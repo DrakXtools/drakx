@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
-"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"POT-Creation-Date: 2003-08-13 03:40+0200\n"
 "PO-Revision-Date: 2003-03-16 02:21+0900\n"
 "Last-Translator: Budi Rachmanto <rac@linux-mandrake.com>\n"
 "Language-Team: Bahasa Indonesia <id@li.org>\n"
@@ -28,10 +28,29 @@ msgstr "Mendeteksi partisi untuk mencari lokasi mount"
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr "jika diset ya, cek tambahan/hapusan file root suid."
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
+"0/1 for Local Config...\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Configuration changed - restart clusternfs/dhcpd?"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t\tErase=%s"
 msgstr "\t\tHapus=%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Differential backups only save files that have changed or are new since the "
+"original 'base' backup."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -81,6 +100,13 @@ msgstr "Di server CUPS \"%s\""
 #, c-format
 msgid "Post-install configuration"
 msgstr "Konfigurasi instalasi akhir"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -132,6 +158,11 @@ msgstr "Republik Afrika Tengah"
 msgid "Gateway device"
 msgstr "Device gateway"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Advanced preferences"
+msgstr "Opsi Lanjutan"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Net Method:"
@@ -142,10 +173,21 @@ msgstr "Metode Jaring:"
 msgid "Ethernetcard"
 msgstr "Kartu Ethernet"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "If set, send the mail report to this email address else send it to root"
+msgstr ""
+"Jika diset, kirim laporan ke alamat email ini, jika tidak, kirim ke root."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parameter"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "no"
+msgstr "Info"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -199,6 +241,11 @@ msgstr "Belarus"
 msgid "Error writing to file %s"
 msgstr "Error pada saat menulis file %s"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result to syslog"
+msgstr "jika ya, laporkan hasil cek ke syslog."
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -249,6 +296,11 @@ msgstr ""
 "Aktivitas drakbackup via %s:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "yes"
+msgstr "Ya"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
@@ -298,6 +350,11 @@ msgstr "Edit host terpilih"
 msgid "No CD device defined!"
 msgstr "Tidak ada alat CD didefinisikan!"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "\tUse .backupignore files\n"
+msgstr "Pakai quota utk file backup."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (phonetic)"
@@ -312,6 +369,11 @@ msgstr "IP awal DHCP"
 #, c-format
 msgid "256 kB"
 msgstr "256 kb"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Don't rewind tape after backup"
+msgstr "Gunakan pita utk backup"
 
 #: ../../any.pm:1
 #, c-format
@@ -332,6 +394,11 @@ msgstr ""
 msgid "Tape"
 msgstr "Tape"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Malaysia"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning network..."
@@ -343,11 +410,6 @@ msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
 msgstr "Dengan opsi ini Anda dapat menyimpan ulang semua versi direktori /etc."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Malaysia"
-msgstr "Malaysia"
 
 #: ../../standalone/drakedm:1
 #, fuzzy, c-format
@@ -379,6 +441,16 @@ msgstr "Ukuran cache cpu (level kedua)"
 msgid "Soundcard"
 msgstr "Kartu Suara"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Search for files to restore"
+msgstr "Pilih media lain utk direstorasi"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -393,23 +465,10 @@ msgstr ""
 msgid "Level %s\n"
 msgstr "Level %s\n"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Luxembourg"
-msgstr "Luxembourg"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Daemon Report\n"
-"\n"
-"\n"
-msgstr ""
-"\n"
-"                      Laporan Daemon DrakBackup\n"
-"\n"
-"\n"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac (phonetic)"
+msgstr "Armenia (fonetik)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -464,6 +523,11 @@ msgstr "Katasandi (lagi)"
 msgid "Search installed fonts"
 msgstr "Cari font terinstal"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default desktop"
+msgstr "Default"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
@@ -488,6 +552,13 @@ msgid ""
 msgstr ""
 "Daftar data rusak:\n"
 "\n"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Can only be mounted explicitly (i.e.,\n"
+"the -a option will not cause the file system to be mounted)."
+msgstr ""
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -555,18 +626,6 @@ msgstr "Hapus modul"
 msgid "Password"
 msgstr "Katasandi"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
-"\\fP."
-msgstr ""
-"Argumen: (max, inactive=-1)\n"
-"\n"
-"Set umur katasandi \\fImax\\fP hari dan delay \\fIinactice\\fP."
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
@@ -623,79 +682,8 @@ msgstr "/Deteksi otomatis drive _jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Description:\n"
-"\n"
-"  Drakbackup is used to backup your system.\n"
-"  During the configuration you can select: \n"
-"\t- System files, \n"
-"\t- Users files, \n"
-"\t- Other files.\n"
-"\tor All your system ...  and Other (like Windows Partitions)\n"
-"\n"
-"  Drakbackup allows you to backup your system on:\n"
-"\t- Harddrive.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup allows you to restore your system to\n"
-"  a user selected directory.\n"
-"\n"
-"  Per default all backups will be stored on your\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"Restore Step:\n"
-"  \n"
-"  During the restore step, DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. It is recommended \n"
-"  you do a last backup before restoring.\n"
-"\n"
-"\n"
+msgid "Store the password for this system in drakbackup configuration."
 msgstr ""
-"Penjelasan:\n"
-"\n"
-"  Drakbackup digunakan untuk membackup system Anda.\n"
-"  Selama konfigurasi Anda dapat memilih: \n"
-"\t- File System, \n"
-"\t- File Pengguna, \n"
-"\t- File Lain-lain.\n"
-"\tatau Seluruh sistem ...  dan Lain-lain (mis. partisi Windows)\n"
-"\n"
-"  Drakbackup dapat melakukan backup sistem di:\n"
-"\t- Harddisk.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (dg autoboot, rescue dan autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup dapat merestorasi sistem Anda ke\n"
-"  direktori pilihan pengguna.\n"
-"\n"
-"  Aslinya semua backup ditempatkan di direktori\n"
-"  /var/lib/drakbackup\n"
-"\n"
-"  File konfigurasi:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"\n"
-"Tahap Restorasi:\n"
-"  \n"
-"  Saat restorasi, DrakBackup akan menghapus \n"
-"  direktori asli Anda dan mencek bahwa semua file \n"
-"  backup tak rusak. Disarankan Anda melakukan \n"
-"  backup sebelumnya.\n"
-"\n"
-"\n"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -936,6 +924,11 @@ msgstr ""
 "Paris - France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default user"
+msgstr "Printer standar"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
@@ -981,6 +974,11 @@ msgstr "Jangan cetak halaman tes"
 msgid "Gurmukhi"
 msgstr "Gurmukh"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s already in use\n"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
@@ -1020,260 +1018,10 @@ msgstr ""
 msgid "Show only for the selected day"
 msgstr "Tampilkan hari terpilih saja"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
+msgid "\tLimit disk usage to %s MB\n"
 msgstr ""
-"Overview drakTermServ\n"
-"\t\t\t   \n"
-"        - Buat Image Etherboot:\n"
-"        \t\tUtk mem-boot kernel via etherboot, image khusus kernel/initrd "
-"harus dibuat.\n"
-"        \t\tmkinitrd-net melakukan sebagian besar kerja, drakTermServ "
-"hanyalah antarmuka grafis\n"
-"        \t\tutk menolong manajemen/tuning image ini.\n"
-"\n"
-"        - Rawat /etc/dhcpd.conf:\n"
-"        \t\tUtk me-net_boot klien, tiap klien perlu entri dhcpd.conf, "
-"menunjuk alamat IP\n"
-"        \t\tdan image net boot ke mesin. drakTermServ menolong membuat/hapus "
-"entri ini.\n"
-"\t\t\t\n"
-"        \t\t(Kartu PCI mungkin mengabaikan image - etherboot akan meminta "
-"image yg benar. Ingat\n"
-"        \t\tbila etherboot mencari images, ia mengharap nama seperti\n"
-"        \t\tboot-3c59x.nbi, bukan boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tContoh dhcpd.conf yg men-support klien diskless:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tAnda dapat memakai pool alamat IP, bukannya satu entri perklien dg\n"
-"\t\t\talamat tetap, dg menggunakan fungsi file konfigurasi spesifik-klien\n"
-"\t\t\tyg disajikan oleh ClusterNFS.\n"
-"\t\t\t\n"
-"\t\t\tCatatan: Entri \"#type\" hanya dipakai oleh drakTermServ. Klien dapat "
-"berupa \"kurus\"\n"
-"\t\t\tatau 'gemuk'. Klien kurus menjalankan sebagian besar software di "
-"server via xdmcp, sementara klien gemuk menjalankan sebagian besar\n"
-"\t\t\tsoftware di mesin klien. Pada inittab khusus, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ akan\n"
-"\t\t\tditulis utk klien kurus. File konfigurasi sistem xdm-config, kdmrc, "
-"gdm.conf dimodifikasi\n"
-"\t\t\tjika klien kurus digunakan, utk mengaktifkan xdmcp. Karena ada masalah "
-"keamanan dlm penggunaan xdmcp,\n"
-"\t\t\thosts.deny dan hosts.allow dimodifikasi utk membatasi akses ke subnet "
-"lokal.\n"
-"\t\t\t\n"
-"\t\t\tCatatan: Lakukan stop/start server setelah menambahkan/mengubah "
-"klien.\n"
-"\t\t\t\n"
-"        - Rawat /etc/exports:\n"
-"        \t\tClusternfs memungkinkan ekspor sistem file root ke klien "
-"diskless. drakTermServ\n"
-"        \t\tmensetup entri utk mengizinkan akses anonim ke sistem file root\n"
-"        \t\tdari klien diskless.\n"
-"\n"
-"        \t\tContoh entri ekspor clusternfs:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tDg SUBNET/MASK terdefinisikan utk jaringan Anda.\n"
-"        \t\t\n"
-"        - Rawat /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tAgar pengguna dapat login ke sistem dari klien diskless, entri\n"
-"        \t\tdi /etc/shadow harus disalin ke /etc/shadow\\$\\$CLIENTS\\$\\$. "
-"drakTermServ membantu\n"
-"        \t\thal ini dg menambahkan/hapus pengguna sistem dari file ini.\n"
-"\n"
-"        - /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$ masing-masing klien:\n"
-"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
-"konfigurasi sendiri\n"
-"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
-"        \t\tmembuat file-file ini.\n"
-"\n"
-"        - File konfigurasi sistem per klien:\n"
-"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
-"konfiguras sendiri\n"
-"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
-"        \t\tmembuat file /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
-"sysconfig/keyboard\n"
-"        \t\ttiap klien.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ mengkonfigurasikan file ini agar bekerja dlm "
-"hubungan dg image yg dibuat oleh\n"
-"        \t\tmkinitrd-net, dan entri di /etc/dhcpd.conf, utk melayani image "
-"boot ke tiap\n"
-"        \t\tklien diskless.\n"
-"\n"
-"        \t\tContoh file konfigurasi tftp:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tPerubahan dari instalasi standar adalah flag disable jadi 'no'\n"
-"        \t\tdan path direktori jadi /var/lib/tftpboot, tempat mkinitrd-net\n"
-"        \t\tmenaruh image.\n"
-"\n"
-"        - Buat disket/CD etherboot:\n"
-"        \t\tMesin klien diskless perlu image ROM di NIC, disket boot atau\n"
-"        \t\tCD utk memulai boot. drakTermServ membantu membuat image ini,\n"
-"        \t\tberdasarkan NIC di mesin klien.\n"
-"        \t\t\n"
-"        \t\tContoh pembuatan disket boot utk 3Com 3c509 secara manual:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -1332,6 +1080,17 @@ msgstr ""
 msgid "<control>Q"
 msgstr "<control>Q"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Please be sure that the cron daemon is included in your services. \n"
+"\n"
+"Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Pastikan daemon cron masuk dalam daftar servis.\n"
+"\n"
+"Ingat bahwa kini semua media 'net' juga menggunakan harddisk."
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Unknown"
@@ -1371,32 +1130,6 @@ msgstr "Opsi %s harus berupa bilangan!"
 msgid "Notice"
 msgstr "Catatan"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan cek keamanan harian."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
-"allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan crontab dan at utk pengguna. Taruh pengguna berizin di\n"
-"/etc/cron.allow dan /etc/at.allow\n"
-"(lihat man at(1) dan crontab(1))."
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1434,98 +1167,8 @@ msgstr "Interface"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" - Backup System Files:\n"
-"       \n"
-"\tThis option allows you to backup your /etc directory,\n"
-"\twhich contains all configuration files. Please be\n"
-"\tcareful during the restore step to not overwrite:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup User Files: \n"
-"\n"
-"\tThis option allows you select all users that you want to \n"
-"\tbackup. To preserve disk space, it is recommended that\n"
-"\tyou do not include the web browser's cache.\n"
-"\n"
-" - Backup Other Files: \n"
-"\n"
-"\tThis option allows you to include additional data to save.\n"
-"\tIf you want to add individual files, select them from the\n"
-"\trighthand 'Files' list pane.  To add directories, enter the \n"
-"\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-"\tand at that point click 'OK' without selecting any files.\n"
-" \n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"penjelasan opsi:\n"
-"\n"
-" - Backup file sistem:\n"
-"       \n"
-"\tOpsi ini dapat mem-backup direktori /etc, yg berisi\n"
-"\tsemua file konfigurasi. Hati-hati saat tahap restore\n"
-"\t(restorasi) agar tak menindih:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup file Pengguna: \n"
-"\n"
-"\tDengan opsi ini Anda dapat memilih pengguna yg ingin \n"
-"\tAnda backup.\n"
-"\tUntuk menghemat ruang disk, cache browser web harap \n"
-"\ttak dimasukkan.\n"
-"\n"
-" - Backup file Lain: \n"
-"\n"
-"\tOpsi ini memungkinkan Anda menambah data utk disimpan.\n"
-"\tDengan backup lain-lain Anda sementara tak dapat \n"
-"\tmemilih backup incremental.\t\t\n"
-" \n"
-" - Backup Incremental:\n"
-"\n"
-"\tIni adalah opsi terkuat backup. Anda dapat mem-backup \n"
-"\tsemua data pertama kali, setelah itu hanya yang berubah.\n"
-"\tKemudian Anda akan dapat, saat tahap restore, menyimpan\n"
-"\tulang data dari tanggal yg ditentukan date.\n"
-"\tJika Anda belum memilih opsi ini semua backup lama akan \n"
-"\tdihapus sebelum tiap backup.    \n"
-"\n"
-"\n"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
-msgstr ""
-"Argumen: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Aktifkan/Matikan laporan syslog ke konsol 12. \\fIexpr\\fP adalah\n"
-"menjelaskan apa yg mesti dicatat (detilnya lihat syslog.conf(5)) dan\n"
-"dev alat tempat menulis catatan."
+msgid "Multisession CD"
+msgstr " (multi-session)"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1581,6 +1224,11 @@ msgstr "Swiss"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "You must be root to read configuration file. \n"
+msgstr "Backup Sekarang dari file konfigurasi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1673,6 +1321,11 @@ msgstr "Konfigurasi Akses Internet..."
 msgid "Norway"
 msgstr "Norwegia"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Delete profile"
+msgstr "Hapus profil..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Danish"
@@ -1707,6 +1360,11 @@ msgstr ""
 "terpilih berada di CDROM lain dan akan mengeluarkan CD yg ada utk kemudian\n"
 "meminta Anda memasukkan CD yg diperlukan."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "When checked, owner and group won't be changed"
+msgstr "jika dipilih, pemilik dan grup takkan diubah"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
@@ -1717,15 +1375,15 @@ msgstr "Prosesor"
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "No NIC selected!"
-msgstr "Tidak ada NIC yg dipilih!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Kepulauan Svalbard dan Jan Mayen"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "No NIC selected!"
+msgstr "Tidak ada NIC yg dipilih!"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1791,6 +1449,17 @@ msgstr ""
 "memudahkan kita untuk merecover sistem dari kegagalan. Ingin buat bootdisk?\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Daemon Report\n"
+msgstr ""
+"\n"
+"                      Laporan Daemon DrakBackup\n"
+"\n"
+"\n"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1821,15 +1490,15 @@ msgstr "Pakai Backup Incremental (tidak menghapus backup lama)"
 msgid "First sector of drive (MBR)"
 msgstr "Sektor pertama di drive (MBR)"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Joystick"
-msgstr "Joystick"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr "Joystick"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1846,6 +1515,11 @@ msgstr "Pakai Unicode sebagai standar"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "modul kernel GNU/Linux yang menangani alat tersebut"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDR device"
+msgstr "device"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1856,6 +1530,14 @@ msgstr "Sedang mencoba menyelamatkan tabel partisi"
 msgid "Option %s must be an integer number!"
 msgstr "Opsi %s harus berupa integer!"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Pakai katasandi utk membuktikan keaslian pengguna."
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -1865,12 +1547,20 @@ msgstr ""
 "Entri yang harus Anda penuhi:\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For backups to other media, files are still created on the hard drive, then "
+"moved to the other media.  Enabling this option will remove the hard drive "
+"tar files after the backup."
+msgstr ""
+
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Unable to start live upgrade !!!\n"
 msgstr "Gagal memulai upgrade live !!!\n"
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../install_steps_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Name: "
 msgstr "Nama: "
@@ -1895,12 +1585,21 @@ msgstr "Toko resmi MandrakeSoft"
 msgid "Resizing"
 msgstr "Sedang mengubah ukuran"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter the maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Masukkan ukuran maximum\n"
+" yg diizinkan utk Drakbackup"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Cable connection"
 msgstr "Konfigurasi jaringan kabel"
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr "Pengguna"
@@ -1942,6 +1641,11 @@ msgstr "mkraid gagal"
 msgid "Button 3 Emulation"
 msgstr "Emulasi tombol 3"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of sgid files"
+msgstr "Jika diset ke ya, cek penambahan/penghapusan file sgid."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sending files..."
@@ -1956,11 +1660,6 @@ msgstr "Ibrani (fonetik)"
 #, c-format
 msgid "access to rpm tools"
 msgstr "akses ke peralatan rpm"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr "edit"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2047,6 +1746,16 @@ msgstr ""
 msgid "Harddrake2 version %s"
 msgstr "Harddrake2 versi %s"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Preferences"
+msgstr "Kesukaan: "
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Swaziland"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -2062,20 +1771,15 @@ msgstr "Pilih warna"
 msgid "Dominican Republic"
 msgstr "Republik Dominika"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Swaziland"
-msgstr "Swaziland"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac"
+msgstr "Syria"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID (ID Pengguna)"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using CDRW media"
-msgstr "Periksa apakah Anda menggunakan media CDRW"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2094,6 +1798,11 @@ msgstr ""
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Gunakan tombol %c dan %c untuk memilih entri yang disorot"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../mouse.pm:1
 #, c-format
@@ -2156,6 +1865,14 @@ msgstr "Pencetakan halaman tes..."
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Partisi dengan titik mount %s sudah ada\n"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable msec hourly security check."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan cek keamanan tiap jam oleh msec."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2298,54 +2015,6 @@ msgstr "Pilihan Anda? (default %s) "
 msgid "Trouble shooting"
 msgstr "Trouble shooting"
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid " / Region"
-msgstr "Reunion"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"The classic bug sound tester is to run the following commands:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
-"by default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
-"currently uses\n"
-"\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services're configured to be run on\n"
-"initlevel 3\n"
-"\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
-msgstr ""
-"Tester suara klasik akan menjalankan perintah berikut:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" akan memberitahu Anda driver mana yg\n"
-"dipakai oleh kartu Anda secara default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" memberitahu driver apa yg dipakai\n"
-"sekarang\n"
-"\n"
-"- \"/sbin/lsmod\" mencek apakah modul (driver) ybs dimuat atau tidak\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" dan \"/sbin/chkconfig --list alsa\" akan\n"
-"memberitahu Anda apakah servis suara dan alsa terkonfigurasi utk dijalankan\n"
-"pada initlevel 3\n"
-"\n"
-"- \"aumix -q\" memberitahu apakah volume suara dipadamkan atau tidak\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" akan memberitahu program mana yg memakai\n"
-"kartu suara.\n"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -2375,11 +2044,6 @@ msgstr "dan satu printer tak dikenal"
 #, c-format
 msgid "Ireland"
 msgstr "Irlandia"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "kernel version"
-msgstr "versi kernel"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2440,12 +2104,26 @@ msgstr "Konfigurasi Dukun"
 msgid "Autoprobe"
 msgstr "Probe otomatis"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
+msgstr ""
+"jika ya, cek katasandi kosong, terhadap katasandi kosong di /etc/shadow dan "
+"terhadap pengguna bukan root yg ber-ID 0."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup system files..."
 msgstr "Backup file sistem..."
 
-#: ../../install_any.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Tanpa domain NIS, broadcast tak dapat dipakai"
@@ -2454,6 +2132,11 @@ msgstr "Tanpa domain NIS, broadcast tak dapat dipakai"
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Menghapus printer \"%s\"..."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Shell history size"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -2639,6 +2322,13 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Support OKI 4w and winprinter kompatibel."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Files or wildcards listed in a .backupignore file at the top of a directory "
+"tree will not be backed up."
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -2679,6 +2369,11 @@ msgid ""
 msgstr ""
 "Akses network tak jalan dan tak dapat dimulai. Cek konfigurasi dan hardware "
 "Anda, lalu coba konfigurasikan printer remote Anda lagi."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2887,6 +2582,14 @@ msgstr "Media tak terhapuskan"
 msgid "Terminal-based"
 msgstr "Terminal-based"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable IP spoofing protection."
+msgstr ""
+"Argumen: (arg, alert=1)\n"
+"\n"
+"Aktifkan/Matikan proteksi pemalsuan IP."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
@@ -2965,15 +2668,15 @@ msgstr "Protokol Eropa (EDSS1)"
 msgid "Video mode"
 msgstr "Mode video"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "Please enter your email address below "
-msgstr "Masukkan alamat email Anda di bawah "
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Oman"
 msgstr "Oman"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Please enter your email address below "
+msgstr "Masukkan alamat email Anda di bawah "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -2995,7 +2698,7 @@ msgstr "Ukuran baru dalam MB: "
 msgid "Partition table type: %s\n"
 msgstr "Partisi tipe: %s\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "Otentikasi Domain Mindows"
@@ -3041,6 +2744,49 @@ msgstr ""
 msgid "Sending Speed:"
 msgstr "Laju Pengiriman:"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"The classic bug sound tester is to run the following commands:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses\n"
+"by default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
+"currently uses\n"
+"\n"
+"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+"loaded or not\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
+"tell you if sound and alsa services're configured to be run on\n"
+"initlevel 3\n"
+"\n"
+"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+msgstr ""
+"Tester suara klasik akan menjalankan perintah berikut:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" akan memberitahu Anda driver mana yg\n"
+"dipakai oleh kartu Anda secara default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" memberitahu driver apa yg dipakai\n"
+"sekarang\n"
+"\n"
+"- \"/sbin/lsmod\" mencek apakah modul (driver) ybs dimuat atau tidak\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" dan \"/sbin/chkconfig --list alsa\" akan\n"
+"memberitahu Anda apakah servis suara dan alsa terkonfigurasi utk dijalankan\n"
+"pada initlevel 3\n"
+"\n"
+"- \"aumix -q\" memberitahu apakah volume suara dipadamkan atau tidak\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" akan memberitahu program mana yg memakai\n"
+"kartu suara.\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
@@ -3056,6 +2802,11 @@ msgstr "Konfigurasi peringatan Mail"
 msgid "Tokelau"
 msgstr "Tokelau"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Matching"
+msgstr "pencocokan"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -3070,15 +2821,6 @@ msgstr "Release: "
 #, c-format
 msgid "Connection speed"
 msgstr "Laju koneksi"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter your CD Writer device name\n"
-" ex: 0,1,0"
-msgstr ""
-"Masukkan nama alat Penulis CD Anda\n"
-" mis: 0,1,0"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3172,16 +2914,10 @@ msgstr "Spanyol"
 msgid "Start"
 msgstr "Mulai"
 
-#: ../../security/help.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
+msgid "Direct root login"
 msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan pengecekan kekacauan kartu ethernet."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3241,6 +2977,11 @@ msgstr "Pilihan File"
 msgid "CUPS"
 msgstr "CUPS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase tape before backup"
+msgstr "Gunakan pita utk backup"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Run config tool"
@@ -3275,15 +3016,15 @@ msgstr ""
 "named (BIND) adalah Domain Name Server (DNS) yang digunakan untuk "
 "menerjemahkan nama host ke IP address."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr "Koneksi diputus"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
 msgstr "Santa Lucia"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
+msgstr "Koneksi diputus"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -3312,6 +3053,13 @@ msgstr ""
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pilihan Grup Paket"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"Allow local hardware\n"
+"configuration."
+msgstr "Konfigurasi ulang otomatis"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3379,6 +3127,11 @@ msgstr "Pastikan media ada di device %s"
 #, c-format
 msgid "Enable multiple profiles"
 msgstr "Aktifkan profil majemuk"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Do not interpret character or block special devices on the file system."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3490,11 +3243,6 @@ msgstr "Konfigurasi modul"
 msgid "Cocos (Keeling) Islands"
 msgstr "Kepulauan Cocos (Keeling)"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnecting from the Internet "
-msgstr "Pemutusan hubungan dari Internet "
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
@@ -3519,18 +3267,6 @@ msgstr "Armenia"
 #, c-format
 msgid "Fiji"
 msgstr "Fiji"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
-msgstr ""
-"Argumen: (panjang, ndigits=0, nuppers=0)\n"
-"\n"
-"Set panjang minimum, jumlah minimum digit dan jumlah minimum huruf besar."
 
 #: ../../any.pm:1
 #, c-format
@@ -3591,6 +3327,11 @@ msgstr "Tanpa katasandi"
 #, c-format
 msgid "Nigeria"
 msgstr "Nigeria"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires hostname...\n"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3734,6 +3475,11 @@ msgstr ""
 msgid "Romania"
 msgstr "Romania"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group"
+msgstr "grup"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "choose device"
@@ -3761,7 +3507,7 @@ msgstr "Jerman"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
 msgstr "Lanjutkan ->"
@@ -3805,6 +3551,11 @@ msgstr "Guinea-Bissau"
 #, c-format
 msgid "Horizontal refresh rate"
 msgstr "Laju refresh horisontal"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Edit"
+msgstr "Keluar"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3978,11 +3729,6 @@ msgstr "Batal"
 msgid "No password prompt on %s at port %s"
 msgstr "Tiada prompt katasandi di %s pada port %s"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to use the non-rewinding device."
-msgstr "Cek apakah Anda ingin menggunakan alat non-rewinding."
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
@@ -4042,20 +3788,15 @@ msgstr "Mouse"
 msgid "not enough room in /boot"
 msgstr "tak cukup ruang di /boot"
 
-#: ../../harddrake/sound.pm:1
+#: ../../lang.pm:1
 #, c-format
-msgid "Choosing an arbitratry driver"
-msgstr "Pilih sebarang driver"
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Nama Host"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Liechtenstein"
-msgstr "Liechtenstein"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4185,6 +3926,11 @@ msgstr ""
 "\"Daftar opsi cetak\".%s%s%s\n"
 "\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Arab Saudi"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4204,11 +3950,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Printer"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Saudi Arabia"
-msgstr "Arab Saudi"
 
 #: ../../services.pm:1
 #, c-format
@@ -4274,17 +4015,6 @@ msgstr "Titik mount harus hanya berupa huruf atau angka"
 msgid "Restarting printing system..."
 msgstr "Mulai ulang sistem cetak ..."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Argumen: (nama)\n"
-"\n"
-"Tambahkan nama sbg eksepsi penanganan umur katasandi dg msec."
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -4346,6 +4076,11 @@ msgstr "Mask Subnet:"
 #, c-format
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Instalasi tema LiLo dan Bootsplash sukses"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Set password expiration and account inactivation delays"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4414,6 +4149,11 @@ msgstr "HardDrake"
 #, c-format
 msgid "new"
 msgstr "baru"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4608,17 +4348,6 @@ msgstr ""
 msgid "Argentina"
 msgstr "Argentina"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Terima/Tolak echo icmp siaran."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -4633,6 +4362,11 @@ msgstr "Tingkat Keamanan:"
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Mount point harus diawali dengan /"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD device"
+msgstr "Pilih ukuran media CD/DVD Anda"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4653,15 +4387,6 @@ msgstr "Yaman"
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Produk ini tersedia di situs MandrakeStore"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the maximum size\n"
-" allowed for Drakbackup"
-msgstr ""
-"Masukkan ukuran maximum\n"
-" yg diizinkan utk Drakbackup"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -4718,31 +4443,15 @@ msgstr "Jenis Mouse: %s\n"
 msgid "Your card can have 3D hardware acceleration support with XFree %s."
 msgstr "Kartu Anda dapat menggunakan akselerasi hardware 3D pada XFree %s."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please choose your CD/DVD media size (Mb)"
-msgstr "Pilih ukuran media CD/DVD Anda"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna."
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Expert Area"
-msgstr "Area Pakar"
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
 msgstr "Pilih monitor"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Mask"
+msgstr "Paket buruk"
 
 #: ../../any.pm:1
 #, c-format
@@ -4917,6 +4626,11 @@ msgstr "Backup sistem"
 msgid "Test pages"
 msgstr "Halaman tes"
 
+#: ../../diskdrake/interactive.pm:1
+#, fuzzy, c-format
+msgid "Logical volume name "
+msgstr "Ukuran lokal"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4940,6 +4654,11 @@ msgstr "Opsi Printer TCP/Soket"
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Mem kartu (DMA)"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnecting from Internet "
+msgstr "Pemutusan hubungan dari Internet "
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -5015,6 +4734,11 @@ msgstr "Ctrl dan Alt bersamaan"
 msgid "United States"
 msgstr "Amerika Serikat"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "User umask"
+msgstr "Pengguna"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
@@ -5047,6 +4771,14 @@ msgstr ""
 msgid "NTP Server"
 msgstr "Server NTP"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Sulogin(8) in single user level"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Tolak sulogin(8) dalam level pengguna single."
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Load/Save on floppy"
@@ -5071,11 +4803,6 @@ msgstr "Keluar dalam %d detik"
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Di serial port mana modem Anda terhubung?"
-
-#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Country"
-msgstr "Negara"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5106,6 +4833,11 @@ msgstr "Path atau Modul dibutuhkan"
 #, c-format
 msgid "Advanced Options"
 msgstr "Opsi Lanjutan"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "View Configuration"
+msgstr "Konfigurasi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5310,6 +5042,29 @@ msgstr ""
 msgid "Slovenian"
 msgstr "Slovenia"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Sahkan semua servis yg dikontrol oleh tcp_wrappers (lihat hosts.deny(5)) "
+"jika \\fIarg\\fP = ALL. Hanya yg lokal\n"
+"jika \\fIarg\\fP = LOCAL dan semua tidak jika \\fIarg\\fP = NONE. Utk "
+"mensahkan servis, gunakan /etc/hosts.allow\n"
+"(lihat hosts.allow(5))."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
@@ -5349,17 +5104,6 @@ msgstr "tidak bisa melakukan format %s dengan tipe %s"
 msgid "Model"
 msgstr "Model"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
@@ -5389,21 +5133,6 @@ msgstr ""
 #, c-format
 msgid "Modem"
 msgstr "Modem"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
-msgstr ""
-"Argumen: (arg, listen_tcp=None)\n"
-"\n"
-"Izinkan/Larang koneksi X. Arg pertama menunjukkan apa yg dilakukan\n"
-"di sisi klien: ALL (semua koneksi diizinkan), LOCAL (hanya\n"
-"koneksi lokal) and NONE (tanpa koneksi)."
 
 #: ../../lang.pm:1
 #, c-format
@@ -5444,6 +5173,11 @@ msgstr ""
 "pengetahuan dan membantu sesama dengan menjadi Pakar di situs support teknik "
 "online:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "No password aging for"
+msgstr "Tanpa katasandi"
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid ""
@@ -5458,6 +5192,11 @@ msgstr ""
 msgid "Automatically find available printers on remote machines"
 msgstr "Cari printer di mesin lain secara otomatis"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Nusantara"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5467,27 +5206,20 @@ msgstr ""
 "\n"
 "- Simpan ke tape di alat: %s"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "East Timor"
-msgstr "Nusantara"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Login name"
+msgstr "Nama domain"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report unowned files"
+msgstr "jika diset ya, laporkan file tak bertuan."
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Del profile..."
 msgstr "Hapus profil..."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang daftar pengguna sistem di manajer display (kdm dan gdm)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5549,6 +5281,11 @@ msgstr "Semua bahasa"
 msgid "Removing %s"
 msgstr "Hapus %s"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "%s not found...\n"
+msgstr "tak ada respon %s"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
@@ -5570,6 +5307,11 @@ msgstr "Katasandi akan diaktifkan, tapi mohon jangan disambungkan ke jaringan."
 #, c-format
 msgid "Start sector: "
 msgstr "Sektor awal: "
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Baca-saja"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5728,6 +5470,14 @@ msgstr ""
 msgid "Network Options"
 msgstr "Opsi Jaringan"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable msec hourly security check"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan cek keamanan tiap jam oleh msec."
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid ""
@@ -5768,21 +5518,21 @@ msgstr "rata-rata"
 msgid "New printer name"
 msgstr "Nama printer baru"
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Allow an ordinary user to mount the file system. The\n"
+"name of the mounting user is written to mtab so that he can unmount the "
+"file\n"
+"system again. This option implies the options noexec, nosuid, and nodev\n"
+"(unless overridden by subsequent options, as in the option line\n"
+"user,exec,dev,suid )."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Guinea Equator"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang autologin."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5829,16 +5579,12 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Other (not drakbackup) keys in place already"
 msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang login root remote."
+"Kunci lain (bukan drakbackup)\n"
+"sudah ada di tempat"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5914,6 +5660,287 @@ msgstr ""
 "masukkan alamat IP (dan nomor port bila perlu) utk mendapat info printer\n"
 "dari server."
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"drakTermServ Overview\n"
+"\t\t\t   \n"
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t\t#hdw_config                true;\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating seperate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login priviledges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured.\n"
+"\t\t\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+msgstr ""
+"Overview drakTermServ\n"
+"\t\t\t   \n"
+"        - Buat Image Etherboot:\n"
+"        \t\tUtk mem-boot kernel via etherboot, image khusus kernel/initrd "
+"harus dibuat.\n"
+"        \t\tmkinitrd-net melakukan sebagian besar kerja, drakTermServ "
+"hanyalah antarmuka grafis\n"
+"        \t\tutk menolong manajemen/tuning image ini.\n"
+"\n"
+"        - Rawat /etc/dhcpd.conf:\n"
+"        \t\tUtk me-net_boot klien, tiap klien perlu entri dhcpd.conf, "
+"menunjuk alamat IP\n"
+"        \t\tdan image net boot ke mesin. drakTermServ menolong membuat/hapus "
+"entri ini.\n"
+"\t\t\t\n"
+"        \t\t(Kartu PCI mungkin mengabaikan image - etherboot akan meminta "
+"image yg benar. Ingat\n"
+"        \t\tbila etherboot mencari images, ia mengharap nama seperti\n"
+"        \t\tboot-3c59x.nbi, bukan boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tContoh dhcpd.conf yg men-support klien diskless:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tAnda dapat memakai pool alamat IP, bukannya satu entri perklien dg\n"
+"\t\t\talamat tetap, dg menggunakan fungsi file konfigurasi spesifik-klien\n"
+"\t\t\tyg disajikan oleh ClusterNFS.\n"
+"\t\t\t\n"
+"\t\t\tCatatan: Entri \"#type\" hanya dipakai oleh drakTermServ. Klien dapat "
+"berupa \"kurus\"\n"
+"\t\t\tatau 'gemuk'. Klien kurus menjalankan sebagian besar software di "
+"server via xdmcp, sementara klien gemuk menjalankan sebagian besar\n"
+"\t\t\tsoftware di mesin klien. Pada inittab khusus, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ akan\n"
+"\t\t\tditulis utk klien kurus. File konfigurasi sistem xdm-config, kdmrc, "
+"gdm.conf dimodifikasi\n"
+"\t\t\tjika klien kurus digunakan, utk mengaktifkan xdmcp. Karena ada masalah "
+"keamanan dlm penggunaan xdmcp,\n"
+"\t\t\thosts.deny dan hosts.allow dimodifikasi utk membatasi akses ke subnet "
+"lokal.\n"
+"\t\t\t\n"
+"\t\t\tCatatan: Lakukan stop/start server setelah menambahkan/mengubah "
+"klien.\n"
+"\t\t\t\n"
+"        - Rawat /etc/exports:\n"
+"        \t\tClusternfs memungkinkan ekspor sistem file root ke klien "
+"diskless. drakTermServ\n"
+"        \t\tmensetup entri utk mengizinkan akses anonim ke sistem file root\n"
+"        \t\tdari klien diskless.\n"
+"\n"
+"        \t\tContoh entri ekspor clusternfs:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tDg SUBNET/MASK terdefinisikan utk jaringan Anda.\n"
+"        \t\t\n"
+"        - Rawat /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tAgar pengguna dapat login ke sistem dari klien diskless, entri\n"
+"        \t\tdi /etc/shadow harus disalin ke /etc/shadow\\$\\$CLIENTS\\$\\$. "
+"drakTermServ membantu\n"
+"        \t\thal ini dg menambahkan/hapus pengguna sistem dari file ini.\n"
+"\n"
+"        - /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$ masing-masing klien:\n"
+"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"konfigurasi sendiri\n"
+"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
+"        \t\tmembuat file-file ini.\n"
+"\n"
+"        - File konfigurasi sistem per klien:\n"
+"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"konfiguras sendiri\n"
+"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
+"        \t\tmembuat file /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
+"sysconfig/keyboard\n"
+"        \t\ttiap klien.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ mengkonfigurasikan file ini agar bekerja dlm "
+"hubungan dg image yg dibuat oleh\n"
+"        \t\tmkinitrd-net, dan entri di /etc/dhcpd.conf, utk melayani image "
+"boot ke tiap\n"
+"        \t\tklien diskless.\n"
+"\n"
+"        \t\tContoh file konfigurasi tftp:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tPerubahan dari instalasi standar adalah flag disable jadi 'no'\n"
+"        \t\tdan path direktori jadi /var/lib/tftpboot, tempat mkinitrd-net\n"
+"        \t\tmenaruh image.\n"
+"\n"
+"        - Buat disket/CD etherboot:\n"
+"        \t\tMesin klien diskless perlu image ROM di NIC, disket boot atau\n"
+"        \t\tCD utk memulai boot. drakTermServ membantu membuat image ini,\n"
+"        \t\tberdasarkan NIC di mesin klien.\n"
+"        \t\t\n"
+"        \t\tContoh pembuatan disket boot utk 3Com 3c509 secara manual:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -5980,15 +6007,15 @@ msgstr "Selesai"
 msgid "Show automatically selected packages"
 msgstr "Tunjukkan paket yang sudah dipilih secara otomatis"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "CPU flags reported by the kernel"
-msgstr "Flag CPU yg dilaporkan oleh kernel"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
 msgstr "Togo"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "CPU flags reported by the kernel"
+msgstr "Flag CPU yg dilaporkan oleh kernel"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -6042,6 +6069,14 @@ msgstr "AS (kabel-hrc)"
 msgid "Journalised FS"
 msgstr "FS terjournal"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Ethernet cards promiscuity check"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan pengecekan kekacauan kartu ethernet."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Guatemala"
@@ -6089,6 +6124,11 @@ msgstr ""
 "Silakan klik OK untuk rekonfigurasi ulang koneksi jaringan/internet ini, "
 "atau batal jika Anda berubah pikiran.\n"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run the daily security checks"
+msgstr "jika ya, jalankan cek keamanan harian."
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Keyboard layout: %s\n"
@@ -6116,6 +6156,11 @@ msgid ""
 msgstr ""
 "Mount dan unmount semua Network File System (NFS), SMB (Lan\n"
 "Manager/windows), dan NCP (Netware)."
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Launch the wizard"
+msgstr "Klik di sini utk meluncurkan wizard ->"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6151,6 +6196,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
 msgstr "Bukan label pita yang benar. Pita berlabel %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6240,6 +6292,13 @@ msgstr "Konfigurasi XFree mana yang Anda inginkan?"
 msgid "More"
 msgstr "Lainnya"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -"
+"scanbus' would also show you the device number."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -6258,6 +6317,13 @@ msgstr ""
 #, c-format
 msgid "Account Password"
 msgstr "Katasandi Account"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -6367,6 +6433,11 @@ msgstr "Daftar opsi cetak"
 msgid "The change is done, but to be effective you must logout"
 msgstr "Perubahan telah dilakukan, Anda harus logout agar perubahan berlaku"
 
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Country / Region"
+msgstr "Negara"
+
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Search servers"
@@ -6388,6 +6459,11 @@ msgstr "Awas, koneksi internet lain terdeteksi, mungkin memakai jaringan Anda"
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "Label CD-ROM \"%s\""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CDRW media"
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -6411,6 +6487,11 @@ msgstr ""
 msgid "Turn your computer into a reliable server"
 msgstr "Jadikan mesin Anda server yang handal"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check empty password in /etc/shadow"
+msgstr "jika diset ya, cek katasandi kosong di /etc/shadow."
+
 #: ../../network/network.pm:1
 #, c-format
 msgid " (driver %s)"
@@ -6429,6 +6510,11 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Saya tak tahu"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6462,6 +6548,11 @@ msgstr ""
 "\n"
 "Jalan terus?"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Telugu"
+msgstr "Tokelau"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -6479,6 +6570,11 @@ msgstr ""
 #, c-format
 msgid "Post Uninstall"
 msgstr "Un-Instalasi Akhir"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Connecting to Internet "
+msgstr "Penghubungan ke Internet "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6542,6 +6638,14 @@ msgstr ""
 "\n"
 "Pastikan Anda telah mengkonfigurasikan akses Jaringan/Internet dg\n"
 "drakconnect sebelum melanjutkan."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept broadcasted icmp echo"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Terima/Tolak echo icmp siaran."
 
 #: ../../lang.pm:1
 #, c-format
@@ -6637,6 +6741,14 @@ msgstr ""
 "\"Kartu Suara\": jika kartu suara terdeteksi di sistem Anda, ia ditampilkan\n"
 "di sini. Jika kartu suara yg tampil tak sesuai dg yg ada di sistem, pilih\n"
 "driver lain."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the root umask."
+msgstr ""
+"Argumen: (umask)\n"
+"\n"
+"Set umask root."
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6769,10 +6881,14 @@ msgstr ""
 "Pemakaian: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: ../../standalone/XFdrake:1
-#, c-format
-msgid "Please relog into %s to activate the changes"
-msgstr "Silakan masuk lagi ke %s untuk mengaktifkan perubahan"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Masukkan ukuran maximum\n"
+" yg diizinkan utk Drakbackup"
 
 #: ../../my_gtk.pm:1
 #, c-format
@@ -6804,6 +6920,18 @@ msgstr "Martinique"
 msgid "HardDrive / NFS"
 msgstr "HardDrive / NFS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Old user list:\n"
+msgstr ""
+"\n"
+"- File Pengguna:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search Backups"
+msgstr ""
+
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "a number"
@@ -6832,30 +6960,20 @@ msgstr "Anda akan diingatkan bila salah satu servis terhenti"
 msgid "Filesystem types:"
 msgstr "Tipe filesystem:"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on HP JetDirect"
-msgstr ", alat multifungsi di HP JetDirect"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Kepulauan Mariana Utara"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on HP JetDirect"
+msgstr ", alat multifungsi di HP JetDirect"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "none"
 msgstr "tiada"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
-msgstr "pengguna :"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your password"
-msgstr "Masukkan katasandi"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -6870,11 +6988,6 @@ msgstr ""
 msgid "Floppy"
 msgstr "Disket"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your RW media (1st Session)"
-msgstr "Cek apakah Anda ingin menghapus media RW (session pertama)"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -6884,6 +6997,11 @@ msgstr "referensi Ghostscript"
 #, c-format
 msgid "Bootloader"
 msgstr "Bootloader"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize all services controlled by tcp_wrappers"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7124,11 +7242,6 @@ msgstr "daftar driver alternatif untuk kartu suara ini"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Scanner sharing"
-msgstr "Sharing scanner"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
@@ -7138,6 +7251,11 @@ msgstr "Tonga"
 #, c-format
 msgid "Tunisia"
 msgstr "Tunisia"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Sharing scanner"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -7150,19 +7268,18 @@ msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "Klik device di pohon kiri utk menampilkan info-nya di sini."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang autologin."
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
 msgstr "XawTV tak diinstal"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Create/Transfer\n"
-"backup keys for SSH"
-msgstr ""
-"Buat/Transfer\n"
-"kunci cadangan SSH"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7173,6 +7290,14 @@ msgstr "Tidak memasukkan file penting (passwd, group, fstab)"
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "nama alat statis lama yg dipakai di paket dev"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable the logging of IPv4 strange packets"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan log paket aneh IPv4."
 
 #: ../../any.pm:1
 #, c-format
@@ -7216,6 +7341,11 @@ msgstr ""
 " Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
 "printer sekarang."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Greek (polytonic)"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
@@ -7225,11 +7355,6 @@ msgstr "Sehabis memformat partisi %s semua data pada partisi ini akan hilang"
 #, c-format
 msgid "Connection Time: "
 msgstr "Waktu Koneksi:"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "pilih file izin yg akan dilihat/edit"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -7273,6 +7398,13 @@ msgid ""
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr "Anda dapat memilih bahasa lain yang akan tersedia seusai instalasi."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Directory (or module) to put the backup on this host."
+msgstr ""
+"Masukkan direktori (atau modul) utk\n"
+" meletakkan backup di host ini."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7361,15 +7493,15 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Kartu grafis: %s\n"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept icmp echo"
+msgstr ""
+
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using a DVDRAM device"
-msgstr "Periksa apakah Anda menggunakan alat DVDRAM"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7414,6 +7546,11 @@ msgstr ""
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Cetak/Akses Kartu Foto di \"%s\""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Daily security check"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7517,21 +7654,6 @@ msgstr ""
 msgid "Choose packages to install"
 msgstr "Paket yang akan diinstal"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-" Some errors during sendmail are caused by \n"
-" a bad configuration of postfix. To solve it you have to\n"
-" set myhostname or mydomain in /etc/postfix/main.cf\n"
-"\n"
-msgstr ""
-"\n"
-" Beberapa error saat sendmail disebabkan oleh \n"
-" konfigurasi buruk postfix. Utk mengatasinya \n"
-" myhostname atau mydomain di /etc/postfix/main.cf harus diset\n"
-"\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -7576,6 +7698,11 @@ msgstr "Bhutan"
 msgid "Network interface"
 msgstr "Antarmuka jaringan"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet failed."
+msgstr "Pemutusan hubungan dari Internet gagal."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Reading printer data..."
@@ -7595,21 +7722,6 @@ msgstr "Tak tersambung"
 #, c-format
 msgid "Greek"
 msgstr "Yunani"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
-"\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"\\fIarg\\fP = ALL mengizinkan adanya /etc/issue dan /etc/issue.net. \\fIarg"
-"\\fP = NONE tak ada issues\n"
-"diizinkan selebihnya hanya /etc/issue diizinkan."
 
 #: ../../lang.pm:1
 #, c-format
@@ -7643,15 +7755,15 @@ msgstr "Aktifkan boot dari OF?"
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "JFS tak dapat dipakai utk partisi berukuran di bawah 16MB"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase your RW media (1st Session)"
+msgstr "Cek apakah Anda ingin menghapus media RW (session pertama)"
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "VertRefresh Monitor: %s\n"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr "path"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -7669,6 +7781,11 @@ msgstr ""
 "Ada error:\n"
 "%s\n"
 "Cobalah ganti parameternya"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "User :"
+msgstr "pengguna :"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7859,15 +7976,20 @@ msgstr ", host \"%s\", port %s"
 msgid "Monaco"
 msgstr "Monako"
 
-#: ../../fs.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid "%s formatting of %s failed"
-msgstr "%s proses format dari %s gagal"
+msgid "Do not send mails when uneeded"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Proses partisi gagal: %s"
+
+#: ../../fs.pm:1 ../../swap.pm:1
+#, c-format
+msgid "%s formatting of %s failed"
+msgstr "%s proses format dari %s gagal"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -7934,6 +8056,11 @@ msgstr "Afrika Selatan"
 msgid "Western Sahara"
 msgstr "Sahara Barat"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Eject tape after the backup"
+msgstr "Gunakan pita utk backup"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot Floppy/ISO"
@@ -7959,21 +8086,22 @@ msgstr "Edit aturan saat ini"
 msgid "%s"
 msgstr "%s"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan log paket aneh IPv4."
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
 msgstr "Silakan tes mouse Anda"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not update inode access times on this file system\n"
+"(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Sticky-bit"
+msgstr "sticky-bit (bit-lengket)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8000,7 +8128,7 @@ msgstr "Sektor"
 msgid "Qatar"
 msgstr "Qatar"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Base dn"
 msgstr "Basis dn LDAP"
@@ -8036,6 +8164,11 @@ msgstr "Hapus /tmp saat boot"
 msgid "Malawi"
 msgstr "Malawi"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: false"
+msgstr "File lokal"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8063,7 +8196,7 @@ msgstr "Inggris"
 msgid "running"
 msgstr "sedang jalan"
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "default"
 msgstr "standar"
@@ -8132,16 +8265,13 @@ msgstr ""
 "  Surat laporan Anda tak terkirim.\n"
 "  Mohon konfigurasikan sendmail"
 
-#: ../../security/help.pm:1
+#: ../../fs.pm:1
 #, c-format
 msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
+"Do not allow set-user-identifier or set-group-identifier\n"
+"bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
+"have suidperl(1) installed.)"
 msgstr ""
-"Argumen: (nilai)\n"
-"\n"
-"Pengesetan timeout shell. Nol = tidak ada timeout."
 
 #: ../../lang.pm:1
 #, c-format
@@ -8158,10 +8288,10 @@ msgstr ""
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connecting to the Internet "
-msgstr "Penghubungan ke Internet "
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom settings"
+msgstr "Lakukan partisi disk secara custom"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8183,17 +8313,6 @@ msgstr "Printer di server SMB/windows 95/98/NT"
 msgid ", "
 msgstr ", "
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
-msgstr ""
-"Argumen: (umask)\n"
-"\n"
-"Set umask root."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8208,10 +8327,10 @@ msgstr ""
 "Postfix adalah Mail Transport Agent, program pengantar surat dari satu ke "
 "lain mesin."
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet failed."
-msgstr "Pemutusan hubungan dari Internet gagal."
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Uzbek (cyrillic)"
+msgstr "Serbia (cyrillic)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8315,8 +8434,9 @@ msgid "Button `%s': %s"
 msgstr "Tombol `%s': %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
-#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
+#: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Tunggu..."
@@ -8424,6 +8544,11 @@ msgstr "Instalasi minimal"
 msgid "Ethiopia"
 msgstr "Ethiopia"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable \"crontab\" and \"at\" for users"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Devanagari"
@@ -8524,6 +8649,26 @@ msgstr "Server DNS Primer (boleh diisi/tidak)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Abg alternatif, Anda dapat menentukan nama device/file"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
+"Argumen: ()\n"
+"\n"
+"Jika SERVER_LEVEL (atau SECURE_LEVEL jika tidak ada) lebih besar daripada 3\n"
+"di /etc/security/msec/security.conf, buat symlink /etc/security/msec/server\n"
+"merujuk /etc/security/msec/server.<SERVER_LEVEL>. /etc/security/msec/server\n"
+"dipakai oleh chkconfig --add utk menambahkan servis jika terdapat di file\n"
+"selama instalasi paket."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8661,26 +8806,15 @@ msgstr ""
 msgid "Choose your filesystem encryption key"
 msgstr "Pilih kunci sandi sistem file Anda"
 
-#: ../../standalone/drakbackup:1
+#: ../../lang.pm:1
 #, c-format
-msgid ""
-"Please choose your CD/DVD device\n"
-"(Press Enter to propogate settings to other fields.\n"
-"This field isn't necessary, only a tool to fill in the form.)"
-msgstr ""
-"Pilih alat CD/DVD Anda\n"
-"(Tekan Enter untuk menyalurkan setting ke tempat isian lain.\n"
-"Field ini tak diperlukan, hanya alat utk mengisi formulir.)"
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Andorra"
 msgstr "Andorra"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Sierra Leone"
-msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8691,6 +8825,14 @@ msgstr "Botswana"
 #, c-format
 msgid "(default value: %s)"
 msgstr "(nilai standar: %s)"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
+msgstr ""
+"Argumen: (max, inactive=-1)\n"
+"\n"
+"Set umur katasandi \\fImax\\fP hari dan delay \\fIinactice\\fP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8721,15 +8863,6 @@ msgstr "Pilih server X"
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Ukuran partisi swap dalam MB: "
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Other (not drakbackup)\n"
-"keys in place already"
-msgstr ""
-"Kunci lain (bukan drakbackup)\n"
-"sudah ada di tempat"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8812,6 +8945,14 @@ msgstr ""
 msgid "received"
 msgstr "diterima"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable su only from the wheel group members or for any user"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_New"
@@ -8857,7 +8998,7 @@ msgstr "Printer Lokal"
 msgid "Installation image directory"
 msgstr "Direktori image instalasi"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Server"
 msgstr "Server NIS"
@@ -8871,6 +9012,11 @@ msgstr "Port: %s"
 #, c-format
 msgid "Spain"
 msgstr "Spanyol"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "local config: %s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -8892,15 +9038,15 @@ msgstr "Terapkan"
 msgid "Auto-detect available ports"
 msgstr "Deteksi otomatis port tersedia"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr "Internet Connection Sharing masih dimatikan"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
 msgstr "San Marino"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Internet Connection Sharing currently disabled"
+msgstr "Internet Connection Sharing masih dimatikan"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -8936,11 +9082,6 @@ msgstr ""
 "Ada error, tapi cara mengatasinya tak diketahui.\n"
 "Jalan terus tapi resiko tanggung sendiri."
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "please wait, parsing file: %s"
-msgstr "tunggu, sedang menelaah file: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -8950,6 +9091,16 @@ msgstr "Taiwan"
 #, c-format
 msgid "Pakistan"
 msgstr "Pakistan"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "please wait, parsing file: %s"
+msgstr "tunggu, sedang menelaah file: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Importance: "
+msgstr "Derajat kepentingan: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8984,11 +9135,6 @@ msgstr "Nama provider (misalnya provider.net.id)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid "Version: %s\n"
-msgstr "Versi: %s\n"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandrake Linux. If that occurs, you can try a text install instead. For "
@@ -9019,6 +9165,11 @@ msgstr "Tipe koneksi"
 msgid "Graphical interface"
 msgstr "Antarmuka grafis"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Chad"
+
 #: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
@@ -9028,11 +9179,6 @@ msgstr "XFree %s dengan akselerasi hardware 3D"
 #, c-format
 msgid "India"
 msgstr "India"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Chad"
-msgstr "Chad"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9155,6 +9301,14 @@ msgstr "Pakai quota utk file backup."
 msgid "Configuring printer \"%s\"..."
 msgstr "Konfigurasikan printer \"%s\"..."
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not allow execution of any binaries on the mounted\n"
+"file system. This option might be useful for a server that has file systems\n"
+"containing binaries for architectures other than its own."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
@@ -9247,6 +9401,13 @@ msgstr "ulang"
 msgid "detected %s"
 msgstr "%s telah terdeteksi"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Expect is an extension to the Tcl scripting language that allows interactive "
+"sessions without user intervention."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
@@ -9294,11 +9455,6 @@ msgstr ""
 msgid "Detecting devices..."
 msgstr "Deteksi device..."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Klik di sini utk meluncurkan wizard ->"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
@@ -9313,10 +9469,23 @@ msgstr ""
 "Penjelasan isian:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "Basic options"
+msgstr "Opsi Dasar DrakSec"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the name of the CPU"
 msgstr "nama CPU"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept bogus IPv4 error messages"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Terima/Tolak pesan error IPv4 yg tak benar."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9362,16 +9531,6 @@ msgstr "Pakai Expect utk SSH"
 #, c-format
 msgid "Poland"
 msgstr "Polandia"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Importance: %s\n"
-msgstr "Derajat kepentingan: %s\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to eject your tape after the backup."
-msgstr "Cek apakah Anda ingin meng-eject tape setelah backup."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9460,24 +9619,25 @@ msgstr "Kutu F00F"
 msgid "XFree %s"
 msgstr "XFree %s"
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Which dhcp client do you want to use?\n"
-"Default is dhcp-client."
-msgstr ""
-"Klien dhcp mana yang ingin Anda pakai?\n"
-"defaultnya adalah dhcp-client"
-
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Domain Name:"
 msgstr "Nama domain:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Root umask"
+msgstr "Katasandi root"
+
 #: ../../any.pm:1
 #, c-format
 msgid "On Floppy"
 msgstr "Di disket"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Reboot by the console user"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9493,6 +9653,14 @@ msgstr "jika ya, cek apakah piranti jaringan berada dalam modus promiscuous."
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Sedang mencari paket yang tersedia..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-seperated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9577,15 +9745,15 @@ msgstr ""
 "bbrp servis bisa berbahaya jika dijalankan. Secara umum, pilihlah hanya\n"
 "servis yang benar-benar Anda perlukan."
 
-#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Lewati"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
 msgstr "Niue"
+
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Lewati"
 
 #: ../../services.pm:1
 #, c-format
@@ -9726,15 +9894,15 @@ msgstr "Pilihlah port tempat printer Anda terhubung."
 msgid "Change Cd-Rom"
 msgstr "Ganti Cd-Rom"
 
-#: ../../network/netconnect.pm:1
-#, fuzzy, c-format
-msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "Konfigurasi XFree mana yang Anda inginkan?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Konfigurasi XFree mana yang Anda inginkan?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -9787,6 +9955,20 @@ msgstr ""
 "Apache adalah server World Wide Web. Dia dipakai untuk menyediakan file\n"
 "HTML dan CGI."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter your CD Writer device name\n"
+" ex: 0,1,0"
+msgstr ""
+"Masukkan nama alat Penulis CD Anda\n"
+" mis: 0,1,0"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "ALL"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Add/Del Clients"
@@ -9816,6 +9998,11 @@ msgid ""
 msgstr ""
 "Partisi di-boot secara default\n"
 "    (untuk MS-DOS boot, bukan untuk lilo)\n"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -9863,15 +10050,6 @@ msgstr "Floppy sukses dibuat. Instalasi bisa direplikasi."
 msgid "the number of buttons the mouse has"
 msgstr "jumlah tombol mouse"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the directory (or module) to\n"
-" put the backup on this host."
-msgstr ""
-"Masukkan direktori (atau modul) utk\n"
-" meletakkan backup di host ini."
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Replay"
@@ -9907,6 +10085,11 @@ msgstr "Keluarga cpuid"
 msgid "32 MB"
 msgstr "32 MB"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: thin"
+msgstr "tipe: %s"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Lithuanian AZERTY (new)"
@@ -9927,11 +10110,6 @@ msgstr ""
 "Anda telah memilih partisi RAID software sebagai root (/).\n"
 "Tanpa partisi /boot, bootloader tak dapat berbuat apa-apa.\n"
 "Hati-hati dalam menambahkan partisi /boot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Previous"
-msgstr "Kembali"
 
 #: ../../any.pm:1
 #, c-format
@@ -10039,7 +10217,7 @@ msgstr ""
 msgid "Content of the file"
 msgstr "Isi file"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication LDAP"
 msgstr "Otentikasi LDAP"
@@ -10074,6 +10252,11 @@ msgstr "RAID md%s\n"
 msgid "%d comma separated strings"
 msgstr "%d string terpisah koma"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid " isdn"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -10088,6 +10271,11 @@ msgstr "Nama tema"
 #, c-format
 msgid "/_Help"
 msgstr "/_Tolong"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitrary driver"
+msgstr "Pilih sebarang driver"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10127,12 +10315,13 @@ msgstr "Tak pilih font yg sudah diinstal"
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
+#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
+#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10174,6 +10363,11 @@ msgstr "/Deteksi otomatis _modem"
 msgid "Remove printer"
 msgstr "Hapus printer"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "View Last Log"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -10212,11 +10406,12 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr "Lainnya"
 
-#: ../../any.pm:1 ../../harddrake/v4l.pm:1
+#: ../../any.pm:1 ../../harddrake/v4l.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Default"
 msgstr "Default"
@@ -10225,6 +10420,11 @@ msgstr "Default"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Emulasi tombol 2"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run chkrootkit checks"
+msgstr "Jika diset ya, jalankan cek chkrootkit."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10246,7 +10446,7 @@ msgstr "pilih file image"
 msgid "X server"
 msgstr "Server X"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Nama Pengguna Admin Domain"
@@ -10260,6 +10460,11 @@ msgstr "Ada error saat men-scan kanal TV"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "Keyboard US (internasional)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finish)"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10286,7 +10491,7 @@ msgstr "/File/-"
 msgid "Italian"
 msgstr "Itali"
 
-#: ../../interactive.pm:1 ../../standalone/draksec:1
+#: ../../interactive.pm:1
 #, c-format
 msgid "Basic"
 msgstr "Opsi Dasar"
@@ -10357,6 +10562,11 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Network dg FTP.\n"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Reports check result to tty"
+msgstr "jika diset ya, laporkan hasil cek ke tty."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10490,11 +10700,6 @@ msgstr ""
 msgid "Save theme"
 msgstr "Simpan tema"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr "grup"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -10514,6 +10719,11 @@ msgstr "Wizard Konfigurasi Jaringan"
 #, c-format
 msgid "Removable media automounting"
 msgstr "Mount otomatis media lepas"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Masukkan direktori utk penyimpanan:"
 
 #: ../../services.pm:1
 #, c-format
@@ -10630,6 +10840,11 @@ msgstr ""
 "(*) Anda perlu floppy berformat FAT (utk membuatnya di GNU/Linux, jalankan\n"
 "\"mformat a:\")"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Moldova"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Kensington Thinking Mouse"
@@ -10640,16 +10855,6 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Konfigurasi printer remote"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Moldova"
-msgstr "Moldova"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your tape before the backup."
-msgstr "Cek apakah Anda ingin menghapus tape sebelum backup."
-
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
@@ -10659,6 +10864,11 @@ msgstr "Platform online yang melayani kebutuhan support spesifik perusahaan"
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "Url harus berawalan 'ftp:' atau  'http:'"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Oriya"
+msgstr "Syria"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10725,6 +10935,11 @@ msgstr "setting servis"
 msgid "Custom"
 msgstr "Custom"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Latvia"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "File is already used by another loopback, choose another one"
@@ -10735,10 +10950,16 @@ msgstr "File sudah digunakan oleh loopback lain, pilih yang lainnya"
 msgid "Read-only"
 msgstr "Baca-saja"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Latvia"
-msgstr "Latvia"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
+"Argumen: (arg, alert=1)\n"
+"\n"
+"Aktifkan/Matikan proteksi pemalsuan resolusi nama.\n"
+"Jika \\fIalert\\fP = true, juga lapor ke syslog."
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10785,10 +11006,25 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Konfigurasi Local Area Network..."
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "jika ya, lakukan checksum file suid/sgid."
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Aktifkan sistem suara"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run some checks against the rpm database"
+msgstr "jika diset ya, cek database rpm"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Execute"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10815,15 +11051,15 @@ msgstr "Filesystem apa yang Anda inginkan?"
 msgid "3 buttons"
 msgstr "3 tombol"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Detailed information"
-msgstr "Info detil"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
 msgstr "Malta"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Detailed information"
+msgstr "Info detil"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10850,6 +11086,13 @@ msgstr "Disket ini tak diformat dengan sistem FAT"
 #, c-format
 msgid "Configuring network"
 msgstr "Konfigureasi jaringan"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This option will save files that have changed.  Exact behavior depends on "
+"whether incremental or differential mode is used."
+msgstr ""
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -10968,7 +11211,7 @@ msgstr ""
 "Driver baru \"%s\" akan digunakan pada boot berikut."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Mode Ahli"
@@ -10987,6 +11230,14 @@ msgstr "Alamat Jaringan Lokal"
 #, c-format
 msgid "Backup your System files. (/etc directory)"
 msgstr "Backup file System Anda. (direktori /etc)"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the user umask."
+msgstr ""
+"Argumen: (umask)\n"
+"\n"
+"Set umask pengguna."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11012,17 +11263,6 @@ msgstr ""
 msgid "Samba Server"
 msgstr "Server Samba"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
-msgstr ""
-"Argumen: (arg, alert=1)\n"
-"\n"
-"Aktifkan/Matikan proteksi pemalsuan IP."
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Australian Optus cable TV"
@@ -11047,11 +11287,6 @@ msgstr "Zimbabwe"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please enter the host name or IP."
-msgstr "Masukkan nama host atau IP."
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "When"
 msgstr "Kapan"
 
@@ -11064,25 +11299,6 @@ msgstr "Server DNS Sekunder (boleh tidak diisi)"
 #, c-format
 msgid "Finland"
 msgstr "Finlandia"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Sahkan semua servis yg dikontrol oleh tcp_wrappers (lihat hosts.deny(5)) "
-"jika \\fIarg\\fP = ALL. Hanya yg lokal\n"
-"jika \\fIarg\\fP = LOCAL dan semua tidak jika \\fIarg\\fP = NONE. Utk "
-"mensahkan servis, gunakan /etc/hosts.allow\n"
-"(lihat hosts.allow(5))."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -11098,6 +11314,19 @@ msgstr "Anda tak bisa buang paket ini. dia mesti diupgrade"
 #, c-format
 msgid "Loading from floppy"
 msgstr "Memuat dari floppy"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan log paket aneh IPv4."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Slovenia"
 
 #: ../../standalone/mousedrake:1
 #, fuzzy, c-format
@@ -11120,11 +11349,6 @@ msgstr ""
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Slovenia"
-msgstr "Slovenia"
 
 #: ../../any.pm:1
 #, c-format
@@ -11187,12 +11411,7 @@ msgstr "Support radio :"
 msgid "Installing SANE packages..."
 msgstr "Instalasi paket SANE..."
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "boot disk creation"
-msgstr "pembuatan bootdisk"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
@@ -11294,15 +11513,13 @@ msgstr ""
 "workgroup."
 
 #: ../../security/help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 "Argumen: (arg)\n"
 "\n"
-"Terima/Tolak echo icmp."
+"Izinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -11317,6 +11534,11 @@ msgid ""
 msgstr ""
 "Kartu Anda dapat menggunakan akselerasi hardware 3D pada XFree %s,\n"
 "NAMUN INI BARU DALAM TAHAP PERCOBAAN DAN DAPAT MEMBUAT KOMPUTER ANDA HANG."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Shell timeout"
+msgstr "Timeout Kernel Boot"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11355,67 +11577,6 @@ msgid ""
 msgstr ""
 "Ada error saat install aboot,\n"
 "paksakan instalasi walau merusak partisi awal?"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - The compression mode:\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode:\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, Drakbackup will ignore all references\n"
-"      included in .backupignore files in each directories.\n"
-"      ex: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
-msgstr ""
-"penjelasan opsi:\n"
-"\n"
-" Di tahap ini Drakbackup memungkinkan Anda mengubah:\n"
-"\n"
-" - Mode kompresi:\n"
-"\n"
-"      Jika Anda pilih kompresi bzip2, Anda akan mengkompres\n"
-"      data lebih baik daripada gzip (sekitar 2-10 %%).\n"
-"      Opsi ini bukan standar karena\n"
-"      banyak makan waktu (sekitar 1000%% lebih).\n"
-"\n"
-" - Mode update:\n"
-"\n"
-"      Opsi ini akan mengupdate backup Anda, tapi tak\n"
-"      benar-benar berguna karena Anda perlu\n"
-"      mengurai backup Anda sebelum dapat meng-update.\n"
-"      \n"
-" - Mode .backupignore:\n"
-"\n"
-"      Seperti cvs, Drakbackup akan mengabaikan semua referensi\n"
-"      tertulis dalam file .backupignore di tiap direktori.\n"
-"      mis: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11514,6 +11675,14 @@ msgstr "Lingkungan tersesuaikan"
 msgid "Inuktitut"
 msgstr "Eskimo"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Some protocols, like rsync, may be configured at the server end.  Rather "
+"than using a directory path, you would use the 'module' name for the service "
+"path."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
@@ -11534,15 +11703,15 @@ msgstr "Tambah printer baru"
 msgid "          All of your selected data have been          "
 msgstr "          Semua data terpilih telah           "
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "<-- Delete"
-msgstr "<-- Hapus"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
 msgstr "Nepal"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "<-- Delete"
+msgstr "<-- Hapus"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -11553,6 +11722,29 @@ msgstr "cpu # "
 #, c-format
 msgid "chunk size"
 msgstr "ukuran chunk"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"\\fIarg\\fP = ALL mengizinkan adanya /etc/issue dan /etc/issue.net. \\fIarg"
+"\\fP = NONE tak ada issues\n"
+"diizinkan selebihnya hanya /etc/issue diizinkan."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Tolak sulogin(8) dalam level pengguna single."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -11605,6 +11797,13 @@ msgstr "Muat ulang tabel partisi"
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Ya, saya mau autologin dg (pengguna, desktop) ini"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Restore Selected"
+msgstr ""
+"Restorasi File\n"
+"Terpilih"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11699,10 +11898,13 @@ msgstr ""
 msgid "Security Administrator:"
 msgstr "Admin Keamanan:"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your login"
-msgstr "Masukkan login"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the shell timeout. A value of zero means no timeout."
+msgstr ""
+"Argumen: (nilai)\n"
+"\n"
+"Pengesetan timeout shell. Nol = tidak ada timeout."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11740,47 +11942,6 @@ msgid ""
 "GIMP."
 msgstr "Printer \"%s\" sukses dihapus dari Star Office/OpenOffice.org/GIMP."
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Standard: This is the standard security recommended for a computer that will "
-"be used to connect\n"
-"               to the Internet as a client.\n"
-"\n"
-"High:       There are already some restrictions, and more automatic checks "
-"are run every night.\n"
-"\n"
-"Higher:    The security is now high enough to use the system as a server "
-"which can accept\n"
-"              connections from many clients. If your machine is only a "
-"client on the Internet, you\n"
-"           should choose a lower level.\n"
-"\n"
-"Paranoid:  This is similar to the previous level, but the system is entirely "
-"closed and security\n"
-"                features are at their maximum\n"
-"\n"
-"Security Administrator:\n"
-"               If the 'Security Alerts' option is set, security alerts will "
-"be sent to this user (username or\n"
-"            email)"
-msgstr ""
-"Standar: Keamanan standar utk komputer yg terhubung ke Internet sbg klien.\n"
-"\n"
-"Tinggi: Ada beberapa pembatasan, dan pemeriksaan otomatis tiap malam.\n"
-"\n"
-"Lebih Tinggi: Cukup aman utk dipakai sbg server yg menerima koneksi dari\n"
-"              banyak klien. Jika mesin Anda hanya klien Internet pilihlah\n"
-"\t      tingkat lebih rendah.\n"
-"\n"
-"Penakut: Mirip tingkat terdahulu, tapi sistem tertutup seluruhnya dan "
-"keamanan adalah maksimum\n"
-"\n"
-"Administrator Keamanan:\n"
-"               Jika opsi 'Pemberitahuan Keamanan' diset, berita keamanan "
-"akan dikirim ke pengguna ini\n"
-"\t       (nama pengguna atau email)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Save packages selection"
@@ -11812,6 +11973,11 @@ msgstr "gunakan pptp"
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Pilih service mana yang hendak dijalankan saat boot scr otomatis"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check files/directories writable by everybody"
+msgstr "jika ya, cek file/direktori agar dapat ditulisi oleh semua orang."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Learn how to use this printer"
@@ -11835,6 +12001,11 @@ msgid ""
 msgstr ""
 "Saya tidak dapat mengubah ukuran partisi FAT ini,\n"
 "Ada error ini yang terjadi: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Size: "
+msgstr "Ukuran: %s"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11881,6 +12052,14 @@ msgstr "Xpmac (instalasi driver display)"
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Nama host Zeroconf tak boleh berisi ."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse icmp echo."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Terima/Tolak echo icmp."
 
 #: ../../services.pm:1
 #, c-format
@@ -11964,6 +12143,11 @@ msgstr ""
 "Catatan: Anda mesti punya Adaptor Jaringan untuk mensetup Jaringan Area\n"
 "Lokal (LAN)."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections X Window"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -11984,6 +12168,11 @@ msgstr "Pilih printer yg ingin diset up atau ketikkan nama device/file"
 #, c-format
 msgid "Refuse"
 msgstr "Tolak"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "LOCAL"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -12093,6 +12282,11 @@ msgstr "Pendeteksian sedang berjalan"
 #, c-format
 msgid "Build Whole Kernel -->"
 msgstr "Bangun Seluruh Kernel -->"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "modem"
+msgstr "Modem"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -12210,6 +12404,22 @@ msgstr ""
 "XFree %s.\n"
 "Kartu Anda ini dapat dipakai pada XFree %s yg punya dukungan baik dalam 2D."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan cek keamanan harian."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable libsafe if libsafe is found on the system"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem."
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
@@ -12239,7 +12449,7 @@ msgstr "sinkronisasi waktu otomatis (dg NTP)"
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Server"
 msgstr "Server LDAP"
@@ -12304,6 +12514,11 @@ msgstr "Konfigurasikan card PCMCIA"
 msgid "kdesu missing"
 msgstr "kdesu hilang"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires a username...\n"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Encryption key"
@@ -12344,7 +12559,7 @@ msgstr "Partisi %s"
 msgid "Paranoid"
 msgstr "Penakut"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS"
 msgstr "NIS"
@@ -12379,28 +12594,6 @@ msgstr "Hapus seluruh disk"
 msgid " (Default)"
 msgstr " (Default)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
-msgstr ""
-"Argumen: ()\n"
-"\n"
-"Jika SERVER_LEVEL (atau SECURE_LEVEL jika tidak ada) lebih besar daripada 3\n"
-"di /etc/security/msec/security.conf, buat symlink /etc/security/msec/server\n"
-"merujuk /etc/security/msec/server.<SERVER_LEVEL>. /etc/security/msec/server\n"
-"dipakai oleh chkconfig --add utk menambahkan servis jika terdapat di file\n"
-"selama instalasi paket."
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -12416,17 +12609,27 @@ msgstr "Laju Penerimaan:"
 msgid "Turks and Caicos Islands"
 msgstr "Kepulauan Turks dan Caicos"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
-msgstr "izin"
-
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
 msgstr "<- Kembali"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Transfer Now"
+msgstr ""
+"  Transfer  \n"
+"Sekarang"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Set root password and network authentication methods"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Pakai katasandi utk membuktikan keaslian pengguna."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12567,6 +12770,20 @@ msgstr "Instal bootloader"
 msgid "Select the memory size of your graphics card"
 msgstr "Pilih memori kartu grafis Anda"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan crontab dan at utk pengguna. Taruh pengguna berizin di\n"
+"/etc/cron.allow dan /etc/at.allow\n"
+"(lihat man at(1) dan crontab(1))."
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12610,11 +12827,6 @@ msgstr "Beberapa alat di kelas perangkat keras \"%s\" dihapus:\n"
 msgid "Found %s %s interfaces"
 msgstr "Ditemukan interface %s %s"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr "sticky-bit (bit-lengket)"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -12629,17 +12841,6 @@ msgstr "Nama domain internal"
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ kartu"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
-msgstr ""
-"Argumen: (umask)\n"
-"\n"
-"Set umask pengguna."
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -12748,23 +12949,18 @@ msgstr "Instalasi sistem"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Santa Vincent dan Grenadin"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang reboot oleh pengguna konsol."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
 msgstr "/File/_Buka"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Argumen menentukan apakah klien diizinkan berhubungan dg\n"
-"server X di port tcp 6000 atau tidak."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -12786,15 +12982,15 @@ msgstr "Hungaria"
 msgid "Total progess"
 msgstr "Total perkembangan"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Color configuration"
-msgstr "Konfigurasi warna"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
 msgstr "New Zealand"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Color configuration"
+msgstr "Konfigurasi warna"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12869,6 +13065,13 @@ msgstr ""
 "melakukan pembagian titik ambang (FDIV) ia takkan mencapai presisi yg "
 "dibutuhkan"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Backup quota exceeded!\n"
+"%d MB used vs %d MB allocated."
+msgstr ""
+
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
@@ -12899,6 +13102,11 @@ msgstr "ketikkan `void' untuk entri kosong"
 msgid "on Hard Drive"
 msgstr "di Hard Drive"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Password history length"
+msgstr "Katasandi ini terlalu sederhana"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Winmodem connection"
@@ -12928,17 +13136,6 @@ msgstr ""
 "ingin mengubah opsi standar setting (tray kertas, kualitas cetak, ...), "
 "pilih \"Printer\" di bagian \"Perangkat Keras\" Pusat Kontrol Mandrake."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Set panjang riwayat katasandi utk mencegah penggunaan ulang katasandi."
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
@@ -12954,6 +13151,14 @@ msgstr "Instalasi tak dapat diteruskan karena swap kurang, tambahkan"
 #, c-format
 msgid "%s on %s"
 msgstr "%s di %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid remote root login."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang login root remote."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -12986,6 +13191,16 @@ msgstr ""
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Pilih zonawaktu Anda"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Can't create log file!"
+msgstr "Katalog tak dapat dibuat!"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Use .backupignore files"
+msgstr "Pakai quota utk file backup."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13042,6 +13257,11 @@ msgstr "Ukuran: %s\n"
 msgid "Hostname: "
 msgstr "Nama Host: "
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a rule"
+msgstr "tambah aturan"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Chunk size %s\n"
@@ -13056,15 +13276,6 @@ msgstr "Bangun masa depan Linux!"
 #, c-format
 msgid "Local Printer"
 msgstr "Printer Lokal"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
-"fr>"
-msgstr ""
-" Hak cipta (C) 2001-2002 MandrakeSoft oleh DUPONT Sebastien <dupont_s"
-"\\@epita.fr>"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -13111,20 +13322,10 @@ msgstr "Ubah ukuran"
 msgid "Dominica"
 msgstr "Dominika"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the device name to use for backup"
-msgstr "Masukkan nama alat utk backup"
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Resolution: %s\n"
 msgstr "Resolusi: %s\n"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
-msgstr "pencocokan"
 
 #: ../../install2.pm:1
 #, c-format
@@ -13175,24 +13376,6 @@ msgstr "Device Mouse: %s\n"
 msgid "Reselect correct fonts"
 msgstr "Pilih ulang font yg benar"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-"Please be careful when you are using ftp backup, because only \n"
-"backups that are already built are sent to the server.\n"
-"So at the moment, you need to build the backup on your hard \n"
-"drive before sending it to the server.\n"
-"\n"
-msgstr ""
-"penjelasan opsi:\n"
-"\n"
-"Hati-hati menggunakan backup ftp, karena hanya backup yg telah \n"
-"dibangun yg akan dikirim ke server. Jadi sementara Anda perlu \n"
-"membangun backup di harddrive Anda sebelum mengirimnya ke server.\n"
-"\n"
-
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -13207,11 +13390,6 @@ msgstr ""
 "boot. Pertanyaan ini diajukan meski Anda memilih tidak mentes konfigurasi.\n"
 "Jelas, Anda ingin menjawab \"Tidak\" jika mesin Anda dijadikan server, atau\n"
 "jika Anda gagal mengkonfigurasi display."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "We are now going to configure the %s connection."
-msgstr "Kita akan mengkonfigurasi koneksi %s."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -13334,6 +13512,11 @@ msgstr "Kartu Suara tak terdeteksi!"
 msgid "Mouse Port"
 msgstr "Port Mouse"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check for unsecured accounts"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid ""
@@ -13347,17 +13530,6 @@ msgstr ""
 #, c-format
 msgid "Ftp Server"
 msgstr "Server FTP"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan cek keamanan tiap jam oleh msec."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13373,17 +13545,6 @@ msgstr "konversi font pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Tipe bus tempat mouse dicolokkan"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Argumen: (ukuran)\n"
-"\n"
-"Set ukuran riwayat perintah cangkang. -1 berarti tak terbatas."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13501,25 +13662,6 @@ msgstr ""
 msgid "Comoros"
 msgstr "Comoros"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"We are now going to configure the %s connection.\n"
-"\n"
-"\n"
-"Press OK to continue."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Konfigurasi koneksi %s.\n"
-"\n"
-"\n"
-"Tekan OK utk mulai."
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13554,59 +13696,6 @@ msgstr "Pilih media lain utk direstorasi"
 #, c-format
 msgid "Software Manager"
 msgstr "Manajer Software"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Restore Description:\n"
-" \n"
-"Only the most recent date will be used, because with incremental \n"
-"backups it is necessary to restore one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"penjelasan restorasi:\n"
-" \n"
-"Hanya tanggal terkini yang akan dipakai, karena dg backup incremental \n"
-"diperlukan restorasi satu demi satu tiap backup lama.\n"
-"\n"
-"Jadi jika Anda tak ingin merestorasi pengguna lepaslah pilihan semua kotak\n"
-"tandanya.\n"
-"\n"
-"Jika tidak, Anda dapat memilih hanya satu opsi.\n"
-"\n"
-" - Backup Incremental:\n"
-"\n"
-"\tBackup incremental adalah opsi terkuat backup,\n"
-"\tAnda dapat mem-backup semua data pertama kali,\n"
-"\tdan kemudian hanya yg berubah.\n"
-"\tJadi Anda dapat, saat restorasi, menaruh\n"
-"\tulang data Anda dari tanggal yg ditentukan.\n"
-"\tJika Anda belum memilih opsi ini semua backup\n"
-"\tlama akan dihapus sebelum tiap backup.    \n"
-"\n"
-"\n"
-"\n"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -13679,6 +13768,11 @@ msgstr "Deteksi printer yg terhubung dg mesin Microsoft Windows"
 msgid "This password is too simple"
 msgstr "Katasandi ini terlalu sederhana"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Chkconfig obey msec rules"
+msgstr "Konfigurasi service"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
@@ -13702,20 +13796,12 @@ msgstr "Benar-benar instalasi minim (khususnya tanpa urpmi)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"  Transfer  \n"
-"Now"
-msgstr ""
-"  Transfer  \n"
-"Sekarang"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use daemon"
 msgstr "Pakai daemon"
 
 #: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/logdrake:1
+#: ../../standalone/drakauth:1 ../../standalone/drakconnect:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
 msgstr "Otentikasi"
@@ -13812,11 +13898,6 @@ msgstr "Setting printer standar..."
 msgid "Interface %s (using module %s)"
 msgstr "Interface %s (pakai module %s)"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Name: %s\n"
-msgstr "Nama: %s\n"
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Generating preview ..."
@@ -13830,6 +13911,28 @@ msgid ""
 msgstr ""
 "Freq harus berakhiran k, M atau G (mis. \"2.46G\" utk frekuensi 2.46 GHz), "
 "atau tambahkan '0' (nol) secukupnya."
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "ignore"
+msgstr "Singapura"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
+msgstr ""
+"Argumen: (arg, listen_tcp=None)\n"
+"\n"
+"Izinkan/Larang koneksi X. Arg pertama menunjukkan apa yg dilakukan\n"
+"di sisi klien: ALL (semua koneksi diizinkan), LOCAL (hanya\n"
+"koneksi lokal) and NONE (tanpa koneksi)."
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -13865,6 +13968,11 @@ msgstr ""
 "Anda dapat memberikan opsi terhadap modul %s.\n"
 "Ingat, semua alamat harus diisikan dengan awalan 0x misalnya '0x123'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Kenya"
+
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
@@ -13876,11 +13984,6 @@ msgstr ""
 "Mandrake Linux 9.1 menyajikan Pusat Kontrol Mandrake, konfigurator ampuh "
 "komputer Anda. Anda dapat mengatur tingkat keamanan, perangkat (layar, "
 "mouse, papanketik...), koneksi Internet dll!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Kenya"
-msgstr "Kenya"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -13912,6 +14015,14 @@ msgstr "Kedua Shift bersamaan"
 msgid "Select a scanner model"
 msgstr "Pilih model scanner"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Terima/Tolak pesan error IPv4 yg tak benar."
+
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
@@ -13927,6 +14038,11 @@ msgstr "Konfigurasi Drakbackup"
 msgid "Save as.."
 msgstr "Simpan sbg.."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr "Korea (Utara)"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -13936,22 +14052,17 @@ msgstr ""
 "Antarmuka ini belum dikonfigurasikan.\n"
 "Luncurkan dukun konfigurasi di window utama"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Korea (North)"
-msgstr "Korea (Utara)"
-
-#: ../../any.pm:1
-#, c-format
-msgid "Autologin"
-msgstr "Autologin"
-
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System configuration"
 msgstr "Konfigurasi sistem"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../security/l10n.pm:1
+#, c-format
+msgid "Autologin"
+msgstr "Autologin"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Katasandi Admin Domain"
@@ -14234,6 +14345,22 @@ msgstr "Posisi mount: "
 msgid "parse all fonts"
 msgstr "baca semua font"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid direct root login."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang login root langsung."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Terima/Tolak echo icmp siaran."
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -14290,6 +14417,14 @@ msgstr "Berbagi printer lokal"
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14419,6 +14554,22 @@ msgstr "Mount device %s akan dimount ke mana?"
 msgid "The default lease (in seconds)"
 msgstr "Lama peminjaman standar (dalam detik)"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"We are now going to configure the %s connection.\n"
+"\n"
+"\n"
+"Press \"%s\" to continue."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"Konfigurasi koneksi %s.\n"
+"\n"
+"\n"
+"Tekan OK utk mulai."
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Interface \"%s\""
@@ -14448,17 +14599,6 @@ msgstr ""
 msgid "Test"
 msgstr "Tes"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang login root langsung."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea"
@@ -14478,6 +14618,11 @@ msgstr "Printer raw"
 #, fuzzy, c-format
 msgid "official vendor name of the cpu"
 msgstr "nama vendor resmi cpu"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Useless without Terminal Server"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14499,11 +14644,8 @@ msgstr "Konfigurasi mouse"
 msgid "Choose the mount points"
 msgstr "Pilih lokasi mount"
 
-#: ../../help.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
-#: ../../standalone/net_monitor:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "OK"
@@ -14597,20 +14739,10 @@ msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "Gagal menghapus printer \"%s\" dari Star Office/OpenOffice.org/GIMP."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr "hapus"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "here if no."
 msgstr "di sini jika tidak."
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "help"
-msgstr "Pertolongan"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14632,10 +14764,20 @@ msgstr "Di serial port mana mouse Anda dicolokkan ?"
 msgid "Did it work properly?"
 msgstr "Bekerja dg baik?"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "Mount the file system read-only."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid "Poor"
 msgstr "Lemah"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result by mail"
+msgstr "jika diset ke ya, laporkan hasil cek dg mail."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -14680,6 +14822,11 @@ msgstr ""
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Kannada"
+msgstr "Kanada"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
@@ -14700,6 +14847,11 @@ msgstr "Laju refresh vertikal"
 msgid "Entering step `%s'\n"
 msgstr "Memulai langkah `%s'\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Niger"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan"
@@ -14709,11 +14861,6 @@ msgstr "Logitech MouseMan"
 #, c-format
 msgid "Removing %s ..."
 msgstr "Hapus %s ..."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Niger"
-msgstr "Niger"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14745,6 +14892,11 @@ msgstr "Umum"
 msgid "Printing system: "
 msgstr "Sistem cetak: "
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
+msgstr ""
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
@@ -14766,10 +14918,13 @@ msgid "Philippines"
 msgstr "Filipina"
 
 #: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
-#: ../../standalone/mousedrake:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -14838,25 +14993,20 @@ msgstr ""
 " Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
 "printer sekarang."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore From Catalog"
-msgstr "Restorasi Dari Katalog"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore From Catalog"
+msgstr "Restorasi Dari Katalog"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "IDE"
 msgstr "IDE"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr "grup :"
 
 #: ../../fs.pm:1
 #, c-format
@@ -14899,6 +15049,16 @@ msgid "Looking for available packages and rebuilding rpm database..."
 msgstr "Sedang mencari paket yg tersedia dan membangun ulang database rpm..."
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Report \n"
+msgstr ""
+"\n"
+"                      Laporan DrakBackup \n"
+"\n"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "Does not appear to be recordable media!"
 msgstr "Tampaknya bukan media yang dapat merekam!"
@@ -14912,6 +15072,13 @@ msgstr "Tentukan opsi"
 #, c-format
 msgid "Vanuatu"
 msgstr "Vanuatu"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "New user list:\n"
+msgstr ""
+"\n"
+"- File Pengguna:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14948,6 +15115,14 @@ msgstr ""
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
 msgstr "Anda tak dapat menggunakan sistem file bersandi utk mount point %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the password history length to prevent password reuse."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Set panjang riwayat katasandi utk mencegah penggunaan ulang katasandi."
 
 #: ../../lang.pm:1
 #, c-format
@@ -15182,11 +15357,6 @@ msgstr "TB"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check if you are using a DVDR device"
-msgstr "Periksa apakah Anda menggunakan alat DVDR"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "FATAL"
 msgstr "FATAL"
 
@@ -15206,20 +15376,10 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Delete"
 msgstr "Hapus"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang reboot oleh pengguna konsol."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -15382,10 +15542,15 @@ msgstr "CUPS - Common Unix Printing System"
 msgid "Webmin Service"
 msgstr "Servis Webmin"
 
-#: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "device"
 msgstr "device"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save to:"
+msgstr "Masukkan direktori utk penyimpanan:"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -15421,10 +15586,33 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr "Tamil (layout mesintik)"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Pakai katasandi utk membuktikan keaslian pengguna."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang daftar pengguna sistem di manajer display (kdm dan gdm)."
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
 msgstr "manual"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Filename text to search for:"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15458,6 +15646,11 @@ msgstr "Printer di server NetWare"
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Berikan jumlah RAM dalam satuan MB"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet complete."
+msgstr "Pemutusan hubungan dari Internet selesai."
 
 #: ../../any.pm:1
 #, c-format
@@ -15560,6 +15753,11 @@ msgstr "kompak"
 msgid "1 minute"
 msgstr "1 menit"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: fat"
+msgstr "tipe: %s"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "on channel %d id %d\n"
@@ -15574,6 +15772,14 @@ msgstr ", alat multifungsi"
 #, c-format
 msgid "Laos"
 msgstr "Laos"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Aktifkan/Matikan pengecekan kekacauan kartu ethernet."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15600,15 +15806,15 @@ msgstr "Area :"
 msgid "(E)IDE/ATA controllers"
 msgstr "Pengontrol (E)IDE/ATA"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "All I/O to the file system should be done synchronously."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Server"
 msgstr "Server Printer"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet complete."
-msgstr "Pemutusan hubungan dari Internet selesai."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15633,28 +15839,6 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Santa Pierre dan Miquelon"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"Restore Backup Problems:\n"
-"\n"
-"During the restore step, Drakbackup will verify all your\n"
-"backup files before restoring them.\n"
-"Before the restore, Drakbackup will remove \n"
-"your original directory, and you will loose all your \n"
-"data. It is important to be careful and not modify the \n"
-"backup data files by hand.\n"
-msgstr ""
-"\n"
-"Problem Restore Backup:\n"
-"\n"
-"Saat tahap restore, Drakbackup akan mencek semua file\n"
-"backup sebelum menempatkannya kembali. Sebelum restore,\n"
-"Drakbackup akan menghapus direktori asli Anda, dan Anda\n"
-"akan kehilangan semua data. Hati-hati dan jangan mengubah\n"
-"file data backup secara manual.\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15701,6 +15885,11 @@ msgstr "Silinder %d sampai %d\n"
 msgid "New profile..."
 msgstr "Buat profil baru..."
 
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which disk do you want to move it to?"
@@ -15711,10 +15900,15 @@ msgstr "Disk mana yang hendak dipindah?"
 msgid "Display logo on Console"
 msgstr "Display logo di Konsol"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Windows Domain"
 msgstr "Domain Mindows"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Saami (norwegian)"
+msgstr "Dvorak (Norwegia)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15760,15 +15954,15 @@ msgstr ""
 msgid "Build Single NIC -->"
 msgstr "Bangun NIC Single -->"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#, c-format
-msgid "Is this correct?"
-msgstr "Sudah sesuai?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
 msgstr "Kepulauan Marshall"
+
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#, c-format
+msgid "Is this correct?"
+msgstr "Sudah sesuai?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15785,10 +15979,27 @@ msgstr "Katasandi root"
 msgid "Build All Kernels -->"
 msgstr "Bangun Semua Kernel -->"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDRAM device"
+msgstr "device"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "jika diset ya, laporkan file tak bertuan."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Inilah HardDrake, alat konfigurasi hardware Mandrake.\n"
+"Versi:"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15800,6 +16011,11 @@ msgstr ""
 "Anda belum punya partisi swap\n"
 "\n"
 "Jalan terus?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Version: "
+msgstr "Versi: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15870,10 +16086,16 @@ msgstr "Optimasi keamanan"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Pertolongan"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check if the network devices are in promiscuous mode"
+msgstr "jika ya, cek apakah piranti jaringan berada dalam modus promiscuous."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -15898,6 +16120,11 @@ msgstr ""
 #, c-format
 msgid "Username required"
 msgstr "Nama pengguna dibutuhkan"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Device"
+msgstr "Device: "
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -15936,16 +16163,10 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Pilihan printer SMB (windows 95/NT)"
 
-#: ../../security/help.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
+msgid "Valid user list changed, rewriting config file."
 msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Terima/Tolak pesan error IPv4 yg tak benar."
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15965,6 +16186,11 @@ msgstr ""
 #, c-format
 msgid "Protocol for the rest of the world"
 msgstr "Protokol lain"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digit and upcase letters"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16048,6 +16274,11 @@ msgstr "Pilih ukuran baru"
 msgid "Media class"
 msgstr "Kelas media"
 
+#: ../../standalone/XFdrake:1
+#, c-format
+msgid "You need to log out and back in again for changes to take effect"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not known by this version of Scannerdrake."
@@ -16067,20 +16298,6 @@ msgstr "Jalankan ulang XFS"
 #, c-format
 msgid "Add host/network"
 msgstr "Tambahkan host/jaringan"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
-msgstr ""
-"jika ya, cek katasandi kosong, terhadap katasandi kosong di /etc/shadow dan "
-"terhadap pengguna bukan root yg ber-ID 0."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save to:"
-msgstr "Masukkan direktori utk penyimpanan:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16102,22 +16319,10 @@ msgstr "Tiada CDR/DVDR di drive!"
 msgid "British Indian Ocean Territory"
 msgstr "Inggris, Teritori Samudera Indonesia"
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modus Normal"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' medias also use the hard drive."
-msgstr ""
-"Pastikan daemon cron masuk dalam daftar servis.\n"
-"\n"
-"Ingat bahwa kini semua media 'net' juga menggunakan harddisk."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16204,19 +16409,18 @@ msgstr ""
 "terdekat. Lalu muncul daftar paket: lihat lagi pilihan Anda, tekan\n"
 "\"Instal\" untuk mengambil/nstal paket atau \"Batal\" jika tak jadi."
 
-#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
-#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Keluar"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
 msgstr "Myanmar"
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Keluar"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16269,7 +16473,7 @@ msgstr ""
 " Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
 "printer sekarang."
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication NIS"
 msgstr "Otentikasi NIS"
@@ -16291,10 +16495,20 @@ msgstr "Pemakaian Bersama Koneksi Internet telah aktif"
 msgid "Card IO_0"
 msgstr "IO_0 kartu"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Disable Local Config"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Uni Emirat Arab"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Muangthai"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16303,18 +16517,18 @@ msgstr "IO_1 kartu"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Thailand"
-msgstr "Muangthai"
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr "Router:"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr "Kazakhstan"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Write"
+msgstr "Tulis %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16345,6 +16559,56 @@ msgstr "Pulau Bouvet"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Jika port tak diberikan, sbg standar akan dipakai 631."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu enable to select one of the six preconfigured "
+"security\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16418,6 +16682,11 @@ msgstr "Label"
 #, c-format
 msgid "Save on floppy"
 msgstr "Simpan di floppy"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check open ports"
+msgstr "dideteksi pada port %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16526,6 +16795,11 @@ msgstr "Perancis"
 msgid "Czech (QWERTY)"
 msgstr "Ceko (QWERTY)"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow X Window connections"
+msgstr "Koneksi winmodem"
+
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Hardware probing in progress"
@@ -16550,7 +16824,7 @@ msgstr ""
 " (Port Paralel: /dev/lp0, /dev/lp1, ..., sebanding dengan LPT1:, LPT2:, ..., "
 "printer USB pertama: /dev/usb/lp0, printer USB kedua: /dev/usb/lp1, ...)."
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Lanjut"
@@ -16564,6 +16838,11 @@ msgstr "Anda tak dapat menginstal bootloader pada partisi %s\n"
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -16582,11 +16861,6 @@ msgstr ""
 "Selamat Datang.\n"
 "\n"
 "Parameter instalasi otomatis tersedia di bagian sebelah kiri"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Puerto Rico"
-msgstr "Puerto Rico"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16620,7 +16894,7 @@ msgstr ""
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Domain"
 msgstr "Domain NIS"
@@ -16657,19 +16931,6 @@ msgid ""
 msgstr ""
 "Tunjuk raw device ke block devices (misalnya partisi hard drive),\n"
 "utk digunakan oleh aplikasi semacam Oracle atau player DVD"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
-"Argumen: (arg, alert=1)\n"
-"\n"
-"Aktifkan/Matikan proteksi pemalsuan resolusi nama.\n"
-"Jika \\fIalert\\fP = true, juga lapor ke syslog."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -16721,6 +16982,11 @@ msgstr "Trinidad dan Tobago"
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD and LPRng tak men-support printer IPP.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Host name or IP."
+msgstr "Nama Host"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -16745,6 +17011,11 @@ msgstr "Adapter %s: %s"
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Kepulauan Malvinas"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Boot disk creation"
+msgstr "pembuatan bootdisk"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16786,6 +17057,13 @@ msgstr ""
 "Luncurkan filter paket Linux kernel seri 2.2, untuk set-up\n"
 "firewall yang melindungi mesin Anda dari serangan network."
 
+#: ../../network/ethernet.pm:1
+#, fuzzy, c-format
+msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
+msgstr ""
+"Klien dhcp mana yang ingin Anda pakai?\n"
+"defaultnya adalah dhcp-client"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (ISCII-layout)"
@@ -16795,6 +17073,19 @@ msgstr "Tamil (layout ISCII)"
 #, c-format
 msgid "Mayotte"
 msgstr "Mayotte"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+"Argumen: (ukuran)\n"
+"\n"
+"Set ukuran riwayat perintah cangkang. -1 berarti tak terbatas."
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "%d KB\n"
+msgstr "Ukuran: %d KB\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -16806,15 +17097,15 @@ msgstr "Lagi buat disket auto install"
 msgid "Searching for scanners ..."
 msgstr "Cari scanner..."
 
-#: ../../steps.pm:1
-#, c-format
-msgid "Partitioning"
-msgstr "Pembuatan partisi"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Russia"
 msgstr "Rusia"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Partitioning"
+msgstr "Pembuatan partisi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -16852,6 +17143,14 @@ msgstr "Tak cukup ruangan untuk alokasi otomatis"
 msgid "Set root password"
 msgstr "Set katasandi root"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable IP spoofing protection"
+msgstr ""
+"Argumen: (arg, alert=1)\n"
+"\n"
+"Aktifkan/Matikan proteksi pemalsuan IP."
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -16860,6 +17159,11 @@ msgid ""
 msgstr ""
 "Tak ada driver gratis utk kartu suara Anda (%s), tapi ada driver yg cocok di "
 "\"%s\""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group :"
+msgstr "grup :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16870,6 +17174,14 @@ msgstr "Sehabis meresize partisi %s, semua data pada partisi ini akan hilang"
 #, c-format
 msgid "Internet connection configuration"
 msgstr "konfigurasi koneksi Internet"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+"Argumen: (nama)\n"
+"\n"
+"Tambahkan nama sbg eksepsi penanganan umur katasandi dg msec."
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16895,11 +17207,6 @@ msgstr "Bengal"
 #, c-format
 msgid "Preference: "
 msgstr "Kesukaan: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Wizard..."
-msgstr "Dukun..."
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -16950,6 +17257,17 @@ msgstr "Nama printer harus hanya berupa huruf, angka, atau garisbawah"
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Tampilkan konfigurasi antarmuka"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Argumen menentukan apakah klien diizinkan berhubungan dg\n"
+"server X di port tcp 6000 atau tidak."
 
 #: ../../help.pm:1
 #, c-format
@@ -17063,6 +17381,13 @@ msgstr "Setting"
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "IP host/jaringan tak benar.\n"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Create/Transfer backup keys for SSH"
+msgstr ""
+"Buat/Transfer\n"
+"kunci cadangan SSH"
 
 #: ../../any.pm:1
 #, c-format
@@ -17178,6 +17503,11 @@ msgstr ""
 "Jika ada masalah dlm mengingat katasandi, Anda dapat memilih \"Tanpa\n"
 "katasandi\", jika komputer Anda tak berhubungan dg Internet dan Anda\n"
 "mempercayai semua orang utk mengaksesnya."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Name resolution spoofing protection"
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -17372,15 +17702,15 @@ msgstr ""
 msgid "Shell"
 msgstr "Cangkang"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "PCI"
-msgstr "PCI"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome dan Principe"
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "PCI"
+msgstr "PCI"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -17456,6 +17786,16 @@ msgid " on parallel port #%s"
 msgstr " di port paralel #%s"
 
 #: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Argumen: (panjang, ndigits=0, nuppers=0)\n"
+"\n"
+"Set panjang minimum, jumlah minimum digit dan jumlah minimum huruf besar."
+
+#: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
 msgstr "Jika diset ke ya, cek port yg terbuka."
@@ -17511,6 +17851,11 @@ msgstr "Hitung ukuran partisi Mindows"
 msgid "Italy"
 msgstr "Itali"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Pulau Cayman"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17530,11 +17875,6 @@ msgstr "error melepas mount %s: %s"
 #, c-format
 msgid "Do it!"
 msgstr "Kerjakan!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cayman Islands"
-msgstr "Pulau Cayman"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17630,18 +17970,7 @@ msgstr "Terdeteksi model: %s %s"
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft telah memilih software terbaik utk Anda"
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"Version: %s\n"
-"Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-"\n"
-msgstr ""
-"Inilah HardDrake, alat konfigurasi hardware Mandrake.\n"
-"Versi:"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Local files"
 msgstr "File lokal"
@@ -17655,6 +17984,11 @@ msgstr "hmm.."
 #, c-format
 msgid "Panama"
 msgstr "Panama"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "Can't open %s!"
+msgstr "%s di %s tak tercari"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -17738,11 +18072,6 @@ msgstr ""
 "\n"
 "- Simpan di Hard drive di path: %s\n"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Ukuran: %d KB\n"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove fonts on your system"
@@ -17768,10 +18097,10 @@ msgstr ""
 msgid "Graphical interface at startup"
 msgstr "Antarmuka grafis saat startup"
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
-msgid "Please enter the directory to save:"
-msgstr "Masukkan direktori utk penyimpanan:"
+msgid " adsl"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17782,6 +18111,11 @@ msgstr "Format disket yg di-support oleh drive"
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Partisi tidak cukup untuk level RAID %d\n"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: true"
+msgstr "tak dikonfigurasikan"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17803,6 +18137,11 @@ msgstr "Tersambung"
 msgid "Macedonian"
 msgstr "Macedonia"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Mali"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
@@ -17812,11 +18151,6 @@ msgstr "Pengontrol sistem dan bridge"
 #, c-format
 msgid "/File/_Save"
 msgstr "/File/_Simpan"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Mali"
-msgstr "Mali"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -17842,6 +18176,11 @@ msgstr "Kontrol Remote"
 #, c-format
 msgid "Please select media for backup..."
 msgstr "Pilih media backup..."
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Wrong email"
+msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -17904,8 +18243,7 @@ msgstr ""
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Konfigurator multiguna Mandrake"
 
-#: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Save"
 msgstr "Simpan"
@@ -17955,11 +18293,6 @@ msgstr "Guiana Perancis"
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "tambah aturan"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
@@ -17980,7 +18313,12 @@ msgstr "Transfer konfigurasi printer"
 msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr "Anda ingin mengaktifkan pencetakan di printer tersebut di atas?\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of suid root files"
+msgstr "jika diset ya, cek tambahan/hapusan file root suid."
+
+#: ../../any.pm:1
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -18018,16 +18356,10 @@ msgstr "%s (Port %s)"
 msgid "Use network connection to backup"
 msgstr "Pakai koneksi jaringan utk backup"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Tolak sulogin(8) dalam level pengguna single."
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Kernel version"
+msgstr "versi kernel"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -18136,10 +18468,25 @@ msgstr "Server"
 msgid "Left Shift key"
 msgstr "Kunci \"Mindows\" kiri"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " local network"
+msgstr "Jaringan lokal"
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Pilihan salah, silakan ulangi\n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Syslog reports to console 12"
+msgstr ""
+
+#: ../../diskdrake/smbnfs_gtk.pm:1
+#, fuzzy, c-format
+msgid "Search new servers"
+msgstr "Cari Server"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18294,6 +18641,16 @@ msgstr "Jerman"
 msgid "Austria"
 msgstr "Austria"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD media size (MB)"
+msgstr "Pilih ukuran media CD/DVD Anda"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check permissions of files in the users' home"
+msgstr "jika diset ya, cek izin file-file di home pengguna."
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Run \"sndconfig\" after installation to configure your sound card"
@@ -18371,10 +18728,28 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "Tiada support utk %s pada Linux Mandrake versi ini."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 1"
+msgstr "Level"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
 msgstr "Klien DHCP"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "List users on display managers (kdm and gdm)"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang daftar pengguna sistem di manajer display (kdm dan gdm)."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 2"
+msgstr "Level"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -18385,6 +18760,21 @@ msgstr "Proses restore dari file %s gagal: %s"
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech Mouse (serial, old C7 type)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 3"
+msgstr "Level"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 4"
+msgstr "Level"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 5"
+msgstr "Level"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18455,13 +18845,6 @@ msgstr "Semua mesin remote"
 #, c-format
 msgid "Install themes"
 msgstr "Instal tema"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-msgstr ""
-" update 2002 MandrakeSoft oleh Stew Benedict <sbenedict\\@mandrakesoft.com>"
 
 #: ../../help.pm:1
 #, c-format
@@ -18579,11 +18962,6 @@ msgstr "Persetujuan Lisensi"
 msgid "System Options"
 msgstr "Opsi Sistem"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory where backups are stored"
-msgstr "Masukkan direktori tempat backup disimpan"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
@@ -18598,6 +18976,13 @@ msgstr "Host ini sudah terdaftar, tak dapat ditambahkan lagi.\n"
 #, c-format
 msgid ", USB printer"
 msgstr ", printer USB"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Incremental backups only save files that have changed or are new since the "
+"last backup."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -18624,6 +19009,14 @@ msgstr "Selamat!"
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Gunakan id pemilik utk eksekusi"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow remote root login"
+msgstr ""
+"Argumen: (arg)\n"
+"\n"
+"Izinkan/Larang login root remote."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -18683,6 +19076,11 @@ msgstr "Microsoft Explorer"
 #, c-format
 msgid "German (no dead keys)"
 msgstr "Jerman (tanpa dead key)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tSend mail to %s\n"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18779,6 +19177,11 @@ msgstr ""
 " Jika printer yg diinginkan terdeteksi, pilihlah dari daftar lalu tambahkan "
 "nama pengguna, katasandi, dan/atau grupkerja jika perlu."
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " cable"
+msgstr "Tabel"
+
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -18789,17 +19192,6 @@ msgstr "Pakai ruang kosong pada partisi windows"
 msgid "%s found on %s, configure it automatically?"
 msgstr "%s ditemukan di %s, konfigurasikan secara otomatis?"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Pakai katasandi utk membuktikan keaslian pengguna."
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
@@ -18809,17 +19201,6 @@ msgstr "Driver XFree86: %s\n"
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
 msgstr "Host/jaringan ini sudah terdaftar, tak dapat ditambahkan lagi.\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Report \n"
-"\n"
-msgstr ""
-"\n"
-"                      Laporan DrakBackup \n"
-"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -18835,6 +19216,11 @@ msgstr "Papua New Guinea"
 #, c-format
 msgid "Serbian (cyrillic)"
 msgstr "Serbia (cyrillic)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory where backups are stored"
+msgstr "Masukkan direktori tempat backup disimpan"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -19134,16 +19520,6 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check for multisession CD"
-msgstr "Mohon cek perihal CD multisession"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
-msgstr "pengguna"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Pakai Hard Disk utk backup"
 
@@ -19221,6 +19597,11 @@ msgstr ""
 msgid "Detected model: %s"
 msgstr "Model terdeteksi: %s"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" is not a valid email!"
+msgstr ""
+
 #: ../../standalone/drakedm:1
 #, c-format
 msgid ""
@@ -19235,6 +19616,11 @@ msgstr ""
 #, c-format
 msgid "if set to yes, run the daily security checks."
 msgstr "jika ya, jalankan cek keamanan harian."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "Masukkan nama alat utk backup"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19458,6 +19844,331 @@ msgstr "server NFS, SMB, Proxy, SSH"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Kumpulan tool utk membaca, mengirim email dan news serta membrowse Web"
 
+#~ msgid "Please relog into %s to activate the changes"
+#~ msgstr "Silakan masuk lagi ke %s untuk mengaktifkan perubahan"
+
+#~ msgid ""
+#~ "Description:\n"
+#~ "\n"
+#~ "  Drakbackup is used to backup your system.\n"
+#~ "  During the configuration you can select: \n"
+#~ "\t- System files, \n"
+#~ "\t- Users files, \n"
+#~ "\t- Other files.\n"
+#~ "\tor All your system ...  and Other (like Windows Partitions)\n"
+#~ "\n"
+#~ "  Drakbackup allows you to backup your system on:\n"
+#~ "\t- Harddrive.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
+#~ "\t- FTP.\n"
+#~ "\t- Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Tape.\n"
+#~ "\n"
+#~ "  Drakbackup allows you to restore your system to\n"
+#~ "  a user selected directory.\n"
+#~ "\n"
+#~ "  Per default all backups will be stored on your\n"
+#~ "  /var/lib/drakbackup directory\n"
+#~ "\n"
+#~ "  Configuration file:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+#~ "\n"
+#~ "Restore Step:\n"
+#~ "  \n"
+#~ "  During the restore step, DrakBackup will remove \n"
+#~ "  your original directory and verify that all \n"
+#~ "  backup files are not corrupted. It is recommended \n"
+#~ "  you do a last backup before restoring.\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Penjelasan:\n"
+#~ "\n"
+#~ "  Drakbackup digunakan untuk membackup system Anda.\n"
+#~ "  Selama konfigurasi Anda dapat memilih: \n"
+#~ "\t- File System, \n"
+#~ "\t- File Pengguna, \n"
+#~ "\t- File Lain-lain.\n"
+#~ "\tatau Seluruh sistem ...  dan Lain-lain (mis. partisi Windows)\n"
+#~ "\n"
+#~ "  Drakbackup dapat melakukan backup sistem di:\n"
+#~ "\t- Harddisk.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (dg autoboot, rescue dan autoinstall.).\n"
+#~ "\t- FTP.\n"
+#~ "\t- Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Tape.\n"
+#~ "\n"
+#~ "  Drakbackup dapat merestorasi sistem Anda ke\n"
+#~ "  direktori pilihan pengguna.\n"
+#~ "\n"
+#~ "  Aslinya semua backup ditempatkan di direktori\n"
+#~ "  /var/lib/drakbackup\n"
+#~ "\n"
+#~ "  File konfigurasi:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+#~ "\n"
+#~ "\n"
+#~ "Tahap Restorasi:\n"
+#~ "  \n"
+#~ "  Saat restorasi, DrakBackup akan menghapus \n"
+#~ "  direktori asli Anda dan mencek bahwa semua file \n"
+#~ "  backup tak rusak. Disarankan Anda melakukan \n"
+#~ "  backup sebelumnya.\n"
+#~ "\n"
+#~ "\n"
+
+#~ msgid "Please check if you want to use the non-rewinding device."
+#~ msgstr "Cek apakah Anda ingin menggunakan alat non-rewinding."
+
+#~ msgid "Please enter your password"
+#~ msgstr "Masukkan katasandi"
+
+#~ msgid ""
+#~ "\n"
+#~ " Some errors during sendmail are caused by \n"
+#~ " a bad configuration of postfix. To solve it you have to\n"
+#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Beberapa error saat sendmail disebabkan oleh \n"
+#~ " konfigurasi buruk postfix. Utk mengatasinya \n"
+#~ " myhostname atau mydomain di /etc/postfix/main.cf harus diset\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Please choose your CD/DVD device\n"
+#~ "(Press Enter to propogate settings to other fields.\n"
+#~ "This field isn't necessary, only a tool to fill in the form.)"
+#~ msgstr ""
+#~ "Pilih alat CD/DVD Anda\n"
+#~ "(Tekan Enter untuk menyalurkan setting ke tempat isian lain.\n"
+#~ "Field ini tak diperlukan, hanya alat utk mengisi formulir.)"
+
+#~ msgid "Please check if you want to eject your tape after the backup."
+#~ msgstr "Cek apakah Anda ingin meng-eject tape setelah backup."
+
+#~ msgid "Please check if you want to erase your tape before the backup."
+#~ msgstr "Cek apakah Anda ingin menghapus tape sebelum backup."
+
+#~ msgid "Please enter the host name or IP."
+#~ msgstr "Masukkan nama host atau IP."
+
+#~ msgid "Please enter your login"
+#~ msgstr "Masukkan login"
+
+#~ msgid ""
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+#~ msgstr ""
+#~ " Hak cipta (C) 2001-2002 MandrakeSoft oleh DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+
+#~ msgid ""
+#~ "\n"
+#~ "Restore Backup Problems:\n"
+#~ "\n"
+#~ "During the restore step, Drakbackup will verify all your\n"
+#~ "backup files before restoring them.\n"
+#~ "Before the restore, Drakbackup will remove \n"
+#~ "your original directory, and you will loose all your \n"
+#~ "data. It is important to be careful and not modify the \n"
+#~ "backup data files by hand.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Problem Restore Backup:\n"
+#~ "\n"
+#~ "Saat tahap restore, Drakbackup akan mencek semua file\n"
+#~ "backup sebelum menempatkannya kembali. Sebelum restore,\n"
+#~ "Drakbackup akan menghapus direktori asli Anda, dan Anda\n"
+#~ "akan kehilangan semua data. Hati-hati dan jangan mengubah\n"
+#~ "file data backup secara manual.\n"
+
+#~ msgid ""
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ msgstr ""
+#~ " update 2002 MandrakeSoft oleh Stew Benedict <sbenedict\\@mandrakesoft."
+#~ "com>"
+
+#~ msgid ""
+#~ "Arguments: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
+#~ "expression describing what to log (see syslog.conf(5) for more details) "
+#~ "and\n"
+#~ "dev the device to report the log."
+#~ msgstr ""
+#~ "Argumen: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Aktifkan/Matikan laporan syslog ke konsol 12. \\fIexpr\\fP adalah\n"
+#~ "menjelaskan apa yg mesti dicatat (detilnya lihat syslog.conf(5)) dan\n"
+#~ "dev alat tempat menulis catatan."
+
+#~ msgid "edit"
+#~ msgstr "edit"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ " Accept/Refuse broadcasted icmp echo."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Terima/Tolak echo icmp siaran."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Allow/Forbid remote root login."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Izinkan/Larang login root remote."
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "pilih file izin yg akan dilihat/edit"
+
+#~ msgid "path"
+#~ msgstr "path"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Aktifkan/Matikan log paket aneh IPv4."
+
+#~ msgid ""
+#~ "Arguments: (arg, alert=1)\n"
+#~ "\n"
+#~ "Enable/Disable IP spoofing protection."
+#~ msgstr ""
+#~ "Argumen: (arg, alert=1)\n"
+#~ "\n"
+#~ "Aktifkan/Matikan proteksi pemalsuan IP."
+
+#~ msgid "permissions"
+#~ msgstr "izin"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable msec hourly security check."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Aktifkan/Matikan cek keamanan tiap jam oleh msec."
+
+#~ msgid "delete"
+#~ msgstr "hapus"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Terima/Tolak pesan error IPv4 yg tak benar."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Use password to authenticate users."
+#~ msgstr ""
+#~ "Argumen: (arg)\n"
+#~ "\n"
+#~ "Pakai katasandi utk membuktikan keaslian pengguna."
+
+#~ msgid "user"
+#~ msgstr "pengguna"
+
+#~ msgid ""
+#~ "Standard: This is the standard security recommended for a computer that "
+#~ "will be used to connect\n"
+#~ "               to the Internet as a client.\n"
+#~ "\n"
+#~ "High:       There are already some restrictions, and more automatic "
+#~ "checks are run every night.\n"
+#~ "\n"
+#~ "Higher:    The security is now high enough to use the system as a server "
+#~ "which can accept\n"
+#~ "              connections from many clients. If your machine is only a "
+#~ "client on the Internet, you\n"
+#~ "           should choose a lower level.\n"
+#~ "\n"
+#~ "Paranoid:  This is similar to the previous level, but the system is "
+#~ "entirely closed and security\n"
+#~ "                features are at their maximum\n"
+#~ "\n"
+#~ "Security Administrator:\n"
+#~ "               If the 'Security Alerts' option is set, security alerts "
+#~ "will be sent to this user (username or\n"
+#~ "            email)"
+#~ msgstr ""
+#~ "Standar: Keamanan standar utk komputer yg terhubung ke Internet sbg "
+#~ "klien.\n"
+#~ "\n"
+#~ "Tinggi: Ada beberapa pembatasan, dan pemeriksaan otomatis tiap malam.\n"
+#~ "\n"
+#~ "Lebih Tinggi: Cukup aman utk dipakai sbg server yg menerima koneksi dari\n"
+#~ "              banyak klien. Jika mesin Anda hanya klien Internet "
+#~ "pilihlah\n"
+#~ "\t      tingkat lebih rendah.\n"
+#~ "\n"
+#~ "Penakut: Mirip tingkat terdahulu, tapi sistem tertutup seluruhnya dan "
+#~ "keamanan adalah maksimum\n"
+#~ "\n"
+#~ "Administrator Keamanan:\n"
+#~ "               Jika opsi 'Pemberitahuan Keamanan' diset, berita keamanan "
+#~ "akan dikirim ke pengguna ini\n"
+#~ "\t       (nama pengguna atau email)"
+
+#~ msgid "Expert Area"
+#~ msgstr "Area Pakar"
+
+#~ msgid "Wizard..."
+#~ msgstr "Dukun..."
+
+#~ msgid "Country"
+#~ msgstr "Negara"
+
+#~ msgid "Previous"
+#~ msgstr "Kembali"
+
+#~ msgid "Please check if you are using CDRW media"
+#~ msgstr "Periksa apakah Anda menggunakan media CDRW"
+
+#~ msgid "Please check if you are using a DVDRAM device"
+#~ msgstr "Periksa apakah Anda menggunakan alat DVDRAM"
+
+#~ msgid "Please check if you are using a DVDR device"
+#~ msgstr "Periksa apakah Anda menggunakan alat DVDR"
+
+#~ msgid "Please check for multisession CD"
+#~ msgstr "Mohon cek perihal CD multisession"
+
+#~ msgid "We are now going to configure the %s connection."
+#~ msgstr "Kita akan mengkonfigurasi koneksi %s."
+
+#~ msgid "Name: %s\n"
+#~ msgstr "Nama: %s\n"
+
 #~ msgid ""
 #~ "Which ISDN configuration do you prefer?\n"
 #~ "\n"
@@ -19536,9 +20247,6 @@ msgstr "Kumpulan tool utk membaca, mengirim email dan news serta membrowse Web"
 
 #~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 #~ msgstr "Buat initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#~ msgid "Write %s"
-#~ msgstr "Tulis %s"
 
 #~ msgid "Copy %s to %s"
 #~ msgstr "Salin %s ke %s"
@@ -20930,9 +21638,6 @@ msgstr "Kumpulan tool utk membaca, mengirim email dan news serta membrowse Web"
 
 #~ msgid "DrakFloppy Error: %s"
 #~ msgstr "Error DrakFloppy: %s"
-
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #~ msgid ""
 #~ "You are about to configure your computer to install a PXE server as a "

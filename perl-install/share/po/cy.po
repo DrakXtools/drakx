@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-cy2\n"
-"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"POT-Creation-Date: 2003-08-13 03:40+0200\n"
 "PO-Revision-Date: 2003-03-12 19:36-0000\n"
 "Last-Translator: Rhoslyn Prys <rhoslyn.prys@meddal.org.uk>\n"
 "Language-Team: Cymraeg <rhoslyn.prys@meddal.org.uk>\n"
@@ -26,10 +26,29 @@ msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
 "os wedi ei osod i iawn, , gwirio ychwanegu/tynnu ffeiliau gwraidd suid."
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
+"0/1 for Local Config...\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Configuration changed - restart clusternfs/dhcpd?"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t\tErase=%s"
 msgstr "\t\tDileu=%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Differential backups only save files that have changed or are new since the "
+"original 'base' backup."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -79,6 +98,13 @@ msgstr "Ar wasanaethwr CUPS \"%s\""
 #, c-format
 msgid "Post-install configuration"
 msgstr "Ffurfweddiad ôl osod"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -130,6 +156,11 @@ msgstr "Central African Republic"
 msgid "Gateway device"
 msgstr "Dyfais mynedfa"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Advanced preferences"
+msgstr "Dewisiadau Uwch"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Net Method:"
@@ -140,10 +171,22 @@ msgstr "Dull Rhwyd:"
 msgid "Ethernetcard"
 msgstr "Cerdyn Ethernet"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "If set, send the mail report to this email address else send it to root"
+msgstr ""
+"os wedi ei osod, anfon yr adroddiad e-bost i'r cyfeiriad e-bost neu ei anfon "
+"i'r gwraidd."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Paramedrau"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "no"
+msgstr "Gwybodaeth"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -197,6 +240,11 @@ msgstr "Belarus"
 msgid "Error writing to file %s"
 msgstr "Gwall wrth ysgrifennu i ffeil %s"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result to syslog"
+msgstr "os wedi ei osod i iawn, adrodd y gwirio i syslog."
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -247,6 +295,11 @@ msgstr ""
 "Gweithgaredd Drakbackup drwy %s:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "yes"
+msgstr "Iawn"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
@@ -295,6 +348,11 @@ msgstr "Golygu'r gwesteiwr"
 msgid "No CD device defined!"
 msgstr "Heb ddiffinio dyfais CD!"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "\tUse .backupignore files\n"
+msgstr "Defnyddiwch y cwota ar gyfer ffeiliau wrth gefn"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (phonetic)"
@@ -309,6 +367,11 @@ msgstr "Enw cychwyn DHCP"
 #, c-format
 msgid "256 kB"
 msgstr "256 kB"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Don't rewind tape after backup"
+msgstr "Defnyddiwch dâp i gadw wrth gefn"
 
 #: ../../any.pm:1
 #, c-format
@@ -329,6 +392,11 @@ msgstr ""
 msgid "Tape"
 msgstr "Tâp"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Malaysia"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning network..."
@@ -342,11 +410,6 @@ msgid ""
 msgstr ""
 "Gyda'e dewis hwn medrwch adfer unrhyw fersiwn\n"
 "o'ch cyfeiriadur /etc."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Malaysia"
-msgstr "Malaysia"
 
 #: ../../standalone/drakedm:1
 #, fuzzy, c-format
@@ -378,6 +441,16 @@ msgstr "Maint storfa cpu (ail lefel)"
 msgid "Soundcard"
 msgstr "Cerdyn sain"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Search for files to restore"
+msgstr "Dewis cyfrwng arall i adfer ohono"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -392,23 +465,10 @@ msgstr ""
 msgid "Level %s\n"
 msgstr "Lefel %s\n"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Luxembourg"
-msgstr "Luxembourg"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Daemon Report\n"
-"\n"
-"\n"
-msgstr ""
-"\n"
-"                     Adroddiad Daemon DrakBackup \n"
-"\n"
-"\n"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac (phonetic)"
+msgstr "Armenaidd (ffonetig)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -464,6 +524,11 @@ msgstr "Cyfrinair (eto)"
 msgid "Search installed fonts"
 msgstr "Chwilio am ffontiau wedi eu gosod"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default desktop"
+msgstr "Rhagosodedig"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
@@ -488,6 +553,13 @@ msgid ""
 msgstr ""
 "Rhestr o ddata llwgr:\n"
 "\n"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Can only be mounted explicitly (i.e.,\n"
+"the -a option will not cause the file system to be mounted)."
+msgstr ""
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -556,19 +628,6 @@ msgstr "Tynnu modiwl"
 msgid "Password"
 msgstr "Cyfrinair"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
-"\\fP."
-msgstr ""
-"Ymresymiadau: (max, inactive=-1)\n"
-"\n"
-"Gosod cyfrinair yn erbyn \\fImax\\fP dyddiau ac oedi i newid i \\fIinactive"
-"\\fP."
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
@@ -625,80 +684,8 @@ msgstr "/Awtoganfod_gyrrwr jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Description:\n"
-"\n"
-"  Drakbackup is used to backup your system.\n"
-"  During the configuration you can select: \n"
-"\t- System files, \n"
-"\t- Users files, \n"
-"\t- Other files.\n"
-"\tor All your system ...  and Other (like Windows Partitions)\n"
-"\n"
-"  Drakbackup allows you to backup your system on:\n"
-"\t- Harddrive.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup allows you to restore your system to\n"
-"  a user selected directory.\n"
-"\n"
-"  Per default all backups will be stored on your\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"Restore Step:\n"
-"  \n"
-"  During the restore step, DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. It is recommended \n"
-"  you do a last backup before restoring.\n"
-"\n"
-"\n"
+msgid "Store the password for this system in drakbackup configuration."
 msgstr ""
-"Disgrifiad:\n"
-"\n"
-" Mae Drakbackup yn cael ei ddefnyddio i cadw\n"
-" eich ffeiliau system wrth gefn.\n"
-" Yn ystod y ffurfweddiad medrwch ddewis:\n"
-"\t- Ffeiliau system,\n"
-"\t-Ffeiliau defnyddwyr,\n"
-"\t-Ffeiliau eraill.\n"
-"\tneu Eich holl system...ac Arall (megis Rhaniadau Windows)\n"
-"\n"
-"  Mae Drackbackup yn caniatáu i chi ddefnyddio:\n"
-"\t- Disg Caled.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (gyda awto gychwyn, achub ac awto osod.).\n"
-"\t- FTP.\n"
-"\t-Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tâp.\n"
-"\n"
-"  Mae Drakbackup yn caniatáu i chi adfer eich system i\n"
-"  gyfeiriadur o ddewis y defnyddiwr.\n"
-"\n"
-"  Yn rhagosodedig bydd ffeiliau wrth gefn yn cael eu cadw yn eich\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Ffeil ffurfweddiad:\n"
-"\t/etc/drakconf/drakbackup/drakbakup.conf\n"
-"\n"
-"\n"
-"Camau wrth adfer:\n"
-"  \n"
-"  Yn ystod yr adfer bydd Drakbackup yn tynnu\n"
-"  eich cyfeiriadur gwreiddiol a gwirio nad yw'r holl \n"
-"  ffeiliau wrth gefn wedi eu llygru. Argymhellir i chi \n"
-"  gadw wrth gefn cyn adfer.\n"
-"\n"
-"\n"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -934,6 +921,11 @@ msgstr ""
 "Barn, Paris - Ffrainc. Am unrhyw gwestiwn ynghylch yddogfen hon cysylltwch â "
 "MandrakeSoft S.A.  \n"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default user"
+msgstr "Argraffydd rhagosodedig"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
@@ -977,6 +969,11 @@ msgstr "Peidiwch argraffu tudalennau prawf"
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s already in use\n"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
@@ -1016,275 +1013,10 @@ msgstr ""
 msgid "Show only for the selected day"
 msgstr "Dangos ar y diwrnod penodol yn unig"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
+msgid "\tLimit disk usage to %s MB\n"
 msgstr ""
-"Trosolwg drakTermServ\n"
-"\t\t\t   \n"
-"        - Crea Delwedd Cychwynydd Galluogi Etherboot:\n"
-"        \t\tI gychwyn y cnewyllyn drwy etherboot, rhaid creu delwedd "
-"cnewyllyn/initrd arbennig.\n"
-"        \t\tmae tmkinitrd-net yn gwneud llawer o'r gwaith ac mae drak "
-"termServ yn rhyngwyneb graffigol iddo\n"
-"        \t\ti gynorthwyo rheoli/addasuto help manage/customize these "
-"images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -1345,6 +1077,17 @@ msgstr ""
 msgid "<control>Q"
 msgstr "<control>Q"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Please be sure that the cron daemon is included in your services. \n"
+"\n"
+"Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Gwnewch yn siwr bod daemon cron yn cael ei gynnwys yn eich gwasanaethau. \n"
+"\n"
+"Sylwer bod yr holl gyfrwn \"gwe\" yn defnyddio'r ddisg caled."
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Unknown"
@@ -1385,33 +1128,6 @@ msgstr "Rhaid i ddewis %s fod yn rhif!"
 msgid "Notice"
 msgstr "Nodyn"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Galluogi/Analluogi gwiriad diogelwch dyddiol."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
-"allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Galluogi/Analluogi crontab ac at ar gyfer defnyddwyr. Rhoi defnyddwyr â "
-"chniatâd yn\n"
-"/etc/cron.allow a  /etc/at.allow\n"
-" (gw. man yn(1) a crontab(1))."
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1449,100 +1165,8 @@ msgstr "Rhyngwyneb"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" - Backup System Files:\n"
-"       \n"
-"\tThis option allows you to backup your /etc directory,\n"
-"\twhich contains all configuration files. Please be\n"
-"\tcareful during the restore step to not overwrite:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup User Files: \n"
-"\n"
-"\tThis option allows you select all users that you want to \n"
-"\tbackup. To preserve disk space, it is recommended that\n"
-"\tyou do not include the web browser's cache.\n"
-"\n"
-" - Backup Other Files: \n"
-"\n"
-"\tThis option allows you to include additional data to save.\n"
-"\tIf you want to add individual files, select them from the\n"
-"\trighthand 'Files' list pane.  To add directories, enter the \n"
-"\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-"\tand at that point click 'OK' without selecting any files.\n"
-" \n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"disgrifiad o'r dewisiadau:\n"
-"\n"
-"- Ffeiliau system Cadw wrth Gefn\n"
-"         \n"
-"\tMae'r dewis hwn yn caniatáu i chi gadw wrth gefn eich\n"
-"\tcyfeiriadur /etc, sy'n cynnwys eich ffeiliau ffurfweddiad.\n"
-"\tByddwch ofalus wrth ei adfer i beidio trosysgrifo:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-"- Ffeiliau Defnyddiwr Cadw wrth Gefn\n"
-"\n"
-"\tMae'r dewis hwn yn caniatáu i chi ddewis pob defnyddiwr\n"
-"\trydych am gadw wrth gefn ar eu cyfer.\n"
-"\tI ddiogelu lle ar ddisg, argymhellir nad ydych yn cadw storfa'r\n"
-"\t porwr.\n"
-" \n"
-"- Cadw Ffeiliau Eraill wrth Gefn\n"
-"\n"
-"\tMae'r dewis hwn yn caniatáu i chi ychwanegu mwy\n"
-"\to ddata i'w gadw. Gyda'r cadw arall wrth gefn nid\n"
-"\tyw'n bosibl ar hyn o bryd i ddewis cadw wrth gefn\n"
-"\tcynyddol.\t\t\n"
-"\n"
-"Cadw wrth Gefn Cynyddol:\n"
-"\n"
-"\tCadw wrth Gefn Cynyddol yw'r dewis mwyaf pwerus.\n"
-"\tMae'r dewis hwn yn caniatáu i chi gadw eich data wrth\n"
-"\tgefn y tro cyntaf ac yna dim ond yr hyn sydd wedi newid.\n"
-"\tYna bydd modd i chi, yn ystod y cam o adfer, adfer eich\n"
-"\tdata o ddyddiad penodol.\n"
-"\tOs nad ydych wedi dewis hwn, bydd yr holl hen ffeiliau\n"
-"\twrth gefn yn cael eu dileu cyn pob cadw wrth gefn.    \n"
-"\n"
-"\n"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
-msgstr ""
-"Ymresymiadau: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Galluogi/Analluogi adroddiadau syslog i consol 12. \\fIexpr\\fP yw'r \n"
-"disgrifiad o beth iw' gofnodi (gw. syslog conf(5) am wyboodaeth) a\n"
-"dev y ddyfais i greu cofnod."
+msgid "Multisession CD"
+msgstr "(aml-sesiwn)"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1598,6 +1222,11 @@ msgstr "Y Swisdir"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "You must be root to read configuration file. \n"
+msgstr "Cadwch wrth Gefn eich ffeiliau ffurfweddu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1692,6 +1321,11 @@ msgstr "Ffurfweddu Mynediad i'r We..."
 msgid "Norway"
 msgstr "Norwy"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Delete profile"
+msgstr "Proffl dileu"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Danish"
@@ -1728,6 +1362,11 @@ msgstr ""
 "yn gwybod os yw pecyn penodol wedi ei leoli ar CD-ROM arall a bydd yn bwrw\n"
 "allan y CD cyfredol a gofyn am y llall."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "When checked, owner and group won't be changed"
+msgstr "wedi ei dicio, nid fydd y perchennog a'r grwp yn cael ei newid"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
@@ -1738,15 +1377,15 @@ msgstr "Prosesyddion"
 msgid "Bulgaria"
 msgstr "Bwlgaria"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "No NIC selected!"
-msgstr "Heb ddewis NIC!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard and Jan Mayen Islands"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "No NIC selected!"
+msgstr "Heb ddewis NIC!"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1814,6 +1453,17 @@ msgstr ""
 "greu disg cychwyn ar gyfer eich system?\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Daemon Report\n"
+msgstr ""
+"\n"
+"                     Adroddiad Daemon DrakBackup \n"
+"\n"
+"\n"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1844,15 +1494,15 @@ msgstr "Defnyddio Cadw wrth Gefn Cynyddol (peidio disodli hen gadw wrth gefn)"
 msgid "First sector of drive (MBR)"
 msgstr "Adran gyntaf o'r gyrrwr (MBR)"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Joystick"
-msgstr "Ffon hud"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr "Ffon hud"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1869,6 +1519,11 @@ msgstr "Defnyddio Unicode drwy rhagosodiad"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "y modiwl o'r cnewyllyn GNU/Linux sy'n trin y ddyfais honno"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDR device"
+msgstr "dyfais"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1879,6 +1534,14 @@ msgstr "Yn ceisiio achub y tabl rhaniadau"
 msgid "Option %s must be an integer number!"
 msgstr "Rhaid i ddewis %s fod yn gyfanrif"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users"
+msgstr ""
+"Ymresymiadau: arg)\n"
+"\n"
+"Defnyddio cyfrinair i wirio defnyddiwr."
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -1888,12 +1551,20 @@ msgstr ""
 "Gwybodaeth i'w gyflawyno:\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For backups to other media, files are still created on the hard drive, then "
+"moved to the other media.  Enabling this option will remove the hard drive "
+"tar files after the backup."
+msgstr ""
+
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Unable to start live upgrade !!!\n"
 msgstr "Methu cychwyn diweddariad byw!!! \n"
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../install_steps_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Name: "
 msgstr "Enw :"
@@ -1918,12 +1589,21 @@ msgstr "Y siop MandrakeSoft swyddogol"
 msgid "Resizing"
 msgstr "Newid maint"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter the maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Rhowch y maint mwyaf\n"
+"i'w ganiatáu ar gyfer Drakbackup"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Cable connection"
 msgstr "Cysylltiad cebl"
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr "Defnyddiwr"
@@ -1967,6 +1647,11 @@ msgstr "methodd mkraid"
 msgid "Button 3 Emulation"
 msgstr "Efelychiad Botwm 3"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of sgid files"
+msgstr "oa wedi ei osod i iawn, gwirio ychwanegiadau/tynnu ffeiliau sgid."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sending files..."
@@ -1981,11 +1666,6 @@ msgstr "Israelaidd (Ffonetig)"
 #, c-format
 msgid "access to rpm tools"
 msgstr "mynediad i offer rpm"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr "golygu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2074,6 +1754,16 @@ msgstr ""
 msgid "Harddrake2 version %s"
 msgstr "Harddrake2 fersiwn %s"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Preferences"
+msgstr "Dewis"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Swaziland"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -2089,20 +1779,15 @@ msgstr "dewis lliw"
 msgid "Dominican Republic"
 msgstr "Dominican Republic"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Swaziland"
-msgstr "Swaziland"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac"
+msgstr "Syria"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using CDRW media"
-msgstr "Gwiriwch os ydych yn defnyddio cyfrwng CDRW"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2121,6 +1806,11 @@ msgstr ""
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Defnyddiwch allweddi %c a %c i ddewis pa gofnod i'w amlygu."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../mouse.pm:1
 #, c-format
@@ -2185,6 +1875,14 @@ msgstr "Argraffu tudalen(nau) prawf..."
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Mae yna eisoes raniad gyda phwynt gosod %s\n"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable msec hourly security check."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi gwiriad diogelwch msec bob awr."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2341,54 +2039,6 @@ msgstr "Eich dewis? (rhagosodedig %s)"
 msgid "Trouble shooting"
 msgstr "Datrys problemau"
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid " / Region"
-msgstr "Reunion"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"The classic bug sound tester is to run the following commands:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
-"by default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
-"currently uses\n"
-"\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services're configured to be run on\n"
-"initlevel 3\n"
-"\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
-msgstr ""
-"Prawf gwall sain - rhedeg y gorchmynion canlynol:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" pa yrrwyr i'w defnyddio\n"
-"drwy ragosodiad\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" pa yrrwyr mae'n defnyddio\n"
-"ar hyn o bryd\n"
-"\n"
-"- \"/sbin/lsmod\" gwirio os yw ei yrrwr wedi ei lwytho\n"
-"a'i peidio\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" a \"/sbin/chkconfig --list alsa\" dangos\n"
-"os yw sain a gwasanaethau alsa services sydd wedi eu ffurfweddu yn rhedwg\n"
-"ar initlevel 3\n"
-"\n"
-"- \"aumix -q\" a yw'r sain wedi ei ddistewi a'i peidio\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" pa rhaglen sy'n defnyddio'r cerdyn sain.\n"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -2418,11 +2068,6 @@ msgstr "ac un argraffydd anhysbys"
 #, c-format
 msgid "Ireland"
 msgstr "Iwerddon"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "kernel version"
-msgstr "fersiwn cnewyllyn"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2485,12 +2130,26 @@ msgstr "Ffurfweddiad y Dewin"
 msgid "Autoprobe"
 msgstr "Atoholi"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
+msgstr ""
+"os wedi ei osod i iawn,  gwirio am gyfrinair gwag, neu un arall ddyllai fod "
+"yn /etc/shadow neu eraill gyda enw 0."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup system files..."
 msgstr "Ffeiliau system wrth gefn"
 
-#: ../../install_any.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Methu defnyddio darlledu heb barth NIS"
@@ -2499,6 +2158,11 @@ msgstr "Methu defnyddio darlledu heb barth NIS"
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Tynnu argraffydd \"%s\"..."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Shell history size"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -2694,6 +2358,13 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Cynnal OKI 4w ac argraffyddion windows cyffelyb."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Files or wildcards listed in a .backupignore file at the top of a directory "
+"tree will not be backed up."
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -2736,6 +2407,11 @@ msgstr ""
 "Nid oedd mynediad i'r rhwydwaith yn rhedeg ac nid oedd modd ei gychwyn. "
 "Gwiriwch eich ffurfweddiad a'ch caledwedd. Yna ceisiwch ail ffurfweddi eich "
 "argraffydd."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2955,6 +2631,14 @@ msgstr "Nid cyfrwng dileuadwy!"
 msgid "Terminal-based"
 msgstr "Seiliedig ar derfynnell"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable IP spoofing protection."
+msgstr ""
+"Ymresymiadau: (arg, alert=1)\n"
+"\n"
+"Galluogi/Analluogi Amddiffyn spwffio IP"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
@@ -3033,15 +2717,15 @@ msgstr "Protocol Ewropeaidd (EDSSI)"
 msgid "Video mode"
 msgstr "Modd fideo"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "Please enter your email address below "
-msgstr "Rhowch eich cyfeiriad e-bost islaw"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Oman"
 msgstr "Oman"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Please enter your email address below "
+msgstr "Rhowch eich cyfeiriad e-bost islaw"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -3063,7 +2747,7 @@ msgstr "Maint mewn MB: "
 msgid "Partition table type: %s\n"
 msgstr "Tabl rhaniad math: %s\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "Dilysu Parth Windows"
@@ -3110,6 +2794,49 @@ msgstr ""
 msgid "Sending Speed:"
 msgstr "Cyflymder Anfon:"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"The classic bug sound tester is to run the following commands:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses\n"
+"by default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
+"currently uses\n"
+"\n"
+"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+"loaded or not\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
+"tell you if sound and alsa services're configured to be run on\n"
+"initlevel 3\n"
+"\n"
+"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+msgstr ""
+"Prawf gwall sain - rhedeg y gorchmynion canlynol:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" pa yrrwyr i'w defnyddio\n"
+"drwy ragosodiad\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" pa yrrwyr mae'n defnyddio\n"
+"ar hyn o bryd\n"
+"\n"
+"- \"/sbin/lsmod\" gwirio os yw ei yrrwr wedi ei lwytho\n"
+"a'i peidio\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" a \"/sbin/chkconfig --list alsa\" dangos\n"
+"os yw sain a gwasanaethau alsa services sydd wedi eu ffurfweddu yn rhedwg\n"
+"ar initlevel 3\n"
+"\n"
+"- \"aumix -q\" a yw'r sain wedi ei ddistewi a'i peidio\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" pa rhaglen sy'n defnyddio'r cerdyn sain.\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
@@ -3125,6 +2852,11 @@ msgstr "Ffurfweddiad rhybudd e-bost"
 msgid "Tokelau"
 msgstr "Tokelau"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Matching"
+msgstr "cydweddu"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -3139,15 +2871,6 @@ msgstr "Ryddhad"
 #, c-format
 msgid "Connection speed"
 msgstr "Cyflymder y cysylltiad"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter your CD Writer device name\n"
-" ex: 0,1,0"
-msgstr ""
-"Rhowch enw dyfais eich Ysgrifennwr CD\n"
-"ex: 0,1,0"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3243,16 +2966,10 @@ msgstr "Spaenaidd"
 msgid "Start"
 msgstr "Cychwyn"
 
-#: ../../security/help.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
+msgid "Direct root login"
 msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Galluogi/Analluogi gwiriad cymysgaredd cardiau ethernet."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3314,6 +3031,11 @@ msgstr "Dewis ffeiliau"
 msgid "CUPS"
 msgstr "CUPS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase tape before backup"
+msgstr "Defnyddiwch dâp i gadw wrth gefn"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Run config tool"
@@ -3348,15 +3070,15 @@ msgstr ""
 "mae'r enwyd (BIND) yn Wasanaethwr Enw Parth (DNS) sy'n cael ei ddefnyddio i "
 "gydrannu enwau gwestai i'r cyfeiriadau IP."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr "Dadgysylltu..."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
+msgstr "Dadgysylltu..."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -3386,6 +3108,13 @@ msgstr ""
 #, c-format
 msgid "Package Group Selection"
 msgstr "Dewis  y Grwp Pecyn"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"Allow local hardware\n"
+"configuration."
+msgstr "Ail ffurfweddiad awtomatig"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3453,6 +3182,11 @@ msgstr "Gwnewch yn siwr fod y deunydd ar gael ar gyfer y ddyfais %s"
 #, c-format
 msgid "Enable multiple profiles"
 msgstr "Galluogi aml-broffil"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Do not interpret character or block special devices on the file system."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3567,11 +3301,6 @@ msgstr "Modd ffurfweddu"
 msgid "Cocos (Keeling) Islands"
 msgstr "Cocos (Keeling) Islands"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnecting from the Internet "
-msgstr "Datgysylltu o'r Rhyngrwyd"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
@@ -3596,19 +3325,6 @@ msgstr "Armenia"
 #, c-format
 msgid "Fiji"
 msgstr "Ffiji"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
-msgstr ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Gosod lleiafswm hyd cyfrinair a lleiafswm digidau a lleiafswm llythrennau "
-"mawr."
 
 #: ../../any.pm:1
 #, c-format
@@ -3669,6 +3385,11 @@ msgstr "Dim cyfrinair"
 #, c-format
 msgid "Nigeria"
 msgstr "Nigeria"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires hostname...\n"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3815,6 +3536,11 @@ msgstr ""
 msgid "Romania"
 msgstr "Rwmania"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group"
+msgstr "grwp"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "choose device"
@@ -3842,7 +3568,7 @@ msgstr "Almaeneg"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
 msgstr "Nesaf ->"
@@ -3889,6 +3615,11 @@ msgstr "Guinea-Bissau"
 #, c-format
 msgid "Horizontal refresh rate"
 msgstr "Graddfa adfywio llorweddol"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Edit"
+msgstr "Gadael"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4066,12 +3797,6 @@ msgstr "Peidio"
 msgid "No password prompt on %s at port %s"
 msgstr "Dim cais am gyfrinair ar %s ym mhorth %s"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to use the non-rewinding device."
-msgstr ""
-"Gwiriwch os ydych am ddefnyddio'r dyfais nad yw'n mynd nôl i'e ddechrau."
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
@@ -4133,20 +3858,15 @@ msgstr "Llygoden"
 msgid "not enough room in /boot"
 msgstr "dim digon o le yn /boot"
 
-#: ../../harddrake/sound.pm:1
+#: ../../lang.pm:1
 #, c-format
-msgid "Choosing an arbitratry driver"
-msgstr "Dewis gyrrwr ar hap"
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Enw gwesteiwr"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Liechtenstein"
-msgstr "Liechtenstein"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4288,6 +4008,11 @@ msgstr ""
 "ai'r rhestr isod neu cliciwch ar y botwm \"Rhestr dewis argraffu\".%s%s%s\n"
 "\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Saudi Arabia"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4307,11 +4032,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Argraffydd"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Saudi Arabia"
-msgstr "Saudi Arabia"
 
 #: ../../services.pm:1
 #, c-format
@@ -4377,17 +4097,6 @@ msgstr "Dylai enw'r pwyntiau gosod gynnwys llythrennau a  rhifau'n unig"
 msgid "Restarting printing system..."
 msgstr "Ailgychwyn system argraffu..."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Ymresymiadau: (name)\n"
-"\n"
-"Ychwanegu'r enw fel eithriad i drin cyfrinair yn erbyn msec."
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -4449,6 +4158,11 @@ msgstr "Masg Isnet"
 #, c-format
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Themâu LiLo a Croeso Cychwyn wedi eu gosod yn llwyddiannus"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Set password expiration and account inactivation delays"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4519,6 +4233,11 @@ msgstr "HardDrake"
 #, c-format
 msgid "new"
 msgstr "newydd"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4714,17 +4433,6 @@ msgstr ""
 msgid "Argentina"
 msgstr "Yr Ariannin"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod darlledu icmp atsain."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -4739,6 +4447,11 @@ msgstr "Lefel diogelwch:"
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Rhaid i bwyntiau gosod gynnwys / arweiniol"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD device"
+msgstr "Dewiswch maint eich gofod CD/DVD"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4759,15 +4472,6 @@ msgstr "Yemen"
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Mae'r cynnyrch ar gael ar safle gwe MandrakeStore"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the maximum size\n"
-" allowed for Drakbackup"
-msgstr ""
-"Rhowch y maint mwyaf\n"
-"i'w ganiatáu ar gyfer Drakbackup"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -4825,32 +4529,15 @@ msgid "Your card can have 3D hardware acceleration support with XFree %s."
 msgstr ""
 "Mae modd i'ch cerdyn gael cefnogaeth cyflymu caledwedd 3D gyda XFree %s"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please choose your CD/DVD media size (Mb)"
-msgstr "Dewiswch maint eich gofod CD/DVD"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-" Galluogu su o aelodau grwp olwyn yn unig neu ganiatáu su o unrhyw "
-"ddefnyddiwr."
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Expert Area"
-msgstr "Maes Uwch"
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
 msgstr "Dewiswch fonitor"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Mask"
+msgstr "Pecyn gwallus"
 
 #: ../../any.pm:1
 #, c-format
@@ -5024,6 +4711,11 @@ msgstr "System cadw wrth gefn"
 msgid "Test pages"
 msgstr "Tudalennau prawf"
 
+#: ../../diskdrake/interactive.pm:1
+#, fuzzy, c-format
+msgid "Logical volume name "
+msgstr "Mesur lleol"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5047,6 +4739,11 @@ msgstr "Dewisiadau Argraffydd TCP/Soced"
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Cof Cerdyn (DMA)"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnecting from Internet "
+msgstr "Datgysylltu o'r Rhyngrwyd"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -5122,6 +4819,11 @@ msgstr "Bysellau Ctrl ac Alt gyda'i gilydd"
 msgid "United States"
 msgstr "Yr Unol Daleithiau"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "User umask"
+msgstr "Defnyddwyr"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
@@ -5155,6 +4857,14 @@ msgstr ""
 msgid "NTP Server"
 msgstr "Gweinydd NTP"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Sulogin(8) in single user level"
+msgstr ""
+"Ymresymniadau:  (arg)\n"
+"\n"
+"Galluogi/Analluogi sulogin(8 mewn defnydd defnyddiwr unigol."
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Load/Save on floppy"
@@ -5179,11 +4889,6 @@ msgstr "Gadael mewn %d eiliad"
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Dewiswch ba borth cyfresol mae eich modem wedi cysylltu iddo."
-
-#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Country"
-msgstr "Gwlad"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5214,6 +4919,11 @@ msgstr "Llwybr neu Fodiwl angenrheidiol"
 #, c-format
 msgid "Advanced Options"
 msgstr "Dewisiadau Uwch"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "View Configuration"
+msgstr "Ffurfweddiad"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5438,6 +5148,29 @@ msgstr ""
 msgid "Slovenian"
 msgstr "Slfenaidd"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Caniatáu i bob gwasanaeth sy'n cael ei reoli gan tcp_wrappers os yw \\fIarg"
+"\\fP = ALL. Dim ond rhai lleol\n"
+"os\\fIarg\\fP = LOCAL a dim os \\fIarg\\fP = NONE. I gnaiatáu'r "
+"gwasanaethausydd angen defnyddiwch /etc/hosts.allow\n"
+"(gw. hosts.allow(5))."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
@@ -5477,17 +5210,6 @@ msgstr "Nid wyf yn gwybod sut i fformatio %s ym math %s"
 msgid "Model"
 msgstr "Model"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Galluogi/Analluogi libsafe os yw ar y system."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
@@ -5517,21 +5239,6 @@ msgstr ""
 #, c-format
 msgid "Modem"
 msgstr "Modem"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
-msgstr ""
-"Ymresymiadau: (arg, listen_tcp=None)\n"
-"\n"
-"Caniatáu/Gwrthod cysylltiadau X. Ym. cyntaf pennu'r hyn sy'n digwydd\n"
-"aochr y cleient: ALL (caniatáu pob cysylltiad), LOCAL (dim ond\n"
-"cysylltiadau lleol) a NONE (dim cysylltiadau)."
 
 #: ../../lang.pm:1
 #, c-format
@@ -5572,6 +5279,11 @@ msgstr ""
 "eich gwybodaeth ac i helpu eraill drwy ddod yn Arbenigwr cydnabyddedig ar y "
 "safle cefnogaeth dechnegol."
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "No password aging for"
+msgstr "Dim cyfrinair"
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid ""
@@ -5586,6 +5298,11 @@ msgstr ""
 msgid "Automatically find available printers on remote machines"
 msgstr "Canfod argraffyddion ar gyfrifiaduron pell, yn awtomatig."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Dwyrain Timor"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5595,28 +5312,20 @@ msgstr ""
 "\n"
 "- Cadw i dâp ar ddyfais: %s"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "East Timor"
-msgstr "Dwyrain Timor"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Login name"
+msgstr "Enw parth"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report unowned files"
+msgstr "os wedi ei osod i iawn, adrodd ar ffeiliau heb berchennog."
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Del profile..."
 msgstr "Proffl dileu"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Caniatáu/Gwrthod rhestr defnyddwyr ar y system ar rheolwyr arddangos (kdm "
-"and gdm)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5678,6 +5387,11 @@ msgstr "Pob iaith"
 msgid "Removing %s"
 msgstr "Tynnu %s"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "%s not found...\n"
+msgstr "Nid yw %s yn ymateb"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
@@ -5701,6 +5415,11 @@ msgstr ""
 #, c-format
 msgid "Start sector: "
 msgstr "Sector dechreuol: "
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Darllen yn unig"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5860,6 +5579,14 @@ msgstr ""
 msgid "Network Options"
 msgstr "Dewisiadau Rhwydwaith"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable msec hourly security check"
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi gwiriad diogelwch msec bob awr."
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid ""
@@ -5901,21 +5628,21 @@ msgstr "cyfartaledd"
 msgid "New printer name"
 msgstr "Enw'r argraffydd newydd"
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Allow an ordinary user to mount the file system. The\n"
+"name of the mounting user is written to mtab so that he can unmount the "
+"file\n"
+"system again. This option implies the options noexec, nosuid, and nodev\n"
+"(unless overridden by subsequent options, as in the option line\n"
+"user,exec,dev,suid )."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Equatorial Guinea"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod awtofewngofnodi."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5963,16 +5690,12 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Other (not drakbackup) keys in place already"
 msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod mewngofnodi gwraidd pell"
+"Allweddi eraill (nid drakbackup)\n"
+"yn eu lle yn barod"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -6049,6 +5772,302 @@ msgstr ""
 "lleol rhaid rhoi cyfeiriad(au) IP ac yn ddewisol rhif(au) porth yma i gael "
 "gwybodaeth am yr argraffydd gan y gwasanaethwr(wyr)."
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"drakTermServ Overview\n"
+"\t\t\t   \n"
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t\t#hdw_config                true;\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating seperate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login priviledges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured.\n"
+"\t\t\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+msgstr ""
+"Trosolwg drakTermServ\n"
+"\t\t\t   \n"
+"        - Crea Delwedd Cychwynydd Galluogi Etherboot:\n"
+"        \t\tI gychwyn y cnewyllyn drwy etherboot, rhaid creu delwedd "
+"cnewyllyn/initrd arbennig.\n"
+"        \t\tmae tmkinitrd-net yn gwneud llawer o'r gwaith ac mae drak "
+"termServ yn rhyngwyneb graffigol iddo\n"
+"        \t\ti gynorthwyo rheoli/addasuto help manage/customize these "
+"images.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be \"thin\"\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run most\n"
+"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are modified\n"
+"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
+"issues in using xdmcp,\n"
+"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
+"subnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. In the future drakTermServ "
+"will help create these\n"
+"        \t\tfiles.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. In the future, "
+"drakTermServ can help create files\n"
+"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
+"keyboard on a per-client\n"
+"        \t\tbasis.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -6116,15 +6135,15 @@ msgstr "Gorffen"
 msgid "Show automatically selected packages"
 msgstr "Dangoswch y pecynnau dewis awtomatig"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "CPU flags reported by the kernel"
-msgstr "Baneri cpu'n cael eu dangos gan y cnewyllyn"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
 msgstr "Togo"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "CPU flags reported by the kernel"
+msgstr "Baneri cpu'n cael eu dangos gan y cnewyllyn"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -6178,6 +6197,14 @@ msgstr "UDA (cable-hrc)"
 msgid "Journalised FS"
 msgstr "Jwrnaleiddiwyd FS"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Ethernet cards promiscuity check"
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi gwiriad cymysgaredd cardiau ethernet."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Guatemala"
@@ -6226,6 +6253,11 @@ msgstr ""
 "Cliciwch Iawn i gadw eich ffurfweddiad, neu ddileu i ail ffurfweddi eich "
 "cysylltiad Rhyngrwyd a Rhwydwaith.\n"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run the daily security checks"
+msgstr "os wedi ei osod i iawn, rhedeg y gwiriadau diogelwch dyddiol."
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Keyboard layout: %s\n"
@@ -6253,6 +6285,11 @@ msgid ""
 msgstr ""
 "Yn gosod a dadosod pob System Ffeil y Rhwydwaith (NFS), SMB\n"
 "(Rheolwr Rhwydwaith/Windows), a phwyntiau gosod NCP (NetWare) ."
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Launch the wizard"
+msgstr "Cliciwch yma i gychwyn y dewin ->"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6288,6 +6325,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
 msgstr "Nid yr label tâp cywir. Tâp wedi ei labelu %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6391,6 +6435,13 @@ msgstr "Pa ffurfweddiad XFree hoffech ei gael?"
 msgid "More"
 msgstr "Rhagor"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -"
+"scanbus' would also show you the device number."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -6412,6 +6463,13 @@ msgstr ""
 #, c-format
 msgid "Account Password"
 msgstr "Cyfrinair y Cyfrif"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -6527,6 +6585,11 @@ msgstr ""
 "Mae'r newid wedi ei gyflawni, ond i fod yn effeithiol mae'n rhaid i chi "
 "allgofnodi"
 
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Country / Region"
+msgstr "Gwlad"
+
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Search servers"
@@ -6551,6 +6614,11 @@ msgstr ""
 msgid "Cd-Rom labeled \"%s\""
 msgstr "Cd-Rom wedi ei labelu \"%s\""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CDRW media"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6574,6 +6642,11 @@ msgstr ""
 msgid "Turn your computer into a reliable server"
 msgstr "Trowch eich peiriant i fod yn wasanaethwr dibynadwy"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check empty password in /etc/shadow"
+msgstr "os wedi ei osod i iawn, gwirio cyfrinair gwag y  /etc/shadow."
+
 #: ../../network/network.pm:1
 #, c-format
 msgid " (driver %s)"
@@ -6592,6 +6665,11 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Dim syniad"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6623,6 +6701,11 @@ msgstr ""
 "Ydych chi eisiau parhau?\n"
 "?"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Telugu"
+msgstr "Tokelau"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -6640,6 +6723,11 @@ msgstr ""
 #, c-format
 msgid "Post Uninstall"
 msgstr "Wedi'r dad osod"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Connecting to Internet "
+msgstr "Cysylltu â'r Rhyngrwyd"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6703,6 +6791,14 @@ msgstr ""
 "\n"
 "Gwnewch yn siwr eich bod wedi ffurfweddu eich mynediad\n"
 "Rhwydwaith/Rhyngrwyd gyda Drakconnect cyn mynd ymhellach."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept broadcasted icmp echo"
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod darlledu icmp atsain."
 
 #: ../../lang.pm:1
 #, c-format
@@ -6799,6 +6895,14 @@ msgstr ""
 "yn cael ei ddangos yma. Os ydych yn sylwi nad y cerdyn sain sydd ar eich\n"
 "cyfrifiadur sy'n cael ei ddangos, yna cliciwch ar y botwm a dewis\n"
 " gyrrwr arall."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the root umask."
+msgstr ""
+"Ymresymiadau: (umask)\n"
+"\n"
+"Gosod gwraidd umask."
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6931,10 +7035,14 @@ msgstr ""
 "Defnydd: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 
-#: ../../standalone/XFdrake:1
-#, c-format
-msgid "Please relog into %s to activate the changes"
-msgstr "Ail fewn gofnodwch i %s i wireddu'r newidiadau"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Rhowch y maint mwyaf\n"
+"i'w ganiatáu ar gyfer Drakbackup"
 
 #: ../../my_gtk.pm:1
 #, c-format
@@ -6966,6 +7074,18 @@ msgstr "Martinique"
 msgid "HardDrive / NFS"
 msgstr "Disg Caled / NFS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Old user list:\n"
+msgstr ""
+"\n"
+"- Ffeiliau Defnyddiwr:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search Backups"
+msgstr ""
+
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "a number"
@@ -6994,30 +7114,20 @@ msgstr "Byddwch yn derbyn rhybudd os na fydd un o'r gwasanaethu hyn yn rhedeg"
 msgid "Filesystem types:"
 msgstr "Mathau o system ffeiliau:"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on HP JetDirect"
-msgstr ", dyfais amlbwrpas ar HP JetDirect"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Northern Mariana Islands"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on HP JetDirect"
+msgstr ", dyfais amlbwrpas ar HP JetDirect"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "none"
 msgstr "dim"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
-msgstr "defnyddiwr :"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your password"
-msgstr "Rhowch eich cyfrinair"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -7033,11 +7143,6 @@ msgstr ""
 msgid "Floppy"
 msgstr "Disg Meddal"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your RW media (1st Session)"
-msgstr "Gwiriwch os ydych am ddileu eich cyfrwng RW(Sesiwn 1af)"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -7047,6 +7152,11 @@ msgstr "cyfeirio Ghostscript"
 #, c-format
 msgid "Bootloader"
 msgstr "Cychwynydd ar waith"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize all services controlled by tcp_wrappers"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7284,11 +7394,6 @@ msgstr "rhestr o yrrwr eraill ar gyfer eich cerdyn sain"
 msgid "Gateway"
 msgstr "Mynedfa"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Scanner sharing"
-msgstr "Rhannu sganiwr"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
@@ -7298,6 +7403,11 @@ msgstr "Tonga"
 #, c-format
 msgid "Tunisia"
 msgstr "Tunisia"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Rhannu sganiwr"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -7310,19 +7420,18 @@ msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "Cliciwch ar ddyfais yn y goeden chwith i gael at ei wybodaeth"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod awtofewngofnodi."
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
 msgstr "Nid yw XawTV wedi ei osod!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Create/Transfer\n"
-"backup keys for SSH"
-msgstr ""
-"Creu/Trosglwyddo\n"
-"allweddi wrth gefn ar gyfer SSH"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7333,6 +7442,14 @@ msgstr "Peidio cynnwys ffeiliau hanfodol (passwd, group, fstab)"
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "hen enw dyfais sefydlog yn cael ei ddefnyddio mewn pecyn dev"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable the logging of IPv4 strange packets"
+msgstr ""
+"Ymresymiadau: arg)\n"
+"\n"
+"Galluogi?Analluogi mewngofnodi pecynnau anarferol IPv4."
 
 #: ../../any.pm:1
 #, c-format
@@ -7377,6 +7494,11 @@ msgstr ""
 "Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
 "eich argraffydd(ion) ar hyn o bryd."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Greek (polytonic)"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
@@ -7387,11 +7509,6 @@ msgstr ""
 #, c-format
 msgid "Connection Time: "
 msgstr "Amser Cysylltiad:"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "dewis ffeil perm i weld/golygu"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -7438,6 +7555,13 @@ msgstr ""
 "Gallwch ddewis ieithoedd eraill fydd ar gael ar ôl gosod. Dewiswch\n"
 "pa iaith yr hoffech ei osod. Byddant ar gael pan fydd eich gosodiad\n"
 "wedi ei gwblhau a phan fyddwch yn ailgychwyn eich system."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Directory (or module) to put the backup on this host."
+msgstr ""
+"Rhowch y cyfeiriadur(neu fodiwl) i osod y cadw\n"
+"wrth gefn ar y gwesteiwr hwn."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7529,15 +7653,15 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Cerdyn graffeg: %s\n"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept icmp echo"
+msgstr ""
+
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using a DVDRAM device"
-msgstr "Gwiriwch os ydych yn defnyddio dyfais DVDRAM"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7582,6 +7706,11 @@ msgstr ""
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Argraffu/Mynediad Cardiau Llun ar  \"%s\""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Daily security check"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7684,16 +7813,6 @@ msgstr ""
 msgid "Choose packages to install"
 msgstr "Dewis pecynnau i'w gosod"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-" Some errors during sendmail are caused by \n"
-" a bad configuration of postfix. To solve it you have to\n"
-" set myhostname or mydomain in /etc/postfix/main.cf\n"
-"\n"
-msgstr "\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -7740,6 +7859,11 @@ msgstr "Bhutan"
 msgid "Network interface"
 msgstr "Rhyngwyneb rhwydwaith"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet failed."
+msgstr "Methodd datgysylltu o'r Rhyngrwyd."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Reading printer data..."
@@ -7759,21 +7883,6 @@ msgstr "Heb gysylltu"
 #, c-format
 msgid "Greek"
 msgstr "Groegaidd"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
-"\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Os yw \\fIarg\\fP = ALL caniatá /etc/issue a /etc/issue.net i fodoli. Os yw "
-"\\fIarg\\fP = NONE\n"
-"dim materion heblaw caniatáu  /etc/issue."
 
 #: ../../lang.pm:1
 #, c-format
@@ -7807,15 +7916,15 @@ msgstr "Galluogi Cychwyn OF?"
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Does dim modd defnyddio JFS ar raniadau llai na 16MB"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase your RW media (1st Session)"
+msgstr "Gwiriwch os ydych am ddileu eich cyfrwng RW(Sesiwn 1af)"
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "VertRefresh Monitor: %s\n"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr "llwybr"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -7833,6 +7942,11 @@ msgstr ""
 "Digwyddodd gwall:\n"
 "%s\n"
 "Ceisiwch newid parammedrau"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "User :"
+msgstr "defnyddiwr :"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8031,15 +8145,20 @@ msgstr ", gwesteiwr \"%s\", porth %s"
 msgid "Monaco"
 msgstr "Monaco"
 
-#: ../../fs.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid "%s formatting of %s failed"
-msgstr "methodd  fformatio %s o %s"
+msgid "Do not send mails when uneeded"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Methodd rhannu: %s"
+
+#: ../../fs.pm:1 ../../swap.pm:1
+#, c-format
+msgid "%s formatting of %s failed"
+msgstr "methodd  fformatio %s o %s"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8106,6 +8225,11 @@ msgstr "De Affrica"
 msgid "Western Sahara"
 msgstr "Western Sahara"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Eject tape after the backup"
+msgstr "Defnyddiwch dâp i gadw wrth gefn"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot Floppy/ISO"
@@ -8131,21 +8255,22 @@ msgstr "Golygu'r rheol bresennol"
 msgid "%s"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-"Ymresymiadau: arg)\n"
-"\n"
-"Galluogi?Analluogi mewngofnodi pecynnau anarferol IPv4."
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
 msgstr "Profwch y llygoden"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not update inode access times on this file system\n"
+"(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Sticky-bit"
+msgstr "sticky-bit"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8172,7 +8297,7 @@ msgstr "Sector"
 msgid "Qatar"
 msgstr "Qatar"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Base dn"
 msgstr "Sail dn LDAP"
@@ -8208,6 +8333,11 @@ msgstr "Glanhau /tmp bob tro fyddwch yn cychwyn"
 msgid "Malawi"
 msgstr "Malawi"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: false"
+msgstr "Ffeiliau lleol"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8237,7 +8367,7 @@ msgstr "Y Deyrnas Unedig"
 msgid "running"
 msgstr "rhedeg"
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "default"
 msgstr "rhagosodedig"
@@ -8306,16 +8436,13 @@ msgstr ""
 " chafodd eich adroddiad e-bost mo'i anfon\n"
 " Ffurfweddwch eich sendmail"
 
-#: ../../security/help.pm:1
+#: ../../fs.pm:1
 #, c-format
 msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
+"Do not allow set-user-identifier or set-group-identifier\n"
+"bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
+"have suidperl(1) installed.)"
 msgstr ""
-"Ymresymiadau: (val)\n"
-"\n"
-"Gosod amser allan y gragen. Gwerth sero'n golygu dim amser allan."
 
 #: ../../lang.pm:1
 #, c-format
@@ -8332,10 +8459,10 @@ msgstr ""
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connecting to the Internet "
-msgstr "Cysylltu â'r Rhyngrwyd"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom settings"
+msgstr "Rhannu disg unigol"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8357,17 +8484,6 @@ msgstr "Argraffydd ar wasanaethwr SMB/Windows 95/98/NT"
 msgid ", "
 msgstr ", "
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
-msgstr ""
-"Ymresymiadau: (umask)\n"
-"\n"
-"Gosod gwraidd umask."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8382,10 +8498,10 @@ msgstr ""
 "Mae Postfix yn Asiant Cludo E-bost (MTA), sef rhaglen sy'nsymud e-bost o un "
 "peiriant i'r llall."
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet failed."
-msgstr "Methodd datgysylltu o'r Rhyngrwyd."
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Uzbek (cyrillic)"
+msgstr "Serbaidd (cyrilig)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8493,8 +8609,9 @@ msgid "Button `%s': %s"
 msgstr "Botwm '%s'.%s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
-#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
+#: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Arhoswch"
@@ -8601,6 +8718,11 @@ msgstr "Gosodiad lleiaf"
 msgid "Ethiopia"
 msgstr "Ethiopia"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable \"crontab\" and \"at\" for users"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Devanagari"
@@ -8703,6 +8825,29 @@ msgstr "Gwasanaethwr DNS Cyntaf (dewisol)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Yn lle hynny, rhowch enw dyfais/ffeil ar y ninell mewnbwn"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
+"Ymresymiadau: ()\n"
+"\n"
+"Os yw SERVER_LEVEL (or SECURE_LEVEL if absent) yn fwy na 3\n"
+" yn /etc/security/msec/security.conf, creu'r symlink /etc/security/msec/"
+"server\n"
+"i bwyntio at /etc/security/msec/server.<SERVER_LEVEL>. Mae /etc/security/"
+"msec/server\n"
+"yn cael ei ddefnyddio gan chkconfig --ychwanegu at i benderfynnu ychwnaegu "
+"gwasanaeth\n"
+"os yw ar gael yn y ffeil during the installation of packages."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8846,26 +8991,15 @@ msgstr ""
 msgid "Choose your filesystem encryption key"
 msgstr "Dewiswch eich allwedd amgryptio system ffeiliau"
 
-#: ../../standalone/drakbackup:1
+#: ../../lang.pm:1
 #, c-format
-msgid ""
-"Please choose your CD/DVD device\n"
-"(Press Enter to propogate settings to other fields.\n"
-"This field isn't necessary, only a tool to fill in the form.)"
-msgstr ""
-"Dewiswch eich dyfais CD/DVD\n"
-"(Gwasgwch Enter i drosglwyddo'r gosodiadau i feysydd eraill.\n"
-"Nid yw'r maes hwn yn angenrheidiol, dim ond offeryn i lanw'r ffurflen.)"
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Andorra"
 msgstr "Andorra"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Sierra Leone"
-msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8876,6 +9010,15 @@ msgstr "Botswana"
 #, c-format
 msgid "(default value: %s)"
 msgstr "(gwerth rhagosodedig: %s)"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
+msgstr ""
+"Ymresymiadau: (max, inactive=-1)\n"
+"\n"
+"Gosod cyfrinair yn erbyn \\fImax\\fP dyddiau ac oedi i newid i \\fIinactive"
+"\\fP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8906,15 +9049,6 @@ msgstr "Dewiswch wasanaethwr X"
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Maint rhaniad cyfnewid mewn MB: "
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Other (not drakbackup)\n"
-"keys in place already"
-msgstr ""
-"Allweddi eraill (nid drakbackup)\n"
-"yn eu lle yn barod"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8997,6 +9131,15 @@ msgstr ""
 msgid "received"
 msgstr "derbyniwyd"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable su only from the wheel group members or for any user"
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+" Galluogu su o aelodau grwp olwyn yn unig neu ganiatáu su o unrhyw "
+"ddefnyddiwr."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_New"
@@ -9042,7 +9185,7 @@ msgstr "Argraffyddion Lleol"
 msgid "Installation image directory"
 msgstr "Cyfeiriadur delwedd gosod"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Server"
 msgstr "Gwasanaethwr NIS"
@@ -9056,6 +9199,11 @@ msgstr "Porth: %s"
 #, c-format
 msgid "Spain"
 msgstr "Sbaen"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "local config: %s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9077,15 +9225,15 @@ msgstr "Gosod"
 msgid "Auto-detect available ports"
 msgstr "Awtoganfod pyrth ar gael"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr "Mae Rhannu Cysylltiad a'r Rhyngrwyd wedi ei analluogi"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
 msgstr "San Marino"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Internet Connection Sharing currently disabled"
+msgstr "Mae Rhannu Cysylltiad a'r Rhyngrwyd wedi ei analluogi"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -9121,11 +9269,6 @@ msgstr ""
 "Digwyddodd gwall ond wn i ddim sut i ddelio ag ef yn dwt.\n"
 "Mae'n beryglus i barhau."
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "please wait, parsing file: %s"
-msgstr "arhoswch, dosbarthu ffeil: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9135,6 +9278,16 @@ msgstr "Taiwan"
 #, c-format
 msgid "Pakistan"
 msgstr "Pacistan"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "please wait, parsing file: %s"
+msgstr "arhoswch, dosbarthu ffeil: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Importance: "
+msgstr "Pwysigrwydd: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9170,11 +9323,6 @@ msgstr "Enw darparwr (eng. darparwr.net)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid "Version: %s\n"
-msgstr "Fersiwn: %s\n"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandrake Linux. If that occurs, you can try a text install instead. For "
@@ -9206,6 +9354,11 @@ msgstr "Math o gyswllt:"
 msgid "Graphical interface"
 msgstr "Rhyngwyneb graffigol"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Chad"
+
 #: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
@@ -9215,11 +9368,6 @@ msgstr "XFree %s gyda cyflymu caledwedd 3D"
 #, c-format
 msgid "India"
 msgstr "India"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Chad"
-msgstr "Chad"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9344,6 +9492,14 @@ msgstr "Defnyddiwch y cwota ar gyfer ffeiliau wrth gefn"
 msgid "Configuring printer \"%s\"..."
 msgstr "Ffurfweddu argraffydd \"%s\" ..."
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not allow execution of any binaries on the mounted\n"
+"file system. This option might be useful for a server that has file systems\n"
+"containing binaries for architectures other than its own."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
@@ -9436,6 +9592,13 @@ msgstr "ail chwarae"
 msgid "detected %s"
 msgstr "canfyddwyd %s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Expect is an extension to the Tcl scripting language that allows interactive "
+"sessions without user intervention."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
@@ -9484,11 +9647,6 @@ msgstr ""
 msgid "Detecting devices..."
 msgstr "Canfod dyfeisiau..."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Cliciwch yma i gychwyn y dewin ->"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
@@ -9503,10 +9661,23 @@ msgstr ""
 "Disgrifiad y meysydd:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "Basic options"
+msgstr "Dewisiadau Sylfaenol DrakSec"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the name of the CPU"
 msgstr "enw'r prosesydd"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept bogus IPv4 error messages"
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod negeseuon gwall IPv4 ffug."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9552,16 +9723,6 @@ msgstr "Defnyddiwch Expect ar gyfer SSH"
 #, c-format
 msgid "Poland"
 msgstr "Gwlad Pwyl"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Importance: %s\n"
-msgstr "Pwysigrwydd: %s\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to eject your tape after the backup."
-msgstr "Gwiriwch os ydych am dynnu eich tâp ar ôl y cadw wrth gefn."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9650,24 +9811,25 @@ msgstr "Gwall F00f"
 msgid "XFree %s"
 msgstr "XFree: %s"
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Which dhcp client do you want to use?\n"
-"Default is dhcp-client."
-msgstr ""
-"Pa gleient dhcp ydych chi eisiau ei ddefnyddio?\n"
-"dhcp-client yw'r rhagosodedig"
-
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Domain Name:"
 msgstr "Enw Parth:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Root umask"
+msgstr "Cyfrinair gwraidd"
+
 #: ../../any.pm:1
 #, c-format
 msgid "On Floppy"
 msgstr "Ar Ddisg Meddal"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Reboot by the console user"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9684,6 +9846,14 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Chwilio am y pecynnau sydd ar gael"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-seperated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9777,15 +9947,15 @@ msgstr ""
 "cael.\n"
 "!!"
 
-#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Hepgor"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
 msgstr "Niue"
+
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Hepgor"
 
 #: ../../services.pm:1
 #, c-format
@@ -9924,15 +10094,15 @@ msgstr "Dewiswch y porth mae'r argraffydd wedi cysylltu iddo."
 msgid "Change Cd-Rom"
 msgstr "Newid CD-Rom"
 
-#: ../../network/netconnect.pm:1
-#, fuzzy, c-format
-msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "Pa ffurfweddiad XFree hoffech ei gael?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Pa ffurfweddiad XFree hoffech ei gael?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -9986,6 +10156,20 @@ msgstr ""
 "Mae Apache yn wasanaethwr y We Fyd Eang. Mae'n cael ei ddefnyddio "
 "iwasanaethu ffeiliau HTML a CGI."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter your CD Writer device name\n"
+" ex: 0,1,0"
+msgstr ""
+"Rhowch enw dyfais eich Ysgrifennwr CD\n"
+"ex: 0,1,0"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "ALL"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Add/Del Clients"
@@ -10015,6 +10199,11 @@ msgid ""
 msgstr ""
 "Cychwyn y rhaniad fel rhagosodwyd\n"
 "    (ar gyfer cychwyn MS-DOS, nid ar gyfer lilo)\n"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -10064,15 +10253,6 @@ msgstr ""
 msgid "the number of buttons the mouse has"
 msgstr "nifer y botymau sydd gan y llygoden"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the directory (or module) to\n"
-" put the backup on this host."
-msgstr ""
-"Rhowch y cyfeiriadur(neu fodiwl) i osod y cadw\n"
-"wrth gefn ar y gwesteiwr hwn."
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Replay"
@@ -10108,6 +10288,11 @@ msgstr "Teulu cpuid"
 msgid "32 MB"
 msgstr "32 MB"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: thin"
+msgstr "math:  %s"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Lithuanian AZERTY (new)"
@@ -10129,11 +10314,6 @@ msgstr ""
 "Rydych wedi dewis meddalwedd rhannu RAID fel gwraidd (/)\n"
 "Nid oes cychwynnydd yn medru trin hwn heb rhaniad /boot\n"
 "Cofiwch ychwanegu rhaniad /boot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Previous"
-msgstr "Cynt"
 
 #: ../../any.pm:1
 #, c-format
@@ -10242,7 +10422,7 @@ msgstr ""
 msgid "Content of the file"
 msgstr "Cynnwys y ffeil"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication LDAP"
 msgstr "Dilysu LDAP"
@@ -10277,6 +10457,11 @@ msgstr "RAID md%s\n"
 msgid "%d comma separated strings"
 msgstr "%d llinellau gwahanwyd gan gollnod"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid " isdn"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -10291,6 +10476,11 @@ msgstr "Enw Thema"
 #, c-format
 msgid "/_Help"
 msgstr "/_Cymorth"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitrary driver"
+msgstr "Dewis gyrrwr ar hap"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10330,12 +10520,13 @@ msgstr "Tynnu ffontiau wedi eu gosod"
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
+#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
+#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10377,6 +10568,11 @@ msgstr "/Awtoganfod_modem"
 msgid "Remove printer"
 msgstr "Tynnu argraffydd"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "View Last Log"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -10416,11 +10612,12 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr "Arall"
 
-#: ../../any.pm:1 ../../harddrake/v4l.pm:1
+#: ../../any.pm:1 ../../harddrake/v4l.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Default"
 msgstr "Rhagosodedig"
@@ -10429,6 +10626,11 @@ msgstr "Rhagosodedig"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Efelychiad Botwm 2"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run chkrootkit checks"
+msgstr "os wedi ei osod i iawn,  gwirio gyda chkrootkit."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10450,7 +10652,7 @@ msgstr "dewis ffeil delwedd"
 msgid "X server"
 msgstr "Gwasanaethwr X"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Enw Defnyddiwr Gweinyddiaeth Parth"
@@ -10464,6 +10666,11 @@ msgstr "Digwyddodd gwall wrth sganio am sianelu teledu"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "Bysellfwrdd UDA (rhyngwladol)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finish)"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10490,7 +10697,7 @@ msgstr "/Ffeil/-"
 msgid "Italian"
 msgstr "Eidalaidd"
 
-#: ../../interactive.pm:1 ../../standalone/draksec:1
+#: ../../interactive.pm:1
 #, c-format
 msgid "Basic"
 msgstr "Elfennol"
@@ -10563,6 +10770,11 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Rhwydwaith drwy FTP.\n"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Reports check result to tty"
+msgstr "os wedi ei osod i iawn, adrodd adroddiadau gwirio i tty."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10702,11 +10914,6 @@ msgstr ""
 msgid "Save theme"
 msgstr "cadw thema"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr "grwp"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -10726,6 +10933,11 @@ msgstr "Dewin Ffurfweddu'r Rhwydwaith"
 #, c-format
 msgid "Removable media automounting"
 msgstr "Cyfrwng symudadwy'n awto-osod"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Rhowch y cyfeiriadur i gadw iddo:"
 
 #: ../../services.pm:1
 #, c-format
@@ -10844,6 +11056,11 @@ msgstr ""
 "(*) Bydd angen disg meddal wedi ei fformatio fel FAT (i greu un yn\n"
 "GNU/Linux, teipiwch \"mformat a:\")"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Moldova"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Kensington Thinking Mouse"
@@ -10854,16 +11071,6 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Ffurfweddiad argraffydd pell"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Moldova"
-msgstr "Moldova"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your tape before the backup."
-msgstr "Gwiriwch os ydych am ddileu eich tâp cyn y cadw wrth gefn."
-
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
@@ -10873,6 +11080,11 @@ msgstr "Platfform arlein i ymateb i anghenion cefnogaeth penodol cwmni"
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "Dylai'r URL ddechrau gyda 'ftp' neu 'http:'"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Oriya"
+msgstr "Syria"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10939,6 +11151,11 @@ msgstr "gosodiad gwasanaeth"
 msgid "Custom"
 msgstr "Arddull"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Latfia"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "File is already used by another loopback, choose another one"
@@ -10951,10 +11168,16 @@ msgstr ""
 msgid "Read-only"
 msgstr "Darllen yn unig"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Latvia"
-msgstr "Latfia"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
+"Ymresymiadau: (arg, alert=1)\n"
+"\n"
+"Galluogi/Analluogi amddiffyn spwffio datrys enw. Os yw\n"
+"\\fIalert\\fP yn wir, adrodd i syslog."
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -11001,10 +11224,25 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Ffurfweddu'r Rhwydwaith Lleol..."
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "os wedi ei osod i iawn, gwirio checksum y ffeiliau suid/sgid."
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Cychwyn y system sain ar eich peiriant"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run some checks against the rpm database"
+msgstr "os wedi ei osod i iawn,  gwirio yn erbyn y gronfa ddata rpm."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Execute"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11031,15 +11269,15 @@ msgstr "Pa fath o system ffeil  ydych chi eisiau?"
 msgid "3 buttons"
 msgstr "3 botwm"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Detailed information"
-msgstr "Gwybodaeth fanwl"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
 msgstr "Malta"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Detailed information"
+msgstr "Gwybodaeth fanwl"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11068,6 +11306,13 @@ msgstr "Nid yw 'r disg meddal hwn wedi ei fformatio i FAT"
 #, c-format
 msgid "Configuring network"
 msgstr "Ffurfweddu'r rhwydwaith"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This option will save files that have changed.  Exact behavior depends on "
+"whether incremental or differential mode is used."
+msgstr ""
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -11187,7 +11432,7 @@ msgstr ""
 "Bydd y gyrrwr \"%s|\"'n cael ei ddefnyddio ar y cychwyn"
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Modd Uwch"
@@ -11206,6 +11451,14 @@ msgstr "Cyfeiriad y Rhwydwaith Lleol "
 #, c-format
 msgid "Backup your System files. (/etc directory)"
 msgstr "Cadw wrth gefn ffeiliau System. ( cyfeiriadur /etc )"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the user umask."
+msgstr ""
+"Ymresymiadau: (umasg)\n"
+"\n"
+"Gosod umasg y defnyddiwr"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11233,17 +11486,6 @@ msgstr ""
 msgid "Samba Server"
 msgstr "Gwasanaethwr Samba"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
-msgstr ""
-"Ymresymiadau: (arg, alert=1)\n"
-"\n"
-"Galluogi/Analluogi Amddiffyn spwffio IP"
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Australian Optus cable TV"
@@ -11268,11 +11510,6 @@ msgstr "Zimbabwe"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please enter the host name or IP."
-msgstr "Rhowch enw'r gwesteiwr neu'r IP"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "When"
 msgstr "Pryd"
 
@@ -11285,25 +11522,6 @@ msgstr "Ail Wasanaethwr DNS (dewisol)"
 #, c-format
 msgid "Finland"
 msgstr "Y Ffindir"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Caniatáu i bob gwasanaeth sy'n cael ei reoli gan tcp_wrappers os yw \\fIarg"
-"\\fP = ALL. Dim ond rhai lleol\n"
-"os\\fIarg\\fP = LOCAL a dim os \\fIarg\\fP = NONE. I gnaiatáu'r "
-"gwasanaethausydd angen defnyddiwch /etc/hosts.allow\n"
-"(gw. hosts.allow(5))."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -11319,6 +11537,19 @@ msgstr "Does dim mod dad-ddewis y pecyn hwn. Rhaid ei ddiweddaru"
 #, c-format
 msgid "Loading from floppy"
 msgstr "Llwytho o ddisg meddal"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
+"Ymresymiadau: arg)\n"
+"\n"
+"Galluogi?Analluogi mewngofnodi pecynnau anarferol IPv4."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Slovenia"
 
 #: ../../standalone/mousedrake:1
 #, fuzzy, c-format
@@ -11341,11 +11572,6 @@ msgstr ""
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Slovenia"
-msgstr "Slovenia"
 
 #: ../../any.pm:1
 #, c-format
@@ -11409,12 +11635,7 @@ msgstr "Cynnal radio:"
 msgid "Installing SANE packages..."
 msgstr "Gosod pecynnau SANE..."
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "boot disk creation"
-msgstr "creu disg cychwyn"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
@@ -11517,15 +11738,14 @@ msgstr ""
 "gwybodaeth am grwp gwaith perthynol."
 
 #: ../../security/help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
-"Ymredymiadau: (arg)\n"
+"Ymresymiadau: (arg)\n"
 "\n"
-"Ganiatáu/Gwrthod atsain icmp."
+" Galluogu su o aelodau grwp olwyn yn unig neu ganiatáu su o unrhyw "
+"ddefnyddiwr."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -11540,6 +11760,11 @@ msgid ""
 msgstr ""
 "Mae modd i'ch cerdyn gael cefnogaeth cyflymu caledwedd 3D gyda XFree %s \n"
 "SYLWER CEFNOGAETH ARBROFOL YW HWN AC FE ALL RHEWI EICH CYFRIFIADUR."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Shell timeout"
+msgstr "Goramser cychwyn y cnewyllyn"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11579,65 +11804,6 @@ msgid ""
 msgstr ""
 "Gwall gosod aboot, \n"
 "ceisiwch orfodi gosodiad hyd yn oed os yw hynny'n dinistrio'r rhaniad cyntaf?"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - The compression mode:\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode:\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, Drakbackup will ignore all references\n"
-"      included in .backupignore files in each directories.\n"
-"      ex: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
-msgstr ""
-"disgrifiad o'r dewisiadau:\n"
-"\n"
-"Yma mae Drakbackup yn caniatáu i chi newid:\n"
-"\n"
-" - Y modd cywasgu:\n"
-"   \n"
-"     Os wnewch chi glicio cywasgiad bzip2, byddwch yn \n"
-"     cywasgu eich data'n well na gzip (tua 2-10%%).\n"
-"     Nid yw'r dewis wedi ei nodi drwy ragosodiad gan fod\n"
-"     angen mwy o amser ar y modd cywasgu hwn (tua 1000%% yn fwy).\n"
-"\n"
-"- Y modd diweddaru:\n"
-"\n"
-"      Bydd y dewis hwn yn diweddaru eich caw wrth gefn, ond\n"
-"      nid yw'r dewis hwn wir yn ddefnyddiol gan fo angen dadgywasgu\n"
-"      eich cadw wrth gefn cyn bo modd i chi ei ddiweddaru.\n"
-"      \n"
-"- Y modd .backupignore\n"
-"     Fel gyda cvs, bydd Drakbackup yn anwybyddu pob cyfeiriad\n"
-"     yn ffeiliau .backupignore ym mhob cyfeiriadur.\n"
-"     ar wahân i: \n"
-"         /*> cat .backupignore*/\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11736,6 +11902,14 @@ msgstr "Mae modd addasu eich byd..."
 msgid "Inuktitut"
 msgstr "Inuktitut"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Some protocols, like rsync, may be configured at the server end.  Rather "
+"than using a directory path, you would use the 'module' name for the service "
+"path."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
@@ -11756,15 +11930,15 @@ msgstr "Ychwanegu argraffydd newydd"
 msgid "          All of your selected data have been          "
 msgstr "         Mae eich dewis data wedi ei          "
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "<-- Delete"
-msgstr "<-- Dileu"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
 msgstr "Nepal"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "<-- Delete"
+msgstr "<-- Dileu"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -11775,6 +11949,29 @@ msgstr "cpu # "
 #, c-format
 msgid "chunk size"
 msgstr "maint darn"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Os yw \\fIarg\\fP = ALL caniatá /etc/issue a /etc/issue.net i fodoli. Os yw "
+"\\fIarg\\fP = NONE\n"
+"dim materion heblaw caniatáu  /etc/issue."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
+"Ymresymniadau:  (arg)\n"
+"\n"
+"Galluogi/Analluogi sulogin(8 mewn defnydd defnyddiwr unigol."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -11827,6 +12024,13 @@ msgstr "Ail-lwytho'r tabl rhaniad"
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Iawn, rwyf eisiau awto-mewngofnodi gyda (defnyddiwr, bwrdd gwaith)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Restore Selected"
+msgstr ""
+"Adfer y Dewis\n"
+"Ffeiliau"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11929,10 +12133,13 @@ msgstr ""
 msgid "Security Administrator:"
 msgstr "Gweinyddwr Diogelwch:"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your login"
-msgstr "Rhowch eich mewngofnod"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the shell timeout. A value of zero means no timeout."
+msgstr ""
+"Ymresymiadau: (val)\n"
+"\n"
+"Gosod amser allan y gragen. Gwerth sero'n golygu dim amser allan."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11973,53 +12180,6 @@ msgstr ""
 "Cafodd argraffydd \"%s\" ei dynnu'n llwyddiannus o Star Office/OpenOffice."
 "org."
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Standard: This is the standard security recommended for a computer that will "
-"be used to connect\n"
-"               to the Internet as a client.\n"
-"\n"
-"High:       There are already some restrictions, and more automatic checks "
-"are run every night.\n"
-"\n"
-"Higher:    The security is now high enough to use the system as a server "
-"which can accept\n"
-"              connections from many clients. If your machine is only a "
-"client on the Internet, you\n"
-"           should choose a lower level.\n"
-"\n"
-"Paranoid:  This is similar to the previous level, but the system is entirely "
-"closed and security\n"
-"                features are at their maximum\n"
-"\n"
-"Security Administrator:\n"
-"               If the 'Security Alerts' option is set, security alerts will "
-"be sent to this user (username or\n"
-"            email)"
-msgstr ""
-"Safonol: Dyma'r safon diogelwch sy'n cael ei argymell ar gyfer cyfrifiadur "
-"i'w ddefnyddio\n"
-"              i gysylltu â'r Rhyngrwyd fel cleient.\n"
-"\n"
-"Uchel:      Mae rhai cyfyngiadau eisoes, ac mae gwiriadau'n cael eu rhedeg "
-"bob nos.\n"
-"\n"
-"Uchaf:      Mae diogelwch yn ddigon uchel i ddefnyddio'r system fel "
-"gwasanaethwr sy'n medru\n"
-"                derbyn cysylltiadau o nifer o gleientiau. Os mai eich "
-"peiriant yw'r unig gleient ar y\n"
-"              Rhyngrwyd, dylech ddewis lefel is.\n"
-"\n"
-"Paranoia:  Mae'n debyg i'r lefel cynt ond mae'r system wedi ei gau'n llwyr a "
-"nodweddion diogelwch\n"
-" ar eu                   heithaf.\n"
-"\n"
-"Gweinyddwr Diogelwch:\n"
-"                 Os yw'r dewis 'Rhybuddion Diogelwch' wedi ei ddewis, bydd "
-"rhybuddion diogelwch yn cael eu\t              anfon i'r defnyddiwr hwn (enw "
-"defnyddiwr neu e-bost)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Save packages selection"
@@ -12054,6 +12214,12 @@ msgstr ""
 "Dewiswch pa wasanaethau ddylai gael eu cychwyn yn awtomatig wrth gychwyn y "
 "cyfrifiadur"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check files/directories writable by everybody"
+msgstr ""
+"os wedi ei osod i iawn, gwirio ffeiliau/cyfeiriaduron ysgrifenadwy gan bawb."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Learn how to use this printer"
@@ -12077,6 +12243,11 @@ msgid ""
 msgstr ""
 "Nid yw'r newidiwr maint FAT yn medru trin eich rhaniad.\n"
 "digwyddodd y gwall canlynol: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Size: "
+msgstr "Maint: %s"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -12124,6 +12295,14 @@ msgstr "Xpmac (gyrrwr gosod dangoswr)"
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Rhaid i enw gwesteiwr Zeroconf beidio cynnwys ."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse icmp echo."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod atsain icmp."
 
 #: ../../services.pm:1
 #, c-format
@@ -12212,6 +12391,11 @@ msgstr ""
 "Sylwer: bydd angen Addasydd Rhwydwaith un-pwrpas i greu Rhwydwaith Lleol "
 "(LAN)."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections X Window"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -12234,6 +12418,11 @@ msgstr ""
 #, c-format
 msgid "Refuse"
 msgstr "Gwrthod"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "LOCAL"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -12346,6 +12535,11 @@ msgstr "Canfod ar waith"
 #, c-format
 msgid "Build Whole Kernel -->"
 msgstr "Adeiladu'r cnewyllyn gyfan -->"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "modem"
+msgstr "Modem"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -12469,6 +12663,22 @@ msgstr ""
 "Mae eich cerdyn yn cael ei gynnal gan XFree %s efallai bod gwell cefnogaeth "
 "mewn 2D."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi gwiriad diogelwch dyddiol."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable libsafe if libsafe is found on the system"
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi libsafe os yw ar y system."
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
@@ -12498,7 +12708,7 @@ msgstr "Cydweddi amser awtomatig (defnyddio NTP)"
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Server"
 msgstr "Gwasanaethwr LDAP"
@@ -12564,6 +12774,11 @@ msgstr "Ffurfweddu cardiau PCMCIA..."
 msgid "kdesu missing"
 msgstr "kdesu ar goll"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires a username...\n"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Encryption key"
@@ -12604,7 +12819,7 @@ msgstr "rhaniad %s"
 msgid "Paranoid"
 msgstr "Paranoia"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS"
 msgstr "NIS"
@@ -12639,31 +12854,6 @@ msgstr "Dileu'r ddisg gyfan"
 msgid " (Default)"
 msgstr "(Rhagosodedig)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
-msgstr ""
-"Ymresymiadau: ()\n"
-"\n"
-"Os yw SERVER_LEVEL (or SECURE_LEVEL if absent) yn fwy na 3\n"
-" yn /etc/security/msec/security.conf, creu'r symlink /etc/security/msec/"
-"server\n"
-"i bwyntio at /etc/security/msec/server.<SERVER_LEVEL>. Mae /etc/security/"
-"msec/server\n"
-"yn cael ei ddefnyddio gan chkconfig --ychwanegu at i benderfynnu ychwnaegu "
-"gwasanaeth\n"
-"os yw ar gael yn y ffeil during the installation of packages."
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -12679,17 +12869,27 @@ msgstr "Derbyn Cyflymder"
 msgid "Turks and Caicos Islands"
 msgstr "Turks and Caicos Islands"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
-msgstr "caniatadau"
-
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
 msgstr "<- Cynt"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Transfer Now"
+msgstr ""
+"Trosglwyddo \n"
+"Nawr"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Set root password and network authentication methods"
+msgstr ""
+"Ymresymiadau: arg)\n"
+"\n"
+"Defnyddio cyfrinair i wirio defnyddiwr."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12827,6 +13027,21 @@ msgstr "Gosod cychwynnwr"
 msgid "Select the memory size of your graphics card"
 msgstr "Dewiswch faint y cof eich cerdyn graffeg"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi crontab ac at ar gyfer defnyddwyr. Rhoi defnyddwyr â "
+"chniatâd yn\n"
+"/etc/cron.allow a  /etc/at.allow\n"
+" (gw. man yn(1) a crontab(1))."
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12870,11 +13085,6 @@ msgstr "Cafodd rhai dyfeisiau yn nosbarth caledwedd\"%s\" eu tynnu:\n"
 msgid "Found %s %s interfaces"
 msgstr "Wedi canfod rhyngwynebau %s %s"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr "sticky-bit"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -12889,17 +13099,6 @@ msgstr "Enw'r parth mewnol"
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ y cerdyn"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
-msgstr ""
-"Ymresymiadau: (umasg)\n"
-"\n"
-"Gosod umasg y defnyddiwr"
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -13009,23 +13208,18 @@ msgstr "Gosod y system"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent and the Grenadines"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod ailgychwyn cyfrifiadur gan ddefnyddiwr y consol."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
 msgstr "/Ffeil/_Agor"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
-msgstr ""
-"Ymresymiadau (arg)\n"
-"\n"
-"Mae'r ymresymiad yn pennu os oes gan y defnyddiwr ganiatád i gysylltu\n"
-"gyda'r  gwasanaethwr X porth  tcp 6000 neu beidio."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -13047,15 +13241,15 @@ msgstr "Hwngari"
 msgid "Total progess"
 msgstr "Cyfanswm y cynnydd"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Color configuration"
-msgstr "Ffurfweddiad lliw"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
 msgstr "Seland Newydd"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Color configuration"
+msgstr "Ffurfweddiad lliw"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -13131,6 +13325,13 @@ msgstr ""
 "yw'n ymgyrraedd â'r cywirdeb angenrheidiol wrth berfformio Floating point "
 "DIVision (FDIV)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Backup quota exceeded!\n"
+"%d MB used vs %d MB allocated."
+msgstr ""
+
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
@@ -13161,6 +13362,11 @@ msgstr "rhowch'gwag' am gofnod gwag"
 msgid "on Hard Drive"
 msgstr "ar Ddisg Caled"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Password history length"
+msgstr "Mae'r cyfrinair yn rhy syml"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Winmodem connection"
@@ -13187,17 +13393,6 @@ msgstr ""
 "gosodiadau dewis rhagosodedig (mewnflwch papur, ansawdd y printiad,...0, "
 "dewiswch \"Argraffydd\" yn adran \"Caledwedd\" Canolfan Rheoli Mandrake."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Gosod hyd hanes cyfrinair i rwysstro ailddefnyddio'r cyfrinair."
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
@@ -13213,6 +13408,14 @@ msgstr "Dim digon o le cyfnewid i gyflawni'r gosodiad, ychwanegwch rhagor"
 #, c-format
 msgid "%s on %s"
 msgstr "%s ar %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid remote root login."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod mewngofnodi gwraidd pell"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13248,6 +13451,16 @@ msgstr ""
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Pa un yw eich parth amser?"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Can't create log file!"
+msgstr "Methu creu catalog!"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Use .backupignore files"
+msgstr "Defnyddiwch y cwota ar gyfer ffeiliau wrth gefn"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13304,6 +13517,11 @@ msgstr "Maint: %s\n"
 msgid "Hostname: "
 msgstr "Enw gwesteiwr:"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a rule"
+msgstr "ychwanegu rheol"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Chunk size %s\n"
@@ -13318,15 +13536,6 @@ msgstr "Adeiladu dyfodol Linux!"
 #, c-format
 msgid "Local Printer"
 msgstr "Argraffydd Lleol"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
-"fr>"
-msgstr ""
-" Hawlfraint (C) 2001-2002 MandrakeSoft gan DUPONT Sebastien <dupont_s"
-"\\@epita.fr>"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -13373,20 +13582,10 @@ msgstr "Newid maint"
 msgid "Dominica"
 msgstr "Dominica"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the device name to use for backup"
-msgstr "Rhowch enw dyfais i'w ddefnyddio ar gyfer cadw wrth gefn"
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Resolution: %s\n"
 msgstr "Cydraniad: %s\n"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
-msgstr "cydweddu"
 
 #: ../../install2.pm:1
 #, c-format
@@ -13439,26 +13638,6 @@ msgstr "Dyfais  llygoden: %s\n"
 msgid "Reselect correct fonts"
 msgstr "Ailddewis y ffontiau cywir"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-"Please be careful when you are using ftp backup, because only \n"
-"backups that are already built are sent to the server.\n"
-"So at the moment, you need to build the backup on your hard \n"
-"drive before sending it to the server.\n"
-"\n"
-msgstr ""
-"disgrifiad o'r dewisiadau:\n"
-"\n"
-"Byddwch ofalus wrth ddefnyddio cadw wrth gefn ftp, oherwydd\n"
-"dim ond ffeiliau wrth gefn sydd wedi eu hadeiladu sy'n cael eu\n"
-"hanfon at y gwasanaethwr.\n"
-"Felly, rhaid i chi adeiladu eich cadw wrth gefn ar eich disg caled\n"
-"cyn ei anfon i'r gwasanaethwr.\n"
-"\n"
-
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -13474,11 +13653,6 @@ msgstr ""
 "hyd yn oed os nad ydych yn dewis profi'r ffurfweddiad. Yn amlwg, byddwch\n"
 "am ateb \"Na\" os yw eich peiriant i weithredu fel gwasanaethwr, neu os\n"
 "nad oeddech yn llwyddiannus yn cael eich dangosydd i ffurfweddu'n gywir.."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "We are now going to configure the %s connection."
-msgstr "Rydym am ffurfweddu cysylltiad %s"
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -13601,6 +13775,11 @@ msgstr "Heb ganfod Cerdyn Sain!"
 msgid "Mouse Port"
 msgstr "Porth Llygoden"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check for unsecured accounts"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid ""
@@ -13614,17 +13793,6 @@ msgstr ""
 #, c-format
 msgid "Ftp Server"
 msgstr "Gwasanaethwr Ftp"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
-"Ymresymiadau: (arg)\n"
-"\n"
-"Galluogi/Analluogi gwiriad diogelwch msec bob awr."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13640,17 +13808,6 @@ msgstr "trosi ffontiau pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Math o fws mae eich llygoden wedi cysylltu iddi"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Ymresymiad: (size)\n"
-"\n"
-"Gosod maint hanes gorchymyn cragen. Gwerth -1 yn golygu diderfyn."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13784,25 +13941,6 @@ msgstr ""
 msgid "Comoros"
 msgstr "Comoros"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"We are now going to configure the %s connection.\n"
-"\n"
-"\n"
-"Press OK to continue."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Rydym yn awr yn mynd i ffurfweddu cysylltiad %s.\n"
-"\n"
-"\n"
-"Pwyswch Iawn i barhau."
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13837,58 +13975,6 @@ msgstr "Dewis cyfrwng arall i adfer ohono"
 #, c-format
 msgid "Software Manager"
 msgstr "Rheolwr Meddalwedd"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Restore Description:\n"
-" \n"
-"Only the most recent date will be used, because with incremental \n"
-"backups it is necessary to restore one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"disgrifad o adfer:\n"
-"\n"
-"Dim ond y ffeiliau mwyaf diweddar fydd yn cael eu defnyddio,\n"
-"oherwydd gyda candw wrth gefn cynyddol mae angen adfer\n"
-"pob cadw hyn yn unigol.\n"
-"\n"
-"Felly os nad ydych am adfer defnyddiwr dad-ddewiswch ei ddewisiadau.\n"
-"\n"
-"Ar wahan i hynny, dim ond un o rhain mae modd ei ddewis\n"
-"\n"
-"Cadw wrth Gefn Cynyddol:\n"
-"\n"
-"\tCadw wrth Gefn Cynyddol yw'r dewis mwyaf pwerus.\n"
-"\tMae'r dewis hwn yn caniatáu i chi gadw eich data wrth\n"
-"\tgefn y tro cyntaf ac yna dim ond yr hyn sydd wedi newid.\n"
-"\tYna bydd modd i chi, yn ystod y cam o adfer, adfer eich\n"
-"\tdata o ddyddiad penodol.\n"
-"\tOs nad ydych wedi dewis hwn, bydd yr holl hen ffeiliau\n"
-"\twrth gefn yn cael eu dileu cyn pob cadw wrth gefn.    \n"
-"\\n\n"
-"\n"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -13963,6 +14049,11 @@ msgstr ""
 msgid "This password is too simple"
 msgstr "Mae'r cyfrinair yn rhy syml"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Chkconfig obey msec rules"
+msgstr "Ffurfweddu gwasanaethau"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
@@ -13986,20 +14077,12 @@ msgstr "Gosodiad bychan iawn (yn arbennig dim urpmi)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"  Transfer  \n"
-"Now"
-msgstr ""
-"Trosglwyddo \n"
-"Nawr"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use daemon"
 msgstr "Defnyddiwch ddaemon"
 
 #: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/logdrake:1
+#: ../../standalone/drakauth:1 ../../standalone/drakconnect:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
 msgstr "Dilysu"
@@ -14099,11 +14182,6 @@ msgstr "Gosod yr Argraffydd Rhagosodedig"
 msgid "Interface %s (using module %s)"
 msgstr "Rhyngwyneb %s (gan ddefnyddio modiwl %s)"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Name: %s\n"
-msgstr "Enw: %s\n"
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Generating preview ..."
@@ -14117,6 +14195,28 @@ msgid ""
 msgstr ""
 "Dylai Frqu gael rhagosodiad k, M neu G (ee \"2.46G\" am donfedd 2.46 GHz ), "
 "neu ychwanegu '0' (sero)."
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "ignore"
+msgstr "Singapore"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
+msgstr ""
+"Ymresymiadau: (arg, listen_tcp=None)\n"
+"\n"
+"Caniatáu/Gwrthod cysylltiadau X. Ym. cyntaf pennu'r hyn sy'n digwydd\n"
+"aochr y cleient: ALL (caniatáu pob cysylltiad), LOCAL (dim ond\n"
+"cysylltiadau lleol) a NONE (dim cysylltiadau)."
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -14153,6 +14253,11 @@ msgstr ""
 "Sylwer: wrth greu unrhyw gyfeiriad bydd angen defnyddio rhagddodiad 0x, e.e. "
 "'0x123'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Kenya"
+
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
@@ -14165,11 +14270,6 @@ msgstr ""
 "addasu eich cyfrifiadur i'ch defnydd personol chi. Gallwch addasu elfennau "
 "megis lefelau diogelwch, offer ymylol (sgrîn, llygoden, bysellfwrdd...), "
 "cysylltiad â'r Rhyngrwyd a llawer mwy!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Kenya"
-msgstr "Kenya"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -14201,6 +14301,14 @@ msgstr "Y ddwy fysell Shift gyda'i gilydd"
 msgid "Select a scanner model"
 msgstr "Dewiswch model sganiwr"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod negeseuon gwall IPv4 ffug."
+
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
@@ -14216,6 +14324,11 @@ msgstr "Ffurfweddiad Drakbackup"
 msgid "Save as.."
 msgstr "Cadw fel..."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr "Corea (Gogledd)"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -14225,22 +14338,17 @@ msgstr ""
 "Nid yw'r rhag wyneb hwn wedi ei ffurfweddu eto.\n"
 "Cychwynnwch y dewin ffurfweddi yn y brif ffenestr."
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Korea (North)"
-msgstr "Corea (Gogledd)"
-
-#: ../../any.pm:1
-#, c-format
-msgid "Autologin"
-msgstr "Awtomewngofnodi"
-
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System configuration"
 msgstr "Ffurfweddu'r system"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../security/l10n.pm:1
+#, c-format
+msgid "Autologin"
+msgstr "Awtomewngofnodi"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Cyfrinair Gweinyddol y Parth"
@@ -14532,6 +14640,22 @@ msgstr "Pwynt gosod:"
 msgid "parse all fonts"
 msgstr "pob ffont"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid direct root login."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod mewngofnodi gwraidd uniongyrchol."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod darlledu icmp atsain."
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -14589,6 +14713,14 @@ msgstr "Rhannu argraffyddion lleol"
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi libsafe os yw ar y system."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14715,6 +14847,22 @@ msgstr "Lle'r ydych am osod dyfais %s?"
 msgid "The default lease (in seconds)"
 msgstr "Les rhagosodedig (mewn eiliadau)"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"We are now going to configure the %s connection.\n"
+"\n"
+"\n"
+"Press \"%s\" to continue."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"Rydym yn awr yn mynd i ffurfweddu cysylltiad %s.\n"
+"\n"
+"\n"
+"Pwyswch Iawn i barhau."
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Interface \"%s\""
@@ -14744,17 +14892,6 @@ msgstr ""
 msgid "Test"
 msgstr "Prawf"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
-msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod mewngofnodi gwraidd uniongyrchol."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea"
@@ -14774,6 +14911,11 @@ msgstr "Argraffydd bras"
 #, fuzzy, c-format
 msgid "official vendor name of the cpu"
 msgstr "Enw swyddogol gwerthwr y cpu"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Useless without Terminal Server"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14795,11 +14937,8 @@ msgstr "Ffurfweddu llygoden"
 msgid "Choose the mount points"
 msgstr "Dewiswch y pwyntiau gosod"
 
-#: ../../help.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
-#: ../../standalone/net_monitor:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "Iawn"
@@ -14898,20 +15037,10 @@ msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "Methwyd â thynnu argraffydd \"%s\" o Star Office/OpenOffice.org/GIMP."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr "dileu"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "here if no."
 msgstr "yma os nad."
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "help"
-msgstr "Cymorth"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14933,10 +15062,20 @@ msgstr "Dewiswch ba  borth cyfresol mae eich llygoden wedi cysylltu iddi"
 msgid "Did it work properly?"
 msgstr "A weithiodd hwnnw'n iawn?"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "Mount the file system read-only."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid "Poor"
 msgstr "Gwael"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result by mail"
+msgstr "os wedi ei osod i iawn, adrodd y gwirio drwy e-bost"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -14981,6 +15120,11 @@ msgstr ""
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Kannada"
+msgstr "Canada"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
@@ -15001,6 +15145,11 @@ msgstr "Graddfa adfywio fertigol"
 msgid "Entering step `%s'\n"
 msgstr "Cychwyn cam '%s\"\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Niger"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan"
@@ -15010,11 +15159,6 @@ msgstr "Logitech MouseMan"
 #, c-format
 msgid "Removing %s ..."
 msgstr "Tynnu %s..."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Niger"
-msgstr "Niger"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15046,6 +15190,11 @@ msgstr "Cyffredinol"
 msgid "Printing system: "
 msgstr "System argraffu."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
+msgstr ""
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
@@ -15067,10 +15216,13 @@ msgid "Philippines"
 msgstr "Philippines"
 
 #: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
-#: ../../standalone/mousedrake:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr "Iawn"
@@ -15141,25 +15293,20 @@ msgstr ""
 "Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
 "eich argraffydd(ion) ar hyn o bryd."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore From Catalog"
-msgstr "Adfer o'r Catalog"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore From Catalog"
+msgstr "Adfer o'r Catalog"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "IDE"
 msgstr "IDE"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr "grwp:"
 
 #: ../../fs.pm:1
 #, c-format
@@ -15203,6 +15350,16 @@ msgstr ""
 "Chwilio am y pecynnau sydd ar gael ac yn ailadeiladu cronfa ddata rpm..."
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Report \n"
+msgstr ""
+"\n"
+"                      Adroddiad DrakBackup  \n"
+"\n"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "Does not appear to be recordable media!"
 msgstr "Nid yw'n ymddangos fel cyfrwng cofnodi."
@@ -15216,6 +15373,13 @@ msgstr "Enwi dewisiadau"
 #, c-format
 msgid "Vanuatu"
 msgstr "Vanuatu"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "New user list:\n"
+msgstr ""
+"\n"
+"- Ffeiliau Defnyddiwr:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15258,6 +15422,14 @@ msgstr ""
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
 msgstr "Nid oes modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the password history length to prevent password reuse."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Gosod hyd hanes cyfrinair i rwysstro ailddefnyddio'r cyfrinair."
 
 #: ../../lang.pm:1
 #, c-format
@@ -15493,11 +15665,6 @@ msgstr "TB"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check if you are using a DVDR device"
-msgstr "Gwiriwch os ydych yn defnyddio dyfais DVDR"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "FATAL"
 msgstr "TERFYNNOL"
 
@@ -15517,20 +15684,10 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Delete"
 msgstr "Dileu"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod ailgychwyn cyfrifiadur gan ddefnyddiwr y consol."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -15697,10 +15854,15 @@ msgstr "CUPS - Common Unix Printing System"
 msgid "Webmin Service"
 msgstr "Gwasanaethau Webmin"
 
-#: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "device"
 msgstr "dyfais"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save to:"
+msgstr "Rhowch y cyfeiriadur i gadw iddo:"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -15736,10 +15898,34 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr "Tamil (cynllun teipiadur)"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users."
+msgstr ""
+"Ymresymiadau: arg)\n"
+"\n"
+"Defnyddio cyfrinair i wirio defnyddiwr."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Caniatáu/Gwrthod rhestr defnyddwyr ar y system ar rheolwyr arddangos (kdm "
+"and gdm)."
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
 msgstr "llaw"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Filename text to search for:"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15773,6 +15959,11 @@ msgstr "Argraffydd ar wasanaethwr NetWare"
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Rhowch maint RAM mewn MB"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet complete."
+msgstr "Datgysylltwyd yn llwyr o'r Rhyngrwyd."
 
 #: ../../any.pm:1
 #, c-format
@@ -15875,6 +16066,11 @@ msgstr "cryno"
 msgid "1 minute"
 msgstr "1 munud"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: fat"
+msgstr "math:  %s"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "on channel %d id %d\n"
@@ -15889,6 +16085,14 @@ msgstr ",dyfais amlbwrpas"
 #, c-format
 msgid "Laos"
 msgstr "Laos"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Galluogi/Analluogi gwiriad cymysgaredd cardiau ethernet."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15915,15 +16119,15 @@ msgstr "Ardal:"
 msgid "(E)IDE/ATA controllers"
 msgstr "Rheolyddion (E)IDE/ATA"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "All I/O to the file system should be done synchronously."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Server"
 msgstr "Gwasanaethwr Argraffydd"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet complete."
-msgstr "Datgysylltwyd yn llwyr o'r Rhyngrwyd."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15948,29 +16152,6 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre a Miquelon"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"Restore Backup Problems:\n"
-"\n"
-"During the restore step, Drakbackup will verify all your\n"
-"backup files before restoring them.\n"
-"Before the restore, Drakbackup will remove \n"
-"your original directory, and you will loose all your \n"
-"data. It is important to be careful and not modify the \n"
-"backup data files by hand.\n"
-msgstr ""
-"\n"
-"Anawsterau Adfer Ffeiliau wrth gefn\n"
-"\n"
-"Yn ystod yr adfer bydd Drakbackup yn gwirio eich holl\n"
-"ffeiliau wrth gefn cyn eu hadfer.\n"
-"Cyn adfer, bydd Drakbackup yn tynnu'r cyfeiriadur\n"
-"gwreiddiol, a byddwch yn colli eich holl ddata. Mae'n\n"
-"bwysig eich bod yn ofalus a pheidio newid y ffeiliau\n"
-"data wrth gefn gyda llaw.\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16017,6 +16198,11 @@ msgstr "Silindr %d i silindr %d\n"
 msgid "New profile..."
 msgstr "Proffil newydd..."
 
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which disk do you want to move it to?"
@@ -16027,10 +16213,15 @@ msgstr "Pa ddisg hoffech chi symud iddo?"
 msgid "Display logo on Console"
 msgstr "Darddangos logo yn y Consol"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Windows Domain"
 msgstr "Parth Windows"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Saami (norwegian)"
+msgstr "Dvorak (Norwyaidd)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16074,15 +16265,15 @@ msgstr "Dim gwybodaeth ychwanegol am y gwasanaeth hwn."
 msgid "Build Single NIC -->"
 msgstr "Adeiladau NIC unigol -->"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#, c-format
-msgid "Is this correct?"
-msgstr "Ydi hyn yn gywir?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
 msgstr "Marshall Islands"
+
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#, c-format
+msgid "Is this correct?"
+msgstr "Ydi hyn yn gywir?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16099,10 +16290,27 @@ msgstr "Cyfrinair gwraidd"
 msgid "Build All Kernels -->"
 msgstr "Adeiladu pob cnewyllyn -->"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDRAM device"
+msgstr "dyfais"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "os wedi ei osod i iawn, adrodd ar ffeiliau heb berchennog."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Dyma HardDrake, offeryn ffurfweddu caledwedd Mandrake.\n"
+"Fersiwn:"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16114,6 +16322,11 @@ msgstr ""
 "Nid oes gennych raniad cyfnewid\n"
 "\n"
 "Parhau beth bynnag?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Version: "
+msgstr "Fersiwn: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16184,10 +16397,17 @@ msgstr "Y diogelwch mwyaf"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Cymorth"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check if the network devices are in promiscuous mode"
+msgstr ""
+"os wedi ei osod i iawn, gwirio os yw'r dyfeisiau rhwydwaith mewn modd cymysg"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16212,6 +16432,11 @@ msgstr ""
 #, c-format
 msgid "Username required"
 msgstr "Mae angen enw defnyddiwr"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Device"
+msgstr "Dyfais: "
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -16259,16 +16484,10 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Dewisiadau Argraffydd SMB (Windows 9x/NT)"
 
-#: ../../security/help.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
+msgid "Valid user list changed, rewriting config file."
 msgstr ""
-"Ymredymiadau: (arg)\n"
-"\n"
-"Ganiatáu/Gwrthod negeseuon gwall IPv4 ffug."
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16288,6 +16507,11 @@ msgstr ""
 #, c-format
 msgid "Protocol for the rest of the world"
 msgstr "Protocol ar gyfer gweddill y byd"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digit and upcase letters"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16372,6 +16596,11 @@ msgstr "Dewiswch y maint newydd"
 msgid "Media class"
 msgstr "Dosbarth y cyfrwng"
 
+#: ../../standalone/XFdrake:1
+#, c-format
+msgid "You need to log out and back in again for changes to take effect"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not known by this version of Scannerdrake."
@@ -16391,20 +16620,6 @@ msgstr "Ail gychwyn XFS"
 #, c-format
 msgid "Add host/network"
 msgstr "Ychwanegu gwesteiwr/rhwydwaith"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
-msgstr ""
-"os wedi ei osod i iawn,  gwirio am gyfrinair gwag, neu un arall ddyllai fod "
-"yn /etc/shadow neu eraill gyda enw 0."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save to:"
-msgstr "Rhowch y cyfeiriadur i gadw iddo:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16426,22 +16641,10 @@ msgstr "Dim CDR/DVDR yn y gyrrwr!"
 msgid "British Indian Ocean Territory"
 msgstr "British Indian Ocean Territory"
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modd Arferol"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' medias also use the hard drive."
-msgstr ""
-"Gwnewch yn siwr bod daemon cron yn cael ei gynnwys yn eich gwasanaethau. \n"
-"\n"
-"Sylwer bod yr holl gyfrwn \"gwe\" yn defnyddio'r ddisg caled."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16530,19 +16733,18 @@ msgstr ""
 "pecynnau yn ymddangos: Wedi i chi benderfynu ar eich dewis, cliciwch\n"
 "\"Gosod\" i estyn a gosod y pecynnau hynny neu \"Diddymu\" i beidio."
 
-#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
-#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Gadael"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
 msgstr "Myanmar"
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Gadael"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16596,7 +16798,7 @@ msgstr ""
 "Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
 "eich argraffydd(ion) ar hyn o bryd."
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication NIS"
 msgstr "Dilysu LDAP"
@@ -16618,10 +16820,20 @@ msgstr "Mae Rhannu Cysylltiad â'r Rhyngrwyd wedi ei alluogi"
 msgid "Card IO_0"
 msgstr "IO_O y cerdyn"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Disable Local Config"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "United Arab Emirates"
 msgstr "United Arab Emirates"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Gwlad Thail"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16630,18 +16842,18 @@ msgstr "IO_1 y cerdyn"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Thailand"
-msgstr "Gwlad Thail"
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr "Llwybryddion:"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr "Kazakhstan"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Write"
+msgstr "Ysgrifennu  %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16674,6 +16886,56 @@ msgid "If no port is given, 631 will be taken as default."
 msgstr ""
 "Os nad oes porth yn cael ei gynnig, bydd 631 yn cael ei gymryd fel y "
 "rhagosodedig."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu enable to select one of the six preconfigured "
+"security\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16748,6 +17010,11 @@ msgstr "Label"
 #, c-format
 msgid "Save on floppy"
 msgstr "Cadw ar ddisg meddal"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check open ports"
+msgstr "canfyddwyd ar borth %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16860,6 +17127,11 @@ msgstr "Ffrengig"
 msgid "Czech (QWERTY)"
 msgstr "Tsiec (QWERTY)"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow X Window connections"
+msgstr "Cysylltiad Winmodem l"
+
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Hardware probing in progress"
@@ -16884,7 +17156,7 @@ msgstr ""
 " (Pyrth paralel: /dev/lp0, /dev/lp1, ..., yn cyfateb i LPT1:, LPT2:, ..., "
 "argraffydd USB cyntaf: /dev/usb/lp0, ail argraffydd USB : /dev/usb/lp1, ...)."
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Nesaf"
@@ -16898,6 +17170,11 @@ msgstr "Nid oes modd gosod y cychwynnydd ar raniad %s\n"
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -16916,11 +17193,6 @@ msgstr ""
 "Croeso\n"
 "\n"
 "Mae paramedrau'r awto osod i'w cael yn yr adran ar y chwith"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Puerto Rico"
-msgstr "Puerto Rico"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16955,7 +17227,7 @@ msgstr ""
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Domain"
 msgstr "Parth NIS"
@@ -16992,19 +17264,6 @@ msgid ""
 msgstr ""
 "Dynodi dyfeisiau bras i ddyfeisiau bloc (megis dig caled rhaniadau), \n"
 "ar gyfer defnydd rhaglenni megis Oracle neu chwaraewyr DVD."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
-"Ymresymiadau: (arg, alert=1)\n"
-"\n"
-"Galluogi/Analluogi amddiffyn spwffio datrys enw. Os yw\n"
-"\\fIalert\\fP yn wir, adrodd i syslog."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -17056,6 +17315,11 @@ msgstr "Trinidad a Tobago"
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "Nid yw LPD na LPRng yn cynnal argraffyddion IPP.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Host name or IP."
+msgstr "Enw gwesteiwr"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -17080,6 +17344,11 @@ msgstr "Addasydd %s: %s"
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland Islands (Malvinas)"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Boot disk creation"
+msgstr "creu disg cychwyn"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17123,6 +17392,13 @@ msgstr ""
 "i greu mur gwarchod i amddiffyn eich peiriant rhag ymosodiadau \n"
 "o'r rhwydwaith."
 
+#: ../../network/ethernet.pm:1
+#, fuzzy, c-format
+msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
+msgstr ""
+"Pa gleient dhcp ydych chi eisiau ei ddefnyddio?\n"
+"dhcp-client yw'r rhagosodedig"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (ISCII-layout)"
@@ -17132,6 +17408,19 @@ msgstr "Tamil (cynllun TSCII)"
 #, c-format
 msgid "Mayotte"
 msgstr "Mayotte"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+"Ymresymiad: (size)\n"
+"\n"
+"Gosod maint hanes gorchymyn cragen. Gwerth -1 yn golygu diderfyn."
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "%d KB\n"
+msgstr "Maint: %d KB\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -17143,15 +17432,15 @@ msgstr "Creu disg meddal awto gosod"
 msgid "Searching for scanners ..."
 msgstr "Chwilio am sganiwyr..."
 
-#: ../../steps.pm:1
-#, c-format
-msgid "Partitioning"
-msgstr "Creu Rhanniadau"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Russia"
 msgstr "Rwsia"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Partitioning"
+msgstr "Creu Rhanniadau"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -17190,6 +17479,14 @@ msgstr "Nid oes digon o le ar gyfer awtoddynodi"
 msgid "Set root password"
 msgstr "Gosod cyfrinair gwraidd"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable IP spoofing protection"
+msgstr ""
+"Ymresymiadau: (arg, alert=1)\n"
+"\n"
+"Galluogi/Analluogi Amddiffyn spwffio IP"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -17198,6 +17495,11 @@ msgid ""
 msgstr ""
 "Nid oes gyrrwr rhydd ar gyfer eich cerdyn sain (%s) ond mae yrrwr perchnogol "
 "yn \"%s\" ."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group :"
+msgstr "grwp:"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17210,6 +17512,14 @@ msgstr ""
 #, c-format
 msgid "Internet connection configuration"
 msgstr "Ffurfweddiad cysylltiad â'r Rhyngrwyd"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+"Ymresymiadau: (name)\n"
+"\n"
+"Ychwanegu'r enw fel eithriad i drin cyfrinair yn erbyn msec."
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17235,11 +17545,6 @@ msgstr "Bengali"
 #, c-format
 msgid "Preference: "
 msgstr "Dewis"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Wizard..."
-msgstr "Dewin..."
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -17291,6 +17596,17 @@ msgstr ""
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Dangoswch y ffurfweddiad rhag wyneb cyfredol"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
+msgstr ""
+"Ymresymiadau (arg)\n"
+"\n"
+"Mae'r ymresymiad yn pennu os oes gan y defnyddiwr ganiatád i gysylltu\n"
+"gyda'r  gwasanaethwr X porth  tcp 6000 neu beidio."
 
 #: ../../help.pm:1
 #, c-format
@@ -17405,6 +17721,13 @@ msgstr "Gosodiadau"
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Nid yw IP'r gwesteiwr/rhwydwaith yn gywir.\n"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Create/Transfer backup keys for SSH"
+msgstr ""
+"Creu/Trosglwyddo\n"
+"allweddi wrth gefn ar gyfer SSH"
 
 #: ../../any.pm:1
 #, c-format
@@ -17532,6 +17855,11 @@ msgstr ""
 "\"Dim cyfineiriau\", os na fydd eich cyfrifiadur yn cael cyswllt â'r we ac "
 "rydych\n"
 "yn ymddiried yn y defnyddiwr."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Name resolution spoofing protection"
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -17721,15 +18049,15 @@ msgstr ""
 msgid "Shell"
 msgstr "Cragen"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "PCI"
-msgstr "PCI"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome a Principe"
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "PCI"
+msgstr "PCI"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -17806,6 +18134,17 @@ msgid " on parallel port #%s"
 msgstr " ar borth paralel #\"%s"
 
 #: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Arguments: (length, ndigits=0, nupper=0)\n"
+"\n"
+"Gosod lleiafswm hyd cyfrinair a lleiafswm digidau a lleiafswm llythrennau "
+"mawr."
+
+#: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
 msgstr "os wedi ei osod i iawn, gwirio pyrth agored."
@@ -17861,6 +18200,11 @@ msgstr "Cyfrifo maint rhaniad Windows"
 msgid "Italy"
 msgstr "Yr Eidal"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Cayman Islands"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17880,11 +18224,6 @@ msgstr "gwall dadosod %s: %s"
 #, c-format
 msgid "Do it!"
 msgstr "Gwna!!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cayman Islands"
-msgstr "Cayman Islands"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17981,18 +18320,7 @@ msgstr "Canfyddwyd model %s %s"
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "Mae Mandrake Linux wedi dewis y feddalwedd orau ar eich cyfer"
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"Version: %s\n"
-"Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-"\n"
-msgstr ""
-"Dyma HardDrake, offeryn ffurfweddu caledwedd Mandrake.\n"
-"Fersiwn:"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Local files"
 msgstr "Ffeiliau lleol"
@@ -18006,6 +18334,11 @@ msgstr "efallai"
 #, c-format
 msgid "Panama"
 msgstr "Panama"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "Can't open %s!"
+msgstr "Methu canfod %s ar %s"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -18091,11 +18424,6 @@ msgstr ""
 "\n"
 "Cadw ar Ddisg caled ar lwybr: %s\n"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Maint: %d KB\n"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove fonts on your system"
@@ -18122,10 +18450,10 @@ msgstr ""
 msgid "Graphical interface at startup"
 msgstr "Rhyngwyneb graffigol wrth gychwyn"
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
-msgid "Please enter the directory to save:"
-msgstr "Rhowch y cyfeiriadur i gadw iddo:"
+msgid " adsl"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -18136,6 +18464,11 @@ msgstr "Fformatio disgiau meddal derbyniol i'r gyrrwr"
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Dim digon o raniadau ar gyfer RAID lefel %d\n"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: true"
+msgstr "heb ffurfweddu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18157,6 +18490,11 @@ msgstr "Wedi cysylltu"
 msgid "Macedonian"
 msgstr "Macedonaidd"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Mali"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
@@ -18166,11 +18504,6 @@ msgstr "Rheolyddion pontydd a syatem"
 #, c-format
 msgid "/File/_Save"
 msgstr "/Ffeil/_Cawd"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Mali"
-msgstr "Mali"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -18196,6 +18529,11 @@ msgstr "Rheoli o Bell"
 #, c-format
 msgid "Please select media for backup..."
 msgstr "Dewiswch y cyfrwng ar gyfer cadw wrth gefn..."
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Wrong email"
+msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -18258,8 +18596,7 @@ msgstr ""
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Offeryn ffurfweddiad amlbwrpas Mandrake"
 
-#: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Save"
 msgstr "Gorffen"
@@ -18310,11 +18647,6 @@ msgstr "French Guiana"
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "ychwanegu rheol"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
@@ -18335,7 +18667,13 @@ msgstr "Trosglwyddo ffurfweddiad yr argraffydd"
 msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr "Ydych chi am alluogi argraffu ar yr argraffyddion enwwi'r uchod?\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of suid root files"
+msgstr ""
+"os wedi ei osod i iawn, , gwirio ychwanegu/tynnu ffeiliau gwraidd suid."
+
+#: ../../any.pm:1
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -18373,16 +18711,10 @@ msgstr "%s(Porth %s)"
 msgid "Use network connection to backup"
 msgstr "Defnyddiwch cysylltiad rhwydwaith i gadw wrth gefn"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
-msgstr ""
-"Ymresymniadau:  (arg)\n"
-"\n"
-"Galluogi/Analluogi sulogin(8 mewn defnydd defnyddiwr unigol."
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Kernel version"
+msgstr "fersiwn cnewyllyn"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -18503,10 +18835,25 @@ msgstr "Gwasanaethwr"
 msgid "Left Shift key"
 msgstr "Bysell \"Windows\" chwith"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " local network"
+msgstr "Rhwydwaith(iau) lleol "
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Dewis gwael, ceisiwch eto\n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Syslog reports to console 12"
+msgstr ""
+
+#: ../../diskdrake/smbnfs_gtk.pm:1
+#, fuzzy, c-format
+msgid "Search new servers"
+msgstr "Chwiliwch am wasanaethwyr"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18663,6 +19010,17 @@ msgstr "Yr Almaen"
 msgid "Austria"
 msgstr "Awstria"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD media size (MB)"
+msgstr "Dewiswch maint eich gofod CD/DVD"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check permissions of files in the users' home"
+msgstr ""
+"os wedi ei osod i iawn, gwirio caniatâd ffeiliau yng nghartref y defnyddiwr."
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Run \"sndconfig\" after installation to configure your sound card"
@@ -18745,10 +19103,29 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "Nid yw %s yn cael ei gynnal gan y fersiwn hwn o Mandrake Linux"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 1"
+msgstr "Lefel"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
 msgstr "Cleient DHCP"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "List users on display managers (kdm and gdm)"
+msgstr ""
+"Ymresymiadau: (arg)\n"
+"\n"
+"Caniatáu/Gwrthod rhestr defnyddwyr ar y system ar rheolwyr arddangos (kdm "
+"and gdm)."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 2"
+msgstr "Lefel"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -18759,6 +19136,21 @@ msgstr "Methodd adfer o ffeil %s: %s"
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Llygoden Logitech (cyfresol, hen fath C7)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 3"
+msgstr "Lefel"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 4"
+msgstr "Lefel"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 5"
+msgstr "Lefel"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18829,14 +19221,6 @@ msgstr "Pob cyfrifiadur pell"
 #, c-format
 msgid "Install themes"
 msgstr "Gosod themâu"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-msgstr ""
-" yn diweddaru 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft."
-"com>"
 
 #: ../../help.pm:1
 #, c-format
@@ -18956,11 +19340,6 @@ msgstr "Cytundeb trwyddedu"
 msgid "System Options"
 msgstr "Dewisiadau System"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory where backups are stored"
-msgstr "Rhowch y cyfeiriadur lle mae'r ffeiliau wrth gefn yn cael eu cadw"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
@@ -18975,6 +19354,13 @@ msgstr "Mae'r gwesteiwr ar y rhestr yn barod, does dim modd ei ychwanegu.\n"
 #, c-format
 msgid ", USB printer"
 msgstr "argraffydd USB"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Incremental backups only save files that have changed or are new since the "
+"last backup."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -19001,6 +19387,14 @@ msgstr "Llongyfarchiadau!"
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Defnyddio enw perchennog i weithredu"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow remote root login"
+msgstr ""
+"Ymredymiadau: (arg)\n"
+"\n"
+"Ganiatáu/Gwrthod mewngofnodi gwraidd pell"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -19060,6 +19454,11 @@ msgstr "Microsoft Explorer"
 #, c-format
 msgid "German (no dead keys)"
 msgstr "Almaenaidd (dim bysellau marw)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tSend mail to %s\n"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19158,6 +19557,11 @@ msgstr ""
 "Os cafodd yr argraffydd ei awtoganfod, dewiswch ef o'r rhestr ac ychwanegu "
 "enw defnyddiwr, cyfrinair a/neu grwp gwaith yn ôl yr angen."
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " cable"
+msgstr "Tabl"
+
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -19167,17 +19571,6 @@ msgstr "Defnyddiwch y lle gwag ar raniad Windows"
 #, c-format
 msgid "%s found on %s, configure it automatically?"
 msgstr "Wedi canfod %s ar %s, ei ffurfweddi'n awtomatig?"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
-msgstr ""
-"Ymresymiadau: arg)\n"
-"\n"
-"Defnyddio cyfrinair i wirio defnyddiwr."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -19190,17 +19583,6 @@ msgid "This host/network is already in the list, it cannot be added again.\n"
 msgstr ""
 "Mae'r gwesteiwr/rhwydwaith ar y rhestr yn barod, does dim modd ei "
 "ychwanegu.\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Report \n"
-"\n"
-msgstr ""
-"\n"
-"                      Adroddiad DrakBackup  \n"
-"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -19216,6 +19598,11 @@ msgstr "Papua New Guinea"
 #, c-format
 msgid "Serbian (cyrillic)"
 msgstr "Serbaidd (cyrilig)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory where backups are stored"
+msgstr "Rhowch y cyfeiriadur lle mae'r ffeiliau wrth gefn yn cael eu cadw"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -19523,16 +19910,6 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check for multisession CD"
-msgstr "Gwiriwch os ydych yn defnyddio CD amlsesiwn"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
-msgstr "defnyddiwr"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Defnyddiwch y Ddisg Caled ar gyfer cadw wrth gefn"
 
@@ -19612,6 +19989,11 @@ msgstr ""
 msgid "Detected model: %s"
 msgstr "Canfyddwyd model: %s"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" is not a valid email!"
+msgstr ""
+
 #: ../../standalone/drakedm:1
 #, c-format
 msgid ""
@@ -19627,6 +20009,11 @@ msgstr ""
 #, c-format
 msgid "if set to yes, run the daily security checks."
 msgstr "os wedi ei osod i iawn, rhedeg y gwiriadau diogelwch dyddiol."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "Rhowch enw dyfais i'w ddefnyddio ar gyfer cadw wrth gefn"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19852,6 +20239,333 @@ msgstr ""
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Casgliad o offer i ddarllen ac anfon e-bost a newyddion ac i bori'r We"
 
+#~ msgid "Please relog into %s to activate the changes"
+#~ msgstr "Ail fewn gofnodwch i %s i wireddu'r newidiadau"
+
+#~ msgid ""
+#~ "Description:\n"
+#~ "\n"
+#~ "  Drakbackup is used to backup your system.\n"
+#~ "  During the configuration you can select: \n"
+#~ "\t- System files, \n"
+#~ "\t- Users files, \n"
+#~ "\t- Other files.\n"
+#~ "\tor All your system ...  and Other (like Windows Partitions)\n"
+#~ "\n"
+#~ "  Drakbackup allows you to backup your system on:\n"
+#~ "\t- Harddrive.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
+#~ "\t- FTP.\n"
+#~ "\t- Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Tape.\n"
+#~ "\n"
+#~ "  Drakbackup allows you to restore your system to\n"
+#~ "  a user selected directory.\n"
+#~ "\n"
+#~ "  Per default all backups will be stored on your\n"
+#~ "  /var/lib/drakbackup directory\n"
+#~ "\n"
+#~ "  Configuration file:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+#~ "\n"
+#~ "Restore Step:\n"
+#~ "  \n"
+#~ "  During the restore step, DrakBackup will remove \n"
+#~ "  your original directory and verify that all \n"
+#~ "  backup files are not corrupted. It is recommended \n"
+#~ "  you do a last backup before restoring.\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Disgrifiad:\n"
+#~ "\n"
+#~ " Mae Drakbackup yn cael ei ddefnyddio i cadw\n"
+#~ " eich ffeiliau system wrth gefn.\n"
+#~ " Yn ystod y ffurfweddiad medrwch ddewis:\n"
+#~ "\t- Ffeiliau system,\n"
+#~ "\t-Ffeiliau defnyddwyr,\n"
+#~ "\t-Ffeiliau eraill.\n"
+#~ "\tneu Eich holl system...ac Arall (megis Rhaniadau Windows)\n"
+#~ "\n"
+#~ "  Mae Drackbackup yn caniatáu i chi ddefnyddio:\n"
+#~ "\t- Disg Caled.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (gyda awto gychwyn, achub ac awto osod.).\n"
+#~ "\t- FTP.\n"
+#~ "\t-Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Tâp.\n"
+#~ "\n"
+#~ "  Mae Drakbackup yn caniatáu i chi adfer eich system i\n"
+#~ "  gyfeiriadur o ddewis y defnyddiwr.\n"
+#~ "\n"
+#~ "  Yn rhagosodedig bydd ffeiliau wrth gefn yn cael eu cadw yn eich\n"
+#~ "  /var/lib/drakbackup directory\n"
+#~ "\n"
+#~ "  Ffeil ffurfweddiad:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+#~ "\n"
+#~ "\n"
+#~ "Camau wrth adfer:\n"
+#~ "  \n"
+#~ "  Yn ystod yr adfer bydd Drakbackup yn tynnu\n"
+#~ "  eich cyfeiriadur gwreiddiol a gwirio nad yw'r holl \n"
+#~ "  ffeiliau wrth gefn wedi eu llygru. Argymhellir i chi \n"
+#~ "  gadw wrth gefn cyn adfer.\n"
+#~ "\n"
+#~ "\n"
+
+#~ msgid "Please check if you want to use the non-rewinding device."
+#~ msgstr ""
+#~ "Gwiriwch os ydych am ddefnyddio'r dyfais nad yw'n mynd nôl i'e ddechrau."
+
+#~ msgid "Please enter your password"
+#~ msgstr "Rhowch eich cyfrinair"
+
+#~ msgid ""
+#~ "\n"
+#~ " Some errors during sendmail are caused by \n"
+#~ " a bad configuration of postfix. To solve it you have to\n"
+#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
+#~ "\n"
+#~ msgstr "\n"
+
+#~ msgid ""
+#~ "Please choose your CD/DVD device\n"
+#~ "(Press Enter to propogate settings to other fields.\n"
+#~ "This field isn't necessary, only a tool to fill in the form.)"
+#~ msgstr ""
+#~ "Dewiswch eich dyfais CD/DVD\n"
+#~ "(Gwasgwch Enter i drosglwyddo'r gosodiadau i feysydd eraill.\n"
+#~ "Nid yw'r maes hwn yn angenrheidiol, dim ond offeryn i lanw'r ffurflen.)"
+
+#~ msgid "Please check if you want to eject your tape after the backup."
+#~ msgstr "Gwiriwch os ydych am dynnu eich tâp ar ôl y cadw wrth gefn."
+
+#~ msgid "Please check if you want to erase your tape before the backup."
+#~ msgstr "Gwiriwch os ydych am ddileu eich tâp cyn y cadw wrth gefn."
+
+#~ msgid "Please enter the host name or IP."
+#~ msgstr "Rhowch enw'r gwesteiwr neu'r IP"
+
+#~ msgid "Please enter your login"
+#~ msgstr "Rhowch eich mewngofnod"
+
+#~ msgid ""
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+#~ msgstr ""
+#~ " Hawlfraint (C) 2001-2002 MandrakeSoft gan DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+
+#~ msgid ""
+#~ "\n"
+#~ "Restore Backup Problems:\n"
+#~ "\n"
+#~ "During the restore step, Drakbackup will verify all your\n"
+#~ "backup files before restoring them.\n"
+#~ "Before the restore, Drakbackup will remove \n"
+#~ "your original directory, and you will loose all your \n"
+#~ "data. It is important to be careful and not modify the \n"
+#~ "backup data files by hand.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Anawsterau Adfer Ffeiliau wrth gefn\n"
+#~ "\n"
+#~ "Yn ystod yr adfer bydd Drakbackup yn gwirio eich holl\n"
+#~ "ffeiliau wrth gefn cyn eu hadfer.\n"
+#~ "Cyn adfer, bydd Drakbackup yn tynnu'r cyfeiriadur\n"
+#~ "gwreiddiol, a byddwch yn colli eich holl ddata. Mae'n\n"
+#~ "bwysig eich bod yn ofalus a pheidio newid y ffeiliau\n"
+#~ "data wrth gefn gyda llaw.\n"
+
+#~ msgid ""
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ msgstr ""
+#~ " yn diweddaru 2002 MandrakeSoft by Stew Benedict <sbenedict"
+#~ "\\@mandrakesoft.com>"
+
+#~ msgid ""
+#~ "Arguments: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
+#~ "expression describing what to log (see syslog.conf(5) for more details) "
+#~ "and\n"
+#~ "dev the device to report the log."
+#~ msgstr ""
+#~ "Ymresymiadau: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Galluogi/Analluogi adroddiadau syslog i consol 12. \\fIexpr\\fP yw'r \n"
+#~ "disgrifiad o beth iw' gofnodi (gw. syslog conf(5) am wyboodaeth) a\n"
+#~ "dev y ddyfais i greu cofnod."
+
+#~ msgid "edit"
+#~ msgstr "golygu"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ " Accept/Refuse broadcasted icmp echo."
+#~ msgstr ""
+#~ "Ymredymiadau: (arg)\n"
+#~ "\n"
+#~ "Ganiatáu/Gwrthod darlledu icmp atsain."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr ""
+#~ "Ymresymiadau: (arg)\n"
+#~ "\n"
+#~ "Galluogi/Analluogi libsafe os yw ar y system."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Allow/Forbid remote root login."
+#~ msgstr ""
+#~ "Ymredymiadau: (arg)\n"
+#~ "\n"
+#~ "Ganiatáu/Gwrthod mewngofnodi gwraidd pell"
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "dewis ffeil perm i weld/golygu"
+
+#~ msgid "path"
+#~ msgstr "llwybr"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr ""
+#~ "Ymresymiadau: arg)\n"
+#~ "\n"
+#~ "Galluogi?Analluogi mewngofnodi pecynnau anarferol IPv4."
+
+#~ msgid ""
+#~ "Arguments: (arg, alert=1)\n"
+#~ "\n"
+#~ "Enable/Disable IP spoofing protection."
+#~ msgstr ""
+#~ "Ymresymiadau: (arg, alert=1)\n"
+#~ "\n"
+#~ "Galluogi/Analluogi Amddiffyn spwffio IP"
+
+#~ msgid "permissions"
+#~ msgstr "caniatadau"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable msec hourly security check."
+#~ msgstr ""
+#~ "Ymresymiadau: (arg)\n"
+#~ "\n"
+#~ "Galluogi/Analluogi gwiriad diogelwch msec bob awr."
+
+#~ msgid "delete"
+#~ msgstr "dileu"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr ""
+#~ "Ymredymiadau: (arg)\n"
+#~ "\n"
+#~ "Ganiatáu/Gwrthod negeseuon gwall IPv4 ffug."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Use password to authenticate users."
+#~ msgstr ""
+#~ "Ymresymiadau: arg)\n"
+#~ "\n"
+#~ "Defnyddio cyfrinair i wirio defnyddiwr."
+
+#~ msgid "user"
+#~ msgstr "defnyddiwr"
+
+#~ msgid ""
+#~ "Standard: This is the standard security recommended for a computer that "
+#~ "will be used to connect\n"
+#~ "               to the Internet as a client.\n"
+#~ "\n"
+#~ "High:       There are already some restrictions, and more automatic "
+#~ "checks are run every night.\n"
+#~ "\n"
+#~ "Higher:    The security is now high enough to use the system as a server "
+#~ "which can accept\n"
+#~ "              connections from many clients. If your machine is only a "
+#~ "client on the Internet, you\n"
+#~ "           should choose a lower level.\n"
+#~ "\n"
+#~ "Paranoid:  This is similar to the previous level, but the system is "
+#~ "entirely closed and security\n"
+#~ "                features are at their maximum\n"
+#~ "\n"
+#~ "Security Administrator:\n"
+#~ "               If the 'Security Alerts' option is set, security alerts "
+#~ "will be sent to this user (username or\n"
+#~ "            email)"
+#~ msgstr ""
+#~ "Safonol: Dyma'r safon diogelwch sy'n cael ei argymell ar gyfer "
+#~ "cyfrifiadur i'w ddefnyddio\n"
+#~ "              i gysylltu â'r Rhyngrwyd fel cleient.\n"
+#~ "\n"
+#~ "Uchel:      Mae rhai cyfyngiadau eisoes, ac mae gwiriadau'n cael eu "
+#~ "rhedeg bob nos.\n"
+#~ "\n"
+#~ "Uchaf:      Mae diogelwch yn ddigon uchel i ddefnyddio'r system fel "
+#~ "gwasanaethwr sy'n medru\n"
+#~ "                derbyn cysylltiadau o nifer o gleientiau. Os mai eich "
+#~ "peiriant yw'r unig gleient ar y\n"
+#~ "              Rhyngrwyd, dylech ddewis lefel is.\n"
+#~ "\n"
+#~ "Paranoia:  Mae'n debyg i'r lefel cynt ond mae'r system wedi ei gau'n "
+#~ "llwyr a nodweddion diogelwch\n"
+#~ " ar eu                   heithaf.\n"
+#~ "\n"
+#~ "Gweinyddwr Diogelwch:\n"
+#~ "                 Os yw'r dewis 'Rhybuddion Diogelwch' wedi ei ddewis, "
+#~ "bydd rhybuddion diogelwch yn cael eu\t              anfon i'r defnyddiwr "
+#~ "hwn (enw defnyddiwr neu e-bost)"
+
+#~ msgid "Expert Area"
+#~ msgstr "Maes Uwch"
+
+#~ msgid "Wizard..."
+#~ msgstr "Dewin..."
+
+#~ msgid "Country"
+#~ msgstr "Gwlad"
+
+#~ msgid "Previous"
+#~ msgstr "Cynt"
+
+#~ msgid "Please check if you are using CDRW media"
+#~ msgstr "Gwiriwch os ydych yn defnyddio cyfrwng CDRW"
+
+#~ msgid "Please check if you are using a DVDRAM device"
+#~ msgstr "Gwiriwch os ydych yn defnyddio dyfais DVDRAM"
+
+#~ msgid "Please check if you are using a DVDR device"
+#~ msgstr "Gwiriwch os ydych yn defnyddio dyfais DVDR"
+
+#~ msgid "Please check for multisession CD"
+#~ msgstr "Gwiriwch os ydych yn defnyddio CD amlsesiwn"
+
+#~ msgid "We are now going to configure the %s connection."
+#~ msgstr "Rydym am ffurfweddu cysylltiad %s"
+
+#~ msgid "Name: %s\n"
+#~ msgstr "Enw: %s\n"
+
 #~ msgid ""
 #~ "Which ISDN configuration do you prefer?\n"
 #~ "\n"
@@ -19930,9 +20644,6 @@ msgstr "Casgliad o offer i ddarllen ac anfon e-bost a newyddion ac i bori'r We"
 
 #~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 #~ msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#~ msgid "Write %s"
-#~ msgstr "Ysgrifennu  %s"
 
 #~ msgid "Copy %s to %s"
 #~ msgstr "Copïo %s i %s"

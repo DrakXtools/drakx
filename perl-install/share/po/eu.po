@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"POT-Creation-Date: 2003-08-13 03:40+0200\n"
 "PO-Revision-Date: 2002-10-13 17:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Euskara <linux-eu@chanae.alphanet.ch>\n"
@@ -25,10 +25,29 @@ msgstr "Partizioak eskaneatzen muntatze-puntuak aurkitzeko"
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
+"0/1 for Local Config...\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Configuration changed - restart clusternfs/dhcpd?"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t\tErase=%s"
 msgstr "\t\tErase=%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Differential backups only save files that have changed or are new since the "
+"original 'base' backup."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -79,6 +98,13 @@ msgstr "\"%s\" CUPS zerbitzarian"
 msgid "Post-install configuration"
 msgstr "Instalazio-ondorengo konfigurazioa"
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
+msgstr ""
+
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``%s'' instead"
@@ -127,6 +153,11 @@ msgstr "Erdialdeko Afrikar Errepublika"
 msgid "Gateway device"
 msgstr "Atebide-gailua"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Advanced preferences"
+msgstr "Aukera aurreratuak"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Net Method:"
@@ -137,10 +168,20 @@ msgstr "Sareko Metodoa:"
 msgid "Ethernetcard"
 msgstr "Ethernet txartela"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "If set, send the mail report to this email address else send it to root"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametroak"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "no"
+msgstr "Informazioa"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -195,6 +236,11 @@ msgstr "Bielorrusia"
 msgid "Error writing to file %s"
 msgstr "Errorea %s fitxategian idaztean"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Report check result to syslog"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -245,6 +291,11 @@ msgstr ""
 "Drakbackup ekintzak %s bitartez:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "yes"
+msgstr "Bai"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
@@ -293,6 +344,11 @@ msgstr "%s detektatua"
 msgid "No CD device defined!"
 msgstr "Ez da CD gailurik definitu!"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "\tUse .backupignore files\n"
+msgstr "Erabili kuota babeskopia-fitxategientzat"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (phonetic)"
@@ -307,6 +363,11 @@ msgstr "DHCP-ren eremu hasiera"
 #, c-format
 msgid "256 kB"
 msgstr "256 kB"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Don't rewind tape after backup"
+msgstr "Erabili zinta babeskopia egiteko"
 
 #: ../../any.pm:1
 #, c-format
@@ -325,6 +386,11 @@ msgstr ""
 msgid "Tape"
 msgstr "Zinta"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Malaysia"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning network..."
@@ -338,11 +404,6 @@ msgid ""
 msgstr ""
 "Aukera honekin /etc direktorioaren edozein bertsio leheneratu\n"
 "ahal izango duzu."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Malaysia"
-msgstr "Malaysia"
 
 #: ../../standalone/drakedm:1
 #, fuzzy, c-format
@@ -374,6 +435,16 @@ msgstr ""
 msgid "Soundcard"
 msgstr "Soinu-txartela"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Search for files to restore"
+msgstr "Hautatu beste euskarri bat leheneratzeko"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Luxenburgo"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -388,23 +459,10 @@ msgstr ""
 msgid "Level %s\n"
 msgstr "%s maila\n"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Luxembourg"
-msgstr "Luxenburgo"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Daemon Report\n"
-"\n"
-"\n"
-msgstr ""
-"\n"
-"                      DrakBackup Daemon-aren berri-ematea\n"
-"\n"
-"\n"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac (phonetic)"
+msgstr "armeniarra (fonetikoa)"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -461,6 +519,11 @@ msgstr "Pasahitza (berriro)"
 msgid "Search installed fonts"
 msgstr "Bilatu instalatutako letra-tipoak"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default desktop"
+msgstr "Lehenetsia"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
@@ -485,6 +548,13 @@ msgid ""
 msgstr ""
 "Hondatutako datuen zerrenda:\n"
 "\n"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Can only be mounted explicitly (i.e.,\n"
+"the -a option will not cause the file system to be mounted)."
+msgstr ""
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -551,15 +621,6 @@ msgstr "Kendu modulua"
 msgid "Password"
 msgstr "Pasahitza"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
-"\\fP."
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
@@ -615,80 +676,9 @@ msgid "/Autodetect _jazz drives"
 msgstr "Auto-detektatuta"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Description:\n"
-"\n"
-"  Drakbackup is used to backup your system.\n"
-"  During the configuration you can select: \n"
-"\t- System files, \n"
-"\t- Users files, \n"
-"\t- Other files.\n"
-"\tor All your system ...  and Other (like Windows Partitions)\n"
-"\n"
-"  Drakbackup allows you to backup your system on:\n"
-"\t- Harddrive.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup allows you to restore your system to\n"
-"  a user selected directory.\n"
-"\n"
-"  Per default all backups will be stored on your\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"Restore Step:\n"
-"  \n"
-"  During the restore step, DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. It is recommended \n"
-"  you do a last backup before restoring.\n"
-"\n"
-"\n"
+#, c-format
+msgid "Store the password for this system in drakbackup configuration."
 msgstr ""
-"Azalpena:\n"
-"\n"
-"  Drakbackup zure sistemaren babeskopia egiteko erabiltzen da.\n"
-"  konfigurazioan zehar hauta ditzakezu: \n"
-"\t- Sistema-fitxategiak, \n"
-"\t- Erabiltzaile-fitxategiak, \n"
-"\t- Bestelako fitxategiak.\n"
-"\tedo Sistema osoa ...  eta Bestelakoa (Windows partizioetan bezala)\n"
-"\n"
-"  Drakbackup-en bidez, babeskopiak egiteko erabil daiteke:\n"
-"\t- Disko gogorra.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM.\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Zinta.\n"
-"\n"
-"  Drakbackup erabiliz, zure sistema hautatutako\n"
-"  direktorio batean lehenera dezakezu.\n"
-"\n"
-"  Lehenespen gisa, babeskopia guztiak \n"
-"  /var/lib/drakbackup direktorioan gordeko dira\n"
-"\n"
-"  Konfigurazio-fitxategia:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"\n"
-"Leheneratze-urratsa:\n"
-"  \n"
-"  Leheneratze-urratsean, DrakBackup.ek kendu egingo du\n"
-"  jatorrizko direktorioa eta babeskopia-fitxategiak ez\n"
-"  daudela hondatuta egiaztatuko du. Leheneratu aurretik\n"
-"  babeskopia egitea gomendatzen da.\n"
-"\n"
-"\n"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -920,6 +910,11 @@ msgstr ""
 "bete behar duzu.\n"
 "Lizentzia honetako baldintzak Frantziako legeen araberakoak dira.\n"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default user"
+msgstr "Inprimagailu lehenetsia"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
@@ -963,6 +958,11 @@ msgstr "Ez inprimatu proba-orririk"
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s already in use\n"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
@@ -1002,141 +1002,9 @@ msgstr ""
 msgid "Show only for the selected day"
 msgstr "Erakutsi bakarrik hautatutako egunerako"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
+msgid "\tLimit disk usage to %s MB\n"
 msgstr ""
 
 #: ../../Xconfig/card.pm:1
@@ -1197,6 +1065,17 @@ msgstr ""
 msgid "<control>Q"
 msgstr "<control>Q"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Please be sure that the cron daemon is included in your services. \n"
+"\n"
+"Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Mesedez ziurtatu cron deabrua zure zerbitzuen artean dagoen.\n"
+"\n"
+"Ohartu oraingoz 'sareko' euskarri guztiek disko zurruna erabiltzen dutela."
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Unknown"
@@ -1236,24 +1115,6 @@ msgstr "%s aukerak zenbakia izan behar du!"
 msgid "Notice"
 msgstr "Oharra"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
-"allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1292,93 +1153,8 @@ msgstr "Interfazea"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" - Backup System Files:\n"
-"       \n"
-"\tThis option allows you to backup your /etc directory,\n"
-"\twhich contains all configuration files. Please be\n"
-"\tcareful during the restore step to not overwrite:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup User Files: \n"
-"\n"
-"\tThis option allows you select all users that you want to \n"
-"\tbackup. To preserve disk space, it is recommended that\n"
-"\tyou do not include the web browser's cache.\n"
-"\n"
-" - Backup Other Files: \n"
-"\n"
-"\tThis option allows you to include additional data to save.\n"
-"\tIf you want to add individual files, select them from the\n"
-"\trighthand 'Files' list pane.  To add directories, enter the \n"
-"\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-"\tand at that point click 'OK' without selecting any files.\n"
-" \n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"aukeren azalpena:\n"
-"\n"
-" - Sistema-fitxategien babeskopia:\n"
-"       \n"
-"\tAukera honen bidez konfigurazio-fitxategi guztiak dituen\n"
-"\t/etc direktorioaren babeskopia egin daiteke. Kontuz ibili\n"
-"\tleheneratze-urratsean, eta ez gainidatzi hauek:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Erabiltzaile-fitxategien babeskopia: \n"
-"\n"
-"\tAukera honen bidez, babeskopia egiteko erabiltzaileak\n"
-"\thauta ditzakezu.\n"
-"\tDisko-lekua gordetzeko, web arakatzailearen cachea ez \n"
-"\tsartzea komeni da.\n"
-"\n"
-" - Bestelako fitxategien babeskopia: \n"
-"\n"
-"\tAukera honen bidez, gordetzeko datu gehiago gehituko dituzu.\n"
-"\tBeste babeskopiekin ezin da oraindik babeskopia inkrementala hautatu.\t\t\n"
-" \n"
-" - Babeskopia inkrementalak:\n"
-"\n"
-"\tBabeskopia-aukera ahaltsuena da. Aukera honen\n"
-"\tbidez, lehen aldian datu guztien babeskopia egin\n"
-"\tdaiteke, eta gero aldatuenak bakarrik.\n"
-"\tGero, leheneratze-urratsean, data jakin bateko\n"
-"\tdatuak leheneratu ahal izango dituzu.\n"
-"\tAukera hau hautatuta ez baduzu, babeskopia zahar guztiak\n"
-"\tezabatzen dira babeskopia bakoitza egin aurretik.    \n"
-"\n"
-"\n"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
-msgstr ""
+msgid "Multisession CD"
+msgstr " (saio-anitza)"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1434,6 +1210,11 @@ msgstr "Suitza"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "You must be root to read configuration file. \n"
+msgstr "Egin babeskopia konfigurazio-fitxategitik"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1522,6 +1303,11 @@ msgstr "Konfiguratu Interneterako sarbidea..."
 msgid "Norway"
 msgstr "Norvegia"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Delete profile"
+msgstr "Ezabatu profila..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Danish"
@@ -1560,6 +1346,11 @@ msgstr ""
 "hautatako pakete bat beste CD-ROM batean kokatuta dagoen edo ez, eta uneko\n"
 "CDa atera eta beste bat sartzeko eskatuko dizu behar izan ahala."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "When checked, owner and group won't be changed"
+msgstr "Markatuta dagoenean, jabea eta taldea ez dira aldatuko"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
@@ -1570,15 +1361,15 @@ msgstr ""
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
-msgid "No NIC selected!"
-msgstr "Ez da nic batere hautatu!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard eta Jan Mayen uharteak"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "No NIC selected!"
+msgstr "Ez da nic batere hautatu!"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1649,6 +1440,17 @@ msgstr ""
 "Zure sistemarako abioko disko bat sortu nahi duzu?\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Daemon Report\n"
+msgstr ""
+"\n"
+"                      DrakBackup Daemon-aren berri-ematea\n"
+"\n"
+"\n"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1679,15 +1481,15 @@ msgstr "Erabili babeskopia inkrementalak (ez ordeztu kopia zaharrak)"
 msgid "First sector of drive (MBR)"
 msgstr "Unitateko lehen sektorea (MBR)"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Joystick"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1704,6 +1506,11 @@ msgstr ""
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "gailu hori gobernatzen duen GNU/Linux kernelaren modulua"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDR device"
+msgstr "gailua"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1714,6 +1521,11 @@ msgstr "Partizio-taula berreskuratzen saiatzen"
 msgid "Option %s must be an integer number!"
 msgstr "%s aukerak osoko zenbakia izan behar du!"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Use password to authenticate users"
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -1723,12 +1535,20 @@ msgstr ""
 "Zuk bete beharreko sarrerak:\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For backups to other media, files are still created on the hard drive, then "
+"moved to the other media.  Enabling this option will remove the hard drive "
+"tar files after the backup."
+msgstr ""
+
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Unable to start live upgrade !!!\n"
 msgstr "Ezin da bertsio-berritzea abiarazi!!!\n"
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../install_steps_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Name: "
 msgstr "Izena: "
@@ -1753,12 +1573,21 @@ msgstr "MandrakeSoft denda ofiziala"
 msgid "Resizing"
 msgstr "Tamaina aldatzen"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter the maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Adierazi Drakbackup-en gehieneko\n"
+" tamaina "
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Cable connection"
 msgstr "Kable-konexioa"
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr "Erabiltzailea"
@@ -1801,6 +1630,11 @@ msgstr "mkraid-ek huts egin du"
 msgid "Button 3 Emulation"
 msgstr "3. botoiaren emulazioa"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check additions/removals of sgid files"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sending files..."
@@ -1815,11 +1649,6 @@ msgstr "Israeldarra (fonetikoa)"
 #, c-format
 msgid "access to rpm tools"
 msgstr "rpm tresnen atzipena"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr "editatu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1902,6 +1731,16 @@ msgstr ""
 msgid "Harddrake2 version %s"
 msgstr "Harddrake2 bertsioa %s"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Preferences"
+msgstr "Hobespena: "
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Swazilandia"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -1917,20 +1756,15 @@ msgstr "Aukeratu kolorea"
 msgid "Dominican Republic"
 msgstr "Dominikar errepublika"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Swaziland"
-msgstr "Swazilandia"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac"
+msgstr "Surinam"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using CDRW media"
-msgstr "Hautatu CDRW euskarria erabiltzen baduzu"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -1951,6 +1785,11 @@ msgstr ""
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Erabili %c eta %c teklak zein sarrera nabarmenduko den hautatzeko."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../mouse.pm:1
 #, c-format
@@ -2015,6 +1854,11 @@ msgstr "Proba-orria(k) inprimatzen..."
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Jadanik badago %s muntatze-puntua duen partizio bat\n"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable msec hourly security check."
+msgstr ""
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -2177,35 +2021,6 @@ msgstr "Zure aukera? (%s lehenetsia) "
 msgid "Trouble shooting"
 msgstr ""
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid " / Region"
-msgstr "Reunion"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"The classic bug sound tester is to run the following commands:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
-"by default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
-"currently uses\n"
-"\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services're configured to be run on\n"
-"initlevel 3\n"
-"\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -2237,11 +2052,6 @@ msgstr ""
 #, c-format
 msgid "Ireland"
 msgstr "Irlanda"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "kernel version"
-msgstr "nukleo-bertsioa"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2310,12 +2120,24 @@ msgstr "Morroiaren konfigurazioa"
 msgid "Autoprobe"
 msgstr "Autoproba"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup system files..."
 msgstr "Sistema-fitxategien babeskopia"
 
-#: ../../install_any.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Ezin da difusioa erabili NIS domeinurik gabe"
@@ -2324,6 +2146,11 @@ msgstr "Ezin da difusioa erabili NIS domeinurik gabe"
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "\"%s\" inprimagailua ezabatzen..."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Shell history size"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -2505,6 +2332,13 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Onartu OKI 4w eta winprinter bateragarriak."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Files or wildcards listed in a .backupignore file at the top of a directory "
+"tree will not be backed up."
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -2549,6 +2383,11 @@ msgstr ""
 "Sarerako sarbidea ez dago martxan eta ezin da abiarazi. Begiratu "
 "konfigurazioa eta hardwarea ondo dauden. Gero saiatu berriro urruneko "
 "inprimagailua konfiguratzen."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2747,6 +2586,11 @@ msgstr "Ez da euskarri ezabagarria!"
 msgid "Terminal-based"
 msgstr "Terminalean oinarritua"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable IP spoofing protection."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
@@ -2825,15 +2669,15 @@ msgstr "Europako protokoloa (EDSS1)"
 msgid "Video mode"
 msgstr "Bideo modua"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "Please enter your email address below "
-msgstr "Mesedez sartu zure posta-e helbidea azpian "
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Oman"
 msgstr "Oman"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Please enter your email address below "
+msgstr "Mesedez sartu zure posta-e helbidea azpian "
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
@@ -2855,7 +2699,7 @@ msgstr "Tamaina berria MBtan: "
 msgid "Partition table type: %s\n"
 msgstr "Partizio-taularen mota: %s\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "windowsen Autentifikazio Domeinua"
@@ -2902,6 +2746,30 @@ msgstr ""
 msgid "Sending Speed:"
 msgstr "Fitxategiak bidaltzen..."
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"The classic bug sound tester is to run the following commands:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses\n"
+"by default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
+"currently uses\n"
+"\n"
+"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+"loaded or not\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
+"tell you if sound and alsa services're configured to be run on\n"
+"initlevel 3\n"
+"\n"
+"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
@@ -2917,6 +2785,11 @@ msgstr "Posta alerta konfigurazioa"
 msgid "Tokelau"
 msgstr "Tokelau"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Matching"
+msgstr "bat badatoz"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -2931,15 +2804,6 @@ msgstr "Bertsioa: "
 #, c-format
 msgid "Connection speed"
 msgstr "Konexioaren abiadura"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter your CD Writer device name\n"
-" ex: 0,1,0"
-msgstr ""
-"Adierazi CD idazgailuaren gailu-izena \n"
-" adib.: 0,1,0"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3032,12 +2896,9 @@ msgstr "espainiarra"
 msgid "Start"
 msgstr "Hasi"
 
-#: ../../security/help.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
+msgid "Direct root login"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -3100,6 +2961,11 @@ msgstr "Fitxategi-hautapena"
 msgid "CUPS"
 msgstr "CUPS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase tape before backup"
+msgstr "Erabili zinta babeskopia egiteko"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Run config tool"
@@ -3134,15 +3000,15 @@ msgstr ""
 "named (BIND) domeinu-izenen zerbitzari bat (DNS) da, ostalari-izenak ebatzi "
 "eta IP helbide bihurtzeko erabiltzen dena."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr "Deskonektatu..."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
 msgstr "Santa Luzia"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
+msgstr "Deskonektatu..."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -3172,6 +3038,13 @@ msgstr ""
 #, c-format
 msgid "Package Group Selection"
 msgstr "Pakete-taldearen hautapena"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"Allow local hardware\n"
+"configuration."
+msgstr "Birkonfigurazio automatikoa"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3239,6 +3112,11 @@ msgstr "Egiaztatu %s gailuak euskarria baduela"
 #, c-format
 msgid "Enable multiple profiles"
 msgstr "Gaitu profil anitzak"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Do not interpret character or block special devices on the file system."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3353,11 +3231,6 @@ msgstr "Konfiguratu modulua"
 msgid "Cocos (Keeling) Islands"
 msgstr "Cocos Keeling uharteak"
 
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Disconnecting from the Internet "
-msgstr "Konektatu Internetekin"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
@@ -3382,15 +3255,6 @@ msgstr "Armenia"
 #, c-format
 msgid "Fiji"
 msgstr "Fiji"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -3451,6 +3315,11 @@ msgstr "Pasahitzik ez"
 #, c-format
 msgid "Nigeria"
 msgstr "Nigeria"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires hostname...\n"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3597,6 +3466,11 @@ msgstr ""
 msgid "Romania"
 msgstr "Errumania"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group"
+msgstr "taldea"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "choose device"
@@ -3624,7 +3498,7 @@ msgstr "alemana"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
 msgstr "Hurrengoa ->"
@@ -3663,6 +3537,11 @@ msgstr "Ginea Bissau"
 #, c-format
 msgid "Horizontal refresh rate"
 msgstr "Freskatze-maiztasun horizontala"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Edit"
+msgstr "Irten"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3840,11 +3719,6 @@ msgstr "Abortatu"
 msgid "No password prompt on %s at port %s"
 msgstr "Pasahitz eskaririk ez %s-n %s portuan"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to use the non-rewinding device."
-msgstr "Mesedez markatu rebobinatzen ez den gailua erabiltzeko."
-
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Usage of remote scanners"
@@ -3905,20 +3779,15 @@ msgstr "Sagua"
 msgid "not enough room in /boot"
 msgstr "ez dago nahiko leku /boot-en"
 
-#: ../../harddrake/sound.pm:1
+#: ../../lang.pm:1
 #, c-format
-msgid "Choosing an arbitratry driver"
-msgstr ""
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Ostalari-izena"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Liechtenstein"
-msgstr "Liechtenstein"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4054,6 +3923,11 @@ msgstr ""
 "egin klik \"Inprimatu aukeren zerrenda\" botoian.%s%s\n"
 "\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Saudi Arabia"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4073,11 +3947,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Inprimagailua"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Saudi Arabia"
-msgstr "Saudi Arabia"
 
 #: ../../services.pm:1
 #, c-format
@@ -4139,14 +4008,6 @@ msgstr ""
 msgid "Restarting printing system..."
 msgstr "Inprimatze-sistema berrabiarazten ..."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -4194,6 +4055,11 @@ msgstr ""
 #, c-format
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "LiLo eta Bootsplash gai instalazio arrakastatsua"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Set password expiration and account inactivation delays"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4265,6 +4131,11 @@ msgstr "HardDrake"
 #, c-format
 msgid "new"
 msgstr "berria"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -4461,14 +4332,6 @@ msgstr ""
 msgid "Argentina"
 msgstr "Argentina"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -4483,6 +4346,11 @@ msgstr "Segurtasun-maila:"
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Muntatzen-puntuek / batez hasi behar dute"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD device"
+msgstr "Mesedez hautatu zure CD/DVD euskarri neurria"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4503,15 +4371,6 @@ msgstr "Yemen"
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Produktu hau MandrakeStore webgunean eskuragarri dago"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the maximum size\n"
-" allowed for Drakbackup"
-msgstr ""
-"Adierazi Drakbackup-en gehieneko\n"
-" tamaina "
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -4570,28 +4429,15 @@ msgstr ""
 "Zure txartelak 3D hardware-azelerazioaren euskarria izan dezake XFree %s(r)"
 "ekin."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please choose your CD/DVD media size (Mb)"
-msgstr "Mesedez hautatu zure CD/DVD euskarri neurria"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Expert Area"
-msgstr "Aditu area"
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
 msgstr "Aukeratu monitorea"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Mask"
+msgstr "Pakete txarra"
 
 #: ../../any.pm:1
 #, c-format
@@ -4765,6 +4611,11 @@ msgstr "Sistemaren babeskopia "
 msgid "Test pages"
 msgstr "Proba-orriak"
 
+#: ../../diskdrake/interactive.pm:1
+#, fuzzy, c-format
+msgid "Logical volume name "
+msgstr "Fitxategi lokalak"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4788,6 +4639,11 @@ msgstr "TCP/Socket inprimagailuaren aukerak"
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Txartelaren mem (DMA)"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnecting from Internet "
+msgstr "Konektatu Internetekin"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -4863,6 +4719,11 @@ msgstr "Ktrl eta Alt teklak batera"
 msgid "United States"
 msgstr "Estatu Batuak"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "User umask"
+msgstr "Erabiltzaileak"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
@@ -4896,6 +4757,11 @@ msgstr ""
 msgid "NTP Server"
 msgstr "NTP Zerbitzaria"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Sulogin(8) in single user level"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Load/Save on floppy"
@@ -4920,11 +4786,6 @@ msgstr "%d segundo"
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Aukeratu modema konektatuta dagoen serieko ataka."
-
-#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Country"
-msgstr "Estatua:"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -4955,6 +4816,11 @@ msgstr "Bidea edo Modulua behar da"
 #, c-format
 msgid "Advanced Options"
 msgstr "Aukera aurreratuak"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "View Configuration"
+msgstr "Konfigurazioa"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5169,6 +5035,22 @@ msgstr ""
 msgid "Slovenian"
 msgstr "Esloveniarra"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
+msgstr ""
+
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Libya"
@@ -5209,14 +5091,6 @@ msgstr "Ez dakit nola formateatu %s %s motan"
 msgid "Model"
 msgstr "Eredua"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "USB printer #%s"
@@ -5246,16 +5120,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Modem"
 msgstr "Eredua"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -5295,6 +5159,11 @@ msgstr ""
 "zure jakinduria elkarbanatu eta besteei lagundu lerroko euskarri teknikoko "
 "webguneetan Aditu ezaguna bilakatuz:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "No password aging for"
+msgstr "Pasahitzik ez"
+
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
 msgid ""
@@ -5309,6 +5178,11 @@ msgstr ""
 msgid "Automatically find available printers on remote machines"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Ekialdeko Timor"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5318,24 +5192,20 @@ msgstr ""
 "\n"
 "- Gorde Zintara gailu honetan: %s"
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Login name"
+msgstr "Domeinu-izena:"
+
+#: ../../security/l10n.pm:1
 #, c-format
-msgid "East Timor"
-msgstr "Ekialdeko Timor"
+msgid "Report unowned files"
+msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Del profile..."
 msgstr "Ezabatu profila..."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5397,6 +5267,11 @@ msgstr "Aukeratu hizkuntza"
 msgid "Removing %s"
 msgstr "%s kentzen"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "%s not found...\n"
+msgstr "%s-k ez du erantzuten"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
@@ -5420,6 +5295,11 @@ msgstr ""
 #, c-format
 msgid "Start sector: "
 msgstr "Hasierako sektorea: "
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Irakurketa-soilik"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5573,6 +5453,11 @@ msgstr ""
 msgid "Network Options"
 msgstr "Sareko Aukerak"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable msec hourly security check"
+msgstr ""
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid ""
@@ -5615,18 +5500,21 @@ msgstr ""
 msgid "New printer name"
 msgstr "Inprimagailu-izen berria"
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Allow an ordinary user to mount the file system. The\n"
+"name of the mounting user is written to mtab so that he can unmount the "
+"file\n"
+"system again. This option implies the options noexec, nosuid, and nodev\n"
+"(unless overridden by subsequent options, as in the option line\n"
+"user,exec,dev,suid )."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Ekuatore Ginea"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5673,13 +5561,12 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Other (not drakbackup) keys in place already"
 msgstr ""
+"Beste (drakbackup ez)\n"
+"giltzak bere tokian dagoeneko"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5748,6 +5635,169 @@ msgid ""
 "information from the server(s)."
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"drakTermServ Overview\n"
+"\t\t\t   \n"
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t\t#hdw_config                true;\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating seperate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login priviledges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured.\n"
+"\t\t\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -5814,15 +5864,15 @@ msgstr "Amaitu"
 msgid "Show automatically selected packages"
 msgstr "Erakutsi automatikoki hautatutako paketeak"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "CPU flags reported by the kernel"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
 msgstr "Togo"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "CPU flags reported by the kernel"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5876,6 +5926,11 @@ msgstr "AEB (kablea-hrc)"
 msgid "Journalised FS"
 msgstr "Journalised FS"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Ethernet cards promiscuity check"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Guatemala"
@@ -5923,6 +5978,11 @@ msgstr ""
 "Hautatu Ados zure konfigurazioa mantentzeko, edo hautatu Utzi Internet eta "
 "Sare-konexioa birkonfiguratzeko.\n"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Run the daily security checks"
+msgstr ""
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Keyboard layout: %s\n"
@@ -5948,6 +6008,11 @@ msgid ""
 msgstr ""
 "Network File System (NFS), SMB (Lan Manager/Windows), eta NCP \n"
 "(NetWare) muntatze-puntu guztiak muntatu eta desmuntatzen ditu."
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Launch the wizard"
+msgstr "Egin klik hemen morroia abiarazteko ->"
 
 #: ../../harddrake/data.pm:1
 #, fuzzy, c-format
@@ -5983,6 +6048,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
 msgstr "Ez da zinta etiketa zuzena. Zinta %s etiketa dauka."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6098,6 +6170,13 @@ msgstr "XFree-ren zein konfigurazio izan nahi duzu?"
 msgid "More"
 msgstr "Gehiago"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -"
+"scanbus' would also show you the device number."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -6117,6 +6196,13 @@ msgstr ""
 #, c-format
 msgid "Account Password"
 msgstr "Kontuaren pasahitza"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -6228,6 +6314,11 @@ msgstr "Inprimatzeko aukeren zerrenda"
 msgid "The change is done, but to be effective you must logout"
 msgstr "Aldaketa egin da, baina, eragina izan dezan, saioa amaitu behar duzu"
 
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Country / Region"
+msgstr "Estatua"
+
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Search servers"
@@ -6252,6 +6343,11 @@ msgstr ""
 msgid "Cd-Rom labeled \"%s\""
 msgstr "\"%s\" etiketadun CDROMa"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CDRW media"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6275,6 +6371,11 @@ msgstr ""
 msgid "Turn your computer into a reliable server"
 msgstr "Bihurtu zure makina zerbitzari fidagarria"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check empty password in /etc/shadow"
+msgstr ""
+
 #: ../../network/network.pm:1
 #, c-format
 msgid " (driver %s)"
@@ -6293,6 +6394,11 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Ez dakit"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6327,6 +6433,11 @@ msgstr ""
 "\n"
 "Jarraitu nahi duzu ?"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Telugu"
+msgstr "Tokelau"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -6344,6 +6455,11 @@ msgstr ""
 #, c-format
 msgid "Post Uninstall"
 msgstr "Posta-desinstalazioa"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Connecting to Internet "
+msgstr "Konektatu Internetekin"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6407,6 +6523,11 @@ msgstr ""
 "\n"
 "Zure Sare/Internet sarbidea drakconnect erabiliz konfiguratu duzula\n"
 "ziurtatu aurrera egin aurretik."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept broadcasted icmp echo"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -6499,6 +6620,11 @@ msgid ""
 "present on your system, you can click on the button and choose another\n"
 "driver."
 msgstr ""
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the root umask."
+msgstr "Ezarri root-aren pasahitza"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6611,10 +6737,14 @@ msgid ""
 "testing] [-v|--version] "
 msgstr ""
 
-#: ../../standalone/XFdrake:1
-#, c-format
-msgid "Please relog into %s to activate the changes"
-msgstr "Hasi berriro saioa %s(e)n aldaketak aktibatzeko"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Adierazi Drakbackup-en gehieneko\n"
+" tamaina "
 
 #: ../../my_gtk.pm:1
 #, c-format
@@ -6646,6 +6776,18 @@ msgstr "Martinika"
 msgid "HardDrive / NFS"
 msgstr "HardDrive / NFS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Old user list:\n"
+msgstr ""
+"\n"
+"- Erabiltzaile-fitxategiak:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search Backups"
+msgstr ""
+
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "a number"
@@ -6674,30 +6816,20 @@ msgstr "Alerta jasoko duzu hautatutako zerbitzuetakoren bat gelditzen bada"
 msgid "Filesystem types:"
 msgstr "Fitxategi-sistemen motak:"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on HP JetDirect"
-msgstr ", funtzio anitzeko gailua - HP JetDirect"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Iparraldeko Mariana uharteak"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on HP JetDirect"
+msgstr ", funtzio anitzeko gailua - HP JetDirect"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "none"
 msgstr "bat ere ez"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
-msgstr "Erabiltzailea :"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your password"
-msgstr "Sartu pasahitza"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -6713,11 +6845,6 @@ msgstr ""
 msgid "Floppy"
 msgstr "Abiapen Disketea"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your RW media (1st Session)"
-msgstr "Mesedez markatu zure RW eukarria ezabatu nahi baduzu (1. saioa)"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -6727,6 +6854,11 @@ msgstr "Ghostscript erreferentzia"
 #, c-format
 msgid "Bootloader"
 msgstr "Abioko kargatzailea"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize all services controlled by tcp_wrappers"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6966,11 +7098,6 @@ msgstr "Soinu txartel honentzako gidari alternatiboen zerrenda"
 msgid "Gateway"
 msgstr "Atebidea"
 
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Scanner sharing"
-msgstr "Fitxategi-konpartitzea"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
@@ -6980,6 +7107,11 @@ msgstr "Tonga"
 #, c-format
 msgid "Tunisia"
 msgstr "Tunisia"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Scanner sharing"
+msgstr "Fitxategi-konpartitzea"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -6992,19 +7124,15 @@ msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
 msgstr "XawTV ez dago instalatuta!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Create/Transfer\n"
-"backup keys for SSH"
-msgstr ""
-"Sortu/Transferitu\n"
-"babeserako giltzak SSH-rentzako"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7015,6 +7143,11 @@ msgstr "Ez sartu fitxategi kritikoak (passwd, group, fstab)"
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "dev paketean erabiltzen den gailu estatikoaren izen zaharra"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable the logging of IPv4 strange packets"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -7059,6 +7192,11 @@ msgstr ""
 " Klikatu \"Hurrengoa\" prest zaudenean, eta \"Etsi\" zure inprimagailua "
 "orain ezarri nahi ez duzunean."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Greek (polytonic)"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
@@ -7069,11 +7207,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Connection Time: "
 msgstr "Konexio-mota: "
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "hautatu ikusi/editatzeko fitxategia"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -7119,6 +7252,13 @@ msgid ""
 msgstr ""
 "Instalatu ondoren erabilgarri egongo diren beste hizkuntza batzuk aukera "
 "ditzakezu"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Directory (or module) to put the backup on this host."
+msgstr ""
+"Mesedez sartu direktorioa (edo modulua) babes-kopia\n"
+" ostalari honetan jartzeko."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7193,15 +7333,15 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Txartel grafikoa: %s\n"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept icmp echo"
+msgstr ""
+
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using a DVDRAM device"
-msgstr "Mesedez markatu DVDRAM gailua erabiltzen ari bazara"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7246,6 +7386,11 @@ msgstr ""
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Inprimaketa/Argazki Txartelen Sarrera \"%s\"-n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Daily security check"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7352,21 +7497,6 @@ msgstr ""
 msgid "Choose packages to install"
 msgstr "Aukeratu instalatu beharreko paketeak"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-" Some errors during sendmail are caused by \n"
-" a bad configuration of postfix. To solve it you have to\n"
-" set myhostname or mydomain in /etc/postfix/main.cf\n"
-"\n"
-msgstr ""
-"\n"
-" Posta bidaltzean izandako errore batzuk postfix gaizki \n"
-" konfiguratuta dagoelako izan dira. Konpontzeko, \n"
-" myhostname edo mydomain ezarri behar duzu hemen: /etc/postfix/main.cf\n"
-"\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -7410,6 +7540,11 @@ msgstr "Bhutan"
 msgid "Network interface"
 msgstr "Sare-interfazea"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet failed."
+msgstr "Konektatu Internetekin"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Reading printer data..."
@@ -7429,16 +7564,6 @@ msgstr "Konektatu gabe"
 #, c-format
 msgid "Greek"
 msgstr "Grekoa"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
-"\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -7472,15 +7597,15 @@ msgstr "Gaitu OF abiaraztea?"
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Ezin da JFS erabili 16MB baino gutxiagoko partizioetarako"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase your RW media (1st Session)"
+msgstr "Mesedez markatu zure RW eukarria ezabatu nahi baduzu (1. saioa)"
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitorearen FreskBert: %s\n"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr "bidea"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -7495,6 +7620,11 @@ msgid ""
 "%s\n"
 "Try to change some parameters"
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "User :"
+msgstr "Erabiltzailea :"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7691,18 +7821,23 @@ msgstr ", \"%s\" ostalaria, %s protua"
 msgid "Monaco"
 msgstr "Monako"
 
-# #this syntax doesn't work yet in perl :-(
-# #msgid "%s formatting of %s failed"
-# #msgstr "%2$s(r)i %1$s formatua emateak huts egin du"
-#: ../../fs.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid "%s formatting of %s failed"
-msgstr "%s %s(r)i formatua emateak huts egin du"
+msgid "Do not send mails when uneeded"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Partizioak huts egin du: %s"
+
+# #this syntax doesn't work yet in perl :-(
+# #msgid "%s formatting of %s failed"
+# #msgstr "%2$s(r)i %1$s formatua emateak huts egin du"
+#: ../../fs.pm:1 ../../swap.pm:1
+#, c-format
+msgid "%s formatting of %s failed"
+msgstr "%s %s(r)i formatua emateak huts egin du"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -7769,6 +7904,11 @@ msgstr "Hegoafrika"
 msgid "Western Sahara"
 msgstr "Mendebaldeko Sahara"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Eject tape after the backup"
+msgstr "Erabili zinta babeskopia egiteko"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot Floppy/ISO"
@@ -7794,18 +7934,22 @@ msgstr "Editatu uneko araua"
 msgid "%s"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
 msgstr "Probatu sagua"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not update inode access times on this file system\n"
+"(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Sticky-bit"
+msgstr "bit-likatsua"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7832,7 +7976,7 @@ msgstr "Sektorea"
 msgid "Qatar"
 msgstr "Qatar"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Base dn"
 msgstr "LDAP basea dn"
@@ -7868,6 +8012,11 @@ msgstr "Garbitu /tmp abiatzen den bakoitzean"
 msgid "Malawi"
 msgstr "Malawi"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: false"
+msgstr "Fitxategi lokalak"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -7895,7 +8044,7 @@ msgstr "Erresuma Batua"
 msgid "running"
 msgstr "martxan"
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "default"
 msgstr "lehenetsia"
@@ -7964,12 +8113,12 @@ msgstr ""
 "  Berri emateko mezua ez da bidali\n"
 "  Mesedez konfiguratu posta-bidalketa sendmail bitartez"
 
-#: ../../security/help.pm:1
+#: ../../fs.pm:1
 #, c-format
 msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
+"Do not allow set-user-identifier or set-group-identifier\n"
+"bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
+"have suidperl(1) installed.)"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -7987,10 +8136,10 @@ msgstr ""
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../standalone/net_monitor:1
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
-msgid "Connecting to the Internet "
-msgstr "Konektatu Internetekin"
+msgid "Custom settings"
+msgstr "Disko-partizio pertsonalizatua"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8012,14 +8161,6 @@ msgstr "SMB/Windows 95/98/NT zerbitzariko inprimagailua"
 msgid ", "
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Remove selected host/network"
@@ -8034,10 +8175,10 @@ msgstr ""
 "Postfix posta garraiatzeko agentea da (Mail Transport Agent - MTA), hau da, "
 "posta elektronikoa makina batetik bestera eramaten duen programa."
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet failed."
-msgstr ""
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Uzbek (cyrillic)"
+msgstr "Serbiarra (zirilikoa)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8146,8 +8287,9 @@ msgid "Button `%s': %s"
 msgstr "`%s' botoia: %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
-#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
+#: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Itxaron mesedez"
@@ -8255,6 +8397,11 @@ msgstr "Gutxieneko instalazioa"
 msgid "Ethiopia"
 msgstr "Etiopia"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable \"crontab\" and \"at\" for users"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Devanagari"
@@ -8361,6 +8508,19 @@ msgid ""
 msgstr ""
 "Hautatu inprimagailua konektatuta dagoen ataka edo idatzi gailuaren izena/"
 "fitxategi-izena"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8511,26 +8671,15 @@ msgstr ""
 msgid "Choose your filesystem encryption key"
 msgstr "Aukeratu fitxategi-sistema enkriptatzeko gakoa"
 
-#: ../../standalone/drakbackup:1
+#: ../../lang.pm:1
 #, c-format
-msgid ""
-"Please choose your CD/DVD device\n"
-"(Press Enter to propogate settings to other fields.\n"
-"This field isn't necessary, only a tool to fill in the form.)"
-msgstr ""
-"Mesedez hautatu zure CD/DVD gailua\n"
-"(Sartu sakatu ezarpenak beste eremu batzutara hedatzeko.\n"
-"Eremu hau ez da beharrezkoa, formularioa betetzeko tresna bakarrik.)"
+msgid "Sierra Leone"
+msgstr "Sierra Leona"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Andorra"
 msgstr "Andorra"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Sierra Leone"
-msgstr "Sierra Leona"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8541,6 +8690,11 @@ msgstr "Botswana"
 #, fuzzy, c-format
 msgid "(default value: %s)"
 msgstr " (jatorrian: %s)"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8572,15 +8726,6 @@ msgstr "Aukeratu X zerbitzaria"
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Swap partizioaren tamaina MBtan: "
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Other (not drakbackup)\n"
-"keys in place already"
-msgstr ""
-"Beste (drakbackup ez)\n"
-"giltzak bere tokian dagoeneko"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8661,6 +8806,11 @@ msgstr ""
 msgid "received"
 msgstr ""
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable su only from the wheel group members or for any user"
+msgstr ""
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_New"
@@ -8706,7 +8856,7 @@ msgstr "Inprimagailu lokalak"
 msgid "Installation image directory"
 msgstr "Xpmac (instalazioaren bistaratze-kontrolatzailea)"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Server"
 msgstr "NIS zerbitzaria"
@@ -8720,6 +8870,11 @@ msgstr "Ataka"
 #, c-format
 msgid "Spain"
 msgstr "Espainia"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "local config: %s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -8741,15 +8896,15 @@ msgstr "Aplikatu"
 msgid "Auto-detect available ports"
 msgstr "Auto-detektatuta"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr "Interneteko konexioa konpartitzea desgaituta dago orain"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
 msgstr "San Marino"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Internet Connection Sharing currently disabled"
+msgstr "Interneteko konexioa konpartitzea desgaituta dago orain"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -8785,11 +8940,6 @@ msgstr ""
 "Errore bat gertatu da, baina ez dakit behar bezala maneiatzen.\n"
 "Jarraitu zure ardurapean."
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "please wait, parsing file: %s"
-msgstr "itxaron, fitxategia analizatzen: %s"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Taiwan"
@@ -8799,6 +8949,16 @@ msgstr "Thailandia"
 #, c-format
 msgid "Pakistan"
 msgstr "Pakistan"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "please wait, parsing file: %s"
+msgstr "itxaron, fitxategia analizatzen: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Importance: "
+msgstr "Garrantzia: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8834,11 +8994,6 @@ msgstr "Hornitzailearen izena (adib. hornitzailea.net)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid "Version: %s\n"
-msgstr "Bertsioa: %s\n"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandrake Linux. If that occurs, you can try a text install instead. For "
@@ -8870,6 +9025,11 @@ msgstr "Konexio-mota: "
 msgid "Graphical interface"
 msgstr "X abioan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Txad"
+
 #: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
@@ -8879,11 +9039,6 @@ msgstr "XFree %s 3D hardware-azelerazioarekin"
 #, c-format
 msgid "India"
 msgstr "India"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Chad"
-msgstr "Txad"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9003,6 +9158,14 @@ msgstr "Erabili kuota babeskopia-fitxategientzat"
 msgid "Configuring printer \"%s\"..."
 msgstr "\"%s\" inprimagailua ezartzen..."
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not allow execution of any binaries on the mounted\n"
+"file system. This option might be useful for a server that has file systems\n"
+"containing binaries for architectures other than its own."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
@@ -9095,6 +9258,13 @@ msgstr "Errepikatu"
 msgid "detected %s"
 msgstr "%s detektatua"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Expect is an extension to the Tcl scripting language that allows interactive "
+"sessions without user intervention."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
@@ -9142,11 +9312,6 @@ msgstr ""
 msgid "Detecting devices..."
 msgstr "Gailuak detektatzen..."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Egin klik hemen morroia abiarazteko ->"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
@@ -9161,10 +9326,20 @@ msgstr ""
 "Eremuen deskribapena:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "Basic options"
+msgstr "DrakSec Oinarrizko Aukerak"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "the name of the CPU"
 msgstr "gailuaren saltzaile izena"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept bogus IPv4 error messages"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9210,17 +9385,6 @@ msgstr "Erabili Expect SSH-rentzako"
 #, c-format
 msgid "Poland"
 msgstr "Polonia"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Importance: %s\n"
-msgstr "Garrantzia: %s\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to eject your tape after the backup."
-msgstr ""
-"Mesedez markatu babes-kopia ondoren zure zinta kanporatzea nahi baduzu."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9307,24 +9471,25 @@ msgstr ""
 msgid "XFree %s"
 msgstr "XFree %s"
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Which dhcp client do you want to use?\n"
-"Default is dhcp-client."
-msgstr ""
-"Zein dhcp bezero erabili nahi duzu?\n"
-"Lehenetsia dhcp-client da"
-
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
 msgid "Domain Name:"
 msgstr "Domeinu-izena:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Root umask"
+msgstr "Ezarri root-aren pasahitza"
+
 #: ../../any.pm:1
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "Abiapen Disketea"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Reboot by the console user"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9340,6 +9505,14 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Pakete erabilgarriak bilatzen"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-seperated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9430,15 +9603,15 @@ msgstr ""
 "zerbitzari batean gaitzen badira. Oro har, benetan behar dituzun zerbitzuak\n"
 "soilik hautatu. !!"
 
-#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Saltatu"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
 msgstr "Niue"
+
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Saltatu"
 
 #: ../../services.pm:1
 #, c-format
@@ -9589,15 +9762,15 @@ msgstr "Aukeratu inprimagailua konektatuta dagoen ataka."
 msgid "Change Cd-Rom"
 msgstr "Aldatu CDROMa"
 
-#: ../../network/netconnect.pm:1
-#, fuzzy, c-format
-msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "XFree-ren zein konfigurazio izan nahi duzu?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguai"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "XFree-ren zein konfigurazio izan nahi duzu?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -9650,6 +9823,20 @@ msgstr ""
 "Apache World Wide Web-eko zerbitzari bat da. HTML fitxategiak eta CGI "
 "zerbitzatzeko erabili ohi da."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter your CD Writer device name\n"
+" ex: 0,1,0"
+msgstr ""
+"Adierazi CD idazgailuaren gailu-izena \n"
+" adib.: 0,1,0"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "ALL"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Add/Del Clients"
@@ -9679,6 +9866,11 @@ msgid ""
 msgstr ""
 "Lehenespenez abiarazteko partizioa\n"
 "    (MS-DOS abiorako, ez lilo-rako)\n"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
 
 #: ../../standalone/draksplash:1
 #, fuzzy, c-format
@@ -9728,15 +9920,6 @@ msgstr ""
 msgid "the number of buttons the mouse has"
 msgstr "aurrerapen-barraren kolorea"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the directory (or module) to\n"
-" put the backup on this host."
-msgstr ""
-"Mesedez sartu direktorioa (edo modulua) babes-kopia\n"
-" ostalari honetan jartzeko."
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Replay"
@@ -9772,6 +9955,11 @@ msgstr ""
 msgid "32 MB"
 msgstr "32 MB"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: thin"
+msgstr "Mota: "
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Lithuanian AZERTY (new)"
@@ -9793,11 +9981,6 @@ msgstr ""
 "Ez dago abioko kargatzailerik hori /boot partiziorik gabe erabil "
 "dezakeenik.\n"
 "Beraz, kontuan izan /boot partizioa gehitu behar duzula"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Previous"
-msgstr "Aurrekoa"
 
 #: ../../any.pm:1
 #, c-format
@@ -9912,7 +10095,7 @@ msgstr ""
 msgid "Content of the file"
 msgstr "Fitxategiaren edukia"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication LDAP"
 msgstr "LDAP autentifikazioa"
@@ -9947,6 +10130,11 @@ msgstr "RAID md%s\n"
 msgid "%d comma separated strings"
 msgstr "komaz banaturiko %d karaktere-hilara"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid " isdn"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -9961,6 +10149,11 @@ msgstr "Gaiaren izena"
 #, c-format
 msgid "/_Help"
 msgstr "/_Laguntza"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitrary driver"
+msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -9998,12 +10191,13 @@ msgstr "Desautatu instalatutako letra-tipoak"
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
+#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
+#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10045,6 +10239,11 @@ msgstr "Auto-detektatuta"
 msgid "Remove printer"
 msgstr "Kendu inprimagailua"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "View Last Log"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -10084,11 +10283,12 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr "Bestelakoa"
 
-#: ../../any.pm:1 ../../harddrake/v4l.pm:1
+#: ../../any.pm:1 ../../harddrake/v4l.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Default"
 msgstr "Lehenetsia"
@@ -10097,6 +10297,11 @@ msgstr "Lehenetsia"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "2. botoiaren emulazioa"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Run chkrootkit checks"
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10118,7 +10323,7 @@ msgstr "aukeratu irudi fitxategia"
 msgid "X server"
 msgstr "X zerbitzaria"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Domeinuaren Admin Erabiltzaile Izena"
@@ -10132,6 +10337,11 @@ msgstr "Errore bat izan da TB kateak bilatzerakoan"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "AEBetako teklatua (nazioartekoa)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finish)"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10158,7 +10368,7 @@ msgstr "/Fitxategia/-"
 msgid "Italian"
 msgstr "Italiarra"
 
-#: ../../interactive.pm:1 ../../standalone/draksec:1
+#: ../../interactive.pm:1
 #, c-format
 msgid "Basic"
 msgstr "Oinarrizkoa"
@@ -10227,6 +10437,11 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\tFTP bidezko sarea.\n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Reports check result to tty"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10359,11 +10574,6 @@ msgstr ""
 msgid "Save theme"
 msgstr "gaia gorde"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr "taldea"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -10383,6 +10593,11 @@ msgstr "Sarea konfiguratzeko morroia"
 #, c-format
 msgid "Removable media automounting"
 msgstr "Euskarri aldagarrien automuntatzea"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Adierazi gorde beharreko direktorioa:"
 
 #: ../../services.pm:1
 #, c-format
@@ -10500,6 +10715,11 @@ msgstr ""
 "(*) FAT formatudun disketea behar duzu (GNU/Linux-en horrelako diskete bat\n"
 "sortzeko, idatzi \"mformat a:\")"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Moldavia"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Kensington Thinking Mouse"
@@ -10510,16 +10730,6 @@ msgstr "Kensington Thinking sagua"
 msgid "Configuration of a remote printer"
 msgstr "Urruneko inprimagailu baten konfigurazioa"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Moldova"
-msgstr "Moldavia"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your tape before the backup."
-msgstr "Mesedez markatu babes-kopia aurretik zinta ezabatu nahi baduzu."
-
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
@@ -10529,6 +10739,11 @@ msgstr "Konpainien euskarri behar espezifikoei erantzuteko lerroko plataforma"
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "URLaren hasieran 'ftp:' edo 'http:' egon behar da"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Oriya"
+msgstr "Surinam"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10593,6 +10808,11 @@ msgstr "zerbitzuaren ezarpena"
 msgid "Custom"
 msgstr "Pertsonalizatua"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Letonia"
+
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "File is already used by another loopback, choose another one"
@@ -10604,10 +10824,12 @@ msgstr ""
 msgid "Read-only"
 msgstr "Irakurketa-soilik"
 
-#: ../../lang.pm:1
+#: ../../security/help.pm:1
 #, c-format
-msgid "Latvia"
-msgstr "Letonia"
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10654,10 +10876,25 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Konfiguratu sare lokala..."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Abiarazi zure makinako soinu-sistema"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Run some checks against the rpm database"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Execute"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10684,15 +10921,15 @@ msgstr "Zein fitxategi-sistema nahi duzu?"
 msgid "3 buttons"
 msgstr "3 botoi"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Detailed information"
-msgstr "Informazio xehea"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
 msgstr "Malta"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Detailed information"
+msgstr "Informazio xehea"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10720,6 +10957,13 @@ msgstr "Diskete honek ez du FAT formaturik"
 #, c-format
 msgid "Configuring network"
 msgstr "Sarea konfiguratzen"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This option will save files that have changed.  Exact behavior depends on "
+"whether incremental or differential mode is used."
+msgstr ""
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -10837,7 +11081,7 @@ msgstr ""
 "\"%s\" gidari berria hurrengo bootstrap-ean erabiliko da soilik."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Aditu modua"
@@ -10856,6 +11100,11 @@ msgstr "Bertako Sare helbidea"
 #, c-format
 msgid "Backup your System files. (/etc directory)"
 msgstr "Sistema-fitxategien babeskopia egin. (/etc direktorioa )"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the user umask."
+msgstr "Erabiltzaileak"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -10883,14 +11132,6 @@ msgstr ""
 msgid "Samba Server"
 msgstr "Samba Zerbitzaria"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
-msgstr ""
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Australian Optus cable TV"
@@ -10915,11 +11156,6 @@ msgstr "Zimbawe"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please enter the host name or IP."
-msgstr "Idatzi ostalariaren izena edo IPa."
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "When"
 msgstr "Noiz"
 
@@ -10932,18 +11168,6 @@ msgstr "Bigarren DNS zerbitzaria (aukerakoa)"
 #, c-format
 msgid "Finland"
 msgstr "Finlandia"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -10959,6 +11183,16 @@ msgstr "Ezin duzu pakete hau desautatu. Bertsio-berritu egin behar da"
 #, c-format
 msgid "Loading from floppy"
 msgstr "Disketetik kargatzen"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Eslovenia"
 
 #: ../../standalone/mousedrake:1
 #, fuzzy, c-format
@@ -10980,11 +11214,6 @@ msgstr ""
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Slovenia"
-msgstr "Eslovenia"
 
 #: ../../any.pm:1
 #, c-format
@@ -11048,12 +11277,7 @@ msgstr "Irrati euskarria :"
 msgid "Installing SANE packages..."
 msgstr "Paketeak instalatzen..."
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "boot disk creation"
-msgstr "abioko disketea sortu"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
@@ -11159,9 +11383,7 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -11178,6 +11400,11 @@ msgstr ""
 "Zure txartelak 3D hardware-azelerazioaren euskarria izan dezake XFree %s(r)"
 "ekin,\n"
 "KONTUAN IZAN EUSKARRI ESPERIMENTALA DELA ETA ORDENAGAILUA BLOKEA DEZAKEELA."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Shell timeout"
+msgstr "Nukleoaren abioaren denbora-muga"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11217,67 +11444,6 @@ msgid ""
 msgstr ""
 "Errorea aboot instalatzean, \n"
 "instalazioa ezartzen saiatu lehen partizioa suntsitzen badu ere?"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - The compression mode:\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode:\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, Drakbackup will ignore all references\n"
-"      included in .backupignore files in each directories.\n"
-"      ex: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
-msgstr ""
-"aukeren azalpena:\n"
-"\n"
-" Urrats honetan Drakbackup-ek hauek aldatzen utziko dizu:\n"
-"\n"
-" - Konprimitze-modua:\n"
-"    \n"
-"      bzip2 konpresioa hautatuz, gzip-ekin baino gehiago\n"
-"      konprimituko dituzu datuak (% 2-10 inguru).\n"
-"      Aukera hau ez da lehenespen gisa hautatzen konpresio-modu\n"
-"      honek denbora gehiago (% 1000 gehiago) hartzen duelako.\n"
-" \n"
-" - Eguneratze modua:\n"
-"\n"
-"      Aukera honek babeskopia eguneratuko du, baina ez da\n"
-"      oso erabilgarria, eguneratu aurretik babeskopia\n"
-"      deskonprimitu egin behar baita.\n"
-"      \n"
-" - .backupignore modua:\n"
-"\n"
-"      cvs-rekin bezala, Drakbackup-ek ezikusi egingo die direktorio\n"
-"      bakoitzeko .backupignore fitxategietako erreferentzia guztiei.\n"
-"      adib: \n"
-"         /*> cat .backupignore*/\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11376,6 +11542,14 @@ msgstr ""
 msgid "Inuktitut"
 msgstr "Inuktitut"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Some protocols, like rsync, may be configured at the server end.  Rather "
+"than using a directory path, you would use the 'module' name for the service "
+"path."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
@@ -11396,15 +11570,15 @@ msgstr "Gehitu inprimagailu berria"
 msgid "          All of your selected data have been          "
 msgstr "          Hautatu dituzun datu guztiak izan dira          "
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "<-- Delete"
-msgstr "<-- Ezabatu"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
 msgstr "Nepal"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "<-- Delete"
+msgstr "<-- Ezabatu"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -11415,6 +11589,21 @@ msgstr ""
 #, c-format
 msgid "chunk size"
 msgstr "zatiaren tamaina"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -11467,6 +11656,13 @@ msgstr "Birkargatu partizio-taula"
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Bai, automatikoki honekin hasi nahi dut (erabiltzailea, mahaigaina)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Restore Selected"
+msgstr ""
+"Leheneratu Hautatutako\n"
+"Fitxategiak"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11572,10 +11768,10 @@ msgstr ""
 msgid "Security Administrator:"
 msgstr "Segurtasun Kudeatzailea:"
 
-#: ../../standalone/drakbackup:1
+#: ../../security/help.pm:1
 #, c-format
-msgid "Please enter your login"
-msgstr "Sartu saioa hasteko izena"
+msgid "Set the shell timeout. A value of zero means no timeout."
+msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11615,52 +11811,6 @@ msgstr ""
 "\"%s\" inprimagailua behar bezala kendu da Star Office/OpenOffice.org/GIMP-"
 "tik."
 
-#: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid ""
-"Standard: This is the standard security recommended for a computer that will "
-"be used to connect\n"
-"               to the Internet as a client.\n"
-"\n"
-"High:       There are already some restrictions, and more automatic checks "
-"are run every night.\n"
-"\n"
-"Higher:    The security is now high enough to use the system as a server "
-"which can accept\n"
-"              connections from many clients. If your machine is only a "
-"client on the Internet, you\n"
-"           should choose a lower level.\n"
-"\n"
-"Paranoid:  This is similar to the previous level, but the system is entirely "
-"closed and security\n"
-"                features are at their maximum\n"
-"\n"
-"Security Administrator:\n"
-"               If the 'Security Alerts' option is set, security alerts will "
-"be sent to this user (username or\n"
-"            email)"
-msgstr ""
-"Estandarra: Hau da internetera bezero bezala konektatuko den konputagailu "
-"batentzako\n"
-"               segurtasun estandarra.\n"
-"\n"
-"Altua:      Muga batzuk ezartzen ditu, eta egiaztapen automatiko gehiago "
-"exekutatzen dira gauero.\n"
-"\n"
-"Altuagoa: Sistemak segurtasun maila nahikoa dauka bezero askoren lotura "
-"onartuko duen zerbitzari\n"
-"              bezala erabil dadin. Zure makina Interneten bezero soila "
-"badamaila apalagoa hautatu behar zenuke.\n"
-"\n"
-"Paranoikoa: Hau aurreko mailaren antzekoa da, baino sistema erabat itxita "
-"dago eta segurtasun\n"
-"                ezaugarriak mailarik altuenean daude.\n"
-"\n"
-"Segurtasun Kudeatzailea:\n"
-"                'Segurtasun Alertak' aukera ezartzen bada, segurtasun "
-"alertak bidaliko zaizkio erabiltzaile honi (erabiltzaile-izena edo\n"
-"\t       posta-e)."
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Save packages selection"
@@ -11693,6 +11843,11 @@ msgstr "erabili pptp"
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Aukeratu zein zerbitzari abiarazi behar den automatikoki abioan"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check files/directories writable by everybody"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Learn how to use this printer"
@@ -11716,6 +11871,11 @@ msgid ""
 msgstr ""
 "FAT tamaina-aldatzaileak ezin du zure partizioa maneiatu, \n"
 "errore hau gertatu da: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Size: "
+msgstr "Tamaina: %s"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11762,6 +11922,11 @@ msgstr "Xpmac (instalazioaren bistaratze-kontrolatzailea)"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse icmp echo."
 msgstr ""
 
 #: ../../services.pm:1
@@ -11850,6 +12015,11 @@ msgstr ""
 "Adi: Sare-moldagailu dedikatu bat behar duzu Bertako Eremuko Sare (LAN) bat "
 "konfiguratzeko."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections X Window"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -11873,6 +12043,11 @@ msgstr ""
 #, c-format
 msgid "Refuse"
 msgstr "Ezetsi"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "LOCAL"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -11978,6 +12153,11 @@ msgstr "Detekzio martxan"
 #, c-format
 msgid "Build Whole Kernel -->"
 msgstr "Eraiki Kernel Osoa -->"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "modem"
+msgstr "Eredua"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -12098,6 +12278,16 @@ msgstr ""
 "Zure txartelak XFree %s euskarria du, eta horrek euskarri hobea izan dezake "
 "2Dan."
 
+#: ../../security/help.pm:1
+#, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable libsafe if libsafe is found on the system"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
@@ -12127,7 +12317,7 @@ msgstr "Ordu-sinkronizazio automatikoa (NTP erabiliz)"
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Server"
 msgstr "LDAP Zerbitzaria"
@@ -12193,6 +12383,11 @@ msgstr "PCMCIA txartelak konfiguratzen..."
 msgid "kdesu missing"
 msgstr "kdesu falta da"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires a username...\n"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Encryption key"
@@ -12233,7 +12428,7 @@ msgstr "%s partizioan"
 msgid "Paranoid"
 msgstr "Paranoidea"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS"
 msgstr "NIS"
@@ -12268,21 +12463,6 @@ msgstr "Ezabatu disko osoa"
 msgid " (Default)"
 msgstr " (lehenetsia)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
-msgstr ""
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -12298,17 +12478,24 @@ msgstr ""
 msgid "Turks and Caicos Islands"
 msgstr "Turk eta Caico uharteak"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
-msgstr "baimenak"
-
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
 msgstr "<- Aurrekoa"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Transfer Now"
+msgstr ""
+"  Transferitu  \n"
+"Orain"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Set root password and network authentication methods"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12446,6 +12633,15 @@ msgstr "Abioko kargatzailea"
 msgid "Select the memory size of your graphics card"
 msgstr "Hautatu txartel grafikoaren memoria-tamaina"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12480,11 +12676,6 @@ msgstr "Zenbait gailu \"%s\" hardware motan ezabatu egin dira:\n"
 msgid "Found %s %s interfaces"
 msgstr "%s %s interfaze aurkitu dira"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr "bit-likatsua"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -12499,14 +12690,6 @@ msgstr "Barneko domeinu izena"
 #, c-format
 msgid "Card IRQ"
 msgstr "Txartelaren IRQ"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
-msgstr ""
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -12604,19 +12787,15 @@ msgstr "SILO instalazioa"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent eta Grenadinak"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
 msgstr "/Fitxategia/_Ireki"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
-msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, fuzzy, c-format
@@ -12638,15 +12817,15 @@ msgstr "Hungaria"
 msgid "Total progess"
 msgstr "Aurrerapen guztia"
 
-#: ../../standalone/net_monitor:1
-#, fuzzy, c-format
-msgid "Color configuration"
-msgstr "abisu-konfigurazioa"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
 msgstr "Zeelanda Berria"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Color configuration"
+msgstr "abisu-konfigurazioa"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12721,6 +12900,13 @@ msgid ""
 "Floating point DIVision (FDIV)"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Backup quota exceeded!\n"
+"%d MB used vs %d MB allocated."
+msgstr ""
+
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
@@ -12751,6 +12937,11 @@ msgstr " sartu 'void' sarrera hutsa jartzeko"
 msgid "on Hard Drive"
 msgstr "disko gogorrean"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Password history length"
+msgstr "Pasahitz hau sinpleegia da"
+
 #: ../../network/netconnect.pm:1
 #, fuzzy, c-format
 msgid "Winmodem connection"
@@ -12780,14 +12971,6 @@ msgstr ""
 "lehenetsiak (paper-iturria, inprimatze-kalitatea...) aldatu nahi badituzu, "
 "hautatu \"Inprimagailua\" Mandrake Kontrol Zentroko \"Hardwarea\" atalean."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
@@ -12803,6 +12986,11 @@ msgstr "Ez dago nahikoa swap instalazioa burutzeko, gehitu egin beharko duzu"
 #, fuzzy, c-format
 msgid "%s on %s"
 msgstr "Ataka"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid remote root login."
+msgstr "(makina honetan)"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -12839,6 +13027,16 @@ msgstr ""
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Zein da zure ordu-zona?"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Can't create log file!"
+msgstr "Ezin da katalogoa sortu!"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Use .backupignore files"
+msgstr "Erabili kuota babeskopia-fitxategientzat"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12895,6 +13093,11 @@ msgstr "Tamaina: %s\n"
 msgid "Hostname: "
 msgstr "Ostalari-izena: "
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a rule"
+msgstr "Arau bat gehitu"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Chunk size %s\n"
@@ -12909,14 +13112,6 @@ msgstr ""
 #, c-format
 msgid "Local Printer"
 msgstr "Inprimagailu lokala"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
-"fr>"
-msgstr ""
-" Copyright (C) 2001 MandrakeSoft, DUPONT Sebastien <dupont_s\\@epita.fr>"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12963,20 +13158,10 @@ msgstr "Aldatu tamaina"
 msgid "Dominica"
 msgstr "Dominika"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the device name to use for backup"
-msgstr "Adierazi babeskopiarako erabiliko den gailuaren izena"
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Resolution: %s\n"
 msgstr "Bereizmena: %s\n"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
-msgstr "bat badatoz"
 
 #: ../../install2.pm:1
 #, c-format
@@ -13031,25 +13216,6 @@ msgstr "Sagu-gailua: %s\n"
 msgid "Reselect correct fonts"
 msgstr "Hautatu berriro letra-tipo egokiak"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-"Please be careful when you are using ftp backup, because only \n"
-"backups that are already built are sent to the server.\n"
-"So at the moment, you need to build the backup on your hard \n"
-"drive before sending it to the server.\n"
-"\n"
-msgstr ""
-"aukeren azalpena:\n"
-"\n"
-"Kontuz ftp backup erabiltzean, eginda dauden babeskopiak \n"
-"soilik bidaliko direlako zerbitzarira.\n"
-"Beraz, orain, disko gogorrean egin behar duzu babeskopia\n"
-"zerbitzarira bidali aurretik.\n"
-"\n"
-
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
 #: ../../help.pm:1
@@ -13067,11 +13233,6 @@ msgstr ""
 "egingo zaizula. Jakina, \"Ez\" erantzun nahi izango duzu zure ordenagailuak\n"
 "zerbitzari gisa jokatu behar badu, edo bistaratzea konfiguratzea lortzen ez\n"
 "baduzu."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "We are now going to configure the %s connection."
-msgstr "%s konexioa konfiguratuko dugu orain."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -13190,6 +13351,11 @@ msgstr "Ez da Soinu Txartelik aurkitu!"
 msgid "Mouse Port"
 msgstr "Sagu-ataka"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check for unsecured accounts"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid ""
@@ -13201,14 +13367,6 @@ msgstr ""
 #, c-format
 msgid "Ftp Server"
 msgstr "Ftp Zerbitzaria"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -13224,14 +13382,6 @@ msgstr "pfm letra-tipoen bihurketa"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Aukeratu sagua konektatuta dagoen serieko ataka."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -13303,25 +13453,6 @@ msgstr ""
 msgid "Comoros"
 msgstr "Komoroak"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"We are now going to configure the %s connection.\n"
-"\n"
-"\n"
-"Press OK to continue."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"%s konexioa konfiguratuko dugu orain.\n"
-"\n"
-"\n"
-"Jarraitzeko, sakatu Ados."
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13355,62 +13486,6 @@ msgstr "Hautatu beste euskarri bat leheneratzeko"
 #, c-format
 msgid "Software Manager"
 msgstr "Software Kudeatzailea"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Restore Description:\n"
-" \n"
-"Only the most recent date will be used, because with incremental \n"
-"backups it is necessary to restore one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"leheneratze azalpena:\n"
-" \n"
-"Gertueneko data soilik erabiliko da, babeskopia inkrementalarekin\n"
-"beharrezkoa delako babeskopia zaharrak banan-banan leheneratzea.\n"
-"\n"
-"Beraz erabiltzaile bat leheneratu nahi ez baduzu, haren egiaztapen-"
-"laukietatik\n"
-"markak kendu.\n"
-"\n"
-"Bestela, hauetako bakarra hautatu ahal izango duzu\n"
-"\n"
-" - Babeskopia inkrementalak:\n"
-"\n"
-"\tBabeskopia-aukera ahaltsuena da. Aukera honen\n"
-"\tbidez, lehen aldian datu guztien babeskopia\n"
-"\tegiteko aukera ematen du, eta gero aldatutako\n"
-"\tdatuak bakarrik.\n"
-"\tBeraz, leheneratze-urratsean, data\n"
-"\tjakin bateko datuak leheneratu ahal izango\n"
-"\tdituzu.\n"
-"\tAukera hau hautatuta ez baduzu, babeskopia zahar guztiak\n"
-"\tezabatzen dira babeskopia bakoitzaren aurretik.    \n"
-"\n"
-"\n"
-"\n"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -13485,6 +13560,11 @@ msgstr ""
 msgid "This password is too simple"
 msgstr "Pasahitz hau sinpleegia da"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Chkconfig obey msec rules"
+msgstr "Konfiguratu zerbitzuak"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
@@ -13505,20 +13585,12 @@ msgstr "Instalazio minimo-minimoa (batez ere, urpmi gabe)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"  Transfer  \n"
-"Now"
-msgstr ""
-"  Transferitu  \n"
-"Orain"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use daemon"
 msgstr "Erabili daemon-a"
 
 #: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/logdrake:1
+#: ../../standalone/drakauth:1 ../../standalone/drakconnect:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
 msgstr "Autentifikazioa"
@@ -13608,11 +13680,6 @@ msgstr "Inprimagailu lehenetsia"
 msgid "Interface %s (using module %s)"
 msgstr "%s interfazea (%s modulua erabiliz)"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Name: %s\n"
-msgstr "Izena: %s\n"
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Generating preview ..."
@@ -13623,6 +13690,23 @@ msgstr "Aurreikuspena sortzen ..."
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "ignore"
+msgstr "Singapur"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -13660,6 +13744,11 @@ msgstr ""
 "Ohartu sartzen den edozein helbide 0x aurrizkiarekin jarri behar dela, adib. "
 "'0x123'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Kenya"
+
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
@@ -13668,11 +13757,6 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Kenya"
-msgstr "Kenya"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -13704,6 +13788,11 @@ msgstr "Bi Maius teklak batera"
 msgid "Select a scanner model"
 msgstr "Hautatu eskaner bat"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
+msgstr ""
+
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
@@ -13719,6 +13808,11 @@ msgstr " Drakbackup-en konfigurazioa"
 msgid "Save as.."
 msgstr "Gorde honela.."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -13728,22 +13822,17 @@ msgstr ""
 "Interfaze hau ez dago konfiguratuta.\n"
 "Abiarazi konfigurazio-morroia leiho nagusian"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Korea (North)"
-msgstr ""
-
-#: ../../any.pm:1
-#, c-format
-msgid "Autologin"
-msgstr "Automatikoki hasi saioa"
-
 #: ../../install_gtk.pm:1
 #, fuzzy, c-format
 msgid "System configuration"
 msgstr "CUPSen konfigurazioa"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../security/l10n.pm:1
+#, c-format
+msgid "Autologin"
+msgstr "Automatikoki hasi saioa"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Domeinuko Admin Pasahitza"
@@ -14029,6 +14118,16 @@ msgstr "Muntatze-puntua: "
 msgid "parse all fonts"
 msgstr "analizatu letra-tipo guztiak"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid direct root login."
+msgstr "(makina honetan)"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -14085,6 +14184,11 @@ msgstr "Inprimagailu erabilgarriak"
 #, fuzzy, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14167,6 +14271,22 @@ msgstr "Non muntatu nahi duzu %s gailua?"
 msgid "The default lease (in seconds)"
 msgstr "Jatorrizko alokatze denbora (segundutan)"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"We are now going to configure the %s connection.\n"
+"\n"
+"\n"
+"Press \"%s\" to continue."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"%s konexioa konfiguratuko dugu orain.\n"
+"\n"
+"\n"
+"Jarraitzeko, sakatu Ados."
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Interface \"%s\""
@@ -14196,14 +14316,6 @@ msgstr ""
 msgid "Test"
 msgstr "Froga"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
-msgstr ""
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Korea"
@@ -14223,6 +14335,11 @@ msgstr "Inprimagailu \"gordina\""
 #, fuzzy, c-format
 msgid "official vendor name of the cpu"
 msgstr "gailuaren saltzaile izena"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Useless without Terminal Server"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14244,11 +14361,8 @@ msgstr "Konfiguratu sagua"
 msgid "Choose the mount points"
 msgstr "Aukeratu muntatze-puntuak"
 
-#: ../../help.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
-#: ../../standalone/net_monitor:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "Ados"
@@ -14330,20 +14444,10 @@ msgstr ""
 "Huts egin du \"%s\" inprimagailua Star Office/OpenOffice.org/GIMP-tik "
 "kentzean."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr "ezabatu"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "here if no."
 msgstr "egin klik hemen, ziur ez bazaude."
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "help"
-msgstr "Laguntza"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -14365,10 +14469,20 @@ msgstr "Aukeratu sagua konektatuta dagoen serieko ataka."
 msgid "Did it work properly?"
 msgstr "Ongi egin du?"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "Mount the file system read-only."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid "Poor"
 msgstr "Txikia"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Report check result by mail"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -14410,6 +14524,11 @@ msgstr ""
 msgid "Guadeloupe"
 msgstr "Guadalupe"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Kannada"
+msgstr "Kanada"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
@@ -14430,6 +14549,11 @@ msgstr "Freskatze-maiztasun bertikala"
 msgid "Entering step `%s'\n"
 msgstr "`%s' urratsean sartzen\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Niger"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan"
@@ -14439,11 +14563,6 @@ msgstr "Logitech MouseMan"
 #, fuzzy, c-format
 msgid "Removing %s ..."
 msgstr "%s kentzen"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Niger"
-msgstr "Niger"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14475,6 +14594,11 @@ msgstr "Orokorra"
 msgid "Printing system: "
 msgstr "Inprimatze-sistema: "
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
+msgstr ""
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
@@ -14496,10 +14620,13 @@ msgid "Philippines"
 msgstr "Filipinak"
 
 #: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
-#: ../../standalone/mousedrake:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr "Ados"
@@ -14568,25 +14695,20 @@ msgstr ""
 " Klikatu \"Hurrengoa\" prest zaudenean, eta \"Etsi\" zure inprimagailua "
 "orain ezarri nahi ez duzunean."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore From Catalog"
-msgstr "Leheneratu Katalogotik"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore From Catalog"
+msgstr "Leheneratu Katalogotik"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "IDE"
 msgstr "IDE"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr "taldea :"
 
 #: ../../fs.pm:1
 #, c-format
@@ -14629,6 +14751,16 @@ msgid "Looking for available packages and rebuilding rpm database..."
 msgstr "Pakete erabilgarriak bilatzen eta rpm databaseak berreraikitzen..."
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Report \n"
+msgstr ""
+"\n"
+"                      DrakBackup-en berri-ematea \n"
+"\n"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "Does not appear to be recordable media!"
 msgstr "Ez dirudi euskarri idazgarria denik!"
@@ -14642,6 +14774,13 @@ msgstr "Zehaztu aukerak"
 #, c-format
 msgid "Vanuatu"
 msgstr "Vanuatu"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "New user list:\n"
+msgstr ""
+"\n"
+"- Erabiltzaile-fitxategiak:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14684,6 +14823,11 @@ msgstr ""
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
 msgstr "Ezin da fitxategi-sistema enkriptatua erabili %s muntatze-punturako"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the password history length to prevent password reuse."
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -14925,11 +15069,6 @@ msgstr "TB"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check if you are using a DVDR device"
-msgstr "Mesedez markatu DVDR gailua erabiltzen ari bazara"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "FATAL"
 msgstr "LARRIA"
 
@@ -14944,17 +15083,10 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Delete"
 msgstr "Ezabatu"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -15117,10 +15249,15 @@ msgstr "CUPS - Common Unix Printing System"
 msgid "Webmin Service"
 msgstr "Webmin Zerbitzua"
 
-#: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "device"
 msgstr "gailua"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save to:"
+msgstr "Mesedez adierazi zein direktoriotan gorde behar den:"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -15156,9 +15293,26 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr "armeniarra (idazmakina)"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Use password to authenticate users."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Filename text to search for:"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -15193,6 +15347,11 @@ msgstr "NetWare zerbitzariko inprimagailua"
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Eman ram-tamaina MBtan"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet complete."
+msgstr "Konektatu Internetekin"
 
 #: ../../any.pm:1
 #, c-format
@@ -15295,6 +15454,11 @@ msgstr "trinkotu"
 msgid "1 minute"
 msgstr "minutu bat"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: fat"
+msgstr "Mota: "
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "on channel %d id %d\n"
@@ -15308,6 +15472,11 @@ msgstr ", funtzio anitzeko gailua"
 #: ../../lang.pm:1
 #, c-format
 msgid "Laos"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -15337,15 +15506,15 @@ msgstr "Area :"
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
+#: ../../fs.pm:1
+#, c-format
+msgid "All I/O to the file system should be done synchronously."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Server"
 msgstr "Inprimagailu-zerbitzaria"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet complete."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -15366,29 +15535,6 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint-Pierre eta Mikelune"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"Restore Backup Problems:\n"
-"\n"
-"During the restore step, Drakbackup will verify all your\n"
-"backup files before restoring them.\n"
-"Before the restore, Drakbackup will remove \n"
-"your original directory, and you will loose all your \n"
-"data. It is important to be careful and not modify the \n"
-"backup data files by hand.\n"
-msgstr ""
-"\n"
-"Leheneratze-arazoak:\n"
-"\n"
-"Leheneratze-urratsean, Drakbackup-ek babeskopia-fitxategi\n"
-"guztiak egiaztatuko ditu leheneratu aurretik.\n"
-"Leheneratu aurretik, Drakbackup-ek kendu egingo du\n"
-"jatorrizko direktorioa, eta datu guztiak galduko dituzu.\n"
-"Garrantzizkoa da kontuz ibiltzea eta babeskopia-fitxategiak\n"
-"eskuz ez aldatzea.\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15435,6 +15581,11 @@ msgstr "%d zilindrotik %d zilindrora\n"
 msgid "New profile..."
 msgstr "Profil berria..."
 
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which disk do you want to move it to?"
@@ -15445,10 +15596,15 @@ msgstr "Zein diskotara eraman nahi duzu?"
 msgid "Display logo on Console"
 msgstr "Erakutsi logoa Kontsolan"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Windows Domain"
 msgstr "Windows Domeinua"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Saami (norwegian)"
+msgstr "Dvorak (norvegiarra)"
 
 #: ../../standalone/drakpxe:1
 #, fuzzy, c-format
@@ -15494,15 +15650,15 @@ msgstr ""
 msgid "Build Single NIC -->"
 msgstr "Eraiki NIC Bakarri -->"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#, c-format
-msgid "Is this correct?"
-msgstr "Zuzena da?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
 msgstr "Marshall uharteak"
+
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#, c-format
+msgid "Is this correct?"
+msgstr "Zuzena da?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15519,10 +15675,27 @@ msgstr "Ezarri root-aren pasahitza"
 msgid "Build All Kernels -->"
 msgstr "Eraiki Kernel Guztiak -->"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDRAM device"
+msgstr "gailua"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"HardDrake da hau, Mandrakeren hardware ezarpen tresna bat.\n"
+"Bertsioa:"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15534,6 +15707,11 @@ msgstr ""
 "Ez duzu swap partiziorik\n"
 "\n"
 "Jarraitu hala ere?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Version: "
+msgstr "Bertsioa: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -15604,10 +15782,16 @@ msgstr "Optimizatu zure segurtasuna"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Laguntza"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check if the network devices are in promiscuous mode"
+msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -15632,6 +15816,11 @@ msgstr ""
 #, c-format
 msgid "Username required"
 msgstr "Erabiltzaile-izena behar da"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Device"
+msgstr "Gailua: "
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -15670,12 +15859,9 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB (Windows 9x/NT) inprimagailuaren aukerak"
 
-#: ../../security/help.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
+msgid "Valid user list changed, rewriting config file."
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -15694,6 +15880,11 @@ msgstr ""
 #, c-format
 msgid "Protocol for the rest of the world"
 msgstr "Munduko gainerako protokoloa"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digit and upcase letters"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15781,6 +15972,11 @@ msgstr "Aukeratu tamaina berria"
 msgid "Media class"
 msgstr "Euskarri mota"
 
+#: ../../standalone/XFdrake:1
+#, c-format
+msgid "You need to log out and back in again for changes to take effect"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "The %s is not known by this version of Scannerdrake."
@@ -15800,18 +15996,6 @@ msgstr "Berrabiarazi XFS"
 #, c-format
 msgid "Add host/network"
 msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save to:"
-msgstr "Mesedez adierazi zein direktoriotan gorde behar den:"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -15833,22 +16017,10 @@ msgstr "Unitatean ez dago CDR/DVDR!"
 msgid "British Indian Ocean Territory"
 msgstr "Indiako Ozeanoko Britainiar Lurraldea"
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modu normala"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' medias also use the hard drive."
-msgstr ""
-"Mesedez ziurtatu cron deabrua zure zerbitzuen artean dagoen.\n"
-"\n"
-"Ohartu oraingoz 'sareko' euskarri guztiek disko zurruna erabiltzen dutela."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15939,19 +16111,18 @@ msgstr ""
 "zuhaitza agertuko da orduan: egin hautapena eta sakatu \"Instalatu\"\n"
 "hautatutako paketeak hartu eta instalatzeko, edo \"Utzi\" abortatzeko."
 
-#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
-#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Irten"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
 msgstr "Birmania"
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Irten"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16005,7 +16176,7 @@ msgstr ""
 " Klikatu \"Hurrengoa\" prest zaudenean, eta \"Etsi\" zure inprimagailua "
 "orain ezarri nahi ez duzunean."
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication NIS"
 msgstr "NIS Autentifikazioa"
@@ -16027,10 +16198,20 @@ msgstr "Interneteko konexioa konpartitzea gaituta dago orain"
 msgid "Card IO_0"
 msgstr "Txartelaren S/I_0"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Disable Local Config"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Arabiar Emirerri Batuak"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Thailandia"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16039,18 +16220,18 @@ msgstr "Txartelaren S/I_1"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Thailand"
-msgstr "Thailandia"
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr "Kazakhstan"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Write"
+msgstr "Idatzi %s"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -16080,6 +16261,56 @@ msgstr "Bouvet uhartea"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu enable to select one of the six preconfigured "
+"security\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -16155,6 +16386,11 @@ msgstr "Etiketa"
 #, c-format
 msgid "Save on floppy"
 msgstr "Gorde disketean"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check open ports"
+msgstr "%s atakan detektatua"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16266,6 +16502,11 @@ msgstr "frantsesa"
 msgid "Czech (QWERTY)"
 msgstr "Txekiarra (QWERTY)"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow X Window connections"
+msgstr "Modem-konexio normala"
+
 #: ../../standalone/service_harddrake:1
 #, fuzzy, c-format
 msgid "Hardware probing in progress"
@@ -16291,7 +16532,7 @@ msgstr ""
 "lehen USB inprimagailua: /dev/usb/lp0, 2. USB inprimagailua: /dev/usb/"
 "lp1, ...)."
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Hurrengoa"
@@ -16305,6 +16546,11 @@ msgstr "Abioko kargatzailea ezin da %s partizio batean instalatu\n"
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -16323,11 +16569,6 @@ msgstr ""
 "Ongi etorri.\n"
 "\n"
 "Auto-instalazioko parametroak ezkerreko sekzioetan daude erabilgarri"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Puerto Rico"
-msgstr "Puerto Rico"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16361,7 +16602,7 @@ msgstr ""
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Domain"
 msgstr "NIS domeinua"
@@ -16398,15 +16639,6 @@ msgid ""
 msgstr ""
 "Esleitu gailu \"gordinak\" (raw devices) blokeko gailuei \n"
 "(disko gogorreko partizioak adib.), Oracle bezalako aplikazioentzat."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -16458,6 +16690,11 @@ msgstr "Trinidad eta Tobago"
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPDk eta LPRng-ek ez dute IPP inprimagailurik onartzen.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Host name or IP."
+msgstr "Ostalari-izena"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -16482,6 +16719,11 @@ msgstr "%s moldagailua: %s"
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland uharteak (Malvinak)"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Boot disk creation"
+msgstr "abioko disketea sortu"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16523,6 +16765,13 @@ msgstr ""
 "Abiarazi Linux-nukleoen 2.2 serieko pakete-iragazketa, zure \n"
 "makina sareko erasoetatik babesteko suebaki bat ezartzeko."
 
+#: ../../network/ethernet.pm:1
+#, fuzzy, c-format
+msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
+msgstr ""
+"Zein dhcp bezero erabili nahi duzu?\n"
+"Lehenetsia dhcp-client da"
+
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
 msgid "Tamil (ISCII-layout)"
@@ -16532,6 +16781,16 @@ msgstr "Tamila (TSCII)"
 #, c-format
 msgid "Mayotte"
 msgstr "Mayotte"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "%d KB\n"
+msgstr "Tamaina: %d KB\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -16543,15 +16802,15 @@ msgstr "Auto-instalazioko disketea sortzen..."
 msgid "Searching for scanners ..."
 msgstr "Inprimagailu erabilgarriak"
 
-#: ../../steps.pm:1
-#, fuzzy, c-format
-msgid "Partitioning"
-msgstr "Inprimatzea"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Russia"
 msgstr "errusiarra"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Partitioning"
+msgstr "Inprimatzea"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -16587,6 +16846,11 @@ msgstr "Ez dago nahikoa leku libre auto-esleitzeko"
 msgid "Set root password"
 msgstr "Ezarri root-aren pasahitza"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable IP spoofing protection"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -16595,6 +16859,11 @@ msgid ""
 msgstr ""
 "Ez dago OSS/ALSA gidari alternatibo ezagunik zure (%s) soinu "
 "txartelarentzat, orain \"%s\" erabiltzen du"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group :"
+msgstr "taldea :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16607,6 +16876,11 @@ msgstr ""
 #, c-format
 msgid "Internet connection configuration"
 msgstr "Interneteko konexioaren konfigurazioa"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16632,11 +16906,6 @@ msgstr "Bengaliarra"
 #, c-format
 msgid "Preference: "
 msgstr "Hobespena: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Wizard..."
-msgstr "Morroia..."
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -16688,6 +16957,13 @@ msgstr ""
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Erakutsi uneko interfaze-konfigurazioa"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -16802,6 +17078,13 @@ msgstr "Ezarpenak"
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Create/Transfer backup keys for SSH"
+msgstr ""
+"Sortu/Transferitu\n"
+"babeserako giltzak SSH-rentzako"
 
 #: ../../any.pm:1
 #, fuzzy, c-format
@@ -16921,6 +17204,11 @@ msgstr ""
 "Zure ordenagailua administratutako sare batekin konektatuta ez badago,\n"
 "beharbada \"Fitxategi lokalak\" aukeratu nahi izango dituzu\n"
 "autentifikaziorako."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Name resolution spoofing protection"
+msgstr ""
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -17117,15 +17405,15 @@ msgstr ""
 msgid "Shell"
 msgstr "Shell"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "PCI"
-msgstr "PCI"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome eta Principe"
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "PCI"
+msgstr "PCI"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -17202,6 +17490,13 @@ msgstr " - \\/*%s ataka paraleloan"
 
 #: ../../security/help.pm:1
 #, c-format
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
 msgid "if set to yes, check open ports."
 msgstr ""
 
@@ -17256,6 +17551,11 @@ msgstr "Erabili Windows-en partizioko leku librea"
 msgid "Italy"
 msgstr "Italia"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Kaiman uharteak"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17275,11 +17575,6 @@ msgstr "errorea %s desmuntatzean: %s"
 #, c-format
 msgid "Do it!"
 msgstr "Egin!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cayman Islands"
-msgstr "Kaiman uharteak"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17372,18 +17667,7 @@ msgstr "Detektatutako eredua: %s %s"
 msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"Version: %s\n"
-"Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-"\n"
-msgstr ""
-"HardDrake da hau, Mandrakeren hardware ezarpen tresna bat.\n"
-"Bertsioa:"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Local files"
 msgstr "Fitxategi lokalak"
@@ -17397,6 +17681,11 @@ msgstr "beharbada"
 #, c-format
 msgid "Panama"
 msgstr "Panama"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "Can't open %s!"
+msgstr "Ezin da %s %s-n bilatu"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -17481,11 +17770,6 @@ msgstr ""
 "\n"
 "- Gorde disko gogorrean, bide-izen honetan: %s\n"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Tamaina: %d KB\n"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove fonts on your system"
@@ -17511,10 +17795,10 @@ msgstr ""
 msgid "Graphical interface at startup"
 msgstr "X abioan"
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
-msgid "Please enter the directory to save:"
-msgstr "Adierazi gorde beharreko direktorioa:"
+msgid " adsl"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17525,6 +17809,11 @@ msgstr ""
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Ez dago nahikoa partizio %d RAID mailarako\n"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: true"
+msgstr "birkonfiguratu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17547,6 +17836,11 @@ msgstr "Konektatuta"
 msgid "Macedonian"
 msgstr "Mazedoniarra"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Mali"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
@@ -17556,11 +17850,6 @@ msgstr ""
 #, c-format
 msgid "/File/_Save"
 msgstr "/Fitxategia/_Gorde"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Mali"
-msgstr "Mali"
 
 #: ../../install_steps_gtk.pm:1
 #, fuzzy, c-format
@@ -17586,6 +17875,11 @@ msgstr "Urruneko Agintea"
 #, c-format
 msgid "Please select media for backup..."
 msgstr "Hautatu babeskopiaren euskarria..."
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Wrong email"
+msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -17647,8 +17941,7 @@ msgstr ""
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Mandrake Terminal Zerbitzariaren Ezarpena"
 
-#: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Save"
 msgstr "Gorde"
@@ -17699,11 +17992,6 @@ msgstr "Guyana frantsesa"
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "Arau bat gehitu"
-
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "A command line must be entered!"
@@ -17724,7 +18012,12 @@ msgstr "Transferitu inprimagailu-konfigurazioa"
 msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr "Inprimaketa gaitu nahi duzu goian aipatutako inprimagailuetan?\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check additions/removals of suid root files"
+msgstr ""
+
+#: ../../any.pm:1
 #, fuzzy, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -17765,13 +18058,10 @@ msgstr "Ataka"
 msgid "Use network connection to backup"
 msgstr "Erabili sareko konexioa babeskopia egiteko"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
-msgstr ""
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Kernel version"
+msgstr "nukleo-bertsioa"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
@@ -17892,10 +18182,25 @@ msgstr "Zerbitzaria"
 msgid "Left Shift key"
 msgstr "Ezkerreko \"Windows\" tekla"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " local network"
+msgstr "Bertako Sare helbidea"
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Aukera okerra, saiatu berriro\n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Syslog reports to console 12"
+msgstr ""
+
+#: ../../diskdrake/smbnfs_gtk.pm:1
+#, fuzzy, c-format
+msgid "Search new servers"
+msgstr "Bilatu zerbitzarietan"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -18055,6 +18360,16 @@ msgstr "Alemania"
 msgid "Austria"
 msgstr "Austria"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD media size (MB)"
+msgstr "Mesedez hautatu zure CD/DVD euskarri neurria"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check permissions of files in the users' home"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Run \"sndconfig\" after installation to configure your sound card"
@@ -18129,10 +18444,25 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "Mandrake Linux bertsio honek ez du %s onartzen."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 1"
+msgstr "maila"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
 msgstr "DHCP bezeroa"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "List users on display managers (kdm and gdm)"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 2"
+msgstr "maila"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -18143,6 +18473,21 @@ msgstr "Huts egin du %s fitxategitik leheneratzean: %s"
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech sagua (seriekoa, C7 mota zaharrekoa)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 3"
+msgstr "maila"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 4"
+msgstr "maila"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 5"
+msgstr "maila"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18213,14 +18558,6 @@ msgstr "(makina honetan)"
 #, c-format
 msgid "Install themes"
 msgstr "Instalatu gaiak"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-msgstr ""
-" eguneraketak 2002 MandrakeSoft Stew Benedict-ek <sbenedict\\@mandrakesoft."
-"com>"
 
 #: ../../help.pm:1
 #, c-format
@@ -18335,11 +18672,6 @@ msgstr "Lizentzia-kontratua"
 msgid "System Options"
 msgstr "Sistemaren Aukerak"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory where backups are stored"
-msgstr "Adierazi zein direktoriotan dauden babeskopiak"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
@@ -18354,6 +18686,13 @@ msgstr ""
 #, fuzzy, c-format
 msgid ", USB printer"
 msgstr ", \\/*%s USB inprimagailua"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Incremental backups only save files that have changed or are new since the "
+"last backup."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -18380,6 +18719,11 @@ msgstr "Zorionak!"
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Erabili jabearen id exekuziorako"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow remote root login"
+msgstr "(makina honetan)"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -18440,6 +18784,11 @@ msgstr "Microsoft Explorer"
 #, c-format
 msgid "German (no dead keys)"
 msgstr "Alemana (letra zaharkiturik ez)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tSend mail to %s\n"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18529,6 +18878,11 @@ msgstr ""
 " Nahi zenuen inprimagailua auto-detektatu bada, hautatu ezazu zerrendatik "
 "eta gehitu erabiltzaile-izena, pasahitza, eta/edo lantaldea beharrezko bada."
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " cable"
+msgstr "Taula"
+
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -18539,14 +18893,6 @@ msgstr "Erabili Windows-en partizioko leku librea"
 msgid "%s found on %s, configure it automatically?"
 msgstr "%s aurkitu da %s-n, konfiguratu?"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
-msgstr ""
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
@@ -18556,17 +18902,6 @@ msgstr "XFree86 kontrolatzailea: %s\n"
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
 msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Report \n"
-"\n"
-msgstr ""
-"\n"
-"                      DrakBackup-en berri-ematea \n"
-"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -18582,6 +18917,11 @@ msgstr "Papua Ginea Berria"
 #, c-format
 msgid "Serbian (cyrillic)"
 msgstr "Serbiarra (zirilikoa)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory where backups are stored"
+msgstr "Adierazi zein direktoriotan dauden babeskopiak"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -18859,16 +19199,6 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check for multisession CD"
-msgstr "Mesedez markatu saio-anitzeko CDa egiteko"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
-msgstr "Erabiltzailea"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Erabili disko gogorra babeskopia egiteko"
 
@@ -18948,6 +19278,11 @@ msgstr ""
 msgid "Detected model: %s"
 msgstr "Detektatutako eredua: %s %s"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" is not a valid email!"
+msgstr ""
+
 #: ../../standalone/drakedm:1
 #, c-format
 msgid ""
@@ -18960,6 +19295,11 @@ msgstr ""
 #, c-format
 msgid "if set to yes, run the daily security checks."
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "Adierazi babeskopiarako erabiliko den gailuaren izena"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19188,6 +19528,122 @@ msgstr ""
 "Posta eta berriak irakurtzeko eta bidaltzeko (pine, mutt, tin..) eta web-a "
 "arakatzeko tresnak"
 
+#~ msgid "Please relog into %s to activate the changes"
+#~ msgstr "Hasi berriro saioa %s(e)n aldaketak aktibatzeko"
+
+#~ msgid "Please check if you want to use the non-rewinding device."
+#~ msgstr "Mesedez markatu rebobinatzen ez den gailua erabiltzeko."
+
+#~ msgid "Please enter your password"
+#~ msgstr "Sartu pasahitza"
+
+#~ msgid ""
+#~ "\n"
+#~ " Some errors during sendmail are caused by \n"
+#~ " a bad configuration of postfix. To solve it you have to\n"
+#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Posta bidaltzean izandako errore batzuk postfix gaizki \n"
+#~ " konfiguratuta dagoelako izan dira. Konpontzeko, \n"
+#~ " myhostname edo mydomain ezarri behar duzu hemen: /etc/postfix/main.cf\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Please choose your CD/DVD device\n"
+#~ "(Press Enter to propogate settings to other fields.\n"
+#~ "This field isn't necessary, only a tool to fill in the form.)"
+#~ msgstr ""
+#~ "Mesedez hautatu zure CD/DVD gailua\n"
+#~ "(Sartu sakatu ezarpenak beste eremu batzutara hedatzeko.\n"
+#~ "Eremu hau ez da beharrezkoa, formularioa betetzeko tresna bakarrik.)"
+
+#~ msgid "Please check if you want to eject your tape after the backup."
+#~ msgstr ""
+#~ "Mesedez markatu babes-kopia ondoren zure zinta kanporatzea nahi baduzu."
+
+#~ msgid "Please check if you want to erase your tape before the backup."
+#~ msgstr "Mesedez markatu babes-kopia aurretik zinta ezabatu nahi baduzu."
+
+#~ msgid "Please enter the host name or IP."
+#~ msgstr "Idatzi ostalariaren izena edo IPa."
+
+#~ msgid "Please enter your login"
+#~ msgstr "Sartu saioa hasteko izena"
+
+#~ msgid ""
+#~ "\n"
+#~ "Restore Backup Problems:\n"
+#~ "\n"
+#~ "During the restore step, Drakbackup will verify all your\n"
+#~ "backup files before restoring them.\n"
+#~ "Before the restore, Drakbackup will remove \n"
+#~ "your original directory, and you will loose all your \n"
+#~ "data. It is important to be careful and not modify the \n"
+#~ "backup data files by hand.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Leheneratze-arazoak:\n"
+#~ "\n"
+#~ "Leheneratze-urratsean, Drakbackup-ek babeskopia-fitxategi\n"
+#~ "guztiak egiaztatuko ditu leheneratu aurretik.\n"
+#~ "Leheneratu aurretik, Drakbackup-ek kendu egingo du\n"
+#~ "jatorrizko direktorioa, eta datu guztiak galduko dituzu.\n"
+#~ "Garrantzizkoa da kontuz ibiltzea eta babeskopia-fitxategiak\n"
+#~ "eskuz ez aldatzea.\n"
+
+#~ msgid ""
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ msgstr ""
+#~ " eguneraketak 2002 MandrakeSoft Stew Benedict-ek <sbenedict"
+#~ "\\@mandrakesoft.com>"
+
+#~ msgid "edit"
+#~ msgstr "editatu"
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "hautatu ikusi/editatzeko fitxategia"
+
+#~ msgid "path"
+#~ msgstr "bidea"
+
+#~ msgid "permissions"
+#~ msgstr "baimenak"
+
+#~ msgid "delete"
+#~ msgstr "ezabatu"
+
+#~ msgid "user"
+#~ msgstr "Erabiltzailea"
+
+#~ msgid "Expert Area"
+#~ msgstr "Aditu area"
+
+#~ msgid "Wizard..."
+#~ msgstr "Morroia..."
+
+#~ msgid "Previous"
+#~ msgstr "Aurrekoa"
+
+#~ msgid "Please check if you are using CDRW media"
+#~ msgstr "Hautatu CDRW euskarria erabiltzen baduzu"
+
+#~ msgid "Please check if you are using a DVDRAM device"
+#~ msgstr "Mesedez markatu DVDRAM gailua erabiltzen ari bazara"
+
+#~ msgid "Please check if you are using a DVDR device"
+#~ msgstr "Mesedez markatu DVDR gailua erabiltzen ari bazara"
+
+#~ msgid "Please check for multisession CD"
+#~ msgstr "Mesedez markatu saio-anitzeko CDa egiteko"
+
+#~ msgid "We are now going to configure the %s connection."
+#~ msgstr "%s konexioa konfiguratuko dugu orain."
+
+#~ msgid "Name: %s\n"
+#~ msgstr "Izena: %s\n"
+
 #~ msgid ""
 #~ "Which ISDN configuration do you prefer?\n"
 #~ "\n"
@@ -19267,9 +19723,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Eraiki RAMdiskoa (initrd) honekin 'mkinitrd -f /boot/initrd-%s.img %s'."
 
-#~ msgid "Write %s"
-#~ msgstr "Idatzi %s"
-
 #~ msgid "Copy %s to %s"
 #~ msgstr "Kopiatu %s %s-ra"
 
@@ -19284,34 +19737,6 @@ msgstr ""
 
 #~ msgid "Author:"
 #~ msgstr "Egilea:"
-
-#, fuzzy
-#~ msgid "Audio station"
-#~ msgstr "Multimediako estazioa"
-
-#, fuzzy
-#~ msgid "Sound playing/editing programs"
-#~ msgstr "Soinua eta bideoa jotzeko/editatzeko programak"
-
-#, fuzzy
-#~ msgid "Video station"
-#~ msgstr "Joko-estazioa"
-
-#, fuzzy
-#~ msgid "Video playing programs"
-#~ msgstr "Soinua eta bideoa jotzeko/editatzeko programak"
-
-#, fuzzy
-#~ msgid "Graphic station"
-#~ msgstr "Joko-estazioa"
-
-#, fuzzy
-#~ msgid "Graphics programs"
-#~ msgstr "The Gimp bezalako programa grafikoak"
-
-#, fuzzy
-#~ msgid "Printer sharing"
-#~ msgstr "Fitxategi-konpartitzea"
 
 #~ msgid ""
 #~ "Your printer belongs to the group of GDI laser printers (winprinters) "
@@ -19515,261 +19940,6 @@ msgstr ""
 #~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
 #~ msgstr "Ezagutu \"MandrakeClub\" eta \"Mandrake Corporate Club\""
 
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
-#, fuzzy
-#~ msgid ""
-#~ "As a review, DrakX will present a summary of various information it has\n"
-#~ "about your system. Depending on your installed hardware, you may have "
-#~ "some\n"
-#~ "or all of the following entries:\n"
-#~ "\n"
-#~ " * \"Mouse\": check the current mouse configuration and click on the "
-#~ "button\n"
-#~ "to change it if necessary.\n"
-#~ "\n"
-#~ " * \"%s\": check the current keyboard map configuration and click on\n"
-#~ "the button to change that if necessary.\n"
-#~ "\n"
-#~ " * \"%s\": check the current country selection. If you are not in this\n"
-#~ "country, click on the button and choose another one.\n"
-#~ "\n"
-#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-#~ "primary language you have chosen. But here, just as in your choice of a\n"
-#~ "keyboard, you may not be in a country to which the chosen language\n"
-#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
-#~ "configure the clock for the correct timezone.\n"
-#~ "\n"
-#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
-#~ "printer\n"
-#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-#~ "Guide'' for more information on how to setup a new printer. The "
-#~ "interface\n"
-#~ "presented there is similar to the one used during installation.\n"
-#~ "\n"
-#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-#~ "click that button. This should be reserved to advanced users.\n"
-#~ "\n"
-#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-#~ "interface in \"800x600\" resolution. If that does not suits you, click "
-#~ "on\n"
-#~ "the button to reconfigure your graphical interface.\n"
-#~ "\n"
-#~ " * \"Network\": If you want to configure your Internet or local network\n"
-#~ "access now, you can by clicking on this button.\n"
-#~ "\n"
-#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
-#~ "displayed here. If you notice the sound card displayed is not the one "
-#~ "that\n"
-#~ "is actually present on your system, you can click on the button and "
-#~ "choose\n"
-#~ "another driver.\n"
-#~ "\n"
-#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-#~ "here. If you have a TV card and it is not detected, click on the button "
-#~ "to\n"
-#~ "try to configure it manually.\n"
-#~ "\n"
-#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-#~ "displayed here. You can click on the button to change the parameters\n"
-#~ "associated with the card."
-#~ msgstr ""
-#~ "Hemen zure ordenagailuari dagozkion parametroak aurkezten dira.\n"
-#~ "Instalatutako hardwarearen arabera, ondoko sarrerak ikusiko dituzu - edo\n"
-#~ "ez:\n"
-#~ "\n"
-#~ " * \"Sagua\": egiaztatu uneko sagu-konfigurazioa eta, behar izanez gero,\n"
-#~ "egin klik botoian, aldatzeko;\n"
-#~ "\n"
-#~ " * \"Teklatua\": egiaztatu uneko teklatuaren konfigurazioa eta, behar\n"
-#~ "izanez gero, egin klik botoian aldatzeko;\n"
-#~ "\n"
-#~ " * \"Ordu-zona\": DrakXk, lehenespenez, aukeratutako hizkuntzatik "
-#~ "asmatzen\n"
-#~ "du zure ordu-zona. Baina hemen ere, teklatua aukeratzean bezala, "
-#~ "baliteke\n"
-#~ "aukeratutako hizkuntzari dagokion herrialdean ez egotea zu. Horregatik,\n"
-#~ "\"Ordu-zona\" botoian klik egin beharko duzu erlojua zu zauden ordu-"
-#~ "zonaren\n"
-#~ "arabera konfiguratzeko;\n"
-#~ "\n"
-#~ " * \"Inprimagailua\": \"Inprimagailurik ez\" botoian klik eginez,\n"
-#~ "inprimagailuaren konfigurazio-morroia irekiko da;\n"
-#~ "\n"
-#~ " * \"Soinu-txartela\": zure sisteman soinu-txartel bat detektatzen bada,\n"
-#~ "hemen bistaratuko da. Instalazio-garaian ezin da aldaketarik egin;\n"
-#~ "\n"
-#~ " * \"Telebista-txartela\": zure sisteman telebista-txartel bat "
-#~ "detektatzen\n"
-#~ "bada, hemen bistaratuko da. Instalazio-garaian ezin da aldaketarik egin;\n"
-#~ "\n"
-#~ " * \"ISDN txartela\": zure sisteman ISDN txartel bat detektatzen bada,\n"
-#~ "hemen bistaratuko da. Egin klik botoian txartelaren parametroak aldatzeko."
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
-#, fuzzy
-#~ msgid ""
-#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
-#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
-#~ "what it finds there:\n"
-#~ "\n"
-#~ " * if a Windows boot sector is found, it will replace it with a grub/"
-#~ "LILO\n"
-#~ "boot sector. This way you will be able to load either GNU/Linux or "
-#~ "another\n"
-#~ "OS.\n"
-#~ "\n"
-#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
-#~ "one.\n"
-#~ "\n"
-#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
-#~ "bootloader.\n"
-#~ "\n"
-#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
-#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
-#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
-#~ "disk\n"
-#~ "(\"On Floppy\").\n"
-#~ "\n"
-#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-#~ "handy.\n"
-#~ "\n"
-#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
-#~ "by\n"
-#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
-#~ ">>rescue<<\n"
-#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
-#~ "at\n"
-#~ "least two situations where having a boot floppy is critical:\n"
-#~ "\n"
-#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
-#~ "(MBR)\n"
-#~ "of your main disk (unless you are using another boot manager), to allow "
-#~ "you\n"
-#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
-#~ "on\n"
-#~ "your system). If at some point you need to reinstall Windows, the "
-#~ "Microsoft\n"
-#~ "install process will rewrite the boot sector and remove your ability to\n"
-#~ "start GNU/Linux!\n"
-#~ "\n"
-#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
-#~ "disk,\n"
-#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
-#~ "a\n"
-#~ "fair number of system tools for restoring a system that has crashed due "
-#~ "to\n"
-#~ "a power failure, an unfortunate typing error, a forgotten root password, "
-#~ "or\n"
-#~ "any other reason.\n"
-#~ "\n"
-#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
-#~ "format the floppy and will rewrite the whole disk."
-#~ msgstr ""
-#~ "Mandrake Linux-en CD-ROMak berreskuratze-modua dauka barnean. Hura "
-#~ "erabili\n"
-#~ "dezakezu CD-ROMetik abiatu, >>F1<< tekla abioan sakatu eta gonbitan "
-#~ ">>rescue<<\n"
-#~ "idatziz. Baina zure ordenagailua CD-ROMetik abiatu ezin daitekeen kasuan, "
-#~ "urrats\n"
-#~ "honetara itzuli beharko zenuke laguntza bila gutxienez bi egoeratan:\n"
-#~ "\n"
-#~ " * abio-zamatzailea instalatzeko, DrakXek zure disko nagusiko abio-"
-#~ "sektorea\n"
-#~ "(MBR) berridatziko du (baldin eta ez baduzu beste abio-kudeatzaile bat\n"
-#~ "erabiltzen), Windows nahiz GNU/Linux-ekin hasi ahal zaitezen (zure "
-#~ "sisteman\n"
-#~ "Windows daukazula suposatuz). Windows berrinstalatzen baduzu,\n"
-#~ "Microsoft-en instalazio-prozesuak abioko sektorea berridatziko du, eta "
-#~ "gero\n"
-#~ "ezin izango duzu GNU/Linux abiarazi!\n"
-#~ "\n"
-#~ " * arazoren bat sortzen bada eta GNU/Linux disko zurrunetik abiarazi ezin "
-#~ "baduzu,\n"
-#~ "diskete hau izango da GNU/Linux abiarazteko bide bakarra. Sistema-tresna "
-#~ "ugari ditu, argindarra eten, idazketa-akats tamalgarri bat, pasahitz "
-#~ "batean akatsa, edo\n"
-#~ "beste edozein arrazoigatik hondatu den sistema berreskuratzeko.\n"
-#~ "\n"
-#~ "\"Bai\" esaten baduzu, unitatean diskete bat sartzea eskatuko zaizu. "
-#~ "Sartuko\n"
-#~ "duzun disketea hutsik egon behar da edo dituen datuak ez dira beharrezko "
-#~ "izan\n"
-#~ "behar. Ez duzu eratu beharko, DrakX-ek disko osoa gainidatziko baitu."
-
-# DO NOT BOTHER TO MODIFY HERE, SEE:
-# cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/eu/drakx-help.xml
-#, fuzzy
-#~ msgid ""
-#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-#~ "handy.\n"
-#~ "\n"
-#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
-#~ "by\n"
-#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
-#~ ">>rescue<<\n"
-#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
-#~ "at\n"
-#~ "least two situations where having a boot floppy is critical:\n"
-#~ "\n"
-#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
-#~ "(MBR)\n"
-#~ "of your main disk (unless you are using another boot manager), to allow "
-#~ "you\n"
-#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
-#~ "on\n"
-#~ "your system). If at some point you need to reinstall Windows, the "
-#~ "Microsoft\n"
-#~ "install process will rewrite the boot sector and remove your ability to\n"
-#~ "start GNU/Linux!\n"
-#~ "\n"
-#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
-#~ "disk,\n"
-#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
-#~ "a\n"
-#~ "fair number of system tools for restoring a system that has crashed due "
-#~ "to\n"
-#~ "a power failure, an unfortunate typing error, a forgotten root password, "
-#~ "or\n"
-#~ "any other reason.\n"
-#~ "\n"
-#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
-#~ "format the floppy and will rewrite the whole disk."
-#~ msgstr ""
-#~ "Mandrake Linux-en CD-ROMak berreskuratze-modua dauka barnean. Hura "
-#~ "erabili\n"
-#~ "dezakezu CD-ROMetik abiatu, >>F1<< tekla abioan sakatu eta gonbitan "
-#~ ">>rescue<<\n"
-#~ "idatziz. Baina zure ordenagailua CD-ROMetik abiatu ezin daitekeen kasuan, "
-#~ "urrats\n"
-#~ "honetara itzuli beharko zenuke laguntza bila gutxienez bi egoeratan:\n"
-#~ "\n"
-#~ " * abio-zamatzailea instalatzeko, DrakXek zure disko nagusiko abio-"
-#~ "sektorea\n"
-#~ "(MBR) berridatziko du (baldin eta ez baduzu beste abio-kudeatzaile bat\n"
-#~ "erabiltzen), Windows nahiz GNU/Linux-ekin hasi ahal zaitezen (zure "
-#~ "sisteman\n"
-#~ "Windows daukazula suposatuz). Windows berrinstalatzen baduzu,\n"
-#~ "Microsoft-en instalazio-prozesuak abioko sektorea berridatziko du, eta "
-#~ "gero\n"
-#~ "ezin izango duzu GNU/Linux abiarazi!\n"
-#~ "\n"
-#~ " * arazoren bat sortzen bada eta GNU/Linux disko zurrunetik abiarazi ezin "
-#~ "baduzu,\n"
-#~ "diskete hau izango da GNU/Linux abiarazteko bide bakarra. Sistema-tresna "
-#~ "ugari ditu, argindarra eten, idazketa-akats tamalgarri bat, pasahitz "
-#~ "batean akatsa, edo\n"
-#~ "beste edozein arrazoigatik hondatu den sistema berreskuratzeko.\n"
-#~ "\n"
-#~ "\"Bai\" esaten baduzu, unitatean diskete bat sartzea eskatuko zaizu. "
-#~ "Sartuko\n"
-#~ "duzun disketea hutsik egon behar da edo dituen datuak ez dira beharrezko "
-#~ "izan\n"
-#~ "behar. Ez duzu eratu beharko, DrakX-ek disko osoa gainidatziko baitu."
-
 #~ msgid ""
 #~ "The following printers are configured. Double-click on a printer to "
 #~ "change its settings; to make it the default printer; to view information "
@@ -19794,9 +19964,6 @@ msgstr ""
 
 #~ msgid "DrakFloppy Error: %s"
 #~ msgstr "DrakFloppy-ren errorea: %s"
-
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #~ msgid "Launch Aurora at boot time"
 #~ msgstr "Abiarazi Aurora abioan"
@@ -19827,18 +19994,6 @@ msgstr ""
 
 #~ msgid "/Options"
 #~ msgstr "/Aukerak"
-
-#, fuzzy
-#~ msgid "/Autodetect jazz drives"
-#~ msgstr "Auto-detektatuta"
-
-#, fuzzy
-#~ msgid "/Autodetect modems"
-#~ msgstr "Auto-detektatuta"
-
-#, fuzzy
-#~ msgid "/Autodetect printers"
-#~ msgstr "Auto-detektatuta"
 
 #~ msgid ""
 #~ "The partition you've selected to add as root (/) is physically located "

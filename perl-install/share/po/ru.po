@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Drak-X\n"
-"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"POT-Creation-Date: 2003-08-13 03:40+0200\n"
 "PO-Revision-Date: 2003-04-11 14:48+0200\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: russian <cooker-i18n@linux-mandrake.com>\n"
@@ -25,10 +25,29 @@ msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
 "если установлено yes, проверяет добавления/удаления битов suid root файлов."
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
+"0/1 for Local Config...\n"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Configuration changed - restart clusternfs/dhcpd?"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t\tErase=%s"
 msgstr "\t\tСтереть=%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Differential backups only save files that have changed or are new since the "
+"original 'base' backup."
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -78,6 +97,13 @@ msgstr "на сервере CUPS \"%s\""
 #, c-format
 msgid "Post-install configuration"
 msgstr "Настройка после установки"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -129,6 +155,11 @@ msgstr "Центрально-африканская республика"
 msgid "Gateway device"
 msgstr "Шлюзовое устройство"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Advanced preferences"
+msgstr "Дополнительные настройки"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Net Method:"
@@ -139,10 +170,22 @@ msgstr "Сетевой метод:"
 msgid "Ethernetcard"
 msgstr "Карта ethernet"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "If set, send the mail report to this email address else send it to root"
+msgstr ""
+"если установлено, отправляет письмо с отчетом на этот адрес, иначе "
+"отправляет его root'у."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Параметры"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "no"
+msgstr "Информация"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -196,6 +239,11 @@ msgstr "Беларусь"
 msgid "Error writing to file %s"
 msgstr "Ошибка записи в файл %s"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result to syslog"
+msgstr "если установлено yes, сообщает о результате проверки в syslog."
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -247,6 +295,11 @@ msgstr ""
 "Drakbackup выполняется на %s:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "yes"
+msgstr "Да"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
@@ -295,6 +348,11 @@ msgstr "Редактировать выбранный хост"
 msgid "No CD device defined!"
 msgstr "Устройство CD не выбрано!"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "\tUse .backupignore files\n"
+msgstr "Использовать квоты для резервных файлов"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (phonetic)"
@@ -309,6 +367,11 @@ msgstr "Начальный IP-адрес DHCP"
 #, c-format
 msgid "256 kB"
 msgstr "256 kB"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Don't rewind tape after backup"
+msgstr "Использовать для резервирования магнитную ленту"
 
 #: ../../any.pm:1
 #, c-format
@@ -329,6 +392,11 @@ msgstr ""
 msgid "Tape"
 msgstr "Магнитная лента"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Малайзия"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning network..."
@@ -342,11 +410,6 @@ msgid ""
 msgstr ""
 "При помощи этой опции вы сможете восстановить любую версию своего каталога /"
 "etc."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Malaysia"
-msgstr "Малайзия"
 
 #: ../../standalone/drakedm:1
 #, fuzzy, c-format
@@ -378,6 +441,16 @@ msgstr "Размер кэша (второго уровня) процессора"
 msgid "Soundcard"
 msgstr "Звуковая карта"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Search for files to restore"
+msgstr "Выберите другой носитель для восстановления"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Люксембург"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -392,23 +465,10 @@ msgstr ""
 msgid "Level %s\n"
 msgstr "Уровень %s\n"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Luxembourg"
-msgstr "Люксембург"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Daemon Report\n"
-"\n"
-"\n"
-msgstr ""
-"\n"
-"                      Отчет демона DrakBackup\n"
-"\n"
-"\n"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac (phonetic)"
+msgstr "Армянская (фонетическая)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -466,6 +526,11 @@ msgstr "Пароль (еще раз)"
 msgid "Search installed fonts"
 msgstr "Поиск установленных шрифтов"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default desktop"
+msgstr "По умолчанию"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
@@ -490,6 +555,13 @@ msgid ""
 msgstr ""
 "Список поврежденных данных:\n"
 "\n"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Can only be mounted explicitly (i.e.,\n"
+"the -a option will not cause the file system to be mounted)."
+msgstr ""
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -557,19 +629,6 @@ msgstr "Удалить модуль"
 msgid "Password"
 msgstr "Пароль"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
-"\\fP."
-msgstr ""
-"Аргументы: (max, inactive=-1)\n"
-"\n"
-"Устанавливает возраст пароля в \\fImax\\fP дней и задержку для изменения в "
-"\\fIinactive\\fP."
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
@@ -626,81 +685,8 @@ msgstr "/Автоопределение приводов _jazz"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Description:\n"
-"\n"
-"  Drakbackup is used to backup your system.\n"
-"  During the configuration you can select: \n"
-"\t- System files, \n"
-"\t- Users files, \n"
-"\t- Other files.\n"
-"\tor All your system ...  and Other (like Windows Partitions)\n"
-"\n"
-"  Drakbackup allows you to backup your system on:\n"
-"\t- Harddrive.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup allows you to restore your system to\n"
-"  a user selected directory.\n"
-"\n"
-"  Per default all backups will be stored on your\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"Restore Step:\n"
-"  \n"
-"  During the restore step, DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. It is recommended \n"
-"  you do a last backup before restoring.\n"
-"\n"
-"\n"
+msgid "Store the password for this system in drakbackup configuration."
 msgstr ""
-"Описание:\n"
-"\n"
-"  Drakbackup используется для резервирования вашей системы.\n"
-"  Во время настройки вы можете выбрать: \n"
-"\t- Системные файлы, \n"
-"\t- Файлы пользователей, \n"
-"\t- Другие файлы.\n"
-"\tили Всю свою систему ... и Другие (напр., разделы Windows)\n"
-"\n"
-"  Drakbackup позволяет вам резервировать свою систему на:\n"
-"\t- Жесткий диск.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (с автозагрузкой, аварийным\n"
-"\t  запуском и автоматической установкой.)\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Магнитную ленту.\n"
-"\n"
-"  Drakbackup позволяет вам восстановить свою систему\n"
-"  в каталог, указанный пользователем.\n"
-"\n"
-" По умолчанию все резервные копии будут сохранены\n"
-" в вашем каталоге /var/lib/drakbackup\n"
-"\n"
-"  Файл настройки:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"\n"
-"Этап восстановления:\n"
-"  \n"
-"  На этапе восстановления DrakBackup удалит ваш \n"
-"  исходный каталог и проверит, чтобы все \n"
-"  резервные файлы не были повреждены.\n"
-"  Рекомендуется, чтобы вы перед восстановлением\n"
-"  выполнили последнее резервирование.\n"
-"\n"
-"\n"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -926,6 +912,11 @@ msgstr ""
 "вопросам, касающимся этого документа, пожалуйста, свяжитесь\n"
 "с MandrakeSoft S.A.\n"
 
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Default user"
+msgstr "Принтер по умолчанию"
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
@@ -969,6 +960,11 @@ msgstr "Не печатать никаких тестовых страниц"
 msgid "Gurmukhi"
 msgstr "Гурмуки"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s already in use\n"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
@@ -1008,274 +1004,10 @@ msgstr ""
 msgid "Show only for the selected day"
 msgstr "Показывать только за выбранный день"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be \"thin\"\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run most\n"
-"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are modified\n"
-"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
-"issues in using xdmcp,\n"
-"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
-"subnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future drakTermServ "
-"will help create these\n"
-"        \t\tfiles.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. In the future, "
-"drakTermServ can help create files\n"
-"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
-"keyboard on a per-client\n"
-"        \t\tbasis.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
+msgid "\tLimit disk usage to %s MB\n"
 msgstr ""
-"Обзор drakTermServ\n"
-"\t\t\t   \n"
-"        - Создает загрузочные образы с etherboot:\n"
-"        \t\tДля загрузки ядра посредством etherboot должен быть создан "
-"специальный образ kernel/initrd.\n"
-"        \t\tmkinitrd-net выполняет основную часть этой работы, а "
-"drakTermServ является просто графическим интерфейсом,\n"
-"        \t\tчтобы помочь с управлением/настройкой этих образов.\n"
-"\n"
-"        - Обслуживает /etc/dhcpd.conf:\n"
-"        \t\tДля клиентов с сетевой загрузкой каждый должен иметь запись в "
-"dhcpd.conf, определяющую IP-адрес\n"
-"        \t\tи сетевые загрузочные образы машины. drakTermServ помогает "
-"создавать/удалять эти записи.\n"
-"\t\t\t\n"
-"        \t\t(карты PCI могут пропустить образ - etherboot запросит "
-"правильный образ. Вы также\n"
-"        \t\tдолжны учесть, что когда etherboot ищет образы, он ожидает "
-"увидеть имена типа\n"
-"        \t\tboot-3c59x.nbi скорее, чем boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tТипичная запись в dhcpd.conf для поддержки бездисковых клиентов "
-"выглядит так:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t/*type                          fat;*/\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tВы можете использовать пул IP-адресов, а также указывать определенную "
-"запись для\n"
-"\t\t\tклиентской машины, используя схему с фиксированным адресом, "
-"позволяющую\n"
-"\t\t\tиспользовать конфигурационные файлы для отдельных клиентов "
-"ClusterNFS.\n"
-"\t\t\t\n"
-"\t\t\tПримечание: Параметр \"#type\" используется только в drakTermServ. "
-"Клиенты могут\n"
-"\t\t\tбыть как \"тонкими\" так и 'толстыми'. Тонкие клиенты запускают "
-"большинство программного\n"
-"\t\t\tобеспечения на сервере посредством xdmcp, в то время как толстые "
-"клиенты запускают\n"
-"\t\t\tбольшинство программного обеспечения на клиентской машине. Специальный "
-"inittab, /etc/inittab\\$\\$IP=ip_клиента\\$\\$\n"
-"\t\t\tнаписан для тонких клиентов. Конфигурационные файлы системы xdm-"
-"config, kdmrc и gdm.conf изменяются,\n"
-"\t\t\tесли используются тонкие клиенты, чтобы включить xdmcp. В то же время "
-"существуют проблемы\n"
-"\t\t\tс безопасностью при использовании xdmcp, изменяются hosts.deny и hosts."
-"allow\n"
-"\t\t\tдля ограничения доступа к локальной сети.\t\t\t\n"
-"\t\t\tПримечание: Вы должны остановить/запустить сервер после добавления или "
-"изменения клиентов.\n"
-"\t\t\t\n"
-"        - Содержание /etc/exports:\n"
-"        \t\tClusternfs позволяет экспортировать корневую файловую систему "
-"бездисковым клиентам.\n"
-"        \t\tdrakTermServ настраивает корректную запись для предоставления "
-"анонимного доступа\n"
-"        \t\t к корневой файловой системе с бездисковых клиентов.\n"
-"\n"
-"        \t\tТипичная запись exports для clusternfs:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              ПОДСЕТЬ/МАСКА(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tС ПОДСЕТЬЮ/МАСКОЙ для вашей сети.\n"
-"        \t\t\n"
-"        - Содержание /etc/shadow\\$\\$КЛИЕНТ\\$\\$:\n"
-"        \t\tЧтобы пользователи могли входить в систему с бездисковых "
-"клиентов,\n"
-"        \t\t их записи в /etc/shadow должны быть продублированы в /etc/shadow"
-"\\$\\$CLIENTS\\$\\$.\n"
-"        \t\t drakTermServ помогает в этом, добавляя или удаляя системных "
-"пользователей из этого файла.\n"
-"\n"
-"        - Для каждого клиента /etc/X11/XF86Config-4\\$\\$IP-АДРЕС\\$\\$:\n"
-"        \t\tИспользуя clusternfs, каждый бездисковый клиент может иметь свои "
-"собственные\n"
-"        \t\t уникальные конфигурационные файлы на корневой файловой системе "
-"на сервере.\n"
-"        \t\t В будущем drakTermServ поможет создать эти файлы.\n"
-"        - Конфигурационные файлы для каждого клиента:\n"
-"        \t\tИспользуя clusternfs, каждый бездисковый клиент может иметь свои "
-"собственные\n"
-"        \t\t уникальные конфигурационные файлы на корневой файловой системе "
-"сервера.\n"
-"        \t\t В будущем drakTermServ сможет помочь создать файлы, такие как /"
-"etc/modules.conf,\n"
-"        \t\t/etc/sysconfig/mouse, /etc/sysconfig/ для каждого клиента.\n"
-"\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ сконфигурирует этот файл для работы в связке с "
-"образами, созданными\n"
-"        \t\tпри помощи mkinitrd-net, а также записи в /etc/dhcpd.conf для "
-"обслуживания\n"
-"        \t\tзагрузочного образа каждого бездискового клиента.\n"
-"\n"
-"        \t\tТипичный конфигурационный файл tftp выглядит так:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tОтличия от установок по умолчанию: опция disable изменена на "
-"'no' и путь каталогу\n"
-"        \t\tизменен на /var/lib/tftpboot, куда mkinitrd-net помещает свои "
-"образы.\n"
-"\n"
-"        - Создание дискет/компакт-дисков etherboot:\n"
-"        \t\tМашинам бездисковых клиентов нужны либо ROM-образы на NIC, либо "
-"загрузочная дискета\n"
-"        \t\tили компакт-диск, чтобы проинициализировать последовательность "
-"начальной загрузки.\n"
-"        \t\t\n"
-"        \t\tПростой пример создания вручную загрузочной дискеты для 3Com "
-"3c509:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -1335,6 +1067,17 @@ msgstr ""
 msgid "<control>Q"
 msgstr "<control>Q"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Please be sure that the cron daemon is included in your services. \n"
+"\n"
+"Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Пожалуйста, убедитесь, что демон cron включен в ваши сервисы.\n"
+"\n"
+"Заметьте, что сейчас все 'сетевые' носители также используют жесткий диск."
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Unknown"
@@ -1374,32 +1117,6 @@ msgstr "Параметр %s должен быть числом!"
 msgid "Notice"
 msgstr "Уведомление"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает ежедневную проверку безопасности."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
-"allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает для пользователей crontab и at. Помещает разрешенных "
-"пользователей в /etc/cron.allow и /etc/at.allow\n"
-"(см. man at(1) и crontab(1))."
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1437,93 +1154,8 @@ msgstr "Интерфейс"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" - Backup System Files:\n"
-"       \n"
-"\tThis option allows you to backup your /etc directory,\n"
-"\twhich contains all configuration files. Please be\n"
-"\tcareful during the restore step to not overwrite:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup User Files: \n"
-"\n"
-"\tThis option allows you select all users that you want to \n"
-"\tbackup. To preserve disk space, it is recommended that\n"
-"\tyou do not include the web browser's cache.\n"
-"\n"
-" - Backup Other Files: \n"
-"\n"
-"\tThis option allows you to include additional data to save.\n"
-"\tIf you want to add individual files, select them from the\n"
-"\trighthand 'Files' list pane.  To add directories, enter the \n"
-"\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-"\tand at that point click 'OK' without selecting any files.\n"
-" \n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"описание опций:\n"
-"\n"
-" - Резервирование системных файлов:\n"
-"\n"
-"\tЭта опция позволяет вам резервировать свой каталог /etc,\n"
-"\tкоторый содержит все файлы настройки. Пожалуйста, будьте\n"
-"\tосторожны на этапе восстановления, чтобы не перезаписать:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab \n"
-"\n"
-" - Резервирование файлов пользователя: \n"
-"\n"
-"\tЭта опция позволяет вам выбрать всех пользователей,\n"
-"\tданные которых вы хотите зарезервировать.\n"
-"\tДля экономии дискового пространства рекомендуется,\n"
-"\tчтобы вы не включали кэш браузера.\n"
-"\n"
-" - Нарастающие резервирования:\n"
-"\tНарастающее резервирование является наиболее мощной\n"
-"\tопцией резервирования. Эта опция позволяет вам в первый\n"
-"\tраз зарезервировать все свои данные, а в дальнейшем\n"
-"\tтолько изменившиеся.\n"
-"\tДалее, вы сможете на этапе восстановления восстановить\n"
-"\tсвои данные за указанный период.\n"
-"\tЕсли вы не выбрали эту опцию, все старые пакеты будут\n"
-"\tудаляться перед каждым резервированием.\n"
-"\n"
-"\n"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
-msgstr ""
-"Аргументы: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Включает/отключает уведомления syslog в консоли 12. \\fIexpr\\fP является\n"
-"расширением, описывающим, что регистрировать (подробнее смотрите в syslog."
-"conf(5)), а dev -- устройство, регистрирующее логи."
+msgid "Multisession CD"
+msgstr " (многосеансовый)"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1579,6 +1211,11 @@ msgstr "Швейцария"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Бруней Даруссалам"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "You must be root to read configuration file. \n"
+msgstr "Зарезервировать немедленно из файла конфигурации"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1674,6 +1311,11 @@ msgstr "Настроить доступ в Интернет..."
 msgid "Norway"
 msgstr "Норвегия"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Delete profile"
+msgstr "Удалить профиль..."
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Danish"
@@ -1710,6 +1352,11 @@ msgstr ""
 "DrakX сам определит, если выбранный пакет находится на другом\n"
 "компакт-диске, извлечет текущий диск и попросит вас вставить требуемый."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "When checked, owner and group won't be changed"
+msgstr "если отмечен, владелец и группа не будут изменены"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
@@ -1720,15 +1367,15 @@ msgstr "Процессоры"
 msgid "Bulgaria"
 msgstr "Болгария"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "No NIC selected!"
-msgstr "NIC не выбран!"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
 msgstr "Свалбард и острова Яна Майена"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "No NIC selected!"
+msgstr "NIC не выбран!"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1795,6 +1442,17 @@ msgstr ""
 "восстановление системы после критических сбоев. Хотите создать загрузочный\n"
 "диск для своей системы?%s"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Daemon Report\n"
+msgstr ""
+"\n"
+"                      Отчет демона DrakBackup\n"
+"\n"
+"\n"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1826,15 +1484,15 @@ msgstr ""
 msgid "First sector of drive (MBR)"
 msgstr "Первый сектор диска (MBR)"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Joystick"
-msgstr "Джойстик"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
 msgstr "Сальвадор"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr "Джойстик"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1851,6 +1509,11 @@ msgstr "Использовать по умолчанию Unicode"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "модуль ядра GNU/Linux, управляющий этим устройством"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDR device"
+msgstr "устройство"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1861,6 +1524,14 @@ msgstr "Выполняется попытка спасти таблицу разделов"
 msgid "Option %s must be an integer number!"
 msgstr "Параметр %s должен быть целым числом!"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Использовать пароли для аутентификации пользователей."
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -1870,12 +1541,20 @@ msgstr ""
 "Пункты, которые вы должны заполнить:\n"
 "%s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For backups to other media, files are still created on the hard drive, then "
+"moved to the other media.  Enabling this option will remove the hard drive "
+"tar files after the backup."
+msgstr ""
+
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Unable to start live upgrade !!!\n"
 msgstr "Невозможно начать обновление !!!\n"
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../install_steps_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Name: "
 msgstr "Имя: "
@@ -1900,12 +1579,21 @@ msgstr "Официальный магазин MandrakeSoft"
 msgid "Resizing"
 msgstr "Изменение размера"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter the maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Пожалуйста, введите максимальный размер,\n"
+" разрешенный для Drakbackup"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Cable connection"
 msgstr "Кабельное соединение"
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr "Пользователь"
@@ -1950,6 +1638,11 @@ msgstr "mkraid завершился неудачей"
 msgid "Button 3 Emulation"
 msgstr "Эмуляция 3-й кнопки"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of sgid files"
+msgstr "если установлено yes, проверяет добавления/удаления бита sgid файлов."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sending files..."
@@ -1964,11 +1657,6 @@ msgstr "Израильская (фонетическая)"
 #, c-format
 msgid "access to rpm tools"
 msgstr "доступ к инструментам rpm"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr "редактировать"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2057,6 +1745,16 @@ msgstr ""
 msgid "Harddrake2 version %s"
 msgstr "Harddrake2 версия %s"
 
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Preferences"
+msgstr "Предпочтение: "
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Свазиленд"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -2072,20 +1770,15 @@ msgstr "выбрать цвет"
 msgid "Dominican Republic"
 msgstr "Доминиканская республика"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Swaziland"
-msgstr "Свазиленд"
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Syriac"
+msgstr "Сирия"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
 msgstr "Set-UID"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using CDRW media"
-msgstr "Пожалуйста, отметьте, если вы используете носитель CDRW"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2104,6 +1797,11 @@ msgstr ""
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Use the %c and %c keys for selecting which entry is highlighted."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../mouse.pm:1
 #, c-format
@@ -2168,6 +1866,14 @@ msgstr "Печатается тестовая страница..."
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Уже есть раздел с точкой монтирования %s\n"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable msec hourly security check."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает проверку безопасности msec каждый час."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2329,55 +2035,6 @@ msgstr "Что вы выбираете? (по умолчанию %s) "
 msgid "Trouble shooting"
 msgstr "Поиск и устранение неисправностей"
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid " / Region"
-msgstr " / Регион"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"The classic bug sound tester is to run the following commands:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
-"by default\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
-"currently uses\n"
-"\n"
-"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
-"loaded or not\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
-"tell you if sound and alsa services're configured to be run on\n"
-"initlevel 3\n"
-"\n"
-"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
-msgstr ""
-"Классическое тестирование ошибок звука выполняется запуском следующих "
-"команд:\n"
-"\n"
-"\n"
-"- \"lspcidrake -v | fgrep AUDIO\" сообщит вам, какой драйвер использует ваша "
-"карта по умолчанию\n"
-"\n"
-"- \"grep sound-slot /etc/modules.conf\" сообщит вам, какой драйвер\n"
-"используется в данный момент\n"
-"\n"
-"- \"/sbin/lsmod\" позволит вам проверить загружен ли модуль (драйвер)\n"
-"\n"
-"- \"/sbin/chkconfig --list sound\" и \"/sbin/chkconfig --list alsa\"\n"
-"сообщит вам были сервисы sound и alsa настроены для запуска\n"
-"на initlevel 3 или нет\n"
-"\n"
-"- \"aumix -q\" сообщит вам включена громкость звука или нет\n"
-"\n"
-"- \"/sbin/fuser -v /dev/dsp\" сообщит, какая программа использует\n"
-"звуковую карту.\n"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -2407,11 +2064,6 @@ msgstr "и один неизвестный принтер"
 #, c-format
 msgid "Ireland"
 msgstr "Ирландия"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "kernel version"
-msgstr "версия ядра"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2476,12 +2128,26 @@ msgstr "Мастер настройки"
 msgid "Autoprobe"
 msgstr "Автоматическое исследование"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
+msgstr ""
+"если установлено в yes, проверяет на пустые пароли, отсутствие паролей в /"
+"etc/shadow и пользователей с id 0, отличных от root"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup system files..."
 msgstr "Резервируются системные файлы..."
 
-#: ../../install_any.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Невозможно использовать широковещание без домена NIS"
@@ -2490,6 +2156,11 @@ msgstr "Невозможно использовать широковещание без домена NIS"
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Удаляется принтер \"%s\"..."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Shell history size"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -2684,6 +2355,13 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr "Поддержка win-принтеров OKI 4w и совместимых."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Files or wildcards listed in a .backupignore file at the top of a directory "
+"tree will not be backed up."
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -2726,6 +2404,11 @@ msgstr ""
 "Доступ к сети не выполнялся и не может быть запущен. Пожалуйста, проверьте "
 "свою конфигурацию и оборудование. Затем снова попытайтесь настроить свой "
 "удаленный принтер."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2942,6 +2625,14 @@ msgstr "Отсутствует носитель для стирания!"
 msgid "Terminal-based"
 msgstr "На базе терминала"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable IP spoofing protection."
+msgstr ""
+"Аргументы: (arg, alert=1)\n"
+"\n"
+"Включает/отключает защиту от спуфинга IP."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
@@ -3020,15 +2711,15 @@ msgstr "Европейский протокол (EDSS1)"
 msgid "Video mode"
 msgstr "Видеорежим"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "Please enter your email address below "
-msgstr "Пожалуйста, введите ниже свой email адрес "
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Oman"
 msgstr "Оман"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Please enter your email address below "
+msgstr "Пожалуйста, введите ниже свой email адрес "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -3050,7 +2741,7 @@ msgstr "Новый размер в MB: "
 msgid "Partition table type: %s\n"
 msgstr "Тип таблицы разделов: %s\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr "Аутентификация домена Windows"
@@ -3096,6 +2787,50 @@ msgstr ""
 msgid "Sending Speed:"
 msgstr "Скорость отправки:"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"The classic bug sound tester is to run the following commands:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses\n"
+"by default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
+"currently uses\n"
+"\n"
+"- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+"loaded or not\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will\n"
+"tell you if sound and alsa services're configured to be run on\n"
+"initlevel 3\n"
+"\n"
+"- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
+msgstr ""
+"Классическое тестирование ошибок звука выполняется запуском следующих "
+"команд:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" сообщит вам, какой драйвер использует ваша "
+"карта по умолчанию\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" сообщит вам, какой драйвер\n"
+"используется в данный момент\n"
+"\n"
+"- \"/sbin/lsmod\" позволит вам проверить загружен ли модуль (драйвер)\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" и \"/sbin/chkconfig --list alsa\"\n"
+"сообщит вам были сервисы sound и alsa настроены для запуска\n"
+"на initlevel 3 или нет\n"
+"\n"
+"- \"aumix -q\" сообщит вам включена громкость звука или нет\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" сообщит, какая программа использует\n"
+"звуковую карту.\n"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
@@ -3111,6 +2846,11 @@ msgstr "Настройка уведомления по почте"
 msgid "Tokelau"
 msgstr "Токелау"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Matching"
+msgstr "совпадает с"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -3125,15 +2865,6 @@ msgstr "Выпуск:"
 #, c-format
 msgid "Connection speed"
 msgstr "Скорость соединения"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter your CD Writer device name\n"
-" ex: 0,1,0"
-msgstr ""
-"Пожалуйста, введите имя своего устройства для записи компакт-дисков\n"
-" пример: 0,1,0"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3231,16 +2962,10 @@ msgstr "Испанская"
 msgid "Start"
 msgstr "Запустить"
 
-#: ../../security/help.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
+msgid "Direct root login"
 msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает проверку promiscuity карт ethernet."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3303,6 +3028,11 @@ msgstr "Выбор файла"
 msgid "CUPS"
 msgstr "CUPS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase tape before backup"
+msgstr "Использовать для резервирования магнитную ленту"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Run config tool"
@@ -3337,15 +3067,15 @@ msgstr ""
 "named (BIND) является сервером доменных имен (DNS), который используется для "
 "преобразования имен хостов в IP-адреса."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr "Отключить..."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
 msgstr "Сент-Люсия"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
+msgstr "Отключить..."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -3375,6 +3105,13 @@ msgstr ""
 #, c-format
 msgid "Package Group Selection"
 msgstr "Выбор группы пакетов"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"Allow local hardware\n"
+"configuration."
+msgstr "Автоматическая перенастройка"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3442,6 +3179,11 @@ msgstr "Убедитесь, что накопитель находится в устройстве %s"
 #, c-format
 msgid "Enable multiple profiles"
 msgstr "Разрешить несколько профилей"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Do not interpret character or block special devices on the file system."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3556,11 +3298,6 @@ msgstr "Настроить модуль"
 msgid "Cocos (Keeling) Islands"
 msgstr "Кокосовые острова "
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnecting from the Internet "
-msgstr "Выполняется отключение от Интернета "
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
@@ -3585,19 +3322,6 @@ msgstr "Армения"
 #, c-format
 msgid "Fiji"
 msgstr "Фиджи"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
-msgstr ""
-"Аргументы: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Устанавливает минимальную длину пароля, минимальное количество цифр и "
-"минимально количество символов в верхнем регистре."
 
 #: ../../any.pm:1
 #, c-format
@@ -3658,6 +3382,11 @@ msgstr "Без пароля"
 #, c-format
 msgid "Nigeria"
 msgstr "Нигерия"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires hostname...\n"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3804,6 +3533,11 @@ msgstr ""
 msgid "Romania"
 msgstr "Румыния"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group"
+msgstr "группа"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "choose device"
@@ -3831,7 +3565,7 @@ msgstr "Немецкая"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
 msgstr "Далее ->"
@@ -3877,6 +3611,11 @@ msgstr "Гвинея-Бисау"
 #, c-format
 msgid "Horizontal refresh rate"
 msgstr "Частота обновления по горизонтали"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Edit"
+msgstr "Выход"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4055,12 +3794,6 @@ msgstr "Прервать"
 msgid "No password prompt on %s at port %s"
 msgstr "Отсутствует запрос пароля для %s на порту %s"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to use the non-rewinding device."
-msgstr ""
-"Пожалуйста, отметьте, если вы хотите использовать устройство без перемотки."
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
@@ -4123,20 +3856,15 @@ msgstr "Мышь"
 msgid "not enough room in /boot"
 msgstr "не хватает места в /boot"
 
-#: ../../harddrake/sound.pm:1
+#: ../../lang.pm:1
 #, c-format
-msgid "Choosing an arbitratry driver"
-msgstr "Выбор произвольного драйвера"
+msgid "Liechtenstein"
+msgstr "Лихтенштейн"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Имя хоста"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Liechtenstein"
-msgstr "Лихтенштейн"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4271,6 +3999,11 @@ msgstr ""
 "представленный ниже список или нажмите на кнопку \"Список опций печати\".%s%s"
 "%s\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Саудовская Аравия"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
@@ -4290,11 +4023,6 @@ msgstr ""
 #, c-format
 msgid "Printer"
 msgstr "Принтер"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Saudi Arabia"
-msgstr "Саудовская Аравия"
 
 #: ../../services.pm:1
 #, c-format
@@ -4359,18 +4087,6 @@ msgstr "Точки монтирования должны содержать только символы букв и цифр"
 msgid "Restarting printing system..."
 msgstr "Перезапускается система печати..."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Аргументы: (name)\n"
-"\n"
-"Добавляет имя как исключение из управления возрастом паролей, "
-"осуществляемого msec."
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -4432,6 +4148,11 @@ msgstr "Маска подсети:"
 #, c-format
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Установка тем LiLo и Bootsplash успешно завершена"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Set password expiration and account inactivation delays"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4501,6 +4222,11 @@ msgstr "HardDrake"
 #, c-format
 msgid "new"
 msgstr "новый"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4696,17 +4422,6 @@ msgstr ""
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Принимать/Отклонять широковещательные icmp echo."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -4721,6 +4436,11 @@ msgstr "Уровень безопасности:"
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Точка монтирования должна начинаться с /"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD device"
+msgstr "Пожалуйста, выберите размер своего накопителя CD/DVD"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4741,15 +4461,6 @@ msgstr "Йемен"
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
 msgstr "Этот продукт доступен на веб-сайте MandrakeStore"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the maximum size\n"
-" allowed for Drakbackup"
-msgstr ""
-"Пожалуйста, введите максимальный размер,\n"
-" разрешенный для Drakbackup"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -4807,32 +4518,15 @@ msgid "Your card can have 3D hardware acceleration support with XFree %s."
 msgstr ""
 "Ваша видеокарта может иметь аппаратную поддержку 3D-ускорения в XFree %s."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please choose your CD/DVD media size (Mb)"
-msgstr "Пожалуйста, выберите размер своего накопителя CD/DVD"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Разрешает su только для членов привилегированной группы или разрешает su для "
-"любого пользователя."
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Expert Area"
-msgstr "Область эксперта"
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
 msgstr "Выберите монитор"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Mask"
+msgstr "Плохой пакет"
 
 #: ../../any.pm:1
 #, c-format
@@ -5010,6 +4704,11 @@ msgstr "Резервировать систему"
 msgid "Test pages"
 msgstr "Тестовые страницы"
 
+#: ../../diskdrake/interactive.pm:1
+#, fuzzy, c-format
+msgid "Logical volume name "
+msgstr "Локальный показатель"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5033,6 +4732,11 @@ msgstr "Параметры принтера TCP/Socket"
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Память карты (DMA)"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnecting from Internet "
+msgstr "Выполняется отключение от Интернета "
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -5108,6 +4812,11 @@ msgstr "Клавиши Ctrl и Alt одновременно"
 msgid "United States"
 msgstr "Соединенные Штаты"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "User umask"
+msgstr "Пользователи"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
@@ -5141,6 +4850,14 @@ msgstr ""
 msgid "NTP Server"
 msgstr "Сервер NTP"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Sulogin(8) in single user level"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает sulogin(8) на уровне одного пользователя."
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Load/Save on floppy"
@@ -5166,11 +4883,6 @@ msgstr "Закроется через %d секунд"
 msgid "Please choose which serial port your modem is connected to."
 msgstr ""
 "Пожалуйста, выберите, к какому последовательному порту подключен ваш модем."
-
-#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Country"
-msgstr "Страна"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5201,6 +4913,11 @@ msgstr "Требуется путь к хосту или модулю"
 #, c-format
 msgid "Advanced Options"
 msgstr "Дополнительные настройки"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "View Configuration"
+msgstr "Настройка"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -5424,6 +5141,30 @@ msgstr ""
 msgid "Slovenian"
 msgstr "Словенская"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Санкционирует все сервисы, контролируемые tcp_wrappers (см. hosts.deny(5)), "
+"если \\fIarg\\fP = ALL.\n"
+"Только локальные сервисы, если \\fIarg\\fP = LOCAL и ни одного, если \\fIarg"
+"\\fP = NONE.\n"
+"Для санкционирования сервисов вам необходимо использовать /etc/hosts.allow\n"
+"(см. hosts.allow(5))."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
@@ -5464,17 +5205,6 @@ msgstr "Не знаю как форматировать %s с типом %s"
 msgid "Model"
 msgstr "Модель"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает libsafe, если libsafe найдена в системе."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
@@ -5504,21 +5234,6 @@ msgstr ""
 #, c-format
 msgid "Modem"
 msgstr "Модем"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
-msgstr ""
-"Аргументы: (arg, listen_tcp=None)\n"
-"\n"
-"Разрешает/запрещает X-подключения. Первый аргумент определяет, что\n"
-"происходит на клиентской стороне: ALL (разрешены все подключения),\n"
-"LOCAL (только локальное подключение) и NONE (нет подключения)."
 
 #: ../../lang.pm:1
 #, c-format
@@ -5559,6 +5274,11 @@ msgstr ""
 "онлайне, чтобы поделиться своими знаниями и помочь другим, став признанным "
 "Экспертом на веб-сайте онлайновой технической поддержки:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "No password aging for"
+msgstr "Без пароля"
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid ""
@@ -5574,6 +5294,11 @@ msgstr ""
 msgid "Automatically find available printers on remote machines"
 msgstr "Автоматически искать доступные принтеры на удаленных машинах"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Восточный Тимор"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5583,28 +5308,20 @@ msgstr ""
 "\n"
 "- Сохранить на ленту на устройство : %s"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "East Timor"
-msgstr "Восточный Тимор"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Login name"
+msgstr "Имя домена"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report unowned files"
+msgstr "если установлено yes, сообщает о файлах без владельца."
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Del profile..."
 msgstr "Удалить профиль..."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Разрешает/запрещает список пользователей системы в менеджерах экрана (kdm "
-"иgdm)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5666,6 +5383,11 @@ msgstr "Все языки"
 msgid "Removing %s"
 msgstr "Удаляется: %s"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "%s not found...\n"
+msgstr "%s не отвечает"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
@@ -5689,6 +5411,11 @@ msgstr ""
 #, c-format
 msgid "Start sector: "
 msgstr "Начальный сектор: "
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Только для чтения"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5846,6 +5573,14 @@ msgstr ""
 msgid "Network Options"
 msgstr "Сетевые опции"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable msec hourly security check"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает проверку безопасности msec каждый час."
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid ""
@@ -5886,21 +5621,21 @@ msgstr "в среднем"
 msgid "New printer name"
 msgstr "Новое имя принтера"
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Allow an ordinary user to mount the file system. The\n"
+"name of the mounting user is written to mtab so that he can unmount the "
+"file\n"
+"system again. This option implies the options noexec, nosuid, and nodev\n"
+"(unless overridden by subsequent options, as in the option line\n"
+"user,exec,dev,suid )."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
 msgstr "Экваториальная Гвинея"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Разрешить/Запретить автоматический вход."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5948,16 +5683,12 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Кирибати"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Other (not drakbackup) keys in place already"
 msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Разрешает/запрещает удаленный вход для root в систему."
+"Другие (не drakbackup)\n"
+"ключи уже на месте"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -6034,6 +5765,301 @@ msgstr ""
 "должны ввести IP-адрес и, возможно, номер порта, чтобы получить с сервера "
 "информацию о принтере."
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"drakTermServ Overview\n"
+"\t\t\t   \n"
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t\t#hdw_config                true;\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating seperate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login priviledges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured.\n"
+"\t\t\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+msgstr ""
+"Обзор drakTermServ\n"
+"\t\t\t   \n"
+"        - Создает загрузочные образы с etherboot:\n"
+"        \t\tДля загрузки ядра посредством etherboot должен быть создан "
+"специальный образ kernel/initrd.\n"
+"        \t\tmkinitrd-net выполняет основную часть этой работы, а "
+"drakTermServ является просто графическим интерфейсом,\n"
+"        \t\tчтобы помочь с управлением/настройкой этих образов.\n"
+"\n"
+"        - Обслуживает /etc/dhcpd.conf:\n"
+"        \t\tДля клиентов с сетевой загрузкой каждый должен иметь запись в "
+"dhcpd.conf, определяющую IP-адрес\n"
+"        \t\tи сетевые загрузочные образы машины. drakTermServ помогает "
+"создавать/удалять эти записи.\n"
+"\t\t\t\n"
+"        \t\t(карты PCI могут пропустить образ - etherboot запросит "
+"правильный образ. Вы также\n"
+"        \t\tдолжны учесть, что когда etherboot ищет образы, он ожидает "
+"увидеть имена типа\n"
+"        \t\tboot-3c59x.nbi скорее, чем boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tТипичная запись в dhcpd.conf для поддержки бездисковых клиентов "
+"выглядит так:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t/*type                          fat;*/\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tВы можете использовать пул IP-адресов, а также указывать определенную "
+"запись для\n"
+"\t\t\tклиентской машины, используя схему с фиксированным адресом, "
+"позволяющую\n"
+"\t\t\tиспользовать конфигурационные файлы для отдельных клиентов "
+"ClusterNFS.\n"
+"\t\t\t\n"
+"\t\t\tПримечание: Параметр \"#type\" используется только в drakTermServ. "
+"Клиенты могут\n"
+"\t\t\tбыть как \"тонкими\" так и 'толстыми'. Тонкие клиенты запускают "
+"большинство программного\n"
+"\t\t\tобеспечения на сервере посредством xdmcp, в то время как толстые "
+"клиенты запускают\n"
+"\t\t\tбольшинство программного обеспечения на клиентской машине. Специальный "
+"inittab, /etc/inittab\\$\\$IP=ip_клиента\\$\\$\n"
+"\t\t\tнаписан для тонких клиентов. Конфигурационные файлы системы xdm-"
+"config, kdmrc и gdm.conf изменяются,\n"
+"\t\t\tесли используются тонкие клиенты, чтобы включить xdmcp. В то же время "
+"существуют проблемы\n"
+"\t\t\tс безопасностью при использовании xdmcp, изменяются hosts.deny и hosts."
+"allow\n"
+"\t\t\tдля ограничения доступа к локальной сети.\t\t\t\n"
+"\t\t\tПримечание: Вы должны остановить/запустить сервер после добавления или "
+"изменения клиентов.\n"
+"\t\t\t\n"
+"        - Содержание /etc/exports:\n"
+"        \t\tClusternfs позволяет экспортировать корневую файловую систему "
+"бездисковым клиентам.\n"
+"        \t\tdrakTermServ настраивает корректную запись для предоставления "
+"анонимного доступа\n"
+"        \t\t к корневой файловой системе с бездисковых клиентов.\n"
+"\n"
+"        \t\tТипичная запись exports для clusternfs:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              ПОДСЕТЬ/МАСКА(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tС ПОДСЕТЬЮ/МАСКОЙ для вашей сети.\n"
+"        \t\t\n"
+"        - Содержание /etc/shadow\\$\\$КЛИЕНТ\\$\\$:\n"
+"        \t\tЧтобы пользователи могли входить в систему с бездисковых "
+"клиентов,\n"
+"        \t\t их записи в /etc/shadow должны быть продублированы в /etc/shadow"
+"\\$\\$CLIENTS\\$\\$.\n"
+"        \t\t drakTermServ помогает в этом, добавляя или удаляя системных "
+"пользователей из этого файла.\n"
+"\n"
+"        - Для каждого клиента /etc/X11/XF86Config-4\\$\\$IP-АДРЕС\\$\\$:\n"
+"        \t\tИспользуя clusternfs, каждый бездисковый клиент может иметь свои "
+"собственные\n"
+"        \t\t уникальные конфигурационные файлы на корневой файловой системе "
+"на сервере.\n"
+"        \t\t В будущем drakTermServ поможет создать эти файлы.\n"
+"        - Конфигурационные файлы для каждого клиента:\n"
+"        \t\tИспользуя clusternfs, каждый бездисковый клиент может иметь свои "
+"собственные\n"
+"        \t\t уникальные конфигурационные файлы на корневой файловой системе "
+"сервера.\n"
+"        \t\t В будущем drakTermServ сможет помочь создать файлы, такие как /"
+"etc/modules.conf,\n"
+"        \t\t/etc/sysconfig/mouse, /etc/sysconfig/ для каждого клиента.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ сконфигурирует этот файл для работы в связке с "
+"образами, созданными\n"
+"        \t\tпри помощи mkinitrd-net, а также записи в /etc/dhcpd.conf для "
+"обслуживания\n"
+"        \t\tзагрузочного образа каждого бездискового клиента.\n"
+"\n"
+"        \t\tТипичный конфигурационный файл tftp выглядит так:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tОтличия от установок по умолчанию: опция disable изменена на "
+"'no' и путь каталогу\n"
+"        \t\tизменен на /var/lib/tftpboot, куда mkinitrd-net помещает свои "
+"образы.\n"
+"\n"
+"        - Создание дискет/компакт-дисков etherboot:\n"
+"        \t\tМашинам бездисковых клиентов нужны либо ROM-образы на NIC, либо "
+"загрузочная дискета\n"
+"        \t\tили компакт-диск, чтобы проинициализировать последовательность "
+"начальной загрузки.\n"
+"        \t\t\n"
+"        \t\tПростой пример создания вручную загрузочной дискеты для 3Com "
+"3c509:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -6100,15 +6126,15 @@ msgstr "Завершить"
 msgid "Show automatically selected packages"
 msgstr "Показывать автоматически выбранные пакеты"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "CPU flags reported by the kernel"
-msgstr "Флаги процессора, выданные ядром"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
 msgstr "Того"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "CPU flags reported by the kernel"
+msgstr "Флаги процессора, выданные ядром"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -6162,6 +6188,14 @@ msgstr "США (hrc-кабель)"
 msgid "Journalised FS"
 msgstr "Журналируемая ФС"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Ethernet cards promiscuity check"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает проверку promiscuity карт ethernet."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Guatemala"
@@ -6209,6 +6243,11 @@ msgstr ""
 "Нажмите ОК, чтобы сохранить текущие настройки, или Отмена, чтобы\n"
 "перенастроить свое подключение к Интернету и локальной сети.\n"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run the daily security checks"
+msgstr "если установлено yes, запускает ежедневные проверки безопасности."
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Keyboard layout: %s\n"
@@ -6236,6 +6275,11 @@ msgid ""
 msgstr ""
 "Монтирует и размонтирует все точки монтирования сетевых\n"
 "файловых систем(NFS), SMB (LanManager/Windows) и NCP (NetWare)."
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Launch the wizard"
+msgstr "Нажмите сюда, чтобы запустить мастер ->"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6271,6 +6315,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
 msgstr "Неверная метка ленты. Лента имеет метку %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6370,6 +6421,13 @@ msgstr "Какую конфигурацию XFree вы хотите получить?"
 msgid "More"
 msgstr "Больше"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -"
+"scanbus' would also show you the device number."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -6391,6 +6449,13 @@ msgstr ""
 #, c-format
 msgid "Account Password"
 msgstr "Пароль учетной записи"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -6505,6 +6570,11 @@ msgid "The change is done, but to be effective you must logout"
 msgstr ""
 "Изменение выполнено, но чтобы оно вступило в силу, вы должны выйти из системы"
 
+#: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Country / Region"
+msgstr "Страна / Регион"
+
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Search servers"
@@ -6529,6 +6599,11 @@ msgstr ""
 msgid "Cd-Rom labeled \"%s\""
 msgstr "Компакт-диск с меткой \"%s\""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CDRW media"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6552,6 +6627,11 @@ msgstr ""
 msgid "Turn your computer into a reliable server"
 msgstr "Превратите свою машину в надежный сервер"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check empty password in /etc/shadow"
+msgstr "если установлено yes, проверяет пустые пароли в /etc/shadow."
+
 #: ../../network/network.pm:1
 #, c-format
 msgid " (driver %s)"
@@ -6570,6 +6650,11 @@ msgstr ""
 #, c-format
 msgid "I don't know"
 msgstr "Я не знаю"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Start when requested"
+msgstr ""
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -6597,6 +6682,11 @@ msgstr ""
 "этом компьютере. На некоторых этапах в интерактивном режиме вам будет "
 "предложено изменить значения."
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Telugu"
+msgstr "Токелау"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -6614,6 +6704,11 @@ msgstr ""
 #, c-format
 msgid "Post Uninstall"
 msgstr "Завершение удаления"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Connecting to Internet "
+msgstr "Подключение к Интернету "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -6677,6 +6772,14 @@ msgstr ""
 "\n"
 "Перед тем, как продолжить, убедитесь, что вы настроили свой доступ к\n"
 "Интернету/локальной сети при помощи drakconnect."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept broadcasted icmp echo"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Принимать/Отклонять широковещательные icmp echo."
 
 #: ../../lang.pm:1
 #, c-format
@@ -6775,6 +6878,14 @@ msgstr ""
 "она будет здесь показана. Если вы увидите, что показанная звуковая карта\n"
 "не соответствует тому, что у вас есть в системе, вы можете нажать на кнопку\n"
 "и выбрать другой драйвер"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the root umask."
+msgstr ""
+"Аргументы: (umask)\n"
+"\n"
+"Устанавливает umask root'a."
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6907,10 +7018,14 @@ msgstr ""
 "Использование: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] "
 "[--testing] [-v|--version] "
 
-#: ../../standalone/XFdrake:1
-#, c-format
-msgid "Please relog into %s to activate the changes"
-msgstr "Пожалуйста, войдите еще раз в %s, чтобы применить изменения"
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Maximum size\n"
+" allowed for Drakbackup (MB)"
+msgstr ""
+"Пожалуйста, введите максимальный размер,\n"
+" разрешенный для Drakbackup"
 
 #: ../../my_gtk.pm:1
 #, c-format
@@ -6942,6 +7057,18 @@ msgstr "Мартиника"
 msgid "HardDrive / NFS"
 msgstr "Жесткий диск / NFS"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Old user list:\n"
+msgstr ""
+"\n"
+"- Файлы пользователя:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search Backups"
+msgstr ""
+
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "a number"
@@ -6971,30 +7098,20 @@ msgstr ""
 msgid "Filesystem types:"
 msgstr "Типы файловых систем:"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on HP JetDirect"
-msgstr ", многофункциональное устройство на HP JetDirect"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
 msgstr "Острова северной Марианы"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on HP JetDirect"
+msgstr ", многофункциональное устройство на HP JetDirect"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "none"
 msgstr "отсутствует"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
-msgstr "пользователь :"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your password"
-msgstr "Пожалуйста, введите свой пароль"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -7009,12 +7126,6 @@ msgstr ""
 msgid "Floppy"
 msgstr "Дискета"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your RW media (1st Session)"
-msgstr ""
-"Пожалуйста, отметьте, если вы хотите стереть свой RW-носитель (1-ый сеанс)"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -7024,6 +7135,11 @@ msgstr "создание связей Ghostscript"
 #, c-format
 msgid "Bootloader"
 msgstr "Начальный загрузчик"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize all services controlled by tcp_wrappers"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7264,11 +7380,6 @@ msgstr "список альтернативных драйверов для этой звуковой карты"
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Scanner sharing"
-msgstr "Общий доступ к сканеру"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
@@ -7278,6 +7389,11 @@ msgstr "Тонга"
 #, c-format
 msgid "Tunisia"
 msgstr "Тунис"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Общий доступ к сканеру"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -7291,19 +7407,18 @@ msgid ""
 msgstr ""
 "Щелкните на устройство из дерева слева, чтобы увидеть здесь информацию о нем."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+"Arguments: (arg)\n"
+"\n"
+"Разрешить/Запретить автоматический вход."
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
 msgstr "XawTV не установлен!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Create/Transfer\n"
-"backup keys for SSH"
-msgstr ""
-"Создать/переслать\n"
-"резервные ключи для SSH"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7314,6 +7429,14 @@ msgstr "Не включать важные файлы (passwd, group, fstab)"
 #, c-format
 msgid "old static device name used in dev package"
 msgstr "в пакете dev используется имя старого статического устройства"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable the logging of IPv4 strange packets"
+msgstr ""
+"Arguments: (arg)\n"
+"\n"
+"Включает/отключает регистрацию необычных пакетов IPv4."
 
 #: ../../any.pm:1
 #, c-format
@@ -7359,6 +7482,11 @@ msgstr ""
 "Нажмите \"Далее\", когда будете готовы, и \"Отмена\", если вы не хотите "
 "устанавливать свой принтер(ы) сейчас."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Greek (polytonic)"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
@@ -7369,11 +7497,6 @@ msgstr ""
 #, c-format
 msgid "Connection Time: "
 msgstr "Время соединения: "
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "выбрать файл perm для просмотра/редактирования"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -7422,6 +7545,13 @@ msgstr ""
 "Mandrake Linux может поддерживать несколько языков. Выберите\n"
 "языки, которые вы хотите установить. Они будут доступны, когда\n"
 "завершится установка и вы перезапустите свою систему."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Directory (or module) to put the backup on this host."
+msgstr ""
+"Пожалуйста, введите каталог (или модуль)\n"
+"для размещения резервной копии на этот хост."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7515,15 +7645,15 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Видеокарта: %s\n"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Accept icmp echo"
+msgstr ""
+
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you are using a DVDRAM device"
-msgstr "Пожалуйста, отметьте, если вы используете устройство DVDRAM"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7568,6 +7698,11 @@ msgstr ""
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Печать/Доступ к фотокартам на  \"%s\""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Daily security check"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7674,21 +7809,6 @@ msgstr ""
 msgid "Choose packages to install"
 msgstr "Выбор пакетов"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-" Some errors during sendmail are caused by \n"
-" a bad configuration of postfix. To solve it you have to\n"
-" set myhostname or mydomain in /etc/postfix/main.cf\n"
-"\n"
-msgstr ""
-"\n"
-" Некоторые ошибки при отправке почты вызваны\n"
-" плохой настройкой postfix'a. Для их решения вы должны\n"
-" определить myhostname или mydomain в /etc/postfix/main.cf\n"
-"\n"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -7737,6 +7857,11 @@ msgstr "Бутан"
 msgid "Network interface"
 msgstr "Сетевой интерфейс"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet failed."
+msgstr "Отключение от Интернет завершилось неудачей."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Reading printer data..."
@@ -7756,21 +7881,6 @@ msgstr "Не подключен"
 #, c-format
 msgid "Greek"
 msgstr "Греческая"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
-"\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Если \\fIarg\\fP = ALL, разрешает существование /etc/issue и /etc/issue.net. "
-"Если \\fIarg\\fP = NONE,\n"
-"запрещены все issue, кроме /etc/issue."
 
 #: ../../lang.pm:1
 #, c-format
@@ -7804,15 +7914,16 @@ msgstr "Включить загрузку OF?"
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Вы не можете использовать JFS на разделах менее 16MB"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Erase your RW media (1st Session)"
+msgstr ""
+"Пожалуйста, отметьте, если вы хотите стереть свой RW-носитель (1-ый сеанс)"
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "VertRefresh монитора: %s\n"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr "путь"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -7830,6 +7941,11 @@ msgstr ""
 "Возникла ошибка:\n"
 "%s\n"
 "Попробуйте изменить некоторые параметры"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "User :"
+msgstr "пользователь :"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8027,15 +8143,20 @@ msgstr ", хост \"%s\", порт %s"
 msgid "Monaco"
 msgstr "Монако"
 
-#: ../../fs.pm:1
+#: ../../security/l10n.pm:1
 #, c-format
-msgid "%s formatting of %s failed"
-msgstr "%s форматирование %s завершилось неудачно"
+msgid "Do not send mails when uneeded"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Разметка на разделы завершилась неудачно: %s"
+
+#: ../../fs.pm:1 ../../swap.pm:1
+#, c-format
+msgid "%s formatting of %s failed"
+msgstr "%s форматирование %s завершилось неудачно"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8102,6 +8223,11 @@ msgstr "Южная Африка"
 msgid "Western Sahara"
 msgstr "Западная Сахара"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Eject tape after the backup"
+msgstr "Использовать для резервирования магнитную ленту"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot Floppy/ISO"
@@ -8127,21 +8253,22 @@ msgstr "Редактировать текущее правило"
 msgid "%s"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-"Arguments: (arg)\n"
-"\n"
-"Включает/отключает регистрацию необычных пакетов IPv4."
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
 msgstr "Пожалуйста, проверьте свою мышь"
+
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not update inode access times on this file system\n"
+"(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Sticky-bit"
+msgstr "закрепляющий бит"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8168,7 +8295,7 @@ msgstr "Сектор"
 msgid "Qatar"
 msgstr "Катар"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Base dn"
 msgstr "LDAP Base dn"
@@ -8205,6 +8332,11 @@ msgstr "Очищать /tmp  при каждой загрузке"
 msgid "Malawi"
 msgstr "Малави"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: false"
+msgstr "Локальные файлы"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8234,7 +8366,7 @@ msgstr "Объединенное Королевство"
 msgid "running"
 msgstr "выполняется"
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "default"
 msgstr "по умолчанию"
@@ -8303,17 +8435,13 @@ msgstr ""
 "  Ваше письмо с отчетом не было отправлено.\n"
 "  Пожалуйста, настройте sendmail"
 
-#: ../../security/help.pm:1
+#: ../../fs.pm:1
 #, c-format
 msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
+"Do not allow set-user-identifier or set-group-identifier\n"
+"bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
+"have suidperl(1) installed.)"
 msgstr ""
-"Аргументы: (val)\n"
-"\n"
-"Устанавливает таймаут командного процессора. Нулевое значение означает "
-"отсутствие таймаута."
 
 #: ../../lang.pm:1
 #, c-format
@@ -8330,10 +8458,10 @@ msgstr ""
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connecting to the Internet "
-msgstr "Подключение к Интернету "
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom settings"
+msgstr "Ручная разметка диска"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8355,17 +8483,6 @@ msgstr "Принтер на сервере SMB/Windows 95/98/NT"
 msgid ", "
 msgstr ", "
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
-msgstr ""
-"Аргументы: (umask)\n"
-"\n"
-"Устанавливает umask root'a."
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8380,10 +8497,10 @@ msgstr ""
 "Postfix это Агент доставки почты, программа которая переправляет почту с "
 "одной машины на другую."
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet failed."
-msgstr "Отключение от Интернет завершилось неудачей."
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Uzbek (cyrillic)"
+msgstr "Сербская (кириллическая)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8492,8 +8609,9 @@ msgid "Button `%s': %s"
 msgstr "Кнопка: `%s': %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
-#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
+#: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Подождите, пожалуйста"
@@ -8600,6 +8718,11 @@ msgstr "Минимальная установка"
 msgid "Ethiopia"
 msgstr "Эфиопия"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Enable \"crontab\" and \"at\" for users"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Devanagari"
@@ -8705,6 +8828,28 @@ msgid ""
 msgstr ""
 "В качестве альтернативы вы можете ввести название устройства/имя файла в "
 "строке ввода данных"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
+"Аргументы: ()\n"
+"\n"
+"Если SERVER_LEVEL (или SECURE_LEVEL, если отсутствует) больше 3\n"
+"в /etc/security/msec/security.conf, создает символическую ссылку /etc/"
+"security/msec/server\n"
+"на /etc/security/msec/server.<SERVER_LEVEL>. /etc/security/msec/server\n"
+"используется chkconfig --add, чтобы решить, добавлять ли сервис, если он "
+"присутствует\n"
+"в файле во время установки пакетов."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -8852,26 +8997,15 @@ msgstr ""
 msgid "Choose your filesystem encryption key"
 msgstr "Выберите ключ шифрования вашей файловой системы"
 
-#: ../../standalone/drakbackup:1
+#: ../../lang.pm:1
 #, c-format
-msgid ""
-"Please choose your CD/DVD device\n"
-"(Press Enter to propogate settings to other fields.\n"
-"This field isn't necessary, only a tool to fill in the form.)"
-msgstr ""
-"Пожалуйста, выберите свой привод CD/DVD\n"
-"(нажмите Enter, чтобы скопировать настройки в другие поля.\n"
-"Это поле необязательно, это просто инструмент для заполнения формы)."
+msgid "Sierra Leone"
+msgstr "Сьерра-Леоне"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Andorra"
 msgstr "Андорра"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Sierra Leone"
-msgstr "Сьерра-Леоне"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8882,6 +9016,15 @@ msgstr "Ботсвана"
 #, c-format
 msgid "(default value: %s)"
 msgstr "(значение по умолчанию: %s)"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
+msgstr ""
+"Аргументы: (max, inactive=-1)\n"
+"\n"
+"Устанавливает возраст пароля в \\fImax\\fP дней и задержку для изменения в "
+"\\fIinactive\\fP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8912,15 +9055,6 @@ msgstr "Выберите X-сервер"
 #, c-format
 msgid "Swap partition size in MB: "
 msgstr "Размер раздела swap в MB: "
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Other (not drakbackup)\n"
-"keys in place already"
-msgstr ""
-"Другие (не drakbackup)\n"
-"ключи уже на месте"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9003,6 +9137,15 @@ msgstr ""
 msgid "received"
 msgstr "получено"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable su only from the wheel group members or for any user"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает su только для членов привилегированной группы или разрешает su для "
+"любого пользователя."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_New"
@@ -9048,7 +9191,7 @@ msgstr "Локальные принтеры"
 msgid "Installation image directory"
 msgstr "Каталог с образом для установки"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Server"
 msgstr "Сервер NIS"
@@ -9062,6 +9205,11 @@ msgstr "Порт: %s"
 #, c-format
 msgid "Spain"
 msgstr "Испания"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "local config: %s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9083,15 +9231,15 @@ msgstr "Применить"
 msgid "Auto-detect available ports"
 msgstr "Авто-определение доступных портов"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr "Совместное использование подключения к Интернету сейчас отключено"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
 msgstr "Сан-Марино"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Internet Connection Sharing currently disabled"
+msgstr "Совместное использование подключения к Интернету сейчас отключено"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -9127,11 +9275,6 @@ msgstr ""
 "Произошла ошибка, но я не знаю, как ее корректно обработать.\n"
 "Продолжайте на свой собственный страх и риск."
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "please wait, parsing file: %s"
-msgstr "Пожалуйста, подождите, разбирается файл: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
@@ -9141,6 +9284,16 @@ msgstr "Тайвань"
 #, c-format
 msgid "Pakistan"
 msgstr "Пакистан"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "please wait, parsing file: %s"
+msgstr "Пожалуйста, подождите, разбирается файл: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Importance: "
+msgstr "Важность: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9177,11 +9330,6 @@ msgstr "Имя провайдера (например, provider.net)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid "Version: %s\n"
-msgstr "Версия: %s\n"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandrake Linux. If that occurs, you can try a text install instead. For "
@@ -9213,6 +9361,11 @@ msgstr "Тип соединения: "
 msgid "Graphical interface"
 msgstr "Графический интерфейс"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Чад"
+
 #: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
@@ -9222,11 +9375,6 @@ msgstr "XFree %s с аппаратным 3D-ускорением"
 #, c-format
 msgid "India"
 msgstr "Индия"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Chad"
-msgstr "Чад"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9350,6 +9498,14 @@ msgstr "Использовать квоты для резервных файлов"
 msgid "Configuring printer \"%s\"..."
 msgstr "Настраивается принтер \"%s\"..."
 
+#: ../../fs.pm:1
+#, c-format
+msgid ""
+"Do not allow execution of any binaries on the mounted\n"
+"file system. This option might be useful for a server that has file systems\n"
+"containing binaries for architectures other than its own."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
@@ -9442,6 +9598,13 @@ msgstr "повторить"
 msgid "detected %s"
 msgstr "обнаружено %s"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Expect is an extension to the Tcl scripting language that allows interactive "
+"sessions without user intervention."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
@@ -9492,11 +9655,6 @@ msgstr ""
 msgid "Detecting devices..."
 msgstr "Определяются устройства..."
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Нажмите сюда, чтобы запустить мастер ->"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
@@ -9511,10 +9669,23 @@ msgstr ""
 "Описание полей:\n"
 "\n"
 
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "Basic options"
+msgstr "Основные параметры DrakSec"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the name of the CPU"
 msgstr "название CPU"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Accept bogus IPv4 error messages"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Принимать/Отклонять фиктивные IPv4 ошибочные сообщения."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9560,17 +9731,6 @@ msgstr "Использовать Expect для SSH"
 #, c-format
 msgid "Poland"
 msgstr "Польша"
-
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Importance: %s\n"
-msgstr "Важность: %s\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to eject your tape after the backup."
-msgstr ""
-"Пожалуйста, отметьте, если вы хотите извлечь свою ленту после резервирования."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9660,24 +9820,25 @@ msgstr "Ошибка F00f"
 msgid "XFree %s"
 msgstr "XFree %s"
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Which dhcp client do you want to use?\n"
-"Default is dhcp-client."
-msgstr ""
-"Какой dhcp-клиент вы хотите использовать?\n"
-"По умолчанию используется dhcp-client"
-
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Domain Name:"
 msgstr "Имя домена:"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Root umask"
+msgstr "Пароль Root"
+
 #: ../../any.pm:1
 #, c-format
 msgid "On Floppy"
 msgstr "На дискету"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Reboot by the console user"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9695,6 +9856,14 @@ msgstr ""
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Выполняется поиск доступных пакетов..."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-seperated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9786,15 +9955,15 @@ msgstr ""
 "которые вам действительно нужны.\n"
 "!!"
 
-#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Пропустить"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
 msgstr "Нью"
+
+#: ../../any.pm:1 ../../help.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Пропустить"
 
 #: ../../services.pm:1
 #, c-format
@@ -9937,15 +10106,15 @@ msgstr "Пожалуйста, выберите порт, к которому подключен ваш принтер."
 msgid "Change Cd-Rom"
 msgstr "Смените компакт-диск"
 
-#: ../../network/netconnect.pm:1
-#, fuzzy, c-format
-msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "Какую конфигурацию XFree вы хотите получить?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Парагвай"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Какую конфигурацию XFree вы хотите получить?"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -9999,6 +10168,20 @@ msgstr ""
 "Apache является сервером всемирной паутины. Он используется для обслуживания "
 "файлов HTML и CGI."
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"Enter your CD Writer device name\n"
+" ex: 0,1,0"
+msgstr ""
+"Пожалуйста, введите имя своего устройства для записи компакт-дисков\n"
+" пример: 0,1,0"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "ALL"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Add/Del Clients"
@@ -10028,6 +10211,11 @@ msgid ""
 msgstr ""
 "Загрузочный раздел по умолчанию\n"
 "    (для загрузки MS-DOS, не для lilo)\n"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -10077,15 +10265,6 @@ msgstr ""
 msgid "the number of buttons the mouse has"
 msgstr "количество кнопок, имеющихся у мыши"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the directory (or module) to\n"
-" put the backup on this host."
-msgstr ""
-"Пожалуйста, введите каталог (или модуль)\n"
-"для размещения резервной копии на этот хост."
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Replay"
@@ -10121,6 +10300,11 @@ msgstr "Семейство cpuid"
 msgid "32 MB"
 msgstr "32 MB"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: thin"
+msgstr "тип: %s"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Lithuanian AZERTY (new)"
@@ -10143,11 +10327,6 @@ msgstr ""
 "Вы выбрали программный раздел RAID в качестве корневого (/).\n"
 "Никакой загрузчик не в состоянии управлять им без раздела /boot.\n"
 "Пожалуйста, убедитесь, что раздел /boot добавлен"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Previous"
-msgstr "Назад"
 
 #: ../../any.pm:1
 #, c-format
@@ -10256,7 +10435,7 @@ msgstr ""
 msgid "Content of the file"
 msgstr "Содержимое файла"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication LDAP"
 msgstr "Аутентификация LDAP"
@@ -10291,6 +10470,11 @@ msgstr "RAID md%s\n"
 msgid "%d comma separated strings"
 msgstr "%d строк, разделенных запятыми"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid " isdn"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -10305,6 +10489,11 @@ msgstr "название темы"
 #, c-format
 msgid "/_Help"
 msgstr "/_Справка"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitrary driver"
+msgstr "Выбор произвольного драйвера"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10344,12 +10533,13 @@ msgstr "Снять выделение с установленных шрифтов"
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
+#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
+#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10391,6 +10581,11 @@ msgstr "/Автоопределение _модемов"
 msgid "Remove printer"
 msgstr "Удалить принтер"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "View Last Log"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid ""
@@ -10431,11 +10626,12 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr "Другие"
 
-#: ../../any.pm:1 ../../harddrake/v4l.pm:1
+#: ../../any.pm:1 ../../harddrake/v4l.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Default"
 msgstr "По умолчанию"
@@ -10444,6 +10640,11 @@ msgstr "По умолчанию"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Эмуляция 2-й кнопки"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run chkrootkit checks"
+msgstr "если установлено yes, запускает проверки chkrootkit."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10465,7 +10666,7 @@ msgstr "выберите файл образа"
 msgid "X server"
 msgstr "X-сервер"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin User Name"
 msgstr "Имя пользователя - администратора домена"
@@ -10479,6 +10680,11 @@ msgstr "При сканировании ТВ-каналов произошла ошибка"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "US клавиатура (международная)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finish)"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10505,7 +10711,7 @@ msgstr "/Файл/-"
 msgid "Italian"
 msgstr "Итальянская"
 
-#: ../../interactive.pm:1 ../../standalone/draksec:1
+#: ../../interactive.pm:1
 #, c-format
 msgid "Basic"
 msgstr "Основной"
@@ -10578,6 +10784,11 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Сеть с FTP.\n"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Reports check result to tty"
+msgstr "если установлено yes, сообщает о результатах проверки на tty."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10715,11 +10926,6 @@ msgstr ""
 msgid "Save theme"
 msgstr "сохранить тему"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr "группа"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -10739,6 +10945,11 @@ msgstr "Мастер настройки сети"
 #, c-format
 msgid "Removable media automounting"
 msgstr "Автомонтирование съемных носителей"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save:"
+msgstr "Пожалуйста, введите каталог для сохранения:"
 
 #: ../../services.pm:1
 #, c-format
@@ -10855,6 +11066,11 @@ msgstr ""
 "(*) Вам необходима дискета с файловой системой FAT (для создания ее под\n"
 "GNU/Linux, наберите \"mformat a:\")"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Молдова"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Kensington Thinking Mouse"
@@ -10864,18 +11080,6 @@ msgstr "Kensington Thinking Mouse"
 #, c-format
 msgid "Configuration of a remote printer"
 msgstr "Настройка удаленного принтера"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Moldova"
-msgstr "Молдова"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your tape before the backup."
-msgstr ""
-"Пожалуйста, отметьте, если вы хотите стереть свою ленту перед "
-"резервированием."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -10888,6 +11092,11 @@ msgstr ""
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "URL должен начинаться с 'ftp:' или 'http:'"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Oriya"
+msgstr "Сирия"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10954,6 +11163,11 @@ msgstr "настройка сервиса"
 msgid "Custom"
 msgstr "Выборочно"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Латвия"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "File is already used by another loopback, choose another one"
@@ -10964,10 +11178,16 @@ msgstr "Файл уже используется другим loopback, выберите другой"
 msgid "Read-only"
 msgstr "Только для чтения"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Latvia"
-msgstr "Латвия"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
+"Аргументы: (arg, alert=1)\n"
+"\n"
+"Включает/отключает защиту от спуфинга распознавания имен. Если\n"
+"\\fIalert\\fP равен 1, а также сообщать в syslog."
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -11014,10 +11234,25 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Настроить локальную сеть..."
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Verify checksum of the suid/sgid files"
+msgstr "если установлено yes, проверяет контрольную сумму файлов suid/sgid."
+
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the sound system on your machine"
 msgstr "Запускает звуковую систему на вашей машине"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Run some checks against the rpm database"
+msgstr "если установлено yes, запускает некоторые проверки базы данных rpm."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Execute"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11044,15 +11279,15 @@ msgstr "Какую файловую систему желаете?"
 msgid "3 buttons"
 msgstr "3 кнопки"
 
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Detailed information"
-msgstr "Подробная информация"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
 msgstr "Мальта"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Detailed information"
+msgstr "Подробная информация"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11080,6 +11315,13 @@ msgstr "Эта дискета не отформатирована под FAT"
 #, c-format
 msgid "Configuring network"
 msgstr "Настройка сети"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This option will save files that have changed.  Exact behavior depends on "
+"whether incremental or differential mode is used."
+msgstr ""
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -11200,7 +11442,7 @@ msgstr ""
 "загрузке."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Режим эксперта"
@@ -11219,6 +11461,14 @@ msgstr "Адрес локальной сети"
 #, c-format
 msgid "Backup your System files. (/etc directory)"
 msgstr "Создать резервные копии системных файлов (каталог /etc)."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the user umask."
+msgstr ""
+"Аргументы: (umask)\n"
+"\n"
+"Устанавливает umask пользователя."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11246,17 +11496,6 @@ msgstr ""
 msgid "Samba Server"
 msgstr "Сервер Samba"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
-msgstr ""
-"Аргументы: (arg, alert=1)\n"
-"\n"
-"Включает/отключает защиту от спуфинга IP."
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Australian Optus cable TV"
@@ -11281,11 +11520,6 @@ msgstr "Зимбабве"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please enter the host name or IP."
-msgstr "Пожалуйста, введите имя хоста или IP"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "When"
 msgstr "Когда"
 
@@ -11298,26 +11532,6 @@ msgstr "Второй сервер DNS (необязательно)"
 #, c-format
 msgid "Finland"
 msgstr "Финляндия"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Санкционирует все сервисы, контролируемые tcp_wrappers (см. hosts.deny(5)), "
-"если \\fIarg\\fP = ALL.\n"
-"Только локальные сервисы, если \\fIarg\\fP = LOCAL и ни одного, если \\fIarg"
-"\\fP = NONE.\n"
-"Для санкционирования сервисов вам необходимо использовать /etc/hosts.allow\n"
-"(см. hosts.allow(5))."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -11333,6 +11547,19 @@ msgstr "Вы не можете отменить выбор этого пакета. Он должен быть обновлен"
 #, c-format
 msgid "Loading from floppy"
 msgstr "Загружается с дискеты"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
+"Arguments: (arg)\n"
+"\n"
+"Включает/отключает регистрацию необычных пакетов IPv4."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Словения"
 
 #: ../../standalone/mousedrake:1
 #, fuzzy, c-format
@@ -11355,11 +11582,6 @@ msgstr ""
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-cronyx-times-bold-r-normal--17-*-100-100-p-*-koi8-r,*-r-*"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Slovenia"
-msgstr "Словения"
 
 #: ../../any.pm:1
 #, c-format
@@ -11423,12 +11645,7 @@ msgstr "Поддержка радио :"
 msgid "Installing SANE packages..."
 msgstr "Устанавливаются пакеты SANE..."
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "boot disk creation"
-msgstr "создание загрузочного диска"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP"
 msgstr "LDAP"
@@ -11531,15 +11748,14 @@ msgstr ""
 "паролем и рабочей группой."
 
 #: ../../security/help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 "Аргументы: (arg)\n"
 "\n"
-"Принимать/Отклонять icmp-эхо."
+"Разрешает su только для членов привилегированной группы или разрешает su для "
+"любого пользователя."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -11555,6 +11771,11 @@ msgstr ""
 "Ваша видеокарта может иметь аппаратную поддержку 3D-ускорения,\n"
 "поддерживаемую XFree %s, ПОМНИТЕ, ЭТО ЭКСПЕРИМЕНТАЛЬНАЯ ПОДДЕРЖКА\n"
 "И ВОЗМОЖНО ЗАВИСАНИЕ ВАШЕГО КОМПЬЮТЕРА."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Shell timeout"
+msgstr "Таймаут при загрузке ядра"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11594,68 +11815,6 @@ msgid ""
 msgstr ""
 "Ошибка установки aboot, \n"
 "попытаться форсировать установку, даже если это разрушит первый раздел?"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - The compression mode:\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode:\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, Drakbackup will ignore all references\n"
-"      included in .backupignore files in each directories.\n"
-"      ex: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
-msgstr ""
-"описание опций:\n"
-"\n"
-"На этом этапе Drakbackup позволяет вам изменить:\n"
-"\n"
-" - Режим сжатия:\n"
-"\n"
-"      Если вы выберете сжатие bzip2, вы сожмете\n"
-"      свои данные лучше gzip'а (около 2-10%%).\n"
-"      Эта опция по умолчанию не включена, потому что\n"
-"      для этого сжатия требуется больше времени (около 1000%%).\n"
-"      \n"
-" - Режим обновления:\n"
-"\n"
-"      Эта опция обновит вашу резервную копию, но на\n"
-"      самом деле эта опция бесполезна, потому что вы\n"
-"      должны распаковать свою резервную копию перед тем,\n"
-"      как обновить ее.\n"
-"      \n"
-" - Режим .backupignore:\n"
-"\n"
-"      Как в cvs, Drakbackup проигнорирует все связи,\n"
-"      включенные в файлы .backupignore в каждом каталоге.\n"
-"      Пример: \n"
-"         /*> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11757,6 +11916,14 @@ msgstr "Настраиваемая среда"
 msgid "Inuktitut"
 msgstr "Инуктитут"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Some protocols, like rsync, may be configured at the server end.  Rather "
+"than using a directory path, you would use the 'module' name for the service "
+"path."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
@@ -11777,15 +11944,15 @@ msgstr "Добавить новый принтер"
 msgid "          All of your selected data have been          "
 msgstr "            Все выбранные вами данные были             "
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "<-- Delete"
-msgstr "<-- Удалить"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
 msgstr "Непал"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "<-- Delete"
+msgstr "<-- Удалить"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -11796,6 +11963,29 @@ msgstr "процессор # "
 #, c-format
 msgid "chunk size"
 msgstr "размер куска"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Если \\fIarg\\fP = ALL, разрешает существование /etc/issue и /etc/issue.net. "
+"Если \\fIarg\\fP = NONE,\n"
+"запрещены все issue, кроме /etc/issue."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает sulogin(8) на уровне одного пользователя."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -11850,6 +12040,13 @@ msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 "Да, я хочу использовать автоматический вход с этими (пользователь,\n"
 "рабочим столом)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Restore Selected"
+msgstr ""
+"Восстановить\n"
+"выбранные файлы"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11949,10 +12146,14 @@ msgstr ""
 msgid "Security Administrator:"
 msgstr "Администратор по безопасности:"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your login"
-msgstr "Пожалуйста, введите свой логин"
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the shell timeout. A value of zero means no timeout."
+msgstr ""
+"Аргументы: (val)\n"
+"\n"
+"Устанавливает таймаут командного процессора. Нулевое значение означает "
+"отсутствие таймаута."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11992,53 +12193,6 @@ msgid ""
 "GIMP."
 msgstr "Принтер \"%s\" был успешно удален из Star Office/OpenOffice.org/GIMP."
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Standard: This is the standard security recommended for a computer that will "
-"be used to connect\n"
-"               to the Internet as a client.\n"
-"\n"
-"High:       There are already some restrictions, and more automatic checks "
-"are run every night.\n"
-"\n"
-"Higher:    The security is now high enough to use the system as a server "
-"which can accept\n"
-"              connections from many clients. If your machine is only a "
-"client on the Internet, you\n"
-"           should choose a lower level.\n"
-"\n"
-"Paranoid:  This is similar to the previous level, but the system is entirely "
-"closed and security\n"
-"                features are at their maximum\n"
-"\n"
-"Security Administrator:\n"
-"               If the 'Security Alerts' option is set, security alerts will "
-"be sent to this user (username or\n"
-"            email)"
-msgstr ""
-"Стандартный: это стандартный уровень безопасности, рекомендуемый для "
-"компьютера, который будет использоваться для подключения\n"
-"             к Интернет в качестве клиента.\n"
-"\n"
-"Высокий:     Здесь уже присутствуют некоторые ограничения, а также "
-"дополнительные автоматические проверки, выполняемые каждую ночь.\n"
-"\n"
-"Повышенный:  Безопасность теперь достаточно высока для использования машины "
-"вкачестве сервера, который может принимать\n"
-"             подключения от многочисленных клиентов. Если ваша машина "
-"является только клиентом Интернета, вы \n"
-"             должны использовать более низкий уровень.\n"
-"\n"
-"Параноидальный: похож на предыдущий уровень, но система полностью\n"
-"закрыта и\n"
-"             возможности защиты используются по максимуму.\n"
-"\n"
-"Администратор по безопасности:\n"
-"             если установлена опция 'Предупреждения о безопасности',"
-"предупреждения о безопасности будут отправляться этому\n"
-"             пользователю (имя пользователя или email)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Save packages selection"
@@ -12072,6 +12226,13 @@ msgid "Choose which services should be automatically started at boot time"
 msgstr ""
 "Выберите, какие сервисы должны быть автоматически запущены во время загрузки"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check files/directories writable by everybody"
+msgstr ""
+"если установлено yes, проверяет файлы/каталоги на возможность записи кем-"
+"либо."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Learn how to use this printer"
@@ -12095,6 +12256,11 @@ msgid ""
 msgstr ""
 "Программа изменения размера FAT не может обработать ваш раздел, \n"
 "произошла следующая ошибка: %s"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Size: "
+msgstr "Размер: %s"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -12141,6 +12307,14 @@ msgstr "Xpmac (установка драйвера монитора)"
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Имя хоста Zeroconf не должно содержать a ."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse icmp echo."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Принимать/Отклонять icmp-эхо."
 
 #: ../../services.pm:1
 #, c-format
@@ -12229,6 +12403,11 @@ msgstr ""
 "Примечание: вам необходим отдельный сетевой адаптер для настройки локальной "
 "сети (LAN)."
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections X Window"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -12252,6 +12431,11 @@ msgstr ""
 #, c-format
 msgid "Refuse"
 msgstr "Отказаться"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "LOCAL"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -12364,6 +12548,11 @@ msgstr "Выполняется определение"
 #, c-format
 msgid "Build Whole Kernel -->"
 msgstr "Собрать все ядро -->"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "modem"
+msgstr "Модем"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -12485,6 +12674,22 @@ msgstr ""
 "Ваша видеокарта поддерживается XFree %s, который может иметь лучшую "
 "поддержку в 2D."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает ежедневную проверку безопасности."
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable libsafe if libsafe is found on the system"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает libsafe, если libsafe найдена в системе."
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
@@ -12514,7 +12719,7 @@ msgstr "Автоматическая синхронизация времени (используя NTP)"
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "LDAP Server"
 msgstr "Сервер LDAP"
@@ -12579,6 +12784,11 @@ msgstr "Настраиваются карты PCMCIA ..."
 msgid "kdesu missing"
 msgstr "отсутствует kdesu"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "%s: %s requires a username...\n"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Encryption key"
@@ -12621,7 +12831,7 @@ msgstr "раздел %s"
 msgid "Paranoid"
 msgstr "Параноидальный"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS"
 msgstr "NIS"
@@ -12656,30 +12866,6 @@ msgstr "Очистить весь диск"
 msgid " (Default)"
 msgstr " (По умолчанию)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
-msgstr ""
-"Аргументы: ()\n"
-"\n"
-"Если SERVER_LEVEL (или SECURE_LEVEL, если отсутствует) больше 3\n"
-"в /etc/security/msec/security.conf, создает символическую ссылку /etc/"
-"security/msec/server\n"
-"на /etc/security/msec/server.<SERVER_LEVEL>. /etc/security/msec/server\n"
-"используется chkconfig --add, чтобы решить, добавлять ли сервис, если он "
-"присутствует\n"
-"в файле во время установки пакетов."
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -12695,17 +12881,27 @@ msgstr "Скорость получения:"
 msgid "Turks and Caicos Islands"
 msgstr "Острова Туркс и Каикос"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
-msgstr "права"
-
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
 msgstr "<- Назад"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Transfer Now"
+msgstr ""
+"  Переслать  \n"
+"сейчас"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Set root password and network authentication methods"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Использовать пароли для аутентификации пользователей."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12843,6 +13039,20 @@ msgstr "Установка загрузчика"
 msgid "Select the memory size of your graphics card"
 msgstr "Выберите объем памяти вашей видеокарты"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает для пользователей crontab и at. Помещает разрешенных "
+"пользователей в /etc/cron.allow и /etc/at.allow\n"
+"(см. man at(1) и crontab(1))."
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12886,11 +13096,6 @@ msgstr "Были удалены некоторые устройства из оборудования класса \"%s\":\n"
 msgid "Found %s %s interfaces"
 msgstr "Найдены %s %s интерфейсы"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr "закрепляющий бит"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -12905,17 +13110,6 @@ msgstr "Имя внутреннего домена"
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ карты"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
-msgstr ""
-"Аргументы: (umask)\n"
-"\n"
-"Устанавливает umask пользователя."
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -13028,23 +13222,18 @@ msgstr "Установка системы"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Винсент и Гренадины"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/Запрещает перезагрузку консольному пользователю."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
 msgstr "/Файл/_Открыть"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Аргумент определяет, будет ли клиентам разрешено подключаться\n"
-"к X-серверу на tcp-порт 6000."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -13066,15 +13255,15 @@ msgstr "Венгрия"
 msgid "Total progess"
 msgstr "Общий прогресс"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Color configuration"
-msgstr "Настройка цвета"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
 msgstr "Новая Зеландия"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Color configuration"
+msgstr "Настройка цвета"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -13149,6 +13338,13 @@ msgstr ""
 "плавающей точкой, который не достиг требуемой точности при выполнении "
 "деления с плавающей точкой (FDIV)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Backup quota exceeded!\n"
+"%d MB used vs %d MB allocated."
+msgstr ""
+
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
@@ -13181,6 +13377,11 @@ msgstr " введите `void', чтобы очистить пункт"
 msgid "on Hard Drive"
 msgstr "на жестком диске"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Password history length"
+msgstr "Этот пароль слишком прост"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Winmodem connection"
@@ -13211,18 +13412,6 @@ msgstr ""
 "бумаги, качество вывода данных на печать, ...), выберите \"Принтер\" в "
 "разделе \"Оборудование\" Центра управления Mandrake."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Устанавливает период истории пароля для предотвращения повторного "
-"использования пароля."
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
@@ -13240,6 +13429,14 @@ msgstr ""
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid remote root login."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/запрещает удаленный вход для root в систему."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13276,6 +13473,16 @@ msgstr ""
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Какой у вас часовой пояс?"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Can't create log file!"
+msgstr "Невозможно создать каталог!"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Use .backupignore files"
+msgstr "Использовать квоты для резервных файлов"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13332,6 +13539,11 @@ msgstr "Размер: %s\n"
 msgid "Hostname: "
 msgstr "Имя хоста:"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a rule"
+msgstr "добавить правило"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Chunk size %s\n"
@@ -13346,15 +13558,6 @@ msgstr "Стройте будущее Linux!"
 #, c-format
 msgid "Local Printer"
 msgstr "Локальный принтер"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
-"fr>"
-msgstr ""
-" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
-"fr>"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -13403,20 +13606,10 @@ msgstr "Изменить размер"
 msgid "Dominica"
 msgstr "Доминика"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the device name to use for backup"
-msgstr "Пожалуйста, введите имя устройства, используемого для резервирования"
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Resolution: %s\n"
 msgstr "Разрешение: %s\n"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
-msgstr "совпадает с"
 
 #: ../../install2.pm:1
 #, c-format
@@ -13469,25 +13662,6 @@ msgstr "Мышь: %s\n"
 msgid "Reselect correct fonts"
 msgstr "Заново выбрать правильные шрифты"
 
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-"Please be careful when you are using ftp backup, because only \n"
-"backups that are already built are sent to the server.\n"
-"So at the moment, you need to build the backup on your hard \n"
-"drive before sending it to the server.\n"
-"\n"
-msgstr ""
-"описание опций:\n"
-"\n"
-"Пожалуйста, будьте осторожны при резервировании по ftp, потому что\n"
-"на сервер отправляются только уже созданные резервные копии.\n"
-"Поэтому сначала вам потребуется создать резервную копию на\n"
-"своем жестком диске, а уже потом отправлять ее на сервер.\n"
-"\n"
-
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -13503,11 +13677,6 @@ msgstr ""
 "даже если вы не тестировали конфигурацию. Понятно, что вы должны\n"
 "ответить \"Нет\", если ваша машина будет работать в качестве сервера, или,\n"
 "если вы не смогли настроить монитор."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "We are now going to configure the %s connection."
-msgstr "Сейчас мы собираемся настроить соединение %s."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -13630,6 +13799,11 @@ msgstr "Звуковая карта не обнаружена!"
 msgid "Mouse Port"
 msgstr "Порт мыши"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Check for unsecured accounts"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid ""
@@ -13643,17 +13817,6 @@ msgstr ""
 #, c-format
 msgid "Ftp Server"
 msgstr "Сервер Ftp"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает проверку безопасности msec каждый час."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13669,18 +13832,6 @@ msgstr "преобразование шрифтов pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Тип шины, к которой подключена мышь."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Аргументы: (size)\n"
-"\n"
-"Устанавливает размер истории команд командного процессора. Значение -1 "
-"означает неограниченно."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13824,25 +13975,6 @@ msgstr ""
 msgid "Comoros"
 msgstr "Коморские острова"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"We are now going to configure the %s connection.\n"
-"\n"
-"\n"
-"Press OK to continue."
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Сейчас мы собираемся настроить %s соединение.\n"
-"\n"
-"\n"
-"Нажмите ОК для продолжения."
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13877,61 +14009,6 @@ msgstr "Выберите другой носитель для восстановления"
 #, c-format
 msgid "Software Manager"
 msgstr "Менеджер программного обеспечения"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid ""
-"Restore Description:\n"
-" \n"
-"Only the most recent date will be used, because with incremental \n"
-"backups it is necessary to restore one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-msgstr ""
-"описание восстановления:\n"
-"\n"
-"Будет использована только последняя дата, потому что для\n"
-"нарастающих резервирований необходимо восстановить одну\n"
-"за другой все резервные копии.\n"
-"\n"
-"Поэтому, если вы не хотите восстанавливать данные пользователя,\n"
-"пожалуйста, снимите выделение со всех его пунктов.\n"
-"\n"
-"В противном случае вы сможете выбрать только это\n"
-"\n"
-" - Нарастающие резервирования:\n"
-"\n"
-"\tНарастающее резервирование является наиболее мощной\n"
-"\tопцией резервирования. Эта опция позволяет вам в первый\n"
-"\tраз зарезервировать все свои данные, а в дальнейшем\n"
-"\tтолько изменившиеся.\n"
-"\tДалее, вы сможете на этапе восстановления восстановить\n"
-"\tсвои данные за указанный период.\n"
-"\tЕсли вы не выбрали эту опцию, все старые пакеты будут\n"
-"\tудаляться перед каждым резервированием.\n"
-"\n"
-"\n"
-"\n"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -14008,6 +14085,11 @@ msgstr ""
 msgid "This password is too simple"
 msgstr "Этот пароль слишком прост"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Chkconfig obey msec rules"
+msgstr "Настройка сервисов"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
@@ -14031,20 +14113,12 @@ msgstr "Действительно минимальная установка (в особенности нет urpmi)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"  Transfer  \n"
-"Now"
-msgstr ""
-"  Переслать  \n"
-"сейчас"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use daemon"
 msgstr "Использовать демон"
 
 #: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/logdrake:1
+#: ../../standalone/drakauth:1 ../../standalone/drakconnect:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
 msgstr "Аутентификация"
@@ -14145,11 +14219,6 @@ msgstr "Устанавливается принтер по умолчанию..."
 msgid "Interface %s (using module %s)"
 msgstr "Интерфейс %s (использующий модуль %s)"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Name: %s\n"
-msgstr "Название: %s\n"
-
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Generating preview ..."
@@ -14163,6 +14232,28 @@ msgid ""
 msgstr ""
 "Freq должна иметь суффикс k, M или G (например, \"2.46G\" для частоты 2.46 "
 "GHz), или добавьте нужное количество '0' (нулей)."
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "ignore"
+msgstr "Сингапур"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
+msgstr ""
+"Аргументы: (arg, listen_tcp=None)\n"
+"\n"
+"Разрешает/запрещает X-подключения. Первый аргумент определяет, что\n"
+"происходит на клиентской стороне: ALL (разрешены все подключения),\n"
+"LOCAL (только локальное подключение) и NONE (нет подключения)."
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -14199,6 +14290,11 @@ msgstr ""
 "Теперь вы можете передать его параметры в модуль %s.\n"
 "Помните, что любые адреса должны быть введены с префиксом 0x, напр., '0z123'"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Кения"
+
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
@@ -14212,11 +14308,6 @@ msgstr ""
 "доступный для понимания. Настраивайте и подгоняйте такие элементы, как "
 "уровень безопасности, периферия (экран, мышь, клавиатура...), соединение с "
 "Интернет и многое другое!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Kenya"
-msgstr "Кения"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -14248,6 +14339,14 @@ msgstr "Обе клавиши Shift одновременно"
 msgid "Select a scanner model"
 msgstr "Выберите модель сканера"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Принимать/Отклонять фиктивные IPv4 ошибочные сообщения."
+
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
@@ -14263,6 +14362,11 @@ msgstr "Настройка Drakbackup"
 msgid "Save as.."
 msgstr "Сохранить как..."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr "Корея (North)"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -14272,22 +14376,17 @@ msgstr ""
 "Этот интерфейс еще не был настроен.\n"
 "Запустите в главном окне мастер настройки"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Korea (North)"
-msgstr "Корея (North)"
-
-#: ../../any.pm:1
-#, c-format
-msgid "Autologin"
-msgstr "Автоматический вход"
-
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System configuration"
 msgstr "Настройка системы"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1 ../../security/l10n.pm:1
+#, c-format
+msgid "Autologin"
+msgstr "Автоматический вход"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Domain Admin Password"
 msgstr "Пароль администратора домена"
@@ -14579,6 +14678,22 @@ msgstr "Точка монтирования:"
 msgid "parse all fonts"
 msgstr "разобрать все шрифты"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid direct root login."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/запрещает root'у прямой вход в систему."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Принимать/Отклонять широковещательные icmp echo."
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -14636,6 +14751,14 @@ msgstr "Общий доступ к локальным принтерам"
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr " http://www.mandrakelinux.com/en/91errata.php3"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает libsafe, если libsafe найдена в системе."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14771,6 +14894,22 @@ msgstr "Куда вы хотите примонтировать устройство %s?"
 msgid "The default lease (in seconds)"
 msgstr "Владение адресом по умолчанию (в секундах)"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"We are now going to configure the %s connection.\n"
+"\n"
+"\n"
+"Press \"%s\" to continue."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"Сейчас мы собираемся настроить %s соединение.\n"
+"\n"
+"\n"
+"Нажмите ОК для продолжения."
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Interface \"%s\""
@@ -14800,17 +14939,6 @@ msgstr ""
 msgid "Test"
 msgstr "Проверить"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Разрешает/запрещает root'у прямой вход в систему."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea"
@@ -14830,6 +14958,11 @@ msgstr "Принтер печати необработанных данных"
 #, fuzzy, c-format
 msgid "official vendor name of the cpu"
 msgstr "Официальный производитель процессора"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Useless without Terminal Server"
+msgstr ""
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14851,11 +14984,8 @@ msgstr "Настройка мыши"
 msgid "Choose the mount points"
 msgstr "Выберите точки монтирования"
 
-#: ../../help.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
-#: ../../standalone/net_monitor:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "OK"
@@ -14958,20 +15088,10 @@ msgstr ""
 "Удаление принтера \"%s\" из Star Office/OpenOffice.org/GIMP завершилось "
 "неудачей."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr "Удалить"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "here if no."
 msgstr "если не уверены - сюда"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "help"
-msgstr "Справка"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14993,10 +15113,20 @@ msgstr "Укажите, к какому последовательному порту подключена ваша мышь."
 msgid "Did it work properly?"
 msgstr "Он работал правильно?"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "Mount the file system read-only."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid "Poor"
 msgstr "Низкий"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Report check result by mail"
+msgstr "если установлено yes, сообщает о результатах проверки по почте."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -15041,6 +15171,11 @@ msgstr ""
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Kannada"
+msgstr "Канада"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
@@ -15061,6 +15196,11 @@ msgstr "Частота обновления по вертикали"
 msgid "Entering step `%s'\n"
 msgstr "Осуществляется переход на этап `%s'\n"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Нигер"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan"
@@ -15070,11 +15210,6 @@ msgstr "Logitech MouseMan"
 #, c-format
 msgid "Removing %s ..."
 msgstr "Удаляется %s ..."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Niger"
-msgstr "Нигер"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15106,6 +15241,11 @@ msgstr "Обычный"
 msgid "Printing system: "
 msgstr "Система печати: "
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
+msgstr ""
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
@@ -15127,10 +15267,13 @@ msgid "Philippines"
 msgstr "Филиппины"
 
 #: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
-#: ../../standalone/mousedrake:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr "ОК"
@@ -15203,25 +15346,20 @@ msgstr ""
 "Нажмите \"Далее\", когда будете готовы, и \"Отмена\", если вы не хотите\n"
 "устанавливать свой принтер(ы) сейчас."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore From Catalog"
-msgstr "Восстановить из каталога"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
 msgstr "Питкэрн"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore From Catalog"
+msgstr "Восстановить из каталога"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "IDE"
 msgstr "IDE"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr "группа :"
 
 #: ../../fs.pm:1
 #, c-format
@@ -15265,6 +15403,16 @@ msgstr ""
 "Выполняется поиск доступных пакетов и перестраивается база данных rpm..."
 
 #: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"                      DrakBackup Report \n"
+msgstr ""
+"\n"
+"                      Отчет DrakBackup \n"
+"\n"
+
+#: ../../standalone/drakbackup:1
 #, c-format
 msgid "Does not appear to be recordable media!"
 msgstr "Похоже, что это не перезаписываемый носитель!"
@@ -15278,6 +15426,13 @@ msgstr "Укажите параметры"
 #, c-format
 msgid "Vanuatu"
 msgstr "Вануату"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "New user list:\n"
+msgstr ""
+"\n"
+"- Файлы пользователя:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15319,6 +15474,15 @@ msgid "You can't use an encrypted file system for mount point %s"
 msgstr ""
 "Вы не можете использовать зашифрованную файловую систему для точки "
 "монтирования %s"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the password history length to prevent password reuse."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Устанавливает период истории пароля для предотвращения повторного "
+"использования пароля."
 
 #: ../../lang.pm:1
 #, c-format
@@ -15555,11 +15719,6 @@ msgstr "TB"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check if you are using a DVDR device"
-msgstr "Пожалуйста, отметьте, если вы используете устройство DVDR"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "FATAL"
 msgstr "ГРУБЫЙ"
 
@@ -15579,20 +15738,10 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Delete"
 msgstr "Удалить"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Разрешает/Запрещает перезагрузку консольному пользователю."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -15762,10 +15911,15 @@ msgstr "CUPS - Общая система печати Unix"
 msgid "Webmin Service"
 msgstr "Сервис Webmin"
 
-#: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
+#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "device"
 msgstr "устройство"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory to save to:"
+msgstr "Пожалуйста, введите каталог для сохранения:"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -15801,10 +15955,34 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr "Тамильская (машинописная раскладка)"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Использовать пароли для аутентификации пользователей."
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/запрещает список пользователей системы в менеджерах экрана (kdm "
+"иgdm)."
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
 msgstr "вручную"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Filename text to search for:"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15838,6 +16016,11 @@ msgstr "Принтер на сервере NertWare"
 #, c-format
 msgid "Give the ram size in MB"
 msgstr "Укажите объем RAM в MB"
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Disconnection from Internet complete."
+msgstr "Отключение от Интернет выполнено."
 
 #: ../../any.pm:1
 #, c-format
@@ -15940,6 +16123,11 @@ msgstr "компактно"
 msgid "1 minute"
 msgstr "1 минута"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "type: fat"
+msgstr "тип: %s"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "on channel %d id %d\n"
@@ -15954,6 +16142,14 @@ msgstr ", многофункциональное устройство"
 #, c-format
 msgid "Laos"
 msgstr "Лаос"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Включает/отключает проверку promiscuity карт ethernet."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15980,15 +16176,15 @@ msgstr "Территория"
 msgid "(E)IDE/ATA controllers"
 msgstr "Контроллеры (E)IDE/ATA"
 
+#: ../../fs.pm:1
+#, c-format
+msgid "All I/O to the file system should be done synchronously."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Server"
 msgstr "Сервер печати"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnection from the Internet complete."
-msgstr "Отключение от Интернет выполнено."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16014,28 +16210,6 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Сен-Пьер и Микелон"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"Restore Backup Problems:\n"
-"\n"
-"During the restore step, Drakbackup will verify all your\n"
-"backup files before restoring them.\n"
-"Before the restore, Drakbackup will remove \n"
-"your original directory, and you will loose all your \n"
-"data. It is important to be careful and not modify the \n"
-"backup data files by hand.\n"
-msgstr ""
-"\n"
-"Проблемы при восстановлении резервных копий:\n"
-"\n"
-"На этапе восстановления Drakbackup проверит все ваши\n"
-"резервные файлы перед тем, как их восстанавливать.\n"
-"Перед восстановлением Drakbackup удалит ваш оригинальный\n"
-"каталог и вы потеряете все свои данные. Будьте осторожны\n"
-"и не изменяйте резервные файлы вручную.\n"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16082,6 +16256,11 @@ msgstr "Цилиндр %d до %d\n"
 msgid "New profile..."
 msgstr "Новый профиль..."
 
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Which disk do you want to move it to?"
@@ -16092,10 +16271,15 @@ msgstr "На какой диск хотите его переместить?"
 msgid "Display logo on Console"
 msgstr "Показывать логотип в консоли"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Windows Domain"
 msgstr "Домен Windows"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Saami (norwegian)"
+msgstr "Дворака (норвежская)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16141,15 +16325,15 @@ msgstr ""
 msgid "Build Single NIC -->"
 msgstr "Собрать единственный NIC -->"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#, c-format
-msgid "Is this correct?"
-msgstr "Все правильно?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
 msgstr "Маршалловы острова"
+
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#, c-format
+msgid "Is this correct?"
+msgstr "Все правильно?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16166,10 +16350,27 @@ msgstr "Пароль Root"
 msgid "Build All Kernels -->"
 msgstr "Собрать все ядра -->"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "DVDRAM device"
+msgstr "устройство"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
 msgstr "если установлено yes, сообщает о файлах без владельца."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid ""
+"This is HardDrake, a Mandrake hardware configuration tool.\n"
+"<span foreground=\"royalblue3\">Version:</span> %s\n"
+"<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"Это HardDrake - инструмент настройки оборудования Mandrake.\n"
+"Версия:"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16181,6 +16382,11 @@ msgstr ""
 "У вас нет раздела swap\n"
 "\n"
 "Желаете продолжить?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "Version: "
+msgstr "Версия: %s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16251,10 +16457,18 @@ msgstr "Оптимизируйте вашу защиту с помощью Mandrake Linux"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/drakfont:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Справка"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check if the network devices are in promiscuous mode"
+msgstr ""
+"если установлено yes, проверяет, работают ли сетевые устройства в режиме "
+"promiscuous."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16279,6 +16493,11 @@ msgstr ""
 #, c-format
 msgid "Username required"
 msgstr "Требуется имя пользователя"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Device"
+msgstr "Устройство: "
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -16320,16 +16539,10 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Параметры принтера SMB (Windows 9x/NT)"
 
-#: ../../security/help.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
+msgid "Valid user list changed, rewriting config file."
 msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Принимать/Отклонять фиктивные IPv4 ошибочные сообщения."
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16349,6 +16562,11 @@ msgstr ""
 #, c-format
 msgid "Protocol for the rest of the world"
 msgstr "Протокол для всего остального мира"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digit and upcase letters"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16434,6 +16652,11 @@ msgstr "Выбрать новый размер"
 msgid "Media class"
 msgstr "Класс носителя"
 
+#: ../../standalone/XFdrake:1
+#, c-format
+msgid "You need to log out and back in again for changes to take effect"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not known by this version of Scannerdrake."
@@ -16453,20 +16676,6 @@ msgstr "Перезапуск XFS"
 #, c-format
 msgid "Add host/network"
 msgstr "Добавить хост/сеть"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
-msgstr ""
-"если установлено в yes, проверяет на пустые пароли, отсутствие паролей в /"
-"etc/shadow и пользователей с id 0, отличных от root"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save to:"
-msgstr "Пожалуйста, введите каталог для сохранения:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16488,22 +16697,10 @@ msgstr "В приводе отсутствует CDR/DVDR!"
 msgid "British Indian Ocean Territory"
 msgstr "Британская территория Индийского океана"
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Нормальный режим"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' medias also use the hard drive."
-msgstr ""
-"Пожалуйста, убедитесь, что демон cron включен в ваши сервисы.\n"
-"\n"
-"Заметьте, что сейчас все 'сетевые' носители также используют жесткий диск."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16593,19 +16790,18 @@ msgstr ""
 "и установки выбранных пакетов, или \"Отмена\", чтобы прервать установку\n"
 "обновлений."
 
-#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
-#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Выход"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
 msgstr "Мьянма"
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Выход"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16660,7 +16856,7 @@ msgstr ""
 "Нажмите \"Далее\", когда будете готовы, и \"Отмена\", если вы не хотите\n"
 "устанавливать свой принтер(ы) сейчас."
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Authentication NIS"
 msgstr "Аутентификация NIS"
@@ -16682,10 +16878,20 @@ msgstr "Совместное использование подключения к Интернету сейчас включено"
 msgid "Card IO_0"
 msgstr "IO_0 карты"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Disable Local Config"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "United Arab Emirates"
 msgstr "Объединенные арабские Эмираты"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Тайланд"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -16694,18 +16900,18 @@ msgstr "IO_1 карты"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Thailand"
-msgstr "Тайланд"
+msgid "Kazakhstan"
+msgstr "Казахстан"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr "Маршрутизаторы:"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr "Казахстан"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Write"
+msgstr "Записать %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16736,6 +16942,56 @@ msgstr "Остров Буве"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Если порт не указан, по умолчанию будет использован 631."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu enable to select one of the six preconfigured "
+"security\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16812,6 +17068,11 @@ msgstr "Метка"
 #, c-format
 msgid "Save on floppy"
 msgstr "Сохранить на дискету"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check open ports"
+msgstr "найден на порту %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16921,6 +17182,11 @@ msgstr "Французская"
 msgid "Czech (QWERTY)"
 msgstr "Чешская (QWERTY)"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow X Window connections"
+msgstr "Win-модемное соединение"
+
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Hardware probing in progress"
@@ -16946,7 +17212,7 @@ msgstr ""
 "LPT2:, ..., 1-й принтер USB: /dev/usb/lp0, 2-й принтер USB: /dev/usb/"
 "lp1, ...)."
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Далее"
@@ -16960,6 +17226,11 @@ msgstr "Вы не можете установить начальный загрузчик на раздел %s\n"
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Пуэрто-Рико"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -16978,11 +17249,6 @@ msgstr ""
 "Добро пожаловать.\n"
 "\n"
 "Параметры автоматической установки доступны в разделах слева"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Puerto Rico"
-msgstr "Пуэрто-Рико"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17017,7 +17283,7 @@ msgstr ""
 msgid "Anguilla"
 msgstr "Ангвилла"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "NIS Domain"
 msgstr "Домен NIS"
@@ -17055,19 +17321,6 @@ msgstr ""
 "Назначает raw-устройства block-устройствам (таким как разделы\n"
 "жесткого диска) для использования такими приложениями, как Oracle или\n"
 "DVD проигрыватели"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
-"Аргументы: (arg, alert=1)\n"
-"\n"
-"Включает/отключает защиту от спуфинга распознавания имен. Если\n"
-"\\fIalert\\fP равен 1, а также сообщать в syslog."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -17119,6 +17372,11 @@ msgstr "Тринидад и Тобаго"
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD и LPRng не поддерживают принтеры IPP.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Host name or IP."
+msgstr "Имя хоста"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -17143,6 +17401,11 @@ msgstr "Адаптер %s: %s"
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Фолклендские (Мальвинские) острова"
+
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Boot disk creation"
+msgstr "создание загрузочного диска"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17186,6 +17449,13 @@ msgstr ""
 "Запуск фильтрации пакетов для ядер Linux серии 2.2, чтобы установить\n"
 "файервол для защиты своей машины от сетевых атак."
 
+#: ../../network/ethernet.pm:1
+#, fuzzy, c-format
+msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
+msgstr ""
+"Какой dhcp-клиент вы хотите использовать?\n"
+"По умолчанию используется dhcp-client"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (ISCII-layout)"
@@ -17195,6 +17465,20 @@ msgstr "Тамильская (раскладка ISCII)"
 #, c-format
 msgid "Mayotte"
 msgstr "Майот"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+"Аргументы: (size)\n"
+"\n"
+"Устанавливает размер истории команд командного процессора. Значение -1 "
+"означает неограниченно."
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "%d KB\n"
+msgstr "Размер: %d KB\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -17206,15 +17490,15 @@ msgstr "Создается дискета автоматической установки..."
 msgid "Searching for scanners ..."
 msgstr "Поиск сканеров ..."
 
-#: ../../steps.pm:1
-#, c-format
-msgid "Partitioning"
-msgstr "Разметка диска"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Russia"
 msgstr "Россия"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Partitioning"
+msgstr "Разметка диска"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -17254,6 +17538,14 @@ msgstr "Недостаточно свободного места для автоматического распределения"
 msgid "Set root password"
 msgstr "Установка пароля root"
 
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Enable IP spoofing protection"
+msgstr ""
+"Аргументы: (arg, alert=1)\n"
+"\n"
+"Включает/отключает защиту от спуфинга IP."
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid ""
@@ -17262,6 +17554,11 @@ msgid ""
 msgstr ""
 "Для вашей звуковой карты (%s) нет свободного драйвера, но имеется "
 "собственный драйвер на \"%s\""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group :"
+msgstr "группа :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17273,6 +17570,15 @@ msgstr ""
 #, c-format
 msgid "Internet connection configuration"
 msgstr "Настройка подключения к Интернету"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+"Аргументы: (name)\n"
+"\n"
+"Добавляет имя как исключение из управления возрастом паролей, "
+"осуществляемого msec."
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17298,11 +17604,6 @@ msgstr "Бенгальская"
 #, c-format
 msgid "Preference: "
 msgstr "Предпочтение: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Wizard..."
-msgstr "Мастер..."
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -17354,6 +17655,17 @@ msgstr ""
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Показать текущую настройку интерфейса"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Аргумент определяет, будет ли клиентам разрешено подключаться\n"
+"к X-серверу на tcp-порт 6000."
 
 #: ../../help.pm:1
 #, c-format
@@ -17471,6 +17783,13 @@ msgstr "Настройки"
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Введен неправильный IP хоста/сети.\n"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Create/Transfer backup keys for SSH"
+msgstr ""
+"Создать/переслать\n"
+"резервные ключи для SSH"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Here is the full list of available countries"
@@ -17587,6 +17906,11 @@ msgstr ""
 "Если у вас возникли проблемы с запоминанием паролей, вы можете выбрать\n"
 "опцию \"Без пароля\", если ваш компьютер не будет подключаться к Интернет и\n"
 "если вы доверяете всем доступ к машине."
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Name resolution spoofing protection"
+msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -17778,15 +18102,15 @@ msgstr ""
 msgid "Shell"
 msgstr "Командный процессор"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "PCI"
-msgstr "PCI"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе и Принсипи"
+
+#: ../../network/isdn.pm:1
+#, c-format
+msgid "PCI"
+msgstr "PCI"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -17862,6 +18186,17 @@ msgid " on parallel port #%s"
 msgstr " на параллельном порту #%s"
 
 #: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Аргументы: (length, ndigits=0, nupper=0)\n"
+"\n"
+"Устанавливает минимальную длину пароля, минимальное количество цифр и "
+"минимально количество символов в верхнем регистре."
+
+#: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
 msgstr "если установлено yes, проверяет открытые порты."
@@ -17917,6 +18252,11 @@ msgstr "Вычисляется размер раздела Windows"
 msgid "Italy"
 msgstr "Италия"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Каймановы острова"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
@@ -17936,11 +18276,6 @@ msgstr "ошибка размонтирования %s: %s"
 #, c-format
 msgid "Do it!"
 msgstr "Выполнить!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cayman Islands"
-msgstr "Каймановы острова"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18038,18 +18373,7 @@ msgstr "Обнаружена модель: %s %s"
 msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft выбрал для вас лучшее программное обеспечение"
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid ""
-"This is HardDrake, a Mandrake hardware configuration tool.\n"
-"Version: %s\n"
-"Author: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
-"\n"
-msgstr ""
-"Это HardDrake - инструмент настройки оборудования Mandrake.\n"
-"Версия:"
-
-#: ../../install_steps_interactive.pm:1
+#: ../../any.pm:1
 #, c-format
 msgid "Local files"
 msgstr "Локальные файлы"
@@ -18063,6 +18387,11 @@ msgstr "может быть"
 #, c-format
 msgid "Panama"
 msgstr "Панама"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "Can't open %s!"
+msgstr "Невозможно найти %s на %s"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -18147,11 +18476,6 @@ msgstr ""
 "\n"
 "- Сохранить на жесткий диск в каталог : %s\n"
 
-#: ../../install_steps_gtk.pm:1
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Размер: %d KB\n"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove fonts on your system"
@@ -18177,10 +18501,10 @@ msgstr ""
 msgid "Graphical interface at startup"
 msgstr "Графический интерфейс при загрузке"
 
-#: ../../standalone/drakbackup:1
+#: ../../network/netconnect.pm:1
 #, c-format
-msgid "Please enter the directory to save:"
-msgstr "Пожалуйста, введите каталог для сохранения:"
+msgid " adsl"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -18191,6 +18515,11 @@ msgstr "Формат дискет, поддерживаемый дисководом"
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Недостаточно разделов для RAID уровня %d\n"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid "local config: true"
+msgstr "не настроен"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18213,6 +18542,11 @@ msgstr "Подключен"
 msgid "Macedonian"
 msgstr "Македонская"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Мали"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
@@ -18222,11 +18556,6 @@ msgstr "Мосты и системные контроллеры"
 #, c-format
 msgid "/File/_Save"
 msgstr "/Файл/_Сохранить"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Mali"
-msgstr "Мали"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -18252,6 +18581,11 @@ msgstr "Удаленное управление"
 #, c-format
 msgid "Please select media for backup..."
 msgstr "Пожалуйста, выберите носитель для резервирования..."
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Wrong email"
+msgstr ""
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -18315,8 +18649,7 @@ msgstr ""
 msgid "Mandrake's multipurpose configuration tool"
 msgstr "Универсальный инструмент настройки Mandrake"
 
-#: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Save"
 msgstr "Сохранить"
@@ -18367,11 +18700,6 @@ msgstr "Французская Гвиана"
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "добавить правило"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
@@ -18392,7 +18720,13 @@ msgstr "Передать конфигурацию принтера"
 msgid "Do you want to enable printing on the printers mentioned above?\n"
 msgstr "Хотите включить печать на принтерах, упомянутых выше?\n"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check additions/removals of suid root files"
+msgstr ""
+"если установлено yes, проверяет добавления/удаления битов suid root файлов."
+
+#: ../../any.pm:1
 #, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
@@ -18431,16 +18765,10 @@ msgstr "%s (Порт %s)"
 msgid "Use network connection to backup"
 msgstr "Использовать сетевое соединение для резервирования"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Включает/отключает sulogin(8) на уровне одного пользователя."
+#: ../../standalone/drakfloppy:1
+#, fuzzy, c-format
+msgid "Kernel version"
+msgstr "версия ядра"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -18560,10 +18888,25 @@ msgstr "Сервер"
 msgid "Left Shift key"
 msgstr "Левая клавиша \"Windows\""
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " local network"
+msgstr "Локальная сеть"
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
 msgstr "Неудачный выбор, попробуйте еще раз\n"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Syslog reports to console 12"
+msgstr ""
+
+#: ../../diskdrake/smbnfs_gtk.pm:1
+#, fuzzy, c-format
+msgid "Search new servers"
+msgstr "Поиск серверов"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18724,6 +19067,18 @@ msgstr "Германия"
 msgid "Austria"
 msgstr "Австрия"
 
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Choose your CD/DVD media size (MB)"
+msgstr "Пожалуйста, выберите размер своего накопителя CD/DVD"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Check permissions of files in the users' home"
+msgstr ""
+"если установлено yes, проверяет разрешения файлов в домашних каталогах "
+"пользователей."
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Run \"sndconfig\" after installation to configure your sound card"
@@ -18809,10 +19164,29 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s не поддерживается этой версией Mandrake Linux."
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 1"
+msgstr "Уровень"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
 msgstr "Клиент DHCP"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "List users on display managers (kdm and gdm)"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/запрещает список пользователей системы в менеджерах экрана (kdm "
+"иgdm)."
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 2"
+msgstr "Уровень"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -18823,6 +19197,21 @@ msgstr "Восстановление из файла %s завершилось неудачей: %s"
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech Mouse (последовательная, старого типа C7)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 3"
+msgstr "Уровень"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 4"
+msgstr "Уровень"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 5"
+msgstr "Уровень"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18893,13 +19282,6 @@ msgstr "Все удаленные машины"
 #, c-format
 msgid "Install themes"
 msgstr "Установить темы"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-msgstr ""
-" обновления 2002 MandrakeSoft, Stew Benedict <sbenedict\\@mandrakesoft.com>"
 
 #: ../../help.pm:1
 #, c-format
@@ -19020,11 +19402,6 @@ msgstr "Лицензионное соглашение"
 msgid "System Options"
 msgstr "Системные опции"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory where backups are stored"
-msgstr "Пожалуйста, введите каталог для сохранения резервных копий"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
@@ -19039,6 +19416,13 @@ msgstr "Этот хост уже есть в списке, его нельзя добавить снова.\n"
 #, c-format
 msgid ", USB printer"
 msgstr ", принтер USB"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Incremental backups only save files that have changed or are new since the "
+"last backup."
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -19065,6 +19449,14 @@ msgstr "Поздравляем!"
 #, c-format
 msgid "Use owner id for execution"
 msgstr "Использовать id владельца для выполнения"
+
+#: ../../security/l10n.pm:1
+#, fuzzy, c-format
+msgid "Allow remote root login"
+msgstr ""
+"Аргументы: (arg)\n"
+"\n"
+"Разрешает/запрещает удаленный вход для root в систему."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -19124,6 +19516,11 @@ msgstr "Microsoft Explorer"
 #, c-format
 msgid "German (no dead keys)"
 msgstr "Немецкая (без мертвых клавиш)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tSend mail to %s\n"
+msgstr ""
 
 # ../../printerdrake.pm_.c:2489 #, c-format
 #: ../../printer/printerdrake.pm:1
@@ -19224,6 +19621,11 @@ msgstr ""
 "списка, а затем добавьте, если необходимо, имя пользователя, пароль и/или "
 "рабочую группу."
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid " cable"
+msgstr "Таблица"
+
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -19234,17 +19636,6 @@ msgstr "Использовать свободное место на разделе Windows"
 msgid "%s found on %s, configure it automatically?"
 msgstr "%s найден на %s, настроить его автоматически?"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
-msgstr ""
-"Аргументы: (arg)\n"
-"\n"
-"Использовать пароли для аутентификации пользователей."
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
@@ -19254,17 +19645,6 @@ msgstr "Драйвер XFree86: %s\n"
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
 msgstr "Этот хост/сеть уже есть в списке, он не может быть добавлен еще раз.\n"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"                      DrakBackup Report \n"
-"\n"
-msgstr ""
-"\n"
-"                      Отчет DrakBackup \n"
-"\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -19280,6 +19660,11 @@ msgstr "Папуа Новая Гвинея"
 #, c-format
 msgid "Serbian (cyrillic)"
 msgstr "Сербская (кириллическая)"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Enter the directory where backups are stored"
+msgstr "Пожалуйста, введите каталог для сохранения резервных копий"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -19584,16 +19969,6 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Please check for multisession CD"
-msgstr "Пожалуйста, отметьте для многосеансового компакт-диска"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
-msgstr "пользователь"
-
-#: ../../standalone/drakbackup:1
-#, c-format
 msgid "Use Hard Disk to backup"
 msgstr "Использовать жесткий диск для резервирования"
 
@@ -19673,6 +20048,11 @@ msgstr ""
 msgid "Detected model: %s"
 msgstr "Обнаружена модель: %s"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" is not a valid email!"
+msgstr ""
+
 #: ../../standalone/drakedm:1
 #, c-format
 msgid ""
@@ -19688,6 +20068,11 @@ msgstr ""
 #, c-format
 msgid "if set to yes, run the daily security checks."
 msgstr "если установлено yes, запускает ежедневные проверки безопасности."
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "Device name to use for backup"
+msgstr "Пожалуйста, введите имя устройства, используемого для резервирования"
 
 #: ../../lang.pm:1
 #, c-format
@@ -19913,6 +20298,347 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Набор утилит для чтения и отправки почты и новостей и навигации по вебу"
 
+#~ msgid "Please relog into %s to activate the changes"
+#~ msgstr "Пожалуйста, войдите еще раз в %s, чтобы применить изменения"
+
+#~ msgid ""
+#~ "Description:\n"
+#~ "\n"
+#~ "  Drakbackup is used to backup your system.\n"
+#~ "  During the configuration you can select: \n"
+#~ "\t- System files, \n"
+#~ "\t- Users files, \n"
+#~ "\t- Other files.\n"
+#~ "\tor All your system ...  and Other (like Windows Partitions)\n"
+#~ "\n"
+#~ "  Drakbackup allows you to backup your system on:\n"
+#~ "\t- Harddrive.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
+#~ "\t- FTP.\n"
+#~ "\t- Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Tape.\n"
+#~ "\n"
+#~ "  Drakbackup allows you to restore your system to\n"
+#~ "  a user selected directory.\n"
+#~ "\n"
+#~ "  Per default all backups will be stored on your\n"
+#~ "  /var/lib/drakbackup directory\n"
+#~ "\n"
+#~ "  Configuration file:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+#~ "\n"
+#~ "Restore Step:\n"
+#~ "  \n"
+#~ "  During the restore step, DrakBackup will remove \n"
+#~ "  your original directory and verify that all \n"
+#~ "  backup files are not corrupted. It is recommended \n"
+#~ "  you do a last backup before restoring.\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Описание:\n"
+#~ "\n"
+#~ "  Drakbackup используется для резервирования вашей системы.\n"
+#~ "  Во время настройки вы можете выбрать: \n"
+#~ "\t- Системные файлы, \n"
+#~ "\t- Файлы пользователей, \n"
+#~ "\t- Другие файлы.\n"
+#~ "\tили Всю свою систему ... и Другие (напр., разделы Windows)\n"
+#~ "\n"
+#~ "  Drakbackup позволяет вам резервировать свою систему на:\n"
+#~ "\t- Жесткий диск.\n"
+#~ "\t- NFS.\n"
+#~ "\t- CDROM (CDRW), DVDROM (с автозагрузкой, аварийным\n"
+#~ "\t  запуском и автоматической установкой.)\n"
+#~ "\t- FTP.\n"
+#~ "\t- Rsync.\n"
+#~ "\t- Webdav.\n"
+#~ "\t- Магнитную ленту.\n"
+#~ "\n"
+#~ "  Drakbackup позволяет вам восстановить свою систему\n"
+#~ "  в каталог, указанный пользователем.\n"
+#~ "\n"
+#~ " По умолчанию все резервные копии будут сохранены\n"
+#~ " в вашем каталоге /var/lib/drakbackup\n"
+#~ "\n"
+#~ "  Файл настройки:\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+#~ "\n"
+#~ "\n"
+#~ "Этап восстановления:\n"
+#~ "  \n"
+#~ "  На этапе восстановления DrakBackup удалит ваш \n"
+#~ "  исходный каталог и проверит, чтобы все \n"
+#~ "  резервные файлы не были повреждены.\n"
+#~ "  Рекомендуется, чтобы вы перед восстановлением\n"
+#~ "  выполнили последнее резервирование.\n"
+#~ "\n"
+#~ "\n"
+
+#~ msgid "Please check if you want to use the non-rewinding device."
+#~ msgstr ""
+#~ "Пожалуйста, отметьте, если вы хотите использовать устройство без "
+#~ "перемотки."
+
+#~ msgid "Please enter your password"
+#~ msgstr "Пожалуйста, введите свой пароль"
+
+#~ msgid ""
+#~ "\n"
+#~ " Some errors during sendmail are caused by \n"
+#~ " a bad configuration of postfix. To solve it you have to\n"
+#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Некоторые ошибки при отправке почты вызваны\n"
+#~ " плохой настройкой postfix'a. Для их решения вы должны\n"
+#~ " определить myhostname или mydomain в /etc/postfix/main.cf\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "Please choose your CD/DVD device\n"
+#~ "(Press Enter to propogate settings to other fields.\n"
+#~ "This field isn't necessary, only a tool to fill in the form.)"
+#~ msgstr ""
+#~ "Пожалуйста, выберите свой привод CD/DVD\n"
+#~ "(нажмите Enter, чтобы скопировать настройки в другие поля.\n"
+#~ "Это поле необязательно, это просто инструмент для заполнения формы)."
+
+#~ msgid "Please check if you want to eject your tape after the backup."
+#~ msgstr ""
+#~ "Пожалуйста, отметьте, если вы хотите извлечь свою ленту после "
+#~ "резервирования."
+
+#~ msgid "Please check if you want to erase your tape before the backup."
+#~ msgstr ""
+#~ "Пожалуйста, отметьте, если вы хотите стереть свою ленту перед "
+#~ "резервированием."
+
+#~ msgid "Please enter the host name or IP."
+#~ msgstr "Пожалуйста, введите имя хоста или IP"
+
+#~ msgid "Please enter your login"
+#~ msgstr "Пожалуйста, введите свой логин"
+
+#~ msgid ""
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+#~ msgstr ""
+#~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
+#~ "\\@epita.fr>"
+
+#~ msgid ""
+#~ "\n"
+#~ "Restore Backup Problems:\n"
+#~ "\n"
+#~ "During the restore step, Drakbackup will verify all your\n"
+#~ "backup files before restoring them.\n"
+#~ "Before the restore, Drakbackup will remove \n"
+#~ "your original directory, and you will loose all your \n"
+#~ "data. It is important to be careful and not modify the \n"
+#~ "backup data files by hand.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Проблемы при восстановлении резервных копий:\n"
+#~ "\n"
+#~ "На этапе восстановления Drakbackup проверит все ваши\n"
+#~ "резервные файлы перед тем, как их восстанавливать.\n"
+#~ "Перед восстановлением Drakbackup удалит ваш оригинальный\n"
+#~ "каталог и вы потеряете все свои данные. Будьте осторожны\n"
+#~ "и не изменяйте резервные файлы вручную.\n"
+
+#~ msgid ""
+#~ " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+#~ msgstr ""
+#~ " обновления 2002 MandrakeSoft, Stew Benedict <sbenedict\\@mandrakesoft."
+#~ "com>"
+
+#~ msgid ""
+#~ "Arguments: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
+#~ "expression describing what to log (see syslog.conf(5) for more details) "
+#~ "and\n"
+#~ "dev the device to report the log."
+#~ msgstr ""
+#~ "Аргументы: (arg, expr='*.*', dev='tty12')\n"
+#~ "\n"
+#~ "Включает/отключает уведомления syslog в консоли 12. \\fIexpr\\fP "
+#~ "является\n"
+#~ "расширением, описывающим, что регистрировать (подробнее смотрите в syslog."
+#~ "conf(5)), а dev -- устройство, регистрирующее логи."
+
+#~ msgid "edit"
+#~ msgstr "редактировать"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ " Accept/Refuse broadcasted icmp echo."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Принимать/Отклонять широковещательные icmp echo."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable libsafe if libsafe is found on the system."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Включает/отключает libsafe, если libsafe найдена в системе."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Allow/Forbid remote root login."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Разрешает/запрещает удаленный вход для root в систему."
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "выбрать файл perm для просмотра/редактирования"
+
+#~ msgid "path"
+#~ msgstr "путь"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable the logging of IPv4 strange packets."
+#~ msgstr ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Включает/отключает регистрацию необычных пакетов IPv4."
+
+#~ msgid ""
+#~ "Arguments: (arg, alert=1)\n"
+#~ "\n"
+#~ "Enable/Disable IP spoofing protection."
+#~ msgstr ""
+#~ "Аргументы: (arg, alert=1)\n"
+#~ "\n"
+#~ "Включает/отключает защиту от спуфинга IP."
+
+#~ msgid "permissions"
+#~ msgstr "права"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Enable/Disable msec hourly security check."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Включает/отключает проверку безопасности msec каждый час."
+
+#~ msgid "delete"
+#~ msgstr "Удалить"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Accept/Refuse bogus IPv4 error messages."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Принимать/Отклонять фиктивные IPv4 ошибочные сообщения."
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Use password to authenticate users."
+#~ msgstr ""
+#~ "Аргументы: (arg)\n"
+#~ "\n"
+#~ "Использовать пароли для аутентификации пользователей."
+
+#~ msgid "user"
+#~ msgstr "пользователь"
+
+#~ msgid ""
+#~ "Standard: This is the standard security recommended for a computer that "
+#~ "will be used to connect\n"
+#~ "               to the Internet as a client.\n"
+#~ "\n"
+#~ "High:       There are already some restrictions, and more automatic "
+#~ "checks are run every night.\n"
+#~ "\n"
+#~ "Higher:    The security is now high enough to use the system as a server "
+#~ "which can accept\n"
+#~ "              connections from many clients. If your machine is only a "
+#~ "client on the Internet, you\n"
+#~ "           should choose a lower level.\n"
+#~ "\n"
+#~ "Paranoid:  This is similar to the previous level, but the system is "
+#~ "entirely closed and security\n"
+#~ "                features are at their maximum\n"
+#~ "\n"
+#~ "Security Administrator:\n"
+#~ "               If the 'Security Alerts' option is set, security alerts "
+#~ "will be sent to this user (username or\n"
+#~ "            email)"
+#~ msgstr ""
+#~ "Стандартный: это стандартный уровень безопасности, рекомендуемый для "
+#~ "компьютера, который будет использоваться для подключения\n"
+#~ "             к Интернет в качестве клиента.\n"
+#~ "\n"
+#~ "Высокий:     Здесь уже присутствуют некоторые ограничения, а также "
+#~ "дополнительные автоматические проверки, выполняемые каждую ночь.\n"
+#~ "\n"
+#~ "Повышенный:  Безопасность теперь достаточно высока для использования "
+#~ "машины вкачестве сервера, который может принимать\n"
+#~ "             подключения от многочисленных клиентов. Если ваша машина "
+#~ "является только клиентом Интернета, вы \n"
+#~ "             должны использовать более низкий уровень.\n"
+#~ "\n"
+#~ "Параноидальный: похож на предыдущий уровень, но система полностью\n"
+#~ "закрыта и\n"
+#~ "             возможности защиты используются по максимуму.\n"
+#~ "\n"
+#~ "Администратор по безопасности:\n"
+#~ "             если установлена опция 'Предупреждения о безопасности',"
+#~ "предупреждения о безопасности будут отправляться этому\n"
+#~ "             пользователю (имя пользователя или email)"
+
+#~ msgid "Expert Area"
+#~ msgstr "Область эксперта"
+
+#~ msgid "Wizard..."
+#~ msgstr "Мастер..."
+
+#~ msgid " / Region"
+#~ msgstr " / Регион"
+
+#~ msgid "Country"
+#~ msgstr "Страна"
+
+#~ msgid "Previous"
+#~ msgstr "Назад"
+
+#~ msgid "Please check if you are using CDRW media"
+#~ msgstr "Пожалуйста, отметьте, если вы используете носитель CDRW"
+
+#~ msgid "Please check if you are using a DVDRAM device"
+#~ msgstr "Пожалуйста, отметьте, если вы используете устройство DVDRAM"
+
+#~ msgid "Please check if you are using a DVDR device"
+#~ msgstr "Пожалуйста, отметьте, если вы используете устройство DVDR"
+
+#~ msgid "Please check for multisession CD"
+#~ msgstr "Пожалуйста, отметьте для многосеансового компакт-диска"
+
+#~ msgid "We are now going to configure the %s connection."
+#~ msgstr "Сейчас мы собираемся настроить соединение %s."
+
+#~ msgid "Name: %s\n"
+#~ msgstr "Название: %s\n"
+
 #~ msgid ""
 #~ "Which ISDN configuration do you prefer?\n"
 #~ "\n"
@@ -19992,9 +20718,6 @@ msgstr ""
 
 #~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 #~ msgstr "Создать initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#~ msgid "Write %s"
-#~ msgstr "Записать %s"
 
 #~ msgid "Copy %s to %s"
 #~ msgstr "Копировать %s в %s"
