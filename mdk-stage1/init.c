@@ -270,6 +270,15 @@ struct filesystem
 	int mounted;
 };
 
+char* strcat(register char* s,register const char* t)
+{
+  char *dest=s;
+  s+=strlen(s);
+  for (;;)
+    if (!(*s = *t)) break; ++s; ++t;
+  return dest;
+}
+
 /* attempt to unmount all filesystems in /proc/mounts */
 void unmount_filesystems(void)
 {
@@ -341,16 +350,37 @@ void unmount_filesystems(void)
 
 #ifdef MANDRAKE_MOVE
         if (!disallow_eject) {
-                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+                fd = open("/proc/fs/supermount/subfs", O_RDONLY, 0);
                 if (fd > 0) {
-                        ioctl(fd, CDROM_LOCKDOOR, 0);
+                        char devices[100][100];
+                        int i = 0;
+                        char * ptr1, * ptr2;
+                        size = read(fd, buf, sizeof(buf) - 1);
+                        buf[size] = '\0';
                         close(fd);
-                }
-                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
-                if (fd > 0) {
-                        if (!ioctl(fd, CDROMEJECT, 0))
-                                goto ejected;
-                        close(fd);
+                        ptr1 = buf;
+                        ptr2 = buf;
+                        while (*ptr1 && *ptr2) {
+                                char * ptrf = ptr1;
+                                while (*ptr2 && *ptr2 != '\n')
+                                        ptr2++;
+                                while (*ptrf && *ptrf != ' ')
+                                        ptrf++;
+                                if (*ptrf)
+                                        *ptrf = '\0';
+                                strcpy(devices[i], ptr1);
+                                i++;
+                                if (*ptr2)
+                                        ptr2++;
+                                ptr1 = ptr2;
+                        }
+                        while (i >= 1) {
+                                i--;
+                                strcat(devices[i], " release force");
+                                fd = open("/proc/fs/supermount/subfs", O_WRONLY, 0);
+                                write(fd, devices[i], strlen(devices[i]));
+                                close(fd);
+                        }
                 }
                 fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
                 if (fd > 0) {
@@ -362,8 +392,6 @@ void unmount_filesystems(void)
                         ioctl(fd, CDROMEJECT, 0);
                         close(fd);
                 }
-        ejected:
-                close(fd);
         }
 #endif
 	
