@@ -101,7 +101,7 @@ sub new($$) {
 	    } else {
 		@servers = qw(Xsun24);
 	    }
-	} elsif (arch() =~ /ia64|x86_64/) {
+	} elsif (arch() =~ /ia64/) {
 	    require Xconfig::card;
 	    my ($card) = Xconfig::card::probe();
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
