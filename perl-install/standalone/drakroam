@@ -38,8 +38,6 @@ require_root_capability();
 
 # global settings
 my $route = '/sbin/route';
-my $AboutFile = 'ABOUT';
-my $HelpFile = 'README';
 my $IWList = '/sbin/iwlist';
 my $IWConfig = '/sbin/iwconfig';
 my $IFConfig = '/sbin/ifconfig';
@@ -164,18 +162,6 @@ my $SignalLabel = Gtk2::WrappedLabel->new;
 my $w = ugtk2->new('Drakroam');
 gtkadd(gtkset_border_width($w->{window}, 2),
        gtkpack_(Gtk2::VBox->new,
-                0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Status")), 2),
-                          gtkpack(Gtk2::VBox->new,
-                                  create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                                   [ $NetLabel, $IpLabel, $GwLabel ],
-                                                   [ $ModeLabel, $WepLabel, $SignalLabel ],
-                                                  ),
-                                  gtkpack(create_hbox(),
-                                          gtksignal_connect(Gtk2::Button->new(N("Disconnect")), clicked => sub { &Disconnect }),
-                                          gtksignal_connect(Gtk2::Button->new(N("Refresh")), clicked => sub { &UpdateStatus })
-                                         )
-                                 )
-                         ),
                 0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Roaming")), 2),
                           gtkpack(create_hbox(),
                                   gtkpack(Gtk2::VBox->new,
@@ -225,14 +211,19 @@ gtkadd(gtkset_border_width($w->{window}, 2),
                                              )
                                   )
                          ),
-                0, gtkpack(create_hbox(),
-                           gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { &Dialog($HelpFile) }),
-                           gtksignal_connect(Gtk2::Button->new(N("About")), clicked => sub { &Dialog($AboutFile) }),
-                           gtksignal_connect(Gtk2::Button->new(N("Save and close")), clicked => sub {
-                                                 &WriteConfig;
-                                                 Gtk2->main_quit;
-                                             })
-                          )
+                0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Status")), 2),
+                          gtkpack(Gtk2::VBox->new,
+                                  create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
+                                                   [ $NetLabel, $IpLabel, $GwLabel ],
+                                                   [ $ModeLabel, $WepLabel, $SignalLabel ],
+                                                  ),
+                                  gtkpack(create_hbox(),
+                                          gtksignal_connect(Gtk2::Button->new(N("Disconnect")), clicked => sub { &Disconnect }),
+                                          gtksignal_connect(Gtk2::Button->new(N("Refresh")), clicked => sub { &UpdateStatus }),
+                                          gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { Gtk2->main_quit })
+                                         )
+                                 )
+                         ),
                )
       );
 
