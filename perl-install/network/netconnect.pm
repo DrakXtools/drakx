@@ -717,8 +717,7 @@ or skip and do it later."),
                             $file = 'mgmt.o';
                             ($source, $adsl_failed) = network::tools::use_floppy($in, $file);
                         } elsif ($adsl_answer eq N("Use my Windows partition")) {
-                            $file = 'alcaudsl.sys';
-                            ($source, $adsl_failed) = network::tools::use_windows();
+                            ($source, $adsl_failed) = network::tools::use_windows($file = 'alcaudsl.sys');
                         }
                         return "adsl_no_firmawre" if $adsl_answer eq N("Do it later");
 
