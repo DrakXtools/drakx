@@ -1678,7 +1678,7 @@ sub set_text {
 	my $val_index = find_index { $_ eq $val } @{$w->{strings}};
 	$w->set_active($val_index);
     };
-    warn $@ if $@;
+    warn qq(impossible to lookup "$val":\n$@) if $@;
 }
 
 
