@@ -19,6 +19,7 @@ print '
 #include <linux/hdreg.h>
 #include <linux/vt.h>
 #include <linux/cdrom.h>
+#include <linux/loop.h>
 #include <net/if.h>
 #include <net/route.h>
 
@@ -242,6 +243,32 @@ kernel_version()
   RETVAL
 
 
+int
+set_loop(dev_fd, file)
+  int dev_fd
+  char *file
+  CODE:
+  RETVAL = 0;
+{
+  struct loop_info loopinfo;
+  int file_fd = open(file, O_RDWR);
+
+  if (file_fd < 0) return;
+
+  memset(&loopinfo, 0, sizeof (loopinfo));
+  strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
+  loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
+
+  if (ioctl(dev_fd, LOOP_SET_FD, file_fd) < 0) return;
+  if (ioctl(dev_fd, LOOP_SET_STATUS, &loopinfo) < 0) {
+    ioctl(dev_fd, LOOP_CLR_FD, 0);
+    return;
+  }
+  close(file_fd);
+  RETVAL = 1;
+}
+  OUTPUT:
+  RETVAL
 ';
 
 $ENV{C_RPM} and print '
@@ -747,7 +774,7 @@ headerGetEntry_filenames(h)
 
 @macros = (
   [ qw(int S_IFCHR S_IFBLK KDSKBENT KT_SPEC NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
-       HDIO_GETGEO BLKGETSIZE
+       HDIO_GETGEO BLKGETSIZE LOOP_GET_STATUS
        MS_MGC_VAL MS_RDONLY O_NONBLOCK SECTORSIZE WNOHANG
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT
        ) ],

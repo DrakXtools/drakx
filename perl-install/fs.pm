@@ -173,8 +173,9 @@ sub mount_part($;$$) {
     $part->{isMounted} and return;
 
     unless ($::testing) {
+	local $part->{device} = devices::set_loop(loopback::file($part)) || die if isLoopback($part);
 	if (isSwap($part)) {
-	  swap::swapon($part->{device});
+	    swap::swapon($part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point";
 	    mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);

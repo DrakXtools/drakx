@@ -344,6 +344,9 @@ sub add_alias($$) {
     $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
     log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
+    if ($alias eq "sound" && $name =~ /^snd-card-/) {
+	$conf{$name}{"post-install"} = "modprobe snd-pcm-oss";
+    }
     $alias;
 }
 
@@ -472,7 +475,7 @@ sub write_conf {
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
 
     my @l = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf;
-    add_alias('block-major-11', 'scsi_hostadapter');
+    add_alias('block-major-11', 'scsi_hostadapter') if @l;
     push @l, "ide-floppy" if detect_devices::zips();
     $conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @l if @l;
 

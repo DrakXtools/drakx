@@ -35,6 +35,18 @@ sub size($) {
     $low + 1;
 }
 
+sub set_loop {
+    my ($file) = @_;
+
+    foreach (0..9) {
+	local *F;
+	my $dev = devices::make("loop$_");
+	sysopen F, $dev, 0 or next;
+	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
+	return c::set_loop(fileno F, $file) && $dev;
+    }
+}
+
 sub make($) {
     local $_ = my $file = $_[0];
     my ($type, $major, $minor);
@@ -79,6 +91,7 @@ sub make($) {
 	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
 		   "hidbp-mse-" => [ c::S_IFCHR(), 10, 32 ],
 		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
+		   "loop"   => [ c::S_IFBLK(), 7,  0 ],
 		   "md"     => [ c::S_IFBLK(), 9,  0 ],
 		   "nst"    => [ c::S_IFCHR(), 9, 128],
 		   "scd"    => [ c::S_IFBLK(), 11, 0 ],

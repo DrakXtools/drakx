@@ -1,5 +1,8 @@
 2000-03-09  Pixel  <pixel@mandrakesoft.com>
 
+	* modules.pm (write_conf): don't add alias block-major-11 in every case
+	* modules.pm (add_alias): special case oss (post-installs modprobe snd-pcm-oss)
+
 	* fs.pm (format_*): move the @options before the device
 
 	* loopback.pm: created, added a lot of stuff for loopback in

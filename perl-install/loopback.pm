@@ -19,8 +19,6 @@ sub file {
       $part->{loopback_file};
 }
 
-sub ffile { "$_[0]{device}{mntpoint}$_[0]{loopback_file}" }
-
 sub loopbacks {
     map { map { @{$_->{loopback} || []} } partition_table::get_normal_parts($_) } @_;
 }
