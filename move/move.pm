@@ -519,6 +519,9 @@ sub automatic_xconf {
     
 	log::l('automatic XFree configuration');
         
+	any::devfssymlinkf($o->{mouse}, 'mouse');
+	local $o->{mouse}{device} = 'mouse';
+
 	require Xconfig::default;
 	$o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
     
