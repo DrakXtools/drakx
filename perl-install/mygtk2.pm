@@ -646,6 +646,16 @@ sub _icon_paths() {
     "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
 
+sub main {
+    my ($window, $o_verif) = @_;
+    my $destroyed;
+    $window->signal_connect(destroy => sub { $destroyed = 1 });
+    $window->show;
+    do { Gtk2->main } while (!$destroyed && $o_verif && !$o_verif->());
+    may_destroy($window);
+    flush();
+}
+
 sub sync {
     my ($window) = @_;
     $window->show;

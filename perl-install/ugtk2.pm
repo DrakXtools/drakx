@@ -880,8 +880,6 @@ sub new {
 	set_main_window_size($o);
 	gtkpack($::WizardTable, $o->{window});
     }
-    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
-
     $o;
 }
 sub set_main_window_size {
@@ -893,12 +891,10 @@ sub set_main_window_size {
 sub main {
     my ($o, $o_completed, $o_canceled) = @_;
     gtkset_mousecursor_normal();
-    $o->show;
 
-    do {
-	Gtk2->main;
-    } while (!$o->{destroyed} && ($o->{retval} ? $o_completed && !$o_completed->() : $o_canceled && !$o_canceled->()));
-    $o->destroy;
+    $o->show;
+    mygtk2::main($o->{rwindow},
+		 sub { $o->{retval} ? !$o_completed || $o_completed->() : !$o_canceled || $o_canceled->() });
     $o->{retval};
 }
 sub show($) {
