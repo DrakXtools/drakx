@@ -264,7 +264,7 @@ sub installPackages {
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Post install stuff"));
+    my $w = $o->wait_message('', _("Post install configuration"));
     $o->SUPER::afterInstallPackages($o);
 }
 

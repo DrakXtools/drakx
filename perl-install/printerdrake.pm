@@ -233,7 +233,7 @@ _("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', 
 	  if $action eq "ps" || $action eq "both";
 
 	if (@testpages) {
-	    my $w = $in->wait_message('', _(@testpages > 1 ? "Printing tests pages..." : "Printing test page..."));
+	    my $w = $in->wait_message('', _("Printing test page(s)..."));
 
 	    #- restart lpd with blank spool queue.
 	    foreach (("/var/spool/lpd/$printer->{QUEUE}/lock", "/var/spool/lpd/lpd.lock")) {
@@ -245,15 +245,19 @@ _("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', 
 
 	    run_program::rooted($prefix, "lpr", "-P$printer->{QUEUE}", $_) foreach @testpages;
 
-	    sleep 3; #- allow lpr to send pages.
+	    sleep 5; #- allow lpr to send pages.
 	    local *F; open F, "chroot $prefix/ /usr/bin/lpq -P$printer->{QUEUE} |";
 	    my @lpq_output = grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
 
 	    undef $w; #- erase wait message window.
 	    if (@lpq_output) {
-		$action = $in->ask_yesorno('', _("Is this correct? Printing status:\n%s", "@lpq_output"), 1) ? 'done' : 'change';
+		$action = $in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
+This may take a little time before printer start.
+Does it work properly? Printing status:\n%s", "@lpq_output"), 1) ? 'done' : 'change';
 	    } else {
-		$action = $in->ask_yesorno('', _("Is this correct?"), 1) ? 'done' : 'change';
+		$action = $in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
+This may take a little time before printer start.
+Does it work properly?"), 1) ? 'done' : 'change';
 	    }
 	}
     } while ($action ne 'done');
