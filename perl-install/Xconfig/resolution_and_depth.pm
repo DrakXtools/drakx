@@ -262,6 +262,7 @@ sub choose_gtk {
 	$pixmap_mo->set_from_file($image);
 	$x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     };
+    $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $set_chosen_resolution->($chosen_x_res, $chosen_y_res);
 
     my $help_sub = $in->interactive_help_sub_display_id('configureX_resolution');
@@ -294,7 +295,6 @@ sub choose_gtk {
 	    $set_chosen_resolution->(max(@{$depth2x_res{$chosen_Depth}}));
 	}
     });
-    $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
 	$set_chosen_resolution->($1, $2) if $x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
 	
