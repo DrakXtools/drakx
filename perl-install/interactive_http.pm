@@ -45,7 +45,7 @@ sub end() {
     -e $pipe_r or return; # don't run this twice
     my $q = CGI->new;
     cont_stdout("Exit");
-    print "It's done, thanks for playing ($@) ($?)", $q->end_html;
+    print "It's done, thanks for playing", $q->end_html;
     close STDOUT;
     unlink $pipe_r, $pipe_w;
 }
