@@ -1031,7 +1031,7 @@ sub generateAutoInstFloppy($) {
     my ($floppy) = detect_devices::floppies();
 
     $o->ask_yesorno('', 
-"Do you want to generate an auto install floppy for linux replication?", $floppy) or return;
+_("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
 
     $o->ask_warn('', _("Insert a blank floppy in drive %s", $floppy));
 
