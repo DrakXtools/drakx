@@ -639,9 +639,9 @@ sub g_auto_install {
     join('', 
 "#!/usr/bin/perl -cw
 #
-# You should check the syntax of this file before using it in an auto-install.  You
-# can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file (note the
-# '#!/usr/bin/perl -cw' on the first line).
+# You should check the syntax of this file before using it in an auto-install.
+# You can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file
+# (note the '#!/usr/bin/perl -cw' on the first line).
 ", 
 	 Data::Dumper->Dump([$o], ['$o']), if_($replay, 
 qq(\npackage install_steps_auto_install;), q(
