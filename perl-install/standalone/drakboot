@@ -304,8 +304,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
                 )
       );
 
-$auto_buttons[0]->signal_connect('toggled' => sub { print "TOG\n"; $auto_box->set_sensitive($auto_buttons[0]->get_active()) });
-$auto_buttons[1]->signal_connect('toggled' => sub { print "TOG\n"; $auto_box->set_sensitive(!$auto_buttons[1]->get_active()) });
+$auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active()) });
+$auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active()) });
 $auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
 $auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
 
