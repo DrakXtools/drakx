@@ -510,22 +510,6 @@ sub normalize_append {
     pack_append($simple, $dict);
 }
 
-sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
-
-sub get_append {
-    my ($b, $key) = @_;
-    my ($simple, $dict) = unpack_append($b->{perImageAppend});
-    if (member($key, @$simple)) {
-	return 1;
-    }
-    my @l = map { $_->[1] } grep { $_->[0] eq $key } @$dict;
-
-    #- suppose we want the memsize
-    @l = grep { append__mem_is_memsize($_) } @l if $key eq 'mem';
-
-    log::l("more than one $key in $b->{perImageAppend}") if @l > 1;
-    $l[0];
-}
 sub modify_append {
     my ($b, $f) = @_;
 
@@ -538,6 +522,25 @@ sub modify_append {
 	log::l("modify_append: $$_");
     }
 }
+
+sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
+
+sub get_append_simple {
+    my ($b, $key) = @_;
+    my ($simple, $_dict) = unpack_append($b->{perImageAppend});
+    member($key, @$simple);
+}
+sub get_append_with_key {
+    my ($b, $key) = @_;
+    my ($_simple, $dict) = unpack_append($b->{perImageAppend});
+    my @l = map { $_->[1] } grep { $_->[0] eq $key } @$dict;
+
+    #- suppose we want the memsize
+    @l = grep { append__mem_is_memsize($_) } @l if $key eq 'mem';
+
+    log::l("more than one $key in $b->{perImageAppend}") if @l > 1;
+    $l[0];
+}
 sub remove_append_simple {
     my ($b, $key) = @_;
     modify_append($b, sub {
@@ -545,34 +548,38 @@ sub remove_append_simple {
 	@$simple = grep { $_ ne $key } @$simple;
     });
 }
-sub set_append {
-    my $has_val = @_ > 2;
+sub set_append_with_key {
     my ($b, $key, $val) = @_;
 
     modify_append($b, sub {
-	my ($simple, $dict) = @_;
-	if ($has_val) {
-	    my $to_add = $key eq 'mem' ? $val : $val ne '';
-	    @$dict = map {
-		if ($_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val)) {
-		    $_;
-		} elsif ($to_add) {
-		    $to_add = 0;
-		    [ $key, $val ];
-		} else {
-		    ();
-		}
-	    } @$dict;
+	my ($_simple, $dict) = @_;
 
-	    push @$dict, [ $key, $val ] if $to_add;
-	} else {
-	    @$simple = uniq(@$simple, $key);
-	}
+	my $to_add = $key eq 'mem' ? $val : $val ne '';
+	@$dict = map {
+	    if ($_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val)) {
+		$_;
+	    } elsif ($to_add) {
+		$to_add = 0;
+		[ $key, $val ];
+	    } else {
+		();
+	    }
+	} @$dict;
+
+	push @$dict, [ $key, $val ] if $to_add;
     });
 }
-sub may_append {
+sub set_append_simple {
+    my ($b, $key) = @_;
+
+    modify_append($b, sub {
+	my ($simple, $_dict) = @_;
+	@$simple = uniq(@$simple, $key);
+    });
+}
+sub may_append_with_key {
     my ($b, $key, $val) = @_;
-    set_append($b, $key, $val) if !get_append($b, $key);
+    set_append_with_key($b, $key, $val) if !get_append_with_key($b, $key);
 }
 
 sub get_append_netprofile {
@@ -714,7 +721,7 @@ wait for default boot.
     add2hash_($bootloader, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
     if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
 	log::l("serial console $s $port $speed");
-	set_append($bootloader, 'console' => $s);
+	set_append_with_key($bootloader, console => $s);
 	any::set_login_serial_console($port, $speed);
     }
 
@@ -1025,7 +1032,7 @@ sub write_lilo {
     push @conf, qq(append="$bootloader->{append}") if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
-    push @conf, "serial=" . $1 if get_append($bootloader, 'console') =~ /ttyS(.*)/;
+    push @conf, "serial=" . $1 if get_append_with_key($bootloader, 'console') =~ /ttyS(.*)/;
     
     push @conf, "message=/boot/message" if arch() !~ /ia64/;
     push @conf, "menu-scheme=wb:bw:wb:bw" if arch() !~ /ia64/;
@@ -1190,7 +1197,7 @@ sub write_grub {
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
-    if (get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
+    if (get_append_with_key($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
 	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
 	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
     }

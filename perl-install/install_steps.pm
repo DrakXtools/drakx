@@ -497,7 +497,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	$p && $p->flag_installed
     };
     require bootloader;
-    bootloader::may_append($o->{bootloader}, devfs => $have_devfsd ? 'mount' : 'nomount');
+    bootloader::may_append_with_key($o->{bootloader}, devfs => $have_devfsd ? 'mount' : 'nomount');
 
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($o->{prefix}, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
@@ -848,13 +848,13 @@ sub setupBootloaderBefore {
     });
 
     if ($o->{miscellaneous}{HDPARM}) {
-	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
+	bootloader::set_append_with_key($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
     }
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
-	bootloader::set_append($o->{bootloader}, mem => 'nopentium');
+	bootloader::set_append_with_key($o->{bootloader}, mem => 'nopentium');
     }
     if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
-	bootloader::set_append($o->{bootloader}, $1, $2);
+	bootloader::set_append_with_key($o->{bootloader}, $1, $2);
     }
     if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\w+)/) {
 	if ($acpi eq 'ht') {
@@ -865,15 +865,17 @@ sub setupBootloaderBefore {
 		$acpi = 'on';
 	    }
 	}
-	bootloader::set_append($o->{bootloader}, acpi => $acpi);
+	bootloader::set_append_with_key($o->{bootloader}, acpi => $acpi);
     }
     if (cat_("/proc/cmdline") =~ /\bnoapic/) {
-	bootloader::set_append($o->{bootloader}, 'noapic');
+	bootloader::set_append_simple($o->{bootloader}, 'noapic');
     }
     my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
     if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @{$o->{fstab}}) {
 	log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
-	bootloader::set_append($o->{bootloader}, resume => devices::make($biggest_swap->{device})) if $MemTotal < $biggest_swap->{size} / 2;
+	if ($MemTotal < $biggest_swap->{size} / 2) {
+	    bootloader::set_append_with_key($o->{bootloader}, resume => devices::make($biggest_swap->{device}));
+	}
     }
 
     #- check for valid fb mode to enable a default boot with frame buffer.

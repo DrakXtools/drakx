@@ -82,7 +82,7 @@ sub hdInstallPath() {
 sub install_acpi_pkgs {
     my ($do_pkgs, $b) = @_;
 
-    my $acpi = bootloader::get_append($b, 'acpi') or return;
+    my $acpi = bootloader::get_append_with_key($b, 'acpi') or return;
     if (!member($acpi, 'off', 'ht')) {
 	$do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
     }
@@ -228,10 +228,10 @@ sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
     my @method_choices = bootloader::method_choices($fstab);
-    my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') !~ /off|ht/;
-    my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');
-    my $prev_force_nolapic = my $force_nolapic = bootloader::get_append($b, 'nolapic');
-    my $memsize = bootloader::get_append($b, 'mem');
+    my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
+    my $prev_force_noapic = my $force_noapic = bootloader::get_append_simple($b, 'noapic');
+    my $prev_force_nolapic = my $force_nolapic = bootloader::get_append_simple($b, 'nolapic');
+    my $memsize = bootloader::get_append_with_key($b, 'mem');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
 
@@ -297,15 +297,15 @@ sub setupBootloader__general {
 	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
 
-    bootloader::set_append($b, "mem", $memsize || 0);
+    bootloader::set_append_with_key($b, mem => $memsize || 0);
     if ($prev_force_acpi != $force_acpi) {
-	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'ht'));
+	bootloader::set_append_with_key($b, acpi => ($force_acpi ? '' : 'ht'));
     }
     if ($prev_force_noapic != $force_noapic) {
-	($force_noapic ? \&bootloader::set_append : \&bootloader::remove_append_simple)->($b, 'noapic');
+	($force_noapic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'noapic');
     }
     if ($prev_force_nolapic != $force_nolapic) {
-	($force_nolapic ? \&bootloader::set_append : \&bootloader::remove_append_simple)->($b, 'nolapic');
+	($force_nolapic ? \&bootloader::set_append_simple : \&bootloader::remove_append_simple)->($b, 'nolapic');
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
