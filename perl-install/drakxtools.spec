@@ -326,7 +326,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Sat Aug 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.34mdk
 - disdrake: explain why ntfs resizing had failled (pixel)
-- drakbacup: (stew)
+- drakbackup: (stew)
   o fix crash on file select of "Other" finish custom cron
     configuration
   o normal users can now do cron backups
