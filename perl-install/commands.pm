@@ -325,7 +325,7 @@ sub dd {
 
 sub head_tail {
     my ($h, $n) = getopts(\@_, qw(hn));
-    $h || @_ > 1 + bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
+    $h || @_ < bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
     $n = $n ? shift : 10;
     local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
 
