@@ -422,7 +422,7 @@ sub list_countries {
 }
 
 #- this list is built with the following command on the compile cluster:
-#- rpm -qpl /cooker/RPMS/locales-* | grep LC_CTYPE | cut -d'/' -f5 | grep '_' | grep -v '\.' | sort | tr '\n' ' ' ; echo
+#- rpm -qpl /RPMS/locales-* | grep LC_CTYPE | cut -d'/' -f5 | grep '_' | grep -v '\.' | sort | tr '\n' ' ' ; echo
 our @locales = qw(af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE as_IN az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BE en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW eo_XX es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU fur_IT fy_DE fy_NL ga_IE gd_GB gez_ER gez_ER@abegede gez_ET gez_ET@abegede gl_ES gu_IN gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID ik_CA is_IS it_CH it_IT iu_CA ja_JP ka_GE kl_GL km_KH kn_IN ko_KR ku_TR kw_GB ky_KG li_BE li_NL lo_LA lt_LT lv_LV mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nb_NO nds_DE nds_DE@traditional nds_NL ne_NP nl_BE nl_NL nn_NO no_NO oc_FR om_ET om_KE pa_IN ph_PH pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA sc_IT se_NO sid_ET sk_SK sl_SI sq_AL sr_CS sr_CS@Latn sr_YU sr_YU@Latn st_ZA sv_FI sv_SE sw_XX ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tig_ER tk_TM tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ uz_UZ@Cyrl uz_UZ@Latn vi_VN wa_BE xh_ZA yi_US zh_CN zh_HK zh_SG zh_TW zu_ZA);
 	
 sub standard_locale {
@@ -471,8 +471,18 @@ sub getLANGUAGE {
 					locale_to_main_locale($lang)));
 }
 
+#-------------------------------------------------------------
+#
+# IM configuration hash tables
+#
+# in order to configure an IM, one has to:
+# - put generic configuration in %IM_config
+# - put locale specific configuration in %IM_XIM_program
 
-my %im_xim_program =
+
+# This set XIM_PROGRAM field for IM that needs a different value
+# depending on locale:
+my %IM_XIM_program =
   (
    chinput => {
                'zh_CN' => 'chinput -gb',
@@ -489,6 +499,8 @@ my %im_xim_program =
            },
   );
 
+# This set generic IM fields.
+#
 #- XMODIFIERS is the environnement variable used by the X11 XIM protocol
 #-	it is of the form XIMODIFIERS="@im=foo"
 #- XIM is used by some programs, it usually is the like XIMODIFIERS
@@ -497,8 +509,8 @@ my %im_xim_program =
 #-	XIM server; or a a native gtk module if exists)
 #- XIM_PROGRAM the program to run (usually the same as XIM value, but
 #-	in some cases different, particularly if parameters are needed;
-#-	if it is locale dependent it should be defined in %im_xim_program)
-my %gtkqt_im =
+#-	If it is locale dependent it should be defined in %IM_XIM_program)
+my %IM_config =
   (
    ami => {
            XIM => 'Ami',
@@ -512,7 +524,7 @@ my %gtkqt_im =
    chinput => {
                GTK_IM_MODULE => 'xim',
                XIM => 'chinput',
-               # bogus entry overwriten by %im_xim_program, just for read()
+               # bogus entry overwriten by %IM_XIM_program, just for read()
                XIM_PROGRAM => 'chinput',
                XMODIFIERS => '@im=Chinput',
                },
@@ -563,10 +575,16 @@ my %gtkqt_im =
                  },
 );
 
-sub get_ims() { keys %gtkqt_im }
+sub get_ims() { keys %IM_config }
            
+
+
+#-------------------------------------------------------------
+#
+# Locale configuration regarding encoding/IM
+
 #- ENC is used by some versions or rxvt
-my %xim = (
+my %IM_locale_specific_config = (
            'ja_JP' => {
                        ENC => 'eucj',
                       },
@@ -955,8 +973,8 @@ sub read {
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
     if ($h{XIM_PROGRAM}) {
-	$locale->{IM} = find { $gtkqt_im{$_}{XIM_PROGRAM} eq $h{XIM_PROGRAM} } keys %gtkqt_im;
-	$locale->{IM} ||= find { member($h{XIM_PROGRAM}, values %{$im_xim_program{$_}}) } keys %im_xim_program;
+	$locale->{IM} = find { $IM_config{$_}{XIM_PROGRAM} eq $h{XIM_PROGRAM} } keys %IM_config;
+	$locale->{IM} ||= find { member($h{XIM_PROGRAM}, values %{$IM_XIM_program{$_}}) } keys %IM_XIM_program;
     }
     $locale;
 }
@@ -1029,9 +1047,9 @@ sub write {
     if ($im && $im ne 'None') {
         log::explanations(qq(Configuring "$im" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
-        add2hash($h, { XIM_PROGRAM => $im_xim_program{$im}{$h->{LC_NAME}} });
-        add2hash($h, $xim{$locale->{lang}});
-        add2hash($h, $gtkqt_im{$locale->{IM}});
+        add2hash($h, { XIM_PROGRAM => $IM_XIM_program{$im}{$h->{LC_NAME}} });
+        add2hash($h, $IM_locale_specific_config{$locale->{lang}});
+        add2hash($h, $IM_config{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
         my @packages = IM2packages($locale);
         if (@packages && $b_user_only) {
@@ -1246,7 +1264,7 @@ sub check() {
     print "\tWarnings:\n";
     $warn->("unused charset $_ (given in \%charsets, but not used in \%langs)") foreach difference2([ keys %charsets ], \@wanted_charsets);
 
-    $warn->("unused entry $_ in \%xim") foreach grep { !/UTF-8/ } difference2([ keys %xim ], [ map { l2locale($_) } list_langs() ]);
+    $warn->("unused entry $_ in \%xim") foreach grep { !/UTF-8/ } difference2([ keys %IM_locale_specific_config ], [ map { l2locale($_) } list_langs() ]);
 
     #- consolefonts are checked during build via console_font_files()
 
