@@ -294,6 +294,7 @@ sub setupBootloader {
     local $ENV{DURING_INSTALL} = 1;
     run_program::rooted($o->{prefix}, "/usr/sbin/msec", "-o", "run_commands=0", "-o", "log=stderr", $o->{security});
     any::config_libsafe($o->{prefix}, $o->{libsafe});
+    any::config_security_user($o->{prefix}, $o->{security_user});
 }
 #------------------------------------------------------------------------------
 sub configureX {

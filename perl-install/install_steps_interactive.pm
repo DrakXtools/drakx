@@ -1263,7 +1263,7 @@ sub miscellaneous {
     my ($o, $clicked) = @_;
 
     if ($::expert) {
-	any::choose_security_level($o, \$o->{security}, \$o->{libsafe}) or return;
+	any::choose_security_level($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user}) or return;
     }
     install_steps::miscellaneous($o);
 }
