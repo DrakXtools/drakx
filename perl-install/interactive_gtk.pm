@@ -65,7 +65,7 @@ sub ask_from_treelist {
 	my $s;
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$separator"} ||= 
-	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 2, (undef) x 4, 0, 0);
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
 	    $s .= "$_$separator";
 	}
 	$wtree{$s};
@@ -73,7 +73,7 @@ sub ask_from_treelist {
     my ($root, $leaf, $wdef, $ndef);
     foreach (@$l) {
 	($root, $leaf) = /(.*)$sep(.+)/o or ($root, $leaf) = ('', $_);
-	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 2, (undef) x 4, 1, 0);
+	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
 
 	if ($def eq $_) {
 	    $wdef = $node;
@@ -94,20 +94,30 @@ sub ask_from_treelist {
 	$w->{retval} = join $separator, @l;
 	Gtk->main_quit;
     };
+
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    1, gtkset_usize(createScrolledWindow($tree), 200, 280),
 		    0, $w->create_okcancel));
     $tree->set_selection_mode('browse');
-    $tree->signal_connect(tree_select_row => sub { $curr = $_[1] });
+    $tree->signal_connect(tree_select_row => sub { $curr = $_[1]; });
     $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+    $tree->signal_connect(key_press_event => sub {
+        my ($w, $e) = @_;
+	my $c = chr $e->{keyval};
+
+	if ($e->{keyval} >= 0x100) {
+	    &$leave if $c eq "\r" || $c eq "\x8d";
+	}
+	1;
+    });
 
     $tree->focus_row($ndef) if $ndef;
     $tree->select($wdef) if $wdef;
     $tree->node_moveto($wdef, 0, 0.5, 0) if $wdef;
 
     $tree->grab_focus;
-    $w->{window}->show_all;
+
     $w->main or die "ask_from_list cancel";
 }
 
