@@ -61,6 +61,8 @@ $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
 my $in;
 my $splash = -f '/proc/splash';
+my $splash_was_silent = cat_('/proc/splash') =~ /, silent : on/;
+
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach my $hw_class (@harddrake::data::tree) {
     my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
@@ -179,6 +181,9 @@ foreach my $hw_class (@harddrake::data::tree) {
 # output new hw config
 log::explanations("created file $last_boot_config");
 Storable::store(\%config, $last_boot_config);
+
+# restore bootsplash mode
+$splash_was_silent and eval { output('/proc/splash', 'silent') };
 
 
 $in->exit(0) if $in;
