@@ -328,7 +328,7 @@ sub Dialog {
 my $FilePointer = pop @_;
 my $content = join('', cat_($FilePointer));
 # dump into a dialog
-my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $MainWindow,
+my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{window},
                                     'destroy-with-parent',
                                     'gtk-ok' => 'none');
 my $AboutLabel = Gtk2::Label->new($content);
