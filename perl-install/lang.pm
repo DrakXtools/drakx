@@ -1010,7 +1010,7 @@ sub write {
     setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
     substInFile {
         s!^function lang\b.*!function lang()="$h->{LANG}"!g;
-    } "/etc/menu-methods/lang.h";
+    } "$::prefix/etc/menu-methods/lang.h";
 
     eval {
 	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
