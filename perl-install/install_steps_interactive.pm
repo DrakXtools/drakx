@@ -336,12 +336,12 @@ Do you agree to loose all the partitions?
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!"));
 
-    if (arch() =~ /ppc/) {	#- need to make bootstrap part if recommended install - thx Pixel ;^)
+    if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
 	if (defined $partition_table_mac::bootstrap_part) {
 	    #- don't do anything if we've got the bootstrap setup
 	    #- otherwise, go ahead and create one somewhere in the drive free space
 	} else {
-	    if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {
+	    if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {	        
 		my ($hd) = $partition_table_mac::freepart_device;
 		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
 		$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
@@ -349,7 +349,7 @@ Continue at your own risk!"));
 		fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
-		die "no free space for 1MB bootstrap";
+		$o->ask_warn('',_("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
 	    }
 	}
     }
@@ -1065,6 +1065,14 @@ sub setupBootloaderBefore {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($o, $more) = @_;
+    if (arch() =~ /ppc/) {
+	my $machtype = detect_devices::get_mac_generation();
+	if ($machtype !~ /NewWorld/) {
+	    $o->ask_warn('', _("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX to boot your machine"));
+	    log::l("OldWorld or Unknown Machine - no yaboot setup");
+	    return;
+	}
+    }
     if (arch() =~ /^alpha/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
 	catch_cdie { $o->SUPER::setupBootloader } sub {
@@ -1083,11 +1091,11 @@ try to force installation even if that destroys the first partition?"));
 	    unlink "$o->{prefix}/tmp/.error";
 	    die "already displayed";
 	} elsif (arch() =~ /ppc/) {
-		my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
-		chop($of_boot);
-		unlink "$o->{prefix}/tmp/.error";
-		$o->ask_warn('', _("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device $of_boot,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
-	    }
+	    my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
+	    chop($of_boot);
+	    unlink "$o->{prefix}/tmp/.error";
+	    $o->ask_warn('', _("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device $of_boot,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
+	}
     }
 }
 

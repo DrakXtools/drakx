@@ -255,7 +255,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 }],
 [ 'sound', {
 if_(arch() =~ /ppc/,
-  "dmasound" => "Amiga or PowerMac DMA sound",
+  "dmasound_awacs" => "Amiga or PowerMac DMA sound",
 ),
 if_(arch() !~ /^sparc/,
   "cmpci" => "C-Media Electronics CMI8338A CMI8338B CMI8738",
@@ -717,7 +717,7 @@ sub load_thiskind {
       if_(arch() =~ /ppc/, 
 	  if_($type =~ /scsi/, 'mesh', 'mac53c94'),
 	  if_($type =~ /net/, 'bmac', 'gmac', 'mace'),
-	  if_($type =~ /sound/, 'dmasound'),
+	  if_($type =~ /sound/, 'dmasound_awacs'),
       ),
     );
     grep {

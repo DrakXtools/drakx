@@ -147,8 +147,8 @@ sub read($$) {
                 		$freepart_part = "/dev/" . $hd->{device} . ($i+1);
                 		log::l("free apple partition found on drive /dev/$freepart_device->{device}, block $freepart_start, size $freepart_size");
                 	}
-                    next;
-					#$h{type} = 0x0;
+			$h{type} = 0x0;
+			$h{pName} = 'Extra';                    
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
                  	$h{type} = 0x402;
                  	if (defined $macos_part) {		
@@ -293,7 +293,10 @@ sub write($$$;$) {
                 $_->{pType} = "Apple_Bootstrap";
                 $_->{pName} = "bootstrap";
                 $_->{pFlags} = 0x33;
-				$_->{isBoot} = 1;
+		$_->{isBoot} = 1;
+		log::l("writing a bootstrap at /dev/$_->{device}");
+		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table_mac::bootstrap_part);
+		$bootstrap_part = "/dev/" . $_->{device};
             } elsif ($_->{type} == 0x82) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "swap";

@@ -151,7 +151,11 @@ sub doPartitionDisksAfter {
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, @{$o->{lvms}}, $o->{raid}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
-
+    
+    if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
+	die "Need bootstrap partition to boot system!" if !(defined $partition_table_mac::bootstrap_part);
+    }
+    
     if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{hds})) {
 	die _("You must have a FAT partition mounted in /boot/efi");
     }

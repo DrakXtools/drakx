@@ -54,9 +54,23 @@ sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_) } getIDE() }
 sub dvdroms    { grep { $_->{type} eq 'cdrom' && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
-	my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
-	log::l("Mac model: $mac_model");
-	$mac_model;	
+    my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
+    log::l("Mac model: $mac_model");
+    $mac_model;	
+}
+
+sub get_mac_generation() {
+    my $generation = cat_("/proc/cpuinfo") || die "Can't open /proc/cpuinfo";
+    my @genarray = split(/\n/, $generation);
+    my $count = 0;
+    while ($count <= @genarray) {
+	if ($genarray[$count] =~ /pmac-generation/) {
+	    @genarray = split(/:/, $genarray[$count]);
+	    return $genarray[1];
+	}
+	$count++;
+    }
+    return "Unknown Generation";	
 }
 
 sub floppies() {
