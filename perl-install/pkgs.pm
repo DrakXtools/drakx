@@ -321,49 +321,28 @@ sub unselectAllPackagesIncludingUpgradable($) {
 
 sub psUpdateHdlistsDeps {
     my ($prefix, $method, $packages) = @_;
-    my ($good_hdlists_deps, $mediums) = (0, 0);
+    my $need_copy = 0;
 
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
+	$_->{selected} || $_->{ignored} or next;
 	my $hdlistf = "$prefix/var/lib/urpmi/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	my $synthesisf = "$prefix/var/lib/urpmi/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
-	-s $hdlistf == $_->{hdlist_size} && -s $synthesisf == $_->{synthesis_hdlist_size} and ++$good_hdlists_deps;
-	++$mediums;
-    }
-    $good_hdlists_deps > 0 && $good_hdlists_deps == $mediums and return; #- nothing to do.
-
-    #- at this point, this means partition has problably be reformatted and hdlists should be retrieved.
-    install_any::useMedium($install_any::boot_medium);
-
-    my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
-
-    #- WARNING: this function should be kept in sync with functions
-    #- psUsingHdlists and psUsingHdlist.
-    #- it purpose it to update hdlist files on system to install.
-
-    #- parse hdlist.list file.
-    my $medium = 1;
-    foreach (<$listf>) {
-	chomp;
-	s/\s*#.*$//;
-	/^\s*$/ and next;
-	m/^\s*(?:noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
-	my ($hdlist, $rpmsdir, $descr) = ($1, $2, $3);
-
-	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
-	#- for getting header of package during installation or after by urpmi.
-	my $fakemedium = "$descr ($method$medium)";
-	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-	-e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
-	install_any::getAndSaveFile("Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
-	symlinkf $newf, "/tmp/$hdlist";
-	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist",
-				    "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2"));
-	++$medium;
+	if (-s $hdlistf != $_->{hdlist_size}) {
+	    install_any::getAndSaveFile("Mandrake/base/$_->{hdlist}", $hdlistf) or die "no $_->{hdlist} found";
+	    symlinkf $hdlistf, "/tmp/$_->{hdlist}";
+	    ++$need_copy;
+	}
+	if (-s $synthesisf != $_->{synthesis_hdlist_size}) {
+	    install_any::getAndSaveFile("Mandrake/base/synthesis.$_->{hdlist}", $synthesisf);
+	    -s $synthesisf > 0 or unlink $synthesisf;
+	}
     }
 
-    #- this is necessary for urpmi.
-    install_any::getAndSaveFile("Mandrake/base/$_", "$prefix/var/lib/urpmi/$_") foreach qw(rpmsrate);
+    if ($need_copy) {
+	#- this is necessary for urpmi.
+	install_any::getAndSaveFile("Mandrake/base/$_", "$prefix/var/lib/urpmi/$_") foreach qw(rpmsrate);
+    }
 }
 
 sub psUsingHdlists {
@@ -605,7 +584,7 @@ sub setSelectedFromCompssList {
 	$state->{selected} = {};
 
 	$packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
-				     no_flag_update => 1, callback_choices => \&packageCallbackChoices);
+				     callback_choices => \&packageCallbackChoices);
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
@@ -616,14 +595,8 @@ sub setSelectedFromCompssList {
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
 	    $min_level = $p->rate;
-	    $packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1); #- FIXME INCOMPLETE TODO
+	    $packages->resolve_unrequested($packages->{rpmdb}, $state, $state->{selected});
 	    last;
-	}
-
-	#- do the effective selection (was not done due to no_flag_update option used.
-	foreach (keys %{$state->{selected}}) {
-	    my $pkg = $packages->{depslist}[$_];
-	    $state->{selected}{$_} ? $pkg->set_flag_requested : $pkg->set_flag_required;
 	}
     }
     log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
@@ -826,7 +799,7 @@ sub selectPackagesToUpgrade {
     my ($packages, $prefix, $medium) = @_;
 
     #- check before that if medium is given, it should be valid.
-    $medium && ! defined $medium->{start} || ! defined $medium->{end} and return;
+    $medium && (! defined $medium->{start} || ! defined $medium->{end}) and return;
 
     log::l("selecting packages to upgrade");
 
