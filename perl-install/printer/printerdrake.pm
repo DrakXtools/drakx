@@ -743,16 +743,19 @@ sub configure_new_printers {
 
     # When HPOJ is running, it blocks the printer ports on which it is
     # configured, so we stop it here. If it is not installed or not 
-    # configured, this command has no effect.
+    # configured, this command has no effect. We do not stop HPOJ if we are
+    # called by the hotplug script, as HPOJ reloads the parallel port
+    # kernel modules and causes a new hotplug signal which leads to
+    # recursive calls of the hotplug script.
     require services;
-    services::stop("hpoj");
+    services::stop("hpoj") if !$::noX;
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
 
     # We are ready with auto-detection, so we restart HPOJ here. If it 
     # is not installed or not configured, this command has no effect.
-    services::start("hpoj");
+    services::start("hpoj") if !$::noX;
 
     # No printer found? So no need of new queues.
     return 1 if !@autodetected;
