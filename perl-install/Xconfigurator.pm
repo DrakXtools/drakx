@@ -6,6 +6,7 @@ use vars qw($in $resolution_wanted @depths @resolutions @accelservers @allserver
 
 use pci_probing::main;
 use common qw(:common :file);
+use interactive_gtk;
 use log;
 
 use Xconfigurator_consts;
@@ -444,6 +445,16 @@ sub main {
     moreCardConfiguration($o);
 
     write_XF86Config($o, "/tmp/Xconfig");
+
+    unless (fork) {
+	exec "X", ":9" or exit 1;
+    }
+    
+    {
+	local $ENV{DISPLAY} = ":9";
+	my $w = interactive_gtk->new;
+	$w->ask_yesorno("Do you see this message");
+    }
 
     # Success 
     rewriteInittab(rc & STARTX ? 5 : 3);
