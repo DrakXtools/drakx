@@ -110,6 +110,7 @@ sub remove_light_tree {
 my @always_list = chomp_(cat_('data/always.list'));
 my @boot_list_orig = chomp_(cat_('data/boot.list'));
 my @totem_list_orig = chomp_(cat_('data/totem.list'));
+my @nvidia_list = chomp_(cat_('data/nvidia.list'));
 my @always_i18n_list = chomp_(cat_('data/always_i18n.list'));
 
 @always_list = uniq(@always_list, intersection(\@boot_list_orig, \@totem_list_orig));
@@ -120,6 +121,7 @@ my @totem_list = difference2(\@totem_list_orig, \@always_list);
 remove_light_tree('always', \@always_list);
 remove_light_tree('boot', \@boot_list);
 remove_light_tree('totem', \@totem_list);
+remove_light_tree('nvidia', \@nvidia_list);
 foreach my $lang (@ALLOWED_LANGS) {
     remove_light_tree("always_i18n_$lang", []);
 }
@@ -128,6 +130,7 @@ if (!@ARGV) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
+    create_light_tree('nvidia', \@nvidia_list);    
     foreach my $lang (@ALLOWED_LANGS) {
 	my $full_lang = lang::l2locale($lang);
 	my ($short_lang) = $full_lang =~ /(..)/;

@@ -530,9 +530,13 @@ sub automatic_xconf {
 	my $card = Xconfig::card::from_raw_X($o->{raw_X});
     }
 
-    if (cat_('/etc/X11/XF86Config-4') =~ /Driver\s*"nvidia"/) {
+    my ($Driver) = cat_('/etc/X11/XF86Config-4') =~ /Section "Device".*Driver\s*"(.*?)"/s;
+    if ($Driver eq 'nvidia') {
         modules::load('nvidia');
+	lomount_clp('nvidia', '/usr/lib/libGLcore.so.1');
     }
+    my $lib = 'libGL.so.1';
+    symlinkf("/usr/lib/$lib.$Driver", "/etc/X11/$lib") if -e "/usr/lib/$lib.$Driver";
 }
 
 
