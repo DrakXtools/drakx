@@ -13,7 +13,7 @@ use log;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute write_interface_conf read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname miscellaneousNetwork down_it read_conf write_resolv_conf up_it);
+@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname down_it read_conf write_resolv_conf up_it);
 
 #-######################################################################################
 #- Functions
@@ -121,17 +121,20 @@ sub write_resolv_conf {
 sub write_interface_conf {
     my ($file, $intf, $prefix) = @_;
 
+    if ($::o->{miscellaneous}{track_network_id} && -e "$prefix/sbin/ip") {
+	$intf->{HWADDR} = undef;
+	if (my $s = `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`) {
+	    if ($s =~ m|.*link/ether\s([0-9a-z:]+)\s|) {
+		$intf->{HWADDR} = $1;
+	    }
+	}
+    }
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
-    my $hwaddr;
-    $::o->{miscellaneous}{track_network_id} and $hwaddr = -e "$prefix/sbin/ip" && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`;
-    if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/ }
-    $hwaddr and $intf->{HWADDR} = undef;
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
-		     if_($::o->{miscellaneous}{track_network_id}, HWADDR => $hwaddr)
 		    });
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)));
 }
@@ -372,12 +375,13 @@ You may also enter the IP address of the gateway if you have one"),
 			      );
 }
 
-sub miscellaneousNetwork {
-    my ($in, $clicked, $no_track_net) = @_;
-    my $u = $::o->{miscellaneous} ||= {};
-    $::isInstall and $in->set_help('configureNetworkProxy');
+sub miscellaneous_choose {
+    my ($in, $u, $clicked, $no_track_net) = @_;
+    $in->set_help('configureNetworkProxy') if $::isInstall;
+
     $u->{track_network_id} = detect_devices::isLaptop();
-    $::expert || $clicked and ($in->ask_from('',
+
+    $in->ask_from('',
        N("Proxies configuration"),
        [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
          { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
@@ -388,8 +392,14 @@ sub miscellaneousNetwork {
 	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("Url should begin with 'ftp:' or 'http:'")), return 1,1;
 	   0;
        }
-    ) or return);
+    ) or return if $::expert || $clicked;
     1;
+}
+
+sub proxy_configure {
+    my ($u) = @_;
+    setExportedVarsInSh( "$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
+    setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
 }
 
 sub read_all_conf {
@@ -447,7 +457,7 @@ sub configureNetwork2 {
     }
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
-    any::miscellaneousNetwork();
+    proxy_configure($::o->{miscellaneous});
 }
 
 

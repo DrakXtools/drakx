@@ -27,6 +27,7 @@ use common;
 use network::netconnect;
 use network::ethernet;
 use network::tools;
+use network::modem;
 use network;
 use c;
 use any;
@@ -341,9 +342,9 @@ sub apply {
     $old_profile = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     network::netconnect::save_conf($netcnx, $netc, $intf);
 
-    $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
+    $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}}, '');
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc, $netcnx); #$light
-    $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
+    $netcnx->{type} eq 'isdn_external' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}}, '');
     my $a = $netcnx->{type};
     $a =~ s/adsl_//;
     $netcnx->{type} =~ /adsl/ and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);

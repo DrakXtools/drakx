@@ -25,9 +25,8 @@ use interactive;
 use network::network;
 use any;
 
-$::o->{miscellaneous} ||= {};
-$::o->{miscellaneous} = { getVarsFromSh('/etc/profile.d/proxy.sh') };
+my $u = { getVarsFromSh('/etc/profile.d/proxy.sh') };
 my $in = 'interactive'->vnew('su', 'network');
-network::network::miscellaneousNetwork($in, 1, 1);
-any::miscellaneousNetwork('');
+network::network::miscellaneous_choose($in, $u, 1, 1);
+network::network::proxy_configure($u);
 $in->exit(0);

@@ -207,7 +207,7 @@ such as ``mybox.mylab.myco.com''."),
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
-    miscellaneousNetwork($in) or goto configureNetwork_step_1;
+    network::network::miscellaneous_choose($in, $::o->{miscellaneous} ||= {}) or goto configureNetwork_step_1;
     1;
 }
 
