@@ -215,16 +215,28 @@ sub put_font_dir {
     # xlsfonts | less pour verifier l'installation des polices.
 }
 
-
 sub remove_fonts {
-#    rm_rf(@)
-# recuperer le path pour regenerer le type1inst
-    mkdir_p($drakfont_dir);
-    cp_af(@font_list, $drakfont_dir);
-    system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
-    
-    # xlsfonts | less pour verifier l'installation des polices.
+    my @list_dir;
+    my @toto;
+    foreach my $i (@font_list) {
+#	rm_rf($i);
+	print "nom complet : ".$i."\n";
+	$i =~ s/\/\w*\.\w*//gi;
+	grep ( $i, (@list_dir)) or push @list_dir, $i;
+	print "nom rep     : " . $_."\n" foreach @list_dir;
+    }
+    foreach my $i (@list_dir) {
+#	print listlength all("$i");
+	if (listlength all("$i") > 2)  {
+	    # remove this directory of the de fontpath
+	    system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
+	} else {
+	    #	    # do type1inst in this path
+	    system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
+	}
+    }
 }
+
 
 
 $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
@@ -257,6 +269,7 @@ sub backend_mod {
 	print "........Uninstall Specifics Fonts........\n\n";
 	search_installed_fonts_full_path();
 	search_dir_font_uninstall $_ foreach (@uninstall);
+	remove_fonts();
 	print "\n...............The End...................\n";
     }
 }
