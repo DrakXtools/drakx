@@ -377,7 +377,7 @@ sub pppConfig {
 
     unless ($m->{device} || $::expert && !$o->ask_yesorno('', _("Try to find a modem?"), 1)) {
 	foreach (0..3) {
-	    next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
+	    next if $o->{mouse}{device} =~ /ttyS$_/;
 	    detect_devices::hasModem("$o->{prefix}/dev/ttyS$_")
 		and $m->{device} = "ttyS$_", last;
 	}

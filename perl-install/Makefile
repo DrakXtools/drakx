@@ -120,7 +120,7 @@ get_needed_files: $(DIRS)
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
-	cp *.in modparm.lst $(DEST)/usr/share
+	cp template.in/*.in modparm.lst $(DEST)/usr/share
 	cp MonitorsDB $(DEST)/usr/X11R6/lib/X11
 	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp -a themes $(DEST)/usr/share/gtk
