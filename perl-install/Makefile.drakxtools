@@ -17,7 +17,7 @@ NETLIBDEST = $(LIBDIR)/$(NAME)/network
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 .PHONY: $(DIRS)
 
-all: $(DIRS)
+all: rpcinfo-flushed $(DIRS)
 
 $(DIRS):
 	install -d auto
@@ -29,7 +29,7 @@ install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(NETLIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) 
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
-	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
+	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	install -m 644 *.pm $(LIBDEST)

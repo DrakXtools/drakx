@@ -507,11 +507,8 @@ sub mount {
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
-    if ($fs eq 'nfs') {
-	log::l("calling nfs::mount($dev, $where)");
-#	nfs::mount($dev, $where) or die _("nfs mount failed");
-    } elsif ($fs eq 'smbfs') {
-	die "no smb yet...";
+    if (member($fs, 'smb', 'nfs') && $::isStandalone) {
+	system('mount', $dev, $where) == 0 or die _("mount failed");
     } elsif (member($fs, 'ext2', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
@@ -579,7 +576,7 @@ sub mount_part {
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
-	    mount(devices::make($dev), $mntpoint, type2fs($part), $rdonly);
+	    mount($dev, $mntpoint, type2fs($part), $rdonly);
 	    rmdir "$mntpoint/lost+found";
 	}
     }
