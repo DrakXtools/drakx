@@ -577,9 +577,6 @@ sub main {
     #- ala pixel? :-) [fpons]
     sync(); sync();
 
-    #- remounting read-only may avoid error if kernel is unable to umount fs.
-    install_any::remount_readonly($o, $o->{prefix});
-
     log::l("installation complete, leaving");
     print "\n" x 30;
 }

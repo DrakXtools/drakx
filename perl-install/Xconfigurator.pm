@@ -717,10 +717,13 @@ sub main {
 
     XF86check_link();
 
-    $o->{card} = cardConfiguration($o->{card}, $::noauto, $allowFB);
+    {
+	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
 
-    $o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
+	$o->{card} = cardConfiguration($o->{card}, $::noauto, $allowFB);
 
+	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
+    }
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
     $ok &&= testFinalConfig($o, $::auto);

@@ -497,12 +497,12 @@ sub lspci {
 }
 sub dmesg { print cat_("/tmp/syslog"); }
 
-my %cached_failed_install_cpio;
+#my %cached_failed_install_cpio;
 #- double space between sub and install_cpio cuz install_cpio is not a shell command
 sub  install_cpio($$) {
     my ($dir, $name) = @_; 
 
-    return if $cached_failed_install_cpio{"$dir $name"};
+#    return if $cached_failed_install_cpio{"$dir $name"};
     return "$dir/$name" if -e "$dir/$name";
 
     my $cpio = "$dir.cpio.bz2";
@@ -514,7 +514,7 @@ sub  install_cpio($$) {
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
 
     #- not found, cache result
-    return if $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
+#    return if $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
     "$dir/$name";
 }
 

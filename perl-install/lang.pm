@@ -178,7 +178,7 @@ sub load_po($) {
 	-e ($f = "$_") and last foreach @INC;
 	$f = commands::install_cpio("$f/po", "$lang.po");
     }
-    local *F; open F, $f or return;
+    local *F; open F, $f; #- not returning here help avoiding reading the same multiple times.
     foreach (<F>) {
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;
