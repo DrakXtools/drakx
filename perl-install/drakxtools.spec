@@ -292,12 +292,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog 
 * Mon Feb 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-5mdk
-- clean up exit of tools when embedded in the mcc
+- clean up tools embeddeding in the mcc
+  o make it hard to freeze the mcc
+  o make tools loo better when embedded (no embedded wait messages,
+    ...)
 - harddrake2:
   o add "/dev" to devfs paths
   o do not offer to configure module when there's no module or when
     driver is an url or a graphic server
-- printerdrake: make it looks smoother when embedded
+  o fix embedding
 
 * Fri Feb 21 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-4mdk
 - drakconnect fixes
