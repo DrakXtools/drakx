@@ -23,6 +23,7 @@ foreach $date (reverse sort keys %l) {
 	while (($file, $log) = each %{$l{$date}{$user}}) {
 	    $log =~ s/^\s+( \*)?//ms;
 	    $log =~ s/\s+$//ms;
+	    $log = "\n$log" if $log =~ /^-/;
 	    push @{$inv{$log}}, $file;
 	}
 	foreach $log (keys %inv) {
@@ -39,6 +40,7 @@ sub auto_fill {
     map {
 	my @l;
 	my $l = '';
+	$_ = "  $_" if /^-/;
 	while ($_) {
 	    s/^(\s*)(\S*)//;
 	    my $m = "$l$1$2";
