@@ -482,6 +482,7 @@ sub ask_fromW {
 		    $action => gtksignal_connect(Gtk2::Button->new(translate($action)),
 						 clicked => sub { $do_action->($action) });
 		} @actions;
+		$w->set_size_request(400, -1);
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
 				   1, create_scrolled_window($w), 
 				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $buttons{$_} } @actions));
