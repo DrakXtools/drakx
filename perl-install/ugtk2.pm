@@ -842,7 +842,7 @@ sub new {
 
 
     my $o = bless { %opts }, $type;
-    $o->_create_window($title);
+    $o->_create_window($title) if !$::isEmbedded;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
     $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
@@ -865,7 +865,7 @@ sub new {
 	$o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
-	if (!defined($::WizardWindow)) {
+	if (!defined($::WizardWindow) && !$::isEmbedded) {
 	    $::WizardWindow = Gtk2::Window->new('toplevel');
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
 	    $::WizardWindow->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus || $o->{force_focus};
@@ -921,7 +921,7 @@ sub new {
 	    $::WizardWindow->show_all;
 	    flush();
 	}
-	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
+	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0) if !$::isEmbedded;
     }
 
     if ($::isEmbedded && !$o->{pop_it}) {
