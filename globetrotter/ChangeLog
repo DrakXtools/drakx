@@ -1,0 +1,119 @@
+2004-08-27 08:10  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* Makefile: add changelog target
+
+2004-07-20 04:42  Pixel <pixel@mandrakesoft.com>
+
+	* hwprofile, move.pm, runstage2: MandrakeSoft -> Mandrakesoft
+
+2004-07-09 04:47  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: sometimes grub return non zero exit status w/o error
+
+2004-07-09 04:46  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: kill debug message
+
+2004-07-09 04:16  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: do not complain about unmounted usb fs in recue mode
+
+2004-07-09 03:45  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: fix restore mode (initrd's mount failled to mount ext2
+	  as ext3)
+
+2004-06-30 10:14  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* doc/BUILD: fix build explanation (else make_live will horribly
+	  die due to missing functions :-()
+
+2004-06-30 09:25  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* doc/BUILD: update how to build instructions
+
+2004-06-30 08:13  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* doc/BUILD: do not forget to update hdlists
+
+2004-06-30 08:12  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* README: fix required packages list
+
+2004-06-30 07:24  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: display a nicer error message when disk is not found
+
+2004-06-29 08:25  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: fix umounting
+
+2004-06-29 05:28  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: unselect uim since mdk10 package of uim IM break first
+	  time wizard when selecting english
+
+2004-06-29 04:09  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: perl_checker cleanups
+
+2004-06-29 03:36  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: add rescue support
+
+2004-06-24 11:41  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: (installPackages) kill debugging statements
+
+2004-06-24 10:17  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* hwprofile: create hw profile after having run first time wizard
+	  so that if one refuse the icense, he has to run it again
+
+2004-06-24 07:39  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: make share partition be writeable by unpriviliegied
+	  users
+
+2004-06-24 07:33  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: add fb2png in order to be able to take screenshots
+
+2004-06-24 07:31  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: per machine firewall configuration
+
+2004-06-18 05:44  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: force installation of both 2.4.x and 2.6.x centrino
+	  drivers
+
+2004-06-18 05:44  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: - use labels for home and packages partitions too -
+	  mount packages partition in read-only mode
+
+2004-06-18 04:08  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* make_live: install autologin as requested by QA
+
+2004-06-15 18:56  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* README: update package versions to reflect current globetrotter
+
+2004-06-15 18:54  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* README: update what's required in new initscripts
+
+2004-06-15 18:50  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* .perl_checker, Makefile, README, hwprofile, make_live,
+	  mandrake-globetrotter.spec, move.pm, runstage2, doc/BUGS,
+	  doc/BUILD, doc/NOTES: Imported Globetrotter
+
+2004-06-15 18:50  Thierry Vignaud <tvignaud@mandrakesoft.com>
+
+	* .perl_checker, Makefile, README, hwprofile, make_live,
+	  mandrake-globetrotter.spec, move.pm, runstage2, doc/BUGS,
+	  doc/BUILD, doc/NOTES: Initial revision
+
