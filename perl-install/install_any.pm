@@ -904,21 +904,23 @@ sub ejectCdrom {
     getFile("XXX"); #- close still opened filehandle
     my $cdrom;
     if ($o_mountpoint) {
-	$cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1 or return;
+	$cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1;
     } else {
-	$cdrom = cat_("/proc/mounts") =~ m!(/dev/$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1 or return;
-	$o_mountpoint ||= $2 || '/tmp/image';
+	$cdrom = cat_("/proc/mounts") =~ m!(/dev/$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1;
+	$o_mountpoint ||= $cdrom ? $2 || '/tmp/image' : '';
     }
+    $cdrom ||= $o_cdrom;
 
     #- umount BEFORE opening the cdrom device otherwise the umount will
     #- D state if the cdrom is already removed
-    eval { fs::umount($o_mountpoint) };
+    $o_mountpoint and eval { fs::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
     return if is_xbox();
     eval { 
 	my $dev = detect_devices::tryOpen($cdrom);
 	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
     };
+    $@ and log::l("ejection failed: $@");
 }
 
 sub warnAboutFilesStillOpen() {
