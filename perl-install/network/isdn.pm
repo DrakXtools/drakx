@@ -208,7 +208,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
     $e = $in->ask_from_listf(N("ISDN Configuration"),
 			     N("Which of the following is your ISDN card?"),
 			     sub { $_[0]{description} },
-			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto ($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
+			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
   isdn_ask_step_3:
@@ -244,8 +244,8 @@ sub isdn_detect {
     1;
 }
 
-sub isdn_detect_backend {
-    my ($isdn) = { };
+sub isdn_detect_backend() {
+    my $isdn = { };
     if (my ($c) = modules::probe_category('network/isdn')) {
 	$isdn = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
