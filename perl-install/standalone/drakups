@@ -48,6 +48,8 @@ sub readDriversList() {
     \%ups, \@ups;
 }
 
+my %models;
+
 sub add_device_wizard {
     my ($in, $config) = @_;
     my ($ups_models, $model_list) = readDriversList();
@@ -98,8 +100,8 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                        $name = $str;
                                        
                                        if (!exists $struct->{$str}) {
-                                           $struct->{$str}{port} = $ups_device->{port} || $ups_device->{DEVICE};
-                                           $struct->{$str}{driver} = $ups_device->{driver};
+                                           $port   = $struct->{$str}{port} = $ups_device->{port} || $ups_device->{DEVICE};
+                                           $driver = $struct->{$str}{driver} = $ups_device->{driver};
                                            push @new_devices, $str;
                                        }
                                    }
@@ -247,6 +249,7 @@ my @pages = (
                    $struct = Libconf::Glueconf::NUT::Ups_conf->new($files{devices});
                    map { [ $_, @{$struct->{$_}}{qw(driver port)} ] } keys %$struct;
                },
+               id => "ups",
              },
              { name => N("UPS users"),
                columns => [ N("Name") ],
@@ -262,6 +265,7 @@ my @pages = (
                    $users = Libconf::Glueconf::NUT::Ups_conf->new($files{users});
                    map { [ $_ ] } keys %$users;
                },
+               id => "users",
              },
              { name => N("Access Control Lists"),
                columns => [ N("Name"), N("IP address"), N("IP mask") ],
@@ -274,6 +278,7 @@ my @pages = (
                    load_access_conf();
                    @acls;
                },
+               id => "acls",
              },
              { name => N("Rules"),
                columns => [ N("Action"), N("Level"), N("ACL name"), N("Password") ],
@@ -284,6 +289,7 @@ my @pages = (
                             },
                       
                load => sub { @rules }, # already loaded when we loaded acls
+               id => "rules",
              },
             );
 
@@ -333,7 +339,7 @@ my %labels = (
 	     );
 
 foreach my $i (@pages) {
-    my $model = Gtk2::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
+    my $model = $models{$i->{id}} = Gtk2::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
     my (%buttons, $list);
     $indexes{$i->{name}} = 0;
     my $idx = \$indexes{$i->{name}};
@@ -378,6 +384,8 @@ foreach my $i (@pages) {
 	$set_sensitive->(defined $iter);
       });
 }
+
+    $models{ups}->append_set(1 => "toto", 2 => "tata", 3 => "titi");
 
 #------------------------------------------------------------------
 # let's start the show:
