@@ -106,6 +106,10 @@ sub errorOpeningFile($) {
     #- this means it is no more selected.
     $::o->{packages}[2]{$asked_medium}{selected} = undef;
 
+    #- on cancel, we can expect the current medium to be undefined too,
+    #- this enable remounting if selecting a package back.
+    $current_medium = 'unknown';
+
     return;
 }
 sub getFile {
