@@ -323,6 +323,7 @@ sub setPackages {
 	}
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
+	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
 
 	$o->{compssUsersChoice}{'3D'} = 1 if 
 	    detect_devices::matching_desc('Matrox.* G[24]00') ||
