@@ -259,17 +259,21 @@ sub selectMouse {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($o, $auto, $at_least_one) = @_;
+    my ($o, $clicked) = @_;
 
-    if ($o->{pcmcia} && !$::noauto) {
-	my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
-	modules::configure_pcmcia($o->{pcmcia});
+    if (!$::noauto) {
+	if ($o->{pcmcia} ||= c::pcmcia_probe()) {
+	    my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
+	    modules::configure_pcmcia($o->{pcmcia});
+	}
     }
     { 
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load_ide();
     }
-    any::setup_thiskind($o, 'scsi|disk', $auto, $at_least_one, $o->{pcmcia});
+    any::setup_thiskind($o, 'scsi|disk', !$::expert && !$clicked, $clicked, $o->{pcmcia});
+
+    install_interactive::tellAboutProprietaryModules($o) if !$clicked;
 }
 
 sub ask_mntpoint_s {
@@ -984,51 +988,22 @@ try to force installation even if that destroys the first partition?"));
 		chop($of_boot);
 		unlink "$o->{prefix}/tmp/.error";
 		$o->ask_warn('', _("You will need to change your Open Firmware boot-device to\n enable the bootloader.  Hold down Command-Option-O-F\n at reboot and enter:\n setenv boot-device $of_boot,\\ofboot.b\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
-    }
+	    }
     }
 }
 
-#- deprecated
-sub __deprecated__miscellaneous {
-    return; 
-
+sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	0 => _("Welcome To Crackers"),
-	1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),
 	4 => _("High"),
-	5 => _("Paranoid"),
     );
-    delete @l{0,1,5} unless $::expert;
-
-    my $u = $o->{miscellaneous} ||= {};
-    my $s = $o->{security};
-
-    install_interactive::tellAboutProprietaryModules($o) unless $clicked;
-
-    add2hash_ $o, { useSupermount => $s < 4 && arch() !~ /^sparc/ };
-    $s = $l{$s} || $s;
-
-    $::expert || $clicked and $o->ask_from_entries_refH('',
-	_("Miscellaneous questions"), [
-{ label => _("Choose security level"), val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-     ], complete => sub {
-	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
-	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
-	    $o->{security} == 5 and $o->ask_okcancel('',
-_("beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!
-If you want to be root, you have to login as a user and then use \"su\".
-More generally, do not expect to use your machine for anything but as a server.
-You have been warned.")) || return;
-
-	    #- message below kept in case it is of any use again. (otherwise removed from po and pablo is not happy ;p)
-_("Be carefull, having numlock enabled causes a lot of keystrokes to
-give digits instead of normal letters (eg: pressing `p' gives `6')");
-	    0; }
-    ) || return;
-
+    if ($::expert || $clicked) {
+	$ENV{SECURE_LEVEL} = $o->{security} = 
+	  $o->ask_from_listf('', _("Choose security level"), sub { $l{$_[0]} }, [ ikeys %l ], $o->{security})
+	    or return;
+    }
     install_steps::miscellaneous($o);
 }
 

@@ -41,7 +41,7 @@ my (%installSteps, @orderedInstallSteps);
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
   selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1, 1 ],
+  miscellaneous      => [ __("Security"), 1, 1, '!$::expert' ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions" ],
@@ -154,7 +154,7 @@ sub selectMouse {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($clicked) = @_;
-    $o->setupSCSI(!$::expert && !$clicked, $clicked);
+    $o->setupSCSI($clicked);
 }
 
 #------------------------------------------------------------------------------
@@ -472,8 +472,6 @@ sub main {
 
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
-
-    $o->{pcmcia} ||= c::pcmcia_probe();
 
     eval { modules::load("af_packet") };
 
