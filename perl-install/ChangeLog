@@ -1,3 +1,250 @@
+2001/09/15  civileme
+
+	* help.pm: Added a dialog in English for users selecting a printing system
+	since no other
+	OS seems to offer such a choice during install.
+
+2001/09/15  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: better connection testing
+
+	* network/tools.pm: more timeout
+
+	* network/adsl.pm: avoid asking 2 times to restart the ethernet card
+
+	* mouse.pm: readded darea realization
+
+2001/09/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: make gtk-themes installed when Gnome is choosen
+
+	* share/po/es.po: updated Spanish file
+
+	* share/po/wa.po, share/po/hu.po: updated Hungarian file
+
+2001/09/15  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile.config, tools/Makefile: add aewm-drakx
+
+	* install_steps_gtk.pm: makes cancel on mouse selection works even better
+	  - add and use aewm-drakx
+	  - add some "skip" title on help/logo/steps windows so that aewm-drakx
+	know they don't need keyboard focus
+	  - add some more title to ease debugging (when aewm-drakx is in debug
+	mode)
+
+	* install_gtk.pm, tools/aewm-drakx/Makefile, tools/aewm-drakx/misc.c,
+	tools/aewm-drakx/README: 
+	  - add and use aewm-drakx
+	  - add some "skip" title on help/logo/steps windows so that aewm-drakx
+	know they don't need keyboard focus
+	  - add some more title to ease debugging (when aewm-drakx is in debug
+	mode)
+
+	* any.pm: i18n kdmrc
+	fix user icons choice
+	  - add and use aewm-drakx
+	  - add some "skip" title on help/logo/steps windows so that aewm-drakx
+	know they don't need keyboard focus
+	  - add some more title to ease debugging (when aewm-drakx is in debug
+	mode)
+
+	* install2.pm: don't warn if modules are missing when testing
+
+	* bootloader.pm: find error in /tmp/.error only if exception is "xxx
+	failed"
+	(write_lilo_conf): ensure linear and lba32 are not both set
+
+	* share/po/fake_c.pl: fix a tricky hack
+
+	* my_gtk.pm: do the set_events before the show otherwise gtk go crazy (no
+	more keyboard focus)
+
+	* c/stuff.pm: i18n kdmrc
+
+	* lang.pm (load_mo): ensure the locale is set (was broken in non-gtk
+	installs)
+
+	* install_steps_interactive.pm: fix typo
+	find error in /tmp/.error only if exception is "xxx failed"
+	makes cancel on mouse selection works even better
+	fix cancel on mouse choice
+
+	* install_steps.pm: i18n kdmrc
+	enable supermount again
+
+	* network/adsl.pm: correct dams typo
+
+	* fs.pm (write_fstab): fix supermount moving from options to fstype
+
+	* steps.pm: find error in /tmp/.error only if exception is "xxx failed"
+
+	* tools/aewm-drakx/aewm.h, tools/aewm-drakx/client.c,
+	tools/aewm-drakx/events.c, tools/aewm-drakx/aewm-drakx.c: set_focus on
+	new map_request event (fix summary step)
+	  - add and use aewm-drakx
+	  - add some "skip" title on help/logo/steps windows so that aewm-drakx
+	know they don't need keyboard focus
+	  - add some more title to ease debugging (when aewm-drakx is in debug
+	mode)
+
+	* install_steps_auto_install.pm (enteringStep): do not translate in
+	ja|ko|zh
+
+2001/09/15  siegel
+
+	* share/po/de.po: fixed another typo
+	new string
+
+	* printerdrake.pm: added missing _()
+
+	* standalone/draksec: use " instead of ' to get i18n
+
+	* standalone/draknet: fixed missing _()
+
+2001/09/15  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Added the PDQ panic button.
+	Removed a superfluous "set_help" line.
+	Save default spooler at program start, fixed typos in comments.
+	Command line commands as "lpr", "lpq", ... are mapped to the correct
+	spooler now.
+	Fixed bug of a waiting message appearing together with a dialog
+	Cleaned up variables to correctly switch between CUPS/Foomatic/Raw type
+	for a printer
+
+	* printer.pm: Added the PDQ panic button.
+	Command line commands as "lpr", "lpq", ... are mapped to the correct
+	spooler now.
+
+	* standalone/printerdrake: Fixed bug of spooler choice via command line
+	options being ignored.
+
+2001/09/15  warly
+
+	* share/rpmsrate: add drakfirsttime
+
+2001/09/14  dam's  <damien@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: make test_pms happy
+
+	* install_any.pm: pptp-adsl instead of pptp-adsl-fr
+
+	* Xconfigurator.pm: no shadow when X test
+
+	* standalone.pm: bugfix
+
+	* my_gtk.pm: no icon if wizard
+	no shadow when X test
+	shadow color
+
+	* bootlook.pm: bugfix
+	iautologin correction
+
+	* mouse.pm: trying to remove draw
+
+	* network/adsl.pm: debug
+	pptp-adsl instead of pptp-adsl-fr
+	bugfix
+	updated speedtouch handling.
+
+2001/09/14  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: removed S3 ViRGE card from card with problem with
+	frame buffer as it works fine.
+
+	* Xconfigurator.pm: fixed filtering of depth for newt version.
+	depth 24 is used for DRI for Rage 128 and Radeon instead of Depth 32 (as
+	depth
+	32 simply doesn't work, even if DRI guide says it works :-) 24 bit works
+	fine
+	for Rage 128.
+	apply restriction on depth available when changing resolution, removed
+	S3 ViRGE
+	from experimental 3D accelerated card list as it really does not work,
+	allow on
+	second pass to change card configuration to choose server (experimental
+	server
+	are still only available to expert), added support for UseCCEFor2D for
+	Rage 128
+	card if a TV card is installed (set to true, else set to false), added
+	support
+	for Rage Mobility M... card that are Rage 128 Mobile chipset, improved
+	error
+	message display to catch only appropriate error message of XFree 4.1.0
+	only,
+	added support for 32 bits for DRI using Matrox card, improved info
+	message with
+	real version of XFree used (anybody) and identifier from PCI probe
+	(expert).
+
+2001/09/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/insmod-busybox/Makefile: clean also cleans the DIET target
+
+	* mdk-stage1/Makefile, mdk-stage1/Makefile.mkinitrd_helper: back to using
+	a reduced form of mkinitrd_helper for mkinitrd (only
+	to provide a dietlibc-enabled static insmod)
+
+2001/09/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po: updated Walloon file
+
+	* share/po/ko.po: updated Korean file
+
+	* share/po/da.po: updated Danish file
+	updated Danish file
+
+	* share/po/bs.po, share/po/sv.po: updated Bosnian and Swedish files
+
+2001/09/14  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_raw.pm, install_any.pm: when testing for bad drives, if
+	opening for writing fails, remove the drive from the hard drive list
+	(useful for Smartmedia readers)
+
+	* pkgs.pm: update correctSize and invCorrectSize (now linear)
+
+	* share/po/fr.po: fix odin bug (please run msgfmt before committing!)
+
+	* share/rpmsrate: do not install Aurora in russian
+
+2001/09/14  siegel
+
+	* share/po/de.po: updates
+
+	* standalone/drakautoinst: Check exisence of "/root/replay_install.img"
+	before anything else ...
+
+2001/09/14  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Added "set_help" lines for installer help texts.
+	Raw queue entry added, so cursor not always on "Alps MD-1000" when no
+	printer
+	detected.
+	Resolved conflict.
+	Now it is checked whether the network is configured and running.
+	draknet is called when the network is not configured.
+	It is checked whether the spooler is automatically started at boot.
+	The oki4daemon is started when needed.
+	Lexmarks inkjet drivers are fully integrated.
+	The permissions of the device files are set so that normal users can
+	print with PDQ.
+
+	* standalone/printerdrake: Fixed spooler selection by command line.
+
+	* printer.pm: Raw queue entry added, so cursor not always on "Alps
+	MD-1000" when no printer
+	detected.
+	Made network checking working on non-english systems.
+	Now it is checked whether the network is configured and running.
+	draknet is called when the network is not configured.
+	It is checked whether the spooler is automatically started at boot.
+	The oki4daemon is started when needed.
+	Lexmarks inkjet drivers are fully integrated.
+	The permissions of the device files are set so that normal users can
+	print with PDQ.
+
 2001/09/14  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/bg.po, share/po/tr.po: updated Turkish and Bulgarian files
