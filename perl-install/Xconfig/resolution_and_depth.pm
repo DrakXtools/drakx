@@ -85,6 +85,8 @@ sub allowed {
     
     if ($card->{Driver} eq 'fbdev') {
 	push @resolution_and_depth, grep { $_->{Depth} == 16 } @bios_vga_modes;
+    } elsif ($card->{Driver} eq 'vmware') {
+	push @depths, 16, 8;
     } elsif ($card->{Driver} eq 'fglrx') {
 	$prefered_depth = 24;
 	push @depths, 24;
