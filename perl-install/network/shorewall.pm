@@ -71,6 +71,7 @@ sub default_interfaces {
 
 my @all_cards = network::ethernet::get_eth_cards();
 my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
+put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
 
 	$in->ask_from('',
 		N("Please enter the name of the interface connected to the internet.
