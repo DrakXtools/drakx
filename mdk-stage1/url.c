@@ -36,13 +36,14 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/poll.h>
 
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 
-#include "log.h"
 #include "dns.h"
+#include "log.h"
 #include "tools.h"
 
 #include "url.h"
@@ -56,9 +57,8 @@ static int ftp_check_response(int sock, char ** str)
 {
 	static char buf[BUFFER_SIZE + 1];
 	int bufLength = 0; 
-	fd_set emptySet, readSet;
+	struct pollfd polls;
 	char * chptr, * start;
-	struct timeval timeout;
 	int bytesRead, rc = 0;
 	int doesContinue = 1;
 	char errorCode[4];
@@ -66,21 +66,10 @@ static int ftp_check_response(int sock, char ** str)
 	errorCode[0] = '\0';
     
 	do {
-		FD_ZERO(&emptySet);
-		FD_ZERO(&readSet);
-		FD_SET(sock, &readSet);
-
-		timeout.tv_sec = TIMEOUT_SECS;
-		timeout.tv_usec = 0;
-    
-		rc = select(sock + 1, &readSet, &emptySet, &emptySet, &timeout);
-		if (rc < 1) {
-			if (rc==0) 
-				return FTPERR_BAD_SERVER_RESPONSE;
-			else
-				rc = FTPERR_UNKNOWN;
-		} else
-			rc = 0;
+		polls.fd = sock;
+		polls.events = POLLIN;
+		if (poll(&polls, 1, TIMEOUT_SECS*1000) != 1)
+			return FTPERR_BAD_SERVER_RESPONSE;
 
 		bytesRead = read(sock, buf + bufLength, sizeof(buf) - bufLength - 1);
 
@@ -125,7 +114,7 @@ static int ftp_check_response(int sock, char ** str)
 		} else {
 			bufLength = 0;
 		}
-	} while (doesContinue && !rc);
+	} while (doesContinue);
 
 	if (*errorCode == '4' || *errorCode == '5') {
 		if (!strncmp(errorCode, "550", 3)) {
@@ -170,10 +159,13 @@ static int get_host_address(const char * host, struct in_addr * address)
 			return FTPERR_BAD_HOST_ADDR;
 		}
 	} else {
-		if (mygethostbyname((char *) host, address)) {
-			errno = h_errno;
+		struct hostent * h;
+		h = mygethostbyname(host);
+		if (h && h->h_addr_list && (h->h_addr_list)[0]) {
+			*address = *((struct in_addr *) (h->h_addr_list)[0]);
+			log_message("is-at: %s", inet_ntoa(*address));
+		} else
 			return FTPERR_BAD_HOSTNAME;
-		}
 	}
     
 	return 0;
@@ -394,7 +386,6 @@ int ftp_start_download(int sock, char * remotename, int * size)
 		log_message("FTP: could not get filesize (trying to continue)");
 		*size = 0;
 	}
-	
 	return ftp_data_command(sock, "RETR", remotename);
 }
 
@@ -411,15 +402,14 @@ int ftp_end_data_command(int sock)
 int http_download_file(char * hostname, char * remotename, int * size)
 {
 	char * buf;
-	struct timeval timeout;
 	char headers[4096];
 	char * nextChar = headers;
 	int checkedCode;
 	struct in_addr serverAddress;
+	struct pollfd polls;
 	int sock;
 	int rc;
 	struct sockaddr_in destPort;
-	fd_set readSet;
 	char * header_content_length = "Content-Length: ";
 
 	if ((rc = get_host_address(hostname, &serverAddress))) return rc;
@@ -450,13 +440,10 @@ int http_download_file(char * hostname, char * remotename, int * size)
 	*nextChar = '\0';
 	checkedCode = 0;
 	while (!strstr(headers, "\r\n\r\n")) {
-		FD_ZERO(&readSet);
-		FD_SET(sock, &readSet);
+		polls.fd = sock;
+		polls.events = POLLIN;
+		rc = poll(&polls, 1, TIMEOUT_SECS*1000);
 
-		timeout.tv_sec = TIMEOUT_SECS;
-		timeout.tv_usec = 0;
-    
-		rc = select(sock + 1, &readSet, NULL, NULL, &timeout);
 		if (rc == 0) {
 			close(sock);
 			return FTPERR_SERVER_TIMEOUT;
