@@ -268,11 +268,14 @@ sub ask_mntpoint_s { #- }{}
 	$o->ask_from_({ messages => N("Choose the mount points"),
 			interactive_help_id => 'ask_mntpoint_s',
 		      },
-		      [ map { { label => partition_table::description($_), 
-				  val => \$_->{mntpoint},
-				    not_edit => 0,
-				      list => [ '', fsedit::suggestions_mntpoint(fs::get::empty_all_hds()) ] }
-			  } grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
+		      [ map { 
+			  { 
+			      label => partition_table::description($_), 
+			      val => \$_->{mntpoint},
+			      not_edit => 0,
+			      list => [ '', fsedit::suggestions_mntpoint(fs::get::empty_all_hds()) ],
+			  };
+		        } grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }
