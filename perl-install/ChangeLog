@@ -26,6 +26,34 @@
 
 	* keyboard.pm (unpack_keyboards): return undef on error
 
+2002/03/15  dam's  <damien@mandrakesoft.com>
+
+	* share/po/ja.po: reverted ' \n' from pablo because I managed to correct
+	the way we wrap for the advertising
+
+	* install_steps_gtk.pm: submitting widget instead of style (style/font
+	initialization bug from gtk
+
+	* my_gtk.pm: corrected get_text_coord : widget instead of style, and
+	handling of ugly language (/ja|zh/)
+
+2002/03/15  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: update lang according to lang.pm of 8.2 (remove
+	@euro appended for 8.1).
+
+2002/03/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* keyboard.pm: added xx_YY -> keyboard lines in addition of xx -> keyboard
+	ones
+
+2002/03/15  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/fr.po: s/Linux Mandrake/Mandrake Linux/ (from the
+	drakx-help.xml not merged)
+
+	* keyboard.pm (unpack_keyboards): return undef on error
+
 2002/03/14  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/ja.po: updated po file
