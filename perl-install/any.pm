@@ -843,20 +843,20 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
     $restrict = $r ne $l[1];
     my $custom = $r eq $l[2];
     if ($r ne $l[0]) {
+	require services;
 	#- verify we can export in $type
 	my %type2service = (nfs => [ 'nfs-utils', 'nfs' ], smb => [ 'samba-server', 'smb' ]);
 	my %l;
 	if ($type) {
 	    %l = ($type => 1);
 	} else {
-	    %l = map_each { $::a => -e $::b->[1] } %type2service;
+	    %l = map_each { $::a => services::starts_on_boot($::b->[1]) } %type2service;
 	    $in->ask_from('', N("You can export using NFS or Samba. Please select which you'd like to use."),
 			  [ map { { text => $_, val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
 	}
 	foreach (keys %l) {
 	    my ($pkg, $service) = @{$type2service{$_}} or die "unknown type $_\n";
 	    my $file = "/etc/init.d/$service";
-	    require services;
 	    if ($l{$_}) {
 		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
 		services::start($service);
