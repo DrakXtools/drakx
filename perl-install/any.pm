@@ -92,10 +92,11 @@ sub setupBootloader {
     my $semi_auto = !$::expert && arch() !~ /ia64/;
     my $ask_per_entries = $::expert || $more > 1;
     $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
-    $automatic = $semi_auto = 0 
-      #- full expert questions when there is 2 kind of disks
-      #- it would need a semi_auto asking on which drive the bios boots...
-      if (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds);
+    if (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) {
+	$automatic = $semi_auto = 0;
+	#- full expert questions when there is 2 kind of disks
+	#- it would need a semi_auto asking on which drive the bios boots...
+    }
 	
     if ($automatic) {
 	#- automatic
