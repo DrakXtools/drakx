@@ -200,7 +200,10 @@ sub getNextStep {
 sub spawnShell() {
     return if $::o->{localInstall} || $::testing;
 
-    fork() and return;
+    if (my $shellpid = fork()) {
+        output('/var/run/drakx_shell.pid', $shellpid);
+        return;
+    }
 
     $ENV{DISPLAY} ||= ":0"; #- why not :pp
 
