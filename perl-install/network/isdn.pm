@@ -84,16 +84,19 @@ defaultroute
 
     substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
 
+    # we start the virtual interface at boot (we dial only on demand.
+    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
     write_cnx_script($netc, "isdn",
-"/sbin/route del default
-/sbin/ifup ippp0
+"#/sbin/route del default
+#/sbin/ifup ippp0
 /usr/sbin/isdnctrl dial ippp0
 " . if_($isdn->{speed} =~ /128/, "service ibod restart
 "),
 "/usr/sbin/isdnctrl hangup ippp0
-/sbin/ifdown ippp0
+#/sbin/ifdown ippp0
 "  . if_($isdn->{speed} =~ /128/, "service ibod stop
 "), $netc->{isdntype});
     1;
