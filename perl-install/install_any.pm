@@ -419,7 +419,7 @@ sub install_urpmi {
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
 
-	$name =~ s/(\s)/\\$1 /g; $dir =~ s/(\s)/\\$1/g; #- necessary to change protect white char, for urpmi >= 1.40
+	$name =~ s/(\s)/\\$1/g; $dir =~ s/(\s)/\\$1/g; #- necessary to change protect white char, for urpmi >= 1.40
 	$dir .= " with ../base/$_->{hdlist}" if $method =~ /ftp|http/;
 	"$name $dir\n";
     } values %$mediums;
