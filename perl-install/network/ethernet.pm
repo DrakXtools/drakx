@@ -15,12 +15,9 @@ use MDK::Common::Globals "network", qw($in);
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card_backend);
 
-my (@cards, @ether_steps, $last, %last);
-
-
-sub ether_conf{
-    # my ($netcnx, $netc, $intf, $first_time) = @_;
-    my ($in, $_prefix, $netc, $intf) = @_;
+# FIXME: unused code to merge in into wizard
+sub ether_conf {
+    my ($in, $netcnx, $netc, $intf) = @_;
     configureNetwork2($in, $::prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
@@ -43,7 +40,7 @@ qq(
 
 sub mapIntfToDevice {
     my ($interface) = @_;
-    my ($bus, $slot, $func) = map { hex($_) } (c::getHwIDs("eth0") =~ /([0-9a-f])+:([0-9a-f])+\.([0-9a-f]+)/);
+    my ($bus, $slot, $_func) = map { hex($_) } (c::getHwIDs("eth0") =~ /([0-9a-f])+:([0-9a-f])+\.([0-9a-f]+)/);
     grep { $_->{pci_bus} == $bus && $_->{pci_device} == $slot } detect_devices::probeall();
 }
 
