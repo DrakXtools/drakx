@@ -13,8 +13,8 @@ use log;
 #- files are optional
 sub read {
     my ($class, $xfree3_file, $xfree4_file) = @_;
-    bless { xfree3 => Xconfig::xfree3->read($xfree3_file), 
-	    xfree4 => Xconfig::xfree4->read($xfree4_file) }, $class;
+    bless { xfree3 => eval { Xconfig::xfree3->read($xfree3_file) } || [], 
+	    xfree4 => eval { Xconfig::xfree4->read($xfree4_file) } || [] }, $class;
 }
 #- files are optional
 sub write {
