@@ -1,3 +1,96 @@
+2001/02/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/probing.c: do not close un unbound socket!!
+
+	* c/stuff.xs.pm: close socket everytime in hasNetDevice
+
+	* mdk-stage1/Makefile: tag it 8.0beta instead of 8.0, to avoid future
+	potential confusions
+
+	* modules.pm: re include some network modules
+
+2001/02/12  uid535
+
+	* rescue/list: fix vi trouble
+	  - add lspci, lspcidrake, vim-minimal
+	  - better /etc/issue
+	  - better PS1
+	  - write embryonic tool (installation of detected drivers according to
+	pci cards)
+
+	* rescue/aliases, rescue/tree/etc/issue: fix vi trouble
+
+	* rescue/list.i386, rescue/make_rescue_img, rescue/drvinst: 
+	  - add lspci, lspcidrake, vim-minimal
+	  - better /etc/issue
+	  - better PS1
+	  - write embryonic tool (installation of detected drivers according to
+	pci cards)
+
+2001/02/12  uid553
+
+	* rescue/drvinst: pixelization
+
+	* docs/README: fix doc about Mandrake/base/compss
+
+	* install_steps_gtk.pm (choosePackagesTree): non first choice packages are
+	in "Other".
+
+	* install_interactive.pm, any.pm, fsedit.pm, diskdrake.pm: auto_allocate
+	partitions choice modified. diskdrake in expert asks what kind
+	of auto_allocation is wanted, others choose 'simple' in
+	%fsedit::suggestions
+
+	* install2.pm: auto_allocate partitions choice modified. diskdrake in
+	expert asks what kind
+	of auto_allocation is wanted, others choose 'simple' in
+	%fsedit::suggestions
+	(main): gc has done it again! /tmp/conf.modules is now
+	/etc/modules.conf,
+	so load both to keep compatibility.
+
+	* my_gtk.pm: cleanup (remove ask_from_list and _ask_from_list)
+
+	* interactive_gtk.pm (ask_from_entries_refW): use
+	$common->{advanced_label}
+	(create_ctree): add keyboard shortcuts
+	(create_clist): moveto only if row_is_visible
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): advanced_label
+	defaults to
+	_("Advanced")
+
+	* tools/addchangelog.pl: log more than mdk-stage1 and perl-install (added
+	docs, rescue, tools)
+
+	* install_steps_interactive.pm (configurePrinter): cleanup,
+	pkg_install_if_requires_satisfied('xpp',
+	'kups') only if a printer is configured (for the case when _("Would you
+	like to configure a printer?") is answered no)
+
+	* rescue/tree/etc/rc.sysinit: add floppy module for 2.4
+
+2001/02/10  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/draknet, standalone/XFdrake: corrected pkgs_install given
+
+	* install_any.pm: add preConfigureTimezone
+	add step summary. remove steps configureTimezone and configurePrinter
+
+	* install_interactive.pm: cleanup
+
+	* standalone/keyboarddrake, share/keymaps_generate, keyboard.pm: 
+	  - lang2keyboards handle keyboard percentages
+	  - xmodmaps now named keyboards
+
+	* install_steps_interactive.pm: add step summary. remove steps
+	configureTimezone and configurePrinter, modify selectKeyboard
+
+	* install2.pm, timezone.pm, install_steps.pm: add step summary. remove
+	steps configureTimezone and configurePrinter
+
+	* netconnect.pm: corrected back $install call
+
 2001/02/10  Pixel  <pixel@mandrakesoft.com>
 
 	* standalone/keyboarddrake, share/keymaps_generate, keyboard.pm: 
