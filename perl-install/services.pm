@@ -173,7 +173,7 @@ sub ask_install {
 			       },
 			       get_info => sub { formatLines(description($_[0], $prefix)) },
 			      }) or return ($l, $on_services); #- no change on cancel.
-    ($l, [ grep { $services{$_} } @$l ]);
+    [ grep { $services{$_} } @$l ];
 }
 
 sub ask_standalone_gtk {
@@ -247,7 +247,7 @@ sub ask_standalone_gtk {
     $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
     $::isEmbedded and kill (12, $::CCPID);
     $W->main or return;
-    ($l, $on_services);
+    $on_services;
 }
 
 sub ask {    
