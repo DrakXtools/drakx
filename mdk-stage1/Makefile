@@ -266,7 +266,7 @@ clean:
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -f *.o .depend *.rdz *.img rescue-gui $(BINS)
+	rm -f *.o .depend *.rdz *.img rescue-gui init-move $(BINS)
 
 
 tar-mkinitrd_helper: clean
