@@ -112,8 +112,8 @@ sub write {
 		    [ 'all', 'all', 'REJECT', 'info' ],
 		   );
     set_config_file('rules',
-    		    if_(cat_("$prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
-		    if_(cat_("$prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
+    		    if_(cat_("$::prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
+		    if_(cat_("$::prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
 		    (map { 
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
 		    } ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
