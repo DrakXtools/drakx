@@ -57,7 +57,7 @@ sub configure_everything {
     $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
     $ok &&= Xconfig::screen::configure($raw_X, $X->{card});
     $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}, $auto);
-    $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, $auto);
+    $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, $auto, 'skip_badcard');
 
     if (!$ok) {
 	($ok) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X, 1);
@@ -111,10 +111,12 @@ sub configure_chooser_raw {
 		      clicked => sub {
 			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}));
 		      } },
-		    { val => _("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} || !$modified || !Xconfig::card::check_bad_card($X->{card}) },
-		      clicked => sub {
-			  $ok = Xconfig::test::test($in, $raw_X, $X->{card}, 1);
+		        if_(Xconfig::card::check_bad_card($X->{card}) || $::isStandalone,
+		     { val => _("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} },
+		       clicked => sub { 
+			  $ok = Xconfig::test::test($in, $raw_X, $X->{card}, 'auto', 0);
 		      } },
+			),
 		    { val => _("Options"), icon => "ic82-tape-40", clicked => sub {
 			  Xconfig::various::various($in, $X->{card}, $options);
 		      } },

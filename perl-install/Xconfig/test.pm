@@ -20,11 +20,17 @@ sub xtest {
 }
 
 sub test {
-    my ($in, $raw_X, $card, $auto) = @_;
+    my ($in, $raw_X, $card, $auto, $skip_badcard) = @_;
 
-    Xconfig::card::check_bad_card($card) or return 1;
-    $in->ask_yesorno(_("Test of the configuration"), _("Do you want to test the configuration?"), 1) or return 1 if !$auto;
+    my $bad_card = !Xconfig::card::check_bad_card($card);
+    return 1 if $skip_badcard && $bad_card;
 
+    if ($bad_card || !$auto) {
+	my $msg = 
+	$in->ask_yesorno(_("Test of the configuration"), 
+			 _("Do you want to test the configuration?") . ($bad_card ? "\n" . _("Warning: testing this graphic card may freeze your computer") : ''),
+			 !$bad_card) or return 1;
+    }
 
     unlink "$::prefix/tmp/.X9-lock";
 
