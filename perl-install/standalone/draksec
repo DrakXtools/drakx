@@ -100,6 +100,7 @@ $w = ugtk2->new('draksec');
 my $window = $w->{window};
 
 %fields = security::l10n::fields();
+my %inv_fields = reverse %fields;
 
 ############################    I18N     ###################################
 my %inv_translations = map { translate($_) => $_ } N_("ALL"), N_("LOCAL"), N_("N_ON_E"), N_("default"), N_("default"), N_("ignore"), N_("no"), N_("yes");
@@ -169,7 +170,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            my $i = $_;
                                                                                            
                                                                                            my $entry;
-                                                                                           my $default = $msec->get_function_default($i);
+                                                                                           my $opt = $inv_fields{$i} || $i;
+                                                                                           my $default = $msec->get_function_default($opt);
                                                                                            if (member($default, @all_choices)) {
                                                                                                $values{$i} = new_nonedit_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
                                                                                                $entry = $values{$i}->entry;
@@ -177,8 +179,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $values{$i} = new Gtk2::Entry();
                                                                                                $entry = $values{$i};
                                                                                            }
-                                                                                           $entry->set_text(to_i18n($msec->get_function_value($i)));
-                                                                                           set_help_tip($entry, $default, $i);
+                                                                                           $entry->set_text(to_i18n($msec->get_function_value($opt)));
+                                                                                           set_help_tip($entry, $default, $opt);
                                                                                            [ new_wrapped_label($i), $values{$i} ];
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain))))),
                            new_wrapped_label($label));
@@ -193,11 +195,12 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                1, create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
+                                                                                       my $opt = $inv_fields{$i} || $i;
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($i));
                                                                                        my $entry = $security_checks_value{$i}->entry;
-                                                                                       set_help_tip($entry, $msec->get_check_default($i), $i);
-                                                                                       [ gtkshow(new_wrapped_label($fields{$i} || translate($i))), $security_checks_value{$i} ];
-                                                                                   } sort map { $fields{$_} } $msec->list_checks)))),
+                                                                                       set_help_tip($entry, $msec->get_check_default($opt), $i);
+                                                                                       [ gtkshow(new_wrapped_label($i)), $security_checks_value{$i} ];
+                                                                                   } sort map { $fields{$_} || $_} $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
 
@@ -237,7 +240,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
                                     log::explanations("Setting msec functions related to $domain");
                                     foreach my $key (keys %{$options_values{$domain}}) {
                                         my $opt = $options_values{$domain}{$key};
-                                        $msec->set_function($key, from_i18n($opt->get_text));
+                                        $msec->set_function($inv_fields{$key} || $key, from_i18n($opt->get_text));
                                     }
                                 }
                                 $msec->apply_functions;
