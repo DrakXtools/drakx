@@ -323,10 +323,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - diskdrake:
   o more lvm2 support (pixel / Luca Berra)
   o update partition reread on kernel side and rebooting if needed (pixel)
-- drakboot (boot loader config) :
-  o do not complain on canceling
-  o handle graphical boot with grub too
-  o fix layout when embedded
+- drakboot:
+  o boot loader config: do not complain on canceling
+  o graphical boot theme config:
+    * handle grub too (bootsplash being independant of boot loader)
+    * fix layout when embedded
 - drakconnect: update manage interfaces (poulpy)
 - drakTermServ: first time wizard (stew)
 
