@@ -883,7 +883,6 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    my ($name, $tag) = @_;
 	    my @list;
 	    print OUTPUT "$name:$tag\n";
-	    log::l("ask_child: ask parsehdlist for $name:$tag");
 
 	    local $_;
 	    while (<INPUT>) {
@@ -892,7 +891,6 @@ sub selectPackagesToUpgrade($$$;$$) {
 		push @list, $_;
 	    }
 
-	    log::l("ask_child: ask parsehdlist returned $name:$tag -> " . scalar(@list) . " items");
 	    @list;
 	};
 
@@ -968,10 +966,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 				     });
 
-#		my $list = 
-#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files");
-#		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 
 		#- keep in mind the cumul size of installed package since they will be deleted
 		#- on upgrade.
@@ -985,10 +980,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    my $p = $_;
 
 	    if (packageFlagSelected($p)) {
-#		my $list = $ask_child->(packageName($p));
-#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files");
-#		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 	    }
 	}
 
@@ -1003,11 +995,9 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	    unless (packageFlagSelected($p)) {
 		my $toSelect = 0;
-#		my $list = $ask_child->(packageName($p));
-#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { if (exists $installedFilesForUpgrade{$_}) {
 		    ++$toSelect if ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
-		  } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files"); #map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+		  } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files");
 		if ($toSelect) {
 		    if ($toSelect <= 1 && packageName($p) =~ /-devel/) {
 			log::l("avoid selecting " . packageName($p) . " as not enough files will be updated");
@@ -1034,9 +1024,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	foreach (values %{$packages->[0]}) {
 	    my $p = $_;
 
-#	    my $list = $ask_child->(packageName($p));
-#	    my @obsoletes = map { /^\*(\S*)/ ? ($1) : () } @$list;
-#	    foreach (@obsoletes) {
+	    #- TODO take into account version number and flags (that's why regexp :-)
 	    foreach (map { /^(\S*)/ ? ($1) : () } $ask_child->(packageName($p), "obsoletes")) {
 		if (c::rpmdbNameTraverse($db, $_) > 0) {
 		    log::l("selecting " . packageName($p) . " by selection on obsoletes");
@@ -1056,42 +1044,6 @@ sub selectPackagesToUpgrade($$$;$$) {
 	open STDOUT, ">&OUTPUT_CHILD";
 	exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->[2]};
 	c::_exit(1);
-
-	#- THE FOLLOWING IS OBSOLETE AND WILL BE REMOVED SOON, OR KEPT FOR INFO
-	local $_;
-
-	#- child process will hashes filelist and answer its parent
-	#- for each specific informations.
-	close INPUT;
-	close OUTPUT;
-	select((select(OUTPUT_CHILD),  $| = 1)[0]);
-
-	#- get filelist of package to avoid getting all header into memory.
-	my %filelist;
-	my $current;
-	my $f = install_any::getFile('Mandrake/base/filelist') or log::l("unable to get filelist of packages");
-	while (<$f>) {
-	    if (/^#(\S*)/) {
-		$current = $filelist{$1} = [];
-	    } else {
-		push @$current, $_;
-	    }
-	}
-
-	#- now respond to its parent wanting some data from filelist ...
-	while (<INPUT_CHILD>) {
-	    chomp;
-	    foreach (@{$filelist{$_}}) {
-		print OUTPUT_CHILD $_;
-	    }
-	    print OUTPUT_CHILD "\n";
-	}
-
-	#- the parent has broken the pipe associated with INPUT_CHILD,
-	#- exit now and free all that memory...
-	close OUTPUT_CHILD;
-	close INPUT_CHILD;
-	c::_exit(0);
     }
 
     #- keep a track of packages that are been selected for being upgraded,
