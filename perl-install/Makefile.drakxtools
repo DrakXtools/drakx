@@ -60,13 +60,13 @@ install:
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
-	ln -s $(SBINDEST)/{XFdrake,drakx11}
-	ln -s $(SBINDEST)/{diskdrake,drakdisk}
-	ln -s $(SBINDEST)/{drakclock,clock.pl}
-	ln -s $(SBINDEST)/{harddrake2,drakhardware}
-	ln -s $(SBINDEST)/{keyboarddrake,drakkeyboard}
-	ln -s $(SBINDEST)/{localedrake,draklocale}
-	ln -s $(SBINDEST)/{logdrake,draklog}
-	ln -s $(SBINDEST)/{mousedrake,drakmouse}
-	ln -s $(SBINDEST)/{net_monitor,draknet_monitor}
-	ln -s $(SBINDEST)/{printerdrake,drakprinter}
+	ln -s {XFdrake,$(SBINDEST)/drakx11}
+	ln -s {diskdrake,$(SBINDEST)/drakdisk}
+	ln -s {drakclock,$(SBINDEST)/clock.pl}
+	ln -s {harddrake2,$(SBINDEST)/drakhardware}
+	ln -s {keyboarddrake,$(SBINDEST)/drakkeyboard}
+	ln -s {localedrake,$(SBINDEST)/draklocale}
+	ln -s {logdrake,$(SBINDEST)/draklog}
+	ln -s {mousedrake,$(SBINDEST)/drakmouse}
+	ln -s {net_monitor,$(SBINDEST)/draknet_monitor}
+	ln -s {printerdrake,$(SBINDEST)/drakprinter}
