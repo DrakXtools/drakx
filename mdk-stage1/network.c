@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <netdb.h>
 #include <resolv.h>
+#include <sys/utsname.h>
 
 #include "stage1.h"
 #include "frontend.h"
