@@ -72,9 +72,9 @@ sub read_squid_conf {
       admin_mail => [ if_(cat_($file) =~ /^\s*err_html_text\s+(.*)/mg, split(' ', $1)) ] };
 }
 
-sub read_tmdns_conf {
-    my ($file) = @_;
-    if_(cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m, { ZEROCONF_HOSTNAME => $1 });
+sub read_tmdns_conf() {
+    my ($file) = "$::prefix/etc/tmdns.conf";
+    cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
 }
 
 sub write_conf {
@@ -334,7 +334,7 @@ sub read_all_conf {
     my $netcnx = $o_netcnx || {};
     add2hash($netc, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf());
-    add2hash($netc, read_tmdns_conf("$::prefix/etc/tmdns.conf")) if -r "$::prefix/etc/tmdns.conf";
+    add2hash($netc, read_tmdns_conf());
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
 	if (/^ifcfg-([A-Za-z0-9.:]+)$/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
