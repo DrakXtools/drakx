@@ -13,13 +13,12 @@ use c;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakxconf\n";
+/-version/ and die "version: $Id$\n";
 
 my $in = 'interactive'->vnew('su', 'default');
 my @l=(
        { des => 'Display Configuration',
 	 cmd => 'XFdrake'},
-       { des => 'Hard Drive Configuration',
-	 cmd => 'diskdrake'},
        { des => 'KeyBoard Configuration',
 	 cmd => 'keyboarddrake'},
        { des => 'Mouse Configuration',
