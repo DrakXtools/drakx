@@ -153,9 +153,9 @@ sub select_packages {
     if (exists $options{server}) {
 	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
 		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
-		    NETWORKING_FILE_TRANSFER_SERVER NETWORKING_FIREWALLING_SERVER
+		    NETWORKING_FILE_TRANSFER_SERVER NETWORKING_FIREWALLING_SERVER NETWORKING_LDAP_SERVER
 		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
-		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS
+		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS NETWORKING_DNS_SERVER
 		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
 		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X)) {
 	    $o->{compssUsersChoice}{$_} = 1;
@@ -185,7 +185,7 @@ sub select_packages {
     foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
 		Mesa Mesa-demos alsa alsa-utils Mesa-demos
                 glibc vim-minimal kernel
-               ), exists $options{server} ? qw(kernel22) : ()) {
+	       ), exists $options{server} ? qw(kernel22 openldap-migration openldap-clients pam_ldap) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
     }

@@ -514,7 +514,7 @@ $ENV{DURING_INSTALL} = 1;
 $ENV{RPM_INSTALL_LANG} = "$flang:$lang";
 $ENV{LD_LIBRARY_PATH} = "/usr/X11R6/lib";
 $ENV{SECURE_LEVEL} = 2;
-foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /proc)) {
+foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /var/log /proc)) {
     mkdir "/mnt/$_";
 }
 system "mount", "-t", "proc", "proc", "/mnt/proc";
@@ -535,10 +535,11 @@ close F;
 open F, ">/mnt/etc/rpm/macros";
 print F "%_install_langs $flang:$lang\n";
 close F;
-system "rpm", "--root", "/mnt", "--initdb";
 
-#- hack for rpm bug, copy environment of rpm before an throw install from that.
-#system "tar cvf - /lib/l* /usr/lib/librpm* /bin/rpm /usr/bin/rpm* /usr/lib/rpm/* | tar xvf - -C /mnt";
+#- hack for package psacct which has problem with its log file not touched.
+${pkgs::packageByName($packages, 'psacct') || {}}->{selected} and system "touch", "/mnt/var/log/psacct.log";
+
+system "rpm", "--root", "/mnt", "--initdb";
 
 #- copy and install from each cd image.
 foreach my $medium (@media) {
@@ -568,9 +569,6 @@ foreach my $medium (@media) {
 	    my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
 	    if (-e $file) {
 		system "rpm", "-ivh", "--root", "/mnt", "--nodeps", "--force", "--noscripts", $file;
-		#system "cp", $file, "/mnt";
-		#system "chroot", "/mnt", "rpm", "--nodeps", "--force", "--noscripts", "-ivh", rpm_filename($pkg);
-		#system "rm", ("/mnt" . rpm_filename($pkg));
 	    }
 	}
     } else {
@@ -667,9 +665,9 @@ sub select_packages {
     if (exists $options{server}) {
 	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
 		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
-		    NETWORKING_FILE_TRANSFER_SERVER NETWORKING_FIREWALLING_SERVER
+		    NETWORKING_FILE_TRANSFER_SERVER NETWORKING_FIREWALLING_SERVER NETWORKING_LDAP_SERVER
 		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
-		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS
+		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS NETWORKING_DNS_SERVER
 		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
 		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X)) {
 	    $o->{compssUsersChoice}{$_} = 1;
@@ -699,7 +697,7 @@ sub select_packages {
     foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools icewm-light
 		Mesa Mesa-demos alsa alsa-utils Mesa-demos
                 glibc vim-minimal kernel
-	       ), exists $options{server} ? qw(kernel22) : ()) {
+	       ), exists $options{server} ? qw(kernel22 openldap-migration openldap-clients pam_ldap) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
     }
