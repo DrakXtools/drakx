@@ -73,7 +73,7 @@ if ($ts == 256) {
 		system("urpmi terminal-server > /dev/null");
 	}
 	$ts = system("rpm -q terminal-server > /dev/null");
-	if ($ts == 256) {
+	if ($ts == 256 && !$::testing) {
 		warn(N("Useless without Terminal Server"));
 		exit(1);
 	}
