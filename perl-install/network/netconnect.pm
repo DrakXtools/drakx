@@ -556,8 +556,8 @@ Take a look at http://www.linmodems.org"),
                             $driver =~ /^Hcf:/ and $type = "hcfmodem";
                             $driver =~ /^Hsf:/ and $type = "hsfmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
-                            #- we need a better agreement to use list_modules::category2modules('network/slmodem')
-                            member($driver, qw(slamr slusb)) and $type = "slmodem";
+                            #- we may need a better agreement to use list_modules::category2modules('network/slmodem')
+                            member($driver, list_modules::category2modules('network/slmodem')) and $type = "slmodem";
                             if ($type && (my $packages = $in->do_pkgs->check_kernel_module_packages("$type-kernel", if_(! -f $pkgs2path{$type}, $type)))) {
                                 if ($in->do_pkgs->install(@$packages)) {
                                     # start slmodemd when installing it (thus preventing the average user to have to restart
