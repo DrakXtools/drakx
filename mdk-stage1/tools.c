@@ -243,7 +243,7 @@ static void save_stuff_for_rescue(void)
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 {
 	BZFILE * st2;
-	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
+	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd, and that root=/dev/ram3 is actually passed to the kernel at boot time */
 	int ram_fd;
 	char buffer[4096];
 	int z_errnum;

@@ -399,17 +399,8 @@ int main(int argc, char **argv, char **env)
 	if (interactive_pid != 0)
 		kill(interactive_pid, 9);
 
-	if (IS_RESCUE) {
-		int fd = open("/proc/sys/kernel/real-root-dev", O_RDWR);
-#if defined(__powerpc__) || defined (__sparc__)
-		write(fd, "0x1030000", sizeof("0x1030000")); /* ram3 or sparc */
-#else
-		write(fd, "0x103", sizeof("0x103")); /* ram3 */
-#endif
-		close(fd);
+	if (IS_RESCUE)
 		return 66;
-	}
-
 	if (IS_TESTING)
 		return 0;
 
