@@ -1,1097 +1,521 @@
-package help; # $Id$
-
+package help;
 use common;
-
 %steps = (
 empty => '',
 
-selectLanguage =>
- __("Please choose your preferred language for installation and system usage."),
-
-license =>
- __("You need to accept the terms of the above license to continue installation.
-
-
-Please click on \"Accept\" if you agree with its terms.
-
-
-Please click on \"Refuse\" if you disagree with its terms. Installation will end without modifying your current
-configuration."),
-
-selectKeyboard =>
- __("Choose the layout corresponding to your keyboard from the list above"),
-
-selectLangs => 
- __("If you wish other languages (than the one you choose at
-beginning of installation) will be available after installation, please chose
-them in list above. If you want select all, you just need to select \"All\"."),
-
-selectInstallClass =>
- __("Please choose \"Install\" if there are no previous version of Mandrake Linux
-installed or if you wish to use several operating systems.
-
-
-Please choose \"Update\" if you wish to update an already installed version of Mandrake Linux.
-
-
-Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or update your
-Mandrake Linux operating system:
-
-	* Recommended: if you have never installed a GNU/Linux operating system choose this. Installation will be
-	  be very easy and you will be asked only on few questions.
-
-
-	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usage (workstation, server,
-	  development) of your system. You will need to answer to more questions than in \"Recommended\" installation
-	  class, so you need to know how GNU/Linux works to choose this installation class.
-
-
-	* Expert: if you have a good knowledge in GNU/Linux, you can choose this installation class. As in \"Customized\"
-	  installation class, you will be able to choose the primary usage (workstation, server, development). Be very
-	  careful before choose this installation class. You will be able to perform a higly customized installation.
-	  Answer to some questions can be very difficult if you haven't a good knowledge in GNU/Linux. So, don't choose
-	  this installation class unless you know what you are doing."),
-
-selectInstallClassCorpo =>
- __("Select:
-
-  - Customized: If you are familiar enough with GNU/Linux, you may then choose
-    the primary usage for your machine. See below for details.
-
-
-  - Expert: This supposes that you are fluent with GNU/Linux and want to
-    perform a highly customized installation. As for a \"Customized\"
-    installation class, you will be able to select the usage for your system.
-    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!"),
-
-selectInstallClass2 =>
- __("You must now define your machine usage. Choices are:
-
-	* Workstation: this the ideal choice if you intend to use your machine primarily for everyday use, at office or
-	  at home.
-
-
-	* Development: if you intend to use your machine primarily for software development, it is the good choice. You
-	  will then have a complete collection of software installed in order to compile, debug and format source code,
-	  or create software packages.
-
-
-	* Server: if you intend to use this machine as a server, it is the good choice. Either a file server (NFS or
-	  SMB), a print server (Unix style or Microsoft Windows style), an authentication server (NIS), a database
-	  server and so on. As such, do not expect any gimmicks (KDE, GNOME, etc.) to be installed."),
-
-setupSCSI => 
- __("DrakX will attempt to look for PCI SCSI adapter(s). If DrakX
-finds an SCSI adapter and knows which driver to use, it will be automatically
-installed.
-
-
-If you have no SCSI adapter, an ISA SCSI adapter or a PCI SCSI adapter that
-DrakX doesn't recognize, you will be asked if a SCSI adapter is present in your
-system. If there is no adapter present, you can click on \"No\". If you click on
-\"Yes\", a list of drivers will be presented from which you can select your
-specific adapter.
-
-
-If you have to manually specify your adapter, DrakX will ask if you want to
-specify options for it. You should allow DrakX to probe the hardware for the
-options. This usually works well.
-
-
-If not, you will need to provide options to the driver. Please review the User
-Guide (chapter 3, section \"Collective informations on your hardware\") for hints
-on retrieving this information from hardware documentation, from the
-manufacturer's Web site (if you have Internet access) or from Microsoft Windows
-(if you have it on your system)."),
-
-doPartitionDisks => 
- __("At this point, you need to choose where to install your
-Mandrake Linux operating system on your hard drive. If it is empty or if an
-existing operating system uses all the space available on it, you need to
-partition it. Basically, partitioning a hard drive consists of logically
-dividing it to create space to install your new Mandrake Linux system.
-
-
-Because the effects of the partitioning process are usually irreversible,
-partitioning can be intimidating and stressful if you are an inexperienced user.
-This wizard simplifies this process. Before beginning, please consult the manual
-and take your time.
-
-
-You need at least two partitions. One is for the operating system itself and the
-other is for the virtual memory (also called Swap).
-
-
-If partitions have been already defined (from a previous installation or from
-another partitioning tool), you just need choose those to use to install your
-Linux system.
-
-
-If partitions haven't been already defined, you need to create them. 
-To do that, use the wizard available above. Depending of your hard drive
-configuration, several solutions can be available:
-
-	* Use existing partition: the wizard has detected one or more existing Linux partitions on your hard drive. If
-	  you want to keep them, choose this option. 
-
-
-	* Erase entire disk: if you want delete all data and all partitions present on your hard drive and replace them by
-	  your new Mandrake Linux system, you can choose this option. Be careful with this solution, you will not be
-	  able to revert your choice after confirmation.
-
-
-	* Use the free space on the Windows partition: if Microsoft Windows is installed on your hard drive and takes
-	  all space available on it, you have to create free space for Linux data. To do that you can delete your
-	  Microsoft Windows partition and data (see \"Erase entire disk\" or \"Expert mode\" solutions) or resize your
-	  Microsoft Windows partition. Resizing can be performed without loss of any data. This solution is
-	  recommended if you want use both Mandrake Linux and Microsoft Windows on same computer.
-
-
-	  Before choosing this solution, please understand that the size of your Microsoft
-	  Windows partition will be smaller than at present time. It means that you will have less free space under
-	  Microsoft Windows to store your data or install new software.
-
-
-	* Expert mode: if you want to partition manually your hard drive, you can choose this option. Be careful before
-	  choosing this solution. It is powerful but it is very dangerous. You can lose all your data very easily. So,
-	  don't choose this solution unless you know what you are doing."),
-
-partition_with_diskdrake => 
- __("At this point, you need to choose what
-partition(s) to use to install your new Mandrake Linux system. If partitions
-have been already defined (from a previous installation of GNU/Linux or from
-another partitioning tool), you can use existing partitions. In other cases,
-hard drive partitions must be defined.
-
-
-To create partitions, you must first select a hard drive. You can select the
-disk for partitioning by clicking on \"hda\" for the first IDE drive, \"hdb\" for
-the second or \"sda\" for the first SCSI drive and so on.
-
-
-To partition the selected hard drive, you can use these options:
-
-   * Clear all: this option deletes all partitions available on the selected hard drive.
-
-
-   * Auto allocate: this option allows you to automatically create Ext2 and swap partitions in free space of your
-     hard drive.
-
-
-   * Rescue partition table: if your partition table is damaged, you can try to recover it using this option. Please
-     be careful and remember that it can fail.
-
-
-   * Undo: you can use this option to cancel your changes.
-
-
-   * Reload: you can use this option if you wish to undo all changes and load your initial partitions table
-
-
-   * Wizard: If you wish to use a wizard to partition your hard drive, you can use this option. It is recommended if
-     you do not have a good knowledge in partitioning.
-
-
-   * Restore from floppy: if you have saved your partition table on a floppy during a previous installation, you can
-     recover it using this option.
-
-
-   * Save on floppy: if you wish to save your partition table on a floppy to be able to recover it, you can use this
-     option. It is strongly recommended to use this option
-
-
-   * Done: when you have finished partitioning your hard drive, use this option to save your changes.
-
-
-For information, you can reach any option using the keyboard: navigate trough the partitions using Tab and Up/Down arrows.
-
-
-When a partition is selected, you can use:
-
-           * Ctrl-c to create a new partition (when a empty partition is selected)
-
-           * Ctrl-d to delete a partition
-
-           * Ctrl-m to set the mount point
-           
-
-           
-If you are installing on a PPC Machine, you will want to create a small HFS 'bootstrap' partition of at least 1MB for use
-by the yaboot bootloader. If you opt to make the partition a bit larger, say 50MB, you may find it a useful place to store 
-a spare kernel and ramdisk image for emergency boot situations."),
-
-ask_mntpoint_s => 
- __("Above are listed the existing Linux partitions detected on
-your hard drive. You can keep choices make by the wizard, they are good for a
-common usage. If you change these choices, you must at least define a root
-partition (\"/\"). Don't choose a too little partition or you will not be able
-to install enough software. If you want store your data on a separate partition,
-you need also to choose a \"/home\" (only possible if you have more than one
-Linux partition available).
-
-
-For information, each partition is listed as follows: \"Name\", \"Capacity\".
-
-
-\"Name\" is coded as follow: \"hard drive type\", \"hard drive number\",
-\"partition number\" (for example, \"hda1\").
-
-
-\"Hard drive type\" is \"hd\" if your hard drive is an IDE hard drive and \"sd\"
-if it is an SCSI hard drive.
-
-
-\"Hard drive number\" is always a letter after \"hd\" or \"sd\". With IDE hard drives:
-
-   * \"a\" means \"master hard drive on the primary IDE controller\",
-
-   * \"b\" means \"slave hard drive on the primary IDE controller\",
-
-   * \"c\" means \"master hard drive on the secondary IDE controller\",
-
-   * \"d\" means \"slave hard drive on the secondary IDE controller\".
-
-
-With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc..."),
-
-takeOverHdChoose => 
- __("Choose the hard drive you want to erase to install your
-new Mandrake Linux partition. Be careful, all data present on it will be lost
-and will not be recoverable."),
-
-takeOverHdConfirm => 
- __("Click on \"OK\" if you want to delete all data and
-partitions present on this hard drive. Be careful, after clicking on \"OK\", you
-will not be able to recover any data and partitions present on this hard drive,
-including any Windows data.
-
-
-Click on \"Cancel\" to cancel this operation without losing any data and
-partitions present on this hard drive."),
-
-resizeFATChoose => 
- __("More than one Microsoft Windows partition have been
-detected on your hard drive. Please choose the one you want resize to install
-your new Mandrake Linux operating system.
-
-
-For information, each partition is listed as follow; \"Linux name\", \"Windows
-name\" \"Capacity\".
-
-\"Linux name\" is coded as follow: \"hard drive type\", \"hard drive number\",
-\"partition number\" (for example, \"hda1\").
-
-
-\"Hard drive type\" is \"hd\" if your hard dive is an IDE hard drive and \"sd\"
-if it is an SCSI hard drive.
-
-
-\"Hard drive number\" is always a letter putted after \"hd\" or \"sd\". With IDE hard drives:
-
-   * \"a\" means \"master hard drive on the primary IDE controller\",
-
-   * \"b\" means \"slave hard drive on the primary IDE controller\",
-
-   * \"c\" means \"master hard drive on the secondary IDE controller\",
-
-   * \"d\" means \"slave hard drive on the secondary IDE controller\".
-
-With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc.
-
-
-\"Windows name\" is the letter of your hard drive under Windows (the first disk
-or partition is called \"C:\")."),
-
-resizeFATWait => 
- __("Please be patient. This operation can take several minutes."),
-
-formatPartitions => 
- __("Any partitions that have been newly defined must be
-formatted for use (formatting meaning creating a filesystem).
-
-
-At this time, you may wish to reformat some already existing partitions to erase
-the data they contain. If you wish do that, please also select the partitions
-you want to format.
-
-
-Please note that it is not necessary to reformat all pre-existing partitions.
-You must reformat the partitions containing the operating system (such as \"/\",
-\"/usr\" or \"/var\") but do you no have to reformat partitions containing data
-that you wish to keep (typically /home).
-
-
-Please be careful selecting partitions, after formatting, all data will be
-deleted and you will not be able to recover any of them.
-
-
-Click on \"OK\" when you are ready to format partitions.
-
-
-Click on \"Cancel\" if you want to choose other partitions to install your new
-Mandrake Linux operating system."),
+acceptLicense => 
+__("Before going further, you should read carefully the terms of the license. It
+covers the whole Mandrake Linux distribution, and if you do not agree with all
+the terms in it, click on the Refuse button. That'll immediately terminate the
+installation. To follow on with the installation, click the Accept button."),
+
+addUser => 
+__("GNU/Linux is a multiuser system, and this means that each user can have his own
+preferences, his own files and so on. You can read the User Guide to learn more.
+But unlike Root, which is the administrator, the users which you will add here
+will not be entitled to change anything except their own files and their own
+configuration. You will have to create at least one regular user for yourself.
+That account is where you should log in for routine use. Although it is very
+practical to log in as Root everyday, it may also be very dangerous! The
+slightest mistake could mean that your system would not work any more. If you
+make a serious mistake as a regular user, you may only lose some information,
+but not the entire system.
+
+First you have to enter your real name. This is not mandatory, of course as you
+can actually enter whatever you want. drakX will then take the first word you
+have entered in the box and will bring it over to the User name. This is the
+name that this particular user will use to log into the system. You can change
+it. You then have to enter a password here. A non-privileged (regular) user's
+password is not as crucial as that of Root from a security point of view, but
+that is no reason to neglect it after all, they are your files at risk.
+
+If you click on Accept user, you can then add as many as you want. Add a user
+for each of your friends: your father or your sister, for example. When you have
+added all the users you want, select Done.
+
+Clicking the Advanced button allows you to change the default Shell for that
+user (bash by default)."),
 
 choosePackages => 
- __("You may now select the group of packages you wish to
-install or upgrade.
+__("It is now time to specify which programs you wish to install on your system.
+There are thousands of packages available for Mandrake Linux, and you are not
+supposed to know them all by heart.
 
+If you are performing a standard installation from CDROM you will first be asked
+to specify the CDs you currently have. Check the boxes corresponding to the CDs
+you've got around and click OK.
 
-DrakX will then check whether you have enough room to install them all. If not,
-it will warn you about it. If you want to go on anyway, it will proceed onto the
-installation of all selected groups but will drop some packages of lesser
-interest. At the bottom of the list you can select the option 
-\"Individual package selection\"; in this case you will have to browse through
-more than 1000 packages..."),
+Packages are sorted in groups corresponding to a particular use of your machine.
+The groups themselves are sorted in four sections:
 
-choosePackagesTree => 
- __("You can now choose individually all the packages you
-wish to install.
+ * Workstation: If your machine will be used as a workstation, select one or more
+of the corresponding groups.
 
+ * Graphical Environment: Select here your preferred graphical environment.
+Select one at least if you want to have a graphical workstation!
 
-You can expand or collapse the tree by clicking on options in the left corner of
-the packages window.
+ * Development: if the machine will be used for programming choose the desired
+group(s).
 
+ * Server: Finally, if the machine is intended to be a server, you are able here
+to select the most common services that you wish to see installed on the
+machine.
 
-If you prefer to see packages sorted in alphabetic order, click on the icon
-\"Toggle flat and group sorted\".
+Moving the mouse cursor over a group name will display a short explanatory text
+about this group.
 
+Clicking the Advanced button, will allow you to select the Individual package
+selection option. This is useful if you know well the packages offered or if you
+want to have total control on what will be installed.
 
-If you want not to be warned on dependencies, click on \"Automatic
-dependencies\". If you do this, note that unselecting one package may silently
-unselect several other packages which depend on it."),
+If you have started the installation in ``Update'' mode, you can unselect all
+groups to avoid installing any new package and just repair or update the
+existing system.
 
-chooseCD => 
- __("If you have all the CDs in the list above, click Ok. If you have
-none of those CDs, click Cancel. If only some CDs are missing, unselect them,
-then click Ok."),
+Finally, depending whether you choose to select individual packages or not, you
+will be presented a tree containing all packages classified by groups and
+subgroups. While browsing the tree, you can select entire groups, subgroups, or
+simply packages.
 
-installPackages => 
- __("Your new Mandrake Linux operating system is currently being
-installed. This operation should take a few minutes (it depends on size you
-choose to install and the speed of your computer).
+Whenever you select a package on the tree, a description appears on the right.
+When you have finished with your selections, click the Install button. The
+installation itself then begins. If you have chosen to install a lot of
+packages, you can go and have a cup of coffee.
 
+!! If it happens that a server package has been selected either intentionnally
+or because it was part of a whole group; you will be asked to confirm that you
+really want those servers to be installed. Under Mandrake Linux, installed
+servers are started by default at boot time. Even if they are safe at the time
+the distribution was shipped, it may happen that security holes be discovered
+afterwards. In particular if you don't know what all that is about, simply click
+No here. Clickin Yes will install the listed services and they will be available
+by default. !!
 
-Please be patient."),
-
-selectMouse => 
- __( "You can now test your mouse. Use buttons and wheel to verify
-if settings are good. If not, you can click on \"Cancel\" to choose another
-driver.
-
-
-If you are installing on an Apple machine with a 1-button mouse, you will
-be given the opportunity to define some keyboard keys to emulate the 2nd
-and 3rd mouse buttons.  This will allow you to be able to access the full
-functionality of the mouse in both the Linux console and the X Window GUI.
-
-
-If you have an ADB mouse, please select USB, as the Linux kernel will take
-care of mapping your mouse hardware correctly."),
-
-selectSerialPort => 
- __("Please select the correct port. For example, the COM1
-port under MS Windows is named ttyS0 under GNU/Linux."),
+The Automatic dependencies option simply disable the warning dialog which
+appears whenever the installer automatically selects a package because it is a
+dependency of another package you just selected."),
 
 configureNetwork => 
- __("If you wish to connect your computer to the Internet or
-to a local network please choose the correct option. Please turn on your device
-before choosing the correct option to let DrakX detect it automatically.
+__("If you wish to connect your computer to the Internet or to a local network
+please choose the correct option. Please turn on your device before choosing the
+correct option to let DrakX detect it automaticall.
 
+Mandrake Linux offers you to configure your Internet connection at install time.
+Available connections are: traditional modem, ISDN modem, ADSL connection, cable
+modem, and finally a simple LAN connection (Ethernet).
+
+We won't enter here into the details of each configuration. Simply make sure
+that you have all the parameters from your Internet Service Provider or system
+administrator.
+
+You can consult the chapter of the manual about Internet connection for details
+about the configuration, or simply wait until your system is installed and use
+the program described there to configure your connection.
 
 If you do not have any connection to the Internet or a local network, choose
 \"Disable networking\".
 
-
 If you wish to configure the network later after installation or if you have
 finished to configure your network connection, choose \"Done\"."),
 
-configureNetworkNoModemFound => 
- __("No modem has been detected. Please select the serial port on which it is plugged.
+configureServices => 
+__("You may now choose which services you want to start at boot time.
 
+Here are presented all the services available with the current installation.
+Review them carefully and uncheck those that are not always needed at boot time.
 
-For information, the first serial port (called \"COM1\" under Microsoft
-Windows) is called \"ttyS0\" under Linux."),
-
-configureNetworkDNS => 
- __("You may now enter dialup options. If you don't know
-or are not sure what to enter, the correct informations can be obtained from
-your Internet Service Provider. If you do not enter the DNS (name server)
-information here, this information will be obtained from your Internet Service
-Provider at connection time."),
-
-configureNetworkISDN => 
- __("If your modem is an external modem, please turn on it now to let DrakX detect it automatically."),
-
-configureNetworkADSL => 
- __("Please turn on your modem and choose the correct one."),
-
-configureNetworkADSL2 => 
- __("If you are not sure if informations above are
-correct or if you don't know or are not sure what to enter, the correct
-informations can be obtained from your Internet Service Provider. If you do not
-enter the DNS (name server) information here, this information will be obtained
-from your Internet Service Provider at connection time."),
-
-configureNetworkCable => 
- __("You may now enter your host name if needed. If you
-don't know or are not sure what to enter, the correct informations can be
-obtained from your Internet Service Provider."),
-
-configureNetworkIP => 
- __("You may now configure your network device.
-
-   * IP address: if you don't know or are not sure what to enter, ask your network administrator.
-     You should not enter an IP address if you select the option \"Automatic IP\" below.
-
-   * Netmask: \"255.255.255.0\" is generally a good choice. If you don't know or are not sure what to enter,
-     ask your network administrator.
-
-   * Automatic IP: if your network uses BOOTP or DHCP protocol, select this option. If selected, no value is needed in
-    \"IP address\". If you don't know or are not sure if you need to select this option, ask your network administrator."),
-
-configureNetworkHost => 
- __("You may now enter your host name if needed. If you
-don't know or are not sure what to enter, ask your network administrator."),
-
-configureNetworkHostDHCP => 
- __("You may now enter your host name if needed. If you
-don't know or are not sure what to enter, leave blank."),
-
-configureNetworkISP =>
- __("You may now enter dialup options. If you're not sure what to enter, the
-correct information can be obtained from your ISP."),
-
-configureNetworkProxy =>
- __("If you will use proxies, please configure them now. If you don't know if
-you should use proxies, ask your network administrator or your ISP."),
-
-installCrypto =>
- __("You can install cryptographic package if your internet connection has been
-set up correctly. First choose a mirror where you wish to download packages and
-after that select the packages to install.
-
-
-Note you have to select mirror and cryptographic packages according
-to your legislation."),
-
-configureTimezone =>
- __("You can now select your timezone according to where you live."),
-
-configureTimezoneGMT => 
- __("GNU/Linux manages time in GMT (Greenwich Manage
-Time) and translates it in local time according to the time zone you have
-selected.
-
-
-If you use Microsoft Windows on this computer, choose \"No\"."),
-
-configureServices =>
- __("You may now choose which services you want to start at boot time.
-
-
-When your mouse comes over an item, a small balloon help will popup which
-describes the role of the service.
-
+You can get a short explanatory text on a service by placing the mouse cursor on
+the service name. If you are not sure whether a service is useful or not, it is
+safer to leave the default behavior though.
 
 Be very careful in this step if you intend to use your machine as a server: you
 will probably want not to start any services that you don't need. Please
 remember that several services can be dangerous if they are enable on a server.
 In general, select only the services that you really need."),
 
-configurePrinter => 
- __("You can configure a local printer (connected to your computer) or remote
-printer (accessible via a Unix, Netware or Microsoft Windows network)."),
+configureX => 
+__("X (for X Window System) is the heart of the GNU/Linux graphical interface on
+which all the graphics environments (KDE, Gnome, AfterStep, WindowMaker...)
+bundled with Mandrake Linux rely. In this section, drakX will try to configure X
+automatically.
 
-configurePrinterSystem => 
- __("If you wish to be able to print, please choose one printing system between
-CUPS and LPR.
+It is extremely rare for it to fail. The only reason for it doing so is if the
+hardware is very old (or very new). If it succeeds, it will start X
+automatically with the best resolution possible depending on the size of the
+monitor. A window will then appear and ask you if you can see it.
 
+If you are doing an Expert install, you will enter the X configuration wizard.
+See the corresponding section of the manual for more information about this
+wizard.
 
-CUPS is a new, powerful and flexible printing system for Unix systems (CUPS
-means \"Common Unix Printing System\"). It is the default printing system in
+If you can see the message and answer Yes, then drakX will proceed to next step.
+If you cannot see the message, it simply means that the configuration was wrong
+and the test will automatically end after 10 seconds, restoring the screen.
+
+It can happen that the first try isn't the best display (screen is too small,
+shifted left or right...). This is why, even if X starts up correctly, drakX
+will then ask you if the configuration suits you and will propose to change it
+by displaying a list of valid modes it could find, asking you to select one.
+
+As a last resort, if you still cannot get X to work, choose Change graphics
+card, select Unlisted card, and when prompted on which server you want, choose
+FBDev. This is a failsafe option which works with any modern graphics card. Then
+choose Test again to be sure.
+
+Finally, you will be asked on whether you want to see the graphical interface at
+boot. Note that you will be asked this even if you chose not to test the
+configuration. Obviously, you want to answer No if your machine will act as a
+server or if you were not successful in getting the display configured."),
+
+createBootdisk => 
+__("The Mandrake Linux CDROM has a built-in rescue mode. You can access it by
+booting from the CDROM, press the >>F1<< key at boot and type >>rescue<< at the
+prompt. But in case your computer cannot boot from the CDROM, you should come
+back to this step for help in at least two situations:
+
+ * when installing the boot loader, drakX will rewrite the boot sector (MBR) of
+your main disk (unless you are using another boot manager) so that you can start
+up with either Windows or GNU/Linux (assuming you have Windows in your system).
+If you need to reinstall Windows, the Microsoft install process will rewrite the
+boot sector, and then you will not be able to start GNU/Linux!
+
+ * if a problem arises and you cannot start up GNU/Linux from the hard disk, this
+floppy disk will be the only means of starting up GNU/Linux. It contains a fair
+number of system tools for restoring a system which has crashed due to a power
+failure, an unfortunate typing error, a typo in a password, or any other reason.
+
+When you click on this step, you will be asked to enter a disk inside the drive.
+The floppy disk that you will insert must be empty or must only contain data
+which you do not need. You will not have to format it; drakX will rewrite the
+whole disk."),
+
+doPartitionDisks => 
+__("At this point, you need to choose where to install your Mandrake Linux operating
+system on your hard drive. If it is empty or if an existing operating system
+uses all the space available on it, you need to partition it. Basically,
+partitioning a hard drive consists of logically dividing it to create space to
+install your new Mandrake Linux system.
+
+Because the effects of the partitioning process are usually irreversible,
+partitioning can be intimidating and stressful if you are an inexperienced user.
+Hopefully, there is a wizard which simplifies this process. Before beginning,
+please consult the manual and take your time.
+
+If you are running the install in Expert mode, you will enter the Mandrake Linux
+partitioning tool: DiskDrake;. It allows you to fine-tune your partitions. See
+the chapter DiskDrake of the manual; the usage is the same. You can use from the
+installation interface the wizards as described here by clicking the button
+Wizard from the interface.
+
+If partitions have been already defined (from a previous installation or from
+another partitioning tool), you just need choose those to use to install your
+Linux system.
+
+If partitions haven't been already defined, you need to create them. To do that,
+use the wizard available above. Depending of your hard drive configuration,
+several options are available:
+
+ * Use free space: it will simply lead to an automatic partitioning of your blank
+drive(s); you won't need to worry any more about it.
+
+ * Use existing partition: the wizard has detected one or more existing Linux
+partitions on your hard drive. If you want to keep them, choose this option.
+
+ * Erase entire disk: if you want delete all data and all partitions present on
+your hard drive and replace them by your new Mandrake Linux system, you can
+choose this option. Be careful with this solution, you will not be able to
+revert your choice after confirmation.
+
+ * Use the free space on the Windows partition: if Microsoft Windows is installed
+on your hard drive and takes all space available on it, you have to create free
+space for Linux data. To do that you can delete your Microsoft Windows partition
+and data (see \"Erase entire disk\" or \"Expert mode\" solutions) or resize your
+Microsoft Windows partition. Resizing can be performed without loss of any data.
+This solution is recommended if you want use both Mandrake Linux and Microsoft
+Windows on same computer.
+
+   Before choosing this solution, please understand that the size of your Microsoft
+Windows partition will be smaller than at present time. It means that you will
+have less free space under Microsoft Windows to store your data or install new
+software.
+
+ * Remove Windows: it will simply erase everything on the drive and begin fresh,
+partitioning from scratch. All data on your disk will be lost.
+
+   !! If you choose this option, All data on your disk will be lost. !!
+
+ * Expert mode: if you want to partition manually your hard drive, you can choose
+this option. Be careful before choosing this solution. It is powerful but it is
+very dangerous. You can lose all your data very easily. So, don't choose this
+solution unless you know what you are doing."),
+
+exitInstall => 
+__("There you are. Installation is now complete and your GNU/Linux system is ready
+to use. Just click OK to reboot the system. You can start GNU/Linux or Windows,
+whichever you prefer (if you are dual-booting), as soon as the computer has
+booted up again.
+
+The Advanced button shows two more buttons to:
+
+ * Generate auto install floppy: to create an install floppy disk that will
+automatically perform a whole installation without the help of an operator,
+similar to the installation you just configured.
+
+   Note that two different options are available after clicking the button:
+
+    * Replay: This is a partially automated install as the partitioning step (and
+only this one) remains interactive.
+
+    * Automated: Fully automated install: the hard disk is completely rewritten, all
+data is lost.
+
+   This feature is very handy when installing a great number of similar machines.
+See the Auto install section at our WebSite.
+
+ * Save packages selection(*): saves the packages selection as made previously.
+Then when doing another install, insert the floppy inside the driver and run the
+install going to the help screen F1, and issuing >>linux defcfg=\"floppy\"<<.
+
+(*) You need a FAT formatted floppy (To create one under GNU/Linux type
+\"mformat a:\")"),
+
+formatPartitions => 
+__("Any partitions that have been newly defined must be formatted for use
+(formatting meaning creating a filesystem).
+
+At this time, you may wish to reformat some already existing partitions to erase
+the data they contain. If you wish do that, please also select the partitions
+you want to format.
+
+Please note that it is not necessary to reformat all pre-existing partitions.
+You must reformat the partitions containing the operating system (such as \"/\",
+\"/usr\" or \"/var\") but you do not have to reformat partitions containing data
+that you wish to keep (typically /home).
+
+Please be careful selecting partitions, after formatting, all data on the
+selected partitions will be deleted and you will not be able to recover any of
+them.
+
+Click on OK when you are ready to format partitions.
+
+Click on Cancel if you want to choose other partitions to install your new
+Mandrake Linux operating system.
+
+Click on Advanced to select partitions on which you want to check for bad
+blocks."),
+
+installPackages => 
+__("Your new Mandrake Linux operating system is currently being installed. This
+operation should take a few minutes (it depends on size you choose to install
+and the speed of your computer).
+
+Please be patient."),
+
+miscellaneous => 
+__("At this point, it is now time to choose the security level desired for that
+machine. As a rule of thumb, the more exposed is the machine, and the more the
+data stored in it is crucial the higher the security level should be. However a
+higher security level is generally obtained at the expenses of easiness of use.
+Refer to the chapter MSEC of the Reference Manual; to get more information about
+the meaning of those levels.
+
+If you don't know what to choose, keep the default option."),
+
+multiCD => 
+__("The Mandrake Linux spreads among several CDROMs. It may be that drakX has
+selected packages on another CDROM than the installation CDROM, and when it
+needs that you put another one into the drive, it will eject the current CDROM
+and ask you for another one."),
+
+selectInstallClass => 
+__("drakX now ask you what installation class you want. Here, you will also choose
+whether you want to perform an installation or an upgrade of an existing
+Mandrake Linux system. Choose what suits your situation. You can perform an
+installation over an existing system, wiping out the old system. You can also do
+an upgrade to repair an existing system.
+
+Please choose \"Install\" if there are no previous version of Mandrake Linux
+installed or if you wish to use several operating systems.
+
+Please choose \"Update\" if you wish to update an already installed version of
 Mandrake Linux.
 
+Depend of your knowledge in GNU/Linux, you can choose one of the following
+levels to install or update your Mandrake Linux operating system:
 
-LPR is the old printing system used in previous Mandrake Linux distributions.
+ * Recommended: if you have never installed a GNU/Linux operating system choose
+this. Installation will be be very easy and you will be asked only on few
+questions.
 
+ * Customized: if you are familiar enough with GNU/Linux, you may choose the
+primary usage (workstation, server, development) of your system. You will need
+to answer to more questions than in \"Recommended\" installation class, so you
+need to know how GNU/Linux works to choose this installation class.
 
-If you don't have printer, click on \"None\"."),
+ * Expert: if you have a good knowledge in GNU/Linux, you can choose this
+installation class. As in \"Customized\" installation class, you will be able to
+choose the primary usage (workstation, server, development). Be very careful
+before choose this installation class. You will be able to perform a higly
+customized installation. Answer to some questions can be very difficult if you
+haven't a good knowledge in GNU/Linux. So, don't choose this installation class
+unless you know what you are doing."),
 
-configurePrinterConnected => 
- __("GNU/Linux can deal with many types of printer. Each of these types requires
-a different setup.
+selectKeyboard => 
+__("Normally, drakX will have selected the right keyboard for you (depending on the
+language you have chosen) and you won't even see this step. However, you might
+not have a keyboard which corresponds exactly to your language: for example, if
+you are an English speaking Swiss person, you may still want your keyboard to be
+a Swiss keyboard. Or if you speak English but are located in Québec, you may
+find yourself in the same situation. In both cases, you will have to go back to
+this installation step and select an appropriate keyboard from the list.
 
+All you need to do is select your preferred keyboard layout from the list which
+appears in front of you.
 
-If your printer is physically connected to your computer, select \"Local
-printer\".
+If you have a keyboard from another language than the one used by default, click
+on the Advanced button. You will be presented the complete list of supported
+keyboards."),
 
+selectLanguage => 
+__("Please choose your preferred language for installation and system usage.
 
-If you want to access a printer located on a remote Unix machine, select
-\"Remote printer\".
+There is an Advanced button allowing you to select other languages, that will be
+installed in the machine so that you can use them later if you need them. If for
+example you will host people from Spain on your machine, select English as the
+main language in the tree view, and under the advanced section, check the box
+corresponding to Spanish|Spain.
 
+As soon as you have selected the language and confirmed with clicking the OK
+button, you will automatically go on to the next step."),
 
-If you want to access a printer located on a remote Microsoft Windows machine
-(or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."),
+selectMouse => 
+__("drakX just skips this test unless you purposely click on the corresponding step
+on the left. By default, drakX sees your mouse as a two-button mouse and
+emulates the third button, and knows whether it's PS/2, serial or USB.
 
-configurePrinterLocal => 
- __("Please turn on your printer before continuing to let DrakX detect it.
+Perhaps this is not what you want. In that case, you just have to select the
+right type for your mouse in the list which appears.
 
-You have to enter some informations here.
-
-
-   * Name of printer: the print spooler uses \"lp\" as default printer name. So, you must have a printer named \"lp\".
-     If you have only one printer, you can use several names for it. You just need to separate them by a pipe
-     character (a \"|\"). So, if you prefer a more meaningful name, you have to put it first, eg: \"My printer|lp\".
-     The printer having \"lp\" in its name(s) will be the default printer.
-
-
-   * Description: this is optional but can be useful if several printers are connected to your computer or if you allow
-     other computers to access to this printer.
-
-
-   * Location: if you want to put some information on your
-     printer location, put it here (you are free to write what
-     you want, for example \"2nd floor\").
-"),
-
-configurePrinterLPR => 
-__("You need to enter some informations here.
-
-
-   * Name of queue: the print spooler uses \"lp\" as default printer name. So, you need have a printer named \"lp\".
-    If you have only one printer, you can use several names for it. You just need to separate them by a pipe
-    character (a \"|\"). So, if you prefer to have a more meaningful name, you have to put it first, eg: \"My printer|lp\".
-    The printer having \"lp\" in its name(s) will be the default printer.
-
-  
-   * Spool directory: it is in this directory that printing jobs are stored. Keep the default choice
-     if you don't know what to use
-
-
-   * Printer Connection: If your printer is physically connected to your computer, select \"Local printer\".
-     If you want to access a printer located on a remote Unix machine, select \"Remote lpd printer\".
-
-
-     If you want to access a printer located on a remote Microsoft Windows machine (or on Unix machine using SMB
-     protocol), select \"SMB/Windows 95/98/NT\".
-
-
-     If you want to acces a printer located on NetWare network, select \"NetWare\".
-"),
-
-configurePrinterDev => 
- __("Your printer has not been detected. Please enter the name of the device on
-which it is connected.
-
-
-For information, most printers are connected on the first parallel port. This
-one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
-
-configurePrinterType => 
- __("You must now select your printer in the above list."),
-
-configurePrinterOptions => 
-__("Please select the right options according to your printer.
-Please see its documentation if you don't know what choose here.
-
-
-You will be able to test your configuration in next step and you will be able to modify it if it doesn't work as you want."),
+You can now test your mouse. Use buttons and wheel to verify if settings are
+good. If not, you can click on \"Cancel\" to choose another driver."),
 
 setRootPassword => 
- __("You can now enter the root password for your Mandrake Linux system.
-The password must be entered twice to verify that both password entries are identical.
-
-
-Root is the system's administrator and is the only user allowed to modify the
-system configuration. Therefore, choose this password carefully. 
-Unauthorized use of the root account can be extemely dangerous to the integrity
-of the system, its data and other system connected to it.
-
+__("This is the most crucial decision point for the security of your GNU/Linux
+system: you are going to have to enter the Root password. Root is the system
+administrator and is the only one authorized to make updates, add users, change
+the overall system configuration, and so on. In short, root can do everything!
+That is why you have to choose a password which is difficult to guess; drakX
+will tell you if it is too easy. As shown, you can choose not to enter a
+password, but we strongly advise you to enter one, if only for one reason: do
+not think that because you booted GNU/Linux, your other operating systems are
+safe from mistakes. That's not true since Root can overcome all limitations and
+unintentionally erase all data on partitions by carelessly accessing the
+partitions themselves!
 
 The password should be a mixture of alphanumeric characters and at least 8
 characters long. It should never be written down.
 
-
 Do not make the password too long or complicated, though: you must be able to
-remember it without too much effort."),
+remember it without too much effort.
 
-setRootPasswordAuth =>
- __("If your network uses LDAP (or NIS) protocol for authentication, select
-\"LDAP\" (or \"NIS\") as authentication. If you don't know, ask your network
-administrator.
+You will have to type the password twice a typing error in the first attempt
+could be a problem if you repeat it since the ``incorrect'' password is now
+required when you connect up to the system.
 
-If your computer is not connected to any administrated network, you may want to
-choose \"Local files\" for authentication."),
+Depending on your local network configuration, you may or may not use NIS. If
+you don't know, ask your system administrator. If you use NIS, check the option
+Use NIS. When you press OK, you will then have to fill in the necessary
+information."),
 
-addUser =>
- __("You may now create one or more \"regular\" user account(s), as
-opposed to the \"privileged\" user account, root. You can create
-one or more account(s) for each person you want to allow to use
-the computer. Note that each user account will have its own
-preferences (graphical environment, program settings, etc.)
-and its own \"home directory\", in which these preferences are
-stored.
+setupBootloader => 
+__("LILO and GRUB are boot loaders for GNU/Linux. This stage is normally totally
+automated. In fact, drakX will analyze the disk boot sector and will act
+accordingly depending on what it finds here:
 
+ * if it finds a Windows boot sector, it will replace it with a GRUB/LILO boot
+sector so that you can start GNU/Linux or Windows;
 
-First of all, create an account for yourself! Even if you will be the only user
-of the machine, you may NOT connect as root for daily use of the system: it's a
-very high security risk. Making the system unusable is very often a typo away.
+ * if it finds a GRUB or LILO boot sector, it will replace it with a new one;
 
+If in doubt, drakX will display a dialog with various options.
 
-Therefore, you should connect to the system using the user account
-you will have created here, and login as root only for administration
-and maintenance purposes."),
+ * Bootloader to use: you get here three choices:
 
-createBootdisk => 
- __("Creating a boot disk is strongly recommended. If you can't
-boot your computer, it's the only way to rescue your system without
-reinstalling it."),
+    * LILO with graphical menu: if you prefer LILO with its graphical interface.
 
-setupBootloaderBeginner =>
- __("You need to indicate where you wish
-to place the information required to boot to GNU/Linux.
+    * Grub: if you prefer GRUB (text menu).
 
+    * LILO with text menu: if you prefer LILO with its text menu interface.
 
-Unless you know exactly what you are doing, choose \"First sector of
-drive (MBR)\"."),
+ * Boot device: In most cases, you will not change the default (/dev/hda), but if
+you prefer, the bootloader can be installed on the second hard drive (/dev/hdb),
+or even on a floppy disk (/dev/fd0).
 
-setupBootloader =>
- __("Unless you know specifically otherwise, the usual choice is \"/dev/hda\"
- (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."),
+ * Delay before booting default image: When rebooting the computer, this is the
+delay granted to the user to choose in the boot loader menu, another boot entry
+than the default one.
 
-setupBootloaderAddEntry =>
- __("LILO (the LInux LOader) and Grub are bootloaders: they are able to boot
-either GNU/Linux or any other operating system present on your computer.
-Normally, these other operating systems are correctly detected and
-installed. If this is not the case, you can add an entry by hand in this
-screen. Be careful as to choose the correct parameters.
+!! Beware that if you choose not to install a bootloader (by selecting Cancel
+here), you must ensure that you have a way to boot your Mandrake Linux system!
+Also be sure about what you are doing if you change any of the options here. !!
 
+Clicking the Advanced button in this dialog will offer many advanced options
+reserved to the expert user.
 
-You may also want not to give access to these other operating systems to
-anyone, in which case you can delete the corresponding entries. But
-in this case, you will need a boot disk in order to boot them!"),
+Mandrake Linux installs its own bootloader, which will let you boot either
+GNU/Linux or any other operating systems which you have on your system.
 
-setupBootloaderGeneral =>
- __("LILO and grub main options are:
-  - Boot device: Sets the name of the device (e.g. a hard disk
-partition) that contains the boot sector. Unless you know specifically
-otherwise, choose \"/dev/hda\".
+If there is another operating system installed on your machine, it'll be
+automatically added to the boot menu. Here you can choose to fine-tune the
+existing options. Double-clicking on an existing entry allows you to change its
+parameters or remove it; Add creates a new entry; and Done goes onto next
+installation step."),
 
+setupSCSI => 
+__("drakX then goes on to detecting all hard disks present on your computer. It will
+also scan for one or more PCI SCSI card(s) on your system, if you have any. If
+such a device is found, drakX will automatically install the right driver.
 
-  - Delay before booting default image: Specifies the number in tenths
-of a second the boot loader should wait before booting the first image.
-This is useful on systems that immediately boot from the hard disk after
-enabling the keyboard. The boot loader doesn't wait if \"delay\" is
-omitted or is set to zero.
+Should it fail, you are anyway asked whether you have a SCSI card or not. Answer
+Yes to choose your card in a list or No if you have no SCSI hardware. If you are
+not sure you can also check the list of hardware in your machine by selecting
+See hardware info and clicking OK.
 
+If you have to manually specify your adapter, DrakX will ask if you want to
+specify options for it. You should allow DrakX to probe the hardware for the
+options. This usually works well.
 
-  - Video mode: This specifies the VGA text mode that should be selected
-when booting. The following values are available: 
+If not, you will need to provide options to the driver. Please review the User
+Guide (chapter 3, section \"Collective informations on your hardware\") for
+hints on retrieving this information from hardware documentation, from the
+manufacturer's Web site (if you have Internet access) or from Microsoft Windows
+(if you have it on your system)."),
 
-    * normal: select normal 80x25 text mode.
+summary => 
+__("Here are presented various parameters related to your machine. Depending on your
+installed hardware you may or not, see the following entries:
 
-    * <number>:  use the corresponding text mode.
+ * Mouse: mouse Check the current mouse configuration and click on the button to
+change it if necessary.
 
+ * Keyboard: keyboard Check the current keyboard map configuration and click on
+the button to change that if necessary.
 
-  - Clean \"/tmp\" at each boot: if you want delete all files and directories
-stored in \"/tmp\" when you boot your system, select this option.
+ * Timezone: timezone DrakX, by default, guesses your timezone from the language
+you have chosen. But here again, as for the keyboard choice, you may not be in
+the country which the chosen language suggests, so you may need to click on the
+Timezone button so that you can configure the clock according to the time zone
+you are in.
 
+ * Printer: Clicking on the No Printer button, will open the printer
+configuration wizard..
 
-  - Precise RAM if needed: unfortunately, there is no standard method to ask the
-BIOS about the amount of RAM present in your computer. As consequence, Linux may
-fail to detect your amount of RAM correctly. If this is the case, you can
-specify the correct amount or RAM here. Please note that a difference of 2 or 4
-MB between detected memory and memory present in your system is normal."),
+ * Sound card: If a sound card has been detected on your system, it is displayed
+here. No modification possible at installation time.
 
-setupYabootGeneral =>
- __("Yaboot is a bootloader for NewWorld MacIntosh hardware. It is able
-to boot either GNU/Linux, MacOS, or MacOSX, if present on your computer.
-Normally, these other operating systems are correctly detected and
-installed. If this is not the case, you can add an entry by hand in this
-screen. Be careful as to choose the correct parameters.
+ * TV card: If a TV card has been detected on your system, it is displayed here.
+No modification possible at installation time.
 
-
-Yaboot main options are:
-
-
-  - Init Message: A simple text message that is displayed before the boot
-prompt.
-
-
-  - Boot Device: Indicate where you want to place the information required to 
-boot to GNU/Linux. Generally, you will have setup a bootstrap partition earlier 
-to hold this information.
-
-
-  - Open Firmware Delay: Unlike LILO, there are two delays available with 
-yaboot.  The first delay is measured in seconds and at this point you can 
-choose between CD, OF boot, MacOS, or Linux.
-
-
-  - Kernel Boot Timeout: This timeout is similar to the LILO boot delay.  After 
-selecting Linux, you will have this delay in 0.1 seconds before your default
-kernel description is selected.
-
-
-  - Enable CD Boot?: Checking this option will allow you to choose 'C' for CD at
-the first boot prompt.
-
-
-  - Enable OF Boot?: Checking this option will allow you to choose 'N' for Open
-Firmware at the first boot prompt.
-
-
-  - Default OS: You can select which OS will boot by default when the Open Firmware 
-Delay expires."),
- 
-setupYabootAddEntry =>
-__("You can add additional entries for yaboot, either for other operating systems,
-alternate kernels, or for an emergency boot image.
-
-
-For other OS's - the entry consists only of a label and the root partition.
-
-
-For Linux, there are a few possible options: 
-
-
-  - Label: This is simply the name will type at the yaboot prompt to select this 
-boot option.
-
-
-  - Image: This would be the name of the kernel to boot.  Typically vmlinux or
-a variation of vmlinux with an extension.
-
-
-  - Root: The root device or '/' for your Linux installation.
-
-
-  
-  - Append: On Apple hardware, the kernel append option is used quite often to
-assist in initializing video hardware, or to enable keyboard mouse button emulation
-for the often lacking 2nd and 3rd mouse buttons on a stock Apple mouse.  The following 
-are some examples:
-
-
-		 video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 hda=autotune
-
-		 video=atyfb:vmode:12,cmode:24 adb_buttons=103,111 
-
-
- 
-  - Initrd: This option can be used either to load initial modules, before the boot 
-device is available, or to load a ramdisk image for an emergency boot situation.
-
-
-  - Initrd-size: The default ramdisk size is generally 4096 bytes.  If you should need
-to allocate a large ramdisk, this option can be used.
-
-
-  - Read-write: Normally the 'root' partition is initially brought up read-only, to allow
-a filesystem check before the system becomes 'live'.  You can override this option here.
-
-
-  - NoVideo: Should the Apple video hardware prove to be exceptionally problematic, you can
-select this option to boot in 'novideo' mode, with native framebuffer support.
-
-
-  - Default: Selects this entry as being the default Linux selection, selectable by just
-pressing ENTER at the yaboot prompt.  This entry will also be highlighted with a '*', if you
-press TAB to see the boot selections."),
-
-setupSILOAddEntry =>
- __("SILO is a bootloader for SPARC: it is able to boot
-either GNU/Linux or any other operating system present on your computer.
-Normally, these other operating systems are correctly detected and
-installed. If this is not the case, you can add an entry by hand in this
-screen. Be careful as to choose the correct parameters.
-
-
-You may also want not to give access to these other operating systems to
-anyone, in which case you can delete the corresponding entries. But
-in this case, you will need a boot disk in order to boot them!"),
-
-setupSILOGeneral =>
- __("SILO main options are:
-  - Bootloader installation: Indicate where you want to place the
-information required to boot to GNU/Linux. Unless you know exactly
-what you are doing, choose \"First sector of drive (MBR)\".
-
-
-  - Delay before booting default image: Specifies the number in tenths
-of a second the boot loader should wait before booting the first image.
-This is useful on systems that immediately boot from the hard disk after
-enabling the keyboard. The boot loader doesn't wait if \"delay\" is
-omitted or is set to zero."),
-
-configureX =>
- __("Now it's time to configure the X Window System, which is the
-core of the GNU/Linux GUI (Graphical User Interface). For this purpose,
-you must configure your video card and monitor. Most of these
-steps are automated, though, therefore your work may only consist
-of verifying what has been done and accept the settings :)
-
-
-When the configuration is over, X will be started (unless you
-ask DrakX not to) so that you can check and see if the
-settings suit you. If they don't, you can come back and
-change them, as many times as necessary."),
-
-configureXmain =>
- __("If something is wrong in X configuration, use these options to correctly
-configure the X Window System."),
-
-configureXxdm =>
- __("If you prefer to use a graphical login, select \"Yes\". Otherwise, select
-\"No\"."),
-
-miscellaneous =>
- __("You can choose a security level for your system. Please refer to the manual for complete
-  information. Basically, if you don't know what to choose, keep the default option.
-"),
-
-exitInstall =>
- __("Your system is going to reboot.
-
-After rebooting, your new Mandrake Linux system will load automatically.
-If you want to boot into another existing operating system, please read
-the additional instructions."),
+ * ISDN card: If an ISDN card has been detected on your system, it is displayed
+here. You can click on the button to change the associated parameters."),
 );
-
-#-#- ################################################################################
-#-#- NO LONGER UP-TO-DATE...
-#-%steps_long = (
-#-selectLanguage =>
-#- __("Choose preferred language for install and system usage."),
-#-
-#-selectKeyboard =>
-#- __("Choose the layout corresponding to your keyboard from the list above"),
-#-
-#-selectPath =>
-#- __("Choose \"Installation\" if there are no previous versions of GNU/Linux
-#-installed, or if you wish to use multiple distributions or versions.
-#-
-#-
-#-Choose \"Update\" if you wish to update a previous version of Mandrake
-#-Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
-#-
-#-selectInstallClass =>
-#- __("Select:
-#-
-#-  - Beginner: If you have never installed GNU/Linux before, and wish to
-#-install the distribution elected \"Product of the year\" for 1999,
-#-click here.
-#-
-#-  - Developer: If you are familiar with GNU/Linux and will be using the
-#-computer primarily for software development, you will find happiness
-#-here.
-#-
-#-  - Server: If you wish to install a general purpose server, or the
-#-GNU/Linux distribution elected \"Distribution/Server\" for 1999, select
-#-this.
-#-
-#-  - Expert: If you are fluent with GNU/Linux and want to perform
-#-a highly customized installation, this Install Class is for you."),
-#-
-#-setupSCSI =>
-#- __("DrakX will attempt at first to look for one or more PCI
-#-SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
-#-to use, it will insert it (them)  automatically.
-#-
-#-If your SCSI adapter is ISA, or is PCI but DrakX doesn't know
-#-which driver to use for this card, or if you have no SCSI adapters
-#-at all, you will then be prompted on whether you have one or not.
-#-If you have none, answer \"No\". If you have one or more, answer
-#-\"Yes\". A list of drivers will then pop up, from which you will
-#-have to select one.
-#-
-#-After you have selected the driver, DrakX will ask if you
-#-want to specify options for it. First, try and let the driver
-#-probe for the hardware: it usually works fine.
-#-
-#-If not, do not forget the information on your hardware that you
-#-could get from you documentation or from Windows (if you have
-#-it on your system), as suggested by the installation guide.
-#-These are the options you will need to provide to the driver."),
-#-
-#-partitionDisks =>
-#- __("In this stage, you may choose what partition(s) use to install your
-#-Mandrake Linux system."),
-#-
-#-#At this point, hard drive partitions must be defined. (Unless you
-#-#are overwriting a previous install of GNU/Linux and have already defined
-#-#your hard drive partitions as desired.) This operation consists of
-#-#logically dividing the computer's hard drive capacity into separate
-#-#areas for use.
-#-#
-#-#
-#-#Two common partition are: the root partition (/), which is the starting
-#-#point of the filesystem's directory hierarchy, and /boot, which contains
-#-#all files necessary to start the operating system when the
-#-#computer is first turned on.
-#-#
-#-#
-#-#Because the effects of this process are usually irreversible, partitioning
-#-#can be intimidating and stressful to the unexperienced. DiskDrake
-#-#simplifies the process so that it need not be. Consult the documentation
-#-#and take your time before proceeding."),
-#-
-#-formatPartitions =>
-#- __("Any partitions that have been newly defined must be formatted for
-#-use (formatting meaning creating a filesystem). At this time, you may
-#-wish to re-format some already existing partitions to erase the data
-#-they contain. Note: it is not necessary to re-format pre-existing
-#-partitions, particularly if they contain files or data you wish to keep.
-#-Typically retained are /home and /usr/local."),
-#-
-#-choosePackages =>
-#- __("You may now select the packages you wish to install.
-#-
-#-
-#-Please note that some packages require the installation of others.
-#-These are referred to as package dependencies. The packages you select,
-#-and the packages they require will be automatically selected for
-#-install. It is impossible to install a package without installing all
-#-of its dependencies.
-#-
-#-
-#-Information on each category and specific package is available in the
-#-area titled \"Info\",  located between list of packages and the five
-#-buttons \"Install\", \"Select more/less\" and \"Show more/less\"."),
-#-
-#-doInstallStep =>
-#- __("The packages selected are now being installed.
-#-
-#-
-#-This operation should take a few minutes."),
-#-
-#-selectMouse =>
-#- __("If DrakX failed to find your mouse, or if you want to
-#-check what it has done, you will be presented the list of mice
-#-above.
-#-
-#-
-#-If you agree with DrakX' settings, just jump to the section
-#-you want by clicking on it in the menu on the left. Otherwise,
-#-choose a mouse type in the menu which you think is the closest
-#-match for your mouse.
-#-
-#-In case of a serial mouse, you will also have to tell DrakX
-#-which serial port it is connected to."),
-#-
-#-configureNetwork =>
-#- __("This section is dedicated to configuring a local area network,
-#-or LAN. If you answer \"Yes\" here, DrakX will try to find an
-#-Ethernet adapter on your machine. PCI adapters should be found and
-#-initialized automatically. However, if your peripheral is ISA,
-#-autodetection will not work, and you will have to choose a driver
-#-from the list that will appear then.
-#-
-#-
-#-As for SCSI adapters, you can let the driver probe for the adapter
-#-in the first time, otherwise you will have to specify the options
-#-to the driver that you will have fetched from Windows' control
-#-panel.
-#-
-#-
-#-If you install a Mandrake Linux system on a machine which is part
-#-of an already existing network, the network administrator will
-#-have given you all necessary information (IP address, network
-#-submask or netmask for short, and hostname). If you're setting
-#-up a private network at home for example, you should choose
-#-addresses "),
-#-
-#-configureTimezone =>
-#- __("Help"),
-#-
-#-configureServices =>
-#- __("Help"),
-#-
-#-configurePrinter =>
-#- __("GNU/Linux can deal with many types of printer. Each of these
-#-types require a different setup.
-#-
-#-
-#-If your printer is directly connected to your computer, select
-#-\"Local printer\". You will then have to tell which port your
-#-printer is connected to, and select the appropriate filter.
-#-
-#-
-#-If you want to access a printer located on a remote Unix machine,
-#-you will have to select \"Remote lpd queue\". In order to make
-#-it work, no username or password is required, but you will need
-#-to know the name of the printing queue on this server.
-#-
-#-
-#-If you want to access a SMB printer (which means, a printer located
-#-on a remote Windows 9x/NT machine), you will have to specify its
-#-SMB name (which is not its TCP/IP name), and possibly its IP address,
-#-plus the username, workgroup and password required in order to
-#-access the printer, and of course the name of the printer.The same goes
-#-for a NetWare printer, except that you need no workgroup information."),
-#-
-#-setRootPassword =>
-#- __("You must now enter the root password for your Mandrake Linux
-#-system. The password must be entered twice to verify that both
-#-password entries are identical.
-#-
-#-
-#-Root is the administrator of the system, and is the only user
-#-allowed to modify the system configuration. Therefore, choose
-#-this password carefully! Unauthorized use of the root account can
-#-be extremely dangerous to the integrity of the system and its data,
-#-and other systems connected to it. The password should be a
-#-mixture of alphanumeric characters and a least 8 characters long. It
-#-should *never* be written down. Do not make the password too long or
-#-complicated, though: you must be able to remember without too much
-#-effort."),
-#-
-#-addUser =>
-#- __("You may now create one or more \"regular\" user account(s), as
-#-opposed to the \"privileged\" user account, root. You can create
-#-one or more account(s) for each person you want to allow to use
-#-the computer. Note that each user account will have its own
-#-preferences (graphical environment, program settings, etc.)
-#-and its own \"home directory\", in which these preferences are
-#-stored.
-#-
-#-
-#-First of all, create an account for yourself! Even if you will be the only user
-#-of the machine, you may NOT connect as root for daily use of the system: it's a
-#-very high security risk. Making the system unusable is very often a typo away.
-#-
-#-
-#-Therefore, you should connect to the system using the user account
-#-you will have created here, and login as root only for administration
-#-and maintenance purposes."),
-#-
-#-createBootdisk =>
-#- __("Please, please, answer \"Yes\" here! Just for example, when you
-#-reinstall Windows, it will overwrite the boot sector. Unless you have
-#-made the bootdisk as suggested, you won't be able to boot into GNU/Linux
-#-any more!"),
-#-
-#-setupBootloader =>
-#- __("You need to indicate where you wish
-#-to place the information required to boot to GNU/Linux.
-#-
-#-
-#-Unless you know exactly what you are doing, choose \"First sector of
-#-drive (MBR)\"."),
-#-
-#-configureX =>
-#- __("Now it's time to configure the X Window System, which is the
-#-core of the GNU/Linux GUI (Graphical User Interface). For this purpose,
-#-you must configure your video card and monitor. Most of these
-#-steps are automated, though, therefore your work may only consist
-#-of verifying what has been done and accept the settings :)
-#-
-#-
-#-When the configuration is over, X will be started (unless you
-#-ask DrakX not to) so that you can check and see if the
-#-settings suit you. If they don't, you can come back and
-#-change them, as many times as necessary."),
-#-
-#-exitInstall =>
-#- __("Help"),
-#-);

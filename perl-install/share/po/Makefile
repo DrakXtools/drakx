@@ -12,6 +12,9 @@ LOCALEDIR=$(DATADIR)/locale
 
 all: $(MOFILES)
 
+help: /tmp/drakx-help.xml
+	./help_xml2pm.pl $^ > ../../help.pm
+
 %.mo: %.po
 	msgfmt -o $@ $<
 
