@@ -367,6 +367,7 @@ wait %d seconds for default boot.
 	}
     }
     my $failsafe = add_kernel($prefix, $lilo, $labels{''}, '', $root, { label => 'failsafe' });
+    $failsafe->{append} =~ s/devfs=mount/devfs=nomount/;
     $failsafe->{append} .= " failsafe";
 
     if (arch() =~ /sparc/) {
