@@ -177,35 +177,25 @@ sub search_dir_font {
 	if ( -d $fn ) { 
 	    foreach my $i (all($fn)) { 
 		if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
-		    push @font_list_tmp, "$fn$i";
+		    push @font_list_tmp, "$i";
+		    if (!$replace) {
+			foreach my $i (@font_list_tmp) {
+			    !grep /$i/, (@installed_fonts) and push @font_list, "$fn$i";
+			}
+		    }
+		    else { push @font_list, @font_list_tmp;
+		       }
 		}
 	    }
 	}
 	else {
 	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
-		push @font_list_tmp, "$fn";
+		!grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
 	    }
 	}
 	print "Fonts in directory  : ".$_."\n" foreach (@font_list_tmp);
-	if (!$replace) {
-	    foreach my $i (@installed_fonts) {
-		foreach my $j (@font_list_tmp) {
-		    if (( $j =~ !/$i/) && !grep ($j , @font_list))  {
-			push @font_list, "$j" ;
-		    }
-		}
-	    }
-	}
-	else { 
-	    $font_list_tmp[0] and  @font_list = @font_list_tmp;
-	}
     }
-    print ".................................................\n\n";
-    print "Font to install : ".$_."\n" foreach (@font_list);
 }
-
-
-# gestion not replace ... have to find fonts not installed
 
 sub search_dir_font_uninstall {
     my @font_list_tmp = ();
@@ -261,6 +251,8 @@ sub backend_mod {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
 	search_dir_font $_ foreach (@install);
+	print ".................................................\n\n";
+	print "Font to install : ".$_."\n" foreach (@font_list);
 	#put_font_dir();
 	print "\n...............The End...................\n";
     }
