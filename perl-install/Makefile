@@ -64,7 +64,7 @@ install_pms: $(DIRS)
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 	if [ "x$(PERL_INSTALL_DEBUG)" == "x" ]; then \
 		perl -pi -e 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' $(DESTREP4PMS)/install2; \
@@ -147,7 +147,7 @@ endif
 	      fi; \
 	    fi; \
 	done
-	perl -pi -e 's/\s*use\s+(warnings|diagnostics|vars|strict).*//g' $(DEST)/usr/*/*/*/utf8_heavy.pl
+	perl -pi -e 's/\s*use\s+(warnings|diagnostics|strict|vars|warnings).*//g' $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_
@@ -259,5 +259,5 @@ cvstag:
 	cd ..; cvs tag $(CVSTAGOPT) $(TAG) $(OTHERS)
 
 nuke_perl:
-	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
-	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
+	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
+	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
