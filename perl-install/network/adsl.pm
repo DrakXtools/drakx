@@ -126,7 +126,7 @@ defaultroute
     if ($adsl_type eq 'speedtouch') {
 	$netc->{vpivci} =~ /(\d+)_(\d+)/;
 	output("$prefix/etc/ppp/peers/adsl", 
-qq{noauth
+qq(noauth
 noipdefault
 pty "/usr/bin/pppoa3 -vpi $1 -vci $2"
 sync
@@ -141,7 +141,7 @@ persist
 usepeerdns
 defaultroute
 user "$adsl->{login}"
-});
+));
 	modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
 						      ['tty-ldisc-3', 'ppp_async'],
 						      ['tty-ldisc-13', 'n_hdlc'],
@@ -160,7 +160,7 @@ and copy the mgmt.o in /usr/share/speedtouch"));
 if ($adsl_type eq 'eci') {
     $netc->{vpivci} =~ /(\d+)_(\d+)/;
     output("$prefix/etc/ppp/peers/adsl", 
-qq{debug
+qq(debug
 kdebug 1
 noipdefault
 defaultroute
@@ -177,7 +177,7 @@ maxfail 10
 usepeerdns
 noauth
 lcp-echo-interval 0
-});
+));
     modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
 						  ['tty-ldisc-14', 'ppp_synctty'],
 						  ['tty-ldisc-13', 'n_hdlc']);
