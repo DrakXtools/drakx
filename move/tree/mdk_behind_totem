@@ -41,8 +41,10 @@ umount_cd() {
     losetup -d /dev/$boot_loop
 
     ln -sf /image_always/lib /
-    umount /image
-    /image_always/sbin/losetup -d /dev/$main_loop
+
+    umount /image && \
+	/image_always/sbin/losetup -d /dev/$main_loop || { mount_cd; kill $totem_pid; exec mdk_totem; }
+    
     /image_always/usr/bin/eject
 }
 
@@ -56,7 +58,7 @@ mount_cd() {
 
     ln -sf /image/lib /
 
-    mdk_move_loop to_cdrom always always_i18n totem
+    mdk_move_loop to_cdrom always always_i18n totem nvidia
 }
 
 while [ -e "/proc/$totem_pid" ]; do
