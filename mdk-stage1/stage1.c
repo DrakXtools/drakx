@@ -536,6 +536,9 @@ int mandrake_move_post(void)
                         return RETURN_ERROR;
         }
 
+        if (IS_DEBUGSTAGE1)
+                while (1);
+
         log_message("move: pivot_rooting");
         // trick so that kernel won't try to mount the root device when initrd exits
         if (scall((fd = open("/proc/sys/kernel/real-root-dev", O_WRONLY)) < 0, "open"))

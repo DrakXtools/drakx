@@ -95,6 +95,7 @@ void process_cmdline(void)
 		if (!strcmp(name, "recovery")) set_param(MODE_RECOVERY);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 		if (!strcmp(name, "live")) set_param(MODE_LIVE);
+		if (!strcmp(name, "debugstage1")) set_param(MODE_DEBUGSTAGE1);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);
 			grab_automatic_params(value);
