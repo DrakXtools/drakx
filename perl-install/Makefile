@@ -182,7 +182,7 @@ endif
 
 	for i in fonts keyboards locales-skeleton keymaps; do tar xfj share/$$i.tar.bz2 -C $(DEST); done
 
-	cp /usr/X11R6/lib/X11/fonts/misc/cursor.pcf.gz /usr/share/fonts/ttf/vera/{Vera,VeraBd}.ttf $(DEST)/usr/X11R6/lib/X11/fonts
+	cp /usr/X11R6/lib/X11/fonts/misc/cursor.pcf.gz /usr/X11R6/lib/X11/fonts/TTF/{Vera,VeraBd}.ttf $(DEST)/usr/X11R6/lib/X11/fonts
 	mkfontdir $(DEST)/usr/X11R6/lib/X11/fonts
 	fc-cache -f $(DEST)/usr/X11R6/lib/X11/fonts
 
