@@ -1,3 +1,845 @@
+2005/03/06  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/03/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: set Linetype in eagle-usb.conf to use CMVs
+	create CMV symlinks for both POTS and ISDN lines
+
+2005/03/05  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/03/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: CMV support for eagle-usb
+
+	* mdk-stage1/probing.c: remove unused variable
+
+	* network/netconnect.pm: copy provider_id tag too
+	add @network::ethernet::dhcp_clients
+
+	* detect_devices.pm: add is_lan_interface
+
+	* mdk-stage1/stage1.c: set MODE_TESTING too if DEBUGSTAGE1 is set
+
+	* standalone/drakconnect: perl_checker fix
+	allow to modify DHCP settings too
+	use detect_devices::is_lan_interface
+
+	* network/ethernet.pm: add @network::ethernet::dhcp_clients
+
+	* network/adsl_consts.pm: use provider_id as key instead of id
+	add provider IDs, comments, cleanups
+
+2005/03/04  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: 100% good to go!:)
+	A few more fixes:)
+	100%!
+	:)
+
+2005/03/04  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: do not check yaboot "magic" on ppc (it seems the magic we
+	have is somewhat wrong), assuming we have yaboot installed (it is the
+	only handled bootloader anyway)
+
+2005/03/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm: Disallow to delect the first media listed in the
+	"hdlists" file.
+
+	* pkgs.pm: Modify new string in order to merge with KDE translations
+	Fix passing installation method instead of description to
+	install_any::getFile
+	Add a wait message when downloading hdlists from network
+
+	* share/po/fr.po: Translation nit
+
+	* install_any.pm: Add an explicit error message instead of a built-in
+	cryptic one (bug #14243)
+
+2005/03/04  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/03/04  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/default.pm: 
+	  - Let printerdrake recognize if the user edited /etc/cups/client.conf
+	manually.
+
+2005/03/03  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/03/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* detect_devices.pm: add ralink RT2x00 interfaces type in comment
+
+	* network/netconnect.pm: delete gateway settings if gateway device is
+	invalid too (#11761)
+
+2005/03/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: Added translation for "recommended"
+	string
+
+2005/03/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm, install_any.pm: perl_checker fixes
+	Add a progress bar when copying rpms from the media to the hard disk
+
+	* commands.pm: Avoid unnecessary stats.
+
+	* share/po/nb.po: Fix .po syntax
+
+2005/03/03  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+	updated po files
+
+2005/03/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+
+2005/03/03  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Sync with Arabeyes CVS
+
+2005/03/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: refresh every second, and do not reread network
+	conf at each refresh
+
+	* network/netconnect.pm: delete gateway settings if reconfiguring the
+	gateway interface to dhcp
+
+2005/03/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po: fixed menu
+
+	* share/po/af.po: updated po file
+	small fix in Afrikaans file
+
+	* share/po/bg.po: fixed menus
+
+2005/03/02  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: handle boot-as and master-boot (bugzilla #13846)
+	fix comment
+
+	* Xconfig/xfree.pm: add the various "names" for standard resolutions
+	sort CVT_ratios by preference
+	"keyboard" InputDevice can also be called "kbd"
+
+	* install_any.pm: screenshot_dir__and_move(): use /tmp which is ramdisk
+	instead of /tmp/stage2 which is now always read-only
+
+2005/03/02  rstandtke
+
+	* share/po/de.po: some additions
+
+2005/03/02  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Made the "(recommended)" in the printer/driver lists translateable
+	(bug
+	10651)
+
+	* share/rpmsrate: 
+	  - Let hardware-specific GUI tools for HP printers not be installed by
+	default
+	during installation. They get only preloaded now, so that printerdrake
+	  can install them if needed (bug 13957).
+
+2005/03/02  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/03/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix 10.2-0.35mdk's changelog
+	10.2-0.35mdk
+
+	* ugtk2.pm (create_scrolled_window) Gtk2::Html::View has native scrolling
+	support and
+	thus behave badly with GtkViewport
+
+2005/03/01  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* any.pm: 
+	  - webclient alternative is obsolete, launch browser with new
+	/usr/bin/www-browser
+	  - check and launch browser according to wm
+
+	* standalone/drakbug: 
+	  - load link with /usr/bin/www-browser
+	  -  use any::launch_browser_with_wm func to launch better suited
+	browser
+
+	* standalone/drakhelp: 
+	  - load link with /usr/bin/www-browser
+	  - use any::launch_browser_with_wm
+
+2005/03/01  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: add i18n packages for mozilla-firefox
+
+2005/03/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: do not show a dialog box before loading network or
+	SCSI drivers, we'll
+	load it anyway ...
+
+	* diskdrake/interactive.pm: remember encryption algorithm
+	allow to choose encryption algorithm (#13472)
+
+2005/03/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po: corrected syntax error
+
+2005/03/01  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: more proof reading
+
+2005/03/01  pjetur
+
+	* share/po/is.po: Small fixes
+
+2005/03/01  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive.pm: when testing, don't silently default to newt
+
+	* mygtk2.pm: stringify using a perl_checker compliant way
+	  - handle {list_ref} in ComboBox
+	  - handle more than one {ref} per widget
+	  - check that the string value of the ref doesn't change when it is set
+	(maybe we should remove the REF or SCALAR prefix?)
+
+	* Xconfig/monitor.pm: fix typo
+	create {preferred_resolution} out of the edid detailed_timings and use
+	it
+	skip detailed_timings flagged bad_ratio
+
+	* bootloader.pm: fix buggy get_append_memsize() (bugzilla #13874)
+
+	* Xconfig/resolution_and_depth.pm: add a ratio choice, and restrict the
+	resolutions to this choice
+	  - sort the whole resolutions to simplify the code, and get better
+	choices
+	  - add a failsafe resolution
+	create {preferred_resolution} out of the edid detailed_timings and use
+	it
+
+	* Xconfig/xfree.pm: add 1280x600 for VAIO PCG-C1M (bugzilla #5192)
+	give up trying to only add modelines not defined in xorg, otherwise xorg
+	will prefer the modelines we give here (eg: it will use 1024x768@50
+	whereas it could use 1024x768@60)
+	  - when setting a resolution, create associated gtf modelines for
+	various standard vfreqs
+	(but don't do it for builtin_ModeLines (cf vesamodes and extramodes in
+	xorg))
+	  - drop the Dell modelines (this is now cleanly handled)
+	  - drop the Vaio modeline (but this modeline was not gtf, will it work
+	with the gtf modeline?)
+	  - export {ModeLine} raw to allow playing with pre_comment
+
+	* Xconfig/parse.pm: fix section with only comments (putting the comment
+	after the EndSection is wrong)
+
+	* lang.pm: configure iocharset and codepage option for hal
+
+2005/03/01  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Make sure that recommended driver is preselected in expert mode,
+	even if the
+	recommended driver is a manufacturer-supplied PPD with language tag.
+	  - Added possibility to add a remote LPD printer in beginner's mode
+	(bug 13734)
+	  - Fixed incorrect display of accentuated characters in PPD options
+	also for
+	  boolean options (bug 13928)
+	  - Let detected LPD printer model be shown in a pop-up window and not
+	in the
+	  add printer wizard
+	  - Let detected socket printer model be shown if the IP/port was
+	manually
+	  entered
+	  - Small fix on selection of test pages
+	  - Fixed add printer wizard ("Previous" and "Cancel") for printerdrake
+	being
+	  run embedded in the MCC (bug 13929).
+
+2005/03/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/ethernet.pm (get_eth_cards) workaround buggy kernel until
+	provided patch got applied (#12609)
+	(get_eth_cards) backport fixes from HEAD:
+	  - workaround buggy kernel until provided patch got applied (#12609)
+	  - do not rely on broken ethtool from hostap drivers (#13979)
+
+	* ugtk2.pm (Gtk2::ComboBox::set_popdown_strings) clear model before
+	filling the list
+
+	* share/rpmsrate: do not install gftp with gnome, it's not HIG compliant,
+	it's not
+	gtk+2, it's bog prone and browser & nautilus are better
+
+	* Makefile.drakxtools, Makefile: fix build after pixel's pass
+
+	* drakxtools.spec: 10.2-0.34mdk
+	10.2-0.33mdk
+
+	* share/po/fr.po: fix bogus translation
+
+2005/02/28  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/28  mbukovjan
+
+	* share/po/cs.po: Updated Czech translation.
+
+2005/02/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/ethernet.pm: do not rely on broken ethtool from hostap drivers
+
+	* drakxtools.spec: add net_applet menu entry
+
+	* network/netconnect.pm: enhance "wrong network mask format" message
+	(#10712)
+	allow to modify DHCP timeout
+	handle PEERYP and PEERNTPD too (#9982)
+	peerdns support (and assorted space fixes)
+	apply USERCTL settings for modems too
+
+	* standalone/net_applet: netprofile support, allow to select watched
+	interface
+
+	* standalone/drakconnect: enhance "wrong network mask format" message
+	(#10712)
+
+	* network/network.pm: write DHCP_TIMEOUT for DHCP connections
+	write PEERYP and PEERNTPD for DHCP connections
+	write PEERDNS for DHCP interfaces
+
+2005/02/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fr.po: updated French file
+
+	* keyboard.pm: define 'compose:rwin' in XkbOptions when
+	$keyboard->{GRP_TOGGLE}
+	is different than "rwin_toggle" and also when $keyboard->{GRP_TOGGLE}
+	is not defined.
+
+	* share/po/sl.po: updated Slovenian file
+	updated Slovenian file
+
+	* share/po/vi.po: updated Vietnamese file
+
+	* share/po/fa.po, share/po/nl.po, share/po/it.po, share/po/bs.po,
+	share/po/sk.po, share/po/br.po, share/po/cy.po, share/po/et.po,
+	share/po/ja.po, share/po/da.po, share/po/pt.po: updated Welsh, Persian,
+	Italian adn Japanese files;
+	ran msgmerge on all *.po files
+
+2005/02/28  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: minor fixes
+	updates from eskild hustvedt:)
+	a few fixes
+
+2005/02/28  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/make_partimage_save_rest_all, rescue/make_rescue_img: 
+	  - in rest_all, try to restore from the cdrom
+	  - remove the debugging setting of leia as the partimage server
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - remove ddcxinfos, replaced by monitor-edid (which is in a separate
+	package)
+	  - add many resolutions (they are structured by aspect ratio for next
+	move)
+	  - put the "Monitor preferred modeline" from EDID in xorg.conf
+	  - for this ModeLine must be exported from the monitor section
+	  - specifying a VendorName|ModelName in auto_inst is valid, don't
+	overwrite it with edid probe
+	  - the strange /dev/zero needed (?) by ddcxinfos is no more needed
+	  - field {size} is now {diagonal_size}, and is no more "corrected"
+	  - add @CVT_ratios and @CVT_vfreqs (unused at the moment)
+	  - Getopt::Long is needed by monitor-parse-edid
+	  - drop hashes
+	  - handle lower than 640 resolutions
+	(prepare for next move, introducing aspect ratio in choose_gtk)
+
+	* mdk-stage1/disk.c, mdk-stage1/cdrom.c, mdk-stage1/stage1.h,
+	mdk-stage1/tools.c, mdk-stage1/directory.c: new option "keepmounted" to
+	allow the rescue media to be kept mounted
+
+	* Xconfig/various.pm, any.pm, Makefile.config, drakxtools.spec,
+	share/list, Xconfig/xfree.pm, Makefile.drakxtools, Xconfig/monitor.pm,
+	tools/Makefile, install2.pm: 
+	  - remove ddcxinfos, replaced by monitor-edid (which is in a separate
+	package)
+	  - add many resolutions (they are structured by aspect ratio for next
+	move)
+	  - put the "Monitor preferred modeline" from EDID in xorg.conf
+	  - for this ModeLine must be exported from the monitor section
+	  - specifying a VendorName|ModelName in auto_inst is valid, don't
+	overwrite it with edid probe
+	  - the strange /dev/zero needed (?) by ddcxinfos is no more needed
+	  - field {size} is now {diagonal_size}, and is no more "corrected"
+	  - add @CVT_ratios and @CVT_vfreqs (unused at the moment)
+	  - Getopt::Long is needed by monitor-parse-edid
+
+	* rescue/list: add xfs_repair to the rescue (bugzilla #10488)
+
+	* bootloader.pm: fix typo
+	have install.sh 755 (as suggested by Vincent Meyer)
+
+2005/02/28  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm: Make regexps a bit more lenient.
+
+2005/02/28  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Bugzilla 13998 - Sort list of nbis.
+	Bugzilla 14031 - cleint files created as char devices.
+
+2005/02/28  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm, install_steps_interactive.pm: 
+	  - Let country and not language decide about default paper size
+
+2005/02/28  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/02/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix adding net_applet menu entry
+	10.2-0.32mdk
+
+	* share/po/br.po: update
+	typo fixes
+
+2005/02/28  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic QA
+	QA for Arabic
+
+2005/02/27  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/27  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+	Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+
+2005/02/26  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: translated new 78 messages
+
+2005/02/26  vljubovic
+
+	* share/po/bs.po: Latest changes to Bosnian files
+
+2005/02/25  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2005/02/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: write USERCTL too
+
+	* network/netconnect.pm: pre-detect modem device (instead of mouse device
+	...) and do it at the
+	right place
+	remove debug code (spotted by Pixel)
+	allow to enable USERCTL
+	space fixes
+	space fixes
+	allow to select "unlisted" provider in adsl provider list
+
+	* network/tools.pm: do not ask for root password if interface allows
+	USERCTL
+
+2005/02/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po: updated Bengali file
+
+	* share/po/wa.po: small update
+
+	* share/po/sv.po, share/po/gl.po: updated Swedish file; corrected
+	"default:LTR" entry for Galician
+
+	* keyboard.pm: changed keyboard to "us" for Chinese
+
+2005/02/25  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: now that i understand hsync and vsync,
+	i can filter using HorizSync much more nicely :)
+
+2005/02/25  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Driver "oki4w" was renamed to "oki4drv". Adapted printerdrake
+	appropriately
+
+2005/02/25  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+	updated slovak translation
+
+2005/02/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakxtv: perl_checker fixes
+
+	* standalone/drakfont (backend_mod) fix uninstalling fonts (#9324)
+	(backend_mod) fix uninstalling fonts (#9324)
+	rollback unwanted changes
+	(backend_mod) fix uninstalling fonts (#9324)
+
+	* drakxtools.spec: 10.2-0.31mdk
+	10.2-0.30mdk
+
+	* share/po/ja.po: fix wrong key accelerator (#13540)
+
+	* standalone/draksec: rollback unwanted changes
+
+	* standalone/logdrake: simplify
+	perl_checker fixes
+
+	* share/po/br.po: update
+
+	* standalone/drakconnect: perl_checko fixes (especially fix wrong message)
+
+2005/02/24  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation.
+
+2005/02/24  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/02/24  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/control-center/po/da.po soft/mdkonline/po/da.po
+	soft/urpmi/po/da.po gi/perl-install/share/po/da.po
+
+2005/02/24  mareklaane
+
+	* share/po/et.po: Updated translation.
+
+2005/02/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: do not update kde config file if kde isn't installed
+	(spotted by Mathieu Geli)
+	fix typos
+	minimal WPA support
+	always restart wlan-ng interface
+	move wlan-ng stuff in network::network
+
+	* network/tools.pm: minimal WPA support
+
+	* network/netconnect.pm: minimal WPA support
+	move wlan-ng stuff in network::network
+	space cleanup
+	spaces cleanup
+
+2005/02/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* standalone/net_applet: no space before question marks in English
+	no space after colon in English
+
+	* printer/printerdrake.pm: move "HPOJ" and "HPLIP" as parameters of
+	translatable strings,
+	so common phrases need to be translated only once.
+	perl_cheker doesn't like a line break between function name and
+	parenthesis
+
+	* share/po/nn.po, share/po/wa.po: updated Walloon file
+	updated pot file
+
+	* share/po/da.po, share/po/eu.po: updated Basque and Danish files
+	updated pot file
+
+	* share/po/es.po: updated Spanish file
+	updated pot file
+
+2005/02/24  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/mount_options.pm: if we remove a weird option, also remove nodev,
+	noexec and nosuid
+	(but don't do it everytime, since those options can be usefully used for
+	/tmp for example)
+	fix typo
+	fix typo
+	fix typo
+
+2005/02/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/lt.po: merge in strings from urpmi & rpmdrake
+
+	* standalone/drakups: perl_checker fixes
+	fix reading UPS db: some UPS have the same name but differes in the
+	way they're plugged into the system (eg: USB vs serial cable), so we
+	need to differ them through the "extra" field
+	adapt to new Libconf API
+
+	* share/po/br.po: merge in strings from urpmi & rpmdrake
+	update
+	minor update
+
+	* drakxtools.spec: 10.2-0.29mdk
+
+	* .perl_checker: blacklist bad Libconf package
+
+	* share/po/eo.po: merge in strings from urpmi & rpmdrake
+	update
+
+	* share/po/id.po, share/po/ro.po, share/po/mk.po, share/po/th.po,
+	share/po/af.po, share/po/az.po, share/po/sr@Latn.po, share/po/ko.po,
+	share/po/bg.po, share/po/lv.po: update
+
+	* standalone/drakxtv: explain
+	fix #13865: scan TV channels for TV ocards that do not require any
+	driver configuration
+
+2005/02/24  willysr
+
+	* share/po/id.po: Updated
+
+2005/02/23  fisher
+
+	* share/po/uk.po: ukrainian tr-tion update
+
+2005/02/23  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakconnect: remove spurious spaces
+
+	* network/modem.pm: remove all non-digit characters in phone number
+	(#10813)
+
+	* network/network.pm: handle wpa_supplicant files
+
+2005/02/23  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: fix
+
+	* interactive/gtk.pm: 
+	  - fix displaying "Advanced" instead of "Basic" in advanced_state by
+	default
+	  - cleanup
+
+	* ugtk2.pm: fix usage of create_file_selector()
+
+	* common.pm: cleanup is_xbox() here too
+
+	* detect_devices.pm: write code correctly
+	"pae" flag in the cpu is needed for new kernel
+	SuSE also have "Hand Held" as a laptop (ch_type in { 8, 9, 10, 11, 14 })
+
+2005/02/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* ugtk2.pm: Force to open file selector as a modal window (bug 13942)
+
+	* share/po/zh_TW.po: Fix missing \n
+
+2005/02/23  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* keyboard.pm, detect_devices.pm, common.pm, Xconfig/monitor.pm,
+	Xconfig/xfree.pm: XBox support - XFdrake
+
+	* standalone/drakbackup, standalone/drakTermServ: Drop banner, using up
+	too much window space. Perl_checker mods.
+
+2005/02/23  shivahuang
+
+	* share/po/zh_TW.po: merge correctly between 1.352 and 1.353
+
+2005/02/23  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed bug of accentuated characters in PPDs not correctly reproduced
+	in the
+	printer options dialog.
+
+	* printer/main.pm: 
+	  - Made possible modifying the options on a non-Foomatic queue not set
+	up
+	with printerdrake.
+
+2005/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_any.pm (default_packages) setup acerk for another laptop (which
+	doesn't need
+	any option)
+
+	* network/adsl_consts.pm: add norwegian ADSL providers (Eskild Hustvedt)
+
+	* share/po/br.po: update
+
+2005/02/23  vljubovic
+
+	* share/po/bs.po: Fixes in Bosnian translation
+
+2005/02/22  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: finished translation for 10.2
+
+2005/02/22  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+	melo
+
+2005/02/22  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: reflect new label from drakconf
+	disable activefw by default
+
+2005/02/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po: updated Bengali file
+
+	* share/po/ky.po: updated Kirghiz file
+
+	* share/po/sl.po: updated Slovenian file
+
+2005/02/22  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm, pkgs.pm: Verify free space on disk for copying
+	rpms
+
+	* install_any.pm: Fix location of hdlist for rpms copied on disk
+
+2005/02/22  rstandtke
+
+	* share/po/de.po: some fixes
+
+2005/02/22  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/02/22  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Corrected default settings for printer auto-detection in beginner's
+	mode
+
+2005/02/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfont (interactive_mode) typo fix
+
+	* standalone/drakconnect, standalone/net_applet: reuse the very same
+	message
+	unbreak blino change: reuse string from mcc since that's what will be
+	displayed and allter *all* callers
+
+	* drakxtools.spec: 10.2-0.28mdk
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: merge missing strings from mcc's
+	domain
+
+	* share/rpmsrate, lang.pm: adapt to new uim splitting
+
+2005/02/22  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic QA
+
+2005/02/21  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/02/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakids: add an explanation about the Gtk2::SimpleList
+	workaround
+	uggly workaround of Gtk2::SimpleList bugs
+
+2005/02/21  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: fix scim-anthy appearing twice
+
+2005/02/21  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/data.pm: 
+	  - Removed "gpr" from the packages to be installed. It is taken from
+	the distro
+	because it is not maintained anymore.
+
+2005/02/21  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
 2005/02/21  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: part. update
@@ -45386,7 +46228,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1010 2005/02/15 17:13:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1011 2005/02/21 19:20:08 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
