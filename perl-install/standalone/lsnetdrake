@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use lib qw(/usr/lib/libDrakX);
+use standalone;
 use network::nfs;
 use network::smb;
 
@@ -18,7 +19,7 @@ push @l, network::smb->new if $smb;
 
 foreach my $class (@l) {
     foreach my $server (sort_names($class->find_servers)) {
-	foreach (sort_names($class->find_exports($server))) {
+	foreach (sort_names(eval { $class->find_exports($server) })) {
 	    print $class->to_fullstring($_), "\n";
 	}
     }
