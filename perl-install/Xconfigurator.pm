@@ -10,6 +10,7 @@ use detect_devices;
 use run_program;
 use Xconfigurator_consts;
 use any;
+use modules;
 use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
@@ -1105,13 +1106,13 @@ Would you like X to start when you reboot?"), 1);
 		$l{uid} > 500, $l{name};
 	    } cat_("$o->{prefix}/etc/passwd");
 
-	    my lag='yes'
+	    my $flag='no';
 	    unless (exists $o->{miscellaneous}{autologuser} || $::auto || !@users || $o->{authentication}{NIS}) {
 	        $in->ask_from_entries_refH(_("Autologin"),
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
                                            [ _("Choose the default user:") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ])
-		    or delete $o->{miscellaneaous}{autologuser} && flag='no';
+		    && delete $o->{miscellaneaous}{autologuser} && do { $flag='yes'; system("urpmi --auto autologin"); } ;
 	    }
 	    any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, "startx", $flag);
 	}
