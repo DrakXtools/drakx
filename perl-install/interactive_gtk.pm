@@ -140,7 +140,7 @@ sub create_ctree {
     my $sep = quotemeta $e->{separator};
     my $tree = Gtk::CTree->new(1, 0);
 
-    my (%wtree, %wleaves, $size);
+    my (%wtree, %wleaves, $size, $selected_via_click);
     my $parent; $parent = sub {
 	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
 	my $s;
@@ -178,17 +178,19 @@ sub create_ctree {
     $tree->set_selection_mode('browse');
     $tree->signal_connect(tree_select_row => sub { 
 	$curr = $_[1]; 
-	$curr->row->is_leaf or return;
-	my @ll; for (my $c = $curr; $c; $c = $c->row->parent) { 
-	    unshift @ll, first $tree->node_get_pixtext($c, 0);
+	if ($curr->row->is_leaf) {
+	    my @ll; for (my $c = $curr; $c; $c = $c->row->parent) { 
+		unshift @ll, first $tree->node_get_pixtext($c, 0);
+	    }
+	    my $val = join $e->{separator}, @ll;
+	    mapn {
+		${$e->{val}} = $_[1] if $val eq $_[0]
+	    } \@l, $e->{list};
+	    &$changed;
+	} else {
+	    $tree->expand($curr) if $selected_via_click;
 	}
-	my $val = join $e->{separator}, @ll;
-	mapn {
-	    ${$e->{val}} = $_[1] if $val eq $_[0]
-	} \@l, $e->{list};
-	&$changed;
     });
-#    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
     my $timeout;
 
@@ -199,6 +201,7 @@ sub create_ctree {
     };
     $tree->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
+	$selected_via_click = 0;
 	my $c = chr($event->{keyval} & 0xff);
 	$curr or return;
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
@@ -245,7 +248,10 @@ sub create_ctree {
 	}
 	1;
     });
-    $tree->signal_connect(button_press_event => sub { &$double_click if $curr->row->is_leaf }) if $double_click;
+    $tree->signal_connect(button_press_event => sub {
+	$selected_via_click = 1;
+	&$double_click if $curr->row->is_leaf && $double_click;
+    });
 
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
