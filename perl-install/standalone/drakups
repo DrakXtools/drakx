@@ -304,6 +304,8 @@ $in = 'interactive'->vnew;
 
 $ugtk2::wm_icon = "drakups";
 
+$in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') if !$::testing;
+
 if (any { $_ eq '--wizard' } @ARGV) {
     add_device_wizard($in, $struct);
     $in->exit($@ ? 1 : 0);
@@ -395,6 +397,5 @@ foreach my $i (@pages) {
 
 #------------------------------------------------------------------
 # let's start the show:
-$in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') if !$::testing;
 $w->{rwindow}->show_all;
 $w->main;
