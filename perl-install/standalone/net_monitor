@@ -52,10 +52,12 @@ require_root_capability();
 
 my $window1 = my_gtk->new('net_monitor');
 $window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
-$window1->{rwindow}->set_position(1);
-$window1->{rwindow}->set_title(N("Network Monitoring"));
-$window1->{rwindow}->set_policy(1, 1, 1);
-$window1->{rwindow}->set_border_width(5);
+unless ($::isEmbedded) {
+    $window1->{rwindow}->set_position(1) ;
+    $window1->{rwindow}->set_title(N("Network Monitoring"));
+    $window1->{rwindow}->set_policy(1, 1, 1);
+    $window1->{rwindow}->set_border_width(5);
+}
 #$::isEmbedded or $window1->{rwindow}->set_usize(580, 320);
 
 my $colorr = gtkcolor(50400, 655, 20000);
