@@ -135,7 +135,7 @@ gtkadd($window,
                                                    $splash_mode = !$splash_mode;
         					   if ($boot_warn && $no_bootsplash && $splash_mode) { 
 						       $in->ask_warn(N("Warning"), 
-						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode into the bootloader configuration tool.") ]);
+						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") ]);
 						   	$boot_warn = 0
 						    }
                                                    $splash_box->set_sensitive($splash_mode);

@@ -598,7 +598,7 @@ enable the oportunistic ecryption.\n",$ipsec_conf));
 
 } elsif ($choice =~ /^config setup/) {
 	$in->ask_from('',
-N("Your %s file has several sctions.\n
+N("Your %s file has several sections.\n
 You can now edit the config setup section entries.
 Choose continue when you are done to write the data.\n", $ipsec_conf),
 
@@ -851,7 +851,7 @@ my $number = network::ipsec::matched_section_key_number_racoon_conf($choice,$rac
 
 if ($choice =~ /^remote/) {
      ask_info2('',
-N("Your %s file has several sctions.\n
+N("Your %s file has several sections.\n
 
 You can now edit the remote section entries.
 
@@ -860,7 +860,7 @@ Choose continue when you are done to write the data.\n", $racoon_conf), $racoon-
 
 } elsif ($choice =~ /^sainfo/) {
 	ask_info('',
-N("Your %s file has several sctions.
+N("Your %s file has several sections.
 
 You can now edit the sainfo section entries.
 
