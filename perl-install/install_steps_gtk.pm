@@ -575,7 +575,7 @@ sub install_theme {
 
     load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
 
-    if (my ($font, $font2) = lang::get_x_fontset($o->{lang})) {
+    if (my ($font, $font2) = lang::get_x_fontset($o->{lang}, $::rootwidth < 800 ? 10 : 12)) {
 	$font2 ||= $font;
 	Gtk::Rc->parse_string(qq(
 style "default-font" 
@@ -590,7 +590,7 @@ widget "*" style "default-font"
 widget "*Steps*" style "small-font"
 
 ));
-   }
+    }
     gtkset_background(@background1);# unless $::testing;
 
     create_logo_window($o);

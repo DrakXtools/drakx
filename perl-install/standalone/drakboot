@@ -2,12 +2,13 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:common :system :file :functional);
+use common qw(:common :file :functional);
 use interactive;
 use any;
 use bootloader;
 use detect_devices;
 use fsedit;
+use fs;
 use c;
 
 local $_ = join '', @ARGV;
@@ -17,7 +18,7 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/;
 $::isStandalone = 1;
 
-my $in = vnew interactive('su');
+my $in = interactive->vnew('su');
 
 my %l = (
 	 arch() !~ /sparc|alpha/ ? (

@@ -268,7 +268,7 @@ sub setup {
 	local *F;
 	open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].bkmap |";
 	local $/ = undef;
-	eval { load(scalar <F>) };
+	eval { load(join('', <F>)) };
     }
     my $f = xmodmap_file($keyboard);
     eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;

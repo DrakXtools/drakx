@@ -433,7 +433,7 @@ sub setup_thiskind {
     }
     @l = map { $_->{description} } @l;
     while (1) {
-	my ($msg_type) = $type =~ s/\|.*//;
+	(my $msg_type = $type) =~ s/\|.*//;
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
 	    _("Do you have another one?") ] :

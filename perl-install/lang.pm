@@ -152,7 +152,7 @@ my %xim = (
 
 sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
 sub std_ { std2($_[0], 10), std2($_[0], 10) }
-sub std  { std2($_[0], 12), std2($_[0],  8) }
+sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 
 #- [0]: console font name; [1]: unicode map for console font
 #- [2]: acm file for console font; [3]: X11 fontset
@@ -169,9 +169,9 @@ my %charsets = (
   "georgian-ps" => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
   "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
-	std("iso8859-1") ],
+	sub { std("iso8859-1", @_) } ],
   "iso-8859-2" => [ "lat2-sun16",	undef,		"iso02",
-	std("iso8859-2") ],
+	sub { std("iso8859-2", @_) } ],
   "iso-8859-3" => [ "iso03.f16",	undef,		"iso03",
 	std_("iso8859-3") ],
   "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
@@ -189,7 +189,7 @@ my %charsets = (
   "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
 	std_("iso8859-8") ],
   "iso-8859-9" => [ "iso09.f16",	"iso09",	"trivial.trans",
-	std("iso8859-9") ],
+	sub { std("iso8859-9", @_) } ],
   "iso-8859-13" => [ "tlat7",		"iso01",	"trivial.trans",
 	std_("iso8859-13") ],
   "iso-8859-14" => [ "tlat8",		"iso01",	"trivial.trans",
@@ -420,11 +420,13 @@ sub load_console_font {
 #-}
 
 sub get_x_fontset {
-    my ($lang) = @_;
+    my ($lang, $size) = @_;
 
     my $l = $languages{$lang}  or return;
     my $c = $charsets{$l->[1]} or return;
-    @$c[3..4];
+    my ($big, $small) = @$c[3..4];
+    ($big, $small) = $big->($size) if ref $big;
+    ($big, $small);
 }
 
 #-######################################################################################
