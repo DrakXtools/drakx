@@ -541,7 +541,13 @@ sub main {
     }
 
     #- needed very early for install_steps_gtk
-    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
+    unless ($::testing) {
+	if ($o->{mouse}) {
+	    mouse::load_modules();
+	} else {
+	    eval { $o->{mouse} = mouse::detect() } unless $o->{nomouseprobe};
+	}
+    }
 
     $o->{locale}{lang} = lang::set($o->{locale}{lang}) if $o->{locale}{lang} ne 'en_US'; #- mainly for defcfg
 
