@@ -2,6 +2,7 @@ package harddrake::bttv;
 
 use strict;
 
+use standalone;
 use interactive;
 use detect_devices;
 use lang;
