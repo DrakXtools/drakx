@@ -458,8 +458,8 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{N("Informations")}) {
-	my $module = c::getNetDriver($interface_kind) || modules::get_alias($interface_kind);
-	my $info = find { $module ? $_->{driver} eq $module : $_->{description} eq $gui->{description} } detect_devices::probeall();
+	my ($info) = $gui->{description} ? 
+	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
 	
 	gtkpack($gui->{sheet}{N("Informations")} = Gtk2::VBox->new(0,0),
 		gtktext_insert(Gtk2::TextView->new,
@@ -468,7 +468,7 @@ sub build_notebook {
 					 [ N("Vendor"), split('\|', $info->{description}) ],
 					 [ N("Description"), reverse split('\|', $info->{description}) ],
 					 [ N("Media class"), $info->{media_type} || '-' ],
-					 [ N("Module name"), $module || '-' ], 
+					 [ N("Module name"), $info->{driver} || '-' ], 
 					 [ N("Mac Address"), c::get_hw_address($interface_kind) || '-' ],
 					 [ N("Bus"), $info->{bus} || '-' ],
 					 [ N("Location on the bus"), $info->{pci_bus} || '-' ],
