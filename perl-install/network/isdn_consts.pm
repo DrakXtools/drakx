@@ -427,16 +427,16 @@ our @isdn_capi =
     id => 0x3000,
     description => 'AVM GmbH|FtitzCard USB DSL SL USB',
     bus => 'USB',
-    driver => 'fcdslslusb',
-    firmware => 'fdlubase.frm',
+    driver => 'fcdslusba',
+    firmware => 'fdlabase.frm'
    },
    {
     vendor => 0x057c,
     id => 0x3500,
     description => 'AVM GmbH|FtitzCard USB DSL SL USB Analog',
     bus => 'USB',
-    driver => 'fcdslusba',
-    firmware => 'fdlabase.frm'
+    driver => 'fcdslslusb',
+    firmware => 'fdlubase.frm',
    },
   );
 
