@@ -116,7 +116,7 @@ sub errorInStep {
 #-######################################################################################
 sub installPackages {
     my ($o, $packages) = @_;
-    catch_cdie { $o->install_steps::installPackages($packages) } sub { print formatError($@), "\n"; 1 }
+    catch_cdie { $o->install_steps::installPackages($packages) } sub { print formatError($@), "\n"; 1 };
 }
 
 1;

@@ -320,7 +320,7 @@ sub Clear_all {
 	RemoveFromRAID($in, $hd, $_, $all_hds) if isPartOfRAID($_);
     }
     if (isLVM($hd)) {
-	lvm::lv_delete($hd, $_) foreach @parts
+	lvm::lv_delete($hd, $_) foreach @parts;
     } else {
 	$hd->{readonly} = 0; #- give a way out of readonly-ness. only allowed when getting_rid_of_readonly_allowed
 	$hd->{getting_rid_of_readonly_allowed} = 0;
@@ -923,7 +923,7 @@ sub Options {
 		  [ 
 		   (map { 
 			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, hidden => scalar(/password/),
-			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'), }
+			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool') };
 		     } keys %$options),
 		    { label => N("Various"), val => \$unknown, advanced => 1 },
 		  ],
@@ -1263,7 +1263,7 @@ sub choose_encrypt_key {
 	     complete => sub {
 		 length $encrypt_key < 6 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 6)), return 1,0;
 		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ N("The encryption keys do not match"), N("Please try again") ]), return 1,1;
-		 return 0
+		 return 0;
         } } }, [
 { label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },

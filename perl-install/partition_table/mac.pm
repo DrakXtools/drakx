@@ -175,7 +175,7 @@ sub read($$) {
                 } else {
                  	$h{pt_type} = 0x401;
                      $h{isDriver} = 1;
-                };
+                }
 
                 # Let's see if this partition is a driver.
                 foreach (@{$info{ddMap}}) {
@@ -185,7 +185,7 @@ sub read($$) {
             }
             \%h;
         } [ $part ];
-    };
+    }
 
     [ @pt ], \%info;
 }
@@ -225,7 +225,7 @@ sub write($$$;$) {
             };
         }
         push @partstowrite, $part;
-    };
+    }
 
     # now, fill a gap at the end if there is one.
     if ($last->{start} + $last->{size} < $hd->{totalsectors}) {
@@ -327,7 +327,7 @@ sub write($$$;$) {
                 $_->{pName} = "Extra";
                 $_->{pFlags} = 0x31;
             }
-        };
+        }
         $_->{pMapEntry} = @partstowrite;
         syswrite $F, pack($p_format, @$_{@$p_fields}), psizeof($p_format) or return 0;
     }
@@ -384,7 +384,7 @@ sub clear_raw {
             push @{$pt->{normal}}, $pt->{raw}[$i];
             $i++;
         }
-    };
+    }
     @{$pt->{info}{ddMap}} = @{$hd->{primary}{info}{ddMap}};
 
     $pt;

@@ -112,7 +112,7 @@ sub read_header {
     $info{revision} <= $current_revision or log::l("oops, this is a new GPT revision ($info{revision} > $current_revision)");
 
     $info{headerCRC32} == compute_headerCRC32(\%info) or die "bad partition table checksum";
-    \%info
+    \%info;
 }
 
 sub read_partitionEntries {
@@ -169,7 +169,7 @@ sub write {
 	$_->{gpt_type} = $gpt_types{$_->{pt_type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
     my $partitionEntries = join('', map {
-	pack($partitionEntry_format, @$_{@$partitionEntry_fields})	
+	pack($partitionEntry_format, @$_{@$partitionEntry_fields});	
     } (@$pt, ({}) x ($info->{nbPartitions} - @$pt)));
 
     $info->{partitionEntriesCRC32} = crc32($partitionEntries);

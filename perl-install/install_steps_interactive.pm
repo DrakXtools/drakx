@@ -96,7 +96,7 @@ sub acceptLicense {
 	  if ($::globetrotter) {
 	      system("killall XFree86");
 	      exec("/sbin/reboot");
-	  };
+	  }
 	  install_any::ejectCdrom();
 	  $o->exit;
       };
@@ -334,7 +334,7 @@ sub choosePartitionsToFormat {
     my @l = grep { !$_->{isMounted} && $_->{mntpoint} && 
 		   (!isSwap($_) || $::expert) &&
 		   (!isFat_or_NTFS($_) || $_->{notFormatted} || $::expert) &&
-		   (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
+		   (!isOtherAvailableFS($_) || $::expert || $_->{toFormat});
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
 
@@ -653,7 +653,7 @@ sub reallyChooseGroups {
 		  disabled => sub { $all },
 		  text => translate($_->{label}),
 		  help => translate($_->{descr}),
-		 }
+		 };
 	   } @$compssUsers),
 	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
 	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
@@ -1137,7 +1137,7 @@ sub summary {
 	label => N("Bootloader"),
 	val => sub { 
 	    #-PO: example: lilo-graphic on /dev/hda1
-	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot})
+	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot});
 	},
 	clicked => sub { 
 	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security});
@@ -1228,7 +1228,7 @@ sub setRootPassword {
 		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,0;
 		 length $sup->{password} < 2 * $o->{security}
 		   and $o->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return 1,0;
-		 return 0
+		 return 0;
         } } }, [
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },

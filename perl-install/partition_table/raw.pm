@@ -160,7 +160,7 @@ sub get_geometry {
     if ($total = c::total_sectors(fileno $F)) {
 	compute_nb_cylinders(\%geom, $total);
     } else {
-	$total = $geom{heads} * $geom{sectors} * $geom{cylinders}
+	$total = $geom{heads} * $geom{sectors} * $geom{cylinders};
     }
 
     { geom => \%geom, totalsectors => $total };

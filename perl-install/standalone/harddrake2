@@ -197,12 +197,12 @@ my @menu_items =
                              N("Description of the fields:\n\n")
                              . join("\n\n", map {
                                  my $info = lookup_field($_);
-                                 if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])))
+                                 if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
                              } sort keys %$current_device),
-                             { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 })
+                             { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 });
 
            } else {
-               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) })
+               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) });
            }
        },
        undef, '<Item>'
@@ -313,7 +313,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                        $current_device->{$_} eq 'yes' ? N("Yes") : 
                        $current_device->{$_} eq 'no'  ? N("No") : 
                        $current_device->{$_}) . "\n\n", if_($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/, { foreground => 'indian red' }) ]
-                   ])
+                   ]);
             } sort keys %$current_device;
             my %groups = map { if_(ref $groups{$_}, %{$groups{$_}}) } 'generic', $current_class;
             my ($grouped, $ungrouped) = partition {
@@ -328,13 +328,13 @@ $tree->get_selection->signal_connect('changed' => sub {
                 
                 push @formated, titleFormat($group);
                 push @formated, map { if_(ref $_, @$_) } @device_fields{@fields};
-            };
+            }
             push @formated, if_(@formated && @$ungrouped, titleFormat(N("Misc"))), map { @{$device_fields{$_}} } @$ungrouped;
             gtktext_insert($text, \@formated);
 
             foreach (keys %$current_device) {
                 print qq(Warning: skip "$_" field => "$current_device->{$_}"\n\n) unless (lookup_field($_))[0];
-            };
+            }
             
             # if we've valid driver, let's offer to configure it, else hide buttons 
             show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^Removable:|\|/, $module_cfg_button);
@@ -434,7 +434,7 @@ foreach (@classes) {
         rename_field($_, 'usb_vendor', 'vendor');
         rename_field($_, 'vendor_name', 'Vendor');
 
-        foreach my $i (qw(auxmouse devfs_prefix unsafe val wacom)) { delete $_->{$i} };
+        foreach my $i (qw(auxmouse devfs_prefix unsafe val wacom)) { delete $_->{$i} }
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
@@ -525,5 +525,5 @@ sub popup_menu {
           }
           # Tell calling code that we have not handled this event; pass it on.
           return 0;
-      }
+      };
 }
