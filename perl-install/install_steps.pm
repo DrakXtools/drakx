@@ -523,13 +523,15 @@ sub updateModulesFromFloppy {
     my ($o) = @_;
     return if $::testing || !$o->{updatemodules};
 
-    fs::mount($o->{updatemdoules}, "/floppy", "ext2", 0);
+    fs::mount($o->{updatemodules}, "/floppy", "ext2", 0);
     foreach (glob_("$o->{prefix}/lib/modules/*")) {
 	my ($kernelVersion) = m,lib/modules/(\S*),;
+	log::l("examining updated modules for kernel $kernelVersion");
 	if (-d "/floppy/$kernelVersion") {
 	    my @src_files = glob_("/floppy/$kernelVersion/*");
-	    my @dest_files = split "\n", `find "$o->{prefix}/lib/modules`;
+	    my @dest_files = split "\n", `chroot $o->{prefix} find /lib/modules`;
 	    foreach my $s (@src_files) {
+		log::l("found updatable module $s");
 		my ($sfile, $sext) = $s =~ /([^\/\.]*\.o)(?:\.gz|\.bz2)?$/;
 		my $qsfile = quotemeta $sfile;
 		my $qsext = quotemeta $sext;
