@@ -82,7 +82,10 @@ our %spoolers = ('pdq' => {
 					      /sbin/ifconfig
 					      /usr/bin/xpp
 					      /usr/share/cups/model/postscript.ppd.gz),
-					   $::isInstall ? '/usr/bin/curl' : '/usr/bin/wget' ] ],
+					   $::isInstall ||
+					   !(-x '/usr/bin/wget') ?
+					   '/usr/bin/curl' :
+					   '/usr/bin/wget' ] ],
 		     'alternatives' => [
 					[ 'lpr', '/usr/bin/lpr-cups' ],
 					[ 'lpq', '/usr/bin/lpq-cups' ],
