@@ -1204,7 +1204,8 @@ sub configureX {
     };
 
     require Xconfig::main;
-    if ($o->{raw_X} = Xconfig::main::configure_everything_or_configure_chooser($o, $options, !$expert, $o->{keyboard}, $o->{mouse})) {
+    if (my $raw_X = Xconfig::main::configure_everything_or_configure_chooser($o, $options, !$expert, $o->{keyboard}, $o->{mouse})) {
+	$o->{raw_X} = $raw_X;
 	install_steps::configureXAfter($o);
     }
 }
