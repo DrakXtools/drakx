@@ -199,8 +199,6 @@ sub create_treeview_tree {
     my $select = sub {
 	my ($path_str) = @_;
 	my $path = Gtk2::TreePath->new_from_string($path_str);
-	print STDERR "TODO: Gtk2::TreeView::expand_to_path segfaults as of 2.1.2, disabling it until a fix\n";
-	return;
 	$tree->expand_to_path($path);
 	$path->free;
 	$path = Gtk2::TreePath->new_from_string($path_str);
