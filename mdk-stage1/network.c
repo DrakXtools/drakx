@@ -654,16 +654,16 @@ static enum return_type intf_select_and_up(char **http_proxy_host, char **http_p
 		num_interfaces++;
 	}
 	
+	sel_intf->http_proxy_host = "";
+	sel_intf->http_proxy_port = "";
+
 	results = bringup_networking(sel_intf);
 
 	if (results == RETURN_OK) {
-		intf->http_proxy_host = "";
-		intf->http_proxy_port = "";
-
 		if (http_proxy_host && http_proxy_port) {
-			intf_get_http_proxy(intf);
-			*http_proxy_host = intf->http_proxy_host;
-			*http_proxy_port = intf->http_proxy_port;
+			intf_get_http_proxy(sel_intf);
+			*http_proxy_host = sel_intf->http_proxy_host;
+			*http_proxy_port = sel_intf->http_proxy_port;
 		}
 
 		save_netinfo(sel_intf);
@@ -1059,7 +1059,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 			}
 
 		}
-		hosts[host_index+1] = NULL;
+		hosts[host_index] = NULL;
 
 		results = ask_from_list("Please select a mirror in the list, "
 					"or cancel to specify it.",
