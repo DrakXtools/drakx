@@ -258,7 +258,7 @@ sub setupBootloader__general {
     }
 
     bootloader::set_profiles($b, $profiles);
-    bootloader::set_append($b, "mem", $memsize);
+    bootloader::set_append($b, "mem", $memsize || 0);
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'ht'));
     }

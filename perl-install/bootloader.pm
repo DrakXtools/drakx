@@ -381,7 +381,7 @@ sub set_append {
 	my ($simple, $dict) = @_;
 	if ($has_val) {
 	    @$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
-	    push @$dict, [ $key, $val ] if $val ne '';
+	    push @$dict, [ $key, $val ] if !($val eq '' || $key eq 'mem' && !$val);
 	} else {
 	    @$simple = grep { $_ ne $key } @$simple;
 	    push @$simple, $key;
