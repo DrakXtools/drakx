@@ -314,8 +314,10 @@ sub create_box_with_title {
 
     my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
     my $box = Gtk2::VBox->new(0,0);
-    return $box if $nbline == 0;
-
+    if ($nbline == 0) {
+	$o->{box_size} = 0;
+	return $box;
+    }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
     if (@_ <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
