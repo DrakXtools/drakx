@@ -293,14 +293,13 @@ sub write_fstab($;$$) {
 		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
     push @to_add,
-      sort { $a->[1] cmp $b->[1] }
       grep { !exists $new{$_->[0]} && !exists $new{$_->[1]} }
       map { [ split ] } cat_("$prefix/etc/fstab");
 
     log::l("writing $prefix/etc/fstab");
     local *F;
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
-    print F join(" ", @$_), "\n" foreach @to_add;
+    print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
 }
 
 sub check_mount_all_fstab($;$) {

@@ -1,16 +1,19 @@
 style "default-font" 
 {
-  fontset = "-mdk-helvetica-medium-r-normal-*-*-100-*-*-*-*-iso8859-15"
+  fontset = "-*-*-medium-r-normal-*-10-*-*-*-*-*-iso8859-15"
 }
 
 style "steps"
 {
-  fontset = "-mdk-helvetica-medium-r-normal-*-*-80-*-*-*-*-iso8859-15"
+  fontset = "-*-*-medium-r-normal-*-8-*-*-*-*-*-iso8859-15"
 }
 
 style "logo"
 {
   bg[NORMAL] = { 1.0, 1.0, 1.0 }
+
+  # no background image
+  engine "pixmap" { image { function = FLAT_BOX } }
 }
 
 style "stepsReachable"

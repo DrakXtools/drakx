@@ -26,6 +26,7 @@ use modules;
 use lang;
 use services;
 use keyboard;
+use any;
 use fs;
 use log;
 
@@ -620,6 +621,7 @@ sub addUser($) {
     my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
     $u->{shell} ||= "/bin/bash";
+    $u->{icon} ||= translate('default');
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
@@ -634,6 +636,8 @@ sub addUser($) {
          _("Password (again)") => {val => \$u->{password2}, hidden => 1},
 	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
+	   ), $o->{security} > 3 || $::beginner ? () : (
+	 _("Icon") => {val => \$u->{icon}, list => [ map { translate($_) } @any::users ], not_edit => 1 },
 	   ),
         ],
         focus_out => sub {
@@ -647,6 +651,7 @@ sub addUser($) {
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
+	    $u->{icon} = untranslate($u->{icon}, @any::users);
 	    return 0;
 	},
     )) {
@@ -1002,15 +1007,19 @@ _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', te
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
 _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
+     $::expert ? (
+_("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
+     ) : (),
      $u->{numlock} ? (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
      ) : (),
      ], complete => sub {
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
+	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
+	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
 	    0;
 	}
     ) || return;
-    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 }
 
 #------------------------------------------------------------------------------

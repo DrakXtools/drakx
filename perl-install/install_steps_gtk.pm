@@ -174,13 +174,13 @@ sub new($$) {
 	if ($ENV{DISPLAY} eq ":0") {
 	    my $launchX = sub {
 		my $ok = 1;
-		local $SIG{CHLD} = sub { $ok = 0 };
+		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
 		    exec $_[0], "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
 		}
 		foreach (1..60) {
 		    sleep 1;
-		    return 0 if !$ok;
+		    log::l("Server died"), return 0 if !$ok;
 		    return 1 if c::Xtest($ENV{DISPLAY});
 		}
 		log::l("Timeout!!");
@@ -235,6 +235,7 @@ sub new($$) {
 sub enteringStep {
     my ($o, $step) = @_;
 
+    print _("Entering step `%s'\n", $o->{steps}{$step}{text});
     $o->SUPER::enteringStep($step);
     create_steps_window($o);
     create_help_window($o);
@@ -778,7 +779,7 @@ sub create_logo_window() {
     $w->{rwindow} = $w->{window} = new Gtk::Window;
     $w->{rwindow}->set_uposition($::stepswidth, 0);
     $w->{rwindow}->set_usize($::logowidth, $::logoheight);
-    $w->{rwindow}->set_name("background");
+    $w->{rwindow}->set_name("logo");
     $w->show;
     my $file = "logo-mandrake.xpm";
     -r $file or $file = "/usr/share/$file";

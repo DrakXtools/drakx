@@ -19,6 +19,7 @@ use log;
 use fsedit;
 use commands;
 use network;
+use any;
 use fs;
 
 my @filesToSaveForUpgrade = qw(
@@ -418,7 +419,7 @@ sub installCrypto {
     my $u = $o->{crypto} or return; $u->{mirror} or return;
     my ($packages, %done);
     my $dir = "$o->{prefix}/tmp";
-    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
     network::up_it($o->{prefix}, $o->{intf}) if $o->{intf};
 
     local *install_any::getFile = sub {
@@ -550,7 +551,7 @@ sub addUser($) {
 	}
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
-
+	any::addKdmIcon($p, $u->{name}, $u->{icon});
     }
     require any;
     any::addUsers($o->{prefix}, map { $_->{name} } @l);
@@ -715,6 +716,7 @@ sub miscellaneous {
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
+    $o->{miscellaneous}{CLEAN_TMP} ||= $s{HDPARM} if exists $s{CLEAN_TMP};
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};

@@ -77,7 +77,7 @@ sub get_geometry($) {
 
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
     if (my $total = c::total_sectors(fileno F)) {
-	$geom{cylinders} = $total / $geom{heads} / $geom{sectors};
+	$geom{cylinders} = int $total / $geom{heads} / $geom{sectors};
     }
 
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };

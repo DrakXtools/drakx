@@ -262,9 +262,12 @@ sub allocatePartitions($$) {
 	    while (suggest_part($hd, 
 				$part = { start => $start, size => 0, maxsize => $size }, 
 				$hds, $to_add)) {
+		log::l("partsize " . ($part->{size}+ $part->{start}));
+		log::l("size " . ($size+ $start));
 		add($hd, $part, $hds);
 		$size -= $part->{size} + $part->{start} - $start;
 		$start = $part->{start} + $part->{size};
+		log::l("size " . ($size+ $start));
 	    }
 	}
     }

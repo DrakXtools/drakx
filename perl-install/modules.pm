@@ -1,6 +1,6 @@
 package modules;
 
-use vars qw(%loaded %drivers $scsi);
+use vars qw(%loaded %drivers);
 
 use common qw(:common :file :system);
 use detect_devices;
@@ -10,7 +10,7 @@ use log;
 
 my %conf;
 my %loaded; #- array of loaded modules for each types (scsi/net/...)
-$scsi = 0;
+my $scsi = 0;
 my %deps = ();
 
 my @drivers_by_category = (
@@ -86,9 +86,9 @@ arch() =~ /^sparc/ ? (
   "3c59x" => "3com 3c59x (Vortex)",
   "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
-
+}],
+[ 'network', {
   "8390" => "8390",
-  "dummy" => "dummy",
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
@@ -340,11 +340,11 @@ sub text2driver($) {
 
 sub add_alias($$) { 
     my ($alias, $name) = @_;
-    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return foreach keys %conf;
+    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;
     $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
     log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
-    1;
+    $alias;
 }
 
 sub remove_alias($) {
@@ -464,14 +464,12 @@ sub write_conf {
     my ($file) = @_;
 
     #- remove the post-install supermount stuff. We may have to add some more
-    substInFile { $_ = '' if /post-install supermount/ } $file;
+    substInFile { $_ = '' if /^post-install supermount/ } $file;
 
     my $written = read_conf($file);
 
     my %net = detect_devices::net2module();
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
-
-    add_alias('scsi_hostadapter', 'ide-scsi') if detect_devices::getIDEBurners();
 
     if (my @scsis = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf) {
 	log::l("has scsis ", join " ; ", map { "modprobe $_" } @scsis);

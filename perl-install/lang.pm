@@ -114,9 +114,9 @@ my %xim = (
   }
 );
 
-sub std2 { "-mdk-helvetica-medium-r-normal-*-*-$_[1]-*-*-*-*-$_[0]" }
-sub std_ { std2($_[0], 100), std2($_[0], 100) }
-sub std  { std2($_[0], 100), std2($_[0],  80) }
+sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
+sub std_ { std2($_[0], 10), std2($_[0], 10) }
+sub std  { std2($_[0], 10), std2($_[0],  8) }
 
 #- [0]: console font name; [1]: unicode map for console font
 #- [2]: acm file for console font; [3]: X11 fontset
@@ -174,9 +174,9 @@ my %charsets = (
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
 #- I have no console font for Thai...
   "tis620"     => [ undef,		undef,		"trivial.trans",
-	std2("tis620.2533-1",120) ],
+	std2("tis620.2533-1",12) ],
   "tcvn"       => [ "tcvn8x16",		"tcvn",		"trivial.trans",
-	std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
+	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
   "viscii"     => [ "viscii10-8x16",	"viscii.uni",	"viscii1.0_to_viscii1.1.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
 #- Farsi (iranian) needs special console driver for text mode [patching acon ?]

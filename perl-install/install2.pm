@@ -382,6 +382,7 @@ sub miscellaneous {
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
             HDPARM => $o->{miscellaneous}{HDPARM},
+            CLEAN_TMP => $o->{miscellaneous}{CLEAN_TMP},
             CLASS => $::expert && "expert" || $::beginner && "beginner" || "medium",
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
@@ -448,7 +449,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 #-PADTODO
 sub createBootdisk {
-    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
 
     return if $o->{lnx4win};
     $o->createBootdisk($_[1] == 1);
@@ -467,7 +468,7 @@ sub configureX {
 
     #- done here and also at the end of install2.pm, just in case...
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
-    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
 
     $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
@@ -657,7 +658,7 @@ sub main {
     install_any::ejectCdrom();
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
-    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();

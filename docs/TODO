@@ -14,11 +14,13 @@ what happens if a module fails to insmod (scsi step), in beginner/normal/expert
 
 fstab must be sorted (/usr/local after /usr)
 
-in chooseResolutions: display the graphic card found
-
 diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 RAID upgrades
+
+add choice clean /tmp or not in expert
+
+kernel chosen by default must be the one according to supermount/secure
 
 -features-------------------------------------------------------------------------------
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
@@ -55,7 +57,7 @@ PPPoE install and configuration (SuSE includes it, DHCP-like)
 
 (7.1?)loopback partitions (even root one)
 
-(7.1)standalone applications for configuration (netdrake, authentificationconf, soundcard)
+(7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
 
 (7.1)feature missing: cancel installation
 crypto: add a cancel & progress bar while downloading
@@ -101,18 +103,18 @@ auto ppp-configure with free provider
 
 
 -easy fixes-----------------------------------------------------------------------------
-add choice clean /tmp or not in expert
-
 in ok_cancel, focus has 3 states, should be 2 (ask dindinx)
-
-configure DHCP for newbies if ethernet & DHCP card available
 
 rpmdrake proposition for cdrom labels
 
-kernel chosen by default must be the one according to supermount/secure
+use option nocheck to mount for upgrades
 
 -fixes needing thinking-----------------------------------------------------------------
+with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
+
 ask network configuration only if NIC found?
+
+configure DHCP for newbies if ethernet & DHCP card available
 
 xvidtune like screen configuration (see SuSE's yast)
 
@@ -161,6 +163,8 @@ bug keyboard focus: after switch in console at Xconfig step
 
 
 -to look at--------------------------------------------------------------------------
+adduserdrake to remove/update users
+
 (???)free provider auto configuration facility (to be discussed).
 
 (?)on laptop, configure the MMU to use swap not very often
@@ -473,4 +477,6 @@ peut en sortir. La seule solution est de redémarrer.
 
 (done,pix)diskdrake and auto partitioning, may have the last creation of partition rejected,
 try to figure why?
+
+(done,pix)in chooseResolutions: display the graphic card found
 

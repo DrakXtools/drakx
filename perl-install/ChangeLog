@@ -1,3 +1,46 @@
+2000-03-01  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (new): more intelligent SIGCHLD handler
+
+2000-02-29  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: moved common network stuff from "net" to "network"
+	(modules like nfs lockd...)
+
+	* fs.pm (write_fstab): moved the sort to the right place
+
+	* services.pm (drakxservices): chkconfig --list is i18n'ed :(
+	set LANGUAGE=C before
+
+	* partition_table_raw.pm (get_geometry): geom{cylinders} must not
+	be a decimal value :)
+
+	* install_steps_gtk.pm (create_logo_window): set_name logo for
+	logo window
+	* share/install.rc: force disabling of background image theme
+
+	* install_steps_gtk.pm (enteringStep): add step information for
+	console 1
+
+	* any.pm (addKdmIcon): new function
+	* install_steps.pm (addUser): handle field icon
+	* install_steps_interactive.pm (addUser): add choice of kdm icon
+	* standalone/adduserdrake: add choice of kdm icon
+
+	* diskdrake.pm (ask_all_data...): change for easier i18n
+
+	* install_steps.pm (miscellaneous): add CLEAN_TMP handling
+	(need cleaning?)
+	* install_steps_interactive.pm (miscellaneous): add CLEAN_TMP
+	option in expert
+	* install2.pm (miscellaneous): add CLEAN_TMP option for
+	/etc/sysconfig/system	
+
+	* install_steps_interactive.pm (miscellaneous): forbidden
+	useSupermount if high security.	
+
+	* mouse.pm (detect): fix bug (ttyS instead of ttyS0)
+
 2000-02-28  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (createXconf): do not use "Generic VGA" for
