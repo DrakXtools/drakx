@@ -523,7 +523,7 @@ list => [ $printer->{currentqueue}{'connect'},
 	  "smb://",
 	  "ncp://",
 	  "socket://",
-	  "postpipe:",
+	  "postpipe:\"\"",
 	  ], not_edit => 0 }, ],
 complete => sub {
     unless ($printer->{currentqueue}{'connect'} =~ /[^:]+:.+/) {
@@ -572,7 +572,7 @@ sub setup_postpipe {
     if (($printer->{configured}{$queue}) &&
 	($printer->{currentqueue}{'connect'} =~ m/^postpipe:/)) {
 	$uri = $printer->{currentqueue}{'connect'};
-	$uri =~ m!^\s*postpipe:(.*)$!;
+	$uri =~ m!^\s*postpipe:\"(.*)\"$!;
 	$commandline = $1;
     } else {
 	$commandline = "";
