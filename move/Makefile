@@ -32,7 +32,7 @@ build: stage1 xwait runlevel_set
 	$(MAKE) -C ../perl-install mo_files
 
 stage1:
-	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-full init-move
+	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make dirs init stage1-full init-move
 	cd .. ; ./make_boot_img move
 
 install:
