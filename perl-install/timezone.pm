@@ -33,10 +33,11 @@ sub ntp_server {
     -e $f or return;
 
     if (@_ > 1) {
+	my $added = 0;
 	substInFile {
 	    if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
-		$_ = $server ? "server $server\n" : "#server $1\n";
-		$server = '';
+		$_ = $added ? "#server $1\n" : "server $server\n";
+		$added = 1;
 	    }
 	} $f;
 	output("$prefix/etc/ntp/step-tickers", "$server\n");
