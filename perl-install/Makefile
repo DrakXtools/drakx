@@ -231,6 +231,9 @@ export:
 	cd ..; cvs export -d $(PACKAGE)-$(PKGVERSION) -r $(TAG) $(PACKAGE)
 	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf $(OTHERDIRS) && set -x && for f in $(OTHERDIRS); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d `basename $$f` gi/$$f; done
 	cd ..; set -x && for f in $(OTHERFILES); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d $(PACKAGE)-$(PKGVERSION) gi/$$f; done
+	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
+	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
+
 
 cvstag:
 	cvs tag $(CVSTAGOPT) $(TAG)
