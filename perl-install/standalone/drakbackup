@@ -92,9 +92,6 @@ my @list_other;
 my $mdk_cc = 0;
 my $DEBUG = 0;
 
-my $backup_sys;# = 1;
-
-
 
 # config. FILES ->  PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -105,6 +102,9 @@ my $save_path = "/var/drakbackup";
 my $option_replace = 0;
 my $comp_mode = 0;
 my $backup_mode = 0; 
+my $backup_sys = 1;
+my $backup_sys_cvs = 1;
+my $what_no_browser = 1;
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -135,6 +135,7 @@ sub read_passwd {
     $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
     @home_files = ();
     @user_list = ();
+    push @user_and_path_list, 'root:/root';
     push @home_files, (split(':', $_))[1] foreach (@user_and_path_list);
     push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
     $DEBUG and print "home_files: ".$_."\n" foreach (@home_files);
@@ -146,6 +147,9 @@ sub save_conf_file {
 		     "OTHER_FILES=@other_files\n",
 		     "PATH_TO_SAVE=$save_path\n",
 		     );
+
+    $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
+    $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
     if ($comp_mode) {
@@ -172,7 +176,8 @@ sub read_conf_file {
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
-	    unless (/^NO_SYS_FILES/)   { $backup_sys = 1;}
+	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0; }
+	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
 	}
 	$cfg_file_exist = 1;
     } else {
@@ -182,32 +187,6 @@ sub read_conf_file {
     close CONF_FILE;    
     $DEBUG and debug; 
 }
-
-# sub read_conf_file {
-#     read_passwd();
-#     if (-e $cfg_file) {
-# 	while (cat_ ('$cfg_file')) {
-# 	    next unless /\S/;
-# 	    next if /^#/;
-# 	    chomp;
-# 	    if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_ );	}
-# 	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @home_files = split(' ', $_ );	}
-# 	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @other_files = split(' ', $_ );	}
-# 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
-# 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
-# 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0; print "I see NO_SYS_FILES\n"; }
-# 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
-# 	    unless (/^NO_SYS_FILES/)   { $backup_sys = 1; print "I NO see NO_SYS_FILES\n"; }
-# 	}
-# 	$cfg_file_exist = 1;
-#     } else {
-# 	$cfg_file_exist = 0;
-# 	print "no exist\n";
-#     }    
-# #    $DEBUG and debug; 
-# }
-
-
 
 if ($mdk_cc) { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
 	   } else { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode_my(); }
@@ -391,6 +370,7 @@ sub advanced {
     my $book_closed;
     my $book_closed_mask;
     my $box_tmp;    
+    my $choice_what_sys;
     $list_other = new Gtk::List();
     $list_other->set_selection_mode(-extended);
 
@@ -456,22 +436,29 @@ sub advanced {
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
 				 1, _("\nPlease check all options that you need.\n"),
-#gtkset_active
-				 0, gtksignal_connect(gtkset_active(new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)")), 0) , clicked => sub { print "on affiche le check valeur :$backup_sys \n"; $backup_sys = $backup_sys ? 0 : 1; print "backup sys value__ : $backup_sys\n"; }),
-				 0, gtkset_active(new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ), 1),
+				 0, my $check_what_sys = new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)")),
+				 0, my $check_what_cvs = new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
 				 1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
 				 );
+
+#      foreach (@user_list) {
+#  	my @lst2;
+# 	push @lst2, ($check_what_user = new Gtk::CheckButton("$_"));
+#      }
+
+
     
     my $box_what_user =  gtkpack_(new Gtk::VBox(0,0),
 				  0, _("Please check all user that you want to include inb your backup."),
 				  0, new Gtk::HSeparator,
 				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-								   new Gtk::CheckButton("root"),
-								   map {new Gtk::CheckButton("$_") } (@user_list) 
+#								   my $check_what_user_root = new Gtk::CheckButton("root"),
+								   map {my $check_what_user = new Gtk::CheckButton("$_") } (@user_list) 
+								   
 								   ),
 							   ),
 				  0, new Gtk::HSeparator,
-				  0, new Gtk::CheckButton( _(" do not include the browser cache") ),
+				  0, my $check_what_browser = new Gtk::CheckButton( _(" do not include the browser cache") ),
 				  );
 
     my $box_what_other =  gtkpack_(new Gtk::VBox(0,10),
@@ -557,6 +544,11 @@ sub advanced {
 		  bottom => "left",
 		  left => "top"
 		  );
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser]) {
+	my $ref = $_->[1];
+	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
+	}
+
     $notebook->set_tab_pos( $rotate{ $notebook->tab_pos } );
     $central_widget = \$about_box;
     $up_box->show_all();
@@ -651,7 +643,7 @@ sub after_adv {
     my $box_cgf_state_comp;
     my $mask;
     my $style;
-    my $box_cgf_state_sys;
+    my $box_cgf_state_sys = ("");
     my $box;
     init Gtk;
     my $text2 = new Gtk::Text(undef, undef);
@@ -662,7 +654,31 @@ sub after_adv {
 
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
+    my ($pix_b_map, $pix_b_mask) = gtkcreate_png("../pixmaps/backup_bot2.png");
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("../pixmaps/cdrom.png");
+    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("../pixmaps/hd.png");
+    my ($pix_quit_map, $pix_quit_mask) = gtkcreate_png("../pixmaps/quit.png");
+
+    my $button_burn_cd = new Gtk::Button();
+    $button_burn_cd->add( gtkpack(new Gtk::HBox( 0, 2),
+				  new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
+				  _("Burn auto\n Install CDROM")
+				  ),
+			  );
+
+    my $button_do_backup = new Gtk::Button();
+    $button_do_backup->add( gtkpack(new Gtk::HBox( 0, 2),
+				  new Gtk::Pixmap($pix_hd2_map, $pix_hd2_mask),
+				  _("Build a \nbackupn now")
+				  ),
+			  );
+
+    my $button_quit = new Gtk::Button();
+    $button_quit->add( gtkpack(new Gtk::HBox( 0, 2),
+				  new Gtk::Pixmap($pix_quit_map, $pix_quit_mask),
+				  _("Quit DrakBackup")
+				  ),
+			  );
 
     read_conf_file();    
     $backup_sys or $box_cgf_state_sys = _("Do not include System Files");
@@ -692,25 +708,28 @@ sub after_adv {
 										gtkpack(new Gtk::VBox(0,10),
 											$box_cfg_state,
 											),),),),),
+					   0, new Gtk::Pixmap($pix_b_map, $pix_b_mask),
 					   0, gtkpack_(new Gtk::HBox(0, 0),
-						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
-						       1, gtkpack_(new Gtk::VBox(0, 1),	
-							       1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
+#						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+						       1, gtkpack_(new Gtk::HBox(0, 1),	
+							       1, gtksignal_connect($button_quit,
 										  clicked => sub { Gtk->main_quit() }),
-							       1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
+							       1, gtksignal_connect($button_do_backup,
+										  clicked => sub { Gtk->main_quit() }),
+							       1, gtksignal_connect($button_burn_cd, 
 										  clicked => sub { Gtk->main_quit() }),
 								   ),
 						       ),
-					   0, new Gtk::HSeparator,
-					   0, new Gtk::HSeparator,
-					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
-						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
-									    sub { ${$central_widget}->destroy(); advanced() }),
-						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
-									    sub { ${$central_widget}->destroy(); wizard() }),
-						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
-									    sub { Gtk->main_quit() }),
-						       ),
+# 					   0, new Gtk::HSeparator,
+# 					   0, new Gtk::HSeparator,
+# 					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
+# 						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
+# 									    sub { ${$central_widget}->destroy(); advanced() }),
+# 						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
+# 									    sub { ${$central_widget}->destroy(); wizard() }),
+# 						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
+# 									    sub { Gtk->main_quit() }),
+# 						       ),
 					   ),
 			   ),
 		   ),
@@ -904,16 +923,6 @@ configuration file:
 #     Gtk->main;
 #     Gtk->exit(0);
 # }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1132,4 +1141,31 @@ configuration file:
 # 	    );
 #     $central_widget = \$box;
 #     $up_box->show_all();
+# }
+
+
+
+
+# sub read_conf_file {
+#     read_passwd();
+#     if (-e $cfg_file) {
+# 	while (cat_ ('$cfg_file')) {
+# 	    next unless /\S/;
+# 	    next if /^#/;
+# 	    chomp;
+# 	    if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_ );	}
+# 	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @home_files = split(' ', $_ );	}
+# 	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @other_files = split(' ', $_ );	}
+# 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
+# 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
+# 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0; print "I see NO_SYS_FILES\n"; }
+# 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
+# 	    unless (/^NO_SYS_FILES/)   { $backup_sys = 1; print "I NO see NO_SYS_FILES\n"; }
+# 	}
+# 	$cfg_file_exist = 1;
+#     } else {
+# 	$cfg_file_exist = 0;
+# 	print "no exist\n";
+#     }    
+# #    $DEBUG and debug; 
 # }
