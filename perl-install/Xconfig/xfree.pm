@@ -315,10 +315,11 @@ sub add_gtf_ModeLines {
 	  ($res eq '1400x1050' || $Xconfig::xfree::resolution2ratio{$res} ne '4/3')) {
 	@to_add = map {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'gtf', $resolution->{X}, $resolution->{Y}, $_);
-	    my ($name, $val) = $s =~ /ModeLine\s*"(.*)"(.*)/i;
-	    chomp $val;
-	    $name =~ s/\.00//;	#- nicer that way
-	    { val => qq("${name}"$val), pre_comment => "# $banner\n" };
+	    if (my ($name, $val) = $s =~ /ModeLine\s*"(.*)"(.*)/i) {
+		chomp $val;
+		$name =~ s/\.00//;	#- nicer that way
+		{ val => qq("${name}"$val), pre_comment => "# $banner\n" };
+	    } else { () }
 	} reverse(sort_numbers(@Xconfig::xfree::vfreqs));
     }
 
