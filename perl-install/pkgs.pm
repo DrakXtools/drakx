@@ -96,8 +96,16 @@ sub invCorrectSize { ($_[0] - $C) / $B }
 sub selectedSize {
     my ($packages) = @_;
     my $size = 0;
+    #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
 	$_->flag_selected and $size += $_->size;
+    }
+    #- but remove size of package being obsoleted or removed.
+    foreach (keys %{$packages->{state}{obsoleted}}) {
+	/(.*)\.[^\.]*$/ and $size -= $packages->{sizes}{$1};
+    }
+    foreach (keys %{$packages->{state}{ask_remove}}) {
+	$size -= $packages->{sizes}{$_};
     }
     $size;
 }
@@ -780,8 +788,9 @@ sub cleanOldRpmDb {
 sub selectPackagesAlreadyInstalled {
     my ($packages, $prefix) = @_;
 
-    log::l("computing installed flags only");
-    $packages->compute_installed_flags($packages->{rpmdb});
+    log::l("computing installed flags and size of installed packages");
+    $packages->{sizes} = $packages->compute_installed_flags($packages->{rpmdb});
+    ref $packages->{sizes} or $packages->{sizes} = {}; #- safe guard for right perl-URPM TO BE REMOVED SOON
 }
 
 sub selectPackagesToUpgrade {
