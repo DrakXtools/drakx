@@ -92,7 +92,7 @@ upload: clean install
 
 	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | tools/mailchangelog
 	tools/addchangelog perl-install/ChangeLog 'snapshot uploaded'
-	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
+#	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
 
 upload_sparc:
 	touch /tmp/mdkinst_done
