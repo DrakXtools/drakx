@@ -88,6 +88,7 @@ static void *grab_file(const char *filename, unsigned long *size)
 
 static enum return_type ensure_additional_modules_available(void)
 {
+#ifdef ENABLE_ADDITIONAL_MODULES
         struct stat statbuf;
         if (stat(additional_archive_name, &statbuf)) {
                 char floppy_mount_location[] = "/tmp/floppy";
@@ -139,6 +140,10 @@ static enum return_type ensure_additional_modules_available(void)
                 return ret;
         } else
                 return RETURN_OK;
+#else
+	allow_additional_modules_floppy = 0;
+	return RETURN_ERROR;
+#endif
 }
 
 int insmod_local_file(char * path, char * options)
