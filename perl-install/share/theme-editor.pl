@@ -40,7 +40,7 @@ $file ||= "themes-mdk.rc";
 $file2 ||= $file;
 my $window1 = new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
-$window1->set_title(_("Theme editor"));
+$window1->set_title(N("Theme editor"));
 $window1->set_policy(0, 1, 0);
 $window1->set_border_width(5);
 gtkadd($window1, my $vb = new Gtk::VBox(0,5));
@@ -97,8 +97,8 @@ foreach (cat_($file)) {
 }
 gtkpack__($vb,
 	  gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-			      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { doit(); Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { doit(); Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { Gtk->main_quit() }),
 			     )
 	 );
 
@@ -140,14 +140,14 @@ sub change_color {
     my $doit;
     $window->signal_connect ( delete_event => sub { Gtk->main_quit() });
     $window->set_position(1);
-    $window->set_title(_("Color configuration"));
+    $window->set_title(N("Color configuration"));
     $window->set_border_width(5);
     gtkadd(gtkset_modal($window,1),
 	   gtkpack_(new Gtk::VBox(0,5),
 		    1, my $colorsel = new Gtk::ColorSelection,
 		    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-			      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { $doit=1; Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { $doit=1; Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { Gtk->main_quit() }),
 			     )
 		   )
 	  );
