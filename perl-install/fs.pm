@@ -227,7 +227,9 @@ sub mount($$$;$) {
 	} elsif ($fs eq 'romfs') {
 	    eval { modules::load('romfs') };
 	} elsif ($fs eq 'ext2') {
-	    run_program::run("fsck.ext2", "-a", $dev) or die _("fsck failed: ") . "$!";
+	    run_program::run("fsck.ext2", "-a", $dev);
+	    $? & 0x0100 and log::l("fsck corrected partition $dev");
+	    $? & 0xfeff and die _("fsck failed with exit code %d or signal %d", $? >> 8, $? & 255);
 	}
 
 	$where =~ s|/$||;
