@@ -41,9 +41,9 @@ my %mice =
      
  'USB' =>
  [ [ 'usbmouse' ],
-   [ [ 1, 'ps/2', 'PS/2', N_("1 button") ],
-     [ 2, 'ps/2', 'PS/2', N_("Generic 2 Button Mouse") ],
-     [ 3, 'ps/2', 'PS/2', N_("Generic") ],
+   [ [ 1, 'ps/2', 'IMPS/2', N_("1 button") ],
+     [ 2, 'ps/2', 'IMPS/2', N_("Generic 2 Button Mouse") ],
+     [ 3, 'ps/2', 'IMPS/2', N_("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', N_("Wheel") ],
      [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
    ] ],
@@ -264,7 +264,7 @@ sub detect() {
 		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
 		eval { modules::load(qw(hid mousedev usbmouse)) };
 		if (!$@ && detect_devices::tryOpen("usbmouse")) {
-		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic");
+		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Wheel");
 		    $auxmouse and $mouse->{auxmouse} = $auxmouse; #- for laptop, we kept the PS/2 as secondary (symbolic).
 		    return $mouse;
 		}
