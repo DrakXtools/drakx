@@ -1,9 +1,9 @@
 GRAPHICAL_DESKTOP
   5 icewm-light
   4 icewm
-  3 AfterStep Epplets WMRack WindowMaker blackbox enlightenment ethemes gtk-themes icepref
+  3 Epplets WMRack WindowMaker blackbox enlightenment ethemes gtk-themes icepref
     wmakerconf xlockmore
-  2 AfterStep-APPS wmnet
+  2 AfterStep AfterStep-APPS wmnet
   1 fvwm fvwm2 lesstif-mwm xbanner
 
 GNOME
@@ -12,6 +12,7 @@ GNOME
   3 gnome-pilot sawfish-themes
   2 bug-buddy eog g-print
   1 sawfish-themer
+
 KDE
   4 kdeaddutils kdeadmin kdebase kdegraphics kdemultimedia kdenetwork
     kdepim kdetoys kdeutils
@@ -25,14 +26,16 @@ VIDEO
     4 KDE kwintv
 
 OFFICE
-  3 abisuite cbb gaddr ical lyx wv xpdf
+  5 LOCALES"en" staroffice-en
+  4 abisuite cbb gaddr ical lyx xpdf
+  3 wv 
   2 units
   GNOME
     4 gnome-pim gnome-pim-conduits gnumeric
     3 gnome-pilot-conduits
     2 dia ggv gnucash
   KDE
-    4 koffice
+    5 koffice
 
 SOUND
   5 sox
@@ -55,9 +58,9 @@ ACCESSIBILITY
   2 gtkeyboard
 
 PUBLISHING
-  4 enscript ghostscript-module-X
+  5 enscript ghostscript-module-X
     xpp
-  3 docbook-dtd31-sgml ghostscript-utils gv jadetex latex2html psutils tetex-afm
+  4 docbook-dtd31-sgml ghostscript-utils gv jadetex latex2html psutils tetex-afm
     tetex-doc tetex-dvilj tetex-dvips tetex-latex tetex-xdvi texinfo
   1 docbook-style-dsssl docbook-style-dsssl-doc openjade sgml-tools ghostscript-module-SVGALIB
   KDE
@@ -69,6 +72,7 @@ SHELLS
   1 bash1
 
 SCIENCES
+  5 3D openuniverse
   4 gnuplot gtkgraph
   3 bc xlispstat
   2 mathplot octave
@@ -105,40 +109,52 @@ TERMINALS
     LOCALES"ja" kterm
 
 NETWORKING_CHAT
-  4 ytalk
-  3 talk
-  2 GNOME gabber gaim
-
+  CLIENT
+    4 ytalk
+    3 talk
+    2 GNOME gabber gaim
+  SERVER
+    3 talk-server
+    
 NETWORKING_FILE_TRANSFER
-  5 lftp mirrordir rsync uucp
-  4 gftp rdist
-  3 fmirror ncftp
-  3 GNOME dpsftp
+  CLIENT
+    5 lftp mirrordir rsync uucp
+    4 gftp rdist
+    3 fmirror ncftp
+    3 GNOME dpsftp
+  SERVER
+    5 proftpd
 
 NETWORKING_INSTANT_MESSAGING
-  4 licq
-  3 everybuddy licq-autoreply licq-console licq-forwarder licq-rms licq-update-hosts
-  GNOME
-    4 gnomeicu
-    3 gtk+licq
+  CLIENT
+    4 licq
+    3 everybuddy licq-autoreply licq-console licq-forwarder licq-rms licq-update-hosts
+    GNOME
+      4 gnomeicu
+      3 gtk+licq
 
 NETWORKING_IRC
-  4 KDE kvirc
-  3 BitchX irssi
-  3 GNOME xchat
-  2 eggdrop
+  CLIENT
+    4 KDE kvirc
+    3 BitchX irssi
+    3 GNOME xchat
+    2 eggdrop
 
 NETWORKING_MAIL
-  5 fetchmail mailx metamail
-  4 faces
-  3 exmh pine urlview xmailbox
-  2 FaxMail comsat elm faces-xface
-  1 mutt fetchmail-daemon fetchmailconf
+  CLIENT
+    5 fetchmail mailx metamail
+    4 faces
+    3 exmh pine urlview xmailbox
+    2 FaxMail comsat elm faces-xface
+    1 mutt fetchmail-daemon fetchmailconf
 
 NETWORKING_NEWS
-  3 slrn-pull tin trn xrn
-  2 GNOME pan
-  1 slrn
+  CLIENT
+    3 slrn-pull tin trn xrn
+    2 GNOME pan
+    1 slrn
+  SERVER
+    5 inn 
 
 NETWORKING_OTHER
   4 bind-utils nfs-utils-clients
@@ -148,11 +164,13 @@ NETWORKING_OTHER
   1 nslint
 
 NETWORKING_REMOTE_ACCESS
-  5 rsh telnet
-  4 openssh-clients
-  3 vnc vnc-SVGALIB
-  2 vnc-doc vnc-java
-  1 sftp
+  CLIENT
+    5 openssh-clients
+    3 vnc vnc-SVGALIB
+    2 rsh telnet vnc-doc vnc-java
+    1 sftp
+  SERVER
+    5 telnet-server
 
 NETWORKING_WWW
   5 lynx
@@ -185,9 +203,14 @@ BURNER
   2 mkisofs
 
 DATABASES
-  3 MySQL-client MySQL-shared postgresql postgresql-server
-  2 postgresql-odbc postgresql-perl postgresql-tcl postgresql-test
-  1 MySQL-bench MySQL-devel postgresql-jdbc postgresql-python postgresql-tk
+  CLIENT
+    5 postgresql
+    3 MySQL-client MySQL-shared postgresql postgresql-server
+  SERVER
+    5 postgresql-server
+    2 postgresql-odbc postgresql-perl postgresql-tcl postgresql-test
+  DEVELOPEMENT
+    1 MySQL-bench MySQL-devel postgresql-jdbc postgresql-python postgresql-tk
 
 GAMES
   4 clanbomber
@@ -199,9 +222,9 @@ GAMES
     4 gnome-chess gnome-games
     1 gtkgo gtulpas
   KDE
-    4 kdegames
+    2 kdegames
   3D
-    4 spacecup chromium tuxracer openuniverse csmash gltron
+    4 spacecup chromium tuxracer csmash gltron
       
     5 !PCI"Riva.*128" !PCI"Rage X[CL]" !PCI"Rage Mobility (?:P\/M|L) " !PCI"3D Rage (?:LT|Pro)" # XF3 3D
         bzflag
@@ -284,11 +307,12 @@ SERVER
     telnet-server inews portsentry XFree86-Xvfb XFree86-Xnest webmin
 
 CONFIG
-  5 drakxtools ipchains ldetect
+  5 drakxtools ldetect
+  4 ipchains iptables
   3 ipvsadm linuxconf quota shapecfg timetool userdrake usernet
   2 control-panel adjtimex isicom xinput timeconfig
   1 ipxutils
-  4 gnome-linuxconf
+  4 GNOME gnome-linuxconf
 
 SYSTEM
   5 Aurora DrakConf MAKEDEV MandrakeUpdate XFree86 XFree86-75dpi-fonts 
@@ -304,7 +328,7 @@ SYSTEM
     lilo-doc sudo
   1 xtoolwait fdutils genromfs ext2ed mailcap pango usbview kernel-utils
   GNOME
-    4 gnome-print gnorpm
+    3 gnome-print gnorpm
 
   3 PCMCIA irda-utils
   4 PCI"Voodoo 5" Glide_V5
