@@ -174,7 +174,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			     mount_parts, go_to_console, reboot_, doc, NULL };
 	char * choice;
 
-	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" VERSION ") " __DATE__ " " __TIME__);
+	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" DISTRIB_VERSION ") " __DATE__ " " __TIME__);
 
 	do {
 		int pid;
