@@ -92,6 +92,7 @@ sub format_reiserfs($@) {
     my ($dev, @options) = @_;
 
     #TODO add -h tea
+    eval { modules::load('reiserfs') };
     run_program::run("mkreiserfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
 }
 
