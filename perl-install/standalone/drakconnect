@@ -249,7 +249,7 @@ $window1->{window}->add(
                                  0, Gtk2::HSeparator->new,
                                  0, gtkpack(Gtk2::HButtonBox->new,
                                             gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-                                                                  exec("drakhelp Drakxtools-Guide.html/internet-connection.html") unless fork() }),
+                                                                  exec("drakhelp --id internet-connection") unless fork() }),
                                             $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
                                                                               clicked => \&apply),
                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&quit_global),
