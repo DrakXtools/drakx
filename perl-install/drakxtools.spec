@@ -373,7 +373,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * DVB
     * joysticks
   o add support for multiple different AGP controllers
-  o handle a few more special serial ports
+  o handle a few more special serial port cards
 
 * Wed Feb  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.22mdk
 - localedrake: switch arabic font for KDE from "Roya" to "Terafik"
