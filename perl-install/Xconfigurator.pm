@@ -827,6 +827,7 @@ sub chooseResolutionsGtk($$;$) {
 	}
     }
     $chosen_w = $best_w;
+    $chosen_w ||= 640; #- safe guard ?
 
     my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
 
@@ -840,7 +841,7 @@ sub chooseResolutionsGtk($$;$) {
     $monitor{1152} = [ gtkcreate_png("monitor-" . 1024 . ".png") ];
     $monitor{1600} = [ gtkcreate_png("monitor-" . 1280 . ".png") ];
 
-    my $pixmap_m = new Gtk::Pixmap( $monitor{$chosen_w}[0]  , $monitor{$chosen_w}[1] );
+    my $pixmap_mo = new Gtk::Pixmap( $monitor{$chosen_w}[0]  , $monitor{$chosen_w}[1] );
 
     while (my ($w, $h) = each %w2h) {
 	my $V = $w . "x" . $h;
@@ -867,7 +868,7 @@ sub chooseResolutionsGtk($$;$) {
 					     ),
 		    1, gtkpack2(new Gtk::VBox(0,0),
 				gtkpack2__(new Gtk::VBox(0, $::isEmbedded ? 15 : 0),
-					   if_($::isEmbedded, $pixmap_m),
+					   if_($::isEmbedded, $pixmap_mo),
 					   if_(!$::isEmbedded, map {$w2widget{$_} } ikeys(%w2widget)),
 					   gtkpack2(new Gtk::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5},
@@ -903,7 +904,7 @@ sub chooseResolutionsGtk($$;$) {
 	$w2_combo->entry->signal_connect(changed => sub {
 	    ($chosen_w) = $w2_combo->entry->get_text =~ /([^x]*)x.*/;
 	    $no_human ? $no_human=0 : $w2widget{$chosen_w}->set_active(1);
-	    $pixmap_m->set($monitor{$chosen_w}[0], $monitor{$chosen_w}[1]);
+	    $pixmap_mo->set($monitor{$chosen_w}[0], $monitor{$chosen_w}[1]);
 	});
     }
     &$set_depth();
