@@ -34,6 +34,7 @@ my $key_disabled;
 
 my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
+my $key_part;
 my $virtual_key_part;
 my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed,nobadchars';
 
@@ -268,7 +269,8 @@ sub key_parts {
     return () if $key_disabled;
 
     my @keys = grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{hds}};
-    (fsedit::get_fstab(@keys), grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{raw_hds}});
+    my @parts = (fsedit::get_fstab(@keys), grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{raw_hds}});
+    grep { isFat({ type => fsedit::typeOfPart($_->{device}) }) } @parts;
 }
     
 sub key_mount {
@@ -281,19 +283,38 @@ sub key_mount {
     if ($virtual_key_part) {
         #- :/ merge_from_mtab didn't got my virtual key, need to add it manually
         push @{$o->{fstab}}, $virtual_key_part;
+	$key_part = $virtual_key_part;
+	return;
     }
 
-    require fs;
-    each_index { 
-	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
+    foreach (key_parts($o)) {
+	if ($key_part) {
+	    log::l("trying another usb key partition than $key_part->{device}");
+	    fs::umount_part($key_part);
+	    delete $key_part->{mntpoint};
+	}
+	$_->{mntpoint} = '/home';
 	$_->{options} = $key_mountopts;
-	eval { fs::mount_part($_); 1 } or delete $_->{mntpoint};
-    } key_parts($o);
+	if (eval { fs::mount_part($_); 1 }) {
+	    $key_part = $_;
+	    last if -e $key_sysconf;
+	} else {
+	    delete $_->{mntpoint};
+	}
+    } 
+
+    
 }
 
 sub key_umount {
     my ($o) = @_;
-    eval { fs::umount_part($_) foreach key_parts($o); 1 };
+    $key_part or return;
+
+    eval { 
+	fs::umount_part($key_part);
+	undef $key_part;
+	1;
+    };
 }
 
 sub machine_ident() {
@@ -531,7 +552,6 @@ Continue at your own risk."), formatError($@) ]) if $@;
 sub install_TrueFS_in_home {
     my ($o) = @_;
 
-    require fsedit;
     my $home = fsedit::mntpoint2part('/home', $o->{fstab}) or return;
 
     my %loopbacks = map {
