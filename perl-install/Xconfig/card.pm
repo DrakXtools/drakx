@@ -200,7 +200,7 @@ sub card_config__not_listed {
     );
 
     my $r = $in->ask_from_treelistf(
-	N("X server"), N("Choose a X server"), '|', 
+	N("X server"), N("Choose an X server"), '|', 
 	sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
 	      $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] },
 	\@list, 
