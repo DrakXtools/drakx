@@ -424,12 +424,7 @@ sub ask_from_entries_refW {
 		$w->disable_activate;
 		($real_w, $w) = ($w, $w->entry);
 	    } else {
-                # ${...} removed here, it causes a number given as default
-                # value in addition being interpreted as the maximum length
-                # of the field, so a field with '1' or '1.0' as default
-                # allows only 1 character to be entered.
-                # $w = new Gtk::Entry(${$e->{val}});
-                $w = new Gtk::Entry($e->{val});		
+                $w = new Gtk::Entry;
 	    }
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $w->signal_connect(changed => $changed);
@@ -464,10 +459,10 @@ sub ask_from_entries_refW {
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
 	#- use a scrolled window if there is a lot of checkboxes (aka
-	#- ask_many_from_list) or if there are many widgets in general (aka
+	#- ask_many_from_list) or if there are many widgets in general (eg
 	#- options of native PostScript printer in printerdrake)
-	my $has = (((grep { $_->{e}{type} eq 'bool' } @_) > 4) ||
-		   ((@_) > 10));      
+	my $has = ((grep { $_->{e}{type} eq 'bool' } @_) > 4) ||
+		   @_ > 10;      
 	$has_scroll ||= $has;
 	$has ? createScrolledWindow($w) : $w;
     };
