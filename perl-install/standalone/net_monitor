@@ -254,11 +254,10 @@ sub connection() {
 
     gtkflush();
 
-    if ($wasconnected == 1) {
-        $tool_pid = network::tools::stop_interface($default_intf);
-    } else {
-        $tool_pid = network::tools::start_interface($default_intf);
-    }
+    $tool_pid = 
+      $wasconnected == 1 
+	? network::tools::stop_interface($default_intf);
+        : network::tools::start_interface($default_intf);
 }
 
 sub graph_window_width() { $width - $left_border }
