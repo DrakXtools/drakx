@@ -327,7 +327,12 @@ sub read_conf($;$) {
 
 sub write_conf {
     my ($file) = @_;
-    my (undef, %written) = read_conf($file);
+    my %written = read_conf($file);
+
+    my %net = detect_devices::net2module();
+    while (my ($k, $v) = each %net) {
+	$conf{$k}{alias} ||= $v;
+    }
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");

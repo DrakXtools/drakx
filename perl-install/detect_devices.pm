@@ -129,7 +129,7 @@ sub getDAC960() {
     @idi;
 }
 
-sub net2module {
+sub net2module() {
     my @modules = map { quotemeta first(split) } cat_("/proc/modules");
     my $modules = join '|', @modules;
     my $net     = join '|', @netdevices;
@@ -164,10 +164,7 @@ sub tryOpen($) {
     local *F;
     sysopen F, devices::make($_[0]), c::O_NONBLOCK() and \*F;
 }
-
 sub syslog {
-    my $file = "/var/log/dmesg";
-    -r $file or $file = "/tmp/syslog";
-    my @l = cat_($file);
-    @l ? @l : `dmesg`;
+    -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
+    `dmesg`
 }
