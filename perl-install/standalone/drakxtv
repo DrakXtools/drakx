@@ -31,7 +31,7 @@ use common;
 
 my $in = 'interactive'->vnew;
 
-sub scan4channels {
+sub scan4channels() {
     # xawtv has been installed by DrakX when/if it's detected a tv
     # card.
 
@@ -129,7 +129,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 }
 
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall(1);
-push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
+push @devices, { driver => 'bttv', description => 'dummy' } if $::testingv && !@devices;
 if (@devices) {
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
