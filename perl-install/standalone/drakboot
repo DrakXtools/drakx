@@ -252,7 +252,7 @@ sub lilo_choice() {
     if ($err && $err !~ /wizcancel/) {
         # BUG: note that the following message won't speak about the right bootloader if user is currently switching between 
         # various bootloaders and if the error occured before boot sector get overwritten by bootloader installer
-        my $w = $in->ask_warn(N("Error2"), 
+        my $w = $in->ask_warn(N("Error"), 
                       [ N("Installation of %s failed. The following error occured:", bootloader::detect_bootloader()), $err ]);
         undef $w;
         goto ask;
