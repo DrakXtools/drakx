@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 9mdk
+Release: 10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep  9 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-10mdk
+- disdrake: fix userdrake not runnable (#5447) (pixel)
+- drakboot:
+  o fix too small kernels window width (#5040)
+  o fix too big main window
+- drakconnect:
+  o when no proviles exists, use default one (poulpy)
+  o add support for sagem dhcp (francois)
+- drakperm: do not complain about saving on view change
+- drakxtv: install xawtv if needed (#5130)
+- logdrake: fix infinite entries (#5448)
+- printerdrake: fix options saving (#5423) (till)
+
 * Mon Sep  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-9mdk
 - drakfont: fix not being able to select directories (#4964)
 - drakconnect:
