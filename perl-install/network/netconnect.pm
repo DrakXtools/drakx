@@ -1,9 +1,5 @@
 package network::netconnect;
 
-use diagnostics;
-use strict;
-use vars qw($isdn_init @isdndata @EXPORT);
-
 use common;
 use log;
 use detect_devices;
