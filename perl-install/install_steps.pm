@@ -838,7 +838,7 @@ sub configureX {
       Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new,
 			  { allowFB          => $o->{allowFB},
 			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
-			  }, sub { $o->pkg_install(@_) });
+			  });
     }
     $o->configureXAfter;
 }

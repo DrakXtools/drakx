@@ -390,7 +390,6 @@ sub read_all_conf {
 #-  $prefix
 #-  $netc
 #-  $intf
-#-  $install : a function that takes a list of package and install them : ex sub { system("urpmi --auto --best-output " . join(' ', @_)); }
 #- $netc input
 #-  NETWORKING : networking flag : string : "yes" by default
 #-  FORWARD_IPV4 : forward IP flag : string : "false" by default
@@ -411,20 +410,20 @@ sub read_all_conf {
 #-  $intf->{$device}{DEVICE} : DEVICE = $device
 #-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
 sub configureNetwork2 {
-    my ($in, $prefix, $netc, $intf, $install) = @_;
+    my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
 
-    $netc->{wireless_eth} and $install->('wireless-tools');
+    $netc->{wireless_eth} and $in->do_pkgs->install('wireless-tools');
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     if (grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
-	$::isStandalone ? $in->standalone::pkgs_install('dhcpcd') : $install->('dhcpcd');
+	$in->do_pkgs->install('dhcpcd');
     }
     if (grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
-	$::isStandalone ? $in->standalone::pkgs_install('pump') : $install->('pump');
+	$in->do_pkgs->install('pump');
     }
     #-res_init();		#- reinit the resolver so DNS changes take affect
 

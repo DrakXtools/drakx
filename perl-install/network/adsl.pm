@@ -6,7 +6,7 @@ use network::tools;
 use network::ethernet;
 
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);
@@ -21,7 +21,7 @@ Some connections use pptp, a few ones use dhcp.
 If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
-	$install->("rp-$type");
+	$in->do_pkgs->install("rp-$type");
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
@@ -33,11 +33,11 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	}
     }
     if ($type eq 'dhcp') {
-	$install->(qw(dhcpcd));
+	$in->do_pkgs->install(qw(dhcpcd));
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
     }
     if ($type eq 'pptp') {
-	$install->(qw(pptp-adsl-fr));
+	$in->do_pkgs->install(qw(pptp-adsl-fr));
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;

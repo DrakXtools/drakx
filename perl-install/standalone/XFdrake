@@ -47,7 +47,7 @@ my $in = interactive->vnew('su', 'X');
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
 my $f = "/usr/X11R6/lib/X11/Cards";
-$in->standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
+$in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts') if !-e $f;
 -e $f or die "install XFree86 first!\n";
 
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if !$i->{skiptest};
@@ -82,7 +82,7 @@ eval {
 
 $::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, { allowFB          => $::expert,
-				   allowNVIDIA_rpms => $allowNVIDIA_rpms }, sub { $in->standalone::pkgs_install(@_) });
+				   allowNVIDIA_rpms => $allowNVIDIA_rpms });
 !$::isEmbedded and $in->exit(0);
 kill USR1, $::CCPID;
 goto begin;

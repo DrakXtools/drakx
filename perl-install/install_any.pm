@@ -959,4 +959,55 @@ sub remove_bigseldom_used {
       );
 }
 
+
+################################################################################
+package interactive_pkgs;
+use run_program;
+use common;
+use pkgs;
+
+sub interactive::do_pkgs {
+    my ($o) = @_;
+    bless { o => $o }, 'interactive_pkgs';
+}
+
+sub install {
+    my ($do, @l) = @_;
+    $do->{o}->pkg_install(@l);
+}
+
+sub is_installed {
+    my ($do, @l) = @_;
+    foreach (@l) {
+	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
+	$p && pkgs::packageFlagSelected($p) or return;
+    }
+    1;
+}
+
+sub remove {
+    my ($do, @l) = @_;
+
+    @l = grep {
+	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
+	pkgs::unselectPackage($do->{o}->{packages}, $p) if $p;
+	$p;
+    }
+    run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', @l);
+}
+
+sub remove_nodeps {
+    my ($do, @l) = @_;
+
+    @l = grep {
+	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
+	pkgs::packageSetFlagSelected($p, 0) if $p;
+	$p;
+    }
+    run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', '--nodeps', @l);
+}
+################################################################################
+
+package install_any;
+
 1;

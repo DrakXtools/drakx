@@ -304,7 +304,7 @@ my %rpm2file = ( ipchains => "/sbin/ipchains",
 		 bind => "/usr/sbin/named",
 		 "caching-nameserver" => "/var/named/named.local");
 
-$in->standalone::pkgs_install(grep { !-e $rpm2file{$_} } keys %rpm2file);
+$in->do_pkgs->install(grep { !-e $rpm2file{$_} } keys %rpm2file);
 -e $rpm2file{$_} or fatal_quit(_("Problems installing package $_")) foreach keys %rpm2file;
 
 
@@ -657,6 +657,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.47  2001/08/08 18:26:31  prigaux
+#- add interactive_pkgs stuff
+#-
 #- Revision 1.46  2001/08/06 13:11:35  yduret
 #- use MDK::Common;
 #- use network::netconnect; and update functions call from netconnect

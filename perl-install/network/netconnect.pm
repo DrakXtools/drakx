@@ -17,12 +17,12 @@ use commands;
 #require Data::Dumper;
 
 use network::tools;
-use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
 
 #- intro is called only in standalone.
 sub intro {
-    my ($prefix, $netcnx, $in, $install) = @_;
+    my ($prefix, $netcnx, $in) = @_;
     my ($netc, $mouse, $intf) = ({}, {}, {});
     my $text;
     my $connected;
@@ -52,9 +52,9 @@ sub intro {
 				    \@l );
 	run_program::rooted($prefix, $connect_prog) if ($e->{c}==1);
 	run_program::rooted($prefix, $disconnect_file) if ($e->{c}==2);
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, 0, 0) if ($e->{c}==3);
+	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if ($e->{c}==3);
     } else {
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, 0, 0);
+	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0);
     }
 }
 
@@ -110,11 +110,10 @@ sub pre_func {
 }
 
 sub main {
-    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, $first_time, $direct_fr) = @_;
+    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr) = @_;
     MDK::Common::Globals::init(
 		  in => $in,
 		  prefix => $prefix,
-		  install => $install,
 		  connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
 		  disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
 		  connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
@@ -236,7 +235,7 @@ environnement to avoid hostname changing problem."));
 
   step_5:
 
-    network::configureNetwork2($in, $prefix, $netc, $intf, $install);
+    network::configureNetwork2($in, $prefix, $netc, $intf);
 
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
 	output "$prefix$connect_prog",

@@ -8,7 +8,7 @@ use common;
 use run_program;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install);
+use MDK::Common::Globals "network", qw($in $prefix);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(configureNetwork conf_network_card conf_network_card_backend go_ethernet);
@@ -38,12 +38,12 @@ sub configure_cable {
 Default is dhcpcd"),
 					sub { $_[0]{description} },
 					\@m )) {
-	    $f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $install->(qw(dhcpcd));
-	    $f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $install->(qw(dhcpxd));
-	    $f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $install->(qw(dhcp-client));
+	    $f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
+	    $f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
+	    $f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
 	}
     } else {
-	$install->(qw(dhcpcd));
+	$in->do_pkgs->install(qw(dhcpcd));
     }
     go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
     write_cnx_script($netc, "cable",
@@ -62,7 +62,7 @@ sub configure_lan {
     $::isInstall and $in->set_help('configureNetworkIP');
     require Data::Dumper;
     configureNetwork($netc, $intf, $first_time) or return;
-    configureNetwork2($in, $prefix, $netc, $intf, $install);
+    configureNetwork2($in, $prefix, $netc, $intf);
     if ($::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
 							  _("Do you want to restart the network"), 1))) {
 	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");

@@ -36,7 +36,7 @@ any::addUsers('', $users);
 any::write_passwd_user('', $_, $isMD5) foreach @$users;
 system("pwconv") if $isShadow;
 
-#$in->pkgs_install("autologin") if $o->{autologin};
+#$in->do_pkgs->install("autologin") if $o->{autologin};
 #any::set_autologin('', $o->{autologin}, $o->{desktop});
 
 $in->exit(0) if $in;

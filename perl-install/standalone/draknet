@@ -279,7 +279,7 @@ my $button_wizard = new Gtk::Button _("Configure");
 $button_wizard->signal_connect( clicked => sub {
 				     $::isWizard = 1;
 				     system("draknet --wizard");
-# netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
+# netconnect::intro('', $netcnx, $in);
 				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
 				     network::netconnect::load_conf($netcnx, $netc, $intf);
 				     update();
@@ -349,7 +349,7 @@ Gtk->main;
 Gtk->exit(0);
 
 dd:
-network::netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
+network::netconnect::intro('', $netcnx, $in);
 $in->exit(0);
 
 
@@ -357,13 +357,13 @@ sub apply {
     $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     network::netconnect::save_conf($netcnx, $netc, $intf);
 
-    $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '', sub { $in->standalone::pkgs_install(@_) });
+    $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc); #$light
-    $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '', sub { $in->standalone::pkgs_install(@_) });
+    $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
     $netcnx->{type} eq 'adsl_ppoe' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
     $netcnx->{type} eq 'adsl_pptp' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');;
 
-    network::configureNetwork2($in, $prefix, $netc, $intf, sub { $in->standalone::pkgs_install(@_) });
+    network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     system("$prefix/etc/rc.d/init.d/network restart");
     $button_apply->set_sensitive(0);

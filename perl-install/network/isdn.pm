@@ -8,7 +8,7 @@ use run_program;
 use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install);
+use MDK::Common::Globals "network", qw($in $prefix);
 use MDK::Common::File;
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
@@ -59,7 +59,7 @@ We recommand the light configuration.
 	$p && pkgs::packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
     }
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
-    $install->($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
+    $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     my $light = $e =~ /light/ ? 1 : 0;
     isdn_write_config_backend($isdn, $light, $netc);
     1;

@@ -11,6 +11,7 @@ c::bindtextdomain('libDrakX', "/usr/share/locale");
 
 
 
+################################################################################
 package interactive_pkgs;
 
 sub interactive::do_pkgs {
@@ -21,22 +22,20 @@ sub interactive::do_pkgs {
 sub install {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    my $ret = system('urpmi', '--auto', '--best-output', @l);
+    my $ret = system('urpmi', '--auto', '--best-output', @l) == 0;
     $o->{in}->resume;
     $ret;
 }
 
-sub install_if {
-    my ($o, $deps, @l) = @_;
-    my @deps = deref($deps);
-    system('rpm', '-q', @deps) == 0 or return;
-    install($o, @l);
+sub is_installed {
+    my ($o, @l) = @_;
+    system('rpm', '-q', @l) == 0;
 }
 
 sub remove {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    my $ret = system('rpm', '-e', @l);
+    my $ret = system('rpm', '-e', @l) == 0;
     $o->{in}->resume;
     $ret;
 }
@@ -44,14 +43,12 @@ sub remove {
 sub remove_nodeps {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    my $ret = system('rpm', '-e', '--nodeps', @l);
+    my $ret = system('rpm', '-e', '--nodeps', @l) == 0;
     $o->{in}->resume;
     $ret;
 }
+################################################################################
 
-sub is_installed {
-    my ($o, $pkg) = @_;
-    system('rpm', '-q', $pkg) == 0;
-}
+package standalone;
 
 1;

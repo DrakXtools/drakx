@@ -9,7 +9,7 @@ use c;
 
 
 sub main {
-    my ($prefix, $in, $install) = @_;
+    my ($prefix, $in) = @_;
     my $proxy_cfg = {};
     my $config_file = "$prefix/usr/lib/wgetrc";
 

@@ -235,7 +235,7 @@ sub main {
     $dialog->vbox->pack_start($label,1,1,20);
     $dialog->show_all;
     Gtk->main_iteration while Gtk->events_pending;
-    if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
+    if (!$in->do_pkgs->install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
 	$in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
  Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
 	$dialog->destroy;

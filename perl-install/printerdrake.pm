@@ -131,7 +131,7 @@ complete => sub {
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
-    if ($printer->{SPOOLER} eq 'lpd') {$in->do_pkgs->install('rlpr');}
+    $printer->{SPOOLER} eq 'lpd' and $in->do_pkgs->install('rlpr');
 
     1;
 }
@@ -336,8 +336,7 @@ complete => sub {
     join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
-    if (($printer->{SPOOLER} eq 'lpd') ||
-        ($printer->{SPOOLER} eq 'lprng')) {$in->do_pkgs->install('nc');}
+    $printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng' and $in->do_pkgs->install('nc');
 
     1;
 }
@@ -742,8 +741,8 @@ sub main {
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
     if (!$::testing) {
-	$in->do_pkgs->install(('foomatic', 'printer-utils','printer-testpages',
-		   ($in->do_pkgs->is_installed("gimp") ? 'gimpprint' : ())));
+	$in->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
+			      if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
     }
 
     # only experts should be asked for the spooler
