@@ -85,7 +85,7 @@ sub set_help { 1 }
 #------------------------------------------------------------------------------
 sub selectLanguage {
     my ($o) = @_;
-    lang::set($o->{lang});
+    lang::set($o->{lang}, !$o->isa('interactive_gtk'));
     $o->{langs} ||= { $o->{lang} => 1 };
 
     log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{langs}));

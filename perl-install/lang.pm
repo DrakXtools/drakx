@@ -544,7 +544,7 @@ sub charset2kde_charset {
 }
 
 sub set { 
-    my ($lang) = @_;
+    my ($lang, $translate_for_console) = @_;
 
     if ($lang && !exists $languages{$lang}) {
 	#- try to find the best lang
@@ -596,9 +596,14 @@ sub set {
 	$ENV{LC_CTYPE}  = lang2LANG($lang);
 	$ENV{LC_MESSAGES} = lang2LANG($lang);
 	$ENV{LANG}      = lang2LANG($lang);
-	$ENV{LANGUAGE}  = lang2LANGUAGE($lang);
 
-	load_mo();
+	if ($translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
+	    log::l("not translating in console");
+	    $ENV{LANGUAGE}  = 'C';
+	} else {
+	    $ENV{LANGUAGE}  = lang2LANGUAGE($lang);
+	}
+	load_mo() ;
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};

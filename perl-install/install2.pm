@@ -517,7 +517,7 @@ sub main {
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
-    $o->{lang} = lang::set($o->{lang}); #- mainly for defcfg
+    $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 
     start_i810fb();
 
