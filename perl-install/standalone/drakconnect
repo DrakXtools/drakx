@@ -365,7 +365,7 @@ sub update {
     $label5->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 #TV    $list->window->freeze();
-#TV    $list->window->clear();
+    $tree_model->clear;
     build_list();
 #TV    $list->window->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
