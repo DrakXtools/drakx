@@ -1,3 +1,95 @@
+2001/09/16  dam's  <damien@mandrakesoft.com>
+
+	* mouse.pm, my_gtk.pm: bugfix + cosmetic changes
+
+2001/09/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* help.pm: updated help.pm file
+
+	* share/po/hu.po: updated Hungarian file
+	updated pot file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/vi.po,
+	share/po/gl.po, share/po/ca.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/bs.po, share/po/da.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated pot file
+
+2001/09/16  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: "please click on ..." for removable, nfs, smb.
+
+	* fsedit.pm: enhance lvm handling (mostly standalone)
+	  - cleanup & enhance raid mdstat reading (now works with or without
+	devfs mounted)
+	  - chunk size is buggy?
+
+	* install_any.pm (getAndSaveAutoInstallFloppy): skip it on ia64
+	more up to my need ALL flag in compssUsersChoice
+	remove auto-install special case (initialisation of compssUsersChoice)
+	use new mkdir_p, rm_rf and cp_af from MDK::Common
+
+	* share/rpmsrate: 
+	  - cleanup packages appearing twice in rpmsrate
+	  - handle a few case of packages appearing twice
+	  - special case for packages appearing in INSTALL section (flag
+	dropped)
+	  - new special flag ALL for compssUsersChoice
+
+	* verify_c: add special case for c::to_utf8
+
+	* pkgs.pm: more up to my need ALL flag in compssUsersChoice
+	  - cleanup packages appearing twice in rpmsrate
+	  - handle a few case of packages appearing twice
+	  - special case for packages appearing in INSTALL section (flag
+	dropped)
+	  - new special flag ALL for compssUsersChoice
+	use new mkdir_p, rm_rf and cp_af from MDK::Common
+
+	* services.pm, install2.pm, lang.pm, commands.pm, loopback.pm,
+	tinyfirewall.pm, raid.pm, keyboard.pm, printerdrake.pm, fs.pm, mouse.pm,
+	network/netconnect.pm, timezone.pm, network/adsl.pm, install_steps.pm,
+	any.pm, printer.pm, rescue/make_rescue_img, bootloader.pm: use new
+	mkdir_p, rm_rf and cp_af from MDK::Common
+
+	* diskdrake_interactive.pm, lvm.pm: enhance lvm handling (mostly
+	standalone)
+
+	* devices.pm (make): ensure it never returns a non-absolute name
+	(it happened with make("foo") when cwd=/dev and /dev/foo existed)
+
+2001/09/16  siegel
+
+	* share/po/help_xml2pm.pl: added "systemitem"
+	added commet explainig that help.pm is automatically generated.
+
+	* .cvsignore: added .*.sw? for vim users
+
+2001/09/16  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Added possibility to list command line
+	options for the printers and to give the users help for printing
+	Fixed bug of sometimes appearing the wron dialog after printing test
+	pages
+
+2001/09/15  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: fix options appearing twice in fstab
+
+	* install_steps.pm, any.pm, c/stuff.pm: i18n kdmrc
+
+	* lang.pm (load_mo): ensure the locale is set (was broken in non-gtk
+	installs)
+
+	* install_steps_auto_install.pm (enteringStep): do not translate in
+	ja|ko|zh
+
 2001/09/15  Pixel  <pixel@mandrakesoft.com>
 
 	* fs.pm: fix options appearing twice in fstab
