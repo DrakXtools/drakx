@@ -348,9 +348,9 @@ sub choosePackagesTree {
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages,$_[0]) or return;
 				pkgs::packageMedium($packages, $p)->{selected} or return;
-				$p->flag_base      and return 'base';
-				$p->flag_installed and return 'installed';
-				$p->flag_selected  and return 'selected';
+				$p->flag_base                           and return 'base';
+				$p->flag_installed && !$p->flag_upgrade and return 'installed';
+				$p->flag_selected                       and return 'selected';
 				return 'unselected';
 			    },
 			    build_tree => sub {
@@ -442,7 +442,7 @@ sub choosePackagesTree {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
 				if ($p->flag_base) {
 				    $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
-				} elsif ($p->flag_installed) {
+				} elsif ($p->flag_installed && !$p->flag_upgrade) {
 				    $o->ask_warn('', _("You can't unselect this package. It is already installed"));
 				} elsif ($p->flag_selected && $p->flag_installed) {
 				    if ($::expert) {
