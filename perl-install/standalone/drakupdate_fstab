@@ -31,10 +31,23 @@ $::isStandalone = 1; #- not using standalone.pm which generates too many logs fo
 
 log::l("drakupdate_fstab called with @ARGV\n");
 
-$::testing = $ARGV[0] eq '--test' && shift @ARGV;
-$::auto = $ARGV[0] eq '--auto' && shift @ARGV;
-my $no_flag = $ARGV[0] eq '--no-flag' && shift @ARGV;
-my $debug = $ARGV[0] eq '--debug' && shift @ARGV;
+my ($no_flag, $debug, $removed);
+
+my %args = (
+            '--auto' => \$::auto,
+            '--debug' => \$debug,
+            '--no-flag' => \$no_flag,
+            '--test' => \$::testing,
+           );
+
+each_index {
+    if ($args{$_}) {
+        ${$args{$_}} = 1;
+        splice @ARGV, $::i - $removed, 1;
+        $removed++;
+    }
+} @ARGV;
+
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
