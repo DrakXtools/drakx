@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.18mdk
+Release: 0.19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Feb 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.19mdk
+- diskdrake: type 0x17 can be ntfs
+- drakbackup: rework backupignore behavior (Anthill #306) (stew)
+- drakconnect
+  o wizard:
+    * do not use ifplugd on wireless connections by default
+    * fix "network needs to be restarted" step
+    * do not overwrite current wireless parameters with default
+      values
+    * tag some wireless options as advanced ones
+  o manage interface:
+    * update adsl (poulpy)
+    * sanitize buttons layout
+
 * Tue Feb 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.18mdk
 - new default icon for wizards banner
 - drakconnect
