@@ -67,8 +67,8 @@ sub install2::startMove {
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
 
-    run_program::run('/sbin/service', 'syslog', 'start'); # otherwise minilogd will strike
-    run_program::run('killall', 'minilogd'); # get rid of minilogd
+    run_program::run('/sbin/service', 'syslog', 'start');  #- otherwise minilogd will strike
+    run_program::run('killall', 'minilogd');  #- get rid of minilogd
 
     run_program::run('adduser', 'mdk');
 
