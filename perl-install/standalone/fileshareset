@@ -91,11 +91,11 @@ if ($0 =~ /fileshareset/) {
 	$export->update_server;
     }
 }
-my @mntpoints = uniq(map { map { $_->{mntpoint} } @$_ } @exports);
+my @mntpoints = grep {$_} uniq(map { map { $_->{mntpoint} } @$_ } @exports);
 print "$_\n" foreach grep { own($_) } @mntpoints;
 
 
-sub own { (stat($_[0]))[4] == $uid }
+sub own { $uid == 0 || (stat($_[0]))[4] == $uid }
 
 sub verify_mntpoint {
     local ($_) = @_;
