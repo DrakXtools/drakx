@@ -23,53 +23,61 @@ use c;
 use netconnect;
 use detect_devices;
 
+$::isInstall and fatal_quit(_("Not supported during install."));
+
+
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-$::isWizard = "@ARGV" =~ /--wizard/;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakgw [--version --verbose]\n";
+/-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
-
-$::verbose = /-verbose/;
+$::isWizard = 1;
 $::direct = /-direct/;
-
-my $in = vnew interactive('su');
 
 
 my $sysconf_network = "/etc/sysconfig/network";
 my $conf_linuxconf = "/etc/conf.linuxconf";
-my $rc_firewall = "/etc/rc.d/rc.firewall.inet_sharing";
+my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
+my $rc_firewall_22 = "/etc/rc.d/rc.firewall.inet_sharing-2.2";
+my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $cups_conf = "/etc/cups/cupsd.conf";
-
-
 my $drakgw_setup = "/etc/sysconfig/inet_sharing";
+
+
+my $kernel_version = substr `uname -r`, 0, 3;
+log::l("[drakgw] kernel_version $kernel_version\n");
+
+($kernel_version eq "2.2" || $kernel_version eq "2.4") or die "Only for 2.2 or 2.4 kernels.\n";
+
+
+my $in = vnew interactive('su');
+
+
 
 sub start_daemons()
 {
     my $cups_used = 0;
     log::l("[drakgw] Starting daemons\n");
-    if (-f "/etc/rc.d/init.d/cups")
-    {
-        if (grep(/is running/, `/etc/rc.d/init.d/cups status`))
-        {
+    if (-f "/etc/rc.d/init.d/cups") {
+        if (grep(/is running/, `/etc/rc.d/init.d/cups status`)) {
            $cups_used = 1;
            (system("/etc/rc.d/init.d/cups stop") == 0) or die "Could not stop the CUPS daemon";
         }
     }
-    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
-    grep(/error: cannot connect/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0)
+							     or die "Could not stop the dhcp server");
+    grep(/error: cannot connect/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0)
+									    or die "Could not stop the named server");
     (system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
-    (system("sh /etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
+    (system("sh $rc_firewall_generic") == 0) or die "Could not start the firewall script";
     (system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
     (system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
     (system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
     (system("/sbin/chkconfig --level 345 dhcpd on") == 0) or die "Could not chkconfig dhcpd";
-    if ($cups_used == 1)
-    {
-        (system("/etc/rc.d/init.d/cups start") == 0) or die "Could not start the CUPS daemon";
-    }
+    $cups_used and ((system("/etc/rc.d/init.d/cups start") == 0) or die "Could not start the CUPS daemon");
+
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=enabled\n";
     close DRAKGW_SETUP;
@@ -78,9 +86,15 @@ sub start_daemons()
 sub stop_daemons()
 {
     log::l("[drakgw] Stopping daemons\n");
-    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
-    grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
-    (system("/etc/rc.d/init.d/ipchains stop") == 0) or die "Could not stop ipchains";
+    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0)
+							     or die "Could not stop the dhcp server");
+    grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0)
+									 or die "Could not stop the named server");
+    if ($kernel_version eq "2.2") {
+	(system("/sbin/ipchains -F") == 0) or die "Could not flush ipchains chains";
+    } else {
+	(system("/sbin/iptables -t nat -F") == 0) or die "Could not flush iptables chains";
+    }
     (system("/sbin/chkconfig --level 345 named off") == 0) or die "Could not chkconfig named";
     (system("/sbin/chkconfig --level 345 dhcpd off") == 0) or die "Could not chkconfig dhcpd";
 
@@ -94,8 +108,9 @@ sub fatal_quit($)
     log::l("[drakgw] FATAL: $_[0]\n");
     (defined $wait_configuring) and (undef $wait_configuring);
     $in->ask_warn('', $_[0]);
-    $in->exit(-1);
+    quit_global($in, -1);
 }
+
 
 begin:
 
@@ -109,24 +124,34 @@ if (-f $drakgw_setup)
     my @drakgw_setup_content = <DRAKGW_SETUP>;
     close DRAKGW_SETUP;
 
+    $::Wizard_no_previous = 1;
+
     if (grep(/enabled/, @drakgw_setup_content))
     {
 	my $r = $in->ask_from_list(_("Internet Connection Sharing currently enabled"),
 				   _("The setup of Internet connection sharing has already been done.
 It's currently enabled.\n
 What would you like to do?"),
-				   [ _("disable"), _("reconfigure"), _("dismiss") ]);
+				   [ _("disable"), _("reconfigure"), _("dismiss") ]) or quit_global($in, 0);
 	if ($r eq _("disable"))
 	{
+	    undef $r;
+	    $wait_disabl = $in->wait_message('', _("Configuring scripts, installing software, starting servers...Disabling servers..."));
 	    stop_daemons();
 	    -f "$dhcpd_conf.drakgwdisable" and (unlink("$dhcpd_conf.drakgwdisable") or die "Could not unlink $dhcpd_conf.drakgwdisable");
 	    rename($dhcpd_conf, "$dhcpd_conf.drakgwdisable") or die "Could not rename $dhcpd_conf to $dhcpd_conf.drakgwdisable";
-	    -f "$rc_firewall.drakgwdisable" and (unlink("$rc_firewall.drakgwdisable") or die "Could not unlink $rc_firewall.drakgwdisable");
-	    rename($rc_firewall, "$rc_firewall.drakgwdisable") or die "Could not rename $rc_firewall to $rc_firewall.drakgwdisable";
+	    -f "$rc_firewall_22.drakgwdisable" and (unlink("$rc_firewall_22.drakgwdisable") or die "Could not unlink $rc_firewall_22.drakgwdisable");
+	    rename($rc_firewall_22, "$rc_firewall_22.drakgwdisable") or die "Could not rename $rc_firewall_22 to $rc_firewall_22.drakgwdisable";
+	    -f "$rc_firewall_24.drakgwdisable" and (unlink("$rc_firewall_24.drakgwdisable") or die "Could not unlink $rc_firewall_24.drakgwdisable");
+	    rename($rc_firewall_24, "$rc_firewall_24.drakgwdisable") or die "Could not rename $rc_firewall_24 to $rc_firewall_24.drakgwdisable";
             log::l("[drakgw] Disabled\n");
-	    $in->exit(0);
+	    undef $wait_disabl;
+	    $::Wizard_finished = 1;
+	    $in->ask_okcancel(_("fuck"), 
+			      _("Internet connection sharing is now disabled."));
+	    quit_global($in, 0);
 	}
-	($r eq _("dismiss")) and $in->exit(0);
+	($r eq _("dismiss")) and quit_global($in, 0);
     }
     elsif (grep(/disabled/, @drakgw_setup_content))
     {
@@ -137,50 +162,51 @@ What would you like to do?"),
 				   [ _("enable"), _("reconfigure"), _("dismiss") ]);
 	if ($r eq _("enable"))
 	{
+	    $wait_enabl = $in->wait_message('', _("Enabling servers..."));
 	    -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
 	    rename("$dhcpd_conf.drakgwdisable", $dhcpd_conf) or die "Could not find configuration. Please reconfigure.";
 	    -f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
 	    rename("$rc_firewall.drakgwdisable", $rc_firewall) or die "Could not find configuration. Please reconfigure.";
 	    start_daemons();
             log::l("[drakgw] Enabled\n");
-	    $in->exit(0);
+	    undef $wait_enabl;
+	    $::Wizard_finished = 1;
+	    $in->ask_okcancel(_("fuck"), 
+			      _("Internet connection sharing is now enabled."));
+	    quit_global($in, 0);
 	}
-	($r eq _("dismiss")) and $in->exit(0);
+	($r eq _("dismiss")) and quit_global($in, 0);
     }
     else
     {
 	$in->ask_warn("Unrecognized config file", _("Config file content could not be interpreted."));
-	$in->exit(-1);
+	quit_global($in, -1);
     }
 }
 
 
-
 #- **********************************
 #- * 1st step: detect/setup
+step_ask_confirm:
 
+$::Wizard_no_previous = 1;
+    
 $::direct or $in->ask_okcancel(_("Internet Connection Sharing"),
-			       _("Your computer can be configured to share its Internet connection.\n
-Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n
-Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
+			       _("You are about to configure your computer to share its Internet connection.\n
+Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or quit_global($in, 0);
 
-#my @pci_ethernet_cards;
-#OBSOLETE! require pci_probing::main;
-#($_->[0] =~ /NETWORK_ETHERNET/) and (push @pci_ethernet_cards, $_) foreach (pci_probing::main::probe('.'));
+undef $::Wizard_no_previous;
 
-#(@pci_ethernet_cards == ()) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
-#
-##  push @pci_ethernet_cards, [ "NETWORK_ETHERNET", "Fake ne2000", "ne2k" ];
+
+step_detectsetup:
 
 my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg*`;
-
-#my @active_devices = `/sbin/ifconfig | grep ^[a-z] | awk '{print \$1}'`; chop @active_devices;
 
 my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach cat_("/etc/modules.conf");
 my $card_netconnect = netconnect::get_net_device("/");
 (defined $card_netconnect) and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect\n");
 my @all_cards_getnet = detect_devices::getNet();
-my @all_cards;
+my @all_cards = ();
 foreach my $card (@all_cards_getnet)
 {
     log::l("[drakgw] Have network card: $card\n");
@@ -189,69 +215,38 @@ foreach my $card (@all_cards_getnet)
 }
 log::l("[drakgw] Available network cards: ".join(" ; ", @all_cards)."\n");
 
-#  print "pci_detection: "; print ">".$_->[2]."< " foreach (@pci_ethernet_cards);
-#  print "\nconfigured: "; print ">".$_."< " foreach (@configured_devices);
-#  print "\nactive: "; print ">".$_."< " foreach (@active_devices);
-#  print "\naliased: "; print ">".$_." => ".$aliased_devices{$_}."< " foreach (keys %aliased_devices);
-#  print "\n";
-#  print "\nall_cards: "; print ">".$_."< " foreach (@all_cards);
-
-#
-#foreach $pci_card (@pci_ethernet_cards)
-#{
-#    my $this_card = $pci_card->[1];
-#    foreach $aliased_dev (keys %aliased_devices)
-#    {
-#	 if ($pci_card->[2] eq $aliased_devices{$aliased_dev})
-#	 {
-#	     $this_card .= ", hardware-configured";
-#	     grep(/$aliased_dev/, @configured_devices) and $this_card .= ", software-configured";
-#	     grep(/$aliased_dev/, @active_devices) and $this_card .= ", active";
-#	 }
-#    }
-#    push @all_cards, $this_card;
-#}
-
 
 #- setup the network interface we shall use
 
 my $interface;
-if (@all_cards == ())
+if (!@all_cards)
 {
     $in->ask_warn(_("No network adapter on your system!"), 
 		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
     quit_global($in);
 }
-elsif (@all_cards == 1)
+elsif ($#all_cards == 0)
 {
     $interface = $all_cards[0];
-    $::verbose and ($in->ask_okcancel(_("Network interface"),
-				      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or quit_global($in));
+    $in->ask_okcancel(_("Network interface"),
+		      _("There is only one configured network adapter on your system:\n\n$interface\n\nI am about to setup your Local Area Network with that adapter."), 1) or goto step_ask_confirm;
 }
 else
 {
     $interface = $in->ask_from_list(_("Choose the network interface"),
 				    _("Please choose what network adapter will be connected to your Local Area Network."),
 				    \@all_cards,
-				    );
+				    ) or goto step_ask_confirm;
     defined $interface or quit_global($in);
 }
 my ($device) = $interface =~ /(eth[0-9]+)/ or die("Internal error");
 log::l("[drakgw] Choosing network card: $device\n");
 
 grep(/$device/, @configured_devices) and
-    ($in->ask_okcancel('', _("Warning, the network adapter is already configured.\nWould you like to reconfigure?")) or quit_global($in));
+    ($in->ask_okcancel('', _("Warning, the network adapter is already configured. I will reconfigure it.")) or goto step_detectsetup);
 
 
-#- setup the address for the LAN
-
-my $full_lan_address = "192.168.0.0";
-#$::expert and ($full_lan_address = $in->ask_from_entry(_("Local Area Network specification"),
-#						       _("You may now decide which class C network to use.\n"),
-#						       _("Network:"), $full_lan_address,
-#						       ) or $in->exit(0));
-my ($lan_address) =
-  $full_lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/ or die "Invalid network.\n";
+my $lan_address = "192.168.0";
 
 
 #- test for potential conflict with other networks
@@ -262,7 +257,7 @@ foreach (@configured_devices)
     {
 	my @ifcfg_content = cat_("/etc/sysconfig/network-scripts/ifcfg-$_");
 	grep(/$lan_address/, @ifcfg_content) and
-	    $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and quit_global($in);
+	    ($in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) or goto step_detectsetup);
     }
 }
 
@@ -270,17 +265,18 @@ foreach (@configured_devices)
 #- test for potential conflict with previous firewall config
 
 my @chain_rules;
-(-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -L`) and (@chain_rules > 3)))
-    and ($in->ask_okcancel(_("Firewalling configuration detected!"),
-			   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation. Proceed?"), 1) or quit_global($in));
+if ($kernel_version eq "2.2") {
+    if (-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -nL`) and (@chain_rules > 3))) {
+	$in->ask_okcancel(_("Firewalling configuration detected!"),
+			  _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation.")) or goto step_detectsetup;
+    }
+} else {
+    if (-f "/etc/sysconfig/iptables" or ((-x "/sbin/iptables") and (@chain_rules = `/sbin/iptables -t nat -nL`) and (@chain_rules > 8))) {
+	$in->ask_okcancel(_("Firewalling configuration detected!"),
+			  _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation.")) or goto step_detectsetup;
+    }
+}
 
-
-#- ask for confirmation
-#
-#$in->ask_okcancel(_("Internet Connection Sharing - setup"),
-#		  _("The local network is about to be configured.\n") .
-#		    "You will then be able to connect other computers to this network, with automatic ".
-#		    "DHCP configuration."), 1) or $in->exit(0);
 
 #- **********************************
 #- * 2nd step: configure
@@ -292,8 +288,7 @@ $wait_configuring = $in->wait_message(_("Configuring..."), _("Configuring script
 my $network_scripts = "/etc/sysconfig/network-scripts";
 -f "$network_scripts/ifcfg-$device" and rename("$network_scripts/ifcfg-$device", "$network_scripts/old.ifcfg-$device");
 my $ifcfg = "$network_scripts/ifcfg-$device";
-output($ifcfg, qq(
-DEVICE=$device
+output($ifcfg, qq(DEVICE=$device
 BOOTPROTO=static
 IPADDR=$lan_address.1
 NETMASK=255.255.255.0
@@ -314,40 +309,33 @@ my %bin2rpm = ( "/sbin/ipchains" => "ipchains",
 		"/var/named/named.local" => "caching-nameserver" );
 
 -e $_ or $rpms_to_install .= "$bin2rpm{$_} " foreach (keys %bin2rpm);
-standalone::pkgs_install($rpms_to_install);
+$in->standalone::pkgs_install($rpms_to_install);
 -e $_ or fatal_quit(_("Problems installing package $bin2rpm{$_}")) foreach (keys %bin2rpm);
 
 
 #- setup the masquerading configuration
 
-if (-f "/etc/rc.d/rc.firewall")
-{
-    local *RCFIREWALL;
-    open RCFIREWALL, "/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
-    my @rcfirewall_content = <RCFIREWALL>;
-    close RCFIREWALL;
-    grep(m|\Q/etc/rc.d/rc.firewall.inet_sharing|, @rcfirewall_content) or push @rcfirewall_content, "# Added by drakgw\n[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing\n";
-    open RCFIREWALL, ">/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
-    print RCFIREWALL @rcfirewall_content;
-    close RCFIREWALL;
-}
-else
-{
-    local *RCFIREWALL; open RCFIREWALL, ">/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
-    print RCFIREWALL <<EOF;
-#!/bin/sh
+if (!-f $rc_firewall_generic || !grep(/drakgw/, cat_($rc_firewall_generic))) {
+    output($rc_firewall_generic, qq(#!/bin/sh
 #
 # Automatically generated by drakgw
 
-[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing
-EOF
-    chmod 0700, "/etc/rc.d/rc.firewall";
+KERNELMAJ=`uname -r | sed                   -e 's,\\..*,,'`
+KERNELMIN=`uname -r | sed -e 's,[^\\.]*\\.,,' -e 's,\\..*,,'`
+
+if [ "\$KERNELMAJ" -eq 2 -a "\$KERNELMIN" -eq 2 ]; then
+    [ -x $rc_firewall_22 ] && $rc_firewall_22
+fi
+if [ "\$KERNELMAJ" -eq 2 -a "\$KERNELMIN" -eq 4 ]; then
+    [ -x $rc_firewall_24 ] && $rc_firewall_24
+fi
+    ));
 }
 
--f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
-local *RCFIREWALL; open RCFIREWALL, ">$rc_firewall" or die "Can't open $rc_firewall";
-print RCFIREWALL <<EOF;
-#!/bin/sh
+chmod 0700, $rc_firewall_generic;
+
+
+output($rc_firewall_22, qq(#!/bin/sh
 #
 # rc.firewall - Initial SIMPLE IP Masquerade test for 2.1.x and 2.2.x kernels using IPCHAINS
 #
@@ -447,29 +435,33 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 #
 /sbin/ipchains -P forward DENY
 /sbin/ipchains -A forward -s $lan_address.0/24 -j MASQ
-EOF
-close RCFIREWALL;
-chmod 0700, $rc_firewall;
+));
+chmod 0700, $rc_firewall_22;
+
+
+output($rc_firewall_24, qq(#!/bin/sh
+# Load the NAT module (this pulls in all the others).
+modprobe iptable_nat
+
+# In the NAT table (-t nat), Append a rule (-A) after routing (POSTROUTING)
+# which says to MASQUERADE the connection (-j MASQUERADE).
+iptables -t nat -A POSTROUTING -s $lan_address.0/24 -j MASQUERADE
+
+# Turn on IP forwarding
+echo 1 > /proc/sys/net/ipv4/ip_forward
+));
+chmod 0700, $rc_firewall_24;
 
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
-open SYSCONF_NETWORK, "$sysconf_network" or die "Can't open $sysconf_network";
-my @sysconf_network_content = <SYSCONF_NETWORK>;
-close SYSCONF_NETWORK;
-($_ =~ /^FORWARD_IPV4=/ and $_="FORWARD_IPV4=true\n") foreach @sysconf_network_content;
-grep(/^FORWARD_IPV4=/, @sysconf_network_content) or push @sysconf_network_content, "FORWARD_IPV4=true\n";
-open SYSCONF_NETWORK, ">$sysconf_network" or die "Can't open $sysconf_network";
-print SYSCONF_NETWORK @sysconf_network_content;
-close SYSCONF_NETWORK;
+substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network;
 
 
 #- setup the DHCP server
 
 -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
-local *DHCPDCONF; open DHCPDCONF, ">$dhcpd_conf" or die "Can't open $dhcpd_conf";
-print DHCPDCONF <<EOF;
-subnet $lan_address.0 netmask 255.255.255.0 {
+output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
 	# default gateway
 	option routers $lan_address.1;
 	option subnet-mask 255.255.255.0;
@@ -481,16 +473,12 @@ subnet $lan_address.0 netmask 255.255.255.0 {
 	default-lease-time 21600;
 	max-lease-time 43200;
 }
-EOF
-close DHCPDCONF;
+));
 
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
-my @conf_linuxconf_content = cat_($conf_linuxconf);
-(/^DHCP.interface/ and $_="DHCP.interface $device\n") foreach @conf_linuxconf_content;
-grep(/DHCP.interface/, @conf_linuxconf_content) or push @conf_linuxconf_content, "DHCP.interface $device\n";
-output($conf_linuxconf, @conf_linuxconf_content);
+substInFile { s/^DHCP.interface.*\n//; $_ .= "DHCP.interface $device\n" if eof } $conf_linuxconf;
 
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
@@ -504,14 +492,12 @@ output($conf_linuxconf, @conf_linuxconf_content);
 #-
 #- These steps are only done when the CUPS package is installed.
 
-if (-f $cups_conf)
-{
-    my @cups_conf_content = cat_($cups_conf);
-    /ServerName[^:]/ and $_ = "ServerName $lan_address.1\n" foreach @cups_conf_content;
-    push @cups_conf_content, "ServerName $lan_address.1\n" if grep /ServerName[^:]/, @cups_conf_content;
-    push @cups_conf_content, "BrowseAddress $lan_address.255\n" if grep /^BrowseAddress $lan_address.255/, @cups_conf_content;
-    output($cups_conf, @cups_conf_content);
-}
+(-f $cups_conf) and
+    substInFile {
+	s/^ServerName[^:].*\n//; $_ .= "ServerName $lan_address.1\n" if eof;
+	s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
+    } $cups_conf;
+
 
 #- start the daemons
 
@@ -522,17 +508,20 @@ start_daemons();
 
 undef $wait_configuring;
 
-$in->ask_warn(_("Congratulations!"), 
-	      _("Everything has been configured.
+$::Wizard_no_previous = 1;
+$::Wizard_finished = 1;
+
+$in->ask_okcancel(_("Congratulations!"), 
+		  _("Everything has been configured.
 You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
 
 
 log::l("[drakgw] Installation complete, exiting\n");
-quit_global($in);
+quit_global($in, 0);
 
 sub quit_global {
-    my ($in)=@_;
-    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+    my ($in, $exitcode) = @_;
+    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit($exitcode);
     goto begin
 }
 
@@ -540,6 +529,10 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.24  2001/03/12 18:26:16  gc
+#- - make it work as a wizard
+#- - make it work with iptables (kernel-2.4)
+#-
 #- Revision 1.23  2001/03/01 00:18:17  damien
 #- updated embedded mode
 #-
