@@ -84,13 +84,14 @@ sub adsl_conf {
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
     $adsl_type eq 'speedtouch' or conf_network_card($netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
-    adsl_conf_backend($adsl, $netc, $adsl_type, $netcnx);
+    adsl_conf_backend($adsl, $netc, $adsl_type);
     1;
 }
 
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type, $netcnx) = @_;
-
+    defined $netcnx and $netc->{adsltype} = $netcnx->{type};
+    $netc->{adsltype} ||= "adsl_$adsl_type";
     mkdir_p("$prefix/etc/ppp");
     output("$prefix/etc/ppp/options",
 'lock
@@ -160,19 +161,19 @@ and copy the mgmt.o in /usr/share/speedtouch'));
 /usr/bin/pptp 10.0.0.138 name $adsl->{login}
 ",
 '/usr/bin/killall pptp pppd
-', $netcnx->{type}) } elsif ($adsl_type eq 'pppoe') {
+', $netc->{adsltype}) } elsif ($adsl_type eq 'pppoe') {
     write_cnx_script($netc, "adsl",
 "/sbin/route del default
 LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}
 ",
 '/usr/sbin/adsl-stop
 /usr/bin/killall pppoe pppd
-', $netcnx->{type}) } elsif ($adsl_type eq 'speedtouch') {
+', $netc->{adsltype}) } elsif ($adsl_type eq 'speedtouch') {
     write_cnx_script($netc, 'adsl',
 '/usr/share/speedtouch/speedtouch.sh start
 ',
 '/usr/share/speedtouch/speedtouch.sh stop
-', $netcnx->{type}) }
+', $netc->{adsltype}) }
 
     $netc->{NET_INTERFACE}='ppp0';
 }

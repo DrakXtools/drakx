@@ -23,12 +23,12 @@ sub configure {
 			       ) or return;
     if ($e =~ /card/) {
       intern_pci:
-	$netcnx->{type}='isdn_internal';
+	$netc->{isdntype}='isdn_internal';
 	$netcnx->{isdn_internal}={};
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach ('description', 'vendor', 'id', 'driver', 'card_type', 'type');
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
-	$netcnx->{type}='isdn_external';
+	$netc->{isdntype}='isdn_external';
 	$netcnx->{isdn_external}={};
 	$netcnx->{isdn_external}{device}=$netc->{autodetect}{modem};
 	$netcnx->{isdn_external}{special_command}='AT&F&O2B40';
@@ -62,12 +62,13 @@ We recommand the light configuration.
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
     $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     my $light = $e =~ /light/ ? 1 : 0;
-    isdn_write_config_backend($isdn, $light, $netc, $netcnx);
+    isdn_write_config_backend($isdn, $light, $netc);
     1;
 }
 
 sub isdn_write_config_backend {
     my ($isdn, $light, $netc, $netcnx) = @_;
+    defined $netcnx and $netc->{isdntype} = $netcnx->{type};
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	if ($isdn->{id}) {
@@ -145,7 +146,7 @@ defaultroute
 "/sbin/isdnctrl hangup ippp0
 /sbin/ifdown ippp0
 "  . if_($isdn->{speed} =~ /128/, "service ibod stop
-"), $netcnx->{type});
+"), $netc->{isdntype});
     1;
 }
 
