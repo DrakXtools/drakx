@@ -666,8 +666,8 @@ sub g_default_packages {
 
     require Data::Dumper;
     output('/floppy/auto_inst.cfg', 
-	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
-	   "# To use it, boot with ``linux defcfg=floppy''\n",
+	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n",
+	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n",
 	   Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']), "\0");
     fs::umount("/floppy");
 
