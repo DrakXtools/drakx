@@ -103,6 +103,13 @@ sub handle_init {
     init_lists();
 }
 
+sub list_remove_addr {
+    my ($list, @addr) = @_;
+    foreach (0 .. $#{$list}) {
+        member($list->[$_][0], @addr) and splice @$list, $_, 1;
+    }
+}
+
 sub init_blacklist {
     my @packets = $activefw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
@@ -139,7 +146,7 @@ sub unblacklist {
     my @addr = @_;
     $activefw->unblacklist($_) foreach @addr;
     #- delete from the list even if the above calls were unsuccessful
-    @{$blacklist->{data}} = grep { !member($_->[0], @addr) } @{$blacklist->{data}};
+    list_remove_addr($blacklist->{data}, @addr);
 }
 
 sub init_whitelist {
@@ -169,7 +176,7 @@ sub unwhitelist {
     my @addr = @_;
     $activefw->unwhitelist($_) foreach @addr;
     #- delete from the list even if the above calls were unsuccessful
-    @{$whitelist->{data}} = grep { !member($_->[0], @addr) } @{$whitelist->{data}};
+    list_remove_addr($whitelist->{data}, @addr);
 }
 
 sub init_lists {
