@@ -742,6 +742,8 @@ sub write_lilo_conf {
 	print F "message=/boot/message" if (arch() !~ /ia64/);
 	print F "menu-scheme=wb:bw:wb:bw" if (arch() !~ /ia64/);
 
+	print F "ignore-table" if grep { $_->{unsafe} && $_->{table} } @{$lilo->{entries}};
+
 	foreach (@{$lilo->{entries}}) {
 	    print F "$_->{type}=", $file2fullname->($_->{kernel_or_dev});
 	    print F "\tlabel=", make_label_lilo_compatible($_->{label});
@@ -755,7 +757,7 @@ sub write_lilo_conf {
 		print F "\tread-only" if !$_->{'read-write'};
 	    } else {
 		print F "\ttable=$_->{table}" if $_->{table};
-		print F $_->{table} ? "\tignore-table" : "\tunsafe" if $_->{unsafe};
+		print F "\tunsafe" if $_->{unsafe} && !$_->{table};
 		
 		if (my ($dev) = $_->{table} =~ m|/dev/(.*)|) {
 		    if ($dev2bios{$dev}) {
