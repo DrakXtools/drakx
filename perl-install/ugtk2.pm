@@ -1565,8 +1565,48 @@ sub toggle_expansion {
 # compatible with Combo since its API is quite nice.
 
 package Gtk2::OptionMenu;
+use common;
 
-sub new { Gtk2::ComboBox->new_text }
+# try to get combox <==> option menu mapping
+sub set_popdown_strings {
+    my ($w, @strs) = @_;
+    my $menu = Gtk2::Menu->new;
+    # keep string list around for ->set_text compatibilty helper
+    $w->{strings} = \@strs;
+    #$w->set_menu((ugtk2::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
+    $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
+    $w->set_menu($menu);
+    $w
+}
+
+sub new_with_strings {
+    my ($class, $strs, $o_val) = @_;
+    my $w = $class->new;
+    $w->set_popdown_strings(@$strs);
+    $w->set_text($o_val) if $o_val;
+    $w;
+}
+
+sub entry {
+    my ($w) = @_;
+    return $w;
+}
+
+sub get_text {
+    my ($w) = @_;
+    $w->{strings}[$w->get_history];
+}
+
+sub set_text {
+    my ($w, $val) = @_;
+    each_index {
+        if ($_ eq $val) {
+            $w->set_history($::i);
+            return;
+        }
+    } @{$w->{strings}};
+}
+
 
 
 
