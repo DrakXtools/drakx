@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Aug 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.15mdk
+- GUI cleanups:
+  o drakboot: fix canceling first step
+  o localedrake: let's look & behave like a wizard (fix cancel on
+    country choice)
+- drakconnect: detect Intel & ATI PCI modems
+- localedrake: really install proper packages depending on (locale,
+  input method) tuple (and not just those depending on IM)
+- XFdrake: add dell D800 specific modeline and resolution (Olivier
+  Thauvin)
+
 * Thu Aug 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.14mdk
 - fix ddcprobe for other archictectures
 - drakconnect: restart network for non ethernet adsl devices (blino)
