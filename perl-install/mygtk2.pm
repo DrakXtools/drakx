@@ -396,12 +396,16 @@ sub _gtk__Frame {
 
 sub _gtk__Window { &_gtk_any_Window }
 sub _gtk__Dialog { &_gtk_any_Window }
+sub _gtk__Plug   { &_gtk_any_Window }
 sub _gtk_any_Window {
     my ($w, $opts, $class) = @_;
 
     if (!$w) {
 	if ($class eq 'Window') {
 	    $w = "Gtk2::$class"->new(delete $opts->{type} || 'toplevel');
+	} elsif ($class eq 'Plug') {
+	    $opts->{socket_id} or internal_error("can not create a Plug without a socket_id");
+	    $w = "Gtk2::$class"->new(delete $opts->{socket_id});
 	} else {
 	    $w = "Gtk2::$class"->new;
 	}
