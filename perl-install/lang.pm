@@ -124,7 +124,7 @@ my %xim = (
   'ja' => {
 	ENC => 'eucj',
 	XIM => 'kinput2',
-	XIM_PROGRAM => 'kinput2'
+	XIM_PROGRAM => 'kinput2',
 	XMODIFIERS => '"@im=kinput2"',
   }
 );

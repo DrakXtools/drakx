@@ -404,11 +404,13 @@ sub choosePackagesTree {
 
 	my ($root, $leaf);
 	if ($flat = $_[0]) {
-	    $add_node->($_, undef) foreach sort keys %{$packages->[0]};
+	    $add_node->($_, undef) foreach sort grep { my $pkg = pkgs::packageByName($packages, $_);
+						       $pkg->{medium}{selected} } keys %{$packages->[0]};
 	} else {
 	    foreach (sort @$compss) {
 		($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
-		$add_node->($leaf, $root);
+		my $pkg = pkgs::packageByName($packages, $leaf);
+		$add_node->($leaf, $root) if $pkg->{medium}{selected};
 	    }
 	}
 	$tree->thaw;
