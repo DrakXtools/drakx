@@ -207,6 +207,12 @@ sub set_alternative {
 
 sub files_exist { and_(map { -f "$::prefix$_" } @_) }
 
+sub secured_file {
+    my ($f) = @_;
+    c::is_secure_file($f) or die "can't ensure a safe $f";
+    $f;
+}
+
 sub set_permissions {
     my ($file, $perms, $owner, $group) = @_;
     # We only need to set the permissions during installation to be able to
