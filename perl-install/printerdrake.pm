@@ -338,7 +338,7 @@ sub main($$$;$) {
     my ($queue, $continue) = ('', 1);
 
     while ($continue) {
-	if (!$::expert || !(scalar keys %{$printer->{configured} || {}})) {
+	if (!$::expert || %{$printer->{configured} || {}} == ()) {
 	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
 							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
