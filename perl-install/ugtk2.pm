@@ -88,7 +88,7 @@ sub gtkset_line_wrap          { $_[0]->set_line_wrap($_[1]); $_[0] }
 sub gtkadd {
     my $w = shift;
     foreach my $l (@_) {
-	ref $l or $l = Gtk2::WrappedLabel->new($l);
+	ref $l or $l = gtknew('WrappedLabel', text => $l);
 	$w->add(gtkshow($l));
     }
     $w;
@@ -98,7 +98,7 @@ sub gtkadd_widget {
     my $sg = shift;
     map {
         my $l = $_;
-        ref $l or $l = Gtk2::WrappedLabel->new($l);
+        ref $l or $l = gtknew('WrappedLabel', text => $l);
         $sg->add_widget($l);
         $l;
     } @_;
@@ -107,7 +107,7 @@ sub gtkadd_widget {
 sub gtkappend {
     my $w = shift;
     foreach my $l (@_) {
-	ref $l or $l = Gtk2::WrappedLabel->new($l);
+	ref $l or $l = gtknew('WrappedLabel', text => $l);
 	$w->append(gtkshow($l));
     }
     $w;
@@ -129,7 +129,7 @@ sub gtkappend_page {
 
 sub gtkentry {
     my ($text) = @_;
-    my $e = Gtk2::Entry->new;
+    my $e = gtknew('Entry');
     $text and $e->set_text($text);
     $e;
 }
@@ -224,7 +224,7 @@ sub gtkpowerpack {
 	    }
 	}
 	#- Get and pack the widget (create it if necessary to  a label...)
-	my $widget = ref($_[0]) ? shift : Gtk2::WrappedLabel->new(shift);
+	my $widget = ref($_[0]) ? shift : gtknew('WrappedLabel', text => shift);
 	my $pack_call = 'pack_' . ($attr{pack_end} ? 'end' : 'start');
 	$box->$pack_call($widget, $attr{expand}, $attr{fill}, $attr{padding});
 	$widget->show;
@@ -253,11 +253,12 @@ sub gtktreeview_children {
 sub create_pixbutton {
     my ($label, $pix, $reverse_order) = @_;
     my @label_and_pix = (0, $label, if_($pix, 0, $pix));
-    gtkadd(Gtk2::Button->new,
-	   gtkpack_(Gtk2::HBox->new(0, 3),
+    gtkadd(gtknew('Button'),
+	   gtknew('HBox', spacing => 3, children => [
 		    1, "",
 		    $reverse_order ? reverse(@label_and_pix) : @label_and_pix,
-		    1, ""));
+		    1, "",
+		]));
 }
 
 sub create_adjustment {
@@ -314,8 +315,8 @@ sub create_box_with_title {
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
 	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
-	my $scroll = create_scrolled_window($wtext);
 	my $width = 400;
+	my $scroll = gtknew('ScrolledWindow', child => $wtext, width => $width, height => 200);
 	$scroll->signal_connect(realize => sub {
                                 my $layout = $wtext->create_pango_layout($text);
                                 $layout->set_width(($width - 10) * Gtk2::Pango->scale);
@@ -323,14 +324,13 @@ sub create_box_with_title {
                                 $scroll->set_size_request($width, min(200, ($layout->get_pixel_size)[1] + 10));
                                 $o->{rwindow}->queue_resize;
                             });
-	$scroll->set_size_request($width, 200);
 	gtkpack_($box, $o->{box_allow_grow} || 0, $scroll);
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
      my $new_label = sub {
          my ($txt) = @_;
-         my $w = ref($txt) ? $txt : Gtk2::WrappedLabel->new($txt);
+         my $w = ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
          gtkset_name($w, "Title");
      };
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
@@ -389,7 +389,7 @@ sub create_dialog {
     my $ret = 0;
     my $dialog =  gtkset_border_width(_create_dialog($title, $o_options), 10);
     $dialog->set_border_width(10);
-    my $text = ref($label) ? $label : $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
+    my $text = ref($label) ? $label : $o_options->{use_markup} ? gtknew('WrappedLabel', text_markup => $label) : gtknew('WrappedLabel', text => $label);
     gtkpack($dialog->vbox,
             gtknew('HBox', children => [
                      if_($o_options->{stock},
@@ -440,8 +440,8 @@ sub err_dialog {
     create_dialog($title, $label, $o_options);
 }
 
-sub create_hbox { gtkset_layout(Gtk2::HButtonBox->new, $_[0] || 'spread') }
-sub create_vbox { gtkset_layout(Gtk2::VButtonBox->new, $_[0] || 'spread') }
+sub create_hbox { gtknew('HButtonBox', layout => $_[0]) }
+sub create_vbox { gtknew('VButtonBox', layout => $_[0]) }
 
 sub create_factory_menu_ {
     my ($type, $name, $window, @menu_items) = @_;
@@ -462,7 +462,7 @@ sub create_menu {
 }
 
 sub create_notebook {
-    my $book = Gtk2::Notebook->new;
+    my $book = gtknew('Notebook');
     while (@_) {
 	my ($page, $title) = splice(@_, 0, 2);
 	gtkappend_page($book, $page, $title);
@@ -479,7 +479,7 @@ sub create_packtable {
 	each_index {
 	    my $j = $::i;
 	    if ($_) {
-		ref $_ or $_ = Gtk2::WrappedLabel->new($_);
+		ref $_ or $_ = gtknew('WrappedLabel', text => $_);
 		$j != $#$l && !$options->{mcc} ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     'fill', 'fill', $options->{xpadding}, $options->{ypadding}) :
@@ -570,7 +570,7 @@ sub create_hpaned {
 
 sub gtkcreate_frame {
     my ($label) = @_;
-    gtkset_border_width(Gtk2::Frame->new($label), 5);
+    gtknew('Frame', text => $label, border_width => 5);
 }
 
 
@@ -597,12 +597,12 @@ sub _find_imgfile {
 
 # use it if you want to display an icon/image in your app
 sub gtkcreate_img {
-    return Gtk2::Image->new_from_file(_find_imgfile(@_) || internal_error("can't find $_[0]"));
+    gtknew('Image', file => $_[0]);
 }
 
 # use it if you want to draw an image onto a drawingarea
 sub gtkcreate_pixbuf {
-    return Gtk2::Gdk::Pixbuf->new_from_file(_find_imgfile(@_) || internal_error("can't find $_[0]"));
+    gtknew('Pixbuf', file => $_[0]);
 }
 
 sub gtktext_append { gtktext_insert(@_, append => 1) }
@@ -969,7 +969,7 @@ END { &exit() }
 
 sub _create_window {
     my ($title) = @_;
-    my $w = Gtk2::Window->new('toplevel');
+    my $w = gtknew('Window');
     $w->set_border_width(5) if !$::isInstall && !$::isWizard;
 
     $w->set_name("Title");
@@ -1041,7 +1041,7 @@ sub ask_dir        { my $w = ugtk2->new(shift @_, grab => 1); $w->_ask_dir(@_); 
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
-    my $entry = Gtk2::Entry->new;
+    my $entry = gtknew('Entry');
     my $f = sub { $o->{retval} = $entry->get_text; Gtk2->main_quit };
     $o->{ok_clicked} = $f;
     $o->{cancel_clicked} = sub { undef $o->{retval}; Gtk2->main_quit };
@@ -1126,9 +1126,9 @@ sub ask_browse_tree_info {
 	   gtknew('VBox', spacing => 5, children => [
 		    0, $common->{message},
 		    1, gtknew('HBox', children_loose => [
-			       create_scrolled_window($tree),
+			       gtknew('ScrolledWindow', child => $tree),
 			       gtknew('Frame', text => N("Info"), child =>
-				      create_scrolled_window(my $info = gtknew('TextView')),
+				      gtknew('ScrolledWindow', child => my $info = gtknew('TextView')),
 				     ) ]),
 		    0, my $box1 = gtknew('HBox', spacing => 15),
 		    0, my $box2 = gtknew('HBox', spacing => 10),
@@ -1441,7 +1441,7 @@ sub gtk_new_TextView_get_log {
     my ($command, $filter_output, $when_command_is_over) = @_;
 
     my $log_w = gtknew('TextView', editable => 0);
-    my $log_scroll = create_scrolled_window($log_w);  #- $log_scroll is a frame, not a ScrolledWindow, so giving $log_scroll->child
+    my $log_scroll = gtknew('ScrolledWindow', child => $log_w);  #- $log_scroll is a frame, not a ScrolledWindow, so giving $log_scroll->child
     my $pid = gtk_TextView_get_log($log_w, $log_scroll->child, $command, $filter_output, $when_command_is_over) or return;
     $log_scroll, $pid;
 }
@@ -1606,8 +1606,8 @@ sub set_text {
 
 package Gtk2::Label;
 sub set {
-    my ($label) = shift;
-    $label->set_label(@_);
+    my ($label, $text) = @_;
+    mygtk2::gtkset($label, text => $text);
 }
 
 
