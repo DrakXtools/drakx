@@ -21,9 +21,6 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(%printer_type %printer_type_inv);
 
-#-location of the printer database in an installed system
-my $PRINTER_DB_FILE = "/usr/share/foomatic/db/compiled/overview.xml";
-
 #-Did we already read the subroutines of /usr/sbin/ptal-init?
 my $ptalinitread = 0;
 
@@ -383,18 +380,12 @@ sub read_printer_db(;$) {
 
     my $spooler = $_[0];
 
-    my $dbpath = $::prefix . $PRINTER_DB_FILE;
-
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
-    if (!(-f $dbpath)) {
-	open DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
-	    "foomatic-configure -O -q |" or
-		die "Could not run foomatic-configure";
-    } else {
-	open DBPATH, $dbpath or die "An error occurred on $dbpath : $!"; #-#
-    }
+    open DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
+	"foomatic-configure -O -q |" or
+	die "Could not run foomatic-configure";
 
     my $entry = {};
     my $inentry = 0;
@@ -419,7 +410,7 @@ sub read_printer_db(;$) {
 		# All entries inside this block will be ignored
 		if ($autodetecttype) {
 		    if (m!^.*</$autodetecttype>\s*$!) {
-			# End of parallel, USB, or SNMP section
+			# End of general, parallel, USB, or SNMP section
 			$autodetecttype = "";
 		    } elsif (m!^\s*<manufacturer>\s*([^<>]+)\s*</manufacturer>\s*$!) {
 			# Manufacturer
@@ -433,12 +424,27 @@ sub read_printer_db(;$) {
 		    } elsif (m!^\s*<commandset>\s*([^<>]+)\s*</commandset>\s*$!) {
 			# Command set
 			$entry->{devidcmdset} = $1;
+		    } elsif (m!^\s*<ieee1284>\s*([^<>]+)\s*</ieee1284>\s*$!) {
+			# Full ID string
+			my $idstr = $1;
+			$idstr =~ m!(MFG|MANUFACTURER):([^;]+);!i;
+			$entry->{devidmake} = $2;
+			undef $2;
+			$idstr =~ m!(MDL|MODEL):([^;]+);!i;
+			$entry->{devidmodel} = $2;
+			undef $2;
+			$idstr =~ m!(DES|DESCRIPTION):([^;]+);!i;
+			$entry->{deviddesc} = $2;
+			undef $2;
+			$idstr =~ m!(CMD|COMMAND\s*SET):([^;]+);!i;
+			$entry->{devidcmdset} = $2;
+			undef $2;
 		    }
 		} else {
 		    if (m!^.*</autodetect>\s*$!) {
 			# End of autodetect block
 			$inautodetect = 0;
-		    } elsif (m!^\s*<(parallel|usb|snmp)>\s*$!) {
+		    } elsif (m!^\s*<(general|parallel|usb|snmp)>\s*$!) {
 			# Beginning of parallel, USB, or SNMP section
 			$autodetecttype = $1;
 		    }
