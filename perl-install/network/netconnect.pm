@@ -592,7 +592,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
 
-                        return is_wireless_intf($module) "wireless" : "static_hostname";
+                        return is_wireless_intf($module) ? "wireless" : "static_hostname";
                     },
                    },
                    
