@@ -201,12 +201,13 @@ NIS_SERVER
 
 NETWORKING_REMOTE_ACCESS
   5 openssh-clients
-  3 vnc vnc-SVGALIB
-  2 rsh telnet vnc-java
+  3 vnc
+  2 rsh telnet vnc-SVGALIB vnc-java
   2 BOOKS vnc-doc
   1 sftp
 NETWORKING_REMOTE_ACCESS_SERVER
   5 openssh-server
+  2 vnc-server
   1 telnet-server rsh-server
 
 NETWORKING_DNS
@@ -220,10 +221,11 @@ NETWORKING_FILE
   4 samba-client nfs-utils-clients
   3 arkeia-gui arkeia-client
   2 GNOME gnomba gtm
+  1 am-utils autofs
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba arkeia-server-shareware
-  3 squid am-utils
+  3 squid
 
 NETWORKING_WWW
   5 lynx
@@ -338,8 +340,8 @@ DEVELOPMENT
 
   3 swig
 
-  4 python python-devel veepee
-  3 tkinter python-imaging pygtk-glarea pygtk pygtk-libglade rpm-python
+  4 python veepee tkinter
+  3 python-devel python-imaging pygtk-glarea pygtk pygtk-libglade rpm-python
 
   4 perl perl-Term-Readline-Gnu perl-libnet perl-libwww-perl perl-devel
   3 perl-DBI perl-Digest-MD5 perl-IO-stringy perl-PDL perl-Parse-RecDescent 
@@ -431,11 +433,11 @@ SYSTEM
     hexedit strace rxvt drakfloppy drakfont mandrake_desk rootfiles
     Aurora-Monitor-NewStyle-Categorizing-WsLib
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK
-  3 XFree86-100dpi-fonts drakprofile bc
+  3 XFree86-100dpi-fonts bc
   2 kernel-utils sane acpid tksysv imlib-cfgeditor adns audiofile awesfx fbset sudo
     Aurora-Monitor-NewStyle-WsLib Aurora-Monitor-Traditional-Gtk+
     Aurora-Monitor-Traditional-WsLib
-  1 DrakeLogo Mesa xtoolwait fdutils genromfs mailcap usbview pinfo X11R6-contrib 
+  1 DrakeLogo drakprofile Mesa xtoolwait fdutils genromfs mailcap usbview pinfo X11R6-contrib 
   GNOME
     3 gnome-print gnorpm
 
