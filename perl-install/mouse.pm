@@ -305,14 +305,16 @@ sub detect() {
 
     #- probe serial device to make sure a wacom has been detected.
     eval { modules::load("serial") };
-    my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
-    $r and return { wacom => \@wacom, %$r };
-
-    #- in case only a wacom has been found, assume an inexistant mouse (necessary).
-    @wacom and return fullname2mouse('none|No mouse', wacom => \@wacom);
-
-    #- defaults to generic serial mouse on ttyS0.
-    fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+    my ($serial_mouse, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
+    if ($serial_mouse) {
+	{ wacom => \@wacom, %$serial_mouse };
+    } elsif (@wacom) {
+	#- in case only a wacom has been found, assume an inexistant mouse (necessary).
+	fullname2mouse('none|No mouse', wacom => \@wacom);
+    } else {
+	#- defaults to generic serial mouse on ttyS0.
+	fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+    }
 }
 
 sub load_modules {
