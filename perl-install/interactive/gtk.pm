@@ -118,7 +118,7 @@ sub create_treeview_list {
 
 	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
-	1;
+	0;
     });
     $list_tv->show;
 
@@ -272,7 +272,7 @@ sub create_treeview_tree {
 
 	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
-	1;
+	0;
     });
     $tree->signal_connect(button_press_event => sub {
 	$selected_via_click = 1;
@@ -304,7 +304,7 @@ sub create_list {
     	    my ($_w, $event) = @_;
     	    my $c = chr($event->keyval & 0xff);
 	    &$may_go_to_next if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
-    	    1;
+    	    0;
     	});
 	$list->append_items($item);
 	$item->show;
