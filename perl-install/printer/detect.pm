@@ -124,7 +124,8 @@ sub whatUsbport() {
 		$description =~ s/HEWLETT[-\s_]PACKARD/HP/;
 		$itemfound = 1;
 	    }
-	    if ($idstr =~ /SE*R*N:([^;]+);/) {
+	    if (($idstr =~ /SE*R*N:([^;]+);/) ||
+		($idstr =~ /SN:([^;]+);/)) {
 		$serialnumber = $1;
 		$itemfound = 1;
 	    }
