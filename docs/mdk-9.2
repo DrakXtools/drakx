@@ -23,11 +23,27 @@
 * tools
 ** all:
 *** have a button or a menu to access help (was already part of mdk9.1 specs)
+*** rename and provide compatibility links:
+**** adduserdrake  => drakeuseradd
+**** diskdrake     => drakdisk
+**** harddrake     => drakhw
+**** keyboarddrake => drakkeyboard
+**** localedrake   => draklocale
+**** logdrake      => draklog
+**** menudrake     => drakmenu [fredc]
+**** mousedrake    => drakmouse
+**** printerdrake  => drakprinter
+**** userdrake     => drakuser [deush]
+**** XFdrake       => drakx11
 ** drakboot:
 *** should prevent the user to insert a space in a kernel label (#2826)
 ** mcc:
 *** make tool names be black or blue (like in rpmdrake & harddrake2 guies) (#2695)
+*** hide non executable programs instead of warning at runtime if program isn't executable
+*** make more program being options rather than depandancies (ie like rpmdrake and drakwizard)
 ** harddrake: colorize the internal help
+** rpmdrake
+*** save mode (sort by group, mdk choice, ...)
 
 
 * packages
@@ -37,7 +53,9 @@
 ** add new packages:
 *** kernel-mosix
 *** dvb packages
+** icewm/windowmaker/other wm
+*** export BROWSER like gnome/kde (look at /etc/gnome/gnomerc)
 
 * hardware support
 ** kernel: update alsa, bttv, dvb & saa7134 drivers for better hardware support
-** isa detection/probing in ldetect ? (#118, #497) => need some old hw
+** isa detection/probing in ldetect ? (#118, #497) => need some old hw in order to test

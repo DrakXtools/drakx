@@ -4,15 +4,14 @@
 ** drakxtools* need XF-{75,100}fonts that requires XFree86
 
 * Harddrake TODO:
-** rename it drakhw by default
 ** ui
 *** mdk9.2: put data into a third hidden column rather in %data
 *** more usb mice infos
 *** enable the user to force a module (isa, isapnp, ...)
 *** print "(not loaded)" if module isn't loaded
-*** add bus_position to make unique id in ui
+*** add bus_position to make unique id in ui (check it does not confuse hw service)
 *** cdrom (must be done by diskdrake):
-**** ide-scsi / ide-cd switch
+**** ide-scsi / ide-cd switch (humm, the future (aka 2.6.x kernel) is ide-cd only)
 *** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
 *** help: 
 **** print fields in black and their description in blue as for information fields
@@ -65,7 +64,7 @@
 ** alter detect_devices in order to only probe one time
 ** detect *ALL* mouses if more than one (mousedrake?)
 
-**  deeper data structure in Mandrake 9.1 :
+**  deeper data structure in Mandrake 9.2 ?
 
     "Mass storage" => (Floppy,
 				   Disk,
@@ -100,13 +99,6 @@
 * ####################################################################
 
 * Suggestions
-** a dialog in harddrake to select the driver of choice. 
-easy way: greping pcitable for all known oss modules and alsa' snd-*
-ones, then build a hand hash (oss<->alsa modules names) that enable to
-get alsa or (respectively oss) module from oss (respectively alsa)
-module.
-then offering a window to switch from alsa to oss.
-
 ** various
 Subject: Re: [Cooker] Optional ALSA Support for SB Live!
 From: Fabrice FACORAT <f.faber@netcourrier.com>
