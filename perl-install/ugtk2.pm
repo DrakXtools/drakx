@@ -1249,6 +1249,7 @@ sub ask_browse_tree_info_given_widgets {
     &$update_size;
     $common->{initial_selection} and $common->{toggle_nodes}($set_leaf_state, @{$common->{initial_selection}});
     my $_b = before_leaving { $clear_all_caches->() };
+    $common->{init_callback}->() if $common->{init_callback};
     $w->{w}->main;
 }
 
