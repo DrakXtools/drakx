@@ -374,6 +374,7 @@ sub apply {
     $netcnx->{type} eq 'adsl_ppoe' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
     $netcnx->{type} eq 'adsl_pptp' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');
 
+    $netcnx->{dhcp_client} and $netc->{dhcp_client} = $netcnx->{dhcp_client};
     network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     system("$prefix/etc/rc.d/init.d/network restart");
