@@ -56,13 +56,14 @@ sub read($) {
     $fs->{nb_sectors} = $fs->{small_nb_sectors} || $fs->{big_nb_sectors};
     $fs->{cluster_size} = $fs->{cluster_size_in_sectors} * $fs->{sector_size};
 
-    $fs->{boot_sign} == 0xAA55 or die "Invalid signature for a MS-based filesystem.";
-    $fs->{nb_fats} == 2 or die "Weird number of FATs: $fs->{nb_fats}, not 2.",
+    $fs->{boot_sign} == 0xAA55 or die "Invalid signature for a MS-based filesystem.\n";
     $fs->{nb_sectors} < 32 and die "Too few sectors for viable file system\n";
+    $fs->{nb_fats} == 2 or cdie "Weird number of FATs: $fs->{nb_fats}, not 2.\n";
     $fs->{sector_size} == 512 or cdie "Strange sector_size != 512\n";
 
     if ($fs->{fat16_fat_length}) {
 	#- asserting FAT16, will be verified later on
+	$resize_fat::isFAT32 = 0;
         $fs->{fs_type} = 'FAT16';
 	$fs->{fs_type_size} = 16;
 	$fs->{fat_length} = $fs->{fat16_fat_length};
