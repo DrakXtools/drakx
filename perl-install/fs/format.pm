@@ -105,8 +105,8 @@ sub mke2fs {
     local $/ = "\b";
     local $_;
     while (<$F>) {
-	#- when this is over, it still takes some time, hence the 85%
-	$wait_message->('', $1, int($2 / 0.85)) if m!^\s*(\d+)/(\d+)\b!;
+	#- even if it still takes some time when format is over, we don't want the progress bar to stay at 85%
+	$wait_message->('', $1, $2) if m!^\s*(\d+)/(\d+)\b!;
     }
     return close($F);
 }
