@@ -202,7 +202,7 @@ sub searchAndMount4Upgrade {
     my ($o) = @_;
     my ($root, $found);
 
-    $o->{partitioning}{readonly} ||= $::
+    $o->{partitioning}{readonly} = 1;
 
     #- try to find the partition where the system is installed if beginner
     #- else ask the user the right partition, and test it after.
