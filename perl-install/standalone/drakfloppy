@@ -180,7 +180,8 @@ sub pref_dialog() {
     fill_tree($kernel_combo->entry->get_text);
     foreach my $module (@modules) {
         my $full_path = join('/', "/lib/modules", $kernel_combo->entry->get_text, $module);
-        my $size = get_file_size($full_path);
+        $full_path =~ s/\.(ko|o)(|.gz)//;
+        my $size = get_file_size(glob_("$full_path.*"));
         $list_model->append_set(map_index { $::i => $_ } $module, $size, $full_path);
     }
     
