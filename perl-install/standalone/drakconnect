@@ -331,6 +331,12 @@ sub apply() {
 
 sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig $_[0]` =~ /inet/ }
 
+sub update_intbutt {
+    $int_state->set($isconnected ? N("Connected") : N("Not connected"));
+    $int_connect->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
+    $int_connect->set_sensitive(1);
+}
+
 my $to_update;
 sub update() {
     my $h = chomp_(`hostname`);
@@ -341,9 +347,7 @@ sub update() {
     update_list();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     return 1 if $isconnected == -1;
-    $int_state->set($isconnected ? N("Connected") : N("Not connected"));
-    $int_connect->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
-    $int_connect->set_sensitive(1);
+    update_intbutt();
     1;
 }
 
@@ -364,9 +368,7 @@ sub update2() {
                 $warning_label1->set(N("Warning, another Internet connection has been detected, maybe using your network"));
                 $isconnected = 0;
             } else { $warning_label1->set("") }
-            $int_state->set($isconnected ? N("Connected") : N("Not connected"));
-            $int_connect->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
-            $int_connect->set_sensitive(1);
+            update_intbutt();
         }
     }
     update();
