@@ -1,3 +1,244 @@
+2002/09/18  florin
+
+	* standalone/drakgw: more details for the dhcp server
+
+	* network/shorewall.pm: remove forgotten debug hash printings
+
+2002/09/18  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm: 
+	  - add ntfs in isOtherAvailableFS
+	  - but ensure it is not in isMountableRW
+
+2002/09/18  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* security/msec.pm: 
+	  - factorize @sec_levels and %sec_levels for get_default() and
+	get_seclevel_list()
+	  - use them in get_default()
+	  - get_value() : don't assume a space between "function_name" and
+	  "(parameters)"
+	remove brackets on function values loading
+	respect msec syntax
+	"kill quart of draksec code" patch aka make it really working aka "happy
+	fred" :
+	  - security::msec :
+	  o consolidate get_function_value() and get_value into get_value()
+	  o really apply changes, aka save them :
+	    * config_check() : use substInFile and setVarsInSh
+	    * config_function() : use substInFile and append_to_file
+	    * kill stupid and bogus config_option()
+	  o don't overwrite previous changes, aka reread them :
+	    * fix checks and functions current value loading
+	    * fix checks and functions default loading
+	
+	  - security::main :
+	  o simplify ui creation, make it more readable
+	  o kill offuscating basic_secadmin_check(), basic_secadmin_entry(),
+	    network_generate_page(), system_generate_page() and
+	checks_generate_page()
+	  o increase default height because of stupid "add_with_viewport" in
+	    ugtk::createScrolledWindow
+	  o consolidate network and system functions managment, they're all the
+	same for
+	    msec, splitting is only a draksec "feature";  all go in
+	%options_values
+	
+	  - draksec :
+	  o let standalone module configure standalone mode
+	  o security::main already take care of initializing gtk
+	  o security::main already take care of exiting
+	  o don't play with embedded mode special variables
+	
+	it overall looks better but big cleanups're still possible for mdk9.1
+
+	* standalone/draksec: "kill quart of draksec code" patch aka make it
+	really working aka "happy fred" :
+	  - security::msec :
+	  o consolidate get_function_value() and get_value into get_value()
+	  o really apply changes, aka save them :
+	    * config_check() : use substInFile and setVarsInSh
+	    * config_function() : use substInFile and append_to_file
+	    * kill stupid and bogus config_option()
+	  o don't overwrite previous changes, aka reread them :
+	    * fix checks and functions current value loading
+	    * fix checks and functions default loading
+	  - security::main :
+	  o simplify ui creation, make it more readable
+	  o kill offuscating basic_secadmin_check(), basic_secadmin_entry(),
+	    network_generate_page(), system_generate_page() and
+	checks_generate_page()
+	  o increase default height because of stupid "add_with_viewport" in
+	    ugtk::createScrolledWindow
+	  o consolidate network and system functions managment, they're all the
+	same for
+	    msec, splitting is only a draksec "feature";  all go in
+	%options_values
+	
+	  - draksec :
+	  o let standalone module configure standalone mode
+	  o security::main already take care of initializing gtk
+	  o security::main already take care of exiting
+	  o don't play with embedded mode special variables
+	
+	it overall looks better but big cleanups're still possible for mdk9.1
+
+	* security/main.pm: fix wait_message doesn't display
+	run msec after setting changes
+	"kill quart of draksec code" patch aka make it really working aka "happy
+	fred" :
+	  - security::msec :
+	  o consolidate get_function_value() and get_value into get_value()
+	  o really apply changes, aka save them :
+	    * config_check() : use substInFile and setVarsInSh
+	    * config_function() : use substInFile and append_to_file
+	    * kill stupid and bogus config_option()
+	  o don't overwrite previous changes, aka reread them :
+	    * fix checks and functions current value loading
+	    * fix checks and functions default loading
+	  - security::main :
+	  o simplify ui creation, make it more readable
+	  o kill offuscating basic_secadmin_check(), basic_secadmin_entry(),
+	    network_generate_page(), system_generate_page() and
+	checks_generate_page()
+	  o increase default height because of stupid "add_with_viewport" in
+	    ugtk::createScrolledWindow
+	  o consolidate network and system functions managment, they're all the
+	same for
+	    msec, splitting is only a draksec "feature";  all go in
+	%options_values
+	
+	  - draksec :
+	  o let standalone module configure standalone mode
+	  o security::main already take care of initializing gtk
+	  o security::main already take care of exiting
+	  o don't play with embedded mode special variables
+	
+	it overall looks better but big cleanups're still possible for mdk9.1
+
+2002/09/17  David Baudens  <baudens@mandrakesoft.com>
+
+	* share/advertising/04-multimedia.png: Use the right image
+
+2002/09/17  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - sync option names with server's name.
+	  - fix typo
+	  - back to normal http connection (instead of https)
+	  - relocated web wizard
+
+2002/09/17  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/po/fr.po: corrected typo
+
+2002/09/17  florin
+
+	* network/shorewall.pm: small updates
+
+	* network/drakfirewall.pm: add a silly message
+
+	* standalone/drakgw: add warning message
+	add the nameserver IP variable in advanced mode
+
+2002/09/17  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+	* share/po/nl.po, share/po/sk.po: updated Dutch and Slovak files
+
+	* share/po/tr.po: updated Turkish file
+
+2002/09/17  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: fix draksec typo
+
+	* drakxtools.spec: 50mdk for lord fredl
+
+	* security/msec.pm: 
+	  - security::msec :
+	o config_check: use MDK::Common to set option rather
+	    than overwriting config file
+	  o remove all stupid prefix that just ofuscate code
+	    whereas it's always set to  '',
+	    $::prefix will be a lot better
+	  o s/shift @_/shift/
+	  o kill config_option()
+	  o simplify get_default()
+	  o get_secure_level() : replace if cascade by an array
+	  o set_secure_level() :
+	    * replace if cascade by an hash
+	    * default to runlevel 3 if undefined
+	  o get_functions() : simplify by merging code paths
+	  - security::main :
+	  o security::libsafe is unneeded
+	  o don't pass useless prefix
+	  o begin to read default values
+	  - msec::config_check: use MDK::Common to set option rather
+	  than overwriting config file
+	  - remove all stupid prefix that just ofuscate code
+	  whereas it's always set to  '',
+	  $::prefix will be a lot better
+	  - security::main: kill duplicated 'use strict'
+	  - no ignore choice for periodic checks
+	  - save functions in /etc/security/msec/level.local
+	  and not security.conf
+	  - "from mseclib import" is useless
+	  - fix functions saving (an object method invocation
+	  takes class name as argument)
+	remove libsafe option (not anymore used by msec)
+
+	* security/main.pm: 
+	  - security::msec :
+	o config_check: use MDK::Common to set option rather
+	    than overwriting config file
+	  o remove all stupid prefix that just ofuscate code
+	    whereas it's always set to  '',
+	    $::prefix will be a lot better
+	  o s/shift @_/shift/
+	  o kill config_option()
+	  o simplify get_default()
+	  o get_secure_level() : replace if cascade by an array
+	  o set_secure_level() :
+	    * replace if cascade by an hash
+	    * default to runlevel 3 if undefined
+	  o get_functions() : simplify by merging code paths
+	  - security::main :
+	  o security::libsafe is unneeded
+	  o don't pass useless prefix
+	  o begin to read default values
+	  - msec::config_check: use MDK::Common to set option rather
+	  than overwriting config file
+	  - remove all stupid prefix that just ofuscate code
+	  whereas it's always set to  '',
+	  $::prefix will be a lot better
+	  - security::main: kill duplicated 'use strict'
+	  - no ignore choice for periodic checks
+	  - save functions in /etc/security/msec/level.local
+	  and not security.conf
+	  - "from mseclib import" is useless
+	  - fix functions saving (an object method invocation
+	  takes class name as argument)
+	add ignore option to msec items
+
+2002/09/17  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: remove !CDCOM flag for OpenOffice.org
+
+2002/09/16  siegel
+
+	* share/po/de.po: updates
+
+2002/09/16  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm, share/po/de.po: Do not try to install "webfetch" during
+	installation.
+
+2002/09/16  Warly  <warly@mandrakesoft.com>
+
+	* drakxtools.spec: 49mdk for new printerdrake code regarding webfetch that
+	breaks during install.
+
 2002/09/16  siegel
 
 	* share/po/de.po: updates
@@ -3502,7 +3743,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.751 2002/09/16 20:21:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.752 2002/09/16 23:19:57 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
