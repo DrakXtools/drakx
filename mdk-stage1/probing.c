@@ -206,11 +206,6 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 			goto end_pci_probe;
 		}
 
-		if (IS_EXPERT && type != USB_CONTROLLERS) {
-			ask_insmod(type);
-			return;
-		}
-
 		if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
 			log_message("PCI: could not open proc file");
 			goto end_pci_probe;
