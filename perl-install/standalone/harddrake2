@@ -5,7 +5,7 @@ use standalone;
 use harddrake::ui;
 
 if ("@ARGV" =~ /--help|-h/) {
-    print "Harddrake 2\n", $license, "\nUsage: harddrake [-h|--help]\n";
+    print "Harddrake 2\n", $harddrake::ui::license, "\nUsage: harddrake [-h|--help]\n";
     exit;
 }
 $::isStandalone=1;
