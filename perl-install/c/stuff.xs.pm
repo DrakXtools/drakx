@@ -3,6 +3,9 @@ print '
 #include "perl.h"
 #include "XSUB.h"
 
+/* workaround for glibc and kernel header files not in sync */
+#define dev_t dev_t
+
 #include <ctype.h>
 #include <unistd.h>
 #include <syslog.h>
