@@ -64,6 +64,18 @@ sub set_loop {
     $dev;
 }
 
+sub init_device_mapper() {
+    eval { modules::load('dm-mod') };
+    make('urandom');
+    my $control = '/dev/mapper/control';
+    if (! -e $control) {
+	my ($major) = cat_('/proc/devices') =~ /(\d+) misc$/m or return;
+	my ($minor) = cat_('/proc/misc') =~ /(\d+) device-mapper$/m or return;
+	mkdir_p(dirname($control));
+	syscall_('mknod', $control, c::S_IFCHR() | 0600, makedev($major, $minor)) or die "mknod $control failed: $!";	
+    }
+}
+
 sub entry {
     my ($type, $major, $minor);
     local ($_) = @_;

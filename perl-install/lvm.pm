@@ -31,15 +31,7 @@ sub cylinder_size {
 init() or log::l("lvm::init failed");
 
 sub init() {
-    eval { modules::load('dm-mod') };
-    devices::make('urandom');
-    my $control = '/dev/mapper/control';
-    if (! -e $control) {
-	my ($major) = cat_('/proc/devices') =~ /(\d+) misc$/m or return;
-	my ($minor) = cat_('/proc/misc') =~ /(\d+) device-mapper$/m or return;
-	mkdir_p(dirname($control));
-	syscall_('mknod', $control, c::S_IFCHR() | 0600, makedev($major, $minor)) or die "mknod $control failed: $!";	
-    }
+    devices::init_device_mapper();
     if ($::isInstall) {
 	run_program::run('lvm2', 'vgscan');
 	run_program::run('lvm2', 'vgchange', '-a', 'y');
