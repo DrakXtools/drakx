@@ -138,7 +138,8 @@ sub gtkradio {
 }
 
 sub gtkroot {
-    Gtk2::Gdk::Window->foreign_new(Gtk2::Gdk->ROOT_WINDOW);
+    my $root if 0;
+    $root ||= Gtk2::Gdk::Window->foreign_new(Gtk2::Gdk->ROOT_WINDOW);
 }
 
 sub gtkset_text {
