@@ -523,8 +523,13 @@ sub read_stage1_conf {
     }
 }
 
-sub load_thiskind($;&$) {
+sub load_thiskind {
     my ($type, $f, $pcic) = @_;
+    show_load_thiskind($type, $f, $pcic, 1);
+}
+
+sub show_load_thiskind {
+    my ($type, $f, $pcic, $load) = @_;
     my %loaded_text;
 
     my @devs = grep { my $l = $drivers{$_->{driver}}; $l && $l->{type} eq $type } detect_devices::probeall('', $pcip);
@@ -535,11 +540,10 @@ sub load_thiskind($;&$) {
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;
-	load($mod, $type);
+	$load ? load($mod, $type) : push @{$loaded{$type}}, $mod;
 	$loaded_text{$mod} = $text;
     }
-
-    if ($type =~ /scsi/) {
+    if ($load && $type =~ /scsi/) {
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
 
 	#- probe for USB SCSI.
@@ -554,12 +558,13 @@ sub load_thiskind($;&$) {
 		last if !$@;
 	    }
 	}
-	if (my ($c) = (detect_devices::matching_type('AUDIO'))) {
-	    add_alias("sound", $c->{driver});
+	if (my ($c) = (show_load_thiskind ('audio'))) { #detect_devices::matching_type('AUDIO'))) {
+	    add_alias("sound", $c->{driver}); #- (dam's) this should be changed, we shouldn't use alias sound
 	}
     }
+
     my @loaded = map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
-    $type =~ /scsi/ and @loaded and eval { load("sd_mod") };
+    $type =~ /scsi/ and @loaded and $load and eval { load("sd_mod") };
     @loaded;
 }
 
@@ -609,4 +614,26 @@ sub load_ide {
 	delete $conf{"ide-mod"}{options};
 	load_multi(qw(ide-probe ide-probe-mod ide-disk ide-cd));
     }
+
 }
+
+sub load_bordel {
+
+	#- probe for USB SCSI.
+	if (detect_devices::probeUSB()) {
+	    eval { load("usb-storage", $type); sleep(2); };
+	    -d "/proc/scsi/usb" or unload("usb-storage");
+	}
+	#- probe for parport SCSI.
+	if (arch() !~ /sparc/) {
+	    foreach ("imm", "ppa") {
+		eval { load($_, $type) };
+		last if !$@;
+	    }
+	}
+#	if (my ($c) = (show_load_thiskind ('audio'))) { #detect_devices::matching_type('AUDIO'))) {
+#	    add_alias("sound", $c->{driver}); #- (dam's) this should be changed, we shouldn't use alias sound
+	}
+    }
+}
+

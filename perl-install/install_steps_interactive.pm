@@ -1162,7 +1162,41 @@ sub load_thiskind {
 }
 
 #------------------------------------------------------------------------------
+# (dam's) is not anymore used by setupSCSI
 sub setup_thiskind {
+    my ($o, $type, $auto, $at_least_one) = @_;
+
+    return if arch() eq "ppc";
+
+    my @l;
+    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
+
+    if ($allow_probe) {
+	eval { @l = grep { !/ide-/ } $o->load_thiskind($type) };
+	$o->ask_warn('', $@) if $@;
+	return if $auto && (@l || !$at_least_one);
+    }
+    while (1) {
+	my $msg = @l ?
+	  [ _("Found %s %s interfaces", join(", ", @l), $type),
+	    _("Do you have another one?") ] :
+	  _("Do you have any %s interfaces?", $type);
+
+	my $opt = [ __("Yes"), __("No") ];
+	push @$opt, __("See hardware info") if $::expert;
+	my $r = "Yes";
+	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
+	if ($r eq "No") { return }
+	if ($r eq "Yes") {
+	    push @l, $o->load_module($type) || next;
+	} else {
+	    #-eval { commands::modprobe("isapnp") };
+	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
+	}
+    }
+}
+
+sub setup_scsi_raid {
     my ($o, $type, $auto, $at_least_one) = @_;
 
     return if arch() eq "ppc";
