@@ -581,7 +581,7 @@ sub create_hpaned {
 sub _find_imgfile {
     my ($name) = @_;
 
-    if ($name =~ m|^/|) {
+    if ($name =~ m|/| && -f $name) {
 	$name;
     } else {
 	foreach my $path (icon_paths()) {
