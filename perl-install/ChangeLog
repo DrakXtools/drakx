@@ -1,3 +1,82 @@
+2002/03/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakxtv: english
+
+2002/03/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/da.po, share/po/no.po: updated po files
+
+	* share/po/eu.po: updated po file
+
+	* lang.pm: changed LANGUAGE for basque
+
+	* share/po/ja.po: added \n in advertising
+
+2002/03/14  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: CHARSET"iso-8859-1" and CHARSET"iso-8859-15" is no good
+	for english which has CHARSET"C", adding it
+
+	* share/rpmsrate.server: obsolete
+
+2002/03/14  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* standalone/drakxtv: 
+	  - add SECAM to france description to ease user comprehension
+	  - remove unused variables
+	  - revert gc & dam's (also known as the usual suckers) garbage
+	  who'ven't the hardware to test:
+	
+		- explain in source why we don't try to install xawtv (see below)
+	
+		- just display a message if xawtv isn't installed
+		  since drakx should have installed it
+	
+		- let it be runned as root again (how many times i'm
+		  supposed to restore this behaviour)
+	
+		- retest with a tv card
+	
+	  - use %ENV rather than relying on shell ~ expansion
+	
+	  - if tv card wasn't detected, ask the user to spam us
+	
+	  - factorize $in->exit() out of scan4tvchannels()
+	
+	  - add to TODO list the possibility to install xawtv if needed
+	
+	  - check scantv return value and display an error message
+	
+	  - also if the wrapper was runned on console, display a nice
+	  message saying one can now run xawtv under X11
+
+2002/03/14  warly
+
+	* share/rpmsrate: add commercial apps
+
+2002/03/14  Yves Duret <yduret@mandrakesoft.com>
+
+	* standalone/logdrake: fix some bug
+	fix * bug in field matching/ not matching
+
+2002/03/13  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake.png: new gfx
+
+2002/03/13  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: sync with oem (removed mach32 server).
+	sync with oem.
+	remove bzflag.
+	synced with oem script.
+
+	* rescue/tree/etc/oem: remove Mach32 XF3.3.6 server too.
+	remove Mach8 and Mono driver for oem only.
+	remove bzflag.
+	fixed closure selection on sub groups (like 3D),
+	moved some big package out of oem,
+	minor fixes.
+
 2002/03/13  dam's  <damien@mandrakesoft.com>
 
 	* share/logo-mandrake.png: new gfx
