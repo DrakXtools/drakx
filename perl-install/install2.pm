@@ -83,17 +83,17 @@ my @serverPartitioning = (
 );
 
 my $default = {
-    display => "129.104.42.9:0",
+#    display => "192.168.1.8:0",
     user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
     rootPassword => 'toto',
     lang => 'us',
     isUpgrade => 0,
     installClass => 'Server',
-    bootloader => { onmbr => 0, linear => 0 },
+    bootloader => { onmbr => 1, linear => 0 },
     mkbootdisk => 0,
     comps => [ qw() ],
     packages => [ qw() ],
-    partitionning => { clearall => 1, eraseBadPartitions => 1, autoformat => 1 },
+    partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -210,6 +210,7 @@ sub main {
     $o->{prefix} = $testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
     $o->{method} = install_methods->new('cdrom');
+
     $o = install_steps_graphical->new($o);
 
     $o->{lang} = $o->chooseLanguage;

@@ -19,8 +19,8 @@ sub rooted($$@) {
     {
 	open STDIN, "/dev/null" or die "can't open /dev/null as stdin";
 
-	open STDERR, ">> /dev/tty5" or open STDERR, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
-	open STDOUT, ">> /dev/tty5" or open STDOUT, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
+	open STDERR, ">> /dev/tty7" or open STDERR, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
+	open STDOUT, ">> /dev/tty7" or open STDOUT, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
 
 	$root and chroot $root;
 	chdir "/";

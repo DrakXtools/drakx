@@ -11,6 +11,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 use Gtk;
+use c;
 
 1;
 
@@ -200,6 +201,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     $o->{window} = new Gtk::Window;
     $o->{window}->set_title($title);
+    $o->{window}->signal_connect("expose_event" => sub { c::XSetInputFocus($o->{window}->window->XWINDOW) }) if $my_gtk::force_focus; 
     $o->{window}->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
     $o->{window}
 }

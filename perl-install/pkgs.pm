@@ -141,7 +141,7 @@ sub psFromHeaderListDesc {
 sub psFromHeaderListFile {
     my ($file) = @_;
     local *F;
-    sysopen F, $file, 0 or die "error opening header file: $!";
+    sysopen F, $file, 0 or die "error opening header file $file: $!";
     psFromHeaderListDesc(\*F, 0);
 }
 

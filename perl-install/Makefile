@@ -63,11 +63,12 @@ full_tar:
 
 get_needed_files: $(SO_FILES)
 	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2.pm < /dev/null
+	perl -pi -e 's|/usr/local/|/usr/|' /tmp/list
 
 	install -d $(DEST)/bin
 	install -d $(DEST)/usr/bin
 	for i in $(BINS) `grep "\.so" /tmp/list`; do \
-		install -s $$i $(DEST)/usr/bin; \
+		install -s $$i $(DEST)/lib; \
 		ldd $$i | sed -e 's/.*=> //' -e 's/ .*//' >> /tmp/list; \
 	done
 	for i in `sort /tmp/list | uniq`; do \
@@ -98,6 +99,7 @@ as_root:
 
 full_stage2:
 	rm -rf $(DEST)/[^M]*
+	ln -sf .. $(DEST)/Mandrake/instimage
 	@#mkdir -p $(DEST)/Mandrake/base
 	@#ln -s .. $(DEST)/Mandrake/instimage
 	$(MAKE) get_needed_files 

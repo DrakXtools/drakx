@@ -15,7 +15,7 @@ use common qw(:common :system);
 use partition_table_raw;
 
 
-@important_types = ("Linux native", "Linux swap", "DOS FAT16");
+@important_types = ("Linux native", "Linux swap", "DOS FAT16", "Win98 FAT32");
 
 my %types = (
   0 => "Empty",
@@ -29,9 +29,9 @@ my %types = (
   8 => "AIX",
   9 => "AIX bootable",
   10 => "OS/2 Boot Manager",
-  0xb => "Win98 FAT32",
-  0xc => "Win98 FAT32 0xb",
-  0xe => "Win98 FAT32 0xc",
+  0xb => "Win98 FAT32 0xb",
+  0xc => "Win98 FAT32",
+  0xe => "Win98 FAT32 0xd",
   0x12 => "Compaq setup",
   0x40 => "Venix 80286",
   0x51 => "Novell?",
