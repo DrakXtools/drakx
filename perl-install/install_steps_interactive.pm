@@ -915,8 +915,8 @@ Do you want to continue ?")) || return;
     return if $@;
 
     my $update_medium = do {
-      my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
-      crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
+	my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
+	crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     };
 
     if ($update_medium) {
