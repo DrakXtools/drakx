@@ -446,13 +446,14 @@ sub install2::configMove {
     }
     install_steps_interactive::summaryBefore($o);
 
-    require timezone;
-    timezone::write($o->{prefix}, $o->{timezone});
-
     modules::load_category('multimedia/sound');
     enable_service('sound');
 
     detect_devices::isLaptop() or enable_service('numlock');
+
+after_autoconf:
+    require timezone;
+    timezone::write($o->{prefix}, $o->{timezone});
 
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
@@ -461,7 +462,6 @@ sub install2::configMove {
     require install_any;
     install_any::write_fstab($o);
 
-after_autoconf:
     modules::write_conf('');
     require mouse;
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
