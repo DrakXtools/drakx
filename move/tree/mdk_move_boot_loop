@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo losetup >> /tmp/.log
+free >> /tmp/.log
+date >> /tmp/.log
+if sudo losetup /dev/loop0 2>/dev/null | grep -q live_tree_boot; then
+  sudo losetup /dev/loop0 /image_raw/live_tree_boot.clp
+  sudo rm -f /live_tree_boot.clp
+fi
+free >> /tmp/.log
