@@ -1078,7 +1078,7 @@ sub spawn_progress {
 	my $timer;
 	$interactive and progress($pbar3, $plabel3, 0, translate($descr));
 	$interactive and $pbar3->set_pulse_step(0.1);
-	$interactive and $timer = Glib::Timeout->add(20, \&progress_timeout);
+	$interactive and $timer = Glib::Timeout->add(20, sub { $pbar3->pulse });
 
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
@@ -1094,11 +1094,6 @@ sub spawn_progress {
 	}
 	close TMP;
 	$interactive and Glib::Source->remove($timer);
-}
-
-sub progress_timeout() {
-	$pbar3->pulse;	
-	return 1;
 }
 
 sub get_cd_device() {
@@ -1992,7 +1987,6 @@ sub advanced_where_net_types {
 	        
     gtkpack($advanced_box,
 	    $box_where_net = gtkpack_(new Gtk2::VBox(0, 10),
-	 		0, new Gtk2::HSeparator,
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 	 			0, my $check_where_use_net = new Gtk2::CheckButton(N("Use network connection to backup")),
 				1, new Gtk2::HBox(0,10),
@@ -2001,10 +1995,11 @@ sub advanced_where_net_types {
 	 		),	 
 	 		0, gtkpack_(new Gtk2::HBox(0,5),
 	   			0, gtkset_sensitive(my $check_use_expect = new Gtk2::CheckButton(N("Use Expect for SSH")), ($where_net && $net_proto eq 'ssh')),
-	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk2::CheckButton(N("Create/Transfer\nbackup keys for SSH")), ($where_net && $net_proto eq 'ssh')),
-				0, gtkset_sensitive(my $button_xfer_keys = Gtk2::Button->new(N("  Transfer  \nNow")), $xfer_keys),
-	   			0, gtkset_sensitive(my $check_user_keys = new Gtk2::CheckButton(N("Other (not drakbackup)\nkeys in place already")), ($where_net && $net_proto eq 'ssh')),
+	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk2::CheckButton(N("Create/Transfer backup keys for SSH")), ($where_net && $net_proto eq 'ssh')),
+				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(my $button_xfer_keys = Gtk2::Button->new(N("Transfer Now")), $xfer_keys),
 			),
+			0, gtkset_sensitive(my $check_user_keys = new Gtk2::CheckButton(N("Other (not drakbackup) keys in place already")), ($where_net && $net_proto eq 'ssh')),
 	 		0, new Gtk2::HSeparator,
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 		    	0, gtkset_sensitive(new Gtk2::Label(N("Host name or IP.")), $where_net),
@@ -2012,7 +2007,7 @@ sub advanced_where_net_types {
 		    	0, gtkset_sensitive(my $host_name_entry = new Gtk2::Entry(), $where_net),
 		    ),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	 			0, gtkset_sensitive(new Gtk2::Label(N("Directory (or module) to\n put the backup on this host.")), $where_net),
+	 			0, gtkset_sensitive(new Gtk2::Label(N("Directory (or module) to put the backup on this host.")), $where_net),
 		     	1, new Gtk2::HBox(0,10),
 		     	0, gtkset_sensitive(my $host_path_entry = new Gtk2::Entry(), $where_net), 
 		    ),
@@ -2024,12 +2019,10 @@ sub advanced_where_net_types {
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Password")),  $where_net),
 				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(my $check_remember_pass = new Gtk2::CheckButton(N("Remember this password")), $where_net),
+				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(my $passwd_user_entry = new Gtk2::Entry(), $where_net),
 			),
-	 		0, gtkpack_(new Gtk2::HBox(0,10),
-				1, new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(my $check_remember_pass = new Gtk2::CheckButton(N("Remember this password")), $where_net),
-	 		),
 	 	),   
 	);
 	$entry_net_type->set_popdown_strings(@net_methods);
@@ -3515,31 +3508,68 @@ sub find_files_to_restore() {
 	local $_;
 	my $file_restore;
 	my $start_restore;
+	my @possible_sources;
+	my $file_to_restore;
+	my $cat_entry;
+	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
 	
 	#- file info in tree view
 	my $model = Gtk2::TreeStore->new("Glib::String");
     my $file_list = Gtk2::TreeView->new_with_model($model);
+	$file_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$file_list->set_headers_visible(0);
+	$file_list->get_selection->set_mode('single');
+
 	my $file_wildcard_entry = new Gtk2::Entry();
 	
     gtkpack($advanced_box,
 		$file_restore = gtkpack_(new Gtk2::VBox(0,10),
-		    0, new Gtk2::Label(N("Filename to search for (wildcards allowed):")),
+		    0, new Gtk2::Label(N("Filename text to search for:")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, $file_wildcard_entry,
 				0, gtksignal_connect(new Gtk2::Button(N("Search Backups")), clicked => sub {
-					# FIXME - search the file listings and offer a list of possible matches
 					my $wildcard = $file_wildcard_entry->get_text;
-					show_warning("w", N("Search For...\n%s", $wildcard));
-					gtkset_sensitive($start_restore, 1);
+					@possible_sources = glob "$save_path/list*";
+					foreach my $list (@possible_sources) {
+						my @listing = cat_($list);
+						my @matches = grep { /$wildcard/ } @listing;
+						if (@matches) {
+							my $list_entry = $model->append_set(undef, [ 0 => $list ]);
+							foreach (@matches) {
+								chop;
+								$model->append_set($list_entry, [ 0 => $_ ]);
+							}
+						}
+					}
 				}),
 			),
 			1, create_scrolled_window($file_list),
 			0, gtkset_sensitive(gtksignal_connect($start_restore = new Gtk2::Button(N("Restore Selected")), clicked => sub {
-				# FIXME - search the file listings and offer a list of possible matches
-				show_warning("w", N("Start Search..."));
+				my $media_check = restore_catalog_entry($cat_entry, $file_to_restore);
+				if (! $media_check) {
+					destroy_widget();
+					find_files_to_restore();
+				} 
 			}), 0),
 		),
 	);
+
+	$file_list->get_selection->signal_connect(changed => sub {
+		my ($lmodel, $iter) = $_[0]->get_selected;
+		$lmodel && $iter or return;
+ 		my $s = $lmodel->get($iter, 0);
+		if (! any { /$s/ } @possible_sources) {
+			$file_to_restore = $s;
+			my $parent_iter = Gtk2::TreeModel::iter_parent($lmodel, $iter);
+			my $parent_name = $lmodel->get($parent_iter, 0);
+			$cat_entry = substr($parent_name, -19, 15);
+			my @full_cat_entry = grep { /^$cat_entry/ } @catalog;
+			$cat_entry = $full_cat_entry[0];
+			gtkset_sensitive($start_restore, 1);			
+		} else {
+			gtkset_sensitive($start_restore, 0);
+		}
+	});
 
 	$central_widget = \$file_restore;
 }
@@ -3568,48 +3598,14 @@ sub catalog_restore() {
 
 	#- read the catalog
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
-    my %full_cat_entry;
 	
 	foreach (@catalog) {
 		chop;
 		my @line_data = split(':', $_);
 		my $t = $line_data[0];
-		$full_cat_entry{$t} = $_;
 		
 		my $t_catalog = $model->append_set(undef, [ 0 => $t ]);
 		
-		$tree_catalog->get_selection->signal_connect(changed => sub {			
-			my ($model, $iter) = $_[0]->get_selected;
-        	$model && $iter or return;
-			$cat_entry = $model->get($iter, 0);
-			if ($cat_entry != $t) {
-				$cat_entry = '';
-				return;
-			}
-			cursor_wait();
-			@restore_files = ();
-			$lmodel->clear;
-			foreach my $filename (glob("$save_path/list*$cat_entry.txt")) {
-				my @contents = cat_($filename);
-				foreach (@contents) {
-					chop;
-					my $s = $_;
-					$lmodel->append_set(undef, $s);
-					$tree_files->get_selection->signal_connect(changed => sub {
-						my (@what) = $_[0]->get_selected_rows;
-						@restore_files = ();
-						foreach (@what) {
-							my $iter = $lmodel->get_iter($_);
-    						$s = $lmodel->get($iter, 0);
-							push @restore_files, $s;
-						}
-					});
-				}
-			}
-			cursor_norm();
-			$cat_entry = $full_cat_entry{$t};
-		});
-
 		my $indexer = 0;
 		foreach (@line_data) {
 			if ($indexer != 0) {
@@ -3626,6 +3622,41 @@ sub catalog_restore() {
 			$indexer++;
 		}
 	}	
+
+	$tree_catalog->get_selection->signal_connect(changed => sub {			
+		my ($model, $iter) = $_[0]->get_selected;
+        $model && $iter or return;
+		$cat_entry = $model->get($iter, 0);
+		my $parent_iter = Gtk2::TreeModel::iter_parent($model, $iter);
+		if ($parent_iter) {
+			$cat_entry = '';
+			return;
+		}
+		cursor_wait();
+		@restore_files = ();
+		$lmodel->clear;
+		foreach my $filename (glob("$save_path/list*$cat_entry.txt")) {
+			my @contents = cat_($filename);
+			foreach (@contents) {
+				chop;
+				my $s = $_;
+				$lmodel->append_set(undef, $s);
+			}
+		}
+		cursor_norm();
+		my @full_cat_entry = grep { /^$cat_entry/ } @catalog;
+		$cat_entry = $full_cat_entry[0];
+	});
+
+	$tree_files->get_selection->signal_connect(changed => sub {
+		my (@what) = $_[0]->get_selected_rows;
+		@restore_files = ();
+		foreach (@what) {
+			my $iter = $lmodel->get_iter($_);
+    		my $s = $lmodel->get($iter, 0);
+			push @restore_files, $s;
+		}
+	});
 		
 	gtkpack($advanced_box,
 		$catalog_box = gtkpack_(new Gtk2::HBox(0,10),
@@ -3639,7 +3670,7 @@ sub catalog_restore() {
 					1, gtksignal_connect(Gtk2::Button->new(N("Restore Selected\nCatalog Entry")), clicked => sub { 
 						if ($cat_entry) {
 							my $media_check = restore_catalog_entry($cat_entry, ());
-							if ($media_check) {
+							if (! $media_check) {
 								destroy_widget();
 								interactive_mode_box();
 							} 
@@ -3651,7 +3682,7 @@ sub catalog_restore() {
 						my @passed_files = @restore_files;
 						if ($cat_entry && $files) {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
-							if ($media_check) {
+							if (! $media_check) {
 								destroy_widget();
 								interactive_mode_box();
 							} 
@@ -4117,6 +4148,11 @@ sub restore_find_media_box() {
 						$box2->destroy;
 						catalog_restore();
 					}),
+					gtksignal_connect(Gtk2::Button->new(N("Search for files to restore")), clicked => sub { 
+						$box2->destroy;
+						button_box_file_restore();
+						find_files_to_restore() 
+					}),
 				),
 				new Gtk2::VBox(0, 5),
 			),
@@ -4132,9 +4168,9 @@ sub restore_find_media_box() {
 
 sub restore_status() {
 	destroy_widget();
-    $pbar3 =  new Gtk2::ProgressBar;
-    $stext = new Gtk2::Label("");
-    gtkpack($advanced_box,
+	$pbar3 =  new Gtk2::ProgressBar;
+	$stext = new Gtk2::Label("");
+	gtkpack($advanced_box,
 		$table = gtkpack(new Gtk2::VBox(0, 5),
 			new Gtk2::HBox(0,5),
 	    	create_packtable({ col_spacings => 10, row_spacings => 5 },
@@ -4894,6 +4930,8 @@ sub interactive_mode() {
     my $box;
 	my $winht = 400;
 	$winht = 320 if $::isEmbedded;
+	my $winwidth = 540;
+	$winwidth = 500 if $::isEmbedded;
 	
     $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
@@ -4907,7 +4945,7 @@ sub interactive_mode() {
 
     gtkadd($window1,
 		gtkpack(new Gtk2::VBox(0,0),
-			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), 540, $winht),
+			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), $winwidth, $winht),
 				$box = gtkpack_(new Gtk2::VBox(0, 3),
 					if_(!$::isEmbedded, 0, gtkcreate_img("drakbackup.540x57")),
 					1, gtkpack_(new Gtk2::HBox(0, 3),
