@@ -1331,13 +1331,13 @@ sub main {
 
 sub set_profile {
     my ($netcnx) = @_;
-    system(qq(/sbin/set-netprofile "$netcnx->{PROFILE}"));
+    system('/sbin/set-netprofile', $netcnx->{PROFILE});
     log::explanations(qq(Switching to "$netcnx->{PROFILE}" profile));
 }
 
 sub save_profile {
     my ($netcnx) = @_;
-    system(qq(/sbin/save-netprofile "$netcnx->{PROFILE}"));
+    system('/sbin/save-netprofile', $netcnx->{PROFILE});
     log::explanations(qq(Saving "$netcnx->{PROFILE}" profile));
 }
 
@@ -1351,7 +1351,7 @@ sub del_profile {
 sub add_profile {
     my ($netcnx, $profile) = @_;
     return if !$profile || $profile eq "default" || member($profile, get_profiles());
-    system(qq(/sbin/clone-netprofile "$netcnx->{PROFILE}" "$profile"));
+    system('/sbin/clone-netprofile', $netcnx->{PROFILE}, $profile);
     log::explanations(qq("Creating "$profile" profile));
 }
 
