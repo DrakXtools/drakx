@@ -35,10 +35,15 @@ my %dm = ('GNOME' => [ 'GDM (GNOME Display Manager)', '/usr/bin/gdm', 'gdm' ],
           'XDM'   => [ 'XDM (X Display Manager)', '/usr/bin/X11/xdm', 'XFree86' ],
           );
 
-my $dm = 'KDE';
+my $dm;
 
 foreach (cat_($cfg_file)) {
     $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
+}
+
+if (!$dm) {
+    $dm = 'KDE';
+    log::explanations("defaulting to $dm for display manager")
 }
 
 my @raw_list = sort keys %dm;
@@ -67,6 +72,7 @@ several different X sessions on your local machine at the same time.")),
         s/^\n//g;
         $_ .= "\nDISPLAYMANAGER=$dm\n" if eof;
     } $cfg_file;
+    log::explanations("display manager is now $dm");
     if (any::running_window_manager()) {
         $in->ask_okcancel('', N("The change is done, do you want to restart the dm service ?"), 1) and services::restart("dm");
     }
