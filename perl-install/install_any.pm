@@ -576,7 +576,7 @@ sub hdInstallPath() {
 }
 
 sub install_urpmi {
-    my ($prefix, $method, $mediums) = @_;
+    my ($prefix, $method, $packages, $mediums) = @_;
 
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !hdInstallPath() and return;
@@ -595,18 +595,13 @@ sub install_urpmi {
 				       http => $ENV{URLPREFIX},
 				       cdrom => "removable://mnt/cdrom" }}{$method}) . "/$_->{rpmsdir}";
 
-	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
-	print LIST "$dir/$_\n" foreach chomp_(<FILES>);
-	close FILES or log::l("parsehdlist failed"), return;
-	close LIST;
-
-	#- build synthesis file if there are still not existing (ie not copied from mirror).
-	if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
-	    unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
-	    run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
-				"--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
-	    run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
+	#- build list file using internal data, synthesis file should exists.
+	#- WARNING this method of build only works because synthesis (or hdlist)
+	#-         has been read.
+	foreach my $pkg (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
+	    print LIST "$dir/".$_->filename."\n";
 	}
+	close LIST;
 
 	my ($qname, $qdir) = ($name, $dir);
 	$qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
