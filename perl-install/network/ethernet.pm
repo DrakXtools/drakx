@@ -87,7 +87,7 @@ sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $netadr) = @_;
     #-type =static or dhcp
     any::setup_thiskind($in, 'net', !$::expert, 1);
-    my @all_cards=conf_network_card_backend($prefix, $netc, $intf, $type, undef, $ipadr, $netadr);
+    my @all_cards=conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
     my $interface;
     @all_cards == () and $in->ask_warn('', _("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
@@ -101,7 +101,7 @@ I cannot set up this connection type.")) and return;
   l1:
     $::isStandalone and modules::write_conf($prefix);
 
-    my $device=conf_network_card_backend($prefix, $netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
+    my $device=conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
     if ( $::isStandalone and !($type eq "dhcp")) {
 	$in->ask_yesorno(_("Network interface"),
 			  _("I'm about to restart the network device:\n") . $device . _("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
@@ -132,7 +132,7 @@ I cannot set up this connection type.")) and return;
 #-  $all_cards : a list of a list ( [eth1, module1], ... , [ethn, modulen]). Pass the ethx as $interface in further call.
 #-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
 sub conf_network_card_backend {
-    my ($prefix, $netc, $intf, $type, $interface, $ipadr, $netadr) = @_;
+    my ($netc, $intf, $type, $interface, $ipadr, $netadr) = @_;
     #-type =static or dhcp
     if (!$interface) {
 	my @all_cards = detect_devices::getNet();
@@ -192,7 +192,7 @@ sub configureNetwork {
     local $_;
     any::setup_thiskind($in, 'net', !$::expert, 1);
     my @l = detect_devices::getNet() or die _("no network card found");
-    my @all_cards = network::ethernet::conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 
   configureNetwork_step_1:
     my $n_card=0;

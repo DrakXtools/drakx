@@ -70,7 +70,7 @@ sub detect {
     any::setup_thiskind_backend('net', undef);
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend ('', undef, undef, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend (undef, undef, undef, undef, undef, undef);
     require network::adsl;
     network::adsl->import;
     map {
@@ -93,7 +93,7 @@ sub main {
 		  connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
-    $::isStandalone and read_net_conf($netcnx, $netc); # REDONDANCE with intro. FIXME
+    $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
     $netc->{NET_DEVICE}=$netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE}=$netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
     network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
@@ -266,7 +266,7 @@ sub save_conf {
     any::setup_thiskind_backend('net', undef);
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
 
@@ -376,7 +376,7 @@ sub del_profile {
     $profile eq "default" and return;
     print "deleting $profile\n";
     commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
-    commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/net_{up,down,prog}." . $profile);
+    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog}." . $profile));
 }
 
 sub add_profile {
@@ -489,7 +489,6 @@ sub read_net_conf {
     my ($prefix, $netcnx, $netc)=@_;
     add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/draknet") });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
-#-    print "type : $netcnx->{type}\n device : $netcnx->{NET_DEVICE}\n interface : $netcnx->{NET_INTERFACE}\n";
     $netcnx->{$netcnx->{type}}||={};
     add2hash($netcnx->{$netcnx->{type}}, { getVarsFromSh("$prefix/etc/sysconfig/draknet." . $netcnx->{type}) });
 }

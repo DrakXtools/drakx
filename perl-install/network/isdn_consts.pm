@@ -169,6 +169,11 @@ package network::isdn; # $Id$
     io => '0xd80',
     card => 'isa',
    },
+   {description => "Sedlbauer Speed Fax+ (PCI)", #28 no parameter
+    driver => 'hisax',
+    type => '28',
+    card => 'pci',
+   },
    {description => "USR Sportster internal (ISA)", #16 irq, io
     driver => 'hisax',
     type => '16',
