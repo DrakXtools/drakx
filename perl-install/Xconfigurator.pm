@@ -66,6 +66,7 @@ sub readCardsDB {
 	    CLOCKCHIP => sub { $card->{clockchip} = $val; $card->{flags}->{noclockprobe} = 1; },
 	    NOCLOCKPROBE => sub { $card->{flags}->{noclockprobe} = 1 },
 	    UNSUPPORTED => sub { $card->{flags}->{unsupported} = 1 },
+	    COMMENT => sub {},
 	}}{$cmd};
 
 	$f ? &$f() : log::l("unknown line $lineno ($_)");
@@ -112,23 +113,19 @@ sub rewriteInittab {
 	open G, "> /etc/inittab-" or die "cannot write in /etc/inittab-: $!";
     
 	foreach (<F>) {
-	    print G /^id:/ ? "id:$runlevel:initdefault:\n" : $_;
+	    print G /^(id:)[35](:initdefault:)\s*$/ ? "$1$runlevel$2\n" : $_;
 	}
     }
     unlink("/etc/inittab");
     rename("/etc/inittab-", "/etc/inittab");
 }
 
-sub findLegalModes {
+sub keepOnlyLegalModes {
     my ($card) = @_;
-    my $mem = $card->{memory} || 1000000;
+    my $mem = 1024 * ($card->{memory} || return);
 
-    foreach (reverse @resolutions) {
-	my ($h, $v) = split 'x';
-	
-	foreach $_ (@depths) {
-	    push @{$card->{depth}->{$_}}, [ $h, $v ] if 1024 * $mem >= $h * $v * $_ / 8;
-	}
+    while (my ($depth, $res) = each %{$card->{depth}}) {
+	@$res = grep { $mem >= product(@$_, $depth / 8)	} @$res;
     }
 }
 
@@ -146,7 +143,6 @@ sub cardConfigurationAuto() {
 sub cardConfiguration(;$$) {
     my ($card, $noauto) = @_;
     $card ||= {};
-    $noauto = $::expert unless $noauto;
 
     readCardsDB("/usr/X11R6/lib/X11/Cards");
 
@@ -198,7 +194,8 @@ sub testConfig($) {
     local *F;
     open F, "$o->{card}->{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
     foreach (<F>) {
-	#$videomemory = $2 if /(videoram|Video RAM):\s*(\d*)/;
+	$o->{card}->{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
+
 	# look for clocks
 	push @$clocklines, $1 if /clocks: (.*)/ && !/(pixel |num)clocks:/;
 
@@ -210,8 +207,8 @@ sub testConfig($) {
     ($resolutions, $clocklines);
 }
 
-sub testFinalConfig($) {
-    my ($o) = @_;
+sub testFinalConfig($;$) {
+    my ($o, $auto) = @_;
 
     $o->{monitor}->{hsyncrange} && $o->{monitor}->{vsyncrange} or
       $in->ask_warn('', _("Monitor not configured yet")), return;
@@ -222,8 +219,13 @@ sub testFinalConfig($) {
     $o->{card}->{depth} or
       $in->ask_warn('', _("Resolutions not chosen yet")), return;
 
+    rename("/etc/X11/XF86Config", "/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
 
     write_XF86Config($o, $::testing ? $tmpconfig : "/etc/X11/XF86Config");
+
+    $auto 
+      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test configuration?"))
+      or return 1;
 
     my $pid; unless ($pid = fork) {
 	my @l = "X";
@@ -252,19 +254,23 @@ sub testFinalConfig($) {
 	    $time-- or Gtk->main_quit;
 	});
 
-	exit !interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1);
+	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1) 
+                ? 0 : 222);
     };
     my $rc = close F;
+    my $err = $?;
     kill 2, $pid;
+
+    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occured, try changing some parameters"));
 
     $rc;
 }
 
-sub autoResolutions($) {
-    my ($o) = @_;
+sub autoResolutions($;$) {
+    my ($o, $nowarning) = @_;
     my $card = $o->{card};
 
-    $in->ask_okcancel(_("Automatic resolutions"),
+    $nowarning || $in->ask_okcancel(_("Automatic resolutions"),
 _("To find the available resolutions i will try different ones.
 Your screen will blink... 
 You can switch if off if you want, you'll hear a beep when it's over")) or return;
@@ -282,7 +288,7 @@ You can switch if off if you want, you'll hear a beep when it's over")) or retur
 	    delete $card->{depth}->{$_};
 	} else {
 	    $card->{clocklines} ||= $clocklines unless $card->{flags}->{noclockprobe};
-	    $card->{depth}->{$_} = [ sort { $b->[0] <=> $a->[0] } @$resolutions ];
+	    $card->{depth}->{$_} = [ @$resolutions ];
 	}
     }
 
@@ -293,12 +299,8 @@ You can switch if off if you want, you'll hear a beep when it's over")) or retur
 
 sub autoDefaultDepth($$) {
     my ($card, $resolution_wanted) = @_;
-    my $wres_wanted = first(split 'x', $resolution_wanted);
-    my $depth = $card->{default_depth};
-
-    # unset default_depth if there is no resolution in this depth
-    undef $depth if $depth && !$card->{depth}->{$depth};
-    my $best = $depth;
+    my ($wres_wanted) = split 'x', $resolution_wanted;
+    my ($best, $depth);
 
     while (my ($d, $r) = each %{$card->{depth}}) {
 	$depth = $depth ? max($depth, $d) : $d;
@@ -306,15 +308,80 @@ sub autoDefaultDepth($$) {
 	# try to have $resolution_wanted
 	$best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
     }
-    $card->{default_depth} = $best || $depth or die "no valid modes";
+    $best || $depth or die "no valid modes";
+}
+
+sub chooseResolutions($$) {
+    my ($card, $chosen_depth) = @_;
+
+    my $W = my_gtk->new(_("Resolution"));
+    my %txt2depth = reverse %depths;
+    my $chosen_w = 9999999; # will be set by the combo callback
+    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
+
+    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
+
+    # the set function is usefull to toggle the CheckButton with the callback being ignored
+    my $ignore;
+    my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
+
+    while (my ($depth, $res) = each %{$card->{depth}}) {
+	foreach (@$res) {
+	    $w2h{$_->[0]} = $_->[1];
+	    push @{$w2depth{$_->[0]}}, $depth;
+	}
+    }
+    while (my ($w, $h) = each %w2h) {
+	my $V = $w . "x" . $h;
+	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
+	$r->signal_connect("clicked" => sub {
+			       $ignore and return;
+			       $chosen_w = $w;
+			       unless (member($chosen_depth, @{$w2depth{$w}})) {
+				   $chosen_depth = max(@{$w2depth{$w}});
+				   &$set_depth();
+			       }
+			   });
+    }
+
+    gtkadd($W->{window},
+	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth")),
+		    1, gtkpack(new Gtk::HBox(0,20),
+			       $depth_combo = new Gtk::Combo,
+			       gtkpack_(new Gtk::VBox(0,0),
+					map { 0, $w2widget{$_} } ikeys(%w2widget),
+					),
+			       ),
+		    0, $W->create_okcancel,
+		    ));
+    $depth_combo->disable_activate;
+    $depth_combo->set_use_arrows_always(1);
+    $depth_combo->entry->set_editable(0);
+    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
+    $depth_combo->entry->signal_connect(changed => sub {
+       $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
+       my $w = $card->{depth}->{$chosen_depth}->[0][0];
+       $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
+    });
+    &$set_depth();
+
+    $W->main or return;
+
+    ($chosen_depth, $chosen_w);
 }
 
 
-sub resolutionsConfiguration($;$) {
+sub resolutionsConfiguration($$) {
     my ($o, $option) = @_;
     my $card = $o->{card};
     my $auto = $option eq 'auto';
-    my $noauto = $option || $::expert;
+    my $nowarning = $auto || $option eq 'nowarning';
+    my $noauto = $option eq 'noauto';
+
+    unless ($card->{depth}) {
+	$card->{depth}->{$_} = [ map { [ split "x" ] } @resolutions ] 
+	  foreach @depths;
+    }
 
     # For the mono and vga16 server, no further configuration is required.
     return if member($card->{server}, "Mono", "VGA16");
@@ -344,70 +411,32 @@ sub resolutionsConfiguration($;$) {
     #$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
     #						       _("Do you want to try?") ]);
     
-    findLegalModes($card);
-
-    if ($auto || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
+    if ($nowarning || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
 Do you want to try?")))) {
-	autoResolutions($o);
+	autoResolutions($o, $nowarning);
     }
 
-    autoDefaultDepth($card, $o->{resolution_wanted} || $resolution_wanted);
+    # sort resolutions in each depth
+    @$_ = sort { $b->[0] <=> $a->[0] } @$_ foreach values %{$card->{depth}};
 
+    # remove unusable resolutions (based on the video memory size)
+    keepOnlyLegalModes($card);
 
-    my $W = my_gtk->new(_("Resolution"));
-    my %txt2depth = reverse %depths;
-    my $chosen_depth = $card->{default_depth};
-    my $chosen_w = 9999999; # will be set by the combo callback
-    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
+    my $res = $o->{resolution_wanted} || $resolution_wanted;
+    my $depth = $card->{default_depth} || autoDefaultDepth($card, $res);
 
-    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
+    $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
 
+    # needed in auto mode when all has been provided by the user
+    $card->{depth}->{$depth} or die "you fixed an unusable depth";
 
-    while (my ($depth, $res) = each %{$card->{depth}}) {
-	foreach (@$res) {
-	    $w2h{$_->[0]} = $_->[1];
-	    push @{$w2depth{$_->[0]}}, $depth;
-	}
-    }
-    while (my ($w, $h) = each %w2h) {
-	my $V = $w . "x" . $h;
-	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
-	$r->signal_connect("clicked" => sub {
-			       $chosen_w = $w;
-			       unless (member($chosen_depth, @{$w2depth{$w}})) {
-				   $chosen_depth = max(@{$w2depth{$w}});
-				   &$set_depth();
-			       }
-			   });
-    }
-
-    gtkadd($W->{window},
-	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth")),
-		    1, gtkpack(new Gtk::HBox(0,20),
-			       $depth_combo = new Gtk::Combo,
-			       gtkpack_(new Gtk::VBox(0,0),
-					map { 0, $w2widget{$_} } ikeys(%w2widget),
-					),
-			       ),
-		    0, $W->create_okcancel,
-		    ));
-    $depth_combo->disable_activate;
-    $depth_combo->set_use_arrows_always(1);
-    $depth_combo->entry->set_editable(0);
-    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
-    $depth_combo->entry->signal_connect(changed => sub {
-       $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
-       my $w = $card->{depth}->{$chosen_depth}->[0][0];
-       $chosen_w > $w and $w2widget{$chosen_w = $w}->set_active(1);
-    });
-    &$set_depth();
-    my $rc = $W->main;
-    
-    $card->{default_depth} = $chosen_depth;
-    $card->{depth}->{$chosen_depth} = [ grep { $_->[0] <= $chosen_w } @{$card->{depth}->{$chosen_depth}} ];
-    $rc;
+    # remove all biggest resolution (keep the small ones for ctl-alt-+)
+    # otherwise there'll be a virtual screen :(
+    $card->{depth}->{$depth} = [ grep { $_->[0] <= $res } @{$card->{depth}->{$depth}} ];
+    $card->{default_depth} = $depth;
+    1;
 }
 
 
@@ -567,23 +596,23 @@ sub main {
 
     XF86check_link();
 
-    $o->{card} = cardConfiguration($o->{card});
+    $o->{card} = cardConfiguration($o->{card}, $::noauto);
 
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
-    my $ok = resolutionsConfiguration($o);
+    my $ok = resolutionsConfiguration($o, $::auto && 'auto' || $::noauto && 'noauto' || '');
     
-    $ok = testFinalConfig($o) if $ok && $in->ask_yesorno(_("Test configuration"), _("Do you want to test configuration?"));
+    $ok &&= testFinalConfig($o, $::auto);
 
     my $quit;
     until ($ok || $quit) {
 
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
-           __("Change Graphic card") => sub { $o->{card} = cardConfiguration(0, 1) },
+           __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
-	   __("Automaticall resolutions search") => sub { resolutionsConfiguration($o, 'auto') },
-	   __("Test again") => sub { $ok = testFinalConfig($o) },
+	   __("Automaticall resolutions search") => sub { resolutionsConfiguration($o, 'nowarning') },
+	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
 	&{$c{$in->ask_from_list_('', 
@@ -591,16 +620,17 @@ sub main {
 				 [ grep { !ref } @c ])}};
     }
 
-    if ($ok && !$::expert) {
-	my $run5 = $in->ask_yesorno(_("X at startup"), 
+    if ($ok) {
+	my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"), 
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"));
-	rewriteInittab($run5 ? 5 : 3) unless $::testing;
+
+	rewriteInittab($run ? 5 : 3) unless $::testing;
 
 	$in->ask_warn(_("X successfully configured"),
 _("Configuration file has been written. Take a look at it before running 'startx'. 
 Within the server press ctrl, alt and '+' simultaneously to cycle video resolutions. 
 Pressing ctrl, alt and backspace simultaneously immediately exits the server 
-For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config."));
+For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.")) unless $::auto;
     }
 }

@@ -362,14 +362,14 @@ sub load($$;$) {
     my ($hd, $file, $force) = @_;
 
     local *F;
-    open F, $file or die _("Error reading file $file");
+    open F, $file or die _("Error reading file %s", $file);
 
     my $h;
     {
 	no strict 'vars';
 	$h = eval join '', <F>;
     }
-    $@ and die _("Restoring from file $file failed: $@");
+    $@ and die _("Restoring from file %s failed: %s", $file, $@);
 
     ref $h eq 'HASH' or die _("Bad backup file");
 
@@ -391,5 +391,5 @@ sub save($$) {
     local *F;
     open F, ">$file"
       and print F Dumper(\%h) 
-      or die _("Error writing to file $file");
+      or die _("Error writing to file %s", $file);
 }

@@ -6,9 +6,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(_ __ min max sum bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
+    common => [ qw(_ __ min max sum product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
     functional => [ qw(fold_left) ],
-    file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
+    file => [ qw(dirname basename touch all glob_ cat_ chop_ mode getVarsFromSh) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
@@ -26,6 +26,7 @@ sub __ { $_[0] }
 sub min { fold_left(sub { $a < $b ? $a : $b }, @_) }
 sub max { fold_left(sub { $a > $b ? $a : $b }, @_) }
 sub sum { fold_left(sub { $a + $b }, @_) }
+sub product { fold_left(sub { $a * $b }, @_) }
 sub first { $_[0] }
 sub second { $_[1] }
 sub top { $_[$#_] }
@@ -123,4 +124,24 @@ sub untranslate($@) {
     my $s = shift;
     foreach (@_) { translate($_) eq $s and return $_ }
     die "untranslate failed";
+}
+
+sub getVarsFromSh($) {
+    my %l;
+    local *F;
+    open F, $_[0] or return;
+    foreach (<F>) {
+	my ($v, $val, $val2) = 
+	  /^\s*			# leading space
+	   (\w+) =		# variable
+	   (
+   	       "([^"]*)"	# double-quoted text "
+   	     | '([^']*)'	# single-quoted text '
+   	     | [^'"\s]+		# normal text '
+           )
+           \s*$			# end of line
+          /x or next;
+	$l{$v} = $val2 || $val;
+    }
+    %l;
 }

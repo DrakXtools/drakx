@@ -292,7 +292,7 @@ sub _ask_from_list($$$$) {
 	$def = $i if $l->[$i] eq $def;
 	my $w = new Gtk::ListItem($l->[$i]);
 	my $id = $w->signal_connect(key_press_event => sub {
-             my ($w, $e)= @_;
+             my ($w, $e) = @_;
 	     my $c = chr $e->{keyval};
 	
 	     Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
