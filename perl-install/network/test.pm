@@ -1,4 +1,4 @@
-package network::test; # $Id
+package network::test;          # $Id$
 
 use strict;
 use MDK::Common;
@@ -6,103 +6,103 @@ use run_program;
 use Socket;
 
 sub new {
-  my ($class, $o_hostname) = @_;
-  bless {
-	 hostname => $o_hostname || "mandrakesoft.com"
-	}, $class;
+    my ($class, $o_hostname) = @_;
+    bless {
+           hostname => $o_hostname || "mandrakesoft.com"
+          }, $class;
 }
 
 #- launch synchronous test, will hang until the test finishes
 sub test_synchronous {
-  my ($o) = @_;
-  ($o->{address}, $o->{ping}) = resolve_and_ping($o->{hostname});
-  $o->{done} = 1;
+    my ($o) = @_;
+    ($o->{address}, $o->{ping}) = resolve_and_ping($o->{hostname});
+    $o->{done} = 1;
 }
 
 #- launch asynchronous test, won't hang
 sub start {
-  my ($o) = @_;
-  $o->{done} = 0;
-  $o->{kid} = bg_command->new(sub {
-				my ($address, $ping) = resolve_and_ping($o->{hostname});
-				print "$address|$ping\n";
-			      });
+    my ($o) = @_;
+    $o->{done} = 0;
+    $o->{kid} = bg_command->new(sub {
+                                    my ($address, $ping) = resolve_and_ping($o->{hostname});
+                                    print "$address|$ping\n";
+                                });
 }
 
 #- abort asynchronous test
 sub abort {
-  my ($o) = @_;
-  if ($o->{kid}) {
-    kill -9, $o->{kid}{pid};
-    undef $o->{kid};
-  }
+    my ($o) = @_;
+    if ($o->{kid}) {
+        kill -9, $o->{kid}{pid};
+        undef $o->{kid};
+    }
 }
 
 #- returns a true value if the test is finished, usefull for asynchronous tests
 sub is_done {
-  my ($o) = @_;
-  $o->update_status;
-  to_bool($o->{done});
+    my ($o) = @_;
+    $o->update_status;
+    to_bool($o->{done});
 }
 
 #- return a true value if the connection works (hostname resolution and ping)
 sub is_connected {
-  my ($o) = @_;
-  to_bool(defined($o->{hostname}) && defined($o->{ping}));
+    my ($o) = @_;
+    to_bool(defined($o->{hostname}) && defined($o->{ping}));
 }
 
 #- get hostname used in test for resolution and ping
 sub get_hostname {
-  my ($o) = @_;
-  $o->{hostname};
+    my ($o) = @_;
+    $o->{hostname};
 }
 
 #- get resolved address (if any) of given hostname
 sub get_address {
-  my ($o) = @_;
-  $o->{address};
+    my ($o) = @_;
+    $o->{address};
 }
 
 #- get ping (if any) to given hostname
 sub get_ping {
-  my ($o) = @_;
-  $o->{ping};
+    my ($o) = @_;
+    $o->{ping};
 }
 
 sub resolve_and_ping {
-  my ($hostname) = @_;
-  require Net::Ping;
-  require Time::HiRes;
-  my $p;
-  if ($>) {
-      $p = Net::Ping->new('tcp');
-      # Try connecting to the www port instead of the echo port
-      $p->{port_num} = getservbyname('http', 'tcp');
-  } else {
-      $p = Net::Ping->new('icmp');
-  }
-  $p->Net::Ping::hires; #- get ping as float
-  #- default timeout is 5 seconds
-  my ($ret, $ping, $address) = $p->Net::Ping::ping($hostname, 5);
-  if ($ret) {
-      return $address, $ping;
-  } elsif (defined($ret)) {
-      return $address;
-  }
+    my ($hostname) = @_;
+    require Net::Ping;
+    require Time::HiRes;
+    my $p;
+    if ($>) {
+        $p = Net::Ping->new('tcp');
+        # Try connecting to the www port instead of the echo port
+        $p->{port_num} = getservbyname('http', 'tcp');
+    } else {
+        $p = Net::Ping->new('icmp');
+    }
+    $p->Net::Ping::hires;       #- get ping as float
+    #- default timeout is 5 seconds
+    my ($ret, $ping, $address) = $p->Net::Ping::ping($hostname, 5);
+    if ($ret) {
+        return $address, $ping;
+    } elsif (defined($ret)) {
+        return $address;
+    }
 }
 
 sub update_status {
-  my ($o) = @_;
-  if ($o->{kid}) {
-    my $fd = $o->{kid}{fd};
-    fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
-    local $| = 1;
-    if (defined(my $output = <$fd>)) {
-      ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.\,]+)*$/;
-      $o->{done} = 1;
-      undef $o->{kid};
+    my ($o) = @_;
+    if ($o->{kid}) {
+        my $fd = $o->{kid}{fd};
+        fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+        local $| = 1;
+        if (defined(my $output = <$fd>)) {
+            ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.\,]+)*$/;
+            $o->{done} = 1;
+            undef $o->{kid};
+        }
     }
-  }
 }
 
 1;
