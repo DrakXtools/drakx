@@ -288,13 +288,6 @@ sub choosePackagesTree {
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
 
     my $common;
-    my $slow = sub {
-        my ($func) = @_;
-	gtkset_mousecursor_wait($common->{widgets}{tree}->window);
-	ugtk2::flush();
-	$func->();
-	gtkset_mousecursor_normal($common->{widgets}{tree}->window);
-    };
     $common = {             get_status => sub {
 				my $size = pkgs::selectedSize($packages);
 				N("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
@@ -338,7 +331,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
-				$slow->(sub { pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums}) });
+				pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums});
 
 				my $imp = translate($pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
@@ -355,13 +348,11 @@ sub choosePackagesTree {
 				my @n = map { pkgs::packageByName($packages, $_) } @_;
 				my %l;
 				my $isSelection = !$n[0]->flag_selected;
-                                $slow->(sub {
-                                    foreach (@n) {
-                                        #pkgs::togglePackageSelection($packages, $_, my $l = {});
-                                        #@l{grep {$l->{$_}} keys %$l} = ();
-                                        pkgs::togglePackageSelection($packages, $_, \%l);
-                                    }
-                                });
+                                foreach (@n) {
+                                    #pkgs::togglePackageSelection($packages, $_, my $l = {});
+                                    #@l{grep {$l->{$_}} keys %$l} = ();
+                                    pkgs::togglePackageSelection($packages, $_, \%l);
+                                }
 				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
 				    #- check for size before trying to select.
 				    my $size = pkgs::selectedSize($packages);
