@@ -380,7 +380,6 @@ if_(arch() !~ /^sparc/,
 [ 'fs', {
   "smbfs" => "Windows SMB",
   "fat" => "fat",
-  "msdos" => "msdos",
   "romfs" => "romfs",
   "vfat" => "vfat",
 }],
