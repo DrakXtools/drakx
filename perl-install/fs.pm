@@ -152,8 +152,8 @@ sub subpart_from_wild_device_name {
 	    }
 	    $dev =~ s!/(tmp|dev)/!!;
 
-	    $part{device} = $dev;
-	    $part{devfs_device} = $dev if $dev =~ m!/(disc|part\d+)$!;
+	    my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
+	    $part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
 	    return \%part;
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");
