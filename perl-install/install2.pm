@@ -497,6 +497,11 @@ sub main {
 	    }
 	} else {
 	    log::l("auto install config file loaded successfully");
+
+	    #- normalize for people not using our special scheme
+	    foreach (@{$o->{manualFstab} || []}) {
+		$_->{device} =~ s!^/dev/!!;
+	    }
 	}
     }
     $o->{interactive} ||= 'gtk' if !$::auto_install;
