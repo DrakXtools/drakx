@@ -206,13 +206,13 @@ sub select_packages {
     }
 
     #- special packages that are to be removed always... BEWARE THIS IS A HACK !!!
-    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	if ($pkg) {
-	    delete $pkg->{closure};
-	    delete $pkg->{selected};
-	}
-    }
+#    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
+#	my $pkg = pkgs::packageByName($o->{packages}, $_);
+#	if ($pkg) {
+#	    delete $pkg->{closure};
+#	    delete $pkg->{selected};
+#	}
+#    }
 
     $o->{packages};
 }
@@ -285,7 +285,7 @@ sub selectedSize {
     }
     $size;
 }
-my @preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
+my @preferred = qw(perl-GTK postfix gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4);
 sub selectPackage {
     my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
 
