@@ -1,5 +1,6 @@
 # drakbootdisk messages in Traditional Chinese
 # Copyright (C) 2000 Free Software Foundation, Inc.
+# Platin <platin@cle.linux.org.tw> , 2000
 # Danny Zeng <danny@zeng.com.cn>, 2000.
 # Joe Man <trmetal@yahoo.com.hk>, 2001
 # Kenduest Lee <kenduest@i18n.linux.org.tw> , 2002
@@ -7,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-09-11 13:59+0200\n"
-"PO-Revision-Date: 2002-09-06 06:00+CST\n"
+"POT-Creation-Date: 2002-09-13 22:00+0200\n"
+"PO-Revision-Date: 2002-09-13 06:00+CST\n"
 "Last-Translator: Kenduest Lee <kenduest@i18n.linux.org.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -192,8 +193,8 @@ msgid "Ok"
 msgstr "確定"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3155
-#: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:224
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3203
+#: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:225
 msgid "Quit"
 msgstr "結束"
 
@@ -293,13 +294,13 @@ msgid "Graphics card: %s"
 msgstr "顯示卡: %s"
 
 #: ../../Xconfig/resolution_and_depth.pm_.c:268 ../../any.pm_.c:1019
-#: ../../bootlook.pm_.c:343 ../../diskdrake/smbnfs_gtk.pm_.c:87
+#: ../../bootlook.pm_.c:344 ../../diskdrake/smbnfs_gtk.pm_.c:87
 #: ../../install_steps_gtk.pm_.c:406 ../../install_steps_gtk.pm_.c:464
 #: ../../interactive.pm_.c:142 ../../interactive.pm_.c:354
 #: ../../interactive/http.pm_.c:105 ../../interactive/newt.pm_.c:195
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
-#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2124
+#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2169
 #: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
@@ -308,8 +309,8 @@ msgstr "顯示卡: %s"
 #: ../../standalone/drakbackup_.c:4184 ../../standalone/drakconnect_.c:115
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
-#: ../../standalone/drakfloppy_.c:234 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:536 ../../standalone/logdrake_.c:224
+#: ../../standalone/drakfloppy_.c:235 ../../standalone/drakfont_.c:970
+#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:225
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
 msgstr "取消"
@@ -500,7 +501,7 @@ msgstr "在啟動作業系統前先延遲的時間"
 #: ../../any.pm_.c:170 ../../any.pm_.c:789
 #: ../../diskdrake/smbnfs_gtk.pm_.c:179
 #: ../../install_steps_interactive.pm_.c:1094 ../../network/modem.pm_.c:48
-#: ../../printerdrake.pm_.c:850 ../../printerdrake.pm_.c:965
+#: ../../printerdrake.pm_.c:865 ../../printerdrake.pm_.c:980
 #: ../../standalone/drakbackup_.c:3530 ../../standalone/drakconnect_.c:624
 #: ../../standalone/drakconnect_.c:649
 msgid "Password"
@@ -607,7 +608,7 @@ msgstr "新增"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3155 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3203 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "完成"
 
@@ -873,8 +874,8 @@ msgstr "接受使用者"
 msgid "Real name"
 msgstr "使用者名稱"
 
-#: ../../any.pm_.c:788 ../../printerdrake.pm_.c:849
-#: ../../printerdrake.pm_.c:964
+#: ../../any.pm_.c:788 ../../printerdrake.pm_.c:864
+#: ../../printerdrake.pm_.c:979
 msgid "User name"
 msgstr "使用者帳號"
 
@@ -930,7 +931,7 @@ msgstr "允許所有使用者"
 msgid "No sharing"
 msgstr "不分享"
 
-#: ../../any.pm_.c:988 ../../install_any.pm_.c:1198 ../../standalone.pm_.c:58
+#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:59
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
@@ -940,7 +941,7 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "您能夠分享出 NFS 或者是 Samba 資源。您打算用那個"
 
-#: ../../any.pm_.c:999 ../../install_any.pm_.c:1203 ../../standalone.pm_.c:63
+#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:64
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "錯誤! %s 套件未安裝或者是遺失"
@@ -1159,18 +1160,18 @@ msgid "Boot Style Configuration"
 msgstr "開機樣式組態設定"
 
 #: ../../bootlook.pm_.c:79 ../../harddrake/ui.pm_.c:62
-#: ../../harddrake/ui.pm_.c:63 ../../standalone/drakfloppy_.c:81
-#: ../../standalone/logdrake_.c:101
+#: ../../harddrake/ui.pm_.c:63 ../../standalone/drakfloppy_.c:82
+#: ../../standalone/logdrake_.c:102
 msgid "/_File"
 msgstr "/檔案 (_F)"
 
-#: ../../bootlook.pm_.c:80 ../../standalone/drakfloppy_.c:82
-#: ../../standalone/logdrake_.c:107
+#: ../../bootlook.pm_.c:80 ../../standalone/drakfloppy_.c:83
+#: ../../standalone/logdrake_.c:108
 msgid "/File/_Quit"
 msgstr "/檔案/離開 (_Q)"
 
 #: ../../bootlook.pm_.c:80 ../../harddrake/ui.pm_.c:63
-#: ../../standalone/drakfloppy_.c:82 ../../standalone/logdrake_.c:107
+#: ../../standalone/drakfloppy_.c:83 ../../standalone/logdrake_.c:108
 msgid "<control>Q"
 msgstr "<control>Q"
 
@@ -1207,21 +1208,25 @@ msgid "Install themes"
 msgstr "安裝佈景"
 
 #: ../../bootlook.pm_.c:147
-msgid "Display theme under console"
-msgstr "在 console 顯示佈景"
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"在 console\n"
+"顯示佈景"
 
 #: ../../bootlook.pm_.c:148
 msgid "Create new theme"
 msgstr "建立新的佈景"
 
-#: ../../bootlook.pm_.c:192
+#: ../../bootlook.pm_.c:193
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "將 %s 檔案備份至 %s.old"
 
-#: ../../bootlook.pm_.c:193 ../../bootlook.pm_.c:196 ../../bootlook.pm_.c:199
-#: ../../bootlook.pm_.c:229 ../../bootlook.pm_.c:231 ../../bootlook.pm_.c:241
-#: ../../bootlook.pm_.c:250 ../../bootlook.pm_.c:257
+#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
+#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
 #: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
 #: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
 #: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
@@ -1232,33 +1237,33 @@ msgstr "將 %s 檔案備份至 %s.old"
 msgid "Error"
 msgstr "錯誤"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:194
 msgid "unable to backup lilo message"
 msgstr "無法備份 lilo 訊息檔案"
 
-#: ../../bootlook.pm_.c:195
+#: ../../bootlook.pm_.c:196
 #, c-format
 msgid "Copy %s to %s"
 msgstr "正在複製 %s 至 %s"
 
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:197
 msgid "can't change lilo message"
 msgstr "無法變更 lilo 訊息設定"
 
-#: ../../bootlook.pm_.c:199
+#: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
 msgstr "lilo 訊息檔案遺失"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr "無法寫入 /etc/sysconfig/bootsplash。"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 #, c-format
 msgid "Write %s"
 msgstr "寫入 %s"
 
-#: ../../bootlook.pm_.c:231
+#: ../../bootlook.pm_.c:232
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
@@ -1266,17 +1271,17 @@ msgstr ""
 "無法寫入 /etc/sysconfig/bootsplash\n"
 "檔案找不到。"
 
-#: ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr "無法執行 mkinitrd -f /boot/initrd-%s.img %s。"
 
-#: ../../bootlook.pm_.c:245
+#: ../../bootlook.pm_.c:246
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 msgstr "執行 'kinird -f /boot/initrd-%s.img %s'。"
 
-#: ../../bootlook.pm_.c:251
+#: ../../bootlook.pm_.c:252
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
@@ -1285,24 +1290,24 @@ msgstr ""
 "請使用 root 身份在命令提示字元執行 \"lilo\" 程式，以便於完成 lilo 佈景的安"
 "裝。"
 
-#: ../../bootlook.pm_.c:255
+#: ../../bootlook.pm_.c:256
 msgid "Relaunch 'lilo'"
 msgstr "執行執行 'lilo'"
 
-#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:165
+#: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
 msgid "Notice"
 msgstr "注意"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "lilo 與開機進度畫面的佈景檔案已經安裝成功"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "Theme installation failed!"
 msgstr "佈景安裝失敗"
 
-#: ../../bootlook.pm_.c:266
+#: ../../bootlook.pm_.c:267
 #, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
@@ -1311,24 +1316,24 @@ msgstr ""
 "你目前是選用 %s 當作您目前的開機管理程式。\n"
 "您可以點選設定來啟動設定精靈"
 
-#: ../../bootlook.pm_.c:268 ../../standalone/drakbackup_.c:2429
+#: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:530
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
 msgid "Configure"
 msgstr "設定"
 
-#: ../../bootlook.pm_.c:275
+#: ../../bootlook.pm_.c:276
 msgid "Splash selection"
 msgstr "畫面選取"
 
-#: ../../bootlook.pm_.c:278
+#: ../../bootlook.pm_.c:279
 msgid "Themes"
 msgstr "佈景"
 
-#: ../../bootlook.pm_.c:280
+#: ../../bootlook.pm_.c:281
 msgid ""
 "\n"
-"Select a theme for\n"
+"Select theme for\n"
 "lilo and bootsplash,\n"
 "you can choose\n"
 "them separatly"
@@ -1337,31 +1342,31 @@ msgstr ""
 "請選擇 lilo 與開機載入畫面項目，\n"
 "您可以分開選擇"
 
-#: ../../bootlook.pm_.c:283
+#: ../../bootlook.pm_.c:284
 msgid "Lilo screen"
 msgstr "Lilo 螢幕"
 
-#: ../../bootlook.pm_.c:288
+#: ../../bootlook.pm_.c:289
 msgid "Bootsplash"
 msgstr "開機圖片"
 
-#: ../../bootlook.pm_.c:323
+#: ../../bootlook.pm_.c:324
 msgid "System mode"
 msgstr "系統模式"
 
-#: ../../bootlook.pm_.c:325
+#: ../../bootlook.pm_.c:326
 msgid "Launch the graphical environment when your system starts"
 msgstr "開機時啟動 X Window 圖形作業環境"
 
-#: ../../bootlook.pm_.c:330
+#: ../../bootlook.pm_.c:331
 msgid "No, I don't want autologin"
 msgstr "不，我不需要自動登入 (AutoLogin)"
 
-#: ../../bootlook.pm_.c:332
+#: ../../bootlook.pm_.c:333
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "是的，我需要用這個 (使用者、桌面) 來自動登入"
 
-#: ../../bootlook.pm_.c:342 ../../network/netconnect.pm_.c:97
+#: ../../bootlook.pm_.c:343 ../../network/netconnect.pm_.c:97
 #: ../../standalone/drakTermServ_.c:173 ../../standalone/drakTermServ_.c:300
 #: ../../standalone/drakTermServ_.c:405 ../../standalone/drakbackup_.c:4193
 #: ../../standalone/drakbackup_.c:4956 ../../standalone/drakconnect_.c:108
@@ -1374,46 +1379,46 @@ msgstr "是的，我需要用這個 (使用者、桌面) 來自動登入"
 msgid "OK"
 msgstr "確定"
 
-#: ../../bootlook.pm_.c:402
+#: ../../bootlook.pm_.c:403
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "無法開啟 /etc/inittab 檔案進行讀取： %s"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "GB"
 msgstr "GB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "KB"
 msgstr "KB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "MB"
 msgstr "MB"
 
-#: ../../common.pm_.c:102
+#: ../../common.pm_.c:107
 msgid "TB"
 msgstr "TB"
 
-#: ../../common.pm_.c:110
+#: ../../common.pm_.c:115
 #, c-format
 msgid "%d minutes"
 msgstr "%d 分鐘"
 
-#: ../../common.pm_.c:112
+#: ../../common.pm_.c:117
 msgid "1 minute"
 msgstr "1 分鐘"
 
-#: ../../common.pm_.c:114
+#: ../../common.pm_.c:119
 #, c-format
 msgid "%d seconds"
 msgstr "%d 秒"
 
-#: ../../common.pm_.c:159
+#: ../../common.pm_.c:164
 msgid "Can't make screenshots before partitioning"
 msgstr "在尚未進行分割前無法提供畫面捕捉功能"
 
-#: ../../common.pm_.c:166
+#: ../../common.pm_.c:171
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "在安裝 %s 後就能夠提供畫面捕捉功能"
@@ -1972,7 +1977,7 @@ msgstr "掛載參數"
 msgid "Various"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:103
+#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:104
 msgid "device"
 msgstr "裝置設備"
 
@@ -2410,11 +2415,11 @@ msgid "No alternative driver"
 msgstr "不使用另外可供選擇的驅動程式"
 
 #: ../../harddrake/sound.pm_.c:169
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
-msgstr "您的音效卡 (%s) 目前沒有任何現有的 OSS/ALSA 驅動程式能夠支援"
+msgstr "目前的OSS/ALSA 驅動程式都能夠支援你的音效卡 (%s)，模組為 \"%s\""
 
 #: ../../harddrake/sound.pm_.c:171
 msgid "Sound configuration"
@@ -2556,7 +2561,7 @@ msgstr "媒介類別"
 msgid "class of hardware device"
 msgstr "硬體裝置類別"
 
-#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1517
+#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1562
 msgid "Description"
 msgstr "描述"
 
@@ -2627,7 +2632,7 @@ msgstr "/結束(&Q)"
 
 #: ../../harddrake/ui.pm_.c:64 ../../harddrake/ui.pm_.c:65
 #: ../../harddrake/ui.pm_.c:71 ../../harddrake/ui.pm_.c:73
-#: ../../standalone/logdrake_.c:110
+#: ../../standalone/logdrake_.c:111
 msgid "/_Help"
 msgstr "/說明 (_H)"
 
@@ -2775,30 +2780,37 @@ msgstr "開啟 radio 支援"
 msgid ""
 "GNU/Linux is a multiuser system, and this means that each user can have his\n"
 "own preferences, his own files and so on. You can read the ``User Guide''\n"
-"to learn more. But unlike \"root\", which is the administrator, the users\n"
-"you add here will not be entitled to change anything except their own files\n"
-"and their own configuration. You will have to create at least one regular\n"
-"user for yourself. That account is where you should log in for routine use.\n"
-"Although it is very practical to log in as \"root\" everyday, it may also\n"
-"be very dangerous! The slightest mistake could mean that your system would\n"
-"not work any more. If you make a serious mistake as a regular user, you may\n"
-"only lose some information, but not the entire system.\n"
+"to learn more this concept. But unlike \"root\", which is the\n"
+"administrator, the users you add here will not be entitled to change\n"
+"anything except their own files and their own configurations. You will have\n"
+"to create at least one regular user for yourself. That account is where you\n"
+"should log in for routine use. Although it is very practical to log in as\n"
+"\"root\" everyday, it may also be very dangerous! The slightest mistake\n"
+"could mean that your system would not work any more. If you make a serious\n"
+"mistake as a regular user, you may only lose some information, but not the\n"
+"entire system.\n"
 "\n"
-"First, you have to enter your real name. This is not mandatory, of course -\n"
-"as you can actually enter whatever you want. DrakX will then take the first\n"
-"word you have entered in the box and will bring it over to the \"User\n"
+"First, you have to enter your real name. This is not mandatory, of course\n"
+"-- as you can actually enter whatever you want. DrakX will then take the\n"
+"first word you have entered in the box and will bring it over to the \"User\n"
 "name\". This is the name this particular user will use to log onto the\n"
 "system. You can change it. You then have to enter a password here. A\n"
-"non-privileged (regular) user's password is not as crucial as the \"root\"'\n"
+"non-privileged (regular) user's password is not as crucial as the \"root\"\n"
 "one from a security point of view, but that is no reason to neglect it:\n"
 "after all, your files are at risk.\n"
 "\n"
 "If you click on \"Accept user\", you can then add as many as you want. Add\n"
-"a user for each one of your friends: your father or your sister, for\n"
-"example. When you finish adding all the users you want, select \"Done\".\n"
+"a user for each one of the people meant to use that computer. When you are\n"
+"finish adding all the users you want, select \"Done\".\n"
 "\n"
 "Clicking the \"Advanced\" button allows you to change the default \"shell\"\n"
-"for that user (bash by default)."
+"for that user (bash by default).\n"
+"\n"
+"When you are finished adding all users, you will be proposed to choose a\n"
+"user which can automatically log into the system when the computer boots\n"
+"up. If you are interested in that feature (and do not care much about local\n"
+"security), choose the desired user and window manager, then click \"Yes\".\n"
+"If you are not interested in this feature, click \"No\"."
 msgstr ""
 "「GNU/Linux」是一個多人的系統，簡單說每個使用者都有其獨立的作業環境。您可以詳"
 "閱『User Guide』文件說明以便於得知更多資訊。系統有一個帳號為 \"root\"，這是系"
@@ -2813,14 +2825,14 @@ msgstr ""
 "若是您選擇\"進階\"按鈕，可以設定該使用者額外的項目。比方包含該使用者的Shell程"
 "式名稱。"
 
-#: ../../help.pm_.c:41
+#: ../../help.pm_.c:48
 msgid ""
 "Listed above are the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, they are good for most common\n"
 "installations. If you make any changes, you must at least define a root\n"
 "partition (\"/\"). Do not choose too small a partition or you will not be\n"
 "able to install enough software. If you want to store your data on a\n"
-"separate partition, you will also need to create a partition for \"/home\"\n"
+"separate partition, you will also need to create a \"/home\" partition\n"
 "(only possible if you have more than one Linux partition available).\n"
 "\n"
 "Each partition is listed as follows: \"Name\", \"Capacity\".\n"
@@ -2872,7 +2884,7 @@ msgstr ""
 "以 SCSI 硬碟來說，\"a\" 就是指 \"SCSI IDE 編號最小的那一台\", \"b\"\n"
 "就是指 \"SCSI IDE 編號為二的那一台硬碟\"，然後依此類推下去....."
 
-#: ../../help.pm_.c:72
+#: ../../help.pm_.c:79
 msgid ""
 "The Mandrake Linux installation is spread out over several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM and will eject the\n"
@@ -2881,7 +2893,7 @@ msgstr ""
 "Mandrake Linux 安裝片包含數張光碟片。DrakeX 安裝程式安裝到某個\n"
 "所需要的套件時，會提示您放入所需要的光碟片。"
 
-#: ../../help.pm_.c:77
+#: ../../help.pm_.c:84
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2914,7 +2926,7 @@ msgid ""
 "installation (by opposition to an upgrade), a dialog will pop up proposing\n"
 "different options for a minimal installation:\n"
 "\n"
-" * \"With X\": install the fewer packages possible to have a working\n"
+" * \"With X\": install the fewest packages possible to have a working\n"
 "graphical desktop;\n"
 "\n"
 " * \"With basic documentation\": installs the base system plus basic\n"
@@ -2930,11 +2942,11 @@ msgid ""
 "total control over what will be installed.\n"
 "\n"
 "If you started the installation in \"Upgrade\" mode, you can unselect all\n"
-"groups to avoid installing any new package. This is useful for repairing or\n"
-"updating an existing system."
+"groups to avoid installing any new package. This is useful to repair or\n"
+"update an existing system."
 msgstr ""
 
-#: ../../help.pm_.c:128
+#: ../../help.pm_.c:135
 msgid ""
 "Finally, depending on whether or not you chose to be able to select\n"
 "individual packages, you will be presented a tree containing all packages\n"
@@ -2945,9 +2957,9 @@ msgid ""
 "right. When your selection is finished, click the \"Install\" button which\n"
 "will then launch the installation process. Depending on the speed of your\n"
 "hardware and the number of packages that need to be installed, it may take\n"
-"a while to complete the process. An estimate of the time it will take to\n"
-"install everything is displayed on the screen, to help you gauge if there\n"
-"is sufficient time to enjoy a cup of coffee.\n"
+"a while to complete the process. An installation time estimate is displayed\n"
+"on the screen, to help you gauge if there is sufficient time to enjoy a cup\n"
+"of coffee.\n"
 "\n"
 "!! If a server package has been selected, either intentionally or because\n"
 "it was part of a whole group, you will be asked to confirm that you really\n"
@@ -2968,16 +2980,16 @@ msgid ""
 "The tiny floppy disk icon at the bottom of the list allows to load the\n"
 "package list chosen during a previous installation. Clicking on this icon\n"
 "will ask you to insert a floppy disk previously created at the end of\n"
-"another installation. See the second tip of last step on how to create such\n"
-"a floppy."
+"another installation. See the second tip of the previous step on how to\n"
+"create such a floppy disk."
 msgstr ""
 
-#: ../../help.pm_.c:164
+#: ../../help.pm_.c:171
 msgid ""
 "You are now able to set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"OK\".\n"
 "The autodetection of network devices and modem will be launched. If this\n"
-"detection fails, uncheck the \"Use auto detection\" box next time. You may\n"
+"detection fails, uncheck the \"Use auto-detection\" box next time. You may\n"
 "also choose not to configure the network, or do it later; in that case,\n"
 "simply click the \"Cancel\" button.\n"
 "\n"
@@ -2988,8 +3000,8 @@ msgid ""
 "all the parameters from your Internet Service Provider or system\n"
 "administrator.\n"
 "\n"
-"You can consult the ``User Guide'' chapter about Internet connections for\n"
-"details about the configuration, or simply wait until your system is\n"
+"You can consult the ``Starter Guide'' chapter about Internet connections\n"
+"for details about the configuration, or simply wait until your system is\n"
 "installed and use the program described there to configure your connection.\n"
 "\n"
 "If you wish to configure the network later after installation, or if you\n"
@@ -3010,13 +3022,13 @@ msgstr ""
 "相關網路設定，您也可以事後再透過控制台網路連線設定來進行。這個步驟若是您不準"
 "備設定，可以點選『取消』項目。"
 
-#: ../../help.pm_.c:186
+#: ../../help.pm_.c:193
 msgid ""
 "You may now choose which services you wish to start at boot time.\n"
 "\n"
-"Here are presented all the services available with the current\n"
-"installation. Review them carefully and uncheck those which are not always\n"
-"needed at boot time.\n"
+"Here are listed all the services available with the current installation.\n"
+"Review them carefully and uncheck those which are not always needed at boot\n"
+"time.\n"
 "\n"
 "You can get a short explanatory text about a service by selecting a\n"
 "specific service. However, if you are not sure whether a service is useful\n"
@@ -3041,7 +3053,7 @@ msgstr ""
 "建議您詳細思考決定那些服務要開啟關閉，因為某些服務套件啟動後可能會有一些潛在"
 "的安全性風險問題。建議您，只選取要你開放的服務項目即可。"
 
-#: ../../help.pm_.c:203
+#: ../../help.pm_.c:210
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
 "local time according to the time zone you selected. It is however possible\n"
@@ -3057,16 +3069,16 @@ msgid ""
 "by other machines on your local network."
 msgstr ""
 
-#: ../../help.pm_.c:217
+#: ../../help.pm_.c:224
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely. In this section, DrakX\n"
-"will try to configure X automatically.\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely.\n"
 "\n"
-"It is extremely rare for it to fail, unless the hardware is very old (or\n"
-"very new). If it succeeds, it will start X automatically with the best\n"
-"resolution possible, depending on the size of the monitor. A window will\n"
+"You will be presented the list of available resolutions and color depth\n"
+"available for your hardware. Choose the one that best suit your needs (you\n"
+"will be able to change that after installation though). When you are\n"
+"satisfied with the sample shown in the monitor, click \"OK\". A window will\n"
 "then appear and ask you if you can see it.\n"
 "\n"
 "If you are doing an \"Expert\" installation, you will enter the X\n"
@@ -3076,7 +3088,7 @@ msgid ""
 "If you can see the message during the test, and answer \"Yes\", then DrakX\n"
 "will proceed to the next step. If you cannot see the message, it simply\n"
 "means that the configuration was wrong and the test will automatically end\n"
-"after 10 seconds, restoring the screen. Refer then to the Video\n"
+"after 10 seconds, restoring the screen. Refer then to the video\n"
 "configuration section of the user guide for more information on how to\n"
 "configure your display."
 msgstr ""
@@ -3097,7 +3109,7 @@ msgstr ""
 "話方塊訊問動作的話，測試會自行結束然後恢復切換到原本的畫面，你可以再繼續選擇"
 "相關組態並測試直到沒問題等。"
 
-#: ../../help.pm_.c:239
+#: ../../help.pm_.c:246
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
 "at boot. Note this question will be asked even if you chose not to test the\n"
@@ -3111,19 +3123,19 @@ msgstr ""
 "因為一般 Server 伺服器並不跑 X 環境執行相關GUI圖形\n"
 "介面軟體程式。"
 
-#: ../../help.pm_.c:246
+#: ../../help.pm_.c:253
 msgid ""
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
 "booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<\n"
 "at the prompt. But in case your computer cannot boot from the CD-ROM, you\n"
 "should come back to this step for help in at least two situations:\n"
 "\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows in\n"
-"your system). If you need to reinstall Windows, the Microsoft install\n"
-"process will rewrite the boot sector, and then you will not be able to\n"
-"start GNU/Linux!\n"
+" * when installing the bootloader, DrakX will rewrite the boot sector (\n"
+"MBR) of your main disk (unless you are using another boot manager), to\n"
+"allow you to start up with either Windows or GNU/Linux (assuming you have\n"
+"Windows in your system). If you need to reinstall Windows, the Microsoft\n"
+"install process will rewrite the boot sector, and then you will not be able\n"
+"to start GNU/Linux!\n"
 "\n"
 " * if a problem arises and you cannot start up GNU/Linux from the hard\n"
 "disk, this floppy disk will be the only means of starting up GNU/Linux. It\n"
@@ -3154,14 +3166,13 @@ msgstr ""
 "當你選取這個步驟項目時，您需要一張磁碟片以便於製作一張resuce 救援磁片，請注意"
 "的是，DrakX 程式會對這一張磁片進行格式化動作，原本資料都會消失。"
 
-#: ../../help.pm_.c:270
+#: ../../help.pm_.c:277
 msgid ""
-"At this point, you need to choose where you want to install the Mandrake\n"
-"Linux operating system on your hard drive. If your hard drive is empty or\n"
-"if an existing operating system is using all the available space, you will\n"
-"need to partition it. Basically, partitioning a hard drive consists of\n"
-"logically dividing it to create space to install your new Mandrake Linux\n"
-"system.\n"
+"You now need to choose where you want to install the Mandrake Linux\n"
+"operating system on your hard drive. If your hard drive is empty or if an\n"
+"existing operating system is using all the available space, you will need\n"
+"to partition it. Basically, partitioning a hard drive consists of logically\n"
+"dividing it to create space to install your new Mandrake Linux system.\n"
 "\n"
 "Because the partitioning process' effects are usually irreversible,\n"
 "partitioning can be intimidating and stressful if you are an inexperienced\n"
@@ -3170,9 +3181,9 @@ msgid ""
 "\n"
 "If you are running the installation in Expert mode, you will enter\n"
 "DiskDrake, the Mandrake Linux partitioning tool, which allows you to\n"
-"fine-tune your partitions. See the DiskDrake section in the ``User Guide''.\n"
-"From the installation interface, you can use the wizards as described here\n"
-"by clicking the dialog's \"Wizard\" button.\n"
+"fine-tune your partitions. See the DiskDrake section in the ``Starter\n"
+"Guide''. From the installation interface, you can use the wizards as\n"
+"described here by clicking the dialog's \"Wizard\" button.\n"
 "\n"
 "If partitions have already been defined, either from a previous\n"
 "installation or from another partitioning tool, simply select those to\n"
@@ -3180,7 +3191,7 @@ msgid ""
 "\n"
 "If partitions are not defined, you will need to create them using the\n"
 "wizard. Depending on your hard drive configuration, several options are\n"
-"available:\n"
+"available.\n"
 "\n"
 " * \"Use free space\": this option will simply lead to an automatic\n"
 "partitioning of your blank drive(s). You will not be prompted further;\n"
@@ -3191,9 +3202,9 @@ msgid ""
 "each of the partitions. The legacy mount points are selected by default,\n"
 "and you should generally keep them.\n"
 "\n"
-" * \"Use the free space on the Windows; partition\": if Microsoft Windows\n"
-"is installed on your hard drive and takes all the space available on it,\n"
-"you have to create free space for Linux data. To do so, you can delete your\n"
+" * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
+"installed on your hard drive and takes all the space available on it, you\n"
+"have to create free space for Linux data. To do so, you can delete your\n"
 "Microsoft Windows partition and data (see ``Erase entire disk'' or ``Expert\n"
 "mode'' solutions) or resize your Microsoft Windows partition. Resizing can\n"
 "be performed without the loss of any data, provided you previously\n"
@@ -3220,10 +3231,10 @@ msgid ""
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
 " * \"Expert mode\": choose this option if you want to manually partition\n"
-"your hard drive. Be careful - it is a powerful but dangerous choice. You\n"
+"your hard drive. Be careful -- it is a powerful but dangerous option. You\n"
 "can very easily lose all your data. Hence, do not choose this unless you\n"
-"know what you are doing. To know how do use the DiskDrake utility used\n"
-"here, refer to the section ``Managing Your Partitions'' of the ````User\n"
+"know what you are doing. To know how to use the DiskDrake utility used\n"
+"here, refer to the section ``Managing Your Partitions'' of the ````Starter\n"
 "Guide''''"
 msgstr ""
 "接下來，您需要選擇一顆準備用來安裝『Mandrake-Linux』作業系統的硬碟。如果您的"
@@ -3266,9 +3277,9 @@ msgstr ""
 "相當好用，也意味著若是操作不當失誤可能會毀損您的硬碟資料，因此\n"
 "請小心使用。"
 
-#: ../../help.pm_.c:341
+#: ../../help.pm_.c:347
 msgid ""
-"There you are. Installation is now complete and your GNU/Linux system is\n"
+"There you are. Installation is now completed and your GNU/Linux system is\n"
 "ready to use. Just click \"OK\" to reboot the system. You can start\n"
 "GNU/Linux or Windows, whichever you prefer (if you are dual-booting), as\n"
 "soon as the computer has booted up again.\n"
@@ -3325,10 +3336,10 @@ msgstr ""
 "FAT 格式磁片以便於使用。(GNU/Linux 環境下，可以用 mformat a: 製作一張空白磁"
 "片。)"
 
-#: ../../help.pm_.c:372
+#: ../../help.pm_.c:378
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
-"(formatting means creating a filesystem).\n"
+"(formatting means creating a filesystem on it).\n"
 "\n"
 "At this time, you may wish to reformat some already existing partitions to\n"
 "erase any data they contain. If you wish to do that, please select those\n"
@@ -3342,7 +3353,7 @@ msgid ""
 "\n"
 "Please be careful when selecting partitions. After formatting, all data on\n"
 "the selected partitions will be deleted and you will not be able to recover\n"
-"any of it.\n"
+"it.\n"
 "\n"
 "Click on \"OK\" when you are ready to format partitions.\n"
 "\n"
@@ -3368,7 +3379,7 @@ msgstr ""
 "若是您點選了『取消』，那將會會到先前的操作步驟，繼續選擇要安裝的分割區，假設"
 "您點選了『進階』的項目後，將會提供是否要進行壞軌掃描動作的選項。"
 
-#: ../../help.pm_.c:398
+#: ../../help.pm_.c:404
 msgid ""
 "Your new Mandrake Linux operating system is currently being installed.\n"
 "Depending on the number of packages you will be installing and the speed of\n"
@@ -3382,7 +3393,7 @@ msgstr ""
 "安裝所需時間，將會依照您選擇安裝套件數量以及電腦的配備而有所不同。\n"
 "再安裝這段時間，您可以去泡一杯茶或者是看看電視，等等再回來查看安裝進度。"
 
-#: ../../help.pm_.c:406
+#: ../../help.pm_.c:412
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Some bugs may have\n"
@@ -3408,20 +3419,20 @@ msgstr ""
 "擇你要更新的項目，點選「安裝」取得要安裝更新的套件，或者是選擇「取消」放棄套"
 "件的更新。"
 
-#: ../../help.pm_.c:419
+#: ../../help.pm_.c:425
 msgid ""
 "Before continuing, you should read carefully the terms of the license. It\n"
 "covers the whole Mandrake Linux distribution, and if you do not agree with\n"
-"all the terms in it, click on the \"Refuse\" button which will immediately\n"
-"terminate the installation. To continue with the installation, click on the\n"
-"\"Accept\" button."
+"all the terms included in it, click on the \"Refuse\" button which will\n"
+"immediately terminate the installation. To continue with the installation,\n"
+"click on the \"Accept\" button."
 msgstr ""
 "在進行下面動作前，您已經仔細的閱讀下面相關版權條款。\n"
 "這包含整個「Mandrake-Linux-Distriubtion」版權內容，而若是您不同意內文所提及的"
 "相關版權條款宣告，您可以點選『拒絕』按鈕放棄，安裝程式將會立即結束。若是您接"
 "受的話，可以點選『接受』按鈕以便於繼續進行下面的安裝。 "
 
-#: ../../help.pm_.c:426
+#: ../../help.pm_.c:432
 msgid ""
 "At this point, it is time to choose the security level desired for the\n"
 "machine. As a rule of thumb, the more exposed the machine is, and the more\n"
@@ -3438,7 +3449,7 @@ msgstr ""
 "於取得更多這方面的相關資訊。\n"
 "若是您不知道該如何選擇的話，使用預設值就可以了。"
 
-#: ../../help.pm_.c:436
+#: ../../help.pm_.c:442
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -3456,16 +3467,16 @@ msgid ""
 "drive;\n"
 "\n"
 " * \"Auto allocate\": this option enables to automatically create ext3 and\n"
-"swap partitions in free space of your hard drive;\n"
+"swap partitions on your hard drive's free space;\n"
 "\n"
 "\"More\": gives access to additional features:\n"
 "\n"
 " * \"Save partition table\": saves the partition table to a floppy. Useful\n"
-"for later partition-table recovery if necessary. It is strongly recommended\n"
-"to perform this step;\n"
+"for later partition-table recovery, if necessary. It is strongly\n"
+"recommended to perform this step;\n"
 "\n"
 " * \"Restore partition table\": allows to restore a previously saved\n"
-"partition table from floppy disk;\n"
+"partition table from a floppy disk;\n"
 "\n"
 " * \"Rescue partition table\": if your partition table is damaged, you can\n"
 "try to recover it using this option. Please be careful and remember that it\n"
@@ -3566,7 +3577,7 @@ msgstr ""
 "議，您可以讓這塊保留的分割區有大一點的空間，比方保留一塊「20M」的分割區，那您"
 "就能夠在該分割區上放置許多份的開機核心相關檔案來使用。"
 
-#: ../../help.pm_.c:507
+#: ../../help.pm_.c:513
 msgid ""
 "More than one Microsoft partition has been detected on your hard drive.\n"
 "Please choose the one you want to resize in order to install your new\n"
@@ -3625,47 +3636,45 @@ msgstr ""
 "\n"
 "「Windows 名稱」就是在 Windows 下的磁碟機代號名稱，比方像是「C:\\」。"
 
-#: ../../help.pm_.c:538
+#: ../../help.pm_.c:544
 msgid "Please be patient. This operation can take several minutes."
 msgstr "請稍後，這個步驟能夠需要花費一些時間才能夠執行完畢。"
 
-#: ../../help.pm_.c:541
+#: ../../help.pm_.c:547
 msgid ""
 "DrakX now needs to know if you want to perform a default (\"Recommended\")\n"
-"installation or if you want to have greater control (\"Expert\"). You can\n"
-"also choose to do a new install or an upgrade of an existing Mandrake Linux\n"
-"system:\n"
+"installation or if you want to have greater control (\"Expert\") over your\n"
+"installation. You can also choose to do a new installation or upgrade your\n"
+"existing Mandrake Linux system:\n"
 "\n"
-" * \"Install\": completely wipes out the old system, however, depending on\n"
+" * \"Install\": completely wipes out the old system. However, depending on\n"
 "what is currently installed on your machine, you may be able to keep some\n"
 "old partitions (Linux or otherwise) unchanged;\n"
 "\n"
 " * \"Upgrade\": this installation class allows to simply update the\n"
-"packages currently installed on your Mandrake Linux system. It keeps the\n"
-"current partitions of your hard drives as well as user configurations. All\n"
-"other configuration steps remain available, similar to a normal\n"
-"installation;\n"
+"packages currently installed on your Mandrake Linux system. It keeps your\n"
+"hard drives' current partitions as well as user configurations. All other\n"
+"configuration steps remain available, similar to a normal installation;\n"
 "\n"
 " * \"Upgrade Packages Only\": this new installation class allows you to\n"
 "upgrade an existing Mandrake Linux system while keeping all system\n"
 "configurations unchanged. Adding new packages to the current installation\n"
 "is also possible.\n"
 "\n"
-"Upgrades should work fine on Mandrake Linux systems containing version\n"
-"\"8.1\" or later.\n"
+"Upgrades should work fine on Mandrake Linux systems using version \"8.1\"\n"
+"or later.\n"
 "\n"
-"Depending on your knowledge of GNU/Linux, select one of the following\n"
-"choices:\n"
+"Depending on your GNU/Linux knowledge, select one of the following choices:\n"
 "\n"
 " * Recommended: choose this if you have never installed a GNU/Linux\n"
 "operating system. The installation will be very easy and you will only be\n"
 "asked a few questions;\n"
 "\n"
-" * Expert: if you have a good understanding of GNU/Linux, you may wish to\n"
+" * Expert: if you have a good GNU/Linux understanding, you may wish to\n"
 "perform a highly customized installation. Some of the decisions you will\n"
-"have to make may be difficult if you do not have good knowledge of\n"
-"GNU/Linux, so it is not recommended that those without a fair amount of\n"
-"experience select this installation class."
+"have to make may be difficult if you do not have good GNU/Linux knowledge,\n"
+"so it is not recommended that those without a fair amount of experience\n"
+"select this installation class."
 msgstr ""
 "這裡，您需要決定一個安裝的模式，比方你希望使用預設『建議值』或者是使用比較有"
 "自主權『專家模式』模式進行安裝。當然，您也可以安裝一套全新的系統，或者是將目"
@@ -3692,7 +3701,7 @@ msgstr ""
 "能夠駕馭這些詢問的話，建議您除非您知道您所選擇的項目代表意義為何，要不然請使"
 "用預設值而不要再去選取相關設定項目。"
 
-#: ../../help.pm_.c:578
+#: ../../help.pm_.c:582
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen). However, you might not have a keyboard that\n"
@@ -3706,8 +3715,8 @@ msgid ""
 "supported keyboards.\n"
 "\n"
 "If you choose a keyboard layout based on a non-latin alphabet, you will be\n"
-"asked on next dialog to choose the key binding that will switch the\n"
-"keyboard layout between the latin and non latin layouts."
+"asked in the next dialog to choose the key binding that will switch the\n"
+"keyboard layout between the latin and non-latin layouts."
 msgstr ""
 "正常情況來說，「DrakX」能夠正確的依照您選擇的語系，自動偵測您系統的鍵盤,所以"
 "您不會會看到這個步驟的設定。但是，若是您有特殊的環境需求，這邊就能夠讓您選"
@@ -3715,7 +3724,7 @@ msgstr ""
 "\n"
 "請點選「更多」按鈕，以便於選擇您所需要使用的鍵盤項目。"
 
-#: ../../help.pm_.c:594
+#: ../../help.pm_.c:598
 msgid ""
 "The first step is to choose your preferred language.\n"
 "\n"
@@ -3724,12 +3733,16 @@ msgid ""
 "Clicking on the \"Advanced\" button will allow you to select other\n"
 "languages to be installed on your workstation. Selecting other languages\n"
 "will install the language-specific files for system documentation and\n"
-"applications. For example, if you will host users from Spain on your\n"
-"machine, select English as the main language in the tree view and in the\n"
-"Advanced section click on the box corresponding to \"Spanish|Spain\".\n"
+"applications. For example, if you host users from Spain on your machine,\n"
+"select English as the main language in the tree view and in the Advanced\n"
+"section, click on the box corresponding to \"Spanish|Spain\".\n"
 "\n"
 "Note that multiple languages may be installed. Once you have selected any\n"
-"additional locales, click the \"OK\" button to continue."
+"additional locales, click the \"OK\" button to continue.\n"
+"\n"
+"To switch from one language to the other, you can launch the\n"
+"\"/usr/sbin/localedrake\" command as \"root\" to change the whole system\n"
+"language, or as a simple user to only change that user's default language."
 msgstr ""
 "請選取您安裝過程所要使用的語系。點選『進階』按鈕可以讓您\n"
 "選取其他語系，該選取的語系將會一同安裝到系統內。\n"
@@ -3739,14 +3752,14 @@ msgstr ""
 "\n"
 "當您選擇好了之後，請點選『確定』按鈕繼續。"
 
-#: ../../help.pm_.c:609
+#: ../../help.pm_.c:617
 msgid ""
-"DrakX generally detects the number of buttons your mouse has. If not, it\n"
-"assumes you have a two-button mouse and will set it up for third-button\n"
+"DrakX generally detects the number of buttons your mouse possesses. If not,\n"
+"it assumes you have a two-button mouse and will set it up for third-button\n"
 "emulation. DrakX will automatically know whether it is a PS/2, serial or\n"
 "USB mouse.\n"
 "\n"
-"If you wish to specify a different type of mouse select the appropriate\n"
+"If you wish to specify a different type of mouse, select the appropriate\n"
 "type from the provided list.\n"
 "\n"
 "If you choose a mouse other than the default, a test screen will be\n"
@@ -3754,12 +3767,12 @@ msgid ""
 "correct. If the mouse is not working well, press the space bar or [Return]\n"
 "to \"Cancel\" and choose again.\n"
 "\n"
-"Wheel mouses are sometimes not automatically detected. You will need to\n"
+"Sometimes, wheel mouses are not automatically detected. You will need to\n"
 "manually select it in the list. Be sure to select the one corresponding to\n"
 "the correct port it is attached to. After you have pressed the \"OK\"\n"
-"button, a mouse image is displayed. You then need to move the wheel of your\n"
-"mouse to activate it correctly. Then test all buttons and movements are\n"
-"correct."
+"button, a mouse image will be displayed. You then need to move the wheel of\n"
+"your mouse to activate it correctly. Then test that all buttons and\n"
+"movements are correct."
 msgstr ""
 "預設的情況，『DrakX』程式會預設您系統只有兩個按鈕式的滑鼠，並自動選擇模擬三鍵"
 "的功能。此外，『DrakX』也能夠很自動化的偵測到您系統使用的滑鼠是屬於序列、"
@@ -3773,7 +3786,7 @@ msgstr ""
 "法正常工作，使用鍵盤按下空白鍵或者是「Enter鍵」，然後選擇『取消』回到滑鼠選擇"
 "項目即可。"
 
-#: ../../help.pm_.c:630
+#: ../../help.pm_.c:638
 msgid ""
 "Please select the correct port. For example, the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux."
@@ -3781,23 +3794,23 @@ msgstr ""
 "請選擇正確的連接埠名稱。比方，MS Windows 所稱呼的「COM1」，\n"
 "在 GNU/Linux 環境是稱呼為「ttyS0」。"
 
-#: ../../help.pm_.c:634
+#: ../../help.pm_.c:642
 msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you have to enter the \"root\" password. \"root\" is the system\n"
-"administrator and is the only one authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That is why you must choose a password that is difficult to\n"
-"guess - DrakX will tell you if it is too easy. As you can see, you can\n"
-"choose not to enter a password, but we strongly advise you against this if\n"
-"only for one reason: do not think that because you booted GNU/Linux that\n"
-"your other operating systems are safe from mistakes. Since \"root\" can\n"
-"overcome all limitations and unintentionally erase all data on partitions\n"
-"by carelessly accessing the partitions themselves, it is important for it\n"
-"to be difficult to become \"root\".\n"
+"This is the most crucial decision in regards with the security of your\n"
+"GNU/Linux system: you have to enter the \"root\" password. \"Root\" is the\n"
+"system administrator and is the only one authorized to make updates, add\n"
+"users, change the overall system configuration, and so on. In short,\n"
+"\"root\" can do everything! That is why you must choose a password that is\n"
+"difficult to guess -- DrakX will tell you if it is too easy. As you can\n"
+"see, you can choose not to enter a password, but we strongly advise you\n"
+"against this if only for one reason: do not think that because you booted\n"
+"GNU/Linux that your other operating systems are safe from mistakes. Since\n"
+"\"root\" can overcome all limitations and unintentionally erase all data on\n"
+"partitions by carelessly accessing the partitions themselves, it is\n"
+"important for it to be difficult to become \"root\".\n"
 "\n"
 "The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password - it makes it too\n"
+"characters long. Never write down the \"root\" password -- it makes it too\n"
 "easy to compromise a system.\n"
 "\n"
 "However, please do not make the password too long or complicated because\n"
@@ -3811,9 +3824,9 @@ msgid ""
 "In Expert mode, you will be asked if you will be connecting to an\n"
 "authentication server, like NIS or LDAP.\n"
 "\n"
-"If your network uses either of the LDAP, NIS, or PDC Windows Domain\n"
-"authentication services, select the appropriate one as \"authentication\".\n"
-"If you do not know, ask your network administrator.\n"
+"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
+"services, select the appropriate one as \"authentication\". If you have no\n"
+"clue, ask your network administrator.\n"
 "\n"
 "If your computer is not connected to any administrated network, you will\n"
 "want to choose \"Local files\" for authentication."
@@ -3842,11 +3855,11 @@ msgstr ""
 "\n"
 "若是認證方式就是單純該電腦上的帳號方式，選擇使用本地端密碼檔案項目即可。"
 
-#: ../../help.pm_.c:670
+#: ../../help.pm_.c:678
 msgid ""
-"LILO and grub are GNU/Linux bootloaders. This stage, normally, is totally\n"
+"LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. In fact, DrakX analyzes the disk boot sector and acts\n"
-"accordingly, depending on what it finds here:\n"
+"accordingly, depending on what it finds there:\n"
 "\n"
 " * if a Windows boot sector is found, it will replace it with a grub/LILO\n"
 "boot sector. Hence, you will be able to load either GNU/Linux or another\n"
@@ -3855,14 +3868,14 @@ msgid ""
 " * if a grub or LILO boot sector is found, it will replace it with a new\n"
 "one.\n"
 "\n"
-"If in doubt, DrakX will display a dialog with various options.\n"
+"if in doubt, DrakX will display a dialog with various options.\n"
 "\n"
 " * \"Bootloader to use\": you have three choices:\n"
 "\n"
-"    * \"GRUB\": if you prefer grub (text menu).\n"
+"    * \"GRUB\": if you prefer grub (text menu);\n"
 "\n"
 "    * \"LILO with graphical menu\": if you prefer LILO with its graphical\n"
-"interface.\n"
+"interface;\n"
 "\n"
 "    * \"LILO with text menu\": if you prefer LILO with its text menu\n"
 "interface.\n"
@@ -3872,7 +3885,7 @@ msgid ""
 "second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\");\n"
 "\n"
 " * \"Delay before booting the default image\": when rebooting the computer,\n"
-"this is the delay granted to the user to choose - in the bootloader menu,\n"
+"this is the delay granted to the user to choose -- in the bootloader menu,\n"
 "another boot entry than the default one.\n"
 "\n"
 "!! Beware that if you choose not to install a bootloader (by selecting\n"
@@ -3924,7 +3937,7 @@ msgstr ""
 "您可以在顯示出可供選擇開機項目上快速點兩次變更內容甚至是刪除該啟動項目;使用"
 "『新增』來建立開機項目內容; 然後點選『完成』以便於繼續進行下面的安裝項目。"
 
-#: ../../help.pm_.c:710
+#: ../../help.pm_.c:718
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options which will be available at boot time will be displayed.\n"
@@ -3932,7 +3945,7 @@ msgid ""
 "If there is another operating system installed on your machine, it will\n"
 "automatically be added to the boot menu. Here, you can choose to fine-tune\n"
 "the existing options. Select an entry and click \"Modify\" to modify or\n"
-"remove it; \"Add\" creates a new entry; and \"Done\" goes on to the next\n"
+"remove it. \"Add\" creates a new entry. and \"Done\" goes on to the next\n"
 "installation step.\n"
 "\n"
 "You may also not want to give access to these other operating systems to\n"
@@ -3950,10 +3963,10 @@ msgstr ""
 "夠使用該項目進行的開機功能。這個情況下，當你刪除其中一個啟動項目後，後續你也"
 "許就需要使用該作業系統的開機片才能夠進入這個作業系統了!"
 
-#: ../../help.pm_.c:724
+#: ../../help.pm_.c:732
 msgid ""
 "You must indicate where you wish to place the information required to boot\n"
-"to GNU/Linux.\n"
+"GNU/Linux.\n"
 "\n"
 "Unless you know exactly what you are doing, choose \"First sector of drive\n"
 "(MBR)\"."
@@ -3962,34 +3975,26 @@ msgstr ""
 "\n"
 "除非您很清楚您在做什麼，否則都應該選取 \"硬碟的第一個磁區 (MBR)\"。"
 
-#: ../../help.pm_.c:731
+#: ../../help.pm_.c:739
 msgid ""
-"Here, we select a printing system for your computer. Other OSs may offer\n"
-"you one, but Mandrake Linux offers three.\n"
+"Here, we select a printing system for your computer. Other OSes may offer\n"
+"you one, but Mandrake Linux offers two.\n"
 "\n"
-" * \"pdq\" - which means ``print, don't queue'', is the choice if you have\n"
+" * \"pdq\" -- which means ``print, don't queue'', is the choice if you have\n"
 "a direct connection to your printer and you want to be able to panic out of\n"
 "printer jams, and you do not have networked printers. It will handle only\n"
 "very simple network cases and is somewhat slow for networks. Pick \"pdq\"\n"
-"if this is your maiden voyage to GNU/Linux. You can change your choices\n"
+"if this is your first voyage to GNU/Linux. You can change your choices\n"
 "after installation by running PrinterDrake from the Mandrake Control Center\n"
 "and clicking the expert button.\n"
 "\n"
-" * \"CUPS\" - ``Common Unix Printing System'', is excellent at printing to\n"
+" * \"CUPS\" -- ``Common Unix Printing System'', is excellent at printing to\n"
 "your local printer and also halfway-around the planet. It is simple and can\n"
 "act as a server or a client for the ancient \"lpd\" printing system. Hence,\n"
 "it is compatible with the systems that went before. It can do many tricks,\n"
 "but the basic setup is almost as easy as \"pdq\". If you need this to\n"
 "emulate an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has\n"
-"graphical front-ends for printing or choosing printer options.\n"
-"\n"
-" * \"lprNG\" - ``line printer daemon New Generation''. This system can do\n"
-"approximately the same things the others can do, but it will print to\n"
-"printers mounted on a Novell Network, because it supports the IPX protocol,\n"
-"and it can print directly to shell commands. If you have need of Novell or\n"
-"printing to commands without using a separate pipe construct, use lprNG.\n"
-"Otherwise, CUPS is preferable as it is simpler and better at working over\n"
-"networks."
+"graphical front-ends for printing or choosing printer options."
 msgstr ""
 "這裡將要選擇所要使用的列印服務系統項目，Mandrake Linux 這邊提供了三種供您選擇"
 "的項目。\n"
@@ -4014,7 +4019,7 @@ msgstr ""
 
 #: ../../help.pm_.c:759
 msgid ""
-"DrakX now detects any IDE devices present in your computer. It will also\n"
+"DrakX now detects any IDE device present in your computer. It will also\n"
 "scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
@@ -4024,7 +4029,7 @@ msgid ""
 "be presented with a list of SCSI cards to choose from. Click \"No\" if you\n"
 "have no SCSI hardware. If you are unsure, you can check the list of\n"
 "hardware detected in your machine by selecting \"See hardware info\" and\n"
-"clicking \"OK\". Examine the list of hardware and then click on the \"OK\"\n"
+"clicking \"OK\". Examine the hardware list and then click on the \"OK\"\n"
 "button to return to the SCSI interface question.\n"
 "\n"
 "If you have to manually specify your adapter, DrakX will ask if you want to\n"
@@ -4033,12 +4038,7 @@ msgid ""
 "usually works well.\n"
 "\n"
 "If DrakX is not able to probe for the options which need to be passed, you\n"
-"will need to provide options to the driver manually. Please review the\n"
-"``User Guide'' (chapter 3, in the ``Collecting Information on Your\n"
-"Hardware'' section) for hints on retrieving the parameters required from\n"
-"hardware documentation, from the manufacturer's web site (if you have\n"
-"Internet access) or from Microsoft Windows (if you used this hardware with\n"
-"Windows on your system)."
+"will need to manually provide options to the driver."
 msgstr ""
 "DrakX 程式目前正在偵測您系統上的 IDE 裝置。此外，它也會順便掃描系統所安裝的 "
 "SCSI 介面卡。當偵測到 SCSI 卡時，DrakX 程式將會自動安裝適當的SCSI 驅動程式驅"
@@ -4057,12 +4057,12 @@ msgstr ""
 "請注意的是，若是您要手動指定傳入的參數，建議您請參考使用手冊的第三章 "
 "(\"Collecting Information on Your hardware\") 以便於獲得更多相關資訊。"
 
-#: ../../help.pm_.c:786
+#: ../../help.pm_.c:781
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
 "systems, alternate kernels, or for an emergency boot image.\n"
 "\n"
-"For other OSs, the entry consists only of a label and the \"root\"\n"
+"For other OSes, the entry consists only of a label and the \"root\"\n"
 "partition.\n"
 "\n"
 "For Linux, there are a few possible options:\n"
@@ -4093,7 +4093,7 @@ msgid ""
 "need to allocate a large ramdisk, this option can be used;\n"
 "\n"
 " * Read-write: normally the \"root\" partition is initially brought up in\n"
-"read-only, to allow a file system check before the system becomes ``live''.\n"
+"read-only, to allow a filesystem check before the system becomes ``live''.\n"
 "Here, you can override this option;\n"
 "\n"
 " * NoVideo: should the Apple video hardware prove to be exceptionally\n"
@@ -4152,7 +4152,7 @@ msgstr ""
 "單模式，這時候您可以用方向鍵選擇你要啟動的項目。或者是你看到的是單純的 boot: "
 "提示訊息，此時您可以按下 [Tab] 按鍵可以獲得能夠選擇輸入的開機項目標籤。"
 
-#: ../../help.pm_.c:833
+#: ../../help.pm_.c:828
 msgid ""
 "Yaboot is a bootloader for NewWorld MacIntosh hardware. It is able to boot\n"
 "either GNU/Linux, MacOS or MacOSX if present on your computer. Normally,\n"
@@ -4210,10 +4210,10 @@ msgstr ""
 "Delay 的功能。\n"
 " * Default OS: 作為預設開機的選擇項目。"
 
-#: ../../help.pm_.c:865
+#: ../../help.pm_.c:860
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
-"your installed hardware, you may - or not, see the following entries:\n"
+"your installed hardware, you may (or may not), see the following entries:\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary;\n"
@@ -4228,19 +4228,19 @@ msgid ""
 "order to configure the clock according to the time zone you are in;\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``User\n"
+"configuration wizard. Consult the correpsonding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
-"presented there is similar to the one used during installation;\n"
+"presented there is similar to the one used at installation time;\n"
 "\n"
-" * \"Sound card\": if a sound card is detected on your system, it is\n"
+" * \"Sound card\": if a sound card is detected on your system, it will be\n"
 "displayed here. No modification possible at installation time;\n"
 "\n"
-" * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. No modification possible at installation time;\n"
+" * \"TV card\": if a TV card is detected on your system, it will be\n"
+"displayed here. No modification possible at installation time;\n"
 "\n"
-" * \"ISDN card\": if an ISDN card is detected on your system, it is\n"
+" * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
 "displayed here. You can click on the button to change the parameters\n"
-"associated with it."
+"associated to it."
 msgstr ""
 "這邊目前列出的是您系統相關組態內容設定。依據您系統所安裝的硬體環境，\n"
 "您可以使用 - 調整下面所列示項目:\n"
@@ -4260,7 +4260,7 @@ msgstr ""
 " * \"ISDN 卡\n"
 ": 安裝時所偵測到的系統ISDN介面卡項目，點選該項目能夠設定之。"
 
-#: ../../help.pm_.c:896
+#: ../../help.pm_.c:891
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandrake Linux partition. Be careful, all data present on it will be lost\n"
@@ -4269,14 +4269,14 @@ msgstr ""
 "選擇您希望用來安裝 Mandrake Linux 系統的硬碟。當你選擇好後，該顆硬碟上面所有"
 "的資料將會被清除而無法挽救，請小心操作這個項目。"
 
-#: ../../help.pm_.c:901
+#: ../../help.pm_.c:896
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"OK\", you will not be able\n"
 "to recover any data and partitions present on this hard drive, including\n"
 "any Windows data.\n"
 "\n"
-"Click on \"Cancel\" to cancel this operation without losing any data and\n"
+"Click on \"Cancel\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
 "如果您真的確定要清除這個硬碟上面所有的分割區與資料的話，點選『確定』按鈕。當"
@@ -4300,7 +4300,7 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "您也必須要格式化 %s"
 
-#: ../../install_any.pm_.c:424
+#: ../../install_any.pm_.c:423
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -4325,7 +4325,7 @@ msgstr ""
 "\n"
 "您確定真的要安裝這些套件項目嗎？\n"
 
-#: ../../install_any.pm_.c:442
+#: ../../install_any.pm_.c:441
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -4334,20 +4334,20 @@ msgid ""
 "Do you really want to remove these packages?\n"
 msgstr ""
 
-#: ../../install_any.pm_.c:472
+#: ../../install_any.pm_.c:471
 msgid "Can't use broadcast with no NIS domain"
 msgstr "沒有 NIS 域名無法查詢網路資訊"
 
-#: ../../install_any.pm_.c:869
+#: ../../install_any.pm_.c:870
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "請在 %s 中插入已經格式化(FAT格式)磁碟片"
 
-#: ../../install_any.pm_.c:873
+#: ../../install_any.pm_.c:874
 msgid "This floppy is not FAT formatted"
 msgstr "這張並不是 FAT 格式化的磁碟片"
 
-#: ../../install_any.pm_.c:885
+#: ../../install_any.pm_.c:886
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -4355,12 +4355,12 @@ msgstr ""
 "要使用所儲存的套件選擇，在開機安裝啟動 LILO 程式的時候，於 boot 輸入:linux "
 "defcfg=floopy 即可。"
 
-#: ../../install_any.pm_.c:908 ../../partition_table.pm_.c:767
+#: ../../install_any.pm_.c:909 ../../partition_table.pm_.c:767
 #, c-format
 msgid "Error reading file %s"
 msgstr "讀取檔案 %s 時發生錯誤"
 
-#: ../../install_any.pm_.c:1030
+#: ../../install_any.pm_.c:1031
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -4595,7 +4595,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "歡迎來到 %s"
 
-#: ../../install_steps.pm_.c:531 ../../install_steps.pm_.c:770
+#: ../../install_steps.pm_.c:542 ../../install_steps.pm_.c:781
 msgid "No floppy drive available"
 msgstr "沒有可用的軟碟機"
 
@@ -5381,8 +5381,8 @@ msgstr "滑鼠"
 msgid "Timezone"
 msgstr "時區"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2937
-#: ../../printerdrake.pm_.c:3026
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2985
+#: ../../printerdrake.pm_.c:3074
 msgid "Printer"
 msgstr "印表機"
 
@@ -5438,7 +5438,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr "這個密碼太簡單了 (一定至少要有 %d 個字元才行)"
 
 #: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:49
-#: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:172
+#: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:173
 msgid "Authentication"
 msgstr "認證方式"
 
@@ -5540,7 +5540,7 @@ msgstr "第一台軟碟"
 msgid "Second floppy drive"
 msgstr "第二台軟碟"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2470
+#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2515
 msgid "Skip"
 msgstr "略過"
 
@@ -5765,12 +5765,12 @@ msgstr "選擇檔案"
 msgid "Advanced"
 msgstr "進階"
 
-#: ../../interactive.pm_.c:321
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
 msgid "Basic"
 msgstr "基本"
 
 #: ../../interactive/newt.pm_.c:195 ../../my_gtk.pm_.c:158
-#: ../../printerdrake.pm_.c:2124
+#: ../../printerdrake.pm_.c:2169
 msgid "<- Previous"
 msgstr "<- 上一步"
 
@@ -6376,7 +6376,7 @@ msgstr ""
 msgid "Finish"
 msgstr "完成"
 
-#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2126
+#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2171
 msgid "Next ->"
 msgstr "下一步 ->"
 
@@ -6510,7 +6510,7 @@ msgid ""
 "I cannot set up this connection type."
 msgstr "系統偵測不到有任何網路卡的安裝。所以無法設定連結類型。"
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:240
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
 msgid "Choose the network interface"
 msgstr "選取網路介面"
 
@@ -6844,13 +6844,13 @@ msgstr "請選取要設定的項目"
 msgid "Use auto detection"
 msgstr "使用自動偵測"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3151
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3199
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
-#: ../../standalone/drakfloppy_.c:145
+#: ../../standalone/drakfloppy_.c:146
 msgid "Expert Mode"
 msgstr "專家模式"
 
-#: ../../network/netconnect.pm_.c:174 ../../printerdrake.pm_.c:386
+#: ../../network/netconnect.pm_.c:174 ../../printerdrake.pm_.c:399
 msgid "Detecting devices..."
 msgstr "正在偵測裝置..."
 
@@ -7018,7 +7018,7 @@ msgstr "自動分配 IP"
 msgid "Start at boot"
 msgstr "於開機時啟動"
 
-#: ../../network/network.pm_.c:333 ../../printerdrake.pm_.c:860
+#: ../../network/network.pm_.c:333 ../../printerdrake.pm_.c:875
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP 位址必須要用類似 1.2.3.4 的格式來輸入"
 
@@ -7048,14 +7048,12 @@ msgid "Gateway device"
 msgstr "閘道裝置"
 
 #: ../../network/network.pm_.c:376
-#, fuzzy
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr "IP 位址必須要用類似 1.2.3.4 的格式來輸入"
+msgstr "DNS IP 位址必須要用類似 1.2.3.4 的格式來輸入"
 
 #: ../../network/network.pm_.c:380
-#, fuzzy
 msgid "Gateway address should be in format 1.2.3.4"
-msgstr "IP 位址必須要用類似 1.2.3.4 的格式來輸入"
+msgstr "Gateway IP 位址必須要用類似 1.2.3.4 的格式來輸入"
 
 #: ../../network/network.pm_.c:394
 msgid "Proxies configuration"
@@ -7275,7 +7273,7 @@ msgstr "LPD - Line Printer Daemon"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1125
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1144
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -7303,7 +7301,7 @@ msgstr "遠端印表機"
 msgid "Printer on remote CUPS server"
 msgstr "遠端的 CUPS 伺服器印表機"
 
-#: ../../printer.pm_.c:52 ../../printerdrake.pm_.c:883
+#: ../../printer.pm_.c:52 ../../printerdrake.pm_.c:898
 msgid "Printer on remote lpd server"
 msgstr "遠端的 lpd 伺服器印表機"
 
@@ -7319,7 +7317,7 @@ msgstr "SMB/Windows 95/98/NT 伺服器印表機"
 msgid "Printer on NetWare server"
 msgstr "Netware 伺服器印表機"
 
-#: ../../printer.pm_.c:56 ../../printerdrake.pm_.c:887
+#: ../../printer.pm_.c:56 ../../printerdrake.pm_.c:902
 msgid "Enter a printer device URI"
 msgstr "輸入印表機所在 URI 位址"
 
@@ -7327,102 +7325,102 @@ msgstr "輸入印表機所在 URI 位址"
 msgid "Pipe job into a command"
 msgstr "使用 Pipe 管線方式組成列印工作"
 
-#: ../../printer.pm_.c:324 ../../printer.pm_.c:366 ../../printer.pm_.c:533
+#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:552
 msgid "Unknown Model"
 msgstr "未知的型號"
 
-#: ../../printer.pm_.c:735 ../../printer.pm_.c:926 ../../printer.pm_.c:1318
-#: ../../printerdrake.pm_.c:2260 ../../printerdrake.pm_.c:3414
+#: ../../printer.pm_.c:754 ../../printer.pm_.c:945 ../../printer.pm_.c:1337
+#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3462
 msgid "Unknown model"
 msgstr "未知的型號"
 
-#: ../../printer.pm_.c:763
+#: ../../printer.pm_.c:782
 msgid "Local Printers"
 msgstr "本機印表機"
 
-#: ../../printer.pm_.c:765 ../../printer.pm_.c:1126
+#: ../../printer.pm_.c:784 ../../printer.pm_.c:1145
 msgid "Remote Printers"
 msgstr "遠端印表機"
 
-#: ../../printer.pm_.c:772 ../../printerdrake.pm_.c:404
+#: ../../printer.pm_.c:791 ../../printerdrake.pm_.c:417
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr "於並列埠上 \\/*%s"
 
-#: ../../printer.pm_.c:775 ../../printerdrake.pm_.c:406
+#: ../../printer.pm_.c:794 ../../printerdrake.pm_.c:419
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr "，USB 印表機  \\/*%s"
 
-#: ../../printer.pm_.c:780
+#: ../../printer.pm_.c:799
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr "，位於並列埠多功能裝置 \\/*%s"
 
-#: ../../printer.pm_.c:783
+#: ../../printer.pm_.c:802
 msgid ", multi-function device on USB"
 msgstr "，位於 USB 的多功能裝置"
 
-#: ../../printer.pm_.c:785
+#: ../../printer.pm_.c:804
 msgid ", multi-function device on HP JetDirect"
 msgstr "HP JetDirect 上的多功能裝置"
 
-#: ../../printer.pm_.c:787
+#: ../../printer.pm_.c:806
 msgid ", multi-function device"
 msgstr "，多功能裝置"
 
-#: ../../printer.pm_.c:790
+#: ../../printer.pm_.c:809
 #, c-format
 msgid ", printing to %s"
 msgstr "，列印至 %s"
 
-#: ../../printer.pm_.c:792
+#: ../../printer.pm_.c:811
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr " 位於 LPD 主機 \"%s\"，印表機 \"%s\""
 
-#: ../../printer.pm_.c:794
+#: ../../printer.pm_.c:813
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr "，TCP/IP 主機 \"%s\"，連接埠 %s"
 
-#: ../../printer.pm_.c:798
+#: ../../printer.pm_.c:817
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " 位於 Windows 主機 \"%s\"，分享名稱 \"%s\""
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:821
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " 位於 Novell 主機 \"%s\"，印表機 \"%s\""
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:823
 #, c-format
 msgid ", using command %s"
 msgstr "，使用命令 %s"
 
-#: ../../printer.pm_.c:923 ../../printerdrake.pm_.c:1656
+#: ../../printer.pm_.c:942 ../../printerdrake.pm_.c:1701
 msgid "Raw printer (No driver)"
 msgstr "Raw 印表機 (無驅動程式)"
 
-#: ../../printer.pm_.c:1095
+#: ../../printer.pm_.c:1114
 #, c-format
 msgid "(on %s)"
 msgstr "(於 %s)"
 
-#: ../../printer.pm_.c:1097
+#: ../../printer.pm_.c:1116
 msgid "(on this machine)"
 msgstr "(位於這個機器上)"
 
-#: ../../printer.pm_.c:1122
+#: ../../printer.pm_.c:1141
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "位於 CUPS 伺服器 \"%s\""
 
-#: ../../printer.pm_.c:1128 ../../printerdrake.pm_.c:3071
-#: ../../printerdrake.pm_.c:3082 ../../printerdrake.pm_.c:3303
-#: ../../printerdrake.pm_.c:3355 ../../printerdrake.pm_.c:3381
-#: ../../printerdrake.pm_.c:3556 ../../printerdrake.pm_.c:3558
+#: ../../printer.pm_.c:1147 ../../printerdrake.pm_.c:3119
+#: ../../printerdrake.pm_.c:3130 ../../printerdrake.pm_.c:3351
+#: ../../printerdrake.pm_.c:3403 ../../printerdrake.pm_.c:3429
+#: ../../printerdrake.pm_.c:3604 ../../printerdrake.pm_.c:3606
 msgid " (Default)"
 msgstr " (預設開機)"
 
@@ -7448,11 +7446,11 @@ msgstr ""
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "印表機自動偵測 (本機、TCP/Socket 與 SMB 網路印表機)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3135
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3183
 msgid "CUPS configuration"
 msgstr "CUPS 組態"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3136
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3184
 msgid "Specify CUPS server"
 msgstr "指定 CUPS 伺服器"
 
@@ -7493,7 +7491,7 @@ msgstr ""
 msgid "The IP address should look like 192.168.1.20"
 msgstr "IP 位址應該長得像是 1.2.3.4 的格式"
 
-#: ../../printerdrake.pm_.c:95 ../../printerdrake.pm_.c:1094
+#: ../../printerdrake.pm_.c:95 ../../printerdrake.pm_.c:1109
 msgid "The port number should be an integer!"
 msgstr "Port 欄位應該為數字"
 
@@ -7501,7 +7499,7 @@ msgstr "Port 欄位應該為數字"
 msgid "CUPS server IP"
 msgstr "CUPS 伺服器 IP"
 
-#: ../../printerdrake.pm_.c:103 ../../printerdrake.pm_.c:1114
+#: ../../printerdrake.pm_.c:103 ../../printerdrake.pm_.c:1129
 msgid "Port"
 msgstr "連接埠"
 
@@ -7510,19 +7508,19 @@ msgid "Automatic CUPS configuration"
 msgstr "CPUS 自動化設定"
 
 #: ../../printerdrake.pm_.c:177 ../../printerdrake.pm_.c:247
-#: ../../printerdrake.pm_.c:1529 ../../printerdrake.pm_.c:1533
-#: ../../printerdrake.pm_.c:1651 ../../printerdrake.pm_.c:2203
-#: ../../printerdrake.pm_.c:2356 ../../printerdrake.pm_.c:2415
-#: ../../printerdrake.pm_.c:2488 ../../printerdrake.pm_.c:2509
-#: ../../printerdrake.pm_.c:2699 ../../printerdrake.pm_.c:2740
-#: ../../printerdrake.pm_.c:2745 ../../printerdrake.pm_.c:2779
-#: ../../printerdrake.pm_.c:2784 ../../printerdrake.pm_.c:2821
-#: ../../printerdrake.pm_.c:2874 ../../printerdrake.pm_.c:2894
-#: ../../printerdrake.pm_.c:2908 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2988 ../../printerdrake.pm_.c:3006
-#: ../../printerdrake.pm_.c:3095 ../../printerdrake.pm_.c:3169
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3526
-#: ../../printerdrake.pm_.c:3579 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:1574 ../../printerdrake.pm_.c:1578
+#: ../../printerdrake.pm_.c:1696 ../../printerdrake.pm_.c:2248
+#: ../../printerdrake.pm_.c:2401 ../../printerdrake.pm_.c:2460
+#: ../../printerdrake.pm_.c:2533 ../../printerdrake.pm_.c:2554
+#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2788
+#: ../../printerdrake.pm_.c:2793 ../../printerdrake.pm_.c:2827
+#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2869
+#: ../../printerdrake.pm_.c:2922 ../../printerdrake.pm_.c:2942
+#: ../../printerdrake.pm_.c:2956 ../../printerdrake.pm_.c:2990
+#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3054
+#: ../../printerdrake.pm_.c:3143 ../../printerdrake.pm_.c:3217
+#: ../../printerdrake.pm_.c:3519 ../../printerdrake.pm_.c:3574
+#: ../../printerdrake.pm_.c:3627 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "PrinterDrake"
 
@@ -7635,12 +7633,13 @@ msgid ""
 msgstr ""
 "NOTE：需要安裝必要的印表機驅動程式套件等檔案，大約共佔用 %d MB 的空間。"
 
-#: ../../printerdrake.pm_.c:269 ../../printerdrake.pm_.c:278
-#: ../../printerdrake.pm_.c:3117 ../../printerdrake.pm_.c:3242
+#: ../../printerdrake.pm_.c:279 ../../printerdrake.pm_.c:291
+#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3165
+#: ../../printerdrake.pm_.c:3290
 msgid "Add a new printer"
 msgstr "新增印表機"
 
-#: ../../printerdrake.pm_.c:270
+#: ../../printerdrake.pm_.c:280
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -7660,7 +7659,7 @@ msgstr ""
 "設定過程中，請依提示選擇相關項目，包含印表機種類、\n"
 "額外參數等。"
 
-#: ../../printerdrake.pm_.c:280
+#: ../../printerdrake.pm_.c:293
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -7696,7 +7695,7 @@ msgstr ""
 "\n"
 "當你確認沒問題是，點選「下一步」，或者是點選「取消」放棄設定。"
 
-#: ../../printerdrake.pm_.c:289 ../../printerdrake.pm_.c:306
+#: ../../printerdrake.pm_.c:302 ../../printerdrake.pm_.c:319
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -7719,7 +7718,7 @@ msgstr ""
 "\n"
 "當你確認沒問題時，點選「下一步」，或者是點選「取消」放棄設定。"
 
-#: ../../printerdrake.pm_.c:297
+#: ../../printerdrake.pm_.c:310
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -7752,24 +7751,19 @@ msgstr ""
 "\n"
 "當你確認沒問題是，點選「下一步」，或者是點選「取消」放棄設定。"
 
-#: ../../printerdrake.pm_.c:315
+#: ../../printerdrake.pm_.c:328
 msgid "Auto-detect printers connected to this machine"
 msgstr "自動偵測本機印表機"
 
-#: ../../printerdrake.pm_.c:318
+#: ../../printerdrake.pm_.c:331
 msgid "Auto-detect printers connected directly to the local network"
 msgstr "自動偵測區域網路印表機"
 
-#: ../../printerdrake.pm_.c:321
+#: ../../printerdrake.pm_.c:334
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "自動偵測位於 Microsoft Windows 機器的印表機"
 
-#: ../../printerdrake.pm_.c:348 ../../printerdrake.pm_.c:562
-#: ../../printerdrake.pm_.c:587
-msgid "Local Printer"
-msgstr "本機印表機"
-
-#: ../../printerdrake.pm_.c:349
+#: ../../printerdrake.pm_.c:362
 msgid ""
 "\n"
 "Congratulations, your printer is now installed and configured!\n"
@@ -7789,49 +7783,53 @@ msgstr ""
 "請在 Mandrake 控制台內選擇『硬體』再選擇『印表機』項目\n"
 "即可進行設定動作。"
 
-#: ../../printerdrake.pm_.c:386 ../../printerdrake.pm_.c:577
-#: ../../printerdrake.pm_.c:790 ../../printerdrake.pm_.c:1030
+#: ../../printerdrake.pm_.c:399 ../../printerdrake.pm_.c:590
+#: ../../printerdrake.pm_.c:805 ../../printerdrake.pm_.c:1045
 msgid "Printer auto-detection"
 msgstr "印表機自動偵測"
 
-#: ../../printerdrake.pm_.c:408
+#: ../../printerdrake.pm_.c:421
 #, c-format
 msgid ", network printer \"%s\", port %s"
 msgstr "，網路印表機 \"%s\"，連接埠 %s"
 
-#: ../../printerdrake.pm_.c:410
+#: ../../printerdrake.pm_.c:423
 #, c-format
 msgid ", printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "，網路印表機 \"%s\"，位於 SMB/Windows 伺服器 \"%s\""
 
-#: ../../printerdrake.pm_.c:416
+#: ../../printerdrake.pm_.c:429
 #, c-format
 msgid "Detected %s"
 msgstr "偵測到 %s"
 
-#: ../../printerdrake.pm_.c:420 ../../printerdrake.pm_.c:451
-#: ../../printerdrake.pm_.c:470
+#: ../../printerdrake.pm_.c:433 ../../printerdrake.pm_.c:464
+#: ../../printerdrake.pm_.c:483
 #, c-format
 msgid "Printer on parallel port \\/*%s"
 msgstr "印表機位於並列埠 \\/*%s"
 
-#: ../../printerdrake.pm_.c:422 ../../printerdrake.pm_.c:453
-#: ../../printerdrake.pm_.c:475
+#: ../../printerdrake.pm_.c:435 ../../printerdrake.pm_.c:466
+#: ../../printerdrake.pm_.c:488
 #, c-format
 msgid "USB printer \\/*%s"
 msgstr "USB 印表機 \\/*%s"
 
-#: ../../printerdrake.pm_.c:424
+#: ../../printerdrake.pm_.c:437
 #, c-format
 msgid "Network printer \"%s\", port %s"
 msgstr "網路印表機 \"%s\"，連接埠 %s"
 
-#: ../../printerdrake.pm_.c:426
+#: ../../printerdrake.pm_.c:439
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "網路印表機 \"%s\"，位於 SMB/Windows 伺服器 \"%s\""
 
-#: ../../printerdrake.pm_.c:563
+#: ../../printerdrake.pm_.c:575 ../../printerdrake.pm_.c:600
+msgid "Local Printer"
+msgstr "本機印表機"
+
+#: ../../printerdrake.pm_.c:576
 msgid ""
 "No local printer found! To manually install a printer enter a device name/"
 "file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., "
@@ -7842,19 +7840,19 @@ msgstr ""
 "(並列埠：/dev/lp0，/dev/lp1，... 相當於 LPT1:，LPT2:...，\n"
 "第一台 USB 印表機是：/dev/usb/lp0，第二台：/dev/usb/lp1)。"
 
-#: ../../printerdrake.pm_.c:567
+#: ../../printerdrake.pm_.c:580
 msgid "You must enter a device or file name!"
 msgstr "您需要選擇或輸入該印表機名稱或裝置項目!"
 
-#: ../../printerdrake.pm_.c:578
+#: ../../printerdrake.pm_.c:591
 msgid "No printer found!"
 msgstr "找不到印表機！"
 
-#: ../../printerdrake.pm_.c:588
+#: ../../printerdrake.pm_.c:601
 msgid "Available printers"
 msgstr "可用的印表機"
 
-#: ../../printerdrake.pm_.c:592
+#: ../../printerdrake.pm_.c:605
 msgid ""
 "The following printer was auto-detected, if it is not the one you want to "
 "configure, enter a device name/file name in the input line"
@@ -7862,7 +7860,7 @@ msgstr ""
 "下面所列出的是使用自動偵測所找到的印表機。若是找到的項目\n"
 "並不是你所預期的，那請手動輸入裝置名稱/檔案名稱"
 
-#: ../../printerdrake.pm_.c:593
+#: ../../printerdrake.pm_.c:606
 msgid ""
 "Here is a list of all auto-detected printers. Please choose the printer you "
 "want to set up or enter a device name/file name in the input line"
@@ -7870,7 +7868,7 @@ msgstr ""
 "下面所列出的是使用自動偵測所找到的印表機。請選擇您要設定的\n"
 "印表機項目，或者是手動輸入裝置名稱/檔案名稱"
 
-#: ../../printerdrake.pm_.c:595
+#: ../../printerdrake.pm_.c:608
 msgid ""
 "The following printer was auto-detected. The configuration of the printer "
 "will work fully automatically. If your printer was not correctly detected or "
@@ -7881,7 +7879,7 @@ msgstr ""
 "都能夠自動完成而不需要另外設定。若是下面列出所找到的印表機\n"
 "並不是您所預期的，或者是你希望手動方式設定，請選擇『手動設定』。"
 
-#: ../../printerdrake.pm_.c:596
+#: ../../printerdrake.pm_.c:609
 msgid ""
 "Here is a list of all auto-detected printers. Please choose the printer you "
 "want to set up. The configuration of the printer will work fully "
@@ -7889,17 +7887,17 @@ msgid ""
 "customized printer configuration, turn on \"Manual configuration\"."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:598
+#: ../../printerdrake.pm_.c:611
 msgid ""
 "Please choose the port where your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr "請選擇您印表機的連接埠，或者是輸入該裝置的名稱"
 
-#: ../../printerdrake.pm_.c:599
+#: ../../printerdrake.pm_.c:612
 msgid "Please choose the port where your printer is connected to."
 msgstr "請選取印表機所連接的連接埠。"
 
-#: ../../printerdrake.pm_.c:601
+#: ../../printerdrake.pm_.c:614
 msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
@@ -7907,19 +7905,19 @@ msgstr ""
 " (並列埠：/dev/lp0，/dev/lp1，...... 相當於 LPT1:，LPT2:....\n"
 "第一台 USB 印表機是：/dev/usb/lp0，第二台：/dev/usb/lp1)。"
 
-#: ../../printerdrake.pm_.c:606
+#: ../../printerdrake.pm_.c:619
 msgid "You must choose/enter a printer/device!"
 msgstr "您需要選擇或輸入該印表機名稱或裝置項目!"
 
-#: ../../printerdrake.pm_.c:626
+#: ../../printerdrake.pm_.c:639
 msgid "Manual configuration"
 msgstr "手動組態設定"
 
-#: ../../printerdrake.pm_.c:680
+#: ../../printerdrake.pm_.c:693
 msgid "Remote lpd Printer Options"
 msgstr "遠端 lpd 印表機選項"
 
-#: ../../printerdrake.pm_.c:681
+#: ../../printerdrake.pm_.c:694
 msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
@@ -7928,46 +7926,46 @@ msgstr ""
 "印表服務的遠端列印伺服主機名稱，以及分享出來\n"
 "印表機名稱。"
 
-#: ../../printerdrake.pm_.c:682
+#: ../../printerdrake.pm_.c:695
 msgid "Remote host name"
 msgstr "遠端主機名稱"
 
-#: ../../printerdrake.pm_.c:683
+#: ../../printerdrake.pm_.c:696
 msgid "Remote printer name"
 msgstr "遠端印表機名稱"
 
-#: ../../printerdrake.pm_.c:686
+#: ../../printerdrake.pm_.c:699
 msgid "Remote host name missing!"
 msgstr "沒指定遠端主機名稱 !"
 
-#: ../../printerdrake.pm_.c:690
+#: ../../printerdrake.pm_.c:703
 msgid "Remote printer name missing!"
 msgstr "沒指定印表機名稱 !"
 
-#: ../../printerdrake.pm_.c:712 ../../printerdrake.pm_.c:1225
+#: ../../printerdrake.pm_.c:727 ../../printerdrake.pm_.c:1244
 #, c-format
 msgid "Detected model: %s %s"
 msgstr "偵測到的型號：%s %s"
 
-#: ../../printerdrake.pm_.c:790 ../../printerdrake.pm_.c:1030
+#: ../../printerdrake.pm_.c:805 ../../printerdrake.pm_.c:1045
 msgid "Scanning network..."
 msgstr "掃描網路中..."
 
-#: ../../printerdrake.pm_.c:799 ../../printerdrake.pm_.c:820
+#: ../../printerdrake.pm_.c:814 ../../printerdrake.pm_.c:835
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr "，印表機 \"%s\"，位於主機 \"%s\""
 
-#: ../../printerdrake.pm_.c:802 ../../printerdrake.pm_.c:823
+#: ../../printerdrake.pm_.c:817 ../../printerdrake.pm_.c:838
 #, c-format
 msgid "Printer \"%s\" on server \"%s\""
 msgstr "印表機 \"%s\"，位於 \"%s\""
 
-#: ../../printerdrake.pm_.c:843
+#: ../../printerdrake.pm_.c:858
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "網路芳鄰 (SMB, Windows 9x/NT) 印表機選項"
 
-#: ../../printerdrake.pm_.c:844
+#: ../../printerdrake.pm_.c:859
 msgid ""
 "To print to a SMB printer, you need to provide the SMB host name (Note! It "
 "may be different from its TCP/IP hostname!) and possibly the IP address of "
@@ -7979,7 +7977,7 @@ msgstr ""
 "有時還必須指定列印伺服器的 IP 位址、分享出來的印表\n"
 "機名稱、適當的使用者帳號與密碼，以及工作群組的資訊。"
 
-#: ../../printerdrake.pm_.c:845
+#: ../../printerdrake.pm_.c:860
 msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
@@ -7987,39 +7985,39 @@ msgstr ""
 "如果偵測出來的印表機是您所需要的，你可以選擇該項目，並輸入存取的使用者名稱、"
 "密碼，必要時並輸入群組名稱。"
 
-#: ../../printerdrake.pm_.c:846
+#: ../../printerdrake.pm_.c:861
 msgid "SMB server host"
 msgstr "網芳主機名稱”"
 
-#: ../../printerdrake.pm_.c:847
+#: ../../printerdrake.pm_.c:862
 msgid "SMB server IP"
 msgstr "網芳主機 IP"
 
-#: ../../printerdrake.pm_.c:848
+#: ../../printerdrake.pm_.c:863
 msgid "Share name"
 msgstr "印表機名稱"
 
-#: ../../printerdrake.pm_.c:851
+#: ../../printerdrake.pm_.c:866
 msgid "Workgroup"
 msgstr "工作群組"
 
-#: ../../printerdrake.pm_.c:853
+#: ../../printerdrake.pm_.c:868
 msgid "Auto-detected"
 msgstr "自動偵測"
 
-#: ../../printerdrake.pm_.c:864
+#: ../../printerdrake.pm_.c:879
 msgid "Either the server name or the server's IP must be given!"
 msgstr "伺服器的主機名稱或者是 IP 必須指定"
 
-#: ../../printerdrake.pm_.c:868
+#: ../../printerdrake.pm_.c:883
 msgid "Samba share name missing!"
 msgstr "Samba 分享的名稱沒指定 !"
 
-#: ../../printerdrake.pm_.c:874
+#: ../../printerdrake.pm_.c:889
 msgid "SECURITY WARNING!"
 msgstr "安全性警告"
 
-#: ../../printerdrake.pm_.c:875
+#: ../../printerdrake.pm_.c:890
 #, c-format
 msgid ""
 "You are about to set up printing to a Windows account with password. Due to "
@@ -8057,7 +8055,7 @@ msgstr ""
 "Printerdrake 程式內使用「%s」連線類型進行設定與列印。\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:885
+#: ../../printerdrake.pm_.c:900
 #, c-format
 msgid ""
 "Set up your Windows server to make the printer available under the IPP "
@@ -8068,7 +8066,7 @@ msgstr ""
 "請設定好您的 Windows 主機的服務，確認印表機能夠在 IPP 通訊協定上正常運作，以"
 "便於在 PrinterDrake 程式內使用 \"%s\" 連線能夠存取到。\n"
 
-#: ../../printerdrake.pm_.c:888
+#: ../../printerdrake.pm_.c:903
 msgid ""
 "Connect your printer to a Linux server and let your Windows machine(s) "
 "connect to it as a client.\n"
@@ -8080,11 +8078,11 @@ msgstr ""
 "\n"
 "您確定要繼續進行下去嗎？"
 
-#: ../../printerdrake.pm_.c:960
+#: ../../printerdrake.pm_.c:975
 msgid "NetWare Printer Options"
 msgstr "NetWare 印表機選項"
 
-#: ../../printerdrake.pm_.c:961
+#: ../../printerdrake.pm_.c:976
 msgid ""
 "To print on a NetWare printer, you need to provide the NetWare print server "
 "name (Note! it may be different from its TCP/IP hostname!) as well as the "
@@ -8096,37 +8094,37 @@ msgstr ""
 "的主機名稱可能並不相同)，還要有分享出來的列印\n"
 "佇列名稱，以及適當的使用者帳號與密碼。"
 
-#: ../../printerdrake.pm_.c:962
+#: ../../printerdrake.pm_.c:977
 msgid "Printer Server"
 msgstr "列印伺服器名稱"
 
-#: ../../printerdrake.pm_.c:963
+#: ../../printerdrake.pm_.c:978
 msgid "Print Queue Name"
 msgstr "列印佇列名稱"
 
-#: ../../printerdrake.pm_.c:968
+#: ../../printerdrake.pm_.c:983
 msgid "NCP server name missing!"
 msgstr "NCP 伺服器名稱沒指定!"
 
-#: ../../printerdrake.pm_.c:972
+#: ../../printerdrake.pm_.c:987
 msgid "NCP queue name missing!"
 msgstr "NCP 列印佇列名稱名稱沒指定"
 
-#: ../../printerdrake.pm_.c:1039 ../../printerdrake.pm_.c:1059
+#: ../../printerdrake.pm_.c:1054 ../../printerdrake.pm_.c:1074
 #, c-format
 msgid ", host \"%s\", port %s"
 msgstr "，主機 \"%s\"，連接埠 %s"
 
-#: ../../printerdrake.pm_.c:1042 ../../printerdrake.pm_.c:1062
+#: ../../printerdrake.pm_.c:1057 ../../printerdrake.pm_.c:1077
 #, c-format
 msgid "Host \"%s\", port %s"
 msgstr "主機 \"%s\"，連接埠 %s"
 
-#: ../../printerdrake.pm_.c:1082
+#: ../../printerdrake.pm_.c:1097
 msgid "TCP/Socket Printer Options"
 msgstr "TCP/Socket 印表機選項"
 
-#: ../../printerdrake.pm_.c:1084
+#: ../../printerdrake.pm_.c:1099
 msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) into the input fields."
@@ -8134,7 +8132,7 @@ msgstr ""
 "請由清單內選擇您預期的印表機項目，並且輸入主機名稱、\n"
 "IP等資訊，必要時請輸入該連結埠號 (預設使用 port 9100)。"
 
-#: ../../printerdrake.pm_.c:1085
+#: ../../printerdrake.pm_.c:1100
 msgid ""
 "To print to a TCP or socket printer, you need to provide the host name or IP "
 "of the printer and optionally the port number (default is 9100). On HP "
@@ -8148,19 +8146,19 @@ msgstr ""
 "就不一定為這個數值。建議您先閱讀印表機所提供的\n"
 "手冊，尋找出你目前使用這款印表機的相關硬體資訊。"
 
-#: ../../printerdrake.pm_.c:1090
+#: ../../printerdrake.pm_.c:1105
 msgid "Printer host name or IP missing!"
 msgstr "沒指定印表機主機名稱或是IP !"
 
-#: ../../printerdrake.pm_.c:1112
+#: ../../printerdrake.pm_.c:1127
 msgid "Printer host name or IP"
 msgstr "印表機主機名稱或是IP"
 
-#: ../../printerdrake.pm_.c:1160 ../../printerdrake.pm_.c:1162
+#: ../../printerdrake.pm_.c:1177 ../../printerdrake.pm_.c:1179
 msgid "Printer Device URI"
 msgstr "印表裝置的 URI"
 
-#: ../../printerdrake.pm_.c:1161
+#: ../../printerdrake.pm_.c:1178
 msgid ""
 "You can specify directly the URI to access the printer. The URI must fulfill "
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
@@ -8170,11 +8168,11 @@ msgstr ""
 "CUPS伺服器所在位址，或者是用 Foomatic 規格方式輸入。\n"
 "請注意，並不是所有的 URI 類型都能夠被所有的 spooler 支援。"
 
-#: ../../printerdrake.pm_.c:1176
+#: ../../printerdrake.pm_.c:1193
 msgid "A valid URI must be entered!"
 msgstr "必須輸入完整的 URI 位址！"
 
-#: ../../printerdrake.pm_.c:1515
+#: ../../printerdrake.pm_.c:1560
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
@@ -8182,27 +8180,27 @@ msgstr ""
 "每一個印表機都需要指定一個名稱 (比方像是 printer)。\n"
 "至於描述與位置欄位可以不必填入，因為這些欄位是註解。"
 
-#: ../../printerdrake.pm_.c:1516
+#: ../../printerdrake.pm_.c:1561
 msgid "Name of printer"
 msgstr "印表機名稱"
 
-#: ../../printerdrake.pm_.c:1518
+#: ../../printerdrake.pm_.c:1563
 msgid "Location"
 msgstr "位置"
 
-#: ../../printerdrake.pm_.c:1530 ../../printerdrake.pm_.c:1652
+#: ../../printerdrake.pm_.c:1575 ../../printerdrake.pm_.c:1697
 msgid "Reading printer database..."
 msgstr "正在讀取印表機資料 ..."
 
-#: ../../printerdrake.pm_.c:1534
+#: ../../printerdrake.pm_.c:1579
 msgid "Preparing printer database..."
 msgstr "正在準備印表機資料"
 
-#: ../../printerdrake.pm_.c:1631
+#: ../../printerdrake.pm_.c:1676
 msgid "Your printer model"
 msgstr "您的印表機型號"
 
-#: ../../printerdrake.pm_.c:1632
+#: ../../printerdrake.pm_.c:1677
 #, c-format
 msgid ""
 "Printerdrake has compared the model name resulting from the printer auto-"
@@ -8225,24 +8223,24 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../printerdrake.pm_.c:1637 ../../printerdrake.pm_.c:1640
+#: ../../printerdrake.pm_.c:1682 ../../printerdrake.pm_.c:1685
 msgid "The model is correct"
 msgstr "該型號正確"
 
-#: ../../printerdrake.pm_.c:1638 ../../printerdrake.pm_.c:1639
-#: ../../printerdrake.pm_.c:1642
+#: ../../printerdrake.pm_.c:1683 ../../printerdrake.pm_.c:1684
+#: ../../printerdrake.pm_.c:1687
 msgid "Select model manually"
 msgstr "手動選擇型號"
 
-#: ../../printerdrake.pm_.c:1659
+#: ../../printerdrake.pm_.c:1704
 msgid "Printer model selection"
 msgstr "印表機型號選擇"
 
-#: ../../printerdrake.pm_.c:1660
+#: ../../printerdrake.pm_.c:1705
 msgid "Which printer model do you have?"
 msgstr "您的印表機屬於那種型號？"
 
-#: ../../printerdrake.pm_.c:1661
+#: ../../printerdrake.pm_.c:1706
 msgid ""
 "\n"
 "\n"
@@ -8255,17 +8253,17 @@ msgstr ""
 "請檢視 PrinterDrake 程式所自動偵測到的印表機型號是否正確。\n"
 "您也可以尋找檢視下面的印表機清單。"
 
-#: ../../printerdrake.pm_.c:1664
+#: ../../printerdrake.pm_.c:1709
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
 msgstr "如果該印表機並未列出，請選擇相容或者是相信的印表機型號。"
 
-#: ../../printerdrake.pm_.c:1741
+#: ../../printerdrake.pm_.c:1786
 msgid "OKI winprinter configuration"
 msgstr "OKI Windows 印表機設定"
 
-#: ../../printerdrake.pm_.c:1742
+#: ../../printerdrake.pm_.c:1787
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they work only when "
@@ -8281,11 +8279,11 @@ msgstr ""
 "第一個連接埠上，以便於才能夠正在列印測試頁內容。\n"
 "否則列印功能將會無法正常工作。"
 
-#: ../../printerdrake.pm_.c:1785 ../../printerdrake.pm_.c:1812
+#: ../../printerdrake.pm_.c:1830 ../../printerdrake.pm_.c:1857
 msgid "Lexmark inkjet configuration"
 msgstr "Lexmark 噴墨印表機設定"
 
-#: ../../printerdrake.pm_.c:1786
+#: ../../printerdrake.pm_.c:1831
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
 "no printers on remote machines or print server boxes. Please connect your "
@@ -8297,7 +8295,7 @@ msgstr ""
 "印表機已經正確連結到您本地端電腦上，設定該印表機的\n"
 "連結位置。"
 
-#: ../../printerdrake.pm_.c:1813
+#: ../../printerdrake.pm_.c:1858
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -8319,11 +8317,11 @@ msgstr ""
 "的設定。然後使用 \"lexmarkmaintain\" 程式項目來列印噴頭\n"
 "校正的工作設定。"
 
-#: ../../printerdrake.pm_.c:1816
+#: ../../printerdrake.pm_.c:1861
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1817
+#: ../../printerdrake.pm_.c:1862
 msgid ""
 "Your printer belongs to the group of GDI laser printers (winprinters) sold "
 "by different manufacturers which uses the Zenographics ZJ-stream raster "
@@ -8346,7 +8344,7 @@ msgid ""
 "as root. After having done so you can print normally.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2040
+#: ../../printerdrake.pm_.c:2085
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -8360,33 +8358,33 @@ msgstr ""
 "您需要確定紙張的大小與墨水的種類設定都正確無誤。\n"
 "請注意一下，當使用高品質列印時所花費的時間會越久。"
 
-#: ../../printerdrake.pm_.c:2049
+#: ../../printerdrake.pm_.c:2094
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "%s 參數需要為整數 !"
 
-#: ../../printerdrake.pm_.c:2053
+#: ../../printerdrake.pm_.c:2098
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "%s 參數需要為整數"
 
-#: ../../printerdrake.pm_.c:2058
+#: ../../printerdrake.pm_.c:2103
 #, c-format
 msgid "Option %s out of range!"
 msgstr "%s 參數超出允許範圍"
 
-#: ../../printerdrake.pm_.c:2097
+#: ../../printerdrake.pm_.c:2142
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr "您要使用這台印表機 (\"%s\") 為預設印表機嗎？"
 
-#: ../../printerdrake.pm_.c:2120
+#: ../../printerdrake.pm_.c:2165
 msgid "Test pages"
 msgstr "列印測試頁"
 
-#: ../../printerdrake.pm_.c:2121
+#: ../../printerdrake.pm_.c:2166
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -8399,39 +8397,39 @@ msgstr ""
 "能夠會需要花費更久時間。\n"
 "一般情況來說，選擇標準的測試頁就很足夠了。"
 
-#: ../../printerdrake.pm_.c:2125
+#: ../../printerdrake.pm_.c:2170
 msgid "No test pages"
 msgstr "不列印測試頁"
 
-#: ../../printerdrake.pm_.c:2126
+#: ../../printerdrake.pm_.c:2171
 msgid "Print"
 msgstr "列印"
 
-#: ../../printerdrake.pm_.c:2183
+#: ../../printerdrake.pm_.c:2228
 msgid "Standard test page"
 msgstr "標準列印測試頁"
 
-#: ../../printerdrake.pm_.c:2186
+#: ../../printerdrake.pm_.c:2231
 msgid "Alternative test page (Letter)"
 msgstr "Letter 紙張列印測試頁"
 
-#: ../../printerdrake.pm_.c:2189
+#: ../../printerdrake.pm_.c:2234
 msgid "Alternative test page (A4)"
 msgstr "A4 紙張列印測試頁"
 
-#: ../../printerdrake.pm_.c:2191
+#: ../../printerdrake.pm_.c:2236
 msgid "Photo test page"
 msgstr "圖形列印測試頁"
 
-#: ../../printerdrake.pm_.c:2195
+#: ../../printerdrake.pm_.c:2240
 msgid "Do not print any test page"
 msgstr "不要列印測試頁"
 
-#: ../../printerdrake.pm_.c:2204 ../../printerdrake.pm_.c:2357
+#: ../../printerdrake.pm_.c:2249 ../../printerdrake.pm_.c:2402
 msgid "Printing test page(s)..."
 msgstr "正在列印測試頁..."
 
-#: ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2274
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -8446,7 +8444,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2233
+#: ../../printerdrake.pm_.c:2278
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
@@ -8454,15 +8452,15 @@ msgstr ""
 "測試頁已經被送到列印伺服程式了，接著可能需要花\n"
 "一點時間，印表機才會把結果印出來。\n"
 
-#: ../../printerdrake.pm_.c:2240
+#: ../../printerdrake.pm_.c:2285
 msgid "Did it work properly?"
 msgstr "列印正常嗎？"
 
-#: ../../printerdrake.pm_.c:2262 ../../printerdrake.pm_.c:3416
+#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3464
 msgid "Raw printer"
 msgstr "Raw 印表機"
 
-#: ../../printerdrake.pm_.c:2288
+#: ../../printerdrake.pm_.c:2333
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -8479,7 +8477,7 @@ msgstr ""
 "即可。您可以透過圖型介面程式簡單的選擇印表機項目，\n"
 "包含修改相關的列印選項。\n"
 
-#: ../../printerdrake.pm_.c:2290
+#: ../../printerdrake.pm_.c:2335
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
@@ -8489,8 +8487,8 @@ msgstr ""
 "它。\n"
 "但是這邊不提供所謂的檔案名稱，因為相關檔案的列印功能是由相關應用程式提供。\n"
 
-#: ../../printerdrake.pm_.c:2293 ../../printerdrake.pm_.c:2310
-#: ../../printerdrake.pm_.c:2320
+#: ../../printerdrake.pm_.c:2338 ../../printerdrake.pm_.c:2355
+#: ../../printerdrake.pm_.c:2365
 #, c-format
 msgid ""
 "\n"
@@ -8502,7 +8500,7 @@ msgstr ""
 "「%s」指令，能夠讓您修改某個設定列印工作項目的參數設定。\n"
 "簡單一點的方式就是在命令列加上您要填入的設定值，比方「%s <檔案>」。 "
 
-#: ../../printerdrake.pm_.c:2296 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2341 ../../printerdrake.pm_.c:2381
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -8513,7 +8511,7 @@ msgstr ""
 "所顯示的項目，請點選點選『列印選項清單』按鈕。%s%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2300
+#: ../../printerdrake.pm_.c:2345
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
@@ -8521,7 +8519,7 @@ msgstr ""
 "下面包含了目前印表機支援的選項清單:\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:2315
+#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2360
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -8530,8 +8528,8 @@ msgstr ""
 "要在終端機命令列環境列印檔案的話，您可以執行這個指令:\n"
 "\"%s <檔案>\"。\n"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:2317
-#: ../../printerdrake.pm_.c:2327
+#: ../../printerdrake.pm_.c:2352 ../../printerdrake.pm_.c:2362
+#: ../../printerdrake.pm_.c:2372
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
@@ -8542,13 +8540,13 @@ msgstr ""
 "但是這邊不提供所謂的檔案名稱，因為相關檔案的列印功能是由\n"
 "相關應用程式提供。\n"
 
-#: ../../printerdrake.pm_.c:2312 ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2357 ../../printerdrake.pm_.c:2367
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
 msgstr "要獲得目前這台印表機可用的相關參數選項，請點選『列印選項清單』按鈕。"
 
-#: ../../printerdrake.pm_.c:2325
+#: ../../printerdrake.pm_.c:2370
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -8557,7 +8555,7 @@ msgstr ""
 "要在終端機命令列環境列印檔案的話，您可以執行這個指令: \"%s <檔案>\" 或者是 "
 "\"%s <檔案>\"。\n"
 
-#: ../../printerdrake.pm_.c:2329
+#: ../../printerdrake.pm_.c:2374
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
 "handling printing jobs.\n"
@@ -8572,7 +8570,7 @@ msgstr ""
 "您應該可以找到一個命名為 \"停止印表機!\" 的項目。當您\n"
 "點選該項目後，目前正在列印的工作都會立即暫停。\n"
 
-#: ../../printerdrake.pm_.c:2333
+#: ../../printerdrake.pm_.c:2378
 #, c-format
 msgid ""
 "\n"
@@ -8585,40 +8583,40 @@ msgstr ""
 "的參數設定。簡單一點的方式就是在命令列加上您要填入的設定值，\n"
 "比方 \"%s <檔案>\"。\n"
 
-#: ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2388
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2344
+#: ../../printerdrake.pm_.c:2389
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2346
+#: ../../printerdrake.pm_.c:2391
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2347
+#: ../../printerdrake.pm_.c:2392
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "使用「%s」印表機進行列印"
 
-#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2353
-#: ../../printerdrake.pm_.c:2354 ../../printerdrake.pm_.c:2355
-#: ../../printerdrake.pm_.c:3400 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:2395 ../../printerdrake.pm_.c:2398
+#: ../../printerdrake.pm_.c:2399 ../../printerdrake.pm_.c:2400
+#: ../../printerdrake.pm_.c:3448 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
 msgid "Close"
 msgstr "關閉"
 
-#: ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2398
 msgid "Print option list"
 msgstr "列印選項清單"
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2418
 #, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
@@ -8632,7 +8630,7 @@ msgid ""
 "Do not use \"scannerdrake\" for this device!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2394
+#: ../../printerdrake.pm_.c:2439
 msgid ""
 "Your printer was configured automatically to give you access to the photo "
 "card drives from your PC. Now you can access your photo cards using the "
@@ -8645,17 +8643,17 @@ msgid ""
 "of the file lists."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2416 ../../printerdrake.pm_.c:2875
-#: ../../printerdrake.pm_.c:3170
+#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2923
+#: ../../printerdrake.pm_.c:3218
 msgid "Reading printer data..."
 msgstr "讀取印表機資料 ..."
 
-#: ../../printerdrake.pm_.c:2436 ../../printerdrake.pm_.c:2464
-#: ../../printerdrake.pm_.c:2499
+#: ../../printerdrake.pm_.c:2481 ../../printerdrake.pm_.c:2509
+#: ../../printerdrake.pm_.c:2544
 msgid "Transfer printer configuration"
 msgstr "印表機傳送設定"
 
-#: ../../printerdrake.pm_.c:2437
+#: ../../printerdrake.pm_.c:2482
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -8670,7 +8668,7 @@ msgstr ""
 "不過不包含傳送要列印的工作項目功能。\n"
 "另外並不是所有的列印工作都能夠被傳輸過來，因為下面原因：\n"
 
-#: ../../printerdrake.pm_.c:2440
+#: ../../printerdrake.pm_.c:2485
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
@@ -8678,7 +8676,7 @@ msgstr ""
 "CUPS 目前並不支援位於Novell主機上的印表機，包含不使用free-formed\n"
 "命令傳送列印資料的印表機。\n"
 
-#: ../../printerdrake.pm_.c:2442
+#: ../../printerdrake.pm_.c:2487
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
@@ -8686,11 +8684,11 @@ msgstr ""
 "PDQ 僅支援本地端印表機，或者是遠端 LPD 的印表機，以及\n"
 "TCP/Socket 印表機類型。\n"
 
-#: ../../printerdrake.pm_.c:2444
+#: ../../printerdrake.pm_.c:2489
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "PD 與 LPRng 不支援 IPP 類型的印表機。\n"
 
-#: ../../printerdrake.pm_.c:2446
+#: ../../printerdrake.pm_.c:2491
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
@@ -8698,7 +8696,7 @@ msgstr ""
 "除此之外，queues 無法透過該程式建立，或者是 \"foomatic-configure\"\n"
 "無法進行傳輸。"
 
-#: ../../printerdrake.pm_.c:2447
+#: ../../printerdrake.pm_.c:2492
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
@@ -8708,7 +8706,7 @@ msgstr ""
 "印表機應該已經透過廠商所提供的 PPD 檔案內容設定好了。或者是\n"
 "原生性的 CUPS 驅動程式無法被進行轉換動作。"
 
-#: ../../printerdrake.pm_.c:2448
+#: ../../printerdrake.pm_.c:2493
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
@@ -8717,15 +8715,15 @@ msgstr ""
 "\n"
 "請點選標記您要傳送的印表機項目，然後點選 \"傳送\" 即可。"
 
-#: ../../printerdrake.pm_.c:2451
+#: ../../printerdrake.pm_.c:2496
 msgid "Do not transfer printers"
 msgstr "不傳送印表機"
 
-#: ../../printerdrake.pm_.c:2452 ../../printerdrake.pm_.c:2469
+#: ../../printerdrake.pm_.c:2497 ../../printerdrake.pm_.c:2514
 msgid "Transfer"
 msgstr "傳送"
 
-#: ../../printerdrake.pm_.c:2465
+#: ../../printerdrake.pm_.c:2510
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -8736,11 +8734,11 @@ msgstr ""
 "請點選『傳送』覆蓋內容。\n"
 "您也可以另外輸入一個名稱，或者是略過這台印表機。"
 
-#: ../../printerdrake.pm_.c:2473
+#: ../../printerdrake.pm_.c:2518
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr "印表機的名稱應該只有包含英文字母、數字與底線這類字元"
 
-#: ../../printerdrake.pm_.c:2478
+#: ../../printerdrake.pm_.c:2523
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -8749,45 +8747,45 @@ msgstr ""
 "這台 \"%s\" 印表機已經存在了，\n"
 "您確定要覆蓋這台印表機的組態設定嗎？"
 
-#: ../../printerdrake.pm_.c:2486
+#: ../../printerdrake.pm_.c:2531
 msgid "New printer name"
 msgstr "新印表機名稱"
 
-#: ../../printerdrake.pm_.c:2489
+#: ../../printerdrake.pm_.c:2534
 #, c-format
 msgid "Transferring %s..."
 msgstr "正在傳送 %s ..."
 
-#: ../../printerdrake.pm_.c:2500
+#: ../../printerdrake.pm_.c:2545
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2510
+#: ../../printerdrake.pm_.c:2555
 msgid "Refreshing printer data..."
 msgstr "正在更新印表機資料 ..."
 
-#: ../../printerdrake.pm_.c:2518 ../../printerdrake.pm_.c:2590
-#: ../../printerdrake.pm_.c:2602
+#: ../../printerdrake.pm_.c:2563 ../../printerdrake.pm_.c:2638
+#: ../../printerdrake.pm_.c:2650
 msgid "Configuration of a remote printer"
 msgstr "設定遠端印表機"
 
-#: ../../printerdrake.pm_.c:2519
+#: ../../printerdrake.pm_.c:2564
 msgid "Starting network..."
 msgstr "啟動網路中 ..."
 
-#: ../../printerdrake.pm_.c:2554 ../../printerdrake.pm_.c:2558
-#: ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2599 ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2605
 msgid "Configure the network now"
 msgstr "立即設定網路"
 
-#: ../../printerdrake.pm_.c:2555
+#: ../../printerdrake.pm_.c:2600
 msgid "Network functionality not configured"
 msgstr "目前網路功能尚未設定"
 
-#: ../../printerdrake.pm_.c:2556
+#: ../../printerdrake.pm_.c:2601
 msgid ""
 "You are going to configure a remote printer. This needs working network "
 "access, but your network is not configured yet. If you go on without network "
@@ -8799,11 +8797,11 @@ msgstr ""
 "目繼續進行下面的步驟的話，關於設定使用遠端印表機功能的項目將無法設定。您打算"
 "要怎麼作呢？"
 
-#: ../../printerdrake.pm_.c:2559
+#: ../../printerdrake.pm_.c:2604
 msgid "Go on without configuring the network"
 msgstr "略過網路設定項目繼續進行下面的步驟"
 
-#: ../../printerdrake.pm_.c:2592
+#: ../../printerdrake.pm_.c:2640
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network gets accessable after booting your "
@@ -8818,7 +8816,7 @@ msgstr ""
 "的設定，您也可以透過 Mandrake 控制台程式，在『硬體』內的\n"
 "『印表機』項目來進行設定"
 
-#: ../../printerdrake.pm_.c:2593
+#: ../../printerdrake.pm_.c:2641
 msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
@@ -8828,24 +8826,24 @@ msgstr ""
 "請檢查一下您的設定，甚至包含您的硬體是否設定正確無誤。\n"
 "當檢查完畢後，再重新設定遠端列印的相關項目。"
 
-#: ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2651
 msgid "Restarting printing system..."
 msgstr "正在重新啟動列印系統服務 ..."
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2689
 msgid "high"
 msgstr "高"
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2689
 msgid "paranoid"
 msgstr "瘋狂狀態"
 
-#: ../../printerdrake.pm_.c:2642
+#: ../../printerdrake.pm_.c:2690
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr "在 %s 安全等級環境下正在安裝列印服務系統項目"
 
-#: ../../printerdrake.pm_.c:2643
+#: ../../printerdrake.pm_.c:2691
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -8870,11 +8868,11 @@ msgstr ""
 "\n"
 "您確定要開始設定這台機器上的列印項目設定嗎？"
 
-#: ../../printerdrake.pm_.c:2675
+#: ../../printerdrake.pm_.c:2723
 msgid "Starting the printing system at boot time"
 msgstr "於開機時啟動列印服務系統"
 
-#: ../../printerdrake.pm_.c:2676
+#: ../../printerdrake.pm_.c:2724
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -8895,59 +8893,59 @@ msgstr ""
 "您希望這邊能夠設定在開機時能夠預設啟動列印\n"
 "服務的項目嗎？"
 
-#: ../../printerdrake.pm_.c:2700 ../../printerdrake.pm_.c:2741
-#: ../../printerdrake.pm_.c:2780 ../../printerdrake.pm_.c:2822
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2789
+#: ../../printerdrake.pm_.c:2828 ../../printerdrake.pm_.c:2870
+#: ../../printerdrake.pm_.c:2991
 msgid "Checking installed software..."
 msgstr "正在檢查已經安裝的軟體"
 
-#: ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2794
 msgid "Removing LPRng..."
 msgstr "正在移除 LPRng..."
 
-#: ../../printerdrake.pm_.c:2785
+#: ../../printerdrake.pm_.c:2833
 msgid "Removing LPD..."
 msgstr "正在移除 LPD..."
 
-#: ../../printerdrake.pm_.c:2858
+#: ../../printerdrake.pm_.c:2906
 msgid "Select Printer Spooler"
 msgstr "選擇印表列印系統"
 
-#: ../../printerdrake.pm_.c:2859
+#: ../../printerdrake.pm_.c:2907
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "您打算用那一套列印系統？"
 
-#: ../../printerdrake.pm_.c:2895
+#: ../../printerdrake.pm_.c:2943
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "正在設定「%s」印表機中 ..."
 
-#: ../../printerdrake.pm_.c:2909
+#: ../../printerdrake.pm_.c:2957
 msgid "Installing Foomatic..."
 msgstr "正在安裝 Foomatic 套件..."
 
-#: ../../printerdrake.pm_.c:2979 ../../printerdrake.pm_.c:3020
-#: ../../printerdrake.pm_.c:3417 ../../printerdrake.pm_.c:3490
+#: ../../printerdrake.pm_.c:3027 ../../printerdrake.pm_.c:3068
+#: ../../printerdrake.pm_.c:3465 ../../printerdrake.pm_.c:3538
 msgid "Printer options"
 msgstr "印表機選項"
 
-#: ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3037
 msgid "Preparing Printerdrake..."
 msgstr "正在準備 Printerdrake 印表機設定精靈..."
 
-#: ../../printerdrake.pm_.c:3007 ../../printerdrake.pm_.c:3580
+#: ../../printerdrake.pm_.c:3055 ../../printerdrake.pm_.c:3628
 msgid "Configuring applications..."
 msgstr "正在設定應用程式..."
 
-#: ../../printerdrake.pm_.c:3027
+#: ../../printerdrake.pm_.c:3075
 msgid "Would you like to configure printing?"
 msgstr "您要設定印表機列印項目嗎？"
 
-#: ../../printerdrake.pm_.c:3039
+#: ../../printerdrake.pm_.c:3087
 msgid "Printing system: "
 msgstr "列印系統："
 
-#: ../../printerdrake.pm_.c:3099
+#: ../../printerdrake.pm_.c:3147
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -8959,7 +8957,7 @@ msgstr ""
 "要檢視關於這台印表機的資訊，或者是設定讓這台印表機在\n"
 "Star Office/OpenOffice.org/GIMP 內成一台可被使用的 CUPS 服務主機。"
 
-#: ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3148
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -8968,28 +8966,28 @@ msgstr ""
 "下列的印表機都已經設定過了，您可以點選其中一個項目，\n"
 "可以查看內容資訊或者是修改內容設定，包含設定為預設印表機。"
 
-#: ../../printerdrake.pm_.c:3127
+#: ../../printerdrake.pm_.c:3175
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "更新印表機清單 (重新尋找遠端可用的所有 CUPS 印表機)"
 
-#: ../../printerdrake.pm_.c:3145
+#: ../../printerdrake.pm_.c:3193
 msgid "Change the printing system"
 msgstr "變更列印系統"
 
-#: ../../printerdrake.pm_.c:3150 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3198 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "一般模式"
 
-#: ../../printerdrake.pm_.c:3310 ../../printerdrake.pm_.c:3360
-#: ../../printerdrake.pm_.c:3573
+#: ../../printerdrake.pm_.c:3358 ../../printerdrake.pm_.c:3408
+#: ../../printerdrake.pm_.c:3621
 msgid "Do you want to configure another printer?"
 msgstr "您還需要設定另外一台印表機嗎？"
 
-#: ../../printerdrake.pm_.c:3395
+#: ../../printerdrake.pm_.c:3443
 msgid "Modify printer configuration"
 msgstr "修改印表機設定"
 
-#: ../../printerdrake.pm_.c:3397
+#: ../../printerdrake.pm_.c:3445
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -8998,103 +8996,103 @@ msgstr ""
 "印表機 %s\n"
 "您要修改這個印表機的那個項目？"
 
-#: ../../printerdrake.pm_.c:3401
+#: ../../printerdrake.pm_.c:3449
 msgid "Do it!"
 msgstr "做吧 !"
 
-#: ../../printerdrake.pm_.c:3406 ../../printerdrake.pm_.c:3461
+#: ../../printerdrake.pm_.c:3454 ../../printerdrake.pm_.c:3509
 msgid "Printer connection type"
 msgstr "印表機連線方式"
 
-#: ../../printerdrake.pm_.c:3407 ../../printerdrake.pm_.c:3465
+#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3513
 msgid "Printer name, description, location"
 msgstr "印表機名稱,描述,位置"
 
-#: ../../printerdrake.pm_.c:3409 ../../printerdrake.pm_.c:3483
+#: ../../printerdrake.pm_.c:3457 ../../printerdrake.pm_.c:3531
 msgid "Printer manufacturer, model, driver"
 msgstr "印表機廠商,型號,驅動程式"
 
-#: ../../printerdrake.pm_.c:3410 ../../printerdrake.pm_.c:3484
+#: ../../printerdrake.pm_.c:3458 ../../printerdrake.pm_.c:3532
 msgid "Printer manufacturer, model"
 msgstr "印表機廠商,型號"
 
-#: ../../printerdrake.pm_.c:3419 ../../printerdrake.pm_.c:3494
+#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3542
 msgid "Set this printer as the default"
 msgstr "使用這台印表機為預設印表機"
 
-#: ../../printerdrake.pm_.c:3421 ../../printerdrake.pm_.c:3499
+#: ../../printerdrake.pm_.c:3469 ../../printerdrake.pm_.c:3547
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "新增這台印表機至 Star Office/OpenOffice.org/GIMP 內"
 
-#: ../../printerdrake.pm_.c:3422 ../../printerdrake.pm_.c:3508
+#: ../../printerdrake.pm_.c:3470 ../../printerdrake.pm_.c:3556
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "移除位於 Star Office/OpenOffice.org/GIMP 的印表機"
 
-#: ../../printerdrake.pm_.c:3423 ../../printerdrake.pm_.c:3517
+#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3565
 msgid "Print test pages"
 msgstr "列印測試頁..."
 
-#: ../../printerdrake.pm_.c:3424 ../../printerdrake.pm_.c:3519
+#: ../../printerdrake.pm_.c:3472 ../../printerdrake.pm_.c:3567
 msgid "Know how to use this printer"
 msgstr "瞭解如何使用這台印表機"
 
-#: ../../printerdrake.pm_.c:3426 ../../printerdrake.pm_.c:3521
+#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3569
 msgid "Remove printer"
 msgstr "刪除印表機"
 
-#: ../../printerdrake.pm_.c:3472
+#: ../../printerdrake.pm_.c:3520
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "正在刪除舊有印表機 \"%s\" ..."
 
-#: ../../printerdrake.pm_.c:3497
+#: ../../printerdrake.pm_.c:3545
 msgid "Default printer"
 msgstr "預設印表機"
 
-#: ../../printerdrake.pm_.c:3498
+#: ../../printerdrake.pm_.c:3546
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "這台印表機 \"%s\" 將會被設定成為預設印表機。"
 
-#: ../../printerdrake.pm_.c:3502 ../../printerdrake.pm_.c:3505
+#: ../../printerdrake.pm_.c:3550 ../../printerdrake.pm_.c:3553
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "新增印表機至 Star Office/OpenOffice.org/GIMP 內"
 
-#: ../../printerdrake.pm_.c:3503
+#: ../../printerdrake.pm_.c:3551
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "這台印表機 \"%s\" 已經成功的新增於 Star Office/OpenOffice.org/GIMP 內。"
 
-#: ../../printerdrake.pm_.c:3506
+#: ../../printerdrake.pm_.c:3554
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr "無法新增印表機 \"%s\" 到 Star Office/OpenOffice.org/GIMP 內。"
 
-#: ../../printerdrake.pm_.c:3511 ../../printerdrake.pm_.c:3514
+#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "移除 Star Office/OpenOffice.org/GIMP 內的印表機"
 
-#: ../../printerdrake.pm_.c:3512
+#: ../../printerdrake.pm_.c:3560
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
 msgstr "已經成功的將 Star Office/OpenOffice.org/GIMP 的印表機 \"%s\" 移除。"
 
-#: ../../printerdrake.pm_.c:3515
+#: ../../printerdrake.pm_.c:3563
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "無法移除在 Star Office/OpenOffice.org/GIMP 的印表機 \"%s\"。"
 
-#: ../../printerdrake.pm_.c:3523
+#: ../../printerdrake.pm_.c:3571
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "您確定要刪除 \"%s\" 印表機嗎？"
 
-#: ../../printerdrake.pm_.c:3527
+#: ../../printerdrake.pm_.c:3575
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "移除「%s」印表機中 ..."
@@ -9191,23 +9189,47 @@ msgstr "呼叫 mkraid 失敗 (也許是 raidtools 沒安裝所導致的)"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "分割區數目不足以用來設定成為階層 %d 的磁碟陣列\n"
 
+#: ../../security/main.pm_.c:35
+msgid ""
+"Standard: This is the standard security recommended for a computer that will "
+"be used to connect\n"
+"               to the Internet as a client.\n"
+"\n"
+"High:       There are already some restrictions, and more automatic checks "
+"are run every night.\n"
+"\n"
+"Higher:    The security is now high enough to use the system as a server "
+"which can accept\n"
+"              connections from many clients. If your machine is only a "
+"client on the Internet, you\n"
+"\t      should choose a lower level.\n"
+"\n"
+"Paranoid:  This is similar to the previous level, but the system is entirely "
+"closed and security\n"
+"                features are at their maximum\n"
+"\n"
+"Security Administrator:\n"
+"               If the 'Security Alerts' option is set, security alerts will "
+"be sent to this user (username or\n"
+"\t       email)"
+msgstr ""
+
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
 msgstr "安全等級:"
 
 #: ../../security/main.pm_.c:74
-#, fuzzy
 msgid "Security Alerts:"
-msgstr "安全等級"
+msgstr "安全警示："
 
 #: ../../security/main.pm_.c:83
 msgid "Security Administrator:"
 msgstr "安全性管理者:"
 
 #: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, fuzzy, c-format
+#, c-format
 msgid " (default: %s)"
-msgstr " (預設開機)"
+msgstr " (預設：%s)"
 
 #: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
 #: ../../security/main.pm_.c:179
@@ -9216,15 +9238,25 @@ msgid ""
 "system security. If you need explanations, click on Help.\n"
 msgstr ""
 
+#: ../../security/main.pm_.c:226
+msgid "Network Options"
+msgstr "網路選項"
+
+#: ../../security/main.pm_.c:235
+msgid "System Options"
+msgstr "系統選項"
+
+#: ../../security/main.pm_.c:242
+msgid "Periodic Checks"
+msgstr "週期性檢查"
+
 #: ../../security/main.pm_.c:256
-#, fuzzy
 msgid "Please wait, setting security level..."
-msgstr "設定安全等級"
+msgstr "請稍後，設定安全等級中..."
 
 #: ../../security/main.pm_.c:262
-#, fuzzy
 msgid "Please wait, setting security options..."
-msgstr "正在準備安裝工作..."
+msgstr "請稍後，設定安全選項..."
 
 #: ../../services.pm_.c:14
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -9686,8 +9718,8 @@ msgstr ""
 
 #: ../../share/advertising/09-server.pl_.c:10
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of your "
-"mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your machine into a powerful Linux server with a few clicks of "
+"your mouse: Web server, mail, firewall, router, file and print server, ..."
 msgstr ""
 "透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。\n"
 "其中像是: Web Server、Mail Server、Firewall、Router、Printer..."
@@ -9813,7 +9845,7 @@ msgid ""
 "MandrakeClub!"
 msgstr ""
 
-#: ../../standalone.pm_.c:41
+#: ../../standalone.pm_.c:42
 msgid "Installing packages..."
 msgstr "正在安裝套件..."
 
@@ -9911,9 +9943,8 @@ msgid "<-- Del User"
 msgstr "<-- 刪除使用者"
 
 #: ../../standalone/drakTermServ_.c:694
-#, fuzzy
 msgid "No net boot images created!"
-msgstr "網路開機映像檔"
+msgstr "並未建立網路開機映像檔"
 
 #: ../../standalone/drakTermServ_.c:710
 msgid "Add Client -->"
@@ -9928,9 +9959,8 @@ msgid "dhcpd Config..."
 msgstr "dhcpd 設定..."
 
 #: ../../standalone/drakTermServ_.c:873
-#, fuzzy
 msgid "dhcpd Server Configuration"
-msgstr "進階設定模式"
+msgstr "dhcpd 服務主機設定"
 
 #: ../../standalone/drakTermServ_.c:874
 msgid ""
@@ -10033,7 +10063,7 @@ msgstr ""
 "\n"
 "自動安裝內可用的參數項目都在左邊的區段內"
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:484
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "恭喜!!"
@@ -10384,11 +10414,12 @@ msgstr ""
 "現在"
 
 #: ../../standalone/drakbackup_.c:1786
-#, fuzzy
 msgid ""
 "Other (not drakbackup)\n"
 "keys in place already"
-msgstr "認證憑證檔案已經存在"
+msgstr ""
+"其他 (非 drakbackup)\n"
+"認證憑證檔案已經存在"
 
 #: ../../standalone/drakbackup_.c:1790
 msgid "Please enter the host name or IP."
@@ -11042,7 +11073,7 @@ msgid "Previous"
 msgstr "上一步"
 
 #: ../../standalone/drakbackup_.c:3941 ../../standalone/drakbackup_.c:4027
-#: ../../standalone/logdrake_.c:223
+#: ../../standalone/logdrake_.c:224
 msgid "Save"
 msgstr "儲存"
 
@@ -11814,93 +11845,93 @@ msgstr "Etnernet 介面卡"
 msgid "DHCP Client"
 msgstr "DHCP 用戶端"
 
-#: ../../standalone/drakfloppy_.c:63
+#: ../../standalone/drakfloppy_.c:64
 msgid "usage: drakfloppy\n"
 msgstr "用法：drakfloppy\n"
 
-#: ../../standalone/drakfloppy_.c:67
+#: ../../standalone/drakfloppy_.c:68
 msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
-#: ../../standalone/drakfloppy_.c:68
+#: ../../standalone/drakfloppy_.c:69
 msgid "Module name"
 msgstr "模組名稱"
 
-#: ../../standalone/drakfloppy_.c:68
+#: ../../standalone/drakfloppy_.c:69
 msgid "Size"
 msgstr "大小"
 
-#: ../../standalone/drakfloppy_.c:73
+#: ../../standalone/drakfloppy_.c:74
 msgid "drakfloppy"
 msgstr "drakfloppy 製作開機磁片"
 
-#: ../../standalone/drakfloppy_.c:90
+#: ../../standalone/drakfloppy_.c:91
 msgid "boot disk creation"
 msgstr "製作開機磁片"
 
-#: ../../standalone/drakfloppy_.c:98 ../../standalone/drakfloppy_.c:111
+#: ../../standalone/drakfloppy_.c:99 ../../standalone/drakfloppy_.c:112
 msgid "default"
 msgstr "預設"
 
-#: ../../standalone/drakfloppy_.c:114
+#: ../../standalone/drakfloppy_.c:115
 #, c-format
 msgid "DrakFloppy Error: %s"
 msgstr "DrakFloppy 錯誤：%s"
 
-#: ../../standalone/drakfloppy_.c:125
+#: ../../standalone/drakfloppy_.c:126
 msgid "kernel version"
 msgstr "核心版本"
 
-#: ../../standalone/drakfloppy_.c:131
+#: ../../standalone/drakfloppy_.c:132
 msgid "General"
 msgstr "一般"
 
-#: ../../standalone/drakfloppy_.c:136
+#: ../../standalone/drakfloppy_.c:137
 msgid "Expert Area"
 msgstr "專家區域"
 
-#: ../../standalone/drakfloppy_.c:139
+#: ../../standalone/drakfloppy_.c:140
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd 選項"
 
-#: ../../standalone/drakfloppy_.c:140
+#: ../../standalone/drakfloppy_.c:141
 msgid "Add a module"
 msgstr "新增模組"
 
-#: ../../standalone/drakfloppy_.c:160
+#: ../../standalone/drakfloppy_.c:161
 msgid "force"
 msgstr "強迫"
 
-#: ../../standalone/drakfloppy_.c:161
+#: ../../standalone/drakfloppy_.c:162
 msgid "if needed"
 msgstr "當需要時"
 
-#: ../../standalone/drakfloppy_.c:162
+#: ../../standalone/drakfloppy_.c:163
 msgid "omit scsi modules"
 msgstr "省略 scsi 模組"
 
-#: ../../standalone/drakfloppy_.c:163
+#: ../../standalone/drakfloppy_.c:164
 msgid "omit raid modules"
 msgstr "省略 raid 模組"
 
-#: ../../standalone/drakfloppy_.c:199
+#: ../../standalone/drakfloppy_.c:200
 msgid "Remove a module"
 msgstr "移除模組"
 
-#: ../../standalone/drakfloppy_.c:221
+#: ../../standalone/drakfloppy_.c:222
 msgid "Output"
 msgstr "輸出"
 
-#: ../../standalone/drakfloppy_.c:233
+#: ../../standalone/drakfloppy_.c:234
 msgid "Build the disk"
 msgstr "建立開機磁片"
 
-#: ../../standalone/drakfloppy_.c:376
+#: ../../standalone/drakfloppy_.c:377
 #, c-format
 msgid "Be sure a media is present for the device %s"
 msgstr "請確定裝置 %s 內已放入磁碟片"
 
-#: ../../standalone/drakfloppy_.c:381
+#: ../../standalone/drakfloppy_.c:382
 #, c-format
 msgid ""
 "There is no medium or it is write-protected for device %s.\n"
@@ -11909,12 +11940,12 @@ msgstr ""
 "在裝置 %s 內找不到磁碟片，或者是磁片防寫。\n"
 "請放入一張磁碟片。"
 
-#: ../../standalone/drakfloppy_.c:383
+#: ../../standalone/drakfloppy_.c:384
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "無法建立另一行程：%s"
 
-#: ../../standalone/drakfloppy_.c:387
+#: ../../standalone/drakfloppy_.c:388
 #, c-format
 msgid ""
 "Unable to close properly mkbootdisk: \n"
@@ -12121,19 +12152,19 @@ msgstr "由您的系統移除該字體檔案"
 msgid "Post Uninstall"
 msgstr "後續反安裝設定"
 
-#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:188
+#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:184
 msgid "Internet Connection Sharing"
 msgstr "Internet 連線分享"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:115
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "抱歉，目前只有支援使用 2.4 的核心版本。"
 
-#: ../../standalone/drakgw_.c:130
+#: ../../standalone/drakgw_.c:126
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Internet 連線分享目前處於可用狀態"
 
-#: ../../standalone/drakgw_.c:131
+#: ../../standalone/drakgw_.c:127
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -12143,31 +12174,31 @@ msgstr ""
 "目前 Internet 連線分享的設定已經完成了.. 目前已經可用了..\n"
 "您目前打算要做什麼呢？"
 
-#: ../../standalone/drakgw_.c:135
+#: ../../standalone/drakgw_.c:131
 msgid "disable"
 msgstr "關閉"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "dismiss"
 msgstr "取消"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "reconfigure"
 msgstr "重新設定"
 
-#: ../../standalone/drakgw_.c:138
+#: ../../standalone/drakgw_.c:134
 msgid "Disabling servers..."
 msgstr "正在關閉伺服器..."
 
-#: ../../standalone/drakgw_.c:146
+#: ../../standalone/drakgw_.c:142
 msgid "Internet connection sharing is now disabled."
 msgstr "Internet 連線共享目前關閉了。"
 
-#: ../../standalone/drakgw_.c:155
+#: ../../standalone/drakgw_.c:151
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Internet 連線共享目前關閉了。"
 
-#: ../../standalone/drakgw_.c:156
+#: ../../standalone/drakgw_.c:152
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -12178,19 +12209,19 @@ msgstr ""
 "\n"
 "您希望要處理那個？"
 
-#: ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:156
 msgid "enable"
 msgstr "開啟"
 
-#: ../../standalone/drakgw_.c:167
+#: ../../standalone/drakgw_.c:163
 msgid "Enabling servers..."
 msgstr "開啟伺服器中..."
 
-#: ../../standalone/drakgw_.c:172
+#: ../../standalone/drakgw_.c:168
 msgid "Internet connection sharing is now enabled."
 msgstr "Internet 連線工想目前開啟了。"
 
-#: ../../standalone/drakgw_.c:189
+#: ../../standalone/drakgw_.c:185
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -12204,31 +12235,31 @@ msgstr ""
 "連上 Internet。請注意: 您需要另外一張網路卡以便\n"
 "於提供區域網路電腦連線存取分享使用。"
 
-#: ../../standalone/drakgw_.c:215
+#: ../../standalone/drakgw_.c:211
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "介面 %s (使用 %s 模組)"
 
-#: ../../standalone/drakgw_.c:216
+#: ../../standalone/drakgw_.c:212
 #, c-format
 msgid "Interface %s"
 msgstr "介面 %s"
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:220
 msgid "No network adapter on your system!"
 msgstr "您系統並沒有網路卡存在"
 
-#: ../../standalone/drakgw_.c:225
+#: ../../standalone/drakgw_.c:221
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
 msgstr "您系統偵測不到有網路卡的存在，請重新執行硬體設定工具。"
 
-#: ../../standalone/drakgw_.c:231
+#: ../../standalone/drakgw_.c:227
 msgid "Network interface"
 msgstr "網路介面"
 
-#: ../../standalone/drakgw_.c:232
+#: ../../standalone/drakgw_.c:228
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -12243,17 +12274,17 @@ msgstr ""
 "\n"
 "現在要進行這張網路卡與區域網路的連線組態設定。"
 
-#: ../../standalone/drakgw_.c:241
+#: ../../standalone/drakgw_.c:237
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr "請選擇要連線到區域網路內的網路卡。"
 
-#: ../../standalone/drakgw_.c:259
+#: ../../standalone/drakgw_.c:255
 msgid "Network interface already configured"
 msgstr "網路介面已經設定完成"
 
-#: ../../standalone/drakgw_.c:260
+#: ../../standalone/drakgw_.c:256
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -12268,15 +12299,15 @@ msgstr ""
 "\n"
 "如果您有特殊需求，可以選擇手動方式設定。"
 
-#: ../../standalone/drakgw_.c:265
+#: ../../standalone/drakgw_.c:261
 msgid "Automatic reconfiguration"
 msgstr "自動重新設定"
 
-#: ../../standalone/drakgw_.c:266
+#: ../../standalone/drakgw_.c:262
 msgid "Show current interface configuration"
 msgstr "顯示目前網路介面組態設定"
 
-#: ../../standalone/drakgw_.c:268
+#: ../../standalone/drakgw_.c:264
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -12293,7 +12324,7 @@ msgstr ""
 "IP 屬性：%s\n"
 "驅動程式： %s"
 
-#: ../../standalone/drakgw_.c:280
+#: ../../standalone/drakgw_.c:276
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the C-Class Network that "
@@ -12312,41 +12343,41 @@ msgstr ""
 "取得IP資訊。\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:285
+#: ../../standalone/drakgw_.c:281
 msgid "C-Class Local Network"
 msgstr "C 等級的區域網路"
 
-#: ../../standalone/drakgw_.c:286
+#: ../../standalone/drakgw_.c:282
 msgid "(This) DHCP Server IP"
 msgstr "該 DHCP 主機 IP"
 
-#: ../../standalone/drakgw_.c:287
+#: ../../standalone/drakgw_.c:283
 msgid "Re-configure interface and DHCP server"
 msgstr "重新設定該網路介面與 DHCP 伺服器"
 
-#: ../../standalone/drakgw_.c:294
+#: ../../standalone/drakgw_.c:290
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "該區域網路並不是以 .0 結尾，放棄..."
 
-#: ../../standalone/drakgw_.c:305
+#: ../../standalone/drakgw_.c:301
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Potential LAN 位址與目前在 %s 找到的設定互衝突!\n"
 
-#: ../../standalone/drakgw_.c:315
+#: ../../standalone/drakgw_.c:311
 msgid "Configuring..."
 msgstr "設定中..."
 
-#: ../../standalone/drakgw_.c:316
+#: ../../standalone/drakgw_.c:312
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "設定 script, 安裝軟體，啟動相關的 servers 服務"
 
-#: ../../standalone/drakgw_.c:352
+#: ../../standalone/drakgw_.c:348
 #, c-format
 msgid "Problems installing package %s"
 msgstr "安裝 %s 套件發生錯誤"
 
-#: ../../standalone/drakgw_.c:485
+#: ../../standalone/drakgw_.c:481
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -12356,23 +12387,23 @@ msgstr ""
 "現在您的系統已經透過 DHCP 動態 IP 分配的方式取得連線 IP，\n"
 "並且也已經能夠透過其他電腦的頻寬分享存取 Internet 服務。"
 
-#: ../../standalone/drakgw_.c:504
+#: ../../standalone/drakgw_.c:500
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "這個設定先前已經完成了，不過目前是處理關閉沒啟用的狀態"
 
-#: ../../standalone/drakgw_.c:505
+#: ../../standalone/drakgw_.c:501
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "這個設定先前已經完成了，目前是處理開啟可用的狀態"
 
-#: ../../standalone/drakgw_.c:506
+#: ../../standalone/drakgw_.c:502
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Internet 連線分享尚未設定。"
 
-#: ../../standalone/drakgw_.c:511
+#: ../../standalone/drakgw_.c:507
 msgid "Internet connection sharing configuration"
 msgstr "Internet 連線分享設定"
 
-#: ../../standalone/drakgw_.c:518
+#: ../../standalone/drakgw_.c:514
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -12551,13 +12582,19 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig "
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"請注意，若是您使用的音效卡是 ISA PnP 類型的話，您需要使用 sndconfig \n"
+"這個程式來設定。請在 console 模式輸入執行 \"sndconfig\" 即可。"
 
 #: ../../standalone/draksplash_.c:34
-#, fuzzy
 msgid ""
 "package 'ImageMagick' is required for correct working.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-msgstr "系統需要安裝上 ImageMagick 套件才能夠進行設定"
+msgstr ""
+"系統需要安裝上 ImageMagick 套件才能夠進行設定。\n"
+"請點選 \"確定\" 安裝該套件，或者是點選 \"取消\" 放棄安裝"
 
 #: ../../standalone/draksplash_.c:78
 msgid "first step creation"
@@ -12670,9 +12707,9 @@ msgstr "產生御覽圖示中..."
 
 #. -PO  First %s is theme name, second %s (in parenthesis) is resolution
 #: ../../standalone/draksplash_.c:511
-#, fuzzy, c-format
+#, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr "無法建立開機進度畫面御覽"
+msgstr "%s 開機進度畫面 (%s) 御覽"
 
 #: ../../standalone/drakxtv_.c:49
 msgid ""
@@ -12827,15 +12864,14 @@ msgstr ""
 "http://www.linux-mandrake.com/en/hardware.php3"
 
 #: ../../standalone/harddrake2_.c:8
-#, fuzzy
 msgid ""
 "\n"
 "Usage: harddrake [-h|--help] [--test]\n"
-msgstr "usage： keyboarddrake [--expert] [keyboard]\n"
+msgstr ""
 
 #: ../../standalone/keyboarddrake_.c:16
 msgid "usage: keyboarddrake [--expert] [keyboard]\n"
-msgstr "usage： keyboarddrake [--expert] [keyboard]\n"
+msgstr ""
 
 #: ../../standalone/keyboarddrake_.c:32
 msgid "Please, choose your keyboard layout."
@@ -12865,128 +12901,128 @@ msgstr "無法啟動線上更新程式 !!!\n"
 msgid "The change is done, but to be effective you must logout"
 msgstr "變更已經完成，不過您需要重新登入才能夠生效"
 
-#: ../../standalone/logdrake_.c:85 ../../ugtk.pm_.c:285
+#: ../../standalone/logdrake_.c:86 ../../ugtk.pm_.c:285
 msgid "logdrake"
 msgstr "logdrake"
 
-#: ../../standalone/logdrake_.c:95
+#: ../../standalone/logdrake_.c:96
 msgid "Show only for the selected day"
 msgstr "僅顯示所選取日期項目"
 
-#: ../../standalone/logdrake_.c:102
+#: ../../standalone/logdrake_.c:103
 msgid "/File/_New"
 msgstr "/檔案/新增 (_N)"
 
-#: ../../standalone/logdrake_.c:102
+#: ../../standalone/logdrake_.c:103
 msgid "<control>N"
 msgstr "<control>N"
 
-#: ../../standalone/logdrake_.c:103
+#: ../../standalone/logdrake_.c:104
 msgid "/File/_Open"
 msgstr "/檔案/開啟 (_O)"
 
-#: ../../standalone/logdrake_.c:103
+#: ../../standalone/logdrake_.c:104
 msgid "<control>O"
 msgstr "<control>O"
 
-#: ../../standalone/logdrake_.c:104
+#: ../../standalone/logdrake_.c:105
 msgid "/File/_Save"
 msgstr "/檔案/儲存 (_S)"
 
-#: ../../standalone/logdrake_.c:104
+#: ../../standalone/logdrake_.c:105
 msgid "<control>S"
 msgstr "<control>S"
 
-#: ../../standalone/logdrake_.c:105
+#: ../../standalone/logdrake_.c:106
 msgid "/File/Save _As"
 msgstr "/檔案/另存新檔 (_A)"
 
-#: ../../standalone/logdrake_.c:106
+#: ../../standalone/logdrake_.c:107
 msgid "/File/-"
 msgstr "/檔案/-"
 
-#: ../../standalone/logdrake_.c:108
+#: ../../standalone/logdrake_.c:109
 msgid "/_Options"
 msgstr "/選項 (_O)"
 
-#: ../../standalone/logdrake_.c:109
+#: ../../standalone/logdrake_.c:110
 msgid "/Options/Test"
 msgstr "/選項/測試"
 
-#: ../../standalone/logdrake_.c:111
+#: ../../standalone/logdrake_.c:112
 msgid "/Help/_About..."
 msgstr "/說明/關於 (_A)"
 
-#: ../../standalone/logdrake_.c:118
+#: ../../standalone/logdrake_.c:119
 msgid "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
 msgstr "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
 
-#: ../../standalone/logdrake_.c:119
+#: ../../standalone/logdrake_.c:120
 msgid "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
 msgstr "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
 
-#: ../../standalone/logdrake_.c:173
+#: ../../standalone/logdrake_.c:174
 msgid "User"
 msgstr "User (使用者)"
 
-#: ../../standalone/logdrake_.c:174
+#: ../../standalone/logdrake_.c:175
 msgid "Messages"
 msgstr "Messages (訊息)"
 
-#: ../../standalone/logdrake_.c:175
+#: ../../standalone/logdrake_.c:176
 msgid "Syslog"
 msgstr "Syslog (系統記錄)"
 
-#: ../../standalone/logdrake_.c:176
+#: ../../standalone/logdrake_.c:177
 msgid "Mandrake Tools Explanations"
 msgstr "Mandrake 工具解析"
 
-#: ../../standalone/logdrake_.c:179
+#: ../../standalone/logdrake_.c:180
 msgid "search"
 msgstr "尋找"
 
-#: ../../standalone/logdrake_.c:185
+#: ../../standalone/logdrake_.c:186
 msgid "A tool to monitor your logs"
 msgstr "監察記錄檔的工具"
 
-#: ../../standalone/logdrake_.c:186
+#: ../../standalone/logdrake_.c:187
 msgid "Settings"
 msgstr "設定"
 
-#: ../../standalone/logdrake_.c:191
+#: ../../standalone/logdrake_.c:192
 msgid "matching"
 msgstr "相配的"
 
-#: ../../standalone/logdrake_.c:192
+#: ../../standalone/logdrake_.c:193
 msgid "but not matching"
 msgstr "但是不相配"
 
-#: ../../standalone/logdrake_.c:196
+#: ../../standalone/logdrake_.c:197
 msgid "Choose file"
 msgstr "選取檔案"
 
-#: ../../standalone/logdrake_.c:201
+#: ../../standalone/logdrake_.c:202
 msgid "Calendar"
 msgstr "行事曆"
 
-#: ../../standalone/logdrake_.c:211
+#: ../../standalone/logdrake_.c:212
 msgid "Content of the file"
 msgstr "檔案的內容"
 
-#: ../../standalone/logdrake_.c:215 ../../standalone/logdrake_.c:391
+#: ../../standalone/logdrake_.c:216 ../../standalone/logdrake_.c:392
 msgid "Mail alert"
 msgstr "郵件警示"
 
-#: ../../standalone/logdrake_.c:267
+#: ../../standalone/logdrake_.c:268
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "請稍候，正在解析檔案：%s"
 
-#: ../../standalone/logdrake_.c:408
+#: ../../standalone/logdrake_.c:409
 msgid "Mail alert configuration"
 msgstr "郵件警示通知組態設定"
 
-#: ../../standalone/logdrake_.c:409
+#: ../../standalone/logdrake_.c:410
 msgid ""
 "Welcome to the mail configuration utility.\n"
 "\n"
@@ -12996,64 +13032,64 @@ msgstr ""
 "\n"
 "在這裡，您能夠設定您的警示通知的方式。\n"
 
-#: ../../standalone/logdrake_.c:416
+#: ../../standalone/logdrake_.c:417
 msgid "Apache World Wide Web Server"
 msgstr "Apache WWW 伺服器"
 
-#: ../../standalone/logdrake_.c:417
+#: ../../standalone/logdrake_.c:418
 msgid "Domain Name Resolver"
 msgstr "網域名稱解析器"
 
-#: ../../standalone/logdrake_.c:418
+#: ../../standalone/logdrake_.c:419
 msgid "Ftp Server"
 msgstr "FTP 伺服器"
 
-#: ../../standalone/logdrake_.c:419
+#: ../../standalone/logdrake_.c:420
 msgid "Postfix Mail Server"
 msgstr "Postfix 郵件伺服器"
 
-#: ../../standalone/logdrake_.c:420
+#: ../../standalone/logdrake_.c:421
 msgid "Samba Server"
 msgstr "Samba 伺服器"
 
-#: ../../standalone/logdrake_.c:421
+#: ../../standalone/logdrake_.c:422
 msgid "SSH Server"
 msgstr "NIS 伺服主機"
 
-#: ../../standalone/logdrake_.c:422
+#: ../../standalone/logdrake_.c:423
 msgid "Webmin Service"
 msgstr "Webmin 服務"
 
-#: ../../standalone/logdrake_.c:423
+#: ../../standalone/logdrake_.c:424
 msgid "Xinetd Service"
 msgstr "Xinetd 服務"
 
-#: ../../standalone/logdrake_.c:430
+#: ../../standalone/logdrake_.c:431
 msgid "service setting"
 msgstr "服務設定"
 
-#: ../../standalone/logdrake_.c:431
+#: ../../standalone/logdrake_.c:432
 msgid ""
 "You will receive an alert if one of the selected services is no more running"
 msgstr "若是您所選取的服務項目若是沒執行的話，您將會收到警示通知"
 
-#: ../../standalone/logdrake_.c:443
+#: ../../standalone/logdrake_.c:444
 msgid "load setting"
 msgstr "載入設定"
 
-#: ../../standalone/logdrake_.c:444
+#: ../../standalone/logdrake_.c:445
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "當系統負載超過該數值時，您將會收到警示通知"
 
-#: ../../standalone/logdrake_.c:457
+#: ../../standalone/logdrake_.c:458
 msgid "alert configuration"
 msgstr "警示設定"
 
-#: ../../standalone/logdrake_.c:458
+#: ../../standalone/logdrake_.c:459
 msgid "Please enter your email address below "
 msgstr "請於下方輸入你的 e-mail"
 
-#: ../../standalone/logdrake_.c:497
+#: ../../standalone/logdrake_.c:498
 msgid "Save as.."
 msgstr "另存新檔..."
 
@@ -13142,11 +13178,8 @@ msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "位於 \"%s\" 的硬體類別項目已經移除：\n"
 
 #: ../../standalone/service_harddrake_.c:48
-#, fuzzy
 msgid "Some devices were added:\n"
-msgstr ""
-"\n"
-"位於 %s 類別內的裝置項目已經新增：\n"
+msgstr "一些裝置項目已經新增了：\n"
 
 #: ../../steps.pm_.c:14
 msgid "Choose your language"
@@ -13462,883 +13495,3 @@ msgstr "多媒體 - CD 燒錄"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "科學計算平台"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "To submit a bug report, click on the button report.\n"
-#~ "This will open  a web browser window  on https://www.bugzilla.com\n"
-#~ " where you'll find a form to fill in.The information displayed above will "
-#~ "be \n"
-#~ "transferred to that server\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "要回報任何臭蟲問題，請點選回報的按鈕。\n"
-#~ "系統將會開啟瀏覽器並連線到 https://www.bugzilla.com\n"
-#~ " 然後請找到適當的項目並輸入相關問題資訊，以便於將臭蟲問題送至主機通知發展"
-#~ "人員。\n"
-#~ "\n"
-
-#~ msgid "Make bootsplash step 2"
-#~ msgstr "第二部建立開機載入畫面"
-
-#~ msgid "Go to lilosplash configuration"
-#~ msgstr "進入 lilo 開機圖片設定"
-
-#~ msgid "Go back"
-#~ msgstr "回上一步"
-
-#~ msgid ""
-#~ "There's no known OSS/ALSA alternative driver for your sound card (%s)"
-#~ msgstr "您的音效卡 (%s) 目前沒有任何現有的 OSS/ALSA 驅動程式能夠支援"
-
-#~ msgid "ECI Hi-Focus"
-#~ msgstr "ECI Hi-Focus"
-
-#~ msgid "Proxy should be ftp://..."
-#~ msgstr "代理伺服器的設定格式必須為 ftp://..."
-
-#~ msgid "quit"
-#~ msgstr "結束"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.0 provides the best Open Source games - arcade, action, "
-#~ "cards, sports, strategy..."
-#~ msgstr ""
-#~ "Mandrake Linux 9.0 提供了許多好玩的遊戲，\n"
-#~ "比方像是：益智、動作、紙牌、戰略... 等遊戲項目"
-
-#~ msgid ""
-#~ "Transform your machine into a powerful server with a few clicks of your "
-#~ "mouse: Web server, mail, firewall, router, file and print server..."
-#~ msgstr ""
-#~ "透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。\n"
-#~ "其中像是: Web Server、Mail Server、Firewall、Router、Printer..."
-
-#~ msgid ""
-#~ "Sorry, perl-Expect is not installed/enabled. To use\n"
-#~ "this feature, install perl-Expect and comment lines 772-774,\n"
-#~ " as well as 788,789. Then uncomment line 787."
-#~ msgstr ""
-#~ "抱歉，perl-Expect 並未安裝，或者是沒有啟動。\n"
-#~ "請先安裝上 perl-Expect 程式，然後修改該檔案，\n"
-#~ "將 787 該行前面註解敘述拿掉即可。"
-
-#~ msgid ""
-#~ "The \"%s\" driver for your sound card is unlisted\n"
-#~ "\n"
-#~ "Please send the output of the \"lspcidrake -v\" command to\n"
-#~ "Thierry Vignaud <tvignaud at mandrakesoft dot com>\n"
-#~ "with subject: unlisted sound driver"
-#~ msgstr ""
-#~ "您音效卡所要使用的音效卡驅動程式 %s 並未在清單內\n"
-#~ "\n"
-#~ "請執行 \"lspcidrake -v\" 程式，以標題為 'unlisted sound driver'\n"
-#~ "郵寄到 tvignaud@mandrakesoft.com，好讓我們能夠支援這款音效卡"
-
-#~ msgid ""
-#~ "Here are presented various parameters concerning your machine. Depending "
-#~ "on\n"
-#~ "your installed hardware, you may - or not, see the following entries:\n"
-#~ "\n"
-#~ " * \"Mouse\": check the current mouse configuration and click on the "
-#~ "button\n"
-#~ "to change it if necessary;\n"
-#~ "\n"
-#~ " * \"Keyboard\": check the current keyboard map configuration and click "
-#~ "on\n"
-#~ "the button to change that if necessary;\n"
-#~ "\n"
-#~ " * \"Timezone\": DrakX, by default, guesses your time zone from the\n"
-#~ "language you have chosen. But here again, as for the choice of a "
-#~ "keyboard,\n"
-#~ "you may not be in the country for which the chosen language should\n"
-#~ "correspond. Hence, you may need to click on the \"Timezone\" button in\n"
-#~ "order to configure the clock according to the time zone you are in;\n"
-#~ "\n"
-#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
-#~ "printer\n"
-#~ "configuration wizard. Consult the correpsonding chapter of the ``User\n"
-#~ "Guide'' for more information on how to setup a new printer. The "
-#~ "interface\n"
-#~ "presented there is similar to the one used during installation;\n"
-#~ "\n"
-#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
-#~ "displayed here. No modification possible at installation time;\n"
-#~ "\n"
-#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-#~ "here. No modification possible at installation time;\n"
-#~ "\n"
-#~ " * \"ISDN card\": if an ISDN card is detected on your system, it is\n"
-#~ "displayed here. You can click on the button to change the parameters\n"
-#~ "associated with it."
-#~ msgstr ""
-#~ "這邊目前列出的是您系統相關組態內容設定。依據您系統所安裝的硬體環境，\n"
-#~ "您可以使用 - 調整下面所列示項目:\n"
-#~ "\n"
-#~ " * \"滑鼠\": 查看目前滑鼠的設定，點選該按鈕能夠改變其設定值。\n"
-#~ "\n"
-#~ " * \"鍵盤\": 查看目前鍵盤配置設定，點選該按鈕能夠改變其設定值。\n"
-#~ "\n"
-#~ " * \"時區\": 查看目前時區設定，點選該按鈕能夠改變其設定值。\n"
-#~ "\n"
-#~ " * \"印表機\": 查看印表機設定，點選 \"沒有印表機\" 按鈕啟動印表機精靈。\n"
-#~ "\n"
-#~ " * \"音效卡\": 安裝時所偵測到的系統音效卡項目，安裝過程無法設定之。\n"
-#~ "\n"
-#~ " * \"電視卡\": 安裝時所偵測到的系統電視卡項目，安裝過程無法設定之。\n"
-#~ "\n"
-#~ " * \"ISDN 卡\n"
-#~ ": 安裝時所偵測到的系統ISDN介面卡項目，點選該項目能夠設定之。"
-
-#~ msgid ""
-#~ "tinyfirewall configurator\n"
-#~ "\n"
-#~ "This configures a personal firewall for this Mandrake Linux machine.\n"
-#~ "For a powerful dedicated firewall solution, please look to the\n"
-#~ "specialized MandrakeSecurity Firewall distribution."
-#~ msgstr ""
-#~ "歡迎來到輕量型防火牆設定程式\n"
-#~ "\n"
-#~ "這是用來設定Mandrake-Linux機器上的個人防火牆的組態，\n"
-#~ "能夠協助您完成簡易的防火牆設定。\n"
-#~ "\n"
-#~ "若是您需要很完備強大的防火牆解決方案，您可以參閱\n"
-#~ "『MandrakeSecurity Firewall distribution』產品資訊。"
-
-#~ msgid ""
-#~ "To be able to print with your Lexmark inkjet and this configuration, you "
-#~ "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
-#~ "com/). Go to the US site and click on the \"Drivers\" button. Then choose "
-#~ "your model and afterwards \"Linux\" as operating system. The drivers come "
-#~ "as RPM packages or shell scripts with interactive graphical installation. "
-#~ "You do not need to do this configuration by the graphical frontends. "
-#~ "Cancel directly after the license agreement. Then print printhead "
-#~ "alignment pages with \"lexmarkmaintain\" and adjust the head alignment "
-#~ "settings with this program."
-#~ msgstr ""
-#~ "若是希望能夠使用這台 Lexmark 噴墨印表機進行列印的話\n"
-#~ "您需要由 Lexmark 網站 (http://www.lexmark.com) 首頁上\n"
-#~ "尋找相關連結，下載這台印表機的驅動程式。比方當您連上\n"
-#~ "Lexmark 網站首頁後，請點選 \"Drivers\" 按鈕，選擇您\n"
-#~ "目前使用該款印表機型號，並確認是選取使用 \"Linux\"的\n"
-#~ "版本。一般來說，您下載回來的檔案，可能是 RPM 套件檔案\n"
-#~ "或者是幾個 shell script (執行該檔案將會啟動安裝程式)。\n"
-#~ "一般來說，您並不需要透過圖行化的前端介面來進行相關的\n"
-#~ "的設定。然後使用 \"lexmarkmaintain\" 程式項目來列印噴頭\n"
-#~ "校正的工作設定。"
-
-#~ msgid "Push multimedia at its limits!"
-#~ msgstr "盡情多媒體享受帶來的享受！"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.0 provides a powerful tool to fully customize and "
-#~ "configure your machine."
-#~ msgstr ""
-#~ "Mandrake Linux 9.0 提供了一整套強大的功能協助使用者來\n"
-#~ "設定系統，您可以透過 Mandrake Linux 控制中心進行設定動作"
-
-#~ msgid "Mandrake Linux 9.0 is the ultimate development platform."
-#~ msgstr "Mandrake Linux 9.0 提供了相當完備的開發環境。"
-
-#~ msgid ""
-#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
-#~ "Source development environments."
-#~ msgstr ""
-#~ "Mandrake Linux 提供完備的程式發展平台的套件，\n"
-#~ "讓程式設計師能夠使用豐富的資源開發出強大的程式軟體。"
-
-#~ msgid "Turn your machine into a reliable server."
-#~ msgstr "讓您的機器成為強固完備可信賴的服務主機。"
-
-#~ msgid ""
-#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
-#~ "N.F.)."
-#~ msgstr "MandrakeSecurity 提供了完備的 Firewall 產品 (M.N.F.)。"
-
-#~ msgid ""
-#~ "Our full range of Linux solutions, as well as special offers on products "
-#~ "and 'goodies', are available online at our e-store."
-#~ msgstr ""
-#~ "Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，\n"
-#~ "您可以上網瀏覽我們提供的線上電子商店穫得進一步資訊。"
-
-#~ msgid "Certify yourself on Linux."
-#~ msgstr "取得 Linux 的認證執照"
-
-#~ msgid ""
-#~ "Whether you choose to teach yourself online or via our netwirk of "
-#~ "training partners, the Linux-Campus catalogue prepares you for the "
-#~ "acknowledged LPI certification program (worldwide professional technical "
-#~ "certification)."
-#~ msgstr ""
-#~ "當您選擇能夠透過我們的合作夥伴提供的線上網路訓練課程後，\n"
-#~ "將能夠協助您以進一步準備並考取 LPI 認證。"
-
-#~ msgid "An online platform to respond to company's specific support needs."
-#~ msgstr "提供了商業公司所需要服務的線上平台。"
-
-#~ msgid ""
-#~ "The first time you try the X configuration, you may not be very "
-#~ "satisfied\n"
-#~ "with its display (screen is too small, shifted left or right...). Hence,\n"
-#~ "even if X starts up correctly, DrakX then asks you if the configuration\n"
-#~ "suits you. It will also propose to change it by displaying a list of "
-#~ "valid\n"
-#~ "modes it could find, asking you to select one.\n"
-#~ "\n"
-#~ "As a last resort, if you still cannot get X to work, choose \"Change\n"
-#~ "graphics card\", select \"Unlisted card\", and when prompted on which\n"
-#~ "server, choose \"FBDev\". This is a failsafe option which works with any\n"
-#~ "modern graphics card. Then choose \"Test again\" to be sure."
-#~ msgstr ""
-#~ "當第一次設定X環境組態時，也許您不是很滿意所設定出來的結果。比方你設定好的 "
-#~ "X 環境，看起來螢幕顯示很小、或者是解析度不對，甚至螢幕有偏移等情況。請不要"
-#~ "灰心，有耐心的多測試幾次就可以成功了。DrakX程式等等會詢問您是否滿意目前的"
-#~ "設定值，你可以持續測試選擇直到滿意時再告訴DrakX程式可以使用當時您所選用的"
-#~ "組態。\n"
-#~ "\n"
-#~ "如果你測試過程中，出現無法正常啟動 X 環境的情況，那可能是安裝程式沒有正確"
-#~ "偵測出你顯示卡種類，若是如此請選取『改變顯示卡設定』，再選擇『Unlisted "
-#~ "card』手動選擇您系統所安裝的顯示卡即可。一般來說，若是程式無法順利偵測出系"
-#~ "統所使用的顯示卡的話，該款顯示卡可能比較特殊，也許一般傳統的XFree86 原生性"
-#~ "的驅動程式無法驅動該顯示卡工作。因此當安裝程式出現您要使用哪一款的 X "
-#~ "Server 項目時，請選擇『FBDev』項目。\"FBDev\" 項目的顯示方式是透過 VESA "
-#~ "2.0 的工業標準顯示規格介面來驅動顯示卡達到繪圖的目的，目前一般的 AGP 顯示"
-#~ "卡都具備這個顯示標準規格。選取好後，請選擇『再次測試設定值』確定所選擇的項"
-#~ "目是否正確沒問題。"
-
-#~ msgid "Internet and Messaging"
-#~ msgstr "網路與訊息傳遞"
-
-#~ msgid "Multimedia and Graphics"
-#~ msgstr "多媒體與繪圖"
-
-#~ msgid ""
-#~ "Mandrake Linux 8.2 provides 11 different graphical desktop environments "
-#~ "and window managers to choose from including GNOME 1.4, KDE 2.2.2, Window "
-#~ "Maker 0.8, and the rest"
-#~ msgstr ""
-#~ "Mandrake Linux 提供了數十種圖形介面管理程式，包含\n"
-#~ "GNOME 2、KDE 3、Windows Maker、IceWM、BlackBox..."
-
-#~ msgid "Server Software"
-#~ msgstr "伺服器軟體"
-
-#~ msgid "MandrakeCampus"
-#~ msgstr "Mandrake 校園"
-
-#~ msgid ""
-#~ "Would you like to learn Linux simply, quickly, and for free? MandrakeSoft "
-#~ "provides free Linux training, as well as a way to test your progress, at "
-#~ "MandrakeCampus -- our online training center"
-#~ msgstr ""
-#~ "您希望能夠簡單、快速以及免費的學習 Linux 系統嗎？\n"
-#~ "MandrakeSoft 提供的免費的 Linux 訓練。詳細部份，\n"
-#~ "請參考一下我們網站上的 MandrakeCampus 項目"
-
-#~ msgid ""
-#~ "Quality support from the Linux Community, and from MandrakeSoft, is just "
-#~ "around the corner. And if you're already a Linux veteran, become an "
-#~ "\"Expert\" and share your knowledge at our support website"
-#~ msgstr ""
-#~ "來自於傳統 Linux 社群、MandrakeSoft 的 Linux 支援遍及世界\n"
-#~ "若是您是 Linux 的老手，請加入 MandrakeExpert，在 Mandrake\n"
-#~ "的支援網站內來分享您的專業技術"
-
-#~ msgid "MandrakeConsulting"
-#~ msgstr "Mandrake 諮詢"
-
-#~ msgid ""
-#~ "For all of your IT projects, our consultants are ready to analyze your "
-#~ "requirements and offer a customized solution. Benefit from MandrakeSoft's "
-#~ "vast experience as a Linux producer to provide a true IT alternative for "
-#~ "your business organization"
-#~ msgstr ""
-#~ "對於您的 IT 專案計畫，我們的專業諮詢家能夠分析出\n"
-#~ "您的需求並提供所需要的解決方案。身為 Linux 套件\n"
-#~ "提供廠商以及我們的豐富經驗，能夠為您的商業需求\n"
-#~ "提供完備的諮詢"
-
-#~ msgid "MandrakeStore"
-#~ msgstr "Mandrake 商店"
-
-#~ msgid ""
-#~ "For more information on MandrakeSoft's Professional Services and "
-#~ "commercial offerings, please see the following web page:"
-#~ msgstr ""
-#~ "要獲得更多關於 MandrakeSoft 專業服務以及商業的支援，\n"
-#~ "請參閱下面的網頁資訊："
-
-#~ msgid "http://www.mandrakesoft.com/sales/contact"
-#~ msgstr "http://www.mandrakesoft.com/sales/contact"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "LBA (doesn't work on old BIOSes)"
-#~ msgstr "LBA 模式(某些舊型 BIOS 上無法使用)"
-
-#~ msgid "You don't have any partitions!"
-#~ msgstr "您沒有任何可用的分割區 !"
-
-#~ msgid ""
-#~ "DiskDrake failed to read correctly the partition table.\n"
-#~ "Continue at your own risk!"
-#~ msgstr ""
-#~ "DiskDrake 無法正確讀取硬碟分割區配置表，\n"
-#~ "繼續安裝工作是很危險的 !!"
-
-#~ msgid ""
-#~ "I can't read your partition table, it's too corrupted for me :(\n"
-#~ "I'll try to go on blanking bad partitions"
-#~ msgstr ""
-#~ "程式無法讀取您的硬碟分割區配置表，這個配置表有問題 :(\n"
-#~ "程式會試著忽略壞掉的分割區以後再繼續。"
-
-#~ msgid ""
-#~ "Please Build backup before to restore it...\n"
-#~ " or verify that your path to save is correct."
-#~ msgstr ""
-#~ "您要先建立備份資料才能夠回存...\n"
-#~ "或者是確認您要回存資料的來源位置正確無誤!"
-
-#~ msgid "Firewalling Configuration"
-#~ msgstr "防火牆設定"
-
-#~ msgid "Firewalling configuration"
-#~ msgstr "防火牆設定"
-
-#~ msgid ""
-#~ "Firewalling\n"
-#~ "\n"
-#~ "You already have set up a firewall.\n"
-#~ "Click on Configure to change or remove the firewall"
-#~ msgstr ""
-#~ "您已經設定過防火牆的機制了。\n"
-#~ "請點選設定來改變內容組態，或者是選擇移除把原本設定刪除"
-
-#~ msgid ""
-#~ "Firewalling\n"
-#~ "\n"
-#~ "Click on Configure to set up a standard firewall"
-#~ msgstr ""
-#~ "防火牆\n"
-#~ "\n"
-#~ "點選防火牆來設定產生一個標準的防火牆防護功能"
-
-#~ msgid ""
-#~ "We'll now ask you questions about which services you'd like to allow\n"
-#~ "the Internet to connect to.  Please think carefully about these\n"
-#~ "questions, as your computer's security is important.\n"
-#~ "\n"
-#~ "Please, if you're not currently using one of these services, firewall\n"
-#~ "it off.  You can change this configuration anytime you like by\n"
-#~ "re-running this application!"
-#~ msgstr ""
-#~ "下面我們將會進行一些問題的詢問，像是允許開放那些服務能讓\n"
-#~ "外面能夠存取到。請仔細的觀看下面的一些問題，因為這關係於\n"
-#~ "您電腦的網路安全問題\n"
-#~ "\n"
-#~ "請注意一下，如果您並沒有要使用這些服務，防火牆設定可以關閉。\n"
-#~ "若是您往後有設定需要，再執行設定程式進行調整。"
-
-#~ msgid ""
-#~ "Are you running a web server on this machine that you need the whole\n"
-#~ "Internet to see? If you are running a webserver that only needs to be\n"
-#~ "accessed by this machine, you can safely answer NO here.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "您打算讓這台伺服器成為 Web 伺服器嗎？\n"
-#~ "\n"
-#~ "若是你這台機器並不打算用來放置網頁檔案，\n"
-#~ "然後提供他人能夠透過瀏覽器瀏覽存取的話，\n"
-#~ "這裡您可以選擇『否』。\n"
-
-#~ msgid ""
-#~ "Are you running a name server on this machine? If you didn't set one\n"
-#~ "up to give away IP and zone information to the whole Internet, please\n"
-#~ "answer no.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "您打算讓這台伺服器成為 DNS 伺服器嗎？\n"
-#~ "\n"
-#~ "若是您不打算在主機上架設 Domain Name Server\n"
-#~ "提供「IP」與「主機名稱」解析服務的話，\n"
-#~ "請選擇『否』。\n"
-
-#~ msgid ""
-#~ "Do you want to allow incoming Secure Shell (ssh) connections? This\n"
-#~ "is a telnet-replacement that you might use to login. If you're using\n"
-#~ "telnet now, you should definitely switch to ssh. telnet is not\n"
-#~ "encrypted -- so some attackers can steal your password if you use\n"
-#~ "it. ssh is encrypted and doesn't allow for this eavesdropping."
-#~ msgstr ""
-#~ "您希望能夠允許「Secure Shell - ssh 」遠端登入的連線服務嗎？\n"
-#~ "\n"
-#~ "「ssh」是一個用來取代「telnet」的連線程式，與「telnet」程式\n"
-#~ "的差異性在於使用「ssh」連線過程中所有的傳輸內容都會加密。\n"
-#~ "\n"
-#~ "所以我們建議若是你原本有打算開放「telnet 遠端登入服務」\n"
-#~ "的話，可以考慮改用「ssh」取代原本「telnet」的使用。\n"
-#~ "\n"
-#~ "當使用「ssh」後，因為整個網路傳輸內容都是加密過的，因此\n"
-#~ "有心人士無法輕易的竊取網路傳輸中的內容，如此網路作業\n"
-#~ "環境會更加安全。"
-
-#~ msgid ""
-#~ "Do you want to allow incoming telnet connections?\n"
-#~ "This is horribly unsafe, as we explained in the previous screen. We\n"
-#~ "strongly recommend answering No here and using ssh in place of\n"
-#~ "telnet.\n"
-#~ msgstr ""
-#~ "您希望能夠允許 telnet 遠端登入的連線服務嗎？\n"
-#~ "\n"
-#~ "開放「telnet」遠端登入功能是相當不安全的，在先前的\n"
-#~ "螢幕畫面中我們已經提及過了。\n"
-#~ "\n"
-#~ "因此我們建議您這邊不要選擇開放「telnet遠端登入」\n"
-#~ "的服務，改用「ssh」這類有安全加密的遠端登入程式會\n"
-#~ "比較安全。\n"
-
-#~ msgid ""
-#~ "Are you running an FTP server here that you need accessible to the\n"
-#~ "Internet? If you are, we strongly recommend that you only use it for\n"
-#~ "Anonymous transfers. Any passwords sent by FTP can be stolen by some\n"
-#~ "attackers, since FTP also uses no encryption for transferring passwords.\n"
-#~ msgstr ""
-#~ "您打算讓這台伺服器成為 FTP 主機並且提供外來 Internet \n"
-#~ "的存取嗎？\n"
-#~ "\n"
-#~ "如果是的話，一般我們建議您只開放「anonymous 匿名使用者」\n"
-#~ "登入使用較佳。\n"
-#~ "\n"
-#~ "因為若是開放允許真實帳號登入存取的話，因為網路傳輸內容\n"
-#~ "都是未經過加密的，所以登入時所輸入的密碼就很有可能被有\n"
-#~ "有人士監聽到。\n"
-
-#~ msgid ""
-#~ "Are you running a mail server here? If you're sending you \n"
-#~ "messages through pine, mutt or any other text-based mail client,\n"
-#~ "you probably are.  Otherwise, you should firewall this off.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "您打算讓這台伺服器成為郵件伺服器嗎？\n"
-#~ "\n"
-#~ "如果你希望使用「pine」、「mutt」或者是一些\n"
-#~ "文字模式的讀信軟體收發mail 的話，那就應該是了。\n"
-#~ "要不然，你應該設定把這個 firewall 設定關閉。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Are you running a POP or IMAP server here? This would\n"
-#~ "be used to host non-web-based mail accounts for people via \n"
-#~ "this machine.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "您這台伺服器有要跑 POP 或者是 IMAP 這類服務嗎？\n"
-#~ "\n"
-#~ "這些服務能夠讓這台有帳號的使用者能夠使用一些\n"
-#~ "郵件軟體存取這台主機上的個人信件。\n"
-#~ "\n"
-#~ "若是您主機不提供 POP、IMAP 這類信件遠端存取服務\n"
-#~ "的話，那應該選擇「否」。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "You appear to be running a 2.2 kernel.  If your network IP\n"
-#~ "is automatically set by a computer in your home or office \n"
-#~ "(dynamically assigned), we need to allow for this.  Is\n"
-#~ "this the case?\n"
-#~ msgstr ""
-#~ "您目前系統似乎是使用 kernel 2.2 的版本。\n"
-#~ "\n"
-#~ "如果您電腦 IP 是由DHCP 等等這類伺服器分配給您的，\n"
-#~ "我們就需要允許這個項目。那目前是這個情況嗎？\n"
-
-#~ msgid ""
-#~ "Is your computer getting time syncronized to another computer?\n"
-#~ "Mostly, this is used by medium-large Unix/Linux organizations\n"
-#~ "to synchronize time for logging and such.  If you're not part\n"
-#~ "of a larger office and haven't heard of this, you probably \n"
-#~ "aren't."
-#~ msgstr ""
-#~ "您要設定讓您的電腦系統時間與另外一台電腦同步對時嗎？\n"
-#~ "\n"
-#~ "一般來說，這對於您系統若是當一個伺服器提供運作，然後有\n"
-#~ "log 等這類紀錄的話，系統時間的正確性就相當重要。\n"
-#~ "若是您電腦是一般桌上型的用途，這個項目您也許就不是\n"
-#~ "相當需要。"
-
-#~ msgid ""
-#~ "Configuration complete.  May we write these changes to disk?\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "設定已經完成。\n"
-#~ "\n"
-#~ "您要把這些變更寫入磁碟嗎？\n"
-#~ "\n"
-#~ "若是不打算儲存，請選擇『不儲存』。\n"
-#~ "若是您要將設定的組態儲存起來，請選擇\n"
-#~ "『儲存並結束』。或者是選擇『上一步』\n"
-#~ "重新檢視設定項目。\n"
-#~ "\n"
-
-#~ msgid "Can't open %s for writing: %s\n"
-#~ msgstr "對 %s 檔案進行寫入時發生錯誤： %s\n"
-
-#~ msgid "No I don't need DHCP"
-#~ msgstr "否，我不需要 DHCP"
-
-#~ msgid "Yes I need DHCP"
-#~ msgstr "是的，我需要 DHCP"
-
-#~ msgid "No I don't need NTP"
-#~ msgstr "否，我不需要 NTP"
-
-#~ msgid "Yes I need NTP"
-#~ msgstr "是的，我需要 NTP"
-
-#~ msgid "Don't Save"
-#~ msgstr "不儲存"
-
-#~ msgid "Save & Quit"
-#~ msgstr "儲存並結束"
-
-#~ msgid "Firewall Configuration Wizard"
-#~ msgstr "防火牆設定精靈"
-
-#~ msgid "No (firewall this off from the internet)"
-#~ msgstr "否 (設定防火牆組態阻攔該服務)"
-
-#~ msgid "Yes (allow this through the firewall)"
-#~ msgstr "是 (設定定防火牆組態允許該服務)"
-
-#~ msgid "Please Wait... Verifying installed packages"
-#~ msgstr "請稍後... 檢視已安裝的套件程式"
-
-#~ msgid ""
-#~ "Failure installing the needed packages: %s and Bastille.\n"
-#~ " Try to install them manually."
-#~ msgstr ""
-#~ "安裝下面必備的套件時發生錯誤：%s 與 Bastille。\n"
-#~ " 請手動安裝上這些套件。"
-
-#~ msgid ""
-#~ "This level is to be used with care. It makes your system more easy to "
-#~ "use,\n"
-#~ "                but very sensitive: it must not be used for a machine "
-#~ "connected to others\n"
-#~ "                or to the Internet. There is no password access."
-#~ msgstr ""
-#~ "把安全機制設定在這個等級時必須要非常謹慎，\n"
-#~ "它會讓您的系統用起來更加簡易方便，可是卻極易\n"
-#~ "受到破壞: 這個設定不應該被用在有連線到Internet\n"
-#~ "的主機，因為所有的存取動作都沒有用密碼加以\n"
-#~ "限制。"
-
-#~ msgid ""
-#~ "With this security level, the use of this system as a server becomes "
-#~ "possible.\n"
-#~ "                The security is now high enough to use the system as a "
-#~ "server which can accept\n"
-#~ "                connections from many clients. Note: if your machine is "
-#~ "only a client on the Internet, you should choose a lower level."
-#~ msgstr "高度的安全性相關的檢查與設定，適合提供在架設對外服務的伺服器使用。"
-
-#~ msgid "Basic Options"
-#~ msgstr "基本選項"
-
-#~ msgid "Security Checks"
-#~ msgstr "安全性檢查"
-
-#~ msgid "Data list to include on CDROM."
-#~ msgstr "資料清單包含紀錄於 CDROM"
-
-#~ msgid "Please choose your CD space"
-#~ msgstr "請選取您 CD 片容量"
-
-#~ msgid "Please enter the cd writer speed"
-#~ msgstr "請輸入燒錄器的寫入倍數"
-
-#~ msgid "Please check if you want to erase your CDRW before"
-#~ msgstr "如果您要先清除 CDRW 原有資料，請選取該項目"
-
-#~ msgid "Please enter your CD Writer device name (ex: 0,1,0)"
-#~ msgstr "請輸入燒錄器的裝置名稱 (比方: 0,1,0)"
-
-#~ msgid "Please check if you want to include install boot on your CD."
-#~ msgstr "若是您希望 CD 能夠啟動系統，請選取該項目"
-
-#~ msgid "Windows PDC"
-#~ msgstr "Windows PDC"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamil"
-
-#~ msgid "Url should begin with 'ftp:'"
-#~ msgstr "代理伺服器的設定格式必須為 ftp://..."
-
-#~ msgid ""
-#~ "Please check if you want to include\n"
-#~ " install boot on your CD."
-#~ msgstr ""
-#~ "如果您希望包含安裝可開機\n"
-#~ "CD 的話，請選取該項目"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome to the Printer Setup Wizard\n"
-#~ "\n"
-#~ "This wizard will help you to install your printer(s) connected to this "
-#~ "computer.\n"
-#~ "\n"
-#~ "Please plug in your printer(s) on this computer and turn it/them on. "
-#~ "Click on \"Next\" when you are ready, and on \"Cancel\" when you do not "
-#~ "want to set up your printer(s) now.\n"
-#~ "\n"
-#~ "Note that some computers can crash during the printer auto-detection, "
-#~ "turn off \"Auto-detect printers\" to do a printer installation without "
-#~ "auto-detection. Use the \"Expert Mode\" of printerdrake when you want to "
-#~ "set up printing on a remote printer if printerdrake does not list it "
-#~ "automatically."
-#~ msgstr ""
-#~ "\n"
-#~ "歡迎來到印表機設定精靈\n"
-#~ "\n"
-#~ "設定精靈將會帶領您完成印表機的安裝。\n"
-#~ "\n"
-#~ "進行下面動作前，請確認您已經開啟印表機電源，然後選擇『下一步』\n"
-#~ "繼續，或者是選擇『取消』放棄設定。\n"
-#~ "\n"
-#~ "由於在某些機器上使用自動偵測功能時，將會讓系統當機失去回應，\n"
-#~ "所以這時候最好是選擇關閉『自動偵測印表機』項目。另外，您可以\n"
-#~ "選擇『專家模式』項目，能夠讓使用者使用手動的方式選擇相關項目。"
-
-#~ msgid "Auto-Detection of Printers"
-#~ msgstr "印表機自動偵測"
-
-#~ msgid ""
-#~ "Printerdrake is able to auto-detect your locally connected parallel and "
-#~ "USB printers for you, but note that on some systems the auto-detection "
-#~ "CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do "
-#~ "it ON YOUR OWN RISK!\n"
-#~ "\n"
-#~ "Do you really want to get your printers auto-detected?"
-#~ msgstr ""
-#~ "PrinterDrake 能夠自動偵測系統上的並列埠或者是USB上的印表機，\n"
-#~ "不過自動偵測可能會讓您的系統失去回應，甚至毀壞檔案系統。\n"
-#~ "若是您要使用該項目，請多加小心!!\n"
-#~ "\n"
-#~ "一般來說，本地端印表機就安裝在您電腦附近，您可以簡單查看\n"
-#~ "該印表機的型號，不一定得使用自動偵測的功能。因此，您確定\n"
-#~ "要使用自動偵測的功能嗎？"
-
-#~ msgid "Set up printer manually"
-#~ msgstr "手動設定印表機"
-
-#~ msgid ""
-#~ "Network printers can only be installed after the installation. Choose "
-#~ "\"Hardware\" and then \"Printer\" in the Mandrake Control Center."
-#~ msgstr ""
-#~ "網路印表機設定，需要在安裝後才能夠進行。事後您可以透過\n"
-#~ "Mandrake 控制中心內的\"硬體\"項目內的『印表機』來設定。"
-
-#~ msgid ""
-#~ "To install network printers, click \"Cancel\", switch to the \"Expert Mode"
-#~ "\", and click \"Add a new printer\" again."
-#~ msgstr ""
-#~ "若是要安裝網路印表機，請點選『取消』，然後另外\n"
-#~ "選擇有『專家模式』，再點選『新增印表機』即可。"
-
-#~ msgid "Installing HPOJ package..."
-#~ msgstr "正在安裝 HPOJ 套件..."
-
-#~ msgid "Checking device and configuring HPOJ..."
-#~ msgstr "正在檢查裝置項目並且設定 HPOJ"
-
-#~ msgid "Scanning on your HP multi-function device"
-#~ msgstr "正在 HP 掃描多功能裝置"
-
-#~ msgid "Making printer port available for CUPS..."
-#~ msgstr "正在設定印表機連接埠讓 CUPS 存取使用..."
-
-#~ msgid "Control Center"
-#~ msgstr "控制中心"
-
-#~ msgid "Choose the tool you want to use"
-#~ msgstr "選取您想使用的工具"
-
-#~ msgid "Configure the way the system will alert you"
-#~ msgstr "設定系統通知警示的方式"
-
-#~ msgid "no serial_usb found\n"
-#~ msgstr "找不到序列 usb 埠\n"
-
-#~ msgid "fsck failed with exit code %d or signal %d"
-#~ msgstr "fsck 失敗，傳回 %d 錯誤代碼或者是 %d 信號"
-
-#~ msgid "Graphics card identification: %s\n"
-#~ msgstr "顯示卡識別資料： %s\n"
-
-#~ msgid "Choose options for server"
-#~ msgstr "選取 X 伺服程式的參數"
-
-#~ msgid "Monitor not configured"
-#~ msgstr "沒有完成設定螢幕的動作"
-
-#~ msgid "Graphics card not configured yet"
-#~ msgstr "尚未完成顯示卡的設定"
-
-#~ msgid "Resolutions not chosen yet"
-#~ msgstr "尚未選取要使用的解析度"
-
-#~ msgid ""
-#~ "\n"
-#~ "try to change some parameters"
-#~ msgstr ""
-#~ "\n"
-#~ "請試著去更改一些參數的設定值"
-
-#~ msgid "An error occurred:"
-#~ msgstr "發生錯誤："
-
-#~ msgid "Leaving in %d seconds"
-#~ msgstr "%d 秒內離開"
-
-#~ msgid "Is this the correct setting?"
-#~ msgstr "這個設定值正確嗎？"
-
-#~ msgid "An error occurred, try to change some parameters"
-#~ msgstr "發生錯誤，請試著更改一些參數的設定值"
-
-#~ msgid "XFree86 server: %s"
-#~ msgstr "XFree86 伺服程式： %s"
-
-#~ msgid "Show all"
-#~ msgstr "顯示全部"
-
-#~ msgid "Preparing X-Window configuration"
-#~ msgstr "正在準備 X-Window 的設定"
-
-#~ msgid "What do you want to do?"
-#~ msgstr "您打算怎麼作 ?"
-
-#~ msgid "Change Monitor"
-#~ msgstr "改變螢幕設定"
-
-#~ msgid "Change Graphics card"
-#~ msgstr "改變顯示卡設定"
-
-#~ msgid "Change Server options"
-#~ msgstr "改變伺服程式的參數設定"
-
-#~ msgid "Change Resolution"
-#~ msgstr "改變解析度設定"
-
-#~ msgid "Show information"
-#~ msgstr "顯示所有資訊"
-
-#~ msgid "Test again"
-#~ msgstr "再次測試設定值"
-
-#~ msgid "Use Hard Drive with daemon"
-#~ msgstr "配合排程使用硬碟備份"
-
-#~ msgid "Use FTP with daemon"
-#~ msgstr "配合排程使用FTP傳輸備份"
-
-#~ msgid "Package List to Install"
-#~ msgstr "要安裝的套件清單"
-
-#~ msgid "proftpd"
-#~ msgstr "proftpd"
-
-#~ msgid "sshd"
-#~ msgstr "sshd"
-
-#~ msgid "webmin"
-#~ msgstr "webmin"
-
-#~ msgid "xinetd"
-#~ msgstr "xinetd"
-
-#~ msgid "Select a graphics card"
-#~ msgstr "選取您的顯示卡"
-
-#~ msgid "Choose a X driver"
-#~ msgstr "選取合適的 X 伺服程式"
-
-#~ msgid "Standard VGA, 640x480 at 60 Hz"
-#~ msgstr "Standard VGA, 640x480 at 60 Hz"
-
-#~ msgid "Super VGA, 800x600 at 56 Hz"
-#~ msgstr "Super VGA, 800x600 at 56 Hz"
-
-#~ msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
-#~ msgstr "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
-
-#~ msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
-#~ msgstr "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
-
-#~ msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
-#~ msgstr "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
-
-#~ msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
-#~ msgstr "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
-
-#~ msgid "High Frequency SVGA, 1024x768 at 70 Hz"
-#~ msgstr "High Frequency SVGA, 1024x768 at 70 Hz"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
-#~ msgstr "Multi-frequency that can do 1280x1024 at 60 Hz"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
-#~ msgstr "Multi-frequency that can do 1280x1024 at 74 Hz"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
-#~ msgstr "Multi-frequency that can do 1280x1024 at 76 Hz"
-
-#~ msgid "Monitor that can do 1600x1200 at 70 Hz"
-#~ msgstr "Monitor that can do 1600x1200 at 70 Hz"
-
-#~ msgid "Monitor that can do 1600x1200 at 76 Hz"
-#~ msgstr "Monitor that can do 1600x1200 at 76 Hz"
-
-#~ msgid ""
-#~ "The total size for the groups you have selected is approximately %d MB.\n"
-#~ msgstr "您選取的所有群組的總共大小約為 %d MB.\n"
-
-#~ msgid ""
-#~ "If you wish to install less than this size,\n"
-#~ "select the percentage of packages that you want to install.\n"
-#~ "\n"
-#~ "A low percentage will install only the most important packages;\n"
-#~ "a percentage of 100%% will install all selected packages."
-#~ msgstr ""
-#~ "如果您希望安裝少於該容量大小的套件，\n"
-#~ "選擇您希望要安裝套件的百分比。\n"
-#~ "百分比越少，意味著只會安裝系統必備的套件項目;\n"
-#~ "若是百分比是 100%% 的話，就是安裝所有選擇的套件。"
-
-#~ msgid ""
-#~ "You have space on your disk for only %d%% of these packages.\n"
-#~ "\n"
-#~ "If you wish to install less than this,\n"
-#~ "select the percentage of packages that you want to install.\n"
-#~ "A low percentage will install only the most important packages;\n"
-#~ "a percentage of %d%% will install as many packages as possible."
-#~ msgstr ""
-#~ "您目前系統可用空間只能夠安裝 %d%% 的套件數量。\n"
-#~ "\n"
-#~ "如果您希望安裝少於該容量大小的套件，\n"
-#~ "選擇您希望要安裝套件的百分比。\n"
-#~ "百分比越少，意味著只會安裝系統必備的套件項目;\n"
-#~ "百分比 %d%% 是盡可能安裝越多套件。"
-
-#~ msgid "You will be able to choose them more specifically in the next step."
-#~ msgstr "您還可以在接下來的步驟中作更精確的套件選擇"

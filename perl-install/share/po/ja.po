@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-09-11 13:59+0200\n"
+"POT-Creation-Date: 2002-09-13 22:00+0200\n"
 "PO-Revision-Date: 2000-07-05 15:44+0200\n"
 "Last-Translator: YAMAGATA Hiroo <hiyori13@alum.mit.edu>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -190,8 +190,8 @@ msgid "Ok"
 msgstr "OK"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3155
-#: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:224
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3203
+#: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:225
 msgid "Quit"
 msgstr "終了"
 
@@ -291,13 +291,13 @@ msgid "Graphics card: %s"
 msgstr "グラフィックカード: %s"
 
 #: ../../Xconfig/resolution_and_depth.pm_.c:268 ../../any.pm_.c:1019
-#: ../../bootlook.pm_.c:343 ../../diskdrake/smbnfs_gtk.pm_.c:87
+#: ../../bootlook.pm_.c:344 ../../diskdrake/smbnfs_gtk.pm_.c:87
 #: ../../install_steps_gtk.pm_.c:406 ../../install_steps_gtk.pm_.c:464
 #: ../../interactive.pm_.c:142 ../../interactive.pm_.c:354
 #: ../../interactive/http.pm_.c:105 ../../interactive/newt.pm_.c:195
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
-#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2124
+#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2169
 #: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
@@ -306,8 +306,8 @@ msgstr "グラフィックカード: %s"
 #: ../../standalone/drakbackup_.c:4184 ../../standalone/drakconnect_.c:115
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
-#: ../../standalone/drakfloppy_.c:234 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:536 ../../standalone/logdrake_.c:224
+#: ../../standalone/drakfloppy_.c:235 ../../standalone/drakfont_.c:970
+#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:225
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
 msgstr "キャンセル"
@@ -501,7 +501,7 @@ msgstr "デフォルトイメージ起動の待ち時間"
 #: ../../any.pm_.c:170 ../../any.pm_.c:789
 #: ../../diskdrake/smbnfs_gtk.pm_.c:179
 #: ../../install_steps_interactive.pm_.c:1094 ../../network/modem.pm_.c:48
-#: ../../printerdrake.pm_.c:850 ../../printerdrake.pm_.c:965
+#: ../../printerdrake.pm_.c:865 ../../printerdrake.pm_.c:980
 #: ../../standalone/drakbackup_.c:3530 ../../standalone/drakconnect_.c:624
 #: ../../standalone/drakconnect_.c:649
 msgid "Password"
@@ -614,7 +614,7 @@ msgstr "追加"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3155 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3203 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "終了"
 
@@ -881,8 +881,8 @@ msgstr "受け付けるユーザ"
 msgid "Real name"
 msgstr "実際の氏名"
 
-#: ../../any.pm_.c:788 ../../printerdrake.pm_.c:849
-#: ../../printerdrake.pm_.c:964
+#: ../../any.pm_.c:788 ../../printerdrake.pm_.c:864
+#: ../../printerdrake.pm_.c:979
 msgid "User name"
 msgstr "ユーザ名"
 
@@ -938,7 +938,7 @@ msgstr "すべてのユーザを認める"
 msgid "No sharing"
 msgstr "ファイル共有しない"
 
-#: ../../any.pm_.c:988 ../../install_any.pm_.c:1198 ../../standalone.pm_.c:58
+#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:59
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "パッケージ %s が必要です。インストールしますか？"
@@ -948,7 +948,7 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "エクスポートには NFS か Samba が使えます。どちらにしますか？"
 
-#: ../../any.pm_.c:999 ../../install_any.pm_.c:1203 ../../standalone.pm_.c:63
+#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:64
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "必要パッケージ %s がありません"
@@ -1181,18 +1181,18 @@ msgid "Boot Style Configuration"
 msgstr "起動方式の設定"
 
 #: ../../bootlook.pm_.c:79 ../../harddrake/ui.pm_.c:62
-#: ../../harddrake/ui.pm_.c:63 ../../standalone/drakfloppy_.c:81
-#: ../../standalone/logdrake_.c:101
+#: ../../harddrake/ui.pm_.c:63 ../../standalone/drakfloppy_.c:82
+#: ../../standalone/logdrake_.c:102
 msgid "/_File"
 msgstr "/ファイル(_F)"
 
-#: ../../bootlook.pm_.c:80 ../../standalone/drakfloppy_.c:82
-#: ../../standalone/logdrake_.c:107
+#: ../../bootlook.pm_.c:80 ../../standalone/drakfloppy_.c:83
+#: ../../standalone/logdrake_.c:108
 msgid "/File/_Quit"
 msgstr "/ファイル(F)/終了(_Q)"
 
 #: ../../bootlook.pm_.c:80 ../../harddrake/ui.pm_.c:63
-#: ../../standalone/drakfloppy_.c:82 ../../standalone/logdrake_.c:107
+#: ../../standalone/drakfloppy_.c:83 ../../standalone/logdrake_.c:108
 msgid "<control>Q"
 msgstr "<control>Q"
 
@@ -1229,21 +1229,25 @@ msgid "Install themes"
 msgstr "テーマの導入"
 
 #: ../../bootlook.pm_.c:147
-msgid "Display theme under console"
-msgstr "コンソールでテーマを表示"
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"コンソールで\n"
+"テーマを表示"
 
 #: ../../bootlook.pm_.c:148
 msgid "Create new theme"
 msgstr "新しいテーマを作成"
 
-#: ../../bootlook.pm_.c:192
+#: ../../bootlook.pm_.c:193
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "%s を %s.old にバックアップ"
 
-#: ../../bootlook.pm_.c:193 ../../bootlook.pm_.c:196 ../../bootlook.pm_.c:199
-#: ../../bootlook.pm_.c:229 ../../bootlook.pm_.c:231 ../../bootlook.pm_.c:241
-#: ../../bootlook.pm_.c:250 ../../bootlook.pm_.c:257
+#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
+#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
 #: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
 #: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
 #: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
@@ -1254,33 +1258,33 @@ msgstr "%s を %s.old にバックアップ"
 msgid "Error"
 msgstr "エラー"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:194
 msgid "unable to backup lilo message"
 msgstr "liloメッセージをバックアップできません"
 
-#: ../../bootlook.pm_.c:195
+#: ../../bootlook.pm_.c:196
 #, c-format
 msgid "Copy %s to %s"
 msgstr "%s を%sにコピー中"
 
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:197
 msgid "can't change lilo message"
 msgstr "liloメッセージを変更できません"
 
-#: ../../bootlook.pm_.c:199
+#: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
 msgstr "liloメッセージが見つかりません"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr "/etc/sysconfig/bootsplashが書けません"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 #, c-format
 msgid "Write %s"
 msgstr "%sを書き込む"
 
-#: ../../bootlook.pm_.c:231
+#: ../../bootlook.pm_.c:232
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
@@ -1288,17 +1292,17 @@ msgstr ""
 "/etc/sysconfig/bootsplashが書き込めません\n"
 "ファイルが見つかりません。"
 
-#: ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr "mkinitrd -f /boot/initrd-%s.img %sを起動できません。"
 
-#: ../../bootlook.pm_.c:245
+#: ../../bootlook.pm_.c:246
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 msgstr "mkinitrd -f /boot/initrd-%s.img %sをinitrdにする"
 
-#: ../../bootlook.pm_.c:251
+#: ../../bootlook.pm_.c:252
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
@@ -1306,24 +1310,24 @@ msgstr ""
 "LiLoを再実行できません！\n"
 "Liloテーマのインストールを完了するにはrootになって「lilo」を実行します。"
 
-#: ../../bootlook.pm_.c:255
+#: ../../bootlook.pm_.c:256
 msgid "Relaunch 'lilo'"
 msgstr "liloを再実行します"
 
-#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:165
+#: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
 msgid "Notice"
 msgstr "通知"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Liloと起動時スプラッシュテーマのインストール成功"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "Theme installation failed!"
 msgstr "テーマのインストール失敗！"
 
-#: ../../bootlook.pm_.c:266
+#: ../../bootlook.pm_.c:267
 #, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
@@ -1332,24 +1336,24 @@ msgstr ""
 "いま、ブートマネージャには %s をお使いです。\n"
 "設定ウィザードを起動するには「設定」をクリックしましょう。"
 
-#: ../../bootlook.pm_.c:268 ../../standalone/drakbackup_.c:2429
+#: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:530
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
 msgid "Configure"
 msgstr "設定"
 
-#: ../../bootlook.pm_.c:275
+#: ../../bootlook.pm_.c:276
 msgid "Splash selection"
 msgstr "スプラッシュ選択"
 
-#: ../../bootlook.pm_.c:278
+#: ../../bootlook.pm_.c:279
 msgid "Themes"
 msgstr "テーマ"
 
-#: ../../bootlook.pm_.c:280
+#: ../../bootlook.pm_.c:281
 msgid ""
 "\n"
-"Select a theme for\n"
+"Select theme for\n"
 "lilo and bootsplash,\n"
 "you can choose\n"
 "them separatly"
@@ -1359,31 +1363,31 @@ msgstr ""
 "テーマを選びましょう。\n"
 "両者は別々に選べます"
 
-#: ../../bootlook.pm_.c:283
+#: ../../bootlook.pm_.c:284
 msgid "Lilo screen"
 msgstr "lilo画面"
 
-#: ../../bootlook.pm_.c:288
+#: ../../bootlook.pm_.c:289
 msgid "Bootsplash"
 msgstr "起動スプラッシュ"
 
-#: ../../bootlook.pm_.c:323
+#: ../../bootlook.pm_.c:324
 msgid "System mode"
 msgstr "システムモード"
 
-#: ../../bootlook.pm_.c:325
+#: ../../bootlook.pm_.c:326
 msgid "Launch the graphical environment when your system starts"
 msgstr "起動時に X ウィンドウを実行"
 
-#: ../../bootlook.pm_.c:330
+#: ../../bootlook.pm_.c:331
 msgid "No, I don't want autologin"
 msgstr "自動ログインはしない"
 
-#: ../../bootlook.pm_.c:332
+#: ../../bootlook.pm_.c:333
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "この (ユーザ、デスクトップ）で自動ログインする"
 
-#: ../../bootlook.pm_.c:342 ../../network/netconnect.pm_.c:97
+#: ../../bootlook.pm_.c:343 ../../network/netconnect.pm_.c:97
 #: ../../standalone/drakTermServ_.c:173 ../../standalone/drakTermServ_.c:300
 #: ../../standalone/drakTermServ_.c:405 ../../standalone/drakbackup_.c:4193
 #: ../../standalone/drakbackup_.c:4956 ../../standalone/drakconnect_.c:108
@@ -1396,46 +1400,46 @@ msgstr "この (ユーザ、デスクトップ）で自動ログインする"
 msgid "OK"
 msgstr "OK"
 
-#: ../../bootlook.pm_.c:402
+#: ../../bootlook.pm_.c:403
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "/etc/inittab が読みとり用に開けません: %s"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "GB"
 msgstr "GB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "KB"
 msgstr "KB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "MB"
 msgstr "MB"
 
-#: ../../common.pm_.c:102
+#: ../../common.pm_.c:107
 msgid "TB"
 msgstr "TB"
 
-#: ../../common.pm_.c:110
+#: ../../common.pm_.c:115
 #, c-format
 msgid "%d minutes"
 msgstr "あと %d 分"
 
-#: ../../common.pm_.c:112
+#: ../../common.pm_.c:117
 msgid "1 minute"
 msgstr "あと 1 分"
 
-#: ../../common.pm_.c:114
+#: ../../common.pm_.c:119
 #, c-format
 msgid "%d seconds"
 msgstr "あと %d 秒"
 
-#: ../../common.pm_.c:159
+#: ../../common.pm_.c:164
 msgid "Can't make screenshots before partitioning"
 msgstr "パーティションを追加するまでスクリーンショットは撮れません"
 
-#: ../../common.pm_.c:166
+#: ../../common.pm_.c:171
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "%s のインストール後にスクリーンショットが可能です"
@@ -1999,7 +2003,7 @@ msgstr "マウントオプション"
 msgid "Various"
 msgstr "その他"
 
-#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:103
+#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:104
 msgid "device"
 msgstr "デバイス"
 
@@ -2601,7 +2605,7 @@ msgstr "メディアクラス"
 msgid "class of hardware device"
 msgstr "ハードウェアデバイスのクラス"
 
-#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1517
+#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1562
 msgid "Description"
 msgstr "説明"
 
@@ -2673,7 +2677,7 @@ msgstr "/終了(_Q)"
 
 #: ../../harddrake/ui.pm_.c:64 ../../harddrake/ui.pm_.c:65
 #: ../../harddrake/ui.pm_.c:71 ../../harddrake/ui.pm_.c:73
-#: ../../standalone/logdrake_.c:110
+#: ../../standalone/logdrake_.c:111
 msgid "/_Help"
 msgstr "/ヘルプ(_H)"
 
@@ -2823,30 +2827,37 @@ msgstr "ラジオサポートを有効にする"
 msgid ""
 "GNU/Linux is a multiuser system, and this means that each user can have his\n"
 "own preferences, his own files and so on. You can read the ``User Guide''\n"
-"to learn more. But unlike \"root\", which is the administrator, the users\n"
-"you add here will not be entitled to change anything except their own files\n"
-"and their own configuration. You will have to create at least one regular\n"
-"user for yourself. That account is where you should log in for routine use.\n"
-"Although it is very practical to log in as \"root\" everyday, it may also\n"
-"be very dangerous! The slightest mistake could mean that your system would\n"
-"not work any more. If you make a serious mistake as a regular user, you may\n"
-"only lose some information, but not the entire system.\n"
+"to learn more this concept. But unlike \"root\", which is the\n"
+"administrator, the users you add here will not be entitled to change\n"
+"anything except their own files and their own configurations. You will have\n"
+"to create at least one regular user for yourself. That account is where you\n"
+"should log in for routine use. Although it is very practical to log in as\n"
+"\"root\" everyday, it may also be very dangerous! The slightest mistake\n"
+"could mean that your system would not work any more. If you make a serious\n"
+"mistake as a regular user, you may only lose some information, but not the\n"
+"entire system.\n"
 "\n"
-"First, you have to enter your real name. This is not mandatory, of course -\n"
-"as you can actually enter whatever you want. DrakX will then take the first\n"
-"word you have entered in the box and will bring it over to the \"User\n"
+"First, you have to enter your real name. This is not mandatory, of course\n"
+"-- as you can actually enter whatever you want. DrakX will then take the\n"
+"first word you have entered in the box and will bring it over to the \"User\n"
 "name\". This is the name this particular user will use to log onto the\n"
 "system. You can change it. You then have to enter a password here. A\n"
-"non-privileged (regular) user's password is not as crucial as the \"root\"'\n"
+"non-privileged (regular) user's password is not as crucial as the \"root\"\n"
 "one from a security point of view, but that is no reason to neglect it:\n"
 "after all, your files are at risk.\n"
 "\n"
 "If you click on \"Accept user\", you can then add as many as you want. Add\n"
-"a user for each one of your friends: your father or your sister, for\n"
-"example. When you finish adding all the users you want, select \"Done\".\n"
+"a user for each one of the people meant to use that computer. When you are\n"
+"finish adding all the users you want, select \"Done\".\n"
 "\n"
 "Clicking the \"Advanced\" button allows you to change the default \"shell\"\n"
-"for that user (bash by default)."
+"for that user (bash by default).\n"
+"\n"
+"When you are finished adding all users, you will be proposed to choose a\n"
+"user which can automatically log into the system when the computer boots\n"
+"up. If you are interested in that feature (and do not care much about local\n"
+"security), choose the desired user and window manager, then click \"Yes\".\n"
+"If you are not interested in this feature, click \"No\"."
 msgstr ""
 "GNU/Linux はマルチユーザシステムです。つまり各ユーザは自分の好きな設定や\n"
 "ファイルをもてます。詳しくは、ユーザーガイドを読んでください。\n"
@@ -2873,14 +2884,14 @@ msgstr ""
 "「高度な選択」ボタンを押すと、そのユーザのデフォルトのシェルを変えられま\n"
 "す（デフォルトは bash）"
 
-#: ../../help.pm_.c:41
+#: ../../help.pm_.c:48
 msgid ""
 "Listed above are the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, they are good for most common\n"
 "installations. If you make any changes, you must at least define a root\n"
 "partition (\"/\"). Do not choose too small a partition or you will not be\n"
 "able to install enough software. If you want to store your data on a\n"
-"separate partition, you will also need to create a partition for \"/home\"\n"
+"separate partition, you will also need to create a \"/home\" partition\n"
 "(only possible if you have more than one Linux partition available).\n"
 "\n"
 "Each partition is listed as follows: \"Name\", \"Capacity\".\n"
@@ -2939,7 +2950,7 @@ msgstr ""
 "SCSI ハードディスクの場合、「a」がSCSI ID番号最小のディスク、\n"
 "「b」はその次のID番号、という具合です"
 
-#: ../../help.pm_.c:72
+#: ../../help.pm_.c:79
 msgid ""
 "The Mandrake Linux installation is spread out over several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM and will eject the\n"
@@ -2949,7 +2960,7 @@ msgstr ""
 "は、選んだパッケージが別のCD-ROM上にあるときは、いまのCDを\n"
 "吐き出して、必要な別の CD を入れるよう要求します。"
 
-#: ../../help.pm_.c:77
+#: ../../help.pm_.c:84
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2982,7 +2993,7 @@ msgid ""
 "installation (by opposition to an upgrade), a dialog will pop up proposing\n"
 "different options for a minimal installation:\n"
 "\n"
-" * \"With X\": install the fewer packages possible to have a working\n"
+" * \"With X\": install the fewest packages possible to have a working\n"
 "graphical desktop;\n"
 "\n"
 " * \"With basic documentation\": installs the base system plus basic\n"
@@ -2998,8 +3009,8 @@ msgid ""
 "total control over what will be installed.\n"
 "\n"
 "If you started the installation in \"Upgrade\" mode, you can unselect all\n"
-"groups to avoid installing any new package. This is useful for repairing or\n"
-"updating an existing system."
+"groups to avoid installing any new package. This is useful to repair or\n"
+"update an existing system."
 msgstr ""
 "では、システムにどんなソフトをインストールするか指定しましょう。\n"
 "Mandrake Linux で使えるソフトは何千とありますし、全部を覚えられる人は\n"
@@ -3049,7 +3060,7 @@ msgstr ""
 "と新しいパッケージは入れずに、既存システムの修復更新をするだけにな\n"
 "ります。"
 
-#: ../../help.pm_.c:128
+#: ../../help.pm_.c:135
 msgid ""
 "Finally, depending on whether or not you chose to be able to select\n"
 "individual packages, you will be presented a tree containing all packages\n"
@@ -3060,9 +3071,9 @@ msgid ""
 "right. When your selection is finished, click the \"Install\" button which\n"
 "will then launch the installation process. Depending on the speed of your\n"
 "hardware and the number of packages that need to be installed, it may take\n"
-"a while to complete the process. An estimate of the time it will take to\n"
-"install everything is displayed on the screen, to help you gauge if there\n"
-"is sufficient time to enjoy a cup of coffee.\n"
+"a while to complete the process. An installation time estimate is displayed\n"
+"on the screen, to help you gauge if there is sufficient time to enjoy a cup\n"
+"of coffee.\n"
 "\n"
 "!! If a server package has been selected, either intentionally or because\n"
 "it was part of a whole group, you will be asked to confirm that you really\n"
@@ -3083,8 +3094,8 @@ msgid ""
 "The tiny floppy disk icon at the bottom of the list allows to load the\n"
 "package list chosen during a previous installation. Clicking on this icon\n"
 "will ask you to insert a floppy disk previously created at the end of\n"
-"another installation. See the second tip of last step on how to create such\n"
-"a floppy."
+"another installation. See the second tip of the previous step on how to\n"
+"create such a floppy disk."
 msgstr ""
 "最後に、「個別パッケージの選択」を選んだかどうかによっては\n"
 "すべてのパッケージがグループごとに分類されてツリー表示されます。\n"
@@ -3119,12 +3130,12 @@ msgstr ""
 "ように支持が出ます。こういうフロッピーの作り方は、さいごのステップ\n"
 "の二番目のヒントを読んでください。"
 
-#: ../../help.pm_.c:164
+#: ../../help.pm_.c:171
 msgid ""
 "You are now able to set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"OK\".\n"
 "The autodetection of network devices and modem will be launched. If this\n"
-"detection fails, uncheck the \"Use auto detection\" box next time. You may\n"
+"detection fails, uncheck the \"Use auto-detection\" box next time. You may\n"
 "also choose not to configure the network, or do it later; in that case,\n"
 "simply click the \"Cancel\" button.\n"
 "\n"
@@ -3135,8 +3146,8 @@ msgid ""
 "all the parameters from your Internet Service Provider or system\n"
 "administrator.\n"
 "\n"
-"You can consult the ``User Guide'' chapter about Internet connections for\n"
-"details about the configuration, or simply wait until your system is\n"
+"You can consult the ``Starter Guide'' chapter about Internet connections\n"
+"for details about the configuration, or simply wait until your system is\n"
 "installed and use the program described there to configure your connection.\n"
 "\n"
 "If you wish to configure the network later after installation, or if you\n"
@@ -3162,13 +3173,13 @@ msgstr ""
 "ネットワークの設定はインストール後にやりたい、あるいはネットワーク設定が\n"
 "すんでいるなら「キャンセル」を押します。"
 
-#: ../../help.pm_.c:186
+#: ../../help.pm_.c:193
 msgid ""
 "You may now choose which services you wish to start at boot time.\n"
 "\n"
-"Here are presented all the services available with the current\n"
-"installation. Review them carefully and uncheck those which are not always\n"
-"needed at boot time.\n"
+"Here are listed all the services available with the current installation.\n"
+"Review them carefully and uncheck those which are not always needed at boot\n"
+"time.\n"
 "\n"
 "You can get a short explanatory text about a service by selecting a\n"
 "specific service. However, if you are not sure whether a service is useful\n"
@@ -3193,7 +3204,7 @@ msgstr ""
 "サーバ上で使うと危険だというのをお忘れなく。\n"
 "一般に、本当に必要なサービスだけ選んでください。"
 
-#: ../../help.pm_.c:203
+#: ../../help.pm_.c:210
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
 "local time according to the time zone you selected. It is however possible\n"
@@ -3221,16 +3232,16 @@ msgstr ""
 "オプションによってはローカルネットワーク上の他のマシンが、それに接続して\n"
 "時間あわせをすることもできます。"
 
-#: ../../help.pm_.c:217
+#: ../../help.pm_.c:224
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely. In this section, DrakX\n"
-"will try to configure X automatically.\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely.\n"
 "\n"
-"It is extremely rare for it to fail, unless the hardware is very old (or\n"
-"very new). If it succeeds, it will start X automatically with the best\n"
-"resolution possible, depending on the size of the monitor. A window will\n"
+"You will be presented the list of available resolutions and color depth\n"
+"available for your hardware. Choose the one that best suit your needs (you\n"
+"will be able to change that after installation though). When you are\n"
+"satisfied with the sample shown in the monitor, click \"OK\". A window will\n"
 "then appear and ask you if you can see it.\n"
 "\n"
 "If you are doing an \"Expert\" installation, you will enter the X\n"
@@ -3240,7 +3251,7 @@ msgid ""
 "If you can see the message during the test, and answer \"Yes\", then DrakX\n"
 "will proceed to the next step. If you cannot see the message, it simply\n"
 "means that the configuration was wrong and the test will automatically end\n"
-"after 10 seconds, restoring the screen. Refer then to the Video\n"
+"after 10 seconds, restoring the screen. Refer then to the video\n"
 "configuration section of the user guide for more information on how to\n"
 "configure your display."
 msgstr ""
@@ -3261,7 +3272,7 @@ msgstr ""
 "メッセージが見えなければ、設定がまちがっているということなので、その\n"
 "テストは10秒で終了して、もとの画面に戻ります。"
 
-#: ../../help.pm_.c:239
+#: ../../help.pm_.c:246
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
 "at boot. Note this question will be asked even if you chose not to test the\n"
@@ -3274,19 +3285,19 @@ msgstr ""
 "ディスプレイの設定がうまくいかなかった時には、ここではもちろん「いいえ」\n"
 "と答えましょう。"
 
-#: ../../help.pm_.c:246
+#: ../../help.pm_.c:253
 msgid ""
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
 "booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<\n"
 "at the prompt. But in case your computer cannot boot from the CD-ROM, you\n"
 "should come back to this step for help in at least two situations:\n"
 "\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows in\n"
-"your system). If you need to reinstall Windows, the Microsoft install\n"
-"process will rewrite the boot sector, and then you will not be able to\n"
-"start GNU/Linux!\n"
+" * when installing the bootloader, DrakX will rewrite the boot sector (\n"
+"MBR) of your main disk (unless you are using another boot manager), to\n"
+"allow you to start up with either Windows or GNU/Linux (assuming you have\n"
+"Windows in your system). If you need to reinstall Windows, the Microsoft\n"
+"install process will rewrite the boot sector, and then you will not be able\n"
+"to start GNU/Linux!\n"
 "\n"
 " * if a problem arises and you cannot start up GNU/Linux from the hard\n"
 "disk, this floppy disk will be the only means of starting up GNU/Linux. It\n"
@@ -3322,14 +3333,13 @@ msgstr ""
 "入っていないものにしましょう。フォーマットする必要はありません。\n"
 "DrakXが完全にそれを書き換えます。"
 
-#: ../../help.pm_.c:270
+#: ../../help.pm_.c:277
 msgid ""
-"At this point, you need to choose where you want to install the Mandrake\n"
-"Linux operating system on your hard drive. If your hard drive is empty or\n"
-"if an existing operating system is using all the available space, you will\n"
-"need to partition it. Basically, partitioning a hard drive consists of\n"
-"logically dividing it to create space to install your new Mandrake Linux\n"
-"system.\n"
+"You now need to choose where you want to install the Mandrake Linux\n"
+"operating system on your hard drive. If your hard drive is empty or if an\n"
+"existing operating system is using all the available space, you will need\n"
+"to partition it. Basically, partitioning a hard drive consists of logically\n"
+"dividing it to create space to install your new Mandrake Linux system.\n"
 "\n"
 "Because the partitioning process' effects are usually irreversible,\n"
 "partitioning can be intimidating and stressful if you are an inexperienced\n"
@@ -3338,9 +3348,9 @@ msgid ""
 "\n"
 "If you are running the installation in Expert mode, you will enter\n"
 "DiskDrake, the Mandrake Linux partitioning tool, which allows you to\n"
-"fine-tune your partitions. See the DiskDrake section in the ``User Guide''.\n"
-"From the installation interface, you can use the wizards as described here\n"
-"by clicking the dialog's \"Wizard\" button.\n"
+"fine-tune your partitions. See the DiskDrake section in the ``Starter\n"
+"Guide''. From the installation interface, you can use the wizards as\n"
+"described here by clicking the dialog's \"Wizard\" button.\n"
 "\n"
 "If partitions have already been defined, either from a previous\n"
 "installation or from another partitioning tool, simply select those to\n"
@@ -3348,7 +3358,7 @@ msgid ""
 "\n"
 "If partitions are not defined, you will need to create them using the\n"
 "wizard. Depending on your hard drive configuration, several options are\n"
-"available:\n"
+"available.\n"
 "\n"
 " * \"Use free space\": this option will simply lead to an automatic\n"
 "partitioning of your blank drive(s). You will not be prompted further;\n"
@@ -3359,9 +3369,9 @@ msgid ""
 "each of the partitions. The legacy mount points are selected by default,\n"
 "and you should generally keep them.\n"
 "\n"
-" * \"Use the free space on the Windows; partition\": if Microsoft Windows\n"
-"is installed on your hard drive and takes all the space available on it,\n"
-"you have to create free space for Linux data. To do so, you can delete your\n"
+" * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
+"installed on your hard drive and takes all the space available on it, you\n"
+"have to create free space for Linux data. To do so, you can delete your\n"
 "Microsoft Windows partition and data (see ``Erase entire disk'' or ``Expert\n"
 "mode'' solutions) or resize your Microsoft Windows partition. Resizing can\n"
 "be performed without the loss of any data, provided you previously\n"
@@ -3388,10 +3398,10 @@ msgid ""
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
 " * \"Expert mode\": choose this option if you want to manually partition\n"
-"your hard drive. Be careful - it is a powerful but dangerous choice. You\n"
+"your hard drive. Be careful -- it is a powerful but dangerous option. You\n"
 "can very easily lose all your data. Hence, do not choose this unless you\n"
-"know what you are doing. To know how do use the DiskDrake utility used\n"
-"here, refer to the section ``Managing Your Partitions'' of the ````User\n"
+"know what you are doing. To know how to use the DiskDrake utility used\n"
+"here, refer to the section ``Managing Your Partitions'' of the ````Starter\n"
 "Guide''''"
 msgstr ""
 "さてこんどは、ハードディスク上でMandrake Linux OS をどこにインストール\n"
@@ -3458,9 +3468,9 @@ msgstr ""
 "  危険な選択でもあります。ディスク上の全データをあっさり消してしまえます。\n"
 "  よくよくわかったうえでなければ、これは選ばないでください。"
 
-#: ../../help.pm_.c:341
+#: ../../help.pm_.c:347
 msgid ""
-"There you are. Installation is now complete and your GNU/Linux system is\n"
+"There you are. Installation is now completed and your GNU/Linux system is\n"
 "ready to use. Just click \"OK\" to reboot the system. You can start\n"
 "GNU/Linux or Windows, whichever you prefer (if you are dual-booting), as\n"
 "soon as the computer has booted up again.\n"
@@ -3517,10 +3527,10 @@ msgstr ""
 "(*) FAT 形式のフロッピーが必要（GNU/Linux で作るには「mformat a:」\n"
 "とタイプします。)"
 
-#: ../../help.pm_.c:372
+#: ../../help.pm_.c:378
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
-"(formatting means creating a filesystem).\n"
+"(formatting means creating a filesystem on it).\n"
 "\n"
 "At this time, you may wish to reformat some already existing partitions to\n"
 "erase any data they contain. If you wish to do that, please select those\n"
@@ -3534,7 +3544,7 @@ msgid ""
 "\n"
 "Please be careful when selecting partitions. After formatting, all data on\n"
 "the selected partitions will be deleted and you will not be able to recover\n"
-"any of it.\n"
+"it.\n"
 "\n"
 "Click on \"OK\" when you are ready to format partitions.\n"
 "\n"
@@ -3565,7 +3575,7 @@ msgstr ""
 "「キャンセル」をクリックしてください。\n"
 "不良ブロックのチェックをしたければ「高度な選択」をクリックします。"
 
-#: ../../help.pm_.c:398
+#: ../../help.pm_.c:404
 msgid ""
 "Your new Mandrake Linux operating system is currently being installed.\n"
 "Depending on the number of packages you will be installing and the speed of\n"
@@ -3579,7 +3589,7 @@ msgstr ""
 "\n"
 "しばらくお待ちを。"
 
-#: ../../help.pm_.c:406
+#: ../../help.pm_.c:412
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Some bugs may have\n"
@@ -3606,20 +3616,20 @@ msgstr ""
 "何が選ばれたか確認しましょう。「インストール」を押すと、選択パッケージ\n"
 "が読み込みインストールされます。「キャンセル」で中断です。"
 
-#: ../../help.pm_.c:419
+#: ../../help.pm_.c:425
 msgid ""
 "Before continuing, you should read carefully the terms of the license. It\n"
 "covers the whole Mandrake Linux distribution, and if you do not agree with\n"
-"all the terms in it, click on the \"Refuse\" button which will immediately\n"
-"terminate the installation. To continue with the installation, click on the\n"
-"\"Accept\" button."
+"all the terms included in it, click on the \"Refuse\" button which will\n"
+"immediately terminate the installation. To continue with the installation,\n"
+"click on the \"Accept\" button."
 msgstr ""
 "先に進む前にライセンス条件を慎重に読んでください。これは Mandrake Linux\n"
 "全体をカバーするものです。一つでも同意できない条項があれば、「拒否」\n"
 "を押してください。するとインストールがすぐに終わります。インストールを\n"
 "続けるには、「同意する」ボタンを押してください。"
 
-#: ../../help.pm_.c:426
+#: ../../help.pm_.c:432
 msgid ""
 "At this point, it is time to choose the security level desired for the\n"
 "machine. As a rule of thumb, the more exposed the machine is, and the more\n"
@@ -3638,7 +3648,7 @@ msgstr ""
 "\n"
 "何を選べばいいかわからなければ、デフォルトのままにしておきましょう。"
 
-#: ../../help.pm_.c:436
+#: ../../help.pm_.c:442
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -3656,16 +3666,16 @@ msgid ""
 "drive;\n"
 "\n"
 " * \"Auto allocate\": this option enables to automatically create ext3 and\n"
-"swap partitions in free space of your hard drive;\n"
+"swap partitions on your hard drive's free space;\n"
 "\n"
 "\"More\": gives access to additional features:\n"
 "\n"
 " * \"Save partition table\": saves the partition table to a floppy. Useful\n"
-"for later partition-table recovery if necessary. It is strongly recommended\n"
-"to perform this step;\n"
+"for later partition-table recovery, if necessary. It is strongly\n"
+"recommended to perform this step;\n"
 "\n"
 " * \"Restore partition table\": allows to restore a previously saved\n"
-"partition table from floppy disk;\n"
+"partition table from a floppy disk;\n"
 "\n"
 " * \"Rescue partition table\": if your partition table is damaged, you can\n"
 "try to recover it using this option. Please be careful and remember that it\n"
@@ -3777,7 +3787,7 @@ msgstr ""
 "このパーティションを、たとえば 50 MB とか大きめにしておくと、そこに予備の\n"
 "カーネルやramdisk イメージを保存しておけて、緊急起動に使えて便利です。"
 
-#: ../../help.pm_.c:507
+#: ../../help.pm_.c:513
 msgid ""
 "More than one Microsoft partition has been detected on your hard drive.\n"
 "Please choose the one you want to resize in order to install your new\n"
@@ -3839,47 +3849,45 @@ msgstr ""
 "「ウィンドウズ名」は、ウィンドウズでのドライブ文字です（最初のディスク\n"
 "やパーティションは「C:」ドライブです)。"
 
-#: ../../help.pm_.c:538
+#: ../../help.pm_.c:544
 msgid "Please be patient. This operation can take several minutes."
 msgstr "しばらくお待ちを。この操作はしばらくかかりますので。"
 
-#: ../../help.pm_.c:541
+#: ../../help.pm_.c:547
 msgid ""
 "DrakX now needs to know if you want to perform a default (\"Recommended\")\n"
-"installation or if you want to have greater control (\"Expert\"). You can\n"
-"also choose to do a new install or an upgrade of an existing Mandrake Linux\n"
-"system:\n"
+"installation or if you want to have greater control (\"Expert\") over your\n"
+"installation. You can also choose to do a new installation or upgrade your\n"
+"existing Mandrake Linux system:\n"
 "\n"
-" * \"Install\": completely wipes out the old system, however, depending on\n"
+" * \"Install\": completely wipes out the old system. However, depending on\n"
 "what is currently installed on your machine, you may be able to keep some\n"
 "old partitions (Linux or otherwise) unchanged;\n"
 "\n"
 " * \"Upgrade\": this installation class allows to simply update the\n"
-"packages currently installed on your Mandrake Linux system. It keeps the\n"
-"current partitions of your hard drives as well as user configurations. All\n"
-"other configuration steps remain available, similar to a normal\n"
-"installation;\n"
+"packages currently installed on your Mandrake Linux system. It keeps your\n"
+"hard drives' current partitions as well as user configurations. All other\n"
+"configuration steps remain available, similar to a normal installation;\n"
 "\n"
 " * \"Upgrade Packages Only\": this new installation class allows you to\n"
 "upgrade an existing Mandrake Linux system while keeping all system\n"
 "configurations unchanged. Adding new packages to the current installation\n"
 "is also possible.\n"
 "\n"
-"Upgrades should work fine on Mandrake Linux systems containing version\n"
-"\"8.1\" or later.\n"
+"Upgrades should work fine on Mandrake Linux systems using version \"8.1\"\n"
+"or later.\n"
 "\n"
-"Depending on your knowledge of GNU/Linux, select one of the following\n"
-"choices:\n"
+"Depending on your GNU/Linux knowledge, select one of the following choices:\n"
 "\n"
 " * Recommended: choose this if you have never installed a GNU/Linux\n"
 "operating system. The installation will be very easy and you will only be\n"
 "asked a few questions;\n"
 "\n"
-" * Expert: if you have a good understanding of GNU/Linux, you may wish to\n"
+" * Expert: if you have a good GNU/Linux understanding, you may wish to\n"
 "perform a highly customized installation. Some of the decisions you will\n"
-"have to make may be difficult if you do not have good knowledge of\n"
-"GNU/Linux, so it is not recommended that those without a fair amount of\n"
-"experience select this installation class."
+"have to make may be difficult if you do not have good GNU/Linux knowledge,\n"
+"so it is not recommended that those without a fair amount of experience\n"
+"select this installation class."
 msgstr ""
 "DrakXはこんどは、どんな種類のインストールをしたいか尋ねます。デフォルト\n"
 "（推奨）インストールか、もっとコントロールしたいか（「エキスパート」）\n"
@@ -3911,7 +3919,7 @@ msgstr ""
 "GNU/Linuxについてよほど詳しくないと、なかなか答えられない質問が\n"
 "あります。わかった人以外は、このクラスは選ばないこと。"
 
-#: ../../help.pm_.c:578
+#: ../../help.pm_.c:582
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen). However, you might not have a keyboard that\n"
@@ -3925,8 +3933,8 @@ msgid ""
 "supported keyboards.\n"
 "\n"
 "If you choose a keyboard layout based on a non-latin alphabet, you will be\n"
-"asked on next dialog to choose the key binding that will switch the\n"
-"keyboard layout between the latin and non latin layouts."
+"asked in the next dialog to choose the key binding that will switch the\n"
+"keyboard layout between the latin and non-latin layouts."
 msgstr ""
 "ふつう、drakXはあなた用の正しいキーボードを自動的に選びます（言語の選択\n"
 "をもとに判断します）。だからこのステップはふつうは出てきません。が、自分\n"
@@ -3938,7 +3946,7 @@ msgstr ""
 "\n"
 "「もっと」ボタンを押すと、サポートされるキーボードがすべて表示されます。"
 
-#: ../../help.pm_.c:594
+#: ../../help.pm_.c:598
 msgid ""
 "The first step is to choose your preferred language.\n"
 "\n"
@@ -3947,12 +3955,16 @@ msgid ""
 "Clicking on the \"Advanced\" button will allow you to select other\n"
 "languages to be installed on your workstation. Selecting other languages\n"
 "will install the language-specific files for system documentation and\n"
-"applications. For example, if you will host users from Spain on your\n"
-"machine, select English as the main language in the tree view and in the\n"
-"Advanced section click on the box corresponding to \"Spanish|Spain\".\n"
+"applications. For example, if you host users from Spain on your machine,\n"
+"select English as the main language in the tree view and in the Advanced\n"
+"section, click on the box corresponding to \"Spanish|Spain\".\n"
 "\n"
 "Note that multiple languages may be installed. Once you have selected any\n"
-"additional locales, click the \"OK\" button to continue."
+"additional locales, click the \"OK\" button to continue.\n"
+"\n"
+"To switch from one language to the other, you can launch the\n"
+"\"/usr/sbin/localedrake\" command as \"root\" to change the whole system\n"
+"language, or as a simple user to only change that user's default language."
 msgstr ""
 "インストールとシステム利用で使う言語を選んでください。\n"
 "\n"
@@ -3964,14 +3976,14 @@ msgstr ""
 "言語は複数選べます。追加の言語（ロケール）を選んで、OKを押して確認したら、\n"
 "自動的に次のステップに進みます。"
 
-#: ../../help.pm_.c:609
+#: ../../help.pm_.c:617
 msgid ""
-"DrakX generally detects the number of buttons your mouse has. If not, it\n"
-"assumes you have a two-button mouse and will set it up for third-button\n"
+"DrakX generally detects the number of buttons your mouse possesses. If not,\n"
+"it assumes you have a two-button mouse and will set it up for third-button\n"
 "emulation. DrakX will automatically know whether it is a PS/2, serial or\n"
 "USB mouse.\n"
 "\n"
-"If you wish to specify a different type of mouse select the appropriate\n"
+"If you wish to specify a different type of mouse, select the appropriate\n"
 "type from the provided list.\n"
 "\n"
 "If you choose a mouse other than the default, a test screen will be\n"
@@ -3979,12 +3991,12 @@ msgid ""
 "correct. If the mouse is not working well, press the space bar or [Return]\n"
 "to \"Cancel\" and choose again.\n"
 "\n"
-"Wheel mouses are sometimes not automatically detected. You will need to\n"
+"Sometimes, wheel mouses are not automatically detected. You will need to\n"
 "manually select it in the list. Be sure to select the one corresponding to\n"
 "the correct port it is attached to. After you have pressed the \"OK\"\n"
-"button, a mouse image is displayed. You then need to move the wheel of your\n"
-"mouse to activate it correctly. Then test all buttons and movements are\n"
-"correct."
+"button, a mouse image will be displayed. You then need to move the wheel of\n"
+"your mouse to activate it correctly. Then test that all buttons and\n"
+"movements are correct."
 msgstr ""
 "デフォルトだと、DrakX は２ボタンマウスを想定して、中央ボタンをエミュレート\n"
 "する設定になっています。DrakX は、それがPS/2マウスかUSBマウスかを自動判定\n"
@@ -3997,7 +4009,7 @@ msgstr ""
 "動かなければ、スペースか「リターン」を押してキャンセルして、選びなおし\n"
 "ます。"
 
-#: ../../help.pm_.c:630
+#: ../../help.pm_.c:638
 msgid ""
 "Please select the correct port. For example, the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux."
@@ -4005,23 +4017,23 @@ msgstr ""
 "正しいポートを選んでください。たとえば、MS ウィンドウズでの\n"
 "COM1ポートは、GNU/Linuxでは ttyS0 という名前になります。"
 
-#: ../../help.pm_.c:634
+#: ../../help.pm_.c:642
 msgid ""
-"This is the most crucial decision point for the security of your GNU/Linux\n"
-"system: you have to enter the \"root\" password. \"root\" is the system\n"
-"administrator and is the only one authorized to make updates, add users,\n"
-"change the overall system configuration, and so on. In short, \"root\" can\n"
-"do everything! That is why you must choose a password that is difficult to\n"
-"guess - DrakX will tell you if it is too easy. As you can see, you can\n"
-"choose not to enter a password, but we strongly advise you against this if\n"
-"only for one reason: do not think that because you booted GNU/Linux that\n"
-"your other operating systems are safe from mistakes. Since \"root\" can\n"
-"overcome all limitations and unintentionally erase all data on partitions\n"
-"by carelessly accessing the partitions themselves, it is important for it\n"
-"to be difficult to become \"root\".\n"
+"This is the most crucial decision in regards with the security of your\n"
+"GNU/Linux system: you have to enter the \"root\" password. \"Root\" is the\n"
+"system administrator and is the only one authorized to make updates, add\n"
+"users, change the overall system configuration, and so on. In short,\n"
+"\"root\" can do everything! That is why you must choose a password that is\n"
+"difficult to guess -- DrakX will tell you if it is too easy. As you can\n"
+"see, you can choose not to enter a password, but we strongly advise you\n"
+"against this if only for one reason: do not think that because you booted\n"
+"GNU/Linux that your other operating systems are safe from mistakes. Since\n"
+"\"root\" can overcome all limitations and unintentionally erase all data on\n"
+"partitions by carelessly accessing the partitions themselves, it is\n"
+"important for it to be difficult to become \"root\".\n"
 "\n"
 "The password should be a mixture of alphanumeric characters and at least 8\n"
-"characters long. Never write down the \"root\" password - it makes it too\n"
+"characters long. Never write down the \"root\" password -- it makes it too\n"
 "easy to compromise a system.\n"
 "\n"
 "However, please do not make the password too long or complicated because\n"
@@ -4035,9 +4047,9 @@ msgid ""
 "In Expert mode, you will be asked if you will be connecting to an\n"
 "authentication server, like NIS or LDAP.\n"
 "\n"
-"If your network uses either of the LDAP, NIS, or PDC Windows Domain\n"
-"authentication services, select the appropriate one as \"authentication\".\n"
-"If you do not know, ask your network administrator.\n"
+"If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
+"services, select the appropriate one as \"authentication\". If you have no\n"
+"clue, ask your network administrator.\n"
 "\n"
 "If your computer is not connected to any administrated network, you will\n"
 "want to choose \"Local files\" for authentication."
@@ -4069,11 +4081,11 @@ msgstr ""
 "「NISを使う」オプションを選びます。「OK」を押したら、必要な情報\n"
 "を入力します。"
 
-#: ../../help.pm_.c:670
+#: ../../help.pm_.c:678
 msgid ""
-"LILO and grub are GNU/Linux bootloaders. This stage, normally, is totally\n"
+"LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. In fact, DrakX analyzes the disk boot sector and acts\n"
-"accordingly, depending on what it finds here:\n"
+"accordingly, depending on what it finds there:\n"
 "\n"
 " * if a Windows boot sector is found, it will replace it with a grub/LILO\n"
 "boot sector. Hence, you will be able to load either GNU/Linux or another\n"
@@ -4082,14 +4094,14 @@ msgid ""
 " * if a grub or LILO boot sector is found, it will replace it with a new\n"
 "one.\n"
 "\n"
-"If in doubt, DrakX will display a dialog with various options.\n"
+"if in doubt, DrakX will display a dialog with various options.\n"
 "\n"
 " * \"Bootloader to use\": you have three choices:\n"
 "\n"
-"    * \"GRUB\": if you prefer grub (text menu).\n"
+"    * \"GRUB\": if you prefer grub (text menu);\n"
 "\n"
 "    * \"LILO with graphical menu\": if you prefer LILO with its graphical\n"
-"interface.\n"
+"interface;\n"
 "\n"
 "    * \"LILO with text menu\": if you prefer LILO with its text menu\n"
 "interface.\n"
@@ -4099,7 +4111,7 @@ msgid ""
 "second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\");\n"
 "\n"
 " * \"Delay before booting the default image\": when rebooting the computer,\n"
-"this is the delay granted to the user to choose - in the bootloader menu,\n"
+"this is the delay granted to the user to choose -- in the bootloader menu,\n"
 "another boot entry than the default one.\n"
 "\n"
 "!! Beware that if you choose not to install a bootloader (by selecting\n"
@@ -4155,7 +4167,7 @@ msgstr ""
 "たりできます。「完了」を押せば、インストールの次のステップへ進み\n"
 "ます。"
 
-#: ../../help.pm_.c:710
+#: ../../help.pm_.c:718
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options which will be available at boot time will be displayed.\n"
@@ -4163,7 +4175,7 @@ msgid ""
 "If there is another operating system installed on your machine, it will\n"
 "automatically be added to the boot menu. Here, you can choose to fine-tune\n"
 "the existing options. Select an entry and click \"Modify\" to modify or\n"
-"remove it; \"Add\" creates a new entry; and \"Done\" goes on to the next\n"
+"remove it. \"Add\" creates a new entry. and \"Done\" goes on to the next\n"
 "installation step.\n"
 "\n"
 "You may also not want to give access to these other operating systems to\n"
@@ -4180,10 +4192,10 @@ msgstr ""
 "場合にはそのOSのエントリを削除しておきましょう。ただしこの場合は、\n"
 "そのOSを使うときには起動ディスクが要りますよ！"
 
-#: ../../help.pm_.c:724
+#: ../../help.pm_.c:732
 msgid ""
 "You must indicate where you wish to place the information required to boot\n"
-"to GNU/Linux.\n"
+"GNU/Linux.\n"
 "\n"
 "Unless you know exactly what you are doing, choose \"First sector of drive\n"
 "(MBR)\"."
@@ -4192,34 +4204,26 @@ msgstr ""
 "\n"
 "よくわからないなら「ドライブの最初のセクタ(MBR)」を選んでください。"
 
-#: ../../help.pm_.c:731
+#: ../../help.pm_.c:739
 msgid ""
-"Here, we select a printing system for your computer. Other OSs may offer\n"
-"you one, but Mandrake Linux offers three.\n"
+"Here, we select a printing system for your computer. Other OSes may offer\n"
+"you one, but Mandrake Linux offers two.\n"
 "\n"
-" * \"pdq\" - which means ``print, don't queue'', is the choice if you have\n"
+" * \"pdq\" -- which means ``print, don't queue'', is the choice if you have\n"
 "a direct connection to your printer and you want to be able to panic out of\n"
 "printer jams, and you do not have networked printers. It will handle only\n"
 "very simple network cases and is somewhat slow for networks. Pick \"pdq\"\n"
-"if this is your maiden voyage to GNU/Linux. You can change your choices\n"
+"if this is your first voyage to GNU/Linux. You can change your choices\n"
 "after installation by running PrinterDrake from the Mandrake Control Center\n"
 "and clicking the expert button.\n"
 "\n"
-" * \"CUPS\" - ``Common Unix Printing System'', is excellent at printing to\n"
+" * \"CUPS\" -- ``Common Unix Printing System'', is excellent at printing to\n"
 "your local printer and also halfway-around the planet. It is simple and can\n"
 "act as a server or a client for the ancient \"lpd\" printing system. Hence,\n"
 "it is compatible with the systems that went before. It can do many tricks,\n"
 "but the basic setup is almost as easy as \"pdq\". If you need this to\n"
 "emulate an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has\n"
-"graphical front-ends for printing or choosing printer options.\n"
-"\n"
-" * \"lprNG\" - ``line printer daemon New Generation''. This system can do\n"
-"approximately the same things the others can do, but it will print to\n"
-"printers mounted on a Novell Network, because it supports the IPX protocol,\n"
-"and it can print directly to shell commands. If you have need of Novell or\n"
-"printing to commands without using a separate pipe construct, use lprNG.\n"
-"Otherwise, CUPS is preferable as it is simpler and better at working over\n"
-"networks."
+"graphical front-ends for printing or choosing printer options."
 msgstr ""
 "ここではコンピュータ用の印刷システムを選びます。他のOSでは一つしか\n"
 "提供されない印刷システムが、ここでは3つもあります。\n"
@@ -4250,7 +4254,7 @@ msgstr ""
 
 #: ../../help.pm_.c:759
 msgid ""
-"DrakX now detects any IDE devices present in your computer. It will also\n"
+"DrakX now detects any IDE device present in your computer. It will also\n"
 "scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
@@ -4260,7 +4264,7 @@ msgid ""
 "be presented with a list of SCSI cards to choose from. Click \"No\" if you\n"
 "have no SCSI hardware. If you are unsure, you can check the list of\n"
 "hardware detected in your machine by selecting \"See hardware info\" and\n"
-"clicking \"OK\". Examine the list of hardware and then click on the \"OK\"\n"
+"clicking \"OK\". Examine the hardware list and then click on the \"OK\"\n"
 "button to return to the SCSI interface question.\n"
 "\n"
 "If you have to manually specify your adapter, DrakX will ask if you want to\n"
@@ -4269,12 +4273,7 @@ msgid ""
 "usually works well.\n"
 "\n"
 "If DrakX is not able to probe for the options which need to be passed, you\n"
-"will need to provide options to the driver manually. Please review the\n"
-"``User Guide'' (chapter 3, in the ``Collecting Information on Your\n"
-"Hardware'' section) for hints on retrieving the parameters required from\n"
-"hardware documentation, from the manufacturer's web site (if you have\n"
-"Internet access) or from Microsoft Windows (if you used this hardware with\n"
-"Windows on your system)."
+"will need to manually provide options to the driver."
 msgstr ""
 "DrakXはマシン上のIDEデバイスを全部見つけようとします。またPCI SCSI\n"
 "アダプタもあれば検出しようとします。SCSIカードみつけたら、適切なドライバ\n"
@@ -4298,12 +4297,12 @@ msgstr ""
 "あるいは（システム上にあれば）MS Windows からどうやって必要情報を得るか\n"
 "を調べてください。"
 
-#: ../../help.pm_.c:786
+#: ../../help.pm_.c:781
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
 "systems, alternate kernels, or for an emergency boot image.\n"
 "\n"
-"For other OSs, the entry consists only of a label and the \"root\"\n"
+"For other OSes, the entry consists only of a label and the \"root\"\n"
 "partition.\n"
 "\n"
 "For Linux, there are a few possible options:\n"
@@ -4334,7 +4333,7 @@ msgid ""
 "need to allocate a large ramdisk, this option can be used;\n"
 "\n"
 " * Read-write: normally the \"root\" partition is initially brought up in\n"
-"read-only, to allow a file system check before the system becomes ``live''.\n"
+"read-only, to allow a filesystem check before the system becomes ``live''.\n"
 "Here, you can override this option;\n"
 "\n"
 " * NoVideo: should the Apple video hardware prove to be exceptionally\n"
@@ -4390,7 +4389,7 @@ msgstr ""
 "エントリはまた、TABを押して起動時の選択肢を表示させたときには、\n"
 "「*」がついてハイライトされています。"
 
-#: ../../help.pm_.c:833
+#: ../../help.pm_.c:828
 msgid ""
 "Yaboot is a bootloader for NewWorld MacIntosh hardware. It is able to boot\n"
 "either GNU/Linux, MacOS or MacOSX if present on your computer. Normally,\n"
@@ -4454,10 +4453,10 @@ msgstr ""
 "  * デフォルト OS: オープンファームウェアの待ち時間が過ぎたとき、どの\n"
 "OSが起動するかを指定します。"
 
-#: ../../help.pm_.c:865
+#: ../../help.pm_.c:860
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
-"your installed hardware, you may - or not, see the following entries:\n"
+"your installed hardware, you may (or may not), see the following entries:\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary;\n"
@@ -4472,19 +4471,19 @@ msgid ""
 "order to configure the clock according to the time zone you are in;\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``User\n"
+"configuration wizard. Consult the correpsonding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
-"presented there is similar to the one used during installation;\n"
+"presented there is similar to the one used at installation time;\n"
 "\n"
-" * \"Sound card\": if a sound card is detected on your system, it is\n"
+" * \"Sound card\": if a sound card is detected on your system, it will be\n"
 "displayed here. No modification possible at installation time;\n"
 "\n"
-" * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. No modification possible at installation time;\n"
+" * \"TV card\": if a TV card is detected on your system, it will be\n"
+"displayed here. No modification possible at installation time;\n"
 "\n"
-" * \"ISDN card\": if an ISDN card is detected on your system, it is\n"
+" * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
 "displayed here. You can click on the button to change the parameters\n"
-"associated with it."
+"associated to it."
 msgstr ""
 "あなたのマシンに関する各種のパラメータを示します。ハードウェアにも\n"
 "よりますが、以下のような項目が出てくるはずです:\n"
@@ -4512,7 +4511,7 @@ msgstr ""
 " * 「ISDN カード」: ISDN カードが検出されたらここに表示されます。\n"
 "ボタンをクリックすると関連パラメータが変えられます。"
 
-#: ../../help.pm_.c:896
+#: ../../help.pm_.c:891
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandrake Linux partition. Be careful, all data present on it will be lost\n"
@@ -4522,14 +4521,14 @@ msgstr ""
 "ハードディスクを選んでください。そのハードディスク上のデータは全部\n"
 "消えて回復できません。注意してください。"
 
-#: ../../help.pm_.c:901
+#: ../../help.pm_.c:896
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"OK\", you will not be able\n"
 "to recover any data and partitions present on this hard drive, including\n"
 "any Windows data.\n"
 "\n"
-"Click on \"Cancel\" to cancel this operation without losing any data and\n"
+"Click on \"Cancel\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
 "このハードディスク上のすべてのデータやパーティションを\n"
@@ -4556,7 +4555,7 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "%s もフォーマットしてください"
 
-#: ../../install_any.pm_.c:424
+#: ../../install_any.pm_.c:423
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -4580,7 +4579,7 @@ msgstr ""
 "\n"
 "本当にこのサーバをインストールしていいですね？\n"
 
-#: ../../install_any.pm_.c:442
+#: ../../install_any.pm_.c:441
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -4593,20 +4592,20 @@ msgstr ""
 "\n"
 "本当にこれらを削除していいですか?\n"
 
-#: ../../install_any.pm_.c:472
+#: ../../install_any.pm_.c:471
 msgid "Can't use broadcast with no NIS domain"
 msgstr "NIS ドメインがないのでブロードキャストが使えません"
 
-#: ../../install_any.pm_.c:869
+#: ../../install_any.pm_.c:870
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "FAT形式のフロッピーをドライブ %s に挿入"
 
-#: ../../install_any.pm_.c:873
+#: ../../install_any.pm_.c:874
 msgid "This floppy is not FAT formatted"
 msgstr "このフロッピーは FATフォーマットじゃありません"
 
-#: ../../install_any.pm_.c:885
+#: ../../install_any.pm_.c:886
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -4614,12 +4613,12 @@ msgstr ""
 "この保存したパッケージ選択を使うには、インストールの起動時に「linux "
 "defcfg=floppy」と指定します。"
 
-#: ../../install_any.pm_.c:908 ../../partition_table.pm_.c:767
+#: ../../install_any.pm_.c:909 ../../partition_table.pm_.c:767
 #, c-format
 msgid "Error reading file %s"
 msgstr "ファイル %s の読みとりエラーです"
 
-#: ../../install_any.pm_.c:1030
+#: ../../install_any.pm_.c:1031
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -4862,7 +4861,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "%s へようこそ"
 
-#: ../../install_steps.pm_.c:531 ../../install_steps.pm_.c:770
+#: ../../install_steps.pm_.c:542 ../../install_steps.pm_.c:781
 msgid "No floppy drive available"
 msgstr "有効なフロッピードライブがありません"
 
@@ -5784,8 +5783,8 @@ msgstr "マウス"
 msgid "Timezone"
 msgstr "時間帯"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2937
-#: ../../printerdrake.pm_.c:3026
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2985
+#: ../../printerdrake.pm_.c:3074
 msgid "Printer"
 msgstr "プリンタ"
 
@@ -5841,7 +5840,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr "このパスワードは簡単すぎます（最低でも %d 文字使ってください）"
 
 #: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:49
-#: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:172
+#: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:173
 msgid "Authentication"
 msgstr "認証"
 
@@ -5943,7 +5942,7 @@ msgstr "最初のフロッピードライブ"
 msgid "Second floppy drive"
 msgstr "二番目のフロッピードライブ"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2470
+#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2515
 msgid "Skip"
 msgstr "スキップ"
 
@@ -6166,12 +6165,12 @@ msgstr "ファイルを選択"
 msgid "Advanced"
 msgstr "高度な選択"
 
-#: ../../interactive.pm_.c:321
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
 msgid "Basic"
 msgstr "基本"
 
 #: ../../interactive/newt.pm_.c:195 ../../my_gtk.pm_.c:158
-#: ../../printerdrake.pm_.c:2124
+#: ../../printerdrake.pm_.c:2169
 msgid "<- Previous"
 msgstr "<- もどる"
 
@@ -6782,7 +6781,7 @@ msgstr ""
 msgid "Finish"
 msgstr "完了"
 
-#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2126
+#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2171
 msgid "Next ->"
 msgstr "次 ->"
 
@@ -6919,7 +6918,7 @@ msgstr ""
 "システム上にイーサネットアダプタが見つかりません。この種類の\n"
 "接続は設定できません。"
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:240
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
 msgid "Choose the network interface"
 msgstr "ネットワークインターフェイスの選択"
 
@@ -7253,13 +7252,13 @@ msgstr "設定するプロフィールの選択"
 msgid "Use auto detection"
 msgstr "自動検出を使う"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3151
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3199
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
-#: ../../standalone/drakfloppy_.c:145
+#: ../../standalone/drakfloppy_.c:146
 msgid "Expert Mode"
 msgstr "エキスパートモード"
 
-#: ../../network/netconnect.pm_.c:174 ../../printerdrake.pm_.c:386
+#: ../../network/netconnect.pm_.c:174 ../../printerdrake.pm_.c:399
 msgid "Detecting devices..."
 msgstr "デバイスの検出中です……"
 
@@ -7427,7 +7426,7 @@ msgstr "IP の自動設定"
 msgid "Start at boot"
 msgstr "起動時に開始"
 
-#: ../../network/network.pm_.c:333 ../../printerdrake.pm_.c:860
+#: ../../network/network.pm_.c:333 ../../printerdrake.pm_.c:875
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP アドレスは 1.2.3.4 のように入力して下さい"
 
@@ -7684,7 +7683,7 @@ msgstr "LPD - ラインプリンタデーモン"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue（キューなしで印刷）"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1125
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1144
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -7712,7 +7711,7 @@ msgstr "リモートプリンタ"
 msgid "Printer on remote CUPS server"
 msgstr "リモートCUPS サーバ上のプリンタ"
 
-#: ../../printer.pm_.c:52 ../../printerdrake.pm_.c:883
+#: ../../printer.pm_.c:52 ../../printerdrake.pm_.c:898
 msgid "Printer on remote lpd server"
 msgstr "リモート lpdサーバ上のプリンタ"
 
@@ -7728,7 +7727,7 @@ msgstr "SMB/ウィンドウズ 95/98/NTサーバ上のプリンタ"
 msgid "Printer on NetWare server"
 msgstr "NetWare サーバ上のプリンタ"
 
-#: ../../printer.pm_.c:56 ../../printerdrake.pm_.c:887
+#: ../../printer.pm_.c:56 ../../printerdrake.pm_.c:902
 msgid "Enter a printer device URI"
 msgstr "プリンタデバイスのURIを入力"
 
@@ -7736,103 +7735,103 @@ msgstr "プリンタデバイスのURIを入力"
 msgid "Pipe job into a command"
 msgstr "ジョブをコマンドへパイプ"
 
-#: ../../printer.pm_.c:324 ../../printer.pm_.c:366 ../../printer.pm_.c:533
+#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:552
 msgid "Unknown Model"
 msgstr "未知のモデル"
 
-#: ../../printer.pm_.c:735 ../../printer.pm_.c:926 ../../printer.pm_.c:1318
-#: ../../printerdrake.pm_.c:2260 ../../printerdrake.pm_.c:3414
+#: ../../printer.pm_.c:754 ../../printer.pm_.c:945 ../../printer.pm_.c:1337
+#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3462
 msgid "Unknown model"
 msgstr "未知のモデル"
 
-#: ../../printer.pm_.c:763
+#: ../../printer.pm_.c:782
 msgid "Local Printers"
 msgstr "ローカルプリンタ"
 
-#: ../../printer.pm_.c:765 ../../printer.pm_.c:1126
+#: ../../printer.pm_.c:784 ../../printer.pm_.c:1145
 msgid "Remote Printers"
 msgstr "リモートプリンタ"
 
-#: ../../printer.pm_.c:772 ../../printerdrake.pm_.c:404
+#: ../../printer.pm_.c:791 ../../printerdrake.pm_.c:417
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr " 以下のパラレルポート上 \\/*%s"
 
-#: ../../printer.pm_.c:775 ../../printerdrake.pm_.c:406
+#: ../../printer.pm_.c:794 ../../printerdrake.pm_.c:419
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr ", USB プリンタ \\/*%s"
 
-#: ../../printer.pm_.c:780
+#: ../../printer.pm_.c:799
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr ", パラレルポート上の多機能デバイス \\/*%s"
 
-#: ../../printer.pm_.c:783
+#: ../../printer.pm_.c:802
 msgid ", multi-function device on USB"
 msgstr "USB 上の多機能デバイス"
 
-#: ../../printer.pm_.c:785
+#: ../../printer.pm_.c:804
 msgid ", multi-function device on HP JetDirect"
 msgstr ", HP JetDirect上の多機能デバイス"
 
-#: ../../printer.pm_.c:787
+#: ../../printer.pm_.c:806
 msgid ", multi-function device"
 msgstr ", 多機能デバイス"
 
-#: ../../printer.pm_.c:790
+#: ../../printer.pm_.c:809
 #, c-format
 msgid ", printing to %s"
 msgstr "%s へ印刷出力中"
 
-#: ../../printer.pm_.c:792
+#: ../../printer.pm_.c:811
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr "LPD サーバ 「%s」上の, プリンタ「%s」"
 
-#: ../../printer.pm_.c:794
+#: ../../printer.pm_.c:813
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr ", TCP/IP ホスト「%s」, ポート %s"
 
 # y, c-format
-#: ../../printer.pm_.c:798
+#: ../../printer.pm_.c:817
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr "ウィンドウズサーバ 「%s」上の, 共有「%s」"
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:821
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr "Novell サーバ 「%s」上の, プリンタ「%s」"
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:823
 #, c-format
 msgid ", using command %s"
 msgstr ", コマンド「%s」を使用"
 
-#: ../../printer.pm_.c:923 ../../printerdrake.pm_.c:1656
+#: ../../printer.pm_.c:942 ../../printerdrake.pm_.c:1701
 msgid "Raw printer (No driver)"
 msgstr "生のプリンタ（ドライバなし）"
 
-#: ../../printer.pm_.c:1095
+#: ../../printer.pm_.c:1114
 #, c-format
 msgid "(on %s)"
 msgstr "(%s上で)"
 
-#: ../../printer.pm_.c:1097
+#: ../../printer.pm_.c:1116
 msgid "(on this machine)"
 msgstr "（このマシン上で）"
 
-#: ../../printer.pm_.c:1122
+#: ../../printer.pm_.c:1141
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "CUPS サーバ「%s」上で"
 
-#: ../../printer.pm_.c:1128 ../../printerdrake.pm_.c:3071
-#: ../../printerdrake.pm_.c:3082 ../../printerdrake.pm_.c:3303
-#: ../../printerdrake.pm_.c:3355 ../../printerdrake.pm_.c:3381
-#: ../../printerdrake.pm_.c:3556 ../../printerdrake.pm_.c:3558
+#: ../../printer.pm_.c:1147 ../../printerdrake.pm_.c:3119
+#: ../../printerdrake.pm_.c:3130 ../../printerdrake.pm_.c:3351
+#: ../../printerdrake.pm_.c:3403 ../../printerdrake.pm_.c:3429
+#: ../../printerdrake.pm_.c:3604 ../../printerdrake.pm_.c:3606
 msgid " (Default)"
 msgstr " (デフォルト)"
 
@@ -7858,11 +7857,11 @@ msgstr ""
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "プリンタ自動検出 (ローカル、TCP/Socket, SMBプリンタ)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3135
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3183
 msgid "CUPS configuration"
 msgstr "CUPS 設定"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3136
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3184
 msgid "Specify CUPS server"
 msgstr "CUPS サーバを指定"
 
@@ -7908,7 +7907,7 @@ msgstr ""
 msgid "The IP address should look like 192.168.1.20"
 msgstr "IP アドレスは 192.168.1.20 のように入力して下さい"
 
-#: ../../printerdrake.pm_.c:95 ../../printerdrake.pm_.c:1094
+#: ../../printerdrake.pm_.c:95 ../../printerdrake.pm_.c:1109
 msgid "The port number should be an integer!"
 msgstr "ポート番号は正数です！"
 
@@ -7916,7 +7915,7 @@ msgstr "ポート番号は正数です！"
 msgid "CUPS server IP"
 msgstr "CUPS サーバのIP"
 
-#: ../../printerdrake.pm_.c:103 ../../printerdrake.pm_.c:1114
+#: ../../printerdrake.pm_.c:103 ../../printerdrake.pm_.c:1129
 msgid "Port"
 msgstr "ポート"
 
@@ -7925,19 +7924,19 @@ msgid "Automatic CUPS configuration"
 msgstr "自動 CUPS 設定"
 
 #: ../../printerdrake.pm_.c:177 ../../printerdrake.pm_.c:247
-#: ../../printerdrake.pm_.c:1529 ../../printerdrake.pm_.c:1533
-#: ../../printerdrake.pm_.c:1651 ../../printerdrake.pm_.c:2203
-#: ../../printerdrake.pm_.c:2356 ../../printerdrake.pm_.c:2415
-#: ../../printerdrake.pm_.c:2488 ../../printerdrake.pm_.c:2509
-#: ../../printerdrake.pm_.c:2699 ../../printerdrake.pm_.c:2740
-#: ../../printerdrake.pm_.c:2745 ../../printerdrake.pm_.c:2779
-#: ../../printerdrake.pm_.c:2784 ../../printerdrake.pm_.c:2821
-#: ../../printerdrake.pm_.c:2874 ../../printerdrake.pm_.c:2894
-#: ../../printerdrake.pm_.c:2908 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2988 ../../printerdrake.pm_.c:3006
-#: ../../printerdrake.pm_.c:3095 ../../printerdrake.pm_.c:3169
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3526
-#: ../../printerdrake.pm_.c:3579 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:1574 ../../printerdrake.pm_.c:1578
+#: ../../printerdrake.pm_.c:1696 ../../printerdrake.pm_.c:2248
+#: ../../printerdrake.pm_.c:2401 ../../printerdrake.pm_.c:2460
+#: ../../printerdrake.pm_.c:2533 ../../printerdrake.pm_.c:2554
+#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2788
+#: ../../printerdrake.pm_.c:2793 ../../printerdrake.pm_.c:2827
+#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2869
+#: ../../printerdrake.pm_.c:2922 ../../printerdrake.pm_.c:2942
+#: ../../printerdrake.pm_.c:2956 ../../printerdrake.pm_.c:2990
+#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3054
+#: ../../printerdrake.pm_.c:3143 ../../printerdrake.pm_.c:3217
+#: ../../printerdrake.pm_.c:3519 ../../printerdrake.pm_.c:3574
+#: ../../printerdrake.pm_.c:3627 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "Printerdrake"
 
@@ -8052,12 +8051,13 @@ msgstr ""
 "注：プリンタの機種と印刷方式によっては、最大で %d MB の追加ソフトがインストー"
 "ルされます。"
 
-#: ../../printerdrake.pm_.c:269 ../../printerdrake.pm_.c:278
-#: ../../printerdrake.pm_.c:3117 ../../printerdrake.pm_.c:3242
+#: ../../printerdrake.pm_.c:279 ../../printerdrake.pm_.c:291
+#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3165
+#: ../../printerdrake.pm_.c:3290
 msgid "Add a new printer"
 msgstr "プリンタ追加"
 
-#: ../../printerdrake.pm_.c:270
+#: ../../printerdrake.pm_.c:280
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -8078,7 +8078,7 @@ msgstr ""
 "プリンタ設定に必要な各種情報を訪ねて、各種プリンタドライバや\n"
 "そのオプション、プリンタ接続方式を選べるようにします。"
 
-#: ../../printerdrake.pm_.c:280
+#: ../../printerdrake.pm_.c:293
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -8116,7 +8116,7 @@ msgstr ""
 "準備ができたら「次」をクリックしてください。プリンタ設定をしないなら「キャン"
 "セル」をクリックしましょう。"
 
-#: ../../printerdrake.pm_.c:289 ../../printerdrake.pm_.c:306
+#: ../../printerdrake.pm_.c:302 ../../printerdrake.pm_.c:319
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -8142,7 +8142,7 @@ msgstr ""
 "準備ができたら「次」をクリックしてください。プリンタ設定をしないなら「キャン"
 "セル」をクリックしましょう。"
 
-#: ../../printerdrake.pm_.c:297
+#: ../../printerdrake.pm_.c:310
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -8178,24 +8178,19 @@ msgstr ""
 "準備ができたら「次」をクリックしてください。プリンタ設定をしないなら「キャン"
 "セル」をクリックしましょう。"
 
-#: ../../printerdrake.pm_.c:315
+#: ../../printerdrake.pm_.c:328
 msgid "Auto-detect printers connected to this machine"
 msgstr "マシン直結プリンタ自動検出"
 
-#: ../../printerdrake.pm_.c:318
+#: ../../printerdrake.pm_.c:331
 msgid "Auto-detect printers connected directly to the local network"
 msgstr "ローカルネットワーク接続のプリンタ検出"
 
-#: ../../printerdrake.pm_.c:321
+#: ../../printerdrake.pm_.c:334
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "マイクロソフトウィンドウズ上のプリンタ自動検出"
 
-#: ../../printerdrake.pm_.c:348 ../../printerdrake.pm_.c:562
-#: ../../printerdrake.pm_.c:587
-msgid "Local Printer"
-msgstr "ローカルプリンタ"
-
-#: ../../printerdrake.pm_.c:349
+#: ../../printerdrake.pm_.c:362
 msgid ""
 "\n"
 "Congratulations, your printer is now installed and configured!\n"
@@ -8219,49 +8214,53 @@ msgstr ""
 "したければ、Mandrake コントロールセンターの「ハードウェア」の中の\n"
 "「プリンタ」を選んでください。"
 
-#: ../../printerdrake.pm_.c:386 ../../printerdrake.pm_.c:577
-#: ../../printerdrake.pm_.c:790 ../../printerdrake.pm_.c:1030
+#: ../../printerdrake.pm_.c:399 ../../printerdrake.pm_.c:590
+#: ../../printerdrake.pm_.c:805 ../../printerdrake.pm_.c:1045
 msgid "Printer auto-detection"
 msgstr "プリンタ自動検出をする"
 
-#: ../../printerdrake.pm_.c:408
+#: ../../printerdrake.pm_.c:421
 #, c-format
 msgid ", network printer \"%s\", port %s"
 msgstr ", ネットワークプリンタ「%s」, ポート %s"
 
-#: ../../printerdrake.pm_.c:410
+#: ../../printerdrake.pm_.c:423
 #, c-format
 msgid ", printer \"%s\" on SMB/Windows server \"%s\""
 msgstr ", プリンタ「%s」、SMB/ウィンドウズ 95/98/NTサーバ「%s」上"
 
-#: ../../printerdrake.pm_.c:416
+#: ../../printerdrake.pm_.c:429
 #, c-format
 msgid "Detected %s"
 msgstr "%s を検出"
 
-#: ../../printerdrake.pm_.c:420 ../../printerdrake.pm_.c:451
-#: ../../printerdrake.pm_.c:470
+#: ../../printerdrake.pm_.c:433 ../../printerdrake.pm_.c:464
+#: ../../printerdrake.pm_.c:483
 #, c-format
 msgid "Printer on parallel port \\/*%s"
 msgstr "パラレルポート上のプリンタ \\/*%s"
 
-#: ../../printerdrake.pm_.c:422 ../../printerdrake.pm_.c:453
-#: ../../printerdrake.pm_.c:475
+#: ../../printerdrake.pm_.c:435 ../../printerdrake.pm_.c:466
+#: ../../printerdrake.pm_.c:488
 #, c-format
 msgid "USB printer \\/*%s"
 msgstr "USB プリンタ \\/*%s"
 
-#: ../../printerdrake.pm_.c:424
+#: ../../printerdrake.pm_.c:437
 #, c-format
 msgid "Network printer \"%s\", port %s"
 msgstr "ネットワークプリンタ %s, ポート %s"
 
-#: ../../printerdrake.pm_.c:426
+#: ../../printerdrake.pm_.c:439
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "プリンタ %s, SMB/ウィンドウズ 95/98/NTサーバ%s上"
 
-#: ../../printerdrake.pm_.c:563
+#: ../../printerdrake.pm_.c:575 ../../printerdrake.pm_.c:600
+msgid "Local Printer"
+msgstr "ローカルプリンタ"
+
+#: ../../printerdrake.pm_.c:576
 msgid ""
 "No local printer found! To manually install a printer enter a device name/"
 "file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., "
@@ -8273,19 +8272,19 @@ msgstr ""
 "が LPT1:, LPT2:, ..., に対応して、1番目の USB プリンタ: /dev/usb/lp0, 2番目"
 "の USB プリンタ: /dev/usb/lp1, ...)."
 
-#: ../../printerdrake.pm_.c:567
+#: ../../printerdrake.pm_.c:580
 msgid "You must enter a device or file name!"
 msgstr "デバイスかファイル名を入力してください"
 
-#: ../../printerdrake.pm_.c:578
+#: ../../printerdrake.pm_.c:591
 msgid "No printer found!"
 msgstr "プリンタが見つかりません！"
 
-#: ../../printerdrake.pm_.c:588
+#: ../../printerdrake.pm_.c:601
 msgid "Available printers"
 msgstr "使えるプリンタ"
 
-#: ../../printerdrake.pm_.c:592
+#: ../../printerdrake.pm_.c:605
 msgid ""
 "The following printer was auto-detected, if it is not the one you want to "
 "configure, enter a device name/file name in the input line"
@@ -8293,7 +8292,7 @@ msgstr ""
 "以下のプリンタが自動検出されました。もしこれが設定したいものでなければ、\n"
 "入力行に、デバイス名/ファイル名を入力してください"
 
-#: ../../printerdrake.pm_.c:593
+#: ../../printerdrake.pm_.c:606
 msgid ""
 "Here is a list of all auto-detected printers. Please choose the printer you "
 "want to set up or enter a device name/file name in the input line"
@@ -8301,7 +8300,7 @@ msgstr ""
 "以下のプリンタが自動検出されました。もし設定したいものがここになければ、\n"
 "入力行に、デバイス名/ファイル名を入力してください"
 
-#: ../../printerdrake.pm_.c:595
+#: ../../printerdrake.pm_.c:608
 msgid ""
 "The following printer was auto-detected. The configuration of the printer "
 "will work fully automatically. If your printer was not correctly detected or "
@@ -8312,7 +8311,7 @@ msgstr ""
 "検出されていなかったり、カスタム設定をしたければ「手動設定」を有効にしてくだ"
 "さい。"
 
-#: ../../printerdrake.pm_.c:596
+#: ../../printerdrake.pm_.c:609
 msgid ""
 "Here is a list of all auto-detected printers. Please choose the printer you "
 "want to set up. The configuration of the printer will work fully "
@@ -8323,7 +8322,7 @@ msgstr ""
 "プリンタは完全に自動で設定されます。検出されていなかったり、カスタム設定\n"
 "したければ「手動設定」を有効にしてください。"
 
-#: ../../printerdrake.pm_.c:598
+#: ../../printerdrake.pm_.c:611
 msgid ""
 "Please choose the port where your printer is connected to or enter a device "
 "name/file name in the input line"
@@ -8331,11 +8330,11 @@ msgstr ""
 "プリンタが接続されているポートを選ぶか、入力行にデバイス名/ファイル名を\n"
 "入力してください"
 
-#: ../../printerdrake.pm_.c:599
+#: ../../printerdrake.pm_.c:612
 msgid "Please choose the port where your printer is connected to."
 msgstr "モデムはどのシリアルポートにつながっていますか？"
 
-#: ../../printerdrake.pm_.c:601
+#: ../../printerdrake.pm_.c:614
 msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
@@ -8343,19 +8342,19 @@ msgstr ""
 "(パラレルポートなら: /dev/lp0, /dev/lp1,... が LPT1:, LPT2:, ..., に対応、1番"
 "目の USB プリンタ: /dev/usb/lp0, 2番目の USB プリンタ: /dev/usb/lp1, ...)."
 
-#: ../../printerdrake.pm_.c:606
+#: ../../printerdrake.pm_.c:619
 msgid "You must choose/enter a printer/device!"
 msgstr "プリンタかデバイスを入力・選択"
 
-#: ../../printerdrake.pm_.c:626
+#: ../../printerdrake.pm_.c:639
 msgid "Manual configuration"
 msgstr "マニュアル設定"
 
-#: ../../printerdrake.pm_.c:680
+#: ../../printerdrake.pm_.c:693
 msgid "Remote lpd Printer Options"
 msgstr "リモートlpdプリンタオプション"
 
-#: ../../printerdrake.pm_.c:681
+#: ../../printerdrake.pm_.c:694
 msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
@@ -8363,46 +8362,46 @@ msgstr ""
 "リモートの lpd の プリンタを使うには，プリンタサーバの\n"
 "ホスト名とサーバ上のプリンタ名が必要になります。."
 
-#: ../../printerdrake.pm_.c:682
+#: ../../printerdrake.pm_.c:695
 msgid "Remote host name"
 msgstr "リモートホスト名"
 
-#: ../../printerdrake.pm_.c:683
+#: ../../printerdrake.pm_.c:696
 msgid "Remote printer name"
 msgstr "リモートプリンタ名"
 
-#: ../../printerdrake.pm_.c:686
+#: ../../printerdrake.pm_.c:699
 msgid "Remote host name missing!"
 msgstr "リモートホスト名がありません！"
 
-#: ../../printerdrake.pm_.c:690
+#: ../../printerdrake.pm_.c:703
 msgid "Remote printer name missing!"
 msgstr "リモートプリンタ名がありません！"
 
-#: ../../printerdrake.pm_.c:712 ../../printerdrake.pm_.c:1225
+#: ../../printerdrake.pm_.c:727 ../../printerdrake.pm_.c:1244
 #, c-format
 msgid "Detected model: %s %s"
 msgstr "検出されたモデル: %s %s"
 
-#: ../../printerdrake.pm_.c:790 ../../printerdrake.pm_.c:1030
+#: ../../printerdrake.pm_.c:805 ../../printerdrake.pm_.c:1045
 msgid "Scanning network..."
 msgstr "ネットワーク走査中..."
 
-#: ../../printerdrake.pm_.c:799 ../../printerdrake.pm_.c:820
+#: ../../printerdrake.pm_.c:814 ../../printerdrake.pm_.c:835
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr ", プリンタ%s, サーバ「%s」上"
 
-#: ../../printerdrake.pm_.c:802 ../../printerdrake.pm_.c:823
+#: ../../printerdrake.pm_.c:817 ../../printerdrake.pm_.c:838
 #, c-format
 msgid "Printer \"%s\" on server \"%s\""
 msgstr "プリンタ%s, サーバ「%s」上"
 
-#: ../../printerdrake.pm_.c:843
+#: ../../printerdrake.pm_.c:858
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB (ウィンドウズ 9x/NT) プリンタのオプション"
 
-#: ../../printerdrake.pm_.c:844
+#: ../../printerdrake.pm_.c:859
 msgid ""
 "To print to a SMB printer, you need to provide the SMB host name (Note! It "
 "may be different from its TCP/IP hostname!) and possibly the IP address of "
@@ -8413,7 +8412,7 @@ msgstr ""
 "多分プリントサーバの IP アドレス，アクセスしたいプリンタの共有名，\n"
 "適切なユーザ名，パスワードおよびワークグループの情報が必要になります。"
 
-#: ../../printerdrake.pm_.c:845
+#: ../../printerdrake.pm_.c:860
 msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
@@ -8421,39 +8420,39 @@ msgstr ""
 "希望のプリンタが自動検出されたら、それを一覧から選んで、必要に応じてユーザ"
 "名、パスワード、ワークグループなどを入力してください。"
 
-#: ../../printerdrake.pm_.c:846
+#: ../../printerdrake.pm_.c:861
 msgid "SMB server host"
 msgstr "SMBサーバホスト"
 
-#: ../../printerdrake.pm_.c:847
+#: ../../printerdrake.pm_.c:862
 msgid "SMB server IP"
 msgstr "SMBサーバのIP"
 
-#: ../../printerdrake.pm_.c:848
+#: ../../printerdrake.pm_.c:863
 msgid "Share name"
 msgstr "シェア名"
 
-#: ../../printerdrake.pm_.c:851
+#: ../../printerdrake.pm_.c:866
 msgid "Workgroup"
 msgstr "ワークグループ"
 
-#: ../../printerdrake.pm_.c:853
+#: ../../printerdrake.pm_.c:868
 msgid "Auto-detected"
 msgstr "自動検出されたもの"
 
-#: ../../printerdrake.pm_.c:864
+#: ../../printerdrake.pm_.c:879
 msgid "Either the server name or the server's IP must be given!"
 msgstr "サーバ名か、サーバのIPはどうしても要ります！"
 
-#: ../../printerdrake.pm_.c:868
+#: ../../printerdrake.pm_.c:883
 msgid "Samba share name missing!"
 msgstr "Sambaシェア名がありません！"
 
-#: ../../printerdrake.pm_.c:874
+#: ../../printerdrake.pm_.c:889
 msgid "SECURITY WARNING!"
 msgstr "!!!セキュリティ警告!!!"
 
-#: ../../printerdrake.pm_.c:875
+#: ../../printerdrake.pm_.c:890
 #, c-format
 msgid ""
 "You are about to set up printing to a Windows account with password. Due to "
@@ -8494,7 +8493,7 @@ msgstr ""
 "してこｎマシンからの印刷設定をPrinterdrakeの \"%s\" 接続タイプで行う。\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:885
+#: ../../printerdrake.pm_.c:900
 #, c-format
 msgid ""
 "Set up your Windows server to make the printer available under the IPP "
@@ -8506,7 +8505,7 @@ msgstr ""
 "してこｎマシンからの印刷設定をPrinterdrakeの \"%s\" 接続タイプで行う。\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:888
+#: ../../printerdrake.pm_.c:903
 msgid ""
 "Connect your printer to a Linux server and let your Windows machine(s) "
 "connect to it as a client.\n"
@@ -8518,11 +8517,11 @@ msgstr ""
 "\n"
 "いまの状態でプリンタの設定を続けますか?"
 
-#: ../../printerdrake.pm_.c:960
+#: ../../printerdrake.pm_.c:975
 msgid "NetWare Printer Options"
 msgstr "Netware プリンタのオプション"
 
-#: ../../printerdrake.pm_.c:961
+#: ../../printerdrake.pm_.c:976
 msgid ""
 "To print on a NetWare printer, you need to provide the NetWare print server "
 "name (Note! it may be different from its TCP/IP hostname!) as well as the "
@@ -8533,37 +8532,37 @@ msgstr ""
 "と，アクセスしたいプリンタのプリントキュー名，適切なユーザ名および\n"
 "パスワードが必要になります。"
 
-#: ../../printerdrake.pm_.c:962
+#: ../../printerdrake.pm_.c:977
 msgid "Printer Server"
 msgstr "プリンタサーバ"
 
-#: ../../printerdrake.pm_.c:963
+#: ../../printerdrake.pm_.c:978
 msgid "Print Queue Name"
 msgstr "印刷キューの名前"
 
-#: ../../printerdrake.pm_.c:968
+#: ../../printerdrake.pm_.c:983
 msgid "NCP server name missing!"
 msgstr "NCP サーバ名がありません！"
 
-#: ../../printerdrake.pm_.c:972
+#: ../../printerdrake.pm_.c:987
 msgid "NCP queue name missing!"
 msgstr "NCP キュー名がありません！"
 
-#: ../../printerdrake.pm_.c:1039 ../../printerdrake.pm_.c:1059
+#: ../../printerdrake.pm_.c:1054 ../../printerdrake.pm_.c:1074
 #, c-format
 msgid ", host \"%s\", port %s"
 msgstr ", ホスト「%s」, ポート %s"
 
-#: ../../printerdrake.pm_.c:1042 ../../printerdrake.pm_.c:1062
+#: ../../printerdrake.pm_.c:1057 ../../printerdrake.pm_.c:1077
 #, c-format
 msgid "Host \"%s\", port %s"
 msgstr "ホスト「%s」, ポート %s"
 
-#: ../../printerdrake.pm_.c:1082
+#: ../../printerdrake.pm_.c:1097
 msgid "TCP/Socket Printer Options"
 msgstr "TCP/ソケットプリンタのオプション"
 
-#: ../../printerdrake.pm_.c:1084
+#: ../../printerdrake.pm_.c:1099
 msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) into the input fields."
@@ -8571,7 +8570,7 @@ msgstr ""
 "一覧から自動検出プリンタをどれか選ぶか、入力フィールドにホスト名かIP とオプ"
 "ションでポート番号（デフォルトは9100）を入力する。"
 
-#: ../../printerdrake.pm_.c:1085
+#: ../../printerdrake.pm_.c:1100
 msgid ""
 "To print to a TCP or socket printer, you need to provide the host name or IP "
 "of the printer and optionally the port number (default is 9100). On HP "
@@ -8584,19 +8583,19 @@ msgstr ""
 "通常9100ですが、ほかのサーバだとまちまちです。ハードウェアのマニュアルを見ま"
 "しょう。"
 
-#: ../../printerdrake.pm_.c:1090
+#: ../../printerdrake.pm_.c:1105
 msgid "Printer host name or IP missing!"
 msgstr "プリンタホスト名かIPがありません！"
 
-#: ../../printerdrake.pm_.c:1112
+#: ../../printerdrake.pm_.c:1127
 msgid "Printer host name or IP"
 msgstr "プリンタホスト名かIP"
 
-#: ../../printerdrake.pm_.c:1160 ../../printerdrake.pm_.c:1162
+#: ../../printerdrake.pm_.c:1177 ../../printerdrake.pm_.c:1179
 msgid "Printer Device URI"
 msgstr "プリンタデバイスのURI"
 
-#: ../../printerdrake.pm_.c:1161
+#: ../../printerdrake.pm_.c:1178
 msgid ""
 "You can specify directly the URI to access the printer. The URI must fulfill "
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
@@ -8606,11 +8605,11 @@ msgstr ""
 "このURIはCUPS仕様かFoomatic仕様で指定してください。\n"
 "なお、すべてのURIタイプが全スプーラでサポートされているわけじゃないです。"
 
-#: ../../printerdrake.pm_.c:1176
+#: ../../printerdrake.pm_.c:1193
 msgid "A valid URI must be entered!"
 msgstr "有効なURIを入力してください！"
 
-#: ../../printerdrake.pm_.c:1515
+#: ../../printerdrake.pm_.c:1560
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
@@ -8619,27 +8618,27 @@ msgstr ""
 "説明や場所の欄は空欄でもかまいません。\n"
 "これはユーザにわかりやすくするためのものです。"
 
-#: ../../printerdrake.pm_.c:1516
+#: ../../printerdrake.pm_.c:1561
 msgid "Name of printer"
 msgstr "プリンタの名前"
 
-#: ../../printerdrake.pm_.c:1518
+#: ../../printerdrake.pm_.c:1563
 msgid "Location"
 msgstr "プリンタの場所"
 
-#: ../../printerdrake.pm_.c:1530 ../../printerdrake.pm_.c:1652
+#: ../../printerdrake.pm_.c:1575 ../../printerdrake.pm_.c:1697
 msgid "Reading printer database..."
 msgstr "プリンタデータベースを読んでいます..."
 
-#: ../../printerdrake.pm_.c:1534
+#: ../../printerdrake.pm_.c:1579
 msgid "Preparing printer database..."
 msgstr "プリンタデータベースを準備中..."
 
-#: ../../printerdrake.pm_.c:1631
+#: ../../printerdrake.pm_.c:1676
 msgid "Your printer model"
 msgstr "プリンタの機種"
 
-#: ../../printerdrake.pm_.c:1632
+#: ../../printerdrake.pm_.c:1677
 #, c-format
 msgid ""
 "Printerdrake has compared the model name resulting from the printer auto-"
@@ -8664,24 +8663,24 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../printerdrake.pm_.c:1637 ../../printerdrake.pm_.c:1640
+#: ../../printerdrake.pm_.c:1682 ../../printerdrake.pm_.c:1685
 msgid "The model is correct"
 msgstr "このモデルを使う"
 
-#: ../../printerdrake.pm_.c:1638 ../../printerdrake.pm_.c:1639
-#: ../../printerdrake.pm_.c:1642
+#: ../../printerdrake.pm_.c:1683 ../../printerdrake.pm_.c:1684
+#: ../../printerdrake.pm_.c:1687
 msgid "Select model manually"
 msgstr "手動で選ぶ"
 
-#: ../../printerdrake.pm_.c:1659
+#: ../../printerdrake.pm_.c:1704
 msgid "Printer model selection"
 msgstr "プリンタの機種を選ぶ"
 
-#: ../../printerdrake.pm_.c:1660
+#: ../../printerdrake.pm_.c:1705
 msgid "Which printer model do you have?"
 msgstr "どの機種のプリンタを使っていますか？"
 
-#: ../../printerdrake.pm_.c:1661
+#: ../../printerdrake.pm_.c:1706
 msgid ""
 "\n"
 "\n"
@@ -8695,7 +8694,7 @@ msgstr ""
 "カーソルがまちがったモデル化「ナマのプリンタ（Raw Printer)」を指して\n"
 "いたら、一覧から正しい機種を探してください。"
 
-#: ../../printerdrake.pm_.c:1664
+#: ../../printerdrake.pm_.c:1709
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
@@ -8703,11 +8702,11 @@ msgstr ""
 "あなたのプリンタがなければ、互換性のあるプリンタ（プリンタのマニュアルか\n"
 "類似プリンタを選んでください。"
 
-#: ../../printerdrake.pm_.c:1741
+#: ../../printerdrake.pm_.c:1786
 msgid "OKI winprinter configuration"
 msgstr "OKI winプリンタの設定"
 
-#: ../../printerdrake.pm_.c:1742
+#: ../../printerdrake.pm_.c:1787
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they work only when "
@@ -8724,11 +8723,11 @@ msgstr ""
 "テストページ印刷の前に、最初のパラレルポートにつなぎなおしてください。\n"
 "さもないと使えません。接続種類の設定は無視されます。"
 
-#: ../../printerdrake.pm_.c:1785 ../../printerdrake.pm_.c:1812
+#: ../../printerdrake.pm_.c:1830 ../../printerdrake.pm_.c:1857
 msgid "Lexmark inkjet configuration"
 msgstr "Lexmarkインクジェットの設定"
 
-#: ../../printerdrake.pm_.c:1786
+#: ../../printerdrake.pm_.c:1831
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
 "no printers on remote machines or print server boxes. Please connect your "
@@ -8739,7 +8738,7 @@ msgstr ""
 "サポートしません。リモートマシンやプリンタサーバ上のプリンタは使えません。\n"
 "プリンタをローカルポートにつなぐか接続されているマシンで設定してください。"
 
-#: ../../printerdrake.pm_.c:1813
+#: ../../printerdrake.pm_.c:1858
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -8759,11 +8758,11 @@ msgstr ""
 "から印刷ヘッドのアラインメントページを\"lexmarkmaintain\" で印刷して、このプ"
 "ログラムでヘッドのアラインメントを調整します。"
 
-#: ../../printerdrake.pm_.c:1816
+#: ../../printerdrake.pm_.c:1861
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
 msgstr "Zenographics ZJ-Stream形式のGDIレーザプリンタ"
 
-#: ../../printerdrake.pm_.c:1817
+#: ../../printerdrake.pm_.c:1862
 msgid ""
 "Your printer belongs to the group of GDI laser printers (winprinters) sold "
 "by different manufacturers which uses the Zenographics ZJ-stream raster "
@@ -8802,7 +8801,7 @@ msgstr ""
 "最初のコマンドはだれでも実行できます。二番目はrootでないと実行できません。こ"
 "れが終わったら普通に印刷できます。\n"
 
-#: ../../printerdrake.pm_.c:2040
+#: ../../printerdrake.pm_.c:2085
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -8816,22 +8815,22 @@ msgstr ""
 "ページの大きさとインクの種類（該当する場合のみ）が正しく設定されているかを確"
 "認しましょう。なお、超高品質印刷はすごく時間がかかることがあります。"
 
-#: ../../printerdrake.pm_.c:2049
+#: ../../printerdrake.pm_.c:2094
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "オプション %s は整数です！"
 
-#: ../../printerdrake.pm_.c:2053
+#: ../../printerdrake.pm_.c:2098
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "オプション %s は数字です！"
 
-#: ../../printerdrake.pm_.c:2058
+#: ../../printerdrake.pm_.c:2103
 #, c-format
 msgid "Option %s out of range!"
 msgstr "オプション %s 範囲外です!"
 
-#: ../../printerdrake.pm_.c:2097
+#: ../../printerdrake.pm_.c:2142
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
@@ -8840,11 +8839,11 @@ msgstr ""
 "このプリンタ (\"%s\") を\n"
 "デフォルトプリンタにしますか？"
 
-#: ../../printerdrake.pm_.c:2120
+#: ../../printerdrake.pm_.c:2165
 msgid "Test pages"
 msgstr "テストページ"
 
-#: ../../printerdrake.pm_.c:2121
+#: ../../printerdrake.pm_.c:2166
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -8856,39 +8855,39 @@ msgstr ""
 "ないレーザプリンタでは出力できないこともあります。多くの場合は標準ページが印"
 "刷できれば大丈夫です。"
 
-#: ../../printerdrake.pm_.c:2125
+#: ../../printerdrake.pm_.c:2170
 msgid "No test pages"
 msgstr "テストページなし"
 
-#: ../../printerdrake.pm_.c:2126
+#: ../../printerdrake.pm_.c:2171
 msgid "Print"
 msgstr "印刷"
 
-#: ../../printerdrake.pm_.c:2183
+#: ../../printerdrake.pm_.c:2228
 msgid "Standard test page"
 msgstr "標準テストページ"
 
-#: ../../printerdrake.pm_.c:2186
+#: ../../printerdrake.pm_.c:2231
 msgid "Alternative test page (Letter)"
 msgstr "別のテストページ (レター)"
 
-#: ../../printerdrake.pm_.c:2189
+#: ../../printerdrake.pm_.c:2234
 msgid "Alternative test page (A4)"
 msgstr "別のテストページ (A4)"
 
-#: ../../printerdrake.pm_.c:2191
+#: ../../printerdrake.pm_.c:2236
 msgid "Photo test page"
 msgstr "写真テストページ"
 
-#: ../../printerdrake.pm_.c:2195
+#: ../../printerdrake.pm_.c:2240
 msgid "Do not print any test page"
 msgstr "テストページを印刷しない"
 
-#: ../../printerdrake.pm_.c:2204 ../../printerdrake.pm_.c:2357
+#: ../../printerdrake.pm_.c:2249 ../../printerdrake.pm_.c:2402
 msgid "Printing test page(s)..."
 msgstr "テストページ印刷中……"
 
-#: ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2274
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -8903,7 +8902,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2233
+#: ../../printerdrake.pm_.c:2278
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
@@ -8911,15 +8910,15 @@ msgstr ""
 "テストページをプリンタデーモンに送りました。\n"
 "プリンタが動き出すまで、ちょっと時間がかかります。\n"
 
-#: ../../printerdrake.pm_.c:2240
+#: ../../printerdrake.pm_.c:2285
 msgid "Did it work properly?"
 msgstr "うまく動きましたか？"
 
-#: ../../printerdrake.pm_.c:2262 ../../printerdrake.pm_.c:3416
+#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3464
 msgid "Raw printer"
 msgstr "生のプリンタ"
 
-#: ../../printerdrake.pm_.c:2288
+#: ../../printerdrake.pm_.c:2333
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -8932,7 +8931,7 @@ msgstr ""
 "「kprinter <file>」を使います。グラフィックツールは、\n"
 "プリンタ選択とオプション設定を簡単にしてくれます。\n"
 
-#: ../../printerdrake.pm_.c:2290
+#: ../../printerdrake.pm_.c:2335
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
@@ -8943,8 +8942,8 @@ msgstr ""
 "ん。\n"
 "印刷するファイルはアプリケーションからくるからです。\n"
 
-#: ../../printerdrake.pm_.c:2293 ../../printerdrake.pm_.c:2310
-#: ../../printerdrake.pm_.c:2320
+#: ../../printerdrake.pm_.c:2338 ../../printerdrake.pm_.c:2355
+#: ../../printerdrake.pm_.c:2365
 #, c-format
 msgid ""
 "\n"
@@ -8957,7 +8956,7 @@ msgstr ""
 "コマンドラインに希望の設定を追加するだけです。\n"
 "たとえば「%s <file>」という具合です。 "
 
-#: ../../printerdrake.pm_.c:2296 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2341 ../../printerdrake.pm_.c:2381
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -8968,7 +8967,7 @@ msgstr ""
 "あるいは「オプション一覧を印刷」ボタンをクリックしましょう。%s%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2300
+#: ../../printerdrake.pm_.c:2345
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
@@ -8976,7 +8975,7 @@ msgstr ""
 "いまのプリンタで使える印刷オプション一覧は以下の通りです:\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:2315
+#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2360
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -8985,8 +8984,8 @@ msgstr ""
 "コマンドライン（ターミナルウィンドウ）からファイルを印刷するには、\n"
 "コマンド「%s <file>」を使います。\n"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:2317
-#: ../../printerdrake.pm_.c:2327
+#: ../../printerdrake.pm_.c:2352 ../../printerdrake.pm_.c:2362
+#: ../../printerdrake.pm_.c:2372
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
@@ -8997,7 +8996,7 @@ msgstr ""
 "ん。\n"
 "印刷するファイルはアプリケーションからくるからです。\n"
 
-#: ../../printerdrake.pm_.c:2312 ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2357 ../../printerdrake.pm_.c:2367
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
@@ -9005,7 +9004,7 @@ msgstr ""
 "いまのプリンタで使えるオプション一覧を見るには、「オプション一覧を印刷」ボタ"
 "ンをクリックしましょう。"
 
-#: ../../printerdrake.pm_.c:2325
+#: ../../printerdrake.pm_.c:2370
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -9014,7 +9013,7 @@ msgstr ""
 "コマンドライン（ターミナルウィンドウ）からファイルを印刷するには、\n"
 "コマンド「%s <file>」または「%s <file>」を使います。\n"
 
-#: ../../printerdrake.pm_.c:2329
+#: ../../printerdrake.pm_.c:2374
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
 "handling printing jobs.\n"
@@ -9029,7 +9028,7 @@ msgstr ""
 "あるでしょう。これをクリックすると、印刷ジョブが全部すぐに止まります。\n"
 "これはたとえば紙詰まりのときに便利です。\n"
 
-#: ../../printerdrake.pm_.c:2333
+#: ../../printerdrake.pm_.c:2378
 #, c-format
 msgid ""
 "\n"
@@ -9042,40 +9041,40 @@ msgstr ""
 "変えさせてくれます。コマンドラインに希望の設定を追加するだけです。\n"
 "たとえば「%s <file>」という具合です。\n"
 
-#: ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2388
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "以下で印刷中/スキャン/フォトカード： \"%s\""
 
-#: ../../printerdrake.pm_.c:2344
+#: ../../printerdrake.pm_.c:2389
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr "以下で印刷中/スキャン： \"%s\""
 
-#: ../../printerdrake.pm_.c:2346
+#: ../../printerdrake.pm_.c:2391
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "以下で印刷中/フォトカードアクセス： \"%s\""
 
-#: ../../printerdrake.pm_.c:2347
+#: ../../printerdrake.pm_.c:2392
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "以下のプリンタで印刷中： \"%s\""
 
-#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2353
-#: ../../printerdrake.pm_.c:2354 ../../printerdrake.pm_.c:2355
-#: ../../printerdrake.pm_.c:3400 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:2395 ../../printerdrake.pm_.c:2398
+#: ../../printerdrake.pm_.c:2399 ../../printerdrake.pm_.c:2400
+#: ../../printerdrake.pm_.c:3448 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
 msgid "Close"
 msgstr "閉じる"
 
-#: ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2398
 msgid "Print option list"
 msgstr "プリンタオプション一覧"
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2418
 #, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
@@ -9097,7 +9096,7 @@ msgstr ""
 "\n"
 "このデバイスでは\"scannerdrake\" は使わないでください!"
 
-#: ../../printerdrake.pm_.c:2394
+#: ../../printerdrake.pm_.c:2439
 msgid ""
 "Your printer was configured automatically to give you access to the photo "
 "card drives from your PC. Now you can access your photo cards using the "
@@ -9117,17 +9116,17 @@ msgstr ""
 "字 \"p:\"以降となります。\"MtoolsFM\" ではファイル一覧の右上すみ のフィールド"
 "でドライブ文字を変えられます。"
 
-#: ../../printerdrake.pm_.c:2416 ../../printerdrake.pm_.c:2875
-#: ../../printerdrake.pm_.c:3170
+#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2923
+#: ../../printerdrake.pm_.c:3218
 msgid "Reading printer data..."
 msgstr "プリンタの情報を読んでいます..."
 
-#: ../../printerdrake.pm_.c:2436 ../../printerdrake.pm_.c:2464
-#: ../../printerdrake.pm_.c:2499
+#: ../../printerdrake.pm_.c:2481 ../../printerdrake.pm_.c:2509
+#: ../../printerdrake.pm_.c:2544
 msgid "Transfer printer configuration"
 msgstr "プリンタの設定を移動"
 
-#: ../../printerdrake.pm_.c:2437
+#: ../../printerdrake.pm_.c:2482
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -9141,7 +9140,7 @@ msgstr ""
 "はそちらに取られますが、ジョブは移動しません。以下の理由で、移動できない"
 "キューもあります：\n"
 
-#: ../../printerdrake.pm_.c:2440
+#: ../../printerdrake.pm_.c:2485
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
@@ -9149,7 +9148,7 @@ msgstr ""
 "CUPS は Novell サーバのプリンタや、自由形式のコマンドにデータを送るプリンタは"
 "サポートしません。\n"
 
-#: ../../printerdrake.pm_.c:2442
+#: ../../printerdrake.pm_.c:2487
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
@@ -9157,11 +9156,11 @@ msgstr ""
 "PDQ はローカルプリンタとリモートの LPD プリンタ、ソケット/TCP プリンタしかサ"
 "ポートしません。\n"
 
-#: ../../printerdrake.pm_.c:2444
+#: ../../printerdrake.pm_.c:2489
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD と LPRng はIPP プリンタをサポートしません。\n"
 
-#: ../../printerdrake.pm_.c:2446
+#: ../../printerdrake.pm_.c:2491
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
@@ -9169,7 +9168,7 @@ msgstr ""
 "さらにこのプログラムや\"foomatic-configure\" で作っていないキューは移動できま"
 "せん。"
 
-#: ../../printerdrake.pm_.c:2447
+#: ../../printerdrake.pm_.c:2492
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
@@ -9179,7 +9178,7 @@ msgstr ""
 "またメーカー提供の PPD ファイルやネイティブの CUPS ドライバで設定されたプリン"
 "タは移動できません。"
 
-#: ../../printerdrake.pm_.c:2448
+#: ../../printerdrake.pm_.c:2493
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
@@ -9188,15 +9187,15 @@ msgstr ""
 "\n"
 "移動したいプリンタを選んで \"T移動\"をクリックしてください。"
 
-#: ../../printerdrake.pm_.c:2451
+#: ../../printerdrake.pm_.c:2496
 msgid "Do not transfer printers"
 msgstr "プリンタを移動しない"
 
-#: ../../printerdrake.pm_.c:2452 ../../printerdrake.pm_.c:2469
+#: ../../printerdrake.pm_.c:2497 ../../printerdrake.pm_.c:2514
 msgid "Transfer"
 msgstr "移動"
 
-#: ../../printerdrake.pm_.c:2465
+#: ../../printerdrake.pm_.c:2510
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -9207,11 +9206,11 @@ msgstr ""
 "上書きするには \"移動\" を押してください。\n"
 "新しい名前をタイプするか、このプリンタをとばすこともできます。"
 
-#: ../../printerdrake.pm_.c:2473
+#: ../../printerdrake.pm_.c:2518
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr "プリンタ名は、文字と数字とアンダースコア (_)しか使えません"
 
-#: ../../printerdrake.pm_.c:2478
+#: ../../printerdrake.pm_.c:2523
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -9220,16 +9219,16 @@ msgstr ""
 "プリンタ \"%s\" はすでに存在します。\n"
 "いまの設定を上書きしてしまいますか？"
 
-#: ../../printerdrake.pm_.c:2486
+#: ../../printerdrake.pm_.c:2531
 msgid "New printer name"
 msgstr "新しいプリンタの名前"
 
-#: ../../printerdrake.pm_.c:2489
+#: ../../printerdrake.pm_.c:2534
 #, c-format
 msgid "Transferring %s..."
 msgstr "%s 移動中……"
 
-#: ../../printerdrake.pm_.c:2500
+#: ../../printerdrake.pm_.c:2545
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
@@ -9238,29 +9237,29 @@ msgstr ""
 "前のデフォルトプリンタ (\"%s\")を移動しました。新しい印刷システム%sでもこれを"
 "デフォルトのプリンタにしますか？"
 
-#: ../../printerdrake.pm_.c:2510
+#: ../../printerdrake.pm_.c:2555
 msgid "Refreshing printer data..."
 msgstr "プリンタデータ更新中..."
 
-#: ../../printerdrake.pm_.c:2518 ../../printerdrake.pm_.c:2590
-#: ../../printerdrake.pm_.c:2602
+#: ../../printerdrake.pm_.c:2563 ../../printerdrake.pm_.c:2638
+#: ../../printerdrake.pm_.c:2650
 msgid "Configuration of a remote printer"
 msgstr "リモートプリンタの設定"
 
-#: ../../printerdrake.pm_.c:2519
+#: ../../printerdrake.pm_.c:2564
 msgid "Starting network..."
 msgstr "ネットワーク起動中..."
 
-#: ../../printerdrake.pm_.c:2554 ../../printerdrake.pm_.c:2558
-#: ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2599 ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2605
 msgid "Configure the network now"
 msgstr "今すぐネットワーク設定をする"
 
-#: ../../printerdrake.pm_.c:2555
+#: ../../printerdrake.pm_.c:2600
 msgid "Network functionality not configured"
 msgstr "ネットワーク機能が設定されてません"
 
-#: ../../printerdrake.pm_.c:2556
+#: ../../printerdrake.pm_.c:2601
 msgid ""
 "You are going to configure a remote printer. This needs working network "
 "access, but your network is not configured yet. If you go on without network "
@@ -9271,11 +9270,11 @@ msgstr ""
 "が、あなたのネットワーク設定はすんでいません。ネットワーク設定なしで進むと、"
 "いま設定中のプリンタは使えません。さてどう進めましょうか？"
 
-#: ../../printerdrake.pm_.c:2559
+#: ../../printerdrake.pm_.c:2604
 msgid "Go on without configuring the network"
 msgstr "ネットワークの設定をとばして先に進む"
 
-#: ../../printerdrake.pm_.c:2592
+#: ../../printerdrake.pm_.c:2640
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network gets accessable after booting your "
@@ -9290,7 +9289,7 @@ msgstr ""
 "じくMandrakeコントロールセンタの「ハードウェア/プリンタ」の部分でプリンタの設"
 "定をしましょう。"
 
-#: ../../printerdrake.pm_.c:2593
+#: ../../printerdrake.pm_.c:2641
 msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
@@ -9299,24 +9298,24 @@ msgstr ""
 "ネットワークアクセスが落ちていて、起動できませんでした。ハードウェアや設定を"
 "チェックしてください。それからリモートプリンタの設定をやりなおしてください。"
 
-#: ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2651
 msgid "Restarting printing system..."
 msgstr "プリンタシステム再起動中..."
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2689
 msgid "high"
 msgstr "高い"
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2689
 msgid "paranoid"
 msgstr "神経質なほど高水準"
 
-#: ../../printerdrake.pm_.c:2642
+#: ../../printerdrake.pm_.c:2690
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr "印刷システムをセキュリティ水準 %s でインストール中"
 
-#: ../../printerdrake.pm_.c:2643
+#: ../../printerdrake.pm_.c:2691
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -9340,11 +9339,11 @@ msgstr ""
 "\n"
 "このマシンで印刷の設定を本当にやっていいですね？"
 
-#: ../../printerdrake.pm_.c:2675
+#: ../../printerdrake.pm_.c:2723
 msgid "Starting the printing system at boot time"
 msgstr "起動時に印刷システムをスタート"
 
-#: ../../printerdrake.pm_.c:2676
+#: ../../printerdrake.pm_.c:2724
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -9364,59 +9363,59 @@ msgstr ""
 "\n"
 "印刷システムの自動スタートをもう一度有効にしますか？"
 
-#: ../../printerdrake.pm_.c:2700 ../../printerdrake.pm_.c:2741
-#: ../../printerdrake.pm_.c:2780 ../../printerdrake.pm_.c:2822
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2789
+#: ../../printerdrake.pm_.c:2828 ../../printerdrake.pm_.c:2870
+#: ../../printerdrake.pm_.c:2991
 msgid "Checking installed software..."
 msgstr "インストール済みソフトをチェック中……"
 
-#: ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2794
 msgid "Removing LPRng..."
 msgstr "LPRng 削除中……"
 
-#: ../../printerdrake.pm_.c:2785
+#: ../../printerdrake.pm_.c:2833
 msgid "Removing LPD..."
 msgstr "LPD 削除中……"
 
-#: ../../printerdrake.pm_.c:2858
+#: ../../printerdrake.pm_.c:2906
 msgid "Select Printer Spooler"
 msgstr "プリンタのスプーラを選んでください"
 
-#: ../../printerdrake.pm_.c:2859
+#: ../../printerdrake.pm_.c:2907
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "どの印刷システム（スプーラ）を使いますか？"
 
-#: ../../printerdrake.pm_.c:2895
+#: ../../printerdrake.pm_.c:2943
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "プリンタ \"%s\" の設定中..."
 
-#: ../../printerdrake.pm_.c:2909
+#: ../../printerdrake.pm_.c:2957
 msgid "Installing Foomatic..."
 msgstr "Foomatic のインストール中..."
 
-#: ../../printerdrake.pm_.c:2979 ../../printerdrake.pm_.c:3020
-#: ../../printerdrake.pm_.c:3417 ../../printerdrake.pm_.c:3490
+#: ../../printerdrake.pm_.c:3027 ../../printerdrake.pm_.c:3068
+#: ../../printerdrake.pm_.c:3465 ../../printerdrake.pm_.c:3538
 msgid "Printer options"
 msgstr "プリンタオプション"
 
-#: ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3037
 msgid "Preparing Printerdrake..."
 msgstr "PrinterDrake準備中..."
 
-#: ../../printerdrake.pm_.c:3007 ../../printerdrake.pm_.c:3580
+#: ../../printerdrake.pm_.c:3055 ../../printerdrake.pm_.c:3628
 msgid "Configuring applications..."
 msgstr "アプリケーションの設定中..."
 
-#: ../../printerdrake.pm_.c:3027
+#: ../../printerdrake.pm_.c:3075
 msgid "Would you like to configure printing?"
 msgstr "印刷の設定をしますか？"
 
-#: ../../printerdrake.pm_.c:3039
+#: ../../printerdrake.pm_.c:3087
 msgid "Printing system: "
 msgstr "印刷システム:"
 
-#: ../../printerdrake.pm_.c:3099
+#: ../../printerdrake.pm_.c:3147
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -9428,7 +9427,7 @@ msgstr ""
 "バ上のプリンタを Star Office/OpenOffice.org/GIMPで使えるようにする場合もそう"
 "です。"
 
-#: ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3148
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9437,28 +9436,28 @@ msgstr ""
 "以下のプリンタが設定されています。変更、デフォルト化、情報の参照には、\n"
 "そのプリンタをダブルクリックします。"
 
-#: ../../printerdrake.pm_.c:3127
+#: ../../printerdrake.pm_.c:3175
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "プリンタ一覧更新（リモート CUPSプリンタをすべて表示)"
 
-#: ../../printerdrake.pm_.c:3145
+#: ../../printerdrake.pm_.c:3193
 msgid "Change the printing system"
 msgstr "印刷システムを変更"
 
-#: ../../printerdrake.pm_.c:3150 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3198 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "ノーマルモード"
 
-#: ../../printerdrake.pm_.c:3310 ../../printerdrake.pm_.c:3360
-#: ../../printerdrake.pm_.c:3573
+#: ../../printerdrake.pm_.c:3358 ../../printerdrake.pm_.c:3408
+#: ../../printerdrake.pm_.c:3621
 msgid "Do you want to configure another printer?"
 msgstr "別のプリンタを設定しますか？"
 
-#: ../../printerdrake.pm_.c:3395
+#: ../../printerdrake.pm_.c:3443
 msgid "Modify printer configuration"
 msgstr "プリンタ設定の変更"
 
-#: ../../printerdrake.pm_.c:3397
+#: ../../printerdrake.pm_.c:3445
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -9467,104 +9466,104 @@ msgstr ""
 "プリンタ %s\n"
 "このプリンタの何を変更しますか？"
 
-#: ../../printerdrake.pm_.c:3401
+#: ../../printerdrake.pm_.c:3449
 msgid "Do it!"
 msgstr "やれ！"
 
-#: ../../printerdrake.pm_.c:3406 ../../printerdrake.pm_.c:3461
+#: ../../printerdrake.pm_.c:3454 ../../printerdrake.pm_.c:3509
 msgid "Printer connection type"
 msgstr "プリンタ接続の種類"
 
-#: ../../printerdrake.pm_.c:3407 ../../printerdrake.pm_.c:3465
+#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3513
 msgid "Printer name, description, location"
 msgstr "プリンタの名前、説明、場所"
 
-#: ../../printerdrake.pm_.c:3409 ../../printerdrake.pm_.c:3483
+#: ../../printerdrake.pm_.c:3457 ../../printerdrake.pm_.c:3531
 msgid "Printer manufacturer, model, driver"
 msgstr "プリンタのメーカー、機種、ドライバ"
 
-#: ../../printerdrake.pm_.c:3410 ../../printerdrake.pm_.c:3484
+#: ../../printerdrake.pm_.c:3458 ../../printerdrake.pm_.c:3532
 msgid "Printer manufacturer, model"
 msgstr "プリンタのメーカー、機種"
 
-#: ../../printerdrake.pm_.c:3419 ../../printerdrake.pm_.c:3494
+#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3542
 msgid "Set this printer as the default"
 msgstr "このプリンタをデフォルトにする"
 
-#: ../../printerdrake.pm_.c:3421 ../../printerdrake.pm_.c:3499
+#: ../../printerdrake.pm_.c:3469 ../../printerdrake.pm_.c:3547
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "このプリンタを Star Office/OpenOffice.org/GIMP に追加"
 
-#: ../../printerdrake.pm_.c:3422 ../../printerdrake.pm_.c:3508
+#: ../../printerdrake.pm_.c:3470 ../../printerdrake.pm_.c:3556
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "このプリンタを Star Office/OpenOffice.org/GIMP から削除"
 
-#: ../../printerdrake.pm_.c:3423 ../../printerdrake.pm_.c:3517
+#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3565
 msgid "Print test pages"
 msgstr "テストページ印刷"
 
-#: ../../printerdrake.pm_.c:3424 ../../printerdrake.pm_.c:3519
+#: ../../printerdrake.pm_.c:3472 ../../printerdrake.pm_.c:3567
 msgid "Know how to use this printer"
 msgstr "このプリンタの使い方を調べる"
 
-#: ../../printerdrake.pm_.c:3426 ../../printerdrake.pm_.c:3521
+#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3569
 msgid "Remove printer"
 msgstr "プリンタ削除"
 
-#: ../../printerdrake.pm_.c:3472
+#: ../../printerdrake.pm_.c:3520
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "古いプリンタ \"%s\" を削除中..."
 
-#: ../../printerdrake.pm_.c:3497
+#: ../../printerdrake.pm_.c:3545
 msgid "Default printer"
 msgstr "デフォルトプリンタ"
 
-#: ../../printerdrake.pm_.c:3498
+#: ../../printerdrake.pm_.c:3546
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "プリンタ %s がデフォルトプリンタになりました。"
 
-#: ../../printerdrake.pm_.c:3502 ../../printerdrake.pm_.c:3505
+#: ../../printerdrake.pm_.c:3550 ../../printerdrake.pm_.c:3553
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "プリンタを Star Office/OpenOffice.org/GIMP に追加中"
 
-#: ../../printerdrake.pm_.c:3503
+#: ../../printerdrake.pm_.c:3551
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr "プリンタ %s を Star Office/OpenOffice.org/GIMP に追加しました。"
 
-#: ../../printerdrake.pm_.c:3506
+#: ../../printerdrake.pm_.c:3554
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "プリンタ %s を Star Office/OpenOffice.org/GIMP に追加できませんでした。"
 
-#: ../../printerdrake.pm_.c:3511 ../../printerdrake.pm_.c:3514
+#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "プリンタを Star Office/OpenOffice.org/GIMP から削除中"
 
-#: ../../printerdrake.pm_.c:3512
+#: ../../printerdrake.pm_.c:3560
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
 msgstr "プリンタ %s を Star Office/OpenOffice.org/GIMP から削除しました。"
 
-#: ../../printerdrake.pm_.c:3515
+#: ../../printerdrake.pm_.c:3563
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "プリンタ %s を Star Office/OpenOffice.org/GIMP から削除できませんでした。"
 
-#: ../../printerdrake.pm_.c:3523
+#: ../../printerdrake.pm_.c:3571
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "プリンタ %s を本当に削除しますか？"
 
-#: ../../printerdrake.pm_.c:3527
+#: ../../printerdrake.pm_.c:3575
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "プリンタ \"%s\" を削除中..."
@@ -9665,6 +9664,31 @@ msgstr "mkraid に失敗 (raidtools が入ってないのかも?)"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "RAID レベル %d のためにはパーティションが不足です\n"
 
+#: ../../security/main.pm_.c:35
+msgid ""
+"Standard: This is the standard security recommended for a computer that will "
+"be used to connect\n"
+"               to the Internet as a client.\n"
+"\n"
+"High:       There are already some restrictions, and more automatic checks "
+"are run every night.\n"
+"\n"
+"Higher:    The security is now high enough to use the system as a server "
+"which can accept\n"
+"              connections from many clients. If your machine is only a "
+"client on the Internet, you\n"
+"\t      should choose a lower level.\n"
+"\n"
+"Paranoid:  This is similar to the previous level, but the system is entirely "
+"closed and security\n"
+"                features are at their maximum\n"
+"\n"
+"Security Administrator:\n"
+"               If the 'Security Alerts' option is set, security alerts will "
+"be sent to this user (username or\n"
+"\t       email)"
+msgstr ""
+
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
 msgstr "セキュリティ水準:"
@@ -9689,6 +9713,20 @@ msgstr " (デフォルト)"
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need explanations, click on Help.\n"
+msgstr ""
+
+#: ../../security/main.pm_.c:226
+#, fuzzy
+msgid "Network Options"
+msgstr "その他オプション"
+
+#: ../../security/main.pm_.c:235
+#, fuzzy
+msgid "System Options"
+msgstr "その他オプション"
+
+#: ../../security/main.pm_.c:242
+msgid "Periodic Checks"
 msgstr ""
 
 #: ../../security/main.pm_.c:256
@@ -10171,8 +10209,8 @@ msgstr "マシンを更新ライサーバに"
 
 #: ../../share/advertising/09-server.pl_.c:10
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of your "
-"mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your machine into a powerful Linux server with a few clicks of "
+"your mouse: Web server, mail, firewall, router, file and print server, ..."
 msgstr ""
 "マウスをほんの数クリックするだけで、あなたのマシンは強力なサーバに早変わり！"
 "ウェブサーバ、メール、ファイアーウォール、ルータ、ファイルサーバに印刷サーバ"
@@ -10305,7 +10343,7 @@ msgstr ""
 "が弊社製品で競争力を得ているなら、あるいはMandrake Linuxの開発をサポートした"
 "ければ、MandrakeClubに参加しましょう!"
 
-#: ../../standalone.pm_.c:41
+#: ../../standalone.pm_.c:42
 msgid "Installing packages..."
 msgstr "パッケージのインストール中..."
 
@@ -10528,7 +10566,7 @@ msgstr ""
 "\n"
 "自動インストールのパラメータが左に表示されています"
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:484
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "おめでとうございます！"
@@ -11549,7 +11587,7 @@ msgid "Previous"
 msgstr "もどる"
 
 #: ../../standalone/drakbackup_.c:3941 ../../standalone/drakbackup_.c:4027
-#: ../../standalone/logdrake_.c:223
+#: ../../standalone/logdrake_.c:224
 msgid "Save"
 msgstr "保存"
 
@@ -12436,96 +12474,96 @@ msgstr "イーサネットカード"
 msgid "DHCP Client"
 msgstr "DHCP クライアント"
 
-#: ../../standalone/drakfloppy_.c:63
+#: ../../standalone/drakfloppy_.c:64
 msgid "usage: drakfloppy\n"
 msgstr "使い方：drakfloppy\n"
 
-#: ../../standalone/drakfloppy_.c:67
+#: ../../standalone/drakfloppy_.c:68
 msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 msgstr ""
 "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,-misc-fixed-medium-r-normal--14-*-"
 "75-75-c-*-jisx0208.1983-0,*"
 
-#: ../../standalone/drakfloppy_.c:68
+#: ../../standalone/drakfloppy_.c:69
 msgid "Module name"
 msgstr "モジュール名"
 
-#: ../../standalone/drakfloppy_.c:68
+#: ../../standalone/drakfloppy_.c:69
 msgid "Size"
 msgstr "サイズ"
 
-#: ../../standalone/drakfloppy_.c:73
+#: ../../standalone/drakfloppy_.c:74
 msgid "drakfloppy"
 msgstr "drakfloppy"
 
-#: ../../standalone/drakfloppy_.c:90
+#: ../../standalone/drakfloppy_.c:91
 msgid "boot disk creation"
 msgstr "ブートディスク作成"
 
-#: ../../standalone/drakfloppy_.c:98 ../../standalone/drakfloppy_.c:111
+#: ../../standalone/drakfloppy_.c:99 ../../standalone/drakfloppy_.c:112
 msgid "default"
 msgstr "デフォルト"
 
-#: ../../standalone/drakfloppy_.c:114
+#: ../../standalone/drakfloppy_.c:115
 #, c-format
 msgid "DrakFloppy Error: %s"
 msgstr "DrakFloppyエラー： %s"
 
-#: ../../standalone/drakfloppy_.c:125
+#: ../../standalone/drakfloppy_.c:126
 msgid "kernel version"
 msgstr "カーネルバージョン"
 
-#: ../../standalone/drakfloppy_.c:131
+#: ../../standalone/drakfloppy_.c:132
 msgid "General"
 msgstr "一般"
 
-#: ../../standalone/drakfloppy_.c:136
+#: ../../standalone/drakfloppy_.c:137
 msgid "Expert Area"
 msgstr "エキスパート向け"
 
-#: ../../standalone/drakfloppy_.c:139
+#: ../../standalone/drakfloppy_.c:140
 msgid "mkinitrd optional arguments"
 msgstr "mkinitrd 追加の引数"
 
-#: ../../standalone/drakfloppy_.c:140
+#: ../../standalone/drakfloppy_.c:141
 msgid "Add a module"
 msgstr "モジュール追加"
 
-#: ../../standalone/drakfloppy_.c:160
+#: ../../standalone/drakfloppy_.c:161
 msgid "force"
 msgstr "強制"
 
-#: ../../standalone/drakfloppy_.c:161
+#: ../../standalone/drakfloppy_.c:162
 msgid "if needed"
 msgstr "必要な場合のみ"
 
-#: ../../standalone/drakfloppy_.c:162
+#: ../../standalone/drakfloppy_.c:163
 msgid "omit scsi modules"
 msgstr "scsi モジュールは飛ばす"
 
-#: ../../standalone/drakfloppy_.c:163
+#: ../../standalone/drakfloppy_.c:164
 msgid "omit raid modules"
 msgstr "raid モジュールは飛ばす"
 
-#: ../../standalone/drakfloppy_.c:199
+#: ../../standalone/drakfloppy_.c:200
 msgid "Remove a module"
 msgstr "モジュールの削除"
 
-#: ../../standalone/drakfloppy_.c:221
+#: ../../standalone/drakfloppy_.c:222
 msgid "Output"
 msgstr "出力"
 
-#: ../../standalone/drakfloppy_.c:233
+#: ../../standalone/drakfloppy_.c:234
 msgid "Build the disk"
 msgstr "ディスクを作成"
 
-#: ../../standalone/drakfloppy_.c:376
+#: ../../standalone/drakfloppy_.c:377
 #, c-format
 msgid "Be sure a media is present for the device %s"
 msgstr "デバイス %s にメディアは入っていますか？"
 
 # ../../standalone/drakfloppy_.c:426, c-format
-#: ../../standalone/drakfloppy_.c:381
+#: ../../standalone/drakfloppy_.c:382
 #, c-format
 msgid ""
 "There is no medium or it is write-protected for device %s.\n"
@@ -12534,12 +12572,12 @@ msgstr ""
 "デバイス %sのメディアがないか書き込み禁止です。\n"
 "セットしてください。"
 
-#: ../../standalone/drakfloppy_.c:383
+#: ../../standalone/drakfloppy_.c:384
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "%s をフォークできません"
 
-#: ../../standalone/drakfloppy_.c:387
+#: ../../standalone/drakfloppy_.c:388
 #, c-format
 msgid ""
 "Unable to close properly mkbootdisk: \n"
@@ -12748,19 +12786,19 @@ msgstr "システムからフォントを削除"
 msgid "Post Uninstall"
 msgstr "アンインストール後の作業"
 
-#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:188
+#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:184
 msgid "Internet Connection Sharing"
 msgstr "インターネット接続の共有"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:115
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "すみませんが、2.4カーネルしかサポートしません。"
 
-#: ../../standalone/drakgw_.c:130
+#: ../../standalone/drakgw_.c:126
 msgid "Internet Connection Sharing currently enabled"
 msgstr "インターネット接続共有は現在有効"
 
-#: ../../standalone/drakgw_.c:131
+#: ../../standalone/drakgw_.c:127
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -12772,31 +12810,31 @@ msgstr ""
 "\n"
 "どうしますか？"
 
-#: ../../standalone/drakgw_.c:135
+#: ../../standalone/drakgw_.c:131
 msgid "disable"
 msgstr "無効に"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "dismiss"
 msgstr "無視"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "reconfigure"
 msgstr "再設定"
 
-#: ../../standalone/drakgw_.c:138
+#: ../../standalone/drakgw_.c:134
 msgid "Disabling servers..."
 msgstr "サーバを無効にしています……"
 
-#: ../../standalone/drakgw_.c:146
+#: ../../standalone/drakgw_.c:142
 msgid "Internet connection sharing is now disabled."
 msgstr "インターネット接続共有は無効になりました。"
 
-#: ../../standalone/drakgw_.c:155
+#: ../../standalone/drakgw_.c:151
 msgid "Internet Connection Sharing currently disabled"
 msgstr "インターネット接続共有は現在無効です"
 
-#: ../../standalone/drakgw_.c:156
+#: ../../standalone/drakgw_.c:152
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -12808,19 +12846,19 @@ msgstr ""
 "\n"
 "どうしますか？"
 
-#: ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:156
 msgid "enable"
 msgstr "有効に"
 
-#: ../../standalone/drakgw_.c:167
+#: ../../standalone/drakgw_.c:163
 msgid "Enabling servers..."
 msgstr "サーバを有効にしています……"
 
-#: ../../standalone/drakgw_.c:172
+#: ../../standalone/drakgw_.c:168
 msgid "Internet connection sharing is now enabled."
 msgstr "インターネット接続共有が有効です。"
 
-#: ../../standalone/drakgw_.c:189
+#: ../../standalone/drakgw_.c:185
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -12835,21 +12873,21 @@ msgstr ""
 "注：ローカルエリアネットワーク (LAN) をつくるには、専用のネットワークアダプタ"
 "が要ります。"
 
-#: ../../standalone/drakgw_.c:215
+#: ../../standalone/drakgw_.c:211
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "インターフェース %s (モジュール %s を使用)"
 
-#: ../../standalone/drakgw_.c:216
+#: ../../standalone/drakgw_.c:212
 #, c-format
 msgid "Interface %s"
 msgstr "インターフェース %s"
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:220
 msgid "No network adapter on your system!"
 msgstr "ネットワークアダプタがありません！"
 
-#: ../../standalone/drakgw_.c:225
+#: ../../standalone/drakgw_.c:221
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -12857,11 +12895,11 @@ msgstr ""
 "システム上にイーサネットアダプタが見つかりません。 ハードウェア設定ツールを実"
 "行してください。"
 
-#: ../../standalone/drakgw_.c:231
+#: ../../standalone/drakgw_.c:227
 msgid "Network interface"
 msgstr "ネットワークインターフェイス"
 
-#: ../../standalone/drakgw_.c:232
+#: ../../standalone/drakgw_.c:228
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -12876,7 +12914,7 @@ msgstr ""
 "\n"
 "このアダプタで LAN に接続しますね。"
 
-#: ../../standalone/drakgw_.c:241
+#: ../../standalone/drakgw_.c:237
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
@@ -12884,11 +12922,11 @@ msgstr ""
 "ローカルエリアネットワークにつながるネットワークアダプタを\n"
 "選んでください。"
 
-#: ../../standalone/drakgw_.c:259
+#: ../../standalone/drakgw_.c:255
 msgid "Network interface already configured"
 msgstr "ネットワークインターフェースは設定済みです設定されてません"
 
-#: ../../standalone/drakgw_.c:260
+#: ../../standalone/drakgw_.c:256
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -12903,15 +12941,15 @@ msgstr ""
 "\n"
 "手動でやることもできますが、それなりの知識が必要ですよ。"
 
-#: ../../standalone/drakgw_.c:265
+#: ../../standalone/drakgw_.c:261
 msgid "Automatic reconfiguration"
 msgstr "自動再設定"
 
-#: ../../standalone/drakgw_.c:266
+#: ../../standalone/drakgw_.c:262
 msgid "Show current interface configuration"
 msgstr "現在のインターフェース設定を表示"
 
-#: ../../standalone/drakgw_.c:268
+#: ../../standalone/drakgw_.c:264
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -12928,7 +12966,7 @@ msgstr ""
 "IP 属性: %s\n"
 "ドライバ: %s"
 
-#: ../../standalone/drakgw_.c:280
+#: ../../standalone/drakgw_.c:276
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the C-Class Network that "
@@ -12946,41 +12984,41 @@ msgstr ""
 "あるいは、こちらでインターフェースとDHCPサーバの設定をやることもできます。\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:285
+#: ../../standalone/drakgw_.c:281
 msgid "C-Class Local Network"
 msgstr "Cクラスローカルネットワーク"
 
-#: ../../standalone/drakgw_.c:286
+#: ../../standalone/drakgw_.c:282
 msgid "(This) DHCP Server IP"
 msgstr "（この）DHCP サーバの IP"
 
-#: ../../standalone/drakgw_.c:287
+#: ../../standalone/drakgw_.c:283
 msgid "Re-configure interface and DHCP server"
 msgstr "インターフェースとDHCPサーバの再設定"
 
-#: ../../standalone/drakgw_.c:294
+#: ../../standalone/drakgw_.c:290
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "ローカルネットワークが「.0」で終わっていません。中断します。"
 
-#: ../../standalone/drakgw_.c:305
+#: ../../standalone/drakgw_.c:301
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "現在の %s の設定ではLANアドレスが衝突するかもしれません！\n"
 
-#: ../../standalone/drakgw_.c:315
+#: ../../standalone/drakgw_.c:311
 msgid "Configuring..."
 msgstr "設定中..."
 
-#: ../../standalone/drakgw_.c:316
+#: ../../standalone/drakgw_.c:312
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "スクリプトの設定、ソフトウェアのインストール、サーバの起動..."
 
-#: ../../standalone/drakgw_.c:352
+#: ../../standalone/drakgw_.c:348
 #, c-format
 msgid "Problems installing package %s"
 msgstr "パッケージ %s のインストールで問題発生"
 
-#: ../../standalone/drakgw_.c:485
+#: ../../standalone/drakgw_.c:481
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -12990,23 +13028,23 @@ msgstr ""
 "これで自動ネットワーク設定（dhcp) を使って、LAN 上の他のマシンとインターネッ"
 "ト接続を共有できます。"
 
-#: ../../standalone/drakgw_.c:504
+#: ../../standalone/drakgw_.c:500
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "設定はすんでいますが、いまは無効になっています。"
 
-#: ../../standalone/drakgw_.c:505
+#: ../../standalone/drakgw_.c:501
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "設定はすんでいて、いまは有効になっています。"
 
-#: ../../standalone/drakgw_.c:506
+#: ../../standalone/drakgw_.c:502
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "インターネット接続共有はまったく設定されていません。"
 
-#: ../../standalone/drakgw_.c:511
+#: ../../standalone/drakgw_.c:507
 msgid "Internet connection sharing configuration"
 msgstr "インターネット接続の設定"
 
-#: ../../standalone/drakgw_.c:518
+#: ../../standalone/drakgw_.c:514
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -13503,132 +13541,132 @@ msgstr "ライブアップグレードを開始できません!!!\n"
 msgid "The change is done, but to be effective you must logout"
 msgstr "変更が完了しましたが、有効にするにはいったんログアウトしてください。"
 
-#: ../../standalone/logdrake_.c:85 ../../ugtk.pm_.c:285
+#: ../../standalone/logdrake_.c:86 ../../ugtk.pm_.c:285
 msgid "logdrake"
 msgstr "logdrake"
 
-#: ../../standalone/logdrake_.c:95
+#: ../../standalone/logdrake_.c:96
 msgid "Show only for the selected day"
 msgstr "選んだ日の分だけを表示"
 
-#: ../../standalone/logdrake_.c:102
+#: ../../standalone/logdrake_.c:103
 msgid "/File/_New"
 msgstr "/ファイル(F)/新規(_N)"
 
-#: ../../standalone/logdrake_.c:102
+#: ../../standalone/logdrake_.c:103
 msgid "<control>N"
 msgstr "<control>N"
 
-#: ../../standalone/logdrake_.c:103
+#: ../../standalone/logdrake_.c:104
 msgid "/File/_Open"
 msgstr "/ファイル(F)/開く(_O)"
 
-#: ../../standalone/logdrake_.c:103
+#: ../../standalone/logdrake_.c:104
 msgid "<control>O"
 msgstr "<control>O"
 
-#: ../../standalone/logdrake_.c:104
+#: ../../standalone/logdrake_.c:105
 msgid "/File/_Save"
 msgstr "/ファイル(F)/保存(_S)"
 
-#: ../../standalone/logdrake_.c:104
+#: ../../standalone/logdrake_.c:105
 msgid "<control>S"
 msgstr "<control>S"
 
-#: ../../standalone/logdrake_.c:105
+#: ../../standalone/logdrake_.c:106
 msgid "/File/Save _As"
 msgstr "/ファイル(F)/名前をつけて保存(_A)"
 
-#: ../../standalone/logdrake_.c:106
+#: ../../standalone/logdrake_.c:107
 msgid "/File/-"
 msgstr "/ファイル(F)/-"
 
-#: ../../standalone/logdrake_.c:108
+#: ../../standalone/logdrake_.c:109
 msgid "/_Options"
 msgstr "/オプション(_O)"
 
-#: ../../standalone/logdrake_.c:109
+#: ../../standalone/logdrake_.c:110
 msgid "/Options/Test"
 msgstr "/オプション(O)/テスト"
 
-#: ../../standalone/logdrake_.c:111
+#: ../../standalone/logdrake_.c:112
 msgid "/Help/_About..."
 msgstr "/ヘルプ(H)/情報(_A)..."
 
-#: ../../standalone/logdrake_.c:118
+#: ../../standalone/logdrake_.c:119
 msgid "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
 msgstr ""
 "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-iso8859-1,-*-fixed-medium-r-normal--"
 "24-*-100-100-c-*-jisx0208.1983-0,*"
 
-#: ../../standalone/logdrake_.c:119
+#: ../../standalone/logdrake_.c:120
 msgid "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
 msgstr ""
 "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-iso8859-1,-*-fixed-medium-r-normal--"
 "24-*-100-100-c-*-jisx0208.1983-0,*"
 
-#: ../../standalone/logdrake_.c:173
+#: ../../standalone/logdrake_.c:174
 msgid "User"
 msgstr "ユーザ名"
 
-#: ../../standalone/logdrake_.c:174
+#: ../../standalone/logdrake_.c:175
 msgid "Messages"
 msgstr "メッセージ"
 
-#: ../../standalone/logdrake_.c:175
+#: ../../standalone/logdrake_.c:176
 msgid "Syslog"
 msgstr "シスログ"
 
-#: ../../standalone/logdrake_.c:176
+#: ../../standalone/logdrake_.c:177
 msgid "Mandrake Tools Explanations"
 msgstr "Mandrake ツールの説明"
 
-#: ../../standalone/logdrake_.c:179
+#: ../../standalone/logdrake_.c:180
 msgid "search"
 msgstr "検索"
 
-#: ../../standalone/logdrake_.c:185
+#: ../../standalone/logdrake_.c:186
 msgid "A tool to monitor your logs"
 msgstr "ログをモニタするためのツール"
 
-#: ../../standalone/logdrake_.c:186
+#: ../../standalone/logdrake_.c:187
 msgid "Settings"
 msgstr "設定"
 
-#: ../../standalone/logdrake_.c:191
+#: ../../standalone/logdrake_.c:192
 msgid "matching"
 msgstr "一致するもの"
 
-#: ../../standalone/logdrake_.c:192
+#: ../../standalone/logdrake_.c:193
 msgid "but not matching"
 msgstr "以下には一致しない"
 
-#: ../../standalone/logdrake_.c:196
+#: ../../standalone/logdrake_.c:197
 msgid "Choose file"
 msgstr "ファイルを選択"
 
-#: ../../standalone/logdrake_.c:201
+#: ../../standalone/logdrake_.c:202
 msgid "Calendar"
 msgstr "カレンダ"
 
-#: ../../standalone/logdrake_.c:211
+#: ../../standalone/logdrake_.c:212
 msgid "Content of the file"
 msgstr "ファイルの内容"
 
-#: ../../standalone/logdrake_.c:215 ../../standalone/logdrake_.c:391
+#: ../../standalone/logdrake_.c:216 ../../standalone/logdrake_.c:392
 msgid "Mail alert"
 msgstr "Mail 警告"
 
-#: ../../standalone/logdrake_.c:267
+#: ../../standalone/logdrake_.c:268
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "少々お待ちを、ファイル %s を探しています。"
 
-#: ../../standalone/logdrake_.c:408
+#: ../../standalone/logdrake_.c:409
 msgid "Mail alert configuration"
 msgstr "Mail 警告の設定"
 
-#: ../../standalone/logdrake_.c:409
+#: ../../standalone/logdrake_.c:410
 msgid ""
 "Welcome to the mail configuration utility.\n"
 "\n"
@@ -13638,64 +13676,64 @@ msgstr ""
 "\n"
 "ここでは警告システムを設定します。\n"
 
-#: ../../standalone/logdrake_.c:416
+#: ../../standalone/logdrake_.c:417
 msgid "Apache World Wide Web Server"
 msgstr "Apache World Wide Webサーバ"
 
-#: ../../standalone/logdrake_.c:417
+#: ../../standalone/logdrake_.c:418
 msgid "Domain Name Resolver"
 msgstr "ドメイン名解決"
 
-#: ../../standalone/logdrake_.c:418
+#: ../../standalone/logdrake_.c:419
 msgid "Ftp Server"
 msgstr "ftp サーバ"
 
-#: ../../standalone/logdrake_.c:419
+#: ../../standalone/logdrake_.c:420
 msgid "Postfix Mail Server"
 msgstr "Postfix メールサーバ"
 
-#: ../../standalone/logdrake_.c:420
+#: ../../standalone/logdrake_.c:421
 msgid "Samba Server"
 msgstr "samba サーバ"
 
-#: ../../standalone/logdrake_.c:421
+#: ../../standalone/logdrake_.c:422
 msgid "SSH Server"
 msgstr "SSH サーバ"
 
-#: ../../standalone/logdrake_.c:422
+#: ../../standalone/logdrake_.c:423
 msgid "Webmin Service"
 msgstr "Webmin サービス"
 
-#: ../../standalone/logdrake_.c:423
+#: ../../standalone/logdrake_.c:424
 msgid "Xinetd Service"
 msgstr "Xinetdサービス"
 
-#: ../../standalone/logdrake_.c:430
+#: ../../standalone/logdrake_.c:431
 msgid "service setting"
 msgstr "サービス設定"
 
-#: ../../standalone/logdrake_.c:431
+#: ../../standalone/logdrake_.c:432
 msgid ""
 "You will receive an alert if one of the selected services is no more running"
 msgstr "以下で選んだサービスのどれかが止まったら警報が出ます。"
 
-#: ../../standalone/logdrake_.c:443
+#: ../../standalone/logdrake_.c:444
 msgid "load setting"
 msgstr "設定の読み込み中"
 
-#: ../../standalone/logdrake_.c:444
+#: ../../standalone/logdrake_.c:445
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "負荷がこの値を上回ったら警報が出ます"
 
-#: ../../standalone/logdrake_.c:457
+#: ../../standalone/logdrake_.c:458
 msgid "alert configuration"
 msgstr "警告の設定"
 
-#: ../../standalone/logdrake_.c:458
+#: ../../standalone/logdrake_.c:459
 msgid "Please enter your email address below "
 msgstr "メールアドレスを入力してください"
 
-#: ../../standalone/logdrake_.c:497
+#: ../../standalone/logdrake_.c:498
 msgid "Save as.."
 msgstr "名前をつけて保存..."
 
@@ -14107,949 +14145,3 @@ msgstr "マルチメディア　CD を焼く"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "科学ワークステーション"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "To submit a bug report, click on the button report.\n"
-#~ "This will open  a web browser window  on https://www.bugzilla.com\n"
-#~ " where you'll find a form to fill in.The information displayed above will "
-#~ "be \n"
-#~ "transferred to that server\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "バグ報告の提出には、「報告」ボタンをクリックしてください。\n"
-#~ "するとwebブラウザが開いて https://www.bugzilla.com が出ます。\n"
-#~ "そこに報告書があるので、記入してください。上記の情報はそのサーバ\n"
-#~ "に転送されます\n"
-#~ "\n"
-
-#~ msgid "Make bootsplash step 2"
-#~ msgstr "起動スプラッシュ作成 ステップ2"
-
-#~ msgid "Go to lilosplash configuration"
-#~ msgstr "lilosplash設定に行く"
-
-#~ msgid "Go back"
-#~ msgstr "戻る"
-
-#~ msgid ""
-#~ "There's no known OSS/ALSA alternative driver for your sound card (%s)"
-#~ msgstr "このサウンドカード (%s) 用の既知のOSS/ALSA代替ドライバがありません"
-
-#~ msgid ""
-#~ "Introduction\n"
-#~ "\n"
-#~ "The operating system and the different components available in the "
-#~ "Mandrake Linux distribution \n"
-#~ "shall be called the \"Software Products\" hereafter. The Software "
-#~ "Products include, but are not \n"
-#~ "restricted to, the set of programs, methods, rules and documentation "
-#~ "related to the operating \n"
-#~ "system and the different components of the Mandrake Linux distribution.\n"
-#~ "\n"
-#~ "\n"
-#~ "1. License Agreement\n"
-#~ "\n"
-#~ "Please read this document carefully. This document is a license agreement "
-#~ "between you and  \n"
-#~ "MandrakeSoft S.A. which applies to the Software Products.\n"
-#~ "By installing, duplicating or using the Software Products in any manner, "
-#~ "you explicitly \n"
-#~ "accept and fully agree to conform to the terms and conditions of this "
-#~ "License. \n"
-#~ "If you disagree with any portion of the License, you are not allowed to "
-#~ "install, duplicate or use \n"
-#~ "the Software Products. \n"
-#~ "Any attempt to install, duplicate or use the Software Products in a "
-#~ "manner which does not comply \n"
-#~ "with the terms and conditions of this License is void and will terminate "
-#~ "your rights under this \n"
-#~ "License. Upon termination of the License,  you must immediately destroy "
-#~ "all copies of the \n"
-#~ "Software Products.\n"
-#~ "\n"
-#~ "\n"
-#~ "2. Limited Warranty\n"
-#~ "\n"
-#~ "The Software Products and attached documentation are provided \"as is\", "
-#~ "with no warranty, to the \n"
-#~ "extent permitted by law.\n"
-#~ "MandrakeSoft S.A. will, in no circumstances and to the extent permitted "
-#~ "by law, be liable for any special,\n"
-#~ "incidental, direct or indirect damages whatsoever (including without "
-#~ "limitation damages for loss of \n"
-#~ "business, interruption of business, financial loss, legal fees and "
-#~ "penalties resulting from a court \n"
-#~ "judgment, or any other consequential loss) arising out of  the use or "
-#~ "inability to use the Software \n"
-#~ "Products, even if MandrakeSoft S.A. has been advised of the possibility "
-#~ "or occurance of such \n"
-#~ "damages.\n"
-#~ "\n"
-#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
-#~ "SOME COUNTRIES\n"
-#~ "\n"
-#~ "To the extent permitted by law, MandrakeSoft S.A. or its distributors "
-#~ "will, in no circumstances, be \n"
-#~ "liable for any special, incidental, direct or indirect damages whatsoever "
-#~ "(including without \n"
-#~ "limitation damages for loss of business, interruption of business, "
-#~ "financial loss, legal fees \n"
-#~ "and penalties resulting from a court judgment, or any other consequential "
-#~ "loss) arising out \n"
-#~ "of the possession and use of software components or arising out of  "
-#~ "downloading software components \n"
-#~ "from one of Mandrake Linux sites  which are prohibited or restricted in "
-#~ "some countries by local laws.\n"
-#~ "This limited liability applies to, but is not restricted to, the strong "
-#~ "cryptography components \n"
-#~ "included in the Software Products.\n"
-#~ "\n"
-#~ "\n"
-#~ "3. The GPL License and Related Licenses\n"
-#~ "\n"
-#~ "The Software Products consist of components created by different persons "
-#~ "or entities.  Most \n"
-#~ "of these components are governed under the terms and conditions of the "
-#~ "GNU General Public \n"
-#~ "Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
-#~ "licenses allow you to use, \n"
-#~ "duplicate, adapt or redistribute the components which they cover. Please "
-#~ "read carefully the terms \n"
-#~ "and conditions of the license agreement for each component before using "
-#~ "any component. Any question \n"
-#~ "on a component license should be addressed to the component author and "
-#~ "not to MandrakeSoft.\n"
-#~ "The programs developed by MandrakeSoft S.A. are governed by the GPL "
-#~ "License. Documentation written \n"
-#~ "by MandrakeSoft S.A. is governed by a specific license. Please refer to "
-#~ "the documentation for \n"
-#~ "further details.\n"
-#~ "\n"
-#~ "\n"
-#~ "4. Intellectual Property Rights\n"
-#~ "\n"
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
-#~ "Products, as a whole or in \n"
-#~ "parts, by all means and for all purposes.\n"
-#~ "\"Mandrake\", \"Mandrake Linux\" and associated logos are trademarks of "
-#~ "MandrakeSoft S.A.  \n"
-#~ "\n"
-#~ "\n"
-#~ "5. Governing Laws \n"
-#~ "\n"
-#~ "If any portion of this agreement is held void, illegal or inapplicable by "
-#~ "a court judgment, this \n"
-#~ "portion is excluded from this contract. You remain bound by the other "
-#~ "applicable sections of the \n"
-#~ "agreement.\n"
-#~ "The terms and conditions of this License are governed by the Laws of "
-#~ "France.\n"
-#~ "All disputes on the terms of this license will preferably be settled out "
-#~ "of court. As a last \n"
-#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
-#~ "Paris - France.\n"
-#~ "For any question on this document, please contact MandrakeSoft S.A.  \n"
-#~ msgstr ""
-#~ "はじめに\n"
-#~ "\n"
-#~ "本オペレーティングシステムおよびMandrake Linuxディストリビューションで\n"
-#~ "提供される各種のコンポーネントを、以下では「ソフトウェア製品」と呼ぶ。\n"
-#~ "ソフトウェア製品は、オペレーティングシステムおよびMandrake Linuxディス\n"
-#~ "トリビューションで提供される各種のコンポーネントに関連するプログラム群\n"
-#~ "やメソッド、きそくやドキュメンテーションを含むが、それに限られるもので\n"
-#~ "はない。\n"
-#~ "\n"
-#~ "\n"
-#~ "1. ライセンス同意事項\n"
-#~ "\n"
-#~ "この文書を慎重に読んでください。本文書はあなたとMandrake S.A.との間で\n"
-#~ "締結される、ソフトウェア製品に適用されるライセンス同意事項です。\n"
-#~ "ソフトウェア製品をいかなる形であれインストール、複製、使用することで\n"
-#~ "あなたは明示的に、本ライセンスの全条件や条項に従うことを受け入れ\n"
-#~ "完全に同意したものとされます。\n"
-#~ "本ライセンスのいかなる部分であれ同意できなければ、ソフトウェア製品の\n"
-#~ "インストール、複製、使用は認められません。\n"
-#~ "本ライセンスの条項や条件に適合しない形でソフトウェア製品をインストール\n"
-#~ "複製、利用しようとする試みは無効であり、本ライセンス下でのあなたの権利\n"
-#~ "を剥奪することとなります。ライセンスの破棄に伴い、あなたはソフトウェア\n"
-#~ "製品の複製すべてを即座に破壊しなければなりません。\n"
-#~ "\n"
-#~ "\n"
-#~ "2. Limited Warranty\n"
-#~ "\n"
-#~ "The Software Products and attached documentation are provided \"as is\", "
-#~ "with no warranty, to the \n"
-#~ "extent permitted by law.\n"
-#~ "MandrakeSoft S.A. will, in no circumstances and to the extent permitted "
-#~ "by law, be liable for any special,\n"
-#~ "incidental, direct or indirect damages whatsoever (including without "
-#~ "limitation damages for loss of \n"
-#~ "business, interruption of business, financial loss, legal fees and "
-#~ "penalties resulting from a court \n"
-#~ "judgment, or any other consequential loss) arising out of  the use or "
-#~ "inability to use the Software \n"
-#~ "Products, even if MandrakeSoft S.A. has been advised of the possibility "
-#~ "or occurance of such \n"
-#~ "damages.\n"
-#~ "\n"
-#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN "
-#~ "SOME COUNTRIES\n"
-#~ "\n"
-#~ "To the extent permitted by law, MandrakeSoft S.A. or its distributors "
-#~ "will, in no circumstances, be \n"
-#~ "liable for any special, incidental, direct or indirect damages whatsoever "
-#~ "(including without \n"
-#~ "limitation damages for loss of business, interruption of business, "
-#~ "financial loss, legal fees \n"
-#~ "and penalties resulting from a court judgment, or any other consequential "
-#~ "loss) arising out \n"
-#~ "of the possession and use of software components or arising out of  "
-#~ "downloading software components \n"
-#~ "from one of Mandrake Linux sites  which are prohibited or restricted in "
-#~ "some countries by local laws.\n"
-#~ "This limited liability applies to, but is not restricted to, the strong "
-#~ "cryptography components \n"
-#~ "included in the Software Products.\n"
-#~ "\n"
-#~ "\n"
-#~ "3. The GPL License and Related Licenses\n"
-#~ "\n"
-#~ "The Software Products consist of components created by different persons "
-#~ "or entities.  Most \n"
-#~ "of these components are governed under the terms and conditions of the "
-#~ "GNU General Public \n"
-#~ "Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
-#~ "licenses allow you to use, \n"
-#~ "duplicate, adapt or redistribute the components which they cover. Please "
-#~ "read carefully the terms \n"
-#~ "and conditions of the license agreement for each component before using "
-#~ "any component. Any question \n"
-#~ "on a component license should be addressed to the component author and "
-#~ "not to MandrakeSoft.\n"
-#~ "The programs developed by MandrakeSoft S.A. are governed by the GPL "
-#~ "License. Documentation written \n"
-#~ "by MandrakeSoft S.A. is governed by a specific license. Please refer to "
-#~ "the documentation for \n"
-#~ "further details.\n"
-#~ "\n"
-#~ "\n"
-#~ "4. Intellectual Property Rights\n"
-#~ "\n"
-#~ "All rights to the components of the Software Products belong to their "
-#~ "respective authors and are \n"
-#~ "protected by intellectual property and copyright laws applicable to "
-#~ "software programs.\n"
-#~ "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
-#~ "Products, as a whole or in \n"
-#~ "parts, by all means and for all purposes.\n"
-#~ "\"Mandrake\", \"Mandrake Linux\" and associated logos are trademarks of "
-#~ "MandrakeSoft S.A.  \n"
-#~ "\n"
-#~ "\n"
-#~ "5. Governing Laws \n"
-#~ "\n"
-#~ "If any portion of this agreement is held void, illegal or inapplicable by "
-#~ "a court judgment, this \n"
-#~ "portion is excluded from this contract. You remain bound by the other "
-#~ "applicable sections of the \n"
-#~ "agreement.\n"
-#~ "The terms and conditions of this License are governed by the Laws of "
-#~ "France.\n"
-#~ "All disputes on the terms of this license will preferably be settled out "
-#~ "of court. As a last \n"
-#~ "resort, the dispute will be referred to the appropriate Courts of Law of "
-#~ "Paris - France.\n"
-#~ "For any question on this document, please contact MandrakeSoft S.A.  \n"
-
-#~ msgid "ECI Hi-Focus"
-#~ msgstr "ECI ハイフォーカス"
-
-#~ msgid "Proxy should be ftp://..."
-#~ msgstr "Proxy は ftp://... です"
-
-#~ msgid "quit"
-#~ msgstr "終了"
-
-#~ msgid ""
-#~ "The first time you try the X configuration, you may not be very "
-#~ "satisfied\n"
-#~ "with its display (screen is too small, shifted left or right...). Hence,\n"
-#~ "even if X starts up correctly, DrakX then asks you if the configuration\n"
-#~ "suits you. It will also propose to change it by displaying a list of "
-#~ "valid\n"
-#~ "modes it could find, asking you to select one.\n"
-#~ "\n"
-#~ "As a last resort, if you still cannot get X to work, choose \"Change\n"
-#~ "graphics card\", select \"Unlisted card\", and when prompted on which\n"
-#~ "server, choose \"FBDev\". This is a failsafe option which works with any\n"
-#~ "modern graphics card. Then choose \"Test again\" to be sure."
-#~ msgstr ""
-#~ "一発目だと、あまり画面の具合がよくないかもしれません。\n"
-#~ "画面が小さすぎるとか、左右にずれているとか）。だから X が正しく\n"
-#~ "起動した場合にでも、DrakX は設定が適切かどうかきいて、可能な各種の\n"
-#~ "モードを表示して、好きなのを選べと言うわけです。\n"
-#~ "\n"
-#~ "最後の手段として、相変わらずXが動かなければ「グラフィックスカードの変"
-#~ "更」\n"
-#~ "を選び「一覧にないカード」を選択、どのサーバを使うかきかれたら FBDevを\n"
-#~ "選びます。これはフェールセーフな選択肢で、最近のすべてのグラフィックス\n"
-#~ "カードで使えます。それから「再テスト」を選んで確認しましょう。"
-
-#~ msgid "Internet and Messaging"
-#~ msgstr "インターネットとメッセージ"
-
-#~ msgid "Multimedia and Graphics"
-#~ msgstr "マルチメディアと画像"
-
-#~ msgid ""
-#~ "Mandrake Linux 8.2 provides 11 different graphical desktop environments "
-#~ "and window managers to choose from including GNOME 1.4, KDE 2.2.2, Window "
-#~ "Maker 0.8, and the rest"
-#~ msgstr ""
-#~ "Mandrake Linux 8.2 には11種類のグラフィックデスクトップ環境とウィンドウマ"
-#~ "ネージャが入っています。GNOME 1.4, KDE 2.2.2, Window Maker 0.8 などです。"
-
-#~ msgid "Server Software"
-#~ msgstr "サーバソフト"
-
-#~ msgid "MandrakeCampus"
-#~ msgstr "MandrakeCampus"
-
-#~ msgid ""
-#~ "Would you like to learn Linux simply, quickly, and for free? MandrakeSoft "
-#~ "provides free Linux training, as well as a way to test your progress, at "
-#~ "MandrakeCampus -- our online training center"
-#~ msgstr ""
-#~ "Linux を手軽にすばやく、無料で勉強したいですか？ MandrakeSoft は無料の"
-#~ "Linux トレーニングや、すすみ具合をチェックする方法を提供しています。それが"
-#~ "MandrakeCampus -- 弊社のオンライン研修センターです。"
-
-#~ msgid ""
-#~ "Quality support from the Linux Community, and from MandrakeSoft, is just "
-#~ "around the corner. And if you're already a Linux veteran, become an "
-#~ "\"Expert\" and share your knowledge at our support website"
-#~ msgstr ""
-#~ "Linux コミュニティと MandrakeSoft からの高質なサポートがすぐに得られます。"
-#~ "そしてあなたが筋金入りの Linux 人なら、「エキスパート」になってサポート用"
-#~ "ウェブサイトで知識を共有してください。"
-
-#~ msgid "MandrakeConsulting"
-#~ msgstr "Mandrake コンサルティング"
-
-#~ msgid ""
-#~ "For all of your IT projects, our consultants are ready to analyze your "
-#~ "requirements and offer a customized solution. Benefit from MandrakeSoft's "
-#~ "vast experience as a Linux producer to provide a true IT alternative for "
-#~ "your business organization"
-#~ msgstr ""
-#~ "あらゆる IT プロジェクトについて、弊社のコンサルタントたちが要件を分析し、"
-#~ "カスタム化したソリューションを提案いたします。Linux ベンダーとしての "
-#~ "MandrakeSoft の莫大な経験を生かして、あなたのビジネス組織向けに真の IT代替"
-#~ "案を提供いたします。"
-
-#~ msgid "MandrakeStore"
-#~ msgstr "MandrakeStore"
-
-#~ msgid ""
-#~ "For more information on MandrakeSoft's Professional Services and "
-#~ "commercial offerings, please see the following web page:"
-#~ msgstr ""
-#~ "MandrakeSoft の専門サービスや販売商品について詳しくは以下のウェブページを"
-#~ "参照してください:"
-
-#~ msgid "LBA (doesn't work on old BIOSes)"
-#~ msgstr "LBA (古い BIOS では動かない)"
-
-#~ msgid "You don't have any partitions!"
-#~ msgstr "パーティションがありません！"
-
-#~ msgid ""
-#~ "DiskDrake failed to read correctly the partition table.\n"
-#~ "Continue at your own risk!"
-#~ msgstr ""
-#~ "DiskDrake はパーティションテーブルを正しく読めませんでした。\n"
-#~ "ここから先は何が起きてもしりませんよ！"
-
-#~ msgid ""
-#~ "I can't read your partition table, it's too corrupted for me :(\n"
-#~ "I'll try to go on blanking bad partitions"
-#~ msgstr ""
-#~ "パーティションテーブルが読めません，壊れているようです:(\n"
-#~ "不正なパーティションを空白で埋めようとします"
-
-#~ msgid ""
-#~ "Please Build backup before to restore it...\n"
-#~ " or verify that your path to save is correct."
-#~ msgstr ""
-#~ "復元するにはバックアップをまず構築してください...\n"
-#~ "あるいは保存先パスは正しいですか？"
-
-#~ msgid "Firewalling Configuration"
-#~ msgstr "ファイアウォールの設定"
-
-#~ msgid "Firewalling configuration"
-#~ msgstr "ファイアウォールの設定"
-
-#~ msgid ""
-#~ "Firewalling\n"
-#~ "\n"
-#~ "You already have set up a firewall.\n"
-#~ "Click on Configure to change or remove the firewall"
-#~ msgstr ""
-#~ "ファイアーウォール\n"
-#~ "\n"
-#~ "すでにファイアーウォールは設定済みです。\n"
-#~ "それを変更・削除するには「設定」をクリックしてください"
-
-#~ msgid ""
-#~ "Firewalling\n"
-#~ "\n"
-#~ "Click on Configure to set up a standard firewall"
-#~ msgstr ""
-#~ "ファイアーウォール\n"
-#~ "\n"
-#~ "「設定」をクリックして標準ファイアーウォールを設定します"
-
-#~ msgid ""
-#~ "We'll now ask you questions about which services you'd like to allow\n"
-#~ "the Internet to connect to.  Please think carefully about these\n"
-#~ "questions, as your computer's security is important.\n"
-#~ "\n"
-#~ "Please, if you're not currently using one of these services, firewall\n"
-#~ "it off.  You can change this configuration anytime you like by\n"
-#~ "re-running this application!"
-#~ msgstr ""
-#~ "さて、インターネット接続したいサービスについていろいろお尋ねします。\n"
-#~ "答えるときにはよく考えてください。あなたのコンピュータのセキュリティ\n"
-#~ "に関わる問題ですから。\n"
-#~ "\n"
-#~ "こうしたサービスで、いま自分で使っていないものはファイアーウォール\n"
-#~ "で隠してしまいましょう。このアプリケーションを実行すれば、設定は\n"
-#~ "いつでも変更できます。"
-
-#~ msgid ""
-#~ "Are you running a web server on this machine that you need the whole\n"
-#~ "Internet to see? If you are running a webserver that only needs to be\n"
-#~ "accessed by this machine, you can safely answer NO here.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "このマシンで、全インターネットから見えるウェブサーバを実行しますか？\n"
-#~ "自分のマシンだけで使うウェブサーバしかないなら、ここで「いいえ」と\n"
-#~ "答えましょう。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Are you running a name server on this machine? If you didn't set one\n"
-#~ "up to give away IP and zone information to the whole Internet, please\n"
-#~ "answer no.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "このマシンでネームサーバ（DNS) を実行しますか？　全インターネットに\n"
-#~ "IP やゾーン情報を公開するよう設定していなければ、「いいえ」と答えて\n"
-#~ "ください。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Do you want to allow incoming Secure Shell (ssh) connections? This\n"
-#~ "is a telnet-replacement that you might use to login. If you're using\n"
-#~ "telnet now, you should definitely switch to ssh. telnet is not\n"
-#~ "encrypted -- so some attackers can steal your password if you use\n"
-#~ "it. ssh is encrypted and doesn't allow for this eavesdropping."
-#~ msgstr ""
-#~ "外からの Secure Shell (ssh) 接続を許可しますか？　sshは\n"
-#~ "telnetに代わるもので、ログインに使えます。いま telnet を使っていたら\n"
-#~ "絶対に ssh に切り替えましょう。telnet は暗号化されていません。だから\n"
-#~ "パスワードを盗まれる危険があります。sshは暗号化されているので、こう\n"
-#~ "いった盗み聴きができません"
-
-#~ msgid ""
-#~ "Do you want to allow incoming telnet connections?\n"
-#~ "This is horribly unsafe, as we explained in the previous screen. We\n"
-#~ "strongly recommend answering No here and using ssh in place of\n"
-#~ "telnet.\n"
-#~ msgstr ""
-#~ "外からの telnet 接続を許可しますか？\n"
-#~ "さっき説明したとおり、これはとんでもなく危険なことです。ここでは\n"
-#~ "絶対に「いいえ」と答えて、ssh を使うようにお勧めします。\n"
-
-#~ msgid ""
-#~ "Are you running an FTP server here that you need accessible to the\n"
-#~ "Internet? If you are, we strongly recommend that you only use it for\n"
-#~ "Anonymous transfers. Any passwords sent by FTP can be stolen by some\n"
-#~ "attackers, since FTP also uses no encryption for transferring passwords.\n"
-#~ msgstr ""
-#~ "インターネットでアクセスできる FTP サーバを実行しますか？\n"
-#~ "もしそうなら、なるべく Anonymous 転送にだけ使うようお勧めします。\n"
-#~ "FTP で送信するパスワードは、すべて盗聴できます。FTP はパスワード送信に\n"
-#~ "暗号を使わないからです。\n"
-
-#~ msgid ""
-#~ "Are you running a mail server here? If you're sending you \n"
-#~ "messages through pine, mutt or any other text-based mail client,\n"
-#~ "you probably are.  Otherwise, you should firewall this off.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "メールサーバを実行しますか？　メールの送信に pine、muttなどの\n"
-#~ "テキストベースのメールクライアントを使う人は、たぶんメールサーバ\n"
-#~ "が必要です。さもなければ、ファイアーウォールで隠しましょう。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Are you running a POP or IMAP server here? This would\n"
-#~ "be used to host non-web-based mail accounts for people via \n"
-#~ "this machine.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "POP サーバか IMAP サーバは使いますか？\n"
-#~ "このマシン経由で、webメール以外のメールアカウントを設定する\n"
-#~ "なら必要です。\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "You appear to be running a 2.2 kernel.  If your network IP\n"
-#~ "is automatically set by a computer in your home or office \n"
-#~ "(dynamically assigned), we need to allow for this.  Is\n"
-#~ "this the case?\n"
-#~ msgstr ""
-#~ "2.2 カーネルを使っていますね。もしネットワーク IP が\n"
-#~ "家庭やオフィスで自動割り当てになっているなら、それに\n"
-#~ "応じた設定をします。自動割り当てになっていますか？\n"
-
-#~ msgid ""
-#~ "Is your computer getting time syncronized to another computer?\n"
-#~ "Mostly, this is used by medium-large Unix/Linux organizations\n"
-#~ "to synchronize time for logging and such.  If you're not part\n"
-#~ "of a larger office and haven't heard of this, you probably \n"
-#~ "aren't."
-#~ msgstr ""
-#~ "あなたのコンピュータは、ほかのコンピュータと時計あわせをして\n"
-#~ "いますか？　これはふつう、中規模から大規模の Linux/Unix 組織\n"
-#~ "で、ログインなどの同期をとるのに使われます。そういう大きな\n"
-#~ "組織の一部ではなく、時計あわせなんか聴いたことがなければ、\n"
-#~ "たぶん不要です"
-
-#~ msgid ""
-#~ "Configuration complete.  May we write these changes to disk?\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "設定完了。変更をディスクに書き込みますか？\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid "Can't open %s for writing: %s\n"
-#~ msgstr "書き込み用に %s が開けません: %s\n"
-
-#~ msgid "No I don't need DHCP"
-#~ msgstr "DHCP は使わない"
-
-#~ msgid "Yes I need DHCP"
-#~ msgstr "DHCP を使う"
-
-#~ msgid "No I don't need NTP"
-#~ msgstr "NTP はいらない"
-
-#~ msgid "Yes I need NTP"
-#~ msgstr "NTPを使う"
-
-#~ msgid "Don't Save"
-#~ msgstr "保存しない"
-
-#~ msgid "Save & Quit"
-#~ msgstr "保存して終了"
-
-#~ msgid "Firewall Configuration Wizard"
-#~ msgstr "ファイアーウォール設定ウィザード"
-
-#~ msgid "No (firewall this off from the internet)"
-#~ msgstr "いいえ（これをインターネットから防御）"
-
-#~ msgid "Yes (allow this through the firewall)"
-#~ msgstr "はい（ファイアーウォールを通す）"
-
-#~ msgid "Please Wait... Verifying installed packages"
-#~ msgstr "少々お待ちを...インストール済みバッケージを確認中"
-
-#~ msgid ""
-#~ "Failure installing the needed packages: %s and Bastille.\n"
-#~ " Try to install them manually."
-#~ msgstr ""
-#~ "必要パッケージのインストールに失敗しました: %s と Bastille.\n"
-#~ "手動でインストールしてみてください。"
-
-#~ msgid "Data list to include on CDROM."
-#~ msgstr "CDROMに含めるデータ一覧"
-
-#~ msgid "Please choose your CD space"
-#~ msgstr "CD スペースを選んでください"
-
-#~ msgid "Please enter the cd writer speed"
-#~ msgstr "CDライターの速度を入力してください"
-
-#~ msgid "Please check if you want to erase your CDRW before"
-#~ msgstr "まず CDRW を消去する場合にはここをクリック"
-
-#~ msgid "Please enter your CD Writer device name (ex: 0,1,0)"
-#~ msgstr "CDライタのデバイス名を入力（例: 0,1,0)"
-
-#~ msgid "Please check if you want to include install boot on your CD."
-#~ msgstr "インストールしたいパッケージを選んで下さい"
-
-#~ msgid "Url should begin with 'ftp:'"
-#~ msgstr "Url は ftp://... ではじまります"
-
-#~ msgid ""
-#~ "Please check if you want to include\n"
-#~ " install boot on your CD."
-#~ msgstr ""
-#~ "CD に起動用のbootを含めるなら\n"
-#~ "チェックしてください。"
-
-#~ msgid ""
-#~ "\n"
-#~ "Welcome to the Printer Setup Wizard\n"
-#~ "\n"
-#~ "This wizard will help you to install your printer(s) connected to this "
-#~ "computer.\n"
-#~ "\n"
-#~ "Please plug in your printer(s) on this computer and turn it/them on. "
-#~ "Click on \"Next\" when you are ready, and on \"Cancel\" when you do not "
-#~ "want to set up your printer(s) now.\n"
-#~ "\n"
-#~ "Note that some computers can crash during the printer auto-detection, "
-#~ "turn off \"Auto-detect printers\" to do a printer installation without "
-#~ "auto-detection. Use the \"Expert Mode\" of printerdrake when you want to "
-#~ "set up printing on a remote printer if printerdrake does not list it "
-#~ "automatically."
-#~ msgstr ""
-#~ "\n"
-#~ "プリンタ設定ウィザードへいらっしゃ〜い\n"
-#~ "\n"
-#~ "このウィザードは、接続されたプリンタのインストールをお手伝いします。\n"
-#~ "\n"
-#~ "プリンタをコンピュータにつないで電源を入れてください。準備ができたら「次」"
-#~ "を\n"
-#~ "クリックするか、いまは設定したくなければ \"キャンセル\" をクリックしま"
-#~ "す。\n"
-#~ "\n"
-#~ "なお、一部のコンピュータはプリンタ自動検出中にクラッシュします。\n"
-#~ "自動検出なしでプリンタ設定をするには、「プリンタ自動検出」をオフにしま"
-#~ "す。\n"
-#~ "またprinterdrake が自動的にリモートプリンタを検出しなければ、\n"
-#~ "「エキスパートモード」を使って設定してください。"
-
-#~ msgid "Auto-Detection of Printers"
-#~ msgstr "プリンタの自動検出"
-
-#~ msgid ""
-#~ "Printerdrake is able to auto-detect your locally connected parallel and "
-#~ "USB printers for you, but note that on some systems the auto-detection "
-#~ "CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do "
-#~ "it ON YOUR OWN RISK!\n"
-#~ "\n"
-#~ "Do you really want to get your printers auto-detected?"
-#~ msgstr ""
-#~ "Printerdrake はローカルプリンタを自動検出できますが、一部のシステムでは\n"
-#~ "システムをフリーズさせて、ファイルシステムを壊します。何が起きても知りませ"
-#~ "んよ！\n"
-#~ "\n"
-#~ "で、本当にプリンタの自動検出をしますか？"
-
-#~ msgid "Set up printer manually"
-#~ msgstr "プリンタを手動で設定"
-
-#~ msgid ""
-#~ "Network printers can only be installed after the installation. Choose "
-#~ "\"Hardware\" and then \"Printer\" in the Mandrake Control Center."
-#~ msgstr ""
-#~ "ネットワークプリンタのインストールは、OS インストール後にしかできませ"
-#~ "ん。\n"
-#~ "インストール後にMandrake コントロールセンタで「ハードウェア」の中の\n"
-#~ "「プリンタ」を選んでください。"
-
-#~ msgid ""
-#~ "To install network printers, click \"Cancel\", switch to the \"Expert Mode"
-#~ "\", and click \"Add a new printer\" again."
-#~ msgstr ""
-#~ "ネットワークプリンタのインストールには「キャンセル」をクリックして\n"
-#~ "「エキスパートモード」に変更してから「新規プリンタの追加」をクリック\n"
-#~ "しなおしてください。"
-
-#~ msgid "Installing HPOJ package..."
-#~ msgstr "HPOJ パッケージのインストール中..."
-
-#~ msgid "Checking device and configuring HPOJ..."
-#~ msgstr "デバイスをチェックしてHPOJ をインストール中..."
-
-#~ msgid "Scanning on your HP multi-function device"
-#~ msgstr "HP マルチ機能デバイスでスキャン中"
-
-#~ msgid "Making printer port available for CUPS..."
-#~ msgstr "プリンタポートを CUPS 用に提供中..."
-
-#~ msgid "Control Center"
-#~ msgstr "コントロールセンター"
-
-#~ msgid "Choose the tool you want to use"
-#~ msgstr "使用するツールを選んで下さい"
-
-#~ msgid "Configure the way the system will alert you"
-#~ msgstr "システムの警告方法を設定"
-
-#~ msgid "no serial_usb found\n"
-#~ msgstr "serial_usbが見つかりません\n"
-
-#~ msgid "fsck failed with exit code %d or signal %d"
-#~ msgstr "fsck 失敗、exit code  %d または signal %d"
-
-#~ msgid "Graphics card identification: %s\n"
-#~ msgstr "グラフィックカード id: %s\n"
-
-#~ msgid "Choose options for server"
-#~ msgstr "サーバのオプションを選んで下さい"
-
-#~ msgid "Monitor not configured"
-#~ msgstr "モニタが設定されてません"
-
-#~ msgid "Graphics card not configured yet"
-#~ msgstr "グラフィックカードが設定されてません"
-
-#~ msgid "Resolutions not chosen yet"
-#~ msgstr "解像度が選択されてません"
-
-#~ msgid ""
-#~ "\n"
-#~ "try to change some parameters"
-#~ msgstr ""
-#~ "\n"
-#~ "いくつかパラメータを変えてみてください"
-
-#~ msgid "An error occurred:"
-#~ msgstr "エラー発生"
-
-#~ msgid "Leaving in %d seconds"
-#~ msgstr "あと %d 秒で戻ります"
-
-#~ msgid "Is this the correct setting?"
-#~ msgstr "設定はこれでいいですか？"
-
-#~ msgid "An error occurred, try to change some parameters"
-#~ msgstr "エラー発生，いくつかのパラメータを変えてみてください"
-
-#~ msgid "XFree86 server: %s"
-#~ msgstr "XFree86 サーバ: %s"
-
-#~ msgid "Show all"
-#~ msgstr "全てを表示"
-
-#~ msgid "Preparing X-Window configuration"
-#~ msgstr "X Window System の設定の準備"
-
-#~ msgid "What do you want to do?"
-#~ msgstr "どうしますか？"
-
-#~ msgid "Change Monitor"
-#~ msgstr "モニタの変更"
-
-#~ msgid "Change Graphics card"
-#~ msgstr "グラフィックカードの変更"
-
-#~ msgid "Change Server options"
-#~ msgstr "サーバオプションの変更"
-
-#~ msgid "Change Resolution"
-#~ msgstr "解像度の変更"
-
-#~ msgid "Show information"
-#~ msgstr "情報を表示"
-
-#~ msgid "Test again"
-#~ msgstr "もう一回テスト"
-
-#~ msgid ""
-#~ "Your HP multi-function device was configured automatically to be able to "
-#~ "scan. Now you can scan from the command line with \"ptal-hp %s scan ..."
-#~ "\". Scanning via a graphical interface or from the GIMP is not supported "
-#~ "yet for your device. More information you will find in the \"/usr/share/"
-#~ "doc/hpoj-0.8/ptal-hp-scan.html\" file on your system. If you have an HP "
-#~ "LaserJet 1100 or 1200 you can only scan when you have the scanner option "
-#~ "installed.\n"
-#~ "\n"
-#~ "Do not use \"scannerdrake\" for this device!"
-#~ msgstr ""
-#~ "HP 多機能デバイスを自動設定して、スキャナも使えるようにしました。これでコ"
-#~ "マンドラインから\"ptal-hp %s scan ...\"でスキャンができます。グラフィック"
-#~ "インターフェースやGIMPからのスキャンは、このデバイスではまだサポートされて"
-#~ "いません。詳しくは\"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" を参照して"
-#~ "ください。HP LaserJet 1100 か 1200 の場合には、スキャナオプションがインス"
-#~ "トールしていないとダメです。\n"
-#~ "\n"
-#~ "このデバイスでは\"scannerdrake\" は使わないでください!"
-
-#~ msgid "Use Hard Drive with daemon"
-#~ msgstr "デーモンでハードドライブを使う"
-
-#~ msgid "Use FTP with daemon"
-#~ msgstr "デーモンで FTP を使う"
-
-#~ msgid "Package List to Install"
-#~ msgstr "インストールするパッケージ一覧"
-
-#~ msgid "proftpd"
-#~ msgstr "proftpd"
-
-#~ msgid "sshd"
-#~ msgstr "sshd"
-
-#~ msgid "webmin"
-#~ msgstr "webmin"
-
-#~ msgid "xinetd"
-#~ msgstr "xinetd"
-
-#~ msgid "Select a graphics card"
-#~ msgstr "グラフィックカードを選択して下さい"
-
-#~ msgid "Choose a X driver"
-#~ msgstr "X ドライバを選んで下さい"
-
-#~ msgid "Standard VGA, 640x480 at 60 Hz"
-#~ msgstr "スタンダード VGA, 640x480 で 60Hz"
-
-#~ msgid "Super VGA, 800x600 at 56 Hz"
-#~ msgstr "スーパー VGA, 800x600 で 56 Hz"
-
-#~ msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
-#~ msgstr "8514 互換, 1024x768 at 87 Hz インターレース (no 800x600)"
-
-#~ msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
-#~ msgstr "スーパー VGA, 1024x768 で 87 Hz インターレース, 800x600 で 56 Hz"
-
-#~ msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
-#~ msgstr "拡張 スーパー VGA, 800x600 で 60 Hz, 640x480 で 72 Hz"
-
-#~ msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
-#~ msgstr "1024x768 at 60 Hz, 800x600 at 72 HzのノンインターレスSVGA"
-
-#~ msgid "High Frequency SVGA, 1024x768 at 70 Hz"
-#~ msgstr "1280x1024 at 70 HzのHigh Frequency SVGA"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
-#~ msgstr "1280x1024 at 60 Hzが可能なマルチスキャンモニタ"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
-#~ msgstr "1280x1024 at 74 Hzが可能なマルチスキャンモニタ"
-
-#~ msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
-#~ msgstr "1280x1024 at 76 Hzが可能なマルチスキャンモニタ"
-
-#~ msgid "Monitor that can do 1600x1200 at 70 Hz"
-#~ msgstr "1600x1200 at 70 Hz が可能なモニタ"
-
-#~ msgid "Monitor that can do 1600x1200 at 76 Hz"
-#~ msgstr "1600x1200 at 76 Hz が可能なモニタ"
-
-#~ msgid ""
-#~ "The total size for the groups you have selected is approximately %d MB.\n"
-#~ msgstr "あなたの選んだグループの総サイズは、だいたい %d MBになります。\n"
-
-#~ msgid ""
-#~ "If you wish to install less than this size,\n"
-#~ "select the percentage of packages that you want to install.\n"
-#~ "\n"
-#~ "A low percentage will install only the most important packages;\n"
-#~ "a percentage of 100%% will install all selected packages."
-#~ msgstr ""
-#~ "インストール量を減らしたければ、パッケージのパーセント数を\n"
-#~ "指定してください。\n"
-#~ "\n"
-#~ "これを下げると、いちばん重要なものだけがインストールされます。\n"
-#~ "100%% を指定すると、選んだパッケージをすべてインストールします。"
-
-#~ msgid ""
-#~ "You have space on your disk for only %d%% of these packages.\n"
-#~ "\n"
-#~ "If you wish to install less than this,\n"
-#~ "select the percentage of packages that you want to install.\n"
-#~ "A low percentage will install only the most important packages;\n"
-#~ "a percentage of %d%% will install as many packages as possible."
-#~ msgstr ""
-#~ "ディスク上に空き領域には、これらのパッケージの %d%% しか入りません。\n"
-#~ "\n"
-#~ "インストール量を減らしたければ、パーセント数を指定してください。\n"
-#~ "これを下げると、いちばん重要なものだけがインストールされます。\n"
-#~ "%d%% を指定すると、最大限のパッケージをインストールします。"
-
-#~ msgid "You will be able to choose them more specifically in the next step."
-#~ msgstr "次のステップではもっと細かい選択が出来ます"
-
-#~ msgid "Percentage of packages to install"
-#~ msgstr "インストールするパッケージ中の割合"
-
-#~ msgid "hide expert mode"
-#~ msgstr "エキスパートモードを隠す"
-
-#~ msgid "show expert mode"
-#~ msgstr "エキスパートモードを表示"
-
-#~ msgid ""
-#~ "If '%s' is a removable peripheral,\n"
-#~ " verify that a media is inserted."
-#~ msgstr ""
-#~ "もし %s が着脱可能な機器なら、\n"
-#~ "メディアが挿入されているか確認してください"
-
-#~ msgid ""
-#~ "WARNING! This will format '%s'.\n"
-#~ "All data will be erased on the peripheral '%s'.\n"
-#~ "If you want to continue, press OK. "
-#~ msgstr ""
-#~ "注意！　この操作をすると '%s'はフォーマットされます。\n"
-#~ "周辺機器 '%s'上のデータはすべて消去されます。\n"
-#~ "それでも続けるなら、OK を押してください。"
-
-#~ msgid "unknown"
-#~ msgstr "不詳"
-
-#~ msgid "Select a module or write his name:"
-#~ msgstr "モジュールを選ぶか名前を指定してください:"
-
-#~ msgid "Category"
-#~ msgstr "カテゴリー"
-
-#~ msgid "preload module"
-#~ msgstr "モジュールのプリロード"
-
-#~ msgid "click on a category"
-#~ msgstr "カテゴリーをクリックしてください"
-
-#~ msgid "Remove"
-#~ msgstr "取り除く"
-
-#~ msgid "Tool for boot disk creation"
-#~ msgstr "ブートディスク作成ツール"
-
-#~ msgid "Show expert mode"
-#~ msgstr "エキスパートモードを表示"
-
-#~ msgid "modules"
-#~ msgstr "モジュール"
-
-#~ msgid "Boot disk maker. Still in early stage.\n"
-#~ msgstr "ブートディスク作成ソフト。まだ開発初期です。\n"
-
-#~ msgid "experts only"
-#~ msgstr "エキスパート専用"
-
-#~ msgid "/File/_Preferences"
-#~ msgstr "/ファイル(F)/プレファレンス(_P)"
