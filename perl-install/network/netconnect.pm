@@ -1353,7 +1353,7 @@ It is not necessary on most networks."),
                         network::ethernet::write_ether_conf($in, $modules_conf, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
                         if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
                             $success = 0;
-                            $in->ask_okcancel(N("Network Configuration"), 
+                            $in->ask_okcancel(N("Network Configuration"),
                                               N("A problem occurred while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
                         }
                         return $offer_to_connect->();
@@ -1361,7 +1361,7 @@ It is not necessary on most networks."),
                    },
 
 
-                   ask_connect_now => 
+                   ask_connect_now =>
                    {
                     name => N("Do you want to try to connect to the Internet now?"),
                     type => "yesorno",
