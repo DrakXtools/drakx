@@ -329,6 +329,7 @@ sub select_packages {
 		Mesa Mesa-demos alsa alsa-utils
 		Aurora xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
                 glibc vim-minimal
+		nfs-utils-clients lvm usbd reiserfsprogs
                )) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
@@ -337,6 +338,7 @@ sub select_packages {
     #- special packages that are to be move to closure always ...
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
 		Aurora xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+		kernel22 kernel22-secure alsa imwheel
 		)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
