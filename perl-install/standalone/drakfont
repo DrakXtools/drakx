@@ -259,7 +259,7 @@ sub search_windows_font() {
 }
 
 sub is_a_font($) {
-    local $_ = $_[0];
+    local ($_) = @_;
     /\.ttf$/i || /\.pfa$/i || /\.pfb$/i || /\.pcf$/i || /\.pcf\.gz$/i || /\.pfm$/i || /\.gsf$/;
 }
 
@@ -585,7 +585,7 @@ sub interactive_mode() {
 						     ), 1,
 					       new Gtk2::HBox(0, 2), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => sub { help() }),
+						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => \&help),
 						      gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { Gtk2->main_quit() }),
 						     ),
 					      ),
@@ -732,7 +732,7 @@ sub font_choice() {
     $file_dialog->show();
 }
 
-sub file_ok_sel($$) {
+sub file_ok_sel {
     my ($_widget, $file_selection) = @_;
     my $file_name = $file_selection->get_filename();
     print "-- @install\n";
@@ -909,7 +909,7 @@ sub import_status_uninstall() {
     backend_mod();
 }
 
-sub progress($$$) {
+sub progress {
     my ($progressbar, $incr, $label_text) = @_;
     my ($new_val) = $progressbar->fraction;
     $new_val += $incr;
