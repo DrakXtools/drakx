@@ -22,7 +22,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use strict; 	 
-use warnings;
 use diagnostics;
 
 use lib qw(/usr/lib/libDrakX);
@@ -231,10 +230,14 @@ sub manage {
 					       ),
 				    );
     $apply_button = $oc->{buttons}{N("Apply")};
+
+    network::netconnect::detect(my $detect = {});
+    $detect->{adsl} and do { $detect->{adsl}{$_} and $intf->{$_} = {} foreach keys %{$detect->{adsl}} };
+
     each_index {
 	my $interface = $_;
 	$gui->{$interface}{index} = $::i;
-	build_notebook($window, $netc, $intf->{$interface}, $gui->{$interface}, $interface, $apply_button);
+	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $interface, $apply_button);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
     } (sort keys %$intf);
     
@@ -247,7 +250,7 @@ sub manage {
 }
 
 sub build_notebook {
-    my ($window, $netc, $intf, $gui, $interface, $apply_button) = @_;
+    my ($netc, $intf, $gui, $interface, $apply_button) = @_;
  
     my $apply = sub { $apply_button->set_sensitive(1) };
 
@@ -292,9 +295,10 @@ sub build_notebook {
 	    );
     $gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
     $interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+    !$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
     $gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     $gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
-
+        
     if ($intf->{WIRELESS_MODE}) {
 	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
 		gtkpack_(Gtk2::VBox->new(0,0),
@@ -342,20 +346,48 @@ sub build_notebook {
 		     ));
     $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
     
+    #- account box
+    if ($interface eq 'speedtouch' || $interface eq 'sagem') {
+	$gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
+	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
+		 0, gtkpack_(Gtk2::VBox->new(0,0),
+			     1, Gtk2::Label->new(N("Authentication")),
+			     0, my $auth_menu  = gtksignal_connect(Gtk2::OptionMenu->new,
+								   changed => $apply),
+			    ),
+		 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
+				    1, Gtk2::Label->new($_->[0]),
+				    0, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
+										 key_press_event => $apply),
+				   ),
+		       );
+		   } ([ N("Account Login (user name)"), 'login' ],
+		      [ N("Account Password"), 'passwd' ],
+		      #[ N("Provider phone number"), 'phone_out' ],
+		     ),
+		);
+	$auth_menu->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
+	$gui->{intf}{passwd}->set_visibility(0);
+	/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
+	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
+	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
+    }
+    
     #- informations box
     my $module = c::getNetDriver($interface) || modules::get_alias($interface);
-    my $info = find { $_->{driver} eq $module } detect_devices::probeall();
+    my $info = find { $module ? $_->{driver} eq $module : $_->{description} eq $gui->{description} } detect_devices::probeall();
+    
     gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
-	    gtktext_insert(Gtk2::TextView->new, 
+	    gtktext_insert(Gtk2::TextView->new,
 			   join('',
                        map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
                                                                   [ N("Vendor"), split('\|', $info->{description}) ],
                                                                   [ N("Description"), reverse split('\|', $info->{description}) ],
-                                                                  [ N("Media class"), $info->{media_type} ],
-                                                                  [ N("Module name"), $module ], 
-                                                                  [ N("Mac Address"), c::get_hw_address($interface) ],
-                                                                  [ N("Bus"), $info->{bus} ],
-                                                                  [ N("Location on the bus"), $info->{pci_bus} ],
+                                                                  [ N("Media class"), $info->{media_type} || '-' ],
+                                                                  [ N("Module name"), $module || '-' ], 
+                                                                  [ N("Mac Address"), c::get_hw_address($interface) || '-' ],
+                                                                  [ N("Bus"), $info->{bus} || '-' ],
+                                                                  [ N("Location on the bus"), $info->{pci_bus} || '-' ],
                                                                  )
                       )
 			  ),
@@ -367,7 +399,7 @@ sub build_notebook {
 
 sub populate_notebook {
     my ($notebook, $gui) = @_;
-    foreach ('Tcp/ip', 'Wireless', 'Options', 'Informations') {
+    foreach ('Tcp/ip', 'Account', 'Wireless', 'Options', 'Informations') {
 	!$gui->{sheet}{$_} and next;
 	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new($_));
     }
