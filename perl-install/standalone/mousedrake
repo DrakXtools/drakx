@@ -51,8 +51,8 @@ if (!$mouse || !$::auto) {
 
     if ($mouse->{device} eq "usbmouse") {
 	modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
-	modules::load_category('bus/usb') or die _("no serial_usb found\n");
-	eval { modules::load('serial_usb') };
+	modules::load_category('bus/usb') or die 'no usb bus found\n';
+	modules::load(qw(hid mousedev usbmouse));
     }
 
     $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
