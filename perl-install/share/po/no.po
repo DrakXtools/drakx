@@ -324,12 +324,11 @@ msgstr ""
 
 #: ../../Xconfigurator.pm_.c:1124
 msgid "Choose the default user:"
-msgstr "Velg standard bruker :"
+msgstr "Velg standard bruker:"
 
 #: ../../Xconfigurator.pm_.c:1125
-#, fuzzy
 msgid "Choose the window_manager to run:"
-msgstr "Velg verktøyet du ønsker å bruke"
+msgstr "Velg vinduhåndtereren du ønsker å kjøre:"
 
 #: ../../Xconfigurator_consts.pm_.c:6
 msgid "256 colors (8 bits)"
@@ -880,7 +879,7 @@ msgstr "Lagre i fil"
 
 #: ../../diskdrake.pm_.c:42
 msgid "Wizard"
-msgstr ""
+msgstr "Wizard"
 
 #: ../../diskdrake.pm_.c:43
 msgid "Restore from floppy"
@@ -1500,7 +1499,7 @@ msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr "Velg oppsettet som stemmer med tastaturet ditt fra listen ovenfor"
 
 #: ../../help.pm_.c:13
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Choose \"Install\" if there are no previous versions of GNU/Linux\n"
 "installed, or if you wish to use multiple distributions or versions.\n"
@@ -1529,8 +1528,8 @@ msgstr ""
 "av GNU/Linux, eller hvis du ønsker å bruke flere distribusjoner eller\n"
 "versjoner.\n"
 "\n"
-"Velg \"Oppdater\" hvis du ønsker å oppdatere en tidligere versjon av "
-"Mandrake Linux:\n"
+"Velg \"Redning\" hvis du ønsker å redde en tidligere versjon av Mandrake "
+"Linux:\n"
 "%s eller %s.\n"
 "\n"
 "\n"
@@ -3032,14 +3031,12 @@ msgstr ""
 "Du får tilgang til å gjøre kraftige, men farlige ting her."
 
 #: ../../install_steps_interactive.pm_.c:132
-#, fuzzy
 msgid "Rescue"
-msgstr "Endre størrelse"
+msgstr "Redning"
 
 #: ../../install_steps_interactive.pm_.c:138
-#, fuzzy
 msgid "Workstation"
-msgstr "Informasjon"
+msgstr "Arbeidstasjon"
 
 #: ../../install_steps_interactive.pm_.c:139
 msgid "Development"
@@ -3082,7 +3079,7 @@ msgid "Choose the mount points"
 msgstr "Velg monteringspunktene"
 
 #: ../../install_steps_interactive.pm_.c:223
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I can try to go on blanking bad partitions (ALL DATA will be lost!).\n"
@@ -3092,8 +3089,11 @@ msgid ""
 "Do you agree to loose all the partitions?\n"
 msgstr ""
 "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
-"Jeg vil førsøke å blanke ut dårlige partisjoner, ALLE DATA vil gå tapt\n"
-"(%s)"
+"Jeg kan forsøke å blanke ut dårlige partisjoner (ALLE DATA vil gå tapt!)\n"
+"Den andre løsningen er å ikke la DrakX modifisere partisjonstabellen.\n"
+"(feilen er %s)\n"
+"\n"
+"Vil du miste alle partisjonene?\n"
 
 #: ../../install_steps_interactive.pm_.c:236
 msgid ""
@@ -3171,7 +3171,6 @@ msgid "Recommended (%dMB)"
 msgstr "Anbefalt (%dMB)"
 
 #: ../../install_steps_interactive.pm_.c:349
-#, fuzzy
 msgid "Select the size you want to install"
 msgstr "Velg størrelsen du ønsker å installere"
 
@@ -3305,9 +3304,8 @@ msgid "Is your hardware clock set to GMT?"
 msgstr "Er maskinvareklokken din satt til GMT?"
 
 #: ../../install_steps_interactive.pm_.c:578
-#, fuzzy
 msgid "What printing system do you want to use?"
-msgstr "Hvilken partisjonstype ønsker du å forandre størrelse på?"
+msgstr "Hvilket utskriftsystem ønsker du å bruke?"
 
 #: ../../install_steps_interactive.pm_.c:604
 msgid "No password"
@@ -4238,14 +4236,15 @@ msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
 #: ../../netconnect.pm_.c:329
-#, fuzzy
 msgid "Internet Configuration."
-msgstr "Internett-konfigurasjon"
+msgstr "Internett-konfigurasjon."
 
 #: ../../netconnect.pm_.c:330
 msgid ""
 "I need to configure your network adaptater to be able to connect to internet."
 msgstr ""
+"Jeg må konfigurere nettverksadapteret ditt for å kunne koble opp mot\n"
+"Internett."
 
 #: ../../netconnect.pm_.c:332 ../../netconnect.pm_.c:348
 #: ../../standalone/drakgw_.c:198
@@ -4253,21 +4252,20 @@ msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
 #: ../../netconnect.pm_.c:333
-#, fuzzy
 msgid ""
 "Please choose which network adaptater do you want to use to connect to "
 "internet.\n"
 "If you don't know, choose eth0.\n"
 msgstr ""
-"Vennligst velg hvilket nettverksadapter som skal kobles\n"
-"til ditt lokale nettverk (LAN)."
+"Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp "
+"mot Internett.\n"
+"Hvis du ikke vet hvilket, velg eth0.\n"
 
 #: ../../netconnect.pm_.c:344 ../../netconnect.pm_.c:373
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
 #: ../../netconnect.pm_.c:345
-#, fuzzy
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
@@ -4279,23 +4277,23 @@ msgstr ""
 "\n"
 "$grensesnitt\n"
 "\n"
-"Ønsker du å sette opp ditt lokale nettverk (LAN) med det adapteret?"
+"Ønsker du å sette opp Internett-tilkoblingen din med dette adapteret?"
 
 #: ../../netconnect.pm_.c:349
-#, fuzzy
 msgid ""
 "Please choose which network adaptater do you want to use to connect to "
 "internet"
-msgstr "Vennligst velg hvilken serieport musen din koblet til."
+msgstr ""
+"Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp "
+"mot Internett"
 
 #: ../../netconnect.pm_.c:374
 msgid "I'm about to restart the network interface. Do you agree?"
-msgstr ""
+msgstr "Jeg er i ferd med å starte nettverksgrensesnittet på nytt. Er du enig?"
 
 #: ../../netconnect.pm_.c:447
-#, fuzzy
 msgid "ADSL configuration"
-msgstr "ISDN-konfigurasjon"
+msgstr "ADSL-konfigurasjon"
 
 #: ../../netconnect.pm_.c:448
 msgid "Do you want to start your connection at boot?"
@@ -4390,19 +4388,16 @@ msgid "Connect to internet using Cable"
 msgstr "Koble opp mot Internett med kabel"
 
 #: ../../netconnect.pm_.c:576
-#, fuzzy
 msgid "Configure LAN"
-msgstr "Konfigurer X"
+msgstr "Konfigurer LAN"
 
 #: ../../netconnect.pm_.c:578
-#, fuzzy
 msgid "End configuration"
-msgstr "ISDN-konfigurasjon"
+msgstr "Slutt-konfigurasjon"
 
 #: ../../netconnect.pm_.c:581
-#, fuzzy
 msgid "Connect to the Internet / Configure LAN"
-msgstr "Koble opp mot Internett"
+msgstr "Koble opp mot Internett / Konfigurer LAN"
 
 #: ../../netconnect.pm_.c:582
 msgid "How do you want to connect to the Internet?"
@@ -4426,9 +4421,8 @@ msgid "What kind is your ISDN connection?"
 msgstr "Hva slags type er ISDN-tilknytningen din?"
 
 #: ../../netconnect.pm_.c:628
-#, fuzzy
 msgid "Cable connection"
-msgstr "Skrivertilkobling"
+msgstr "Kabeltilkobling"
 
 #: ../../netconnect.pm_.c:629 ../../network.pm_.c:278
 msgid ""
@@ -4459,27 +4453,24 @@ msgid "On which country are you located ?"
 msgstr "I hvilket land er du ?"
 
 #: ../../netconnect.pm_.c:649
-#, fuzzy
 msgid "alcatel modem"
-msgstr "Eksternt modem"
+msgstr "alcatel modem"
 
 #: ../../netconnect.pm_.c:651
-#, fuzzy
 msgid "ECI modem"
-msgstr "Eksternt modem"
+msgstr "ECI modem"
 
 #: ../../netconnect.pm_.c:655
-#, fuzzy
 msgid "If your adsl modem is an alcatel one, choose alcatel. Otherwise, ECI."
-msgstr "Hvis adsl modemet ditt er alcatel, velg pptp alcatel. ellers, pppoe."
+msgstr "Hvis adsl modemet ditt er alcatel, velg alcatel. ellers, ECI."
 
 #: ../../netconnect.pm_.c:675
 msgid "use pppoe"
-msgstr ""
+msgstr "bruk pppoe"
 
 #: ../../netconnect.pm_.c:677
 msgid "don't use pppoe"
-msgstr ""
+msgstr "ikke bruk pppoe"
 
 #: ../../netconnect.pm_.c:681
 msgid ""
@@ -4487,6 +4478,9 @@ msgid ""
 "However, it exists some connexion that only use dhcp. If you don't know, "
 "choose 'use pppoe'"
 msgstr ""
+"Den mest vanlige måten å koble opp med adsl er dhcp + pppoe.\n"
+"Men, det eksisterer noen tilkoblinger som bare bruker dhcp. Hvis du ikke "
+"vet, velg 'bruk pppoe'"
 
 #: ../../network.pm_.c:242
 msgid "Keep the current IP configuration"
@@ -4704,9 +4698,8 @@ msgstr ""
 
 #: ../../printer.pm_.c:24 ../../printerdrake.pm_.c:151
 #: ../../printerdrake.pm_.c:153
-#, fuzzy
 msgid "Printer Device URI"
-msgstr "Skriverenhet"
+msgstr "Skriverenhet URI"
 
 #: ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
@@ -4986,24 +4979,22 @@ msgid ""
 "can be defined. What name should be used for this printer and\n"
 "how is the printer connected?"
 msgstr ""
-"Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
-"(ofte lp) og en spolingskatalog direkte assosiert med denne. Hvilket\n"
-"navn og katalog skal brukes for denne køen og hvordan er skriveren tilkoblet?"
+"Hver skriver håndtert av CUPS trenger et navn (f.eks. lp).\n"
+"Andre parametere som beskrivelse av skriveren eller dennes lokasjon\n"
+"kan defineres. Hvilket navn skal brukes for denne skriveren og\n"
+"hvordan er skriveren tilkoblet?"
 
 #: ../../printerdrake.pm_.c:388
-#, fuzzy
 msgid "Name of printer"
-msgstr "Lokal skriver"
+msgstr "Navn på skriver"
 
 #: ../../printerdrake.pm_.c:389
-#, fuzzy
 msgid "Description"
-msgstr "Spesifiser opsjoner"
+msgstr "Beskrivelse"
 
 #: ../../printerdrake.pm_.c:390
-#, fuzzy
 msgid "Location"
-msgstr "Informasjon"
+msgstr "Lokasjon"
 
 #: ../../printerdrake.pm_.c:391 ../../printerdrake.pm_.c:401
 msgid "Printer Connection"
@@ -5337,47 +5328,44 @@ msgid "No network adapter on your system!"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
 #: ../../standalone/drakgw_.c:187
-#, fuzzy
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
 msgstr ""
-"Ikke noe ethernet nettverksadapter er for øyeblikket konfigurert i systemet "
-"ditt. Vennligst bruk verktøyet for maskinvarekonfigurasjon."
+"Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt. "
+"Vennligst kjør verktøyet for maskinvarekonfigurasjon."
 
 #: ../../standalone/drakgw_.c:199
-#, fuzzy
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr ""
-"Vennligst velg hvilket nettverksadapter som skal kobles\n"
-"til ditt lokale nettverk (LAN)."
+"Vennligst velg hvilket nettverksadapter som skal kobles til ditt lokale "
+"nettverk (LAN)."
 
 #: ../../standalone/drakgw_.c:208
-#, fuzzy
 msgid ""
 "Warning, the network adapter is already configured.\n"
 "Would you like to reconfigure?"
 msgstr ""
-"Ikke noe ethernet nettverksadapter er for øyeblikket konfigurert i systemet "
-"ditt. Vennligst bruk verktøyet for maskinvarekonfigurasjon."
+"Advarsel, nettverksadapteret er allerede konfigurert.\n"
+"Vil du konfigurere på nytt?"
 
 #: ../../standalone/drakgw_.c:233
 msgid "Potential LAN address conflict found in current config of $_!\n"
 msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til $_!\n"
 
 #: ../../standalone/drakgw_.c:243
-#, fuzzy
 msgid "Firewalling configuration detected!"
-msgstr "Brannmurkonfigurasjon oppdaget.!"
+msgstr "Brannmurkonfigurasjon oppdaget!"
 
 #: ../../standalone/drakgw_.c:244
-#, fuzzy
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation. Proceed?"
-msgstr "Advarsel! En eksisterende brannmurkonfigurasjon har blitt oppdaget.\n"
+msgstr ""
+"Advarsel! En eksisterende brannmurkonfigurasjon har blitt oppdaget. Du "
+"trenger muligens å konfigurere noe manuelt etter installasjon. Fortsette?"
 
 #: ../../standalone/drakgw_.c:258
 msgid "Configuring scripts, installing software, starting servers..."
@@ -5404,9 +5392,8 @@ msgid "Could not install caching-nameserver RPM with urpmi."
 msgstr "Kunne ikke installere caching-nameserver RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:488
-#, fuzzy
 msgid "Congratulations!"
-msgstr "Konfigurasjon"
+msgstr "Gratulerer!"
 
 #: ../../standalone/drakgw_.c:489
 msgid "Everything has been configured.\n"
@@ -5704,29 +5691,43 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ msgid "Remote lpd"
 #~ msgstr "Fjern-lpd"
 
-#, fuzzy
 #~ msgid "URI for Local printer"
-#~ msgstr "Lokal skriver"
+#~ msgstr "URI for lokal skriver"
 
-#, fuzzy
 #~ msgid "URI for Network printer"
-#~ msgstr "Nettverksgrensesnitt"
+#~ msgstr "URI for nettverksskriver"
 
-#, fuzzy
 #~ msgid "Local Printer Device (URI)"
-#~ msgstr "Lokal skriverenhet"
+#~ msgstr "Lokal skriverenhet (URI)"
 
-#, fuzzy
 #~ msgid ""
 #~ "What URI device is your printer connected to\n"
 #~ "(note that parallel:/dev/lp0 is equivalent to LPT1:)?"
 #~ msgstr ""
-#~ "Hvilken enhet er skriveren din koblet til \n"
-#~ "(merk at /dev/lp0 er det samme som LPT1:)?\n"
+#~ "Hvilken URI-enhet er skriveren din koblet til\n"
+#~ "(merk at parallel:/dev/lp0 er det samme som LPT1:)?"
 
-#, fuzzy
 #~ msgid "Network Printer Options (URI)"
-#~ msgstr "NetWare skriveropsjoner"
+#~ msgstr "NetWare skriveropsjoner (URI)"
+
+#~ msgid ""
+#~ "Choose the right Device URI for a network printer or a local file. "
+#~ "Examples:\n"
+#~ "   file:/path/to/filename.prn\n"
+#~ "   http://hostname:631/ipp/port1\n"
+#~ "   ipp://hostname/ipp/port1\n"
+#~ "   lpq://hostname/queue\n"
+#~ "   socket://hostname\n"
+#~ "   socket://hostname:9100"
+#~ msgstr ""
+#~ "Velg riktig URI-enhet for en nettverksskriver eller en lokal fil. "
+#~ "Eksempler:\n"
+#~ "   fil:/sti/til/filnavn.prn\n"
+#~ "   http://vertsnavn:631/ipp/port1\n"
+#~ "   ipp://vertsnavn/ipp/port1\n"
+#~ "   lpq://vertsnavn/kø\n"
+#~ "   socket://vertsnavn\n"
+#~ "   socket://vertsnavn:9100"
 
 #~ msgid "curly"
 #~ msgstr "krøllet"
