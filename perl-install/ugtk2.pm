@@ -127,11 +127,6 @@ sub gtkappend_page {
     $w
 }
 
-sub gtkbuttonset {
-    gtkdestroy($_[0]->child);
-    gtkadd($_[0], gtkshow($_[1]))
-}
-
 sub gtkentry {
     my ($text) = @_;
     my $e = Gtk2::Entry->new;
