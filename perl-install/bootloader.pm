@@ -10,6 +10,7 @@ use vars qw(%vga_modes);
 use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use log;
+use any;
 use fsedit;
 use loopback;
 use commands;
@@ -632,7 +633,7 @@ sub install_loadlin {
 
     my ($winpart) = grep { $_->{device_windobe} eq 'C' } @$fstab;
     log::l("winpart is $winpart->{device}");
-    my $winhandle = loopback::inspect($winpart, $prefix, 'rw');
+    my $winhandle = any::inspect($winpart, $prefix, 'rw');
     my $windrive = $winhandle->{dir};
     log::l("windrive is $windrive");
 

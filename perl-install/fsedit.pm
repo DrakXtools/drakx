@@ -44,12 +44,12 @@ arch() !~ /^sparc/ ? (
 ) : (),
 );
 
-sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
+sub typeOfPart { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
 
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub hds($$) {
+sub hds {
     my ($drives, $flags) = @_;
     my @hds;
     my $rc;
@@ -98,16 +98,16 @@ sub readProcPartitions {
 }
 
 #- get all normal partition including special ones as found on sparc.
-sub get_fstab(@) {
+sub get_fstab {
     loopback::loopbacks(@_), map { partition_table::get_normal_parts($_) } @_
 }
 
 #- get normal partition that should be visible for working on.
-sub get_visible_fstab(@) {
+sub get_visible_fstab {
     grep { $_ && !partition_table::isWholedisk($_) && !partition_table::isHiddenMacPart($_) } map { partition_table::get_normal_parts($_) } @_;
 }
 
-sub free_space(@) {
+sub free_space {
     sum map { $_->{size} } map { partition_table::get_holes($_) } @_;
 }
 
@@ -117,7 +117,7 @@ sub hasRAID {
     $b;
 }
 
-sub get_root($;$) {
+sub get_root {
     my ($fstab, $boot) = @_;
     if ($boot) { $_->{mntpoint} eq "/boot" and return $_ foreach @$fstab; }
     $_->{mntpoint} eq "/" and return $_ foreach @$fstab;
@@ -134,7 +134,7 @@ sub is_one_big_fat {
 }
 
 
-sub computeSize($$$$) {
+sub computeSize {
     my ($part, $best, $hds, $suggestions) = @_;
     my $max = $part->{maxsize} || $part->{size};
     return min($max, $best->{size}) unless $best->{ratio};
@@ -170,8 +170,8 @@ sub computeSize($$$$) {
     if (grep { $_->{size} < $max - $size } @L) { $size } else { $max }
 }
 
-sub suggest_part($$$;$) {
-    my ($hd, $part, $hds, $suggestions) = @_;
+sub suggest_part {
+    my ($part, $hds, $suggestions) = @_;
     $suggestions ||= \@suggestions;
 
 
@@ -181,7 +181,7 @@ sub suggest_part($$$;$) {
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
       grep { !has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
-      grep { !$_->{hd} || $_->{hd} eq $hd->{device} }
+      grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
       grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
 	@$suggestions or return;
 
@@ -199,7 +199,7 @@ sub suggest_part($$$;$) {
     1;
 }
 
-sub suggestions_mntpoint($) {
+sub suggestions_mntpoint {
     my ($hds) = @_;
     sort grep { !/swap/ && !has_mntpoint($_, $hds) }
       (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
@@ -291,8 +291,7 @@ sub allocatePartitions($$) {
 	foreach (partition_table::get_holes($hd)) {
 	    my ($start, $size) = @$_{"start", "size"};
 	    my $part;
-	    while (suggest_part($hd, 
-				$part = { start => $start, size => 0, maxsize => $size }, 
+	    while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $hd->{device} }, 
 				$hds, $to_add)) {
 		add($hd, $part, $hds);
 		$size -= $part->{size} + $part->{start} - $start;

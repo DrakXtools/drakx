@@ -33,7 +33,7 @@ sub new {
 
 sub configureNetwork {
     my ($o) = @_;
-    modules::load_thiskind('net', sub {}, $o->{pcmcia});
+    modules::load_thiskind('net', $o->{pcmcia});
     install_steps::configureNetwork($o);
 }
 

@@ -535,10 +535,9 @@ sub g_auto_install(;$) {
 
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
-    local *F;
-    open F, ">$f" or log::l("can't output the auto_install script in $f"), return;
-    print F "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n";
-    print F Data::Dumper->Dump([$o], ['$o']), "\0";
+    output($f, 
+	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
+	   Data::Dumper->Dump([$o], ['$o']), "\0");
 }
 
 sub loadO {
@@ -595,6 +594,48 @@ sub generate_ks_cfg {
 	$ks .= "\n";
     }
     $ks;
+}
+
+sub suggest_mount_points {
+    my ($hds, $prefix) = @_;
+    my @parts = grep { isTrueFS($_) } fsedit::get_fstab(@$hds);
+
+    my (%mntpoints, $user);
+
+    my %l = (
+	     '/'     => 'etc/fstab',
+	     '/boot' => 'vmlinuz',
+	     '/tmp'  => '.X11-unix',
+	     '/usr'  => 'X11R6',
+	     '/var'  => 'catman',
+	    );
+
+    foreach my $part (@parts) {
+	$part->{mntpoint} and next; #- if already found via an fstab
+
+	my $handle = any::inspect($part, $prefix) or return;
+	my $d = $handle->{dir};
+	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
+	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
+
+	$part->{mntpoint} = $mnt;
+
+	# try to find other mount points via fstab
+	fs::get_mntpoints_from_fstab(\@parts, $d) if $mnt eq '/';
+    }
+    $_->{mntpoint} and fsedit::suggest_part($_, $hds) foreach @parts;
+}
+
+#- mainly for finding the root partitions for upgrade
+sub find_root_parts {
+    my ($hds, $prefix) = @_;
+    suggest_mount_points($hds, $prefix);
+    grep { delete($_->{mntpoint}) eq '/' } fsedit::get_fstab(@$hds);
+}
+sub use_root_part {
+    my ($fstab, $part, $prefix) = @_;
+    my $handle = any::inspect($part, $prefix) or die;
+    fs::get_mntpoints_from_fstab($fstab, $handle->{dir});
 }
 
 1;

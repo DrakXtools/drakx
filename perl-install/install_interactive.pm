@@ -13,6 +13,7 @@ use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;
 use devices;
+use modules;
 
 
 sub getHds {
@@ -268,6 +269,55 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
     }
     log::l("partitioning wizard log:\n", (map { ">>wizlog>>$_\n" } @wizlog));
     %solutions;
+}
+
+#------------------------------------------------------------------------------
+sub load_thiskind {
+    my ($o, $type) = @_;
+    my $w; #- needed to make the wait_message stay alive
+    my $pcmcia = $o->{pcmcia}
+      unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
+	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
+    $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
+
+    modules::load_thiskind($type, $pcmcia, sub { $w = $o->wait_load_module($type, @_) });
+}
+
+#------------------------------------------------------------------------------
+sub setup_thiskind {
+    my ($o, $type, $auto, $at_least_one) = @_;
+
+    return if arch() eq "ppc";
+
+    my @l;
+    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
+
+    if ($allow_probe) {
+	@l = $o->load_thiskind($type);
+	if (my @err = grep { $_->{error} } map { $_->{error} } @l) {
+	    $o->ask_warn('', join("\n", @err));
+	}
+	return if $auto && (@l || !$at_least_one);
+    }
+    @l = map { $_->{driver} } @l;
+    while (1) {
+	my $msg = @l ?
+	  [ _("Found %s %s interfaces", join(", ", @l), $type),
+	    _("Do you have another one?") ] :
+	  _("Do you have any %s interfaces?", $type);
+
+	my $opt = [ __("Yes"), __("No") ];
+	push @$opt, __("See hardware info") if $::expert;
+	my $r = "Yes";
+	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
+	if ($r eq "No") { return }
+	if ($r eq "Yes") {
+	    push @l, $o->load_module($type) || next;
+	} else {
+	    #-eval { commands::modprobe("isapnp") };
+	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
+	}
+    }
 }
 
 1;

@@ -294,8 +294,6 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
-    return $o->searchAndMount4Upgrade if $o->{isUpgrade};
-
     $o->{steps}{formatPartitions}{done} = 0;
     $o->doPartitionDisksBefore;
     $o->doPartitionDisks;
@@ -445,10 +443,8 @@ sub addUser {
 }
 
 #------------------------------------------------------------------------------
-#-PADTODO
 sub createBootdisk {
     modules::write_conf($o->{prefix});
-
     $o->createBootdisk($_[1] == 1);
 }
 
@@ -661,6 +657,10 @@ sub main {
     modules::read_already_loaded();
 
     eval { modules::load("af_packet") };
+
+    map_index {
+	modules::add_alias("snd-slot-$::i", $_->{driver});
+    } modules::get_that_type('sound');
 
     lang::set($o->{lang});
 

@@ -10,7 +10,9 @@ use vars qw(@users);
 use common qw(:common :system :file :functional);
 use commands;
 use detect_devices;
+use partition_table qw(:types);
 use fsedit;
+use fs;
 use run_program;
 use log;
 
@@ -253,6 +255,30 @@ sub shells {
     grep { -x "$prefix$_" } map { chomp; $_ } cat_("$prefix/etc/shells");
 }
 
+sub inspect {
+    my ($part, $prefix, $rw) = @_;
+
+    isMountableRW($part) or return;
+
+    my $dir = "/tmp/inspect_tmp_dir";
+
+    if ($part->{isMounted}) {
+	$dir = ($prefix || '') . $part->{mntpoint};
+    } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
+	$dir = '';
+    } else {
+	mkdir $dir, 0700;
+	fs::mount($part->{device}, $dir, type2fs($part->{type}), !$rw);
+    }
+    my $h = before_leaving {
+	if (!$part->{isMounted} && $dir) {
+	    fs::umount($dir);
+	    unlink($dir)
+	}
+    };
+    $h->{dir} = $dir;
+    $h;
+}
 
 
 1;

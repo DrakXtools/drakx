@@ -192,20 +192,11 @@ sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 # pci_probing::main::probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
 # get_pcmcia_devices provides field "device", used in network.pm
 # => probeall with $probe_type is unsafe
-# => matching_type is unsafe
 sub probeall {
     my ($probe_type, $pcic) = @_;
     require pci_probing::main;
     require sbus_probing::main;
     pci_probing::main::probe($probe_type), sbus_probing::main::probe(), modules::get_pcmcia_devices($pcic);
-}
-sub matching_type {
-    my ($type, $pcic) = @_;
-    grep { 
-	my $ok = $_->{driver} !~ /(unknown|ignore)/;
-	$ok or log::l("skipping $_->{description}, no module available (if you know one, please mail pixel\@linux-mandrake.com)");
-	$ok
-    } grep { $_->{type} =~ /$type/i } probeall($type, $pcic);
 }
 sub matching_desc {
     my ($regexp) = @_;

@@ -60,10 +60,10 @@ sub check_mounted($) {
     }
 }
 
-sub get_mntpoints_from_fstab($) {
-    my ($fstab) = @_;
+sub get_mntpoints_from_fstab {
+    my ($fstab, $prefix) = @_;
 
-    foreach (read_fstab('/etc/fstab')) {
+    foreach (read_fstab("$prefix/etc/fstab")) {
 	foreach my $p (@$fstab) {
 	    $p->{device} eq $_->{device} or next;
 	    $p->{mntpoint} ||= $_->{mntpoint};

@@ -127,7 +127,7 @@ sub setupSCSI {
 sub doPartitionDisksBefore {
     my ($o) = @_;
 
-    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
+    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$o->{partitioning}{readonly}) {
 	$o->{stage1_hd} = { dev => $1, fs => $2 };
 	install_any::getFile("XXX"); #- close still opened filehandle
 	eval { fs::umount("/tmp/hdimage") };
@@ -159,7 +159,15 @@ sub doPartitionDisksAfter {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
-    my ($o, $hds) = @_;
+    my ($o) = @_;
+
+    if ($o->{isUpgrade}) {
+	# either one root is defined (and all is ok), or we take the first one we find
+	my $p = fsedit::get_root($o->{fstab}) || first(install_any::find_root_parts($o->{hds}, $o->{prefix})) or die;
+	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
+    } else {
+	 #TODO;
+    }	
 }
 
 #------------------------------------------------------------------------------

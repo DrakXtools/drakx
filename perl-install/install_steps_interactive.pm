@@ -86,16 +86,6 @@ sub selectKeyboard($) {
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
-sub selectRootPartition($@) {
-    my ($o, @parts) = @_;
-    $o->{upgradeRootPartition} =
-      $o->ask_from_list(_("Root Partition"),
-			_("What is the root partition (/) of your system?"),
-			[ @parts ], $o->{upgradeRootPartition});
-#- TODO check choice, then mount partition in $o->{prefix} and autodetect.
-#-    install_steps::selectRootPartition($o);
-}
-
 sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
@@ -182,9 +172,11 @@ sub selectMouse {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($o) = @_;
-    { my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
-      modules::load_ide() }
-    setup_thiskind($_[0], 'scsi|raid', $_[1], $_[2]);
+    { 
+	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
+	modules::load_ide();
+    }
+    install_interactive::setup_thiskind($o, 'scsi|raid', $_[1], $_[2]);
 }
 
 sub ask_mntpoint_s {
@@ -216,18 +208,28 @@ sub ask_mntpoint_s {
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
     my ($o) = @_;
-    my %solutions = install_interactive::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
-    my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
+    if ($o->{isUpgrade}) {
+	# either one root is defined (and all is ok), or we take the first one we find
+	my @p = fsedit::get_root($o->{fstab});
+	@p = install_any::find_root_parts($o->{hds}, $o->{prefix}) if !@p;
+	my $p = $o->ask_from_listf(_("Root Partition"),
+				   _("What is the root partition (/) of your system?"),
+				   \&partition_table_raw::description, [ @p ]) or die "setstep exitInstall\n";
+	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
+    } else {
+	my %solutions = install_interactive::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+	my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
-    my $level = $::beginner ? 2 : -9999;
-    my @sol = grep { $_->[0] >= $level } @solutions;
-    @solutions = @sol if @sol > 1;
+	my $level = $::beginner ? 2 : -9999;
+	my @sol = grep { $_->[0] >= $level } @solutions;
+	@solutions = @sol if @sol > 1;
 
-    my $ok; while (!$ok) {
-	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
-	eval { $ok = $sol->[2]->() };
-	$ok &&= !$@;
-	$@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+	my $ok; while (!$ok) {
+	    my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
+	    eval { $ok = $sol->[2]->() };
+	    $ok &&= !$@;
+	    $@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+	}
     }
 }
 
@@ -1158,75 +1160,7 @@ sub load_thiskind {
 	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
 
-    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
-}
-
-#------------------------------------------------------------------------------
-# (dam's) is not anymore used by setupSCSI
-sub setup_thiskind {
-    my ($o, $type, $auto, $at_least_one) = @_;
-
-    return if arch() eq "ppc";
-
-    my @l;
-    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
-
-    if ($allow_probe) {
-	eval { @l = grep { !/ide-/ } $o->load_thiskind($type) };
-	$o->ask_warn('', $@) if $@;
-	return if $auto && (@l || !$at_least_one);
-    }
-    while (1) {
-	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", @l), $type),
-	    _("Do you have another one?") ] :
-	  _("Do you have any %s interfaces?", $type);
-
-	my $opt = [ __("Yes"), __("No") ];
-	push @$opt, __("See hardware info") if $::expert;
-	my $r = "Yes";
-	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
-	if ($r eq "No") { return }
-	if ($r eq "Yes") {
-	    push @l, $o->load_module($type) || next;
-	} else {
-	    #-eval { commands::modprobe("isapnp") };
-	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
-	}
-    }
-}
-
-sub setup_scsi_raid {
-    my ($o, $type, $auto, $at_least_one) = @_;
-
-    return if arch() eq "ppc";
-
-    my @l;
-    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
-
-    if ($allow_probe) {
-	eval { @l = grep { !/ide-/ } $o->load_thiskind($type) };
-	$o->ask_warn('', $@) if $@;
-	return if $auto && (@l || !$at_least_one);
-    }
-    while (1) {
-	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", @l), $type),
-	    _("Do you have another one?") ] :
-	  _("Do you have any %s interfaces?", $type);
-
-	my $opt = [ __("Yes"), __("No") ];
-	push @$opt, __("See hardware info") if $::expert;
-	my $r = "Yes";
-	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
-	if ($r eq "No") { return }
-	if ($r eq "Yes") {
-	    push @l, $o->load_module($type) || next;
-	} else {
-	    #-eval { commands::modprobe("isapnp") };
-	    $o->ask_warn('', [ detect_devices::stringlist() ]); #-, scalar cat_("/proc/isapnp") ]);
-	}
-    }
+    modules::load_thiskind($type, $pcmcia, sub { $w = wait_load_module($o, $type, @_) });
 }
 
 sub upNetwork {

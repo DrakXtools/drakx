@@ -72,31 +72,6 @@ sub create {
     $f;
 }
 
-sub inspect {
-    my ($part, $prefix, $rw) = @_;
-
-    isMountableRW($part) or return;
-
-    my $dir = "/tmp/loopback_tmp";
-
-    if ($part->{isMounted}) {
-	$dir = ($prefix || '') . $part->{mntpoint};
-    } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
-	$dir = '';
-    } else {
-	mkdir $dir, 0700;
-	fs::mount($part->{device}, $dir, type2fs($part->{type}), !$rw);
-    }
-    my $h = before_leaving {
-	if (!$part->{isMounted} && $dir) {
-	    fs::umount($dir);
-	    unlink($dir)
-	}
-    };
-    $h->{dir} = $dir;
-    $h;
-}
-
 sub getFree {
     my ($dir, $part) = @_;
     my $freespace = $dir ? 

@@ -1,6 +1,6 @@
 package modules;
 
-use vars qw(%loaded %drivers);
+use vars qw(%drivers);
 
 use common qw(:common :file :system);
 use detect_devices;
@@ -9,7 +9,6 @@ use log;
 
 
 my %conf;
-my %loaded; #- array of loaded modules for each types (scsi/net/...)
 my $scsi = 0;
 my %deps = ();
 
@@ -322,9 +321,6 @@ while (my ($k, $v) = each %drivers) {
     $drivers{$k} = \%l;
 }
 
-
-1;
-
 sub module_of_type__4update_kernel {
     my ($type) = @_;
     my %skip; @skip{@skip_modules_on_stage1} = ();
@@ -380,8 +376,10 @@ sub load {
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw([ $name, @options ]);
     }
-    push @{$loaded{$type}}, $name;
-
+    if ($name eq "usb-storage") {
+	sleep(2); 
+	-d "/proc/scsi/usb" or return;
+    }
     if ($type) {
 	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
 	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
@@ -409,9 +407,6 @@ sub unload($;$) {
 	    delete $conf{$m}{loaded};
 	}
     }
-    foreach (keys %loaded) {
-	@{$loaded{$_}} = grep { $m ne $_ } @{$loaded{$_}};
-    }
     remove_alias($m) if $remove_alias;
 }
 
@@ -431,11 +426,15 @@ sub load_raw {
 	}
     } @l;
 
-    #- this is a hack to make plip go
     foreach (@l) {
-	$_->[0] eq "parport_pc" or next;
-	foreach (@{$_->[1]}) {
-	    /^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
+	if ($_->[0] eq "parport_pc") {
+	    #- this is a hack to make plip go
+	    foreach (@{$_->[1]}) {
+		/^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
+	    }
+	} elsif ($_->[0] =~ /usb-[uo]hci/) {
+	    #- ensure keyboard is working, the kernel must do the job the BIOS was doing
+	    load_multi("usbkbd", "keybdev");
 	}
     }
     die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
@@ -445,7 +444,6 @@ sub read_already_loaded() {
     foreach (cat_("/proc/modules")) {
 	my ($name) = split;
 	$conf{$name}{loaded} = 1;
-	my $l = $loaded{($drivers{$name} || next)->{type}} ||= [];
 	push @$l, $name unless member($name, @$l);
     }
 }
@@ -524,48 +522,26 @@ sub read_stage1_conf {
 }
 
 sub load_thiskind {
-    my ($type, $f, $pcic) = @_;
-    show_load_thiskind($type, $f, $pcic, 1);
+    my ($type, $pcic, $f) = @_;
+
+    grep {
+	$f->($_->{description}, $_->{driver}) if $f;
+	eval { load($_->{driver}) };
+	$_->{error} = $@;
+
+	!($@ && $_->{try});
+    } get_that_type($type, $pcic),
+      $type =~ /scsi/ && arch() !~ /sparc/ ? 
+	(map { +{ driver => $_, description => $_, try => 1 } } "usb-storage", "imm", "ppa") : ();
 }
 
-sub show_load_thiskind {
-    my ($type, $f, $pcic, $load) = @_;
-    my %loaded_text;
-
-    my @devs = grep { my $l = $drivers{$_->{driver}}; $l && $l->{type} eq $type } detect_devices::probeall('', $pcip);
-    log::l("probe found " . scalar @devs . " $type devices");
-
-    my %devs; foreach (@devs) {
-	my ($text, $mod) = ($_->{description}, $_->{driver});
-	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
-	log::l("found driver for $mod");
-	&$f($text, $mod) if $f;
-	$load ? load($mod, $type) : push @{$loaded{$type}}, $mod;
-	$loaded_text{$mod} = $text;
-    }
-    if ($load && $type =~ /scsi/) {
-	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
-
-	#- probe for USB SCSI.
-	if (detect_devices::probeUSB()) {
-	    eval { load("usb-storage", $type); sleep(2); };
-	    -d "/proc/scsi/usb" or unload("usb-storage");
-	}
-	#- probe for parport SCSI.
-	if (arch() !~ /sparc/) {
-	    foreach ("imm", "ppa") {
-		eval { load($_, $type) };
-		last if !$@;
-	    }
-	}
-	if (my ($c) = (show_load_thiskind ('audio'))) { #detect_devices::matching_type('AUDIO'))) {
-	    add_alias("sound", $c->{driver}); #- (dam's) this should be changed, we shouldn't use alias sound
-	}
-    }
-
-    my @loaded = map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
-    $type =~ /scsi/ and @loaded and $load and eval { load("sd_mod") };
-    @loaded;
+sub get_that_type {
+    my ($type, $pcic) = @_;
+    
+    grep { 
+	my $l = $drivers{$_->{driver}}; 
+	$l && $l->{type} eq $type && detect_devices::check($_);
+    } detect_devices::probeall('', $pcic);
 }
 
 sub pcmcia_need_config($) {
@@ -617,23 +593,5 @@ sub load_ide {
 
 }
 
-sub load_bordel {
-
-	#- probe for USB SCSI.
-	if (detect_devices::probeUSB()) {
-	    eval { load("usb-storage", $type); sleep(2); };
-	    -d "/proc/scsi/usb" or unload("usb-storage");
-	}
-	#- probe for parport SCSI.
-	if (arch() !~ /sparc/) {
-	    foreach ("imm", "ppa") {
-		eval { load($_, $type) };
-		last if !$@;
-	    }
-	}
-#	if (my ($c) = (show_load_thiskind ('audio'))) { #detect_devices::matching_type('AUDIO'))) {
-#	    add_alias("sound", $c->{driver}); #- (dam's) this should be changed, we shouldn't use alias sound
-	}
-    }
-}
+1;
 

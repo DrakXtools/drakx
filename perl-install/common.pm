@@ -337,7 +337,7 @@ sub list_home() {
 }
 sub list_skels { 
     my ($prefix, $suffix) = @_;
-    map { "$prefix$_$suffix" } '/etc/skel', '/root', list_home() }
+    map { "$prefix$_/$suffix" } '/etc/skel', '/root', list_home() }
 
 sub translate {
     my ($s) = @_;
