@@ -398,7 +398,7 @@ Take a look at http://www.linmodems.org"),
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
-                        [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
+                        [ { varl=> \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                             list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         },
                     next => "ppp_provider",
@@ -938,7 +938,7 @@ I cannot set up this connection type.")), return;
                                          },
                     name => N("Choose the network interface") . "\n\n" .
                     N("Please choose which network adapter you want to use to connect to Internet."),
-                    data => [ { var => \$interface, type => "list", list => \@all_cards, } ],
+                    data => [ { val => \$interface, type => "list", list => \@all_cards, } ],
                     format => sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
                     
                     post => sub {
