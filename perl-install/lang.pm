@@ -307,14 +307,14 @@ sub set {
 	#- using a compressed cpio archive is nighmare to extract all files.
 	#- reset locale environment variable to avoid any warnings by perl,
 	#- so installation of new locale is done with empty locale ...
-	unless (-e "$ENV{SHARE_PATH}/locale/$languages{$lang}[2]") {
+	if (!-e "$ENV{SHARE_PATH}/locale/$lang" && common::usingRamdisk()) {
 	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
-		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", $languages{$lang}[2]);
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", split(":", $languages{$lang}[3]));
 	    };
 	}
 
