@@ -944,7 +944,11 @@ sub report_bug {
 
 sub devfssymlinkf {
     my ($o_if, $of, $prefix) = @_;
-    my $if = $o_if->{devfs_device} || $o_if->{device};
+
+    my $if = $o_if->{devfs_device};
+    $if ||= devices::to_devfs($o_if->{device});
+    $if ||= $o_if->{device};
+
     symlinkf($if, "$prefix/dev/$of");
 
     output_p("$prefix/etc/devfs/conf.d/$of.conf", 
