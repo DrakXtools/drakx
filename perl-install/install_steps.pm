@@ -369,7 +369,6 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages);
     delete $ENV{DURING_INSTALL};
-    run_program::rooted($o->{prefix}, 'yelp-pregenerate', '-a') if !$o->{'yelp-pregenerate'}++; #- do it only once
     run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time() - $time));
     install_any::log_sizes($o);
