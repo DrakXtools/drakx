@@ -671,8 +671,8 @@ sub chooseGroups {
 	my $minimal = !grep { $_ } values %{$o->{compssUsersChoice}};
 
 	$o->ask_from(_("Type of install"), 
-		     _("You do not have selected any group of packages
-Please choose the minimal installation you want"),
+		     _("You haven't selected any group of packages.
+Please choose the minimal installation you want:"),
 		     [
 		      { val => \$o->{compssUsersChoice}{X}, type => 'bool', text => _("With X"), disabled => sub { $minimal } },
 		        if_($::expert || $minimal,
