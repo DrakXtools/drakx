@@ -250,6 +250,7 @@ sub set_type_subpart {
 
 
 my @partitions_signatures = (
+    (map { [ 'Linux Logical Volume Manager', 0x200 * $_ + 0x18, "LVM2" ] } 0 .. 3),
     [ 'Linux Logical Volume Manager', 0, "HM\1\0" ],
     [ 'ext2', 0x438, "\x53\xEF" ],
     [ 'reiserfs', 0x10034, "ReIsErFs" ],
@@ -292,7 +293,7 @@ sub type_subpart_from_magic {
 	'';
     };
     my $t = typeFromMagic($dev, 
-			  $check_md,
+			  if_($part->{size}, $check_md),
 			  @partitions_signatures) or return;
 
     my $p = type_name2subpart($t) || fs_type2subpart($t) || internal_error("unknown name/fs $t");
