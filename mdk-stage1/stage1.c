@@ -324,7 +324,7 @@ static enum return_type method_select_and_prepare(void)
 	results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
-		return 	method_select_and_prepare();
+		return method_select_and_prepare();
 
 	results = RETURN_ERROR;
 

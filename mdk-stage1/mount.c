@@ -34,7 +34,7 @@
 
 #ifndef DISABLE_MEDIAS
 /* WARNING: this won't work if the argument is not /dev/ based */
-static int ensure_dev_exists(char *dev)
+int ensure_dev_exists(char *dev)
 {
 	int major, minor;
 	int type = S_IFBLK; /* my default type is block. don't forget to change for chars */
