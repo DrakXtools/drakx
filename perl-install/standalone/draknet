@@ -386,7 +386,7 @@ sub configure_lan {
 	$dialog->set_position(1);
 	$dialog->vbox->set_border_width(10);
 	$dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
-	$dialog->vbox->pack_start(new Gtk::Label(_("You don't any configured interface.
+	$dialog->vbox->pack_start(new Gtk::Label(_("You don't have any configured interface.
 Configure them first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
