@@ -173,7 +173,6 @@ sub hide_down_button_iflast_item {
 
 sub display_perm {
     my ($perm_level) = @_;
-    print "switching to «$perm_level»\n";
     return unless $perm_level;
     my $show_sys_rules  = $perm_level eq $default_perm_level;
     my $show_user_rules = $perm_level eq 'editable';
