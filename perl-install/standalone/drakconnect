@@ -39,6 +39,7 @@ use modules;
 use network::isdn;
 use network::adsl;
 use network::tools;
+use network::test;
 use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
 
@@ -799,6 +800,21 @@ sub update2() {
     1;
 }
 
+
+my $net_test;
+sub update_network_status() {
+    unless ($net_test) {
+        $net_test = network::test->new;
+        $net_test->start;
+    }
+    if ($net_test->is_done) {
+        $isconnected = $net_test->is_connected;
+        update_intbutt();
+        $net_test->start;
+    }
+    1;
+}
+
 sub quit_global() {
     ugtk2->exit(0);
 }
@@ -1021,7 +1037,8 @@ Run the \"Add Connection\" assistant from the Mandrakelinux Control Center"));
                            );
 
     $dialog->{rwindow}->show_all;
-    Glib::Timeout->add(200, \&update_intbutt);
+    update_network_status();
+    Glib::Timeout->add(2000, \&update_network_status);
     $dialog->main;
     ugtk2->exit(0);
 }
