@@ -137,11 +137,11 @@ sub doPartitionDisksBefore {
 sub doPartitionDisksAfter {
     my ($o) = @_;
 
-    install_any::cond_umount_hdimage();
-
     if (!$::testing) {
 	my $hds = $o->{all_hds}{hds};
+	install_any::cond_umount_hdimage();
 	partition_table::write($_) foreach @$hds;
+	install_any::cond_remount_hdimage();
 	$_->{rebootNeeded} and $o->rebootNeeded foreach @$hds;
     }
 
@@ -167,16 +167,6 @@ sub doPartitionDisksAfter {
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
 	fs::mount_part($_, $o->{prefix}) foreach grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
-    }
-
-    if (my $s = delete $o->{stage1_hd}) {
-	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
-	$part->{isMounted} ?
-	  do { rmdir "/tmp/hdimage" ; symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") } :
-	  eval { 
-	      install_any::cond_remount_hdimage($s);
-	      $part->{isMounted} = 1;
-	  };
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/image nfs| &&
