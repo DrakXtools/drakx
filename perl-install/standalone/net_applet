@@ -1,10 +1,12 @@
 #!/usr/bin/perl
 
 use strict;
-use lib qw(/usr/lib/libDrakX);
+use lib qw(/home/blino/cvs/gi/perl-install /usr/lib/libDrakX);
 use c;
 use common;
 use Digest::MD5;
+use network::netconnect;
+use network::tools;
 
 use Gtk2::TrayIcon;
 
@@ -34,7 +36,7 @@ my %appletstate = (
 			      menu => [ 'confNetwork', 'refresh', 'help' ],
 			      tt => [ 
                             #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-                            N_("Network is down. Click on \"Configure Network\"") 
+                            N_("Network is down on interface %d. Click on \"Configure Network\"") 
                            ]
                              }
 	    );
@@ -92,21 +94,16 @@ sub netMonitor() {
     checkNetwork()
 }
 sub checkNetwork() {
-    my $gatewayconf = '/etc/sysconfig/network';
-    my %h = getVarsFromSh($gatewayconf);
+    my $netcnx = {};
+    my $netc = {};
+    my $intf = {};
+    network::netconnect::read_net_conf($netcnx, $netc, $intf);
+    my ($gw_intf, $is_up, $gw_address, $dns_server) = network::tools::get_internet_connection($netc, $intf);
+    if ($gw_address) {
+        go2State('connected', $gw_intf)
+    } else { go2State('disconnected', $gw_intf) }
+
     my $new_md5 = md5file($prog_name);
-    #    print "NEW($newmd5) = OLD($oldmd5)\n"
-    my ($gd, $addrgd);
-    if ($h{GATEWAYDEV}) {
-        $addrgd = getIP($gd = $h{GATEWAYDEV});
-    } else {
-        ($addrgd, $gd) = `/sbin/ip route show` =~ /^default\s+via\s+(\S+).*\s+dev\s+(\S+)/m;
-    }
-
-    if ($addrgd) {
-        go2State('connected', $gd)
-    } else { go2State('disconnected', '') }
-
     if ($new_md5 ne $current_md5) { exec($prog_name) };
 }
 sub getIP {
