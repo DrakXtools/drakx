@@ -140,7 +140,7 @@ sub text2keyboard {
 
 sub lang2keyboard($) {
     local ($_) = @_;
-    $keyboards{$_} && $_ || $lang2keyboard{$_} || substr($_, 0, 2);
+    $lang2keyboard{$_} || $keyboards{$_} && $_ || substr($_, 0, 2);
 }
 
 sub load($) {
