@@ -780,8 +780,8 @@ sub summary {
 
     $o->ask_from_entries_refH('', _("Summary"),
     [
-{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); &$format_mouse },
-{ label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } } },
+{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); &$format_mouse } },
+{ label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => _("Printer"), val => \$o->{printer}{mode}, clicked => sub { $o->configurePrinter(1) }, format => sub { $_[0] || _("No printer") } },
     (map {
