@@ -363,19 +363,43 @@ sub preConfigureTimezone {
 }
 
 sub deselectFoundMedia {
-    #- TODO group by CD
+    #- group by CD
     my ($o, $hdlists) = @_;
+    my %cdlist;
+    my @hdlist2;
+    my @corresp;
+    my $i = 0;
+    for (@$hdlists) {
+	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
+	if (!$cd || !@{$cdlist{$cd} || []}) {
+	    push @hdlist2, $_;
+	    $corresp[$i] = [ $i ];
+	} else {
+	    $corresp[$i] = [];
+	    push @{$corresp[$cdlist{$cd}[0]]}, $i;
+	}
+	if ($cd) {
+	    $cdlist{$1} ||= [];
+	    push @{$cdlist{$1}}, $i;
+	}
+	++$i;
+    }
     my $l = $o->ask_many_from_list('',
 N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now."),
 	{
-	    list => $hdlists,
+	    list => \@hdlist2,
 	    value => sub { 1 },
 	    label => sub { $_[0][3] },
 	},
     );
-    log::l("keeping media " . join ',', map { $_->[1] } @$l);
-    @$l;
+    my @l2; $i = 0;
+    for my $c (@$l) {
+	++$i while $hdlists->[$i][3] ne $c->[3];
+	push @l2, $hdlists->[$_] for @{$corresp[$i]};
+    }
+    log::l("keeping media " . join ',', map { $_->[1] } @l2);
+    @l2;
 }
 
 sub ask_if_suppl_media {
