@@ -72,6 +72,7 @@ struct part_allocate inherits part {
 struct part_raid inherits part {
   string chunk-size  # in KiB, usually '64'
   string level       # one of { 0, 1, 4, 5, 'linear' }
+  string UUID
 
   part disks[]
 
