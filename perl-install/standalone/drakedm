@@ -27,10 +27,10 @@ my $in = 'interactive'->vnew('su');
 
 my $cfg_file = '/etc/sysconfig/desktop';
 
-my %dm = ('GNOME' => 'GDM (GNOME Display Manager)',
-          'KDM'   => 'KDM (KDE Display Manager)',
-          'KDE'   => 'MdkKDM (Mandrake Display Manager)',
-          'XDM'   => 'XDM (X Display Manager)',
+my %dm = ('GNOME' => [ 'GDM (GNOME Display Manager)', '/usr/bin/gdm', 'gdm' ],
+          'KDM'   => [ 'KDM (KDE Display Manager)', '/usr/bin/kdm', 'kdebase-kdm' ],
+          'KDE'   => [ 'MdkKDM (Mandrake Display Manager)', '/usr/bin/mdkkdm', 'mdkkdm' ],
+          'XDM'   => [ 'XDM (X Display Manager)', '/usr/bin/X11/xdm', 'XFree86' ],
           );
 
 my $dm = 'KDE';
@@ -39,22 +39,28 @@ foreach (cat_($cfg_file)) {
     $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
 }
 
-if (my $new_dm = $in->ask_from_list_(N("Choosing a display manager"),
-                                     formatAlaTeX(N("X11 Display Manager allows you to graphically log
+if ($in->ask_from(N("Choosing a display manager"),
+                               formatAlaTeX(N("X11 Display Manager allows you to graphically log
 into your system with the X Window System running and supports running
 several different X sessions on your local machine at the same time.")),
-                                     [ sort values %dm ],
-                                     $dm{$dm}
-                                    )
+                               [
+                                {
+                                 list => [ sort keys %dm ],
+                                 val => \$dm,
+                                 type => 'list',
+                                 format => sub { $dm{$_[0]}[0] },
+                                 ort => 1,
+                                }
+                               ]
+                              )
    ) {
-    $new_dm = { reverse %dm }->{$new_dm};
     log::explanations("modified file $cfg_file");
     substInFile {
         s/^(DISPLAYMANAGER)=.*(\n|)//;
         s/^\n//g;
-        $_ .= "\nDISPLAYMANAGER=$new_dm\n" if eof;
+        $_ .= "\nDISPLAYMANAGER=$dm\n" if eof;
     } $cfg_file;
+    $in->do_pkgs->install($dm{$dm}[2]) unless -x $dm{$dm}[1];
 }
-
 
 $in->exit(0);
