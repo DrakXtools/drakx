@@ -450,8 +450,6 @@ sub configureNetwork2 {
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
-    sethostname($netc) unless $::testing;
-    addDefaultRoute($netc) unless $::testing;
 
     grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpcd');
     grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $install && $install->('pump');
