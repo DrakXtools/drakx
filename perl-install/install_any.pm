@@ -252,6 +252,7 @@ sub searchAndMount4Upgrade {
     } else {
 	delete $root->{mntpoint};
 	($Parts{$_->{device}} || {})->{mntpoint} = $_->{mntpoint} foreach @$found;
+	map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @{$o->{fstab}}; #- use all available swap.
 
 	#- TODO fsck, create check_mount_all ?
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});

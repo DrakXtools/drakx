@@ -58,7 +58,7 @@ sub selectLanguage($) {
 
 #-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
 #-"Warning no warranty", 
-#-			 [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or exit(1) unless $o->{useless_thing_accepted};
+#-			 [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or _exit(1) unless $o->{useless_thing_accepted};
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
