@@ -51,7 +51,7 @@ sub cdroms() {
     }
     @l;
 }
-sub burners { grep { isBurner($_->{device}) } cdroms() }
+sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } get() }
 sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
 
 sub get_mac_model() {
