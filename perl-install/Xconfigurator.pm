@@ -154,7 +154,7 @@ sub cardConfigurationAuto() {
 	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
 	    $card->{type} = $1 if /Card:(.*)/;
 	    $card->{server} = $1 if /Server:(.*)/;
-	    $card->{flags}{needVideoRam} = /86c368|S3.*ViRGE/;
+	    $card->{flags}{needVideoRam} = /86c368|S3/;
 	    $card->{busid} = "PCI:$c[$i]{pci_bus}:$c[$i]{pci_device}:$c[$i]{pci_function}";
 	    push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
 	    push @cards, $card;
