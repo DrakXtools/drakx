@@ -71,12 +71,12 @@ my %fields =
      );
 
 
-my ($in, %IDs, $pid, $w);
+my ($in, $pid, $w);
 
 my (%options, %check_boxes);
 my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
 
-my ($modem_check_box, $printer_check_box, $current_device, $current_configurator);
+my ($current_device, $current_configurator);
 
 
 #-PO Translators, please keep all "/" charaters !!!
@@ -194,7 +194,7 @@ $text->set_wrap_mode('word');
 $frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
 my (@data, @configurators);
-$tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
+$tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
 $tree->get_selection->signal_connect('changed' => sub {
