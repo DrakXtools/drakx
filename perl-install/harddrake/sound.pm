@@ -133,7 +133,7 @@ sub do_switch {
     run_program::run("service alsa stop") if $old_driver =~ /^snd-/;
     modules::unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
-    modules::add_alias('sound-slot-0', $new_driver);
+    modules::add_alias('sound-slot-$::i', $new_driver);
     modules::write_conf;
     if ($new_driver =~ /^snd-/) {
 	   run_program::run("service alsa start");
