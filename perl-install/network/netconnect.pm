@@ -1159,7 +1159,7 @@ See iwpriv(8) man page for further information."),
                             # $netc->{GATEWAY} ||= gateway($ethntf->{IPADDR});
                             if ($ntf_name eq "sagem") {
                               my @sagem_ip = split(/\./, $ethntf->{IPADDR});
-                              @sagem_ip[3] = 254;
+                              $sagem_ip[3] = 254;
                               $netc->{GATEWAY} = join(".", @sagem_ip);
                             }
                         }
