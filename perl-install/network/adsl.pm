@@ -15,11 +15,8 @@ use MDK::Common::Globals "network", qw($in $prefix);
 sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkADSL');
+
   conf_adsl_step1:
-    # my $type = $in->ask_from_list_(N("Connect to the Internet"),
-    # 				   N("The most common way to connect with adsl is pppoe.
-    # Some connections use pptp, a few ones use dhcp.
-    # If you don't know, choose 'use pppoe'"), [N_("use pppoe"), N_("use pptp"), N_("use dhcp"), N_("Alcatel speedtouch usb"), N_("ECI Hi-Focus")]) or return;
     my $l = [ N_("use pppoe"),
 	      N_("use pptp"), 
 	      N_("use dhcp"), 
@@ -34,14 +31,7 @@ If you don't know, choose 'use pppoe'"), $l) or return;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
 	$netcnx->{type} = "adsl_$type";
-#	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-	#-network::configureNetwork($prefix, $netc, $in, $intf, $first_time);
-#  	if ($::isStandalone and $netc->{NET_DEVICE}) {
-#  	    $in->ask_yesorno(N("Network interface"),
-#  			     N("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
-#  	      and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
-#  	}
     }
     #- use pppoe for Sagem modem, but NET_DEVICE is now ADIModem instead of ethx.
     if ($type =~ /Sagem/) {
@@ -70,14 +60,14 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 	$netcnx->{"adsl_$type"}{vpivci} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
-    if ($type =~ /ECI/) {
-	$type = 'eci';
-	$in->do_pkgs->install(qw(eciadsl));
-	$netcnx->{type} = "adsl_$type";
-	$netcnx->{"adsl_$type"} = {};
-	$netcnx->{"adsl_$type"}{vpivci} = '';
-	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
+    # if ($type =~ /ECI/) {
+# 	$type = 'eci';
+# 	$in->do_pkgs->install(qw(eciadsl));
+# 	$netcnx->{type} = "adsl_$type";
+# 	$netcnx->{"adsl_$type"} = {};
+# 	$netcnx->{"adsl_$type"}{vpivci} = '';
+# 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
+#     }
     $type =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
     1;
 }
