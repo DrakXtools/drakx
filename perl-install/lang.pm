@@ -609,6 +609,7 @@ sub get_kde_lang {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
         my %fixlangs = (en => 'C', en_US => 'C', no => 'nb', sh => 'sr',
+                        st => 'nso', ve => 'ven',
                         zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
