@@ -678,7 +678,12 @@ sub deselectFoundMedia {
 		Gtk2::VBox->new(0, 5),
 		Gtk2::WrappedLabel->new(N("The following installation media have been found.
 If you want to skip some of them, you can unselect them now.")),
-		(map { ++$i; gtknew('CheckButton', text => $_->[3], active_ref => \$selection[$i]) } @hdlist2),
+		(map {
+			++$i;
+			my $b = gtknew('CheckButton', text => $_->[3], active_ref => \$selection[$i]);
+			$b->set_sensitive(0) unless $i;
+			$b;
+		    } @hdlist2),
 		gtknew('HSeparator'),
 		Gtk2::WrappedLabel->new(N("You have the option to copy the contents of the CDs onto the hard drive before installation.
 It will then continue from the hard drive and the packages will remain available once the system is fully installed.")),
