@@ -68,7 +68,7 @@ sub vnew {
 	eval { require interactive_gtk };
 	if (!$@) {
 	    my $o = interactive_gtk->new;
-	    $icon and $o->{icon} = $icon;
+	    $icon && !$::isWizard and $o->{icon} = $icon;
 	    return $o;
 	}
     }
