@@ -14,8 +14,8 @@ $border = 10;  #- for leftish text
 	' ',
 	N("<b>Mandrakesoft</b> has developed a wide range of <b>Mandrakelinux</b> products."),
 	' ',
-	N("The Mandrakeliux products are:"),
+	N("The Mandrakelinux products are:"),
 	N("	* <b>Discovery</b>, Your First Linux Desktop."),
 	N("	* <b>PowerPack</b>, The Ultimate Linux Desktop."),
 	N("	* <b>PowerPack+</b>, The Linux Solution for Desktops and Servers."),
-	N("	* <b>Mandrakeliux for x86-64</b>, The Mandrakelinux solution for making the most of your 64-bit processor."));
+	N("	* <b>Mandrakelinux for x86-64</b>, The Mandrakelinux solution for making the most of your 64-bit processor."));
