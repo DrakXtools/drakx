@@ -108,7 +108,8 @@ my %keyboards = (
  "is" => [ __("Icelandic"),      "is-latin1",   "is" ],
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
- "nl" => [ __("Dutch"),          "nl-latin1",   "nl" ],
+#- FIXME: [3] should be "nl", but current XFree86 does not have it yet
+ "nl" => [ __("Dutch"),          "nl-latin1",   "uk" ],
  "lt" => [ __("Lithuanian AZERTY"), "lt-latin7","lt" ],
  "lt_b" => [ __("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt_b" ],
  "lt_p" => [ __("Lithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt_p" ],
