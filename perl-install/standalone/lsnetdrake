@@ -18,8 +18,8 @@ push @l, network::smb->new if $smb;
 
 foreach my $class (@l) {
     foreach my $server (sort_names($class->find_servers)) {
-	foreach my $export (sort_names($class->find_exports($server))) {
-	    print $class->to_fullstring($export), "\n";
+	foreach (sort_names($class->find_exports($server))) {
+	    print $class->to_fullstring($_), "\n";
 	}
     }
 }
