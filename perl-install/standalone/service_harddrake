@@ -94,7 +94,7 @@ foreach (@harddrake::data::tree) {
     my ($pid, $no);
     $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
     unless ($pid = fork()) {
-        exec("/usr/share/harddrake/confirm '$Ident' '$msg'");
+        exec("/usr/share/harddrake/confirm '$Ident' '$timeout' '$msg'");
     }
     alarm($timeout);
     wait();
