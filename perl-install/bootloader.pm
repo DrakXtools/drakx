@@ -583,7 +583,6 @@ sub get_kernels_and_labels {
 sub get_kernel_labels {
     my ($kernels, $b_prefer_24) = @_;
     
-    require pkgs;
     my @kernels_str = 
       sort { c::rpmvercmp($b->{version_no_ext}, $a->{version_no_ext}) } 
       grep { -d "$::prefix/lib/modules/$_->{version}" }
