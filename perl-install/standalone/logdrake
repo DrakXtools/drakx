@@ -19,22 +19,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-
-use POSIX;
-use Gtk;
+use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
-use interactive;
 use common;
+use interactive;
 use any;
-use Config;
-init Gtk;
-Gtk->set_locale;
 use my_gtk qw(:helpers :wrappers);
-use ugtk qw(:helpers);
-
-use Data::Dumper;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -61,12 +52,14 @@ $::isTail = 1 if ($::isFile);
 $| = 1 if ($::isTail);
 my $h = chomp_(`hostname -s`);
 
-my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
-$window->set_title(N("logdrake"));
-$window->set_policy(1, 1, 1);
-$window->border_width (5) unless ($::isEmbedded);
-#$window->set_default_size(540,460);
+my $my_win = my_gtk->new('logdrake');
+unless ($::isEmbedded) {
+    $my_win->{rwindow}->set_title(N("logdrake"));
+    $my_win->{window}->border_width (5);
+    $my_win->{rwindow}->set_policy(1, 1, 1);
+}
+$my_win->{window}->signal_connect(delete_event => \&quit);
+#$my_win->{window}->set_default_size(540,460);
 
 my $cal = gtkset_sensitive(new Gtk::Calendar(),0);
 my (undef,undef,undef,$mday) = localtime(time);
@@ -91,7 +84,7 @@ my @menu_items = (
 		  { path => N("/_Help"),type => '<LastBranch>' },
 		  { path => N("/Help/_About...") } 
 		 );
-my $menubar = ugtk::create_factory_menu($window, @menu_items);
+my $menubar = ugtk::create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
 ######### menus end
 
 
@@ -161,7 +154,8 @@ my $yy = gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("search")) , click
 my $log_text = new Gtk::Text(undef, undef);
 my $refcount_search;
 #### far from window
-gtkadd($window,
+no strict 'refs';
+gtkadd($my_win->{window},
        gtkpack_(new Gtk::VBox(0,0),
 		if_(!$::isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
 		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(N("Settings")),
@@ -169,8 +163,8 @@ gtkadd($window,
 						     gtkpack__(new Gtk::VBox(0,2),
 							       # N("Show lines"),
 							       gtkpack__(new Gtk::HBox(0,0),
-									 " " . N("matching") . " ", $e_yes = new Gtk::Entry(),
-									 " " . N("but not matching") . " ", $e_no = new Gtk::Entry()
+									 " " . N("matching") . " ", my $e_yes = new Gtk::Entry(),
+									 " " . N("but not matching") . " ", my $e_no = new Gtk::Entry()
 									)
 							      ),
 						     gtkpack_(new Gtk::HBox(0,0),
@@ -208,18 +202,15 @@ gtkadd($window,
        	       )
        
       );
+use strict;
 
 $::isFile and gtkset_usize($log_text,400,500);
-$window->realize;
-$window->show_all();
+$my_win->{window}->realize;
+$my_win->{window}->show_all();
 search() if ($::isFile);
-#Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill 'USR2', $::CCPID;
-Gtk->main;
+$my_win->main;
 
-sub quit {
-$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0);
-}
+sub quit { my_gtk->exit(0) }
 
 #-------------------------------------------------------------
 # search functions
@@ -311,8 +302,8 @@ sub logcolorize {
 
     # we get date & time if it is date & time (dmesg)
     s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
-    $timestamp = $::isExplain ? $2 : $1;
-    @rec = split;
+    my $timestamp = $::isExplain ? $2 : $1;
+    my @rec = split;
 
     log_output($cyan,$timestamp,$b); # date & time if any...
     $::isExplain or log_output(($rec[0] eq $h) ? $blue : $col,"$rec[0] ",$b);  # hostname
@@ -335,8 +326,7 @@ sub logcolorize {
 	log_output($green, $rec[1] ." ",$n);
     }
 
- 
-    for ($therest = (2); $therest<= $#rec; $therest++) {
+    for my $therest (2 .. $#rec) {
 	$col = $cyan;
 
 	# Check for keywords to highlight
@@ -404,7 +394,7 @@ my $initdir = "/etc/init.d";
 		  xinetd => N("Xinetd Service")
 		 };
     my @installed_d = ();
-    foreach $serv (keys %$service) {
+    foreach my $serv (keys %$service) {
 	-e "$initdir/$serv" && push (@installed_d,$serv);
     }
   
@@ -414,6 +404,7 @@ my $initdir = "/etc/init.d";
 		  ]) or goto begin;
 
     $cron .= "#- check services\n";
+    my $r;
     foreach (@installed_d) {
 	if(!-e "/var/lock/subsys/$_") { $r .= "Service $_ ($service->{$_} is not running\n" };
 #	$cron .= "$r" if ${ $_ }; # take a look at this, don't know what is done here   
@@ -464,9 +455,10 @@ print F $r;
     print ("whole cron is ****** $cron *******\n");
     
     undef $::isWizard; 
-    $::WizardWindow->destroy if defined $::WizardWindow;
-    undef $::WizardWindow;
-
+    if (defined $::WizardWindow) {
+	$::WizardWindow->destroy;
+	undef $::WizardWindow;
+    }
 }
 
 
