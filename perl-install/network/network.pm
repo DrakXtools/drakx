@@ -339,6 +339,7 @@ sub read_all_conf {
     add2hash($netc, read_tmdns_conf());
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
 	my ($device) = /^ifcfg-([A-Za-z0-9.:]+)$/;
+	next if $device =~ /.rpmnew$|.rpmsave$§/;
 	if ($device && $device ne 'lo') {
 	    my $intf = findIntf($intf, $device);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
