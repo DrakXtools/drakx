@@ -107,8 +107,8 @@ my $keep_logo = 1;
 
 if (-r $themes{sysconfig}) {
     my $SYSF;
-    open $SYSF, $themes{sysconfig} or die "Can't open $themes{sysconfig}\n";                                                                             
-    while (<$SYSF>) {                                                                                                                                    
+    open $SYSF, $themes{sysconfig} or die "Can't open $themes{sysconfig}\n";
+    while (<$SYSF>) {
 	/^SPLASH=no/ and $splash_mode = 0;
 	/^THEME=(.*)/ and  -f "$themes{path}$1$themes{boot}{path}bootsplash-$cur_res.jpg" and $themes{default} = $1;
 	/^LOGO_CONSOLE=(.*)/ and $keep_logo = $1 ne 'no';
