@@ -1,0 +1,456 @@
+#!/usr/bin/perl -w
+
+# Control-center
+# $Id$
+# 
+# Copyright (C) 2001-2002 MandrakeSoft
+# Yves Duret <yduret at mandrakesoft.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, 
+# MA 02111-1307, USA.
+
+
+use POSIX;
+use Gtk;
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use interactive;
+use Config;
+use any;
+init Gtk;
+Gtk->set_locale;
+
+#-------------------------------------------------------------
+# i18n routines
+# IMPORTANT: next two routines have to be redefined here to
+#         get correct namespace (drakconf instead of libDrakX)
+#         (This version is now UTF8 compliant - Sg 2001-08-18)
+#-------------------------------------------------------------
+
+sub _ {
+    my $s = shift @_; my $t = translate($s);
+    sprintf $t, @_;
+}
+
+sub translate {
+    my ($s) = @_;
+    $s ? c::dgettext('drakfloppy', $s) : '';
+}
+
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+if ($::isEmbedded) {
+  print "EMBED\n";
+  print "XID : $::XID\n";
+  print "CCPID :  $::CCPID\n";
+}
+
+$in = 'interactive'->vnew('su', 'default');
+local $_ = join '', @ARGV;
+
+/-h/ and die _("usage: drakfloppy\n");
+
+$expert_mode = 0;
+# we have put here the list in order to do $list->clear() when we have to do
+$fixed_font = Gtk::Gdk::Font->fontset_load(_("-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"));
+my @titles = ( _("Module name"), _("Size") );
+my $list = new_with_titles Gtk::CList( @titles );
+
+my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+$window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
+$window->set_title( _("drakfloppy") );
+$window->set_policy(1, 1, 1);
+$window->border_width (5);
+
+### menus definition
+# the menus are not shown
+# but they provides shiny shortcut like C-q
+my @menu_items = ( 
+		  { path => _("/_File"), type => '<Branch>' },
+		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) } },
+		 );
+my $menubar = get_main_menu( $window );
+
+######### menus end
+
+my $global_vbox = new Gtk::VBox();
+
+$::isEmbedded or $global_vbox->pack_start (new Gtk::Label(_("boot disk creation")), 0, 0, 0);
+
+######## up part
+my $up_vbox  = new Gtk::VBox (0, 0);
+
+# device part
+my $dev_hbox = new Gtk::HBox (1, 0);
+my $device_combo = new Gtk::Combo();
+my $device_button = new Gtk::Button( _("default") );
+
+$device_combo->set_popdown_strings( "/dev/fd0", "/dev/fd1", );
+$device_button->signal_connect( 'clicked', sub { $device_combo->entry->set_text("/dev/fd0");});
+
+$dev_hbox->pack_start (new Gtk::Label( _("device") ), 0, 0, 0);
+$dev_hbox->pack_start ($device_combo, 0, 0, 0);
+$dev_hbox->pack_start ($device_button, 0, 0, 0);
+$up_vbox->pack_start  ($dev_hbox, 0, 0, 0);
+
+# kernel part
+my $ker_hbox = new Gtk::HBox (1, 0);
+my $kernel_combo = new Gtk::Combo();
+my $kernel_button = new Gtk::Button( _("default") );
+$kernel_combo->disable_activate();
+$kernel_combo->set_popdown_strings( do {
+    opendir YREP, "/lib/modules" or die _("DrakFloppy Error: %s", $!);
+    my @files_modules = grep !/^\.\.?$/, readdir YREP;
+    closedir YREP;
+    @files_modules;
+});
+#$kernel_combo->entry->set_text(`uname -r`);
+$kernel_combo->entry->signal_connect( "changed", sub { change_tree($kernel_combo->entry->get_text()); $list->clear();});
+$aaaa= `uname -r`;
+chomp ($aaaa);
+$kernel_button->signal_connect( 'clicked', sub { $kernel_combo->entry->set_text($aaaa); $list->clear(); });
+
+$ker_hbox->pack_start (new Gtk::Label( _("kernel version") ), 0, 0, 0);
+$ker_hbox->pack_start ($kernel_combo, 0, 0, 0);
+$ker_hbox->pack_start ($kernel_button, 0, 0, 0);
+$up_vbox->pack_start  ($ker_hbox, 0, 0, 5);
+
+# vbox part
+my $up_frame = new Gtk::Frame( _("General") );
+$up_frame->add($up_vbox);
+$global_vbox->pack_start ($up_frame, 1, 1, 0);
+
+### expert mode
+my $expert_main_frame = new Gtk::Frame( _("Expert Area") );
+my $expert_dedans = new Gtk::VBox( 0, 5 );
+$expert_dedans->border_width (5);
+my $expert_button_frame = new Gtk::Frame( _("mkinitrd optional arguments") );
+my $expert_mod_frame = new Gtk::Frame( _("Add a module") );
+my $expert_pane = new Gtk::HPaned();
+$expert_pane->set_handle_size( 10 );
+$expert_pane->set_gutter_size( 8 );
+
+my $expert_button = new Gtk::Button( _("Expert Mode") );
+$expert_button->signal_connect( "clicked", sub {
+				  if ($expert_mode) {
+				    $expert_mod_frame->hide();
+				    $expert_button_frame->hide()
+				  } else {
+				    $expert_mod_frame->show();
+				    $expert_button_frame->show();
+				  }
+				    $expert_mode = !$expert_mode;
+				});
+
+my $expert_button_vbox = new Gtk::VBox(0, 5);
+my $expert_button_hbox = new Gtk::HBox(0, 5);
+my $expert_button_hbox2 = new Gtk::HBox(0, 5);
+my $force_button = new Gtk::ToggleButton( _("force") );
+my $needed_button = new Gtk::ToggleButton( _("if needed") );
+my $scsi_button = new Gtk::ToggleButton( _("omit scsi modules") );
+my $raid_button = new Gtk::ToggleButton( _("omit raid modules") );
+$expert_button_hbox->pack_start( $force_button, 0, 0, 0 );
+$expert_button_hbox->pack_start( $raid_button, 0, 0, 0 );
+
+$expert_button_hbox2->pack_start( $needed_button, 0, 0, 0 );
+$expert_button_hbox2->pack_start( $scsi_button, 0, 0, 0 );
+
+$expert_button_vbox->pack_start($expert_button_hbox, 0, 0, 0);
+$expert_button_vbox->pack_start($expert_button_hbox2, 0, 0, 0);
+$expert_button_frame->add($expert_button_vbox);
+$expert_dedans->pack_start ($expert_button_frame, 0, 0, 0);
+$expert_mod_frame->add($expert_pane);
+$expert_dedans->pack_start ($expert_mod_frame, 1, 1, 0);
+$expert_main_frame->add($expert_dedans);
+$global_vbox->pack_start ($expert_main_frame, 1, 1, 0);
+
+### the tree
+
+# Create a ScrolledWindow for the tree
+my $tree_scrolled_win = new Gtk::ScrolledWindow();
+$tree_scrolled_win->set_usize( 200, $::isEmbedded ? 0 : 175);
+$expert_pane->add1( $tree_scrolled_win );
+$tree_scrolled_win->set_policy( 'automatic', 'automatic' );
+
+# Create root tree
+my $tree = new Gtk::Tree();
+my $leaf;
+my $root_dir;
+$tree_scrolled_win->add_with_viewport( $tree );
+$tree->set_selection_mode( 'single' );
+$tree->set_view_mode( 'item' );
+
+fill_tree ($kernel_combo->entry->get_text());
+
+# Create a ScrolledWindow for the list
+my $list_scrolled_win = new Gtk::ScrolledWindow( undef, undef );
+my $rmmod_button = new Gtk::Button( _("Remove a module") );
+my $expert_inside_pane2 = new Gtk::VBox (0, 0);
+my $list_selected_row;
+
+$expert_inside_pane2->pack_start ($list_scrolled_win, 1, 1, 0);
+$expert_inside_pane2->pack_start ($rmmod_button, 0, 0, 0);
+$expert_pane->add2( $expert_inside_pane2 );
+$list_scrolled_win->set_policy( 'automatic', 'automatic' );
+$rmmod_button->signal_connect('clicked', sub {$list->remove($list_selected_row);});
+
+# Create list box
+########################################################## from here my $list
+$list->signal_connect('select_row', sub { (undef, $list_selected_row) = @_; });
+$list_scrolled_win->add( $list );
+$list->set_column_justification(1, 'right');
+$list->set_column_width( 0, 200 );
+$list->set_column_width( 1, 50 );
+$list->set_selection_mode( 'single' );
+$list->set_shadow_type( 'none' );
+$list->show();
+
+### output
+my $output_frame = new Gtk::Frame( _("Output") );
+my $output = new Gtk::Text( undef, undef );
+my $vscrollbar = new Gtk::VScrollbar( $output->vadj );
+my $output_hbox = new Gtk::HBox (0, 0);
+$output_hbox->border_width (5);
+$output_hbox->set_usize( 30, 75 );
+$output_hbox->pack_start( $output, 1, 1, 0 );
+$output_hbox->pack_start( $vscrollbar, 0, 0, 0 );
+$output_frame->add ($output_hbox);
+$global_vbox->pack_start ($output_frame, 0, 0, 0);
+
+### final buttons
+my $build_button = new Gtk::Button( _("Build the disk") );
+my $cancel_button = new Gtk::Button( _("Cancel") );
+my $fin_hbox = new Gtk::HBox( 0, 0 );
+$cancel_button->signal_connect( clicked=> sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
+$build_button->signal_connect('clicked', \&build_it);
+$fin_hbox->pack_end($cancel_button, 0, 0, 0);
+$fin_hbox->pack_end($build_button,  0, 0, 10);
+$fin_hbox->pack_end($expert_button, 0, 0, 10);
+$global_vbox->pack_start ($fin_hbox, 0, 0, 0);
+
+### back to window
+$window->add( $global_vbox );
+
+$window->show_all();
+$expert_mod_frame->hide();
+$expert_button_frame->hide();
+
+Gtk->main_iteration while Gtk->events_pending;
+$::isEmbedded and kill USR2, $::CCPID;
+Gtk->main;
+
+
+
+#-------------------------------------------------------------
+# tree functions
+#-------------------------------------------------------------
+### Subroutines
+
+sub fill_tree {
+  ($root_dir) = @_;
+  $root_dir = "/lib/modules/" . $root_dir;
+  # Create root tree item widget
+  $leaf = new_with_label Gtk::TreeItem( $root_dir );
+  $tree->append( $leaf );
+  $leaf->signal_connect( 'select', \&select_item, $root_dir );
+  $leaf->set_user_data( $root_dir );
+
+  # Create the subtree
+  if ( has_sub_trees( $root_dir ) ) {
+    my $subtree = new Gtk::Tree();
+    $leaf->set_subtree( $subtree );
+    $leaf->signal_connect( 'expand', \&expand_tree, $subtree );
+    $leaf->signal_connect( 'collapse', \&collapse_tree );
+    $leaf->expand();
+  }
+}
+
+sub change_tree {
+  $leaf->destroy();
+  fill_tree (@_);
+  $leaf->show();
+}
+
+# Callback for expanding a tree - find subdirectories, files and add them to tree
+sub expand_tree
+  {
+    my ( $item, $subtree ) = @_;
+
+    my $dir_entry;
+    my $path;
+    my $item_new;
+    my $new_subtree;
+
+    my $dir = $item->get_user_data();
+
+    chdir( $dir );
+
+    foreach $dir_entry ( <*> ) {
+      if (( -d $dir_entry ) or ( $dir_entry =~ /\.o(\.gz)?$/)) {
+	$path = $dir . "/" . $dir_entry;
+	$path =~ s|//|/|g;
+	$item_new = new_with_label Gtk::TreeItem( $dir_entry );
+	$item_new->set_user_data( $path );
+	$item_new->signal_connect( 'select', \&select_item, $path );
+	$subtree->append( $item_new );
+	$item_new->show();
+
+	if ( has_sub_trees( $path ) ) {
+	  $new_subtree = new Gtk::Tree();
+	  $item_new->set_subtree( $new_subtree );
+	  $item_new->signal_connect( 'expand', \&expand_tree, $new_subtree );
+	  $item_new->signal_connect( 'collapse', \&collapse_tree );
+	}
+      }
+    }
+    chdir( ".." );
+  }
+
+
+# Callback for collapsing a tree -- removes the subtree
+sub collapse_tree
+  {
+    my ( $item ) = @_;
+    my $subtree = new Gtk::Tree();
+
+    $item->remove_subtree();
+    $item->set_subtree( $subtree );
+    $item->signal_connect( 'expand', \&expand_tree, $subtree );
+  }
+
+# Called whenever an item is clicked on the tree widget.
+sub select_item  {
+  my ( $widget, $file ) = @_;
+  return  if (-d $file);
+  my  $size = ( lstat( $file ) )[ 7 ];
+  my $lr = $list->rows();
+  my $i;
+  $file =~ s|/lib/modules/.*?/||g;
+  for ($i=0; $i < $lr; $i++) {
+    last if ($file eq $list->get_text($i, 0));
+  }
+  print $file,"\n";
+  
+  $list->append($file, $size) if ($i == $lr) or ($lr == 0);
+}
+
+#-------------------------------------------------------------
+# menu callback functions
+#-------------------------------------------------------------
+
+sub print_hello {
+  print "mcdtg !\n";
+}
+
+sub get_main_menu {
+  my ( $window ) = @_;
+  my $accel_group = new Gtk::AccelGroup();
+  my $item_factory = new Gtk::ItemFactory( 'Gtk::MenuBar', '<main>', $accel_group );
+  $item_factory->create_items( @menu_items );
+  $window->add_accel_group( $accel_group );
+  return ( $item_factory->get_widget( '<main>' ) );
+}
+
+
+sub create_dialog {
+    my ( $label, $c ) = @_;
+    my $ret = 0;
+    my $dialog = new Gtk::Dialog;
+    $dialog->signal_connect ( delete_event => sub {Gtk->main_quit();});
+    $dialog->set_title(_("drakfloppy"));
+    $dialog->border_width(10);
+    $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
+
+    my $button = new Gtk::Button _("OK");
+    $button->can_default(1);
+    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit(); });
+    $dialog->action_area->pack_start($button, 1, 1, 0);
+    $button->grab_default;
+
+    if ($c) {
+	my $button2 = new Gtk::Button _("Cancel");
+	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit(); });
+	$button2->can_default(1);
+	$dialog->action_area->pack_start($button2, 1, 1, 0);
+    }
+
+    $dialog->show_all;
+    Gtk->main();
+    $ret;
+}
+
+sub destroy_window {
+	my($widget, $windowref, $w2) = @_;
+	$$windowref = undef;
+	$w2 = undef if defined $w2;
+	0;
+}
+
+
+#-------------------------------------------------------------
+# the function
+#-------------------------------------------------------------
+sub build_it {
+  my $y;
+  my $co = "/sbin/mkbootdisk --noprompt --verbose --device ". $device_combo->entry->get_text();
+  if ($expert_mode) {
+    $co .= " --mkinitrdargs -f" if $force_button->get_active;
+    $co .= " --mkinitrdargs --ifneeded" if $needed_button->get_active;
+    $co .= " --mkinitrdargs --omit-scsi-modules" if $scsi_button->get_active;
+    $co .= " --mkinitrdargs --omit-raid-modules" if $raid_button->get_active;
+    for (my $i=0; $i<$list->rows(); $i++) {
+      $y = $list->get_text($i, 0);
+      $y =~ s|.*?/||g;
+      $co .= " --mkinitrdargs --with=" . $y; #. "/usr/lib/" . $kernel_combo->entry->get_text() . "/" . $y;
+    }
+  }
+  $co .= " " . $kernel_combo->entry->get_text();
+  $co .= " 2>&1 |";
+  create_dialog(_("Be sure a media is present for the device %s",  $device_combo->entry->get_text()), 1) or return;
+# we test if the media is present
+ test:
+  my $a = "dd count=1 if=/dev/null of=". $device_combo->entry->get_text() ." 2>&1";
+  my $b= `$a`;
+  if ($b =~ "dd") {create_dialog(_("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0; }
+  
+  open STATUS, $co or do { create_dialog(_("Unable to fork: %s", $!), 0); return; };
+  while (<STATUS>) {
+      $output->insert( $fixed_font, undef, undef, $_ );
+  }
+  close STATUS or create_dialog(_("Unable to close properly mkbootdisk: \n %s \n %s", $!, $?), 0);
+  
+  return (0);
+}
+
+####
+# This is put at the end of the file because any translatable string
+# appearing after this will not be found by xgettext, and so wont end in
+# the pot file...
+####
+
+# Test whether a directory has subdirectories
+sub has_sub_trees
+  {
+    my ( $dir ) = @_;
+    my $file;
+
+    foreach $file ( <$dir/*> ) {
+      return 1 if ( -d $file ) or ($file =~ /\.o(\.gz)?$/);
+    }
+
+    return (0);
+  }
+
