@@ -1,3 +1,28 @@
+2001/04/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/make_rescue_img: fix pixelization (aka take advantage of
+	all.kernels/.main)
+
+2001/04/02  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/Makefile (install): s/-r/-rf/
+
+2001/03/30  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/Makefile (install): fix the globbing for packdrake.pm and
+	rpmtools.pm
+
+2001/03/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/drvinst: test for "Card:" and not install, some videoboards are
+	not reported as DISPLAY_VGA :-(
+
+	* tools/make_mdkinst_stage2, docs/HACKING, rescue/make_rescue_img,
+	mdk-stage1/pci-resource/update-pci-ids.pl, docs/README: support more
+	than one boot kernel :-)
+
+	* rescue/list.i386: add reiserfsck
+
 2001/03/29  dam's  <damien@mandrakesoft.com>
 
 	* tinyfirewall.pm: bad message at the end if kernel2.4
