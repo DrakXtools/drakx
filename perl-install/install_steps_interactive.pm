@@ -814,8 +814,10 @@ sub summary {
 	}
     };
 
-    $o->ask_from_entries_refH('', _("Summary"),
-    [
+    $o->ask_from_entries_refH_powered({
+				       messages => _("Summary"),
+				       cancel   => '',
+				      }, [
 { label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); &$format_mouse } },
 { label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
