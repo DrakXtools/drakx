@@ -181,7 +181,7 @@ sub real_main {
                              );
 
       my $offer_to_connect = sub {
-          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
+          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && !member($adsl_type, qw(manual dhcp));
           return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
           return "end";
       };
@@ -213,7 +213,7 @@ sub real_main {
       };
 
       my $handle_multiple_cnx = sub {
-          $need_restart_network = member($netcnx->{type}, qw(cable lan)) || $netcnx->{type} eq 'adsl' && !$adsl_devices{$ntf_name};
+          $need_restart_network = member($netcnx->{type}, qw(cable lan)) || $netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp));
           my $nb = keys %{$netc->{internet_cnx}};
           if (1 < $nb) {
               return "multiple_internet_cnx";
