@@ -243,8 +243,8 @@ sub getAvailableSpace {
     #- make sure of this place to be available for installation, this could help a lot.
     #- currently doing a very small install use 36Mb of postinstall-rpm, but installing
     #- these packages may eat up to 90Mb (of course not all the server may be installed!).
-    #- 50mb may be a good choice to avoid almost all problem of insuficient space left...
-    my $minAvailableSize = 50 * sqr(1024);
+    #- 65mb may be a good choice to avoid almost all problem of insuficient space left...
+    my $minAvailableSize = 65 * sqr(1024);
 
     my $n = !$::testing && getAvailableSpace_mounted($o->{prefix}) || 
             getAvailableSpace_raw($o->{fstab}) * 512 / 1.07;
