@@ -25,10 +25,10 @@ ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
 $(BASE)/compss $(BASE)/depslist.ordered: $(BASE)/hdlists $(BASE)/hdlist.cz
-	genbasefiles $(BASE) `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
+	gendistrib --nohdlists --distrib $(ROOTDEST)
 
 $(BASE)/hdlist.cz: $(BASE)/hdlists $(RPMS)
-	genhdlists --noclean --distrib $(ROOTDEST)
+	gendistrib --noclean --nobasefiles --distrib $(ROOTDEST)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
