@@ -561,7 +561,9 @@ Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) &&
     die N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt));
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
-      if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
+      if !isTrueLocalFS($part) && $mntpoint eq '/';
+    die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
+      if !isTrueFS($part) && member($mntpoint, qw(/home /tmp /usr /var));
     die N("You can't use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 

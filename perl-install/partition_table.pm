@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -255,7 +255,8 @@ sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 
 sub isThisFs { type2fs($_[1]) eq $_[0] }
-sub isTrueFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
+sub isTrueFS { isTrueLocalFS($_[0]) || member(type2fs($_[0]), qw(nfs)) }
+sub isTrueLocalFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
 
 sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && !isThisFs('ntfs', $_[0]) }
@@ -433,7 +434,7 @@ sub adjust_main_extended {
 	foreach (map { $_->{normal} } $l, @l) {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
-	    $only_linux &&= isTrueFS($_) || isSwap($_);
+	    $only_linux &&= isTrueLocalFS($_) || isSwap($_);
 	    $has_win_lba ||= $_->{type} == 0xc || $_->{type} == 0xe;
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;

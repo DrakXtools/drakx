@@ -100,7 +100,7 @@ sub partitionWizardSolutions {
 	   "no harddrive on which partitions can be added");
     }
 
-    if (my @truefs = grep { isTrueFS($_) } @$fstab) {
+    if (my @truefs = grep { isTrueLocalFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
 	$solutions{existing_part} = [ 6 + @truefs + @$fstab, N("Use existing partitions"), sub { $o->ask_mntpoint_s($fstab) } ]
     } else {

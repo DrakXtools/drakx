@@ -230,7 +230,7 @@ sub prepare_write_fstab {
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
-	  isTrueFS($_) && $_->{options} !~ /encryption=/ && !$_->{is_removable} ? 
+	  isTrueLocalFS($_) && $_->{options} !~ /encryption=/ && !$_->{is_removable} ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
 
