@@ -148,7 +148,7 @@ my %charsets = (
 	std_("iso8859-8") ],
   "iso-8859-9" => [ "lat5-16",		"iso09",	"trivial.trans",
 	std("iso8859-9") ],
-  "iso-8859-13" => [ "tlat7",		"iso13",	"trivial.trans"
+  "iso-8859-13" => [ "tlat7",		"iso13",	"trivial.trans",
 	std_("iso8859-13") ],
   "iso-8859-14" => [ "tlat8",		"iso14",	"trivial.trans", 
 	std_("iso8859-14") ],
