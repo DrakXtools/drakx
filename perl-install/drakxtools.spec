@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 43mdk
+Release: 44mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jun 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-44mdk
+- diskdrake: fix hde devfs link (pixel)
+- drakconnect: start to make strings more helpfull
+- drakperm: enable drag 'n drop when looking only at customized settings
+- draksec: do not show empty pages in notebook if security level is not set
+- draksplash: make it work again...
+- harddrake2:
+  o do not list usb hard disk as unknown (fix doble entries)
+  o fix misdetection of nvidia nforce ethernet cards (broken since forcedeth
+    replaced nvnet on 2004-01-21 in MDK10's ldetect-lst)
+  o ethernet card detection: only rely on driver for matching ethernet cards,
+    thus preventing mislisting of other/unwanted devices and enableing to catch
+    ldetect/ldetect-lst/detect_devices bugs where some devices are *not* seen by
+    drakx and drakconnect.
+  o display more data about hard disks (geometry, number of primary/extended
+    partitions)
+
 * Wed Jun  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-43mdk
 - drakauth: add "Active Directory" authentication (WIP) (pixel)
 - drakbackup: (stew)
