@@ -520,13 +520,21 @@ sub ask_fromW {
 	    }
 	} else {
 	    if ($e->{type} eq "combo") {
-		$w = $e->{not_edit} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
-          if (!$e->{not_edit}) {
-              $w->set_use_arrows_always(1);
-              $w->disable_activate;
-          }
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
+
+		my @l = sort { $b <=> $a } map { length } @formatted_list;
+		$width = $l[@l / 16]; # take the third octile (think quartile)
+
+		if ($e->{not_edit} && $width < 60) { #- OptionMenus do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
+		    $w = Gtk2::OptionMenu->new;
+		} else {
+		    $w = Gtk2::Combo->new;
+		    $w->set_use_arrows_always(1);
+		    $w->entry->set_editable(!$e->{not_edit});
+		    $w->disable_activate;
+		    $has_horiz_scroll = 1;
+		}
 
 		$w->set_popdown_strings(@formatted_list);
 		($real_w, $w) = ($w, $w->entry);
@@ -546,10 +554,6 @@ sub ask_fromW {
 		    my $i = eval { find_index { $s eq $_ } @formatted_list };
 		    defined $i ? $e->{list}[$i] : $s;
 		};
-
-		my @l = sort { $b <=> $a } map { length } @formatted_list;
-		$has_horiz_scroll = 1;
-		$width = $l[@l / 16]; # take the third octile (think quartile)
 	    } else {
                 $w = Gtk2::Entry->new;
 		$w->signal_connect(changed => $changed);
