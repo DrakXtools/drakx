@@ -531,7 +531,6 @@ DEVELOPMENT
 
 MONITORING
   5 procinfo psacct
-  5 PCMCIA apmd
   4 lsof swatch tcpdump traceroute
   4 nmap lm_sensors
   4 X nmap-frontend
@@ -639,7 +638,8 @@ SYSTEM
   5 DRIVER"adiusbadsl" eagle-usb
   5 KDE  DRIVER"bcm203x|bfusb|hci_usb" kdebluetooth 
   5 !KDE DRIVER"bcm203x|bfusb|hci_usb" gnome-bluetooth
-  5 DRIVER"ipw2100" ipw2100
+  5 DRIVER"ipw2100" ipw2100-firmware
+  5 DRIVER"ipw2200" ipw2200-firmware
   5 DRIVER"madwifi_pci" madwifi_kernel madwifi
   5 DRIVER"speedtch" speedtouch speedtouch_mgmt
   5 DRIVER"^ISDN:|^Hcf:|^Hsf:|^LT:|speedtch"
@@ -647,12 +647,13 @@ SYSTEM
       SMP kernel-smp-2.4
       BIGMEM kernel-enterprise-2.4
 
-  5 HW"Intel Corp\.\|PRO/Wireless LAN" ndiswrapper
+  5 atmel-firmware prism54-firmware
 
   5 KDE TYPE"laptop" kdeutils-klaptop
-
+  5 TYPE"laptop" cpufreq apmd
+  
   4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc
-  4 PCMCIA netprofile
+  4 TYPE"laptop" netprofile
 
   3 bc
   2 sndconfig acpid adns audiofile freeswan fbset vlan-utils gpm
@@ -664,7 +665,7 @@ SYSTEM
       howto-html-de howto-html-el
 
   4 NIS yp-tools
-  3 PCMCIA irda-utils
+  3 TYPE"laptop" irda-utils
   3 USB usbutils
 
   4 LOCALES"ar" || LOCALES"fa" || LOCALES"he" || LOCALES"yi" acon
