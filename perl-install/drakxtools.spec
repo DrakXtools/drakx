@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 4mdk
+Release: 5mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -109,7 +109,8 @@ hardware classes.
 %setup -q
 
 %build
-make
+%make rpcinfo-flushed ddcprobe serial_probe 
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -213,6 +214,9 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
+- code enhancement: increase coherency around the whole drakx code
+
 * Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-4mdk
 - fix depandancy
 
