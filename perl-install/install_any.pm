@@ -443,6 +443,7 @@ sub selectSupplMedia {
 	    $cdrom =~ m,^/, or $cdrom = "/dev/$cdrom";
 	    devices::make($cdrom);
 	    ejectCdrom($cdrom);
+	    openCdromTray($cdrom);
 	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
 		#- mount suppl CD in /mnt/cdrom to avoid umounting /tmp/image
 		mountCdrom("/mnt/cdrom", $cdrom);
@@ -467,10 +468,7 @@ sub selectSupplMedia {
 		eval { fs::umount("/mnt/cdrom") };
 		#- re-mount CD 1 if this was a cdrom install
 		if ($main_method eq 'cdrom') {
-		    eval { 
-			my $dev = detect_devices::tryOpen($cdrom);	    
-			ioctl($dev, c::CDROMEJECT(), 1);
-		    };
+		    openCdromTray($cdrom);
 		    $o->ask_warn('', N("Insert the CD 1 again"));
 		    mountCdrom("/tmp/image", $cdrom);
 		    log::l($@) if $@;
@@ -899,6 +897,12 @@ sub unlockCdrom() {
     eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROM_LOCKDOOR(), 0) };
 }
 
+sub openCdromTray {
+    my ($cdrom) = @_;
+    eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROMEJECT(), 1) };
+    $@ and log::l("ejection failed: $@");
+}
+
 sub ejectCdrom {
     my ($o_cdrom, $o_mountpoint) = @_;
     getFile("XXX"); #- close still opened filehandle
@@ -920,7 +924,6 @@ sub ejectCdrom {
 	my $dev = detect_devices::tryOpen($cdrom);
 	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
     };
-    $@ and log::l("ejection failed: $@");
 }
 
 sub warnAboutFilesStillOpen() {
