@@ -2,7 +2,7 @@
 DEST_LIVETREE = /tmp/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 
-DATA_FILES = devices symlinks directories-to-create etcfiles
+DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1
@@ -23,6 +23,7 @@ all: install
 build: xwait
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
+	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 
 install: build
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
