@@ -20,7 +20,7 @@ ifeq (ia64,$(ARCH))
     BOOT_IMG = all.img
 endif
 ifeq (x86_64,$(ARCH))
-    BOOT_IMG = BOOT_IMG = cdrom.img hd.img hdcdrom_usb.img network.img network_gigabit_usb.img blank.img
+    BOOT_IMG = cdrom.img hd.img hdcdrom_usb.img network.img network_gigabit_usb.img blank.img
 endif
 
 FBOOT_IMG = $(BOOT_IMG:%=images/%)
