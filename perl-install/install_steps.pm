@@ -294,8 +294,8 @@ sub addUser($) {
     $u{home} ||= "/home/$u{name}";
 
     my (%uids, %gids); 
-    foreach (glob_("/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
-    my ($old_uid, $old_gid) = ($u{uid}, $u{gid}) = (stat($u{home}))[4,5];
+    foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
+    my ($old_uid, $old_gid) = ($u{uid}, $u{gid}) = (stat("$p$u{home}"))[4,5];
     if (getpwuid($u{uid})) { for ($u{uid} = 500; getpwuid($u{uid}) || $uids{$u{uid}}; $u{uid}++) {} }
     if (getgrgid($u{gid})) { for ($u{gid} = 500; getgrgid($u{gid}) || $gids{$u{gid}}; $u{gid}++) {} }
 
