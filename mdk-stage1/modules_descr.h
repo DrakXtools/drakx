@@ -21,6 +21,7 @@ struct module_descr {
 };
 
 struct module_descr modules_descriptions[] = {
+#ifndef DISABLE_NETWORK
 	/* description of network drivers that have not very explicit names */
 	{ "ne",        "NE1000/NE2000/clones" },
 	{ "ne2k-pci",  "PCI NE2000" },
@@ -35,7 +36,9 @@ struct module_descr modules_descriptions[] = {
 	{ "bmac",      "Macintosh integrated ethernet (G3)" },
 	{ "gmac",      "Macintosh integrated ethernet (G4/iBook)" },
 	{ "mace",      "Macintosh integrated ethernet (PowerMac)" },
+#endif
 
+#ifndef DISABLE_MEDIAS
 	/* description of scsi drivers that have not very explicit names */
 	{ "53c7,8xx",  "NCR53c810/700" },
 	{ "sim710",    "NCR53c710" },
@@ -46,11 +49,15 @@ struct module_descr modules_descriptions[] = {
 	{ "sim710",    "NCR53C710 family" },
 	{ "mesh",      "Macintosh integrated SCSI (NewWorld or internal SCSI)" },
 	{ "mac53c94",  "Macintosh integrated SCSI (OldWorld or external SCSI)" },
+#endif
 
+#ifdef ENABLE_USB
 	/* description of usb drivers that have not very explicit names */
 	{ "usbnet",    "Netchip or Prolific USB-USB Bridge" },
 	{ "pegasus",   "ADMtek AN986 (USB Ethernet chipset)" },
 	{ "kaweth",    "KL5KUSB101 (USB Ethernet chipset)" },
+	{ "catc",      "CATC EL1210A NetMate USB Ethernet" },
+#endif
 };
 
 int modules_descriptions_num = sizeof(modules_descriptions) / sizeof(struct module_descr);
