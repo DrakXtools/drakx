@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 13mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Dec 30 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.3-14mdk
+- ugtk2.pm: fix ask_dir dialog (#6152)
+
 * Mon Dec 22 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-13mdk
 - do not show useless "ignore" button when requesting root password
   through kdesu
