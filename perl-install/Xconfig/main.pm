@@ -226,6 +226,8 @@ sub check_valid {
     } qw(Files InputDevice Monitor Device Screen ServerLayout);
 
     $sections{Files}[0]{FontPath} or return "missing FontPath";
+
+    '';
 }
 
 #- most usefull XFree86-4.0.1 server options. Default values is the first ones.
