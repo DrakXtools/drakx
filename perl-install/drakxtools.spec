@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.12mdk
+Release: 0.13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jan 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.13mdk
+- keyboarddrake: minimal XkbModel support (pixel)
+- diskdrake (pixel):
+  o don't write /etc/mdadm.conf when no raid
+  o use option "auto=yes" in mdadm.conf to ensure mdadm will create
+    /dev/mdX devices when needed
+- printerdrake:
+  o fix subdialogs when embedded in mcc
+  o fix banner's title by initializing l10n domains before ugtk2
+
 * Wed Jan 19 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.12mdk
 - diskdrake: progress bar when formatting ext3 (pixel)
 - drakauth: fix switching back nsswitch.conf to local authentication
