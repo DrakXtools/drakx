@@ -1,3 +1,76 @@
+2001/01/10  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_interactive.pm: corrected last message . firewall
+
+2001/01/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: fix modules.pm for modules to be skept in stage1 (ppa, imm,
+	parport*, plip)
+
+2001/01/10  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm (ask_from_entries_refW): add handling of 'changed'
+	callback on clist/list/ctree
+
+	* install_steps.pm (addUser): use any::pack_passwd
+	(setRootPassword): use any::unpack_passwd and any::pack_passwd
+
+	* my_gtk.pm (create_packtable): yet another try to have something nice :)
+	!! uses Gtk::Table::attach_raw which is available in
+	perl-GTK-0.7004-6mdk !!
+	(create_box_with_title): with the size given to set_usize for the scroll
+	containing the text widget in case of long text. and don't let the
+	scroll
+	grow.
+	(gtktext_insert): remove adding an ending "\n" (no more needed?)
+
+	* any.pm (setAutologin): cleanup
+	(pack_passwd, unpack_passwd): created
+
+	* Xconfigurator.pm (cardConfiguration): adapt for $install which is
+	generic
+	(autologin): use $install which is now generic
+
+	* install_steps_interactive.pm (selectLanguage): many_languages choice
+	moved there as advanced
+
+	* standalone/printerdrake, standalone/keyboarddrake, standalone/draknet2,
+	standalone/livedrake, standalone/drakboot, standalone/draksec,
+	standalone/netdrake, standalone/mousedrake, standalone/drakgw,
+	standalone/drakxservices, standalone.pm, standalone/draknet,
+	standalone/XFdrake, standalone/diskdrake, standalone/adduserdrake,
+	standalone/drakxconf: use standalone and standalone::pkgs_install
+
+2001/01/09  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm (drakx_version): nicer (4gc)
+
+	* install2.pm (main): log::l the drakx_version
+
+	* my_gtk.pm (create_packtable): no_expand option added
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): field
+	"disabled" added,
+	"advanced_messages" added
+
+	* lang.pm (langs): created (transform the $o->{langs} hash ref in a list)
+	(pack_langs): use lang::langs
+
+	* install_steps.pm (selectLanguage): $o->{langs} is now a ref so
+	initialize as such
+
+	* Makefile (get_needed_files): generate /usr/share/VERSION which contains
+	the version
+	of ChangeLog (which is updated at each upload)
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): handle "check
+	for bad blocks" as advanced
+	(setRootPassword): remove choosing non-md5 or non-shadow passwords.
+
+	* install_any.pm (setPackages): use lang::langs instead of using
+	$o->{langs} as a array ref (it is not so anymore)
+	(spawnShell): print the drakx_version
+
 2001/01/08  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive.pm: fixes
