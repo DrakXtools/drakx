@@ -219,7 +219,7 @@ sub choosePartitionsToFormat($$) {
     $o->SUPER::choosePartitionsToFormat($fstab);
 
     my @l = grep { !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) &&
-		    (!isFat($_) || $::expert || $_->{toFormat})
+		    (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
@@ -801,7 +801,7 @@ sub setupSILO {
     if ($::beginner && $more == 1) {
 	#- nothing more to do here.
     } elsif ($more || !$::beginner) {
-	$o->set_help("setupBootloaderGeneral");
+	$o->set_help("setupSILOGeneral");
 
 	$::expert and $o->ask_yesorno('', _("Do you want to use SILO?"), 1) || return;
 
@@ -825,7 +825,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
     }
 
     until ($::beginner && $more <= 1) {
-	$o->set_help('setupBootloaderAddEntry');
+	$o->set_help('setupSILOAddEntry');
 	my $c = $o->ask_from_list_([''], 
 _("Here are the following entries in SILO.
 You can add some more or change the existing ones."),
@@ -854,16 +854,18 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("$o->{prefix}/boot/vmlinuz*") } ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { map { s/$o->{prefix}//; $_ } glob_("$o->{prefix}/boot/vmlinuz*") } ] },
 _("Partition") => { val => \$e->{partition}, list => [ map { ("$o->{prefix}/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
-_("Root") => { val => \$e->{root}, list => [ map { "$o->{prefix}/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Append") => \$e->{append},
-_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("$o->{prefix}/boot/initrd*") } ] },
+_("Initrd") => { val => \$e->{initrd}, list => [ eval { map { s/$o->{prefix}//; $_ } glob_("$o->{prefix}/boot/initrd*") } ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..7] unless $::expert;
 	} else {
-	    die "Other SILO entries not supported at the moment";
+	    @l = ( 
+_("Root") => { val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+	    );
 	}
 	@l = (
 _("Label") => \$e->{label},

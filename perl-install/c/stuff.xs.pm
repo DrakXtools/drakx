@@ -326,7 +326,40 @@ prom_getchild(node)
   int node
 
 void
+prom_getopt(key)
+  char *key
+  PPCODE:
+  int lenp = 0;
+  char *value = NULL;
+  value = prom_getopt(key, &lenp);
+  EXTEND(sp, 1);
+  if (value != NULL) {
+    PUSHs(sv_2mortal(newSVpv(value, 0)));
+  } else {
+    PUSHs(&PL_sv_undef);
+  }
+
+void
+prom_setopt(key, value)
+  char *key
+  char *value
+
+void
 prom_getproperty(key)
+  char *key
+  PPCODE:
+  int lenp = 0;
+  char *value = NULL;
+  value = prom_getproperty(key, &lenp);
+  EXTEND(sp, 1);
+  if (value != NULL) {
+    PUSHs(sv_2mortal(newSVpv(value, lenp)));
+  } else {
+    PUSHs(&PL_sv_undef);
+  }
+
+void
+prom_getstring(key)
   char *key
   PPCODE:
   int lenp = 0;
@@ -343,19 +376,25 @@ int
 prom_getbool(key)
   char *key
 
+
+
 void
-prom_getint(key)
-  char *key
-  PPCODE:
-  int lenp = 0;
-  char *value = NULL;
-  value = prom_getproperty(key, &lenp);
-  EXTEND(sp, 1);
-  if (value != NULL && lenp == sizeof(int)) {
-    PUSHs(sv_2mortal(newSViv(*(int *)value)));
-  } else {
-    PUSHs(&PL_sv_undef);
-  }
+initSilo()
+
+char *
+disk2PromPath(disk)
+  unsigned char *disk
+
+int
+hasAliases()
+
+char *
+promRootName()
+
+void
+setPromVars(linuxAlias, bootDevice)
+  char *linuxAlias
+  char *bootDevice
 ';
 
 $ENV{C_RPM} and print '

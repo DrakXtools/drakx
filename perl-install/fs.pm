@@ -197,6 +197,8 @@ sub mount($$$;$) {
 	    $mount_opt = 'check=relaxed';
 	    eval { modules::load('vfat') }; #- try using vfat
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
+	} elsif ($fs eq 'ufs') {
+	    eval { modules::load('ufs') };
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail

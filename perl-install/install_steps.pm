@@ -202,7 +202,7 @@ sub choosePartitionsToFormat($$) {
 	      fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
-	      (isFat({ type => $t }) ? !isFat($_) : $t != $_->{type});
+	      (isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
 	}
     }
 }
@@ -809,6 +809,7 @@ sub setupBootloaderBefore {
 	}
     } elsif (arch() =~ /^sparc/) {
 	require silo;
+        silo::init();
         silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
     } else {
 	require lilo;

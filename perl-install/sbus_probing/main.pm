@@ -65,13 +65,14 @@ my %sbus_table_video =   (
 
 1;
 
-#- update %sbus_probed according to SBUS detection.
+sub prom_getint($) { unpack "I", c::prom_getproperty($_[0]) }
+
+#- update $@sbus_probed according to SBUS detection.
 sub prom_walk($$$$) {
     my ($sbus_probed, $node, $sbus, $ebus) = @_;
-    my ($prob_name, $prob_type) = (c::prom_getproperty("name"), c::prom_getproperty("device_type"));
+    my ($prob_name, $prob_type) = (c::prom_getstring("name"), c::prom_getstring("device_type"));
     my ($nextnode, $nsbus, $nebus) = (undef, $sbus, $ebus);
 
-    log::l("sbus probe at $node => $prob_name of type $prob_type on $sbus,$ebus");
     #- probe for network devices.
     if ($sbus && $prob_type eq 'network') {
 	$prob_name =~ s/[A-Z,]*(.*)/$1/;
@@ -97,9 +98,9 @@ sub prom_walk($$$$) {
     #- probe for video devices.
     if ($prob_type eq 'display' && ($sbus || $prob_name =~ /^(ffb|afb|cgfourteen)$/)) {
 	$prob_name =~ s/[A-Z,]*(.*)/$1/;
-	my $ext = ($prob_name eq 'mgx' && c::prom_getint('fb_size') == 0x400000 && '_4M' ||
+	my $ext = ($prob_name eq 'mgx' && prom_getint('fb_size') == 0x400000 && '_4M' ||
 		   $prob_name eq 'cgsix' && do {
-		       my ($chiprev, $vmsize) = (c::prom_getint('chiprev'), c::prom_getint('vmsize'));
+		       my ($chiprev, $vmsize) = (prom_getint('chiprev'), prom_getint('vmsize'));
 		       my $result = '';
 		       $chiprev >= 1 && $chiprev <= 4 and $result = '_dbl';
 		       $chiprev >= 5 && $chiprev <= 9 and $result = '_sgl';
@@ -108,10 +109,10 @@ sub prom_walk($$$$) {
 		       $chiprev == 11 && !$result and $result = '_t';
 		       $result;
 		   } ||
-		   $prob_name eq 'leo' && c::prom_getproperty('model') =~ /501-2503/ && '_t' ||
+		   $prob_name eq 'leo' && c::prom_getstring('model') =~ /501-2503/ && '_t' ||
 		   $prob_name eq 'tcx' && c::prom_getbool('tcx-8-bit') && '_8b' ||
-		   $prob_name eq 'afb' && sprintf "_btx%x", c::prom_getint('board_type') ||
-		   $prob_name eq 'ffb' && sprintf "_btx%x", c::prom_getint('board_type'));
+		   $prob_name eq 'afb' && sprintf "_btx%x", prom_getint('board_type') ||
+		   $prob_name eq 'ffb' && sprintf "_btx%x", prom_getint('board_type'));
 
 	$sbus_table_video{$prob_name . $ext} ?
 	    push @$sbus_probed, [ "VIDEO", @{$sbus_table_video{$prob_name . $ext}} ] :
@@ -153,6 +154,7 @@ sub matching_desc($;$) {
 
     prom_walk(\@l, $root_node, 0, 0);
     c::prom_close();
+
     grep { !$type || $_->[1] =~ /$regexp/ } @l;
 }
 

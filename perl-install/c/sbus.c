@@ -19,12 +19,11 @@
  *
  */
 
-#include <stdlib.h>
-
 #ifdef __sparc__
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
 #include <asm/openpromio.h>
@@ -87,6 +86,25 @@ int prom_getchild(int node)
     return *(int *)op->oprom_array;
 }
 
+char *prom_getopt(char *var, int *lenp)
+{
+    DECL_OP(MAX_VAL);
+        
+    strcpy (op->oprom_array, var);
+    if (ioctl (promfd, OPROMGETOPT, op) < 0)
+        return 0;
+    if (lenp) *lenp = op->oprom_size;
+    return op->oprom_array;
+}
+
+void prom_setopt(char *var, char *value) {
+    DECL_OP(MAX_VAL);
+
+    strcpy (op->oprom_array, var);
+    strcpy (op->oprom_array + strlen (var) + 1, value);
+    ioctl (promfd, OPROMSETOPT, op);
+}
+
 char *prom_getproperty(char *prop, int *lenp)
 {
     DECL_OP(MAX_VAL);
@@ -114,11 +132,25 @@ int prom_getbool(char *prop)
     }
 }
 
+int prom_pci2node(int bus, int devfn) {
+    DECL_OP(2*sizeof(int));
+    
+    ((int *)op->oprom_array)[0] = bus;
+    ((int *)op->oprom_array)[1] = devfn;
+    if (ioctl (promfd, OPROMPCI2NODE, op) < 0)
+        return 0;
+    prom_current_node = *(int *)op->oprom_array;
+    return *(int *)op->oprom_array;
+}
+
 #else
 int prom_open() { return 0; }
 void prom_close() {}
 int prom_getsibling(int node) { return 0; }
 int prom_getchild(int node) { return 0; }
-char *prom_getproperty(char *prop, int *lenp) { return NULL; }
+char *prom_getopt(char *var, int *lenp) { return 0; /* NULL */ }
+void prom_setopt(char *var, char *value) {}
+char *prom_getproperty(char *prop, int *lenp) { return 0; /* NULL */ }
 int prom_getbool(char *prop) { return 0; }
+int prom_pci2node(int bus, int devfn) { return 0; }
 #endif /* __sparc__ */

@@ -1,3 +1,16 @@
+2000-06-20  François Pons  <fpons@mandrakesoft.com>
+
+	* c/sbus.c: added some functions for silo.c integration.
+	* c/silo.c: initial release including write in prom, and translation
+	of disk name from openprom to linux, rh version modified.
+	* silo.pm: added write in prom, support of sunos boot from silo.
+	* partition_table.pm: added support for ufs partition like windows one.
+	* install_steps_interactive.pm: added other entries in silo.
+	* install_steps.pm: support sunos partition.
+	* install_any.pm: automatically mount sunos partition with diskdrake.
+	* fsedit.pm: added /mnt/sunos suggested mount point.
+	* fs.pm: added ufs support for mount.
+
 2000-06-19  François Pons  <fpons@mandrakesoft.com>
 
 	* crypto.pm: modified for getting sparc crypto file for sparc*.

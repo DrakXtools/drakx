@@ -34,6 +34,7 @@ use install_steps;
 #- Steps table
 #-######################################################################################
 $::VERSION = "7.1";
+#-$::corporate=1;
 
 my (%installSteps, @orderedInstallSteps);
 {    

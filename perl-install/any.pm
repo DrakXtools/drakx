@@ -135,7 +135,7 @@ You can add some more or change the existing ones."),
 	}
 	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
-	    
+
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (

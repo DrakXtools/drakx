@@ -7,7 +7,7 @@ use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -165,12 +165,19 @@ arch() =~ /^ppc/ ? (
 ) : (
   0x07 => 'ntfs',
 ),
-arch() !~ /^sparc/ ? (
+arch() !~ /sparc/ ? (
   0x01 => 'vfat',
   0x04 => 'vfat',
   0x05 => 'ignore',
   0x06 => 'vfat',
-) : (),
+) : (
+  0x01 => 'ufs',
+  0x02 => 'ufs',
+  0x04 => 'ufs',
+  0x06 => 'ufs',
+  0x07 => 'ufs',
+  0x08 => 'ufs',
+),
   0x0b => 'vfat',
   0x0c => 'vfat',
   0x0e => 'vfat',
@@ -212,6 +219,9 @@ sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
 sub isDos($) { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
+sub isSunOS($) { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
+sub isSolaris($) { 0; } #- hack to search for getting the difference ? TODO
+sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) } #- other OS that linux can access its filesystem
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
@@ -219,7 +229,7 @@ sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) }
-sub isMountableRW { isTrueFS($_[0]) || isFat($_[0]) }
+sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;

@@ -363,6 +363,14 @@ Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
 	    $_->{mntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
 	}
     }
+
+    my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
+    if (@sunos) {
+	my $v = '';
+	map { $_->{mntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
+    }
+    #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
+
     $ok2;
 }
 

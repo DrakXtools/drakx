@@ -3,14 +3,13 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 
 my $libs = '-L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc';
-
 $libs .= ' -lrpm -ldb1 -lz' if $ENV{C_RPM};
 
 WriteMakefile(
     'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
     'MAKEFILE'  => 'Makefile_c',
-    'OBJECT'    => 'stuff.o smp.o md5.o md5_crypt.o sbus.o',
+    'OBJECT'    => 'stuff.o smp.o md5.o md5_crypt.o sbus.o silo.o',
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 

@@ -371,6 +371,26 @@ when booting. The following values are available:
     * normal: select normal 80x25 text mode.
     * <number>:  use the corresponding text mode."),
 
+setupSILOAddEntry =>
+ __("SILO is a bootloader for SPARC: it is able to boot
+either GNU/Linux or any other operating system present on your computer.
+Normally, these other operating systems are correctly detected and
+installed. If this is not the case, you can add an entry by hand in this
+screen. Be careful as to choose the correct parameters.
+
+
+You may also want not to give access to these other operating systems to
+anyone, in which case you can delete the corresponding entries. But
+in this case, you will need a boot disk in order to boot them!"),
+
+setupSILOGeneral =>
+ __("SILO main options are:
+  - Delay before booting default image: Specifies the number in tenths
+of a second the boot loader should wait before booting the first image.
+This is useful on systems that immediately boot from the hard disk after
+enabling the keyboard. The boot loader doesn't wait if \"delay\" is
+omitted or is set to zero."),
+
 configureX =>
  __("Now it's time to configure the X Window System, which is the
 core of the GNU/Linux GUI (Graphical User Interface). For this purpose,
