@@ -19,16 +19,12 @@ my %options = (
 	       'no-entry' => \ (my $no_entry),
 	       'no-launch' => \ (my $no_launch),
 	       'no-initrd' => \ (my $no_initrd),	       
-
-	       'no-link' => \ (my $nolink),
 	      );
 
 GetOptions(%options) or die "usage: Releve " . join(' ', map { "[--$_]" } keys %options) . "\n";
 
 my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader);
 $action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
-
-$no_short_name ||= $nolink;
 
 if ($vmlinuz) {
     if (my $ver = bootloader::vmlinuz2version($vmlinuz)) {
