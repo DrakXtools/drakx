@@ -1,9 +1,8 @@
 GRAPHICAL_DESKTOP
   4 WindowMaker icewm
-  3 Epplets WMRack blackbox enlightenment ethemes icepref
+  2 wmnet Epplets WMRack blackbox enlightenment ethemes icepref
     wmakerconf xlockmore
-  2 wmnet
-  1 lesstif-mwm xbanner xfce
+  1 lesstif-mwm xfce
 
 GNOME
   5 gnome-core
@@ -23,55 +22,6 @@ KDE
     kdepim kdetoys kdeutils quanta 
 
   2 kdesdk kdoc
-
-VIDEO
-  4 powerdvd RealPlayer RealPlayer-rpnp
-  3 nist xanim xmms-smpeg xmovie 
-  2 mtv mtv-fullscreen-extension
-  1 bcast mpeg2_movie
-TV
-  4 xawtv gatos
-  4 KDE kwintv
-
-OFFICE
-  4 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it
-    acroread acroread-nppdf
-  4 cbb gaddr ical xpdf moneydance
-  3 wv 
-  4 LOCALES"zh" pyDict
-  2 units lyx phpgroupware
-  GNOME
-    4 abiword gnome-pim gnome-pim-conduits gnumeric
-    3 dia gnome-pilot-conduits
-    2 ggv gnucash
-  KDE
-    5 koffice
-    5 koffice-i18n-az koffice-i18n-hu koffice-i18n-ro koffice-i18n-cs koffice-i18n-it koffice-i18n-ru koffice-i18n-da 
-      koffice-i18n-ja koffice-i18n-sk koffice-i18n-de koffice-i18n-lt koffice-i18n-sl koffice-i18n-en_GB koffice-i18n-nl 
-      koffice-i18n-sv koffice-i18n-eo koffice-i18n-no koffice-i18n-ta koffice-i18n-es koffice-i18n-no_NY koffice-i18n-tr 
-      koffice-i18n-et koffice-i18n-pl koffice-i18n-fr koffice-i18n-pt
-    2 klyx
-
-SOUND
-  5 sox
-  4 aumix
-  4 KDE xmms-arts
-
-AUDIO
-  4 eMusic grip xmms xmms-skins
-  4 GNOME gnome-audio gnome-media xmms-gnome
-  4 KDE kdelibs-sound
-  4 3D xmms-mesa
-  3 cdp cdparanoia cdrecord-cdda2wav mikmod mp3info mpg123
-    playmidi playmidi-X11 space_sounds timidity-instruments xmms-esd
-    xmms-kjofol-skins xmms-mikmod xmms-more-vis-plugins
-  3 GNOME gnome-audio-extra 
-
-  4 HW"Rio 500" rio500 grio500
-
-  1 viavoicemenu_de viavoicemenu_fr viavoicemenu_us
-  DEVELOPMENT
-    4 ViaVoice_sdk
 
 ACCESSIBILITY
   2 gtkeyboard
@@ -95,13 +45,6 @@ SHELLS
   3 BOOKS bash-doc zsh-doc
   2 eshell pdksh tcsh
   1 bash1
-
-SCIENCES
-  5 3D openuniverse
-  4 gnuplot gtkgraph
-  3 xlispstat HDF
-  2 mathplot octave
-  1 xoscope
 
 EDITORS
   5 vim-enhanced
@@ -153,7 +96,8 @@ NETWORKING_FILE_TRANSFER
   2 uucp
 
 NETWORKING_FILE_TRANSFER_SERVER
-  4 wu-ftpd anonftp wizards_lib-ftp
+  4 wu-ftpd anonftp 
+  4 WIZARDS wizards_lib-ftp
   2 proftpd
 
 NETWORKING_LDAP_SERVER
@@ -174,11 +118,13 @@ NETWORKING_IRC
   1 eggdrop
 
 NETWORKING_FIREWALLING_SERVER
-  5 iproute2 routed iptables ipchains wizards_lib-firewall
+  5 iproute2 routed iptables ipchains 
+  5 WIZARDS wizards_lib-firewall
   3 prelude
   1 portsentry 
 
 NETWORKING_GROUPWARE_SERVER
+  4 phpgroupware
 
 NETWORKING_MAIL
   5 mailx metamail
@@ -189,7 +135,8 @@ NETWORKING_MAIL
   2 FaxMail comsat elm faces-xface
   1 exmh mutt fetchmail-daemon fetchmailconf pine
 NETWORKING_MAIL_SERVER
-  5 postfix wizards_lib-postfix
+  5 postfix 
+  5 WIZARDS wizards_lib-postfix
   4 sympa 
 
 NETWORKING_NEWS
@@ -197,14 +144,16 @@ NETWORKING_NEWS
   3 slrn tin trn 
   1 slrn-pull xrn
 NETWORKING_NEWS_SERVER
-  4 inn wizards_lib-news
+  4 inn 
+  4 WIZARDS wizards_lib-news
   3 inews 
 
 NETWORKING_OTHER
   3 finger fwhois ucd-snmp-utils
   2 htdig macutils queso
 NETWORKING_OTHER_SERVER
-  3 dhcp gated timed xntp3 wizards_lib-dhcp wizards_lib-time 
+  3 dhcp gated timed xntp3 
+  3 WIZARDS wizards_lib-dhcp wizards_lib-time 
 
   3 intimed mcserv nscd imap pidentd
     rdate bootparamd 
@@ -225,16 +174,17 @@ NETWORKING_REMOTE_ACCESS
   2 rsh vnc-SVGALIB vnc-java
   2 BOOKS vnc-doc
   1 sftp
+
 NETWORKING_REMOTE_ACCESS_SERVER
   5 openssh-server
-  4 webmin 
   2 vnc-server
   1 telnet-server-krb5 rsh-server
 
 NETWORKING_DNS
   4 bind-utils 
 NETWORKING_DNS_SERVER
-  5 bind wizards_lib-dns
+  5 bind 
+  5 WIZARDS wizards_lib-dns
   4 caching-nameserver
   1 nslint
 
@@ -245,7 +195,7 @@ NETWORKING_FILE
   1 am-utils autofs
 NETWORKING_FILE_SERVER 
   5 nfs-utils
-  4 wizards_lib-samba
+  4 WIZARDS wizards_lib-samba
   4 samba 
   2 arkeia-server-shareware
   3 squid squidGuard
@@ -258,9 +208,11 @@ NETWORKING_WWW
       CHARSET"iso-8859-1" || CHARSET"iso-8859-15" nautilus-mozilla
   3 plugger opera bluefish
   4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-chinese_big5 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
+
 NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl 
-  4 apache-suexec wizards_lib-web
+  4 apache-suexec 
+  4 WIZARDS wizards_lib-web
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
     php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl PHP-nuke
@@ -314,31 +266,6 @@ DATABASES
     4 perl-Mysql
     3 MySQL-bench MySQL-devel
     2 postgresql-devel
-
-GAMES
-  4 sin-demo
-  4 clanbomber freeciv mures methane lbreakout2 toppler
-  3 shogo-demo
-  3 cxhextris xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank nethack_falconseye rocksndiamonds tuxpuck teg
-  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies powermanga xpilot trophy
-  1 7colors xrally fortune-mod nil
-  GNOME
-    4 gnome-chess gnome-games
-    2 3D gtulpas
-    1 gtkgo
-    DEVELOPMENT
-      2 gnomes-games-devel
-  KDE
-    2 kdegames
-    DEVELOPMENT
-      2 kdegames-devel
-  3D
-    4 csmash armagetron
-      !HW"Riva.*128" chromium tuxracer
-
-    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" 
-        bzflag
-    3 FlightGear spacecup gltron
 
 DEVELOPMENT
   5 autoconf automake m4 make 
@@ -434,13 +361,16 @@ FILE_TOOLS
   5 file gnupg mkxauth mtools slocate
   4 symlinks
   3 FileRunner dosfstools draksync mc tree
-  2 git gentoo sfm xwc
+  2 git gentoo
   1 xdelta
+
+WEBMIN
+  5 webmin
 
 CONFIG
   4 userdrake linuxconf
   4 GNOME gnome-linuxconf
-  3 webmin Bastille-Curses-module
+  3 Bastille-Curses-module
   3 ipvsadm quota timetool usernet
   2 gfcc control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module
   1 ipxutils
