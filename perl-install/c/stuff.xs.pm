@@ -52,14 +52,6 @@ void rpmError_callback(void) {
   }
 }
 
-FD_t fd2FD_t(int fd) {
-  static FD_t f = NULL;
-  if (fd == -1) return NULL;
-  if (f == NULL) f = fdNew("");
-  fdSetFdno(f, fd);
-  return f;
-}
-
 ';
 
 print '
@@ -464,7 +456,7 @@ rpmdbOpenForTraversal(root)
   rpmErrorCallBackType old_cb;
   old_cb = rpmErrorSetCallback(rpmError_callback_empty);
   rpmSetVerbosity(RPMMESS_FATALERROR);
-  RETVAL = rpmdbOpenForTraversal(root, &db) == 0 ? db : NULL;
+  RETVAL = rpmdbOpen(root, &db, O_RDONLY, 0644) == 0 ? db : NULL;
   rpmErrorSetCallback(old_cb);
   rpmSetVerbosity(RPMMESS_NORMAL);
   OUTPUT:
@@ -500,9 +492,9 @@ rpmdbTraverse(db, ...)
       FREETMPS;
       LEAVE;
     }
-    headerFree(h);
     ++count;
   }
+  rpmdbFreeIterator(mi);
   RETVAL = count;
   OUTPUT:
   RETVAL
@@ -517,15 +509,18 @@ rpmdbNameTraverse(db, name, ...)
   Header h;
   rpmdbMatchIterator mi;
   rpmErrorCallBackType oldcb;
-  dbiIndexSet matches;
   CODE:
   if (items > 2) {
     callback = ST(2);
   }
   count = 0;
+  fprintf(stderr, "name traverse with %d items on name of length %d and value [%s]\n", items, strlen(name), name);
   mi = rpmdbInitIterator(db, RPMTAG_NAME, name, 0);
+  fprintf(stderr, "-- 1\n");
   oldcb = rpmErrorSetCallback(rpmError_callback_empty);
+  fprintf(stderr, "-- 2\n");
   while (h = rpmdbNextIterator(mi)) {
+  fprintf(stderr, "-- *\n");
     if (callback != &PL_sv_undef && SvROK(callback)) {
       dSP;
       ENTER;
@@ -537,10 +532,13 @@ rpmdbNameTraverse(db, name, ...)
       FREETMPS;
       LEAVE;
     }
-    headerFree(h);
     ++count;
   }
+  fprintf(stderr, "-- 3\n");
   rpmErrorSetCallback(oldcb);
+  fprintf(stderr, "-- 4\n");
+  rpmdbFreeIterator(mi);
+  fprintf(stderr, "-- 5\n");
   RETVAL = count;
   OUTPUT:
   RETVAL
@@ -568,6 +566,7 @@ rpmtransAddPackage(rpmdep, header, key, update)
   CODE:
   rpmTransactionSet r = rpmdep;
   RETVAL = rpmtransAddPackage(r, header, NULL, strdup(key), update, NULL) == 0;
+  /* rpminstall.c of rpm-4 call headerFree directly after, we can make the same ?*/
   OUTPUT:
   RETVAL
 
@@ -579,20 +578,19 @@ rpmtransRemovePackages(db, rpmdep, p)
   CODE:
   rpmdb d = db;
   rpmTransactionSet r = rpmdep;
-  dbiIndexSet matches;
-  int i;
+  Header h;
+  rpmdbMatchIterator mi;
   int count = 0;
-  if (!rpmdbFindByLabel(d, p, &matches)) {
-    for (i = 0; i < dbiIndexSetCount(matches); ++i) {
-      unsigned int recOffset = dbiIndexRecordOffset(matches, i);
-      if (recOffset) {
-        rpmtransRemovePackage(rpmdep, recOffset);
-        ++count;
-      }
+  mi = rpmdbInitIterator(db, RPMDBI_LABEL, p, 0);
+  while (h = rpmdbNextIterator(mi)) {
+    unsigned int recOffset = rpmdbGetIteratorOffset(mi);
+    if (recOffset) {
+      rpmtransRemovePackage(rpmdep, recOffset);
+      ++count;
     }
-    RETVAL=count;
-  } else
-    RETVAL=0;
+  }
+  rpmdbFreeIterator(mi);
+  RETVAL=count;
   OUTPUT:
   RETVAL
 
@@ -676,12 +674,6 @@ rpmtransSetScriptFd(trans, fd)
   void *trans
   int fd
   CODE:
-  /* this code core dumps on install...
-  static FD_t scriptFd = NULL;
-  if (scriptFd == NULL) scriptFd = fdNew("");
-  fdSetFdno(scriptFd, fd);
-  rpmtransSetScriptFd(trans, scriptFd);
-  */
   static FD_t scriptFd = NULL;
   if (scriptFd != NULL) fdClose(scriptFd);
   scriptFd = fdDup(fd);
@@ -697,8 +689,8 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   PPCODE:
   rpmProblemSet probs;
   void *rpmRunTransactions_callback(const Header h, const rpmCallbackType what, const unsigned long amount, const unsigned long total, const void * pkgKey, void * data) {
-      static FD_t fd;
       static int last_amount;
+      static FD_t fd = NULL;
       char *msg = NULL;
       char *param_s = NULL;
       const unsigned long *param_ul1 = NULL;
@@ -718,7 +710,8 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   	i = perl_call_sv(callbackOpen, G_SCALAR);
         SPAGAIN;
         if (i != 1) croak("Big trouble\n");
-        fd = fd2FD_t(POPi);
+        i = POPi; fd = fdDup(i); close(i);
+	fd = fdLink(fd, "persist DrakX");
   	PUTBACK;
         return fd;
       }
@@ -730,6 +723,11 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   	PUTBACK;
   	perl_call_sv(callbackClose, G_DISCARD);
         free(n); /* was strdup in rpmtransAddPackage */
+	fd = fdFree(fd, "persist DrakX");
+	if (fd) {
+	  fdClose(fd);
+	  fd = NULL;
+	}
   	break;
       }
 
@@ -823,21 +821,25 @@ rpmErrorSetCallback(fd)
   rpmErrorSetCallback(rpmError_callback);
 
 void *
-rpmReadPackageHeader(fd)
-  int fd
+rpmReadPackageHeader(fdno)
+  int fdno
   CODE:
   Header h;
   int isSource, major;
-  RETVAL = rpmReadPackageHeader(fd2FD_t(fd), &h, &isSource, &major, NULL) ? NULL : h;
+  FD_t fd = fdDup(fdno);
+  RETVAL = rpmReadPackageHeader(fd, &h, &isSource, &major, NULL) ? NULL : h;
+  fdClose(fd);
   OUTPUT:
   RETVAL
 
 void *
-headerRead(fd, magicp)
-  int fd
+headerRead(fdno, magicp)
+  int fdno
   int magicp
   CODE:
-  RETVAL = (void *) headerRead(fd2FD_t(fd), magicp);
+  FD_t fd = fdDup(fdno);
+  RETVAL = (void *) headerRead(fd, magicp);
+  fdClose(fd);
   OUTPUT:
   RETVAL
 
