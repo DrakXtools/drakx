@@ -316,11 +316,6 @@ sub setup_tooltips() {
 	);
 }
 
-sub set_help_tip {
-     my ($entry, $key) = @_;
-     gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help{$key}));
-}
-
 sub show_conf() {
     print "DrakBackup configuration:\n\n";
     read_conf_file();
@@ -415,6 +410,11 @@ if (check_for_xserver()) {
 	interactive_mode();
 } else {
 	die "Can't run in console mode...";
+}
+
+sub set_help_tip {
+     my ($entry, $key) = @_;
+     gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help{$key}));
 }
 
 sub all_user_list() {
