@@ -679,11 +679,11 @@ sub setupBootloaderBefore {
 
 	require bootloader;
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
+	my $aurora = pkgs::packageByName($o->{packages}, $::expert ? 'Aurora-Monitor-Traditional-WsLib' : 'Aurora-Monitor-NewStyle-WsLib');
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
-			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, $::expert ? 'Aurora-wsMonitor' : 'Aurora-mwsMonitor') || {}) && $vga);
-	if (arch() !~ /ppc/) {
-        bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
-    }
+			    $aurora && pkgs::packageFlagInstalled($aurora) && $vga);
+	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
+
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
