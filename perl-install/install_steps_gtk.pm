@@ -618,4 +618,48 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
     $install_result;
 }
 
+sub summary_prompt {
+    my ($o, $l, $check_complete) = @_;
+
+    my $w = ugtk2->new('');
+
+    my $set_entry_labels;
+    my @table;
+    my %group;
+    foreach my $e (@$l) {
+	$group{$e->{group}} ||= do {
+	    push @table, [ gtkpack__(Gtk2::HBox->new(0, 0), $e->{group}), '' ];
+	};
+	$e->{widget} = Gtk2::Label->new;
+	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 20), '', $e->{widget}), 
+			   gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub { 
+						 $w->{rwindow}->hide;
+						 $e->{clicked}(); 
+						 $w->{rwindow}->show;
+						 $set_entry_labels->();
+					     }) ];
+    }
+
+    $set_entry_labels = sub {
+	foreach (@$l) {
+	    my $t = $_->{val}() || '<span foreground="red">' . N("not configured") . '</span>';
+	    $_->{widget}->set_markup($_->{label} . ' - ' . $t);
+	}
+    };
+    $set_entry_labels->();
+
+    my $help_sub = $o->interactive_help_sub_display_id('summary');
+
+    gtkadd($w->{window},
+	   gtkpack_(Gtk2::VBox->new(0,5),
+		    1, create_packtable({ mcc => 1 }, @table),
+		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
+		  ));
+
+    while (1) {
+	$w->main;
+	last if $check_complete->();
+    }
+}
+
 1;
