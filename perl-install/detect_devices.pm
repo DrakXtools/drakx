@@ -28,7 +28,7 @@ sub get {
     #- 2. The first SCSI device if SCSI exists. Or
     #- 3. The first RAID device if RAID exists.
 
-    getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray();
+    getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
 sub hds() { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
 sub zips() { grep { $_->{media_type} =~ /.d/ && isZipDrive($_) } get(); }
@@ -191,9 +191,18 @@ sub getDAC960() {
     foreach (syslog()) {
 	my ($device, $info) = m|/dev/(rd/.*?): (.*?),| or next;
 	$idi{$device} = { info => $info, media_type => 'hd', device => $device };
-	log::l("DAC960: $device ($info)");
     }
     values %idi;
+}
+
+sub getATARAID {
+    my %l;
+    foreach (syslog()) {
+	my ($device) = m|^\s*(ataraid/d\d+):| or next;
+	$l{$device} = { info => 'ATARAID block device', media_type => 'hd', device => $device };
+	log::l("ATARAID: $device");
+    }
+    values %l;
 }
 
 sub getNet() {
