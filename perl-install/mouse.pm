@@ -473,7 +473,7 @@ sub test_mouse {
   	my ($t, $y) = @_;
   	my $font = $darea->style->font;
   	my $w = $font->string_width($t);
-  	$darea->window->draw_string($font, $darea->style->black_gc, ($width - $w) / 2, $y, $t);
+  	$darea->window->draw_string($font, $darea->style->black_gc, ($darea->allocation->[2]-$width)/2 + ($width - $w) / 2, ($darea->allocation->[3]-$height)/2 + $y, $t);
     };
     my $drawarea; $drawarea = sub { $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 								 $image, 0, 0,
