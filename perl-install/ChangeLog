@@ -1,3 +1,123 @@
+2003/01/31  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm, diskdrake/resize_ntfs.pm: create
+	diskdrake::resize_ntfs to factorize code
+
+	* install_interactive.pm: add ntfs resize to the wizard
+
+	* install_any.pm: fix typo
+
+	* install_gtk.pm: graphical layout change
+
+2003/01/30  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: fixed progress bar
+	too small.
+	new image for floppy for 9.1
+
+	* share/list: added pango-hebrew-xft.so for hebrew to be displayed
+	(chmouel)
+
+2003/01/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/tg.po: Added Tajiki file
+
+	* share/po/cy.po: converted Welsh file to UTF-8
+
+	* share/po/nl.po: updated Dutch file
+
+2003/01/30  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm: drop $o->{lnx4win} handling
+	add isFat_or_NTFS() and use it where possible instead of isFat() since
+	Windows
+	is now using ntfs, not only Windows NT
+
+	* install2.pm: drop $o->{lnx4win} handling
+
+	* mdk-stage1/Makefile: remove other.img & usb.img, add hd_usb.img &
+	network_gigabit_usb.img
+
+	* Xconfig/xfree.pm (merge_values): allow get_monitors to work when xfree3
+	is missing
+
+	* interactive.pm (helper_separator_tree_to_tree): this new function helps
+	transforming a
+	flag {list} to a tree, using {separator}
+
+	* interactive/newt.pm: perl_checker small fixes
+	basic treelist handling (it leaks memory, but who cares, compared to gtk
+	:)
+
+	* any.pm, bootloader.pm, install_steps_interactive.pm,
+	diskdrake/hd_gtk.pm, fsedit.pm, install_any.pm, partition_table.pm: add
+	isFat_or_NTFS() and use it where possible instead of isFat() since
+	Windows
+	is now using ntfs, not only Windows NT
+
+	* network/network.pm, network/ethernet.pm, install_steps_auto_install.pm,
+	network/netconnect.pm, modules.pm: adapt to new category network/gigabit
+	(which used to be in network/main)
+
+	* Newt/Newt.xs: basic treelist handling (it leaks memory, but who cares,
+	compared to gtk :)
+
+2003/01/30  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Conservation of option settings also for queues with PostScript PPD
+	files
+	or when switching between PostScript PPD file and Foomatic.
+	  - Fixed tree structure of main window in expert mode.
+	  - Several smaller bug fixes.
+	  - Display options devided in the groups defined in the PPD file.
+	  - For Foomatic PPDs the options in the "General" group are shown by
+	default
+	  the rest when clicking "Advanced". When there ar no groups, the
+	decision
+	  is done by a table of most commonly used option names.
+	  - Sort the displayed options of a queue with a non-Foomatic PPD file
+	by the
+	  importance of the options.
+	  - Do not sort the values of an option, they are already conveniently
+	sorted
+	  in the PPD files.
+	  - Removed some unnecessary re-reads of the printer option information.
+	  - Several fixes to run smoothly with Foomatic 2.9.x.
+
+	* printer/data.pm: 
+	  - Conservation of option settings also for queues with PostScript PPD
+	files
+	or when switching between PostScript PPD file and Foomatic.
+	  - Fixed tree structure of main window in expert mode.
+	  - Several smaller bug fixes.
+
+2003/01/30  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/harddrake2: translate topics (aka hw class names) in
+	harddrake gui
+
+	* drakxtools.spec: 9.1-0.19mdk
+
+	* harddrake/data.pm: translate topics (aka hw class names) in harddrake
+	gui
+	  - cosmetic fix for "drakconnect does not detect nvnet part of nvforce2
+	chips"
+	hint: their class is MEMORY_RAM :-( ...
+	  - btw, simplify unknown devices detection (merging tests regarding
+	driver and
+	  media type)
+	  - move nforce system controllers in bridge class (which is renamed
+	"bridges and
+	  system controllers" aka where we put stuff we've nothing to configure
+	but we
+	  don't want to put them in controller so that users are not afraid) but
+	nvnet
+
+	* standalone/logdrake: on second thoughts, this is just simpler
+	  - perl_checker fixes
+	  - fix non embedded case :-(
+
 2003/01/30  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive.pm (helper_separator_tree_to_tree): this new function helps
@@ -9222,7 +9342,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.773 2003/01/24 22:22:04 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.774 2003/01/30 01:32:42 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
