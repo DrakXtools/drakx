@@ -176,11 +176,13 @@ static void blocking_msg(char *type, char *fmt, va_list ap)
 
 void verror_message(char *msg, va_list ap)
 {
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	blocking_msg("> Error! ", msg, ap);
 }
 
 void vinfo_message(char *msg, va_list ap)
 {
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	blocking_msg("> Notice: ", msg, ap);
 }
 

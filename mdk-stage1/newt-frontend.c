@@ -59,11 +59,13 @@ void finish_frontend(void)
 
 void verror_message(char *msg, va_list ap)
 {
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	newtWinMessagev("Error", "Ok", msg, ap);
 }
 
 void vinfo_message(char *msg, va_list ap)
 {
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	newtWinMessagev("Notice", "Ok", msg, ap);
 }
 
