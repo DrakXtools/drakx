@@ -152,24 +152,56 @@ sub keepOnlyLegalModes {
 }
 
 sub cardConfigurationAuto() {
-    my $card;
-    if (my ($c) = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall()) {
-	local $_ = $c->{driver};
-	$card->{type} = $1 if /Card:(.*)/;
-	$card->{server} = $1 if /Server:(.*)/;
-	$card->{flags}{needVideoRam} &&= /86c368/;
-	$card->{identifier} = $c->{description};
-	push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
+    my @cards;
+    if (my @c = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall(1)) {
+	foreach my $i (0..$#c) {
+	    local $_ = $c[$i]->{driver};
+	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
+	    $card->{type} = $1 if /Card:(.*)/;
+	    $card->{server} = $1 if /Server:(.*)/;
+	    $card->{flags}{needVideoRam} &&= /86c368/;
+	    $card->{busid} = "PCI:$c[$i]{pci_bus}:$c[$i]{pci_device}:$c[$i]{pci_function}";
+	    push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
+	    push @cards, $card;
+	}
     }
     #- take a default on sparc if nothing has been found.
-    if (arch() =~ /^sparc/ && !$card->{server} && !$card->{type}) {
+    if (arch() =~ /^sparc/ && !@cards) {
         log::l("Using probe with /proc/fb as nothing has been found!");
 	local $_ = cat_("/proc/fb");
-	if (/Mach64/) { $card->{server} = "Mach64" }
-	elsif (/Permedia2/) { $card->{server} = "3DLabs" }
-	else { $card->{server} = "Sun24" }
+	if (/Mach64/) { push @cards, { server => "Mach64" } }
+	elsif (/Permedia2/) { push @cards, { server => "3DLabs" } }
+	else { push @cards, { server => "Sun24" } }
     }
-    $card;
+    #- special case for dual head card using only one busid.
+    @cards = map { my $dup = $_->{identifier} =~ /MGA G450/ ? 2 : 1;
+		   if ($dup > 1) {
+		       my @result;
+		       my $orig = $_;
+		       foreach (1..$dup) {
+			   my $card = {};
+			   add2hash($card, $orig);
+			   push @result, $card;
+		       }
+		       @result;
+		   } else {
+		       ($_);
+		   }
+	       } @cards;
+    #- make sure no type are already used, duplicate both screen
+    #- and rename type (because used as id).
+    if (@cards > 1) {
+	my $screen = 0;
+	foreach (@cards) {
+	    updateCardAccordingName($_, $_->{type}) if $_->{type};
+	    $_->{screen} = $screen++;
+	    $_->{type} = "$_->{type} $screen";
+	}
+    }
+    #- in case of only one cards, remove all busid reference, this will avoid
+    #- need of change of it if the card is moved.
+    @cards == 1 and delete $cards[0]{busid};
+    @cards;
 }
 
 sub cardConfiguration(;$$$) {
@@ -178,7 +210,40 @@ sub cardConfiguration(;$$$) {
 
     updateCardAccordingName($card, $card->{type}) if $card->{type}; #- try to get info from given type
     undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
-    add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
+    my @cards = cardConfigurationAuto();
+    if (@cards > 1 && ($noauto || !$card->{server})) {#} && !$::isEmbedded) {
+	my (%single_heads, @choices, $tc);
+	my $configure_multi_head = sub {
+	    add2hash($card, $cards[0]); #- assume good default.
+	    delete $card->{cards} if $noauto;
+	    $card->{cards} or $card->{cards} = \@cards;
+	    $card->{force_xf4} = 1; #- force XF4 in such case.
+	    $card->{Xinerama} = $_[0];
+	};
+	foreach (@cards) {
+	    unless ($_->{driver} && !$_->{flags}{unsupported}) {
+		log::l("found card \"$_->{identifier}\" not supported by XF4, disabling mutli-head support");
+		$configure_multi_head = undef;
+	    }
+	    $single_heads{$_->{busid}} = $_;
+	}
+	if ($configure_multi_head) {
+	    push @choices, { text => _("Configure all heads independantly"), code => sub { $configure_multi_head->('') } };
+	    push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
+	}
+	foreach (values %single_heads) {
+	    push @choices, { text => _("Configure only card \"%s\" (%s)", $_->{identifier}, $_->{busid}),
+			     code => sub { add2hash($card, $_); delete $card->{cards}; delete $card->{Xinerama} } };
+	}
+	$tc = $in->ask_from_listf(_("Multi-head configuration"),
+_("Your system support multiple head configuration.
+What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return; #- no more die, CHECK with auto that return ''!
+	$tc->{code} and $tc->{code}();
+    } else {
+	#- only one head found, configure it as before.
+	add2hash($card, $cards[0]) unless $card->{server} || $noauto;
+	delete $card->{cards}; delete $card->{Xinerama};
+    }
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
     $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
     undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
@@ -186,11 +251,13 @@ sub cardConfiguration(;$$$) {
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $card->{memory} = 4096,  delete $card->{depth} if $card->{driver} eq 'i810';
-    $card->{memory} = 16384, delete $card->{depth} if $card->{chipset} =~ /PERMEDIA/ && $card->{memory} <= 1024;
+    foreach ($card, @{$card->{cards}}) {
+	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
+	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
+    }
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
-    $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
+    $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24][05]0/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /Riva.*128/ ||
 			 $card->{identifier} =~ /Rage X[CL]/ ||
 			 $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
@@ -205,7 +272,7 @@ sub cardConfiguration(;$$$) {
 				      $card->{type} =~ /SiS/);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
-			$card->{identifier} =~ /Matrox.* G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
+			$card->{identifier} =~ /Matrox.* G[24][05]0/ || #- prefer 16bit (24bit not well tested according to DRI)
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			#$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
@@ -217,25 +284,27 @@ sub cardConfiguration(;$$$) {
 
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
-    $card->{prefer_xf3} = ($card->{type} =~ /RIVA TNT/ ||
-			   $card->{type} =~ /RIVA128/ ||
-			   $card->{type} =~ /GeForce/ ||
-			   $card->{type} =~ /NeoMagic /);
+    $card->{force_xf4} = arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
+    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /RIVA TNT/ ||
+						  $card->{type} =~ /RIVA128/ ||
+						  $card->{type} =~ /GeForce/ ||
+						  $card->{type} =~ /NeoMagic /);
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
     if ($::isStandalone) {
 	readlink("$prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
-	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = 1;
+	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
     }
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
-    my ($xf4_ver, $xf3_ver) = ("4.0.2", "3.3.6");
+    my ($xf4_ver, $xf3_ver) = ("4.0.3", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
-				      if_(!$card->{prefer_xf3} || $::expert, 
+				      #- hack for Matrox driver where there are undefined reference if no DRI!
+				      if_($card->{identifier} !~ /Matrox.* G[24][05]0/ && (!$card->{prefer_xf3} || $::expert), 
 					  { text => _("XFree %s", $xf4_ver),
 					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
@@ -293,10 +362,6 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
     
-    #- ugly hack - force 4.0.x for PPC in recommended mode
-    if (!$::expert && arch() =~ /ppc/) {
-		$card->{use_xf4} = 1;
-	}
 	
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
@@ -325,12 +390,9 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     $card->{options_xf4}{DPMS} = 1;
 
     $card->{flags}{needVideoRam} and
-      $card->{memory} ||=
-	$videomemory{$in->ask_from_list_('',
-					 _("Select the memory size of your graphic card"),
-					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
-					   keys %videomemory]) || return};
-
+      $card->{memory} ||= $videomemory{$in->ask_from_list_('', _("Select the memory size of your graphic card"),
+							   [ sort { $videomemory{$a} <=> $videomemory{$b} }
+							     keys %videomemory]) || return};
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
     if ($card->{identifier} =~ /Rage X[CL]/ ||
@@ -382,7 +444,10 @@ sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
     my $useFB = shift || 0;
 
-    $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
+    if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
+	add2hash($monitor, { type => "monitor1", vendor => "Unknown", model => "Unknown" });
+	return $monitor;
+    }
 
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
@@ -900,6 +965,7 @@ EndSection
 Section "DRI"
     Mode	0666
 EndSection
+
 ) if $o->{card}{DRI_glx};
 
     #- Write monitor section.
@@ -924,47 +990,43 @@ EndSection
     print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
+    foreach (2..@{$o->{card}{cards} || []}) {
+	print G qq(Section "Monitor"\n);
+	print G qq(    Identifier "monitor$_"\n);
+	print G qq(    VendorName "$O->{vendor}"\n);
+	print G qq(    ModelName  "$O->{model}"\n\n);
+	print G qq(    HorizSync   $O->{hsyncrange}\n);
+	print G qq(    VertRefresh $O->{vsyncrange}\n);
+	print G qq(EndSection\n\n\n);
+    }
 
     #- Write Device section.
     $O = $o->{card};
     print F $devicesection_text;
     print G $devicesection_text_v4;
     print F qq(Section "Device"\n);
-    print G qq(Section "Device"\n);
     print F qq(    Identifier  "$O->{type}"\n);
-    print G qq(    Identifier  "$O->{type}"\n);
     print F qq(    VendorName  "$O->{vendor}"\n);
-    print G qq(    VendorName  "$O->{vendor}"\n);
     print F qq(    BoardName   "$O->{board}"\n);
-    print G qq(    BoardName   "$O->{board}"\n);
 
     print F "#" if $O->{chipset} && !$O->{flags}{needChipset};
     print F qq(    Chipset     "$O->{chipset}"\n) if $O->{chipset};
-    print G qq(    Driver      "$O->{driver}"\n);
 
     print F "#" if $O->{memory} && !$O->{flags}{needVideoRam};
-    print G "#" if $O->{memory} && !$O->{flags}{needVideoRam};
     print F "    VideoRam    $O->{memory}\n" if $O->{memory};
-    print G "    VideoRam    $O->{memory}\n" if $O->{memory};
 
     print F map { "    $_\n" } @{$O->{lines} || []};
-    print G map { "    $_\n" } @{$O->{lines} || []};
 
     print F qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
-    print G qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
     print F qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
-    print G qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
 
     if ($O->{clockchip}) {
 	print F qq(    Clockchip   "$O->{clockchip}"\n);
-	print G qq(    Clockchip   "$O->{clockchip}"\n);
     } else {
 	print F "    # Clock lines\n";
-	print G "    # Clock lines\n";
 	print F "    Clocks $_\n" foreach (@{$O->{clocklines}});
-	print G "    Clocks $_\n" foreach (@{$O->{clocklines}});
     }
-    do { print F; print G } for qq(
+    print F qq(
 
     # Uncomment following option if you see a big white block        
     # instead of the cursor!                                          
@@ -977,10 +1039,39 @@ EndSection
     };
     print F $p->('options');
     print F $p->('options_xf3');
-    print G $p->('options');
-    print G $p->('options_xf4');
     print F "EndSection\n\n\n";
-    print G "EndSection\n\n\n";
+
+    #- configure all drivers here!
+    foreach (@{$O->{cards} || [ $O ]}) {
+	print G qq(Section "Device"\n);
+	print G qq(    Identifier  "$_->{type}"\n);
+	print G qq(    VendorName  "$_->{vendor}"\n);
+	print G qq(    BoardName   "$_->{board}"\n);
+	print G qq(    Driver      "$_->{driver}"\n);
+	print G "#" if $_->{memory} && !$_->{flags}{needVideoRam};
+	print G "    VideoRam    $_->{memory}\n" if $_->{memory};
+	print G map { "    $_\n" } @{$_->{lines} || []};
+	print G qq(    Ramdac      "$_->{ramdac}"\n) if $_->{ramdac};
+	print G qq(    Dacspeed    "$_->{dacspeed}"\n) if $_->{dacspeed};
+	if ($_->{clockchip}) {
+	    print G qq(    Clockchip   "$_->{clockchip}"\n);
+	} else {
+	    print G "    # Clock lines\n";
+	    print G "    Clocks $_\n" foreach (@{$_->{clocklines}});
+	}
+	print G qq(
+
+    # Uncomment following option if you see a big white block        
+    # instead of the cursor!                                          
+    #    Option      "sw_cursor"
+
+);
+	print G $p->('options'); #- keep $O for these!
+	print G $p->('options_xf4'); #- keep $O for these!
+	print G qq(    Screen $_->{screen}\n) if defined $_->{screen};
+	print G qq(    BusID       "$_->{busid}"\n) if $_->{busid};
+	print G "EndSection\n\n\n";
+    }
 
     #- Write Screen sections.
     print F $screensection_text1, "\n";
@@ -1035,7 +1126,6 @@ Section "Screen"
 
     &$screen("fbdev", $o->{default_depth}, $O->{type}, $O->{depth});
 
-
     print G qq(
 Section "Screen"
     Identifier "screen1"
@@ -1044,12 +1134,32 @@ Section "Screen"
 );
     #- bpp 32 not handled by XF4
     $subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
+    foreach (2..@{$O->{cards} || []}) {
+	my $device = $O->{cards}[$_ - 1]{type};
+	print G qq(
+Section "Screen"
+    Identifier "screen$_"
+    Device      "$device"
+    Monitor     "monitor$_"
+);
+	#- bpp 32 not handled by XF4
+	$subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
+    }
 
-    print G '
+    print G qq(
 
 Section "ServerLayout"
     Identifier "layout1"
     Screen     "screen1"
+);
+    foreach (2..@{$O->{cards} || []}) {
+	my ($curr, $prev) = ($_, $_ - 1);
+	print G qq(    Screen     "screen$curr" RightOf "screen$prev"\n);
+    }
+    print G '#' if defined $O->{Xinerama} && !$O->{Xinerama};
+    print G qq(    Option     "Xinerama" "on"\n) if defined $O->{Xinerama};
+
+    print G '
     InputDevice "Mouse1" "CorePointer"
 ';
     print G '
