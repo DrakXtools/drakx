@@ -436,7 +436,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
     run_program::rooted($o->{prefix}, "chkconfig", "--add", $_) foreach
-			qw(random netfs network rawdevices sound kheader usb keytable syslog crond portmap);
+			qw(random netfs network rawdevices sound kheader keytable syslog crond portmap);
 
     if ($o->{mouse}{device} =~ /ttyS/) {
 	log::l("disabling gpm for serial mice (doesn't get along nicely with X)");
