@@ -582,7 +582,7 @@ sub main {
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
-    if (!$::move && !$::testing) {
+    if (!$::move && !$::testing && !$o->{meta_class}) {
 	my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
 	$o->{meta_class} = 'desktop' if $VERSION =~ /desktop|discovery/i;
 	$o->{meta_class} = 'download' if $VERSION =~ /download/i;
