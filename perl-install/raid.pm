@@ -109,8 +109,8 @@ sub write {
 
     output($file,
 	   map {
-	       my $s = sprintf(<<EOF, $_->{device}, $_->{level}, $_->{'chunk-size'}, int @{$_->{disks}});
-raiddev       /dev/%s
+	       my $s = sprintf(<<EOF, devices::make($_->{device}), $_->{level}, $_->{'chunk-size'}, int @{$_->{disks}});
+raiddev       %s
 raid-level    %s
 chunk-size    %s
 persistent-superblock 1
