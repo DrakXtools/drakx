@@ -1,3 +1,5 @@
+# KTranslator Generated File
+# KTranslator Generated File
 # Translation file of Mandrake graphic install
 # Copyright (C) 1999 Mandrakesoft
 # Terje Bjerkelia <terje@bjerkelia.com>, 1999-2000
@@ -8,7 +10,7 @@ msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "POT-Creation-Date: 2001-07-24 16:06+0200\n"
 "PO-Revision-Date: 2001-03-13 13:19CET\n"
-"Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
+"Last-Translator: Andreas Bergstrøm <abergstr@halden.net>\n"
 "Language-Team: Norsk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -418,20 +420,20 @@ msgstr "4 MB"
 msgid "8 MB"
 msgstr "8 MB"
 
+#
 #: ../../Xconfigurator_consts.pm_.c:113
-#, fuzzy
 msgid "16 MB"
-msgstr "1 MB"
+msgstr "16 MB"
 
+#
 #: ../../Xconfigurator_consts.pm_.c:114
-#, fuzzy
 msgid "32 MB"
-msgstr "2 MB"
+msgstr "32 MB"
 
+#
 #: ../../Xconfigurator_consts.pm_.c:115
-#, fuzzy
 msgid "64 MB or more"
-msgstr "16 MB eller mer"
+msgstr "64 MB eller mer"
 
 #: ../../Xconfigurator_consts.pm_.c:123
 msgid "Standard VGA, 640x480 at 60 Hz"
@@ -1151,10 +1153,10 @@ msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
 msgid "System mode"
 msgstr "Systemmodus"
 
+#
 #: ../../bootlook.pm_.c:227
-#, fuzzy
 msgid "Default Runlevel"
-msgstr "Standard"
+msgstr "Standard runlevel"
 
 #: ../../bootlook.pm_.c:235 ../../standalone/draknet_.c:88
 #: ../../standalone/draknet_.c:120 ../../standalone/draknet_.c:184
@@ -1892,7 +1894,7 @@ msgstr "Jeg vet ikke hvordan formatere %s i type %s"
 #: ../../fs.pm_.c:232
 #, c-format
 msgid "fsck failed with exit code %d or signal %d"
-msgstr ""
+msgstr "fsck avsluttet med feilkode %d eller signal %d"
 
 #: ../../fs.pm_.c:237
 msgid "mount failed: "
@@ -3411,6 +3413,13 @@ msgid ""
 "to\n"
 "choose \"Local files\" for authentication."
 msgstr ""
+" Hvis ditt nettverk bruker LDAP (eller NIS) protokollen for autentisering, "
+"velg\n"
+"\"LDAP\" (eller \"NIS\") for autentisering. Hvis du ikke vet, spør din "
+"nettverksadministrator.\n"
+"\n"
+"Hvis din datamaskin ikke er knyttet til noe administrert nettver, kan du\n"
+"velge \"Lokale filer\" for autentisering."
 
 #: ../../help.pm_.c:617
 msgid ""
@@ -4114,10 +4123,10 @@ msgstr ""
 "\n"
 "Fortsette likevel?"
 
+#
 #: ../../install_interactive.pm_.c:50 ../../install_steps.pm_.c:160
-#, fuzzy
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "Du må ha en vekslingspartisjon"
+msgstr "Du må ha en FAT-parisjonen montert under /boot/efi"
 
 #: ../../install_interactive.pm_.c:72
 msgid "Use free space"
@@ -4527,15 +4536,15 @@ msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 msgid "Show automatically selected packages"
 msgstr "Vis automatisk valgte pakker"
 
+#
 #: ../../install_steps_gtk.pm_.c:445
-#, fuzzy
 msgid "Load/Save on floppy"
-msgstr "Lagre på diskett"
+msgstr "Lagre på/hente fra diskett"
 
+#
 #: ../../install_steps_gtk.pm_.c:446
-#, fuzzy
 msgid "Updating package selection"
-msgstr "Lagre pakkevalg"
+msgstr "Oppdaterer pakkevalg"
 
 #: ../../install_steps_gtk.pm_.c:477
 msgid "Estimating"
@@ -5022,11 +5031,13 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
+"Det er ikke plass for 1 MB bootstrap! Installasjonen vil fortsette, but for "
+"åboote systemet ditt, må du lage en bootstrap partisjon i DiskDrake"
 
+#
 #: ../../install_steps_interactive.pm_.c:362
-#, fuzzy
 msgid "No root partition found to perform an upgrade"
-msgstr "Velg partisjonene du ønsker å partisjonere"
+msgstr "Ingen rotpartisjon funnet for oppgradering"
 
 #: ../../install_steps_interactive.pm_.c:363
 msgid "Root Partition"
@@ -5103,26 +5114,28 @@ msgid ""
 "Please choose load or save package selection on floppy.\n"
 "The format is the same as auto_install generated floppies."
 msgstr ""
+"Vennligst velg lagre eller hente pakkevalg på diskett.\n"
+"Formatet er det samme som for auto_install genererte disketter."
 
+#
 #: ../../install_steps_interactive.pm_.c:538
-#, fuzzy
 msgid "Load from floppy"
-msgstr "Gjenopprett fra diskett"
+msgstr "Hent fra diskett"
 
+#
 #: ../../install_steps_interactive.pm_.c:540
-#, fuzzy
 msgid "Loading from floppy"
-msgstr "Gjenopprett fra diskett"
+msgstr "Henter fra disketten"
 
+#
 #: ../../install_steps_interactive.pm_.c:540
-#, fuzzy
 msgid "Package selection"
-msgstr "Valg pakkegruppe"
+msgstr "Pakkevalg"
 
+#
 #: ../../install_steps_interactive.pm_.c:545
-#, fuzzy
 msgid "Insert a floppy containing package selection"
-msgstr "Sett inn en diskett i stasjon %s"
+msgstr "Sett inn en diskett med pakkevalget"
 
 #: ../../install_steps_interactive.pm_.c:618
 msgid "Selected size is larger than available space"
@@ -5246,19 +5259,19 @@ msgstr "Vennligst velg pakkene du ønsker å installere."
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
+#
 #: ../../install_steps_interactive.pm_.c:814
-#, fuzzy
 msgid "Hardware clock set to GMT"
-msgstr "Er maskinvareklokken din satt til GMT?"
+msgstr "Maskinvareklokken din satt til GMT"
 
 #: ../../install_steps_interactive.pm_.c:815
 msgid "Automatic time synchronization (using NTP)"
-msgstr ""
+msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
+#
 #: ../../install_steps_interactive.pm_.c:822
-#, fuzzy
 msgid "NTP Server"
-msgstr "NIS-tjener"
+msgstr "NTP-tjener"
 
 #: ../../install_steps_interactive.pm_.c:856 ../../printer.pm_.c:22
 #: ../../printerdrake.pm_.c:415
@@ -5301,20 +5314,20 @@ msgstr "Hvilket utskriftsystem ønsker du å bruke?"
 #: ../../install_steps_interactive.pm_.c:958
 #: ../../install_steps_interactive.pm_.c:962
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
+#
 #: ../../install_steps_interactive.pm_.c:935
 #: ../../install_steps_interactive.pm_.c:958
 #: ../../install_steps_interactive.pm_.c:971
-#, fuzzy
 msgid "NIS"
-msgstr "Bruk NIS"
+msgstr "NIS"
 
+#
 #: ../../install_steps_interactive.pm_.c:936
 #: ../../install_steps_interactive.pm_.c:958
-#, fuzzy
 msgid "Local files"
-msgstr "Lokal skriver"
+msgstr "Lokale filer"
 
 #: ../../install_steps_interactive.pm_.c:947
 msgid "No password"
@@ -5330,24 +5343,24 @@ msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
+#
 #: ../../install_steps_interactive.pm_.c:966
-#, fuzzy
 msgid "Authentication LDAP"
-msgstr "Autentifikasjon"
+msgstr "Autentisering LDAP"
 
 #: ../../install_steps_interactive.pm_.c:967
 msgid "LDAP Base dn"
-msgstr ""
+msgstr "LDAP grunnleggende dn"
 
+#
 #: ../../install_steps_interactive.pm_.c:968
-#, fuzzy
 msgid "LDAP Server"
-msgstr "Tjener"
+msgstr "LDAP-tjener"
 
+#
 #: ../../install_steps_interactive.pm_.c:974
-#, fuzzy
 msgid "Authentication NIS"
-msgstr "Autentifikasjon NIS"
+msgstr "Autentisering NIS"
 
 #: ../../install_steps_interactive.pm_.c:975
 msgid "NIS Domain"
@@ -5453,6 +5466,10 @@ msgid ""
 "The install will continue, but you'll\n"
 " need to use BootX to boot your machine"
 msgstr ""
+"Det virker som du har en OldWorld eller ukjent\n"
+"maskin, yaboot oppstartslasteren vil ikke virke for deg.\n"
+"Installasjonen vil fortsette, men du må\n"
+"bruke BootX for å starte din maskin."
 
 #: ../../install_steps_interactive.pm_.c:1078
 msgid "Do you want to use aboot?"
@@ -5683,10 +5700,10 @@ msgstr "UK-tastatur"
 msgid "US keyboard"
 msgstr "US-tastatur"
 
+#
 #: ../../keyboard.pm_.c:143
-#, fuzzy
 msgid "Albanian"
-msgstr "Iransk"
+msgstr "Albansk"
 
 #: ../../keyboard.pm_.c:144
 msgid "Armenian (old)"
@@ -5852,15 +5869,15 @@ msgstr "Portugisisk"
 msgid "Canadian (Quebec)"
 msgstr "Canadisk (Quebec)"
 
+#
 #: ../../keyboard.pm_.c:196
-#, fuzzy
 msgid "Romanian (qwertz)"
-msgstr "Russisk (Yawerty)"
+msgstr "Romansk (qwertz)"
 
+#
 #: ../../keyboard.pm_.c:197
-#, fuzzy
 msgid "Romanian (qwerty)"
-msgstr "Russisk (Yawerty)"
+msgstr "Romansk (qwerty)"
 
 #: ../../keyboard.pm_.c:199
 msgid "Russian (Yawerty)"
@@ -6211,16 +6228,27 @@ msgid ""
 "We recommand the light configuration.\n"
 "\n"
 msgstr ""
+"Hvilken ISDN konfigurering foretrekker du?\n"
+"\n"
+"* Den gamle konfigurasjoen bruker isdn4net. Det har kraftfulle verktøy, den "
+"det er vanskelig å konfigurere for en nybegynner, og er ikke "
+"standardbasert.\n"
+"\n"
+"' Det nye konfigurasjonsverktøyet er enklere å forstå, mer standardisert, "
+"men med færre verktøy.\n"
+"\n"
+"Vi anbefaler den nye konfigurasjonen.\n"
+"\n"
 
+#
 #: ../../network/isdn.pm_.c:52
-#, fuzzy
 msgid "New configuration (isdn-light)"
-msgstr "Brannmurkonfigurasjon oppdaget!"
+msgstr "Ny konfigurasjon (isdn-light)"
 
+#
 #: ../../network/isdn.pm_.c:52
-#, fuzzy
 msgid "Old configuration (isdn4net)"
-msgstr "Brannmurkonfigurasjon oppdaget!"
+msgstr "Gamle konfigurasjonen (isdn4net)"
 
 #: ../../network/isdn.pm_.c:155 ../../network/isdn.pm_.c:172
 #: ../../network/isdn.pm_.c:182 ../../network/isdn.pm_.c:189
@@ -6472,10 +6500,10 @@ msgstr "oppdaget på grensesnitt %s"
 msgid "Cable connection"
 msgstr "Kabeltilkobling"
 
+#
 #: ../../network/netconnect.pm_.c:153
-#, fuzzy
 msgid "cable connection detected"
-msgstr "Kabeltilkobling"
+msgstr "Kabeltilkobling detektert"
 
 #: ../../network/netconnect.pm_.c:154
 msgid "LAN connection"
@@ -6485,10 +6513,10 @@ msgstr "Lokalt nettverksoppkobling"
 msgid "ethernet card(s) detected"
 msgstr "oppdaget ethernettkort"
 
+#
 #: ../../network/netconnect.pm_.c:159
-#, fuzzy
 msgid "Choose"
-msgstr "Lukk"
+msgstr "Velg"
 
 #: ../../network/netconnect.pm_.c:177
 msgid ""
@@ -7142,11 +7170,11 @@ msgstr "Spolingskatalog"
 msgid "Printer Connection"
 msgstr "Skrivertilkobling"
 
+#
 #: ../../proxy.pm_.c:29 ../../proxy.pm_.c:37 ../../proxy.pm_.c:58
 #: ../../proxy.pm_.c:78
-#, fuzzy
 msgid "Proxy configuration"
-msgstr "Konfigurasjon proxy"
+msgstr "Proxy-konfigurasjon"
 
 #: ../../proxy.pm_.c:30
 msgid ""
@@ -7155,68 +7183,78 @@ msgid ""
 "Here, you'll be able to set up your http and ftp proxies\n"
 "with or without login and password\n"
 msgstr ""
+"Velkommen til proxy-konfigurasjonsverktøyet.\n"
+"\n"
+"Her kan du sette opp dine http og ftp proxier\n"
+"med eller uten brukernavn og passord\n"
 
 #: ../../proxy.pm_.c:38
 msgid ""
 "Please fill in the http proxy informations\n"
 "Leave it blank if you don't want an http proxy"
 msgstr ""
+"Vennligst fill ut med http proxy informasjon\n"
+"La feltet være hvis du ikke ønsker en http proxy"
 
 #: ../../proxy.pm_.c:39 ../../proxy.pm_.c:60
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
+#
 #: ../../proxy.pm_.c:40 ../../proxy.pm_.c:61
-#, fuzzy
 msgid "port"
-msgstr "Port"
+msgstr "port"
 
+#
 #: ../../proxy.pm_.c:44
-#, fuzzy
 msgid "Url should begin with 'http:'"
-msgstr "Proxy burde være http://..."
+msgstr "URLen bør begynne med \"http:\""
 
+#
 #: ../../proxy.pm_.c:48 ../../proxy.pm_.c:69
-#, fuzzy
 msgid "The port part should be numeric"
-msgstr "Portnummer burde være mumerisk"
+msgstr "Portnummer burde være numerisk"
 
 #: ../../proxy.pm_.c:59
 msgid ""
 "Please fill in the ftp proxy informations\n"
 "Leave it blank if you don't want an ftp proxy"
 msgstr ""
+"Vennligst fyll ut ftp-proxy informasjonen-nLa feltet være hvis du ikke "
+"ønsker en ftp-proxy"
 
+#
 #: ../../proxy.pm_.c:65
-#, fuzzy
 msgid "Url should begin with 'ftp:'"
-msgstr "Proxy burde være ftp://..."
+msgstr "URLen bør begynne med \"ftp:\""
 
 #: ../../proxy.pm_.c:79
 msgid ""
 "Please enter proxy login and password, if any.\n"
 "Leave it blank if you don't want login/passwd"
 msgstr ""
+"Vennligst skriv inn proxy brukernavn og passord, hvis det eksisterer.\n"
+"La det være hvis du ikke ønsker brukernavn/passord"
 
+#
 #: ../../proxy.pm_.c:80
-#, fuzzy
 msgid "login"
-msgstr "Autoinnlogg"
+msgstr "brukernavn"
 
+#
 #: ../../proxy.pm_.c:81
-#, fuzzy
 msgid "password"
-msgstr "Passord"
+msgstr "passord"
 
+#
 #: ../../proxy.pm_.c:82
-#, fuzzy
 msgid "re-type password"
-msgstr "Intet passord"
+msgstr "skriv inn passord på nytt"
 
+#
 #: ../../proxy.pm_.c:86
-#, fuzzy
 msgid "The passwords don't match. Try again!"
-msgstr "Passordene stemmer ikke overens"
+msgstr "Passordene stemmer ikke overens. Prøv igjen!"
 
 #: ../../raid.pm_.c:33
 #, c-format
@@ -8069,8 +8107,8 @@ msgstr "ingen serie_usb funnet\n"
 msgid "Emulate third button?"
 msgstr "Emulere tredje knapp?"
 
+#
 #: ../../standalone/mousedrake_.c:131
-#, fuzzy
 msgid "Test the mouse here."
 msgstr "Vennligst test musen."
 
