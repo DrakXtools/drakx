@@ -52,7 +52,7 @@ sub set_loop {
     my $dev = find_free_loop();
 
     if ($o_encrypt_key && $o_encryption) {
-	eval { modules::load('cryptoloop', 'aes') };
+	eval { modules::load('cryptoloop', 'aes-i586') };
 	my $cmd = "losetup -p 0 -e $o_encryption $dev $file";
 	log::l("calling $cmd");
 	open(my $F, "|$cmd");
