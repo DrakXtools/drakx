@@ -267,8 +267,8 @@ sub dd {
 	$h{$1} = $2;
     }
     local (*IF, *OF); my ($tmp, $nb, $read);
-    ref $h{if} eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: can't open file $h{if}\n";
-    ref $h{of} eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
+    ref($h{if}) eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: can't open file $h{if}\n";
+    ref($h{of}) eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
 
     $h{bs} = removeXiBSuffix($h{bs});
 

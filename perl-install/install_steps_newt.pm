@@ -32,7 +32,7 @@ sub new {
 #-PO This string must fit in a 80-char wide text screen
     Newt::PushHelpLine(N("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
 
-    (bless {}, ref $type || $type)->SUPER::new($o);
+    (bless {}, ref($type) || $type)->SUPER::new($o);
 }
 
 sub enteringStep {

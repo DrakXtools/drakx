@@ -137,7 +137,7 @@ sub selectInstallClass {
 	my $p = $o->ask_from_listf(N("Install/Upgrade"),
 				   N("Is this an install or an upgrade?"),
 				   sub {
-				       ref $_[0] ? (@l > 1 ? 
+				       ref($_[0]) ? (@l > 1 ? 
 						     N("Upgrade %s", $_[0]{release}) : 
 						     N("Upgrade")) : 
 						    translate($_[0]);

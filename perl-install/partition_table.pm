@@ -783,7 +783,7 @@ sub load {
     }
     $@ and die N("Restoring from file %s failed: %s", $file, $@);
 
-    ref $h eq 'ARRAY' or die N("Bad backup file");
+    ref($h) eq 'ARRAY' or die N("Bad backup file");
 
     my %h; @h{@fields2save} = @$h;
 

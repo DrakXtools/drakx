@@ -80,7 +80,7 @@ use common;
 sub new($) {
     my ($type) = @_;
 
-    bless {}, ref $type || $type;
+    bless {}, ref($type) || $type;
 }
 
 sub vnew {
@@ -311,7 +311,7 @@ sub ask_from_normalize {
 	    $e->{type} ||= 'combo';
 
 	    if (!$e->{not_edit}) {
-		die q(when using "not_edit" you must use strings, not a data structure) if ref ${$e->{val}} || any { ref $_ } @$li;
+		die q(when using "not_edit" you must use strings, not a data structure) if ref(${$e->{val}}) || any { ref $_ } @$li;
 	    }
 	    if ($e->{type} ne 'combo' || $e->{not_edit}) {
 		${$e->{val}} = $li->[0] if !member(may_apply($e->{format}, ${$e->{val}}), map { may_apply($e->{format}, $_) } @$li);

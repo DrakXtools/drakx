@@ -28,7 +28,7 @@ sub load {
     #- keeping the order of modules
     my %options;
     my @l = map {
-	my ($name, @options) = ref $_ ? @$_ : $_;
+	my ($name, @options) = ref($_) ? @$_ : $_;
 	$options{$name} = \@options;
 	dependencies_closure($name);
     } @_;

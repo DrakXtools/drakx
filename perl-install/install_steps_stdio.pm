@@ -14,7 +14,7 @@ use lang;
 sub new($$) {
     my ($type, $o) = @_;
 
-    (bless {}, ref $type || $type)->SUPER::new($o);
+    (bless {}, ref($type) || $type)->SUPER::new($o);
 }
 
 sub enteringStep {

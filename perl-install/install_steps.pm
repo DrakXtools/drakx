@@ -36,7 +36,7 @@ use fs;
 sub new($$) {
     my ($type, $o) = @_;
 
-    bless $o, ref $type || $type;
+    bless $o, ref($type) || $type;
     return $o;
 }
 
@@ -63,7 +63,7 @@ sub leavingStep {
 
 	my $reachable = 1;
 	if (my $needs = $o->{steps}{$s}{needs}) {
-	    my @l = ref $needs ? @$needs : $needs;
+	    my @l = ref($needs) ? @$needs : $needs;
 	    $reachable = min(map { $o->{steps}{$_}{done} || 0 } @l);
 	}
 	$o->{steps}{$s}{reachable} = 1 if $reachable;

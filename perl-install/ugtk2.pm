@@ -285,7 +285,7 @@ sub create_scrolled_window {
     my $w = Gtk2::ScrolledWindow->new(undef, undef);
     $policy ||= [ 'automatic', 'automatic' ];
     $w->set_policy(@{$policy});
-    if (member(ref $W, qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
+    if (member(ref($W), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	$w->add($W)
     } else {
 	$w->add_with_viewport($W);
@@ -336,10 +336,10 @@ sub create_box_with_title {
 			       1, gtkpack_($o->{box_title} = Gtk2::VBox->new(0,0),
 					   1, Gtk2::HBox->new(0,0),
 					   (map {
-					       my $w = ref $_ ? $_ : Gtk2::Label->new($_);
+					       my $w = ref($_) ? $_ : Gtk2::Label->new($_);
 					       $::isWizard and $w->set_justify("left");
 					       (0, gtkset_name($w, "Title"));
-					   } map { ref $_ ? $_ : warp_text($_) } @_),
+					   } map { ref($_) ? $_ : warp_text($_) } @_),
 					   1, Gtk2::HBox->new(0,0),
 					  )
 			      ),
@@ -348,10 +348,10 @@ sub create_box_with_title {
 	} else {
 	    gtkpack__($box,
 		      (map {
-			  my $w = ref $_ ? $_ : Gtk2::Label->new($_);
+			  my $w = ref($_) ? $_ : Gtk2::Label->new($_);
 			  $::isWizard and $w->set_justify("left");
 			  gtkset_name($w, "Title");
-		      } map { ref $_ ? $_ : warp_text($_) } @_),
+		      } map { ref($_) ? $_ : warp_text($_) } @_),
 		      if_($a, Gtk2::HSeparator->new)
 		     )
 	}
@@ -1225,7 +1225,7 @@ sub ask_browse_tree_info_given_widgets {
     $common->{display_info} = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
     my $children = sub { map { my $v = $w->{tree_model}->get($_, 0); $_->free; $v } gtktreeview_children($w->{tree_model}, $_[0]) };
     my $toggle = sub {
-	if (ref $curr && !$_[0]) {
+	if (ref($curr) && !$_[0]) {
 	    $w->{tree}->toggle_expansion(my $path = $w->{tree_model}->get_path($curr));
 	    $path->free;
 	} else {

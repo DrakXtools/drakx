@@ -135,7 +135,7 @@ sub new($$) {
     };
     $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
-    $o = (bless {}, ref $type || $type)->SUPER::new($o);
+    $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
     $o;
 }

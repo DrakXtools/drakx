@@ -648,7 +648,7 @@ sub ask_fromW {
     
     my $widget_to_focus =
       $common->{focus_cancel} ? $mainw->{cancel} :
-	@widgets && ($common->{focus_first} || !$mainw->{ok} || @widgets == 1 && member(ref $widgets[0]{focus_w}, "Gtk2::TreeView", "Gtk2::RadioButton")) ? 
+	@widgets && ($common->{focus_first} || !$mainw->{ok} || @widgets == 1 && member(ref($widgets[0]{focus_w}), "Gtk2::TreeView", "Gtk2::RadioButton")) ? 
 	  $widgets[0]{focus_w} : 
 	    $mainw->{ok};
     $widget_to_focus->grab_focus() if $widget_to_focus;

@@ -790,7 +790,7 @@ sub Add2LVM {
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
     my $lvm = $in->ask_from_listf_('', N("Choose an existing LVM to add to"),
-				  sub { ref $_[0] ? $_[0]{VG_name} : $_[0] },
+				  sub { ref($_[0]) ? $_[0]{VG_name} : $_[0] },
 				  [ @$lvms, N_("new") ]) or return;
     require lvm;
     if (!ref $lvm) {

@@ -33,7 +33,7 @@ sub new {
 	goto &{$::{$interactiveClass . "::"}{new}};
     } else {
 	@ISA = ('install_steps_auto_install_non_interactive', @ISA);
-	(bless {}, ref $type || $type)->install_steps::new($o);
+	(bless {}, ref($type) || $type)->install_steps::new($o);
     }
 }
 
@@ -87,7 +87,7 @@ sub rebootNeeded {
 }
 
 sub ask_warn {
-    log::l(ref $_[1] ? join " ", @{$_[1]} : $_[1]);
+    log::l(ref($_[1]) ? join " ", @{$_[1]} : $_[1]);
 }
 
 sub wait_message {}

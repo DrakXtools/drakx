@@ -40,13 +40,13 @@ sub rooted {
 sub raw {
     my ($options, $name, @args) = @_;
     my $root = $options->{root} || '';
-    my $str = ref $name ? $name->[0] : $name;
+    my $str = ref($name) ? $name->[0] : $name;
     log::l("running: $str @args" . ($root ? " with root $root" : ""));
 
     return 1 if $root && $<;
 
     $root ? ($root .= '/') : ($root = '');
-    install_any::check_prog(ref $name ? $name->[0] : $name) if !$root && $::isInstall;
+    install_any::check_prog(ref($name) ? $name->[0] : $name) if !$root && $::isInstall;
 
 
     my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);

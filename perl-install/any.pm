@@ -419,7 +419,7 @@ N("Here are the entries on your boot menu so far.
 You can create additional entries or change the existing ones."), [ { 
         format => sub {
 	    my ($e) = @_;
-	    ref $e ? 
+	    ref($e) ? 
 	      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		translate($e);
 	}, list => $b->{entries},

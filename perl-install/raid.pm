@@ -17,7 +17,7 @@ sub max_nb { 31 }
 
 sub nb { 
     my ($nb) = @_;
-    first((ref $nb ? $nb->{device} : $nb) =~ /(\d+)/);
+    first((ref($nb) ? $nb->{device} : $nb) =~ /(\d+)/);
 }
 
 sub new {
