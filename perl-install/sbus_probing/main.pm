@@ -66,10 +66,10 @@ my %sbus_table_video =   (
 
 1;
 
-sub prom_getint($) { unpack "I", c::prom_getproperty($_[0]) }
+sub prom_getint { unpack "I", c::prom_getproperty($_[0]) }
 
 #- update $@sbus_probed according to SBUS detection.
-sub prom_walk($$$$) {
+sub prom_walk {
     my ($sbus_probed, $node, $sbus, $ebus) = @_;
     my ($prob_name, $prob_type) = (c::prom_getstring("name"), c::prom_getstring("device_type"));
     my ($nextnode, $nsbus, $nebus) = (undef, $sbus, $ebus);
@@ -129,10 +129,10 @@ sub prom_walk($$$$) {
 
 sub probe {
     eval { modules::load("openprom") } if arch() =~ /sparc/;
-    my $root_node = c::prom_open();
+    my $root_node = c::prom_open() or return;
     my @l;
 
     prom_walk(\@l, $root_node, 0, 0);
     c::prom_close();
-    map { my %l; @l{qw(type description drivers)} = @$_ } @l;
+    map { my %l; @l{qw(type description drivers)} = @$_; \%l } @l;
 }
