@@ -86,7 +86,7 @@ my %fields =
       "vendor_id" => [ N("Vendor"), N("the vendor name of the processor") ],
       "wp" => [ N("Write protection"), N("the WP flag in the CR0 register of the cpu enforce write proctection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)") ],
      },
-     floppy =>
+     FLOPPY =>
      {
       info => [ N("Floppy format"), N("format of floppies supported by the drive") ],
      },
