@@ -2898,9 +2898,6 @@ msgstr "%s fitxategia sortzen eta formateatzen"
 msgid "I do not know how to format %s in type %s"
 msgstr "Ez dakit nola formateatu %s %s motan"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "%s formatting of %s failed"
-# #msgstr "%2$s(r)i %1$s formatua emateak huts egin du"
 #: fs/format.pm:88 fs/format.pm:90
 #, c-format
 msgid "%s formatting of %s failed"
@@ -9553,41 +9550,26 @@ msgstr "Ba duzu %s interfazerik?"
 msgid "See hardware info"
 msgstr "Ikus hardwarearen informazioa"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:82
 #, c-format
 msgid "Installing driver for USB controller"
 msgstr "USB kontrolatzailearentzako gidaria instalatzen"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for firewire controller %s"
 msgstr "%s firewire kontrolatzailearentzako gidaria instalatzen"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for hard drive controller %s"
 msgstr "%s disko zurrun kontrolatzailearentzako gidaria instalatzen"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for ethernet controller %s"
 msgstr "%s ethernet kontrolatzailearentzako gidaria instalatzen"
 
-# #this syntax does not work yet in perl :-(
-# #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
 #: modules/interactive.pm:96
@@ -10882,7 +10864,15 @@ msgstr "Konexioaren denbora-muga (segundotan)"
 msgid "Get DNS servers from DHCP"
 msgstr "DNS zerbitzariaren IPa"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -17335,11 +17325,6 @@ msgstr "Mandrakesoft Morroiak"
 msgid "Wizards to configure server"
 msgstr "Zerbitzaria konfiguratzeko morroiak"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Mandrakesoft Morroiak"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20492,11 +20477,6 @@ msgstr "Instalatu gabe"
 msgid "Package not installed"
 msgstr "Paketea ez dago instalatuta"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "Ez dago arakatzailerik! Instalatu arakatzaile bat"
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -20665,16 +20645,6 @@ msgstr "estatikoa"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, c-format
@@ -21843,15 +21813,6 @@ msgid ""
 msgstr ""
 "%s ezin da bistaratu \n"
 ". Ez dago mota honetako laguntza-sarrerarik\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Arakatzailerik ez daukazu instalatuta sisteman. Laguntza-sistema arakatzeko "
-"aurrena arakatzailea instalatu behar duzu"
 
 #: standalone/drakperm:22
 #, c-format
@@ -25238,7 +25199,6 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, c-format
 msgid "Account:"
@@ -25613,9 +25573,9 @@ msgid "Watched interface"
 msgstr "interfazeak"
 
 #: standalone/net_applet:78
-#, fuzzy, c-format
+#, c-format
 msgid "Profiles"
-msgstr "Proxy-ak"
+msgstr "Profilak"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -26664,3 +26624,17 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalazioak huts egin du"
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Mandrakesoft Morroiak"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Ez dago arakatzailerik! Instalatu arakatzaile bat"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Arakatzailerik ez daukazu instalatuta sisteman. Laguntza-sistema "
+#~ "arakatzeko aurrena arakatzailea instalatu behar duzu"

@@ -7,15 +7,14 @@
 # Fabian Mandelbaum <fmandelbaum@hotmail.com>, 2003, 2004.
 # Pablo Saratxaga <pablo@mandrakesoft.com>, 2004.
 # Jaime Crespo <505201@unizar.es>, 2004, 2005.
-# José Manuel Pérez <jmprodu@yahoo.es>, 2005.
-# José Manuel Pérez <jmperez@yahoo.es>, 2005.
+# José Manuel Pérez <jmperez@hotmail.com>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-es\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-02-24 21:16+0100\n"
-"Last-Translator: José Manuel Pérez <jmperez@yahoo.es>\n"
+"PO-Revision-Date: 2005-03-11 09:48+0100\n"
+"Last-Translator: José Manuel Pérez <jmperez@hotmail.com>\n"
 "Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -811,6 +810,8 @@ msgid ""
 "_:weird aspect ratio\n"
 "other"
 msgstr ""
+"_:opción extraña de ratio\n"
+"otro"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -9944,9 +9945,9 @@ msgid "Any PS/2 & USB mice"
 msgstr "Cualquier ratón PS/2 y USB"
 
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Explorer"
+msgstr "Controlador S de Microsoft Xbox"
 
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
@@ -10950,16 +10951,24 @@ msgid "DHCP client"
 msgstr "cliente DHCP"
 
 #: network/netconnect.pm:1041 standalone/drakconnect:389
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr "Demora de la conexión (en seg)"
+msgstr "Demora de la conexión (en segundos)"
 
 #: network/netconnect.pm:1042 standalone/drakconnect:392
-#, fuzzy, c-format
+#, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "La IP del servidor DNS"
+msgstr "Obtenga servidores DNS desde DHCP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr "Obtenga servidores YP desde DHCP"
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr "Obtenga servidores NTPD desde DHCP"
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -10968,9 +10977,10 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "Las direcciones IP deben estar en el formato 1.2.3.4"
 
 #: network/netconnect.pm:1057 standalone/drakconnect:686
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask address should be in format 255.255.224.0"
-msgstr "Las direcciones de la pasarela deberían estar en el formato 1.2.3.4"
+msgstr ""
+"La dirección de la máscara de red debería estar en formato 255.255.224.0"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -11046,7 +11056,7 @@ msgstr "Tasa de bits (en b/s)"
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Use Wi-Fi Protected Access (WPA)"
-msgstr ""
+msgstr "Utilice acceso protegido Wi-Fi (WPA)"
 
 #: network/netconnect.pm:1168
 #, c-format
@@ -11303,9 +11313,9 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "La configuración está completa, ¿desea aplicar los ajustes?"
 
 #: network/netconnect.pm:1336
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "¿Desea iniciar su conexión al arrancar?"
+msgstr "¿Desea permitir a los usuarios iniciar la conexión?"
 
 #: network/netconnect.pm:1345
 #, c-format
@@ -12747,9 +12757,9 @@ msgstr ""
 "Microsoft Windows"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "Detección automática"
+msgstr "Sin detección automática"
 
 #: printer/printerdrake.pm:1173
 #, c-format
@@ -17476,11 +17486,6 @@ msgstr "Asistentes de Mandrakesoft"
 msgid "Wizards to configure server"
 msgstr "Asistentes para configurar servidor"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Asistentes de Mandrakesoft"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20628,11 +20633,6 @@ msgstr "No instalado"
 msgid "Package not installed"
 msgstr "Paquete no instalado"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "¡No hay un navegador disponible! Por favor, instale uno"
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -20801,16 +20801,6 @@ msgstr "estática"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, c-format
@@ -21992,15 +21982,6 @@ msgid ""
 msgstr ""
 "no se puede mostrar %s\n"
 " No hay entrada de ayuda de este tipo\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"No se instaló navegador en su sistema, por favor instale uno si desea "
-"navegar el sistema de ayuda"
 
 #: standalone/drakperm:22
 #, c-format
@@ -25272,7 +25253,7 @@ msgstr "/Autodetectar unidades _jaz"
 #: standalone/harddrake2:188
 #, c-format
 msgid "/_Upload the hardware list"
-msgstr ""
+msgstr "/_Subir la lista de hardware"
 
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
@@ -25397,8 +25378,7 @@ msgstr "DVD"
 #: standalone/harddrake2:525
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
-
+msgstr "Subir la lista de hardware"
 
 #: standalone/harddrake2:530
 #, c-format
@@ -25771,9 +25751,9 @@ msgid "Configure Network"
 msgstr "Configurar la red"
 
 #: standalone/net_applet:69
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "interfaces"
+msgstr "Interfaz vigilada"
 
 #: standalone/net_applet:78
 #, c-format
@@ -26832,3 +26812,26 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Falló la instalación"
+
+#~ msgid "Get YP server from DHCP"
+#~ msgstr "Obtenga servidor YP desde DHCP"
+
+#~ msgid "Get NTPD server from DHCP"
+#~ msgstr "Obtenga servidor NTPD desde DHCP"
+
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Asistentes de MandrakeSoft"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "¡No hay un navegador disponible! Por favor, instale uno"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "No se instaló navegador en su sistema, por favor instale uno si desea "
+#~ "navegar el sistema de ayuda"
+
+#, fuzzy
+#~ msgid "Upload the system configuration"
+#~ msgstr "Configuración del sistema"
