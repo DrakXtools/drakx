@@ -469,7 +469,6 @@ sub _ask_from_list {
 	$list->moveto($_[0], 0, 0.5, 0);
     };
 
-
     ref $title && !@okcancel ?
       $list->signal_connect(button_release_event => $leave) :
       $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
@@ -524,10 +523,11 @@ sub _ask_from_list {
 		  ));
 
     $o->sync; #- otherwise the moveto is not done
-    map_index {
+    my $toselect; map_index {
 	$list->append($_);
-	&$select($::i) if $def && $_ eq $def;
+	$toselect = $::i if $def && $_ eq $def;
     } @$l;
+    &$select($toselect);
 
     $list->grab_focus;
 }

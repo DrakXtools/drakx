@@ -1,14 +1,8 @@
-diskdrake bug: saved information on floppy contains isMounted.
-
 move security question before isntallation of packages
-
-verify kernel-smp is put in lilo by default, works on torturebox :-/
 
 i18n
 
 wizard for partitioning in case of one full vfat
-
-update devices.c from modules.pm
 
 diskdrake in text mode
 
@@ -16,24 +10,14 @@ ability to add nfs/weird_fs entries in fstab
 
 language support: only choose the right locales and upmark the packages requiring it
 
-standalone applications for configuration
-
-in lilo.conf, put 
-disk=/dev/hdb
-  bios=0x80
+standalone applications for configuration (netdrake)
 
 is configureNetworkNet needed with dhcp/bootp?
 
 (pix)kickstart
 X configuration and bootloader in kickstart
 
-(pix)diskdrake
-auto_partitions
-suggested partition tables must be better foreach installClass
-
 (pix)Tree -> CTree, ``all'' branch with all packages
-
-update the list of modules (in update_kernel)
 
 install ssh
 
@@ -123,3 +107,16 @@ compress hdlist?
 
 (done,pix) if u choose mouse usb != found mouse, it fails at X config
 
+(done,pix) diskdrake bug: saved information on floppy contains isMounted.
+
+(done,pix) update devices.c from modules.pm
+
+(done,pix) in lilo.conf, put 
+disk=/dev/hdb
+  bios=0x80
+
+(done,pix) diskdrake
+auto_partitions
+suggested partition tables must be better foreach installClass
+
+(done,pix) update the list of modules (in update_kernel)

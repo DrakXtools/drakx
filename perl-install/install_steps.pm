@@ -528,6 +528,7 @@ sub miscellaneous {
         TYPE => $o->{installClass},
         SECURITY => $o->{security},
     });
+    $ENV{SECURE_LEVEL} = $o->{security};
 }
 
 #------------------------------------------------------------------------------

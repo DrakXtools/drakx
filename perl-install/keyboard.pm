@@ -143,7 +143,7 @@ sub setup($) {
 sub write($$) {
     my ($prefix, $keyboard) = @_;
 
-    setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => kmap($keyboard) });
+    setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => kmap($keyboard), BACKSPACE => "Delete" });
 
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or die "dumpkeys failed";
 }

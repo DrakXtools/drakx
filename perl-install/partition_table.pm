@@ -567,6 +567,7 @@ sub load($$;$) {
 
     @{$hd}{@fields2save} = @$h;
 
+    delete @$_{qw(isMounted isFormatted notFormatted toFormat toFormatUnsure)} foreach get_normal_parts($hd);
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
 }
 

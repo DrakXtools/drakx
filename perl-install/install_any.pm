@@ -128,6 +128,7 @@ sub setPackages($) {
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{base}}, "raidtools" if !is_empty_hash_ref($o->{raid});
+	push @{$o->{base}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {
@@ -394,7 +395,11 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab nomouseprobe); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe); #- TODO modules bootloader 
+
+    my $card = $::o->{X}{card};
+    $o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
+    $o->{X}{card}{resolution_wanted} = join "x", @{$card->{depth}{$card->{default_depth}}[0]};
 
 #-    local $o->{partitioning}{clearall} = 1;
 
@@ -451,7 +456,7 @@ sub fsck_option() {
 sub install_urpmi {
     my ($prefix, $method) = @_;
 
-    (my $name = _("installation_cd")) =~ s/\s/_/g; #- in case translators are too good :-/
+    (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
 
     my $f = "$prefix/etc/urpmi/hdlist.$name";
     {

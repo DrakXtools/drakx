@@ -103,9 +103,9 @@ sub write($) {
     my ($raid, $file) = @_;
     local *F;
     local $\ = "\n";
+    open F, ">$file" or die _("Can't write file $file");
 
     foreach (grep {$_} @$raid) {
-	open F, ">$file" or die _("Can't write file $file");
 	print F <<"EOF";
 raiddev       /dev/$_->{device}
 raid-level    $_->{level}
@@ -122,6 +122,7 @@ EOF
 
 sub make($$) {
     my ($raid, $part) = @_;
+    is($_) and make($raid, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
     eval { commands::modprobe(module($part)) };
     run_program::run("raidstop", $dev);
