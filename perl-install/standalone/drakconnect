@@ -193,9 +193,7 @@ $window1->{window}->add(
                                                                                  sensitive_buttons(0);
                                                                                  local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                                  eval { # For wizcancel
-                                                                                     use Data::Dumper; print Dumper([ $intf, $netc ]);
                                                                                      configureNetworkNet($in, $netc, $intf, @all_cards);
-                                                                                     use Data::Dumper; print Dumper([ $intf, $netc ]);
                                                                                      network::sethostname($intf);
                                                                                      $button_apply->set_sensitive(1);
                                                                                      update();
@@ -255,13 +253,15 @@ $window1->{window}->add(
                                                                                           clicked => \&apply),
                                                      gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&quit_global),
                                                      gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                           my $dialog = _create_dialog(N("Please wait"));
-                                                                           gtkpack($dialog->vbox,
-                                                                                   Gtk2::Label->new(N("Please Wait... Applying the configuration")));
-                                                                           $dialog->show_all;
-                                                                           gtkflush();
-                                                                           apply();
-                                                                           $dialog->destroy;
+                                                                           if ($button_apply->get('sensitive')) {
+                                                                               my $dialog = _create_dialog(N("Please wait"));
+                                                                               gtkpack($dialog->vbox,
+                                                                                       Gtk2::Label->new(N("Please Wait... Applying the configuration")));
+                                                                               $dialog->show_all;
+                                                                               gtkflush();
+                                                                               apply();
+                                                                               $dialog->destroy;
+                                                                           }
                                                                            update();
                                                                            quit_global();
                                                                        }),
