@@ -1260,11 +1260,6 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or run_program::rooted($::prefix, "/chkconfig --del adsl 2> /dev/null");
-
-    if ($::isInstall && $::o->{security} >= 3) {
-	require network::drakfirewall;
-	network::drakfirewall::main($in, $::o->{security} <= 3);
-    }
 }
 
 sub main {
