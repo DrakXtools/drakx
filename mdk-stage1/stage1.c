@@ -46,6 +46,7 @@ _syscall2(int,pivot_root,const char *,new_root,const char *,put_old)
 #include "automatic.h"
 #include "mount.h"
 #include "insmod.h"
+#include "thirdparty.h"
 
 #ifdef ENABLE_PCMCIA
 #include "pcmcia_/pcmcia.h"
@@ -214,64 +215,6 @@ static void spawn_interactive(void)
 #endif
 
 
-/************************************************************
- */
-
-static void expert_third_party_modules(void)
-{
-	enum return_type results;
-	char * floppy_mount_location = "/tmp/floppy";
-	char ** modules;
-	char final_name[500];
-	char * choice;
-	int rc;
-	char * questions[] = { "Options", NULL };
-	static char ** answers = NULL;
-
-	results = ask_yes_no("If you want to insert third-party kernel modules, insert "
-			     "a Linux (ext2fs) formatted floppy containing the modules and confirm. Otherwise, select \"no\".");;
-	if (results != RETURN_OK)
-		return;
-
-	if (my_mount(floppy_device(), floppy_mount_location, "ext2", 0) == -1) {
-		stg1_error_message("I can't find a Linux ext2 floppy in first floppy drive.");
-		return expert_third_party_modules();
-	}
-
-	modules = list_directory(floppy_mount_location);
-
-	if (!modules || !*modules) {
-		stg1_error_message("No modules found on floppy disk.");
-		umount(floppy_mount_location);
-		return expert_third_party_modules();
-	}
-
-	results = ask_from_list("Which driver would you like to insmod?", modules, &choice);
-	if (results != RETURN_OK) {
-		umount(floppy_mount_location);
-		return;
-	}
-
-	sprintf(final_name, "%s/%s", floppy_mount_location, choice);
-
-	results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
-	if (results != RETURN_OK) {
-		umount(floppy_mount_location);
-		return expert_third_party_modules();
-	}
-
-	rc = insmod_local_file(final_name, answers[0]);
-	umount(floppy_mount_location);
-
-	if (rc) {
-		log_message("\tfailed");
-		stg1_error_message("Insmod failed.");
-	}
-
-	return expert_third_party_modules();
-}
-
-
 #ifdef ENABLE_PCMCIA
 static void handle_pcmcia(void)
 {
@@ -296,7 +239,7 @@ static void handle_pcmcia(void)
 	remove_wait_message();
 
 	if (IS_EXPERT)
-		expert_third_party_modules();
+		thirdparty_load_modules();
 
         add_to_env("PCMCIA", pcmcia_adapter);
 }
@@ -324,6 +267,7 @@ static void method_select_and_prepare(void)
 	char * network_ftp_install = "FTP server"; char * network_ftp_install_auto = "ftp";
 	char * network_http_install = "HTTP server"; char * network_http_install_auto = "http";
 #endif
+	char * thirdparty_install = "Load third party modules"; char * thirdparty_install_auto = "thirdparty";
 
 	i = 0;
 #ifndef DISABLE_NETWORK
@@ -339,6 +283,7 @@ static void method_select_and_prepare(void)
 	means[i] = disk_install; means_auto[i++] = disk_install_auto;
         allow_additional_modules_floppy = 0;
 #endif
+	means[i] = thirdparty_install; means_auto[i++] = thirdparty_install_auto;
 	means[i] = NULL;
 
 	unlink(IMAGE_LOCATION);
@@ -371,6 +316,11 @@ static void method_select_and_prepare(void)
 		results = http_prepare();
 #endif
 #endif
+
+	if (!strcmp(choice, thirdparty_install)) {
+		thirdparty_load_modules();
+		return method_select_and_prepare();
+        }
 
 	if (results != RETURN_OK)
 		return method_select_and_prepare();
@@ -634,9 +584,6 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
         /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
 	probe_that_type(USB_CONTROLLERS, BUS_USB);
-
-	if (IS_EXPERT)
-		expert_third_party_modules();
 
 	if (IS_UPDATEMODULES)
 		update_modules();
