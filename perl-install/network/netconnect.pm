@@ -95,7 +95,7 @@ sub pre_func {
 	my $W = my_gtk->new(_("Network Configuration Wizard"));
 	gtkadd($W->{window},
 	       gtkpack_(new Gtk::VBox(0, 0),
-			1, write_on_pixmap(gtkpng ("draknet_step"),
+			1, write_on_pixmap(gtkpng ("drakconnect_step"),
 					   20,200,
 					   _("We are now going to configure the %s connection.",_($text)),
 					  ),
@@ -311,7 +311,7 @@ fi
 	output "$prefix$connect_prog",
 	  qq(
 #!/bin/bash
-/usr/sbin/draknet
+/usr/sbin/drakconnect
 );
     }
     if ($direct_net_install) {
@@ -362,7 +362,7 @@ sub save_conf {
 
     $intf = { %$intf };
 
-    output("$prefix/etc/sysconfig/network-scripts/draknet_conf",
+    output("$prefix/etc/sysconfig/network-scripts/drakconnect_conf",
       "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
 InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type}; } else { $netc->{GATEWAY} ? "lan" : ""; } } . "
@@ -438,11 +438,11 @@ ADSLLogin=$adsl->{login}
 ADSLPassword=$adsl->{passwd}
 DOMAINNAME2=$netc->{DOMAINNAME2}"
 	  );
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf";
+    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
-    cp_af("$prefix/etc/sysconfig/network-scripts/draknet_conf", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a);
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf";
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a;
+    cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
+    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
+    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a;
     foreach ( ["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
 	      ["$prefix$connect_prog", "prog"],
@@ -462,7 +462,7 @@ sub set_profile {
     my ($netcnx, $profile) = @_;
     $profile ||= $netcnx->{PROFILE};
     $profile or return;
-    my $f = "$prefix/etc/sysconfig/network-scripts/draknet_conf";
+    my $f = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     -e ($f . "." . $profile) or return;
     $netcnx->{PROFILE}=$profile;
     cp_af($f . "." . $profile, $f);
@@ -485,7 +485,7 @@ sub del_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    rm_rf("$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
+    rm_rf("$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile);
     rm_rf(glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
 }
 
@@ -493,15 +493,15 @@ sub add_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    my $cmd1 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
-    my $cmd2 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile;
+    my $cmd1 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+    my $cmd2 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile;
     cp_af($cmd1, $cmd2);
 }
 
 sub get_profiles {
     my @a;
     my $i=0;
-    foreach (glob("/etc/sysconfig/network-scripts/draknet_conf.*")) {
+    foreach (glob("/etc/sysconfig/network-scripts/drakconnect_conf.*")) {
 	s/.*\.//;
 	$a[$i] = $_;
 	$i++;
@@ -519,8 +519,8 @@ sub load_conf {
     my $system_name;
     my $domain_name;
 
-    if (-e "$prefix/etc/sysconfig/network-scripts/draknet_conf") {
-	foreach (cat_("$prefix/etc/sysconfig/network-scripts/draknet_conf")) {
+    if (-e "$prefix/etc/sysconfig/network-scripts/drakconnect_conf") {
+	foreach (cat_("$prefix/etc/sysconfig/network-scripts/drakconnect_conf")) {
 	    /^DNSPrimaryIP=(.*)$/ and $netc->{dnsServer} = $1;
 	    /^DNSSecondaryIP=(.*)$/ and $netc->{dnsServer2} = $1;
 	    /^DNSThirdIP=(.*)$/ and $netc->{dnsServer3} = $1;
@@ -593,22 +593,22 @@ sub load_conf {
 }
 
 sub get_net_device {
-    ${{ getVarsFromSh("/etc/sysconfig/draknet") }}{NET_DEVICE};
+    ${{ getVarsFromSh("/etc/sysconfig/drakconnect") }}{NET_DEVICE};
 }
 
 sub read_net_conf {
     my ($prefix, $netcnx, $netc)=@_;
-    add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/draknet") });
+    add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/drakconnect") });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}}||={};
-    add2hash($netcnx->{$netcnx->{type}}, { getVarsFromSh("$prefix/etc/sysconfig/draknet." . $netcnx->{type}) });
+    add2hash($netcnx->{$netcnx->{type}}, { getVarsFromSh("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}) });
 }
 
 sub set_net_conf {
     my ($netcnx, $netc)=@_;
-    setVarsInShMode("$prefix/etc/sysconfig/draknet", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE" );
-    setVarsInShMode("$prefix/etc/sysconfig/draknet." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
-    setVarsInShMode("$prefix/etc/sysconfig/draknet.netc", 0600, $netc); #- doesn't work, don't know why
+    setVarsInShMode("$prefix/etc/sysconfig/drakconnect", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE" );
+    setVarsInShMode("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
+    setVarsInShMode("$prefix/etc/sysconfig/drakconnect.netc", 0600, $netc); #- doesn't work, don't know why
 }
 
 sub start_internet {
