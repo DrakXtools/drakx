@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.26mdk
+Release: 0.27mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Aug  4 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.27mdk
+- ugtk2.pm:
+  - revert "use checkboxes instead of icons"
+  - fix not possible to select with mouse anymore (rpmdrake etc)
+
 * Mon Aug  4 2003 Pixel <pixel@mandrakesoft.com> 9.2-0.26mdk
 - various fixes
 - clean tarball with no Makefile_c (thanks to Christiaan Welvaart)
