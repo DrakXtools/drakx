@@ -5,9 +5,17 @@ use any;
 
 sub kinds { 
     my $no_para = @_ == 0;
-    my ($meta_class) = @_;
+    my ($do_pkgs, $meta_class) = @_;
+    my $allow_SmartCard = $no_para || $do_pkgs->is_available('castella-pam');
     my $allow_AD = $no_para || $meta_class =~ /corporate/;
-    ('local', 'LDAP', 'NIS', 'SmartCard', 'winbind', if_($allow_AD, 'AD', 'SMBKRB'));
+    (
+	'local', 
+	'LDAP',
+	'NIS', 
+	if_($allow_SmartCard, 'SmartCard'), 
+	'winbind', 
+	if_($allow_AD, 'AD', 'SMBKRB'),
+    );
 }
 
 sub kind2name {
@@ -180,7 +188,7 @@ sub ask_root_password_and_authentication {
         } } }, [
 { label => N("Password"), val => \$superuser->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$kind, type => 'list', list => [ authentication::kinds($meta_class) ], format => \&authentication::kind2name, advanced => 1 },
+{ label => N("Authentication"), val => \$kind, type => 'list', list => [ authentication::kinds($in->do_pkgs, $meta_class) ], format => \&authentication::kind2name, advanced => 1 },
         ]) or delete $superuser->{password};
 
     ask_parameters($in, $netc, $authentication, $kind) or goto &ask_root_password_and_authentication;
