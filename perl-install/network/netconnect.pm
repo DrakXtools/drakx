@@ -236,7 +236,7 @@ environnement to avoid hostname changing problem."));
 	$in->ask_okcancel(_("Network Configuration"), $m, 1);
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
-    } else {  $in->ask_warn('', $m ); }
+    } else {  $::isStandalone and $in->ask_warn('', $m ); }
 
   step_5:
 
