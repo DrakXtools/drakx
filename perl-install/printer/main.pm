@@ -350,21 +350,27 @@ sub make_menuentry {
 	    $connection = N(", multi-function device");
 	}
     } elsif ($connect =~ m!^file:(.+)$!) {
-	$connection = N(", printing to %s", $1);
+        my $file = $1;
+	$connection = N(", printing to %s", $file);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = N(" on LPD server \"%s\", printer \"%s\"", $1, $2);
+        my ($server, $printer) = ($1, $2);
+	$connection = N(" on LPD server \"%s\", printer \"%s\"", $server, $printer);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
-	$connection = N(", TCP/IP host \"%s\", port %s", $1, $2);
+        my ($host, $port) = ($1, $2);
+	$connection = N(", TCP/IP host \"%s\", port %s", $host, $port);
     } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!) {
-	$connection = N(" on SMB/Windows server \"%s\", share \"%s\"", $1, $2);
+        my ($server, $share) = ($1, $2);
+	$connection = N(" on SMB/Windows server \"%s\", share \"%s\"", $server, $share);
     } elsif ($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
-	$connection = N(" on Novell server \"%s\", printer \"%s\"", $1, $2);
+        my ($server, $printer) = ($1, $2);
+	$connection = N(" on Novell server \"%s\", printer \"%s\"", $server, $printer);
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
-	$connection = N(", using command %s", $1);
+        my $command = $1;
+	$connection = N(", using command %s", $command);
     } else {
 	$connection = ($printer->{expert} ? ", URI: $connect" : "");
     }
@@ -401,22 +407,27 @@ sub connectionstr {
 	    $connection = N("Multi-function device");
 	}
     } elsif ($connect =~ m!^file:(.+)$!) {
-	$connection = N("Prints into %s", $1);
+        my $file = $1;
+	$connection = N("Prints into %s", $file);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = N("LPD server \"%s\", printer \"%s\"", $1, $2);
+        my ($server, $port) = ($1, $2);
+	$connection = N("LPD server \"%s\", printer \"%s\"", $server, $port);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
         my ($host, $port) = ($1, $2);
         $connection = N("TCP/IP host \"%s\", port %s", $host, $port);
     } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!) {
-	$connection = N("SMB/Windows server \"%s\", share \"%s\"", $1, $2);
+        my ($server, $share) = ($1, $2);
+	$connection = N("SMB/Windows server \"%s\", share \"%s\"", $server, $share);
     } elsif ($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
-	$connection = N("Novell server \"%s\", printer \"%s\"", $1, $2);
+        my ($server, $share) = ($1, $2);
+	$connection = N("Novell server \"%s\", printer \"%s\"", $server, $share);
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
-	$connection = N("Uses command %s", $1);
+        my $command = $1;
+	$connection = N("Uses command %s", $command);
     } else {
 	$connection = N("URI: %s", $connect);
     }
