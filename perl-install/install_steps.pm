@@ -185,7 +185,11 @@ sub servicesConfig {}
 sub printerConfig {
     my($o) = @_;
     my $printer = $o->default("printer");
-    printer::configure_queue($printer) if $printer;
+    if ($o->{printer}{complete}) {
+	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
+	$o->installPackages($o->{packages});
+	printer::configure_queue($printer) if $o->{printer}{complete};
+    }
 }
 
 sub setRootPassword($) {

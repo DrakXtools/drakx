@@ -3,7 +3,7 @@ package printer;
 use diagnostics;
 use strict;
 
-use vars qw(%thedb %printer_type %printer_type_inv);
+use vars qw(%thedb %printer_type %printer_type_inv @papersize_type);
 
 ########################################################################################
 # misc imports
@@ -133,7 +133,7 @@ my %ex_printcap_entry =
    RESOLUTION   => "NAxNA",                         #ghostscript resolution to use
    PAPERSIZE    => "letter",                        #Papersize
    BITSPERPIXEL => "necp2x6",                       #ghostscript color option                    
-   CRLF         => "YES" ,                            #Whether or not to do CR/LF xlation         
+   CRLF         => 1 ,                            #Whether or not to do CR/LF xlation         
 
    TYPE         => "LOCAL",
 
@@ -195,6 +195,8 @@ my $PRINTER_NCP    = "NCP";
 		   );                                 
 
 %printer_type_inv = reverse %printer_type;
+
+@papersize_type = qw(letter legal ledger a3 a4);
 
 
 ########################################################################################
@@ -417,7 +419,7 @@ sub configure_queue($) {
     ($filein, $file) = &$get_name_file("textonly.cfg");
     %fieldname = ();
     $fieldname{textonlyoptions} = "";
-    $fieldname{crlftrans}       = $entry->{CRLF};
+    $fieldname{crlftrans}       = $entry->{CRLF} ? "YES" : "";
     $fieldname{textsendeof}     = "1";
     create_config_file($filein, $file, %fieldname);
 
@@ -464,7 +466,7 @@ sub configure_queue($) {
 	      "{}",
 		$dbentry->{ENTRY},
 		  $entry->{BITSPERPIXEL},
-		    ($entry->{CRLF} eq "YES") ? "1" : "";
+		    $entry->{CRLF} ? "1" : "";
 
 	
     print PRINTCAP "$entry->{QUEUE}:\\\n";

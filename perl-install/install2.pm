@@ -242,11 +242,16 @@ my $default = {
     lang         => 'us',
     isUpgrade    => 0,
     installClass => 'beginner',
-    printer => {
+    printer => { 
+                 complete => 0,
                  str_type => $printer::printer_type[0],
                  QUEUE    => "lp",
                  SPOOLDIR => "/var/spool/lpd/lp",
+                 DBENTRY  => "DeskJet670",
+                 PAPERSIZE => "legal",
+                 CRLF      => 0,
                },
+    
 #    keyboard => 'de',
 #    display => "192.168.1.9:0",
 

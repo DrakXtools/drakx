@@ -149,6 +149,7 @@ sub printerConfig($) {
 		      $o->{printer}{want});
     return if !$o->{printer}{want};
 
+    $o->{printer}{complete} = 0;
     #std info
     #Don't wait, if the user enter something, you must remember it
     #($o->{default}{printer}{QUEUE}, $o->{default}{printer}{SPOOLDIR}) =
@@ -184,26 +185,117 @@ sub printerConfig($) {
 	$string .= _("I detect :");
 	$string .= join(", ", @port);
 
+	$o->{printer}{DEVICE}    ||= $o->{default}{printer}{DEVICE};
 	
-	
-	
+
+	$o->ask_from_entries_ref(_("Local Printer Device"),
+				 $string,
+				 [_("Printer Device:")],
+				 [\$o->{printer}{DEVICE}],
+				);
+
     } elsif ($o->{printer}{TYPE} eq "REMOTE") {
+	
+    } elsif ($o->{printer}{TYPE} eq "SMB") {
+    } elsif ($o->{printer}{TYPE} eq "NCP") {
+    }
+    
+ 
+#    printer::set_prefix($o->{prefix});
+    printer::read_printer_db();
+    my @entries_db_short     = sort keys %printer::thedb;
+    my @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
+    my %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
+    my %db_to_descr          = reverse %descr_to_db;
+    
+    $o->{printer}{DBENTRY} ||= $o->{default}{printer}{DBENTRY};
+    $o->{printer}{DBENTRY} = 
+      $descr_to_db{
+		   $o->ask_from_list_(_("Configure Printer"),
+				      _("What type of printer do you have?"),
+				      [@entry_db_description],
+				      $db_to_descr{$o->{printer}{DBENTRY}},
+				     )
+		  };
+
+    my %db_entry = %{$printer::thedb{$o->{printer}{DBENTRY}}};
+
+
+    #paper size conf
+    $o->{printer}{PAPERSIZE} ||= $o->{default}{printer}{PAPERSIZE};
+    $o->{printer}{PAPERSIZE} = 
+      $o->ask_from_list_(_("Paper Size"),
+			 _("Paper Size"),
+			 \@printer::papersize_type,
+			 $o->{printer}{PAPERSIZE}
+			);
+
+    #resolution size conf
+    $o->{printer}{RESOLUTION} ||= $o->{default}{printer}{RESOLUTION};
+    
+    my @list_res = @{$db_entry{RESOLUTION}};
+    my @res = map { "${$_}{XDPI}x${$_}{YDPI}" } @list_res;
+    if (@list_res) {
+	$o->{printer}{RESOLUTION} = $o->ask_from_list_(_("Resolution"),
+						   _("Resolution"),
+						   \@res,
+						   $o->{printer}{RESOLUTION},
+						   );
+    } else {
+	$o->{printer}{RESOLUTION} = "Default";
+    }
+
+    
+    #Fix ster stepping
+    # MAJOR HACK 
+    # if the printer is an HP, let's do stairstep correction 
+    $o->{printer}{CRLF} = $db_entry{DESCR} =~ /HP/;
+
+    $o->{printer}{CRLF} ||= $o->{default}{printer}{CRLF};
+    $o->{printer}{CRLF}= $o->ask_yesorno(_("CRLF"),
+					 _("Fix stair-stepping of text?"),
+					 $o->{printer}{CRLF});
+
+    #color_depth
+    $o->{printer}{BITSPERPIXEL} ||= $o->{default}{printer}{BITSPERPIXEL};
+    my @list_col      = @{$db_entry{BITSPERPIXEL}};
+    my @col           = map { "$_->{DEPTH} $_->{DESCR}" } @list_col;
+    my %col_to_depth  = map { ("$_->{DEPTH} $_->{DESCR}", $_->{DEPTH}) } @list_col;
+    my %depth_to_col  = reverse %col_to_depth;
+
+    if (@list_col) {
+	my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
+	if ($is_uniprint) {
+	    $o->{printer}{BITSPERPIXEL} = 
+	      $col_to_depth{$o->ask_from_list_
+			    (_("Configure Uniprint Driver"),
+			     _("You may now configure the uniprint options for this printer."),
+			     \@col,
+			     $depth_to_col{$o->{printer}{BITSPERPIXEL}},
+			     )};
+	    
+	} else {
+	    $o->{printer}{BITSPERPIXEL} = 
+	      $col_to_depth{$o->ask_from_list_
+			    (_("Configure Color Depth"),
+			     _("You may now configure the color options for this printer."),
+			     \@col,
+			     $depth_to_col{$o->{printer}{BITSPERPIXEL}},
+			     )};
+	    
+			    
+			     
+
+	}
+    } else {
+	$o->{default}{printer}{BITSPERPIXEL} = "Default";
     }
     
     
 
-#    $entry = 
-#      do {
-#	   
-#      }
-#
-#    if ($type eq "local") {
-#	 
-#    }
-    printer::set_prefix($o->{prefix});
-    printer::read_printer_db();
-
+    #    $o->{printer}{complete} = 1;
     $o->SUPER::printerConfig;
+    
 }
 
 
