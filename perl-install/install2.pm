@@ -597,7 +597,7 @@ sub main {
     #- make sure failed upgrade will not hurt too much.
     install_steps::cleanIfFailedUpgrade($o);
 
-    -e "$o->{prefix}/usr/bin/urpmi" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
+    -e "$o->{prefix}/usr/sbin/urpmi.update" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
 
     #- mainly for auto_install's
     run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
