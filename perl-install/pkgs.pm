@@ -207,9 +207,18 @@ sub packageRequest {
 sub packageCallbackChoices {
     my ($urpm, $db, $state, $choices) = @_;
     my $prefer;
-    foreach (@$choices) {
-	exists $preferred{$_->name} and $prefer = $_;
-	$_->name =~ /kernel-\d/ and $prefer ||= $_;
+    foreach my $pkg (@$choices) {
+	#- examine first an explicitely prefered package.
+	exists $preferred{$pkg->name} and $prefer = $pkg;
+	#- or if a kernel has to be chosen, chose the basic one.
+	$pkg->name =~ /kernel-\d/ and $prefer ||= $pkg;
+	#- or even if a package requires a specific locales which
+	#- is already selected.
+	foreach ($pkg->requires_nosense) {
+	    /locales-/ or next;
+	    my $p = packageByName($packages, $_) or next;
+	    $p->flag_available and $prefer ||= $pkg;
+	}
     }
     $prefer || $choices->[0]; #- first one (for instance).
 }
