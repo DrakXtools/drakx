@@ -1,3 +1,96 @@
+2002/02/20  dam's  <damien@mandrakesoft.com>
+
+	* share/advertising/13-Nvert.pl: changed toll free
+
+	* my_gtk.pm: added mcc kill if wait message
+
+	* standalone/logdrake: cosmetic change, mcc compliance
+
+2002/02/20  daouda
+
+	* share/rpmsrate: 
+	  - same weight for rfbdrake in NETWORKING_REMOTE_ACCESS
+	NETWORKING_REMOTE_ACCESS_SERVER
+
+2002/02/20  fcrozat
+
+	* share/rpmsrate: Remove mozilla-psm from list, it is merged in mozilla
+
+2002/02/20  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: fixed INSTALL category in rpmsrate for copying
+	file when changing cd (was an
+	limitation in read_rpmsrate when a package having a category and INSTALL
+	caused
+	INSTALL to be dropped).
+
+2002/02/20  gbeauchesne
+
+	* share/rpmsrate: 
+	  - Add gcc3.0-c++ and libstdc++3.0-devel
+	  - Prefer gcc3.0-java over gcc-java
+	  - Remove BasiliskII-sheepnet since it does no longer exist
+	  - Add/prefer BasiliskII-jit over BasiliskII
+
+2002/02/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/advertising/07-server.pl, share/advertising/01-gnu.pl: Improved
+	English strings
+
+	* share/po/hu.po, share/po/es.po, share/po/ar.po: updated Hungarian and
+	Spanish files
+
+2002/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: remove fsck_option (obsolete)
+
+	* share/po/fr.po: fix s/SILO/LILO/
+
+	* fsedit.pm: have "with /usr" translated
+
+	* install_steps_interactive.pm (loadSavePackagesOnFloppy): add a "Cancel"
+	button
+
+	* steps.pm: move installUpdates after configureX (workaround for bad
+	timeouts during installing updates)
+
+	* install_steps.pm, any.pm, standalone/draksec: factorize and update the
+	reading of previous security level
+
+2002/02/20  siegel
+
+	* share/po/de.po: snapshot
+
+2002/02/19  dam's  <damien@mandrakesoft.com>
+
+	* share/advertising/Makefile: new Makefile to install ads
+
+2002/02/19  fcrozat
+
+	* share/rpmsrate: 
+	  -Install gnome-vfs-extras when installing nautilus (to get samba
+	browsing)
+	  -don't install nautilus-mozilla, it is pulled by nautilus
+
+2002/02/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* any.pm: english fix
+
+2002/02/19  Pixel  <pixel@mandrakesoft.com>
+
+	* share/advertising/Makefile: advertising installation cleanup
+
+	* diskdrake/smbnfs_gtk.pm: ugly hack to fix die
+
+2002/02/19  siegel
+
+	* share/po/de.po: updates for beta 3
+
+2002/02/19  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Changed button texts of "Do you want to auto-detect?"
+	dialog.
+
 2002/02/19  dam's  <damien@mandrakesoft.com>
 
 	* share/advertising/Makefile: new Makefile to install ads
