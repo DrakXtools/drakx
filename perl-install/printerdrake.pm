@@ -1616,6 +1616,7 @@ sub printer_help {
     my $default = $printer->{DEFAULT};
     my $raw = 0;
     my $cupsremote = 0;
+    my $scanning = "";
     if ($printer->{configured}{$queue}) {
 	if (($printer->{configured}{$queue}{'queuedata'}{'model'} eq
 	     _("Unknown model")) ||
@@ -1623,19 +1624,16 @@ sub printer_help {
 	     _("Raw printer"))) {
 	    $raw = 1;
 	}
+	# Information about scanning with HP's multi-function devices
+	$scanning = scanner_help
+	    ($printer->{configured}{$queue}{'queuedata'}{'make'} . " " .
+	     $printer->{configured}{$queue}{'queuedata'}{'model'}, 
+	     $printer->{configured}{$queue}{'queuedata'}{'connect'});
+	if ($scanning) {
+	    $scanning = "\n\n$scanning\n\n";
+	}
     } else {
 	$cupsremote = 1;
-    }
-    #my $foomatic = $printer->{configured}{$queue}{queuedata}{foomatic};
-    #my $ppd = $printer->{configured}{$queue}{queuedata}{ppd};
-
-    # Information about scanning with HP's multi-function devices
-    my $scanning = scanner_help
-	($printer->{configured}{$queue}{'queuedata'}{'make'} . " " .
-	 $printer->{configured}{$queue}{'queuedata'}{'model'}, 
-	 $printer->{configured}{$queue}{'queuedata'}{'connect'});
-    if ($scanning) {
-	$scanning = "\n\n$scanning\n\n";
     }
 
     my $dialogtext;
