@@ -549,7 +549,7 @@ sub install_urpmi {
 
 sub updateModulesFromFloppy {
     my ($o) = @_;
-    return if $::testing || !$o->{updatemodules};
+    return if $::testing;
 
     fs::mount($o->{updatemodules}, "/floppy", "ext2", 0);
     foreach (glob_("$o->{prefix}/lib/modules/*")) {
