@@ -778,10 +778,6 @@ If you don't know, choose 'use pppoe'"),
 
                    adsl_account => 
                    {
-                    pre => sub {
-                        $netc->{dnsServer2} ||= $adsl_data->{dns1};
-                        $netc->{dnsServer3} ||= $adsl_data->{dns2};
-                    },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => sub {
