@@ -24,9 +24,9 @@ install:
 	@install make_mdkinst_stage2 $(ROOTDEST)/misc
 	@cd /usr/bin ; install packdrake $(ROOTDEST)/misc || { echo "packdrake is missing"; exit 1; }
 	@cd /usr/bin ; install gendistrib rpm2header $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@eval `perl -V:installvendorlib | sed s/5.8../5.8.3/`;  cd $$installvendorlib ;  cp -rf packdrake.pm $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@eval `perl -V:installvendorarch | sed s/5.8../5.8.3/`; cd $$installvendorarch ; cp -rf URPM* $(ROOTDEST)/misc || { echo "install perl-URPM first!" ; exit 1; }
-	@eval `perl -V:installvendorarch | sed s/5.8../5.8.3/`; cd $$installvendorarch/auto ; cp -rf URPM $(ROOTDEST)/misc/auto || { echo "install perl-URPM first!" ; exit 1; }
+	@eval `perl -V:installvendorlib`;  cd $$installvendorlib ;  cp -rf packdrake.pm $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
+	@eval `perl -V:installvendorarch`; cd $$installvendorarch ; cp -rf URPM* $(ROOTDEST)/misc || { echo "install perl-URPM first!" ; exit 1; }
+	@eval `perl -V:installvendorarch`; cd $$installvendorarch/auto ; cp -rf URPM $(ROOTDEST)/misc/auto || { echo "install perl-URPM first!" ; exit 1; }
 	@mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
