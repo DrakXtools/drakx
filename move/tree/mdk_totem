@@ -78,10 +78,10 @@ if (my @busy = remove_simple_daemons(busy_pids_and_files())) {
     }
 }
 
-{
-    $in->wait_message('', N("Copying to memory to allow removing the CDROM"));
-    system('mdk_move_loop', 'to_memory', 'always', 'totem');
-}
+my %file2loop = do {
+    my $_w = $in->wait_message('', N("Copying to memory to allow removing the CDROM"));
+    `GIVE_LOOP=1 mdk_move_loop to_memory always always_i18n totem` =~ /(.*?)=(.*)/g;
+};
 
 ugtk2::gtkset_mousecursor_normal(); #- for restoring a normal in any case
 ugtk2::flush();
@@ -92,5 +92,8 @@ if (my $pid = fork()) {
     $ENV{MDKMOVE} = $pid;
     exec 'totem';
 } else {
-    exec 'sudo', 'mdk_behind_totem', '--totem-pid', $totem_pid;
+    exec 'sudo', 'mdk_behind_totem', 
+	'--boot-loop', $file2loop{'live_tree_boot.clp'},
+	'--main-loop', $file2loop{'live_tree.clp'},
+	'--totem-pid', $totem_pid;
 }
