@@ -47,7 +47,6 @@ sub get_lvs {
 	   my $type = -e $_ && fsedit::typeOfPart($_);
 	   { device => $_, 
 	     type => $type || 0x83,
-	     isFormatted => $type,
 	     size => (split(':', `lvdisplay -D -c $_`))[6] }
        } map { /^LV Name\s+(\S+)/ ? $1 : () } `vgdisplay -v -D $lvm->{LVMname}`
       ];
