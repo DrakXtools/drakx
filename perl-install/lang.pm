@@ -935,7 +935,7 @@ sub write {
 	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
 
-	mkdir_p($confdir);
+	-d $confdir or die 'not configuring kde config files since it is not installed/used';
 
 	update_gnomekderc("$confdir/kdeglobals", Locale => (
 			      Charset => charset2kde_charset($charset),
