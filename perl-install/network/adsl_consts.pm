@@ -15,8 +15,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '212.35.2.1',
-                   dns2 => '212.35.2.2',
+                   dnsServer2 => '212.35.2.1',
+                   dnsServer3 => '212.35.2.2',
                   },
 
                   N("Belgium") . "|Belgacom" =>
@@ -29,8 +29,8 @@ our %adsl_data = (
                   { 
                    vpi => 8, 
                    vci => 23,
-                   dns1 => '213.228.0.68',
-                   dns2 => ' 212.27.32.176',
+                   dnsServer2 => '213.228.0.68',
+                   dnsServer3 => ' 212.27.32.176',
                    method => 'pppoa',
                   },
 
@@ -38,16 +38,16 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 24,
-                   dns1 => '213.228.0.68',
-                   dns2 => '212.27.32.176',
+                   dnsServer2 => '213.228.0.68',
+                   dnsServer3 => '212.27.32.176',
                   },
 
                   N("France") . "|9online 512" =>
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '62.62.156.12',
-                   dns2 => '62.62.156.13',
+                   dnsServer2 => '62.62.156.12',
+                   dnsServer3 => '62.62.156.13',
                    method => 'pppoa',
                   },
 
@@ -55,8 +55,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '194.117.200.10',
-                   dns2 => '194.117.200.15',
+                   dnsServer2 => '194.117.200.10',
+                   dnsServer3 => '194.117.200.15',
                    method => 'pppoa',
                   },
 
@@ -64,8 +64,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '193.252.19.3',
-                   dns2 => '193.252.19.4',
+                   dnsServer2 => '193.252.19.3',
+                   dnsServer3 => '193.252.19.4',
                    method => 'pppoa',
                   },
 
@@ -73,8 +73,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '212.151.136.242',
-                   dns2 => '130.244.127.162',
+                   dnsServer2 => '212.151.136.242',
+                   dnsServer3 => '130.244.127.162',
                    method => 'pppoa',
                   },
 
@@ -82,8 +82,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23, 
-                   dns1 => '213.36.80.1',
-                   dns2 => '213.36.80.2',
+                   dnsServer2 => '213.36.80.1',
+                   dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
                   },
 
@@ -91,8 +91,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '213.36.80.1',
-                   dns2 => '213.36.80.2',
+                   dnsServer2 => '213.36.80.1',
+                   dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
                   },
 
@@ -113,8 +113,8 @@ our %adsl_data = (
                   {
                    vpi => 1,
                    vci => 20,
-                   dns1 => '195.20.224.234',
-                   dns2 => '194.25.2.129',
+                   dnsServer2 => '195.20.224.234',
+                   dnsServer3 => '194.25.2.129',
                    method => 'pppoe',
                   },
 
@@ -128,8 +128,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '195.20.224.234',
-                   dns2 => '194.25.2.129',
+                   dnsServer2 => '195.20.224.234',
+                   dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
                   },
 
@@ -137,8 +137,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '195.20.224.234',
-                   dns2 => '194.25.2.129',
+                   dnsServer2 => '195.20.224.234',
+                   dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
                   },
 
@@ -152,8 +152,8 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
-                   dns1 => '194.204.152.34',
-                   dns2 => '217.98.63.164',
+                   dnsServer2 => '194.204.152.34',
+                   dnsServer3 => '217.98.63.164',
                    method => 'pppoa',
                   },
 
@@ -167,8 +167,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 20,
-                   dns1 => '80.58.32.33',
-                   dns2 => '80.58.0.97',
+                   dnsServer2 => '80.58.32.33',
+                   dnsServer3 => '80.58.0.97',
                    method => 'pppoe',
                   },
                   N("Spain") . "|Telefonica ip fija" =>
@@ -176,8 +176,8 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 20,
                    protocol => 'static',
-                   dns1 => '80.58.32.33',
-                   dns2 => '80.58.0.97',
+                   dnsServer2 => '80.58.32.33',
+                   dnsServer3 => '80.58.0.97',
                    method => 'static',
                   },
 
@@ -185,8 +185,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
-                   dns1 => '80.58.0.33',
-                   dns2 => '80.58.32.97',
+                   dnsServer2 => '80.58.0.33',
+                   dnsServer3 => '80.58.32.97',
                    method => 'pppoa',
                   },
 
