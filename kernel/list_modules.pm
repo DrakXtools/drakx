@@ -177,7 +177,7 @@ our %l = (
     tv => [ qw(bt878 bttv cpia_usb cx8800 cyber2000fb dpc7146 ibmcam ivtv mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo usbvision zr36067) ],
     dvb => [ qw(budget budget-av budget-ci dvb-ttpci hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
-    radio => [ qw(radio-maxiradio) ],
+    radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
     joystick => [ qw(cs461x ns558 emu10k1-gp fm801-gp iforce lightning ns558 vortex) ],
   },
