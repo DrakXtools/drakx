@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.23mdk
+Release: 0.24mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Wed Feb  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.24mdk
+- drakfont updates (poulpy)
+
 * Wed Feb  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.23mdk
 - draksec cleanups
 - fix harddrake2 embedding in mcc
