@@ -220,8 +220,13 @@ sub cardConfiguration(;$$$) {
     $card->{prefer_xf3} = ($card->{type} =~ /RIVA TNT/ ||
 			   $card->{type} =~ /RIVA128/ ||
 			   $card->{type} =~ /GeForce/ ||
-			   $card->{type} =~ /NeoMagic / ||
-			   $card->{type} =~ /SiS/);
+			   $card->{type} =~ /NeoMagic /);
+    #- take into account current environment in standalone to keep
+    #- the XFree86 version.
+    if ($::isStandalone) {
+	readlink("$prefix/etc/X11/X") =~ /XFree86/ and $card->{prefer_xf3} = 0;
+	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = 1;
+    }
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.0.2", "3.3.6");
