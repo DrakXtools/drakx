@@ -778,6 +778,20 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
+
+    require bootloader;
+    if (my @l = detect_devices::IDEburners()) {
+	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
+	#- in that case, also add ide-floppy otherwise ide-scsi will be used!
+	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-floppy') foreach detect_devices::ide_zips();
+    }
+    if ($o->{miscellaneous}{HDPARM}) {
+	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
+    }
+    if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
+	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
+    }
+
     if (arch() =~ /alpha/) {
 	if (my $dev = fsedit::get_root($o->{fstab})) {
 	    $o->{bootloader}{boot} ||= "/dev/$dev->{rootDevice}";
@@ -803,7 +817,6 @@ sub setupBootloaderBefore {
 	my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') #- SiS 630 need frame buffer.
 					 );
 
-	require bootloader;
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
 	my $has_aurora = do {
 	    my $p = pkgs::packageByName($o->{packages}, 'Aurora');
@@ -919,18 +932,6 @@ sub miscellaneousBefore {
 }
 sub miscellaneous {
     my ($o) = @_;
-
-    if (my @l = detect_devices::IDEburners()) {
-	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
-	#- in that case, also add ide-floppy otherwise ide-scsi will be used!
-	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-floppy') foreach detect_devices::ide_zips();
-    }
-    if ($o->{miscellaneous}{HDPARM}) {
-	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
-    }
-    if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
-	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
-    }
     #- keep some given parameters
     #-TODO
 }
