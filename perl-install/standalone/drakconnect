@@ -86,24 +86,20 @@ $combo1->entry->set_text($netcnx->{PROFILE} || "default");
 my $button_del = new Gtk2::Button(N("Del profile..."));
 $button_del->signal_connect(clicked => sub {
 				my $dialog = _create_dialog(N("Delete profile"));
-				$dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
-				my $combo_dialog = new Gtk2::OptionMenu;
+				gtkpack($dialog->vbox,
+                            Gtk2::Label->new(N("Profile to delete:")),
+                            my $combo_dialog = new Gtk2::OptionMenu,
+                           );
 				$combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
-				$dialog->vbox->pack_start($combo_dialog,1,1,0);
-				my $bbox_dialog = new Gtk2::HButtonBox;
-				$dialog->action_area->add($bbox_dialog);
-				$bbox_dialog->set_layout('end');
-				my $button_ok = Gtk2::Button->new(N("Ok"));
-				$button_ok->signal_connect(clicked => sub {
-							       network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text);
-							       $netcnx->{PROFILE} eq $combo_dialog->entry->get_text and $netcnx->{PROFILE} = "default";
-                                          sensitive_buttons(1);
-							       Gtk2->main_quit;
-							   });
-				$bbox_dialog->add($button_ok);
-				my $button_cancel = Gtk2::Button->new(N("Cancel"));
-				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit });
-				$bbox_dialog->add($button_cancel);
+				gtkpack($dialog->action_area,
+                            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { Gtk2->main_quit }),
+                            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                                  network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text);
+                                                  $netcnx->{PROFILE} eq $combo_dialog->entry->get_text and $netcnx->{PROFILE} = "default";
+                                                  sensitive_buttons(1);
+                                                  Gtk2->main_quit;
+                                              }),
+                            );
 				$dialog->show_all;
 				$dialog->run;
 				$dialog->destroy;
@@ -692,6 +688,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
             gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
            );
     gtkpack($dialog->action_area,
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
             gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
                                   each_index {
                                       ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
@@ -701,7 +698,6 @@ Create one first by clicking on 'Configure'")),1,1,0);
                                   $exit_dialogsub->();
                                   $dialog->destroy; Gtk2->main_quit;
                               }),
-            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub)
            );
 
     $dialog->show_all;
