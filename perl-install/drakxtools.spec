@@ -293,6 +293,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-15mdk
 - fix infamous #2672
+- fix drakwizard ("next" button being packed too far) (pixel)
 
 * Wed Mar  5 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-14mdk
 - localedrake: fix behaviour when only one lang is available (clicking
