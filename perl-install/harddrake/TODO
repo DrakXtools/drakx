@@ -15,7 +15,13 @@
 *** move all drakx tools into just a small one-liner that uses real <tool>.pm
     so that harddrake and mcc reduces their memory usage pattern and
     be faster (the next fast step will be to use perl6/parrot)
-*** scanner/sound/printer/ ... non needed by X, posponed to X11
+*** non needed stuff to run X must be posponed after X11 startup
+**** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
+**** different modes:
+***** neuneu => automatic config in service (ie for mouse/video card/...)
+***** expert => run config tools
+
+*** mode neuneu/expert => automatic/tools
 
 ** missing
 *** add updfstab
