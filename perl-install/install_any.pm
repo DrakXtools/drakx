@@ -965,14 +965,17 @@ sub suggest_mount_points {
     $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
 }
 
-#- mainly for finding the root partitions for upgrade
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
-    log::l("find_root_parts");
-    my $user;
-    grep { 
-	my ($mnt) = guess_mount_point($_, $prefix, \$user);
-	$mnt eq '/';
+    map { 
+	if (my $handle = any::inspect($_, $prefix)) {
+	    if (my $s = cat_("$handle->{dir}/etc/mandrake-release")) {
+		chomp($s);
+		$s =~ s/\s+for\s+\S+//;
+		log::l("find_root_parts found $_->{device}: $s");
+		{ release => $s, part => $_ };
+	    } else { () }
+	} else { () }
     } @$fstab;
 }
 sub use_root_part {
