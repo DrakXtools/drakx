@@ -956,8 +956,16 @@ sub install($$$;$$) {
 			my @params = split ":";
 			if ($params[0] eq 'close') {
 			    my $pkg = $packages->{depslist}[$params[1]];
+			    #- update flag associated to package.
 			    $pkg->set_flag_installed(1);
 			    $pkg->set_flag_upgrade(0);
+			    #- update obsoleted entry.
+			    foreach (keys %{$packages->{state}{obsoleted}}) {
+				if (exists $packages->{state}{obsoleted}{$_}{$pkg->id}) {
+				    delete $packages->{state}{obsoleted}{$_}{$pkg->id};
+				    %{$packages->{state}{obsoleted}{$_}} or delete $packages->{state}{obsoleted}{$_};
+				}
+			    }
 			} else {
 			    installCallback($packages, @params);
 			}
