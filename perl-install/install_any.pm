@@ -1375,6 +1375,7 @@ sub migrate_device_names {
 
 sub use_root_part {
     my ($all_hds, $part, $o_in) = @_;
+    my $migrate_device_names;
     {
 	my $handle = any::inspect($part, $::prefix) or die;
 
@@ -1382,6 +1383,7 @@ sub use_root_part {
 
 	my $root_from_fstab = fs::get::root_(\@from_fstab);
 	if (!fsedit::is_same_hd($root_from_fstab, $part)) {
+	    $migrate_device_names = 1;
 	    log::l("from_fstab contained: $_->{device} $_->{mntpoint}") foreach @from_fstab;
 	    migrate_device_names($all_hds, \@from_fstab, $part, $root_from_fstab, $o_in);
 	    log::l("from_fstab now contains: $_->{device} $_->{mntpoint}") foreach @from_fstab;
@@ -1390,6 +1392,7 @@ sub use_root_part {
 	log::l("fstab is now: $_->{device} $_->{mntpoint}") foreach fs::get::fstab($all_hds);
     }
     isSwap($_) and $_->{mntpoint} = 'swap' foreach fs::get::really_all_fstab($all_hds); #- use all available swap.
+    $migrate_device_names;
 }
 
 sub getHds {
@@ -1504,7 +1507,7 @@ sub set_security {
 
 sub write_fstab {
     my ($o) = @_;
-    fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$o->{isUpgrade};
+    fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$o->{isUpgrade} || $o->{migrate_device_names};
 }
 
 my @bigseldom_used_groups = (
