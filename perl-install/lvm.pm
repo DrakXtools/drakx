@@ -90,7 +90,7 @@ sub lv_delete {
 sub lv_create {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal};
-    my $nb = 1 + max(map { basename($_) } @$list);
+    my $nb = 1 + max(map { basename($_->{device}) } @$list);
     $lv->{device} = "/dev/$lvm->{LVMname}/$nb";
     run_program::run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $nb, $lvm->{LVMname});
     push @$list, $lv;
