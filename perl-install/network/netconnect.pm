@@ -150,7 +150,9 @@ If you don't want to use the auto detection, deselect the checkbox.
             }
         }
        };
-    $in->exit(0) if $@ =~ /wizcancel/;
+    if (my $err = $@) {
+        $err =~ /wizcancel/ ? $in->exit(0) : die $err;
+    }
   
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
