@@ -149,7 +149,6 @@ sub getCompaqSmartArray() {
 	foreach (cat_($f)) {
 	    if (m|^(ida/.*?):|) {
 		push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
-		last;
 	    }
 	}
     }
