@@ -30,8 +30,12 @@ my $current_md5 = md5file($prog_name);
 my $netcnx = {};
 my $netc = {};
 my $intf = {};
-network::netconnect::read_net_conf($netcnx, $netc, $intf);
 my $watched_interface;
+
+$SIG{HUP} = sub {
+    print "received SIGHUP, reloading network configuration\n";
+    checkNetworkForce();
+};
 
 my %appletstate = (
              connected => {
@@ -81,7 +85,6 @@ my %actions = (
                    launch => sub {
                        $netcnx->{PROFILE} = $_[0];
                        network::tools::bg_command_as_root('/sbin/set-netprofile', $netcnx->{PROFILE});
-                       checkNetworkForce();
                    }
                },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
