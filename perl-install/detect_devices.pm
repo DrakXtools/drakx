@@ -36,8 +36,8 @@ sub get {
 }
 sub hds         { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get() }
 sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
-sub burners     { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
-sub dvdroms     { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
+sub burners     { grep { isBurner($_) } cdroms() }
+sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
 sub zips        { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
 #-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get() }
 sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
