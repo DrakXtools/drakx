@@ -1,3 +1,23 @@
+2005/03/10  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: we don't want the 4/3 detailed_timings otherwise
+	they conflict with the Xorg builtin vesamodes
+
+	* standalone.pm: help perl
+
+2005/03/10  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/03/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: hide wlan-ng settings for non-root users
+	make wpa_supplicant.conf readable by root only
+
+2005/03/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* Makefile: ga translation level has been leveraged up
+
 2005/03/09  mareklaane
 
 	* share/po/et.po: Translation fixes.
@@ -46419,7 +46439,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1013 2005/03/08 10:50:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1014 2005/03/09 18:41:38 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
