@@ -736,11 +736,13 @@ sub create_box_with_title($@) {
     my $o = shift;
 
     my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
-    $o->{box} = new Gtk::VBox(0,0);
-    $o->{box_size} = n_line_size($nbline, 'text', $o->{box});
+    my $box = new Gtk::VBox(0,0);
+    return $box if $nbline == 0;
+
+    $o->{box_size} = n_line_size($nbline, 'text', $box);
     if (@_ <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
-	  eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)) };
+	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
 	$o->{box_size} = min(200, $o->{box_size});
 	my $has_scroll = $o->{box_size} < $wanted;
@@ -750,12 +752,12 @@ sub create_box_with_title($@) {
 	chomp(my $text = join("\n", @_));
 	my $scroll = createScrolledWindow(gtktext_insert($wtext, $text));
 	$scroll->set_usize(400, $o->{box_size});
-	gtkpack__($o->{box}, $scroll);
+	gtkpack__($box, $scroll);
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
 	if ($o->{icon} && !$::isWizard) {
-	    gtkpack__($o->{box},
+	    gtkpack__($box,
 		      gtkpack_(new Gtk::HBox(0,0),
 			       0, gtkset_usize(new Gtk::VBox(0,0), 15, 0),
 			       0, eval { gtkpng($o->{icon}) },
@@ -774,7 +776,7 @@ sub create_box_with_title($@) {
 		      if_($a, new Gtk::HSeparator)
 		     )
 	} else {
-	    gtkpack__($o->{box},
+	    gtkpack__($box,
 		      (map {
 			  my $w = ref $_ ? $_ : new Gtk::Label($_);
 			  $::isWizard and $w->set_justify("left");
