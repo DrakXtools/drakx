@@ -839,7 +839,7 @@ sub versionCompare($$) {
     while ($a || $b) {
 	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D*)// } ($b, $a);
 	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
-	$sa eq '' && $sb eq '' and return $a cmp $b;
+	$sa eq '' && $sb eq '' and return $a cmp $b || 0;
     }
 }
 
@@ -961,7 +961,10 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 		#- TODO take into account version number and flags (that's why regexp :-)
 		$ask_child->(packageName($p), "obsoletes", sub {
-				 if ($_[0] =~ /^(\S*)/ && c::rpmdbNameTraverse($db, $1) > 0) {
+				 #- take care of flags and version and release if present
+				 if ($_[0] =~ /^(\S*)\s*(\S*)\s*([^\s-]*)-?(\S*)/ && c::rpmdbNameTraverse($db, $1) > 0) {
+				     $3 and eval(versionCompare(packageVersion($p), $3) . $2 . 0) or next;
+				     $4 and eval(versionCompare(packageRelease($p), $4) . $2 . 0) or next;
 				     log::l("selecting " . packageName($p) . " by selection on obsoletes");
 				     $obsoletedPackages{$1} = undef;
 				     selectPackage($packages, $p);
