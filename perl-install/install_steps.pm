@@ -419,6 +419,10 @@ GridHeight=70
 	} "$o->{prefix}$_/.kde/share/config/kfmrc" 
     }
 
+    #- to unsure linuxconf doesn't cry against those files being in the future
+    -e $_ and touch($_) foreach map { "$o->{prefix}/$_" } 
+      '/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/network', '/etc/sysconfig/mouse', '/etc/X11/fs/config';
+
     #- move some file after an upgrade that may be seriously annoying.
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
@@ -450,7 +454,7 @@ sub configureNetwork($) {
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
 
-    $o->pkg_install("dhcpxd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$o->{intf}};
+    $o->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$o->{intf}};
     # Handle also pump (this is still in initscripts no?)
     $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect

@@ -95,11 +95,13 @@ sub drakxservices {
     mapn { 
 	my ($name, $before, $after) = @_;
 	if ($before != $after) {
+	    my $script = "/etc/rc.d/init.d/$name";
 	    run_program::rooted($prefix, "chkconfig", $after ? "--add" : "--del", $name);
-	    if ($after && cat_("$prefix/etc/rc.d/init.d/$name") =~ /^#\s+chkconfig:\s+-/m) {
-		#- `/sbin/runlevel` =~ /\s(\d+)/ or die "bad runlevel";
-		#- $1 == 3 || $1 == 5 or log::l("strange runlevel: ``$1'' (neither 3 nor 5)");
+	    if ($after && cat_("$prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
 		run_program::rooted($prefix, "chkconfig", "--level", "35", $name, "on");
+	    }
+	    if (!$after && $::isStandalone) {
+		run_program::rooted($prefix, $script, "stop");
 	    }
 	}
     } \@l, \@before, $after;

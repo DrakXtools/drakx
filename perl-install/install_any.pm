@@ -34,7 +34,7 @@ use log;
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-server
-XFree86 dhcpxd pump ppp ypbind rhs-printfilters pnm2ppa samba ncpfs kernel-fb
+XFree86 dhcpcd pump ppp ypbind rhs-printfilters pnm2ppa samba ncpfs kernel-fb
 );
 
 #-######################################################################################
@@ -254,7 +254,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
-	push @{$o->{default_packages}}, "alsa" if modules::get_alias("sound") =~ /^snd-card-/;
+	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);

@@ -1,3 +1,11 @@
+2000-05-03  Pixel  <pixel@mandrakesoft.com>
+
+	* services.pm (drakxservices): stop immediately service if removed
+
+	* install_steps.pm (configureNetwork): replaced dhcpxd by dhcpcd
+	* install_steps.pm (afterInstallPackages): touch some files to
+	please linuxconf
+
 2000-05-03  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps.pm: updated min size, fixed kppprc generation.
