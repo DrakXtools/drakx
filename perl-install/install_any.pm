@@ -201,8 +201,6 @@ sub getNextStep() {
 sub spawnShell() {
     return if $::o->{localInstall} || $::testing;
 
-    -x "/bin/sh" or die "cannot open shell - /bin/sh doesn't exist";
-
     fork() and return;
 
     $ENV{DISPLAY} ||= ":0"; #- why not :pp
@@ -221,8 +219,12 @@ sub spawnShell() {
 
     ioctl(STDIN, c::TIOCSCTTY(), 0) or warn "could not set new controlling tty: $!";
 
-    my $busybox = "/usr/bin/busybox";
-    exec { -e $busybox ? $busybox : "/bin/sh" } "/bin/sh" or log::l("exec of /bin/sh failed: $!");
+    my @args; -e '/etc/bashrc' and @args = qw(--rcfile /etc/bashrc);
+    foreach (qw(/bin/bash /usr/bin/busybox /bin/sh)) {
+        -x $_ or next;
+        exec { $_ } $_ =~ /busybox/ ? "/bin/sh" : $_, @args or log::l("exec of $_ failed: $!");
+    }
+    die "cannot open shell";
 }
 
 sub getAvailableSpace {
