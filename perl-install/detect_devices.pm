@@ -577,7 +577,7 @@ sub getUPS() {
         $_->{driver} = "UPS:mge-shut"  if $_->{MODEL} =~ /0002/;
         $_->{media_type} = 'UPS';
         $_->{description} = "MGE UPS SYSTEMS|UPS - Uninterruptible Power Supply" if $_->{MODEL} =~ /000[12]/;
-        $_;1
+        $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
       # USB UPSs;
       (map {
