@@ -1,0 +1,219 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2001 by Sebastien DUPONT <sdupont@mandrakesoft.com>
+# Redistribution of this file is permitted under the terms of the GNU
+# Public License (GPL)
+## description:
+#
+#  Drakbacup is use to backup system files and user files
+#  Drakbacup allow to restore the system (etc, var files)
+#  from starup or on drakconf utility.
+#
+#backup name format: all the time from the /
+#                    backup_sys_12102001.tar.gz                    -> default system backup
+#		     backup_sys_etc_var_proc_12102001.tar.gz       -> specific system directories
+#		     backup_user_james_12102001.tar.gz             -> default user backup
+#		     backup_user_james_documents_12102001.tar.gz   -> specific user directories
+#                    backup_other_proc_12102001.tar.gz             -> specific other directories
+#
+# backup name rules: system: begin by sys
+#                    user:   begin by user
+#                    other:   begin by other
+#                    end of all `date`.tar.gz
+#
+# seems to be good idea to have a txt file where user explain the differences
+# between all the backup
+#
+# save only the differences...
+# find / -mtime -1 \! -type d -print > /tmp/liste.jour
+#
+# build iso fs with rescue.
+#
+# configuration file on /etc/drakconf/drakbackup/drakbakup.conf
+#
+
+use Gtk;
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use standalone;
+use my_gtk qw(:helpers :wrappers);
+use common;
+use strict;
+
+
+if ("@ARGV" =~ /--help|-h/) {
+    print q(Backup and monitoring application
+
+--list           : list of files or directories to backup.
+--default        : save default directories.
+--build_cd       : build restore iso with the currents backups files
+                       & rescue options.
+--build_floppy   : build restore floppy.
+--update         : don t replace the old backup, only update it. 
+--replace        : delete backup files before build new.
+--save_dir       : by default the backup files are saved in 
+                       in /var/backup directory so write other directory
+	               to change to change it.
+--conf_file      : to read other configuration file. 
+);
+    exit(0);
+}
+
+# Backend Options.
+my $default = 0;
+my $build_cd = 0;
+my $build_floppy = 0;
+my $comp_mode = 0;
+my $mode = 0;
+my $replace = 0;
+my $update = 0;
+my $conf_file = 0;
+my @list_arg = ();
+my @sys_files ;
+my @home_files;
+my @other_files;
+my $save_path;
+my $option_replace = 0;
+my $option_update = 0;
+my $windows = 0;
+my $central_widget;
+my $interactive;
+
+
+# PATH  & Global variables.
+my $cfg_file = "/etc/drakconf/drakbackup/drakbackup.conf";
+
+
+
+foreach (@ARGV) {
+    /--default/ and $default = 1, $mode=-1;
+    /--build_cd/ and $build_cd = 1, $mode=-1;
+    /--build_floppy/ and $build_floppy = 1, $mode=-1;
+    /--replace|-r/ and $replace = 1, $mode=-1;
+    /--update|-u/ and $update = 1, $mode=-1;
+    /--conf_file/ and $mode = 0, next;
+#    $mode == 0 and push $conf_file, $_;
+    /--list/ and $mode = 1, next;
+    $mode == 1 and push @list_arg, $_;
+}
+
+sub debug {
+    print "SYS_FILES: $_ \n" foreach (@sys_files);
+    print "HOME_FILES: $_ \n" foreach (@home_files);
+    print "OTHER_FILES: $_ \n" foreach (@other_files);
+    print "PATH_TO_SAVE: $save_path \n";
+    print "OPTION_REPLACE: $option_replace \n";
+    print "OPTION_UPDATE: $option_update \n";
+    print "OPTION_COMP: $comp_mode \n";
+}
+
+sub read_conf_file {
+    foreach (cat_("$cfg_file")) {
+	if (/^SYS_FILES/) {  
+	    chomp;
+	    s/^SYS_FILES=//gi;
+	    @sys_files = split(' ', $_ );
+	}
+	if (/^HOME_FILES/)  {
+	    chomp;
+	    s/^HOME_FILES=//gi;
+	    @home_files = split(' ', $_ );
+	}
+	if (/^OTHER_FILES/)  {
+	    chomp;
+	    s/^OTHER_FILES=//gi;
+	    @other_files = split(' ', $_ );
+	}
+	if (/^PATH_TO_SAVE/) {
+	    chomp;
+	    $save_path = $_;
+	}
+	if (/^OPTION_REPLACE/){
+	    $option_replace = 1;
+	    $option_update  = 0;
+	}
+        if (/^OPTION_UPDATE/){
+	    $option_replace = 0;
+	    $option_update  = 1;
+	}
+	if (/^OPTION_COMP/) {
+	    chomp;
+	    s/^OPTION_COMP=//gi;
+	    /TAR.GZ/ and  $comp_mode = 0;
+	    /TAR.BZ2/ and $comp_mode = 1;
+	}
+    }
+    debug; 
+}
+
+$build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
+
+sub backend_mod {
+    read_conf_file();
+}
+
+sub build_cd_fct {
+
+}
+
+sub build_floppy_fct {
+
+}
+
+sub build_backup_files {
+
+}
+
+sub interactive_mode {
+    my $font_box;
+    my $font_sel;
+    $interactive = 1;
+    
+    init Gtk;
+    
+    my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
+    $window1->set_position(1);
+    $window1->set_title(_("Fonts Importation"));
+    $window1->set_border_width(5);
+    
+    gtkadd($window1,
+	   gtkpack_(new Gtk::HBox(0,2),
+		    1, gtkpack_(new Gtk::VBox(0,2),
+				1, new Gtk::VBox(0,0),
+				1, gtkpack(gtkset_usize($font_box = new Gtk::VBox(0,5),500, 350),
+					   $font_sel = new Gtk::FontSelection,
+					   ),
+				1, new Gtk::VBox(0,0)
+				),
+		    0, gtkpack_(new Gtk::VBox(0,5),
+				0, _("DrakFont"),
+				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
+							    sub { ${$central_widget}->destroy(); $windows = 1; license(\&appli_choice)}),
+					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
+							    sub {  ${$central_widget}->destroy(); $windows = 0; license(\&advanced_install)}),
+					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
+							    sub { ${$central_widget}->destroy(); uninstall() }),
+					  gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
+							    sub { ${$central_widget}->destroy(); create_fontsel()}),
+					  ),
+				1, new Gtk::VBox(0,0),
+				1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
+					       ${$central_widget}->destroy(); help() }),
+					  gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
+					  ),
+				)
+		    ),
+	   );
+    $central_widget = \$font_sel;
+    $window1->show_all;
+    $window1->realize;
+    $window1->show_all();
+    
+    Gtk->main;
+    Gtk->exit(0);
+}
+
+
