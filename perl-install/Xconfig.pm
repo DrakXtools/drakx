@@ -164,6 +164,7 @@ sub getinfoFromXF86Config {
     $mouse{nbuttons} ||= 3; #- when no tag found, this is because there is 3 buttons.
     $mouse{auxmouse}{nbuttons} ||= 3;
     mouse::update_type_name(\%mouse); #- allow getting fullname (type|name).
+    mouse::update_type_name($mouse{auxmouse});
 
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
