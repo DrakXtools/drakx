@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center_at_pos $force_center $force_focus $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_center $force_focus $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
 use lang;
 
 $::o = { locale => lang::read() } if !$::isInstall;
@@ -877,6 +877,7 @@ sub new {
 
     $o->{isWizard} ||= $::isWizard;
     $o->{isEmbedded} ||= $::isEmbedded;
+    $o->{wm_icon} ||= $wm_icon || $::Wizard_pix_up || "wiz_default_up.png";
 
     $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
 	#- don't take into account the DrawingArea
@@ -885,7 +886,7 @@ sub new {
 
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window($title);
-	$o->{rwindow}->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
+	$o->{rwindow}->set_icon(gtkcreate_pixbuf($o->{wm_icon});
 	$o->{rwindow}->set_position('center-on-parent');
 
 	if ($::isInstall) {
@@ -930,9 +931,9 @@ sub new {
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
-          $::WizardWindow->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
+		$::WizardWindow->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
 	    } else {
-          $::Plug->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
+		$::Plug->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
 	    }
 	    $::WizardWindow->show;
 	}
