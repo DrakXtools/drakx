@@ -712,11 +712,9 @@ CAT_PRINTER
     foomatic-filters foomatic-db foomatic-db-hpijs ImageMagick
     ghostscript printer-filters printer-utils mpage 
     a2ps ppdfilt groff lesstif
-    sane-backends sane-frontends scanner-gui xsane
-    libsnmp0 xojpanel libsane-hpoj1
+    libsnmp0 
     hplip-hpijs hplip-hpijs-ppds postscript-ppds
     gimpprint-ijs gimpprint-foomatic gimpprint-escputil
-    hplip libsane-hpaio1 libhpip0
 
 INSTALL
   NOCOPY
@@ -742,4 +740,8 @@ INSTALL
     synaptics dkms-minimal
 
   5 cups cups-drivers hpoj libhpojip0 gimpprint-cups
+    xojpanel libsane-hpoj1
+    sane-backends sane-frontends scanner-gui xsane
+
   4 xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
+    hplip libsane-hpaio1 libhpip0
