@@ -568,7 +568,7 @@ enum return_type nfs_prepare(void)
 
 	do {
 		results = ask_from_entries_auto("Please enter the name or IP address of your NFS server, "
-						"and the directory containing the " DISTRIB_NAME " installation.",
+						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto);
 		if (results != RETURN_OK)
 			return nfs_prepare();
@@ -585,7 +585,7 @@ enum return_type nfs_prepare(void)
 		}
 
 		if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
-			error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Installation.");
+			error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
 			umount("/tmp/image");
 			results = RETURN_BACK;
 		}

@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/mount.h>
+#include <dirent.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
@@ -33,6 +34,24 @@
 
 #include "disk.h"
 
+
+static char * list_directory(char * direct)
+{
+	char tmp[500] = "";
+	int nb = 0;
+	struct dirent *ep;
+	DIR *dp = opendir(direct);
+	while (dp && nb < 5 && (ep = readdir(dp))) {
+		if (strcmp(ep->d_name, ".") && strcmp(ep->d_name, "..")) {
+			strcat(tmp, strdup(ep->d_name));
+			strcat(tmp, "\n");
+			nb++;
+		}
+	}
+	if (dp)
+		closedir(dp);
+	return strdup(tmp);
+}
 
 static enum return_type try_with_device(char *dev_name)
 {
@@ -63,14 +82,14 @@ static enum return_type try_with_device(char *dev_name)
 		if ((strstr(name, dev_name) == name) && (blocks > 1) && (name[strlen(dev_name)] != '\0')) {
 			parts[i] = strdup(name);
 			parts_comments[i] = (char *) malloc(sizeof(char) * 25);
-			snprintf(parts_comments[i], 24, "size: %d blocks", blocks);
+			snprintf(parts_comments[i], 24, "size: %d Mbytes", blocks >> 10);
 			i++;
 		}
 	}
 	parts[i] = NULL;
 	fclose(f);
 
-	results = ask_from_list_comments("Please choose the partition to use for the installation.", parts, parts_comments, &choice);
+	results = ask_from_list_comments("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.", parts, parts_comments, &choice);
 	if (results != RETURN_OK)
 		return results;
 
@@ -84,7 +103,7 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	results = ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Installation.",
+	results = ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Distribution.",
 				   questions_location, &answers_location, 24);
 	if (results != RETURN_OK) {
 		umount("/tmp/disk");
@@ -95,8 +114,10 @@ static enum return_type try_with_device(char *dev_name)
 	strcat(location_full, answers_location[0]);
 
 	if (access(location_full, R_OK)) {
+		error_message("Directory could not be found on partition.\n"
+			      "Here's a short extract of the files in the root of the partition:\n"
+			      "%s", list_directory("/tmp/disk"));
 		umount("/tmp/disk");
-		error_message("Directory could not be found on partition.");
 		return try_with_device(dev_name);
 	}
 
@@ -104,9 +125,12 @@ static enum return_type try_with_device(char *dev_name)
 	symlink(location_full, "/tmp/image");
 
 	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
-		umount("/tmp/disk");
+		error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory.\n"
+			      "Here's a short extract of the files in the directory:\n"
+			      "%s", list_directory("/tmp/image"));
+		if (umount("/tmp/disk"))
+			log_message("umount failed");
 		unlink("/tmp/image");
-		error_message("I can't find the " DISTRIB_NAME " Installation in the specified directory.");
 		return try_with_device(dev_name);
 	}
 
@@ -161,7 +185,7 @@ enum return_type disk_prepare(void)
 		return disk_prepare();
 	}
 
-	results = ask_from_list_comments("Please choose the DISK drive to use for the installation.", medias, medias_models, &choice);
+	results = ask_from_list_comments("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Distribution.", medias, medias_models, &choice);
 
 	if (results != RETURN_OK)
 		return results;
