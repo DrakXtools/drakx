@@ -126,8 +126,6 @@ sub selectKeyboard {
 	my $keyboard = keyboard::read($o->{prefix});
 	$keyboard and $o->{keyboard} = $keyboard;
     }
-    return if !$::expert && !$clicked;
-
     installStepsCall($o, $auto, 'selectKeyboard', $clicked);
 }
 
