@@ -1232,7 +1232,7 @@ sub log_sizes {
 sub X_options_from_o {
     my ($o) = @_;
     { 
-	freeDriver => $o->{freeDriver},
+	freedriver => $o->{freedriver},
 	allowFB => $o->{allowFB},
     };
 }

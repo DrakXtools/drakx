@@ -289,7 +289,7 @@ sub install_server {
 	push @packages, 'xorg-x11-glide-module' if $card->{card_name} =~ /Voodoo/;
     }
 
-    if ($options->{freeDriver}) {
+    if ($options->{freedriver}) {
 	delete $card->{Driver2};
     }
 
