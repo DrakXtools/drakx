@@ -456,44 +456,42 @@ sub pack_passwd {
 }
 
 sub get_autologin {
-    my ($_o) = @_;
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-    my $dm = $desktop{DISPLAYMANAGER};
     my $desktop = $desktop{DESKTOP} || 'KDE';
-    if ($desktop{DISPLAYMANAGER} eq 'GNOME') {
-        my %l = getVarsFromSh("$::prefix/etc/X11/gdm/gdm.conf");
-        return { autologin => text2bool($l{AutomaticLoginEnable}) && $l{AutomaticLogin}, desktop => $desktop };
-    } else { # KDM / MdkKDM
-        my %l = getVarsFromSh("$::prefix/usr/share/config/kdm/kdmrc");
-        return { autologin => text2bool($l{AutoLoginEnable}) && $l{AutoLoginUser}, desktop => $desktop };
-    }
+    my $autologin = do {
+	if (($desktop{DISPLAYMANAGER} || $desktop) eq 'GNOME') {
+	    my %conf = read_gnomekderc("$::prefix/etc/X11/gdm/gdm.conf", 'daemon');
+	    text2bool($conf{AutomaticLoginEnable}) && $conf{AutomaticLogin};
+	} else { # KDM / MdkKDM
+	    my %conf = read_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core');
+	    text2bool($conf{AutoLoginEnable}) && $conf{AutoLoginUser};
+	}
+    };
+    { autologin => $autologin, desktop => $desktop };
 }
 
 sub set_autologin {
-  my ($user, $desktop) = @_;
-  print "\n\nconfig => ($user, $desktop)\n";
-  my $autologin = bool2text($user);
-  my $found;
-  # Configure KDM / MDKKDM
-  substInFile {
-      s/^(AutoLoginEnable=).*/$1$autologin/;
-      $found ||= s/^(AutoLoginUser=).*/$1$user/;
-  } "$::prefix/usr/share/config/kdm/kdmrc";
-  substInFile {
-      s/^(AutoLoginEnable=.*)$/$1\nAutoLoginUser=$user/;
-  } "$::prefix/usr/share/config/kdm/kdmrc" if !$found;
-  # Configure GDM
-  substInFile {
-      s/^(AutomaticLoginEnable=).*/$1$autologin/;
-      s/^(AutomaticLogin=).*/$1$user/;
-  } "$::prefix/etc/X11/gdm/gdm.conf";
+    my ($user, $desktop) = @_;
+    my $autologin = bool2text($user);
+
+    #- Configure KDM / MDKKDM
+    eval { update_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'X-:0-Core' => (
+	AutoLoginEnable => $autologin,
+	AutoLoginUser => $user,
+    )) };
+
+    #- Configure GDM
+    eval { update_gnomekderc("$::prefix/etc/X11/gdm/gdm.conf", daemon => (
+	AutomaticLoginEnable => $autologin,
+	AutomaticLogin => $user,
+    )) };
   
-  if ($user) {
-      my %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-      $l{DESKTOP} = $desktop;
-      setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
-      log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
-  }
+    if ($user) {
+	my %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
+	$l{DESKTOP} = $desktop;
+	setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
+	log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
+    }
 }
 
 sub rotate_log {
