@@ -383,6 +383,31 @@ sub read_all_conf {
     }
 }
 
+#- configureNetwork2 : configure the network interfaces.
+#- input
+#-  $prefix
+#-  $netc
+#-  $intf
+#-  $install : a function that takes a list of package and install them : ex sub { system("urpmi --auto --best-output " . join(' ', @_)); }
+#- $netc input
+#-  NETWORKING : networking flag : string : "yes" by default
+#-  FORWARD_IPV4 : forward IP flag : string : "false" by default
+#-  HOSTNAME : hostname : string : "localhost.localdomain" by default
+#-  DOMAINNAME : domainname : string : $netc->{HOSTNAME} =~ /\.(.*)/ by default
+#-  DOMAINNAME2 : well it's another domainname : have to look further why we used 2
+#-  The following are facultatives
+#-  DHCP_HOSTNAME : If you have a dhcp and want to set the hostname
+#-  GATEWAY : gateway
+#-  GATEWAYDEV : gateway interface
+#-  NISDOMAIN : nis domain
+#-  $netc->{dnsServer} : dns server 1
+#-  $netc->{dnsServer2} : dns server 2
+#-  $netc->{dnsServer3} : dns server 3 : note that we uses the dns1 for the LAN, and the 2 others for the internet conx
+#- $intf input: for each $device (for example ethx)
+#-  $intf->{$device}{IPADDR} : IP address
+#-  $intf->{$device}{NETMASK} : netmask
+#-  $intf->{$device}{DEVICE} : DEVICE = $device
+#-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
 sub configureNetwork2 {
     my ($prefix, $netc, $intf, $install) = @_;
     my $etc = "$prefix/etc";
