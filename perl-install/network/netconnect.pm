@@ -311,9 +311,8 @@ sub real_main {
                             ],
                             },
                     post => sub {
-                        network::isdn::write_config($isdn, $netc); # or return 'isdn_protocol';
+                        network::isdn::write_config($isdn);
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        # return "static_hostname";
                         $handle_multiple_cnx->();
                     },
                    },
