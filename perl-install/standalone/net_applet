@@ -99,12 +99,21 @@ sub checkNetwork {
     my %h = getVarsFromSh($gatewayconf);
     my $new_md5 = md5file($prog_name);
     #    print "NEW($newmd5) = OLD($oldmd5)\n"
+    my $gd, $addrgd;
     if ($h{GATEWAYDEV}) {
-	my $addrgd = getIP($h{GATEWAYDEV});	
-	if ($addrgd) {
-	    go2State('connected', $h{GATEWAYDEV}) 
-	} else { go2State('disconnected', '') }
-    } else { die "No Gatewaydev defined" }
+        $addrgd = getIP($gd = $h{GATEWAYDEV});
+    } else {
+        foreach (`/sbin/ip route show`) {
+            ($addrgd, $gd) = /^default\s+via\s+(\S+).*\s+dev\s+(\S+)/ and last;
+        }
+    }
+
+    $gd or die "No Gatewaydev defined";
+
+    if ($addrgd) {
+        go2State('connected', $gd)
+    } else { go2State('disconnected', '') }
+
     if ($new_md5 ne $current_md5) { exec($prog_name) };
 }
 sub getIP {
