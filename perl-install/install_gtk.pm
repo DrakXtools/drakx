@@ -71,12 +71,12 @@ widget "*Steps*" style "small-font"
 
 #------------------------------------------------------------------------------
 sub create_big_help {
+    my ($o) = @_;
     my $w = my_gtk->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
     $w->{rwindow}->set_usize($::logowidth, $::rootheight - $::logoheight);
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
-		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
-							   formatAlaTeX(_ deref($help::steps{$::o->{step}})))),
+		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, $o->{current_help})),
 		    0, gtksignal_connect(my $ok = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		   ));
     $ok->grab_focus;
@@ -102,11 +102,10 @@ sub create_help_window {
     my $pixmap = new Gtk::Pixmap(gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
-		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => \&create_big_help), $pixmap),
+		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => sub { create_big_help($o) }), $pixmap),
 		    1, createScrolledWindow($o->{help_window_text} = new Gtk::Text),
 		   ));
-    gtktext_insert($o->{help_window_text}, $o->{step} ? formatAlaTeX(_ deref($help::steps{$o->{step}})) : '');
-
+    $o->set_help($o->{step}) if $o->{step};
     $w->show;
     $o->{help_window} = $w;
 }

@@ -1,9 +1,11 @@
 2000-09-15  Pixel  <pixel@mandrakesoft.com>
 
-	* mouse.pm: reworked quite a lot. Now sorts/categorize nicely the mice.
-	
-	* install_steps_interactive.pm (selectMouse): adapted for reworked mouse.pm
+	* install_steps_gtk.pm (set_help): save the help message displayed
+	in $o->{current_help}
+	* install_gtk.pm (create_big_help): display $o->{current_help}
 
+	* mouse.pm: reworked quite a lot. Now sorts/categorize nicely the mice.	
+	* install_steps_interactive.pm (selectMouse): adapted for reworked mouse.pm
 	* install2.pm (selectMouse): adapted for mouse::read now returning
 	an hash ref
 

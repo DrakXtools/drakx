@@ -380,7 +380,7 @@ sub _create_window($$) {
 
 	if ($d eq "help" && !$::isStandalone) {
 	    require install_gtk;
-	    install_gtk::create_big_help();
+	    install_gtk::create_big_help($::o);
 	} else {
 	    my $s = $::o->{step};
 	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};

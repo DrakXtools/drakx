@@ -558,9 +558,8 @@ sub set_help {
     my ($o, @l) = @_;
 
     $::live and return 1;
-    gtktext_insert($o->{help_window_text}, 
-		   formatAlaTeX(join "\n", 
-				map { _ deref($help::steps{$_}) } @l));
+    $o->{current_help} = formatAlaTeX(join "\n", map { _ deref($help::steps{$_}) } @l);
+    gtktext_insert($o->{help_window_text}, $o->{current_help});
     1;
 }
 
