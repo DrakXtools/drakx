@@ -282,7 +282,7 @@ sub services {
     my ($prefix) = @_;
     local $ENV{LANGUAGE} = 'C';
     my @raw_l = run_program::rooted_get_stdout($prefix, '/sbin/chkconfig', '--list');
-    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort @raw_l;
+    my @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
 
