@@ -135,23 +135,6 @@ sub fuzzyChoice {
 }
 sub bestTimezone { $l2t{fuzzyChoice($_[0])} || 'GMT' }
 
-my %sex = (
-fr_FR => { '[iln]a$' => 1, '[cdilnst]e$' => 1, 'e$' => .8, 'n$' => .1, 'd$' => .05, 't$' => 0 },
-en => { 'a$' => 1, 'o$' => 0, '[ln]$' => .3, '[rs]$' => .2 },
-);
-
-
-sub sexProb($) {
-    local ($_) = @_;
-    my $l = $sex{$ENV{LC_ALL}} or return 0.5;
-
-    my ($prob, $nb) = (0, 0);
-    foreach my $k (keys %$l) {
-	/$k/ and $prob += $l->{$k}, $nb++;
-    }
-    $nb ? $prob / $nb : 0.5;
-}
-
 sub ntp_servers { 
 q(Australia (ntp.adelaide.edu.au)
 Australia (ntp.saard.net)
