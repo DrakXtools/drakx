@@ -334,20 +334,10 @@ notation (for example, 1.2.3.4).");
 		     }
 		     return 0 if $auto_ip;
 
-		     my $bad_ip = 0;
-		     each_index { unless (is_ip($intf->{$_})) { 
+		     if (my @bad = map_index { if_(is_ip($intf->{$_}), $::i) } @fields) {
 			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
-			 $bad_ip = 1;
-		     } } @fields;
-		     return 1 if $bad_ip;
-
-		     #for (my $i = 0; $i < @fields; $i++) {
-		     #    unless (is_ip($intf->{$fields[$i]})) {
-		     #       $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
-		     #       return (1);
-		     #    }
-		     #    return 0;
-		     #}
+			 return 1, $bad[0];
+		     }
 		     		     		     
 		     return 0 if !$intf->{WIRELESS_FREQ};
 		     if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
