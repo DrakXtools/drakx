@@ -1413,9 +1413,111 @@ sub get_copiable_queues {
 sub copy_foomatic_queue {
     my ($printer, $oldqueue, $oldspooler, $newqueue) = @_;
     run_program::rooted($prefix, "foomatic-configure", "-q",
-		      "-s", $printer->{SPOOLER},
-		      "-n", $newqueue,
+			"-s", $printer->{SPOOLER},
+			"-n", $newqueue,
 			"-C", $oldspooler, $oldqueue);
+}
+
+sub configure_hpoj {
+    my ($device, @autodetected) = @_;
+    # Get the model ID as auto-detected
+    my $model;
+    foreach (@autodetected) {
+	$device eq $_->{port} or next;
+	$model = $_->{val}{MODEL};
+	last;
+    }
+    #$device = "/dev/usb/lp1"; $model = "DeskJet 990C";
+    # Read the HPOJ config file and check whether this device is already
+    # configured
+    my $deviceconfigured = 0;
+    my $ptaldevice;
+    my $hpoj_config = "/etc/ptal-start.conf";
+    local *HPOJCONFIG; 
+    if (open HPOJCONFIG, ("< $prefix$hpoj_config")) {
+	while ($line = <HPOJCONFIG>) {
+	    chomp $line;
+	    # Comment or blank line
+	    next if (($line =~ /^\s*\#/) || ($line =~ /^\s*$/));
+	    # Only lines beginning with "ptal-mlcd" are interesting.
+	    next if ($line !~ /^\s*ptal-mlcd\s+(\S+)\s+/);
+	    $ptaldevice = "mlc:$1";
+	    if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
+		# Parallel device
+		next if ($device =~ /usb/);
+		if ($line =~ m!-device\s+$device!) {
+		    # Our new device is parallel and already configured
+		    # by the current line
+		    $deviceconfigured = 1;
+		    last;
+		}
+	    } elsif ($ptaldevice =~ /^mlc:usb:(.+)$/) {
+		# USB device
+		next if ($device !~ /usb/);
+		if ($line =~ /-devidmatch\s+(\"[^\"]*\")/) {
+		    $configuredmodel = $1;
+		    $configuredmodel =~ s/\"//g;
+		    $configuredmodel =~ s/^mdl://;
+		    $configuredmodel =~ s/^model://;
+		    $configuredmodel =~ s/;$//;
+		    if ($configuredmodel eq $model) {
+			# Our new device is USB and already configured
+			# by the current line
+			$deviceconfigured = 1;
+			last;
+		    }
+		} elsif ($line =~ m!-device\s+(/dev/usb/lp\d+)!) {
+		    if ($1 eq $device) {
+			# Our new device is USB and already configured
+			# by the current line
+			$deviceconfigured = 1;
+			last;
+		    }
+		}
+	    }
+	}
+	close HPOJCONFIG;
+    }
+
+    # It's all done for us, the device is already configured
+    return $ptaldevice if $deviceconfigured;
+
+    # Configure the device
+    my $entry;
+    if ($device =~ /usb/) {
+	# USB device
+	my $ptaldevicemodel = $model;
+	$ptaldevicemodel =~ s/\s+/_/g;
+	$entry = "\nptal-mlcd usb:$ptaldevicemodel -device /dev/usb/lp* -devidmatch \"$model;\" \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:usb:$ptaldevicemodel \$PTAL_PRINTD_CMDLINE_APPEND\n";
+	$ptaldevice = "mlc:usb:$ptaldevicemodel";
+    } else {
+	# parallel device
+	# auto-detect the parallel port addresses
+	$device =~ m!^/dev/lp(\d+)$!;
+	my $portnumber = $1;
+	my $parport_addresses = 
+	    `cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
+	my $address_arg;
+	if ($parport_addresses =~ /^\s*(\d+)\s+(\d+)\s*$/) {
+	    $address_arg = sprintf(" -base 0x%x -basehigh 0x%x", $1, $2);
+	} elsif ($parport_addresses =~ /^\s*(\d+)\s*$/) {
+	    $address_arg = sprintf(" -base 0x%x", $1);
+	} else {
+	    $address_arg = "";
+	}
+	$entry = "\nptal-mlcd par:$portnumber -device $device$address_arg \$PTAL_MLCD_CMDLINE_APPEND\nptal-printd mlc:par:$portnumber \$PTAL_PRINTD_CMDLINE_APPEND\n";
+	$ptaldevice = "mlc:par:$portnumber";
+    }
+
+    # Add new entry to HPOJ's config file
+    open(HPOJCONFIG,">> $prefix$hpoj_config") ||
+	die "Could not open $hpoj_config for writing!\n";
+    print HPOJCONFIG $entry;
+    close HPOJCONFIG;
+    # Restart HPOJ
+    restart_service("hpoj");
+    # Return HPOJ device name to form the URI
+    return $ptaldevice;
 }
 
 

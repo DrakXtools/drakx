@@ -448,15 +448,44 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	}
     }
 
+    #- Check whether the printer is an HP multi-function device and 
+    #- configure HPOJ if it is one
+
+    my $ptaldevice = "";
+    if (($menuchoice =~ /HP OfficeJet/i) ||
+	($menuchoice =~ /HP PSC/i) ||
+	($menuchoice =~ /HP PhotoSmart/i) ||
+	($menuchoice =~ /HP LaserJet 1100/i) ||
+	($menuchoice =~ /HP LaserJet 1200/i) ||
+	($menuchoice =~ /HP LaserJet 1220/i) ||
+	($menuchoice =~ /HP LaserJet 3200/i)) {
+	# Install HPOJ package
+	if ((!$::testing) &&
+	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
+				       /etc/ptal-start.conf))))) {
+	    my $w = $in->wait_message('', _("Installing HPOJ package..."));
+	    $in->do_pkgs->install('hpoj');
+	}
+	# Configure and start HPOJ
+	$ptaldevice = printer::configure_hpoj($device, @parport);
+
+	# make the DeviceURI from $device.
+	$printer->{currentqueue}{'connect'} = "ptal:/" . $ptaldevice;
+    } else {
+	# make the DeviceURI from $device.
+	$printer->{currentqueue}{'connect'} = "file:" . $device;
+    }
+
     #- if CUPS is the spooler, make sure that CUPS knows the device
     if ($printer->{SPOOLER} eq "cups") {
 	my $w = $in->wait_message
 	    ('', _("Making printer port available for CUPS ..."));
-	printer::assure_device_is_available_for_cups($device);
+	if ($ptaldevice eq "") {
+	    printer::assure_device_is_available_for_cups($device);
+	} else {
+	    printer::assure_device_is_available_for_cups($ptaldevice);
+	}
     }
-
-    #- make the DeviceURI from $device.
-    $printer->{currentqueue}{'connect'} = "file:" . $device;
 
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
