@@ -480,7 +480,7 @@ sub create_packtable {
 	each_index {
 	    my $j = $::i;
 	    if ($_) {
-		ref $_ or $_ = Gtk2::Label->new($_);
+		ref $_ or $_ = Gtk2::WrappedLabel->new($_);
 		$j != $#$l && !$options->{mcc} ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     'fill', 'fill', $options->{xpadding}, $options->{ypadding}) :
