@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2002.12.11.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
 Conflicts: drakconf < 9.1-0.4mdk 
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
+BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -288,6 +288,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Jan  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.8mdk
+- harddrake: treat usb hubs as usb controllers
+
 * Mon Jan  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.7mdk
 - printerdrake fixes
 
