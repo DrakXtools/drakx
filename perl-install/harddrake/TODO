@@ -18,6 +18,20 @@
 *** ide-scsi / ide-cd switch
 *** supermount switch
 
+** 9.1 development
+*** move the usb-interface setting from drakx into harddrake, and do it at boot time
+*** nvidia proprietary module hook
+if [[ -e /lib/modules/`uname -r`/kernel/drivers/video/NVdriver ]]; then
+        perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#(Load.*glx)!\1!g' /etc/X11/XF86Config-4
+else    
+        perl -pi -e 's!Driver "nv.*"!Driver "nv"!g;s!(Load.*glx)!#\1!g' /etc/X11/XF86Config-4
+fi
+*** help: print fields in black and their description in blue as for information fields
+*** translate all fields
+*** split help per category
+*** separate version for harddrake & drakxtool
+
+
 ** draksound
 *** add a dialog so that the user choose its wavetable.
 *** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
