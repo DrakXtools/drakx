@@ -1124,14 +1124,14 @@ sub bindtextdomain() {
 }
 
 sub load_mo {
-    my ($lang) = @_;
+    my ($o_lang) = @_;
 
     my $localedir = bindtextdomain();
     my $suffix = 'LC_MESSAGES/libDrakX.mo';
 
-    $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
+    $o_lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
-    my @possible_langs = map { { name => $_, mofile => "$localedir/$_/$suffix" } } split ':', $lang;
+    my @possible_langs = map { { name => $_, mofile => "$localedir/$_/$suffix" } } split ':', $o_lang;
 
     -s $_->{mofile} and return $_->{name} foreach @possible_langs;
 
