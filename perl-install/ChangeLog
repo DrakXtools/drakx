@@ -2,6 +2,53 @@
 
 	* share/po/es.po: Updated Spanish translations
 
+2004/02/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/advertising/dis-10.pl, share/advertising/pwp-09.pl: unified
+	phrases that are the same, to ease translating
+
+2004/02/02  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: fix reading stage1 network configuration
+
+	* detect_devices.pm: 
+	  - no ide-scsi emulation for ide ZIPs
+	  - no ide-scsi emulation for cd burners when kernel 2.6
+
+	* install_steps.pm: fix typo creating agpgart alias
+	  - no ide-scsi emulation for ide ZIPs
+	  - no ide-scsi emulation for cd burners when kernel 2.6
+
+2004/02/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: remove debug message
+	fix adsl modem detection
+
+	* network/tools.pm: remove pseudo global variables use from use_floppy()
+
+	* network/adsl.pm (adsl_detect) fix modem detection so that harddrake get
+	full device
+	meta data rather than plain presence boolean
+	remove pseudo global variables use from adsl_conf_backend()
+
+	* network/netconnect.pm: fix preselecting ppoa for speedtouch modem
+	remove pseudo global variables use from use_floppy()
+	remove pseudo global variables use from adsl_conf_backend()
+
+	* drakxtools.spec: 10-0.2mdk
+	10-0.1mdk
+
+	* share/rpmsrate: add some packages for adsl
+
+	* network/ethernet.pm: this module does not need anymore pseudo global
+	variables
+
+	* harddrake/sound.pm: handle new aureal drivers
+
+2004/02/02  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
 2004/02/02  Pixel  <pixel at mandrakesoft.com>
 
 	* detect_devices.pm: 
@@ -24792,7 +24839,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.863 2004/02/02 11:49:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.864 2004/02/02 12:45:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
