@@ -166,7 +166,7 @@ sub getinfoFromXF86Config {
     add2hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
     add2hash($o->{mouse}{auxmouse} ||= {}, $mouse{auxmouse}) if $mouse{auxmouse}{XMOUSETYPE};
-    @{$o->{wacom}} > 0 or $o->{wacom} = [ keys %wacom ];
+    @{$o->{wacom} || []} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
 
     $o;
