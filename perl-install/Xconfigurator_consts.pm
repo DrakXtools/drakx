@@ -170,6 +170,7 @@ $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 #-    'Cirrus Logic|GD 5446' => [ '	Option "no_bitblt"' ],
       'Silicon Integrated Systems [SiS]|86C326' => [ qq(	Option "noaccel") ],
       'Neomagic Corporation|NM2160 [MagicGraph 128XD]' => [ 'Option "XaaNoScanlineImageWriteRect"', 'Option "XaaNoScanlineCPUToScreenColorExpandFill' ],
+      'Neomagic Corporation|[MagicMedia 256XL+]' => [ '    Option "sw_cursor"' ],
 
 #-      'Trident Microsystems|Cyber 9525' => [ '	Option "noaccel"' ],
 #-      'S3 Inc.|86c368 [Trio 3D/2X]' => [ '	ChipID  0x8a10' ],
