@@ -4,7 +4,6 @@ use diagnostics;
 use strict;
 use common;
 use log;
-use URPM;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
@@ -923,7 +922,6 @@ sub utf8_should_be_needed {
 sub pack_langs { 
     my ($l) = @_; 
     my $s = $l->{all} ? 'all' : join ':', uniq(map { getLANGUAGE($_) } langs($l));
-    URPM::add_macro("_install_langs $s");
     $s;
 }
 
@@ -961,6 +959,8 @@ sub write_langs {
     my ($langs) = @_;
     my $s = pack_langs($langs);
     symlink "$::prefix/etc/rpm", "/etc/rpm" if $::prefix;
+    require URPM;
+    URPM::add_macro("_install_langs $s");
     substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof && $s } "$::prefix/etc/rpm/macros";
 }
 
