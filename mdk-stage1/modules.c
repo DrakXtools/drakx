@@ -308,7 +308,7 @@ void init_modules_insmoding(void)
 static void add_modules_conf(char * str)
 {
 	static char data[5000] = "";
-	char * target = "/etc/modules.conf";
+	char * target = "/tmp/modules.conf";
 	int fd;
 
 	if (strlen(data) + strlen(str) >= sizeof(data))

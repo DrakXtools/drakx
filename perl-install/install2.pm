@@ -441,6 +441,8 @@ sub main {
         move::init($o);
     }
 
+    cp_f(glob('/stage1/tmp/*'), '/tmp');
+
     #- free up stage1 memory
     eval { fs::umount($_) } foreach qw(/stage1/proc/bus/usb /stage1/proc /stage1);
 
@@ -455,7 +457,7 @@ sub main {
     eval { spawnShell() };
 
     modules::load_dependencies(($::testing ? ".." : "") . "/modules/modules.dep");
-    modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
+    modules::read_stage1_conf('/tmp/modules.conf');
     modules::read_already_loaded();
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
