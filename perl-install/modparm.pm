@@ -57,7 +57,7 @@ sub raw_parameters {
       }
       #- print "STILL HAVE ($_)\n" if $_;
 
-      push @parameters, [ $name, $1, $description, $min, $max, $is_a_number ];
+      push @parameters, [ $name, $description, $min, $max, $is_a_number ];
   }
   @parameters;
 }
@@ -66,7 +66,7 @@ sub parameters {
   my ($module) = @_;
   my @parameters ;
   foreach (raw_parameters($module)) {
-    my ($name, undef, $description, $min, $max, $is_a_number) = @$_;
+    my ($name, $description, $min, $max, $is_a_number) = @$_;
     my $format = parameter_type($min, $max, $is_a_number);
     push @parameters, [ $format ? "$name ($format)" : $name, $description ];
   }
