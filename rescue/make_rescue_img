@@ -62,9 +62,18 @@ _ "find $tmp -name 'CVS*' | xargs rm -rf";
 _ "perl devices.pl $tmp/dev";
 
 install_raw(keyboard::loadkeys_files());
+my %keytable_conflicts;
+my @less_important_keytables = qw(am_old am_phonetic no-dvorak fr_CH-latin1);
 foreach (keyboard::loadkeys_files()) {
-    # create the long name based on the short one (if needed)
-    symlink "$2.kmap.gz", "$tmp$1/$3.kmap.gz" if m|(.*)/((..).+)\.kmap\.gz|;
+    my ($dir, $fname) = (dirname($_), basename($_));
+    my ($name) = $fname =~ /(.*)\.kmap\.gz/ or next;
+    next if member($name, @less_important_keytables);
+    if (my ($short) = $name =~ m|(.+?)[\W_]|) {
+	$keytable_conflicts{$short} and warn("conflict between $keytable_conflicts{$short} and $name for short name $short (choosing the first)\n"), next;
+	$keytable_conflicts{$short} = $name;
+	# create the short name based on the long one
+	symlinkf($fname, "$tmp$dir/$short.kmap.gz");
+    }
 }
 
 my $perl_version = join ".", unpack "C3", $^V;
