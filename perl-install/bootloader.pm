@@ -199,9 +199,11 @@ sub read_lilo {
 	delete $b{message};
     }
 
-    #- cleanup duplicate labels (in case file is corrupted)
+    #- cleanup duplicate labels & bad entries (in case file is corrupted)
     my %seen;
-    @{$b{entries}} = grep { !$seen{$_->{label}}++ } @{$b{entries}};
+    @{$b{entries}} = 
+	grep { !$seen{$_->{label}}++ }
+	grep { $_->{type} ne 'image' || -e "$::prefix$_->{kernel_or_dev}" } @{$b{entries}};
 
     \%b;
 }
