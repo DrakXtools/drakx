@@ -748,13 +748,9 @@ sub new {
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * ($::logoheight ? 0.15 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
-		    my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F1  => 'help',
-			        Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
+		    my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
 		    
-		    if ($d eq "help") {
-			require install_gtk;
-			install_gtk::create_big_help($::o);
-		    } elsif ($d eq 'screenshot') {
+		    if ($d eq 'screenshot') {
 			common::take_screenshot();
 		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
 			log::l("Switching to " . ($::expert ? "beginner" : "expert"));
