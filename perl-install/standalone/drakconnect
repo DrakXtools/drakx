@@ -327,14 +327,16 @@ sub build_notebook {
     gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
 	    gtktext_insert(Gtk2::TextView->new, 
 			   join('',
-				map { "$_\n" } (N("Vendor : %s", split('\|', $info->{description})),
-						N("Descripton : %s", reverse split('\|', $info->{description})),
-						N("Media class : %s", $info->{media_type}),
-						N("Module name : %s", $module), 
-						N("Mac Address : %s", c::get_hw_address($interface)),
-						N("Bus : %s", $info->{bus}),
-						N("Location on the bus : %s", $info->{pci_bus}),
-					       ))
+                       map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
+                                                                  [ N("Vendor"), split('\|', $info->{description}) ],
+                                                                  [ N("Descripton"), reverse split('\|', $info->{description}) ],
+                                                                  [ N("Media class"), $info->{media_type} ],
+                                                                  [ N("Module name"), $module ], 
+                                                                  [ N("Mac Address"), c::get_hw_address($interface) ],
+                                                                  [ N("Bus"), $info->{bus} ],
+                                                                  [ N("Location on the bus"), $info->{pci_bus} ],
+                                                                 )
+                      )
 			  ),
 	   );
     
