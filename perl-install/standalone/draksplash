@@ -210,10 +210,10 @@ sub write_boot_thm {
   	&set_thm_values;
   	my $logo = $boot_conf_frame{widgets}{check}{logo}->get_active ? 'yes' : 'no';
 	my $quiet = $boot_conf_frame{widgets}{check}{quiet}->get_active ? 'yes' : 'no';
-	my $globalconf_file = boot_conf_path.$theme{name}.'/global.config';
-	my $cfg_file = boot_conf_path . $theme{name} . "$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
+	my $globalconf_file = $boot_conf_path.$theme{name}.'/global.config';
+	my $cfg_file = $boot_conf_path . $theme{name} . "$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
 	#- verify all dir exists or create them
-     foreach my $dir (boot_conf_path . $theme{name} . $cfg_path, $thm_path.$theme{name} . '/images/') {
+     foreach my $dir ($boot_conf_path . $theme{name} . $cfg_path, $thm_path.$theme{name} . '/images/') {
          mkdir_p($dir) if !-d $dir;
      }
 	#- copy image to dest by convert
@@ -275,7 +275,7 @@ sub get_this_thm_res_conf() {
 }
 
 sub read_boot_conf {
-	chdir(boot_conf_path);
+	chdir($boot_conf_path);
 	my $line;
 	if (-f $theme{name} . "/$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg') {
           local *CFG;
