@@ -4,7 +4,8 @@ use lib qw(/usr/lib/libDrakX);
 use MDK::Common;
 use Gtk;
 use interactive;
-use my_gtk ;
+#use my_gtk ;
+use ugtk qw(:helpers :wrappers);
 init Gtk;
 
 #- convenience variables for true and false
@@ -78,11 +79,11 @@ my %first = ('frame'=>new Gtk::Frame(_("first step creation")),
 	   				'file'=>_("choose image file"),
 					'name'=>_("Theme name")
 				   },
-			 'button'=>{ 'boot_conf'=>_("make bootsplash step 2"),
-				     'lilo_conf'=>_("go to lilosplash configuration"),
-				     'kill'=>_("quit"),
-				     'save'=>_("save theme"),
-				     'file'=>_("browse"),
+			 'button'=>{ 'boot_conf'=>_("Make bootsplash step 2"),
+				     'lilo_conf'=>_("Go to lilosplash configuration"),
+				     'kill'=>_("Quit"),
+				     'save'=>_("Save theme"),
+				     'file'=>_("Browse"),
 				 },
 			 'combo'=> {'res'=>['800x600', '1024x768', '1280x1024'],
 		       		    'name'=>[ $theme{'name'} , &giv_exist_thm]
@@ -116,9 +117,9 @@ my %boot_conf_frame = ('frame' => new Gtk::Frame( _("Configure bootsplash pictur
 						 'pw'=> 1,
 						 'ph'=> 1,
 				    		},
-				     'button' => { 'annul'=> _("go back"),
-				     		   'prev'=>_("preview"),
-						   'pc'=> _("choose color"),
+				     'button' => { 'annul'=> _("Go back"),
+				     		   'prev'=>_("Preview"),
+						   'pc'=> _("Choose color"),
 						   
 						 },
 				     'check'  => { 'logo' => _("Display logo on Console" ),
@@ -230,7 +231,7 @@ sub write_boot_thm{
 	system('/usr/share/bootsplash/scripts/rewritejpeg '.$thm_path.$theme{'name'}.'/images/bootsplash-'.$theme{'res'}{'res'}.'.jpg');
 	#- write conf files
 	my $cfg_cont = '# This is the configuration file for the '.$theme{'res'}{'res'}.' bootsplash picture
-	# this file is necessary to specify the coordinates of the text box on the
+# this file is necessary to specify the coordinates of the text box on the
 # splash screen.
 
 # tx is the x coordinate of the text window in characters. default is 24
@@ -489,14 +490,15 @@ sub set_thm_values{
 #- Args  => $file (str) full path to preview file
 sub show_prev{
  my ($file) = @_;
- $prev_window 
+ $prev_window
    or ($prev_window = new Gtk::Window('toplevel') and $prev_window->set_policy( 0, 1, 1 ) ); 
  #- must destroy and recreate or get a bug on refreshing the preview window!
  $pix 
    and $pix->destroy;
- $pix = new Gtk::Pixmap(my_gtk::gtkcreate_png($file));
+ my $pic = gtkcreate_png_pixbuf($file);
+ $pix = new Gtk::Pixmap($pic->render_pixmap_and_mask($pic),'');
  $prev_window->add($pix);
- $prev_window ->signal_connect(delete_event => sub{$prev_window->destroy} );
+ $prev_window ->signal_connect(delete_event => sub{$prev_window->destroy ; undef($prev_window);} );
  $prev_window->show_all;
  
 }
