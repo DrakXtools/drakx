@@ -319,14 +319,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakboot: misc fixes (pixel, fpons)
 - drakconnect:
   o do not set hostname if there's a dynamic interface
-  o fix firmware loading
+  o fix firmware loading (poulpy)
   o fix profiles with spaces in name (#5586)
-- drakfont: fix failling to install fonts (#5571)
-- drakfirewall not working with dialup connexion (#4424) (florin)
-- drakgw: fix canceling info steps (florinà
+- drakfont: fix faillure to install fonts (#5571)
+- drakfirewall: make it work with dialup connexion (#4424) (florin)
+- drakgw: fix canceling info steps (florin)
 - harddrake2:
   o fix freeze while configuring modules (infamous #4136)
-  o warn about no module instead of not showing the dialog
+  o warn about no module parameters instead of not showing the dialog
 - localedrake: configure kdmrc too (pixel)
 - logdrake: always display the log domain names in the same order
 - printerdrake: help making printerdrake icon bar be shorter (#5282)
@@ -339,7 +339,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix too small kernels window width (#5040)
   o fix too big main window
 - drakconnect:
-  o when no proviles exists, use default one (poulpy)
+  o when no profile is set, use default one (poulpy)
   o add support for sagem dhcp (francois)
 - drakperm: do not complain about saving on view change
 - drakxtv: install xawtv if needed (#5130)
@@ -356,9 +356,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o use new help scheme (daouda)
   o reread database when switching between normal and expert mode
     (till)
-
 - scannerdrake: complain if saned could not be installed
-- XFdrake: Xuse OptionMenu's rather than Combo's (more consistent gui
+- XFdrake: use OptionMenu's rather than Combo's (more consistent gui
   and better behavior when embedded)
 
 * Sun Sep  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-8mdk
@@ -457,7 +456,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakfirewall: add samba in services list
 - drakperm: make security level menu be more understandable & usuable
 - draksec: translate default value in help tooltips too
-- fix CJK wrapping in more places
+- fix CJK wrapping in more places (#3670 and the like)
 - make interactive button order be the same as gtk dialogs one and our
   dialogs but only in standalone mode
 - misc fixes from pixel
