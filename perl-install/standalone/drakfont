@@ -97,9 +97,6 @@ my $xlsfonts = 0;
 my $windows  = 0;
 my $strong;
 my $replace;
-my $application;
-my $install;
-my $uninstall;
 my $so      = 1;
 my $gs      = 1;
 my $abi     = 1;
@@ -109,25 +106,12 @@ my @application;
 my @install;
 my @uninstall;
 my $interactive;
-my $text;
-my $vscrollbar;
-my $check4;
-my $check1;
-my $check2;
-my $check3;
 my $pbar;
 my $pbar1;
 my $pbar2;
 my $pbar3;
 my $font_box;
 my $central_widget;
-my $label1;
-my $label2;
-my $label3;
-my $label4;
-my $list_path;
-my $path_list;
-my $current_path;
 my $model;
 my $list;
 my $list_all_font_path;
@@ -162,7 +146,7 @@ foreach my $i (@application) {
 }
 
 # PATH and binary full path
-my $xfs_conffile = '/etc/fonts/fonts.conf';
+#my $xfs_conffile = '/etc/fonts/fonts.conf';
 my $drakfont_dir = '/usr/X11R6/lib/X11/fonts/drakfont';
 my $ttf2pt1      = '/usr/sbin/ttf2pt1';
 my $pfm2afm      = '/usr/sbin/pfm2afm';
@@ -171,13 +155,10 @@ my $chkfontpath  = '/usr/sbin/chkfontpath';
 # mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
 my $ttmkfdir     = '/usr/sbin/ttmkfdir';
 my $fccache      = '/usr/bin/fc-cache';
-my $ghostscript;
 
 my @font_list;                 # list of fonts to install
 my @installed_fonts;           # list of installed fonts
 my @installed_fonts_path;      # list of path included in xfs
-my @fontsdir_to_install;       # list of fonts to uninstall
-my @fontsdir_to_uninstall;     # path to remove in xfs font file
 my @installed_fonts_full_path; # full path list of fonts to uninstall
 
 sub list_fontpath() {
