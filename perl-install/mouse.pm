@@ -432,7 +432,12 @@ sub test_mouse_install {
 	  );
     $okcancel->set_uposition(7, $height-23);
     Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1) });
-    test_mouse($mouse, $w, $darea, $width, $height, $vbox_grab);
+    test_mouse($mouse, $w, $darea, $width, $height);
+    $w->sync; # HACK
+    Gtk::Gdk->pointer_grab($darea->window, 1,
+			   [ 'pointer_motion_mask'],
+			   $darea->window, undef ,0);
+    $w->main;
 }
 
 sub test_mouse_standalone {
@@ -451,16 +456,19 @@ sub test_mouse_standalone {
 }
 
 sub test_mouse {
-    my ($mouse, $w, $darea, $width, $height, $vbox_grab) = @_;
+    my ($mouse, $w, $darea, $width, $height) = @_;
 
     $darea->realize();
+    my $wait = 0;
     my ($m3_image, $m3_mask) = gtkcreate_xpm($darea, 'mouse_3b.xpm');
     my ($m3_imagep, $m3_maskp) = gtkcreate_xpm($darea, 'mouse_3b+.xpm');
     my ($m3_left, $m3_left_mask) = gtkcreate_xpm($darea, 'mouse_left.xpm');
     my ($m3_right, $m3_right_mask) = gtkcreate_xpm($darea, 'mouse_right.xpm');
     my ($m3_middle, $m3_middle_mask) = gtkcreate_xpm($darea, 'mouse_middle.xpm');
+    my ($aru, $aru_mask) = gtkcreate_xpm($darea, 'arrow_up.xpm');
+    my ($ard, $ard_mask) = gtkcreate_xpm($darea, 'arrow_down.xpm');
     my $image = $m3_image;
-    $mouse->{nbuttons} > 3 and $image = $m3_imagep;
+    $mouse->{nbuttons} > 3 || 1 and $image = $m3_imagep;
     my $draw_text = sub {
   	my ($t, $y) = @_;
   	my $font = $darea->style->font;
@@ -497,15 +505,30 @@ sub test_mouse {
 					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					     13, 62);
 	    } else {
-		$darea->window->draw_arc ( $darea->style->black_gc,
-					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
-					   0, 360*64);
+#############
+		$wait=1;
+		$darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					     $m3_middle, 0, 0,
+					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
+					     13, 62);
+		Gtk->timeout_add(200, sub { $wait = 0 });
+#############
+
+#  		$darea->window->draw_arc ( $darea->style->black_gc,
+#  					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+#  					   0, 360*64);
 	    }
 	} elsif ($nb == 4) {
+	    $wait=1;
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $aru, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 57,
+					 6, 8);
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $m3_middle, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
-					 13, 62)
+					 13, 62);
+	    Gtk->timeout_add(200, sub { $wait = 0 });
 	} elsif ($nb == 5) {
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $m3_middle, 0, 0,
@@ -517,15 +540,10 @@ sub test_mouse {
   			       my $b = $_[1]{button};
 			       $paintButton->($b - 1);
   			   });
-    $darea->signal_connect(button_release_event => sub { 
+    $darea->signal_connect(button_release_event => sub {
+			       while ($wait) { my_gtk::flush() }
 			       $drawarea->()
   			   });
     $darea->signal_connect(expose_event => sub { $drawarea->() });
     $darea->size($width, $height);
-    $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);
-    $w->sync; # HACK
-    $vbox_grab and Gtk::Gdk->pointer_grab($darea->window, 1,
-					  [ 'pointer_motion_mask'],
-					  $darea->window, undef ,0);
-    $w->main;
 }
