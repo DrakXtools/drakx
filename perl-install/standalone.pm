@@ -119,6 +119,11 @@ Network & Internet connection and monitoring application
 $usages{$_} = $usages{rpmdrake} foreach qw(rpmdrake-remove MandrakeUpdate);
 $usages{Xdrakres} = $usages{XFdrake};
 
+sub version() {
+    print 'Drakxtools version 10
+Copyright (C) 1999-2004 Mandrakesoft by <install@mandrakesoft.com>
+',  $::license, "\n";
+}
 
 my ($i, @new_ARGV);
 foreach (@ARGV) {
@@ -151,12 +156,6 @@ foreach (@ARGV) {
 
 @ARGV = @new_ARGV;
 
-
-sub version() {
-    print 'Drakxtools version 10
-Copyright (C) 1999-2004 Mandrakesoft by <install@mandrakesoft.com>
-',  $::license, "\n";
-}
 
 ################################################################################
 
