@@ -124,7 +124,7 @@ endif
 
 	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION
 
-	gzip -9 $(DEST)/usr/share/ldetect-lst/*
+	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 
 	cd share ; cp -a modparm.lst $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
