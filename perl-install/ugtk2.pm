@@ -84,8 +84,7 @@ sub gtkadd {
     foreach (@_) {
 	my $l = $_;
 	ref $l or $l = Gtk2::Label->new($l);
-	$w->add($l);
-	$l->show;
+	$w->add(gtkshow($l));
     }
     $w
 }
@@ -95,8 +94,7 @@ sub gtkappend {
     foreach (@_) {
 	my $l = $_;
 	ref $l or $l = Gtk2::Label->new($l);
-	$w->append($l);
-	$l->show;
+	$w->append(gtkshow($l));
     }
     $w
 }
