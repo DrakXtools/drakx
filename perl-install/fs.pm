@@ -244,7 +244,7 @@ sub merge_info_from_fstab {
 
 sub get_info_from_fstab {
     my ($all_hds) = @_;
-    my @l = read_fstab('/etc/fstab', 'keep_default');
+    my @l = read_fstab($::prefix, '/etc/fstab', 'keep_default');
     add2all_hds($all_hds, @l)
 }
 
