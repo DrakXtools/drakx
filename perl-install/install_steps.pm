@@ -53,7 +53,7 @@ sub leavingStep {
 
     if (-d "$o->{prefix}/root/drakx") {
 	eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root/drakx") };
-	output(install_any::auto_inst_file(), install_any::g_auto_install());
+	output(install_any::auto_inst_file(), install_any::g_auto_install(1));
     }
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
