@@ -2,23 +2,28 @@ This is the documentation for the "Update Modules" (Update Drivers)
 feature.
 
 This feature aims to propose new modules or replacement modules for the
-install. This is useful when there is a firmware update for a given
-driver, an additional driver needed for something, etc.
+install and afterwards. This is useful when there is a firmware update for a
+given driver, an additional driver needed for something, etc.
 
 
 You must use a floppy disk with e2fs filesystem (NOT vfat/windows
 formatted). Use "mke2fs /dev/fd0" on your own box to format a floppy with
 e2fs filesystem.
 
-This disk may contain a number of kernel modules on the root (e.g. not in
-a subdirectory); some of them may replace existing modules, some of them
-may be added. This disk must contain a special file, named "to_load", on
+This disk may contain a number of kernel modules; some of them 
+may replace existing modules, some of them may be added.
+This disk must contain a special file, named "to_load", on
 the root (not in a subdirectory). This file will contain a series of
 module names, with optional module options; the program will try to load
 all these modules one after another, using file on the floppy if present,
 else using file within standard module repository ("marfile" on the boot
 floppy). It can contain comments, these are strictly defined by the
 presence of a hash (#) character on column 0 of any line.
+
+This disk may also contain some update modules for installed kernels. 
+Those modules must be placed in directory <kernel-version>. They can be
+gzipped or bzipped.
+
 
 
 Here's a typical scenario:
@@ -39,11 +44,13 @@ Our example disk contains:
 [root@obiwan mnt]# ll floppy/
 total 77
 drwxr-xr-x    2 root     root        12288 Jul 26 12:02 lost+found/
--rw-r--r--    1 root     root         9051 Jul 26 12:43 msdos.o
--rw-r--r--    1 root     root        13660 Jul 26 12:04 ppa.o
+-rw-r--r--    1 root     root         9051 Jul 26 12:43 msdos.ko
+-rw-r--r--    1 root     root        13660 Jul 26 12:04 ppa.ko
 -rw-r--r--    1 root     root           54 Jul 26 12:46 to_load
--rw-r--r--    1 root     root        32108 Jul 26 12:04 uhci.o
--rw-r--r--    1 root     root         6572 Jul 26 12:04 wacom.o
+-rw-r--r--    1 root     root        32108 Jul 26 12:04 uhci.ko
+-rw-r--r--    1 root     root         6572 Jul 26 12:04 wacom.ko
+drwxr-xr-x    4 root     root         4096 Jul 26 12:04 2.6.8.1-20mdk
+drwxr-xr-x    4 root     root         4096 Jul 26 12:04 2.6.8.1-20mdksmp
 [root@obiwan mnt]# cat floppy/to_load 
 # Update Drivers description file
 3c59x
@@ -54,6 +61,8 @@ msdos
 ppa
 # ISA network card needing options
 ne io=0x300 irq=7
+[root@obiwan mnt]# ls floppy/2.6.8.1-20mdk
+msdos.ko.gz  ppa.ko.gz  uhci.ko.gz  wacom.ko.gz
 [root@obiwan mnt]# 
 --=----=----=----=----=----=----=----=----=--
 
@@ -72,3 +81,7 @@ ne io=0x300 irq=7
 the case of load from the update modules floppy, that's why on
 our example we need to load "fat" from the standard modules
 before "msdos" from the update floppy.
+
+
+4. When system is installed, update floppy is asked again so that update
+modules for the installed kernels can be copied.
