@@ -110,6 +110,10 @@ for i in $ALL_KERNELS/*; do
 	    nm cardmgr.o | grep -q cardmgr_main && echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
 	    gcc -o cardmgr-$kern *.o main.c
 	)
+	[ -e $i/sbin/cardmgr ] && (
+	    mkdir $i/cardmgr
+	    cp -f $i/sbin/cardmgr $i/cardmgr/cardmgr-$kern
+        )
 	(
 	    mkdir all.modules/$kern
 	    cd all.modules/$kern
@@ -124,7 +128,7 @@ done
 
 
 install_kernel() {
- v=2.4.8-3mdk
+ v=2.4.8-5mdk
  vv=${v}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
  scp kenobi:~chmou/work/kernel/archive/kernel-BOOT-$v.i586.rpm /tmp
