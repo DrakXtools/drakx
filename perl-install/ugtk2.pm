@@ -25,6 +25,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
                 ask_yesorno ) ],
+    dialogs => [ qw(err_dialog warn_dialog) ],
 
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -367,14 +368,19 @@ sub _create_dialog {
 }
 
 
-# drakfloppy / drakfont / harddrake2
+# drakfloppy / drakfont / harddrake2 / mcc
 sub create_dialog {
     my ($title, $label, $o_options) = @_;
     my $ret = 0;
     my $dialog = _create_dialog($title, $o_options);
     $dialog->set_border_width(10);
     my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::Label->new(), $label) : Gtk2::Label->new($label);
-    $dialog->vbox->pack_start(create_scrolled_window($text, [ 'never', 'automatic' ]), 1, 1, 0);
+    gtkpack($dialog->vbox,
+            gtkpack_(Gtk2::HBox->new,
+                     if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
+                     1, create_scrolled_window($text, [ 'never', 'automatic' ]),
+                    ),
+           );
     $text->set_line_wrap(1);
 
     if ($o_options->{cancel}) {
@@ -393,6 +399,18 @@ sub create_dialog {
     $dialog->show_all;
     Gtk2->main;
     $ret;
+}
+
+sub warn_dialog {
+    my ($title, $label, $o_options) = @_;
+    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-warning', cancel => 1 });
+    create_dialog($title, $label, $o_options);
+}
+
+sub err_dialog {
+    my ($title, $label, $o_options) = @_;
+    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-error' });
+    create_dialog($title, $label, $o_options);
 }
 
 sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), $_[0] || 'spread') }
