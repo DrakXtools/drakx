@@ -13,7 +13,7 @@ my $true = 1;
 
 my $in = 'interactive'->vnew('su');
 
-my $window = ugtk2->new;
+my $window = ugtk2->new('DrakSplash');
 $window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
 
 #- verification of package image magik
@@ -159,8 +159,8 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
 #- image file selection for new theme
 $first{widgets}{button}{file}->signal_connect(clicked => sub {
-	my $file_dialog = new Gtk2::FileSelection('choose image');
-	$file_dialog->set_filename($first{widgets}{label}{file}->get ne N("choose image file") ? $first{widgets}{label}{file}->get : '~/');
+	my $file_dialog = new Gtk2::FileSelection(N("choose image"));
+	$file_dialog->set_filename($first{widgets}{label}{file}->get_text ne N("choose image file") ? $first{widgets}{label}{file}->get_text : '~/');
 	$file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
 	$file_dialog->ok_button->signal_connect(clicked => sub { $first{widgets}{label}{file}->set_text($file_dialog->get_filename); $file_dialog->destroy });
 	$file_dialog->show;
