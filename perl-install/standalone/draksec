@@ -44,21 +44,51 @@ my $security = any::get_secure_level('');
 my $libsafe = any::config_libsafe('');
 my @logins = security::msec::get_user_list('');
 my $email = "put.your\@email.here";
+my $w;
+my (@options) = security::msec::get_config('', $security);
+
+my $expert_file = "/etc/security/msec/expert_mode";
+my $expert_section = "";
+
+#for $href (@options) {
+#    for $href2 (keys %$href) {
+#	    %noref = %$href;
+#            print "$href2 = $noref{$href2}{description}\n";
+#    }
+#}
 
 if (any::choose_security_level($in, \$security, \$libsafe, \$email)) {
     any::config_libsafe('', $libsafe);
 
-    my $w = $in->wait_message('', _("Setting security level"));
+    $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
     system "/usr/sbin/msec", $security;
     $in->resume;
 
-    my $w = $in->wait_message('', _("Setting security user"));
+    $w = $in->wait_message('', _("Setting security user"));
     $in->suspend;
     security::msec::add_config('', "set_security_conf", "MAIL_USER", $email);
     security::msec::commit_changes('');
     $in->resume;
+}
+
+while (-f $expert_file) {
+    $expert_section = cat_($expert_file);
+
+    %config_hash = %{ $options[$expert_section] };
+   
+#    foreach $key (keys %config_hash) {
+#        print "$key = $config_hash{$key}{val}\n";
+#    }
+
+    if(any::choose_security_options($in, $security, $libsafe, \$email, \%config_hash)) {
+       $w = $in->wait_message('', _("Setting security options"));
+       $in->suspend;
+       $in->resume;
+    }
+
+    rm_rf($expert_file);
 }
 
 !$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
