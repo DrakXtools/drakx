@@ -19,10 +19,6 @@ my ($prefix, %cards, %monitors);
 
 sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
-sub restart_xfs() {
-    run_program::rooted($prefix, "/etc/rc.d/init.d/xfs", $_) foreach "stop", "start";
-}
-
 sub setVirtual($) {
     my $vt = '';
     local *C;
@@ -229,7 +225,7 @@ sub testConfig($) {
     write_XF86Config($o, $tmpconfig);
 
     unlink "/tmp/.X9-lock";
-    restart_xfs;
+    #- restart_xfs;
 
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
@@ -274,7 +270,7 @@ sub testFinalConfig($;$) {
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
     symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
-    restart_xfs;
+    #- restart_xfs;
 
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
@@ -734,7 +730,7 @@ sub main {
 
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
-           __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
+           __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, noauto => 1) },
 	   __("Automatical resolutions search") => sub {
 	       delete $o->{card}{depth};
