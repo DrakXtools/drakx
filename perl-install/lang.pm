@@ -1031,6 +1031,21 @@ sub write {
     if ($locale->{IM}) {
         delete @$h{qw(GTK_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, $gtkqt_im{$locale->{IM}});
+        my @packages = IM2packages($locale->{IM});
+        if (@packages && $b_user_only) {
+            require interactive;
+            interactive->vnew->ask_warn(N("Warning"),
+                                       N("You should install the following packages: %s", 
+                                         join(
+                                              #-PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
+                                              N(", "),
+                                              @packages,
+                                             ),
+                                        )
+                                      );
+        } elsif(@packages) {
+            do_pkgs_standalone->new->install((IM2packages($locale->{IM}), )) ;
+        }
     }
 
     #- deactivate translations on console for RTL languages
