@@ -1,3 +1,86 @@
+2005/03/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm (wpa_supplicant_configure) scan hidden ssid
+
+2005/03/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: choose a 4/3 resolution by default
+	xbox support (by Stew)
+
+2005/03/08  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/03/07  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: use fonts-ttf-dejavu instead of fonts-ttf-vera (bug
+	#13493).
+
+2005/03/07  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: added gcin setup
+	Added settings for new traditional chinese IME gcin.
+
+2005/03/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakconnect: handle NEEDHOSTNAME and DHCP_HOSTNAME in Manage
+	interface
+	move DHCP settings in a notebook page
+
+	* network/netconnect.pm: delete gateway if appropriate when configuring
+	DSL devices too (#13978)
+
+	* mdk-stage1/dhcp.h: export dhcp_domain too
+
+	* mdk-stage1/network.c: remove spurious space
+	try to reuse hostname and domain information from dhcp step (#14285)
+	ask if the http proxy should be used for ftp (#13492)
+	don't segault if proxy step is cancelled
+
+2005/03/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po: updated Bengali file
+
+2005/03/07  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: more and more fixes
+
+2005/03/07  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: allow live resizing of reiserfs on lvm (as
+	tested by Gaetan Lehmann). not tested
+
+	* share/themes-galaxy.rc, install_gtk.pm, share/themes-blue.rc,
+	share/list: 
+	  - by default, gtk use /usr/share/themes/Galaxy/gtk-2.0/gtkrc,
+	so add this gtkrc to the install, and so no need
+	  to have galaxy settings in themes-galaxy.rc
+	  => this fixes the doc theme not having the good shapes for the buttons
+	  - fix the worst pb in themes-blue.rc (even if we don't use it)
+
+2005/03/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-1mdk
+
+	* share/po/br.po: update
+
+2005/03/06  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: more fixes..
+
+2005/03/06  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, diskdrake/resize_ntfs.pm: ensure ntfsresize is
+	available
+
+2005/03/06  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/03/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: proofreading (gerard delafond)
+
 2005/03/06  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: melo
@@ -46228,7 +46311,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1011 2005/02/21 19:20:08 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1012 2005/03/06 13:16:05 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
