@@ -27,6 +27,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -207,6 +208,9 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 	unsigned char * chptr;
 	unsigned char option, length;
 
+	if (breq->bootfile && strlen(breq->bootfile) > 0)
+		stage2_kickstart = strdup(breq->bootfile);
+	
 	memcpy(&intf->ip, &breq->yiaddr, 4);
 
 	chptr = breq->vendor;

@@ -68,6 +68,7 @@
  * globals */
 
 char * method_name;
+char * stage2_kickstart = NULL;
 
 
 void fatal_error(char *msg)
@@ -445,6 +446,10 @@ int main(int argc, char **argv, char **env)
 	}
 	if (disable_modules)
 		*argptr++ = "--blank";
+	if (stage2_kickstart) {
+		*argptr++ = "--kickstart";
+		*argptr++ = stage2_kickstart;
+	}
 	*argptr++ = NULL;
 
 	execve(stage2_args[0], stage2_args, grab_env());
