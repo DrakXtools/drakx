@@ -71,9 +71,15 @@ sub read_fstab {
 		 if_($all_options, freq => $freq, passno => $passno),
 		};
 
-	($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
-
+	if ($dev =~ /^LABEL=/) {
+	    if (my ($e) = grep { $_->{mntpoint} eq $mntpoint } read_fstab('', '/proc/mounts')) {
+		$h->{device_LABEL} = $dev;
+		$dev = $h->{device} = $e->{device};
+	    }
+        }
 	if ($dev =~ m,/(tmp|dev)/,) {
+	    ($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
+
 	    my $symlink = readlink("$prefix$dev");
 	    $dev =~ s,/(tmp|dev)/,,;
 
@@ -211,7 +217,7 @@ sub prepare_write_fstab {
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
 	  do {
-	      my $dir = $_->{device} =~ m|^/| ? '' : '/dev/';
+	      my $dir = $_->{device} =~ m!^(/|LABEL=)! ? '' : '/dev/';
 	      eval { devices::make("$prefix$dir$_->{device}") };
 	      "$dir$_->{device}";
 	  };
@@ -244,7 +250,9 @@ sub prepare_write_fstab {
 
 	    my $type = type2fs($_);
 
-	    my $dev = $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
+	    my $dev = 
+	      $_->{device_LABEL} ? $_->{device_LABEL} :
+	      $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
 
 	    $mntpoint =~ s/ /\\040/g;
 	    $dev =~ s/ /\\040/g;
