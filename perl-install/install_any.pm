@@ -754,6 +754,11 @@ sub kdeicons_postinstall($) {
 	    template2userfile($prefix, "$ENV{SHARE_PATH}/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/hd_unmount.xpm";
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/large/hd_unmount.xpm";
+	} elsif (m|^/dev/(\S+)\s+/mnt/([^\/]*)\s+vfat\s+|) {
+	    my %toreplace = ( device => $1, id => $1, mntpoint => "/mnt/$2" );
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/Dos_.kdelnk.in", "Desktop/$2.kdelnk", 1, %toreplace);
+	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/hd_unmount.xpm";
+	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/large/hd_unmount.xpm";
 	} elsif (m|^/dev/(\S+)\s+(\S*)\s+vfat\s+|) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
 	    template2userfile($prefix, "$ENV{SHARE_PATH}/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);

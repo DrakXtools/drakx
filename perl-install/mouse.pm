@@ -140,9 +140,9 @@ sub detect() {
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
 
     require pci_probing::main;
-    if (my ($c) = grep { $_->[1] =~ /usb-/ } pci_probing::main::probe('')) {
+    if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
 	eval { 
-	    modules::load($c->[1], "SERIAL_USB");
+	    modules::load($c, "SERIAL_USB");
 	    modules::load("usbmouse");
 	    modules::load("mousedev");
 	   };
@@ -155,7 +155,7 @@ sub detect() {
 	}
 	modules::unload("mousedev");
 	modules::unload("usbmouse");
-	modules::unload($c->[1], 'remove_alias');
+	modules::unload($c, 'remove_alias');
     }
 
     #- defaults to generic ttyS0

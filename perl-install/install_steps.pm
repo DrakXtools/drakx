@@ -767,7 +767,7 @@ sub readBootloaderConfigBeforeInstall {
 	    $v = "/boot/$v" if $v !~ m|^/|;
 	    if (-e "$o->{prefix}$v") {
 		my $e = lilo::get("/boot/$image", $o->{bootloader}) or next;
-		$e->{kernel} = $v;
+		$e->{kernel_or_dev} = $v;
 		log::l("renaming /boot/$image entry by $v");
 	    }
 	}

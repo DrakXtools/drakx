@@ -524,7 +524,7 @@ sub load_thiskind($;&$) {
 
     my @devs = (@pcidevs, @pcmciadevs);
 
-    load("sd_mod") if $type eq 'scsi' && @devs; 
+    load("sd_mod") if $type eq 'scsi' && @devs;
 
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
@@ -592,4 +592,19 @@ sub load_ide {
 	delete $conf{"ide-mod"}{options};
 	load_multi(qw(ide-probe ide-disk ide-cd));
     }
+}
+
+sub load_usbscsi { #- TODO
+    require pci_probing::main;
+    eval {
+	if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
+	    load($c, "SERIAL_USB"); load("usb-storage");
+	    sleep(1);
+	    if (!$@ && -e "/proc/scsi/usb/0") {
+		return 1;
+	    }
+	    unload("usb-storage");
+	}
+    };
+    0;
 }
