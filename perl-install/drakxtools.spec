@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.23mdk
+Release: 0.24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.24mdk
+- drakxtv:
+  o only offer to configure tv cards that (may) need to be configured
+  o do not complain about no tv cards when there're but they do not
+    require any configuration beyond loading proper module (#7443,
+    #11270, ...)
+- harddrake:
+  o detect more webcams
+  o do not detect speakers as keyboards
+- printerdrake: misc fixes (till):
+
 * Thu Feb 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.23mdk
 - printerdrake (till):
   o add automatic setup of HP printers with HPLIP
