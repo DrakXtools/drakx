@@ -540,13 +540,11 @@ my %gtkqt_im =
 
    scim => {
             GTK_IM_MODULE => 'scim',
-            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
            },
    uim => {
            GTK_IM_MODULE => 'uim-anthy',
-           QT_IM_MODULE => 'uim-anthy',
            XIM => 'uim-anthy',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim-anthy',
@@ -1022,8 +1020,9 @@ sub write {
 	
     }
     if ($locale->{IM}) {
-        delete @$h{qw(GTK_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
+        delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, $gtkqt_im{$locale->{IM}});
+        $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
         my @packages = IM2packages($locale);
         if (@packages && $b_user_only) {
             require interactive;
