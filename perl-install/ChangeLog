@@ -1,3 +1,63 @@
+2001/02/22  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): if list+format
+	then type is
+	'list', combo not accepted (hacky?)
+
+	* install_steps_auto_install.pm: $graphical is now a module variable. Can
+	be changed from everywhere
+
+	* interactive_gtk.pm (ask_from_entries_refW): if no button wanted, don't
+	call create_okcancel
+
+2001/02/21  dam's  <damien@mandrakesoft.com>
+
+	* network.pm, netconnect.pm: netconnect recode, wizard compatible.
+	network.pm modified for wizard. Still need work for ask_yesorno,
+	ask_okcancel. +debugging of course
+
+	* standalone/draknet: updated (don't remember what)
+
+2001/02/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/tools.c, mdk-stage1/Makefile,
+	mdk-stage1/dietlibc/lib/vprintf.c, mdk-stage1/dietlibc/lib/vfprintf.c,
+	mdk-stage1/minilibc.h, mdk-stage1/minilibc.c,
+	mdk-stage1/init-libc-headers.h: 
+	  - fix "init" on ppc (do not use minilibc on non-i386 arch's)
+	  - fix segfault of dietlibc-linked apps (broken va_stuff in dietlibc)
+	  - cleanup of "init"
+
+	* mdk-stage1/init.c: 
+	  - fix "init" on ppc (do not use minilibc on non-i386 arch's)
+	  - fix segfault of dietlibc-linked apps (broken va_stuff in dietlibc)
+	  - cleanup of "init"
+	fix up syslog logging stuff
+
+2001/02/21  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (generateAutoInstFloppy): removed
+
+	* install_any.pm (g_auto_install): use selected_leaves for
+	default_packages to reduce the
+	list of packages (aka cleanup auto_inst.cfg)
+	(g_default_packages): created
+
+	* install_steps_interactive.pm (exitInstall): add generateAutoInstFloppy
+	and g_default_packages calls in
+	advanced
+
+	* netconnect.pm, partition_table.pm, fsedit.pm: cleanup Data::Dumper use
+
+	* pkgs.pm (selected_leaves): created
+
+	* install2.pm (main): do postInstallNonRooted before postInstall (so that
+	'modprobe
+	vfat' can be done in postInstallNonRooted and used in postInstall)
+	  - move the loadO of patch/defcfg after loading modules.dep
+	  - generateAutoInstFloppy is no more a step
+	  - removed use Data::Dumper
+
 2001/02/21  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* share/rpmsrate: Add iputils to SYSTEM.
