@@ -153,7 +153,7 @@ sub acceptLicense {}
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($o) = @_;
-    modules::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
+    install_any::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
     modules::load(modules::category2modules('disk/cdrom'));
     modules::load_category('bus/firewire');
     modules::load_category('disk/scsi|hardware_raid|firewire');
@@ -433,7 +433,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     run_program::rooted($o->{prefix}, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
 
     #- configure PCMCIA services if needed.
-    modules::write_pcmcia($o->{prefix}, $o->{pcmcia});
+    install_any::write_pcmcia($o->{pcmcia});
 
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";

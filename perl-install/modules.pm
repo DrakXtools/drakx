@@ -354,47 +354,6 @@ sub read_stage1_conf {
     mergein_conf($_[0]);
 }
 
-#-###############################################################################
-#- pcmcia various
-#-###############################################################################
-sub configure_pcmcia {
-    my ($pcic) = @_;
-
-    #- try to setup pcmcia if cardmgr is not running.
-    my $running if 0;
-    return if $running;
-    $running = 1;
-
-    log::l("i try to configure pcmcia services");
-
-    symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
-
-    eval {
-	load("pcmcia_core");
-	load($pcic);
-	load("ds");
-    };
-
-    #- run cardmgr in foreground while it is configuring the card.
-    run_program::run("cardmgr", "-f", "-m", "/modules");
-    sleep(3);
-    
-    #- make sure to be aware of loaded module by cardmgr.
-    read_already_loaded();
-}
-
-sub write_pcmcia {
-    my ($prefix, $pcmcia) = @_;
-
-    #- should be set after installing the package above otherwise the file will be renamed.
-    setVarsInSh("$prefix/etc/sysconfig/pcmcia", {
-	PCMCIA    => bool2yesno($pcmcia),
-	PCIC      => $pcmcia,
-	PCIC_OPTS => "",
-        CORE_OPTS => "",
-    });
-}
-
 
 #-###############################################################################
 #- internal functions

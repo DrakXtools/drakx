@@ -1244,4 +1244,43 @@ sub remove_bigseldom_used() {
       qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs);
 }
 
+
+#-###############################################################################
+#- pcmcia various
+#-###############################################################################
+sub configure_pcmcia {
+    my ($pcic) = @_;
+
+    #- try to setup pcmcia if cardmgr is not running.
+    my $running if 0;
+    return if $running;
+    $running = 1;
+
+    log::l("i try to configure pcmcia services");
+
+    symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
+
+    eval { modules::load('pcmcia_core', $pcic, 'ds') };
+
+    #- run cardmgr in foreground while it is configuring the card.
+    run_program::run("cardmgr", "-f", "-m", "/modules");
+    sleep(3);
+    
+    #- make sure to be aware of loaded module by cardmgr.
+    modules::read_already_loaded();
+}
+
+sub write_pcmcia {
+    my ($pcic) = @_;
+
+    #- should be set after installing the package above otherwise the file will be renamed.
+    setVarsInSh("$::prefix/etc/sysconfig/pcmcia", {
+	PCMCIA    => bool2yesno($pcic),
+	PCIC      => $pcic,
+	PCIC_OPTS => "",
+        CORE_OPTS => "",
+    });
+}
+
+
 1;
