@@ -251,7 +251,7 @@ package log;
 sub l {}
 
 package detect_devices;
-sub matching_desc { 0 }
+sub matching_desc { 1 }
 
 package install_any;
 sub getFile { open FILE, "$dir/$_[0]" or return; \*FILE }
