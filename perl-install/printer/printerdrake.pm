@@ -1124,26 +1124,25 @@ complete => sub {
 
     # Non-local printer, check network and abort if no network available
     if ($printer->{currentqueue}{connect} !~ m!^(file|ptal):/! &&
-        !check_network($printer, $in, $upNetwork, 0)) { return 0 };
-
+        !check_network($printer, $in, $upNetwork, 0)) { 
+        return 0;
+    }
     # If the chosen protocol needs additional software, install it.
 
     # LPD does not support filtered queues to a remote LPD server by itself
     # It needs an additional program as "rlpr"
-    if ($printer->{currentqueue}{connect} =~ /^lpd:/ &&
+    elsif ($printer->{currentqueue}{connect} =~ /^lpd:/ &&
 	$printer->{SPOOLER} eq 'lpd' && !$::testing && !files_exist('/usr/bin/rlpr')) {
         $in->do_pkgs->install('rlpr');
-    }
-    if ($printer->{currentqueue}{connect} =~ /^smb:/ &&
+    } elsif ($printer->{currentqueue}{connect} =~ /^smb:/ &&
         !$::testing && !files_exist('/usr/bin/smbclient')) {
 	$in->do_pkgs->install('samba-client');
-    }
-    if ($printer->{currentqueue}{connect} =~ /^ncp:/ &&
+    } elsif ($printer->{currentqueue}{connect} =~ /^ncp:/ &&
 	!$::testing && !files_exist('/usr/bin/nprint')) {
 	$in->do_pkgs->install('ncpfs');
     }
     #- LPD and LPRng need netcat ('nc') to access to socket printers
-    if ($printer->{currentqueue}{connect} =~ /^socket:/ &&
+    elsif ($printer->{currentqueue}{connect} =~ /^socket:/ &&
 	($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') &&
         !$::testing && !files_exist('/usr/bin/nc')) {
         $in->do_pkgs->install('nc');
