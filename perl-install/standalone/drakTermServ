@@ -1421,7 +1421,8 @@ sub write_dhcpd_config {
 
 	if ($mode eq "append") {
 		append_to_file("/etc/dhcpd.conf", qq(include "/etc/dhcpd.conf.terminal-server";\n));
-		push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
+#- disable for the moment until we finish PXE setup
+#		push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 		push @dhcpd_config, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
 		push @dhcpd_config, qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n);
 		push @dhcpd_config, qq(# Include client machine configurations\ninclude "$client_cfg";\n);
@@ -1437,7 +1438,8 @@ sub write_dhcpd_config {
 	push @dhcpd_config, "ddns-update-style none;\n\n";
 	push @dhcpd_config, "# Long leases (48 hours)\ndefault-lease-time 172800;\nmax-lease-time 172800;\n\n";
 	push @dhcpd_config, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
-	push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
+#- disable for the moment until we finish PXE setup
+#	push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 	push @dhcpd_config, qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n\n);
 	push @dhcpd_config, "# Network-specific section\n\n";
 	
@@ -1544,6 +1546,7 @@ sub enable_ts() {
 	$exports .= "/\t$nfs_subnet/$nfs_mask(ro,$squash)\n";
 	$exports .= "/home\t$nfs_subnet/$nfs_mask(rw,root_squash)\n";
 	output_p("/etc/exports", $exports);
+	$buff_index = toggle_chkconfig("on", "portmap", $buff_index+1);
 	$buff_index = toggle_chkconfig("on", "clusternfs", $buff_index+1);
 	$buff_index = toggle_chkconfig("on", "tftp", $buff_index);	
 	$buff_index = service_change("xinetd", "restart", $buff_index);
@@ -1568,6 +1571,7 @@ sub disable_ts() {
 	my $buff_index = toggle_chkconfig("off", "dhcpd", 2);
 	$buff[$buff_index] = "\tRestoring default /etc/exports...\n";
 	cp_af("/etc/exports.mdkTS", "/etc/exports") if -e "/etc/exports.mdkTS";
+	$buff_index = toggle_chkconfig("off", "portmap", $buff_index+1);
 	$buff_index = toggle_chkconfig("off", "clusternfs", $buff_index+1);
 	$buff_index = toggle_chkconfig("off", "tftp", $buff_index);
 	$buff_index = service_change("xinetd", "restart", $buff_index);
@@ -1611,6 +1615,7 @@ sub start_ts() {
 		$buff[0] = "Starting Terminal Server...\n\n";
 		`touch /etc/dhcpd.conf.etherboot.kernel` if ! -f "/etc/dhcpd.conf.etherboot.kernel";
 		my $buff_index = service_change("dhcpd", "start", 2);
+		$buff_index = service_change("portmap", "start", $buff_index);
 		$buff_index = service_change("clusternfs", "start", $buff_index);
 		$buff[$buff_index] = "\n\tDone!";	
 	} else {
@@ -1631,6 +1636,7 @@ sub stop_ts() {
 	@buff = ();
 	$buff[0] = "Stopping Terminal Server...\n\n";
 	my $buff_index = service_change("dhcpd", "stop", 2);
+	$buff_index = service_change("portmap", "stop", $buff_index);
 	$buff_index = service_change("clusternfs", "stop", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 
