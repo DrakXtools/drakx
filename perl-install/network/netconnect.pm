@@ -247,8 +247,8 @@ If you don't want to use the auto detection, deselect the checkbox.
     network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
 
-    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or ($in->ask_yesorno(_("Network configuration"),
-							  _("The network needs to be restarted"), 1) or goto step_2))) {
+    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
+							  _("The network needs to be restarted"), 1))) {
 #-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
 	    $success = 0;
