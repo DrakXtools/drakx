@@ -262,7 +262,7 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} = "swap" if isSwap($_);
 	$_->{mntpoint} or next;
 	
-	add2hash_($_, { toFormat => $_->{notFormatted} });
+	add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: don't set toFormat for isRawRAID (0xfd)
         $_->{$::recovery ? 'toFormat' : 'toFormatUnsure'} ||= member($_->{mntpoint}, '/', '/usr');
 
 	if (!$_->{toFormat}) {
