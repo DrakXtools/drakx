@@ -228,7 +228,7 @@ sub _create_window($$) {
 	    require install_gtk;
 	    install_gtk::create_big_help($::o);
 	} elsif ($::isInstall && $d eq 'screenshot') {
-	    common::take_screenshot($o);
+	    common::take_screenshot();
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;
