@@ -206,7 +206,7 @@ foreach (@harddrake::data::tree) {
     next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
 
     my @devices = &$detector;
-    next unless listlength(@devices); # Skip empty class (no devices)
+    next unless @devices; # Skip empty class (no devices)
 
     my $parent_iter = $tree_model->append_set(undef, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
 
