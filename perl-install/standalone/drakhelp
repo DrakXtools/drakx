@@ -18,9 +18,9 @@ my $in = interactive->vnew;
 my $locale = lang::read('', $>);
 if (!member($locale->{lang}, qw(de en es fr it ru))) { $locale->{lang} = 'en' };
 my $path2help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
--d $path2help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
-
 my $path = $ARGV[0] =~ /^http|^www/ ? $ARGV[0] : $path2help . $ARGV[0];
+
+-e $path or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
 
 my $wm = any::running_window_manager();
 my %launchhelp = (
