@@ -237,7 +237,7 @@ sub check_mntpoint {
 
     ref $loopbackDevice or undef $loopbackDevice;
 
-    $mntpoint eq '' || isSwap($part) || isRAID($part) and return;
+    $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
 
     local $_ = $mntpoint;
     m|^/| or die _("Mount points must begin with a leading /");
