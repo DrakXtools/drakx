@@ -55,7 +55,7 @@ sub raw_from_file { #- internal
 	if (/^$/) {
 	    $comment .= "\n" if $comment;
 	    next;
-	} elsif (/^#\W/) {
+	} elsif (/^#\W/ || /^#$/) {
 	    s/^#\s+/# /;
 	    $comment .= "$_\n";
 	    next;
@@ -91,7 +91,7 @@ sub raw_from_file { #- internal
 	    s/(\s*#.*)/$comment_on_line = $1; ''/e;
 
 	    if (/^$/) {
-		die "$line: weird";
+		die "$file:$line: weird";
 	    }
 
 	    (my $name, my $Option, $_)  = 
