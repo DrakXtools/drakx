@@ -58,10 +58,8 @@ unless ($::isEmbedded) {
     ### menus definition
     # the menus are not shown but they provides shiny shortcut like C-q
     create_factory_menu($window->{rwindow}, ( 
-                                             {
-                                              path => N("/_File"), type => '<Branch>' },
-                                             {
-                                              path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { ugtk2->exit(0) } },
+                                             { path => N("/_File"), item_type => '<Branch>' },
+                                             { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { ugtk2->exit(0) } },
                                             )
                        );
 }
