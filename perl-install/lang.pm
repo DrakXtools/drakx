@@ -1041,7 +1041,7 @@ sub write {
     }
 
     #- deactivate translations on console for most CJK, RTL and complex languages
-    if (member($locale->{lang}, qw(ar bn fa he hi kn ko pa ug ur yi zh_TW zh_CN))) {
+    if (member($locale->{lang}, qw(ar bn fa he hi jp kn ko pa ug ur yi zh_TW zh_CN))) {
         #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
         #-	it is needed for languages not supported by the linux console
         log::explanations(qq(Disabling tranlsation on console since "$locale->{lang}" is not supported by the console));
