@@ -35,6 +35,12 @@ use fs;
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
   ],
 );
+foreach (values %suggestions) {
+    if (arch() =~ /ia64/) {
+	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, type => 0xb, ratio => 1, maxsize => 150 << 11 }, @$_);
+    }
+}
+
 my @suggestions_mntpoints = (
     "/root", "/var/ftp", "/var/www", "/boot",
     arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
