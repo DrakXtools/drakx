@@ -393,17 +393,16 @@ wish to access and any applicable user name and password."),
 #------------------------------------------------------------------------------
 sub setRootPassword($) {
     my ($o) = @_;
-#    $o->{superuser} ||= {};
-#    $o->{superuser}{password2} ||= $o->{superuser}{password} ||= "";
-    my $sup = $o->{superuser};
+    $o->{superuser} ||= {};
+    my %sup = %{$o->{superuser}};
 
     $o->ask_from_entries_ref(_("Set root password"),
 			 _("Set root password"),
 			 [_("Password"), _("Password (again)")],
-			 [\$sup->{password}, \$sup->{password2}],
+			 [\$sup{password}, \$sup{password2}],
 			 complete => sub {
-			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
-			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
+			     $sup{password} eq $sup{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
+			     (length $sup{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
 			);
