@@ -1352,6 +1352,9 @@ EndSection
 	print G $p_xf4->('options_xf4'); #- keep $O for these!
 	print G qq(    Screen $_->{screen}\n) if defined $_->{screen};
 	print G qq(    BusID       "$_->{busid}"\n) if $_->{busid};
+        if ((arch =~ /ppc/) && ($_->{driver} eq "r128")) {
+            print G qq(    Option    "UseFBDev"\n);
+        }
 	print G "EndSection\n\n\n";
     }
 
