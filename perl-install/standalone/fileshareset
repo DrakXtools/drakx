@@ -145,7 +145,7 @@ sub check {
 	while (@l = getgrent) {
 	    last if $l[0] eq $authorisation_group;
 	}
-	::member($username, split(',', $l[3])) or ::error($non_authorised);
+	::member($username, split(' ', $l[3])) or ::error($non_authorised);
     }
 }
 
