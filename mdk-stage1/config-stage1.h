@@ -38,7 +38,7 @@
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR "cdrom"
 #define IMAGE_LOCATION_REAL SLASH_LOCATION "/image"
 #define RAW_LOCATION_REL "/cdrom"
-#define STAGE2_LOCATION_REL "/image"
+#define STAGE2_LOCATION_ROOTED "/image"
 #define BOOT_LOCATION SLASH_LOCATION "/image_boot"
 #define ALWAYS_LOCATION SLASH_LOCATION "/image_always"
 #define TOTEM_LOCATION SLASH_LOCATION "/image_totem"
@@ -51,7 +51,7 @@
 #define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR "image"
 #define IMAGE_LOCATION_REAL "/tmp/image"
-#define STAGE2_LOCATION_REL "/tmp/stage2"
+#define STAGE2_LOCATION_ROOTED "/tmp/stage2"
 #endif
 
 

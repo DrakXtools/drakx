@@ -388,7 +388,7 @@ enum return_type create_initial_fs(char* symlinks, char* devices)
                 char oldpath[500], newpath[500], newpathfinal[500];
                 buf[strlen(buf)-1] = '\0';  // trim \n
                 if (sscanf(buf, "%s %s", oldpath, newpath) != 2) {
-                        sprintf(oldpath, "%s%s", STAGE2_LOCATION_REL, buf);
+                        sprintf(oldpath, "%s%s", STAGE2_LOCATION_ROOTED, buf);
                         sprintf(newpathfinal, "%s%s", SLASH_LOCATION, buf);
                 } else {
                         sprintf(newpathfinal, "%s%s", SLASH_LOCATION, newpath);
@@ -490,7 +490,7 @@ int mandrake_move_post(void)
                         return RETURN_ERROR;
         } else
                 // need a fallback in case we don't use image_totem.clp nor live_tree_totem, but we're in -u mode
-                if (scall(symlink(STAGE2_LOCATION_REL "/usr", SLASH_LOCATION "/usr"), "symlink"))
+                if (scall(symlink(STAGE2_LOCATION_ROOTED "/usr", SLASH_LOCATION "/usr"), "symlink"))
                         return RETURN_ERROR;
 
         if (create_initial_fs(IMAGE_LOCATION_REAL "/move/symlinks", IMAGE_LOCATION_REAL "/move/devices") != RETURN_OK)
