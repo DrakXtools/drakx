@@ -37,6 +37,11 @@ sub new {
     }
 }
 
+sub configureNetwork {
+    my ($_o) = @_;
+    modules::load_category('network/main|usb');
+    goto &install_steps::configureNetwork;
+}
 
 sub exitInstall {
     my ($o, $alldone) = @_;
@@ -64,12 +69,6 @@ use lang;
 use modules;
 use common;
 use log;
-
-sub configureNetwork {
-    my ($_o) = @_;
-    modules::load_category('network/main|usb');
-    goto &install_steps::configureNetwork;
-}
 
 sub enteringStep {
     my ($o, $step) = @_;
