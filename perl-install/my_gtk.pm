@@ -504,7 +504,7 @@ sub fill_tiled {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $color_text, $style, $background, $x_back, $y_back, $x_round,
+    my ($args, $w, $color_text, $widget_for_font, $background, $x_back, $y_back, $x_round,
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
@@ -522,7 +522,7 @@ sub gtkicons_labels_widget {
                   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
                   if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
 		      my $state = $darea->{state};
-                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $style->font, $x_round, 1,
+                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
                                                                1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
                       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
                       $darea->set_usize($dx, $dy);
