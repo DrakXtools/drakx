@@ -69,12 +69,6 @@ live_tree_boot:
 	$(MAKE) /tmp/live_tree_totem.clp
 	$(MAKE) $(patsubst %, /tmp/live_tree_always_i18n_%.clp, $(LANG_FILES))
 
-live_tree_boot_all:
-	cd /tmp/live_tree ; find -type l | cpio -pd /tmp/live_tree_boot_all
-	cd /tmp/live_tree_boot ; find | cpio -upd /tmp/live_tree_boot_all
-	cp -a /tmp/live_tree/move /tmp/live_tree_boot_all
-	cp -a /dev/{null,urandom} /tmp/live_tree_boot_all/dev
-
 un_live_tree_boot:
 	./make_live_tree_boot -u
 
