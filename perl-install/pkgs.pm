@@ -509,7 +509,8 @@ sub getDeps {
     local *F; open F, "$prefix/var/lib/urpmi/depslist.ordered" or die "can't find dependancies list";
     local $_;
     while (<F>) {
-	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
+	my ($name, $version, $release, $arch, $serial, $sizeDeps) =
+	  /^([^:\s]*)-([^:\-\s]+)-([^:\-\s]+)\.([^:\.\-\s]*)(?::(\d+)\S*)?\s+(.*)/;
 	my $pkg = $packages->{names}{$name};
 
 	#- these verification are necessary in case of error, but are no more fatal as
