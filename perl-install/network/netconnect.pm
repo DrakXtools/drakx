@@ -671,7 +671,7 @@ killall pppd
                     },
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
-                        $adsl_type = 'pppoa' if $ntf_name eq 'speedtouch';
+                        $adsl_type = 'pppoa' if member($ntf_name, qw(bewan speedtouch));
                         if ($adsl_provider ne $adsl_old_provider) {
                             $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 Encapsulation vpi vci);
                               $adsl_type ||= $adsl_data->{method};
