@@ -310,11 +310,10 @@ sub which_res_exist() {
 	chdir($thm_path.$theme{name}."/images/");
 	my $is_ok = 0;
 	foreach (@{$first{widget}{combo}{res}}) {
-		 -f "bootsplash-$_.jpg"
-		   and $is_ok = 1
-		   and $first{widgets}{combo}{res}->entry->set_text($_)
-		   and last;
-		
+         next if !-f "bootsplash-$_.jpg";
+         $is_ok = 1;
+         $first{widgets}{combo}{res}->entry->set_text($_);
+         last;
 	}
 	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res})) and return 0;
 	return 1;
