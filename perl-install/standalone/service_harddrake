@@ -145,7 +145,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
         next;
     } elsif ($Ident eq "PCMCIA_CONTROLLER") {
-        $ID{none}->{driver} = '' if is_empty_hash_ref($added[0]) && @was_removed;
+        $ID{none}{driver} = '' if is_empty_hash_ref($added[0]) && @was_removed;
         harddrake::autoconf::pcmcia(first(values(%ID))->{driver});
     } elsif ($Ident eq "USB_CONTROLLER") {
         modules::load_category($modules_conf, 'bus/usb');
