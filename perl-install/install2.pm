@@ -279,7 +279,7 @@ sub setupBootloader {
     modules::write_conf($o->{prefix});
 
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
-    installStepsCall($o, $auto, 'setupBootloader');
+    installStepsCall($o, $auto, 'setupBootloader', $ent_number);
 
     eval { install_any::set_security($o) };
 }

@@ -1180,7 +1180,7 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    my ($o) = @_;
+    my ($o, $ent_number) = @_;
     if (arch() =~ /ppc/) {
 	my $machtype = detect_devices::get_mac_generation();
 	if ($machtype !~ /NewWorld/) {
@@ -1197,7 +1197,11 @@ N("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
+	if ($ent_number == 1) {
+	    any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
+	} else {
+	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
+	}
 
 	{
 	    my $_w = $o->wait_message('', N("Installing bootloader"));
