@@ -661,7 +661,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                 method_select_and_prepare();
 
 #ifndef MANDRAKE_MOVE
-	if (!IS_RAMDISK)
+	if (access(STAGE2_LOCATION, R_OK) != 0)
 		if (symlink(IMAGE_LOCATION_REAL "/" LIVE_LOCATION_REL, STAGE2_LOCATION) != 0)
 			log_perror("symlink from " IMAGE_LOCATION_REAL "/" LIVE_LOCATION_REL " to " STAGE2_LOCATION " failed");
 #endif
