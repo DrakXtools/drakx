@@ -633,10 +633,11 @@ sub ask_browse_tree_info_refW {
     my @toolbar = (ftout  =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
 		   ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
 		   reload =>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$common->{state}{flat}) } ]);
-    foreach (@{$common->{icons} || []}) {
-	push @toolbar, ( $_->{icon} => [ $_->{help}, sub {
-					     if ($_->{code}) {
-						 my $w = $_->{wait_msg} && $o->wait_message('', $_->{wait_msg});
+    foreach my $ic (@{$common->{icons} || []}) {
+	push @toolbar, ( $ic->{icon} => [ $ic->{help}, sub {
+					     if ($ic->{code}) {
+						 my $w = $ic->{wait_msg} && $o->wait_message('', $ic->{wait_msg});
+						 $ic->{code}();
 						 $add_nodes->($common->{state}{flat});
 					     }
 					 } ]);
