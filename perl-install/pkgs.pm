@@ -667,15 +667,16 @@ sub read_rpmsrate {
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
-		    
 		    my @m2 = 
 		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
 		      map { packageById($packages, $_) } packageDepsId($p);
 
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
+		    if (@m3 == 1 && $m3[0] eq 'INSTALL') {
+			push @{$packages->{needToCopy} ||= []}, $_;
+			next; #- don't need to put INSTALL flag for a package.
+		    }
 		    if (packageRate($p)) {
-			next if @m3 == 1 && $m3[0] eq 'INSTALL';
-
 			my ($rate2, @m4) = packageRateRFlags($p);
 			if (@m3 > 1 || @m4 > 1) {
 			    log::l("can't handle complicate flags for packages appearing twice ($_)");
