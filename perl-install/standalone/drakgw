@@ -131,7 +131,7 @@ What would you like to do?"),
 				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
 	if ($r eq "disable") {
 	    {
-		my $wait_disabl = $in->wait_message('', N("Disabling servers..."));
+		my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
 		stop_daemons();
 	    }
 	    foreach ($dhcpd_conf, $masq_file) {
@@ -159,7 +159,7 @@ What would you like to do?"),
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
 	    }
 	    {
-		my $wait_enabl = $in->wait_message('', N("Enabling servers..."));
+		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
 		start_daemons();
 	    }
             log::l("[drakgw] Enabled");
@@ -253,8 +253,7 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
 log::explanations("Choosing network device: $device");
 
 my $server_ip = network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
-   $server_ip =~ m/(.*)\.(.*)/;
-my $lan_address = $1 ? "$1.0" : "192.168.1.0";
+my $lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : "192.168.1.0";
 my $nameserver_ip = network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
 my $netmask = network::network::read_dhcpd_conf()->{subnet_mask}[0] ||= "255.255.255.0";
 my $start_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[0] ||= "16";
@@ -265,10 +264,10 @@ my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0]
 
 my $reconf_dhcp_server_intf = 1;
 
-if (grep(/$device/, @configured_devices)) {
+if (grep { /$device/ } @configured_devices) {
   step_warning_already_conf:
     my $auto = N("Yes");
-		my $dhcp_details = N("Yes");
+		my $_dhcp_details = N("Yes");
     my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
 		
     $in->ask_from(N("Network interface already configured"),
@@ -291,8 +290,7 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = network::network::read_dhcpd_conf()->{option_routers}[0] ||= $conf->{IPADDR} ||= "192.168.1.1";
 	$nameserver_ip = network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= $conf->{IPADDR} ||= "192.168.1.1";
-   $server_ip =~ m/(.*)\.(.*)/;
-	$lan_address = $1 ? "$1.0" : $conf->{NETWORK};
+	$lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : $conf->{NETWORK};
 	$in->ask_from('',
 		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
 
@@ -333,9 +331,8 @@ log::explanations("Using LAN address <$lan_address>");
 
 #- test for potential conflict with other networks
 
-foreach (grep { $_ ne $device } @configured_devices)
-{
-    grep(/$lan_address/, cat_("/etc/sysconfig/network-scripts/ifcfg-$_")) and
+foreach (grep { $_ ne $device } @configured_devices) {
+    grep { /$lan_address/ } cat_("/etc/sysconfig/network-scripts/ifcfg-$_") and
       ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
 }
 
@@ -470,7 +467,7 @@ if (-f $cups_conf) {
 
     # Cut out the root location block so that it can be treated seperately
     # without affecting the rest of the file
-    if (grep(m|^\s*<Location\s+/\s*>|, @cups_conf_content)) {
+    if (grep { m|^\s*<Location\s+/\s*>| } @cups_conf_content) {
 	$root_location_start = -1;
 	$root_location_end = -1;
 	# Go through all the lines, bail out when start and end line found
@@ -529,9 +526,9 @@ sub quit_global {
     goto begin
 }
 
-sub pur_gtk_mode {
+sub pur_gtk_mode() {
     require ugtk2;
-    import ugtk2 qw(:wrappers :helpers :create);
+    ugtk2->import(qw(:wrappers :helpers :create));
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
                          ($shorewall->{disabled} ? 
 			  N("The setup has already been done, but it's currently disabled.") :
