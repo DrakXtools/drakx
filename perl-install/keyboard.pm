@@ -69,9 +69,9 @@ my %lang2keyboard =
   'lt' => 'lt',
   'mk' => 'mk',
   'nb' => 'no',
-  'nl' => 'us_intl', # 95 us_intl, 2 uk, 1 nl
 'nl_BE'=> 'be',
-'nl_NL'=> 'nl',
+'nl_NL'=> 'us_intl:95 uk:2 nl:1',
+#'nl_NL'=> 'nl',
   'no' => 'no',
   'no@nynorsk' => 'no',
   'ny' => 'no',
@@ -192,7 +192,7 @@ arch() eq "ppc" ? (
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub xmodmaps { keys %keyboards }
+sub keyboards { keys %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
 sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
@@ -217,9 +217,19 @@ sub loadkeys_files {
     @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
 }
 
+sub unpack_keyboards {
+    my ($k) = @_ or return;
+    [ map { [ split ':' ] } split ' ', $k ];
+}
+sub lang2keyboards {
+    my ($l) = @_;
+    my $li = unpack_keyboards($lang2keyboard{$l}) || [ $keyboards{$l} && $l || "us" ];
+    $li->[0][1] ||= 100;
+    $li;
+}
 sub lang2keyboard {
     my ($l) = @_;
-    my $kb = $lang2keyboard{$l} || $keyboards{$l} && $l || "us";
+    my $kb = lang2keyboards($l)->[0][0];
     $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
 }
 

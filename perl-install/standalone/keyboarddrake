@@ -27,7 +27,7 @@ begin:
 $keyboard ||= $in->ask_from_listf_(_("Keyboard"),
 				   _("Please, choose your keyboard layout."),
 				   \&keyboard::keyboard2text,
-				   [ keyboard::xmodmaps() ],
+				   [ keyboard::keyboards() ],
 				   keyboard::read());
 
 keyboard::keyboard2text($keyboard) or die "bad keyboard $keyboard\n";
