@@ -156,7 +156,7 @@ sub selectKeyboard {
 
     #- good guess, don't ask
     return install_steps::selectKeyboard($o) 
-      if !$::expert && !$clicked && $l->[0][1] > 90;
+      if !$::expert && !$clicked && $l->[0][1] >= 90;
 
     my @best = map { $_->[0] } @$l;
     push @best, 'us_intl' if !member('us_intl', @best);
