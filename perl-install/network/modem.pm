@@ -39,9 +39,9 @@ sub ppp_read_conf {
     #my $secret = network::tools::read_secret_backend();
     #my @cnx_list = map { $_->{server} } @$secret;
     $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
-    $modem->{auto_gateway} ||= $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
-    $modem->{auto_ip} ||=  $modem->{IPAdddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
-    $modem->{auto_dns} ||= defined $modem->{dns1} || defined $modem->{dns2} ? N("Manual") : N("Automatic");
+    $modem->{auto_gateway} ||= defined $modem->{Gateway} && $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
+    $modem->{auto_ip} ||=  defined $modem->{IPAddr} && $modem->{IPAddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
+    $modem->{auto_dns} ||= $modem->{dns1} || $modem->{dns2} ? N("Manual") : N("Automatic");
 }
 
 #-----modem conf
