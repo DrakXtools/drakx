@@ -15,16 +15,21 @@ sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
 
   conf_adsl_step1:
-    my $l = [ N_("use pppoe"),
-	      N_("use pptp"), 
-	      N_("use dhcp"), 
-	      N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),
-	      N_("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
-	     ];
+    my %l = (
+	     'pppoe' =>  N_("use pppoe"),
+	     'pptp'  =>  N_("use pptp"), 
+	     'dhcp'  =>  N_("use dhcp"), 
+	     'speedtouch' => N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),
+	     'sagem' =>  N_("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, " - detected"),
+	    );
+    
     my $type = $in->ask_from_list_(N("Connect to the Internet"),
 				   N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few use dhcp.
-If you don't know, choose 'use pppoe'"), $l) or return;
+If you don't know, choose 'use pppoe'"),
+				   [ sort values %l ],
+				   $l{ find { defined $netc->{autodetect}{adsl}{$_} } keys %l }
+				  ) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
