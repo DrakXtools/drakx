@@ -53,21 +53,12 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
 
  #- stage1 "loader"
-ifeq (i386, $(ARCH))
-INITSRC = minilibc.c init.c
-INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
-else
-ifeq (x86_64, $(ARCH))
+ifeq (DIETLIBC, $(L))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
 else
 INITSRC = init.c
-ifeq (ia64, $(ARCH))
 INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(GLIBC_INCLUDES)
-else
-INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(DIETLIBC_INCLUDES)
-endif
-endif
 endif
 
 INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
@@ -94,12 +85,10 @@ FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 
 FRONTEND_LINK = $(FRONTEND_OBJS) $($(F)_FRONTEND_LIBS)
 
+ifeq (DIETLIBC, $(L))
+INSMOD = insmod-busybox
+else
 INSMOD = insmod-modutils
-ifeq (i386, $(ARCH))
-INSMOD = insmod-busybox
-endif
-ifeq (x86_64, $(ARCH))
-INSMOD = insmod-busybox
 endif
 
 STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
@@ -107,9 +96,7 @@ STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
 
 ifeq (DIETLIBC, $(L))
 STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
-endif
-
-ifeq (GLIBC, $(L))
+else
 ifeq (x86_64, $(ARCH))
 STAGE1_NETWORK_LIBS = /usr/lib64/libresolv.a
 else
