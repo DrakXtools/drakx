@@ -38,6 +38,7 @@
 #include "log.h"
 #include "dns.h"
 #include "mount.h"
+#include "automatic.h"
 
 #include "network.h"
 
@@ -268,18 +269,20 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 {
 	enum return_type results;
 	char * bootprotos[] = { "Static", "DHCP", NULL };
+	char * bootprotos_auto[] = { "static", "dhcp" };
 	char * choice;
 
-	results = ask_from_list("Please choose the desired IP attribution.", bootprotos, &choice);
+	results = ask_from_list_auto("Please choose the desired IP attribution.", bootprotos, &choice, "network", bootprotos_auto);
 	if (results != RETURN_OK)
 		return results;
 
 	if (!strcmp(choice, "Static")) {
 		char * questions[] = { "IP of this machine", "IP of Domain Name Server", "IP of default gateway", NULL };
+		char * questions_auto[] = { "ip", "dns", "gateway" };
 		char ** answers;
 		struct in_addr addr;
 
-		results = ask_from_entries("Please enter the network information.", questions, &answers, 16);
+		results = ask_from_entries_auto("Please enter the network information.", questions, &answers, 16, questions_auto);
 		if (results != RETURN_OK)
 			return setup_network_interface(intf);
 
@@ -331,6 +334,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	} else {
 		error_message("DHCP not implemented yet");
 		intf->boot_proto = BOOTPROTO_DHCP;
+		return RETURN_ERROR;
 	}
 	
 	if (configure_net_device(intf))
@@ -352,15 +356,16 @@ static enum return_type configure_network(struct interface_info * intf)
 	if (!name) {
 		enum return_type results;
 		char * questions[] = { "Host name", "Domain name", NULL };
+		char * questions_auto[] = { "hostname", "domain" };
 		char ** answers;
 		char * boulet;
 
 		log_message("reverse name lookup on self failed");
 
-		results = ask_from_entries("I could not guess hostname and domain name; please fill in this information. "
-					   "Valid answers are for example: `mybox' for hostname and `mynetwork.com' for domain name, "
-					   "for a machine called `mybox.mynetwork.com' on the Internet.",
-					   questions, &answers, 32);
+		results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
+						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for domain name, "
+						"for a machine called `mybox.mynetwork.com' on the Internet.",
+						questions, &answers, 32, questions_auto);
 		if (results != RETURN_OK)
 			return results;
 
@@ -475,32 +480,25 @@ static enum return_type intf_select_and_up(void)
 {
 	static struct interface_info intf[20];
 	static int num_interfaces = 0;
-	enum return_type results;
-
-	do {
-		struct interface_info * sel_intf = NULL;
-		int i;
-		char * iface = interface_select();
-		
-		if (iface == NULL)
-			return RETURN_BACK;
-		
-		for (i = 0; i < num_interfaces ; i++)
-			if (!strcmp(intf[i].device, iface))
-				sel_intf = &(intf[i]);
-		
-		if (sel_intf == NULL) {
-			sel_intf = &(intf[num_interfaces]);
-			strcpy(sel_intf->device, iface);
-			sel_intf->is_up = 0;
-			num_interfaces++;
-		}
-
-		results = bringup_networking(sel_intf);
+	struct interface_info * sel_intf = NULL;
+	int i;
+	char * iface = interface_select();
+	
+	if (iface == NULL)
+		return RETURN_BACK;
+	
+	for (i = 0; i < num_interfaces ; i++)
+		if (!strcmp(intf[i].device, iface))
+			sel_intf = &(intf[i]);
+	
+	if (sel_intf == NULL) {
+		sel_intf = &(intf[num_interfaces]);
+		strcpy(sel_intf->device, iface);
+		sel_intf->is_up = 0;
+		num_interfaces++;
 	}
-	while (results == RETURN_BACK);
-
-	return RETURN_OK;
+	
+	return bringup_networking(sel_intf);
 }
 
 
@@ -508,6 +506,7 @@ static enum return_type intf_select_and_up(void)
 enum return_type nfs_prepare(void)
 {
 	char * questions[] = { "NFS server name", "Linux-Mandrake directory", NULL };
+	char * questions_auto[] = { "server", "directory", NULL };
 	char ** answers;
 	char * nfsmount_location;
 	enum return_type results = intf_select_and_up();
@@ -516,9 +515,9 @@ enum return_type nfs_prepare(void)
 		return results;
 
 	do {
-		results = ask_from_entries("Please enter the name or IP address of your NFS server, "
-					   "and the directory containing the Linux-Mandrake installation.",
-					   questions, &answers, 40);
+		results = ask_from_entries_auto("Please enter the name or IP address of your NFS server, "
+						"and the directory containing the Linux-Mandrake installation.",
+						questions, &answers, 40, questions_auto);
 		if (results != RETURN_OK)
 			return nfs_prepare();
 		

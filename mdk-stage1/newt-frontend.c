@@ -60,6 +60,7 @@ void error_message(char *msg, ...)
 	va_start(args, msg);
 	va_end(args);
 	newtWinMessagev("Error", "Ok", msg, args);
+	set_param(MODE_AUTOMATIC_ERROR_OCCURED);
 }
 
 void info_message(char *msg, ...)
@@ -67,7 +68,10 @@ void info_message(char *msg, ...)
 	va_list args;
 	va_start(args, msg);
 	va_end(args);
-	newtWinMessagev("Notice", "Ok", msg, args);
+	if (!IS_AUTOMATIC)
+		newtWinMessagev("Notice", "Ok", msg, args);
+	else
+		vlog_message(msg, args);
 }
 
 void wait_message(char *msg, ...)

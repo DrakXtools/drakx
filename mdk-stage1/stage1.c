@@ -42,6 +42,7 @@
 #include "frontend.h"
 #include "modules.h"
 #include "tools.h"
+#include "automatic.h"
 
 #ifndef DISABLE_CDROM
 #include "cdrom.h"
@@ -110,37 +111,38 @@ void spawn_shell(void)
 
 enum return_type method_select_and_prepare(void)
 {
-#ifndef DISABLE_DISK
-	char * disk_install = "Hard disk";
-#endif
-#ifndef DISABLE_CDROM
-	char * cdrom_install = "CDROM drive";
-#endif
-#ifndef DISABLE_NETWORK
-	char * network_nfs_install = "NFS server";
-	char * network_ftp_install = "FTP server";
-	char * network_http_install = "HTTP server";
-#endif
 	enum return_type results;
 	char * choice;
-	char * means[10];
+	char * means[10], * means_auto[10];
 	int i;
+
+#ifndef DISABLE_DISK
+	char * disk_install = "Hard disk"; char * disk_install_auto = "disk";
+#endif
+#ifndef DISABLE_CDROM
+	char * cdrom_install = "CDROM drive"; char * cdrom_install_auto = "cdrom";
+#endif
+#ifndef DISABLE_NETWORK
+	char * network_nfs_install = "NFS server"; char * network_nfs_install_auto = "nfs";
+	char * network_ftp_install = "FTP server"; char * network_ftp_install_auto = "ftp";
+	char * network_http_install = "HTTP server"; char * network_http_install_auto = "http";
+#endif
 
 	i = 0;
 #ifndef DISABLE_NETWORK
-	means[i] = network_nfs_install; i++;
-	means[i] = network_ftp_install; i++;
-	means[i] = network_http_install; i++;
-#endif
-#ifndef DISABLE_DISK
-	means[i] = disk_install; i++;
+	means[i] = network_nfs_install; means_auto[i++] = network_nfs_install_auto;
+	means[i] = network_ftp_install; means_auto[i++] = network_ftp_install_auto;
+	means[i] = network_http_install; means_auto[i++] = network_http_install_auto;
 #endif
 #ifndef DISABLE_CDROM
-	means[i] = cdrom_install; i++;
+	means[i] = cdrom_install; means_auto[i++] = cdrom_install_auto;
+#endif
+#ifndef DISABLE_DISK
+	means[i] = disk_install; means_auto[i++] = disk_install_auto;
 #endif
 	means[i] = NULL;
 
-	results = ask_from_list("Please choose the mean of installation.", means, &choice);
+	results = ask_from_list_auto("Please choose the mean of installation.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
 		return results;

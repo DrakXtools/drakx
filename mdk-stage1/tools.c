@@ -31,23 +31,18 @@
 #include "log.h"
 #include "mount.h"
 #include "frontend.h"
+#include "automatic.h"
 
 #include "tools.h"
 
 
-struct cmdline_elem
-{
-	char * name;
-	char * value;
-};
-
-struct cmdline_elem * params;
+static struct param_elem * params;
 
 void process_cmdline(void)
 {
 	char buf[512];
 	int fd, size, i, p;
-	struct cmdline_elem tmp_params[50];
+	struct param_elem tmp_params[50];
 	
 	log_message("opening /proc/cmdline... ");
 	
@@ -61,36 +56,42 @@ void process_cmdline(void)
 	log_message("\t%s", buf);
 
 	i = 0; p = 0;
-	while (buf[i] != 0) {
+	while (buf[i] != '\0') {
 		char *name, *value = NULL;
 		int j = i;
-		while (buf[i] != ' ' && buf[i] != '=' && buf[i] != 0)
+		while (buf[i] != ' ' && buf[i] != '=' && buf[i] != '\0')
 			i++;
 		if (i == j) {
 			i++;
 			continue;
 		}
 		name = memdup(&buf[j], i-j + 1);
-		name[i-j] = 0;
+		name[i-j] = '\0';
 
 		if (buf[i] == '=') {
 			int k = i+1;
 			i++;
-			while (buf[i] != ' ' && buf[i] != 0)
+			while (buf[i] != ' ' && buf[i] != '\0')
 				i++;
 			value = memdup(&buf[k], i-k + 1);
-			value[i-k] = 0;
+			value[i-k] = '\0';
 		}
 
 		tmp_params[p].name = name;
 		tmp_params[p].value = value;
-		p++;
-		i++;
 		if (!strcmp(name, "expert")) set_param(MODE_EXPERT);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "pcmcia")) set_param(MODE_PCMCIA);
 		if (!strcmp(name, "cdrom")) set_param(MODE_CDROM);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
+		if (!strcmp(name, "automatic")) {
+			set_param(MODE_AUTOMATIC);
+			grab_automatic_params(value);
+		}
+		p++;
+		if (buf[i] == '\0')
+			break;
+		i++;
 	}
 	
 	if (IS_RESCUE) {
@@ -102,9 +103,9 @@ void process_cmdline(void)
 
 	tmp_params[p++].name = NULL;
 
-	params = memdup(tmp_params, sizeof(struct cmdline_elem) * p);
+	params = memdup(tmp_params, sizeof(struct param_elem) * p);
 
-	log_message("\tgot %d args", p);
+	log_message("\tgot %d args", p-1);
 }
 
 
@@ -117,7 +118,7 @@ int get_param(int i)
 
 char * get_param_valued(char *param_name)
 {
-	struct cmdline_elem * ptr = params;
+	struct param_elem * ptr = params;
 
 	while (ptr->name) {
 		if (!strcmp(ptr->name, param_name))
@@ -179,7 +180,7 @@ int ramdisk_possible(void)
 	if (total_memory() > MEM_LIMIT_RAMDISK)
 		return 1;
 	else {
-		log_message("Warning, ramdisk is not possible due to low mem!");
+		log_message("warning, ramdisk is not possible due to low mem!");
 		return 0;
 	}
 }

@@ -22,6 +22,7 @@
 #ifndef _TOOLS_H_
 #define _TOOLS_H_
 
+#include <stdlib.h>
 
 void process_cmdline(void);
 int get_param(int i);
@@ -30,6 +31,12 @@ int total_memory(void);
 int ramdisk_possible(void);
 enum return_type load_ramdisk(void);
 void * memdup(void *src, size_t size);
+
+struct param_elem
+{
+	char * name;
+	char * value;
+};
 
 
 #endif
