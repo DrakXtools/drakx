@@ -36,8 +36,7 @@ sub write_secret_backend {
 
 sub unquotify {
     my ($word) = @_;
-    my ($a, $b, $c) = $$word =~ /"(.*)"|'(.*)'|(.*)/;
-    $$word = $a || $b || $c;
+    $$word =~ s/^(['"]?)(.*)\1$/$2/;
 }
 
 sub read_secret_backend {
