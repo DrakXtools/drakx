@@ -16,7 +16,7 @@ sub config_window {
     if ($in->ask_from("Module configuration", N("You can configure each parameter of the module here."), \@l)) {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
-		  modules::set_options($_->{driver}, $options);
+		  modules::set_options($data->{driver}, $options);
 		    modules::write_conf;
 		}
     }
