@@ -10,7 +10,7 @@ our ($version, $sbindir, $bindir) = ("1.1.5", "/usr/sbin", "/usr/bin");
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|DISPLAY|MULTIMEDIA_VIDEO|BRIDGE|NETWORK|MULTIMEDIA_AUDIO/ } detect_devices::probeall(1);
+    grep { $_->{media_type} !~ /tape|DISPLAY|MULTIMEDIA_VIDEO|STORAGE_IDE|BRIDGE|NETWORK|MULTIMEDIA_AUDIO/ } detect_devices::probeall(1);
 }
 
 
@@ -59,9 +59,9 @@ our @tree =
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { require scanner; scanner::findScannerUsbport() }],
 	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect()}],
-	["JOYSTICK","Joystick", "joystick.png", "", sub {}]
+	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
-#	["","Ideinterface", "Ideinterface.png", "", "STORAGE_IDE"],
+	["","Ideinterface", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
 #	["","Scsiinterface", "Scsiinterface.png", "", \&detect_devices::getSCSI],
 #	["","Usbinterface", "Usbinterface.png", "", \&detect_devices::usb_probe]
 	);
