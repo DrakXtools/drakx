@@ -42,14 +42,18 @@ sub set_above {
     }
 }
 
+sub create_from_old() {
+    #- use module-init-tools script
+    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", file());
+}
+
 sub read {
     my ($type, $o_file) = @_;
 
     my $file = $o_file || do {
 	my $f = $::prefix . file();
 	if (!-e $f && -e "$::prefix/etc/modules.conf") {
-	    #- use module-init-tools script
-	    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", file());
+	    create_from_old();
 	}
 	$f;
     };

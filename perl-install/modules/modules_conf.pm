@@ -60,6 +60,11 @@ sub write {
     };
 
     modules::any_conf::write($conf, $file);
+
+    if ($::isInstall) {
+	require modules::modprobe_conf;
+	modules::modprobe_conf::create_from_old();
+    }
 }
 
 1;
