@@ -212,7 +212,6 @@ sub save_conf_file {
     save_cron_files();
 }
 
-
 sub read_cron_files {
     if (-f '/etc/cron.hourly/drakbackup') { $when_space = 'hourly'; }
     elsif (-f '/etc/cron.daily/drakbackup') { $when_space = 'daily'; }
@@ -285,11 +284,9 @@ sub read_conf_file {
 }
 
 sub backend_mod {
-
 }
 
 sub build_cd_fct {
-
 }
 
 sub build_floppy_fct {
@@ -328,8 +325,6 @@ sub return_path {
 
 sub build_backup_files {
 
-#tar --use-compress-prog=bzip2 xf foo.tar.bz2
-
     -d  $save_path or mkdir_p($save_path);
     my $path_name;
     my $tar_cmd;
@@ -362,7 +357,20 @@ sub build_backup_files {
 	}
     }
     if ($where_net) {
+
+#  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
+#         die_if_ssl_error("ssl write");
+#         shutdown S, 1;  # Half close --> No more output, sends EOF to server
+#         $got = Net::SSLeay::read($ssl);         # Perl returns undef on failure
+#         die_if_ssl_error("ssl read");
+#         print $got;
+                
+#         Net::SSLeay::free ($ssl);               # Tear down connection
+#         Net::SSLeay::CTX_free ($ctx);
+#         close S;
+
 	
+
     }
     if ($where_cd) {
 	
@@ -612,7 +620,6 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
     my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
 				  0, new Gtk::HSeparator,
 				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
-#				  0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon") ),
 				  0, new Gtk::HSeparator,
 				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please choose your protocol"),
@@ -621,7 +628,7 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
 					      ),
 				  0, _(""),
 				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer the host name."),
+					      1, _("please entrer the host name or IP."),
 					      1, my $host_name_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
@@ -664,7 +671,6 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
-#				 0, my $check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Disk with daemon") ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     0, _(" "),
@@ -694,7 +700,7 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
     my $box_where_cd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_cd = new Gtk::CheckButton( _(" Use CD/DVDROM to backup") ),
-#				 0, my $check_where_cd_daemon = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon") ),
+
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     1, _("please choose your CD space"),
@@ -874,15 +880,26 @@ sub find_backup_to_restore {
 }
 
 sub do_cron {
-
-
 }
 
 sub do_restore_backend {
-    $restore_user  and system("cd / && tar xvfz $save_path/backup_user_$_.tar.gz ") foreach @user_list_to_restore;
-    $restore_sys   and system("cd / && tar xvfz $save_path/backup_sys.tar.gz ");
-    $restore_other and system("cd / && tar xvfz $save_path/backup_other.tar.gz ");
+    my $untar_cmd;
+    if (grep /tar.gz$/, all($save_path)) { $untar_cmd = 0; } 
+    else { $untar_cmd = 1; } 
 
+    if ($restore_user)  { 
+	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $save_path/backup_user_$_.tar.gz ") foreach @user_list_to_restore;
+	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $save_path/backup_user_$_.tar.bz2 | tar xf -") foreach @user_list_to_restore;
+    }
+    if ($restore_sys)   { 
+	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $save_path/backup_sys.tar.gz ");
+	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $save_path/backup_sys.tar.bz2  | tar xf - ");
+    }
+    if ($restore_other) { 
+	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $save_path/backup_other.tar.gz ");
+	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $save_path/backup_other.tar.bz2  | tar xf - ");
+    }
+    print "End of restore\n";
 }
 
 sub do_restore {
@@ -897,16 +914,12 @@ sub do_restore {
 					       new Gtk::VBox(0,10),
 					       ),
 				   1, new Gtk::VBox(0,10),
-				   0, gtkpack_(new Gtk::HBox(0,10),
-					       0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
-						   ${$central_widget}->destroy();
-						   restore_step2();				
-					       }),
-					       1,  new Gtk::VBox(0,10),
-					       0,  gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
-						   ${$central_widget}->destroy();
-					       }),
-					       ),
+ 				   0, gtkpack_(new Gtk::HBox(0,10),
+ 					       0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
+ 						   ${$central_widget}->destroy();
+ 						   restore_step2();				
+ 					       }),
+ 					       ),
 				   ),
 	    );
     $central_widget = \$do_restore;
@@ -953,7 +966,6 @@ sub restore_step_other {
 
 my %check_user_to_restore;
 sub restore_step_user {
-    @user_list_to_restore = @user_backuped;
     my $retore_step_user;
     gtkpack($retore_box2,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -970,12 +982,10 @@ sub restore_step_user {
 										}
 										$b->signal_connect(toggled => sub { 
 										    if ($check_user_to_restore{$name}[1] ) {
-											print "add : $name \n";
 											$check_user_to_restore{$name}[1] = 1;
 											if (!member($name, @user_list_to_restore) ) {
 											    push @user_list_to_restore, $name;}
 										    } else {
-											print "remove  : $name \n";
 											$check_user_to_restore{$name}[1] = 0;
 									       my @user_list_tmp = grep(!/^$name$/,@user_list_to_restore );
 											@user_list_to_restore = @user_list_tmp;
@@ -1078,6 +1088,7 @@ sub restore {
 
     find_backup_to_restore();
 
+    @user_list_to_restore = @user_backuped;
     if ($other_backuped || $sys_backuped || @user_backuped) {
 	gtkpack($up_box,
 	      $retore_box = gtkpack_(new Gtk::VBox(0,1),
@@ -1092,7 +1103,11 @@ sub restore {
 						 1, new Gtk::HBox(0,10),
 						 1, gtkpack_(new Gtk::VBox(0,10),
 							     0, gtksignal_connect(new Gtk::Button(_("Restore all backups (last)")), 
-								 clicked => sub { $retore_box3->destroy(); do_restore(); }),
+								 clicked => sub { $retore_box3->destroy(); 
+										  $restore_sys = 1;
+										  $restore_other = 1;
+										  $restore_user = 1;
+										  do_restore(); }),
 							     0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), 
 								 clicked => sub { $retore_box3->destroy(); restore_step2(); }),
 							     ),
@@ -1291,7 +1306,6 @@ sub after_adv {
 				  ),
     } else { $box_cfg_state =  gtkpack(new Gtk::VBox(0,1),
 				       _("No configuration please click Wizard or Advanced.") ), }
-    
     gtkadd($window1,
 	   gtkpack(new Gtk::VBox(0,0),
 		   gtkpack(gtkset_usize($up_box = new Gtk::VBox(0, 5), 500, 420),
