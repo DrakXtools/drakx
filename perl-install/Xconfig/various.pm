@@ -73,7 +73,7 @@ sub choose_xdm {
 N("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"),
 				  interactive_help_id => 'configureXxdm',
-				 }, $xdm) or return;
+				 }, $xdm);
     }
     runlevel($xdm ? 5 : 3);
 }
