@@ -4,13 +4,22 @@ my $dir = `pwd`;
 chomp $dir;
 $dir .= "/../../..";
 
+#- perl version of the install, we use directly the version we found,
+#- this means there SHOULD BE no module compiled for an older version of perl
+#- which will be used by DrakX.
+my ($version, $arch) = (glob "$dir/usr/lib/perl5/*/*/CORE/libperl.so")[0] =~ m|$dir/usr/lib/perl5/([^/]*)/([^/]*)/CORE/libperl.so|;
+
 #- keep it mind the ELF loader to use.
 $ENV{LD_LOADER} = "$dir/lib/ld-linux.so.2";
 
 $ENV{LOCPATH}="$dir/usr/share/locale";
 $ENV{GCONV_PATH}="$dir/usr/lib/gconv";
-$ENV{PERL5LIB} = join ":", map { "$dir/$_" } @INC;
-$ENV{LD_LIBRARY_PATH} = "$dir/usr/bin:$dir/bin:$dir/sbin:$dir/usr/sbin:$dir/usr/X11R6/bin:$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/5.6.0/i386-linux/CORE";
+$ENV{PERL5LIB} = join ":", map { "$dir/usr/lib/perl5/$_" } ("$version/$arch",
+							    "$version",
+							    "site_perl/$version/$arch",
+							    "site_perl/$version",
+							    "site_perl");
+$ENV{LD_LIBRARY_PATH} = "$dir/usr/bin:$dir/bin:$dir/sbin:$dir/usr/sbin:$dir/usr/X11R6/bin:$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/$version/$arch/CORE";
 $ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
 $ENV{SHARE_PATH} = "$dir/usr/share";
 $ENV{RPMRC_FILE} = "$dir/usr/lib/rpm/rpmrc";
