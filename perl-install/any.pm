@@ -621,7 +621,7 @@ sub ask_user_one {
           callbacks => {
 	          focus_out => sub {
 		      if ($_[0] eq '0') {
-			  $u->{name} ||= lc first($u->{realname} =~ /([\w-]+)/);
+			  $u->{name} ||= lc first($u->{realname} =~ /([a-z0-9_-]+)/);
 		      }
 		  },
 	          complete => sub { $u->{name} ? &$verif : 0 },
