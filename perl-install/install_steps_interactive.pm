@@ -157,8 +157,8 @@ sub printerConfig($) {
     $o->{printer}{SPOOLDIR} ||= $o->{default}{printer}{SPOOLDIR};
     $o->ask_from_entries_ref(_("Standard Printer Options"),
 			 _("Every print queue (which print jobs are directed to) needs a 
-			   name (often lp) and a spool directory associated with it. What 
-			   name and directory should be used for this queue?"),
+name (often lp) and a spool directory associated with it. What 
+name and directory should be used for this queue?"),
 			 [_("Name of queue:"), _("Spool directory:")],
 			 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
 			);
@@ -181,7 +181,7 @@ sub printerConfig($) {
 	eval { modules::unload("lp") };
 	
 	my $string = _("What device is your printer connected to 
-			    (note that /dev/lp0 is equivalent to LPT1:)?\n");
+(note that /dev/lp0 is equivalent to LPT1:)?\n");
 	$string .= _("I detect :");
 	$string .= join(", ", @port);
 
@@ -199,8 +199,8 @@ sub printerConfig($) {
 	$o->{printer}{REMOTEQUEUE}    ||= $o->{default}{printer}{REMOTEQUEUE};
 	$o->ask_from_entries_ref(_("Remote lpd Printer Options"), 
 				 _("To use a remote lpd print queue, you need to supply 
-				   the hostname of the printer server and the queue name 
-				   on that server which jobs should be placed in."),
+the hostname of the printer server and the queue name 
+on that server which jobs should be placed in."),
 				 [_("Remote hostname:"), _("Remote queue:")],
 				 [\$o->{printer}{REMOTEHOST}, \$o->{printer}{REMOTEQUEUE}],
 				);
@@ -216,10 +216,10 @@ sub printerConfig($) {
 	
 	$o->ask_from_entries_ref(_("SMB/Windows 95/NT Printer Options"),
 				 _("To print to a SMB printer, you need to provide the 
-	SMB host name (this is not always the same as the machines 
-	TCP/IP hostname) and possibly the IP address of the print server, as 
-	well as the share name for the printer you wish to access and any 
-	applicable user name, password, and workgroup information."),
+SMB host name (this is not always the same as the machines 
+TCP/IP hostname) and possibly the IP address of the print server, as 
+well as the share name for the printer you wish to access and any 
+applicable user name, password, and workgroup information."),
 				 [_("SMB server host:"), _("SMB server IP:"),
 				  _("Share name:"), _("User name:"), _("Password:"),
 				  _("Workgroup:")],
