@@ -65,7 +65,7 @@ sub selectInstallClass($@) {
 }
 
 sub setupSCSI {
-    my ($o) = @_;
+    my ($o, $auto) = @_;
     my $w;
     my @l = modules::load_thiskind('scsi', sub { 
         $w = $o->wait_message('', 
@@ -75,7 +75,7 @@ sub setupSCSI {
     });
     undef $w; # kill wait_message
 
-    $o->default("autoSCSI") and return;
+    return if $auto;
     while (1) {
 	@l ?
 	  $o->ask_yesorno('', 

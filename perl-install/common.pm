@@ -78,7 +78,6 @@ sub fold_left(&$@) {
 sub add_f4before_leaving {
     my ($f, $b, $name) = @_;
 
-#    print "add_f4before_leaving\n";
     unless ($common::before_leaving::{$name}) {
 	no strict 'refs';
 	${"common::before_leaving::$name"} = 1;
@@ -114,7 +113,6 @@ sub catch_cdie(&&) {
 sub cdie {
     $@ = join '', @_;
     foreach (@common::cdie_catches) {
-	print;
 	&{$_}(@_) and return;
     }
     die @_;

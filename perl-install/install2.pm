@@ -20,31 +20,110 @@ use smp;
 use lang;
 use run_program;
 
-my @installStepsFields = qw(text help redoable onError needs);
+my %stepsHelp = (
+selectLanguage => 
+ __("Choose the language which you approved. This one govern the language's system."),
+selectPath => 
+ __("Choose \"Installation\" if you never have installed Linux system on this computer or if you wish
+to install several of them on this machine.
+
+Choose \"Update\" if you wish to update a Linux system Mandrake 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or
+ 6.0 (Venus)."),
+selectInstallClass => 
+ __("Select:
+  - Beginer: if you have never installed Linux system and wish to install the system elected 
+\"Product of the year\" for 1999, click here.
+  - Developer: if wish to use your Linux system to build software, you will find your happiness here.
+  - Server: if you wish to install the operating system elected \"Distribution/Server\" for 1999,
+choose this installation class.
+  - Expert: if you alway know very fine GNU/Linux and that you wish to preserve the whole
+control of the installation, this class is for you."),
+setupSCSI => 
+ __("The system did not detect a SCSI card. If you have one (or several) click on \"Yes\" and choose the module
+to be tested. In the contrary case, cliquez on \"Not\".
+
+If you don't know if you have interfaces SCSI, consult the documentation delivered with your computer
+or, if you use Microsoft Windows 95/98, consult the file \"Peripheral manager\" of the item \"System\"
+ of the \"Control panel\"."),
+partitionDisks => 
+ __("In this stage, you will must partion your hard disk. It consists in cutting your disk in several zones
+(which are not equal). This operation, for spectacular and intimidating that it is,
+ is not hardly if you be carrefull so that you do. 
+Also, take your time, are sure you before click on \"Finishing\" and READ the handbook of DiskDrake
+before use them."),
+formatPartitions => 
+ __("The partitions lately created must be formatted so that the system can use them.
+You can also format partitions before created and used if you wish to remove all the data which
+contain. Note that it is not necessary to format the partitions created before used if they contain data to
+which you want to keep (typical cases: / home and / usr/local)."),
+choosePackages => 
+ __("You now have the possibility of choosing the software which you wish to install.
+
+Please note that packages manage the dependences: that means that if you wish to install
+a software requiring the presence of another software, this last will be automatically selected
+and that it will be impossible for you to install the first without installing the second.
+
+Information on each category of packages and each one of enter of them are available in zone \"Infos\"
+located above buttons of confirmation/selection/deselection."),
+doInstallStep => 
+ __("Selected packages are now getting installed on your system. This operation take only a few minutes."),
+setRootPassword => 
+ __("The system now requires an administrator password for your Linux system.
+This passwd is required of you by twice in order to being certain of its spelling.
+
+Choose it carefully because it mainly conditions the good functioning of your system.
+Indeed, only the administrator (also named \"root\") is able to configure the computer.
+The password should not be too simple so that whoever cannot be connected under this account.
+It should not be either too sophisticated under penalty of being difficult to retain and, finally, forgotten.
+
+When you wish to connect yourselves on your Linux system as an administrator, the \"login\" 
+is \"root\" and the \"passswrd\", this one which you now will indicate."),
+addUser => 
+ __("You can now authorize one or more people to be connected on your Linux system. Each one of
+them will profit from his own environment will be able to configure.
+
+It is very important that you create at least one user even if you are the only person who will connect
+herself on this machine. Indeed, if runnig the system as \"root\" is attractive, that 
+is a very bad idea. This last having all the rights it is certain that at one time you will broke all.
+This is highly preferable you connect as simple user and that you use the account \"root\" only when
+that is essential."),
+doInstallStep => 
+ __("The system being now copied on your disk, he is now time to indicate to him from where he will have to start.
+With less than you know exactly what you do, always choose \"First sector of drive\"."),
+
+configureX => 
+ __("It is now time to configure the graphic server. First of all, choose your monitor. You have then
+the possibility of testing your configuration and of reconsidering your choices if the latter are not
+appropriate to you."),
+);
+
+
+my @installStepsFields = qw(text redoable onError needs);
 my @installSteps = (
-  selectLanguage => [ __("Choose your language"), "help", 1, 1 ],
-  selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
-  selectInstallClass => [ __("Select installation class"), __("help"), 1, 1 ],
-  setupSCSI => [ __("Setup SCSI"), __("help"), 1, 0 ],	
-  partitionDisks => [ __("Setup filesystems"), __("help"), 1, 0 ],
-  formatPartitions => [ __("Format partitions"), __("help"), 1, -1, "partitionDisks" ],
-  choosePackages => [ __("Choose packages to install"), __("help"), 1, 1 ],
-  doInstallStep => [ __("Install system"), __("help"), 1, -1, ["formatPartitions", "selectPath"] ],
-#  configureMouse => [ __("Configure mouse"), __("help"), 0, 0 ],
-  finishNetworking => [ __("Configure networking"), __("help"), 1, 1, "formatPartitions" ],
-#  configureTimezone => [ __("Configure timezone"), __("help"), 0, 0 ],
-#  configureServices => [ __("Configure services"), __("help"), 0, 0 ],
-#  configurePrinter => [ __("Configure printer"), __("help"), 0, 0 ],
-  setRootPassword => [ __("Set root password"), __("help"), 1, 0, "formatPartitions" ],
-  addUser => [ __("Add a user"), __("help"), 1, 0, "formatPartitions" ],
-  createBootdisk => [ __("Create bootdisk"), __("help"), 1, 0, "doInstallStep" ],
-  setupBootloader => [ __("Install bootloader"), __("help"), 1, 1, "doInstallStep" ],
-  configureX => [ __("Configure X"), __("help"), 1, 0, "formatPartitions" ],
-  exitInstall => [ __("Exit install"), __("help"), 0, 0, "alldone" ],
+  selectLanguage => [ __("Choose your language"), 1, 1 ],
+  selectPath => [ __("Choose install or upgrade"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
+  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
+  partitionDisks => [ __("Setup filesystems"), 1, 0 ],
+  formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
+  choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
+  doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
+#  configureMouse => [ __("Configure mouse"), 0, 0 ],
+  finishNetworking => [ __("Configure networking"), 1, 1, "formatPartitions" ],
+#  configureTimezone => [ __("Configure timezone"), 0, 0 ],
+#  configureServices => [ __("Configure services"), 0, 0 ],
+#  configurePrinter => [ __("Configure printer"), 0, 0 ],
+  setRootPassword => [ __("Set root password"), 1, 0, "formatPartitions" ],
+  addUser => [ __("Add a user"), 1, 0, "formatPartitions" ],
+  createBootdisk => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
+  setupBootloader => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
+  configureX => [ __("Configure X"), 1, 0, "doInstallStep" ],
+  exitInstall => [ __("Exit install"), 0, 0, "alldone" ],
 );
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
+    $h{help} = $stepsHelp{$installSteps[$i]} || __("Help");
     $h{next} = $installSteps[$i + 2];
     $h{onError} = $installSteps[$i + 2 * $h{onError}];
     $installSteps{ $installSteps[$i] } = \%h;
@@ -93,8 +172,7 @@ $o = $::o = { default => $default, steps => \%installSteps, orderedSteps => \@or
 
 
 sub selectLanguage {
-    $o->{lang} = $o->chooseLanguage;
-    lang::set($o->{lang});
+    lang::set($o->{lang} = $o->chooseLanguage);
     $o->{keyboard} = keyboard::setup();
 
     addToBeDone {
@@ -117,7 +195,9 @@ sub selectInstallClass {
     $o->{autoSCSI} = $o->default("autoSCSI") || $o->{installClass} eq "beginner";
 }
 
-sub setupSCSI { $o->setupSCSI }
+sub setupSCSI { 
+    $o->setupSCSI($o->default("autoSCSI") && $_[0]);
+}
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
@@ -162,19 +242,20 @@ sub formatPartitions {
 }
 
 sub choosePackages {
-    $o->{packages} = pkgs::psUsingDirectory();
-    pkgs::getDeps($o->{packages});
-
-    $o->{compss} = pkgs::readCompss($o->{packages});
-
     my @p = @{$o->{default}{base}};
-    push @p, "kernel-smp" if smp::detect();
 
-    foreach (@p) { $o->{packages}{$_}{base} = 1 }
+    unless ($o->{packages}) {
+	$o->{packages} = pkgs::psUsingDirectory();
+	pkgs::getDeps($o->{packages});
 
-    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
+	$o->{compss} = pkgs::readCompss($o->{packages});
+	push @p, "kernel-smp" if smp::detect();
+
+	foreach (@p) { $o->{packages}{$_}{base} = 1 }
+
+	pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
+    }
     $o->choosePackages($o->{packages}, $o->{compss}); 
-
     foreach (@p) { $o->{packages}{$_}{selected} = 1 }
 }
 
@@ -191,7 +272,9 @@ sub configureServices { $o->servicesConfig }
 sub setRootPassword { $o->setRootPassword }
 sub addUser { 
     $o->addUser;
-    run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); # use shadow passwords
+    addToBeDone {
+	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); # use shadow passwords
+    } 'doInstallStep';
 }
 
 sub createBootdisk {
@@ -204,7 +287,9 @@ sub setupBootloader {
     $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
-sub configureX { $o->setupXfree if $o->{packages}{XFree86}{installed} }
+sub configureX {
+    $o->setupXfree if $o->{packages}{XFree86}{installed} || $_[0];
+}
 sub exitInstall { $o->exitInstall }
 
 
@@ -244,13 +329,15 @@ sub main {
     modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
 
+    my $clicked = 0;
     for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->enteringStep($o->{step});
 	$o->{steps}{$o->{step}}{entered} = 1;
 	eval { 
-	    &{$install2::{$o->{step}}}();
+	    &{$install2::{$o->{step}}}($clicked);
 	};
-	$@ =~ /^setstep (.*)/ and $o->{step} = $1, redo;
+	$clicked = 0;
+	$@ =~ /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo;
 	$@ =~ /^theme_changed$/ and redo;
 	if ($@) {
 	    $o->errorInStep($@);

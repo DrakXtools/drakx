@@ -78,6 +78,9 @@ install_pms: all
 		perl -ne 'print #unless /^use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
+	rm $(DESTREP4PMS)/c/c.xs.pm
+	mv -f $(DESTREP4PMS)/c/c.pm $(DESTREP4PMS)
+
 	cp *.rc $(DESTREP4PMS)
 	ln -sf perl-install/install2 $(DEST)/usr/bin
 	ln -sf perl-install/commands $(DEST)/usr/bin

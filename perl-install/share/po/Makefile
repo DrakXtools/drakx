@@ -13,7 +13,7 @@ $(FROMPOFILES): %.pm: %.po
 
 $(POFILES): empty.po
 	cp -f $@ $@t
-	msgmerge $@t $< > $@
+	msgmerge $< $@t > $@
 	rm $@t
 
 empty.po: $(PMSFILES)

@@ -98,6 +98,8 @@ sub shells($) {
 sub addToBeDone(&$) {
     my ($f, $step) = @_;
 
+    return &$f() if $::o->{steps}{$step}{done};
+
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 

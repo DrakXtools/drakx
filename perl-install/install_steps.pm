@@ -126,7 +126,7 @@ sub beforeInstallPackages($) {
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
-    my $toInstall = [ grep { $_->{selected} } values %$packages ];
+    my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
     pkgs::install($o->{prefix}, $toInstall, $o->{isUpgrade}, 0);
 }
 

@@ -38,11 +38,9 @@ sub main($;$) {
     my ($o, $f) = @_;
     $o->show;
 
-    $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
     do { 
 	Gtk->main 
     } while ($o->{retval} && $f && !&$f());
-    $o->{rwindow}->grab_remove if $my_gtk::grab || $o->{grab};
     $o->destroy;
     $o->{retval}
 }
@@ -50,9 +48,11 @@ sub show($) {
     my ($o) = @_;
     $o->{window}->show;
     $o->{rwindow}->show;
+    $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
 }
 sub destroy($) { 
     my ($o) = @_;
+    $o->{rwindow}->grab_remove if $my_gtk::grab || $o->{grab};
     $o->{rwindow}->destroy;
     flush();
 }
@@ -263,7 +263,7 @@ sub _create_window($$) {
     my $f = new Gtk::Frame(undef);
     $w->set_name("Title");
 
-    if ($::isStandalone) {
+    if ($::isStandalone || $o->{no_border}) {
 	gtkadd($w, $f);
     } else {
 	my $t = new Gtk::Table(0, 0, 0);

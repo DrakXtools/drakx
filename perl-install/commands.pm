@@ -23,6 +23,8 @@ sub getopts {
     @r;
 }
 
+sub true { exit 0 }
+sub false { exit 1 }
 sub cat { @ARGV = @_; print while <> }
 sub which { ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG; }}}
 sub dirname_ { print dirname(@_), "\n" }
