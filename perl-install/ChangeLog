@@ -2,6 +2,68 @@
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
 
+2004/09/13  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: simplify
+
+	* Xconfig/card.pm: adapt to new proprietary package naming
+
+	* do_pkgs.pm: 
+	  - simplify ->check_kernel_module_packages, same for install and
+	standalone
+	  - create ->are_available used by ->check_kernel_module_packages
+
+2004/09/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps.pm: Ability to choose from the mirror list when assing an
+	ftp supplementary
+	media. Fix download of hdlists file for ftp supplementary media.
+
+	* install_any.pm: redundant code
+	deselection of found media: don't display twice media from the same
+	installation CD
+	http supplementary media were borked
+	Ability to choose from the mirror list when assing an ftp supplementary
+	media. Fix download of hdlists file for ftp supplementary media.
+
+	* install_steps_interactive.pm: The "choose an update mirror" screen was
+	launched without notice when
+	a supplementary ftp media was selected.
+	Ability to choose from the mirror list when assing an ftp supplementary
+	media. Fix download of hdlists file for ftp supplementary media.
+
+2004/09/13  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix crashes in CD/Tape setup.  Fix UI behavior in
+	wizard. (Nicolas Adenis-Lamarre)
+
+2004/09/13  Till Kamppeter  <till at mandrakesoft.com>
+
+	* Makefile.config: Reverted accidentally uploaded file.
+	Fixed "dynamic()" in scannerdrake to do not contain anything
+	interactive.
+
+	* standalone/scannerdrake: Fixed "dynamic()" in scannerdrake to do not
+	contain anything interactive.
+
+2004/09/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: another typo fix
+	typo fix
+
+	* drakxtools.spec: fix 10.1-3mdk's changelog
+	10.1-4mdk
+
+	* share/po/cy.po: fix draksec entries in welsh
+
+	* share/rpmsrate: fix regexpes
+	fix rpmsrate
+	ltmodem needs ltmodem package
+
+2004/09/13  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
 2004/09/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
@@ -38971,7 +39033,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.967 2004/09/13 05:53:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.968 2004/09/13 06:54:11 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
