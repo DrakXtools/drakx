@@ -154,6 +154,7 @@ noaccomp),
                   sagem =>
                   {
                    start => "/usr/sbin/eaglectrl -w",
+                   stop =>  "/usr/bin/killall pppoa",
                    get_intf => "/usr/sbin/eaglectrl -i",
                    server => {
                               pppoa => qq("/usr/sbin/pppoa -I `/usr/sbin/eaglectrl -s; /usr/sbin/eaglectrl -i`"),
@@ -274,7 +275,7 @@ user "$adsl->{login}"
                     },
 
            pppoa => {
-                     disconnect => qq(/usr/bin/killall pppoa pppd\n),
+                     disconnect => qq(/usr/bin/killall pppd\n),
                     },
           );
         set_cnx_script($netc, "adsl", join("\n",
