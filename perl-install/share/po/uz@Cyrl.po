@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-08-25 17:04+0200\n"
+"POT-Creation-Date: 2003-08-26 16:49+0200\n"
 "PO-Revision-Date: 2003-08-24 16:37+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -1201,15 +1201,15 @@ msgstr "Рванда"
 msgid "Switzerland"
 msgstr "Швейцария"
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "Сизда %s интерфейси борми?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Бруней Доруссалом"
+
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "Сизда %s интерфейси борми?"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -1988,6 +1988,11 @@ msgstr ""
 "Агар автоматик равишда ўрнатиш усулини мослашни истамасангиз, буни бўш "
 "қолдиринг.\n"
 "\n"
+
+#: ../../printer/cups.pm:1
+#, fuzzy, c-format
+msgid "Configured on other machines"
+msgstr "Уланишни мослаш"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3461,7 +3466,7 @@ msgstr "Дворак (Норвегча)"
 msgid "Hard Disk Backup Progress..."
 msgstr ""
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr ""
@@ -8179,7 +8184,7 @@ msgstr "бу майдон ускунани таърифлайди"
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Star Office/OpenOffice.org/GIMP дастурларига принтер қўшилмоқда"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "Локал принтерлар"
@@ -11198,11 +11203,6 @@ msgid ""
 "new/changed hardware."
 msgstr ""
 
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, c-format
-msgid "Remote Printers"
-msgstr "Узоқдаги принтерлар"
-
 #: ../../fs.pm:1
 #, c-format
 msgid "Creating and formatting file %s"
@@ -12843,6 +12843,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 Мб"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Configured on this machine"
+msgstr "(шу компютерда)"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
@@ -13708,11 +13713,6 @@ msgstr "Февраль"
 #, c-format
 msgid "General"
 msgstr "Умумий"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr "Босиб чиқариш системаси: "
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -15419,6 +15419,11 @@ msgstr "Мандраке Онлине"
 #, c-format
 msgid "\t-Network by webdav.\n"
 msgstr "\t-Тармоқ webdav орқали.\n"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on a parallel port"
+msgstr ", \\#%s параллел портидаги кўп амалли ускуна"
 
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
@@ -17758,6 +17763,11 @@ msgstr "Сиз ўрнатмоқчи бўлган пакетларни танла
 msgid "Papua New Guinea"
 msgstr "Папуа Янги Гвинея"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "Multi-function device on a parallel port"
+msgstr ", \\#%s параллел портидаги кўп амалли ускуна"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
@@ -18365,6 +18375,12 @@ msgstr "NFS сервери, SMB сервери, Прокси сервери, SSH
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 
+#~ msgid "Remote Printers"
+#~ msgstr "Узоқдаги принтерлар"
+
+#~ msgid "Printing system: "
+#~ msgstr "Босиб чиқариш системаси: "
+
 #~ msgid "Bad Ip"
 #~ msgstr "Нотўғри IP"
 
@@ -18532,9 +18548,6 @@ msgstr ""
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Интернетга уланиш ва мослаш"
-
-#~ msgid "Configure the connection"
-#~ msgstr "Уланишни мослаш"
 
 #~ msgid "Disconnect"
 #~ msgstr "Узиш"
