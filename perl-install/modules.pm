@@ -126,7 +126,7 @@ arch() =~ /^sparc/ ? (
 
   "a100u2w" => "a100u2w",
   "atp870u" => "atp870u (Acard/Artop)",
-#******(missing-2.4)  "dc395x_trm" => "dc395x_trm",
+  "dc395x_trm" => "dc395x_trm",
   "psi240i" => "psi240i",
   "qlogicfc" => "qlogicfc",
   "sim710" => "sim710",
