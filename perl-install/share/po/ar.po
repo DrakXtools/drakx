@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-16 13:15GMT+3\n"
+"PO-Revision-Date: 2003-02-17 16:40GMT+3\n"
 "Last-Translator: Mohammed Gamal <f2c2001@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,15 +110,14 @@ msgid "Country"
 msgstr "البلد"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "اختر لغتك"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr "استخدم يونيكود افتراضياً"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "الكل"
 
 #: ../../any.pm:1
 #, c-format
@@ -495,6 +494,16 @@ msgstr "تشديد خيارات سطر الأوامر"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "تمكين الإقلاع من القرص المدمج؟"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "توقيت ما قبل اقلاع الصورة الافتراضية"
 
@@ -547,6 +556,11 @@ msgstr "تخطي"
 #, c-format
 msgid "On Floppy"
 msgstr "على قرص مرن"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "القطاع اول من تجزئة الإقلاع"
 
 #: ../../any.pm:1
 #, c-format
@@ -794,7 +808,7 @@ msgid ""
 "them separately"
 msgstr ""
 "\n"
-"اختر تيمة\n"
+"اختر سمة\n"
 "Lilo و bootsplash,\n"
 "يمكنك اختيارهم\n"
 "بشكل منفصل"
@@ -802,14 +816,15 @@ msgstr ""
 #: ../../bootlook.pm:1
 #, c-format
 msgid "Themes"
-msgstr "التيمات"
+msgstr "السمات"
 
 #: ../../bootlook.pm:1
 #, c-format
 msgid "Splash selection"
 msgstr "اختيار الشاشات"
 
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
+#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Configure"
 msgstr "إعداد"
@@ -826,12 +841,12 @@ msgstr ""
 #: ../../bootlook.pm:1
 #, c-format
 msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "تم تثبيت تيمات LiLo و Bootsplash بنجاح"
+msgstr "تم تثبيت سمات LiLo و Bootsplash بنجاح"
 
 #: ../../bootlook.pm:1
 #, c-format
 msgid "Theme installation failed!"
-msgstr "فشل تثبيت التيمات"
+msgstr "فشل تثبيت السمات"
 
 #: ../../bootlook.pm:1 ../../standalone/draksplash:1
 #, c-format
@@ -859,7 +874,7 @@ msgid ""
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
 "تعذرت اعادة تشغيل LiLo!\n"
-"شغّل \"lilo\" كمستخدم جذر في سطر الأوامر و أكمل تثبيت تيمات LiLo."
+"شغّل \"lilo\" كمستخدم جذر في سطر الأوامر و أكمل تثبيت سمات LiLo."
 
 #: ../../bootlook.pm:1
 #, c-format
@@ -908,7 +923,7 @@ msgstr "انسخ %s احتياطياً الى %s.old"
 #: ../../bootlook.pm:1
 #, c-format
 msgid "Create new theme"
-msgstr "انشئ تيمة جديدة"
+msgstr "انشئ سمة جديدة"
 
 #: ../../bootlook.pm:1
 #, c-format
@@ -916,13 +931,13 @@ msgid ""
 "Display theme\n"
 "under console"
 msgstr ""
-"اعرض التيمات\n"
+"اعرض السمات\n"
 "في سطر الأوامر"
 
 #: ../../bootlook.pm:1
 #, c-format
 msgid "Install themes"
-msgstr "ثبت التيمات"
+msgstr "ثبت السمات"
 
 #: ../../bootlook.pm:1
 #, c-format
@@ -1139,8 +1154,24 @@ msgstr "لا يمكنك استخدام LVM Logical Volume لنقطة التحم�
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"لقد اخترت تجزئة RAID برمجية كتجزئة جذرية (/).\n"
+"لا يستطيع أي محمّل اقلاع التعامل مع ذلك بدون تجزئة /boot.\n"
+"فضلاً تأكد من اضافة تجزئة /boot"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "هناك تجزئة مع نقطة التحميل %s مسبقاً\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "اسم الطابعة يجب أن يحتوي فقط على حروف و أرقام و شارطات تحتية"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1283,8 +1314,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1297,7 +1328,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1566,7 +1597,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1670,7 +1701,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1766,7 +1797,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"This step is activated only if an ols GNU/Linux partition has been found on\n"
+"This step is activated only if an old GNU/Linux partition has been found on\n"
 "your machine.\n"
 "\n"
 "DrakX now needs to know if you want to perform a new install or an upgrade\n"
@@ -1922,6 +1953,15 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
+"عند هذه النقطة, سيسمح لك DrakX باختيار المستوى الأمني الذي ترغب به\n"
+"لهذه الماكينة. بديهياً, يجب تعيين مستوى أمني\n"
+"عالٍ اذا كانت الماكينة تحتوي على معلومات هامة, أو اذا كانت الماكينة\n"
+"ستُستخدم للإتصال بالإنترنت. ان استخدام مستوى أمني عالٍ يأتي\n"
+"عادة على حساب سهولة الإستخدام. راجع فضل \"msec\"\n"
+"في ``دليل سطر الأوامر'' للحصول على مزيد من المعلومات حول\n"
+"معنى هذه المستويات.\n"
+"\n"
+"اذا لم تكن تريد الإختيار, احفظ الاختيار الإفتراضي."
 
 #: ../../help.pm:1
 #, c-format
@@ -2072,7 +2112,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2107,6 +2147,11 @@ msgid ""
 "act as a server, or if you were not successful in getting the display\n"
 "configured."
 msgstr ""
+"في النهاية, سيتم سؤالك عن اذا كنت تريد بدء الواجهة الرسومية\n"
+"عند بدء النظام. لاحط أنه سيتم سؤالك هذا السؤال حتى لو اخترت عدم اختبار\n"
+"التهيئة, بكل وضوح, ستختار \"لا\" اذا كانت ماكينتك ستستخدم كجهاز\n"
+"خادم, أو اذا لم تنجح في تهيئة العرض\n"
+"بشكل صحيح."
 
 #: ../../help.pm:1
 #, c-format
@@ -2115,6 +2160,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"اذا كانت هناك خادمات مختلفة للبطاقة الخاصة بك, مع أو\n"
+"دون تسريع للرسوم ثلاثية الأبعاد, يمكنك اختيار الخادم الذي\n"
+"يناسب احتياجاتك."
 
 #: ../../help.pm:1
 #, c-format
@@ -2123,9 +2171,15 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"دقة العرض\n"
+"\n"
+"   يمكنك اختيار دقة العرض و عمق الألوان في الحدود\n"
+"المتوفرة للعتاد. اختر تلك التي تناسب احتياجاتك (لا تزال\n"
+"تستطيع تغيير تلك الخيارات بعد التثبيت). يتم عرض عينة\n"
+"من التهيئة المختارة على الشاشة."
 
 #: ../../help.pm:1
 #, c-format
@@ -2136,6 +2190,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"الشاشة\n"
+"\n"
+"   يمكن لبرنامج التثبيت اكتشاف و تهيئة الشاشة المتصلة بماكينتك\n"
+"آلياً. ان لم يصل ذلك, يمكنك اختيار الشاشة التي لديك\n"
+"من القائمة."
 
 #: ../../help.pm:1
 #, c-format
@@ -2169,7 +2228,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2261,6 +2320,10 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"الطابعة\": النقر على \"لا طابعة\" سيفتح معالج تهيئة\n"
+"الطابعة. اقرأ الفضل المختص في ``دليل المبتدئ''\n"
+"لكزيد من المعلومات عن كيفية اعداد طابعة جديدة. الواجهة\n"
+"هناك مماثلة لتلك المستخدمة أثناء التثبين."
 
 #: ../../help.pm:1
 #, c-format
@@ -2501,6 +2564,10 @@ msgid ""
 "terms in it, check the \"Accept\" box. If not, simply turn off your\n"
 "computer."
 msgstr ""
+"قبل المتابعة, عليك قراءة بنود الترخيص جيداً. انها\n"
+"تغطي كل توزيعة Mandrake Linux. اذا كنت توافق على كل البنود\n"
+"الموجودة فيها, قم بالتأشبر على صندوق \"اقبل\". ان لم تقبل, قم بإغلاق\n"
+"الكمبيوتر."
 
 #: ../../install2.pm:1
 #, c-format
@@ -2813,7 +2880,7 @@ msgstr "لا توجد مساحة فارغة لعمل التجزئات الجدي
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Use free space"
-msgstr "استعمل  مكانا حرا"
+msgstr "استعمل المساحة الفارغة"
 
 #: ../../install_interactive.pm:1 ../../install_steps.pm:1
 #, c-format
@@ -3048,6 +3115,19 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Entering step `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr "مساعدة"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "غير معدّ"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3259,14 +3339,6 @@ msgstr "التالي ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "اختيار مفرد للحزم"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "مساعدة"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3510,12 +3582,13 @@ msgstr "التحقق"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "كلمة المرو هذه قصيرة جداً (يجب أن تكون %d رموز على الأقل)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "لا كلمة مرور"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "عيّن كلمة مرور المستخدم الجذر"
@@ -3575,11 +3648,6 @@ msgstr "الأمن"
 #, c-format
 msgid "Security Level"
 msgstr "مستوى الأمن"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "غير معدّ"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -3765,6 +3833,11 @@ msgstr ""
 "اذا لم تمكن لديك أي من هذه الأقراص, اضغط الغاء.\n"
 "اذا كانت بعض هذه الأقراص مفقودة, قم بازالة اختيارهاثم اضغط موافق."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "الكل"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -3842,6 +3915,11 @@ msgstr "لا يوجد في نظامك مساحة متبقة تكفي للتثب�
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "جاري العثور على الحزم المتوفرة..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "جاري البحث عن الحزم التي ستتم ترقيتها..."
 
@@ -3849,11 +3927,6 @@ msgstr "جاري البحث عن الحزم التي ستتم ترقيتها..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "جاري التعرف على الحزم المثبتة مسبقاً..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "جاري العثور على الحزم المتوفرة..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3965,11 +4038,6 @@ msgstr "فضلاً اختر نوع الفأرة."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "ترقية"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "ترقية %s"
 
@@ -3997,11 +4065,6 @@ msgstr "رجاء, اختر لوحة المفاتيح."
 #, c-format
 msgid "License agreement"
 msgstr "اتفاقية الترخيص"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "default:LTR"
-msgstr "default:RTL"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4558,6 +4621,11 @@ msgstr "البلجيكية"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "الأذربيجانية (لاتيني)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5719,6 +5787,11 @@ msgstr "أندورا"
 msgid "Afghanistan"
 msgstr "أفغانستان"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:RTL"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6134,10 +6207,10 @@ msgstr ""
 "الى بروتوكولات توجيه معقدة أكثر."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "عين الأجهزة الخام الى أجهزة في وضع الكليشيه (مثل تجزئات\n"
 "الأقراص الصلبة), للاستخام في تطبيقات مثل Oracle"
@@ -6418,10 +6491,10 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -6628,7 +6701,7 @@ msgstr "الخروج من التثبيت"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
+msgid "Install updates"
 msgstr "تثبيت تحديثات النظام"
 
 #: ../../steps.pm:1
@@ -6655,6 +6728,11 @@ msgstr "تهيئة الشبكة"
 #, c-format
 msgid "Add a user"
 msgstr "أضف مستخدم"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "لا كلمة مرور"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6703,7 +6781,7 @@ msgstr "الترخيص"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "اختر لغتك"
 
 #: ../../ugtk2.pm:1
@@ -7578,41 +7656,6 @@ msgstr "ستحتاج الى اعادة التشغيل قبل أن يتم تفع�
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "جدول اتتقسيم للقرص %s سيتم كتابته الى القرص!"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"لقد اخترت تجزئة RAID برمجية كتجزئة جذرية (/).\n"
-"لا يستطيع أي محمّل اقلاع التعامل مع ذلك بدون تجزئة /boot.\n"
-"فضلاً تأكد من اضافة تجزئة /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"التجزئة التي اخترتها كتجزئة جذرية (/) موجودة مادياً بعد\n"
-"الإسطوانة 1024 من القرص الصلب, و ليست لديك تجزئة /boot.\n"
-"اذا كنت تنوي استخدام LILO كمدير اقلاع فلا تنسى اضافة تجزئة /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"عفواً, لن أقبل انشاء دليل /boot بهذا البعد على القرص (على أسطوانة أكبر من "
-"1024).\n"
-"إما أن تستخدم LILO و لن يعمل هذا, أو لا تستخدم LILO و لن تحتاج الى /boot"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9534,7 +9577,8 @@ msgstr "Automatic IP"
 msgid "Netmask"
 msgstr "Netmask"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "عنوان IP"
@@ -9787,7 +9831,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "طراز غير معروف"
@@ -9796,6 +9840,11 @@ msgstr "طراز غير معروف"
 #, c-format
 msgid "Unknown model"
 msgstr "طراز غير معروف"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "(على %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9949,11 +9998,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "هل تريد تجربة إعداد طابعة أخرى؟"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "جاري ازالة الطابعة \"%s\" ..."
 
@@ -9969,8 +10013,8 @@ msgstr "احذف الطابعة"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "اعرف كيف تستخدم هذه الطابعة"
+msgid "Learn how to use this printer"
+msgstr "تعلم كيف تستخدم هذه الطابعة"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10068,11 +10112,6 @@ msgstr "نوع وصلة الطابعة"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "تعلم كيف تستخدم هذه الطابعة"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "طابعة خام"
 
@@ -10133,6 +10172,11 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "أعد تحميل قائمة الطابعات (لعرض كل طابعات CUPS البعيدة المتوفرة)"
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "أعد تحميل قائمة الطابعات (لعرض كل طابعات CUPS البعيدة المتوفرة)"
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
@@ -10158,16 +10202,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "نظام الطباعة: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "هل تريد تهيئة الطباعة؟"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "جاري تجهيز Printerdrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10203,6 +10237,11 @@ msgstr "أي نظام طباعة تريد أن تستخدم؟"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "اختر Printer Spooler"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "الطابعة الإفتراضية"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10487,6 +10526,14 @@ msgid ""
 "can switch between drive letters with the field at the upper-right corners "
 "of the file lists."
 msgstr ""
+"تم تهيئة الطابعة آلياً لكي تعطيك القدرة على الوصول الى سواقات بطاقات الصور "
+"على جهازك الشخصي. يمكنك الآن الوصول الى بطاقات الصور باستخدام البرنامج "
+"الرسومي \"MToolsFM\" (القائمة: \"تطبيقات\" -> \"أدوات الملفات\" -> \"مدير "
+"ملفات MTools\") أو باستخدام أدوات \"mtools\" في سطر الأوامر (أدخل \"man "
+"mtools\" في سطر الأوامر لمزيد من المعلومات). يمكنك ايجاد نظام ملفات البطاقة "
+"تحت حرف السواقة \"p:\", أو حروف السواقات الأخرى اذا كانت لديك أكثر من طابعة "
+"HP مع سواقات بطاقات صور. في \"MToolsFM\" يمكنك التحويل بين حروف السواقات على "
+"الحقل الموجود في الركن الأيسر الى الأعلى في قوائم الملفات."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10501,6 +10548,14 @@ msgid ""
 "\n"
 "Do not use \"scannerdrake\" for this device!"
 msgstr ""
+"الجهاز المتعدد الوظائف الخاص بك تم تهيئته آلياً ليتمكن من المسح الضوئي. يمكنك "
+"الآن استخدام المسخ الضوئي باستخدام \"scanimage\" (\"scanimage -d hp:%s\" "
+"لتحديد الماسح الضوئي اذا كان لديك أكثر من واحد) من سطر الأوامر أو بالبرامج "
+"الرسومية \"xscanimage\" أو \"xsane\". اذا كنت تستخدم GIMP, يمكنك أيضاً المسح "
+"الضوئي باستخدام القوائم \"File\"/\"Acquire\". شغل الأمر \"man scanimage\" في "
+"سطر الأوامر للحصول على مزيد من المعلومات.\n"
+"\n"
+"لا تستخدم \"scannerdrake\" لهذا الجهاز!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10565,6 +10620,11 @@ msgid ""
 "jobs immediately when you click it. This is for example useful for paper "
 "jams.\n"
 msgstr ""
+"يمكنك كذلك استخدام البرنامج الرسومي \"xpdq\" لتعيين الخيارات و التعامل مع "
+"وظائف الطباعة.\n"
+"اذا كنت تستعمب كيدي كبيئة سطح مكتب فلديك أيقونة \"للطوارئ\", اسمها \"STOP "
+"Printer!\", تقوم بإيقاف كل وظائف الطباعة فوراً عند النقر عليها. هذا المثال "
+"مفيد للحالات التي يحصل فيها تعثر في استخدام الورق.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10573,13 +10633,16 @@ msgid ""
 "printing dialogs of many applications. But here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
+"يمكنك استخدام هذا الأمر أيضاً في حقل \"أمر الطباعة\" في مربعات حوار الطابعة "
+"في العديد من التطبيقات. لكن هنا لا تقم بإعطاء اسم الملف لأن ملف الطباعة يتم "
+"توفيره عن طريق التطبيق.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\" or \"%s <file>\".\n"
-msgstr ""
+msgstr "لطباعة ملف من سطر الأوامر استخدم الأمر \"%s <file> أو \"%s <file>\".\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10587,6 +10650,8 @@ msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
 msgstr ""
+"للحصول على قائمة بالخيارات المتوفرة للطابعة المختارة اضغط على زر \"قائمة "
+"خيارات الطابعة\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10596,13 +10661,16 @@ msgid ""
 "particular printing job. Simply add the desired settings to the command "
 "line, e. g. \"%s <file>\". "
 msgstr ""
+"\n"
+"الأمر \"%s\" يسمح لك كذلك يتعديل اعدادات الخيارات لوظيفة طباعة محددة. بكل "
+"بساطة أضف الإعداد المطلوب الى سطر الآوامر, مثال \"%s <file>\". "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
-msgstr ""
+msgstr "لطباعة ملف من سطر الأوامر استخدام الأمر \"%s <file>\".\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10610,6 +10678,8 @@ msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
 msgstr ""
+"هذه قائمة بالخيارات المتوفرة للطباعة على الطابعة الحالية:\n"
+"\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10618,6 +10688,9 @@ msgid ""
 "printing dialogs of many applications, but here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
+"يمكنك استخدام هذه الأوامر أيضاً في حقل \"أمر الطباعة\" في مربعات حوار الطباعة "
+"في العديد من التطبيقات, لكن لا تقم هنا بإعطاء اسم الملف لأن الملف المطلوب "
+"طباعته يتم اعطاؤه من قبل التطبيق.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10627,6 +10700,9 @@ msgid ""
 "\"kprinter <file>\". The graphical tools allow you to choose the printer and "
 "to modify the option settings easily.\n"
 msgstr ""
+"لطباعة ملف من سطر الأوامر يمكنك أن تستخدم الأمر \"%s <file>\" أو أن تستخدم "
+"أداة طباعة رسومية: \"xpp <file>\" أو \"kprinter <file>\". الأدوات الرسومية "
+"تسمح لك باختيار الطابعات و تعديل خياراتها بسهولة.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10639,6 +10715,8 @@ msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
+"تم ارسال الصفحات الإختبارية الى الطابعة.\n"
+"قد يستغرق هذا بعض الوقت حتى تبدأ الطابعة.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10649,6 +10727,11 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"تم ارسال الصفحات الإختبارية الى الطابعة.\n"
+"قد يستغرق هذا بعض الوقت حتى تبدأ الطابعة.\n"
+"حالة الطباعة:\n"
+"%s\n"
+"\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10693,6 +10776,10 @@ msgid ""
 "laser printers with too low memory it can even not come out. In most cases "
 "it is enough to print the standard test page."
 msgstr ""
+"فضلاً اختر الصفحات الإختبارية التي تود طباعتها.\n"
+"ملحوظة: الصفحة الإختبارية لصورة ستستغرق وقتاً طويلاً لطباعتها و على طابعات "
+"الليزر بكمية ذاكرة قليلة قد لا يتم طباعتها مطلقاً. في أغلب الأحيان يكفي أن "
+"تطبع الصفحة الإختبارية القياسية."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10733,6 +10820,11 @@ msgid ""
 "duplex unit, extra trays) are set correctly. Note that with a very high "
 "printout quality/resolution printing can get substantially slower."
 msgstr ""
+"اعدادات الطابعة الإفتراضية\n"
+"\n"
+"يجب عليك التأكد اذا كان حجم الصفحة و نوع الحبر/وضع الطباعة (ان وجد) بالإضافة "
+"الى اعدادات العتاد لطابعات الليزر (الذاكرة, وحدات الدوبلكس, المنصات "
+"الإضافية) معدّة بشكل صحيح. لاحظ أن جودة طباعة عالية جداً قد تجهل الطباعة بطيئة."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10757,6 +10849,25 @@ msgid ""
 "The first command can be given by any normal user, the second must be given "
 "as root. After having done so you can print normally.\n"
 msgstr ""
+"Your printer belongs to the group of GDI laser printers (winprinters) sold "
+"by different manufacturers which uses the Zenographics ZJ-stream raster "
+"format for the data sent to the printer. The driver for these printers is "
+"still in a very early development stage and so it will perhaps not always "
+"work properly. Especially it is possible that the printer only works when "
+"you choose the A4 paper size.\n"
+"\n"
+"Some of these printers, as the HP LaserJet 1000, for which this driver was "
+"originally created, need their firmware to be uploaded to them after they "
+"are turned on. In the case of the HP LaserJet 1000 you have to search the "
+"printer's Windows driver CD or your Windows partition for the file "
+"\"sihp1000.img\" and upload the file to the printer with one of the "
+"following commands:\n"
+"\n"
+"     lpr -o raw sihp1000.img\n"
+"     cat sihp1000.img > /dev/usb/lp0\n"
+"\n"
+"The first command can be given by any normal user, the second must be given "
+"as root. After having done so you can print normally.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10775,6 +10886,14 @@ msgid ""
 "agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and "
 "adjust the head alignment settings with this program."
 msgstr ""
+"To be able to print with your Lexmark inkjet and this configuration, you "
+"need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
+"com/). Click on the \"Drivers\" link. Then choose your model and afterwards "
+"\"Linux\" as operating system. The drivers come as RPM packages or shell "
+"scripts with interactive graphical installation. You do not need to do this "
+"configuration by the graphical frontends. Cancel directly after the license "
+"agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and "
+"adjust the head alignment settings with this program."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10789,6 +10908,9 @@ msgid ""
 "printer to a local port or configure it on the machine where it is connected "
 "to."
 msgstr ""
+"مشغلات طابعتك inkjet التي تم توفيرها من Lexmark تدعم الطابعات المحلية فقط, "
+"لا يدعم المشغل الطابعات على الماكينات البعيدة أو خادمات الطباعة. فضلاً وصل "
+"طابعتك الى منفذ محلي أو قم بتهيئتها على الماكينة المرتبطة بها."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10800,6 +10922,11 @@ msgid ""
 "first parallel port before you print a test page. Otherwise the printer will "
 "not work. Your connection type setting will be ignored by the driver."
 msgstr ""
+"أنت تقوم بتهيئة طابعة OKI laser winprinter. هذه الطابعات\n"
+"تستخدم بروتوكول اتصالات خاص و لذا فهي تعمل فقط عندما تكون متصلة بالمنفذ "
+"المتوازي الأول. عندما تكون الطابعة متصلة بمنفذ آخر أو بخادم طباعة فمن فضلك "
+"قم بتوصيل الطابعة الى المنفذ المتوازي الأول قبل أن تطبع صفحة اختبارية. ان لم "
+"تفعل ذلك فلن تعمل الطابعة. اعداد نوع الوصلة سيتم تجاهله من المشغّل."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10812,6 +10939,8 @@ msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
 msgstr ""
+"اذا لم تكن طابعت موجودة في القائمة, فضلاً اختر طابعة متوافقة (انظر دليل  "
+"الطابعة) أو اختر طابعة مماثلة."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10822,6 +10951,10 @@ msgid ""
 "model correctly. Find the correct model in the list when a wrong model or "
 "\"Raw printer\" is highlighted."
 msgstr ""
+"\n"
+"\n"
+"فضلاً تأكد من قيام Printerdrake باكتشاف طراز طابعتك بشكل صحيح.  اعثر على "
+"الطراز الصحيح اذا تم اختيار طراز خطأ أو \"طابعة خام\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10846,7 +10979,7 @@ msgstr "تم اختيار النّموذج يدويًّا"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The model is correct"
-msgstr "الطراز غير صحيح"
+msgstr "الطراز صحيح"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10862,6 +10995,16 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"قام Printerdrake بمقارنة اسم الطراز الناتج عن التحقق الآلي من الطابعات مع "
+"الطرازات الموجودة في قاعدة بيانات الطابعات للحصول على أفضل توافق. هذا "
+"الإختيار قد يكون خاطئاً, خصوصاً اذا كانت الطابعة غير موجودة اطلاقاً في قاعدة "
+"بيانات الطابعات. لذا تأكد اذ كان اختيارك صحيحاً و انقر \"الطراز صحيح\", أما "
+"ان لم يكن الطاز صحيحاً, انقر \"اختر الطراز يدوياً\" كي يتسنى لك اختيار طراز "
+"طابعتك يدوياً على الشاشة التالية.\n"
+"\n"
+"لطابعتك وجد Printerdrake:\n"
+"\n"
+"%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11197,6 +11340,8 @@ msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
 msgstr ""
+" اذا تم اكتشاف الطابعة المطلوبة آلياً, كل ما عليك هو اختيارها من القائمة ثم "
+"أضف اسم المستخدم, كلمة المرور, و/أو مجموعة العمل ان احتجت لذلك."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11206,6 +11351,10 @@ msgid ""
 "the print server, as well as the share name for the printer you wish to "
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
+"للطباعة الى طابعة SMB, ستحتاج الى اعطاء اسم مستضيف SMB (ملحوظة! قد يكون "
+"مختلفاً عن اسم مستضيف TCP/IP!) و ربما عنوان IP الخاص بخادم الطابعة, اضافة الى "
+"اسم المشاركة لطابعة التي تود الوصول اليها بالإضافة الى اسم مستخدم, كلمة "
+"مرور, و مجموعة عمل مناسبة."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11248,6 +11397,8 @@ msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
 msgstr ""
+"لاستخدام طابعة lpd بعيدة, عليك اعطاء اسم مستضيف خادم الطابعة و اسم الطابعة "
+"على ذلك الخادم."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11257,7 +11408,7 @@ msgstr "خيارات طابعة lpd البعيد"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Manual configuration"
-msgstr "إعداد يدوي"
+msgstr "تهيئة يدوية"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11270,6 +11421,8 @@ msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
+" (المنافذ المتوازية: /dev/lp0, /dev/lp1, ..., مماشل لـ LPT1:, LPT2:, ..., "
+"طابعة USB الأولي: /dev/usb/lp0, طابعة USB الثانية: /dev/usb/lp1, ...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11282,6 +11435,7 @@ msgid ""
 "Please choose the port that your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr ""
+"فضلاً أدخل المنفذ المتصلة به الطابعة أو أدخل اسم جهاز/اسم ملف في حقل الإدخال"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11296,6 +11450,8 @@ msgid ""
 "detected or if you prefer a customized printer configuration, turn on "
 "\"Manual configuration\"."
 msgstr ""
+"فضلاً أدخل الطابعة التي تريد اعدادها. اعداد هذه الطابعة سيعمل آلياً. ان لم يتم "
+"اكتشاف الطابعة بالشكل الصحيح أو اذا كنت تفضل تهيئة يدوية شغل \"تهيئة يدوية\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11314,11 +11470,13 @@ msgid ""
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
 msgstr ""
+"اعداد الطابعة سيعمل بشكل آلي. اذا لم يتم اكتشاف طابعتك بالشكل الصحيح أو اذا "
+"كنت تفضل اعداد مخصص شغّل \"تهيئة يدوية\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The following printer was auto-detected. "
-msgstr "تم اكتشاف طابعتك آلياً. "
+msgstr "تم اكتشاف الطابعة الآتية آلياً. "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11326,6 +11484,8 @@ msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
 msgstr ""
+"فضلاً أدخل الطابعة التي يجب أن تذهب اليها وظائف الطباعة أو أدخل اسم جهاز/اسم "
+"ملف في حقل الإدخال"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11333,12 +11493,13 @@ msgid ""
 "Please choose the printer you want to set up or enter a device name/file "
 "name in the input line"
 msgstr ""
+"فضلاً اختر الطابعة التي تريد اعدادها أو أدخل اسم جهاز/اسم ملف في حقل الإدخال"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
-msgstr ""
+msgstr "بدلاً من ذلك, يمكنك تحديد اسم جهاز/اسم ملف في حقا الإدخال"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11346,6 +11507,7 @@ msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
+"اذا لم تكن هذه هي التي تريد تهيئتها, أدخل اسم جهاز/اسم ملف في حقل الإدخال"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11361,7 +11523,7 @@ msgstr "لا توجد طابعة!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "You must enter a device or file name!"
-msgstr ""
+msgstr "يجب عليك ادخال جهاز أو اسم ملف!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11371,6 +11533,10 @@ msgid ""
 "equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB "
 "printer: /dev/usb/lp1, ...)."
 msgstr ""
+"لم يتم ايجاد طابعة محلية! لتثبيت طابعة يدوياً ادخل اسم جهاز/اسم ملف في حقل "
+"الإدخال (الطابعات المتوازية: /dev/lp0, /dev/lp1, ..., مماثلة لـLPT1:, "
+"LPT2:, ..., طابعة USB الأولى: /dev/usb/lp0, طابعة USB الثانية: /dev/usb/"
+"lp1, ...)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11426,6 +11592,14 @@ msgid ""
 "select \"Printer\" in the \"Hardware\" section of the Mandrake Control "
 "Center."
 msgstr ""
+"\n"
+"تهانينا, تم تثبيت و تهيئة طابعتك!\n"
+"\n"
+"يمكنك الطباعة باستخدام أمر \"اطبع\" في تطبيقاتك (عادة في قائمة \"ملف\").\n"
+"\n"
+"اذا أردت اضافة أو حذف أو اعادة تسمية طابعة, أة اذا أردت تغيير خيارات الطابعة "
+"الإفتراضية (جودة الطباعة, تغيير الحبر, ...), اختر \"الطابعة\" في قسم \"العتاد"
+"\" في مركز تحكم Mandrake."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11567,6 +11741,35 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "جاري إعداد الطابعة \"%s\" ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "جاري البحث عن طابعات جديدة..."
 
@@ -11687,6 +11890,64 @@ msgid "Checking your system..."
 msgstr "جاري التأكد من نظامك..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "أعد تشغيل XFS"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "هذا المستضيف موجود في القائمة مسبقاً, لا يمكن اضافته مرة أخرى.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "أمثلة لعناوين IP صحيحة:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "عنوان IP المدُخل للمستضيف/الشبكة غير صحيح.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "اسم خادم NCP مفقود!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "طابعة على خادم CUPS بعيد"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "احذف المستضيف المختار"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "حرر المستضيف المختار"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "اضف مستخدم"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr "عنوان IP للمستضيف/الشبكة:"
@@ -11698,38 +11959,13 @@ msgstr "هذا المستضيف/الشبكة موجود في القائمة مس
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "أمثلة لعناوين IP صحيحة:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "عنوان IP المدُخل للمستضيف/الشبكة غير صحيح.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11782,11 +12018,45 @@ msgid ""
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
 msgstr ""
+"عند تشغيل هذا الخيار, فعند كل بداية تشغيل لـCUPS سيتم التأكد آلياً من ما\n"
+"\n"
+"- اذا كان LPD/LPRng مثبتاً, لن تتم الكتابة فوق /etc/printcap عن طريق CUPS\n"
+"\n"
+"- اذا كان /etc/cups/cupsd.conf مفقود, سيتم انشاؤه في هذه الحال\n"
+"\n"
+"- اذا كانت معلومات الطباعة منشورة, أي أنها لا تحتوي \"localhost\" كإسم "
+"للخادم.\n"
+"\n"
+"اذا كانت بعض هذه الإجراءات قد تسببت بمشاكل لك, عطّل هذا الخيار, لكن في هذه "
+"الحال عليك الإنتباه لهذه النقاط."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "تصحيح آلي لتهيئة CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "انتهى"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "على خادم CUPS \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -11819,6 +12089,8 @@ msgid ""
 "You can also decide here whether printers on remote machines should be "
 "automatically made available on this machine."
 msgstr ""
+"يمكنك كذلك أن تقرر هنا اذا كانت الطابعات الموجودة على الأجهزة البعيدة أن "
+"تكون متوفرة آلياً لهذه الماكينة."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11826,6 +12098,8 @@ msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
+"هنا يمكنك أن تختار اذا كان يجب للطابعات المتصلة بهذه الماكينة أن تكون متوفرة "
+"للماكينات الأخرى على الشبكة."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11844,6 +12118,9 @@ msgid ""
 "Printers on remote CUPS servers do not need to be configured here; these "
 "printers will be automatically detected."
 msgstr ""
+"\n"
+"لا تحتاج الى تهيئة الطابعات على خادمات CUPS البعيدة; هذه الكابعات يمكن "
+"اكتشلفها آلياً."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11951,10 +12228,10 @@ msgid "if set to yes, report check result to syslog."
 msgstr "if set to yes, report check result to syslog."
 
 #: ../../security/help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 "if set to yes, check for empty password, or a password while it should be "
 "in /etc/shadow or other users with id 0."
@@ -12394,6 +12671,8 @@ msgid ""
 "This is similar to the previous level, but the system is entirely closed and "
 "security features are at their maximum."
 msgstr ""
+"هذا مماثل للمستوى السابق, و لكن النظام مغلق كلياً و المزايا الأمني على حدها "
+"الأقصى."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12405,6 +12684,10 @@ msgid ""
 "connections from many clients. Note: if your machine is only a client on the "
 "Internet, you should choose a lower level."
 msgstr ""
+"بهذا المستوى الأمني, يكون استخدام هذا النظام كخادم يصبح ممكناً.\n"
+"المستوى الأمني عالٍ بشكل كافي لاستخدام هذا النظام كخادم يستطيع قبول\n"
+"اتصالات من عملاء كثيرين. ملحوظة: اذا كانت ماكينتك مجرد عميل على الإنترنت "
+"فالأجدر بك اختيار مستوى أمني أقل."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12412,6 +12695,7 @@ msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
+"توجد بعض القيود, كما يتم تشغيل برامج للتأكد من النظام أوتوماتيكياً كل ليلة."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12419,13 +12703,14 @@ msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr ""
+"هذا هو المستوى الأمني القياسي للحاسوب الذي سيستخدم للإتصال بالإنترنت كعميل."
 
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr ""
+msgstr "كلمات المرور ممكّنة الآن, لكن الاستخدام كحاسب في شبكة يزال غير مفضّل."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12434,6 +12719,9 @@ msgid ""
 "but very sensitive. It must not be used for a machine connected to others\n"
 "or to the Internet. There is no password access."
 msgstr ""
+"يجب استخدام هذا المستوى الأمني بحذر. فهو يجعل نظامك أسهل في الإستخدام,\n"
+"لكن يمون حساساً جداً. لذا لا يجب استخدامه لماكينة متصلة بماكينات أخرى\n"
+"أو الى الإنترنت. لا يوجد دخول بكلمة المرور."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12820,6 +13108,9 @@ msgid ""
 "from your running system.\n"
 "You can modify as needed."
 msgstr ""
+"تم استخراج أغلب هذه القيم\n"
+"من النظام.\n"
+"يمكنك التعديل اذا احتجت لذلك."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -12877,6 +13168,8 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
+"يجب اعادة تشغيل مدير العرض لكي يتم تفعيل التغييرات. \n"
+"(service dm restart - في سطر الأوامر)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -12935,6 +13228,9 @@ msgid ""
 " the one in the Terminal Server database.\n"
 "Delete/re-add the user to the Terminal Server to enable login."
 msgstr ""
+"!!! تظهر اذا كانت كلمة المرور في قاعدة بيانات النظام مختلفة\n"
+"عن تلك التي لقاعدة بيانات خادم الطرفيات.\n"
+"احذف/أعد اضافة المستخدم الى خادم الطرفيات لتمكين تسجيل الدخول."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13122,6 +13418,138 @@ msgid ""
 " \n"
 "\n"
 msgstr ""
+"drakTermServ Overview\n"
+"\t\t\t   \n"
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrdrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images.\n"
+"\n"
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be \"thin\"\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run most\n"
+"\t\t\tsoftware on the client machine. A special inittab, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are modified\n"
+"\t\t\tif thin clients are used, to enable xdmcp. Since there are security "
+"issues in using xdmcp,\n"
+"\t\t\thosts.deny and hosts.allow are modified to limit access to the local "
+"subnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing "
+"clients.\n"
+"\t\t\t\n"
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network.\n"
+"        \t\t\n"
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file.\n"
+"\n"
+"        - Per client /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. In the future drakTermServ "
+"will help create these\n"
+"        \t\tfiles.\n"
+"\n"
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have it's own "
+"unique configuration files\n"
+"        \t\ton the root filesystem of the server. In the future, "
+"drakTermServ can help create files\n"
+"        \t\tsuch as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/"
+"keyboard on a per-client\n"
+"        \t\tbasis.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs it's images.\n"
+"\n"
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13148,6 +13576,10 @@ msgid ""
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
 msgstr ""
+"\n"
+" جميع الحقوق محفوظة (C) 2002 لـMandrakeSoft \n"
+"\tStew Benedict sbenedict\\@mandrakesoft.com\n"
+"\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13215,6 +13647,8 @@ msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
 msgstr ""
+"تم توليد القرص المرن بنجاح.\n"
+"يمكنك الآن اعادة التثبيت."
 
 #: ../../standalone/drakautoinst:1 ../../standalone/drakgw:1
 #: ../../standalone/scannerdrake:1
@@ -13230,6 +13664,10 @@ msgid ""
 "\n"
 "The parameters of the auto-install are available in the sections on the left"
 msgstr ""
+"\n"
+"أهلاً بكم.\n"
+"\n"
+"معاوملات التثبيت الآلي موجودة على القسم الأيسر"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -13247,6 +13685,8 @@ msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
 msgstr ""
+"فضلاً اختر لكل خطوة اذا كنت ستقوم بإعادتها آلياً أم أنك تريد أن يكون التثبيت "
+"بشكل يدوي."
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -13273,6 +13713,16 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"أنت على وشك تهيئة قرص للتثبيت الآلي. هذه الميزة خطرة بعض الشئ و يجب "
+"استخدامها بحذر.\n"
+"\n"
+"بهذه الميزة يمكنك اعادة عمل التثبيت الذي قمت به على هذا الكمبيوتر, مع تنبيهك "
+"لبعض الخطوات التي يجب عليك فيها تغيير القيم, حتى تتمكن من تغييرها.\n"
+"\n"
+"لأقصى حد من الأمان, ستتم تجزئة و تجهيز الأقراص الصلبة بشكل آلي, مثلما اخترت "
+"أثناء التثبيت على هذا الكمبيوتر.\n"
+"\n"
+"هل تريد المتابعة؟"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -13302,6 +13752,15 @@ msgid ""
 "data. It is important to be careful and not modify the \n"
 "backup data files by hand.\n"
 msgstr ""
+"\n"
+"مشاكل استعادة النسخ الإحتياطية:\n"
+"\n"
+"أثناء خطوة التثبيت, سيقوم Drakbackup بالتأكد من كل ملفات\n"
+"النسخ الإحتياطي قبل استعادتها.\n"
+"قبل الإستعادة سيقوم drakbackup بحذف \n"
+"الدليل الأصلي و ستخسر كل البيانات التي \n"
+"عليه. من المهم أن تكون حذراً و لا تقوم بتعديل \n"
+"بيانات النسخ الإحتياطي يدوياً.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13314,6 +13773,13 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
+"وصف الخيارات:\n"
+"\n"
+"من فضلك كن حذراً عند استخدام النسخ الإحتياطي عبر FTP, لأن \n"
+"النسخ المبنية مسبقاً فقط هي التي يتم ارسالها الى الخادم.\n"
+"لذا فالآن عليك أن تبني النسخة الإحتياطية على القرص \n"
+"الصلب قبل ارسالها الى الخادم.\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13451,6 +13917,11 @@ msgid ""
 " set myhostname or mydomain in /etc/postfix/main.cf\n"
 "\n"
 msgstr ""
+"\n"
+" بعض أخطاء sendmail يكون سببها \n"
+" تهيئة سيئة من postfix. لحل هذا المشكلة عليك\n"
+" تعيين myhostname أو mydomain في ملف /etc/postfix/main.cf\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15742,6 +16213,15 @@ msgid ""
 "for you.\n"
 "\n"
 msgstr ""
+"يمكنني حفظ التهيئة و افتراض أنك قمت بإعداد خادم DHCP مسبقاً; في هذه الحال "
+"تأكد من أنني أستطيع قراءة الشبكة التي تستخدمها للشبكة المحلية بشكل صحيح; "
+"سأقوم بإعادة تهيئتها و لن أقوم بأي شئ تجاه تهيئة خادم DHCP.\n"
+"\n"
+"مدخل DNS الإفتراضي هو اسم الخادم المخبئي على الجدار الناري. يمكنك ابدال ذلك "
+"بعنوان IP للـDNS الخاص بموفر خدمة الإنترنت, مثل.\n"
+"\t\t      \n"
+"ان لم يكن ذلك, يمكنني اعداة تهيئة الواجهة و اعداة تهيئة خادم DHCP لك.\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16191,7 +16671,7 @@ msgid "The DHCP start ip"
 msgstr "DHCP start ip"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The DHCP server will allow other computer to boot using PXE in the given "
 "range of address.\n"
@@ -16199,9 +16679,6 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
-"خادم DHCP سيسمح للحواسيب الأخرى بالإقلاع باستخدام PXE في الحدود المعطاة من "
-"العناوين.\n"
-"عنوان الشبكة يستخدم الـnetmask %s.\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16293,16 +16770,16 @@ msgstr "تنبيهات أمنية:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(القيمة الإفتراضية: %s)"
-
-#: ../../standalone/draksec:1
-#, c-format
 msgid "Security Level:"
 msgstr "مستوى الأمن:"
 
 #: ../../standalone/draksec:1
 #, c-format
+msgid "(default value: %s)"
+msgstr "(القيمة الإفتراضية: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -16315,7 +16792,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -16324,7 +16801,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "قياسي: هذا هو المستوى القياسي المنصوح به لكمبيوتر يقوم بالإتصال\n"
 "               بالإنترنت كعميل.\n"
@@ -16411,12 +16888,12 @@ msgstr "إختيار لون شريط التحميل"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "This theme does not yet have a bootsplash in %s !"
-msgstr "هذه التيمة ليس لها bootsplash في %s !"
+msgstr "هذه السمة ليس لها bootsplash في %s !"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr "جاري حفظ تيمة Bootsplash..."
+msgstr "جاري حفظ سمة Bootsplash..."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16446,7 +16923,7 @@ msgstr "إختر اللون"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
-msgstr "احفظ التيمة"
+msgstr "احفظ السمة"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16522,7 +16999,7 @@ msgstr "استعرض"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Theme name"
-msgstr "اسم التيمة"
+msgstr "اسم السمة"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16707,26 +17184,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/خيارات"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/تحقق آلي من سواقات Jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/تحقق آلي من أجهزة المودم"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/تحقق آلي من الطابعات"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "أساسي"
 
@@ -16740,6 +17197,16 @@ msgstr "ثانوي"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "انقر على جهاز في السلسلة اليسرى لعرض معلوماته هنا."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "طراز غير معروف"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "طراز غير معروف"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16845,6 +17312,11 @@ msgstr "/_وصف الحقول"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "/_Quit"
+msgstr "/_خروج"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/تحقق آلي من _سواقات Jazz"
 
@@ -16862,11 +17334,6 @@ msgstr "/تحقق آلي من أ_جهزة المودم"
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/تحقق آلي من ال_طابعات"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/_Quit"
-msgstr "/_خروج"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16965,7 +17432,7 @@ msgstr "المستوى"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "نسق الأقراص التي تقبلها السواقة"
 
 #: ../../standalone/harddrake2:1
@@ -17604,9 +18071,9 @@ msgid "Network Monitoring"
 msgstr "مراقبة الشبكة"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "جاري قراءة بيانات الطابعة ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "جاري البحث عن طابعات جديدة..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17720,52 +18187,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"تمت تهيئة الماسح الضوئي %s.\n"
-"يمكنك الآن مسح المستندات باستخدام \"XSane\" من فرع وسائط متعددة/برامج رسومية "
-"في قائمة التطبيقات."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"الماسح الضوئي %s يجب اعداده عن طريق PrinterDrake.\n"
-"يمكن تشغيل PrinterDrake من مركز تحكم Mandrake في قسم العتاد."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "اختر الجهاز "
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr "فضلاً اختر الجهاز المتصل به %s"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "هذا الـ %s غير مدعوم"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "الـ %s غير معروف من قبل هذا الإصدار من Scannerdrake."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "الـ %s غير مدعوم من هذا الإصدار من Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr "جاري اعادة توليد قائمة الماسحات الضوئية المعدّة ..."
 
@@ -17827,7 +18248,88 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"تمت تهيئة الماسح الضوئي %s.\n"
+"يمكنك الآن مسح المستندات باستخدام \"XSane\" من فرع وسائط متعددة/برامج رسومية "
+"في قائمة التطبيقات."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"الماسح الضوئي %s يجب اعداده عن طريق PrinterDrake.\n"
+"يمكن تشغيل PrinterDrake من مركز تحكم Mandrake في قسم العتاد."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "اختر الجهاز "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "فضلاً اختر الجهاز المتصل به %s"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "جاري البحث عن ماسحات ضوئية جديدة..."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "/تحقق آلي من الطابعات"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "هذا الـ %s غير مدعوم"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "الـ %s غير معروف من قبل هذا الإصدار من Scannerdrake."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "الـ %s غير مدعوم من هذا الإصدار من Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "البوابة"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "تم اكتشاف الطراز: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "اختر جهاز المسح الضوئي"
 
 #: ../../standalone/scannerdrake:1
@@ -17918,6 +18420,10 @@ msgstr "أدوات لتسهيل إعداد جهازك"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "محطة عمل علمية"
+
+#: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
@@ -18097,3 +18603,72 @@ msgstr "الميزانية الشخصية"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "برامج لإدارة ميزانيتك مثل gnucash"
+
+#~ msgid "/Options"
+#~ msgstr "/خيارات"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/تحقق آلي من سواقات Jazz"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/تحقق آلي من أجهزة المودم"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/تحقق آلي من الطابعات"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "التجزئة التي اخترتها كتجزئة جذرية (/) موجودة مادياً بعد\n"
+#~ "الإسطوانة 1024 من القرص الصلب, و ليست لديك تجزئة /boot.\n"
+#~ "اذا كنت تنوي استخدام LILO كمدير اقلاع فلا تنسى اضافة تجزئة /boot"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "عفواً, لن أقبل انشاء دليل /boot بهذا البعد على القرص (على أسطوانة أكبر من "
+#~ "1024).\n"
+#~ "إما أن تستخدم LILO و لن يعمل هذا, أو لا تستخدم LILO و لن تحتاج الى /boot"
+
+#~ msgid "Install system updates"
+#~ msgstr "تثبيت تحديثات النظام"
+
+#~ msgid "Upgrade"
+#~ msgstr "ترقية"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "هل تريد تجربة إعداد طابعة أخرى؟"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "اعرف كيف تستخدم هذه الطابعة"
+
+#~ msgid "Would you like to configure printing?"
+#~ msgstr "هل تريد تهيئة الطباعة؟"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "جاري تجهيز Printerdrake..."
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "جاري قراءة بيانات الطابعة ..."
