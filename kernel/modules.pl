@@ -152,8 +152,9 @@ sub check {
 	if (my @l = difference2(\@l, [ keys %listed ])) {
 	    my %not_listed;
 	    push @{$not_listed{$module2category{$_}}}, $_ foreach @l;
-	    print STDERR "USBTABLE MODULES NOT LISTED $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
-	    #$error = 1;
+	    if ($verbose) {
+		print "usbtable modules not listed $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
+	    }
 	}
     }
 
