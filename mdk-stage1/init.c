@@ -271,7 +271,8 @@ void unmount_filesystems(void)
 	struct filesystem fs[500];
 	int numfs = 0;
 	int i, nb;
-	
+	int disallow_eject = 0;
+
 	printf("unmounting filesystems...\n"); 
 	
 	fd = open("/proc/mounts", O_RDONLY, 0);
@@ -300,6 +301,8 @@ void unmount_filesystems(void)
 		*p++ = '\0';
 		while (*p != '\n') p++;
 		p++;
+                if (!strcmp(fs[numfs].fs, "nfs"))
+                        disallow_eject = 1;
 		if (strcmp(fs[numfs].name, "/")
                     && strcmp(fs[numfs].name, "/dev")
                     && strncmp(fs[numfs].name, "/proc", 5))
@@ -332,11 +335,13 @@ void unmount_filesystems(void)
 		}
 
 #ifdef MANDRAKE_MOVE
-	fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
-        if (fd > 0) {
-		printf("ejecting cdrom...\n");
-                ioctl(fd, CDROMEJECT, 0);
-                close(fd);
+        if (!disallow_eject) {
+                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+                if (fd > 0) {
+                        printf("ejecting cdrom...\n");
+                        ioctl(fd, CDROMEJECT, 0);
+                        close(fd);
+                }
         }
 #endif
 	
