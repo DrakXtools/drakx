@@ -124,11 +124,25 @@ sub ask_install_simple {
 sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
-			 _("Printing") => [ qw(cups cupslpd lpr oki4daemon) ],
-			 _("Internet") => [ qw(httpd ftp proftpd wuftpd) ],
-			 _("File sharing") => [ qw(nfs nfslock smb nettalk) ],
-			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs) ],
-			 _("Remote Administration") => [ qw(sshd telnetd webmin) ],
+			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj apcupsd cups-lpd ) ],
+			 _("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
+                                               ipchains iptables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
+                                               portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init ) ],
+			 _("File sharing") => [ qw(nfs nfslock smb nettalk netfs mcserv autofs amd
+                                                   venus.init auth2.init codasrv.init update.init swat ) ],
+			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
+                                             alsa functions halt kheader killall mandrake_everytime mandrake_firstime
+                                             random rawdevices single keytable syslog crond medusa-init portmap acon
+                                             anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
+                                             fcron powertweak.init ups syslog-ng cvs) ],
+			 _("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
+                                                            iplog mon vncserver netsaint olympusd drakxtools_http ) ],
+#			 _("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync ) ],
+#			 _("Network Server") => [ qw(named bootparamd ntpd xntpd chronyd postfix sendmail
+#                                                     imap imaps ipop2 ipop3 pop3s routed yppasswdd ypserv ldap dhcpd dhcrelay
+#                                                     hylafax innd identd rstatd rusersd rwalld rwhod gated
+#                                                     kadmin kprop krb524 krb5kdc krb5server hldsld bayonne sockd dhsd gnu-pop3d
+#                                                     gdips pptpd.conf vrrpd crossfire bnetd pvmd ircd sympa finger ntalk talk) ],
 			 _("Database Server") => [ qw(mysql postgresql) ],
 			);
     my %services_root;
