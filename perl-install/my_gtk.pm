@@ -155,14 +155,13 @@ END { &exit() }
 
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
-    print "[ $w, $ok, $cancel, $spread  ]\n";
     $spread ||= $::isWizard ? "end" : "spread";
-    my $cancel_xpm= gtkxpm($::isWizard ? 'stock_left.xpm' : 'stock_cancel.xpm') if !defined $cancel && !defined $ok;
-    print "cancel_xpm $cancel_xpm\n";
     $cancel = $::isWizard ? _("Previous") : _("Cancel") if !defined $cancel && !defined $ok;
-    my $ok_xpm= gtkxpm($::isWizard ? ($::Wizard_finished ? 'stock_exit.xpm' : 'stock_right.xpm') : 'stock_ok.xpm') if !defined $ok;
-    print "ok_xpm $ok_xpm\n";
+    my $cancel_xpm;
+    $cancel eq $_->[0] and $cancel_xpm = gtkxpm($_->[1]) foreach ([ _("Previous"), 'stock_left.xpm' ], [ _("Cancel"), 'stock_cancel.xpm']);
     $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next")) : _("Ok") if !defined $ok;
+    my $ok_xpm;
+    $ok eq $_->[0] and $ok_xpm = gtkxpm($_->[1]) foreach ([ _("Finish"), 'stock_exit.xpm' ], [ _("Next"), 'stock_right.xpm'], [ _("Ok"), 'stock_ok.xpm']);
     my $b1 = gtksignal_connect($w->{ok} = create_pixbutton($ok, $ok_xpm, $::isWizard), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = create_pixbutton($cancel, $cancel_xpm),
 					  clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
