@@ -62,6 +62,7 @@ my %langs = (
 'ja' =>    [ 'Japanese',            'ZZ Nihongo',        'ja_JP', ' 2   ', 'jisx0208' ],
 'ka' =>    [ 'Georgian',            'ZZ Georgian',       'ka_GE', ' 2   ', 'utf_ka' ],
 #-'kl' =>  [ 'Greenlandic (inuit)', 'ZZ Inuit',          'kl_GL', '    5', 'iso-8859-1' ],
+#-'kn' =>  [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'unicode' ],
 'ko' =>    [ 'Korean',              'ZZ Korea',          'ko_KR', ' 2   ', 'ksc5601' ],
 #-'kw' =>  [ 'Cornish gaelic',      'Kernewek',          'kw_GB', '1    ', 'utf_lat8', 'kw:en_GB:en' ],
 #waiting-for-image 'lo' => [ 'Laotian',  'lo_LA', ' 2   ', 'utf_lo' ],
@@ -69,6 +70,7 @@ my %langs = (
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
+'mn' =>    [ 'Mongolian',           'Mongol',            'mn_MN', ' 2   ', 'utf_cyr2' ],
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'iso-8859-1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
 'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'no_NO', '1    ', 'iso-8859-1',  'nb:no' ],
@@ -377,8 +379,8 @@ sub list_countries {
 }
 
 #- this list is built with 'cd /usr/share/i18n/locales ; echo ??_??'
-#- plus sp_YU, eo_XX, mn_MN, lo_LA, ph_PH
-our @locales = qw(af_ZA am_ET ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU ga_IE gd_GB gl_ES gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT iw_IL ja_JP ka_GE kl_GL ko_KR kw_GB lt_LT lv_LV mi_NZ mk_MK mr_IN ms_MY mt_MT nl_BE nl_NL nn_NO no_NO oc_FR pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA se_NO sk_SK sl_SI sq_AL sr_YU sv_FI sv_SE ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ vi_VN wa_BE yi_US zh_CN zh_HK zh_SG zh_TW sp_YU eo_XX mn_MN lo_LA ph_PH);
+#- plus sp_YU, eo_XX, mn_MN, lo_LA, ph_PH, en_BE
+our @locales = qw(af_ZA am_ET ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU ga_IE gd_GB gl_ES gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT iw_IL ja_JP ka_GE kl_GL ko_KR kw_GB lt_LT lv_LV mi_NZ mk_MK mr_IN ms_MY mt_MT nl_BE nl_NL nn_NO no_NO oc_FR pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA se_NO sk_SK sl_SI sq_AL sr_YU sv_FI sv_SE ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ vi_VN wa_BE yi_US zh_CN zh_HK zh_SG zh_TW sp_YU eo_XX mn_MN lo_LA ph_PH en_BE);
 
 sub standard_locale {
     my ($lang, $country, $utf8) = @_;
