@@ -191,7 +191,15 @@ Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
 		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
 			if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
-		      ]) or goto configureNetwork_step_1;
+		      ],
+		      complete => sub {
+			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./ ) {
+			      $in->ask_warn('', N("Zeroconf host name must not contain a ."));
+			      return 1;
+			  }
+			  0;
+		      }
+		      ) or goto configureNetwork_step_1;
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
