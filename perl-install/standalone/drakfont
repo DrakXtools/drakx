@@ -130,6 +130,7 @@ my $label4;
 my $list_path;
 my $path_list;
 my $current_path;
+my $model;
 my $list;
 my $list_all_font_path;
 
@@ -893,22 +894,27 @@ sub file_ok_sel {
     print "-- @install\n";
     if (!member($file_name, @install)) {
         push @install, $file_name;
-        $list->add(gtkshow(new Gtk2::ListItem($file_name)));
+	$model->append_set(undef, [ 0 => $file_name]);
     }
 }
 
 sub list_remove {
-    my ($_widget, $list) = @_;
-    my @to_remove;
-    push @to_remove, $list->child_position($_) foreach $list->selection;
-    splice @install, $_, 1 foreach reverse sort @to_remove;
-    $list->remove_items($list->selection);
+    my ($treeStore, $iter) = ($list->get_selection->get_selected);
+    my $to_remove = $treeStore->_get($iter, 0);
+    my ($index) = map_index { if_($_ eq $to_remove, $::i) } @install;
+    splice @install, $index, 1;
+    $treeStore->remove($iter);
 }
 
 sub advanced_install {
     my $adv_box;
-    $list = new Gtk2::List();
-    $list->set_selection_mode('extended');
+    
+    $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    $list = Gtk2::TreeView->new_with_model($model);
+    $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $list->set_headers_visible(0);
+    $list->get_selection->set_mode('browse');
+    $list->set_rules_hint(1);
 
     gtkpack(
         $font_box,
@@ -925,9 +931,8 @@ sub advanced_install {
                 ),
                 gtksignal_connect(
                     new Gtk2::Button(N("Remove Selected")),
-                    clicked => \&list_remove,
-                    $list
-                ),
+                    clicked => \&list_remove
+		),
                 gtksignal_connect(
                     new Gtk2::Button(N("Install List")),
                     clicked => sub {
@@ -942,7 +947,7 @@ sub advanced_install {
     $adv_box->show_all();
 }
 
-sub list_to_remove {
+sub list_to_remove { #- fucked for the moment, will fix it tomorrow
     my @number_to_remove;
     my @files_path = grep(!/fonts/, all($current_path));
     gtkflush();
@@ -957,8 +962,15 @@ sub list_to_remove {
 
 sub show_list_to_remove {
     my $show_box;
-    my $show_list = new Gtk2::List();
-    $show_list->add(gtkshow(new Gtk2::ListItem($_))) foreach @uninstall;
+    my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $list = Gtk2::TreeView->new_with_model($model);
+    $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $list->set_headers_visible(0);
+    $list->get_selection->set_mode('browse');
+    $list->set_rules_hint(1);
+
+    $model->append_set(undef, [ 0 => $_ ]) foreach @uninstall;
+
     gtkpack(
         $font_box,
         $show_box = gtkpack_(
@@ -966,7 +978,7 @@ sub show_list_to_remove {
             1,
             gtkpack_(
                 new Gtk2::HBox(0, 4),
-                1, create_scrolled_window($show_list)
+                1, create_scrolled_window($list)
             ),
             0,
             gtkadd(
@@ -992,54 +1004,51 @@ sub show_list_to_remove {
 
 sub uninstall {
     my $uninst_box;
+    my ($left_model, $right_model);
+    my ($left_list, $right_list);
     @install              = ();
     @installed_fonts_path = ();
     list_fontpath();
     chk_empty_xfs_path();
-    $list_path = new Gtk2::List();
-    $list_path->set_selection_mode('extended');
+    
+    #- left part
+    $left_model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    $left_list = Gtk2::TreeView->new_with_model($left_model);
+    $left_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $left_list->set_headers_visible(0);
+    $left_list->set_rules_hint(1);
+    $left_list->get_selection->set_mode('multiple');
 
-    foreach (@installed_fonts_path) {
-        my $t = $_;
-        $list_path->add(
-            gtkshow(
-                gtksignal_connect(
-                    new Gtk2::ListItem($t),
-                    select => sub {
-                        $current_path = $t;
-                        $path_list->clear_items(0, -1);
-                        $path_list->append_items(
-                            map { /fonts/ ? () : gtkshow(new Gtk2::ListItem($_)) } all($t)
-                        );
-                    }
-                )
-            )
-        );
-    }
-    $list_path->set_selection_mode('single');
-    $path_list = new Gtk2::List();
-    $path_list->set_selection_mode('extended');
+    $left_model->append_set(undef, [ 0 => $_ ]) foreach @installed_fonts_path;
+
+    #- right part
+    $right_model = Gtk2::TreeStore->new(Gtk2::GType->STRING);;
+    $right_list = Gtk2::TreeView->new_with_model($right_model);
+    $right_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $right_list->set_headers_visible(0);
+    $right_list->get_selection->set_mode('multiple');
+    $right_list->set_rules_hint(1);
 
     gtkpack(
-        $font_box,
+	$font_box,
         $uninst_box = gtkpack_(
             new Gtk2::VBox(0, 10),
             1,
             gtkpack_(
                 new Gtk2::HBox(0, 4), 1,
-                create_scrolled_window($list_path), 1,
-                create_scrolled_window($path_list)
+                create_scrolled_window($left_list), 1,
+                create_scrolled_window($right_list)
             ),
             0,
             gtkadd(
                 gtkset_layout(new Gtk2::HButtonBox, 'spread'),
                 gtksignal_connect(
                     new Gtk2::Button(N("Unselected All")),
-                    clicked => sub { $path_list->unselect_all() }
+                    clicked => sub { $left_list->get_selection->unselect_all() }
                 ),
                 gtksignal_connect(
                     new Gtk2::Button(N("Selected All")),
-                    clicked => sub { $path_list->select_all() }
+                    clicked => sub { $left_list->get_selection->select_all() }
                 ),
                 gtksignal_connect(
                     new Gtk2::Button(N("Remove List")),
