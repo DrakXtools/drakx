@@ -1,0 +1,252 @@
+Well here is a little description of how DrakX can be modified or extended.
+Please refer to README file for getting DrakX code source and to known more
+exactly how it works and what it can do.
+
+
+********************************************************************************
+* Execution of DrakX ***********************************************************
+********************************************************************************
+DrakX has originally be written by pixel in perl and C.
+entry point for stage2 is /usr/bin/runinstall2 which is typically a link to
+/usr/bin/install2 which simply load module install2.pm and execute
+install2::main with @ARGV.
+
+install2::main parse command line arguments, prepare installation, find the right
+install_interactive class (take a look at gi/docs/object_class.fig) according to
+command line, memory available and if the interactive chosen is initializing
+correctly, else it will try a less-demanding interactive object.
+Once done, $::o is set to this install & interactive object and main runs the
+various step of install2 defined in $o->{steps}, starting with $o->{steps}{first}
+and iterating with method install_any::getNextStep().
+while running step, it trap any errors that may arise and use perl exception to
+change step.
+
+********************************************************************************
+* DrakX modules descriptions ***************************************************
+********************************************************************************
+Here is a brief description of what each modules of DrakX is doing.
+
+install2: main module of DrakX as described above, main loop execution of DrakX.
+
+install_steps: generic installation module containing steps definition, all steps
+  should always be defined here as some methods may be used on automatic mode.
+  there is no interactivity available. typically are defined base operation for
+  configuring each step according to $o.
+
+install_steps_interactive: generic installation module with generic interative
+  methods. typically are found all interactive code of DrakX for each steps.
+
+install_steps_auto_install: implementation installation module without interactive
+  methods to match auto_install mode. this is the simplest as almost no method are
+  redefined (inherit module install_steps only, compared to other implementation
+  modules described below).
+
+install_steps_stdio: implementation installation module with interactive stdio
+  methods to match stdio mode. inherit modules install_steps_interactive and
+  interative_stdio.
+
+install_steps_newt: implementation installation module with interactive newt
+  methods to match newt mode. inherit modules install_steps_interactive and
+  interactive_newt.
+
+install_steps_gtk: implementation installation module with interactive gtk
+  methods to match gtk mode. inherit modules install_steps_interactive and
+  interactive_gtk.
+
+install_any: contains various methods using generic interactive interface but
+  not used by standalone tools.
+
+install_gtk: contains various methods using gtk interface but not used by
+  standalone tools.
+
+interactive_stdio: implementation methods for interactivity in stdio mode.
+  inherit module interactive.
+
+interactive_newt: implementation methods for interactivity in newt mode.
+  inherit module interactive.
+
+interactive_gtk: implementation methods for interactivity in gtk mode.
+  inherit module interactive.
+
+my_gtk: basic gtk access methods.
+
+any: contains various methods using generic interactive interface. to compare
+  against install_any module as this one is available for standalone tools.
+
+class_discard: simple module that implement every methods undefined to return
+  nothing. this trick is used to ensure no undefined method can arise when using
+  code that reference interactive method which are not defined.
+
+common: contains very simple and very usefull (common) methods to do various task.
+  some methods inspired by functionnal language.
+
+c: contains wrapper to C definition of methods used by DrakX, use of C is necessary
+  for C extern libraries interface (rpmlib, ldetect), kernel interface, XFree
+  interface.
+
+commands: implement some un*x commands, conflicting name with perl contains
+  trailing underscore (_). this module is used by commands perl script that
+  determine which command to run according to $0 (this is used this way when DrakX
+  is running).
+
+run_program: allow running a program with redirection but without using a shell.
+  allow rooted execution.
+
+help: contains all help message displayed by DrakX.
+
+log: log facility methods.
+
+lang: language manipulation methods, get and set sysconfig file, load po.
+
+keyboard: keyboard manipulation methods, get and set sysconfig file, set console
+  keyboard mapping.
+
+mouse: mouse manipulation methods, get and set sysconfig file, change mouse.
+
+timezone: time zone manipulation methods, get and set timezone.
+
+services: services manipulation methods, activate or delete services (see
+  /etc/rc.d/init.d directories).
+
+detect_devices: manage detection of various class of hardware.
+
+devices: manage device file, create device special according device name.
+
+partition_table: base partition table management methods, it manages
+  appriopriate partition_table_XXX object according to what has been read
+  as XXX partition table type.
+
+partition_table_raw: generic class for the following partition_table_XXX.
+
+partition_table_emtpy: matches an empty partition table.
+
+partition_table_dos: matches a DOS partition table.
+
+partition_table_bsd: matches a BSD partition table.
+
+partition_table_mac: matches an Apple partition table.
+
+partition_table_sun: matches a Sun Label partition table.
+
+fs: read and write /etc/fstab file, mount and umount, format.
+
+fsedit: manage (modyfy, edit) mount point associated to partition (like editing
+  /etc/fstab).
+
+swap: swap management methods, format and mount (activation).
+
+raid: raid (software only) management methods.
+
+lvm: lvm (Logical Volume Manager) management methods.
+
+loopback: loopback management methods, used for lnx4win type installation or using
+  a file as a partition.
+
+diskdrake: diskdrake itself, disk graphical (using gtk) manipulation tools.
+
+ftp: ftp mangement methods, used when using ftp install.
+
+http: http management methods, used when using http install.
+
+modparm: kernel modules options management, allow building nice dialog with each
+  module parameter available.
+
+modules: kernel modules management, allow loading or unloading (ala modprobe or
+  insmod).
+
+printer: printer management methods, read and write both LPR or CUPS configuration.
+
+printerdrake: interactive printer management methods.
+
+network: network management methods, get and set sysconfig file.
+
+netconnect: network configuration wizard.
+
+netconnect_const: network configuration wirard data.
+
+Xconfig: X configuration (monitor + already existing config file) management.
+
+Xconfigurator: X configuration wizard.
+
+Xconfigurator_const: X configuration wizard data.
+
+booloader: bootloader (LILO, GRUB, LOADLIN, SILO) configuration management methods.
+
+pkgs: rpm package and hdlist, depslist management methods, allow selecting or
+  unselecting packages, manage rpmsrate file and select group, installation and
+  removal methods of rpm file.
+
+crypto: *obsoleted* module to manage crypto site and rpm file.
+
+standalone: standalone only, allow defining a standalone tools.
+
+bootlook: standalone only, interface with DrakConf to configure bootloader options.
+
+tinyfirewall: standalone only, interface with DrakConf to configure a tiny firewall.
+
+********************************************************************************
+* DrakX FAT resizer module description *****************************************
+********************************************************************************
+here is a fat resizer written in perl and C used by DrakX (diskdrake) to resize
+FAT16/FAT32 partition. it moves clusters to make sure a shrink can be done on the
+limit of the partition itself, if no cluster need to be moved, only boot sector
+partition limit are modified.
+
+any: various methods to flag cluster, compute min size.
+
+boot_sector: boot sector management methods.
+
+c_rewritten: originally resize_fat was only perl, this contains code section that
+  are the most sensible to speed or memory contraints and have been rewritten to C
+  using perl extension.
+
+dir_entry: manage directory structure.
+
+directory: traverse directory recursively, needed to move correctly cluster.
+
+fat: manage fat structure.
+
+info_sector: manage info sector.
+
+io: manage I/O on disk (need to take care of big file as partition size may be
+  larger than 2GB).
+
+main: main resizer algortihm. if needed allocate new clusters, copy files, copy
+  directories. update boot sector info.
+
+********************************************************************************
+* Adding a new step to DrakX ***************************************************
+********************************************************************************
+Say we want to add a question for setting "alawindows" option.
+We put it pretty early in the install, let's say after "Select Installation
+Class".
+
+1. in install2.pm
+
+add
+
+  selectAlawindows => [ __("A la windows or not"), 0, 1, '' ],
+
+after
+
+  selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
+
+the 0, 1, '' means not "redoable", "skip on error", "don't hide"
+
+2. add your function selectAlawindows in install2.pm
+
+sub selectAlawindows  { $o->selectAlawindows }
+
+3. add your function selectAlawindows in install_steps_interactive.pm
+
+sub selectAlawindows {
+    my ($o) = @_;
+    $o->{alawindows} = $o->ask_yesorno('', _("Throw everything away as windobe does?"), 1);
+}
+
+4. add your function selectAlawindows in install_steps.pm (not needed in that
+case, except for auto_install)
+
+sub selectAlawindows  {}
+
+

@@ -1,5 +1,5 @@
 Well here is a little description of what DrakX needs to work in comparison
-to the standard newt install.
+to the RH newt install.
 
 ********************************************************************************
 * CVS **************************************************************************
@@ -33,7 +33,8 @@ just have to issue:
 
 % gendistrib --noclean --distrib <DIRS>
 
-Where <DIRS> is the root of all the media that the install will see:
+Where <DIRS> is the root of all the media that the install will see, this first
+one is the main one :
 
 (1) network or 1-cdrom installs
 	DIRS == the root directory of the Distribution
@@ -41,10 +42,11 @@ Where <DIRS> is the root of all the media that the install will see:
 (2) multi-cdrom install
 	DIRS == the root directories of all the media that the install will see
 
-``gendistrib'' will scan, from the DIRS you provide, for some
-Mandrake/RPMS* directories containing some RPM packages. For multi-cd,
-please use Mandrake/RPMS, Mandrake/RPMS2, etc. For one CD or a network/hd
-volume, please use Mandrake/RPMS.
+``gendistrib'' will scan the file Mandrake/base/hdlists in the main root
+directory (the first one in DIRS) to search for all media used. Typically you
+use Mandrake/RPMS* for RPM packages repository.
+For multi-cd, please use Mandrake/RPMS or Mandrake/RPMS1, Mandrake/RPMS2, etc.
+For one CD or a network/hd volume, please use Mandrake/RPMS.
 
 Optionnally, you can modify ``Mandrake/base/rpmsrate''; this file manages
 the relative importance of the files, and thus their installation or not.
@@ -58,37 +60,61 @@ See below for information about these files.
 First here are the different things needed :
 
 Mandrake/base/hdlists
-	description of the available install media
+	description of the available install media.
+	format is one line for one medium as
+		<hdlist_name> <rpms_directory> <description>
+	<hdlist_name> should be match regexp /hdlist\S*.cz2?/
+	for example (two cd install) you get
+		hdlist1.cz	Mandrake/RPMS1	Boot CD
+		hdlist2.cz	Mandrake/RPMS2	Extension CD
 
 Mandrake/base/hdlist*.cz
 	table of rpm's headers, referred by ``hdlists''
-	! Need to be remade when Mandrake/RPMS changes (with ``gendistrib'') !
-
-Mandrake/base/depslist
-	for each packages, tell which package it depends on. Also contains the
-	size for some (obscure) bloody reasons.
-	! Need to be remade when Mandrake/RPMS changes !
-	(with ``misc/gendepslist2 -o Mandrake/base/depslist Mandrake/base/hdlist.cz2'')
+	their contents can be listed using ``packdrake -l <hdlist_file>'' or
+	or ``parsehdlist <hdlist_file>''.
+	! Need to be remade when Mandrake/RPMS* changes (with ``gendistrib'') !
 
 Mandrake/base/depslist.ordered
-	more compact depslist with closure done, internally indexed
+	for each packages, tell which package it depends on. Also contains the
+	size for some (obscure) bloody reasons.
+	! Need to be remade when Mandrake/RPMS* changes !
+	(with ``gendistrib --noclean --distrib .'')
 
 Mandrake/base/compss
 	obsoletes comps. It store packages in different categories, generated
 	from the %{GROUP} field
+	! Need to be remade when Mandrake/RPMS* changes !
+	(with ``gendistrib --noclean --distrib .'')
 
 Mandrake/base/rpmsrate
 	ranks and classify packages, so that the installer will know which
-        ones to install (see beginning of perl-install/pkgs.pm for more)
+        ones to install. format is :
+		<intern_group>
+			<level> <packages>
+	where <intern_group> is a symbolic name used in Mandrake/base/compssUsers* files,
+	and <level> defines importance level as described below :
+		5	must have
+		4	important
+		3	very nice
+		2	nice
+		1	maybe
+	by default (for non expert), group selects packages for level 4 (important)
+	and 5 (must have). export mode add 3 (very nice) level. other level (below 2)
+	can only be selected using individual package selection.
 
 Mandrake/mdkinst
 	live system used on certain installs. See ``Ramdisk or not'' below for
 	more.
 
-Mandrake/base/mdkinst_stage2.gz
-	for the ramdisk. live sytem in ext2 filesystem gzipped.
+Mandrake/base/mdkinst_stage2.bz2
+	for the ramdisk. live sytem in ext2 filesystem bzipped2.
 	generated from Mandrake/mdkinst tree using misc/make_mdkinst_stage2
 	See ``Ramdisk or not'' below for more.
+
+Mandrake/base/rescue_stage2.bz2
+	rescue ramdisk. live sytem in ext2 filesystem bzipped2.
+	this is the ramdisk loaded when typing rescue on boot prompt.
+	there is no live system available, only the ramdisk is used.
 
 images/*.img
 	boot images to use with DrakX. Use:
@@ -97,17 +123,20 @@ images/*.img
 	- hd for hard-disk install
 	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
 
-  the following modules have been removed from:
+	the following modules have been removed from:
           network.img: acenic sk98lin de4x5
           cdrom.img and hd.img: BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
           hd.img: dpt_i2o eata eata_pio eata_dma
           cdrom.img: aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
           pcmcia.img: apa1480_cb
-  they are now in "other.img", 
+	they are now in "other.img", 
 
-  if you think one of those modules is used a lot, tell me, i may find some room
-  to put it back on the main floppies.
-	
+	blank.img is a blank boot image without a kernel nor initrd. this image
+	can be used to generate custom boot disk.
+
+	if you think one of those modules is used a lot, tell me, i may find some room
+	to put it back on the main floppies.
+
 
 ********************************************************************************
 * logs *************************************************************************
@@ -161,6 +190,7 @@ The DrakX install is much bigger than the newt one. So the ramdisk which was
 used is getting big, and costs a lot in memory 
 (eg: the mdkinst_stage2 is 14MB - 23/09/99)
 (update! now size is 21MB - 24/01/01)
+(update! now size is 19MB - 26/04/01)
 
 |       | newt    | DrakX
 |-------+---------+----------------------------------------------------------
@@ -226,42 +256,6 @@ then, on another computer:
 % DISPLAY=test_machine:0 xwd -root | convert - screenshot.png
 
 ********************************************************************************
-* Adding a new step to DrakX ***************************************************
-********************************************************************************
-Say we want to add a question for setting "alawindows" option.
-We put it pretty early in the install, let's say after "Select Installation
-Class".
-
-1. in install2.pm
-
-add
-
-  selectAlawindows => [ __("A la windows or not"), 0, 1, '' ],
-
-after
-
-  selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
-
-the 0, 1, '' means not "redoable", "skip on error", "don't hide"
-
-2. add your function selectAlawindows in install2.pm
-
-sub selectAlawindows  { $o->selectAlawindows }
-
-3. add your function selectAlawindows in install_steps_interactive.pm
-
-sub selectAlawindows {
-    my ($o) = @_;
-    $o->{alawindows} = $o->ask_yesorno('', _("Throw everything away as windobe does?"), 1);
-}
-
-4. add your function selectAlawindows in install_steps.pm (not needed in that
-case, except for auto_install)
-
-sub selectAlawindows  {}
-
-
-********************************************************************************
 * Miscellaneous ****************************************************************
 ********************************************************************************
 >  o Media access methods: nfs, ftp, http, hd, cdrom
@@ -289,7 +283,7 @@ doesn't contain scsi modules nor ide.
 >  o Text and Graphic mode installers
 >    - Architectural overview of each
 
-have a look at gi/install.fig
+have a look at gi/docs/object_class.fig
 
 
 ********************************************************************************
@@ -304,26 +298,34 @@ have a look at gi/install.fig
 
 many solutions:
 
-- make an install on drive hdb, then either
-   1. dd if=/dev/hdb of=/dev/hdc
-   2. dd if=/dev/hdb of=/dev/hdc count=1 ; kernel_reread /dev/hdc ; 
-      mke2fs /dev/hdc1 ; mount /dev/hdb1 /source ; mount /dev/hdc1 /dest ; cp -a /source /dest
+- make an install on drive hdb, then :
+      dd if=/dev/hdb of=/dev/hdc
+  but you should make sure the hardware is *REALLY* identical.
 
 - try the oem feature
-   3. - burn a cd out of *latest* cooker
+   3. - burn a cd out of *latest* cooker or 8.0 and above.
       - boot on it telling "oem" to syslinux
-      !! it will destroy every data on the harddrive !!
+      !! it will destroy every data on the harddrive or
+         resize (or use free space) if *ONLY* one fat partition is defined !!
       - you now have a very automated install matrix 
       (duplicate it with "dd if=/dev/hdb of=/dev/hdc bs=1M count=730")
 
     put the harddrive in the oem box, the user will now have an *very* automated
-    install, just asking the root password and user password.
+    install, just asking the root password and user password, and some other
+    question according its hardware.
 
-   4. (just like 3. without burning a cd, doing the first part by hand)
+   4. just like 3. but you may have to mount /cdrom after typing rescue on
+      syslinux prompt (oem script do it automatically if a automatic boot nfs
+      network has been done as server is known). under /cdrom may be anything
+      as long as it provides an installation tree of Linux-Mandrake.
+      after that run oem script by typing "/etc/oem -f" for normal installation
+      or "/etc/oem -f server" for server installation (normal with server installed).
+
+   5. (just like 3. without burning a cd, doing the first part by hand)
       have a look at the /etc/oem script on the rescue and do it by hand...
 
 
-cu Pixel.
+cu Pixel, fpons.
 
 
 comments:
