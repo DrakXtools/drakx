@@ -167,7 +167,7 @@ ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-medias-usb
 endif
 ifeq (x86_64, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network stage1-usb
+BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-medias-usb
 endif
 
 ifeq (i386, $(ARCH))
