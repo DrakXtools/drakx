@@ -611,7 +611,6 @@ sub main {
 	    local $_ = $err;
 	    $o->kill_action;
 	    if (!/^already displayed/) {
-		log::l("error: $err");
 		eval { $o->errorInStep($_) };
 		$o->{steps}{$o->{step}}{auto} = 0;
 		$err = $@;
