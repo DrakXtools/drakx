@@ -945,7 +945,7 @@ sub system_locales_to_ourlocale {
 	$h->{main};
     $locale->{lang} .= '@' . $h->{variant} if $h->{variant};
     $locale->{country} = analyse_locale_name($locale_country)->{country};
-    $locale->{utf8} = $h->{encoding} && $h->{encoding} eq 'UTF-8';
+    $locale->{utf8} = $h->{charset} && $h->{charset} eq 'UTF-8';
     #- safe fallbacks
     $locale->{lang} ||= 'en_US';
     $locale->{country} ||= 'US';
