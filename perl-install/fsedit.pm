@@ -83,9 +83,54 @@ sub recompute_loopbacks {
     @{$all_hds->{loopbacks}} = map { isPartOfLoopback($_) ? @{$_->{loopback}} : () } @fstab;
 }
 
+sub raids {
+    my ($hds) = @_;
+
+    my @parts = get_fstab(@$hds);
+    (grep { isRawRAID($_) } @parts) && detect_devices::raidAutoStart() or return [];
+
+    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_partitions();
+
+    my @raids;
+    my @mdstat = cat_("/proc/mdstat");
+    for (my $i = 0; $i < @mdstat; $i++) {
+
+	my ($nb, $level, $mdparts) = 
+	  #- line format is:
+	  #- md%d : {in}?active{ (read-only)}? {linear|raid1|raid4|raid5}{ DEVNAME[%d]{(F)}?}*
+	  $mdstat[$i] =~ /^md(.).* ([^ \[\]]+) (\S+\[\d+\].*)/ or next;
+
+	$level =~ s/raid//; #- { linear | raid0 | raid1 | raid5 } -> { linear | 0 | 1 | 5 }
+
+	my $chunks = $mdstat[$i+1] =~ /(\S+) chunks/ ? $1 : "64k";
+
+	my @raw_mdparts = map { /([^\[]+)/ } split ' ', $mdparts;
+	my @mdparts = 
+	  map { 
+	      my $mdpart = $devname2part{$_} || { device => $_ };
+	      if (my ($part) = grep { is_same_hd($mdpart, $_) } @parts) {
+		  $part->{raid} = $nb;
+		  delete $part->{mntpoint};
+		  $part;
+	      } else {
+		  #- forget it when not found? that way it won't break much... beurk.
+		  ();
+	      }
+	  } @raw_mdparts;
+
+	my $type = typeOfPart("md$nb");
+	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($type, "type $type "), "with parts ", join(", ", @raw_mdparts));
+	$raids[$nb] = { 'chunk-size' => $chunks, type => $type || 0x83, disks => \@mdparts,
+			device => "md$nb", notFormatted => !$type, level => $level };
+    }
+    require raid;
+    raid::update(@raids);
+    \@raids;
+}
+
 sub hds {
     my ($drives, $flags) = @_;
-    my (@hds, @lvms, @raids);
+    my (@hds);
     my $rc;
 
     foreach (@$drives) {
@@ -112,6 +157,8 @@ sub hds {
 	}
 	push @hds, $hd;
     }
+
+    my @lvms;
     if (my @pvs = grep { isRawLVM($_) } map { partition_table::get_normal_parts($_) } @hds) {
 	#- otherwise vgscan won't find them
 	devices::make($_->{device}) foreach @pvs; 
@@ -129,44 +176,12 @@ sub hds {
 	    push @{$lvm->{disks}}, $_;
 	}
     }
-    if ((my @parts = grep { isRawRAID($_) } map { partition_table::get_normal_parts($_) } @hds) && detect_devices::raidAutoStart()) {
-	my @mdstat = cat_("/proc/mdstat");
-	for (my $i=0 ; $i<@mdstat ; $i++) {
-	    next if $mdstat[$i] !~ /^md(.).* ([^ \[\]]+) ([^ ]+\[[^ \]]+\])(.*)$/;
-	    my ($nb, $level, $partcar, $partcdr) = ($1, $2, $3, $4);
-	    $level =~ /raid(.)/ and $level = $1;
-	    $partcar =~ /([^\[]+)/ or next;
-	    my @thisparts = ( $1 );
-	    while ($partcdr =~ /\s*([^\[]+)[^\]]+\](.*)/) {
-		push @thisparts, $1;
-		$partcdr = $2;
-	    }
-	    my $chunks = $mdstat[$i+1] =~ /([^ ]+) chunks/ ? $1 : "64k";
-	    my @disks;
-	    foreach my $part (@parts) {
-		if (grep { readlink("/dev/$part->{device}") eq $_ || $part->{device} eq $_ } @thisparts) {
-		    $part->{raid} = $nb;
-		    delete $part->{mntpoint};
-		    push @disks, $part;
-		}
-	    }
-	    my $type = typeOfPart("md$nb");
-	    my $notformat = 0;
-	    log::l("RAID: found md$nb (raid $level) chunks $chunks ", $type ? "type $type " : "", "with parts ", join(", ", @thisparts));
-	    if (!$type) {
-		$type = 0x83;
-		$notformat = 1;
-	    }
-	    $raids[$nb] = { 'chunk-size' => $chunks, type => $type, disks => \@disks,
-			   device => "md$nb", notFormatted => $notformat, level => $level };
-	}
-	require raid;
-	raid::update(@raids);
-    }
 
-    
-    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => \@raids };
+    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => [] };
     fs::get_major_minor(get_all_fstab($all_hds));
+
+    $all_hds->{raids} = raids(\@hds);
+
     $all_hds;
 }
 
