@@ -609,9 +609,8 @@ sub whatUsbport() {
     # This routine based on an ioctl request gives very clean and correct
     # manufacturer and model names, so that they are easily matched to the
     # printer entries in the Foomatic database
-    my $i; 
     my @res;
-    foreach $i (0..15) {
+    foreach my $i (0..15) {
 	my $port = "/dev/usb/lp$i";
 	my $realport = devices::make($port);
 	next if !$realport;

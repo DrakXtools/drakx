@@ -105,9 +105,8 @@ sub read($$) {
 
     sysread F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
     my %info; @info{@$bz_fields} = unpack $bz_format, $tmp;
-    my $i;
 
-    foreach $i (0 .. $info{bzDrvrCnt}-1) {
+    foreach my $i (0 .. $info{bzDrvrCnt}-1) {
         sysread F, $tmp, psizeof($dd_format) or die "error while reading driver data in sector $sector";
         my %dd; @dd{@$dd_fields} = unpack $dd_format, $tmp;
         push @{$info{ddMap}}, \%dd;
@@ -129,7 +128,7 @@ sub read($$) {
     c::lseek_sector(fileno(F), $sector, 512) or die "reading of partition in sector $sector failed";
 
     my @pt;
-    for ($i=0;$i<$partmapsize;$i++) {
+    for (my $i=0;$i<$partmapsize;$i++) {
     	my $part;
         sysread F, $part, psizeof($p_format) or die "error while reading partition info in sector $sector";
 
@@ -240,8 +239,7 @@ sub write($$$;$) {
     # Since we didn't create any new drivers, let's try and match up our driver records with out partitons and see if any are missing.
     $info->{bzDrvrCnt} = 0;
     my @ddstowrite;
-    my $dd;
-    foreach $dd (@{$info->{ddMap}}) {
+    foreach my $dd (@{$info->{ddMap}}) {
         foreach (@partstowrite) {
             if ($dd->{ddBlock} == $_->{pPBlockStart}) {
             	push @ddstowrite, $dd;

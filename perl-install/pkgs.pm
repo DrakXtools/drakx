@@ -843,7 +843,7 @@ sub installTransactionClosure {
 	    $l[0] >= $_->{start} and $medium = $_, last;
 	    #- ... but it could be necessary to find the first
 	    #- medium containing package of @l.
-	    foreach $id (@l) {
+	    foreach my $id (@l) {
 		$id >= $_->{start} && $id <= $_->{end} and $medium = $_, last;
 	    }
 	    $medium and last;

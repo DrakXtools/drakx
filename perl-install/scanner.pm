@@ -171,7 +171,7 @@ sub updateScannerDBfromSane {
     opendir YREP, $_sanesrcdir or die "can't open $_sanesrcdir: $!";
     @files = grep /.*desc$/, readdir YREP;
     closedir YREP;
-    foreach $i (@files) {
+    foreach my $i (@files) {
 	my $F = common::openFileMaybeCompressed("$_sanesrcdir/$i");
 	print Y "\n# from $i";
 	my ($lineno, $cmd, $val) = 0;

@@ -244,13 +244,14 @@ sub ps {
 @>>>> @>>>> @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 $pid, $rss, $cpu, $cmd
 .
-    foreach $pid (sort { $a <=> $b } grep { /\d+/ } all('/proc')) {
-	 my @l = split(' ', cat_("/proc/$pid/stat"));
-	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
-	 $rss = (split ' ', cat_("/proc/$pid/stat"))[23] * $page;
-	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
-	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
-	 write PS;
+    foreach (sort { $a <=> $b } grep { /\d+/ } all('/proc')) {
+	$pid = $_;
+	my @l = split(' ', cat_("/proc/$pid/stat"));
+	$cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
+	$rss = (split ' ', cat_("/proc/$pid/stat"))[23] * $page;
+	(($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
+	$cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
+	write PS;
     }
 }
 
@@ -391,7 +392,7 @@ sub insmod {
     #- try to install the module if it exist else extract it from archive.
     #- needed for cardmgr.
     unless (-r $f) {
-	$_ = $1 if m@.*/([^/]*)\.o@;
+	$_ = $1 if m!.*/([^/]*)\.o!;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
 	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
@@ -462,7 +463,8 @@ $dev, $size, $used, $free, $use, $mntpoint
 	($dev, $mntpoint) = split;
 	$h{$dev} = $mntpoint;
     }
-    foreach $dev (sort keys %h) {
+    foreach (sort keys %h) {
+	$dev = $_;
 	($size, $free) = MDK::Common::System::df($mntpoint = $h{$dev});
 	$size or next;
 
@@ -497,9 +499,9 @@ sub sort {
     $h and die "usage: sort [-n] [<file>]\n";
     local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
     if ($n) {
-	print sort { $a <=> $b } <F>;
+	print(sort { $a <=> $b } <F>);
     } else {
-	print sort <F>;
+	print(sort <F>);
     }
 }
 

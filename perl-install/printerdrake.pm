@@ -1601,8 +1601,7 @@ sub get_db_entry {
 	    $printer->{DBENTRY} = "";
 	    my $make = uc($printer->{configured}{$queue}{queuedata}{make});
 	    my $model = $printer->{configured}{$queue}{queuedata}{model};
-	    my $key;
-	    for $key (keys %printer::thedb) {
+	    for my $key (keys %printer::thedb) {
 		if ((($::expert) && ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
 		    ((!$::expert) && ($key =~ /^$make\|$model$/))) {
 		    $printer->{DBENTRY} = $key;
@@ -1614,7 +1613,7 @@ sub get_db_entry {
 		$model =~ s/PS//;
 		$model =~ s/PostScript//;
 		$model =~ s/Series//;
-		for $key (keys %printer::thedb) {
+		for my $key (keys %printer::thedb) {
 		    if ((($::expert) && ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
 			((!$::expert) && ($key =~ /^$make\|$model$/))) {
 			$printer->{DBENTRY} = $key;
@@ -1990,8 +1989,7 @@ sub setup_options {
 		# enumerated option
 		push(@choicelists, []);
 		push(@shortchoicelists, []);
-		my $choice;
-		for $choice (@{$printer->{ARGS}[$i]{vals}}) {
+		for my $choice (@{$printer->{ARGS}[$i]{vals}}) {
 		    push(@{$choicelists[$i]}, $choice->{comment});
 		    push(@{$shortchoicelists[$i]}, $choice->{value});
 		    if ($choice->{value} eq $optshortdefault) {
@@ -2590,7 +2588,7 @@ sub check_network {
 			      [ { val => \$choice, type => 'list',
 				  list => [ N("Configure the network now"),
 					    N("Go on without configuring the network") ]} ] )) {
-		if ($choice eq N("Configure the network now")){
+		if ($choice eq N("Configure the network now")) {
 		    if ($::isInstall) {
 			require network::netconnect;
 		        network::netconnect::main
@@ -3491,9 +3489,8 @@ What do you want to modify on this printer?",
 		$printer->{DBENTRY} = undef;
 		#- Which printer type did we have before (check beginning of
 		#- URI)
-		my $type;
 		if ($printer->{configured}{$queue}) {
-		    for $type (qw(file lpd socket smb ncp postpipe)) {
+		    for my $type (qw(file lpd socket smb ncp postpipe)) {
 			if ($printer->{currentqueue}{connect}
 			    =~ /^$type:/) {
 			    $printer->{TYPE} = 

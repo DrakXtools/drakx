@@ -710,8 +710,7 @@ sub read_configured_queues($) {
     $printer->{SPOOLER} ||= get_default_spooler();
     if (!$printer->{SPOOLER}) {
 	#- Find the first spooler where there are queues
-	my $spooler;
-	for $spooler (qw(cups pdq lprng lpd)) {
+	for my $spooler (qw(cups pdq lprng lpd)) {
 	    #- Is the spooler's daemon running?
 	    my $service = $spooler;
 	    if ($service eq "lprng") {
@@ -795,9 +794,8 @@ sub read_configured_queues($) {
 	}
 	# Fill in "options" field
 	if (my $args = $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args}) {
-	    my $arg;
 	    my @options;
-	    for $arg (@{$args}) {
+	    for my $arg (@{$args}) {
 		push(@options, "-o");
 		my $optstr = $arg->{name} . "=" . $arg->{default};
 		push(@options, $optstr);
@@ -916,8 +914,7 @@ sub read_printer_db(;$) {
 		    # Make one database entry per driver with the entry name
 		    # manufacturer|model|driver
 		    if ($::expert) {
-			my $driver;
-			for $driver (@{$entry->{drivers}}) {
+			for my $driver (@{$entry->{drivers}}) {
 			    my $driverstr;
 			    if ($driver eq "Postscript") {
 				$driverstr = "PostScript";
@@ -1114,7 +1111,7 @@ sub set_cups_special_options {
     # If nothing is already configured, set text file borders of half an inch
     # and decrease the font size a little bit, so nothing of the text gets
     # cut off by unprintable borders.
-    if (!grep { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions){
+    if (!grep { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions) {
 	run_program::rooted($prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "page-top=36", "-o", "page-bottom=36",
@@ -2753,15 +2750,14 @@ sub findsofficeconfigfile {
 	 "/usr/local/lib/*/share/xp3/Xpdefaults",
 	 "/usr/local/*/share/xp3/Xpdefaults",
 	 "/opt/*/share/xp3/Xpdefaults");
-    my $configfilename = "";
-    for $configfilename (@configfilenames) {
+    for my $configfilename (@configfilenames) {
 	local *F;
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
 	    close F;
 	    if ($filename) {
 		if ($prefix ne "") {
-		    $filename =~ s:^$prefix::;
+		    $filename =~ s/^$prefix//;
 		}
 		# Work around a bug in the "ls" of "busybox". During
 		# installation it outputs the mask given on the command line
@@ -2780,15 +2776,14 @@ sub findopenofficeconfigfile {
 	 "/usr/local/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/*/share/psprint/psprint.conf",
 	 "/opt/*/share/psprint/psprint.conf");
-    my $configfilename = "";
-    for $configfilename (@configfilenames) {
+    for my $configfilename (@configfilenames) {
 	local *F;
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
 	    close F;
 	    if ($filename) {
 		if ($prefix ne "") {
-		    $filename =~ s:^$prefix::;
+		    $filename =~ s/^$prefix//;
 		}
 		# Work around a bug in the "ls" of "busybox". During
 		# installation it outputs the mask given on the command line
@@ -3145,7 +3140,7 @@ sub findgimpconfigfiles {
 	    if ((($uid == 0) || ($uid >= 500)) && ($username ne "nobody")) {
 		foreach my $file (@configfilenames) {
 		    my $dir = "$homedir/$file";
-		    $dir =~ s:/[^/]*$::;
+		    $dir =~ s,/[^/]*$,,;
 		    next if (-f $dir) && (! -d $dir);
 		    if (! -d "$prefix$dir") {
 			run_program::rooted($prefix, 
