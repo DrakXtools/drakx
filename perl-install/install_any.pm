@@ -1046,6 +1046,17 @@ sub remove_bigseldom_used {
       );
 }
 
+sub cond_umount_hdimage() {
+    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$::o->{partitioning}{readonly}) {
+	$::o->{stage1_hd} = { device => $1, type => $2 };
+	getFile("XXX"); #- close still opened filehandle
+	eval { fs::umount("/tmp/hdimage") };
+    }
+}
+sub cond_remount_hdimage {
+    my $s = shift || delete $::o->{stage1_hd} or return;
+    fs::mount($s->{device}, '/tmp/hdimage', $s->{type});
+}
 
 ################################################################################
 package pkgs_interactive;

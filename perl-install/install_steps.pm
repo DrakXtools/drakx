@@ -125,12 +125,6 @@ sub setupSCSI {
 #------------------------------------------------------------------------------
 sub doPartitionDisksBefore {
     my ($o) = @_;
-
-    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$o->{partitioning}{readonly}) {
-	$o->{stage1_hd} = { device => $1, type => $2 };
-	install_any::getFile("XXX"); #- close still opened filehandle
-	eval { fs::umount("/tmp/hdimage") };
-    }
     eval { 
 	close *pkgs::LOG;
 	eval { fs::umount("$o->{prefix}/proc") };
@@ -142,6 +136,9 @@ sub doPartitionDisksBefore {
 #------------------------------------------------------------------------------
 sub doPartitionDisksAfter {
     my ($o) = @_;
+
+    install_any::cond_umount_hdimage();
+
     if (!$::testing) {
 	my $hds = $o->{all_hds}{hds};
 	partition_table::write($_) foreach @$hds;
@@ -177,7 +174,7 @@ sub doPartitionDisksAfter {
 	$part->{isMounted} ?
 	  do { rmdir "/tmp/hdimage" ; symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") } :
 	  eval { 
-	      fs::mount($s->{device}, "/tmp/hdimage", $s->{type});
+	      install_any::cond_remount_hdimage($s);
 	      $part->{isMounted} = 1;
 	  };
     }
