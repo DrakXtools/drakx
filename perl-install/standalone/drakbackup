@@ -152,7 +152,6 @@ my $other_backuped = 0;
 my @user_list_to_restore;
 my @sys_list_to_restore;
 my $cd_device_entry;
-my $custom_help;
 my $button_box;
 my $button_box_tmp;
 my $next_widget;
@@ -268,6 +267,7 @@ my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
 my $max_space = 1000.0;
 my @no_devices = translate("No devices found");
+my %help;
 
 foreach (@ARGV) {
 
@@ -294,6 +294,27 @@ if ($ENV{HOME} ne '/root') {
 	@user_list = $ENV{USER};
 }
 $cfg_file = $cfg_dir . "drakbackup.conf";
+
+sub setup_tooltips() {
+	%help = (
+		'use_expect' => N("Expect is an extension to the Tcl scripting language that allows interactive sessions without user intervention."),
+		'remember_pass' => N("Store the password for this system in drakbackup configuration."),
+		'erase_cdrw' => N("For a mulitsession CD, only the first session will erase the cdrw. Otherwise the cdrw is erased before each backup."),	
+		'cdrecord_device' => N("This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -scanbus' would also show you the device number."),
+		'use_incr_decr' => N("This option will save files that have changed.  Exact behavior depends on whether incremental or differential mode is used."), 
+		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
+		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
+		'send_mail_to' => N("This should be a comma-seperated list of local users or email addresses that you want the backup results sent to. You will need a functioning mail transfer agent setup on your system."),
+		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
+		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
+		'dir_or_module' => N("Some protocols, like rsync, may be configured at the server end.  Rather than using a directory path, you would use the 'module' name for the service path."),
+	);
+}
+
+sub set_help_tip {
+     my ($entry, $key) = @_;
+     gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help{$key}));
+}
 
 sub show_conf() {
     print "DrakBackup configuration:\n\n";
@@ -1677,7 +1698,7 @@ sub check_list {
 }
 
 sub fonction_env {
-    ($central_widget, $current_widget, $previous_widget, $custom_help, $next_widget) = @_;
+    ($central_widget, $current_widget, $previous_widget, $next_widget) = @_;
 }
 
 sub advanced_what_sys() {
@@ -1709,7 +1730,10 @@ sub advanced_what_sys() {
 	$mode_buttons[0]->signal_connect('toggled' => sub { $sys_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_sys_versions);
 	$mode_buttons[1]->set_sensitive($backup_sys_versions);
-    fonction_env(\$box_what_sys, \&advanced_what_sys, \&advanced_what, "what");
+	set_help_tip($check_what_versions, 'use_incr_decr');
+	set_help_tip($mode_buttons[0], 'use_incremental');
+	set_help_tip($mode_buttons[1], 'use_differential');
+    fonction_env(\$box_what_sys, \&advanced_what_sys, \&advanced_what);
     $up_box->show_all;
 }
 
@@ -1766,8 +1790,12 @@ sub advanced_what_user {
 	$mode_buttons[0]->signal_connect('toggled' => sub { $user_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_user_versions);
 	$mode_buttons[1]->set_sensitive($backup_user_versions);
-    if ($previous_function) { fonction_env(\$box_what_user, \&advanced_what_user, \&$previous_function, "what", \&$previous_function) }
-    else { fonction_env(\$box_what_user, \&advanced_what_user, \&advanced_what, "what") }
+	set_help_tip($check_what_user_versions, 'use_incr_decr');
+	set_help_tip($mode_buttons[0], 'use_incremental');
+	set_help_tip($mode_buttons[1], 'use_differential');
+
+    if ($previous_function) { fonction_env(\$box_what_user, \&advanced_what_user, \&$previous_function, \&$previous_function) }
+    else { fonction_env(\$box_what_user, \&advanced_what_user, \&advanced_what) }
     $up_box->show_all;
 }
 
@@ -1828,7 +1856,11 @@ sub advanced_what_other() {
 	$mode_buttons[0]->signal_connect('toggled' => sub { $other_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_other_versions);
 	$mode_buttons[1]->set_sensitive($backup_other_versions);
-    fonction_env(\$box_what_other, \&advanced_what_other, \&advanced_what, "what");
+	set_help_tip($check_what_other_versions, 'use_incr_decr');
+	set_help_tip($mode_buttons[0], 'use_incremental');
+	set_help_tip($mode_buttons[1], 'use_differential');
+
+    fonction_env(\$box_what_other, \&advanced_what_other, \&advanced_what);
     $up_box->show_all;			
 }
 
@@ -1859,7 +1891,7 @@ sub advanced_what_entire_sys() {
 				  new Gtk2::Label(N("Windows (FAT32)")),
 				  new Gtk2::HBox(0, 5)
 				  ));
-    fonction_env(\$box_what, \&advanced_what_entire_sys, \&advanced_what, "");
+    fonction_env(\$box_what, \&advanced_what_entire_sys, \&advanced_what);
     $up_box->show_all;
 }
 
@@ -1905,7 +1937,7 @@ sub advanced_what() {
 # 				    new Gtk2::HBox(0, 5)
 # 				    ));
 
-    fonction_env(\$box_what, \&advanced_what, \&advanced_box, "");
+    fonction_env(\$box_what, \&advanced_what, \&advanced_box);
     $up_box->show_all;
 }
 
@@ -2024,10 +2056,13 @@ sub advanced_where_net_types {
 		destroy_widget();
  		$current_widget->();
     });
+	set_help_tip($check_use_expect, 'use_expect');
+	set_help_tip($check_remember_pass, 'remember_pass');
+	set_help_tip($host_path_entry, 'dir_or_module');
     if ($previous_function) { 
-		fonction_env(\$box_where_net, \&advanced_where_net_types, \&$previous_function, "net");
+		fonction_env(\$box_where_net, \&advanced_where_net_types, \&$previous_function);
     } else { 
-		fonction_env(\$box_where_net, \&advanced_where_net_types, \&advanced_where, "net");
+		fonction_env(\$box_where_net, \&advanced_where_net_types, \&advanced_where);
 	}
     $up_box->show_all;
 }
@@ -2159,10 +2194,13 @@ sub advanced_where_cd {
 		$check_cdrw->set_active($cd_devices{$std_device}{cdrw});			
 	});
 	
+	set_help_tip($button_erase_now, 'erase_cdrw');
+	set_help_tip($combo_where_cdrecord_device, 'cdrecord_device');
+	
     if ($previous_function) { 
-		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function, ""); 
+		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function); 
 	} else { 
-		fonction_env(\$box_where_cd, \&advanced_where_cd, \&advanced_where, ""); 
+		fonction_env(\$box_where_cd, \&advanced_where_cd, \&advanced_where); 
 	}
     $up_box->show_all;
 }
@@ -2261,9 +2299,9 @@ sub advanced_where_tape {
 		$tape_device = $combo_where_tape_device->entry->get_text;
 	}); 
     if ($previous_function) { 
-		fonction_env(\$box_where_tape, \&advanced_where_tape, \&$previous_function, ""); 
+		fonction_env(\$box_where_tape, \&advanced_where_tape, \&$previous_function); 
 	} else { 
-		fonction_env(\$box_where_tape, \&advanced_where_tape, \&advanced_where, ""); 
+		fonction_env(\$box_where_tape, \&advanced_where_tape, \&advanced_where); 
 	}
     $up_box->show_all;
 }
@@ -2324,9 +2362,9 @@ sub advanced_where_hd {
 			}
 		});
     if ($previous_function) { 
-		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, ""); 
+		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function); 
 	} else { 
-		fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where, ""); 
+		fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where); 
 	}
     $up_box->show_all;
 }
@@ -2384,7 +2422,7 @@ sub advanced_where() {
  		new Gtk2::Label(N("Tape")),
  		new Gtk2::HBox(0, 5)
  	));
-    fonction_env(\$box_where, \&advanced_where, \&advanced_box, ""); 
+    fonction_env(\$box_where, \&advanced_where, \&advanced_box); 
     $up_box->show_all;
 }
 
@@ -2447,7 +2485,7 @@ sub advanced_when() {
 	$entry_media_type->entry->signal_connect('changed', sub { 
 		$daemon_media = $entry_media_type->entry->get_text;
 	});
-    fonction_env(\$box_when, \&advanced_when, \&advanced_box, "");
+    fonction_env(\$box_when, \&advanced_when, \&advanced_box);
     $up_box->show_all;
 }
 
@@ -2482,7 +2520,10 @@ sub advanced_options() {
 #    check_list([$check_mail, \$send_mail], [$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]);
     $mail_entry->set_text($user_mail);
     $mail_entry->signal_connect('changed', sub { $user_mail = $mail_entry->get_text });
-    fonction_env(\$box_options, \&advanced_options, \&advanced_box, "options");
+	set_help_tip($check_backupignore, 'backupignore');
+	set_help_tip($check_mail, 'send_mail_to');
+	set_help_tip($check_del_hd_files, 'delete_files');
+    fonction_env(\$box_options, \&advanced_options, \&advanced_box);
     $up_box->show_all;
 }
 
@@ -2527,7 +2568,7 @@ sub advanced_box() {
 	    new Gtk2::Label(N("More Options")),
 	    new Gtk2::HBox(0, 5)
 	));
-    fonction_env(\$box_adv, \&advanced_box, \&interactive_mode_box, "");
+    fonction_env(\$box_adv, \&advanced_box, \&interactive_mode_box);
     $up_box->show_all;
 }
 
@@ -2550,7 +2591,7 @@ sub wizard_step3() {
 			),
 		),
 	);
-    fonction_env(\$box2, \&wizard_step3, \&wizard_step2, "");
+    fonction_env(\$box2, \&wizard_step3, \&wizard_step2);
     button_box_wizard_end();
     $up_box->show_all;
 }
@@ -2622,8 +2663,8 @@ sub wizard_step2() {
 				wizard_step2();
 			})
 	}
-    if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&message_noselect_box) }
-    else { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&wizard_step3) }
+    if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, \&message_noselect_box) }
+    else { fonction_env(\$box2, \&wizard_step2, \&wizard, \&wizard_step3) }
     button_box_wizard();
     $up_box->show_all;
 }
@@ -2661,8 +2702,8 @@ sub wizard()   {
 				$next_widget = \&message_noselect_what_box }
 			})
 	}
-    if ($backup_sys || $backup_user && @user_list) { fonction_env(\$box2, \&wizard, \&interactive_mode_box, "", \&wizard_step2) } 
-    else { fonction_env(\$box2, \&wizard, \&interactive_mode_box, "", \&message_noselect_what_box) } 
+    if ($backup_sys || $backup_user && @user_list) { fonction_env(\$box2, \&wizard, \&interactive_mode_box, \&wizard_step2) } 
+    else { fonction_env(\$box2, \&wizard, \&interactive_mode_box, \&message_noselect_what_box) } 
     button_box_wizard();
     $up_box->show_all;
 }
@@ -2963,7 +3004,7 @@ sub restore_aff_backup_problems() {
 		),
 	);
     button_box_restore_pbs_end();
-    fonction_env(\$do_restore, \&restore_aff_backup_problems, "", "restore_pbs");
+    fonction_env(\$do_restore, \&restore_aff_backup_problems, "restore_pbs");
     $up_box->show_all;
 }
 
@@ -3102,7 +3143,7 @@ sub restore_do2() {
 		),
 	);
     button_box_restore_end();
-    fonction_env(\$do_restore, \&restore_do2, \&restore_box, "restore");
+    fonction_env(\$do_restore, \&restore_do2, \&restore_box);
     $up_box->show_all;
 }
 
@@ -3120,7 +3161,7 @@ sub restore_step_other() {
 		),
 	);
     check_list([$check_restore_other_sure, \$restore_other]);
-    fonction_env(\$retore_step_other, \&restore_step_other, \&restore_step2, "restore", \&restore_do);
+    fonction_env(\$retore_step_other, \&restore_step_other, \&restore_step2, \&restore_do);
     $up_box->show_all;
 }
 
@@ -3196,9 +3237,9 @@ sub restore_step_user() {
 			),
 		),
 	);
-    if ($restore_other) { fonction_env(\$retore_step_user, \&restore_step_user, "", "restore", \&restore_step_other) }
-	elsif ($restore_sys) { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step_sys, "restore", \&restore_step_other) }
-    else { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step2, "restore", \&restore_do) }
+    if ($restore_other) { fonction_env(\$retore_step_user, \&restore_step_user, "", \&restore_step_other) }
+	elsif ($restore_sys) { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step_sys, \&restore_step_other) }
+    else { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step2, \&restore_do) }
     $up_box->show_all;
 }
 
@@ -3233,9 +3274,9 @@ sub restore_step_sys() {
 	}); 	
     $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore");
-    if ($restore_user) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_user) }
-    elsif ($restore_other) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_other) }
-    else { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_do) }
+    if ($restore_user) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, \&restore_step_user) }
+    elsif ($restore_other) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, \&restore_step_other) }
+    else { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, \&restore_do) }
     $up_box->show_all;
 }
 
@@ -3280,8 +3321,8 @@ sub restore_other_media_hd {
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
     $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text });
-    if ($previous_function) { fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, "") }
-    else { fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where, "") }
+    if ($previous_function) { fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function) }
+    else { fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where) }
     $up_box->show_all;
 }
 
@@ -3331,7 +3372,7 @@ sub restore_other_media() {
     $restore_find_path_entry->set_text($path_to_find_restore);
     $restore_find_path_entry->signal_connect('changed', sub { $path_to_find_restore = $restore_find_path_entry->get_text });
 #- not sure if this was the original intent - address the crash at "Next"
-    fonction_env(\$box_find_restore, \&restore_other_media, \&restore_step2, "other_media", \&restore_do);
+    fonction_env(\$box_find_restore, \&restore_other_media, \&restore_step2, \&restore_do);
     $up_box->show_all;
 }
 
@@ -3411,7 +3452,7 @@ sub restore_step2() {
 		$current_widget->();
     });
 	$central_widget = \$retore_step2;
-    fonction_env(\$retore_step2, \&restore_step2, \&restore_box, "restore");
+    fonction_env(\$retore_step2, \&restore_step2, \&restore_box);
     if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box }
     elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys }
     elsif ($restore_user) { $next_widget = \&restore_step_user }
@@ -3586,7 +3627,7 @@ sub catalog_restore() {
 	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text });
 	
 	button_box_restore();		
-	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, "restore", \&catalog_restore);
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore);
 	$central_widget = \$catalog_box;	
     $up_box->show_all;
 }
@@ -3988,7 +4029,7 @@ sub restore_box() {
 		destroy_widget();
 		restore_find_media_box(),
 	}
-    fonction_env(\$retore_box, \&restore_box, \&interactive_mode_box, "restore");
+    fonction_env(\$retore_box, \&restore_box, \&interactive_mode_box);
     $central_widget = \$retore_box;
 	$up_box->show_all;
 }
@@ -4065,7 +4106,6 @@ sub restore_status() {
 			$stext,
 		),
 	);
-    $custom_help = "options";
     $central_widget = \$table;
     $up_box->show_all;
     gtkflush();
@@ -4403,7 +4443,6 @@ sub dialog_one {
                             ),
            );
     button_box_restore_main();
-    $custom_help = "mail_pb";
     $central_widget = \$box2;
     $up_box->show_all;    
 }
@@ -4438,7 +4477,7 @@ sub install_rpm {
 				}),
 		),
 	);
-    fonction_env(\$box_what_user, \&install_rpm, \&$previous_function, "what");
+    fonction_env(\$box_what_user, \&install_rpm, \&$previous_function);
     $up_box->show_all;
 }
 
@@ -4622,7 +4661,6 @@ sub build_backup_status() {
 		),
 	);
 
-    $custom_help = "options";
     $central_widget = \$tbox;
     $up_box->show_all;
     gtkflush();
@@ -4655,7 +4693,6 @@ sub build_backup_ftp_status() {
 			1, new Gtk2::VBox(0, 15),
 		),
 	);
-    $custom_help = "options";
     $central_widget = \$table;
     $up_box->show_all;
     gtkflush();
@@ -4678,7 +4715,6 @@ sub build_backup_box_see_conf {
 		),
 	);
     button_box_backup_end();
-    $custom_help = "";
     $central_widget = \$box2;
     $current_widget = \&build_backup_box_see_conf;
 	if ($caller eq "interactive") {
@@ -4741,7 +4777,7 @@ sub build_backup_box() {
 	));
 
     button_box_restore_main();
-    fonction_env(\$box2, \&build_backup_box, \&interactive_mode_box, "options");
+    fonction_env(\$box2, \&build_backup_box, \&interactive_mode_box);
     $up_box->show_all;
 }
 
@@ -4799,7 +4835,6 @@ sub interactive_mode_box {
 	);
     $central_widget = \$box2;
     button_box_main();
-    $custom_help = "main";
     $up_box->show_all;
 }
 
@@ -4843,8 +4878,8 @@ sub interactive_mode() {
 			),
 		),
 	);
+	setup_tooltips();
     interactive_mode_box();
-    $custom_help = "main";
     button_box_main();
     $central_widget = \$box2;
     $window1->show_all;
