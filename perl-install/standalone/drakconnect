@@ -47,7 +47,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 my $in = 'interactive'->vnew('su');
 !$::isEmbedded and $in->isa('interactive::gtk');
 $::Wizard_pix_up = "wiz_drakconnect.png";
-$::Wizard_title = "Network & Internet Configuration";
+$::Wizard_title = N("Network & Internet Configuration");
 
 my $activate_profile = 0; #- deactivated by default (in order to keep code)
 
