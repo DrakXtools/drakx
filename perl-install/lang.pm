@@ -23,7 +23,7 @@ use log;
 my %langs = (
 'af' =>    [ 'Afrikaans',           'Afrikaans',         'af_ZA', '  3  ', 'iso-8859-1' ],
 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_am' ],
-#'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
+'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'cp1251' ],
 'bg' =>    [ 'Bulgarian',           'Blgarski',          'bg_BG', '1    ', 'cp1251' ],
@@ -742,6 +742,9 @@ sub l2pango_font {
 
 sub set {
     my ($lang, $translate_for_console) = @_;
+
+    #- disable Arabic in install as no (free) fonts are available.
+    $lang eq 'ar' and $lang='en_US';
 
     exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
 
