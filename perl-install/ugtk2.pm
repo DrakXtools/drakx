@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position $grab $pop_it $shape_width $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -864,34 +864,10 @@ END { &exit() }
 sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = Gtk2::Window->new('toplevel');
-    !$::isStandalone && !$::live && !$::g_auto_install and $shape_width = 3;
     my $inner = gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
 		       my $f = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
 		      );
-    my $table;
-    if ($::isStandalone || $::live || $::g_auto_install || $::noShadow) { gtkadd($w, $inner) if !$::noBorder } else {
-	my $gc = Gtk2::Gdk::GC->new(gtkroot());
-	$gc->set_rgb_fg_color(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
-	my $sqw = $shape_width;
-	gtkadd($w, $table = Gtk2::Table->new(2, 2, 0));
-	$table->attach($inner, 0, 1, 0, 1, ['expand', 'fill'], ['expand', 'fill'], 0, 0);
-	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, $sqw, 1), expose_event => sub {
-					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
-					      $_[0]->window->draw_rectangle($gc, 1, 0, $sqw, $sqw, $_[0]->allocation->height);
-					  }),
-			1, 2, 0, 1, 'fill', 'fill', 0, 0);
-	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, 1, $sqw), expose_event => sub {
-					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
-					      $_[0]->window->draw_rectangle($gc, 1, $sqw, 0, $_[0]->allocation->width, $sqw);
-					  }),
-			0, 1, 1, 2, 'fill', 'fill', 0, 0);
-	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, $sqw, $sqw), expose_event => sub {
-					      $_[0]->window->draw_rectangle($gc, 1, 0, 0, $sqw, $sqw);
-					  }),
-			1, 2, 1, 2, 'fill', 'fill', 0, 0);
-	$table->show_all;
-	$w->signal_connect(delete_event => sub { $gc->unref });
-    }
+    gtkadd($w, $inner) if !$::noBorder;
     $w->set_name("Title");
     $w->set_title($title);
 
@@ -919,23 +895,10 @@ sub _create_window($$) {
 	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
 
-	if (!$::isStandalone && !$::live && !$::g_auto_install && !$::noShadow) {
-	    my $sqw = $shape_width; #square width
-	    my $wia = int(($wi+7)/8);
-	    my $s = "\xFF" x ($wia*$he);
-	    my $wib = $wia*8;
-	    my $dif = $wib-$wi;
-	    foreach my $y (0..$sqw-1) { vec($s, $wib-1-$dif-$_+$wib*$y, 1) = 0x0 foreach (0..$sqw-1) }
-	    foreach my $y (0..$sqw-1) { vec($s, (($he-1)*$wib)-$wib*$y+$_, 1) = 0x0 foreach (0..$sqw-1) }
-	    $w->realize;
-	    my $b = Gtk2::Gdk::Bitmap->create_from_data($w->window, $s, $wib, $he);
-	    $w->window->shape_combine_mask($b, 0, 0);
-	}
     }) if ($force_center || $o->{force_center}) && !($force_position || $o->{force_position});
 
     $o->{window} = $::noBorder ? $w : $f;
     $o->{rwindow} = $w;
-    $table and $table->queue_draw;
 }
 
 
