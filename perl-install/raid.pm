@@ -21,7 +21,7 @@ sub nb {
 sub new {
     my ($raids, @parts) = @_;
     my $nb = @$raids; 
-    $raids->[$nb] = { 'chunk-size' => "64k", type => 0x83, disks => [ @parts ], device => "md$nb", notFormatted => 1, level => 1 };
+    $raids->[$nb] = { 'chunk-size' => "64k", type => 0x483, disks => [ @parts ], device => "md$nb", notFormatted => 1, level => 1 };
     foreach my $part (@parts) {
 	$part->{raid} = $nb;
 	delete $part->{mntpoint};

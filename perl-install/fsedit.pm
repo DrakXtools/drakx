@@ -19,20 +19,20 @@ use fs;
 
 %suggestions = (
   __("simple") => [
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize =>3500 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize =>3500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
+    { mntpoint => "/home", size => 300 << 11, type =>0x483, ratio => 3 },
   ], 'with usr' => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 500 << 11 },
+    { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>3000 << 11 },
+    { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 5 },
   ], __("server") => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>3000 << 11 },
-    { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 3, maxsize =>3000 << 11 },
+    { mntpoint => "/var",  size => 100 << 11, type =>0x483, ratio => 4 },
+    { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 5 },
   ],
 );
 foreach (values %suggestions) {
