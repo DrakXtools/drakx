@@ -1,3 +1,38 @@
+2001/08/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakautoinst: require -> use
+
+	* install_any.pm: save the .img file so that multi-cd install won't ask to
+	re-enter first cd
+
+2001/08/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/is.po, share/po/hu.po, share/po/zh_TW.Big5.po,
+	share/po/it.po, share/po/id.po, share/po/pl.po, share/po/fi.po,
+	share/po/no.po, share/po/zh_CN.GB2312.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2001/08/26  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile, share/po/.cvsignore: fetch directly the latest
+	drakx-help.xml
+
+2001/08/25  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/drakbug_report: add "rpm -qa"
+
+	* bootlook.pm: fix deprecated call standalone::pkgs_install
+
+	* diskdrake.pm: don't the grab flag propagate everywhere
+
 2001/08/25  dam's  <damien@mandrakesoft.com>
 
 	* install2.pm, steps.pm: icon correction
