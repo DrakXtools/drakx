@@ -276,14 +276,17 @@ wait %d seconds for default boot.
     add2hash_($lilo, { getVarsFromSh("$prefix/etc/sysconfig/system") }); #- for CLEAN_TMP
     add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
 
+    #- give more priority to secure kernel because if the user want security, he will got it...
     my $isSecure = -e "$prefix/boot/vmlinuz-${kernelVersion}secure";
+    my $isEnterprise = -e "$prefix/boot/vmlinuz-${kernelVersion}enterprise";
 
     my $isSMP = detect_devices::hasSMP();
     if ($isSMP && !-e "$prefix/boot/vmlinuz-${kernelVersion}smp") {
 	log::l("SMP machine, but no SMP kernel found") unless $isSecure;
 	$isSMP = 0;
     }
-    my $entry = add_kernel($prefix, $lilo, $kernelVersion, $isSecure ? 'secure' : $isSMP ? 'smp' : '',
+    my $entry = add_kernel($prefix, $lilo, $kernelVersion,
+			   $isSecure ? 'secure' : $isEnterprise ? 'enterprise' : $isSMP ? 'smp' : '',
 	       {
 		label => 'linux',
 		root  => "/dev/$root",
@@ -291,9 +294,9 @@ wait %d seconds for default boot.
 	       });
     add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
-		label => $isSecure || $isSMP ? 'linux-up' : 'linux-nonfb',
+		label => $isSecure || $isEnterprise || $isSMP ? 'linux-up' : 'linux-nonfb',
 		root  => "/dev/$root",
-	       }) if $isSecure || $isSMP || $vga_fb;
+	       }) if $isSecure || $isEnterprise || $isSMP || $vga_fb;
     my $failsafe = add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => 'failsafe',
