@@ -36,7 +36,11 @@ sub load {
     my @l = map {
 	my ($name, @options) = ref($_) ? @$_ : $_;
 	$options{$name} = \@options;
-	dependencies_closure($name);
+	my @l = dependencies_closure($name);
+	if (c::kernel_version() =~ /^\@2.6/) {
+	    push @l, "$1-hcd" if $name =~ /(uhci|ohci)/; # usb-uhci, uhci, usb-ohci are deprecated in 2.6
+	}
+	@l;
     } @_;
 
     @l = difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]) or return;
