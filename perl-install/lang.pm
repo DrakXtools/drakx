@@ -22,12 +22,12 @@ use log;
 my %langs = (
 'af' =>    [ 'Afrikaans',           'Afrikaans',         'af_ZA', '  3  ', 'iso-8859-1' ],
 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_am' ],
-#- doesn't work well after install
-#'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
+'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
+'as' =>    [ 'Assamese',            'ZZ Assamese',       'as_IN', ' 2   ', 'utf_bn' ],
 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'cp1251' ],
 'bg' =>    [ 'Bulgarian',           'Blgarski',          'bg_BG', '1    ', 'cp1251' ],
-'bn' =>    [ 'Bengali',             'ZZ Bengali',        'bn_BD', ' 2   ', 'unicode' ],
+'bn' =>    [ 'Bengali',             'ZZ Bengali',        'bn_BD', ' 2   ', 'utf_bn' ],
 'br' =>    [ 'Britton',             'Brezhoneg',         'br_FR', '1    ', 'iso-8859-15', 'br:fr_FR:fr' ],
 'bs' =>    [ 'Bosnian',             'Bosanski',          'bs_BA', '1    ', 'iso-8859-2' ],
 'ca' =>    [ 'Catalan',             'Catala',            'ca_ES', '1    ', 'iso-8859-15', 'ca:es_ES:es' ],
@@ -35,6 +35,7 @@ my %langs = (
 'cy' =>    [ 'Welsh',               'Cymraeg',           'cy_GB', '1    ', 'utf_lat8',    'cy:en_GB:en' ],
 'da' =>    [ 'Danish',              'Dansk',             'da_DK', '1    ', 'iso-8859-15' ],
 'de' =>    [ 'German',              'Deutsch',           'de_DE', '1    ', 'iso-8859-15' ],
+#-'dz' =>  [ 'Buthanese',           'ZZ Dzhonka',        'dz_BT', ' 2   ', 'unicode' ],
 'el' =>    [ 'Greek',               'Ellynika',          'el_GR', '1    ', 'iso-8859-7' ],
 'en_GB' => [ 'English (British)',   'English (British)', 'en_GB', '12345', 'iso-8859-15' ],
 'en_US' => [ 'English (American)', 'English (American)', 'en_US', '    5', 'C' ],
@@ -49,6 +50,8 @@ my %langs = (
 'ga' =>    [ 'Gaelic (Irish)',      'Gaeilge',           'ga_IE', '1    ', 'iso-8859-15', 'ga:en_IE:en_GB:en' ],
 #'gd' =>   [ 'Gaelic (Scottish)',   'Gaidhlig',          'gb_GB', '1    ', 'utf_lat8',    'gd:en_GB:en' ],
 'gl' =>    [ 'Galician',            'Galego',            'gl_ES', '1    ', 'iso-8859-15', 'gl:es_ES:es:pt:pt_BR' ],
+#- there isn't yet a gu_IN locale, using hi_IN instead
+'gu' =>    [ 'Gujarati',            'ZZ Gujarati',       'hi_IN', ' 2   ', 'unicode' ],
 #'gv' =>   [ 'Gaelic (Manx)',       'Gaelg',             'gv_GB', '1    ', 'utf_lat8',    'gv:en_GB:en' ],
 'he' =>    [ 'Hebrew',              'AA Ivrit',          'he_IL', ' 2   ', 'utf_he' ],
 'hi' =>    [ 'Hindi',               'ZZ Hindi',          'hi_IN', ' 2   ', 'unicode' ],
@@ -63,18 +66,24 @@ my %langs = (
 'ja' =>    [ 'Japanese',            'ZZ Nihongo',        'ja_JP', ' 2   ', 'jisx0208' ],
 'ka' =>    [ 'Georgian',            'ZZ Georgian',       'ka_GE', ' 2   ', 'utf_ka' ],
 #-'kl' =>  [ 'Greenlandic (inuit)', 'ZZ Inuit',          'kl_GL', '    5', 'iso-8859-1' ],
-'kn' =>    [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'unicode' ],
+'kn' =>    [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'utf_kn' ],
 'ko' =>    [ 'Korean',              'ZZ Korea',          'ko_KR', ' 2   ', 'ksc5601' ],
+#-'ku' =>  [ 'Kurdish',             'Kurdi',             'ku_TR', ' 2   ', 'iso-8859-9' ],
 #-'kw' =>  [ 'Cornish',             'Kernewek',          'kw_GB', '1    ', 'utf_lat8',    'kw:en_GB:en' ],
+# no li_NL locale yet; using nl_NL instead and defning LANGUAGE
+'li' =>    [ 'Limbourgish',         'Limburgs',          'nl_NL', '1    ', 'iso-8859-15' ],
 'lo' =>    [ 'Laotian',             'Laotian',           'lo_LA', ' 2   ', 'utf_lo' ],
 'lt' =>    [ 'Lithuanian',          'Lietuviskai',       'lt_LT', '1    ', 'iso-8859-13' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
+'ml' =>    [ 'Malayalam',           'ZZ Malayalam',      'ml_IN', ' 2   ', 'unicode' ],
 'mn' =>    [ 'Mongolian',           'Mongol',            'mn_MN', ' 2   ', 'utf_cyr2' ],
+'mr' =>    [ 'Marathi',             'ZZ Marathi',        'mr_IN', ' 2   ', 'unicode' ],
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'iso-8859-1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
 'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'no_NO', '1    ', 'iso-8859-1',  'nb:no' ],
+#-'ne' =>  [ 'Nepali',              'ZZ Nepali',         'ne_IN', ' 2   ', 'unicode' ],
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
 #-'oc' =>  [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
@@ -84,29 +93,35 @@ my %langs = (
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
 'ro' =>    [ 'Romanian',            'Romana',            'ro_RO', '1    ', 'iso-8859-2' ],
 'ru' =>    [ 'Russian',             'Russkij',           'ru_RU', '12   ', 'koi8-r' ],
-'sh' =>    [ 'Serbian Latin',       'Srpska',            'sh_YU', '1    ', 'iso-8859-2',  'sh:sr@Latn' ], 
+'se' =>    [ 'Saami',               'Samegiella',        'se_NO', '1    ', 'unicode' ], 
 'sk' =>    [ 'Slovak',              'Slovencina',        'sk_SK', '1    ', 'iso-8859-2' ],
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
 'sq' =>    [ 'Albanian',            'Shqip',             'sq_AL', '1    ', 'iso-8859-1' ], 
 'sr' =>    [ 'Serbian Cyrillic',    'Srpska',            'sr_YU', '1    ', 'iso-8859-5',  'sp:sr' ],
+'sr@Latn' => [ 'Serbian Latin',     'Srpska',            'sr_YU', '1    ', 'iso-8859-2',  'sh:sr@Latn' ], 
+#- ss_ZA not yet done, using en_ZA locale instead
+'ss' =>    [ 'Swati',               'SiSwati',           'en_ZA', '  3  ', 'iso-8859-1', 'ss:en_ZA' ],
+'st' =>    [ 'Sotho',               'Sesotho',           'st_ZA', '  3  ', 'iso-8859-1', 'st:nso:en_ZA' ],
 'sv' =>    [ 'Swedish',             'Svenska',           'sv_SE', '1    ', 'iso-8859-1' ],
 'ta' =>    [ 'Tamil',               'ZZ Tamil',          'ta_IN', ' 2   ', 'utf_ta' ],
+'te' =>    [ 'Telugu',              'ZZ Telugu',         'te_IN', ' 2   ', 'unicode' ],
 'tg' =>    [ 'Tajik',               'Tojiki',            'tg_TJ', ' 2   ', 'utf_cyr2' ],
 'th' =>    [ 'Thai',                'ZZ Thai',           'th_TH', ' 2   ', 'tis620' ],
 'tr' =>    [ 'Turkish',             'Turkce',            'tr_TR', ' 2   ', 'iso-8859-9' ],
 #-'tt' =>  [ 'Tatar',               'Tatar',             'tt_RU', ' 2   ', 'utf_cyr2' ],
 'uk' =>    [ 'Ukrainian',           'Ukrayinska',        'uk_UA', '1    ', 'koi8-u' ],
 #-'ur' =>  [ 'Urdu',                'AA Urdu',           'ur_PK', ' 2   ', 'utf_ar' ],  
-'uz' =>    [ 'Uzbek',               'Ozbekcha',          'uz_UZ', ' 2   ', 'unicode' ],
+'uz' =>    [ 'Uzbek (latin)',       'Ozbekcha',          'uz_UZ', ' 2   ', 'unicode' ],
+'uz@Cyrl' => [ 'Uzbek (cyrillic)',  'Ozbekcha',          'uz_UZ', ' 2   ', 'unicode', 'uz@Cyrl:uz' ],
+#- ve_ZA not yet done, using en_ZA locale instead
+'ve' =>    [ 'Venda',               'Venda',             'en_ZA', '  3  ', 'iso-8859-1', 've:ven:en_ZA' ],
 'vi' =>    [ 'Vietnamese',          'Tieng Viet',        'vi_VN', ' 2   ', 'utf_vi' ],
 'wa' =>    [ 'Walon',               'Walon',             'wa_BE', '1    ', 'iso-8859-15', 'wa:fr_BE:fr' ],
-#- Xhosa locale (xh_ZA) is not yet available, using en_ZA instead,
-#- and defining a LANGUAGE variable
-#waiting for lang-xh.png, it has kde trans.
-#-'xh' =>  [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
+'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
 #-'yi' =>  [ 'Yiddish',             'AA Yidish',         'yi_US', '1   5', 'utf_he' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
+'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
 );
 sub l2name           { exists $langs{$_[0]} && $langs{$_[0]}[0] }
 sub l2transliterated { exists $langs{$_[0]} && $langs{$_[0]}[1] }
@@ -549,11 +564,13 @@ my %charsets = (
 "utf_am"      => [ "Agafari-16",     undef,   undef,      "utf8",    undef ],
 "utf_ar"      => [ "iso06.f16",      undef,   undef,      "utf8",    undef ],
 "utf_az"      => [ "tiso09e",        undef,   undef,      "utf8",    undef ],
+"utf_bn"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_cyr1"    => [ "UniCyr_8x16",    undef,   undef,      "utf8",    undef ],
 "utf_cyr2"    => [ "koi8-k",         undef,   undef,      "utf8",    undef ],
 "utf_he"      => [ "iso08.f16",      undef,   undef,      "utf8",    undef ],
 "utf_hy"      => [ "arm8",           undef,   undef,      "utf8",    undef ],
 "utf_ka"      => [ "t_geors",        undef,   undef,      "utf8",    undef ],
+"utf_kn"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_lo"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_ta"      => [ "tamil",          undef,   undef,      "utf8",    undef ],
 "utf_vi"      => [ "tcvn8x16",       undef,   undef,      "utf8",    undef ],
@@ -608,9 +625,11 @@ sub get_kde_lang {
     my $valid_lang = sub {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
-        my %fixlangs = (en => 'C', en_US => 'C', no => 'nb', sh => 'sr',
+        my %fixlangs = (en => 'C', en_US => 'C',
+                        'sr@Latn' => 'sr',
                         st => 'nso', ve => 'ven',
-                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
+                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5',
+                        zh_HK => 'zh_TW', zh_SG => 'zh_CN');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
@@ -658,14 +677,16 @@ my %charset2kde_font = (
   'Big5' => [ "Ar Pl Mingti2l Big5,13" ],
   'tis620' => [ "Norasi,16", "Norasi,15" ],
   'utf_ar' => [ "Kacs_qr,13", "Courier New,13", "Kacs_qr,12" ], 
+  'utf_am' => [ "GF Zemen Unicode,15" ],
   'utf_az' => [ "Nimbus Sans,12", "Nimbus Mono,10", "Nimbus Sans,11" ],
+  'utf_bn' => [ "Mukti,14", ],
+  'utf_he' => [ "Nachlieli,13", , "Miriam Mono,10", "Nachlieli,11" ],
   'utf_hy' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
+  'utf_kn' => [ "Sampige,14", ],
   'utf_ta' => [ "Tscu_paranar,14", "Tsc_avarangalfxd,10", "Tscu_paranar,12", ],
   #- the following should be changed to better defaults when better fonts
   #- get available
   'utf_vi' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
-  'utf_am' => [ "clearlyu,15" ],
-  'utf_he' => [ "clearlyu,15" ],
   'utf_ka' => [ "clearlyu,15" ],
   'utf_lo' => [ "clearlyu,15" ],
   'default' => [ "Nimbus Sans,12", "Nimbus Mono,10", "Nimbus Sans,11" ],
