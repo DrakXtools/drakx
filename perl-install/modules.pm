@@ -640,13 +640,13 @@ sub load_thiskind {
 
     my @try_modules = (
       if_($type =~ /scsi/,
-	  'imm', 'ppa',
+      if_(arch() !~ /ppc/, 'imm', 'ppa'),
 	  if_(detect_devices::usbZips(), 'usb-storage'),
       ),
       if_(arch() =~ /ppc/, 
-	  'mesh', 'mac53c94',
-	  if_($type =~ /net/, 'bmac', 'gmac', 'pmac'),
-	  if_($type =~ /sound/, 'dmasound'),
+      if_($type =~ /scsi/, 'mesh', 'mac53c94'),
+      if_($type =~ /net/, 'bmac', 'gmac', 'mace'),
+      if_($type =~ /sound/, 'dmasound'),
       ),
     );
     grep {
