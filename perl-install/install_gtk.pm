@@ -101,11 +101,11 @@ sub create_steps_window {
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
 
-    my @l = ('', '', N_("System installation"));
+    my @l = ('', '', N("System installation"));
     my $s;
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
 	if ($_ eq 'setRootPassword') {
-	    push @l, $s, N_("System configuration");
+	    push @l, $s, N("System configuration");
 	    $s = '';
 	}
 	$s .= ($o->{steps}{$_}{done} ? '+' : '-') . ' ' . translate($o->{steps}{$_}{text}) . "\n";	
