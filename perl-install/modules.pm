@@ -366,7 +366,7 @@ sub name2file {
 sub when_load {
     my ($name, @options) = @_;
 
-    if ($name =~ /usb-[uo]hci/) {
+    if ($name =~ /[uo]hci/) {
         -f '/proc/bus/usb/devices' or eval {
             require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
