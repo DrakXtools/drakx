@@ -622,7 +622,7 @@ sub suggest_mount_points {
 	    );
 
     foreach my $part (@parts) {
-	$part->{mntpoint} and next; #- if already found via an fstab
+	$part->{mntpoint} && !$part->{unsafeMntpoint} and next; #- if already found via an fstab
 
 	my $handle = any::inspect($part, $prefix) or return;
 	my $d = $handle->{dir};
@@ -631,7 +631,7 @@ sub suggest_mount_points {
 	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) ? '/home' : ''; 
 
 	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
-	$part->{mntpoint} = $mnt;
+	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
 	fs::get_mntpoints_from_fstab(\@parts, $d, $uniq) if $mnt eq '/';
@@ -695,14 +695,14 @@ sub getHds {
     } else {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
-	    $_->{mntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
+	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
 	}
     }
 
     my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
     if (@sunos) {
 	my $v = '';
-	map { $_->{mntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
+	map { $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;
     }
     #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
 

@@ -1110,21 +1110,24 @@ Would you like X to start when you reboot?"), 1);
 	    my %l; @l{@etc_pass_fields} = split ':';
 	    $l{uid} > 500, $l{name};
 	} cat_("$o->{prefix}/etc/passwd");
-	my $cmd = $prefix ? "chroot $prefix" : "";
-	my @wm = map { lc } (split (' ', `$cmd /usr/sbin/chksession -l`));
-	my $flag='no';
-	unless (exists $o->{miscellaneous}{autologuser} || $::auto || !@users || $o->{authentication}{NIS}) {
+
+	unless ($::auto || !@users || $o->{authentication}{NIS}) {
+	    my $cmd = $prefix ? "chroot $prefix" : "";
+	    my @wm = map { lc } (split (' ', `$cmd /usr/sbin/chksession -l`));
+
+	    my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
+	    $o->{autologin} ||= $l{USER};
+
 	    $in->ask_from_entries_refH(_("Autologin"),
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-				       [ _("Choose the default user:") => { val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1},
-					 _("Choose the window_manager to run:") => { val => \$o->{miscellaneous}{autologwm}, list => \@wm, not_edit => 1}, ])
-	      ? do { $flag='yes';
-		     $::isStandalone ? system("urpmi --auto autologin") : $o->pkg_install("autologin");
-		 } : delete $o->{miscellaneaous}{autologuser};
+				       [ _("Choose the default user:") => { val => \$o->{autologin}, list => \@users },
+					 _("Choose the window_manager to run:") => { val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
 	}
-	any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, $o->{miscellaneous}{autologwm}, "/usr/X11R6/bin/startx", $flag);
-
+	if ($o->{autologin}) {
+	    $::isStandalone ? system("urpmi --auto autologin") : $o->pkg_install("autologin");
+	    any::setAutologin($prefix, $o->{autologin}, $o->{desktop});
+	}
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }

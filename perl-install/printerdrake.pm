@@ -274,8 +274,8 @@ _("Eject page after job?") => { val => \$printer->{AUTOSENDEOF}, type => 'bool' 
 _("Resolution") => { val => \$printer->{RESOLUTION}, type => 'list', not_edit => !$::expert, list => \@res } ) : (),
 @list_col > 1 ? (
 $is_uniprint ? (
-_("Uniprint driver options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', not_edit => 1, list => \@col } ) : (
-_("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', not_edit => 1, list => \@col } ), ) : (),
+_("Uniprint driver options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col } ) : (
+_("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col } ), ) : (),
 $db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT' && $db_entry{GSDRIVER} ne 'ppa' ? (
 _("Print text as PostScript?") => { val => \$printer->{ASCII_TO_PS}, type => 'bool' }, ) : (),
 #+_("Reverse page order") => { val => \$printer->{REVERSE_ORDER}, type => 'bool' },
@@ -388,7 +388,7 @@ how is the printer connected?"), [
 _("Name of printer") => { val => \$printer->{QUEUE} },
 _("Description") => { val => \$printer->{Info} },
 _("Location") => { val => \$printer->{Location} },
-_("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ printer::printer_type($printer) ] },
+_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
 				  ],
 					       ) or printer::remove_queue($printer), $continue = 1, last;
 		} else {
@@ -398,7 +398,7 @@ name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue and how is the printer connected?"), [
 _("Name of queue") => { val => \$printer->{QUEUE} },
 _("Spool directory") => { val => \$printer->{SPOOLDIR} },
-_("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ printer::printer_type($printer) ] },
+_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
 										      ],
 					   changed => sub {
 					       $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];

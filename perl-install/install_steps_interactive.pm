@@ -801,7 +801,7 @@ sub miscellaneous {
     !$::beginner || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
-_("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
+_("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
 _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
 arch() !~ /^sparc/ ? (
 _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' }, ) : (),

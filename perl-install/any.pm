@@ -122,7 +122,7 @@ sub setupBootloader {
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
 	my @l = (
 arch() =~ /sparc/ ? (
-_("Bootloader installation") => { val => \$silo_install_lang, list => \@silo_install_lang, not_edit => 1 },
+_("Bootloader installation") => { val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },
 _("LBA (doesn't work on old BIOSes)") => { val => \$b->{lba32}, type => "bool", text => "lba" },
@@ -236,19 +236,9 @@ _("Default") => { val => \$default, type => 'bool' },
 }
 
 sub setAutologin {
-  my ($prefix, $user, $wm, $exe, $flag) = @_; 
-  my $f = "$prefix/etc/sysconfig/autologin";
-  my $t1 = "USER=";
-  my $t2 = "EXEC=";
-  my $t3 = "AUTOLOGIN=";
-  $wm=uc($wm);
-  substInFile { s/^(\Q$t1\E|\Q$t2\E|\Q$t3\E).*\n//; $_ .= "$t1$user\n$t2$exe\n$t3=$flag" if eof } $f;
-  `chmod 644 $f`;
-  local *F;
-  open F, ">$prefix/etc/sysconfig/desktop" or die "Can't open $!";
-  print F <<END;
-$wm
-END
+  my ($prefix, $user) = @_; 
+  setVarsInSh("$prefix/etc/sysconfig/autologin", 
+	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
 }
 
 
