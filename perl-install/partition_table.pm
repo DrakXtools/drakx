@@ -168,7 +168,7 @@ sub read($;$) {
 
     $hd->{primary} = $pt;
     $hd->{extended} = undef;
-    $clearall and return $hd->{isDirty} = 1;
+    $clearall and return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 
     my @l = (@{$pt->{normal}}, $pt->{extended});
     foreach my $i (@l) { foreach (@l) {
@@ -226,8 +226,11 @@ sub write($) {
     $hd->{isDirty} = 0;
 
     # now sync disk and re-read the partition table 
-    sync();
-    partition_table_raw::kernel_read($hd);
+    if ($hd->{needKernelReread}) {
+	sync();
+	partition_table_raw::kernel_read($hd);
+	$hd->{needKernelReread} = 0;
+    }
 }
 
 sub active($$) {
@@ -249,7 +252,7 @@ sub remove($$) {
 	    splice(@{$hd->{primary}->{normal}}, $i, 1);
 	    %$_ = ();
 
-	    return $hd->{isDirty} = 1;
+	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$i++;
     }
@@ -260,7 +263,7 @@ sub remove($$) {
 	    %{$last->{extended}} = $_->{extended} ? %{$_->{extended}} : ();
 	    splice(@{$hd->{extended}}, $i, 1);
 	    
-	    return $hd->{isDirty} = 1;
+	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$last = $_;
 	$i++;
@@ -276,7 +279,7 @@ sub add($$) {
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
-    $hd->{isDirty} = 1;
+    $hd->{isDirty} = $hd->{needKernelReread} = 1;
     adjustStartAndEnd($hd, $part);
 
     if (is_empty_array_ref($hd->{primary}->{normal})) {

@@ -84,7 +84,7 @@ my @serverPartitioning = (
 );
 
 my $default = {
-#    display => "192.168.1.8:0",
+#    display => "jaba:1",
     user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
     rootPassword => 'toto',
     lang => 'us',
@@ -94,13 +94,14 @@ my $default = {
     mkbootdisk => 0,
     comps => [ qw() ],
     packages => [ qw() ],
-    partitionning => { clearall => 1, eraseBadPartitions => 1, autoformat => 1 },
+    partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
 		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 	     ],
+    shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash) ],
 };
 $o = { default => $default };
 
@@ -112,6 +113,8 @@ sub selectPath {
 
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass;
+
+    $testing and $o->{default}->{partitionning}->{clearall} = 1;
 
     if ($o->{installClass} eq 'Server') {
 	#TODO
@@ -138,7 +141,12 @@ sub partitionDisks {
 
 	unless ($testing) {
 	    # Write partitions to disk 
-	    foreach (@{$o->{hds}}) { partition_table::write($_); }
+	    my $need_reboot = 0;
+	    foreach (@{$o->{hds}}) { 
+		eval { partition_table::write($_); };
+		$need_reboot ||= $@;
+	    }
+	    $need_reboot and $o->rebootNeeded;
 	}
     }
 
@@ -164,6 +172,12 @@ sub findInstallFiles {
  
 sub choosePackages { 
     $o->choosePackages($o->{packages}, $o->{comps}); 
+
+    $o->{comps}->{Base}->{selected} = 1;
+
+    foreach (grep { $_->{selected} } values %{$o->{comps}}) {
+	foreach (@{$_->{packages}}) { $_->{selected} = 1 }
+    }
     smp::detect() and $o->{packages}->{"kernel-smp"}->{selected} = 1;
 }
 

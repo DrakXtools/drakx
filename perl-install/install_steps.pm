@@ -46,6 +46,12 @@ sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
     fsedit::auto_allocate($hds, $o->{default}->{partitions});
 }
+sub rebootNeeded($) {
+    my ($o) = @_;
+    log::l("Rebooting...");
+    exit(0);
+}
+
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
@@ -58,10 +64,7 @@ sub choosePartitionsToFormat($$) {
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
 
-    foreach ('Base', @{$o->{default}->{comps}}) {
-	$comps->{$_}->{selected} = 1;
-	foreach (@{$comps->{$_}->{packages}}) { $_->{selected} = 1; }
-    }
+    foreach (@{$o->{default}->{comps}}) { $comps->{$_}->{selected} = 1; }
     foreach (@{$o->{default}->{packages}}) { $packages->{$_}->{selected} = 1; }
 }
 
