@@ -1,3 +1,40 @@
+2001/04/04  daouda
+
+	* share/rpmsrate: add gatos for ati tv card .
+
+2001/04/04  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: added SCANNER and PHOTO groups
+
+2001/04/04  François Pons  <fpons@mandrakesoft.com>
+
+	* live_install: unset locale environment for safety
+
+	* detect_devices.pm: added missing LD_LOADER reference for /bin/dmesg
+	(needed for live upgrade so
+	that error message are not printed)
+
+	* diskdrake.pm: fixed adding 1 to size for resize2fs, causing a corruption
+	some times.
+
+	* install_steps_gtk.pm: fixed to use SHARE_PATH instead of /usr/share
+
+	* any.pm, netconnect.pm: use SHARE_PATH instead of /usr/share
+
+	* install2.pm: added selectPackagesToUpgrade the first time choosePackages
+	is called.
+
+	* install_any.pm: fixed multiple wait message (looking+finding packages)
+
+2001/04/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (setPackages): better handling for tv, photo and scanner
+
+	* modules.pm (@skip_modules_on_stage1): kaweth and pegasus doesn't work on
+	stage1, so skip them
+	  - add photo, tv and scanner
+	  - add pegasus and kaweth modules
+
 2001/04/04  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: typo
