@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script remove_initscript write_secret_backend start_interface stop_interface);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected remove_initscript write_secret_backend start_interface stop_interface);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -19,15 +19,6 @@ sub set_cnx_script {
     my ($netc, $type, $up, $down, $type2) = @_;
     $netc->{internet_cnx}{$type}{$_->[0]} = $_->[1] foreach [$connect_file, $up], [$disconnect_file, $down];
     $netc->{internet_cnx}{$type}{type} = $type2;
-}
-sub write_cnx_script {
-    my ($netc) = @_;
-    foreach ($connect_file, $disconnect_file) {
-        output_with_perm("$::prefix$_", 0755,
-                         '#!/bin/bash
-' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
-') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
-    }
 }
 
 sub write_secret_backend {
@@ -167,6 +158,7 @@ sub check_link_beat() {
                             $p = Net::Ping->new("icmp");
                         }
                         print $p->ping("www.mandrakesoft.com") ? 1 : 0;
+                        0;
                     });
 }
 
