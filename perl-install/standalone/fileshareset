@@ -1,0 +1,207 @@
+#!/usr/bin/perl -T
+use strict;
+
+my $uid = $<;
+my $username = getpwuid($uid);
+
+my $authorisation_file = '/etc/security/fileshare.conf';
+my $authorisation_group = 'fileshare';
+my $usage =
+"usage: fileshareset --add <dir>
+       fileshareset --remove <dir>";
+my $non_authorised =
+qq(You are not authorised to use fileshare'ing
+To grant you the rights, either:
+- put "RESTRICT=no" in $authorisation_file
+- put user "$username" in group "$authorisation_group");
+
+
+my %exit_codes = reverse (
+  1 => $non_authorised,
+  2 => $usage,
+
+# when adding
+  3 => "already exported", 
+  4 => "invalid mount point",
+
+# when removing
+  5 => "not exported",
+
+  255 => "various",
+);
+
+%ENV = ();
+authorisation::check();
+
+my $nfs_exports = nfs_exports::read();
+
+if ($0 =~ /fileshareset/) {
+    my ($cmd, $dir) = @ARGV;
+    $< = $>;
+    @ARGV == 2 && ($cmd eq '--add' || $cmd eq '--remove') or error($usage);
+
+    verify_mntpoint($dir);
+
+    if ($cmd eq '--add') {
+	nfs_exports::add($nfs_exports, $dir);
+    } else {
+	nfs_exports::remove($nfs_exports, $dir);
+    }
+    nfs_exports::write($nfs_exports);
+    nfs_exports::update_server();
+}
+
+print "$_->{mntpoint}\n" foreach grep { own($_->{mntpoint}) } @$nfs_exports;
+
+
+sub own { (stat($_[0]))[4] == $uid }
+
+sub verify_mntpoint {
+    local ($_) = @_;
+    my $ok = 1;
+    $ok &&= m|^/|;
+    $ok &&= !m|/../|;
+    $ok &&= !m|[\0\n\r]|;
+    $ok &&= -d $_;
+    $ok &&= own($_);
+    $ok or error("invalid mount point");
+}
+
+
+sub error {
+    my ($string) = @_;
+    print STDERR "$string\n";
+    exit($exit_codes{$string} || 255);
+}
+sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
+
+
+################################################################################
+package authorisation;
+
+sub read_conf {
+    local *F;
+    open F, $authorisation_file; # don't care if it's missing
+    my %conf;
+    foreach (<F>) {
+	s/#.*//; # remove comments
+	s/^\s+//; 
+	s/\s+$//;
+	/^$/ and next;
+	my ($cmd, $value) = split('=', $_, 2);
+	$conf{$cmd} = $value || warn qq(suspicious line "$_" in $authorisation_file\n);
+    }
+    \%conf
+}
+
+sub check {
+    my $conf = read_conf();
+
+    if (lc($conf->{RESTRICT}) eq 'no') {
+	# ok, access granted for everybody
+    } else {
+	my @l;
+	while (@l = getgrent) {
+	    last if $l[0] eq $authorisation_group;
+	}
+	::member($username, split(',', $l[3])) or ::error($non_authorised);
+    }
+}
+
+################################################################################
+package nfs_exports;
+
+sub read {
+    my $file = '/etc/exports';
+    open F, $file or return [];
+
+    my ($prev_raw, $prev_line, %e, @l);
+    my $line_nb = 0;
+    foreach my $raw (<F>) {
+	$line_nb++;
+	local $_ = $raw;
+	$raw .= "\n" if !/\n/;
+
+	s/#.*//; # remove comments
+
+	s/^\s+//; 
+	s/\s+$//; # remove unuseful spaces to help regexps
+
+	if (/^$/) {
+	    # blank lines ignored
+	    $prev_raw .= $raw;
+	    next;
+	}
+
+	if (/\\$/) {
+	    # line continue across lines
+	    chop; # remove the backslash
+	    $prev_line .= "$_ ";
+	    $prev_raw .= $raw;
+	    next;
+	}
+	my $line = $prev_line . $_;
+	my $raw_line = $prev_raw . $raw;
+	($prev_line, $prev_raw) = ('', '');
+
+	my ($mntpoint, $options) = $line =~ /("[^"]*"|\S+)\s+(.*)/ or die "$file:$line_nb: bad line $line\n";
+
+	# You can also specify spaces or any other unusual characters in the
+	# export path name using a backslash followed by the character code as
+	# 3 octal digits.
+	$mntpoint =~ s/\\(\d{3})/chr(oct $1)/ge;
+
+	# not accepting weird characters that would break the output
+	$mntpoint =~ m/[\0\n\r]/ and die "i won't handle this";
+	push @l, { mntpoint => $mntpoint, option => $options, raw => $raw_line };
+    }
+    \@l;
+}
+
+sub find {
+    my ($nfs_exports, $mntpoint) = @_;
+    foreach (@$nfs_exports) {
+	$_->{mntpoint} eq $mntpoint and return $_;
+    }
+    undef;
+}
+
+sub add {
+    my ($nfs_exports, $mntpoint) = @_;
+    foreach (@$nfs_exports) {
+	$_->{mntpoint} eq $mntpoint and ::error("already exported");
+    }
+    push @$nfs_exports, { mntpoint => $mntpoint, options => '*(ro,all_squash)' };
+}
+
+sub remove {
+    my ($nfs_exports, $mntpoint) = @_;
+    my @l = grep { $_->{mntpoint} ne $mntpoint } @$nfs_exports;
+    @l < @$nfs_exports or ::error("not exported");
+    @$nfs_exports = @l;  
+}
+
+sub write {
+    my ($nfs_exports) = @_;
+    foreach (@$nfs_exports) {
+	if (!exists $_->{raw}) {
+	    my $mntpoint = $_->{mntpoint} =~ /\s/ ? qq("$_->{mntpoint}") : $_->{mntpoint};
+	    $_->{raw} = sprintf("%s %s\n", $mntpoint, $_->{options});
+	}
+    }
+    local *F;
+    open F, ">/etc/exports" or die "can't write /etc/exports";
+    print F $_->{raw} foreach @$nfs_exports;
+}
+
+sub update_server {
+    if (fork) {
+	system('/usr/sbin/exportfs', '-r');
+	if (system('/sbin/pidof rpc.mountd >/dev/null') != 0 ||
+	    system('/sbin/pidof nfsd >/dev/null') != 0) {
+	    # trying to start the server...
+	    system('/etc/init.d/nfs', $_) foreach 'stop', 'start';
+	}
+	exit 0;
+    }
+}
