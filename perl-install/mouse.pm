@@ -303,7 +303,7 @@ sub detect() {
 
     #- at this level, not all possible mice are detected so avoid invoking serial_probe
     #- which takes a while for its probe.
-    if ($::isStandalone) {
+    if ($::isStandalone || $::move) {
 	my $mouse = $fast_mouse_probe->();
 	$mouse and return { wacom => \@wacom, %$mouse };
     }
@@ -313,7 +313,7 @@ sub detect() {
     my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
     $r and return { wacom => \@wacom, %$r };
 
-    if (!$::isStandalone) {
+    if (!$::isStandalone && !$::move) {
 	my $mouse = $fast_mouse_probe->();
 	$mouse and return { wacom => \@wacom, %$mouse };
     }
