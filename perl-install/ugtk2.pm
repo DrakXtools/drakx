@@ -1451,6 +1451,7 @@ use common;
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
     my ($w, @strs) = @_;
+    $w->get_model->clear;
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
     $w->append_text($_) foreach @strs;
