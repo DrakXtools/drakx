@@ -111,22 +111,19 @@ $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
 my $button_new = Gtk2::Button->new(N("New profile..."));
 $button_new->signal_connect(clicked => sub {
 				my $dialog = _create_dialog("New profile...");
-				$dialog->vbox->pack_start(Gtk2::Label->new(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),1,1,0);
 				my $entry_dialog = Gtk2::Entry->new;
-				$dialog->vbox->pack_start($entry_dialog,1,1,0);
-				my $bbox_dialog = Gtk2::HButtonBox->new;
-				$dialog->action_area->add($bbox_dialog);
-				$bbox_dialog->set_layout('end');
-				my $button_ok = Gtk2::Button->new(N("Ok"));
-				$button_ok->signal_connect(clicked => sub {
-							       network::netconnect::add_profile($netcnx, $entry_dialog->get_text);
-							       $netcnx->{PROFILE} = $entry_dialog->get_text;
-							       Gtk2->main_quit;
-							   });
-				$bbox_dialog->add($button_ok);
-				my $button_cancel = Gtk2::Button->new(N("Cancel"));
-				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit });
-				$bbox_dialog->add($button_cancel);
+				gtkpack($dialog->vbox,
+                            Gtk2::Label->new(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),
+                            $entry_dialog,
+                           );
+				gtkpack($dialog->action_area,
+                            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                                  network::netconnect::add_profile($netcnx, $entry_dialog->get_text);
+                                                  $netcnx->{PROFILE} = $entry_dialog->get_text;
+                                                  Gtk2->main_quit;
+                                              }),
+                            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { Gtk2->main_quit }),
+                            );
 				$dialog->show_all;
 				$dialog->run;
 				$dialog->destroy;
@@ -405,11 +402,13 @@ sub configure_hostname() {
     my $window = _create_dialog(N("Hostname configuration"), { small => 1 });
     
     $window->set_border_width(10);
-    $window->vbox->pack_start(Gtk2::Label->new(N("Hostname configuration")), 1, 1, 0);
-    $window->vbox->pack_start(my $hbox = Gtk2::HBox->new(0,0), 1, 0, 0);
-    $hbox->set_border_width(10);
-    $hbox->pack_start(Gtk2::Label->new(N("Hostname")), 0, 1, 0);
-    $hbox->pack_start(my $entry = Gtk2::Entry->new_with_text($netc->{HOSTNAME}), 0, 1, 0);
+    gtkpack($window->vbox,
+            Gtk2::Label->new(N("Hostname configuration")),
+            gtkpack(gtkset_border_width(Gtk2::HBox->new(0, 0), 10),
+                    Gtk2::Label->new(N("Hostname")),
+                    my $entry = Gtk2::Entry->new_with_text($netc->{HOSTNAME}),
+                   ),
+            );
     gtkpack($window->action_area,
             gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                               clicked => sub { $window->destroy; Gtk2->main_quit }),
@@ -437,13 +436,12 @@ sub configure_lan() {
     my @card_tab;
 
     if (@all_cards < 1) {
-	$window->vbox->pack_start(Gtk2::Label->new(N("You don't have any configured interface.
-Configure them first by clicking on 'Configure'")),1,1,0);
-	$window->action_area->add(gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
-                                         gtksignal_connect(Gtk2::Button->new(N("Ok")),
-                                                           clicked => sub { Gtk2->main_quit })
-                                         )
-                                  );
+	$window->vbox->add(Gtk2::Label->new(N("You don't have any configured interface.
+Configure them first by clicking on 'Configure'")));
+	gtkpack(gtkset_layout($window->action_area, 'end'),
+             gtksignal_connect(Gtk2::Button->new(N("Ok")),
+                               clicked => sub { Gtk2->main_quit })
+            );
 	$window->show_all;
 	$window->run;
 	$window->destroy;
@@ -451,13 +449,11 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     }
 
     $window->set_border_width(10);
-    $window->vbox->pack_start(my $vbox0 = Gtk2::VBox->new(0,0),
-                              1, 1, 0,
-                             );
-
-    $vbox0->pack_start(Gtk2::Label->new(N("LAN Configuration")),0,1,0);
-    my $notebook = Gtk2::Notebook->new;
-    $vbox0->pack_start($notebook,0,1,0);
+    gtkpack($window->vbox,
+            Gtk2::Label->new(N("LAN Configuration")),
+            my $notebook = Gtk2::Notebook->new,
+            my $bbox8 = Gtk2::HButtonBox->new,
+           );
 
     foreach (0..$#all_cards) {
 	my @infos;
@@ -522,41 +518,36 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	#	$list->set_selectable($_, 0);
 	$notebook->append_page($vbox_local, Gtk2::Label->new($interface));
     }
-    my $bbox8 = Gtk2::HButtonBox->new;
-    $vbox0->pack_start($bbox8,0,0,10);
     $bbox8->set_layout('end');
 
-    my $button_ok = Gtk2::Button->new(N("Ok"));
     my $exit_dialogsub = sub {
         sensitive_buttons(1);
         $window->destroy;
         Gtk2->main_quit;
     };
-    $button_ok->signal_connect(clicked => sub {
-				   foreach (0..$#all_cards) {
-				       my @infos = @{$card_tab[2*$_]};
-				       each_index { ${$_->[1]} = $infos[2*$::i+1]->get_text } @{$card_tab[2*$_+1]};
-				       my $interface = $all_cards[$_][0];
-				       if ($intf->{$interface}{BOOTPROTO} ne "static") {
-                           delete @{$intf->{$interface}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
-				       } else {
-					   if ($infos[1]->get_text ne "No ip") {
-					       $intf->{$interface}{IPADDR}  = $infos[1]->get_text;
-					       $intf->{$interface}{NETMASK} = $infos[3]->get_text;
-					   }
-				       }
-                       }
-				   update();
-				   $button_apply->set_sensitive(1);
-                       $exit_dialogsub->();
-			       });
-    $window->action_area->pack_start(gtkpack(Gtk2::HButtonBox->new,
-                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                                                               clicked => $exit_dialogsub),
-                                             $button_ok,
-                                            ),
-                                     1, 1, 0,
-				    );
+
+    gtkpack($window->action_area,
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")),
+                              clicked => $exit_dialogsub),
+            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                  foreach (0..$#all_cards) {
+                                      my @infos = @{$card_tab[2*$_]};
+                                      each_index { ${$_->[1]} = $infos[2*$::i+1]->get_text } @{$card_tab[2*$_+1]};
+                                      my $interface = $all_cards[$_][0];
+                                      if ($intf->{$interface}{BOOTPROTO} ne "static") {
+                                          delete @{$intf->{$interface}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
+                                      } else {
+                                          if ($infos[1]->get_text ne "No ip") {
+                                              $intf->{$interface}{IPADDR}  = $infos[1]->get_text;
+                                              $intf->{$interface}{NETMASK} = $infos[3]->get_text;
+                                          }
+                                      }
+                                  }
+                                  update();
+                                  $button_apply->set_sensitive(1);
+                                  $exit_dialogsub->();
+                              }),
+          );
     
     $window->show_all;
     foreach (0..$#all_cards) {
@@ -578,14 +569,11 @@ sub configure_net {
     };
     if (!$netcnx->{type}) {
 	$dialog = _create_dialog(N("LAN configuration"));
-	$dialog->vbox->pack_start(Gtk2::Label->new(N("You don't have an Internet connection.
-Create one first by clicking on 'Configure'")),1,1,0);
-	my $bbox_dialog = Gtk2::HButtonBox->new;
-	$dialog->action_area->add($bbox_dialog);
-	$bbox_dialog->set_layout('end');
-	my $button_ok = Gtk2::Button->new(N("Ok"));
-	$button_ok->signal_connect(clicked => $exit_dialogsub);
-	$bbox_dialog->add($button_ok);
+	$dialog->vbox->add(Gtk2::Label->new(N("You don't have an Internet connection.
+Create one first by clicking on 'Configure'")));
+	gtkpack($dialog->action_area,
+             gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => $exit_dialogsub),
+            );
 	$dialog->show_all;
 	$dialog->run;
 	$dialog->destroy;
