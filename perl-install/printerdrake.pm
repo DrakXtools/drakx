@@ -169,6 +169,84 @@ sub auto_detect {
     @res;
 }
 
+sub first_time_dialog {
+    my ($printer, $in, $upNetwork) = @_;
+    return 1 if (printer::get_default_spooler () or $::isInstall);
+
+    # Wait message
+    my $w = $in->wait_message(_("Printerdrake"), 
+			      _("Checking your system..."));
+
+    # Auto-detect local printers
+    my @autodetected = auto_detect (1, 0, 0);
+    my @printerlist;
+    my $localprinterspresent;
+    if (@autodetected == ()) {
+	$localprinterspresent = 0;
+	push (@printerlist, _("There are no printers found which are directly connected to your machine"));
+    } else {
+	$localprinterspresent = 1;
+	for my $printer (@autodetected) {
+	    my $entry = $printer->{val}{DESCRIPTION};
+	    if ($entry) {push (@printerlist, "  -  $entry\n");}
+	}
+	my $morethanoneprinters = ($#printerlist > 0);
+	my $unknown_printers = $#autodetected - $#printerlist;
+	if (@printerlist != ()) {
+	    unshift (@printerlist, 
+		     ($morethanoneprinters ?
+		      _("The following printers\n\n") :
+		      _("The following printer\n\n")));
+	    if ($unknown_printers == 1) {
+		push (@printerlist, _("\nand one unknown printer are "));
+	    } elsif ($unknown_printers > 1) {
+		push (@printerlist, _("\nand %d unknown printers are ",
+				      $unknown_printers));
+	    } else {
+		push (@printerlist, ($morethanoneprinters ? 
+				     _("\nare ") :
+				     _("\nis ")));
+	    }
+	    push (@printerlist, _("directly connected to your system"));
+	} else {
+	    if ($unknown_printers == 1) {
+		push (@printerlist, _("\nThere is one unknown printer directly connected to your system"));
+	    } elsif ($unknown_printers > 1) {
+		push (@printerlist, _("\nThere are %d unknown printers directly connected to your system",
+				      $unknown_printers));
+	    }
+	}
+    }
+    push (@printerlist,
+	  _(" (Make sure that all your printers are connected and turned on).\n"));
+    my $localprinters = join('', @printerlist);
+
+    # Do we have a local network?
+
+    # If networking is configured, start it, but don't ask the user to
+    # configure networking.
+    my $havelocalnetworks = 
+	 (check_network($printer, $in, $upNetwork, 1) && 
+	  (printer::getIPsInLocalNetworks() != ()));
+
+    # Finish building the dialog text
+    my $question = ($havelocalnetworks ?
+		    ($localprinterspresent ?
+		     _("Do you want to enable printing on the printers mentioned above or on printers in the local network?\n") :
+		     _("Do you want to enable printing on printers in the local network?\n")) :
+		    ($localprinterspresent ?
+		     _("Do you want to enable printing on the printers mentioned above?\n") :
+		     _("Are you sure that you want to set up printing on this machine?\n")));
+    my $warning = _("NOTE: Depending on the printer model and the printing system up to 80 MB of additional software will be installed.");
+    my $dialogtext = "$localprinters\n$question\n$warning";
+
+    # Close wait message
+    undef $w;
+
+    # Show dialog
+    $in->ask_yesorno(_("Printerdrake"), $dialogtext, 0);
+}
+
 sub wizard_welcome {
     my ($printer, $in, $upNetwork) = @_;
     my $ret;
@@ -1237,12 +1315,14 @@ sub setup_common {
 		(!printer::files_exist((qw(/usr/sbin/ptal-mlcd
 					   /usr/sbin/ptal-init
 					   /usr/bin/xojpanel))))) {
-		my $w = $in->wait_message('', _("Installing HPOJ package..."));
+		my $w = $in->wait_message(_("Printerdrake"),
+					  _("Installing HPOJ package..."));
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
 	    my $w = $in->wait_message
-		('', _("Checking device and configuring HPOJ..."));
+		(_("Printerdrake"),
+		 _("Checking device and configuring HPOJ..."));
 	    $ptaldevice = printer::configure_hpoj($device, @autodetected);
 	    
 	    if ($ptaldevice) {
@@ -1261,7 +1341,8 @@ sub setup_common {
 						 '/usr/bin/xsane-gimp' : 
 						 ()))))) {
 			my $w = $in->wait_message
-			    ('', _("Installing SANE packages..."));
+			    (_("Printerdrake"),
+			     _("Installing SANE packages..."));
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
 					      'xsane', 'libsane-hpoj0',
@@ -1283,7 +1364,8 @@ sub setup_common {
 						  /usr/bin/MToolsFM
 						  )))) {
 			my $w = $in->wait_message
-			    ('', _("Installing mtools packages..."));
+			    (_("Printerdrake"),
+			     _("Installing mtools packages..."));
 			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
 		    # Configure mtools/MToolsFM for photo card access
@@ -1333,7 +1415,8 @@ sub setup_common {
 	($device !~ /^http:/) &&
 	($device !~ /^ipp:/)) {
 	my $w = $in->wait_message
-	    ('', _("Making printer port available for CUPS..."));
+	    ('_("Printerdrake")',
+	     _("Making printer port available for CUPS..."));
 	if ($ptaldevice eq "") {
 	    printer::assure_device_is_available_for_cups($device);
 	} else {
@@ -1343,7 +1426,8 @@ sub setup_common {
 
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
 
@@ -1442,10 +1526,12 @@ sub get_db_entry {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
-    my $w = $in->wait_message('', _("Preparing printer database..."));
+    my $w = $in->wait_message(_("Printerdrake"),
+			      _("Preparing printer database..."));
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue}) {
 	# The queue was already configured
@@ -1562,7 +1648,8 @@ sub choose_model {
     $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
     if (!member($printer->{DBENTRY}, keys(%printer::thedb))) {
@@ -1583,7 +1670,8 @@ sub get_printer_info {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
     #if ((keys %printer::thedb) == 0) {
-    #    my $w = $in->wait_message('', _("Reading printer database..."));
+    #    my $w = $in->wait_message(_("Printerdrake"), 
+    #                              _("Reading printer database..."));
     #    printer::read_printer_db($printer->{SPOOLER});
     #}
     my $queue = $printer->{OLD_QUEUE};
@@ -2101,7 +2189,8 @@ Note: the photo test page can take a rather long time to get printed and on lase
     if ($res1 && !$res2) {
 	my @lpq_output;
 	{
-	    my $w = $in->wait_message('', _("Printing test page(s)..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+				      _("Printing test page(s)..."));
 	    
 	    $upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
 	    my $stdtestpage = "/usr/share/printer-testpages/testprint.ps";
@@ -2253,7 +2342,8 @@ _("To know about the options available for the current printer read either the l
 		 [ _("Print option list"), _("Close") ],
 		 _("Close"));
 	    if ($choice ne _("Close")) {
-		my $w = $in->wait_message('', _("Printing test page(s)..."));
+		my $w = $in->wait_message(_("Printerdrake"),
+					  _("Printing test page(s)..."));
 	        printer::print_optionlist($printer);
 	    }
 	}
@@ -2310,7 +2400,8 @@ sub copy_queues_from {
     my $oldspoolerstr;
     my $noninteractive = 0;
     {
-	my $w = $in->wait_message('', _("Reading printer data..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Reading printer data..."));
 	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
 	@oldqueues = sort(@oldqueues);
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
@@ -2382,7 +2473,7 @@ You can also type a new name or skip this printer.",
 		    },
 		      [{label => _("New printer name"),val => \$newqueue}]))) {
 		    {
-			my $w = $in->wait_message('', 
+			my $w = $in->wait_message(_("Printerdrake"), 
 			   _("Transferring %s...", $oldqueue));
 		        printer::copy_foomatic_queue($printer, $oldqueue,
 						   $oldspooler, $newqueue) and
@@ -2403,7 +2494,8 @@ You can also type a new name or skip this printer.",
             }
 	}
         if ($queuecopied) {
-	    my $w = $in->wait_message('', _("Refreshing printer data..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+                                      _("Refreshing printer data..."));
 	    printer::read_configured_queues($printer);
         }
     }
@@ -2592,7 +2684,8 @@ sub install_spooler {
 	}
 	if ($printer->{SPOOLER} eq "cups") {
 	    {
-		my $w = $in->wait_message('', _("Checking installed software..."));
+		my $w = $in->wait_message(_("Printerdrake"),
+					  _("Checking installed software..."));
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
 					       /sbin/ifconfig
@@ -2632,11 +2725,13 @@ sub install_spooler {
 	    start_spooler_on_boot($printer, $in, "cups");
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    {
-		my $w = $in->wait_message('', _("Checking installed software..."));
+		my $w = $in->wait_message(_("Printerdrake"), 
+					  _("Checking installed software..."));
 		# "lpr" conflicts with "LPRng", remove "LPRng"
 		if ((!$::testing) &&
 		    (printer::files_exist((qw(/usr/lib/filters/lpf))))) {
-		    my $w = $in->wait_message('', _("Removing LPRng..."));
+		    my $w = $in->wait_message(_("Printerdrake"),
+					      _("Removing LPRng..."));
 		    $in->do_pkgs->remove_nodeps('LPRng');
 		}
 		if ((!$::testing) &&
@@ -2669,11 +2764,13 @@ sub install_spooler {
 	    start_spooler_on_boot($printer, $in, "lpd");
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    {
-		my $w = $in->wait_message('', _("Checking installed software..."));
+		my $w = $in->wait_message(_("Printerdrake"),
+					  _("Checking installed software..."));
 		# "LPRng" conflicts with "lpr", remove "lpr"
 		if ((!$::testing) &&
 		    (printer::files_exist((qw(/usr/sbin/lpf))))) {
-		    my $w = $in->wait_message('', _("Removing LPD..."));
+		    my $w = $in->wait_message(_("Printerdrake"),
+					      _("Removing LPD..."));
 		    $in->do_pkgs->remove_nodeps('lpr');
 		}
 		if ((!$::testing) &&
@@ -2709,7 +2806,8 @@ sub install_spooler {
 	    start_spooler_on_boot($printer, $in, "lpd");
 	} elsif ($printer->{SPOOLER} eq "pdq") {
 	    {
-		my $w = $in->wait_message('', _("Checking installed software..."));
+		my $w = $in->wait_message(_("Printerdrake"),
+					  _("Checking installed software..."));
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/bin/pdq
 					       /usr/X11R6/bin/xpdq))))) {
@@ -2761,7 +2859,8 @@ sub setup_default_spooler {
 	printer::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
-	    my $w = $in->wait_message('', _("Reading printer data..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+				      _("Reading printer data..."));
 	    printer::read_configured_queues($printer);
 	}
 	# Copy queues from former spooler
@@ -2769,7 +2868,8 @@ sub setup_default_spooler {
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
 	%printer::thedb = ();
-	#my $w = $in->wait_message('', _("Reading printer database..."));
+	#my $w = $in->wait_message(_("Printerdrake"),
+	#                          _("Reading printer database..."));
 	#printer::read_printer_db($printer->{SPOOLER});
     }
     # Save spooler choice
@@ -2779,8 +2879,9 @@ sub setup_default_spooler {
 
 sub configure_queue {
     my ($printer, $in) = @_;
-    my $w = $in->wait_message('', _("Configuring printer \"%s\"...",
-				    $printer->{currentqueue}{queue}));
+    my $w = $in->wait_message(_("Printerdrake"),
+			      _("Configuring printer \"%s\"...",
+				$printer->{currentqueue}{queue}));
     $printer->{complete} = 1;
     printer::configure_queue($printer);
     $printer->{complete} = 0;
@@ -2792,7 +2893,8 @@ sub install_foomatic {
 	(!printer::files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm)
 				    )))) {
-	my $w = $in->wait_message('', _("Installing Foomatic..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic');
     }
 }
@@ -2821,7 +2923,8 @@ sub main {
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
     {
-	my $w = $in->wait_message('', _("Checking installed software..."));
+	my $w = $in->wait_message(_("Printerdrake"),
+				  _("Checking installed software..."));
 	if ((!$::testing) &&
 	    (!printer::files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
@@ -2866,7 +2969,8 @@ sub main {
 	# Get the default printer
 	if (defined($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '') &&
 	    ((!defined($printer->{DEFAULT})) || ($printer->{DEFAULT} eq ''))) {
-	    my $w = $in->wait_message('', _("Preparing PrinterDrake..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+				      _("Preparing Printerdrake..."));
 	    $printer->{DEFAULT} = printer::get_default_printer($printer);
 	    if ($printer->{DEFAULT}) {
 		# If a CUPS system has only remote printers and no default
@@ -2883,7 +2987,8 @@ sub main {
 
 	# Configure the current printer queues in applications
 	{
-	    my $w = $in->wait_message('', _("Configuring applications..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+				      _("Configuring applications..."));
 	    printer::configureapplications($printer);
 	}
 
@@ -3029,11 +3134,14 @@ sub main {
 			$::expert = !$::expert;
 			# Read printer database for the new user mode
 			%printer::thedb = ();
-			#my $w = $in->wait_message('', _("Reading printer database..."));
+			#my $w = $in->wait_message(_("Printerdrake"), 
+			#                   _("Reading printer database..."));
 		        #printer::read_printer_db($printer->{SPOOLER});
 			# Re-read printer queues to switch the tree
 			# structure between expert/normal mode.
-			my $w = $in->wait_message('', _("Reading printer data..."));
+			my $w = $in->wait_message
+			    (_("Printerdrake"), 
+			     _("Reading printer data..."));
 			printer::read_configured_queues($printer);
 			$cursorpos = "::";
 			next;
@@ -3333,7 +3441,10 @@ What do you want to modify on this printer?",
 			configure_queue($printer, $in);
 		    # Delete old queue when it was renamed
 		    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
-			my $w = $in->wait_message('', _("Removing old printer \"%s\"...", $printer->{OLD_QUEUE}));
+			my $w = $in->wait_message
+			    (_("Printerdrake"),
+			     _("Removing old printer \"%s\"...",
+			       $printer->{OLD_QUEUE}));
 		        printer::remove_queue($printer, $printer->{OLD_QUEUE});
 			# If the default printer was renamed, correct the
 			# the default printer setting of the spooler
@@ -3385,7 +3496,9 @@ What do you want to modify on this printer?",
 		    if ($in->ask_yesorno('',
            _("Do you really want to remove the printer \"%s\"?", $queue), 1)) {
 			{
-			    my $w = $in->wait_message('', _("Removing printer \"%s\"...", $queue));
+			    my $w = $in->wait_message
+				(_("Printerdrake"),
+				 _("Removing printer \"%s\"...", $queue));
 			    if (printer::remove_queue($printer, $queue)) { 
 				$editqueue = 0;
 				# Define a new default printer if we have
@@ -3437,7 +3550,8 @@ What do you want to modify on this printer?",
 	# Configure the current printer queue in applications when main menu
 	# will not be shown (During installation in "Recommended" mode)
 	if ($::isInstall && !$::expert && !$menushown && !$continue) {
-	    my $w = $in->wait_message('', _("Configuring applications..."));
+	    my $w = $in->wait_message(_("Printerdrake"),
+				      _("Configuring applications..."));
 	    printer::configureapplications($printer);
 	}
 
