@@ -685,7 +685,7 @@ sub install2::startMove {
     
     install_TrueFS_in_home($o);
 
-    my $username = $o->{users}[0]{name};
+    my $username = $o->{users}[0]{name} or die 'no user';
     output('/var/run/console.lock', $username);
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
