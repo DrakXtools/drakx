@@ -74,7 +74,29 @@ int main () {
   while (devices) {
     serialDevice = (struct serialDevice*)devices;
 
-    printf("CLASS=%s\n", classStrings[serialDevice->type]);
+    printf("CLASS=");
+    if (serialDevice->type == CLASS_UNSPEC) puts("UNSPEC"); else
+    if (serialDevice->type == CLASS_OTHER) puts("OTHER"); else
+    if (serialDevice->type == CLASS_NETWORK) puts("NETWORK"); else
+    if (serialDevice->type == CLASS_SCSI) puts("SCSI"); else
+    if (serialDevice->type == CLASS_MOUSE) puts("MOUSE"); else
+    if (serialDevice->type == CLASS_AUDIO) puts("AUDIO"); else
+    if (serialDevice->type == CLASS_CDROM) puts("CDROM"); else
+    if (serialDevice->type == CLASS_MODEM) puts("MODEM"); else
+    if (serialDevice->type == CLASS_VIDEO) puts("VIDEO"); else
+    if (serialDevice->type == CLASS_TAPE) puts("TAPE"); else
+    if (serialDevice->type == CLASS_FLOPPY) puts("FLOPPY"); else
+    if (serialDevice->type == CLASS_SCANNER) puts("SCANNER"); else
+    if (serialDevice->type == CLASS_HD) puts("HD"); else
+    if (serialDevice->type == CLASS_RAID) puts("RAID"); else
+    if (serialDevice->type == CLASS_PRINTER) puts("PRINTER"); else
+    if (serialDevice->type == CLASS_CAPTURE) puts("CAPTURE"); else
+    if (serialDevice->type == CLASS_KEYBOARD) puts("KEYBOARD"); else
+    if (serialDevice->type == CLASS_MONITOR) puts("MONITOR"); else
+    if (serialDevice->type == CLASS_USB) puts("USB"); else
+    if (serialDevice->type == CLASS_SOCKET) puts("SOCKET"); else
+    if (serialDevice->type == CLASS_FIREWIRE) puts("FIREWIRE"); else
+    if (serialDevice->type == CLASS_IDE) puts("IDE");
     printf("BUS=SERIAL\n");
     printf("DEVICE=/dev/%s\n", serialDevice->device);
     printf("DRIVER=%s\n", serialDevice->driver);
