@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use strict;
+use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -8,6 +10,8 @@ use interactive;
 use common;
 use lang;
 use any;
+
+die "Usage: drakhelp <help_path>" if @ARGV != 1;
 
 my $in = interactive->vnew;
 
