@@ -380,7 +380,9 @@ wait %d seconds for default boot.
 			   type => 'other',
 			   kernel_or_dev => "/dev/$_->{device}",
 			   label => $label . ($nbs{$label}++ ? $nbs{$label} : ''),
-			   table => "/dev/$_->{rootDevice}",
+			     if_($_->{device} =~ /[1-4]$/, 
+			   table => "/dev/$_->{rootDevice}"
+				),
 			   unsafe => 1
 			  }) if isNT($_) || isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) });
 	    }
