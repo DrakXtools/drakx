@@ -268,6 +268,7 @@ my %eide_hds = (
     "FUJITSU" => "Fujitsu",
     "HITACHI" => "Hitachi",
     "Lite-On" => "Lite-On Technology Corp.",
+    "LITE-ON" => "Lite-On Technology Corp.",
     "LTN" => "Lite-On Technology Corp.",
     "IOMEGA" => "Iomega",
     "MAXTOR" => "Maxtor",
