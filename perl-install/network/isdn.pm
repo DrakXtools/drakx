@@ -1,6 +1,6 @@
 package network::isdn;
 
-
+use strict;
 use network::isdn_consts;
 use common;
 use any;
