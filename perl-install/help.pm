@@ -970,7 +970,7 @@ country, click on the button and choose another one.
 
  * \"Timezone\": By default, DrakX deduces your time zone based on the
 primary language you have chosen. But here, just as in your choice of a
-keyboard, you may not be in the country for which the chosen language
+keyboard, you may not be in the country with which the chosen language
 should correspond. You may need to click on the \"Timezone\" button to
 configure the clock for the correct timezone.
 
@@ -984,7 +984,7 @@ click that button. This should be reserved to advanced users.
 
  * \"Graphical Interface\": by default, DrakX configures your graphical
 interface in \"800x600\" resolution. If that does not suits you, click on
-the button to reconfigure your grapical interface.
+the button to reconfigure your graphical interface.
 
  * \"Network\": If you want to configure your Internet or local network
 access now, you can by clicking on this button.
