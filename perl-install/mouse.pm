@@ -299,22 +299,14 @@ sub detect() {
 	log::l("no usb interface found for wacom");
     }
 
-    #- at this level, not all possible mice are detected so avoid invoking serial_probe
-    #- which takes a while for its probe.
-    if ($::isStandalone || $::move) {
-	my $mouse = $fast_mouse_probe->();
-	$mouse and return { wacom => \@wacom, %$mouse };
+    if (my $mouse = $fast_mouse_probe->()) {
+	return { wacom => \@wacom, %$mouse };
     }
 
     #- probe serial device to make sure a wacom has been detected.
     eval { modules::load("serial") };
     my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
     $r and return { wacom => \@wacom, %$r };
-
-    if (!$::isStandalone && !$::move) {
-	my $mouse = $fast_mouse_probe->();
-	$mouse and return { wacom => \@wacom, %$mouse };
-    }
 
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).
     @wacom and return fullname2mouse('none|No mouse', wacom => \@wacom);
