@@ -58,8 +58,31 @@ my %settings;
 my $config_file = "/etc/Bastille/bastille-firewall.cfg";
 my $default_config_file = "/usr/share/Bastille/bastille-firewall.cfg"; # set this later
 sub ReadConfig {
-    -e $config_file or cp($default_config_file, $config_file);
+    -e $config_file or commands::cp($default_config_file, $config_file);
     add2hash(\%settings, { getVarsFromSh("$config_file") });
+}
+sub SaveConfig {
+	my $tmp_file = tmpnam();
+	open CONFIGFILE, "$config_file"
+		or die "Can't open $config_file: $!\n";
+	open TMPFILE, ">$tmp_file"
+		or die "Can't open $tmp_file for writing: $!\n";
+	while (my $line = <CONFIGFILE>)
+	{
+		if ($line =~ m/^(.+)\s*\=\s*\"(.*)\"/)
+		{
+			my ($variable, $value) = ($1, $2);
+			my $newvalue = $settings{$variable};
+			$line =~ s/\".*\"/\"$newvalue\"/
+				if (exists $settings{$variable});
+		}
+		print TMPFILE $line;
+	}
+	close CONFIGFILE;
+	close TMPFILE;
+	rename ($config_file, $config_file . ".orig");
+	system ("/bin/cp $tmp_file $config_file");
+	system ("/bin/rm $tmp_file");
 }
 sub DoInterface {
     my ($in)=@_;
@@ -93,11 +116,16 @@ sub DoInterface {
     } else { $settings{DHCP_IFACES} = "" } };
     my $quit = sub {
 	$_[0] or $in->exit(0);
-	cp("-f", $config_file, $config_file . ".orig");
-	my $tmp_file = tmpnam();
+	SaveConfig();
+	$in->exit(0);
+	return;
+	$_[0] or $in->exit(0);
+	commands::cp("-f", $config_file, $config_file . ".orig");
 	substInFile {
-	    /^(.+)\s*\=/;
-	    s/\".*\"/\"$settings{$1}\"/
+	    if(/^(.+)\s*\=/) {
+		$a=$settings{$1};
+		s/\".*\"/\"$a\"/;
+	    }
 	} $config_file;
 	map { system($_) } ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
