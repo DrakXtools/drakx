@@ -45,6 +45,7 @@
 #include "dns.h"
 
 #include "network.h"
+#include "directory.h"
 
 /* include it after config-stage1.h so that _GNU_SOURCE is defined and strndup is available */
 #include <string.h>
@@ -850,6 +851,7 @@ enum return_type nfs_prepare(void)
 	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
+	char * nfs_own_mount = SLASH_LOCATION "/tmp/nfsimage";
 	char * nfsmount_location;
 	enum return_type results = intf_select_and_up(NULL, NULL);
 
@@ -870,37 +872,18 @@ enum return_type nfs_prepare(void)
 		strcat(nfsmount_location, ":");
 		strcat(nfsmount_location, answers[1]);
 		
-		if (my_mount(nfsmount_location, IMAGE_LOCATION, "nfs", 0) == -1) {
+		if (my_mount(nfsmount_location, nfs_own_mount, "nfs", 0) == -1) {
 			stg1_error_message("I can't mount the directory from the NFS server.");
 			results = RETURN_BACK;
 			continue;
 		}
 
-#ifdef MANDRAKE_MOVE
-		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
-#else
-		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
-#endif
-			stg1_error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
-			umount(IMAGE_LOCATION);
-			results = RETURN_BACK;
-		}
+		results = try_with_directory(nfs_own_mount, "nfs", "nfs-iso");
+		if (results == RETURN_BACK)
+			umount(nfs_own_mount);
 	}
 	while (results == RETURN_BACK);
 
-	log_message("found the " DISTRIB_NAME " Installation, good news!");
-
-	if (IS_SPECIAL_STAGE2) {
-		if (load_ramdisk() != RETURN_OK) {
-			stg1_error_message("Could not load program into memory.");
-			return nfs_prepare();
-		}
-	}
-
-	if (IS_RESCUE)
-		umount(IMAGE_LOCATION);
-
-        add_to_env("METHOD", "nfs");
 	return RETURN_OK;
 }
 
