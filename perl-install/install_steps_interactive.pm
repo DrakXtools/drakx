@@ -524,7 +524,7 @@ sub addUser($) {
     my @shells = install_any::shells($o);
 
     if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_refH(
-        [ _("Add user"), _("Accept user"), _("Done") ],
+        [ _("Add user"), _("Accept user"), $o->{security} > 4 && !@{$o->{users}} ? () : _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
 	 _("Real name") => \$u->{realname},

@@ -15,6 +15,7 @@ $(DIRS):
 install:
 	$(MAKE) gendepslist rpm2header xhost+
 	install make_mdkinst_stage2 gendepslist rpm2header genhdlist $(ROOTDEST)/misc
+	mkdir -p $(DEST)/usr/bin
 	install -s xhost+ $(DEST)/usr/bin
 
 xhost+: %: %.c
