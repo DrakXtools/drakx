@@ -258,7 +258,6 @@ sub detect() {
 			      "busmouse|1 button");
     }
 
-    my @wacom;
     my $fast_mouse_probe = sub {
 	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
 
@@ -286,6 +285,7 @@ sub detect() {
 	$auxmouse;
     };
 
+    my @wacom;
     if (modules::get_probeall("usb-interface")) {
 	if (my (@l) = detect_devices::usbWacom()) {
 	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
