@@ -363,7 +363,7 @@ sub add_entry {
 	$to_add = $conflicting;
 
 	my $new_label = $v->{label} eq 'linux' && kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
-	$label = $new_label && $label ne $new_label ? $new_label : 'old' . ($i++ ? $i : '') . "_$label";
+	$label = $new_label && $label ne $new_label ? $new_label : 'alt' . ($i++ ? $i : '') . "_$label";
     }
     die 'add_entry';
 }
