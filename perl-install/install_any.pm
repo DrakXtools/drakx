@@ -887,28 +887,34 @@ sub loadO {
 sub generate_automatic_stage1_params {
     my ($o) = @_;
 
-    my @ks = "method:$o->{method}";
+    my $method = $o->{method};
+    my @ks;
 
     if ($o->{method} eq 'http') {
-	$ENV{URLPREFIX} =~ m|http://([^/:]+)(/.*)| or die;
-	push @ks, "server:$1", "directory:$2";
+	$ENV{URLPREFIX} =~ m!(http|ftp)://([^/:]+)(/.*)! or die;
+	$method = $1; #- in stage1, FTP via HTTP proxy is available through FTP config, not HTTP
+	@ks = (server => $2, directory => $3);
     } elsif ($o->{method} eq 'ftp') {
-	push @ks,  "server:$ENV{HOST}", "directory:$ENV{PREFIX}", "user:$ENV{LOGIN}", "pass:$ENV{PASSWORD}";
+	@ks = (server => $ENV{HOST}, directory => $ENV{PREFIX}, user => $ENV{LOGIN}, pass => $ENV{PASSWORD});
     } elsif ($o->{method} eq 'nfs') {
 	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
-	push @ks, "server:$1", "directory:$2";
+	@ks = (server => $1, directory => $2);
     }
+    @ks = (method => $method, @ks);
 
     if (member($o->{method}, qw(http ftp nfs))) {
-	my ($intf) = values %{$o->{intf}};
-	push @ks, "interface:$intf->{DEVICE}";
+	if ($ENV{PROXY}) {
+	    push @ks, proxy_host => $ENV{PROXY}, proxy_port => $ENV{PROXYPORT};
+	}
+	push @ks, interface => first(values %{$o->{intf}})->{DEVICE};
 	if ($intf->{BOOTPROTO} eq 'dhcp') {
-	    push @ks, "network:dhcp";
+	    push @ks, network => 'dhcp';
 	} else {
+	    push @ks, network => 'static', ip => $intf->{IPADDR}, netmask => $intf->{NETMASK}, gateway => $o->{netc}{GATEWAY};
 	    require network::network;
-	    push @ks, "network:static", "ip:$intf->{IPADDR}", "netmask:$intf->{NETMASK}", "gateway:$o->{netc}{GATEWAY}";
-	    my @dnss = network::network::dnsServers($o->{netc});
-	    push @ks, "dns:$dnss[0]" if @dnss;
+	    if (my @dnss = network::network::dnsServers($o->{netc})) {
+		push @ks, dns => $dnss[0];
+	    }
 	}
     }
 
@@ -917,7 +923,7 @@ sub generate_automatic_stage1_params {
 		   adsluser => 'adslu', adslpass => 'adslp', hostname => 'hos', domain => 'dom', server => 'ser',
 		   directory => 'dir', user => 'use', pass => 'pas', disk => 'dis', partition => 'par');
     
-    'automatic='.join(',', map { /^([^:]+)(:.*)/ && $aliases{$1} ? $aliases{$1}.$2 : $_ } @ks);
+    'automatic=' . join(',', map { ($aliases{$_->[0]} || $_->[0]) . ':' . $_->[1] } group_by2(@ks));
 }
 
 sub guess_mount_point {
