@@ -807,13 +807,16 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{pop_it} ||= $pop_it || $::WizardTable && do {
+    $o->{pop_it} ||= $pop_it || (!$::isWizard && !$::isEmbedded) || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
 	pop @l if !$::isInstall && $::isWizard; #- don't take into account the DrawingArea
 	any { $_->visible } @l;
     };
 
     if ($o->{pop_it}) {
+	$o->{rwindow}->set_position('center_always') if 
+	  $::isStandalone && ($force_center || $o->{force_center}) || 
+	    @interactive::objects && $::isStandalone && !$o->{transient}; #- no need to center when set_transient is used
 	push @interactive::objects, $o if !$opts{no_interactive_objects};
 	$o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
 	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
@@ -975,7 +978,7 @@ sub _create_window($$) {
 	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
 
-    }) if ($force_center || $o->{force_center}) && !($force_position || $o->{force_position});
+    }) if $::isInstall && ($force_center || $o->{force_center}) && !($force_position || $o->{force_position});
 
     $o->{window} = $::noBorder ? $w : $f;
     $o->{rwindow} = $w;
