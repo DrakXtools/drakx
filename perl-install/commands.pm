@@ -399,8 +399,10 @@ sub insmod {
 
     require 'run_program.pm';
 
-    unless (m|/|) {
-	m/(.*)\.o/ and die "either give ./$_ or $1\n";
+    #- try to install the module if it exist else extract it from archive.
+    #- needed for cardmgr.
+    unless (-r $f) {
+	$_ = $1 if m@.*/([^/]*)\.o@;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
 	    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");

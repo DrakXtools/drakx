@@ -785,7 +785,7 @@ sub load_thiskind {
     my $w; #- needed to make the wait_message stay alive
     my $pcmcia = $o->{pcmcia}
       unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
-	     $o->ask_yesorno('', _("Skip PCMCIA probing", 1));
+	     $o->ask_yesorno('', _("Skip %s PCMCIA probing", $type), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
