@@ -34,25 +34,81 @@ sub getinfo {
 }
 
 sub getinfoFromXF86Config {
-    my $o = shift || {};
+    my $o = shift || {}; #- original $::o->{X} which must be changed only if sure!
     my $prefix = shift || "";
+    my (%keyboard, %mouse, %wacom, %card, %monitor);
     my (%c, $depth, $driver);
 
-    $o->{card}{server} ||= $1 if readlink("$prefix/etc/X11/X") =~ /XF86_ (\w+)$/x; #- /x for perl2fcalls
-
-    local *F; open F, "$prefix/etc/X11/XF86Config" or return {};
     local $_;
+    local *G; open G, "$prefix/etc/X11/XF86Config-4";
+    while (<G>) {
+	if (my $i = /^Section "InputDevice"/ .. /^EndSection/) {
+	    %c = () if $i == 1;
+
+	    $c{driver} = $1 if /^\s*Driver\s+"(.*?)"/;
+	    $c{xkb_keymap} ||= $1 if /^\s*Option\s+"XkbLayout"\s+"(.*?)"/;
+	    $c{XMOUSETYPE} ||= $1 if /^\s*Option\s+"Protocol"\s+"(.*?)"/;
+	    $c{device} ||= $1 if /^\s*Option\s+"Device"\s+"\/dev\/(.*?)"/;
+	    $c{chordmiddle} ||= $1 if /^\s*Option\s+"ChordMiddle"\s+"\/dev\/(.*?)"/;
+	    $c{nbuttons}   = 2 if /^\s*Option\s+"Emulate3Buttons"\s+/;
+	    $c{nbuttons} ||= 3 if /^\s*#\s*Option\s+"Emulate3Buttons"\s+/;
+	    $c{nbuttons} ||= 5 if /^\s*#\s*Option\s+"ZAxisMapping"\s.*5/;
+	    $c{nbuttons}   = 7 if /^\s*#\s*Option\s+"ZAxisMapping"\s.*7/;
+
+	    if ($i =~ /E0/) {
+		@keyboard{qw(xkb_keymap)} = @c{qw(xkb_keymap)}
+		  if $c{driver} =~ /keyboard/i;
+		@mouse{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
+		  if $c{driver} =~ /mouse/i;
+		@wacom{qw(device)} = @c{qw(device)}
+		  if $c{driver} =~ /wacom/i;
+	    }
+	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
+	    $monitor{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
+	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
+	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
+	    $monitor{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
+	    $monitor{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
+	    $monitor{modelines}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
+	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
+	    $card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
+	    if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
+		undef $depth if $i == 1;
+		$depth = $1 if /^\s*Depth\s+(\d*)/;
+		if (/^\s*Modes\s+(.*)/) {
+		    my $a = 0;
+		    unshift @{$card{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
+		      grep { $_->[0] >= 640 } map { [ /"(\d+)x(\d+)"/ ] } split ' ', $1;
+		}
+	    }
+	}
+    }
+    close G;
+    local *F; open F, "$prefix/etc/X11/XF86Config";
     while (<F>) {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
-	    $o->{keyboard}{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
+	    $keyboard{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
-	    $o->{mouse}{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
-	    $o->{mouse}{device} ||= $1 if m|^\s*Device\s+"/dev/(.*?)"|;
-	    $o->{mouse}{cleardtrrts} ||= 1 if m/^\s*ClearDTR\s+/;
-	    $o->{mouse}{cleardtrrts} ||= 1 if m/^\s*ClearRTS\s+/;
-	    $o->{mouse}{nbuttons}   = 2 if m/^\s*Emulate3Buttons\s+/;
-	    $o->{mouse}{nbuttons} ||= 5 if m/^\s*ZAxisMapping\s.*5/;
-	    $o->{mouse}{nbuttons}   = 7 if m/^\s*ZAxisMapping\s.*7/;
+	    $mouse{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
+	    $mouse{device} ||= $1 if m|^\s*Device\s+"/dev/(.*?)"|;
+	    $mouse{cleardtrrts} ||= 1 if m/^\s*ClearDTR\s+/;
+	    $mouse{cleardtrrts} ||= 1 if m/^\s*ClearRTS\s+/;
+	    $mouse{chordmiddle} ||= 1 if m/^\s*ChordMiddle\s+/;
+	    $mouse{nbuttons}   = 2 if m/^\s*Emulate3Buttons\s+/;
+	    $mouse{nbuttons} ||= 3 if m/^\s*#\s*Emulate3Buttons\s+/;
+	    $mouse{nbuttons} ||= 5 if m/^\s*ZAxisMapping\s.*5/;
+	    $mouse{nbuttons}   = 7 if m/^\s*ZAxisMapping\s.*7/;
+	} elsif (/^Section "XInput"/ .. /^EndSection/) {
+	    if (/^\s*SubSection "Wacom/ .. /^\s*EndSubSection/) {
+		$wacom{device} ||= $1 if /^\s*Port\s+"\/dev\/(.*?)"/;
+	    }
+	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
+	    $monitor{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
+	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
+	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
+	    $monitor{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
+	    $monitor{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
+	    $monitor{modelines}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    %c = () if $i == 1;
 
@@ -62,43 +118,48 @@ sub getinfoFromXF86Config {
 	    $c{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $c{board} ||= $1 if /^\s*BoardName\s+"(.*?)"/;
 	    $c{driver} ||= $1 if /^\s*Driver\s+"(.*?)"/;
-	    $c{options}{$1} ||= 1 if /^\s*Option\s+"(.*?)"/;
-	    $c{options}{$1} ||= 0 if /^\s*#\s*Option\s+"(.*?)"/;
+	    $c{options_xf3}{$1} ||= 1 if /^\s*Option\s+"(.*?)"/;
+	    $c{options_xf3}{$1} ||= 0 if /^\s*#\s*Option\s+"(.*?)"/;
 
-	    #- clockchip, ramdac, dacspeed read with following line.
-	    push @{$c{lines}}, $_ unless /(Section|Identifier|VideoRam|VendorName|BoardName|Option)/;
-
-	    add2hash($o->{card} ||= {}, \%c) if ($i =~ /E0/ && $c{type} && $c{type} ne "Generic VGA");
-	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
-	    $o->{monitor}{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
-	    $o->{monitor}{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
-	    $o->{monitor}{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
-	    $o->{monitor}{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
-	    $o->{monitor}{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
-	    $o->{monitor}{modelines} .= $_ if /^\s*Mode[lL]ine\s+/;
+	    add2hash(\%card, \%c) if ($i =~ /E0/ && $c{type} && $c{type} ne "Generic VGA");
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
 	    undef $driver if $s == 1;
 	    $driver = $1 if /^\s*Driver\s+"(.*?)"/;
-	    if ($driver eq $Xconfigurator::serversdriver{$o->{card}{server}}) {
-		$o->{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
+	    if ($driver eq $Xconfigurator::serversdriver{$card{server}}) {
+		$card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
 		if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
 		    undef $depth if $i == 1;
 		    $depth = $1 if /^\s*Depth\s+(\d*)/;
 		    if (/^\s*Modes\s+(.*)/) {
 			my $a = 0;
-			unshift @{$o->{card}{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
+			unshift @{$card{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
 		            grep { $_->[0] >= 640 } map { [ /"(\d+)x(\d+)"/ ] } split ' ', $1;
 		    }
 		}
 	    }
 	}
     }
-    #- get the default resolution according the the current file.
-    if (my @depth = keys %{$o->{card}{depth}}) {
-	$o->{resolution_wanted} ||=
-	  ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][0]) . "x" .
-	    ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][1]);
+    close F;
+
+    #- clean up modeline by those automatically given by $modelines_text.
+    foreach (split /\n/, $Xconfigurator::modelines_text) {
+	delete $monitor{modelines_}{"$1_$2"} if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+(.*)/;
     }
+    $monitor{modelines} .= $_ foreach values %{$monitor{modelines_}}; delete $monitor{modelines_};
+
+    #- get the default resolution according the the current file.
+    #- suggestion to take into account, but that have to be checked.
+    $o->{card}{suggest_depth} = $card{default_depth};
+    if (my @depth = keys %{$card{depth}}) {
+	$o->{card}{suggest_wres} = ($card{depth}{$o->{card}{suggest_depth} || $depth[0]}[0][0]);
+    }
+
+    #- try to merge with $o, the previous has been obtained by ddcxinfos.
+    add2hash($o->{keyboard} ||= {}, \%keyboard);
+    add2hash($o->{mouse} ||= {}, \%mouse);
+    $o->{wacom} ||= $wacom{device};
+    add2hash($o->{monitor} ||= {}, \%monitor);
+
     $o;
 }
 
