@@ -1,3 +1,32 @@
+2001/02/13  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: profile handling updated
+
+	* network.pm: typo
+	corrected domainname setting
+
+	* netconnect.pm: finished load_conf
+
+2001/02/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/make_rescue_img, rescue/list: include libs for hostname resolving
+
+	* mdk-stage1/stage1.c, mdk-stage1/init.c: better console messages at
+	startup
+
+	* mdk-stage1/tools.c: 
+	  - save /etc/resolv.conf for rescue
+
+2001/02/13  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (selectKeyboard): can be automatic only in
+	non-expert
+
+	* any.pm: md5 now done via crypt
+
+	* install_steps.pm (exitInstall): catch exception of output report.bug
+	(for gc)
+
 2001/02/13  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_interactive.pm (selectKeyboard): can be automatic only in
