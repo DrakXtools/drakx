@@ -383,6 +383,8 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my $time = time();
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages);
+
+    any::writeandclean_ldsoconf($o->{prefix});
     delete $ENV{DURING_INSTALL};
     run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time() - $time));
@@ -433,8 +435,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     any::config_dvd($o->{prefix}, $have_devfsd);
     any::config_mtools($o->{prefix});
-
-    any::writeandclean_ldsoconf($o->{prefix});
 
     #- make sure wins is disabled in /etc/nsswitch.conf
     #- else if eth0 is not existing, glibc segfaults.
