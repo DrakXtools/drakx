@@ -83,6 +83,7 @@ sub device_name_to_entry {
     } else {
 	$e->{device} = $name; #- keeping the exact name given (often is the devfs name)
     }
+    $e->{media_type} = 'fd' if $name =~ /fd[01]/;
     $e;
 }
 
@@ -130,7 +131,7 @@ sub main {
 	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');
     }
 
-    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_default', 'verbatim_credentials') ];
+    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name', 'verbatim_credentials') ];
     my ($existing_fstab_entries, $fstab_) = partition { $_->{device} eq $part->{device} || $_->{device} eq $part->{devfs_device} } @$fstab;
 
     if ($action eq 'add') {
@@ -143,7 +144,10 @@ sub main {
 	set_mount_point($part, $fstab) or return;
 	
 	my ($line) = fs::prepare_write_fstab([$part]);
-	append_to_file($fstab_file, $line) if $line;
+	if ($line) {
+	    append_to_file($fstab_file, $line);
+	    system("mount $part->{mntpoint}") if !$::testing && $device_name =~ /^fd\d+/;
+	}
 
 	if ($::auto) {
 	    print $part->{mntpoint}, " ", $useSupermount ? 'supermount' : 'user', "\n";
