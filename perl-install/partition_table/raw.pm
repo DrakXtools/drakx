@@ -176,7 +176,7 @@ sub test_for_bad_drives {
     
     sub error { die "$_[0] error: $_[1]" }
 
-    my $F = openit($hd, 2) or error(openit($hd) ? 'write' : 'read', "can't open device");
+    my $F = openit($hd, $::testing ? 0 : 2) or error(openit($hd) ? 'write' : 'read', "can't open device");
 
     my $seek = sub {
 	c::lseek_sector(fileno($F), $sector, 0) or error('read', "seeking to sector $sector failed");
