@@ -121,7 +121,7 @@ $Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
 						print($bugzilla_url . "?" . $options . "\n");
 						connect_bugzilla($bugzilla_url."?".$options) });
 my $help_button = new Gtk2::Button(" ".N("Help")." ");
-$help_button->signal_connect(clicked => sub { $window->standalone::on_request_help('/usr/share/doc/HTML/index.html') });
+$help_button->signal_connect(clicked => sub { system("drakhelp https://qa.mandrakesoft.com &") });
 $hbx->pack_end($Report_Button,0,0,0);
 $hbx->pack_end($help_button,0,0,5);
 $vbx->pack_start($hbx,0,0,0);
