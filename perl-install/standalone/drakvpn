@@ -207,7 +207,7 @@ step_detectsetup:
 my %aliased_devices; 
 /^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
 
-my $card_netconnect = network::netconnect::get_net_device() || "eth0";
+my $card_netconnect = network::shorewall::get_net_device() || "eth0";
 defined $card_netconnect and log::l("[drakvpn] Information from netconnect: ignore card $card_netconnect");
 
 	$in->ask_from('',

@@ -206,8 +206,8 @@ my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scri
 my %aliased_devices; 
 /^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
 
-my $card_netconnect = network::netconnect::get_net_device() || "eth0";
-defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
+my $card_netconnect = network::shorewall::get_net_device() || "eth0";
+log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
 my $modules_conf = modules::any_conf->read;
 my @all_cards = network::ethernet::get_eth_cards($modules_conf);

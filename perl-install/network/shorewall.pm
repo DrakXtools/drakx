@@ -72,7 +72,7 @@ sub default_interfaces_silent {
 sub default_interfaces {
 	my ($in) = @_;
 	my %conf;
-	my $card_netconnect = network::netconnect::get_net_device() || "eth0";
+	my $card_netconnect = get_net_device() || "eth0";
 	defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
 	my @l = detect_devices::getNet() or return;
