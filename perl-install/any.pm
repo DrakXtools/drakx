@@ -237,7 +237,7 @@ _("Here are the different entries.
 You can add some more or change the existing ones."),
 		 ok => '',
 },
-		[ { val => \$e, type => 'list', format => sub {
+		[ { val => \$e, type => 'combo', format => sub {
 		    my ($e) = @_;
 		    ref $e ? 
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
