@@ -528,7 +528,7 @@ sub installPackages {
 	    local $my_gtk::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    print "\a";	    
-	    $name !~ /application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
+	    $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
 Warning
 
 Please read carefully the terms below. If you disagree with any
