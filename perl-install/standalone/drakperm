@@ -1,7 +1,7 @@
 #!/usr/bin/perl 
 
 use strict;
-
+use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 
@@ -151,9 +151,9 @@ $combo_perm->entry->set_text($default_perm_level);
 
 $permList->get_selection()->signal_connect('changed' => sub {
                                                my ($select) = @_;
-                                               my ($model, $iter) = $select->get_selected();
+                                               my (undef, $iter) = $select->get_selected();
                                                my $editable = $editable;
-                                               $editable = 0 unless $model;
+                                               $editable = 0 unless $iter;
                                                sensitive_buttons($editable);
                                            });
 
@@ -171,9 +171,9 @@ sub check_save {
 
 sub display_perm {
     my $perm_level = shift @_;
+    return unless $perm_level;
     my $file = $perm{$perm_level};
     my $sav_ = &check_save;
-    my $i = 0;
     if ($modified && ! $sav_) {
 	$combo_perm->entry->signal_handler_block($combo_sig);
 	$combo_perm->entry->set_text($prec_txt);
@@ -209,7 +209,6 @@ sub save_perm {
     open F, '>' . $perm{editable} or die("Impssible to process \"", $perm{editable}, "\"");
     $treeModel->foreach(sub {
                              my ($model, $_path, $iter) = @_;
-                             my $module = $model->get($iter, 0);
                              my $line = $model->get($iter, 0) . "\t" . $model->get($iter,1) . ($model->get($iter,2) ? "." . $model->get($iter,2) : "") . "\t" . $model->get($iter,3) . "\n";
                              print F $line;
                              return 0;
