@@ -648,6 +648,10 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
+    my ($dmi) = grep { $_->{name} eq 'System' } detect_devices::dmidecode();
+    if ($dmi->{Manufacturer} eq "Dell Computer" && member($dmi->{'Product Name'}, qw(Inspiron Latitude))) {
+        push @{$o->{default_packages}}, "i8kutils"
+    }
     push @{$o->{default_packages}}, "grub" if isLoopback(fs::get::root($o->{fstab}));
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
