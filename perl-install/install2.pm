@@ -592,6 +592,7 @@ sub main {
 	$o->{distro_type} = 'cooker' if $VERSION =~ /cooker/i;
     }
     $o->{meta_class} eq 'discovery' and $o->{meta_class} = 'desktop';
+    log::l("meta_class $o->{meta_class}");
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{compssListLevel} = 4;
