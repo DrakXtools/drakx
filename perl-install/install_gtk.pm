@@ -118,7 +118,7 @@ sub install_theme {
 
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
-    $::move or gtkset_background(@background);
+    gtkset_background(@background) if !$::move;
 }
 
 #------------------------------------------------------------------------------
@@ -234,7 +234,7 @@ q(<fontconfig>
 sub init_sizes() {
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    $::move or $::stepswidth = $::rootwidth <= 640 ? 0 : 160;
+    $::stepswidth = $::rootwidth <= 640 ? 0 : 200 if !$::move;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (500, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, $::move && 15);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
