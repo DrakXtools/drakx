@@ -160,10 +160,10 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
 #else
 		char p;
-		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
+		if (access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK)) {
 #endif
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " LIVE_LOCATION ")\n"
+				      "(I need the subdirectory " LIVE_LOCATION_REL ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", extract_list_directory(IMAGE_LOCATION));
 			umount(IMAGE_LOCATION);
@@ -171,7 +171,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 			return RETURN_BACK;
 		}
 #ifndef MANDRAKE_MOVE
-		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
+		if (readlink(IMAGE_LOCATION "/" LIVE_LOCATION_REL "/usr/bin/runinstall2", &p, 1) != 1) {
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution is to copy the " DISTRIB_NAME " Distribution on a Linux partition.");

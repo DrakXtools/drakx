@@ -968,7 +968,7 @@ enum return_type ftp_prepare(void)
                         }
 
 			strcpy(modules_cz, location_full);
-			strcat(modules_cz, LIVE_LOCATION "lib/modules.cz-");
+			strcat(modules_cz, "/" LIVE_LOCATION_REL "lib/modules.cz-");
 			strcat(modules_cz, kernel_uname.release);
 
 			log_message("checking presence of modules.cz file : \"%s\"", modules_cz);

@@ -27,7 +27,6 @@
 
 #define RAMDISK_COMPRESSION_RATIO 1.95
 
-#define LIVE_LOCATION    "/install/stage2/live/"
 #define RAMDISK_LOCATION "/install/stage2/"
 #define SLASH_LOCATION   "/sysroot"
 #define STAGE2_LOCATION  SLASH_LOCATION "/tmp/stage2"
@@ -47,6 +46,8 @@
 #else
 
 #define DISTRIB_NAME "Mandrakelinux"
+
+#define LIVE_LOCATION_REL "install/stage2/live/"
 #define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR "image"
 #define IMAGE_LOCATION_REAL "/tmp/image"

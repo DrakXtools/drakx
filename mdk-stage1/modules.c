@@ -373,7 +373,13 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 		return INSMOD_OK;
 
 	log_message("needs %s", mod_name);
-	return insmod_archived_file(mod_name, options, allow_modules_floppy);
+	{
+		char *file = asprintf_("/modules/%s%s", mod_name, kernel_module_extension());
+		if (access(file, R_OK) == 0)
+			return insmod_local_file(file, options);
+		else
+			return insmod_archived_file(mod_name, options, allow_modules_floppy);
+	}
 }
 
 

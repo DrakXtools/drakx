@@ -564,8 +564,8 @@ void finish_preparing(void)
                 mkdir(SLASH_LOCATION "/etc", 0755);
                 mkdir(SLASH_LOCATION "/var", 0755);
                 /* STAGE2_LOCATION is wrong for live installs before pivot_root */
-                if ((!IS_RAMDISK && create_initial_fs(IMAGE_LOCATION LIVE_LOCATION "/usr/share/symlinks",
-                                                      IMAGE_LOCATION LIVE_LOCATION "/usr/share/devices") != RETURN_OK)
+                if ((!IS_RAMDISK && create_initial_fs(IMAGE_LOCATION "/" LIVE_LOCATION_REL "/usr/share/symlinks",
+                                                      IMAGE_LOCATION "/" LIVE_LOCATION_REL "/usr/share/devices") != RETURN_OK)
                   || (IS_RAMDISK && create_initial_fs(STAGE2_LOCATION "/usr/share/symlinks",
                                                       STAGE2_LOCATION "/usr/share/devices") != RETURN_OK))
                         stg1_fatal_message("Fatal error finishing initialization.");
@@ -662,8 +662,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 #ifndef MANDRAKE_MOVE
 	if (!IS_RAMDISK)
-		if (symlink(IMAGE_LOCATION_REAL LIVE_LOCATION, STAGE2_LOCATION) != 0)
-			log_perror("symlink from " IMAGE_LOCATION_REAL LIVE_LOCATION " to " STAGE2_LOCATION " failed");
+		if (symlink(IMAGE_LOCATION_REAL "/" LIVE_LOCATION_REL, STAGE2_LOCATION) != 0)
+			log_perror("symlink from " IMAGE_LOCATION_REAL "/" LIVE_LOCATION_REL " to " STAGE2_LOCATION " failed");
 #endif
 
 	if (interactive_pid != 0)
