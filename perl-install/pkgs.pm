@@ -355,9 +355,8 @@ sub psUpdateHdlistsDeps {
     }
 
     #- this is necessary for urpmi.
-    install_any::getAndSaveFile('Mandrake/base/depslist.ordered', "$prefix/var/lib/urpmi/depslist.ordered");
-    install_any::getAndSaveFile('Mandrake/base/provides', "$prefix/var/lib/urpmi/provides");
-    install_any::getAndSaveFile('Mandrake/base/compss', "$prefix/var/lib/urpmi/compss");
+    install_any::getAndSaveFile("Mandrake/base/$_", "$prefix/var/lib/urpmi/$_")
+      foreach qw(depslist.ordered provides compss rpmsrate);
 }
 
 sub psUsingHdlists {
