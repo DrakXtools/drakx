@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-12-03 03:09+0100\n"
+"POT-Creation-Date: 2003-12-09 20:45+0100\n"
 "PO-Revision-Date: 2003-11-17 13:47+0100\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -1134,6 +1134,7 @@ msgid "This server is already in the list, it cannot be added again.\n"
 msgstr "Сервер аллақачон рўйхатда, уни яна қўшиб бўлмайди.\n"
 
 #: ../../network/netconnect.pm:1 ../../network/tools.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "Network Configuration"
 msgstr "Тармоқни мослаш"
@@ -1333,11 +1334,6 @@ msgid ""
 "If you are not interested in this feature, uncheck the \"%s\" box."
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Configure Internet Access..."
-msgstr "Интернетга уланишни мослаш"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose the time interval between each backup"
@@ -1347,11 +1343,6 @@ msgstr ""
 #, c-format
 msgid "Norway"
 msgstr "Норвегия"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Delete profile"
-msgstr "Профилни ўчириш"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2252,6 +2243,13 @@ msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
 msgstr ""
 "ALSA (Advanced Linux Sound Architecture) товуш системасини ишга тушириш"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid ""
+"Sending\n"
+"speed:"
+msgstr "Юбориш тезлиги:"
+
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
 #: ../../modules/interactive.pm:1
@@ -2599,11 +2597,6 @@ msgid ""
 " FTP connection problem: It was not possible to send your backup files by "
 "FTP.\n"
 msgstr ""
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Sending Speed:"
-msgstr "Юбориш тезлиги:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -3417,11 +3410,6 @@ msgstr "USB контроллерлар"
 msgid "What norm is your TV using?"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Type:"
-msgstr "Тури:"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Share name"
@@ -3584,7 +3572,7 @@ msgstr "Дворак (Норвегча)"
 msgid "Hard Disk Backup Progress..."
 msgstr ""
 
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr ""
@@ -3903,6 +3891,15 @@ msgid ""
 "monitor.\n"
 " If in doubt, choose a conservative setting."
 msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid ""
+"This interface has not been configured yet.\n"
+"Run the \"Add an interface\" assistant from the Mandrake Control Center"
+msgstr ""
+"Бу интерфейс ҳали мослангани йўқ.\n"
+"Мошлаш ёрдамчисини асосий ойнадан ишга туширинг."
 
 #: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #, c-format
@@ -4985,11 +4982,6 @@ msgstr "Фойдаланувчи"
 msgid "Report unowned files"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Del profile..."
-msgstr "Профилни ўчириш"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing Foomatic..."
@@ -5677,11 +5669,6 @@ msgid ""
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Launch the wizard"
-msgstr "Ёрдамчини ишга тушириш"
-
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Tvcard"
@@ -6072,11 +6059,6 @@ msgstr "Муғулча (кирил)"
 msgid "Add a module"
 msgstr "Модулни қўшиш"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Profile to delete:"
-msgstr "Ўчириш учун профил:"
-
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Local measure"
@@ -6367,6 +6349,13 @@ msgstr ""
 msgid "Circular mounts %s\n"
 msgstr ""
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid ""
+"Connection\n"
+"time: "
+msgstr "Уланиш вақти: "
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
@@ -6439,13 +6428,6 @@ msgstr ", HP JetDirect'даги кўп амалли ускуна"
 #, c-format
 msgid "none"
 msgstr "йўқ"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid ""
-"Name of the profile to create (the new profile is created as a copy of the "
-"current one) :"
-msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -6732,11 +6714,6 @@ msgstr "Тунис"
 msgid "Scanner sharing"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Profile: "
-msgstr "Профил: "
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -6823,11 +6800,6 @@ msgstr "Грекча (политоник)"
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Дискнинг %s қисми формат қилгандан кегин у ердаги ҳамма маълумот йўқолади"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connection Time: "
-msgstr "Уланиш вақти: "
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -7577,6 +7549,11 @@ msgstr "Жорий қоидани тузатиш"
 msgid "%s"
 msgstr "%s"
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Average"
+msgstr "ўртачаси"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
@@ -7995,6 +7972,17 @@ msgstr "Белгиланган принтерни ўчириш"
 #, c-format
 msgid "Info"
 msgstr "Маълумот"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid ""
+"An error occured while deleting the \"%s\" network interface:\n"
+"\n"
+"%s"
+msgstr ""
+"Тармоқни бошқадан ишга туширишда қуйидаги хато рўй берди: \n"
+"\n"
+"%s"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
@@ -9732,6 +9720,21 @@ msgstr "/_Ёрдам"
 msgid "Choosing an arbitrary driver"
 msgstr "Ихтиёрий драйвер танланмоқда"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid ""
+"Your USB key doesn't have any valid Windows (FAT) partitions.\n"
+"We need one to continue (beside, it's more standard so that you\n"
+"will be able to move and access your files from machines\n"
+"running Windows). Please plug in an USB key containing a\n"
+"Windows partition instead.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Cook Islands"
@@ -10437,15 +10440,15 @@ msgid ""
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
 
-#: ../../services.pm:1
-#, c-format
-msgid "Launch the sound system on your machine"
-msgstr "Компютерингизда товуш системасини ишга тушириш"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Verify checksum of the suid/sgid files"
 msgstr "suid/sgid файлларнинг checksum'ини текшириш"
+
+#: ../../services.pm:1
+#, c-format
+msgid "Launch the sound system on your machine"
+msgstr "Компютерингизда товуш системасини ишга тушириш"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11739,6 +11742,13 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid ""
+"Receiving\n"
+"speed:"
+msgstr "Қабул қилиш тезлиги:"
+
 #: ../../standalone/drakclock:1
 #, fuzzy, c-format
 msgid "DrakClock"
@@ -12024,11 +12034,6 @@ msgstr " (Андоза)"
 msgid "Automatic reconfiguration"
 msgstr "Автоматик равишда бошқадан мослаш"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Receiving Speed:"
-msgstr "Қабул қилиш тезлиги:"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Turks and Caicos Islands"
@@ -12302,11 +12307,6 @@ msgstr "Юклаш дискини яратиш учун дискет ускун�
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO (матн меню)"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "instantaneous"
-msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -13123,11 +13123,6 @@ msgstr ""
 "Plug'n Play аниқлаш муваффақиятсиз тугади. Илтимос тўғри келадиган мониторни "
 "танланг"
 
-#: ../../../move/move.pm:1
-#, c-format
-msgid "Detect again USB key"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid "Services and deamons"
@@ -13436,15 +13431,6 @@ msgstr "...сифатида сақлаш"
 #, c-format
 msgid "Korea (North)"
 msgstr "Шимолий Корея"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid ""
-"This interface has not been configured yet.\n"
-"Launch the configuration wizard in the main window"
-msgstr ""
-"Бу интерфейс ҳали мослангани йўқ.\n"
-"Мошлаш ёрдамчисини асосий ойнадан ишга туширинг."
 
 #: ../../install_gtk.pm:1
 #, c-format
@@ -13791,6 +13777,11 @@ msgstr "%s ускунани қаерга уламоқчисиз?"
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Select the network interface to remove:"
+msgstr "Тармоқ интерфейсини танлаш"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -14542,6 +14533,11 @@ msgstr "USB принтер"
 msgid "Right \"Windows\" key"
 msgstr "Ўнг \"Windows\" тугмаси"
 
+#: ../../../move/move.pm:1
+#, c-format
+msgid "Detect USB key again"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
@@ -14717,9 +14713,9 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
 #: ../../standalone/drakauth:1 ../../standalone/drakboot:1
-#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/draksplash:1 ../../../move/move.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../../move/move.pm:1 ../../../move/tree/mdk_totem:1
 #, c-format
 msgid "Error"
 msgstr "Хато"
@@ -15078,6 +15074,12 @@ msgstr ""
 msgid "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid ""
+"Congratulations, the \"%s\" network interface has been succesfully deleted"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
@@ -15184,11 +15186,6 @@ msgstr "Цилиндр %d дан %d гача\n"
 #, c-format
 msgid "YOUR TEXT HERE"
 msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "New profile..."
-msgstr "Янги профил"
 
 #: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -16092,7 +16089,8 @@ msgstr "X Windows уланишларга рухсат этиш"
 msgid "Hardware probing in progress"
 msgstr "Асбоб-ускуналарни аниқлаш кетаяпти"
 
-#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Тармоқ ускунаси"
@@ -17689,6 +17687,11 @@ msgstr "Янги серверларни қидириш"
 msgid "Heard and McDonald Islands"
 msgstr "Херд ва МакДоналд Ороллари"
 
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Instantaneous"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No alternative driver"
@@ -18375,6 +18378,11 @@ msgstr "Дискнинг Windows қисмидаги бўш жойдан фойд
 msgid "%s found on %s, configure it automatically?"
 msgstr "%s %s'да топилди, уни автоматик равишда мослайми?"
 
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Remove a network interface"
+msgstr "Тармоқ интерфейсини танлаш"
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
@@ -18399,11 +18407,6 @@ msgstr "Папуа Янги Гвинея"
 #, c-format
 msgid "Multi-function device on a parallel port"
 msgstr "Параллел портидаги кўп амалли ускуна"
-
-#: ../../../move/tree/mdk_totem:1
-#, fuzzy, c-format
-msgid "Busy files"
-msgstr "Файлларни яшириш"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19015,6 +19018,34 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Хат-хабар ва янгиликларни ўқиш ва жўнатиш ва Интернетни кўриш воситалар "
 "тўплами."
+
+#~ msgid "Configure Internet Access..."
+#~ msgstr "Интернетга уланишни мослаш"
+
+#~ msgid "Delete profile"
+#~ msgstr "Профилни ўчириш"
+
+#~ msgid "Type:"
+#~ msgstr "Тури:"
+
+#~ msgid "Del profile..."
+#~ msgstr "Профилни ўчириш"
+
+#~ msgid "Launch the wizard"
+#~ msgstr "Ёрдамчини ишга тушириш"
+
+#~ msgid "Profile to delete:"
+#~ msgstr "Ўчириш учун профил:"
+
+#~ msgid "Profile: "
+#~ msgstr "Профил: "
+
+#~ msgid "New profile..."
+#~ msgstr "Янги профил"
+
+#, fuzzy
+#~ msgid "Busy files"
+#~ msgstr "Файлларни яшириш"
 
 #~ msgid "Profile "
 #~ msgstr "Профил "
