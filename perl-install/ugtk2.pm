@@ -878,7 +878,7 @@ sub new {
     };
 
     if ($o->{pop_it}) {
-	$o->{rwindow} = _create_window($o, $title);
+	$o->{rwindow} = _create_window($title);
 
 	if ($::isInstall || $::isEmbedded) {
 	    gtkadd($o->{rwindow}, 
@@ -906,7 +906,7 @@ sub new {
 	    flush();
 	    $::Plug->add($::WizardTable);
 	} elsif (!$::WizardWindow) {
-	    $::WizardWindow = _create_window($o, $title);
+	    $::WizardWindow = _create_window($title);
 
 	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
@@ -998,8 +998,8 @@ sub exit {
 #- in case "exit" above was not called by the program
 END { &exit() }
 
-sub _create_window($$) {
-    my ($o, $title) = @_;
+sub _create_window {
+    my ($title) = @_;
     my $w = Gtk2::Window->new('toplevel');
 
     $w->set_name("Title");
