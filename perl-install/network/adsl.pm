@@ -319,13 +319,17 @@ user "$adsl->{login}"
         }
 
         if ($adsl_type eq 'pppoe') {
-            my $net_device = $modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE};
-            substInFile {
-                s/ETH=.*\n/ETH=$net_device\n/;
-                s/USER=.*\n/USER=$adsl->{login}\n/;
-                s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
-                s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
-            } "$::prefix/etc/ppp/pppoe.conf";
+            if (-f "$::prefix/etc/ppp/pppoe.conf") {
+                my $net_device = $modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE};
+                substInFile {
+                    s/ETH=.*\n/ETH=$net_device\n/;
+                    s/USER=.*\n/USER=$adsl->{login}\n/;
+                    s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
+                    s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
+                } "$::prefix/etc/ppp/pppoe.conf";
+            } else {
+                log::l("can't find pppoe.conf, make sure the rp-pppoe package is installed");
+            }
         }
 
 #            pppoe => {
