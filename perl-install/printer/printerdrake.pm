@@ -2070,7 +2070,9 @@ sub setup_common {
 			$::noX
 			    or $in->do_pkgs->install('sane-backends',
 						     'sane-frontends',
-						     'scanner-gui', 
+						     ($::isInstall ?
+						      'xsane' : 
+						      'scanner-gui'), 
 						     'libsane-hpoj1')
 			    or do {
 				$in->ask_warn(N("Warning"),
