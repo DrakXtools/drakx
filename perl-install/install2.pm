@@ -339,7 +339,8 @@ sub choosePackages {
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
     unless ($o->{isUpgrade}) {
-	$o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
+	$o->choosePackages($o->{packages}, $o->{compss}, 
+			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
 	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;
 	$o->{packages}{$_}{selected} = 1 foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
     }

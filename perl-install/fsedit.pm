@@ -340,6 +340,16 @@ sub move {
     }
 }
 
+sub change_type($$$) {
+    my ($hd, $part, $type) = @_;
+    $type != $part->{type} or return;
+    $hd->{isDirty} = 1;
+    $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
+    $part->{type} = $type;
+    $part->{notFormatted} = 1;
+    $part->{isFormatted} = 0;    
+}
+
 sub rescuept($) {
     my ($hd) = @_;
     my ($ext, @hd);
