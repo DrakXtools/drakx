@@ -77,7 +77,7 @@ if ($ts == 256) {
 	}
 	$ts = system("rpm -qa | grep terminal-server > /dev/null");
 	if ($ts == 256) {
-		warn("Useless without Terminal Server");
+		warn(N("Useless without Terminal Server"));
 		exit(1);
 	}
 }
@@ -107,28 +107,28 @@ if ("@ARGV" =~ /--stop/) {
 }
 
 if ("@ARGV" =~ /--adduser/) {
-	die "$0 $ARGV[0] requires a username...\n" if $#ARGV < 1;
+	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
 	my $cmd_line = 1;
 	adduser($cmd_line, $ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--deluser/) {
-	die "$0 $ARGV[0] requires a username...\n" if $#ARGV < 1;
+	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
 	my $cmd_line = 1;
 	deluser($cmd_line, $ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--addclient/) {
-	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT...\n" if $#ARGV < 5;
+	die N("%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, 0/1 for Local Config...\n", $0, $ARGV[0]) if $#ARGV < 6;
 	my $cmd_line = 1;
-	addclient($cmd_line, @ARGV[1..5]);
+	addclient($cmd_line, @ARGV[1..6]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--delclient/) {
-	die "$0 $ARGV[0] requires hostname...\n" if $#ARGV < 1;
+	die N("%s: %s requires hostname...\n", $0, $ARGV[0]) if $#ARGV < 1;
 	my $cmd_line = 1;
 	delclient($cmd_line, $ARGV[1]);
 	exit(0);	
@@ -140,7 +140,7 @@ interactive_mode() if $#ARGV < 1;
 sub read_conf_file() {
 	if (-e $cfg_file) {
 		local *CONF_FILE;
-		open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
+		open(CONF_FILE, "<" . $cfg_file) || print N("You must be root to read configuration file. \n");
 		local $_;
 		while (<CONF_FILE>) {
 			if (/^\bALLOW_THIN\b/) {
@@ -417,15 +417,19 @@ sub help() {
 
         - Per client /etc/X11/XF86Config-4\$\$IP-ADDRESS\$\$:
         		Through clusternfs, each diskless client can have it's own unique configuration files
-        		on the root filesystem of the server. In the future drakTermServ will help create these
-        		files.
+        		on the root filesystem of the server. By allowing local client hardware configuration, 
+        		drakTermServ will help create these files.
 
         - Per client system configuration files:
         		Through clusternfs, each diskless client can have it's own unique configuration files
-        		on the root filesystem of the server. In the future, drakTermServ can help create files
-        		such as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/keyboard on a
-        		per-client basis.
+        		on the root filesystem of the server. By allowing local client hardware configuration, 
+				clients can customize files such as /etc/modules.conf, /etc/sysconfig/mouse, 
+        		/etc/sysconfig/keyboard on a per-client basis.
 
+        Note: Enabling local client hardware configuration does enable root login to the terminal 
+        server on each client machine that has this feature enabled.  Local configuration can be turned
+        back off, retaining the configuration files, once the client machine is configured.
+		
         - /etc/xinetd.d/tftp:
         		drakTermServ will configure this file to work in conjunction with the images created by
         		mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to each
@@ -736,6 +740,7 @@ sub maintain_clients() {
 	my %clients = read_dhcpd_conf();
 	my $client;
 	my $citer;
+	my $local_config = 0;
 	
 	#- client info in tree view
 	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
@@ -781,18 +786,17 @@ sub maintain_clients() {
 
 	#- entry boxes for client data entry
 	my $label_host = new Gtk2::Label("Client Name:");
-	$label_host->set_justify('left');
 	my $entry_host = new Gtk2::Entry();
 	my $label_mac = new Gtk2::Label("MAC Address:");
-	$label_mac->set_justify('left');
 	my $entry_mac = new Gtk2::Entry();
 	my $label_ip = new Gtk2::Label("IP Address:");
-	$label_ip->set_justify('left');
 	my $entry_ip = new Gtk2::Entry();
 	my $label_nbi = new Gtk2::Label("Kernel Netboot Image:");
-	$label_nbi->set_justify('left');
 	my $entry_nbi = new Gtk2::Combo();
 
+	gtksignal_connect(my $check_hdw_config = new Gtk2::CheckButton(N("Allow local hardware\nconfiguration.")),
+		clicked => sub { invbool \$local_config });
+					
 	my @images = grep { /\.nbi/ } all("/var/lib/tftpboot/");
 	my $have_nbis = @images;
 	if ($have_nbis) {
@@ -809,21 +813,19 @@ sub maintain_clients() {
 	my $is_thin = 0;
 			 
 	gtkpack($status_box,
-		$client_box = gtkpack_(new Gtk2::VBox(1,10),
-			0, gtkadd(new Gtk2::HBox(0,5),
+		$client_box = gtkpack_(new Gtk2::VBox(0,10),
+			0, gtkadd(new Gtk2::HBox(1,5),
 				gtkadd(new Gtk2::VBox(0,5),
 					gtkadd($label_host), gtkadd($entry_host),
 					gtkadd($label_mac), gtkadd($entry_mac),
 					gtkadd($label_ip), gtkadd($entry_ip),
 					gtkadd($label_nbi), gtkadd($entry_nbi),
+					gtkadd($check_hdw_config),
+					gtksignal_connect($check_thin = new Gtk2::CheckButton(N("Thin Client")), 
+						clicked => sub { invbool \$is_thin }),	
 				),
 				gtkadd(new Gtk2::VBox(1,10),
-					gtkadd(new Gtk2::HBox(0,1),
-						gtksignal_connect($check_thin = new Gtk2::CheckButton(N("Thin Client")), clicked =>
-						sub { invbool \$is_thin }),
-						$check_allow_thin = new Gtk2::CheckButton(N("Allow Thin Clients")),
-					), 
-#					new Gtk2::HBox(1,1),
+					$check_allow_thin = new Gtk2::CheckButton(N("Allow Thin Clients")),
 					gtksignal_connect(new Gtk2::Button(N("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text;
 							my $mac = $entry_mac->get_text;
@@ -847,12 +849,12 @@ sub maintain_clients() {
 									$model->append($c_det_ip, $t_client);
     								$model->set($c_det_ip, [ 0 => $ip ]);
 																		
-									my $client_type = "type: fat";
-									$client_type = "type: thin" if $is_thin == 1;
+									my $client_type = N("type: fat");
+									$client_type = N("type: thin") if $is_thin == 1;
 									my $c_det_type = Gtk2::TreeIter->new;
 									$model->append($c_det_type, $t_client);
     								$model->set($c_det_type, [ 0 => $client_type ]);
-									
+					
 									if ($nbi) {											
 										my $c_det_nbi = Gtk2::TreeIter->new;
 										$model->append($c_det_nbi, $t_client);
@@ -860,6 +862,13 @@ sub maintain_clients() {
 									}									
 									$check_thin->set_active(0);
 									$is_thin = 0;
+									
+									my $hdw_config = N("local config: false");
+									$hdw_config = N("local config: true") if $local_config == 1;
+									my $c_hdw_config = Gtk2::TreeIter->new;
+									$model->append($c_hdw_config, $t_client);
+    								$model->set($c_hdw_config, [ 0 => $hdw_config ]);
+					
 								}		
 							}
 						}),
