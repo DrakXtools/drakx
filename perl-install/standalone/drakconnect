@@ -231,7 +231,6 @@ sub manage {
     each_index {
 	my ($name, $interface, $protocol) = ($_, $config->{$_}{kind}, $config->{$_}{protocol});
 	$gui->{$interface}{index} = $::i;
-	$interface =~ /eth|ath|wlan/ and $config->{$name{$interface}} = $interface && delete $config->{$name};
 	build_tree($netc, $intf->{$interface} ||= {}, $name, $interface, $protocol);
 	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
