@@ -437,8 +437,8 @@ sub wait_message {
     push @tempory::objects, $w if $temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
-    #- enable access through set_label
-    MDK::Common::Func::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set_label');
+    #- enable access through set
+    MDK::Common::Func::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set');
     $b;
 }
 
