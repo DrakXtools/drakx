@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 36mdk
+Release: 37mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-37mdk
+- drakconnect (#9669):
+ o prevent identification mismatch on ethtool results
+ o fix card name lookup when driver does not support GDRVINFO command
+   from ETHTOOL ioctl and there's only one card managed by this driver
+
 * Mon May 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-36mdk
 - ugtk2:: still provide compat stuff for OptionMenu widget (#9826)
 - drakTermServ: add /etc/modprobe* mount points for client hardware
