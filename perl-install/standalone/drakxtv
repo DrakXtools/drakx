@@ -46,27 +46,26 @@ sub scan4channels {
 	    );
 # HRC means Harmonically Related Carrier
 
-    $in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
+    if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 			   [
 			    { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo'},
 			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
-			    ],
-			   complete => sub { 
-				  my $wait = $in->wait_message(_('Please wait'),
-										 _("Scanning for TV channels in progress ..."));
-
-#                     we provide scantv a bogus table (france) which will
-#                     will be ignored as "All" is selected because of -a
-				  $ftable_id = "france -a " if ($ftable_id eq -1);
-				  # Note that this'll be broken if/when we implement interactive_qt
-				  my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
-				  system( (($use_X ) ?
-						 "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
-						. "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
-				  print "Now, you can run xawtv !\n";
-				  $in->exit(0);
-			   },
-			   );
+			    ]
+				 )) {
+	   my $wait = $in->wait_message(_('Please wait'),
+							  _("Scanning for TV channels in progress ..."));
+	   
+#       we provide scantv a bogus table (france) which will
+#       will be ignored as "All" is selected because of -a
+	   $ftable_id = "france -a " if ($ftable_id eq -1);
+	   # Note that this'll be broken if/when we implement interactive_qt
+	   my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
+	   system ( (($use_X ) ?
+			  "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
+			 . "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
+	   print "Now, you can run xawtv !\n";
+	   $in->exit(0);
+    };
     $in->exit(0);
 }
 
