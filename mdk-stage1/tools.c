@@ -21,6 +21,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -31,6 +32,7 @@
 #include <sys/types.h>
 #include <bzlib.h>
 #include <sys/mount.h>
+#include <sys/poll.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -249,8 +251,19 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	int bytes_read = 0;
 	int actually;
 	int seems_ok = 0;
+	struct pollfd polls;
+
+	/* first of all, we wait for data to be available on fd; because
+	   when it's a socket, data can be unavailable at the beginning */
+	polls.fd = ramdisk_fd;
+	polls.events = POLLIN;
+	if (poll(&polls, 1, 10000) != 1) {
+		log_message("poll'ing ramdisk fd: timeout or error");
+		return RETURN_ERROR;
+	}
 
 	st2 = BZ2_bzdopen(ramdisk_fd, "r");
+	BZ2_bzerror(st2, &z_errnum);
 
 	if (!st2) {
 		log_message("Opening compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
