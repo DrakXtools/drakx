@@ -1,0 +1,31 @@
+How to handle wizard?
+
+to switch in wizard mode:
+set $::isWizard to true;
+if $::Wizard_no_previous is set to true, the wizard won't display the previous button. Usefull for first step
+if $::Wizard_finished is set to true, the wizard will display Finish instead of Next. Usefull for last step
+
+how to code:
+Code as if there were no wizard.
+OK button is displayed as Next
+Cancel is displayed as Previous
+a additional button Cancel is added, xhich die with the exception 'wizard_cancelled'
+
+You have to handle the previous button. For example:
+
+step 1:
+ask_from list( blablablabl) or return;
+step2:
+ask_from list( blablablabl) or goto step1;
+step3:
+ask_from list( blablablabl) or goto step2;
+
+etc... You don't have to handle the wizard Cancel button as it send an exception.
+
+Understood? If yes, you'll see that there is a pb with ask_yesorno. In this case, yes+next returns true, no+next returns false, Cancel send the exception 'wizard_canceled' and previous send the exception 'wizard previous'. So you have to handle the previous button manually.
+
+plop.
+
+dam's, pour vous servir
+
+
