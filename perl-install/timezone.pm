@@ -38,27 +38,43 @@ sub write {
 }
 
 my %l2t = (
+'Afrikaans (South Africa)' => 'Africa/Johannesburg',
+'Arabic' => 'Africa/Cairo',
+'Armenian (Armenia)' => 'Asia/Yerevan',
+'Azeri (Azerbaijan)' => 'Asia/Baku',
+'Belarussian (Belarus)' => 'Europe/Minsk',
+'Bosnian (Bosnia)' => 'Europe/Sarajevo',
 'Brezhoneg (Brittany)' => 'Europe/Paris',
+'Bulgarian (Bulgaria)' => 'Europe/Sofia',
+'Catalan' => 'Europe/Madrid',
 'Chinese (China)' => 'Asia/Shanghai',
 'Croatian (Bosnia)' => 'Europe/Sarajevo',
 'Croatian (Croatia)' => 'Europe/Zagreb',
+'Cymraeg (Welsh)' => 'Europe/London',
+'Czech' => 'Europe/Prague',
 'Danish (Denmark)' => 'Europe/Copenhagen',
 'Dutch (Netherlands)' => 'Europe/Amsterdam',
 'English (USA)' => 'America/New_York',
 'English (UK)' => 'Europe/London',
 'Esperanto' => 'Europe/Warsaw',
 'Estonian (Estonia)' => 'Europe/Tallinn',
+'Euskara (Basque)' => 'Europe/Madrid',
 'Finnish (Finland)' => 'Europe/Helsinki',
 'French (France)' => 'Europe/Paris',
 'French (Belgium)' => 'Europe/Brussels',
 'French (Canada)' => 'Canada/Atlantic', # or Newfoundland ? or Eastern ?
 'Gaeilge (Ireland)' => 'Europe/Dublin',
+'Galego' => 'Europe/Madrid',
+'Georgian (Georgia)' => 'Asia/Yerevan',
 'German (Austria)' => 'Europe/Vienna',
 'German (Germany)' => 'Europe/Berlin',
 'Greek (Greece)' => 'Europe/Athens',
+'Greenlandic' => 'Arctic/Longyearbyen',
+'Hebrew (Israel)' => 'Asia/Tel_Aviv',
 'Hungarian (Hungary)' => 'Europe/Budapest',
 'Icelandic (Iceland)' => 'Atlantic/Reykjavik',
 'Indonesian (Indonesia)' => 'Asia/Jakarta',
+'Iranian (Iran)' => 'Asia/Tehran',
 'Italian (Italy)' => 'Europe/Rome',
 #-'Italian (San Marino)' => 'Europe/San_Marino',
 #-'Italian (Vatican)' => 'Europe/Vatican',
@@ -67,6 +83,8 @@ my %l2t = (
 'Korean (Korea)' => 'Asia/Seoul',
 'Latvian (Latvia)' => 'Europe/Riga',
 'Lithuanian (Lithuania)' => 'Europe/Vilnius',
+'Macedonian (Macedonia)' => 'Europe/Skopje',
+'Maori (New Zealand)' => 'Australia/Sydney',
 'Norwegian (Bokmaal)' => 'Europe/Oslo',
 'Norwegian (Nynorsk)' => 'Europe/Oslo',
 'Polish (Poland)' => 'Europe/Warsaw',
@@ -76,20 +94,27 @@ my %l2t = (
 'Russian (Russia)' => 'Europe/Moscow',
 'Serbian (Serbia)' => 'Europe/Belgrade',
 'Slovak (Slovakia)' => 'Europe/Bratislava',
+'Slovenian (Slovenia)' => 'Europe/Ljubljana',
 'Spanish (Argentina)' => 'America/Buenos_Aires',
 'Spanish (Mexico)' => 'America/Mexico_City',
 'Spanish (Spain)' => 'Europe/Madrid',
 'Swedish (Sweden)' => 'Europe/Stockholm',
+'Tajik (Tajikistan)' => 'Asia/Dushanbe',
+'Tamil (Sri Lanka)' => 'Asia/Colombo',
+'Tatar' => 'Europe/Minsk',
 'Thai (Thailand)' => 'Asia/Bangkok',
 'Turkish (Turkey)' => 'Europe/Istanbul',
 'Ukrainian (Ukraine)' => 'Europe/Kiev',
+'Uzbek (Uzbekistan)' => 'Asia/Tashkent',
+'Vietnamese (Vietnam)' => 'Asia/Saigon',
 'Walon (Belgium)' => 'Europe/Brussels',
 );
 
-sub bestTimezone {
-    my ($langtext) = @_;
-    $l2t{common::bestMatchSentence($langtext, keys %l2t)};
+sub fuzzyChoice { 
+    my ($b, $count) = common::bestMatchSentence($_[0], keys %l2t);
+    $count ? $b : '';
 }
+sub bestTimezone { $l2t{fuzzyChoice($_[0])} || 'GMT' }
 
 my %sex = (
 fr_FR => { '[iln]a$' => 1, '[cdilnst]e$' => 1, 'e$' => .8, 'n$' => .1, 'd$' => .05, 't$' => 0 },
