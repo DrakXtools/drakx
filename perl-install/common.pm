@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate formatError_and_log);
+@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -161,10 +161,11 @@ sub expand_symlinks_but_simple {
 
 sub sync { &MDK::Common::System::sync }
 
-sub formatError_and_log {
+BEGIN { undef *formatError };
+sub formatError {
     my ($err) = @_;
     log::l("error: $err");
-    formatError($err);
+    &MDK::Common::String::formatError($err);
 }
 
 # Group the list by n. Returns a reference of lists of length n
