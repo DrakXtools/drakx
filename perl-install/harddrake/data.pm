@@ -307,7 +307,16 @@ our @tree =
       string => N("USB controllers"),
       icon => "usb.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices) },
+      detector => sub { f(grep { $_->{media_type} eq 'SERIAL_USB' } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "USB_HUB",
+      string => N("USB ports"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /Hub/ } @devices) },
       checked_on_boot => 0,
      },
 
