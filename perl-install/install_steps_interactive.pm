@@ -554,7 +554,7 @@ sub chooseCD {
     my @mediumsDescr = ();
     my %mediumsDescr = ();
 
-    unless (grep { /ram3/ } cat_("/proc/mounts")) {
+    if (isCdNotEjectable()) {
 	#- mono-cd in case of no ramdisk
 	undef $packages->{mediums}{$_}{selected} foreach @mediums;
 	log::l("low memory install, using single CD installation (as it is not ejectable)");
