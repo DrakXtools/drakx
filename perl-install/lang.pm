@@ -515,16 +515,19 @@ my %charset2kde_font = (
   'iso-8859-2'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-9'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-15' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
-  'gb2312' => [ "default-ming,16" ],
   'jisx0208' => [ "misc-fixed,14", "wadalab-gothic,13" ],
   'ksc5601' => [ "daewoo-gothic,16" ],
-  'Big5'   => [ "taipei-fixed,16" ],
-  'armscii-8' => [ "clearlyu,17" ],
-  'utf_ka'    => [ "clearlyu,17" ],
-  'viscii'  => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
+  'gb2312' => [ "default-ming,16" ],
+  'Big5' => [ "taipei-fixed,16" ],
+  'tis620' => [ "misc-norasi,17", ],
+  'viscii' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
   #- TSCII uses pseudo iso-8859-1 fonts, it is important to choose them
   #- correctly
-  'tscii'  => [ "tsc_avarangal,14", "tsc_avarangalfxd,10", "tsc_avarangal,12", ],
+  'tscii' => [ "tsc_avarangal,14", "tsc_avarangalfxd,10", "tsc_avarangal,12", ],
+  #- the following should be changed to better defaults when better fonts
+  #- get available
+  'armscii-8' => [ "clearlyu,17" ],
+  'utf_ka' => [ "clearlyu,17" ],
   'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
 
