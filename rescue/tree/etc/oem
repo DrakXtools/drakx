@@ -141,7 +141,7 @@ if ($minor == 5) {
     print F "resize $hd_parts[0]{minor} $point $hd_size\n";
 }
 printf F "mkpart logical ext2 %s %s\n", $point, $point+$inst_size; $point+=$inst_size+5;
-printf F "mkpart logical linux-swap %s %s\n", $point, $point+$swap_size; $point+=$inst_size+5;
+printf F "mkpart logical linux-swap %s %s\n", $point, $point+$swap_size; $point+=$swap_size+5;
 printf F "mkpart logical ext2 %s %s\n", $point, $point+$root_size < $hd_size ? $point+$root_size : $hd_size;
 print F "quit\n";
 close F or die "unable to partition the disk $hd";
