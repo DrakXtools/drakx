@@ -124,13 +124,14 @@ done
 
 
 install_kernel() {
- v=2.4.7-BOOT4
+ v=2.4.7-8mdk
+ vv=${v}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
- scp kenobi:~chmou/work/kernel/archive/kernel-$v.tar.bz2 /tmp
- cd ~/gi/all.kernels ; rm -rf $v ; mkdir $v ; cd $v ; tar xfj /tmp/kernel-$v.tar.bz2 
+ scp kenobi:~chmou/work/kernel/archive/kernel-BOOT-$v.i586.rpm /tmp
+ cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/kernel-BOOT-$v.i586.rpm | cpio -id
  cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
- /bin/cp -f all.kernels/$v/boot/vmlinu* /var/lib/tftpboot/vmlinuz
+ /bin/cp -f all.kernels/$vv/boot/vmlinu* /var/lib/tftpboot/vmlinuz
  /bin/cp -f images/network.rdz /var/lib/tftpboot/
- /bin/cp -f ~/gi/all.modules/modules.cz-$v /export/Mandrake/mdkinst/lib/modules.cz
+ /bin/cp -f ~/gi/all.modules/modules.cz-$vv /export/Mandrake/mdkinst/lib/modules.cz
 }
 # scp kenobi:~mbadaire/kernel/boot/archive/kernel-$v.tar.bz2 /tmp
