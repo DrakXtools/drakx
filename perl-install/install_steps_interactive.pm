@@ -926,12 +926,14 @@ Do you want to install the updates ?"))) || return;
     if ($update_medium) {
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
 	    $o->pkg_install;
-	    $o->install_urpmi;
 	} else {
 	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
 	    #- this is possible by deselecting the medium (which can be re-selected above).
 	    delete $update_medium->{selected};
 	}
+	#- update urpmi even, because there is an hdlist available and everything is good,
+	#- this will allow user to update the medium but update his machine later.
+	$o->install_urpmi;
     }
  
     #- stop interface using ppp only. FIXME REALLY TOCHECK isdn (costly network) ?
