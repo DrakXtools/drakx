@@ -139,7 +139,7 @@ sleep 10
 ),
                   stop => qq(modprobe -r $bewan_module),
                   plugin => {
-                             pppoa => "pppoatm.so $netc->{vpi}." . hex($netc->{vci})
+                             pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci}))
                             },
                   ppp_options => qq(
 lock 
