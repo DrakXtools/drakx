@@ -144,7 +144,7 @@ sub pref_dialog() {
     } (N("Module name"), N("Size"));
     
     gtkpack_($dialog->vbox,
-             0, gtkadd(Gtk2::Frame->new(N("mkinitrd optional arguments")),
+             0, gtkadd(Gtk2::Frame->new(N("Mkinitrd optional arguments")),
                        gtkpack__(Gtk2::VBox->new(0, 5),
                                  $buttons{force} = new Gtk2::CheckButton(N("force")),
                                  $buttons{raid} = new Gtk2::CheckButton(N("omit raid modules")),
