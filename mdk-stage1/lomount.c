@@ -80,6 +80,8 @@ set_loop (const char *device, const char *file, int gz)
 	loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 	loopinfo.lo_offset = 0;
         if (gz) {
+                my_insmod("cryptoloop", ANY_DRIVER_TYPE, NULL, 1);
+                my_insmod("zlib_inflate", ANY_DRIVER_TYPE, NULL, 1);
                 my_insmod("gzloop", ANY_DRIVER_TYPE, NULL, 1);
                 loopinfo.lo_encrypt_type = 13; /* LO_CRYPT_GZ */
         }
@@ -115,11 +117,9 @@ set_loop (const char *device, const char *file, int gz)
 }
 
 
-char* find_free_loop(int chloop)
+char* find_free_loop()
 {
-        char loopdev[] = "/dev/loop0";
-        char chloopdev[] = "/dev/chloop0";
-        char * ldev = chloop ? chloopdev : loopdev;        
+        char ldev[] = "/dev/loop0";
 	struct loop_info loopinfo;
         int i;
         for (i=0; i<8; i++) {
@@ -167,19 +167,13 @@ lomount(char *loopfile, char *where, char **dev, int gz)
   
 	long int flag;
         char * loopdev;
-        int chloop = 0;
 
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
-#ifdef MANDRAKE_MOVE
-	my_insmod("change_loop", ANY_DRIVER_TYPE, NULL, 1);
-        chloop = 1;
-#else
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL, 1);
-#endif
 
-        if (!(loopdev = find_free_loop(chloop))) {
+        if (!(loopdev = find_free_loop())) {
 		log_message("could not find a free loop");
 		return 1;
         }
