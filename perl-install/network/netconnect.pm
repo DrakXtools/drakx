@@ -120,12 +120,12 @@ If you don't want to use the auto detection, deselect the checkbox.
   step_2:
 
     my @l = (
-	  [ join('', N("Normal modem connection"), if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem}))), \$conf{modem} ],
-	  [ join('', N("Winmodem connection"), if_($netc->{autodetect}{winmodem}, " - " . N("detected"))), \$conf{winmodem} ],
-	  [ join('', N("ISDN connection"), if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description}))), \$conf{isdn} ],
-	  [ join('', N("ADSL connection"), if_($netc->{autodetect}{adsl}, " - " . N("detected"))), \$conf{adsl} ],
-	  [ join('', N("Cable connection"), if_($netc->{autodetect}{cable}, " - " . N("cable connection detected"))), \$conf{cable} ],
-	  [ join('', N("LAN connection"), if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected"))), \$conf{lan} ]
+	  [ join('', N("Normal modem connection"), if_($conf{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem}))), \$conf{modem} ],
+	  [ join('', N("Winmodem connection"), if_($conf{winmodem}, " - " . N("detected"))), \$conf{winmodem} ],
+	  [ join('', N("ISDN connection"), if_($conf{isdn}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description}))), \$conf{isdn} ],
+	  [ join('', N("ADSL connection"), if_($conf{adsl}, " - " . N("detected"))), \$conf{adsl} ],
+	  [ join('', N("Cable connection"), if_($conf{cable}, " - " . N("cable connection detected"))), \$conf{cable} ],
+	  [ join('', N("LAN connection"), if_($conf{lan}, " - " . N("ethernet card(s) detected"))), \$conf{lan} ]
 	 );
     eval { $in->ask_from_({ title => N("Network Configuration Wizard"),
 			    messages => N("Choose the connection you want to configure"),
