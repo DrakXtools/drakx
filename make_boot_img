@@ -273,6 +273,7 @@ sub boot_img_i386 {
 
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
+	#- argh not enough room, try to suggest how to solve this
 	unlink "$mnt/$short_type.rdz";
 	my $avail = (split ' ', `df $mnt`)[-3];
 	my $s = int((-s $rdz) / 1024);
