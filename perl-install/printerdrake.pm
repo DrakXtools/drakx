@@ -441,6 +441,14 @@ and optionally the port number."), [
 		$in->ask_from_entries_refH_powered(
                     { title => _("Select Printer Connection"),
 		      cancel => !$::expert || !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
+		      callbacks => { complete => sub {
+					 unless ($printer->{QUEUE} =~ /^\w*$/) {
+					     $in->ask_warn('', _("Name of printer should contains only letters, numbers and the underscore"));
+					     return (1,0);
+					 }
+					 return 0;
+				     },
+				   },
 		      messages =>
 _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
@@ -449,7 +457,7 @@ how is the printer connected?") }, [
 { label => _("Name of printer"), val => \$printer->{QUEUE} },
 { label => _("Description"), val => \$printer->{Info} },
 { label => _("Location"), val => \$printer->{Location} },
-				  ]) or printer::remove_queue($printer), $continue = 1, last;
+                                   ]) or printer::remove_queue($printer), $continue = 1, last;
 	    } else {
 		if (!$::expert) {
 		    $printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
