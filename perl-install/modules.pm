@@ -297,6 +297,7 @@ if_(arch() !~ /^sparc/,
 [ 'pcmcia', {
 if_(arch() !~ /^sparc/,
   "ide_cs" => "ide_cs",
+  "ide-cs" => "ide-cs",  #- sucking kernel-pcmcia
   "fmvj18x_cs" => "fmvj18x_cs",
   "fdomain_cs" => "fdomain_cs",
   "netwave_cs" => "netwave_cs",
@@ -326,7 +327,8 @@ if_(arch() !~ /^sparc/,
   "serial_cb" => "serial_cb",
 #  "sram_mtd" => "sram_mtd",
   "tulip_cb" => "tulip_cb",
-
+  "xircom_tulip_cb" => "xircom_tulip_cb",
+  "xircom_cb" => "xircom_cb",
 ),
 }],
 [ 'pcmcia_everywhere', {
@@ -335,6 +337,7 @@ if_(arch() !~ /^sparc/,
   "tcic" => "PCMCIA tcic controller",
   "ds" => "PCMCIA card support",
   "i82365" => "PCMCIA i82365 controller",
+  "yenta_socket" => "PCMCIA PCI i82365-style controller",
 ),
 }],
 [ 'paride', {
@@ -624,7 +627,7 @@ sub load_raw {
 }
 
 sub read_already_loaded() {
-    foreach (cat_("/proc/modules")) {
+    foreach (reverse cat_("/proc/modules")) {
 	my ($name) = split;
 	$conf{$name}{loaded} = 1;
 	when_load($name, $drivers{$name}{type});
