@@ -30,7 +30,7 @@ sub ppp_read_conf {
     }
     foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
         /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
-        /^METRIC=(.*)/ and $modem->{metric} = $1;
+        /^METRIC=(.*)/ and $modem->{METRIC} = $1;
     }
     $modem->{login} ||= $l{Username};
     my $secret = network::tools::read_secret_backend();
@@ -77,7 +77,7 @@ sub ppp_configure {
     }
     $toreplace{Gateway} = $modem->{auto_gateway} eq N("Automatic") ? '0.0.0.0' : $modem->{Gateway};
 
-    $toreplace{metric} = defined($modem->{metric}) ? $modem->{metric} : network::tools::get_default_metric("modem");
+    $toreplace{METRIC} = defined($modem->{METRIC}) ? $modem->{METRIC} : network::tools::get_default_metric("modem");
 
     #- build ifcfg-ppp0.
     my $various = <<END;
@@ -104,7 +104,7 @@ DISCONNECTTIMEOUT="5"
 RETRYTIMEOUT="60"
 BOOTPROTO="none"
 PEERDNS="$toreplace{peerdns}"
-METRIC=$toreplace{metric}
+METRIC=$toreplace{METRIC}
 END
     output("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
 	   $various,
