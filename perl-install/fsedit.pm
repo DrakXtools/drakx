@@ -449,7 +449,7 @@ sub computeSize {
     }
     my $size = int min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
     #- verify other entry can fill the hole
-    any { $_->{size} < $max - $size } @L ? $size : $max;
+    (any { $_->{size} < $max - $size } @L) ? $size : $max;
 }
 
 sub suggest_part {
