@@ -1,3 +1,273 @@
+2002/08/05  alus
+
+	* share/po/pl.po: removed unused strings
+	updated translation, ugh... after second beta so much changes??
+
+2002/08/05  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/logdrake: 
+	  - do not show empty wizard when save button clicked.
+	  - cleanup (remove all sms stuffs: code and labels)
+	  - do not expand mail address
+
+2002/08/05  gbeauchesne
+
+	* Makefile: lib64 fixes
+	  - Move xf86Wacom.so modules to {i386,ppc}-specific filelist
+	  - Make filelists lib64 aware with LIB variable
+	  - Add x86_64-specific filelist
+
+	* share/list.i386, Makefile.config, share/list, share/list.x86_64,
+	share/list.ppc: 
+	  - Move xf86Wacom.so modules to {i386,ppc}-specific filelist
+	  - Make filelists lib64 aware with LIB variable
+	  - Add x86_64-specific filelist
+
+2002/08/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* drakxtools.spec: 1.1.9-5mdk
+	1.1.9-4mdk
+
+	* my_gtk.pm: the state can be XXX also in flat mode, for disabling
+	the setting of the state
+
+2002/08/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/cy.po, share/po/ca.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/fr.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po: updated pot file
+
+	* share/po/sv.po, share/po/da.po, share/po/hu.po: updated pot file
+	updated po files
+
+	* share/po/tr.po, share/po/pt.po: updated po files
+	updated pot file
+
+2002/08/05  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/Makefile: packdrake.pm is now in vendorlib
+
+	* commands.pm: make perl_checker happy
+
+	* bootlook.pm, standalone/printerdrake, standalone/draksec,
+	standalone/drakfloppy, standalone/drakxservices, standalone/drakfont,
+	standalone/drakautoinst, my_gtk.pm, standalone/drakconnect,
+	standalone/drakgw, standalone/XFdrake, standalone/tinyfirewall,
+	standalone/keyboarddrake, standalone/drakTermServ,
+	standalone/mousedrake, standalone/scannerdrake: replace "kill USR1" with
+	"kill 'USR1'" (and same for USR2)
+	(so that 'use strict' works)
+
+	* drakxtools.spec: rebuild for perl thread-multi
+
+	* diskdrake/smbnfs_gtk.pm: adapt to ugtk
+
+	* standalone.pm (install): verify at least one package is not installed
+	before displaying a
+	wait_message and calling urpmi (thanks to Jure Repinc)
+	(is_installed): use run_program and redirect stdout to dave null for
+	cleanness
+
+	* Xconfig/card.pm: fix Option's (especially for XFree3)
+	don't have Utah GLX the default. XFree4 is the default
+
+	* share/list: switch to thread-multi
+	packdrake.pm is now in vendorlib
+
+	* Xconfig/main.pm: call the "Quit" button exit during install (as
+	suggested by David Sansome)
+
+	* any.pm, mouse.pm: do the job of devfsd in case devfsd doesn't do it
+
+	* install_steps_interactive.pm: as suggested by Buchan Milne, defaults
+	LDAP Server to ldap.DOMAINNAME
+
+	* Xconfig/xfree4.pm: still have HorizSync and VertRefresh for Plug'n Play
+	monitors
+	(XFree4 still need some help)
+
+	* standalone/drakboot: replace "kill USR1" with "kill 'USR1'" (and same
+	for USR2)
+	(so that 'use strict' works)
+	a few more fixes (thanks Jure Repinc & Richard Burt)
+
+2002/08/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_any.pm: smbpasswd call deferred with addToBeDone
+
+2002/08/05  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Make/Model/Driver list in expert mode: Fixed bug of
+	"recommended" driver entries getting a duplicate entry without
+	"recommended" when entering the list via double-click on existing queue
+	/ "Printer manufacturer, model, driver".
+	Finished auto-detection of network and SMB printers.
+	Added automatic configuration of HP's multi-function devices when
+	connected via HP JetDirect (network).
+
+	* printer.pm: Finished auto-detection of network and SMB printers.
+	Added automatic configuration of HP's multi-function devices when
+	connected via HP JetDirect (network).
+
+2002/08/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* modules.pm: 
+	  - export %modules::conf
+	  - kill modparm::raw_parameters and modparm::parameter_type
+	which get merged back in modparm::parameters
+	  - add more parameters to modparm::parameters for harddrake
+	 harddrake/ui.pm |   19 ++++++++++---------
+	 modparm.pm      |   33 +++++++++------------------------
+	   2 files changed, 19 insertions(+), 33 deletions(-)
+
+	* install_steps_gtk.pm, network/network.pm, log.pm, install_steps.pm,
+	interactive.pm, bootloader.pm, harddrake/data.pm, steps.pm,
+	install_steps_interactive.pm, keyboard.pm, printer.pm, lang.pm,
+	fsedit.pm, install2.pm, detect_devices.pm, common.pm, commands.pm:
+	s/__END__/1;
+	kill "wonderful perl"
+
+	* harddrake/ui.pm: 
+	  - export %modules::conf
+	  - kill modparm::raw_parameters and modparm::parameter_type
+	which get merged back in modparm::parameters
+	  - add more parameters to modparm::parameters for harddrake
+	 harddrake/ui.pm |   19 ++++++++++---------
+	 modparm.pm      |   33 +++++++++------------------------
+	   2 files changed, 19 insertions(+), 33 deletions(-)
+	no one use second paramater of raw_parameters
+	factorize some code in modparm::parameter_type
+	s/__END__/1;
+
+	* modparm.pm: 
+	  - export %modules::conf
+	  - kill modparm::raw_parameters and modparm::parameter_type
+	which get merged back in modparm::parameters
+	  - add more parameters to modparm::parameters for harddrake
+	 harddrake/ui.pm |   19 ++++++++++---------
+	 modparm.pm      |   33 +++++++++------------------------
+	   2 files changed, 19 insertions(+), 33 deletions(-)
+	no one use second paramater of raw_parameters
+	factorize some code in modparm::parameter_type
+
+	* standalone/service_harddrake.sh: english fixes
+
+	* standalone/logdrake, scanner.pm, standalone/drakautoinst,
+	standalone/drakgw, standalone/scannerdrake: kill $Log (487 useless lines
+	supressed from drakxtools)
+
+2002/08/04  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_any.pm, install_steps_interactive.pm: partial rework of Windows
+	PDC authentication, still need
+	to run smbpasswd after network is up
+
+2002/08/04  Till Kamppeter  <till@mandrakesoft.com>
+
+	* detect_devices.pm, printerdrake.pm: Accelerated network scanning for
+	printers by applying "nmap" only to machines which answered to a
+	broadcast ping before.
+	Completed network/SMB printer auto-detection for recommended mode.
+	Started network/SMB printer auto-detection for expert mode.
+
+2002/08/02  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/logdrake: 
+	  - expand $email in cron script
+	  - disable sms alerts (free sms site too complicated to
+	handle). Postponed
+	  - mail service should work now
+	  - clean up code
+	  - give the correct right to cron file to work correctly
+	  - fix titi mess
+
+	* standalone/drakbug: 
+	  - avoiding looping indefinitalely when selecting items in combo
+	  - add commandline arguments: drakbug --report name_app
+
+2002/08/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* interactive/gtk.pm, my_gtk.pm: move interactive::gtk::exit to
+	my_gtk::exit so that my_gtk
+	apps can call it (and fix busy mouse cursor problem that way)
+
+2002/08/02  jgotti
+
+	* standalone/drakboot: minor bugfix in calling bootloader::read
+
+2002/08/02  Pixel  <pixel@mandrakesoft.com>
+
+	* drakxtools.spec: keyboarddrake now handles choosing toggle key
+	(XkbOptions)
+
+2002/08/02  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Corrected strings for printer queue list in main window.
+
+2002/08/02  warly
+
+	* share/rpmsrate, share/compssUsers: add lsb group
+
+2002/08/01  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: drop keyboard unsafe when not unsafe
+	anymore
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+	* Xconfig/various.pm: finish tvout configuration
+
+	* any.pm, Xconfig/xfreeX.pm, standalone/keyboarddrake, install2.pm,
+	install_steps.pm, Xconfig/parse.pm, Xconfig/default.pm, commands.pm,
+	printerdrake.pm: 
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+	* bootloader.pm (duplicate_kernel_entry): added
+
+	* keyboard.pm: don't have "unsafe" in /etc/sysconfig/keyboard
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+2002/08/01  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Added stuff for scanning network for SMB printer
+	shares.
+
+	* detect_devices.pm: Added facility to scan network for SMB/Windows-hosted
+	printers.
+
+2002/08/01  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Makefile.config, drakxtools.spec: drakconf is dead
+
+	* harddrake/ui.pm, harddrake/TODO: update
+
+2002/08/01  warly
+
+	* share/logo-mandrake.png: new logo for beta 2
+
 2002/08/01  alus
 
 	* share/po/pl.po: updated translation
