@@ -110,6 +110,8 @@ endif
 	done
 	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
 
+	for i in $(DEST)/usr/share/icons/*.xpm; do convert $$i `echo $$i | sed 's/xpm/png/'`; rm $$i; done
+
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
@@ -123,7 +125,7 @@ endif
 	cd share ; cp -a modparm.lst $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
-	cd share ; cp *.png $(DEST)/usr/share
+	cd share ; cp -f *.png *.xpm $(DEST)/usr/share
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
@@ -143,7 +145,7 @@ endif
 
 ifeq (i386,$(ARCH))
 	cp -a /etc/pcmcia $(DEST)/etc
-	patch -p0 -d $(DEST)/etc < ../install/pcmcia_config.patch
+	patch -p0 -d $(DEST)/etc < ../tools/pcmcia_config.patch
 endif
 
 	find $(DEST) -name CVS | xargs rm -rf
