@@ -79,19 +79,16 @@ if (@busy) {
     my $choice = 'quit';
     my @l = my %l = (
 		     kill => N("Kill those programs"), 
-		     keep => N("Run with no CDROM support"), 
-		     quit => N("Quit"),
+		     keep => N("No CDROM support"), 
 		    );
 
-    $in->ask_from_({ ok => undef,
+    $in->ask_from_({ 
 		     title => N("Busy files"),
 		     messages => N("You can't use another CDROM when the following programs are running: 
 %s", join(", ", uniq(sort @progs))) }, 
-		  [ { type => 'list', val => \$choice, list => first(list2kv(@l)), format => sub { $l{$_[0]} } } ]);
+		  [ { type => 'list', val => \$choice, list => first(list2kv(@l)), format => sub { $l{$_[0]} } } ]) or $in->exit;
 
-    if ($choice eq 'quit') {
-	$in->exit;
-    } elsif ($choice eq 'keep') {
+    if ($choice eq 'keep') {
 	exec 'totem' or $in->exit;
     } else {
 	kill 15, map { $_->{pid} } @busy;
