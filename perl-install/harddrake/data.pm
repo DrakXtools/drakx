@@ -197,7 +197,7 @@ our @tree =
           #- protocol report are not accurate) so I'll need to verify against
           #- known drivers :-(
           require list_modules;
-          my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
+          my @usbnet = (list_modules::category2modules('network/usb'), qw(forcedeth nvnet)); # rought hack for nforce2's nvet
           
           f(grep {
               $_->{media_type} && $_->{media_type} =~ /^NETWORK/
