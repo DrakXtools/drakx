@@ -570,7 +570,7 @@ sub main {
 	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
     if ($::recovery) {
-	push @auto, 'selectLanguage', 'selectInstallClass', 'doPartitionDisks', 'formatPartitions';
+	push @auto, 'selectLanguage', 'selectInstallClass', 'selectMouse', 'selectKeyboard', 'doPartitionDisks', 'formatPartitions', 'miscellaneous', 'choosePackages', 'configureTimezone';
     }
 
     foreach (@auto) {
