@@ -562,7 +562,7 @@ sub install_urpmi {
 		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		    local $_; 
 		    while (<$F>) {
-			my $arch = $_->arch;
+                        my ($arch) = $_ =~ /\.([^\.]+)\.rpm/;
 			my $ldir = $dir;
 			$ldir =~ s|/([^/]*)%{ARCH}|/./$1$arch|; $ldir =~ s|%{ARCH}|$arch|g;
 			print $LIST "$ldir/$_";
