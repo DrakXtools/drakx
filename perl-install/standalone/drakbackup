@@ -323,6 +323,36 @@ sub return_path {
     }
 }
 
+sub ftp_client {
+
+use Net::FTP; 
+my $ftp = Net::FTP->new("some.host.name"); 
+$ftp->login("anonymous","mon\@adresse.mail"); 
+$ftp->cwd("/pub"); 
+$ftp->get("/ce/repertoire/ce.fichier"); 
+$ftp->quit; 
+
+#Telnet : En utilisant le package Net::Telnet
+
+# use strict; 
+# use Net::Telnet; 
+# use CGI qw/:standard :html3 :netscape escape unescape/; 
+# use CGI::Carp qw/fatalsToBrowser/; 
+# my $username="alian"; 
+# my $passwd="password"; 
+# my $HOST="indy.alianet"; 
+# print header; 
+# my $t = new Net::Telnet (Timeout=>undef) or die "Can't connect:$!"; 
+# $t->open($HOST);
+# $t->login($username, $passwd); 
+# my @lines = $t->cmd("/ma/commande/a/executer");
+# print join(' ',@lines); 
+
+}
+
+
+
+
 sub build_backup_files {
 
     -d  $save_path or mkdir_p($save_path);
