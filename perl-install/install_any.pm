@@ -504,11 +504,11 @@ sub selectSupplMedia {
 	    my $url;
 	    local $global_ftp_prefix;
 	    if ($suppl_method eq 'ftp') { #- mirrors are ftp only (currently)
-		$url = $o->askSupplMirror(N("URL of the mirror?")) or return '';
+		$url = $o->askSupplMirror(N("URL of the mirror?")) or return 'error';
 		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
 	    } else {
-		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
+		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
 	    }
 	    useMedium($medium_name);
 	    require "$suppl_method.pm"; #- require http or ftp
@@ -554,6 +554,7 @@ sub selectSupplMedia {
 		setup_suppl_medium($supplmedium, $url, $suppl_method);
 	    } else {
 		log::l("no suppl hdlist");
+		$suppl_method = 'error';
 	    }
 	}
     } else {
