@@ -82,8 +82,6 @@ sub kernelVersion {
 sub mkbootdisk {
     my ($in, $bootloader, $fstab) = @_;
 
-    $in->set_help('createBootdisk') if !$::isStandalone;
-
     if (arch() =~ /sparc/) {
 	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
 	#- [pixel] uh, but in that case it would be better to change detect_devices::floppies, no?
@@ -194,7 +192,6 @@ On which drive are you booting?"), \&partition_table::description, $hds) or retu
 sub setupBootloader__mbr_or_not {
     my ($in, $b, $hds, $fstab) = @_;
 
-    $in->set_help('setupBootloaderBeginner') if !$::isStandalone;
     if (arch() =~ /ppc/) {
 	if (defined $partition_table::mac::bootstrap_part) {
 	    $b->{boot} = $partition_table::mac::bootstrap_part;
@@ -216,8 +213,10 @@ sub setupBootloader__mbr_or_not {
 
 	my $default = arch() =~ /sparc/ ? ($b->{use_partition} ? $l[1] : $l[0]) : 
 	                                  find { $_->[1] eq $b->{boot} } @l;
-	$in->ask_from(arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
-		      N("Where do you want to install the bootloader?"),
+	$in->ask_from_({ title => arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
+			 messages => N("Where do you want to install the bootloader?"),
+			 interactive_help_id => 'setupBootloaderBeginner',
+		       },
 		      [ { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' } ]);
 	my $new_boot = $default->[1] or return;
 
@@ -236,8 +235,6 @@ sub setupBootloader__mbr_or_not {
 sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
-    $in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") if !$::isStandalone; #- TO MERGE ?
-
     my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
 
     ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
@@ -250,7 +247,9 @@ sub setupBootloader__general {
     $b->{password2} ||= $b->{password} ||= '';
     $b->{vga} ||= 'normal';
     if (arch() !~ /ppc/) {
-	$in->ask_from('', N("Bootloader main options"), [
+	$in->ask_from_({ messages => N("Bootloader main options"),
+			 interactive_help_id => 'setupBootloader',
+		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
                 arch() =~ /sparc/ ? (
             { label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
@@ -283,7 +282,9 @@ sub setupBootloader__general {
 	}) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
-	$in->ask_from('', N("Bootloader main options"), [
+	$in->ask_from_({ messages => N("Bootloader main options"),
+			 interactive_help_id => 'setupYabootGeneral',
+		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
             { label => N("Init Message"), val => \$b->{'init-message'} },
             { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
@@ -319,8 +320,6 @@ sub setupBootloader__general {
 
 sub setupBootloader__entries {
     my ($in, $b, $all_hds, $fstab) = @_;
-
-    $in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 
     my $Modify = sub {
 	my ($e) = @_;
@@ -369,7 +368,8 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	}
 
 	$in->ask_from_(
-	    { 
+	    {
+	     interactive_help_id => arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry',
 	     callbacks => {
 	       complete => sub {
 		   $e->{label} or $in->ask_warn('', N("Empty label not allowed")), return 1;
@@ -543,6 +543,7 @@ sub ask_users {
 	my $ret = $in->ask_from_(
 	    { title => N("Add user"),
 	      messages => N("Enter a user\n%s", $names),
+	      interactive_help_id => 'addUser',
 	      focus_first => 1,
 	      if_(!$::isInstall, ok => N("Done")),
 	      cancel => N("Accept user"),
@@ -621,6 +622,7 @@ sub selectLanguage {
     $in->ask_from_(
 	{ messages => N("Please choose a language to use."),
 	  title => 'language choice',
+	  interactive_help_id => 'selectLanguage',
 	  if_($::isInstall, cancel => ''),
 	  advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
 the languages you would like to install. They will be available

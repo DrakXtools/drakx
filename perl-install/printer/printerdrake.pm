@@ -18,7 +18,6 @@ use printer::data;
 
 sub choose_printer_type {
     my ($printer, $in) = @_;
-    $in->set_help('configurePrinterConnected') if $::isInstall;
     $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
     $autodetect = 1 if $printer->{AUTODETECT};
@@ -52,7 +51,7 @@ sub config_cups {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-    $in->set_help('configureRemoteCUPSServer') if $::isInstall;
+#    $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     #- hack to handle cups remote server printing,
     #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
     my ($server, $port, $autoconf);
@@ -644,7 +643,7 @@ sub setup_local_autoscan {
 
     my @autodetected;
     my $menuentries = {};
-    $in->set_help('setupLocal') if $::isInstall;
+#    $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
 	if (!$::testing &&
 	    !$expert_or_modify && $printer->{AUTODETECTSMB} && !files_exist('/usr/bin/smbclient')) {
@@ -761,7 +760,7 @@ sub setup_local_autoscan {
 	$device = $menuentries->{$menuchoice} if $device eq "";
     }
     if ($in) {
-	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
+#	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
 	if ($#menuentrieslist < 0) { # No menu entry
 	    # auto-detection has failed, we must do all manually
 	    $do_auto_detect = 0;
@@ -874,7 +873,7 @@ sub setup_lpd {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-    $in->set_help('setupLPD') if $::isInstall;
+#    $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
@@ -945,7 +944,7 @@ sub setup_smb {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-    $in->set_help('setupSMB') if $::isInstall;
+#    $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
@@ -1135,7 +1134,7 @@ sub setup_ncp {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-    $in->set_help('setupNCP') if $::isInstall;
+#    $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
@@ -1202,7 +1201,7 @@ sub setup_socket {
     # running
     if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
-    $in->set_help('setupSocket') if $::isInstall;
+#    $in->set_help('setupSocket') if $::isInstall;
 
     my ($uri, $remotehost, $remoteport);
     my $queue = $printer->{OLD_QUEUE};
@@ -1361,7 +1360,7 @@ sub setup_socket {
 sub setup_uri {
     my ($printer, $in, $upNetwork) = @_;
 
-    $in->set_help('setupURI') if $::isInstall;
+#    $in->set_help('setupURI') if $::isInstall;
     return if !$in->ask_from(N("Printer Device URI"),
 N("You can specify directly the URI to access the printer. The URI must fulfill either the CUPS or the Foomatic specifications. Note that not all URI types are supported by all the spoolers."), [
 { label => N("Printer Device URI"),
@@ -1450,7 +1449,7 @@ complete => sub {
 sub setup_postpipe {
     my ($printer, $in) = @_;
 
-    $in->set_help('setupPostpipe') if $::isInstall;
+#    $in->set_help('setupPostpipe') if $::isInstall;
     my $uri;
     my $commandline;
     my $queue = $printer->{OLD_QUEUE};
@@ -1820,7 +1819,7 @@ sub setup_common {
 sub choose_printer_name {
     my ($printer, $in) = @_;
     # Name, description, location
-    $in->set_help('setupPrinterName') if $::isInstall;
+#    $in->set_help('setupPrinterName') if $::isInstall;
     my $default = $printer->{currentqueue}{queue};
     $in->ask_from_(
 	 { title => N("Enter Printer Name and Comments"),
@@ -1969,7 +1968,7 @@ sub get_db_entry {
 
 sub is_model_correct {
     my ($printer, $in) = @_;
-    $in->set_help('chooseModel') if $::isInstall;
+#    $in->set_help('chooseModel') if $::isInstall;
     my $dbentry = $printer->{DBENTRY};
     if (!$dbentry) {
 	# If printerdrake could not determine the model, omit this dialog and
@@ -1996,7 +1995,7 @@ For your printer Printerdrake has found:
 
 sub choose_model {
     my ($printer, $in) = @_;
-    $in->set_help('chooseModel') if $::isInstall;
+#    $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
     if ((keys %printer::main::thedb) == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
@@ -2287,7 +2286,7 @@ sub setup_options {
 	 "Option29",
 	 "Option30"
 	 );
-    $in->set_help('setupOptions') if $::isInstall;
+#    $in->set_help('setupOptions') if $::isInstall;
     if ($printer->{currentqueue}{printer} || # We have a Foomatic queue
 	$printer->{currentqueue}{ppd}) { # We have a CUPS+PPD queue
 	# Set up the widgets for the option dialog
@@ -2471,7 +2470,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 
 sub setasdefault {
     my ($printer, $in) = @_;
-    $in->set_help('setupAsDefault') if $::isInstall;
+#    $in->set_help('setupAsDefault') if $::isInstall;
     if ($printer->{DEFAULT} eq '' || # We have no default printer,
 	                             # so set the current one as default
 	$in->ask_yesorno('', N("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0)) { # Ask the user
@@ -2482,7 +2481,7 @@ sub setasdefault {
 	
 sub print_testpages {
     my ($printer, $in, $upNetwork) = @_;
-    $in->set_help('printTestPages') if $::isInstall;
+#    $in->set_help('printTestPages') if $::isInstall;
     # print test pages
     my $res2 = 0;
     my %options = (alta4 => 0, altletter => 0, ascii => 0, photo => 0, standard => 1);
@@ -2740,7 +2739,7 @@ sub photocard_help {
 sub copy_queues_from {
     my ($printer, $in, $oldspooler) = @_;
 
-    $in->set_help('copyQueues') if $::isInstall;
+#    $in->set_help('copyQueues') if $::isInstall;
     my $newspooler = $printer->{SPOOLER};
     my @oldqueues;
     my @queueentries;
@@ -2885,7 +2884,7 @@ sub check_network {
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
 
-    $in->set_help('checkNetwork') if $::isInstall;
+#    $in->set_help('checkNetwork') if $::isInstall;
 
     # First check: Do configured networks
     # (/etc/sysconfig/network-scripts/ifcfg*) exist?
@@ -2958,7 +2957,7 @@ sub security_check {
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
 
-    $in->set_help('securityCheck') if $::isInstall;
+#    $in->set_help('securityCheck') if $::isInstall;
 
     # Get security level
     my $security;
@@ -3016,7 +3015,7 @@ sub start_spooler_on_boot {
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
 
-    $in->set_help('startSpoolerOnBoot') if $::isInstall;
+#    $in->set_help('startSpoolerOnBoot') if $::isInstall;
     if (!services::starts_on_boot($service)) {
 	if ($in->ask_yesorno(N("Starting the printing system at boot time"),
 			     N("The printing system (%s) will not be started automatically when the machine is booted.
@@ -3095,13 +3094,15 @@ sub install_spooler {
 
 sub setup_default_spooler {
     my ($printer, $in, $upNetwork) = @_;
-    $in->set_help('setupDefaultSpooler') if $::isInstall;
     $printer->{SPOOLER} ||= 'cups';
     my $oldspooler = $printer->{SPOOLER};
 
     my $str_spooler = 
-	$in->ask_from_list_(N("Select Printer Spooler"),
-			    N("Which printing system (spooler) do you want to use?"),
+	$in->ask_from_listf_raw({ title => N("Select Printer Spooler"),
+				  messages => N("Which printing system (spooler) do you want to use?"),
+				  interactive_help_id => 'setupDefaultSpooler',
+				},
+				sub { translate($_[0]) },
 			    [ printer::main::spooler() ],
 			    $spoolers{$printer->{SPOOLER}}{long_name},
 			    ) or return;
@@ -3279,7 +3280,7 @@ sub main {
 	    $modify = N("Printer options");
 	    if (!$ask_multiple_printer && 
 		%{$printer->{configured} || {}} == ()) {
-		$in->set_help('doYouWantToPrint') if $::isInstall;
+#		$in->set_help('doYouWantToPrint') if $::isInstall;
 		$newqueue = 1;
 		$menuchoice = $printer->{want} || 
 		    $in->ask_yesorno(N("Printer"),
@@ -3308,7 +3309,7 @@ sub main {
 		# when we are in expert mode, or when we are not in the
 		# installation.
 		if (%{$printer->{configured} || {}} || $::expert || !$::isInstall) {
-		    $in->set_help('mainMenu') if $::isInstall;
+#		    $in->set_help('mainMenu') if $::isInstall;
 		    # Cancelling the printer type dialog should leed to this
 		    # dialog
 		    $continue = 1;
@@ -3630,7 +3631,7 @@ sub main {
 	} else {
 	    $printer->{NEW} = 0;
 	    # Modify a queue, ask which part should be modified
-	    $in->set_help('modifyPrinterMenu') if $::isInstall;
+#	    $in->set_help('modifyPrinterMenu') if $::isInstall;
 	    # Get some info to display
 	    my $infoline;
 	    if ($printer->{configured}{$queue}) {

@@ -13,7 +13,7 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-    $::isInstall and $in->set_help('configureNetworkADSL');
+#    $::isInstall and $in->set_help('configureNetworkADSL');
 
   conf_adsl_step1:
     my $l = [ N_("use pppoe"),

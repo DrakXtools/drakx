@@ -326,7 +326,7 @@ notation (for example, 1.2.3.4).");
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
-    $::isStandalone or $in->set_help('configureNetworkIP');
+#    $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
   	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n") .
 	          $text,
@@ -389,7 +389,7 @@ sub configureNetworkNet {
     my $gateway_ex = gateway($intf->{IPADDR});
 #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
-    $::isInstall and $in->set_help('configureNetworkHost');
+#    $::isInstall and $in->set_help('configureNetworkHost');
     $in->ask_from(N("Configuring network"),
 N("Please enter your host name.
 Your host name should be a fully-qualified host name,
@@ -426,7 +426,7 @@ want to use the default host name."),
 
 sub miscellaneous_choose {
     my ($in, $u, $clicked, $no_track_net) = @_;
-    $in->set_help('configureNetworkProxy') if $::isInstall;
+#    $in->set_help('configureNetworkProxy') if $::isInstall;
 
     $in->ask_from('',
        N("Proxies configuration"),

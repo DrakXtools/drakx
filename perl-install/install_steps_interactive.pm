@@ -83,6 +83,7 @@ sub acceptLicense {
 
     $o->ask_from_({ title => N("License agreement"), 
 		    messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()), 
+		    interactive_help_id => 'acceptLicense',
 		    callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		  },
 		  [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list' } ]) or die 'already displayed';
@@ -105,6 +106,7 @@ sub selectKeyboard {
 	$o->ask_from_(
 		      { title => N("Keyboard"), 
 			messages => N("Please choose your keyboard layout."),
+			interactive_help_id => 'selectKeyboard',
 			advanced_messages => N("Here is the full list of keyboards available"),
 			advanced_label => N("More"),
 			callbacks => { changed => sub { $other = $_[0] == 1 } },
@@ -134,8 +136,10 @@ sub selectInstallClass {
 	    $_->{release} .= " ($_->{part}{device})" foreach @l;
 	}
 
-	my $p = $o->ask_from_listf(N("Install/Upgrade"),
-				   N("Is this an install or an upgrade?"),
+	my $p = $o->ask_from_listf_raw({ title => N("Install/Upgrade"),
+					 messages => N("Is this an install or an upgrade?"),
+					 interactive_help_id => 'selectInstallClass',
+					 },
 				   sub {
 				       ref($_[0]) ? (@l > 1 ? 
 						     N("Upgrade %s", $_[0]{release}) : 
@@ -160,16 +164,19 @@ sub selectMouse {
     if ($force) {
 	my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
 
-	$o->ask_from('', N("Please choose your type of mouse."),
+	$o->ask_from_({ messages => N("Please choose your type of mouse."),
+			interactive_help_id => 'selectMouse',
+		      },
 		     [ { list => [ mouse::fullnames() ], separator => '|', val => \$prev } ]);
 	$o->{mouse} = mouse::fullname2mouse($prev);
     }
 
     if ($force && $o->{mouse}{type} eq 'serial') {
-	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = 
-	  $o->ask_from_listf(N("Mouse Port"),
-			    N("Please choose which serial port your mouse is connected to."),
+	  $o->ask_from_listf_raw({ title => N("Mouse Port"),
+				   messages => N("Please choose which serial port your mouse is connected to."),
+				   interactive_help_id => 'selectSerialPort',
+				 },
 			    \&mouse::serial_port2text,
 			    [ mouse::serial_ports() ]) or return &selectMouse;
     }
@@ -222,9 +229,8 @@ sub setupSCSI {
     install_any::getHds($o, $o);
 }
 
-sub ask_mntpoint_s {
+sub ask_mntpoint_s { #- }{}
     my ($o, $fstab) = @_;
-    $o->set_help('ask_mntpoint_s');
 
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
@@ -239,13 +245,14 @@ sub ask_mntpoint_s {
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
-	$o->ask_from('', 
-				  N("Choose the mount points"),
-				  [ map { { label => partition_table::description($_), 
-					    val => \$_->{mntpoint},
-					    not_edit => 0,
-					    list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
-					} grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
+	$o->ask_from_({ messages => N("Choose the mount points"),
+			interactive_help_id => 'ask_mntpoint_s',
+		      },
+		      [ map { { label => partition_table::description($_), 
+				  val => \$_->{mntpoint},
+				    not_edit => 0,
+				      list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
+			  } grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }
@@ -306,6 +313,7 @@ sub choosePartitionsToFormat {
 
     $o->ask_from_(
         { messages => N("Choose the partitions you want to format"),
+	  interactive_help_id => 'formatPartitions',
           advanced_messages => N("Check bad blocks?"),
         },
         [ map { 
@@ -551,7 +559,9 @@ sub reallyChooseGroups {
     my $size_text = &$size_to_display;
 
     my ($path, $all);
-    $o->ask_from('', N("Package Group Selection"), [
+    $o->ask_from_({ messages => N("Package Group Selection"),
+		    interactive_help_id => 'choosePackages',
+		  }, [
         { val => \$size_text, type => 'label' }, {},
 	 (map { 
 	       my $old = $path;
@@ -607,7 +617,7 @@ sub chooseCD {
     #- note first CD is always selected and should not be unselected!
     return if @mediumsDescr == () || !$::expert;
 
-    $o->set_help('chooseCD');
+#    $o->set_help('chooseCD');
     $o->ask_many_from_list('',
 N("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
@@ -619,7 +629,6 @@ If only some CDs are missing, unselect them, then click Ok."),
 			   }) or do {
 			       $mediumsDescr{$_} = 0 foreach @mediumsDescr; #- force unselection of other CDs.
 			   };
-    $o->set_help('choosePackages');
 
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {
@@ -721,8 +730,7 @@ sub installUpdates {
     
     $o->hasNetwork or return;
 
-    is_empty_hash_ref($u) and $o->ask_yesorno('', 
-formatAlaTeX(
+    is_empty_hash_ref($u) and $o->ask_yesorno_({ messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -730,7 +738,9 @@ contain security or bug fixes.
 To download these packages, you will need to have a working Internet 
 connection.
 
-Do you want to install the updates ?"))) || return;
+Do you want to install the updates ?")),
+						interactive_help_id => 'installUpdates',
+					       }) || return;
 
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);
@@ -781,10 +791,9 @@ sub configureTimezone {
 
     require timezone;
     $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) || return;
-    $o->set_help('configureTimezoneGMT');
 
     my $ntp = to_bool($o->{timezone}{ntp});
-    $o->ask_from('', '', [
+    $o->ask_from_({ interactive_help_id => 'configureTimezoneGMT' }, [
 	  { text => N("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
 	  { text => N("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
     ]) or goto &configureTimezone
@@ -792,7 +801,7 @@ sub configureTimezone {
     if ($ntp) {
 	my @servers = split("\n", timezone::ntp_servers());
 
-	$o->ask_from('', '',
+	$o->ask_from_({},
 	    [ { label => N("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
         ) or goto &configureTimezone;
 	$o->{timezone}{ntp} =~ s/.*\((.+)\)/$1/;
@@ -827,6 +836,7 @@ sub summary_prompt {
     
     $o->ask_from_({
 		   messages => N("Summary"),
+		   interactive_help_id => 'summary',
 		   cancel   => '',
 		  }, $l);
 }
@@ -994,12 +1004,11 @@ sub setRootPassword {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $::isInstall and $o->set_help("setRootPassword", if_($::expert, "setRootPasswordAuth"));
-
     $o->ask_from_(
         {
 	 title => N("Set root password"), 
 	 messages => N("Set root password"),
+	 interactive_help_id => "setRootPassword",
 	 cancel => ($o->{security} <= 2 && !$::corporate ? N("No password") : ''),
 	 focus_first => 1,
 	 callbacks => { 
@@ -1071,7 +1080,6 @@ sub addUser {
 sub setupBootloaderBefore {
     my ($o) = @_;
     my $_w = $o->wait_message('', N("Preparing bootloader..."));
-    $o->set_help('empty');
     $o->SUPER::setupBootloaderBefore($o);
 }
 
@@ -1173,6 +1181,7 @@ Do you really want to quit now?"), 0);
     $o->ask_from_no_check(
 	{
 	 messages => formatAlaTeX(install_messages::install_completed()),
+	 interactive_help_id => 'exitInstall',
 	 ok => N("Reboot"),
 	},      
 	[

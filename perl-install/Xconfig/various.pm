@@ -67,9 +67,8 @@ sub choose_xdm {
     my $xdm = $::isStandalone ? runlevel() == 5 : 1;
 
     if (!$auto || $::isStandalone) {
-	$in->set_help('configureXxdm') if !$::isStandalone;
-
-	$xdm = $in->ask_yesorno(N("Graphical interface at startup"),
+	$xdm = $in->ask_yesorno_({ interactive_help_id => 'configureXxdm' },
+				 N("Graphical interface at startup"),
 N("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"), $xdm) or return;
     }

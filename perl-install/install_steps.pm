@@ -80,7 +80,6 @@ Continue at your own risk."), $@ ]) if $@;
 
 sub errorInStep($$) { print "error :(\n"; c::_exit(1) }
 sub kill_action {}
-sub set_help { 1 }
 
 #-######################################################################################
 #- Steps Functions

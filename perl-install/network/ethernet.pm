@@ -17,7 +17,7 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 sub configure_cable {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-    $::isInstall and $in->set_help('configureNetworkCable');
+#    $::isInstall and $in->set_help('configureNetworkCable');
     $netcnx->{type} = 'cable';
 
     if ($::expert) {
@@ -54,7 +54,7 @@ qq(
 
 sub configure_lan {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-    $::isInstall and $in->set_help('configureNetworkIP');
+#    $::isInstall and $in->set_help('configureNetworkIP');
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
@@ -183,7 +183,7 @@ sub configureNetwork {
     
     if ($last->{BOOTPROTO} !~ /static/) {
 	$netc->{minus_one} = 1;
-	$::isInstall and $in->set_help('configureNetworkHostDHCP');
+#	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from(N("Configuring network"),
 N("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.

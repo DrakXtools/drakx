@@ -218,8 +218,9 @@ sub ppp_choose {
     $mouse ||= {};
 
     $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-    $::isInstall and $in->set_help('selectSerialPort');
-    $modem->{device} ||= $in->ask_from_listf('', N("Please choose which serial port your modem is connected to."),
+    $modem->{device} ||= $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
+						   interactive_help_id => 'selectSerialPort',
+						 },
 					     \&mouse::serial_port2text,
 					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), if_(-e '/dev/modem', '/dev/modem')) ]) || return;
 
@@ -228,7 +229,7 @@ sub ppp_choose {
     foreach (@$secret) {
 	push @cnx_list, $_->{server};
     }
-    $::isStandalone || $in->set_help('configureNetworkISP');
+#    $::isStandalone || $in->set_help('configureNetworkISP');
     $in->ask_from('', N("Dialup options"), [
 { label => N("Connection name"), val => \$modem->{connection} },
 { label => N("Phone number"), val => \$modem->{phone} },

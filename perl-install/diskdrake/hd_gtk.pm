@@ -48,7 +48,7 @@ notebook current_kind[]
 =cut
 
 sub main {
-    ($in, $all_hds, my $nowizard, $do_force_reload) = @_;
+    ($in, $all_hds, my $nowizard, $do_force_reload, my $interactive_help) = @_;
 
     @notebook = ();
 
@@ -79,7 +79,7 @@ sub main {
 	$lock = 1;
 	partition_table::assign_device_numbers($_) foreach fsedit::all_hds($all_hds);
 	create_automatic_notebooks($notebook_widget);
-	general_action_box($general_action_box, $nowizard);
+	general_action_box($general_action_box, $nowizard, $interactive_help);
 	per_kind_action_box($per_kind_action_box, $current_kind);
 	current_kind_changed($in, $current_kind);
 	current_entry_changed($current_kind, $current_entry);
@@ -151,10 +151,10 @@ sub add_kind2notebook {
 }
 
 sub general_action_box {
-    my ($box, $nowizard) = @_;
+    my ($box, $nowizard, $interactive_help) = @_;
     $_->widget->destroy foreach $box->children;
 
-    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $in->{interactive_help})) if $in->{interactive_help};
+    gtkadd($box, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { $in->ask_warn(N("Help"), $interactive_help->()) })) if $interactive_help;
 
     my @actions = (if_($::isInstall && !$nowizard, N_("Wizard")), 
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 

@@ -118,7 +118,6 @@ sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $_direct_fr, $noauto) = @_;
     init_globals($in, $prefix);
     $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
-    $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
     $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
@@ -152,12 +151,14 @@ ifdown eth0
   step_1:
     $::Wizard_no_previous = 1;
     my @profiles = get_profiles();
-    eval { $in->ask_from(N("Network Configuration Wizard"),
-			 N("Welcome to The Network Configuration Wizard.
+    eval { $in->ask_from_({ title => N("Network Configuration Wizard"),
+			    messages => N("Welcome to The Network Configuration Wizard.
 
 We are about to configure your internet/network connection.
 If you don't want to use the auto detection, deselect the checkbox.
 "),
+			    interactive_help_id => 'configureNetwork',
+			    },
 			 [
 			  if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
 			  { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
@@ -175,7 +176,6 @@ If you don't want to use the auto detection, deselect the checkbox.
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
 
-    $::isInstall and $in->set_help('configureNetwork');
     my @l = (
 	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
 	  [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
@@ -184,8 +184,10 @@ If you don't want to use the auto detection, deselect the checkbox.
 	  [N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), \$conf{cable}],
 	  [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
 	 );
-    $::isInstall and $in->set_help('configureNetwork');
-    eval { $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
+    eval { $in->ask_from_({ title => N("Network Configuration Wizard"),
+			    messages => N("Choose the connection you want to configure"),
+			    interactive_help_id => 'configureNetwork',
+			  },
 			 [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			 changed => sub {
 			     return if !$netc->{autodetection};

@@ -18,7 +18,7 @@ sub configure {
     my ($netcnx, $netc, $isdn) = @_;
   isdn_step_1:
     defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
-    $::isInstall and $in->set_help('configureNetworkISDN');
+#    $::isInstall and $in->set_help('configureNetworkISDN');
     my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
 				N("Which ISDN configuration do you prefer?
 

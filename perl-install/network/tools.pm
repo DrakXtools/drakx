@@ -112,7 +112,7 @@ sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompress
 sub ask_info2 {
     my ($cnx, $netc) = @_;
     
-    $::isInstall and $in->set_help('configureNetworkDNS');
+#    $::isInstall and $in->set_help('configureNetworkDNS');
     $in->ask_from(N("Connection Configuration"),
 		  N("Please fill or check the field below"),
 		  [

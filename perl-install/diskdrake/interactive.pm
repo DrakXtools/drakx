@@ -164,7 +164,7 @@ struct all_hds {
 
 
 sub main {
-    my ($in, $all_hds, $_nowizard, $do_force_reload) = @_;
+    my ($in, $all_hds, $_nowizard, $do_force_reload, $_interactive_help) = @_;
 
     if ($in->isa('interactive::gtk')) {
 	require diskdrake::hd_gtk;

@@ -38,7 +38,6 @@ sub partition_with_diskdrake {
     my ($o, $all_hds, $nowizard) = @_;
     my $ok; 
 
-    $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
 	my $do_force_reload = sub {
@@ -50,7 +49,7 @@ sub partition_with_diskdrake {
 	require diskdrake::interactive;
 	{
 	    local $::expert = $::expert;
-	    diskdrake::interactive::main($o, $all_hds, $nowizard, $do_force_reload);
+	    diskdrake::interactive::main($o, $all_hds, $nowizard, $do_force_reload, sub { $o->interactive_help_get_id('choosePackages') });
 	}
 	if (delete $o->{wizard}) {
 	    partitionWizard($o, 'nodiskdrake') or redo;
@@ -137,10 +136,10 @@ sub partitionWizardSolutions {
 	$solutions{resize_fat} = 
 	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Windows partition"),
 	    sub {
-		$o->set_help('resizeFATChoose');
-		my $part = $o->ask_from_listf('', N("Which partition do you want to resize?"), \&partition_table::description, \@ok_for_resize_fat) or return;
+		my $part = $o->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
+						    interactive_help_id => 'resizeFATChoose',
+						  }, \&partition_table::description, \@ok_for_resize_fat) or return;
 		my $hd = fsedit::part2hd($part, $all_hds);
-		$o->set_help('resizeFATWait');
 		my $resize_fat = eval {
 		    my $pkg = isFat($part) ? do { 
 			require resize_fat::main;
@@ -206,11 +205,12 @@ When sure, press Ok.")) or return;
 	$solutions{wipe_drive} =
 	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase entire disk"), 
 	    sub {
-		$o->set_help('takeOverHdChoose');
-		my $hd = $o->ask_from_listf('', N("You have more than one hard drive, which one do you install linux on?"),
-					    \&partition_table::description, \@hds_rw) or return;
-		$o->set_help('takeOverHdConfirm');
-		$o->ask_okcancel('', N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd))) or return;
+		my $hd = $o->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
+						  interactive_help_id => 'takeOverHdChoose',
+						},
+						\&partition_table::description, \@hds_rw) or return;
+		$o->ask_okcancel_({ messages => N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd)),
+				    interactive_help_id => 'takeOverHdConfirm' }) or return;
 		partition_table::raw::zero_MBR($hd);
 		fsedit::auto_allocate($all_hds);
 		1;
@@ -247,8 +247,6 @@ When you are done, don't forget to save using `w'", partition_table::description
 sub partitionWizard {
     my ($o, $nodiskdrake) = @_;
 
-    $o->set_help('doPartitionDisks');
-
     my %solutions = partitionWizardSolutions($o, $o->{all_hds});
 
     delete $solutions{diskdrake} if $nodiskdrake;
@@ -267,8 +265,10 @@ sub partitionWizard {
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
     my $sol;
-    $o->ask_from('', N("The DrakX Partitioning wizard found the following solutions:"), 
-		 [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
+    $o->ask_from_({ messages => N("The DrakX Partitioning wizard found the following solutions:"),
+		    interactive_help_id => 'doPartitionDisks',
+		  }, 
+		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
     log::l("partitionWizard calling solution $sol->[1]");
     my $ok = eval { $sol->[2]->() };
     $@ and $o->ask_warn('', N("Partitioning failed: %s", $@));

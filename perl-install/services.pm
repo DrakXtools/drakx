@@ -177,6 +177,7 @@ sub ask_install {
 				     scalar(values %services));
 			       },
 			       get_info => sub { formatLines(description($_[0], $prefix)) },
+			       interactive_help_id => 'configureServices',
 			      }) or return ($l, $on_services); #- no change on cancel.
     [ grep { $services{$_} } @$l ];
 }

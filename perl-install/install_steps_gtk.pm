@@ -139,7 +139,6 @@ sub enteringStep {
     $o->SUPER::enteringStep($step);
     install_gtk::create_steps_window($o);
 #    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
-    $o->set_help($o->{step});
 }
 sub leavingStep {
     my ($o, $step) = @_;
@@ -260,6 +259,7 @@ sub reallyChooseGroups {
 			   )),
 		   1, '',
 		   0, gtkadd(Gtk2::HBox->new(0, 0),
+			  gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id('choosePackages')) }),
 			  $w_size,
 			  if_($individual, do {
 			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));
@@ -395,6 +395,7 @@ sub choosePackagesTree {
 				return;
 			    },
 			    auto_deps => N("Show automatically selected packages"),
+			    interactive_help_id => 'choosePackagesTree',
 			    ok => N("Install"),
 			    cancel => N("<- Previous"),
 			    icons => [ { icon         => 'floppy',
@@ -418,7 +419,6 @@ sub choosePackagesTree {
 				     },
 			  };
 
-    $o->set_help('choosePackagesTree');
     $o->ask_browse_tree_info('', N("Choose the packages you want to install"), $common);
 }
 
@@ -614,17 +614,6 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
     }
     $w->destroy;
     $install_result;
-}
-
-sub set_help {
-    my ($o, @l) = @_;
-
-    my @l2 = map { 
-	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::steps{$_})))
-    } @l;
-    $o->{current_help} = join("\n\n\n", @l2);
-#    gtktext_insert($o->{help_window_text}, $o->{current_help});
-    1;
 }
 
 1;

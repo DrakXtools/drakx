@@ -1052,6 +1052,10 @@ sub ask_browse_tree_info {
     } @l;
     @buttons = reverse @buttons if !$::isInstall;    
 
+    gtkpack__($box2, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {
+					   ask_warn(N("Help"), $common->{interactive_help}->())
+				       })) if $common->{interactive_help};
+
     if ($common->{auto_deps}) {
 	gtkpack__($box1, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new($common->{auto_deps}), $common->{state}{auto_deps}),
 					clicked => sub { invbool \$common->{state}{auto_deps} }));
