@@ -37,7 +37,7 @@ my $Perm_list = new_with_titles Gtk::CList(N("path"), N("user"), N("group"), N("
 my $vb				= new Gtk::VBox(0,5);
 my $select_box = new Gtk::HBox(0,5);
 my $action_box = new Gtk::HBox(0,5);
-my $up_down_box=new Gtk::HBox(0,5);
+my $up_down_box = new Gtk::HBox(0,5);
 my $B_quit		= new Gtk::Button('quit');
 my $B_sav			= new Gtk::Button('save');
 my $B_up			= new Gtk::Button(N("Up"));
@@ -371,13 +371,13 @@ sub row_setting_dialog {
 sub get_user_or_group {
 	my $what = @_;
 	my @users;
+     local *F;
 	$what eq 'users' 
 		and	open F, '/etc/passwd'
 		or	open F, '/etc/group';
 	
 	while (<F>) {
-		m/^([^#:]+):[^:]+:[^:]+:/
-			or next;
+		m/^([^#:]+):[^:]+:[^:]+:/ or next;
 		push @users, $1;
      }
 	close F;
