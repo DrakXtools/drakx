@@ -1987,7 +1987,8 @@ to get information about it or on
 	    configure_queue($printer, $in);
 	    setasdefault($printer, $in);
 	    if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) { 
-		$continue = ($::expert || !$::isInstall);
+		$continue = ($::expert || !$::isInstall ||
+			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
 	    } else {
 		$editqueue = 1;
 		$queue = $printer->{QUEUE};
@@ -2120,7 +2121,7 @@ What do you want to modify on this printer?",
 	    } else {
 		$editqueue = 0;
 	    }
-	    $continue = ($::expert || !$::isInstall);
+	    $continue = ($editqueue || $::expert || !$::isInstall);
 	}
 	# Delete some variables
 	$printer->{OLD_QUEUE} = "";
