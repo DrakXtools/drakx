@@ -17,38 +17,53 @@ use log;
 #- [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
 #- languages, carefully choosen)
 my %languages = (
-  'en'  => [ 'English',			undef,	      'en', 'en_US' ],
-'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE' ],
+  'en'  => [ 'English',			undef,	      'en', 'en_US:en' ],
+  'bg'  => [ 'Bulgarian',		'cp1250',     'bg', 'bg' ],
+  'br'  => [ 'Brezhonneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
+  'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:fr_FR:es:fr' ],
+  'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
+  'cy'  => [ 'Cymraeg (Welsh)',		'iso-8859-14','cy', 'cy:en_GB:en' ],
+  'da'  => [ 'Danish',			'iso-8859-1', 'da', 'da' ],		
+'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE:de' ],
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
 'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
-'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
-#- Galician users may want to also have spanish and portuguese languages 
-  'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es:pt' ],
+  'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
+  'eu'  => [ 'Euskara (Basque)',	'iso-8859-1', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
+'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
+  'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
+  'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
+  'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
   'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
-#- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in
+#- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in_ID
 #- we catch the few catalog files still using the wrong code
-  'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in' ],
+  'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
-  'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT' ],
-  'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis' ],
+  'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT:it' ],
+  'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
   'ka'  => [ 'Georgian',                'georgian-academy', 'ka', 'ka' ],
   'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
+  'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
+#- 'mk' => [ 'Macedonian',		'iso-8859-5', 'mk', 'mk:sr' ],
+  'nl'  => [ 'Dutch (Neitherlands)',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
   'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
-'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1','no', 'no@nynorsk' ],
-'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt', 'pt_BR:pt_PT' ],
-'pt_PT' => [ 'Portuguese (Portugal)',	'iso-8859-1', 'pt', 'pt_PT:pt_BR' ],
+'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1','no', 'no@nynorsk:no' ],
+  'pl'  => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
+'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt', 'pt_BR:pt_PT:pt' ],
+'pt_PT' => [ 'Portuguese (Portugal)',	'iso-8859-1', 'pt', 'pt_PT:pt_BR:pt' ],
   'ro'  => [ 'Romanian',  		'iso-8859-2', 'ro', 'ro' ],
   'ru'  => [ 'Russian',   		'koi8-r',     'ru', 'ru' ],
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
+#- 'sr' => [ 'Serbian',			'iso-8859-5', 'sr', 'sr:sp' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
   'uk'  => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
-					'vi_VN.tcvn:vi_VN.tcvn-5712' ],
+					'vi_VN.tcvn:vi_VN.tcvn-5712:vi' ],
 'vi_VN.viscii' => [ 'Vietnamese (VISCII)','viscii',   'vi',
-				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1' ],
-  'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE' ],
-'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5' ],
+				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1:vi' ],
+  'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
+'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh' ],
+'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN.gb2312:zh' ],	
 );
 
 sub std2 { "-mdk-helvetica-medium-r-normal-*-*-$_[1]-*-*-*-*-$_[0]" }
@@ -60,6 +75,9 @@ my %charsets = (
 #- chinese needs special console driver for text mode
   "Big5"       => [ "?????",                    "????",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
+  "gb2312"     => [ "?????",                    "????",
+        "*-helvetica-medium-r-normal--14-*-*-*-*-*-iso8859-1," .
+        "-isas-song ti-medium-r-normal--16-*-*-*-*-*-gb2312.1980-0" ],
   "iso-8859-1" => [ "lat0-sun16",		"iso15", std("iso8859-1") ],
   "iso-8859-2" => [ "lat2-sun16",		"iso02", std("iso8859-2") ],
   "iso-8859-3" => [ "iso03.f16",		"iso03", std_("iso8859-3") ],
@@ -86,7 +104,7 @@ my %charsets = (
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
   "tcvn"       => [ "tcvn8x16",		        "tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
   "viscii"     => [ "viscii10-8x16",	        "viscii",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii*.*-*" ],
+	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
 );
 
 #-######################################################################################
@@ -110,6 +128,7 @@ sub set {
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
+	$ENV{LINGUAS}   = $languages{$lang}[3];
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -132,6 +151,7 @@ sub write {
     if (my $l = $languages{$lang}) {
 	&$f("LANG", $l->[2]);
 	&$f("LANGUAGE", $l->[3]);
+	&$f("LINGUAS", $l->[3]);
 
 	$l->[1] or return;
 	if (my $c = $charsets{$l->[1]}) {
