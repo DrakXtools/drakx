@@ -9,7 +9,7 @@ use vars qw(@ISA);
 use interactive;
 use common qw(:common :functional);
 use log;
-use Newt::Newt;
+use Newt::Newt; #- !! provides Newt and not Newt::Newt
 
 my $width = 80;
 my $height = 25;

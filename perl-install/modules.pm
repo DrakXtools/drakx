@@ -61,7 +61,7 @@ arch() =~ /^sparc/ ? (
   "ni52" => "NI 5210",
   "ni65" => "NI 6510",
   "es3210" => "Racal-Interlan ES3210",
-  "rcpci45" => "RedCreek PCI45 LAN",
+  "rcpci" => "Red Creek Hardware VPN",
   "epic100" => "SMC 83c170 EPIC/100",
   "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
@@ -71,6 +71,7 @@ arch() =~ /^sparc/ ? (
   "via-rhine" => "VIA Rhine",
 #  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO is a "AT&T GIS WaveLAN ISA" ?
   "wd" => "WD8003, WD8013 and compatible",
+  "z85230" => "Z85x30",
 
   "dmfe" => "dmfe",
   "fmv18x" => "fmv18x",
@@ -367,7 +368,7 @@ sub load {
 
 	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
 
-	load($_, 'prereq') foreach @{$deps{$name}};
+	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw($name, @options);
     }
     push @{$loaded{$type}}, $name;

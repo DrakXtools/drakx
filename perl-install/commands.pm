@@ -64,18 +64,20 @@ sub tr_ {
 
 sub mount {
     @_ or return cat("/proc/mounts");
-    my ($t) = getopts(\@_, qw(t));
+    my ($t, $r) = getopts(\@_, qw(tr));
     my $fs = $t && shift;
 
-    @_ == 2 or die "usage: mount [-t <fs>] <device> <dir>\n",
+    @_ == 2 or die "usage: mount [-r] [-t <fs>] <device> <dir>\n",
     "       (if /dev/ is left off the device name, a temporary node will be created)\n";
 
     my ($dev, $where) = @_;
     $fs ||= $where =~ /:/ ? "nfs" :
             $dev =~ /fd/ ? "vfat" : "ext2";
 
-    require 'fs.pm';
-    fs::mount($dev, $where, $fs, 0, 1);
+    require fs;
+    require modules;
+    modules::load_deps("/modules/modules.dep");
+    fs::mount($dev, $where, $fs, $r);
 }
 
 sub umount {
@@ -251,7 +253,10 @@ sub cp {
 		-d $dest or mkdir $dest, mode($src) or die "mkdir: can't create directory $dest: $!\n";
 		&$cp(glob_($src), $dest);
 	    } elsif (-l $src) {
-		symlink((readlink($src) || die "readlink failed: $!"), $dest) or die "symlink: can't create symlink $dest: $!\n";
+		unless (symlink((readlink($src) || die "readlink failed: $!"), $dest)) {
+		    my $msg = "symlink: can't create symlink $dest: $!\n";
+		    $force ? warn $msg : die $msg;		    
+		}
 	    } else {
 		local (*F, *G);
 		open F, $src or die "can't open $src for reading: $!\n";

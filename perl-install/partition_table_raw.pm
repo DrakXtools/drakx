@@ -73,11 +73,13 @@ sub get_geometry($) {
 
     local *F; sysopen F, $dev, 0 or return;
     ioctl(F, c::HDIO_GETGEO(), $g) or return;
-
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
-    $geom{totalcylinders} = $geom{cylinders};
 
-    { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
+    #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
+    my $total = c::total_sectors(fileno F);
+    $geom{totalcylinders} = $total / $geom{heads} * $geom{sectors};
+
+    { geom => \%geom, totalsectors => $total };
 }
 
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }

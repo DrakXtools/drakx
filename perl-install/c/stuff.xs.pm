@@ -96,6 +96,18 @@ lseek_sector(fd, sector, offset)
   OUTPUT:
   RETVAL
 
+unsigned int
+total_sectors(fd)
+  int fd
+  CODE:
+  {
+    struct hd_driveid s;
+    ioctl(fd, HDIO_GET_IDENTITY, &s);
+    RETVAL = s.lba_capacity;
+  }
+  OUTPUT:
+  RETVAL
+
 void
 openlog(ident)
   char *ident
