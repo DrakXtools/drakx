@@ -41,8 +41,8 @@ sub rooted {
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
     
     $ENV{HOME} || $::isInstall or die q($HOME is unset, so I don't know where to put my temporary files);
-    my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : $stdout_raw);
-    my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : $stderr_raw);
+    my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : "$root$stdout_raw");
+    my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
 
     if (my $pid = fork) {
 	waitpid $pid, 0;
@@ -68,13 +68,13 @@ sub rooted {
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
 	    $stderr_mode =~ s/2//;
-	    open STDERR, "$stderr_mode $root$stderr" or die "run_program can't output in $root$stderr (mode `$stderr_mode')";
+	    open STDERR, "$stderr_mode $stderr" or die "run_program can't output in $stderr (mode `$stderr_mode')";
 	} elsif ($::isInstall) {
 	    open STDERR, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
 	}
 	if ($stdout && $stdout eq 'STDOUT') {
 	} elsif ($stdout) {
-	    open STDOUT, "$stdout_mode $root$stdout" or die "run_program can't output in $root$stdout (mode `$stdout_mode')";
+	    open STDOUT, "$stdout_mode $stdout" or die "run_program can't output in $stdout (mode `$stdout_mode')";
 	} elsif ($::isInstall) {
 	    open STDOUT, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
 	}
