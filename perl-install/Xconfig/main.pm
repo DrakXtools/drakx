@@ -34,16 +34,14 @@ sub configure_resolution {
 
 sub configure_everything_auto_install {
     my ($raw_X, $do_pkgs, $old_X, $options) = @_;
-    
-    my $monitor = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
-    $options->{VideoRam_probed} = $monitor->{VideoRam_probed};
-    my $card = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
-    Xconfig::screen::configure($raw_X, $card) or return;
-    my $resolution = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $card, $monitor, $old_X);
+    my $X = {};
+    $X->{monitor} = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
+    $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
+    $X->{card} = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
+    Xconfig::screen::configure($raw_X, $X->{card}) or return;
+    $X->{resolution} = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $X->{card}, $X->{monitor}, $old_X);
 
-    export_to_install_X($card, $monitor, $resolution);
-    $raw_X->write;
-    symlinkf "../..$card->{prog}", "$::prefix/etc/X11/X" if $card->{server} !~ /Xpmac/;
+    &write($raw_X, $X);
 
     any::runlevel($::prefix, exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
 }
@@ -64,7 +62,7 @@ sub configure_everything {
     } else {
 	Xconfig::various::various($in, $X->{card}, $options, $auto);
     }
-    $ok = &write($in, $raw_X, $X, $ok);
+    $ok = may_write($in, $raw_X, $X, $ok);
     
     $ok && 'config_changed';
 }
@@ -135,12 +133,12 @@ sub configure_chooser {
     };
     my ($ok, $modified) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
 
-    $modified and &write($in, $raw_X, $X, $ok) or return;
+    $modified and may_write($in, $raw_X, $X, $ok) or return;
 
     'config_changed';
 }
 
-sub write {
+sub may_write {
     my ($in, $raw_X, $X, $ok) = @_;
 
     $ok ||= $in->ask_yesorno('', _("Keep the changes?
@@ -148,14 +146,18 @@ The current configuration is:
 
 %s", Xconfig::various::info($raw_X, $X->{card})), 1);
 
-    $ok or return;
+    &write($raw_X, $X) if $ok;
+    $ok;
+}
 
+sub write {
+    my ($raw_X, $X) = @_;
     export_to_install_X($X);
     $raw_X->write;
     Xconfig::various::check_XF86Config_symlink();
     symlinkf "../..$X->{card}{prog}", "$::prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
-    1;
 }
+
 
 sub export_to_install_X {
     my ($X) = @_;
