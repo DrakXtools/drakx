@@ -943,6 +943,11 @@ sub _create_window {
 		   widget_name => 'Title',
 		   position_policy => !$::isInstall && !$::isStandalone ? 'center_always' : 'center-on-parent',
 		   if_(!$::isInstall, icon_no_error => wm_icon()),
+
+		   if_($::isInstall, position => [
+		       $::rootwidth - ($::windowwidth + $::real_windowwidth) / 2, 
+		       $::logoheight + ($::windowheight - $::real_windowheight) / 2,
+		   ]),
 		   %options);
 
     if ($force_focus) {
