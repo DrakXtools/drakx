@@ -109,6 +109,18 @@ my $menubar = get_main_menu( $window );
 
 my $global_vbox = new Gtk::VBox();
 #$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
+
+# lilo/grub
+my $lilo_dedans = new Gtk::VBox(0, 10);
+$lilo_dedans->border_width (5);
+my $lilo_vbox = new Gtk::VBox(0, 0);
+$lilo_vbox->border_width (10);
+my $lilo_frame = new Gtk::Frame _("Lilo/grub mode");
+$lilo_frame->add($lilo_vbox);
+$global_vbox->pack_start ($lilo_frame, 0, 0, 0);
+
+
+
 ######## aurora part
 my $a_dedans = new Gtk::VBox(0, 5);
 $a_dedans->border_width(5);
@@ -203,14 +215,11 @@ $global_vbox->pack_start($bbox, 0, 0, 0);
 $bbox->set_layout(-end);
 my $build_button = new Gtk::Button _("OK");
 $bbox->add($build_button);
-my $apply_button = new Gtk::Button _("Apply");
-$bbox->add($apply_button);
 my $cancel_button = new Gtk::Button $::isEmbedded ? _("Cancel") : _("Quit");
 $bbox->add($cancel_button);
 my $fin_hbox = new Gtk::HBox( 0, 0 );
 $cancel_button->signal_connect(clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
-$build_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
-$apply_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora(); });
+$build_button->signal_connect(clicked=>sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0)});
 
 ### back to window
 $window->add($global_vbox);
