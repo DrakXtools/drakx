@@ -395,7 +395,7 @@ sub write_on_pixmap {
 sub n_line_size {
     my ($nbline, $type, $widget) = @_;
     my $font = $widget->style->font;
-    my $spacing = ${{ text => 0, various => 15 }}{$type};
+    my $spacing = ${{ text => 0, various => 17 }}{$type};
     $nbline * ($font->ascent + $font->descent + $spacing) + 8;
 }
 
