@@ -1169,9 +1169,7 @@ sub configure_queue($) {
 	if (($printer->{currentqueue}{queue} ne 
 	     $printer->{OLD_QUEUE}) &&
 	    ($printer->{configured}{$printer->{OLD_QUEUE}})) {
-	    system("echo yes | cp -f " .
-		   "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd " .
-		   "$prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd");
+	    system("cp -f $prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd $prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd");
 	}
     } else {
 	# Raw queue
