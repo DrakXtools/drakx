@@ -254,7 +254,6 @@ log::explanations("Choosing network device: $device");
 my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
 
 my $server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
-print $server_ip."->1\n";
 my $lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : "192.168.1.0";
 my $nameserver_ip = network::network::read_resolv_conf_raw()->{nameserver}[0] ||=  network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
 my $netmask = $conf->{NETMASK} ||= network::network::read_dhcpd_conf()->{subnet_mask}[0] ||= "255.255.255.0";
@@ -290,7 +289,6 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
     if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
-	print $server_ip."->2\n";
 	$nameserver_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
 	$lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : $conf->{NETWORK};
 	$in->ask_from('',
