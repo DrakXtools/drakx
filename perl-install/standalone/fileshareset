@@ -3,7 +3,7 @@ use strict;
 
 ########################################
 # config files
-$nfs_exports::default_options = '*(ro,all_squash)';
+$nfs_exports::default_options = '*(ro,all_squash,sync)';
 $nfs_exports::conf_file = '/etc/exports';
 $smb_exports::conf_file = '/etc/samba/smb.conf';
 my $authorisation_file = '/etc/security/fileshare.conf';
