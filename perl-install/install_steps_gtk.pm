@@ -475,13 +475,11 @@ sub installPackages {
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
 	    my $pix = gtkcreate_pixbuf($f);
-	    my $dbl_area;
 	    my $darea = Gtk2::DrawingArea->new;
 	    gtkpack($box, $advertising = !$draw_text ?
 		    gtkcreate_img($f) :
 		    gtksignal_connect(gtkset_size_request($darea, $width, $height), expose_event => sub {
 			       my (undef, undef, $dx, $dy) = $darea->allocation->values;
-			       if (!defined($dbl_area)) {
 				   $darea->window->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
 				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
 							    ($dx-$width)/2, 0, $width, $height, 'none', 0, 0);
@@ -496,7 +494,6 @@ sub installPackages {
                                        $draw_lay->($darea->style->black_gc, 0);
                                        $line->{options}{bold} and $draw_lay->($darea->style->black_gc, 1);
                                    }
-			       }
 			   }));
 	} else {
 	    $advertising = undef;
