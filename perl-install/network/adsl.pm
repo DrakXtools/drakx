@@ -21,9 +21,7 @@ sub configure {
 	     'dhcp'  =>  N("use dhcp"),
 	     'speedtouch' => N("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
 	     'sagem' =>  N("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
-	     if_($::expert, #- avoid clash with strings not translated but still add functionnalities...
-		 'sagem_dhcp' =>  N("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
-		),
+	     'sagem_dhcp' =>  N("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
 	    );
     
     my $type = $in->ask_from_list(N("Connect to the Internet"),
