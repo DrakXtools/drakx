@@ -404,7 +404,7 @@ sub set_selection_on_first {
 	$model = $rtree_model;
     }
     my $iter = $model->get_iter_first();
-    $tree->get_selection->select_iter($iter);
+    $tree->get_selection->select_iter($iter) if $iter;
 }
 
 sub set_selection {
