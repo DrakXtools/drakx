@@ -216,14 +216,14 @@ sub searchAndMount4Upgrade {
 	my $r; unless ($r = $root->{realMntpoint}) {
 	    $r = $o->{prefix};
 	    $root->{mntpoint} = "/"; 
-	    log::l("trying to mount root partition $root->{device}");
+	    log::l("trying to mount partition $root->{device}");
 	    eval { fs::mount_part($root, $o->{prefix}, 'readonly') };
 	    $r = "/*ERROR*" if $@;
 	}
 	$found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$r/etc/fstab") ];
 
 	unless ($root->{realMntpoint}) {
-	    log::l("umounting non root partition $root->{device}");
+	    log::l("umounting partition $root->{device}");
 	    eval { fs::umount_part($root, $o->{prefix}) };
 	}
 
