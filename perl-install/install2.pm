@@ -62,7 +62,7 @@ arch() !~ /alpha|sparc/ ? (
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
-arch() !~ /sparc/ ? (
+arch() !~ /alpha|sparc/ ? (
   generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "doInstallStep" ],
 ) : (),
   exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
