@@ -962,8 +962,7 @@ sub configureX {
       local $::auto = $::beginner && !$clicked;
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
-	  my ($server, @l) = @_;
-	  $o->pkg_install("XFree86-$server", @l);
+	  $o->pkg_install(@_);
       });
     }
     $o->configureXAfter;
