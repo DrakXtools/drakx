@@ -607,6 +607,7 @@ sub main {
     if ($oem) {
 	$o->{partitioning}{auto_allocate} = 1;
 	$o->{compssListLevel} = 50;
+	$o->{doNotFormatRootByDefault} = 1;
 	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
 
