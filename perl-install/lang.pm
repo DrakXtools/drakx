@@ -584,43 +584,16 @@ sub get_ims() { keys %IM_config }
 # Locale configuration regarding encoding/IM
 
 #- ENC is used by some versions or rxvt
+my %locale2encoding = (
+                       'ja_JP' => 'eucj',
+                       'ko_KR' => 'kr',
+                       'zh_CN' => 'gb',
+                       'zh_HK' => 'big5',
+                       'zh_SG' => 'gb',
+                       'zh_TW' => 'big5',
+                      );
+
 my %IM_locale_specific_config = (
-           'ja_JP' => {
-                       ENC => 'eucj',
-                      },
-           'ja_JP.UTF-8' => {
-                             ENC => 'utf8',
-                            },
-           'ko_KR' => {
-                       ENC => 'kr',
-                      },
-           'ko_KR.UTF-8' => {
-                             ENC => 'utf8',
-                            },
-           'zh_TW' => { 
-                       ENC => 'big5',
-                      },
-           'zh_TW.UTF-8' => {
-                             ENC => 'utf8',
-                            },
-           'zh_CN' => {
-                       ENC => 'gb',
-                      },
-           'zh_CN.UTF-8' => {
-                             ENC => 'utf8',
-                            },
-           'zh_HK' => {
-                       ENC => 'big5',
-                      },
-           'zh_HK.UTF-8' => {
-                             ENC => 'utf8',
-                            },
-           'zh_SG' => {
-                       ENC => 'gb',
-                      },
-           'zh_SG.UTF-8' => {
-                             ENC => 'utf8',
-                            },
            #-XFree86 has an internal XIM for Thai that enables syntax checking etc.
            #-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
            #-and convert them to right ones, 'Strict' refuses bad sequences
@@ -1049,6 +1022,9 @@ sub write {
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, { XIM_PROGRAM => $IM_XIM_program{$im}{$h->{LC_NAME}} });
         add2hash($h, $IM_locale_specific_config{$locale->{lang}});
+        $h->{ENC} = $locale2encoding{$locale->{lang}};
+        $h->{ENC} = 'utf8' if member($locale->{lang}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
+
         add2hash($h, $IM_config{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
         my @packages = IM2packages($locale);
