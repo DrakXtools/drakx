@@ -166,14 +166,6 @@ sub write_interface_conf {
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
 
-    if ($netc->{DHCP} && $netc->{HOSTNAME}) {
-	$intf->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
-	$intf->{NEEDHOSTNAME} = "no";
-    } else { 
-	$intf->{DHCP_HOSTNAME} = "";
-	$intf->{NEEDHOSTNAME} = "yes" 
-    }
-
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
@@ -182,7 +174,7 @@ sub write_interface_conf {
 
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{DHCP_HOSTNAME}, 'DHCP_HOSTNAME'), if_(!$intf->{DHCP_HOSTNAME}, 'NEEDHOSTNAME'));
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME)));
 }
 
 sub add2hosts {
@@ -335,6 +327,7 @@ notation (for example, 1.2.3.4).");
     }
     my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
     my $onboot = $intf->{ONBOOT} !~ /no/;
+    my $needhostname = $intf->{NEEDHOSTNAME} !~ /no/; 
     my $hotplug = $::isStandalone && !$intf->{MII_NOT_SUPPORTED} or 1;
     my $track_network_id = $::isStandalone && $intf->{HWADDR} or detect_devices::isLaptop();
     delete $intf->{NETWORK};
@@ -344,11 +337,15 @@ notation (for example, 1.2.3.4).");
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
   	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n") .
 	          $text,
-	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
-	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
-	           { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") },
-	           if_($::expert, { label => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
+	         [ { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") },
+		   { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
+	           { label => N("Netmask"), val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
+		   
+	           if_($::expert,
+		       { label => N("DHCP host name"), val => \$intf->{DHCP_HOSTNAME}, disabled => sub { ! $auto_ip } },
+		       { label => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
 		       { label => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
+		       { label => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool", disabled => sub { ! $auto_ip } },
 		       { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto" ] },
@@ -391,6 +388,7 @@ notation (for example, 1.2.3.4).");
 	         }
     	    ) or return;
     $intf->{ONBOOT} = bool2yesno($onboot);
+    $intf->{NEEDHOSTNAME} = bool2yesno($needhostname);
     $intf->{MII_NOT_SUPPORTED} = !$hotplug && bool2yesno(!$hotplug) or delete $intf->{MII_NOT_SUPPORTED};
     $intf->{HWADDR} = $track_network_id or delete $intf->{HWADDR};
     1;
@@ -472,7 +470,6 @@ sub read_all_conf {
 	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
-	    $netc->{HOSTNAME} = $intf->{DHCP_HOSTNAME} if ($intf->{BOOTPROTO} == 'dhcp');
 	}
     }
     $netcnx->{type} or probe_netcnx_type($prefix, $netc, $intf, $netcnx);
