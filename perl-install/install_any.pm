@@ -519,9 +519,9 @@ sub install_urpmi {
 		    #- WARNING this method of build only works because synthesis (or hdlist)
 		    #-         has been read.
 		    foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-			my $ldir = $dir;
 			my $arch = $_->arch;
-			$ldir =~ s/%{ARCH}/$arch/g;
+			my $ldir = $dir;
+			$ldir =~ s|/([^/]*)%{ARCH}|/./$1$arch|; $ldir =~ s|%{ARCH}|$arch|g;
 			print $LIST "$ldir/".$_->filename."\n";
 		    }
 		} else {
@@ -529,9 +529,9 @@ sub install_urpmi {
 		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		    local $_; 
 		    while (<$F>) {
-			my $ldir = $dir;
 			my $arch = $_->arch;
-			$ldir =~ s/%{ARCH}/$arch/g;
+			my $ldir = $dir;
+			$ldir =~ s|/([^/]*)%{ARCH}|/./$1$arch|; $ldir =~ s|%{ARCH}|$arch|g;
 			print $LIST "$ldir/$_";
 		    }
 		    close $F;
@@ -557,8 +557,9 @@ sub install_urpmi {
 		$with = "../base/hdlist.cz";
 	    } else {
 		$with = $_->{rpmsdir};
+		$with =~ s|/[^/]*%{ARCH}.*||;
 		$with =~ s|/+|/|g; $with =~ s|/$||; $with =~ s|[^/]||g; $with =~ s|/|../|g;
-		$with .= "Mandrake/base/$_->{hdlist}";
+		$with .= "../Mandrake/base/$_->{hdlist}";
 	    }
 
 	    #- output new urpmi.cfg format here.
