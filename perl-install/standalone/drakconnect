@@ -412,21 +412,25 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 			 [N("DHCP client"), \$netcnx->{dhcp_client}]
 			);
 	my $i = 0;
+     my $size_group = Gtk2::SizeGroup->new('horizontal');
+
 	foreach my $j (@conf_data) {
 	    my $l = new Gtk2::Label($j->[0]);
 	    $l->set_justify('left');
 	    $infos[2*$i] = gtkpack_(Gtk2::HBox->new,
-                                 1);
-	    $vbox_local->pack_start($infos[2*$i],0,0,0);
+                                 1, $l);
+	    $vbox_local->pack_start($infos[2*$i], 1, 1, 0);
+	    my $c;
 	    if (defined $j->[2]) {
-		my $c = new Gtk2::OptionMenu;
+		$c = new Gtk2::OptionMenu;
 		$c->set_popdown_strings(@{$j->[2]});
 		$infos[2*$i+1] = $c->entry;
 		$infos[2*$i]->pack_start($c,0,0,0);
 	    } else {
-		$infos[2*$i+1] = new Gtk2::Entry();
+		$infos[2*$i+1] = ($c = Gtk2::Entry->new);
 		$infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
 	    }
+	    $size_group->add_widget($c);
 	    $infos[2*$i+1]->set_text(${$j->[1]});
 	    $i++;
 	}
