@@ -13,6 +13,7 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: draksec [--expert]\n";
 
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 my $in = vnew interactive('su');
 
@@ -43,6 +44,8 @@ Security features are at their maximum."),
 delete @l{0,1,5} unless $::expert;
 delete @help{0,1,5} unless $::expert;
 
+begin:
+$::isEmbedded and kill USR2, $::CCPID;
 if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" . 
 				   join('', map { "$l{$_}: $help{$_}\n\n" } keys %l), 
 				   [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
@@ -55,4 +58,5 @@ if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" .
     $in->resume;
 }
 
-$in->exit(0);
+!$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
+goto begin;
