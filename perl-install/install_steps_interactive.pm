@@ -418,7 +418,7 @@ sub addUser($) {
     $o->{user} ||= {};
     $o->{user}{password2} ||= $o->{user}{password};
     my $u = $o->{user};
-    my @fields = qw(name password password2 realname);
+    my @fields = qw(realname name password password2);
 
     my @shells = install_any::shells($o);
 
@@ -430,6 +430,7 @@ sub addUser($) {
 	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
         ],
         focus_out => sub {
+	    print "int $_[0], $u->{name},  $u->{realname},\n";
 	    ($u->{name}) = $u->{realname} =~ /\U(\S+)/ if $_[0] eq 0;
 	},
         complete => sub {
