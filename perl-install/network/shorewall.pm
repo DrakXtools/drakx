@@ -9,7 +9,7 @@ use run_program;
 use common;
 use log;
 
-my @drakgw_ports = qw(domain bootps);
+my @drakgw_ports = qw(domain bootps http https 631 imap pop3 smtp nntp ntp);
 
 sub check_iptables {
     my ($in) = @_;
