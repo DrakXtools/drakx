@@ -203,7 +203,7 @@ sub configure {
     } else {
 	$default_resolution = choose($in, $default_resolution, @resolutions) or return;
     }
-    $raw_X->set_resolution($default_resolution);
+    set_resolution($raw_X, $default_resolution);
 
     $default_resolution;
 }
@@ -219,9 +219,36 @@ sub configure_auto_install {
     my ($default_resolution) = choices($raw_X, $resolution_wanted, $card, $monitors);
     $default_resolution or die "you selected an unusable depth";
 
-    $raw_X->set_resolution($default_resolution);
+    set_resolution($raw_X, $default_resolution);
 
     $default_resolution;
+}
+
+sub set_resolution {
+    my ($raw_X, $resolution) = @_; 
+    $raw_X->set_resolution($resolution);
+    set_default_background($resolution);
+}
+sub set_default_background {
+    my ($resolution) = @_;
+
+    my $ratio = $resolution->{X} / $resolution->{Y};
+    my $dir = "$::prefix/usr/share/mdk/backgrounds";
+    my @l = 
+      sort { 
+	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1]
+      } map {
+	  if (my ($X, $Y) = /^Mandrakelinux-(\d+)x(\d+).png$/) {
+	      [
+		  $_, 
+		  int(abs($ratio - $X / $Y) * 100), #- we want the nearest ratio (precision .01)
+		  $X >= $resolution->{X}, #- then we don't want a resolution smaller
+		  abs($X - $resolution->{X}), #- the nearest resolution
+	      ];
+	  } else { () }
+      } all($dir);
+
+    symlinkf $l[0][0], "$dir/default.png";
 }
 
 sub resolution2ratio {
