@@ -131,22 +131,15 @@ sub ask_from_listf_no_check {
     }
 }
 
-sub ask_from_treelistf {
-    my ($o, $title, $message, $separator, $f, $l, $def) = @_;
-    my (@l,%l); my $i = 0; foreach (@$l) {
-	my $v = $f->($_, $i++);
-	push @l, $v;
-	$l{$v} = $_;
-    }
-    my $r = ask_from_treelist($o, $title, $message, $separator, \@l, defined $def ? $f->($def) : $def) or return;
-    $l{$r};
-}
-
 sub ask_from_treelist {
     my ($o, $title, $message, $separator, $l, $def) = @_;
-    $o->ask_from_treelistW($title, [ deref($message) ], $separator, [ sort @$l ], $def || $l->[0]);
+    ask_from_treelistf($o, $title, $message, $separator, undef, $l, $def);
 }
-
+sub ask_from_treelistf {
+    my ($o, $title, $message, $separator, $f, $l, $def) = @_;
+    ask_from_entries_refH($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f } ]);
+    $def;
+}
 
 sub ask_many_from_list {
     my ($o, $title, $message, @l) = @_;
@@ -232,7 +225,6 @@ sub ask_from_entries_refH_powered {
     my ($o, $common, $l) = @_;
     ask_from_entries_refH_powered_normalize($o, $common, $l);
     $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
-    1;
 }
 sub ask_from_entries_refH_powered_no_check {
     my ($o, $common, $l) = @_;
