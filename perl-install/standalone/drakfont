@@ -171,10 +171,12 @@ sub search_windows_font {
 sub search_dir_font {
     my @font_list_tmp = ();
     my @font_list_tmpp = ();
+    my $dir ;
     my $fn = $_;
     if (!(-e $fn )) { print "$_ :: no such file or directory \n";}
     else {
 	if ( -d $fn ) { 
+	    $dir = $fn;
 	    foreach my $i (all($fn)) { 
 		if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
 		    push @font_list_tmp, "$i";
@@ -193,7 +195,7 @@ sub search_dir_font {
 		!grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
 	    }
 	}
-	print "Fonts in directory  : ".$_."\n" foreach (@font_list_tmp);
+	print "Fonts in directory ".$dir." : ".$_."\n" foreach (@font_list_tmp);
     }
 }
 
