@@ -362,7 +362,7 @@ sub install_TrueFS_in_home {
 
     my %loopbacks = map {
 	my $part = { 
-		type => 0x483, 
+		type => 0x83, 
 		device => "/home/.mdkmove-$_",
 	        loopback_file => "/.mdkmove-$_", loopback_device => $home,
 		mntpoint => "/home/$_/.mdkmove-truefs", size => 6 << 11,
