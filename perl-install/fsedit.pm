@@ -175,7 +175,7 @@ sub hds {
 
     my @drives = detect_devices::hds();
 
-    my (@hds);
+    my (@hds, @raw_hds);
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});
 	$hd->{prefix} ||= $hd->{device};
@@ -205,6 +205,9 @@ sub hds {
 		if ($hd->{readonly}) {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
+		} elsif (exists $hd->{usb_description} && ($hd->{type} ||= typeOfPart($hd->{device}))) {
+		    push @raw_hds, $hd;
+		    next;
 		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
 		    partition_table::raw::zero_MBR($hd);
 		} else {
@@ -230,7 +233,7 @@ sub hds {
 
     #- detect raids before LVM allowing LVM on raid
     my $raids = raids(\@hds);
-    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => [], raids => $raids };
+    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, raw_hds => \@raw_hds, lvms => [], raids => $raids };
 
     $all_hds->{lvms} = [ lvms($all_hds) ];
 
