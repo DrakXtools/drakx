@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 14mdk
+Release: 15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi
 Requires: foomatic-db-engine, mkbootdisk
-Conflicts: drakconf < 9.3-10mdk
+Conflicts: drakconf < 9.3-21mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.1-2mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
@@ -313,8 +313,45 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jan  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-15mdk
+- alias scannerdrake => drakscanner
+- drakauth: integrate chkauth (which is now deprecated) (pixel)
+- drakbackup: (stew)
+  o DVD+RW support,
+  o fix bogus cron message
+- drakboot:
+  o split it into bootloader and autologin configuration
+  o drop no more handled keytable line in grub config file  (pixel)
+  o simplify lilo boot message. Not mentioning the timeout parameter
+    (#5429)  (pixel)
+  o remove /boot/grub/messages and don't use the i18n command which
+    are obsolete since grub doesn't handle it anymore (pixel)
+- drakconnect: fix sagem800 configuratio (poulpy)
+- drakdisk: basic lvm2 support (pixel)
 - drakfloppy must not be in drakxtools-newt, must now require mkbootdisk
   (which is not installed by default anymore)
+- drakperm: do not discard 0 when perms are 0xx like
+- drakTermServ: support new etherboot floppy image syntax and file
+  locations (stew)
+- drakxservices: fix descriptions (#1704) (pixel)
+- enable other packages to override libDrakx translations with those
+  from their own domains
+- handle /etc/modprobe.preload
+- harddrake: detect megaraid controllers as scsi ones
+- harddrake service:
+  o for removable devices, we've to remove/add them one by one, so
+    when several devices of the same class are removed/added, we ask
+    if we should handle them several time.
+  o let ask confirmation once per class instead (olivier blin, #6649)
+  o do no ask several times the kernel to switch into verbose mode
+    (olivier blin)
+  o really display which devices were removed
+- misc cleanups
+- tool layout:
+  o add a separator below buttons on fredc request
+  o really pack the two button sets at edges
+  o try to have a better layout when embedded): let's have only one
+    scrollbar that scroll the whole window
 
 * Tue Dec 30 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.3-14mdk
 - ugtk2.pm: fix ask_dir dialog (#6152)
