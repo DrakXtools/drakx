@@ -683,9 +683,8 @@ sub chooseCD {
 	return;
     }
 
-    #- if no other medium available or a poor beginner, we are choosing for him!
-    #- note first CD is always selected and should not be unselected!
-    return if @mediums == () || !$::expert;
+    #- the boot medium is already selected.
+    $mediumsDescr{pkgs::mediumDescr($packages, $install_any::boot_medium)} = 1;
 
     #- build mediumDescr according to mediums, this avoid asking multiple times
     #- all the medium grouped together on only one CD.
@@ -694,6 +693,10 @@ sub chooseCD {
 	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
 	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}{selected};
     }
+
+    #- if no other medium available or a poor beginner, we are choosing for him!
+    #- note first CD is always selected and should not be unselected!
+    return if @mediumsDescr == () || !$::expert;
 
     $o->set_help('chooseCD');
     $o->ask_many_from_list('',
