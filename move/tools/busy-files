@@ -14,7 +14,7 @@ push @l, grep { $_ } map { (split)[5] } map { cat_("/proc/$_/maps") } @pids;
 
 foreach (uniq @l) {
     if ($ARGV[0] eq '--server') {
-	s!/image_(always|boot)!/tmp/live_tree!;
+	s!/image_(always|boot|totem)!/tmp/live_tree!;
 	s!/image_raw/live_tree!/tmp/live_tree!;
     }
     print "$_\n";
