@@ -53,7 +53,7 @@ sub main {
 
     $w = my_gtk->new('DiskDrake');
     my $rc = "/etc/gtk/diskdrake.rc";
-    -r $rc or $rc = dirname(__FILE__) . "/diskdrake.rc";
+    -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
     Gtk::Rc->parse($rc);
 
