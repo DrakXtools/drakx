@@ -1,3 +1,231 @@
+2003/08/27  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2003/08/27  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/diskdrake: 
+	  - new drakhelp call schema
+
+	* standalone/drakhelp: 
+	  - perl-checker
+	  - New drakhelp to increase accuracy in help system
+	  - contextual help
+
+	* standalone/drakconnect, standalone/harddrake2, standalone/drakbackup: 
+	  - new drakhelp args
+
+	* standalone/drakbug: 
+	  - help connects to qa.mandrakesoft.com
+
+2003/08/27  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakboot: typo fix
+
+	* network/adsl.pm: fix firmware name (shame on me)
+	fix #4363 (titi's so beautiful)
+
+2003/08/27  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/27  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_interactive.pm: scandisk is not enough! you can destroy your
+	windows XP if you
+	don't use chkdsk and then ntfsresize is used on a buggy partition
+	(drakx should detect it via ntfsresize though), running chkdsk is
+	*mandatory*
+
+2003/08/27  nplanel
+
+	* any.pm: Now acpi=ht to prevent HT detection only
+
+	* install_steps.pm: fixup last hack
+	Now acpi=ht to prevent HT detection only
+
+2003/08/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+	updated pot file
+
+	* share/po/nl.po: updated po file
+	updated pot file
+
+	* share/po/he.po: updated Hebrew file
+	updated pot file
+
+	* share/po/sr@Latn.po, share/po/sk.po, share/po/eo.po, share/po/bg.po,
+	share/po/zh_TW.po, share/po/sv.po, share/po/sr.po, share/po/ta.po,
+	share/po/sl.po, share/po/lt.po, share/po/it.po, share/po/es.po,
+	share/po/el.po, share/po/pt_BR.po, share/po/eu.po, share/po/ca.po,
+	share/po/ru.po, share/po/pl.po, share/po/id.po, share/po/mt.po,
+	share/po/da.po, share/po/lv.po, share/po/ga.po, share/po/be.po,
+	share/po/uz@Cyrl.po, share/po/zh_CN.po, share/po/ja.po, share/po/ms.po,
+	share/po/is.po, share/po/ko.po, share/po/ar.po, share/po/af.po,
+	share/po/fr.po, share/po/de.po, share/po/fi.po, share/po/et.po,
+	share/po/gl.po, share/po/tr.po, share/po/bs.po, share/po/tg.po,
+	share/po/uz.po, share/po/hr.po, share/po/ro.po, share/po/wa.po,
+	share/po/cy.po, share/po/th.po, share/po/vi.po, share/po/DrakX.pot,
+	share/po/az.po: updated pot file
+
+	* share/po/nb.po: updated Norwegian file
+	updated pot file
+	updated Norwegian file
+
+	* share/po/hu.po: updated Hungarian file
+	updated pot file
+
+	* share/po/uk.po, share/po/fa.po, share/po/sq.po, share/po/pt.po: updated
+	pot file
+	updated Farsi, Portuguese, Albanian and Ukrainian files
+
+2003/08/27  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Determine default printer already when reading in the
+	queue data,
+	this is much faster than running "foomatic-configure" a second time.
+
+	* printer/cups.pm: Added lpstat_lpv() function to list remotely defined
+	printers with
+	description and location.
+
+2003/08/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: let draconnect banner fit in french
+
+	* standalone/drakconnect: rename vbox2 as param_vbox
+	remove useless bbox8 (due to use of std dialog button box)
+	get rid of useless/badly named bbox0
+	rename combo1 as profile_combo
+	  - fix hostname setting
+	  - set hostname at the same time we apply dns changes, that is when one
+	ask to apply changes
+
+	* drakxtools.spec: 9.2-4mdk
+
+	* any.pm, printer/cups.pm: fix pot regeneration at package build time
+
+	* harddrake/v4l.pm: resync with current bttv card and tuner lists
+
+2003/08/26  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: current update
+
+2003/08/26  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakfont: fix buttons sensitive behavior
+
+2003/08/26  François Pons  <fpons at mandrakesoft.com>
+
+	* install2.pm: alias meta_class=discovery with meta_class=desktop
+
+	* share/compssUsers: added [selected=default] for all section which needed
+	to be selected
+	(approximative map of existing packages).
+
+	* share/compssUsers.desktop: added [selected=desktop] when needed (same as
+	default selection (PowerPack) but
+	Gnome is removed).
+
+	* install_steps_interactive.pm: drop security level selection for desktop
+	user.
+	do not ask user for group selection if desktop meta class is used.
+
+	* install_any.pm: added default compssUsers group selection from
+	compssUser file directly (use
+	[selected=...] where ... is a list of comma separated meta_class (or
+	default for
+	no meta_class or all for all meta_class).
+	fixed all radeon card are using 3D for 3D package group.
+
+	* share/compssUsers.server: added [selected=server] for groups to be
+	selected by default.
+
+	* pkgs.pm: get selected list from compssUsers for readCompssUsers.
+
+2003/08/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po, share/po/et.po: updated Estonian, Finnish, Hungarian,
+	Norwegian and Swedish files
+	updated pot file
+	updated Estonian, Hungarian and Ukrainian files
+
+	* share/po/uk.po: updated pot file
+	updated Estonian, Hungarian and Ukrainian files
+
+	* share/po/sv.po, share/po/nb.po, share/po/fi.po: updated Estonian,
+	Finnish, Hungarian, Norwegian and Swedish files
+	updated pot file
+
+	* share/po/pt.po: updated Portuguese file
+	updated pot file
+
+	* share/po/sr@Latn.po, share/po/sk.po, share/po/eo.po, share/po/bg.po,
+	share/po/zh_TW.po, share/po/sr.po, share/po/ta.po, share/po/sl.po,
+	share/po/lt.po, share/po/it.po, share/po/es.po, share/po/el.po,
+	share/po/pt_BR.po, share/po/he.po, share/po/eu.po, share/po/ca.po,
+	share/po/ru.po, share/po/pl.po, share/po/id.po, share/po/mt.po,
+	share/po/da.po, share/po/lv.po, share/po/ga.po, share/po/be.po,
+	share/po/uz@Cyrl.po, share/po/cs.po, share/po/fa.po, share/po/zh_CN.po,
+	share/po/ja.po, share/po/ms.po, share/po/is.po, share/po/ko.po,
+	share/po/ar.po, share/po/af.po, share/po/nl.po, share/po/fr.po,
+	share/po/de.po, share/po/sq.po, share/po/gl.po, share/po/tr.po,
+	share/po/bs.po, share/po/tg.po, share/po/uz.po, share/po/hr.po,
+	share/po/ro.po, share/po/wa.po, share/po/cy.po, share/po/th.po,
+	share/po/vi.po, share/po/DrakX.pot, share/po/az.po: updated pot file
+
+	* lang.pm: updated list of available kde-i18n-xx packages
+
+	* share/fonts.tar.bz2: updated Nimbus Sans font with more cyrillic glyphs
+
+2003/08/26  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: install "autofs" pkg when using ldap (thanks to Buchan Milne)
+
+	* share/po/i18n_compssUsers: adapt to new flag [selected=...]
+
+2003/08/26  Till Kamppeter  <till at mandrakesoft.com>
+
+	* pixmaps/printer-mdk.png: Updated icon for printerdrake's dialog windows.
+
+2003/08/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-3mdk
+
+	* standalone/drakconnect: hide profile in "internet config" dialog if
+	profiles are disabled
+	fix "Internet Connection Configuration" dialog does not show up its
+	contents
+	rename --gui option as --skip-wizard option on interface team request
+	only write conf & install packages on exit (Ok press) if something
+	really has been altered so that we do not write the config twice if
+	the user already pressed the "apply" button
+	  - "Configure hostname..." button: offer to configure DNS too
+	  - (configure_hostname) kill it since it only duplicate code from
+	network/*pm
+	still more dialogs cleanups
+	add --gui in order to start in "mcc" state (aka not in wizard mode)
+	more dialog misusage and some indent fixes
+	enfore gc style for gtk+2 widgets creation
+	more layout fixes: cance/ok order coherency, no VBoxes/HButtonBoxes
+	abuses, ...
+	(configure_net) Gtk2::Dialog main area is already a vbox, so it's
+	useless to pack a vbox there idem for action area and Gtk2::HButtonBox
+	(get_intf_status) kill duplicate
+	net & lan configuration dialogs: prevent one to do concurrent config
+	changes from the gui
+	(sensitive_buttons) fix it
+	  - only allow to run one wizard at once (insensitive button if one is
+	already started)
+	  - reload the configuration once the wizard exited
+	  - prevent one to do concurrent config changes from the gui while the
+	  wizard is run (proper fix involve both fix modality/transcientness
+	  when embedded and running the wizard within the same process instead
+	  of forking it]
+
+	* network/drakfirewall.pm: fix pkg to install for samba
+
 2003/08/26  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakfont: fix buttons sensitive behavior
@@ -19972,7 +20200,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.825 2003/08/26 13:45:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.826 2003/08/26 14:23:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
