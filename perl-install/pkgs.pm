@@ -817,7 +817,15 @@ sub installTransactionClosure {
 
     #- search first usable medium (sorted by medium ordering).
     foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
-	$_->{selected} or next;
+	unless ($_->{selected}) {
+	    #- this medium is not selected, but we have to make sure no package are left
+	    #- in $id2pkg.
+	    foreach ($_->{start} .. $_->{end}) {
+		delete $id2pkg->{$_};
+	    }
+	    #- anyway, examine the next one.
+	    next;
+	}
 	if ($l[0] <= $_->{end}) {
 	    #- we have a candidate medium, it could be the right one containing
 	    #- the first package of @l...
