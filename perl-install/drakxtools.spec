@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 46mdk
+Release: 47mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -11,7 +11,7 @@ Conflicts: drakconf < 0.96-10mdk
 BuildRequires: gettext, gtk+-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
-Obsoletes: draksec
+Obsoletes: draksec , drakfloppy
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
@@ -288,6 +288,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Sep 13 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-47mdk
+- obsoletes drakfloppy
+
 * Thu Sep 12 2002 Damien Chaumette <dchaumette@mandrakesoft.com> 1.1.9-46mdk
 - fix broken net_monitor
 
