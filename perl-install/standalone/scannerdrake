@@ -39,10 +39,15 @@ my $in = 'interactive'->vnew('su');
 if (!files_exist('/usr/bin/scanimage',
 		 '/usr/bin/xsane',
 		 if_(files_exist("/usr/bin/gimp"),
-		     "/usr/lib/gimp/*/plug-ins/xsane"))) {
-    $in->do_pkgs->install('sane-backends', 'xsane', 
-			  if_($in->do_pkgs->is_installed('gimp'),
-			      'xsane-gimp'));
+		     "/usr/lib/gimp/1.2/plug-ins/xsane"))) {
+    if (!$in->do_pkgs->install('sane-backends', 'xsane',
+			       if_($in->do_pkgs->is_installed('gimp'),
+				   'xsane-gimp'))) {
+	$in->ask_warn(N("Scannerdrake"),
+		      N("Could not install the packages needed to set up a scanner with Scannerdrake.") . " " .
+		      N("Scannerdrake will not be started now."));
+	exit 0;
+    }
 }
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(N("Scannerdrake"),
