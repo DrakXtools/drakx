@@ -13,7 +13,7 @@ use log;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname down_it read_conf write_resolv_conf up_it);
+@EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname down_it read_conf write_resolv_conf up_it, easy_dhcp);
 
 #-######################################################################################
 #- Functions
@@ -413,6 +413,32 @@ sub read_all_conf {
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
 	}
     }
+}
+
+sub easy_dhcp {
+    my ($in) = @_;
+    my ($netc, $intf);
+    $netc->{autodetect} = {};
+
+    require network::netconnect;
+    network::netconnect::detect($netc->{autodetect});
+
+    #- only for a single network card
+    if ($netc->{autodetect}{lan}{eth0} && !$netc->{autodetect}{lan}{eth1}) {
+	$netc->{NETWORKING} = "yes";
+	$netc->{FORWARD_IPV4} = "false";
+	$netc->{HOSTNAME} = "localhost.localdomain";
+	$netc->{DOMAINNAME} = "localdomain";
+	$intf->{eth0}{DEVICE} = "eth0";
+	$intf->{eth0}{BOOTPROTO} = "dhcp";
+	$intf->{eth0}{ONBOOT} = "yes";
+	$intf->{eth0}{NETMASK} = "255.255.255.0";
+	
+	configureNetwork2($in, '', $netc, $intf);
+
+	run_program::rooted('', "/etc/rc.d/init.d/network restart") or return;	
+    } else { return 0 }
+    1;
 }
 
 #- configureNetwork2 : configure the network interfaces.
