@@ -576,6 +576,13 @@ sub gtkicons_labels_widget {
     gtkset_border_width($w_ret, -2); #- ok, this is very very ugly...
 }
 
+sub ctree_set_icon {
+    my ($tree, $node, $icon_pixmap, $icon_mask) = @_;
+
+    my ($text, $spacing, undef, undef, undef, undef, $isleaf, $expanded) = $tree->get_node_info($node);
+    $tree->set_node_info($node, $text, $spacing, $icon_pixmap, $icon_mask, $icon_pixmap, $icon_mask, $isleaf, $expanded);
+}
+
 sub compute_icons {
     my ($fx, $fy, $decx, $decy, $interstice, @tab) = @_;
     my $nb = $#tab;
