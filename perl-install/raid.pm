@@ -152,13 +152,21 @@ sub inactivate_and_dirty {
 }
 
 sub active_mds() {
-    map { if_(/^(md\d+) /, $1) } cat_("/proc/mdstat");
+    map { if_(/^(md\d+)\s*:\s*active/, $1) } cat_("/proc/mdstat");
+}
+sub inactive_mds() {
+    map { if_(/^(md\d+)\s*:\s*inactive/, $1) } cat_("/proc/mdstat");
 }
 
 sub detect_during_install {
     my (@parts) = @_;
     detect_during_install_once(@parts);
     detect_during_install_once(@parts) if active_mds(); #- try again to detect RAID 10
+
+    foreach (inactive_mds()) {
+	log::l("$_ is an inactive md, we stop it to ensure it doesn't busy devices");
+	run_program::run('mdadm', '--stop', devices::make($_));
+    }
 }
 
 sub detect_during_install_once {
