@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 21mdk
+Release: 22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Oct  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-22mdk
+- bootloader-config: on a recent kernel, remove any existing devfs=
+  kernel option in order to enable udev (pixel)
+- drakconnect: add chinese ISPs (Funda Wang, #10965)
+- XFdrake: fix parsing fully commented Section (pixel)
+
 * Wed Oct  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-21mdk
 - bootloader-config: fix installing kernel-2.6.8.1-12.1mdk (pixel)
 - drakups: fix brown paper bug in USB detection
