@@ -23,8 +23,7 @@ use log;
 #-######################################################################################
 sub read_conf {
     my ($file) = @_;
-    my %netc = getVarsFromSh($file);
-    \%netc;
+    { getVarsFromSh($file) }
 }
 
 sub read_resolv_conf {
@@ -77,10 +76,8 @@ sub write_conf {
 }
 
 sub write_zeroconf {
-    my ($file, $netc) = @_;
-    my %zeroconf_file = getVarsFromSh($file);
-    $zeroconf_file{hostname} = $netc->{ZEROCONF_HOSTNAME};
-    setVarsInSh($file, \%zeroconf_file);
+    my ($file, $zhostname) = @_;
+    substInFile { s/^(hostname) =.*/$1 = $zhostname/ } $file;
 }
 
 sub write_resolv_conf {
@@ -504,7 +501,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     ($netc->{DHCP} || grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-    $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc);      
+    $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
     proxy_configure($::o->{miscellaneous});
