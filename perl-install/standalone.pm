@@ -146,7 +146,7 @@ Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
 
 sub on_request_help {
     my ($o, $link) = @_;
-    my $browser = $ENV{BROWSER} || MDK::Common::Func::find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $o->ask_warn('',N("No browser is installed on your system, Please install one if you want to browse the help system"));
+    my $browser = $ENV{BROWSER} || MDK::Common::Func::find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $o->ask_warn('', N("No browser is installed on your system, Please install one if you want to browse the help system"));
     log::explanations("Connection to help system at $link");
     system("$browser $link &");
 }
@@ -303,7 +303,7 @@ sub rm_rf {
 }
 
 sub cp_af {
-    my $retval = MDK::Common::File::cp_af @_;
+    my $retval = MDK::Common::File::cp_af(@_);
     my $dest = pop @_;
     explanations "copied recursively @_ to $dest";
     return $retval;
@@ -336,14 +336,14 @@ sub update_gnomekderc {
 
 
 sub chmod {
-    my $retval = CORE::chmod @_;
+    my $retval = CORE::chmod(@_);
     my $mode = shift @_;
     explanations sprintf("changed mode of %s to %o", $_, $mode) foreach @_;
     return $retval;
 }
 
 sub chown {
-    my $retval = CORE::chown @_;
+    my $retval = CORE::chown(@_);
     my $uid = shift @_;
     my $gid = shift @_;
     explanations sprintf("changed owner of $_ to $uid.$gid") foreach @_;
@@ -352,27 +352,27 @@ sub chown {
 
 sub unlink {
     explanations "removed files/directories @_";
-    CORE::unlink @_;
+    CORE::unlink(@_);
 }
 
 sub link {
     explanations "hard linked file $_[0] to $_[1]";
-    CORE::link $_[0], $_[1];
+    CORE::link($_[0], $_[1]);
 }
 
 sub symlink {
     explanations "symlinked file $_[0] to $_[1]";
-    CORE::symlink $_[0], $_[1];
+    CORE::symlink($_[0], $_[1]);
 }
 
 sub rename {
     explanations "renamed file $_[0] to $_[1]";
-    CORE::rename $_[0], $_[1];
+    CORE::rename($_[0], $_[1]);
 }
 
 sub system {
     explanations "launched command: @_";
-    CORE::system @_;
+    CORE::system(@_);
 }
 
 1;
