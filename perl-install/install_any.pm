@@ -414,7 +414,7 @@ sub selectSupplMedia {
 	    : int(keys %{$o->{packages}{mediums}}) + 1;
 	local $::isWizard = 0;
 	#- configure network if needed
-	if (!(our $asked) && !scalar keys %{$o->{intf}}) {
+	if (!(our $asked) && !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/) {
 	    $asked = 1;
 	    #- install basesystem now
 	    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
