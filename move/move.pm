@@ -619,7 +619,11 @@ sub install2::startMove {
 
     touch '/var/run/utmp';
     run_program::run('runlevel_set', '5');
-    member($_, qw(xfs dm devfsd syslog)) or run_program::run($_, 'start') foreach glob('/etc/rc.d/rc5.d/*');
+    foreach (glob('/etc/rc.d/rc5.d/*')) {
+        next if member($_, qw(xfs dm devfsd syslog));
+        next if /~$/;
+        run_program::run($_, 'start');
+    }
 
     #- allow user customisation of startup through /etc/rc.d/rc.local
     run_program::run('/etc/rc.d/rc.local');
