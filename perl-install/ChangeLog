@@ -1,3 +1,44 @@
+2001/08/22  anoncvs
+
+	* share/po/zh_CN.GB2312.po: * Wed Aug 22 2001 DU Xiaoming
+	<dxiaoming@mandrakesoft.com>
+	Updated chinese (simplied) translation.
+
+2001/08/22  fabman
+
+	* share/po/es.po: updated spanish .po files for DrakX and drakbootdisk
+
+2001/08/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/automatic.c: don't stay automatic for ask_from_entries when
+	entries are not given
+
+	* mdk-stage1/tools.c, mdk-stage1/stage1.c, mdk-stage1/cdrom.c,
+	mdk-stage1/mount.c, mdk-stage1/lomount.c, mdk-stage1/mount.h,
+	mdk-stage1/network.c, mdk-stage1/modules.c, mdk-stage1/disk.c: mount all
+	but ramdisk Read Only
+
+2001/08/22  Pixel  <pixel@mandrakesoft.com>
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: fix ru KOI8-R
+
+	* bootlook.pm: fix typo
+
+	* network/nfs.pm: pleac perl_checker
+
+	* install_steps.pm: do init_db inside pkg_inside otherwise LOG is closed
+	and rpmlib tries to write in it and ...
+	do not call configurePrinter if no printer is wanted
+
+	* interactive_gtk.pm: more intelligent setting back the selected value in
+	the clist and ctree
+	(done already for entry)
+	  - fix entries editing causing the cursor to go to the end of line
+	  - select the text
+
+	* c/stuff.xs.pm, pkgs.pm: do init_db inside pkg_inside otherwise LOG is
+	closed and rpmlib tries to write in it and ...
+
 2001/08/22  François Pons  <fpons@mandrakesoft.com>
 
 	* printerdrake.pm: fixed int and float checking which should accept
