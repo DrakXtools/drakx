@@ -1,3 +1,165 @@
+2002/08/08  alus
+
+	* share/po/pl.po: various changes
+	corrected errors
+
+2002/08/08  François Pons  <fpons@mandrakesoft.com>
+
+	* fs.pm: make sure fsck is called for ext3 partition (due to possible
+	kernel panic on
+	corrupted ext3 partition, even after mounting ext3, umounting and
+	remounting
+	ext2).
+
+2002/08/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/keyboards.tar.bz2, keyboard.pm: Added Tamils TSCII keyboard
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/eu.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/cs.po, share/po/bg.po,
+	share/po/el.po, share/po/hu.po: updated pot file
+
+	* lang.pm: Added Tamils TSCII keyboard
+	Added some support for Tamil (proper KDE default fonts, and define it
+	as iso8859-1 encoding for kde)
+
+	* share/po/es.po: updated pot file
+	updated Spanish file
+
+2002/08/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: 
+	  - remove the icons in reallyChooseGroups
+	  - add the LSB group
+	  - remove buttons to change theme
+	  - add F5 to change the theme to the 'white' theme
+	  - cleanup the theme code
+	workaround a weird pb with gtk: still re-creating help Gtk::Text at each
+	step :-/
+	  - remove the "help" button
+	  - ensure the help box is not created twice (except when changing
+	theme)
+
+	* Xconfig/xfreeX.pm (set_resolution): handle the optional $resolution->{Y}
+	(@resolutions): add 1280x960
+	fix typo
+	replace 1152x768 with 1152x864 as it should and used to be
+
+	* install_steps.pm: don't add users in group usb (unneeded (?), anyway
+	doesn't do anything since group usb doesn't exist currently)
+
+	* install2.pm: 
+	  - remove buttons to change theme
+	  - add F5 to change the theme to the 'white' theme
+	  - cleanup the theme code
+
+	* services.pm (services): better sorting of services
+
+	* install_any.pm, timezone.pm: use $::prefix in timezone::read
+	timezone::read now returns a hash
+
+	* install_gtk.pm: 
+	  - remove buttons to change theme
+	  - add F5 to change the theme to the 'white' theme
+	  - cleanup the theme code
+	workaround a weird pb with gtk: still re-creating help Gtk::Text at each
+	step :-/
+	  - remove the "help" button
+	  - ensure the help box is not created twice (except when changing
+	theme)
+
+	* Xconfig/various.pm (tvout): rough default value for PAL vs NTSC
+	(configure_FB_TVOUT): add ModeLines (Florent Beranger says it displays
+	better with them)
+
+	* any.pm: 
+	  - write_passwd_user: ensure {pw} is set (at least '')
+	  - cleanup dead code
+	(ask_window_manager_to_logout): adapt to new gnome
+	sort security level descriptions
+
+	* my_gtk.pm: do not hard code icon path
+	  - remove buttons to change theme
+	  - add F5 to change the theme to the 'white' theme
+	  - cleanup the theme code
+
+	* Xconfig/card.pm, Xconfig/monitor.pm, Xconfig/main.pm: when prompting for
+	VideoRam, default to the value obtained via DDC
+
+	* Xconfig/resolution_and_depth.pm: handle the pb of resolutions where X
+	doesn't imply Y (eg: 1280x1024 and 1280x960)
+
+	* standalone/adduserdrake: 
+	  - fix detecting use of MD5 and shadow passwords
+	  - cosmetic move of any::addUsers
+
+2002/08/08  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_any.pm, install_steps_interactive.pm: Windows PDC -> Windows
+	Domain, don't make samba dirs - samba fixed now
+
+2002/08/08  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* scanner.pm: old hp scanners report themselves as "Processor"s as :
+	  - tested in hw lab
+	  - written in linux/include/scsi/scsi.h: "TYPE_PROCESSOR.*HP scanners
+	use this"
+	  - reported by sane-find-sane: "old HP scanners use the CPU id"
+
+	* detect_devices.pm: explain the fscking "Processor" need
+	old hp scanners report themselves as "Processor"s as :
+	  - tested in hw lab
+	  - written in linux/include/scsi/scsi.h: "TYPE_PROCESSOR.*HP scanners
+	use this"
+	  - reported by sane-find-sane: "old HP scanners use the CPU id"
+
+2002/08/07  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* security/shorewall.pm: shorewall-related functions will go here.
+
+2002/08/07  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: added automatic update of lilo image and KDE & GNOME
+	background.
+
+	* install2.pm: allow automatic oem patch. add log if successfull patching.
+
+	* install_steps_interactive.pm: do not ask user to select ignored medium.
+
+	* crypto.pm: allow patching of mirror used.
+
+	* pkgs.pm: call rpmReadConfigFiles before installing packages.
+	do not read package of ignored medium (contrib) to save memory.
+
+	* install_any.pm: getAndSaveFile now return before writing zero-length
+	file if input file doesn't
+	exists on invocation.
+
+2002/08/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated Vietnamese file
+
+2002/08/07  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/card.pm: load glx in any case (well except for nvidia
+	proprietary shit)
+
+	* fs.pm: "LABEL=xxx" in fstab handling
+
+	* bootlook.pm: replace glob() with all()
+
+	* network/netconnect.pm (get_profiles): get rid of "glob", clean it up
+
 2002/08/06  alus
 
 	* share/po/pl.po: updated translation
