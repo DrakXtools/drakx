@@ -123,13 +123,10 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
-use my_gtk qw(:helpers :wrappers);
 use common;
-use strict;
+
 use Time::localtime;
 use detect_devices;
-
-my $in = 'interactive'->vnew('', 'default');
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and Restore application
@@ -619,7 +616,7 @@ sub save_cron_files {
 		$backup_daemon = 0;
 		return(1);
 	}
-    my @cron_file = ("#!/bin/sh\n", "export TERM=xterm\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
+    my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
 
     if ($backup_daemon) {
 		foreach (qw(hourly daily weekly monthly)) {
@@ -4652,6 +4649,14 @@ sub interactive_mode_box {
 
 sub interactive_mode {
     $interactive = 1;
+	eval { require my_gtk; };
+	if ($@ ne '') {
+		die "Can't load my_gtk...\n";
+	} else {
+  		my_gtk->import(qw(:helpers :wrappers));
+	}
+	my $in = 'interactive'->vnew('', 'default');
+
     my $box;
     $my_win = my_gtk->new('drakbackup');
     $window1 = $my_win->{window};
