@@ -13,7 +13,7 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
-DIRS = tools #mdk-stage1
+DIRS = tools mdk-stage1
 
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
@@ -23,9 +23,9 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
 .PHONY: dirs $(FLOPPY_IMG) install
 
-install: #rescue
+install: build autoboot rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
-#	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
+	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
 ifeq (alpha,$(ARCH))
 	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
