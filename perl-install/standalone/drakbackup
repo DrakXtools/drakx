@@ -119,6 +119,7 @@ my $ignore_files_list;
 my @list_of_rpm_to_install;
 my @other_files;
 my @sys_files = "/etc";
+my $host_passwd;
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -398,6 +399,11 @@ sub save_conf_file() {
     write_sitecopyrc() if $conf{NET_PROTO} eq 'webdav';
     write_password_file() if $conf{NET_PROTO} eq 'rsync' && $conf{PASSWD};
 	return 1 if $conf{SEND_MAIL} && verify_mail_setup();
+	#- don't save this, but retain it for this session
+	if ($conf{REMEMBER_PASS} != 1) {
+		$host_passwd = $conf{PASSWD};
+		$conf{PASSWD} = undef;
+	}
 	if ($backup_daemon && $conf{DAEMON_MEDIA} eq '') {
 		show_warning("f", N("No media selected for cron operation."));
 		return 1;
@@ -415,6 +421,7 @@ sub save_conf_file() {
 	$conf{HOME_FILES} = list_to_conf(@user_list);
 	$conf{SYS_FILES} = list_to_conf(@sys_files);
 	setVarsInSh($cfg_file, \%conf);
+	$conf{PASSWD} = $host_passwd if $conf{REMEMBER_PASS} != 1;
     chmod(0600, $cfg_file);
     save_cron_files();
     0;
@@ -502,12 +509,13 @@ sub upgrade_conf_file() {
 sub read_conf_file() {
     if (-e $cfg_file) {
 		my $conf_version = `grep USE_HD $cfg_file`;
-		upgrade_conf_file() if $conf_version !~ /^USE_HD=1/;		
+		upgrade_conf_file() if $conf_version !~ /^USE_HD=1/;
 		%conf = getVarsFromSh($cfg_file);
 		@other_files = conf_to_list($conf{OTHER_FILES});
 		@user_list = conf_to_list($conf{HOME_FILES});
 		@sys_files = conf_to_list($conf{SYS_FILES}) if exists($conf{SYS_FILES});
 		$backup_daemon = 1 if exists($conf{DAEMON_TIME_SPACE});
+		$conf{PASSWD} = $host_passwd if $conf{REMEMBER_PASS} != 1;
 		read_cron_files();
 		$cfg_file_exist = 1;
     } else { 
