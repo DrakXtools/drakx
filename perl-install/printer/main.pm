@@ -1221,8 +1221,8 @@ sub write_cups_config {
 	    "Allow From 127.0.0.1\n" .
 	    ($#{$printer->{cupsconfig}{clientnetworks}} >= 0 ?
 	     "Allow From " .
-	     join ("\nAllow From ", 
-		   @{$printer->{cupsconfig}{clientnetworks}}) .
+	     join("\nAllow From ", 
+		  @{$printer->{cupsconfig}{clientnetworks}}) .
 	     "\n" : "").
 	    "</Location>\n";
 	my ($location_start, @location) = 
