@@ -288,7 +288,6 @@ sub suggest {
     my ($onmbr, $unsafe) = $lilo->{crushMbr} ? (1, 0) : suggest_onmbr($hds);
     add2hash_($lilo, arch() =~ /sparc/ ?
 	{
-	 default => "linux",
 	 entries => [],
 	 timeout => 5,
 	 use_partition => 0, #- we should almost always have a whole disk partition.
@@ -298,7 +297,6 @@ sub suggest {
 	} : arch =~ /ppc/ ?
 	{
 	 defaultos => "linux",
-	 default => "linux",
 	 entries => [],
 	 initmsg => "Welcome to Mandrake Linux!",
 	 delay => 30,	#- OpenFirmware delay
@@ -310,7 +308,6 @@ sub suggest {
 	} :
 	{
 	 bootUnsafe => $unsafe,
-	 default => "linux",
 	 entries => [],
 	 timeout => $onmbr && 5,
 	   if_(arch() !~ /ia64/,
@@ -406,6 +403,14 @@ wait %d seconds for default boot.
 	    }
 	}
     }
+    foreach ('secure', 'enterprise', 'smp') {
+	if (get_label("linux-$_", $lilo)) {
+	    $lilo->{default} ||= "linux-$_";
+	    last;
+	}
+    }
+    $lilo->{default} ||= "linux";
+
     my %l = (
 	     yaboot => to_bool(arch() =~ /ppc/),
 	     silo => to_bool(arch() =~ /sparc/),
