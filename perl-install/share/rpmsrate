@@ -27,10 +27,11 @@ KDE
   5 kdeaddons-searchbar
 
 VIDEO
+  5 totem
   4 RealPlayer
-  4 totem
   4 KDE kdenlive
-  3 xine-ui xine-oss xine-xv powerdvd
+  3 xine-ui xine-oss xine-xv
+  3 powerdvd
   3 nist xanim xmms-smpeg mplayer-gui
   2 mtv mtv-fullscreen-extension
   2 xmovie
@@ -124,9 +125,11 @@ SHELLS
 
 SCIENCES
   4 gnuplot
-  4 KDE kdeedu
   3 HDF
   2 mathplot octave
+
+EDUCATION
+  4 KDE kdeedu
 
 EDITORS
   4 emacs-X11
@@ -156,7 +159,7 @@ COMMUNICATIONS
   4 KDE kdebase-kdeprintfax kdegraphics-kfax
   4 hylafax-client 
   3 jpilot pilot-link
-  2 hylafax-server hylafax-client dip
+  2 hylafax-server dip
   2 lrzsz mgetty mgetty-contrib mgetty-sendfax mgetty-viewfax mgetty-voice minicom
   1 jpilot-Mail jpilot-syncmal statserial
 
@@ -334,7 +337,6 @@ NETWORKING_WWW_SERVER
 GRAPHICS
   5 qiv
   4 gimp gqview
-  4 KDE kdegraphics-kooka
   4 KDE kdegraphics-ksnapshot
   4 KDE kimdaba
   4 ImageMagick giftrans gphoto2
@@ -378,8 +380,9 @@ BURNER
     3 cdrecord-devel
 
 SCANNER
-  5 sane-frontends
-  4 xsane
+  4 sane-frontends
+  4 KDE kdegraphics-kooka
+  4 !KDE xsane
 
 PHOTO
   4 gphoto gphoto2
@@ -468,19 +471,26 @@ DEVELOPMENT
   4 gettext-devel libncurses5-devel ncurses-devel
 
   BOOKS
-    2 pam-doc python-docs slang-doc kernel-doc nasm-doc qt2-doc ruby-doc lkmpg
+    5 qt3-example
+    2 pam-doc python-docs slang-doc kernel-doc nasm-doc ruby-doc lkmpg
 
   KDE
-    4 kdevelop
-    4 libkdebase4-devel libkdebase-devel libkdebase-kate-devel libkdebase-nsplugins-devel libkdecore4-devel libkdecore-devel 
-      libkdeedu1-devel libkdeedu-devel libkdegames1-devel libkdegames-devel libkdegraphics-common-devel
-      libkdegraphics-kooka-devel libkdemultimedia-common-devel libkdenetwork-common-devel
-      libkdepim-common-devel libkdepim2-devel libkdepim-devel libkdesdk1-devel libkdesdk-devel libkdetoys1-devel libkdetoys-devel
-      libkdeutils-common-devel libkdeutils1-devel libkdeutils-devel libkdeutils-ksim-devel
-      libkdevelop2-devel libkdevelop-devel
-    4 kdesdk
-
-    1 kdesupport-devel kdeaddutils-devel libkoffice2-devel koffice-devel
+    5 kdevelop
+    5 kdesdk
+    5 libkdenetwork2-kopete-devel libkdebase4-kate-devel libkdepim2-common-devel
+      libkdebase4-nsplugins-devel libkdepim2-kaddressbook-devel
+      libkdepim2-kmail-devel libkdecore4-devel libkdepim2-knode-devel
+      libkdeedu1-devel libkdepim2-kontact-devel libkdegames1-devel
+      libkdepim2-korganizer-devel libkdegraphics0-common-devel
+      libkdepim2-kpilot-devel libkdegraphics0-kooka-devel
+      libkdesdk1-cervisia-devel libkdegraphics0-kpovmodeler-devel
+      libkdesdk1-devel libkdegraphics0-ksvg-devel libkdesdk1-kbabel-devel
+      libkdegraphics0-kview-devel libkdetoys1-devel
+      libkdemultimedia1-common-devel libkdeutils1-common-devel
+      libkdemultimedia1-kscd-devel libkdeutils1-ksim-devel
+      libkdemultimedia1-noatun-devel libkdevelop3-devel libarts1-devel
+      libqt3-devel libquanta0-devel libquanta0-kfilereplace-devel
+      libquanta0-kommander-devel libkoffice2-devel
 
   GNOME
     4 perl-GTK-Glade perl-GTK-Gnome 
@@ -530,6 +540,7 @@ FILE_TOOLS
 
 WEBMIN
   5 webmin
+  5 mdkwebadmin
 
 WIZARDS
   5 drakwizard
@@ -644,7 +655,7 @@ PRINTER
   4 xpp nmap printer-testpages scli net-tools gimpprint foomatic-db-engine 
     foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
     a2ps ppdfilt gpr groff lesstif
-    sane-backends sane-frontends xsane xsane-gimp 
+    sane-backends sane-frontends xsane-gimp 
     libsnmp0 xojpanel libsane-hpoj1 printer-utils
 
 INSTALL
