@@ -57,7 +57,7 @@ sub handle_etcfiles {
             $mode eq 'READ' && !-e $_ and symlinkf_short("/image$_", $_);
             if ($mode eq 'OVERWRITE') {
                 mkdir_p(dirname($_));
-                run_program::run('cp', "/image$_", $_);  #- need copy contents
+                cp_f("/image$_", $_);  #- need copy contents
             }
             $mode eq 'DIR' and mkdir_p $_;
         }
@@ -72,7 +72,13 @@ sub handle_virtual_key() {
         my $dir = '/virtual_key_mount';
         mkdir $dir;
         run_program::run('mount', $device, $dir);
-        $options =~ /format/ and run_program::run('mkdosfs', "$dir$file");
+        if ($options =~ /format/) {
+	    if (! -e "$dir$file") {
+		require commands;
+		commands::dd("if=/dev/zero", "of=$dir$file", "bs=1M", "count=40");
+	    }
+	    run_program::run('mkdosfs', "$dir$file");
+	}
         require devices;
         my $loop = devices::find_free_loop();
         run_program::run('losetup', $loop, "$dir$file");
@@ -117,10 +123,10 @@ sub init {
     symlinkf "/proc/mounts", "/etc/mtab";
 
     #- these files need be writable but we need a sensible first contents
-    run_program::run('cp', "/image/etc/$_", '/etc') foreach qw(passwd passwd- group sudoers fstab);
+    cp_f("/image/etc/$_", '/etc') foreach qw(passwd passwd- group sudoers fstab);
 
     #- these files are typically opened in read-write mode, we need them copied
-    mkdir_p("/etc/$_"), run_program::run('cp', '-R', glob_("/image/etc/$_/*"), "/etc/$_")
+    mkdir_p("/etc/$_"), cp_f(glob_("/image/etc/$_/*"), "/etc/$_")
       foreach qw(cups profile.d sysconfig devfs/conf.d);
 
     #- directories we badly need as non-links because files will be written in
@@ -359,7 +365,7 @@ sub key_installfiles {
                     symlinkf("$sysconf$_", $_);
                 }
             }
-            run_program::run('cp', '/image/move/README.adding.more.files', $key_sysconf);
+            eval { cp_f('/image/move/README.adding.more.files', $key_sysconf) };
             $done = 1;
         } else {
             #- not in full mode and no host directory, grab user config from first existing host directory if possible
@@ -382,7 +388,7 @@ sub key_installfiles {
     }
 
     #- /etc/sudoers can't be a link
-    unlink($_), run_program::run('cp', "/image$_", $_) foreach qw(/etc/sudoers);
+    unlink($_), cp_f("/image$_", $_) foreach qw(/etc/sudoers);
 }
 
 sub reboot() {
