@@ -587,6 +587,7 @@ sub setDefaultPackages {
     $o->{rpmsrate_flags_chosen}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64|x86_64/;
     $o->{rpmsrate_flags_chosen}{SMP} = 1 if detect_devices::hasSMP();
     $o->{rpmsrate_flags_chosen}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
+    $o->{rpmsrate_flags_chosen}{TV} = 1 if detect_devices::getTVcards();
     $o->{rpmsrate_flags_chosen}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc('Rage X[CL]') ||
