@@ -318,8 +318,12 @@ TYPE=$kind
     write_cnx_script($netc);
 
     unless ($::isStandalone) {
+        $::isInstall && eval {
+            require fs;
+            fs::mount("/proc/bus/usb", "$::prefix/proc/bus/usb", 'usbdevfs');
+        } or log::l("failed to mount usbdevfs");
         $modems{$adsl_device}{modules} && eval { modules::load(@{$modems{$adsl_device}{modules}}) }
-          or log::l("failled to load " . join('', @{$modems{$adsl_device}{modules}}), " modules: $@");
+          or log::l("failed to load " . join('', @{$modems{$adsl_device}{modules}}), " modules: $@");
         $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
     }
 }
