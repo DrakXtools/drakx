@@ -132,7 +132,7 @@ $button_del->signal_connect(clicked => sub {
                                                               if ($profile2delete eq $netcnx->{PROFILE}) {
                                                                   set_profiles("default");
                                                               } else {
-                                                                  udapte_profiles();
+                                                                  update_profiles();
                                                               }
                                                           }),
                                        );
