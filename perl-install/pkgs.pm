@@ -165,6 +165,20 @@ sub selectedSize {
 }
 sub correctedSelectedSize { correctSize(selectedSize($_[0]) / sqr(1024)) }
 
+sub size2time {
+    my ($x, $max) = @_;
+    my $A = 7e-07;
+    my $limit = min($max * 3 / 4, 9e8);
+    if ($x < $limit) {
+	$A * $x;
+    } else { 
+	$x -= $limit;
+	my $B = 6e-16;
+	my $C = 15e-07;
+	$B * $x ** 2 + $C * $x + $A * $limit;
+    }
+}
+
 
 #- searching and grouping methods.
 #- package is a reference to list that contains

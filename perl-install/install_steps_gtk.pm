@@ -551,18 +551,25 @@ sub installPackages {
 	    my $p = pkgs::packageByName($o->{packages}, $name);
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
-	    $advertize->(1) if $show_advertising && $total_size > 20 * sqr(1024) && time() - $change_time > 20;
+	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
 
 	    my $dtime = time() - $start_time;
-	    my $ratio = $total_size ? ($_[1] + $current_total_size) / $total_size : 0; $ratio >= 1 and $ratio = 1;
+	    my $ratio = 
+	      $total_size == 0 ? 0 :
+		pkgs::size2time($current_total_size + $_[1], $total_size) / pkgs::size2time($total_size, $total_size);
+	    $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
+#-	    my $ratio2 = $total_size == 0 ? 0 : ($current_total_size + $_[1]) / $total_size;
+#-	    log::l(sprintf("XXXX advance %d %d %s", $current_total_size + $_[1], $dtime, formatTimeRaw($total_time)));
+
 	    $progress_total->update($ratio);
-	    if ($dtime != $last_dtime && $current_total_size > 10 * sqr(1024)) {
+	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
 		$msg_time_total->set(formatTime(10 * round($total_time / 10) + 10));
+#-		$msg_time_total->set(formatTimeRaw($total_time) . "  " . formatTimeRaw($dtime / $ratio2));
 		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
