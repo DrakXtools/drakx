@@ -310,7 +310,7 @@ sub setPackages($) {
 
 	my @l = ();
 	push @l, 'xawtv', 'kwintv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
-	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
+	push @l, "drakprofile", "draksync", "irda-utils" if $o->{pcmcia};
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');
 	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
@@ -392,11 +392,13 @@ sub hdInstallPath() {
 sub unlockCdrom(;$) {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
     eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
 sub ejectCdrom(;$) {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
     getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/rhimage") };

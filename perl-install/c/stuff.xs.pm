@@ -11,6 +11,7 @@ print '
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/ioctl.h>
+#include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
@@ -710,6 +711,9 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
       const unsigned long *param_ul1 = NULL;
       const unsigned long *param_ul2 = NULL;
       char *n = (char *) pkgKey;
+      static struct timeval tprev;
+      static struct timeval tcurr;
+      long delta;
 
       switch (what) {
       case RPMCALLBACK_INST_OPEN_FILE: {
@@ -770,18 +774,22 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
 
       case RPMCALLBACK_INST_START: {
         msg = "Starting installing package";
+	gettimeofday(&tprev, NULL);
         param_s = n;
 
         last_amount = 0;
       } break;
 
       case RPMCALLBACK_INST_PROGRESS:
-        if (total && (amount - last_amount) * 22 / 4 / total) {
+        gettimeofday(&tcurr, NULL);
+        delta = 1000000 * (tcurr.tv_sec - tprev.tv_sec) + (tcurr.tv_usec - tprev.tv_usec);
+        if (delta > 200000 || amount >= total - 1) { /* (total && (amount - last_amount) * 22 / 4 / total)) { */
           msg = "Progressing installing package";
           param_s = n;
           param_ul1 = &amount;
           param_ul2 = &total;
 
+	  tprev = tcurr;
           last_amount = amount;
   	} break;
       default: break;
