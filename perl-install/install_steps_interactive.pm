@@ -1145,15 +1145,6 @@ sub load_thiskind {
 	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
 
-    if ($type =~ /scsi/i) {
-	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
-	install_any::ultra66($o);
-
-	require pci_probing::main;
-	if (my ($c) = pci_probing::main::probe('AUDIO')) {
-	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
-	}
-    }
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
 
@@ -1162,7 +1153,22 @@ sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
 
     my @l;
-    if (!$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1)) {
+    my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+
+    {
+	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
+	modules::load("ide-mod", 'prereq', $allow_probe && 'options="' . detect_devices::hasHPT() . '"');
+	modules::load_multi(qw(ide-probe ide-disk ide-cd));
+    }
+
+    if ($allow_probe && $type =~ /scsi/i) {
+	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
+	require pci_probing::main;
+	if (my ($c) = pci_probing::main::probe('AUDIO')) {
+	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
+	}
+    }
+    if ($allow_probe) {
 	eval { @l = $o->load_thiskind($type) };
 	if ($@) {
 	    $o->errorInStep($@);

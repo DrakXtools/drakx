@@ -234,6 +234,14 @@ sub selectMouse {
 }
 
 #------------------------------------------------------------------------------
+sub setupSCSI {
+    my ($clicked) = $_[0];
+    $o->{autoSCSI} ||= $::beginner;
+
+    $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
+}
+
+#------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked) = $_[0];
 
@@ -266,14 +274,6 @@ sub selectInstallClass {
         $o->setPackages(\@install_classes);
         $o->selectPackagesToUpgrade() if $o->{isUpgrade};
     }
-}
-
-#------------------------------------------------------------------------------
-sub setupSCSI {
-    my ($clicked) = $_[0];
-    $o->{autoSCSI} ||= $::beginner;
-
-    $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
 }
 
 #------------------------------------------------------------------------------
@@ -572,7 +572,8 @@ sub main {
 
     if ($::auto_install) {
 	require install_steps_auto_install;
-	eval { $o = $::o = install_any::loadO($o, "floppy") };
+	eval { $o = $::o = install_any::loadO($o, "Mandrake/auto_inst.cfg.pl") };
+	eval { $o = $::o = install_any::loadO($o, "floppy") } if $@;
 	if ($@) {
 	    log::l("error using auto_install, continuing");
 	    undef $::auto_install;
@@ -628,7 +629,7 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
-    modules::load_multi(qw(ide-probe ide-disk ide-cd sd_mod af_packet));
+    modules::load("af_packet");
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle

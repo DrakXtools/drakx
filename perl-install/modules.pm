@@ -343,6 +343,10 @@ sub get_alias {
     my ($alias) = @_;
     $conf{$alias}{alias};
 }
+sub get_options {
+    my ($name) = @_;
+    $conf{$name}{options};
+}
 
 sub add_alias($$) { 
     my ($alias, $name) = @_;
@@ -415,7 +419,7 @@ sub unload($;$) {
 sub load_raw($@) {
     my ($name, @options) = @_;
 
-    run_program::run("insmod", $name, @options) or die("insmod $name failed");
+    run_program::run("insmod", $name, grep { $_ } @options) or die("insmod $name failed");
 
     #- this is a hack to make plip go
     if ($name eq "parport_pc") {

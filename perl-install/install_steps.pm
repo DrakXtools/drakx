@@ -112,7 +112,11 @@ sub selectInstallClass($@) {
     }}{$o->{installClass}};
 }
 #------------------------------------------------------------------------------
-sub setupSCSI { modules::load_thiskind('scsi') }
+sub setupSCSI { 
+    modules::load("ide-mod", 'prereq', 'options="' . detect_devices::hasHPT() . '"');
+    modules::load_multi(qw(ide-probe ide-disk ide-cd));
+    modules::load_thiskind('scsi');
+}
 #------------------------------------------------------------------------------
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
@@ -243,7 +247,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 sub afterInstallPackages($) {
     my ($o) = @_;
 
-    -x "$o->{prefix}/usr/bin/dumpkeys" or die 
+    -x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
 "Some important packages didn't get installed properly.
 
 Please switch to console 2 (using ctrl-alt-f2)
@@ -742,7 +746,9 @@ sub miscellaneous {
 	$_ .= " " . join(" ", map { "$_=ide-scsi" } @l);
     }
     #- keep some given parameters
-    $_ .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline")) unless /ide.=/;
+    if (my $m = modules::get_options("ide-mod")) {
+	/options="(.*)"/ and $_ .= " $1" if !/ide.=/;
+    }
 
     $o->{bootloader}{perImageAppend} = $_;
 }

@@ -16,6 +16,7 @@ use Gtk;
 #-use Gtk::XmHTML;
 use devices;
 use fsedit;
+use commands;
 use modules;
 use pkgs;
 use install_steps;

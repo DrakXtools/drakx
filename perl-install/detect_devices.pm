@@ -7,7 +7,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use log;
-use common qw(:common :file);
+use common qw(:common :file :functional);
 use devices;
 use c;
 
@@ -196,6 +196,23 @@ sub syslog {
 }
 
 sub hasSMP { c::detectSMP() }
+
+sub hasHPT {
+    cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
+
+    require pci_probing::main;
+    my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
+    
+    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map_index { hex($_) + (odd($::i) ? 1 : -1) } do {
+	if (@l == 2) {
+	    map { (split ' ')[3..4] } @l
+	} else {
+	    map { (split ' ')[3..6] } @l
+	}
+    };
+    log::l("HPT|Ultra66: found $ide");
+    $ide;
+}
 
 sub whatParport() {
     my @res =();

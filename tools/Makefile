@@ -27,7 +27,8 @@ ddcprobe/ddcxinfos:
 $(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz2
 	gendepslist2 -o $@ `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' `
 
-$(BASE)/hdlist.cz2: $(BASE)/hdlists
+$(BASE)/hdlist.cz2:
+	genhdlists --noclean --distrib $(ROOTDEST)
 
 $(BASE)/hdlists: $(RPMS)
 	genhdlists --noclean --distrib $(ROOTDEST)
