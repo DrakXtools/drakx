@@ -544,7 +544,7 @@ sub main {
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio"},
 	    corporate => sub { $::corporate = 1 },
-	    ks        => sub { $::auto_install = $v },
+	    ks        => sub { $::auto_install ||= 1 },
 	    kickstart => sub { $::auto_install = $v },
 	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },

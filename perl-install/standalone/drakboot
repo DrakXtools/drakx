@@ -26,9 +26,10 @@ my %l = (
 );
 -x $l{$_} or delete $l{$_} foreach grep { $l{$_} } keys %l;
 
-my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
-exec $cmd if $cmd;
-
+if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
+    my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
+    exec $cmd if $cmd;
+}
 
 my $bootloader = lilo::read('', '/etc/lilo.conf');
 local ($_) = `detectloader`;

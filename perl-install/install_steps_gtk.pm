@@ -350,14 +350,15 @@ sub choosePackagesTree {
     my $details = new Gtk::VBox(0,0);
     my $tree = Gtk::CTree->new(3, 0);
     $tree->set_selection_mode('browse');
-    $tree->set_column_auto_resize($_, 1) foreach 0..2;
+    $tree->set_column_width(0, 200);
+    $tree->set_column_auto_resize($_, 1) foreach 1..2;
 
     gtkadd($w->{window}, 
 	   gtkpack_(new Gtk::VBox(0,5),
 		    0, _("Choose the packages you want to install"),
 		    1, gtkpack(new Gtk::HBox(0,0),
 			       createScrolledWindow($tree),
-			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 125, 0),
+			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
 				      createScrolledWindow($info_widget = new Gtk::Text),
 				     )),
 		    0, my $l = new Gtk::HBox(0,15),
@@ -440,6 +441,7 @@ sub choosePackagesTree {
 	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ? 100 : round_down($p->{values}[$ind], 10)});
 
 	gtktext_insert($info_widget, $@ ? _("Bad package") :
+		       _("Name: %s\n", pkgs::packageName($p)) .
 		       _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
 		       _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
 		       ($imp && _("Importance: %s\n", $imp)) . "\n" .

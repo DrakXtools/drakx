@@ -713,6 +713,7 @@ Section "Module"
 # This loads the DBE extension module.
 
     Load	"dbe"
+    Load	"glx"
 
 # This loads the miscellaneous extensions module, and disables
 # initialisation of the XFree86-DGA extension within that module.

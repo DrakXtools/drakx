@@ -315,7 +315,7 @@ sub write($$$$) {
     my @to_add = (
        $useSupermount ?
        [ split ' ', "/mnt/floppy /mnt/floppy supermount fs=vfat,dev=/dev/$floppy 0 0" ] :
-       [ split ' ', "/dev/$floppy /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0" ],
+       [ split ' ', "/dev/$floppy /mnt/floppy auto sync,user,noauto,nosuid,nodev 0 0" ],
        [ split ' ', 'none /proc proc defaults 0 0' ],
        [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
        (map_index {
