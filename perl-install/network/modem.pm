@@ -49,6 +49,7 @@ sub pppConfig {
 { label => _("First DNS Server (optional)"), val => \$modem->{dns1} },
 { label => _("Second DNS Server (optional)"), val => \$modem->{dns2} },
     ]) or return;
+    $netc->{DOMAINNAME2} = $modem->{domain};
     any::pppConfig($in, $modem, $prefix);
     $netc->{$_}='ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
