@@ -163,10 +163,12 @@ not interesting.
 - alt-F7: the graphical install lives there
 
 - command "bug" puts on floppy lots of interesting stuff.
-- /tmp/ddebug.log: same (or nearly the same) as alt-F3
+- /tmp/stage1.log: same as alt-F3 part when stage1 run (e.g. actions
+  before graphical install really begins)
+- /tmp/ddebug.log: (nearly the) same as latter alt-F3 part
 - /tmp/syslog: same as alt-F4
 - /mnt/root/ddebug.log: at the end of each step, DrakX tries to backup
-/tmp/ddebug.log to /mnt/root. Available only after mounting of /.
+  /tmp/ddebug.log to /mnt/root. Available only after mounting of /.
 - /mnt/root/install.log: the log of the installation (or upgrade) of the rpms
 (just like rpm's /mnt/tmp/(install|upgrade).log)
 - /mnt/root/auto_inst.cfg.pl: a kickstart file generated at the end of each

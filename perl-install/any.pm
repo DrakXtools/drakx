@@ -852,6 +852,7 @@ sub report_bug {
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),
       header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
+      header("stage1.log"), cat_("/tmp/stage1.log"),
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("$prefix/root/install.log"),
       header("fstab"), cat_("$prefix/etc/fstab"),
