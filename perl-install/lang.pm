@@ -1023,8 +1023,12 @@ sub write {
 	}
 	
     }
-    add2hash($h, $gtkqt_im{$locale->{IM}});
-    add2hash($h, $xim{$h->{LANG}});
+    my %conf = %{$xim{$h->{LANG}}} if $xim{$h->{LANG}};
+    if ($locale->{IM}) {
+        delete @{$_}{qw(GTK_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)} foreach $h, \%conf;
+        add2hash($h, $gtkqt_im{$locale->{IM}});
+    }
+    add2hash($h, \%conf);
 
     #- deactivate translations on console for RTL languages
     if ($h->{LANG} =~ /ar|fa|he|ur|yi/) {
