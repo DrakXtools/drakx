@@ -868,7 +868,7 @@ sub build_backup_files {
 		webdav_client() if $webdav_daemon;
 		build_cd() if $cd_daemon;
 		build_tape() if $tape_daemon;
-		$results .= _("\nDrakbackup activities via $daemon_media:\n\n");
+		$results .= _("\nDrakbackup activities via %s:\n\n", $daemon_media);
 		$results .= cat_("$log_file");			
 #-maybe keep this???
 #-		unlink("$log_file");
@@ -892,7 +892,7 @@ sub build_backup_files {
 			rsync_client() if ($net_proto eq 'rsync');
 			ssh_client() if ($net_proto eq 'ssh');
 			webdav_client() if ($net_proto eq 'webdav');
-			$results .= _("\nDrakbackup activities via $net_proto:\n\n");
+			$results .= _("\nDrakbackup activities via %s:\n\n", $net_proto);
 		}
 		
 		if ($where_cd) {
