@@ -712,14 +712,14 @@ sub selectCountry {
 		    advanced_messages => N("Here is the full list of available countries"),
 		    advanced_label => N("Other Countries"),
 		    advanced_state => $ext_country && scalar(@best),
-		    callbacks => { changed => sub { $other = $_[0] == 1 } },
+		    callbacks => { changed => sub { $_[0] != 2 and $other = $_[0] == 0 } },
 		  },
 		  [ if_(@best, { val => \$country, type => 'list', format => \&lang::c2name,
 				 list => \@best, sort => 1 }),
+		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
+		      list => [ @countries ], advanced => scalar(@best) },
 		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), sort => 0,
 		      list => [ N_("None"), sort(lang::get_ims()) ], advanced => 1, format => sub { uc(translate($_[0])) }, },
-		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
-		      list => [ difference2(\@countries, \@best) ], advanced => scalar(@best) },
 		  ]) or return;
 
     $locale->{country} = $other || !@best ? $ext_country : $country;
