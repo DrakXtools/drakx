@@ -109,6 +109,7 @@ sub test {
         my_gtk->import(qw(:wrappers)); #- help perl_checker
 	use interactive::gtk;
         use run_program;
+        use common;
 
         $::prefix = ") . $::prefix . q(";
         $::isStandalone = 1;
