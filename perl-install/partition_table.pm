@@ -6,7 +6,7 @@ package partition_table; # $Id$
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isLVM isRAID isMDRAID isLVMBased isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -216,6 +216,7 @@ sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0x
 sub isLVM($) { $_[0]{type} == 0x8e }
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isMDRAID { $_[0]{device} =~ /^md/ }
+sub isLVMBased { $_[0]{LVMname} }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
