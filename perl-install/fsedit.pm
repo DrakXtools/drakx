@@ -104,14 +104,16 @@ sub get_hds {
 
     my @drives = detect_devices::hds();
 
-    my (@hds, @raw_hds);
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});
 	$hd->{prefix} ||= $hd->{device};
-	$hd->{readonly} = $flags->{readonly};
+    }
 
-	my $h = partition_table::raw::get_geometry($hd->{file}) or log::l("An error occurred while getting the geometry of block device $hd->{file}: $!"), next;
-	add2hash_($hd, $h);
+    partition_table::raw::get_geometries(\@drives);
+
+    my (@hds, @raw_hds);
+    foreach my $hd (@drives) {
+	$hd->{readonly} = $flags->{readonly};
 
 	eval { partition_table::raw::test_for_bad_drives($hd) };
 	if (my $err = $@) {

@@ -94,7 +94,51 @@ sub compute_nb_cylinders {
     $geom->{cylinders} = int $totalsectors / $geom->{heads} / $geom->{sectors};
 }
 
-sub get_geometry($) {
+sub keep_non_duplicates {
+    my %l;
+    $l{$_->[0]}++ foreach @_;
+    map { @$_ } grep { $l{$_->[0]} == 1 } @_;
+}
+
+sub get_geometries {
+    my ($hds) = @_;
+
+    foreach my $hd (@$hds) {
+	my $h = get_geometry($hd->{file}) or log::l("An error occurred while getting the geometry of block device $hd->{file}: $!"), next;
+	add2hash_($hd, $h);
+    }
+
+    my %id2hd = keep_non_duplicates(map {
+	my $F = openit($_) or die "failed to open device $_->{device}";
+	my $tmp;
+	if (c::lseek_sector(fileno($F), 0, 0x1b8) && sysread($F, $tmp, 4)) {
+	    [ sprintf('0x%08x', unpack('V', $tmp)), $_ ];
+	} else {
+	    ();
+	}
+    } @$hds);
+
+
+    my %id2edd = keep_non_duplicates(map { [ chomp_(cat_("$_/mbr_signature")), $_ ] } glob("/sys/firmware/edd/int13_dev*"));
+
+    log::l("id2hd: " . join(' ', map_each { "$::a=>$::b->{device}" } %id2hd));
+    log::l("id2edd: " . join(' ', map_each { "$::a=>$::b" } %id2edd));
+
+    foreach my $id (keys %id2hd) {
+	my $hd = $id2hd{$id};
+	$hd->{volume_id} = $id;
+
+	if (my $edd_dir = $id2edd{$id}) {
+	    $hd->{bios_from_edd} = $1 if $edd_dir =~ /int13_dev(.*)/;
+
+	    require partition_table::dos;
+	    my $geom = partition_table::dos::geometry_from_edd($hd, $edd_dir);
+	    $hd->{geom} = $geom if $geom;
+	}
+    }
+}
+
+sub get_geometry {
     my ($dev) = @_;
     my $g = "";
 

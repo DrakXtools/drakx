@@ -124,6 +124,21 @@ sub guess_geometry_from_partition_table {
     $geom;
 }
 
+sub geometry_from_edd {
+    my ($hd, $edd_dir) = @_;
+
+    my $geom = { sectors => 0 + cat_("$edd_dir/legacy_sectors_per_track"), 
+		 heads => 1 + cat_("$edd_dir/legacy_max_head"),
+		 from_edd => 1 };
+    partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
+
+    log::l("geometry_from_edd $hd->{device} $hd->{volume_id}: " . geometry_to_string($geom));
+    
+    member($geom->{heads}, @valid_nb_heads) && member($geom->{sectors}, @valid_nb_sectors) 
+      && $geom;
+}
+
+
 sub try_every_geometry {
     my ($hd) = @_;
 
@@ -148,7 +163,7 @@ sub set_best_geometry_for_the_partition_table {
 
     my $guessed_geom = guess_geometry_from_partition_table($hd);
     if ($guessed_geom->{empty}) {
-	log::l("$hd->{device}: would need looking at BIOS info to find out geometry");
+	log::l("$hd->{device}: would need looking at BIOS info to find out geometry") if !$hd->{geom}{from_edd};
 	return;
     } 
     my $default_ok = is_geometry_valid_for_the_partition_table($hd, $hd->{geom}, 0);
