@@ -237,6 +237,7 @@ sub manage {
     each_index {
 	my $interface = $_;
 	$gui->{$interface}{index} = $::i;
+	build_tree($netc, $intf->{$interface}, $interface);
 	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $interface, $apply_button);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
     } (sort keys %$intf);
@@ -249,57 +250,93 @@ sub manage {
     ugtk2->exit(0);
 }
 
+sub build_tree {
+    my ($netc, $intf, $interface) = @_;
+    
+    if ($interface eq 'ppp0') {
+	$intf->{pages} = { 'Tcp/ip' => 1, 'Account' => 1, 'Options' => 1, 'Informations' => 1 };
+	$intf->{device} = $netc->{autodetect}{modem};
+	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+	$intf->{connection} = $l{Name};
+	$intf->{domain} = $l{Domain};
+	($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
+	
+	foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
+	    /.*ATDT(\d*)/ and $intf->{phone} = $1;
+	}
+	foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
+	    /NAME=(['"]?)(.*)\1/ and $intf->{login} = $2;
+	}
+	my $secret = network::tools::read_secret_backend();
+	foreach (@$secret) {
+	    $intf->{passwd} = $_->{passwd} if $_->{login} eq $intf->{login};
+	}
+	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
+    }
+    elsif ($interface eq 'ippp0') {
+	$intf->{pages} = { 'Tcp/ip' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
+	network::isdn::isdn_read_config($intf);
+	$intf->{save} = sub { network::isdn::isdn_write_config($intf, $netc) };
+    } 
+    else {
+	#- ethernet is default
+	$intf->{pages} = { 'Tcp/ip' => 1, if_($intf->{WIRELESS_MODE}, 'Wireless' => 1), 'Options' => 1, 'Informations' => 1 };
+    }
+}
+
 sub build_notebook {
     my ($netc, $intf, $gui, $interface, $apply_button) = @_;
  
     my $apply = sub { $apply_button->set_sensitive(1) };
 
-    #- tcp/ip box
-    gtkpack_($gui->{sheet}{'Tcp/ip'} = Gtk2::VBox->new(0,0),
-	     if_($interface =~ /eth/, 
-		 0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
-								changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}; $apply->() },
-							       ),
-		),
-	     1, gtkpack(Gtk2::HBox->new(0,0),
-			gtkpack_(Gtk2::VBox->new(0,0),
-				 0, gtkpack_(Gtk2::VBox->new(0,0),
-					     1, Gtk2::Label->new(N("IP address")),
-					     0, gtksignal_connect($gui->{intf}{IPADDR} = Gtk2::Entry->new, 
-								  key_press_event => $apply),
-					    ),
-				 0, gtkpack_(Gtk2::VBox->new(0,0),
-					     1, Gtk2::Label->new(N("Netmask")),
-					     0, gtksignal_connect($gui->{intf}{NETMASK} = Gtk2::Entry->new,
-								  key_press_event => $apply),
-					    ),
-				 0, gtkpack_(Gtk2::VBox->new(0,0),
-					     1, Gtk2::Label->new(N("Gateway")),
-					     0, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
-								  key_press_event => $apply),
-					    ),
-				),
-			Gtk2::VSeparator->new,
-			gtkpack_(Gtk2::VBox->new(0,0),
-				 1, gtkadd(Gtk2::Frame->new(N("DNS servers")), 
-					   gtkpack(Gtk2::VBox->new(0,0),
-						   Gtk2::Label->new($netc->{dnsServer}),
-						   Gtk2::Label->new($netc->{dnsServer2}),
-						  ),
-					  ),
-				 1, gtkadd(Gtk2::Frame->new(N("Search Domain")),
-					   Gtk2::Label->new($netc->{DOMAINNAME} || 'none'),
-					  ),
-				),
-		       ),
-	    );
-    $gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
-    $interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
-    !$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
-    $gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
-    $gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
-        
-    if ($intf->{WIRELESS_MODE}) {
+    if ($intf->{pages}{'Tcp/ip'}) {
+	gtkpack_($gui->{sheet}{'Tcp/ip'} = Gtk2::VBox->new(0,0),
+		 if_($interface =~ /eth/, 
+		      0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
+								     changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}; $apply->() },
+								    ),
+		     ),
+		 1, gtkpack(Gtk2::HBox->new(0,0),
+			    gtkpack_(Gtk2::VBox->new(0,0),
+				     0, gtkpack_(Gtk2::VBox->new(0,0),
+						 1, Gtk2::Label->new(N("IP address")),
+						 0, gtksignal_connect($gui->{intf}{IPADDR} = Gtk2::Entry->new, 
+								      key_press_event => $apply),
+						),
+				     0, gtkpack_(Gtk2::VBox->new(0,0),
+						 1, Gtk2::Label->new(N("Netmask")),
+						 0, gtksignal_connect($gui->{intf}{NETMASK} = Gtk2::Entry->new,
+								      key_press_event => $apply),
+						),
+				     0, gtkpack_(Gtk2::VBox->new(0,0),
+						 1, Gtk2::Label->new(N("Gateway")),
+						 0, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+								      key_press_event => $apply),
+						),
+				    ),
+			    Gtk2::VSeparator->new,
+			    gtkpack_(Gtk2::VBox->new(0,0),
+				     1, gtkadd(Gtk2::Frame->new(N("DNS servers")), 
+					       gtkpack(Gtk2::VBox->new(0,0),
+						       Gtk2::Label->new($intf->{dns1} || $netc->{dnsServer}),
+						       Gtk2::Label->new($intf->{dns2} || $netc->{dnsServer2}),
+						       Gtk2::Label->new($intf->{dns3}),
+						      ),
+					      ),
+				     1, gtkadd(Gtk2::Frame->new(N("Search Domain")),
+					       Gtk2::Label->new($intf->{domain} || $netc->{DOMAINNAME} || 'none'),
+					      ),
+				    ),
+			   ),
+		);
+	$gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
+	$interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
+	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
+	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
+    }
+    
+    if ($intf->{pages}{Wireless}) {
 	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
@@ -334,52 +371,55 @@ sub build_notebook {
 	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     }
     
-    #- options box
-    gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),	    
-	    gtkpack__(Gtk2::VBox->new(0,0),
-		      $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
-								    toggled => $apply),
-		      if_($interface =~ /eth/,
-			  map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
-										toggled => $apply))
-			    } ([ "HWADDR", N("Track network card id (useful for laptops)") ],
-			       [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
-			      ),		     
-			 ),
-		      if_($interface eq 'ippp0',
-			  gtkpack(Gtk2::HBox->new(0,0),
-				  gtkpack__(new Gtk2::VBox(0,0),
-					    Gtk2::Label->new(N("Dialing mode")),
-					    my @dialing_mode_radio = gtkradio(("auto") x 2, "manual"),
-					   ),
-				  Gtk2::VSeparator->new,
-				  gtkpack__(new Gtk2::VBox(0,0),
-					    Gtk2::Label->new(N("Connection speed")),
-					    my @speed_radio = gtkradio(("64 Kb/s") x 2, "128 Kb/s"),
-					   ),
-				 ),
-			  gtkpack_(Gtk2::HBox->new(0,0),
-				   0, Gtk2::Label->new(N("Connection timeout (in sec)")),
-				   1, gtksignal_connect($gui->{cnx}{huptimeout} = Gtk2::Entry->new,
-							key_press_event => $apply),
-				  ),
-			 ),
-		     ));
-    $dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply->() });
-    $dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply->() });
-    $speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply->() });
-    $speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply->() });
-    $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
+    if ($intf->{pages}{Options}) {
+	gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),	    
+		gtkpack__(Gtk2::VBox->new(0,0),
+			  $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
+									toggled => $apply),
+			  if_($interface =~ /eth/,
+			      map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
+										    toggled => $apply))
+				} ([ "HWADDR", N("Track network card id (useful for laptops)") ],
+				   [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
+				  ),		     
+			     ),
+			  if_($interface eq 'ippp0',
+			      gtkpack(Gtk2::HBox->new(0,0),
+				      gtkpack__(new Gtk2::VBox(0,0),
+						Gtk2::Label->new(N("Dialing mode")),
+						my @dialing_mode_radio = gtkradio(("auto") x 2, "manual"),
+					       ),
+				      Gtk2::VSeparator->new,
+				      gtkpack__(new Gtk2::VBox(0,0),
+						Gtk2::Label->new(N("Connection speed")),
+						my @speed_radio = gtkradio(("64 Kb/s") x 2, "128 Kb/s"),
+					       ),
+				     ),
+			      gtkpack_(Gtk2::HBox->new(0,0),
+				       0, Gtk2::Label->new(N("Connection timeout (in sec)")),
+				       1, gtksignal_connect($gui->{cnx}{huptimeout} = Gtk2::Entry->new,
+							    key_press_event => $apply),
+				      ),
+			     ),
+			 ));
+	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply->() });
+	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply->() });
+	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply->() });
+	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply->() });
+	$gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
+    }
     
-    #- account box
-    if ($interface eq 'speedtouch' || $interface eq 'sagem') {
-	$gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
+    if ($intf->{pages}{Account}) {
+	if ($interface =~ /^speedtouch|sagem$/) {
+	    $gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
+	}
 	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
-		 # 0, gtkpack_(Gtk2::VBox->new(0,0),
-		 # 			     1, Gtk2::Label->new(N("Authentication")),
-		 # 			     0, my $auth_menu  = gtksignal_connect(Gtk2::OptionMenu->new,
-		 # 								   changed => $apply),
-		 # 			    ),
+		 if_($interface eq 'ipp0',
+		     0, gtkpack_(Gtk2::VBox->new(0,0),
+				 1, Gtk2::Label->new(N("Authentication")),
+				 0, $gui->{intf}{auth} = gtksignal_connect(Gtk2::OptionMenu->new,
+									   changed => $apply),
+				)),
 		 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 				    1, Gtk2::Label->new($_->[0]),
 				    0, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
@@ -388,18 +428,17 @@ sub build_notebook {
 		       );
 		   } ([ N("Account Login (user name)"), 'login' ],
 		      [ N("Account Password"), 'passwd' ],
-		      #[ N("Provider phone number"), 'phone_out' ],
+		      if_($interface =~ /^(i?ppp0)$/, [ N("Provider phone number"), $1 eq 'ppp0' ? 'phone' : 'phone_out' ]),
 		     ),
 		);
-	#$auth_menu->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
+	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
 	$gui->{intf}{passwd}->set_visibility(0);
-	/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
-	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
+	#/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
+	#$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
 	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     }
     
-    #- Modem box
-    if ($interface eq 'ippp0') {
+    if ($intf->{pages}{Modem}) {
 	gtkpack($gui->{sheet}{Modem} = Gtk2::HBox->new(0,0),
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
@@ -411,7 +450,7 @@ sub build_notebook {
 			   } ([ N("Card IRQ"), 'irq' ],
 			      [ N("Card mem (DMA)"), 'mem' ],
 			      [ N("Card IO"), 'io' ],
-			      [ N("Card IO_1"), 'io1' ],
+			      [ N("Card IO_0"), 'io0' ],
 			     ),
 			),
  		Gtk2::VSeparator->new,
@@ -425,25 +464,26 @@ sub build_notebook {
 	$protocol_radio[1]->signal_connect('toggled' => sub { $gui->{isdn}{protocol} = 3; $apply });
     }
     
-    #- informations box
-    my $module = c::getNetDriver($interface) || modules::get_alias($interface);
-    my $info = find { $module ? $_->{driver} eq $module : $_->{description} eq $gui->{description} } detect_devices::probeall();
-    
-    gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
-	    gtktext_insert(Gtk2::TextView->new,
-			   join('',
-                       map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
-                                                                  [ N("Vendor"), split('\|', $info->{description}) ],
-                                                                  [ N("Description"), reverse split('\|', $info->{description}) ],
-                                                                  [ N("Media class"), $info->{media_type} || '-' ],
-                                                                  [ N("Module name"), $module || '-' ], 
-                                                                  [ N("Mac Address"), c::get_hw_address($interface) || '-' ],
-                                                                  [ N("Bus"), $info->{bus} || '-' ],
-                                                                  [ N("Location on the bus"), $info->{pci_bus} || '-' ],
-                                                                 )
-                      )
-			  ),
-	   );
+    if ($intf->{pages}{Informations}) {
+	my $module = c::getNetDriver($interface) || modules::get_alias($interface);
+	my $info = find { $module ? $_->{driver} eq $module : $_->{description} eq $gui->{description} } detect_devices::probeall();
+	
+	gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
+		gtktext_insert(Gtk2::TextView->new,
+			       join('',
+				    map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
+					 [ N("Vendor"), split('\|', $info->{description}) ],
+					 [ N("Description"), reverse split('\|', $info->{description}) ],
+					 [ N("Media class"), $info->{media_type} || '-' ],
+					 [ N("Module name"), $module || '-' ], 
+					 [ N("Mac Address"), c::get_hw_address($interface) || '-' ],
+					 [ N("Bus"), $info->{bus} || '-' ],
+					 [ N("Location on the bus"), $info->{pci_bus} || '-' ],
+										    )
+				   )
+			      ),
+	       );
+    }
     
     $gui->{notebook} = Gtk2::Notebook->new;
     populate_notebook($gui->{notebook}, $gui);
@@ -461,6 +501,7 @@ sub save {
     my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
  
     save_notebook($netc, $intf->{$_}, $gui->{$_}) foreach keys %$intf;
+    $intf->{$_}{save} and $intf->{$_}{save}->() foreach keys %$intf;
     apply($netc, $netcnx, $intf, $apply_button);
 }
 
