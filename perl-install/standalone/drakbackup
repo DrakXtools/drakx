@@ -5125,7 +5125,7 @@ sub interactive_mode() {
 ################################################  HELP & ABOUT  ################################################  
 
 sub adv_help() {
-	exec("drakhelp Drakxtools-Guide.html/drakbackup.html") unless fork();
+	exec("drakhelp --id drakbackup") unless fork();
 }
 
 sub to_ok() {
