@@ -136,7 +136,7 @@ sub real_format_part {
 }
 sub format_part {
     my ($raid, $part, $prefix) = @_;
-    if (isRAID($part)) {
+    if (isMDRAID($part)) {
 	require raid;
 	raid::format_part($raid, $part);
     } elsif (isLoopback($part)) {
