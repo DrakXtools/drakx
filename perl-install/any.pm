@@ -109,7 +109,7 @@ sub installBootloader {
 
     install_acpi_pkgs($in->do_pkgs, $b);
 
-    eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
+    eval { run_program::rooted($::prefix, 'echo | lilo -u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
   retry:
     eval { 
