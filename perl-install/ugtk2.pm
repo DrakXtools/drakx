@@ -1622,7 +1622,7 @@ sub set_pixmap {
 
 
 sub new {
-    my ($_class, $icon, $text) = @_;
+    my ($_class, $icon, $text, $o_options) = @_;
 
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_size_request(-1, 75);
@@ -1637,7 +1637,8 @@ sub new {
                                my $height = $darea->{icon}->get_height;
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, 10, 10, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->text_gc('normal'), $height + 20, 25, $darea->{layout});
+                               $darea->window->draw_layout($style->text_gc('normal'), $height + 20, $o_options->{txt_ypos} || 25,
+                                                           $darea->{layout});
                                1;
                            });
                                
