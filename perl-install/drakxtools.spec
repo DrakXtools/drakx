@@ -312,8 +312,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Sat Jul  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.9mdk
+* Sun Jul  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.9mdk
 - increase gui coherency of drakxtools vs other gtk+ apps: use stock icons
+- drakconnect, drakfloppy, drakperm: let columns be sortable
 
 * Tue Jul  1 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.8mdk
 - drakbackup: try to better fit gui when embedded (fix #4111) (stew)
