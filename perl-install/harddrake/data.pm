@@ -78,7 +78,7 @@ our @tree =
 
      {
       class => "HARDDISK",
-      string => N("Disk"),
+      string => N("Hard Disk"),
       icon => "harddisk.png",
       configurator => "$sbindir/diskdrake",
       detector => sub { f(detect_devices::hds()) },
