@@ -1052,6 +1052,29 @@ sub read_cups_options ($) {
     return \@args;
 }
 
+sub set_cups_special_options {
+    my ($queue) = $_[0];
+    # Set some special CUPS options
+    my @lpoptions = chomp_(cat_("$prefix/etc/cups/lpoptions"));
+    # If nothing is already configured, set text file borders of half an inch
+    # and decrease the font size a little bit, so nothing of the text gets
+    # cut off by unprintable borders.
+    if(!grep {/$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/} @lpoptions){
+	run_program::rooted($prefix, "lpoptions",
+			    "-p", $queue,
+			    "-o", "page-top=36", "-o", "page-bottom=36",
+			    "-o", "page-left=36", "-o page-right=36",
+			    "-o", "cpi=12", "-o", "lpi=7", "-o", "wrap");
+    }
+    # Let images fill the whole page by default
+    if (!grep {/$queue.*\s(scaling|natural-scaling|ppi)=/} @lpoptions) {
+	run_program::rooted($prefix, "lpoptions",
+			    "-p", $queue,
+			    "-o", "scaling=100");
+    }
+    return 1;
+}
+
 #------------------------------------------------------------------------------
 
 sub read_cups_printer_list {
@@ -1418,6 +1441,11 @@ sub configure_queue($) {
 			    "-C", "up", $printer->{currentqueue}{queue});
     }
 
+    # In case of CUPS set some more useful defaults for text and image printing
+    if ($printer->{SPOOLER} eq "cups") {
+	set_cups_special_options($printer->{currentqueue}{queue});
+    }
+
     # Check whether a USB printer is configured and activate USB printing if so
     my $useUSB = 0;
     foreach (values %{$printer->{configured}}) {
@@ -1682,6 +1710,10 @@ sub copy_foomatic_queue {
 			"-s", $printer->{SPOOLER},
 			"-n", $newqueue,
 			"-C", $oldspooler, $oldqueue);
+    # In case of CUPS set some more useful defaults for text and image printing
+    if ($printer->{SPOOLER} eq "cups") {
+	set_cups_special_options($newqueue);
+    }
 }
 
 # ------------------------------------------------------------------
