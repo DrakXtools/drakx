@@ -900,7 +900,7 @@ Modifying the fields below will override this configuration."),
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
                         # blacklist bogus driver, enable ifplugd support else:
                         my @devs = detect_devices::pcmcia_probe();
-                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_wireless || member($module, qw(bcm4400 forcedeth))
+                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_wireless || member($module, qw(b44 forcedeth))
                                                                     || find { $_->{device} eq $ntf_name } @devs);
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
