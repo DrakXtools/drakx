@@ -32,7 +32,7 @@ our %l = (
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
-    firewire => [ qw(eth1394) ],
+    firewire => [ qw(eth1394 pcilynx) ],
     gigabit => [
       qw(dl2k e1000 ixgb myri_sbus ns83820 r8169 s2io sk98lin tg3 via-velocity yellowfin ),
       qw(bcm5820 bcm5700), #- encrypted
@@ -187,7 +187,7 @@ our %l = (
       qw(btaudio),
 
       #- these need checking
-      qw(pcilynx tmspci rrunner meye buz paep),
+      qw(tmspci rrunner meye buz paep),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
