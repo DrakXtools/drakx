@@ -1,6 +1,7 @@
 package network::adsl;
 
 use common;
+use commands;
 use run_program;
 use network::tools;
 use network::ethernet;
