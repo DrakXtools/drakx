@@ -97,7 +97,7 @@ sub ask_fromW {
 }
 
 sub ask_fromW_real {
-    my ($_o, $common, $l, $l2) = @_;
+    my ($o, $common, $l, $l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
 
@@ -166,10 +166,12 @@ sub ask_fromW_real {
 	    };
 	    $size = $count->($data_tree);
 	    
-	    my ($h) = @l == 1 && $height > 30 ? 10 : 5;
-	    my $scroll = $size > $h;
-	    $has_scroll = 1;
-	    $size = min($size, $h);
+	    my $prefered_size = @l == 1 && $height > 30 ? 10 : 5;
+	    my $scroll;
+	    if ($size > $prefered_size && !$o->{no_individual_scroll}) {
+		$has_scroll = $scroll = 1;
+		$size = $prefered_size;
+	    }
 
 	    $w = Newt::Component::Tree($size, $scroll);
 
@@ -215,12 +217,15 @@ sub ask_fromW_real {
 		1;
 	    };
 	} elsif ($e->{type} =~ /list/) {
-	    my ($h) = @l == 1 && $height > 30 ? 10 : 5;
-	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
-	    $has_scroll = 1;
-	    $size = min(int @{$e->{list}}, $h);
+	    $size = @{$e->{list}};
+	    my ($prefered_size) = @l == 1 && $height > 30 ? 10 : 5;
+	    my $scroll;
+	    if ($size > $prefered_size && !$o->{no_individual_scroll}) {
+		$has_scroll = $scroll = 1;
+		$size = $prefered_size;
+	    }
 
-	    $w = Newt::Component::Listbox($size, $scroll); #- NEWT_FLAG_SCROLL	    
+	    $w = Newt::Component::Listbox($size, $scroll ? 1 << 2 : 0); #- NEWT_FLAG_SCROLL	    
 
 	    my @l = map { 
 		my $t = simplify_string(may_apply($e->{format}, $_), $width - 10);
@@ -280,7 +285,10 @@ sub ask_fromW_real {
 	if (@l > 3 && $total_size > $height_avail) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
 	    if ($has_scroll) {
-		#- :'-(
+		#- trying again with no_individual_scroll set
+		$o->{no_individual_scroll} and internal_error('no_individual_scroll already set, argh...');
+		$o->{no_individual_scroll} = 1;
+		goto &ask_fromW_real; #- same player shoot again!
 	    }
 	    $has_scroll = 1;
 	    $total_size = $height_avail;
