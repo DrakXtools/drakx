@@ -640,15 +640,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	if (total_memory() < MEM_LIMIT_MOVE)
 		stg1_info_message(DISTRIB_NAME " typically needs more than %d Mbytes of memory (detected %d Mbytes). You may proceed, but the machine may crash or lock up for no apparent reason. Continue at your own risk. Alternatively, you may reboot your system now.",
 				   MEM_LIMIT_MOVE, total_memory());
-#else
-#ifndef DISABLE_DISK
-        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom")) {
-                if (!process_recovery())
-                        method_select_and_prepare();
-        } else
 #endif
-#endif
-                method_select_and_prepare();
+        method_select_and_prepare();
 
 #ifndef MANDRAKE_MOVE
 	if (access(STAGE2_LOCATION, R_OK) != 0)

@@ -107,7 +107,6 @@ void process_cmdline(void)
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
 		if (!strcmp(name, "netauto")) set_param(MODE_NETAUTO);
-		if (!strcmp(name, "recovery")) set_param(MODE_RECOVERY);
 		if (!strcmp(name, "debugstage1")) set_param(MODE_DEBUGSTAGE1);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);

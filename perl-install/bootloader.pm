@@ -746,33 +746,6 @@ wait for default boot.
 	any::set_login_serial_console($port, $speed);
     }
 
-    #- add a restore entry if installation is done from disk, in order to allow redoing it.
-    if (my $hd_install_path = any::hdInstallPath()) {
-	my ($cmdline, $vga);
-	if ($::restore && -e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" &&
-	    ($cmdline = cat_("/tmp/image/boot/grub/menu.lst") =~ m|kernel \S+/boot/vmlinuz (.*)$|m)) {
-	    #- cmdline should'n have any reference to vga=...
-	    $cmdline =~ s/vga=(\S+)//g and $vga = $1;
-	    log::l("copying kernel and stage1 install to $::prefix/boot/restore");
-	    eval { mkdir "$::prefix/boot/restore";
-		   cp_af("/tmp/image/boot/vmlinuz", "$::prefix/boot/restore/vmlinuz");
-		   cp_af("/tmp/image/boot/all.rdz", "$::prefix/boot/restore/all.rdz") };
-	    unless ($@) {
-		log::l("adding a restore bootloader entry on $hd_install_path (remapped to $::prefix/boot/restore)");
-		add_entry($bootloader, {
-					type => 'image',
-					label => 'restore',
-					kernel_or_dev => "/boot/restore/vmlinuz",
-					initrd => "/boot/restore/all.rdz",
-					append => "$cmdline recovery", #- the restore entry is a recovery entry
-					if_($vga, vga => $vga),
-				       });
-	    }
-	} else {
-	    log::l("no restore bootloader need to be used on $hd_install_path");
-	}
-    }
-
     my @kernels = get_kernels_and_labels() or die "no kernel installed";
 
     foreach my $kernel (@kernels) {

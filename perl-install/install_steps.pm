@@ -211,7 +211,7 @@ sub doPartitionDisksAfter {
 	die N("You must have a FAT partition mounted in /boot/efi");
     }
 
-    if ($o->{partitioning}{use_existing_root} && !$::recovery) {
+    if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
 	fs::mount_part($_, $o->{prefix}) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} }
 						 grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
@@ -267,7 +267,7 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} or next;
 	
 	add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: don't set toFormat for isRawRAID (0xfd)
-        $_->{$::recovery ? 'toFormat' : 'toFormatUnsure'} ||= member($_->{mntpoint}, '/', '/usr');
+        $_->{toFormatUnsure} ||= member($_->{mntpoint}, '/', '/usr');
 
 	if (!$_->{toFormat}) {
 	    my $fs_type = fs::type::fs_type_from_magic($_);

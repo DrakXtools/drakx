@@ -559,7 +559,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium or an iso image, always abort.
-	return if !install_any::method_allows_medium_change($method) || $::oem;
+	return if !install_any::method_allows_medium_change($method);
 
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	local $| = 1; print "\a";

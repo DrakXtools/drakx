@@ -82,16 +82,14 @@ sub acceptLicense {
 
     my $r = $::testing ? 'Accept' : 'Refuse';
 
-    ($::recovery ?
-     $o->ask_yesorno('', N("Do you want to recover your system?"), 0) :
-     $o->ask_from_({ title => N("License agreement"), 
+    $o->ask_from_({ title => N("License agreement"), 
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
 		     more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ],
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
-		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ]))
+		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
       or do {
 	  if ($::globetrotter) {
 	      system("killall XFree86");
@@ -450,7 +448,7 @@ sub choosePackages {
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
-    $o->chooseCD($packages) if install_any::method_allows_medium_change($o->{method}) && !$::oem;
+    $o->chooseCD($packages) if install_any::method_allows_medium_change($o->{method});
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = &install_steps::choosePackages;
@@ -741,7 +739,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium or an iso image, always abort.
-	return if !install_any::method_allows_medium_change($method) || $::oem;
+	return if !install_any::method_allows_medium_change($method);
 
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	local $| = 1; print "\a";

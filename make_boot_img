@@ -203,7 +203,6 @@ sub entries_append {
     my @entries = (
         (map { $_->[0] => "$automatic $default_acpi $_->[1]" } group_by2(@simple_entries)),
 	acpi => "$automatic $default_vga",
-	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom $default_vga $default_acpi rescue oem",),
         if_($type eq "all", all => "pcmcia $default_vga $default_acpi"),
     );
 

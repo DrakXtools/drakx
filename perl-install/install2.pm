@@ -381,7 +381,6 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
-	    oem       => sub { $::oem = $v },
 	    lang      => sub { $o->{locale}{lang} = $v },
 	    flang     => sub { $o->{locale}{lang} = $v; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
@@ -399,8 +398,6 @@ sub main {
 	    testing   => sub { $::testing = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
-	    recovery  => sub { $::recovery = 1 },
-	    restore   => sub { $::restore = 1 },
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
@@ -534,9 +531,6 @@ sub main {
 
     #- oem patch should be read before to still allow patch or defcfg.
     eval { $o = $::o = install_any::loadO($o, "install/patch-oem.pl"); log::l("successfully read oem patch") };
-    #- recovery mode should be read early to allow default parameter to be taken.
-    eval { $o = $::o = install_any::loadO($o, "install/recovery.cfg"); log::l("successfully read recovery") } if $::recovery;
-    $@ and $::recovery = 0; #- avoid keeping recovery if there was a problem reading the recovery.cfg file.
     #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
     eval { $o = $::o = install_any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
@@ -580,14 +574,6 @@ sub main {
     $o->{meta_class} eq 'powerpackplus' and $o->{meta_class} = 'server';
 
     log::l("meta_class $o->{meta_class}");
-    if ($::oem) {
-	$o->{partitioning}{use_existing_root} = 1;
-	$o->{compssListLevel} = 4;
-	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
-    }
-    if ($::recovery) {
-	push @auto, 'selectLanguage', 'selectInstallClass', 'selectMouse', 'selectKeyboard', 'doPartitionDisks', 'formatPartitions', 'miscellaneous', 'choosePackages', 'configureTimezone';
-    }
 
     foreach (@auto) {
 	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
@@ -649,10 +635,6 @@ sub main {
     install_any::write_fstab($o);
     $o->{modules_conf}->write;
     detect_devices::install_addons($o->{prefix});
-
-    #- save recovery file if needed (ie disk style install).
-    $o->{method} eq 'disk' and
-      output($o->{prefix} . any::hdInstallPath() . '/install/recovery.cfg', install_any::g_auto_install(1));
 
     #- mainly for auto_install's
     #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged
