@@ -473,7 +473,7 @@ sub interactive_mode() {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("DrakFont"));
         $window1->{window}->set_icon(gtkcreate_pixbuf("drakfont"));
-    }
+    } else { $::Plug->set_icon(gtkcreate_pixbuf("drakfont")) }
     
     my $button = {};
     my $disable = sub { my ($b) = @_; $button->{$_}->set_sensitive($_ ne $b) foreach keys %$button };
@@ -619,7 +619,7 @@ sub exitdialog() { Gtk2->main_quit };
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop) = @_;
-    $dialog = _create_dialog($title, if_(!$::isEmbedded, { transient => $window1->{window} }));
+    $dialog = _create_dialog($title, { transient => $::isEmbedded ? $::Plug : $window1->{window} });
     $dialog->signal_connect(delete_event => \&exitdialog);
     gtkpack_($dialog->vbox, @$widgets);
     gtkpack($dialog->action_area, @$buttons) if $buttons;
