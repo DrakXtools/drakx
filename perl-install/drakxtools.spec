@@ -245,13 +245,20 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Fri Jul 12 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+* Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
 - able to restart WindowMaker if needed
 - draknet is dead; vival el drakconnect
-- no need to write /etc/sysconfig/harddrake2/previous_hw in %%post
-  since harddrake2 service doesn't configure anything if previous
-  config was empty
-- fix usb mac mouse detection
+- devices managment:
+	o no need to write /etc/sysconfig/harddrake2/previous_hw in
+  	  %%post since harddrake2 service doesn't configure anything if
+  	  previous config was empty
+	o fix usb mac mouse detection
+	o move scsi/ata controllers, burners, dvd, ... from
+	  unknown/others into their own"non configurable" sections
+	o fix problems with usb-interface
+- XFdrake: big cleanup
+- general cleanups
+- translation updates
 
 * Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
 - drakx :
