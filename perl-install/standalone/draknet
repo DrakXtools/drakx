@@ -27,6 +27,7 @@ use network::ethernet;
 use network::tools;
 use network;
 use c;
+use MDK::Common;
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -270,8 +271,9 @@ $vbox1->pack_start($bbox0,0,0,0);
 $bbox0->set_layout(-end);
 
 
+$bbox0->add(new Gtk::Label("Click here to launch the wizard ->"));
 my $button_wizard = new Gtk::Button _("Configure");
-$button_wizard->signal_connect ( clicked => sub {
+$button_wizard->signal_connect( clicked => sub {
 				     $::isWizard = 1;
 				     system("draknet --wizard");
 # netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
@@ -474,11 +476,11 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start($bbox1,0,0,10);
     $bbox1->set_layout(-end);
     my $old_networking = $netc->{NETWORKING};
-    my $button_able = new Gtk::Button $netc->{NETWORKING} eq "yes" ? _("Disable") : _("Enable");
+    my $button_able = new Gtk::Button $netc->{NETWORKING} eq "yes" ? _("Disable network") : _("Enable network");
     $button_able->signal_connect ( clicked => sub {
 				       $netc->{NETWORKING} eq "yes" ? ($netc->{NETWORKING} = "no") : ($netc->{NETWORKING} = "yes");
 				       $notebook->set_sensitive($netc->{NETWORKING} eq "yes");
-				       $button_able->child->set($netc->{NETWORKING} eq "yes" ? _("Disable") : _("Enable"));
+				       $button_able->child->set($netc->{NETWORKING} eq "yes" ? _("Disable network") : _("Enable network"));
 				   } );
     $bbox1->add($button_able);
     my $button_ok = new Gtk::Button( _("OK") );
