@@ -1048,17 +1048,18 @@ sub load_mo {
 
     $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
-    foreach (split ':', $lang) {
-	my $f = "$localedir/$_/$suffix";
-	-s $f and return $_;
+    my @possible_langs = map { { name => $_, mofile => "$localedir/$_/$suffix" } } split ':', $lang;
 
-	if ($::isInstall && common::usingRamdisk()) {
-	    #- cleanup
-	    eval { rm_rf($localedir) };
-	    eval { mkdir_p(dirname("$localedir/$_/$suffix")) };
-	    install_any::getAndSaveFile("$localedir/$_/$suffix");
+    -s $_->{mofile} and return $_->{name} foreach @possible_langs;
 
-	    -s $f and return $_;
+    if ($::isInstall && common::usingRamdisk()) {
+        foreach (@possible_langs) {
+            #- cleanup
+            eval { rm_rf($localedir) };
+            eval { mkdir_p(dirname($_->{mofile})) };
+
+	    install_any::getAndSaveFile($_->{mofile});
+	    -s $_->{mofile} and return $_->{name};
 	}
     }
     '';
