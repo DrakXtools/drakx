@@ -281,7 +281,7 @@ if (arch() !~ /ppc/) {
 	@l );
 	if ($e->{type} eq "image") {
 		@l = ({ label => _("Label"), val => \$e->{label} },
-		$::expert ? @l[1..4] : @l[1..2], { label => _("Append"), val => \$e->{append} } ,
+		$::expert ? @l[1..4] : (@l[1..2], { label => _("Append"), val => \$e->{append} }) ,
 		if_($::expert, { label => _("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
 		if_($::expert, $l[5]),
 		{ label => _("NoVideo"), val => \$e->{novideo}, type => 'bool' },

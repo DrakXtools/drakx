@@ -320,9 +320,57 @@ image=/vmlinux$I.gz
 
 sub boot_img_ppc {
     my ($mnt, $img) = @_;
-    # Here's a quick hack...  just to give the script somethign to do. :)
-    # We do not yet have a set way of making bootable images.
-    _ "cp $type.rdz $img";
+    my $dir = "/export";
+	my $boot = "boot"; #- non-absolute pathname only!
+    _ "mkdir -p $dir/$boot";
+	_ "cp -f vmlinux $dir/$boot/vmlinux";
+	_ "cp -f all.rdz $dir/boot/all.gz";
+	_ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
+	
+	output("$dir/$boot/yaboot.conf", "
+init-message = \"\\nWelcome to Mandrake Linux PPC!\\nHit <TAB> for boot options.\\n\\n\"
+timeout = 150
+default = install-novideo
+
+image = cd:,\\\\\\\\vmlinux
+    label = install-novideo
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=ofonly\"
+    
+image = cd:,\\\\\\\\vmlinux
+    label = install-atyfb
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=atyfb:vmode:17\"
+    
+image = cd:,\\\\\\\\vmlinux
+    label = install-aty128fb
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=aty128fb:vmode:17\"
+
+image = cd:,\\\\\\\\vmlinux
+    label = install-text
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" text\"
+
+image = cd:,\\\\\\\\vmlinux
+    label = rescue
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" rescue\"    
+");
+	#- seem to need 2 yaboot.conf, one in the root, and one in boot
+	_ "cp -f $dir/boot/yaboot.conf $dir/yaboot.conf";		
+
+	output("$dir/$boot/README", "
+To Build a Bootable CD-ROM, do:
+cd /tools/ppc
+./mkINSTALLCD /export ppc-cd.img
+");
+
 }
 
 sub output {

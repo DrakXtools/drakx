@@ -789,7 +789,7 @@ sub summary {
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
     (map { 
 { label => _("Sound card"), val => $_->{description} } 
-     } modules::get_that_type('sound')),
+     } arch() !~ /ppc/ ? modules::get_that_type('sound') : modules::load_thiskind('sound')),
     (map {
 { label => _("TV card"), val => $_->{description} } 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
