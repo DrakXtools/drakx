@@ -469,11 +469,12 @@ Take a look at http://www.linmodems.org"),
                         my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
                         my $type;
                         
-                        my $driver = $netc->{autodetect}{modem}{$modem_name}{driver};
-                        $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
-                        $driver =~ /^Hsf:/ and $type = "hsflinmodem";
-                        $driver =~ /^LT:/  and $type = "ltmodem";
-                        $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
+                        if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
+                            $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
+                            $driver =~ /^Hsf:/ and $type = "hsflinmodem";
+                            $driver =~ /^LT:/  and $type = "ltmodem";
+                            $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
+                        }
                         
                         return "no_supported_winmodem" if !$type;
 
