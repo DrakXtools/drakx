@@ -159,7 +159,7 @@ sub add_probeall {
 
     my $l = $conf{$alias}{probeall} ||= [];
     @$l = uniq(@$l, $module);
-    log::l("setting probeall scsi_hostadapter to @$l");
+    log::l("setting probeall $alias to @$l");
 }
 
 sub remove_alias($) {
