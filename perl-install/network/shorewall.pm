@@ -73,7 +73,7 @@ Examples:
                 ppp+ for modem or DSL connections, 
                 eth0, or eth1 for cable connection, 
                 ippp+ for a isdn connection.
-", $card_netconnect),
+"),
                    [ { label => N("Net Device"), val => \$card_netconnect, list => \@l } ]);
 	$conf{net_interface} = $card_netconnect;
 	#$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
