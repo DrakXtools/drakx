@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2002-09-24 06:00+CST\n"
 "Last-Translator: Kenduest Lee <kenduest@i18n.linux.org.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -342,6 +342,11 @@ msgstr "使用該選項，您將能夠還原 /etc 目錄內任何版本的檔案目錄"
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1468,11 +1473,6 @@ msgstr ""
 "安裝程式幫您製作一張開機磁片嗎?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ", USB printer \\#%s"
-msgstr "，USB 印表機  \\/*%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1512,6 +1512,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1597,11 +1602,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "在回存前進行新的備份動作 (只能夠用在遞增式備份時。)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "印表機位於並列埠 \\/*%s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1756,11 +1756,6 @@ msgid ""
 msgstr ""
 "選擇您希望用來安裝 Mandrake Linux 系統的硬碟。當你選擇好後，該顆硬碟上面所有"
 "的資料將會被清除而無法挽救，請小心操作這個項目。"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid " on parallel port \\#%s"
-msgstr "於並列埠上 \\/*%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2739,6 +2734,11 @@ msgstr "開機時啟動 X Window 圖形作業環境"
 msgid "hourly"
 msgstr "每小時"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "右方 Alt 按鍵"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2785,6 +2785,42 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "正在設定應用程式..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"歡迎來到印表機設定精靈\n"
+"\n"
+"接下來設定精靈將會引導您完成印表機的設定，包含位於本機的印表機以及遠端網路印"
+"表機。\n"
+"\n"
+"若是您要設定的印表機是直接安裝在你機器上的，請先確認你的線路有安插正確，電源"
+"並且已經開啟，以便於能夠自動偵測你印表機的類型。若是您要使用的是網路印表機，"
+"請確認該印表機的電源也是處於開啟狀態，而且對方機器與網路能夠正確連通。\n"
+"\n"
+"請注意，自動偵測印表機的功能適用於本機印表機的情況，若是你要使用的是網路印表"
+"機，通常你需要把自動偵測功能關閉。\n"
+"\n"
+"當你確認沒問題是，點選「下一步」，或者是點選「取消」放棄設定。"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2794,28 +2830,6 @@ msgstr "一般 modem 連線方式"
 #, c-format
 msgid "File Selection"
 msgstr "檔案選取"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"您要使用那一種 ISDN 組態？\n"
-"\n"
-"* 舊的組態設定是使用 isdn4net，它包含許多很好用的工具，但是\n"
-"  但是這個程式很難設定，也不是很標準。\n"
-"\n"
-"* 新的組態設定比較容易了解，也更標準，只不過可用的工具會少一點。\n"
-"\n"
-"建議您使用 light 組態設定較佳。\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3280,7 +3294,7 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
-"透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。\n"
+"透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。"
 "其中像是: Web Server、Mail Server、Firewall、Router、Printer..."
 
 #: ../../security/level.pm:1
@@ -3500,6 +3514,11 @@ msgstr "選取您的掃描器"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "警告：在這張卡上面作顯示測試時可能會讓您系統停止回應"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "介面卡 IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4332,13 +4351,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "格式化"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4434,11 +4446,6 @@ msgstr "正在格式化分割區 %s"
 #, c-format
 msgid "User name"
 msgstr "使用者帳號"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "新的組態設定 (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4853,6 +4860,11 @@ msgstr "利比利亞"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "設定 script, 安裝軟體，啟動相關的 servers 服務"
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "印表機位於並列埠 \\/*%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4884,6 +4896,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "USB 印表機 \\/*%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5128,6 +5145,11 @@ msgstr ""
 "\n"
 "目前有一台未知類型的印表機安裝在您本機上。"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "右方 Alt 按鍵"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5163,11 +5185,6 @@ msgstr "捷克共和國"
 msgid "Egypt"
 msgstr "Egypt"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "舊的組態設定 (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5194,6 +5211,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "不刪除暫時檔案"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"恭喜 ! 網路設定組態已經設定完成了。\n"
+"您的系統已經能夠使用該設定。\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5983,6 +6010,11 @@ msgstr "要刪除那個設定檔："
 msgid "Local measure"
 msgstr "本機密碼檔"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6009,13 +6041,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6073,43 +6105,6 @@ msgstr "Bangladesh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "日本 (cable)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"歡迎來到印表機設定精靈\n"
-"\n"
-"接下來設定精靈將會引導您完成印表機的設定，包含位於本機的印表機以及遠端網路印"
-"表機。\n"
-"\n"
-"若是您要設定的印表機是直接安裝在你機器上的，請先確認你的線路有安插正確，電源"
-"並且已經開啟，以便於能夠自動偵測你印表機的類型。若是您要使用的是網路印表機，"
-"請確認該印表機的電源也是處於開啟狀態，而且對方機器與網路能夠正確連通。\n"
-"\n"
-"請注意，自動偵測印表機的功能適用於本機印表機的情況，若是你要使用的是網路印表"
-"機，通常你需要把自動偵測功能關閉。\n"
-"\n"
-"當你確認沒問題是，點選「下一步」，或者是點選「取消」放棄設定。"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6880,6 +6875,14 @@ msgstr "您要啟上面提及印表機列印服務，或者是使用內部網路內的印表機嗎？\n"
 msgid "Printer default settings"
 msgstr "印表機型號選擇"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7531,7 +7534,7 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
-"Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，\n"
+"Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，"
 "您可以上網瀏覽我們提供的線上電子商店穫得進一步資訊。"
 
 #: ../../any.pm:1
@@ -7549,11 +7552,6 @@ msgstr ""
 "執行 sendmail 程式時發生錯誤\n"
 "  由於該錯誤，備份報表檔案將無法送出\n"
 "  請檢視您系統的 sendmail 是否有錯誤。"
-
-#: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr "，位於並列埠多功能裝置 \\/*%s"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -7725,9 +7723,9 @@ msgstr "資訊： "
 msgid "Button `%s': %s"
 msgstr "按鈕 `%s'： %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "請稍候"
@@ -7934,6 +7932,11 @@ msgstr "第一台DNS伺服器 (可不輸入)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "請選擇您印表機的連接埠，或者是輸入該裝置的名稱"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "俄羅斯 (音標)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9073,6 +9076,11 @@ msgstr "   進度Bar的色彩                                 "
 msgid "Hardware clock set to GMT"
 msgstr "硬體時鐘設定為 GMT 時間"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "您想要測試您的設定值嗎？"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9087,6 +9095,11 @@ msgstr "請選取印表機所連接的連接埠。"
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "更換光碟片"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "您要用哪一個 XFree 設定 ?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9481,7 +9494,8 @@ msgstr "反向選取已安裝字型"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "取消"
@@ -9613,6 +9627,11 @@ msgstr "美式鍵盤 (國際通用型)"
 msgid "Not installed"
 msgstr "尚未安裝"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "同時兩邊 Shift 按鍵"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9692,11 +9711,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-網路 (透過 FTP)\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "俄羅斯 (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10398,6 +10412,11 @@ msgstr "這個套件一定要更新才行，您不可以不選這個套件"
 msgid "Loading from floppy"
 msgstr "正在載入軟碟中的設定值"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -10495,6 +10514,11 @@ msgstr "SLILO"
 #, c-format
 msgid "Change type"
 msgstr "改變分割區格式"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr "，USB 印表機  \\/*%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -10620,7 +10644,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 提供了讓您盡情發揮多媒體的需求，\n"
+"Mandrake Linux 提供了讓您盡情發揮多媒體的需求，"
 "讓使用者能夠進行圖片的瀏覽、音樂的撥放、觀看電視"
 
 #: ../../printer/printerdrake.pm:1
@@ -10727,15 +10751,15 @@ msgstr "開機自動載入"
 msgid "Bus identification"
 msgstr "匯流排描述"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "請您先備份您的資料"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "拉托維亞"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "請您先備份您的資料"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11142,7 +11166,7 @@ msgstr "系統偵測不到任何電視卡！"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "選項"
@@ -11747,6 +11771,11 @@ msgstr "Loopback 檔案名稱： "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS IP 位址必須要用類似 1.2.3.4 的格式來輸入"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "遠端印表機"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -12503,6 +12532,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -12512,11 +12546,6 @@ msgstr "pfm 字型轉換"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "請選取您滑鼠連接的序列埠。"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12846,6 +12875,11 @@ msgstr "\t使用 tar 與 gzip 進行備份\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "同時兩邊 Shift 按鍵"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12884,6 +12918,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr "，位於並列埠多功能裝置 \\/*%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -13526,19 +13565,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"要獲得進一步開放源碼社群資訊與成為會員方式，包含學習、\n"
+"要獲得進一步開放源碼社群資訊與成為會員方式，包含學習、"
 "教學、求助與參與討論，請參考我們首頁上的 \"Community\" 網頁項目"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"恭喜 ! 網路設定組態已經設定完成了。\n"
-"您的系統已經能夠使用該設定。\n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13589,6 +13617,11 @@ msgstr "刪除"
 #, c-format
 msgid "here if no."
 msgstr "不確定點選這裡"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "求助"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -13744,6 +13777,7 @@ msgstr "Philippines"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "確定"
@@ -13784,6 +13818,30 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"歡迎來到印表機設定精靈\n"
+"\n"
+"接下來設定精靈將會引導您完成印表機的設定，包含位於本機的印表機。\n"
+"若是您要設定的印表機是直接安裝在你機器上的，請先確認你的線路有安插正確，電源"
+"並且已經開啟，以便於能夠自動偵測你印表機的類型。\n"
+"\n"
+"當你確認沒問題時，點選「下一步」，或者是點選「取消」放棄設定。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14216,8 +14274,9 @@ msgstr "，印表機 \"%s\"，位於主機 \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "錯誤"
@@ -15155,6 +15214,11 @@ msgstr "檢查壞掉的磁區?"
 msgid "Other MultiMedia devices"
 msgstr "其他裝置"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "印表機"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -15808,6 +15872,11 @@ msgstr "製作開機磁片"
 msgid "Solomon Islands"
 msgstr "Solomon Islands"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "請測試滑鼠"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -15898,6 +15967,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "( %s 已經加入)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "安裝開機程式"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -16314,6 +16388,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "回存所有備份資料"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr "於並列埠上 \\/*%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -16430,6 +16509,11 @@ msgstr ""
 #, c-format
 msgid "Zip"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "右方 Alt 按鍵"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16642,11 +16726,6 @@ msgstr ""
 msgid "Connected"
 msgstr "已連線"
 
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "USB 印表機 \\/*%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Macedonian"
@@ -16785,7 +16864,7 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
-"MandrakeSoft 的成功，來自於自由軟體的發展準則。Mandrake Linux\n"
+"MandrakeSoft 的成功，來自於自由軟體的發展準則。Mandrake Linux"
 "許多新的功能與機制，都是來自於全世界 Linux 社群努力的共同成果。"
 
 #: ../../lang.pm:1
@@ -16935,6 +17014,11 @@ msgstr "接受使用者"
 #, c-format
 msgid "Server"
 msgstr "伺服器平台"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "左邊 \"Windows\" 按鍵"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -18183,6 +18267,32 @@ msgstr "NFS server、SMB server、Proxy server、Ssh server"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "包含讀信、寫信以及閱讀網路論壇的工具 (pine、mutt、tin ..) 與及 web 瀏覽工具"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "您要使用那一種 ISDN 組態？\n"
+#~ "\n"
+#~ "* 舊的組態設定是使用 isdn4net，它包含許多很好用的工具，但是\n"
+#~ "  但是這個程式很難設定，也不是很標準。\n"
+#~ "\n"
+#~ "* 新的組態設定比較容易了解，也更標準，只不過可用的工具會少一點。\n"
+#~ "\n"
+#~ "建議您使用 light 組態設定較佳。\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "新的組態設定 (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "舊的組態設定 (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Intenet 連線與設定"

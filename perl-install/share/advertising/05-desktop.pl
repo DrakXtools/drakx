@@ -2,11 +2,9 @@
 
 $width = 556;
 $height = 303;
-$icon = 0;
-$icon_dx = 0;
-$icon_dy = 0;
-@data = (
-	 [ N("A customizable environment"), 0, 0, 400, 20, 1],
-	 [ N("Perfectly adapt your computer to your needs thanks to the 11 available Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME 2.2, Window Maker, ..."), 0, 30, 500, 0, 0],
-#	 [ 'text', $x, $y, $area_width, $area_height ],
-	);
+
+$y_start = 10;
+
+$title = N("A customizable environment");
+
+@text = (N("Perfectly adapt your computer to your needs thanks to the 11 available Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME 2.2, Window Maker, ..."));

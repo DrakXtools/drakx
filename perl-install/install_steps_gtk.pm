@@ -490,11 +490,10 @@ sub installPackages {
 	    log::l("advertising $f");
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon.png/;
-	    my ($draw_text, $width, $height, @data, $icon, $icon_dx, $icon_dy, $icon_px);
+	    my ($draw_text, $width, $height, $y_start, $title, @text);
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
 	    my $pix = gtkcreate_pixbuf($f);
-	    $icon_px = gtkcreate_pixbuf($icon_name) if $icon;
 	    my $dbl_area;
 	    my $darea = Gtk2::DrawingArea->new;
 	    gtkpack($box, $advertising = !$draw_text ?
@@ -505,39 +504,23 @@ sub installPackages {
 				   $darea->window->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
 				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
 							    ($dx-$width)/2, 0, $width, $height, 'none', 0, 0);
-				   my $yicon = 0;
-				   my $decy = 0;
-				   my $first = 1;
-				   foreach (@data) {
-				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
-				       my ($width, $_height, $lines, $widths, $heights, $_ascents, $_descents) =
-					 get_text_coord($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
-				       if ($first && $icon) {
-					   my $iconx = ($dx-$width)/2 + $x + $widths->[0] - $icon_dx;
-					   my $icony = $y + $heights->[0] - $icon_dy/2;
-					   $icony > 0 or $icony = 0;
-					   $icon_px->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
-									$iconx, $icony, $icon_dx, $icon_dy, 'none', 0, 0);
-					   $yicon = $icony + $icon_dy;
-				       }
-				       my $i = 0;
-				       $yicon > $y + $heights->[0] and $decy = $yicon - ($y + $heights->[$i]);
-				       foreach (@$lines) {
-					   my $layout = $darea->create_pango_layout($_);
-					   my $draw_lay = sub {
-					       my ($gc, $decx, $decy) = @_;
-					       $darea->window->draw_layout($gc,
-									   ($dx-$width)/2 + $x + $widths->[$i] + $decx,
-									   $y + $heights->[$i] + $decy,
-									   $layout);
-					   };
-					   $draw_lay->($darea->style->black_gc, 0, 0);
-					   $bold and $draw_lay->($darea->style->black_gc, 1, 0);
-					   $layout->unref;
-					   $i++;
-				       }
-				       $first = 0;
-				   }
+
+                                   my ($width, $lines, $widths, $heights) = wrap_paragraph([ $title, '', @text ], $darea, 520);
+                                   my $i = 0;
+                                   foreach (@$lines) {
+                                       my $layout = $darea->create_pango_layout($_);
+                                       my $draw_lay = sub {
+                                           my ($gc, $decx) = @_;
+                                           $darea->window->draw_layout($gc,
+                                                                       ($dx-$width)/2 + $widths->[$i] + $decx,
+                                                                       $y_start + $heights->[$i],
+                                                                       $layout);
+                                       };
+                                       $draw_lay->($darea->style->black_gc, 0);
+                                       $i == 0 and $draw_lay->($darea->style->black_gc, 1);
+                                       $layout->unref;
+                                       $i++;
+                                   }
 			       }
 			   }));
 	} else {

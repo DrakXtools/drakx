@@ -17,7 +17,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
     helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
                     gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size
-                    string_width string_height) ],
+                    string_width string_height wrap_paragraph) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
@@ -703,7 +703,33 @@ sub get_text_coord {
  	my $dh = ($height-$real_height)/2 + (string_height($widget4style, $lines[0]))/2;
  	@heights = map { $_ + $dh } @heights;
     }
-    ($width, $height, \@lines, \@widths, \@heights)
+    ($width, $height, \@lines, \@widths, \@heights);
+}
+
+sub wrap_paragraph {
+    my ($text, $widget4style, $max_width) = @_;
+
+    my ($width, @lines, @widths, @heights);
+    my $ydec;
+    foreach (@$text) {
+        if ($_ ne '') {
+            my ($width_, $height, $lines, $widths, $heights) = get_text_coord($_, $widget4style, $max_width, 0, 1, 0, 1, 0);
+            push @widths, @$widths;
+            push @heights, map { $_ + $ydec } @$heights;
+            push @lines, @$lines;
+            $width = max($width, $width_);
+            $ydec += $height + 1;
+        } else {
+            #- void line
+            my $yvoid = $ydec / @lines;
+            push @widths, 0;
+            push @heights, $yvoid;
+            push @lines, '';
+            $ydec += $yvoid;
+        }
+    }
+
+    ($width, \@lines, \@widths, \@heights);
 }
 
 sub gtkcolor {

@@ -2,12 +2,10 @@
 
 $width = 556;
 $height = 303;
-$icon = 0;
-$icon_dx = 0;
-$icon_dy = 0;
-@data = (
-	 [ N("Build the future of Linux!"), 0, 30, 400, 0, 1],
-	 [ N("Want to know more and to contribute to the Open Source community? Get involved in the Free Software world!"), 0, 90, 400, 20, 0],
-	 [ N("To share your own knowledge and help build Linux software, join our discussion forums on our \"Community\" webpages."), 0, 150, 400, 0, 0],
-#	 [ 'text', $x, $y, $area_width, $area_height, $bold ],
-	);
+
+$y_start = 30;
+
+$title = N("Build the future of Linux!");
+
+@text = (N("Want to know more and to contribute to the Open Source community? Get involved in the Free Software world!"),
+         N("To share your own knowledge and help build Linux software, join our discussion forums on our \"Community\" webpages."));
