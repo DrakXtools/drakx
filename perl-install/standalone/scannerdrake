@@ -67,8 +67,7 @@ quit();
 sub removeverticalbar {
     my ($s) = @_;
     $s =~ s/\|/ /g;
-    my $make = $1 if $s =~ /^\s*(\S+)\s+/;
-    my $searchmake = handle_configs::searchstr($make);
+    my $searchmake = handle_configs::searchstr(first($s =~ /^\s*(\S+)\s+/));
     $s =~ s/($searchmake)\s*$searchmake/$1/;
     return $s; 
 }
