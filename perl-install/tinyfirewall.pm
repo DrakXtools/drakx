@@ -8,7 +8,6 @@ use run_program;
 use netconnect;
 use network;
 use my_gtk qw(:helpers :wrappers);
-use Data::Dumper;
 
 my @messages = (_("tinyfirewall configurator
 
@@ -105,7 +104,6 @@ sub ReadConfig
     $default_config_file ||= "/usr/share/Bastille/bastille-firewall.cfg";
     -e $config_file or cp($default_config_file, $config_file);
     add2hash(\%settings, { getVarsFromSh("$config_file") });
-    print Data::Dumper->Dump ( [%settings], ["plop"]) . "\n";
 }
 
 my $GetNetworkInfo = sub {
@@ -128,24 +126,27 @@ my $GetNetworkInfo = sub {
             map { my $i=$_; my $f=$i; $f=~s/[0-9]+/\\\+/;
 		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
 	      } (@interfaces) ));
-    print Data::Dumper->Dump ( [%settings], ["plop"]) . "\n";
 };
 
 sub DoInterface {
     my ($in)=@_;
     $::isWizard=1;
+    my $popimapno = sub { $_[0] or return; mapn { $settings{$_->[0]} = $_->[1] } (
+[ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
+[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY"; ]); }
     my @struct = (
 		  [$GetNetworkInfo],
 		  [],
-		  [undef , undef, undef, "http no", "http yes", ["tcp", "80"], ["tcp", "443"]],
-		  [undef , undef, undef, "dns no", "dns yes", ["tcp", "53"], ["udp", "53"]],
-		  [undef , undef, undef, "ssh no", "ssh yes", ["tcp", "22"]],
-		  [undef , undef, undef, "telnet no", "telnet yes", ["tcp", "23"]],
-		  [undef , undef, undef, "ftp no", "ftp yes", ["tcp", "20"],["tcp", "21"]],
-		  [undef , undef, undef, "smtp no", "smtp yes", ["tcp", "25"]],
-		  [undef , undef, undef, "popimap no", "popimap yes", ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
-		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), "dhcp no", "dhcp yes", [$settings{DHCP_IFACES}]],
-		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), "ntp no", "ntp yes", ]
+		  [undef , undef, undef, undef, ["tcp", "80"], ["tcp", "443"]],
+		  [undef , undef, undef, undef, ["tcp", "53"], ["udp", "53"]],
+		  [undef , undef, undef, undef, ["tcp", "22"]],
+		  [undef , undef, undef, undef, ["tcp", "23"]],
+		  [undef , undef, undef, undef, ["tcp", "20"],["tcp", "21"]],
+		  [undef , undef, undef, undef, ["tcp", "25"]],
+		  [undef , undef, undef, $popimapno, ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
+		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), , [$settings{DHCP_IFACES}]],
+		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), , ]
+		  [undef , _("Don't Save"), _("Save & Quit"), , , ]
 		 );
     !Kernel22() and pop @struct, pop @struct;
     for (my $i=0;$i<@struct;$i++) {
@@ -161,15 +162,54 @@ sub DoInterface {
 	my $no = $l->[1] ? $l->[1] : _("No (firewall this off from the internet)");
 	my $yes = $l->[2] ? $l->[2] : _("Yes (allow this through the firewall)");
 	if (my $e = $in->ask_from_list(_("Firewall Configuration Wizard"),
-			       $messages[$i],
-			       [ $yes, $no ], or_( map { if_($_, CheckService($_->[0], $_->[1])) } (@$l[5..7])) ? $yes : $no
-			      )) {
-	    WidgetHandler($i, $e =~ /Yes/)
+				       $messages[$i],
+				       [ $yes, $no ], or_( map { if_($_, CheckService($_->[0], $_->[1])) } (@$l[4..6])) ? $yes : $no
+				      )) {
+	    map { if_($_, Service ($e=~/Yes/, $_->[0], $_->[1]) } (@$struct[$i][4..6]);
+	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/);
 	} else {
 	  prev:
 	    $i = $i-2 >= -1 ? $i-2 : -1;
 	}
     }
+}
+
+
+sub Service {
+    my ($add, $protocol, $port) = @_;
+    if ($add) {
+	map { $_ eq $port and return } (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"}));
+	$settings{uc($protocol) . "_PUBLIC_SERVICES"} .= " " . $port;
+    } else {
+	$settings{uc($protocol) . "_PUBLIC_SERVICES"} =
+	  join( ' ', map { if_($service ne $port, $service)} (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"})) );
+    }
+}
+
+sub AddService
+#######################
+## adds a port to [TCP|UDP]_PUBLIC_SERVICES if it's not already there
+{
+
+	my @old_services;
+
+
+	foreach my $service (@old_services)
+	{
+		$port_active = 1 if ($service eq $port);
+	}
+
+	$settings{TCP_PUBLIC_SERVICES} .= " "
+		if ($settings{TCP_PUBLIC_SERVICES} and ($protocol eq "tcp") and (!$port_active));
+
+	$settings{UDP_PUBLIC_SERVICES} .= " "
+		if ($settings{UDP_PUBLIC_SERVICES} and ($protocol eq "udp") and (!$port_active));
+
+	$settings{TCP_PUBLIC_SERVICES} .= $port
+		if (!$port_active and ($protocol eq "tcp"));
+
+	$settings{UDP_PUBLIC_SERVICES} .= $port
+		if (!$port_active and ($protocol eq "udp"));		
 }
 
 sub WidgetHandler {
@@ -191,88 +231,10 @@ sub WidgetHandler {
 		return 0;
 	}
 
-	if ($togglebutton->active)
-	{
-		if ($data eq "http no")
-		{
-			RemoveService ("tcp", "80");
-			RemoveService ("tcp", "443");
-		}
-		
-		elsif ($data eq "http yes")
-		{
-			AddService ("tcp", "80");
-			AddService ("tcp", "443");
-		}
+		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), "dhcp no", "dhcp yes", [$settings{DHCP_IFACES}]],
+		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), "ntp no", "ntp yes", ]
+		  [undef , _("Don't Save"), _("Save & Quit"), , , ]
 
-		elsif ($data eq "dns no")
-		{
-			RemoveService ("tcp", "53");
-			RemoveService ("udp", "53");
-		}
-		
-		elsif ($data eq "dns yes")
-		{
-			AddService ("tcp", "53");
-			AddService ("udp", "53");
-		}
-		elsif ($data eq "ssh no")
-		{
-			RemoveService ("tcp", "22");
-		}
-		elsif ($data eq "ssh yes")
-		{
-			AddService ("tcp", "22");
-		}
-		elsif ($data eq "telnet no")
-		{
-			RemoveService ("tcp", "23");
-		}
-		elsif ($data eq "telnet yes")
-		{
-			AddService ("tcp", "23");
-		}	
-		elsif ($data eq "ftp no")
-		{
-			RemoveService ("tcp", "20");
-			RemoveService ("tcp", "21");
-		}
-		elsif ($data eq "ftp yes")
-		{
-			AddService ("tcp", "20");
-			AddService ("tcp", "21");
-		}
-		elsif ($data eq "smtp no")
-		{
-			RemoveService ("tcp", "25");
-		}
-		elsif ($data eq "smtp yes")
-		{
-			AddService ("tcp", "25");
-		}
-		elsif ($data eq "popimap no")
-		{
-			RemoveService ("tcp", "109");
-			RemoveService ("tcp", "110");
-			RemoveService ("tcp", "143");
-
-			
-		}
-		elsif ($data eq "popimap yes")
-		{
-			AddService ("tcp", "109");
-			AddService ("tcp", "110");
-			AddService ("tcp", "143");
-			
-			$settings{FORCE_PASV_FTP} = "N";
-			$settings{TCP_BLOCKED_SERVICES} = "6000:6020";
-			$settings{UDP_BLOCKED_SERVICES} = "2049";
-			$settings{ICMP_ALLOWED_TYPES} = "destination-unreachable echo-reply time-exceeded";
-			$settings{ENABLE_SRC_ADDR_VERIFY} = "Y";
-			$settings{IP_MASQ_NETWORK} = "";
-			$settings{IP_MASQ_MODULES} = "";
-			$settings{REJECT_METHOD} = "DENY";
-		}
 		elsif ($data eq "dhcp yes")
 		{
 			return if $settings{DHCP_IFACES};  # variable already has something
