@@ -29,6 +29,7 @@ int get_param(int i);
 void set_param(int i);
 void unset_param(int i);
 int charstar_to_int(const char * s);
+off_t file_size(const char * path);
 int total_memory(void);
 int ramdisk_possible(void);
 char * get_ramdisk_realname(void);

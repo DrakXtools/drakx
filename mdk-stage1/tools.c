@@ -191,15 +191,21 @@ int charstar_to_int(const char * s)
 	return number;
 }
 
+off_t file_size(const char * path)
+{
+	struct stat statr;
+	if (stat(path, &statr))
+		return -1;
+        else
+                return statr.st_size;
+}
+
 int total_memory(void)
 {
 	int value;
-	struct stat statr;
-	if (stat("/proc/kcore", &statr))
-		return 0;
 
 	/* drakx powered: use /proc/kcore and rounds every 4 Mbytes */
-	value = 4 * ((int)((float)statr.st_size / 1024 / 1024 / 4 + 0.5));
+	value = 4 * ((int)((float)file_size("/proc/kcore") / 1024 / 1024 / 4 + 0.5));
 	log_message("Total Memory: %d Mbytes", value);
 
 	return value;
@@ -346,7 +352,7 @@ char * get_ramdisk_realname(void)
 enum return_type load_ramdisk(void)
 {
 	int st2_fd;
-	struct stat statr;
+        off_t size;
 	char img_name[500];
 
 	strcpy(img_name, IMAGE_LOCATION);
@@ -362,10 +368,10 @@ enum return_type load_ramdisk(void)
 		return RETURN_ERROR;
 	}
 
-	if (stat(img_name, &statr))
+	if ((size = file_size(img_name)) == -1)
 		return RETURN_ERROR;
 	else
-		return load_ramdisk_fd(st2_fd, statr.st_size);
+		return load_ramdisk_fd(st2_fd, size);
 }
 
 /* pixel's */
