@@ -1139,63 +1139,14 @@ sub load_thiskind {
 	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
 
-    if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
-	require pci_probing::main;
-	my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
-	if (@l && $o->ask_yesorno('', 
-_("Linux does not yet fully support ultra dma 66.
-As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"), 1)) {
-	    log::l("HPT|Ultra66: found");
-	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", 
-	      map_index { hex($_) + (odd($::i) ? 1 : -1) } do {
-		if (@l == 2) {
-		    map { (split ' ')[3..4] } @l
-		} else {
-		    map { (split ' ')[3..6] } @l
-		}
-	    };
-	    log::l("HPT|Ultra66: gonna add ($ide)");
+    if ($type =~ /scsi/i) {
+	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
+	install_any::ultra66($o);
 
-	    my $dev = devices::make("fd0");
-	    my $image = $o->{pcmcia} ? "pcmcia" :
-	      ${{ hd => 'hd', cdrom => 'cdrom', 
-		  ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
-	
-	    my $nb_try; 
-	    for ($nb_try = 0; $nb_try <= 1; $nb_try++) {
-		eval { fs::mount($dev, "/floppy", "vfat", 0) };
-		last if !$@ && -e "/floppy/syslinux.cfg";
-
-		eval { fs::umount("/floppy") };		    
-		$o->ask_warn('', 
-_("Enter a floppy to create an HTP enabled boot
-(all data on floppy will be lost)"));
-		if (my $fd = install_any::getFile("$image.img")) {
-                    my $w = $o->wait_message('', _("Creating bootdisk"));
-		    local *OUT;
-		    open OUT, ">$dev" or log::l("failed to write $dev"), return;
-		    local $/ = \ (16 * 1024);
-		    print OUT foreach <$fd>;
-		}
-	    }
-	    if (-e "/floppy/syslinux.cfg") {
-		log::l("HTP: modifying syslinux.cfg");
-		substInFile { s/(?=$)/ $ide/ if /^\s*append\s/ } "/floppy/syslinux.cfg";	
-		fs::umount("/floppy");
-		log::l("HPT|Ultra66: all done");
-
-		$o->ask_warn('', $nb_try ? 
-			     _("It is necessary to restart installation booting on the floppy") :
-			     _("It is necessary to restart installation with the new parameters"));
-		install_steps::rebootNeeded($o);
-	    } else {
-		$o->ask_warn('', 
-_("Failed to create an HTP boot floppy.
-You may have to restart installation and give ``%s'' at the prompt", $ide));
-	    }
+	if (my ($c) = pci_probing::main::probe('AUDIO')) {
+	    modules::add_alias("sound", $c);
 	}
     }
-
     my @l = eval { modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia) };
     $@ and $o->errorInStep($@), return undef;
     @l;
