@@ -394,7 +394,7 @@ my $r= "*** ". chomp_(`date`) . " ***\n";
     $::isWizard = 1;
     $::Wizard_no_previous = 1;
     $in->ask_okcancel(_("Mail/SMS alert configuration"),
-                      _("Welcome to the mail/SMS configuration utility.\n\nHere, you'll be able to set up \n"),
+                      _("Welcome to the mail/SMS configuration utility.\n\nHere, you'll be able to set up the alert system.\n"),
 		      1) or quit();
 
   step_service:
@@ -433,14 +433,14 @@ my ($load) = split ' ', first(cat_("/proc/loadavg"));
 $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
     
   step_output:
-    $in->ask_from(_("window title - ask_from"),
-		  _("message\nexamples of utilisation of ask_from"),
+    $in->ask_from(_("alert configuration"),
+		  _("Configure the way the system will alert you"),
 		  [
 		   { label => "mail", val => \$mail, type => "bool", text => "mail output" },
 		   { label => "email", val => \$email, disabled => sub { !$mail; }},
 		   { label => "smtp ??", val => \$smtp, disabled => sub { !$mail; } },
 		   { label => "" },
-		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have set up smsend\nThis service can be unavailable on some countries" },
+		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have smsend set up (works only for some countries)" },
 		   { label => "smssend output", val => \$smssend , disabled => sub {!$sms;}},
 		  ]) or goto step_load;
 
@@ -516,6 +516,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.11  2002/02/05 11:26:29  damien
+# wizard updated
+#
 # Revision 1.10  2002/02/05 11:16:28  damien
 # correction for mcc.
 #
