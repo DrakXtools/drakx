@@ -1,3 +1,95 @@
+2001/04/03  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: a lot of bugfixs
+	corrected bad flag test
+	corrected bad priority
+
+	* standalone/draknet: typo
+	bug fixes
+	removed debugging messages and Data::Dumper
+	corrected bad flag test
+
+2001/04/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po, share/po/DrakX.pot: Updated Vietnamese file
+
+2001/04/03  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (load_raw): add the require install_any
+
+	* share/rpmsrate: restore Aurora (i really don't understand what i've done
+	with flag AURORA a month ago) to a simple behaviour
+
+	* lang.pm (charset): fix for chineese which have charset in the name
+
+	* install_steps.pm (setupBootloaderBefore): nicer Aurora presence
+	detetection
+
+	* Makefile: no more special case for mkreiserfs (can be done via -v 1)
+
+	* install_steps_interactive.pm (choosePackages): do not make a special
+	case for upgrades (was: select the
+	min size, which was on contradiction with profile selection)
+
+	* fs.pm (real_format_part): give "-v 1" to mkreiserfs if kernel is 2.2
+
+	* install_steps_gtk.pm (choosePackagesTree): better name than "Automatic
+	dependencies"
+
+	* install_any.pm (setPackages): don't preselect profiles in upgrade
+	(setPackages): handle Flag:<theflag>
+	(setPackages): install kernel22 if install kernel is a 2.2
+
+	* share/list: add back mkreiserfs
+
+	* standalone/XFdrake: don't start xfs if skiptest
+
+	* lvm.pm (get_lvs): remove the setting of flag isFormatted which was wrong
+	(didn't
+	propose to format it)
+	protect the loading of module lvm-mod
+
+2001/04/02  dam's  <damien@mandrakesoft.com>
+
+	* modules.pm: corrected petite's mistake
+
+	* netconnect.pm: protecting against non existent files
+
+2001/04/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/make_boot_img, mdk-stage1/.cvsignore: fix
+	comply to all.kernels policy
+
+	* tools/make_mdkinst_stage2: fix remove of alternate cz modules
+
+2001/04/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: Updated Czech file
+
+	* lang.pm: codepage option to mount requires only numeric values, eg "437"
+	and not "cp437"
+	Changed accordingly in the lists
+
+	* share/rpmsrate: Install latin2 Postscript fonts for latin2 locales,
+	install fonts-ttf-thai for Thai locale
+
+2001/04/02  Pixel  <pixel@mandrakesoft.com>
+
+	* c/Makefile: small cleanup for pcmcia_probe.c
+
+	* tools/Makefile (install): s/-r/-rf/
+
+	* install_any.pm (setPackages): s/reiserfs-utils/reiserfsprogs/
+	(setPackages): install imwheel if nbuttons > 3
+
+	* c/Makefile.PL: small cleanup for pcmcia_probe.c
+	don't use pcmcia_probe.o from stage1, better compile it here, otherwise
+	perl-install require mdk-stage1 to do compiled => circular dependency
+
+	* Makefile: ignore dams or at least dams errors
+
+	* c/.cvsignore: add pcmcia_probe.c
+
 2001/04/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* rescue/make_rescue_img: fix pixelization (aka take advantage of
