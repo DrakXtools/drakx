@@ -1,3 +1,136 @@
+2001/08/14  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: corrected activation button
+
+2001/08/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm, install2.pm,
+	network/netconnect.pm: 
+	  - fix behaviour of draknet when auto-install
+	  - remove auto flag when error-in-step
+
+	* Xconfigurator.pm: fix automatic configuration
+
+	* install_any.pm: 
+	  - fix choice of packages when auto install
+
+2001/08/14  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix typo?
+
+2001/08/14  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Removed superfluous lines.
+
+	* printerdrake.pm: Transfer queues non-interactively when switching
+	between LPD and LPRng.
+	Wait message for queue transfer, manufacturer name bugfix
+
+2001/08/13  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* tools/i386/netboot/stage2.eepro100: Add eepro100 grub stage.
+	Removing old version of eepro100 (no stage1).
+
+	* tools/i386/netboot/stage1.eepro100: Add eepro100 grub stage.
+
+2001/08/13  dam's  <damien@mandrakesoft.com>
+
+	* interactive.pm: corrected 'no icon'
+
+	* network/adsl.pm, network/netconnect.pm: adsl autodetection activated
+	(planq the children)
+
+2001/08/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakautoinst: ouch! use lib from /usr/lib/libDrakX, rather
+	than from ..
+	initial revision for drakautoinst
+	  - put %installSteps in a separate package (steps.pm) (for drakxtools)
+	  - use additional fields {auto} and {noauto}, by step, to ease
+	interactive auto install and oem stuff
+	  - in install2.pm, perform each step either from the interactive class
+	or from install_steps, according to the {auto} flag
+	  - id, tell each step to not try to be automatic if {noauto}
+	  - in the install, have auto install bootdisk created in install_any so
+	we can always write a bootdisk (from install_steps) for further use from
+	drakautoinst in standalone
+	  - interactive version of install_steps_auto_install is now inheriting
+	from the interactive class, so we can click on a previous automatic step
+	and have it interactively during an interactive auto install
+
+	* install_steps.pm, install_steps_interactive.pm,
+	install_steps_auto_install.pm, install2.pm, steps.pm, install_any.pm:
+	initial revision for drakautoinst
+	  - put %installSteps in a separate package (steps.pm) (for drakxtools)
+	  - use additional fields {auto} and {noauto}, by step, to ease
+	interactive auto install and oem stuff
+	  - in install2.pm, perform each step either from the interactive class
+	or from install_steps, according to the {auto} flag
+	  - id, tell each step to not try to be automatic if {noauto}
+	  - in the install, have auto install bootdisk created in install_any so
+	we can always write a bootdisk (from install_steps) for further use from
+	drakautoinst in standalone
+	  - interactive version of install_steps_auto_install is now inheriting
+	from the interactive class, so we can click on a previous automatic step
+	and have it interactively during an interactive auto install
+
+2001/08/13  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_auto_install.pm, install2.pm, install_any.pm, steps.pm:
+	auto_inst enhancements
+
+	* install_steps_interactive.pm, standalone/XFdrake, install_steps.pm,
+	Xconfigurator.pm: really use a class_discard for Xconfigurator::main
+
+	* devices.pm: add /dev/hd[mt] handling
+
+2001/08/13  siegel
+
+	* share/po/de.po: new german version
+
+2001/08/13  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Automatic transfer of queues when changing the spooler.
+	Update printer queue list when exiting during install, so that the
+	"Summary" entry is correct.
+	When one sayd "No" on the test page, the modify dialog was not pointing
+	to the current printer
+
+	* printer.pm: Automatic transfer of queues when changing the spooler.
+	The photo test page was not printed during installation.
+
+	* interactive.pm: Tree lists are sorted again now.
+
+2001/08/13  yduret
+
+	* standalone/drakxconf: removed diskdrake from the choice
+
+2001/08/12  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: longer timeout
+
+2001/08/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fix ortograf typo
+
+2001/08/12  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile: po->mo is no longer gonna be nasty with us
+
+	* interactive_gtk.pm: clean the nice till fix
+
+	* tools/cvslog2changelog.pl: add till
+
+	* Makefile: ensure locales.tar.bz2 in perl-install/share is build
+	po->mo is no longer gonna be nasty with us
+
+2001/08/12  Till Kamppeter <till@mandrakesoft.com>
+
+	* interactive.pm: Lists get only sorted when the "sort" option is given.
+
+	* printer.pm, printerdrake.pm: Check files before checking RPM database =>
+	Acceleration, waiting windows
+
 2001/08/11  dam's  <damien@mandrakesoft.com>
 
 	* share/themes.rc, share/logo-mandrake.png, share/themes-mdk.rc,
