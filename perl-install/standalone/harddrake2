@@ -155,18 +155,11 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
 
 #    $tree->set_column_auto_resize(0, 1);
 my (%data, %configurators);
-gtktext_append($text, [ [ N_("Click on a device in the left tree in order to get its information displayed here.") ] ]);
 $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
-my $select_count;
 my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
     my ($select) = @_;
-    # gtk+ send us a dummy signal on realization
-    unless ($select_count) {
-        $select_count = 1;
-        return 1;
-    }
     my ($model, $iter) = $select->get_selected();
     if ($model) {
         my $id = $model->get($iter, 1);
@@ -183,6 +176,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
                 print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n" unless $fields{$_}[0];
             };
             
+            # hide buttons if needed
             # we've valid driver, let's offer to configure it
             show_hide($current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/, $module_cfg_button);
             
@@ -191,8 +185,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
             return 1;
         }
     }
-    # hide buttons if needed
-    $text->get_buffer->set_text('', -1); # erase all previous text
+    $text->get_buffer->set_text(N_("Click on a device in the left tree in order to get its information displayed here."), -1);
     $config_button->hide;
     $module_cfg_button->hide;
 });
