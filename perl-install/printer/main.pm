@@ -1824,7 +1824,8 @@ sub help_output {
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     my $helptext = join("", <F>);
     close F;
-    $helptext = "Option list not available!\n" if $spooler eq 'lpq' && (!$helptext || $helptext eq "");
+    $helptext = "Option list not available!\n" 
+	if (!$helptext || $helptext eq "");
     return $helptext;
 }
 

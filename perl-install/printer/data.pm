@@ -9,10 +9,10 @@ use vars qw(@ISA @EXPORT);
 
 
 our %spoolers = ('pdq' => {
-                          'help' => "/usr/bin/lphelp %s |",
-					 'print_command' => 'lpr-pdq',
-					 'long_name' => N("PDQ - Print, Don't Queue"),
-					 'short_name' => N("PDQ"),
+                          'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
+			  'print_command' => 'lpr-pdq',
+			  'long_name' => N("PDQ - Print, Don't Queue"),
+			  'short_name' => N("PDQ"),
                           'packages2add' => [ [ 'pdq' ], [qw(/usr/bin/pdq /usr/X11R6/bin/xpdq)] ],
                           'alternatives' => [
                               [ 'lpr', '/usr/bin/lpr-pdq' ],
@@ -21,9 +21,8 @@ our %spoolers = ('pdq' => {
                           ],
                  },
                 'lpd' => {
-                        'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
                         'print_command' => 'lpr',
-				    'long_name' => N("LPD - Line Printer Daemon"),
+			'long_name' => N("LPD - Line Printer Daemon"),
                         'short_name' => N("LPD"),
                         'boot_spooler' => 'lpd',
                         'service' => 'lpd',
@@ -67,6 +66,7 @@ our %spoolers = ('pdq' => {
 					]
 		 },
 		 'cups' => {
+		     'help' => "/usr/bin/lphelp %s |",
 		     'print_command' => 'lpr-cups',
 		     'long_name' => N("CUPS - Common Unix Printing System"),
 		     'short_name' => N("CUPS"),

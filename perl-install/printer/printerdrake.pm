@@ -409,7 +409,7 @@ sub configure_new_printers {
     # there is already a queue for them. If there is no queue for an
     # auto-detected printer, a queue gets set up non-interactively.
 
-    # Experts can have weird things as self-made CUPS backend, so do not
+    # Experts can have weird things as self-made CUPS backends, so do not
     # automatically pollute the system with unwished queues in expert
     # mode
     return 1 if $::expert;
@@ -470,14 +470,22 @@ sub configure_new_printers {
 				       };
 	    # Generate a queue name from manufacturer and model
 	    my $queue;
-	    my $make = $p->{val}{MANUFACTURER};
-	    if ($p->{val}{SKU}) {
-		$queue = $make . $p->{val}{SKU};
+	    my $unknown;
+	    if (!$p->{val}{MANUFACTURER} || !$p->{val}{MODEL} ||
+		$p->{val}{MODEL} eq N("Unknown Model")) {
+		$queue = N("Printer");
+		$unknown = 1;
 	    } else {
-		$queue = $make . $p->{val}{MODEL};
+		my $make = $p->{val}{MANUFACTURER};
+		if ($p->{val}{SKU}) {
+		    $queue = $make . $p->{val}{SKU};
+		} else {
+		    $queue = $make . $p->{val}{MODEL};
+		}
+		$queue =~ s/\s+//g;
+		$queue =~ s/^$make$make/$make/;
 	    }
-	    $queue =~ s/\s+//g;
-	    $queue =~ s/^$make$make/$make/;
+	    # Append a number if the queue name already exists
 	    if ($printer->{configured}{$queue}) {
 		$queue =~ s/(\d)$/$1_/;
 		my $i = 1;
@@ -489,8 +497,10 @@ sub configure_new_printers {
 	    $printer->{currentqueue}{queue} = $queue;
 	    undef $_w;
 	    $_w = $in->wait_message(N("Printerdrake"),
-				    N("Configuring printer \"%s\"...",
-				      $printer->{currentqueue}{queue}));
+				    ($unknown ?
+				     N("Configuring printer ...") :
+				     N("Configuring printer \"%s\"...",
+				       $printer->{currentqueue}{queue})));
 	    # Do configuration of multi-function devices and look up
 	    # model name in the printer database
 	    setup_common($printer, $in, $p->{val}{DESCRIPTION}, $p->{port},
@@ -500,15 +510,63 @@ sub configure_new_printers {
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} =
 		$printer->{currentqueue}{queue};
 	    # Do the steps of queue setup
-	    get_db_entry($printer, $in) or next;
+	    get_db_entry($printer, $in);
+	    # Let the user choose the model manually if it could not be
+	    # auto-detected.
+	    if (!$printer->{DBENTRY}) {
+		# Set the OLD_CHOICE to a non-existing value
+		$printer->{OLD_CHOICE} = "XXX";
+		# Set model selection cursor onto the "Raw Printer" entry.
+		$printer->{DBENTRY} = N("Raw printer (No driver)");
+		# Remove wait message
+		undef $_w;
+		# Choose the printer/driver from the list
+		$printer->{DBENTRY} = 
+		    $in->ask_from_treelist(N("Printer model selection"),
+					   N("Which printer model do you have?") .
+					   N("
+
+Printerdrake could not determine which model your printer is. Please choose the correct model from the list.") . " " .
+					   N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
+					   [ keys %printer::main::thedb ], $printer->{DBENTRY}) or next;
+		# Rename the queue according to the chosen model
+		$queue = $printer->{DBENTRY};
+		$queue =~ s/\|/ /g;
+		$printer->{currentqueue}{desc} = $queue;
+		$queue =~ s/[\s\(\),]//g;
+		# Append a number if the queue name already exists
+		if ($printer->{configured}{$queue}) {
+		    $queue =~ s/(\d)$/$1_/;
+		    my $i = 1;
+		    while ($printer->{configured}{"$queue$i"}) {
+			$i ++;
+		    }
+		    $queue .= $i;
+		}
+		$printer->{currentqueue}{queue} = $queue;
+		$printer->{QUEUE} = $printer->{currentqueue}{queue};
+		# Restore wait message
+		$_w = $in->wait_message(N("Printerdrake"),
+					N("Configuring printer \"%s\"...",
+					  $printer->{currentqueue}{queue}));
+	    }
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
 	    configure_queue($printer, $in) or next;
 	    # If there is no default printer set, let this one get the
 	    # default
-	    $printer->{DEFAULT} ||= $printer->{QUEUE};
+	    if (!$printer->{DEFAULT}) {
+		$printer->{DEFAULT} = $printer->{QUEUE};
+		printer::default::set_printer($printer);
+	    }
 	}
     }
+    # Configure the current printer queues in applications
+    $_w =
+	$in->wait_message(N("Printerdrake"),
+			  N("Configuring applications..."));
+    printer::main::configureapplications($printer);
+    undef $_w;
     undef $printer->{noninteractive};
 }
 
@@ -1962,6 +2020,7 @@ sub get_db_entry {
 	}
 	$printer->{OLD_CHOICE} = $printer->{DBENTRY};
     }
+    1;
 }
 
 sub is_model_correct {
@@ -2629,11 +2688,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::main::help_output($printer, 'lpd') : 
+", $scanning, $photocard) . printer::main::help_output($printer, 'cups') : 
  $scanning . $photocard .
  N("Here is a list of the available printing options for the current printer:
 
-") . printer::main::help_output($printer, 'lpd')) : $scanning . $photocard);
+") . printer::main::help_output($printer, 'cups')) : $scanning . $photocard);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -3090,6 +3149,25 @@ sub install_spooler {
     1;
 }
 
+sub assure_default_printer_is_set {
+    my ($printer, $in) = @_;
+    if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
+	(!defined($printer->{DEFAULT}) || !$printer->{DEFAULT})) {
+	my $_w = $in->wait_message(N("Printerdrake"),
+				   N("Setting Default Printer..."));
+	$printer->{DEFAULT} = printer::default::get_printer($printer);
+	if ($printer->{DEFAULT}) {
+	    # If a CUPS system has only remote printers and no default
+	    # printer defined, it defines the first printer whose
+	    # broadcast signal appeared after the start of the CUPS
+	    # daemon, so on every start another printer gets the default
+	    # printer. To avoid this, make sure that the default printer
+	    # is defined.
+	    printer::default::set_printer($printer);
+	} else { $printer->{DEFAULT} = '' }
+    }
+}
+
 sub setup_default_spooler {
     my ($printer, $in, $upNetwork) = @_;
     $printer->{SPOOLER} ||= 'cups';
@@ -3124,9 +3202,14 @@ sub setup_default_spooler {
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
 	%printer::main::thedb = ();
-	#my $_w = $in->wait_message(N("Printerdrake"), N("Reading printer database..."));
-	#printer::main::read_printer_db($printer->{SPOOLER});
+	assure_default_printer_is_set($printer, $in);
     }
+    # Configure the current printer queues in applications
+    my $_w =
+	$in->wait_message(N("Printerdrake"),
+			  N("Configuring applications..."));
+    printer::main::configureapplications($printer);
+    undef $_w;
     # Save spooler choice
     printer::default::set_spooler($printer);
     return $printer->{SPOOLER};
@@ -3178,14 +3261,11 @@ sub wizard_close {
 
 #- Program entry point for configuration of the printing system.
 sub main {
-    my ($printer, $in, $ask_multiple_printer, $upNetwork) = @_;
+    my ($printer, $in, $normal_run, $upNetwork) = @_;
 
     # Save the user mode, so that the same one is used on the next start
     # of Printerdrake
     printer::main::set_usermode($::expert);
-
-    # Set up new printers
-    $::isInstall || configure_new_printers($printer, $in, $upNetwork);
 
     # Default printer name, we do not use "lp" so that one can switch the
     # default printer under LPD without needing to rename another printer.
@@ -3196,7 +3276,7 @@ sub main {
     # we install some more stuff
     {
 	my $_w = $in->wait_message(N("Printerdrake"),
-				  N("Checking installed software..."));
+				   N("Checking installed software..."));
 	if (!$::testing &&
 	    !files_exist(qw(/usr/bin/foomatic-configure
 			    /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
@@ -3228,6 +3308,22 @@ sub main {
         printer::default::set_spooler($printer);
     }
 
+    # Get the default printer (Done after non-interactive queue setup, so
+    # that these queues are taken into account)
+    assure_default_printer_is_set($printer, $in);
+
+    # Non-interactive setup of newly detected printers (This is done only
+    # when not in expert mode, so we always have a spooler defined here)
+    configure_new_printers($printer, $in, $upNetwork);
+
+    # For preparation of the "Summary" step of the installation all is done
+    # now. We do not go into the main loop
+    return if !$normal_run;
+
+    # Ask for a spooler when none is defined yet
+    $printer->{SPOOLER} ||= 
+	setup_default_spooler($printer, $in, $upNetwork) || return;
+
     # Turn on printer autodetection by default
     $printer->{AUTODETECT} = 1;
     $printer->{AUTODETECTLOCAL} = 1;
@@ -3235,238 +3331,174 @@ sub main {
     $printer->{AUTODETECTSMB} = 1;
 
     # Control variables for the main loop
-    my ($menuchoice, $cursorpos, $queue, $continue, $newqueue, $editqueue, $menushown) = ('', '::', $defaultprname, 1, 0, 0, 0);
+    my ($menuchoice, $cursorpos, $queue, $newqueue, $editqueue) =
+	('', '::', $defaultprname, 0, 0);
     # Cursor position in queue modification window
     my $modify = N("Printer options");
-    while ($continue) {
+    while (1) {
 	$newqueue = 0;
-	# When the queue list is not shown, cancelling the printer type
-	# dialog should leave the program
-	$continue = 0;
-	# Get the default printer
-	if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
-	    (!defined($printer->{DEFAULT}) || $printer->{DEFAULT})) {
-	    my $_w = $in->wait_message(N("Printerdrake"),
-				      N("Preparing Printerdrake..."));
-	    $printer->{DEFAULT} = printer::default::get_printer($printer);
-	    if ($printer->{DEFAULT}) {
-		# If a CUPS system has only remote printers and no default
-		# printer defined, it defines the first printer whose
-		# broadcast signal appeared after the start of the CUPS
-		# daemon, so on every start another printer gets the default
-		# printer. To avoid this, make sure that the default printer
-		# is defined.
-		printer::default::set_printer($printer);
-	    } else { $printer->{DEFAULT} = '' }
-	}
-
-	# Configure the current printer queues in applications
-	{
-	    my $_w = $in->wait_message(N("Printerdrake"), N("Configuring applications..."));
-	    printer::main::configureapplications($printer);
-	}
-
 	if ($editqueue) {
-	    # The user was either in the printer modification dialog and did
-	    # not close it or he had set up a new queue and said that the test
-	    # page didn't come out correctly, so let the user edit the queue.
-	    $newqueue = 0;
-	    $continue = 1;
+	    # The user was either in the printer modification dialog
+	    # and did not close it or he had set up a new queue and
+	    # said that the test page didn't come out correctly, so
+	    # let the user edit the queue (do not show main window now).
 	    $editqueue = 0;
 	} else {
 	    # Reset modification window cursor when one leaves the window
 	    $modify = N("Printer options");
-	    if (!$ask_multiple_printer && 
-		%{$printer->{configured} || {}} == ()) {
-#		$in->set_help('doYouWantToPrint') if $::isInstall;
-		$newqueue = 1;
-		$menuchoice = $printer->{want} || 
-		    $in->ask_yesorno(N("Printer"),
-				    N("Would you like to configure printing?"),
-				    0) ? "\@addprinter" : "\@quit";
-		if ($menuchoice ne "\@quit") {
-		    $printer->{SPOOLER} ||= 
-			setup_default_spooler($printer, $in, $upNetwork) ||
-			    return;
+	    # This entry and the check for this entry have to use
+	    # the same translation to work properly
+	    my $_spoolerentry = N("Printing system: ");
+	    # If networking is configured, start it, but don't ask the
+	    # user to configure networking. We want to know whether we
+	    # have a local network, to suppress some buttons in the
+	    # recommended mode
+	    my $havelocalnetworks_or_expert =
+		$::expert ||
+		check_network($printer, $in, $upNetwork, 1) && 
+		printer::detect::getIPsInLocalNetworks() != ();
+#	    $in->set_help('mainMenu') if $::isInstall;
+	    # Initialize the cursor position
+	    if ($cursorpos eq "::" && 
+		$printer->{DEFAULT} &&
+		$printer->{DEFAULT} ne "") {
+		if ($printer->{configured}{$printer->{DEFAULT}}) {
+		    $cursorpos = 
+			$printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
+		} elsif ($printer->{SPOOLER} eq "cups") {
+		    $cursorpos = find { /!$printer->{DEFAULT}:[^!]*$/ } printer::cups::get_formatted_remote_queues($printer);
 		}
-	    } else {
-		# Ask for a spooler when none is defined
-		$printer->{SPOOLER} ||= setup_default_spooler($printer, $in, $upNetwork) || return;
-		# This entry and the check for this entry have to use
-		# the same translation to work properly
-		my $_spoolerentry = N("Printing system: ");
-		# If networking is configured, start it, but don't ask the
-		# user to configure networking. We want to know whether we
-		# have a local network, to suppress some buttons in the
-		# recommended mode
-		my $havelocalnetworks_or_expert =
-		    $::expert ||
-		     check_network($printer, $in, $upNetwork, 1) && 
-		      printer::detect::getIPsInLocalNetworks() != ();
-		# Show a queue list window when there is at least one queue,
-		# when we are in expert mode, or when we are not in the
-		# installation.
-		if (%{$printer->{configured} || {}} || $::expert || !$::isInstall) {
-#		    $in->set_help('mainMenu') if $::isInstall;
-		    # Cancelling the printer type dialog should leed to this
-		    # dialog
-		    $continue = 1;
-		    # This is for the "Recommended" installation. When one has
-		    # no printer queue printerdrake starts directly adding
-		    # a printer and in the end it asks whether one wants to
-		    # install another printer. If the user says "Yes", he
-		    # arrives in the main menu of printerdrake. From now
-		    # on the question is not asked any more but the menu
-		    # is shown directly after having done an operation.
-		    $menushown = 1;
-		    # Initialize the cursor position
-		    if ($cursorpos eq "::" && 
-			$printer->{DEFAULT} &&
-			$printer->{DEFAULT} ne "") {
-			if ($printer->{configured}{$printer->{DEFAULT}}) {
-			    $cursorpos = 
-				$printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
-			} elsif ($printer->{SPOOLER} eq "cups") {
-			    $cursorpos = find { /!$printer->{DEFAULT}:[^!]*$/ } printer::cups::get_formatted_remote_queues($printer);
-			}
-		    }
-		    # Generate the list of available printers
-		    my @printerlist = 
-			sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
-				      . ($_ eq $printer->{DEFAULT} ?
-					 N(" (Default)") : "") }
-				 keys(%{$printer->{configured}
-					|| {}})),
-				($printer->{SPOOLER} eq "cups" ?
-				 printer::cups::get_formatted_remote_queues($printer) :
-				 ()));
-		    my $noprinters = $#printerlist < 0;
-		    # Position the cursor where it were before (in case
-		    # a button was pressed).
-		    $menuchoice = $cursorpos;
-		    # Show the main dialog
-		    $in->ask_from_(
-			{ title => N("Printerdrake"),
-			 messages =>
-			     ($noprinters ? "" :
-			      ($printer->{SPOOLER} eq "cups" ?
-			       N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star Office/OpenOffice.org/GIMP.") :
-			       N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."))),
-			 cancel => (""),
-			 ok => (""),
+	    }
+	    # Generate the list of available printers
+	    my @printerlist = 
+		sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
+			    . ($_ eq $printer->{DEFAULT} ?
+			       N(" (Default)") : "") }
+		      keys(%{$printer->{configured}
+			     || {}})),
+		     ($printer->{SPOOLER} eq "cups" ?
+		      printer::cups::get_formatted_remote_queues($printer) :
+		      ()));
+	    my $noprinters = $#printerlist < 0;
+	    # Position the cursor where it was before (in case
+	    # a button was pressed).
+	    $menuchoice = $cursorpos;
+	    # Show the main dialog
+	    $in->ask_from_({ 
+		title => N("Printerdrake"),
+		messages =>
+		    ($noprinters ? "" :
+		     ($printer->{SPOOLER} eq "cups" ?
+		      N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star Office/OpenOffice.org/GIMP.") :
+		      N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."))),
+		cancel => (""),
+		ok => ("")},
+		# List the queues
+		[ if_(!$noprinters,
+		      { val => \$menuchoice, format => \&translate,
+			sort => 0, separator => "!",tree_expanded => 1,
+			quit_if_double_click => 1,allow_empty_list =>1,
+			list => \@printerlist }),
+		  { clicked_may_quit =>
+			sub { 
+			    # Save the cursor position
+			    $cursorpos = $menuchoice;
+			    $menuchoice = "\@addprinter";
+			    1; 
 			},
-			# List the queues
-			[ if_(!$noprinters,
-			   { val => \$menuchoice, format => \&translate,
-			     sort => 0, separator => "!",tree_expanded => 1,
-			     quit_if_double_click => 1,allow_empty_list =>1,
-			     list => \@printerlist }),
-			  { clicked_may_quit =>
-			    sub { 
-				# Save the cursor position
-				$cursorpos = $menuchoice;
-				$menuchoice = "\@addprinter";
-				1; 
+		    val => N("Add a new printer") },
+		  ($printer->{SPOOLER} eq "cups" &&
+		   $havelocalnetworks_or_expert ?
+		   ({ clicked_may_quit =>
+			  sub { 
+			      # Save the cursor position
+			      $cursorpos = $menuchoice;
+			      $menuchoice = "\@refresh";
+			      1;
+			  },
+		      val => N("Refresh printer list (to display all available remote CUPS printers)") },
+		    { clicked_may_quit =>
+			  sub { 
+			      # Save the cursor position
+			      $cursorpos = $menuchoice;
+			      $menuchoice = "\@cupsconfig";
+			      1;
+			  },
+		      val => ($::expert ? N("CUPS configuration") :
+			      N("Printer sharing")) }) : ()),
+		  ($::expert ?
+		   { clicked_may_quit =>
+			 sub {
+			     # Save the cursor position
+			     $cursorpos = $menuchoice;
+			     $menuchoice = "\@spooler";
+			     1;
+			 },
+		     val => N("Change the printing system") } :
+		   ()),
+		  { clicked_may_quit =>
+			sub {
+			    # Save the cursor position
+			    $cursorpos = $menuchoice;
+			    $menuchoice = "\@usermode";
+			    1 
 			    },
-			    val => N("Add a new printer") },
-			  ($printer->{SPOOLER} eq "cups" && $havelocalnetworks_or_expert ?
-			    ({ clicked_may_quit =>
-				   sub { 
-				       # Save the cursor position
-				       $cursorpos = $menuchoice;
-				       $menuchoice = "\@refresh";
-				       1;
-				   },
-			       val => N("Refresh printer list (to display all available remote CUPS printers)") },
-			     { clicked_may_quit =>
-				   sub { 
-				       # Save the cursor position
-				       $cursorpos = $menuchoice;
-				       $menuchoice = "\@cupsconfig";
-				       1;
-				   },
-			       val => ($::expert ? N("CUPS configuration") :
-				       N("Printer sharing")) }) : ()),
-			  ($::expert ?
-			    { clicked_may_quit =>
-				  sub {
-				      # Save the cursor position
-				      $cursorpos = $menuchoice;
-				      $menuchoice = "\@spooler";
-				      1;
-				  },
-				  val => N("Change the printing system") } :
-			    ()),
-			  { clicked_may_quit =>
-				  sub {
-				      # Save the cursor position
-				      $cursorpos = $menuchoice;
-				      $menuchoice = "\@usermode";
-				      1 
-				  },
-				  val => ($::expert ? N("Normal Mode") :
-					  N("Expert Mode")) },
-			  { clicked_may_quit =>
-			    sub { $menuchoice = "\@quit"; 1 },
-			    val => ($::isEmbedded || $::isInstall ?
-				    N("Done") : N("Quit")) },
-			  ]
-		    );
-		    # Toggle expert mode and standard mode
-		    if ($menuchoice eq "\@usermode") {
-			printer::main::set_usermode(!$::expert);
-			# Read printer database for the new user mode
-			%printer::main::thedb = ();
-			# Modify menu entries to switch the tree
-			# structure between expert/normal mode.
-			my $spooler =
-			    $spoolers{$printer->{SPOOLER}}{short_name};
-			if ($::expert) {
-			    map { 
-				$printer->{configured}{$_}{queuedata}{menuentry} =~ 
-				    s/^/$spooler!/;
-			    } keys(%{$printer->{configured}});
-			    $cursorpos =~ s/^/$spooler!/;
-			} else {
-			    map { 
-				$printer->{configured}{$_}{queuedata}{menuentry} =~ 
-				    s/^$spooler!//;
-			    } keys(%{$printer->{configured}});
-			    $cursorpos =~ s/^$spooler!//;
-			}
-			next;
-		    }
+				val => ($::expert ? N("Normal Mode") :
+					N("Expert Mode")) },
+		  { clicked_may_quit =>
+			sub { $menuchoice = "\@quit"; 1 },
+			val => ($::isEmbedded || $::isInstall ?
+				N("Done") : N("Quit")) },
+		  ]);
+	    # Toggle expert mode and standard mode
+	    if ($menuchoice eq "\@usermode") {
+		printer::main::set_usermode(!$::expert);
+		# Read printer database for the new user mode
+		%printer::main::thedb = ();
+		# Modify menu entries to switch the tree
+		# structure between expert/normal mode.
+		my $spooler =
+		    $spoolers{$printer->{SPOOLER}}{short_name};
+		if ($::expert) {
+		    map { 
+			$printer->{configured}{$_}{queuedata}{menuentry} =~ 
+			    s/^/$spooler!/;
+		    } keys(%{$printer->{configured}});
+		    $cursorpos =~ s/^/$spooler!/;
 		} else {
-		    #- as there are no printer already configured, Add one
-		    #- automatically.
-		    $menuchoice = "\@addprinter"; 
+		    map { 
+			$printer->{configured}{$_}{queuedata}{menuentry} =~ 
+			    s/^$spooler!//;
+		    } keys(%{$printer->{configured}});
+		    $cursorpos =~ s/^$spooler!//;
 		}
-		# Refresh printer list
-		next if $menuchoice eq "\@refresh";
-		# Configure CUPS
-		if ($menuchoice eq "\@cupsconfig") {
-		    config_cups($printer, $in, $upNetwork);
-		    next;
-		}
-	        # Determine a default name for a new printer queue
-		if ($menuchoice eq "\@addprinter") {
-		    $newqueue = 1;
-		    my %queues; 
-		    @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
-		    my $i = ''; while ($i < 150) { last unless exists $queues{"$defaultprname$i"}; ++$i }
-		    $queue = "$defaultprname$i";
-		}
-		# Function to switch to another spooler
-		if ($menuchoice eq "\@spooler") {
-		    $printer->{SPOOLER} = setup_default_spooler($printer, $in, $upNetwork) || $printer->{SPOOLER};
-		    next;
-		}
-		# Rip the queue name out of the chosen menu entry
-		if ($menuchoice =~ /!([^\s!:]+):[^!]*$/) {
-		    $queue = $1;
-		    # Save the cursor position
-		    $cursorpos = $menuchoice;
-		}
+		next;
+	    }
+	    # Refresh printer list
+	    next if $menuchoice eq "\@refresh";
+	    # Configure CUPS
+	    if ($menuchoice eq "\@cupsconfig") {
+		config_cups($printer, $in, $upNetwork);
+		next;
+	    }
+	    # Determine a default name for a new printer queue
+	    if ($menuchoice eq "\@addprinter") {
+		$newqueue = 1;
+		my %queues; 
+		@queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
+		my $i = ''; while ($i < 150) { last unless exists $queues{"$defaultprname$i"}; ++$i }
+		$queue = "$defaultprname$i";
+	    }
+	    # Call function to switch to another spooler
+	    if ($menuchoice eq "\@spooler") {
+		$printer->{SPOOLER} = setup_default_spooler($printer, $in, $upNetwork) || $printer->{SPOOLER};
+		next;
+	    }
+	    # Rip the queue name out of the chosen menu entry
+	    if ($menuchoice =~ /!([^\s!:]+):[^!]*$/) {
+		$queue = $1;
+		# Save the cursor position
+		$cursorpos = $menuchoice;
 	    }
 	    # Save the default spooler
 	    printer::default::set_spooler($printer);
@@ -3498,7 +3530,6 @@ sub main {
 	    if (!$::isEmbedded && !$::isInstall &&
 	    #if ((!$::isInstall) &&
 		$in->isa('interactive::gtk')) {
-		$continue = 1;
 		# Enter wizard mode
 		$::Wizard_pix_up = "wiz_printerdrake.png";
 		$::Wizard_title = N("Add a new printer");
@@ -3511,8 +3542,8 @@ sub main {
 		    next;
 		};
 		undef $::Wizard_no_previous;
-		eval {
-		#do {
+		#eval {
+		do {
 		    # eval to catch wizard cancel. The wizard stuff should 
 		    # be in a separate function with steps. see dragw.
 		    # (dams)
@@ -3568,8 +3599,6 @@ sub main {
 			# User was content with test pages
 			# Leave wizard mode with congratulations screen
 			wizard_close($in, 1);
-			$continue = ($::expert || !$::isInstall || $menushown ||
-				     $in->ask_yesorno('', N("Do you want to configure another printer?")));
 		    } elsif ($testpages == 2) {
 			# User was not content with test pages
 			# Leave wizard mode without congratulations
@@ -3584,16 +3613,7 @@ sub main {
 		$::expert or $printer->{TYPE} = "LOCAL";
 		wizard_welcome($printer, $in, $upNetwork) or next;
 		!$::expert or choose_printer_type($printer, $in) or next;
-		#- Cancelling the printer connection type window
-		#- should not restart printerdrake in recommended mode,
-		#- it is the first dialog of the sequence there and
-		#- the "Add printer" sequence should be stopped when there
-		#- are no local printers. In expert mode this is the second
-		#- dialog of the sequence.
-		$continue = 1;
 		setup_printer_connection($printer, $in, $upNetwork) or next;
-		#- Cancelling one of the following dialogs should
-		#- restart printerdrake
 		if ($::expert or $printer->{MANUAL} or
 		    $printer->{MORETHANONE}) {
 		    choose_printer_name($printer, $in) or next;
@@ -3615,11 +3635,7 @@ sub main {
 		    $printer->{configured}{$printer->{QUEUE}}{queuedata}{menuentry} .
 		    ($printer->{QUEUE} eq $printer->{DEFAULT} ? N(" (Default)") : '');
 		my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
-		if ($testpages == 1) {
-		    # User was content with test pages
-		    $continue = ($::expert || !$::isInstall || $menushown ||
-				 $in->ask_yesorno('', N("Do you want to configure another printer?")));
-		} elsif ($testpages == 2) {
+		if ($testpages == 2) {
 		    # User was not content with test pages
 		    $editqueue = 1;
 		    $queue = $printer->{QUEUE};
@@ -3681,8 +3697,8 @@ What do you want to modify on this printer?",
 				   N("Print test pages"),
 				   N("Learn how to use this printer"),
 				   if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
-		# Stay in the queue edit window until the user clicks "Close"
-		# or deletes the queue
+		# Stay in the queue edit window until the user clicks
+		# "Close" or deletes the queue
 		$editqueue = 1; 
 		#- Copy the queue data and work on the copy
 		$printer->{currentqueue} = {};
@@ -3763,7 +3779,7 @@ What do you want to modify on this printer?",
                             N("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP.", $queue));
 		} elsif ($modify eq N("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
-		} elsif ($modify eq N("Know how to use this printer")) {
+		} elsif ($modify eq N("Learn how to use this printer")) {
 		    printer_help($printer, $in);
 		} elsif ($modify eq N("Remove printer")) {
 		    if ($in->ask_yesorno('',
@@ -3804,21 +3820,17 @@ What do you want to modify on this printer?",
 		    }
 		}
 	    } else { $editqueue = 0 }
-	    $continue = $editqueue || $::expert || !$::isInstall || $menushown ||
-			 $in->ask_yesorno('', N("Do you want to configure another printer?"));
 	}
 
-	# Configure the current printer queue in applications when main menu
-	# will not be shown (During installation in "Recommended" mode)
-	if ($::isInstall && !$::expert && !$menushown && !$continue) {
-	    my $_w = $in->wait_message(N("Printerdrake"), N("Configuring applications..."));
-	    printer::main::configureapplications($printer);
-	}
+	# Configure the current printer queue in applications
+	my $_w = $in->wait_message(N("Printerdrake"),
+				   N("Configuring applications..."));
+	printer::main::configureapplications($printer);
+	undef $_w;
 
 	# Delete some variables
-	$printer->{OLD_QUEUE} = "";
-	foreach (qw(QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)) {
-		$printer->{$_} = "";
+	foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)){
+	    $printer->{$_} = "";
 	}
 	$printer->{currentqueue} = {};
 	$printer->{complete} = 0;

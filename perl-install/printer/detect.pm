@@ -126,7 +126,8 @@ sub whatUsbport() {
 	}
 	# Was there a manufacturer and a model in the string?
 	if ($manufacturer eq "" || $model eq "") {
-	    next;
+	    $manufacturer = "";
+	    $model = N("Unknown Model");
 	}
 	# No description field? Make one out of manufacturer and model.
 	if ($description eq "") {
