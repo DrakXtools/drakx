@@ -182,6 +182,9 @@ sub cardConfiguration(;$$$) {
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
+    $card->{memory} = 4096  if $card->{memory} <= 1024 && $card->{driver} eq "i810";
+    $card->{memory} = 16384 if $card->{memory} <= 1024 && $card->{chipset} =~ /PERMEDIA/;
+
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /3D Rage Pro AGP/); #- by default only such card are supported, with AGP ?
