@@ -1301,8 +1301,6 @@ It is not necessary on most networks."),
                     default => sub { bool2yesno(text2bool($intf->{$netc->{NET_INTERFACE}}{USERCTL})) },
                     post => sub {
                         my ($res) = @_;
-                        use Data::Dumper;
-                        print Dumper($intf, $netc);
                         $intf->{$netc->{NET_INTERFACE}}{USERCTL} = bool2yesno($res);
                         return $goto_start_on_boot_ifneeded->();
                     },
