@@ -42,9 +42,9 @@ sub config {
 
     my $dav = { %$dav_ }; #- working on a local copy so that "Cancel" works
 
-    my %actions = my @actions = actions();
     my $action;
     while ($action ne 'Done') {
+	my %actions = my @actions = actions($dav);
 	$action = $in->ask_from_list_('', format_dav_info($dav), 
 					 [ map { $_->[0] } group_by2 @actions ], 'Done') or return;
 	$actions{$action}->($in, $dav, $all_hds);    
@@ -53,12 +53,25 @@ sub config {
 }
 
 sub actions {
+    my ($dav) = @_;
+
     (
+     if_($dav && $dav->{isMounted}, __("Unmount") => sub { try('Unmount', @_) }),
+     if_($dav && $dav->{mntpoint} && !$dav->{isMounted}, __("Mount") => sub { try('Mount', @_) }),
      __("Server") => \&ask_server,
      __("Mount point") => \&mount_point,
      __("Options") => \&options,
      __("Done") => sub {},
     );
+}
+
+sub try {
+    my ($name, $in, $dav) = @_;
+    my $f = $diskdrake::interactive::{$name} or die "unknown function $name";
+    eval { $f->($in, {}, $dav) };
+    if (my $err = $@) {
+	$in->ask_warn(_("Error"), formatError($err));
+    }
 }
 
 sub ask_server {
