@@ -135,7 +135,7 @@ sub DoInterface {
 				       $messages[$i],
 				       [ $yes, $no ], or_( map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
-	    map { $_ and Service ($e=~/Yes/, $_->[0], $_->[1]) } (@{@struct[$i]}[4..6]);
+	    map { $_ and Service($e=~/Yes/, $_->[0], $_->[1]) } (@{$struct[$i]}[4..6]);
 	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/);
 	} else {
 	  prev:
