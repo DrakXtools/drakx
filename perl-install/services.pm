@@ -223,10 +223,10 @@ sub ask_standalone_gtk {
                   gtkpack__(new Gtk::HBox(0,0), gtkset_active(gtksignal_connect(
                           new Gtk::CheckButton(_("On boot")),
                           clicked => sub { if ($_[0]->active) {
-                                               "@$on_services" =~ /$service/ or push(@$on_services,$service)
+                                               push @$on_services, $service if !member($service, @$on_services);
                                            } else {
-                                               @$on_services = grep(!/$service/, @$on_services)
-                                        }}), "@$on_services" =~ /$service/)),
+                                               @$on_services = grep { $_ ne $service } @$on_services;
+                                        }}), member($service, @$on_services))),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
@@ -241,8 +241,8 @@ sub ask_standalone_gtk {
             ))
 	  );
     $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;
-                                                               my ($ox, $oy) = $w->window->get_deskrelative_origin;
-                                                               $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
+						    my ($ox, $oy) = $w->window->get_deskrelative_origin;
+						    $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
     $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
     $::isEmbedded and kill (12, $::CCPID);
