@@ -873,7 +873,7 @@ sub probeSerialDevices() {
     require list_modules;
     require modules;
     modules::load_category($::o->{modules_conf}, 'various/serial');
-    modules::append_to_modules_loaded_at_startup_for_all_kernels($_) foreach list_modules::category2modules('various/serial');
+    modules::append_to_modules_loaded_at_startup_for_all_kernels(list_modules::category2modules('various/serial'));
     foreach (0..3) {
 	#- make sure the device are created before probing,
 	devices::make("/dev/ttyS$_");
