@@ -18,14 +18,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+# TODO: consider switching from TreeView to gtkhtml
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use common;
 use interactive;
-use ugtk qw(:helpers :wrappers);
-use my_gtk qw(:helpers :wrappers);
+use ugtk2 qw(:wrappers :helpers :create);
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -47,24 +48,24 @@ foreach (@ARGV) {
 }
 
 $::isTail = 1 if $::isFile;
-n$| = 1 if $::isTail;
+$| = 1 if $::isTail;
 my $h = chomp_(`hostname -s`);
 
-my $my_win = my_gtk->new('logdrake');
+my $my_win = ugtk2->new('logdrake');
 unless ($::isEmbedded) {
     $my_win->{rwindow}->set_title(N("logdrake"));
-    $my_win->{window}->border_width(5);
-    $my_win->{rwindow}->set_policy(1, 1, 1);
+    $my_win->{window}->set_border_width(5);
+    #$my_win->{rwindow}->set_policy(1, 1, 1);
+    #$my_win->{window}->set_default_size(540,460);
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
-#$my_win->{window}->set_default_size(540,460);
 
-my $cal = gtkset_sensitive(new Gtk::Calendar(),0);
-my (undef,undef,undef,$mday) = localtime(time());
+my $cal = gtkset_sensitive(new Gtk2::Calendar(), 0);
+my (undef, undef, undef, $mday) = localtime(time());
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode = 0;
-my $cal_butt = gtksignal_connect(new Gtk::CheckButton(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
+my $cal_butt = gtksignal_connect(new Gtk2::CheckButton(N("Show only for the selected day")), clicked => sub { $cal_mode = !$cal_mode; gtkset_sensitive($cal,$cal_mode) });
 
 ### menus definition
 # the menus are not shown
@@ -82,13 +83,13 @@ my @menu_items = (
 		  { path => N("/_Help"),type => '<LastBranch>' },
 		  { path => N("/Help/_About...") } 
 		 );
-my $menubar = ugtk::create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
+my $menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
 ######### menus end
 
 
 ########## font and colors
-my $n = Gtk::Gdk::Font->fontset_load(N("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
-my $b = Gtk::Gdk::Font->fontset_load(N("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
+my %n = ('font' => ''); # Gtk2::Pango::FontDescription->from_string('Serif 12');#Gtk2::Gdk::Font->fontset_load(N("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
+my %b = ('font' => 'Bold'); #Gtk2::Pango::FontDescription->from_string('Serif Bold 12');#Gtk2::Gdk::Font->fontset_load(N("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
 
 #$black    = "\033[30m";
 #$red      = "\033[31m";
@@ -106,17 +107,16 @@ my $b = Gtk::Gdk::Font->fontset_load(N("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*
 #$col_underline =        "\033[04m";
 #$col_blink =            "\033[05m";
 
-my $white    = my_gtk::gtkcolor(50400, 655, 20000);
-my $black    = my_gtk::gtkcolor(0, 0, 0);
-my $red      = my_gtk::gtkcolor(0xFFFF, 655, 655);
-my $green    = my_gtk::gtkcolor(0x0, 0x9898,0x0);
-my $yellow   = my_gtk::gtkcolor(0xFFFF, 0xD7D7, 0);
-my $blue     = my_gtk::gtkcolor(655, 655, 0xFFFF);
-my $magenta  = my_gtk::gtkcolor(0xFFFF, 655, 0xFFFF);
-my $purple   = my_gtk::gtkcolor(0xA0A0, 0x2020, 0xF0F0);
-my $cyan     = my_gtk::gtkcolor(0x0, 0x9898, 0x9898);
-my $darkgray = my_gtk::gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
-
+my $white    = gtkcolor(50400, 655, 20000);
+my $black    = gtkcolor(0, 0, 0);
+my $red      = gtkcolor(0xFFFF, 655, 655);
+my $green    = gtkcolor(0x0, 0x9898,0x0);
+my $yellow   = gtkcolor(0xFFFF, 0xD7D7, 0);
+my $blue     = gtkcolor(655, 655, 0xFFFF);
+my $magenta  = gtkcolor(0xFFFF, 655, 0xFFFF);
+my $purple   = gtkcolor(0xA0A0, 0x2020, 0xF0F0);
+my $cyan     = gtkcolor(0x0, 0x9898, 0x9898);
+my $darkgray = gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
     
 # Define global terms:
 # Define good notables:
@@ -134,7 +134,7 @@ my @daemons = ("named");
 # Now define what we want to use when:
 my $col_good = $green;
 my $col_warn = $yellow;
-my $col_bad = $red;
+my $col_bad  = $red;
 my $col_note = $purple;
 my $col = $cyan;
 
@@ -148,44 +148,52 @@ my %files = (
 	     "explanations" => { file => "/var/log/explanations", desc => N("Mandrake Tools Explanations") }
 );
 
-my $yy = gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("search")) , clicked => \&search),0);
-my $log_text = new Gtk::Text(undef, undef);
+my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
+my $log_text = new Gtk2::TextView;
+my $log_buf = $log_text->get_buffer();
 my $refcount_search;
 #### far from window
-no strict 'refs';
+
+my %toggle;
+
 gtkadd($my_win->{window},
-       gtkpack_(new Gtk::VBox(0,0),
+       gtkpack_(new Gtk2::VBox(0,0),
 		if_(!$::isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
-		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(N("Settings")),
-					   gtkpack__(new Gtk::VBox(0,2),
-						     gtkpack__(new Gtk::VBox(0,2),
-							       # N("Show lines"),
-							       gtkpack__(new Gtk::HBox(0,0),
-									 " " . N("matching") . " ", my $e_yes = new Gtk::Entry(),
-									 " " . N("but not matching") . " ", my $e_no = new Gtk::Entry()
+		if_(!$::isFile, 0, gtkadd(new Gtk2::Frame(N("Settings")),
+					  gtkpack__(new Gtk2::VBox(0,2),
+						    gtkpack__(new Gtk2::VBox(0,2),
+							      # N("Show lines"),
+							      gtkpack__(new Gtk2::HBox(0,0),
+									" " . N("matching") . " ", my $e_yes = new Gtk2::Entry(),
+									" " . N("but not matching") . " ", my $e_no = new Gtk2::Entry()
 									)
 							      ),
-						     gtkpack_(new Gtk::HBox(0,0),
-							      1, gtkadd(gtkset_border_width(new Gtk::Frame(N("Choose file")),2),
-									gtkpack (gtkset_border_width(new Gtk::VBox(0,0),0),
-										 map { ${ "b_". $_ } = gtksignal_connect(new Gtk::CheckButton($files{$_}{desc}), clicked => sub{ $refcount_search++; gtkset_sensitive($yy,$refcount_search) }) } keys %files,
+						    gtkpack_(new Gtk2::HBox(0,0),
+							     1, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Choose file")),2),
+								       gtkpack (gtkset_border_width(new Gtk2::VBox(0,0),0),
+										map { 
+										    $toggle{$_} = gtksignal_connect(new Gtk2::CheckButton($files{$_}{desc}), 
+														    clicked => sub {
+															$refcount_search++; 
+															gtkset_sensitive($yy, $refcount_search);
+														    }) } keys %files,
 										)
 								       ),
-							      0, gtkadd(gtkset_border_width(new Gtk::Frame(N("Calendar")),2),
-									gtkpack__(gtkset_border_width(new Gtk::VBox(0,0),5),
-										  $cal_butt, $cal
+							     0, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Calendar")),2),
+								       gtkpack__(gtkset_border_width(new Gtk2::VBox(0,0),5),
+										 $cal_butt, $cal
 										 )
 								       )
-							      ),
-						     $yy,
+							     ),
+						    $yy,
 						    )
 					  )
-		   ),
-		!$::isExplain ? (1, gtkadd(new Gtk::Frame(N("Content of the file")),
-					 createScrolledWindow($log_text)
-					)) : (1, createScrolledWindow($log_text)),
-		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
-					      if_(!$::isFile, gtksignal_connect(new Gtk::Button (N("Mail alert")), 
+		    ),
+		!$::isExplain ? (1, gtkadd(new Gtk2::Frame(N("Content of the file")),
+					   create_scrolled_window($log_text)
+					   )) : (1, create_scrolled_window($log_text)),
+		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
+					      if_(!$::isFile, gtksignal_connect(new Gtk2::Button (N("Mail alert")), 
 										clicked => sub { eval { alert_config() };  
 												 if ($@ =~ /wizcancel/) {
 												     $::Wizard_no_previous = 1;
@@ -193,51 +201,54 @@ gtkadd($my_win->{window},
 												     $::WizardWindow->destroy if defined $::WizardWindow;
 												     undef $::WizardWindow;
 												 } })),
-					      gtksignal_connect(new Gtk::Button (N("Save")), clicked => \&save),
-					      gtksignal_connect(new Gtk::Button ($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
-					     )
-		   )
-       	       )
-       
-      );
-use strict;
+					      gtksignal_connect(new Gtk2::Button (N("Save")), clicked => \&save),
+					      gtksignal_connect(new Gtk2::Button ($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
+					      )
+		    )
+		)
+       );
 
-$::isFile and gtkset_usize($log_text,400,500);
+$::isFile and gtkset_size_request($log_text, 400, 500);
+
 $my_win->{window}->realize;
 $my_win->{window}->show_all();
 search() if $::isFile;
 $my_win->main;
 
-sub quit { my_gtk->exit(0) }
+sub quit { ugtk2->exit(0) }
 
 #-------------------------------------------------------------
 # search functions
 #-------------------------------------------------------------
 sub search {
-    $log_text->backward_delete($log_text->get_length());
-    $log_text->freeze();
+#    gtk_text_buffer_delete();
+#BUG    $log_text->backward_delete($log_text->get_length()); #BUG
+#BUG    $log_text->freeze();
     if ($::isFile) {
 	parse_file($::File);
     } else {
 	foreach (keys %files) {
-	    parse_file($files{$_}{fnile}) if ${ $::{"b_" . $_} n}->active 
-	};
+	    parse_file($files{$_}{file}) if $toggle{$_}->active;
+	}
     }
-    $log_text->thaw();
-    Gtk->main_iteration while Gtk->events_pending;
+#BUG    $log_text->thaw();
+    $log_text->show();
+    gtkflush();
 }
 
 sub parse_file {
-  my $file = $_[0];
+  my ($file) = @_;#$_[0];
 
   $file =~ s/\.gz$//;
-  my $i = 0;
-  gtkadd(my $win_pb = (gtkset_modal new Gtk::Window(), 1),
-	 gtkpack(new Gtk::VBox(5,0), 
-		 " " . N("please wait, parsing file: %s", $files{$_}{desc}) . " ",
-		 my $pbar = new Gtk::ProgressBar()
-		)
+  gtkadd(my $win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
+	 gtkpack(new Gtk2::VBox(2,0),
+#BUG: the returned string is cutted on accents with a PANGO error (s/N(/sprintf(/)
+		 new Gtk2::Label(" " . N("please wait, parsing file: %s", $files{$_}{desc}) . " "),
+		 my $pbar = new Gtk2::ProgressBar()
+		 )
 	);
+  $win_pb->set_transient_for($my_win->{rwindow});
+  $win_pb->set_modal(1);
   $win_pb->set_position('center');
   $win_pb->realize();
   $win_pb->show_all();
@@ -267,16 +278,17 @@ sub parse_file {
   }
 
   my $taille = @all;
+  my $i = 0;
   foreach (@all) {
       $i++;
       if ($i % 10) { 
-	  $pbar->update($i/$taille);
-	  Gtk->main_iteration while Gtk->events_pending;
+	  $pbar->set_fraction($i/$taille);
+	  gtkflush();
       }
       
       if ($en eq "" and /$ey/i)     { logcolorize($_); next }
-      if (! /$en/i and /$ey/i)      { logcolorize($_); next }
-      if (! /$en/i and $ey eq "")   { logcolorize($_); next }
+      if (!  /$en/i and /$ey/i)     { logcolorize($_); next }
+      if (!  /$en/i and $ey eq "")  { logcolorize($_); next }
   }
   $win_pb->destroy();
 
@@ -305,25 +317,26 @@ sub logcolorize {
     my $timestamp = $::isExplain ? $2 : $1;
     my @rec = split;
 
-    log_output($cyan,$timestamp,$b); # date & time if any...
-    $::isExplain or log_output($rec[0] eq $h ? $blue : $col, "$rec[0] ",$b);  # hostname
+    log_output($timestamp,  { %b, 'foreground-gdk' => $cyan }); # date & time if any...
+    # BUG: $col hasn't yet be reseted
+    $::isExplain or log_output("$rec[0] ",  { %b, 'foreground-gdk' => $rec[0] eq $h ? $blue : $col });  # hostname
     
     if ($rec[1] eq "last") {
-	log_output($green, " last message repeated ",$n);
-	log_output($green, $rec[4], $b);
-	log_output($green, " times\n",$n);
+	log_output(" last message repeated ",  { %n, 'foreground-gdk' => $green });
+	log_output($rec[4],  { %b, 'foreground-gdk' => $green });
+	log_output(" times\n",  { %n, 'foreground-gdk' => $green });
 	return;
     }
     # Extract PID if present
     if ($rec[1] =~ /\[(\d+)\]\:/) {
 	my($pid) = $1;
 	$rec[1] =~ s/\[$1\]\://;
-	log_output ($green, $rec[1] . "[", $n);
-	log_output ($black, $pid,$b);
-	log_output ($green, "]: ",$n);
+	log_output($rec[1] . "[",  { %n, 'foreground-gdk' => $green });
+	log_output($pid,  { %b, 'foreground-gdk' => $black });
+	log_output("]: ",  { %n, 'foreground-gdk' => $green });
     }
     else {
-	log_output($green, $rec[1] . " ", $n);
+	log_output($rec[1] . " ",  { %n, 'foreground-gdk' => $green });
     }
 
     foreach my $therest (2 .. $#rec) {
@@ -340,14 +353,15 @@ sub logcolorize {
  	#foreach (@line_warn) { $col = $col_warn if $_ eq $rec[$therest] }
 	#foreach (@line_bad)  { $col = $col_bad  if $_ eq $rec[$therest] }
  	
-	log_output($col, "$rec[$therest] ", $n);
+	log_output("$rec[$therest] ",  { %n, 'foreground-gdk' => $col });
     }
-    log_output($black, "\n",$n);
+    log_output("\n",  { %n, 'foreground-gdk' => $black });
 }
 
 
+#    log_output (Gtk2::TextView, [ [ ... ] ])
 sub log_output {
-      $log_text->insert($_[2], $_[0], undef, $_[1]);
+    gtktext_insert($log_text, [ \@_ ], undef, 1);
 }
 
 
@@ -435,8 +449,8 @@ EOF
 		   { label => "Email", val => \$email },
 		  ]) or goto step_load;
 
-    $cron .= q(#- report it);
-    $cron .= q(
+    $cron .= q(#- report it
+
 $email = ) . "'$email';\n\n";
 
 	$cron .= q(
