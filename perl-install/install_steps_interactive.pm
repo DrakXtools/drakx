@@ -420,7 +420,6 @@ sub choosePackages {
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
 
     $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
-    $@ and log::l("<$@>");
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
     install_any::warnAboutNaughtyServers($o) or goto chooseGroups;
