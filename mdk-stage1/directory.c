@@ -126,7 +126,12 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	}
 #endif
 
-	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
+	/* warning, stat() fails on large files (like DVD ISO images) */
+	if (!stat(location_full, &statbuf) && S_ISDIR(statbuf.st_mode)) {
+		log_message("assuming %s is a mirror tree", location_full);
+		symlink(location_full, IMAGE_LOCATION);
+		add_to_env("METHOD", method_live);
+	} else {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
 		if (lomount(location_full, IMAGE_LOCATION, &loopdev, 0)) {
 			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", location_full);
@@ -134,10 +139,6 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		}
 		add_to_env("ISOPATH", location_full);
 		add_to_env("METHOD", method_iso);
-	} else {
-		log_message("assuming %s is a mirror tree", location_full);
-		symlink(location_full, IMAGE_LOCATION);
-		add_to_env("METHOD", method_live);
 	}
 #ifndef MANDRAKE_MOVE
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
