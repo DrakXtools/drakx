@@ -79,9 +79,63 @@ my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
 			  },
 			    );
 
+# fill the devices tree
+sub detect {
+    my @class_tree;
+    foreach (@harddrake::data::tree) {
+	my ($Ident, $title, $icon, $configurator, $detector) = @$_;
+	next if (ref($detector) ne "CODE"); #skip class witouth detector
+	next if $Ident =~ /(MODEM|PRINTER)/ && "@ARGV" =~ /test/;
+#	print _("Probing %s class\n", $Ident);
+#	standalone::explanations("Probing %s class\n", $Ident);
+
+	my @devices = &$detector;
+	next if (!listlength(@devices)); # Skip empty class (no devices)
+	my $devices_list;
+	foreach (@devices) {
+	    if (exists $_->{bus} && $_->{bus} eq "PCI") {
+		my $i = $_;
+		$_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
+		$_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(pci_bus pci_device pci_function);
+	    }
+	    # split description into manufacturer/description
+	    ($_->{Vendor}, $_->{description}) = split(/\|/,$_->{description}) if exists $_->{description};
+	    
+	    if (exists $_->{val}) { # Scanner ?
+		my $val = $_->{val};
+		($_->{Vendor},$_->{description}) = split(/\|/, $val->{DESCRIPTION});
+	    }
+	    # EIDE detection incoherency:
+	    if (exists $_->{bus} && $_->{bus} eq 'ide') {
+		$_->{channel} = _($_->{channel} ? "secondary" : "primary");
+		delete $_->{info};
+	    } elsif ((exists $_->{id}) && ($_->{bus} ne 'PCI')) {
+		# SCSI detection incoherency:
+		my $i = $_;
+		$_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(bus id);
+	    }
+	    if ($Ident eq "AUDIO") {
+		my $alter = harddrake::sound::get_alternative($_->{driver});
+		$_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
+	    }
+	    foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} }
+	    $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
+	    push @$devices_list, $_;
+	}
+	push @class_tree, [ $devices_list, [ [$title], 5], $icon, [ 0, ($title =~ /Unknown/ ? 0 : 1) ], $title, $configurator ];
+    }
+    @class_tree;
+}
+
 sub new {
-    my $sig_id;
+    my ($sig_id, $wait);
+    unless ($::isEmbedded) {
     $in = 'interactive'->vnew('su', 'default');
+	$wait = $in->wait_message(_("Please wait"), _("Detection in progress"));
+	gtkflush;
+    }
+    my @class_tree = &detect;
+
     add_icon_path('/usr/share/pixmaps/harddrake2/');
     $w = my_gtk->new((_("Harddrake2 version ") . $harddrake::data::version));
     $w->{window}->set_usize(760, 550) unless $::isEmbedded;
@@ -107,8 +161,6 @@ sub new {
 							  my $config_button = new Gtk::Button(_("Run config tool"))), 1, 1);
     $vbox->set_child_packing($config_button, 0, 0, 0, 'start');
     $vbox->set_child_packing($module_cfg_button, 0, 0, 0, 'start');
-
-    my $wait = $in->wait_message(_("Please wait"), _("Detection in progress"));
 
     my $cmap = Gtk::Gdk::Colormap->get_system;
     my $color = { 'red' => 0x3100, 'green' => 0x6400, 'blue' => 0xbc00 };
@@ -174,52 +226,21 @@ sub new {
 	   }
     });
 
-    foreach (@harddrake::data::tree) {
-	   my ($Ident, $title, $icon, $configurator, $detector) = @$_;
-	   next if (ref($detector) ne "CODE"); #skip class witouth detector
-#	   print _("Probing %s class\n", $Ident);
-	   next if $Ident =~ /(MODEM|PRINTER)/ && "@ARGV" =~ /test/;
-	   my @devices = &$detector;
-	   next if (!listlength(@devices)); # Skip empty class (no devices)
-	   my $hw_class_tree = $tree->insert_node(undef, undef, [$title], 5, (gtkcreate_png($icon)) x 2, 0, ($title =~ /Unknown/ ? 0 : 1));
+    foreach (@class_tree) {
+	my ($devices_list, $arg, $icon, $arg2, $title, $configurator ) = @$_;
+	my $hw_class_tree = $tree->insert_node(undef, undef, @$arg, (gtkcreate_png($icon)) x 2, @$arg2);
 	   my $prev_item;
-	   foreach (@devices) {
-		  if (exists $_->{bus} && $_->{bus} eq "PCI") {
-			 my $i = $_;
-			 $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
-			 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(pci_bus pci_device pci_function);
-		  }
-		  # split description into manufacturer/description
-		  ($_->{Vendor}, $_->{description}) = split(/\|/,$_->{description}) if exists $_->{description};
-		  
-		  if (exists $_->{val}) { # Scanner ?
-			  my $val = $_->{val};
-			  ($_->{Vendor},$_->{description}) = split(/\|/, $val->{DESCRIPTION});
-		  }
-		  # EIDE detection incoherency:
-		  if (exists $_->{bus} && $_->{bus} eq 'ide') {
-			 $_->{channel} = _($_->{channel} ? "secondary" : "primary");
-			delete $_->{info};
-		  } elsif ((exists $_->{id}) && ($_->{bus} ne 'PCI')) {
-			 # SCSI detection incoherency:
-			 my $i = $_;
-			 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(bus id);
-		  }
-		  if ($Ident eq "AUDIO") {
-			 my $alter = harddrake::sound::get_alternative($_->{driver});
-			 $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
-		  }
-		  foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} }
-		  $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
+	foreach (@$devices_list) {
 		  my $custom_id = harddrake::data::custom_id($_, $title);
 		  $custom_id .= ' ' while exists($tree->{data}{$custom_id});
 		  my $hw_item = $tree->insert_node($hw_class_tree, $prev_item, [$custom_id ], 5, (undef) x 4, 1, 0);
-		  $tree->set_row_data($hw_item, [data => $_, configurator => $configurator ]);
 		  $tree->{data}{$custom_id} = $_;
 		  $tree->{configurator}{$custom_id} = $configurator;
 		  $prev_item = $hw_item;
 	   }
+	undef $prev_item;
     }
+
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
     $w->{rwindow}->signal_connect (delete_event => \&quit_global);
     undef $wait;
@@ -227,6 +248,7 @@ sub new {
     $w->{rwindow}->set_position('center') unless $::isEmbedded;
     $w->{rwindow}->show_all();
     foreach ($module_cfg_button, $config_button) { $_->hide };
+    $in = 'interactive'->vnew('su', 'default') if $::isEmbedded;
     $w->main;
 }
 
