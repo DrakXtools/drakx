@@ -51,6 +51,8 @@ my $printer;
 $ugtk2::wm_icon = "printerdrake";
 my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
+# i18n: IMPORTANT: to get correct namespace (userdrake instead of libDrakX)
+BEGIN { unshift @::textdomains, 'drakconf' }
 
 my $commandline = $_;
 
@@ -207,8 +209,17 @@ my $searchBox = gtkpack_(Gtk2::HBox->new(0,5),
 gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack(create_scrolled_window($localtree)), gtkshow(Gtk2::Label->new(N("Configured on this machine"))));
 gtkappend_page($nb, gtkpack(create_scrolled_window($remotetree)), gtkshow(Gtk2::Label->new(N("Configured on other machines"))));
 $nb->set_show_border(0);
+
+my @extra_widgets;
+if ($::isEmbedded) {
+	push @extra_widgets, 0, Gtk2::Banner->new("/usr/share/mcc/themes/default/printer-mcc-mdk.png",
+		#-PO: do not translate, this is already translated in mcc
+		translate("Printers"));
+}	 
+
 $us->{wnd}{window}->add(gtkpack_(Gtk2::VBox->new(0, 0),
 				  0, $menu,
+				  @extra_widgets,
 				  0, $toolb,
 				  0, $searchBox,
 				  0, Gtk2::HSeparator->new,
