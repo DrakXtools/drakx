@@ -83,15 +83,16 @@ sub entry {
 	$minor = 16 * $3 + ($4 || 0);
     } elsif (/(.*)(\d+)$/) {
 	    ($type, $major, $minor) =
-	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
-		   "hidbp-mse-" => [ c::S_IFCHR(), 10, 32 ],
-		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
-		   "usb/lp" => [ c::S_IFCHR(), 180, 0 ],
-		   "loop"   => [ c::S_IFBLK(), 7,  0 ],
-		   "md"     => [ c::S_IFBLK(), 9,  0 ],
-		   "nst"    => [ c::S_IFCHR(), 9, 128],
-		   "scd"    => [ c::S_IFBLK(), 11, 0 ],
-		   "ttyS"   => [ c::S_IFCHR(), 4, 64 ],
+	     @{ ${{"fd"          => [ c::S_IFBLK(), 2,  0 ],
+		   "hidbp-mse-"  => [ c::S_IFCHR(), 10, 32 ],
+		   "lp"          => [ c::S_IFCHR(), 6,  0 ],
+		   "usb/lp"      => [ c::S_IFCHR(), 180, 0 ],
+		   "input/event" => [ c::S_IFCHR(), 13, 64 ],
+		   "loop"        => [ c::S_IFBLK(), 7,  0 ],
+		   "md"          => [ c::S_IFBLK(), 9,  0 ],
+		   "nst"         => [ c::S_IFCHR(), 9, 128],
+		   "scd"         => [ c::S_IFBLK(), 11, 0 ],
+		   "ttyS"        => [ c::S_IFCHR(), 4, 64 ],
 	       }}{$1}};
 	    $minor += $2;
     }
