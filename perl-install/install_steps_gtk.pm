@@ -159,7 +159,7 @@ sub selectInstallClass1 {
     my $w = my_gtk->new(_("Install Class"));
     my $focused;
     gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(_("Please, choose one of the following classes of installation:")),
+	   gtkpack($w->create_box_with_title(_("Please choose one of the following classes of installation:")),
 		   (my @radios = gtkradio($def, @$l)),
 		   gtkadd(create_hbox(),
 			  map { my $v = $_; 

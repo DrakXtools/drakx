@@ -196,7 +196,7 @@ sub selectKeyboard {
     my $ext_keyboard = $o->{keyboard};
     $o->ask_from_(
 	{ title => _("Keyboard"), 
-	  messages => _("Please, choose your keyboard layout."),
+	  messages => _("Please choose your keyboard layout."),
 	  advanced_messages => _("Here is the full list of keyboards available"),
 	  advanced_label => _("More"),
 	  callbacks => { changed => sub { $other = $_[0]==1 } },
@@ -251,7 +251,7 @@ sub selectMouse {
 
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
-	$o->ask_from_treelist_('', _("Please, choose the type of your mouse."), 
+	$o->ask_from_treelist_('', _("Please choose the type of your mouse."), 
 			       '|', [ mouse::fullnames ], $prev) || return) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
