@@ -25,7 +25,7 @@ sub new {
 
 	@ISA = ($interactiveClass, @ISA);
 
-	for (my $f = $o->{steps}{first}; $f; $f = $o->{steps}{$f}{next}) {
+	foreach my $f (@{$o->{orderedSteps}}) {
 	    my $auto_name = member($f, @{$o->{interactiveSteps}}) ? 'noauto' : 'auto';
 	    $o->{steps}{$f}{$auto_name} = 1;
 	}

@@ -56,7 +56,7 @@ sub leavingStep {
 	output(install_any::auto_inst_file(), install_any::g_auto_install(1));
     }
 
-    for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
+    foreach my $s (@{$o->{orderedSteps}}) {
 	#- the reachability property must be recomputed each time to take
 	#- into account failed step.
 	next if $o->{steps}{$s}{done} && !$o->{steps}{$s}{redoable};

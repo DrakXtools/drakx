@@ -34,7 +34,6 @@ use common;
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-	$h{next}    = $installSteps[$i + 2];
 	$h{entered} = 0;
 	$h{onError} = $installSteps[$i + 2 * $h{onError}];
 	$h{reachable} = !$h{needs};
