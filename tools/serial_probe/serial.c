@@ -21,6 +21,7 @@
 #include <string.h>
 #include <signal.h>
 #include <time.h>
+#include <libgen.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
