@@ -75,7 +75,6 @@ if ($type eq 'fileshare') {
 my $all_hds = fsedit::get_hds({}, $in);
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
-my $fstab = [ fsedit::get_all_fstab($all_hds) ];
 
 fs::get_raw_hds('', $all_hds);
 
