@@ -8,6 +8,7 @@ use detect_devices;
 use modules;
 use network;
 use log;
+use interactive;
 use printer::main;
 use printer::services;
 use printer::detect;
