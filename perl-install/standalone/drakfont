@@ -1,6 +1,8 @@
 #!/usr/bin/perl 
 #
-# Copyright (C) 2001-2002 by MandrakeSoft (sdupont@mandrakesoft.com)
+# Copyright (C) 2001-2002 by MandrakeSoft
+#                            DUPONT Sebastien
+#                            dchaumette@mandrakesoft.com
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -80,6 +82,7 @@
 
 use strict;
 use diagnostics;
+
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;    #- warning, standalone must be loaded very first, for 'explanations'
@@ -616,7 +619,6 @@ sub interactive_mode {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Import Fonts"));
     }
-    $window1->{rwindow}->set_border_width(5);
 
     gtkadd(
         $window1->{window},
@@ -683,9 +685,8 @@ sub interactive_mode {
                         gtkadd(
                             gtkset_layout(new Gtk2::VButtonBox, 'end'),
                             gtksignal_connect(
-                                new Gtk2::Button(N("Help")),
-                                clicked =>
-                                  sub { ${$central_widget}->destroy(); help() }
+                                new Gtk2::Button(N("About")),
+                                clicked => sub { help() }
                             ),
                             gtksignal_connect(
                                 new Gtk2::Button(N("Close")),
@@ -697,31 +698,11 @@ sub interactive_mode {
                         ),
                     ),
                 ),
-
-                # 			     0, gtkpack_(new Gtk2::VBox(0,5),
-                # 					 0, new Gtk2::VBox(0,0),
-                # 					 0, new Gtk2::Pixmap(gtkcreate_img("ic-drakfont-48"),
-                # 					 1, new Gtk2::VBox(0,0),
-                # 					 1, gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-                # 						   gtksignal_connect(new Gtk2::Button(N("About")), clicked => sub { 
-                # 						       ${$central_widget}->destroy(); about() }),
-                # 						   gtksignal_connect(new Gtk2::Button(N("             Help           ")), clicked => sub { 
-                # 						       ${$central_widget}->destroy(); help() }),
-                # 						   gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
-                # 									 $::isEmbedded and kill 'USR1', $::CCPID;
-                # 									 Gtk2->main_quit() }),
-                # 						   ),
-                # 					 )
             ),
         ),
     );
     $central_widget = \$font_sel;
     $window1->{rwindow}->show_all;
-#    $font_sel->set_page(1);
-#    $font_sel->cur_page->child->hide();
-#    $font_sel->set_page(2);
-#    $font_sel->cur_page->child->hide();
-#    $font_sel->set_page(0);
     $window1->{rwindow}->realize;
 
     #    $window1->{rwindow}->show_all();    
@@ -729,10 +710,32 @@ sub interactive_mode {
     ugtk2->exit(0);
 }
 
-sub about {
-    text_view(N("
+sub text_view {
+    my ($text) = @_;
+    my $box;
+    gtkpack($font_box,
+	    $box = gtkpack_(new Gtk2::VBox(0,10),
+	       1, gtkpack_(new Gtk2::HBox(0,0),
+			   1, create_scrolled_window(gtktext_insert(
+								    new Gtk2::TextView,
+								    [ [ $text ] ])
+						     ),
+			   ),
+				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
+							     sub { ${$central_widget}->destroy() }),
+					   ),
+				 )
+	    );
+    $central_widget = \$box;
+    $font_box->show_all();
+}
+
+sub help {
+    my $about_box = ugtk2::create_dialog(N("
  Copyright (C) 2001-2002 by MandrakeSoft 
-	DUPONT Sebastien sdupont\@mandrakesoft.com
+	DUPONT Sebastien (initial version)
+        CHAUMETTE Damien dchaumette\@mandrakesoft.com
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -758,77 +761,6 @@ sub about {
     -  ttf2pt1:   
 	  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  
              Convert ttf font files to afm and pfb fonts
-
-
-")) }
-
-sub text_view {
-    my ($text) = @_;
-    my $box;
-    gtkpack($font_box,
-	    $box = gtkpack_(new Gtk2::VBox(0,10),
-	       1, gtkpack_(new Gtk2::HBox(0,0),
-			   1, create_scrolled_window(gtktext_insert(
-#								    gtkset_editable(
-										    new Gtk2::TextView,
-#										    1)
-								    [ [ $text ] ])
-						     ),
-			   ),
-				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
-							     sub { ${$central_widget}->destroy() }),
-					   ),
-				 )
-	    );
-    $central_widget = \$box;
-    $font_box->show_all();
-}
-
-sub help {
-    text_view(N("drakfont Future Overview
-        - Fonts import:
-                pfb ( Adobe Type 1 binary )
-                pfa ( Adobe Type 1 ASCII )
-                ttf ( True-Type  )
-                pcf.gz
-                Speedo
-                and Bitmap (PCF, BDF, and SNF)
-        - Features
-                - Install fonts from any directory
-                - Get windows fonts on any vfat partitions
-                - Get fonts on any partitions.
-                - UN-installation of any fonts (even if not installed through drakfont)
-        - Support
-              - Xfs
-              - ghostscript & printer
-              - Staroffice & printer
-              - abiword
-	      - netscape
-              - Koffice, Gnumeric, ... studying
-              - all fonts supported by printer
-              - anti-aliases by RENDER in Xfree86 .... 
-				supported by KDE.
-				will be supported by gnome 1.2.
-Visual Interface:
-        Window interface:
-          - Fontselectiondialog widget
-          - Command buttons under Fontselectiondialog (like the actual frontend).
-        Commands buttons:
-          - import from windows partition.
-                import from all fat32 partitions and look for winnt/windows/font
-                and import all (delete doubles) but don't import if they already exist.
-          - import from directory
-                look to see if each font exists and do not delete the original.
-                (replace all, no, none)
-                expert options:
-                        specify the directory, and look to see if it exists before
-                        if it exists ask: (replace all, no, none)
-          - uninstall with list per font type
-        Expert additional switch
-          - option support:   ghostscript, Staroffice, etc...
-                check-button. (by default all check)
-          - Printer Application Fonts Support...
 
 
 "));
@@ -1135,12 +1067,10 @@ sub import_status {
                 N("Initial tests"), $pbar, $pbar->set_text(' ')
             ],
             [
-                N("Copy fonts on your system"), $pbar1,
-                $pbar1->set_text(' ')
+                N("Copy fonts on your system"), $pbar1, $pbar1->set_text(' ')
             ],
             [
-                N("Install & convert Fonts"), $pbar2,
-                $pbar2->set_text(' ')
+                N("Install & convert Fonts"), $pbar2, $pbar2->set_text(' ')
             ],
             [
                 N("Post Install"), $pbar3, $pbar3->set_text(' ')
@@ -1185,11 +1115,11 @@ sub import_status_uninstall {
 
 sub progress {
     my ($progressbar, $incr, $label_text) = @_;
-    my ($new_val) = $progressbar->get_current_percentage;
+    my ($new_val) = $progressbar->fraction;
     $new_val += $incr;
     if ($new_val > 1) { $new_val = 1 }
-    $progressbar->update($new_val);
-    $progressbar->{label}->set($label_text);
+    $progressbar->fraction($new_val);
+    $progressbar->set_text($label_text);
     gtkflush();
 }
 
