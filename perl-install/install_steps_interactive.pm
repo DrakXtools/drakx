@@ -908,11 +908,14 @@ sub setRootPassword {
   ),
 			 ]) or return;
 
-    if ($nis) { $o->ask_from_entries_refH('',
-				     _("Authentification NIS"),
-				     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-				       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
-				     ]); } else { $o->{authentication}{NIS} = ''; }
+    if ($nis) { 
+	$o->{authentication}{NIS} = 'broadcast';
+	$o->ask_from_entries_refH('',
+				  _("Authentification NIS"),
+				  [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+				    { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
+				  ]); 
+    } else { $o->{authentication}{NIS} = '' }
     install_steps::setRootPassword($o);
 }
 
