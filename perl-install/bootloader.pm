@@ -245,8 +245,10 @@ sub read_grub {
 
     $b{nowarn} = 1;
     # handle broken installkernel -r:
-    $b{default} = min($b{default}, scalar(@{$b{entries}}) - 1);
-    $b{default} = $b{entries}[$b{default}]{label};
+    if (@{$b{entries}}) {
+	$b{default} = min($b{default}, scalar(@{$b{entries}}) - 1);
+	$b{default} = $b{entries}[$b{default}]{label};
+    }
     $b{method} = 'grub';
 
     \%b;
