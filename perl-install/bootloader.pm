@@ -248,6 +248,7 @@ sub suggest {
 	$lilo->{message} = join('', cat_("$prefix/boot/message"));
 	if (!$lilo->{message}) {
 	    my $msg_en =
+#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 __("Welcome to %s the operating system chooser!
 
 Choose an operating system in the list above or
@@ -633,6 +634,7 @@ EOF
 ";
 
      output "$prefix/boot/grub/messages", map { translate($_) . "\n" } (
+#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 __("Welcome to GRUB the operating system chooser!"),
 __("Use the %c and %c keys for selecting which entry is highlighted."),
 __("Press enter to boot the selected OS, \'e\' to edit the"),
