@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.12mdk
+Release: 0.13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -11,7 +11,7 @@ Requires: foomatic-db-engine
 %ifarch sparc sparc64 %{ix86} x86_64 amd64
 Requires: mkbootdisk
 %endif
-Conflicts: drakconf < 9.3-21mdk
+Conflicts: drakconf < 10-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.1-2mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
@@ -316,6 +316,28 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 13 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.13mdk
+- all tools: new banner style
+- add drakvpn (florin)
+- drakbackup: fix crash on file search, failure to report ftp error
+  (stew)
+- drakconnect:
+  o wizard:
+    * fix wireless network interfaces detection
+    * ask isp for ip and gateway by default (#7705)
+  o manage interface: (poulpy)
+    * fix adsl/eth confusion
+    * fix apply button
+- harddrake service: only probe for local printers
+- harddrake2:
+  o remove statusbar on interface team request
+  o do not force black color for fields values which badly conflict
+    with inverted accessibility themes
+- fix module dependancies problem because of 2.4/2.6 mappings, better
+  support 2.4 and 2.6 alltogether by keeping 2.4 names in modules.conf
+  (gc)
+- XFdrake: handle packages not found (#7786)
+
 * Thu Feb 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.12mdk
 - drakconnect:
   o preselect right protocol for ethernet though connections
@@ -332,7 +354,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o do not allow to step forward if no network card was found
     (workaround #7672)
 - keyboardrake: support 2.6.x kernel (pixel)
-- add drakvpn (florin)
 - drakbackup: misc changes (stew)
 - draksec: fix unable to save checks when config file is empty
 - harddrake: support more webcams
