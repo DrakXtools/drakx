@@ -513,7 +513,8 @@ sub getUPS() {
     my $POWER_USAGE = 0x840020;
     my $hiddev_find_application = sub {
         my ($fd, $usage) = @_;
-        my ($i, $ret) = 0;
+        my $i = 0;
+	my $ret;
         do { $i++ } while ($ret = ioctl($fd, c::HIDIOCAPPLICATION(), $i)) && $ret != $usage;
         return $ret == $usage ? 1 : 0;
     };
@@ -743,9 +744,14 @@ sub probeSerialDevices() {
     print STDERR "Please wait while probing serial ports...\n";
     #- start probing all serial ports... really faster than before ...
     #- ... but still take some time :-)
-    my %current; foreach (run_program::get_stdout('serial_probe')) {
-	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
-	$current{$1} = $2 if /^([^=]+)=(.*?)\s*$/;
+    my %current; 
+    foreach (run_program::get_stdout('serial_probe')) {
+	if (/^\s*$/) {
+	    $serialprobe{$current{DEVICE}} = { %current } if $current{DEVICE};
+	    %current = ();
+	} elsif (/^([^=]+)=(.*?)\s*$/) {
+	    $current{$1} = $2;
+	}
     }
 
     foreach (values %serialprobe) {
