@@ -1,3 +1,8 @@
+PACKAGE=drakxtools
+PKGVERSION:=$(shell rpm -q --qf '%{VERSION}\n' --specfile $(PACKAGE).spec|head -1)
+RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -1)
+TAG := $(shell echo "V$(PKGVERSION)_$(RELEASE)" | tr -- '-.' '__')
+
 include Makefile.config
 
 POFILES = $(shell ls share/po/*.po)
@@ -20,15 +25,15 @@ check:
 	perl -I. -Mlang -e 'lang::check'
 	perl -I. -Mkeyboard -e 'keyboard::check'
 
-tar-drakxtools: clean
+localcopy: clean
 	rm -rf standalone/pixmaps
 	$(MAKE) -C ../tools clean
-	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/rpcinfo-flushed.c tools/ddcprobe tools/serial_probe drakxtools
-	cd ../drakxtools ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
-	cd ../drakxtools ; perl -pi -e 's/^all: help/all:/' share/po/Makefile
-	cd ../drakxtools ; rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm */CVS ; mv Makefile.drakxtools Makefile
-	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt diskdrake c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security)
-	cd .. ; rm -rf drakxtools
+	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af tools/rpcinfo-flushed.c tools/ddcprobe tools/serial_probe $(PACKAGE)-$(PKGVERSION)
+	cd ../$(PACKAGE)-$(PKGVERSION) ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
+	cd ../$(PACKAGE)-$(PKGVERSION) ; perl -pi -e 's/^all: help/all:/' share/po/Makefile
+	cd ../$(PACKAGE)-$(PKGVERSION) ; rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm */CVS ; mv Makefile.drakxtools Makefile
+	cd .. ; tar cfj $(PACKAGE)-$(PKGVERSION).tar.bz2 --exclude CVS $(patsubst %,$(PACKAGE)-$(PKGVERSION)/%,Makefile Makefile.config Newt apps.net_monitor diskdrake c ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security)
+	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION)
 
 $(DIRS):
 	install -d auto
@@ -181,3 +186,40 @@ full_stage2:
 stage2:
 	$(MAKE) install_pms
 	$(ROOTDEST)/misc/make_mdkinst_stage2 $(DEST) $(ROOTDEST)/Mandrake/base/mdkinst_stage2
+
+# rules to build a test rpm
+
+localrpm: localdist buildrpm
+
+localsrpm: localdist buildsrpm
+
+localdist: cleandist localcopy
+
+cleandist:
+	rm -rf ../$(PACKAGE)-$(PKGVERSION) ../$(PACKAGE)-$(PKGVERSION).tar.bz2
+
+tar:
+	tar cvf ../$(PACKAGE)-$(PKGVERSION).tar ../$(PACKAGE)-$(PKGVERSION)
+	bzip2 -9vf ../$(PACKAGE)-$(PKGVERSION).tar
+	rm -rf ../$(PACKAGE)-$(PKGVERSION)
+
+buildrpm:
+	rpm -ta ../$(PACKAGE)-$(PKGVERSION).tar.bz2
+
+buildsrpm:
+	rpm -ts ../$(PACKAGE)-$(PKGVERSION).tar.bz2
+
+# rules to build a distributable rpm
+
+rpm: cvstag dist buildrpm
+
+srpm: cvstag dist buildsrpm
+
+dist: cleandist export tar
+
+export:
+	cd ..; cvs export -d $(PACKAGE)-$(PKGVERSION) -r $(TAG) $(PACKAGE)
+
+cvstag:
+	cvs tag $(CVSTAGOPT) $(TAG)
+
