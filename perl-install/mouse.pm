@@ -427,12 +427,13 @@ sub test_mouse_install {
     gtkadd($w->{window},
   	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
 		   gtksize(gtkset_usize($darea, $width+1, $height+1), $width+1, $height+1),
-		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 0),
+		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 1)
 		  ),
 	  );
-    $okcancel->set_uposition(7, $height-23);
-    Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1) });
+    $okcancel->set_uposition(7, $height-43);
+    Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1); $okcancel->draw(undef); });
     test_mouse($mouse, $w, $darea, $width, $height);
+    $w->{window}->set_usize(undef, $height+10);
     $w->sync; # HACK
     Gtk::Gdk->pointer_grab($darea->window, 1,
 			   [ 'pointer_motion_mask'],
@@ -479,9 +480,11 @@ sub test_mouse {
 								 $image, 0, 0,
 								 ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
 								 210, 350);
-				    $draw_text->(_("Please test the mouse"), $height - 80);
-				    $draw_text->(_("To activate the mouse,"), $height - 65) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-				    $draw_text->(_("MOVE YOUR WHEEL!"), $height - 50) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+				    $draw_text->(_("Please test the mouse"), $height - 120);
+				    $draw_text->(_("To activate the mouse,"), $height - 105) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+				    $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+				    return if $::isStandalone;
+				    $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
 				};
 
     my $paintButton = sub {
