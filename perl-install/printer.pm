@@ -437,7 +437,55 @@ sub read_configured_queues($) {
 	    }
 	    @{$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{options}} = @options;
 	}
+	# Construct an entry line for tree view in main window of
+	# printerdrake
+	make_menuentry($printer, $QUEUES[$i]->{'queuedata'}{'queue'});
     }
+}
+
+sub make_menuentry {
+    my ($printer, $queue) = @_;
+    my $spooler = $shortspooler_inv{$printer->{SPOOLER}};
+    my $connect = $printer->{configured}{$queue}{'queuedata'}{'connect'};
+    my $localremote;
+    if ($connect =~ m!^file:!) {
+	$localremote = _("Local Printers");
+    } else {
+	$localremote = _("Remote Printers");
+    }
+    my $queue = $printer->{configured}{$queue}{'queuedata'}{'queue'};
+    my $make = $printer->{configured}{$queue}{'queuedata'}{'make'};
+    my $model = $printer->{configured}{$queue}{'queuedata'}{'model'};
+    my $connection;
+    if ($connect =~ m!^file:/dev/lp(\d+)$!) {
+	my $number = $1;
+	$connection = _(" on parallel port \#%s", $number);
+    } elsif ($connect =~ m!^file:/dev/usb/lp(\d+)$!) {
+	my $number = $1;
+	$connection = _(", USB printer \#%s", $number);
+    } elsif ($connect =~ m!^file:(.+)$!) {
+	$connection = _(", printing to %s", $1);
+    } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
+	$connection = _("on LPD server \"%s\", printer \"%s\"", $2, $1);
+    } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
+	$connection = _(", TCP/IP host \"%s\", port \"%s\"", $1, $2);
+    } elsif (($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$!) ||
+	     ($connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$!) ||
+	     ($connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
+	$connection = _("on Windows server \"%s\", share \"%s\"", $1, $2);
+    } elsif (($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$!) ||
+	     ($connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$!) ||
+	     ($connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
+	$connection = _("on Novell server \"%s\", printer \"%s\"", $1, $2);
+    } elsif ($connect =~ m!^postpipe:(.+)$!) {
+	$connection = _(", using command %s", $1);
+    } else {
+	$connection = "";
+    }
+    my $sep = "!";
+    $printer->{configured}{$queue}{'queuedata'}{'menuentry'} = 
+	($::expert ? "$spooler$sep" : "") .
+	"$localremote$sep$queue: $make $model$connection";
 }
 
 sub read_printer_db(;$) {
@@ -684,6 +732,7 @@ sub read_cups_options ($) {
 #------------------------------------------------------------------------------
 
 sub read_cups_printer_list {
+    my ($printer) = $_[0];
     # This function reads in a list of all printers which the local CUPS
     # daemon currently knows, including remote ones.
     local *F;
@@ -695,12 +744,43 @@ sub read_cups_printer_list {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
 	    my $queuename = $1;
 	    my $comment = "";
-	    if ($2 =~ m!^ipp://([^/:]+)[:/]!) {
+	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
+		(!$printer->{configured}{$queuename})) {
 		$comment = _("(on %s)", $1);
 	    } else {
 		$comment = _("(on this machine)");
 	    }
 	    push (@printerlist, "$queuename $comment");
+	}
+    }
+    close F;
+    return @printerlist;
+}
+
+sub get_cups_remote_queues {
+    my ($printer) = $_[0];
+    # This function reads in a list of all remote printers which the local 
+    # CUPS daemon knows due to broadcasting of remote servers or 
+    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf/
+    local *F;
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"lpstat -v |" || return ();
+    my @printerlist = ();
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
+	    my $queuename = $1;
+	    my $comment = "";
+	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
+		(!$printer->{configured}{$queuename})) {
+		$comment = _("On CUPS server \"%s\"", $1);
+		my $sep = "!";
+		push (@printerlist,
+		      ($::expert ? _("CUPS") . $sep : "") .
+		      _("Remote Printers") . "$sep$queuename: $comment"
+		      . ($queuename eq $printer->{DEFAULT} ?
+			 _(" (Default)") : ()));
+	    }
 	}
     }
     close F;
@@ -1147,6 +1227,9 @@ sub lphelp_output {
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$lphelp $queue |";
     $helptext = join("", <F>);
     close F;
+    if (!$helptext || ($helptext eq "")) {
+	$helptext = "Option list not available!\n";
+    }
     return $helptext;
 }
 
