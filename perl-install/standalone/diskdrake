@@ -27,7 +27,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use common;
-use diskdrake_interactive;
+use diskdrake::interactive;
 use interactive;
 use detect_devices;
 use fsedit;
@@ -43,13 +43,20 @@ if ($::isEmbedded) {
   print "mcc pid\t$::CCPID\n";
 }
 
-local $_ = join '', @ARGV;
+my %options = map { /-?-?(.*)/ => 1 } @ARGV;
+$::expert = delete $options{expert};
+$::testing = delete $options{testing};
 
-/-h/ and die "usage: diskdrake [--expert] [--testing] [--fileshare]\n";
+my @types = qw(hd nfs smb removable fileshare);
+my $type = 'hd';
+foreach (@types) {
+    if (delete $options{$_}) {
+	$type = $_;
+	last;
+    }
+}
+%options and die "usage: diskdrake [--expert] [--testing] [--{" . join(",", @types) . "}]\n";
 
-$::expert = /-expert/;
-$::testing = /-testing/;
-my $fileshare = /-fileshare/;
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
@@ -58,24 +65,27 @@ if ($>) {
 
 my $in = 'interactive'->vnew('su');
 
-if ($fileshare) {
+if ($type eq 'fileshare') {
     any::fileshare_config($in);
     $in->exit(0);
 }
 
-my ($all_hds) =
-    catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
-    sub {
-	my $err = formatError($@);
-	if ($err =~ s/ask_before_blanking://) {
-	    $in->ask_okcancel(_("Error"),
+my $all_hds = do {
+    if ($type eq 'hd') {
+	catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
+	  sub {
+	      my $err = formatError($@);
+	      if ($err =~ s/ask_before_blanking://) {
+		  $in->ask_okcancel(_("Error"),
 [_("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"), $err]);
-	} else {
-	    $in->ask_warn('', $err);
-	    1;
-        }
-    };
+              } else {
+	          $in->ask_warn('', $err);
+		  1;
+	      }
+	  };
+    } else { fsedit::empty_all_hds() }
+};
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_all_fstab($all_hds) ];
@@ -85,10 +95,17 @@ fs::get_raw_hds('', $all_hds);
 fs::merge_info_from_fstab([ fsedit::get_really_all_fstab($all_hds) ]);
 fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
 
-if ($ENV{TEST_DEFAULT_OPTIONS}) {
-    fs::set_all_default_options($all_hds);
-    fs::set_removable_mntpoints($all_hds);
+$all_hds->{current_fstab} = fs::fstab_to_string($all_hds);
+
+if ($type eq 'hd') {
+    diskdrake::interactive::main($in, $all_hds);
+} elsif ($type eq 'removable') {
+    require diskdrake::removable;
+    diskdrake::removable::main($in, $all_hds);
+} else {
+    $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive_gtk');
+    require diskdrake::smbnfs_gtk;
+    diskdrake::smbnfs_gtk::main($in, $all_hds, $type);
 }
-diskdrake_interactive::main($in, $all_hds);
 
 $in->exit(0);
