@@ -18,7 +18,7 @@ use loopback;
 
 
 sub read_fstab {
-    my ($prefix, $file, $all_options) = @_;
+    my ($prefix, $file, @reading_options) = @_;
 
     my %comments;
     my $comment;
@@ -68,7 +68,7 @@ sub read_fstab {
 	my $h = { 
 		 device => $dev, mntpoint => $mntpoint, type => $type, 
 		 options => $options, comment => $comment,
-		 if_($all_options, freq => $freq, passno => $passno),
+		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
 
 	if ($dev =~ /^LABEL=/) {
@@ -91,7 +91,7 @@ sub read_fstab {
 	    }
 	}
 
-	if ($h->{options} =~ /credentials=/) {
+	if ($h->{options} =~ /credentials=/ && !member('verbatim_credentials', @reading_options)) {
 	    require network::smb;
 	    #- remove credentials=file with username=foo,password=bar,domain=zoo
 	    #- the other way is done in fstab_to_string
@@ -188,16 +188,14 @@ sub merge_info_from_fstab {
 	} else {
 	    1;
 	}
-    } read_fstab($prefix, "/etc/fstab", 'all_options');
+    } read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
 
     merge_fstabs($loose, $fstab, @l);
 }
 
 sub prepare_write_fstab {
-    my ($all_hds, $prefix, $keep_smb_credentials) = @_;
+    my ($fstab, $prefix, $keep_smb_credentials) = @_;
     $prefix ||= '';
-
-    my @l_in = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
 
     my %new;
     my @smb_credentials;
@@ -255,21 +253,23 @@ sub prepare_write_fstab {
 	} else {
 	    ()
 	}
-    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } @l_in;
+    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } @$fstab;
 
     join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
 }
 
 sub fstab_to_string {
     my ($all_hds, $prefix) = @_;
-    my ($s, undef) = prepare_write_fstab($all_hds, $prefix, 'keep_smb_credentials');
+    my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
+    my ($s, undef) = prepare_write_fstab($fstab, $prefix, 'keep_smb_credentials');
     $s;
 }
 
 sub write_fstab {
     my ($all_hds, $prefix) = @_;
     log::l("writing $prefix/etc/fstab");
-    my ($s, $smb_credentials) = prepare_write_fstab($all_hds, $prefix, '');
+    my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
+    my ($s, $smb_credentials) = prepare_write_fstab($fstab, $prefix, '');
     output("$prefix/etc/fstab", $s);
     network::smb::save_credentials($_) foreach @$smb_credentials;
 }
@@ -513,15 +513,10 @@ sub set_removable_mntpoints {
 sub get_raw_hds {
     my ($prefix, $all_hds) = @_;
 
-    $all_hds->{raw_hds} = 
-      [ 
-       detect_devices::floppies(), 
-       detect_devices::cdroms__faking_ide_scsi(), 
-       detect_devices::zips__faking_ide_scsi(),
-      ];
+    $all_hds->{raw_hds} = [ detect_devices::removables() ];
     get_major_minor(@{$all_hds->{raw_hds}});
 
-    my @fstab = read_fstab($prefix, "/etc/fstab", 'all_options');
+    my @fstab = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
     $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{davs} = [ grep { isThisFs('davfs', $_) } @fstab ];
