@@ -585,7 +585,7 @@ sub install2::startMove {
     foreach (fsedit::get_really_all_fstab($o->{all_hds})) {
 	if (isSwap($_)) {
 	    eval { swap::swapon($_->{device}) };
-	} elsif ($_->{mntpoint} && !$_->{isMounted} && $_->{options} !~ /\bnoauto\b/) {
+	} elsif ($_->{mntpoint} && !$_->{isMounted} && !$::noauto) {
 	    mkdir_p($_->{mntpoint});
 	    run_program::run('mount', $_->{mntpoint});
 	}
