@@ -202,7 +202,7 @@ sub manage {
     $notebook->set_property('show-border', 0);
 
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
-    my %name = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
+    my %name = network::ethernet::get_eth_cards_names(@all_cards);
     foreach (keys %name) {
 	my $dev = /eth|ath|wlan/ ? $name{$_} : $_;
 	$p->{$dev} = {
@@ -657,7 +657,7 @@ sub del_intf() {
       $in->exit(0);
     }
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
-    my %ethernet_names = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
+    my %ethernet_names = network::ethernet::get_eth_cards_names(@all_cards);
     my $wiz =
       {
        defaultimage => "drakconnect.png",

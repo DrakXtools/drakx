@@ -128,7 +128,7 @@ sub real_main {
           require network::ethernet;
           modules::interactive::load_category($in, $modules_conf, network::ethernet::get_eth_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
-          %eth_intf = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
+          %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
           require list_modules;
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
             grep { to_bool($is_wireless) == c::isNetDeviceWirelessAware($_->[0]) } @all_cards;

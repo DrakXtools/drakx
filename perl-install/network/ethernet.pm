@@ -79,7 +79,7 @@ sub get_eth_cards {
 }
 
 sub get_eth_cards_names {
-    my ($modules_conf, @all_cards) = @_;
+    my (@all_cards) = @_;
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
 }
 

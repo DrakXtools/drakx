@@ -71,7 +71,7 @@ sub default_interfaces {
 
 	my $modules_conf = modules::any_conf->read;
 my @all_cards = network::ethernet::get_eth_cards($modules_conf);
-my %net_devices = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
+my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
 put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
 
 	$in->ask_from('',
