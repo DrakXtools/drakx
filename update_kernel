@@ -100,7 +100,8 @@ for i in $ALL_KERNELS/*; do
 	kern=`basename $i`
 	[ -e $i/cardmgr ] && (
 	    cd $i/cardmgr
-	    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
+	    touch main.c
+	    nm cardmgr.o | grep -q cardmgr_main && echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
 	    gcc -o cardmgr-$kern *.o main.c
 	)
 	(
@@ -117,7 +118,7 @@ done
 
 
 install_kernel() {
- v=2.4.2-BOOT5
+ v=2.4.3-BOOT4
  scp kenobi:~chmou/work/kernel/archive/kernel-$v.tar.bz2 /tmp
  cd ~/gi/all.kernels ; rm -rf $v ; mkdir $v ; cd $v ; tar xfj /tmp/kernel-$v.tar.bz2 
  cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
@@ -125,3 +126,4 @@ install_kernel() {
  scp images/network.rdz kenobi:/tftpboot
  cp -f ~/gi/all.modules/modules.cz-$v /export/Mandrake/mdkinst/lib/modules.cz
 }
+# scp kenobi:~mbadaire/kernel/boot/archive/kernel-$v.tar.bz2 /tmp
