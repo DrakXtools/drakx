@@ -108,7 +108,7 @@ static enum return_type try_with_device(char *dev_name)
 
 	strcpy(device_fullname, "/dev/");
 	strcat(device_fullname, choice);
-	
+
 	if (my_mount(device_fullname, disk_own_mount, "ext2") == -1 &&
 	    my_mount(device_fullname, disk_own_mount, "vfat") == -1 &&
 	    my_mount(device_fullname, disk_own_mount, "reiserfs") == -1) {
@@ -140,7 +140,7 @@ static enum return_type try_with_device(char *dev_name)
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
 		if (lomount(location_full, IMAGE_LOCATION)) {
 			error_message("Could not mount ISO image.");
-			umount(IMAGE_LOCATION);
+			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
 	} else
@@ -154,11 +154,11 @@ static enum return_type try_with_device(char *dev_name)
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);
-			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			error_message("Could not load program into memory.");
+			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
 	} else {
@@ -170,7 +170,6 @@ static enum return_type try_with_device(char *dev_name)
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);
-			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
 		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
@@ -178,7 +177,6 @@ static enum return_type try_with_device(char *dev_name)
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
 			umount(disk_own_mount);
-			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
 		log_message("found the " DISTRIB_NAME " Installation, good news!");

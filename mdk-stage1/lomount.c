@@ -70,8 +70,10 @@ set_loop (const char *device, const char *file)
 	if ((ffd = open (file, mode)) < 0)
 		return 1;
   
-	if ((fd = open (device, mode)) < 0)
+	if ((fd = open (device, mode)) < 0) {
+		close(ffd);
 		return 1;
+	}
 
 	memset(&loopinfo, 0, sizeof (loopinfo));
 	strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
@@ -84,17 +86,22 @@ set_loop (const char *device, const char *file)
 	 * passwd etc being swapped out and left somewhere on disk.
 	 */
   
-	if(mlockall(MCL_CURRENT|MCL_FUTURE)) {
-		log_message("CRITICAL Couldn't lock into memory! %s (memlock)", strerror(errno));
-		return 1;
-	}
+	  if(mlockall(MCL_CURRENT|MCL_FUTURE)) {
+		  log_message("CRITICAL Couldn't lock into memory! %s (memlock)", strerror(errno));
+		  return 1;
+	  }
 #endif
 
-	if (ioctl(fd, LOOP_SET_FD, ffd) < 0)
+	if (ioctl(fd, LOOP_SET_FD, ffd) < 0) {
+		close(fd);
+		close(ffd);
 		return 1;
-  
+	}
+
 	if (ioctl(fd, LOOP_SET_STATUS, &loopinfo) < 0) {
 		(void) ioctl (fd, LOOP_CLR_FD, 0);
+		close(fd);
+		close(ffd);
 		return 1;
 	}
 
