@@ -321,233 +321,139 @@ sub reallyChooseGroups {
 
 sub choosePackagesTree {
     my ($o, $packages) = @_;
+    my $common; $common = { get_status => sub {
+				my $size = pkgs::selectedSize($packages);
+				_("Total size: %d / %d MB",
+				  pkgs::correctSize($size / sqr(1024)),
+				  install_any::getAvailableSpace($o) / sqr(1024));
+			    },
+			    node_state => sub {
+				my $p = pkgs::packageByName($packages,$_[0]) or return;
+				pkgs::packageMedium($p)->{selected} or return;
+				pkgs::packageFlagBase($p) and return 'base';
+				pkgs::packageFlagInstalled($p) and return 'installed';
+				pkgs::packageFlagSelected($p) and return 'selected';
+				return 'unselected';
+			    },
+			    build_tree => sub {
+				my ($add_node, $flat) = @_;
+				if ($flat) {
+				    foreach (sort grep { my $pkg = pkgs::packageByName($packages, $_);
+							 pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}}) {
+					$add_node->($_, undef);
+				    }
+				} else {
+				    foreach my $root (@{$o->{compssUsersSorted}}) {
+					my (%fl, @firstchoice, @others);
+					#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
+					$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
+					foreach my $p (values %{$packages->{names}}) {
+					    my ($rate, @flags) = pkgs::packageRateRFlags($p);
+					    next if !($rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
+					    $rate >= 3 ?
+					      push(@firstchoice, pkgs::packageName($p)) :
+						push(@others,      pkgs::packageName($p));
+					}
+					$add_node->($_, $root                   ) foreach sort @firstchoice;
+					$add_node->($_, $root . '|' . _("Other")) foreach sort @others;
+				    }
+				}
+			    },
+			    get_info => sub {
+				my $p = pkgs::packageByName($packages, $_[0]) or return '';
+				pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($p));
+				pkgs::packageHeader($p) or die;
+
+				my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?
+									  5 : pkgs::packageRate($p)});
+
+				my $info = $@ ? _("Bad package") :
+				  (_("Name: %s\n", pkgs::packageName($p)) .
+				   _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
+				   _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
+				   ($imp && _("Importance: %s\n", $imp)) . "\n" .
+				   formatLines(c::headerGetEntry(pkgs::packageHeader($p), 'description')));
+				pkgs::packageFreeHeader($p);
+				return $info;
+			    },
+			    toggle_nodes => sub {
+				my $set_state = shift @_;
+				my @n = map { pkgs::packageByName($packages, $_) } @_;
+				my %l;
+				my $isSelection = !pkgs::packageFlagSelected($n[0]);
+				foreach (@n) {
+				    pkgs::togglePackageSelection($packages, $_, my $l = {});
+				    @l{grep {$l->{$_}} keys %$l} = ();
+				}
+				if (my @l = keys %l) {
+				    #- check for size before trying to select.
+				    my $size = pkgs::selectedSize($packages);
+				    foreach (@l) {
+					my $p = $packages->{names}{$_};
+					pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
+				    }
+				    if (pkgs::correctSize($size / sqr(1024)) > install_any::getAvailableSpace($o) / sqr(1024)) {
+					return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
+				    }
+
+				    @l > @n && $common->{state}{auto_deps} and
+				      $o->ask_okcancel('', [ $isSelection ? 
+							     _("The following packages are going to be installed") :
+							     _("The following packages are going to be removed"),
+							     join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
+				    if ($isSelection) {
+					pkgs::selectPackage($packages, $_) foreach @n;
+				    } else {
+					pkgs::unselectPackage($packages, $_) foreach @n;
+				    }
+				    foreach (@l) {
+					my $p = pkgs::packageByName($packages, $_);
+					$set_state->($_, pkgs::packageFlagSelected($p) ? 'selected' : 'unselected');
+				    }
+				} else {
+				    $o->ask_warn('', _("You can't select/unselect this package"));
+				}
+			    },
+			    grep_allowed_to_toggle => sub {
+				grep { !pkgs::packageFlagBase(pkgs::packageByName($packages, $_)) } @_;
+			    },
+			    grep_unselected => sub {
+				grep { !pkgs::packageFlagSelected(pkgs::packageByName($packages, $_)) } @_;
+			    },
+			    check_interactive_to_toggle => sub {
+				my $p = pkgs::packageByName($packages, $_[0]) or return;
+				if (pkgs::packageFlagBase($p)) {
+				    $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
+				} elsif (pkgs::packageFlagInstalled($p)) {
+				    $o->ask_warn('', _("You can't unselect this package. It is already installed"));
+				} elsif (pkgs::packageFlagUpgrade($p)) {
+				    if ($::expert) {
+					if (pkgs::packageFlagSelected($p)) {
+					    $o->ask_yesorno('', _("This package must be upgraded\nAre you sure you want to deselect it?")) or return;
+					}
+					return 1;
+				    } else {
+					$o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
+				    }
+				} else { return 1; }
+				return;
+			    },
+			    auto_deps => _("Show automatically selected packages"),
+			    ok => _("Install"),
+			    cancel => undef,
+			    icons => [ { icon         => 'floppy',
+					 help         => _("Load/Save on floppy"),
+					 wait_message => _("Updating package selection"),
+					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1; },
+				       }, ],
+			    state => {
+				      auto_deps => 1,
+				      flat      => 0,
+				     },
+			  };
 
     $o->set_help('choosePackagesTree');
-    my ($curr, $parent, $info_widget, $w_size, $go, $idle, $flat);
-    my $auto_deps = 1;
-    my (%wtree, %ptree);
-
-    my $w = my_gtk->new('');
-    my $details = new Gtk::VBox(0,0);
-    my $tree = Gtk::CTree->new(3, 0);
-    $tree->set_selection_mode('browse');
-    $tree->set_column_width(0, 200);
-    $tree->set_column_auto_resize($_, 1) foreach 1..2;
-
-    gtkadd($w->{window}, 
-	   gtkpack_(new Gtk::VBox(0,5),
-		    0, _("Choose the packages you want to install"),
-		    1, gtkpack(new Gtk::HBox(0,0),
-			       createScrolledWindow($tree),
-			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), $::windowwidth - 490, 0),
-				      createScrolledWindow($info_widget = new Gtk::Text),
-				     )),
-		    0, my $l = new Gtk::HBox(0,15),
-		    0, gtkpack(new Gtk::HBox(0,10),
-			       $go = gtksignal_connect(new Gtk::Button(_("Install")), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
-			      )
-    ));
-    gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));
-    gtkpack__($l, gtksignal_connect(gtkset_active(new Gtk::CheckButton(_("Show automatically selected packages")), $auto_deps), clicked => sub { invbool \$auto_deps }));
-    $l->pack_end($w_size = new Gtk::Label(''), 0, 1, 20);
-
-    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
-    $go->grab_focus;
-    $w->{rwindow}->show_all;
-
-    my $pix_base     = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-base.png") ];
-    my $pix_selected = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-selected.png") ];
-    my $pix_unselect = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-unselected.png") ];
-    my $pix_semisele = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-semiselected.png") ];
-    my $pix_installed= [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-installed.png") ];
-
-    my $add_parent; $add_parent = sub {
-	$_[0] or return undef;
-	if (my $w = $wtree{$_[0]}) { return $w }
-	my $s; foreach (split '\|', $_[0]) {
-	    my $s2 = $s ? "$s|$_" : $_;
-	    $wtree{$s2} ||= do {
-		my $n = $tree->insert_node($s ? $add_parent->($s) : undef, undef, [$_, '', ''], 5, (undef) x 4, 0, 0);
-		$n;
-	    };
-	    $s = $s2;
-	}
-	$tree->node_set_pixmap($wtree{$s}, 1, $pix_semisele->[0], $pix_semisele->[1]);
-	$wtree{$s};
-    };
-    my $add_node = sub {
-	my ($leaf, $root) = @_;
-	my $p = pkgs::packageByName($packages,$leaf) or return;
-	pkgs::packageMedium($p)->{selected} or return;
-	my $node = $tree->insert_node($add_parent->($root), 
-				      undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
-	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : pkgs::packageFlagInstalled($p) ? $pix_installed : $pix_unselect;
-	$tree->node_set_pixmap($node, 1, $pix->[0], $pix->[1]);
-	push @{$ptree{$leaf}}, $node;
-    };
-    my $add_nodes = sub {
-	%ptree = %wtree = ();
-
-	$tree->freeze;
-	while (1) { $tree->remove_node($tree->node_nth(0) || last) }
-
-	if ($flat = $_[0]) {
-	    $add_node->($_, undef) foreach sort grep { my $pkg = pkgs::packageByName($packages, $_);
-						       pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}};
-	} else {
-	    foreach my $root (@{$o->{compssUsersSorted}}) {
-		my (%fl, @firstchoice, @others);
-		#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
-		$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
-		foreach my $p (values %{$packages->{names}}) {
-		    my ($rate, @flags) = pkgs::packageRateRFlags($p);
-		    next if !($rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
-		    $rate >= 3 ?
-		      push(@firstchoice, pkgs::packageName($p)) :
-		      push(@others,      pkgs::packageName($p));
-		}
-		$add_node->($_, $root                   ) foreach sort @firstchoice;
-		$add_node->($_, $root . '|' . _("Other")) foreach sort @others;
-	    }
-	}
-	$tree->thaw;
-    };
-    $add_nodes->($flat);
-
-    my $update_size = sub {
-	my $size = pkgs::selectedSize($packages);
-	$w_size->set(_("Total size: %d / %d MB", 
-		       pkgs::correctSize($size / sqr(1024)),
-		       install_any::getAvailableSpace($o) / sqr(1024)));
-    };
-
-    my %toolbar = my @toolbar = 
-      (
-       floppy =>  [ _("Load/Save on floppy") , sub { $o->loadSavePackagesOnFloppy($packages);
-						     my $w = $o->wait_message(_("Package selection"),
-									      _("Updating package selection"));
-						     $add_nodes->($flat); &$update_size; } ],
-       ftout  =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
-       ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
-       reload =>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
-      );
-    $toolbar->set_button_relief("none");
-    foreach (grep_index { $::i % 2 == 0 } @toolbar) {
-	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkpng("$ENV{SHARE_PATH}/$_.png")),
-			  clicked => $toolbar{$_}[1]);
-    }
-    $toolbar->set_style("icons");
-
-    my $display_info = sub {
-	my $p = pkgs::packageByName($packages, $curr) or return gtktext_insert($info_widget, '');
-	pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($p));
-	pkgs::packageHeader($p) or die;
-
-	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?
-						  5 : pkgs::packageRate($p)});
-
-	gtktext_insert($info_widget, $@ ? _("Bad package") :
-		       _("Name: %s\n", pkgs::packageName($p)) .
-		       _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
-		       _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
-		       ($imp && _("Importance: %s\n", $imp)) . "\n" .
-		       formatLines(c::headerGetEntry(pkgs::packageHeader($p), 'description')));
-	pkgs::packageFreeHeader($p);
-	#c::headerFree(delete $p->[$HEADER]);
-	0;
-    };
-
-    my $select = sub {
-	my %l;
-	my $isSelection = !pkgs::packageFlagSelected($_[0]);
-	foreach (@_) {
-	    pkgs::togglePackageSelection($packages, $_, my $l = {});
-	    @l{grep {$l->{$_}} keys %$l} = ();
-	}
-	if (my @l = keys %l) {
-	    #- check for size before trying to select.
-	    my $size = pkgs::selectedSize($packages);
-	    foreach (@l) {
-		my $p = $packages->{names}{$_};
-		pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
-	    }
-	    if (pkgs::correctSize($size / sqr(1024)) > install_any::getAvailableSpace($o) / sqr(1024)) {
-		return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
-	    }
-
-	    @l > @_ && $auto_deps and $o->ask_okcancel('', [ $isSelection ? 
-							      _("The following packages are going to be installed") :
-							      _("The following packages are going to be removed"),
-							      join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
-	    $isSelection ? pkgs::selectPackage($packages, $_) : pkgs::unselectPackage($packages, $_) foreach @_;
-	    foreach (@l) {
-		my $p = $packages->{names}{$_};
-		my $pix = pkgs::packageFlagSelected($p) ? $pix_selected : $pix_unselect;
-		$tree->node_set_pixmap($_, 1, $pix->[0], $pix->[1]) foreach @{$ptree{$_}};
-	    }
-	    &$update_size;
-	} else {
-	    $o->ask_warn('', _("You can't select/unselect this package"));
-	}
-    };
-    my $children = sub { map { $packages->{names}{($tree->node_get_pixtext($_, 0))[0]} } gtkctree_children($_[0]) };
-    my $toggle = sub {
-	if (ref $curr && ! $_[0]) {
-	    $tree->toggle_expansion($curr);
-	} else {
-	    if (ref $curr) {
-		my @l = grep { !pkgs::packageFlagBase($_) } $children->($curr) or return;
-		my @unsel = grep { !pkgs::packageFlagSelected($_) } @l;
-		my @p = @unsel ?
-		  @unsel : # not all is selected, select all
-		    @l;
-		$select->(@p);
-		$parent = $curr;
-	    } else {
-		my $p = $packages->{names}{$curr} or return;
-		if (pkgs::packageFlagBase($p)) {
-		    return $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
-		} elsif (pkgs::packageFlagInstalled($p)) {
-		    return $o->ask_warn('', _("You can't unselect this package. It is already installed"));
-		} elsif (pkgs::packageFlagUpgrade($p)) {
-		    if ($::expert) {
-			if (pkgs::packageFlagSelected($p)) {
-			    $o->ask_yesorno('', _("This package must be upgraded\nAre you sure you want to deselect it?")) or return;
-			}
-		    } else {
-			return $o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
-		    }
-		}
-		$select->($p);
-	    }
-	    if (my @l = $children->($parent)) {
-		my $nb = grep { pkgs::packageFlagSelected($_) } @l;
-		my $pix = $nb==0 ? $pix_unselect : $nb<@l ? $pix_semisele : $pix_selected;
-		$tree->node_set_pixmap($parent, 1, $pix->[0], $pix->[1]);
-	    }
-	}
-    };
-
-    $tree->signal_connect(key_press_event => sub {
-        my ($w, $e) = @_;
-	my $c = chr($e->{keyval} & 0xff);
-	$toggle->(0) if $e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
-	1;
-    });
-    $tree->signal_connect(tree_select_row => sub {
-	Gtk->timeout_remove($idle) if $idle;
-
-	if ($_[1]->row->is_leaf) {
-	    ($curr) = $tree->node_get_pixtext($_[1], 0);
-	    $parent = $_[1]->row->parent;
-	    $idle = Gtk->timeout_add(100, $display_info);
-	} else {
-	    $curr = $_[1];
-	}
-	$toggle->(1) if $_[2] == 1;
-    });
-    &$update_size;
-    $w->main;
+    $o->ask_browse_tree_info('', _("Choose the packages you want to install"), $common);
 }
 
 #------------------------------------------------------------------------------
