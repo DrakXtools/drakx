@@ -556,7 +556,7 @@ sub wpa_supplicant_add_network {
             if (/^\s*(\w+)=(.*?)(\s*#.*)?$/) {
                 push @{$network{entries}}, { key => $1, value => $2, comment => $3 };
                 $1 eq 'ssid' and $network{ssid} = $2;
-            } elsif (/^·*\}/) {
+            } elsif (/^\}/) {
                 #- end of network block, write it
                 $s .= "network={$network{comment}\n";
                 my $update = $network{ssid} eq $new_network->{ssid};
