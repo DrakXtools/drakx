@@ -2287,7 +2287,7 @@ sub configure_hpoj {
 	"\n" .
 	"# The format version of this file:\n" .
 	"#   ptal-init ignores devices with incorrect/missing versions.\n" .
-	"init.version=1\n";
+	"init.version=2\n";
 
     # Write model string.
     if ($model_long !~ /\S/) {
