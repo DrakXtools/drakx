@@ -1,3 +1,74 @@
+2004/03/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: Gnome Low-Saxon translations use "nds_DE", putting it on
+	LANGUAGE
+
+2004/03/18  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: new helper function may_set_icon that takes care of missing
+	wiz_default_up during install
+
+	* partition_table/dos.pm: not guessing a geometry when default_ok is no
+	big deal
+
+2004/03/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: only warn about the fact we need 2.4.x kernel
+	when we're under 2.6.x
+
+	* network/adsl.pm: only kill pppoa for sagem modem (eg for bewan, we use
+	pppoa plugin for
+	ppp)
+	fix bewan support by providing an ad-how /etc/ppp/options
+
+	* Makefile.config: reput back drakups
+
+	* share/rpmsrate: install kernel-2.4.x for pci modems whose binary driver
+	isn't ported
+	on 2.6.x
+
+2004/03/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po: chinese names for countries
+
+	* share/po/uk.po: updated Ukrainian file
+
+	* share/po/mn.po: updated po files
+
+2004/03/17  Pixel  <pixel at mandrakesoft.com>
+
+	* install_gtk.pm: enlarge steps window (no pb since the window is
+	invisible) (bugzilla #8985)
+
+	* standalone/diskdrake: add "diskdrake
+	--change-geometry=<device>=[<cylinders>,]<heads>,<sectors>" to
+	allow forcing the geometry used in the partition table. This allows
+	helping
+	poor Windows booting using old int13 function 2. This should work when
+	Windows
+	has not been resized.
+
+2004/03/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: do not alter oss<->alsa drivers mapping table
+	(olivier blin, #8501)
+	When current driver doesn't match current sound card (because sound
+	card has been replaced for example), draksound allows to choose the
+	driver between current driver and its alternatives, but does not
+	propose default driver and alternatives for current sound card. So
+	available drivers don't match current sound card (olivier blin, #8501)
+
+	* standalone/drakedm: fix dm restart
+
+	* standalone/service_harddrake: remove /etc/asound.state *before*
+	restarting sound service
+
+	* drakxtools.spec: 10-24mdk
+
+2004/03/17  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: community install logo
+
 2004/03/17  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/po/fr.po: Update advertising translations
@@ -29360,7 +29431,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.911 2004/03/17 13:54:30 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.912 2004/03/17 16:51:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
