@@ -454,7 +454,8 @@ sub set_authentication {
 	    $f->();
 	} 'configureNetwork';
     };
-    any::set_authentication($o, $o->{netc}, $o->{authentication} ||= {}, $when_network_is_up);
+    require authentication;
+    authentication::set($o, $o->{netc}, $o->{authentication} ||= {}, $when_network_is_up);
 }
 
 sub killCardServices() {

@@ -1126,7 +1126,8 @@ sub setRootPassword {
     $sup->{password2} ||= $sup->{password} ||= "";
 
     if ($o->{security} >= 1 || $clicked) {
-        my $authentication_kind = any::authentication2authentication_kind($o->{authentication} ||= {});
+	require authentication;
+        my $authentication_kind = authentication::to_kind($o->{authentication} ||= {});
 
 	$o->ask_from_({
 	 title => N("Set root password and network authentication methods"), 
@@ -1145,10 +1146,10 @@ sub setRootPassword {
         } } }, [
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$authentication_kind, list => [ any::authentication_kinds() ], format => \&any::authentication_kind2description, advanced => 1 },
+{ label => N("Authentication"), val => \$authentication_kind, list => [ authentication::kinds() ], format => \&authentication::kind2description, advanced => 1 },
         ]) or delete $sup->{password};
 
-	any::ask_authentification_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
+	authentication::ask_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
     }
     install_steps::setRootPassword($o);
 }
