@@ -310,8 +310,9 @@ sub getCompaqSmartArray() {
 	my ($name) = m|/(.*)|;
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
 	    foreach (cat_($f)) {
-		if (my ($device) = m|^\s*($name/.*?):|) {
-		    push @idi, { device => $device, prefix => $device . 'p', info => "Compaq RAID logical disk",
+                if (my ($raw_device) = m|^\s*($name/.*?):|) {
+                    my $device = -d "/dev/$raw_device" ? "$raw_device/disc" : $raw_device;
+                    push @idi, { device => $device, prefix => $raw_device . 'p', info => "Compaq RAID logical disk",
 				 media_type => 'hd', bus => 'ida' };
 		}
 	    }
