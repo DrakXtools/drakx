@@ -1,0 +1,7 @@
+# Logrotate file for drakxtools-http RPM
+
+/var/log/drakxtools_http.log {
+    weekly
+    notifempty
+    missingok
+}

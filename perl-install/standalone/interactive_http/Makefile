@@ -9,6 +9,7 @@ install:
 	install -D miniserv.init $(PREFIX)/etc/init.d/drakxtools_http
 	install -D -m 644 miniserv.conf $(PREFIX)/etc/drakxtools_http.conf
 	install -D -m 644 miniserv.pam $(PREFIX)/etc/pam.d/miniserv
+	install -D -m 644 miniserv.logrotate $(PREFIX)/etc/logrotate.d/drakxtools_http
 
 	install -d $(DATADIR)/$(FNAME)/www
 	install -m 644 miniserv.pl miniserv.pem miniserv.users $(DATADIR)/$(FNAME)
