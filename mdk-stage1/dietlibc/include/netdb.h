@@ -72,4 +72,19 @@ struct protoent *getprotobynumber(int proto) __THROW;
 void setprotoent(int stayopen) __THROW;
 void endprotoent(void) __THROW;
 
+
+/* Description of data base entry for a single network.  NOTE: here a
+   poor assumption is made.  The network number is expected to fit
+   into an unsigned long int variable.  */
+struct netent
+{
+  char *n_name;			/* Official name of network.  */
+  char **n_aliases;		/* Alias list.  */
+  int n_addrtype;		/* Net address type.  */
+  uint32_t n_net;		/* Network number.  */
+};
+
+extern struct netent *getnetbyname (__const char *__name) __THROW;
+
+
 #endif
