@@ -38,6 +38,7 @@ install:
 	mv -f $(SBINDEST)/drakbug $(BINDEST)
 	mv -f $(SBINDEST)/drakhelp $(BINDEST)
 	mv -f $(SBINDEST)/localedrake $(BINDEST)
+	mv -f $(SBINDEST)/net_applet $(BINDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
