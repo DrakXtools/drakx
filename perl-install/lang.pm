@@ -199,18 +199,18 @@ my %charsets = (
 #- Functions
 #-######################################################################################
 
-sub list { map { $_->[0] } values %languages }
+sub list { sort { $a cmp $b } map { $_->[0] } values %languages }
 sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
 sub text2lang {
     my ($t) = @_;
-    while (my ($k, $v) = each %languages) {
-	lc($v->[0]) eq lc($t) and return $k;
+    foreach (keys %languages) {
+	lc($languages{$_}[0]) eq lc($t) and return $_;
     }
     die "unknown language $t";
 }
 
 sub set {
-    my ($lang, $langs) = @_;
+    my ($lang) = @_;
 
     if ($lang) {
 	#- use extract_archive that follow symlinks and expand directory.
@@ -231,7 +231,6 @@ sub set {
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 #- apparently autoconf/automake doesn't like LINGUAS having a list of values
 #-	$ENV{LINGUAS}   = $languages{$lang}[3];
-	set_langs($langs || [$lang]);
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -243,9 +242,11 @@ sub set {
 }
 
 sub set_langs {
-    my ($l) = @_;
+    my ($l) = @_; 
+    $l or return;
     $ENV{RPM_INSTALL_LANG} = member('all', @$l) ? 'all' :
       join ':', uniq(map { substr($languages{$_}[2], 0, 2) } @$l);
+    log::l("RPM_INSTALL_LANG: $ENV{RPM_INSTALL_LANG}");
 }
 
 sub write {

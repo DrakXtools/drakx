@@ -111,8 +111,8 @@ sub entry {
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
 		   "tty"     => [ c::S_IFCHR(),  5, 0 ],
-#		   "usbmouse"=> [ c::S_IFCHR(), 10, 32], #- aka hidbp-mse-0
-		   "usbmouse"=> [ c::S_IFCHR(), 13, 32], #- aka /dev/usb/usbmouse0
+		   "usbmouse"=> [ c::S_IFCHR(), 10, 32], #- aka hidbp-mse-0
+#		   "usbmouse"=> [ c::S_IFCHR(), 13, 32], #- aka /dev/usb/usbmouse0
 		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
 	       }}{$_} or die "unknown device $_" };
     }

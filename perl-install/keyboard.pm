@@ -166,8 +166,8 @@ sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 sub text2keyboard {
     my ($t) = @_;
-    while (my ($k, $v) = each %keyboards) {
-        lc($v->[0]) eq lc($t) and return $k;
+    foreach (keys %keyboards) {
+	lc($keyboards{$_}[0]) eq lc($t) and return $_;
     }
     die "unknown keyboard $t";
 }

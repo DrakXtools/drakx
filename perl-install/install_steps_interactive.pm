@@ -66,22 +66,23 @@ sub selectLanguage($) {
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
-    my ($o) = @_;
-    $o->{keyboard} =
-      keyboard::text2keyboard($o->ask_from_list_(_("Keyboard"),
-						 _("Please, choose your keyboard layout."),
-						 [ keyboard::list() ],
-						 keyboard::keyboard2text($o->{keyboard})));
-    delete $o->{keyboard_unsafe};
-    install_steps::selectKeyboard($o);
-
-
-    if ($::expert) {
-	my $langs = $o->ask_many_from_list('', 
-		_("You can choose other languages that will be available after install"),
-		[ sort { $a cmp $b } lang::list() ]) or goto &selectLanguage;
-	$o->{langs} = [ $o->{lang}, grep_index { $langs->[$::i] } lang::list() ];
+    my ($o, $clicked) = @_;
+    if (!$::beginner || $clicked) {
+	$o->{keyboard} =
+	  keyboard::text2keyboard($o->ask_from_list_(_("Keyboard"),
+						     _("Please, choose your keyboard layout."),
+						     [ keyboard::list() ],
+						     keyboard::keyboard2text($o->{keyboard})));
+	delete $o->{keyboard_unsafe};
     }
+    if ($::expert) {
+	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
+	$o->ask_many_from_list_ref('', 
+		_("You can choose other languages that will be available after install"),
+		[ lang::list() ], [ map { \$langs{lang::text2lang($_)} } lang::list() ] ) or goto &selectKeyboard;
+	$o->{langs} = [ grep { $langs{$_} } keys %langs ];
+    }
+    install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
 sub selectRootPartition($@) {
@@ -1164,7 +1165,7 @@ sub setup_thiskind {
     my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
 
     if ($allow_probe) {
-	eval { @l = $o->load_thiskind($type) };
+	eval { @l = grep { !/ide-/ } $o->load_thiskind($type) };
 	$o->ask_warn('', $@) if $@;
 	return if $auto && (@l || !$at_least_one);
     }

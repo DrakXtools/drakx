@@ -19,7 +19,6 @@ NETWORK_MODULES="$FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
 HD_MODULES="     $FSMODULES $SCSI_DRIVERS"
 PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS af_packet.o isofs.o scsi_mod.o sr_mod.o sd_mod.o cdrom.o ide-cd.o ide-mod.o ide-probe.o ide-disk.o"
-LNX4WIN_MODULES="$FSMODULES loop.o isofs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
@@ -28,10 +27,8 @@ if [ "$ARCH" == "i386" ]; then
     #disable any existing resolution!!!
     cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
     /usr/sbin/rdev -v vmlinuz 65535 #788 #785 
-    cp -f vmlinuz /export/lnx4win
 
     rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
-    install -d lnx4win/initrd/modules
 else
     cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
 fi
@@ -50,7 +47,6 @@ rm -rf modules ; install -d modules
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
 [ "$ARCH" == "i386" ] && {
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
-    cp -f $LNX4WIN_MODULES modules.dep ../lnx4win/initrd/modules
 }
     rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES $PCMCIA_MODULES $PCMCIA_INSTALLMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 )

@@ -36,7 +36,7 @@ arch() =~ /^sparc/ ? (
   { mntpoint => "/tmp",     size =>  50 << 11, type => 0x83, ratio => 3, maxsize => 500 << 11 },
   { mntpoint => "/mnt/iso", size => 700 << 11, type => 0x83 },
 );
-my @suggestions_mntpoints = qw(/mnt/windows);
+my @suggestions_mntpoints = qw(/root /mnt/windows);
 
 
 my @partitions_signatures = (
@@ -270,6 +270,7 @@ sub check_mntpoint {
     $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
 
     die "raid / with no /boot" if $mntpoint eq "/" && raid::is($part) && !has_mntpoint("/boot", $hds);
+    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /usr));
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 #-	  die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);

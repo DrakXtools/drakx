@@ -596,13 +596,6 @@ sub readCompssUsers {
     \%compssUsers, \@sorted;
 }
 
-#- sub isLangSensitive($$) {
-#-     my ($name, $lang) = @_;
-#-     local $SIG{__DIE__} = 'none';
-#-     $name =~ /-([^-]*)$/ or return;
-#-     $1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
-#- }
-
 sub setSelectedFromCompssList {
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;

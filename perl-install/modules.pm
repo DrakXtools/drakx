@@ -335,8 +335,8 @@ sub text_of_type($) {
 
 sub text2driver($) {
     my ($text) = @_;
-    while (my ($k, $v) = each %drivers) {
-	$v->{text} eq $text and return $k;
+    foreach (keys %drivers) {
+	$drivers{$_}{text} eq $text and return $_;
     }
     die "$text is not a valid module description";
 }

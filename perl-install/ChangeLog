@@ -1,3 +1,25 @@
+2000-05-07  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (text2driver): same as text2lang below
+	* keyboard.pm (text2keyboard): same as text2lang below
+	* lang.pm (text2lang): replace the while (... each) by a foreach
+	(keys) (because each is dangerous if loop is exited)
+
+	* install_steps_interactive.pm (selectKeyboard): better handling
+	of multiple langs question.
+
+	* ftp.pm (new): Timeout set to 60 (seconds), was default (120)
+
+	* install_steps_interactive.pm (setup_thiskind): remove ide-*
+	from modules displayed as loaded.
+
+2000-05-06  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm (check_mntpoint): verify that standard mntpoints (/
+	/usr) are not on not trueFS
+
+	* any.pm (setupBootloader): add $prefix for the 2 glob_'s
+
 2000-05-07  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/keyboards.tar.bz2: added Ukrainian keyboard xmodmap.ua

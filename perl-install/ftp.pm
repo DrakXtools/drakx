@@ -30,7 +30,7 @@ sub new {
     my @l = do { if ($hosts{"$host$prefix"}) {
 	@{$hosts{"$host$prefix"}};
     } else {
-	my %options = (Passive => 1);
+	my %options = (Passive => 1, Timeout => 60);
 	$options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
 	$options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
 	unless ($login) {

@@ -248,13 +248,12 @@ sub selectKeyboard {
     return unless $o->{isUpgrade} || !$::beginner || $clicked;
 
     $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
-    $o->selectKeyboard if !$::beginner || $clicked;
+    $o->selectKeyboard;
 
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, $o->{keyboard});
-	lang::set_langs($o->{langs});
     } 'doInstallStep' unless $::g_auto_install;
 }
 
@@ -661,7 +660,7 @@ sub main {
 
     eval { modules::load("af_packet") };
 
-    lang::set($o->{lang}, $o->{langs});
+    lang::set($o->{lang});
 
     #-the main cycle
     my $clicked = 0;

@@ -139,10 +139,10 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("/boot/vmlinuz*") } ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { map { s/$prefix// } glob_("$prefix/boot/vmlinuz*") } ] },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 _("Append") => \$e->{append},
-_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
+_("Initrd") => { val => \$e->{initrd}, list => [ eval { map { s/$prefix// } glob_("$prefix/boot/initrd*") } ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..5] unless $::expert;
