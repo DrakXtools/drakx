@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt);
+@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt internal_error);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -178,6 +178,10 @@ sub join_lines {
 	}
     }
     @l, if_($s, $s);
+}
+
+sub internal_error {
+    die "INTERNAL ERROR: $_[0]\n" . backtrace();
 }
 
 #-######################################################################################
