@@ -468,12 +468,15 @@ sub setAuthentication {
 	    cp_af($f, "$f.orig");
 	    cp_af("$f-winbind", $f);
 	}
-	write_smb_conf($o, $domain);
+	write_smb_conf($domain);
 	run_program::rooted($o->{prefix}, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir "$o->{prefix}/home/$domain", 0755;
+	
+	#- just temporary until samba packages fixed
+	mkdir "$o->{prefix}/var/log/samba", 0755;
+        mkdir "$o->{prefix}/var/run/samba", 0755;
 
-	#- finally join the machine to the Windoze domain
-	run_program::rooted($o->{prefix}, "/usr/bin/smbpasswd", "-j", $domain, "-r", $winbind);
+	#- defer running smbpassword - no network yet
     }
 }
 
