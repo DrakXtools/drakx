@@ -82,7 +82,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                                            0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
                                                                                                     $mode = !$mode; 
                                                                                                     $hb_ntp->set_sensitive($mode);
-                                                                                                    if (!-e "/etc/init.d/ntpd" && $mode == 1) {
+                                                                                                    if ($mode == 1 && !$in->do_pkgs->is_installed('ntp')) {
                                                                                                         install_ntp();
                                                                                                     }
                                                                                                 }),
