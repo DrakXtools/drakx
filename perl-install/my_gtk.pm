@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack2_ gtkpack2__ gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -116,6 +116,11 @@ sub gtkpack2($@) {
 sub gtkpack2__($@) {
     my $box = shift;
     gtkpack2_($box, map {; 0, $_ } @_);
+}
+sub gtkpack3 {
+    my $a = shift;
+    $a && goto \&gtkpack2__;
+    goto \&gtkpack2;
 }
 sub gtkpack2_($@) {
     my $box = shift;
@@ -231,8 +236,8 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread) = @_;
     my $one = ($ok xor $cancel);
-    $spread ||= $::isStandalone ? "edge" : "spread";
-    $ok ||= $::isStandalone ? _("Next ->") : _("Ok");
+    $spread ||= $::isWizard ? "edge" : "spread";
+    $ok ||= $::isWizard ? _("Next ->") : _("Ok");
 
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), "clicked" => $w->{ok_clicked} || sub { Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit });

@@ -41,48 +41,47 @@ sub ask_from_list_with_helpW {
     if (@$l < 5 or $::isWizard) {
 	my $defW;
 	my $tips = new Gtk::Tooltips;
-	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	my $g = sub { $w->{retval} = $_[1]; };
+	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	my $b;
-	if ($::isWizard) {
-	    $w->sync;
-	    my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) or goto nowizard;
-	    gtkset_usize($w->{rwindow},500, 400);
-	    gtkadd($w->{window},
-		   gtkpack2_(create_box_with_title($w, @$messages),
-			     1,
-			     gtkpack2_(new Gtk::HBox(0,0),
-				       0, $pixmap,
-				       0, gtkset_usize(new Gtk::VBox(0,0),30, 0),
-				       0, gtkpack2__( new Gtk::VBox(0,0 ),
-						      gtkset_usize(new Gtk::VBox(0,0), 0, 30),
+	$w->sync;
+	printf "wiz" . $::isWizard . "\n";
+	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)); # or goto nowizard;
+	$::isWizard and gtkset_usize($w->{rwindow}, 500, 400);
+	gtkadd($w->{window},
+	       gtkpack2_(create_box_with_title($w, @$messages),
+			 1,
+			 gtkpack3( $::isWizard,
+				   new Gtk::HBox(0,0),
+				   $::isWizard ? ($pixmap, gtkset_usize(new Gtk::VBox(0,0),30, 0)) : (),
+				   gtkpack2__( $::isWizard ? new Gtk::VBox(0,0): ( @$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox()),
+					      $::isWizard ? gtkset_usize(new Gtk::VBox(0,0), 0, 30) : (),
 						  map {
-						      $b = new Gtk::RadioButton($b ? ($_, $b) : $_);
+						      $::isWizard ? $b = new Gtk::RadioButton($b ? ($_, $b) : $_) : ($b = new Gtk::Button($_));
 						      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
 						      $_ eq $def and $defW = $b;
 						      $b->signal_connect(clicked => [ $g, $_ ]);
 						      $b;
 						  } @$l, )),
-			     0, new Gtk::HSeparator,
-			     0, $w->create_okcancel(),
-			    ),
-		  );
-	}
-	else {
-	  nowizard:
-	    gtkadd($w->{window},
-		   gtkpack(create_box_with_title($w, @$messages),
-			   gtkadd(@$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox(),
-				  map {
-				      $b = new Gtk::Button($_);
-				      $b->signal_connect(clicked => [ $f, $_ ]);
-				      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
-				      $_ eq $def and $defW = $b;
-				      $b;
-				  } @$l, ),
-			  ),
-		  );
-	}
+			 0, new Gtk::HSeparator,
+			 0, $w->create_okcancel(),
+			),
+	      );
+#          {
+#  	  nowizard:
+#  	    gtkadd($w->{window},
+#  		   gtkpack(create_box_with_title($w, @$messages),
+#  			   gtkadd(@$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox(),
+#  				  map {
+#  				      $b = new Gtk::Button($_);
+#  				      $b->signal_connect(clicked => [ $f, $_ ]);
+#  				      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
+#  				      $_ eq $def and $defW = $b;
+#  				      $b;
+#  				  } @$l, ),
+#  			  ),
+#  		  );
+#       }
 
 	$defW->grab_focus if $defW;
 	$r = $w->main;
