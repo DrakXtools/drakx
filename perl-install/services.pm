@@ -123,7 +123,7 @@ sub ask_install_simple {
 sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
-			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj apcupsd cups-lpd ) ],
+			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd ) ],
 			 _("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
                                                ipchains iptables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
                                                portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init ) ],
@@ -133,7 +133,7 @@ sub ask_install {
                                              alsa functions halt kheader killall mandrake_everytime mandrake_firstime
                                              random rawdevices single keytable syslog crond medusa-init portmap acon
                                              anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
-                                             fcron powertweak.init ups syslog-ng cvs) ],
+                                             fcron powertweak.init ups syslog-ng cvs apcupsd) ],
 			 _("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
                                                             iplog mon vncserver netsaint olympusd drakxtools_http ) ],
 #			 _("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync ) ],
