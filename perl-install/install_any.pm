@@ -441,8 +441,8 @@ sub selectSupplMedia {
 		useMedium($medium_name);
 
 		#- probe for an hdlists file and then look for all hdlists listed herein
-		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
-		log::l("psUsingHdlists failed: $@");
+		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/", $o->{packages}, $medium_name) };
+		log::l("psUsingHdlists failed: $@") if $@;
 
 		#- copy latest compssUsers.pl and rpmsrate somewhere locally
 		getAndSaveFile("/mnt/cdrom/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
@@ -468,6 +468,15 @@ sub selectSupplMedia {
 	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
 	    useMedium($medium_name);
 	    require "$suppl_method.pm";
+	    #- first, try to find an hdlists file
+	    eval { pkgs::psUsingHdlists($o, $suppl_method, "$url/", $o->{packages}, $medium_name) };
+	    if ($@) {
+		log::l("psUsingHdlists failed: $@");
+	    } else {
+		useMedium($prev_asked_medium); #- back to main medium
+		return $suppl_method;
+	    }
+	    #- then probe for an hdlist.cz
 	    my $f = eval {
 		if ($suppl_method eq 'http') {
 		    http::getFile("$url/media_info/hdlist.cz");

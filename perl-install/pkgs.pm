@@ -380,7 +380,7 @@ sub psUpdateHdlistsDeps {
 sub psUsingHdlists {
     my ($o, $method, $o_hdlistsfile, $o_packages, $o_initialmedium) = @_;
     my $prefix = $o->{prefix};
-    my $listf = install_any::getFile($o_hdlistsfile || 'media/media_info/hdlists')
+    my $listf = install_any::getFile($o_hdlistsfile . 'media/media_info/hdlists')
 	or die "no hdlists found";
     my ($suppl_CDs, $deselectionAllowed) = (0, 0);
     if (!$o_packages) {
@@ -406,7 +406,7 @@ sub psUsingHdlists {
 	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
 	push @hdlists, [ $2, $medium_name, $3, $4, !$1, 
 	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
-	    $cdsuppl ? "/mnt/cdrom/media/media_info/$2" : undef,
+	    $o_hdlistsfile ? "$o_hdlistsfile/media/media_info/$2" : undef,
 	];
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
