@@ -18,6 +18,7 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 
 use Gtk;
 use c;
+use log;
 use common qw(:common :functional);
 
 my $forgetTime = 1000; #- in milli-seconds
@@ -324,12 +325,27 @@ sub _create_window($$) {
     $w->signal_connect(delete_event => sub { undef $o->{retval}; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
-    $w->signal_connect('focus' => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
+    $w->signal_connect(focus => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
 
-    $w->signal_connect("key_press_event" => sub {
+    $w->set_events("pointer_motion_mask");
+    my $signal;
+    $signal = $w->signal_connect(motion_notify_event => sub {
+	delete $o->{mouse}{unsafe};
+	log::l("unsetting unsafe mouse");
+	$w->signal_disconnect($signal);
+    }) if $o->{mouse}{unsafe};
+
+    $w->signal_connect(key_press_event => sub {
 	my $d = ${{ 65470 => 'help',
 	            65481 => 'next',
 		    65480 => 'previous' }}{$_[1]->{keyval}} or return;
+
+	#- previous field is created here :(
+	my $s; foreach (reverse @{$::o->{orderedSteps}}) {
+	    $s->{previous} = $_ if $s;
+	    $s = $::o->{steps}{$_};
+	}
+
 	if ($d eq "help") {
 	    require install_steps_gtk;
 	    install_steps_gtk::create_big_help();

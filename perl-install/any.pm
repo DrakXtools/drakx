@@ -44,7 +44,7 @@ sub addUsers {
 
     allocUsers($prefix, @users);
     foreach my $u (@users) {
-	substInFile { s/^$u\n//; $_ .= "$u\n" if eof } "$msec/user.conf" if -d $msec;
+	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
 	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon}, 'force');
     }
     run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");

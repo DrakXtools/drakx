@@ -120,11 +120,11 @@ Hey no kidding, you will be allowed powerfull but dangerous things here."),
     };      
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
-					      first(list2kv(@c)), ${{reverse %c}}{$o->{installClass}},
+					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
 					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
 
     if ($::corporate || $::beginner || $o->{isUpgrade}) {
-	$o->{installClass} = "normal";
+	delete $o->{installClass};
     } else {
 	my %c = (
 		 normal    => _("Normal"),
@@ -142,7 +142,7 @@ Hey no kidding, you will be allowed powerfull but dangerous things here."),
 sub selectMouse {
     my ($o, $force) = @_;
 
-    if ($o->{mouse}{unsafe} || !$::beginner || $force) {
+    if ($o->{mouse}{unsafe} || $::expert || $force) {
 	my $name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $o->{mouse}{FULLNAME});
 	$o->{mouse} = mouse::name2mouse($name);
     }
@@ -170,7 +170,7 @@ sub setupSCSI {
 
 sub ask_mntpoint_s {
     my ($o, $fstab) = @_;
-    my @fstab = grep { isExt2($_) } @$fstab;
+    my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
 #    @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
@@ -230,7 +230,7 @@ sub choosePartitionsToFormat($$) {
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
-    @l = grep { $_->{toFormat} && !isLoopback($_) } @l;
+    @l = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
     $o->ask_many_from_list_ref('', _("Check bad blocks?"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
@@ -319,7 +319,7 @@ sub chooseGroups {
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted, _("Miscellaneous"), _("Individual package selection") ],
 			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous", "Individual" ]
-			       ) or goto &chooseGroups unless $::beginner;
+			       ) or goto &chooseGroups unless $::beginner || $::corporate;
 
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
@@ -619,13 +619,13 @@ sub setRootPassword {
     return if $o->{security} < 1 && !$clicked;
 
     $o->set_help("setRootPassword", 
-		 $o->{installClass} eq "server" || $::expert ? "setRootPasswordMd5" : (),
+		 $o->{installClass} =~ "server" || $::expert ? "setRootPasswordMd5" : (),
 		 $::beginner ? () : "setRootPasswordNIS");
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
 			 [ _("Set root password"), 
 			   $::beginner ? "\n" .
-_("(an user ``mandrake'' with password ``mandrake'' has been automatically added)") : ()
+_("(a user ``mandrake'' with password ``mandrake'' has been automatically added)") : ()
 			 ], [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },

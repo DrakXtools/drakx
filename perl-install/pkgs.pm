@@ -487,8 +487,8 @@ sub readCompss {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 
-	if (/^(\S+)/) {
-	    $p = $1 if /^(\S+)/;
+	if (/^(\S.*)/) {
+	    $p = $1;
 	} else {
 	    /(\S+)/;
 	    $packages->[0]{$1} or log::l("unknown package $1 in compss"), next;

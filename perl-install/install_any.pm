@@ -247,6 +247,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
+	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
 	push @{$o->{default_packages}}, "alsa" if modules::get_alias("sound") =~ /^snd-card-/;
 
@@ -351,7 +352,7 @@ sub searchAndMount4Upgrade {
     getHds($o);
 
     #- get all ext2 partition that may be root partition.
-    my %Parts = my %parts = map { $_->{device} => $_ } grep { isExt2($_) } @{$o->{fstab}};
+    my %Parts = my %parts = map { $_->{device} => $_ } grep { isTrueFS($_) } @{$o->{fstab}};
     while (keys(%parts) > 0) {
 	$root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
 	$root = delete $parts{$root};
@@ -389,7 +390,7 @@ sub searchAndMount4Upgrade {
 	map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @{$o->{fstab}}; #- use all available swap.
 
 	#- TODO fsck, create check_mount_all ?
-	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+	fs::mount_all([ grep { isTrueFS($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
 }
 

@@ -88,7 +88,7 @@ sub format_ext2($@) {
 sub format_reiserfs($@) {
     my ($dev, @options) = @_;
 
-    run_program::run("mkreiserfs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
+    run_program::run("mkreiserfs", "-f", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
 }
 
 sub format_dos($@) {
@@ -186,9 +186,14 @@ sub mount($$$;$) {
 	my $mount_opt = "";
 
 	if ($fs eq 'vfat') {
-	    $mount_opt = "check=relaxed";
+	    $mount_opt = 'check=relaxed';
 	    eval { modules::load('vfat') }; #- try using vfat
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
+	} elsif ($fs eq 'reiserfs') {
+	    #- could be better if we knew if there is a /boot or not
+	    #- without knowing it, / is forced to be mounted with notail
+	    $mount_opt = 'notail' if $where =~ m|/(boot)?$|;
+	    eval { modules::load('reiserfs') };
 	}
 
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
@@ -340,9 +345,10 @@ sub write_fstab($;$$) {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
 	  $options = $_->{options} || $options;
 
-	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
+	  isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
 	  isFat($_) and $options = $_->{options} || "user,exec,umask=0";
+	  isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 
 	  my $dev = isLoopback($_) ?
 	    ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :

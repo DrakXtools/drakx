@@ -2,12 +2,12 @@ package partition_table;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save);
 use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -21,7 +21,8 @@ use partition_table_mac;
 use log;
 
 
-@important_types = ('Linux native', 'ReiserFS', 'Linux swap', 'DOS FAT16', 'Win98 FAT32', 'Linux RAID');
+@important_types = ('Linux native', 'Linux swap', 'Win98 FAT32');
+@important_types2 = ('ReiserFS', 'Linux RAID');
 
 @fields2save = qw(primary extended totalsectors);
 
@@ -189,7 +190,10 @@ my %fs2type = reverse %type2fs;
 
 1;
 
-sub important_types { $_[0] and return sort values %types; @important_types }
+sub important_types { 
+    $::expert and return sort values %types; 
+    @important_types, $::beginner ? () : @important_types2;
+}
 
 sub type2name($) { $types{$_[0]} || $_[0] }
 sub type2fs($) { $type2fs{$_[0]} }
@@ -212,9 +216,10 @@ sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
-sub isMountableRW { isExt2($_[0]) || isFat($_[0]) }
 sub isApplePartMap { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
+sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) }
+sub isMountableRW { isTrueFS($_[0]) || isFat($_[0]) }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;

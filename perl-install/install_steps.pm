@@ -105,10 +105,11 @@ sub selectPath {}
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o) = @_;
-    $o->{installClass} ||= "normal";
+    $o->{installClass} ||= $::corporate ? "corporate" : "normal";
     $o->{security} ||= ${{
 	normal    => 2,
 	developer => 3,
+	corporate => 3,
 	server    => 4,
     }}{$o->{installClass}};
 }
@@ -786,7 +787,7 @@ sub miscellaneous {
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};
-    add2hash_ $o, { useSupermount => $o->{security} < 4 };
+    add2hash_ $o, { useSupermount => $o->{security} < 4 && $o->{installClass} !~ /corporate|server/ };
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });

@@ -128,6 +128,7 @@ arch() =~ /^sparc/ ? (
   ],
 ),
 );
+$suggestedPartitions{corporate} = $suggestedPartitions{server};
 
 #-#######################################################################################
 #-$O
@@ -271,7 +272,7 @@ sub selectInstallClass {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "partitionDisks") : $_ } 
 	                        grep { !/partitionDisks/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
-	    $s->{next} = $_;
+	    $s->{next} = $_ if $s;
 	    $s = $o->{steps}{$_};
 	}
     }
@@ -337,7 +338,7 @@ sub formatPartitions {
     #-	 Do  not  update  inode  access times on this
     #-	 file system (e.g, for faster access  on  the
     #-	 news spool to speed up news servers).
-    $o->{pcmcia} and $_->{options} = "noatime" foreach grep { isExt2($_) } @{$o->{fstab}};
+    $o->{pcmcia} and $_->{options} = "noatime" foreach grep { isTrueFS($_) } @{$o->{fstab}};
 }
 
 #------------------------------------------------------------------------------
@@ -513,6 +514,8 @@ sub main {
 	}
     } $cmdline{$opt} = 1 if $opt;
     
+    $::beginner = 1;
+
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
@@ -520,8 +523,8 @@ sub main {
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga       => sub { $o->{vga16} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
-	    expert    => sub { $::expert = 1 },
-	    beginner  => sub { $::beginner = 1 },
+	    expert    => sub { $::expert = 1; $::beginner = 0 },
+	    beginner  => sub { $::beginner = $v },
 	    class     => sub { $o->{installClass} = $v },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },

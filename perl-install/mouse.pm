@@ -134,7 +134,7 @@ sub detect() {
         return name2mouse("Apple ADB Mouse");
     }
 
-    detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
+    detect_devices::hasMousePS2 and return { unsafe => 1, %{name2mouse("Generic Mouse (PS/2)")} };
 
     eval { commands::modprobe("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
@@ -159,5 +159,5 @@ sub detect() {
     }
 
     #- defaults to generic ttyS0
-    add2hash({ device => "ttyS0", unsafe => 1 }, name2mouse("Generic Mouse (serial)"));
+    { device => "ttyS0", unsafe => 1, %{name2mouse("Generic Mouse (serial)")} };
 }

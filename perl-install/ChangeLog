@@ -1,3 +1,16 @@
+2000-04-14  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): don't
+	ask about checking bad blocks for reiserfs, cuz not handled
+
+	* fs.pm (mount): reiserfs handling
+	* fs.pm (format_reiserfs): added
+	* fs.pm (write_fstab): add option "notail" for reiserfs if
+	the partition holds the kernel (/boot or /)
+
+	* partition_table.pm (isTrueFS): added, replaces most occurences
+	of isExt2
+
 2000-04-12  François Pons  <fpons@mandrakesoft.com>
 
 	* install2.pm: force installation step if package have been
