@@ -48,6 +48,10 @@ install:
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
 
+	install -D standalone/finish-install.xsetup $(PREFIX)/etc/X11/xsetup.d/finish-install.xsetup
+	install -d $(PREFIX)/etc/sysconfig
+	echo 'FINISH_INSTALL=yes' > $(PREFIX)/etc/sysconfig/finish-install
+
 	for i in $(HAVEINST_DIRS); do \
 		$(MAKE) -C $$i install PREFIX=$(PREFIX) SUDO= DATADIR=$(DATADIR) NAME=$(NAME) ; \
 	done

@@ -50,5 +50,6 @@ sub ask_users() {
 eval { ask_network() };
 eval { ask_authentication() };
 eval { ask_users() };
+setVarsInSh('/etc/sysconfig/finish-install', { FINISH_INSTALL => 'no' });
 
 $in->exit(0);
