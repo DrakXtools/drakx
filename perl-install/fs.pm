@@ -384,7 +384,7 @@ sub mount_options_pack {
     noreturn();
 }
 
-sub mount_options_help {
+sub mount_options_help() {
     (
 
 	'grpquota' => '',
