@@ -718,15 +718,15 @@ sub default_packages {
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
     if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
-        modules::append_to_modules_loaded_at_startup($_, 'i8k') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        modules::append_to_modules_loaded_at_startup_for_all_kernels('i8k');
         push @l, "i8kutils";
     }
     if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
-        modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        modules::append_to_modules_loaded_at_startup_for_all_kernels('toshiba');
         push @l, "toshutils";
     }
     if ($dmi{BIOS}{Vendor} eq 'COMPAL' && $dmi{BIOS}{Characteristics} =~ /Function key-initiated network boot is supported/) {
-        modules::append_to_modules_loaded_at_startup($_, 'acerhk') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 
     push @l, "grub" if isLoopback(fs::get::root($o->{fstab}));
