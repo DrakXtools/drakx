@@ -49,9 +49,9 @@ $configure_this ||= $::auto ? 'auto_install' : 'everything';
 	} elsif ($configure_this eq 'auto_install') {
 	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure($in->do_pkgs), $in->do_pkgs, {}, $options);
 	} elsif ($configure_this eq 'monitor') {
-	    Xconfig::main::configure_monitor($in, Xconfig::xfree->read);
+	    Xconfig::main::configure_monitor($in);
 	} elsif ($configure_this eq 'resolution') {
-	    Xconfig::main::configure_resolution($in, Xconfig::xfree->read);
+	    Xconfig::main::configure_resolution($in);
 	}
     };
     if (!$::auto) {
