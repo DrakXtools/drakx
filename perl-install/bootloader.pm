@@ -588,7 +588,7 @@ sub get_of_dev {
 	my ($unix_dev) = @_;
 	#- don't care much for this - need to run ofpath rooted, and I need the result
 	#- In test mode, just run on "/", otherwise you can't get to the /proc files		
-	run_program::rooted_or_die($::prefix, "/usr/local/sbin/ofpath $unix_dev", ">", "/tmp/ofpath");
+	run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath $unix_dev", ">", "/tmp/ofpath");
 	open(FILE, "$::prefix/tmp/ofpath") || die "Can't open $::prefix/tmp/ofpath";
 	my $of_dev = "";
 	local $_ = "";
@@ -629,8 +629,8 @@ sub install_yaboot {
 	}
 	
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(delay timeout);
-	print F "install=/usr/local/lib/yaboot/yaboot";
-	print F "magicboot=/usr/local/lib/yaboot/ofboot";
+	print F "install=/usr/lib/yaboot/yaboot";
+	print F "magicboot=/usr/lib/yaboot/ofboot";
 	$lilo->{$_} and print F $_ foreach qw(enablecdboot enableofboot);
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(defaultos default);
 	#- print F "nonvram";
@@ -673,7 +673,7 @@ sub install_yaboot {
     if (defined $install_steps_interactive::new_bootstrap) {
 	run_program::run("hformat", "$lilo->{boot}") or die "hformat failed";
     }	
-    run_program::rooted_or_die($::prefix, "/sbin/ybin", "2>", "/tmp/.error");
+    run_program::rooted_or_die($::prefix, "/usr/sbin/ybin", "2>", "/tmp/.error");
     unlink "$::prefix/tmp/.error";	
 }
 
