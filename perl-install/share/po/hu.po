@@ -10898,7 +10898,15 @@ msgstr "A csatlakozás várakozási ideje (másodpercben)"
 msgid "Get DNS servers from DHCP"
 msgstr "A DNS-kiszolgáló IP-címe"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -17427,11 +17435,6 @@ msgstr "Mandrakesoft-varázslók"
 msgid "Wizards to configure server"
 msgstr "Varázslók a kiszolgáló beállítására"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Mandrakesoft-varázslók"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20573,11 +20576,6 @@ msgstr "Nincs telepítve"
 msgid "Package not installed"
 msgstr "A csomag nincs telepítve"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "Nincs elérhető böngésző. Telepítsen egyet."
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -20747,16 +20745,6 @@ msgstr "statikus"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, c-format
@@ -21938,15 +21926,6 @@ msgid ""
 msgstr ""
 "%s nem jeleníthető meg. \n"
 "Nincs ilyen típusú bejegyzés a dokumentációban.\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Nincs telepítve böngésző a gépre. Ha szeretné elérni a segítségrendszert, "
-"telepítsen egy böngészőt."
 
 #: standalone/drakperm:22
 #, c-format
@@ -25347,7 +25326,6 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, c-format
 msgid "Account:"
@@ -26774,6 +26752,20 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "A telepítés hibával ért véget."
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Mandrakesoft-varázslók"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Nincs elérhető böngésző. Telepítsen egyet."
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Nincs telepítve böngésző a gépre. Ha szeretné elérni a segítségrendszert, "
+#~ "telepítsen egy böngészőt."
 
 #~ msgid ""
 #~ "Insert a floppy in drive\n"
