@@ -411,6 +411,11 @@ sub configure_hostname() {
     return;
 }
 
+sub get_intf_status {
+    my ($c) = @ç;
+    ethisup($c) ? N("Deactivate now") : N("Activate now")
+}
+
 sub configure_lan() {
     my $window = _create_dialog(N("LAN configuration"), { small => 1 });
     my @card_tab;
@@ -485,11 +490,12 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	my $c = $_;
 	my $widget_temp;
 	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
-	    $widget_temp = gtksignal_connect(new Gtk2::Button(ethisup($c) ? N("deactivate now") : N("activate now")),
-					     clicked => sub {
-						 system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
-						 ugtk2::gtkbuttonset($_[0], ethisup($c) ? N("deactivate now") : N("activate now"));
-					     });
+         $widget_temp = gtksignal_connect(new Gtk2::Button(get_intf_status($c)),
+                                          clicked => sub {
+                                              system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
+                                              $_[0]->set_label(get_intf_status($c));
+                                              update();
+                                          });
 	} else {
 	    $widget_temp = N("This interface has not been configured yet.\nLaunch the configuration wizard in the main window");
 	}
