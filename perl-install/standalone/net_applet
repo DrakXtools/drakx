@@ -40,10 +40,8 @@ my %appletstate = (
 	    );
 
 my %actions = (
-               'upNetwork' => { name => sub { N("Connect %s", $_[0]) },
-                                launch => sub { system("/usr/sbin/net_monitor --connect --defaultintf $_[0] &") } },
-               'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) },
-                                  launch => sub { system("/usr/sbin/net_monitor --disconnect --defaultintf $_[0] &") } },
+               'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => \&network::tools::start_interface },
+               'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => \&network::tools::stop_interface },
                'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },

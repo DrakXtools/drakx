@@ -41,9 +41,15 @@ my $connect = "@ARGV" =~ /--connect/;
 my $disconnect = "@ARGV" =~ /--disconnect/;
 my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 
+my $netcnx = {};
+my $netc = {};
+my $intf = {};
+network::netconnect::read_net_conf($netcnx, $netc, $intf);
+$default_intf or ($default_intf, undef, undef, undef) = get_internet_connection($netc, $intf);
+
 if ($force) {
-    $connect and start_connection();
-    $disconnect and stop_connection();
+    $connect and network::tools::start_interface($default_intf);
+    $disconnect and network::tools::stop_interface($default_intf);
     $connect = $disconnect = 0;
 }
 $quiet and exit(0);
@@ -66,9 +72,6 @@ my $colora = gtkcolor(655, 50400, 655);
 my $isconnected = -1;
 my @interfaces;
 my $monitor = {};
-my $netcnx = {};
-my $netc = {};
-my $intf = {};
 my $c_time = 0;
 my $ct_tag;
 
@@ -84,7 +87,6 @@ my $cfg_file = $< ? "$ENV{HOME}/.net_monitorrc" : "/etc/sysconfig/net_monitorrc"
 my %config = getVarsFromSh($cfg_file);
 my $use_same_scale = text2bool($config{use_same_scale});
 
-network::netconnect::read_net_conf($netcnx, $netc, $intf);
 MDK::Common::Globals::init(in => $in);
 
 gtkadd($window1->{window},
@@ -174,19 +176,6 @@ sub main_quit() {
     ugtk2->exit(0);
 }
 
-sub bg_command_as_root {
-    my $name = shift;
-    run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @_);
-}
-
-sub start_connection() {
-    $default_intf and bg_command_as_root('/sbin/ifup', $default_intf);
-}
-
-sub stop_connection() {
-    $default_intf and bg_command_as_root('/sbin/ifdown', $default_intf);
-}
-
 sub connection() {
     $during_connection = 1;
     my $wasconnected = $isconnected;
@@ -262,9 +251,9 @@ sub connection() {
     gtkflush();
 
     if ($wasconnected == 1) {
-        $tool_pid = stop_connection();
+        $tool_pid = network::tools::start_interface($default_intf);
     } else {
-        $tool_pid = start_connection();
+        $tool_pid = network::tools::stop_interface($default_intf);
     }
 }
 

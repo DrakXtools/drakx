@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script remove_initscript write_secret_backend);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script remove_initscript write_secret_backend start_interface stop_interface);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -80,6 +80,21 @@ sub connect_backend {
 sub disconnect_backend {
     my ($netc) = @_;
     run_program::rooted($::prefix, "ifdown $netc->{NET_INTERFACE} &");
+}
+
+sub bg_command_as_root {
+    my ($name, @args) = @_;
+    run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @args);
+}
+
+sub start_interface {
+    my ($intf) = @_;
+    bg_command_as_root('/sbin/ifup', $intf);
+}
+
+sub stop_interface {
+    my ($intf) = @_;
+    bg_command_as_root('/sbin/ifdown', $intf);
 }
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
