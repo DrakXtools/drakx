@@ -168,8 +168,7 @@ my $ttf2pt1      = '/usr/sbin/ttf2pt1';
 my $pfm2afm      = '/usr/sbin/pfm2afm';
 my $type1inst    = '/usr/sbin/type1inst';
 my $chkfontpath  = '/usr/sbin/chkfontpath';
-# mkttfdir only knows about iso-8859-1, using ttmkfdir instead
-my $mkttfdir     = '/usr/X11R6/bin/mkttfdir';
+# mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
 my $ttmkfdir     = '/usr/sbin/ttmkfdir';
 my $fccache      = '/usr/bin/fc-cache';
 my $ghostscript;
@@ -348,9 +347,7 @@ sub put_font_dir() {
         interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
 
         my $ttfdir = $drakfont_dir . "/ttf";
-        # mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
-        #`$mkttfdir $ttfdir`;
-       	system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
+        system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
         interactive_progress($pbar2, 0.10, N("True Type install done"));
         my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
 
