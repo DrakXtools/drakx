@@ -154,7 +154,7 @@ NETWORKING_LDAP_SERVER
 
 NETWORKING_INSTANT_MESSAGING
   4 licq
-  3 everybuddy licq-autoreply licq-console licq-forwarder licq-rms licq-update-hosts
+  3 everybuddy licq-console licq-rms
   GNOME
     5 aspell-fr aspell-en
     4 gnomeicu gabber gaim
@@ -179,10 +179,10 @@ NETWORKING_GROUPWARE_SERVER
 NETWORKING_MAIL
   5 mailx metamail
   4 faces mozilla-mail evolution
-  3 fetchmail urlview sylpheed
+  3 fetchmail urlview mutt
   3 !GNOME !KDE xmailbox
   2 FaxMail comsat elm faces-xface
-  1 exmh mutt fetchmail-daemon fetchmailconf pine
+  1 exmh sylpheed fetchmail-daemon fetchmailconf
 NETWORKING_MAIL_SERVER
   5 postfix 
   5 WIZARDS wizards_lib-postfix
@@ -199,10 +199,9 @@ NETWORKING_NEWS_SERVER
   3 inews 
 
 NETWORKING_OTHER
-  2 finger fwhois ucd-snmp-utils
-    htdig macutils queso
+  2 finger fwhois ucd-snmp-utils htdig macutils
 NETWORKING_OTHER_SERVER
-  3 dhcp gated timed xntp3 
+  3 dhcp-server gated timed ntp
   3 WIZARDS wizards_lib-dhcp wizards_lib-time 
 
   3 intimed mcserv nscd imap pidentd
@@ -221,9 +220,8 @@ NETWORKING_REMOTE_ACCESS
   5 openssh-clients telnet telnet-client-krb5
   4 traceroute rfbdrake
   3 vnc
-  2 rsh vnc-SVGALIB vnc-java
+  2 rsh
   2 BOOKS vnc-doc
-  1 sftp
 NETWORKING_REMOTE_ACCESS_SERVER
   5 openssh-server
   4 rfbdrake
@@ -247,7 +245,7 @@ NETWORKING_FILE
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 WIZARDS wizards_lib-samba
-  4 samba bwbserver_linux
+  4 samba-server bwbserver_linux
   3 BOOKS samba-doc 
   2 arkeia-server samba-winbind
   3 squid squidGuard
@@ -260,23 +258,22 @@ NETWORKING_WWW
       screem 
       !LOCALES"eu" galeon 
   3 plugger opera bluefish
-  4 !LOCALES"eu" netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-chinese_big5 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
 NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl
   4 apache-suexec bwbserver_linux
   4 WIZARDS wizards_lib-web
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-    php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl PHP-nuke
+    php-pgsql php-readline php mod_php mod_sxnet auth_ldap HTML-Embperl PHP-nuke
   2 ApacheJServ
   1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
   4 ImageMagick giftrans gimp gphoto gphoto2 qiv ac3d
-  3 gimp-data-extras gqview sketch xloadimage xpcd xwpick xli
+  3 gimp-data-extras gqview sketch xwpick xli
   2 blender-mdk-cdcom
   2 gif2png gimp-perl xfig xpcd-gimp gd-utils cameleo VariCAD-mdk-cdcom
-  1 libgr-progs libungif-progs qcad transfig zgv xpaint xmorph
+  1 libgr-progs libungif-progs qcad transfig xpaint xmorph
   1 3D Mesa-demos
   GNOME
     4 gnome-iconedit
@@ -355,11 +352,9 @@ DEVELOPMENT
 
   5 libtool binutils ltrace gdb gcc
   2 gperf cdecl cproto indent ElectricFence
-  2 gcc3.0
   1 egcs glibc-profile xxgdb
 
   4 gcc-c++ libstdc++-devel
-  2 gcc3.0-c++ libstdc++3.0-devel
   2 libsigc++-examples
   1 egcs-c++ 
 
@@ -369,9 +364,7 @@ DEVELOPMENT
   2 doxygen C++2LaTeX
 
   3 jikes kaffe
-  2 gcc3.0-java
   1 gcc-java
-  1 gcc3.0-g77
 
   5 cvs rcs
   2 diffstat tkcvs
@@ -392,7 +385,7 @@ DEVELOPMENT
   3 kernel-source
 
   2 gcc-g77 nasm dev86 
-  1 egcs-g77 egcs-objc gcc-objc gcc-chill
+  1 gcc-objc
 
   2 teyjus gprolog ocaml umb-scheme mawk guile clisp SmallEiffel p2c 
     ghc ghc-prof happy haskell-GTK haskell-GTK-devel hugs98 mercury swi-prolog 
@@ -458,10 +451,8 @@ WEBMIN
 CONFIG
   4 linuxconf linuxconf-lang-fr linuxconf-lang-de
   4 GNOME gnome-linuxconf
-  3 Bastille-Curses-module
   3 ipvsadm quota usernet
-  2 gfcc control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module 
-    samba-swat
+  2 gfcc control-panel adjtimex isicom xinput timeconfig samba-swat
   1 ipxutils
 
 BOOKS
@@ -472,7 +463,7 @@ X
   5 icewm-light
 
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives harddrake fonts-ttf-west_european
-    mandrake-mime menudrake drakfloppy drakfont mandrake_desk mdk-cdcom-html-pages 
+    mandrake-mime menudrake mandrake_desk mdk-cdcom-html-pages 
     mdkonline drakfirsttime mdk-eazel-engine bootsplash
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK 
 
@@ -480,9 +471,6 @@ X
   3 USB usbview
   2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
   2 tksysv imlib-cfgeditor
-    Aurora-Monitor-NewStyle-Categorizing-WsLib
-    Aurora-Monitor-NewStyle-WsLib Aurora-Monitor-Traditional-Gtk+
-    Aurora-Monitor-Traditional-WsLib
   1 DrakeLogo drakprofile Mesa xtoolwait X11R6-contrib 
 
   GNOME
@@ -507,7 +495,7 @@ DOCS
   5 man info man-pages
 
 SYSTEM
-  5 at MAKEDEV anacron eject kudzu ldetect devfsd
+  5 at MAKEDEV anacron eject ldetect devfsd
     locales iputils urpmi cpio msec tmpwatch
 
   5 HIGH_SECURITY libsafe kernel-secure
@@ -520,10 +508,10 @@ SYSTEM
      NVIDIA_nforce-2.4.18-6mdk
      BIGMEM NVIDIA_nforce-2.4.18-6mdk-enterprise
 
-  4 ftp ftp-client-krb5 gpm hexedit strace sudo grub procmail gnupg
+  4 ftp-client-krb5 gpm hexedit strace sudo grub procmail gnupg
 
   3 bc
-  2 sndconfig kernel-utils sane acpid adns audiofile freeswan awesfx fbset vlan-utils
+  2 sndconfig kernel-utils acpid adns audiofile freeswan awesfx fbset vlan-utils
   1 fdutils genromfs mailcap pinfo
 
   BOOKS 
@@ -560,7 +548,7 @@ INSTALL
     xpp pdq printer-testpages 
     autologin ntp ipchains 
     cups LPRng lpr foomatic printer-utils printer-testpages gimpprint xpp 
-    nc qtcups kups sndconfig
+    nc kups sndconfig
     ImageMagick ghostscript printer-filters mpage a2ps ppdfilt libppd1 gpr groff libgimpprint1 numlock curl
     sane-backends sane-frontends xsane xsane-gimp
     hotplug dev ypbind speedtouch_mgmt
