@@ -704,6 +704,8 @@ enum return_type ftp_prepare(void)
 	char * questions_auto[] = { "server", "directory", "user", "pass", "proxy_host", "proxy_port", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
+	char modules_cz[500];
+	struct utsname kernel_uname;
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -715,6 +717,8 @@ enum return_type ftp_prepare(void)
 
 	if (results != RETURN_OK)
 		return results;
+
+	uname(&kernel_uname);
 
 	do {
 		char location_full[500];
@@ -751,6 +755,17 @@ enum return_type ftp_prepare(void)
                                 results = RETURN_BACK;
                                 continue;
                         }
+
+			strcpy(modules_cz, answers[1]);
+			strcat(modules_cz, LIVE_LOCATION "lib/modules.cz-");
+			strcat(modules_cz, kernel_uname.release);
+
+			log_message("checking presence of modules.cz file : \"%s\"", modules_cz);
+			if (ftp_get_filesize(ftp_serv_response, modules_cz) <= 0) {
+				stg1_info_message("The modules for this kernel (%s) can't be found on this mirror, please update your boot disk", kernel_uname.release);
+				results = RETURN_BACK;
+				continue;
+			}
                 }
 
 		strcpy(location_full, answers[1]);
