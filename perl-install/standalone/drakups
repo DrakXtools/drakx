@@ -51,7 +51,7 @@ sub readDriversList() {
                                      driver => $driver,
                                      extra => $extra,
                                     };
-            push @ups, "$vendor|$model";
+            push @ups, "$vendor|$model ($extra)";
         }
     }
     \%ups, \@ups;
@@ -129,9 +129,9 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                 data => [ { label => N("Manufacturer / Model:"), val => \$ups, list => $model_list,
                                             type => 'combo', sort => 1, separator => '|' }, ],
                                 post => sub {
-                                    ($vendor, $model) = split(/\|/, $ups);
+                                    ($vendor, $model) = ($1, $2) if $ups =~ /(.*)\|(.*) \(/;
                                     ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model}{driver}, "");
-                                    ($driver) = split(/\s*/, $driver);
+                                    ($driver) = split(/\s+/, $driver);
                                     "driver";
                                 },
                                },
