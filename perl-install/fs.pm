@@ -420,7 +420,7 @@ sub set_default_options {
 
     if ($is_removable) {
 	$options->{supermount} = $useSupermount;
-	$part->{type} = 'auto';	# if supermount, code below will handle choosing the right type
+	$part->{type} = 'auto';
     }
 
     my $is_auto = isThisFs('auto', $part);
