@@ -158,7 +158,7 @@ arch() =~ /^sparc/ ? (
 }],
 [ 'cdrom', {
 arch() !~ /^sparc/ ? (
-  "sbpcd" => "SoundBlaster/Panasonic",
+#-  "sbpcd" => "SoundBlaster/Panasonic", #- removed for space
   "aztcd" => "Aztech CD",
   "gscd" => "Goldstar R420",
   "isp16" => "ISP16/MAD16/Mozart",
