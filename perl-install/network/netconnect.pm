@@ -161,6 +161,7 @@ sub real_main {
                         pptp  => N("Point to Point Tunneling Protocol (PPTP)"),
                         pppoe  => N("PPP over Ethernet (PPPoE)"),
                         pppoa  => N("PPP over ATM (PPPoA)"),
+                        capi  => N("DSL over CAPI"),
                        );
 
       my %encapsulations = (
@@ -425,7 +426,9 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                                      list => [ $isdn->{driver}, "capidrv" ] }
                                   ] },
                     post => sub {
-                        $isdn->{driver} = $isdn_name;
+                        if ($isdn_name eq "capidrv") {
+                            put_in_hash($isdn, $isdn_capi);
+                        }
                         return "isdn_protocol";
                     }
                    },
@@ -653,15 +656,23 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         get_subwizard($wiz, 'adsl');
                         $lan_detect->();
-                        detect($modules_conf, $netc->{autodetect}, 'adsl');
                         @adsl_devices = keys %eth_intf;
+
+                        detect($modules_conf, $netc->{autodetect}, 'adsl');
                         foreach my $modem (keys %adsl_devices) {
                             push @adsl_devices, $modem if $netc->{autodetect}{adsl}{$modem};
+                        }
+
+                        detect($modules_conf, $netc->{autodetect}, 'isdn');
+                        if (my @isdn_modems = @{$netc->{autodetect}{isdn}}) {
+                            require network::isdn;
+                            %isdn_cards = map { $_->{description} => $_ } grep { $_->{driver} =~ /dsl/i } map { network::isdn::get_capi_card($_) } @isdn_modems;
+                            push @adsl_devices, keys %isdn_cards;
                         }
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
-                               list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $adsl_devices{$_[0]} } } ],
+                               list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $adsl_devices{$_[0]} || $_[0] } } ],
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
@@ -678,6 +689,12 @@ Take a look at http://www.linmodems.org"),
                         $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
                         if ($ntf_name eq 'bewan' && !$::testing) {
                             $in->do_pkgs->ensure_is_installed_if_available('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
+                        }
+                        if (exists($isdn_cards{$ntf_name})) {
+                            require network::isdn;
+                            $netcnx->{capi} = $isdn_cards{$ntf_name};
+                            $adsl_type = "capi";
+                            return 'adsl_account';
                         }
                         return 'adsl_provider';
                     },
@@ -800,9 +817,6 @@ If you don't know, choose 'use PPPoE'"),
                             $auto_ip = $adsl_type eq 'dhcp';
                             return 'lan_intf';
                         }
-                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
-                        $netc->{NET_DEVICE} = member($adsl_type, 'pppoe', 'pptp') ? $ntf_name : 'ppp0';
-                        $netc->{NET_INTERFACE} = 'ppp0';
                         return 'adsl_account';
                     },
                    },
@@ -810,6 +824,11 @@ If you don't know, choose 'use PPPoE'"),
 
                    adsl_account => 
                    {
+                    pre => sub {
+                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
+                        $netc->{NET_DEVICE} = member($adsl_type, 'pppoe', 'pptp') ? $ntf_name : 'ppp0';
+                        $netc->{NET_INTERFACE} = 'ppp0';
+                    },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => sub {
@@ -819,8 +838,10 @@ If you don't know, choose 'use PPPoE'"),
                          { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
-                         { label => N("Virtual Path ID (VPI):"), val => \$netc->{vpi}, advanced => 1 },
-                         { label => N("Virtual Circuit ID (VCI):"), val => \$netc->{vci}, advanced => 1 },
+                         if_($adsl_type ne "capi",
+                             { label => N("Virtual Path ID (VPI):"), val => \$netc->{vpi}, advanced => 1 },
+                             { label => N("Virtual Circuit ID (VCI):"), val => \$netc->{vci}, advanced => 1 }
+                            ),
                          if_($ntf_name eq "sagem",
                              { label => N("Encapsulation:"), val => \$netc->{Encapsulation}, list => [ keys %encapsulations ],
                                format => sub { $encapsulations{$_[0]} }, advanced => 1,
