@@ -55,6 +55,7 @@ my $cfg_file = $cfg_dir . "draktermserv.conf";
 my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
+my $tftpboot = "/var/lib/tftpboot";
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
@@ -638,6 +639,8 @@ sub make_boot() {
 						sub { write_eb_image($nic, $rom_path, "floppy") }),
 					gtksignal_connect(new Gtk2::Button(N("Boot ISO")), clicked => 
 						sub { write_eb_image($nic, $rom_path, "iso") }),
+					gtksignal_connect(new Gtk2::Button(N("PXE Image")), clicked => 
+						sub { write_eb_image($nic, $rom_path, "pxe") }),
 					new Gtk2::HBox(0,20),
 				),
 				new Gtk2::HBox(0,5),
@@ -700,7 +703,7 @@ sub make_nbi() {
 	my $list_nbis = Gtk2::TreeView->new_with_model($list_model);
 	$list_nbis->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 	$list_nbis->set_headers_visible(0);	
-	my @nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+	my @nbis = grep { /\.nbi/ } all($tftpboot);
 	my $nbi;
 	my $nbi_iter;
 	my $iter;
@@ -727,7 +730,7 @@ sub make_nbi() {
 							cursor_wait();
 							system("/usr/bin/mknbi-set -k /boot/$kernel");
 							$list_model->clear;
-							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+							@nbis = grep { /\.nbi/ } all($tftpboot);
 							foreach (@nbis) {
     							$list_model->append_set($iter, $_);		
 							}
@@ -740,7 +743,7 @@ sub make_nbi() {
 						if ($nic) {
 							system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
 							$list_model->clear;
-							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+							@nbis = grep { /\.nbi/ } all($tftpboot);
 							foreach (@nbis) {
     							$list_model->append_set($iter, $_);	
 							} 
@@ -753,7 +756,7 @@ sub make_nbi() {
 						cursor_wait();
 						system("/usr/bin/mknbi-set");
 						$list_model->clear;
-						@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+						@nbis = grep { /\.nbi/ } all($tftpboot);
 						foreach (@nbis) {
     						$list_model->append_set($iter, $_);	
 						}
@@ -761,7 +764,7 @@ sub make_nbi() {
 					}),
 					new Gtk2::HBox(1,1),
 					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => sub { 
-						my $nbi = "/var/lib/tftpboot/" . $nbi;
+						my $nbi = $tftpboot . "/" . $nbi;
 						my $result = unlink($nbi) || warn("Can't delete $nbi...");
 						if ($result == 1) {
 							$list_model->remove($nbi_iter);
@@ -769,8 +772,8 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => sub { 
 						cursor_wait();
-						foreach (grep { /\.nbi/ } all("/var/lib/tftpboot")) {
-							my $nbi = "/var/lib/tftpboot/" . $_;
+						foreach (grep { /\.nbi/ } all($tftpboot)) {
+							my $nbi = $tftpboot . "/" . $_;
 							unlink($nbi) || warn("Can't delete $nbi...");
 						}
 						$list_model->clear;
@@ -925,7 +928,7 @@ sub maintain_clients() {
 	gtksignal_connect(my $check_hdw_config = new Gtk2::CheckButton(N("Allow local hardware\nconfiguration.")),
 		clicked => sub { invbool \$local_config });
 					
-	my @images = grep { /\.nbi/ } all("/var/lib/tftpboot/");
+	my @images = grep { /\.nbi/ } all($tftpboot);
 	my $have_nbis = @images;
 	if ($have_nbis) {
 		unshift(@images, "");
@@ -1307,7 +1310,7 @@ sub write_dhcpd_config {
 }
 
 sub write_eb_image {
-	#- write a bootable etherboot CD image or floppy
+	#- write a bootable etherboot CD image or floppy - pxe images too
 	my ($nic, $rom_path, $type) = @_;	 	
 	if ($type eq 'floppy') {
 		my $in = interactive->vnew;
@@ -1323,6 +1326,13 @@ sub write_eb_image {
 		} else {
 			$in->ask_warn(N("Error"), N("No floppy drive available!"));
 		}
+	} elsif ($type eq 'pxe') {
+		system("cat $rom_path/pxeprefix.bin $rom_path/start16.bin $rom_path/zimg/$nic > $tftpboot/$nic.pxe");
+		if (-e "$tftpboot/$nic.pxe") {
+			$in->ask_warn(N("Information"), N("PXE image is %s/%s", $tftpboot, $nic))
+		} else { 
+			$in->ask_warn(N("Error"), N("Error writing %s/%s", $tftpboot, $nic))
+		}			
 	} else {
 		mkdir_p("/tmp/eb");
 		system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /tmp/eb/eb.img");
@@ -1732,12 +1742,25 @@ sub update_hosts_allow {
 sub format_client_entry {
 	#- create a client entry, in proper format
 	my ($client, %ts_clients) = @_;
+	my ($pxe_img) = $ts_clients{$client}{filename} =~ /boot-(.*?)\./;
+	my $pxe;
+	$pxe_img .= ".zimg.pxe";
+	$pxe = 1 if -f "$tftpboot/$pxe_img";
 
 	my $entry = "host $client {\n";
 	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
 	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
 	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
-	$entry .= qq(\tfilename\t\t"$ts_clients{$client}{filename}";\n) if $ts_clients{$client}{filename};
+	if ($ts_clients{$client}{filename}) {
+		$entry .= qq(\tif substring (option vendor-class-identifier, 0, 9) = "PXEClient"\n) if $pxe;
+		$entry .= qq(\t{\n\t) if $pxe;
+		$entry .= qq(\tfilename\t\t"$pxe_img";\n) if $pxe;
+		$entry .= qq(\t}\n) if $pxe;
+		$entry .= qq(\telse if substring (option vendor-class-identifier, 0, 9) = "Etherboot"\n) if $pxe;
+		$entry .= qq(\t{\n\t) if $pxe;
+		$entry .= qq(\tfilename\t\t"$ts_clients{$client}{filename}";\n);
+		$entry .= qq(\t}\n) if $pxe;
+	}
 	$entry .= "\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n" if $ts_clients{$client}{hdw_config};
 	$entry .= "}\n";
 	if ($ts_clients{$client}{type} eq "thin") {
