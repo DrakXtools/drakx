@@ -512,16 +512,16 @@ sub advanced {
     my $choice_what_sys;
     read_conf_file();
     
-#*    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("backup_net.png");
-#*    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("backup_hd.png");
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time.png");
-#*    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user.png");
-#*    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader.png");
-#*    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u.png");
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options.png");
-#*    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd.png");
-#*    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("net.png");
-#*    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom.png");
+#*    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("backup_net");
+#*    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("backup_hd");
+    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time");
+#*    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user");
+#*    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader");
+#*    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u");
+    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options");
+#*    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd");
+#*    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("net");
+#*    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom");
 
 my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $label_what_user, $label_what_other, $label_where_net, $label_where_cd, $label_where_hd) = map { gtkpack($_->[2] ? new Gtk::VBox(0, 2) : new Gtk::HBox(0, 2), gtkpng($_->[0]), $_->[1]) }
       (['backup_hd', _('What backup.'), 1],
@@ -1053,9 +1053,9 @@ sub restore_step2 {
 sub restore {
     my $retore_box;
     my $retore_box3;
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2");
     my $check_restore_sys;
     my $check_restore_user;
     my $check_restore_other;
@@ -1155,9 +1155,9 @@ sub interactive_mode_my {
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
     
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot");
     
     read_conf_file();    
     $backup_sys or $box_cgf_state_sys = _("Do not include System Files");    
@@ -1232,12 +1232,12 @@ sub after_adv {
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
     
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left.png");
-    my ($pix_b_map, $pix_b_mask) = gtkcreate_png("backup_bot2.png");
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom.png");
-    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd.png");
-    my ($pix_quit_map, $pix_quit_mask) = gtkcreate_png("quit.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left");
+    my ($pix_b_map, $pix_b_mask) = gtkcreate_png("backup_bot2");
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom");
+    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd");
+    my ($pix_quit_map, $pix_quit_mask) = gtkcreate_png("quit");
     
     my $button_burn_cd = new Gtk::Button();
     $button_burn_cd->add( gtkpack(new Gtk::HBox( 0, 2),
