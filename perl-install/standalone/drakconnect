@@ -200,6 +200,14 @@ sub manage {
     $notebook->set_property('show-border', 0);
     my $apply_button;
   
+    my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+    gtkflush();
+
+    network::netconnect::detect(my $detect = {});
+    $detect->{adsl} and do { $detect->{adsl}{$_} and $intf->{$_} = {} foreach keys %{$detect->{adsl}} };
+    
+    undef $wait;
+
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
@@ -226,9 +234,6 @@ sub manage {
 					       ),
 				    );
     $apply_button = $oc->{buttons}{N("Apply")};
-
-    network::netconnect::detect(my $detect = {});
-    $detect->{adsl} and do { $detect->{adsl}{$_} and $intf->{$_} = {} foreach keys %{$detect->{adsl}} };
 
     each_index {
 	my $interface = $_;
