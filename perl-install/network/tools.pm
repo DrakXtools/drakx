@@ -9,7 +9,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected_bg disconnect_backend disconnected is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected_bg disconnect_backend disconnected is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -350,6 +350,11 @@ sub use_floppy {
 sub is_wireless_intf {
     my ($module) = @_;
     member($module, qw(acx100_pci airo aironet_cs aironet4500_cs airo_cs airport at76c503 hermes netwave_cs orinoco_cs prism2_usb orinoco ray_cs usbvnet_rfmd wavelan_cs wvlan_cs))
+}
+
+sub is_dynamic_ip {
+  my ($intf) = @_;
+  every { $_->{BOOTPROTO} eq "static" } values %$intf
 }
 
 1;
