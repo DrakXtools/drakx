@@ -403,8 +403,9 @@ sub keyboard2full_xkb {
     $XkbLayout ? {
 	XkbLayout => $XkbLayout, 
 	XkbModel => $XkbModel,
-	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : undef,
-    } : { XkbDisable => undef };
+	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : '',
+	XkbCompat => $keyboard->{GRP_TOGGLE} ? "group_led" : '',
+    } : { XkbDisable => '' };
 }
 
 sub xmodmap_file {
