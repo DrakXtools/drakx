@@ -24,7 +24,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
   choose:
     $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),
 						N("Please, choose your keyboard layout."),
-						\&keyboard::KEYBOARD2text,
+						sub { translate(keyboard::KEYBOARD2text($_[0])) },
 						[ keyboard::KEYBOARDs() ],
 						$keyboard->{KEYBOARD}) or goto end;
 
