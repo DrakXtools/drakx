@@ -219,8 +219,7 @@ sub get_main_menu {
 # launch X functions
 #-------------------------------------------------------------
 
-sub isXlaunched
-{
+sub isXlaunched {
     my $line;
     open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: %s", $!);
     while (<INITTAB>) {
@@ -231,8 +230,7 @@ sub isXlaunched
     return ($line-3);
 }
 
-sub updateInit
-{
+sub updateInit {
     my $runlevel = ($x_mode) ? 5 : 3;
     substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } "/etc/inittab";
 }
@@ -243,8 +241,7 @@ sub updateInit
 
 
 
-sub updateAurora
-{
+sub updateAurora {
     if ($a_mode) {
         if ($a_c_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-Categorizing-WsLib",    "/etc/aurora/Monitor");
@@ -272,10 +269,8 @@ sub updateAurora
 # launch autologin functions
 #-------------------------------------------------------------
 
-sub isAutologin
-{
+sub isAutologin {
     my $line;
-    
     open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: %s", $!);
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
@@ -298,10 +293,8 @@ sub get_autologin {
     %o;
 }
 
-sub updateAutologin
-{
+sub updateAutologin {
     my ($usern,$deskt)=($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
-
     if ($x_yes_button->get_active()) {
 	$in->do_pkgs->install('autologin') if $x_mode;
 	set_autologin('',$usern,$deskt);
@@ -312,9 +305,7 @@ sub updateAutologin
  
 sub set_autologin {
   my ($prefix, $user, $desktop) = @_;
-
   output "$prefix/etc/sysconfig/desktop", uc($desktop), "\n" if $user;
-
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
   chmod 0600, "$prefix/etc/sysconfig/autologin";
@@ -325,8 +316,7 @@ sub set_autologin {
 #-------------------------------------------------------------
 # lilo/grub functions
 #-------------------------------------------------------------
-sub lilo_choice
-{
+sub lilo_choice {
     my $bootloader = bootloader::read('', '/etc/lilo.conf');
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
