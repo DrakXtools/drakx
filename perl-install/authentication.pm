@@ -2,7 +2,6 @@ package authentication; # $Id$
 
 use common;
 use any;
-use Net::DNS;
 
 sub kinds() { 
     ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'SMBKRB');
@@ -65,8 +64,10 @@ sub ask_parameters {
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
 
-	find_srv_name($authentication->{AD_domain});
-	$authentication->{AD_server} ||= $data[0] if @data;
+	$in->do_pkgs->install(qw(perl-Net-DNS));
+
+	my @srvs = query_srv_names($authentication->{AD_domain});
+	$authentication->{AD_server} ||= $srvs[0] if @srvs;
 
 	my %sub_kinds = my @sub_kinds = (
 	    simple => N("simple"), 
@@ -82,7 +83,7 @@ sub ask_parameters {
 		     N("Authentication Active Directory"),
 		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
 		     #{ label => N("Server"), val => \$authentication->{AD_server} },
-		       { label => N("Server"), type => 'combo', val => \$authentication->{AD_server}, list => \@data , not_edit => 0 },
+		       { label => N("Server"), type => 'combo', val => \$authentication->{AD_server}, list => \@srvs , not_edit => 0 },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
@@ -105,12 +106,17 @@ sub ask_parameters {
     } elsif ($kind eq 'winbind' || $kind eq 'SMBKRB') {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking isn't setup yet necessarily
-	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."))
+	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.
+You will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.
+If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.
+Should this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.
+The command 'wbinfo -t' will test whether your authentication secrets are good."))
 	  if $kind eq 'winbind';
 
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'SMBKRB';
 	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
 	$netc->{WINDOMAIN} ||= $netc->{DOMAINNAME};
+	my $anonymous;
 	$in->ask_from('',
 		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
 		        [ if_($kind eq 'SMBKRB', 
@@ -250,16 +256,15 @@ sub set {
 	#- defer running smbpassword until the network is up
 
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'net','join', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'net', 'join', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     } elsif ($kind eq 'SMBKRB') {
 	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
 	my $domain = uc $netc->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
-	my $srvtime = $authentication->{AD_server};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->install('samba-winbind', 'pam_krb5','samba-server', 'samba-client');
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5', 'samba-server', 'samba-client');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
 
@@ -268,7 +273,7 @@ sub set {
 	network::smb::write_smb_ads_conf($domain,$realm);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
-	run_program::rooted($::prefix, 'net','time','set','-S',$authentication->{AD_server});
+	run_program::rooted($::prefix, 'net', 'time', 'set', '-S', $authentication->{AD_server});
 	run_program::rooted($::prefix, 'service', 'smb', 'restart');
 	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
@@ -515,17 +520,14 @@ sub krb5_conf_update {
 
 }
 
-sub find_srv_name {
+sub query_srv_names {
+    my ($domain) = @_;
 
-	my ($domain) = @_;
-	my $res   = Net::DNS::Resolver->new;
-	my $dom = "_ldap._tcp.".$domain;
-	my $query = $res->query("$dom", "srv");
-	foreach ($query->answer) {
-		my $srv = ($query->answer)[$_];
-		push (@data,$_->target);
-	}
-	return @data;
+    eval { require Net::DNS; 1 } or return;
+    my $res = Net::DNS::Resolver->new;
+    my $query = $res->query("_ldap._tcp.$domain", 'srv') or return;
+    map { $_->target } $query->answer;
 }
+
 1;
 
