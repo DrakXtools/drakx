@@ -1,3 +1,38 @@
+2001/04/10  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected bad network restart
+
+	* my_gtk.pm: corrected bad font
+
+	* network.pm: get rid of ifcfg-
+	minor correction
+
+2001/04/09  dam's  <damien@mandrakesoft.com>
+
+	* tinyfirewall.pm: typo
+
+2001/04/09  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm (Create): check for 40MB instead of 32MB for min reiserfs
+	size as the check is done before rounding.
+
+	* bootloader.pm (install_grub): altconfigfile only if /boot is not
+	reiserfs :-/
+
+	* tools/make_mdkinst_stage2: fix the stage2 too big (was keeping too many
+	modules.cz)
+
+	* install_any.pm (setPackages): also have SOUND set in compssUsersChoice
+	based on pciusbtable
+
+	* share/compssUsers, share/rpmsrate: 
+	  - SOUND is now a flag
+	  - AUDIO is the group
+
+2001/04/09  siegel
+
+	* tinyfirewall.pm: i18n fixes
+
 2001/04/09  François Pons  <fpons@mandrakesoft.com>
 
 	* rescue/tree/etc/oem: fixes of grub installation using hd.img
