@@ -237,7 +237,7 @@ void probe_that_type(enum driver_type type)
 				log_message("USB: couldn't mount /proc/bus/usb");
 				goto end_usb_probe;
 			}
-			wait_message("Waiting for USB stuff to show up.");
+			wait_message("Detecting USB devices.");
 			sleep(4); /* sucking background work */
 			remove_wait_message();
 		}
