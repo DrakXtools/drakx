@@ -59,6 +59,11 @@ int brk(void *end_data_segment) __THROW;
 void *sbrk(ptrdiff_t increment) __THROW;
 
 int gethostname(char *name, size_t len) __THROW;
+int sethostname(const char *name, size_t len) __THROW;
+
+int setdomainname(const char *name, size_t len) __THROW;
+
+void sync(void) __THROW;
 
 /* Values for the second argument to access.
    These may be OR'd together.  */
@@ -73,5 +78,6 @@ int dup2 (int __fd, int __fd2) __THROW;
 
 pid_t setsid (void) __THROW;
 
+unsigned int sleep (unsigned int __seconds) __THROW;
 
 #endif

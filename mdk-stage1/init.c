@@ -68,7 +68,7 @@ void print_warning(char *msg)
 	printf("W: %s\n", msg);
 }
 
-void print_int(int fd, int i)
+void print_int_init(int fd, int i)
 {
 	char buf[10];
 	char * chptr = buf + 9;
@@ -90,7 +90,7 @@ void print_int(int fd, int i)
 	write(fd, chptr + 1, j);
 }
 
-void print_str(int fd, char * string)
+void print_str_init(int fd, char * string)
 {
 	write(fd, string, strlen(string));
 }
@@ -147,27 +147,27 @@ void doklog()
 		sleep(5);
 	}
 
-	print_str(log, "] got socket\n");
+	print_str_init(log, "] got socket\n");
 	if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + strlen(sockaddr.sun_path)))	{
-		print_str(log, "] bind error: ");
-		print_int(log, errno);
-		print_str(log, "\n");
+		print_str_init(log, "] bind error: ");
+		print_int_init(log, errno);
+		print_str_init(log, "\n");
 		sleep(5);
 	}
 
-	print_str(log, "] bound socket\n");
+	print_str_init(log, "] bound socket\n");
 	chmod("/dev/log", 0666);
 	if (listen(sock, 5)) {
-		print_str(log, "] listen error: ");
-		print_int(log, errno);
-		print_str(log, "\n");
+		print_str_init(log, "] listen error: ");
+		print_int_init(log, errno);
+		print_str_init(log, "\n");
 		sleep(5);
 	}
 
 	/* disable on-console syslog output */
 	syslog(8, NULL, 1);
 
-	print_str(log, "] kernel/system logger ok\n");
+	print_str_init(log, "] kernel/system logger ok\n");
 	FD_ZERO(&unixs);
 	while (1) {
 		memcpy(&readset, &unixs, sizeof(unixs));
@@ -450,7 +450,7 @@ int main(int argc, char **argv)
 	if (!abnormal_termination) {
 		printf("rebooting system\n");
 		sleep(2);
-		reboot(LINUX_REBOOT_CMD_RESTART);
+		reboot(0xfee1dead, 672274793, 0x01234567);
 	} else {
 		printf("you may safely reboot your system\n");
 		while (1);

@@ -33,8 +33,12 @@
 #include <signal.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
-#include <linux/reboot.h>
-#include <sys/reboot.h>
 #include <linux/unistd.h>
-_syscall3(int, syslog, int, type, char *, bufp, int, len);
+#include <sys/select.h>
 
+#ifndef SOCK_STREAM
+#define SOCK_STREAM 1
+#endif
+
+_syscall3(int, syslog, int, type, char *, bufp, int, len);
+_syscall3(int, reboot, int, magic, int, magic2, int, flag);

@@ -224,18 +224,18 @@ void printf(char * fmt, ...)
 		if (*chptr == '%')
 		{
 			*chptr++ = '\0';
-			print_str(1, start);
+			print_str_init(1, start);
 			
 			switch (*chptr++)
 			{
 			case 's': 
 				strarg = va_arg(args, char *);
-				print_str(1, strarg);
+				print_str_init(1, strarg);
 				break;
 				
 			case 'd':
 				numarg = va_arg(args, int);
-				print_int(1, numarg);
+				print_int_init(1, numarg);
 				break;
 			}
 			
@@ -243,7 +243,7 @@ void printf(char * fmt, ...)
 		}
 		else
 		{
-			print_str(1, start);
+			print_str_init(1, start);
 			start = NULL;
 		}
 	}

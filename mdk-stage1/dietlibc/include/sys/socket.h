@@ -5,6 +5,7 @@
 #include <linux/socket.h>
 
 int socket(int domain, int type, int protocol);
+int listen (int fd, int n);
 int accept(int s, struct sockaddr *addr, socklen_t *addrlen);
 int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen);
 int bind(int sockfd, struct sockaddr *my_addr, socklen_t addrlen);

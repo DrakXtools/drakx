@@ -10,5 +10,6 @@ int sigemptyset(sigset_t *set) __THROW;
 int sigaddset(sigset_t *set, int signum) __THROW;
 int sigprocmask(int how, const sigset_t *set, sigset_t *oldset) __THROW;
 int raise (int sig) __THROW;
+void (*signal(int signum, void (*sighandler)(int)))(int) __THROW;
 
 #endif

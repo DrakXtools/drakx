@@ -111,7 +111,8 @@ NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 ifeq (i386, $(ARCH))
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
 else
-LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
+LDFLAGS_INIT = $(DIETLIBC_LDFLAGS_STAGE1)
+INIT_LIBC = $(DIETLIBC_LIBC)
 endif
 
 
@@ -137,8 +138,8 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n ;\
 	done
 
-init: $(INITOBJS)
-	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
+init: $(INITOBJS) $(INIT_LIBC)
+	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(STAGE1_OWN_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
@@ -168,7 +169,7 @@ $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
 $(INITOBJS): %.o: %.c
-	$(COMPILE) $(INIT_DEFS) $(GLIBC_INCLUDES) -c $<
+	$(COMPILE) $(INIT_DEFS) $(DIETLIBC_INCLUDES) -c $<
 
 .c.o: .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(PCMCIA_DEFS) -c $<

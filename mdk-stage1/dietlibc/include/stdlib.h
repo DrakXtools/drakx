@@ -33,5 +33,12 @@ void exit(int);
 
 extern char **environ;
 
+#define	WIFSTOPPED(status)	(((status) & 0xff) == 0x7f)
+#define	WIFSIGNALED(status)	(!WIFSTOPPED(status) && !WIFEXITED(status))
+#define	WEXITSTATUS(status)	(((status) & 0xff00) >> 8)
+#define	WTERMSIG(status)	((status) & 0x7f)
+#define	WSTOPSIG(status)	WEXITSTATUS(status)
+#define	WIFEXITED(status)	(WTERMSIG(status) == 0)
+
 
 #endif
