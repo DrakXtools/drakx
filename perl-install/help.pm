@@ -579,7 +579,7 @@ __("Please select the right options according to your printer.
 Please see its documentation if you don't know what choose here.
 
 
-You will able to test your configuration in next step and you will be able to modify it if it doesn't work as you want."),
+You will be able to test your configuration in next step and you will be able to modify it if it doesn't work as you want."),
 
 setRootPassword => 
  __("You can now enter the root password for your Linux-Mandrake system.
