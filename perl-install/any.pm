@@ -237,7 +237,7 @@ sub setupBootloader__general {
 
     my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
 
-    ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
+    ($b->{method}, my $method_choices) = bootloader::method_choices($fstab, $b);
     my $profiles = bootloader::has_profiles($b);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') ne 'off';
     my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');

@@ -127,7 +127,7 @@ sub read() {
 	$_->{label}  = remove_quotes_and_spaces($_->{label})  foreach @{$b{entries}};
 	$b{default} = remove_quotes_and_spaces($b{default}) if $b{default};
 	$b{timeout} = $b{timeout} / 10 if $b{timeout};
-	$b{message} = cat_("$::prefix$b{message}") if $b{message};
+	delete $b{message};
     }
 
     #- cleanup duplicate labels (in case file is corrupted)
@@ -476,9 +476,7 @@ sub suggest {
 	});
 
     if (!$bootloader->{message} || $bootloader->{message} eq "1") {
-	$bootloader->{message} = join('', cat_("$::prefix/boot/message"));
-	if (!$bootloader->{message}) {
-	    my $msg_en =
+	my $msg_en =
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 N_("Welcome to %s the operating system chooser!
 
@@ -486,11 +484,10 @@ Choose an operating system from the list above or
 wait %d seconds for default boot.
 
 ");
-	    my $msg = translate($msg_en);
-	    #- use the english version if more than 20% of 8bits chars
-	    $msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
-	    $bootloader->{message} = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $bootloader->{timeout};
-	}
+	my $msg = translate($msg_en);
+	#- use the english version if more than 20% of 8bits chars
+	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
+	$bootloader->{message} = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $bootloader->{timeout};
     }
 
     add2hash_($bootloader, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
@@ -576,11 +573,11 @@ wait %d seconds for default boot.
 	}
     }
     $bootloader->{default} ||= "linux";
-    $bootloader->{method} = first(method_choices($fstab));
+    $bootloader->{method} = first(method_choices($fstab, $bootloader));
 }
 
 sub method_choices {
-    my ($fstab) = @_;
+    my ($fstab, $bootloader) = @_;
     my %choices = (
 	if_(arch() =~ /sparc/,
 	    'silo' => N("SILO"),
@@ -595,7 +592,7 @@ sub method_choices {
     );
     my $prefered;
     $prefered ||= 'grub' if $::isStandalone && run_program::rooted_get_stdout($::prefix, 'detectloader') =~ /GRUB/;
-    $prefered ||= 'lilo-graphic';
+    $prefered ||= 'lilo-' . (member($bootloader->{install}, 'text', 'menu', 'graphic') ? $bootloader->{install} : 'graphic');
     my $default = exists $choices{$prefered} ? $prefered : first(keys %choices);
 
     $default, \%choices;
@@ -914,9 +911,13 @@ sub write_lilo_conf {
 sub install_lilo {
     my ($bootloader, $fstab, $hds, $method) = @_;
 
-    $bootloader->{install} = 'text' if $method eq 'lilo-text';
+    if (my ($install) = $method =~ /lilo-(text|menu)/) {
+	$bootloader->{install} = $install;
+    } else {
+	delete $bootloader->{install};
+    }
     output("$::prefix/boot/message-text", $bootloader->{message}) if $bootloader->{message};
-    symlinkf "message-" . ($method eq 'lilo-text' ? 'text' : 'graphic'), "$::prefix/boot/message";
+    symlinkf "message-" . ($method ne 'lilo-graphic' ? 'text' : 'graphic'), "$::prefix/boot/message";
 
     write_lilo_conf($bootloader, $fstab, $hds);
 
