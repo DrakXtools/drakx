@@ -2,7 +2,7 @@ package harddrake::data;
 
 use strict;
 use detect_devices;
-use MDK::Common;
+use common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
@@ -24,20 +24,20 @@ our @tree =
     (
 	["FLOPPY","Floppy", "floppy.png", "",\&detect_devices::floppies],
 	["HARDDISK","Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds],
-	["CDROM","CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_))} &detect_devices::cdroms}],
+	["CDROM","CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms } ],
 	["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners],
 	["DVDROM","DVD-ROM", "cd.png", "", \&detect_devices::dvdroms],
 	["TAPE","Tape", "tape.png", "", \&detect_devices::tapes],
 #	["CDBURNER","Cd burners", "cd.png", "", \&detect_devices::burners],
 
 	["VIDEO","Videocard", "video.png", "$sbindir/XFdrake", 
-	 sub {grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }],
+	 sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
-	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}],
+	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}],
 	["MULTIMEDIA_OTHER","Other MultiMedia devices", "tv.png", "", 
-	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices}],
+	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices}],
 	["AUDIO","Soundcard", "sound.png", "$bindir/aumix", 
-	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}],
+	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
 	["WEBCAM","Webcam", "webcam.png", "", sub {}],
 	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnect", sub {
@@ -53,7 +53,7 @@ our @tree =
 #	["","Modem", "Modem.png", "", \&detect_devices::getNet],
 #	["","Isdn", "", "", \&detect_devices::getNet]
 
-	["BRIDGE","Bridge(s)", "memory.png", "", sub {grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
+	["BRIDGE","Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
 # 	["","Cpu", "cpu.png", "", sub {}],
 #	["","Memory", "memory.png", "", sub {}],
 	["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown],
@@ -62,13 +62,13 @@ our @tree =
 	 sub { require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { require scanner; scanner::findScannerUsbport() }],
-	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect()}],
+	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect() } ],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
-	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
-	["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_SCSI' } @devices}],
-	["USB_CONTROLLER","USB controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_USB' } @devices}],
-	["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices}],
+	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
+	["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_SCSI' } @devices}],
+	["USB_CONTROLLER","USB controllers", "usb.png", "", sub { grep { $_->{media_type} =~ 'SERIAL_USB' } @devices}],
+	["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub { grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices}],
 	);
 
 
