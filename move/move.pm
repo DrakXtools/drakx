@@ -298,9 +298,10 @@ sub key_mount {
 	    log::l("trying another usb key partition than $key_part->{device}");
 	    fs::umount_part($key_part);
 	    delete $key_part->{mntpoint};
+	    undef $key_part;
 	}
 	$_->{mntpoint} = '/home';
-	$_->{options} = $key_mountopts;
+	$_->{options} = "$key_mountopts,sync";
 	my $ok = eval { fs::mount_part($_); 1 };
 	if ($ok) {
 	    my ($kb_size) = MDK::Common::System::df('/home');
@@ -317,17 +318,6 @@ sub key_mount {
     } 
 
     
-}
-
-sub key_umount {
-    my ($o) = @_;
-    $key_part or return;
-
-    eval { 
-	fs::umount_part($key_part);
-	undef $key_part;
-	1;
-    };
 }
 
 sub machine_ident() {
@@ -404,13 +394,46 @@ sub reboot() {
     exit 0;
 }
 
-sub install2::verifyKey {
-    my $o = $::o;
 
-    log::l("automatic transparent key support is disabled"), return if $key_disabled;
+sub check_key {
+    my ($o) = @_;
 
-    while (cat_('/proc/mounts') !~ m|\s/home\s|) {
+    if ($key_part) {
+	my $tmp = '/home/.touched';
+	#- can we write?
+	if (eval { output($tmp, 'foo'); cat_($tmp) eq 'foo' && unlink $tmp }) {
+	    return 1;
+	}
 
+	#- argh, key is read-only
+	#- try umounting
+	if (eval { fs::umount_part($key_part); undef $key_part; 1 }) {
+	    modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
+
+	    $o->ask_okcancel_({ title => N("Key isn't writable"), 
+				messages => formatAlaTeX(
+N("The USB key seems to have write protection enabled. Please
+unplug it, remove write protection, and then plug it again.")),
+				ok => N("Retry"),
+				cancel => N("Continue without USB key") }) or return;
+
+	    modules::load('usb-storage');
+	    sleep 2;
+	} else {
+	    #- this case happens when the user boots with a write-protected key containing
+	    #- all user and host data, /etc/X11/X which is on key busyfies it
+	    $o->ask_okcancel_({ title => N("Key isn't writable"), 
+				messages => formatAlaTeX(
+N("The USB key seems to have write protection enabled, but we can't safely
+unplug it now.
+
+
+Click the button to reboot the machine, unplug it, remove write protection,
+plug the key again, and launch Mandrake Move again.")),
+				ok => N("Reboot") });
+	    reboot();
+	}
+    } else {
 	my $message = key_parts($o) ? 
 N("Your USB key doesn't have any valid Windows (FAT) partitions.
 We need one to continue (beside, it's more standard so that you
@@ -433,50 +456,33 @@ seconds before detecting again.
 You may also proceed without an USB key - you'll still be
 able to use Mandrake Move as a normal live Mandrake
 Operating System.");
-        $o->ask_okcancel_({ title => N("Need a key to save your data"), 
-                            messages => formatAlaTeX($message),
-                            ok => N("Detect USB key again"),
-                            cancel => N("Continue without USB key") }) or return;
+	$o->ask_okcancel_({ title => N("Need a key to save your data"), 
+			    messages => formatAlaTeX($message),
+			    ok => N("Detect USB key again"),
+			    cancel => N("Continue without USB key") }) or return;
 
-        key_mount($o, 'reread');
     }
+    0;
+}
 
-    local *F;
-    while (!open F, '>/home/.touched') {
+sub install2::verifyKey {
+    my $o = $::o;
 
-        if (!key_umount($o)) {
-            #- this case happens when the user boots with a write-protected key containing
-            #- all user and host data, /etc/X11/X which is on key busyfies it
-            $o->ask_okcancel_({ title => N("Key isn't writable"), 
-                                messages => formatAlaTeX(
-N("The USB key seems to have write protection enabled, but we can't safely
-unplug it now.
+    log::l("automatic transparent key support is disabled"), return if $key_disabled;
 
-
-Click the button to reboot the machine, unplug it, remove write protection,
-plug the key again, and launch Mandrake Move again.")),
-                            ok => N("Reboot") });
-            reboot();
-        }
-
-        modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
-
-        $o->ask_okcancel_({ title => N("Key isn't writable"), 
-                            messages => formatAlaTeX(
-N("The USB key seems to have write protection enabled. Please
-unplug it, remove write protection, and then plug it again.")),
-                            ok => N("Retry"),
-                            cancel => N("Continue without USB key") }) or return;
-
-        modules::load('usb-storage');
-        sleep 2;
-        key_mount($o, 'reread');
-    }
-    close F;
-    unlink '/home/.touched';
+    while (!check_key($o)) {
+	key_mount($o, 'reread');
+    } 
 
     my $_wait = $using_existing_host_config
                 || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
+
+    if (eval { fs::umount_part($key_part) }) {
+	log::l("remounting without sync option");
+	$key_part->{options} = $key_mountopts;
+	fs::mount_part($key_part);
+    }
+
     key_installfiles('full');
 
     setup_userconf($o);
@@ -692,7 +698,7 @@ sub install2::startMove {
     #- allow user customisation of startup through /etc/rc.d/rc.local
     run_program::run('/etc/rc.d/rc.local');
 
-    if (cat_('/proc/mounts') =~ m|\s/home\s|) {
+    if ($key_part) {
         output '/var/lib/machine_ident', machine_ident();
         run_program::run('/usr/bin/etc-monitorer.pl', uniq map { dirname($_) } (chomp_(`find /etc -type f`),
                                                                                 grep { readlink($_) !~ m|^/| } chomp_(`find /etc -type l`)));
