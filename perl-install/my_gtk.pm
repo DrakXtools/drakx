@@ -342,13 +342,15 @@ sub create_box_with_title($@) {
 	$scroll->set_usize(400, $height);
 	gtkpack__($o->{box}, $scroll);
     } else {
+	my $a = !$::no_separator;
+	undef $::no_separator;
 	gtkpack__($o->{box},
 		  (map {
 		      my $w = ref $_ ? $_ : new Gtk::Label($_);
 		      $w->set_name("Title");
 		      $w;
 		  } map { ref $_ ? $_ : warp_text($_) } @_),
-		  new Gtk::HSeparator,
+		  if_($a, new Gtk::HSeparator)
 		 );
     }
 }
