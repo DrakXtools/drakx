@@ -163,7 +163,10 @@ noaccomp),
                   },
                   sagem =>
                   {
-                   start => "/usr/sbin/eaglectrl -w",
+                   start => qq(
+modprobe eagle-usb
+/usr/sbin/eaglectrl -d
+),
                    stop =>  "/usr/bin/killall pppoa",
                    get_intf => "/usr/sbin/eaglectrl -i",
                    server => {
