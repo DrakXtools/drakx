@@ -365,6 +365,7 @@ Take a look at http://www.linmodems.org"),
                    modem =>
                    {
                     pre => sub {
+                        require network::modem;
                         detect($netc->{autodetect}, 'modem');
                     },
                     name => N("Select the modem to configure:"),
