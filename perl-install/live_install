@@ -1,15 +1,22 @@
 #!/bin/sh
 
-dir=`pwd`/../../..
+if [ -x ./Mandrake/mdkinst/usr/bin/perl-install/live_install2 ]; then
+    dir=`pwd`/Mandrake/mdkinst
+elif [ -x ../../../../../Mandrake/mdkinst/usr/bin/perl-install/live_install2 ]; then
+    dir=`pwd`/../../..
+else
+    echo >&2 "unable to get a working live system to start, check your working directory"
+    exit 2
+fi
 
 /bin/rm -rf /tmp/rhimage
-mkdir -m 0700 /tmp/rhimage || exit 1
+/bin/mkdir -m 0700 /tmp/rhimage || exit 1
 /bin/rm -rf /tmp/drakx
-mkdir -m 0700 /tmp/drakx || exit 2
+/bin/mkdir -m 0700 /tmp/drakx || exit 2
 
 for i in Mandrake RPMS misc boot images
 do
-    ln -sf "$dir/../../$i" "/tmp/rhimage/$i" 
+    /bin/ln -sf "$dir/../../$i" "/tmp/rhimage/$i" 
 done
 
 /bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
@@ -18,47 +25,71 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
     perlcoredir=/usr/lib/perl5/5.6.0/i386-linux/CORE
     cd /tmp/drakx/mdkinst/usr/bin/perl-install
     if [ -x $perlcoredir/libperl.so ]; then
-	mv $perlcoredir/libperl.so /tmp/drakx/mdkinst
+	/bin/mv $perlcoredir/libperl.so /tmp/drakx/mdkinst
     fi
-    mkdir -p $perlcoredir
-    ln -sf /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
+    /bin/mkdir -p $perlcoredir
+    /bin/cp -a /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
 
     if [ -x /usr/bin/packdrake ]; then
-	mv /usr/bin/packdrake /tmp/drakx/mdkinst
+	/bin/mv /usr/bin/packdrake /tmp/drakx/mdkinst
     fi
-    ln -sf /tmp/drakx/mdkinst/usr/bin/packdrake /usr/bin/packdrake
+    /bin/cp -a /tmp/drakx/mdkinst/usr/bin/packdrake /usr/bin/packdrake
 
     for i in MonitorsDB CardsNames Cards+
     do
 	if [ -e /usr/X11R6/lib/X11/$i ]; then
-	    mv /usr/X11R6/lib/X11/$i /tmp/drakx/mdkinst
+	    /bin/mv /usr/X11R6/lib/X11/$i /tmp/drakx/mdkinst
 	fi
-	ln -sf /tmp/drakx/mdkinst/usr/X11R6/lib/X11/$i /usr/X11R6/lib/X11/$i
+	/bin/cp -a /tmp/drakx/mdkinst/usr/X11R6/lib/X11/$i /usr/X11R6/lib/X11/$i
     done
+
+    # get correct fonts for DrakX.
+    if [ -n "$DISPLAY" ]; then
+	xset +fp /tmp/drakx/mdkinst/usr/X11R6/lib/X11/fonts/
+	xset fp rehash
+    fi
 
     # start DrakX
     ../../../lib/ld-linux.so.2 ../perl ./live_install2
 
-    for i in MonitorsDB CardsNames Cards+
+    # restore all fonts dir from 7.2 in case something gets wrong.
+    for i in misc PEX Speedo Type1 mdk 75dpi 100dpi cyrillic
     do
-	rm -f /usr/X11R6/lib/X11/$i
-	if [ -e /tmp/drakx/mdkinst/$i ]; then
-	    mv /tmp/drakx/mdkinst/$i /usr/X11R6/lin/X11/$i
+	if [ -d /usr/X11R6/lib/X11/fonts/$i ]; then
+	    if [ ! -e /usr/X11R6/lib/X11/fonts/$i/fonts.dir ]; then
+		cd /usr/X11R6/lib/X11/fonts/$i
+		mkfontdir
+		if [ -n "$DISPLAY" ]; then
+		    xset fp rehash
+		fi
+		cd -
+	    fi
 	fi
     done
 
-    rm -f /usr/bin/packdrake
-    if [ -x /tmp/drakx/mdkinst/packdrake ]; then
-	mv /tmp/drakx/mdkinst/packdrake /usr/bin/packdrake
-    fi
-
-    rm -f $perlcoredir/libperl.so
-    if [ -x /tmp/drakx/mdkinst/libperl.so ]; then
-	mv /tmp/drakx/mdkinst/libperl.so $perlcoredir/libperl.so
-    fi
+#    for i in MonitorsDB CardsNames Cards+
+#    do
+#	if [ -e /tmp/drakx/mdkinst/$i ]; then
+#	    rm -f /usr/X11R6/lib/X11/$i
+#	    mv /tmp/drakx/mdkinst/$i /usr/X11R6/lib/X11/$i
+#	fi
+#    done
+#
+#    if [ -x /tmp/drakx/mdkinst/packdrake ]; then
+#	rm -f /usr/bin/packdrake
+#	mv /tmp/drakx/mdkinst/packdrake /usr/bin/packdrake
+#    fi
+#
+#    if [ -x /tmp/drakx/mdkinst/libperl.so ]; then
+#	rm -f $perlcoredir/libperl.so
+#	mv /tmp/drakx/mdkinst/libperl.so $perlcoredir/libperl.so
+#    fi
 else
     echo >&2 "unable to get a working live system to start, check your working directory"
+    exit 2
 fi
 
 #/bin/rm -rf /tmp/drakx
 #/bin/rm -rf /tmp/rhimage
+
+sync

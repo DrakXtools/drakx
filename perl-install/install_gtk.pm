@@ -43,7 +43,6 @@ sub default_theme {
 #------------------------------------------------------------------------------
 sub install_theme {
     my ($o, $theme) = @_;
-    $::live and return;
 
     $o->{theme} = $theme || $o->{theme};
 
@@ -65,7 +64,7 @@ widget "*Steps*" style "small-font"
 
 ));
     }
-    gtkset_background(@background1);# unless $::testing;
+    gtkset_background(@background1) unless $::live; #- || testing;
 
     create_logo_window($o);
     create_help_window($o);

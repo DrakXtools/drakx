@@ -557,7 +557,6 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
 sub set_help {
     my ($o, @l) = @_;
 
-    $::live and return 1;
     $o->{current_help} = formatAlaTeX(join "\n", map { _ deref($help::steps{$_}) } @l);
     gtktext_insert($o->{help_window_text}, $o->{current_help});
     1;
