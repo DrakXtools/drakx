@@ -27,7 +27,7 @@ install:
 	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
-	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
+	install -m 644 *.pm $(LIBDEST)
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/wizard.rc $(ETCDEST)
@@ -36,6 +36,8 @@ install:
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
 	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
+	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/'
+
 	cp -rf auto icons $(LIBDEST)
 	bzip2 -9 $(LIBDEST)/po/*.po
 	find $(LIBDEST) -name "*.so" | xargs strip
