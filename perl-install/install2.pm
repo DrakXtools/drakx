@@ -497,9 +497,11 @@ sub main {
     #- needed before accessing floppy (in case of usb floppy)
     modules::load_category('bus/usb'); 
 
+    #- oem patch should be read before to still allow patch or defcfg.
+    eval { $o = $::o = install_any::loadO($o, "Mandrake/base/patch-oem.pl"); log::l("successfully read oem patch") };
     #- patch should be read after defcfg in order to take precedance.
-    eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
-    eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
+    eval { $o = $::o = install_any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
+    eval { $o = $::o = install_any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
 
     eval { modules::load("af_packet") };
 
