@@ -28,76 +28,145 @@
 #include "thirdparty.h"
 
 
-static enum return_type third_party_get_device(char ** device)
+static enum return_type third_party_choose_device(char ** device, char *mount_location)
 {
 	char ** medias, ** medias_models;
-        char * floppy_dev;
-	enum return_type results;
+	char ** ptr, ** ptr_models;
+#ifndef DISABLE_DISK
+	char ** disk_medias, ** disk_medias_models;
+	int disk_count;
 	char * parts[50];
 	char * parts_comments[50];
-        int count;
+#endif
+#ifndef DISABLE_CDROM
+	char ** cdrom_medias, ** cdrom_medias_models;
+	int cdrom_count;
+#endif
+	char * floppy_dev;
+	enum return_type results;
+	int count = 0;
 
-        wait_message("Looking for floppy and disk devices ...");
+	wait_message("Looking for floppy, disk and cdrom devices ...");
 
-        count = get_disks(&medias, &medias_models);
-        floppy_dev = floppy_device();
-        if (strstr(floppy_dev, "/dev/") == floppy_dev) {
-                floppy_dev = floppy_dev + 5;
-        }
+#ifndef DISABLE_DISK
+	disk_count = get_disks(&disk_medias, &disk_medias_models);
+	count += disk_count;
+#endif
+#ifndef DISABLE_CDROM
+        cdrom_count = get_cdroms(&cdrom_medias, &cdrom_medias_models);
+        count += cdrom_count;
+#endif
 
-        remove_wait_message();
-
-	if (count == 0) {
-                if (floppy_dev) {
-                        log_message("third party : no DISK drive found, trying with floppy");
-                        *device = floppy_dev;
-                        return RETURN_OK;
-                } else { 
-                        stg1_error_message("I can't find any floppy or disk on this system. "
-                                           "No third-party kernel modules will be used.");
-                        return RETURN_ERROR;
-                }
+	floppy_dev = floppy_device();
+	if (strstr(floppy_dev, "/dev/") == floppy_dev) {
+		floppy_dev = floppy_dev + 5;
 	}
 
-        if (floppy_dev) {
-                medias = realloc(medias, (count + 2) * sizeof(char *));
-                medias[count] = floppy_dev;
-                medias[count+1] = NULL;
-                medias_models = realloc(medias_models, (count + 2) * sizeof(char *));
-                medias_models[count] = "Floppy device";
-                medias_models[count+1] = NULL;
-        }
+	remove_wait_message();
 
-        results = ask_from_list_comments("If you want to insert third-party kernel modules, "
-                                         "please select the disk containing the modules.",
-                                         medias, medias_models, device);
-        if (results != RETURN_OK)
-                return results;
+	if (count == 0) {
+		if (floppy_dev) {
+			log_message("third party : no disk or cdrom drive found, trying with floppy");
+			*device = floppy_dev;
+			return RETURN_OK;
+		} else { 
+			stg1_error_message("I can't find any floppy, disk or cdrom on this system. "
+					   "No third-party kernel modules will be used.");
+			return RETURN_ERROR;
+		}
+	}
 
-        /* floppy is selected, don't try to list partitions */
-        if (streq(*device, floppy_dev))
-                return RETURN_OK;
+	if (floppy_dev)
+		count += 1;
 
-        if (list_partitions(*device, parts, parts_comments)) {
+	ptr = medias = malloc((count + 1) * sizeof(char *));
+	ptr_models =medias_models = malloc((count + 1) * sizeof(char *));
+#ifndef DISABLE_DISK
+	memcpy(ptr, disk_medias, disk_count * sizeof(char *));
+	memcpy(ptr_models, disk_medias_models, disk_count * sizeof(char *));
+	free(disk_medias);
+	free(disk_medias_models);
+	ptr += disk_count;
+	ptr_models += disk_count;
+#endif
+#ifndef DISABLE_CDROM
+	memcpy(ptr, cdrom_medias, cdrom_count * sizeof(char *));
+	memcpy(ptr_models, cdrom_medias_models, cdrom_count * sizeof(char *));
+	free(cdrom_medias);
+	free(cdrom_medias_models);
+	cdrom_medias = ptr; /* used later to know if a cdrom is selected */
+	ptr += cdrom_count;
+	ptr_models += cdrom_count;
+#endif
+	if (floppy_dev) {
+		ptr[0] = floppy_dev;
+		ptr_models[0] = "Floppy device";
+		ptr++;
+		ptr_models++;
+ 	}
+	ptr[0] = NULL;
+	ptr_models[0] = NULL;
+
+	results = ask_from_list_comments("If you want to insert third-party kernel modules, "
+					 "please select the disk containing the modules.",
+					 medias, medias_models, device);
+	if (results != RETURN_OK)
+		return results;
+
+	/* a floppy is selected, don't try to list partitions */
+	if (streq(*device, floppy_dev)) {
+		if (try_mount(floppy_dev, mount_location) == -1) {
+			stg1_error_message("I can't mount the selected floppy.");
+			return RETURN_ERROR;
+		}
+		return RETURN_OK;
+	}
+
+#ifndef DISABLE_CDROM
+	/* a cdrom is selected, mount it as iso9660 */
+	if (device >= cdrom_medias) {
+		char device_fullname[50];
+		strcpy(device_fullname, "/dev/");
+		strcat(device_fullname, *device);
+		if (my_mount(device_fullname, mount_location, "iso9660", 0)) {
+			stg1_error_message("I can't mount the selected cdrom.");
+			return RETURN_ERROR;
+		}
+		return RETURN_OK;
+	}
+#endif
+
+#ifndef DISABLE_DISK
+	/* a disk or usb key is selected */
+	if (list_partitions(*device, parts, parts_comments)) {
 		stg1_error_message("Could not read partitions information.");
 		return RETURN_ERROR;
+	}
+
+	if (parts[0] == NULL) {
+		stg1_error_message("No partition found.");
+		return RETURN_ERROR;
+	}
+
+	/* only one partition has been discovered, don't ask which one to use */
+	if (parts[1] == NULL) {
+		*device = parts[0];
+		return RETURN_OK;
         }
 
-        if (parts[0] == NULL) {
-                stg1_error_message("No partition found.");
-                return RETURN_ERROR;
-        }
+	results = ask_from_list_comments("Please select the partition containing "
+					 "the third party modules.",
+					 parts, parts_comments, device);
+	if (results == RETURN_OK) {
+		if (try_mount(*device, mount_location) == -1) {
+			stg1_error_message("I can't mount the selected partition.");
+			return RETURN_ERROR;
+		}
+		return RETURN_OK;
+	}
+#endif
 
-        /* only one partition has been discovered, don't ask which one to use */
-        if (parts[1] == NULL) {
-                *device = parts[0];
-                return RETURN_OK;
-        }
-
-        results = ask_from_list_comments("Please select the partition containing "
-                                         "the third party modules.",
-                                         parts, parts_comments, device);
-        return results;
+	return results;
 }
 
 void thirdparty_load_modules(void)
@@ -111,16 +180,13 @@ void thirdparty_load_modules(void)
 	char * questions[] = { "Options", NULL };
 	static char ** answers = NULL;
 
-        results = third_party_get_device(&choice);
-	if (results != RETURN_OK)
-		return;
+	do {
+		results = third_party_choose_device(&choice, mount_location);
+		if (results == RETURN_BACK)
+			return;
+	} while (results == RETURN_ERROR);
 
         log_message("third party : using device %s", choice);
-
-	if (try_mount(choice, mount_location) == -1) {
-		stg1_error_message("I can't mount the selected partition.");
-		return thirdparty_load_modules();
-	}
 
 	modules = list_directory(mount_location);
 

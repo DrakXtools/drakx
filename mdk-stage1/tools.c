@@ -459,13 +459,14 @@ int try_mount(char * dev, char * location)
         return 0;
 }
 
+#ifndef DISABLE_DISK
 int get_disks(char *** names, char *** models)
 {
 	char ** ptr;
 	int count = 0;
 
 	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
-	
+
 	get_medias(DISK, names, models, BUS_ANY);
 
 	ptr = *names;
@@ -476,6 +477,28 @@ int get_disks(char *** names, char *** models)
 
         return count;
 }
+#endif
+
+#ifndef DISABLE_CDROM
+int get_cdroms(char *** names, char *** models)
+{
+	char ** ptr;
+	int count = 0;
+
+	my_insmod("ide-cd", ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
+
+	get_medias(CDROM, names, models, BUS_ANY);
+
+	ptr = *names;
+	while (ptr && *ptr) {
+		count++;
+		ptr++;
+	}
+
+	return count;
+}
+#endif
 
 char * floppy_device(void)
 {

@@ -49,7 +49,12 @@ char ** list_directory(char * direct);
 int string_array_length(char ** a);
 int kernel_version(void);
 int try_mount(char * dev, char * location);
+#ifndef DISABLE_DISK
 int get_disks(char *** names, char *** models);
+#endif
+#ifndef DISABLE_CDROM
+int get_cdroms(char *** names, char *** models);
+#endif
 char * floppy_device(void);
 char * asprintf_(const char *msg, ...);
 int scall_(int retval, char * msg, char * file, int line);
