@@ -399,6 +399,7 @@ sub main {
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    blank         => sub { $o->{blank} = $::blank = 1 },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
+	    move  => sub { $::move = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
 
@@ -421,9 +422,17 @@ sub main {
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
-    print STDERR "in second stage install\n";
+    print STDERR "in second stage\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
+
+    if ($::move) {
+        require move;
+        move::init();
+        $::mdkinst = '';
+    } else {
+        $::mdkinst = 'Mandrake/mdkinst';
+    }
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{isUpgrade} = 1 if $::live;
