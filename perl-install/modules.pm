@@ -533,6 +533,11 @@ sub read_conf($;$) {
     \%c;
 }
 
+sub mergein_conf {
+    my ($file) = @_;
+    add2hash(\%conf, read_conf($file, \$scsi));
+}
+
 sub write_conf {
     my ($prefix) = @_;
 
@@ -563,7 +568,8 @@ sub write_conf {
 }
 
 sub read_stage1_conf {
-    add2hash(\%conf, read_conf($_[0], \$scsi));
+    mergein_conf($_[0]);
+
     if (arch() =~ /sparc/) {
 	$conf{parport_lowlevel}{alias} ||= "parport_ax";
 	$conf{plip}{"pre-install"} ||= "modprobe parport_ax ; echo 7 > /proc/parport/0/irq"; #- TOCHECK
