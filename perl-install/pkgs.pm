@@ -1269,9 +1269,9 @@ sub install($$$;$$) {
 		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
 		    foreach @transToInstall;
 
-		#c::rpmdepOrder($trans) or
-		 #   die "error ordering package list: " . c::rpmErrorString(), 
-		  #    sub { c::rpmdbClose($db) };
+		c::rpmdepOrder($trans) or
+		    die "error ordering package list: " . c::rpmErrorString(), 
+		      sub { c::rpmdbClose($db) };
 		c::rpmtransSetScriptFd($trans, fileno LOG);
 
 		log::l("rpmRunTransactions start");
