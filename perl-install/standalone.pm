@@ -66,7 +66,7 @@ OPTIONS:
                  : name_of_application like  so for staroffice 
                  : and gs for ghostscript for only this one."),
 	      'draksec' => N("[OPTIONS]...
-	      --debug         print debugging information"),
+--debug         print debugging information"),
            'drakTermServ' => N("[OPTIONS]...
 Mandrake Terminal Server Configurator
 --enable         : enable MTS
@@ -77,6 +77,8 @@ Mandrake Terminal Server Configurator
 --deluser        : delete an existing system user from MTS (requires username)
 --addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)
 --delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"),
+           'draksec' => "[--debug]
+--debug: print debugging information",
 	      'drakxtv' => "[--no-guess]",
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
 	      'keyboardrake' => N("[keyboard]"),
