@@ -1,6 +1,29 @@
 2004/03/23  fwang
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/03/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakgw: add a new line for lord cat
+
+	* drakxtools.spec: add bug reference in 10-25mdk changelog
+	remove doble entries in 10-25mdk changelog
+	10-26mdk
+
+	* standalone/drakconnect (del_intf) enable to delete ADSL and ISDN
+	connections
+
+	* network/netconnect.pm: fix drakconnect config writing when there's only
+	one configured
+	interface (eg: at install time) (#8998)
+	bewan PCI and ethernet ADSL modems work smoothly with 2.6.x kernels
+	for ISDN, do the same warning popup about supported kernels
+
+	* share/po/gl.po, share/po/ga.po: update
+
+2004/03/23  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
 	update
 
 2004/03/23  Nicolas Planel  <nplanel at mandrakesoft.com>
@@ -29741,7 +29764,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.914 2004/03/19 09:52:10 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.915 2004/03/23 17:08:43 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
