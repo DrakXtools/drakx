@@ -1066,7 +1066,8 @@ try to force installation even if that destroys the first partition?"));
 	    my $w = $o->wait_message('', _("Installing bootloader"));
 	    eval { $o->SUPER::setupBootloader };
 	}
-	if ($@) {
+	if ($err = $@) {
+	    $err =~ /failed$/ or die;
 	    $o->ask_warn('', 
 			 [ _("Installation of bootloader failed. The following error occured:"),
 			   grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);

@@ -538,7 +538,7 @@ sub install_yaboot($$$) {
     if (defined $install_steps_interactive::new_bootstrap) {
 	run_program::run("hformat", "$lilo->{boot}") or die "hformat failed";
     }	
-    run_program::rooted($prefix, "/sbin/ybin", "2>", "/tmp/.error") or die "ybin failed";
+    run_program::rooted_or_die($prefix, "/sbin/ybin", "2>", "/tmp/.error");
     unlink "$prefix/tmp/.error";	
 }
 
@@ -607,8 +607,7 @@ sub install_silo($$$) {
     log::l("Installing boot loader...");
     $::testing and return;
     run_program::rooted($prefix, "silo", "2>", "/tmp/.error", $silo->{use_partition} ? ("-t") : ()) or 
-        run_program::rooted($prefix, "silo", "2>", "/tmp/.error", "-p", "2", $silo->{use_partition} ? ("-t") : ()) or 
-	    die "silo failed";
+        run_program::rooted_or_die($prefix, "silo", "2>", "/tmp/.error", "-p", "2", $silo->{use_partition} ? ("-t") : ());
     unlink "$prefix/tmp/.error";
 
     #- try writing in the prom.
@@ -863,7 +862,7 @@ sub install_grub {
     log::l("Installing boot loader...");
     $::testing and return;
     symlink "$prefix/boot", "/boot";
-    run_program::run("sh", $f) or die "grub installation failed";
+    run_program::run_or_die("sh", $f);
     unlink "$prefix/tmp/.error.grub", "/boot";
 }
 

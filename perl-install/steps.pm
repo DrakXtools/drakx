@@ -29,7 +29,7 @@ use common;
 if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "installPackages", 'bootdisk' ],
 ),
-  setupBootloader    => [ __("Install bootloader"), 1, 1, '', "installPackages", 'bootloader' ],
+  setupBootloader    => [ __("Install bootloader"), 1, 0, '', "installPackages", 'bootloader' ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"], 'X' ],
   exitInstall        => [ __("Exit install"), 0, 0, '!$::expert && !$::live', '', 'exit' ],
 );
