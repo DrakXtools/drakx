@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 1999-10-22 13:03+0200\n"
+"POT-Creation-Date: 1999-10-22 19:05+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -93,12 +93,12 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:312
+#: ../Xconfigurator.pm_.c:312 ../t2.pm_.c:15
 #, c-format
 msgid "(leaving in %d seconds)"
 msgstr "(slutter om %d sekunder)"
 
-#: ../Xconfigurator.pm_.c:316 ../my_gtk.pm_.c:431
+#: ../Xconfigurator.pm_.c:316 ../my_gtk.pm_.c:431 ../t2.pm_.c:19
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
@@ -706,7 +706,7 @@ msgstr "endrer størrelse"
 msgid "Choose the new size"
 msgstr "Velg den nye størrelsen"
 
-#: ../diskdrake.pm_.c:445 ../install_steps_graphical.pm_.c:301
+#: ../diskdrake.pm_.c:445 ../install_steps_graphical.pm_.c:302
 msgid "MB"
 msgstr "MB"
 
@@ -1442,15 +1442,15 @@ msgstr "ekspert"
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:293
+#: ../install2.pm_.c:298
 msgid "Partitioning failed: no root filesystem"
 msgstr "Partisjonering feilet: intet root-filsystem"
 
-#: ../install2.pm_.c:476
+#: ../install2.pm_.c:480
 msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
 
-#: ../install2.pm_.c:481
+#: ../install2.pm_.c:485
 #, c-format
 msgid "Bad kickstart file %s (failed %s)"
 msgstr "Dårlig kickstart-fil %s (mislykket %s)"
@@ -1503,11 +1503,11 @@ msgstr "Dupliser monteringspunkt %s"
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
-#: ../install_steps_graphical.pm_.c:256
+#: ../install_steps_graphical.pm_.c:257
 msgid "You must have a swap partition"
 msgstr "Du må ha en vekslingspartisjon"
 
-#: ../install_steps_graphical.pm_.c:259
+#: ../install_steps_graphical.pm_.c:260
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -1517,95 +1517,86 @@ msgstr ""
 "\n"
 "Fortsette alikevel?"
 
-#: ../install_steps_graphical.pm_.c:301
+#: ../install_steps_graphical.pm_.c:302
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../install_steps_graphical.pm_.c:313
+#: ../install_steps_graphical.pm_.c:314
 #, c-format
 msgid "Version: %s\n"
 msgstr "Versjon: %s\n"
 
-#: ../install_steps_graphical.pm_.c:314
+#: ../install_steps_graphical.pm_.c:315
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Størrelse: %d KB\n"
 
-#: ../install_steps_graphical.pm_.c:315
-#, c-format
-msgid ""
-"Summary: %s\n"
-"\n"
-msgstr ""
-"Oppsummering: %s\n"
-"\n"
-
-#: ../install_steps_graphical.pm_.c:427
+#: ../install_steps_graphical.pm_.c:430
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../install_steps_graphical.pm_.c:430
+#: ../install_steps_graphical.pm_.c:433
 msgid "Info"
 msgstr "Info"
 
-#: ../install_steps_graphical.pm_.c:438 ../install_steps_interactive.pm_.c:81
+#: ../install_steps_graphical.pm_.c:441 ../install_steps_interactive.pm_.c:81
 msgid "Install"
 msgstr "Installer"
 
-#: ../install_steps_graphical.pm_.c:439
+#: ../install_steps_graphical.pm_.c:442
 msgid "Select less"
 msgstr "Velg færre"
 
-#: ../install_steps_graphical.pm_.c:440
+#: ../install_steps_graphical.pm_.c:443
 msgid "Select more"
 msgstr "Velg flere"
 
-#: ../install_steps_graphical.pm_.c:441
+#: ../install_steps_graphical.pm_.c:444
 msgid "Show less"
 msgstr "Vis færre"
 
-#: ../install_steps_graphical.pm_.c:442
+#: ../install_steps_graphical.pm_.c:445
 msgid "Show more"
 msgstr "Vis flere"
 
-#: ../install_steps_graphical.pm_.c:459
+#: ../install_steps_graphical.pm_.c:462
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../install_steps_graphical.pm_.c:465
+#: ../install_steps_graphical.pm_.c:468
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../install_steps_graphical.pm_.c:467
+#: ../install_steps_graphical.pm_.c:470
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../install_steps_graphical.pm_.c:468
+#: ../install_steps_graphical.pm_.c:471
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../install_steps_graphical.pm_.c:473
+#: ../install_steps_graphical.pm_.c:476
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../install_steps_graphical.pm_.c:494
+#: ../install_steps_graphical.pm_.c:497
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:519
+#: ../install_steps_graphical.pm_.c:522
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../install_steps_graphical.pm_.c:519
+#: ../install_steps_graphical.pm_.c:522
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: ../install_steps_graphical.pm_.c:543
+#: ../install_steps_graphical.pm_.c:546
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
-#: ../install_steps_graphical.pm_.c:617 ../install_steps_interactive.pm_.c:508
+#: ../install_steps_graphical.pm_.c:620 ../install_steps_interactive.pm_.c:508
 #: ../interactive.pm_.c:47 ../interactive.pm_.c:57 ../my_gtk.pm_.c:194
 #: ../my_gtk.pm_.c:431 ../my_gtk.pm_.c:521
 msgid "Ok"
@@ -2704,6 +2695,13 @@ msgstr "SMB/Windows 95/NT"
 #: ../printer.pm_.c:247
 msgid "NetWare"
 msgstr "NetWare"
+
+#~ msgid ""
+#~ "Summary: %s\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Oppsummering: %s\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "At this point, hard drive partitions must be defined. (Unless you\n"
