@@ -249,7 +249,7 @@ arch() =~ /^sparc/ ? (
  "uk" => [ N_("UK keyboard"),    "uk",              "gb",    0 ],
  "us" => [ N_("US keyboard"),    "us",              "en_US", 0 ],
  "us_intl" => [ N_("US keyboard (international)"), "us-latin1", "us_intl", 0 ],
- "uz" => [ N_("Uzbek (cyrillic)"), "ru",            "uz",    1 ],
+ "uz" => [ N_("Uzbek (cyrillic)"), "uz",            "uz",    1 ],
  "vn" => [ N_("Vietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
  "yu" => [ N_("Yugoslavian (latin)"), "sr",         "yu",    0 ],
 ),
