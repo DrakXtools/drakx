@@ -44,6 +44,7 @@ my @all_images = (
 		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
 		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux', 'boot.iso'),
 		  if_($arch =~ /ia64/, 'all.img'),
+		  if_($arch =~ /ppc/, 'all.img'),
 		 );
 
 my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
@@ -469,13 +470,17 @@ sub boot_img_ppc() {
     _ "rm -rf $dir/$boot"; mkdir "$dir/$boot", 0777;
 	foreach (glob("kernel/all.kernels/*")) {
 		my $ext = basename($_);
-		if ($ext =~ /2.4/) {
-			_ "cp $_/boot/vmlinux $dir/$boot/vmlinux";
+		if ($ext =~ /power4/) {
+			_ "cp $_/boot/vmlinuz-$ext* $dir/$boot/vmlinux-power4";
+			_ "cp images/all.rdz-$ext $dir/$boot/all-power4.gz";
+		}
+		elsif ($ext =~ /2.6/) {
+			_ "cp $_/boot/vmlinuz-$ext $dir/$boot/vmlinux";
 			_ "cp images/all.rdz-$ext $dir/$boot/all.gz";
 		}
-		if ($ext =~ /2.2/) {
-			_ "cp $_/boot/vmlinux $dir/$boot/vmlinux-2.2";
-			_ "cp images/all.rdz-$ext $dir/$boot/all-2.2.gz";
+		elsif ($ext =~ /2.4/) {
+			_ "cp $_/boot/vmlinux $dir/$boot/vmlinux-2.4";
+			_ "cp images/all.rdz-$ext $dir/$boot/all-2.4.gz";
 		}
     }
     _ "cp -f /usr/lib/yaboot/yaboot $dir/$boot/yaboot";
@@ -489,6 +494,7 @@ Mandrakelinux PPC bootloader
 </DESCRIPTION>
 <BOOT-SCRIPT>
 " screen" output
+load-base release-load-area
 dev screen
 " "(0000000000aa00aa0000aaaaaa0000aa00aaaa5500aaaaaa)" drop 0 8 set-colors
 " "(5555555555ff55ff5555ffffff5555ff55ffffff55ffffff)" drop 8 8 set-colors
@@ -497,7 +503,7 @@ device-end
 0 to background-color
 " "(0C)" fb8-write drop
 " Booting Mandrakelinux PPC..." fb8-write drop 100 ms
-boot cd:2,\\\\yaboot
+boot cd:,\boot\yaboot
 </BOOT-SCRIPT>
 <OS-BADGE-ICONS>
 1010
@@ -556,103 +562,119 @@ boot cd:2,\\\\yaboot
 	output("$dir/$boot/yaboot.conf", '
 init-message = "\nWelcome to Mandrakelinux PPC!\nHit <TAB> for boot options.\n\n"
 timeout = 150
+device=cd:
 default = install-gui
-message=cd:,\\\\yaboot.msg
+message=/boot/yaboot.msg
 
-image = cd:,\\\\vmlinux
+image = /boot/vmlinux
     label = install-gui
     root = /dev/ram3
-    initrd = cd:,\\\\all.gz
+    initrd = /boot/all.gz
     initrd-size = 34000
+    append = " ramdisk_size=128000"
 
-image = cd:,\\\\vmlinux-2.2
-    label = install-gui-2.2
+image = /boot/vmlinux-power4
+    label = install-gui-power4
     root = /dev/ram3
-    initrd = cd:,\\\\all-2.2.gz
+    initrd = /boot/all-power4.gz
     initrd-size = 34000
+    append = " ramdisk_size=128000"
 
-image = cd:,\\\\vmlinux
+image = /boot/vmlinux
     label = install-text
     root = /dev/ram3
-    initrd = cd:,\\\\all.gz
+    initrd = /boot/all.gz
     initrd-size = 34000
-    append = " text video=ofonly"
+    append = " text video=ofonly ramdisk_size=128000"
 
-image = cd:,\\\\vmlinux-2.2
-    label = install-text-2.2
+image = /boot/vmlinux-power4
+    label = install-text-power4
     root = /dev/ram3
-    initrd = cd:,\\\\all-2.2.gz
+    initrd = /boot/all-power4.gz
     initrd-size = 34000
-    append = " text video=ofonly"
+    append = " text video=ofonly ramdisk_size=128000"
 
-image = cd:,\\\\vmlinux
+image = /boot/vmlinux
     label = install-gui-old
     root = /dev/ram3
-    initrd = cd:,\\\\all.gz
+    initrd = /boot/all.gz
     initrd-size = 34000
-    append = " gui-old video=ofonly"
+    append = " gui-old video=ofonly ramdisk_size=128000"
 
-image = cd:,\\\\vmlinux-2.2
-    label = install-gui-old-2.2
+image = /boot/vmlinux-power4
+    label = install-gui-old-power4
     root = /dev/ram3
-    initrd = cd:,\\\\all-2.2.gz
+    initrd = /boot/all-power4.gz
     initrd-size = 34000
-    append = " gui-old video=ofonly"
+    append = " gui-old video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = install-net
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " video=ofonly"
+    append = " video=ofonly ramdisk_size=128000"
 
-image = enet:0,vmlinux-2.2
-    label = install-net-2.2
+image = enet:0,vmlinux-power4
+    label = install-net-power4
     root = /dev/ram3
-    initrd = enet:0,all-2.2.gz
+    initrd = enet:0,all-power4.gz
     initrd-size = 34000
-    append = " video=ofonly"
-	
+    append = " video=ofonly ramdisk_size=128000"
+
 image = enet:0,vmlinux
     label = install-net-text
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " text video=ofonly"
+    append = " text video=ofonly ramdisk_size=128000"
 
-image = enet:0,vmlinux-2.2
-    label = install-net-text-2.2
+image = enet:0,vmlinux-power4
+    label = install-net-text-power4
     root = /dev/ram3
-    initrd = enet:0,all-2.2.gz
+    initrd = enet:0,all-power4.gz
     initrd-size = 34000
-    append = " text video=ofonly"
-	
-image = cd:,\\\\vmlinux
+    append = " text video=ofonly ramdisk_size=128000"
+
+image = /boot/vmlinux
     label = rescue
     root = /dev/ram3
-    initrd = cd:,\\\\all.gz
+    initrd = /boot/all.gz
     initrd-size = 34000
-    append = " rescue video=ofonly"    
+    append = " rescue video=ofonly ramdisk_size=128000"
+
+image = /boot/vmlinux-power4
+    label = rescue-power4
+    root = /dev/ram3
+    initrd = /boot/all-power4.gz
+    initrd-size = 34000
+    append = " rescue video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = rescue-net
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " rescue video=ofonly"    
+    append = " rescue video=ofonly ramdisk_size=128000" 
+
+image = enet:0,vmlinux-power4
+    label = rescue-net-power4
+    root = /dev/ram3
+    initrd = enet:0,all-power4.gz
+    initrd-size = 34000
+    append = " rescue video=ofonly ramdisk_size=128000" 
 ');
 
 	output("$dir/$boot/yaboot.msg", '
 Thanks for choosing Mandrakelinux PPC.  The following is a short
 explanation of the various options for booting the install CD.
 
-All options ending with "2.2" will use the 2.2.20-9mdkBOOT kernel.
-The default syntax with no suffix uses the 2.4.18-4mdkBOOT kernel.
+All options ending with "-power4" use the BOOT kernel for ppc 9xx and POWER4.
+The default syntax with no suffix uses the BOOT kernel for ppc 6xx 7xx and 7xxx.
 The default if you just hit enter is "install-gui".
 
-install-gui:        	uses XFree86 fbdev mode
+install-gui:        	uses Xorg fbdev mode
 install-text:       	text based install
-install-gui-old:    	old Xpmac gui
 install-net:            allows you to use a minimal boot CD,
                         pulling the rest of the install from
                         a network server
