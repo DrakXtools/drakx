@@ -1280,7 +1280,8 @@ sub install($$$;$$) {
 		install_any::useMedium($medium);
 
 		while ($i <= $media->{$medium}{max} && ($i < $min || scalar @transToInstall < $limitMinTrans)) {
-		    my $dep = $packages{packageName($depOrder->[$i++])} or next;
+		    my $pkg = $depOrder->[$i++] or next;
+		    my $dep = $packages{packageName($pkg)} or next;
 		    if ($dep->[$MEDIUM]{selected}) {
 			push @transToInstall, $dep;
 			foreach (map { split '\|' } packageDepsId($dep)) {
