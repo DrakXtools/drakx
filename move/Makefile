@@ -7,7 +7,7 @@ ISO = /BIG/mdkmove.iso
 DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles \
              BOOT-800-MOVE.jpg BOOT-1024-MOVE.jpg BOOT-1280-MOVE.jpg BOOT-1600-MOVE.jpg
 
-PROGRAM_FILES = etc-monitorer.pl tree/startkde_move tree/wait4x tree/netscape
+PROGRAM_FILES = etc-monitorer.pl tree/startkde_move tree/wait4x tree/netscape tree/alsa_default.pl
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1
@@ -53,6 +53,7 @@ install: build
 	sudo rm -f $(DEST_LIVETREE)/usr/bin/{halt,reboot}  #- symlinks to consolehelper
 	sudo cp -f tree/{halt,reboot} $(DEST_LIVETREE)/usr/bin
 	sudo cp -f tree/X_move $(DEST_LIVETREE)/usr/X11R6/bin
+	sudo cp -f tree/sound.initscript $(DEST_LIVETREE)/etc/init.d/sound
 
 	sudo rm -rf $(DEST_LIVETREE)/usr/share/langs
 	sudo mkdir -p $(DEST_LIVETREE)/usr/share/langs
