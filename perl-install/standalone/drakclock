@@ -292,7 +292,8 @@ sub time_to_rad {
 
 sub Repaint {
     my ($drawing_area, $o_update_time) = @_;
-    time_to_rad(localtime(time())) if $o_update_time;
+    my ($sec, $min, $hour) = localtime(time());
+    time_to_rad($sec, $min, $hour) if $o_update_time;
     my ($width, $height) = ($drawing_area->allocation->width, $drawing_area->allocation->height);
     my $dRadians_hour_real = $dRadians_hour + $dRadians_min / 12;
     my $dRadians_min_real  = POSIX::floor($dRadians_min / $PI * 30) * $PI / 30;
