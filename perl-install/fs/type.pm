@@ -8,7 +8,7 @@ use common;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isSunOS isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isHiddenMacPart isFat_or_NTFS
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isHiddenMacPart isFat_or_NTFS
    maybeFormatted set_isFormatted
 );
 
@@ -65,9 +65,9 @@ if_(arch() =~ /ppc/,
 ), if_(arch() =~ /^sparc/,
   0x01 => 'ufs',      'SunOS boot',
   0x02 => 'ufs',      'SunOS root',
-  0x03 => 'ufs',      'SunOS swap',
+  0x03 => '',      'SunOS swap',
   0x04 => 'ufs',      'SunOS usr',
-  0x05 => 'ufs',      'Whole disk',
+  0x05 => '',      'Whole disk',
   0x06 => 'ufs',      'SunOS stand',
   0x07 => 'ufs',      'SunOS var',
   0x08 => 'ufs',      'SunOS home',
@@ -316,7 +316,6 @@ sub isRawRAID { $_[0]{pt_type} == 0xfd }
 sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs') }
-sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{pt_type}} }
 sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
@@ -324,7 +323,7 @@ sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isTrueFS { isTrueLocalFS($_[0]) || member($_[0]{fs_type}, qw(nfs)) }
 sub isTrueLocalFS { member($_[0]{fs_type}, qw(ext2 reiserfs xfs jfs ext3)) }
 
-sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || isSunOS($_[0]) || $_[0]{fs_type} eq 'hfs' } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || member($_[0]{fs_type}, 'ufs', 'hfs') } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && $_[0]{fs_type} ne 'ntfs' }
 sub isNonMountable { 
     my ($part) = @_;
