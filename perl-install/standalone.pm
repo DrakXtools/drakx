@@ -321,7 +321,6 @@ sub symlinkf {
 }
 
 sub output {
-    warn "output explanations\n";
     explanations "created file $_[0]";
     goto &MDK::Common::File::output;
 }
