@@ -369,7 +369,7 @@ sub write {
     setVarsInSh("$prefix/etc/sysconfig/i18n", $h);
 }
 
-sub load_po($) {
+sub load_po {
     my ($lang) = @_;
     my ($s, $from, $to, $state, $fuzzy);
 
