@@ -847,8 +847,10 @@ sub warnAboutFilesStillOpen() {
 sub install_urpmi {
     my ($method, $packages, $mediums) = @_;
 
+    my $hdInstallPath = any::hdInstallPath();
+
     #- rare case where urpmi cannot be installed (no hd install path).
-    $method eq 'disk' && !any::hdInstallPath() and return;
+    $method eq 'disk' && !$hdInstallPath and return;
 
     log::l("install_urpmi $method");
     #- clean to avoid opening twice the rpm db.
@@ -873,7 +875,7 @@ sub install_urpmi {
 	if ($_->{ignored} || $_->{selected}) {
 	    my $curmethod = $_->{method} || $::o->{method};
 	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
-					   disk => "file:/" . any::hdInstallPath(),
+					   disk => "file:/" . $hdInstallPath,
 					   ftp => $ENV{URLPREFIX},
 					   http => $ENV{URLPREFIX},
 					   cdrom => "removable://mnt/cdrom" }}{$curmethod} ||
