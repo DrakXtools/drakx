@@ -106,7 +106,7 @@ sub raids {
 	my ($nb, $level, $mdparts) = 
 	  #- line format is:
 	  #- md%d : {in}?active{ (read-only)}? {linear|raid1|raid4|raid5}{ DEVNAME[%d]{(F)}?}*
-	  $mdstat[$i] =~ /^md(.).* ([^ \[\]]+) (\S+\[\d+\].*)/ or next;
+	  $mdstat[$i] =~ /^md(\d+).* ([^ \[\]]+) (\S+\[\d+\].*)/ or next;
 
 	$level =~ s/raid//; #- { linear | raid0 | raid1 | raid5 } -> { linear | 0 | 1 | 5 }
 
