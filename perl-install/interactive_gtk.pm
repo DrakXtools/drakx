@@ -151,13 +151,15 @@ sub create_ctree {
     my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
+    $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
+
     my $sep = quotemeta $e->{separator};
     my $tree = Gtk::CTree->new(1, 0);
 
     my (%wtree, %wleaves, $size, $selected_via_click);
     my $parent; $parent = sub {
 	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
-	my $s;
+	my $s = '';
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
 	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, $tree_expanded);
