@@ -29,11 +29,11 @@ use security::level;
 use security::msec;
 use security::help;
 
-$MODE = 'basic';
-$0 =~ /draksec-firewall$/ and $MODE = 'firewall';
-$0 =~ /draksec-perms$/ and $MODE = 'perms';
+#$MODE = 'basic';
+#$0 =~ /draksec-firewall$/ and $MODE = 'firewall';
+#$0 =~ /draksec-perms$/ and $MODE = 'perms';
 
-/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
+#/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
 
 my $w;
@@ -177,7 +177,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                        $entry->set_text($msec->get_function_value($i));
                                                                                        set_default_tip($entry, $default, $i);
                                                                                        [ new Gtk2::Label($i), $values{$i} ];
-                                                                                   } $msec->get_functions($domain))))),
+                                                                                   } sort $msec->get_functions($domain))))),
                            new Gtk2::Label($label));
     $options_values{$domain} = \%values;
 }
@@ -198,7 +198,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 
                                                                                        $entry->set_text($msec->get_check_value($i));
                                                                                        [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
                                                                                    } else { undef }
-                                                                               } ($msec->get_default_checks))))),
+                                                                               } sort $msec->get_default_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
 
