@@ -200,7 +200,7 @@ our %l = (
       qw(wdt_pci i810-tco sx), #- what are these???
     ],
     crypto => [
-      qw(amd768_rng amd7xx_tco i810_rng hw_random padlock),
+      qw(amd768_rng amd7xx_tco i810_rng hw_random leedslite padlock),
     ],
     laptop => [
       qw(i8k sonypi toshiba),
