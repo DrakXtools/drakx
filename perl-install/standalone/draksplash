@@ -269,25 +269,17 @@ sub get_this_thm_res_conf() {
 	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
 	  and thm_in_this_res(1) 
 	  and read_boot_conf();
-	  -f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg"
-	    and $img_file = $thm_path . $theme{name} . "/images/bootsplash-" . $theme{res}{res} . ".jpg";
+     my $file = $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg";
+     $img_file = $file if -f $file;
 	  return 1;
 }
 
 sub read_boot_conf {
 	chdir($boot_conf_path);
-	my $line;
-	if (-f $theme{name} . "/$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg') {
-          local *CFG;
-		open CFG, $theme{name} . "/$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
-	  	while ($line = <CFG>) {
-			$line =~ m/^([a-z][a-z])=([^\n]+)/
-			  and $theme{boot_conf}{$1} = $2;
-		}
-		close CFG;
+     my $file = $theme{name} . "/$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
+	if (-f $file) {
+          $theme{boot_conf} = { getVarsFromSh($file) };
 		&set_scale_values;
-	} else {
-		return 0;
 	}
 }
 
@@ -508,8 +500,7 @@ sub kill_preview() {
 #- Args  => $img_file (str) full path to preview file
 sub show_prev {
  my ($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height) = @_;
- $prev_window
-   or $prev_window = Gtk2::Window->new('toplevel'); 
+ $prev_window ||= Gtk2::Window->new('toplevel'); 
  $prev_window->set_title(
                          #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
                          N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
