@@ -161,7 +161,8 @@ sub choices {
 
     #- finding it in @resolutions (well @matching)
     #- (that way, we check it exists, and we get field "bios" for fbdev)
-    my ($default_resolution) = grep { $_->{Depth} eq $Depth } @matching;
+    my @default_resolutions = grep { $_->{Depth} eq $Depth } @matching;
+    my $default_resolution = first(grep { $resolution_wanted->{Y} eq $_->{Y} } @default_resolutions) || $default_resolutions[0];
 
     $default_resolution, @resolutions;
 }
@@ -197,10 +198,9 @@ sub configure_auto_install {
 sub choose_gtk {
     my ($card, $default_resolution, @resolutions) = @_;
 
-    my ($chosen_x_res, $chosen_Depth) = @$default_resolution{'X', 'Depth'};
+    my ($chosen_x_res, $chosen_y_res, $chosen_Depth) = @$default_resolution{'X', 'Y', 'Depth'};
     $chosen_x_res ||= 640;
 
-    my %x_res2y_res = map { $_->{X} => $_->{Y} } @resolutions;
     my %x_res2depth; push @{$x_res2depth{$_->{X}}}, $_->{Depth} foreach @resolutions;
     my %depth2x_res; push @{$depth2x_res{$_->{Depth}}}, $_->{X} foreach @resolutions;
 
@@ -238,10 +238,17 @@ sub choose_gtk {
     my $pixmap_mo;
     my $set_chosen_x_res = sub {
 	$chosen_x_res = $_[0];
+	if ($_[1]) {
+	    $chosen_y_res = $_[1];
+	} else {
+	    #- take one
+	    my ($one) = grep { $_->{X} eq $chosen_x_res } @resolutions;
+	    $chosen_y_res = $one->{Y};
+	}
 	my $image = $monitor_images_x_res{$chosen_x_res} or internal_error("no image for resolution $chosen_x_res");
 	$pixmap_mo ? $pixmap_mo->set($image->[0], $image->[1]) : ($pixmap_mo = new Gtk::Pixmap($image->[0], $image->[1]));
     };
-    $set_chosen_x_res->($chosen_x_res);
+    $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(_("Choose the resolution and the color depth"),
@@ -264,6 +271,7 @@ sub choose_gtk {
     $depth_combo->set_use_arrows_always(1);
     $depth_combo->entry->set_editable(0);
     $depth_combo->set_popdown_strings(map { translate($depth2text{$_}) } ikeys %depth2x_res);
+    $depth_combo->entry->set_usize(220, 0);
     $depth_combo->entry->signal_connect(changed => sub {
         my %txt2depth = reverse %depth2text;
 	my $s = $depth_combo->entry->get_text;
@@ -277,10 +285,10 @@ sub choose_gtk {
     $x_res_combo->disable_activate;
     $x_res_combo->set_use_arrows_always(1);
     $x_res_combo->entry->set_editable(0);
-    $x_res_combo->set_popdown_strings(map { $_ . "x" . $x_res2y_res{$_} } ikeys %x_res2y_res);
+    $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
-	$x_res_combo->entry->get_text =~ /(.*?)x/;
-	$set_chosen_x_res->($1);
+	$x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
+	$set_chosen_x_res->($1, $2);
 	
 	if (!member($chosen_Depth, @{$x_res2depth{$chosen_x_res}})) {
 	    $set_chosen_Depth->(max(@{$x_res2depth{$chosen_x_res}}));
@@ -289,10 +297,12 @@ sub choose_gtk {
     $set_chosen_Depth->($chosen_Depth);
     $W->{ok}->grab_focus;
 
-    $x_res_combo->entry->set_text($chosen_x_res . "x" . $x_res2y_res{$chosen_x_res});
+    $x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     $W->main or return;
 
-    first(grep { $_->{X} == $chosen_x_res && $_->{Depth} == $chosen_Depth } @resolutions);
+    first(grep { $_->{X} == $chosen_x_res && 
+		 $_->{Y} == $chosen_y_res && 
+		 $_->{Depth} == $chosen_Depth } @resolutions);
 }
 
 1;
