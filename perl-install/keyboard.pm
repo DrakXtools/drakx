@@ -384,31 +384,28 @@ sub from_usb() {
 
 sub load {
     my ($keymap) = @_;
-    return if $::testing || c::kernel_version() =~ /^\Q2.6/;
+    return if $::testing;
 
-    my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
-    $keymap = pop @keymaps;
-
+    my ($magic, $tables_given, @tables) = common::unpack_with_refs('I' . 
+								   'i' . c::MAX_NR_KEYMAPS() . 
+								   's' . c::NR_KEYS() . '*',
+								   $keymap);
     $magic != $KMAP_MAGIC and die "failed to read kmap magic";
 
     sysopen(my $F, "/dev/console", 2) or die "failed to open /dev/console: $!";
 
-    my $count = 0;
-    foreach (0 .. c::MAX_NR_KEYMAPS() - 1) {
-	$keymaps[$_] or next;
-
-	my @keymap = unpack "s" . c::NR_KEYS() . "a*", $keymap;
-	$keymap = pop @keymap;
-
-	my $key = -1;
-	foreach my $value (@keymap) {
-	    $key++;
-	    c::KTYP($value) != c::KT_SPEC() or next;
-	    ioctl($F, c::KDSKBENT(), pack("CCS", $_, $key, $value)) or die "keymap ioctl failed ($_ $key $value): $!";
-	 }
-	$count++;
-    }
-    #- log::l("loaded $count keymap tables");
+    my $i_tables = 0;
+    each_index {
+	my $table_index = $::i;
+	if (!$_) {
+	    #- deallocate table
+	    ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, 0, c::K_NOSUCHMAP())) or die "removing table $table_index failed: $!";
+	} else {
+	    each_index {
+		ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, $::i, $_)) or die "keymap ioctl failed ($table_index $::i $_): $!";
+	    } @{$tables[$i_tables++]};
+	}
+    } @$tables_given;
 }
 
 sub keyboard2full_xkb {
