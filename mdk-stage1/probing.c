@@ -114,6 +114,8 @@ void probe_that_type(enum driver_type type)
 				}
 			}
 		}
+
+		fclose(f);
 	}
 }
 
@@ -194,6 +196,7 @@ static void find_media(void)
 			buf[i-1] = '\0'; /* eat the \n */
 			tmp[count].model = strdup(buf);
 		}
+		close(fd);
 
 		log_message("IDE/%d: %s is a %s", tmp[count].type, tmp[count].name, tmp[count].model);
 		tmp[count].bus = IDE;
