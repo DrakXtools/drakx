@@ -71,8 +71,13 @@ sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isBurner { 
-    my $f = tryOpen($_[0]{device}); #- SCSI burner seems to be detected this way.
-    $f && c::isBurner(fileno($f));
+    my $dev = $_[0]{device};
+    if (my($nb) = $dev =~ /scd (.*)/x) {
+	grep { /^(scd|sr)$nb:.*writer/ } syslog();
+    } else {
+	my $f = tryOpen($dev); #- SCSI burner are not detected this way.
+	$f && c::isBurner(fileno($f));
+    }
 }
 sub isDvdDrive {
     $_[0]{info} =~ /DVD/; #- SCSI DVD seems not to be detected correctly, so use another probe after.
