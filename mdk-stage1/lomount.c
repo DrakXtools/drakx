@@ -110,23 +110,25 @@ set_loop (const char *device, const char *file)
 	return 0;
 }
 
-int 
-del_loop (const char *device)
+
+char * loopdev = "/dev/loop3"; /* Ugly. But do I care? */
+
+void
+del_loop(void)
 {
 	int fd;
 
-	if ((fd = open (device, O_RDONLY)) < 0)
-		return 1;
+	if ((fd = open (loopdev, O_RDONLY)) < 0)
+		return;
 
 	if (ioctl (fd, LOOP_CLR_FD, 0) < 0)
-		return 1;
+		return;
   
 	close (fd);
-	return 0;
 }
 
 
-char * loopdev = "/dev/loop3"; /* Ugly. But do I care? */
+static char * where_mounted = NULL;
 
 int
 lomount(char *loopfile, char *where)
@@ -145,11 +147,12 @@ lomount(char *loopfile, char *where)
 	}
   
 	if (my_mount(loopdev, where, "iso9660")) {
-		del_loop(loopdev);
+		del_loop();
 		return 1;
 	}
 
-	log_message("lomount succeded for %s on %s", loopfile, where);
+	where_mounted = strdup(where);
+	log_message("lomount succeeded for %s on %s", loopfile, where);
 	return 0;
 }
 
@@ -157,15 +160,11 @@ lomount(char *loopfile, char *where)
 int
 loumount()
 {
-	if (umount(loopdev)) {
-		log_perror("loumount");
-		return 1;
+	if (where_mounted) {
+		umount(where_mounted);
+		where_mounted = NULL;
 	}
-
-	if (del_loop(loopdev)) {
-		log_perror("del_loop");
-		return 1;
-	}
+	del_loop();
 	return 0;
 }
 

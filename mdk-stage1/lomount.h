@@ -16,6 +16,6 @@
 #define LOMOUNT_H
 
 int lomount(char *loopfile, char *where);
-int loumount();
+int loumount(void);
 
 #endif

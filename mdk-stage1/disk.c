@@ -108,7 +108,7 @@ static enum return_type try_with_device(char *dev_name)
 	if (my_mount(device_fullname, disk_own_mount, "ext2") == -1 &&
 	    my_mount(device_fullname, disk_own_mount, "vfat") == -1 &&
 	    my_mount(device_fullname, disk_own_mount, "reiserfs") == -1) {
-		error_message("I can't find a valid filesystem.");
+		error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
 		return try_with_device(dev_name);
 	}
 
@@ -149,11 +149,13 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
+			loumount();
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			error_message("Could not load program into memory.");
+			loumount();
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -165,6 +167,7 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
+			loumount();
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -172,14 +175,17 @@ static enum return_type try_with_device(char *dev_name)
 			error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
+			loumount();
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
 	}
 
-	if (IS_RESCUE)
-		umount(IMAGE_LOCATION);
+	if (IS_RESCUE) {
+		loumount();
+		umount(disk_own_mount);
+	}
 
 	method_name = strdup("disk");
 	return RETURN_OK;
