@@ -208,6 +208,8 @@ sub card_config__not_listed {
 		       format => sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
 				       $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] } } ]) or return;
 
+    log::l("Xconfig::card: $r manually chosen");
+
     $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, don't modify $card
 
     my ($kind, $s) = $r =~ /(.*?)\|(.*)/;
