@@ -1,5 +1,54 @@
 2002/09/05  David Baudens  <baudens@mandrakesoft.com>
 
+	* standalone/icons/drakfont.620x57.png: Update
+
+	* share/po/fr.po: Update
+	Update
+
+2002/09/05  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - Remove ECI ADSL modem from menu until we have an agreement
+
+	* network/netconnect.pm: 
+	  - little fix
+
+2002/09/05  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ta.po: updated po file
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/nl.po: updated Dutch file
+
+	* share/po/zh_TW.po, share/po/sk.po: updated po Slovak and Chinese files
+
+2002/09/05  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: better NT & Fat bootloader entry adding or not
+	do not add an nt label if there is no magic
+	use name mangling for labels (taken from installkernel)
+
+	* interactive/newt.pm: special case to handle many buttons in newt:
+	replacing with something alike ask_from_list (useful for XFdrake)
+
+	* Xconfig/card.pm, Xconfig/main.pm: add an option for prefering Xinerama
+	in auto_installs
+
+	* fs.pm: set umask=0 for ntfs partitions (currently only used when user
+	sets the mount point to a ntfs partition)
+	(suggested in bug #189)
+
+2002/09/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: cleanup check for Expect - thx gc
+
+2002/09/05  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: rc2
+
+2002/09/05  David Baudens  <baudens@mandrakesoft.com>
+
 	* pixmaps/services.png, pixmaps/X.png, pixmaps/quit.png,
 	pixmaps/bootloader.png, pixmaps/language.png, pixmaps/summary.png,
 	pixmaps/security.png, pixmaps/partition.png, pixmaps/default.png,
@@ -2267,7 +2316,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.737 2002/09/04 16:28:43 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.738 2002/09/05 17:51:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
