@@ -288,7 +288,7 @@ sub update_bootsplash {
 
 sub change_image {
     my ($boot_pic, $val) = @_;
-    my $img_file = $themes{path} . $val . $themes{boot}{path}."bootsplash-$cur_res.jpg";
+    my $img_file = $themes{path} . $val . $themes{boot}{path} . "bootsplash-$cur_res.jpg";
     -f $img_file or return;
     my $boot_pixbuf = gtkcreate_pixbuf($img_file);
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
