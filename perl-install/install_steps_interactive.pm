@@ -673,6 +673,7 @@ Please choose the minimal installation you want"),
 		      { val => \$minimal, type => 'bool', text => _("Truly minimal install (especially no urpmi)") },
 			),
 		     ],
+		     changed => sub { $o->{compssUsersChoice}{X} = $docs = 0 if $minimal },
 	) or return &chooseGroups;
 
 	$o->{excludedocs} = !$docs || $minimal;
