@@ -270,6 +270,8 @@ sub testFinalConfig($;$) {
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
     symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "stop");
+    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start");
 
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
@@ -366,9 +368,9 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-    if ($card->{server} eq 'FBDev') {
-	16; #- assume 16 bits depth for this case.
-    } else {
+#    if ($card->{server} eq 'FBDev') {
+#	16; #- assume 16 bits depth for this case.
+#    } else {
 	while (my ($d, $r) = each %{$card->{depth}}) {
 	    $depth = $depth ? max($depth, $d) : $d;
 
@@ -376,7 +378,7 @@ sub autoDefaultDepth($$) {
 	    $best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
 	}
 	$best || $depth or die "no valid modes";
-    }
+#    }
 }
 
 sub autoDefaultResolution(;$) {

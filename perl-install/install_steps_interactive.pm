@@ -569,8 +569,8 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 		    $pidlpd = (cat_("$o->{prefix}$_"))[0]; kill 'TERM', $pidlpd if $pidlpd;
 		    unlink "$o->{prefix}$_";
 		}
-		run_program::rooted($o->{prefix}, "lprm", "-P$o->{printer}{QUEUE}", "-");
-		run_program::rooted($o->{prefix}, "lpd");
+		run_program::rooted($o->{prefix}, "lprm", "-P$o->{printer}{QUEUE}", "-"); sleep 1;
+		run_program::rooted($o->{prefix}, "lpd"); sleep 1;
 
 		run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $testpage);
 	    }

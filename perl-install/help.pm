@@ -4,21 +4,21 @@ use common qw(:common);
 
 %steps = (
 selectLanguage =>
- __("
-    <h1>Pixel's links</h1>
+#- __("
+#-    <h1>Pixel's links</h1>
+#-
+#-      <h2>Search</h2>
+#-      Quelques sites de recherche :
+#-      <a href=\"http://www.metacrawler.com\">MetaCrawler</a>,
+#-      <a href=\"http://www.dejanews.com\">dejanews</a>,
+#-      <a href=\"http://www.yahoo.fr\">yahoo(fr)</a>,
+#-      <a href=\"http://www.yahoo.com\">yahoo</a>,
+#-      <a href=\"http://www.infoseek.com\">infoseek</a>,
+#-      <a href=\"http://www.altavista.com\">altavista</a>,
+#-      <a href=\"http://www.excite.com\">excite</a>
 
-      <h2>Search</h2>
-      Quelques sites de recherche :
-      <a href=\"http://www.metacrawler.com\">MetaCrawler</a>,
-      <a href=\"http://www.dejanews.com\">dejanews</a>,
-      <a href=\"http://www.yahoo.fr\">yahoo(fr)</a>,
-      <a href=\"http://www.yahoo.com\">yahoo</a>,
-      <a href=\"http://www.infoseek.com\">infoseek</a>,
-      <a href=\"http://www.altavista.com\">altavista</a>,
-      <a href=\"http://www.excite.com\">excite</a>
 
-
-Choose preferred language for install and system usage."),
+__("Choose preferred language for install and system usage."),
 
 selectKeyboard =>
  __("Choose the layout corresponding to your keyboard from the list above"),
