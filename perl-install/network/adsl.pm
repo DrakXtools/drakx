@@ -28,11 +28,11 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
 	#-network::configureNetwork($prefix, $netc, $in, $intf, $first_time);
-	if ($::isStandalone and $netc->{NET_DEVICE}) {
-	    $in->ask_yesorno(_("Network interface"),
-			     _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
-	      and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
-	}
+#  	if ($::isStandalone and $netc->{NET_DEVICE}) {
+#  	    $in->ask_yesorno(_("Network interface"),
+#  			     _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
+#  	      and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
+#  	}
     }
     if ($type eq 'dhcp') {
 	$in->do_pkgs->install(qw(dhcpcd));
