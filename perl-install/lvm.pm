@@ -57,11 +57,11 @@ sub get_lvs {
     $lvm->{primary}{normal} = 
       [
        map {
-	   my $type = -e $_ && fsedit::typeOfPart($_);
+	   my $type = -e "/dev/$_" && fsedit::typeOfPart("/dev/$_");
 	   { device => $_, 
 	     type => $type || 0x83,
-	     size => (split(':', `lvdisplay -D -c $_`))[6] }
-       } map { /^LV Name\s+(\S+)/ ? $1 : () } `vgdisplay -v -D $lvm->{LVMname}`
+	     size => (split(':', `lvdisplay -D -c /dev/$_`))[6] }
+       } map { m|^LV Name\s+/dev/(\S+)| ? $1 : () } `vgdisplay -v -D $lvm->{LVMname}`
       ];
 }
 
@@ -93,7 +93,7 @@ sub vg_destroy {
 sub lv_delete {
     my ($lvm, $lv) = @_;
 
-    run_program::run_or_die('lvremove', '-f', $lv->{device});
+    run_program::run_or_die('lvremove', '-f', "/dev/$lv->{device}");
 
     my $list = $lvm->{primary}{normal};
     @$list = grep { $_ != $lv } @$list;
@@ -103,11 +103,17 @@ sub lv_create {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal};
     my $nb = 1 + max(map { basename($_->{device}) } @$list);
-    $lv->{device} = "/dev/$lvm->{LVMname}/$nb";
+    $lv->{device} = "$lvm->{LVMname}/$nb";
     run_program::run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $nb, $lvm->{LVMname});
     $lv->{notFormatted} = 1;
     $lv->{isFormatted} = 0;
     push @$list, $lv;
+}
+
+sub lv_resize {
+    my ($lv, $oldsize) = @_;
+    run_program::run_or_die($oldsize > $lv->{size} ? ('lvreduce', '-f') : 'lvextend', 
+			    '--size', int($lv->{size} / 2) . 'k', "/dev/$lv->{device}");
 }
 
 1;
