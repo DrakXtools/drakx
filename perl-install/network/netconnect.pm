@@ -169,11 +169,17 @@ ifdown eth0
 
 #    load_conf ($netcnx, $netc, $intf);
 
-    $conf{modem} and do { require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
-    $conf{isdn} and do { require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
-    $conf{adsl} and do { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{cable} and do { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    my $pre_func = sub {
+	$::Wizard_no_previous=1;
+	#$_[0] is the type of connection of the list: (modem, isdn, adsl, cable, local network);
+	$in->ask_okcancel(_("Network Configuration"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
+	undef $::Wizard_no_previous;
+    };
+    $conf{modem} and do { &$pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
+    $conf{isdn} and do { &$pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
+    $conf{adsl} and do { &$pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2};
+    $conf{cable} and do { &$pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{lan} and do { &$pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
@@ -190,7 +196,7 @@ ifdown eth0
     }
     $netc->{internet_cnx_choice} and write_cnx_script($netc);
 
-    $::isStandalone and ask_connect_now() or goto step_2_1;
+    $::isStandalone and ask_connect_now();
 
   step_3:
 

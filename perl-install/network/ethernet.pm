@@ -75,8 +75,7 @@ sub configure_lan {
 	$netcnx->{type}='lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
-    }
-    write_cnx_script($netc, "local network",
+        write_cnx_script($netc, "local network",
 qq(
 #!/bin/bash
 /etc/rc.d/init.d/network restart
@@ -86,6 +85,7 @@ qq(
 /etc/rc.d/init.d/network stop
 /sbin/ifup lo
 ));
+    }
     $::isStandalone and modules::write_conf($prefix);
     1;
 }
