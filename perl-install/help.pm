@@ -12,7 +12,7 @@ license =>
  __("You need to accept the terms of the above license to continue installation.
 
 
-Please click on \"Accept\" if you are agree with its terms.
+Please click on \"Accept\" if you agree with its terms.
 
 
 Please click on \"Refuse\" if you disagree with its terms. Installation will end without modifying your current
