@@ -213,7 +213,7 @@ sub choose_gtk {
 
     my %monitor_images_x_res = do {
 	my @l = qw(640 800 1024 1152 1280 1400 1600 1920 2048);
-	my %h = map { $_ => gtkcreate_img("monitor-$_.png") } @l;
+	my %h = map { $_ => ugtk2::_find_imgfile("monitor-$_.png") } @l;
 
 	#- for the other, use the biggest smaller
 	foreach my $x_res (uniq map { $_->{X} } @resolutions) {
@@ -225,11 +225,11 @@ sub choose_gtk {
 
     my ($depth_combo, $x_res_combo);
 
-    my $pix_colors = gtkcreate_img("colors");
+    my $pix_colors = Gtk2::Image->new;
     my $set_chosen_Depth_image = sub {
-	$pix_colors = gtkcreate_img(
+	$pix_colors->set_from_file(ugtk2::_find_imgfile(
                $chosen_Depth >= 24 ? "colors.png" :
-	       $chosen_Depth >= 15 ? "colors16.png" : "colors8.png");
+	       $chosen_Depth >= 15 ? "colors16.png" : "colors8.png"));
     };
 
     my $set_chosen_Depth = sub {
@@ -238,7 +238,7 @@ sub choose_gtk {
 	$set_chosen_Depth_image->();
     };
 
-    my $pixmap_mo;
+    my $pixmap_mo = Gtk2::Image->new;
     my $set_chosen_x_res = sub {
 	$chosen_x_res = $_[0];
 	if ($_[1]) {
@@ -249,7 +249,7 @@ sub choose_gtk {
 	    $chosen_y_res = $one->{Y};
 	}
 	my $image = $monitor_images_x_res{$chosen_x_res} or internal_error("no image for resolution $chosen_x_res");
-	$pixmap_mo = $image;
+	$pixmap_mo->set_from_file($image);
     };
     $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
