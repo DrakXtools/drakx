@@ -130,6 +130,7 @@ sub new($$) {
 	$w->{rwindow}->set_size_request($::windowwidth * 0.92, $::windowheight * 0.9);
 	gtkadd($w->{window}, gtkpack__(create_box_with_title($w, $o->{current_help}), 
 				       $w->create_okcancel(N("Ok"))));
+	$w->{ok}->grab_focus;
 	$w->main;
     };
     $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
