@@ -81,6 +81,16 @@ rpmsrate
 # perl -alpe '$F[4] =~ /(.*):(.*)/; $r = ($1 * 60 + $2) / $F[2]; s|\S+(\s+\S+)\s*$|sprintf("%.2f", $r) . "$1"|e;'
 # perl -ape '$r = $F[2] / $F[3]; s|\S+\s*$|sprintf "%.2f\n", $r|e;'
 
+9.0beta1
+
+5   ()         89    71    1:35   ext2 500M
+3   X         240   231    3:41   ext2 500M
+5   all       306   293    3:36   ext2 500M
+4   all       808   731    6:48   ext2 1G
+4   all      1433  1331   21:44   ext2 2G
+4   X+kde     822   749    6:05   ext2 2G
+4   X+gnome   369   319    5:58   ext2 2G
+
 
 redhat 7.3:
 - do not halt the box when "halt" is used
@@ -89,3 +99,8 @@ redhat 7.3:
   => choosing gnome gives a flashing black screen and kdm reruns
 
 - repartition of packages on various CDs is crap
+
+- bootloader: handling of multiple disks is more powerful in redhat, but more
+dangerous (proposed to everyone, but not proposed especially to people having
+a dangerous combinaison)
+- why still asking about lba32!!
