@@ -328,15 +328,8 @@ sub beforeInstallPackages {
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
-    mkdir "$o->{prefix}$_" foreach qw(/boot /usr /usr/share /usr/share/mdk /usr/share/bootsplash);
-    #- add oem lilo theme and background if the files exists.
-    install_any::getAndSaveFile("Mandrake/base/oem-message-graphic", "$o->{prefix}/boot/oem-message-graphic");
-    install_any::getAndSaveFile("Mandrake/base/oem-background.png", "$o->{prefix}/usr/share/mdk/oem-background.png");
-    #- add oem bootsplash theme if files exists.
-    foreach (qw(oem-message-graphic oem-bootsplash-800x600.jpg oem-bootsplash-1024x768.jpg oem-bootsplash-1200x1024.jpg
-                oem-bootsplash-1600x1200.jpg)) {
-	install_any::getAndSaveFile("Mandrake/base/$_", "$o->{prefix}/usr/share/bootsplash/$_");
-    }
+    #- add oem theme if the files exists.
+    install_any::getAndSaveFile("Mandrake/base/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
 }
 
 sub pkg_install {
@@ -546,57 +539,10 @@ GridHeight=70
 	}
     }
 
-    #- update oem lilo image if it exists.
-    if (-s "$o->{prefix}/boot/oem-message-graphic") {
-	rename "$o->{prefix}/boot/message-graphic", "$o->{prefix}/boot/message-graphic.mdkgiorig";
-	rename "$o->{prefix}/boot/oem-message-graphic", "$o->{prefix}/boot/message-graphic";
-    }
-
-    #- update background image if it exists for common environment.
-    if (-s "$o->{prefix}/usr/share/mdk/oem-background.png") {
-	if (-e "$o->{prefix}/usr/share/mdk/backgrounds/default.png") {
-	    rename "$o->{prefix}/usr/share/mdk/backgrounds/default.png",
-	           "$o->{prefix}/usr/share/mdk/backgrounds/default.png.mdkgiorig";
-	    rename "$o->{prefix}/usr/share/mdk/oem-background.png", "$o->{prefix}/usr/share/mdk/backgrounds/default.png";
-	} else {
-	    #- KDE desktop background.
-	    if (-e "$o->{prefix}/usr/share/config/kdesktoprc") {
-		update_gnomekderc("$o->{prefix}/usr/share/config/kdesktoprc", "Desktop0",
-				  MultiWallpaperMode => "NoMulti",
-				  Wallpaper => "/usr/share/mdk/oem-background.png",
-				  WallpaperMode => "Scaled",
-				 );
-	    }
-	    #- GNOME desktop background.
-	    if (-e "$o->{prefix}/etc/gnome/config/Background") {
-		update_gnomekderc("$o->{prefix}/etc/gnome/config/Background", "Default",
-				  wallpaper => "/usr/share/mdk/oem-background.png",
-				  wallpaperAlign => "3",
-				 );
-	    }
-	}
-    }
-
-    #- modifying Mandrake theme directly, all image may not be available.
-    if (-e "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message" &&
-	-e "$o->{prefix}/usr/share/bootsplash/oem-message-graphic") {
-	rename "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message",
-	  "$o->{prefix}/usr/share/bootsplash/message.mdkgiorig";
-	rename "$o->{prefix}/usr/share/bootsplash/oem-message-graphic",
-	  "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message";
-    }
-    my $redo_bootsplash;
-    foreach (qw(oem-bootsplash-800x600.jpg oem-bootsplash-1024x768.jpg oem-bootsplash-1200x1024.jpg
-                oem-bootsplash-1600x1200.jpg)) {
-	if (-e "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_" && "$o->{prefix}/usr/share/bootsplash/$_") {
-	    rename "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_", "$o->{prefix}/usr/share/bootsplash/$_.mdkgiorig";
-	    rename "$o->{prefix}/usr/share/bootsplash/$_", "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_";
-	    ++$redo_bootsplash;
-	}
-    }
-    if ($redo_bootsplash && -x "$o->{prefix}/usr/share/loader/make-initrd") {
-	#- redo bootsplash installation for changes to take effects...
-	run_program::rooted($o->{prefix}, "/usr/share/loader/make-initrd", "-n");
+    #- update theme directly from a package (simplest).
+    if (-s "$o->{prefix}/usr/share/oem-theme.rpm") {
+	run_program::rooted($o->{prefix}, "rpm", "-U", "/usr/share/oem-theme.rpm");
+	unlink "/usr/share/oem-theme.rpm";
     }
 
     if ($o->{blank} || $o->{updatemodules}) {
