@@ -10,9 +10,10 @@ use log;
 use smp;
 use fs;
 
-my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 
+my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-FBDev XFree86-Mach32 XFree86-Mach64 
 	XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-S3 XFree86-S3V
-	XFree86-SVGA XFree86-W32 XFree86-I128 XFree86-Sun XFree86-SunMono
+	XFree86-SVGA XFree86-VGA16 XFree86-W32 XFree86-I128 XFree86-Sun 
+	XFree86-SunMono XFree86-Xnest postfix
 	XFree86-Sun24 XFree86-3DLabs kernel-boot metroess metrotmpl);
 
 1;
