@@ -41,7 +41,8 @@ my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    #$_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    $_[0] > 1 and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -171,7 +172,8 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    eval { cp_af((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms) };
+    #- cp_af doesn't handle correctly a missing file.
+    eval { cp_af((grep { -r $_ } map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms) };
 
     log::l("copying Auto Install Floppy");
     getAndSaveInstallFloppy($::o, "$postinstall_rpms/auto_install.img");
