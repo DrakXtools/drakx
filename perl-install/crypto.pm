@@ -101,10 +101,10 @@ sub bestMirror {
 sub version {
     require pkgs;
     my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
-    $pkg && $pkg->version || '9.0'; #- safe but dangerous ;-)
+    $pkg && $pkg->version || '9.1'; #- safe but dangerous ;-)
 }
 
-sub dir { $mirrors{$_[0]}[1] . '/' . version() }
+sub dir { $mirrors{$_[0]}[1] . ($::corporate && '/corporate' || '') . '/' . version() }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
