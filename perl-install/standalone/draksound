@@ -22,31 +22,27 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
  
 use strict;
 use interactive;
-use detect_devices;
 use common;
 use harddrake::sound;
+use modules;
 
 ("@ARGV" =~ /--help|-h/) and die "usage: draksound [-h] [--help]\n";
 
-
 my $in = 'interactive'->vnew();
 
-use modules;
-
-#no strict 'subs';
 modules::mergein_conf('/etc/modules.conf');
 
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::probeall(1);
 if (@devices) {
     # TODO: That need some work for multiples sound cards
-    foreach (@devices) {
-	   # we should overwrite $device->{driver} with the right sound-slot-XX
-	   $_->{driver} = modules::get_alias('sound-slot-0');
+    map_index {
+	   # allocate sound-slot in the same order as install2.pm $device->{driver} with the right sound-slot-XX
+	   $_->{driver} = modules::get_alias("sound-slot-$::i");
 	   harddrake::sound::config($in, $_);
-    }
+	 } modules::probe_category('multimedia/sound');
 } else {
-    $in->ask_warn(_("No Sound Card detected!"), formatAlaTeX(
-											   _("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
+    $in->ask_warn(_("No Sound Card detected!"), 
+			   formatAlaTeX(_("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
 
 
 You can visit our hardware database at:
