@@ -442,11 +442,14 @@ sub return_path {
 }
 
 sub ftp_client {
+# liste des fichiers à envoyer  
     use Net::FTP; 
     my $ftp = Net::FTP->new("$host_name"); 
     $ftp->login("$login_user","$passwd_user"); 
     $ftp->cwd("$host_path"); 
 #   $ftp->get("/ce/repertoire/ce.fichier"); 
+# put ( LOCAL_FILE [, REMOTE_FILE ] )
+
     $ftp->send("$save_path/*"); 
     $ftp->quit; 
 }
@@ -836,7 +839,7 @@ sub advanced_what{
 				    ));
     $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
 				    new Gtk::Pixmap($pix_sysp_map, $pix_sysp_mask),
-				    new Gtk::Label(_(" A Entire System  ")),
+				    new Gtk::Label(_(" An Entire System  ")),
 				    new Gtk::HBox(0, 5)
 				    ));
     $custom_help = "";
@@ -2871,7 +2874,7 @@ sub interactive_mode {
     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("BDO-drakebackup1");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakbackup.540x57");
     read_conf_file();    
 
     gtkadd($window1,
@@ -3231,24 +3234,7 @@ Drakbacup allow to restore the system (etc, var files)
 
 # _____________________________________________________________ DOCS
 
-##### tester taille decompressee
-
-
-
-
-
-
-# Comment récupérer la date du jour ?
-
-# Cf perldoc -f localtime
-
-# ($seconde,$minute,$heure,$jour_du_mois,$annee,
-# $jour_de_la_semaine,$jour_de_l _annee,$drapeau_heure_ete) = localtime(time);
-
-# Il faut ajouter 1900 a l'année pour une date correcte ($annee+=1900) et 1 au jour du mois pour obtenir une date correcte ($jour_du_mois++).
-
 # [Perl] Comment récupérer des informations sur un fichier ?
-
 # Cf perldoc -f stat
 
 # Exemple pour récupérer mtime (date de dernière modification du fichier)
@@ -3261,7 +3247,6 @@ Drakbacup allow to restore the system (etc, var files)
 
 
 #Telnet : En utilisant le package Net::Telnet
-
 # use strict; 
 # use Net::Telnet; 
 # use CGI qw/:standard :html3 :netscape escape unescape/; 
