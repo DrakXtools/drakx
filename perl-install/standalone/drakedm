@@ -50,7 +50,7 @@ several different X sessions on your local machine at the same time.")),
     my $done = 0;
     $new_dm = { reverse %dm }->{$new_dm};
     substInFile {
-        $done ||= s/^(DISPLAYMANAGER)=.*/\1=$new_dm/;
+        $done ||= s/^(DISPLAYMANAGER)=.*/$1=$new_dm/;
         print "\nDISPLAYMANAGER=$dm{$dm}" if eof && !$done;
     } $cfg_file;
 }
