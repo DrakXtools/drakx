@@ -61,7 +61,7 @@ sub mirrors {
 	    #- contact the following URL to retrieve the list of mirrors.
 	    #- http://www.linux-mandrake.com/mirrorsfull.list
 	    require http;
-	    my $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
+	    $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
 	}
 
 	local $SIG{ALRM} = sub { die "timeout" };
