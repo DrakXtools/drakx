@@ -541,7 +541,15 @@ sub write {
     #- now sync disk and re-read the partition table
     if ($hd->{needKernelReread}) {
 	common::sync();
+
+	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
+	foreach (@magic_parts) {
+	    syscall_('umount', $_->{real_mntpoint}) or die _("error unmounting %s: %s", $_->{real_mntpoint}, "$!");
+	}
 	$hd->kernel_read;
+	foreach (@magic_parts) {
+	    syscall_('mount', , $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or die _("mount failed: ") . "$!";
+	}
 	$hd->{needKernelReread} = 0;
     }
 }
