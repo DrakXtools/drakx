@@ -45,7 +45,6 @@ install:
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
 	install -m 644 pixmaps/*.* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
-	install -m 644 share/net_applet.desktop $(DATADIR)/autostart
 
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
