@@ -127,7 +127,7 @@ sub exit {
         require standalone;
         standalone::exit($_[0]);
     } else {
-        exit($_[0])
+        exit($_[0]);
     }
 }
 
