@@ -1,3 +1,98 @@
+2001/03/27  dam's  <damien@mandrakesoft.com>
+
+	* share/help.png: changed help button
+
+	* share/help.xpm: changed help
+
+2001/03/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm, pkgs.pm: fixed too early erasing of old rpmlib db. now
+	postponed at end of install
+	and only if rpm-4.0 or above has been installed.
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: update boot image.
+
+	* Xconfigurator_consts.pm, mouse.pm, Xconfigurator.pm, Xconfig.pm: added
+	support for two mice (laptop). The second mice is generally PS/2 as
+	probe can says it is present.
+
+2001/03/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/nfsmount.c: force 8192 bytes for nfs transfers
+
+2001/03/27  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm, install2.pm: remove use of Bastille. get back to the good state
+	we had :)
+
+	* install_any.pm: warnAboutNaughtyServers
+	(setPackages): default profiles selection to GNOME, KDE, CONFIG
+
+	* share/rpmsrate: move back Bastille-Curses-module to CONFIG
+	  - cleanup LOCALES"zh_*": when there is LOCALES"zh_*", there is
+	LOCALES"zh"
+	  - raise WindowMaker
+	  - add xfce
+	  - am-utils is a server
+	  - raise some stuff in CONFIG to have stuff there
+	  - remove drakxtools from CONFIG (DrakConf requires drakxtools)
+	  - DrakConf from 5 to 4
+
+	* install_steps_interactive.pm: warnAboutNaughtyServers
+	(summary): fix displaying of printer configured
+
+	* lang.pm (langsLANGUAGE): give the list of languages
+
+	* pkgs.pm: warnAboutNaughtyServers
+
+	* install_steps_gtk.pm (installPackages): catch the no png file exception
+	(in case warly is dumb again)
+
+2001/03/27  siegel
+
+	* share/po/i18n_compssUsers: i18n group names
+
+	* share/po/de.po: minor typo-fixes
+	new german version
+
+2001/03/26  daouda
+
+	* share/rpmsrate: add mandrake_desk and rootfiles to SYSTEM (rpmsrate)
+
+2001/03/26  fcrozat
+
+	* share/rpmsrate: Install xscreensaver when installing GNOME
+
+2001/03/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: first attempt at pixelization of code (till's cups
+	patches)
+
+2001/03/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/wa.po: Updated Croatian, vietnamese and Walloon
+	files
+
+	* share/po/vi.po: Updated Croatian, vietnamese and Walloon files
+	Updated Portuguese, Swedish and Thai files
+
+	* share/po/pt.po, share/po/th.po, share/po/es.po, share/po/de.po,
+	share/po/sv.po: Updated Portuguese, Swedish and Thai files
+
+2001/03/25  Pixel  <pixel@mandrakesoft.com>
+
+	* http.pm (getFile): verify the return value of the server. If not 200
+	(aka Ok),
+	return undef
+
+	* install_steps_interactive.pm (configurePrinter): add Mesa-common for xpp
+	and libqtcups2 for kups in
+	pkg_install_if_requires_satisfied
+
+2001/03/25  siegel
+
+	* share/po/de.po: new german version
+
 2001/03/25  fabman
 
 	* share/po/es.po: updated spanish .po file
