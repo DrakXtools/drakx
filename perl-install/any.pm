@@ -123,7 +123,7 @@ sub setupBootloader {
 	    my $use_partition = "/dev/$boot" ne $b->{boot};
 	    $in->ask_from(N("LILO/grub Installation"),
 			  N("Where do you want to install the bootloader?"),
-			  { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } });
+			  [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]);
 	    $b->{boot} = "/dev/" . ($use_partition ? fsedit::get_root($fstab, 'boot')->{device} : $boot);
 	}
     } else {
