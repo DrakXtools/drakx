@@ -565,7 +565,7 @@ Click on Configure to launch the setup wizard.", $setup_state));
 				       ugtk2->exit(0);
 				   });
     $bbox1->add($button_conf);
-    my $button_cancel = Gtk2::Button->new(N("Cancel"));
+    my $button_cancel = Gtk2::Button->new_from_stock('gtk-cancel');
     $button_cancel->signal_connect(clicked => sub { ugtk2->exit(0) });
     $bbox1->add($button_cancel);
     $window1->{rwindow}->show_all;
