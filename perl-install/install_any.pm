@@ -1042,7 +1042,7 @@ sub remove_bigseldom_used {
 }
 
 sub cond_umount_hdimage() {
-    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$::o->{partitioning}{readonly}) {
+    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)| && !$::o->{partitioning}{readonly} && common::usingRamdisk()) {
 	$::o->{stage1_hd} = { device => $1, type => $2 };
 	getFile("XXX"); #- close still opened filehandle
 	eval { fs::umount("/tmp/hdimage") };
