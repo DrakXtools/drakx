@@ -481,4 +481,44 @@ sub install_urpmi {
     }
 }
 
+sub list_home($) {
+    my ($prefix) = @_;
+    local *F; open F, "$prefix/etc/passwd";
+    map { $_->[5] } grep { $_->[2] > 501 } map { [ split ':' ] } <F>;
+}
+
+sub template2userfile($$$$%) {
+    my ($prefix, $inputfile, $outputrelfile, $force, %toreplace) = @_;
+
+    foreach ("/etc/skel", "/root", list_home($prefix)) {
+	my $outputfile = "$prefix/$_/$outputrelfile";
+	if (-d dirname($outputfile) && ($force || ! -e $outputfile)) {
+	    log::l("generating $outputfile from template $inputfile");
+	    template2file($inputfile, $outputfile, %toreplace);
+	}
+    }
+}
+
+sub kdeicons_postinstall {
+    my ($prefix) = @_;
+
+    #- parse etc/fstab file to search for dos/win, zip, cdroms icons.
+    #- avoid rewriting existing file.
+    local *F;
+    open F, "$prefix/etc/fstab" or log::l("failed to read $prefix/etc/fstab"), return;
+
+    foreach (<F>) {
+	if (/^\/dev\/(\S+)\s+\/mnt\/cdrom (\d*)\s+/x) {
+	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/cdrom$2.kdelnk", 0, %toreplace);
+	} elsif (/^\/dev\/(\S+)\s+\/mnt\/zip (\d*)\s+/x) {
+	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/zip$2.kdelnk", 0, %toreplace);
+	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
+	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/DOS_.kdelnk.in", "Desktop/DOS_$2.kdelnk", 0, %toreplace);
+	}
+    }
+}
+
 1;

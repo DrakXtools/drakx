@@ -351,17 +351,14 @@ sub template2file($$%) {
     my ($inputfile, $outputfile, %toreplace) = @_;
     local *OUT; local *IN;
 
-    open IN , $inputfile  or die "Can't open $inputfile $!";
+    open IN, $inputfile  or die "Can't open $inputfile $!";
     if ($::testing) {
 	*OUT = *STDOUT;
     } else {
 	open OUT, ">$outputfile" or die "Can't open $outputfile $!";
     }
 
-    while (<IN>) {
-	s/@@@(.*?)@@@/$toreplace{$1}/g;
-	print OUT;
-    }
+    map { s/@@@(.*?)@@@/$toreplace{$1}/g; print OUT; } <IN>;
 }
 
 sub substInFile(&@) {

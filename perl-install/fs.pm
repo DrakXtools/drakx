@@ -244,6 +244,21 @@ sub write_fstab($;$$) {
       } grep { $_->{mntpoint} && type2fs($_->{type}) &&
 		 ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
+    #- inserts dos/win partitions in fstab.
+    #- backward compatible win kdeicons script to handle upgrade correctly?
+    unshift @to_add,
+      map_index {
+	  my $i = $::i ? $::i + 1 : '';
+	  my $device = $_->{device} =~ /^\/dev\/(.*)$/ ? $1 : $_->{device};
+
+	  #- keep in mind the new line for fstab.
+	  @new{("/mnt/DOS_$device", "/dev/$device")} = undef;
+
+	  mkdir "$prefix/mnt/DOS_$device", 0755 or log::l("failed to mkdir $prefix/mnt/DOS_$device: $!");
+	  [ "/dev/$device", "/mnt/DOS_$device", "vfat", "user,exec,conv=auto", 0, 0 ];
+      } grep { isFat($_) &&
+		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
+
     my @current = cat_("$prefix/etc/fstab");
 
     log::l("writing $prefix/etc/fstab");

@@ -24,7 +24,7 @@ sub read_modparm_file($) {
 
   local *F;
   open F, $file or log::l("missing $file: $!"), return;
-  while (<F>) {
+  foreach (<F>) {
     chomp;
     @line = split ':';
 

@@ -351,6 +351,9 @@ sub doInstallStep {
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
+
+    #- make icons for KDE.
+    install_any::kdeicons_postinstall($o->{prefix});
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {

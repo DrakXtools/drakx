@@ -280,7 +280,8 @@ sub read_printer_db(;$) {
 
     %thedb and return;
 
-    local *DBPATH;		#-don't have to do close
+    local $_; #- use of while (<...
+    local *DBPATH; #- don't have to do close ... and don't modify globals at least
     open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
 
     while (<DBPATH>) {

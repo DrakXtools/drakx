@@ -305,14 +305,15 @@ sub testFinalConfig($;$) {
     do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());
 
     my $b = before_leaving { unlink $f_err };
-    
+
+    local $_;
     local *F; open F, $f_err;
     while (<F>) {
 	if (/\b(error|not supported)\b/i) {
-	    my @msg = !/error/ && $_ ; 
+	    my @msg = !/error/ && $_ ;
 	    while (<F>) {
 		/^$/ and last;
-		push @msg, $_;		
+		push @msg, $_;
 	    }
 	    $in->ask_warn('', [ _("An error occurred:"), " ",
 				@msg,
