@@ -244,7 +244,7 @@ substInFile {
 } "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-fr.html";
 
 #- remove uncessary wizards, especially from appearing in MCC
-unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont drakperm draksec rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
+unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakbackup drakedm drakfont drakperm draksec rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
 unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
 
 #- selecting language must be done from drakx anyway
