@@ -107,7 +107,7 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $ent_number, $auto) = @_;
 
-    if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing) {
+    if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install) {
 	-s modules::cz_file() or die _("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
 
@@ -283,7 +283,7 @@ sub createBootdisk {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($clicked, $ent_number, $auto) = @_;
-    return if $::g_auto_install;
+    return if $::g_auto_install || $::uml_install;
 
     modules::write_conf($o->{prefix});
 
@@ -399,6 +399,7 @@ sub main {
 	    stdio     => sub { $o->{interactive} = "stdio"},
 	    corporate => sub { $::corporate = 1 },
 	    kickstart => sub { $::auto_install = $v },
+	    uml_install => sub { $::uml_install = 1 },
 	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
