@@ -52,6 +52,8 @@ fat
 # updated msdos (handling of 9+4 filenames)
 msdos
 ppa
+# ISA network card needing options
+ne io=0x300 irq=7
 [root@obiwan mnt]# 
 --=----=----=----=----=----=----=----=----=--
 
@@ -62,9 +64,11 @@ ppa
 	b- fat     loaded from the marfile on the boot floppy
 	c- msdos   loaded from the update modules floppy
 	d- ppa     loaded from the update modules floppy
+        e- ne      loaded from the marfile on the boot floppy
 
 
 
-Beware, the dependencies are not handled automatically in the case of load
-from the update modules floppy, that's why on our example we need to load
-"fat" from the standard modules before "msdos" from the update floppy.
+!!! Beware !!!, the dependencies are not handled automatically in
+the case of load from the update modules floppy, that's why on
+our example we need to load "fat" from the standard modules
+before "msdos" from the update floppy.
