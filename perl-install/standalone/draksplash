@@ -507,6 +507,7 @@ sub show_prev{
  my ($file,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height) = @_;
  $prev_window
    or ($prev_window = new Gtk::Window('toplevel') and $prev_window->set_policy( 0, 1, 1 ) ); 
+#-PO  First %s is theme name, second %s (in parenthesis) is resolution
  $prev_window->set_title(_("%s BootSplash (%s) preview",$theme{'name'},$theme{'res'}{'res'}));
  $prev_pic = gtkcreate_png_pixbuf($file);
  $prev_pic->scale_simple($theme{'res'}{'w'},$theme{'res'}{'h'},0);
