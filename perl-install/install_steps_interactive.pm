@@ -1319,7 +1319,9 @@ _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
 For information on fixes which are available for this release of Mandrake Linux,
-consult the Errata available from http://www.mandrakelinux.com/.
+consult the Errata available from:
+
+http://www.linux-mandrake.com/en/82errata.php3
 
 Information on configuring your system is available in the post
 install chapter of the Official Mandrake Linux User's Guide."),
