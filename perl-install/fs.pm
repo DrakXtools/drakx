@@ -339,9 +339,6 @@ sub write {
     my ($prefix, $fstab, $manualFstab, $useSupermount, $options) = @_;
     $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
 
-    use Data::Dumper;
-    print Dumper $options;
-
     unless ($::live) {
 	log::l("resetting /etc/mtab");
 	local *F;
