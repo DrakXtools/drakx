@@ -317,10 +317,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-26mdk
-- drakconnect: use somewhat nice interfaces name (eg: "eth0: 3com
+- drakconnect: use somewhat nicer interfaces name (eg: "eth0: 3com
   905") in manage interface (poulpy)
 - drakTermServ: configure clients with defined IPs to set hostname so
-  gnome works.
+  gnome works (stew)
 - fix accentued characters with fr and ru locales (pablo)
 
 * Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-25mdk
@@ -332,7 +332,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * fix static/dhcp step branching
   o manage interface: (poulpy)
 	* fix modem login fetching
-	* use somewhat nice interfaces name (eg: ethernet0 rather than
+	* use somewhat nicer interfaces name (eg: ethernet0 rather than
 	  eth0)
      * fix adsl loading and saving
 - draksec:
