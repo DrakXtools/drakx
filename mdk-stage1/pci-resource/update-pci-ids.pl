@@ -1,8 +1,12 @@
 #!/usr/bin/perl
 
 use lib "../../perl-install";
+
 use common qw(:common);
-use pci_probing::pcitable;
+require '../../../soft/ldetect-lst/convert/merge2pcitable.pl';
+
+my $drivers = read_pcitable("../../../soft/ldetect-lst/lst/pcitable");
+
 
 print '
 #define PCI_REVISION_ID         0x08    /* Revision ID */
@@ -30,10 +34,11 @@ struct pci_module_map ${_}_pci_ids[] = {
 	m|([^/]*)\.o$|;
 	$l{$1} = 1;
     }
-    while (my ($k, $v) = each %pci_probing::pcitable::ids) {
-	$l{$v->[1]} or next;
-	printf qq|\t{0x%04x  , 0x%04x  , ( "%s" ), ( "%s" )} ,\n|,
-	  $k / 0x10000, $k % 0x10000, $v->[0], $v->[1];
+    while (my ($k, $v) = each %$drivers) {
+	$l{$v->[0]} or next;
+	$k =~ /^(....)(....)/;
+	printf qq|\t{0x%s  , 0x%s  , ( "%s" ), ( "%s" )} ,\n|,
+	   $1, $2, $v->[1], $v->[0];
     }
 
 print "
