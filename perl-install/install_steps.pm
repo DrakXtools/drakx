@@ -591,12 +591,12 @@ sub installCrypto {
 
 sub installUpates {
     my ($o) = @_;
-    my $u = $o->{updates} or return; $u->{updates} && $u->{packages} or return;
+    my $u = $o->{updates} or return; $u->{updates} or return;
 
     upNetwork($o);
     require crypto;
     my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
-    $o->pkg_install(@{$u->{packages}});
+    $o->pkg_install(@{$u->{packages} || []});
 }
 
 sub summary {
