@@ -366,7 +366,7 @@ sub set_xfree_conf {
 
     my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
       ($mouse, if_(!is_empty_hash_ref($mouse->{auxmouse}), $mouse->{auxmouse}));
-    undef $mouse->{auxmouse} if ($synaptics && $synaptics == $mouse->{auxmouse});
+    undef $mouse->{auxmouse} if $synaptics && $synaptics == $mouse->{auxmouse};
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
