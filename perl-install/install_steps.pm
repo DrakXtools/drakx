@@ -733,7 +733,7 @@ sub configurePrinter {
     eval { add2hash($o->{printer} ||= {}, printer::main::getinfo($o->{prefix})) }; #- get existing configuration.
 
     require printer::printerdrake;
-    printer::printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
+    printer::printerdrake::install_spooler($o->{printer}, $o->{security}, $o->do_pkgs);
 
     foreach (values %{$o->{printer}{configured} || {}}) {
 	log::l("configuring printer queue " . $_->{queuedata}{queue} || $_->{QUEUE});

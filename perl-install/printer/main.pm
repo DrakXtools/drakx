@@ -273,7 +273,7 @@ sub read_configured_queues($) {
 	    eval join('', <$F>);
 	    close $F;
 	} else {
-	    my ($daemonless_cups, $remote_cups_server) =
+	    my ($_daemonless_cups, $remote_cups_server) =
 		printer::main::read_client_conf();
 	    $printer->{remote_cups_server} = $remote_cups_server;
 	}
@@ -1682,7 +1682,7 @@ sub ppd_devid_data {
     return $devidmake, $devidmodel;
 }
 
-sub poll_ppd_base() {
+sub poll_ppd_base {
     my ($printer) = @_;
     #- Before trying to poll the ppd database available to cups, we have 
     #- to make sure the file /etc/cups/ppds.dat is no more modified.
@@ -2332,10 +2332,8 @@ sub configure_hpoj {
 	    }
 	};
     }
-    my $devdata;
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
-	$devdata = $_;
 	# $model is for the PTAL device name, so make sure that it is unique
 	# so in the case of the model name auto-detection having failed leave
 	# the port number or the host name as model name.
@@ -2625,7 +2623,7 @@ sub devicefound {
     return 0;
 }
 
-sub usbdevice() {
+sub usbdevice {
     my ($usbid) = @_;
     # Run "lsusb -vv¨ and search the given device to get its USB bus and
     # device numbers

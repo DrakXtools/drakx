@@ -37,7 +37,6 @@ use Gtk2::Gdk::Keysyms;
 use modules;
 use c;
 
-my $companyname = "Mandrakesoft";
 my $distroname = "Mandrakelinux";
 my $domainname = "mandrakesoft.com";
 
@@ -90,7 +89,7 @@ eval { $printer = printer::main::getinfo('') };
 
 undef $w;
 
-exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
+exit 0 unless printer::printerdrake::first_time_dialog($printer, $in, undef);
 
 # Were we in expert mode last time?
 $printer->{expert} = printer::main::get_usermode();
@@ -112,15 +111,18 @@ $commandline =~ /-pdq/ and
 
 if ($::isInstall) {
     # Interactive main window for installation
-    printer::printerdrake::main($printer, $in, 1);
+    printer::printerdrake::main($printer, $::o->{security}, $in, 1, undef);
     exit();
 }
+
+require security::level;
+my $security = security::level::get();
 
 # Do not let printerdrake ask for the spooler
 $printer->{SPOOLER} ||= 'cups';
 
 # Initialization
-printer::printerdrake::init($printer, $in);
+printer::printerdrake::init($printer, $security, $in, undef);
 
 # GTK2 main window
 
@@ -245,9 +247,9 @@ my @toolbwg = map {
      #-PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
      N("Configure CUPS"), N("Configure CUPS printing system"), 'cups_config', \&ConfigCUPS ]
   );
-my ($_tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
+my ($tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
 GrayDelEdit();
-foreach ($_tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
+foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
 $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
 $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
 
@@ -367,7 +369,7 @@ sub Refresh {
 
 sub AddPrinter() {
     deactivate_mainwindow();
-    if (printer::printerdrake::add_printer($printer, $in)) {
+    if (printer::printerdrake::add_printer($printer, $in, undef)) {
 	Refresh($stringsearch);
 	set_selection($printer->{QUEUE});
     } else {
@@ -411,8 +413,8 @@ sub Delete() {
 
 sub ConfigCUPS() {
     deactivate_mainwindow();
-    printer::printerdrake::config_cups($printer, $in);
-    foreach ($_tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
+    printer::printerdrake::config_cups($printer, $security, $in, undef);
+    foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups")};
     $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
     $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
     Refresh($stringsearch);
@@ -504,7 +506,7 @@ sub CreateTree {
     $tree->set_headers_visible(1);
     $tree->set_rules_hint(1);
     $tree->get_selection->signal_connect('changed' => sub {
-			       my (undef, $event) = @_;
+			       my (undef, $_event) = @_;
 			       my (undef, $iter) = $tree->get_selection->get_selected;
 			       return unless $iter;
                                foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { $_->set_sensitive(1) }

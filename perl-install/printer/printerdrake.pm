@@ -14,10 +14,7 @@ use printer::detect;
 use printer::default;
 use printer::data;
 
-my $companyname = "Mandrakesoft";
-my $distroname = "Mandrakelinux";
 my $shortdistroname = "Mandrakelinux";
-my $domainname = "mandrakesoft.com";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by decompressing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
 ");
@@ -25,7 +22,7 @@ my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded aft
 1;
 
 sub config_cups {
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $security, $in, $upNetwork) = @_;
 
     local $::isWizard = 0;
     # Check whether the network functionality is configured and
@@ -552,18 +549,18 @@ N("Examples for correct IPs:\n") .
 		    my $oldspooler = $printer->{SPOOLER};
 		    $printer->{SPOOLER} = ($daemonless_cups ? 
 					  "rcups" : "cups");
-		    if (install_spooler($printer, $in, $upNetwork, 1)) {
+		    if (install_spooler($printer, $security, $in->do_pkgs, $in, $upNetwork, 1)) {
 			printer::default::set_spooler($printer);
 			printer::main::write_client_conf
 			    ($daemonless_cups, $remote_cups_server);
 			$printer->{remote_cups_server} =
 			    $remote_cups_server;
 			# Get the queues of this spooler
-			my $_w = $in->wait_message
+			my $w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Reading printer data..."));
 			printer::main::read_configured_queues($printer);
-			undef $_w;
+			undef $w;
 			# Re-read the printer database next time
 			%printer::main::thedb = ();
 			assure_default_printer_is_set($printer, $in);
@@ -844,7 +841,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	    }
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
-	    my $queue = generate_queuename($printer);
+	    my $_queue = generate_queuename($printer);
 	    # Change wait message
 	    undef $w;
 	    $w = $::noX || 
@@ -2689,10 +2686,10 @@ sub installppd {
     return 0 if !$ppdfile;
 
     # Install the PPD file in /usr/share/cups/ppd/printerdrake/
-    my $_w = $in->wait_message(N("Printerdrake"),
+    my $w = $in->wait_message(N("Printerdrake"),
 			       N("Installing PPD file..."));
     my $ppdentry = printer::main::installppd($printer, $ppdfile);
-    undef $_w;
+    undef $w;
     return $ppdentry;
 }
 
@@ -3681,7 +3678,7 @@ sub check_network {
     # that the network is up and running so that the remote printer is
     # reachable.
 
-    my ($printer, $in, $upNetwork, $dontconfigure) = @_;
+    my ($printer, $in, $upNetwork, $b_dontconfigure) = @_;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
@@ -3692,7 +3689,7 @@ sub check_network {
     # First check: Do configured networks
     # (/etc/sysconfig/network-scripts/ifcfg*) exist?
 
-    if (!$dontconfigure && !network_configured()) {
+    if (!$b_dontconfigure && !network_configured()) {
 	my $go_on = 0;
 	while (!$go_on) {
 	    my $choice = N("Configure the network now");
@@ -3732,7 +3729,7 @@ sub check_network {
 
     # The network is configured now, start it.
     if (!start_network($in, $upNetwork) && 
-	(!$dontconfigure || $::isInstall)) {
+	(!$b_dontconfigure || $::isInstall)) {
 	$in->ask_warn(N("Warning"), 
 ($::isInstall ?
 N("The network configuration done during the installation cannot be started now. Please check whether the network is accessible after booting your system and correct the configuration using the %s Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the %s Control Center, section \"Hardware\"/\"Printer\"", $shortdistroname, $shortdistroname) :
@@ -3755,22 +3752,13 @@ N("The network access was not running and could not be started. Please check you
 sub security_check {
     # Check the security mode and when in "high" or "paranoid" mode ask the
     # user whether he really wants to configure printing.
-    my ($_printer, $in, $spooler) = @_;
+    my ($spooler, $security, $o_in) = @_;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
 
 #    $in->set_help('securityCheck') if $::isInstall;
-
-    # Get security level
-    my $security;
-    if ($::isInstall) {
-	$security = $in->{security};
-    } else {
-     require security::level;
-	$security = security::level::get();
-    }
 
     # Exit silently if the spooler is PDQ
     if ($spooler eq "pdq") { return 1 }
@@ -3786,8 +3774,8 @@ sub security_check {
     # wants to activate the spooler in the given security mode. Stop the
     # operation of installing the spooler if he disagrees.
     my $securitystr = ($security == 4 ? N("high") : N("paranoid"));
-    if ($in &&
-	$in->ask_yesorno(N("Installing a printing system in the %s security level", $securitystr),
+    if ($o_in &&
+	$o_in->ask_yesorno(N("Installing a printing system in the %s security level", $securitystr),
 			 N("You are about to install the printing system %s on a system running in the %s security level.
 
 This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessible by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
@@ -3812,25 +3800,25 @@ Do you really want to configure printing on this machine?",
 sub start_spooler_on_boot {
     # Checks whether the spooler will be started at boot time and if not,
     # ask the user whether he wants to start the spooler at boot time.
-    my ($printer, $in, $service, $silentspooleronboot) = @_;
+    my ($printer, $o_in, $b_service, $b_silentspooleronboot) = @_;
     # PDQ has no daemon, so nothing needs to be started :
-    return unless $service;
+    return unless $b_service;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
     local $::isWizard = 0;
 
 #    $in->set_help('startSpoolerOnBoot') if $::isInstall;
-    if (!services::starts_on_boot($service)) {
-	if ($silentspooleronboot ||
-	    $in->ask_yesorno(N("Starting the printing system at boot time"),
+    if (!services::starts_on_boot($b_service)) {
+	if ($b_silentspooleronboot ||
+	    $o_in && $o_in->ask_yesorno(N("Starting the printing system at boot time"),
 			     N("The printing system (%s) will not be started automatically when the machine is booted.
 
 It is possible that the automatic starting was turned off by changing to a higher security level, because the printing system is a potential point for attacks.
 
 Do you want to have the automatic starting of the printing system turned on again?",
 		       $printer::data::spoolers{$printer->{SPOOLER}}{short_name}))) {
-	    services::start_service_on_boot($service);
+	    services::start_service_on_boot($b_service);
 	}
     }
     1;
@@ -3838,24 +3826,24 @@ Do you want to have the automatic starting of the printing system turned on agai
 
 sub install_spooler {
     # installs the default spooler and start its daemon
-    my ($printer, $in, $upNetwork, $silentspooleronboot) = @_;
+    my ($printer, $security, $do_pkgs, $o_in, $o_upNetwork, $b_silentspooleronboot) = @_;
     return 1 if $::testing;
     my $spooler = $printer->{SPOOLER};
     # If the user refuses to install the spooler in high or paranoid
     # security level, exit.
-    return 0 unless security_check($printer, $in, $spooler);
+    return 0 unless security_check($spooler, $security, $o_in);
     # should not happen
     return 0 if $spooler !~ /^(rcups|cups|lpd|lprng|pqd)$/;
-    my $w = $in->wait_message(N("Printerdrake"), N("Checking installed software..."));
+    my $w = $o_in && $o_in->wait_message(N("Printerdrake"), N("Checking installed software..."));
 
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
     my $packages = $spoolers{$spooler}{packages2rm};
     if ($packages && files_exist($packages->[1])) {
 	undef $w;
-        $w = $in->wait_message(N("Printerdrake"), N("Removing %s..."), $spoolers{$packages->[0]}{short_name});
-        $in->do_pkgs->remove_nodeps($packages->[0])
+        $w = $o_in && $o_in->wait_message(N("Printerdrake"), N("Removing %s..."), $spoolers{$packages->[0]}{short_name});
+        $do_pkgs->remove_nodeps($packages->[0])
 	    or do {
-		$in->ask_warn(N("Error"),
+		$o_in && $o_in->ask_warn(N("Error"),
 			      N("Could not remove the %s printing system!",
 				$spoolers{$packages->[0]}{short_name}));
 		return 0;
@@ -3872,10 +3860,10 @@ sub install_spooler {
 	$spoolers{$spooler}{local_queues};
     if (@{$packages->[0]} && !files_exist(@{$packages->[1]})) {
 	undef $w;
-        $w = $in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
-        $in->do_pkgs->install(@{$packages->[0]})
+        $w = $o_in && $o_in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
+        $do_pkgs->install(@{$packages->[0]})
 	    or do {
-		$in->ask_warn(N("Error"),
+		$o_in && $o_in->ask_warn(N("Error"),
 			      N("Could not install the %s printing system!",
 				$spoolers{$spooler}{short_name}));
 		return 0;
@@ -3887,9 +3875,9 @@ sub install_spooler {
     # Start the network (especially during installation), so the
     # user can set up queues to remote printers.
 
-    $upNetwork and do {
-        &$upNetwork(); 
-        undef $upNetwork; 
+    $o_upNetwork and do {
+        &$o_upNetwork(); 
+        undef $o_upNetwork; 
         sleep(1);
     };
 
@@ -3925,8 +3913,8 @@ sub install_spooler {
     printer::main::pdq_panic_button($spooler eq 'pdq' ? "add" : "remove");
 
     # Should it be started at boot time?
-    start_spooler_on_boot($printer, $in, $spoolers{$spooler}{boot_spooler},
-			  $silentspooleronboot);
+    start_spooler_on_boot($printer, $o_in, $spoolers{$spooler}{boot_spooler},
+			  $b_silentspooleronboot);
 
     # Give a SIGHUP to the devfsd daemon to correct the permissions
     # for the /dev/... files according to the spooler
@@ -4057,7 +4045,7 @@ sub set_cups_daemon_mode {
 
 
 sub setup_default_spooler {
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $security, $in, $upNetwork) = @_;
     my $oldspooler = $printer->{SPOOLER};
     $printer->{SPOOLER} ||= 'cups';
     my @spoolerlist = printer::main::spooler();
@@ -4076,7 +4064,7 @@ sub setup_default_spooler {
 	$printer->{SPOOLER} = $spooler_inv{$str_spooler};
     }
     # Install the spooler if not done yet
-    if (!install_spooler($printer, $in, $upNetwork)) {
+    if (!install_spooler($printer, $security, $in->do_pkgs, $in, $upNetwork)) {
 	$printer->{SPOOLER} = $oldspooler;
 	return;
     }
@@ -4154,7 +4142,7 @@ sub wizard_close {
 
 #- Program entry point for configuration of the printing system.
 sub main {
-    my ($printer, $in, $install_step, $upNetwork) = @_;
+    my ($printer, $security, $in, $install_step, $upNetwork) = @_;
     # $install_step is only made use of during the installation. It is
     # 0 when this function is called during the preparation of the "Summary"
     # screen and 1 when the user clicks on "Configure" on the "Summary" 
@@ -4175,7 +4163,7 @@ sub main {
     if (!$::isInstall || !$::printerdrake_initialized) {
 	$printer->{SPOOLER} ||= 'cups'
 	    if ($::isInstall && $install_step == 0 && !$printer->{expert});
-	init($printer, $in, $upNetwork) or return;
+	init($printer, $security, $in, $upNetwork) or return;
     }
 
     # Main loop: During installation we only enter it when the user has
@@ -4184,12 +4172,12 @@ sub main {
     if (!$::isInstall || $install_step == 1) {
 	# Ask for a spooler when none is defined yet
 	$printer->{SPOOLER} ||= 
-	    setup_default_spooler($printer, $in, $upNetwork) || return;
+	    setup_default_spooler($printer, $security, $in, $upNetwork) || return;
     
 	# Save the default spooler
 	printer::default::set_spooler($printer);
 
-	mainwindow_interactive($printer, $in, $upNetwork);
+	mainwindow_interactive($printer, $security, $in, $upNetwork);
     }
     # In the installation we call the clean-up manually when we leave 
     # the "Summary" step
@@ -4199,7 +4187,7 @@ sub main {
 }
 
 sub init {
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $security, $in, $upNetwork) = @_;
 
     # Initialization of Printerdrake and queue auto-installation
 
@@ -4235,7 +4223,7 @@ sub init {
     # installation, because this only works when CUPS is already running
     if ($printer->{SPOOLER}) {
 	return 0 unless ($::noX || 
-			 install_spooler($printer, $in, $upNetwork));
+			 install_spooler($printer, $security, $in->do_pkgs, $in, $upNetwork));
 	assure_remote_server_is_set($printer, $in)
 	    if ($printer->{SPOOLER} eq "rcups") && !$::noX;
 	printer::main::read_configured_queues($printer)
@@ -4276,7 +4264,7 @@ sub init {
 
 sub mainwindow_interactive {
 
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $security, $in, $upNetwork) = @_;
 
     # Control variables for the main loop
     my ($menuchoice, $cursorpos) = ('', '::');
@@ -4421,12 +4409,12 @@ sub mainwindow_interactive {
 	next if $menuchoice eq '@refresh';
 	# Configure CUPS
 	if ($menuchoice eq '@cupsconfig') {
-	    config_cups($printer, $in, $upNetwork);
+	    config_cups($printer, $security, $in, $upNetwork);
 	    next;
 	}
 	# Call function to switch to another spooler
 	if ($menuchoice eq '@spooler') {
-	    $printer->{SPOOLER} = setup_default_spooler($printer, $in, $upNetwork) || $printer->{SPOOLER};
+	    $printer->{SPOOLER} = setup_default_spooler($printer, $security, $in, $upNetwork) || $printer->{SPOOLER};
 	    next;
 	}
 	# Add a new print queue
@@ -4716,16 +4704,8 @@ What do you want to modify on this printer?",
 
 	    #- Copy the queue data and work on the copy
 	    $printer->{currentqueue} = {};
-	    my $driver;
 	    if ($printer->{configured}{$queue}) {
 		printer::main::copy_printer_params($printer->{configured}{$queue}{queuedata}, $printer->{currentqueue});
-		#- Keep in mind the printer driver which was
-		#- used, so it can be determined whether the
-		#- driver is only available in expert and so
-		#- for setting the options for the driver in
-		#- recommended mode a special treatment has
-		#- to be applied.
-		$driver = $printer->{currentqueue}{driver};
 	    }
 	    #- keep in mind old name of queue (in case of changing)
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
