@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release require_root_capability);
+@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release require_root_capability check_for_xserver);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -245,7 +245,7 @@ sub mandrake_release {
 
 sub require_root_capability {
     return unless $>; # we're already root
-    if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
+    if (check_for_xserver()) {
 	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
 	    exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
 	}
@@ -255,5 +255,13 @@ sub require_root_capability {
     # still not root ?
     die "you must be root to run this program" if $>;
 }
+
+sub check_for_xserver {
+    if (!defined $::xtest) {
+        $::xtest = $ENV{DISPLAY} && (system('/usr/X11R6/bin/xtest') == 0);
+    }
+    return $::xtest;
+}
+
 
 1;

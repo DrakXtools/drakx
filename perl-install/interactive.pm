@@ -94,13 +94,11 @@ sub vnew {
 	$su = '' if $::testing || $ENV{TESTING};
     }
     require_root_capability() if $su;
-    if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
+    if (check_for_xserver()) {
 	eval { require interactive::gtk };
 	if (!$@) {
 	    my $o = interactive::gtk->new;
 	    if ($icon && $icon ne 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
-	    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
-	    $::need_utf8_i18n = 1;
 	    return $o;
 	}
     }

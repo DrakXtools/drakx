@@ -14,7 +14,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
       gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup gtkmodify_font gtkset_property
       gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle gtkappend_page) ],
     helpers => [ qw(add2notebook add_icon_path n_line_size fill_tiled fill_tiled_coords string_size
-      get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf) ],
+      get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf
+      prepare_gtk2) ],
     create => [ qw(create_box_with_title create_adjustment create_scrolled_window create_hbox create_vbox
       create_dialog destroy_window create_factory_menu create_menu create_notebook create_packtable
       create_vpaned create_hpaned create_okcancel) ],
@@ -31,9 +32,10 @@ use common;
 use Gtk2;
 
 unless ($::no_ugtk_init) {
-    !$ENV{DISPLAY} || system('/usr/X11R6/bin/xtest') and die "Cannot be run in console mode.\n";
+    !check_for_xserver() and die "Cannot be run in console mode.\n";
     Gtk2->init(\@ARGV);
 }
+
 
 $border = 5;
 
@@ -1259,5 +1261,10 @@ sub ask_browse_tree_info_given_widgets {
     $w->{w}->main;
 }
 
+
+sub prepare_gtk2 {
+    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
+    $::need_utf8_i18n = 1;
+}
 
 1;
