@@ -40,7 +40,7 @@ sub try {
 }
 sub try_ {
     my ($kind, $name, $f, @args) = @_;
-    eval { $f->($in, @args, $all_hds); };
+    eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
 	$in->ask_warn(_("Error"), formatError($err));
     }
