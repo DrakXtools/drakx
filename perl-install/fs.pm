@@ -201,8 +201,6 @@ sub mount($$$;$) {
 #	nfs::mount($dev, $where) or die _("nfs mount failed");
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
-    } elsif ($fs eq 'ext2') {
-	run_program::run("fsck.ext2", $dev);
     } else {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
@@ -228,6 +226,8 @@ sub mount($$$;$) {
 	    eval { modules::load('reiserfs') };
 	} elsif ($fs eq 'romfs') {
 	    eval { modules::load('romfs') };
+	} elsif ($fs eq 'ext2') {
+	    run_program::run("fsck.ext2", "-a", $dev) or die _("fsck failed: ") . "$!";
 	}
 
 	$where =~ s|/$||;
