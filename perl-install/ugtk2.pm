@@ -1088,11 +1088,16 @@ sub _ask_okcancel($@) {
 
 sub _ask_file {
     my ($o, $title, $path) = @_;
-    my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->get('window-position'));
-    my $f = $o->{rwindow} = $o->{window} = Gtk2::FileSelection->new($title);
-    $f->set_modal($modality);
-    $f->set_position($position);
-    $path and $f->set_filename($path);
+    my $f = Gtk2::FileSelection->new($title);
+    if ($o->{rwindow}->isa('Gtk2::Window')) {
+	my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->get('window-position'));
+	$f->set_modal($modality);
+	$f->set_position($position);
+    }
+    my $bg = $o->{window};
+    $o->{rwindow} = $o->{window} = $f;
+    $f->set_filename($path) if $path;
+    $f->signal_connect(destroy => sub { eval { $bg->destroy } });
     $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename; Gtk2->main_quit });
     $f->cancel_button->signal_connect(clicked => sub { Gtk2->main_quit });
     $f->grab_focus;
