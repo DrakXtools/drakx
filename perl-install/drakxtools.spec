@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 49mdk
+Release: 50mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-50mdk
+- drakupdate_fstab (oblin): fix moving mount point (#6982, #10175)
+- drakauth: for Active Directory, allow: Kerberos, SSL/TLS, simple and
+  anonymous (pixel)
+- net_monitor (oblin):
+  o always display a speed label for transmitted graph
+  o allow the user to use different scales for received and
+    transmitted
+  o always draw an arrow next to transmitted amount
+
 * Tue Jun 29 2004 Pixel <pixel@mandrakesoft.com> 10-49mdk
 - add bootloader-config (used by bootloader-utils and bootsplash scripts)
 - drakboot (pixel):
