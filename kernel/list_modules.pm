@@ -28,7 +28,7 @@ our %l = (
         qw(wd winbond-840 forcedeth),
 	qw(fealnx 3c990 3c990fx bcm4400),
         qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
-        qw(prism54),
+        qw(prism54 airo_mpi),
 
 	qw(iph5526), #- fibre channel
       ),
