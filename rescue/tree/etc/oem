@@ -537,7 +537,10 @@ print F "%_install_langs $flang:$lang\n";
 close F;
 
 #- hack for package psacct which has problem with its log file not touched.
-${pkgs::packageByName($packages, 'psacct') || {}}{selected} and system "touch", "/mnt/var/log/psacct.log";
+if (${pkgs::packageByName($packages, 'psacct') || {}}{selected}) {
+    system "touch", "/mnt/var/log/psacct.log";
+    system "touch", "/mnt/var/log/pacct";
+}
 
 system "rpm", "--root", "/mnt", "--initdb";
 
