@@ -679,7 +679,7 @@ sub computeGroupSize {
 	#- make a fast selection (but potentially erroneous).
 	#- installed and upgrade flags must have been computed (see compute_installed_flags).
 	my %newSelection;
-	unless ($p->flag_installed && !$p->flag_upgrade) {
+	unless ($p->flag_available) {
 	    my @l2 = ($p->id);
 	    my $id;
 
@@ -692,7 +692,7 @@ sub computeGroupSize {
 		    my ($candidate_id, $prefer_id);
 		    foreach (keys %{$packages->{provides}{$_} || {}}) {
 			my $ppkg = $packages->{depslist}[$_] or next;
-			$ppkg->flag_installed && !$p->flag_upgrade and $prefer_id = $candidate_id = undef, last;
+			$ppkg->flag_available and $prefer_id = $candidate_id = undef, last;
 			exists $preferred{$ppkg->name} and $prefer_id = $_;
 			$ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
 			$candidate_id = $_;
