@@ -5,6 +5,13 @@ DIRS	    = ddcprobe serial_probe aewm-drakx
 BASE        = $(ROOTDEST)/Mandrake/base
 CFLAGS      = -Wall
 
+ARCH := $(shell arch | egrep "(x86_64|sparc64|s390x)")
+ifneq ("x$(ARCH)", "x")
+LIB_NAME = lib64
+else
+LIB_NAME = lib
+endif
+
 .PHONY: clean install $(DIRS)
 
 all: $(DIRS) xhost+ rpcinfo-flushed install
@@ -22,7 +29,7 @@ install:
 	@mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
-	$(CC) $(CFLAGS) $< -L/usr/X11R6/lib -lX11 -o $@
+	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
 
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
