@@ -1555,29 +1555,30 @@ sub toggle_expansion {
 # GtkOptionMenu is a much better-implemented widget and also the right UI for
 # noneditable sets of choices.)
 #
-# GtkCombo isn't deprecated yet in 2.2 but will be in 2.4.x because it still
-# uses deprecated GtkList.
+# GtkCombo is deprecated in 2.4.x because it still uses deprecated
+# GtkList. GtkOption menu is deprecated in order to have an unified widget.
 #
-# A replacement widget for both GtkCombo and GtkOption menu is expected in 2.4
-# (currently in libegg). This widget will be themeable to look like either a
-# combo box or the current option menu.
+# GtkComBox widget replaces GtkOption menu whereas GtkComBoxEntry replaces GtkCombo.
 #
 #
-# This layer try to make OptionMenu look be api compatible with Combo since new
-# widget API seems following the current Combo API.
+# This layer try to make OptionMenu and ComboBox look being api
+# compatible with Combo since its API is quite nice.
 
 package Gtk2::OptionMenu;
+
+sub new { print "toto! !!!\n\n"; Gtk2::ComboBox->new_text }
+
+
+
+package Gtk2::ComboBox;
 use common;
 
 # try to get combox <==> option menu mapping
 sub set_popdown_strings {
     my ($w, @strs) = @_;
-    my $menu = Gtk2::Menu->new;
     # keep string list around for ->set_text compatibilty helper
     $w->{strings} = \@strs;
-    #$w->set_menu((ugtk2::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
-    $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
-    $w->set_menu($menu);
+    $w->append_text($_) foreach @strs;
     $w
 }
 
@@ -1596,14 +1597,14 @@ sub entry {
 
 sub get_text {
     my ($w) = @_;
-    $w->{strings}[$w->get_history];
+    $w->{strings}[$w->get_active];
 }
 
 sub set_text {
     my ($w, $val) = @_;
     each_index {
         if ($_ eq $val) {
-            $w->set_history($::i);
+            $w->set_active($::i);
             return;
         }
     } @{$w->{strings}};
