@@ -19,6 +19,7 @@ sub headerGetEntry {
     $q eq 'group' and return from_utf8(headerGetEntry_string($h, RPMTAG_GROUP()));
     $q eq 'version' and return headerGetEntry_string($h, RPMTAG_VERSION());
     $q eq 'release' and return headerGetEntry_string($h, RPMTAG_RELEASE());
+    $q eq 'epoch' and return headerGetEntry_int($h, RPMTAG_EPOCH());
     $q eq 'summary' and return from_utf8(headerGetEntry_string($h, RPMTAG_SUMMARY()));
     $q eq 'description' and return from_utf8(headerGetEntry_string($h, RPMTAG_DESCRIPTION()));
     $q eq 'arch' and return headerGetEntry_string($h, RPMTAG_ARCH());
