@@ -11,7 +11,8 @@ BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
-LOCALFILES  = pnp_serial mouseconfig ddcxinfos extract_archive
+LOCALFILES  = pnp_serial mouseconfig ddcxinfos
+LOCALFILES2 = extract_archive
 DIRS        = c po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
@@ -106,7 +107,8 @@ get_needed_files: $(DIRS)
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
 	install -d $(ROOTDEST)/Mandrake/base
-	cp -af $(LOCALFILES) $(DEST)/usr/bin
+	install -s $(LOCALFILES) $(DEST)/usr/bin
+	cp -f $(LOCALFILES2) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
@@ -194,7 +196,7 @@ stage2:
 	$(SUDO) rm -rf $(STAGE2TMP)
 
 	$(SUDO) umount $(STAGE2)
-	gzip -f -9 $(STAGE2)
+	gzip -f -3 $(STAGE2)
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd
