@@ -406,7 +406,8 @@ sub install2::startMove {
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
     my $root = ugtk2::gtkroot();
-    my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
+    my $pixbuf = eval { Gtk2::Gdk::Pixbuf->new_from_file("/image/move/BOOT-$::rootwidth-MOVE.jpg") };
+    $pixbuf ||= Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
     my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
