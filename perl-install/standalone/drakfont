@@ -192,7 +192,7 @@ sub list_fontpath() {
 sub chk_empty_xfs_path() {
     foreach my $tmp_path (@installed_fonts_path) {
         if (every { /^fonts/ || /^type/ } all($tmp_path)) {
-            system("chkfontpath -r $tmp_path ")
+            system("$chkfontpath -r $tmp_path ")
               or print "PERL::system command failed during chkfontpath\n";
         }
     }
