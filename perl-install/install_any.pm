@@ -962,7 +962,7 @@ sub use_root_part {
 	my $handle = any::inspect($part, $prefix) or die;
 	fs::get_info_from_fstab($all_hds, $handle->{dir}, 'uniq');
     }
-    map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } fsedit::get_really_all_fstab($all_hds); #- use all available swap.
+    isSwap($_) and $_->{mntpoint} = 'swap' foreach fsedit::get_really_all_fstab($all_hds); #- use all available swap.
 }
 
 sub getHds {
