@@ -54,10 +54,10 @@ my $device;
 
 my %available_roaming_daemons = (
 		       wlandetect => {
-				      config_file => '/etc/wlandetect.conf',
+				      config_location => '/etc/wlandetect.conf',
 				      binary => '/usr/sbin/wlandetect',
 				      start_options => sub {
-					  my ($interval) = @_;
+					  my ($interval, $device) = @_;
 					  "-d -t $interval";
 				      },
 				      read_config => sub {
@@ -95,6 +95,33 @@ my %available_roaming_daemons = (
 					      push @contents, "$essid\t\t$iwc; $ifc\n";
 					  }
 					  output($config, @contents);
+				      },
+				      add_net => sub {},
+				      remove_net => sub {},
+				     },
+		       waproamd => {
+				      config_location => '/etc/waproamd/scripts',
+				      binary => '/usr/sbin/waproamd',
+				      start_options => sub {
+					  my ($interval, $device) = @_;
+					  "-i $device -t $interval";
+				      },
+				      read_config => sub {
+					  my ($config) = @_;
+					  foreach my $net (all($config)) {
+					      $net eq "default" or next;
+					      print "Adding net $net\n";
+					      push @{$KnownList->{data}}, [$net];
+					  }
+				      },
+				      write_config => sub {},
+				      add_net => sub {
+					  my ($config, $essid) = @_;
+					  output("$config/$essid", qq(# essid specific config file));
+				      },
+				      remove_net => sub {
+					  my ($config, $essid) = @_;
+					  system("rm -f $config/$essid");
 				      },
 				     },
 );
@@ -172,7 +199,7 @@ gtkadd(gtkset_border_width($w->{window}, 2),
                                    0, gtkpack(create_hbox(),
 					      gtksignal_connect(Gtk2::Button->new("Remove"), clicked => sub {
 								    my ($selected) = $KnownList->get_selected_indices;
-								    splice @{$KnownList->{data}}, $selected, 1;
+								    &RemoveNet($selected);
 								}),
 					      gtksignal_connect(Gtk2::Button->new("Connect"), clicked => sub {
 								    my ($selected) = $KnownList->get_selected_indices;
@@ -237,7 +264,7 @@ sub UpdateStatus() {
 	my $CurrentWEP = "";
 	my $CurrentSignal = "-";
 	print("Updating\n");
-	foreach (run_program::get_stdout($IWConfig)) {
+	foreach (run_program::get_stdout($IWConfig, $device)) {
 		/ESSID:"(\S*)"/ and $CurrentNet = $1;
 		/Mode:(\S*)\s/ and $CurrentMode = $1;
 		/key:(\S*)\s/ and $CurrentWEP = $1;
@@ -280,14 +307,23 @@ sub AddNet {
 	my ($essid, $mode, $channel, $key, $dhcp) = @_;
 	print "Adding net $essid\n";
 	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $key, $dhcp ];
+	$_->{add_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
+}
+
+sub RemoveNet {
+	my ($selected) = @_;
+	my $essid = $KnownList->{data}[$selected][0];
+	print "Removing net $essid\n";
+	splice @{$KnownList->{data}}, $selected, 1;
+	$_->{remove_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
 }
 
 sub ReadConfig() {
-	$_->{read_config}($_->{config_file}) foreach values %available_roaming_daemons;
+	$_->{read_config}($_->{config_location}) foreach values %available_roaming_daemons;
 }
 
 sub WriteConfig() {
-	$_->{write_config}($_->{config_file}) foreach values %available_roaming_daemons;
+	$_->{write_config}($_->{config_location}) foreach values %available_roaming_daemons;
 }
 
 sub StartRoam() {
@@ -338,6 +374,7 @@ sub ConnectNow {
 }
 
 sub Disconnect {
+	print("Dropping $device\n");
 	system("$IFDown $device");
 	&UpdateStatus;
 }
