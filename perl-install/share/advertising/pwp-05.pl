@@ -3,11 +3,16 @@
 $width = 556;
 $height = 303;
 
-$y_start = 80;
+$y_start = 10;
+$border = 10;  #- for leftish text
 
-$title = N("Development tools");
+# Use <b>text</b> for bold
 
-@text = (N("PowerPack includes everything needed for developing and creating your own software, including:"),
-         N("   * Kdevelop: a full featured, easy to use Integrated Development Environment for C++ programming"),
-		 N("   * GCC: the GNU Compiler Collection"),
-		 N("   * GDB: the GNU Project debugger")); 
+# @text = ([ N("text to display"), center => 1 ],
+
+@text = ([ N("<b>Development tools</b>"), center => 1 ],
+        ' ',
+	N("PowerPack includes everything needed for developing and creating your own software, including:"),
+	N("	- <b>Kdevelop:</b> a full featured, easy to use Integrated Development Environment for C++ programming"),
+	N("	- <b>GCC:</b> the GNU Compiler Collection"),
+	N("	- <b>GDB:</b> the GNU Project debugger")); 

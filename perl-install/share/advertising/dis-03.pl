@@ -3,8 +3,13 @@
 $width = 556;
 $height = 303;
 
-$y_start = 80;
+$y_start = 10;
+$border = 10;  #- for leftish text
 
-$title = N("The KDE Choice");
+# Use <b>text</b> for bold
 
-@text = (N("The powerful Open Source graphical desktop environment KDE is the desktop of choice for the Discovery Pack."));
+# @text = ([ N("text to display"), center => 1 ],
+
+@text = ([ N("<b>The KDE Choice</b>"), center => 1 ],
+        ' ',
+	N("The powerful Open Source graphical desktop environment KDE is the desktop of choice for the Discovery Pack."));

@@ -12,4 +12,4 @@ $border = 10;  #- for leftish text
 
 @text = (N("Find all MandrakeSoft products and services at MandrakeStore -- our full service e-commerce platform."),
         ' ',
-		N("Stop by today at <b>www.mandrakestore.com</b>")); 
+	N("Stop by today at <b>www.mandrakestore.com</b>")); 

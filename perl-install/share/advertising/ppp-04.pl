@@ -13,9 +13,9 @@ $border = 10;  #- for leftish text
 @text = (N("In the Mandrake Linux menu you will find easy-to-use applications for all tasks:"),
          ' ',
          N("	- Create, edit and share office documents with <b>OpenOffice.org</b>"),
-		 N("	- Take charge of your personal data with the integrated personal information suites: <b>Kontact</b> and <b>Evolution</b>"),
-		 N("	- Browse the Web with <b>Mozilla and Konqueror</b>"),
-		 N("	- Participate in online chat with <b>Kopete</b>"),
-		 N("	- Listen to audio CDs and music files with KsCD and <b>Totem</b>"),
-		 N("	- Edit images and photos with <b>The Gimp</b>"),
-		 N("	- Plus much more")); 
+	 N("	- Take charge of your personal data with the integrated personal information suites: <b>Kontact</b> and <b>Evolution</b>"),
+	 N("	- Browse the Web with <b>Mozilla and Konqueror</b>"),
+	 N("	- Participate in online chat with <b>Kopete</b>"),
+	 N("	- Listen to audio CDs and music files with KsCD and <b>Totem</b>"),
+	 N("	- Edit images and photos with <b>The Gimp</b>"),
+	 N("	- Plus much more")); 

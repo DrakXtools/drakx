@@ -14,5 +14,5 @@ $border = 10;  #- for leftish text
 @text = (N("Do you require assistance?"),
          ' ',
          N("<b>MandrakeExpert</b> is the primary source for technical support."),
-		 ' ',
-		 N("If you have Linux questions, subscribe to MandrakeExpert at <b>www.mandrakeexpert.com</b>")); 
+	 ' ',
+	 N("If you have Linux questions, subscribe to MandrakeExpert at www.mandrakeexpert.com")); 

@@ -3,12 +3,17 @@
 $width = 556;
 $height = 303;
 
-$y_start = 80;
+$y_start = 10;
+$border = 10;  #- for leftish text
 
-$title = N("Multimedia: Software for every need!");
+# Use <b>text</b> for bold
 
-@text = (N("Listen to audio CDs with KsCD."),
-         '',
-         N("Listen to music files and watch videos with Totem."),
-		 '',
-		 N("View and edit images and photos with GQview and the Gimp!")); 
+# @text = ([ N("text to display"), center => 1 ],
+
+@text = (N("<b>Multimedia:</b> Software for every need!"),
+        ' ',
+	N("Listen to audio CDs with <b>KsCD</b>."),
+	' ',
+	N("Listen to music files and watch videos with <b>Totem</b>."),
+	' ',
+	N("View and edit images and photos with <b>GQview</b> and <b>The Gimp!</b>")); 

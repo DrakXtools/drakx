@@ -12,9 +12,9 @@ $border = 10;  #- for leftish text
 
 @text = (N("PowerPack+ includes everything needed for developing and creating your own software, including:"),
         ' ',
-		N("	- <b>Kdevelop</b>: a full featured, easy to use Integrated Development Environment for C++ programming"),
-		N("	- <b>GCC</b>: the GNU Compiler Collection"),
-		N("	- <b>GDB</b>: the GNU Project debugger"),
-		N("	- <b>Emacs</b>: a customizable and real time display editor"),
-		N("	- <b>Xemacs</b>: open source text editor and application development system"),
-		N("	- <b>Vim</b>: advanced text editor with more features than standard Vi")); 
+	N("	- <b>Kdevelop</b>: a full featured, easy to use Integrated Development Environment for C++ programming"),
+	N("	- <b>GCC</b>: the GNU Compiler Collection"),
+	N("	- <b>GDB</b>: the GNU Project debugger"),
+	N("	- <b>Emacs</b>: a customizable and real time display editor"),
+	N("	- <b>Xemacs</b>: open source text editor and application development system"),
+	N("	- <b>Vim</b>: advanced text editor with more features than standard Vi")); 
