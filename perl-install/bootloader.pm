@@ -534,7 +534,6 @@ wait %d seconds for default boot.
 	     silo => to_bool(arch() =~ /sparc/),
 	     lilo => to_bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
 	     grub => to_bool(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab))),
-	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     unless ($lilo->{methods}) {
 	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
@@ -1018,101 +1017,6 @@ sub lnx4win_file {
     my $lilo = shift;
     map { local $_ = $_; s,/,\\,g; "$lilo->{boot_drive}:\\lnx4win$_" } @_;
 }
-
-sub loadlin_cmd {
-    my ($lilo) = @_;
-    my $e = get_label("linux", $lilo) || first(grep { $_->{type} eq "image" } @{$lilo->{entries}});
-
-    cp_af("$::prefix$e->{kernel_or_dev}", "$::prefix/boot/vmlinuz") unless -e "$::prefix/boot/vmlinuz";
-    cp_af("$::prefix$e->{initrd}", "$::prefix/boot/initrd.img") unless -e "$::prefix/boot/initrd.img";
-
-    $e->{label}, sprintf "%s %s initrd=%s root=%s $e->{append}", 
-      lnx4win_file($lilo, "/loadlin.exe", "/boot/vmlinuz", "/boot/initrd.img"),
-	$e->{root} =~ /loop7/ ? "0707" : $e->{root}; #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
-}
-
-sub install_loadlin {
-    my ($lilo, $fstab) = @_;
-
-    my $boot;
-    ($boot) = grep { $lilo->{boot} eq "/dev/$_->{device}" } @$fstab;
-    ($boot) = grep { loopback::carryRootLoopback($_) } @$fstab if !$boot || !$boot->{device_windobe};
-    ($boot) = grep { isFat($_) } @$fstab if !$boot || !$boot->{device_windobe};
-    log::l("loadlin device is $boot->{device} (windobe $boot->{device_windobe})");
-    $lilo->{boot_drive} = $boot->{device_windobe};
-
-    my ($winpart) = grep { $_->{device_windobe} eq 'C' } @$fstab;
-    log::l("winpart is $winpart->{device}");
-    my $winhandle = any::inspect($winpart, $::prefix, 'rw');
-    my $windrive = $winhandle->{dir};
-    log::l("windrive is $windrive");
-
-    my ($_label, $cmd) = loadlin_cmd($lilo);
-
-    #install_loadlin_config_sys($lilo, $windrive, $label, $cmd);
-    #install_loadlin_desktop($lilo, $windrive);
-
-    output "/initrd/loopfs/lnx4win/linux.bat", unix2dos(
-'@echo off
-echo Mandrake Linux
-smartdrv /C
-' . "$cmd\n");
-
-}
-
-sub install_loadlin_config_sys {
-    my ($lilo, $windrive, $label, $cmd) = @_;
-
-    my $config_sys = "$windrive/config.sys";
-    local $_ = cat_($config_sys);
-    output "$windrive/config.mdk", $_ if $_;
-    
-    my $timeout = $lilo->{timeout} || 1;
-
-    $_ = "
-[Menu]
-menuitem=Windows
-menudefault=Windows,$timeout
-
-[Windows]
-" . $_ if !/^\Q[Menu]/m;
-
-    #- remove existing entry
-    s/^menuitem=$label\s*//mi;    
-    s/\n\[$label\].*?(\n\[|$)/$1/si;
-
-    #- add entry
-    s/(.*\nmenuitem=[^\n]*)/$1\nmenuitem=$label/s;
-
-    $_ .= "
-[$label]
-shell=$cmd
-";
-    output $config_sys, unix2dos($_);
-}
-
-sub install_loadlin_desktop {
-    my ($lilo, $windrive) = @_;
-    my $windir = lc(cat_("$windrive/msdos.sys") =~ /^WinDir=.:\\(\S+)/m ? $1 : "windows");
-
-    foreach (#-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-	     #-PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-	     N_("Desktop"),
-	     #-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows 
-	     N_("Start Menu")) {
-        my $d = "$windrive/$windir/" . translate($_);
-        -d $d or $d = "$windrive/$windir/$_";
-        -d $d or log::l("can't find windows $d directory"), next;
-        output "$d/Linux4Win.url", unix2dos(sprintf 
-q([InternetShortcut]
-URL=file:\lnx4win\lnx4win.exe
-WorkingDirectory=%s
-IconFile=%s
-IconIndex=0
-), lnx4win_file($lilo, "/", "/lnx4win.ico"));
-    }
-}
-
 
 sub install {
     my ($lilo, $fstab, $hds) = @_;

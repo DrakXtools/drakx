@@ -142,8 +142,6 @@ sub setupBootloader {
 			       N_("Grub")                     => sub { $b->{methods}{grub} = 1;
 								       exists $b->{methods}{lilo}
 									 and $b->{methods}{lilo} = "lilo-menu" }),
-			   if_(exists $b->{methods}{loadlin},
-			       N_("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
 			   if_(exists $b->{methods}{yaboot},
 			       N_("Yaboot") => sub { $b->{methods}{yaboot} = 1 }),
 			  );
