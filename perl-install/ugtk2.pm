@@ -817,12 +817,12 @@ sub _create_window($$) {
 	$table->attach($inner, 0, 1, 0, 1, ['expand', 'fill'], ['expand', 'fill'], 0, 0);
 	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, $sqw, 1), expose_event => sub {
 					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
-					      $_[0]->window->draw_rectangle($gc, 1, 0, $sqw, $sqw, ($_[0]->allocation)[3]);
+					      $_[0]->window->draw_rectangle($gc, 1, 0, $sqw, $sqw, $_[0]->allocation->height);
 					  }),
 			1, 2, 0, 1, 'fill', 'fill', 0, 0);
 	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, 1, $sqw), expose_event => sub {
 					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
-					      $_[0]->window->draw_rectangle($gc, 1, $sqw, 0, ($_[0]->allocation)[2], $sqw);
+					      $_[0]->window->draw_rectangle($gc, 1, $sqw, 0, $_[0]->allocation->width, $sqw);
 					  }),
 			0, 1, 1, 2, 'fill', 'fill', 0, 0);
 	$table->attach(gtksignal_connect(gtkset_size_request(Gtk2::DrawingArea->new, $sqw, $sqw), expose_event => sub {
