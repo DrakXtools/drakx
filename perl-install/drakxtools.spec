@@ -348,6 +348,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Wed Oct  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-21mdk
+- bootloader-config: fix installing kernel-2.6.8.1-12.1mdk (pixel)
 - drakups: fix brown paper bug in USB detection
 
 * Tue Oct  5 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-20mdk
