@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 1999-10-13 16:15+0200\n"
+"POT-Creation-Date: 1999-10-13 16:46+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -1462,9 +1462,10 @@ msgstr "Total størrelse: "
 #: ../install_steps_graphical.pm_.c:315
 #, c-format
 msgid "Version: %s\n"
-msgstr ""
+msgstr "Versjon: %s\n"
 
 #: ../install_steps_graphical.pm_.c:316
+#, c-format
 msgid "Size: %d KB\n"
 msgstr "Størrelse: %d KB\n"
 
@@ -1474,73 +1475,75 @@ msgid ""
 "Summary: %s\n"
 "\n"
 msgstr ""
+"Oppsummering: %s\n"
+"\n"
 
-#: ../install_steps_graphical.pm_.c:434
+#: ../install_steps_graphical.pm_.c:433
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../install_steps_graphical.pm_.c:437
+#: ../install_steps_graphical.pm_.c:436
 msgid "Info"
 msgstr "Info"
 
-#: ../install_steps_graphical.pm_.c:445
+#: ../install_steps_graphical.pm_.c:444
 msgid "Go"
 msgstr "Start"
 
-#: ../install_steps_graphical.pm_.c:446
+#: ../install_steps_graphical.pm_.c:445
 msgid "Select less"
 msgstr "Velg færre"
 
-#: ../install_steps_graphical.pm_.c:447
+#: ../install_steps_graphical.pm_.c:446
 msgid "Select more"
 msgstr "Velg flere"
 
-#: ../install_steps_graphical.pm_.c:448
+#: ../install_steps_graphical.pm_.c:447
 msgid "Show less"
 msgstr "Vis færre"
 
-#: ../install_steps_graphical.pm_.c:449
+#: ../install_steps_graphical.pm_.c:448
 msgid "Show more"
 msgstr "Vis flere"
 
-#: ../install_steps_graphical.pm_.c:466
+#: ../install_steps_graphical.pm_.c:465
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../install_steps_graphical.pm_.c:472
+#: ../install_steps_graphical.pm_.c:471
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../install_steps_graphical.pm_.c:474
+#: ../install_steps_graphical.pm_.c:473
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../install_steps_graphical.pm_.c:475
+#: ../install_steps_graphical.pm_.c:474
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../install_steps_graphical.pm_.c:480
+#: ../install_steps_graphical.pm_.c:479
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../install_steps_graphical.pm_.c:501
+#: ../install_steps_graphical.pm_.c:500
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:526
+#: ../install_steps_graphical.pm_.c:525
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../install_steps_graphical.pm_.c:526
+#: ../install_steps_graphical.pm_.c:525
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved bestilling av pakkene:"
 
-#: ../install_steps_graphical.pm_.c:550
+#: ../install_steps_graphical.pm_.c:549
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
-#: ../install_steps_graphical.pm_.c:623 ../interactive.pm_.c:47
+#: ../install_steps_graphical.pm_.c:622 ../interactive.pm_.c:47
 #: ../interactive.pm_.c:57 ../my_gtk.pm_.c:194 ../my_gtk.pm_.c:348
 #: ../my_gtk.pm_.c:438
 msgid "Ok"
@@ -1554,18 +1557,13 @@ msgstr "En feil oppsto"
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:60
-msgid "Wanring no wrranty, be carfull it's gonna explose ytou romcpature"
-msgstr ""
-
 #: ../install_steps_interactive.pm_.c:61
 msgid "Accept"
-msgstr ""
+msgstr "Godta"
 
 #: ../install_steps_interactive.pm_.c:61
-#, fuzzy
 msgid "Refuse"
-msgstr "Endre størrelse"
+msgstr "Avslå"
 
 #: ../install_steps_interactive.pm_.c:69
 msgid "What is your keyboard layout?"
@@ -1976,13 +1974,15 @@ msgstr "Legg til bruker"
 #: ../install_steps_interactive.pm_.c:534
 #, c-format
 msgid "(already added %s)"
-msgstr ""
+msgstr "(allerede lagt til %s)"
 
 #: ../install_steps_interactive.pm_.c:534
+#, c-format
 msgid ""
 "Enter a user\n"
 "%s"
-msgstr "Entre en bruker\n"
+msgstr ""
+"Entre en bruker\n"
 "%s"
 
 #: ../install_steps_interactive.pm_.c:535
@@ -2281,11 +2281,11 @@ msgstr "Dropp PCMCIA-søk"
 
 #: ../install_steps_interactive.pm_.c:789
 msgid "Configuring PCMCIA cards..."
-msgstr ""
+msgstr "Konfigurerer PCMCIA kort..."
 
 #: ../install_steps_interactive.pm_.c:789
 msgid "PCMCIA"
-msgstr ""
+msgstr "PCMCIA"
 
 #: ../install_steps_interactive.pm_.c:796
 #, c-format
@@ -3001,3 +3001,6 @@ msgstr "NetWare"
 
 #~ msgid " Mb"
 #~ msgstr " Mb"
+
+#~ msgid "Wanring no wrranty, be carfull it's gonna explose ytou romcpature"
+#~ msgstr "Wanring no wrranty, be carfull it's gonna explose ytou romcpature"
