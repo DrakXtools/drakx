@@ -488,6 +488,9 @@ sub Create {
 	$part->{size} = $part->{maxsize};
 	fs::type::suggest_fs_type($part, 'ext3');
     }
+    if (isLVM($hd)) {
+	lvm::suggest_lv_name($hd, $part);
+    }
 
     #- update adjustment for start and size, take into account the minimum partition size
     #- including one less sector for start due to a capacity to increase the adjustement by

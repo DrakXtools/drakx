@@ -128,14 +128,19 @@ sub lv_delete {
     @$list = grep { $_ != $lv } @$list;
 }
 
-sub lv_create {
+sub suggest_lv_name {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal} ||= [];
     $lv->{lv_name} ||= 1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list);
+}
+
+sub lv_create {
+    my ($lvm, $lv) = @_;
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
     lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
     set_isFormatted($lv, 0);
+    my $list = $lvm->{primary}{normal} ||= [];
     push @$list, $lv;
 }
 
