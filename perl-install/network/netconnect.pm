@@ -187,7 +187,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 # 	     [N("LAN connection"), $netc->{autodetect}{lan}, N_("ethernet card(s) detected"), \$conf{lan}]
 # 	);
     my $i = 0;
-    map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
+#    map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
 #     my %l = (
 # 	       1 => [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), "modem"],
 # 	       2 => [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), "winmodem"],
@@ -211,7 +211,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 # 			  }}]
 # 			 ) or goto step_1;
 #     $conf{$l{$cnx_type}[1]} = 1;
-    @l = (
+    my @l = (
 	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
 	  [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
 	  [N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
