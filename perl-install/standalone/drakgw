@@ -209,7 +209,7 @@ Examples:
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 ", $card_netconnect),
-      [ { label => N("Net Device"), val => \$card_netconnect, type => 'entry' } ])
+      [ { label => N("Net Device"), val => \$card_netconnect, list => [ detect_devices::getNet() ], not_edit => 0 } ])
 		  or goto step_ask_confirm;
 
 my @cards = grep {
