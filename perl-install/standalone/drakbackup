@@ -4667,7 +4667,7 @@ sub interactive_mode {
 		gtkpack(new Gtk::VBox(0,0),
 			gtkpack(gtkset_usize ($up_box = new Gtk::VBox(0, 5), 540, 400),
 				$box = gtkpack_(new Gtk::VBox(0, 3),
-					0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+					if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
 					1, gtkpack_(new Gtk::HBox(0, 3),
 				  		1, gtkpack_(new Gtk::HBox(0, 15),	
 							0, new Gtk::HBox(0, 5),	
