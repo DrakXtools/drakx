@@ -98,7 +98,7 @@ my %lang2keyboard =
   'pp' => 'br:80 la:20 pt:10 us_intl:30',
 'pt_BR'=> 'br:80 la:20 pt:10 us_intl:30',
 'pt_PT'=> 'pt:80',
-  'ro' => 'ro2:80 ro:40 us-intl:10',
+  'ro' => 'ro2:80 ro:40 us_intl:10',
   'ru' => 'ru:85 ru_yawerty:80',
 'ru_RU'=> 'ru:85 ru_yawerty:80',
 'ru_UA'=> 'ua:50 ru:40 ru_yawerty:30',
@@ -297,7 +297,7 @@ sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 
 sub loadkeys_files {
-    my ($warn) = @_;
+    my ($err) = @_;
     my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch() =~ /ppc/ ? "mac" : arch();
     my $p = "/usr/lib/kbd/keymaps/$archkbd";
     my $post = ".kmap.gz";
@@ -306,7 +306,7 @@ sub loadkeys_files {
     foreach my $dir (all($p)) {
 	$find_file{$dir} = '';
 	foreach (all("$p/$dir")) {
-	    $find_file{$_} && $warn and warn "file $_ is both in $find_file{$_} and $dir\n";
+	    $find_file{$_} and $err->("file $_ is both in $find_file{$_} and $dir") if $err;
 	    $find_file{$_} = "$p/$dir/$_";
 	}
     }
@@ -314,11 +314,14 @@ sub loadkeys_files {
     foreach (values %keyboards) {
 	local $_ = $trans{$_->[1]} || $_->[1];
 	my $l = $find_file{"$_$post"} || $find_file{first(/(..)/) . $post};
-	print STDERR "unknown $_\n" if $warn && !$l; $l or next;
-	push @l, $l;
-	foreach (`zgrep include $l | grep "^include"`) {
-	    /include\s+"(.*)"/ or die "bad line $_";
-	    @l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
+	if ($l) {
+	    push @l, $l;
+	    foreach (`zgrep include $l | grep "^include"`) {
+		/include\s+"(.*)"/ or die "bad line $_";
+		@l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
+	    }
+	} else {
+	    $err->("unknown loadkeys keytable $_") if $err;
 	}
     }
     @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
@@ -335,7 +338,7 @@ sub unpack_keyboards {
 sub lang2keyboards {
     my ($l) = @_;
     my $li = unpack_keyboards($lang2keyboard{substr($l, 0, 5)}) || [ $keyboards{$l} && $l || "us" ];
-    $li->[0][1] ||= 100;
+    $li->[0][1] ||= 100 if @$li;
     $li;
 }
 sub lang2keyboard {
@@ -345,7 +348,7 @@ sub lang2keyboard {
 }
 sub usb2drakxkbd {
     my ($cc) = @_;
-    my $kb = usb2drakxkbd{$cc};
+    my $kb = $usb2drakxkbd{$cc};
 #- TODO: detect when undef is returned because it is actualy not defined
 #- ($cc == 0) and when it is because of an unknown/not listed number;
 #- in that last case it would be nice to display a dialog telling the
@@ -468,6 +471,44 @@ sub read {
     my $keytable = read_raw($prefix)->{KEYTABLE};
     keyboard2kmap($_) eq $keytable and return $_ foreach keys %keyboards;
     $keyboards{$keytable} && $keytable; #- keep track of unknown keyboard.
+}
+
+sub check {
+    require lang;
+
+    my $ok = 1;
+    my $warn = sub {
+	print STDERR "$_[0]\n";
+    };
+    my $err = sub {
+	&$warn;
+	$ok = 0;
+    };
+
+    if (my @l = grep { is_empty_array_ref(lang2keyboards($_)) } lang::list()) {
+	$warn->("no keyboard for langs " . join(" ", @l));
+    }
+    foreach my $lang (lang::list()) {
+	my $l = lang2keyboards($lang);
+	foreach (@$l) {
+	    0 <= $_->[1] && $_->[1] <= 100 or $err->("invalid value $_->[1] in $lang2keyboard{$lang} for $lang in \%lang2keyboard keyboard.pm");
+	    $keyboards{$_->[0]} or $err->("invalid keyboard $_->[0] in $lang2keyboard{$lang} for $lang in \%lang2keyboard keyboard.pm");
+	}
+    }
+    !$_ || $keyboards{$_} or $err->("invalid keyboard $_ in \%usb2drakxkbd keyboard.pm") foreach values %usb2drakxkbd;
+
+    my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
+    $err->("unknown xkb group toggle '$_' in \%kbdgrptoggle") foreach difference2([ keys %kbdgrptoggle ], \@xkb_groups);
+    $warn->("unused xkb group toggle '$_'") foreach difference2(\@xkb_groups, [ keys %kbdgrptoggle ]);
+
+    my @xkb_layouts = (#- (map { (split)[0] } grep { /^! layout/ .. /^\s*$/ } cat_('/usr/lib/X11/xkb/rules/xfree86.lst')),
+		       all('/usr/lib/X11/xkb/symbols'),
+		       (map { (split)[2] } cat_('/usr/lib/X11/xkb/symbols.dir')));
+    $err->("unknown xkb layout $_") foreach difference2([ map { keyboard2xkb($_) } keyboards() ], \@xkb_layouts);
+
+    loadkeys_files($err);
+
+    exit($ok ? 0 : 1);
 }
 
 #-######################################################################################
