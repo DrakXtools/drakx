@@ -144,7 +144,7 @@ sub errorOpeningFile($) {
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
     $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need for worying about.
-    my $current_method = $::o->{packages}{medium}{$asked_medium}{method} || $::o->{method};
+    my $current_method = $::o->{packages}{mediums}{$asked_medium}{method} || $::o->{method};
 
     my $max = 32; #- always refuse after $max tries.
     if ($current_method eq "cdrom") {
@@ -186,7 +186,7 @@ sub errorOpeningFile($) {
 sub getFile {
     my ($f, $o_method, $o_altroot) = @_;
     my $current_method = $o_method eq 'local' ? ''
-	: (($asked_medium ? $::o->{packages}{medium}{$asked_medium}{method} : '') || $::o->{method});
+	: (($asked_medium ? $::o->{packages}{mediums}{$asked_medium}{method} : '') || $::o->{method});
     log::l("getFile $f:$o_method ($asked_medium:$current_method)");
     my $rel = relGetFile($f);
     do {
@@ -201,7 +201,7 @@ sub getFile {
 	    ftp::getFile($rel);
 	} elsif ($current_method eq "http") {
 	    require http;
-	    http::getFile("$ENV{URLPREFIX}/$rel");
+	    http::getFile(($ENV{URLPREFIX} || $o_altroot) . "/$rel");
 	} else {
 	    #- try to open the file, but examine if it is present in the repository,
 	    #- this allows handling changing a media when some of the files on the

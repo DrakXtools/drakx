@@ -416,7 +416,7 @@ sub psUsingHdlist {
     my $urpmidir = urpmidir($prefix);
     log::l("trying to read $hdlist for medium $medium_name");
 
-    #- if the medium already exist, use it.
+    #- if the medium already exists, use it.
     $packages->{mediums}{$medium_name} and return $packages->{mediums}{$medium_name};
 
     my $m = { hdlist     => $hdlist,
@@ -1118,7 +1118,7 @@ sub install($$$;$$) {
 						    #- supplementary CD already mounted in /mnt/cdrom
 						    $fd = install_any::getFile($f, $medium->{descr}, '/mnt/cdrom');
 						} else {
-						    $fd = install_any::getFile($f, $medium->{descr});
+						    $fd = install_any::getFile($f, $medium->{descr}, $medium->{prefix});
 						}
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
