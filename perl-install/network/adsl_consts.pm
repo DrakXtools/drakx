@@ -27,12 +27,24 @@ our %adsl_data = (
                   # please forward updates to http://forum.eagle-usb.org
                   # order alphabetically by country (in English) / ISP (local language)
 
+                  N("Algeria") . "|Wanadoo" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                   dnsServer2 => '82.101.136.29',
+                   dnsServer3 => '82.101.136.206',
+                  },
+
                   N("Argentina") . "|Speedy" =>
                   {
                    vpi => 1,
                    vci => 23,
                    Encapsulation => 1,
                    method => 'pppoe',
+                   dnsServer2 => '200.51.254.238',
+                   dnsServer3 => '200.51.209.22',
                   },
 
                   N("Austria") . "|Any" =>
@@ -56,6 +68,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
+                   method => 'pppoe',
                   },
 
                   N("Belgium") . "|ADSL Office" =>
@@ -63,6 +76,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
+                   method => 'pppoe',
                   },
 
                   N("Belgium") . "|Tiscali BE" =>
@@ -89,6 +103,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 5,
+                   method => 'pppoa',
                   },
 
                   N("Brazil") . "|Speedy/Telefonica" =>
@@ -305,6 +320,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 65,
+                   method => 'pppoe',
                    Encapsulation => 3,
                   },
 
@@ -468,6 +484,16 @@ our %adsl_data = (
                    dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
                   },
+		  
+                  N("Italy") . "|Libero.it" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 6,
+                   dnsServer2 => '193.70.192.25',
+                   dnsServer3 => '193.70.152.25',
+                   method => 'pppoa',
+                  },
 
                   N("Italy") . "|Telecom Italia/Office Users (ADSL Smart X)" =>
                   {
@@ -499,6 +525,8 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
+                   dnsServer2 => '212.217.0.1',
+                   dnsServer3 => '212.217.0.12',
                    method => 'pppoa',
                   },
 
@@ -549,6 +577,8 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
+                   dnsServer2 => '195.114.181.130',
+                   dnsServer3 => '195.114.161.61',
                    method => 'pppoe',
                   },
 
@@ -557,6 +587,17 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Russia") . "|MTU-Intel" =>
+                  {
+                   vpi => 1,
+                   vci => 50,
+                   Encapsulation => 1,
+                   dnsServer2 => '212.188.4.10',
+                   dnsServer3 => '195.34.32.116',
+                   method => 'pppoe',
                   },
 
                   N("Slovenia") . "|SiOL" =>
@@ -584,7 +625,6 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 3,
-                   protocol => 'static',
                    dnsServer2 => '80.58.32.33',
                    dnsServer3 => '80.58.0.97',
                    method => 'static',
@@ -600,11 +640,92 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
+                  N("Spain") . "|Wanadoo PPPoE" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Spain") . "|Wanadoo ip fija" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 3,
+                   method => 'static',
+                  },
+
+                  N("Spain") . "|Tiscali" =>
+                  {
+                   vpi => 1,
+                   vci => 20,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Spain") . "|Arrakis" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Spain") . "|Auna" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Spain") . "|Communitel" =>
+                  {
+                   vpi => 0,
+                   vci => 21,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Spain") . "|Euskatel" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Spain") . "|Uni2" =>
+                  {
+                   vpi => 1,
+                   vci => 21,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Spain") . "|Ya.com PPPoE" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Spain") . "|Ya.com static" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 3,
+                   method => 'static',
+                  },
+
                   N("Sweden") . "|Telia" =>
                   {
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
+                   method => 'pppoe',
                   },
 
                   N("Switzerland") . "|Any" =>
@@ -612,6 +733,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
+                   method => 'pppoe',
                   },
 
                   N("Switzerland") . "|BlueWin / Swisscom" =>
@@ -629,6 +751,8 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 64,
                    Encapsulation => 1,
+                   dnsServer2 => '203.144.225.242',
+                   dnsServer3 => '203.144.225.72',
                    method => 'pppoe',
                   },
 
@@ -637,7 +761,9 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 32,
                    Encapsulation => 5,
-                   method => 'pppoe',
+                   dnsServer2 => '213.42.20.20',
+                   dnsServer3 => '195.229.241.222',
+                   method => 'pppoa',
                   },
 
                   N("United Kingdom") . "|Tiscali UK " =>
@@ -645,6 +771,8 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
+                   dnsServer2 => '212.74.112.66',
+                   dnsServer3 => '212.74.112.67',
                    method => 'pppoa',
                   },
 
@@ -653,8 +781,11 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
+                   dnsServer2 => '194.74.65.69',
+                   dnsServer3 => '194.72.9.38',
                    method => 'pppoa',
                   },
+
                  );
 
 
