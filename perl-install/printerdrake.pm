@@ -1333,7 +1333,7 @@ sub setup_common {
 	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
 	$printer->{DBENTRY} = "";
 	for my $entry (keys(%printer::thedb)) {
-	    if ($entry =~ m!$descr!) {
+	    if ($entry =~ m!$descr!i) {
 		$printer->{DBENTRY} = $entry;
 		last;
 	    }
@@ -1427,7 +1427,7 @@ sub get_db_entry {
 		$printer->{DBENTRY} = "$make|$model|$driverstr";
 		# database key contains the "(recommended)" for the
 		# recommended driver, so add it if necessary
-		if (!($printer::thedb{$printer->{DBENTRY}}{printer})) {
+		if (!member($printer->{DBENTRY}, keys(%printer::thedb))) {
 		    $printer->{DBENTRY} .= " (recommended)";
 		}
 	    } else {
@@ -1529,7 +1529,7 @@ sub choose_model {
 	my $w = $in->wait_message('', _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
-    if (!$printer::thedb{$printer->{DBENTRY}}) {
+    if (!member($printer->{DBENTRY}, keys(%printer::thedb))) {
 	$printer->{DBENTRY} = _("Raw printer (No driver)");
     }
     # Choose the printer/driver from the list
