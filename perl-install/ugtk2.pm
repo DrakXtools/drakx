@@ -1341,7 +1341,7 @@ sub set {
 package Gtk2::Entry;
 sub new_with_text {
     shift;
-    my $entry = Gtk2::Entry::new;
+    my $entry = Gtk2::Entry->new;
     @_ and $entry->set_text(@_);
     return $entry;
 }
