@@ -45,7 +45,7 @@ sub try_ {
 	$in->ask_warn(_("Error"), formatError($err));
     }
     update($kind);
-    Gtk->main_quit if $name eq 'Done';
+    Gtk->main_quit if member($name, 'Cancel', 'Done');
 }
 
 sub raw_hd_options {
@@ -59,7 +59,7 @@ sub raw_hd_mount_point {
 
 sub per_entry_info_box {
     my ($box, $kind, $entry) = @_;
-    $_->widget->destroy foreach $box->children;
+    $_->isa('Gtk::Button') or $_->destroy foreach map { $_->widget } $box->children;
     my $info;
     if ($entry) {
 	$info = diskdrake::interactive::format_raw_hd_info($entry);
@@ -82,7 +82,7 @@ sub per_entry_action_box {
     my @l = (
 	     if_($entry, __("Mount point") => \&raw_hd_mount_point),
 	     if_($entry && $entry->{mntpoint}, __("Options") => \&raw_hd_options),
-	     __("Export") => sub { any::fileshare_config($in, $kind->{type}) },
+	     __("Cancel") => sub {},
 	     __("Done") => \&done,
 	    );
     push @buttons, map {
@@ -128,7 +128,7 @@ sub find_fstab_entry {
 }
 
 sub import_ctree {
-    my ($kind) = @_;
+    my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports, $inside);
 
     $tree = Gtk::CTree->new(1, 0);
@@ -146,7 +146,7 @@ sub import_ctree {
 	$servers_displayed{$name} ||= do {
 	    my $w = $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
 	    my_gtk::ctree_set_icon($tree, $w, @{$icons{server}});
-	    $wservers{$w} = $server;
+	    $wservers{$w->{_gtk}} = $server;
 	    $w;
 	};
     };
@@ -154,14 +154,22 @@ sub import_ctree {
     my $add_exports = sub {
 	my ($node) = @_;
 	$tree->expand($node);
-	foreach ($kind->find_exports($wservers{$node} || die '')) {
+	foreach ($kind->find_exports($wservers{$node->{_gtk}} || die '')) {
 	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
 	    set_export_icon(find_fstab_entry($kind, $_), $w);
 	    $wexports{$w->{_gtk}} = $_;
 	}
     };
 
-    my $click_here = $tree->insert_node(undef, undef, [_("click here")], 5, (undef) x 4, 0, 0);
+    { 
+	my $search = new Gtk::Button(_("Search servers"));
+	gtkpack__($info_box, 
+		  gtksignal_connect($search,
+				    clicked => sub {
+					$add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
+					$search->destroy;
+				    }));
+    }
 
     foreach (uniq(map { ($kind->from_dev($_->{device}))[0] } @{$kind->{val}})) {
 	my $node = $add_server->({ name => $_ });
@@ -180,12 +188,7 @@ sub import_ctree {
 		gtkset_mousecursor_wait($tree->window);
 		my_gtk::flush();
 		$tree->freeze;
-		if ($curr == $click_here) {
-		    $add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
-		    $tree->remove_node($click_here);
-		} else {
-		    $add_exports->($curr);
-		}
+		$add_exports->($curr);		
 		$tree->thaw;
 		gtkset_mousecursor_normal($tree->window);
 	    }
@@ -201,9 +204,9 @@ sub add_smbnfs {
     my ($widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{display_box} = createScrolledWindow(import_ctree($kind));
-    $kind->{action_box} = new Gtk::HBox(0,0);
     $kind->{info_box} = new Gtk::VBox(0,0);
+    $kind->{display_box} = createScrolledWindow(import_ctree($kind, $kind->{info_box}));
+    $kind->{action_box} = new Gtk::HBox(0,0);
     $kind->{main_box} =
       gtkpack_(new Gtk::VBox(0,7),
 	       1, gtkpack(new Gtk::HBox(0,7),
