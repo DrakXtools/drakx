@@ -344,7 +344,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Fri Sep 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-3mdk
 - net_applet (blino):
-  o make connect/disconnect buttons useful (#11389)
+  o fix crash on connect/disconnect (#11389)
   o refresh status on every 5 second
 
 * Fri Sep 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-2mdk
