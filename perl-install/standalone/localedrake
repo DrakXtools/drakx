@@ -43,8 +43,8 @@ sub select_country() {
 
 eval {
     local $::isWizard = 1;
-    local $::Wizard_no_previous = 1;
   language:
+    local $::Wizard_no_previous = 1;
     my $old_lang = $locale->{lang};
     $locale->{lang} = any::selectLanguage($in, $locale->{lang});
     $locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
