@@ -17,10 +17,28 @@
 
 enum deviceClass {
     /* device classes... this is somewhat ad-hoc */
-	CLASS_UNSPEC, CLASS_OTHER, CLASS_NETWORK, CLASS_SCSI, CLASS_VIDEO, 
-	CLASS_AUDIO, CLASS_MOUSE, CLASS_MODEM, CLASS_CDROM, CLASS_TAPE,
-	CLASS_FLOPPY, CLASS_SCANNER, CLASS_HD, CLASS_RAID, CLASS_PRINTER,
-	CLASS_CAPTURE, CLASS_KEYBOARD, CLASS_PCMCIA
+	CLASS_UNSPEC = ~0,
+	CLASS_OTHER = (1 << 0),
+	CLASS_NETWORK = (1 << 1),
+	CLASS_SCSI = (1 << 2),
+	CLASS_MOUSE = (1 << 3),
+	CLASS_AUDIO = (1 << 4),
+	CLASS_CDROM = (1 << 5),
+	CLASS_MODEM = (1 << 6),
+	CLASS_VIDEO = (1 << 7),
+	CLASS_TAPE = (1 << 8),
+	CLASS_FLOPPY = (1 << 9),
+	CLASS_SCANNER = (1 << 10),
+	CLASS_HD = (1 << 11),
+	CLASS_RAID = (1 << 12),
+	CLASS_PRINTER = (1 << 13),
+	CLASS_CAPTURE = (1 << 14),
+	CLASS_KEYBOARD = (1 << 15),
+	CLASS_MONITOR = (1 << 16),
+	CLASS_USB = (1 << 17),
+	CLASS_SOCKET = (1 << 18),
+	CLASS_FIREWIRE = (1 << 19),
+	CLASS_IDE = (1 << 20)
 };
 
 /* Update this if needed */
@@ -30,7 +48,7 @@ enum deviceBus {
     /* 'bus' that a device is attached to... this is also ad-hoc */
     /* BUS_SBUS is sort of a misnomer - it's more or less Sun */
     /* OpenPROM probing of all various associated non-PCI buses */
-    BUS_UNSPEC = 0,
+    BUS_UNSPEC = ~0,
     BUS_OTHER = (1 << 0),
     BUS_PCI = (1 << 1),
     BUS_SBUS = (1 << 2),

@@ -937,13 +937,14 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
     
     
     if (
-	(probeClass == CLASS_UNSPEC) ||
-	(probeClass == CLASS_OTHER) ||
-	(probeClass == CLASS_MOUSE) ||
-	(probeClass == CLASS_MODEM) ||
-	(probeClass == CLASS_PRINTER)
+	(probeClass & CLASS_UNSPEC) ||
+	(probeClass & CLASS_OTHER) ||
+	(probeClass & CLASS_MOUSE) ||
+	(probeClass & CLASS_MODEM) ||
+	(probeClass & CLASS_PRINTER)
 	) {
 	int x;
+	
 	for (x=0; x<=3 ; x++) {
 	    struct stat sbuf;
 	    char lockfile[32];
