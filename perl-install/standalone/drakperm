@@ -200,7 +200,7 @@ sub save_perm {
 }
 #- on list selection we get all data concerning the current selection
 sub row_setting_data {
-    my (undef, $row, $column, undef ) = @_;
+    my (undef, $row, $column) = @_;
     %CURENT = ('clicked' => {'row' => $row,
 			     'col' => $column
 			    },
@@ -371,7 +371,7 @@ sub get_user_or_group {
     my $what = @_;
     my @users;
     local *F;
-    open F, $what eq 'users' ? '/etc/passwd': '/etc/group';
+    open F, $what eq 'users' ? '/etc/passwd' : '/etc/group';
 	
     local $_;
     while (<F>) {
