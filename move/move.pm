@@ -76,6 +76,7 @@ sub init {
                  ifplugd);
     symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
+    symlinkf_short("/image/root/$_", "/root/$_") foreach qw(.bashrc);
 
     #- non-trivial files/directories that need be readable, files that will be overwritten
     handle_etcfiles('READ', 'OVERWRITE');
