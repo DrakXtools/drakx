@@ -15,12 +15,11 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:common :system :file);
 use interactive;
 use standalone;
-use log;
-use c;
 use proxy;
+
+use my_gtk qw(:helpers :wrappers);
 # use detect_devices;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -52,7 +51,7 @@ gtkadd($window1,
 			   new Gtk::Label _("Welcome to the Proxy Connection utility
 
 Click on Configure to launch the setup wizard."),
-			  )
+			  ),
 		1, gtkpack(my $hbox2 = new Gtk::HBox(0,0),),
 		0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
 			  gtksignal_connect(new Gtk::Button _("Configure"), clicked => sub { system ("/usr/sbin/drakgw --wizard") }),
@@ -68,6 +67,9 @@ Gtk->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.3  2001/06/11 16:17:21  damien
+#- updated
+#-
 #- Revision 1.2  2001/06/11 16:03:10  damien
 #- perlised
 #-
