@@ -109,7 +109,6 @@ widget "*" style "default-font"
 sub default_theme {
     my ($o) = @_;
     $::move ? '/usr/share/themes/Galaxy/gtk-2.0/gtkrc' :
-    $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
     $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
