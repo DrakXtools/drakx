@@ -271,6 +271,8 @@ sub readCardsDB {
 	DRI_GLX_EXPERIMENTAL => sub { $card->{DRI_GLX_EXPERIMENTAL} = 1 if $card->{driver} },
 	UTAH_GLX_EXPERIMENTAL => sub { $card->{UTAH_GLX_EXPERIMENTAL} = 1 if $card->{server} },
 	MULTI_HEAD => sub { $card->{MULTI_HEAD} = $val if $card->{driver} },
+	BAD_FB_RESTORE => sub { $card->{BAD_FB_RESTORE} = 1 },
+	BAD_FB_RESTORE_XF3 => sub { $card->{BAD_FB_RESTORE_XF3} = 1 },
 	UNSUPPORTED => sub { delete $card->{driver} },
 
 	COMMENT => sub {},
@@ -283,7 +285,7 @@ sub readCardsDB {
 	/^$/ and next;
 	/^END/ and do { $cards{$card->{card_name}} = $card if $card; last };
 
-	($cmd, $val) = /(\S+)\s*(.*)/ or next; #log::l("bad line $lineno ($_)"), next;
+	($cmd, $val) = /(\S+)\s*(.*)/ or next;
 
 	my $f = $fs->{$cmd};
 
