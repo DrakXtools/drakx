@@ -272,9 +272,8 @@ sub new {
 
     foreach (['PRINTERS_DETECTION', N("/Autodetect printers")], ['MODEMS_DETECTION', N("/Autodetect modems")]) {
         $check_boxes{$_->[0]} = $menubar->{factory}->get_widget("<main>".N("/Options").$_->[1]);
-        print "$_->[0] : value=$options{$_->[0]}, defined=" , defined($options{$_->[0]}), "\n";
-        $options{$_->[0]} = 0 unless defined($options{$_->[0]});
-        $check_boxes{$_->[0]}->set_active($options{$_->[0]});
+        $options{$_->[0]} = 0 unless defined($options{$_->[0]}); # force detection by default
+        $check_boxes{$_->[0]}->set_active($options{$_->[0]});    # restore saved values
     }
 
     foreach ($module_cfg_button, $config_button) { $_->hide };
@@ -287,7 +286,7 @@ sub quit_global {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
     $w->{rwindow}->destroy;
-    $in->exit;
+    my_gtk->exit(0);
 }
 
 # remove a signal handler from a button & hide it if needed
