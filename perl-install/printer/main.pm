@@ -9,9 +9,7 @@ use run_program;
 use printer::data;
 use printer::services;
 use printer::default;
-use printer::gimp;
 use printer::cups;
-use printer::office;
 use printer::detect;
 use handle_configs;
 use services;
@@ -1464,8 +1462,8 @@ sub ppd_entry_str {
 	    $descr =~ s/Foomatic \+ Postscript/PostScript/;
 	} elsif ($descr =~ /Foomatic/i) {
 	    $descr =~ s/Foomatic/GhostScript/i;
-	} elsif ($descr =~ /CUPS\+GIMP-print/i) {
-	    $descr =~ s/CUPS\+GIMP-print/CUPS + GIMP-Print/i;
+	} elsif ($descr =~ /CUPS\+Gimp-Print/i) {
+	    $descr =~ s/CUPS\+Gimp-Print/CUPS + Gimp-Print/i;
 	} elsif ($descr =~ /Series CUPS/i) {
 	    $descr =~ s/Series CUPS/Series, CUPS/i;
 	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic)/i) {
@@ -1521,7 +1519,7 @@ sub ppd_entry_str {
 	$model =~ s/BJC\s+/BJC-/;
     }
     # New MF devices from Epson have mis-spelled name in PPD files for
-    # native CUPS drivers of GIMP-Print
+    # native CUPS drivers of Gimp-Print
     if ($mf eq "EPSON") {
 	$model =~ s/Stylus CX\-/Stylus CX/;
     }
@@ -1875,7 +1873,6 @@ sub remove_queue($$) {
     $printer->{ARGS} = {};
     $printer->{DBENTRY} = "";
     $printer->{currentqueue} = {};
-    removeprinterfromapplications($printer, $queue);
 }
 
 sub restart_queue($) {
@@ -2622,44 +2619,6 @@ RIGHTDRIVE=" "
 EOF
     }
     output("$::prefix/etc/mtoolsfm.conf", $mtoolsfmconf);
-}
-
-# ------------------------------------------------------------------
-#
-# Configuration of printers in applications
-#
-# ------------------------------------------------------------------
-
-sub configureapplications {
-    my ($printer) = @_;
-    setcupslink($printer);
-    printer::office::configureoffice('Star Office', $printer);
-    printer::office::configureoffice('OpenOffice.Org', $printer);
-    printer::gimp::configure($printer);
-}
-
-sub addcupsremotetoapplications {
-    my ($printer, $queue) = @_;
-    setcupslink($printer);
-    return printer::office::add_cups_remote_to_office('Star Office', $printer, $queue) &&
-	   printer::office::add_cups_remote_to_office('OpenOffice.Org', $printer, $queue) &&
-	   printer::gimp::addcupsremoteto($printer, $queue);
-}
-
-sub removeprinterfromapplications {
-    my ($printer, $queue) = @_;
-    setcupslink($printer);
-    return printer::office::remove_printer_from_office('Star Office', $printer, $queue) &&
-	   printer::office::remove_printer_from_office('OpenOffice.Org', $printer, $queue) &&
-	   printer::gimp::removeprinterfrom($printer, $queue);
-}
-
-sub removelocalprintersfromapplications {
-    my ($printer) = @_;
-    setcupslink($printer);
-    printer::office::remove_local_printers_from_office('Star Office', $printer);
-    printer::office::remove_local_printers_from_office('OpenOffice.Org', $printer);
-    printer::gimp::removelocalprintersfrom($printer);
 }
 
 sub setcupslink {

@@ -662,7 +662,6 @@ sub configure_new_printers {
     # Now install queues for all auto-detected printers which have no queue
     # yet
     $printer->{noninteractive} = 1; # Suppress all interactive steps
-    my $configapps = 0;
     foreach my $p (@autodetected) {
 	if (!member($p->{port}, @blacklist)) {
 	    # Initialize some variables for queue setup
@@ -772,7 +771,6 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
 	    configure_queue($printer, $in) or next;
-	    $configapps = 1;
 	    # If there is no default printer set, let this one get the
 	    # default
 	    if (!$printer->{DEFAULT}) {
@@ -786,15 +784,6 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	}
 	$printer->{currentqueue} = {};
 	$printer->{complete} = 0;
-    }
-    # Configure the current printer queues in applications
-    undef $w;
-    if ($configapps) {
-	$w =
-	    $in->wait_message(N("Printerdrake"),
-			      N("Configuring applications..."));
-	printer::main::configureapplications($printer);
-	undef $w;
     }
     undef $printer->{noninteractive};
 }
@@ -3316,7 +3305,7 @@ sub scanner_help {
 	    # Models with built-in scanner
 	    return N("Your multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" on the command line to get more information.
 
-Do not use \"scannerdrake\" for this device!",
+You do not need to run \"scannerdrake\" for setting up scanning on this device, you only need to use \"scannerdrake\" if you want to share the scanner on the network.",
 		     $ptaldevice);
 	} else {
 	    # Scanner-less models
@@ -3760,8 +3749,6 @@ sub setup_default_spooler {
 	return;
     }
     if ($printer->{SPOOLER} ne $oldspooler) {
-	# Remove the local printers from Star Office/OpenOffice.org/GIMP
-	printer::main::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
 	    my $_w = $in->wait_message(N("Printerdrake"),
@@ -3774,11 +3761,6 @@ sub setup_default_spooler {
 	# has no raw queue)
 	%printer::main::thedb = ();
 	assure_default_printer_is_set($printer, $in);
-	# Configure the current printer queues in applications
-	my $_w =
-	    $in->wait_message(N("Printerdrake"),
-			      N("Configuring applications..."));
-	printer::main::configureapplications($printer);
     }
     # Save spooler choice
     printer::default::set_spooler($printer);
@@ -3897,15 +3879,10 @@ sub init {
 			    /usr/share/printer-testpages/testprint.ps
 			    /usr/bin/nmap
 			    /usr/bin/scli
-			    ),
-			 if_(files_exist("/usr/bin/gimp"),
-			     "/usr/lib/gimp/1.2/plug-ins/print")
-			 )) {
+			    ))) {
 	    $in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
 				  'foomatic-db', 'printer-utils',
-				  'printer-testpages', 'nmap', 'scli',
-				  if_($in->do_pkgs->is_installed('gimp'),
-				      'gimpprint'))
+				  'printer-testpages', 'nmap', 'scli')
 		or do {
 		    $in->ask_warn(N("Error"),
 				  N("Could not install necessary packages, %s cannot be started!",
@@ -3941,13 +3918,6 @@ sub init {
 	printer::default::set_printer($printer);
     }
 
-    # Configure the current printer queues in applications
-    my $w =
-	$in->wait_message(N("Printerdrake"),
-			  N("Configuring applications..."));
-    printer::main::configureapplications($printer);
-    undef $w;
-    
     # Turn on printer autodetection by default
     $printer->{AUTODETECT} = 1;
     $printer->{AUTODETECTLOCAL} = 1;
@@ -4268,10 +4238,6 @@ sub add_printer {
 	    undef $printer->{MANUAL} if $printer->{MANUAL};
 	    $::Wizard_no_previous = 1;
 	    setasdefault($printer, $in);
-	    my $_w = $in->wait_message(N("Printerdrake"),
-				       N("Configuring applications..."));
-	    printer::main::configureapplications($printer);
-	    undef $_w;
 	    my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
 	    if ($testpages == 1) {
 		# User was content with test pages
@@ -4310,11 +4276,6 @@ sub add_printer {
 	configure_queue($printer, $in) or return 0;
 	undef $printer->{MANUAL} if $printer->{MANUAL};
 	setasdefault($printer, $in);
-	# Configure the current printer queue in applications
-	my $_w = $in->wait_message(N("Printerdrake"),
-				   N("Configuring applications..."));
-	printer::main::configureapplications($printer);
-	undef $_w;
 	my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
 	if ($testpages == 2) {
 	    # User was not content with test pages
@@ -4335,10 +4296,6 @@ sub edit_printer {
     my ($printer, $in, $upNetwork, $queue) = @_;
 
     # The menu for doing modifications on an existing print queue
-
-    # If one, we have to update the application configuration (GIMP,
-    # StarOffice, ...)
-    my $configapps = 0;
 
     # Cursor position in queue modification window
     my $modify = N("Printer options");
@@ -4399,9 +4356,6 @@ What do you want to modify on this printer?",
 				N("Printer options"))) : ()),
 			  if_($queue ne $printer->{DEFAULT},
 			      N("Set this printer as the default")),
-			  if_(!$printer->{configured}{$queue},
-			      N("Add this printer to Star Office/OpenOffice.org/GIMP"),
-			      N("Remove this printer from Star Office/OpenOffice.org/GIMP")),
 			  N("Print test pages"),
 			  N("Learn how to use this printer"),
 			  if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
@@ -4452,8 +4406,7 @@ What do you want to modify on this printer?",
 		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Printer name, description, location")) {
 		choose_printer_name($printer, $in) &&
-		    configure_queue($printer, $in) &&
-		    ($configapps = 1);
+		    configure_queue($printer, $in);
 		# Delete old queue when it was renamed
 		if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 		    my $_w = $in->wait_message
@@ -4475,36 +4428,23 @@ What do you want to modify on this printer?",
 		choose_model($printer, $in) &&
 		    get_printer_info($printer, $in) &&
 		    setup_options($printer, $in) &&
-		    configure_queue($printer, $in) &&
-		    ($configapps = 1);
+		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Printer options")) {
 		get_printer_info($printer, $in) &&
 		    setup_options($printer, $in) &&
 		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Set this printer as the default")) {
 		default_printer($printer, $in, $queue);
-		$configapps = 1;
 		# The "Set this printer as the default" menu entry will
 		# disappear if the printer is the default, so go back to the
 		# default entry
 		$modify = N("Printer options");
-	    } elsif ($modify eq N("Add this printer to Star Office/OpenOffice.org/GIMP")) {
-		$in->ask_warn(N("Adding printer to Star Office/OpenOffice.org/GIMP"),
-			      printer::main::addcupsremotetoapplications($printer, $queue) ?
-			      N("The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP.", $queue) :
-			      N("Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP.", $queue));
-	    } elsif ($modify eq N("Remove this printer from Star Office/OpenOffice.org/GIMP")) {
-		$in->ask_warn(N("Removing printer from Star Office/OpenOffice.org/GIMP"),
-			      printer::main::removeprinterfromapplications($printer, $queue) ?
-			      N("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/GIMP.", $queue) :
-			      N("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP.", $queue));
 	    } elsif ($modify eq N("Print test pages")) {
 		print_testpages($printer, $in, $upNetwork);
 	    } elsif ($modify eq N("Learn how to use this printer")) {
 		printer_help($printer, $in);
 	    } elsif ($modify eq N("Remove printer")) {
 		if (remove_printer($printer, $in, $queue)) {
-		    $configapps = 1;
 		    # Let the main menu cursor go to the default
 		    # position
 		    delete $printer->{QUEUE};
@@ -4512,13 +4452,6 @@ What do you want to modify on this printer?",
 		}
 	    }
 
-	    # Configure the current printer queue in applications
-	    if ($configapps) {
-		my $_w = 
-		    $in->wait_message(N("Printerdrake"),
-				      N("Configuring applications..."));
-		printer::main::configureapplications($printer);
-	    }
 	    # Delete some variables
 	    cleanup($printer);
 	} else {
