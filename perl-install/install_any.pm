@@ -651,13 +651,11 @@ sub g_auto_install {
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk); #- TODO modules bootloader 
 
     if (my $printer = $::o->{printer}) {
-	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER TYPE str_type OPTIONS DBENTRY);
+	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER DEFAULT BROWSEPOLLADDR BROWSEPOLLPORT MANUALCUPSCONFIG);
 	$o->{printer}{configured} = {};
 	foreach my $queue (keys %{$::o->{printer}{configured}}) {
-	    my $val = $::o->{printer}{configured}{$queue};
-	    exists $val->{$_} and $o->{printer}{configured}{$queue}{$_} = $val->{$_} foreach qw(OPTIONS);
-	    exists $val->{queuedata}{$_} and $o->{printer}{configured}{$queue}{queuedata}{$_} = $val->{queuedata}{$_}
-	      foreach keys %{$val->{queuedata} || {}};
+	    my $val = $::o->{printer}{configured}{$queue}{queuedata};
+	    exists $val->{$_} and $o->{printer}{configured}{$queue}{queuedata}{$_} = $val->{$_} foreach keys %{$val || {}};
 	}
     }
 
