@@ -395,7 +395,7 @@ sub choosePackagesTree {
 			    },
 			    auto_deps => N("Show automatically selected packages"),
 			    ok => N("Install"),
-			    cancel => $limit_to_medium && N("Cancel"),
+			    cancel => N("<- Previous"),
 			    icons => [ { icon         => 'floppy',
 					 help         => N("Load/Save on floppy"),
 					 wait_message => N("Updating package selection"),
