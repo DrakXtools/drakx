@@ -223,7 +223,7 @@ sub ppp_choose {
 						   interactive_help_id => 'selectSerialPort',
 						 },
 					     \&mouse::serial_port2text,
-					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), if_(-e '/dev/modem', '/dev/modem')) ]) || return;
+					     [ grep { $_ ne $mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
 
     my @cnx_list;
     my $secret = network::tools::read_secret_backend();
