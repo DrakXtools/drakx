@@ -607,6 +607,8 @@ sub main {
     }
     $::o = $o = $o_;
 
+    eval { output('/proc/splash', "verbose\n") };
+  
     #-the main cycle
     my $clicked = 0;
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
