@@ -7,7 +7,6 @@ use common;
 #            you want it changed.
 
 our %steps = (
-empty => '',
 
 acceptLicense => 
 N_("Before continuing, you should carefully read the terms of the license. It

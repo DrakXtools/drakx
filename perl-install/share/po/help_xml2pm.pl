@@ -72,7 +72,6 @@ use common;
 #            you want it changed.
 
 our %steps = (
-empty => '',
 };
     foreach (sort keys %$help) {
 	my $s = to_ascii($help->{$_});
