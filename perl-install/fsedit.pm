@@ -464,8 +464,18 @@ sub get_root { &get_root_ || {} }
 #- do this before modifying $part->{type}
 sub check_type {
     my ($type, $hd, $part) = @_;
-    isThisFs("jfs", { type => name2type($type) }) && $part->{size} < 16 << 11 and die _("You can't use JFS for partitions smaller than 16MB");    
-    isThisFs("reiserfs", { type => name2type($type) }) && $part->{size} < 32 << 11 and die _("You can't use ReiserFS for partitions smaller than 32MB");
+    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die _("You can't use JFS for partitions smaller than 16MB");
+    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die _("You can't use ReiserFS for partitions smaller than 32MB");
+}
+
+sub package_needed_for_partition_type {
+    my ($part) = @_;
+    my %l = (
+	reiserfs => 'reiserfsprogs',
+	xfs => 'xfsprogs',
+        jfs => 'jfsprogs',
+    );
+    $l{type2fs($part)};
 }
 
 #- do this before modifying $part->{mntpoint}
