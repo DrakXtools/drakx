@@ -79,8 +79,11 @@ perl-install:
 mdk-stage1/mar/mar:
 	make -C mdk-stage1/mar
 
-all.modules: mdk-stage1/mar/mar perl-install
+all.modules: mdk-stage1/mar/mar perl-install/auto/c/stuff/stuff.so update_kernel perl-install/modules.pm
 	`./tools/specific_arch ./update_kernel`
+
+perl-install/auto/c/stuff/stuff.so: perl-install
+
 
 $(FBOOT_IMG:%=%f): %f: %
 	dd if=$< of=/dev/fd0
