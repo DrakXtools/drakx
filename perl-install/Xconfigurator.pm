@@ -268,11 +268,11 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				      $card->{type} =~ /GeForce 256/ ||
 				      $card->{type} =~ /S3 Savage3D/ || #- only this one is evoluting (expect a stable release ?)
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
-				      $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
+				      $card->{identifier} =~ /Rage Mobility [PL]/ ||
 				      $card->{type} =~ /SiS/);
     #- 3D acceleration configuration for XFree 4 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
-			$card->{identifier} =~ /Matrox.* G[24][05]0/ || #- prefer 16bit with AGP only
+			$card->{identifier} =~ /Matrox.* G[245][05]0/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
@@ -307,14 +307,14 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
 				      #- hack for Matrox driver where there are undefined reference if no DRI!
-				      if_($card->{identifier} !~ /Matrox.* G[24][05]0/ && (!$card->{prefer_xf3} || $::expert), 
+				      if_($card->{identifier} !~ /Matrox.* G[245][05]0/ && (!$card->{prefer_xf3} || $::expert), 
 					  { text => _("XFree %s", $xf4_ver),
 					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
-				      if_(!$card->{prefer_xf3} && $::expert, $xf3_tc)) : $xf3_tc;
+				      if_(!$card->{prefer_xf3} && !$card->{force_xf4} && $::expert, $xf3_tc)) : $xf3_tc;
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
-    if ($card->{Utah_glx}) {
+    if ($card->{Utah_glx} && !$card->{force_xf4}) {
 	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
@@ -326,7 +326,7 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
-    if ($::expert && $card->{use_xf4} && $card->{DRI_glx_EXPERIMENTAL}) {
+    if ($::expert && $card->{use_xf4} && $card->{DRI_glx_EXPERIMENTAL} && !$card->{Xinerama}) {
 	$msg =
 _("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\n\n\n" . $msg;
@@ -337,7 +337,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
-    if ($::expert && $card->{Utah_glx_EXPERIMENTAL}) {
+    if ($::expert && $card->{Utah_glx_EXPERIMENTAL} && !$card->{force_xf4}) {
 	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
@@ -350,7 +350,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     }
 
     #- ask the expert user to enable or not hardware acceleration support.
-    if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx})) {
+    if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{Xinerama}) {
 	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
 	$::expert or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
@@ -448,7 +448,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
     if ($card->{DRI_glx}) {
-	$card->{identifier} =~ /Matrox.* G[24][05]0/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
+	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
 	$card->{identifier} =~ /8281[05].* CGC/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
     }
 
