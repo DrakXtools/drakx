@@ -144,6 +144,8 @@ sub set {
 
     log::l("authentication::set $kind");
 
+    sshd_config_UsePAM($kind ne 'local');
+
     if ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
@@ -526,6 +528,18 @@ sub krb5_conf_update {
 
     MDK::Common::File::output($file, $s);
 
+}
+
+sub sshd_config_UsePAM {
+    my ($UsePAM) = @_;
+    my $sshd = "$::prefix/etc/ssh/sshd_config";
+    -e $sshd or return;
+
+    my $val = "UsePAM " . bool2yesno($UsePAM);
+    substInFile {
+	$val = '' if s/^#?UsePAM.*/$val/;
+	$_ .= "$val\n" if eof && $val;
+    } $sshd;
 }
 
 sub query_srv_names {
