@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 8mdk
+Release: 9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -11,7 +11,7 @@ Requires: foomatic-db-engine
 Conflicts: drakconf < 9.3-2mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
-BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
+BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -315,6 +315,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Nov 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-9mdk
+- resync serial_probe with kudzu
+- fix some untranslated strings
+
 * Mon Nov 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-8mdk
 - rebuild for reupload
 
