@@ -78,7 +78,7 @@ Here, you'll be add a new UPS to your system.\n"),
                       method => {
                                  name => N("We're going to add an UPS device.
 
-Do you want to autodetect UPS devices connected to this machine or to manually select them ?"),
+Do you want to autodetect UPS devices connected to this machine or to manually select them?"),
                                  data => [ { label => N("Autodetection"), val => \$method, type => "list",
                                              list => [ values %methods ] } ],
                                  post => sub { +{ reverse %methods }->{$method} },
