@@ -381,7 +381,7 @@ sub _create_dialog {
     my $dialog = Gtk2::Dialog->new;
     $dialog->set_title($title);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->set_icon(gtkcreate_pixbuf($wm_icon || $::Wizard_pix_up || "wiz_default_up.png"));
+    may_set_icon($dialog, $wm_icon || $::Wizard_pix_up || "wiz_default_up.png");
     $dialog->set_size_request($o_options->{width} || -1, $o_options->{height} || -1);
     $dialog->set_modal(1);
     $dialog->set_transient_for($o_options->{transient}) if $o_options->{transient};
@@ -600,6 +600,12 @@ sub gtkcreate_pixbuf {
 }
 
 sub gtktext_append { gtktext_insert(@_, append => 1) }
+
+sub may_set_icon {
+    my ($w, $f, @extensions) = @_;
+    $f = $f && _find_imgfile($f, @extensions) or return;
+    $w->set_icon(gtkcreate_pixbuf($f));
+}
 
 # choose one of the two styles:
 # - gtktext_insert($textview, "My text..");
@@ -887,7 +893,7 @@ sub new {
 
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window($title);
-	$o->{rwindow}->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
+	may_set_icon($o->{rwindow}, $o->{wm_icon});
 	$o->{rwindow}->set_position('center-on-parent');
 
 	if ($::isInstall) {
@@ -911,7 +917,7 @@ sub new {
 
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
-	    $::Plug->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
+	    may_set_icon($::Plug, $o->{wm_icon});
 	    flush();
 	    gtkadd($::Plug, $::WizardTable);
 	} elsif (!$::WizardWindow) {
@@ -933,7 +939,7 @@ sub new {
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
-		$::WizardWindow->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
+		may_set_icon($::WizardWindow, $o->{wm_icon});
 	    }
 	    $::WizardWindow->show;
 	}
