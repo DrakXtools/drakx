@@ -253,8 +253,6 @@ sub suggest {
 	 timeout => $onmbr && 5,
 	 install => "/boot/boot.b",
 	});
-#- the following is not needed anymore with latest lilo
-#-    $lilo->{disk} ||= "/dev/$hds->[0]{device} bios=0x80" if $hds->[0]{device} =~ /^hd[be]$/;
 
     if (!$lilo->{message} || $lilo->{message} eq "1") {
 	$lilo->{message} = join('', cat_("$prefix/boot/message"));
@@ -588,7 +586,7 @@ sub install_silo($$$) {
 }
 
 sub install_lilo($$) {
-    my ($prefix, $lilo) = @_;
+    my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
     if ($lilo->{message}) {
@@ -602,10 +600,21 @@ sub install_lilo($$) {
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
-	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable disk);
+	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable);
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
 	#- print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
+
+	my $dev = $hds->[0]{device};
+	my %dev2bios = map_index { $_ => $::i } dev2bios($hds, $lilo->{boot});
+	if ($dev2bios{$dev}) {
+	    my %bios2dev = reverse %dev2bios;
+	    print  F "disk=/dev/$bios2dev{0} bios=0x80";
+	    printf F "disk=/dev/$dev bios=0x%x", 0x80 + $dev2bios{$dev};
+	} elsif ($dev =~ /hd[bde]/) {
+	    print F "disk=/dev/$dev bios=0x80";
+	}
+
 	if ($lilo->{message}) {
 	    if (-e "$prefix/boot/$lilo->{methods}{lilo}" && $lilo->{methods}{lilo} eq "boot-graphic.b") {
 		print F "message=/boot/message-graphic";
@@ -672,8 +681,7 @@ sub dev2bios {
 
     s/x(d.)/h$1/ foreach @dev; #- switch back;
 
-    (map_index { $_ => "fd$::i" } detect_devices::floppies()),
-    (map_index { $_ => "hd$::i" } @dev);
+    @dev;
 }
 
 sub dev2grub {
@@ -685,7 +693,9 @@ sub dev2grub {
 
 sub install_grub {
     my ($prefix, $lilo, $fstab, $hds) = @_;
-    my %dev2bios = dev2bios($hds, $lilo->{boot});
+    my %dev2bios = 
+      (map_index { $_ => "fd$::i" } detect_devices::floppies()),
+      (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{boot}));
 
     {
 	my %bios2dev = reverse %dev2bios;
