@@ -501,11 +501,12 @@ sub main {
     }
     require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
 
-    # needed before accessing floppy (in case of usb floppy)
+    #- needed before accessing floppy (in case of usb floppy)
     $::noauto or modules::load_thiskind("usb"); 
- 
-    eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
+
+    #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
+    eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
 
     eval { modules::load("af_packet") };
 
