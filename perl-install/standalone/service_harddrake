@@ -119,7 +119,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     if (harddrake::data::is_removable($Ident)) {
         foreach my $device (@ID{@added}) {
             push @configurator_pool, harddrake::data::set_removable_auto_configurator($Ident, $device);
-        };
+        }
         foreach my $device (@$oldconfig{@was_removed}) {
             push @configurator_pool, harddrake::data::set_removable_remover($Ident, $device);
         }
