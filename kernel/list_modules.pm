@@ -47,7 +47,7 @@ our %l = (
       qw(xirc2ps_cs xircom_cb xircom_tulip_cb),
     ],
     usb => [ 
-      qw(pegasus kaweth usbnet catc CDCEther usbvnet_rfmd),
+      qw(catc CDCEther kaweth pegasus rtl8150 usbnet usbvnet_rfmd),
     ],
     isdn => [
       qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam),
