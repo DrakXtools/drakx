@@ -47,14 +47,14 @@ sub find_free_loop {
     die "no free loop found";
 }
 sub set_loop {
-    my ($file, $encrypt_key, $encryption) = @_;
+    my ($file, $o_encrypt_key, $o_encryption) = @_;
     my $dev = find_free_loop();
 
-    if ($encrypt_key && $encryption) {
-	my $cmd = "losetup -p 0 -e $encryption $dev $file";
+    if ($o_encrypt_key && $o_encryption) {
+	my $cmd = "losetup -p 0 -e $o_encryption $dev $file";
 	log::l("calling $cmd");
 	open(my $F, "|$cmd");
-	print $F $encrypt_key;
+	print $F $o_encrypt_key;
 	close $F or die "losetup failed";
     } else {
 	run_program::run("losetup", $dev, $file) or return;

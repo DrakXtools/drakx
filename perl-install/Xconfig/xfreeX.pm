@@ -259,8 +259,8 @@ sub raw_export_section {
 }
 
 sub raw_import_section {
-    my ($section, $h, $fields) = @_;
-    foreach ($fields ? grep { exists $h->{$_} } @$fields : keys %$h) {
+    my ($section, $h, $o_fields) = @_;
+    foreach ($o_fields ? grep { exists $h->{$_} } @$o_fields : keys %$h) {
 	my @l = map { ref($_) eq 'HASH' ? $_ : { val => $_ } } deref_array($h->{$_});
 	$section->{$_} = (ref($h->{$_}) eq 'ARRAY' ? \@l : $l[0]);
     }
@@ -282,17 +282,17 @@ sub add_Section {
     $h;
 }
 sub remove_Section {
-    my ($raw_X, $Section, $when) = @_;
-    @$raw_X = grep { $_->{name} ne $Section || $when && $when->($_->{l}) } @$raw_X;
+    my ($raw_X, $Section, $o_when) = @_;
+    @$raw_X = grep { $_->{name} ne $Section || $o_when && $o_when->($_->{l}) } @$raw_X;
     $raw_X;
 }
 sub get_Sections {
-    my ($raw_X, $Section, $when) = @_;
-    map { if_($_->{name} eq $Section && (!$when || $when->($_->{l})), $_->{l}) } @$raw_X;
+    my ($raw_X, $Section, $o_when) = @_;
+    map { if_($_->{name} eq $Section && (!$o_when || $o_when->($_->{l})), $_->{l}) } @$raw_X;
 }
 sub get_Section {
-    my ($raw_X, $Section, $when) = @_;
-    my @l = get_Sections($raw_X, $Section, $when);
+    my ($raw_X, $Section, $o_when) = @_;
+    my @l = get_Sections($raw_X, $Section, $o_when);
     @l > 1 and log::l("Xconfig: found more than one Section $Section");
     $l[0];
 }

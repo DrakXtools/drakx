@@ -169,11 +169,11 @@ sub choices {
 }
 
 sub configure {
-    my ($in, $raw_X, $card, $monitor, $auto) = @_;
+    my ($in, $raw_X, $card, $monitor, $b_auto) = @_;
 
     my ($default_resolution, @resolutions) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
 
-    if ($auto) {
+    if ($b_auto) {
 	#- use $default_resolution
     } elsif ($in->isa('interactive::gtk')) {
 	$default_resolution = choose_gtk($in, $card, $default_resolution, @resolutions) or return;

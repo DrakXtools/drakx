@@ -24,23 +24,23 @@ sub config_window {
 }
 
 sub load_category {
-    my ($in, $category, $auto, $at_least_one) = @_;
+    my ($in, $category, $b_auto, $b_at_least_one) = @_;
 
     my @l;
     {
 	my $w;
 	my $wait_message = sub { $w = wait_load_module($in, $category, @_) };
 	@l = modules::load_category($category, $wait_message);
-	@l = modules::load_category($category, $wait_message, 'force') if !@l && $at_least_one;
+	@l = modules::load_category($category, $wait_message, 'force') if !@l && $b_at_least_one;
     }
     if (my @err = grep { $_ } map { $_->{error} } @l) {
 	$in->ask_warn('', join("\n", @err));
     }
-    return @l if $auto && (@l || !$at_least_one);
+    return @l if $b_auto && (@l || !$b_at_least_one);
 
     @l = map { $_->{description} } @l;
 
-    if ($at_least_one && !@l) {
+    if ($b_at_least_one && !@l) {
 	@l = load_category__prompt($in, $category) or return;
     }
 

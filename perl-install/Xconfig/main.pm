@@ -69,7 +69,7 @@ sub configure_everything {
 }
 
 sub configure_chooser_raw {
-    my ($in, $raw_X, $do_pkgs, $options, $X, $modified) = @_;
+    my ($in, $raw_X, $do_pkgs, $options, $X, $b_modified) = @_;
 
     my %texts;
 
@@ -87,7 +87,7 @@ sub configure_chooser_raw {
 	if ($val) {
 	    $X->{$field} = $val;
 	    $X->{"modified_$field"} = 1;
-	    $modified = 1;
+	    $b_modified = 1;
 	    $update_texts->();
 
 	    if (member($field, 'card', 'monitor')) {
@@ -122,7 +122,7 @@ sub configure_chooser_raw {
 			  $X->{various} = 'done';
 		      } },
 		   ]);
-    $ok, $modified;
+    $ok, $b_modified;
 }
 
 sub configure_chooser {
@@ -135,7 +135,7 @@ sub configure_chooser {
     };
     my ($ok, $modified) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
 
-    $modified and may_write($in, $raw_X, $X, $ok) or return;
+    $modified && may_write($in, $raw_X, $X, $ok) or return;
 
     'config_changed';
 }

@@ -79,7 +79,7 @@ sub unload {
 }
 
 sub load_category {
-    my ($category, $wait_message, $probe_type) = @_;
+    my ($category, $o_wait_message, $b_probe_type) = @_;
 
     #- probe_category returns the PCMCIA cards. It doesn't know they are already
     #- loaded, so:
@@ -97,19 +97,19 @@ sub load_category {
       ),
     );
     grep {
-	$wait_message->($_->{description}, $_->{driver}) if $wait_message;
+	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
 	eval { load([ $_->{driver}, $_->{options} ]) };
 	$_->{error} = $@;
 
 	$_->{try} = 1 if $_->{driver} eq 'hptraid';
 
 	!($_->{error} && $_->{try});
-    } probe_category($category, $probe_type),
+    } probe_category($category, $b_probe_type),
       map { { driver => $_, description => $_, try => 1 } } @try_modules;
 }
 
 sub probe_category {
-    my ($category, $probe_type) = @_;
+    my ($category, $b_probe_type) = @_;
 
     my @modules = category2modules($category);
 
@@ -127,7 +127,7 @@ sub probe_category {
 	} else {
 	    member($_->{driver}, @modules);
 	}
-    } detect_devices::probeall($probe_type);
+    } detect_devices::probeall($b_probe_type);
 }
 
 sub load_ide {

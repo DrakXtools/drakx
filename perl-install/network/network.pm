@@ -55,13 +55,13 @@ sub read_interface_conf {
 sub read_dhcpd_conf {
     my ($file) = @_;
     $file ||= "$::prefix/etc/dhcpd.conf";
-    { option_routers => [ cat_($file) =~ /^\s*option routers\s+(\S+)\;/mg ],
-      subnet_mask => [ if_(cat_($file) =~ /^\s*option subnet-mask\s+(.*)\;/mg, split(' ', $1)) ],
-      domain_name => [ if_(cat_($file) =~ /^\s*option domain-name\s+\"(.*)\"\;/mg, split(' ', $1)) ],
-      domain_name_servers => [ if_(cat_($file) =~ /^\s*option domain-name-servers\s+(.*)\;/m, split(' ', $1)) ],
-      dynamic_bootp => [ if_(cat_($file) =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*\;/m, split(' ', $1)) ],
-      default_lease_time => [ if_(cat_($file) =~ /^\s*default-lease-time\s+(.*)\;/m, split(' ', $1)) ],
-      max_lease_time => [ if_(cat_($file) =~ /^\s*max-lease-time\s+(.*)\;/m, split(' ', $1)) ] };
+    { option_routers => [ cat_($file) =~ /^\s*option routers\s+(\S+);/mg ],
+      subnet_mask => [ if_(cat_($file) =~ /^\s*option subnet-mask\s+(.*);/mg, split(' ', $1)) ],
+      domain_name => [ if_(cat_($file) =~ /^\s*option domain-name\s+\"(.*)\";/mg, split(' ', $1)) ],
+      domain_name_servers => [ if_(cat_($file) =~ /^\s*option domain-name-servers\s+(.*);/m, split(' ', $1)) ],
+      dynamic_bootp => [ if_(cat_($file) =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*;/m, split(' ', $1)) ],
+      default_lease_time => [ if_(cat_($file) =~ /^\s*default-lease-time\s+(.*);/m, split(' ', $1)) ],
+      max_lease_time => [ if_(cat_($file) =~ /^\s*max-lease-time\s+(.*);/m, split(' ', $1)) ] };
 }
 
 sub read_tmdns_conf {
@@ -153,7 +153,7 @@ sub write_resolv_conf {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $netc, $prefix) = @_;
+    my ($file, $intf, $_netc, $prefix) = @_;
 
     if ($intf->{HWADDR} && -e "$prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
@@ -375,11 +375,11 @@ notation (for example, 1.2.3.4).");
 		     		     		     
 		     return 0 if !$intf->{WIRELESS_FREQ};
 		     if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-			 $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\' (zeroes)."));
+			 $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
 			 return (1,6);
 		     }
 		     if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-			 $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\' (zeroes)."));
+			 $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
 			 return (1,8);
 		     }
 		 },
@@ -419,15 +419,15 @@ want to use the default host name."),
 				    ),
 			       ],
 		               complete => sub {
-				   if ($netc->{dnsServer} and !is_ip($netc->{dnsServer})) {
+				   if ($netc->{dnsServer} && !is_ip($netc->{dnsServer})) {
 				       $in->ask_warn('', N("DNS server address should be in format 1.2.3.4"));
 				       return 1;
 				   }
-				   if ($netc->{GATEWAY} and !is_ip($netc->{GATEWAY})) {
+				   if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
 				       $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
 				       return 1;
 				   }
-				   if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
+				   if ($netc->{ZEROCONF_HOSTNAME} && $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
 				       $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 				       return 1;
 				   }
@@ -437,7 +437,7 @@ want to use the default host name."),
 }
 
 sub miscellaneous_choose {
-    my ($in, $u, $clicked, $_no_track_net) = @_;
+    my ($in, $u, $b_clicked) = @_;
 #    $in->set_help('configureNetworkProxy') if $::isInstall;
 
     $in->ask_from('',
@@ -450,7 +450,7 @@ sub miscellaneous_choose {
 	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,1;
 	   0;
        }
-    ) or return if $::expert || $clicked;
+    ) or return if $::expert || $b_clicked;
     1;
 }
 

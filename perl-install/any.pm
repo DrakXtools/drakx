@@ -81,7 +81,7 @@ sub hdInstallPath() {
 }
 
 sub kernelVersion {
-    my $kernel = readlink "$::prefix/boot/vmlinuz" || first(all("$::prefix/boot"));
+    my $kernel = readlink("$::prefix/boot/vmlinuz") || first(all("$::prefix/boot"));
     first($kernel =~ /vmlinuz-(.*)/);
 }
 
@@ -501,19 +501,19 @@ sub shells {
 }
 
 sub inspect {
-    my ($part, $prefix, $rw) = @_;
+    my ($part, $o_prefix, $b_rw) = @_;
 
     isMountableRW($part) or return;
 
     my $dir = $::isInstall ? "/tmp/inspect_tmp_dir" : "/root/.inspect_tmp_dir";
 
     if ($part->{isMounted}) {
-	$dir = ($prefix || '') . $part->{mntpoint};
+	$dir = ($o_prefix || '') . $part->{mntpoint};
     } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	eval { fs::mount($part->{device}, $dir, type2fs($part), !$rw) };
+	eval { fs::mount($part->{device}, $dir, type2fs($part), !$b_rw) };
 	$@ and return;
     }
     my $h = before_leaving {
@@ -565,7 +565,7 @@ sub ask_users {
 	      cancel => N("Accept user"),
 	      callbacks => {
 	          focus_out => sub {
-		      if ($_[0] eq 0) {
+		      if ($_[0] eq '0') {
 			  $u->{name} ||= lc first($u->{realname} =~ /([\w-]+)/);
 		      }
 		  },

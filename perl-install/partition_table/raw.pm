@@ -109,8 +109,8 @@ sub get_geometry($) {
 }
 
 sub openit { 
-    my ($hd, $mode) = @_;
-    my $F; sysopen($F, $hd->{file}, $mode || 0) and $F;
+    my ($hd, $o_mode) = @_;
+    my $F; sysopen($F, $hd->{file}, $o_mode || 0) and $F;
 }
 
 # cause kernel to re-read partition table

@@ -180,7 +180,7 @@ sub doPartitionDisksAfter {
     }
 
     fs::set_removable_mntpoints($o->{all_hds});
-    fs::set_all_default_options($o->{all_hds}, $o->{useSupermount}, $o->{security}, lang::fs_options($o->{locale}))
+    fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
 	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
@@ -620,7 +620,7 @@ sub updateModulesFromFloppy {
 	    my @dest_files = map { chomp_($_) } run_program::rooted_get_stdout($o->{prefix}, 'find', '/lib/modules');
 	    foreach my $s (@src_files) {
 		log::l("found updatable module $s");
-		my ($sfile, $sext) = $s =~ /([^\/\.]*\.o)(?:\.gz|\.bz2)?$/;
+		my ($sfile, $sext) = $s =~ m!([^/\.]*\.o)(?:\.gz|\.bz2)?$!;
 		my $qsfile = quotemeta $sfile;
 		my $qsext = quotemeta $sext;
 		foreach my $target (@dest_files) {
@@ -843,7 +843,7 @@ sub setupBootloaderBefore {
 	bootloader::set_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
     }
     if ($o->{miscellaneous}{HDPARM}) {
-	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
+	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
     }
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
 	bootloader::set_append($o->{bootloader}, 'mem', 'nopentium');
@@ -1034,7 +1034,7 @@ sub hasNetwork {
 
 #------------------------------------------------------------------------------
 sub upNetwork {
-    my ($o, $pppAvoided) = @_;
+    my ($o, $b_pppAvoided) = @_;
 
     #- do not destroy this file if prefix is '' or even '/' (could it happens ?).
     if (length($o->{prefix}) > 1) {
@@ -1047,7 +1047,7 @@ sub upNetwork {
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
-	} elsif (!$pppAvoided) {
+	} elsif (!$b_pppAvoided) {
 	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	    require network::netconnect;

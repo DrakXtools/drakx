@@ -22,12 +22,13 @@ sub read {
 }
 
 sub ntp_server {
+    my $setting = @_ > 1;
     my ($prefix, $server) = @_;
 
     my $f = "$prefix/etc/ntp.conf";
     -e $f or return;
 
-    if (@_ > 1) {
+    if ($setting) {
 	my $added = 0;
 	substInFile {
 	    if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {

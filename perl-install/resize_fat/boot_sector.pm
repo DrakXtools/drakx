@@ -51,7 +51,7 @@ sub read($) {
     my ($fs) = @_;
 
     my $boot = eval { resize_fat::io::read($fs, 0, $SECTORSIZE) }; $@ and die "reading boot sector failed on device $fs->{fs_name}";
-    @{$fs}{@fields} = unpack $format, $boot;
+    @$fs{@fields} = unpack $format, $boot;
 
     $fs->{nb_sectors} = $fs->{small_nb_sectors} || $fs->{big_nb_sectors};
     $fs->{cluster_size} = $fs->{cluster_size_in_sectors} * $fs->{sector_size};
@@ -98,7 +98,7 @@ sub read($) {
 
 sub write($) {
     my ($fs) = @_;
-    my $boot = pack($format, @{$fs}{@fields});
+    my $boot = pack($format, @$fs{@fields});
 
     eval { resize_fat::io::write($fs, 0, $SECTORSIZE, $boot) }; $@ and die "writing the boot sector failed on device $fs->{fs_name}";
 

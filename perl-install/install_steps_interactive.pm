@@ -389,7 +389,7 @@ sub choosePackages {
     $o->chooseCD($packages) if $o->{method} eq 'cdrom' && !$::oem;
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
-    my $availableC = install_steps::choosePackages(@_);
+    my $availableC = &install_steps::choosePackages;
     my $individual;
 
     require pkgs;
@@ -932,7 +932,7 @@ sub summary {
 		     (my $p = find { $_ && ($_->{make} || $_->{model}) }
 		      $o->{printer}{configured}{$o->{printer}{DEFAULT}}{queuedata})) {
 		"$p->{make} $p->{model}";
-	    } elsif (my $p = find { $_ && ($_->{make} || $_->{model}) }
+	    } elsif ($p = find { $_ && ($_->{make} || $_->{model}) }
 		      map { $_->{queuedata} } (values %{$o->{printer}{configured}})) {
 		"$p->{make} $p->{model}";
 	    } else {
@@ -1166,7 +1166,7 @@ sub setRootPassword {
     if ($auth eq N_("Windows Domain")) {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking isn't setup yet necessarily
-	$o->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
+	$o->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
 	$o->ask_from('',
 			N("Authentication Windows Domain"),
 			[ { label => N("Windows Domain"), val => \ ($o->{netc}{WINDOMAIN} ||= $o->{netc}{DOMAINNAME}) },

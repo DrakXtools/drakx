@@ -300,8 +300,8 @@ sub remove_append_simple {
     });
 }
 sub set_append {
-    my ($b, $key, $val) = @_;
     my $has_val = @_ > 2;
+    my ($b, $key, $val) = @_;
 
     modify_append($b, sub {
 	my ($simple, $dict) = @_;
@@ -400,12 +400,12 @@ sub sanitize_ver {
     $string =~ m|([^-]+)-([^-]+)(-([^-]+))?(-([^-]*))?|;
     $ehad = $1; $chtaim = $2; $chaloch = $3; $arba = $4; $hamesh = $5; $chech = $6;
 
-    if ($chtaim =~ m|mdk| and $chech =~ m|mdk(${mdksub})|) { #new mdk with mdksub
+    if ($chtaim =~ m|mdk| && $chech =~ m|mdk(${mdksub})|) { #new mdk with mdksub
 	my $s = $1;
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk|;
 	$return = "$1$2$3-$4$s";
-    } elsif ($chaloch =~ m|mdk| and $chtaim =~ /pre\d+/
-	     and $arba =~ m|(\d+)mdk(${mdksub})?|) { #new mdk with mdksub
+    } elsif ($chaloch =~ m|mdk| && $chtaim =~ /pre\d+/
+	     && $arba =~ m|(\d+)mdk(${mdksub})?|) { #new mdk with mdksub
 	my $r = $1;
 	my $s = $2 ? $2 : "";
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)pre(\d+)|;
@@ -421,7 +421,7 @@ sub sanitize_ver {
 	my $s = $1;
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)|;
 	$return = "$1$2$3-$s";
-    } elsif (not defined($chaloch)) { #linus/marcelo vanilla
+    } elsif (!defined($chaloch)) { #linus/marcelo vanilla
 	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)$|;
 	$return = "$1$2$3";
     } else { #a pre ac vanilla or whatever with EXTRAVERSION
@@ -499,8 +499,8 @@ wait %d seconds for default boot.
 
     #- add a restore entry if installation is done from disk, in order to allow redoing it.
     if (my $hd_install_path = any::hdInstallPath()) {
-	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" and
-	    my ($cmdline) = cat_("/tmp/image/boot/grub/menu.lst") =~ /kernel \S+\/boot\/vmlinuz (.*)$/m) {
+	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" &&
+	    (my ($cmdline) = cat_("/tmp/image/boot/grub/menu.lst") =~ m|kernel \S+/boot/vmlinuz (.*)$|m)) {
 	    log::l("copying kernel and stage1 install to $::prefix/boot/restore");
 	    eval { mkdir "$::prefix/boot/restore";
 		   cp_af("/tmp/image/boot/vmlinuz", "$::prefix/boot/restore/vmlinuz");
@@ -1073,10 +1073,10 @@ N_("Welcome to GRUB the operating system chooser!"),
 N_("Use the %c and %c keys for selecting which entry is highlighted."),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-N_("Press enter to boot the selected OS, \'e\' to edit the"),
+N_("Press enter to boot the selected OS, 'e' to edit the"),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-N_("commands before booting, or \'c\' for a command-line."),
+N_("commands before booting, or 'c' for a command-line."),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
 N_("The highlighted entry will be booted automatically in %d seconds."),

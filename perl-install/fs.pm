@@ -268,18 +268,18 @@ sub prepare_write_fstab {
 }
 
 sub fstab_to_string {
-    my ($all_hds, $prefix) = @_;
+    my ($all_hds, $o_prefix) = @_;
     my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
-    my ($s, undef) = prepare_write_fstab($fstab, $prefix, 'keep_smb_credentials');
+    my ($s, undef) = prepare_write_fstab($fstab, $o_prefix, 'keep_smb_credentials');
     $s;
 }
 
 sub write_fstab {
-    my ($all_hds, $prefix) = @_;
-    log::l("writing $prefix/etc/fstab");
+    my ($all_hds, $o_prefix) = @_;
+    log::l("writing $o_prefix/etc/fstab");
     my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
-    my ($s, $smb_credentials) = prepare_write_fstab($fstab, $prefix, '');
-    output("$prefix/etc/fstab", $s);
+    my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
+    output("$o_prefix/etc/fstab", $s);
     network::smb::save_credentials($_) foreach @$smb_credentials;
 }
 
@@ -416,12 +416,13 @@ sub mount_options_help {
 }
 
 sub set_default_options {
-    my ($part, $is_removable, $useSupermount, $security, $iocharset, $codepage) = @_;
+    my ($part, %opts) = @_;
+    #- opts are: is_removable useSupermount security iocharset codepage
 
     my ($options, $unknown) = mount_options_unpack($part);
 
-    if ($is_removable) {
-	$options->{supermount} = $useSupermount;
+    if ($opts{is_removable}) {
+	$options->{supermount} = $opts{useSupermount};
 	$part->{type} = 'auto';
     }
 
@@ -455,17 +456,17 @@ sub set_default_options {
 
 	put_in_hash($options, {
 			       user => 1, noexec => 0,
-			      }) if $is_removable;
+			      }) if $opts{is_removable};
 
 	put_in_hash($options, {
-			       'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
+			       'umask=0' => $opts{security} < 3, 'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
     }
     if (isThisFs('ntfs', $part)) {
-	put_in_hash($options, { ro => 1, 'umask=0' => $security < 3, 'iocharset=' => $iocharset });
+	put_in_hash($options, { ro => 1, 'umask=0' => $opts{security} < 3, 'iocharset=' => $opts{iocharset} });
     }
     if (isThisFs('iso9660', $part) || $is_auto) {
-	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $iocharset });
+	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
     }
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;
@@ -493,12 +494,13 @@ sub set_default_options {
 }
 
 sub set_all_default_options {
-    my ($all_hds, $useSupermount, $security, $iocharset, $codepage) = @_;
+    my ($all_hds, %opts) = @_;
+    #- opts are: useSupermount security iocharset codepage
 
     my @removables = @{$all_hds->{raw_hds}};
 
     foreach my $part (fsedit::get_really_all_fstab($all_hds)) {
-	set_default_options($part, member($part, @removables), $useSupermount, $security, $iocharset, $codepage);
+	set_default_options($part, %opts, is_removable => member($part, @removables));
     }
 }
 
@@ -657,8 +659,8 @@ sub formatMount_part {
 }
 
 sub formatMount_all {
-    my ($raids, $fstab, $prefix, $wait_message) = @_;
-    formatMount_part($_, $raids, $fstab, $prefix, $wait_message) 
+    my ($raids, $fstab, $prefix, $o_wait_message) = @_;
+    formatMount_part($_, $raids, $fstab, $prefix, $o_wait_message) 
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
@@ -674,8 +676,8 @@ sub formatMount_all {
 }
 
 sub mount {
-    my ($dev, $where, $fs, $rdonly, $options, $wait_message) = @_;
-    log::l("mounting $dev on $where as type $fs, options $options");
+    my ($dev, $where, $fs, $b_rdonly, $o_options, $o_wait_message) = @_;
+    log::l("mounting $dev on $where as type $fs, options $o_options");
 
     -d $where or mkdir_p($where);
 
@@ -684,14 +686,14 @@ sub mount {
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
     if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone) {
-	$wait_message->(N("Mounting partition %s", $dev)) if $wait_message;
-	system('mount', '-t', $fs, $dev, $where, if_($options, '-o', $options)) == 0 or die \N("mounting partition %s in directory %s failed", $dev, $where);
+	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
+	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die \N("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$where =~ s|/$||;
 
 	my $flag = c::MS_MGC_VAL();
-	$flag |= c::MS_RDONLY() if $rdonly;
+	$flag |= c::MS_RDONLY() if $b_rdonly;
 	my $mount_opt = "";
 
 	if ($fs eq 'vfat') {
@@ -701,16 +703,16 @@ sub mount {
 	    #- without knowing it, / is forced to be mounted with notail
 	    # if $where =~ m|/(boot)?$|;
 	    $mount_opt = 'notail'; #- notail in any case
-	} elsif ($fs eq 'jfs' && !$rdonly) {
-	    $wait_message->(N("Checking %s", $dev)) if $wait_message;
+	} elsif ($fs eq 'jfs' && !$b_rdonly) {
+	    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
 	    #- needed if the system is dirty otherwise mounting read-write simply fails
 	    run_program::raw({ timeout => 60 * 60 }, "fsck.jfs", $dev) or do {
 		my $err = $?;
 		die "fsck.jfs failed" if $err & 0xfc00;
 	    };
 	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
-	    if (!$rdonly) {
-		$wait_message->(N("Checking %s", $dev)) if $wait_message;
+	    if (!$b_rdonly) {
+		$o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
 		foreach ('-a', '-y') {
 		    run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
 		    my $err = $?;
@@ -734,7 +736,7 @@ sub mount {
 	    eval { modules::load('isofs') };
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
-	$wait_message->(N("Mounting partition %s", $dev)) if $wait_message;
+	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die \(N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)");
     } else {
 	log::l("skipping mounting $fs partition");
@@ -756,14 +758,14 @@ sub umount {
 }
 
 sub mount_part {
-    my ($part, $prefix, $rdonly, $wait_message) = @_;
+    my ($part, $o_prefix, $b_rdonly, $o_wait_message) = @_;
 
     #- root carrier's link can't be mounted
-    loopback::carryRootCreateSymlink($part, $prefix);
+    loopback::carryRootCreateSymlink($part, $o_prefix);
 
     log::l("isMounted=$part->{isMounted}, real_mntpoint=$part->{real_mntpoint}, mntpoint=$part->{mntpoint}");
     if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
-	log::l("remounting partition on $prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
+	log::l("remounting partition on $o_prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
 	if ($::isInstall) { #- ensure partition will not be busy.
 	    require install_any;
 	    install_any::getFile('XXX');
@@ -771,7 +773,7 @@ sub mount_part {
 	eval {
 	    umount($part->{real_mntpoint});
 	    rmdir $part->{real_mntpoint};
-	    symlinkf "$prefix$part->{mntpoint}", $part->{real_mntpoint};
+	    symlinkf "$o_prefix$part->{mntpoint}", $part->{real_mntpoint};
 	    delete $part->{real_mntpoint};
 	    $part->{isMounted} = 0;
 	};
@@ -781,19 +783,19 @@ sub mount_part {
 
     unless ($::testing) {
 	if (isSwap($part)) {
-	    $wait_message->(N("Enabling swap partition %s", $part->{device})) if $wait_message;
+	    $o_wait_message->(N("Enabling swap partition %s", $part->{device})) if $o_wait_message;
 	    swap::swapon($part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
-	    my $mntpoint = ($prefix || '') . $part->{mntpoint};
+	    my $mntpoint = ($o_prefix || '') . $part->{mntpoint};
 	    if (isLoopback($part) || $part->{encrypt_key}) {
 		set_loop($part);
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || $part->{device};
-	    mount($dev, $mntpoint, type2fs($part), $rdonly, $part->{options}, $wait_message);
+	    mount($dev, $mntpoint, type2fs($part), $b_rdonly, $part->{options}, $o_wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
     }
@@ -801,7 +803,7 @@ sub mount_part {
 }
 
 sub umount_part {
-    my ($part, $prefix) = @_;
+    my ($part, $o_prefix) = @_;
 
     $part->{isMounted} || $part->{real_mntpoint} or return;
 
@@ -811,7 +813,7 @@ sub umount_part {
 	} elsif (loopback::carryRootLoopback($part)) {
 	    umount("/initrd/loopfs");
 	} else {
-	    umount(($prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
+	    umount(($o_prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
 	    devices::del_loop(delete $part->{real_device}) if $part->{real_device};
 	}
     }
@@ -832,13 +834,13 @@ sub umount_all($;$) {
 # various functions
 ################################################################################
 sub df {
-    my ($part, $prefix) = @_;
+    my ($part, $o_prefix) = @_;
     my $dir = "/tmp/tmp_fs_df";
 
     return $part->{free} if exists $part->{free};
 
     if ($part->{isMounted}) {
-	$dir = ($prefix || '') . $part->{mntpoint};
+	$dir = ($o_prefix || '') . $part->{mntpoint};
     } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
 	return; #- won't even try!
     } else {

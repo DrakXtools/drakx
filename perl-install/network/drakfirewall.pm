@@ -119,13 +119,13 @@ sub set_ports {
 }
 
 sub get_conf {
-    my ($in, $disabled, $ports) = @_;
+    my ($in, $disabled, $o_ports) = @_;
 
     my $possible_servers = default_from_pkgs($in);
     $_->{hide} = 0 foreach @$possible_servers;
 
-    if ($ports) {
-	$disabled, from_ports($ports);
+    if ($o_ports) {
+	$disabled, from_ports($o_ports);
     } elsif (my $shorewall = network::shorewall::read()) {
 	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
     } else {

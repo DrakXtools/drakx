@@ -248,11 +248,11 @@ When you are done, don't forget to save using `w'", partition_table::description
 }
 
 sub partitionWizard {
-    my ($o, $nodiskdrake) = @_;
+    my ($o, $b_nodiskdrake) = @_;
 
     my %solutions = partitionWizardSolutions($o, $o->{all_hds});
 
-    delete $solutions{diskdrake} if $nodiskdrake;
+    delete $solutions{diskdrake} if $b_nodiskdrake;
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
@@ -280,14 +280,14 @@ sub partitionWizard {
 }
 
 sub upNetwork {
-    my ($o, $pppAvoided) = @_;
+    my ($o, $b_pppAvoided) = @_;
     my $_w = $o->wait_message('', N("Bringing up the network"));
-    install_steps::upNetwork($o, $pppAvoided);
+    install_steps::upNetwork($o, $b_pppAvoided);
 }
 sub downNetwork {
-    my ($o, $pppOnly) = @_;
+    my ($o, $b_pppOnly) = @_;
     my $_w = $o->wait_message('', N("Bringing down the network"));
-    install_steps::downNetwork($o, $pppOnly);
+    install_steps::downNetwork($o, $b_pppOnly);
 }
 
 

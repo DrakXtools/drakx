@@ -44,10 +44,10 @@ sub info {
 }
 
 sub various {
-    my ($in, $card, $options, $auto) = @_;
+    my ($in, $card, $options, $b_auto) = @_;
 
-    tvout($in, $card, $options) if !$auto;
-    choose_xdm($in, $auto);
+    tvout($in, $card, $options) if !$b_auto;
+    choose_xdm($in, $b_auto);
     1;
 }
 
@@ -63,10 +63,10 @@ sub runlevel {
 }
 
 sub choose_xdm {
-    my ($in, $auto) = @_;
+    my ($in, $b_auto) = @_;
     my $xdm = $::isStandalone ? runlevel() == 5 : 1;
 
-    if (!$auto || $::isStandalone) {
+    if (!$b_auto || $::isStandalone) {
 	$xdm = $in->ask_yesorno_({ 
 				  title => N("Graphical interface at startup"),
 				  messages =>

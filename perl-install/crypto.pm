@@ -108,8 +108,8 @@ sub dir { $mirrors{$_[0]}[1] . ($::corporate && '/corporate' || '') . '/' . vers
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
-    my ($file, $host) = @_;
-    $host ||= $crypto::host;
+    my ($file, $o_host) = @_;
+    my $host = $o_host || $crypto::host;
     my $dir = dir($host) . ($file =~ /\.rpm$/ && "/RPMS");
     log::l("getting crypto file $file on directory $dir with login $mirrors{$host}[2]");
     my ($ftp, $retr) = ftp::new($host, $dir,

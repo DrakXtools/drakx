@@ -1,4 +1,4 @@
-package partition_table::lvm; # $Id$
+package partition_table::lvm_PV; # $Id$
 
 use diagnostics;
 use strict;

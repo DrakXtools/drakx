@@ -98,7 +98,7 @@ sub main {
       if $::isStandalone;
     $in->ask_warn('', 
 N("If you plan to use aboot, be carefull to leave a free space (2048 sectors is enough)
-at the beginning of the disk")) if arch() eq 'alpha' and !$::isEmbedded;
+at the beginning of the disk")) if arch() eq 'alpha' && !$::isEmbedded;
 
     $w->main;
 }
@@ -106,7 +106,7 @@ at the beginning of the disk")) if arch() eq 'alpha' and !$::isEmbedded;
 sub try {
     my ($name, @args) = @_;
     my $f = $diskdrake::interactive::{$name} or die "unknown function $name";
-    try_($name, \&{$f}, @args);
+    try_($name, \&$f, @args);
 }
 sub try_ {
     my ($name, $f, @args) = @_;

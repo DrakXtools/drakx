@@ -731,7 +731,7 @@ The only solution is to move your primary partitions to have the hole next to th
 }
 
 sub add {
-    my ($hd, $part, $primaryOrExtended, $forceNoAdjust) = @_;
+    my ($hd, $part, $b_primaryOrExtended, $b_forceNoAdjust) = @_;
 
     get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss|ataraid)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
 
@@ -739,18 +739,18 @@ sub add {
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
     $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
-    adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
+    adjustStartAndEnd($hd, $part) unless $b_forceNoAdjust;
 
     my $nb_primaries = $hd->{device} =~ /^rd/ ? 3 : 1;
 
     if (arch() =~ /^sparc|ppc/ ||
-	$primaryOrExtended eq 'Primary' ||
-	$primaryOrExtended !~ /Extended/ && @{$hd->{primary}{normal} || []} < $nb_primaries) {
+	$b_primaryOrExtended eq 'Primary' ||
+	$b_primaryOrExtended !~ /Extended/ && @{$hd->{primary}{normal} || []} < $nb_primaries) {
 	eval { add_primary($hd, $part) };
 	goto success if !$@;
     }
     if ($hd->hasExtended) {
-	eval { add_extended($hd, $part, $primaryOrExtended) };
+	eval { add_extended($hd, $part, $b_primaryOrExtended) };
 	goto success if !$@;
     }
     {
@@ -779,7 +779,7 @@ sub next_start {
 }
 
 sub load {
-    my ($hd, $file, $force) = @_;
+    my ($hd, $file, $b_force) = @_;
 
     local *F;
     open F, $file or die \N("Error reading file %s", $file);
@@ -795,12 +795,12 @@ sub load {
 
     my %h; @h{@fields2save} = @$h;
 
-    $h{totalsectors} == $hd->{totalsectors} or $force or cdie "bad totalsectors";
+    $h{totalsectors} == $hd->{totalsectors} or $b_force or cdie "bad totalsectors";
 
     #- unsure we don't modify totalsectors
     local $hd->{totalsectors};
 
-    @{$hd}{@fields2save} = @$h;
+    @$hd{@fields2save} = @$h;
 
     delete @$_{qw(isMounted isFormatted notFormatted toFormat toFormatUnsure)} foreach get_normal_parts($hd);
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
@@ -808,7 +808,7 @@ sub load {
 
 sub save {
     my ($hd, $file) = @_;
-    my @h = @{$hd}{@fields2save};
+    my @h = @$hd{@fields2save};
     require Data::Dumper;
     eval { output($file, Data::Dumper->Dump([\@h], ['$h']), "\0") }
       or die \N("Error writing to file %s", $file);

@@ -36,7 +36,7 @@ sub main {
 sub try {
     my ($kind, $name, @args) = @_;
     my $f = $diskdrake::interactive::{$name} or die "unknown function $name";
-    try_($kind, $name, \&{$f}, @args);
+    try_($kind, $name, \&$f, @args);
 }
 sub try_ {
     my ($kind, $name, $f, @args) = @_;
@@ -50,7 +50,7 @@ sub try_ {
 
 sub raw_hd_options {
     my ($in, $raw_hd) = @_;
-    diskdrake::interactive::Options($in, {}, $raw_hd);
+    diskdrake::interactive::Options($in, {}, $raw_hd, fsedit::empty_all_hds());
 }
 sub raw_hd_mount_point {
     my ($in, $raw_hd) = @_;
@@ -111,13 +111,13 @@ sub update {
 }
 
 sub find_fstab_entry {
-    my ($kind, $e, $add_or_not) = @_;
+    my ($kind, $e, $b_add_or_not) = @_;
 
     my $fs_entry = $kind->to_fstab_entry($e);
 
     if (my $fs_entry_ = find { $fs_entry->{device} eq $_->{device} } @{$kind->{val}}) {
 	$fs_entry_;
-    } elsif ($add_or_not) {
+    } elsif ($b_add_or_not) {
 	push @{$kind->{val}}, $fs_entry;
 	$fs_entry;
     } else {

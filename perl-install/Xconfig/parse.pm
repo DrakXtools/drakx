@@ -30,10 +30,10 @@ sub read_XF86Config_from_string {
 #- raw reading/saving
 #-###############################################################################
 sub raw_from_file { #- internal
-    my ($file, $lines) = @_;
+    my ($file, $o_lines) = @_;
     my $raw_X = [];
 
-    $lines ||= [ cat_($file) ];
+    my $lines = $o_lines || [ cat_($file) ];
     my $line;
 
     my ($comment, $obj, @objs);
@@ -109,7 +109,7 @@ sub raw_from_file { #- internal
 }
 
 sub raw_to_string {
-    my ($e, $want_spacing) = @_;
+    my ($e, $b_want_spacing) = @_;
     my $s = do {
 	if ($e->{l}) {
 	    my $inside = join('', map_index { raw_to_string($_, $::i) } @{$e->{l}});
@@ -121,7 +121,7 @@ sub raw_to_string {
 	      (defined $e->{val} ? ($e->{Option} && $e->{val} !~ /^"/ ? qq( "$e->{val}") : qq( $e->{val})) : '');
 	}
     };
-    ($e->{pre_comment} ? ($want_spacing ? "\n" : '') . $e->{pre_comment} : '') . $s . ($e->{comment_on_line} || '') . "\n" . ($e->{post_comment} || '');
+    ($e->{pre_comment} ? ($b_want_spacing ? "\n" : '') . $e->{pre_comment} : '') . $s . ($e->{comment_on_line} || '') . "\n" . ($e->{post_comment} || '');
 }
 
 #-###############################################################################

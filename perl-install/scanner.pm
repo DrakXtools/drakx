@@ -51,11 +51,11 @@ sub confScanner {
 	my $linetype = $1;
 	$line = $2;
 	next if !$line;
-	if (!$linetype or
-	    ($linetype eq "USB" and ($port =~ /usb/i or $vendor)) or
-	    ($linetype eq "PARPORT" and !$vendor and 
-	     $port =~ /(parport|pt_drv|parallel)/i) or
-	    ($linetype eq "SCSI" and !$vendor and
+	if (!$linetype ||
+	    ($linetype eq "USB" && ($port =~ /usb/i || $vendor)) ||
+	    ($linetype eq "PARPORT" && !$vendor &&
+	     $port =~ /(parport|pt_drv|parallel)/i) ||
+	    ($linetype eq "SCSI" && !$vendor &&
 	     $port =~ m!(/sg|scsi|/scanner)!i)) {
 	    handle_configs::set_directive(\@driverconf, $line, 1);
 	}
@@ -77,7 +77,7 @@ sub configured {
     local *LIST;
     open LIST, "LC_ALL=C scanimage -L |";
     while (my $line = <LIST>) {
-	if ($line =~ /^\s*device\s*\`([^\`\']+)\'\s+is\s+a\s+(\S.*)$/) {
+	if ($line =~ /^\s*device\s*`([^`']+)'\s+is\s+a\s+(\S.*)$/) {
 	    # Extract port and description
 	    my $port = $1;
 	    my $description = $2;
@@ -120,7 +120,7 @@ sub detect {
 		$vendorid = $1;
 		$productid = $3;
 	    }
-	    if ($vendorid and $productid) {
+	    if ($vendorid && $productid) {
 		# We have vendor and product ID, look up the scanner in
 		# the usbtable
 		foreach my $entry (cat_("$scannerDBdir/usbtable")) {
@@ -225,7 +225,7 @@ sub resolve_symlinks {
 	my $ls = `ls -l $file`;
 	if ($ls =~ m!\s($file)\s*\->\s*(\S+)\s*$!) {
 	    my $target = $2;
-	    if (($target !~ m!^/!) && ($file =~ m!^(.*)/[^/]+$!)) {
+	    if ($target !~ m!^/! && $file =~ m!^(.*)/[^/]+$!) {
 		$target = "$1/$target";
 	    }
 	    $file = $target;
@@ -376,7 +376,7 @@ sub updateScannerDBfromSane {
 		  model => sub {
 		      unless ($name) { $name = $val; return }
 		      $name = member($mfg, keys %$sane2DB) ?
-			(ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
+			ref($sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      if (0 && member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
@@ -389,7 +389,7 @@ sub updateScannerDBfromSane {
 			  foreach my $line (@{$configlines{$backend}}) {
 			      $line =~ /^\s*(\S*?)LINE/;
 			      my $i = $1;
-			      if (!$i or $intf =~ /$i/i) {
+			      if (!$i || $intf =~ /$i/i) {
 				  $to_add .= "$line\n";
 			      }
 			  }
@@ -408,8 +408,8 @@ sub updateScannerDBfromSane {
 	local $_;
 	while (<$F>) { $lineno++;
 		       s/\s+$//;
-		       /^\;/ and next;
-		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
+		       /^;/ and next;
+		       ($cmd, $val) = /:(\S+)\s*\"([^;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
 		       my $f = $fs->{$cmd};
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
 		   }

@@ -332,7 +332,7 @@ sub detect() {
 }
 
 sub set_xfree_conf {
-    my ($mouse, $xfree_conf, $keep_auxmouse_unchanged) = @_;
+    my ($mouse, $xfree_conf, $b_keep_auxmouse_unchanged) = @_;
     
     my @mice = map {
 	{
@@ -343,7 +343,7 @@ sub set_xfree_conf {
 	};
     } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
     
-    if (!$mouse->{auxmouse} && $keep_auxmouse_unchanged) {
+    if (!$mouse->{auxmouse} && $b_keep_auxmouse_unchanged) {
 	my (undef, @l) = $xfree_conf->get_mice;
 	push @mice, @l;
     }
@@ -390,14 +390,14 @@ sub various_xfree_conf {
 #-  $mouse->{MOUSETYPE} : type of the mouse : string : ex "ps/2"
 #-  $mouse->{XEMU3} : emulate 3rd button : string : 'yes' or 'no'
 sub write_conf {
-    my ($in, $mouse, $keep_auxmouse_unchanged) = @_;
+    my ($in, $mouse, $b_keep_auxmouse_unchanged) = @_;
 
     &write($in, $mouse);
     modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;
-    set_xfree_conf($mouse, $xfree_conf, $keep_auxmouse_unchanged);
+    set_xfree_conf($mouse, $xfree_conf, $b_keep_auxmouse_unchanged);
     $xfree_conf->write;
 }
 
@@ -437,7 +437,7 @@ sub test_mouse_standalone {
 }
 
 sub test_mouse {
-    my ($mouse, $_w, $darea, $width, $height, $x_protocol_changed) = @_;
+    my ($mouse, $_w, $darea, $width, $height, $b_x_protocol_changed) = @_;
 
 #    $darea->realize;  IS IT REALLY NEEDED? generates a Gtk-CRITICAL when run..
     require ugtk2;
@@ -470,7 +470,7 @@ sub test_mouse {
 	$draw_pixbuf->($image, 0, 0, 210, $height || 200);
 	if ($::isInstall) {
 	    $draw_text->(N("Please test the mouse"), $height - 120);
-	    if ($x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
+	    if ($b_x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
 		$draw_text->(N("To activate the mouse,"), $height - 105);
 		$draw_text->(N("MOVE YOUR WHEEL!"), $height - 90);
 	    }

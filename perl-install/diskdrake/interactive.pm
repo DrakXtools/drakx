@@ -1084,7 +1084,7 @@ sub need_migration {
 }
 
 sub migrate_files {
-    my ($in, $_hd, $part, $_all_hds) = @_;
+    my ($in, $_hd, $part) = @_;
 
     my $wait = $in->wait_message('', N("Moving files to the new partition"));
     my $handle = any::inspect($part, '', 'rw');

@@ -42,10 +42,10 @@ sub from_raw_X {
 }
 
 sub configure {
-    my ($in, $raw_X, $auto) = @_;
+    my ($in, $raw_X, $b_auto) = @_;
 
     my $monitor = from_raw_X($raw_X);
-    choose($in, $monitor, $auto) or return;
+    choose($in, $monitor, $b_auto) or return;
     $raw_X->set_monitors($monitor);
     $monitor;
 }
@@ -67,12 +67,12 @@ sub configure_auto_install {
 }
 
 sub choose {
-    my ($in, $monitor, $auto) = @_;
+    my ($in, $monitor, $b_auto) = @_;
 
     my $monitors = monitors();
 
     my $ok = configure_automatic($monitor, $monitors);
-    if ($auto) {
+    if ($b_auto) {
 	log::l("Xconfig::monitor: auto failed") if !$ok;
 	return $ok;
     }

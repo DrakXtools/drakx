@@ -386,8 +386,8 @@ sub getTVcards {
 }
 
 sub getSerialModem {
-    my ($modem, $mouse) = @_;
-    $mouse ||= {};
+    my ($modem, $o_mouse) = @_;
+    my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
     eval { modules::load($serdev) };

@@ -105,14 +105,14 @@ sub errorOpeningFile($) {
     return;
 }
 sub getFile {
-    my ($f, $method) = @_;
-    log::l("getFile $f:$method");
+    my ($f, $o_method) = @_;
+    log::l("getFile $f:$o_method");
     my $rel = relGetFile($f);
     do {
 	if ($f =~ m|^http://|) {
 	    require http;
 	    http::getFile($f);
-	} elsif ($method =~ /crypto|update/i) {
+	} elsif ($o_method =~ /crypto|update/i) {
 	    require crypto;
 	    crypto::getFile($f);
 	} elsif ($::o->{method} eq "ftp") {
@@ -310,9 +310,9 @@ sub setPackages {
 }
 
 sub setDefaultPackages {
-    my ($o, $clean) = @_;
+    my ($o, $b_clean) = @_;
 
-    if ($clean) {
+    if ($b_clean) {
 	delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
     }
 
@@ -326,7 +326,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
-    unless ($clean) {
+    unless ($b_clean) {
 	if ($::auto_install && ($o->{compssUsersChoice} || {})->{ALL}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
@@ -564,7 +564,7 @@ sub install_urpmi {
 					   http => $ENV{URLPREFIX},
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
 		       #- for live_update or live_install script.
-		       readlink "/tmp/image/Mandrake" =~ m,^(\/.*)\/Mandrake\/*$, && "removable:/$1") . "/$_->{rpmsdir}";
+		       readlink("/tmp/image/Mandrake") =~ m,^(/.*)/Mandrake/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 	    my $need_list = $dir =~ m|^[^:]*://[^/:\@]*:[^/:\@]+\@|; #- use list file only if a password is visible
 
 	    #- build a list file if needed.
@@ -665,7 +665,7 @@ sub report_bug {
 }
 
 sub g_auto_install {
-    my ($replay, $respect_privacy) = @_;
+    my ($b_replay, $b_respect_privacy) = @_;
     my $o = {};
 
     require pkgs;
@@ -685,20 +685,20 @@ sub g_auto_install {
 	}
     }
 
-    local $o->{partitioning}{auto_allocate} = !$replay;
-    $o->{autoExitInstall} = !$replay;
-    $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions' ] if $replay;
+    local $o->{partitioning}{auto_allocate} = !$b_replay;
+    $o->{autoExitInstall} = !$b_replay;
+    $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions' ] if $b_replay;
 
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
 
     my @user_info_to_remove = (
-	if_($respect_privacy, qw(name realname home pw)), 
+	if_($b_respect_privacy, qw(name realname home pw)), 
 	qw(oldu oldg password password2),
     );
     $_ = { %{$_ || {}} }, delete @$_{@user_info_to_remove} foreach $o->{superuser}, @{$o->{users} || []};
 
-    if ($respect_privacy && $o->{netcnx}) {
+    if ($b_respect_privacy && $o->{netcnx}) {
 	if (my $type = $o->{netcnx}{type}) {
 	    my @netcnx_type_to_remove = qw(passwd passwd2 login phone_in phone_out);
 	    $_ = { %{$_ || {}} }, delete @$_{@netcnx_type_to_remove} foreach $o->{netcnx}{$type};
@@ -750,7 +750,7 @@ sub getAndSaveAutoInstallFloppy {
         fs::umount($mountdir);
         run_program::run("losetup", "-d", "/dev/loop6");
 
-	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*\".*)\"/$1 kickstart=floppy\"/ } "$workdir/silo.conf"; #" for po
+	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*\".*)\"/$1 kickstart=floppy"/ } "$workdir/silo.conf"; #" for po
 #-TODO	output "$workdir/ks.cfg", generate_ks_cfg($o);
 	output "$workdir/boot.msg", "\n7m",
 "!! If you press enter, an auto-install is going to start.
@@ -810,7 +810,7 @@ sub getAndSaveAutoInstallFloppy {
 
 
 sub g_default_packages {
-    my ($o, $quiet) = @_;
+    my ($o, $b_quiet) = @_;
 
     my $floppy = detect_devices::floppy();
 
@@ -831,7 +831,7 @@ sub g_default_packages {
 	   $str, "\0");
     fs::umount("/floppy");
 
-    $quiet or $o->ask_warn('', N("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
+    $b_quiet or $o->ask_warn('', N("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
 }
 
 sub loadO {
@@ -958,7 +958,7 @@ sub use_root_part {
     my ($all_hds, $part, $prefix) = @_;
     {
 	my $handle = any::inspect($part, $prefix) or die;
-	fs::get_info_from_fstab($all_hds, $handle->{dir}, 'uniq');
+	fs::get_info_from_fstab($all_hds, $handle->{dir});
     }
     isSwap($_) and $_->{mntpoint} = 'swap' foreach fsedit::get_really_all_fstab($all_hds); #- use all available swap.
 }
@@ -1032,11 +1032,11 @@ sub copy_advertising {
 	foreach (@files) {
 	    chomp;
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
-	    s/\.png/\.pl/;
+	    s/\.png/.pl/;
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
-	    s/\.pl/_icon\.png/;
+	    s/\.pl/_icon.png/;
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
-	    s/_icon\.png/\.png/;
+	    s/_icon\.png/.png/;
 	}
 	@advertising_images = map { "$dir/$_" } @files;
     }

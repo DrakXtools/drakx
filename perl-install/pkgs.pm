@@ -245,31 +245,31 @@ sub packageCallbackChoices {
 
 #- selection, unselection of package.
 sub selectPackage {
-    my ($packages, $pkg, $base, $otherOnly) = @_;
+    my ($packages, $pkg, $b_base, $o_otherOnly) = @_;
 
-    #- select package and dependancies, otherOnly may be a reference
+    #- select package and dependancies, o_otherOnly may be a reference
     #- to a hash to indicate package that will strictly be selected
     #- when value is true, may be selected when value is false (this
     #- is only used for unselection, not selection)
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
     $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
-				 no_flag_update => $otherOnly, keep_state => $otherOnly,
+				 no_flag_update => $o_otherOnly, keep_state => $o_otherOnly,
 				 callback_choices => \&packageCallbackChoices);
 
-    if ($base || $otherOnly) {
+    if ($b_base || $o_otherOnly) {
 	foreach (keys %{$state->{selected}}) {
 	    my $p = $packages->{depslist}[$_] or next;
 	    #- if base is activated, propagate base flag to all selection.
-	    $base and $p->set_flag_base;
-	    $otherOnly and $otherOnly->{$_} = $state->{selected}{$_};
+	    $b_base and $p->set_flag_base;
+	    $o_otherOnly and $o_otherOnly->{$_} = $state->{selected}{$_};
 	}
     }
     1;
 }
 
 sub unselectPackage($$;$) {
-    my ($packages, $pkg, $otherOnly) = @_;
+    my ($packages, $pkg, $o_otherOnly) = @_;
 
     #- base package are not unselectable,
     #- and already unselected package are no more unselectable.
@@ -277,13 +277,13 @@ sub unselectPackage($$;$) {
     $pkg->flag_selected or return;
 
     my $state = $packages->{state} ||= {};
-    $state->{unselected} = $otherOnly || {};
-    $packages->resolve_unrequested($packages->{rpmdb}, $state, { $pkg->id => undef }, no_flag_update => $otherOnly);
+    $state->{unselected} = $o_otherOnly || {};
+    $packages->resolve_unrequested($packages->{rpmdb}, $state, { $pkg->id => undef }, no_flag_update => $o_otherOnly);
     1;
 }
 sub togglePackageSelection($$;$) {
-    my ($packages, $pkg, $otherOnly) = @_;
-    $pkg->flag_selected ? unselectPackage($packages, $pkg, $otherOnly) : selectPackage($packages, $pkg, 0, $otherOnly);
+    my ($packages, $pkg, $o_otherOnly) = @_;
+    $pkg->flag_selected ? unselectPackage($packages, $pkg, $o_otherOnly) : selectPackage($packages, $pkg, 0, $o_otherOnly);
 }
 sub setPackageSelection($$$) {
     my ($packages, $pkg, $value) = @_;
@@ -354,7 +354,7 @@ sub psUsingHdlists {
     my $packages = new URPM;
 
     #- add additional fields used by DrakX.
-    @{$packages}{qw(count mediums)} = (0, {});
+    @$packages{qw(count mediums)} = (0, {});
 
     #- parse hdlists file.
     my $medium = 1;
@@ -371,14 +371,14 @@ sub psUsingHdlists {
 	++$medium;
     }
 
-    log::l("psUsingHdlists read " . scalar @{$packages->{depslist}} .
-	   " headers on " . scalar keys(%{$packages->{mediums}}) . " hdlists");
+    log::l("psUsingHdlists read " . int(@{$packages->{depslist}}) .
+	   " headers on " . int(keys %{$packages->{mediums}}) . " hdlists");
 
     $packages;
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $fhdlist) = @_;
+    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist) = @_;
     my $fakemedium = "$descr ($method$medium)";
     log::l("trying to read $hdlist for medium $medium");
 
@@ -399,13 +399,13 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
-    install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
+    install_any::getAndSaveFile($o_fhdlist || "Mandrake/base/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
-    #- if $fhdlist is defined, this is preferable not to try to find the associated synthesis.
+    #- if $o_fhdlist is defined, this is preferable not to try to find the associated synthesis.
     my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    unless ($fhdlist) {
+    unless ($o_fhdlist) {
 	#- copy existing synthesis file too.
 	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
@@ -430,12 +430,12 @@ sub psUsingHdlist {
 	} else {
 	    delete $packages->{mediums}{$medium};
 	    unlink $newf;
-	    $fhdlist or unlink $newsf;
+	    $o_fhdlist or unlink $newsf;
 	    die "fatal: no hdlist nor synthesis to read for $fakemedium";
 	}
 	$m->{start} > $m->{end} and do { delete $packages->{mediums}{$medium};
 					 unlink $newf;
-					 $fhdlist or unlink $newsf;
+					 $o_fhdlist or unlink $newsf;
 					 die "fatal: nothing read in hdlist or synthesis for $fakemedium" };
 	log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist");
     }
@@ -755,9 +755,9 @@ sub openInstallLog {
 }
 
 sub rpmDbOpen {
-    my ($prefix, $rebuild_needed) = @_;
+    my ($prefix, $o_rebuild_needed) = @_;
 
-    if ($rebuild_needed) {
+    if ($o_rebuild_needed) {
 	if (my $pid = fork()) {
 	    waitpid $pid, 0;
 	    $? & 0xff00 and die "rebuilding of rpm database failed";
@@ -812,10 +812,10 @@ sub selectPackagesAlreadyInstalled {
 }
 
 sub selectPackagesToUpgrade {
-    my ($packages, $_prefix, $medium) = @_;
+    my ($packages, $_prefix, $o_medium) = @_;
 
     #- check before that if medium is given, it should be valid.
-    $medium && (! defined $medium->{start} || ! defined $medium->{end}) and return;
+    $o_medium && (! defined $o_medium->{start} || ! defined $o_medium->{end}) and return;
 
     log::l("selecting packages to upgrade");
 
@@ -825,7 +825,7 @@ sub selectPackagesToUpgrade {
     my %selection;
     $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, \%selection,
 					   requested => undef,
-					   $medium ? (start => $medium->{start}, end => $medium->{end}) : (),
+					   $o_medium ? (start => $o_medium->{start}, end => $o_medium->{end}) : (),
 					  );
     log::l("resolving dependencies...");
     $packages->resolve_requested($packages->{rpmdb}, $state, \%selection,
@@ -1011,7 +1011,7 @@ sub install($$$;$$) {
 			log::l("opened rpm database for retry transaction of 1 package only");
 			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name));
 		    } else {
-			log::l("opened rpm database for transaction of " . scalar @transToInstall .
+			log::l("opened rpm database for transaction of " . int(@transToInstall) .
 			       " new packages, still $nb after that to do");
 			$trans->add($_, $isUpgrade && allowedToUpgrade($_->name))
 			  foreach @transToInstall;
@@ -1076,7 +1076,7 @@ sub install($$$;$$) {
 
 	    #- if we are using a retry mode, this means we have to split the transaction with only
 	    #- one package for each real transaction.
-	    unless ($retry_pkg) {
+	    if (!$retry_pkg) {
 		my @badPackages;
 		foreach (@transToInstall) {
 		    if (!$_->flag_installed && packageMedium($packages, $_)->{selected} && !exists($ignoreBadPkg{$_->name})) {

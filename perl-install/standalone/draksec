@@ -74,11 +74,11 @@ Security Administrator:
 }
 
 sub new_editable_combo {
-    my ($string_list, $default_value) = @_;
+    my ($string_list, $o_default_value) = @_;
     my $w = new Gtk2::Combo();
     $w->entry->set_editable(0);
     $w->set_popdown_strings(@$string_list) unless is_empty_array_ref $string_list;
-    $w->entry->set_text($default_value) if $default_value;
+    $w->entry->set_text($o_default_value) if $o_default_value;
     $w;
 }
 
@@ -155,7 +155,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            my $entry;
                                                                                            my $default = $msec->get_function_default($i);
                                                                                            if (member($default, @all_choices)) {
-                                                                                               $values{$i} = new_editable_combo(member($default, @yesno_choices) ? \@yesno_choices : member($default, @alllocal_choices) ? \@alllocal_choices : ());
+                                                                                               $values{$i} = new_editable_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
                                                                                                $entry = $values{$i}->entry;
                                                                                            } else {
                                                                                                $values{$i} = new Gtk2::Entry();

@@ -17,22 +17,22 @@ sub fromEnv() {
 }
 
 sub new {
-    my ($host, $prefix, $login, $password) = @_;
+    my ($host, $prefix, $o_login, $o_password) = @_;
     my @l = do { if ($hosts{"$host$prefix"}) {
 	@{$hosts{"$host$prefix"}};
     } else {
 	my %options = (Passive => 1, Timeout => 60, Port => 21);
 	$options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
 	$options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
-	unless ($login) {
-	    $login = 'anonymous';
-	    $password = '-drakx@';
+	unless ($o_login) {
+	    $o_login = 'anonymous';
+	    $o_password = '-drakx@';
 	}
 
 	my $ftp;
 	foreach (1..10) {
 	    $ftp = Net::FTP->new(network::resolv($host), %options) or die;
-	    $ftp && $ftp->login($login, $password) and last;
+	    $ftp && $ftp->login($o_login, $o_password) and last;
 
 	    log::l("ftp login failed, sleeping before trying again");
 	    sleep 5 * $_;

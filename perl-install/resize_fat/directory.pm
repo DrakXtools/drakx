@@ -41,10 +41,10 @@ sub traverse($$$) {
 	#- empty entry means end of directory
 	$$raw =~ /^\0*$/ and return $directory;
 
-	my $entry; @{$entry}{@fields} = unpack $format, $$raw;
+	my $entry; @$entry{@fields} = unpack $format, $$raw;
 
 	&$f($curr_dir_name, $entry)
-	    and	$$raw = pack $format, @{$entry}{@fields};
+	    and	$$raw = pack $format, @$entry{@fields};
     }
     $directory;
 }

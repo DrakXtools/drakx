@@ -392,9 +392,9 @@ sub wait_message_endW {
 }
 
 sub simplify_string {
-    my ($s, $width) = @_;
+    my ($s, $o_width) = @_;
     $s =~ s/\n/ /g;
-    $s = substr($s, 0, $width || 40); #- truncate if too long
+    $s = substr($s, 0, $o_width || 40); #- truncate if too long
     $s;
 }
 

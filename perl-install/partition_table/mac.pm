@@ -103,7 +103,7 @@ sub read($$) {
     my $F = partition_table::raw::openit($hd) or die "failed to open device";
     c::lseek_sector(fileno($F), $sector, 0) or die "reading of partition in sector $sector failed";
 
-    sysread $F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
+    sysread $F, $tmp, psizeof($bz_format) or die "error while reading bz (Block Zero) in sector $sector";
     my %info; @info{@$bz_fields} = unpack $bz_format, $tmp;
 
     foreach (1 .. $info{bzDrvrCnt}) {

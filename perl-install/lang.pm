@@ -398,18 +398,18 @@ sub standard_locale {
 }
     
 sub getlocale_for_lang {
-    my ($lang, $country, $utf8) = @_;
-    standard_locale($lang, $country, $utf8) || l2locale($lang).($utf8 ? '.UTF-8' : '');
+    my ($lang, $country, $o_utf8) = @_;
+    standard_locale($lang, $country, $o_utf8) || l2locale($lang).($o_utf8 ? '.UTF-8' : '');
 }
 
 sub getlocale_for_country {
-    my ($lang, $country, $utf8) = @_;
-    standard_locale($lang, $country, $utf8) || c2locale($country).($utf8 ? '.UTF-8' : '');
+    my ($lang, $country, $o_utf8) = @_;
+    standard_locale($lang, $country, $o_utf8) || c2locale($country).($o_utf8 ? '.UTF-8' : '');
 }
 
 sub getLANGUAGE {
-    my ($lang, $country, $utf8) = @_;
-    l2language($lang) || join(':', uniq(getlocale_for_lang($lang, $country, $utf8), $lang, if_($lang =~ /^(..)_/, $1)));
+    my ($lang, $o_country, $o_utf8) = @_;
+    l2language($lang) || join(':', uniq(getlocale_for_lang($lang, $o_country, $o_utf8), $lang, if_($lang =~ /^(..)_/, $1)));
 }
 
 my %xim = (
@@ -598,7 +598,7 @@ sub l2console_font {
 }
 
 sub get_kde_lang {
-    my ($locale, $default) = @_;
+    my ($locale, $o_default) = @_;
 
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
@@ -618,11 +618,11 @@ sub get_kde_lang {
     my $r;
     $r ||= $valid_lang->($locale->{lang});
     $r ||= find { $valid_lang->($_) } split(':', getlocale_for_lang($locale->{lang}, $locale->{country}));
-    $r || $default || 'C';
+    $r || $o_default || 'C';
 }
 
 sub charset2kde_charset {
-    my ($charset, $default) = @_;
+    my ($charset, $o_default) = @_;
     my $iocharset = ($charsets{$charset} || [])->[3];
 
     my @valid_kde_charsets = qw(big5-0 gb2312.1980-0 iso10646-1 iso8859-1 iso8859-4 iso8859-6 iso8859-8 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 koi8-r koi8-u ksc5601.1987-0 jisx0208.1983-0 microsoft-cp1251 tis620-0);
@@ -638,7 +638,7 @@ sub charset2kde_charset {
     $r ||= $valid_charset->($charset2kde_charset{$charset});
     $r ||= $valid_charset->($charset2kde_charset{$iocharset});
     $r ||= $valid_charset->($iocharset);
-    $r || $default || 'iso10646-1';
+    $r || $o_default || 'iso10646-1';
 }
 
 #- font+size for different charsets; the field [0] is the default,
@@ -738,7 +738,7 @@ sub l2pango_font {
 }
 
 sub set {
-    my ($lang, $translate_for_console) = @_;
+    my ($lang, $b_translate_for_console) = @_;
 
     #- disable Arabic in install as no (free) fonts are available.
     $lang eq 'ar' and $lang='en_US';
@@ -785,7 +785,7 @@ sub set {
     $ENV{LC_MESSAGES} = $lang;
     $ENV{LANG}        = $lang;
     
-    if ($translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
+    if ($b_translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
 	log::l("not translating in console");
 	$ENV{LANGUAGE}  = 'C';
     } else {
@@ -801,8 +801,8 @@ sub langs {
 }
 
 sub langsLANGUAGE {
-    my ($l, $c) = @_;
-    uniq(map { split ':', getLANGUAGE($_, $c) } langs($l));
+    my ($l, $o_c) = @_;
+    uniq(map { split ':', getLANGUAGE($_, $o_c) } langs($l));
 }
 
 sub langs_selected {
@@ -851,7 +851,7 @@ sub write_langs {
 }
 
 sub write { 
-    my ($prefix, $locale, $user_only, $dont_touch_kde_files) = @_;
+    my ($prefix, $locale, $b_user_only, $b_dont_touch_kde_files) = @_;
 
     $locale && $locale->{lang} or return;
 
@@ -867,7 +867,7 @@ sub write {
     log::l("lang::write: lang:$locale->{lang} country:$locale->{country} locale|lang:$locale_lang locale|country:$locale_country language:$h->{LANGUAGE}");
 
     my ($name, $sfm, $acm) = l2console_font($locale);
-    if ($name && !$user_only) {
+    if ($name && !$b_user_only) {
 	my $p = "$prefix/usr/lib/kbd";
 	if ($name) {
 	    eval {
@@ -899,11 +899,11 @@ sub write {
 	add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
     }
 
-    setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
+    setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
     eval {
 	my $charset = l2charset($locale->{lang});
-	my $confdir = $prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
+	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
 
 	mkdir_p($confdir);
@@ -915,7 +915,7 @@ sub write {
 			  ));
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'Over The Spot');
-	if ($user_only && (my $qt_xim = $qt_xim{substr($locale->{lang}, 0, 2)})) {
+	if ($b_user_only && (my $qt_xim = $qt_xim{substr($locale->{lang}, 0, 2)})) {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
@@ -937,7 +937,7 @@ sub write {
 	    		      StandardFont => charset2kde_font($charset, 0),
 	    		  ));
 	}
-    } if !$dont_touch_kde_files;
+    } if !$b_dont_touch_kde_files;
 }
 
 sub bindtextdomain() {
@@ -1005,11 +1005,11 @@ sub load_console_font {
 sub fs_options {
     my ($locale) = @_;
     if ($locale->{utf8}) {
-	('utf8', undef);
+	(iocharset => 'utf8', codepage => undef);
     } else {
 	my $c = $charsets{l2charset($locale->{lang}) || return} or return;
 	my ($iocharset, $codepage) = @$c[3..4];
-	$iocharset, $codepage;
+	(iocharset => $iocharset, codepage => $codepage);
     }
 }
 

@@ -478,8 +478,8 @@ sub installPackages {
 	    $change_time = time();
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
-	    my $pl = $f; $pl =~ s/\.png$/\.pl/;
-	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon\.png/;
+	    my $pl = $f; $pl =~ s/\.png$/.pl/;
+	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon.png/;
 	    my ($draw_text, $width, $height, @data, $icon, $icon_dx, $icon_dy, $icon_px);
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
@@ -503,22 +503,22 @@ sub installPackages {
 				       my ($width, $_height, $lines, $widths, $heights, $_ascents, $_descents) =
 					 get_text_coord($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
 				       if ($first && $icon) {
-					   my $iconx = ($dx-$width)/2 + $x + ${$widths}[0] - $icon_dx;
-					   my $icony = $y + ${$heights}[0] - $icon_dy/2;
+					   my $iconx = ($dx-$width)/2 + $x + $widths->[0] - $icon_dx;
+					   my $icony = $y + $heights->[0] - $icon_dy/2;
 					   $icony > 0 or $icony = 0;
 					   $icon_px->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
 									$iconx, $icony, $icon_dx, $icon_dy, 'none', 0, 0);
 					   $yicon = $icony + $icon_dy;
 				       }
 				       my $i = 0;
-				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
-				       foreach (@{$lines}) {
+				       $yicon > $y + $heights->[0] and $decy = $yicon - ($y + $heights->[$i]);
+				       foreach (@$lines) {
 					   my $layout = $darea->create_pango_layout($_);
 					   my $draw_lay = sub {
 					       my ($gc, $decx, $decy) = @_;
 					       $darea->window->draw_layout($gc,
-									   ($dx-$width)/2 + $x + ${$widths}[$i] + $decx,
-									   $y + ${$heights}[$i] + $decy,
+									   ($dx-$width)/2 + $x + $widths->[$i] + $decx,
+									   $y + $heights->[$i] + $decy,
 									   $layout);
 					   };
 					   $draw_lay->($darea->style->black_gc, 0, 0);

@@ -22,7 +22,7 @@ sub configure {
 	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
     }
     foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-	/.*ATDT(\d*).*/ and $modem->{phone} = $1;
+	/.*ATDT(\d*)/ and $modem->{phone} = $1;
     }
     foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
 	/NAME=(['"]?)(.*)\1/ and $modem->{login} = $2;
@@ -215,15 +215,15 @@ END
 }
 
 sub ppp_choose {
-    my ($in, $netc, $modem, $mouse) = @_;
-    $mouse ||= {};
+    my ($in, $netc, $modem, $o_mouse) = @_;
+    $o_mouse ||= {};
 
-    $mouse->{device} ||= readlink "$::prefix/dev/mouse";
+    $o_mouse->{device} ||= readlink "$::prefix/dev/mouse";
     $modem->{device} ||= $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
 						   interactive_help_id => 'selectSerialPort',
 						 },
 					     \&mouse::serial_port2text,
-					     [ grep { $_ ne $mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
+					     [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
 
     my @cnx_list;
     my $secret = network::tools::read_secret_backend();
@@ -250,7 +250,7 @@ sub ppp_choose {
 #- TODO: add choice between hcf/hsf/lt ?
 sub winmodemConfigure {
     my ($in, $netcnx, $mouse, $netc, $intf) = @_;
-    my %relocations = ( ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem') );
+    my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
     my $type;
     
     foreach (keys %{$netc->{autodetect}{winmodem}}) {

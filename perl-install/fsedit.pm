@@ -169,7 +169,7 @@ sub lvms {
 }
 
 sub hds {
-    my ($flags, $ask_before_blanking) = @_;
+    my ($flags, $o_ask_before_blanking) = @_;
     $flags ||= {};
     $flags->{readonly} && ($flags->{clearall} || $flags->{clear}) and die "conflicting flags readonly and clear/clearall";
 
@@ -204,7 +204,7 @@ sub hds {
 	    if (my $err = $@) {
 		if ($hd->{readonly}) {
 		    use_proc_partitions($hd);
-		} elsif ($ask_before_blanking && $ask_before_blanking->($hd->{device}, $err)) {
+		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
 		    partition_table::raw::zero_MBR($hd);
 		} else {
 		    #- using it readonly
@@ -403,10 +403,10 @@ sub is_one_big_fat_or_NT {
 }
 
 sub file2part {
-    my ($fstab, $file, $keep_simple_symlinks) = @_;    
+    my ($fstab, $file, $b_keep_simple_symlinks) = @_;    
     my $part;
 
-    $file = $keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
+    $file = $b_keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
     unless ($file =~ s/^$::prefix//) {
 	my $part = find { loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
@@ -461,8 +461,8 @@ sub computeSize {
 }
 
 sub suggest_part {
-    my ($part, $all_hds, $suggestions) = @_;
-    $suggestions ||= $suggestions{server} || $suggestions{simple};
+    my ($part, $all_hds, $o_suggestions) = @_;
+    my $suggestions = $o_suggestions || $suggestions{server} || $suggestions{simple};
 
     my $has_swap = any { isSwap($_) } get_all_fstab($all_hds);
 
@@ -498,8 +498,8 @@ sub has_mntpoint {
     mntpoint2part($mntpoint, [ get_really_all_fstab($all_hds) ]);
 }
 sub get_root_ {
-    my ($fstab, $boot) = @_;
-    $boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
+    my ($fstab, $o_boot) = @_;
+    $o_boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
 }
 sub get_root { &get_root_ || {} }
 
@@ -573,7 +573,7 @@ sub allocatePartitions {
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
 	    my $hd = fsedit::part2hd($part, $all_hds);
-	    add($hd, $part, $all_hds);
+	    add($hd, $part, $all_hds, {});
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};
 	}
@@ -581,13 +581,13 @@ sub allocatePartitions {
 }
 
 sub auto_allocate {
-    my ($all_hds, $suggestions) = @_;
+    my ($all_hds, $o_suggestions) = @_;
     my $before = listlength(fsedit::get_all_fstab($all_hds));
 
-    my $suggestions_ = $suggestions || $suggestions{simple};
-    allocatePartitions($all_hds, $suggestions_);
+    my $suggestions = $o_suggestions || $suggestions{simple};
+    allocatePartitions($all_hds, $suggestions);
 
-    if ($suggestions) {
+    if ($o_suggestions) {
 	auto_allocate_raids($all_hds, $suggestions);
 	if (auto_allocate_vgs($all_hds, $suggestions)) {
 	    #- allocatePartitions needs to be called twice, once for allocating PVs, once for allocating LVs
@@ -601,7 +601,7 @@ sub auto_allocate {
 
     if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
-	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
+	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions) {
 	    die \N("Not enough free space for auto-allocating");
 	} else {
 	    die \N("Nothing to do");
@@ -664,7 +664,7 @@ sub undo_prepare {
     require Data::Dumper;
     $Data::Dumper::Purity = 1;
     foreach (@{$all_hds->{hds}}) {
-	my @h = @{$_}{@partition_table::fields2save};
+	my @h = @$_{@partition_table::fields2save};
 	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
     }
 }
@@ -672,7 +672,7 @@ sub undo {
     my ($all_hds) = @_;
     foreach (@{$all_hds->{hds}}) {
 	my $h; eval pop @{$_->{undo}} || next;
-	@{$_}{@partition_table::fields2save} = @$h;
+	@$_{@partition_table::fields2save} = @$h;
 
 	$_->{isDirty} = $_->{needKernelReread} = 1 if $_->{hasBeenDirty};
     }

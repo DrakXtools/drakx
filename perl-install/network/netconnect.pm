@@ -99,7 +99,7 @@ sub pre_func {
 	$::Wizard_splash = 0;
     } else {
 	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	$in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($_[0])), 1);
+	$in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($text)), 1);
     }
     undef $::Wizard_no_previous;
 }
@@ -127,10 +127,10 @@ sub main {
 
     my $direct_net_install;
     if ($first_time && $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs")) {
-	(!($::expert || $noauto) or $in->ask_okcancel(N("Network Configuration"),
-						      N("Because you are doing a network installation, your network is already configured.
+	!$::expert && !$noauto || $in->ask_okcancel(N("Network Configuration"),
+						    N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
-"), 1)) and do {
+"), 1) and do {
     $netcnx->{type} = 'lan';
     output_with_perm("$prefix$connect_file", 0755,
       qq(
@@ -233,8 +233,8 @@ If you don't want to use the auto detection, deselect the checkbox.
     network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
     
-    eval { if ($netconnect::need_restart_network && $::isStandalone and (!$::expert or $in->ask_yesorno(N("Network configuration"),
-													N("The network needs to be restarted. Do you want to restart it ?"), 1))) {
+    eval { if ($netconnect::need_restart_network && $::isStandalone && (!$::expert || $in->ask_yesorno(N("Network configuration"),
+												       N("The network needs to be restarted. Do you want to restart it ?"), 1))) {
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
 	    $success = 0;
 	    $in->ask_okcancel(N("Network Configuration"), 

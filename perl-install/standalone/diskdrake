@@ -65,7 +65,7 @@ my $in = 'interactive'->vnew('su');
 
 if ($type eq 'fileshare') {
     require any;
-    any::fileshare_config($in);
+    any::fileshare_config($in, '');
     $in->exit(0);
 }
 
@@ -76,13 +76,13 @@ $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 fs::get_raw_hds('', $all_hds);
 
 fs::get_info_from_fstab($all_hds, '');
-fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ], '');
+fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
 
 $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 
 if ($type eq 'hd') {
     require diskdrake::interactive;
-    diskdrake::interactive::main($in, $all_hds);
+    diskdrake::interactive::main($in, $all_hds, 0, '', '');
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
     $para =~ s|^/dev/||;
@@ -94,10 +94,14 @@ if ($type eq 'hd') {
 	my $mntpoint = detect_devices::suggest_mount_point($raw_hd);
 	$raw_hd->{mntpoint} ||= find { !fsedit::has_mntpoint($_, $all_hds) } map { "/mnt/$mntpoint$_" } '', 2 .. 10;
 
-	my $use_supermount = 1;
+	my $useSupermount = 1;
 	require security::level;
 	require lang;
-	fs::set_default_options($raw_hd, 1, $use_supermount, security::level::get(), lang::fs_options(lang::read()));
+	fs::set_default_options($raw_hd, 
+				is_removable => 1, 
+				useSupermount => $useSupermount, 
+				security => security::level::get(), 
+				lang::fs_options(lang::read()));
     }
     diskdrake::removable::main($in, $all_hds, $raw_hd);
 } elsif ($type eq 'dav') {

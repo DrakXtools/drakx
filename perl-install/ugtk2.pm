@@ -283,16 +283,15 @@ sub create_adjustment {
 }
 
 sub create_scrolled_window {
-    my ($W, $policy, $viewport_shadow) = @_;
+    my ($W, $o_policy, $o_viewport_shadow) = @_;
     my $w = Gtk2::ScrolledWindow->new(undef, undef);
-    $policy ||= [ 'automatic', 'automatic' ];
-    $w->set_policy(@$policy);
+    $w->set_policy($o_policy ? @$o_policy : ('automatic', 'automatic'));
     if (member(ref($W), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	$w->add($W)
     } else {
 	$w->add_with_viewport($W);
     }
-    $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
+    $o_viewport_shadow and gtkset_shadow_type($w->child, $o_viewport_shadow);
     $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     if (ref($W) eq 'Gtk2::TextView') {
@@ -432,7 +431,10 @@ sub create_menu {
 
 sub create_notebook {
     my $n = Gtk2::Notebook->new;
-    add2notebook($n, splice(@_, 0, 2)) while @_;
+    while (@_) {
+	my ($title, $book) = splice(@_, 0, 2);
+	add2notebook($n, $title, $book);
+    }
     $n
 }
 
@@ -460,10 +462,10 @@ sub create_packtable {
 }
 
 sub create_okcancel {
-    my ($w, $ok, $cancel, $spread, @other) = @_;
+    my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
     my $wizard_buttons = $::isWizard && !$w->{pop_it};
-    $cancel = $wizard_buttons ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
-    $ok = $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
+    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? N("<- Previous") : N("Cancel");
+    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
     my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
@@ -472,7 +474,7 @@ sub create_okcancel {
     my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
 
-    my $box = create_hbox($spread || "edge");
+    my $box = create_hbox($o_spread || "edge");
     
     $box->pack_start($_, 0, 0, 1) foreach @l2;
     $box->pack_end($_, 0, 0, 1) foreach @r2, @l;
@@ -538,10 +540,10 @@ sub gtktext_append { gtktext_insert(@_, { 'append' => 1 }) }
 #		                [ 'third', { 'font' => 'Serif 15', ... } ],
 #                               ... ]);
 sub gtktext_insert {
-    my ($textview, $t, $opts) = @_;
+    my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
     if (ref($t) eq 'ARRAY') {
-	$opts->{append} or $buffer->set_text('', -1);
+	$opts{append} or $buffer->set_text('', -1);
 	foreach my $token (@$t) {
             my ($iter1, $iter2);
 	    my $c = $buffer->get_char_count;
@@ -560,9 +562,9 @@ sub gtktext_insert {
     #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
     $buffer->place_cursor(my $iter = $buffer->get_start_iter); $iter->free;
-    $textview->set_wrap_mode($opts->{wrap_mode} || 'word');
-    $textview->set_editable($opts->{editable} || 0);
-    $textview->set_cursor_visible($opts->{visible} || 0);
+    $textview->set_wrap_mode($opts{wrap_mode} || 'word');
+    $textview->set_editable($opts{editable} || 0);
+    $textview->set_cursor_visible($opts{visible} || 0);
     $textview;
 }
 
@@ -638,8 +640,8 @@ sub string_size {
 }
 
 sub get_text_coord {
-    my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $wrap_char) = @_;
-    $wrap_char ||= ' ';
+    my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $o_wrap_char) = @_;
+    my $wrap_char = $o_wrap_char || ' ';
     my $idx = 0;
     my $real_width = 0;
     my $real_height = 0;
@@ -846,7 +848,7 @@ sub new {
     $o;
 }
 sub main {
-    my ($o, $completed, $canceled) = @_;
+    my ($o, $o_completed, $o_canceled) = @_;
     gtkset_mousecursor_normal();
     my $timeout = Gtk2->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $_b = MDK::Common::Func::before_leaving { Gtk2->timeout_remove($timeout) };
@@ -854,7 +856,7 @@ sub main {
 
     do {
 	Gtk2->main;
-    } while (!$o->{destroyed} && ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->()));
+    } while (!$o->{destroyed} && ($o->{retval} ? $o_completed && !$o_completed->() : $o_canceled && !$o_canceled->()));
     $o->destroy;
     $o->{retval}
 }

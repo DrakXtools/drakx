@@ -193,36 +193,36 @@ sub ask_from_listf_raw {
 }
 
 sub ask_from_listf_raw_no_check {
-    my ($o, $common, $f, $l, $def) = @_;
+    my ($o, $common, $f, $l, $o_def) = @_;
 
     if (@$l <= ($::isWizard ? 1 : 2)) {
 	my ($ok, $cancel) = map { $_ && may_apply($f, $_) } @$l;
 	if (length "$ok$cancel" < 70) {
 	    my $ret = eval {
 		put_in_hash($common, { ok => $ok, 
-				       if_($cancel, cancel => $cancel, focus_cancel => $def eq $l->[1]) });
+				       if_($cancel, cancel => $cancel, focus_cancel => $o_def eq $l->[1]) });
 		ask_from_no_check($o, $common, []) ? $l->[0] : $l->[1];
 	    };
 	    die if $@ && $@ !~ /^wizcancel/;
 	    return $@ ? undef : $ret;
 	}
     }
-    ask_from_no_check($o, $common, [ { val => \$def, type => 'list', list => $l, format => $f } ]) && $def;
+    ask_from_no_check($o, $common, [ { val => \$o_def, type => 'list', list => $l, format => $f } ]) && $o_def;
 }
 
 sub ask_from_treelist {
-    my ($o, $title, $message, $separator, $l, $def) = @_;
-    ask_from_treelistf($o, $title, $message, $separator, undef, $l, $def);
+    my ($o, $title, $message, $separator, $l, $o_def) = @_;
+    ask_from_treelistf($o, $title, $message, $separator, undef, $l, $o_def);
 }
 sub ask_from_treelist_ {
-    my ($o, $title, $message, $separator, $l, $def) = @_;
+    my ($o, $title, $message, $separator, $l, $o_def) = @_;
     my $transl = sub { join '|', map { translate($_) } split(quotemeta($separator), $_[0]) }; 
-    ask_from_treelistf($o, $title, $message, $separator, $transl, $l, $def);
+    ask_from_treelistf($o, $title, $message, $separator, $transl, $l, $o_def);
 }
 sub ask_from_treelistf {
-    my ($o, $title, $message, $separator, $f, $l, $def) = @_;
-    ask_from($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f, sort => 1 } ]) or return;
-    $def;
+    my ($o, $title, $message, $separator, $f, $l, $o_def) = @_;
+    ask_from($o, $title, $message, [ { val => \$o_def, separator => $separator, list => $l, format => $f, sort => 1 } ]) or return;
+    $o_def;
 }
 
 sub ask_many_from_list {

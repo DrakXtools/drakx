@@ -192,7 +192,7 @@ want to use the default host name."),
 			if_($::expert, { label => N("Host name"), val => \$netc->{HOSTNAME} }),
 		      ],
 		      complete => sub {
-			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
+			  if ($netc->{ZEROCONF_HOSTNAME} && $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
 			      $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 			      return 1;
 			  }

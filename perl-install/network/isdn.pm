@@ -15,7 +15,7 @@ use MDK::Common::File;
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
 
 sub configure {
-    my ($netcnx, $netc, $isdn) = @_;
+    my ($netcnx, $netc, $_isdn) = @_;
   isdn_step_1:
     defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
 #    $::isInstall and $in->set_help('configureNetworkISDN');
@@ -72,8 +72,8 @@ sub isdn_write_config {
 }
 
 sub isdn_write_config_backend {
-    my ($isdn, $netc, $netcnx) = @_;
-    defined $netcnx and $netc->{isdntype} = $netcnx->{type};
+    my ($isdn, $netc, $o_netcnx) = @_;
+    defined $o_netcnx and $netc->{isdntype} = $o_netcnx->{type};
     if ($isdn->{is_light}) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	if ($isdn->{id}) {
@@ -214,7 +214,7 @@ sub get_info_providers_backend {
 	chop;
 	my ($name_, $phone, $real, $dns1, $dns2) = split '=>';
 	if ($name eq $name_) {
-	    @{$isdn}{qw(user_name phone_out DOMAINNAME2 dnsServer3 dnsServer2)} =
+	    @$isdn{qw(user_name phone_out DOMAINNAME2 dnsServer3 dnsServer2)} =
 	               ((split(/\|/, $name_))[2], $phone, $real, $dns1, $dns2);
 	}
     }
