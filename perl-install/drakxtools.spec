@@ -380,7 +380,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - mousedrake: prevent a broken X configuration to break mouse
   configuration (pixel)
 - net_monitor: remove connection time timer if connection fails (#11590)
-- XFdrake: allow ignoring X config file when it contains errors
+- XFdrake: allow ignoring X config file when it contains errors (pixel)
 
 * Fri Sep 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-10mdk
 - drakbackup: use radio buttons in media selection (wildman)
