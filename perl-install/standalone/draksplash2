@@ -93,13 +93,15 @@ sub image_expose {
 	    $window->draw_layout($gc, $x, $y, $layout);
 	}
     }
-    if ($current_rect) {
-	my ($x, $y, $w, $h) = rectangle2xywh($current_rect);
-	$window->draw_rectangle($widget->style->black_gc, 0, $x, $y, $w, $h);
-    }
-    if ($current_rect != $progress_rect) {
+    {
 	my ($x, $y, $w, $h) = rectangle2xywh($progress_rect);
-	$window->draw_rectangle(color_index2gc($window, $progress_color), 1, $x, $y, $w, $h);
+	my $w2 = $w - $w % nb_steps();
+	if ($current_rect) {
+	    $window->draw_rectangle(color_index2gc($window, $progress_color), 1, $x, $y, $w2, $h);
+	    $window->draw_rectangle($widget->style->black_gc, 0, $x, $y, $w, $h);
+	} else {
+	    $window->draw_rectangle(color_index2gc($window, $progress_color), 1, $x, $y, $w, $h);
+	}
     }
     0;
 }
@@ -234,6 +236,9 @@ sub create_popup() {
     }
     $popup
 }
+sub nb_steps() {
+    $kernel_and_initrd_size / ($isolinux_mode ? $isolinux_block_size : $lilo_block_size);
+}
 
 sub read_parameters {
     my ($file) = @_;
@@ -283,8 +288,7 @@ sub save_parameters {
 
     $h{'progress_c'} = $progress_color->{Color} + 64;
     ($h{'progress_x'}, $h{'progress_y'}, $h{'progress_real_w'}, $h{'progress_h'}) = rectangle2xywh($progress_rect);
-    my $nb_steps = $kernel_and_initrd_size / ($isolinux_mode ? $isolinux_block_size : $lilo_block_size);
-    $h{'progress_w'} = int($h{'progress_real_w'} / $nb_steps);
+    $h{'progress_w'} = int($h{'progress_real_w'} / nb_steps());
 
     $h{'isolinux_mode'} = $isolinux_mode;
 
