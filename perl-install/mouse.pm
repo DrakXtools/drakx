@@ -311,7 +311,9 @@ sub detect() {
 	} else {
 	    log::l("no usb interface found for mice");
 	}
-	return { wacom => \@wacom, %$ps2_mouse };
+	if ($ps2_mouse) {
+	    return { wacom => \@wacom, %$ps2_mouse };
+	}
     }
 
     #- probe serial device to make sure a wacom has been detected.
