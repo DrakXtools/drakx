@@ -96,6 +96,16 @@ $PKGS_SKIP      = 0x08000000;
 $PKGS_UNSKIP    = 0x10000000;
 $PKGS_UPGRADE   = 0x20000000;
 
+#- package to ignore, typically in Application CD.
+my %ignoreBadPkg = (
+		    'civctp-demo'   => 1,
+		    'eus-demo'      => 1,
+		    'myth2-demo'    => 1,
+		    'heretic2-demo' => 1,
+		    'heroes3-demo'  => 1,
+		    'rt2-demo'      => 1,
+		   );
+
 #- basic methods for extracting informations about packages.
 #- to save memory, (name, version, release) are no more stored, they
 #- are directly generated from (file).
@@ -1059,7 +1069,7 @@ sub install($$$;$$) {
 	c::headerFree(delete $_->{header}) foreach @transToInstall;
 	cleanHeaders($prefix);
 
-	if (my @badpkgs = grep { !packageFlagInstalled($_) && $_->{medium}{selected} } @transToInstall) {
+	if (my @badpkgs = grep { !packageFlagInstalled($_) && $_->{medium}{selected} && !exists($ignoreBadPkg{packageName($_)}) } @transToInstall) {
 	    foreach (@badpkgs) {
 		log::l("bad package $_->{file}");
 		packageSetFlagSelected($_, 0);
