@@ -41,13 +41,11 @@ echo "Formatting $hd$inst partition" ; mkfs.ext2 $hd$inst
 echo "Formatting $hd$root partition" ; mkfs.ext2 $hd$root
 
 echo "Mounting partitions"
-mkdir /hd ; mount -t ext2 $hd$inst /hd
-mkdir /mnt; mount -t ext2 $hd$root /mnt
+mkdir -p /hd ; mount -t ext2 $hd$inst /hd
+mkdir -p /mnt; mount -t ext2 $hd$root /mnt
 
 echo "Copying installation on hard drive"
-mkdir /hd/Mandrake
-cp -a /boot /cdrom/boot /hd
-cp -a /cdrom/Mandrake /hd/Mandrake
+cp -a /boot /cdrom/boot /cdrom/Mandrake /hd
 
 echo "Installing packages"
 export DURING_INSTALL=1
@@ -56,9 +54,11 @@ export SECURE_LEVEL=2
 for i in /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
+touch /mnt/etc/fstab
 for i in `perl -pe 's/ .*//' /cdrom/Mandrake/base/depslist.ordered`; do
-    [ -e $i.*.rpm ] && rpm --root /mnt -ivh /cdrom/RPMS/$i.*.rpm --nodeps --force
+    [ -e /cdrom/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/RPMS/$i.*.rpm --nodeps --force
 done
+umount /mnt/proc
 
 echo
 echo "Done. OEM hard drive ready!"
