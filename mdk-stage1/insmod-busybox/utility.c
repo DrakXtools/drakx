@@ -86,6 +86,7 @@ extern void errorMsg(const char *s, ...)
 	fflush(stdout);
 	fprintf(stderr, "busybox: ");
 	vfprintf(stderr, s, p);
+	fprintf(stderr, "\n");
 	va_end(p);
 	fflush(stderr);
 }
@@ -98,6 +99,7 @@ extern void fatalError(const char *s, ...)
 	fflush(stdout);
 	fprintf(stderr, "busybox: ");
 	vfprintf(stderr, s, p);
+	fprintf(stderr, "\n");
 	va_end(p);
 	fflush(stderr);
 	exit(FALSE);
@@ -109,7 +111,7 @@ extern void errorMsg(const char *s, ...)
 	va_list p;
 
 	va_start(p, s);
-	vlog_message_nobs(s, p);
+	vlog_message(s, p);
 	va_end(p);
 }
 
@@ -118,7 +120,7 @@ extern void fatalError(const char *s, ...)
 	va_list p;
 
 	va_start(p, s);
-	vlog_message_nobs(s, p);
+	vlog_message(s, p);
 	va_end(p);
 	while (1);
 }
