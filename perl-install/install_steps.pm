@@ -451,13 +451,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     install_any::disable_user_view($o->{prefix}) if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
-    #- konsole and gnome-terminal are lamers in exotic languages, link them to something better
-    if ($o->{lang} =~ /ja|ko|zh/) {
-	foreach ("konsole", "gnome-terminal") {
-	    my $f = "$o->{prefix}/usr/bin/$_";
-	    symlinkf("X11/rxvt.sh", $f) if -e $f;
-	}
-    }
     foreach (list_skels($o->{prefix}, '.kde/share/config/kfmrc')) {
 	my $found;
 	substInFile {
