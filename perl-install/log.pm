@@ -19,7 +19,9 @@ sub F() { *LOG }
 
 sub l {
     $logOpen or openLog();
-    if ($::isStandalone) {
+    if ($::testing) {
+	print STDERR @_, "\n";
+    } elsif ($::isStandalone) {
 	c::syslog(c::LOG_WARNING(), join("", @_));
     } elsif ($::isInstall) {
 	print LOG "* ", @_, "\n";
