@@ -263,7 +263,7 @@ sub winmodemConfigure {
     $type || $in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
 Take a look at http://www.linmodems.org")) && return 1;
     my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
-    $e =~ /rpm/ ? $in->do_pkgs->install($relocations{$type} ? @{$relocations{type}} : $type) : return 1;
+    $e =~ /rpm/ ? $in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type) : return 1;
     1;
 }
 
