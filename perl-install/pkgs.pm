@@ -97,7 +97,7 @@ sub invCorrectSize { ($_[0] - $C) / $B }
 sub selectedSize {
     my ($packages) = @_;
     my $size = 0;
-    my %skip;
+    my (%skip_added, %skip_removed);
     #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_selected) {
@@ -105,14 +105,14 @@ sub selectedSize {
 	    #- if a package is obsoleted with the same name it should
 	    #- have been selected, so a selected new package obsoletes
 	    #- all the old package.
-	    exists $skip{$_->name} and next; $skip{$_->name} = undef;
+	    exists $skip_added{$_->name} and next; $skip_added{$_->name} = undef;
 	    $size -= $packages->{sizes}{$_->name};
 	}
     }
     #- but remove size of package being obsoleted or removed.
     foreach ((map { /(.*)\.[^\.]*$/ } keys %{$packages->{state}{obsoleted}}), keys %{$packages->{state}{ask_remove}}) {
 	my ($name) = /(.*)-[^\-]*-[^\-]*$/ or next;
-	exists $skip{$name} and next; $skip{$name} = undef;
+	exists $skip_removed{$name} and next; $skip_removed{$name} = undef;
 	$size -= $packages->{sizes}{$name};
     }
     $size;
@@ -1089,7 +1089,7 @@ sub install($$$;$$) {
 }
 
 sub remove($$) {
-    my ($prefix, $toRemove) = @_;
+    my ($prefix, $toRemove, $packages) = @_;
 
     return if $::g_auto_install || !@{$toRemove || []};
 
@@ -1098,7 +1098,7 @@ sub remove($$) {
 
     foreach my $p (@$toRemove) {
 	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
-	$trans->remove($p) if allowedToUpgrade($p);
+	$trans->remove($p);
     }
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
@@ -1116,6 +1116,13 @@ sub remove($$) {
 
     if (my @probs = $trans->run(undef, force => 1)) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
+    } else {
+	#- clean ask_remove according to package marked to be deleted.
+	if ($packages) {
+	    foreach my $p (@$toRemove) {
+		delete $packages->{state}{ask_remove}{$p};
+	    }
+	}
     }
 
     #- keep in mind removing of these packages by cleaning $toRemove.
