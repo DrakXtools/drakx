@@ -467,6 +467,8 @@ sub install_urpmi {
 	#- build synthesis file at install, this will improve performance greatly.
 	run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name.cz",
 			    "--compact", "--provides", "--requires", "/var/lib/urpmi/hdlist.$name.cz");
+	#- safe guard correct generation of synthesis file.
+	-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" > 24 or unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
 
 	local *LIST;
 	my $mask = umask 077;
