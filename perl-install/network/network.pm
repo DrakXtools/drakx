@@ -64,6 +64,14 @@ sub read_dhcpd_conf {
       max_lease_time => [ if_(cat_($file) =~ /^\s*max-lease-time\s+(.*);/m, split(' ', $1)) ] };
 }
 
+sub read_squid_conf {
+    my ($file) = @_;
+    $file ||= "$::prefix/etc/squid/squid.conf";
+    { http_port => [ cat_($file) =~ /^\s*http_port\s+(.*)/mg ],
+      cache_size => [ if_(cat_($file) =~ /^\s*cache_dir diskd\s+(.*)/mg, split(' ', $1)) ],
+      admin_mail => [ if_(cat_($file) =~ /^\s*err_html_text\s+(.*)/mg, split(' ', $1)) ] };
+}
+
 sub read_tmdns_conf {
     my ($file) = @_;
     local *F; open F, $file or die "cannot open file $file: $!";
