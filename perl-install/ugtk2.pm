@@ -885,6 +885,7 @@ sub new {
 
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window($title);
+	$o->{rwindow}->set_icon(gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png"));
 	$o->{rwindow}->set_position('center-on-parent');
 
 	if ($::isInstall) {
