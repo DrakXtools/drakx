@@ -15,8 +15,7 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	my $dest = $orig;
 	$dest =~ s|^$prefix|$light_prefix|;
 
-	my $dir = dirname($dest);
-	mkdir_p($dir);
+	mkdir_p(dirname($dest));
 
 	if (-l $orig) {
 	    symlink readlink($orig), $dest;
@@ -28,14 +27,28 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	    symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
 	}
     }
+}
 
-    if ($live_name eq 'totem') {
-	foreach my $dir (chomp_(`cd $light_prefix ; find usr -type d`)) {
-	    foreach my $f (all("$prefix/$dir")) {
-		my $file = "$prefix/$dir/$f";
-		my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image/$dir/$f";
-		symlink $link, "$light_prefix/$dir/$f";
-	    }
+sub create_totem_links {
+    my ($live_name, $list) = @_;
+    my $light_prefix = $prefix . '_' . $live_name;
+
+    #- creating all the dirs, even when things are in the "always" tree
+    foreach my $orig (@$list) {
+	my $dest = $orig;
+	$dest =~ s|^$prefix|$light_prefix|;
+	mkdir_p(dirname($dest)) if ! (-e $dest || -l $dest);
+
+	if (-l $orig) {
+	    symlink readlink($orig), $dest;
+	}
+    }
+
+    foreach my $dir (chomp_(`cd $light_prefix ; find usr -type d`)) {
+	foreach my $f (all("$prefix/$dir")) {
+	    my $file = "$prefix/$dir/$f";
+	    my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image/$dir/$f";
+	    symlink $link, "$light_prefix/$dir/$f";
 	}
     }
 }
@@ -92,13 +105,13 @@ sub remove_light_tree {
 }
 
 my @always_list = chomp_(cat_('data/always.list'));
-my @boot_list = chomp_(cat_('data/boot.list'));
-my @totem_list = chomp_(cat_('data/totem.list'));
+my @boot_list_orig = chomp_(cat_('data/boot.list'));
+my @totem_list_orig = chomp_(cat_('data/totem.list'));
 
-@always_list = uniq(@always_list, intersection(\@boot_list, \@totem_list));
+@always_list = uniq(@always_list, intersection(\@boot_list_orig, \@totem_list_orig));
 
-@boot_list = difference2(\@boot_list, \@always_list);
-@totem_list = difference2(\@totem_list, \@always_list);
+my @boot_list = difference2(\@boot_list_orig, \@always_list);
+my @totem_list = difference2(\@totem_list_orig, \@always_list);
 
 remove_light_tree('always', \@always_list);
 remove_light_tree('boot', \@boot_list);
@@ -108,4 +121,5 @@ if (!@ARGV) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
+    create_totem_links('totem', \@totem_list_orig);
 }
