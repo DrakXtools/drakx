@@ -58,8 +58,8 @@ default mode: offer to configure autologin feature"),
 
 OPTIONS:
   --help            - print this help message.
-  --report          - program should be one of mandrake tools
-  --incident        - program should be one of mandrake tools"),
+  --report          - program should be one of mandrakelinux tools
+  --incident        - program should be one of mandrakelinux tools"),
            'drakconnect' => N_("[--add]
   --add             - \"add a network interface\" wizard
   --del             - \"delete a network interface\" wizard
@@ -82,7 +82,7 @@ OPTIONS:
            'draksec' => "[--debug]
 --debug: print debugging information",
            'drakTermServ' => N_("[OPTIONS]...
-Mandrake Terminal Server Configurator
+Mandrakelinux Terminal Server Configurator
 --enable         : enable MTS
 --disable        : disable MTS
 --start          : start MTS
