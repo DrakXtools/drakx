@@ -400,8 +400,9 @@ sub unpack_langs {
 }
 
 sub read {
-    my ($prefix) = @_;    
-    my %h = getVarsFromSh("$prefix/etc/sysconfig/i18n");
+    my ($prefix, $file) = @_;
+    $file ||= '/etc/sysconfig/i18n';
+    my %h = getVarsFromSh("$prefix$file");
     my $lang = $h{LC_MESSAGES} || 'en_US';
     my $langs = 
       cat_("$prefix/etc/rpm/macros") =~ /%_install_langs (.*)/ ? unpack_langs($1) : { $lang => 1 };
@@ -416,7 +417,8 @@ sub write_langs {
 }
 
 sub write { 
-    my ($prefix, $lang) = @_;
+    my ($prefix, $lang, $file, $no_console_stuff) = @_;
+    $file ||= "/etc/sysconfig/i18n";
 
     $lang or return;
 
@@ -426,26 +428,26 @@ sub write {
 	add2hash $h, { LANG => lang2LANG($lang), LANGUAGE => lang2LANGUAGE($lang) };
 
 	my $c = $charsets{lang2charset($lang) || ''};
-	if ($c) {
+	if ($c && !$no_console_stuff) {
 	    my $p = "$prefix/usr/lib/kbd";
 	    if ($c->[0]) {
-		add2hash $h, { SYSFONT => $c->[0] };
 		eval {
 		    cp_af("$p/consolefonts/$c->[0].psf.gz", "$prefix/etc/sysconfig/console/consolefonts");
+		    add2hash $h, { SYSFONT => $c->[0] };
 		};
 		$@ and log::l("missing console font $c->[0]");
 	    }
 	    if ($c->[1]) {
-		add2hash $h, { UNIMAP => $c->[1] };
 		eval {
 		    cp_af(glob_("$p/consoletrans/$c->[1]*"), "$prefix/etc/sysconfig/console/consoletrans");
+		    add2hash $h, { UNIMAP => $c->[1] };
 		};
 		$@ and log::l("missing console unimap file $c->[1]");
 	    }
 	    if ($c->[2]) {
-		add2hash $h, { SYSFONTACM => $c->[2] };
 		eval {
 		    cp_af(glob_("$p/consoletrans/$c->[2]*"), "$prefix/etc/sysconfig/console/consoletrans");
+		    add2hash $h, { SYSFONTACM => $c->[2] };
 		};
 		$@ and log::l("missing console acm file $c->[2]");
 	    }
@@ -453,7 +455,7 @@ sub write {
 	}
 	add2hash $h, $xim{$lang};
     }
-    setVarsInSh("$prefix/etc/sysconfig/i18n", $h);
+    setVarsInSh("$prefix$file", $h);
 }
 
 sub load_mo {
