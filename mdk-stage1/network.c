@@ -640,8 +640,10 @@ enum return_type nfs_prepare(void)
 		results = ask_from_entries_auto("Please enter the name or IP address of your NFS server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
-		if (results != RETURN_OK)
+		if (results != RETURN_OK || streq(answers[0], "")) {
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return nfs_prepare();
+		}
 		
 		nfsmount_location = malloc(strlen(answers[0]) + strlen(answers[1]) + 2);
 		strcpy(nfsmount_location, answers[0]);
@@ -706,8 +708,10 @@ enum return_type ftp_prepare(void)
 						"the directory containing the " DISTRIB_NAME " Distribution, "
 						"and the login/pass if necessary (leave login blank for anonymous).",
 						questions, &answers, 40, questions_auto, NULL);
-		if (results != RETURN_OK)
+		if (results != RETURN_OK || streq(answers[0], "")) {
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return ftp_prepare();
+		}
 
 		log_message("FTP: trying to connect to %s", answers[0]);
 
@@ -723,7 +727,6 @@ enum return_type ftp_prepare(void)
 			results = RETURN_BACK;
 			continue;
 		}
-
 		strcpy(location_full, answers[1]);
 		strcat(location_full, get_ramdisk_realname());
 
@@ -790,8 +793,10 @@ enum return_type http_prepare(void)
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
-		if (results != RETURN_OK)
+		if (results != RETURN_OK || streq(answers[0], "")) {
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return http_prepare();
+		}
 
 		strcpy(location_full, answers[1]);
 		strcat(location_full, get_ramdisk_realname());
