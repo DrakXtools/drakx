@@ -431,7 +431,7 @@ sub load_mo {
 	my $f = "$localedir/$_/$suffix";
 	-s $f and return $_;
 
-	if ($::isInstall) {
+	if ($::isInstall && common::usingRamdisk()) {
 	    # cleanup
 	    eval { commands::rm("-r", $localedir) };
 	    eval { commands::mkdir_("-p", dirname("$localedir/$_/$suffix")) };
