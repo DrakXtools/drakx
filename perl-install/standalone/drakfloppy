@@ -36,29 +36,6 @@ use ugtk qw(:helpers);
 init Gtk;
 Gtk->set_locale;
 
-#-------------------------------------------------------------
-# i18n routines
-# IMPORTANT: next two routines have to be redefined here to
-#         get correct namespace (drakconf instead of libDrakX)
-#         (This version is now UTF8 compliant - Sg 2001-08-18)
-#-------------------------------------------------------------
-
-#sub _ {
-#    my $s = shift @_; my $t = translate($s);
-#    sprintf $t, @_;
-#}
-
-#sub translate {
-#    my ($s) = @_;
-#    $s ? c::dgettext('libDrakX', $s) : '';
-#}
-
-if ($::isEmbedded) {
-  print "EMBED\n";
-  print "XID : $::XID\n";
-  print "CCPID :  $::CCPID\n";
-}
-
 $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
