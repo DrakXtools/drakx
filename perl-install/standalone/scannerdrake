@@ -42,31 +42,42 @@ $wait = undef;
 (@f) ? auto() : manual();
 quit();
 
+sub removeverticalbar {
+    my ($s) = @_;
+    $s =~ s/\|/ /g;
+    return $s; 
+}
+
 sub auto {
-    foreach (@f) { 
+    #use Data::Dumper;
+    #print Dumper (@f);
+    foreach (@f) {
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", $name));
-		return;
+		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
+		next;
 	    }
-	    $in->ask_yesorno('scannerdrake',N("%s found on %s, configure it?",$name,$_->{port}),1) or manual();
-	    tryConfScanner($name, $_->{port});
+	    if ($in->ask_yesorno('scannerdrake',N("%s found on %s, configure it automatically?",removeverticalbar($name),$_->{port}),1)) {
+		tryConfScanner($name, $_->{port}) or manual();
+	    } else {
+		manual();
+	    }
 	} else {
-	    $in->ask_yesorno('scannerdrake',N("%s is not in the scanner database, configure it manually?", $_->{val}{DESCRIPTION}),1) and manual();
+	    $in->ask_yesorno('scannerdrake',N("%s is not in the scanner database, configure it manually?", removeverticalbar($_->{val}{DESCRIPTION})),1) and manual();
 	}
     }
 }
 
 sub manual {
     my $s = $in->ask_from_treelist('scannerdrake', N("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '') or return;
-    return if $s eq ' None';
+    return 1 if $s eq ' None';
     if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
-	$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", $s));
-	return;
+	$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($s)));
+	return 1;
     }
-    tryConfScanner($s);
+    return tryConfScanner($s);
 }
 
 sub dynamic {
@@ -76,10 +87,12 @@ sub dynamic {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", $name));
-		return;
+		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
+		next;
 	    }
-	    scanner::confScanner($name, $_->{port}) unless $scanner::scannerDB->{$model}{flags}{unsupported};
+	    scanner::confScanner($name, $_->{port});
+	} else {
+	    $in->ask_warn('scannerdrake', N("The %s is not known by this version of scannerdrake.", removeverticalbar($name)));
 	}
     }
 }
@@ -88,35 +101,52 @@ sub tryConfScanner {
     # take care if interactive output is needed (unsupported, parallel..)
     my ($model, $port) = @_;
     if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
-	$in->ask_warn('scannerdrake', N("This %s scanner is unsupported", $model));
-	return;
-    }
-    # if ($scanner::scannerDB->{$model}{driver} =~ /Parport/) {
-    # 	$in->ask_warn('scannerdrake', N("This %s scanner uses parallel port, which is unsupported for the moment", $model));
-    # 	return;
-    #     }
-    if ($scanner::scannerDB->{$model}{driver} =~ /SCSI/) {
-     	#$in->ask_warn('scannerdrake', N("This %s scanner uses parallel port, which is unsupported for the moment", $model));
-     	#return;
+	$in->ask_warn('scannerdrake', N("The %s is unsupported", 
+					removeverticalbar($model)));
+	return 0;
     }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) {
-	$port = '/dev/sg0';
+	$port = '/dev/usb/scanner0';
 	$in->ask_from('scannerdrake',
-		      N("Scannerdrake was not able to detect your %s scanner.\nPlease select the device where your scanner is attached", $model),
+		      N("Scannerdrake was not able to detect your %s.\nPlease select the device where your scanner is attached", removeverticalbar($model)),
 		      [
-		       { label => N("choose device"), val => \$port, list => ['/dev/sg0', '/dev/sg1', '/dev/sg2', '/dev/sg3', '/dev/sg4' ], not_edit => 0, sort => 1 },
-		      ],
-		     ) or manual();
+		       { label => N("choose device"), 
+			 val => \$port,
+			 list => ['/dev/scanner', 
+				  '/dev/usb/scanner0',
+				  '/dev/usb/scanner1',
+				  '/dev/usb/scanner2',
+				  'libusb:001:001',
+				  'libusb:001:002',
+				  'libusb:001:003',
+				  'libusb:001:004',
+				  'libusb:001:005',
+				  'libusb:001:006',
+				  'libusb:001:007',
+				  'libusb:001:008',
+				  'libusb:001:009',
+				  'libusb:001:010', 
+				  '/dev/sg0',
+				  '/dev/sg1',
+				  '/dev/sg2',
+				  '/dev/sg3',
+				  '/dev/sg4',
+				  '/dev/parport0',
+				  '/dev/parport1',
+				  '/dev/parport2',
+				  '/dev/pt_drv'], 
+			 not_edit => 0, sort => 1 },
+		       ],
+		      ) or manual();
     }
-
-    if ($scanner::scannerDB->{$model}{server} =~ /printerdrake/) {
-     	$in->ask_warn('scannerdrake', N("This %s scanner must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", $model));
-     	return;
+    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/) {
+     	$in->ask_warn('scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", removeverticalbar($model)));
+     	return 0;
     }
     scanner::confScanner($model,$port);
     $in->ask_warn(N("Congratulations!"),
-		  N("Your %s scanner has been configured.\nYou may now scan documents using ``XSane'' from Multimedia/Graphics in the applications menu.", $model));
-    
+		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+    return 1;
 }
 
 sub quit {

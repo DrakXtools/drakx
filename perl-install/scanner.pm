@@ -28,39 +28,46 @@ use standalone;
 use common;
 use detect_devices;
 use log;
-
+use handle_configs;
 
 my $_sanedir = "$::prefix/etc/sane.d";
 my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
-my $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
+$scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
     $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
-    output("$_sanedir/$a.conf", (join "\n", @{$scannerDB->{$model}{lines}}));
-    substInFile { s/\$DEVICE/$port/ } "$_sanedir/$a.conf";
+    my @driverconf = cat_("$_sanedir/$a.conf");
+    my @configlines = @{$scannerDB->{$model}{lines}};
+    (s/\$DEVICE/$port/) foreach @configlines;
+    (handle_configs::set_directive(\@driverconf, $_)) foreach @configlines;
+    output("$_sanedir/$a.conf", @driverconf);
     add2dll($a);
 }
 
 sub add2dll {
     return if member($_[0], chomp_(cat_("$_sanedir/dll.conf")));
-    append_to_file("$_sanedir/dll.conf", "$_[0]\n");
+    my @dllconf = cat_("$_sanedir/dll.conf");
+    handle_configs::add_directive(\@dllconf, $_[0]);
+    output("$_sanedir/dll.conf", @dllconf);
 }
 
 sub detect {
     my ($i, @res) = 0;
     foreach (grep { $_->{driver} =~ /scanner/ } detect_devices::usb_probe()) {
+	use Data::Dumper;
+	print Dumper ($_);
 	#my ($manufacturer, $model) = split '\|', $_->{description};
 	#$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
 	$_->{description} =~ s/Seiko\s+Epson/Epson/i;
-	push @res, { port => "/dev/usb/scanner$i", val => { #CLASS => 'SCANNER',
-							    #MODEL => $model,
-							    #MANUFACTURER => $manufacturer,
+	push @res, { port => "/dev/usb/scanner$i", val => { CLASS => 'SCANNER',
+							    MODEL => $model,
+							    MANUFACTURER => $manufacturer,
 							    DESCRIPTION => $_->{description},
-							    #id => $_->{id},
-							    #vendor => $_->{vendor},
+							    id => $_->{id},
+							    vendor => $_->{vendor},
 							  } };
 	++$i;
     }
