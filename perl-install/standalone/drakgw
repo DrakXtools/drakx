@@ -261,7 +261,7 @@ my $start_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[0] ||= "1
 my $end_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[1] ||= "253";
 my $default_lease = network::network::read_dhcpd_conf()->{max_lease_time}[0] ||= "21600";
 my $max_lease = network::network::read_dhcpd_conf()->{default_lease_time}[0] ||= "43200";
-my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{nameserver}[0] ||= "homeland.net";
+my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{search}[0] ||= "homeland.net";
 
 my $reconf_dhcp_server_intf = 1;
 
@@ -390,7 +390,7 @@ if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
 put_in_hash($shorewall ||= {}, {
     disabled => 0,
     net_interface => $card_netconnect,
-    if_(@cards > 1, loc_interface => [ grep { $_ ne $device } @cards ]),
+    loc_interface => [ grep { $_ ne $device } @cards ],
     masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
 });
 
