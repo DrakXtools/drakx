@@ -24,6 +24,8 @@ use common;
 use fs;
 use fsedit;
 use run_program;
+use partition_table qw(:types);
+use swap;
 use log;
 use lang;
 use Digest::MD5 qw(md5_hex);
@@ -179,7 +181,7 @@ sub init {
 	install2::handleI18NClp();
     }
 
-    output('/etc/mtab', '');
+    unlink('/etc/mtab'); output('/etc/mtab', '');
     touch '/var/run/rebootctl';
 
 drakx_stuff:
@@ -578,9 +580,12 @@ sub install2::startMove {
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
     foreach (fsedit::get_really_all_fstab($o->{all_hds})) {
-	$_->{mntpoint} && !$_->{isMounted} && $_->{options} !~ /\bnoauto\b/ or next;
-	mkdir_p($_->{mntpoint});
-	run_program::run('mount', $_->{mntpoint});
+	if (isSwap($_)) {
+	    eval { swap::swapon($_->{device}) };
+	} elsif ($_->{mntpoint} && !$_->{isMounted} && $_->{options} !~ /\bnoauto\b/) {
+	    mkdir_p($_->{mntpoint});
+	    run_program::run('mount', $_->{mntpoint});
+	}
     }
     
     install_TrueFS_in_home($o);
