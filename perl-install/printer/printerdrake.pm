@@ -3316,7 +3316,8 @@ sub install_spooler {
     my ($printer, $in, $upNetwork) = @_;
     return 1 if $::testing;
     my $spooler = $printer->{SPOOLER};
-    # If the user refuses to install the spooler in high or paranoid security level, exit.
+    # If the user refuses to install the spooler in high or paranoid
+    # security level, exit.
     return 0 unless security_check($printer, $in, $spooler);
     return 1 if $spooler !~ /^(cups|lpd|lprng|pqd)$/; # should not happen
     my $w = $in->wait_message(N("Printerdrake"), N("Checking installed software..."));
@@ -3324,12 +3325,14 @@ sub install_spooler {
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
     my $packages = $spoolers{$spooler}{packages2rm};
     if ($packages && files_exist($packages->[1])) {
+	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
         $in->do_pkgs->remove_nodeps($packages->[0]);
     }
 
     $packages = $spoolers{$spooler}{packages2add};
     if ($packages && !files_exist(@{$packages->[1]})) {
+	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
         $in->do_pkgs->install(@{$packages->[0]});
     }
@@ -3338,7 +3341,6 @@ sub install_spooler {
     
     # Start the network (especially during installation), so the
     # user can set up queues to remote printers.
-    # (especially during installation)
 
     $upNetwork and do {
         &$upNetwork(); 
@@ -3427,13 +3429,13 @@ sub setup_default_spooler {
 	# has no raw queue)
 	%printer::main::thedb = ();
 	assure_default_printer_is_set($printer, $in);
+	# Configure the current printer queues in applications
+	my $_w =
+	    $in->wait_message(N("Printerdrake"),
+			      N("Configuring applications..."));
+	printer::main::configureapplications($printer);
+	undef $_w;
     }
-    # Configure the current printer queues in applications
-    my $_w =
-	$in->wait_message(N("Printerdrake"),
-			  N("Configuring applications..."));
-    printer::main::configureapplications($printer);
-    undef $_w;
     # Save spooler choice
     printer::default::set_spooler($printer);
     return $printer->{SPOOLER};
@@ -3551,9 +3553,16 @@ sub main {
         configure_new_printers($printer, $in, $upNetwork);
 
 	# Make sure that default printer is registered
-	if ($nodefault) {
+	if ($nodefault && $printer->{DEFAULT}) {
 	    printer::default::set_printer($printer);
 	}
+
+	# Configure the current printer queues in applications
+	my $_w =
+	    $in->wait_message(N("Printerdrake"),
+			      N("Configuring applications..."));
+	printer::main::configureapplications($printer);
+	undef $_w;
 
 	# Mark this part as done, it should not be done a second time.
 	if ($::isInstall) {
