@@ -119,12 +119,10 @@ my $backup_user = 1;
 my $backup_daemon = 1;
 my $backup_sys_cvs = 1;
 my $what_no_browser = 1;
-my $remember_pass = 0;
 my $cdrw = 0;
 my $net_proto= '';
 my $host_path = '';
 my $login_user = '';
-my $passwd_user= '';
 my $net_daemon = 0;
 my $hd_daemon = 0;
 my $cd_daemon = 0;
@@ -184,12 +182,11 @@ sub save_conf_file {
 		     "CD_TIME=$cd_time\n",
 		     "DAEMON_TIME_SPACE=$when_space\n",
 		     "CDRW_DEVICE=$cd_devive\n",
+		     "LOGIN=$login_user\n",
 		     "HOST_NAME=$host_name\n"
 		     );
 
     $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
-    $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ;
-    $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
     $net_daemon and push @cfg_list, "NET_DAEMON\n" ;
     $hd_daemon and push @cfg_list, "HD_DAEMON\n" ;
     $cd_daemon and push @cfg_list, "CD_DAEMON\n" ;
@@ -198,7 +195,6 @@ sub save_conf_file {
     $where_cd and  push @cfg_list, "USE_CD\n" ;
     $where_net and  push @cfg_list, "USE_NET\n" ;
     $cdrw and push @cfg_list, "CDRW\n"; 
-    $remember_pass and push @cfg_list, "REMEMBER_PASS\n" ;
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
     $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
@@ -257,11 +253,9 @@ sub read_conf_file {
 	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0;  }
 	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
 	    if (/^CDRW/)           { $cdrw = 1; }
-	    if (/^REMEMBER_PASS/)  { $remember_pass = 1; }
 	    if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_; }
 	    if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_; } 
-	    if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_; $remember_pass = 1; }
-	    if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1; }
+	    if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_; }
 	    if (/^NET_DAEMON/)	   { $net_daemon = 1; }
 	    if (/^HD_DAEMON/)	   { $hd_daemon = 1; }
 	    if (/^CD_DAEMON/)	   { $cd_daemon = 1; }
@@ -644,28 +638,15 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
 					      0, my $login_user_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer your passord"),
-					      0, my $passwd_user_entry = new Gtk::Entry(),
-					      0, _(""),
-					      ),
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, " ",
-					      0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
-					      0, _(""),
-					      ),
 				  );
     $combo_where_net_proto->entry->set_text($net_proto);
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
-    $passwd_user_entry->set_visibility(0);
     $host_path_entry->set_text( $host_path );
     $host_name_entry->set_text( $host_name );
     $login_user_entry->set_text( $login_user );
-    $passwd_user_entry->set_text( $passwd_user );
     $host_name_entry->signal_connect( 'changed', sub { $host_name = $host_name_entry->get_text()});
     $host_path_entry->signal_connect( 'changed', sub { $host_path = $host_path_entry->get_text()});
     $login_user_entry->signal_connect( 'changed', sub { $login_user = $login_user_entry->get_text()});
-    $passwd_user_entry->signal_connect( 'changed', sub { $passwd_user = $passwd_user_entry->get_text()});
 
     my $adj = new Gtk::Adjustment 500.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
@@ -837,7 +818,6 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
     foreach ([$check_what_sys, \$backup_sys], 
 	     [$check_what_cvs, \$backup_sys_cvs], 
 	     [$check_what_browser, \$what_no_browser], 
-	     [$check_remember_pass, \$remember_pass], 
 	     [$check_cdrw, \$cdrw], 
 	     [$check_where_net_daemon, \$net_daemon], 
 	     [$check_where_hd_daemon, \$hd_daemon],
