@@ -79,7 +79,12 @@ my %first = ('frame' => new Gtk2::Frame(N("first step creation")),
                  'combo' => { 
                      'res' => ['800x600', '1024x768', '1280x1024'],
                      'name' => [ $theme{name} , giv_exist_thm() ]
-                     }
+                     },
+                          extras => {
+                                     res => {
+                                             noneditable => 1,
+                                            },
+                                    },
              },
              'pos' => [ 'name', 'res', 'file', 'boot_conf', #'save', #'kill'
 					],
