@@ -195,6 +195,7 @@ my $system_state;
 my $restore_state;
 my $save_path_entry;
 my $restore_find_path_entry;
+my $new_path_entry;
 my $pbar;
 my $pbar1;
 my $pbar2;
@@ -285,7 +286,8 @@ my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 my $nonroot_user = 0;
 my $not_warned = 0;
 my $media_problem = 0;
-my $cd_volname = '';
+my $vol_name = 'Drakbackup';
+my $good_restore_path = 1;
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root') {
@@ -570,7 +572,7 @@ sub save_conf_file {
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n" ; 
     $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n" ; 
     $media_erase and push @cfg_list, "MEDIA_ERASE\n" ; 
-	$media_erase and push @cfg_list, "MEDIA_EJECT\n" ; 
+	$media_eject and push @cfg_list, "MEDIA_EJECT\n" ; 
 	$multi_session and push @cfg_list, "MULTI_SESSION\n" ; 
     $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ; 
     $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
@@ -730,6 +732,7 @@ sub show_warning {
 	my ($mode, $warning) = @_;
 	$mode = __("WARNING") if ($mode eq "w");
 	$mode = __("FATAL") if ($mode eq "f");
+	$mode = __("INFO") if ($mode eq "i");
 	if ($interactive) {
 		$in->ask_warn('',translate("$mode").": ".translate("$warning"));
 	} else {
@@ -790,7 +793,7 @@ sub do_expect {
 
 #- temporarily disabled
 #	use Expect;
-show_warning("w", "Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 702-704,\n as well as 718,719. Then uncomment line 717."); 
+show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 702-704,\n as well as 718,719. Then uncomment line 717.")); 
 return(1);
 
 	#- for debugging set to 1
@@ -1022,17 +1025,33 @@ sub progress_timeout {
 	return(1);
 }
 
-sub build_iso {
+sub get_cd_device {
+	my $check_device = "/dev/cdrom";
+	get_cd_info();
+	foreach  (keys %cd_devices) {
+		if ($cd_devices{$_}{rec_dev} eq $cd_device) {
+			s/sr/scd/;
+			$check_device = "/dev/" . $_;				
+		}
+	}
+	$check_device;
+}
+
+sub build_iso {	
 	if (($multi_session) && ($session_offset ne '')) {
 		#- we want the volname for the catalog
-		#- as a normal user volname nor dd if=/dev/cdrom bs=1 skip=32808 count=32 work
-		#- try to read the base backup file name?
-		
+		my $check_device = get_cd_device();
+		open TMP, "volname $check_device 2>&1 |";
+		while (<TMP>) {
+			$vol_name = $_;		
+		}
+		close TMP;
+		$vol_name =~ s/[ \t]+\n$//; 			
 	} else {
-		$cd_volname = "Drakbackup" . $the_time;
+		$vol_name = "Drakbackup" . $the_time;
 	}
 	#this is safe to change the volname on rewrites, as is seems to get ignored anyway
-	my $command = "mkisofs -r -J -T -v -V '$cd_volname' ";
+	my $command = "mkisofs -r -J -T -v -V '$vol_name' ";
 	$command .= "-C $session_offset -M $cd_device " if (($multi_session) && ($session_offset ne ''));
 	$command .= "-o $save_path/drakbackup.iso @file_list_to_send_by_ftp";
 	spawn_progress($command, "Running mkisofs...");
@@ -1063,11 +1082,39 @@ sub build_tape {
 	
 	#- try to roll to the end of the data if we're not erasing
 	if (!$media_erase) {
+		$command = "mt -f $tape_device rewind";
+		spawn_progress($command, "Rewind to find tape label");
+		$command = "tar -tf $tape_device";
+		spawn_progress($command, "Check for label");
+		if ($log_buff =~ /drakbackup.label/) {
+			if ($tape_norewind) {
+				$command = "mt -f $tape_device rewind";
+				spawn_progress($command, "Rewind to get tape label");
+			}
+			$command = "pushd $cfg_dir; tar -xf $tape_device";
+			spawn_progress($command, "Reading tape label");		
+			my @volname = cat_("$cfg_dir/drakbackup.label");
+			$vol_name = $volname[0];
+		}
 		$command = "mt -f $tape_device eod"; 
 		spawn_progress($command, "Running mt to find eod");
 	} else {
 		$command = "mt -f $tape_device rewind"; 
-		spawn_progress($command, "Running mt to rewind");	
+		spawn_progress($command, "Running mt to rewind");		
+		# make a tape label for the catalog
+		# if we're using the rewinding device, change modes briefly
+		if (!$tape_norewind) {
+			$tape_device =~ s/\/st/\/nst/;
+		}
+		$vol_name = "Drakbackup" . $the_time;
+		my $f = "$cfg_dir/drakbackup.label";
+		output($f, $vol_name);
+		$command = "pushd $cfg_dir; tar -cf $tape_device drakbackup.label;";
+		spawn_progress($command, "Creating tape label");
+		unlink $f;
+		if (!$tape_norewind) {
+			$tape_device =~ s/\/nst/\/st/;
+		}
 	}
 	
 	#- do the backup
@@ -1327,11 +1374,11 @@ sub build_backup_files {
 	
 	#- write our catalog file
 	if (!$media_problem) {
-		my $catalog = "HD:localhost:$save_path";
-		$catalog = "$net_proto:$host_name:$host_path" if ($net_proto ne '');
-		$catalog = "CD:$cd_volname:$cd_device" if ($where_cd);
-		$catalog = "Tape:localhost:$tape_device" if ($where_tape);
-		$catalog .= ":" . substr($the_time, 1);
+		my $catalog = substr($the_time, 1); 
+		$catalog .= ":HD:localhost:$save_path" if (($net_proto eq '') && (!$where_tape) && (!$where_cd));
+		$catalog .= ":$net_proto:$host_name:$host_path" if ($net_proto ne '');
+		$catalog .= ":CD:$vol_name:$cd_device" if ($where_cd);
+		$catalog .= ":Tape:$vol_name:$tape_device" if ($where_tape);
 		$catalog .= ":System" if ($backup_sys);
 		$catalog .= ":I" if (($backup_sys_versions) && ($backup_sys));
 		$catalog .= ":F" if ((!$backup_sys_versions) && ($backup_sys));
@@ -1472,6 +1519,23 @@ sub filedialog_restore_find_path {
 	$restore_find_path_entry->set_text($file_dialog->get_filename()); 
 	$file_dialog->destroy() });
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
+    $file_dialog->show();
+}
+
+sub filedialog_set_path_to_find_restore {
+	my $file_dialog;
+	
+    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("Restore From Directory:")), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog->ok_button->signal_connect(clicked => sub { 
+		$path_to_find_restore = ($file_dialog->get_filename());
+		$new_path_entry->set_text($path_to_find_restore); 
+		$file_dialog->destroy() 
+	});
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
+	$file_dialog->hide_fileop_buttons();
+#	$file_dialog->file_list->hide();
+# doesn't hide the scrollbars
+#	$file_dialog->file_list_hscroll->hide();
     $file_dialog->show();
 }
 
@@ -1816,8 +1880,6 @@ sub advanced_where_cd {
     my ($previous_function) = @_;
     my $box_where_cd;
 	
-	#- probe installed device capabilities
-	#- reworked the GUI a bit appropriately
 	get_cd_info();
 	
 	my $combo_where_cd_device = new Gtk::Combo();
@@ -1959,7 +2021,7 @@ sub advanced_where_tape {
 
 	#- look for tape devices;
 	get_tape_info();
-	
+
 	my $combo_where_tape_device = new Gtk::Combo();
     $combo_where_tape_device->set_popdown_strings (@tape_devices) if (@tape_devices);  
 
@@ -2449,9 +2511,6 @@ sub wizard   {
 ################################################  RESTORE  ################################################  
 
 sub find_backup_to_restore {
-	# fixme: 
-	# faire test existance cd
-	# faire reponse si non existance de  $path_to_find_restore
     my @list_backup;
     my @list_backup_tmp2;
     my $to_put;
@@ -2461,7 +2520,8 @@ sub find_backup_to_restore {
 
     @user_backuped = ();
     -d $path_to_find_restore and @list_backup_tmp2 = all($path_to_find_restore);
-    foreach (@list_backup_tmp2) {
+    	
+	foreach (@list_backup_tmp2) {
 		s/\_base//gi;
 		s/\_incr//gi;
 		push @list_backup , $_;
@@ -2872,12 +2932,12 @@ sub restore_do2 {
     gtktext_insert($text, $restore_state);
     button_box_restore_main();
     
-    gtkpack($advanced_box,
-	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
-				   0, _("         Restore Configuration       "),
-				   1, createScrolledWindow($text),
-				   ),
-	    );
+	gtkpack($advanced_box,
+		$do_restore = gtkpack_(new Gtk::VBox(0,10),
+			0, _("         Restore Configuration       "),
+			1, createScrolledWindow($text),
+		),
+	);
     button_box_restore_end();
     fonction_env(\$do_restore, \&restore_do2, \&restore_box, "restore");
     $up_box->show_all();
@@ -2889,13 +2949,13 @@ sub restore_step_other {
     my $other_rest = cat_("$path_to_find_restore/list_other");
     gtktext_insert($text, $other_rest); 
     gtkpack($advanced_box,
-	    $retore_step_other = gtkpack_(new Gtk::VBox(0,10),
-					  1, new Gtk::VBox(0,10),
-					  1, createScrolledWindow($text),
-			      0, my $check_restore_other_sure = new Gtk::CheckButton(_("OK to restore the other files.")),
-					  1, new Gtk::VBox(0,10),
-					  ),
-	    );
+		$retore_step_other = gtkpack_(new Gtk::VBox(0,10),
+			1, new Gtk::VBox(0,10),
+			1, createScrolledWindow($text),
+			0, my $check_restore_other_sure = new Gtk::CheckButton(_("OK to restore the other files.")),
+			1, new Gtk::VBox(0,10),
+		),
+	);
     check_list([$check_restore_other_sure, \$restore_other]);
     fonction_env(\$retore_step_other, \&restore_step_other, \&restore_step2, "restore", \&restore_do);
     $up_box->show_all();
@@ -2924,28 +2984,43 @@ sub restore_step_user {
 					$restore_row->pack_end(new Gtk::VBox(1,5), 0, 0, 0);
 					$restore_row->pack_end($details, 0, 0, 0);
 					
-					if (grep $name_complet, @user_list_to_restore2)  {
-						gtkset_active($b, 1);
-						$check_user_to_restore{$name_complet}[1] = 1;
-					} else {
-						gtkset_active($b, 0);
-						$check_user_to_restore{$name_complet}[1] = 0;
+# this doesn't work - I don't understand why - but you end up with
+# everything selected when you hit the screen a second time, after selecting one				
+#					if (grep $name_complet, @user_list_to_restore2)  {
+#						gtkset_active($b, 1);
+#						$check_user_to_restore{$name_complet}[1] = 1;
+#					} else {
+#						gtkset_active($b, 0);
+#						$check_user_to_restore{$name_complet}[1] = 0;
+#					}
+
+# this doesn't work right either - returning to the screen only 1 is selected
+# yet several are scheduled to be restored
+					foreach (@user_list_to_restore2) {
+						if ($name_complet eq $_) {
+							gtkset_active($b, 1);
+							$check_user_to_restore{$name_complet}[1] = 1;
+						} else {
+							gtkset_active($b, 0);
+							$check_user_to_restore{$name_complet}[1] = 0;
+						}
 					}
 					$b->signal_connect(toggled => sub { 
 						if (!$check_user_to_restore{$name_complet}[1] ) {
 							$check_user_to_restore{$name_complet}[1] = 1;
 							if (!grep (/$name/, @user_list_to_restore2)) {
-								push @user_list_to_restore2, $name_complet }
-							} else {
-								$check_user_to_restore{$name_complet}[1] = 0;
-								foreach (@user_list_to_restore2) {
-									$var2 =  (split(' ',$_))[0];
-									if ($name ne $var2) {
-										push @user_list_tmp, $_;
-									}
-								}
-								@user_list_to_restore2 = @user_list_tmp;
+								push @user_list_to_restore2, $name_complet 
 							}
+						} else {
+							$check_user_to_restore{$name_complet}[1] = 0;
+							foreach (@user_list_to_restore2) {
+								$var2 =  (split(' ',$_))[0];
+								if ($name ne $var2) {
+									push @user_list_tmp, $_;
+								}
+							}
+							@user_list_to_restore2 = @user_list_tmp;
+						}
 					});
 					$details->signal_connect('clicked', sub { 
 						#- we're only passing a portion of the filename to
@@ -3138,11 +3213,16 @@ sub restore_step2 {
     my $sys_exist;
     my $user_exist;
 
-    if (-f "$save_path/backup_other*") { $other_exist = 1 } 
+	my $restore_info_path = $save_path;
+	$restore_info_path = $path_to_find_restore if (($where_hd) || ($where_cd));
+	my $info_prefix = "backup";
+	$info_prefix = "list" if (($where_net) || ($where_tape));
+	
+    if (-f "$restore_info_path/$info_prefix\_other*") { $other_exist = 1 } 
     else { my $other_exist = 0; $restore_other = 0 }
-    if (grep /\_sys\_/, grep /^backup/, all("$save_path/")) { $sys_exist = 1 } 
+    if (grep /\_sys\_/, grep /^$info_prefix/, all("$restore_info_path/")) { $sys_exist = 1 } 
     else { my $sys_exist = 0; $restore_sys = 0 }
-    if (grep /\_user\_/, grep /^backup/, all("$save_path/")) { $user_exist = 1 } 
+    if (grep /\_user\_/, grep /^$info_prefix/, all("$restore_info_path/")) { $user_exist = 1 } 
     else { my $user_exist = 0; $restore_user = 0 }
 
 # disabling this (sb) - very nicely wipes out your backup media if the user isn't very careful
@@ -3212,13 +3292,140 @@ sub restore_step2 {
     $up_box->show_all();
 }
 
+sub catalog_restore {
+	my $catalog_box;
+	my $label;
+	my $cat_entry;
+	my @restore_files;
+		
+	#- catalog info in tree view
+	my $tree_catalog = new Gtk::Tree();
+	
+	# file details in list widget
+	my $list_bu_files = new Gtk::List();
+	$list_bu_files->set_selection_mode('extended');	
+	
+	#- read the catalog
+	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
+
+	foreach (@catalog){
+		chop;
+		my $full_cat_entry = $_;
+		my @line_data = split(':', $_);
+		my $t = $line_data[0];
+		my $t_catalog = new_with_label Gtk::TreeItem($t);
+		gtksignal_connect($t_catalog, select => sub {
+		  	$cat_entry = $full_cat_entry;
+			@restore_files = ();
+			foreach my $filename (my @details = glob("$save_path/list*$t.txt")) {
+				my @contents = cat_($filename);
+				$list_bu_files->clear_items();
+				foreach (@contents) {
+					chop;
+					my $s = $_;
+					my $f_item = $list_bu_files->add(gtkshow(new Gtk::ListItem($s)));
+					gtksignal_connect($f_item, select => sub { push @restore_files, $s });
+					gtksignal_connect($f_item, deselect => sub { @restore_files = () });
+				}
+			}
+		});
+		$tree_catalog->append($t_catalog);
+		
+		my $c_detail = new Gtk::Tree();
+		$t_catalog->set_subtree($c_detail);
+		
+		my $indexer = 0;
+		foreach (@line_data) {
+			if ($indexer != 0) {
+				my $m;
+				$m = "Media: " if ($indexer == 1);
+				$m = "Label/Path/Host: " if ($indexer == 2);
+				$m = "Device: " if ($indexer == 3);
+				$m = "Type: Incremental" if ($_ eq "I");
+				$m = "Type: Full" if ($_ eq "F");
+				$m .= $_ if (($_ ne "I") && ($_ ne "F"));
+				my $c_det_cat = new_with_label Gtk::TreeItem($m);
+#				gtksignal_connect($k_det_nic, select => sub { $nic = $m;
+#								$kernel = $t; });
+				$c_detail->append($c_det_cat);
+				$c_det_cat->show();
+			}
+			$indexer++;
+		}		
+	}	
+		
+	gtkpack($advanced_box,
+		$catalog_box = gtkpack_(new Gtk::HBox(0,10),
+			0, new Gtk::VBox(0,10),
+				1, gtkpack_(new Gtk::VBox(0,5),
+					1, gtkpack_(new Gtk::VBox(0, 10),
+						1, createScrolledWindow($tree_catalog),
+						1, createScrolledWindow($list_bu_files),
+					),
+					0, gtkpack_(new Gtk::HBox(1, 10),
+						1, gtksignal_connect(new Gtk::Button(_("Restore Selected Catalog Entry")), clicked => sub { 
+show_warning("w", __("Under Development..."));
+return(0);
+							if ($cat_entry ne '') {
+								${$central_widget}->destroy();
+								button_box_restore(); 
+								restore_catalog_entry($cat_entry, '');
+							} 
+						}),
+						1, gtksignal_connect(new Gtk::Button(_("Restore Selected Files")), clicked => sub { 							
+							my $files = @restore_files;
+							#- grab the array before the widget clears it 
+							my @passed_files = @restore_files;
+show_warning("w", __("Under Development..."));
+return(0);
+							if (($cat_entry ne '') && ($files != 0)) {
+								${$central_widget}->destroy();
+								button_box_restore(); 
+								restore_catalog_entry($cat_entry, @passed_files);
+							}
+						}),
+					),
+					0, new Gtk::VBox(0,10),
+				),
+				0, new Gtk::VBox(0,10),
+			),
+		);		
+	
+	button_box_restore();		
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, "restore", \&restore_do);
+	$central_widget = \$catalog_box;	
+    $up_box->show_all();
+}
+
+sub restore_catalog_entry {
+	#FIXME
+	# we're working from a catalog entry, which means we know the
+	# the tar file wildcards and some info on where the backup was stored
+	# if it's a local device (tape, CD) - prompt for the media
+	# for tape, find how many other catalog entries had the same 
+	# label and calculate the record offset
+	# if it's remote storage, display what we know of the connection
+	# parameters and get the user's verification, then connect
+	
+	my ($cat_entry, @restore_files) = @_;
+	print "$cat_entry\n";
+	print "@restore_files\n";
+	catalog_restore();
+#	restore_do();
+}
+
 sub restore_box {
     my $retore_box;
     my $retore_box3;
     my $check_restore_sys;
     my $check_restore_user;
     my $check_restore_other;
-    $path_to_find_restore = $save_path;
+    
+	if ($good_restore_path) {
+		$path_to_find_restore = $save_path if ($where_hd);
+		$path_to_find_restore = "/mnt/cdrom" if ($where_cd);
+	}
+	
     find_backup_to_restore();
     button_box_restore_main();
 
@@ -3250,13 +3457,62 @@ sub restore_box {
 			),
 		);
     } else {
-		gtkpack($advanced_box,
-			$retore_box = gtkpack_(new Gtk::HBox(0,1),
-				message_norestorefile_box(),
-			),
-		),
+		${$central_widget}->destroy();
+		restore_find_media_box(),
 	}
     fonction_env(\$retore_box, \&restore_box, \&interactive_mode_box, "restore");
+    $central_widget = \$retore_box;
+	$up_box->show_all();
+}
+
+sub restore_find_media_box {
+
+    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
+	my $entry_new_path;
+	my $mount_media = 1;
+	$good_restore_path = 0;
+    my $message = "Unable to find backups to restore...\n";
+	$message .= "Verify that $path_to_find_restore is the correct path" if (($where_hd) && ($where_cd));
+	$message .= " and the CD is in the drive" if ($where_cd);
+	if (($where_tape) || ($net_proto ne '')) {
+		$message .= "Backups on unmountable media - Use Catalog to restore";
+		$mount_media = 0;
+	}
+	$message .= ".";
+	
+    gtkpack($advanced_box,
+		$box2 = gtkpack_(new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask), 
+				_($message),
+				new Gtk::VBox(0, 5),	
+			),
+			1, gtkpack(new Gtk::HBox(0, 15),
+				new Gtk::VBox(0, 5),
+				gtkpack(new Gtk::VBox(0, 10),
+					gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("CD in place - continue.")), clicked => sub {  
+						$good_restore_path = 1;
+						$box2->destroy();
+						interactive_mode_box("restore");
+					}), $mount_media),
+					$new_path_entry = gtkset_sensitive(new Gtk::Entry(), $mount_media),
+					gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Browse to new restore repository.")), clicked => sub {  
+						filedialog_set_path_to_find_restore();
+					}), $mount_media),
+					gtksignal_connect(new Gtk::Button(_("Restore From Catalog")), clicked => sub {  
+						$box2->destroy();
+						catalog_restore();
+					}),
+				),
+				new Gtk::VBox(0, 5),
+			),
+			1, new Gtk::VBox(0, 5),	
+		),
+	);
+	$new_path_entry->set_text($path_to_find_restore);
+
+	button_box_find_media($mount_media);  
     $up_box->show_all();
 }
 
@@ -3496,6 +3752,36 @@ sub button_box_restore {
 	);
 }
 
+sub button_box_find_media {
+
+	my ($mount_media) = @_;
+	
+	#- $central_widget is not known yet?
+    $button_box_tmp->destroy();
+
+    gtkpack($button_box,
+	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
+			1, gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
+				$box2->destroy();
+				interactive_mode_box();  
+			}),
+			1, gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub {
+				$box2->destroy();
+				adv_help(\&$current_widget,$custom_help);
+			}),
+			1, new Gtk::HBox(0, 0),
+			0, gtksignal_connect(new Gtk::Button(_("Previous")), clicked => sub { 
+				$box2->destroy();
+				interactive_mode_box();  
+			}),
+			1, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub {
+				$box2->destroy();
+				interactive_mode_box("restore"); 
+			}), $mount_media),
+		),
+	);
+}
+
 sub button_box_wizard {
     $button_box_tmp->destroy();
 
@@ -3540,27 +3826,6 @@ sub button_box_main {
 
 ################################################  MESSAGES  ################################################  
 
-sub message_norestorefile_box {
-    $box2->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
-    
-    gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-			     _("Please Build backup before to restore it...\n or verify that your path to save is correct."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
-    button_box_restore_main();
-    $central_widget = \$box2;
-    $up_box->show_all();    
-}
-
 sub send_mail_pb {
     $table->destroy();
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
@@ -3571,10 +3836,10 @@ sub send_mail_pb {
 			    0, gtkpack_(new Gtk::HBox(0, 15),	
 					0, new Gtk::VBox(0, 5),	
 					0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-					0, _("Error during sendmail
-  your report mail was not sent
+					0, _("Error during sendmail.
+  Your report mail was not sent.
   Please configure sendmail"),
-					),
+				),
 			    0, new Gtk::VBox(0, 5),	
 			    1, new Gtk::VBox(0, 5),	
 			    ),
@@ -3636,17 +3901,17 @@ sub message_norestore_box {
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please select data to restore..."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			1, new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				_("Please select data to restore..."),
+				new Gtk::VBox(0, 5),	
+			),
+			1, new Gtk::VBox(0, 5),	
+		),
+	);
     button_box_restore_main();
     $central_widget = \$box2;
     $up_box->show_all();    
@@ -3657,17 +3922,17 @@ sub message_noselect_box {
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please select media for backup..."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			1, new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				_("Please select media for backup..."),
+				new Gtk::VBox(0, 5),	
+			),
+			1, new Gtk::VBox(0, 5),	
+		),
+	);
     $previous_widget = \&wizard_step2;
     $next_widget = \&wizard_step2;
     $central_widget = \$box2;
@@ -3679,17 +3944,17 @@ sub message_noselect_what_box {
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please select data to backup..."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			1, new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				_("Please select data to backup..."),
+				new Gtk::VBox(0, 5),	
+			),
+		1, new Gtk::VBox(0, 5),	
+		),
+	);
     $previous_widget = \&wizard;
     $next_widget = \&wizard;
     $central_widget = \$box2;
@@ -3701,17 +3966,17 @@ sub message_noconf_box {
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
 
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("No configuration file found \nplease click Wizard or Advanced."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			1, new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				_("No configuration file found \nplease click Wizard or Advanced."),
+				new Gtk::VBox(0, 5),	
+			),
+			1, new Gtk::VBox(0, 5),	
+		),
+	);
     button_box_restore_main();
     $central_widget = \$box2;
     $up_box->show_all();    
@@ -3722,17 +3987,17 @@ sub message_underdevel {
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
 
     gtkadd($advanced_box,
-	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			    1, new Gtk::VBox(0, 5),	
-			    1, gtkpack(new Gtk::HBox(0, 15),	
-				       new Gtk::VBox(0, 5),	
-				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Under Devel ... please wait."),
-				       new Gtk::VBox(0, 5),	
-				       ),
-			    1, new Gtk::VBox(0, 5),	
-			    ),
-	   );
+		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			1, new Gtk::VBox(0, 5),	
+			1, gtkpack(new Gtk::HBox(0, 15),	
+				new Gtk::VBox(0, 5),	
+				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				_("Under Devel ... please wait."),
+				new Gtk::VBox(0, 5),	
+			),
+			1, new Gtk::VBox(0, 5),	
+		),
+	);
     $central_widget = \$box2;
     $up_box->show_all();    
 }
@@ -3755,39 +4020,39 @@ sub find_backup_to_put_on_cd {
     @data_backuped = ();
     -d $save_path and my @list_backup = all($save_path);
     foreach (grep /^backup_other/, @list_backup) {
-	$other_backuped = 1;
-	chomp;
-	my $tail  = (split(' ',`du $save_path/$_`))[0] ;
-	s/^backup_other//gi;
-	s/.tar.gz$//gi;
-	s/.tar.bz2$//gi;
-	my @user_date = split(/\_20/,$_);
-	my @user_date2 = split(/\_/,$user_date[1]);
-	my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
-	push @data_backuped , $to_put;
+		$other_backuped = 1;
+		chomp;
+		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		s/^backup_other//gi;
+		s/.tar.gz$//gi;
+		s/.tar.bz2$//gi;
+		my @user_date = split(/\_20/,$_);
+		my @user_date2 = split(/\_/,$user_date[1]);
+		my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+		push @data_backuped , $to_put;
     }
     foreach (grep /_sys_/, @list_backup) {
-	$sys_backuped = 1;
-	chomp;
-	my $tail  = (split(' ',`du $save_path/$_`))[0] ;
-	s/^backup_other//gi;
-	s/.tar.gz$//gi;
-	s/.tar.bz2$//gi;
-	my @user_date = split(/\_20/,$_);
-	my @user_date2 = split(/\_/,$user_date[1]);
-	my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
-	push @data_backuped , $to_put;
+		$sys_backuped = 1;
+		chomp;
+		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		s/^backup_other//gi;
+		s/.tar.gz$//gi;
+		s/.tar.bz2$//gi;
+		my @user_date = split(/\_20/,$_);
+		my @user_date2 = split(/\_/,$user_date[1]);
+		my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+		push @data_backuped , $to_put;
     }
     foreach (grep /user_/, @list_backup) {
-	chomp;
-	my $tail  = (split(' ',`du $save_path/$_`))[0] ;
-	s/^backup_user_//gi;
-	s/.tar.gz$//gi;
-	s/.tar.bz2$//gi;
-	my @user_date = split(/\_20/,$_);
-	my @user_date2 = split(/\_/,$user_date[1]);
-	my $to_put = "  $user_date[0],          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
-	push @data_backuped , $to_put;
+		chomp;
+		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		s/^backup_user_//gi;
+		s/.tar.gz$//gi;
+		s/.tar.bz2$//gi;
+		my @user_date = split(/\_20/,$_);
+		my @user_date2 = split(/\_/,$user_date[1]);
+		my $to_put = "  $user_date[0],          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+		push @data_backuped , $to_put;
     }
 }
 
@@ -3946,7 +4211,8 @@ sub build_backup_box {
 
 sub interactive_mode_box {
     $box2->destroy();
-
+	my ($mode) = @_;
+	
     read_conf_file();
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
@@ -3983,7 +4249,11 @@ sub interactive_mode_box {
     button_box_main();
     $custom_help = "main";
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all();
+	if ($mode eq "restore") {
+		${$central_widget}->destroy(); 
+		restore_box();
+	}    
 }
 
 sub interactive_mode {
@@ -4121,24 +4391,24 @@ sub adv_help {
 			"restore" =>
 			_("restore description:
  
-Only the most recent date will be used ,because with incremental 
-backups it is necesarry to restore one by one each older backups.
+Only the most recent date will be used, because with incremental 
+backups it is necessary to restore one by one each older backup.
 
-So if you don't like to restore a user please unselect all his
-check box.
+So if you don't want to restore a user please unselect all their
+check boxes.
 
-Otherwise, you are able to select only one of this
+Otherwise, you are able to select only one of these.
 
  - Incremental Backups:
 
 	The incremental backup is the most powerful 
-	option to use backup, this option allow you 
-	to backup all your data the first time, and 
-	only the changed after.
-	So you will be able during the restore
+	option to use. This option allows you to 
+	backup all of your data the first time, and 
+	only the changed data after.
+	So you will be able, during the restore
 	step, to restore your data from a specified
 	date.
-	If you have not selected this options all
+	If you have not selected this option all
 	old backups are deleted before each backup.    
 
 
