@@ -50,7 +50,7 @@ my $f = "/usr/X11R6/lib/X11/Cards";
 $in->standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 -e $f or die "install XFree86 first!\n";
 
-`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if $i->{skiptest};
+`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if !$i->{skiptest};
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
