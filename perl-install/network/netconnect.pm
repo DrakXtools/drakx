@@ -80,7 +80,7 @@ sub get_subwizard {
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, @devices, %eth_intf);
-      my (%connections, @connection_list);
+      my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
@@ -131,7 +131,7 @@ sub get_subwizard {
 
       my $lan_detect = sub {
           detect($netc->{autodetect}, 'lan');
-          modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
+          modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 1);
           @all_cards = network::ethernet::get_eth_cards();
           foreach my $card (@all_cards) {
               modules::remove_alias($card->[1]);
@@ -195,8 +195,7 @@ sub get_subwizard {
                            [ N("ADSL connection"),   "adsl"  ],
                            [ N("Cable connection"),  "cable" ],
                            [ N("LAN connection"),    "lan"   ],
-                           # if we ever want to split out wireless connection, we'd to split out modules between network/main and network/wlan:
-                           if_(0, [ N("Wireless connection"), "lan" ]),
+                           [ N("Wireless connection"), "lan" ],
                           );
                         
                         foreach (@connections) {
@@ -210,6 +209,7 @@ sub get_subwizard {
                     interactive_help_id => 'configureNetwork',
                     data => \@connection_list,
                     post => sub {
+                        $is_wireless = $cnx_type eq N("Wireless connection");
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         $type = $netcnx->{type} = $connections{$cnx_type};
                         if ($type eq 'cable') {
@@ -833,7 +833,7 @@ notation (for example, 1.2.3.4).")),
 /sbin/ifdown $netc->{NET_DEVICE}
 ), $netcnx->{type}) if $netcnx->{type} eq 'cable';
 
-                        return is_wireless_intf($module) ? "wireless" : "static_hostname";
+                        return $is_wireless ? "wireless" : "static_hostname";
                     },
                    },
                    
