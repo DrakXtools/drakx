@@ -229,7 +229,7 @@ int open_sock(int sock, int mode)
 static int xlate_scsi_name(bind_info_t *bind)
 {
     int i, fd, mode, minor;
-    u_long arg[2], id1, id2;
+    u_int arg[2], id1, id2;
 
     id1 = strtol(bind->name+3, NULL, 16);
     if ((bind->major == SCSI_DISK0_MAJOR) ||
@@ -1259,9 +1259,9 @@ static void adjust_resources(void)
 	if (ret != 0) {
 	    switch (al->adj.Resource) {
 	    case RES_MEMORY_RANGE:
-		sprintf(tmp, "memory %p-%p",
-			(char *)al->adj.resource.memory.Base,
-			(char *)al->adj.resource.memory.Base +
+		sprintf(tmp, "memory %#lx-%#lx",
+			al->adj.resource.memory.Base,
+			al->adj.resource.memory.Base +
 			al->adj.resource.memory.Size - 1);
 		break;
 	    case RES_IO_RANGE:

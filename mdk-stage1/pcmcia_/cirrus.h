@@ -48,11 +48,6 @@
 #define PD67_EXT_INDEX		0x2e	/* Extension index */
 #define PD67_EXT_DATA		0x2f	/* Extension data */
 
-#define pd67_ext_get(s, r) \
-    (i365_set(s, PD67_EXT_INDEX, r), i365_get(s, PD67_EXT_DATA))
-#define pd67_ext_set(s, r, v) \
-    (i365_set(s, PD67_EXT_INDEX, r), i365_set(s, PD67_EXT_DATA, v))
-
 /* PD6722 extension registers -- indexed in PD67_EXT_INDEX */
 #define PD67_DATA_MASK0		0x01	/* Data mask 0 */
 #define PD67_DATA_MASK1		0x02	/* Data mask 1 */
@@ -125,10 +120,6 @@
 #define PD67_EC1_INV_MGMT_IRQ	0x10
 #define PD67_EC1_PULLUP_CTL	0x20
 
-/* Fields in PD67_EXTERN_DATA */
-#define PD67_EXD_VS1(s)		(0x01 << ((s)<<1))
-#define PD67_EXD_VS2(s)		(0x02 << ((s)<<1))
-
 /* Fields in PD67_MISC_CTL_3 */
 #define PD67_MC3_IRQ_MASK	0x03
 #define PD67_MC3_IRQ_PCPCI	0x00
@@ -162,21 +153,5 @@
 
 /* Socket Number Register */
 #define PD6832_SOCKET_NUMBER		0x004c	/* 8 bit */
-
-/* Data structure for tracking vendor-specific state */
-typedef struct cirrus_state_t {
-    u_char		misc1;		/* PD67_MISC_CTL_1 */
-    u_char		misc2;		/* PD67_MISC_CTL_2 */
-    u_char		ectl1;		/* PD67_EXT_CTL_1 */
-    u_char		timer[6];	/* PD67_TIME_* */
-} cirrus_state_t;
-
-#define CIRRUS_PCIC_ID \
-    IS_PD6729, IS_PD6730, IS_PD6832
-
-#define CIRRUS_PCIC_INFO \
-    { "Cirrus PD6729", IS_CIRRUS|IS_PCI, ID(CIRRUS, 6729) },		\
-    { "Cirrus PD6730", IS_CIRRUS|IS_PCI, PCI_VENDOR_ID_CIRRUS, -1 },	\
-    { "Cirrus PD6832", IS_CIRRUS|IS_CARDBUS, ID(CIRRUS, 6832) }
 
 #endif /* _LINUX_CIRRUS_H */

@@ -97,7 +97,6 @@
 #define I365_CSC_GPI	0x10
 
 /* Flags for I365_ADDRWIN */
-#define I365_ADDR_MEMCS16	0x20
 #define I365_ENA_IO(map)	(0x40 << (map))
 #define I365_ENA_MEM(map)	(0x01 << (map))
 
@@ -131,24 +130,6 @@
 #define I365_MEM_WRPROT	0x8000	/* In offset high byte */
 #define I365_MEM_REG	0x4000
 
-#define I365_REG(slot, reg)	(((slot) << 6) | (reg))
-
-/* Default ISA interrupt mask */
-#define I365_ISA_IRQ_MASK	0xdeb8	/* irq's 3-5,7,9-12,14,15 */
-
-/* Device ID's for PCI-to-PCMCIA bridges */
-
-#ifndef PCI_VENDOR_ID_INTEL
-#define PCI_VENDOR_ID_INTEL		0x8086
-#endif
-#ifndef PCI_DEVICE_ID_INTEL_82092AA_0
-#define PCI_DEVICE_ID_INTEL_82092AA_0	0x1221
-#endif
-#ifndef PCI_VENDOR_ID_OMEGA
-#define PCI_VENDOR_ID_OMEGA		0x119b
-#endif
-#ifndef PCI_DEVICE_ID_OMEGA_82C092G
-#define PCI_DEVICE_ID_OMEGA_82C092G	0x1221
-#endif
+#define I365_REG(slot, reg)	(((slot) << 6) + reg)
 
 #endif /* _LINUX_I82365_H */

@@ -103,10 +103,4 @@
 /* Flags for VG469_EXT_MODE_B */
 #define VG469_MODE_B_3V		0x01	/* 3.3v for socket B */
 
-/* Data structure for tracking vendor-specific state */
-typedef struct vg46x_state_t {
-    u_char		ctl;		/* VG468_CTL */
-    u_char		ema;		/* VG468_EXT_MODE_A */
-} vg46x_state_t;
-
 #endif /* _LINUX_VG468_H */

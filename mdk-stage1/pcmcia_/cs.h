@@ -49,8 +49,8 @@ typedef struct adjust_t {
     u_int	Attributes;
     union {
 	struct memory {
-	    u_long	Base;
-	    u_long	Size;
+	    unsigned long	Base;
+	    unsigned long	Size;
 	} memory;
 	struct io {
 	    ioaddr_t	BasePort;
@@ -267,7 +267,7 @@ typedef struct modwin_t {
 /* For RequestWindow */
 typedef struct win_req_t {
     u_int	Attributes;
-    u_long	Base;
+    unsigned long	Base;
     u_int	Size;
     u_int	AccessSpeed;
 } win_req_t;
@@ -398,14 +398,6 @@ typedef struct mtd_bind_t {
 #ifdef __KERNEL__
 
 /*
- *  Calls to set up low-level "Socket Services" drivers
- */
-
-typedef int (*ss_entry_t)(u_int sock, u_int cmd, void *arg);
-extern int register_ss_entry(int nsock, ss_entry_t entry);
-extern void unregister_ss_entry(ss_entry_t entry);
-
-/*
  *  The main Card Services entry point
  */
 
@@ -434,30 +426,6 @@ enum service {
 extern int CardServices(int func, void *a1, void *a2, void *a3);
 #else
 extern int CardServices(int func, ...);
-#endif
-
-#ifdef __BEOS__
-#define SS_MODULE_NAME(s)	("busses/pcmcia/" s "/v1")
-#define MTD_MODULE_NAME(s)	("busses/pcmcia/" s "/v1")
-#define CS_CLIENT_MODULE_NAME	"bus_managers/pcmcia_cs/client/v1"
-typedef struct cs_client_module_info {
-    bus_manager_info	binfo;
-    int (*_CardServices)(int, ...);
-    int (*_MTDHelperEntry)(int, ...);
-    void (*_add_timer)(struct timer_list *);
-    void (*_del_timer)(struct timer_list *);
-} cs_client_module_info;
-#define CS_SOCKET_MODULE_NAME "bus_managers/pcmcia_cs/socket/v1"
-typedef struct cs_socket_module_info {
-    bus_manager_info	binfo;
-    int (*_register_ss_entry)(int, ss_entry_t);
-    void (*_unregister_ss_entry)(ss_entry_t);
-    void (*_add_timer)(struct timer_list *);
-    void (*_del_timer)(struct timer_list *);
-    int (*register_resource)(int, u_long, u_long);
-    int (*release_resource)(int, u_long, u_long);
-    int (*check_resource)(int, u_long, u_long);
-} cs_socket_module_info;
 #endif
 
 #endif /* __KERNEL__ */

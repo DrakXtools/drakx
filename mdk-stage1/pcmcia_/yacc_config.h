@@ -28,7 +28,7 @@
 #define NUMBER 284
 typedef union {
     char *str;
-    u_long num;
+    unsigned long num;
     struct device_info_t *device;
     struct card_info_t *card;
     struct mtd_ident_t *mtd;

@@ -38,8 +38,13 @@
 #endif
 #endif
 
-typedef u_short	socket_t;
+#ifdef __arm__
+typedef u_int   ioaddr_t;
+#else
 typedef u_short	ioaddr_t;
+#endif
+
+typedef u_short	socket_t;
 typedef u_int	event_t;
 typedef u_char	cisdata_t;
 typedef u_short	page_t;
