@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-02-08 03:59+0800\n"
+"PO-Revision-Date: 2005-03-12 15:09+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandrakelinux i18n Team <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -781,7 +781,7 @@ msgstr "您的电视信号是什么制式?"
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "其它"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -5382,8 +5382,7 @@ msgstr ""
 "指南''中的相应章节, 以获得关于防火墙设置的细节。\n"
 "\n"
 " * \"%s\"：如果您想要更改您的引导程序配置, 请单击此按钮。这仅适用于高级用户。"
-"请参考印刷文档或 Mandrakelinux Control\n"
-"Center中关于引导程序配置的帮助。\n"
+"请参考印刷文档或 Mandrakelinux 控制中心中关于引导程序配置的帮助。\n"
 "\n"
 " * \"%s\"：在此您可以精确调整要在您的计算机上运行哪些服务。如果您要将此计算机"
 "用作服务器, 那么应该复查这一设置。"
@@ -6632,7 +6631,7 @@ msgid ""
 msgstr "您的系统所剩余的空间不够进行安装或升级(%d > %d)"
 
 #: install_steps_interactive.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
@@ -6652,9 +6651,9 @@ msgid "Save"
 msgstr "保存"
 
 #: install_steps_interactive.pm:505
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "真实文件"
+msgstr "文件有错"
 
 #: install_steps_interactive.pm:581
 #, c-format
@@ -7775,11 +7774,11 @@ msgid ""
 msgstr "泰米尔(打字机布局)"
 
 #: keyboard.pm:305
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Kedmanee)"
-msgstr "泰国语键盘"
+msgstr "泰国语(Kedmanee)"
 
 #: keyboard.pm:306
 #, c-format
@@ -7789,11 +7788,11 @@ msgid ""
 msgstr "泰国语(TIS-820)"
 
 #: keyboard.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Pattachote)"
-msgstr "泰国语键盘"
+msgstr "泰国语(Pattachote)"
 
 #: keyboard.pm:311
 #, fuzzy, c-format
@@ -9472,9 +9471,9 @@ msgid "Any PS/2 & USB mice"
 msgstr "任何 PS/2 或 USB 鼠标"
 
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Explorer"
+msgstr "Microsoft Xbox 控制器 S"
 
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
@@ -9560,7 +9559,7 @@ msgstr ""
 #: network/adsl.pm:41 network/netconnect.pm:844
 #, c-format
 msgid "ADSL connection type:"
-msgstr "ADSL 连接类型: "
+msgstr "ADSL 连接类型:"
 
 #: network/drakfirewall.pm:12 share/compssUsers.pl:84
 #, c-format
@@ -9652,7 +9651,7 @@ msgstr ""
 #: network/drakfirewall.pm:175
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "您想要允许 Internet 连接到哪些服务?"
+msgstr "您想要本机上开放哪些服务?"
 
 #: network/drakfirewall.pm:176
 #, c-format
@@ -10470,24 +10469,24 @@ msgid "DHCP client"
 msgstr "DHCP 客户端"
 
 #: network/netconnect.pm:1041 standalone/drakconnect:389
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr "连接超时(秒)"
+msgstr "DHCP 超时(秒)"
 
 #: network/netconnect.pm:1042 standalone/drakconnect:392
-#, fuzzy, c-format
+#, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "DNS 服务器 IP"
+msgstr "从 DHCP 获取 DNS 服务器"
 
 #: network/netconnect.pm:1043
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr ""
+msgstr "从 DHCP 获取 YP 服务器"
 
 #: network/netconnect.pm:1044
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr ""
+msgstr "从 DHCP 获取 NTPD 服务器"
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -10496,9 +10495,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "IP 地址的格式应该是 1.2.3.4"
 
 #: network/netconnect.pm:1057 standalone/drakconnect:686
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask address should be in format 255.255.224.0"
-msgstr "网关地址的格式应该是 1.2.3.4"
+msgstr "子网掩码的格式应该是 255.255.224.0"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10574,7 +10573,7 @@ msgstr "比特率(每秒比特数, b/s)"
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Use Wi-Fi Protected Access (WPA)"
-msgstr ""
+msgstr "使用无线访问保护(WPA)"
 
 #: network/netconnect.pm:1168
 #, c-format
@@ -10815,9 +10814,9 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "配置完成, 您想要应用设置吗?"
 
 #: network/netconnect.pm:1336
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "您是否希望一开机就启动连接?"
+msgstr "您是否希望允许用户启动连接?"
 
 #: network/netconnect.pm:1345
 #, c-format
@@ -11078,9 +11077,9 @@ msgid "maybe"
 msgstr "或许有用"
 
 #: pkgs.pm:474
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading file %s..."
-msgstr "正在发送文件..."
+msgstr "正在下载文件 %s..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11827,12 +11826,12 @@ msgstr "打印机自动检测(本地, TCP/Socket、SMB 打印机和设备 URI)"
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "修改网络打印机自动检测的超时"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "在此输入网络打印机自动检测的超时(以毫秒计)。"
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -11843,9 +11842,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "选项 %s 必须是整数！"
+msgstr "超时必须是正整数！"
 
 #: printer/printerdrake.pm:673
 #, c-format
@@ -12185,12 +12184,12 @@ msgstr "自动探测直接连接到本地网络的打印机"
 #: printer/printerdrake.pm:1091
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr "自动探测运行 Microsoft Windows 的机器连接的打印机"
+msgstr "自动检测运行 Microsoft Windows 的机器连接的打印机"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "自动检测"
+msgstr "不自动检测"
 
 #: printer/printerdrake.pm:1173
 #, c-format
@@ -12778,14 +12777,14 @@ msgstr ""
 #: printer/printerdrake.pm:2170
 #, c-format
 msgid "HPLIP"
-msgstr ""
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2114
 #: printer/printerdrake.pm:2270 printer/printerdrake.pm:2276
 #: printer/printerdrake.pm:2287
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2119
 #, c-format
@@ -12811,12 +12810,12 @@ msgstr "打印将只能在 %s 上进行。"
 #: printer/printerdrake.pm:2160
 #, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
+msgstr "无法为您的 %2$s 删除旧的 HPOJ 配置文件 %s!"
 
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "请手动删除文件，并重新启动 HPOJ。"
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
@@ -12824,9 +12823,9 @@ msgid "Checking device and configuring %s..."
 msgstr "正在检查并配置 %s..."
 
 #: printer/printerdrake.pm:2189
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "您将使用哪种协议?"
+msgstr "您想使用 HPLIP 设置哪个打印机?"
 
 #: printer/printerdrake.pm:2218 printer/printerdrake.pm:2331
 #, c-format
@@ -13525,20 +13524,20 @@ msgstr ""
 #: printer/printerdrake.pm:3843
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - 墨水容量/状态信息\n"
 
 #: printer/printerdrake.pm:3844
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - 喷头清洗\n"
 
 #: printer/printerdrake.pm:3845
 #, c-format
 msgid " - Print head alignment\n"
-msgstr ""
+msgstr " - 打印头对齐\n"
 
 #: printer/printerdrake.pm:3846
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
 msgstr " - 颜色校正\n"
 
@@ -23940,7 +23939,7 @@ msgstr "/自动检测 jaz 驱动器(_J)"
 #: standalone/harddrake2:188
 #, c-format
 msgid "/_Upload the hardware list"
-msgstr ""
+msgstr "/上传硬件列表(_U)"
 
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
@@ -24061,7 +24060,7 @@ msgstr "DVD"
 #: standalone/harddrake2:525
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
+msgstr "上传硬件列表"
 
 #: standalone/harddrake2:530
 #, c-format
@@ -24423,9 +24422,9 @@ msgid "Configure Network"
 msgstr "配置网络"
 
 #: standalone/net_applet:69
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "interfaces"
+msgstr "监视的接口"
 
 #: standalone/net_applet:78
 #, c-format
@@ -24444,9 +24443,9 @@ msgid "Get Online Help"
 msgstr "获得在线帮助"
 
 #: standalone/net_applet:177
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive intrusion detection"
-msgstr "打印机自动检测"
+msgstr "交互式检测入侵"
 
 #: standalone/net_applet:181
 #, c-format
@@ -24456,82 +24455,82 @@ msgstr "启动时自动调用"
 #: standalone/net_applet:230
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "%s 试图进行端口扫描攻击。"
 
 #: standalone/net_applet:231
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr ""
+msgstr "%s 服务已被 %s 攻击。"
 
 #: standalone/net_applet:232
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "%s 正在尝试密码破解攻击。"
 
 #: standalone/net_applet:240
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall: intrusion detected"
-msgstr "发现防火墙配置！"
+msgstr "活动的防火墙: 检测到了入侵"
 
 #: standalone/net_applet:251
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to blacklist the attacker?"
-msgstr "您要使用此特性吗?"
+msgstr "您是否想要将入侵者加入黑名单?"
 
 #: standalone/net_applet:265
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "总是黑名单(以后不再询问)"
 
 #: standalone/net_applet:268
-#, fuzzy, c-format
+#, c-format
 msgid "Attack details"
-msgstr "无细节"
+msgstr "攻击细节"
 
 #: standalone/net_applet:272
 #, c-format
 msgid "Attack time: %s"
-msgstr ""
+msgstr "攻击时间: %s"
 
 #: standalone/net_applet:273
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface: %s"
-msgstr "网卡"
+msgstr "网卡: %s"
 
 #: standalone/net_applet:274
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type: %s"
-msgstr "类型: %s"
+msgstr "攻击类型: %s"
 
 #: standalone/net_applet:275
-#, fuzzy, c-format
+#, c-format
 msgid "Protocol: %s"
-msgstr "协议"
+msgstr "协议: %s"
 
 #: standalone/net_applet:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker IP address: %s"
-msgstr "网关 IP 地址"
+msgstr "攻击者 IP 地址: %s"
 
 #: standalone/net_applet:277
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker hostname: %s"
-msgstr "回环文件名称: %s"
+msgstr "攻击者主机名: %s"
 
 #: standalone/net_applet:278
-#, fuzzy, c-format
+#, c-format
 msgid "Service attacked: %s"
-msgstr "服务和守护程序"
+msgstr "攻击的服务: %s"
 
 #: standalone/net_applet:279
-#, fuzzy, c-format
+#, c-format
 msgid "Port attacked: %s"
-msgstr "端口: %s"
+msgstr "攻击的端口: %s"
 
 #: standalone/net_applet:280
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "ICMP 攻击的类型: %s"
 
 #: standalone/net_monitor:61 standalone/net_monitor:66
 #, c-format
@@ -24893,12 +24892,12 @@ msgstr "端口: %s"
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (不支持)"
 
 #: standalone/scannerdrake:144
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%2$s 版本不支持 %1$s。"
+msgstr "%s 不支持 Linux。"
 
 #: standalone/scannerdrake:171 standalone/scannerdrake:185
 #, c-format
@@ -25032,14 +25031,14 @@ msgid "Searching for scanners..."
 msgstr "正在搜索扫描仪..."
 
 #: standalone/scannerdrake:383
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up kernel modules..."
-msgstr "内核模块。"
+msgstr "正在设置内核模块..."
 
 #: standalone/scannerdrake:390 standalone/scannerdrake:397
-#, fuzzy, c-format
+#, c-format
 msgid "Attention!"
-msgstr "自动检测"
+msgstr "小心!"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -25058,13 +25057,12 @@ msgid ""
 msgstr ""
 
 #: standalone/scannerdrake:394 standalone/scannerdrake:403
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"您的 %s 已经配置好了。\n"
-"现在您可以从应用程序菜单的“多媒体/图像”中使用“XSane”或“Kooka”来扫描文档。"
+"此后您就可以从应用程序菜单的“多媒体/图像”中使用“XSane”或“Kooka”来扫描文档了。"
 
 #: standalone/scannerdrake:398
 #, c-format
@@ -25453,15 +25451,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安装失败"
 
-#, fuzzy
-#~ msgid "MandrakeSoft Wizards"
-#~ msgstr "Mandrakesoft 向导"
-
-#~ msgid "No browser available! Please install one"
-#~ msgstr "没有可用的浏览器！请安装一个"
-
-#~ msgid ""
-#~ "No browser is installed on your system, Please install one if you want to "
-#~ "browse the help system"
-#~ msgstr ""
-#~ "在您的系统上没有安装浏览器。如果您想要浏览帮助系统的话, 请先安装一个"
