@@ -396,7 +396,6 @@ In case of doubt, select \"Remote CUPS server\"."),
 		if ($printer->{TYPE} eq 'CUPS') {
 		    #- hack to handle cups remote server printing,
 		    #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
-		    printer::poll_ppd_base(); #- make sure /etc/cups/cupsd.conf is generated before if any.
 		    my @cupsd_conf = printer::read_cupsd_conf();
 		    my ($server, $port);
 
@@ -430,10 +429,12 @@ _("Port") => \$port ],
 						   )) {
 			$server && $port and $server = "$server:$port";
 			if ($server) {
-			    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and undef $server } @cupsd_conf;
+			    @cupsd_conf = map { $server and s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and $server = '';
+						$_ } @cupsd_conf;
 			    $server and push @cupsd_conf, "\nBrowsePoll $server\n";
 			} else {
-			    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/ } @cupsd_conf;
+			    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
+						$_ } @cupsd_conf;
 			}
 		        printer::write_cupsd_conf(@cupsd_conf);
 		    }
