@@ -200,8 +200,13 @@ sub SIGHUP_daemon {
     } else {
 	$daemon = $service;
     }
-    # Send the SIGHUP
-    run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
+    if ($service eq "cups") {
+	# The current CUPS (1.1.13) dies on SIGHUP, to the normal restart.
+	restart_service($service);
+    } else {
+	# Send the SIGHUP
+	run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
+    }
     # CUPS needs some time to come up.
     if ($service eq "cups") {
 	wait_for_cups();
