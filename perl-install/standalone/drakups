@@ -28,11 +28,17 @@ sub writeconf() {
     log::explanations("Updating NUT configuration accordingly");
     $struct->writeConf($files{devices});
 
-    log::explanations("Updating NUT users configuration accordingly");
-    $users->writeConf($files{users});
+    if ($users) {
+        log::explanations("Updating NUT users configuration accordingly");
+        $users->writeConf($files{users});
+    }
 
     require services;
     services::restart("upsd");
+}
+
+sub read_nut_config() {
+    $struct = Libconf::Glueconf::NUT::Ups_conf->new($files{devices})
 }
 
 sub readDriversList() {
@@ -251,7 +257,7 @@ my @pages = (
                              remove => sub { },
                             },
                load => sub {
-                   $struct = Libconf::Glueconf::NUT::Ups_conf->new($files{devices});
+                   read_nut_config();
                    map { [ $_, @{$struct->{$_}}{qw(driver port)} ] } keys %$struct;
                },
                id => "ups",
@@ -310,7 +316,9 @@ $ugtk2::wm_icon = "drakups";
 $in->do_pkgs->ensure_is_installed('nut-server', '/etc/rc.d/init.d/upsd') if !$::testing;
 
 if (any { $_ eq '--wizard' } @ARGV) {
+    read_nut_config();
     add_device_wizard($in, $struct);
+    writeconf();
     $in->exit($@ ? 1 : 0);
 }
 
