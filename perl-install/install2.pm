@@ -142,7 +142,10 @@ sub selectInstallClass {
     installStepsCall($o, $auto, 'selectInstallClass', $clicked);
 
     if ($o->{isUpgrade}) {
-	$o->{keepConfiguration} and @{$o->{orderedSteps}} = grep { !/selectMouse|selectKeyboard|miscellaneous|setRootPassword|addUser|configureNetwork|installUpdates|summary|configureServices|configureX/ } @{$o->{orderedSteps}};
+	@{$o->{orderedSteps}} = uniq('doPartitionDisks', 'formatPartitions', @{$o->{orderedSteps}});
+
+	@{$o->{orderedSteps}} = difference2($o->{orderedSteps}, [ qw(selectMouse selectKeyboard miscellaneous formatPartitions setRootPassword addUser configureNetwork installUpdates summary configureServices configureX) ])
+	  if $o->{keepConfiguration};
     }
 }
 
