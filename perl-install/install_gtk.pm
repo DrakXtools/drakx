@@ -217,6 +217,83 @@ sub createXconf {
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
     symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
+if (arch() =~ /^ia64/) {
+     require Xconfigurator;
+     my ($card) = Xconfigurator::cardConfigurationAuto();
+     Xconfigurator::updateCardAccordingName($card, $card->{type}) if $card && $card->{type};
+    local *F;
+    open F, ">$file" or die "can't create X configuration file $file";
+    print F <<END;
+
+Section "Files"
+   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
+EndSection
+
+Section "InputDevice"
+    Identifier "Keyboard1"
+    Driver      "Keyboard"
+    Option "AutoRepeat"  "250 30"
+    Option "XkbDisable"
+
+    Option "XkbRules" "xfree86"
+    Option "XkbModel" "pc105"
+    Option "XkbLayout" ""
+EndSection
+
+Section "InputDevice"
+    Identifier  "Mouse1"
+    Driver      "mouse"
+    Option "Protocol"    "$mouse_type"
+    Option "Device"      "/dev/mouse"
+EndSection
+
+Section "Monitor"
+    Identifier "Generic|High Frequency SVGA, 1024x768 at 70 Hz"
+    VendorName "Unknown"
+    ModelName  "Unknown"
+    HorizSync  31.5-35.5
+    VertRefresh 50-70
+EndSection
+
+Section "Device"
+    Identifier "Generic VGA"
+    Driver     "vga"
+EndSection
+
+Section "Device"
+    Identifier  "device1"
+    VendorName  "Unknown"
+    BoardName   "Unknown"
+    Driver      "$card->{driver}"
+EndSection
+
+Section "Screen"
+    Identifier "screen1"
+    Device      "device1"
+    Monitor     "Generic|High Frequency SVGA, 1024x768 at 70 Hz"
+    DefaultColorDepth 16
+    Subsection "Display"
+        Depth       16
+        Modes       "800x600" "640x480"
+        ViewPort    0 0
+    EndSubsection
+EndSection
+
+Section "ServerLayout"
+    Identifier "layout1"
+    Screen     "screen1"
+    InputDevice "Mouse1" "CorePointer"
+    InputDevice "Keyboard1" "CoreKeyboard"
+EndSection
+
+END
+
+
+}
+else
+  {
+
+
     my $wacom;
     if ($wacom_dev) {
 	$wacom_dev = devices::make($wacom_dev);
@@ -353,6 +430,7 @@ Section "Screen"
     EndSubsection
 EndSection
 END
+}
 }
 #-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 

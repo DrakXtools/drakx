@@ -671,7 +671,7 @@ sub df {
     my ($blocksize, $size, $free);
     my $buf = ' ' x 20000;
     syscall_('statfs', $mntpoint, $buf) or return;
-    (undef, $blocksize, $size, $free, undef, undef) = unpack "L6", $buf;
+    (undef, $blocksize, $size, $free, undef, undef) = unpack "L!6", $buf;
     map { $_ * ($blocksize / 1024) } $size, $free;
 }
 

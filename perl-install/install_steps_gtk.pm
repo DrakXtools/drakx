@@ -74,6 +74,8 @@ sub new($$) {
 		if (/Mach64/) { @servers = qw(Mach64) }
 		elsif (/Permedia2/) { @servers = qw(3DLabs) }
 		else { @servers = qw(Xsun24) }
+	    } elsif (arch() =~ /ia64/) {
+		@servers= 'XFree86';
 	    } elsif (arch() eq "ppc") {
 	    	@servers = qw(Xpmac);
             }
@@ -81,7 +83,7 @@ sub new($$) {
 	    foreach (@servers) {
 		log::l("Trying with server $_");
 		my $dir = "/usr/X11R6/bin";
-		my $prog = /Xsun|Xpmac/ ? $_ : "XF86_$_";
+		my $prog = /Xsun|Xpmac|XFree86/ ? $_ : "XF86_$_";
 		unless (-x "$dir/$prog") {
 		    unlink $_ foreach glob_("$dir/X*");
 		    install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
