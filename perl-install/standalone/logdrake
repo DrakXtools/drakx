@@ -69,34 +69,34 @@ if ($::isEmbedded) {
 for (@ARGV) {
     /^--version$/ and die 'version: $Id$ '."\n";
     /^--help$/ and die 'logdrake [--version] [--file=myfyle] [--word=myword] [--explain=regexp] [--alert]';
-    /^--explain=(.*)$/ and do { $::isExplain = ($::Explain) = $1; $::isFile=1; $::File="/var/log/explanations"; next };
+    /^--explain=(.*)$/ and do { $::isExplain = ($::Explain) = $1; $::isFile = 1; $::File = "/var/log/explanations"; next };
     /^--file=(.*)$/ and do { $::isFile = ($::File) = $1; next };
     /^--word=(.*)$/ and do { $::isWord = ($::Word) = $1; next };
-    /^--alert$/ and do { alert_config(); quit(); };
+    /^--alert$/ and do { alert_config(); quit() };
 }
 
-$::isTail=1 if ($::isFile);
-$|= 1 if ($::isTail);
-my $h=chomp_(`hostname -s`);
+$::isTail = 1 if ($::isFile);
+$| = 1 if ($::isTail);
+my $h = chomp_(`hostname -s`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window->signal_connect( delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
-$window->set_title( _("logdrake") );
+$window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
+$window->set_title(_("logdrake"));
 $window->set_policy(1, 1, 1);
 $window->border_width (5) unless ($::isEmbedded);
-#$window->set_default_size( 540,460 );
+#$window->set_default_size(540,460);
 
 my $cal = gtkset_sensitive(new Gtk::Calendar(),0);
 my (undef,undef,undef,$mday) = localtime(time);
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
-my $cal_mode=0;
-my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for the selected day")), clicked =>sub{$cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode);});
+my $cal_mode = 0;
+my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for the selected day")), clicked =>sub{ $cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode) });
 
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q
-my @menu_items = ( 
+my @menu_items = (
 		  { path => _("/_File"), type => '<Branch>' },
 		  { path => _("/File/_New"), accelerator => _("<control>N"), callback => \&print_hello },
 		  { path => _("/File/_Open"), accelerator => _("<control>O"),callback => \&print_hello },
@@ -109,7 +109,7 @@ my @menu_items = (
 		  { path => _("/_Help"),type => '<LastBranch>' },
 		  { path => _("/Help/_About...") } 
 		 );
-my $menubar = get_main_menu( $window );
+my $menubar = get_main_menu($window);
 ######### menus end
 
 
@@ -147,23 +147,23 @@ my $darkgray = my_gtk::gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
     
 # Define global terms:
 # Define good notables:
-my @word_good=("starting\n", "Freeing", "Detected", "starting.", "accepted.\n", "authenticated.\n", "Ready", "active", "reloading", "saved;", "restarting", "ONLINE\n");
-my @word_warn=("dangling", "closed.\n", "Assuming", "root", "root\n", "exiting\n", "missing", "Ignored", "adminalert:", "deleting", "OFFLINE\n");
-my @word_bad=("bad");
-my @word_note=("LOGIN", "DHCP_OFFER", "optimized", "reset:", "unloaded", "disconnected", "connect", "Successful", "registered\n");
-my @line_good=("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
-my @line_warn=("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
-my @line_bad=("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
+my @word_good = ("starting\n", "Freeing", "Detected", "starting.", "accepted.\n", "authenticated.\n", "Ready", "active", "reloading", "saved;", "restarting", "ONLINE\n");
+my @word_warn = ("dangling", "closed.\n", "Assuming", "root", "root\n", "exiting\n", "missing", "Ignored", "adminalert:", "deleting", "OFFLINE\n");
+my @word_bad = ("bad");
+my @word_note = ("LOGIN", "DHCP_OFFER", "optimized", "reset:", "unloaded", "disconnected", "connect", "Successful", "registered\n");
+my @line_good = ("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
+my @line_warn = ("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
+my @line_bad = ("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
 
 # Define specifics:
-my @daemons=("named");
+my @daemons = ("named");
 
 # Now define what we want to use when:
 my $col_good = $green;
 my $col_warn = $yellow;
 my $col_bad = $red;
 my $col_note = $purple;
-my $col=$cyan;
+my $col = $cyan;
 
 ######### font and colors end
 
@@ -172,10 +172,10 @@ my %files = (
 	     "user" => { file => "/var/log/user.log", desc => _("User") },
 	     "messages" => { file => "/var/log/messages", desc => _("Messages") },
 	     "syslog" => { file => "/var/log/syslog", desc => _("Syslog") },
-	     "explanations" => { file => "/var/log/explanations", desc => _("Mandrake Tools Explanations")}
+	     "explanations" => { file => "/var/log/explanations", desc => _("Mandrake Tools Explanations") }
 );
 
-my $yy=gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("search")) , clicked => \&search),0);
+my $yy = gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("search")) , clicked => \&search),0);
 my $log_text = new Gtk::Text(undef, undef);
 my $refcount_search;
 #### far from window
@@ -194,7 +194,7 @@ gtkadd($window,
 						     gtkpack_(new Gtk::HBox(0,0),
 							      1, gtkadd(gtkset_border_width(new Gtk::Frame(_("Choose file")),2),
 									gtkpack (gtkset_border_width(new Gtk::VBox(0,0),0),
-										 map { ${"b_". $_} = gtksignal_connect(new Gtk::CheckButton($files{$_}{desc}), clicked=> sub{$refcount_search++;gtkset_sensitive($yy,$refcount_search)}) } keys %files,
+										 map { ${ "b_". $_ } = gtksignal_connect(new Gtk::CheckButton($files{ $_ }{desc}), clicked => sub{ $refcount_search++; gtkset_sensitive($yy,$refcount_search) }) } keys %files,
 										)
 								       ),
 							      0, gtkadd(gtkset_border_width(new Gtk::Frame(_("Calendar")),2),
@@ -211,7 +211,7 @@ gtkadd($window,
 					 createScrolledWindow($log_text)
 					)) : (1, $log_text),
 		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
-					      if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => sub {eval {alert_config()};  
+					      if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => sub { eval { alert_config() };  
 																	if ($@ =~ /wizcancel/) {
 																	        $::Wizard_no_previous = 1;
 																		$::Wizard_no_cancel = 1;
@@ -219,7 +219,7 @@ gtkadd($window,
 #																	        undef $::isWizard;
 																		$::WizardWindow->destroy if defined $::WizardWindow;
 																		undef $::WizardWindow;
-}; })),
+} })),
 			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
 			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
 			  )
@@ -250,21 +250,21 @@ sub search {
 	parse_file($::File);
     } else {
 	foreach (keys %files) {
-	    parse_file($files{$_}{file}) if ${$::{"b_". $_}}->active 
+	    parse_file($files{ $_ }{file}) if ${ $::{ "b_". $_ }}->active 
 	};
     }
     $log_text->thaw();
-    Gtk->main_iteration while Gtk->events_pending;    
+    Gtk->main_iteration while Gtk->events_pending;
 }
 
 sub parse_file {
   my $file = $_[0];
 
   $file =~ s/\.gz$//;
-  my $i=0;
+  my $i = 0;
   gtkadd(my $win_pb = (gtkset_modal new Gtk::Window(), 1),
 	 gtkpack(new Gtk::VBox(5,0), 
-		 " " . _("please wait, parsing file: %s", $files{$_}{desc}) . " ",
+		 " " . _("please wait, parsing file: %s", $files{ $_ }{desc}) . " ",
 		 my $pbar = new Gtk::ProgressBar()
 		)
 	);
@@ -280,10 +280,10 @@ sub parse_file {
 
   if ($cal_mode) {
       my ($year, $month, $day) = $cal->get_date();
-      $ey= $months[$month]."\\s{1,2}$day\\s.*$ey.*\n";
+      $ey = $months[$month]."\\s{1,2}$day\\s.*$ey.*\n";
   }
 
-  my @all=catMaybeCompressed ($file);
+  my @all = catMaybeCompressed ($file);
 
   if ($::isExplain) {
       my (@t, $t);
@@ -293,10 +293,10 @@ sub parse_file {
 	  last if !($t =~ /$::Explain/);
 	  push @t, $t;
       }
-      @all=reverse @t;
+      @all = reverse @t;
   }
 
-  my $taille= @all;
+  my $taille = @all;
   foreach (@all) {
       $i++;
       if ($i % 10) { 
@@ -304,9 +304,9 @@ sub parse_file {
 	  Gtk->main_iteration while Gtk->events_pending;
       }
       
-      if (($en eq "") and /$ey/i)     {logcolorize($_); next}
-      if ((! /$en/i) and /$ey/i)      {logcolorize($_); next}
-      if ((! /$en/i) and ($ey eq "")) {logcolorize($_); next}
+      if (($en eq "") and /$ey/i)     { logcolorize($_); next }
+      if ((! /$en/i) and /$ey/i)      { logcolorize($_); next }
+      if ((! /$en/i) and ($ey eq "")) { logcolorize($_); next }
   }
   $win_pb->destroy();
 
@@ -314,7 +314,7 @@ sub parse_file {
       open F, $file or die "E: $!";
       while (<F>) {}; #to prevent to output the file twice..
       $log_text->set_point($log_text->get_length());
-      my $timer = Gtk->timeout_add( 1000, \&input_callback);
+      my $timer = Gtk->timeout_add(1000, \&input_callback);
   }     
 }
 
@@ -330,7 +330,7 @@ sub logcolorize {
 
     # we get date & time if it is date & time (dmesg)
     s/(\D{3} .. \d\d:\d\d:\d\d )//;
-    $timestamp=$1;
+    $timestamp = $1;
     @rec = split;
 
     log_output($cyan,$timestamp,$b); # date & time if any...
@@ -345,7 +345,7 @@ sub logcolorize {
     # Extract PID if present
     if ($rec[1] =~ /\[(\d+)\]\:/) {
 	my($pid) = $1;
-	$rec[1]=~s/\[$1\]\:// ;
+	$rec[1] =~s/\[$1\]\:// ;
 	log_output ($green, $rec[1] ."[",$n);
 	log_output ($black, $pid,$b);
 	log_output ($green, "]: ",$n);
@@ -355,19 +355,19 @@ sub logcolorize {
     }
 
  
-    for ($therest=(2); $therest<=$#rec; $therest++) {
-	$col=$cyan;
+    for ($therest = (2); $therest<= $#rec; $therest++) {
+	$col = $cyan;
 
 	# Check for keywords to highlight
-	foreach (@word_good) { $col=$col_good if ($_ eq $rec[$therest]);}
-	foreach (@word_warn) { $col=$col_warn if ($_ eq $rec[$therest]);}
-	foreach (@word_bad)  { $col=$col_bad  if ($_ eq $rec[$therest]);}
-	foreach (@word_note) { $col=$col_note if ($_ eq $rec[$therest]);}
+	foreach (@word_good) { $col = $col_good if ($_ eq $rec[$therest]) }
+	foreach (@word_warn) { $col = $col_warn if ($_ eq $rec[$therest]) }
+	foreach (@word_bad)  { $col = $col_bad  if ($_ eq $rec[$therest]) }
+	foreach (@word_note) { $col = $col_note if ($_ eq $rec[$therest]) }
 	
  	# Watch for words that indicate entire lines should be highlighted
- 	#foreach (@line_good) { $col=$col_good if ($_ eq $rec[$therest]);}
- 	#foreach (@line_warn) { $col=$col_warn if ($_ eq $rec[$therest]);}
-	#foreach (@line_bad)  { $col=$col_bad  if ($_ eq $rec[$therest]);}
+ 	#foreach (@line_good) { $col = $col_good if ($_ eq $rec[$therest]) }
+ 	#foreach (@line_warn) { $col = $col_warn if ($_ eq $rec[$therest]) }
+	#foreach (@line_bad)  { $col = $col_bad  if ($_ eq $rec[$therest]) }
  	
 	log_output($col,"$rec[$therest] ",$n);
     }
@@ -390,17 +390,17 @@ sub alert_config {
     $::Wizard_pix_up = "wiz_drakgw.png";    # FIXME
     $::Wizard_title = _("Mail/SMS alert");
     
-    my $cron =q(#!/usr/bin/perl
+    my $cron = q(#!/usr/bin/perl
 # generated by logdrake
 use MDK::Common;
-my $r= "*** ". chomp_(`date`) . " ***\n";
+my $r = "*** ". chomp_(`date`) . " ***\n";
 
 );
 
 my $initdir = "/etc/init.d";
 
     my ($load,$mail,$email,$smtp,$sms,$smssend); 
-    $load=3;
+    $load = 3;
 
   begin:
     $::Wizard_finished = 0;
@@ -412,7 +412,7 @@ my $initdir = "/etc/init.d";
   step_service:
     undef $::Wizard_no_previous;
     undef $::Wizard_finished;
-    my $service ={
+    my $service = {
 		  httpd => _("Apache World Wide Web Server"), 
 		  bind => _("Domain Name Resolver"),
 		  ftp => _("Ftp Server"),
@@ -429,14 +429,14 @@ my $initdir = "/etc/init.d";
   
     $in->ask_from(_("service setting"),
 		  _("You will receive an alert if one of the selected service is no more running"),
-		  [ map { {label => "$_", val=> \${$_}, type => "bool", text => "$service->{$_}" }; } @installed_d
+		  [ map { { label => "$_", val => \${ $_ }, type => "bool", text => "$service->{ $_ }" } } @installed_d
 		  ]) or goto begin;
 
     $cron .= "#- check services\n";
     for (keys %$service) {
-#	$cron .= $l->{$_}[2]."\n" if (${$_}); 
-	if(!-e "/var/lock/subsys/$_") { $r .="Service $_ ($service->{$_} is not running\n"};
-	$cron .= "$r" if ${$_}; # take a look at this, don't know what is done here   
+#	$cron .= $l->{ $_ }[2]."\n" if (${ $_ }); 
+	if(!-e "/var/lock/subsys/$_") { $r .= "Service $_ ($service->{ $_ } is not running\n" };
+	$cron .= "$r" if ${ $_ }; # take a look at this, don't know what is done here   
     }
 
   step_load:
@@ -459,16 +459,16 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 		  _("Configure the way the system will alert you"),
 		  [
 		   { label => "mail", val => \$mail, type => "bool", text => "mail output" },
-		   { label => "email", val => \$email, disabled => sub { !$mail; }},
-		   #{ label => "smtp", val => \$smtp, disabled => sub { !$mail; } },
+		   { label => "email", val => \$email, disabled => sub { !$mail } },
+		   #{ label => "smtp", val => \$smtp, disabled => sub { !$mail } },
 		   { label => "" },
 		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have smsend set up (works only for some countries)" },
-		   { label => "smssend output", val => \$smssend , disabled => sub {!$sms;}},
+		   { label => "smssend output", val => \$smssend , disabled => sub { !$sms } },
 		  ]) or goto step_load;
 
 #output("/etc/cron.hourly/logdrake_alert.pl", ($cron));
     $cron .= q@#- report it@;
-    if ($mail) {
+    if ($mail) { 
 	$cron .= q!
 open F, '|/usr/sbin/sendmail -oi -t';
 
@@ -481,7 +481,7 @@ print F $r;
 # EOF!;
     } elsif ($sms) {
 	$in->do_pkgs->install('smssend');
-	$cron .= q!system(smssend !, $smssend, q! chomp_(`date`));!
+	$cron .= q!system(smssend !, $smssend, q! chomp_(`date`));
     }
 
     undef $::isWizard; 
@@ -499,7 +499,7 @@ print F $r;
 sub save {
     #$file_dialog = new Gtk::FileSelection(_("Save as.."));
     #$file_dialog->show();
-    $yy= $in->ask_file(_("Save as.."),"/root") or return;
+    $yy = $in->ask_file(_("Save as.."),"/root") or return;
     output($yy,$log_text->get_chars(0,$log_text->get_length()));
 }
 
@@ -511,30 +511,30 @@ sub get_main_menu {
   my ($window) = @_;
 
   my $accel_group = new Gtk::AccelGroup();
-  my $item_factory = new Gtk::ItemFactory( 'Gtk::MenuBar', '<main>', $accel_group );
-  $item_factory->create_items( @menu_items );
-  $window->add_accel_group( $accel_group );
-  return ( $item_factory->get_widget( '<main>' ) );
+  my $item_factory = new Gtk::ItemFactory('Gtk::MenuBar', '<main>', $accel_group);
+  $item_factory->create_items(@menu_items);
+  $window->add_accel_group($accel_group);
+  return ($item_factory->get_widget('<main>'));
 }
 
 sub create_dialog {
     my ($label, $c) = @_;
     my $ret = 0;
     my $dialog = new Gtk::Dialog;
-    $dialog->signal_connect ( delete_event => sub {Gtk->main_quit();});
+    $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
     $dialog->set_title(_("logdrake"));
     $dialog->border_width(10);
     $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
 
     my $button = new Gtk::Button _("OK");
     $button->can_default(1);
-    $button->signal_connect(clicked => sub { $ret=1; $dialog->destroy(); Gtk->main_quit(); });
+    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit() });
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
     if ($c) {
 	my $button2 = new Gtk::Button _("Cancel");
-	$button2->signal_connect(clicked => sub { $ret=0; $dialog->destroy(); Gtk->main_quit(); });
+	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit() });
 	$button2->can_default(1);
 	$dialog->action_area->pack_start($button2, 1, 1, 0);
     }
@@ -554,6 +554,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.19  2002/08/01 17:24:58  tvignaud
+# perl_checker fixes
+#
 # Revision 1.18  2002/07/31 23:10:55  prigaux
 # Handle parsing --embedded command line in standalone.pm
 # => allows to remove the somewhat mythical
