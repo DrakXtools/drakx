@@ -164,7 +164,7 @@ noaccomp),
                    stop =>  "/usr/bin/killall pppoa",
                    get_intf => "/usr/sbin/eaglectrl -i",
                    server => {
-                              pppoa => qq("/usr/sbin/pppoa -I `/usr/sbin/eaglectrl -s; /usr/sbin/eaglectrl -i`"),
+                              pppoa => qq("/usr/sbin/pppoa -I `/usr/sbin/fctStartAdsl -i`"),
                              },
                    ppp_options => qq(
 mru 1492
