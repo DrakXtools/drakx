@@ -128,11 +128,10 @@ sub _gtk__CheckButton  { &_gtk_any_Button }
 sub _gtk_any_Button {
     my ($w, $opts, $class) = @_;
 
-    if (!$opts->{image}) {
-	add2hash_($opts, { mnemonic => 1 });
-    }
-
     if (!$w) {
+	if (!$opts->{image}) {
+	    add2hash_($opts, { mnemonic => 1 });
+	}
 	$w = $opts->{image} ? "Gtk2::$class"->new :
 	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(delete $opts->{text} || '') :
 	    "Gtk2::$class"->new_with_label(delete $opts->{text} || '');
@@ -153,6 +152,8 @@ sub _gtk_any_Button {
 	};
 	gtkval_register($w, $text_ref, $set);
 	$set->();
+    } elsif (exists $opts->{text}) {
+	$w->set_label(delete $opts->{text});
     }
 
     if ($class eq 'Button') {
