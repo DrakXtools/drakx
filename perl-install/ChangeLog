@@ -1,3 +1,74 @@
+2005/03/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* drakxtools.spec: force net_applet start from menu (#14858)
+
+	* mdk-stage1/network.c: rephrase message (#14813)
+
+	* standalone/net_applet: don't modify autostart config file value if
+	started with --force
+
+2005/03/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po: updated Bengali file
+
+	* share/po/sl.po: updated Slovenian file
+
+2005/03/21  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: ensure strange return value from gtf(1) doesn't cause
+	havoc
+
+	* rescue/make_partimage_save_rest_all: addmd5 to the generated iso
+	factorize
+
+	* detect_devices.pm, pkgs.pm: handle new kernel flavour for i686 but non
+	pae
+
+2005/03/21  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Allow to eject non-mounted cdroms
+
+2005/03/21  willysr
+
+	* share/po/id.po: Updated
+	Fix typo
+	Updated
+
+2005/03/20  willysr
+
+	* share/po/id.po: Fix Typo
+	Fix Typo
+	Updated
+
+2005/03/19  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: we need latest ldetect-lst (bugzilla #14785)
+
+2005/03/19  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/03/19  willysr
+
+	* share/po/id.po: minnor update
+	Updated
+	minnor update
+	Updated
+	Updated
+
+2005/03/18  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: do "doPartitionDisks" and "formatPartitions" ASAP in
+	upgrade so that miscellaneous is runned when /mnt is mounted (bugzilla
+	#8678)
+
+2005/03/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-9mdk
+
+	* network/netconnect.pm: disable network hotplug for via-velocity driver
+	(#14763)
+
 2005/03/18  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
@@ -47093,7 +47164,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1017 2005/03/17 22:33:27 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1018 2005/03/18 20:50:49 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
