@@ -365,7 +365,7 @@ if ($options{post}) {
     push @files, (map { "/etc/X11/$_" } qw(XF86Config XF86Config-4)),
       (map { "/etc/sysconfig/$_" } qw(keyboard harddrake2/previous_hw harddisks)),
         (map { "/etc/$_" } qw(modprobe.conf modprobe.devfs modprobe.preload modules modules.conf modules.devfs)),
-          qw(/etc/asound.state /etc/fstab /etc/ld.so.conf/GL.conf);
+          qw(/etc/asound.state /etc/fstab /etc/ld.so.conf/GL.conf /etc/shorewall/);
 
     output($prof_cfg, join("\n", sort @files));
 
