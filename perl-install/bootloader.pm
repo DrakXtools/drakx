@@ -85,23 +85,30 @@ sub read() {
 sub read_grub() {
     my $global = 1;
     my ($e, %b);
+
+    my %mnt_pts = (
+	"/dev/" . devices::from_devfs(readlink('/dev/root')) => "/", #- is this useful???
+	map { (split)[0..1] } cat_("/proc/mounts")
+    );
+
     foreach (cat_("$::prefix/boot/grub/menu.lst")) {
-        next if /^\s*#/ || /^\s*$/;
         chomp;
-	my ($keyword, $v) = /^\s*(\S+)\s*(.*?)\s*$/ or do {
-            print STDERR 'unknown line in /boot/grub/menu.lst: "',  chomp_($_), q("\n);
-            next;
-        };
+	s/^\s*//; s/\s*$//;
+        next if /^#/ || /^$/;
+	my ($keyword, $v) = split(' ', $_, 2) or
+	  warn qq(unknown line in /boot/grub/menu.lst: "$_"\n), next;
+
         if ($keyword eq 'title') {
             push @{$b{entries}}, $e = { label => $v };
             $global = 0;
         } elsif ($global) {
-            $b{$keyword} = $v eq '' ? 1 : ungrubify($v);
+            $b{$keyword} = $v eq '' ? 1 : ungrubify($v, \%mnt_pts);
         } else {
             $e->{root} = $1 if $v =~ s/root=(\S*)\s*//;
             if ($keyword eq 'kernel') {
-                ($e->{kernel_or_dev}, $e->{append}) = split /\s+/, ungrubify($v), 2;
                 $e->{type} = 'image';
+                (my $kernel, $e->{append}) = split(' ', $v, 2);
+		$e->{kernel_or_dev} = ungrubify($kernel, \%mnt_pts);
             } elsif ($keyword eq 'root') {
                 $e->{type} = 'other';
 		if ($v =~ /,/) {
@@ -112,8 +119,7 @@ sub read_grub() {
                 $e->{kernel_or_dev} = grub2dev($v);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
-                $e->{$keyword} = ungrubify($v);
-            } else {
+                $e->{initrd} = ungrubify($v, \%mnt_pts);
             }
         }
     }
@@ -1051,23 +1057,19 @@ sub read_grub_device_map() {
 }
 
 sub grub2dev {
-    my ($device, $o_block_device) = @_;
-    my ($dev, $part) = ($1 . ")", $2) if $device =~ s/(\([^,]*?)(?:,(.*))?\)//;
-    undef $part if $o_block_device;
-    $part++ if defined $part;   # grub wants "(hdX,Y)" where lilo just want "hdY+1"
-    $dev =~ s/,[^)]*//;
-    my $new_dev = '/dev/' . read_grub_device_map()->{$dev} . $part;
-    wantarray() ? ($device, $new_dev) : $new_dev;
+    my ($grub_file, $o_block_device) = @_;
+    my ($grub_dev, $rel_file) = $grub_file =~ m!\((.*?)\)/?(.*)! or return;
+    my ($hd, $part) = split(',', $grub_dev);
+    $part = $o_block_device ? '' : defined $part && $part + 1; #- grub wants "(hdX,Y)" where lilo just want "hdY+1"
+    my $device = '/dev/' . read_grub_device_map()->{$hd} . $part;
+    wantarray() ? ($device, $rel_file) : $device;
 }
 
 # replace dummy "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if needed
 sub ungrubify {
-    my ($device) = @_;
-    my $dev;
-    ($device, $dev) = grub2dev($device);
-    my %mnt_pts =  ("/dev/" . devices::from_devfs(readlink('/dev/root')) => "/", map { (split)[0..1] } cat_("/proc/mounts"));
-    (my $v = join($mnt_pts{$dev} || $dev, $device)) =~ s!//!/!g;
-    $v;
+    my ($grub_file, $mnt_pts) = @_;
+    my ($device, $rel_file) = grub2dev($grub_file) or return $grub_file;
+    ($mnt_pts->{$device} || '') . '/' . $rel_file;
 }
 
 sub write_grub_config {
