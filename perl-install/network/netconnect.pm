@@ -185,7 +185,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                                 +{ text => $rconnections{$type}, val => \$conf{$type}, type => 'bool' }
                             } @connections;
                         } else {
-                            @connection_list = ({ val => \$type, type => 'list', list => [ map { $_->[0] } @connections ], });
+                            @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
                         }
                     },
                     if_(!$::isInstall, no_back => 1),
@@ -207,24 +207,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                     },
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
-                        # while in installer, we need to link connections steps depending of which connections the user selected
-                        my @l;
-                        if ($::isInstall) {
-                            @l = grep { $conf{$_} } keys %conf;
-                        } else {
-                            $type = $connections{$type};
-                            @l = ($type);
-                        }
-                        my $first = shift @l;
-                        my @steps = (@l, "multiple_internet_cnx", "apply_settings");
-                        foreach my $cnx ($first, @l) {
-                            $connection_steps{$cnx} = shift @steps;
-                        }
-                        #
-                        # FIXME: get rid of all bugs by just sharing the same paths between standalone and install mode (anyway
-                        #        old "all cnx in one pass" was not very wizard-friendly....
-                        #
-                        return $type;
+                        return $type = $connections{$cnx_type};
                     },
                    },
 
