@@ -1098,7 +1098,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     post => sub {
                         if (keys %$config) {
                             require Data::Dumper;
-                            output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
+                            output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
                         }
                         return "network_on_boot";
                     },
