@@ -544,7 +544,8 @@ sub read_conf($;$) {
 
 sub mergein_conf {
     my ($file) = @_;
-    add2hash(\%conf, read_conf($file, \$scsi));
+    my $modconfref = read_conf ($file, \$scsi);
+    map { my ($key, $value) = $_; $conf{$key}{alias} ||= $value->{alias} } %$modconfref;
 }
 
 sub write_conf {
@@ -554,7 +555,12 @@ sub write_conf {
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
     #- remove the post-install supermount stuff. We now do it in /etc/modules
-    substInFile { $_ = '' if /^post-install supermount/ } $file;
+    # Substitute new aliases in modules.conf (if config has changed)
+    substInFile {
+	$_ = '' if /^post-install supermount/;
+	my ($type,$alias,$module) = split /\s+/, $_;
+	$_ = "$type $alias $conf{$alias}{alias} \n" if ($type ne "loaded" && $conf{$alias}{alias} && $conf{$alias}{alias} !~ /$module/);
+    } $file;
 
     my $written = read_conf($file);
 
