@@ -220,7 +220,8 @@ sub dynamic {
 		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
 		next;
 	    }
-	    scanner::confScanner($name, $_->{port});
+	    scanner::confScanner($name, $_->{port},
+				 $_->{val}{vendor}, $_->{val}{id});
 	} else {
 	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name)));
 	}
@@ -238,7 +239,7 @@ sub tryConfScanner {
     if (($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) || (!$port)){
 	$port = '/dev/usb/scanner0';
 	$in->ask_from('Scannerdrake',
-		      N("Scannerdrake was not able to detect your %s.\nPlease select the device where your scanner is attached", removeverticalbar($model)),
+		      N("Please select the device where your %s is attached", removeverticalbar($model)),
 		      [
 		       { label => N("choose device"), 
 			 val => \$port,
@@ -264,8 +265,11 @@ sub tryConfScanner {
 				  '/dev/parport0',
 				  '/dev/parport1',
 				  '/dev/parport2',
-				  '/dev/pt_drv'], 
-			 not_edit => 0, sort => 1 },
+				  '/dev/pt_drv',
+				  '/dev/ttyS0',
+				  '/dev/ttyS1',
+				  '/dev/ttyS2'], 
+			 not_edit => 0, sort => 0 },
 		       ],
 		      ) or return 0;
     }

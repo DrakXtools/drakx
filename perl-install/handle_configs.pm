@@ -129,12 +129,13 @@ sub set_directive {
 
     # Set a directive, replace the old definition or a commented definition
 
-    my ($lines_ptr, $directive) = @_;
+    my ($lines_ptr, $directive, $full_line) = @_;
 
-    my $searchdirective = searchstr($directive);
-    my $olddirective = $searchdirective;
-    $olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
-    $olddirective ||= $directive;
+    my $olddirective = $directive;
+    if (!$full_line) {
+	$olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
+	$olddirective ||= $directive;
+    }
 
     my $success = (replace_directive($lines_ptr, $olddirective,
 				     $directive) or
@@ -151,11 +152,6 @@ sub add_directive {
     # Add a directive, replace a commented definition
 
     my ($lines_ptr, $directive) = @_;
-
-    my $searchdirective = searchstr($directive);
-    my $olddirective = $searchdirective;
-    $olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
-    $olddirective ||= $directive;
 
     my $success = insert_directive($lines_ptr, $directive);
     if ($success) {

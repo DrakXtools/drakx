@@ -18,11 +18,11 @@ package scanner;
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 # pbs/TODO:
-# - scsi mis-configuration
+# - scsi mis-configuration (should work better now)
 # - devfs use dev_is_devfs()
-# - with 2 scanners same manufacturer -> will overwrite previous conf -> only 1 conf !!
+# - with 2 scanners same manufacturer -> will overwrite previous conf -> only 1 conf !! (should work now)
 # - lp: see printerdrake
-# - install: prefix --> done
+# - install: prefix --> done (partially)
 
 use standalone;
 use common;
@@ -35,14 +35,31 @@ my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
 $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
-    my ($model, $port) = @_;
+    my ($model, $port, $vendor, $product) = @_;
     $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     my @driverconf = cat_("$_sanedir/$a.conf");
     my @configlines = @{$scannerDB->{$model}{lines}};
-    s/\$DEVICE/$port/ foreach @configlines;
-    handle_configs::set_directive(\@driverconf, $_) foreach @configlines;
+    foreach my $line (@configlines) {
+	$line =~ s/\$DEVICE/$port/g if $port;
+	next if $line =~ /\$DEVICE/;
+	$line =~ s/\$VENDOR/$vendor/g if $vendor;
+	next if $line =~ /\$VENDOR/;
+	$line =~ s/\$PRODUCT/$product/g if $product;
+	next if $line =~ /\$PRODUCT/;
+	$line =~ /^(\S+)LINE\s+(.*?)$/;
+	my $linetype = $1;
+	$line = $2;
+	if ((!$linetype) or
+	    (($linetype eq "USB") and (($port =~ /usb/i) or ($vendor))) or
+	    (($linetype eq "PARPORT") and (!$vendor) and 
+	     ($port =~ /(parport|pt_drv|parallel)/i)) or
+	    (($linetype eq "SCSI") and (!$vendor) and
+	     ($port =~ m!(/sg|scsi|/scanner)!i))) {
+	    handle_configs::set_directive(\@driverconf, $line, 1);
+	}
+    }
     output("$_sanedir/$a.conf", @driverconf);
     add2dll($a);
 }
@@ -195,7 +212,10 @@ sub readScannerDB {
 
     my ($lineno, $cmd, $val) = 0;
     my $fs = {
-        LINE => sub { push @{$card->{lines}}, $val },
+        LINE => sub { push @{$card->{lines}}, "LINE $val" },
+        SCSILINE => sub { push @{$card->{lines}}, "SCSILINE $val" },
+        USBLINE => sub { push @{$card->{lines}}, "USBLINE $val" },
+        PARPORTLINE => sub { push @{$card->{lines}}, "PARPORTLINE $val" },
 	NAME => sub {
 	    #$cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
 	    $cards{$card->{type}} = $card if $card;
@@ -241,7 +261,7 @@ sub updateScannerDBfromUsbtable {
 	    print "#[$name] already in ScannerDB!\n";
 	    next;
 	}
-	$to_add .= "NAME $name\nDRIVER usb\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
+	$to_add .= "NAME $name\nDRIVER USB\nCOMMENT usb $vendor_id $product_id\nUNSUPPORTED\n\n";
     }
     $to_add .= "END\n";
 
@@ -261,7 +281,7 @@ sub updateScannerDBfromSane {
 		   "Epson" => "Epson Corp.",
 		   "Fujitsu Computer Products of America" => "Fujitsu",
 		   "HP" => sub { $_[0] =~ s/HP\s/Hewlett-Packard|/; $_[0] =~ s/HP4200/Hewlett-Packard|ScanJet 4200C/; $_[0] },
-		   "Hewlett-Packard" => sub { $_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/; $_[0] },
+		   "Hewlett-Packard" => sub { $_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/ or $_[0] = "Hewlett-Packard|$_[0]"; $_[0] },
 		   "Kodak" => "Kodak Co.",
 		   "Mustek" => "Mustek Systems Inc.",
 		   "NEC" => "NEC Systems",
@@ -274,6 +294,18 @@ sub updateScannerDBfromSane {
 		   "Vobis/Highscreen" => "Vobis",
 		  };
 
+    # Read templates for configuration file lines
+    my %configlines;
+    my $backend;
+    foreach my $line (cat_("$_scannerDBdir/scannerconfigs")) {
+	chomp $line;
+	if ($line =~ /^\s*SERVER\s+(\S+)\s*$/) {
+	    $backend = $1;
+	} elsif ($backend) {
+	    push (@{$configlines{$backend}}, $line);
+	}
+    }
+
     foreach my $f (glob_("$_sanesrcdir/*.desc")) {
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
@@ -283,13 +315,29 @@ sub updateScannerDBfromSane {
 		  backend => sub { $backend = $val },
 		  mfg => sub { $mfg = $val; $name = undef },#bug when a new mfg comes. should called $fs->{ $name }(); but ??
 		  model => sub {
-		      unless ($name) { $name = $val; next }
+		      unless ($name) { $name = $val; return }
 		      $name = member($mfg, keys %$sane2DB) ?
 			(ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
-		      if (member($name, keys %$scanner::scannerDB)) {
+		      if (0 && member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
+			  # SANE bug "snapscan" calls itself "SnapScan"
+			  $backend =~ s/SnapScan/snapscan/g;
 			  $to_add .= "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
+			  # Go through the configuration lines of
+			  # this backend and add what is needed for the
+			  # interfaces of this scanner
+			  foreach my $line (@{$configlines{$backend}}) {
+			      $line =~ /^\s*(\S*?)LINE/;
+			      my $i = $1;
+			      if (!$i or $intf =~ /$i/i) {
+				  $to_add .= "$line\n";
+			      }
+			  }
+			  if ($backend =~
+			      /(unsupported|mustek_pp|gphoto2)/i) {
+			      $to_add .= "UNSUPPORTED\n";
+			  }
 			  $to_add .= "COMMENT $comment\n" if $comment;
 			  $comment = undef; 
 		      }
@@ -303,8 +351,12 @@ sub updateScannerDBfromSane {
 		       s/\s+$//;
 		       /^\;/ and next;
 		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
+		       if ($f =~ /microtek/) {
+			   #print "##### |$cmd|$val|\n";
+		       }
 		       my $f = $fs->{$cmd};
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
+		       #$f ? $f->() : print "##### unknown line $lineno ($_)\n";
 		   }
 	$fs->{model}(); # the last one
     }
