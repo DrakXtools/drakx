@@ -2577,8 +2577,8 @@ sub security_check {
     if ($::isInstall) {
 	$security = $in->{security};
     } else {
-     require any;
-	$security = any::get_secure_level();
+     require security::level;
+	$security = security::level::get();
     }
 
     # Exit silently if the spooler is PDQ
