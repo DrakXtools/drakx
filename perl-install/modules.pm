@@ -217,7 +217,7 @@ sub load_raw($$$@) {
 
 #    @options or @options = guiGetModuleOptions($name);
 
-    run_program::run("/usr/bin/insmod", "/modules/$name.o", @options) or die("insmod $name failed");
+    run_program::run("insmod", "/modules/$name.o", @options) or die("insmod $name failed");
 
     # this is a hack to make plip go
     if ($name eq "parport_pc") {

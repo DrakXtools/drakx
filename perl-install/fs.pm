@@ -79,6 +79,8 @@ sub format_part($;$) {
 
     $part->{isFormatted} and return;
 
+    log::l("formatting device $part->{device} (type ", type2name($_->{type}), ")");
+
     if (isExt2($part)) {
 	format_ext2($part->{device}, $bad_blocks);
     } elsif (isDos($part)) {
@@ -102,16 +104,16 @@ sub mount($$$;$) {
 	nfs::mount($dev, $where) or die "nfs mount failed";
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
-    }
-    $dev = devices::make($dev);
-  
-    my $flag = 0;#c::MS_MGC_VAL();
-    $flag |= c::MS_RDONLY() if $rdonly;
-    my $mount_opt = $fs eq 'vfat' ? "check=relaxed" : "";
-  
-    log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
-    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die "mount failed: $!";
+    } else {
+	$dev = devices::make($dev) if $fs ne 'proc';
 
+	my $flag = 0;#c::MS_MGC_VAL();
+	$flag |= c::MS_RDONLY() if $rdonly;
+	my $mount_opt = $fs eq 'vfat' ? "check=relaxed" : "";
+  
+	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
+	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die "mount failed: $!";
+    }
     local *F;
     open F, ">>/etc/mtab" or return; # fail silently, must be read-only /etc
     print F "$dev $where $fs defaults 0 0\n";

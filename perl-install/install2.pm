@@ -20,7 +20,7 @@ use modules;
 use partition_table qw(:types);
 use detect_devices;
 
-$testing = 1;#$ENV{PERL_INSTALL_TEST};
+$testing = $ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text skipOnCancel skipOnLocal prev next);
@@ -93,12 +93,12 @@ my $default = {
     mkbootdisk => 0,
     comps => [ qw() ],
     packages => [ qw() ],
-    partitionning => { clearall => 1, eraseBadPartitions => 1 },
+    partitionning => { clearall => 1, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
-		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
+		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
+#		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 	     ],
 };
 $o = { default => $default };
@@ -147,14 +147,14 @@ sub partitionDisks {
     $root_fs or die "partitionning failed: no root filesystem";
 
     $testing and return;
-    if ($o->{hints}->{flags}->{autoformat}) {
+    if ($o->{default}->{partitionning}->{autoformat}) {
 	log::l("formatting all filesystems");
 
 	foreach (@{$o->{fstab}}) {
 	    fs::format_part($_) if $_->{mntpoint} && isExt2($_) || isSwap($_);
 	}
     }
-    fs::mount_all($o->{fstab}, '/mnt');
+    fs::mount_all($o->{fstab}, $o->{prefix});
 }
 
 sub findInstallFiles {
@@ -181,13 +181,13 @@ sub addUser { $o->addUser }
 
 sub createBootdisk {
     $testing and return;
-    $o->{isUpgrade} or fs::write('mnt', $o->{fstab});
-    modules::write_conf("/mnt/etc/conf.modules", 'append');
+    $o->{isUpgrade} or fs::write($o->{prefix}, $o->{fstab});
+    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk;
 }
 
 sub setupBootloader {
-    $o->{isUpgrade} or modules::read_conf("/mnt/etc/conf.modules");
+    $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
 
@@ -209,7 +209,7 @@ sub main {
     spawnSync();
     eval { spawnShell() };
 
-    $o->{rootPath} = "/mnt";
+    $o->{prefix} = "/mnt";
     $o->{method} = install_methods->new('cdrom');
     $o = install_steps->new($o);
 
@@ -229,7 +229,7 @@ sub main {
     modules::read_conf("/tmp/conf.modules");
 
     #  make sure we don't pick up any gunk from the outside world 
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/bin:/mnt/usr/sbin:/mnt/usr/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
     $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};

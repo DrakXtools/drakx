@@ -49,7 +49,7 @@ sub doPartitionDisks($$) {
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
 
-    foreach ('base', @{$o->{default}->{comps}}) {
+    foreach ('Base', @{$o->{default}->{comps}}) {
 	$comps->{$_}->{selected} = 1;
 	foreach (@{$comps->{$_}->{packages}}) { $_->{selected} = 1; }
     }
@@ -74,8 +74,8 @@ sub beforeInstallPackages($) {
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
-    my $toInstall = [ $packages->{basesystem}, 
-		      grep { $_->{selected} && $_->{name} ne "basesystem" } values %$packages ];
+    my $toInstall = [ grep { $_->{selected} } values %$packages ];
+    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
     pkgs::install($o->{prefix}, $o->{method}, $toInstall, $o->{isUpgrade}, 0);
 }
 
@@ -153,7 +153,7 @@ sub addUser($) {
 }
 
 sub createBootdisk($) {
-    lilo::mkbootdisk("/mnt", versionString()) if $o->{mkbootdisk} || $o->{default}->{mkbootdisk};
+    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{mkbootdisk} || $o->{default}->{mkbootdisk};
 }
 
 sub setupBootloader($) {

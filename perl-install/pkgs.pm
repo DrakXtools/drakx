@@ -169,8 +169,7 @@ sub install {
 
     foreach my $p (@$toInstall) {
 	my $fullname = sprintf "%s-%s-%s.%s.rpm", 
-	                       $p->{name},
-	                       map { c::headerGetEntry($p->{header}, $_) } qw(version release arch);
+	                       map { c::headerGetEntry($p->{header}, $_) } qw(name version release arch);
 	c::rpmtransAddPackage($trans, $p->{header}, $method->getFile($fullname) , $isUpgrade);
 	$nb++;
 	$total += $p->{size};
