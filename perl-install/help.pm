@@ -173,16 +173,16 @@ your modem is connected to."),
 configureNetworkIP =>
  __("Enter:
 
-  - IP address: if you don't know it, ask your network administrator.
+  - IP address: if you don't know it, ask your network administrator or ISP.
 
 
   - Netmask: \"255.255.255.0\" is generally a good choice. If you are not
-sure, ask your network administrator.
+sure, ask your network administrator or ISP.
 
 
-  - Automatic IP: If your network uses bootp or dhcpd protocol, select 
+  - Automatic IP: If your network uses bootp or dhcp protocol, select 
 this option. If selected, no value is needed in \"IP address\". If you are
-not sure, ask your network administrator.
+not sure, ask your network administrator or ISP.
 "),
 
 configureNetworkISP =>
