@@ -141,9 +141,10 @@ my $list_path;
 my $path_list;
 my $current_path;
 my $list;
-
+my $list_all_font_path;
 
 foreach (@ARGV) {
+    /--list|-l/ and $list_all_font_path = 1, $mode=-1;
     /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
     /--windows_import|-wi/ and $windows = 1, $mode=-1;
     /--strong|-s/ and $strong = 1, $mode=-1;
@@ -203,6 +204,20 @@ sub list_fontpath {
 	push @installed_fonts_path, $_;
     }
 }
+
+
+sub chk_empty_xfs_path {
+    foreach  (@installed_fonts_path) {
+	if (3  > all($_)) {
+	    system("chkfontpath -r $_") or 
+		print "PERL::system command failed during chkfontpath\n";
+	}
+    }
+}
+
+
+
+
 
 sub search_installed_fonts {
     list_fontpath();
@@ -319,6 +334,7 @@ sub dir_created {
 
 sub put_font_dir {
     my @tmpl;
+    my @list_ttf;
     -e "/usr/share/ghostscript" or $gs = 0 && print "ghostscript is not installed on your system...\n"  ;
     if (@font_list) {
 	dir_created();
@@ -327,7 +343,8 @@ sub put_font_dir {
 	    $interactive and progress($pbar1, 1/@font_list, _("Fonts copy"));
 	}
 	$interactive and progress($pbar1, 0.01, _("done"));
-	$interactive and progress($pbar2, 0.45, _("True Type fonts installation"));
+	$interactive and progress($pbar2, 0.40, _("True Type fonts installation"));
+  
 	system ("cd $drakfont_dir/tmp/tmp   && cp *.ttf ../../ttf");
 	system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
 	my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
@@ -375,7 +392,7 @@ sub put_font_dir {
 	    system ("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
 	    system ("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
 	    system ("cd $drakfont_dir/Type1 && $type1inst");
-	    $interactive and progress($pbar2, 0.15, _("type1inst building"));
+	    $interactive and progress($pbar2, 0.14, _("type1inst building"));
 	    $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
 	}
 	
@@ -385,7 +402,7 @@ sub put_font_dir {
 	print "\n\nretarting xfs......\n";
 	$interactive and  progress($pbar3, 0.5 , _("Restart XFS"));
 	system ($restart_xfs);
-	$interactive and  progress($pbar3, 0.25, _("done"));
+	$interactive and  progress($pbar3, 0.30, _("done"));
     }
 }
 
@@ -447,11 +464,14 @@ sub license_msg {
     print _("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.")."\n";
 }
 
-$xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
+$list_all_font_path || $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
 
 sub backend_mod {
     if ($xlsfonts) {
 	system ("xlsfonts");
+    }
+    if ($list_all_font_path) {
+	system ("$chkfontpath");
     }
     if ($windows) {
 	license_msg();
@@ -541,6 +561,8 @@ sub interactive_mode {
 							    sub {  ${$central_widget}->destroy(); $windows = 0; license(\&advanced_install)}),
 					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
 							    sub { ${$central_widget}->destroy(); uninstall() }),
+					  gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
+							    sub { ${$central_widget}->destroy(); create_fontsel()}),
 					  ),
 				1, new Gtk::VBox(0,0),
 				1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
@@ -734,7 +756,8 @@ sub advanced_install {
 					  gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub { font_choice() }),
 					  gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list),
 					  gtksignal_connect(new Gtk::Button(_("Install List")), clicked => sub { 
-					      ${$central_widget}->destroy(); import_status() }),
+					      ${$central_widget}->destroy(); appli_choice()  }),
+#import_status() }),$
 					  ),
 				)
 	    );
@@ -781,6 +804,7 @@ sub uninstall {
     @install=  ();
     @installed_fonts_path = ();
     list_fontpath();    
+    chk_empty_xfs_path();
     $list_path = new Gtk::List();
     $list_path->set_selection_mode(-extended);
     foreach (@installed_fonts_path) {
@@ -858,6 +882,7 @@ sub progress {
     my ($progressbar, $incr, $label_text) = @_;
     my($new_val) = $progressbar->get_current_percentage;
     $new_val += $incr;
+    if ($new_val > 1) {$new_val = 1}
     $progressbar->update($new_val);
     $progressbar->{label}->set($label_text);
     Gtk->main_iteration while Gtk->events_pending;
