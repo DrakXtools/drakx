@@ -234,7 +234,7 @@ sub cardConfiguration(;$$$) {
 	}
 	foreach my $e (values %single_heads) {
 	    push @choices, { text => _("Configure only card \"%s\" (%s)", $e->{identifier}, $e->{busid}),
-			     code => sub { add2hash($card, $e); delete $card->{cards}; delete $card->{Xinerama} } };
+			     code => sub { add2hash($card, $e); foreach (qw(cards screen Xinerama)) { delete $card->{$_} } } };
 	}
 	$tc = $in->ask_from_listf(_("Multi-head configuration"),
 _("Your system support multiple head configuration.
