@@ -47,9 +47,35 @@ stdio: runinstall2  9160(data 7372)
 
 rpmsrate
 
-4   all       831   786   18:08   reiserfs 2G
-4   ()        175   139    3:25   reiserfs 2G
+4   ()        175   139    3:25   reiserfs 2G  0.85
+4   all       831   786   18:08   reiserfs 2G  0.76
 
 8.1b
 
 5   ()         77    66    1:24   ext2 300M
+
+8.1pre_rc1
+
+6   ()         82    66    1:26   ext2 500M
+5   ()         89    71    1:38   ext2 500M   0.91
+3   ()         94    77    1:46   ext2 500M   0.89
+5   X         145   127    2:09   ext2 500M   1.12
+3   X         231   217    3:26   ext2 500M   1.12
+4   kde       393   316    4:31   ext2 2G     1.45
+4   kde       393   316    4:41   ext2 2G     1.40
+4   kde       393   316    4:43   ext2 4G     1.39
+5   all       367   337    5:02   ext2 500M   1.22
+4   kde+gnome 454   370    5:50   ext2 4G     1.30
+4   kde+gnome 454   370    6:10   ext2 4G     1.23
+4   kde+gnome 454   370    6:24   ext2 4G     1.18
+5   all       489   406    5:55   ext2 4G     1.38
+5   all       490   406    5:18   ext2 1G     1.54
+4   kd+gn+dsk 594   494    7:31   ext2 4G     1.32
+4   prev+dev  827   696   10:27   ext2 4G     1.32
+4   all      1100   988   19:34   ext2 1G     0.94
+3   all      1640  1331   31:33   ext2 2G     0.87
+3   all      1740  1434   39:38   ext2 4G     0.73
+2   all      2252  1843   54:40   ext2 4G     0.69
+-1  all      2490  2048   61:02   ext2 4G     0.68
+
+# perl -ape '$F[4] =~ /(.*):(.*)/; $r = $F[2] / ($1 * 60 + $2); s|\S+\s*$|sprintf "%.2f\n", $r|e;'	
