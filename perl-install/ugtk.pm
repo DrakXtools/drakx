@@ -359,13 +359,16 @@ sub create_packtable {
 }
 
 sub createScrolledWindow {
-    my ($W, $policy) = @_;
+    my ($W, $policy, $viewport_shadow) = @_;
     my $w = new Gtk::ScrolledWindow(undef, undef);
     $policy ||= [ 'automatic', 'automatic'];
     $w->set_policy(@{$policy});
-    member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text)) ?
-      $w->add($W) :
-      $w->add_with_viewport($W);
+    if(member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
+       $w->add($W)
+    } else {
+       $w->add_with_viewport($W);
+       $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
+    }
     $W->can("set_focus_vadjustment") and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     $w
@@ -601,7 +604,7 @@ sub gtkicons_labels_widget {
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
 	my $is_resized = 0;
-    my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
+    my $w_ret = createScrolledWindow($fixed, undef, 'none');
     my $redraw_function;
     $redraw_function = sub { 
 	if ($is_resized == 0) {
@@ -622,7 +625,7 @@ sub gtkicons_labels_widget {
     $fixed->{redraw_function} = $redraw_function;
 
     $w_ret->vscrollbar->set_usize(19, undef);
-    gtkhide(gtkset_border_width($w_ret, -2)); #- ok, this is very very ugly...
+    gtkhide($w_ret);
 }
 
 sub n_line_size {
