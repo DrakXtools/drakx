@@ -229,7 +229,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
                         $device->{description}),
                       [ &get_any_driver_entry($in, $driver, $device) ]);
     } else {
-        $in->ask_warn(N("Unkown driver"), 
+        $in->ask_warn(N("Unknown driver"), 
                       N("Error: The \"%s\" driver for your sound card is unlisted"),
                       $driver);
     }
