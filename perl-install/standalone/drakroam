@@ -59,9 +59,9 @@ my %available_roaming_daemons = (
 					  my ($config) = @_;
 					  each_index {
 					      /^#/ || /^\n/ and next; #ignore comments and blank lines
-					      if (/([^ \t]+)([ \t]+)(.*)/) {
+					      if (/^(\S+)\s+(.*)$/) {
 						  my ($essid, $mode, $channel, $key, $dhcp);
-						  my $command = $3;
+						  my $command = $2;
 						  # setup new network entry
 						  $essid = $1;
 						  ($mode) = $command =~ /mode\s([^\s;]+)/;
