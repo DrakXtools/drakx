@@ -3831,19 +3831,51 @@ msgstr ""
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../lilo.pm_.c:432
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../lilo.pm_.c:433
 msgid "Press enter to boot the selected OS, 'e' to edit the"
-msgstr "Trykk enter for å starte opp valgt OS, 'e' for å redigere"
+msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../lilo.pm_.c:434
 msgid "commands before booting, or 'c' for a command-line."
-msgstr "kommandoer før oppstart, eller 'c' for en kommandolinje."
+msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../lilo.pm_.c:435
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
@@ -4631,7 +4663,8 @@ msgid "Choose which services should be automatically started at boot time"
 msgstr "Velg hvilke tjenester som skal startes automatisk ved oppstart"
 
 # NOTE: this message will be displayed by SILO at boot time; that is
-# only 7bit ascii is available
+# only the ascii charset will be available
+# so use only 7bit for this message
 #
 #: ../../silo.pm_.c:164
 #, c-format

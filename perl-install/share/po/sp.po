@@ -3782,23 +3782,51 @@ msgstr ""
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Dobrodosli u GRUB ,u starter operativnog sistema !"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+#
 #: ../../lilo.pm_.c:432
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
-msgstr "Користи  %c и %c слова да би  ознaчили избор"
+msgstr "Koristi  %c i %c slova da bi  oznacili izbor"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+#
 #: ../../lilo.pm_.c:433
 msgid "Press enter to boot the selected OS, 'e' to edit the"
-msgstr "Притисните enter за подизaње изабраног OS,'e' за промену "
+msgstr "Pritisnite ENTER za podizanje izabranog OS, 'e' za promenu"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+#
 #: ../../lilo.pm_.c:434
 msgid "commands before booting, or 'c' for a command-line."
-msgstr "команди пре подизaње система,или  'c' за командну линију "
+msgstr "komandi pre podizanje sistema, ili 'c' za komandnu liniju"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+#
 #: ../../lilo.pm_.c:435
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
-msgstr "Ознaчени избор се подиже аутоматски  за%d секунди "
+msgstr "Oznaceni izbor se podize automatski za %d sekundi"
 
 #: ../../lilo.pm_.c:439
 msgid "not enough room in /boot"
@@ -4574,11 +4602,9 @@ msgstr "Покрeће и зауставља X Фонт сервер при стартaњу и гaшeњу."
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Изаберите које сервиси  треба аутоматски да се стартују при boot-ању"
 
-# NOTE: this message will be displayed by lilo at boot time; that is
-# using the BIOS font; that means cp437 charset on 99.99% of PC computers
-# out there. It is then suggested that for non latin languages an ascii
-# transliteration be used; or maybe the english text be used; as it is best
-# When possible cp437 accentuated letters can be used too.
+# NOTE: this message will be displayed by SILO at boot time; that is
+# only the ascii charset will be available
+# so use only 7bit for this message
 #
 #: ../../silo.pm_.c:164
 #, c-format
