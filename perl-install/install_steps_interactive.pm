@@ -79,7 +79,7 @@ so the messages will be displayed in english during installation") if $ENV{LANGU
 sub acceptLicense {
     my ($o) = @_;
 
-    my $r = 'Refuse';
+    my $r = $::testing ? 'Accept' : 'Refuse';
 
     ($::recovery ?
      $o->ask_yesorno('', N("Do you want to recover your system?"), 0) :
