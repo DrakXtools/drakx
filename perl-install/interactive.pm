@@ -290,7 +290,9 @@ sub ask_from_ {
     ask_from_normalize($o, $common, $l);
 
     @$l or return 1;
-    $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    my $v = $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    %$common = ();
+    $v;
 }
 sub ask_from_no_check {
     my ($o, $common, $l) = @_;
