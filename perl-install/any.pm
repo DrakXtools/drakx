@@ -360,9 +360,8 @@ sub pack_passwd {
 sub get_autologin {
     my ($o) = @_;
     my %l = getVarsFromSh("$::prefix/etc/sysconfig/autologin");
-    $o->{autologin} ||= text2bool($l{AUTOLOGIN}) && $l{USER};
-    %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-    $o->{desktop} ||= $l{DESKTOP};
+    my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
+    { autologin => text2bool($l{AUTOLOGIN}) && $l{USER}, desktop => $desktop{DESKTOP} };
 }
 
 sub set_autologin {

@@ -1159,7 +1159,7 @@ sub addUser {
     if ($o->{security} >= 1 || $clicked) {
 	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
     }
-    any::get_autologin($o);
+    add2hash($o, any::get_autologin());
     any::autologin($o, $o);
 
     install_steps::addUser($o);
