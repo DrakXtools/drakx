@@ -47,16 +47,14 @@ sub enteringStep($$) {
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
 
 	next if $o->{steps}{$s}{done} && !$o->{steps}{$s}{redoable};
+	next if $o->{steps}{$s}{reachable};
 
 	my $reachable = 1;
 	if (my $needs = $o->{steps}{$s}{needs}) {
 	    my @l = ref $needs ? @$needs : $needs;
 	    $reachable = min(map { $o->{steps}{$_}{done} || 0 } @l);
 	}
-	if ($reachable && !$o->{steps}{$s}{reachable}) {
-	    $o->{steps}{$s}{reachable} = 1;
-	    $o->step_set_reachable($s);
-	}
+	$o->{steps}{$s}{reachable} = 1, $o->step_set_reachable($s) if $reachable; 
     }
 }
 sub leavingStep($$) {
@@ -84,6 +82,11 @@ sub chooseLanguage($) {
 sub chooseKeyboard($) {
     $o->default("keyboard");
 }
+sub choosePrinter($) {
+    $o->default("printer");
+}
+
+
 sub selectInstallOrUpgrade($) {
     $o->default("isUpgrade") || 0;
 }
@@ -96,7 +99,7 @@ sub setupSCSI {
 
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
-    fsedit::auto_allocate($hds, $o->{default}{partitions});
+    fsedit::auto_allocate($hds, $o->default("partitions"));
 }
 sub rebootNeeded($) {
     my ($o) = @_;
@@ -179,7 +182,11 @@ sub timeConfig {
 }
 
 sub servicesConfig {}
-sub printerConfig {}
+sub printerConfig {
+    my($o) = @_;
+    my $printer = $o->default("printer");
+    printer::configure_queue($printer) if $printer;
+}
 
 sub setRootPassword($) {
     my ($o) = @_;

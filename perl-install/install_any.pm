@@ -97,7 +97,9 @@ sub setPackages {
     $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages}, $size, $o->{installClass}, $o->{lang});
+    #PIXEL
+    my $size = 10;
+    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages},$size , $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {

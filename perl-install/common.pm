@@ -6,18 +6,18 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(__ min max sum sign product bool bool2text ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
-    functional => [ qw(fold_left map_index mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
-    file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
-    system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
-    constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
+    common     => [ qw(__ min max sum sign product bool bool2text ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
+    functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
+    file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
+    constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
-$printable_chars = "\x20-\x7E";
-$sizeof_int = psizeof("i");
-$bitof_int = $sizeof_int * 8;
-$SECTORSIZE = 512;
+$printable_chars = "\x20-\x7E";     
+$sizeof_int      = psizeof("i");    
+$bitof_int       = $sizeof_int * 8; 
+$SECTORSIZE      = 512;             
 
 1;
 
@@ -82,6 +82,20 @@ sub map_index(&@) {
     local $::i = 0;
     foreach (@_) { push @l, &$f($::i); $::i++; }
     @l;
+}
+
+#pseudo-array-hash :)
+sub map_tab_hash(&$@) {
+    my ($f, $fields, @tab_hash) = @_;
+    my %hash;
+    my $key = { map_index {($_, $::i + 1)} @{$fields} };
+
+    for (my $i = 0; $i < @tab_hash; $i += 2) {
+	my $h = [$key, @{$tab_hash[$i + 1]}];
+	&$f($i, $h) if $f;
+	$hash{ $tab_hash[$i] } = $h;
+      }
+    %hash;
 }
 
 sub smapn {
@@ -247,3 +261,5 @@ sub setVarsInSh {
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }
+
+

@@ -7,7 +7,7 @@ use vars qw(@ISA);
 @ISA = qw(interactive);
 
 use interactive;
-use common qw(:common);
+use common qw(:common :functional);
 use my_gtk qw(:helpers :wrappers);
 
 1;
@@ -25,7 +25,6 @@ sub ask_from_entryW {
     $w->_ask_from_entry(@$messages);
     $w->main;
 }
-
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 
@@ -72,6 +71,34 @@ sub ask_many_from_list_refW {
     $w->{ok}->grab_focus;
     $w->main && $val;
 }
+
+
+sub ask_from_entries_refW {
+    my ($o, $title, $messages, $l, $val) = @_;
+
+    my @entry_list = mapn {
+	my $entry = new Gtk::Entry;
+	my $ref = $_[1];
+	my $update = sub { 
+	    ${$ref} = $entry->get_text;
+	};
+	$entry->signal_connect(changed => $update);
+	$entry->set_text(${$_[1]})  if ${$_[1]};
+	$entry->set_visibility(0) if $_[0] =~ /password/;
+	&$update;
+	[($_[0], $entry)];
+	} $l, $val;
+    
+    my $w = my_gtk->new($title, %$o);
+    gtkadd($w->{window}, 
+	   gtkpack(
+		   create_box_with_title($w, @$messages),
+		   create_packtable({}, @entry_list),
+		   $w->create_okcancel));
+
+    $w->main();
+}
+
 
 sub wait_messageW($$$) {
     my ($o, $title, $message) = @_;

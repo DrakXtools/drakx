@@ -13,6 +13,21 @@ use log;
 my %conf;
 my %deps = ();
 
+
+my @neOptions = (
+  [ "io=", "Base IO port:", "0x300:0x280:0x320:0x340:0x360" ],
+  [ "irq=", "IRQ level:", "" ],
+);
+
+my @de4x5Options = (
+  [ "io=", "Base IO port:", "0x0b" ],
+);
+
+my @cdu31aOptions = (
+  [ "cdu31a_port=", "Base IO port:", "" ],
+  [ "cdu31a_irq=", "IRQ level:", "" ],
+);
+
 #
 #my %knownAliases = (
 #    eth => { type => 'net', minor => 'ethernet' },
@@ -84,7 +99,6 @@ my %deps = ();
 #  "tcic" => [ 1, undef, 0, '' ],
 #  "vfat" => [ 1, undef, 0, '' ],
 #);
-
 my @drivers_by_category = (
 [ \&detect_devices::hasEthernet, 'net', 'ethernet', {
   "3c509" => "3com 3c509",
@@ -227,16 +241,26 @@ sub text2driver($) {
 
 sub load($;$@) {
     my ($name, $type, @options) = @_;
+    if ($::testing) {
+	log::l("i try to install $name module");
+    } else {
 
-    $conf{$name}{loaded} and return;
-
-    $type ||= $drivers{$name}{type};
-
-    load($_, 'prereq') foreach @{$deps{$name}};
-    load_raw($name, @options);
+	$conf{$name}{loaded} and return;
+	
+	$type ||= $drivers{$name}{type};
+	
+	load($_, 'prereq') foreach @{$deps{$name}};
+	load_raw($name, @options);
+    }
 }
 
-sub unload($) { run_program::run("rmmod", $_[0]); }
+sub unload($) { 
+    if ($::testing) {
+	log::l("rmmod $_[0]");
+    } else {
+	run_program::run("rmmod", $_[0]); 
+    }
+}
 
 sub load_raw($@) {
     my ($name, @options) = @_;

@@ -141,6 +141,72 @@ sub timeConfig {
     $o->SUPER::timeConfig($f);
 }
 
+sub printerConfig($) {
+    my($o) = @_;
+    $o->{printer}{want} = 
+      $o->ask_yesorno(_("Printer"),
+		      _("Would you like to configure a printer?"),
+		      $o->{printer}{want});
+    return if !$o->{printer}{want};
+
+    #std info
+    #Don't wait, if the user enter something, you must remember it
+    #($o->{default}{printer}{QUEUE}, $o->{default}{printer}{SPOOLDIR}) =
+    $o->{printer}{QUEUE}    ||= $o->{default}{printer}{QUEUE};
+    $o->{printer}{SPOOLDIR} ||= $o->{default}{printer}{SPOOLDIR};
+    $o->ask_from_entries_ref(_("Standard Printer Options"),
+			 _("Every print queue (which print jobs are directed to) needs a 
+			   name (often lp) and a spool directory associated with it. What 
+			   name and directory should be used for this queue?"),
+			 [_("Name of queue:"), _("Spool directory:")],
+			 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
+			);
+
+    $o->{printer}{str_type} = 
+      $o->ask_from_list_(_("Select Printer Connection"),
+			 _("How is the printer connected?"),
+			 [keys %printer::printer_type],
+			 ${$o->default("printer")}{str_type},
+			);
+    $o->{printer}{TYPE} = $printer::printer_type{$o->{printer}{str_type}};
+
+    if ($o->{printer}{TYPE} eq "LOCAL") {
+	eval { modules::load("lp"); };
+	my @port = ();
+	foreach ("lp0", "lp1", "lp2") {
+	    local *LP;
+	    push @port, "/dev/$_" if open LP, ">/dev/$_"
+	    }
+	eval { modules::unload("lp") };
+	
+	my $string = _("What device is your printer connected to 
+			    (note that /dev/lp0 is equivalent to LPT1:)?\n");
+	$string .= _("I detect :");
+	$string .= join(", ", @port);
+
+	
+	
+	
+    } elsif ($o->{printer}{TYPE} eq "REMOTE") {
+    }
+    
+    
+
+#    $entry = 
+#      do {
+#	   
+#      }
+#
+#    if ($type eq "local") {
+#	 
+#    }
+    printer::set_prefix($o->{prefix});
+    printer::read_printer_db();
+
+    $o->SUPER::printerConfig;
+}
+
+
 sub createBootdisk {
     my ($o, $first_time) = @_;
     my @l = detect_devices::floppies();

@@ -1,7 +1,8 @@
+package log;
+
 use diagnostics;
 use strict;
 
-package log;
 
 my $logOpen = 0;
 my $logDebugMessages = 0;

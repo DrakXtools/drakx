@@ -11,15 +11,17 @@ use network;
 use keyboard;
 use fs;
 use fsedit;
-use install_steps_graphical;
 use modules;
 use partition_table qw(:types);
 use detect_devices;
 use pkgs;
 use smp;
 use lang;
+use printer;
 use run_program;
+use install_steps_graphical;
 
+use Data::Dumper;
 
 my %stepsHelp = (
 
@@ -160,29 +162,30 @@ exitInstall =>
 );
 
 
-my @installStepsFields = qw(text redoable onError needs);
+my @installStepsFields = qw(text redoable onError needs entered reachable toBeDone help next done);
 my @installSteps = (
-  selectLanguage => [ __("Choose your language"), 1, 1 ],
-  selectPath => [ __("Choose install or upgrade"), 0, 0 ],
-  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
-  selectKeyboard => [ __("Choose your keyboard"), 1, 1 ],
-  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
-  partitionDisks => [ __("Setup filesystems"), 1, 0 ],
-  formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
-  choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
-  doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
-  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
-  configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
-  configureTimezone => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
-#  configureServices => [ __("Configure services"), 0, 0 ],
-  configurePrinter => [ __("Configure printer"), 0, 0 ],
-  setRootPassword => [ __("Set root password"), 1, 1, "formatPartitions" ],
-  addUser => [ __("Add a user"), 1, 1, "doInstallStep" ],
-  createBootdisk => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
-  setupBootloader => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
-  configureX => [ __("Configure X"), 1, 0, "doInstallStep" ],
-  exitInstall => [ __("Exit install"), 0, 0, "alldone" ],
+  selectLanguage     => [ __("Choose your language"), 1, 1 ],                                
+  selectPath         => [ __("Choose install or upgrade"), 0, 0 ],                           
+  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],             
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],                                
+  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],	                                     
+  partitionDisks     => [ __("Setup filesystems"), 1, 0 ],                                   
+  formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],                
+  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],    
+  doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ], 
+  configureMouse     => [ __("Configure mouse"), 1, 1, "formatPartitions" ],                 
+  configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],            
+  configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],                 
+#  configureServices => [ __("Configure services"), 0, 0 ],                                  
+  configurePrinter   => [ __("Configure printer"), 1, 0,  ],                                 
+  setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],               
+  addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],                         
+  createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],                    
+  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],                 
+  configureX         => [ __("Configure X"), 1, 0, "doInstallStep" ],                        
+  exitInstall        => [ __("Exit install"), 0, 0, "alldone" ],                             
 );
+
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
@@ -192,12 +195,27 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     $installSteps{ $installSteps[$i] } = \%h;
     push @orderedInstallSteps, $installSteps[$i];
 }
+
+#TOSEE bug avec
+#%installSteps = 
+#      map_tab_hash {
+#	   my ($i, $h)   = @_; 
+#	   $h->{help}    = $stepsHelp{$installSteps[$i]} || __("Help");
+#	   $h->{next}    = $installSteps[$i + 2];
+#	   $h->{onError} = $installSteps[$i + 2 * $h->{onError}];
+##          $h->{toBeDone} = []; SEMBLE FIXE les PBS
+##          $h->{entered} = 0;
+#	   push @orderedInstallSteps, $installSteps[$i];
+#      } \@installStepsFields, @installSteps;
+#print Dumper(\%installSteps);
+
 $installSteps{first} = $installSteps[0];
 
 
 my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
 # partition layout for a server
+#NOT YET USED
 my @serverPartitioning = (
 		     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		     { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
@@ -207,14 +225,12 @@ my @serverPartitioning = (
 		     { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
 );
 
+#all the fields can be also present in $o, (in that case it overides)
 my $default = {
-#    display => "192.168.1.9:0",
-
     bootloader => { onmbr => 1, linear => 0 },
-#    keyboard => 'de',
-    autoSCSI => 0,
+    autoSCSI   => 0,
     mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
-    packages => [ qw() ],
+    packages   => [ qw() ],
     partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
@@ -223,28 +239,53 @@ my $default = {
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
-};
-$o = $::o = { 
-    lang => 'us',
-    isUpgrade => 0,
+    lang         => 'us',
+    isUpgrade    => 0,
     installClass => 'beginner',
+    printer => {
+                 str_type => $printer::printer_type[0],
+                 QUEUE    => "lp",
+                 SPOOLDIR => "/var/spool/lpd/lp",
+               },
+#    keyboard => 'de',
+#    display => "192.168.1.9:0",
 
-#    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
-    default => $default, 
-    steps => \%installSteps, 
-    orderedSteps => \@orderedInstallSteps,
 
-    # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
-#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+};
+
+#the big struct which contain, well everything (globals + the interactive methods ...)
+#if you want to do a kickstart file, you just have to add all the required fields (see for example
+#the variable $default)
+$o = $::o = { 
+
+    default      => $default,              
+    steps        => \%installSteps,        
+    orderedSteps => \@orderedInstallSteps, 
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
+# for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
+#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
+#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+#    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
+
+#step : the current one
+#prefix
+#mouse
+#keyboard
+#netc
+#autoSCSI drives hds  fstab
+#methods
+#packages compss
+#printer haveone entry(cf printer.pm)
+
 };
 
-
+# each step function are called with two arguments : clicked(because if you are a beginner you can force the 
+# the step) and the entered number
 sub selectLanguage {
     lang::set($o->{lang} = $o->chooseLanguage);
-    $o->{keyboard} = keyboard::setup($o->default("keyboard") || keyboard::lang2keyboard($o->{lang}));
+    $o->{keyboard} = $o->default("keyboard") || keyboard::lang2keyboard($o->{lang});
+    keyboard::setup($o->{keyboard});
 
     addToBeDone {
 	unless ($o->{isUpgrade}) {
@@ -255,17 +296,20 @@ sub selectLanguage {
 }
 
 sub selectKeyboard {
-    return if $o->{installClass} eq "beginner" && !$_[0];
+    my ($clicked) = $_[0];
+    return if $o->{installClass} eq "beginner" && !$clicked;
 
-    $o->{keyboard} = keyboard::setup($o->chooseKeyboard);
+    $o->{keyboard} = $o->chooseKeyboard;
+    keyboard::setup($o->{keyboard});
 
+    #if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	keyboard::write($o->{prefix}, $o->{keyboard}) unless $o->{isUpgrade};
     } 'doInstallStep';
 }
 
 sub selectPath {
-    $o->{isUpgrade} = $o->selectInstallOrUpgrade;
+    $o->{isUpgrade}    = $o->selectInstallOrUpgrade;
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
     $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
 }
@@ -344,9 +388,9 @@ sub configureTimezone {
     return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$_[0];
     $o->timeConfig($f);
 }
-sub configureServices { $o->servicesConfig }
-sub configurePrinter { $o->printerConfig }
-sub setRootPassword { $o->setRootPassword }
+sub configureServices { $o->servicesConfig  }
+sub configurePrinter  { $o->printerConfig   }
+sub setRootPassword   { $o->setRootPassword }
 sub addUser { 
     $o->addUser;
     addToBeDone {
@@ -374,7 +418,7 @@ sub main {
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install" unless $::testing;
-    unlink "/sbin/insmod" unless $::testing;
+    unlink "/sbin/insmod"  unless $::testing;
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
@@ -388,6 +432,7 @@ sub main {
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
+    #really needed ??
     spawnSync();
     eval { spawnShell() };
 
@@ -423,6 +468,7 @@ sub main {
 	}
        
     }
+    
 
     my $clicked = 0;
     for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
@@ -445,7 +491,7 @@ sub main {
 	last if $o->{step} eq 'exitInstall';
     }
     killCardServices();
-
+    
     log::l("installation complete, leaving");
 }
 

@@ -20,7 +20,6 @@ my %lang2keyboard =
 
 
 # [1] = name for loadkeys, [2] = extension for Xmodmap
-my @fields =
 my %keyboards = (
 # armenian xmodmap have to be checked...
 # "am" => [ __("Armenian"),       "am-armscii8",  "am" ],
@@ -115,8 +114,6 @@ sub setup($) {
 	load(cat_($file));
     }
     eval { run_program::run('xmodmap', "/usr/share/xmodmap/xmodmap.$o->[2]") };
-
-    $keyboard;
 }
 
 sub write($$) {

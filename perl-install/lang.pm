@@ -10,7 +10,6 @@ use log;
 # key (to be used in $LC_ALL), [0] = english name, [1] = charset encoding,
 # [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
 # languages, carefully choosen)
-my @fields =
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
@@ -105,9 +104,9 @@ sub set {
     my $lang = shift;
 
     if ($lang) {
-	$ENV{LC_ALL} = $lang;
-	$ENV{LANG} = $languages{$lang}[2];
-	$ENV{LANGUAGES} = $languages{$lang}[3];
+	$ENV{LC_ALL}    = $lang;                
+	$ENV{LANG}      = $languages{$lang}[2]; 
+	$ENV{LANGUAGES} = $languages{$lang}[3]; 
 	if (my $f = $languages{$lang}[1]) { load_font($f) }
     } else {
 	# stick with the default (English) */
@@ -153,7 +152,7 @@ sub load_font {
     if (my $c = $charsets{$charset}) {
 	log::l("loading " . $c . " font");
         $fontFile = $c->[0];
-	$fontSet = $c->[2];
+	$fontSet  = $c->[2]; 
     }
 
     # text mode font  
