@@ -780,7 +780,7 @@ Do you want to install the updates ?")),
 		$update_medium = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
 	    }
 	};
-    } while $@ || !$update_medium;
+    } while $@ || !$update_medium && $o->ask_warn('', N("Unable to contact mirror %s" . ($@ ? " :\n$@" : "")));
 
     if ($update_medium) {
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
