@@ -1,0 +1,127 @@
+#!/usr/bin/perl 
+
+# Drak Bug Report 
+# Copyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;
+use interactive;
+use MDK::Common;
+require Gtk;
+require Gtk::Gdk::ImlibImage;
+use my_gtk qw(:helpers :wrappers :ask);
+
+Gtk::Gdk::ImlibImage->init;
+
+my $in = 'interactive'->vnew;
+$::bugzilla_url = "https://qa.mandrakesoft.com";
+
+my $window_g = new Gtk::Window -toplevel;
+$window_g->set_policy($false,$false,$true);
+$window_g->set_position( 1 );
+$window_g->border_width( 5 );
+$window_g->set_title(_("Mandrake Bug Report Tool"));
+#$window_g->set_usize(540, 350);
+$window_g->signal_connect( "delete_event", \&quit_global);
+
+chomp(my $kernel_release = `uname -m -r -s`);
+$kernel_release.="";
+chomp(my $mdk_release = cat_("/etc/mandrake-release"));
+
+my $mdk_app = { 
+	       _("Mandrake Control Center") => 'drakconf',
+	       _("First Time Wizard") => 'drakfw',
+	       _("Synchronization tool") => 'draksync',  
+	       _("Standalone Tools") =>['adduserdrake','diskdrake','drakautoinst','drakbackup','drakboot','drakbug','drakfloppy','drakfont','drakgw','draknet','drakxservices','drakxtv','keyboardrake','logdrake','mousedrake','net_monitor','printerdrake','scannerdrake','tinyfirewall','XFdrake'],
+	       _("HardDrake") => 'harddrake',
+	       _("Mandrake Online") => ['mdkonline','mdkupdate'],
+	       _("Menudrake") => 'menudrake',
+	       _("Remote Control") => 'rfbdrake',
+	       _("Software Manager") => ['rpmdrake','MandrakeUpdate'],
+	       _("Urpmi") => ['urpmi','urpmq','urpme'],
+	       _("Windows Migration tool") => 'transfugdrake',
+	       _("Userdrake") => 'userdrake',
+	       _("Configuration Wizards") => 'wizdrake',
+	      };
+
+gtkpack2__(
+	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
+		      gtkpack(new Gtk::HBox(0,0),
+			      gtkpack(new Gtk::Label(_("Application:"))),
+			      gtkpack(gtkcombo_setpopdown_strings(my $comb_app = new Gtk::Combo(),("",keys %{$mdk_app}))),
+			     ),
+		      gtkpack(new Gtk::HBox(0,5),
+			      gtkpack(new Gtk::Label(_("Package: "))),
+			      gtkpack(gtkset_text(my $version = new Gtk::Entry(50),"fetching ...")),
+			     ),
+		      gtkpack(new Gtk::HBox(0,5),
+			      gtkpack(new Gtk::Label(_("Kernel:"))),
+			      gtkpack(gtkset_text(my $kernel_rel = new Gtk::Entry(50),"$kernel_release")),
+			     ),
+		      gtkpack(new Gtk::HBox(0,0),
+			      gtkpack(new Gtk::Label(_("Release: "))),
+			      gtkpack(gtkset_text(my $compiler = new Gtk::Entry(50),"$mdk_release")),
+			     ),
+		      gtkpack(new Gtk::HBox(0,0),
+			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open a web browser window  on https://www.mandrakebugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
+			     ),
+		      gtkpack(new Gtk::HSeparator),
+		      
+		     ),
+	  );
+my $app_choice;
+
+$comb_app->entry->signal_connect('changed', sub {
+				     if (my $text = $comb_app->entry->get_text() ne '') {
+					 chomp($which_app = `which '$mdk_app->{$text}'`);
+					 chomp($app_choice = `rpm -qf '$which_app'`); 
+				     }
+				 }
+				);
+
+my $hbx = new Gtk::HBox(0,0);
+my $Close_Button = new Gtk::Button(_("Close"));
+$Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
+$hbx->pack_start($Close_Button,0,0,0);
+my $Report_Button = new Gtk::Button(_("Report"));
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com");});
+$hbx->pack_end($Report_Button,0,0,0);
+$vbx->pack_start($hbx,0,0,0);
+$window_g->add($vbx);
+
+$window_g->show_all();
+Gtk->main();
+
+sub connect_bugzilla {
+    my($url) = @_;
+    my $w = $in->wait_message('',_("connecting to Bugzilla wizard ..."));
+    exec $ENV{BROWSER},$url if $ENV{BROWSER};
+    $in->ask_warn('', _("No browser available please! Please install one"));
+}
+
+sub read_app_context {
+    my ($name) = @_;
+    
+}
+
+sub quit_global {
+    Gtk->exit(0);
+}
+
+
+
