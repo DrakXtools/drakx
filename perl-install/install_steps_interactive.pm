@@ -184,8 +184,8 @@ sub selectInstallClass1 {
 }
 
 #------------------------------------------------------------------------------
-sub selectInstallClass($@) {
-    my ($o, @classes) = @_;
+sub selectInstallClass {
+    my ($o, $clicked) = @_;
 
     my %c = my @c = (
       $::corporate ? () : (
@@ -195,7 +195,8 @@ sub selectInstallClass($@) {
 	_("Customized")  => "specific",
 	_("Expert")	 => "expert",
       ),
-    );    
+    );
+    %s = @c = (_("Expert") => "expert") if $::expert && !$clicked;
 
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
@@ -209,7 +210,7 @@ You will be allowed to make powerful but dangerous things here.
 You will be asked questions such as: ``Use shadow file for passwords?'',
 are you ready to answer that kind of questions?"), 
 			 [ _("Customized"), _("Expert") ]) ne "Customized";
-    };      
+    };
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
@@ -834,7 +835,7 @@ sub addUser {
 	    }
 	},
         complete => sub {
-	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
+	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
 	    $o->{security} > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
