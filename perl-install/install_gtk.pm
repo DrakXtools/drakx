@@ -446,11 +446,12 @@ sub test_mouse {
 	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
 		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
 #		   '',
-		   my $okcancel = create_okcancel($w, '', '', "edge"),
+		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 0),
 		  ),
 	  );
 
     $okcancel->set_uposition(2, $height-30);
+    Gtk->timeout_add(1500, sub { gtkset_sensitive($okcancel, 1) });
 
     my $draw_rect; $draw_rect = sub {
 	my ($black, $fill, $rect) = @_;
