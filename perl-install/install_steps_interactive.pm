@@ -757,7 +757,7 @@ If only some CDs are missing, unselect them, then click Ok."),
 #------------------------------------------------------------------------------
 sub installPackages {
     my ($o, $packages) = @_;
-    my ($current, $total) = 0;
+    my ($current, $total) = (0, 0);
 
     my $w = $o->wait_message(_("Installing"), _("Preparing installation"));
 
@@ -765,7 +765,7 @@ sub installPackages {
     local *pkgs::installCallback = sub {
 	my ($data, $type, $id, $subtype, $_amount, $_total) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
-	    $total = $_amount;
+	    $total = $_total;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    my $p = $data->{depslist}[$id];
 	    $w->set(_("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
