@@ -11,7 +11,7 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: keyboarddrake [--expert]\n";
+/-h/ and die _("usage: keyboarddrake [--expert]\n");
 
 $::expert = /-expert/;
 $::isStandalone = 1;
@@ -24,7 +24,7 @@ my $keyboard = $in->ask_from_listf_(_("Keyboard"),
 				   [ keyboard::xmodmaps() ],
 				   keyboard::read());
 
-my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", "Do you want the BackSpace to return Delete in console?", 1);
+my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
 
 my $kmap = keyboard::keyboard2kmap($keyboard);
 `loadkeys $kmap`;

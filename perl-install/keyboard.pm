@@ -281,7 +281,7 @@ sub write {
 
     setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), 
 						    KBCHARSET => $charset,
-						    $isNotDelete ? () : (BACKSPACE => "Delete") });
+						    $isNotDelete ? (BACKSPACE => "BackSpace") : (BACKSPACE => "Delete") });
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
 
