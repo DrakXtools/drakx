@@ -376,7 +376,7 @@ my @skip_big_modules_on_stage1 = (
 # dgrs e1000
 qw(
 sk98lin acenic
-aironet4500_card com20020-pci hamachi natsemi starfire winbond-840
+aironet4500_card com20020-pci hamachi starfire winbond-840
 
 dc395x_trm
 BusLogic seagate fdomain g_NCR5380 tmscsim
