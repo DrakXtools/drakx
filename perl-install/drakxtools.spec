@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 19mdk
+Release: 20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Apr  5 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-20mdk
+- mousedrake: really apply specific ALPS touchpad settings (#14510)
+- drakconnect:
+  o install dkms packages if found
+  o support more slmodems
+- net_monitor: improve wifi detection
+- drakroam:
+  o do not crash if no essid is selected (partially fix #15244)
+  o hide unavailable features, add close button
+- drakboot (Pixel): apply patch from bugzilla #15216, adding support for
+  "password=..." and "restricted" at per-entry level (thanks to jarfil)
+- misc charset fixes (Pixel, Pablo)
+
 * Mon Apr  4 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-19mdk
 - drakconnect:
   o only switch up wireless devices during detection
