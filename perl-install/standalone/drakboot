@@ -68,10 +68,10 @@ unless ($::isEmbedded) {
     ######### menus end
 }
 
-my $user_combo = new Gtk2::Combo;
+my $user_combo = new Gtk2::OptionMenu;
 $user_combo->set_popdown_strings(list_users());
 $user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
-my $desktop_combo = new Gtk2::Combo;
+my $desktop_combo = new Gtk2::OptionMenu;
 $desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
@@ -111,8 +111,7 @@ foreach (all('.')) {
 }
 my %combo = ('thms' => '', 'lilo' => '', 'boot' => '');
 foreach (keys(%combo)) {
-    $combo{$_} = gtkset_size_request(Gtk2::Combo->new, 10, -1);
-    $combo{$_}->set_value_in_list(1, 0);
+    $combo{$_} = gtkset_size_request(Gtk2::OptionMenu->new, 10, -1);
 }
 
 $combo{thms}->set_popdown_strings(@thms);
@@ -277,9 +276,18 @@ gtkadd($window,
                                             gtkpack__(Gtk2::VBox->new(0, 0),
                                                       my @auto_buttons = gtkradio((N("Yes, I want autologin with this (user, desktop)")) x 2, N("No, I don't want autologin")),
                                                      ),
-                                            gtkpack__(my $auto_box = new Gtk2::VBox(0, 10),
-                                                      $user_combo,
-                                                      $desktop_combo
+                                            gtkpack__(
+                                                      my $auto_box = Gtk2::HBox->new,
+                                                      gtkpack(
+                                                              Gtk2::VBox->new,
+                                                              Gtk2::Label->new(N("Default user")),
+                                                              Gtk2::Label->new(N("Default desktop")),
+                                                             ),
+                                                      gtkpack(
+                                                              Gtk2::VBox->new,
+                                                              $user_combo,
+                                                              $desktop_combo
+                                                             ),
                                                      )
                                            )
                                  )
@@ -303,7 +311,7 @@ $auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
 $x_box->set_sensitive($x_mode);
 $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 $window->show_all;
-$no_bootsplash and $thm_frame->hide;
+$no_bootsplash and $thm_frame->set_sensitive(0);
 update_bootloader_label($lilogrub);
 gtkflush();
 $w->main;
