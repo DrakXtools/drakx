@@ -181,7 +181,7 @@ sub setup_postinstall_rpms($$) {
     eval { cp_af((grep { -r $_ } map { "/tmp/image/" . relGetFile($_->filename) } @toCopy), $postinstall_rpms) };
 
     log::l("copying Auto Install Floppy");
-    getAndSaveInstallFloppy($::o, "$postinstall_rpms/auto_install.img");
+    getAndSaveInstallFloppies($::o, $postinstall_rpms, 'auto_install');
 }
 
 sub clean_postinstall_rpms() {
@@ -710,42 +710,41 @@ sub g_auto_install {
     $str;
 }
 
-sub getAndSaveInstallFloppy {
-    my ($o, $where) = @_;
-    my @generated_floppies;
+sub getAndSaveInstallFloppies {
+    my ($o, $dest_dir, $name) = @_;    
+
     if ($postinstall_rpms && -d $postinstall_rpms && -r "$postinstall_rpms/auto_install.img") {
-	log::l("getAndSaveInstallFloppy: using file saved as $postinstall_rpms/auto_install.img");
-	cp_af("$postinstall_rpms/auto_install.img", $where);
-        push @generated_floppies, $where;
+	log::l("getAndSaveInstallFloppies: using file saved as $postinstall_rpms/auto_install.img");
+	cp_af("$postinstall_rpms/auto_install.img", "$dest_dir/$name.img");
+	"$dest_dir/$name.img";
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
-	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{'disk' || $o->{method}};
+	my $have_drivers = $image eq 'network';
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
-        if ($image eq 'network') {
-            my $boot = $where;
-            $boot =~ s/(.*)\.img$/$1_boot.img/ or $boot .= '_boot.img';
-            getAndSaveFile("images/$image.img", $boot) or log::l("failed to write Install Floppy ($image.img) to $boot"), return;
-            push @generated_floppies, $boot;
-            $image .= '_drivers';
-        }
-	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
-        push @generated_floppies, $where;
+
+	if ($have_drivers) {
+	    getAndSaveFile("images/${image}_drivers.img", "$dest_dir/${name}_drivers.img") or log::l("failed to write Install Floppy (${image}_drivers.img) to $dest_dir/${name}_drivers.img"), return;
+	}
+	getAndSaveFile("images/$image.img", "$dest_dir/$name.img") or log::l("failed to write Install Floppy ($image.img) to $dest_dir/$name.img"), return;
+
+	"$dest_dir/$name.img", if_($have_drivers, "$dest_dir/${name}_drivers.img");
     }
-    @generated_floppies;
 }
 
-sub getAndSaveAutoInstallFloppy {
-    my ($o, $replay, $where) = @_;
+sub getAndSaveAutoInstallFloppies {
+    my ($o, $replay) = @_;
+    my $name = ($replay ? 'replay' : 'auto') . '_install';
+    my $dest_dir = "$o->{prefix}/root/drakx";
 
     eval { modules::load('loop') };
 
     if (arch() =~ /sparc/) {
-	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
 	my $mountdir = "$o->{prefix}/tmp/mount"; mkdir_p($mountdir);
 	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
 
-	getAndSaveInstallFloppy($o, $imagefile) or return;
+	my ($imagefile) = getAndSaveInstallFloppies($o, "$o->{prefix}/tmp", $name) or return;
         devices::make($_) foreach qw(/dev/loop6 /dev/ram);
 
         run_program::run("losetup", "/dev/loop6", $imagefile);
@@ -770,59 +769,54 @@ sub getAndSaveAutoInstallFloppy {
         run_program::run("silo", "-r", $mountdir, "-F", "-i", "/fd.b", "-b", "/second.b", "-C", "/silo.conf");
         fs::umount($mountdir);
 	require commands;
-        commands::dd("if=/dev/ram", "of=$where", "bs=1440", "count=1024");
+        commands::dd("if=/dev/ram", "of=$dest_dir/replay_install.img", "bs=1440", "count=1024");
 
         rm_rf($workdir, $mountdir, $imagefile);
+	$imagefile;
     } elsif (arch() =~ /ia64/) {
 	#- nothing yet
     } else {
-	my $imagefile = "$o->{prefix}/root/autoinst.img";
 	my $mountdir = "$o->{prefix}/root/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
-
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
-	my @generated_floppies = getAndSaveInstallFloppy($o, $imagefile) or return;
+	my @imgs = getAndSaveInstallFloppies($o, $dest_dir, $name) or return;
 
-	my $dev = devices::set_loop($imagefile) or log::l("couldn't set loopback device"), return;
-        foreach my $fs (qw(ext2 vfat)) {
-            eval { fs::mount($dev, $mountdir, $fs, 0); 1 } and goto mount_ok;
-        }
-        return;
-      mount_ok:
-	substInFile { 
-	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
-	    s/^(\s*append)/$1 $param/ 
-	} "$mountdir/syslinux.cfg";
+	foreach my $img (@imgs) {
+	    my $dev = devices::set_loop($img) or log::l("couldn't set loopback device"), return;
+	    find { eval { fs::mount($dev, $mountdir, $_, 0); 1 } } qw(ext2 vfat) or return;
 
-	unlink "$mountdir/help.msg";
-	output "$mountdir/boot.msg", "\n0c",
+	    if (@imgs == 1 || $img =~ /drivers/) {
+		local $o->{partitioning}{clearall} = !$replay;
+		eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)) };
+		$@ and log::l("Warning: <", formatError($@), ">");
+	    }
+
+	    if (-e "$mountdir/menu.lst") {
+		# hd_grub boot disk is different than others
+		substInFile {
+		    s/^(\s*timeout.*)/timeout 1/;
+		    s/(\s*automatic=method:disk)/$1 $param/
+		} "$mountdir/menu.lst";
+	    } elsif (-e "$mountdir/syslinux.cfg") {
+		substInFile { 
+		    s/timeout.*/$replay ? 'timeout 1' : ''/e;
+		    s/^(\s*append)/$1 $param/ 
+		} "$mountdir/syslinux.cfg";
+
+		unlink "$mountdir/help.msg";
+		output "$mountdir/boot.msg", "\n0c",
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost,
    including any Windows partitions !!
 ", "07\n" if !$replay;
-
-	local $o->{partitioning}{clearall} = !$replay;
-	eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)) };
-	$@ and log::l("Warning: <", formatError($@), ">");
-
-	fs::umount($mountdir);
+	    }
+	
+	    fs::umount($mountdir);
+	    devices::del_loop($dev);
+	}
 	rmdir $mountdir;
-	devices::del_loop($dev);
-	require commands;
-        while (defined($imagefile = shift @generated_floppies)) {
-            commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
-            if (@generated_floppies) {
-                if ($where =~ m|^/dev|) {
-                    $o->ask_warn('', N("Please insert another floppy for drivers disk"), 1);
-                } else {
-                    $where =~ s/(.*)\.img/$1_drivers.img/;
-                }
-            }
-            unlink $imagefile;
-            common::sync();
-        }
+	@imgs;
     }
-    1;
 }
 
 

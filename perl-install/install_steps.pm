@@ -952,7 +952,7 @@ sub exitInstall {
 	output "$::prefix$report", install_any::report_bug($o->{prefix});
 	run_program::rooted($::prefix, 'gzip', $report);
     };
-    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img");
+    install_any::getAndSaveAutoInstallFloppies($o, 1);
     eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
 

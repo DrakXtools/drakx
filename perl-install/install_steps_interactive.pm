@@ -1278,17 +1278,21 @@ sub configureX {
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy {
     my ($o, $replay) = @_;
+    my @imgs = install_any::getAndSaveAutoInstallFloppies($o, $replay) or return;
 
     my $floppy = detect_devices::floppy();
-
     $o->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or return;
 
-    my $dev = devices::make($floppy);
-    {
+    my $i;
+    foreach (@imgs) {
+	if ($i++) {
+	    $o->ask_okcancel('', N("Please insert another floppy for drivers disk"), 1) or return;
+	}
 	my $_w = $o->wait_message('', N("Creating auto install floppy..."));
-	install_any::getAndSaveAutoInstallFloppy($o, $replay, $dev) or return;
-    }
-    common::sync();         #- if you shall remove the floppy right after the LED switches off
+	require commands;
+	commands::dd("if=$_", 'of=' . devices::make($floppy));
+	common::sync();
+    }	
 }
 
 #------------------------------------------------------------------------------
