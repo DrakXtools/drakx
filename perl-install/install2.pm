@@ -54,7 +54,7 @@ my (%installSteps, @orderedInstallSteps);
   configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
-#-  configureServices => [ __("Configure services"), 0, 0, '' ],
+  configureServices  => [ __("Configure services"), 1, 1, '!expert', "doInstallStep" ],
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
@@ -430,13 +430,9 @@ sub configureTimezone {
     $o->timeConfig($f, $clicked);
 }
 #------------------------------------------------------------------------------
-sub configureServices {
-    return if $o->{lnx4win};
-
-    $o->servicesConfig;
-}
+sub configureServices { $o->servicesConfig }
 #------------------------------------------------------------------------------
-sub configurePrinter  { $o->printerConfig   }
+sub configurePrinter  { $o->printerConfig }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};

@@ -27,7 +27,7 @@ PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 if [ "$ARCH" == "i386" ]; then
     #set 640x480x16 resolution on boot.
     cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
-    /usr/sbin/rdev -v vmlinuz 785
+    /usr/sbin/rdev -v vmlinuz 791 #785 
     cp -f vmlinuz /export/lnx4win
 
     rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules

@@ -53,13 +53,20 @@ sub ask_from_listW {
     $r or die "ask_from_list cancel";
 }
 
-sub ask_many_from_list_refW($$$$$) {
+sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
+    ask_many_from_list_with_help_refW($o, $title, $messages, $list, undef, $val)
+}
+
+sub ask_many_from_list_with_help_refW {
+    my ($o, $title, $messages, $list, $help, $val) = @_;
     my $w = my_gtk->new('', %$o);
+    my $tips = new Gtk::Tooltips;
     my $box = gtkpack(new Gtk::VBox(0,0),
 	map_index {
 	    my $i = $::i;
 	    my $o = Gtk::CheckButton->new($_);
+	    $tips->set_tip($o, $help->[$i]) if $help->[$i];
 	    $o->set_active(${$val->[$i]});
 	    $o->signal_connect(clicked => sub { invbool \${$val->[$i]} });
 	    $o;
@@ -73,7 +80,6 @@ sub ask_many_from_list_refW($$$$$) {
     $w->{ok}->grab_focus;
     $w->main && $val;
 }
-
 
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;

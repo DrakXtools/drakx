@@ -33,11 +33,13 @@ use lang;
 my $w_help;
 my $itemsNB = 1;
 my (@background1, @background2);
-my ($width,       $height)       = (640,   480);
-my ($stepswidth,  $stepsheight)  = (140,   $height);
-my ($logowidth,   $logoheight)   = ($width - $stepswidth, 40);
-my ($helpwidth,   $helpheight)   = ($width - $stepswidth, 100);
-my ($windowwidth, $windowheight) = ($width - $stepswidth, $height - $helpheight - $logoheight);
+
+#- initialised in function init_sizes
+my ($width,       $height);
+my ($stepswidth,  $stepsheight);
+my ($logowidth,   $logoheight);
+my ($helpwidth,   $helpheight);
+my ($windowwidth, $windowheight);
 
 my @themes_vga16 = qw(blue blackwhite savane);
 my @themes = qw(DarkMarble marble3d blueHeart);
@@ -219,6 +221,7 @@ sub new($$) {
     }
     @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
 
+    init_sizes();
     install_theme($o);
     create_logo_window($o);
 
@@ -770,6 +773,15 @@ sub create_logo_window() {
 	gtkadd($ww, new Gtk::Pixmap(@logo));
     }
     $o->{logo_window} = $w;
+}
+
+sub init_sizes() {
+#    ($height,      $width)        = (480, 640);
+    ($height,      $width)        = my_gtk::gtkroot()->get_size;
+    ($stepswidth,  $stepsheight)  = (140,   $height);                                           
+    ($logowidth,   $logoheight)   = ($width - $stepswidth, 40);                                 
+    ($helpwidth,   $helpheight)   = ($width - $stepswidth, 100);                                
+    ($windowwidth, $windowheight) = ($width - $stepswidth, $height - $helpheight - $logoheight);
 }
 
 #------------------------------------------------------------------------------

@@ -112,17 +112,30 @@ sub ask_from_list2($$$$;$) {
 
     $o->ask_from_listW($title, [ deref($message) ], $l, $def || $l->[0]);
 }
-sub ask_many_from_list_ref($$$$;$) {
+sub ask_many_from_list_ref {
     my ($o, $title, $message, $l, $val) = @_;
     return 1 if @$l == 0;
     $o->ask_many_from_list_refW($title, [ deref($message) ], $l, $val);
 }
-sub ask_many_from_list($$$$;$) {
+sub ask_many_from_list_with_help_ref {
+    my ($o, $title, $message, $l, $help, $val) = @_;
+    return 1 if @$l == 0;
+    $o->ask_many_from_list_with_help_refW($title, [ deref($message) ], $l, $help, $val);
+}
+sub ask_many_from_list {
     my ($o, $title, $message, $l, $def) = @_;
 
     my $val = [ map { my $i = $_; \$i } @$def ];
 
     $o->ask_many_from_list_ref($title, $message, $l, $val) ?
+      [ map { $$_ } @$val ] : undef;
+}
+sub ask_many_from_list_with_help {
+    my ($o, $title, $message, $l, $help, $def) = @_;
+
+    my $val = [ map { my $i = $_; \$i } @$def ];
+
+    $o->ask_many_from_list_with_help_ref($title, $message, $l, $help, $val) ?
       [ map { $$_ } @$val ] : undef;
 }
 

@@ -24,6 +24,7 @@ use raid;
 use mouse;
 use modules;
 use lang;
+use any;
 use keyboard;
 use fs;
 use log;
@@ -551,7 +552,11 @@ sub timeConfig {
 }
 
 #------------------------------------------------------------------------------
-#-sub servicesConfig {}
+sub servicesConfig { 
+    my ($o) = @_;
+    any::drakxservices($o, $o->{prefix});
+}
+
 #------------------------------------------------------------------------------
 sub printerConfig($) {
     my ($o) = @_;
