@@ -277,14 +277,13 @@ user "$adsl->{login}"
     }
    
     #- FIXME I'm lame: 
-    #-   -ONBOOT hardcoded
-    #-   -pptp has to be done within pppd (no more use of /usr/bin/pptp)
-    #-   -adsl-start will be called by ifup-ppp, good for pppoe, bad for the others. Most of the time a single `pppd call adsl` is enough.
-    #-   -still have to check hotplug firmware upload for usb modems
-    #- Mostly broken for now :(
+    #-   ONBOOT hardcoded
+    #-   pptp has to be done within pppd (no more use of /usr/bin/pptp)
+    #-   still have to check hotplug firmware upload for usb modems
+    my $kind = $adsl_type eq 'pppoe' ? 'xDSL' : 'ADSL';
     output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
 ONBOOT=no
-TYPE=xDSL
+TYPE=$kind
 ));    
 
     # sagem specific stuff
