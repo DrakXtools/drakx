@@ -605,6 +605,8 @@ sub set_cups_autoconf {
     my ($autoconf) = @_;
     $sysconfig{CUPS_CONFIG} = $autoconf ? "automatic" : "manual";
     setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig);
+    # Restart CUPS
+    printer::services::restart("cups") if $autoconf;
     return 1;
 }
 
