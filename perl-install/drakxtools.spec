@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.5mdk
+Release: 0.6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Aug  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.6mdk
+- add a 6px border around scrolled TextViews (FACORAT Fabrice, #10561)
+- drakbackup: fix crash when selecting an entry in pull down menus
+- localedrake:
+  o fix configuring IM
+  o fix x-unikey support (Larry Nguyen)
+
 * Fri Aug  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.5mdk
 - drakclock: if ntp is used, get the new time before updating the
   hwclock (Emmanuel Blindauer, #10537)
