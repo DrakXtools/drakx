@@ -84,11 +84,11 @@ sub SaveConfig {
 		or die _("Can't open %s for writing: %s\n", $tmp_file, $!);
 	while (my $line = <CONFIGFILE>)
 	{
-		if ($line =~ m/^(.+)\s*\=\s*\"(.*)\"/)
+		if ($line =~ m/^(.+)\s*\=\s*"(.*)"/)
 		{
 			my ($variable, $value) = ($1, $2);
 			my $newvalue = $settings{$variable};
-			$line =~ s/\".*\"/\"$newvalue\"/
+			$line =~ s/".*"/"$newvalue"/
 				if (exists $settings{$variable});
 		}
 		print TMPFILE $line;
@@ -159,7 +159,7 @@ sub DoInterface {
 	substInFile {
 	    if(/^(.+)\s*\=/) {
 		$a=$settings{$1};
-		s/\".*\"/\"$a\"/;
+		s/".*"/"$a"/;
 	    }
 	} $config_file;
 	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
