@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 30mdk
+Release: 31mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Apr 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-31mdk
+- drakbackup: some drives don't return "ATIP info from disk" (stew)
+- drakclock: check /etc/init.d/ntpd instead of /etc/ntp.conf for ntp
+  installation (daouda)
+- drakfont: attempt to correct bug #9423 (dam's)
+- drakconnect (manage interface): fix insensitive IPADDR, NETMASK and
+  GATEWAY fields by default are not sensitive by default in DHCP
+  (broken by #8498 fix) (poulpyà
+
 * Thu Apr  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-30mdk
 - fix inverted translations in french catalog (#8217)
 - fix drakxtools postuninstall script
