@@ -73,8 +73,9 @@ sub enableShadow() {
 }
 
 sub hdInstallPath() {
-    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/?(.*)|);
+    my $tail = first(readlink("/tmp/image") =~ m|^(?:/tmp/)?hdimage/*(.*)|);
     my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
+    log::l("search HD install path, tail=$tail, head=$head, tail defined=" . to_bool(defined $tail));
     defined $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
