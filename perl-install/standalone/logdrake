@@ -348,7 +348,7 @@ sub log_output {
     my ($text, $font, $col) = @_;
     my $tag = join('', $font, $col);
     push @logs, [ $text, $tag ];
-    $log_buf->{tags}{$tag} ||= { if_($font, font => $font), foreground => $col };
+    $log_buf->{tags}{$tag} ||= { foreground => $col }; # if_($font, font => $font), 
 }
 
 sub insert_text_n_scroll() {
