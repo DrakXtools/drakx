@@ -13,6 +13,8 @@ use lang;
 use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
+my $key_disabled;
+
 my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
@@ -43,6 +45,7 @@ sub handle_etcfiles {
 }
 
 sub handle_virtual_key {
+    return if $key_disabled;
     if (my ($device, $file, $options) = cat_('/proc/cmdline') =~ /\bvirtual_key=([^,\s]+),([^,\s]+)(,\S+)?/) {
         log::l("using device=$device file=$file as a virtual key with options $options");
         my $dir = '/virtual_key_mount';
@@ -122,6 +125,8 @@ sub init {
 
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
 
+    $key_disabled = -e '/image/move/key_disabled';
+
     system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
@@ -196,6 +201,8 @@ sub install2::handleI18NClp {
 
 sub key_parts {
     my ($o) = @_;
+
+    return () if $key_disabled;
 
     my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
     map_index { 
@@ -282,6 +289,8 @@ sub key_installfiles {
 
 sub install2::verifyKey {
     my ($o) = $::o;
+
+    log::l("automatic transparent key support is disabled"), return if $key_disabled;
 
     while (cat_('/proc/mounts') !~ m|\s/home\s|) {
         
