@@ -108,8 +108,8 @@ my %charsets = (
 #- (and gtk support isn't done yet)
   "iso-8859-8" => [ "iso08.f16",	"iso08", std_("iso8859-8") ],
   "iso-8859-9" => [ "lat5-16",		"iso09", std("iso8859-9") ],
-  "iso-8859-13" => [ "undef",		undef,   std_("iso8859-13") ],
-  "iso-8859-14" => [ "undef",		undef,   std_("iso8859-14") ],
+  "iso-8859-13" => [ undef,		undef,   std_("iso8859-13") ],
+  "iso-8859-14" => [ undef,		undef,   std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	"iso15", std("iso8859-15") ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef, 
