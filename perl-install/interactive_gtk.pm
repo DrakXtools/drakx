@@ -189,6 +189,7 @@ sub create_ctree {
     my $curr = $tree->node_nth(0); #- default value
     $tree->set_column_auto_resize(0, 1);
     $tree->set_selection_mode('browse');
+    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
     $tree->signal_connect(tree_select_row => sub { 
 	$curr = $_[1]; 
 	if ($curr->row->is_leaf) {
@@ -265,8 +266,6 @@ sub create_ctree {
 	$selected_via_click = 1;
 	&$double_click if $curr->row->is_leaf && $double_click;
     });
-
-    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
