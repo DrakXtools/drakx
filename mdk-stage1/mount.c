@@ -185,8 +185,8 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	}
 
 	if (!strcmp(fs, "supermount")) {
-		my_insmod("supermount", ANY_DRIVER_TYPE, NULL);
-		my_insmod("isofs", ANY_DRIVER_TYPE, NULL);
+		my_insmod("supermount", ANY_DRIVER_TYPE, NULL, 1);
+		my_insmod("isofs", ANY_DRIVER_TYPE, NULL, 1);
 		opts = alloca(500);
                 sprintf(opts, "dev=%s,fs=iso9660,tray_lock=always", dev);
                 dev = "none";
@@ -194,20 +194,20 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 
 #ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
-		my_insmod("vfat", ANY_DRIVER_TYPE, NULL);
+		my_insmod("vfat", ANY_DRIVER_TYPE, NULL, 1);
 		opts = "check=relaxed";
 	}
 
 	if (!strcmp(fs, "reiserfs"))
-		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL);
+		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL, 1);
 
 #endif
 	if (!strcmp(fs, "iso9660"))
-		my_insmod("isofs", ANY_DRIVER_TYPE, NULL);
+		my_insmod("isofs", ANY_DRIVER_TYPE, NULL, 1);
 
 #ifndef DISABLE_NETWORK
 	if (!strcmp(fs, "nfs")) {
-		my_insmod("nfs", ANY_DRIVER_TYPE, NULL);
+		my_insmod("nfs", ANY_DRIVER_TYPE, NULL, 1);
 		log_message("preparing nfsmount for %s", dev);
 		rc = nfsmount_prepare(dev, &opts);
 		if (rc != 0)

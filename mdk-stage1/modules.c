@@ -104,7 +104,7 @@ static enum return_type ensure_additional_modules_available(void)
                                 
         retry:
                 stg1_info_message("Please insert the Additional Drivers floppy.");;
-                my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+                my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
 
                 while (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
                         enum return_type results = ask_yes_no("I can't find a Linux ext2 floppy in first floppy drive.\n"
@@ -161,7 +161,7 @@ static const char * get_name_kernel_26_transition(const char * name)
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
-static enum insmod_return insmod_archived_file(const char * mod_name, char * options)
+static enum insmod_return insmod_archived_file(const char * mod_name, char * options, int allow_modules_floppy)
 {
 	char module_name[50];
 	char final_name[50] = "/tmp/";
@@ -175,7 +175,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
                 static int recurse = 0;
-                if (allow_additional_modules_floppy && !recurse && !IS_AUTOMATIC) {
+                if (allow_additional_modules_floppy && allow_modules_floppy && !recurse && !IS_AUTOMATIC) {
                         recurse = 1;
                         if (ensure_additional_modules_available() == RETURN_OK)
                                 i = mar_extract_file(additional_archive_name, module_name, "/tmp/");
@@ -358,7 +358,7 @@ int module_already_present(const char * name)
 }
 
 
-static enum insmod_return insmod_with_deps(const char * mod_name, char * options)
+static enum insmod_return insmod_with_deps(const char * mod_name, char * options, int allow_modules_floppy)
 {
 	struct module_deps_elem * dep;
 
@@ -371,7 +371,7 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 		while (*one_dep) {
 			/* here, we can fail but we don't care, if the error is
 			 * important, the desired module will fail also */
-			insmod_with_deps(*one_dep, NULL);
+			insmod_with_deps(*one_dep, NULL, allow_modules_floppy);
 			one_dep++;
 		}
 	}
@@ -380,14 +380,14 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 		return INSMOD_OK;
 
 	log_message("needs %s", mod_name);
-	return insmod_archived_file(mod_name, options);
+	return insmod_archived_file(mod_name, options, allow_modules_floppy);
 }
 
 
 #ifndef DISABLE_NETWORK
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options)
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options, int allow_modules_floppy)
 #else
-enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), char * options)
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), char * options, int allow_modules_floppy)
 #endif
 {
 	int i;
@@ -413,7 +413,7 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 	if (IS_TESTING)
 		return INSMOD_OK;
 
-	i = insmod_with_deps(mod_name, options);
+	i = insmod_with_deps(mod_name, options, allow_modules_floppy);
 	if (i == 0) {
 		log_message("\tsucceeded %s", mod_name);
 #ifndef DISABLE_NETWORK
@@ -459,7 +459,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	strcat(options, " ");
 	strcat(options, answers[0]); // because my_insmod will eventually modify the string
 	
-	if (my_insmod(mod, type, answers[0]) != INSMOD_OK) {
+	if (my_insmod(mod, type, answers[0], 1) != INSMOD_OK) {
 		stg1_error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}
@@ -530,7 +530,7 @@ void update_modules(void)
 
 	stg1_info_message("Please insert the Update Modules floppy.");;
 
-	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
 
 	if (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
 		enum return_type results = ask_yes_no("I can't find a Linux ext2 floppy in first floppy drive.\n"
@@ -577,7 +577,7 @@ void update_modules(void)
 			entry++;
 		}
 		if (!entry || !*entry) {
-			enum insmod_return ret = my_insmod(module, ANY_DRIVER_TYPE, options);
+			enum insmod_return ret = my_insmod(module, ANY_DRIVER_TYPE, options, 0);
 			if (ret != INSMOD_OK) {
 				log_message("\t%s (marfile): failed", module);
 				stg1_error_message("Insmod %s (marfile) failed.", module);

@@ -134,7 +134,7 @@ void discovered_device(enum driver_type type,
 			wait_msg = 1;
 		} else
 			stg1_info_message("About to load driver for SCSI adapter:\n \n%s", description);
-		failed = my_insmod(driver, SCSI_ADAPTERS, NULL);
+		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
 		if (wait_msg)
 			remove_wait_message();
 		warning_insmod_failed(failed);
@@ -144,14 +144,15 @@ void discovered_device(enum driver_type type,
 	if (type == NETWORK_DEVICES) {
 		stg1_info_message("About to load driver for network device:\n \n%s", description);
 		prepare_intf_descr(description);
-		warning_insmod_failed(my_insmod(driver, NETWORK_DEVICES, NULL));
+		warning_insmod_failed(my_insmod(driver, NETWORK_DEVICES, NULL, 1));
 		if (intf_descr_for_discover) /* for modules providing more than one net intf */
 			net_discovered_interface(NULL);
 	}
 #endif
 #ifdef ENABLE_USB
 	if (type == USB_CONTROLLERS)
-		my_insmod(driver, USB_CONTROLLERS, NULL);
+                /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
+		my_insmod(driver, USB_CONTROLLERS, NULL, 0);
 #endif
 }
 
@@ -289,17 +290,18 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 		if (!already_mounted_usbdev) {
 			already_mounted_usbdev = 1;
-			my_insmod("usb-storage", SCSI_ADAPTERS, NULL);
+                        /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
+			my_insmod("usb-storage", SCSI_ADAPTERS, NULL, 0); 
 			if (module_already_present("ieee1394"))
-				my_insmod("sbp2", SCSI_ADAPTERS, NULL);
+				my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
 			if (mount("/proc/bus/usb", "/proc/bus/usb", "usbdevfs", 0, NULL)) {
 				log_message("USB: couldn't mount /proc/bus/usb");
 				goto end_usb_probe;
 			}
 			wait_message("Detecting USB devices.");
 			sleep(4); /* sucking background work */
-			my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL);
-			my_insmod("keybdev", ANY_DRIVER_TYPE, NULL);
+			my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL, 0);
+			my_insmod("keybdev", ANY_DRIVER_TYPE, NULL, 0);
 			remove_wait_message();
 		}
 
@@ -332,7 +334,7 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 					if (type == NETWORK_DEVICES) {
 						stg1_info_message("About to load driver for usb network device:\n \n%s", usbdb[i].name);
 						prepare_intf_descr(usbdb[i].name);
-						warning_insmod_failed(my_insmod(usbdb[i].module, NETWORK_DEVICES, NULL));
+						warning_insmod_failed(my_insmod(usbdb[i].module, NETWORK_DEVICES, NULL, 1));
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */
 							net_discovered_interface(NULL);
 					}

@@ -786,7 +786,7 @@ static int load_config(void)
 
 static void install_module(char *mod, char *opts)
 {
-	my_insmod(mod, ANY_DRIVER_TYPE, opts);
+	my_insmod(mod, ANY_DRIVER_TYPE, opts, 1);
 //mdk-stage1//     module_list_t *ml;
 //mdk-stage1// 
 //mdk-stage1//     for (ml = module_list; ml != NULL; ml = ml->next)

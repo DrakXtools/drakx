@@ -147,14 +147,14 @@ enum return_type cdrom_prepare(void)
 	int i, count = 0;
 	enum return_type results;
 
-	my_insmod("ide-cd", ANY_DRIVER_TYPE, NULL);
+	my_insmod("ide-cd", ANY_DRIVER_TYPE, NULL, 0);
 
 	if (IS_AUTOMATIC) {
 		get_medias(CDROM, &medias, &medias_models, BUS_IDE);
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 		
-		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
+		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
 		get_medias(CDROM, &medias, &medias_models, BUS_SCSI);
 		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
@@ -165,7 +165,7 @@ enum return_type cdrom_prepare(void)
 
 		unset_param(MODE_AUTOMATIC);
 	} else
-		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
+		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL, 0);
 
 
 	get_medias(CDROM, &medias, &medias_models, BUS_ANY);

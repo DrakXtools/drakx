@@ -80,7 +80,7 @@ set_loop (const char *device, const char *file, int gz)
 	loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 	loopinfo.lo_offset = 0;
         if (gz) {
-                my_insmod("gzloop", ANY_DRIVER_TYPE, NULL);
+                my_insmod("gzloop", ANY_DRIVER_TYPE, NULL, 1);
                 loopinfo.lo_encrypt_type = 13; /* LO_CRYPT_GZ */
         }
 
@@ -173,10 +173,10 @@ lomount(char *loopfile, char *where, char **dev, int gz)
 	flag |= MS_RDONLY;
 
 #ifdef MANDRAKE_MOVE
-	my_insmod("change_loop", ANY_DRIVER_TYPE, NULL);
+	my_insmod("change_loop", ANY_DRIVER_TYPE, NULL, 1);
         chloop = 1;
 #else
-	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
+	my_insmod("loop", ANY_DRIVER_TYPE, NULL, 1);
 #endif
 
         if (!(loopdev = find_free_loop(chloop))) {

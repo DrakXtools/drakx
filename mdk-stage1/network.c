@@ -518,7 +518,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
 	static struct interface_info loopback;
 	enum return_type results = RETURN_ERROR;
 	
-	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL);
+	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL, 1);
 
 	while (results != RETURN_OK) {
 		results = setup_network_interface(intf);

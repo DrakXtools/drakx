@@ -318,7 +318,7 @@ static int get_disks(char *** names, char *** models)
 	char ** ptr;
 	int count = 0;
 
-	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL);
+	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
 	
 	get_medias(DISK, names, models, BUS_ANY);
 

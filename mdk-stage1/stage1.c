@@ -230,7 +230,7 @@ static void expert_third_party_modules(void)
 	if (results != RETURN_OK)
 		return;
 
-	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
 
 	if (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
 		stg1_error_message("I can't find a Linux ext2 floppy in first floppy drive.");
@@ -284,9 +284,9 @@ static void handle_pcmcia(char ** pcmcia_adapter)
 		log_message("no pcmcia adapter found");
 		return;
 	}
-	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL);
-	my_insmod(*pcmcia_adapter, ANY_DRIVER_TYPE, NULL);
-	my_insmod("ds", ANY_DRIVER_TYPE, NULL);
+	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod(*pcmcia_adapter, ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod("ds", ANY_DRIVER_TYPE, NULL, 0);
 	
         /* call to cardmgr takes time, let's use the wait message */
 	wait_message("Enabling PCMCIA extension cards...");
@@ -463,7 +463,7 @@ int mandrake_move_post(void)
         fclose(f);
         
         // in case we didn't mount any clp, because gzloop.o is not available later in /lib/modules
-	my_insmod("gzloop", ANY_DRIVER_TYPE, NULL);
+	my_insmod("gzloop", ANY_DRIVER_TYPE, NULL, 0);
         
         // hardcoded :(
         if (!access(TOTEM_LOCATION, R_OK)) {
