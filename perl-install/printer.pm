@@ -1972,7 +1972,7 @@ sub configure_hpoj {
 	last;
     }
     # No, it is not an HP multi-function device.
-    return "" if (!$device_ok);
+    return "" if !$device_ok;
 
     # Determine the ptal device name from already existing config files
     my $ptalprefix =
@@ -2270,9 +2270,9 @@ sub removelocalprintersfromapplications {
 
 sub setcupslink {
     my ($printer) = @_;
-    return 1 if (!$::isInstall);
-    return 1 if ($printer->{SPOOLER} ne "cups");
-    return 1 if (-d "/etc/cups/ppd");
+    return 1 if !$::isInstall;
+    return 1 if $printer->{SPOOLER} ne "cups";
+    return 1 if -d "/etc/cups/ppd";
     system("ln -sf $prefix/etc/cups /etc/cups");
     return 1;
 }
@@ -2466,7 +2466,7 @@ sub addcupsremotetostaroffice {
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
-	    next if ($q ne $queue);
+	    next if $q ne $queue;
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
@@ -2516,7 +2516,7 @@ sub addcupsremotetoopenoffice {
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
-	    next if ($q ne $queue);
+	    next if $q ne $queue;
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
@@ -2906,7 +2906,7 @@ sub removeentry {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if ($done);
+	next if $done;
 	if (!$sectionfound) {
 	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$sectionfound = 1;
@@ -2930,7 +2930,7 @@ sub removesection {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if ($done);
+	next if $done;
 	if (!$sectionfound) {
 	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$_ = "";
@@ -3024,7 +3024,7 @@ sub addcupsremotetogimp {
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
-	    next if ($q ne $queue);
+	    next if $q ne $queue;
 	    my $server = $2;
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
@@ -3189,7 +3189,7 @@ sub findgimpconfigfiles {
 		for my $file (@configfilenames) {
 		    my $dir = "$homedir/$file";
 		    $dir =~ s:/[^/]*$::;
-		    next if ((-f $dir) && (! -d $dir));
+		    next if (-f $dir) && (! -d $dir);
 		    if (! -d "$prefix$dir") {
 			run_program::rooted($prefix, 
 					    "/bin/mkdir", $dir)
@@ -3278,7 +3278,7 @@ sub removegimpentry {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if ($done);
+	next if $done;
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
 		$sectionfound = 1;
@@ -3302,7 +3302,7 @@ sub removegimpprinter {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if ($done);
+	next if $done;
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
 		$_ = "";
@@ -3328,7 +3328,7 @@ sub isgimpprinterconfigured {
     my $nonrawprinting = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	last if ($done);
+	last if $done;
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($queue)\s*$/) {
 		$sectionfound = 1;
@@ -3345,8 +3345,8 @@ sub isgimpprinterconfigured {
 	    } 
 	}
     }
-    return 0 if ($done && !$sectionfound);
-    return 1 if ($ppdfileset || $drivernotps2 || $nonrawprinting);
+    return 0 if $done && !$sectionfound;
+    return 1 if $ppdfileset || $drivernotps2 || $nonrawprinting;
     return 0;
 }
 

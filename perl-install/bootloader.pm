@@ -817,8 +817,8 @@ sub write_lilo_conf {
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
 
-	print F "message=/boot/message" if (arch() !~ /ia64/);
-	print F "menu-scheme=wb:bw:wb:bw" if (arch() !~ /ia64/);
+	print F "message=/boot/message" if arch() !~ /ia64/;
+	print F "menu-scheme=wb:bw:wb:bw" if arch() !~ /ia64/;
 
 	print F "ignore-table" if grep { $_->{unsafe} && $_->{table} } @{$lilo->{entries}};
 
@@ -868,7 +868,7 @@ sub install_lilo {
 
     log::l("Installing boot loader...");
     $::testing and return;
-    run_program::rooted_or_die($::prefix, "lilo", "2>", "/tmp/.error") if (arch() !~ /ia64/);
+    run_program::rooted_or_die($::prefix, "lilo", "2>", "/tmp/.error") if arch() !~ /ia64/;
     unlink "$::prefix/tmp/.error";
 }
 

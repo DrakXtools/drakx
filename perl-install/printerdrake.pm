@@ -2959,7 +2959,7 @@ sub wizard_close {
     $::Wizard_no_previous = 1;
     $::Wizard_no_cancel = 1;
     $::Wizard_finished = 1;
-    wizard_congratulations($in) if ($mode == 1);
+    wizard_congratulations($in) if $mode == 1;
     undef $::isWizard;
     $::WizardWindow->destroy if defined $::WizardWindow;
     undef $::WizardWindow;
@@ -3364,7 +3364,7 @@ sub main {
 			$queue = $printer->{QUEUE};
 		    }
 		};
-		wizard_close($in, 0) if ($@ =~ /wizcancel/);
+		wizard_close($in, 0) if $@ =~ /wizcancel/;
 	    } else {
 		$::expert or $printer->{TYPE} = "LOCAL";
 		wizard_welcome($printer, $in, $upNetwork) or next;
