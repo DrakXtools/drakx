@@ -245,8 +245,12 @@ sub ask_from_entries_refH_powered_normalize {
 	$e->{disabled} ||= sub { 0 };
     }
 
-    #- don't display empty lists
-    @$l = grep { !($_->{list} && @{$_->{list}} == () && $_->{not_edit}) } @$l;
+    #- don't display empty lists and one element lists
+    @$l = grep { 
+	my $b = $_->{list} && $_->{not_edit};
+	@{$_->{list}} == () and die 'ask_from_list: empty list';
+	!($b && @{$_->{list}} <= 1);
+    } @$l;
 
     $common->{advanced_label} ||= _("Advanced");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
