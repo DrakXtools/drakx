@@ -204,7 +204,7 @@ sub _create_window($$) {
     $w->set_title($title);
 
     $w->signal_connect(expose_event => sub { eval { $interactive::objects[-1]{rwindow} == $w and $w->window->XSetInputFocus } }) if $my_gtk::force_focus || $o->{force_focus};
-    $w->signal_connect(delete_event => sub { $w->destroy; die 'wizcancel' });
+    $w->signal_connect(delete_event => sub { if ($::isWizard) { $w->destroy; die 'wizcancel' } else { Gtk->main_quit } });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     my $focusing;
