@@ -25,6 +25,9 @@ void initIMPS2() {
 
 MODULE = xf86misc::main		PACKAGE = xf86misc::main
 
+PROTOTYPES: ENABLE
+
+
 int
 Xtest(display)
   char *display

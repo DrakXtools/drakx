@@ -23,6 +23,9 @@ typedef newtGrid Newt__Grid;
 
 MODULE = Newt		PACKAGE = Newt 	PREFIX = newt
 
+PROTOTYPES: ENABLE
+
+
 void
 DESTROY()
 	CODE:
