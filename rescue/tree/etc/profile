@@ -7,6 +7,7 @@
 PROFILE_LOADED=1
 
 export PATH=/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/mnt/sbin:/mnt/bin:/mnt/usr/sbin:/mnt/usr/bin:/mnt/usr/X11R6/bin
+export LD_LIBRARY_PATH=/mnt/lib:/mnt/usr/lib:/mnt/usr/X11R6/lib
 
 PS1="[root@rescue \w]\\$ "
 ls () { /bin/ls --color=auto -F "$@";}
