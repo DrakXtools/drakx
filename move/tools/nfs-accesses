@@ -13,6 +13,7 @@ GetOptions('no-link' => \ (my $no_link),
 	   'log-file=s' => \$log_file,
 	   'first-file=s' => \ (my $first_file),
 	   'from-time=s', => \ (my $from_time),
+	   'already-have=s', \ (my $already_have),
 	  );
 
 my @skipped_dirs = (
@@ -29,6 +30,10 @@ my $skipped_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @skipped_dirs
 if ($full_dirs) {
     my @l = chomp_(map { MDK::Common::File::cat_or_die($_) } split(' ', $full_dirs));
     $full_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @l) . ')/';
+}
+if ($already_have) {
+    my @l = map { chomp_(MDK::Common::File::cat_or_die($_)) } split(' ', $already_have);
+    $already_have = '(' . join('|', map { quotemeta } @l) . ')';
 }
 
 open(my $F, "tac $log_file |");
@@ -47,6 +52,8 @@ while (<$F>) {
 
     last if $file =~ m!/tmp/live_tree/move/(devices|symlinks)!;
     last if $from_time && $time le $from_time;
+
+    $already_have && $file =~ /^$already_have$/ and next;
 
     if ($file !~ /^$skipped_dirs/) {
 	if (-l $file ? !$no_link : -d $file ? !$no_dir : 1) {
