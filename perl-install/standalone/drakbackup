@@ -128,11 +128,6 @@ use common;
 use Time::localtime;
 use detect_devices;
 
-#if ("@ARGV" =~ /--version/) {
-#    print "Drakbackup Version 1.2\n";
-#    exit(0);
-#}
-
 # Backend Options.
 # make this global for status screen      
 my ($window1, $my_win);
@@ -199,11 +194,12 @@ my @tape_devices;
 my $tar_ext = "tar.gz";
 
 # config. FILES -> Default PATH  & Global variables.
+my %config;
 my @sys_files = ("/etc");
 my @user_list;
 my @list_other;
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
-my $save_path = "/var/lib/drakbackup";
+my $config{PATH_TO_SAVE} = "/var/lib/drakbackup";
 my $log_buff;
 my $comp_mode = 0;
 my $backup_sys = 1;
@@ -264,8 +260,8 @@ my $good_restore_path = 1;
 # allow not-root user with own config
 if ($ENV{USER} ne 'root') {
 	$cfg_dir = "$user_home/.drakbackup/";
-	$save_path = $cfg_dir . "backups";
-	-d $save_path or mkdir_p $save_path;
+	$config{PATH_TO_SAVE} = $cfg_dir . "backups";
+	-d $config{PATH_TO_SAVE} or mkdir_p $config{PATH_TO_SAVE};
 	$nonroot_user = 1;
 	$not_warned = 1;
 	$backup_sys = 0;
@@ -514,7 +510,7 @@ sub save_conf_file {
     my @cfg_list = ("SYS_FILES=@sys_files\n",
 		     "HOME_FILES=@user_list\n", 
 		     "OTHER_FILES=@list_other\n",
-		     "PATH_TO_SAVE=$save_path\n",
+		     "PATH_TO_SAVE=$config{PATH_TO_SAVE}\n",
 		     "HOST_PATH=$host_path\n",
 		     "NET_PROTO=$net_proto\n",
 		     "CD_TIME=$cd_time\n",
@@ -606,7 +602,7 @@ sub save_cron_files {
 
 sub read_conf_file {
     if (-e $cfg_file) {
-        open (CONF_FILE, "<". $cfg_file) || print "You must be root to read configuration file. \n";
+        %config = getVarsFromSh($cfg_file) || print "You must be root to read configuration file. \n";
         local $_;
         while (<CONF_FILE>) {
 	    	next unless /\S/;
@@ -615,7 +611,6 @@ sub read_conf_file {
 	    	if (/^SYS_FILES/)		{ s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
 	    	if (/^HOME_FILES/)		{ s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
 	    	if (/^OTHER_FILES/)		{ s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
-	    	if (/^PATH_TO_SAVE/)	{ s/^PATH_TO_SAVE=//gi; $save_path = $_ }
 	    	if (/^NO_SYS_FILES/)   { $backup_sys = 0 }
 	    	if (/^NO_USER_FILES/)  { $backup_user = 0 }
 	    	if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1 }
@@ -1115,7 +1110,8 @@ sub build_tape {
 		spawn_progress($command, "Running mt to eject tape");
 	}
 }
-	
+
+# share this with logdrake
 sub send_mail {
     my ($result) = @_;
     my $datem = `date`;
