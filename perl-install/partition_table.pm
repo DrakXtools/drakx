@@ -676,7 +676,7 @@ The only solution is to move your primary partitions to have the hole next to th
 sub add {
     my ($hd, $part, $primaryOrExtended, $forceNoAdjust) = @_;
 
-    get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
+    get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss|ataraid)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
 
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
