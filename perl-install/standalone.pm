@@ -231,7 +231,7 @@ sub check_kernel_module_packages {
 	    $result = [ keys(%select), if_($ext_name, $ext_name) ];
 	}
     }
-    return undef;
+    return $result;
 }
 
 sub what_provides {
