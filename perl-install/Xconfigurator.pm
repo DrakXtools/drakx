@@ -408,10 +408,10 @@ sub autoDefaultDepth($$) {
     }
 
     while (my ($d, $r) = each %{$card->{depth}}) {
-	$depth = $depth ? max($depth, $d) : $d;
+	$depth = max($depth || 0, $d);
 
 	#- try to have $resolution_wanted
-	$best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
+	$best = max($best || 0, $d) if $r->[0][0] >= $wres_wanted;
     }
     $best || $depth or die "no valid modes";
 }
@@ -563,6 +563,9 @@ Try with another video card or monitor")), return;
 
     my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
     my $wres = first(split 'x', $res);
+
+    #- take the first available resolution <= the wanted resolution
+    $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
     my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
     $options{auto} or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
@@ -573,7 +576,7 @@ Try with another video card or monitor")), return;
     }
 
     #- needed in auto mode when all has been provided by the user
-    $card->{depth}{$depth} or die "you fixed an unusable depth";
+    $card->{depth}{$depth} or die "you selected an unusable depth";
 
     #- remove all biggest resolution (keep the small ones for ctl-alt-+)
     #- otherwise there'll be a virtual screen :(
