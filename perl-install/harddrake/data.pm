@@ -257,15 +257,6 @@ our @tree =
      },
 
      {
-      class => "BRIDGE",
-      string => N("Bridges and system controllers"),
-      icon => "memory.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER/ } @devices) },
-      checked_on_boot => 0,
-     },
-
-     {
       class => "PRINTER",
       string => N("Printer"),
       icon => "hw_printer.png",
@@ -354,6 +345,15 @@ our @tree =
       icon => "usb.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "BRIDGE",
+      string => N("Bridges and system controllers"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER/ } @devices) },
       checked_on_boot => 0,
      },
 
