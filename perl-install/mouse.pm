@@ -158,7 +158,7 @@ sub read {
 
 sub write {
     my ($prefix, $mouse) = @_;
-    local $mouse->{FULLNAME} = qq("$mouse->{type}|$mouse->{name}");
+    local $mouse->{FULLNAME} = qq("$mouse->{type}|$mouse->{name}"); #-"
     local $mouse->{XEMU3} = bool2yesno($mouse->{nbuttons} < 3);
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
