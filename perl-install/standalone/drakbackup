@@ -1280,7 +1280,7 @@ sub build_backup_files() {
 				if (!cat_("$save_path/list_$incr$user$the_time.txt")) {
 			    	system("rm $save_path/list_$incr$user$the_time.txt");
 				} else {
-					system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_$incr$user$the_time.txt");
+					system("$tar_cmd_user -f $save_path/backup_$incr$user$the_time.$tar_ext -T $save_path/list_$incr$user$the_time.txt");
 					push @file_list_to_send_by_ftp, "$save_path/backup_$incr$user$the_time.$tar_ext";
 					push @file_list_to_send_by_ftp, "$save_path/list_$incr$user$the_time.txt";
 					$results .= "\nfile: $save_path/backup_$incr$user$the_time.$tar_ext\n";
