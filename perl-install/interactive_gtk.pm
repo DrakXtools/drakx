@@ -591,7 +591,6 @@ sub ask_browse_tree_info_refW {
     my (%wtree, %ptree, %pix);
 
     my $w = my_gtk->new($common->{title});
-    my $details = new Gtk::VBox(0,0);
     my $tree = Gtk::CTree->new(3, 0);
     $tree->set_selection_mode('browse');
     $tree->set_column_width(0, 200);
