@@ -461,9 +461,8 @@ sub optionsConfiguration($) {
     $in->ask_from('', _("Choose options for server"), \@l);
 }
 
-sub monitorConfiguration(;$$) {
-    my $monitor = shift || {};
-    my $useFB = shift || 0;
+sub monitorConfiguration {
+    my ($monitor, $noauto) = @_;
 
     my $monitors = readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
@@ -474,16 +473,17 @@ sub monitorConfiguration(;$$) {
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	}
     }
-    if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
+    if ($monitor->{hsyncrange} && $monitor->{vsyncrange} && !$noauto) {
 	return $monitor;
     }
-
-    my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($Xconfigurator_consts::good_default_monitor);
-    $monitor->{type} ||=
-      ($::auto_install ? $Xconfigurator_consts::low_default_monitor :
-       $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %$monitors], $good_default));
-    if ($monitor->{type} eq 'Custom') {
-	$in->ask_from('',
+    if (!$monitor->{ModelName} || $noauto) {
+	my $m = 
+	  ($::auto_install ? $Xconfigurator_consts::low_default_monitor :
+	   $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %$monitors], $Xconfigurator_consts::good_default_monitor));
+	if ($m ne 'Custom') {
+	    put_in_hash($monitor, $monitors->{$m});
+	} else {
+	    $in->ask_from('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -493,10 +493,11 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
 				  [ { val => \$monitor->{hsyncrange}, list => \@Xconfigurator_consts::hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
 				    { val => \$monitor->{vsyncrange}, list => \@Xconfigurator_consts::vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
+	}
     } else {
-	add2hash($monitor, $monitors->{$monitor->{type}});
+	my $m = join('|', if_($monitor->{VendorName}, $monitor->{VendorName}), $monitor->{ModelName});
+	put_in_hash($monitor, $monitors->{$m});
     }
-    add2hash($monitor, { manual => 1 });
 }
 
 sub finalize_config {
@@ -1325,7 +1326,7 @@ sub main {
 
 	$X->{card} = cardConfiguration($X->{card}, $::noauto, $cardOptions);
 
-	$X->{monitor} = monitorConfiguration($X->{monitor}, $X->{card}{server} eq 'FBDev');
+	monitorConfiguration($X->{monitor} ||= {}, 1);
     }
     my $ok = resolutionsConfiguration($X, $::auto);
 
@@ -1346,7 +1347,7 @@ sub main {
 		}, [
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
-	   [ _("Change Monitor") => sub { $X->{monitor} = monitorConfiguration() } ],
+	   [ _("Change Monitor") => sub { monitorConfiguration($X->{monitor}, 'noauto') } ],
            [ _("Change Graphics card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
 					       $card and $X->{card} = $card } ],
                     if_($::expert, 
