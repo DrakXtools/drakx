@@ -156,6 +156,26 @@ sub start_service ($) {
     }
 }
 
+sub start_not_running_service ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
+    # The exit status is not zero when the service is not running
+    if (($? >> 8) != 0) {
+	run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
+	if (($? >> 8) != 0) {
+	    return 0;
+	} else {
+	    # CUPS needs some time to come up.
+	    wait_for_cups() if ($service eq "cups");
+	    return 1;
+	}
+    } else {
+	return 1;
+    }
+}
+
 sub stop_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
@@ -194,26 +214,31 @@ sub SIGHUP_daemon {
     # PDQ has no daemon, exit.
     if ($service eq "pdq") {return 1};
     # CUPS needs auto-configuration
-    run_program::rooted($prefix, "/usr/sbin/setcupsconfig") if ($service eq "cups");
+    run_program::rooted($prefix, "/usr/sbin/correctcupsconfig") if ($service eq "cups");
     # Name of the daemon
     my %daemons = (
 			    "lpr" => "lpd",
-			    "lpd" => "lpr",
+			    "lpd" => "lpd",
 			    "lprng" => "lpd",
 			    "cups" => "cupsd",
 			    "devfs" => "devfsd",
 			    );
     my $daemon = $deamons{$service};
     $daemon = $service if (! defined $daemon);
+#    if ($service eq "cups") {
+#	# The current CUPS (1.1.13) dies on SIGHUP, do the normal restart.
+#	restart_service($service);
+#	# CUPS needs some time to come up.
+#	wait_for_cups();
+#    } else {
+
+    # Send the SIGHUP
+    run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
     if ($service eq "cups") {
-	# The current CUPS (1.1.13) dies on SIGHUP, to the normal restart.
-	restart_service($service);
 	# CUPS needs some time to come up.
 	wait_for_cups();
-    } else {
-	# Send the SIGHUP
-	run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
     }
+
     return 1;
 }
 
@@ -1042,7 +1067,7 @@ sub poll_ppd_base {
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
     run_program::rooted($prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
-    start_service("cups");
+    start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
 	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";

@@ -2093,7 +2093,9 @@ sub install_spooler {
 		    sleep(1);
 		};
 		# Start daemon
-	        printer::start_service("cups");
+		# Avoid unnecessary restarting of CUPS, this blocks the
+		# startup of printerdrake for several seconds.
+		printer::start_not_running_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
 	        printer::set_alternative("lpr","/usr/bin/lpr-cups");
 	        printer::set_alternative("lpq","/usr/bin/lpq-cups");
@@ -2125,6 +2127,13 @@ sub install_spooler {
 					       /usr/bin/convert))))) {
 		    $in->do_pkgs->install(('lpr', 'net-tools', 'gpr', 'a2ps', 'ImageMagick'));
 		}
+		# Start the network (especially during installation), so the
+		# user can set up queues to remote printers.
+		$upNetwork and do {
+		    &$upNetwork(); 
+		    undef $upNetwork; 
+		    sleep(1);
+		};
 		# Start daemon
 	        printer::restart_service("lpd");
 		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
@@ -2155,6 +2164,13 @@ sub install_spooler {
 					       /usr/bin/convert))))) {
 		    $in->do_pkgs->install('LPRng', 'net-tools', 'gpr', 'a2ps', 'ImageMagick');
 		}
+		# Start the network (especially during installation), so the
+		# user can set up queues to remote printers.
+		$upNetwork and do {
+		    &$upNetwork(); 
+		    undef $upNetwork; 
+		    sleep(1);
+		};
 		# Start daemon
 	        printer::restart_service("lpd");
 		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
@@ -2178,6 +2194,13 @@ sub install_spooler {
 					       /usr/X11R6/bin/xpdq))))) {
 		    $in->do_pkgs->install('pdq');
 		}
+		# Start the network (especially during installation), so the
+		# user can set up queues to remote printers.
+		$upNetwork and do {
+		    &$upNetwork(); 
+		    undef $upNetwork; 
+		    sleep(1);
+		};
 		# PDQ has no daemon, so nothing needs to be started
 		
 		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
@@ -2246,7 +2269,7 @@ sub install_foomatic {
     my ($in) = @_;
     if ((!$::testing) &&
 	(!printer::files_exist((qw(/usr/bin/foomatic-configure
-				       /usr/lib/perl5/site_perl/5.6.1/Foomatic/DB.pm)
+				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm)
 				    )))) {
 	my $w = $in->wait_message('', _("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic');
@@ -2280,7 +2303,7 @@ sub main {
 	my $w = $in->wait_message('', _("Checking installed software..."));
 	if ((!$::testing) &&
 	    (!printer::files_exist((qw(/usr/bin/foomatic-configure
-				       /usr/lib/perl5/site_perl/5.6.1/Foomatic/DB.pm
+				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 				       /usr/bin/escputil
 				       /usr/share/printer-testpages/testprint.ps
 				       ),
@@ -2548,6 +2571,7 @@ sub main {
 	  step_0:
 	    #if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
 	    if ((!$::isEmbedded) && (!$::isInstall) &&
+	    #if ((!$::isInstall) &&
 		($in->isa('interactive_gtk'))) {
 		$continue = 1;
 		# Enter wizard mode
