@@ -390,6 +390,7 @@ if_(arch() !~ /^sparc/,
   "usb-uhci" => "USB Controller (uhci)",
   "usb-ohci" => "USB Controller (ohci)",
   "usb-ohci-hcd" => "USB (ohci-hcd)",
+  "ehci-hcd" => "USB2 Controller (ehci-hcd)",
 }],
 [ 'fs', {
   "smbfs" => "Windows SMB",
