@@ -41,14 +41,14 @@ my %theme = ('name' => 'new_theme',
                  'w' => '800',
              },
              'boot_conf' => { 
-                 'tx' => 0 ,
-                 'ty' => 0 ,
-                 'tw' => 0 ,
-                 'th' => 0 ,
-                 'px' => 0 ,
-                 'py' => 0 ,
-                 'pw' => 0 ,
-                 'ph' => 0 ,
+                 'tx' => 0,
+                 'ty' => 0,
+                 'tw' => 0,
+                 'th' => 0,
+                 'px' => 0,
+                 'py' => 0,
+                 'pw' => 0,
+                 'ph' => 0,
                  'pc' => '0x21459d',
              },
              'boot_img' => ''
@@ -78,7 +78,7 @@ my %first = ('frame' => Gtk2::Frame->new(N("first step creation")),
                          },
                  'combo' => { 
                      'res' => ['800x600', '1024x768', '1280x1024'],
-                     'name' => [ $theme{name} , giv_exist_thm() ]
+                     'name' => [ $theme{name}, giv_exist_thm() ]
                      },
                           extras => {
                                      res => {
@@ -125,26 +125,26 @@ my %boot_conf_frame = ('frame' => Gtk2::Frame->new(N("Configure bootsplash pictu
                                'quiet' => N("Make kernel message quiet by default"),
                            },
                        },
-                       'pos' => [ 'tx 1' , 
-                                  'ty 1' ,
-                                  'tw 1' , 
-                                  'th 1' ,
-                                  'px 1' ,
-                                  'py 1' ,
-                                  'pw 1' ,
-                                  'ph 1' ,
-                                  'pc' ,
+                       'pos' => [ 'tx 1', 
+                                  'ty 1',
+                                  'tw 1', 
+                                  'th 1',
+                                  'px 1',
+                                  'py 1',
+                                  'pw 1',
+                                  'ph 1',
+                                  'pc',
                                   'logo',
                                   'quiet',
                                   'annul',
                                   'prev',
-                                  'save' ,
+                                  'save',
                                   'kill',
                                   ],
                        );
 #- var action is used to hide/show the correct frame
-my $VB2 = Gtk2::VBox->new(0,5);
-my $first_vbox = Gtk2::VBox->new(0,5);
+my $VB2 = Gtk2::VBox->new(0, 5);
+my $first_vbox = Gtk2::VBox->new(0, 5);
 
 &mk_frame($VB2, \%first);
 #****************************- Signal event actions
@@ -263,13 +263,13 @@ LOGO_CONSOLE='.$logo.'
 # Make kernel message quiet by default.
 QUIET='.$quiet;
 	output($globalconf_file, $globalconf_cont);
-	output($cfg_file,$cfg_cont);
+	output($cfg_file, $cfg_cont);
 }
 
 
 #- Desc  => read the current bootsplash theme configuration if exist
 sub get_this_thm_res_conf() {
-  	member($first{widgets}{combo}{name}->entry->get_text , giv_exist_thm())
+  	member($first{widgets}{combo}{name}->entry->get_text, giv_exist_thm())
 	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
 	  and thm_in_this_res(1) 
 	  and read_boot_conf();
@@ -283,7 +283,7 @@ sub read_boot_conf {
 	my $line;
 	if (-f $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg') {
           local *CFG;
-		open CFG , $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg';
+		open CFG, $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg';
 	  	while ($line = <CFG>) {
 			$line =~ m/^([a-z][a-z])=([^\n]+)/
 			  and $theme{boot_conf}{$1} = $2;
@@ -354,7 +354,7 @@ sub show_act {
 #- Desc  => just add tooltips
 #- Args  => name of widget(str) and frame to work on it (\%hash)
 sub tool_tip {
-	my ($name , $ref) = @_;
+	my ($name, $ref) = @_;
 	foreach (keys %{$ref->{widget}}) {
 		$_ eq 'tooltip' and next;
 	  	if ($ref->{widget}{$_}{$name}) {
@@ -370,7 +370,7 @@ my %hboxes;
 #- Args  => $box(a Vbox widget to contain all widgets), \%frame (hash with complete definition of the frame)
 #- Return=> all hash{widgets} are created and packed in $box
 sub mk_frame {
-	my ($box , $ref) = @_;
+	my ($box, $ref) = @_;
 	foreach my $pos (@{$ref->{pos}}) {
        my $key = $1.'hb' if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
 	  #- open a new hbox
@@ -425,12 +425,12 @@ sub dec2hex {
 
 #- Desc  => prepare and set all signal_connect for boot_frame widget 
 sub make_boot_frame() {
-	my $VB = Gtk2::VBox->new(0,5);
+	my $VB = Gtk2::VBox->new(0, 5);
 	&mk_frame($VB, \%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
 		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-		my @rgb = map { hex($_)/255 } ($1 ,$2, $3) if $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
+		my @rgb = map { hex($_)/255 } ($1, $2, $3) if $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
 		$color->colorsel->set_current_color(Gtk2::Gdk::Color->new(@rgb));
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
@@ -462,7 +462,7 @@ sub make_boot_frame() {
        my $prog_tl_y 	= $theme{boot_conf}{py};
        my $prog_width	= $theme{boot_conf}{pw};
        my $prog_height  = $theme{boot_conf}{ph};
-	  show_prev($txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height);
+	  show_prev($txt_tl_x, $txt_tl_y, $txt_width, $txt_height, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height);
 	});
 	$boot_conf_frame{frame}->show_all;
 #	- check scales values are possibly correct
@@ -508,8 +508,8 @@ sub show_prev {
      my ($w, $event) = @_;
      my ($x, $y, $width, $height) = $event->area->values;
      $prev_pic->render_to_drawable($w->window, $w->style->fg_gc('normal'), $x, $y, $x, $y, $width, $height, 'normal', 0, 0);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true,$txt_tl_x, $txt_tl_y,$txt_width,$txt_height);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_x,$prog_tl_y,$prog_width, $prog_height);
+     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $txt_tl_x, $txt_tl_y, $txt_width, $txt_height);
+     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height);
  });
  $prev_window->signal_connect(delete_event => \&kill_preview);
  $prev_window->show_all;
