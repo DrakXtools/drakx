@@ -18,7 +18,7 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-VERSION = 1.0
+VERSION = 1.0.1
 
 DEFS = -DVERSION=\"$(VERSION)\"
 
