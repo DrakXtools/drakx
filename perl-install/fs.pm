@@ -226,7 +226,7 @@ sub write_fstab($;$$) {
     unshift @to_add,
       map {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
-	  $options ||= $_->{options};
+	  $options = $_->{options} || $options;
 
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and $dir = '', $options ||= 'ro,rsize=8192,wsize=8192';

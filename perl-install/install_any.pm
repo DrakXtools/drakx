@@ -260,7 +260,7 @@ sub write_ldsoconf {
 }
 
 sub setAuthentication() {
-    my ($shadow, $md5, $nis, $nis_server) = @{$::o->{authentification} || {}}{qw(shadow md5 NIS NIS_server)};
+    my ($shadow, $md5, $nis, $nis_server) = @{$::o->{authentication} || {}}{qw(shadow md5 NIS NIS_server)};
     my $p = $::o->{prefix};
     enableMD5Shadow($p, $shadow, $md5);
     enableShadow() if $shadow;
@@ -309,7 +309,7 @@ sub enableMD5Shadow($$$) {
 sub crypt($) {
     my ($password) = @_;
 
-    $::o->{authentification}{md5} ?
+    $::o->{authentication}{md5} ?
       c::crypt_md5($password, salt(8)) :
          crypt    ($password, salt(2));
 }
@@ -388,7 +388,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab); #- TODO modules bootloader 
 
 #-    local $o->{partitioning}{clearall} = 1;
 

@@ -11,6 +11,7 @@ use modules;
 use pci_probing::main;
 use detect_devices;
 use run_program;
+use devices;
 use commands;
 use modules;
 use log;

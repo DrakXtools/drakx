@@ -51,10 +51,9 @@ sub select($$;$) {
 	my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
 	while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
 	    $l{$n} = 1;
-	    my $i = Package($packages, $n);
+	    my $i = $packages->{$n};
 	    if (!$i && $n =~ /\|/) {
 		foreach (split '\|', $n) {
-		    print "SSSSSSSSSSSSS $_\n";
 		    $i = Package($packages, $_);
 		    last if $i && $i->{selected};
 		}

@@ -616,10 +616,10 @@ sub setRootPassword($) {
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
   $o->{installClass} eq "server" || $::expert ? (
-_("Use shadow file") => { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
-_("Use MD5 passwords") => { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
+_("Use shadow file") => { val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
+_("Use MD5 passwords") => { val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
   ) : (), $::beginner ? () : (
-_("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") },
+_("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("yellow pages") },
   )
 			 ], 
 			 complete => sub {
@@ -630,12 +630,12 @@ _("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _
 			 }
     ) or return;
 
-    if ($o->{authentification}{NIS}) {
+    if ($o->{authentication}{NIS}) {
 	$o->ask_from_entries_ref('',
 				 _("Authentification NIS"),
 				 [ _("NIS Domain"), _("NIS Server") ],
 				 [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
-				   { val => \$o->{authentification}{NIS_server}, list => ["broadcast"] },
+				   { val => \$o->{authentication}{NIS_server}, list => ["broadcast"] },
 				 ]);
     }
     install_steps::setRootPassword($o);

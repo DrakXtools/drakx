@@ -140,7 +140,6 @@ sub suggest_part($$$;$) {
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type};
     $part->{size} = computeSize($part, $best, $hds, $suggestions);
-    print "<<<<$part->{size}, $part->{maxsize}\n";
     1;
 }
 

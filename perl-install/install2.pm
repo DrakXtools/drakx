@@ -138,9 +138,10 @@ $o = $::o = {
 #-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
 #-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
-    authentification => { md5 => 1, shadow => 1 },
+    authentication => { md5 => 1, shadow => 1 },
     lang         => 'en',
     isUpgrade    => 0,
+#-    simple_themes => 1,
 #-    installClass => "normal",
 
     timezone => {
@@ -520,7 +521,6 @@ sub main {
 
     #-  make sure we don't pick up any gunk from the outside world
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
-    $ENV{LD_LIBRARY_PATH} = "";
 
     if ($o->{interactive} eq "gtk" && availableMemory < 24 * 1024) {
 	log::l("switching to newt install cuz not enough memory");
@@ -544,10 +544,6 @@ sub main {
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
-
-    #-  make sure we don't pick up any gunk from the outside world
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
-    $ENV{LD_LIBRARY_PATH} = "";
 
     #- needed very early for install_steps_gtk
     eval { $o->{mouse} ||= mouse::detect() };
