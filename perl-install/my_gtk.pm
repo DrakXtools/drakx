@@ -100,6 +100,7 @@ sub new {
     }
 
     $::isEmbedded or return $o;
+    $::Plug and return $o;
     $o->{window} = new Gtk::HBox(0,0);
     $o->{rwindow} = $o->{window};
     defined($::Plug) or $::Plug = new Gtk::Plug ($::XID);
