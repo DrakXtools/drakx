@@ -127,6 +127,7 @@ sub charsetChanged {
     my ($o) = @_;
     Gtk->set_locale;
     install_gtk::install_theme($o);
+    install_gtk::create_steps_window($o);
 }
 
 #-######################################################################################
