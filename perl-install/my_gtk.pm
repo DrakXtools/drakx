@@ -117,7 +117,7 @@ sub gtkset_usize($$$)  { $_[0]->set_usize($_[1],$_[2]); $_[0] }
 sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }
 sub gtkset_active($$)  { $_[0]->set_active($_[1]); $_[0] }
 sub gtkset_modal       { $_[0]->set_modal($_[1]); $_[0] }
-sub gtkmove { $_[0]->windo->move($_[1], $_[2]); $_[0] }
+sub gtkmove { $_[0]->window->move($_[1], $_[2]); $_[0] }
 
 sub gtksignal_connect($@) {
     my $w = shift;
