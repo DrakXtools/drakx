@@ -139,7 +139,7 @@ our %langs = (
 #'wen' =>   [ 'Sorbian',             'XX Sorbian',       'wen_XX', '1    ', 'iso-8859-1' ],
 'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
 'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1    ', 'utf_he' ],
-'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GB2312:zh_CN:zh' ],
+'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GBK:zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
 'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
 );
@@ -708,6 +708,7 @@ my %charsets = (
 #- for special cases not handled magically
 my %charset2kde_charset = (
     gb2312 => 'gb2312.1980-0',
+    gbk => 'gb2312.1980-0',
     jisx0208 => 'jisx0208.1983-0',
     ksc5601 => 'ksc5601.1987-0',
     Big5 => 'big5-0',
