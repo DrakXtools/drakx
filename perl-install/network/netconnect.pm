@@ -989,9 +989,15 @@ notation (for example, 1.2.3.4).")),
                             $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
                             return 1, $bad[0];
                         }
-                        $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved!", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
-			#- test if IP address is already used (do not test for sagem DSL devices since it may use many ifcfg files)
-                        $in->ask_warn(N("Error"), N("%s already in use\n", $ethntf->{IPADDR})) if $ethntf != $intf->{sagem} && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf;
+                        if (is_ip_forbidden($ethntf->{IPADDR})) {
+                          $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved!", $ethntf->{IPADDR}));
+                          return 1;
+                        }
+                        #- test if IP address is already used (do not test for sagem DSL devices since it may use many ifcfg files)
+                        if ($ethntf->{DEVICE} !~ /eagle/ && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf) {
+                          $in->ask_warn(N("Error"), N("%s already in use\n", $ethntf->{IPADDR}));
+                          return 1;
+                        }
                     },
                     focus_out => sub {
                         $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0]
