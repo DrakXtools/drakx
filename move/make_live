@@ -249,6 +249,8 @@ foreach (glob("$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-*.html")) {
     $nb % 4 == 0 or die "bad $_\n";
 }
 
+rm_rf("$::prefix/usr/share/locale/en_ZA");
+
 #- remove uncessary wizards, especially from appearing in MCC
 unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakbackup drakedm drakfont drakperm draksec rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
 unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
