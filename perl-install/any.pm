@@ -309,6 +309,11 @@ sub setupBootloader__general {
 
     bootloader::set_profiles($b, $profiles);
     bootloader::set_append($b, "mem", $memsize);
+    if ($force_acpi) {
+	$in->do_pkgs->ensure_is_installed('acpi', "/usr/bin/acpi", 1) or $force_acpi = 0;
+	$in->do_pkgs->ensure_is_installed('acpid', "/usr/sbin/acpid", 1) or $force_acpi = 0;
+	$force_acpi or log::l("deactivating acpi as no acpi nor acpid packages are present");
+    }
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'off'));
     }
