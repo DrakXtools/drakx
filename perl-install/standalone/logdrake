@@ -243,17 +243,19 @@ sub parse_file {
   my ($file) = @_;#$_[0];
 
   $file =~ s/\.gz$//;
-  gtkadd(my $win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
-	 gtkpack(new Gtk2::VBox(2,0),
-		 new Gtk2::Label(" " . N("please wait, parsing file: %s", $files{$_}{desc}) . " "),
-		 my $pbar = new Gtk2::ProgressBar()
-		 )
-	);
-  $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
-  $win_pb->set_modal(1);
-  $win_pb->set_position('center');
-  $win_pb->realize();
-  $win_pb->show_all();
+  unless ($::isEmbedded) {
+      gtkadd(my $win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
+             gtkpack(new Gtk2::VBox(2,0),
+                     new Gtk2::Label(" " . N("please wait, parsing file: %s", $files{$_}{desc}) . " "),
+                     my $pbar = new Gtk2::ProgressBar()
+                     )
+             );
+      $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
+      $win_pb->set_modal(1);
+      $win_pb->set_position('center');
+      $win_pb->realize();
+      $win_pb->show_all();
+  }
   my $ey = $e_yes->get_chars(0, -1);
   my $en = $e_no->get_chars(0, -1);
   $ey =~ s/ OR /\|/;
@@ -283,7 +285,7 @@ sub parse_file {
   my $i = 0;
   foreach (@all) {
       $i++;
-      if ($i % 10) { 
+      if (!$::isEmbedded && $i % 10) { 
 	  $pbar->set_fraction($i/$taille);
 	  gtkflush();
       }
@@ -292,7 +294,7 @@ sub parse_file {
       if (!  /$en/i and /$ey/i)     { logcolorize($_); next }
       if (!  /$en/i and $ey eq "")  { logcolorize($_); next }
   }
-  $win_pb->destroy();
+  $win_pb->destroy() unless $::isEmbedded;
 
   if ($::isTail) {
       close F;
