@@ -1,3 +1,120 @@
+2002/09/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* my_gtk.pm: workaround ERROR: Can't call method "child" on an undefined
+	value at
+	/usr/lib/libDrakX/my_gtk.pm line 94
+
+	* mdk-stage1/network.c: http: don't add a / between the hostname and the
+	url, apache
+	doesn't understand //~fermigier the same way as /~fermigier
+
+2002/09/14  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+	* share/po/wa.po: corrected typo
+
+	* standalone/logdrake, standalone/drakfloppy: corrected gettext domain
+	(translations are now in libDrakX)
+
+	* share/po/cy.po, share/po/zh_CN.po, share/po/lv.po, share/po/fr.po:
+	updated Welsh, French, Latvian and Chinese files
+
+2002/09/14  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Made "LPRng" show up in the spooler menu when LPRng is
+	installed.
+
+	* share/po/de.po: Printerdrake translations
+	Printerdrake translations
+	Printerdrake translations
+	Printerdrake translations.
+	Printerdrake translations
+
+2002/09/13  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone.pm: 
+	  - meuh aka launch drakbug when incident is risen
+
+2002/09/13  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - fix old conf files name (thx titi)
+
+2002/09/13  florin
+
+	* network/shorewall.pm: more services in drakgw_protocols
+
+2002/09/13  François Pons  <fpons@mandrakesoft.com>
+
+	* live_install2: allow devfsd to be restarted after update.
+
+	* install_any.pm: allow live_update to have something configured correctly
+	for urpmi media.
+
+2002/09/13  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: removed
+	obsolete old unused strings, to make the po files lighter
+
+2002/09/13  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/sp.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/bs.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po: update the help english part (so that no
+	fuzzy occurs)
+
+	* share/rpmsrate: put back kernel-secure
+
+	* install_any.pm: don't write fstab on upgrade (to workaround the fact
+	that many entries are dropped)
+
+	* help.pm, share/po/help-de.pot, share/po/help-it.pot,
+	share/po/help-fr.pot, share/po/help-es.pot: update help from xml
+
+2002/09/13  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Do not insist on "curl" to download PPDs from a CUPS
+	server (for Star Office/OpenOffice.org/GIMP), take the one from "curl"
+	and "wget" which is there. Install "webfetch" when none is there.
+	Let "cups-drivers" be installed when switching from normal to expert
+	mode.
+	Entries in "auto-detected" field of SMB printer setup mask should not be
+	editable.
+
+	* printer.pm: Do not insist on "curl" to download PPDs from a CUPS server
+	(for Star Office/OpenOffice.org/GIMP), take the one from "curl" and
+	"wget" which is there. Install "webfetch" when none is there.
+	Let "cups-drivers" be installed when switching from normal to expert
+	mode.
+	Added timeouts to network scan with "nmap" so that scan does not take
+	too long when there are machines running a firewall.
+	To find running machines in the network, do not only a broadcast ping
+	but also an "nmblookup" to also catch Windows machines which do not
+	answer to ping.
+
 2002/09/13  Daouda Lo  <daouda@mandrakesoft.com>
 
 	* drakxtools.spec: 
@@ -3322,7 +3439,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.748 2002/09/12 22:50:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.749 2002/09/13 14:57:47 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
