@@ -94,74 +94,89 @@ sub adsl_detect() {
 }
 
 sub adsl_conf_backend {
-    my ($adsl, $netc, $adsl_type, $o_netcnx) = @_;
+    my ($adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
+    # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
-    mkdir_p("$::prefix/etc/ppp");
-    output("$::prefix/etc/ppp/options",
-'lock
-noipdefault
-persist
-noauth
-usepeerdns
-defaultroute
-') if $adsl_type =~ /pptp|pppoe|speedtouch|eci/;
 
-    write_secret_backend($adsl->{login}, $adsl->{passwd});
-
-    if ($adsl_type eq 'pppoe') {
-	substInFile {
-	    s/ETH=.*\n/ETH=$netc->{NET_DEVICE}\n/;
-	    s/USER=.*\n/USER=$adsl->{login}\n/;
-	    s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
-	    s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
-	} "$::prefix/etc/ppp/pppoe.conf";
-    }
-
-    if ($adsl_type eq 'sagem') {
-	substInFile {
-	    s/VCI=.*\n/VCI=00000023\n/;
-	    s/Encapsulation=.*\n/Encapsulation=00000006\n/;
-	} "$::prefix/etc/analog/adiusbadsl";
-	output("$::prefix/etc/ppp/peers/adsl",
-qq(noauth
-noipdefault
-pty "/usr/sbin/pppoa -I `/usr/sbin/adictrl -s; /usr/sbin/adictrl -i`"
+    # all supported modems came with their own pppoa module, so no need for "plugin pppoatm.so"
+    my %modems = (
+                  speedtouch =>
+                  {
+                   start => '/usr/sbin/modem_run -v 0 -f /usr/share/speedtouch/mgmt.o',
+                   overide_script => 1,
+                   server => {
+                              pppoa => qq("/usr/sbin/pppoa3 -e 1 -c -vpi $netc->{vpi} -vci $netc->{vci}"),
+                             },
+                   ppp_options => qq(
+sync
+noaccomp),
+                   aliases => [
+                               ['speedtch', 'off'], # disable kernel driver, we use userland stuff but for firmware upload
+                               ['char-major-108', 'ppp_generic'],
+                               ['tty-ldisc-3', 'ppp_async'],
+                               ['tty-ldisc-13', 'n_hdlc'],
+                               ['tty-ldisc-14', 'ppp_synctty'],
+                               ['ppp-compress-21', 'bsd_comp'],
+                               ['ppp-compress-24', 'ppp_deflate'],
+                               ['ppp-compress-26', 'ppp_deflate']
+                              ],
+                  },
+                  sagem =>
+                  {
+                   start => "/usr/sbin/eaglectrl -w",
+                   get_intf => "/usr/sbin/eaglectrl -i",
+                   server => {
+                              pppoa => qq("/usr/sbin/pppoa -I `/usr/sbin/eaglectrl -s; /usr/sbin/eaglectrl -i`"),
+                             },
+                   ppp_options => qq(
 mru 1492
 mtu 1492
-kdebug 1
 nobsdcomp
 nodeflate
 noaccomp -am
-nopcomp
-noccp
-novj
-novjccomp
-holdoff 4
-maxfail 25
+novjccomp),
+                   aliases => [
+                               ['char-major-108', 'ppp_generic'],
+                               ['tty-ldisc-14', 'ppp_synctty'],
+                               ['tty-ldisc-13', 'n_hdlc']
+                              ],
+                  },
+                  eci =>
+                  {
+                   start => '/usr/bin/startmodem',
+                   server => {
+                              pppoe => qq("/usr/bin/pppoeci -v 1 -vpi $netc->{vpi} -vci $netc->{vci}"),
+                             },
+                   ppp_options => qq(
+noipdefault
+sync
+noaccomp
+linkname eciadsl
+noauth
+lcp-echo-interval 0)
+                  },
+                 );
+
+
+    if ($adsl_type =~ /^pp/) {
+        mkdir_p("$::prefix/etc/ppp");
+        $in->do_pkgs->install('ppp') if !$>;
+        output("$::prefix/etc/ppp/options",
+               qq(lock
+noipdefault
 persist
+noauth
 usepeerdns
-defaultroute
-user "$adsl->{login}"
-));
-    }
-
-    if ($adsl_type eq 'sagem_dhcp') {
-	substInFile {
-	    s/VCI=.*\n/VCI=00000024\n/;
-	    s/Encapsulation=.*\n/Encapsulation=00000004\n/;
-	} "$::prefix/etc/analog/adiusbadsl";
-    }
-
-    if ($adsl_type eq 'speedtouch') {
-	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
-	output("$::prefix/etc/ppp/peers/adsl", 
+defaultroute)
+              );
+        
+	output("$::prefix/etc/ppp/peers/adsl",
 qq(noauth
 noipdefault
-pty "/usr/sbin/pppoa3 -e 1 -c -vpi $vpi -vci $vci"
-sync
+pty $modems{$adsl_device}{server}
+$modems{$adsl_device}{ppp_options}
 kdebug 1
-noaccomp
 nopcomp
 noccp
 novj
@@ -172,91 +187,104 @@ usepeerdns
 defaultroute
 user "$adsl->{login}"
 ));
-	modules::add_alias($_->[0], $_->[1]) foreach  ['speedtch', 'off'],
-	                                              ['char-major-108', 'ppp_generic'],
-						      ['tty-ldisc-3', 'ppp_async'],
-						      ['tty-ldisc-13', 'n_hdlc'],
-						      ['tty-ldisc-14', 'ppp_synctty'],
-						      ['ppp-compress-21', 'bsd_comp'],
-						      ['ppp-compress-24', 'ppp_deflate'],
-						      ['ppp-compress-26', 'ppp_deflate'];
-	$::isStandalone and modules::write_conf();
-    }
-    
-    if ($adsl_type eq 'eci') {
-	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
-	output("$::prefix/etc/ppp/peers/adsl", 
-qq(debug
-kdebug 1
-noipdefault
-defaultroute
-pty "/usr/bin/pppoeci -v 1 -vpi $vpi -vci $vci"
-sync
-noaccomp
-nopcomp
-noccp
-novj
-holdoff 10
-user "$adsl->{login}"
-linkname eciadsl
-maxfail 10
-usepeerdns
-noauth
-lcp-echo-interval 0
-));
-	modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
-						      ['tty-ldisc-14', 'ppp_synctty'],
-						      ['tty-ldisc-13', 'n_hdlc'];
-	$::isStandalone and modules::write_conf();
+
+        write_secret_backend($adsl->{login}, $adsl->{passwd});
+        
+        if ($adsl_type eq 'pppoe') {
+            substInFile {
+                s/ETH=.*\n/ETH=$netc->{NET_DEVICE}\n/;
+                s/USER=.*\n/USER=$adsl->{login}\n/;
+                s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
+                s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
+            } "$::prefix/etc/ppp/pppoe.conf";
+        }
+
+        my %ppp_options = 
+          (
+           pptp => {
+                    connect => "/usr/bin/pptp 10.0.0.138 name $adsl->{login}",
+                    disconnect => "/usr/bin/killall pptp pppd\n",
+                   },
+
+           pppoe => {
+                     # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
+                     connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}",
+                     disconnect => qq(/usr/sbin/adsl-stop
+/usr/bin/killall pppoe pppd\n),
+                    },
+
+           pppoa => {
+                     disconnect => qq(/usr/sbin/adsl-stop
+/usr/bin/killall pppoe pppd\n),
+                    },
+          );
+        write_cnx_script($netc, "adsl", join("\n",
+                                             "/sbin/route del default",
+                                             $modems{$adsl_device}{start},
+                                             # /usr/sbin/pppd call adsl
+                                             $modems{$adsl_device}{server}{$adsl_type} || "/usr/sbin/pppd file /etc/ppp/peers/adsl",
+                                             $ppp_options{$adsl_type}{connect}
+                                            ),
+                         $ppp_options{disconnect},
+                         $netc->{adsltype}
+                        );
+
+    } elsif ($adsl_type eq 'dhcp') {
+        write_cnx_script($netc, 'adsl',
+                         qq(
+/sbin/route del default
+#$modems{$adsl_device}{start}
+INTERFACE=`$modems{$adsl_device}{get_intf}`
+/sbin/dhcpcd \$INTERFACE
+#/sbin/ifconfig \$INTERFACE 192.168.60.30 netmask 255.255.255.0 up
+/usr/sbin/pppd file /etc/ppp/peers/adsl\n),
+                         qq(
+INTERFACE=`$modems{$adsl_device}{get_intf}`
+/sbin/ifdown \$INTERFACE\n"),
+                         $netc->{adsltype});
+    } elsif ($adsl_type eq 'static') {
+        # TODO: handle manually configured (new feature)
+        write_cnx_script($netc, 'adsl',
+                         qq(
+/sbin/route del default
+#$modems{$adsl_device}{start}
+INTERFACE=`$modems{$adsl_device}{get_intf}`
+/sbin/ifconfig \$INTERFACE 192.168.60.30 netmask 255.255.255.0 up
+/usr/sbin/pppd file /etc/ppp/peers/adsl\n),
+                         qq(
+INTERFACE=`$modems{$adsl_device}{get_intf}`
+/sbin/ifdown \$INTERFACE\n"),
+                         $netc->{adsltype});
     }
 
-    if ($adsl_type eq 'pptp') {
-	write_cnx_script($netc, "adsl",
-"/sbin/route del default
-/usr/bin/pptp 10.0.0.138 name $adsl->{login}
-",
-'/usr/bin/killall pptp pppd
-', $netc->{adsltype}) } elsif ($adsl_type eq 'pppoe') {
-    write_cnx_script($netc, "adsl",
-"/sbin/route del default
-LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}
-",
-'/usr/sbin/adsl-stop
-/usr/bin/killall pppoe pppd
-', $netc->{adsltype}) } elsif ($adsl_type eq 'speedtouch') {
-    write_cnx_script($netc, 'adsl',
-'/sbin/route del default
-/usr/share/speedtouch/speedtouch.sh start
-',
-'/usr/share/speedtouch/speedtouch.sh stop
-', $netc->{adsltype}) } elsif ($adsl_type eq 'sagem') {
-    write_cnx_script($netc, 'adsl',
-'/sbin/route del default
-/usr/sbin/adictrl -w
-#INTERFACE=`/usr/sbin/adictrl -i`
-#/sbin/ifconfig $INTERFACE 192.168.60.30 netmask 255.255.255.0 up
-/usr/sbin/pppd file /etc/ppp/peers/adsl
-',
-'/usr/sbin/stopadsl
-', $netc->{adsltype}) } elsif ($adsl_type eq 'sagem_dhcp') {
-    write_cnx_script($netc, 'adsl',
-'/sbin/route del default
-/usr/sbin/adictrl -w
-INTERFACE=`/usr/sbin/adictrl -i`
-/sbin/dhcpcd $INTERFACE
-',
-'INTERFACE=`/usr/sbin/adictrl -i`
-/sbin/ifdown $INTERFACE
-', $netc->{adsltype}) } elsif ($adsl_type eq 'eci') {
-    write_cnx_script($netc, 'adsl',
-'/sbin/route del default
-/usr/bin/startmodem
-',
-"# stop is still beta...
-echo 'not yet implemented, still beta software'
-", $netc->{adsltype}) }
+
+    # sagem specific stuff
+    if ($adsl_device eq 'sagem') {
+        my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi);
+        # set vpi and vci parameters for sagem
+        substInFile {
+            s/VCI=.*\n/VCI=$l{vci}\n/;
+            s/VPI=.*\n/VCI=$l{vpi}\n/;
+            s/Encapsulation=.*\n/Encapsulation=$l{vpi}\n/;
+        } "$::prefix/etc/analog/adiusbadsl.conf";
+    } elsif ($adsl_device eq 'speedtouch') {
+        # speedtouch really is used only with pppoa, let its own script handle firmware upload and the like:
+        write_cnx_script($netc, 'adsl', 
+                         qq(/sbin/route del default
+/usr/share/speedtouch/speedtouch.sh start\n),
+                         "/usr/share/speedtouch/speedtouch.sh stop\n",
+                         $netc->{adsltype});
+    }
+
+
+    # set aliases:
+    if (exists $modems{$adsl_device}{modules}) {
+        modules::add_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{modules}};
+        $::isStandalone and modules::write_conf();
+    }
 
     $netc->{NET_INTERFACE} = 'ppp0';
+    write_cnx_script($netc);
 }
 
 1;
