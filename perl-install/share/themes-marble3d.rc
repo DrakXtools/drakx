@@ -135,53 +135,53 @@ style "window"
 
 style "any"
 {
-  text[NORMAL]	  = { 0.00, 0.00, 0.00 }
-  fg[NORMAL]      = { 0.00, 0.00, 0.00 }
-  fg[PRELIGHT]    = { 0.25, 0.25, 0.25 }
-  fg[ACTIVE]      = { 0.00, 0.00, 0.00 }
-  fg[SELECTED]    = { 0.00, 0.00, 0.00 }
-  fg[INSENSITIVE] = { 0.50, 0.50, 0.50 }
+text[NORMAL] = { 0, 0, 0 }
+fg[NORMAL] = { 0, 0, 0 }
+fg[PRELIGHT] = { 0.25, 0.25, 0.25 }
+fg[ACTIVE] = { 0, 0, 0 }
+fg[SELECTED] = { 0, 0, 0 }
+fg[INSENSITIVE] = { 0.5, 0.5, 0.5 }
   
-  base[NORMAL]    = { 0.75, 0.75, 0.75 }
-  bg[NORMAL]      = { 0.80, 0.80, 0.80 }
-  bg[PRELIGHT]    = { 0.85, 0.85, 0.85 }
-  bg[ACTIVE]      = { 0.90, 0.90, 0.90 }
-  bg[SELECTED]    = { 0.90, 0.80, 0.70 }
-  bg[INSENSITIVE] = { 0.80, 0.75, 0.70 }
+base[NORMAL] = { 0.75, 0.75, 0.75 }
+bg[NORMAL] = { 0.29, 0.38, 0.67 }
+bg[PRELIGHT] = { 0.85, 0.85, 0.85 }
+bg[ACTIVE] = { 0.9, 0.9, 0.9 }
+bg[SELECTED] = { 0.9, 0.8, 0.7 }
+bg[INSENSITIVE] = { 0.8, 0.75, 0.7 }
 }
 
 style "entry"
 {
-  base[NORMAL] = { 1.0, 1.0, 1.0 }
-  base[ACTIVE] = { 1.0, 1.0, 1.0 }
-  fg[NORMAL] = { 0, 0, 0 }
+base[NORMAL] = { 1.0, 1.0, 1.0 }
+base[ACTIVE] = { 1.0, 1.0, 1.0 }
+fg[NORMAL] = { 0, 0, 0 }
 }
 
 style "notebook"
 {
-  bg[NORMAL]	  = { 0.82, 0.8, 0.8 }
-  bg[ACTIVE]	  = { 0.72, 0.7, 0.7 }
-  fg[NORMAL]      = { 0, 0, 0 }
+bg[NORMAL] = { 0.82, 0.8, 0.8 }
+bg[ACTIVE] = { 0.72, 0.7, 0.7 }
+fg[NORMAL] = { 0, 0, 0 }
 }
 
 style "button" = "any"
 {
-  bg[NORMAL] = { 1.0, 1.0, 1.0 }
-  fg[NORMAL] = { 0, 0, 0 }
-  bg[PRELIGHT] = { 1.0, 1.0, 1.0 }
-  fg[PRELIGHT] = { 0.67, 0.67, 0.67 }
+bg[NORMAL] = { 1.0, 1.0, 1.0 }
+fg[NORMAL] = { 0, 0, 0 }
+bg[PRELIGHT] = { 1.0, 1.0, 1.0 }
+fg[PRELIGHT] = { 0.67, 0.67, 0.67 }
 }
 
 style "background"
 {
-  bg[NORMAL] = { 0.8, 0.8, 0.8 }
-  bg[PRELIGHT] = { 0.74, 0.72, 0.7 }
+bg[NORMAL] = { 0.8, 0.8, 0.8 }
+bg[PRELIGHT] = { 0.74, 0.72, 0.7 }
 }
 
 
 style "steps"
 {
-  fg[NORMAL] = { 0.40, 0.30, 0.20 }
+fg[NORMAL] = { 0.4, 0.3, 0.2 }
 
   engine "pixmap" {
     image 
