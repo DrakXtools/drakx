@@ -794,6 +794,7 @@ sub charset {
 
 
 sub check {
+    $^W = 0;
     my $ok = 1;
     my $warn = sub {
 	print STDERR "$_[0]\n";

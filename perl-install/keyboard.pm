@@ -475,6 +475,7 @@ sub read {
 
 sub check {
     require lang;
+    $^W = 0;
 
     my $ok = 1;
     my $warn = sub {
