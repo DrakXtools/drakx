@@ -1,3 +1,157 @@
+2005/02/14  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: Modified font settings for zh_CN and zh_TW, 10pt would be fine
+	to New Sung
+	rather than 14pt.
+
+2005/02/14  peroyvind
+
+	* share/po/nb.po: Updates from Eskild Hustvedt:)
+
+2005/02/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (probeSerialDevices) simplify
+
+	* standalone/service_harddrake: better style
+
+2005/02/13  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po: updated Japanese file
+
+2005/02/13  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: protect against bad depth (may occur on ppc?)
+
+2005/02/13  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* drakconf, DrakX
+
+2005/02/13  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: Allow HPLIP setup also when
+	setting up the print queue manually.
+
+2005/02/12  mbukovjan
+
+	* share/po/cs.po: Updated Czech translations
+
+2005/02/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po, share/po/DrakX.pot: updated Basque file
+
+	* share/po/cy.po: updated Welsh file
+
+2005/02/12  rstandtke
+
+	* share/po/de.po: some additions
+
+2005/02/11  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: GNOME is now using gnome-volume-manager instead of
+	magicdev
+	  -install GNOME software if GNOME AND KDE are selected at install
+	  -install gthumb instead of gqview
+	  -install sound-juicer and rhythmbox for sound and GNOME
+
+2005/02/11  fisher
+
+	* share/po/uk.po: translation update
+
+2005/02/11  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* tools/ddcprobe/Makefile: ppc fixes (danny)
+
+2005/02/11  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/11  mareklaane
+
+	* share/po/et.po: Updated and fixed translation.
+
+2005/02/11  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* lang.pm: Don't use the RPM_LANG_INSTALL environment variable anymore
+
+	* install_any.pm: Sort media names in recapitulative message
+
+2005/02/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: fix removing a PCMCIA controller
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/advertising/10.pl, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: fix CD-ROM acronym
+
+	* drakxtools.spec: 10.2-0.25mdk
+
+	* harddrake/sound.pm: align
+	add snd-hdspm & snd-indigo
+	add snd-emu10k1x
+
+	* pkgs.pm: do not favor perl-GTK
+
+	* modules.pm: add various/crypto category (support for hardware
+	accelerated crypto)
+	(write_preload_conf) preload padlock driver for VIA C3 that have RNG
+	(crypto hw) enabled
+
+2005/02/11  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic translation + a few fixes
+	Arabic translation
+
+2005/02/10  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/02/10  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fr.po: updated Slovenian file
+	updated French file
+
+	* share/po/sl.po: updated Slovenian file
+
+2005/02/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/list: include dmraid
+
+	* share/rpmsrate: install hotkeys even when KDE isn't selected
+
+	* docs/HACKING: add another required package (dmraid)
+
+	* detect_devices.pm (isTVcard) better style
+	(probeSerialDevices) really "install" serial modules
+
+2005/02/10  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Sync with arabic translation CVS
+
 2005/02/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/fr.po: updated French file
@@ -44741,7 +44895,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1007 2005/02/07 09:11:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1008 2005/02/10 16:09:01 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
