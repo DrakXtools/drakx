@@ -829,6 +829,10 @@ sub summaryBefore {
     #- auto-detection
     $o->configurePrinter(0);
     install_any::preConfigureTimezone($o);
+    #- get back network configuration.
+    require network;
+    eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
+    log::l("summaryBefore: network configuration: $@");
 }
 
 sub summary_prompt {
