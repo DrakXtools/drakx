@@ -253,7 +253,7 @@ my %charsets = (
   "iso-8859-14" => [ "tlat8",		"iso14",	"trivial.trans",
 	"iso8859-14", "850", std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
-	"iso8859-15", "850", std("iso8859-15") ],
+	"iso8859-15", "850", sub { std("iso8859-15", @_) } ],
   "iso-8859-9e" => [ "tiso09e",		"iso09",	"trivial.trans",
 	"iso8859-9", "857", std2("iso8859-9e",10) ],
 #- japanese needs special console driver for text mode [kon2]
