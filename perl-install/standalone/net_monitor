@@ -156,7 +156,6 @@ $SIG{CHLD} = sub {
         $child_pid = waitpid(-1, POSIX::WNOHANG);
         if ($tool_pid eq $child_pid) {
             undef $tool_pid;
-            $button_connect->set_sensitive(1);
             $button_close->set_sensitive(1);
         }
     } while $child_pid > 0;
@@ -475,10 +474,10 @@ sub update() {
 		$statusbar->pop(1);
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
+            $button_connect->set_sensitive(1);
             $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", translate($netcnx->{type})) : N("Connect %s", $netcnx->{type}));
-	    $button_connect->set_sensitive($default_intf || scalar(@interfaces));
 	}
-    if (!(-e $network::tools::connect_file && -e $network::tools::disconnect_file)) {
+    unless ($default_intf || @interfaces) {
 	$button_connect->set_sensitive(0);
 	$button_connect->set("label", N("No internet connection configured"));
     }
