@@ -108,7 +108,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     } else {
         $res = 1;
     }
-    if ($res) {
+    if (!$no && $res) {
         foreach my $configurator (@configurator_pool) {
             if (fork()) {
                 wait();
