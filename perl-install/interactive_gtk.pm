@@ -181,7 +181,7 @@ sub ask_from_entries_refW {
 	my ($i, $button) = @_;
 	gtkdestroy($i->{icon});
 	my $f = $i->{icon2f}->(${$i->{val}});
-	$i->{icon} = -e $f ?  
+	$i->{icon} = -e $f ?
 	  new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)) :
 	  new Gtk::Label(translate(${$i->{val}}));
 	$button->add($i->{icon});
