@@ -810,7 +810,7 @@ sub autologin {
 Do you want to use this feature?"),
 			 ok => _("Yes"),
 			 cancel => _("No") },
-		       [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+		       [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => \@users },
 			 { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
 		      )
 	  or delete $o->{autologin};
