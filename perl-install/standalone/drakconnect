@@ -477,7 +477,7 @@ Configure them first by clicking on 'Configure'")));
 sub configure_net {
     my ($netcnx, $netc, $_intf) = @_;
     my $dialog = ugtk2->new('drakconnect');
-    my $exit_dialogsub = sub {  };
+    my $exit_dialogsub = sub { Gtk2->main_quit };
     if (!$netcnx->{type}) {
         $in->ask_warn(
                     N("Warning"), 
