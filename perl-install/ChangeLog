@@ -24,6 +24,62 @@
 
 	* Makefile: /usr/lib/X11 now exists on non-sparc (was only for sparc)
 
+	* ChangeLog: New snapshot uploaded
+
+2000/12/18  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm: added embedded support for control-center
+	corrected embedded support.
+	new control center and related
+
+	* netconnect.pm: corrected typo
+	corrected typo
+
+	* standalone/drakxservices, standalone/control-center, ChangeLog,
+	standalone/XFdrake, standalone/draknet2, standalone/adduserdrake,
+	standalone/drakboot: new control center and related
+
+	* install_gtk.pm: added firewall support
+
+	* install2.pm: included firewall handling
+	changed firewall comportement
+
+	* install_steps_interactive.pm: changed firewall comportement
+
+	* modules.pm: corrected bad mergeinconf
+
+2000/12/18  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile, share/keymaps_generate: tar and bzip2 is cfj/xfj and no more
+	cfI/xfI
+	remove isdndb.net
+
+2000/12/19  dam's  <damien@mandrakesoft.com>
+
+	* standalone/pixmaps/logo1.xpm, standalone/pixmaps/px3.xpm,
+	standalone/pixmaps/draknet4.xpm, standalone/pixmaps/draknet1.xpm,
+	standalone/pixmaps/modem.xpm, standalone/pixmaps/logo2.xpm,
+	standalone/pixmaps/util6.gif, standalone/pixmaps/unknown.xpm,
+	standalone/pixmaps/drakgw.xpm, standalone/pixmaps/px4.xpm,
+	standalone/pixmaps/draknet5.xpm, standalone/pixmaps/px1.xpm,
+	standalone/pixmaps/draknet2.xpm, standalone/pixmaps/logo3.xpm,
+	standalone/pixmaps/util7.gif, standalone/pixmaps/port.xpm,
+	standalone/pixmaps/draknet.xpm, standalone/pixmaps/ethernet.xpm,
+	standalone/pixmaps/isdn.xpm, standalone/pixmaps/px2.xpm,
+	standalone/pixmaps/draknet3.xpm: added control-center.
+
+2000/12/19  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: when loading /snd-card-/ module, load snd-pcm-oss
+
+	* unused/christmas-karaoke.patch: Happy Christmas :)
+
+	* install_any.pm: spawnShell: set DISPLAY, just in case :)
+
+	* install2.pm: set PATH before doing spawnShell
+
+	* Makefile: /usr/lib/X11 now exists on non-sparc (was only for sparc)
+
 2000/12/18  dam's  <damien@mandrakesoft.com>
 
 	* interactive_gtk.pm: added embedded support for control-center
