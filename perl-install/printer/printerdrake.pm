@@ -963,7 +963,8 @@ sub generate_queuename {
 		    # characters.
 		    last if ((length($queue) <= $ml) ||
 			     ($_ !~ /[a-zA-Z]{2,}$/) ||
-			     (length($parts{'make'}) <= 3));
+			     (($part eq 'make') && 
+			      (length($parts{'make'}) <= 3)));
 		}
 		$parts{$part} = join('', @words);
 		$queue = "$parts{'make'} $parts{'model'}";
@@ -976,7 +977,7 @@ sub generate_queuename {
 	       (length($parts{'model'}) > 3)) {
 	    # Queue name too long? Remove last words from model name.
 	    $parts{'model'} =~
-		s/(?<=[a-zA-Z0-9])[^a-zA-Z0-9]+[a-zA-Z0-9]*$//;
+		s/[^a-zA-Z0-9]+[a-zA-Z0-9]*$// || last;
 	    $queue = "$parts{'make'} $parts{'model'}";
 	    $queue =~ s/\s+//g;
 	}
@@ -3207,13 +3208,13 @@ sub get_printer_info {
 		# Set device permissions
 		if ($printer->{currentqueue}{connect} =~ 
 		    /^\s*(file|parallel|usb):(\S*)\s*$/) {
-              if ($printer->{SPOOLER} eq 'cups') {
-                  set_permissions($2, '660', 'lp', 'sys');
-              } elsif ($printer->{SPOOLER} eq 'pdq') {
-                  set_permissions($2, '666');
-              } else {
-                  set_permissions($2, '660', 'lp', 'lp');
-              }
+		    if ($printer->{SPOOLER} eq 'cups') {
+			set_permissions($2, '660', 'lp', 'sys');
+		    } elsif ($printer->{SPOOLER} eq 'pdq') {
+			set_permissions($2, '666');
+		    } else {
+			set_permissions($2, '660', 'lp', 'lp');
+		    }
 		}
 		# This is needed to have the device not blocked by the
 		# spooler backend.
