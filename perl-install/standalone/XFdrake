@@ -51,7 +51,7 @@ standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
-$ENV{SHARE_PATH} ||= "/usr/share"; # make sure SHARE_PATH is ok...
+$ENV{SHARE_PATH} ||= "/usr/share"; # make sure SHARE_PATH is ok....
 
 Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 Xconfig::getinfo($i);
