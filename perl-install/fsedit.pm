@@ -387,9 +387,32 @@ sub allocatePartitions($$) {
 }
 
 sub auto_allocate {
-    my ($hds, $suggestions) = @_;    
+    my ($hds, $suggestions, $raid) = @_;    
     allocatePartitions($hds, $suggestions || $suggestions{simple});
+
+    auto_allocate_raids($hds, $suggestions, $raid) if $raid && $suggestions;
+
     map { partition_table::assign_device_numbers($_) } @$hds;
+}
+
+sub auto_allocate_raids {
+    my ($hds, $suggestions, $raid) = @_;
+
+    my @raids = grep { isRAID($_) } get_fstab(@$hds) or return;
+    if (@raids) {
+	require raid;
+	my @mds = grep { $_->{hd} =~ /md/ } @$suggestions;
+	foreach my $md (@mds) {
+	    my @raids_ = grep { !$md->{parts} || $md->{parts} =~ /\Q$_->{mntpoint}/ } @raids;
+	    @raids = difference2(\@raids, \@raids_);
+	    my $nb = raid::new($raid, @raids_);
+	    my $part = $raid->[$nb];
+
+	    my %h = %$md;
+	    delete @h{'hd', 'parts'};
+	    put_in_hash($part, \%h); # mntpoint, level, chunk-size, type
+	}
+    }
 }
 
 sub undo_prepare($) {

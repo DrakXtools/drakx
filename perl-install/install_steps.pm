@@ -192,7 +192,7 @@ sub doPartitionDisks {
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } 
     if ($o->{partitioning}{auto_allocate}) {
-	fsedit::auto_allocate($o->{hds}, $o->{partitions});
+	fsedit::auto_allocate($o->{hds}, $o->{partitions}, $o->{raid}{raid});
     }
 }
 
