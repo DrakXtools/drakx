@@ -49,7 +49,7 @@ sub gtkset {
     }
     my %opts = @_;
 
-    $class =~ s/^Gtk2::(Gdk::)?// or internal_error("gtkset unknown class $class");
+    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk2)::// or internal_error("gtkset unknown class $class");
     
     _gtk($w, $class, 'gtkset', \%opts);
 }
@@ -64,7 +64,7 @@ sub gtkadd {
 	internal_error("gtkadd $class: $r should be a string in @_");
     }
     my %opts = @_;
-    $class =~ s/^Gtk2::(Gdk::)?// or internal_error("gtkadd unknown class $class");
+    $class =~ s/^(Gtk2|Gtk2::Gdk|mygtk2)::// or internal_error("gtkadd unknown class $class");
     
     _gtk($w, $class, 'gtkadd', \%opts);
 }
@@ -475,16 +475,15 @@ sub _gtk__MagicWindow {
 		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
 		});
 		$::WizardWindow = _create_Window($opts);
-		$::WizardWindow->show;
 	    }
 	} else {
 	    %$opts = ();
 	}
 
+	$w = $::WizardWindow;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
-	$w = $sub_child;
     }
-    $w;
+    bless { real_window => $w, child => $sub_child, pop_it => $pop_it }, 'mygtk2::MagicWindow';
 }
 
 sub _gtk__FileSelection {
@@ -606,6 +605,27 @@ sub _gtknew_handle_children {
 	$w->pack_start($child, $fill, $fill, $padding || 0);
 	$child->show;
     }
+}
+
+#- this magic function redirects method calls:
+#- * default is to redirect them to the {child}
+#- * if the {child} doesn't handle the method, we try with the {real_window}
+#-   (eg : add_accel_group set_position set_default_size
+#- * a few methods are handled specially
+my %for_real_window = map { $_ => 1 } qw(show);
+sub mygtk2::MagicWindow::AUTOLOAD {
+    my ($w, @args) = @_;
+
+    my ($meth) = $mygtk2::MagicWindow::AUTOLOAD =~ /mygtk2::MagicWindow::(.*)/;
+
+    my $s = $meth eq 'destroy' && $w->{pop_it} ||
+	    $for_real_window{$meth} || 
+            !$w->{child}->can($meth)
+	      ? 'real_window' : 'child';
+
+#-    warn "mygtk2::MagicWindow::$meth on $s (@args)\n";
+
+    $w->{$s}->$meth(@args);
 }
 
 sub _create_Window {
