@@ -49,9 +49,6 @@
 #include "dhcp.h"
 
 
-#define NUM_RETRIES	5
-
-
 typedef int bp_int32;
 typedef short bp_int16;
 
