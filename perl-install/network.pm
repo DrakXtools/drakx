@@ -68,10 +68,10 @@ sub write_conf {
 		     NETWORKING => "yes",
 		     FORWARD_IPV4 => "false",
 		     HOSTNAME => "localhost.localdomain",
-		     });
+		    });
     add2hash($netc, { DOMAINNAME => $netc->{HOSTNAME} =~ /\.(.*)/ });
 
-    setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 DHCP_HOSTNAME HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_resolv_conf {
@@ -263,12 +263,14 @@ sub configureNetwork {
     #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
     #-	  }
     if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	my $dhcp_hostname = $netc->{HOSTNAME};
 	$in->ask_from_entries_ref(_("Configuring network"),
 _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
 				  [_("Host name")], [ \$netc->{HOSTNAME} ]);
+	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l);
     }
