@@ -644,7 +644,7 @@ sub get_text_coord {
     my $flag = 1;
     my @t = split($wrap_char, $text);
     my @t2;
-    if ($::isInstall && $::o->{lang} =~ /ja|zh/) {
+    if ($::isInstall && $::o->{locale}{lang} =~ /ja|zh/) {
 	@t = map { $_ . $wrap_char } @t;
 	$wrap_char = '';
 	foreach (@t) {
