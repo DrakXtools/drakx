@@ -7,7 +7,7 @@ use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isApplePartMap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -17,6 +17,7 @@ use partition_table_raw;
 use partition_table_dos;
 use partition_table_bsd;
 use partition_table_sun;
+use partition_table_mac;
 use log;
 
 
@@ -152,6 +153,15 @@ arch() =~ /^sparc/ ? (
   0xff => 'Xenix Bad Block Table',
 );
 
+if (arch() eq "ppc") {
+%types = (
+  0x82 => 'Linux swap',
+  0x83 => 'Linux native',
+  0x401	=> 'Apple Partition',
+  0x402	=> 'Apple HFS Partition',
+);
+}
+
 my %type2fs = (
 arch() !~ /^sparc/ ? (
   0x01 => 'vfat',
@@ -168,8 +178,10 @@ arch() !~ /^sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
+  ox402 => 'hfs',
   nfs  => 'nfs', #- hack
 );
+
 my %types_rev = reverse %types;
 my %fs2type = reverse %type2fs;
 
@@ -196,6 +208,8 @@ sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{t
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
+sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
+sub isApplePartMap { defined $_[0]->{isMap} }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
@@ -332,7 +346,7 @@ sub read_one($$) {
     my ($hd, $sector) = @_;
 
     my ($pt, $info);
-    foreach ('dos', 'bsd', 'sun', 'unknown') {
+    foreach ('dos', 'bsd', 'sun', 'mac', 'unknown') {
 	/unknown/ and die "unknown partition table format";
 	eval {
 	    bless $hd, "partition_table_$_";
@@ -368,6 +382,11 @@ sub read($;$) {
     assign_device_numbers($hd);
     remove_empty_extended($hd);
     1;
+}
+
+sub read_and_clear($) {
+    my ($hd) = @_;
+    partition_table::read($hd, 1);
 }
 
 sub read_extended {
