@@ -417,7 +417,7 @@ sub miscellaneous {
 	
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
-	$usb{MOUSE} = $o->{mouse}{device} eq "usbmouse" && "yes"
+	$usb{MOUSE} = $o->{mouse}{device} eq "usbmouse" && "yes";
 	$usb{KEYBOARD} = (int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()) && "yes";
 	$usb{ZIP} = bool2yesno(-d "/proc/scsi/usb");
 	setVarsInSh($f, \%usb);
