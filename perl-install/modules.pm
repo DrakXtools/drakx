@@ -313,9 +313,12 @@ sub write_conf() {
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if detect_devices::matching_driver('^bttv$');
+    my @l_26 = @l;
+    if (my ($agp) = probe_category('various/agpgart')) {
+	push @l_26, $agp->{driver};
+    }
     append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
-    append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l);
-
+    append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l_26);
     #- use module-init-tools script for the moment
     run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
 }
