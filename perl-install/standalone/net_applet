@@ -186,23 +186,15 @@ sub setDBusWatch {
     $con->set_watch_callbacks(sub {
         my ($con, $watch) = @_;
         my $flags = $watch->get_flags;
-        #print "watch callback (enable)\n";
         if ($flags & &Net::DBus::Binding::Watch::READABLE) {
             Gtk2::Helper->add_watch($watch->get_fileno, 'in', sub {
-                #print "READABLE event\n";
                 $watch->handle(&Net::DBus::Binding::Watch::READABLE);
                 $con->dispatch;
                 1;
             });
         }
-        # do nothing for WRITABLE watch, we dispatch when needed
-    }, sub {
-        my ($con, $watch) = @_;
-        #print "watch callback (disable)\n";
-    }, sub {
-        my ($con, $watch) = @_;
-        #print "watch callback (toggle)\n";
-    });
+        #- do nothing for WRITABLE watch, we dispatch when needed
+    }, undef, undef); #- do nothing when watch is disabled or toggled yet
 }
 
 sub initDBus {
@@ -238,9 +230,6 @@ sub initDBus {
 
 sub handleAttack {
     my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
-
-    use Data::Dumper;
-    print Dumper(\@_);
 
     my $ip_addr = join(".", unpack('C4', $addr));
     #- try to resolve address, timeout after 2 seconds
