@@ -498,7 +498,6 @@ sub fill_tiled {
     }
 }
 
-my $j = 0;
 sub gtkicons_labels_widget {
     my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
 
@@ -557,19 +556,17 @@ sub gtkicons_labels_widget {
     $fixed->signal_connect(expose_event => sub {
 			       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
 			   });
-    $fixed->{nb} = $j;
-    $j++;
     $fixed->signal_connect(realize => sub {
 		       $fixed->window->set_back_pixmap($background, 0);
 		       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
 		   });
     $fixed->show_all();
-    my $w_ret = createScrolledWindow($fixed, ['automatic', 'always']);
-    my $timeout2 = Gtk->timeout_add(100, sub {
-				     $fixed->set_usize($w_ret->allocation->[2] - 22, 0);#$w->allocation->[3]);
-				     0;
-				 });
-    $w_ret;
+    my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
+
+    #- Ugly hacks, don't touch! ########
+    my $timeout2 = Gtk->timeout_add(100, sub { $fixed->set_usize($w_ret->allocation->[2] - 22, 0); 0; });
+    $w_ret->vscrollbar->set_usize(19, undef);
+    gtkset_border_width($w_ret, -2);
 }
 
 sub compute_icons {
