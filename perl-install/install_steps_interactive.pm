@@ -792,12 +792,24 @@ sub summary {
     my $format_mouse = sub { $mouse_name = translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) };
     &$format_mouse;
 
+    #- format printer description in a better way according to CUPS/LPR used.
+    my $format_printers = sub {
+	my ($printer) = @_;
+	is_empty_hash_ref($printer->{configured}) and return _("No printer");
+	my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
+	for ($entry->{mode}) {
+	    /CUPS/ and return $entry->{cupsDescr};
+	    /lpr/ and return $entry->{DBENTRY};
+	    die "unknown entry for printer $entry->{QUEUE}";
+	}
+    };
+
     $o->ask_from_entries_refH('', _("Summary"),
     [
 { label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); &$format_mouse } },
 { label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
-{ label => _("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => sub { is_empty_hash_ref($_[0]{configured}) ? _("No printer") : (values %{$_[0]{configured}})[0]->{DBENTRY} } },
+{ label => _("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
     (map {
 { label => _("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
