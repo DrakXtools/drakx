@@ -1057,7 +1057,10 @@ try to force installation even if that destroys the first partition?"));
     } else {
 	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
-	eval { $o->SUPER::setupBootloader };
+	{
+	    my $w = $o->wait_message('', _("Installing bootloader"));
+	    eval { $o->SUPER::setupBootloader };
+	}
 	if ($@) {
 	    $o->ask_warn('', 
 			 [ _("Installation of bootloader failed. The following error occured:"),
