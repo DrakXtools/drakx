@@ -552,6 +552,9 @@ foreach my $medium (@media) {
     }
 }
 
+#- install some important packages.
+system "rpm", "--root", "/mnt", "--initdb";
+
 #- copy and install from each cd image.
 foreach my $medium (@media) {
     while ($cd && ! -d "/cdrom/$medium->{rpmsdir}") {
@@ -570,10 +573,17 @@ foreach my $medium (@media) {
 	if (-e $file) {
 	    print "  copying " . rpm_fullname($pkg) . "\n";
 	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
+	    if (rpm_fullname($pkg) =~ /mandrake-release/) {
+		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/$medium->{rpmsdir}" . $files{rpm_fullname($pkg)};
+	    }
 	}
     }
 }
 
+#- install mandrake-release package.
+system "rpm", "--root", "/mnt", "--initdb";
+system "rpm", "-ivh", "--root", "/mnt", "--nodeps", "--force", @files;
+sy
 #- try to figure out if a oem-message-graphic already exists.
 #- if this is the case, rename it to /mnt/boot/message-graphic
 if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
