@@ -81,6 +81,7 @@ struct part_loopback inherits part {
 
 struct part_lvm inherits part {
   # invalid: active, start, device_windobe, CHS
+  string lv_name
 }
 
 
@@ -463,6 +464,9 @@ sub Create {
          },
            if_($::expert && $hd->hasExtended,
          { label => N("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
+           ),
+	   if_($::expert && isLVM($hd),
+	 { label => _("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
            ),
         ], changed => sub {
 	    if ($part->{start} + ($mb_size << 11) > $max) {

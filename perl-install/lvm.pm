@@ -128,9 +128,9 @@ sub lv_delete {
 sub lv_create {
     my ($lvm, $lv) = @_;
     my $list = $lvm->{primary}{normal} ||= [];
-    my $nb = 1 + max(map { basename($_->{device}) } @$list);
-    $lv->{device} = "$lvm->{VG_name}/$nb";
-    run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $nb, $lvm->{VG_name});
+    $lv->{lv_name} ||= 1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list);
+    $lv->{device} = "$lvm->{VG_name}/$lvm->{lv_name}";
+    run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
     $lv->{notFormatted} = 1;
     $lv->{isFormatted} = 0;
