@@ -2,34 +2,393 @@
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
+use standalone;
 use common;
+use mouse;
 use detect_devices;
+use ugtk2 qw(:create :dialogs :helpers :wrappers);
+use interactive;
 use Libconf qw(:functions);
 use Libconf::Glueconf::Ups;
 
-#------------------------------------------------------------------
-# UPS autoconfig:
+# config files:
+my %files = (devices => "/etc/ups/ups.conf",
+             access => "/etc/ups/upsd.conf",
+             users => "/etc/ups/upsd.users",
+            );
 
-my $file = "/etc/ups/ups.conf";
 
-my $struct = Libconf::Glueconf::Ups->new('ups.conf'); #Libconf::Glueconf::ups->new($file, 'ups', '');
+my ($struct, $users); # NUT configuration
+my ($w, $in); # GUI
+my %indexes;
 
-detect_devices::probeSerialDevices();
 
-foreach my $ups_device (detect_devices::getUPS()) {
-    my $str = $ups_device->{name} || $ups_device->{DESCRIPTION};
-    $str =~ s/ /_/g;
+sub writeconf {
+    info_dialog(N("Warning"), "Write support for users is incomplete\n\nIt lacks some support for some extra fields that would be lost else");
+    log::explanations("Updating NUT configuration accordingly");
+    $struct->writeConf($files{devices});
 
-    if (!exists $struct->{$str}) { 
-	    $struct->{$str}{port} = $ups_device->{port} || $ups_device->{DEVICE};
-	    $struct->{$str}{driver} = $ups_device->{driver};
+    log::explanations("Updating NUT users configuration accordingly");
+    $users->writeConf($files{users});
+}
+
+sub readDriversList {
+    my (%ups, @ups);
+    local $_;
+    foreach (cat_(first(glob("/usr/share/doc/nut-*/docs/driver.list")))) {
+        /^#/ and next;
+        if (my ($vendor, $model, $extra, $driver) = /^"(.*)"\s+"(.*)"\s+"(.*)"\s+"(.*)"/) {
+            $ups{$vendor}{$model} = {
+                                     driver => $driver,
+                                     extra => $extra,
+                                    };
+            push @ups, "$vendor|$model";
+        }
+    }
+    \%ups, \@ups;
+}
+
+sub add_device_wizard {
+    my ($in, $config) = @_;
+    my ($ups_models, $model_list) = readDriversList();
+
+    use wizards;
+    my ($ups, $vendor, $model, $name, $driver, $port, @new_devices);
+    my $w = wizards->new;
+    my $wiz;
+    my %methods = (
+                   # network => N("Connected through the network"), # need SNMP probe
+                   # serial => N("Connected through a serial port"),
+                   # usb => N("Connected through an usb cable"),
+                   auto => N("Connected through a serial port or an usb cable"),
+                   manual => N("Manual configuration"),
+                  );
+    my $method = $methods{manual};
+    $wiz = {
+            defaultimage => "wiz_logdrake.png",    # FIXME
+            name => N("Add an UPS device"),
+            pages => {
+                      welcome => {
+                                  name => N("Welcome to the UPS configuration utility.
+
+Here, you'll be add a new UPS to your system.\n"),
+                                  no_back => 1,
+                                  next => 'method'
+                                 },
+                      method => {
+                                 name => N("We're going to add an UPS device.
+
+Do you prefer autodetect UPS devices connected to this machine or  ?"),
+                                 data => [ { label => N("Autodetection"), val => \$method, type => "list",
+                                             list => [ values %methods ] } ],
+                                 post => sub { +{ reverse %methods }->{$method} },
+                                },
+                      auto => {
+                               end => 1,
+                               pre => sub {
+                                   local $::isWizard;
+                                   my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+                                   # UPS autoconfig:
+                                   detect_devices::probeSerialDevices() if !$::testing;
+                                   @new_devices = ();
+                                   
+                                   foreach my $ups_device (detect_devices::getUPS()) {
+                                       my $str = $ups_device->{name} || $ups_device->{DESCRIPTION};
+                                       $str =~ s/ /_/g;
+                                       
+                                       if (!exists $struct->{$str}) {
+                                           $struct->{$str}{port} = $ups_device->{port} || $ups_device->{DEVICE};
+                                           $struct->{$str}{driver} = $ups_device->{driver};
+                                           push @new_devices, $str;
+                                       }
+                                   }
+                               },
+                               name => sub {
+                                   if (@new_devices) {
+                                       N("Congratulations") . "\n\n" . 
+                                         N("The wizard successfully added the following UPS devices:", join("\n\n-", @new_devices))
+                                     } else {
+                                         N("No new UPS devices was found");
+                                     }
+                               },
+                              },
+                      manual => {
+                                name => N("UPS driver configuration")  . "\n\n" . N("Please select your UPS model."),
+                                data => [ { label => N("Manufacturer / Model:"), val => \$ups, list => $model_list,
+                                            type => 'combo', sort => 1, separator => '|' }, ],
+                                next => "driver",
+                                post => sub {
+                                    ($vendor, $model) = split(/\|/, $ups);
+                                    ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model}{driver}, "");
+                                    ($driver) = split(/\s*/, $driver);
+                                },
+                               },
+                      driver => {
+                                 name => sub {
+                                     N("UPS driver configuration") . "\n\n" . N("We are configuring the \"%s\" UPS from \"%s\".
+Please fill in its name, its driver and its port.", $model, $vendor);
+                                 },
+                                 data => [
+                                          { label => N("Name:"),   val_ref => \\$name, help => N("The name of your ups") },
+                                          { label => N("Driver:"), val_ref => \\$driver, help => N("The driver that manage your ups") },
+                                          { label => N("Port:"),   val_ref => \\$port, format => \&mouse::serial_port2text, type => "combo",
+                                            list => [ &mouse::serial_ports() ], not_edit => 0, 
+                                            help => N("The port on which is connected your ups") },
+                                         ],
+                                 next => "end",
+                                },
+                      end => {
+                              name => sub { 
+                                  N("Congratulations") . "\n\n" . N("The wizard successfully configured the new \"%s\" UPS device.",
+                                                                    $model . "|" . $vendor);
+                              },
+                              end => 1,
+                              no_back => 1,
+                              next => 0
+                             },
+                     },
+           };
+    $w->process($wiz, $in);
+
+    $config->{$name}{driver} = $driver;
+    $config->{$name}{port} = $port;
+
+    log::explanations(qq(Configuring "$name" UPS));
+}
+
+my (@acls, @rules);
+
+sub load_access_conf() {
+    foreach (cat_($files{access})) {
+        s/#.*//;
+        if (/^\s*ACL\s*(\S*)\s*(\S*)/) {
+            my ($ip, $mask) = split('/', $2);
+            push @acls, [ $1, $ip, $mask ];
+        } elsif (/^\s*ACCESS\s*(\S*)\s*(\S*)\s*(\S*)/) {
+            push @rules, [ $1, $2, $3 ];
+        }
     }
 }
 
-$struct->writeConf($file);
 
-my $drivers_table = glob("/usr/share/doc/nut-*/docs/driver.list");
 
-# driver list from nutupsdrv(8)
-my @drivers = qw(apcsmart bcmxcp belkin bestferrups801-807 bestfortress bestuferrups bestups cyberpower dummycons etapro everups fentonups genericups hidups hp isbmex liebert masterguard mge-shut mge-utalk microdowell newapc oneac powercom powernet sec sms snmp-ups tripplite tripplitesu victronups);
+#------------------------------------------------------------------
+# misc gui data
 
+my $help = N("Help");
+my @menu_items =
+    (
+     [ N("/_File"), undef, undef, undef, '<Branch>' ],
+     [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<StockItem>', 'gtk-quit' ],
+     [ $help, undef, undef, undef, '<Branch>' ],
+     [ $help.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
+     [ $help.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report drakups &") } }, undef, '<Item>' ],
+     [ $help.N("/_About..."), undef, sub {
+           create_dialog(N("About DrakUPS"),
+#-PO Do not alter the <span ..> and </span> tags
+                         N("This is DrakUPS, a Mandrake configuration tool for UPS devices.\n
+Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n"))
+       }, undef, '<Item>'
+     ]
+    );
+
+sub edit_row {
+    my ($model, $iter) = @_;
+    # create new item if needed (that is when adding a new one) at end of list
+    $iter ||= $model->append;
+    my $dialog = Gtk2::Dialog->new;
+    $dialog->set_transient_for($w->{rwindow}) unless $::isEmbedded;
+    $dialog->set_modal(1);
+
+    gtkpack_($dialog->vbox,
+             #map {
+             #}
+            );
+
+    gtkadd($dialog->action_area,
+           gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                 # create new item if needed (that is when adding a new one) at end of list
+                                 $iter ||= $model->append;
+                                 # $model->set($iter, 1 => $file->get_text); # FILL ME
+                                 $dialog->destroy;
+                                 # $modified++;
+                             }),
+           gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $dialog->destroy }),
+          );
+     
+    $dialog->show_all;
+
+}
+
+
+sub add_callback() {
+    my ($model, $list, $getindex) = @_;
+    edit_row($model);
+}
+
+sub edit_callback() {
+    my ($model, $list) = @_;
+    my ($iter) = $list->get_selection->get_selected;
+    return unless $iter;
+    edit_row($model, $iter);
+}
+
+sub del_callback() {
+    my ($model, $list) = @_;
+    my (undef, $iter) = $list->get_selection->get_selected;
+    my $removed_idx = $list->get($iter, 0); # 1st column is index
+    #@rules = grep { $_->{index} ne $removed_idx } @rules;
+    #$tree->remove($iter);
+    #sensitive_buttons(0);
+    #$modified++;
+}
+
+my @pages = (
+             { name => N("UPS devices"),
+               columns => [ N("Name"), N("Driver"), N("Port") ], # N("Manufacturer"), N("Model"), 
+               callbacks => {
+                             add => sub {
+                                 eval { add_device_wizard($in, $struct) };
+                                 my $err = $@;
+                                 die $err if $err !~ /wizcancel/;
+                                 $::WizardWindow->destroy if defined $::WizardWindow;
+                                 undef $::WizardWindow;
+                             },
+                             edit => sub { },
+                             remove => sub { },
+                            },
+               load => sub {
+                   $struct = Libconf::Glueconf::Ups->new($files{devices});
+                   map { [ $_, @{$struct->{$_}}{qw(driver port)} ] } keys %$struct;
+               },
+             },
+             { name => N("UPS users"),
+               columns => [ N("Name") ],
+               callbacks => {
+                             add => sub {
+                                 my ($name) = @_;
+                                 $users->{$name} = {};
+                             },
+                             edit => sub { },
+                             remove => sub { },
+                            },
+               load => sub {
+                   $users = Libconf::Glueconf::Ups->new($files{users});
+                   map { [ $_ ] } keys %$users;
+               },
+             },
+             { name => N("Access Control Lists"),
+               columns => [ N("Name"), N("IP address"), N("IP mask") ],
+               callbacks => {
+                             add => sub { },
+                             edit => sub { },
+                             remove => sub { },
+                            },
+               load => sub { 
+                   load_access_conf();
+                   @acls;
+               },
+             },
+             { name => N("Rules"),
+               columns => [ N("Action"), N("Level"), N("ACL name"), N("Password") ],
+               callbacks => {
+                             N("Add") => sub { },
+                             N("Edit") => sub { },
+                             N("Remove") => sub { },
+                            },
+                      
+               load => sub { @rules }, # already loaded when we loaded acls
+             },
+            );
+
+
+#------------------------------------------------------------------
+# initialize:
+
+#$in = 'interactive'->vnew('su'); # require_root_capability();
+$in = 'interactive'->vnew;
+
+$w = ugtk2->new(N("DrakUPS"));
+if (!$::isEmbedded) {
+    $::main_window = $w->{rwindow};
+    $w->{window}->set_size_request(500, 550);
+}
+
+#------------------------------------------------------------------
+# main window:
+$w->{window}->add(gtkpack_(Gtk2::VBox->new,
+                           0, Gtk2::Label->new(N("Welcome to the UPS configuration tools")),
+                           1, my $nb = Gtk2::Notebook->new,
+                           0, Gtk2::HSeparator->new,
+                           0, gtkpack(Gtk2::HButtonBox->new,
+                                      gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
+                                                            #$_->{save}->() foreach @pages;
+                                                            writeconf();
+                                                            $w->exit;
+                                                        }),
+                                      gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $w->exit }),
+                                     ),
+                          ),
+                 );
+
+#------------------------------------------------------------------
+# build the notebook
+
+my %labels = (
+	      add => N("Add"),
+	      edit => N("Edit"),
+	      remove => N("Remove"),
+	     );
+
+foreach my $i (@pages) {
+    my $model = Gtk2::ListStore->new("Glib::Int", ("Glib::String") x listlength(@{$i->{columns}}));
+    my (%buttons, $list);
+    $indexes{$i->{name}} = 0;
+    my $idx = \$indexes{$i->{name}};
+    my $getindex = sub { ${$idx}++ };
+    $nb->append_page(gtkpack_(Gtk2::VBox->new,
+                              1, create_scrolled_window($list = Gtk2::TreeView->new_with_model($model),
+                                                        [ 'automatic', 'automatic' ]),
+                              0, gtkpack(Gtk2::HButtonBox->new,
+                                         (map { 
+                                             my ($id, $label, $sub) = @$_;
+                                             gtksignal_connect($buttons{$id} = Gtk2::Button->new($label), clicked => sub { 
+								 $sub->($model, $list, $getindex);
+							       })
+                                         } ([ 'add', N("Add"), $i->{callbacks}{add} || \&add_callback ],
+                                            [ 'edit', N("Edit"), \&edit_callback ],
+                                            [ 'remove', N("Remove"), \&del_callback],
+                                           )
+                                         )
+                                         #(map {
+                                         #    gtksignal_connect(Gtk2::Button->new($_), clicked => $i->{callbacks}{$_}),
+                                         #} keys %{$i->{callbacks}})
+                                        ),
+                             ),
+                     Gtk2::Label->new($i->{name}),
+                    );
+    #$i->{list} = $list;
+    each_index {
+        $list->append_column(Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1));
+    } @{$i->{columns}};
+    my @u = $i->{load}->();
+    foreach my $line (@u) {
+        $model->append_set(0 => $getindex->(), map_index { $::i + 1 => $_ } @$line);
+    }
+    my $set_sensitive = sub {
+      my ($bool) = @_;
+      $buttons{$_}->set_sensitive($bool) foreach qw(remove edit);
+    };
+    $set_sensitive->(0);
+    $list->get_selection->signal_connect('changed' => sub {
+	my ($select) = @_;
+	my (undef, $iter) = $select->get_selected;
+	$set_sensitive->(defined $iter);
+      });
+}
+
+#------------------------------------------------------------------
+# let's start the show:
+$in->do_pkgs->ensure_is_installed('nut-server', '/usr/sbin/upsd');
+$w->{rwindow}->show_all;
+$w->main;
