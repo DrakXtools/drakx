@@ -116,17 +116,17 @@ partition_table: base partition table management methods, it manages
   appriopriate partition_table_XXX object according to what has been read
   as XXX partition table type.
 
-partition_table_raw: generic class for the following partition_table_XXX.
+partition_table::bsd: matches a BSD partition table.
 
-partition_table_emtpy: matches an empty partition table.
+partition_table::dos: matches a DOS partition table.
 
-partition_table_dos: matches a DOS partition table.
+partition_table::emtpy: matches an empty partition table.
 
-partition_table_bsd: matches a BSD partition table.
+partition_table::mac: matches an Apple partition table.
 
-partition_table_mac: matches an Apple partition table.
+partition_table::raw: generic class for the following partition_table::XXX.
 
-partition_table_sun: matches a Sun Label partition table.
+partition_table::sun: matches a Sun Label partition table.
 
 fs: read and write /etc/fstab file, mount and umount, format.
 
