@@ -95,6 +95,7 @@ It's currently enabled.
 
 What would you like to do ?"),
 				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
+     # FIXME: reconfigure isn't handled
 	if ($r eq "disable") {
 	    if (!$::testing) {
 		my $_wait_disabl = $in->wait_message('', N("Disabling VPN..."));
@@ -120,6 +121,7 @@ It's currently disabled.
 
 What would you like to do ?"),
 				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
+     # FIXME: reconfigure isn't handled
 	if ($r eq "enable") {
 	    foreach ($ipsec_conf, $tunnels_file) {
 		rename($_, "$_.old") if -f $_;
