@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.5mdk
+Release: 0.6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.6mdk
+- move drakbug, drakclock, drakperm, draksec, drakTermServ,
+  net_monitor in drakxtools since they require ugtk2 (#7413)
+- workaround gtk+ bug #133489 (behaviour on click when in scrolled
+  window) (pixel)
+- drakboot: do not try anymore to set global video mode and compat
+  option
+- drakfirewall: handle ip ranges (#7172) (pixel)
+- draksound: advertize alsaconf too since sndconfig failled for cards
+  only managed by ALSA (#7456)
+- logdrake: do not fail when disabling twice the alert mail cron
+- mousedrake: allow changing protocol in standalone (pixel)
+
 * Fri Feb  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.5mdk
 - fix embedded apps
 
