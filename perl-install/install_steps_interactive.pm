@@ -740,7 +740,7 @@ sub addUser {
 sub createBootdisk {
     my ($o, $first_time) = @_;
 
-    return if $first_time && $::beginner;
+    return if $first_time && $::beginner || $o->{lnx4win};
 
     my @l = detect_devices::floppies();
     my %l = (

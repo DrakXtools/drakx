@@ -51,6 +51,10 @@ foreach (cat_("list")) {
     install($_);
     chomp, install_lib($_) foreach `ldd $_ 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
 }
+foreach (cat_("dirs")) {
+    chomp;
+    commands::mkdir_("-p", "$tmp$_");
+}
 foreach (cat_("aliases")) {
     chomp; my ($f, $dest) = split;
     symlink $dest, "$tmp$f";

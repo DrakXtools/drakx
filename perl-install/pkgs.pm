@@ -27,8 +27,8 @@ use c;
   40 => __("interesting"),
   30 => __("maybe"),
   20 => __("maybe"),
-  10 => __("useless"),
-   0 => __("garbage"),
+  10 => __("maybe"),#__("useless"),
+   0 => __("maybe"),#__("garbage"),
 #- if the package requires locales-LANG and LANG is chosen, rating += 90
  -10 => __("i18n (important)"), #- every install in the corresponding lang have these packages
  -20 => __("i18n (very nice)"), #- every beginner/custom install in the corresponding lang have theses packages

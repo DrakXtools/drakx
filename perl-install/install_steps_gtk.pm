@@ -439,7 +439,7 @@ sub choosePackagesTree {
 	pkgs::extractHeaders($o->{prefix}, [$p], $p->{medium});
 	$p->{header} or die;
 
-	my $ind = $o->{compssListLevels}{$o->{install_class}};
+	my $ind = $o->{compssListLevels}{$o->{installClass}};
 	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ? 100 : round_down($p->{values}[$ind], 10)});
 
 	gtktext_insert($info_widget, $@ ? _("Bad package") :
