@@ -195,9 +195,12 @@ void doklog()
 			if (FD_ISSET(readfd, &readset) && FD_ISSET(readfd, &unixs)) {
 				i = read(readfd, buf, sizeof(buf));
 				if (i > 0) {
-					if (out >= 0)
-						write(out, buf, i);
-					write(log, buf, i);
+					/* grep out the output of RPM telling that it installed/removed some packages */
+					if (!strstr(buf, "mdk installed") && !strstr(buf, "mdk removed")) {
+						if (out >= 0)
+							write(out, buf, i);
+						write(log, buf, i);
+					}
 				} else if (i == 0) {
 					/* socket closed */
 					close(readfd);
