@@ -175,7 +175,7 @@ sub add2hosts {
     my %l = map { if_(/^\s*(\S+)(.*)/, $1 => $2) }
             grep { !/\s\Q$hostname$sub_hostname\E(\s|$)/ } cat_($file);
 
-    $l{$_} = "\t\t$hostname$sub_hostname" foreach grep { $_ } @ips;
+    $l{$_} .= ($l{$_} ? " " : "\t\t") . "$hostname$sub_hostname" foreach grep { $_ } @ips;
 
     log::explanations("writing host information to $file");
     output($file, map { "$_$l{$_}\n" } keys %l);
