@@ -372,7 +372,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Wed Mar 30 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-16mdk
 - harddrake:
   o do not list hardware controllers in unknown section
-  o ensure we detect all known SATA controllers
+  o ensure we detect all known SATA controllers and all known sound cards
   o fix optical mice detection (#15082)
 - net_applet: really load network configuration at start (blino)
 - printerdrake: do not mis-detect some USB keyboards as printers (till)
