@@ -34,7 +34,7 @@ sub new {
     my ($type, $title, %opts) = @_;
 
     Gtk->init;
-    init Gtk::Gdk::ImlibImage;
+    Gtk::Gdk::ImlibImage->init;
     Gtk->set_locale;
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
@@ -271,13 +271,13 @@ sub gtkcreate_xpm {
 }
 sub gtkcreate_png {
     my ($f) = @_;
-    my $im = load_image Gtk::Gdk::ImlibImage("$f");
+    my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
 }
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
-sub gtkpng { new Gtk::Pixmap (gtkcreate_png(@_)) }
+sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
 #-###############################################################################
 #- createXXX functions
 
