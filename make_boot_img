@@ -80,7 +80,7 @@ sub initrd {
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
-    if ($ftype eq "pcmcia") {
+    if ($ftype eq "pcmcia" && $arch !~ /ppc/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
     }
