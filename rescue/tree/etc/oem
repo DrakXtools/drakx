@@ -325,7 +325,8 @@ sub select_packages {
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
 	pkgs::selectPackage($o->{packages}, $lang_pkg);
-	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
+	$o->{compssUsersChoice}{qq(LOCALES"$lang")} = 1;
+	$o->{compssUsersChoice}{qq(LOCALES"$flang")} = 1;
     }
 
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
