@@ -229,7 +229,7 @@ sub init_sizes() {
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     $::move or $::stepswidth = $::rootwidth <= 640 ? 0 : 160;
     ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (500, 40);
-    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
+    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, $::move && 15);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
     $::move and $::windowwidth -= 100;
 }
