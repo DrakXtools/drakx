@@ -900,6 +900,7 @@ sub installTransactionClosure {
 		foreach ($_->{start} .. $_->{end}) {
 		    delete $id2pkg->{$_};
 		}
+		@l = sort { $a <=> $b } keys %$id2pkg;
 	    }
 	    #- anyway, examine the next one.
 	    next;
