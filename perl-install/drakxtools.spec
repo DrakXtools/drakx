@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.6mdk
+Release: 0.7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,6 +366,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Dec 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.7mdk
+- detect more fix floppies when dmidecode is supported (pixel)
+- drakconnect:
+  o do not crash when configuring a modem
+  o fix NETMASK autofilling
+- localedrake: do not localize console when using jp (Funda Wang)
+- XFdrake: make "XFdrake --auto" fully automatic (pixel)
+
 * Wed Dec 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.6mdk
 - handle more PCMCIA/CardBus cards
 - do not try to load floppy module if there's no floppy drive (#8211)
