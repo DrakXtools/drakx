@@ -73,7 +73,7 @@ NETWORK_MODULES="  $NETWORK_DRIVERS"
 USBNET_MODULES="   $USB_DRIVERS $USBNET_DRIVERS usbkbd.o keybdev.o input.o"
 CDROM_MODULES="    $CD_DRIVERS"
 HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
-[ "$ARCH" == "ppc" ] && HD_MODULES="$HDMODULES hfs.o"
+[ "$ARCH" == "ppc" ] && HD_MODULES="$HD_MODULES hfs.o"
 PCMCIA_MODULES="   $DOSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $BIG_DRIVERS"
 ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
@@ -131,7 +131,7 @@ install_kernel() {
  v=2.4.8-5mdk
  vv=${v}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
- scp kenobi:~chmou/public_html/kernel/BOOT/kernel-BOOT-$v.i586.rpm /tmp
+ scp kenobi:~chmou/public_html/kernel-BOOT/kernel-BOOT-$v.i586.rpm /tmp
  cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/kernel-BOOT-$v.i586.rpm | cpio -id
  cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
  /bin/cp -f all.kernels/$vv/boot/vmlinu* /var/lib/tftpboot/vmlinuz

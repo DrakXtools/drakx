@@ -27,6 +27,10 @@ my %sanity_check =
   ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too' ],
     medias => [ 'aic7xxx', 'advansys', 'sym53c8xx', 'initio' ],
   ) :
+  arch() =~ /ppc/ ?
+  ( network => [ '3c59x', 'eepro100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too' ],
+    medias => [ 'aic7xxx', 'sym53c8xx', 'initio' ],
+  ) :
   ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
     medias => [ 'aic7xxx', 'advansys', 'ncr53c8xx', 'sym53c8xx', 'initio' ],
   );

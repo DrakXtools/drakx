@@ -50,3 +50,4 @@ b  33  64 hdf hdf1-16
 b  34   0 hdg hdg1-16
 b  34  64 hdh hdh1-16
 b   8   0 sda sda1-15 sdb sdb1-15 sdc sdc1-15 sdd sdd1-15 sde sde1-15 sdf sdf1-15 sdg sdg1-15 sdh sdh1-15
+c  10 144 nvram
