@@ -36,7 +36,6 @@ use network::adsl;
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 $::expert = "@ARGV" =~ /--expert/;
 local $_ = join '', @ARGV;

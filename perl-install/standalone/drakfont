@@ -93,7 +93,6 @@ use common;
 #use POSIX;
 
 my $in = 'interactive'->vnew( 'su', 'network' );
-$::isEmbedded = ( $::XID, $::CCPID ) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
 
 if ( "@ARGV" =~ /--help|-h/ ) {
     print q(Font Importation and monitoring application

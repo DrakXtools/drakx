@@ -10,7 +10,6 @@ use Xconfig::xfree;
 use common;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die _("usage: keyboarddrake [--expert] [keyboard]\n");

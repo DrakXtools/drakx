@@ -34,8 +34,6 @@ use network::netconnect;
 $::isInstall and die "Not supported during install.\n";
 
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--version]\n";
@@ -613,6 +611,11 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.64  2002/07/31 23:10:55  prigaux
+#- Handle parsing --embedded command line in standalone.pm
+#- => allows to remove the somewhat mythical
+#-      $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+#-
 #- Revision 1.63  2002/07/31 11:59:03  prigaux
 #- make new perl_checker happy
 #-

@@ -40,10 +40,7 @@ my %options;
 my @l = @ARGV;
 while (my $e = shift @l) {
     my ($option) = $e =~ /--?(.*)/ or next;
-    if ($option eq 'embedded') {
-	$::isEmbedded = 1;
-	($::XID, $::CCPID, @l) = @l;
-    } elsif ($option =~ /(.*?)=(.*)/) {
+    if ($option =~ /(.*?)=(.*)/) {
 	$options{$1} = $2;
     } else {
 	$options{$option} = '';

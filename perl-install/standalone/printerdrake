@@ -27,7 +27,6 @@ use printerdrake;
 use printer;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing] [--cups] [--lprng] [--lpd] [--pdq]\n";

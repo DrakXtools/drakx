@@ -9,8 +9,6 @@ use interactive;
 use services;
 use log;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakxservices\n";

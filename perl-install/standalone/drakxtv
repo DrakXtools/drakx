@@ -37,7 +37,7 @@ use common;
 
 ("@ARGV" =~ /--help|-h/) and die "usage: drakxtv [-h] [--help] [--no-guess]\n";
 
-#$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+
 my $in = 'interactive'->vnew();
 
 sub scan4channels {

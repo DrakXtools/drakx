@@ -13,7 +13,6 @@ use fsedit;
 use fs;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakboot [--expert] [--testing]\n";

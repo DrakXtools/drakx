@@ -26,8 +26,6 @@ use commands;
 use fs;
 use Data::Dumper;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-
 
 local $_ = join '', @ARGV;
 
@@ -365,6 +363,11 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.21  2002/07/31 23:10:55  prigaux
+#- Handle parsing --embedded command line in standalone.pm
+#- => allows to remove the somewhat mythical
+#-      $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+#-
 #- Revision 1.20  2002/07/30 09:57:11  prigaux
 #- use $o->{interactiveSteps} instead of @install_steps_auto_install::graphical_steps
 #-

@@ -29,8 +29,6 @@ use common;
 use any;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-
 local $_ = join '', @ARGV;
 
 my ($configure_this) = grep { !/^-/ } @ARGV;

@@ -14,7 +14,6 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: draksec [--expert]\n";
 
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 my $in = 'interactive'->vnew('su', 'security');
 

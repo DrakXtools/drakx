@@ -60,7 +60,6 @@ if ($force) {
 $quiet and exit(0);
 init Gtk;
 my $in = 'interactive'->vnew('su', 'default');
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;

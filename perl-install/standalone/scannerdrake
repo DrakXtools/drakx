@@ -26,7 +26,6 @@ use interactive;
 use common;
 use scanner;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 for (@ARGV) {
     /^--version$/ and die 'version: $Id$ '."\n";
     /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]';
@@ -114,6 +113,11 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.12  2002/07/31 23:10:55  prigaux
+# Handle parsing --embedded command line in standalone.pm
+# => allows to remove the somewhat mythical
+#      $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+#
 # Revision 1.11  2002/03/11 06:43:36  yduret
 # re-re-re-re-re-re-uncomment the pkgs check line.
 #

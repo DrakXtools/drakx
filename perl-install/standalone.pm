@@ -9,7 +9,13 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 c::setlocale();
 c::bindtextdomain('libDrakX', "/usr/share/locale");
 
-
+my $i;
+foreach (@ARGV) {
+    $i++;
+    $_ eq '--embedded' or next;
+    (undef, $::XID, $::CCPID) = splice @ARGV, ($i-1), 3;
+    $::isEmbedded = 1;
+}
 
 ################################################################################
 package pkgs_interactive;

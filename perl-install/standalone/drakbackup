@@ -131,7 +131,6 @@ use Time::localtime;
 
 
 my $in = 'interactive'->vnew('', 'default');
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and Restore application

@@ -25,7 +25,6 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use tinyfirewall;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 $::Wizard_pix_up = "wiz_firewall.png";
 $::Wizard_title = _("Firewalling Configuration");

@@ -51,7 +51,6 @@ sub translate {
     $s ? c::dgettext('drakfloppy', $s) : '';
 }
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
   print "EMBED\n";
   print "XID : $::XID\n";

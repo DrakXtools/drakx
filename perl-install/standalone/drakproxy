@@ -26,7 +26,6 @@ use network::network;
 
 $::o->{miscellaneous} ||= {};
 $::o->{miscellaneous} = { getVarsFromSh('/etc/profile.d/proxy.sh') };
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 my $in = 'interactive'->vnew('su', 'network');
 network::network::miscellaneousNetwork($in, 1, 1);
 any::miscellaneousNetwork('');

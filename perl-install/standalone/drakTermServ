@@ -65,7 +65,6 @@ my $nfs_subnet;
 my $nfs_mask;
 
 my $in = 'interactive'->vnew;
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Mandrake Terminal Server Configurator
