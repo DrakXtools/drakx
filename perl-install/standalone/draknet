@@ -61,7 +61,7 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-#$::isEmbedded or goto dd;
+$::isEmbedded or goto dd;
 netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind($in, 'net', !$::expert, 1);
 my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
