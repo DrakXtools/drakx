@@ -34,6 +34,7 @@ use network::ethernet;
 use network::tools;
 use network::modem;
 use network::network;
+use detect_devices;
 use c;
 use modules;
 use network::isdn;
@@ -204,7 +205,7 @@ sub manage {
     @all_cards = network::ethernet::get_eth_cards($modules_conf);
     my %names = network::ethernet::get_eth_cards_names(@all_cards);
     foreach (keys %names) {
-	my $dev = /eth|ath|wlan/ ? $names{$_} : $_;
+	my $dev = detect_devices::is_lan_interface($_) ? $names{$_} : $_;
 	$p->{$dev} = {
                       name => $_ ,
                       intf => $intf->{$_}
@@ -298,7 +299,7 @@ sub build_notebook {
     my ($netc, $intf, $gui, $apply_button, $interface, $interface_name) = @_;
 
     my $apply = sub { $apply_button->set_sensitive(1) };
-    my $is_ethernet = $interface =~ /eth|ath|wlan/;
+    my $is_ethernet = detect_devices::is_lan_interface($interface);
 
     if ($intf->{pages}{'TCP/IP'}) {
 	gtkpack($gui->{sheet}{'TCP/IP'} = Gtk2::HBox->new,
