@@ -245,7 +245,7 @@ cat > $RPM_BUILD_ROOT%_menudir/net_applet <<EOF
         section="System/Monitoring"\
         title="NetApplet"\
         longtitle="Network monitoring applet"\
-        command="/usr/bin/net_applet"\
+        command="/usr/bin/net_applet --force"\
         icon="/usr/share/libDrakX/pixmaps/connected.png"
 EOF
 
