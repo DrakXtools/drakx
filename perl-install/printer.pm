@@ -759,6 +759,7 @@ sub print_pages($@) {
 	if ($page =~ /\.jpg$/) {
 	    system(($::testing ? "$prefix" : "chroot $prefix/ ") .
 		   "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
+		   ($::testing ? "$prefix" : "chroot $prefix/ ") .
 		   "$lpr -s $printer->{SPOOLER} -P $queue");
 	} else {
 	    run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
