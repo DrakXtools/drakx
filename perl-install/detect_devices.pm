@@ -386,7 +386,7 @@ sub getSpeedtouch() {
 }
 
 sub getBewan() {
-    grep { $_->{description} eq 'Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB' } probeall();
+    grep { $_->{description} =~ /Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB/x } probeall();
     
 }
 sub getSagem() {
