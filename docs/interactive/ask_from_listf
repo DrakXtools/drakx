@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+# Yves Duret <yduret at mandrakesoft.com>
+# license: GPL
+
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use Data::Dumper;
+
+my $in = 'interactive'->vnew(undef, 'default');
+
+my @m=(
+       { description => "dhcpcd",
+	 c => 1},
+       { description => "dhcpxd",
+	 c => 3},
+       { description => "dhcp-client",
+	 c => 4},
+      );
+my $f = $in->ask_from_listf(_("ask_from_listf"),
+				_("Which dhcp client do you want to use?\nDefault is dhcpcd"),
+				sub { $_[0]{description} },
+				\@m );
+
+print Data::Dumper->Dump([$f],['f']) . "\n";
+
+$in->exit(0);
+

@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+# Yves Duret <yduret at mandrakesoft.com>
+# license: GPL
+
+use lib qw(/usr/lib/libDrakX);
+use common;
+use interactive;
+
+my %l = (
+	 0 => "Welcome To Crackers",
+	 1 => "Poor",
+	 2 => "Low",
+	 3 => "Medium",
+	 4 => "High",
+	 5 => "Paranoid",
+	);
+
+my $in = 'interactive'->vnew(undef, 'default');
+
+my $level = $in->ask_from_list("window title - ask_from_list",
+			       "radio button\nexamples of utilisation of ask_from_list",
+			       [ values %l ], $l{2}
+			      ) or $in->exit(0);
+
+print "$level\n";
+$in->exit(0);
+

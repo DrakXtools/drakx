@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+# Yves Duret <yduret at mandrakesoft.com>
+# license: GPL
+
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+
+my $irq=1;
+my $login;
+my $login2="editable";
+my $check;
+my $range=57;
+
+my $in = 'interactive'->vnew(undef, 'default');
+
+$in->ask_from("window title - ask_from",
+	      "message\nexamples of utilisation of ask_from",
+	      [
+	       { label => "enter scalar", val => \$irq },
+	       { label => "combo (type=>combo optionnal)", val => \$login, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'], type => 'combo'},
+	       { label => "choose from list editable and sorted", val => \$login2, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'], not_edit => 0, sort => 1},
+	       { label => "check box", val => \$check, type => "bool", text => "text" },
+	       { label => "range", val => \$range, type => 'range', min => 0, max => 100 },
+	      ],
+	      complete => sub { print "complete\n";print "$irq\n$login\n$range\n"; },
+#	      focus_out => sub { print "focus_out\n"},
+#	      changed => sub { print "changed\n"; },
+	     ) or $in->exit(0);
+$in->exit(0);

@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+# Yves Duret <yduret at mandrakesoft.com>
+# license: GPL
+
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+
+my $in = 'interactive'->vnew(undef, 'default');
+my $wait = $in->wait_message('wainting title', _("Moving files to the new partition"));
+sleep(3);
+$wait->set(_("Removing"));
+sleep(3);
+$in->exit(0);

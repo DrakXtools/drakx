@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+# Yves Duret <yduret at mandrakesoft.com>
+# license: GPL
+
+use lib qw(/usr/lib/libDrakX);
+use common;
+use interactive;
+
+my $in = 'interactive'->vnew(undef, 'default');
+my $foo = $in->ask_from_treelist("window title - ask_from_treelist",
+		       "message\nexamples of utilisation of ask_from_treelist",
+		       '|',
+		       ['Custom',
+			'Other|Unlisted',
+			'Matrox|Millennium II=>Matrox Millennium II',
+			'Matrox|Millennium G200=>Matrox Millennium G200',
+			'Matrox|Millennium G400=>Matrox Millennium G400',
+			'Matrox|Millennium G450=>Matrox Millennium G450',
+			'Matrox|Millennium G550=>Matrox Millennium G550',
+			'Sun|FFB 67MHz Creator=>Sun FFB 67MHz Creator',
+			'Sun|FFB 67MHz Creator 3D=>Sun FFB 67MHz Creator 3D',
+			'Sun|FFB 75MHz Creator 3D=>Sun FFB 75MHz Creator 3D',
+		       ],
+				 'Custom'
+		      ) or $in->exit(0);
+print "$foo\n";
+$in->exit(0);
