@@ -191,7 +191,7 @@ sub ask_standalone_gtk {
     my $W = my_gtk->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
-    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = new Gtk::Window (-popup),
+    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = new Gtk::Window('-popup'),
         				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
         				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
         					   gtkset_justify(new Gtk::Label($_[0]), 0))),

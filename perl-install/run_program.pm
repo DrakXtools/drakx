@@ -57,7 +57,7 @@ sub raw {
     my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
 
-    if (my $pid = fork) {
+    if (my $pid = fork()) {
 	my $ok;
 	eval {
 	    local $SIG{ALRM} = sub { die "ALARM" };

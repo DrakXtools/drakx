@@ -24,7 +24,7 @@ sub detect {
 sub whatNetPrinter {
     my ($network, $smb) = @_;
 
-    my ($i,@res);
+    my ($i, @res);
 
     # Which ports should be scanned?
     my @portstoscan;

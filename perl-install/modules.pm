@@ -231,7 +231,7 @@ sub write_conf {
 
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile {
-	my ($type,$alias,$module) = split(/\s+/, chomp_($_), 3);
+	my ($type, $alias, $module) = split(/\s+/, chomp_($_), 3);
 	if ($type eq 'post-install' && $alias eq 'supermount') {	    
 	    #- remove the post-install supermount stuff.
 	    $_ = '';
