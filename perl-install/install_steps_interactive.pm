@@ -382,7 +382,11 @@ sub choosePackages {
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
-    $min_size < $availableC or die N("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
+    unless ($min_size < $availableC) {
+	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
+			   $min_size, $availableC));
+	install_steps::rebootNeeded($o);
+    }
 
     my $min_mark = 4;
 
