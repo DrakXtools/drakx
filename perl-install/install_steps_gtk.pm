@@ -758,6 +758,10 @@ sub create_steps_window {
 
     my @steps_icons = map { [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/step-$_.xpm") ] } qw(green orange red);
 
+    my $style = Gtk::Widget->get_default_style->copy;
+    print $style->fg('normal');
+    print $style->white;
+
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    (map {; 1, $_ } map {
@@ -769,15 +773,17 @@ sub create_steps_window {
 			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $pixmap, 0, $w);
 
 #(dam's) BUGGY : pixmaps cannot be signaled directly (well I think)
-			$pixmap->set_events('enter_notify_mask');
-			$pixmap->signal_connect(enter_notify_event => sub {   print "HERE\n" });
-#			
+			$pixmap->set_events('visibility-notify-mask');#'enter-notify-mask');
+			$pixmap->signal_connect(visibility_notify_event => sub {   print "HERE\n" });
+#
+#			$pixmap->set_events('clicked');
+#			$pixmap->signal_connect(clicked => sub { print "CLICKED\n" });
 			if ($step->{reachable}) {
 			  my $button = new Gtk::Button;
 			  $button->set_relief('none');
 			  gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
-			  $button->set_events('enter_notify_mask');
-			  $button->signal_connect(enter_notify_event => sub { print "HERE\n"; });
+#			  $button->set_events('enter_notify_mask');
+#			  $button->signal_connect(enter_notify_event => sub { print "HERE\n" });
 			  $b=$button;
 			}
 			$b;
