@@ -28,6 +28,8 @@ use c;
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
+$::isEmbedded or $::isWizard=1;
+$::Wizard_pix_up = "wiz_draknet.png";
 
 local $_ = join '', @ARGV;
 
