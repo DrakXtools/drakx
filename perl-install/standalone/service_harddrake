@@ -31,8 +31,8 @@ my (%config, $in);
 # For each hw, class, detect device, compare and offer to reconfigure if
 # needed
 foreach (@harddrake::data::tree) {
-    my ($Ident, $item, undef, $configurator, $detector) = @$_;
-
+    my ($Ident, $item, undef, $configurator, $detector, $do_it) = @$_;
+    next unless $do_it;
     # No detector ? (should never happen but who know ?)
     ref($detector) eq 'CODE' or next;
 
