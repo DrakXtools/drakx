@@ -56,7 +56,7 @@ sub config_cups {
 	my $browsepoll = printer::main::makebrowsepolllist($printer);
 	my $buttonclicked;
 	#- Show dialog
-	if ($in->ask_from(
+	if ($in->ask_from_(
 	     { 
 		 title => N("CUPS printer configuration"),
 		 messages => N("Here you can choose whether the printers connected to this machine should be accessible by remote machines and by which remote machines.") .
@@ -123,7 +123,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 		while (!$subdone) {
 		    # Entry should be edited when double-clicked
 		    $buttonclicked = "edit";
-		    $in->ask_from(
+		    $in->ask_from_(
 			 { title => N("Sharing of local printers"),
 			   messages => N("These are the machines and networks on which the locally connected printer(s) should be available:"),
 			   ok => "",
@@ -198,7 +198,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 			my $oldaddress = 
 			    ($buttonclicked eq "edit" ?
 			     $sharehosts->{invhash}{$choice} : "");
-			if ($in->ask_from(
+			if ($in->ask_from_(
 			     { title => N("Sharing of local printers"),
 			       messages => N("Choose the network or host on which the local printers should be made available:"),
 			       callbacks => {
@@ -308,7 +308,7 @@ N("Examples for correct IPs:\n") .
 		while (!$subdone) {
 		    # Entry should be edited when double-clicked
 		    $buttonclicked = "edit";
-		    $in->ask_from(
+		    $in->ask_from_(
 			 { title => N("Accessing printers on remote CUPS servers"),
 			   messages => N("Add here the CUPS servers whose printers you want to use. You only need to do this if the servers do not broadcast their printer information into the local network."),
 			   ok => "",
@@ -378,7 +378,7 @@ N("Examples for correct IPs:\n") .
 			my $oldaddress = 
 			    ($buttonclicked eq "edit" ?
 			     $browsepoll->{invhash}{$choice} : "");
-			if ($in->ask_from(
+			if ($in->ask_from_(
 			     { title => N("Accessing printers on remote CUPS servers"),
 			       messages => N("Enter IP address and port of the host whose printers you want to use.") . ' ' .
 				   N("If no port is given, 631 will be taken as default."),
