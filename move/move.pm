@@ -46,7 +46,7 @@ sub init {
     modules::load_category('multimedia/sound');
 
     $o->{steps}{exitMove} = { reachable => 1 };
-    $o->{orderedSteps} = qw(selectLanguage acceptLicense selectMouse selectKeyboard exitMove);
+    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard exitMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
