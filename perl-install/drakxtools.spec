@@ -178,6 +178,20 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	command="/usr/sbin/harddrake2"\
 	icon="harddrake.png"
 EOF
+
+cat > $RPM_BUILD_ROOT%_sbindir/convert-harddrake <<EOF
+#!/usr/bin/perl -w
+use diagnostics;
+use strict;
+use Storable;
+ 
+my \$last_boot_config = "/etc/sysconfig/harddrake2/previous_hw";
+ 
+my \$config = do \$last_boot_config;
+store \$config, \$last_boot_config;
+EOF
+chmod +x $RPM_BUILD_ROOT%_sbindir/convert-harddrake
+
 %find_lang libDrakX
 cat libDrakX.lang >> %name.list
 
@@ -209,6 +223,8 @@ done
 %postun -n harddrake-ui
 %clean_menus
 
+%triggerpostun -n harddrake -- harddrake <= 1.1.0
+%_sbindir/convert-harddrake
 
 %files newt -f %name.list
 %defattr(-,root,root)
@@ -228,6 +244,7 @@ done
 %dir /etc/sysconfig/harddrake2/
 %config(noreplace) /etc/sysconfig/harddrake2/previous_hw
 %_datadir/harddrake/service_harddrake
+%_sbindir/convert-harddrake
 
 %files -n harddrake-ui
 %defattr(-,root,root)
@@ -246,7 +263,11 @@ done
 
 %changelog 
 * Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-9mdk
-- reorganization cleanup:
+- harddrake :
+	o don't show "cancel" button in about and help windows
+	o service: convert config file from plain perl to Storable binary
+	  file (faster startup)
+- general reorganization cleanup:
     o move interactive_* into interactive::*
     o move partition_table_* into partition_table::*
 - XFdrake: more cleanups
