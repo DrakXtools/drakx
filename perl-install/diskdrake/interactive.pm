@@ -791,7 +791,7 @@ sub Options {
 		  '',
 		  [ 
 		   (map {; 
-			 { label => $_, text => formatAlaTeX($help{$_}), val => \$options->{$_}, 
+			 { label => $_, text => warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, 
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'), }
 		     } keys %$options),
 		    { label => _("Various"), val => \$unknown, advanced => 1 },
