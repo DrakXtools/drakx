@@ -35,7 +35,10 @@ my %appletstate = (
 			      colour => [ 'disconnected' ],
 			      changes => [ 'connected', 'error', 'busy' ],
 			      menu => [ 'confNetwork', 'refresh', 'help' ],
-			      tt => [ N("Network is down. Click on \"configure Network\"") ]
+			      tt => [ 
+                            #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
+                            N("Network is down. Click on \"Configure Network\"") 
+                           ]
                              }
 	    );
 
