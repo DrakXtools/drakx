@@ -250,7 +250,7 @@ I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
 The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
 
-Do you agree to loose all the partitions?
+Do you agree to lose all the partitions?
 ", $dev, formatError($err)));
         }) } sub { $in->ask_okcancel('', formatError($@)) };
     } else {
