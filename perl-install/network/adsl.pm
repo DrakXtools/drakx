@@ -127,8 +127,7 @@ sub load_firmware_floppy {
     my $_b = before_leaving { fs::umount("/mnt") };
     
     if (-e "/mnt/$file") {
-	cp_af("/mnt/$file");
-	system("cp /mnt/$file $destination");
+	cp_af("/mnt/$file $destination");
     } else { $failed ||= N("Firmware copy failed, file %s not found", $file) }
     
     eval { $in->ask_warn('', $failed || N("Firmware copy succeeded")) }; $in->exit if $@ =~ /wizcancel/;
