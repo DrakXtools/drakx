@@ -137,6 +137,10 @@ sub rewrite2_ {
 	qq($text);
     } elsif (member($tree->{tag}, 'footnote')) {
 	'(*)'
+    } elsif ($tree->{tag} eq 'keycap') {
+	$text =~ s/^(\s+)/$1]/;
+	$text =~ s/(\s+)$/[$1/;
+	$text;
     } elsif ($tree->{tag} eq 'warning') {
 	$text =~ s/^(\s+)/$1!! /;
 	$text =~ s/(\s+)$/ !!$1/;
@@ -148,7 +152,7 @@ sub rewrite2_ {
 	"\n$text\n";
 
     } elsif (member($tree->{tag}, 'guibutton', 'guimenu', 
-                    'emphasis', 'acronym', 'keycap', 'ulink', 'tip', 'note',
+                    'emphasis', 'acronym', 'ulink', 'tip', 'note',
 		    'primary', 'indexterm', 'application', 'keycombo', 
 		    'literal', 'superscript', 'xref',
 		   )) {
