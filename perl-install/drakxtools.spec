@@ -1,12 +1,12 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 3mdk
+Release: 4mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, detect-lst >= 0.9.72, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.2-13mdk, groff
+Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, detect-lst >= 0.9.72, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-3mdk, groff
 Conflicts: drakconf < 0.96-10mdk
 BuildRequires:        e2fsprogs-devel
 BuildRequires:        gcc
@@ -21,7 +21,7 @@ BuildRoot: %_tmppath/%name-buildroot
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 5.600-29mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.2-32mdk, usermode-consoleonly >= 1.44-4mdk
+Requires: perl-base >= 1:5.8.0, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.2-32mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
 Obsoletes: Xconfigurator mouseconfig kbdconfig printtool 
 Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
@@ -109,7 +109,7 @@ hardware classes.
 %setup -q
 
 %build
-%make
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -213,13 +213,16 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Mon Jul  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
+* Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-4mdk
+- fix depandancy
+
+* Tue Jul 09 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
 - harddrake2:
 	o no need to 'use strict' in "binary" => remove warnings 
 	o fix boot freeze on hw change: initscript was running us with
 	  stdout redirected to /dev/null; just use a small sh wrapper to
 	  fix it
-     o harddrake::bttv: only log in standalone mode
+	o harddrake::bttv: only log in standalone mode
 	o display channel of eide devices 
 
 - spec:
