@@ -18,8 +18,7 @@ sub ppp_configure {
 
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
-    my %toreplace;
-    $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
+    my %toreplace = map { $_ => $modem->{$_} } qw(connection phone login passwd auth domain dns1 dns2);
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3 }}{$modem->{auth}};
     $toreplace{phone} =~ s/[a-zA-Z]//g;
