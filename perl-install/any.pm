@@ -102,7 +102,7 @@ sub setupBootloader_simple {
     $mixed_kind_of_disks || $b->{bootUnsafe} || arch() =~ /ppc/ or return 1; #- default is good enough
     
     if (!$mixed_kind_of_disks && arch() !~ /ia64/) {
-	setupBootloader__mbr_or_not($in, $b, $hds, $fstab);
+	setupBootloader__mbr_or_not($in, $b, $hds, $fstab) or return 0;
     } else {
       general:
 	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
@@ -148,7 +148,7 @@ sub setupBootloader__mbr_or_not {
 	my $use_partition = arch() =~ /sparc/ ? $b->{use_partition} : "/dev/$boot" ne $b->{boot};
 	$in->ask_from(arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
 		      N("Where do you want to install the bootloader?"),
-		      [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]);
+		      [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]) or return;
 	if (arch() =~ /sparc/) {
 	    $b->{use_partition} = $use_partition;
 	}  else {
@@ -160,6 +160,7 @@ sub setupBootloader__mbr_or_not {
 	    $b->{boot} = $new_boot;
 	}
     }
+    1;
 }
 
 sub setupBootloader__general {
