@@ -88,7 +88,7 @@ function create_modules_mar() {
 function install_kernel() {
     rpm=$1
 
-    ver=$(rpm -qp --qf '%{name}' $rpm 2>/dev/null | perl -pe 's/kernel(-(BOOT))?-((\.?[0-9]+){3})\.(.*)/$3-$5$2/')
+    ver=$(rpm --nosignature -qpl $rpm | sed -n 's!/boot/vmlinuz-!!p')
     [ -n "$ver" ] || return
     
     if [ -n "$2" ]; then
