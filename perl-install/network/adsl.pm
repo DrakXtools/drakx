@@ -105,12 +105,12 @@ sub adsl_probe_info {
     add2hash($adsl, { login => $login, passwd => $passwd, passwd2 => '' });
 }
 
-sub adsl_detect {
-    my ($adsl) = @_;
+sub adsl_detect() {
+    my $adsl = {};
     require detect_devices;
     $adsl->{speedtouch} = detect_devices::getSpeedtouch();
     $adsl->{sagem} = detect_devices::getSagem();
-    return $adsl if $adsl->{speedtouch} || $adsl->{sagem};
+    return $adsl;
 }
 
 sub adsl_conf_backend {
