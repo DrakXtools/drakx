@@ -41,7 +41,7 @@ my %mice =
      
  'USB' =>
  [ [ 'usbmouse' ],
-   [ if_(arch() eq 'ppc', [ 1, 'ps/2', 'PS/2', N_("1 button") ]),
+   [ [ 1, 'ps/2', 'PS/2', N_("1 button") ],
      [ 2, 'ps/2', 'PS/2', N_("Generic 2 Button Mouse") ],
      [ 3, 'ps/2', 'PS/2', N_("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', N_("Wheel") ],
@@ -268,6 +268,12 @@ sub detect() {
     my @wacom;
     my $fast_mouse_probe = sub {
 	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Standard", unsafe => 1);
+
+	#- workaround for some special case were mouse is openable 1/2.
+	unless ($auxmouse) {
+	    $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Generic PS2 Wheel Mouse", unsafe => 0);
+	    $auxmouse and detect_devices::hasMousePS2("psaux"); #- fake another open in order for XFree to see the mouse.
+	}
 
 	if (modules::get_probeall("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
