@@ -178,7 +178,7 @@ What would you like to do?"),
 #- * 1st step: detect/setup
 step_ask_confirm:
 
-$::Wizard_no_previous = 1;
+undef $::Wizard_no_previous;
     
 $::direct or $in->ask_okcancel(N("Internet Connection Sharing"),
 N("You are about to configure your computer to share its Internet connection.
@@ -186,9 +186,8 @@ With that feature, other computers on your local network will be able to use thi
 
 Make sure you have configured your Network/Internet access using drakconnect before going any further.
 
-Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or quit_global($in, 0);
+Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or goto begin;
 
-undef $::Wizard_no_previous;
 
 
 step_detectsetup:
