@@ -62,6 +62,7 @@ $::prefix = "/tmp/live_tree";
     installPackages();
     system("chroot $::prefix ldconfig");
     system("chroot $::prefix update-menus");
+    system("chroot $::prefix fc-cache");  #- generate cache in all directories mentioned in config file
     rm_rf("$::prefix/dev"); # we don't need it, we use devfs
 }
 
