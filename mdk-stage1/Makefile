@@ -269,7 +269,5 @@ endif
 
 *-NETWORK-USB.o: %-NETWORK-USB.o: %.o
 
-*-USB.o: %-USB.o: %.o
-
 *-FULL.o: %-FULL.o: %.o
 
