@@ -123,10 +123,8 @@ ifeq (i386,$(ARCH))
 endif
 	ln -sf ash $(DEST)/usr/bin/sh
 
+	cd share ; ./gen_locales.sh
 	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
-
-#       # temporary hack to have at least good UTF-8 based locales (otherwise rpmlib segfaults)
-	cd $(DEST)/usr/share/locale/UTF-8 ; for i in `find -type f`; do cp -f /usr/share/locale/en/$$i $$i; done
 
 	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION
 
