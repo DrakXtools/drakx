@@ -210,8 +210,8 @@ sub initrd {
 sub entries_append {
     my ($type) = @_;
 
-    my $automatic = $type =~ /cdrom/ ? 'automatic=method:cdrom' : '';
-    $automatic .= " changedisk" if $type =~ /changedisk/;
+    my $automatic = $type =~ /cdrom|^all/ ? 'automatic=method:cdrom ' : '';
+    $automatic .= 'changedisk ' if $type =~ /changedisk/;
 
     my @simple_entries = (
 	linux => $default_vga,
@@ -223,9 +223,8 @@ sub entries_append {
 	rescue => "rescue",
     );
     my @entries = (
-        (map { $_->[0] => "$automatic $default_acpi $_->[1]" } group_by2(@simple_entries)),
-	acpi => "$automatic $default_vga",
-        if_($type eq "all", all => "pcmcia $default_vga $default_acpi"),
+        (map { $_->[0] => "$automatic$default_acpi $_->[1]" } group_by2(@simple_entries)),
+	acpi => "$automatic$default_vga",
     );
 
     map { { label => $_->[0], append => "$default_append $_->[1]" } }
@@ -708,8 +707,7 @@ sub isolinux {
     output("isolinux/isolinux.cfg", 
 	   syslinux_cfg(150, [
 	       (map {
-		   { label => $_->{label}, kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', 
-		     append => "$_->{append} automatic=method:cdrom" };
+		   { kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', %$_ };
 	       } entries_append('all')),
 	       (map_index {
 		   { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
