@@ -418,9 +418,11 @@ sub get_cd_info() {
 	#- now just report the data if we called --cd-info from the command line
 	foreach my $key (keys %cd_devices) {
 		my $rec_dev = $key;
+		my $prefix;
 		$rec_dev =~ s/sr/sg/;
+		$prefix = "ATAPI:" if $rec_dev =~ /hd/;
 		my $can_record = $cd_devices{$key}{cdr} || $cd_devices{$key}{cdrw} || $cd_devices{$key}{dvdr};
-		$cd_devices{$key}{rec_dev} = "/dev/" . $rec_dev if $can_record;
+		$cd_devices{$key}{rec_dev} = $prefix . "/dev/" . $rec_dev if $can_record;
 		if (!$interactive) {
 			print "\n{$key}->{rec_dev} = $cd_devices{$key}{rec_dev}\n"; 
 			print "{$key}->{speed} = $cd_devices{$key}{speed}\n";
