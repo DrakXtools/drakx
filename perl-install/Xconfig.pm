@@ -90,6 +90,11 @@ sub getinfoFromXF86Config {
 	    }
 	}
     }
+    #- get the default resolution.
+    my @depth = keys %{$o->{card}{depth}};
+    $o->{resolution_wanted} ||=
+      $o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][0] . "x" .
+	$o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][1];
     $o;
 }
 
