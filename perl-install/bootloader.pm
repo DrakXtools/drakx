@@ -12,6 +12,7 @@ use partition_table qw(:types);
 use log;
 use any;
 use fsedit;
+use devices;
 use loopback;
 use commands;
 use detect_devices;
