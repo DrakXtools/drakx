@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-25 15:37+0200\n"
+"POT-Creation-Date: 2000-09-25 15:45+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -258,14 +258,14 @@ msgid "Graphic memory: %s kB\n"
 msgstr "Minne grafikk: %s kB\n"
 
 #: ../../Xconfigurator.pm_.c:1014
-#, fuzzy, c-format
+#, c-format
 msgid "Color depth: %s\n"
-msgstr "Opsjoner fargedybde"
+msgstr "Fargedybde: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1015
-#, fuzzy, c-format
+#, c-format
 msgid "Resolution: %s\n"
-msgstr "Oppløsninger"
+msgstr "Oppløsning: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1017
 #, c-format
@@ -273,9 +273,9 @@ msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1018
-#, fuzzy, c-format
+#, c-format
 msgid "XFree86 driver: %s\n"
-msgstr "XFree86-tjener: %s\n"
+msgstr "XFree86 driver: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1037
 msgid "Preparing X-Window configuration"
@@ -314,13 +314,17 @@ msgid "What do you want to do?"
 msgstr "Hva ønsker du å gjøre?"
 
 #: ../../Xconfigurator.pm_.c:1068
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Keep the changes?\n"
 "Current configuration is:\n"
 "\n"
 "%s"
-msgstr "Behold nåværende IP-konfigurasjon"
+msgstr ""
+"Behold endringene?\n"
+"Nåværende konfigurasjon er:\n"
+"\n"
+"%s"
 
 #: ../../Xconfigurator.pm_.c:1089
 #, c-format
@@ -360,9 +364,8 @@ msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
 #: ../../Xconfigurator.pm_.c:1136
-#, fuzzy
 msgid "Choose the window manager to run:"
-msgstr "Velg vinduhåndtereren du ønsker å kjøre:"
+msgstr "Velg vinduhåndtereren som skal kjøres:"
 
 #: ../../Xconfigurator_consts.pm_.c:6
 msgid "256 colors (8 bits)"
@@ -2679,7 +2682,7 @@ msgid ""
 "There is no FAT partitions to resize or to use as loopback (or not enough "
 "space left)"
 msgstr ""
-"Det finnes ingen FAT partisjon å forandre størrelsen på eller å brukes som "
+"Det finnes ingen FAT partisjon å forandre størrelsen på eller å bruke som "
 "loopback (ikke nok plass igjen)"
 
 #: ../../install_interactive.pm_.c:144
@@ -3054,7 +3057,7 @@ msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 #: ../../install_steps_interactive.pm_.c:94
 #: ../../install_steps_interactive.pm_.c:419
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: ../../install_steps_interactive.pm_.c:102
 #: ../../install_steps_interactive.pm_.c:146
@@ -3096,7 +3099,10 @@ msgid ""
 "are you ready to answer that kind of questions?"
 msgstr ""
 "Er du sikker på at du er en ekspert? \n"
-"Du får tilgang til å gjøre kraftige, men farlige ting her."
+"Du får tilgang til å gjøre kraftige, men farlige ting her.\n"
+"\n"
+"Du vil bli spurt om ting som: ``Bruk skyggefil for passord?'',\n"
+"er du klar for å svare på denne type spørsmål?"
 
 #: ../../install_steps_interactive.pm_.c:135
 msgid "Rescue"
@@ -4270,6 +4276,12 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?\n"
 msgstr ""
+"Nå når Internett-tilknytningen er konfigurert, kan\n"
+"maskinen din konfigureres til å dele Internett-tilknytningen.\n"
+"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
+"nettverk (LAN).\n"
+"\n"
+"Ønsker du å sette opp deling av Internett-tilknytning?\n"
 
 #: ../../network.pm_.c:250
 msgid "no network card found"
@@ -4302,6 +4314,10 @@ msgid ""
 "Simply press OK to keep this device configured.\n"
 "Modifying the fields below will override this configuration."
 msgstr ""
+"ADVARSEL: Denne enheten har tidligere blitt konfigurert til å koble opp mot "
+"Internett.\n"
+"Trykk OK for å beholde enhetens konfigurasjon.\n"
+"Modifisering av feltene nedenfor vil overskrive denne konfigurasjonen."
 
 #: ../../network.pm_.c:291
 msgid ""
@@ -4746,13 +4762,12 @@ msgstr ""
 "Du kan legge til flere eller endre de eksisterende."
 
 #: ../../printerdrake.pm_.c:364
-#, fuzzy
 msgid "CUPS starting"
-msgstr "Beregner"
+msgstr "CUPS starter"
 
 #: ../../printerdrake.pm_.c:364
 msgid "Reading CUPS drivers database..."
-msgstr ""
+msgstr "Leser CUPS driver database..."
 
 #: ../../printerdrake.pm_.c:377 ../../printerdrake.pm_.c:395
 #: ../../printerdrake.pm_.c:408 ../../printerdrake.pm_.c:414
@@ -4835,7 +4850,7 @@ msgstr "Kan ikke legge til en partisjon til _formattert_ RAID md%d"
 
 #: ../../raid.pm_.c:102
 msgid "Can't write file $file"
-msgstr "Kan ikke skrive fil $fil"
+msgstr "Kan ikke skrive fil $file"
 
 #: ../../raid.pm_.c:127
 msgid "mkraid failed"
@@ -5149,7 +5164,6 @@ msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
 #: ../../standalone/drakgw_.c:218
-#, fuzzy
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
@@ -5159,9 +5173,9 @@ msgid ""
 msgstr ""
 "Det er bare ett konfigurert nettverksadapter i systemet ditt:\n"
 "\n"
-"$grensesnitt\n"
+"$interface\n"
 "\n"
-"Ønsker du å sette opp Internett-tilkoblingen din med dette adapteret?"
+"Ønsker du å sette opp ditt lokale nettverke (LAN) med dette adapteret?"
 
 #: ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
@@ -5513,11 +5527,10 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please choose which network adapter you want to use to connect to internet"
 #~ msgstr ""
-#~ "Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp "
+#~ "Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
 #~ "mot Internett"
 
 #~ msgid "I'm about to restart the network interface. Do you agree?"
@@ -5932,7 +5945,7 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ msgstr "Nettverk:"
 
 #~ msgid "Internet Connection Sharing - setup of $device"
-#~ msgstr "Deling av Internett tilkobling - oppsett av $enhet"
+#~ msgstr "Deling av Internett tilkobling - oppsett av $device"
 
 #~ msgid ""
 #~ "The following interface is about to be configured:\n"
@@ -5942,7 +5955,7 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ msgstr ""
 #~ "Følgende grensesnitt er i ferd med å bli konfigurert:\n"
 #~ "\n"
-#~ "$grensesnitt\n"
+#~ "$interface\n"
 #~ "\n"
 
 #~ msgid "Everything configured!"

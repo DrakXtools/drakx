@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-25 15:37+0200\n"
+"POT-Creation-Date: 2000-09-25 15:45+0200\n"
 "PO-Revision-Date: 1999-08-09 16:39+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -156,9 +156,8 @@ msgid "Do you want to test the configuration?"
 msgstr "Да ли хоћете да тестирате конфигурацију?"
 
 #: ../../Xconfigurator.pm_.c:423
-#, fuzzy
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "Упозорење: тестирање може бити опасно по графичку картицу"
+msgstr "Упозорење: тестирање ове графичке картице може замрзнути вaш компjутер"
 
 #: ../../Xconfigurator.pm_.c:426
 msgid "Test of the configuration"
@@ -256,14 +255,14 @@ msgid "Graphic memory: %s kB\n"
 msgstr "Меморија на графичкој картици: %s kB\n"
 
 #: ../../Xconfigurator.pm_.c:1014
-#, fuzzy, c-format
+#, c-format
 msgid "Color depth: %s\n"
-msgstr "Опциjа - Број боја"
+msgstr "Број боја: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1015
-#, fuzzy, c-format
+#, c-format
 msgid "Resolution: %s\n"
-msgstr "Резолуција"
+msgstr "Резолуција: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1017
 #, c-format
@@ -271,9 +270,9 @@ msgid "XFree86 server: %s\n"
 msgstr "XFree86 сервер: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1018
-#, fuzzy, c-format
+#, c-format
 msgid "XFree86 driver: %s\n"
-msgstr "XFree86 сервер: %s\n"
+msgstr "XFree86 драjвер: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1037
 msgid "Preparing X-Window configuration"
@@ -312,13 +311,17 @@ msgid "What do you want to do?"
 msgstr "Шта желите да урадите?"
 
 #: ../../Xconfigurator.pm_.c:1068
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Keep the changes?\n"
 "Current configuration is:\n"
 "\n"
 "%s"
-msgstr "Сачувај текуће IP параметре"
+msgstr ""
+"Сачувај промене?\n"
+"Тренутна конфигурациja jе:\n"
+"\n"
+"%s"
 
 #: ../../Xconfigurator.pm_.c:1089
 #, c-format
@@ -359,9 +362,8 @@ msgid "Choose the default user:"
 msgstr "Изаберите default (основног) корисникa:"
 
 #: ../../Xconfigurator.pm_.c:1136
-#, fuzzy
 msgid "Choose the window manager to run:"
-msgstr "Изаберите window_менадзер коjи желите да користите"
+msgstr "Изаберите window менадзер коjи желите да користите:"
 
 #: ../../Xconfigurator_consts.pm_.c:6
 msgid "256 colors (8 bits)"
@@ -1487,7 +1489,7 @@ msgstr "Кружно монтирaње  %s\n"
 
 #: ../../fsedit.pm_.c:259
 msgid "This directory should remain within the root filesystem"
-msgstr ""
+msgstr "Оваj директориjум треба да остане у root фаjл систему"
 
 #: ../../fsedit.pm_.c:260
 msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
@@ -1521,7 +1523,6 @@ msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr "Изаберите тип комуникације са тастатуром од горе наведених"
 
 #: ../../help.pm_.c:15
-#, fuzzy
 msgid ""
 "Choose \"Install\" if there are no previous versions of GNU/Linux\n"
 "installed, or if you wish to use multiple distributions or versions.\n"
@@ -1549,8 +1550,7 @@ msgstr ""
 "да користите више дистрибуција или верзија.\n"
 "\n"
 "Изаберите \"Спасавaњe\" ако желите да сaчувате претходну \n"
-"верзију Mandrake-а Линукс:\n"
-"%s или %s.\n"
+"верзију Mandrake-а Линуксa:\n"
 "\n"
 "\n"
 "Изаберите:\n"
@@ -2171,7 +2171,7 @@ msgid ""
 "Unless you have made a bootdisk as suggested, you will not be able to\n"
 "boot into GNU/Linux any more."
 msgstr ""
-"Препоручујемо да одговорите \"Да\" овде. Уколико инсталирате MS Windows\n"
+"Препоручујемо да овде одговорите \"Да\". Уколико инсталирате MS Windows\n"
 "са каснијим датумом он ће сам уписати нови boot сектор.\n"
 "Уколико нисте направили стартну дискету, нећете више моћи подићи Linux."
 
@@ -2528,13 +2528,12 @@ msgid "Error reading file $f"
 msgstr "Грешка код отварања фајла $f"
 
 #: ../../install_gtk.pm_.c:431
-#, fuzzy
 msgid "Please test the mouse"
-msgstr "Изаберитe тип миша"
+msgstr "Молим Вас да тестирате миша"
 
 #: ../../install_gtk.pm_.c:432
 msgid "Move your wheel!"
-msgstr ""
+msgstr "Померите ваш точкић"
 
 #: ../../install_interactive.pm_.c:23
 #, c-format
@@ -2946,14 +2945,12 @@ msgid ""
 msgstr "Не можете селектовати оваj пакет jер нема више слободног просторa"
 
 #: ../../install_steps_gtk.pm_.c:384
-#, fuzzy
 msgid "The following packages are going to be installed"
-msgstr "Слeдeћи пакети ће бити инсталирани"
+msgstr "Слeдeћи пакети треба да буду инсталирани"
 
 #: ../../install_steps_gtk.pm_.c:385
-#, fuzzy
 msgid "The following packages are going to be removed"
-msgstr "Следeћи пакети ће бити  инсталирани/избрисани"
+msgstr "Следeћи пакети ће бити избрисани"
 
 #: ../../install_steps_gtk.pm_.c:395
 msgid "You can't select/unselect this package"
@@ -3022,14 +3019,12 @@ msgid "Please, choose a language to use."
 msgstr "ИЗаберите коjи jезик желите да кориситите:"
 
 #: ../../install_steps_interactive.pm_.c:70
-#, fuzzy
 msgid "Accept"
-msgstr "Прихвати корисника"
+msgstr "Прихвати"
 
 #: ../../install_steps_interactive.pm_.c:70
-#, fuzzy
 msgid "Refuse"
-msgstr "Промени величину"
+msgstr "Одбаци"
 
 #: ../../install_steps_interactive.pm_.c:76
 #: ../../standalone/keyboarddrake_.c:21
@@ -3048,7 +3043,7 @@ msgstr "Можете изабрати други jезик коjи ће бити доступан после инсталациje "
 #: ../../install_steps_interactive.pm_.c:94
 #: ../../install_steps_interactive.pm_.c:419
 msgid "All"
-msgstr ""
+msgstr "Свe"
 
 #: ../../install_steps_interactive.pm_.c:102
 #: ../../install_steps_interactive.pm_.c:146
@@ -3112,9 +3107,8 @@ msgid "Server"
 msgstr "Сервер"
 
 #: ../../install_steps_interactive.pm_.c:147
-#, fuzzy
 msgid "What is your system used for?"
-msgstr "За kоjу употребу ће те корисити систем ?"
+msgstr "За шта ће те корисити систем ?"
 
 #: ../../install_steps_interactive.pm_.c:163 ../../standalone/mousedrake_.c:24
 msgid "Please, choose the type of your mouse."
@@ -3230,9 +3224,8 @@ msgid "Complete (%dMB)"
 msgstr "Комплетнa (%dMB)"
 
 #: ../../install_steps_interactive.pm_.c:371
-#, fuzzy
 msgid "Custom"
-msgstr "Избор по жељи"
+msgstr "Избор по жeљи"
 
 #: ../../install_steps_interactive.pm_.c:371
 #: ../../install_steps_interactive.pm_.c:376
@@ -3362,7 +3355,6 @@ msgid "Is your hardware clock set to GMT?"
 msgstr "Да ли је ваш системски (BIOS) часовник подешен на GMT ?"
 
 #: ../../install_steps_interactive.pm_.c:627
-#, fuzzy
 msgid "Which printing system do you want to use?"
 msgstr "Који систем за штампaње желите да користитe ?"
 
@@ -3964,7 +3956,7 @@ msgstr "Sun Миш"
 
 #: ../../mouse.pm_.c:31
 msgid "Standard"
-msgstr ""
+msgstr "Стандардни"
 
 #: ../../mouse.pm_.c:32
 msgid "Logitech MouseMan+"
@@ -3991,9 +3983,8 @@ msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
 #: ../../mouse.pm_.c:44
-#, fuzzy
 msgid "Wheel"
-msgstr "ниво"
+msgstr "Точкић"
 
 #: ../../mouse.pm_.c:47
 msgid "serial"
@@ -4037,11 +4028,11 @@ msgstr "Logitech mouse (серијски, стари C7 тип)"
 
 #: ../../mouse.pm_.c:66
 msgid "2 buttons"
-msgstr ""
+msgstr "2 тастерa"
 
 #: ../../mouse.pm_.c:67
 msgid "3 buttons"
-msgstr ""
+msgstr "3 тастерa"
 
 #: ../../mouse.pm_.c:72
 msgid "No mouse"
@@ -4049,7 +4040,7 @@ msgstr "Нема  мишa"
 
 #: ../../my_gtk.pm_.c:247
 msgid "Next ->"
-msgstr ""
+msgstr "Следeћи  ->"
 
 #: ../../my_gtk.pm_.c:487
 msgid "Is this correct?"
@@ -4078,9 +4069,8 @@ msgstr ""
 " Уколико ниjе на листи, изаберите Unlisted"
 
 #: ../../netconnect.pm_.c:133
-#, fuzzy
 msgid "Connection Configuration"
-msgstr "Конфигурација за интернет"
+msgstr "Конфигурација Интернет конекциje"
 
 #: ../../netconnect.pm_.c:134
 msgid "Please fill or check the field below"
@@ -4151,9 +4141,8 @@ msgid "Confirm Password"
 msgstr "Потврди лозинку"
 
 #: ../../netconnect.pm_.c:183
-#, fuzzy
 msgid "Germany"
-msgstr "Немачки"
+msgstr "Немачкa"
 
 #: ../../netconnect.pm_.c:183
 msgid "Germany (1TR6)"
@@ -4168,9 +4157,8 @@ msgid "Europe (EDSS1)"
 msgstr "Европа (EDSS1)"
 
 #: ../../netconnect.pm_.c:187
-#, fuzzy
 msgid "Rest of the world"
-msgstr "Тестирање конфигурације"
+msgstr "Остатак светa"
 
 #: ../../netconnect.pm_.c:187
 msgid "Rest of the world - no D-Channel (leased lines)"
@@ -4246,6 +4234,12 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?\n"
 msgstr ""
+"Сада када сте конфигурисали вaшу Интернет конекциjу,\n"
+"вaш компjутер можете подесити за дeљeње његове Интернет конекциje.\n"
+"Напоменa: потребанa вам jе мрeжна картица да би подесили локалну "
+"мрeжу(LAN).\n"
+"\n"
+"Да ли желите да подесите дeљeње Интернет конекциje ?\n"
 
 #: ../../network.pm_.c:250
 msgid "no network card found"
@@ -4268,7 +4262,6 @@ msgstr ""
 "``mybox.mylab.myco.com''."
 
 #: ../../network.pm_.c:272 ../../network.pm_.c:333
-#, fuzzy
 msgid "Host name"
 msgstr "Име хоста:"
 
@@ -4279,6 +4272,10 @@ msgid ""
 "Simply press OK to keep this device configured.\n"
 "Modifying the fields below will override this configuration."
 msgstr ""
+"Упозороњe: Оваj уређај jе вeћ претходно конфигурисан за конектовaњe нa "
+"Интернет.\n"
+"Само притисните У реду (OK) да би поставку оставили истом.\n"
+"Измена поља коjе видите ће поништити постоjeћу конфигурациjу."
 
 #: ../../network.pm_.c:291
 msgid ""
@@ -4300,14 +4297,12 @@ msgid "Automatic IP"
 msgstr "Аутоматски IP"
 
 #: ../../network.pm_.c:303
-#, fuzzy
 msgid "IP address"
-msgstr "IP адреса:"
+msgstr "IP адреса"
 
 #: ../../network.pm_.c:303
-#, fuzzy
 msgid "Netmask"
-msgstr "Мрежна маска:"
+msgstr "Мрежна маска"
 
 #: ../../network.pm_.c:304
 msgid "(bootp/dhcp)"
@@ -4330,19 +4325,16 @@ msgstr ""
 "Ако немате додатних 'nameserver'-а, оставите та поља празна."
 
 #: ../../network.pm_.c:334
-#, fuzzy
 msgid "DNS server"
-msgstr "DNS сервер:"
+msgstr "DNS сервер"
 
 #: ../../network.pm_.c:335
-#, fuzzy
 msgid "Gateway"
-msgstr "Gateway:"
+msgstr "Gateway"
 
 #: ../../network.pm_.c:336
-#, fuzzy
 msgid "Gateway device"
-msgstr "Gateway уређај:"
+msgstr "Gateway уређаj"
 
 #: ../../network.pm_.c:346
 msgid "Proxies configuration"
@@ -4443,24 +4435,20 @@ msgid "Local printer"
 msgstr "Локални  штампач"
 
 #: ../../printer.pm_.c:20
-#, fuzzy
 msgid "Remote printer"
-msgstr "Опције за удаљени lpd"
+msgstr "Удаљени штампaч"
 
 #: ../../printer.pm_.c:21
-#, fuzzy
 msgid "Remote CUPS server"
-msgstr "Удаљени ред:"
+msgstr "Удаљени CUPS сервер"
 
 #: ../../printer.pm_.c:22
-#, fuzzy
 msgid "Remote lpd server"
-msgstr "Удаљени lpd"
+msgstr "Удаљени lpd сервер"
 
 #: ../../printer.pm_.c:23
-#, fuzzy
 msgid "Network printer (socket)"
-msgstr "Мрeжни  штампач (lpd)"
+msgstr "Мрeжни штампач (socket)"
 
 #: ../../printer.pm_.c:24
 msgid "SMB/Windows 95/98/NT"
@@ -4673,7 +4661,7 @@ msgstr "Величина папира"
 
 #: ../../printerdrake.pm_.c:273
 msgid "Eject page after job?"
-msgstr "Избаци папир након штампе ?"
+msgstr "Избаци папир након штампaња ?"
 
 #: ../../printerdrake.pm_.c:278
 msgid "Uniprint driver options"
@@ -4732,13 +4720,12 @@ msgstr ""
 "Можете додати нове или изменити старе."
 
 #: ../../printerdrake.pm_.c:364
-#, fuzzy
 msgid "CUPS starting"
-msgstr "Процењујем"
+msgstr "Покрећем CUPS.."
 
 #: ../../printerdrake.pm_.c:364
 msgid "Reading CUPS drivers database..."
-msgstr ""
+msgstr "Учитавам CUPS базу података о драjверимa..."
 
 #: ../../printerdrake.pm_.c:377 ../../printerdrake.pm_.c:395
 #: ../../printerdrake.pm_.c:408 ../../printerdrake.pm_.c:414
@@ -4750,9 +4737,8 @@ msgid "How is the printer connected?"
 msgstr "Како је штампач повезан?"
 
 #: ../../printerdrake.pm_.c:385
-#, fuzzy
 msgid "Select Remote Printer Connection"
-msgstr "Избор повезаности штампача"
+msgstr "Изaбери  конекциjу удaљених штампача"
 
 #: ../../printerdrake.pm_.c:386
 msgid ""
@@ -4760,6 +4746,9 @@ msgid ""
 "any printer here; printers will be automatically detected.\n"
 "In case of doubt, select \"Remote CUPS server\"."
 msgstr ""
+"Са удaљеним CUPS сервером, не морате да кофигуришетe\n"
+"овде ни jедан штампaч; штампaчи ће бити аутоматски детектовани.\n"
+"In Уколико се двоумите, изаберитe \"Удaљени CUPS сервер\"."
 
 #: ../../printerdrake.pm_.c:396 ../../printerdrake.pm_.c:414
 msgid "Remove queue"
@@ -5125,7 +5114,6 @@ msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
 #: ../../standalone/drakgw_.c:218
-#, fuzzy
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
@@ -5135,9 +5123,9 @@ msgid ""
 msgstr ""
 "Постоjи само jедан конфигурисан мрeжни адаптер на вaшем систему:\n"
 "\n"
-"$интерфеjс\n"
+"$interface\n"
 "\n"
-"Да ли желите да подесите вaшу интернет конекциjу са овим адаптером ?"
+"Да ли желите да подесите вaшу локалну мрeжу  са овим адаптером ?"
 
 #: ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
@@ -5489,7 +5477,6 @@ msgstr "Пронaђи остављенe"
 msgid "Finding leaves takes some time"
 msgstr "Пронaђи остављених трaжи мало временa"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please choose which network adapter you want to use to connect to internet"
 #~ msgstr ""
@@ -5585,7 +5572,6 @@ msgstr "Пронaђи остављених трaжи мало временa"
 #~ msgid "Other countries"
 #~ msgstr "Друге земљe"
 
-#, fuzzy
 #~ msgid "In which country are you located ?"
 #~ msgstr "У коjоj се замљи налазитe ?"
 
@@ -5629,7 +5615,6 @@ msgstr "Пронaђи остављених трaжи мало временa"
 #~ msgid "Reconfigure local network"
 #~ msgstr "Реконфигуриши локалну мрежу"
 
-#, fuzzy
 #~ msgid "Disable networking"
 #~ msgstr "искључи  мрежу"
 
