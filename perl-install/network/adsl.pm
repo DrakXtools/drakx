@@ -111,7 +111,7 @@ sub sagem_set_parameters {
         my $cmv;
         $cmv = "$::prefix/etc/eagle-usb/CMVe${type}$netc->{provider_id}.txt" if $netc->{provider_id};
         -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}WO.txt";
-        symlink("$::prefix/etc/eagle-usb/CMVe${type}.txt", $cmv);
+        symlinkf($cmv, "$::prefix/etc/eagle-usb/CMVe${type}.txt");
     }
 }
 
