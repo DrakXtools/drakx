@@ -1,98 +1,32 @@
 #!/usr/bin/perl
 
+# DrakNet
+
+# Copyright (C) 1999 MandrakeSoft (damien@mandrakesoft.com)
 #
-# DindinX (odin@mandrakesoft.com)
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
 #
-# Copyright 2001 MandrakeSoft
-#
-# This software may be freely redistributed under the terms of the GNU
-# public license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
 use interactive;
-use proxy;
+use network::network;
 
-use my_gtk qw(:helpers :wrappers);
-# use detect_devices;
+my $in = 'interactive'->vnew('su', 'network');
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+network::network::miscellaneousNetwork($in, 1);
+any::miscellaneousNetwork('');
+$in->exit(0);
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: drakproxy [--version]\n";
-/-version/ and die 'version: drakproxy 1.0 2001/05/22 dindinx'."\n";
-$::isEmbedded or $::isWizard = 1;
-$::Wizard_pix_up = "wiz_drakgw.png";    # FIXME
-$::Wizard_title = _("Proxy handling");
-
-my $in = 'interactive'->vnew('su', 'default');
-
-if ($::isWizard || ($::isEmbedded && $in->isa('interactive_gtk'))) {
-    proxy::main('', $in);
-    $in->exit(0);
-}
-
-# pure gtk_mode
-my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
-$window1->set_position(1);
-$window1->set_title(_("Proxy configuration"));
-$window1->border_width(10);
-gtkshow(gtkadd($window1,
-	       gtkpack_(new Gtk::VBox(0,0),
-			1, gtkpack(new Gtk::HBox(0,0),
-				   new Gtk::Label _("Welcome to the Proxy Connection utility
-
-Click on Configure to launch the setup wizard."),
-				  ),
-			1, gtkpack(my $hbox2 = new Gtk::HBox(0,0),),
-			0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-				  gtksignal_connect(new Gtk::Button(_("Configure")), clicked => sub { system ("/usr/sbin/drakproxy --wizard") }),
-				  gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { kill(USR1, $::CCPID) }),
-				 )
-		       )
-	      )
-       );
-Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill USR2, $::CCPID;
-Gtk->main;
-Gtk->exit(0);
-
-#-------------------------------------------------
-#- $Log$
-#- Revision 1.9  2002/01/18 20:22:20  gc
-#- - write the 'common' part of the 'explanations' stuff,
-#-   with nice help from Pixel for the tough Perl part
-#- - move 'use standalone' up in all standalone apps,
-#-   to comply to 'explanations'
-#-
-#- Revision 1.8  2001/10/30 20:11:31  damien
-#- corrected ref($in) =~ /gtk/
-#-
-#- Revision 1.7  2001/08/09 09:35:37  gc
-#- use vnew the right way everywhere
-#-
-#- Revision 1.6  2001/08/08 18:26:31  prigaux
-#- add interactive_pkgs stuff
-#-
-#- Revision 1.5  2001/06/12 12:45:57  odin
-#- ui for drakproxy almost done
-#-
-#- Revision 1.4  2001/06/11 16:34:49  damien
-#- corrected CVS: ----------------------------------------------------------------------
-#-
-#- Revision 1.2  2001/06/11 16:03:10  damien
-#- perlised
-#-
-#- Revision 1.1  2001/06/11 15:22:41  odin
-#- first import of drakproxy
-#-
-#-
