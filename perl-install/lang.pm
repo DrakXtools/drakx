@@ -128,7 +128,11 @@ my %languages = my @languages = (
 #- there is no tamil font curently; so set DrakX encoding to utf_1
 #- note: most of the gnome translations for tamil are broken (using bad
 #- encoding)
-'ta_IN.UTF-8'=> [ 'Tamil',		'iso-8859-1',      'ta', 'ta', 'UTF-8' ],
+#-
+#- Tamil currently works only with TSCII encoding; which identifies
+#- itself as a fake iso-8859-1
+#'ta_IN.UTF-8'=> [ 'Tamil (UTF-8)',	'iso-8859-1',      'ta', 'ta', 'UTF-8' ],
+  'ta'  => [ 'Tamil (TSCII)',		'tscii',      'ta', 'ta' ],
 'tg_TJ.UTF-8'=> [ 'Tajik',		'utf_koi8-k',    'tg', 'tg', 'UTF-8' ],
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8'=> [ 'Thai (UTF-8)',         'tis620',     'th', 'th', 'UTF-8' ],
@@ -327,8 +331,9 @@ my %charsets = (
 #- (and gtk support isn't done yet)
 #-  "isiri-3342" => [ undef,		undef,		"trivial.trans",
 #-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
-#-  "tscii-0" => [ "tamil",		undef,		"trivial.trans",
-#-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
+#- Tamil uses pseudo iso-8859-1 fonts
+  "tscii" => [ "tamil",		undef,		"trivial.trans",
+	undef, undef, "-mdk-tsc_helv-*-*-*-*-*-*-*-*-*-*-iso8859-1" ],
   "unicode" => [ undef,			undef,		"trivial.trans",
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
@@ -350,6 +355,8 @@ my %charset2kde_charset = (
     cp1251 => 'microsoft-cp1251',
     utf8 => 'iso10646-1',
     tis620 => 'tis620-0',
+    #- TSCII works using a pseudo iso-8859-1 encoding
+    tscii => 'iso8859-1',
 );
 
 #- for special cases not handled magically
@@ -368,6 +375,7 @@ my %lang2country = (
   sl => 'si',
   sp => 'sr',
   sv => 'se',
+  ta => 'in',
 );
 
 
@@ -518,6 +526,9 @@ my %charset2kde_font = (
   'armscii-8' => [ "clearlyu,17" ],
   'utf_ka'    => [ "clearlyu,17" ],
   'viscii'  => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
+  #- TSCII uses pseudo iso-8859-1 fonts, it is important to choose them
+  #- correctly
+  'tscii'  => [ "tsc_paranar,13", "mylaitsc,13", "tsc_paranar,10", ],
   'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
 
