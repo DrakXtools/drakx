@@ -17,6 +17,7 @@ $last_boot_config .= '_X11' if $invert_do_it;
 
 # first run ? if not read old hw config
 my $previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
+$previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
 my $in = interactive->vnew;
 
