@@ -12,7 +12,7 @@ where [options] are:
 ";
     exit 1;
 }
-my (%options, $yes, $hd, $cd);
+my (%options, $yes, $hd, $hdp, $cd);
 
 #- avoid globing as it is not available in rescue ramdisk.
 foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
@@ -40,15 +40,63 @@ eval {
 	    $cd ||= "scd" . $cdromNum++;
 	}
     }
+    close F;
 };
--e "/dev/$hd" or die "unable to access hard disk";
+#- examine DAC960 device.
+unless ($hd) {
+    local $_;
+    open F, "dmesg |";
+    while (<F>) {
+	m|/dev/(rd/.*?): .*?,| and $hd ||= $1, last;
+    }
+    close F;
+    if ($hd) {
+	my ($c_id, $d_id) = $hd =~ m|rd/c(\d+)d(\d+)|;
+	-d "/dev/rd" or mkdir "/dev/rd";
+	system "mknod", "/dev/$hd", "b", 48+$c_id, 8*$d_id;
+	foreach (1..7) {
+	    system "mknod", "/dev/${hd}p$_", "b", 48+$c_id, 8*$d_id+$_;
+	}
+	$hdp = $hd . 'p';
+    }
+}
+#- examine Compaq Smart Array device.
+unless ($hd) {
+    foreach ('array/ida', 'cpqarray/ida', 'cciss/cciss') {
+	my $prefix = "/proc/driver/$_"; #- kernel 2.4 places it here
+	$prefix = "/proc/$_" if !-e "${prefix}0"; #- kernel 2.2
+
+	my ($name) = m|/(.*)|;
+	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
+	    local $_;
+	    open F, $f;
+	    while (<F>) {
+		if (m|^\s*($name/.*?):|) {
+		    $hd ||= $1;
+		}
+	    }
+	    close F;
+	}
+    }
+    if ($hd) {
+	my ($type, $c_id, $d_id) = $hd =~ m,(ida|cciss)/c(\d+)d(\d+),;
+	-d "/dev/$type" or mkdir "/dev/$type";
+	system "mknod", "/dev/$hd", "b", ($type eq 'ida' ? 72 : 104)+$c_id, 16*$d_id;
+	foreach (1..15) {
+	    system "mknod", "/dev/${hd}p$_", "b", ($type eq 'ida' ? 72 : 104)+$c_id, 16*$d_id+$_;
+	}
+	$hdp = $hd . 'p';
+    }
+}
+$hd && -e "/dev/$hd" or die "unable to access hard disk";
 print "hd: $hd\ncd: $cd\n";
+$hdp ||= $hd;
 
 #- try to free any reference to hard disk which will be used (as in rescue mode it has already loaded
 #- existing partition in /mnt.
 open F, "/proc/mounts";
 while (<F>) {
-    /$hd(\d*)\s+(\S+)/ and $already_mounted{$2} = "$hd$1";
+    /$hdp(\d*)\s+(\S+)/ and $already_mounted{$2} = "$hdp$1";
 }
 foreach (sort { $b cmp $a } keys %already_mounted) {
     print "umounting $already_mounted{$_} from $_\n"; 
@@ -120,6 +168,11 @@ while (<F>) {
     /(\d+)\s*heads/ and $heads = $1;
     /(\d+)\s*sectors/ and $sectors = $1;
     /(\d+)\s*cylinders/ and $cylinders = $1;
+}
+if ($heads == 1 && $cylinders == 1) {
+    $cylinders = $sectors / 255 / 63;
+    $heads = 255;
+    $sectors = 63;
 }
 close F;
 for (1..2) {
@@ -246,49 +299,47 @@ close F or die "unable to partition the disk $hd";
 
 #- we have to build swap and mount it.
 print "Setting swap\n";
-system "mkswap", "/dev/$hd$swap";
-system "swapon", "/dev/$hd$swap";
+system "mkswap", "/dev/$hdp$swap";
+system "swapon", "/dev/$hdp$swap";
 
 #- we have 
-print "Formatting /dev/$hd$inst partition\n";
-system "mkfs.ext2", "/dev/$hd$inst";
-print "Formatting /dev/$hd$root partition\n";
-system "mkfs.ext2", "/dev/$hd$root";
+print "Formatting /dev/$hdp$inst partition\n";
+system "mkfs.ext2", "/dev/$hdp$inst";
+print "Formatting /dev/$hdp$root partition\n";
+system "mkfs.ext2", "/dev/$hdp$root";
 if ($var) {
-    print "Formatting /dev/$hd$var partition\n";
-    system "mkfs.ext2", "/dev/$hd$var";
+    print "Formatting /dev/$hdp$var partition\n";
+    system "mkfs.ext2", "/dev/$hdp$var";
 }
 if ($home) {
-    print "Formatting /dev/$hd$home partition\n";
-    system "mkfs.ext2", "/dev/$hd$home";
+    print "Formatting /dev/$hdp$home partition\n";
+    system "mkfs.ext2", "/dev/$hdp$home";
 }
 
 print "Mounting partitions\n";
 mkdir "/hd";
-system "mount", "-t", "ext2", "/dev/$hd$inst", "/hd";
+system "mount", "-t", "ext2", "/dev/$hdp$inst", "/hd";
 mkdir "/mnt";
-system "mount", "-t", "ext2", "/dev/$hd$root", "/mnt";
+system "mount", "-t", "ext2", "/dev/$hdp$root", "/mnt";
 if ($var) {
     mkdir "/mnt/var";
-    system "mount", "-t", "ext2", "/dev/$hd$var", "/mnt/var";
+    system "mount", "-t", "ext2", "/dev/$hdp$var", "/mnt/var";
 }
 if ($home) {
     mkdir "/mnt/home";
-    system "mount", "-t", "ext2", "/dev/$hd$home", "/mnt/home";
+    system "mount", "-t", "ext2", "/dev/$hdp$home", "/mnt/home";
 }
 
 print "Copying installation on hard drive\n";
-if (-e "/boot/vmlinuz" && -e "/boot/hd.rdz" || -e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
-    system "cp", "-a", "/boot", "/cdrom/boot", "/hd";
+mkdir "/hd/boot";
+if (-e "/cdrom/oem/vmlinuz" && -e "/cdrom/oem/all.rdz") {
+    system "cp", "-a", "/cdrom/oem/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/cdrom/oem/all.rdz", "/hd/boot/all.rdz";
+} elsif (-e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
+    system "cp", "-a", "/cdrom/boot/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/cdrom/boot/hd.rdz", "/hd/boot/all.rdz";
 } else {
-    mkdir "/hd/boot";
-    unless (-e "/tmp/hd/vmlinuz" && -e "/tmp/hd/hd.rdz") {
-	system "cp", "/cdrom/images/hd.img", "/hd/hd.img";
-	mkdir "/tmp/hd";
-	system "modprobe", "loop";
-	system "mount", "/hd/hd.img", "/tmp/hd", "-o", "loop";
-    }
-    system "cp", "-a", "/tmp/hd/vmlinuz", "/tmp/hd/hd.rdz", "/hd/boot";
+    die "no installation stage1 found";
 }
 
 mkdir "/hd/Mandrake";
@@ -480,8 +531,8 @@ if (defined $resize_fat_size) {
     print F "timeout 0\n\n";
     print F "title oem\n";
 }
-print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner flang=$flang oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
-print F "initrd (hd0,$instz)/boot/hd.rdz\n";
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner flang=$flang oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
+print F "initrd (hd0,$instz)/boot/all.rdz\n";
 #- if a windows partition is available, add an entrie for it.
 if (defined $resize_fat_size) {
     print F "\ntitle windows\n";
@@ -489,6 +540,9 @@ if (defined $resize_fat_size) {
     print F "makeactive\n";
     print F "chainloader +1\n";
 }
+close F;
+open F, ">/hd/boot/grub/device.map";
+print F "(hd0) /dev/$hd\n";
 close F;
 open F, "| grub --device-map=/hd/boot/grub/device.map --batch";
 print F "install (hd0,$instz)/boot/grub/stage1 d (hd0) (hd0,$instz)/boot/grub/stage2 p (hd0,$instz)/boot/grub/menu.lst\n";
@@ -519,12 +573,12 @@ foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /var/log /pr
 }
 system "mount", "-t", "proc", "proc", "/mnt/proc";
 open F, ">/mnt/etc/fstab";
-print F "/dev/$hd$root / ext2 defaults 1 1\n";
+print F "/dev/$hdp$root / ext2 defaults 1 1\n";
 if ($var) {
-    print F "/dev/$hd$var /var ext2 defaults 1 2\n";
+    print F "/dev/$hdp$var /var ext2 defaults 1 2\n";
 }
 if ($home) {
-    print F "/dev/$hd$home /home ext2 defaults 1 2\n";
+    print F "/dev/$hdp$home /home ext2 defaults 1 2\n";
 }
 close F;
 open F, ">/mnt/etc/sysconfig/i18n";
@@ -609,7 +663,6 @@ system "umount", "/mnt/proc";
 $home and system "umount", "/mnt/home";
 $var and system "umount", "/mnt/var";
 system "umount", "/mnt";
-system "umount", "/tmp/hd";
 system "umount", "/hd";
 system "umount", "/cdrom";
 
