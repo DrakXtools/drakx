@@ -149,12 +149,11 @@ sub exit {
 
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
-    my $one = ($ok xor $cancel);
     $spread ||= $::isWizard ? "end" : "spread";
-    $ok ||= $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok");
-    $cancel ||= $::isWizard ? _("<- Previous") : _("Cancel");
+    $cancel = $::isWizard ? _("<- Previous") : _("Cancel") if !defined $cancel && !defined $ok;
+    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok") if !defined $ok;
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
-    my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
+    my $b2 = $cancel && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
     $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(_("Cancel")), clicked => sub { die 'wizcancel' });
     my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, $::Wizard_no_previous ? () : $b2, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
