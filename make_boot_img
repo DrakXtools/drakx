@@ -14,7 +14,8 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
-$default_append = "ramdisk_size=128000 root=/dev/ram3 acpi=off";
+$default_append = "ramdisk_size=128000 root=/dev/ram3";
+$default_acpi = "acpi=off";
 $default_vga = "vga=788";
 
 $instdir = "mdk-stage1";
@@ -154,8 +155,10 @@ sub entries_append {
 	rescue => "rescue rw",
     );
     my @entries = (
-        (map { $_->[0] => "$automatic $_->[1]" } group_by2(@simple_entries)),
-	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom $default_vga rescue oem rw"),
+        (map { $_->[0] => "$automatic $default_acpi $_->[1]" } group_by2(@simple_entries)),
+	if_(member($type, "cdrom", "all"),
+	    oem => "automatic=method:cdrom $default_vga rescue oem rw",
+	    acpi => "$default_vga acpi=on"),
         if_($type eq "all", all => "pcmcia $default_vga"),
     );
 
@@ -639,7 +642,7 @@ F2 advanced.msg
   . join('', map_index {
 "label alt$::i
   kernel alt$::i/vmlinuz
-  append initrd=alt$::i/all.rdz $default_append $default_vga
+  append initrd=alt$::i/all.rdz $default_append $default_acpi $default_vga
 " } @kernels);
 
     output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
