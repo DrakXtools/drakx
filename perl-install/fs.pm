@@ -761,11 +761,10 @@ sub umount {
     $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
 
-    # SYS_umount is not a valid sycall on modern kernels
-    (arch() =~ /x86_64/
-     ? syscall_('umount2', $mntpoint, 0)
-     : syscall_('umount', $mntpoint)
-     ) or die \N("error unmounting %s: %s", $mntpoint, $!);
+    syscall_('umount2', $mntpoint, 0) or do {
+	kill 15, fuzzy_pidofs('^fam\b');
+	syscall_('umount2', $mntpoint, 0) or die \N("error unmounting %s: %s", $mntpoint, $!);
+    };
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
 }
