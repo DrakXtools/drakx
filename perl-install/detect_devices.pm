@@ -685,7 +685,7 @@ sub hasMousePS2 {
 
 sub raidAutoStartIoctl() {
     sysopen(my $F, devices::make("md0"), 2) or return;
-    ioctl $F, 2324, 0;
+    ioctl $F, 0x914, 0; /* RAID_AUTORUN */
 }
 
 sub raidAutoStartRaidtab {
