@@ -141,7 +141,7 @@ sub fullname2mouse {
     die "$fname not found ($type, $name)";
 }
 
-sub serial_ports() { map { "ttyS$_" } 0..3 }
+sub serial_ports() { map { "ttyS$_" } 0..7 }
 sub serial_port2text {
     $_[0] =~ /ttyS (\d+)/x;
     "$_[0] / COM" . ($1 + 1);
