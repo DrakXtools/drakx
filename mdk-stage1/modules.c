@@ -124,6 +124,7 @@ static enum return_type ensure_additional_modules_available(void)
                 init_progression("Copying...", file_size(floppy_modules_mar));
                 ret = copy_file(floppy_modules_mar, additional_archive_name, update_progression);
                 end_progression();
+                umount(floppy_mount_location);
                 return ret;
         } else
                 return RETURN_OK;
