@@ -59,7 +59,7 @@ foreach (@harddrake::data::tree) {
         foreach my $device (@ID{@added}) {
             push @configurator_pool, harddrake::data::set_removable_configurator($Ident, $device);
         };
-        foreach my $device (@{$oldconfig}{@was_removed}) {
+        foreach my $device (@$oldconfig{@was_removed}) {
             push @configurator_pool, harddrake::data::set_removable_remover($Ident, $device);
         }
     } else {
