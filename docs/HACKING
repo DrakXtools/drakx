@@ -23,7 +23,7 @@ Then, log yourself into the cvs:
         (the passwd is: 'cvs')
 
 And update the gi package:
-% cvs update -P -d
+% cvs update -P -d gi
 
 
 --------------------------------------------------------------------------
@@ -31,17 +31,18 @@ Preparing the compilation process:
 
 (1) target directory
 
-Create a /export directory and give write permissions to the user/group that 
-will be compiling DrakX.  It is also suggested that you copy a recent 
-Mandrake Linux CD in there. (You don't have to put have all the RPMS...) ; 
-you'll need roughly 1.5 Gbytes for a full install. (It is possible to not 
-have a copy of Mandrake Linux there, if all you desire is to compile gi)
+Create a top level directory called /export and give write permissions to 
+the user/group that will be compiling DrakX.  It is also suggested that you 
+copy a recent Mandrake Linux CD in there. (You don't have to put have all 
+the RPMS...) ; you'll need roughly 1.5 Gbytes for a full install. (It is 
+possible to not have a copy of Mandrake Linux there, if all you desire is to 
+compile gi)
 
 
 (2) support directories
 
-You will need to create an /RPMS directory.  This directory needs to be 
-populated with the following RPMS:
+You will need to create a top level /RPMS directory.  This directory needs 
+to be populated with the following RPMS:
 locales-ja locales-ko locales-zh
 
 gi needs to be informed about which kernel(s) is/are to be used.  A 
@@ -53,8 +54,7 @@ gi/kernel/all.kernels/2.6.0
                                 System.map-2.6.0
                                 vmlinuz-2.6.0
                            /lib/modules/2.6.0
-                                (the module directory for the current 
-kernel)
+                                (the module dir for the current kernel)
 
 Note:  the modules must not be in compressed form (*.gz *.bz2 etc)
 
