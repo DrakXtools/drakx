@@ -346,7 +346,7 @@ $w->main;
 
 sub quit_global() {
     kill(15, $pid) if $pid;
-    setVarsInSh($conffile, \%options);
+    setVarsInSh($conffile, \%options) if !$::testing;
     ugtk2->exit(0);
 }
 
