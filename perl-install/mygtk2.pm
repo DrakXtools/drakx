@@ -402,6 +402,7 @@ sub _gtk__Window {
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
+	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
     }
     $w->set_title(delete $opts->{title}) if exists $opts->{title};
 
