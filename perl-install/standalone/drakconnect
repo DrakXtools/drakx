@@ -224,7 +224,7 @@ sub manage {
                                             },
                                             undef, undef, '',
                                             [ N("Help"), sub { exec("drakhelp --id internet-connection") unless fork() } ],
-                                            [ N("Apply"), sub { save($netc, $p, $apply_button) } ],
+                                            [ N("Apply"), sub { save($netc, $p, $apply_button) }, 0, 1 ],
                                            ),
 					       ),
 				    );
