@@ -1,3 +1,121 @@
+2002/01/28  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm, network/netconnect.pm: debug network testing
+
+2002/01/28  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: updated color of
+	scroll bar and reduced its size.
+
+	* bootloader.pm: fixed get_append if key=mem.
+	timeout passed to 10 instead of 5.
+
+2002/01/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: update games rates
+
+2002/01/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/vi.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/bs.po, share/po/da.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated pot file
+
+2002/01/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (remove_advertising): ensure removing /tmp/drakx-images
+	can't fail
+
+	* any.pm: simpler&nicer solution for writing kppprc in utf8
+	have kppprc strings in utf8
+
+	* detect_devices.pm: remove test code
+
+	* install_steps.pm, bootloader.pm: cleanup perImageAppend code (hopefully
+	handling nicely the mem=nopentium case)
+
+	* diskdrake/smbnfs_gtk.pm: don't use wait_message's when waiting (waiting
+	is usually very short), use a waiting cursor instead.
+	(the wait_message's were causing bad interactivity stuff)
+
+2002/01/27  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: add a minimal example
+
+	* services.pm: 
+	  - move the require on my_gtk to ask_standalone_gtk
+	  - cleanup
+
+	* Makefile.config: 
+	  - adapt to new diskdrake modules
+	  - add logdrake to STANDALONEPMS_
+
+	* my_gtk.pm: strange protection against ensure_focus generating a "focus"
+	event causing a
+	dead-loop (reminder: ensure_focus helps ensuring a widget is focused)
+
+	* Makefile.drakxtools, standalone.pm, Makefile, diskdrake_interactive.pm,
+	install_interactive.pm, diskdrake.pm: 
+	  - adapt to new diskdrake modules
+	  - some cleanup in drakxtools build
+
+	* diskdrake/removable.pm: remove debugging code
+	new diskdrake modules (diskdrake_interactive is now
+	diskdrake::interactive, diskdrake is now diskdrake::hd_gtk, others
+	created from diskdrake.pm)
+
+	* diskdrake/interactive.pm, diskdrake/hd_gtk.pm,
+	diskdrake/removable_gtk.pm: new diskdrake modules (diskdrake_interactive
+	is now diskdrake::interactive, diskdrake is now diskdrake::hd_gtk,
+	others created from diskdrake.pm)
+
+	* diskdrake/smbnfs_gtk.pm: fix updating the actions
+	new diskdrake modules (diskdrake_interactive is now
+	diskdrake::interactive, diskdrake is now diskdrake::hd_gtk, others
+	created from diskdrake.pm)
+
+	* network/nfs.pm: find_exports: add a timeout
+
+	* fs.pm: new function fstab_to_string
+
+	* standalone/diskdrake: handle --removable *and* --removable=<dev>
+	handle --removable=<dev>
+	  - new options --hd, --nfs, --smb, --removable
+	  - adapt to new diskdrake modules
+	  - save $all_hds->{current_fstab} to know if /etc/fstab must be saved
+
+2002/01/25  fabman
+
+	* share/po/es.po: updated spanish translation
+
+2002/01/25  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add devfsd
+
+	* install_any.pm: remove_advertising: use rm_rf since we don't have the
+	real list of files (the .pl's are not in @advertising_images)
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: remove 'ncr53c8xx'
+
+2002/01/25  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Less important options only shown when
+	"Advanced" button clicked.
+	Handling of cursor position in the main window improved.
+	Handling of empty printer queue list in main window improved.
+	Removed line breaks from longer texts, so that text flows into window
+	nicely
+	Minor text improvements.
+
 2002/01/25  dam's  <damien@mandrakesoft.com>
 
 	* install_any.pm: advertising engine updated
