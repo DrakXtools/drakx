@@ -26,7 +26,16 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use common;
 use interactive;
-use ugtk2 qw(:create :dialogs :wrappers :helpers);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:create :dialogs :helpers :wrappers));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use vars qw(*F);
 
 my $in = 'interactive'->vnew('su');

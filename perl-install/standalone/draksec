@@ -24,7 +24,16 @@ use lib qw(/usr/lib/libDrakX);
 use common;
 use standalone;
 use vars qw($MODE %options);
-use ugtk2 qw(:helpers :wrappers :ask :create);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:helpers :wrappers :ask :create));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use run_program;
 use security::level;
 use security::msec;

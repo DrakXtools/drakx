@@ -26,7 +26,16 @@ use standalone;
 use common;
 use any;
 
-use ugtk2 qw(:all);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:all));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use interactive;
 use POSIX qw(mktime ceil);
 use printer::printerdrake;

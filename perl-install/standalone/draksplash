@@ -4,7 +4,16 @@ use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
-use ugtk2 qw(:helpers :wrappers :create);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:helpers :wrappers :create));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use interactive;
 
 #- convenience variables for true and false

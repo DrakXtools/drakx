@@ -27,7 +27,16 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 
 use c;
 use interactive;
-use ugtk2 qw(:helpers :wrappers :create);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:create :helpers :wrappers));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use common;
 use network::netconnect;
 use network::tools;

@@ -6,7 +6,16 @@ use POSIX;
 use common;
 # i18n : IMPORTANT to get correct namespace (drakconf instead of libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
-use ugtk2 qw(:all);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:all));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use interactive;
 use standalone;
 use timezone;

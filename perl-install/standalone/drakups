@@ -6,7 +6,16 @@ use standalone;
 use common;
 use mouse;
 use detect_devices;
-use ugtk2 qw(:create :dialogs :helpers :wrappers);
+BEGIN {
+    eval {
+	require ugtk2;
+	ugtk2->import(qw(:create :dialogs :helpers :wrappers));
+    };
+    if ($@) {
+	print "This program cannot be run in console mode.\n";
+	c::_exit(0);  #- skip ugtk2::END
+    }
+}
 use interactive;
 use Libconf qw(:functions);
 use Libconf::Glueconf::NUT::Ups_conf;
