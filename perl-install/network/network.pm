@@ -343,11 +343,11 @@ notation (for example, 1.2.3.4).");
 	         	     return 0;
 	         	 }
 	         	 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\'."));
+	         	     $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\' (zeroes)."));
 	         	     return (1,6);
 	         	 }
 	         	 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\'."));
+	         	     $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\' (zeroes)."));
 	         	     return (1,8);
 	         	 }
 	         },
@@ -370,7 +370,7 @@ sub configureNetworkNet {
 N("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
-You may also enter the IP address of the gateway if you have one"),
+You may also enter the IP address of the gateway if you have one."),
 			       [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
 				 { label => N("DNS server"), val => \$netc->{dnsServer} },
 				 { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
@@ -406,7 +406,7 @@ sub miscellaneous_choose {
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be http://...")), return 1,0;
-	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("Url should begin with 'ftp:' or 'http:'")), return 1,1;
+	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,1;
 	   0;
        }
     ) or return if $::expert || $clicked;

@@ -57,9 +57,9 @@ sub level_choose {
     );
     my %help = (
       0 => N("This level is to be used with care. It makes your system more easy to use,
-but very sensitive: it must not be used for a machine connected to others
+but very sensitive. It must not be used for a machine connected to others
 or to the Internet. There is no password access."),
-      1 => N("Password are now enabled, but use as a networked computer is still not recommended."),
+      1 => N("Passwords are now enabled, but use as a networked computer is still not recommended."),
       2 => N("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
       3 => N("There are already some restrictions, and more automatic checks are run every night."),
       4 => N("With this security level, the use of this system as a server becomes possible.

@@ -24,7 +24,7 @@ sub check_iptables {
     };
 
     !$existing_config || $in->ask_okcancel(N("Firewalling configuration detected!"),
-					   N("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation."));
+					   N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
 }
 
 sub set_config_file {

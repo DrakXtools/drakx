@@ -29,7 +29,7 @@ sub choose_printer_type {
 		     messages => N("How is the printer connected?") .
 			 if_($printer->{SPOOLER} eq "cups",
 			  N("
-Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.")),
+Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")),
 		     },
 		   [
 		    { val => \$printer->{str_type},
@@ -106,7 +106,7 @@ sub config_cups {
 	      if_($::expert,
 		  { text => N("Automatic correction of CUPS configuration"),
 		    type => 'bool',
-		    help => N("When this option is turned on, on every startup of CUPS is automatically made sure that
+		    help => N("When this option is turned on, on every startup of CUPS it is automatically made sure that
 
 - if LPD/LPRng is installed, /etc/printcap will not be overwritten by CUPS
 
@@ -451,18 +451,18 @@ Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer, connected directly to the network or to a remote Windows machine.
 
-If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) and you Windows machines must be connected and turned on.
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) and your Windows machines must be connected and turned on.
 
 Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you don't need it.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.") : N("
+ Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.") : N("
 Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer.
 
 If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.")) : 
+ Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.")) : 
 				   ($havelocalnetworks ? N("
 Welcome to the Printer Setup Wizard
 
@@ -472,14 +472,14 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 
 Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network printers when you don't need it.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.") : N("
+ Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.") : N("
 Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer.
 
 If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now."))) },
+ Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now."))) },
 		     [
 		      { text => N("Auto-detect printers connected to this machine"), type => 'bool',
 			val => \$autodetectlocal },
@@ -710,8 +710,8 @@ sub setup_local_autoscan {
 				   N("The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
 				   N("Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."))) :
 				 ($::expert ?
-				  N("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
-				  N("Please choose the port where your printer is connected to."))) .
+				  N("Please choose the port that your printer is connected to or enter a device name/file name in the input line") :
+				  N("Please choose the port that your printer is connected to."))) .
 				if_($::expert,
 				 N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."))), 
 				 callbacks => {
@@ -1184,7 +1184,7 @@ sub setup_socket {
 	 {
 	     title => N("TCP/Socket Printer Options"),
 	     messages => ($autodetect ?
-			  N("Choose one of the auto-detected printers from the list or enter the hostname or IP and the optional port number (default is 9100) into the input fields.") :
+			  N("Choose one of the auto-detected printers from the list or enter the hostname or IP and the optional port number (default is 9100) in the input fields.") :
 			  N("To print to a TCP or socket printer, you need to provide the host name or IP of the printer and optionally the port number (default is 9100). On HP JetDirect servers the port number is usually 9100, on other servers it can vary. See the manual of your hardware.")),
 		 callbacks => {
 		 complete => sub {
@@ -1857,7 +1857,7 @@ sub choose_model {
 							 N("Which printer model do you have?") .
 							 N("
 
-Please check whether Printerdrake did the auto-detection of your printer model correctly. Search the correct model in the list when the cursor is standing on a wrong model or on \"Raw printer\".") . " " .
+Please check whether Printerdrake did the auto-detection of your printer model correctly. Find the correct model in the list when a wrong model or \"Raw printer\" is highlighted.") . " " .
 N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 							 [ keys %printer::main::thedb ], $printer->{DBENTRY}));
 
@@ -2725,7 +2725,7 @@ sub check_network {
     if (!start_network($in, $upNetwork) && !$dontconfigure) {
 	$in->ask_warn(N("Configuration of a remote printer"), 
 ($::isInstall ?
-N("The network configuration done during the installation cannot be started now. Please check whether the network gets accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
+N("The network configuration done during the installation cannot be started now. Please check whether the network is accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
 N("The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again.")));
 	return 0;
     }
@@ -3444,7 +3444,7 @@ What do you want to modify on this printer?",
 				       N("Add this printer to Star Office/OpenOffice.org/GIMP"),
 				       N("Remove this printer from Star Office/OpenOffice.org/GIMP")),
 				   N("Print test pages"),
-				   N("Know how to use this printer"),
+				   N("Learn how to use this printer"),
 				   if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
 		# Stay in the queue edit window until the user clicks "Close"
 		# or deletes the queue

@@ -191,7 +191,7 @@ sub test_for_bad_drives {
     $tmp eq $tmp2 or die
 N("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 
-It means writing anything on the disk will end up with random trash");
+It means writing anything on the disk will end up with random, corrupted data.");
 }
 
 1;

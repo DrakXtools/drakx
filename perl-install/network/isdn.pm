@@ -234,7 +234,7 @@ sub isdn_ask_info {
 
 sub isdn_ask_protocol {
     my @toto = (
-	      { description => $::expert ? N("European protocol (EDSS1)") : N("Europe protocol"),
+	      { description => $::expert ? N("European protocol (EDSS1)") : N("European protocol"),
 		protokol => 2 },
 	      { description => $::expert ? N("Protocol for the rest of the world\nNo D-Channel (leased lines)") : N("Protocol for the rest of the world"),
 		protokol => 3 }

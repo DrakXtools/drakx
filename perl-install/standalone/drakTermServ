@@ -584,7 +584,7 @@ sub make_nbi {
 									select => sub { $nbi = $t })));
 								} 
 							} else {
-								$in->ask_warn('', N("No nic selected!"));
+								$in->ask_warn('', N("No NIC selected!"));
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
