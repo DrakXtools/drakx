@@ -66,6 +66,8 @@ BEGIN {
 	      'flepied' => 'Frederic Lepied  <flepied@mandrakesoft.com>',
 	      'chmouel' => 'Chmouel Boudjnah  <chmouel@mandrakesoft.com>',
 	      'uid526'  => 'dam\'s  <damien@mandrakesoft.com>',
+	      'uid533'  => 'François Pons  <fpons@mandrakesoft.com>',
+	      'uid535'  => 'Guillaume Cottenceau  <gc@mandrakesoft.com>',
 	      'uid553'  => 'Pixel  <pixel@mandrakesoft.com>',
 	     );
 }
