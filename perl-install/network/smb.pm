@@ -100,7 +100,7 @@ sub find_exports {
     @l;
 }
 
-sub authentifications_available {
+sub authentications_available {
     my ($server) = @_;
     map { if_(/^auth.\Q$server->{name}.\E(.*)/, $1) } all("/etc/samba");
 }

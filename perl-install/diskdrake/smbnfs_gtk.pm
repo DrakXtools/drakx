@@ -162,7 +162,7 @@ sub import_tree {
 	    $in->ask_warn('', N("Can't login using username %s (bad password?)", $server->{username}));
 	    network::smb::remove_bad_credentials($server);
 	} else {
-	    if (my @l = network::smb::authentifications_available($server)) {
+	    if (my @l = network::smb::authentications_available($server)) {
 		my $user = $in->ask_from_list_(N("Domain Authentication Required"),
 					       N("Which username"), [ @l, N_("Another one") ]) or return;
 		if ($user ne 'Another one') {
