@@ -29,15 +29,7 @@ sub init {
     $::testing and goto drakx_stuff;
 
     #- rw things
-    mkdir "/$_" foreach qw(home mnt root root/tmp var);
-
-    system("cp -a /image/etc /");
-    symlinkf "/proc/mounts", "/etc/mtab";
-    system("find /etc -type f > /tmp/filelist");
-    touch '/dummy';
-    m|^/var| && !-d $_ and mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
-    sleep 2;
-    goto meuh;
+    mkdir "/$_" foreach qw(home mnt root root/tmp etc var);
 
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
@@ -68,7 +60,6 @@ sub init {
     -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
 
 
-  meuh:
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
 
