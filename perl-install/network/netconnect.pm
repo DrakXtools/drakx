@@ -84,7 +84,7 @@ sub real_main {
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $need_restart_network);
-      my ($isdn, $isdn_name, $isdn_type, %isdn_cards);
+      my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -199,6 +199,7 @@ sub real_main {
 
       my $goto_start_on_boot_ifneeded = sub {
           return $after_start_on_boot_step->() if $netcnx->{type} =~ /lan|cable/;
+          return "isdn_dial_on_boot" if  $netcnx->{type} =~ /isdn/;
           return "network_on_boot";
       };
 
@@ -1170,6 +1171,34 @@ It is not necessary on most networks."),
                           $netc->{internet_cnx_choice} eq 'adsl' ? 
                             "$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0" :
                             "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+                        return $after_start_on_boot_step->();
+                    },
+                   },
+
+                   isdn_dial_on_boot =>
+                   {
+                    pre => sub {
+                        $intf->{ippp0} ||= { DEVICE => "ippp0" }; # we want the ifcfg-ippp0 file to be written
+                        @isdn_dial_methods = ({ name => N("Automatically at boot"),
+                                                ONBOOT => 1, DIAL_ON_BOOT => 1 },
+                                              { name => N("By using Net Applet in the system tray"),
+                                                ONBOOT => 0, DIAL_ON_BOOT => 1 },
+                                              { name => N("Manually (the interface would still be activated at boot)"),
+                                               ONBOOT => 1, DIAL_ON_BOOT => 0 });
+                        my $method =  find {
+                            $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) and
+                            $_->{DIAL_ON_BOOT} eq text2bool($intf->{ippp0}{DIAL_ON_BOOT})
+                        } @isdn_dial_methods;
+                        #- use net_applet by default
+                        $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]->{name};
+                    },
+                    name => N("How do you to dial this connection ?"),
+                    data => sub {
+                        [ { type => "list", val => \$isdn->{dial_method}, list => [ map { $_->{name} } @isdn_dial_methods ] } ]
+                    },
+                    post => sub {
+                        my $method = find { $_->{name} eq $isdn->{dial_method} } @isdn_dial_methods;
+                        $intf->{ippp0}{$_} = bool2yesno($method->{$_}) foreach qw(ONBOOT DIAL_ON_BOOT);
                         return $after_start_on_boot_step->();
                     },
                    },

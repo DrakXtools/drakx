@@ -53,9 +53,6 @@ defaultroute
 ";
 	system "$::prefix/etc/rc.d/init.d/isdn4linux restart";
 
-    # we start the virtual interface at boot (we dial only on demand.
-    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp$isdn->{intf_id}";
-
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
     set_cnx_script($netc, "isdn", join('',
