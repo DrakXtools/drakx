@@ -122,8 +122,8 @@ sub make {
     isMDRAID($_) and make($raid, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
     eval { modules::load(module($part)) };
-    run_program::run("raidstop", $dev);
     &write($raid, "/etc/raidtab");
+    run_program::run("raidstop", $dev);
     run_program::run("mkraid", "--really-force", $dev) or die
 	$::isStandalone ? _("mkraid failed (maybe raidtools are missing?)") : _("mkraid failed");
 }

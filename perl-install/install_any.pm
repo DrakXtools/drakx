@@ -825,7 +825,7 @@ sub getHds {
 #    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    my ($hds, $lvms) = catch_cdie { fsedit::hds(\@drives, $flags) }
+    my ($hds, $lvms, $raids) = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
 	  my $err = $@; $err =~ s/ at (.*?)$//;
@@ -848,6 +848,7 @@ sub getHds {
 
     $o->{hds} = $hds;
     $o->{lvms} = $lvms;
+    $o->{raid}->{raid} = $raids;
     $o->{fstab} = [ fsedit::get_fstab(@$hds, @$lvms) ];
     fs::check_mounted($o->{fstab});
     fs::merge_fstabs($o->{fstab}, $o->{manualFstab});

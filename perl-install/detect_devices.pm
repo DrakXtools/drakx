@@ -355,6 +355,24 @@ sub hasMousePS2 {
     my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
+sub raidAutoStartIoctl {
+    eval { modules::load('md') };
+    my $md = devices::make("md0");
+    local *F;
+    sysopen F, $md, 2 or return;
+    ioctl F, 2324, 0;
+}
+
+sub raidAutoStart {
+    log::l("raidAutoStart");
+    my %personalities = ( '1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5' );
+    raidAutoStartIoctl() or log::l("warning, RAID_AUTORUN not supported by kernel"), return;
+    if (my @needed_perso = map { if_(/^kmod: failed.*md-personality-(.)/, $personalities{$1}) } syslog()) {
+	log::l("RAID: autostart needs personality from $_"), eval { modules::load($_) } foreach @needed_perso;
+	return raidAutoStartIoctl();
+    }
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
