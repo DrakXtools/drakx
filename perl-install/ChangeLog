@@ -1,3 +1,167 @@
+2002/07/05  François Pons  <fpons@mandrakesoft.com>
+
+	* Makefile: 
+	  - handle /lib/i686 case
+	  - replace Mandrake/RPMS with Mandrake/RPMS*
+
+2002/07/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pcmcia/cardmgr.c, mdk-stage1/pcmcia/lex_config.c,
+	mdk-stage1/pcmcia/vg468.h, mdk-stage1/pcmcia/cardmgr.h,
+	mdk-stage1/pcmcia/bulkmem.h, mdk-stage1/pcmcia/i82365.h,
+	mdk-stage1/pcmcia/cirrus.h, mdk-stage1/pcmcia/config.h,
+	mdk-stage1/pcmcia/driver_ops.h, mdk-stage1/pcmcia/version.h,
+	mdk-stage1/pcmcia/cistpl.h, mdk-stage1/pcmcia/cs.h,
+	mdk-stage1/pcmcia/Makefile, mdk-stage1/pcmcia/ds.h,
+	mdk-stage1/pcmcia/pcmcia.h, mdk-stage1/pcmcia/cs_types.h,
+	mdk-stage1/pcmcia/yacc_config.c, mdk-stage1/pcmcia/tcic.h,
+	mdk-stage1/pcmcia/yacc_config.h, mdk-stage1/pcmcia/pcmcia_probe.c:
+	pcmcia is now pcmcia_ (it was to begin with a clean branch of unmodified
+	sources)
+
+2002/07/05  Pixel  <pixel@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: make it work with "use
+	strict"
+	do not look at the mar files anymore, only use kernel/modules.pl (and so
+	list_modules.pm)
+
+	* diskdrake/interactive.pm: handle comments in fstab
+
+	* fs.pm (merge_info_from_fstab): try to keep options from merged fstab IF
+	the entry is for the same mountpoint AND the same device
+	handle comments in fstab
+
+	* share/rpmsrate: add gnupg in "4 SYSTEM", so that rpm do not *Require*
+	gnupg, only suggest it very strongly :)
+
+	* mdk-stage1/usb-resource/update-usb-ids.pl: 
+	  - do not use mar files for the list of modules, use list_modules.pm
+	via kernel/modules.pl instead
+	  - use read_pcitable to parse usbtable
+
+2002/07/05  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* harddrake/ui.pm: remove uneeded "#!/...", standalone, lib, ... (this is
+	a module)
+	POSIX is no more used too.
+
+	* drakxtools.spec: fix typo
+	fix dirs1/dirs2 mismatch
+	  - M-q descriptions
+	  - simplify file lists building
+	  - we can use several -f on one "%%files" line
+	  - add preliminary harddrake support
+	
+	  - clean %post
+	
+	  - bump version number
+
+	* harddrake/bttv.pm: 
+	  - remove uneeded stuff for modules ("#!/..", "use lib..", "use
+	standalone", ...)
+	  - simplify bttv options managment:
+	
+	   - use if_, thanks MDK::Common
+	
+	   - s/mapn/map by using a hash at first
+	
+	   - s/mapn{if}/map{if_}
+	
+	  - don't read/write modules.conf here, drakx take care of that for us
+	
+	thus, the test program became:
+	
+	#!/usr/bin/perl
+	
+	use strict;
+	use lib qw(/usr/lib/libDrakX);
+	
+	use standalone;
+	use bttv;
+	use interactive;
+	use modules;
+	
+	modules::read_conf;
+	bttv::config('interactive'->vnew());
+	modules::write_conf;
+	spec29: bttv configuration part of drakxtv.
+	it can be used by:
+	
+	#!/usr/bin/perl
+	
+	use strict;
+	use lib qw(/usr/lib/libDrakX);
+	
+	use standalone;
+	use harddrake::bttv;
+	use interactive;
+	
+	bttv::config('interactive'->vnew());
+
+	* Makefile: don't use sed when not needed
+
+	* install_steps_interactive.pm: minimize startup: only load
+	harddrake::bttv if the user click on "tv
+	card" field in the hw summary window
+	use harddrake::bttv to let people configure their tv card if it's
+	misdetected
+
+	* harddrake/data.pm: remove uneeded "#!/.." and "use lib"
+
+2002/07/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm, install_steps_auto_install.pm,
+	install2.pm, network/ethernet.pm, network/isdn.pm, commands.pm,
+	printerdrake.pm, mouse.pm, network/netconnect.pm, install_any.pm,
+	install_steps.pm, detect_devices.pm, bootloader.pm: adapt to new
+	modules.pm
+
+	* c/stuff.xs.pm: adapt to new ldetect
+
+	* modules.pm: reworked, cleaned:
+	  - the list of modules is moved to kernel/list_modules.pm (and a few
+	functions too)
+	  - new "add_probeall" function (similar to "add_alias")
+	  -> used for scsi_hostadapter and usb-interface
+	  - "load_multi" removed in favour of "load" which is now more powerful
+	  - load_thiskind renamed load_category
+	  - get_that_type renamed probe_category
+	  - %modules::drivers dropped (handled for list_modules)
+	still more cleanup to come
+
+	* rescue/make_rescue_img: adapt to the move all.modules ->
+	kernel/all.modules  and  all.kernels -> kernel/all.kernels
+
+	* modparm.pm: rework, cleanup, simplify and make it work
+
+	* install2: create symlink list_modules.pm in current directory for
+	testing purpose
+
+	* Makefile: when building the tar for drakxtools, handle specially
+	list_modules.pm
+	adapt to the move all.modules -> kernel/all.modules  and  all.kernels ->
+	kernel/all.kernels
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: new directory "kernel"
+	containing:
+	  - all.modules all.kernels update_kernel
+	  - part of perl-install/modules.pm now in kernel/list_modules.pm and
+	kernel/modules.pl
+	  - update_kernel cleaned (it doesn't mention module names anymore, it
+	is now in kernel/modules.pl)
+	  - cleanup Makefile
+	  - mdk-stage1 doesn't depend on perl-install anymore
+	(more precisely mdk-stage1/pci-resource/update-pci-ids.pl)
+
+	* any.pm: reworked & cleaned the kernel modules part
+	  - adapt to new modules.pm
+	  - adapt to new modparm.pm
+	  - renamed setup_thiskind to load_category
+	  - renamed setup_thiskind_backend to load_category_no_message
+
+	* share/po/Makefile: make the "clean" rule less verbose
+
 2002/07/04  daouda
 
 	* standalone/draknet: 
