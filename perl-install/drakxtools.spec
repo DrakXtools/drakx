@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.25mdk
+Release: 0.26mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.26mdk
+- bootloader-config: handle raid-extra-boot (pixel, #11350)
+- drakboot: handles more cases where lilo wants to assign a new Volume
+  ID (pixel)
+- localedrake:
+  o install miniChinput when  configuring chinput
+  o fix miniChinput configuration for Singapore 
+  o handle languages with default IM w/o any configured IM (aka keep
+    "none" user choice)
+  o fix configuration of IM when altering depending on encoding (eg:
+    miniChinput)
+
 * Thu Sep  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.25mdk
 - bootloader-config (pixel):
   o fix regexp to work with "linux-2.6.8.1-10mdk"
