@@ -37,7 +37,7 @@ sub setup_local($$$) {
     }
     if (!$::expert && @str) {
 	@port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
-	@port > 0 and $in = undef;
+	@port == 1 and $in = undef;
     } else {
 	@port = detect_devices::whatPrinterPort();
     }
