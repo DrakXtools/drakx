@@ -57,7 +57,7 @@ mount_cd() {
 
     ln -sf /image/lib /
 
-    mdk_move_loop to_cdrom always totem
+    mdk_move_loop to_cdrom always always_i18n totem
 }
 
 while [ -e "/proc/$totem_pid" ]; do
