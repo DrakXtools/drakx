@@ -105,7 +105,7 @@ sub adsl_conf_backend {
                    start => '/usr/sbin/modem_run -v 0 -f /usr/share/speedtouch/mgmt.o',
                    overide_script => 1,
                    server => {
-                              pppoa => '"/usr/sbin/pppoa3 -e 1 -c -vpi' . hex($netc->{vpi}) . " -vci " . hex($netc->{vci}) . '"',
+                              pppoa => '"/usr/sbin/pppoa3 -e 1 -c -vpi ' . hex($netc->{vpi}) . " -vci " . hex($netc->{vci}) . '"',
                              },
                    ppp_options => qq(
 sync
