@@ -66,11 +66,9 @@ defaultroute
 
 
 sub setup_capi_conf {
-    my ($isdn) = @_;
+    my ($capi_card) = @_;
 
     $in->do_pkgs->install('isdn4k-utils'); #- capi4linux service
-
-    my $capi_card = get_capi_card($isdn);
     is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{driver});
 
     my $capi_conf;
@@ -83,12 +81,6 @@ sub setup_capi_conf {
         $capi_conf = "$capi_card->{driver}        $firmware       -       -       -       -       -\n";
     }
     output("$::prefix/etc/capi.conf", $capi_conf);
-
-    #- install and run drdsl for dsl connections
-    if ($capi_card->{driver} =~ /dsl/i) {
-        $in->do_pkgs->ensure_is_installed_if_available("drdsl", "$::prefix/usr/sbin/drdsl");
-        run_program::rooted($::prefix, "/usr/sbin/drdsl");
-    }
 }
 
 sub read_config {
