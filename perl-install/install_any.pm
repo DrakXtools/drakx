@@ -342,6 +342,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
     $o->{compssUsersChoice}{SYSTEM} = 1;
     $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
+    $o->{compssUsersChoice}{UTF8} = $o->{locale}{utf8};
     $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
     $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
     $o->{compssUsersChoice}{USB} = 1 if modules::get_probeall("usb-interface");
