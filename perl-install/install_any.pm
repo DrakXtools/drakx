@@ -298,6 +298,7 @@ sub setPackages {
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
+	push @{$o->{default_packages}}, "kernel22" if c::kernel_version() =~ /^\Q2.2/;
 	push @{$o->{default_packages}}, "kernel22-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
@@ -329,6 +330,7 @@ sub setPackages {
 	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 	}
 	$o->{compssUsersChoice}{TV} = 1 if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
+	$o->{compssUsersChoice}{$_} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
