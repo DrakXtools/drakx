@@ -281,7 +281,10 @@ complete => sub {
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
-    $printer->{SPOOLER} eq 'lpd' and $in->do_pkgs->install('rlpr');
+    if (($printer->{SPOOLER} eq 'lpd') && (!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/rlpr))))) {
+        $in->do_pkgs->install('rlpr');
+    }
 
     1;
 }
@@ -370,7 +373,10 @@ complete => sub {
     ($smbpassword && ":$smbpassword") . "@")), ($workgroup && ("$workgroup/")),
     ($smbserver || $smbserverip), "/$smbshare");
 
-    $in->do_pkgs->install('samba-client');
+    if ((!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	$in->do_pkgs->install('samba-client');
+    }
     $printer->{SPOOLER} eq 'cups' and printer::restart_queue($printer);
     1;
 }
@@ -440,7 +446,11 @@ complete => sub {
     ($ncppassword && ":$ncppassword") . "@")),
     "$ncpserver/$ncpqueue");
 
-    $in->do_pkgs->install('ncpfs');
+    if ((!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/nprint))))) {
+	$in->do_pkgs->install('ncpfs');
+    }
+
     1;
 }
 
@@ -489,7 +499,11 @@ complete => sub {
     join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
-    $printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng' and $in->do_pkgs->install('nc');
+    if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng'))&& 
+        (!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        $in->do_pkgs->install('nc');
+    }
 
     1;
 }
@@ -519,13 +533,32 @@ complete => sub {
     return 0;
 }
     );
-    if ($printer->{currentqueue}{'connect'} =~ /^smb:/) {
-        $in->do_pkgs->install('samba-client');
-        printer::restart_queue($printer);
+
+    # If the chosen protocol needs additional software, install it.
+
+    # LPD does not support filtered queues to a remote LPD server by itself
+    # It needs an additional program as "rlpr"
+    if (($printer->{currentqueue}{'connect'} =~ /^lpd:/) &&
+	($printer->{SPOOLER} eq 'lpd') && (!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/rlpr))))) {
+        $in->do_pkgs->install('rlpr');
     }
-    if ($printer->{currentqueue}{'connect'} =~ /^ncp:/) {
-        $in->do_pkgs->install('ncpfs');
-        printer::restart_queue($printer);
+    if (($printer->{currentqueue}{'connect'} =~ /^smb:/) &&
+        (!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	$in->do_pkgs->install('samba-client');
+    }
+    if (($printer->{currentqueue}{'connect'} =~ /^ncp:/) &&
+	(!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/nprint))))) {
+	$in->do_pkgs->install('ncpfs');
+    }
+    #- LPD and LPRng need netcat ('nc') to access to socket printers
+    if (($printer->{currentqueue}{'connect'} =~ /^socket:/) &&
+	(($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng'))&& 
+        (!$::testing) &&
+        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        $in->do_pkgs->install('nc');
     }
     1;
 }
@@ -961,7 +994,10 @@ In most cases it is enough to print the standard test page."),
 	    my $asciitestpage = "/usr/share/printer-testpages/testpage.asc";
 	    my @testpages;
 	    # Install the filter to convert the photo test page to PS
-	    $photo && $in->do_pkgs->install('ImageMagick');
+	    if (($photo) && (!$::testing) &&
+		(!printer::files_exist((qw(/usr/bin/convert))))) {
+		$in->do_pkgs->install('ImageMagick');
+	    }
 	    # set up list of pages to print
 	    $standard && push (@testpages, $stdtestpage);
 	    $altletter && push (@testpages, $altlttestpage);
@@ -1019,29 +1055,59 @@ sub install_spooler {
     my ($printer, $in) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
-	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 
-		       if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
-		       ($::expert ? 'cups-drivers' : ())));
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
+					   /usr/bin/xpp
+					   /usr/bin/qtcups),
+					(printer::files_exist("/usr/bin/kwin")?
+					 "/usr/bin/kups" : ()),
+					($::expert ? 
+					 "/usr/share/cups/model/postscript.ppd.gz" : ())
+				    )))) {
+		$in->do_pkgs->install(('cups', 'xpp', 'qtcups', 
+				       if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
+				       ($::expert ? 'cups-drivers' : ())));
+	    }
 	    # Start daemon
 	    printer::start_service("cups");
-	    sleep 1;
+	    #sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
-	    $in->do_pkgs->remove_nodeps('LPRng');
-	    $in->do_pkgs->install('lpr');
+	    if ((!$::testing) &&
+		(printer::files_exist((qw(/usr/lib/filters/lpf))))) {
+		my $w = $in->wait_message('', _("Removing LPRng..."));
+		$in->do_pkgs->remove_nodeps('LPRng');
+	    }
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/sbin/lpf
+					   /usr/sbin/lpd))))) {
+		$in->do_pkgs->install('lpr');
+	    }
 	    # Start daemon
 	    printer::restart_service("lpd");
-	    sleep 1;
+	    #sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
-	    $in->do_pkgs->remove_nodeps('lpr');
-	    $in->do_pkgs->install('LPRng');
+	    if ((!$::testing) &&
+		(printer::files_exist((qw(/usr/sbin/lpf))))) {
+		my $w = $in->wait_message('', _("Removing LPD..."));
+		$in->do_pkgs->remove_nodeps('lpr');
+	    }
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/lib/filters/lpf
+					   /usr/sbin/lpd))))) {
+		$in->do_pkgs->install('LPRng');
+	    }
 	    # Start daemon
 	    printer::restart_service("lpd");
-	    sleep 1;
+	    #sleep 1;
 	} elsif ($printer->{SPOOLER} eq "pdq") {
-	    $in->do_pkgs->install('pdq');
-	    # PDQ has no daemon
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/bin/pdq
+					   /usr/X11R6/bin/xpdq))))) {
+		$in->do_pkgs->install('pdq');
+	    }
+	    # PDQ has no daemon, so nothing needs to be started
 	}
     }
 }
@@ -1052,19 +1118,30 @@ sub main {
 
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
-    if (!$::testing) {
-	$in->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
-			      if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
+    {
+	my $w = $in->wait_message('', _("Checking installed software..."));
+	if ((!$::testing) &&
+	    (!printer::files_exist((qw(/usr/sbin/foomatic-configure
+				       /usr/lib/perl5/site_perl/5.6.1/Foomatic/DB.pm
+				       /usr/bin/escputil
+				       /usr/share/printer-testpages/testprint.ps
+				       ),
+				    (printer::files_exist("/usr/bin/gimp") ?
+				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
+				    )))) {
+	    $in->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
+				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
+	}
+
+	# only experts should be asked for the spooler
+	!$::expert && ($printer->{SPOOLER} ||= 'cups');
+
+	# If we have chosen a spooler, install it.
+	if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
+	    install_spooler($printer, $in);
+	}
+
     }
-
-    # only experts should be asked for the spooler
-    !$::expert && ($printer->{SPOOLER} ||= 'cups');
-
-    # If we have chosen a spooler, install it.
-    if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	install_spooler($printer, $in);
-    }
-
     # Control variables for the main loop
     my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = 
 	('', 1, 0, 0, 0);

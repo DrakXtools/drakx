@@ -110,6 +110,14 @@ sub stop_service ($) {
 	|| die "Could not stop $service!";
 }
 
+sub files_exist {
+    my @files = @_;
+    for (@files) {
+	if (! -f "$prefix$_") {return 0;}
+    }
+    return 1;
+}
+
 sub copy_printer_params($$) {
     my ($from, $to) = @_;
     map { $to->{$_} = $from->{$_} } grep { $_ ne 'configured' } keys %$from; 
@@ -750,7 +758,7 @@ sub print_pages($@) {
 	# images must be treated seperately
 	if ($page =~ /\.jpg$/) {
 	    system(($::testing ? "$prefix" : "chroot $prefix/ ") .
-		"convert $page -page 427x654+100+65 PS:- | " .
+		   "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
 		   "$lpr -s $printer->{SPOOLER} -P $queue");
 	} else {
 	    run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
