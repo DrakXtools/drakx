@@ -138,7 +138,7 @@ sync
                    start => '/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o',
                    overide_script => 1,
                    server => {
-                              pppoa => '"/usr/sbin/pppoa3 -e 1 -c"
+                              pppoa => '"/usr/sbin/pppoa3 -c"
 plugin pppoatm.so
 ' . join('.', hex($netc->{vpi}), hex($netc->{vci})),
                              },
