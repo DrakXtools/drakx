@@ -82,6 +82,7 @@ my @drivers_by_category = (
   "seagate" => "Future Domain TMC-885, TMC-950",
   "fdomain" => "Future Domain TMC-16x0",
   "gdth" => "ICP Disk Array Controller",
+  "initio" => "Initio",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "g_NCR5380" => "NCR 5380",
   "NCR53c406a" => "NCR 53c406a",
@@ -165,7 +166,7 @@ sub load {
     } else {
 	$conf{$name}{loaded} and return;
 
-	$type ||= $drivers{$name}{type};
+	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
 
 	load($_, 'prereq') foreach @{$deps{$name}};
 	load_raw($name, @options);
@@ -285,7 +286,6 @@ sub load_thiskind($;&$) {
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
-	$drivers{$mod} or log::l("module $mod not in install table"), next;
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;
 	load($mod, $type);

@@ -25,6 +25,13 @@ style "entry"
   fg[NORMAL]   = { 0.67, 0, 0.67 }
 }
 
+style "notebook"
+{
+  bg[NORMAL]      = { 0, 0, 1.0 }
+  bg[ACTIVE]      = { 0, 0, 0.67 }
+  fg[NORMAL]      = { 1.0, 1.0, 1.0 }
+}
+
 style "button" = "any"
 {
   bg[NORMAL] = { 0, 0, 1.0 }
@@ -43,5 +50,6 @@ widget_class "*" style "any"
 widget_class "*GtkSpin*" style "entry"
 widget_class "*GtkEntry*" style "entry"
 widget_class "*Gtk*List*" style "entry"
+widget_class "*GtkNotebook*" style "notebook"
 widget "*GtkButton*" style "button"
 widget "*background*" style "background"
