@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script remove_initscript write_secret_backend);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -135,56 +135,15 @@ sub check_link_beat() {
                     });
 }
 
-sub write_initscript() {
+sub remove_initscript() {
     $::testing and return;
-    output_with_perm("$::prefix/etc/rc.d/init.d/internet", 0755,
-		     sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
-#!/bin/bash
-#
-# internet       Bring up/down internet connection
-#
-# chkconfig: 2345 11 89
-# description: Activates/Deactivates the internet interfaces
-#
-# dam's (damien@mandrakesoft.com)
-
-# Source function library.
-. /etc/rc.d/init.d/functions
-
-	case "$1" in
-		start)
-                if [ -e %s ]; then
-			action "Checking internet connections to start at boot" "%s --boot_time"
-		else
-			action "No connection to start" "true"
-		fi
-		touch /var/lock/subsys/internet
-		;;
-	stop)
-                if [ -e %s ]; then
-			action "Stopping internet connection if needed: " "%s --boot_time"
-		else
-			action "No connection to stop" "true"
-		fi
-		rm -f /var/lock/subsys/internet
-		;;
-	restart)
-		$0 stop
-		echo "Waiting 10 sec before restarting the internet connection."
-		sleep 10
-		$0 start
-		;;
-	status)
-		;;
-	*)
-	echo "Usage: internet {start|stop|status|restart}"
-	exit 1
-esac
-exit 0
-EOF
-    $::isStandalone ? system("/sbin/chkconfig --add internet") : do {
-	symlinkf("../init.d/internet", "$::prefix/etc/rc.d/rc$_") foreach
-	  '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
+    -e "$::prefix/etc/rc.d/init.d/internet" and do {
+        $::isStandalone ? system("/sbin/chkconfig --del internet") : do {
+            rm_rf("$::prefix/etc/rc.d/rc$_") foreach '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', 
+                                                     '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
+        };
+        rm_rf("$::prefix/etc/rc.d/init.d/internet");
+        log::explanations("Removed internet service");
     };
 }
 
