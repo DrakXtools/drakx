@@ -108,11 +108,12 @@ sub installBootloader {
 
     install_acpi_pkgs($in->do_pkgs, $b);
 
-    my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
-
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
-    eval { bootloader::install($b, $all_hds) };
+    eval { 
+	my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
+	bootloader::install($b, $all_hds);
+    };
 
     if (my $err = $@) {
 	$err =~ /wizcancel/ and return;
