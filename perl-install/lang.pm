@@ -636,6 +636,7 @@ set_default_im('scim',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UT
 my %IM2packages = (
                    'scim' => {
                               generic => [ qw(scim scim-tables) ],
+                              ja => [ qw(scim-uim) ],
                               'ko' => [ qw(scim-hangul) ],
                               'zh' => [ qw(scim-chinese scim-tables) ],
                              },
