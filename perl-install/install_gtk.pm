@@ -166,7 +166,7 @@ sub init_sizes() {
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);
+    ($::stepswidth,  $::stepsheight)  = (160, $::rootheight);
     ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);

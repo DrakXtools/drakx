@@ -730,8 +730,8 @@ sub new {
 	    $::WizardWindow->add($::WizardTable);
 
 	    if ($::isInstall) {
-		$::WizardTable->set_size_request($::windowwidth * 0.9, $::windowheight * 0.7);
-		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.05, $::logoheight + $::windowheight * 0.15);
+		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * 0.73);
+		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * 0.15);
 	    } else {
 		my $draw1 = Gtk2::DrawingArea->new;
 		$draw1->set_size_request(540, 100);
