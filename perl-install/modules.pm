@@ -745,7 +745,9 @@ sub configure_pcmcia {
     my ($pcic) = @_;
 
     #- try to setup pcmcia if cardmgr is not running.
-#    -s "/var/run/stab" and return;
+    my $running if 0;
+    return if $running;
+    $running = 1;
 
     log::l("i try to configure pcmcia services");
 
