@@ -22,7 +22,7 @@ sub to_memory {
     if (-e "/$file") {
 	system("sudo mv /$file /tmp");
     } else {
-	system("sudo cp /image_raw/$file /tmp");
+	system("sudo cp /cdrom/$file /tmp");
     }
     system("sudo losetup /dev/$loop /tmp/$file");
 }
@@ -30,7 +30,7 @@ sub to_memory {
 sub to_cdrom {
     my ($loop, $file) = @_;
     my $f = -e "/$file" ? "/$file" : -e "/tmp/$file" ? "/tmp/$file" : return;
-    system("sudo losetup /dev/$loop /image_raw/$file");
+    system("sudo losetup /dev/$loop /cdrom/$file");
     system("sudo rm $f");
 }
 

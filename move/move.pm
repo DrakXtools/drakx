@@ -118,12 +118,12 @@ drakx_stuff:
 
 sub lomount_clp {
     my ($name, $needed_file) = @_;
-    my ($clp, $dir) = ("/image_raw/live_tree_$name.clp", "/image_$name");
+    my ($clp, $dir) = ("/cdrom/live_tree_$name.clp", "/image_$name");
 
     -e "$dir$needed_file" and return;
 
     if (! -e $clp || cat_('/proc/cmdline') =~ /\blive\b/) {
-	symlink "/image_raw/live_tree_$name", $dir;
+	symlink "/cdrom/live_tree_$name", $dir;
 	return;
     }
 

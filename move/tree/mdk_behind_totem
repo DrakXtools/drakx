@@ -49,10 +49,10 @@ umount_cd() {
 
 mount_cd() {
     echo mount_cd
-    /image_always/sbin/losetup -r -e gz /dev/$main_loop /image_raw/live_tree.clp 
+    /image_always/sbin/losetup -r -e gz /dev/$main_loop /cdrom/live_tree.clp 
     /image_always/bin/mount /dev/$main_loop /image
 
-    losetup -r -e gz /dev/$boot_loop /image_raw/live_tree_boot.clp 
+    losetup -r -e gz /dev/$boot_loop /cdrom/live_tree_boot.clp 
     mount /dev/$boot_loop /image_boot
 
     ln -sf /image/lib /

@@ -34,10 +34,10 @@
 #ifdef MANDRAKE_MOVE
 #define MEM_LIMIT_MOVE 120
 #define DISTRIB_NAME "Mandrake Move"
-#define IMAGE_LOCATION   "/sysroot/image_raw"
+#define IMAGE_LOCATION   "/sysroot/cdrom"
 #define IMAGE_LOCATION_REAL "/sysroot/image"
 #define SLASH_LOCATION   "/sysroot"
-#define RAW_LOCATION_REL "/image_raw"
+#define RAW_LOCATION_REL "/cdrom"
 #define LIVE_LOCATION_REL "/image"
 #define BOOT_LOCATION "/sysroot/image_boot"
 #define ALWAYS_LOCATION "/sysroot/image_always"
