@@ -78,12 +78,7 @@ sub adsl_ask_info {
 	next if $login && ! -r $_;
 	($login) = map { if_(/^user\s+\"([^\"]+)\"/, $1) } cat_($_);
     }
-    my $passwd = passwd_by_login($pppoe_conf{USER});
-    foreach (qw(/etc/ppp/pap-secrets /etc/ppp/chap-secrets)) {
-	next if $passwd && ! -r $_;
-	my $qlogin = quotemeta $login;
-	($passwd) = map { if_(/^(['"]?)$qlogin\1\s+\S+\s+(['"]?)(\S*)\2/, $3) } cat_($_);
-    }
+    my $passwd = passwd_by_login($login);
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
     add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
