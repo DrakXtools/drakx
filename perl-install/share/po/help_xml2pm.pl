@@ -12,21 +12,23 @@ if ( ! -x "$xsltproc" ){
     print "so type \"urpmi libxslt-proc\" please.\n";
     exit 1;
 }
-my @langs = grep { !/pt/ } grep { /^..$/ && -e "$dir/$_/drakx-chapter.xml" } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
-    my $file = "$dir/$lang/drakx_full.xml";
-    my $template_file = "$dir/$lang/drakx.xml";
+    my @l = grep { !/drakx-MNF-chapter/ } map { /(drakx-.*).xml$/ } all("$dir/$lang");
+    warn int(@l), " ", "\n";
+    if (@l < 20) { () } else {
+	my $template_file = "$dir/$lang/drakx.xml";
+	my $file = "$dir/$lang/drakx_full.xml";
+    	output($template_file, template($lang, @l));
+	system("$xsltproc id.xsl $template_file > $file") == 0 or die "$xsltproc id.xsl $template_file failed\n";
     
-    output($template_file, do { (my $s = $template) =~ s/__LANG__/$lang/g; $s });
-    system("$xsltproc id.xsl $template_file > $file") == 0 or die "$xsltproc id.xsl $template_file failed\n";
-    
-    my $p = new XML::Parser(Style => 'Tree');
-    my $tree = $p->parsefile($file);
+	my $p = new XML::Parser(Style => 'Tree');
+	my $tree = $p->parsefile($file);
 
-    $lang => rewrite2(rewrite1(@$tree), $lang);
-} @langs;
+	$lang => rewrite2(rewrite1(@$tree), $lang);
+    }
+} all($dir);
 
 my $base = delete $helps{en} || die;
 save_help($base);
@@ -162,7 +164,7 @@ sub rewrite2_ {
     !$tree->{attr}{condition} || $tree->{attr}{condition} !~ /no-inline-help/ or return '';
 
     my @prev_inside_strings;
-    my ($id) = $tree->{attr}{id} ? $tree->{attr}{id} =~ /drakxid-(.+)/ : ();
+    my ($id) = $tree->{attr}{id} ? $tree->{attr}{id} =~ /drakxid-([^-]+)$/ : ();
     if ($id) {
 	@prev_inside_strings = @inside_strings;
 	@inside_strings = ();
@@ -267,41 +269,45 @@ sub to_ascii {
     $_;
 }
 
-BEGIN {
-    $template = <<'EOF';
+sub template {
+    my ($lang, @l) = @_;
+    my $entities = join("\n", map { qq(<!ENTITY $_ SYSTEM '$_.xml'>) } @l);
+    my $body = join("\n", map { '&' . $_ . ';' } @l);
+
+    <<EOF;
 <?xml version='1.0' encoding='ISO-8859-1'?>
 
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
 "/usr/share/sgml/docbook/xml-dtd-4.1.2/docbookx.dtd"[
 
-<!ENTITY drakx-chapter SYSTEM 'drakx-chapter.xml'>
+$entities
 
-<!ENTITY % params.ent SYSTEM "../../manuals/Starter/__LANG__/params.ent">
+<!ENTITY % params.ent SYSTEM "../../manuals/Starter/$lang/params.ent">
 %params.ent;
-<!ENTITY % strings.ent SYSTEM "../../manuals/Starter/__LANG__/strings.ent">
+<!ENTITY % strings.ent SYSTEM "../../manuals/Starter/$lang/strings.ent">
 %strings.ent;
 
 <!ENTITY step-only-for-expert "">
 
-<!ENTITY % acronym-list SYSTEM "../../entities/__LANG__/acronym_list.ent" >
+<!ENTITY % acronym-list SYSTEM "../../entities/$lang/acronym_list.ent" >
 %acronym-list;
-<!ENTITY % button-list SYSTEM "../../entities/__LANG__/button_list.ent" >
+<!ENTITY % button-list SYSTEM "../../entities/$lang/button_list.ent" >
 %button-list;
-<!ENTITY % companies SYSTEM "../../entities/__LANG__/companies.ent" >
+<!ENTITY % companies SYSTEM "../../entities/$lang/companies.ent" >
 %companies;
-<!ENTITY % icon-list SYSTEM "../../entities/__LANG__/icon_list.ent" >
+<!ENTITY % icon-list SYSTEM "../../entities/$lang/icon_list.ent" >
 %icon-list;
-<!ENTITY % menu-list SYSTEM "../../entities/__LANG__/menu_list.ent" >
+<!ENTITY % menu-list SYSTEM "../../entities/$lang/menu_list.ent" >
 %menu-list;
-<!ENTITY % tab-list SYSTEM "../../entities/__LANG__/tab_list.ent" >
+<!ENTITY % tab-list SYSTEM "../../entities/$lang/tab_list.ent" >
 %tab-list;
-<!ENTITY % tech SYSTEM "../../entities/__LANG__/tech.ent" >
+<!ENTITY % tech SYSTEM "../../entities/$lang/tech.ent" >
 %tech;
-<!ENTITY % text-field-list SYSTEM "../../entities/__LANG__/text_field_list.ent" >
+<!ENTITY % text-field-list SYSTEM "../../entities/$lang/text_field_list.ent" >
 %text-field-list;
-<!ENTITY % titles SYSTEM "../../entities/__LANG__/titles.ent" >
+<!ENTITY % titles SYSTEM "../../entities/$lang/titles.ent" >
 %titles;
-<!ENTITY % typo SYSTEM "../../entities/__LANG__/typo.ent" >
+<!ENTITY % typo SYSTEM "../../entities/$lang/typo.ent" >
 %typo;
 <!ENTITY % common SYSTEM "../../entities/common.ent" >
 %common;
@@ -310,14 +316,14 @@ BEGIN {
 <!ENTITY % prog-list SYSTEM "../../entities/prog_list.ent" >
 %prog-list;
 
-<!ENTITY lang '__LANG__'>
+<!ENTITY lang '$lang'>
 
 ]>
 
 <book>
   <title>DrakX Documentation</title>
 
-  &drakx-chapter;
+$body
 
 </book>
 EOF
