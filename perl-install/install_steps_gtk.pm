@@ -1,3 +1,4 @@
+
 package install_steps_gtk; # $Id$
 
 use diagnostics;
@@ -467,7 +468,7 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"));
-    $w->{window}->set_usize($::windowwidth * 0.8, $::windowheight * 0.9);
+    $w->{window}->set_usize($::windowwidth * 0.8, 260);#$::windowheight * 0.9);
     $w->sync;
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
