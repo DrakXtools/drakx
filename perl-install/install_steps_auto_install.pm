@@ -28,6 +28,12 @@ sub new {
     }
 }
 
+sub configureNetwork {
+    my ($o) = @_;
+    modules::load_thiskind('net', sub {}, $o->{pcmcia});
+    install_steps::configureNetwork($o);
+}
+
 sub enteringStep($$$) {
     my ($o, $step) = @_;
     print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));

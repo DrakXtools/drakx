@@ -41,8 +41,6 @@ foreach (cat_("dirs")) {
 }
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
-_ "cd $tmp; mkdir -p lib tmp modules proc";
-
 
 foreach (keyboard::loadkeys_files) {
     install($_);

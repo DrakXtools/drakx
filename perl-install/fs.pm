@@ -232,6 +232,14 @@ sub umount($) {
 sub mount_part($;$$) {
     my ($part, $prefix, $rdonly) = @_;
 
+    if ($part->{realMntpoint} eq "/tmp/hdimage") {
+	my $dir = "$prefix$part->{mntpoint}";
+	$dir =~ s|/+$||;
+	log::l("special hd case ($dir)");
+	rmdir $dir;
+	symlink "/tmp/hdimage", $dir;
+	return;
+    }
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
 
@@ -277,23 +285,13 @@ sub umount_part($;$) {
 }
 
 sub mount_all($;$$) {
-    my ($fstab, $prefix, $hd_dev) = @_; #- hd_dev is the device used for hd install
+    my ($fstab, $prefix) = @_;
 
     log::l("mounting all filesystems");
 
-    $hd_dev ||= cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| unless $::isStandalone;
-
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
     foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { $_->{mntpoint} } @$fstab) {
-	if ($hd_dev && $_->{device} eq $hd_dev) {
-	    my $dir = "$prefix$_->{mntpoint}";
-	    $dir =~ s|/+$||;
-	    log::l("special hd case ($dir)");
-	    rmdir $dir;
-	    symlink "/tmp/hdimage", $dir;
-	} else {
-	  mount_part($_, $prefix);
-      }
+	mount_part($_, $prefix);
     }
 }
 

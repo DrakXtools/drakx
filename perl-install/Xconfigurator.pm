@@ -659,8 +659,8 @@ sub write_XF86Config {
     print F qq(    Device      "/dev/$O->{device}"\n);
     print G qq(    Option "Device"      "/dev/$O->{device}"\n);
     #- this will enable the "wheel" or "knob" functionality if the mouse supports it
-    print F "    ZAxisMapping 4 5\n" if
-      member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
+    print F "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
+    print F "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
 
     print F "#" unless $O->{XEMU3};
     print G "#" unless $O->{XEMU3};
@@ -896,7 +896,7 @@ Section "ServerLayout"
     print G '
     InputDevice "Keyboard1" "CoreKeyboard"
 EndSection
-';
+'; #-"
 
     close F;
     close G;
@@ -1015,7 +1015,7 @@ sub main {
 	    $in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace")) unless $found;
 	} else {
 	    $in->set_help('configureXxdm') unless $::isStandalone;
-	    my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
+	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 

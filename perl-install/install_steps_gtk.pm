@@ -767,9 +767,10 @@ sub create_steps_window {
 			$pixmap->signal_connect(enter_notify_event => sub {  print "HERE\n" });
 
 			if ($step->{reachable}) {
-			    gtksignal_connect(gtkadd(new Gtk::Button, $b),
-					      clicked => sub { die "setstep $step_name\n" });
-			} else { $b }
+			    my $button = new Gtk::Button
+			    $button->set_relief('none');
+			    gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
+			    $button;
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
@@ -777,7 +778,7 @@ sub create_steps_window {
 			my $t = $_;
 			my $w = new Gtk::Button('');
 			$w->set_name($t);
-#			$w->set_usize(0, 7);
+			$w->set_usize(0, 7);
 			gtksignal_connect($w, clicked => sub {
 			    $::setstep or return; #- just as setstep s
 			    install_theme($o, $t); die "theme_changed\n" 

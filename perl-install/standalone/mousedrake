@@ -44,14 +44,14 @@ modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
 my $f = "/etc/X11/XF86Config";
 my $g = "/etc/X11/XF86Config-4";
+
+my $zaxis = "\n    ZAxisMapping 4 5" if $mouse->{nbuttons} > 3;
+  $zaxis .= "\n    ZAxisMapping 6 7" if $mouse->{nbuttons} > 5;
 substInFile {
     if (/^Section "Pointer"/ .. /^EndSection/) {
+	$_ = '' if /ZAxisMapping/; #- remove existing line
 	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	s|^(\s*Device\s+).*|$1"/dev/mouse"|;
-#-	  my $zaxis = "4 5" if $mouse->{nbuttons} > 3;
-#-	  $zaxis .= " 6 7" if $mouse->{nbuttons} > 5;
-#-	  s|^(\s*ZAxisMapping\s+).*|$1$zaxis| if $zaxis;
-#-	  s|^([#]\s*ZAxisMapping\s+).*|#    ZAxisMapping\t\n|; }
+	s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
     }
 } $f if -e $f && !$::testing;
 substInFile {

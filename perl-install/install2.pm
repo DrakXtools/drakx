@@ -298,8 +298,12 @@ sub selectInstallClass {
 sub partitionDisks {
     return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
 
-    ($o->{hd_dev}) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage|;
-
+    my $stage1_hd;
+    if (cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
+	$stage1_hd = { dev => $1, fs => $2 };
+	install_any::getFile("XXX"); #- close still opened filehandle
+	fs::umount("/tmp/hdimage");
+    }
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
@@ -320,6 +324,8 @@ sub partitionDisks {
     unless ($::testing) {
 	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
     }
+    fs::mount($stage1_hd->{dev}, "/tmp/hdimage", $stage1_hd->{fs}) if $stage1_hd;
+
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root($o->{fstab}) or die 
 _("You must have a root partition.
@@ -421,6 +427,7 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     #- get current configuration of network device.
+    log::l("debugging: $o->{netc}{HOSTNAME}");
     eval {
 	$o->{netc} ||= {}; $o->{intf} ||= [];
 	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
@@ -670,7 +677,7 @@ sub main {
     $::o = $o = $o_;
 
     #- get stage1 network configuration if any.
-    $o->{netc} = network::read_conf("/tmp/network");
+    $o->{netc} ||= network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
 	my $l = network::read_interface_conf($file);

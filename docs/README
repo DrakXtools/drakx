@@ -227,3 +227,32 @@ sub selectAlawindows {
 case, except for auto_install)
 
 sub selectAlawindows  {}
+
+
+********************************************************************************
+* Miscellaneous ****************************************************************
+********************************************************************************
+>  o Media access methods: nfs, ftp, http, hd, cdrom
+>  o Stages: install1, stage1, stage2
+>    - What exactly each stage does
+
+the stage1 takes care of loading the stage2 :)
+the stage2 is too big to fit on a floppy, that's why stage1 exists.
+
+>    - How each stage relates to the various media access methods
+
+stage1 knows only how to access to the media is compiled for. It contains only
+the kernel modules needed for that media. For eg, the nfs/ftp/http stage1
+doesn't contain scsi modules nor ide.
+
+>    - How one stage terminates and another begins. i.e., How does
+>      stage1 find, mount, and launch stage2?
+
+/sbin/init just starts /sbin/install
+/sbin/install takes care of mounting stage2 (in ramdisk if necessary)
+  then it runs /usr/bin/runinstall2
+
+>  o Text and Graphic mode installers
+>    - Architectural overview of each
+
+have a look at gi/install.fig

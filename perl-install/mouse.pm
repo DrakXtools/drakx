@@ -58,6 +58,7 @@ arch() =~ /^sparc/ ? (
   [ 2, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic Mouse (serial)") ],
   [ 2, "ttyS",  "Microsoft",    "Microsoft",      __("Microsoft compatible (serial)") ],
   [ 3, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic 3 Button Mouse (serial)") ],
+  [ 3, "ttyS",  "Microsoft",    "ThinkingMouse",  __("Kensington Thinking Mouse (serial)") ],
   [ 2, "ttyS",  "MouseSystems", "MouseSystems",   __("Mouse Systems (serial)") ],
 );
 map_index {
@@ -73,6 +74,10 @@ sub name2mouse {
 	return { %$_ } if $name eq $_->{FULLNAME};
     }
     die "$name not found";
+}
+
+sub X2nbuttons {
+    first(map { $_->{nbuttons} } grep { $_->{XMOUSETYPE} eq $_[0] } @mouses);
 }
 
 sub serial_ports_names() {
@@ -92,7 +97,7 @@ sub read($) {
 
 sub write($;$) {
     my ($prefix, $mouse) = @_;
-    local $mouse->{FULLNAME} = qq("$mouse->{FULLNAME}");
+    local $mouse->{FULLNAME} = qq("$mouse->{FULLNAME}"); #-"
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
     symlinkf $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");

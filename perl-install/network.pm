@@ -19,7 +19,7 @@ use log;
 sub read_conf {
     my ($file) = @_;
     my %netc = getVarsFromSh($file);
-    $netc{dnsServer} = $netc{NS0};
+    $netc{dnsServer} = delete $netc{NS0};
     \%netc;
 }
 

@@ -359,10 +359,7 @@ sub formatAlaTeX($) {
 sub formatLines($) {
     my ($t, $tmp);
     foreach (split "\n", $_[0]) {
-	if (/^$/) {
-	    $t .= "$tmp\n";
-	    $tmp = "";
-	} elsif (/^\s/) {
+	if (/^\s/) {
 	    $t .= "$tmp\n";
 	    $tmp = $_;
 	} else {

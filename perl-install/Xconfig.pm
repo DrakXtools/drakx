@@ -30,6 +30,7 @@ sub getinfo {
     add2hash($o->{mouse}, mouse::detect()) unless $o->{mouse}{XMOUSETYPE};
 
     $o->{mouse}{device} ||= "mouse" if -e "/dev/mouse";
+    $o->{mouse}{nbuttons} ||= mouse::X2nbuttons($o->{mouse}{XMOUSETYPE});
     $o;
 }
 
