@@ -252,17 +252,17 @@ sub ask_from_normalize {
     my ($o, $common, $l) = @_;
 
     foreach my $e (@$l) {
-	if (my $l = $e->{list}) {
-	    if ($e->{sort} || @$l > 10 && !exists $e->{sort}) {
-		my @l2 = map { may_apply($e->{format}, $_) } @$l;
+	if (my $li = $e->{list}) {
+	    if ($e->{sort} || @$li > 10 && !exists $e->{sort}) {
+		my @l2 = map { may_apply($e->{format}, $_) } @$li;
 		my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
-		$e->{list} = $l = [ map { $l->[$_] } @places ];
+		$e->{list} = $li = [ map { $li->[$_] } @places ];
 	    }
 	    $e->{type} = 'iconlist' if $e->{icon2f};
 	    $e->{type} = 'treelist' if $e->{separator};
 	    add2hash_($e, { not_edit => 1 });
 	    $e->{type} ||= $e->{not_edit} && @$l == 1 ? 'list' : 'combo';
-	    ${$e->{val}} = $l->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$l);
+	    ${$e->{val}} = $li->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$li);
 	    if ($e->{type} eq 'combo' && $e->{format}) {
 		my @l = map { $e->{format}->($_) } @{$e->{list}};
 		each_index {
