@@ -140,6 +140,7 @@ sub init {
         print "Using existing host configuration\n";
         $using_existing_host_config = 1;
     }
+    $o->{locale} = lang::read('', 0);
 
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
@@ -180,7 +181,6 @@ sub lomount_clp {
 sub install2::autoSelectLanguage {
     my $o = $::o;
 
-    $o->{locale} = lang::read('', 0);
     install_steps::selectLanguage($o);
 }
 
