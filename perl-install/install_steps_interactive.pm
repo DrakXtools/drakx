@@ -854,6 +854,7 @@ sub summary {
 	    }
 	};
 
+  summary:
     $o->ask_from_({
 		   messages => N("Summary"),
 		   cancel   => '',
@@ -886,6 +887,12 @@ sub summary {
         }
     } grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()),
 ]);
+
+    if (!$o->{raw_X} && pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed) {
+	$o->ask_yesorno('', _("You have not configured X. Are you sure you really want this?"))
+	  or goto summary;
+    }
+
     install_steps::configureTimezone($o);  #- do not forget it.
 }
 
