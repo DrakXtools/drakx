@@ -108,7 +108,7 @@ ifeq (DIETLIBC, $(L))
 STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
 else
 ifeq (x86_64, $(ARCH))
-STAGE1_NETWORK_LIBS = /usr/lib64/libresolv.a
+STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
 else
 STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 endif
@@ -143,15 +143,12 @@ ifeq (i386, $(ARCH))
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
 else
 ifeq (x86_64, $(ARCH))
-LDFLAGS_INIT = -static -nostdlib /usr/lib64/crt1.o
-INIT_LIBC = $(GLIBC_LIBC)
+LDFLAGS_INIT = -static -nostdlib /usr/$(LIB)/crt1.o
 else
 ifeq (ia64, $(ARCH))
 LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
-INIT_LIBC = $(GLIBC_LIBC)
 else
 LDFLAGS_INIT = $(DIETLIBC_LDFLAGS_STAGE1)
-INIT_LIBC = $(DIETLIBC_LIBC)
 endif
 endif
 endif
@@ -198,11 +195,11 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n || exit 1 ;\
 	done
 
-init: $(INITOBJS) $(INIT_LIBC)
+init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 
-init-stage2: $(INITOBJS-STAGE2) $(INIT_LIBC)
+init-stage2: $(INITOBJS-STAGE2)
 	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 

@@ -29,9 +29,6 @@ F = NEWT
 ifeq (ia64, $(ARCH))
 L = GLIBC
 endif
-ifeq (ppc, $(ARCH))
-L = GLIBC
-endif
 ifeq (x86_64, $(ARCH))
 #L = GLIBC
 endif
@@ -56,8 +53,6 @@ GLIBC_LDFLAGS_STAGE1 = -static
 DIETLIBC_LDFLAGS_STAGE1 = -nostdlib
 LDFLAGS_STAGE1 = $($(L)_LDFLAGS_STAGE1)
 
-GLIBC_LIBC =
-DIETLIBC_LIBC = 
 STAGE1_LIBC = $($(L)_LIBC)
 
 STRIPCMD = strip -R .note -R .comment
