@@ -32,6 +32,9 @@ struct module_descr modules_descriptions[] = {
 	{ "via-rhine", "VIA VT86c100A Rhine-II, 3043 Rhine-I" },
 	{ "tulip",     "DEC 21040-family based cards" },
 	{ "wd",        "WD8003/WD8013" },
+	{ "bmac",      "Macintosh integrated ethernet (G3)" },
+	{ "gmac",      "Macintosh integrated ethernet (G4/iBook)" },
+	{ "mace",      "Macintosh integrated ethernet (PowerMac)" },
 
 	/* description of scsi drivers that have not very explicit names */
 	{ "53c7,8xx",  "NCR53c810/700" },
@@ -41,6 +44,8 @@ struct module_descr modules_descriptions[] = {
 	{ "ncr53c8xx", "Symbios 53c family" },
 	{ "sym53c8xx", "Symbios 53c family" },
 	{ "sim710",    "NCR53C710 family" },
+	{ "mesh",      "Macintosh integrated SCSI (NewWorld or internal SCSI)" },
+	{ "mac53c94",  "Macintosh integrated SCSI (OldWorld or external SCSI)" },
 
 	/* description of usb drivers that have not very explicit names */
 	{ "usbnet",    "Netchip or Prolific USB-USB Bridge" },
