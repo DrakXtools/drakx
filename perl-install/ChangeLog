@@ -1,3 +1,222 @@
+2003/08/20  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: add firewire_probe() and use it in probeall()
+
+	* modules.pm, install_steps.pm, install_steps_interactive.pm: load
+	detected firewire modules during install
+
+2003/08/19  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Partially updated
+
+2003/08/19  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/tools.pm: fix internet reconnection in mcc
+
+2003/08/19  erwan
+
+	* share/rpmsrate: Switching to ScalablePBS
+
+	* install_any.pm: Fixing Nvidia detection.. Many were missing due to wrong
+	regexp
+
+2003/08/19  gbeauchesne
+
+	* mdk-stage1/dietlibc/librpc/pmap_getport.c: Gracefully handle IPPROTO_TCP
+	in pmap_getport() [PR libc/4943]
+
+	* share/list: lib64 fixes. Make sure we grab Gtk2.pm
+
+	* mdk-stage1/dietlibc/librpc/xdr.c, mdk-stage1/dietlibc/librpc/clnt_udp.c,
+	mdk-stage1/dietlibc/librpc/clnt_tcp.c: 64-bit clean RPC code enough to
+	let MDK stage1 do NFS mounts
+
+	* mdk-stage1/dietlibc/librpc/xdr_mem.c,
+	mdk-stage1/dietlibc/librpc/xdr_rec.c: 64-bit clean RPC code enough to
+	let MDK stage1 do NFS mounts
+	XDR security fix from glibc [CAN 2003-0028]
+
+	* mdk-stage1/dietlibc/lib/htonl.c, mdk-stage1/dietlibc/lib/htons.c,
+	mdk-stage1/dietlibc/include/netinet/in.h: Fix htonl() on 64-bit
+	platforms
+
+	* mdk-stage1/Makefile: Build ppp stuff on AMD64 too
+
+	* Xconfig/card.pm, install_steps_gtk.pm: Use xf4 on AMD64 too
+
+	* mdk-stage1/ppp/pppd/utils.c: Fix varargs for AMD64
+
+	* install_any.pm: 
+	  - Don't care about BIGMEM stuff for IA-64 & AMD64
+	  - Handle platforms that are only aware of all.img
+
+	* partition_table.pm: 
+	  - Merge in AMD64 tree
+	  - Handle EFI partitions on IA-64
+
+	* fsedit.pm: Handle /boot/efi as an EFI partition
+
+	* any.pm: Merge from AMD64 branch: lib64 fixes
+
+	* mdk-stage1/dietlibc/librpc/xdr_stdio.c: XDR security fix from glibc [CAN
+	2003-0028]
+
+	* share/list.ia64, share/list.x86_64: AMD64 updates for 9.2
+
+	* mdk-stage1/dietlibc/include/sys/types.h: Really match dietlibc 0.22 for
+	<sys/types.h> u_long definition though
+	it ought to be uint32_t.
+
+	* fs.pm: Handle EFI partitions. umount syscall does not exist on AMD64,
+	use umount2
+
+2003/08/19  keld
+
+	* share/po/da.po: updates
+	soft/rpmdrake/po/da.po gi/perl-install/share/po/da.po
+	soft/bootsplash/po/da.po
+
+2003/08/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/ro.po, share/po/et.po, share/po/wa.po,
+	share/po/nl.po, share/po/ja.po, share/po/uz@Cyrl.po, share/po/el.po,
+	share/po/th.po, share/po/be.po, share/po/gl.po, share/po/id.po,
+	share/po/bg.po, share/po/uz.po, share/po/af.po, share/po/ru.po,
+	share/po/tg.po, share/po/lv.po, share/po/ca.po, share/po/vi.po,
+	share/po/ko.po, share/po/bs.po, share/po/is.po, share/po/he.po,
+	share/po/lt.po, share/po/ta.po, share/po/sl.po, share/po/fi.po,
+	share/po/de.po, share/po/DrakX.pot, share/po/uk.po, share/po/eu.po,
+	share/po/ga.po, share/po/tr.po, share/po/mt.po, share/po/cy.po,
+	share/po/es.po, share/po/sv.po, share/po/fr.po, share/po/sr.po,
+	share/po/zh_TW.po, share/po/da.po, share/po/nb.po, share/po/az.po,
+	share/po/pt_BR.po, share/po/eo.po, share/po/sk.po, share/po/pl.po,
+	share/po/hr.po, share/po/pt.po, share/po/sq.po, share/po/hu.po,
+	share/po/sr@Latn.po, share/po/it.po: updated pot file
+
+	* standalone/drakbackup, help.pm: Fixed typos
+
+	* share/po/fa.po: updated Farsi file
+	updated pot file
+
+	* share/po/cs.po, share/po/ar.po: updated Arabic and Czech files
+	updated pot file
+
+	* share/fonts.tar.bz2: Updated Nimbus Sans L font (some wrong cyrillic
+	glyphs fixed by
+	Mashrab Kuvatov <kmashrab@uni-bremen.de>)
+
+2003/08/19  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm, standalone/drakxtv, detect_devices.pm, harddrake/data.pm,
+	mouse.pm, standalone/draksound: full pci probe does not freeze anymore,
+	removing code work-arounding the freeze
+
+	* install_steps.pm: add resume=/dev/XXX where /dev/XXX is the swap
+	partition (when the swap partition is bigger than ram size)
+
+	* standalone/drakpxe: "xxx or xxx" in list context is always bad!
+
+	* network/netconnect.pm: perl_checker compliance (revert non usefull titi
+	change)
+
+	* standalone/drakhelp, standalone/drakperm, standalone/drakautoinst,
+	pkgs.pm: perl_checker compliance
+
+	* share/po/help_xml2pm.pl: remove debug code
+	adapt to new documentation layout
+
+	* standalone/adduserdrake: fix any::write_passwd_user() call
+
+	* modules/interactive.pm: do translate choices N_("Yes"), N_("No"),
+	N_("See hardware info")
+	(thanks to Arpad Biro)
+	full pci probe does not freeze anymore, removing code work-arounding the
+	freeze
+
+	* help.pm: new version from XML doc
+
+2003/08/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm: help perl_checker somewhat
+	pci hardware discovery: do full-probe by default
+
+	* standalone/logdrake: mark one more string as translatable (spoted by
+	Arpad Biro)
+	remove unused variable
+
+	* ugtk2.pm: remove broken and unused gtkexpand()
+
+	* standalone/drakconnect: mark one more string as translatable (spoted by
+	Arpad Biro)
+	readd LANGUAGE=C
+	pablo say that redefining LC_* is useless if LC_ALL is defined as the
+	later overrides and take priority over the former
+	add perl_checker hint
+	(update_intbutt) consolidate internet connection button switch code
+	  - use real known interface name everywhere not guessed one
+	(having eth0 and eth9 would resulting in displaying eth0 & eth1
+	  before), thus enabling to get rid of get_eth_ip()
+	  - replace build_list() by update_list() that fix flicker on list
+	  update: only add/remove added/removed interfaces, just update fields
+	  for others
+
+	* install_steps.pm: fix brown paper bug #4702 ...
+
+	* drakxtools.spec: first bits of 9.2-0.32mdk
+
+	* interactive/gtk.pm: show advanced options by default if --expert was
+	passed or if expect
+	checkbox was checked (#4353)
+
+	* commands.pm, c/stuff.xs.pl: pci hardware discovery: do full-probe by
+	default
+
+	* standalone/drakfloppy: translate one more string (already translated as
+	this is a double)
+
+2003/08/18  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated with current pot
+
+2003/08/18  keld
+
+	* share/po/da.po: Updates
+	soft/menu-messages/da.po soft/userdrake2/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/08/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/hu.po, share/po/it.po: updated pot file
+	updated pot file
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/zh_CN.po, share/po/ro.po, share/po/cs.po, share/po/wa.po,
+	share/po/nl.po, share/po/ja.po, share/po/uz@Cyrl.po, share/po/el.po,
+	share/po/th.po, share/po/be.po, share/po/gl.po, share/po/bg.po,
+	share/po/uz.po, share/po/af.po, share/po/ru.po, share/po/tg.po,
+	share/po/lv.po, share/po/ca.po, share/po/vi.po, share/po/ar.po,
+	share/po/ko.po, share/po/bs.po, share/po/is.po, share/po/he.po,
+	share/po/lt.po, share/po/ta.po, share/po/sl.po, share/po/fi.po,
+	share/po/fa.po, share/po/de.po, share/po/DrakX.pot, share/po/uk.po,
+	share/po/eu.po, share/po/ga.po, share/po/tr.po, share/po/mt.po,
+	share/po/cy.po, share/po/es.po, share/po/sv.po, share/po/fr.po,
+	share/po/sr.po, share/po/zh_TW.po, share/po/az.po, share/po/nb.po,
+	share/po/pt_BR.po, share/po/eo.po, share/po/sk.po, share/po/hr.po,
+	share/po/pl.po, share/po/pt.po, share/po/sq.po, share/po/sr@Latn.po:
+	updated pot file
+
+	* share/po/da.po: updated Danish file
+	updated pot file
+
+2003/08/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: typo fix
+
+	* drakxtools.spec: 9.2-0.31mdk (aka do not forget about killing poulpy)
+	9.2-0.30mdk
+
 2003/08/18  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: updated
@@ -18876,7 +19095,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.818 2003/08/14 02:41:01 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.819 2003/08/18 17:55:29 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
