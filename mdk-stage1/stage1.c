@@ -231,7 +231,10 @@ static void handle_pcmcia(void)
 	}
 	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL, 0);
 	my_insmod(pcmcia_adapter, ANY_DRIVER_TYPE, NULL, 0);
+	/* ds is an alias for pcmcia in recent 2.6 kernels
+           but we don't have modules.alias in install, so try to load both */
 	my_insmod("ds", ANY_DRIVER_TYPE, NULL, 0);
+	my_insmod("pcmcia", ANY_DRIVER_TYPE, NULL, 0);
 	
         /* call to cardmgr takes time, let's use the wait message */
 	wait_message("Enabling PCMCIA extension cards...");

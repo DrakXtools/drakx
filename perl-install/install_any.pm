@@ -1792,7 +1792,9 @@ sub configure_pcmcia {
 
     symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
 
-    eval { modules::load('pcmcia_core', $pcic, 'ds') };
+    #- ds is an alias for pcmcia in recent 2.6 kernels
+    #- but we don't have modules.alias in install, so try to load both
+    eval { modules::load('pcmcia', $pcic, 'ds', 'pcmcia') };
 
     #- run cardmgr in foreground while it is configuring the card.
     run_program::run("cardmgr", "-f", "-m", "/modules");
