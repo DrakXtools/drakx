@@ -9,15 +9,28 @@ for i in LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONE
 done
 
 # lc_ctype for common encoding
-for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-7 ISO-8859-9 ; do
+for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-8859-7 ISO-8859-9 ISO-8859-9E ; do
     f=usr/share/locale/$i/LC_CTYPE
     [ -e /$f ] || { echo missing /$f ; exit 1 ; }
     install -D -m 644 /$f $f
     (cd usr/share/locale/$i ; ln -s ../UTF-8/* . 2>/dev/null)
 done
 
+az ka vi
+# for non common encodings, build them locally to ensure they are present
+for i in ISO-8859-9E ARMSCII-8 GEORGIAN-ACADEMY KOI8-K TCVN-5712
+do
+    /usr/bin/localedef -c -i en_US -f $i ./$i
+
+    f=usr/share/locale/$i/LC_CTYPE
+    [ -e ./$i/LC_CTYPE ] || { echo missing ./$i/LC_CTYPE ; exit 1 ; }
+    install -D -m 644 ./$i/LC_CTYPE $f
+    (cd usr/share/locale/$i ; ln -s ../UTF-8/* . 2>/dev/null)
+done
+
+# lc_ctype for non common encodings
 rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
-for i in ja ko th vi ; do
+for i in ja ko ta th ; do
     ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
     rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
     f=usr/share/locale/$i/LC_CTYPE
@@ -47,7 +60,7 @@ cd .. ; rm -rf .tmp2
 perl -I../.. ../gen_locales.pl || exit 1
 
 
-for i in common C armscii-8 en_US.UTF-8 iso8859-1 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 iso8859-9e ja ko koi8-r koi8-u microsoft-cp1251 microsoft-cp1255 microsoft-cp1256 th_TH vi_VN.tcvn zh_CN zh_TW.big5 ; do
+for i in common C armscii-8 en_US.UTF-8 georgian-ps iso8859-1 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 iso8859-9e ja ko koi8-r koi8-u koi8-k microsoft-cp1251 microsoft-cp1255 microsoft-cp1256 th_TH tscii-0 vi_VN.tcvn zh_CN zh_TW.big5 ; do
     cp -a /usr/X11R6/lib/X11/locale/$i usr/X11R6/lib/X11/locale
 done
 
