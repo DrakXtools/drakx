@@ -146,17 +146,13 @@ sub add2hosts {
     my %l;
     $l{$_} = $hostname foreach @ips;
 
-    local *F;
-    if (-e $file) {
-	open F, $file or die "cannot open $file: $!";
-	#/\s*(\S+)(.*)/ and $l{$1} ||= $2 foreach <F>;
-	foreach (<F>) {
-	    m/\s*(\S+)(.*)/;
-	    my ($ip, $host) = ($1, $2);
-	    $l{$ip} ||= $host if $host !~ /^\s*$hostname\s*$/;
-	} 
+    foreach (cat_($file)) {
+	m/\s*(\S+)(.*)/;
+	my ($ip, $host) = ($1, $2);
+	$l{$ip} ||= $host if $host !~ /^\s*$hostname\s*$/;
     }
     log::l("writing host information to $file");
+    local *F;
     open F, ">$file" or die "cannot write $file: $!";
     while (my ($ip, $v) = each %l) {
 	$ip or next;

@@ -602,9 +602,9 @@ sub install_yaboot {
 	open F, ">$::prefix/boot/message" and print F $lilo->{message} or $lilo->{message} = 0;
     }
     {
-	local *F;
         local $\ = "\n";
 	my $f = "$::prefix/etc/yaboot.conf";
+	local *F;
 	open F, ">$f" or die "cannot create yaboot config file: $f";
 	log::l("writing yaboot config to $f");
 
@@ -701,10 +701,10 @@ sub install_silo {
 	open F, ">$::prefix/boot/message" and print F $silo->{message} or $silo->{message} = 0;
     }
     {
-	local *F;
         local $\ = "\n";
 	my $f = "$::prefix/boot/silo.conf"; #- always write the silo.conf file in /boot ...
 	symlinkf "../boot/silo.conf", "$::prefix/etc/silo.conf"; #- ... and make a symlink from /etc.
+	local *F;
 	open F, ">$f" or die "cannot create silo config file: $f";
 	log::l("writing silo config to $f");
 
@@ -788,10 +788,10 @@ sub write_lilo_conf {
     }
 
     {
-	local *F;
         local $\ = "\n";
 	my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
 
+	local *F;
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
@@ -912,9 +912,9 @@ sub write_grub_config {
 	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
-	local *F;
         local $\ = "\n";
 	my $f = "$::prefix/boot/grub/menu.lst";
+	local *F;
 	open F, ">$f" or die "cannot create grub config file: $f";
 	log::l("writing grub config to $f");
 

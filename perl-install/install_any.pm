@@ -127,7 +127,7 @@ sub getFile {
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
 	    $f2 = "/tmp/image/$rel" if !$postinstall_rpms || !-e $f2;
-	    open GETFILE, $f2 and *GETFILE;
+	    local *F; open F, $f2 and *F;
 	}
     } || errorOpeningFile($f);
 }
@@ -586,8 +586,8 @@ sub install_urpmi {
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
-	    local *LIST;
 	    my $mask = umask 077;
+	    local *LIST;
 	    open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
 	    umask $mask;
 
@@ -608,9 +608,9 @@ sub install_urpmi {
 		}
 	    } else {
 		#- need to use another method here to build synthesis.
-		local (*F, $_);
-		open F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |";
-		while ($_ = <F>) {
+		local *F; open F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |";
+		local $_; 
+		while (<F>) {
 		    print LIST "$dir/$_";
 		}
 		close F;

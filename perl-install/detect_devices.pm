@@ -619,6 +619,7 @@ sub whatUsbport() {
 	my $realport = devices::make($port);
 	next if !$realport;
 	next if ! -r $realport;
+	local *PORT;
 	open PORT, $realport or do next;
 	my $idstr = "";
 	# Calculation of IOCTL function 0x84005001 (to get device ID

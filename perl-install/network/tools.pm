@@ -207,6 +207,7 @@ sub test_connected {
 }
 
 sub connected2 {
+    local *KID_TO_READ;
     my $pid = open(KID_TO_READ, "-|");
     if ($pid) {   # parent
 	$kid_pid = $pid;

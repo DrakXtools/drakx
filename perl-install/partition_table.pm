@@ -792,8 +792,8 @@ sub load {
 sub save {
     my ($hd, $file) = @_;
     my @h = @{$hd}{@fields2save};
-    local *F;
     require Data::Dumper;
+    local *F;
     open F, ">$file"
       and print F Data::Dumper->Dump([\@h], ['$h']), "\0"
       or die N("Error writing to file %s", $file);

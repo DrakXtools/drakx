@@ -235,6 +235,7 @@ sub ps {
     require c;
     my $page = c::getpagesize() / 1024;
 
+    local *PS;
     open PS, ">&STDOUT";
     format PS_TOP =
   PID   RSS %CPU CMD
@@ -426,7 +427,7 @@ sub route {
     my ($titles, @l) = cat_("/proc/net/route");
     my @titles = split ' ', $titles;
     my %l;
-    open ROUTE, ">&STDOUT";
+    open ROUTE, ">&STDOUT"; #-# ROUTE must be not be localised otherwise the "format ROUTE" fails
     format ROUTE_TOP =
 Destination    Gateway        Mask           Iface
 .
@@ -447,6 +448,7 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
 sub df {
     my ($h) = getopts(\@_, qw(h));
     my ($dev, $size, $free, $used, $use, $mntpoint);
+    local *DF;
     open DF, ">&STDOUT";
     format DF_TOP =
 Filesystem          Size      Used    Avail     Use  Mounted on

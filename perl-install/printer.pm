@@ -106,23 +106,16 @@ sub printer_type($) {
 
 sub get_default_spooler () {
     if (-f "$prefix$FOOMATIC_DEFAULT_SPOOLER") {
-	open DEFSPOOL, "< $prefix$FOOMATIC_DEFAULT_SPOOLER";
-	my $spool = <DEFSPOOL>;
+	my $spool = cat_("$prefix$FOOMATIC_DEFAULT_SPOOLER")
 	chomp $spool;
-	close DEFSPOOL;
-	return $spool if ($spool =~ /cups|lpd|lprng|pdq/); 
+	return $spool if $spool =~ /cups|lpd|lprng|pdq/; 
     }
 }
 
 sub set_default_spooler ($) {
     my ($printer) = @_;
-    # Make Foomatic config directory if it does not exist yet
-    mkdir "$prefix$FOOMATICCONFDIR" if !(-d "$prefix$FOOMATICCONFDIR");
     # Mark the default driver in a file
-    open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" or 
-	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
-    print DEFSPOOL $printer->{SPOOLER};
-    close DEFSPOOL;
+    output_p("$prefix$FOOMATIC_DEFAULT_SPOOLER", $printer->{SPOOLER});
 }
 
 sub set_permissions {
@@ -497,13 +490,13 @@ sub getIPsInLocalNetworks {
 	while (<F>) { chomp; push @addresses, $_ }
 	close F;
 	if (-x "/usr/bin/nmblookup") {
+	    local *F;
 	    open F, ($::testing ? "" : "chroot $prefix/ ") . 
 		"/bin/sh -c \"export LC_ALL=C; nmblookup -B $bcast \\* | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
 		or next;
 	    local $_;
 	    while (<F>) { chomp;
 			  push @addresses, $_ if !(member($_,@addresses)) }
-	    close F;
 	}
     }
 
@@ -884,11 +877,11 @@ sub read_printer_db(;$) {
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
     if (!(-f $dbpath)) {
-	open DBPATH, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	open DBPATH, ($::testing ? $prefix : "chroot $prefix/ ") . #-#
 	    "foomatic-configure -O -q |" or
 		die "Could not run foomatic-configure";
     } else {
-	open DBPATH, $dbpath or die "An error occurred on $dbpath : $!";
+	open DBPATH, $dbpath or die "An error occurred on $dbpath : $!"; #-#
     }
 
     my $entry = {};
@@ -1036,10 +1029,10 @@ sub read_cups_options ($) {
     # reuse the dialog
     local *F;
     if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
-	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . #-#
 	    "gunzip -cd $queue_or_file | lphelp - |" or return 0;
     } else { # PPD file not compressed or queue
-	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . #-#
 	    "lphelp $queue_or_file |" or return 0;
     }
     my $i;
@@ -1199,15 +1192,8 @@ sub set_cups_autoconf {
     my $autoconf = $_[0];
 
     # Read config file
-    local *F;
     my $file = "$prefix/etc/sysconfig/printing";
-    if (!(-f $file)) {
-	@file_content = ();
-    } else {
-	open F, "< $file" or die "Cannot open $file!";
-	@file_content = <F>;
-	close F;
-    }
+    @file_content = cat_($file);
 
     # Remove all valid "CUPS_CONFIG" lines
     (/^\s*CUPS_CONFIG/ and $_ = "") foreach @file_content;
@@ -1219,10 +1205,7 @@ sub set_cups_autoconf {
 	push @file_content, "CUPS_CONFIG=manual\n";
     }
 
-    # Write back modified file
-    open F, "> $file" or die "Cannot open $file!";
-    print F @file_content;
-    close F;
+    output($file, @file_content);
 
     # Restart CUPS
     restart_service("cups");
@@ -1247,15 +1230,8 @@ sub set_usermode {
     $::expert = $usermode;
 
     # Read config file
-    local *F;
     my $file = "$prefix/etc/sysconfig/printing";
-    if (!(-f $file)) {
-	@file_content = ();
-    } else {
-	open F, "< $file" or die "Cannot open $file!";
-	@file_content = <F>;
-	close F;
-    }
+    @file_content = cat_($file);
 
     # Remove all valid "USER_MODE" lines
     (/^\s*USER_MODE/ and $_ = "") foreach @file_content;
@@ -1267,10 +1243,7 @@ sub set_usermode {
 	push @file_content, "USER_MODE=recommended\n";
     }
 
-    # Write back modified file
-    open F, "> $file" or die "Cannot open $file!";
-    print F @file_content;
-    close F;
+    output($file, @file_content);
 
     return 1;
 }
@@ -1312,22 +1285,12 @@ sub get_default_printer {
 }
 
 sub read_cupsd_conf {
-    my @cupsd_conf;
-    local *F;
-
-    open F, "$prefix/etc/cups/cupsd.conf";
-    @cupsd_conf = <F>;
-    close F;
-
-    @cupsd_conf;
+    cat_("$prefix/etc/cups/cupsd.conf");
 }
 sub write_cupsd_conf {
     my (@cupsd_conf) = @_;
-    local *F;
 
-    open F, ">$prefix/etc/cups/cupsd.conf";
-    print F @cupsd_conf;
-    close F;
+    output("$prefix/etc/cups/cupsd.conf", @cupsd_conf);
 
     #- restart cups after updating configuration.
     restart_service("cups");
@@ -1481,7 +1444,6 @@ sub poll_ppd_base {
 
 sub configure_queue($) {
     my ($printer) = @_;
-    local *F;
 
     if ($printer->{currentqueue}{foomatic}) {
 	#- Create the queue with "foomatic-configure", in case of queue
@@ -1520,9 +1482,9 @@ sub configure_queue($) {
 	# Add a comment line containing the path of the used PPD file to the
 	# end of the PPD file
 	if ($printer->{currentqueue}{ppd} ne '1') {
+	    local *F;
 	    open F, ">> $prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd";
 	    print F "*%MDKMODELCHOICE:$printer->{currentqueue}{ppd}\n";
-	    close F;
 	}
 	# Copy the old queue's PPD file to the new queue when it is renamed,
 	# to conserve the option settings
@@ -1730,10 +1692,9 @@ sub print_optionlist {
 sub get_copiable_queues {
     my ($oldspooler, $newspooler) = @_;
 
-    local *QUEUEOUTPUT; #- don't have to do close ... and don't modify globals
-                        #- at least
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure
+    local *QUEUEOUTPUT;
     open QUEUEOUTPUT, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -Q -q -s $oldspooler |" or
 		die "Could not run foomatic-configure";
@@ -1925,14 +1886,14 @@ sub configure_hpoj {
 				$device, split(' ',$address_arg));
 	}
 	$device_ok = 0;
+	my $ptalprobedevice = $bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe";
 	local *F;
-	my $ptalprobedevice =
-	    ($bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe");
 	if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |") {
 	    my $devid = join("", <F>);
 	    close F;
 	    if ($devid) {
 		$device_ok = 1;
+                local *F;
 		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
 		    $model_long = join("", <F>);
 		    close F;
@@ -1947,7 +1908,7 @@ sub configure_hpoj {
 			}
 		    }
 		}
-		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") {
+		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") { #-#
 		    $serialnumber_long = join("", <F>);
 		    close F;
 		    chomp $serialnumber_long;
@@ -1959,6 +1920,7 @@ sub configure_hpoj {
 	}
 	if ($bus ne "hpjd") {
 	    # Stop ptal-mlcd daemon for locally connected devices
+            local *F;
 	    if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
 		my $line = <F>;
 		if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
@@ -2184,6 +2146,7 @@ drive s: file=\":3\" remote
 # for some photo cards.
 mtools_skip_check=1
 ";
+    local *F
     open F, ">> $prefix/etc/mtools.conf" or 
 	die "can't write mtools config in /etc/mtools.conf: $!";
     print F $mtoolsconf_append;
@@ -2193,10 +2156,7 @@ mtools_skip_check=1
     # modify the existing one
     my $mtoolsfmconf;
     if (-f "$prefix/etc/mtoolsfm.conf") {
-	open F, "< $prefix/etc/mtoolsfm.conf" or 
-	    die "can't read MToolsFM config in $prefix/etc/mtoolsfm.conf: $!";
-	$mtoolsfmconf = join("", <F>);
-	close F;
+	$mtoolsfmconf = cat_("$prefix/etc/mtoolsfm.conf") or die "can't read MToolsFM config in $prefix/etc/mtoolsfm.conf: $!";
 	$mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
 	my $alloweddrives = lc($1);
 	foreach my $letter ("p", "q", "r", "s") {
@@ -2224,10 +2184,7 @@ LEFTDRIVE=\"p\"
 RIGHTDRIVE=\" \"
 ";
     }
-    open F, "> $prefix/etc/mtoolsfm.conf" or 
-	die "can't write mtools config in /etc/mtools.conf: $!";
-    print F $mtoolsfmconf;
-    close F;
+    output("$prefix/etc/mtoolsfm.conf", $mtoolsfmconf);
 }
 
 # ------------------------------------------------------------------

@@ -39,9 +39,8 @@ sub new($$) {
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
 	    devices::make("/dev/kbd");
 
-	    local (*T1, *T2);
-	    open T1, ">/dev/tty5";
-	    open T2, ">/dev/tty6";
+	    local *T1; open T1, ">/dev/tty5";
+	    local *T2; open T2, ">/dev/tty6";
 
 	    my $launchX = sub {
 		my $ok = 1;

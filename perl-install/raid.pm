@@ -103,8 +103,8 @@ sub update {
 
 sub write {
     my ($raids, $file) = @_;
-    local *F;
     local $\ = "\n";
+    local *F;
     open F, ">$file" or die N("Can't write file %s", $file);
 
     foreach (grep { $_ } @$raids) {
