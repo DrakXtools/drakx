@@ -83,9 +83,11 @@ get_needed_files: $(DIRS) $(MOFILES)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
-	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g" > /tmp/list
+	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
+	perl -pe 'if (/\*/) { @l = glob; @l == 1 and $$_ = "$$l[0]\n" } ' > /tmp/list
+	rpm -ql perl-GTK2 | grep '^/usr/lib' >> /tmp/list
 
-	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
 	find auto -follow -name "*.so" >> /tmp/list
 
@@ -140,7 +142,7 @@ endif
 	      fi; \
 	    fi; \
 	done
-	mv -f $(DEST)/$(LIB)/libimlib-png.so $(DEST)/usr/$(LIB)
+	perl -pi -e 's/\s*use\s+(warnings|diagnostics|vars|strict).*//g' $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_
