@@ -21,7 +21,7 @@ sub new {
     my ($type, $o) = @_;
 
     # Handle legacy options
-    $o->{interactive} ||= 'gtk' if $graphical;
+    $o->{interactive} ||= 'gtk' if $graphical || !is_empty_array_ref($o->{interactiveSteps});
     $o->{interactiveSteps} ||= [ @graphical_steps ];
     push @{$o->{interactiveSteps}}, qw(enteringStep formatMountPartitions beforeInstallPackages installPackages);
 
