@@ -903,7 +903,7 @@ sub runlevel {
     my $f = "$prefix/etc/inittab";
     -r $f or log::l("missing inittab!!!"), return;
     if ($runlevel) {
-	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f;
+	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f if !$::testing;
     } else {
 	cat_($f) =~ /^id:(\d):initdefault:\s*$/ && $1;
     }
