@@ -174,6 +174,9 @@ void unset_param(int i)
 	stage1_mode &= ~i;
 }
 
+// warning, many things rely on the fact that:
+// - when failing it returns 0
+// - it stops on first non-digit char
 int charstar_to_int(char * s)
 {
 	int number = 0;
@@ -283,6 +286,8 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 
 	if (!seems_ok) {
 		log_message("reading compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
+		BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
+		close(ram_fd);
 		remove_wait_message();
 		stg1_error_message("Could not uncompress second stage ramdisk. "
 				   "This is probably an hardware error while reading the data. "

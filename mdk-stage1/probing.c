@@ -22,7 +22,7 @@
 
 /*
  * This contains stuff related to probing:
- * (1) any (actually only SCSI, NET, USB Controllers) devices (autoprobe for PCI and USB)
+ * (1) any (actually only SCSI, NET, CPQ, USB Controllers) devices (autoprobe for PCI and USB)
  * (2) IDE media
  * (3) SCSI media
  * (4) ETH devices
@@ -53,7 +53,7 @@
 #include "probing.h"
 
 
-enum bus_type { IDE, SCSI };
+enum bus_type { IDE, SCSI, CPQ };
 
 struct media_info {
 	char * name;
@@ -387,7 +387,6 @@ static void find_media(void)
 	/* ----------------------------------------------- */
 	log_message("looking for scsi media");
 
-
 	fd = open("/proc/scsi/scsi", O_RDONLY);
 	if (fd != -1) {
 		enum { SCSI_TOP, SCSI_HOST, SCSI_VENDOR, SCSI_TYPE } state = SCSI_TOP;
@@ -508,6 +507,36 @@ static void find_media(void)
 		}
 		
 	end_scsi:
+	}
+
+	/* ----------------------------------------------- */
+	log_message("looking for Compaq Smart Array media");
+	{
+		char * procfiles[] = { "/proc/driver/array/ida0", "/proc/array/ida",
+				       "/proc/driver/cciss/cciss0", "/proc/cciss/cciss",
+				       NULL };
+		char ** procfile = procfiles;
+		FILE * f;
+		while (procfile && *procfile && (f = fopen(*procfile, "rb"))) {
+			while (fgets(buf, sizeof(buf), f)) {
+				if (ptr_begins_static_str(buf, "ida/") || ptr_begins_static_str(buf, "cciss/")) {
+					char * end = strchr(buf, ':');
+					if (!end)
+						log_message("Inconsistency in %s, line:\n%s", *procfile, buf);
+					else {
+						*end = '\0';
+						tmp[count].name = strdup(buf);
+						tmp[count].type = DISK;
+						tmp[count].model = "Compaq RAID logical disk";
+						log_message("CPQ: found %s", tmp[count].name);
+						tmp[count].bus = CPQ;
+						count++;
+					}
+				}
+			}
+			fclose(f);
+			procfile++;
+		}
 	}
 
 	/* ----------------------------------------------- */

@@ -83,6 +83,16 @@ static int ensure_dev_exists(char *dev)
 		/* SCSI cd's */
 		major = 11;
 		minor = name[3] - '0';
+	} else if (ptr_begins_static_str(name, "ida/") ||
+		   ptr_begins_static_str(name, "cciss/")) {
+		char * ptr = strchr(name, '/');
+		mkdir("/dev/ida", 0755);
+		mkdir("/dev/cciss", 0755);
+		major = ptr_begins_static_str(name, "ida/") ? 72 : 104 + charstar_to_int(ptr+2);
+		ptr = strchr(ptr, 'd');
+		minor = 16 * charstar_to_int(ptr+1);
+		ptr = strchr(ptr, 'p');
+		minor += charstar_to_int(ptr+1);
 	} else {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;
