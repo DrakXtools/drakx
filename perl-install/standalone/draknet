@@ -26,7 +26,7 @@ use interactive;
 use standalone;
 use netconnect;
 #use common qw(:common :file :functional :system);
-use my_gtk;
+#use my_gtk;
 use c;
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
@@ -42,18 +42,7 @@ my $netc = {};
 my $intf = {};
 my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan' );
 
-$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
-#$::force_xf3 = /-xf3/;
-#$::beginner = /-beginner/;
-#$::expert = /-expert/;
-#$::auto = /-auto/;
-#$::noauto = /-noauto/;
-#$::testing = /-testing/;
-#$i->{skiptest} = /-skiptest/;
-
-#my $f = "/usr/X11R6/lib/X11/Cards";
-#-e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
-#-e $f or die "install XFree86 first!\n";
+#$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
@@ -195,16 +184,6 @@ $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $frame2 = new Gtk::Frame (_("LAN configuration"));
 $vbox1->pack_start($frame2,1,1,0);
-#my $scrolled1 = new Gtk::ScrolledWindow;
-#$scrolled1->set_policy('automatic','automatic');
-#$scrolled1->set_usize(300, 0);
-#$scrolled1->shadow_type('etched_in');
-#$frame2->add($scrolled1);
-#my $table2 = new Gtk::Table (scalar(@all_cards),3, 0);
-#$table2->set_border_width(5);
-#$table2->set_row_spacings(5);
-#$table2->set_col_spacings(5);
-#$frame2->add($table2);
 my $vbox2 = new Gtk::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
@@ -228,13 +207,12 @@ $vbox2->pack_start($hbox3, 0, 0, 0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
-my $frame3 = new Gtk::Frame (_("Actions"));
-$vbox1->pack_start($frame3,1,1,0);
 my $bbox0 = new Gtk::HButtonBox;
-$frame3->add($bbox0);
-$bbox0->set_layout(-start);
-$bbox0->set_border_width(5);
-my $button_wizard = new Gtk::Button "Configure with Wizard...";
+$vbox1->pack_start($bbox0,0,0,0);
+$bbox0->set_layout(-end);
+
+
+my $button_wizard = new Gtk::Button _("Configure...");
 $button_wizard->signal_connect ( clicked => sub {
 				     $::isWizard = 1;
 				     system("draknet --wizard");
@@ -244,33 +222,21 @@ $button_wizard->signal_connect ( clicked => sub {
 				     update();
 				 });
 $bbox0->add($button_wizard );
-my $button_expert = new Gtk::Button "Switch to Expert Mode";
+
+my $button_expert = new Gtk::Button _("Expert Mode");
 $button_expert->signal_connect ( clicked => sub {
 				     foreach($button1, $button3) { $expert_mode ? $_->hide() : $_->show() }
-				     $button_expert->child->set($expert_mode ? "Switch to Expert Mode" : "Switch to Normal Mode");
+				     $button_expert->child->set($expert_mode ? _("Expert Mode") : _("Normal Mode"));
 				     $expert_mode = !$expert_mode;
 				 });
 $bbox0->add($button_expert );
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
-#  my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
-#  $table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
-#  my $label10 = new Gtk::Label(_("isdn_internal"));
-#  $table2->attach($label10, 1, 2, 0, 1, 'fill', 'fill',0,0);
-#  my $label11 = new Gtk::Label(_("Interface:"));
-#  $table2->attach($label11, 0, 1, 1, 2, 'fill', 'fill',0,0);
-#  my $label12 = new Gtk::Label(_("ippp0"));
-#  $table2->attach($label12, 1, 2, 1, 2, 'fill', 'fill',0,0);
-#  my $label13 = new Gtk::Label(_("Status:"));
-#  $table2->attach($label13, 0, 1, 2, 3, 'fill', 'fill',0,0);
-#  my $label14 = new Gtk::Label(_("not connected"));
-#  $table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
-
 my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout(-end);
-$bbox1->set_border_width(5);
+#$bbox1->set_border_width(5);
 
 my $button_ok = new Gtk::Button "OK";
 $button_ok->signal_connect ( clicked => sub {
@@ -565,19 +531,3 @@ sub configure_net {
     $window->set_position('center_always');
     Gtk->main;
 }
-
-#  sub detect {
-#      my ($auto_detect) = @_;
-#      my $isdn={};
-#      netconnect::isdn_detect_backend($isdn);
-#      $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
-
-#      my $netc={};
-#      my $intf={};
-#      any::setup_thiskind_backend('net', undef);
-#      my @all_cards = netconnect::conf_network_card_backend ('', undef, undef, undef, undef, undef, undef);
-#      map { netconnect::adsl_detect("", $_->[0]) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
-#      my $modem={};
-#      netconnect::modem_detect_backend($modem);#, $mouse);
-#      $modem->{device} and $auto_detect->{modem}=$modem->{device};
-#  }
