@@ -418,6 +418,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 						     -e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so")) {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{driver} = 'nvidia';
+	run_program::rooted($prefix, "/sbin/depmod", "-a"); #- hack as NVIDIA_kernel package does not do it actually (8.1 OEM).
     } else {
 	$card->{NVIDIA_glx} = '';
     }
