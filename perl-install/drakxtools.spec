@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 16mdk
+Release: 17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -313,6 +313,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-17mdk
+- drakfirewall: allow a range of ports (anthill bug #267) (pixel)
+- drakfont:
+  o fix unstalling fonts
+  o sanitize application options, about, font import and font removeal
+    layouts
+- fix behavior when embedded in interactive layer:
+  o prevent subwindows being too small
+  o prevent subwindows breaking when canceled
+- run_program layer: don't print refs in log when output is redirected
+  (blino)
+- wizards layer: only complain if a problem actually happened
+- drakconnect:
+  o first snapshot of new manage wizard (poulpy)
+  o "delete network interface" wizard:
+    * show a finish button on last step
+    * exit once delete interface wizard has ended instead of then
+      running the std add wizard...
+    * list ppp interfaces too
+
 * Fri Jan  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-16mdk
 - support newer gtk2 bindings
 - fix drakboot --boot embedding
