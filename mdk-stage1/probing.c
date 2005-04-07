@@ -121,19 +121,121 @@ char * get_net_intf_description(char * intf_name)
 }
 #endif
 
-static struct pci_module_map_full orphan_devices[50]; /* might be overkill, we only need the driver for now */
-static int orphan_devices_len = 0;
+struct pcitable_entry detected_devices[50];
+int detected_devices_len = 0;
 
-int exists_orphan_device(char *driver) {
+/* FIXME: factorize with probe_that_type() */
+
+static void add_detected_device(unsigned short vendor, unsigned short device, const char *name, const char *module)
+{
+	struct pcitable_entry *dev = &detected_devices[detected_devices_len++];
+	dev->vendor = vendor;
+	dev->device = device;
+	strncpy(dev->module, module, 19);
+	dev->module[19] = '\0';
+	strncpy(dev->description, name, 99);
+	dev->description[99] = '\0';
+	log_message("detected device (%x, %x, %s, %s)", vendor, device, name, module);
+}
+
+static int check_device_full(struct pci_module_map_full * pcidb_full, unsigned int len_full,
+			     unsigned short vendor, unsigned short device,
+			     unsigned short subvendor, unsigned short subdevice)
+{
 	int i;
-	for (i = 0; i < orphan_devices_len ; i++) {
-		if (!strcmp(orphan_devices[i].module, driver)) {
-			log_message("probing: found orphan device for module %s", driver);
+	for (i = 0; i < len_full; i++)
+		if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
+			if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
+				add_detected_device(pcidb_full[i].vendor, pcidb_full[i].device,
+						    pcidb_full[i].name, pcidb_full[i].module);
+				return 1;
+			}
+		}
+	return 0;
+}
+
+static int check_device(struct pci_module_map * pcidb, unsigned int len,
+			unsigned short vendor, unsigned short device) {
+	int i;
+	for (i = 0; i < len; i++)
+		if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
+			add_detected_device(pcidb[i].vendor, pcidb[i].device,
+					    pcidb[i].name, pcidb[i].module);
 			return 1;
 		}
+	return 0;
+}
+
+void probing_detect_devices()
+{
+	FILE * f = NULL;
+	char buf[200];
+        static int already_detected_devices = 0;
+
+	if (already_detected_devices)
+		return;
+
+	if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
+		log_message("PCI: could not open proc file");
+		return;
 	}
-        log_message("probing: no orphan device for module %s", driver);
-        return 0;
+
+	while (1) {
+		unsigned int i;
+		unsigned short vendor, device, subvendor, subdevice, devbusfn;
+		if (!fgets(buf, sizeof(buf), f)) break;
+		sscanf(buf, "%hx %x", &devbusfn, &i);
+		device = i;
+		vendor = i >> 16;
+		{
+			int bus = devbusfn >> 8;
+			int device_p = (devbusfn & 0xff) >> 3;
+			int function = (devbusfn & 0xff) & 0x07;
+			char file[100];
+			int sf;
+			sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
+			if ((sf = open(file, O_RDONLY)) == -1) {
+				log_message("PCI: could not open file for full probe (%s)", file);
+				continue;
+			}
+			if (read(sf, buf, 48) == -1) {
+				log_message("PCI: could not read 48 bytes from %s", file);
+				close(sf);
+				continue;
+			}
+			close(sf);
+			memcpy(&subvendor, buf+44, 2);
+			memcpy(&subdevice, buf+46, 2);
+		}
+
+
+#ifndef DISABLE_PCIADAPTERS
+#ifndef DISABLE_MEDIAS
+		if (check_device_full(medias_pci_ids_full, medias_num_ids_full, vendor, device, subvendor, subdevice))
+			continue;
+		if (check_device(medias_pci_ids, medias_num_ids, vendor, device))
+			continue;
+#endif
+
+#ifndef DISABLE_NETWORK
+		if (check_device_full(network_pci_ids_full, network_num_ids_full, vendor, device, subvendor, subdevice))
+			continue;
+		if (check_device(network_pci_ids, network_num_ids, vendor, device))
+			continue;
+#endif
+#endif
+
+#ifdef ENABLE_USB
+		if (check_device(usb_pci_ids, usb_num_ids, vendor, device))
+			continue;
+#endif
+
+		/* device can't be found in built-in pcitables, but keep it */
+		add_detected_device(vendor, device, "", "");
+	}
+
+	fclose(f);
+	already_detected_devices = 1;
 }
 
 void discovered_device(enum driver_type type,
@@ -166,17 +268,6 @@ void discovered_device(enum driver_type type,
                 /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
 		failed = my_insmod(driver, USB_CONTROLLERS, NULL, 0);
 #endif
-
-	if (failed != INSMOD_OK) {
-		struct pci_module_map_full *dev = &orphan_devices[orphan_devices_len++];
-		log_message("adding orphan device (%x, %x, %s)", vendor, device, driver);
-		dev->vendor = vendor;
-		dev->device = device;
-		dev->subvendor = subvendor;
-		dev->subdevice = subdevice;
-		dev->name = description;
-		dev->module = driver;
-	}
 }
 
 #ifdef ENABLE_USB

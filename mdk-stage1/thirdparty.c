@@ -32,6 +32,9 @@
 
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
 
+static struct pcitable_entry pcitable[100];
+static int pcitable_len = 0;
+
 static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 {
 	char ** medias, ** medias_models;
@@ -210,7 +213,51 @@ static enum return_type thirdparty_prompt_modules(const char *modules_location, 
 }
 
 
-static enum return_type thirdparty_autoload_modules(const char *modules_location, char ** modules_list, FILE *f, int load_probed_only)
+static void thirdparty_load_pcitable(const char *modules_location)
+{
+	char pcitable_filename[100];
+	FILE * f = NULL;
+
+	sprintf(pcitable_filename, "%s/pcitable", modules_location);
+	if (!(f = fopen(pcitable_filename, "rb"))) {
+		log_message("third_party: no external pcitable found");
+		return;
+	}
+	while (1) {
+		char buf[200];
+		struct pcitable_entry *e;
+		if (!fgets(buf, sizeof(buf), f)) break;
+		e = &pcitable[pcitable_len++];
+		sscanf(buf, "%hx\t%hx\t\"%[^ \"]\"\t\"%[^ \"]\"", &e->vendor, &e->device, e->module, e->description);
+	}
+	fclose(f);
+}
+
+
+static int thirdparty_is_detected(char *driver) {
+	int i, j;
+
+	for (i = 0; i < detected_devices_len ; i++) {
+		/* first look for the IDs in the third-party pcitable */
+		for (j = 0; j < pcitable_len ; j++) {
+			if (pcitable[j].vendor == detected_devices[i].vendor &&
+			    pcitable[j].device == detected_devices[i].device &&
+			    !strcmp(pcitable[j].module, driver)) {
+				log_message("probing: found device for module %s", driver);
+				return 1;
+			}
+		}
+		/* if not found, compare with the detected driver */
+		if (!strcmp(detected_devices[i].module, driver)) {
+			log_message("probing: found device for module %s", driver);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+static enum return_type thirdparty_autoload_modules(const char *modules_location, char ** modules_list, FILE *f, int load_detected_only)
 {
 	while (1) {
 		char final_name[500];
@@ -230,12 +277,12 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 			options++;
 		}
 
-		if (load_probed_only && !exists_orphan_device(module)) {
+		if (load_detected_only && !thirdparty_is_detected(module)) {
 			log_message("third party: no device detected for module %s, skipping", module);
 			continue;
 		}
 
-		log_message("third party: auto-loading module (%s) (%s)", module, options);
+		log_message("third party: auto-loading module (%s) with options (%s)", module, options);
 		while (entry && *entry) {
 			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
 				sprintf(final_name, "%s/%s", modules_location, *entry);
@@ -300,6 +347,8 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 	sprintf(list_filename, "%s/to_detect", modules_location);
 	f_detect = fopen(list_filename, "rb");
 	if (f_detect) {
+		probing_detect_devices();
+		thirdparty_load_pcitable(modules_location);
 		thirdparty_autoload_modules(modules_location, modules_list, f_detect, 1);
 		fclose(f_detect);
 	}

@@ -34,6 +34,18 @@ void net_discovered_interface(char * intf_name);
 char * get_net_intf_description(char * intf_name);
 void prepare_intf_descr(const char * intf_descr);
 void probe_that_type(enum driver_type type, enum media_bus bus);
-int exists_orphan_device(char *driver);
+
+struct pcitable_entry {
+	/* some bits stolen from pci-resource/pci-ids.h
+	 * FIXME: split pci-ids.h into pci-ids.c and pci-ids.h so that the header can be re-used
+	 */
+	unsigned short	vendor;       /* PCI vendor id */
+	unsigned short	device;       /* PCI device id */
+	char      module[20];      /* module to load */
+	char      description[100]; /* PCI human readable description */
+};
+extern struct pcitable_entry detected_devices[50];
+extern int detected_devices_len;
+void probing_detect_devices();
 
 #endif
