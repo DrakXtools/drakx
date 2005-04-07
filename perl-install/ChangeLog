@@ -1,3 +1,69 @@
+2005/04/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakroam: add some comment
+	hide roaming frame by default, not tested
+	don't truncate default gateway (#15247)
+
+	* standalone/net_applet: fix refresh (forget erased settings)
+
+	* mdk-stage1/thirdparty.h, mdk-stage1/thirdparty.c: export
+	THIRDPARTY_DEVICE and THIRDPARTY_DIR for stage2
+
+	* network/netconnect.pm: always restart slmodem, even if it was already
+	installed
+	cosmetics
+	create correct /dev/modem for HCF modems
+	use correct package name for HCF modems
+	fix h[cs]f fix
+
+	* network/tools.pm: net_applet: really allow users to start connection
+	without having to
+	type the root password
+	run ifup/ifdown with run_program::raw and detach, so that pppd doesn't
+	complain about invalid tty
+
+2005/04/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: sent utf-8 by default for languages that only use plain ascii,
+	and for newly added or with few users languages.
+
+2005/04/07  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: handle third party modules from various
+	devices
+	(at least floppy is still working :)
+
+	* install_steps.pm: handle third party modules from various devices
+	(at least floppy is still working :)
+	workaround weird old code (bugzilla #15300)
+
+2005/04/07  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Add a trace
+
+2005/04/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Sort the nic list for nbis.
+
+2005/04/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-21mdk
+
+2005/04/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/list, share/aliases: ship rmmod binary since insmod from
+	module-init-tools isn't combined with rmmod
+
+2005/04/06  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: monitor-edid needs /dev/zero when fallbacking on lrmi
+
+	* install2.pm: leave bootsplash when X is up (and also in newt and
+	auto_install)
+
+	* install_gtk.pm: fix position of steps window in direction rtl (bugzilla
+	#15261)
+
 2005/04/06  Olivier Blin <oblin at mandrakesoft.com>
 
 	* do_pkgs.pm: now that I know how to short-circuit it, make it work as
@@ -48367,7 +48433,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1031 2005/04/06 09:58:05 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1032 2005/04/06 15:10:33 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
