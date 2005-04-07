@@ -38,7 +38,7 @@ mkdir "images";
 
 my $main = chomp_(cat_('kernel/all.kernels/.main'));
 my $main_BOOT = chomp_(cat_('kernel/all.kernels/.main-BOOT'));
-my @kernels = grep { /^2/ } all('kernel/all.kernels');
+my @kernels = grep { /^2/ } grep { !/xbox/ } all('kernel/all.kernels');
 my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
