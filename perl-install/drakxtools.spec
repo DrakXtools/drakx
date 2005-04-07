@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 20mdk
+Release: 21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr  7 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-21mdk
+- drakconnect (blino):
+  o fix support for fix h[cs]f modems
+  o create correct /dev/modem && install correct package for HCF modems
+- drakroam (blino):
+  o don't truncate default gateway (#15247)
+  o hide roaming frame by default
+- net_applet (blino):
+  o really allow users to start connection without having to type the
+    root password
+  o fix refresh
+
 * Tue Apr  5 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-20mdk
 - mousedrake: really apply specific ALPS touchpad settings (#14510)
 - drakconnect:
