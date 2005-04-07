@@ -660,7 +660,7 @@ sub make_nbi() {
 	my $nic;
 	
 	require list_modules;
-	my @nics = list_modules::category2modules(list_modules::ethernet_categories());
+	my @nics = sort(list_modules::category2modules(list_modules::ethernet_categories()));
 
 	#- kernel/module info in tree view
 	my $model = Gtk2::TreeStore->new("Glib::String");
