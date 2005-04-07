@@ -168,6 +168,9 @@ sub checkNetwork() {
     if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub checkNetworkForce() {
+    $netcnx = {};
+    $netc = {};
+    $intf = {};
     network::netconnect::read_net_conf($netcnx, $netc, $intf);
     undef $current_state;
     checkNetwork();
