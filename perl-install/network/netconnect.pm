@@ -547,10 +547,11 @@ Take a look at http://www.linmodems.org"),
                                          slmodem => "/usr/sbin/slmodemd",
                                         );
 
-                        my %devices = (ltmodem => '/dev/ttyS14',
+                        my %devices = (
                                        hcfpcimodem => '/dev/ttySHSF0',
                                        hsfmodem => '/dev/ttySHSF0',
-                                       slmodem => '/dev/ttySL0'
+                                       ltmodem => '/dev/ttyS14',
+                                       slmodem => '/dev/ttySL0',
                                       );
 
                         if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
