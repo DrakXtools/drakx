@@ -398,7 +398,7 @@ Do you have a supplementary installation media to configure?",
 	    join ", ", uniq(sort {
 		    (my $x) = $a =~ /CD(\d+)/;
 		    (my $y) = $b =~ /CD(\d+)/;
-		    $x && $y ? $x <=> $y : $a cmp $b
+		    $x && $y ? $x <=> $y : $a cmp $b;
 		} map { $_->{descr} } values %{$o->{packages}{mediums}})));
     $o->ask_from(
 	'', $msg,
@@ -913,6 +913,7 @@ sub killCardServices() {
 sub unlockCdrom() {
     my $cdrom = cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
     eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROM_LOCKDOOR(), 0) };
+    $@ and log::l("unlock cdrom ($cdrom) failed: $@");
 }
 
 sub openCdromTray {
