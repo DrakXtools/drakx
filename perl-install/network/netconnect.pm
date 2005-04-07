@@ -541,7 +541,7 @@ Take a look at http://www.linmodems.org"),
                         my $type;
 
                         my %pkgs2path = (
-                                         hcfmodem => "/usr/sbin/hcfpciconfig",
+                                         hcfpcimodem => "/usr/sbin/hcfpciconfig",
                                          hsfmodem => "/usr/sbin/hsfconfig",
                                          ltmodem => "/etc/devfs/conf.d/ltmodem.conf",
                                          slmodem => "/usr/sbin/slmodemd",
@@ -553,7 +553,7 @@ Take a look at http://www.linmodems.org"),
                                       );
 
                         if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
-                            $driver =~ /^Hcf:/ and $type = "hcfmodem";
+                            $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
                             $driver =~ /^Hsf:/ and $type = "hsfmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
                             #- we may need a better agreement to use list_modules::category2modules('network/slmodem')
