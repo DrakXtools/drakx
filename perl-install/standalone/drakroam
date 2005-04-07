@@ -269,6 +269,7 @@ sub UpdateStatus() {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
 	}
 	foreach (run_program::get_stdout($route)) {
+		#- FIXME: use timeout for DNS resolution, factorize with activefw.pm
 		if (/^0.0.0.0\s*(\S*)\s/) { $CurrentGW = gethostbyaddr(inet_aton($1), AF_INET) }
 		else { $CurrentGW = "---.---.---.---" }
 	}
