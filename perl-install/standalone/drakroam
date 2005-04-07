@@ -33,11 +33,12 @@ use run_program;
 use Glib qw(TRUE FALSE);
 use ugtk2 qw(:create :helpers :wrappers);
 use Gtk2::SimpleList;
+use Socket;
 
 require_root_capability();
 
 # global settings
-my $route = '/sbin/route';
+my $route = '/sbin/route -n';
 my $IWList = '/sbin/iwlist';
 my $IWConfig = '/sbin/iwconfig';
 my $IFConfig = '/sbin/ifconfig';
@@ -266,7 +267,7 @@ sub UpdateStatus() {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
 	}
 	foreach (run_program::get_stdout($route)) {
-		if (/default\s*(\S*)\s/) { $CurrentGW = $1 }
+		if (/^0.0.0.0\s*(\S*)\s/) { $CurrentGW = gethostbyaddr(inet_aton($1), AF_INET) }
 		else { $CurrentGW = "---.---.---.---" }
 	}
 	$NetLabel->set_text(N("Network: %s",  $CurrentNet));
