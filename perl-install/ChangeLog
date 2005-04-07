@@ -1,5 +1,27 @@
 2005/04/07  Olivier Blin <oblin at mandrakesoft.com>
 
+	* mdk-stage1/probing.h, mdk-stage1/thirdparty.c, mdk-stage1/probing.c: 
+	  - add probing_detect_devices() to keep existing pci devices in an
+	array
+	  - allow to use external third-party pcitable
+	  - modules in to_detect (thirdparty install) are now compared to
+	external third-par ty pcitable first, then to built-in pcitable
+
+	* network/netconnect.pm: always restart slmodem, even if it was already
+	installed
+
+2005/04/07  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: handle third party
+	modules from various devices
+	(at least floppy is still working :)
+
+2005/04/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-21mdk
+
+2005/04/07  Olivier Blin <oblin at mandrakesoft.com>
+
 	* standalone/drakroam: add some comment
 	hide roaming frame by default, not tested
 	don't truncate default gateway (#15247)
@@ -48433,7 +48455,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1032 2005/04/06 15:10:33 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1033 2005/04/07 18:33:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
