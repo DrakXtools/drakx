@@ -75,7 +75,7 @@ sub bg_command_as_root {
 
 sub user_run_interface_command {
     my ($command, $intf) = @_;
-    if (system("usernetctl $intf report") == 0) {
+    if (system("/usr/sbin/usernetctl $intf report") == 0) {
         run_program::raw({ detach => 1 }, $command, $intf);
     } else {
         bg_command_as_root($command, $intf);
