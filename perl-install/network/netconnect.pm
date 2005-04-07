@@ -541,14 +541,14 @@ Take a look at http://www.linmodems.org"),
                         my $type;
 
                         my %pkgs2path = (
-                                         hcfpcimodem => "/usr/sbin/hcfpciconfig",
-                                         hsflinmodem => "/usr/sbin/hsfconfig",
+                                         hcfmodem => "/usr/sbin/hcfpciconfig",
+                                         hsfmodem => "/usr/sbin/hsfconfig",
                                          ltmodem => "/etc/devfs/conf.d/ltmodem.conf",
                                          slmodem => "/usr/sbin/slmodemd",
                                         );
 
                         my %devices = (ltmodem => '/dev/ttyS14',
-                                       hsflinmodem => '/dev/ttySHSF0',
+                                       hsfmodem => '/dev/ttySHSF0',
                                        slmodem => '/dev/ttySL0'
                                       );
 
