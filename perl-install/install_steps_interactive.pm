@@ -765,10 +765,11 @@ sub afterInstallPackages($) {
     $o->SUPER::afterInstallPackages;
 }
 
-sub updateModulesFromFloppy {
-    my ($o) = @_;
-    $o->ask_okcancel('', N("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}), 1) or return;
-    $o->SUPER::updateModulesFromFloppy;
+sub updatemodules {
+    my ($o, $dev, $rel_dir) = @_;
+
+    $o->ask_okcancel('', N("Please ensure the Update Modules media is in drive %s", $dev), 1) or return;
+    $o->SUPER::updatemodules($dev, $rel_dir);
 }
 
 #------------------------------------------------------------------------------

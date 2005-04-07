@@ -596,8 +596,7 @@ GridHeight=70
     push @{$o->{waitpids}}, run_program::raw({ root => $o->{prefix}, detach => 1 }, "update-menus", "-n");
 
     if ($o->{updatemodules}) {
-	$o->{updatemodules} = detect_devices::floppy() or die N("No floppy drive available");
-	$o->updateModulesFromFloppy;
+	$o->updatemodules($ENV{THIRDPARTY_DEVICE}, $ENV{THIRDPARTY_DIR});
     }
 }
 
@@ -613,21 +612,28 @@ sub install_urpmi {
     }
 }
 
-sub updateModulesFromFloppy {
-    my ($o) = @_;
+sub updatemodules {
+    my ($_o, $dev, $rel_dir) = @_;
     return if $::testing;
 
-    fs::mount(devices::make($o->{updatemodules}), "/floppy", "ext2", 0);
+    $dev = devices::make($dev) or log::l("updatemodules: bad device $dev"), return;
+
+    my $mount_dir = '/updatemodules';
+    find {
+	eval { fs::mount($dev, $mount_dir, $_, 0); 1 };
+    } 'ext2', 'vfat' or log::l("updatemodules: can't mount $dev"), return;
+
+    my $dir = "$mount_dir$rel_dir";
     foreach my $kernel_version (all("$::prefix/lib/modules")) {
 	log::l("examining updated modules for kernel $kernel_version");
-	-d "/floppy/$kernel_version" or next;
+	-d "$dir/$kernel_version" or next;
 	log::l("found updatable modules");
-	run_program::run("cd /floppy/$kernel_version ; find -type f | cpio -pdu $::prefix/lib/modules/$kernel_version");
+	run_program::run("cd $dir/$kernel_version ; find -type f | cpio -pdu $::prefix/lib/modules/$kernel_version");
 	run_program::rooted($::prefix, 'depmod', '-a', '-F', "/boot/System.map-$kernel_version", $kernel_version);
     }
 
     my $category;
-    foreach (cat_('/floppy/to_load')) {
+    foreach (cat_("$dir/to_load")) {
 	chomp;
 	if (/^#/) {
 	    ($category) = $1 if /\[list_modules: (.*?)\]/;
@@ -641,7 +647,7 @@ sub updateModulesFromFloppy {
 	}
     }
 
-    fs::umount("/floppy");
+    fs::umount($mount_dir);
 }
 
 #------------------------------------------------------------------------------
