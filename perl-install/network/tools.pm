@@ -55,12 +55,12 @@ sub passwd_by_login {
 
 sub connect_backend {
     my ($netc) = @_;
-    run_program::rooted($::prefix, "ifup $netc->{NET_INTERFACE} &");
+    run_program::rooted({ detach => 1, root => $::prefix }, "ifup", $netc->{NET_INTERFACE});
 }
 
 sub disconnect_backend {
     my ($netc) = @_;
-    run_program::rooted($::prefix, "ifdown $netc->{NET_INTERFACE} &");
+    run_program::rooted({ detach => 1, root => $::prefix }, "ifdown", $netc->{NET_INTERFACE});
 }
 
 sub bg_command_as_root {
@@ -76,7 +76,7 @@ sub bg_command_as_root {
 sub user_run_interface_command {
     my ($command, $intf) = @_;
     if (system("usernetctl $intf report") == 0) {
-        run_program::run("$command $intf &");
+        run_program::raw({ detach => 1 }, $command, $intf);
     } else {
         bg_command_as_root($command, $intf);
     }
