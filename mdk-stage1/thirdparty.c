@@ -31,7 +31,6 @@
 #include "thirdparty.h"
 
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
-#define THIRDPARTY_DIRECTORY "/install/thirdparty"
 
 static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 {
@@ -275,7 +274,12 @@ static enum return_type thirdparty_try_directory(char * root_directory, int inte
 	if (!modules_list || !modules_list[0]) {
 		modules_location[strlen(root_directory)] = '\0';
 		modules_list = list_directory(modules_location);
-	}
+		if (interactive)
+			add_to_env("THIRDPARTY_DIR", "");
+	} else {
+		if (interactive)
+			add_to_env("THIRDPARTY_DIR", THIRDPARTY_DIRECTORY);
+        }
 
 	log_message("third party: using modules location %s", modules_location);
 
@@ -340,6 +344,7 @@ void thirdparty_load_modules(void)
 	}
 
 	log_message("third party: using device %s", device);
+	add_to_env("THIRDPARTY_DEVICE", device);
 
 	results = thirdparty_try_directory(THIRDPARTY_MOUNT_LOCATION, 1);
 	umount(THIRDPARTY_MOUNT_LOCATION);

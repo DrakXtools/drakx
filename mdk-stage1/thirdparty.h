@@ -16,6 +16,8 @@
 #ifndef _THIRDPARTY_H_
 #define _THIRDPARTY_H_
 
+#define THIRDPARTY_DIRECTORY "/install/thirdparty"
+
 /* load third party modules present on install media
  * use to_load and to_detect files in /install/thirdparty
  * do not prompt user
