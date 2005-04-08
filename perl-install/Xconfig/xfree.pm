@@ -28,6 +28,14 @@ sub read_and_prepare_write {
     if (my ($Keyboard) = $raw_X->get_InputDevices('Keyboard')) {
 	$Keyboard->{Driver}{val} = 'keyboard';
     }
+
+    #- ugly hack to fix empty ModeLine lines, XFdrake seems to generate some, but where???
+    #- at least this allows fixing the pb by re-running XFdrake 
+    foreach ($raw_X->get_Sections('Monitor')) {
+	my $l = $_->{ModeLine} or next;
+	@$l = grep { $_->{val} } @$l;
+    }
+
     $raw_X, $before;
 }
 sub read {
