@@ -240,8 +240,14 @@ sub packagesToInstall {
 
 sub allMediums {
     my ($packages) = @_;
-    sort { $a <=> $b } keys %{$packages->{mediums}};
+    sort {
+	#- put supplementary media at the end
+	my @x = ($a, $b);
+	foreach (@x) { /(\d+)s/ and $_ = 100 + $1 }
+	$x[0] <=> $x[1];
+    } keys %{$packages->{mediums}};
 }
+
 sub mediumDescr {
     my ($packages, $medium_name) = @_;
     $packages->{mediums}{$medium_name}{descr};
