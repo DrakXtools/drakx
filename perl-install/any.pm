@@ -849,7 +849,6 @@ sub report_bug {
       header("lilo.conf"), cat_("$::prefix/etc/lilo.conf"),
       header("menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
       header("XF86Config"), cat_("$::prefix/etc/X11/XF86Config"),
-      header("XF86Config-4"), cat_("$::prefix/etc/X11/XF86Config-4"),
       header("/etc/modules"), cat_("$::prefix/etc/modules"),
       header("sysconfig/i18n"), cat_("$::prefix/etc/sysconfig/i18n"),
       map_index { even($::i) ? header($_) : $_ } @other;
