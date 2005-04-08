@@ -1,3 +1,14 @@
+2005/04/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: add some comments for post 10.2
+
+2005/04/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: do the edid probe before launching X server (the way it was
+	already done for i810fb)
+
+	* any.pm: XF86Config-4 doesn't exist anymore, no need logging it
+
 2005/04/07  Olivier Blin <oblin at mandrakesoft.com>
 
 	* mdk-stage1/probing.h, mdk-stage1/thirdparty.c, mdk-stage1/probing.c: 
@@ -48455,7 +48466,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1033 2005/04/07 18:33:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1034 2005/04/07 21:16:31 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
