@@ -712,8 +712,8 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     };
     foreach my $k (pkgs::allMediums($o->{packages})) {
 	my $m = $o->{packages}{mediums}{$k};
-	#- don't copy rpms of supplementary media, except suppl CDs
-	next if $m->{issuppl} && $m->{medium} !~ /^\d+s$/;
+	#- don't copy rpms of supplementary media
+	next if $m->{issuppl};#- && $m->{medium} !~ /^\d+s$/; XXX handle suppl CDs
 	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
