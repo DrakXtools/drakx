@@ -241,7 +241,7 @@ our @tree =
       detector => sub { 
           require network::adsl;
           my $a = network::adsl::adsl_detect();
-          $a ? f(grep { @$_ } values %$a) : ();
+          $a ? f(map { @$_ } grep { defined($_) } values %$a) : ();
       },
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
