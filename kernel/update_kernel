@@ -24,7 +24,7 @@ if (@ARGV) {
     update_kernel_from_repository($RPMS, '2.6', 0);
     update_kernel_from_repository($RPMS, '2.6', 1);
 #    update_kernel_from_repository($RPMS, '2.4', 1);
-    install_kernel(glob("$RPMS/kernel-xbox*"), 1);
+    install_kernel(glob("$RPMS/kernel-xbox*"), 1) if arch() =~ /i.86/;
 }
 
 
