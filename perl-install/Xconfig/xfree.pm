@@ -350,7 +350,7 @@ sub add_gtf_ModeLines {
     my $res = $resolution->{X} . 'x' . $resolution->{Y};
     my @to_add;
     if ($res ne '1280x1024' && 
-	  ($res eq '1400x1050' || $Xconfig::xfree::resolution2ratio{$res} ne '4/3')) {
+	  ($res eq '1400x1050' || $res eq '1152x864' || $Xconfig::xfree::resolution2ratio{$res} ne '4/3')) {
 	@to_add = map {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'gtf', $resolution->{X}, $resolution->{Y}, $_);
 	    if (my ($name, $val) = $s =~ /ModeLine\s*"(.*)"(.*)/i) {
