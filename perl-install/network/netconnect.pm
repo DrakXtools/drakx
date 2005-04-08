@@ -919,6 +919,7 @@ If you do not know, choose 'use PPPoE'"),
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
                          if_($adsl_type ne "capi",
+                             #- FIXME: take the VPI/VCI settings as decimal, not hex
                              { label => N("Virtual Path ID (VPI):"), val => \$netc->{vpi}, advanced => 1 },
                              { label => N("Virtual Circuit ID (VCI):"), val => \$netc->{vci}, advanced => 1 }
                             ),
@@ -930,6 +931,7 @@ If you do not know, choose 'use PPPoE'"),
                         ];
                     },
                     post => sub {
+                        #- FIXME: update ATMADDR
                         $netc->{internet_cnx_choice} = 'adsl';
                         network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx); #FIXME
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
