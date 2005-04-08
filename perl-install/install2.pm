@@ -324,6 +324,8 @@ sub exitInstall {
 }
 
 sub start_i810fb() {
+    # keep the result otherwise monitor-edid does not return good results afterwards
+    eval { any::monitor_full_edid() };
 
     my ($vga) = cat_('/proc/cmdline') =~ /vga=(\S+)/;
     return if !$vga || listlength(cat_('/proc/fb'));
@@ -334,7 +336,6 @@ sub start_i810fb() {
     log::l("trying to load i810fb module with xres <$xres> (vga was <$vga>)");
     eval { modules::load('intel-agp') };
     eval {
-	any::monitor_full_edid(); # keep the result otherwise monitor-edid does not return good results afterwards
 	my $opt = "xres=$xres hsync1=32 hsync2=48 vsync1=50 vsync2=70 vram=2 bpp=16 accel=1 mtrr=1"; #- this sucking i810fb does not accept floating point numbers in hsync!
 	modules::load_with_options([ 'i810fb' ], { i810fb => $opt }); 
     };
