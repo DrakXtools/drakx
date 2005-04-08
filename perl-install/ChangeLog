@@ -2,6 +2,36 @@
 
 	* harddrake/data.pm: with harddrake crash with USB/PCI DSL modems (#15034)
 
+2005/04/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: ugly hack to fix empty ModeLine lines, XFdrake seems
+	to generate some, but where???
+	at least this allows fixing the pb by re-running XFdrake
+	1152x864 needs more modelines than the poor 1152x864@75Hz builtin xorg
+	(bugzilla #11698)
+
+2005/04/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Supplementary cd-roms weren't marked as supplementary.
+	Fix this.
+	Don't copy rpms that come from any sort of supplementary media.
+	More heuristics to figure out the CD / DVD number from its name, used
+	for the copy of media to the local HD.
+
+	* pkgs.pm: When sorting CDs, put supplementary CDs at the end
+
+2005/04/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-22mdk
+
+2005/04/08  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: new install module
+
+2005/04/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* harddrake/data.pm: with harddrake crash with USB/PCI DSL modems (#15034)
+
 	* network/netconnect.pm: add some comments for post 10.2
 
 2005/04/08  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
@@ -48506,7 +48536,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1035 2005/04/08 11:36:05 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1036 2005/04/08 15:23:47 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
