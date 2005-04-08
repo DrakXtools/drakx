@@ -474,7 +474,12 @@ sub selectSupplMedia {
 		useMedium($medium_name);
 
 		#- probe for an hdlists file and then look for all hdlists listed herein
-		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom", $o->{packages}, $medium_name) };
+		eval {
+		    pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom", $o->{packages}, $medium_name, sub {
+			my ($supplmedium) = @_;
+			$supplmedium->{issuppl} = 1;
+		    });
+		};
 		log::l("psUsingHdlists failed: $@") if $@;
 
 		#- copy latest compssUsers.pl and rpmsrate somewhere locally
