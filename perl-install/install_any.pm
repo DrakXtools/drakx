@@ -85,13 +85,19 @@ sub askChangeMedium($$) {
     $allow;
 }
 
-#- guess the CD number from a media description
+#- guess the CD number from a media description.
+#- XXX lots of heuristics here, must design this properly
 sub getCDNumber {
     my ($description) = @_;
     (my $cd) = $description =~ /\b(?:CD|DVD) ?(\d+)\b/i;
+    if (!$cd) { #- test for single unnumbered DVD
+	$cd = 1 if $description =~ /\bDVD\b/i;
+    }
     if (!$cd) { #- test for mini-ISO
 	$cd = 1 if $description =~ /\bmini.?cd\b/i;
     }
+    #- don't mix suppl. cds with regular ones
+    if ($description =~ /suppl/i) { $cd += 100 }
     $cd;
 }
 
