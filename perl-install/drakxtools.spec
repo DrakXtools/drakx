@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 21mdk
+Release: 22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-22mdk
+- drakconnect: always restart slmodem, even if it was already
+  installed (blino)
+- harddrake: fix harddrake crash with USB/PCI DSL modems (blino, #15034)
+
 * Thu Apr  7 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-21mdk
 - drakconnect (blino):
   o fix support for fix h[cs]f modems
