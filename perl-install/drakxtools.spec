@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 22mdk
+Release: 23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Apr 11 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-23mdk
+- drakconnect (blino):
+  o fix error reporting for ndiswrapper package installation (#15373)
+  o handle spaces in ndiswrapper drivers path
+- XFdrake (pixel):
+  o fix empty ModeLine lines
+  o 1152x864 needs more modelines than the poor 1152x864@75Hz builtin
+    xorg (#11698)
+
 * Fri Apr  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-22mdk
 - drakconnect: always restart slmodem, even if it was already
   installed (blino)
