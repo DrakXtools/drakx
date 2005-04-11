@@ -1127,7 +1127,7 @@ notation (for example, 1.2.3.4).")),
                         }
                         if ($ndiswrapper_driver eq N("Install a new driver")) {
                             if ($ndiswrapper_inf_file = $in->ask_file(N("Please select the Windows driver (.inf file)"), "/mnt/cdrom")) {
-                                    return system("ndiswrapper -i $ndiswrapper_inf_file");
+                                    return system('ndiswrapper', '-i', $ndiswrapper_inf_file);
                             }
                             return 1;
                         }
