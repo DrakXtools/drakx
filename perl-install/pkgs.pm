@@ -208,7 +208,6 @@ sub bestKernelPackage {
       is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
       !detect_devices::has_cpu_flag('pae') ? ('-i686-up-4GB', '-i586-up-1GB') :
-      detect_devices::BIGMEM() ? ('-enterprise', '-smp') : 
       detect_devices::hasSMP() ? '-smp' : 
       '';
     foreach my $prefered_ext (@prefered_exts, '') {
