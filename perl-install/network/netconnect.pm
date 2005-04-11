@@ -1121,7 +1121,7 @@ notation (for example, 1.2.3.4).")),
                             list => [ N("Install a new driver"), N("Use already installed driver (%s)", join(", ", network::tools::ndiswrapper_installed_drivers())) ] } ];
                     },
                     complete => sub {
-                        if ($in->do_pkgs->ensure_is_installed_if_available('ndiswrapper', '/usr/sbin/ndiswrapper')) {
+                        unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
                             return 1;
                         }
