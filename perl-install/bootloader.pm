@@ -179,9 +179,10 @@ sub read {
 	if ($type eq $main_method) {
 	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
 
-	    if (my $default = find { $_ && $_->{append} } (@prefered_entries, @{$bootloader->{entries}})) {
+	    if (my $default = find { $_ && $_->{type} eq 'image' } (@prefered_entries, @{$bootloader->{entries}})) {
 		$bootloader->{default_vga} = $default->{vga};
 		$bootloader->{perImageAppend} ||= $default->{append};
+		log::l("perImageAppend is now $bootloader->{perImageAppend}");
 	    }
 	    return $bootloader;
 	}
