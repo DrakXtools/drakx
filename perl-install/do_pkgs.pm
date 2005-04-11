@@ -41,8 +41,10 @@ sub ensure_binary_is_installed {
 
 sub ensure_is_installed_if_available {
     my ($do, $pkg, $file) = @_;
-    if (! -e "$::prefix$file" && !$::testing) {
-        $do->what_provides($pkg) and $do->install($pkg);
+    if (-e "$::prefix$file" || $::testing) {
+	1;
+    } else {
+        $do->what_provides($pkg) && $do->install($pkg);
     }
 }
 
