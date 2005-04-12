@@ -445,8 +445,7 @@ CAT_GAMES
     5 armagetron csmash
       !HW"Riva.*128" chromium tuxracer
 
-    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)"
-        bzflag
+    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" bzflag
 
 CAT_DEVELOPMENT
   5 autoconf2.1 automake1.4 m4 make 
@@ -651,13 +650,11 @@ CAT_SYSTEM
   5 DRIVER"^LT:|slamr|slusb|^Hcf:|^Hsf:" ppp
       CAT_KDE kdenetwork-kppp
   5 DRIVER"^LT:" ltmodem
-  5 HW"OmniKey Cardman"
-     cm2020
+  5 HW"OmniKey Cardman" cm2020
      SMP cm2020-smp
      HIGH_SECURITY cm2020-secure
      BIGMEM cm2020-enterprise
-  5 DRIVER"a320raid"
-     a320raid-kernel
+  5 DRIVER"a320raid" || HW"HostRAID" a320raid-kernel
      SMP a320raid-kernelsmp
 
   5 CAT_KDE || CAT_GNOME gnome-volume-manager
