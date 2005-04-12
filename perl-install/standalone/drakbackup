@@ -860,16 +860,18 @@ sub build_tape() {
 	}	
 	
 	#- try to roll to the end of the data if we're not erasing
+	$command = "mt -f $conf{TAPE_DEVICE} rewind";
+	# if we're using the rewinding device, change modes briefly
+	if (!$conf{TAPE_NOREWIND}) {
+		$conf{TAPE_DEVICE} =~ s|/st|/nst|;
+	}
 	if (!$conf{MEDIA_ERASE}) {
-		$command = "mt -f $conf{TAPE_DEVICE} rewind";
 		spawn_progress($command, "Rewind to find tape label");
 		$command = "tar -tf $conf{TAPE_DEVICE}";
 		spawn_progress($command, "Check for label");
 		if ($log_buff =~ /drakbackup.label/) {
-			if ($conf{TAPE_NOREWIND}) {
-				$command = "mt -f $conf{TAPE_DEVICE} rewind";
-				spawn_progress($command, "Rewind to get tape label");
-			}
+			$command = "mt -f $conf{TAPE_DEVICE} rewind";
+			spawn_progress($command, "Rewind to get tape label");
 			$command = "tar -C $cfg_dir -xf $conf{TAPE_DEVICE}";
 			spawn_progress($command, "Reading tape label");		
 			my @volname = cat_("$cfg_dir/drakbackup.label");
@@ -879,22 +881,19 @@ sub build_tape() {
 		$command = "mt -f $conf{TAPE_DEVICE} eod"; 
 		spawn_progress($command, "Running mt to find eod");
 	} else {
-		$command = "mt -f $conf{TAPE_DEVICE} rewind"; 
 		spawn_progress($command, "Running mt to rewind");		
 		# make a tape label for the catalog
-		# if we're using the rewinding device, change modes briefly
-		if (!$conf{TAPE_NOREWIND}) {
-			$conf{TAPE_DEVICE} =~ s|/st|/nst|;
-		}
 		$vol_name = "Drakbackup" . $the_time;
 		my $f = "$cfg_dir/drakbackup.label";
 		output($f, $vol_name);
 		$command = "tar -C $cfg_dir -cf $conf{TAPE_DEVICE} drakbackup.label;";
 		spawn_progress($command, "Creating tape label");
 		unlink $f;
-		if (!$conf{TAPE_NOREWIND}) {
-			$conf{TAPE_DEVICE} =~ s|/nst|/st|;
-		}
+
+	}
+	# restore device setup
+	if (!$conf{TAPE_NOREWIND}) {
+		$conf{TAPE_DEVICE} =~ s|/nst|/st|;
 	}
 	
 	#- do the backup
@@ -3725,10 +3724,9 @@ sub find_tape_offset {
 	# always off by 1 for tape label.
 	my $offset = 1;
 	foreach (@catalog) {
-		if (index($_, $label)) {
-			if (!index($_, $cat_entry)) {
-				# tar seems to need 2 of these to get located
-				$offset++;
+		chomp;
+		if (index($_, $label) > 0) {
+			if ($_ ne $cat_entry) {
 				$offset++;
 			} else {
 				return $offset;
