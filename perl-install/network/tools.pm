@@ -55,12 +55,12 @@ sub passwd_by_login {
 
 sub connect_backend {
     my ($netc) = @_;
-    run_program::rooted({ detach => 1, root => $::prefix }, "ifup", $netc->{NET_INTERFACE});
+    run_program::rooted({ detach => 1, root => $::prefix }, "/sbin/ifup", $netc->{NET_INTERFACE});
 }
 
 sub disconnect_backend {
     my ($netc) = @_;
-    run_program::rooted({ detach => 1, root => $::prefix }, "ifdown", $netc->{NET_INTERFACE});
+    run_program::rooted({ detach => 1, root => $::prefix }, "/sbin/ifdown", $netc->{NET_INTERFACE});
 }
 
 sub bg_command_as_root {
