@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 23mdk
+Release: 24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Apr 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-24mdk
+- drakconnect: fix connection establishment (rafael)
+
 * Mon Apr 11 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-23mdk
 - drakconnect (blino):
   o fix error reporting for ndiswrapper package installation (#15373)
