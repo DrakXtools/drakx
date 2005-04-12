@@ -1017,6 +1017,7 @@ sub install_urpmi {
                 $removable_device = '/dev/cdrom';
 		my $p; $p = fs::get::mntpoint2part("/tmp/image", $::o->{fstab})
 		    and $removable_device = $p->{device};
+		$_->{static} = 1;
             }
 
 	    #- build a list file if needed.
@@ -1091,7 +1092,8 @@ sub install_urpmi {
   list: list.$name" : "") . (keys(%{$_->{key_ids}}) ? "
   key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . (defined $removable_device && "
   removable: $removable_device") . ($_->{update} ? "
-  update" : "") . "
+  update" : "") . ($_->{static} ? "
+  static" : "") . "
 }
 
 ";
