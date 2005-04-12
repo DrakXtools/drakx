@@ -253,7 +253,7 @@ arch() =~ /^sparc/ ? (
  "kr" => [ N_("_: keyboard\nKorean"),          "us",             "us",    1 ],
 # TODO: console map
  "ku" => [ N_("_: keyboard\nKurdish (arabic script)"), "us",     "ku",    1 ],
- "ky" => [ N_("_: keyboard\nKirghiz"),         "ky",             "ky",    1 ],
+ "ky" => [ N_("_: keyboard\nKyrgyz"),          "ky",             "ky",    1 ],
  "la" => [ N_("_: keyboard\nLatin American"), "la-latin1",       "la",    0 ],
 # TODO: console map
  "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "lo",    1 ], 
