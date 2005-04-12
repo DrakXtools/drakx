@@ -133,7 +133,7 @@ sub real_main {
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
           require list_modules; #- FIXME: check if useful
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
-            grep { to_bool($is_wireless) == c::isNetDeviceWirelessAware($_->[0]) } @all_cards;
+            grep { to_bool($is_wireless) == detect_devices::is_wireless_interface($_->[0]) } @all_cards;
       };
 
       my $find_lan_module = sub { 

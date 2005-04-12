@@ -563,16 +563,22 @@ sub is_lan_interface {
     $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0|wifi)/;
 }
 
+sub is_wireless_interface {
+    my ($interface) = @_;
+    #- some wireless drivers don't always support the SIOCGIWNAME ioctl
+    #-   ralink devices need to be up to support it
+    #-   wlan-ng (prism2_*) need some special tweaks to support it
+    #- use sysfs as fallback to detect wireless interfaces,
+    #- i.e interfaces for which get_wireless_stats() is available
+    c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
+}
+
 sub getNet() {
-    my @net_devices = grep { is_lan_interface($_) }
+    grep { is_lan_interface($_) }
       uniq(
            (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
           );
-    #- enable interfaces if get_wireless_stats() is available
-    #- needed for some drivers (Ralink) to be able to detect it is wireless aware
-    c::enable_net_device($_) foreach grep { -d "/sys/class/net/$_/wireless" } @net_devices;
-    @net_devices;
  }
 
 #sub getISDN() {
@@ -873,7 +879,7 @@ sub matching_type {
     if ($type =~ /laptop/i) {
         return isLaptop();
     } elsif ($type =~ /wireless/i) {
-        return any { c::isNetDeviceWirelessAware($_) } getNet();
+        return any { is_wireless_interface($_) } getNet();
     }
 }
 

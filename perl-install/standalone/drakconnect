@@ -292,7 +292,7 @@ sub build_tree {
     }
     else {
 	#- ethernet is default
-	$intf->{pages} = { 'TCP/IP' => 1, 'DHCP' => 1, if_(c::isNetDeviceWirelessAware($intf->{DEVICE}), 'Wireless' => 1), 'Options' => 1, 'Information' => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'DHCP' => 1, if_(detect_devices::is_wireless_interface($intf->{DEVICE}), 'Wireless' => 1), 'Options' => 1, 'Information' => 1 };
     }
 }
 
