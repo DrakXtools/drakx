@@ -39,10 +39,10 @@ label save_all
   append initrd=all.rdz $common_para save_all
 label rest_all
   kernel vmlinuz
-  append initrd=all.rdz keepmounted rest_all
+  append initrd=all.rdz $common_para rest_all keepmounted
 label rescue
   kernel vmlinuz
-  append initrd=all.rdz
+  append initrd=all.rdz $common_para
 EOF
 
     if [ $action = rest_all ]; then
