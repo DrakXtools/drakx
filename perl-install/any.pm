@@ -682,15 +682,17 @@ sub autologin {
 	$o->{desktop} = 'KDE';
 	$o->{autologin} = $users[0];
     } elsif (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
-	my $use_autologin = @users == 1;
+	my $use_autologin = bool2yesno(@users == 1);
 
 	$in->ask_from_(
 		       { title => N("Autologin"),
 			 messages => N("I can set up your computer to automatically log on one user.") },
-		       [ { label => N("Do you want to use this feature?"), val => \$use_autologin, type => 'bool' },
+		       [ { label => N("Do you want to use this feature?"), val => \$use_autologin, type => 'list', list => [ N_("Yes"), N("No") ],
+                     format => sub { translate($_[0]) },  gtk => { use_boxradio => 1 } },
 			 { label => N("Choose the default user:"), val => \$o->{autologin}, list => \@users, disabled => sub { !$use_autologin } },
 			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm, disabled => sub { !$use_autologin } } ]
 		      );
+	$use_autologin = to_bool($use_autologin);
 	delete $o->{autologin} if !$use_autologin;
     } else {
 	delete $o->{autologin};
