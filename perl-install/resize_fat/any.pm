@@ -110,7 +110,6 @@ sub flag_clusters {
 	} else { return }
 
 	my $nb = resize_fat::c_rewritten::checkFat($cluster, $type, "$curr_dir_name/$entry->{name}");
-	print "resize_fat:flag_clusters: check fat returned $nb of type $type for $curr_dir_name/$entry->{name}\n";
 	$nb_dirs += $nb if $type == $DIRECTORY;
 	0;
     };
