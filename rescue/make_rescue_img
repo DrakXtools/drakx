@@ -41,9 +41,9 @@ sub install_l {
 
 sub installown($$) {
     my ($own, $dir) = @_;
-    return if -e "$tmp$dir$own";
+    return if -e "$tmp$dir/" . basename($own);
     mkdir_p("$tmp$dir");
-    _ "cp -a $own $tmp$dir";
+    _ "cp $own $tmp$dir";
 }
 
 _ "$sudo rm -rf $tmp" if -e $tmp;
@@ -113,20 +113,39 @@ installown("../mdk-stage1/dhcp-client", "/usr/sbin");
 __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 if ($ENV{PARTIMAGE_DIR}) {
+
+    my $perl_install = "../perl-install";
+    foreach (`strace -efile perl -cw -I $perl_install partimage_whole_disk 2>&1`) {
+	my ($f) = /^open\("(.*?)",.*\)\s*=\s*\d+$/ or next;
+	if ($f =~ s!^\Q$perl_install/!!) {
+	    installown("$perl_install/$f", dirname("/usr/lib/libDrakX/$f"));
+	} elsif ($f =~ m!^/dev/! || $f eq 'partimage_all_disk') {
+	    # skip
+	} else {
+	    installown($f, dirname($f));
+	}
+    }
+    installown('partimage_whole_disk', '/usr/sbin');
+
     _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
     my $server = 'partimaged';
+    $server = 'leia';
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
-      drvinst ; dhcp-client ; partimage -s $server -b save_all $ENV{PARTIMAGE_DIR}; reboot
+      drvinst ; dhcp-client ; partimage_whole_disk save_all $ENV{PARTIMAGE_DIR} $server
+      echo "Press enter"
+      read
   fi
   if grep -q rest_all /proc/cmdline; then
       local=/tmp/image$ENV{PARTIMAGE_DIR}
       if [ -d \$local ]; then
-          partimage -b rest_all \$local; reboot
+          partimage_whole_disk rest_all \$local
       else
-          drvinst ; dhcp-client ; partimage -s $server -b rest_all $ENV{PARTIMAGE_DIR}; reboot
+          drvinst ; dhcp-client ; partimage_whole_disk rest_all $ENV{PARTIMAGE_DIR} $server
       fi
+      echo "Press enter"
+      read
   fi
 EOF
     } "$tmp/etc/rc.sysinit";

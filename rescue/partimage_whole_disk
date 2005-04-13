@@ -1,0 +1,133 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX ../perl-install);
+use standalone;
+use fsedit;
+use fs::format;
+use fs::type;
+use resize_fat::main;
+use diskdrake::resize_ntfs;
+use common;
+use partition_table::empty;
+use Carp::Heavy;
+
+#- help getting the file in make_rescue_img
+BEGIN { partition_table::raw::default_type() }
+
+my ($action, $dir, $server) = @ARGV;
+
+sub usage() { die "partimage_whole_disk <save_all | rest_all> <dir> [<server>]\n" }
+@ARGV == 2 || @ARGV == 3 or usage();
+
+$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+log::openLog("/var/log/partimage_whole_disk.log");
+my @partimage_cmd = ('partimage', if_($server, '-s', $server));
+my $all_hds = fsedit::get_hds({});
+
+if ($action eq 'save_all') {
+    save_all();
+} elsif ($action eq 'rest_all') {
+    rest_all();
+} else {
+    usage();
+}
+
+sub save_all() {
+    my $hd = $all_hds->{hds}[0] or die "no main hard drive\n";
+    log::l("save_all on $hd->{device}");
+    my $part_list = [ partition_table::get_normal_parts($hd) ];
+
+    foreach (@$part_list) {
+	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap');
+	if ($_->{saved}) {
+	    run_program::run_or_die(@partimage_cmd,
+				    '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
+				    'save', devices::make($_->{device}), "$dir/$_->{device}");
+	}
+    }
+    save_part_list($part_list);
+}
+sub rest_all() {
+    my $part_list = read_part_list();
+    fs::type::set_fs_type($_, $_->{fs_type}) foreach @$part_list;
+
+    my @used_hds;
+    foreach my $part (@$part_list) {
+	if (my $hd = find { $part->{device} =~ /^\Q$_->{device}\E./ } fs::get::hds($all_hds)) {
+	    push @used_hds, $hd;
+	    put_in_hash($part, partition_table::hd2minimal_part($hd));
+	}
+    }
+
+    my ($from_partimage, $other) = partition { $_->{saved} } @$part_list;
+    my ($from_resize, $created) = partition { member($_->{fs_type}, 'vfat', 'ntfs') } @$other;
+
+    foreach (@$from_resize) {
+	#- resize first
+	my $part = fs::get::device2part($_->{device}, [ fs::get::fstab($all_hds) ]) or log::l("partition to resize is missing ($_->{device})"), next;
+	$_->{fs_type} eq $_->{fs_type} or log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})"), next;
+
+	$_->{start} = $part->{start};
+	if ($_->{size} < $part->{size}) {
+	    log::l("resizing $_->{device} to $_->{size} (it is $part->{size})");
+	    my $resize_pkg = $_->{fs_type} eq 'vfat' ? 'resize_fat::main' : 'diskdrake::resize_ntfs';
+	    my $resize = $resize_pkg->new($_->{device}, devices::make($_->{device}));
+	    $resize->resize($_->{size});
+	} else {
+	    log::l("no need to resize $_->{device} since $_->{size} >= $part->{size}");
+	}
+    }
+
+    foreach my $hd (uniq(@used_hds)) {
+#	put_in_hash($hd->{geom}, { heads => 240, sectors => 63 });
+
+	#- write the partition table
+	partition_table::raw::zero_MBR($hd);
+	foreach my $part (grep { $_->{rootDevice} eq $hd->{device} } @$part_list) {
+
+	    my $hole = find { isEmpty($_) && $_->{size} >= $part->{size} } partition_table::get_normal_parts_and_holes($hd) or die "not enough room";
+	    $part->{start} = $hole->{start};
+	    
+	    log::l("handling $part->{device}");
+	    my $extended = $part->{device} =~ /(\d+)$/ && $1 > 4 && $hd->hasExtended;
+
+	    my %wanted_part = %$part;
+	    if ($extended || $part->{start} == 1) {
+		$part->{size} += $hd->{geom}{sectors};
+	    }
+	    partition_table::add($hd, $part, $extended && 'Extended');
+	    foreach ('device', 'size') {
+		$part->{$_} eq $wanted_part{$_} or log::l("bad $_ for $part->{device}: $part->{$_} != $wanted_part{$_}");
+	    }
+	}
+	partition_table::write($hd);
+    }
+
+    #- restore from partimage
+    foreach (@$from_partimage) {
+	run_program::run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$dir/$_->{device}");
+    }
+
+    foreach (@$created) {
+	fs::format::part_raw($_, undef);
+    }
+    
+    run_program::run('install_bootloader');
+}
+
+sub lst_fields() { qw(device size fs_type saved) }
+sub save_part_list {
+    my ($part_list) = @_;
+    my @l = map { join(' ', @$_{lst_fields()}) } @$part_list;
+    log::l("save_part_list: $_") foreach @l;
+    my $partimage = join(' ', @partimage_cmd);
+    open(my $F, "| $partimage -z0 -Bfoo=bar -o save_file $dir/.lst");
+    print $F "$_\n" foreach @l;
+}
+sub read_part_list() {
+    my $partimage = join(' ', @partimage_cmd);
+    open(my $F, "$partimage -z0 -Bfoo=bar rest_file $dir/.lst |");
+    my @l = chomp_(cat__($F));
+    log::l("read_part_list: $_") foreach @l;
+    [ map { my %l; @l{lst_fields()} = split; \%l } @l ];
+}
