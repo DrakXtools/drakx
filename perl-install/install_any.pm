@@ -937,11 +937,19 @@ sub ejectCdrom {
     my ($o_cdrom, $o_mountpoint) = @_;
     getFile("XXX"); #- close still opened filehandle
     my $cdrom;
+    my $mounts = cat_("/proc/mounts");
     if ($o_mountpoint) {
-	$cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1;
+	$cdrom = $o_cdrom || $mounts =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1;
     } else {
-	$cdrom = cat_("/proc/mounts") =~ m!((?:/dev/)?$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1;
-	$o_mountpoint ||= $cdrom ? $2 || '/tmp/image' : '';
+	my $mntpt;
+	if ($o_cdrom) {
+	    $cdrom = $mounts =~ m!((?:/dev/)?$o_cdrom)\s+(/mnt/cdrom|/tmp/image)! && $1;
+	    $mntpt = $2;
+	} else {
+	    $cdrom = $mounts =~ m!(/dev/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1;
+	    $mntpt = $2;
+	}
+	$o_mountpoint ||= $cdrom ? $mntpt || '/tmp/image' : '';
     }
     $cdrom ||= $o_cdrom;
 

@@ -966,12 +966,12 @@ Beware that some Mandrakelinux tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
 " };
-    #- wait for remainging processes.
+    #- wait for remaining processes.
     foreach (@{$o->{waitpids}}) {
 	waitpid $_, 0;
 	log::l("pid $_ returned $?");
     }
-    install_any::unlockCdrom();
+    install_any::ejectCdrom();
     install_any::log_sizes($o);
 }
 
