@@ -17,6 +17,11 @@ mkdir /mnt /var/log
 mkdir /proc
 action "Mounting proc filesystem" mount -n -t proc /proc /proc
 
+if grep -q sysfs /proc/filesystems; then
+    mkdir /sys
+    action "Mounting sysfs on /sys" mount -t sysfs none /sys
+fi
+
 >/etc/mtab
 mount -f /
 mount -f /proc
