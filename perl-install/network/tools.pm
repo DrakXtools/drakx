@@ -282,7 +282,7 @@ sub get_interface_type {
     member($interface->{TYPE}, "xDSL", "ADSL") && "adsl" ||
     $interface->{DEVICE} =~ /^ippp/ && "isdn" ||
     $interface->{DEVICE} =~ /^ppp/ && "modem" ||
-    detect_devices::is_wireless_interface($interface->{DEVICE}) && "wifi" ||
+    (detect_devices::is_wireless_interface($interface->{DEVICE}) || exists $interface->{WIRELESS_MODE}) && "wifi" ||
     detect_devices::is_lan_interface($interface->{DEVICE}) && "ethernet" ||
     "unknown";
 }
