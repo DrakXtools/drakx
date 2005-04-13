@@ -436,6 +436,15 @@ sub prep_net_suppl_media {
     sleep(3);
 }
 
+sub remountCD1 {
+    my ($o, $cdrom) = @_;
+    openCdromTray($cdrom);
+    $o->ask_warn('', N("Insert the CD 1 again"));
+    mountCdrom("/tmp/image", $cdrom);
+    log::l($@) if $@;
+    $asked_medium = 1;
+}
+
 sub selectSupplMedia {
     my ($o, $suppl_method) = @_;
     #- ask whether there are supplementary media
@@ -491,13 +500,10 @@ sub selectSupplMedia {
 		log::l("Umounting suppl. CD, back to medium 1");
 		eval { fs::umount("/mnt/cdrom") };
 		#- re-mount CD 1 if this was a cdrom install
-		if ($main_method eq 'cdrom') {
-		    openCdromTray($cdrom);
-		    $o->ask_warn('', N("Insert the CD 1 again"));
-		    mountCdrom("/tmp/image", $cdrom);
-		    log::l($@) if $@;
-		    $asked_medium = 1;
-		}
+		$main_method eq 'cdrom' and remountCD1($o, $cdrom);
+	    } else {
+		$main_method eq 'cdrom' and remountCD1($o, $cdrom);
+		return 'error';
 	    }
 	} else {
 	    my $url;
