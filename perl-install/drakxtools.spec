@@ -453,7 +453,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix sagem modem config
   o try to use the country specific CMV for sagem modems
 - harddrake:
-  o do not list hardware controllers in unknown section
+  o list hardware RAID controllers in their own section (so that they do not
+    appear in the unknown one)
   o ensure we detect all known SATA controllers and all known sound cards
   o fix optical mice detection (#15082)
 - net_applet: really load network configuration at start (blino)
