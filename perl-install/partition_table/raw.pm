@@ -191,14 +191,18 @@ sub raw_add {
     die "raw_add: partition table already full";
 }
 
-sub zero_MBR {
-    my ($hd) = @_;
-    #- force the standard partition type for the architecture
+sub default_type {
     my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
     #- override standard mac type on PPC for IBM machines to dos
     $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
     require "partition_table/$type.pm";
-    bless $hd, "partition_table::$type";
+    "partition_table::$type";
+}
+
+sub zero_MBR {
+    my ($hd) = @_;
+    #- force the standard partition type for the architecture
+    bless $hd, default_type();
     $hd->{primary} = $hd->clear_raw;
     delete $hd->{extended};
     if (is_xbox()) {
