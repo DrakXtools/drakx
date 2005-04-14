@@ -239,6 +239,13 @@ sub getFile {
 	}
     } || errorOpeningFile($f);
 }
+
+sub getLocalFile {
+    my ($file) = @_;
+    my $F;
+    open($F, $file) ? $F : do { log::l("Can not open $file: $!"); undef };
+}
+
 sub getAndSaveFile {
     my ($file, $local) = @_ == 1 ? ("install/stage2/live$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
@@ -603,7 +610,7 @@ sub load_rate_files {
     pkgs::read_rpmsrate(
 	$o->{packages},
 	$o->{rpmsrate_flags_chosen},
-	getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
+	-e "/tmp/rpmsrate" ? getLocalFile("/tmp/rpmsrate") : getFile("media/media_info/rpmsrate")
     );
     ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
 	-e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
