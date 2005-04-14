@@ -20,10 +20,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pt\n"
+"Project-Id-Version: drakX-pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-04-11 01:04+0100\n"
+"PO-Revision-Date: 2005-04-13 01:24+0100\n"
 "Last-Translator: José Melo <mmodem00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,9 +114,9 @@ msgid ""
 "Operating System."
 msgstr ""
 "A sua chave USB não contém nenhuma partição Windows (FAT)\n"
-"válida. É preciso uma para prosseguir (além de que, é mais\n"
-"standard para que tenha a possibilidade de mover e ter acesso\n"
-"aos seus ficheiros nas máquinas que correm Windows). Por\n"
+"válida. É preciso uma para prosseguir (até porque, é mais\n"
+"standard para que tenha a possibilidade de mover e aceder\n"
+"os seus ficheiros nas máquinas que correm Windows). Por\n"
 "favor ligue uma chave USB que tenha uma partição Windows.\n"
 "\n"
 "\n"
@@ -717,7 +717,7 @@ msgstr "É esta a configuração correcta?"
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "Disposição de teclado: %s\n"
+msgstr "Disposição do teclado: %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
@@ -757,7 +757,7 @@ msgstr "Memória gráfica: %s kB\n"
 #: Xconfig/various.pm:40
 #, c-format
 msgid "Color depth: %s\n"
-msgstr "Profundidade de cor: %s\n"
+msgstr "Profundidade da cor: %s\n"
 
 #: Xconfig/various.pm:41
 #, c-format
@@ -843,11 +843,10 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"O LILO quer atribuir um novo ID de Volume ao drive %s.  No entanto, ao\n"
-"mudar o ID de Volume de um Windows NT, 2000, ou disco de arranque\n"
-"XP é um erro fatal para o Windows.\n"
-"Esta precaução não se aplica ao Windows 95 ou 98. ou aos discos de\n"
-"dados NT.\n"
+"O LILO quer atribuir um novo ID de Volume ao drive %s.  No entanto,é\n"
+"um erro fatal do Windows se mudar o ID de Volume de um Windows NT,\n"
+"2000, ou disco de arranque XP.\n"
+"Esta precaução não se aplica ao Windows 95 ou 98. ou aos discos NT.\n"
 "\n"
 "Atribuir um novo ID de Volume?"
 
@@ -922,7 +921,7 @@ msgstr "Onde deseja instalar o carregador de arranque?"
 #: any.pm:264 standalone/drakboot:307
 #, c-format
 msgid "Boot Style Configuration"
-msgstr "Configuração do Estilo de Arranque"
+msgstr "Configuração de Estilo do Arranque"
 
 #: any.pm:266 any.pm:298
 #, c-format
@@ -1116,7 +1115,7 @@ msgstr "Este rótulo já está a ser usado"
 #: any.pm:415
 #, c-format
 msgid "Which type of entry do you want to add?"
-msgstr "Que tipo de entrada quer adicionar?"
+msgstr "Que tipo de entrada deseja adicionar?"
 
 #: any.pm:416
 #, c-format
@@ -1489,8 +1488,8 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
-"Permite-lhe correr um grupo de computadores no mesmo domínio de Serviços de "
-"Informação de Rede com uma senha comum e um ficheiro de grupo."
+"Permite-lhe correr um grupo de computadores no mesmo domínio de Serviços "
+"de Informação de Rede com uma senha comum e um ficheiro de grupo."
 
 #: authentication.pm:54
 #, c-format
@@ -1515,8 +1514,8 @@ msgstr "Directório Activo com SFU:"
 #, c-format
 msgid "Kerberos is a secure system for providing network authentication services."
 msgstr ""
-"Kerberos é um sistema seguro que providencia serviços de autenticação na "
-"rede."
+"Kerberos é um sistema seguro que providencia serviços de autenticação "
+"na rede."
 
 #: authentication.pm:56
 #, c-format
@@ -1631,19 +1630,19 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
-"Para que isto funcione para um W2K PDC, provavelmente irá precisar de ter o "
-"administrador a executar : C:\\>net grupolocal \"Pre-Windows 2000 Acesso "
-"Compatível Access\" todos /add e reinicie o servidor.\n"
-"Também irá precisar do nome/senha de um Administrador de Domínio para juntar "
-"a máquina ao domínio Windows(TM).\n"
+"Para que isto funcione para um W2K PDC, irá provavelmente precisar de "
+"ter o administrador a executar : C:\\>net grupolocal \"Pre-Windows 2000 "
+"Acesso Compatível\" todos /add e reinicie o servidor.\n"
+"Irá também precisar do nome/senha de um Administrador de Domínio para "
+"juntar a máquina ao domínio Windows(TM).\n"
 "Se a rede ainda não está activada, o DrakX irá tentar juntar-se ao domínio a "
 "seguir ao passo da configuração da rede.\n"
-"Se esta configuração falhar por alguma razão e a autenticação no domínio não "
-"funcionar, execute 'smbpasswd -j DOMÍNIO -U UTILIZADOR%%SENHA' usando o seu "
-"Dominio Windows (TM),\n"
-"e o Nome/Senha do Administrador, depois do arranque do sistema.\n"
-"O comando 'wbinfo -t' irá testar se o segredo da sua senha de autenticação "
-"está bom."
+"Se este passo falhar por alguma razão e a autenticação no domínio não "
+"funcionar, execute 'smbpasswd -j DOMÍNIO -U UTILIZADOR%%SENHA' usando "
+"o seu Domínio "
+"Windows (TM), e o Nome/Senha do Admin, depois do arranque do sistema.\n"
+"O comando 'wbinfo -t' irá testar se os segredos da sua autenticação estão "
+"bem."
 
 #: authentication.pm:144
 #, c-format
@@ -1658,7 +1657,7 @@ msgstr "Nome do Utilizador/Administrador do Domínio"
 #: authentication.pm:150
 #, c-format
 msgid "Domain Admin Password"
-msgstr "Senha do Administrador de Domínio"
+msgstr "Senha de Admin do Domínio"
 
 #: authentication.pm:151
 #, c-format
@@ -1668,17 +1667,17 @@ msgstr "Usar Idmap para armazenar UID/SID "
 #: authentication.pm:152
 #, c-format
 msgid "Default Idmap "
-msgstr "Idmap predefinido"
+msgstr "Idmap predefinido "
 
 #: authentication.pm:165
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr "Defina a senha de administrador (root) e os métodos de autenticação da rede"
+msgstr "Define a senha de administrador (root) e os métodos de autenticação da rede"
 
 #: authentication.pm:166
 #, c-format
 msgid "Set administrator (root) password"
-msgstr "Definir a senha de administrador (root)"
+msgstr "Definir a senha do administrador (root)"
 
 #: authentication.pm:167 standalone/drakvpn:1125
 #, c-format
@@ -1694,7 +1693,7 @@ msgstr "Nenhuma senha"
 #: authentication.pm:178
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Essa senha é muito simples (deve ter ao menos %d caracteres)"
+msgstr "Essa senha é demasiado simples (pelo menos deve ter %d caracteres)"
 
 #: authentication.pm:183 network/netconnect.pm:328 network/netconnect.pm:634
 #: standalone/drakauth:23 standalone/drakauth:25 standalone/drakconnect:459
@@ -1823,7 +1822,7 @@ msgstr "kdesu em falta"
 #: common.pm:243
 #, c-format
 msgid "consolehelper missing"
-msgstr "ajuda da linha de comandos em falta"
+msgstr "ajuda da consola em falta"
 
 #: crypto.pm:14 crypto.pm:43 lang.pm:202 network/adsl_consts.pm:50
 #: network/adsl_consts.pm:58 network/adsl_consts.pm:66
@@ -1992,7 +1991,7 @@ msgstr "Opções: %s"
 #: diskdrake/hd_gtk.pm:95
 #, c-format
 msgid "Please make a backup of your data first"
-msgstr "Por favor faça primeiro uma cópia de segurança dos seus dados"
+msgstr "Por favor faça primeiro um backup dos seus dados"
 
 #: diskdrake/hd_gtk.pm:98
 #, c-format
@@ -2561,7 +2560,7 @@ msgstr "Precisará reiniciar antes que as modificações tenham efeito"
 #: diskdrake/interactive.pm:1083
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr "A tabela de partições do drive %s vai ser escrita no disco!"
+msgstr "A tabela de partições do drive %s irá ser escrita no disco!"
 
 #: diskdrake/interactive.pm:1096
 #, c-format
@@ -2704,7 +2703,7 @@ msgid ""
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 "Partição de arranque por omissão\n"
-"    (para arranque do MS-DOS, não para o lilo)\n"
+"    (para arranque MS-DOS, não para lilo)\n"
 
 #: diskdrake/interactive.pm:1200
 #, c-format
@@ -2801,13 +2800,13 @@ msgstr "Escolha a sua senha de encriptação do sistema de ficheiros"
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
-"Essa senha de encriptação é muito simples (tem que ter pelo menos %d "
+"Esta senha de encriptação é muito simples (pelo menos deve ter %d "
 "caracteres de comprimento)"
 
 #: diskdrake/interactive.pm:1270
 #, c-format
 msgid "The encryption keys do not match"
-msgstr "As senhas de encriptação não coincidem"
+msgstr "As senhas de encriptação não correspondem"
 
 #: diskdrake/interactive.pm:1273 network/netconnect.pm:1136
 #: standalone/drakconnect:397
@@ -2818,7 +2817,7 @@ msgstr "Senha de encriptação"
 #: diskdrake/interactive.pm:1274
 #, c-format
 msgid "Encryption key (again)"
-msgstr "Senha de encriptação (outra vez)"
+msgstr "Senha de encriptação (novamente)"
 
 #: diskdrake/removable.pm:46
 #, c-format
@@ -3014,7 +3013,7 @@ msgstr "Dar acesso de escrita a utilizadores normais"
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "Dar acesso de leitura-apenas a utilizadores normais"
+msgstr "Dar acesso de apenas-leitura a utilizadores normais"
 
 #: fs/type.pm:370
 #, c-format
@@ -3057,12 +3056,12 @@ msgstr ""
 #: fsedit.pm:401
 #, c-format
 msgid "Mount points must begin with a leading /"
-msgstr "Pontos de montagem devem começar com uma /"
+msgstr "Os pontos de montagem devem começar com uma /"
 
 #: fsedit.pm:402
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Pontos de montagem devem apenas conter caracteres alfanuméricos"
+msgstr "Os pontos de montagem devem apenas conter caracteres alfanuméricos"
 
 #: fsedit.pm:403
 #, c-format
@@ -3078,7 +3077,7 @@ msgid ""
 msgstr ""
 "Seleccionou uma partição RAID como root (/).\n"
 "Nenhum carregador de arranque a consegue aceder sem uma\n"
-"partição /boot. Certifique-se em adicionar uma partição /boot"
+"partição /boot. Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:408
 #, c-format
@@ -3094,7 +3093,7 @@ msgid ""
 msgstr ""
 "Seleccionou um Volume Lógico LVM como root (/).\n"
 "O carregador de arranque não o consegue aceder sem uma partição /boot\n"
-"Certifique-se em adicionar uma partição /boot"
+"Certifique-se que adiciona uma partição /boot"
 
 #: fsedit.pm:413
 #, c-format
@@ -3120,12 +3119,12 @@ msgstr ""
 #: fsedit.pm:424
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "Não pode usar um sistema de ficheiros encriptado para o ponto de montagem %s"
+msgstr "Não pode usar um sistema de ficheiros encriptado para ponto de montagem %s"
 
 #: fsedit.pm:485
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "Falta de espaço suficiente para auto-alocação"
+msgstr "Sem espaço livre suficiente para auto-alocação"
 
 #: fsedit.pm:487
 #, c-format
@@ -3336,8 +3335,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Não há nenhum drive alternativo OSS/ALSA conhecido para a sua placa de som (%"
-"s) que actualmente use \"%s\""
+"Não há nenhum drive alternativo OSS/ALSA conhecido para a sua placa de "
+"som (%s) que actualmente use \"%s\""
 
 #: harddrake/sound.pm:234
 #, c-format
@@ -3389,19 +3388,18 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 "OSS (Open Sound System) era o primeiro som API. É um som API de um OS "
-"independente (está disponivel na maior parte dos sistemas Unix) mas é um API "
-"muito básico\n"
+"independente (está disponivel na maior parte dos sistemas Unix) mas é um "
+"API muito básico\n"
 "e limitado. Ainda mais, todos os drives OSS reinventam a roda.\n"
 "\n"
-"ALSA (Advanced Linux Sound Architecture) é uma arquitectura modularizada que "
-"suporta\n"
-"um grande numero de placas ISA, USB e PCI.\n"
+"ALSA (Advanced Linux Sound Architecture) é uma arquitectura modularizada\n"
+"que suporta um grande numero de placas ISA, USB e PCI.\n"
 "\n"
 "Também fornece um API mais elevado que um OSS.\n"
 "\n"
 "Para usar alsa, um pode também usar:\n"
 "- o antigo API de compatibilidade OSS\n"
-"- o novo API ALSA que fornece muitas funções melhoradas mas exige o uso da "
+"- o novo API ALSA que fornece muitas funções melhoradas mas requer o uso da "
 "livraria ALSA.\n"
 
 #: harddrake/sound.pm:257 harddrake/sound.pm:342 standalone/drakups:146
@@ -3509,7 +3507,7 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
-"O teste clássico a fazer em caso de problemas de som são os comandos :\n"
+"O teste clássico a fazer em caso de problemas de som são os comandos:\n"
 "\n"
 "\n"
 "- \"lspcidrake -v | fgrep AUDIO\" diz-lhe que drive a sua placa usa\n"
@@ -3606,7 +3604,7 @@ msgstr "Número de buffers de captura :"
 #: harddrake/v4l.pm:314
 #, c-format
 msgid "number of capture buffers for mmap'ed capture"
-msgstr "Número de buffers de captura para captura mmap"
+msgstr "Número de buffers de captura para captura mmapeada"
 
 #: harddrake/v4l.pm:316
 #, c-format
@@ -3621,7 +3619,7 @@ msgstr "Suporte de rádio :"
 #: harddrake/v4l.pm:317
 #, c-format
 msgid "enable radio support"
-msgstr "Activar o suporte de rádio"
+msgstr "activar o suporte de rádio"
 
 #: help.pm:11
 #, c-format
@@ -3710,7 +3708,7 @@ msgstr ""
 "Assim que clicar em \"%s\",pode adicionar outros utilizadores. Adicionar\n"
 "um utilizador para cada um dos seus amigos, o seu pai, a sua irmã, etc.\n"
 "Clique em \"%s\" sempre que acabar de adicionar um utilizador.\n"
-"Ao clicar em \"%s\" permite-lhe mudar a \"shell\" pré-definida para esse\n"
+"Ao clicar em \"%s\" permite-lhe mudar a \"shell\" predefinida para esse\n"
 "utilizador (bash por omissão).\n"
 "\n"
 "Quando terminar de adicionar utilizadores, será-lhe dado a escolher um\n"
@@ -4729,9 +4727,8 @@ msgstr ""
 "exposta à internet. Porém, um nível de segurança superior, geralmente é\n"
 "obtido á custa de menos facilidade de uso/manuseamento.\n"
 "\n"
-"Se não sabe o que escolher, deixe o valor por omissão. Poderá alterá-lo "
-"mais\n"
-"tarde com a ferramenta draksec, que faz parte do Centro de Controlo\n"
+"Se não sabe o que escolher, deixe o valor predefinido. Poderá alterá-lo\n"
+"mais tarde com a ferramenta draksec, que faz parte do Centro de Controlo\n"
 "Mandrakelinux.\n"
 "\n"
 "Preencha o campo \"%s\" com o e-mail da pessoa responsável pela\n"
@@ -5111,9 +5108,9 @@ msgstr ""
 "\n"
 "Ao clicar no botão \"%s\" irá permitir-lhe escolher outras linguagens\n"
 "para instalar na sua área de trabalho, consequentemente instalará os\n"
-"ficheiros para a documentação do sistemae aplicações referentes à\n"
+"ficheiros para a documentação do sistema e aplicações referentes à\n"
 "linguagem específicada . Porexemplo, se utilizadores espanhóis estão\n"
-"para usar a sua máquinam, escolha Inglês como linguagem por omissão\n"
+"para usar a sua máquina, escolha Inglês como linguagem predefinida\n"
 "na vista em árvore e \"%s\" na secção Avançada.\n"
 "\n"
 "Sobre o suporte UTF-8 (unicode): Unicode é uma codificação de caracter\n"
@@ -7366,7 +7363,7 @@ msgstr ""
 #: interactive/stdio.pm:70
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "Sua escolha? (0/1, por omissão '%s') "
+msgstr "A sua escolha? (0/1, predefinido '%s') "
 
 #: interactive/stdio.pm:94
 #, c-format
@@ -12083,7 +12080,7 @@ msgstr "Insira o endereço IP e a porta do anfitrião cujas impressoras deseja u
 #: printer/printerdrake.pm:412
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr "Se nenhuma porta é indicada, 631 vai ser pegado por omissão."
+msgstr "Se nenhuma porta for indicada, a 631 irá ser escolhida como predefinida."
 
 #: printer/printerdrake.pm:416
 #, c-format
@@ -12606,13 +12603,13 @@ msgstr ""
 "\n"
 "Parabéns, a sua impressora encontra-se instalada e configurada!\n"
 "\n"
-"Pode imprimir usando o comando \"Imprimir\" da sua aplicação (geralmente no "
-"menu \"Ficheiro\").\n"
+"Pode imprimir usando o comando \"Imprimir\" da sua aplicação (geralmente "
+"no menu \"Ficheiro\").\n"
 "\n"
-"Se deseja adicionar, remover, ou mudar o nome de uma impressora, ou se "
-"desejar mudar a configuração por omissão (fonte de papel, qualidade de "
-"impressão, ...),escolha \"Impressora\" na secção \"Hardware\" do Centro de "
-"Controlo %s."
+"Se deseja adicionar, remover, ou mudar o nome de uma impressora, ou "
+"se deseja mudar a opção da configuração predefinida (fonte de papel, "
+"qualidade de impressão, ...), escolha \"Impressora\" na secção \"Hardware\" "
+"do Centro de Controlo %s."
 
 #: printer/printerdrake.pm:1143 printer/printerdrake.pm:1373
 #: printer/printerdrake.pm:1435 printer/printerdrake.pm:1525
@@ -13092,9 +13089,9 @@ msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
-"Escolha uma das impressoras auto-detectadas na lista ou escreva o nome de "
-"anfitrião ou o IP e o número da porta opcional (9100 por omissão) nas linhas "
-"de entrada."
+"Escolha uma das impressoras auto-detectadas na lista ou escreva o nome "
+"de máquina ou o IP e o número da porta opcional (9100 é a predefinida) nos "
+"campos de entrada."
 
 #: printer/printerdrake.pm:1844
 #, c-format
@@ -14317,13 +14314,13 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
-"Esta'prestes a instalar o sistema de impressão %s num sistema a correr no "
-"nível de segurança %s.\n"
-"Este sistema de impressão corre um daemon (processo em 2º plano) que espera "
-"por tarefas de impressão trata destas. Este daemon é também acessível "
-"pormáquinas remotas através da rede e então é um possível ponto para "
-"ataques. Então só uns poucos daemons seleccionados são iniciados por omissão "
-"neste nível de segurança.\n"
+"Esta prestes a instalar o sistema de impressão %s num sistema a correr "
+"no nível de segurança %s.\n"
+"Este sistema de impressão corre um daemon (processo em 2º plano) que "
+"espera por tarefas de impressão trata destas. Este daemon é também "
+"acessível por máquinas remotas através da rede e então é um possível "
+"ponto para ataques. Então só uns poucos daemons seleccionados são "
+"iniciados por omissão neste nível de segurança.\n"
 "\n"
 "Deseja realmente configurar a impressão nesta máquina?"
 
@@ -15222,7 +15219,7 @@ msgstr "Activar o registo de pacotes IPv4 extranhos"
 #: security/l10n.pm:31
 #, c-format
 msgid "Enable msec hourly security check"
-msgstr "Activar verificação horária da segurança de msec"
+msgstr "Activar verificação horaria da segurança msec"
 
 #: security/l10n.pm:32
 #, c-format
@@ -22473,7 +22470,7 @@ msgstr "a cor da barra de progressão"
 #: standalone/draksplash:119
 #, c-format
 msgid "Preview"
-msgstr "Pré-visualizar"
+msgstr "Previsão"
 
 #: standalone/draksplash:121
 #, c-format
@@ -22493,7 +22490,7 @@ msgstr "Mostrar o logo na consola"
 #: standalone/draksplash:126
 #, c-format
 msgid "Make kernel message quiet by default"
-msgstr "Tornar a mensagem do kernel \"quiet\" por omissão"
+msgstr "Tornar a mensagem do kernel silenciosa por omissão"
 
 #: standalone/draksplash:161 standalone/draksplash:309
 #: standalone/draksplash:454
@@ -22535,7 +22532,7 @@ msgstr "A gerar previsão..."
 #: standalone/draksplash:497
 #, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr "%s BootSplash (%s) previsão"
+msgstr "%s Previsão (%s) BootSplash"
 
 #. -PO: Do not alter the <span ..> and </span> tags
 #: standalone/draksplash:503
