@@ -33,9 +33,9 @@
 char * extract_list_directory(char * direct)
 {
 	char ** full = list_directory(direct);
-	char tmp[2000] = "";
+	char tmp[20000] = "";
 	int i;
-	for (i=0; i<5 ; i++) {
+	for (i=0; i<50 ; i++) {
 		if (!full || !*full)
 			break;
 		strcat(tmp, *full);
