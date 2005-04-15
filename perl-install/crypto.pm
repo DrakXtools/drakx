@@ -192,7 +192,7 @@ sub getPackages {
     #- extract hdlist of crypto, then depslist.
     require pkgs;
     my $update_medium = pkgs::psUsingHdlist('ftp', $packages, "hdlist-updates.cz", "1u", "",
-					    "Updates for Mandrakelinux " . version(), 1, $fhdlist, $pubkey);
+					    "Updates for Mandriva Linux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
 	#- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
