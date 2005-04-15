@@ -472,7 +472,7 @@ $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no dev
 {
     $SIG{CHLD} = undef;
     #local $SIG{CHLD} = sub {};
-    if (my @packages = grep { !member($_, qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa)) } simple_read_rpmsrate()) {
+    if (my @packages = difference2([ simple_read_rpmsrate() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
         my $do_pkgs = do_pkgs_standalone->new;
         my @packages2install = grep { $do_pkgs->is_available($_) && !$do_pkgs->is_installed($_) } @packages;
         undef $wait;
@@ -542,7 +542,7 @@ sub popup_menu {
       };
 }
 
-sub upload {
+sub upload() {
     my $dialog = _create_dialog(N("Upload the hardware list"),
                                 { if_(!$::isEmbedded, transient => $w->{real_window}) }); #, height => 400
     gtkpack($dialog->vbox,
