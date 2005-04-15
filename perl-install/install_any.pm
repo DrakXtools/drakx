@@ -708,7 +708,7 @@ sub cp_with_progress {
 
 sub copy_rpms_on_disk {
     my ($o) = @_;
-    mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
+    mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrivalinux var/ftp/pub/Mandrivalinux/media);
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
@@ -744,14 +744,14 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    } while !-d "/tmp/image/$m->{rpmsdir}";
 	    $current_medium = $k;
 	}
-	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrivalinux/media");
 	my $total = count_files("/tmp/image/$m->{rpmsdir}");
 	log::l("($total files)");
 	eval {
-	    cp_with_progress($wait_message, 0, $total, "/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	    cp_with_progress($wait_message, 0, $total, "/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrivalinux/media");
 	};
 	log::l($@) if $@;
-	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
+	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrivalinux";
 	$m->{method} = 'disk';
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
 	undef $wait_w;
@@ -1009,7 +1009,7 @@ sub install_urpmi {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
 	    my $curmethod = $_->{method} || $::o->{method};
-	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrakelinux" : '')
+	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrivalinux" : '')
 		|| $_->{prefix} || ${{ nfs => "file://mnt/nfs", 
 					   disk => "file:/" . $hdInstallPath,
 					   ftp => $ENV{URLPREFIX},

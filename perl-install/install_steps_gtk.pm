@@ -670,7 +670,7 @@ sub deselectFoundMedia {
     }
     if ($ask_copy_rpms_on_disk) {
 	#- don't be afraid, cleanup old RPMs if upgrade
-	eval { rm_rf("$::prefix/var/ftp/pub/Mandrakelinux") if $o->{isUpgrade} };
+	eval { rm_rf("$::prefix/var/ftp/pub/Mandrakelinux", "$::prefix/var/ftp/pub/Mandrivalinux") if $o->{isUpgrade} };
 	my $w = ugtk2->new("");
 	$i = -1;
 	$w->sync;
