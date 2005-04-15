@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.2
-Release: 24mdk
+Version: 10.3
+Release: 0.1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr 15 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.1mdk
+- drakbackup: fix direct-to-tape backup/restore issues (stew, #15293)
+- drakconnect (blino):
+  o use sysfs as fallback to detect wireless interfaces (eg:
+    rt2x00/prism2_*)
+  o allow to modify METRIC settings in the wizard
+  o fix displaying wifi data in manage interface
+
 * Tue Apr 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-24mdk
 - drakconnect: fix connection establishment (rafael)
 
