@@ -129,15 +129,18 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 			return results;
 	}
  
-	/* a floppy is selected, don't try to list partitions */
 	if (streq(*device, floppy_dev)) {
+		/* a floppy is selected, don't try to list partitions */
 		return RETURN_OK;
 	}
 
 #ifndef DISABLE_CDROM
-	/* a cdrom is selected, don't try to list partitions */
-	if (device >= cdrom_medias) {
-		return RETURN_OK;
+        for (ptr = cdrom_medias; ptr < cdrom_medias + cdrom_count; ptr++) {
+		if (*device == *ptr) {
+			/* a cdrom is selected, don't try to list partitions */
+			log_message("thirdparty: a cdrom is selected, using it (%s)", *device);
+			return RETURN_OK;
+		}
 	}
 #endif
 
@@ -155,6 +158,7 @@ static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 
 	/* only one partition has been discovered, don't ask which one to use */
 	if (parts[1] == NULL) {
+		log_message("thirdparty: found only one partition on device (%s)", parts[0]);
 		*device = parts[0];
 		return RETURN_OK;
         }
