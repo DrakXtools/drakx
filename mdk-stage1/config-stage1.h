@@ -95,7 +95,7 @@
 
 /* path to mirror list for net install */
 #ifndef DISABLE_NETWORK
-#define MIRRORLIST_HOST "www.linux-mandrake.com"
+#define MIRRORLIST_HOST "www.mandrivalinux.com"
 #define MIRRORLIST_PATH "/mirrorsfull.list"
 #define MIRRORLIST_MAX_ITEMS 500
 #define MIRRORLIST_MAX_MEDIA 10
