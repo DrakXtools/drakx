@@ -264,7 +264,7 @@ sub check() {
 	    if (my $l = delete $not_listed{''}) {
 		print "bad/old pcitable modules : ", join(" ", @$l), "\n";
 	    }
-	    print STDERR "PCITABLE MODULES NOT LISTED $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
+	    print STDERR "PCITABLE MODULES NOT LISTED $_: ", join(" ", sort @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
 	    #$error = 1;
 	}
 
@@ -272,7 +272,7 @@ sub check() {
 	if (my @l = difference2(\@l2, [ keys %listed ])) {
 	    my %not_listed;
 	    push @{$not_listed{$module2category{$_}}}, $_ foreach @l;
-	    print STDERR "usbtable modules not listed $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
+	    print STDERR "usbtable modules not listed $_: ", join(" ", sort @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
 	}
     }
 
