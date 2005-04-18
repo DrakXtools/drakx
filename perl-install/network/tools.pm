@@ -264,7 +264,7 @@ sub get_default_gateway_interface {
 sub get_interface_status {
     my ($gw_intf) = @_;
     my @routes = `$::prefix/sbin/ip route show`;
-    my $is_up = to_bool(grep { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes);
+    my $is_up = any { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes;
     my ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
     return $is_up, $gw_address;
 }
