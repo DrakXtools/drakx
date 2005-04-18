@@ -695,6 +695,9 @@ static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror 
 }
 
 
+#define MIRRORLIST_MAX_ITEMS 500
+#define MIRRORLIST_MAX_MEDIA 10
+
 static int choose_mirror_from_host_list(char *mirrorlist[][4], const char *protocol, char *medium, char **selected_host, char **filepath)
 {
 	enum return_type results;
