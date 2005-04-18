@@ -301,7 +301,11 @@ sub detect {
                 $synaptics_mouse->{ALPS} = $synaptics_touchpad->{description} =~ /ALPS/;
                 #- do not try to use synpatics at beginning of install
                 $::isInstall and $synaptics_mouse->{alternate_install} = $univ_mouse;
-                #- always configure an universal mouse so that USB mices can be hotplugged
+                if ($mouse_nb == 1) {
+                    #- always configure an universal mouse so that USB mices can be hotplugged
+                    $synaptics_mouse->{auxmouse} = $univ_mouse;
+                    return $synaptics_mouse;
+                }
                 $univ_mouse->{auxmouse} = $synaptics_mouse;
             }
 	    return $univ_mouse;
@@ -372,7 +376,6 @@ sub set_xfree_conf {
 
     my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
       ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
-    delete $mouse->{auxmouse} if $synaptics && $synaptics == $mouse->{auxmouse};
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
@@ -397,7 +400,7 @@ sub set_xfree_conf {
     $synaptics and $xfree_conf->set_synaptics(map { {
         Device => "/dev/$_->{device}",
         Protocol => $_->{XMOUSETYPE},
-        Primary => $_ != $mouse->{auxmouse},
+        Primary => !exists($mouse->{auxmouse}),
         ALPS => $_->{ALPS},
     } } @$synaptics);
 }
