@@ -4,6 +4,7 @@ use strict;
 use common;
 use log;
 use detect_devices;
+use list_modules;
 use run_program;
 use modules;
 use any;
@@ -132,7 +133,6 @@ sub real_main {
           modules::interactive::load_category($in, $modules_conf, list_modules::ethernet_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
-          require list_modules; #- FIXME: check if useful
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
             grep { to_bool($is_wireless) == detect_devices::is_wireless_interface($_->[0]) } @all_cards;
       };
@@ -960,7 +960,6 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     },
                     post => sub {
                         if ($ntf_name eq "Manually load a driver") {
-                            require network::ethernet;
                             modules::interactive::load_category__prompt($in, $modules_conf, list_modules::ethernet_categories());
                             return 'lan';
                         } elsif ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
