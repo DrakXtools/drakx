@@ -290,16 +290,15 @@ sub detect {
 
     if (c::kernel_version() =~ /^\Q2.6/) {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
-        my @input_devices = cat_('/proc/bus/input/devices');
         my $synaptics_mouse;
-        if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } @input_devices) {
+        if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } cat_('/proc/bus/input/devices')) {
             if (is_xbox()) {
                 return fullname2mouse('Universal|Microsoft Xbox Controller S', if_($::isInstall, alternate_install => fullname2mouse('Universal|Microsoft Xbox Controller S')));
             }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
-            if (my $synaptics_name = find { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
+            if (my ($synaptics_touchpad) = detect_devices::getSynapticsTouchpads()) {
                 $synaptics_mouse = fullname2mouse('Universal|Synaptics Touchpad', if_($mouse_nb == 1, wacom => \@wacom));
-                $synaptics_mouse->{ALPS} = $synaptics_name =~ /ALPS/;
+                $synaptics_mouse->{ALPS} = $synaptics_touchpad->{description} =~ /ALPS/;
                 #- do not try to use synpatics at beginning of install
                 $::isInstall and $synaptics_mouse->{alternate_install} = $univ_mouse;
                 #- always configure an universal mouse so that USB mices can be hotplugged
