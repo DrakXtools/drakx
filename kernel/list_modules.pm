@@ -217,7 +217,7 @@ our %l = (
     other => [
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
-      qw(btaudio),
+      qw(btaudio speedtch),
 
       arch() =~ /i.86/ ? 'aes-i586' : 'aes',
       if_(arch() =~ /sparc/, 'openprom'),
