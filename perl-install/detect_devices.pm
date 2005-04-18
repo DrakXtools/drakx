@@ -472,7 +472,7 @@ sub getInputDevices() {
 
 sub getSynapticsTouchpads() {
     grep {
-        member($_->{description}, "|SynPS/2 Synaptics TouchPad", "|AlpsPS/2 ALPS TouchPad")
+        member($_->{description}, "|SynPS/2 Synaptics TouchPad", "|AlpsPS/2 ALPS TouchPad");
     } getInputDevices();
 }
 
