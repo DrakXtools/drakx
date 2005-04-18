@@ -196,6 +196,7 @@ sub write_preload_conf {
     push @l, map { $_->{driver} } probe_category('multimedia/joystick');
     push @l, map { $_->{driver} } probe_category('various/crypto');
     push @l, 'padlock' if cat_("/proc/cpuinfo") =~ /rng_en/;
+    push @l, 'evdev' if detect_devices::getSynapticsTouchpads();
     my @l_26 = @l;
     push @l_26, map { $_->{driver} } probe_category('various/agpgart');
     append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
