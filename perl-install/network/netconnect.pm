@@ -89,6 +89,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($ndiswrapper_driver, $ndiswrapper_inf_file);
+      my $wireless_use_wpa;
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -1176,6 +1177,7 @@ notation (for example, 1.2.3.4).")),
                         $netc->{wireless_eth} = 1;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
+                        $wireless_use_wpa = exists $ethntf->{WIRELESS_WPA_DRIVER};
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
@@ -1189,7 +1191,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
                              #- FIXME: ask if the access point is open or restricted
-                             { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$ethntf->{WIRELESS_USE_WPA}, type => "bool" },
+                             { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$wireless_use_wpa, type => "bool" },
                             ];
                     },
                     complete => sub {
@@ -1255,7 +1257,12 @@ See iwpriv(8) man page for further information."),
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
                         $module =~ /^prism2_/ and network::network::wlan_ng_configure($in, $ethntf, $module);
-                        network::network::wpa_supplicant_configure($in, $ethntf);
+                        if ($wireless_use_wpa) {
+                            $ethntf->{WIRELESS_WPA_DRIVER} = network::network::wpa_supplicant_get_driver($module);
+                            network::network::wpa_supplicant_configure($in, $ethntf);
+                        } else {
+                            delete $ethntf->{WIRELESS_WPA_DRIVER};
+                        }
                         return "static_hostname";
                     },
                    },

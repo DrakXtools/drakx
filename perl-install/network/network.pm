@@ -163,7 +163,7 @@ sub write_interface_conf {
     }
 
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR),
-                qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV),
+                qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
@@ -527,22 +527,27 @@ sub wlan_ng_configure {
     services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
 }
 
+sub wpa_supplicant_get_driver {
+    my ($module) = @_;
+    $module =~ /^hostap_/ ? "hostap" :
+    $module eq "prism54" ? "prism54" :
+    $module =~ /^ath_/ ? "madwifi" :
+    $module =~ /^at76c50|atmel_/ ? "atmel" :
+    $module eq "ndiswrapper" ? "ndiswrapper" :
+    $module =~ /^ipw2[12]00$/ ? "ipw" :
+    "wext";
+}
+
 sub wpa_supplicant_configure {
     my ($in, $ethntf) = @_;
     require services;
-    if (delete $ethntf->{WIRELESS_USE_WPA}) {
-        $in->do_pkgs->install('wpa_supplicant');
-        wpa_supplicant_add_network({
+    $in->do_pkgs->install('wpa_supplicant');
+
+    wpa_supplicant_add_network({
             ssid => qq("$ethntf->{WIRELESS_ESSID}"),
             psk => network::tools::convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
             scan_ssid => 1,
-        });
-        services::start_service_on_boot('wpa_supplicant');
-        services::restart('wpa_supplicant');
-    } else {
-        services::stop('wpa_supplicant');
-        services::do_not_start_service_on_boot('wpa_supplicant');
-    }
+    });
 }
 
 sub wpa_supplicant_add_network {
