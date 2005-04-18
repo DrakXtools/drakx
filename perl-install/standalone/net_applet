@@ -182,7 +182,7 @@ sub getIP {
     return wantarray() ? @ip : $ip[0];
 }
 sub cronNetwork() {
-    $timeout = Glib::Timeout->add(1000, sub {
+    $timeout = Glib::Timeout->add(2000, sub {
                                       checkNetwork();
                                       1;
                                   });
