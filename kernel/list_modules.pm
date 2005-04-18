@@ -62,7 +62,7 @@ our %l = (
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
-      qw(avmfritz c4 cdc-acm b1pci divas hfc4s8s_l1 hisax hisax_fcpcipnp hysdn sedlfax t1pci tpam w6692pci),
+      qw(avmfritz c4 cdc-acm b1pci divas hfc4s8s_l1 hfc_usb hisax hisax_st5481 hisax_fcpcipnp hysdn sedlfax t1pci tpam w6692pci),
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
     modem => [
