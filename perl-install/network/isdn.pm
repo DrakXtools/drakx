@@ -11,7 +11,6 @@ use network::tools;
 use MDK::Common::Globals "network", qw($in);
 use MDK::Common::File;
 use services;
-use list_modules;
 
 
 sub write_config {
