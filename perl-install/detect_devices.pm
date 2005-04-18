@@ -470,6 +470,12 @@ sub getInputDevices() {
     @devices;
 }
 
+sub getSynapticsTouchpads() { 
+    grep {
+        member($_->{description}, "|SynPS/2 Synaptics TouchPad", "|AlpsPS/2 ALPS TouchPad")
+    } getInputDevices();
+}
+
 sub getSerialModem {
     my ($modules_conf, $o_mouse) = @_;
     my $mouse = $o_mouse || {};
