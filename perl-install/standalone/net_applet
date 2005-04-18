@@ -158,7 +158,6 @@ sub netMonitor() {
     checkNetwork();
 }
 sub checkNetwork() {
-    my ($gw_intf, $is_up, $gw_address, $dns_server) = network::tools::get_internet_connection($netc, $intf);
     my ($gw_intf, $is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($netc, $intf);
