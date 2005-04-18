@@ -1192,28 +1192,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
                              #- FIXME: ask if the access point is open or restricted
                              { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$wireless_use_wpa, type => "bool" },
-                            ];
-                    },
-                    complete => sub {
-                        if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
-                            return 1, 6;
-                        }
-                        if ($ethntf->{WIRELESS_RATE} && $ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
-                            return 1, 8;
-                        }
-                    },
-                    next => "wireless2",
-                   },
-
-
-                   wireless2 =>
-                   {
-                    name => N("Please enter the wireless parameters for this card:"),
-                    data => sub {
-                        [
-                             { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS},
+                             { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS}, advanced => 1,
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
 nodes or large number of active nodes. This parameter sets the size of the
@@ -1221,7 +1200,7 @@ smallest packet for which the node sends RTS, a value equal to the maximum
 packet size disable the scheme. You may also set this parameter to auto, fixed
 or off.")
                              },
-                             { label => N("Fragmentation"), val => \$ethntf->{WIRELESS_FRAG} },
+                             { label => N("Fragmentation"), val => \$ethntf->{WIRELESS_FRAG}, advanced => 1 },
                              { label => N("Iwconfig command extra arguments"), val => \$ethntf->{WIRELESS_IWCONFIG}, advanced => 1,
                                help => N("Here, one can configure some extra wireless parameters such as:
 ap, channel, commit, enc, power, retry, sens, txpower (nick is already set as the hostname).
@@ -1251,7 +1230,17 @@ those interface specific commands and their effect.
 
 See iwpriv(8) man page for further information."),
                              }
-                         ];
+                            ];
+                    },
+                    complete => sub {
+                        if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+                            $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
+                            return 1, 6;
+                        }
+                        if ($ethntf->{WIRELESS_RATE} && $ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+                            $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
+                            return 1, 8;
+                        }
                     },
                     post => sub {
                         # untranslate parameters
