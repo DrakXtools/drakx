@@ -50,8 +50,7 @@ sub get_default_device() {
     my $netc = {};
     my $intf = {};
     network::netconnect::read_net_conf($netcnx, $netc, $intf);
-    my $default_intf = network::tools::get_default_gateway_interface($netc, $intf);
-    $default_intf->{DEVICE};
+    network::tools::get_default_gateway_interface($netc, $intf);
 }
 
 sub get_net_device() {
