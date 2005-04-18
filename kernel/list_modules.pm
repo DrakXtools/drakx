@@ -181,7 +181,7 @@ our %l = (
       ),
     ],
     tv => [ qw(bt878 bttv cx8800 cx88-blackbird dpc7146 ivtv saa7134 zr36067) ],
-    dvb => [ qw(budget budget-av budget-ci dvb-dibusb dvb-ttpci hexium_orion hexium_gemini skystar2) ],
+    dvb => [ qw(budget budget-av budget-ci cinergyT2 dvb-dibusb dvb-ttpci dvb-ttusb-budget hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
