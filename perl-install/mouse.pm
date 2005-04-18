@@ -300,8 +300,9 @@ sub detect {
             if (my $synaptics_name = find { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
                 $synaptics_mouse = fullname2mouse('Universal|Synaptics Touchpad', if_($mouse_nb == 1, wacom => \@wacom));
                 $synaptics_mouse->{ALPS} = $synaptics_name =~ /ALPS/;
-                $::isInstall and $synaptics_mouse->{alternate_install} = $univ_mouse; #- do not try to use synpatics at beginning of install
-                $mouse_nb == 1 and return $synaptics_mouse;
+                #- do not try to use synpatics at beginning of install
+                $::isInstall and $synaptics_mouse->{alternate_install} = $univ_mouse;
+                #- always configure an universal mouse so that USB mices can be hotplugged
                 $univ_mouse->{auxmouse} = $synaptics_mouse;
             }
 	    return $univ_mouse;
