@@ -233,7 +233,6 @@ arch() =~ /^sparc/ ? (
  "guj" => [ N_("_: keyboard\nGujarati"),      "us",              "guj",   1 ],
  "gur" => [ N_("_: keyboard\nGurmukhi"),      "us",              "gur",   1 ],
  "hr" => [ N_("_: keyboard\nCroatian"),       "croat",           "hr",    0 ],
-# old XKB layout
  "hu" => [ N_("_: keyboard\nHungarian"),      "hu-latin2",       "hu",    0 ],
  "ie" => [ N_("_: keyboard\nIrish"),          "uk",              "ie",    0 ],
  "il" => [ N_("_: keyboard\nIsraeli"),        "il-8859_8",       "il",    1 ],
@@ -257,15 +256,11 @@ arch() =~ /^sparc/ ? (
  "la" => [ N_("_: keyboard\nLatin American"), "la-latin1",       "la",    0 ],
 # TODO: console map
  "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "lo",    1 ], 
-# old XKB layout
- "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt_a", 0 ],
-# old XKB layout
+ "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt(lt_a)", 0 ],
 #- TODO: write a console kbd map for lt_new
- "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt_std", 0 ],
-# old XKB layout
- "lt_b" => [ N_("_: keyboard\nLithuanian \"number row\" QWERTY"), "ltb-latin7", "lt", 1 ],
-# old XKB layout
- "lt_p" => [ N_("_: keyboard\nLithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt_p", 0 ],
+ "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt(lt_std)", 0 ],
+ "lt_b" => [ N_("_: keyboard\nLithuanian \"number row\" QWERTY"), "ltb-latin7", "lt(lt_us)", 1 ],
+ "lt_p" => [ N_("_: keyboard\nLithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt(phonetic)", 0 ],
  "lv" => [ N_("_: keyboard\nLatvian"),	 "lv-latin7",       "lv",    0 ],
  "mal" => [ N_("_: keyboard\nMalayalam"),	 "us",              "ml(mlplusnum)", 1 ],
  "mk" => [ N_("_: keyboard\nMacedonian"),	 "mk",              "mk",    1 ],
@@ -294,7 +289,8 @@ arch() =~ /^sparc/ ? (
  "sd" => [ N_("_: keyboard\nSindhi"),         "us",              "sd",    1 ],
  "se" => [ N_("_: keyboard\nSwedish"),        "se-latin1",       "se",    0 ],
  "si" => [ N_("_: keyboard\nSlovenian"),      "slovene",         "si",    0 ],
-#"sin" => [ N_("_: keyboard\nSinhala"),       "us",              "sin",   1 ],
+# TODO: console map
+ "sin" => [ N_("_: keyboard\nSinhala"),       "us",              "sin",   1 ],
  "sk" => [ N_("_: keyboard\nSlovakian (QWERTZ)"), "sk-qwertz",   "sk",    0 ],
  "sk_qwerty" => [ N_("_: keyboard\nSlovakian (QWERTY)"), "sk-qwerty", "sk_qwerty", 0 ],
 # TODO: console map
@@ -311,11 +307,8 @@ arch() =~ /^sparc/ ? (
  "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th_pat", 1 ],
 # TODO: console map
 # NOTE: we define a triple layout here
-# NOTE: this is the "phonetic" layout, not standard moroccan
-# layout (the standard is still in proposal mode)
-"tifinagh_p" => [ N_("_: keyboard\nTifinagh (+latin/arabic)"), "us", "fr,tifinagh(phonetic),ar(azerty)", 1 ],
-#"tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "us", "fr,tifinagh,ar(azerty)", 1 ],
-#"tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "us", "fr,tifinagh(phonetic),ar(azerty)", 1 ],
+ "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr", "fr,tifinagh,ar(azerty)", 1 ],
+ "tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "fr", "fr,tifinagh(phonetic),ar(azerty)", 1 ],
 # TODO: console map
  "tj" => [ N_("_: keyboard\nTajik"),         "ru4",             "tj",    1 ],
 # TODO: console map
