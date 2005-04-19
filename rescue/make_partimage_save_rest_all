@@ -1,17 +1,20 @@
 #!/bin/sh
 
-[ $# != 1 -a $# != 2 ] && { 
-    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir>]" ; 
+[ $# != 1 -a $# != 2 -a $# != 3 ] && { 
+    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir> [</data/box>]]" ; 
     exit 1
 }
 
 rpm=$1
 partimage_dir=$2
+local_where=$3
+
 where=/data/box
+[ -z "$local_where" ] && local_where=$where
 
 if [ -n "$partimage_dir" ]; then
-    [ -d "$partimage_dir$where" ] || {
-	echo "can't find $partimage_dir$where"
+    [ -d "$partimage_dir$local_where" ] || {
+	echo "can't find $partimage_dir$local_where"
 	exit 1
     }
 fi
@@ -24,7 +27,7 @@ PARTIMAGE_DIR="$where" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore 
 mkdir -p .tmp/install/stage2
 mv -f rescue.clp .tmp/install/stage2
 
-common_para="rescue automatic=method:cdrom"
+common_para="rescue acpi=ht automatic=method:cdrom"
 # hda=4864,255,63
 
 for action in save_all rest_all; do
@@ -47,7 +50,7 @@ EOF
 
     if [ $action = rest_all ]; then
 	mkdir -p .tmp$where
-	ln -s $partimage_dir$where/* .tmp$where
+	ln -s $partimage_dir$local_where/* .tmp$where
     fi
 
     mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
