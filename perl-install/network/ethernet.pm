@@ -132,6 +132,8 @@ sub get_eth_card_mac_address {
 sub update_iftab() {
     foreach my $intf (detect_devices::getNet()) {
         my ($link_type, $mac_address) = get_eth_card_mac_address($intf) or next;
+        #- do not write zeroed MAC addresses in iftab, it confuses ifrename
+        $mac_address = /^[0:]+$/ and next;
         my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type} or next;
         substInFile {
             s/^$intf\s+.*\n//;
