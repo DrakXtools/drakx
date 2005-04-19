@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #
-# Guillaume Cottenceau (gc@mandrakesoft.com)
+# Guillaume Cottenceau
 #
-# Copyright 2001 Mandrakesoft
+# Copyright 2001-2005 Mandriva
 #
 # This software may be freely redistributed under the terms of the GNU
 # public license.
@@ -42,7 +42,7 @@ M: foreach (@parts) {
 	my $where = $target;
 	if (!system("mount -t $fs $dev $where 2>/dev/null")) {
 	    if (-r "$where/etc/fstab" && -r "$where/etc/mandrake-release") {
-		print "=> found a Mandrake root partition on $dev\n=> type $fs, version `",
+		print "=> found a Mandriva Linux root partition on $dev\n=> type $fs, version `",
 		      chomp_(cat_ "$where/etc/mandrake-release"),
 		      "'\n";
 		@fstab = cat_("$where/etc/fstab");
@@ -82,6 +82,9 @@ if ($root) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.8  2005/04/19 13:10:25  prigaux
+#- mandriva switch
+#-
 #- Revision 1.7  2004/07/20 02:42:12  prigaux
 #- MandrakeSoft -> Mandrakesoft
 #-
