@@ -40,9 +40,9 @@ sub save_all() {
     foreach (@$part_list) {
 	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap');
 	if ($_->{saved}) {
-	    run_program::run_or_die(@partimage_cmd,
-				    '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
-				    'save', devices::make($_->{device}), "$dir/$_->{device}");
+	    run_or_die(@partimage_cmd,
+		       '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
+		       'save', devices::make($_->{device}), "$dir/$_->{device}");
 	}
     }
     save_part_list($part_list);
@@ -105,7 +105,7 @@ sub rest_all() {
 
     #- restore from partimage
     foreach (@$from_partimage) {
-	run_program::run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$dir/$_->{device}");
+	run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$dir/$_->{device}");
     }
 
     foreach (@$created) {
@@ -121,13 +121,18 @@ sub save_part_list {
     my @l = map { join(' ', @$_{lst_fields()}) } @$part_list;
     log::l("save_part_list: $_") foreach @l;
     my $partimage = join(' ', @partimage_cmd);
-    open(my $F, "| $partimage -z0 -Bfoo=bar -o save_file $dir/.lst");
+    open(my $F, "| $partimage -z0 -Bfoo=bar -o save_file $dir/lst");
     print $F "$_\n" foreach @l;
 }
 sub read_part_list() {
     my $partimage = join(' ', @partimage_cmd);
-    open(my $F, "$partimage -z0 -Bfoo=bar rest_file $dir/.lst |");
+    open(my $F, "$partimage -z0 -Bfoo=bar rest_file $dir/lst |");
     my @l = chomp_(cat__($F));
     log::l("read_part_list: $_") foreach @l;
     [ map { my %l; @l{lst_fields()} = split; \%l } @l ];
+}
+
+sub run_or_die {
+    my (@l) = @_;
+    run_program::raw({ timeout => 4 * 60 * 60 }, @l) or die join(' ', @l) . " failed\n";
 }
