@@ -1221,7 +1221,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
-                             { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
+                             { label => N("Encryption key"), val => \$wireless_key },
                              #- FIXME: ask if the access point is open or restricted
                              { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$wireless_use_wpa, type => "bool" },
                              { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS}, advanced => 1,
