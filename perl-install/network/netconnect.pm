@@ -997,10 +997,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             undef $ndiswrapper_driver;
                             undef $ndiswrapper_device;
                             unless (network::wireless::ndiswrapper_installed_drivers()) {
-                                if ($ndiswrapper_driver = network::wireless::ndiswrapper_ask_driver($in)) {
-                                    return !$ndiswrapper_do_driver_selection->();
-                                }
-                                return 1;
+                                $ndiswrapper_driver = network::wireless::ndiswrapper_ask_driver($in) or return 1;
+                                return !$ndiswrapper_do_driver_selection->();
                             }
                         }
                         0;
