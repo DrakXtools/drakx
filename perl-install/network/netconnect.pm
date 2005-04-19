@@ -1203,6 +1203,7 @@ notation (for example, 1.2.3.4).")),
                    wireless =>
                    {
                     pre => sub {
+                        require network::wireless;
                         $ethntf->{wireless_eth} = 1;
                         $netc->{wireless_eth} = 1;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
