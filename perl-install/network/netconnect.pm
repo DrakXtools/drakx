@@ -89,7 +89,7 @@ sub real_main {
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
-      my ($ndiswrapper_driver, $ndiswrapper_inf_file);
+      my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
       my ($is_wireless, $wireless_key, $wireless_use_wpa);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
@@ -238,6 +238,42 @@ sub real_main {
               delete $netc->{GATEWAY};
               delete $netc->{GATEWAYDEV};
           }
+      };
+
+      my $ndiswrapper_do_device_selection = sub {
+          $ntf_name = network::wireless::ndiswrapper_setup_device($in, $ndiswrapper_device);
+          unless ($ntf_name) {
+              undef $ndiswrapper_device;
+              return;
+          }
+
+          #- redetect interfaces (so that the ndiswrapper module can be detected)
+          $lan_detect->();
+
+          $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+
+          1;
+      };
+
+      my $ndiswrapper_do_driver_selection = sub {
+          my @devices = network::wireless::ndiswrapper_get_devices($in, $ndiswrapper_driver);
+
+          if (!@devices) {
+              undef $ndiswrapper_driver;
+              return;
+          } elsif (@devices == 1) {
+              #- only one device matches installed driver
+              $ndiswrapper_device = $devices[0];
+              return $ndiswrapper_do_device_selection->();
+          }
+
+          1;
+      };
+
+      my $ndiswrapper_next_step = sub {
+          return $ndiswrapper_device ? 'lan_protocol' :
+                 $ndiswrapper_driver ? 'ndiswrapper_select_device' :
+                 'ndiswrapper_select_driver';
       };
 
       use locale;
@@ -958,12 +994,30 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                         [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N_("Manually load a driver"), if_($is_wireless, N_("Use a Windows driver (with ndiswrapper)")) ], 
                             allow_empty_list => 1, format => sub { translate($eth_intf{$_[0]} || $_[0]) } } ];
                     },
+                    complete => sub {
+                        if ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
+                            require network::wireless;
+                            unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
+                                $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
+                                return 1;
+                            }
+                            undef $ndiswrapper_driver;
+                            undef $ndiswrapper_device;
+                            unless (network::wireless::ndiswrapper_installed_drivers()) {
+                                if ($ndiswrapper_driver = network::wireless::ndiswrapper_ask_driver($in)) {
+                                    return !$ndiswrapper_do_driver_selection->();
+                                }
+                                return 1;
+                            }
+                        }
+                        0;
+                    },
                     post => sub {
                         if ($ntf_name eq "Manually load a driver") {
                             modules::interactive::load_category__prompt($in, $modules_conf, list_modules::ethernet_categories());
                             return 'lan';
                         } elsif ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
-                            return 'ndiswrapper';
+                            return $ndiswrapper_next_step->();
                         }
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
@@ -1115,56 +1169,35 @@ notation (for example, 1.2.3.4).")),
                     },
                    },
 
-                   ndiswrapper =>
+                   ndiswrapper_select_driver =>
                    {
                     pre => sub {
-                        require network::wireless;
+                        @ndiswrapper_drivers = network::wireless::ndiswrapper_installed_drivers();
+                        $ndiswrapper_driver ||= first(@ndiswrapper_drivers);
                     },
                     data => sub {
-                        my @drv = network::wireless::ndiswrapper_installed_drivers();
                         [ { label => N("Choose an ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver, allow_empty_list => 1,
-                            list => [ N("Install a new driver"), if_(@drv, N("Use already installed driver (%s)", join(", ", @drv))) ] } ];
+                            list => [ undef, @ndiswrapper_drivers ],
+                            format => sub { defined $_[0] ? N("Use the ndiswrapper driver %s", $_[0]) : N("Install a new driver") } } ];
                     },
                     complete => sub {
-                        unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
-                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
-                            return 1;
-                        }
-                        if ($ndiswrapper_driver eq N("Install a new driver")) {
-                            if ($ndiswrapper_inf_file = $in->ask_file(N("Please select the Windows driver (.inf file)"), "/mnt/cdrom")) {
-                                    return system('ndiswrapper', '-i', $ndiswrapper_inf_file);
-                            }
-                            return 1;
-                        }
+                        $ndiswrapper_driver ||= network::wireless::ndiswrapper_ask_driver($in) or return 1;
+                        !$ndiswrapper_do_driver_selection->();
                     },
-                    post => sub {
-                        if (keys %eth_intf) {
-                            return 'ndiswrapper_intf';
-                        } else {
-                            $ntf_name = network::wireless::ndiswrapper_setup();
-                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                            return 'lan_protocol';
-                        }
-                    }
+                    post => $ndiswrapper_next_step,
                    },
 
-                   ndiswrapper_intf =>
+                   ndiswrapper_select_device =>
                    {
-                    pre => sub {
-                        undef $ntf_name;
+                    data => sub {
+                        [ { label => N("Select a device:"), type => "list", val => \$ndiswrapper_device, allow_empty_list => 1,
+                            list => [ network::wireless::ndiswrapper_present_devices($ndiswrapper_driver) ],
+                            format => sub { $_[0]{description} } } ];
                     },
-                    data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ],
-                            format => sub { translate($eth_intf{$_[0]}) } } ];
+                    complete => sub {
+                        !$ndiswrapper_do_device_selection->();
                     },
-                    post => sub {
-                        #- if another module is loaded for the wireless interface, unload it before using ndiswrapper
-                        my $eth = find { $_->[0] eq $ntf_name } @all_cards;
-                        $eth and modules::unload($eth->[1]);
-                        $ntf_name = network::wireless::ndiswrapper_setup();
-                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                        return 'lan_protocol';
-                    },
+                    post => $ndiswrapper_next_step,
                    },
 
                    wireless =>

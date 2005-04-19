@@ -170,29 +170,104 @@ sub wpa_supplicant_add_network {
     chmod 0600, $wpa_supplicant_conf;
 }
 
+my $ndiswrapper_prefix = "$::prefix/etc/ndiswrapper";
+
 sub ndiswrapper_installed_drivers() {
-    `ndiswrapper -l` =~ /(\w+)\s+driver present/mg;
+    grep { -d "$ndiswrapper_prefix/$_" } all($ndiswrapper_prefix);
 }
 
-sub ndiswrapper_available_drivers() {
-    `ndiswrapper -l` =~ /(\w+)\s+driver present, hardware present/mg;
+sub ndiswrapper_present_devices {
+    my ($driver) = @_;
+    my @supported_devices;
+    foreach (all("$ndiswrapper_prefix/$driver")) {
+        my ($ids) = /^([0-9A-Z]{4}:[0-9A-Z]{4})\.[05]\.conf$/;
+        $ids and push @supported_devices, $ids;
+    }
+    grep { member(uc(sprintf("%04x:%04x", $_->{vendor}, $_->{id})), @supported_devices) } detect_devices::probeall();
 }
 
-sub ndiswrapper_setup() {
+sub ndiswrapper_get_devices {
+    my ($in, $driver) = @_;
+    my @devices = ndiswrapper_present_devices($driver);
+    @devices or $in->ask_warn(N("Error"), N("No device supporting the %s ndiswrapper driver is present!", $driver));
+    @devices;
+}
+
+sub ndiswrapper_ask_driver {
+    my ($in) = @_;
+    if (my $inf_file = $in->ask_file(N("Please select the Windows driver (.inf file)"), "/mnt/cdrom")) {
+        my $driver = basename(lc($inf_file));
+        $driver =~ s/\.inf$//;
+
+        #- first uninstall the driver if present, may solve issues if it is corrupted
+        -d "$ndiswrapper_prefix/$driver" and system('ndiswrapper', '-e', $driver);
+
+        unless (system('ndiswrapper', '-i', $inf_file) == 0) {
+            $in->ask_warn(N("Error"), N("Unable to install the %s ndiswrapper driver!", $driver));
+            return undef;
+        }
+
+        return $driver;
+    }
+    undef;
+}
+
+sub ndiswrapper_find_matching_devices {
+    my ($device) = @_;
+    my $net_path = '/sys/class/net';
+    my @devices;
+
+    foreach my $interface (all($net_path)) {
+        my $dev_path = "$net_path/$interface/device";
+        -l $dev_path or next;
+
+        my %map = (vendor => 'vendor', device => 'id');
+        if (every { hex(chomp_(cat_("$dev_path/$_"))) eq $device->{$map{$_}} } keys %map) {
+            my $driver = readlink("$net_path/$interface/driver");
+            $driver =~ s!.*/!!;
+            push @devices, [ $interface, $driver ];
+        }
+    }
+
+    @devices;
+}
+
+sub ndiswrapper_find_conflicting_devices {
+    my ($device) = @_;
+    grep { $_->[1] ne "ndiswrapper" } ndiswrapper_find_matching_devices($device);
+}
+
+sub ndiswrapper_find_interface {
+    my ($device) = @_;
+    my $dev = find { $_->[1] eq "ndiswrapper" } ndiswrapper_find_matching_devices($device);
+    $dev->[0];
+}
+
+sub ndiswrapper_setup_device {
+    my ($in, $device) = @_;
+
     eval { modules::unload("ndiswrapper") };
     #- unload ndiswrapper first so that the newly installed .inf files will be read
     eval { modules::load("ndiswrapper") };
 
-    #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
-    #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
-    my @available_drivers = ndiswrapper_available_drivers();
-    my $ntf_name = find {
-        my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
-        $drv =~ s!.*/!!;
-        member($drv, @available_drivers);
-    } detect_devices::getNet();
-    #- fallback on wlan0
-    return $ntf_name ||  "wlan0";
+    if ($@) {
+        $in->ask_warn(N("Error"), N("Unable to load the ndiswrapper module!"));
+        return;
+    }
+
+    my @ndiswrapper_conflicts = ndiswrapper_find_conflicting_devices($device);
+    if (@ndiswrapper_conflicts) {
+        $in->ask_yesorno(N("Warning"), N("The selected device has already been configured with the %s driver.
+Do you really want to use a ndiswrapper driver ?", $ndiswrapper_conflicts[0][1])) or return;
+    }
+
+    my $interface = ndiswrapper_find_interface($device);
+    unless ($interface) {
+        $in->ask_warn(N("Error"), N("Unable to find the ndiswrapper interface!"));
+        return;
+    }
+
+    $interface;
 }
 
 1;
