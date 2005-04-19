@@ -33,7 +33,7 @@ struct part {
   string devfs_device   # 'ide/host0/bus0/target0/lun0/part5', ...
   string prefer_devfs_name # should the {devfs_device} or the {device} be used in fstab
   string device_LABEL   # volume label. LABEL=xxx can be used in fstab instead of
-  string prefer_device_LABEL # should the {device_LABEL} or the {device} be used in fstab
+  bool prefer_device_LABEL # should the {device_LABEL} or the {device} be used in fstab
   bool faked_device     # false if {device} is a real device, true for nfs/smb/dav/none devices. If the field does not exist, we do not know
 
   string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
