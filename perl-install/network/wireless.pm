@@ -97,7 +97,7 @@ sub wpa_supplicant_configure {
 
     wpa_supplicant_add_network({
             ssid => qq("$ethntf->{WIRELESS_ESSID}"),
-            psk => network::tools::convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
+            psk => convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
             scan_ssid => 1,
     });
 }
