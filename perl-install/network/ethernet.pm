@@ -98,7 +98,7 @@ sub get_eth_cards {
         if (!$description) {
             my $drv = readlink("/sys/class/net/$interface/driver");
             if ($drv && $drv =~ s!.*/!!) {
-                $a = $drv if $detected_through_ethtool;
+                $a = $drv unless $detected_through_ethtool;
                 my %l;
                 my %sysfs_fields = (id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor");
                 $l{$_} = hex(chomp_(cat_("/sys/class/net/$interface/device/" . $sysfs_fields{$_}))) foreach keys %sysfs_fields;
