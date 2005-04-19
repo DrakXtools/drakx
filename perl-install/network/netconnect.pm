@@ -1122,7 +1122,7 @@ notation (for example, 1.2.3.4).")),
                     },
                     data => sub {
                         my @drv = network::wireless::ndiswrapper_installed_drivers();
-                        [ { label => N("Choose an ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver,
+                        [ { label => N("Choose an ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver, allow_empty_list => 1,
                             list => [ N("Install a new driver"), if_(@drv, N("Use already installed driver (%s)", join(", ", @drv))) ] } ];
                     },
                     complete => sub {
