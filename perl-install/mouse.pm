@@ -87,7 +87,6 @@ my %mice =
  [ [ 'input/mice' ],
    [ [ 7, 'ps/2', 'ExplorerPS/2', N_("Any PS/2 & USB mice") ],
      if_(is_xbox(), [ 5, 'ps/2', 'IMPS/2', N_("Microsoft Xbox Controller S") ]),
-     [ 5, 'ps/2', 'auto-dev', N_("Synaptics Touchpad") ],
    ] ],
     ),
 
@@ -290,23 +289,18 @@ sub detect {
 
     if (c::kernel_version() =~ /^\Q2.6/) {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
-        my $synaptics_mouse;
         if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } cat_('/proc/bus/input/devices')) {
             if (is_xbox()) {
                 return fullname2mouse('Universal|Microsoft Xbox Controller S', if_($::isInstall, alternate_install => fullname2mouse('Universal|Microsoft Xbox Controller S')));
             }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
             if (my ($synaptics_touchpad) = detect_devices::getSynapticsTouchpads()) {
-                $synaptics_mouse = fullname2mouse('Universal|Synaptics Touchpad', if_($mouse_nb == 1, wacom => \@wacom));
-                $synaptics_mouse->{ALPS} = $synaptics_touchpad->{description} =~ /ALPS/;
-                #- do not try to use synpatics at beginning of install
-                $::isInstall and $synaptics_mouse->{alternate_install} = $univ_mouse;
-                if ($mouse_nb == 1) {
-                    #- always configure an universal mouse so that USB mices can be hotplugged
-                    $synaptics_mouse->{auxmouse} = $univ_mouse;
-                    return $synaptics_mouse;
-                }
-                $univ_mouse->{auxmouse} = $synaptics_mouse;
+                $univ_mouse->{auxmouse} = {
+                                           name => N_("Synaptics Touchpad"),
+                                           Device => 'input/mice',
+                                           Protocal => 'auto-dev',
+                                           ALPS => $synaptics_touchpad->{description} =~ /ALPS/,
+                                          };
             }
 	    return $univ_mouse;
 	}
@@ -365,7 +359,7 @@ sub load_modules {
 	/ttyS/   and push @l, qw(serial);
 	/event/  and push @l, qw(wacom evdev);
     }
-    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse} && $mouse->{auxmouse}{name})) {
+    if ($mouse->{auxmouse} && $mouse->{auxmouse}{name} eq N_("Synaptics Touchpad")) {
 	push @l, qw(evdev);
     }
     eval { modules::load(@l) };
@@ -374,8 +368,7 @@ sub load_modules {
 sub set_xfree_conf {
     my ($mouse, $xfree_conf, $b_keep_auxmouse_unchanged) = @_;
 
-    my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
-      ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
+    my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
@@ -398,9 +391,7 @@ sub set_xfree_conf {
     }
 
     $synaptics and $xfree_conf->set_synaptics(map { {
-        Device => "/dev/$_->{device}",
-        Protocol => $_->{XMOUSETYPE},
-        Primary => !exists($mouse->{auxmouse}),
+        Primary => 0,
         ALPS => $_->{ALPS},
     } } @$synaptics);
 }
