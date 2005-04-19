@@ -305,9 +305,9 @@ sub ndiswrapper_available_drivers() {
 }
 
 sub ndiswrapper_setup() {
-    modules::unload("ndiswrapper");
+    eval { modules::unload("ndiswrapper") };
     #- unload ndiswrapper first so that the newly installed .inf files will be read
-    modules::load("ndiswrapper");
+    eval { modules::load("ndiswrapper") };
 
     #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
     #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
