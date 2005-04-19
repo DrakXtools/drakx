@@ -288,7 +288,7 @@ sub UpdateAvailable() {
 	foreach (`$IWList scan 2>/dev/null`) {
 		/([^ ]+)([ \t]+)Scan completed :/ and $device = $1;
 		/([^ ]+)([ \t]+)No scan results/ and  $device = $1;
-		/ESSID:".*?"/ and $essid = $1;
+		/ESSID:"(.*?)"/ and $essid = $1;
 		/Mode:(\S*)/ and $mode = $1;
 		m!Quality:(\S*)/! and $signal = $1;
 		if (/key:(\S*)\s/) {
