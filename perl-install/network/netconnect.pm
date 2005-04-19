@@ -1133,7 +1133,15 @@ notation (for example, 1.2.3.4).")),
                             return 1;
                         }
                     },
-                    next => 'ndiswrapper_intf',
+                    post => sub {
+                        if (keys %eth_intf ) {
+                            return 'ndiswrapper_intf';
+                        } else {
+                            $ntf_name = network::tools::ndiswrapper_setup();
+                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                            return 'lan_protocol';
+                        }
+                    }
                    },
 
                    ndiswrapper_intf =>
@@ -1143,29 +1151,13 @@ notation (for example, 1.2.3.4).")),
                     },
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ],
-                            format => sub { translate($eth_intf{$_[0]}) }, allow_empty_list => 1 } ];
+                            format => sub { translate($eth_intf{$_[0]}) } } ];
                     },
                     post => sub {
-                        if ($ntf_name) {
-                            #- if another module is loaded for the wireless interface, unload it before using ndiswrapper
-                            my $eth = find { $_->[0] eq $ntf_name } @all_cards;
-                            $ntf_name and modules::unload($eth->[1]);
-                        }
-                        modules::unload("ndiswrapper");
-                        #- unload ndiswrapper first so that the newly installed .inf files will be read
-                        modules::load("ndiswrapper");
-
-                        #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
-                        #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
-                        my @available_drivers = network::tools::ndiswrapper_available_drivers();
-                        $ntf_name = find {
-                            my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
-                            $drv =~ s!.*/!!;
-                            member($drv, @available_drivers);
-                        } detect_devices::getNet();
-                        #- fallback on wlan0
-                        $ntf_name ||= "wlan0";
-
+                        #- if another module is loaded for the wireless interface, unload it before using ndiswrapper
+                        my $eth = find { $_->[0] eq $ntf_name } @all_cards;
+                        $eth and modules::unload($eth->[1]);
+                        $ntf_name = network::tools::ndiswrapper_setup();
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         return 'lan_protocol';
                     },

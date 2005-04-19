@@ -304,4 +304,21 @@ sub ndiswrapper_available_drivers() {
     `ndiswrapper -l` =~ /(\w+)\s+driver present, hardware present/mg;
 }
 
+sub ndiswrapper_setup() {
+    modules::unload("ndiswrapper");
+    #- unload ndiswrapper first so that the newly installed .inf files will be read
+    modules::load("ndiswrapper");
+
+    #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
+    #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
+    my @available_drivers = network::tools::ndiswrapper_available_drivers();
+    my $ntf_name = find {
+        my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
+        $drv =~ s!.*/!!;
+        member($drv, @available_drivers);
+    } detect_devices::getNet();
+    #- fallback on wlan0
+    return $ntf_name ||  "wlan0";
+}
+
 1;
