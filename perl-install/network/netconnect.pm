@@ -82,7 +82,7 @@ sub real_main {
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
       my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf, %all_eth_intf);
-      my (%connections, @connection_list, $is_wireless);
+      my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
@@ -90,7 +90,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($ndiswrapper_driver, $ndiswrapper_inf_file);
-      my $wireless_use_wpa;
+      my ($is_wireless, $wireless_key, $wireless_use_wpa);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -1117,9 +1117,13 @@ notation (for example, 1.2.3.4).")),
 
                    ndiswrapper =>
                    {
+                    pre => sub {
+                        require network::wireless;
+                    },
                     data => sub {
+                        my @drv = network::wireless::ndiswrapper_installed_drivers();
                         [ { label => N("Choose an ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver,
-                            list => [ N("Install a new driver"), N("Use already installed driver (%s)", join(", ", network::tools::ndiswrapper_installed_drivers())) ] } ];
+                            list => [ N("Install a new driver"), if_(@drv, N("Use already installed driver (%s)", join(", ", @drv))) ] } ];
                     },
                     complete => sub {
                         unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
@@ -1134,10 +1138,10 @@ notation (for example, 1.2.3.4).")),
                         }
                     },
                     post => sub {
-                        if (keys %eth_intf ) {
+                        if (keys %eth_intf) {
                             return 'ndiswrapper_intf';
                         } else {
-                            $ntf_name = network::tools::ndiswrapper_setup();
+                            $ntf_name = network::wireless::ndiswrapper_setup();
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             return 'lan_protocol';
                         }
@@ -1157,7 +1161,7 @@ notation (for example, 1.2.3.4).")),
                         #- if another module is loaded for the wireless interface, unload it before using ndiswrapper
                         my $eth = find { $_->[0] eq $ntf_name } @all_cards;
                         $eth and modules::unload($eth->[1]);
-                        $ntf_name = network::tools::ndiswrapper_setup();
+                        $ntf_name = network::wireless::ndiswrapper_setup();
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         return 'lan_protocol';
                     },
@@ -1171,6 +1175,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
                         $wireless_use_wpa = exists $ethntf->{WIRELESS_WPA_DRIVER};
+                        $wireless_use_wpa or $wireless_key = network::wireless::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
@@ -1238,11 +1243,12 @@ See iwpriv(8) man page for further information."),
                     post => sub {
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
-                        $module =~ /^prism2_/ and network::network::wlan_ng_configure($in, $ethntf, $module);
+                        $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
                         if ($wireless_use_wpa) {
-                            $ethntf->{WIRELESS_WPA_DRIVER} = network::network::wpa_supplicant_get_driver($module);
-                            network::network::wpa_supplicant_configure($in, $ethntf);
+                            $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
+                            network::wireless::wpa_supplicant_configure($in, $ethntf);
                         } else {
+                            $intf->{WIRELESS_ENC_KEY} = network::wireless::get_wep_key_from_iwconfig($wireless_key);
                             delete $ethntf->{WIRELESS_WPA_DRIVER};
                         }
                         return "static_hostname";

@@ -158,10 +158,6 @@ sub write_interface_conf {
     defined($intf->{METRIC}) or $intf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($intf)),
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    if (local $intf->{WIRELESS_ENC_KEY} = $intf->{WIRELESS_ENC_KEY}) {
-        network::tools::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
-    }
-
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
@@ -426,7 +422,6 @@ sub read_all_conf {
 	    my $intf = findIntf($intf, $device);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
 	    $intf->{DEVICE} ||= $device;
-	    $intf->{WIRELESS_ENC_KEY} = network::tools::get_wep_key_from_iwconfig($intf->{WIRELESS_ENC_KEY});
 	}
     }
     if (my $default_intf = network::tools::get_default_gateway_interface($netc, $intf)) {
@@ -478,144 +473,6 @@ sub easy_dhcp {
 				      ONBOOT => 'yes'
 				     });
     1;
-}
-
-#- FIXME: to be improved (quotes, comments) and moved in common files
-sub wlan_ng_update_vars {
-    my ($file, $vars) = @_;
-    substInFile {
-        while (my ($key, $value) = each(%$vars)) {
-            s/^#?\Q$key\E=(?:"[^#]*"|[^#\s]*)(\s*#.*)?/$key=$value$1/ and delete $vars->{$key};
-        }
-        $_ .= join('', map { "$_=$vars->{$_}\n" } keys %$vars) if eof;
-    } $file;
-}
-
-sub wlan_ng_configure {
-    my ($in, $ethntf, $module) = @_;
-    $in->do_pkgs->install('prism2-utils');
-    if ($ethntf->{WIRELESS_ESSID}) {
-        my $wlan_conf_file = "$::prefix/etc/wlan/wlan.conf";
-        my @wlan_devices = split(/ /, (cat_($wlan_conf_file) =~ /^WLAN_DEVICES="(.*)"/m)[0]);
-        push @wlan_devices, $ethntf->{DEVICE} unless member($ethntf->{DEVICE}, @wlan_devices);
-        #- enable device and make it use the choosen ESSID
-        wlan_ng_update_vars($wlan_conf_file,
-                            {
-                                WLAN_DEVICES => qq("@wlan_devices"),
-                                "SSID_$ethntf->{DEVICE}" => qq("$ethntf->{WIRELESS_ESSID}"),
-                                "ENABLE_$ethntf->{DEVICE}" => "y"
-                            });
-        my $wlan_ssid_file = "$::prefix/etc/wlan/wlancfg-$ethntf->{WIRELESS_ESSID}";
-        #- copy default settings for this ESSID if config file does not exist
-        -f $wlan_ssid_file or cp_f("$::prefix/etc/wlan/wlancfg-DEFAULT", $wlan_ssid_file);
-        #- enable/disable encryption
-        wlan_ng_update_vars($wlan_ssid_file,
-                            {
-                                (map { $_ => $ethntf->{WIRELESS_ENC_KEY} ? "true" : "false" } qw(lnxreq_hostWEPEncrypt lnxreq_hostWEPDecrypt dot11PrivacyInvoked dot11ExcludeUnencrypted)),
-                                AuthType => $ethntf->{WIRELESS_ENC_KEY} ? qq("sharedkey") : qq("opensystem"),
-                                if_($ethntf->{WIRELESS_ENC_KEY},
-                                    dot11WEPDefaultKeyID => 0,
-                                    dot11WEPDefaultKey0 => qq("$ethntf->{WIRELESS_ENC_KEY}")
-                                )
-                            });
-        #- hide settings for non-root users
-        chmod 0600, $wlan_conf_file;
-        chmod 0600, $wlan_ssid_file;
-    }
-    #- apply settings on wlan interface
-    require services;
-    services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
-}
-
-sub wpa_supplicant_get_driver {
-    my ($module) = @_;
-    $module =~ /^hostap_/ ? "hostap" :
-    $module eq "prism54" ? "prism54" :
-    $module =~ /^ath_/ ? "madwifi" :
-    $module =~ /^at76c50|atmel_/ ? "atmel" :
-    $module eq "ndiswrapper" ? "ndiswrapper" :
-    $module =~ /^ipw2[12]00$/ ? "ipw" :
-    "wext";
-}
-
-sub wpa_supplicant_configure {
-    my ($in, $ethntf) = @_;
-    require services;
-    $in->do_pkgs->install('wpa_supplicant');
-
-    wpa_supplicant_add_network({
-            ssid => qq("$ethntf->{WIRELESS_ESSID}"),
-            psk => network::tools::convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
-            scan_ssid => 1,
-    });
-}
-
-sub wpa_supplicant_add_network {
-    my ($new_network) = @_;
-    my $wpa_supplicant_conf = "$::prefix/etc/wpa_supplicant.conf";
-    my $s;
-    my %network;
-    foreach (cat_($wpa_supplicant_conf)) {
-        if (%network) {
-            #- in a "network = {}" block
-            if (/^\s*(\w+)=(.*?)(\s*#.*)?$/) {
-                push @{$network{entries}}, { key => $1, value => $2, comment => $3 };
-                $1 eq 'ssid' and $network{ssid} = $2;
-            } elsif (/^\}/) {
-                #- end of network block, write it
-                $s .= "network={$network{comment}\n";
-                my $update = $network{ssid} eq $new_network->{ssid};
-                foreach (@{$network{entries}}) {
-                    my $key = $_->{key};
-                    if ($update) {
-                        #- do not write entry if not provided in the new network
-                        exists $new_network->{$key} or next;
-                        #- update value from the new network
-                        $_->{value} = delete $new_network->{$key};
-                    }
-                    if ($key) {
-                        $s .= "    $key=$_->{value}$_->{comment}\n";
-                    } else {
-                        $s .= " $_->{comment}\n";
-                    }
-                }
-                if ($update) {
-                    while (my ($key, $value) = each(%$new_network)) {
-                        $s .= "    $key=$value\n";
-                    }
-                }
-                $s .= "}\n";
-                undef %network;
-                $update and undef $new_network;
-            } else {
-                #- unrecognized, keep it anyway
-                push @{$network{entries}}, { comment => $_ };
-            }
-        } else {
-            if (/^\s*network={(.*)/) {
-                #- beginning of a new network block
-                $network{comment} = $1;
-            } else {
-                #- keep other options, comments
-                $s .= $_;
-            }
-        }
-    }
-    if ($new_network) {
-        #- network wasn't found, write it
-        $s .= "\nnetwork={\n";
-        #- write ssid first
-        if (my $ssid = delete $new_network->{ssid}) {
-            $s .= "    ssid=$ssid\n";
-        }
-        while (my ($key, $value) = each(%$new_network)) {
-            $s .= "    $key=$value\n";
-        }
-        $s .= "}\n";
-    }
-    output($wpa_supplicant_conf, $s);
-    #- hide keys for non-root users
-    chmod 0600, $wpa_supplicant_conf;
 }
 
 #- configureNetwork2 : configure the network interfaces.

@@ -210,32 +210,6 @@ sub is_dynamic_host {
   any { defined $_->{DHCP_HOSTNAME} } values %$intf;
 }
 
-sub convert_wep_key_for_iwconfig {
-    #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
-    #- else consider the key as hexadecimal, do not strip dashes
-    #- always quote the key as string
-    my ($key) = @_;
-    member(length($key), (5, 13)) ? "s:$key" : $key;
-}
-
-sub get_wep_key_from_iwconfig {
-    #- strip "s:" if the key is 5 or 13 characters (ASCII)
-    #- else the key as hexadecimal, do not modify
-    my ($key) = @_;
-    $key =~ s/^s:// if member(length($key), (7,15));
-    $key;
-}
-
-sub convert_key_for_wpa_supplicant {
-    my ($key) = @_;
-    if ($key =~ /^([[:xdigit:]]{4}[\:-])+[[:xdigit:]]{2,}$/) {
-        $key =~ s/[\:-]//g;
-        return lc($key);
-    } else {
-        return qq("$key");
-    }
-}
-
 #- returns interface whose IP address matchs given IP address, according to its network mask
 sub find_matching_interface {
     my ($intf, $address) = @_;
@@ -294,31 +268,6 @@ sub get_default_metric {
     eval { $idx = find_index { $type eq $_ } @known_types };
     $idx = @known_types if $@;
     $idx * 10;
-}
-
-sub ndiswrapper_installed_drivers() {
-    `ndiswrapper -l` =~ /(\w+)\s+driver present/mg;
-}
-
-sub ndiswrapper_available_drivers() {
-    `ndiswrapper -l` =~ /(\w+)\s+driver present, hardware present/mg;
-}
-
-sub ndiswrapper_setup() {
-    eval { modules::unload("ndiswrapper") };
-    #- unload ndiswrapper first so that the newly installed .inf files will be read
-    eval { modules::load("ndiswrapper") };
-
-    #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
-    #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
-    my @available_drivers = network::tools::ndiswrapper_available_drivers();
-    my $ntf_name = find {
-        my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
-        $drv =~ s!.*/!!;
-        member($drv, @available_drivers);
-    } detect_devices::getNet();
-    #- fallback on wlan0
-    return $ntf_name ||  "wlan0";
 }
 
 1;
