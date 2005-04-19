@@ -1208,7 +1208,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
                         $wireless_use_wpa = exists $ethntf->{WIRELESS_WPA_DRIVER};
-                        $wireless_use_wpa or $wireless_key = network::wireless::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
+                        $wireless_use_wpa or $wireless_key = network::wireless::convert_wep_key_for_iwconfig($ethntf->{WIRELESS_ENC_KEY});
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
@@ -1281,7 +1281,7 @@ See iwpriv(8) man page for further information."),
                             $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
                             network::wireless::wpa_supplicant_configure($in, $ethntf);
                         } else {
-                            $intf->{WIRELESS_ENC_KEY} = network::wireless::get_wep_key_from_iwconfig($wireless_key);
+                            $ethntf->{WIRELESS_ENC_KEY} = network::wireless::get_wep_key_from_iwconfig($wireless_key);
                             delete $ethntf->{WIRELESS_WPA_DRIVER};
                         }
                         return "static_hostname";
