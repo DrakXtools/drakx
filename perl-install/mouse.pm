@@ -297,8 +297,8 @@ sub detect {
             if (my ($synaptics_touchpad) = detect_devices::getSynapticsTouchpads()) {
                 $univ_mouse->{auxmouse} = {
                                            name => N_("Synaptics Touchpad"),
-                                           Device => 'input/mice',
-                                           Protocal => 'auto-dev',
+                                           device => 'input/mice',
+                                           XMOUSETYPE => 'auto-dev',
                                            ALPS => $synaptics_touchpad->{description} =~ /ALPS/,
                                           };
             }
@@ -391,6 +391,8 @@ sub set_xfree_conf {
     }
 
     $synaptics and $xfree_conf->set_synaptics(map { {
+        Device => "/dev/$_->{device}",
+        Protocol => $_->{XMOUSETYPE},
         Primary => 0,
         ALPS => $_->{ALPS},
     } } @$synaptics);
