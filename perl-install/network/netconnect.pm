@@ -1151,6 +1151,8 @@ notation (for example, 1.2.3.4).")),
                             my $eth = find { $_->[0] eq $ntf_name } @all_cards;
                             $ntf_name and modules::unload($eth->[1]);
                         }
+                        modules::unload("ndiswrapper");
+                        #- unload ndiswrapper first so that the newly installed .inf files will be read
                         modules::load("ndiswrapper");
 
                         #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
