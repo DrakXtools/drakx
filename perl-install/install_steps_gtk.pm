@@ -47,9 +47,7 @@ sub new($$) {
 	    if ($server eq 'Xnest') {
 		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
 	    } elsif ($::globetrotter || !$::move) {
-                #- use alternate mouse in install if mouse is unsafe or needs some specific module (e.g. synaptics)
-                my $mouse = is_empty_hash_ref($o->{mouse}{alternate_install}) ? $o->{mouse} : $o->{mouse}{alternate_install};
-		install_gtk::createXconf($f, @$mouse{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
+		install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
 		push @options, if_(!$::globetrotter, '-kb'), '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
 		push @options, 'tty7', '-dpms', '-s', '240';

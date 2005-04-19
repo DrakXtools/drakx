@@ -291,7 +291,7 @@ sub detect {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
         if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } cat_('/proc/bus/input/devices')) {
             if (is_xbox()) {
-                return fullname2mouse('Universal|Microsoft Xbox Controller S', if_($::isInstall, alternate_install => fullname2mouse('Universal|Microsoft Xbox Controller S')));
+                return fullname2mouse('Universal|Microsoft Xbox Controller S');
             }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
             if (my ($synaptics_touchpad) = detect_devices::getSynapticsTouchpads()) {
