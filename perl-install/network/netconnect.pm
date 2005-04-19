@@ -99,13 +99,6 @@ sub real_main {
       my $config = {};
       eval(cat_("$::prefix/etc/sysconfig/drakconnect"));
 
-      my %wireless_mode = (N("Ad-hoc") => "Ad-hoc",
-                           N("Managed") => "Managed",
-                           N("Master") => "Master",
-                           N("Repeater") => "Repeater",
-                           N("Secondary") => "Secondary",
-                           N("Auto") => "Auto",
-                          );
       my %l10n_lan_protocols = (
                                static => N("Manual configuration"),
                                dhcp   => N("Automatic IP (BOOTP/DHCP)"),
@@ -1215,7 +1208,8 @@ notation (for example, 1.2.3.4).")),
                     data => sub {
                             [
                              { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE},
-                               list => [ keys %wireless_mode ] },
+                               list => [ N_("Ad-hoc"), N_("Managed"), N_("Master"), N_("Repeater"), N_("Secondary"), N_("Auto") ],
+                               format => \&translate },
                              { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
                              { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
                              { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
@@ -1275,8 +1269,6 @@ See iwpriv(8) man page for further information."),
                         }
                     },
                     post => sub {
-                        # untranslate parameters
-                        $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
                         $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
                         if ($wireless_use_wpa) {
                             $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
