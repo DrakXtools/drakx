@@ -95,7 +95,7 @@ static int wireless_set_restricted_key(int socket, const char *ifname, const cha
 	int key_len = 0;
 	unsigned int tmp;
 
-	while (sscanf(key + key_len, "%2X", &tmp) == 1)
+	while (sscanf(key + 2*key_len, "%2X", &tmp) == 1)
 		real_key[key_len++] = (unsigned char) tmp;
 
 	wrq.u.data.flags = IW_ENCODE_RESTRICTED;
