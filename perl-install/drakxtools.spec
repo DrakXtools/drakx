@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,34 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Apr 20 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.2mdk
+- drakconnect (blino):
+  o merge wireless steps and move advanced settings in advanced mode (#15501)
+  o configure wpa driver in drakconnect, wpa_supplicant init script is dropped
+  o fix default wireless mode to be "Managed" instead of "Secondary"
+  o really use given encryption key
+  o improve ndiswrapper driver configuration (allow to select driver,
+    device and many errors handling)
+  o fix fallback sysfs if ethtool failled
+  o do not write zeroed MAC addresses in iftab, it confuses ifrename
+  o do not crash if modprobe fails
+  o unload ndiswrapper first so that the newly installed .inf files
+    will be read
+  o allow to choose the wireless encryption mode between "None", "Open
+    WEP", "Restricted WEP" and "WPA Pre-Shared Key"
+- drakfirewall: fix automatic net interface detection (blino)
+- drakroam: fix SSID listing (blino)
+- keyboardrake: update keyboard list for next xorg-x11 (pablo)
+- mousedrake (blino):
+  o preselect synaptics touchpad if no external mouse is present
+  o better detection for touchpad
+  o append evdev in modprobe.preload if a touchpad is detected
+  o always configure an universal mouse so that USB mices can be hotplugged
+  o always set synaptics touchpad as secondary and don't list them in
+    mousedrake
+- net_applet: increase network check timeout to lower the load (blino)
+- XFdrake: suggest 1280x1024 instead of 1280x960 which causes pbs (pixel)
+
 * Fri Apr 15 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.1mdk
 - drakbackup: fix direct-to-tape backup/restore issues (stew, #15293)
 - drakconnect (blino):
