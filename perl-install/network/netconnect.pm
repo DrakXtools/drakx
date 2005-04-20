@@ -90,7 +90,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
-      my ($is_wireless, $wireless_key, $wireless_use_wpa);
+      my ($is_wireless, $wireless_enc_mode, $wireless_enc_key);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -177,6 +177,13 @@ sub real_main {
                               4 => N("PAP/CHAP"),
                              );
 
+      my %wireless_enc_modes = (
+                                none => N("None"),
+                                open => N("Open WEP"),
+                                restricted => N("Restricted WEP"),
+                                'wpa-psk' => N("WPA Pre-Shared Key"),
+                               );
+
       my $offer_to_connect = sub {
           return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && !member($adsl_type, qw(manual dhcp));
           return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn isdn_external));
@@ -234,7 +241,7 @@ sub real_main {
       };
 
       my $ndiswrapper_do_device_selection = sub {
-          $ntf_name = network::wireless::ndiswrapper_setup_device($in, $ndiswrapper_device);
+          $ntf_name = network::ndiswrapper::setup_device($in, $ndiswrapper_device);
           unless ($ntf_name) {
               undef $ndiswrapper_device;
               return;
@@ -249,7 +256,7 @@ sub real_main {
       };
 
       my $ndiswrapper_do_driver_selection = sub {
-          my @devices = network::wireless::ndiswrapper_get_devices($in, $ndiswrapper_driver);
+          my @devices = network::ndiswrapper::get_devices($in, $ndiswrapper_driver);
 
           if (!@devices) {
               undef $ndiswrapper_driver;
@@ -989,15 +996,15 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     },
                     complete => sub {
                         if ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
-                            require network::wireless;
+                            require network::ndiswrapper;
                             unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
                                 $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
                                 return 1;
                             }
                             undef $ndiswrapper_driver;
                             undef $ndiswrapper_device;
-                            unless (network::wireless::ndiswrapper_installed_drivers()) {
-                                $ndiswrapper_driver = network::wireless::ndiswrapper_ask_driver($in) or return 1;
+                            unless (network::ndiswrapper::installed_drivers()) {
+                                $ndiswrapper_driver = network::ndiswrapper::ask_driver($in) or return 1;
                                 return !$ndiswrapper_do_driver_selection->();
                             }
                         }
@@ -1163,7 +1170,7 @@ notation (for example, 1.2.3.4).")),
                    ndiswrapper_select_driver =>
                    {
                     pre => sub {
-                        @ndiswrapper_drivers = network::wireless::ndiswrapper_installed_drivers();
+                        @ndiswrapper_drivers = network::ndiswrapper::installed_drivers();
                         $ndiswrapper_driver ||= first(@ndiswrapper_drivers);
                     },
                     data => sub {
@@ -1172,7 +1179,7 @@ notation (for example, 1.2.3.4).")),
                             format => sub { defined $_[0] ? N("Use the ndiswrapper driver %s", $_[0]) : N("Install a new driver") } } ];
                     },
                     complete => sub {
-                        $ndiswrapper_driver ||= network::wireless::ndiswrapper_ask_driver($in) or return 1;
+                        $ndiswrapper_driver ||= network::ndiswrapper::ask_driver($in) or return 1;
                         !$ndiswrapper_do_driver_selection->();
                     },
                     post => $ndiswrapper_next_step,
@@ -1182,7 +1189,7 @@ notation (for example, 1.2.3.4).")),
                    {
                     data => sub {
                         [ { label => N("Select a device:"), type => "list", val => \$ndiswrapper_device, allow_empty_list => 1,
-                            list => [ network::wireless::ndiswrapper_present_devices($ndiswrapper_driver) ],
+                            list => [ network::ndiswrapper::present_devices($ndiswrapper_driver) ],
                             format => sub { $_[0]{description} } } ];
                     },
                     complete => sub {
@@ -1199,8 +1206,12 @@ notation (for example, 1.2.3.4).")),
                         $netc->{wireless_eth} = 1;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
-                        $wireless_use_wpa = exists $ethntf->{WIRELESS_WPA_DRIVER};
-                        $wireless_use_wpa or $wireless_key = network::wireless::convert_wep_key_for_iwconfig($ethntf->{WIRELESS_ENC_KEY});
+                        ($wireless_enc_key, my $restricted) = network::wireless::get_wep_key_from_iwconfig($ethntf->{WIRELESS_ENC_KEY});
+                        $wireless_enc_mode =
+                          exists $ethntf->{WIRELESS_WPA_DRIVER} ? 'wpa-psk' :
+                          !$wireless_enc_key ? 'none' :
+                          $restricted ? 'restricted' :
+                          'open';
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
@@ -1213,9 +1224,10 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
-                             { label => N("Encryption key"), val => \$wireless_key },
-                             #- FIXME: ask if the access point is open or restricted
-                             { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$wireless_use_wpa, type => "bool" },
+                             { label => N("Encryption mode"), val => \$wireless_enc_mode,
+                               list => [ sort { $wireless_enc_modes{$a} cmp $wireless_enc_modes{$b} } keys %wireless_enc_modes ],
+                               format => sub { $wireless_enc_modes{$_[0]} } },
+                             { label => N("Encryption key"), val => \$wireless_enc_key, disabled => sub { $wireless_enc_mode eq 'none' } },
                              { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS}, advanced => 1,
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
@@ -1267,14 +1279,19 @@ See iwpriv(8) man page for further information."),
                         }
                     },
                     post => sub {
-                        $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
-                        if ($wireless_use_wpa) {
-                            $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                            network::wireless::wpa_supplicant_configure($in, $ethntf);
+                        if ($wireless_enc_mode eq 'none') {
+                            delete $ethntf->{WIRELESS_ENC_KEY};
                         } else {
-                            $ethntf->{WIRELESS_ENC_KEY} = network::wireless::get_wep_key_from_iwconfig($wireless_key);
-                            delete $ethntf->{WIRELESS_WPA_DRIVER};
+                            #- keep the key even for WPA, so that drakconnect remembers it
+                            $ethntf->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
+                            if ($wireless_enc_mode eq 'wpa-psk') {
+                                $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
+                                network::wireless::wpa_supplicant_configure($in, $ethntf);
+                            } else {
+                                delete $ethntf->{WIRELESS_WPA_DRIVER};
+                            }
                         }
+                        $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
                         return "static_hostname";
                     },
                    },
