@@ -81,8 +81,8 @@ sub find_interface {
 sub setup_device {
     my ($in, $device) = @_;
 
-    eval { modules::unload("ndiswrapper") };
     #- unload ndiswrapper first so that the newly installed .inf files will be read
+    eval { modules::unload("ndiswrapper") };
     eval { modules::load("ndiswrapper") };
 
     if ($@) {
