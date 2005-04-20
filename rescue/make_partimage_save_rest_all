@@ -17,6 +17,10 @@ if [ -n "$partimage_dir" ]; then
 	echo "can't find $partimage_dir$local_where"
 	exit 1
     }
+    [ -r "$partimage_dir$local_where/lst" ] || {
+	echo "can't read $partimage_dir$local_where/*"
+	exit 1
+    }
 fi
 
 rm -rf .tmp
