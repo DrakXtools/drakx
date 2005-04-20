@@ -585,32 +585,24 @@ my $select_font_msg;
 sub font_choice() {
     my $file_dialog;
     $select_font_msg = N("Select the font file or directory and click on 'Add'");
-    $file_dialog = Gtk2::FileSelection->new(N("File Selection"));
+    $file_dialog = Gtk2::FileChooserDialog->new(N("File Selection"), $window1->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok'); # 'select_folder'
     $file_dialog->set_select_multiple(1);
-    $file_dialog->set_filename($select_font_msg);
-    $file_dialog->signal_connect(delete_event => sub { $file_dialog->response('close') });
-    $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
-    $file_dialog->ok_button->set_label(N("Add"));
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->response('cancel') });
-    $file_dialog->cancel_button->set_label(N("Close"));
-    $file_dialog->show;
-    $file_dialog->run;
-    $file_dialog->destroy;
-}
 
-sub file_ok_sel {
-    my ($_w, $file_selection) = @_;
-    if ($file_selection->get_filename =~ /\Q$select_font_msg/) {
-        create_dialog(N("Error"), N("You've not selected any font"));
-    } else {
-        print "-- @install\n";
-        my @files = $file_selection->get_selections;
-        foreach my $file_name (difference2(\@files, \@install)) {
-            push @install, $file_name;
-            $model->append_set(undef, [ 0 => $file_name ]);
+    $file_dialog->show;
+    while (my $answer = $file_dialog->run) {
+        if (member($answer, qw(cancel delete-event))) {
+            $file_dialog->destroy;
+            return;
+        } elsif ($answer eq 'ok') {
+            my @files = $file_dialog->get_filenames;
+            foreach my $file_name (difference2(\@files, \@install)) {
+                push @install, $file_name;
+                $model->append_set(undef, [ 0 => $file_name ]);
+            }
+            $file_dialog->destroy;
+            return;
         }
     }
-    $file_selection->response('ok');
 }
 
 sub list_remove() { #- TODO : multi-selection
