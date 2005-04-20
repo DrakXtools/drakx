@@ -225,9 +225,11 @@ sub search_windows_font() {
     1;
 }
 
+my @font_extensions = qw(ttf pfa pfb pcf pcf.gz pfm gsf);
+
 sub is_a_font($) {
     my ($file) = @_;
-    any { $file =~ /\Q.$_\E$/i } qw(ttf pfa pfb pcf pcf.gz pfm gsf); 
+    any { $file =~ /\Q.$_\E$/i } @font_extensions;
 }
 
 # Optimisation de cette etape indispensable
@@ -587,6 +589,12 @@ sub font_choice() {
     $select_font_msg = N("Select the font file or directory and click on 'Add'");
     $file_dialog = Gtk2::FileChooserDialog->new(N("File Selection"), $window1->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok'); # 'select_folder'
     $file_dialog->set_select_multiple(1);
+
+    my $filter = Gtk2::FileFilter->new;
+    $filter->set_name(N("Fonts"));
+    $filter->add_pattern("*.$_") foreach @font_extensions;
+    $file_dialog->add_filter($filter);
+    $file_dialog->set_filter($filter);
 
     $file_dialog->show;
     while (my $answer = $file_dialog->run) {
