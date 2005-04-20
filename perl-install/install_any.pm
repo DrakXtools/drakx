@@ -118,9 +118,11 @@ sub look_for_ISO_images() {
     my $get_iso_ids = sub {
 	my ($F) = @_;
 	my ($vol_id, $app_id) = c::get_iso_volume_ids(fileno $F);
-	#- the ISO volume names must end in -Disc\d+
-	my ($cd_set) = $vol_id =~ /^(.*)-(?:disc|extra|dvd)\d*$/i;
-	$cd_set && { cd_set => $cd_set, app_id => $app_id };
+	#- the ISO volume names must end in -Disc\d+ if they are belong (!) to a set
+	my ($cd_set) = $vol_id =~ /^(.*)-disc\d+$/i;
+	#- else use the full volume name as CD set identifier
+	$cd_set ||= $vol_id;
+	{ cd_set => $cd_set, app_id => $app_id };
     };
 
     sysopen(my $F, $iso_images{loopdev}, 0) or return;
@@ -134,7 +136,7 @@ sub look_for_ISO_images() {
 	my $iso_dev = devices::set_loop($iso_file) or return;
 	if (sysopen($F, $iso_dev, 0)) {
 	    my $iso_ids = $get_iso_ids->($F);
-	    push @{$iso_images{media}}, { file => $iso_file, %$iso_ids } if $iso_ids;
+	    push @{$iso_images{media}}, { file => $iso_file, %$iso_ids };
 	    close($F); #- needed to delete loop device
 	}
 	devices::del_loop($iso_dev);
