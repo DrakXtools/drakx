@@ -113,7 +113,7 @@ endif
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c thirdparty.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c partition.c
-NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c
+NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c wireless.c
 
 # use sort to remove duplicates
 STAGE1_ALLSRC = $(sort $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))

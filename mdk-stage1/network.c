@@ -46,6 +46,7 @@
 
 #include "network.h"
 #include "directory.h"
+#include "wireless.h"
 
 /* include it after config-stage1.h so that _GNU_SOURCE is defined and strndup is available */
 #include <string.h>
@@ -558,17 +559,27 @@ static enum return_type configure_network(struct interface_info * intf)
 static enum return_type bringup_networking(struct interface_info * intf)
 {
 	static struct interface_info loopback;
-	enum return_type results = RETURN_ERROR;
+	enum return_type results;
 	
 	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL, 1);
 
-	while (results != RETURN_OK) {
+	do {
+		results = configure_wireless(intf->device);
+	} while (results == RETURN_ERROR);
+
+	if (results == RETURN_BACK)
+		return RETURN_BACK;
+
+	do {
 		results = setup_network_interface(intf);
 		if (results != RETURN_OK)
 			return results;
 		write_resolvconf();
 		results = configure_network(intf);
-	}
+	} while (results == RETURN_ERROR);
+
+	if (results == RETURN_BACK)
+		return bringup_networking(intf);
 
 	write_resolvconf(); /* maybe we have now domain to write also */
 
