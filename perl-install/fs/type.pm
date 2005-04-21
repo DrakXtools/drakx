@@ -308,6 +308,7 @@ sub type_subpart_from_magic {
     $p;
 }
 
+sub true_local_fs_types { qw(ext3 ext2 reiserfs xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
@@ -323,7 +324,7 @@ sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 
 sub isTrueFS { isTrueLocalFS($_[0]) || member($_[0]{fs_type}, qw(nfs)) }
-sub isTrueLocalFS { member($_[0]{fs_type}, qw(ext2 reiserfs xfs jfs ext3)) }
+sub isTrueLocalFS { member($_[0]{fs_type}, true_local_fs_types()) }
 
 sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || member($_[0]{fs_type}, 'ufs', 'hfs', 'iso9660') } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && $_[0]{fs_type} ne 'ntfs' }
