@@ -243,8 +243,13 @@ sub set_permissions {
 	or die "Could not start chmod!";
 }
 
+sub release_file {
+    my ($o_dir) = @_;
+    find { -r "$o_dir$_" } map { "/etc/$_" } 'mandrakelinux-release', 'mandrake-release', 'release', 'redhat-release';
+}
+
 sub mandrake_release() {
-    chomp_(cat_("/etc/mandrakelinux-release"));
+    chomp_(cat_(release_file()));
 }
 
 sub require_root_capability() {

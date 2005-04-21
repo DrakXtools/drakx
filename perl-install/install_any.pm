@@ -1471,9 +1471,8 @@ sub find_root_parts {
     my ($fstab, $prefix) = @_;
     map { 
 	my $handle = any::inspect($_, $prefix);
-	my $f = $handle && (find { -f $_ } map { "$handle->{dir}/etc/$_" } 'mandrakelinux-release', 'mandrake-release', 'redhat-release');
-	if ($f) {
-	    my $s = cat_($f);
+	if (my $f = $handle && common::release_file($handle->{dir})) {
+	    my $s = cat_("$handle->{dir}$f");
 	    chomp($s);
 	    $s =~ s/\s+for\s+\S+//;
 	    log::l("find_root_parts found $_->{device}: $s");
