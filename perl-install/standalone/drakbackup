@@ -1372,10 +1372,14 @@ sub filedialog_generic {
 	#- a more generic file dialog
 	#- a title prompt, the widget to get updated
 	my ($prompt, $widget) = @_; 
-	my $file_dialog;
 	
-    $file_dialog = gtksignal_connect(Gtk2::FileSelection->new($prompt), destroy => sub { $file_dialog->destroy });
-    $file_dialog->ok_button->signal_connect(clicked => sub { 
+    my $file_dialog = Gtk2::FileChooserDialog->new($prompt, $my_win->{real_window}, 'select_folder', N("Cancel") => 'cancel', N("Ok") => 'ok');
+    $file_dialog->show;
+    while (my $answer = $file_dialog->run) {
+        if (member($answer, qw(cancel delete-event))) {
+            $file_dialog->destroy;
+            return;
+        } elsif ($answer eq 'ok') {
 		if (defined($widget)) {
 			$$widget->set_text($file_dialog->get_filename);
 		} else {
@@ -1388,9 +1392,9 @@ sub filedialog_generic {
     		}
 		}
 		$file_dialog->destroy;
-	});
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
-    $file_dialog->show;
+		return;
+        }
+    }
 }
 
 ################################################  ADVANCED  ################################################  
