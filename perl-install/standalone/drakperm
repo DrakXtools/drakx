@@ -55,14 +55,14 @@ load_perms();
 my $combo_perm = Gtk2::ComboBox->new_with_strings([ sort(values %perm_l10n) ]);
 
 sub add_callback() {
-    row_setting_dialog();
+    row_setting_dialog(N("Add a new rule"));
     $modified++;
 }
 
 sub edit_callback() {
     my (undef, $iter) = $permList->get_selection->get_selected;
     return unless $iter;
-    row_setting_dialog($iter);
+    row_setting_dialog(N("Edit current rule"), $iter);
 }
 
 my @buttons;
@@ -97,7 +97,7 @@ $permList->signal_connect(button_press_event => sub {
                      my (undef, $event) = @_;
                      my (undef, $iter) = $permList->get_selection->get_selected;
                      return unless $iter;
-                     row_setting_dialog($iter) if $event->type eq '2button-press';
+                     row_setting_dialog(N("Edit current rule"), $iter) if $event->type eq '2button-press';
                  });
 
 
@@ -233,10 +233,11 @@ sub load_perms() {
 }
 
 sub row_setting_dialog {
-    my ($iter) = @_;
+    my ($title, $iter) = @_;
     
     my $dlg = Gtk2::Dialog->new;
     $dlg->set_transient_for($w->{real_window}) unless $::isEmbedded;
+    $dlg->set_title($title);
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);
     my $browse = Gtk2::Button->new(N("browse"));
