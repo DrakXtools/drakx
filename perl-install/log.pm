@@ -31,14 +31,16 @@ sub l {
 }
 
 sub openLog {
-    if ($_[0]) { #- useLocal
-	open $LOG, "> $_[0]";
+    my ($o_file) = @_;
+
+    if ($o_file) { #- useLocal
+	open $LOG, "> $o_file";
     } elsif ($::isInstall) {
 	open $LOG, "> /dev/tty3";
 	open $LOG2, ">> /tmp/ddebug.log";
-	select((select($LOG),  $| = 1)[0]);
-	select((select($LOG2), $| = 1)[0]);
     }
+    select((select($LOG),  $| = 1)[0]) if $LOG;
+    select((select($LOG2), $| = 1)[0]) if $LOG2;
 }
 
 sub closeLog() { 
