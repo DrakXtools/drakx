@@ -46,6 +46,19 @@ sub installown($$) {
     _ "cp $own $tmp$dir";
 }
 
+sub install_perl_script {
+    my ($script, $dir) = @_;
+    my @gi_modules;
+    foreach (`../tools/get-needed-drakx-modules ../perl-install /usr/lib/libDrakX $script`) {
+	chomp;
+	my ($local, $dest) = split "\t";
+	installown($local, dirname($dest || $local));
+	push @gi_modules, "$tmp$dest" if $dest;
+    }    
+    installown($script, $dir);
+    system('../tools/simplify-drakx-modules', @gi_modules, "$tmp$dir/$script");
+}
+
 _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
@@ -98,12 +111,12 @@ my $main = chomp_(`cat ../kernel/all.kernels/.main`);
 _ "cp ../kernel/all.kernels/$main/modules.{cz,dep} $tmp/modules";
 
 installown("drvinst", "/usr/bin");
-installown("guessmounts", "/usr/bin");
-installown("install_bootloader", "/usr/bin");
+install_perl_script("guessmounts", "/usr/bin");
+install_perl_script("install_bootloader", "/usr/bin");
 if (arch() =~ /^i.86|x86_64/) {
-    installown("restore_ms_boot", "/usr/bin");
+    install_perl_script("restore_ms_boot", "/usr/bin");
 }
-installown("lsparts", "/usr/bin");
+install_perl_script("lsparts", "/usr/bin");
 installown("rescue-doc", "/usr/bin");
 _ "cd ../mdk-stage1 && make rescue-gui dhcp-client";
 installown("../mdk-stage1/rescue-gui", "/usr/bin");
@@ -114,18 +127,7 @@ __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 if ($ENV{PARTIMAGE_DIR}) {
 
-    my $perl_install = "../perl-install";
-    foreach (`strace -efile perl -cw -I $perl_install partimage_whole_disk 2>&1`) {
-	my ($f) = /^open\("(.*?)",.*\)\s*=\s*\d+$/ or next;
-	if ($f =~ s!^\Q$perl_install/!!) {
-	    installown("$perl_install/$f", dirname("/usr/lib/libDrakX/$f"));
-	} elsif ($f =~ m!^/dev/! || $f eq 'partimage_all_disk') {
-	    # skip
-	} else {
-	    installown($f, dirname($f));
-	}
-    }
-    installown('partimage_whole_disk', '/usr/sbin');
+    install_perl_script('partimage_whole_disk', '/usr/sbin');
 
     _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
     my $server = 'partimaged';
@@ -133,7 +135,7 @@ if ($ENV{PARTIMAGE_DIR}) {
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
-      drvinst ; dhcp-client ; partimage_whole_disk save_all $ENV{PARTIMAGE_DIR} $server
+      drvinst NETWORK ; dhcp-client ; partimage_whole_disk save_all $ENV{PARTIMAGE_DIR} $server
       echo "Press enter"
       read
   fi
@@ -142,7 +144,7 @@ if ($ENV{PARTIMAGE_DIR}) {
       if [ -d \$local ]; then
           partimage_whole_disk rest_all \$local
       else
-          drvinst ; dhcp-client ; partimage_whole_disk rest_all $ENV{PARTIMAGE_DIR} $server
+          drvinst NETWORK ; dhcp-client ; partimage_whole_disk rest_all $ENV{PARTIMAGE_DIR} $server
       fi
       echo "Press enter"
       read
