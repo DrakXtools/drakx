@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.4mdk
+Release: 0.5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.5mdk
+- mandrakesoft is now mandriva
+
 * Thu Apr 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.4mdk
 - drakconnect: basic tokenring support
 
