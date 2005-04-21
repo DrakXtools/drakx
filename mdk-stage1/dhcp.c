@@ -290,7 +290,7 @@ static int prepare_request(struct bootp_request * breq, int sock, char * device)
 		return -1;
 	}
 	
-	breq->hw = 1; 		/* ethernet */
+	breq->hw = req.ifr_hwaddr.sa_family;
 	breq->hwlength = IFHWADDRLEN;	
 	memcpy(breq->hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
 	memcpy(gen_hwaddr, req.ifr_hwaddr.sa_data, IFHWADDRLEN);
@@ -516,11 +516,6 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	char requested_options[50];
 	char * client_id_str, * client_id_hwaddr;
 
-	if (strncmp(intf->device, "eth", 3)) {
-		stg1_error_message("DHCP available only for Ethernet networking.");
-		return RETURN_ERROR;
-	}
-
 	s = socket(AF_INET, SOCK_DGRAM, 0);
 	if (s < 0) {
 		log_perror("socket");
@@ -573,9 +568,14 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	if (dhcp_hostname && *dhcp_hostname) { /* pick client id form based on absence or presence of domain name */
 		if (*dhcp_domain) /* alternate style <hostname>.<domainname> */
 			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str+1)+1, client_id_str);
-		else { /* usual style (aka windows / dhcpcd) */
+		else {  /* usual style (aka windows / dhcpcd) */
 			/* but put MAC in form required for client identifier first */
 			client_id_hwaddr = malloc(IFHWADDRLEN+2);
+			/* (from pump-0.8.22/dhcp.c)
+			 * Microsoft uses a client identifier field of the 802.3 address with a
+			 * pre-byte of a "1".  In order to re-use the DHCP address that they set
+			 * for this interface, we have to mimic their identifier.
+			 */
 			client_id_hwaddr[0] = 1;  /* set flag for ethernet */
 			memcpy(client_id_hwaddr+1, gen_hwaddr, IFHWADDRLEN);
 			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, IFHWADDRLEN+1, client_id_hwaddr);
