@@ -187,7 +187,7 @@ sub display_perm {
     foreach my $rule (@rules) {
         next if !$show_all_rules && ($show_user_rules && $rule->{editable} || $show_sys_rules && !$rule->{editable});
         $model->append_set(map_index { if_(defined $rule->{$_}, $::i => $rule->{$_}) } qw(editable path user group perms index));
-    };
+    }
 
     # alter button box behavior
     $editable = $perm_level =~ /^level \d/ ? 0 : 1;
@@ -233,7 +233,7 @@ sub load_perms() {
 }
 
 sub row_setting_dialog {
-    my ($title, $iter) = @_;
+    my ($title, $o_iter) = @_;
     
     my $dlg = Gtk2::Dialog->new;
     $dlg->set_transient_for($w->{real_window}) unless $::isEmbedded;
@@ -242,7 +242,7 @@ sub row_setting_dialog {
 #    $dlg->set_resizable(0);
     my $browse = Gtk2::Button->new(N("browse"));
     my $file        = Gtk2::Entry->new;
-    my ($other, $group, $user, $s) = reverse(split(//, $model->get($iter, 4))) if $iter;
+    my ($other, $group, $user, $s) = reverse(split(//, $model->get($o_iter, 4))) if $o_iter;
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
     my @owners = (N_("user"), N_("group"), N_("other"));
@@ -253,21 +253,21 @@ sub row_setting_dialog {
                              label => N("Read"),
                              tip => { map { $_ => 
                                               #-PO: here %s will be either "user", "group" or "other"
-                                              N("Enable \"%s\" to read the file", translate($_))
+                                              N("Enable \"%s\" to read the file", translate($_));
                                           } keys %rights },
                             },
                   'write' => {
                               label => N("Write"),
                               tip => { map { $_ => 
                                               #-PO: here %s will be either "user", "group" or "other"
-                                              N("Enable \"%s\" to write the file", translate($_))
+                                              N("Enable \"%s\" to write the file", translate($_));
                                           } keys %rights },
                              },
                   'execute' => {
                                 label => N("Execute"),
                                 tip => { map { $_ => 
                                               #-PO: here %s will be either "user", "group" or "other"
-                                              N("Enable \"%s\" to execute the file", translate($_))
+                                              N("Enable \"%s\" to execute the file", translate($_));
                                           } keys %rights },
                                },
                   sticky => { label => N("Sticky-bit"), tip => N("Used for directory:\n only owner of directory or file in this directory can delete it") },
@@ -278,15 +278,15 @@ sub row_setting_dialog {
     #- dlg widgets settings
     my %s_right = get_right($s);
      
-    my $alrd_exsts = defined $iter;
-    $file->set_text($model->get($iter, 1)) if $iter;
+    my $alrd_exsts = defined $o_iter;
+    $file->set_text($model->get($o_iter, 1)) if $o_iter;
 
     my $users  = Gtk2::ComboBox->new_with_strings([ get_user_or_group('users') ]);
-    $users->entry->set_text($model->get($iter, 2)) if $iter;
+    $users->entry->set_text($model->get($o_iter, 2)) if $o_iter;
     $users->set_wrap_width(3);
      
-    my $groups = Gtk2::ComboBox->new_with_strings([ get_user_or_group() ]);
-    $groups->entry->set_text($model->get($iter, 3)) if $iter;
+    my $groups = Gtk2::ComboBox->new_with_strings([ get_user_or_group('groups') ]);
+    $groups->entry->set_text($model->get($o_iter, 3)) if $o_iter;
     $groups->set_wrap_width(3);
 
     my $id_box = gtkadd(Gtk2::HBox->new,
@@ -300,9 +300,9 @@ sub row_setting_dialog {
                                                  N("When checked, owner and group will not be changed")),
                                       clicked => sub { $id_box->set_sensitive(!$_[0]->get_active) });
      
-    if ($iter && $model->get($iter, 2) eq 'current') {
+    if ($o_iter && $model->get($o_iter, 2) eq 'current') {
      $usr_check->set_active(1);
-     $id_box->set_sensitive(0)
+     $id_box->set_sensitive(0);
     } else { $usr_check->set_active(0) }
      
      
@@ -387,15 +387,15 @@ sub row_setting_dialog {
                                 $perms = sprintf("%03o", eval(join('', "0b",
                                                                    (map { $perms{$_}->get_active || 0 } reverse @bits),
                                                                    (map { my $owner = $_;map_index {
-                                                                       $perms{$owner}{$_}->get_active || 0
+                                                                       $perms{$owner}{$_}->get_active || 0;
                                                                    } @rights } @owners))));
                                 # create new item if needed (that is when adding a new one) at end of list
-                                if (!$iter) {
-                                    $iter = $model->append;
+                                if (!$o_iter) {
+                                    $o_iter = $model->append;
                                     push @rules, { path => $path, user => $user, group => $group, perms => $perms, index => $index };
-                                    $model->set($iter, 5 => $index++);
+                                    $model->set($o_iter, 5 => $index++);
                                 }
-                                $model->set($iter, 1 => $path, 2 => $user, 3 => $group, 4 => $perms);
+                                $model->set($o_iter, 1 => $path, 2 => $user, 3 => $group, 4 => $perms);
                                 $dlg->destroy;
                                 $modified++;
                             }
@@ -403,7 +403,7 @@ sub row_setting_dialog {
                           ),
           );
      
-    $w->{ok}->set_sensitive(!$model->get($iter, 0)) if $alrd_exsts;
+    $w->{ok}->set_sensitive(!$model->get($o_iter, 0)) if $alrd_exsts;
     $dlg->show_all;
 
 }
