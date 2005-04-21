@@ -162,7 +162,7 @@ endif
 	      fi; \
 	    fi; \
 	done
-	perl -pi -e 's/\s*use\s+(warnings|diagnostics|strict|vars|warnings).*//g' $(DEST)/usr/*/*/*/utf8_heavy.pl
+	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_
@@ -290,8 +290,8 @@ cvstag:
 	cd ..; cvs tag $(CVSTAGOPT) $(TAG) $(OTHERS)
 
 nuke_perl:
-	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
-	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
+	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs ../tools/simplify-drakx-modules
+	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs ../tools/simplify-drakx-modules
 
 dont_run_directly_stage2:
 	[ -d $(DEST) ] || $(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
