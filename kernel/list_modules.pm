@@ -281,7 +281,7 @@ sub module2category {
 }
 
 sub ethernet_categories() {
-    'network/main|gigabit|pcmcia|usb|wireless|firewire';
+    'network/main|gigabit|pcmcia|tokenring|usb|wireless|firewire';
 }
 
 sub sub_categories {
