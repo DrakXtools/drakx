@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+my ($rel, $dest, $script) = @ARGV;
+
+$rel =~ s!/?$!!;
+
+foreach (`strace -efile perl -cw -I $rel $script 2>&1`) {
+    my ($f) = /^open\("(.*?)",.*\)\s*=\s*\d+$/ or next;
+    $f !~ m!/usr/lib/perl5/[^/]*/warnings.pm! or next;
+    if (begins_with($f, $rel)) {
+	print $f, "\t", $dest . substr($f, length($rel)), "\n";
+    } elsif (begins_with($f, '/dev/')) {
+	# skip
+    } elsif (begins_with($f, '/')) {
+	print "$f\n";
+    }
+}
