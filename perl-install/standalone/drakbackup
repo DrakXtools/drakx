@@ -1964,25 +1964,30 @@ sub advanced_where_hd {
 	my $adj = Gtk2::Adjustment->new($conf{MAX_SPACE}, 0.0, $conf{MAX_SPACE}, 10.0, 5.0, 0.0);
     my $spinner;
 	
+    my $size_group = Gtk2::SizeGroup->new('horizontal');
+    my $label_size_group = Gtk2::SizeGroup->new('horizontal');
     gtkpack($advanced_box,
 	    $box_where_hd = gtkpack_(Gtk2::VBox->new(0, 6),
 			0, Gtk2::HSeparator->new,
 			0, gtkpack_(Gtk2::HBox->new(0,10),
-				0, gtkset_sensitive(Gtk2::Label->new(N("Enter the directory to save to:")), $conf{USE_HD}),
-				1, Gtk2::VBox->new(0, 6),
-				0, gtkset_size_request(gtkset_sensitive($save_path_entry = Gtk2::Entry->new, $conf{USE_HD}), 152, 20),
+				0, gtkset_sensitive(my $l1 = Gtk2::Label->new(N("Enter the directory to save to:")), $conf{USE_HD}),
+				1, gtkpack_(my $select_box = Gtk2::HBox->new(0,10),
+				1, gtkset_sensitive($save_path_entry = Gtk2::Entry->new, $conf{USE_HD}),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
 					filedialog_generic(N("Directory to save to"), \$save_path_entry); 
 				}), $conf{USE_HD}),
+                               ),
 			),
 			0, Gtk2::VBox->new(0, 6),
 			0, gtkpack_(Gtk2::HBox->new(0,10),
-				0, gtkset_sensitive(Gtk2::Label->new(N("Maximum size\n allowed for Drakbackup (MB)")),  $conf{USE_HD}),
-				1, Gtk2::VBox->new(0, 6),
-				0, gtkset_size_request(gtkset_sensitive($spinner = Gtk2::SpinButton->new($adj, 0, 0), $conf{USE_HD}), 200, 20),
+				0, gtkset_sensitive(my $l2 = Gtk2::Label->new(N("Maximum size\n allowed for Drakbackup (MB)")),  $conf{USE_HD}),
+				1, gtkset_sensitive($spinner = Gtk2::SpinButton->new($adj, 0, 0), $conf{USE_HD}),
 			),
 		),
 	);
+    $size_group->add_widget($_) foreach $select_box, $spinner;
+    $label_size_group->add_widget($_) foreach $l1, $l2;
+
     $button->add(gtkpack(Gtk2::HBox->new(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($conf{PATH_TO_SAVE});
 	$spinner->signal_connect('changed', sub { $conf{MAX_SPACE} = $spinner->get_text });
