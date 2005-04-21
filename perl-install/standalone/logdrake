@@ -47,7 +47,7 @@ $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
 $ugtk2::wm_icon = "logdrake";
-my $explain_title = N("Mandrakelinux Tools Logs");
+my $explain_title = N("Mandrivalinux Tools Logs");
 my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
 
 unless ($::isEmbedded) {

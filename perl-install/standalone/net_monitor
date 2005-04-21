@@ -233,7 +233,7 @@ sub connection() {
 									  N("Disconnection from Internet complete.")) :
 						     ($isconnected ?
 						       N("Connection complete.") :
-						       N("Connection failed.\nVerify your configuration in the Mandrakelinux Control Center."))
+						       N("Connection failed.\nVerify your configuration in the Mandrivalinux Control Center."))
 						    );
  				            # remove the connection time timer if connection is down or failed
  				            $isconnected or Glib::Source->remove($ct_tag);

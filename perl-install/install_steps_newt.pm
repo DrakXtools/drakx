@@ -17,7 +17,7 @@ use lang;
 use common;
 
 sub banner {
-    my $banner = translate(N_("Mandrakelinux Installation %s"));
+    my $banner = translate(N_("Mandrivalinux Installation %s"));
     my $l = first(Newt::GetScreenSize()) - length($banner) - length($_[0]) + 1;
     Newt::DrawRootText(0, 0, sprintf($banner, ' ' x $l . $_[0]));
     Newt::Refresh();

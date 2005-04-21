@@ -3926,7 +3926,7 @@ sub hplip_help {
     
     if ($hplipentry->{scan}) {
 	$text .= N("The scanner in your printer can be used with the usual SANE software, for example Kooka or XSane (Both in the Multimedia/Graphics menu). ");
-	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandrakelinux Control Center) to share your scanner on the network.\n\n");
+	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandrivalinux Control Center) to share your scanner on the network.\n\n");
     }
 
     if (($hplipentry->{card} == 2) && ($deviceuri =~ m!/usb/!i)) {

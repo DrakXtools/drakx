@@ -9,16 +9,16 @@ sub main_license() {
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Introduction
 
-The operating system and the different components available in the Mandrakelinux distribution 
+The operating system and the different components available in the Mandrivalinux distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
 restricted to, the set of programs, methods, rules and documentation related to the operating 
-system and the different components of the Mandrakelinux distribution.
+system and the different components of the Mandrivalinux distribution.
 
 
 1. License Agreement
 
 Please read this document carefully. This document is a license agreement between you and  
-Mandrakesoft S.A. which applies to the Software Products.
+Mandriva S.A. which applies to the Software Products.
 By installing, duplicating or using the Software Products in any manner, you explicitly 
 accept and fully agree to conform to the terms and conditions of this License. 
 If you disagree with any portion of the License, you are not allowed to install, duplicate or use 
@@ -33,21 +33,21 @@ Software Products.
 
 The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
 extent permitted by law.
-Mandrakesoft S.A. will, in no circumstances and to the extent permitted by law, be liable for any special,
+Mandriva S.A. will, in no circumstances and to the extent permitted by law, be liable for any special,
 incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
 business, interruption of business, financial loss, legal fees and penalties resulting from a court 
 judgment, or any other consequential loss) arising out of  the use or inability to use the Software 
-Products, even if Mandrakesoft S.A. has been advised of the possibility or occurrence of such 
+Products, even if Mandriva S.A. has been advised of the possibility or occurrence of such 
 damages.
 
 LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
 
-To the extent permitted by law, Mandrakesoft S.A. or its distributors will, in no circumstances, be 
+To the extent permitted by law, Mandriva S.A. or its distributors will, in no circumstances, be 
 liable for any special, incidental, direct or indirect damages whatsoever (including without 
 limitation damages for loss of business, interruption of business, financial loss, legal fees 
 and penalties resulting from a court judgment, or any other consequential loss) arising out 
 of the possession and use of software components or arising out of  downloading software components 
-from one of Mandrakelinux sites  which are prohibited or restricted in some countries by local laws.
+from one of Mandrivalinux sites  which are prohibited or restricted in some countries by local laws.
 This limited liability applies to, but is not restricted to, the strong cryptography components 
 included in the Software Products.
 
@@ -59,9 +59,9 @@ of these components are governed under the terms and conditions of the GNU Gener
 Licence, hereafter called \"GPL\", or of similar licenses. Most of these licenses allow you to use, 
 duplicate, adapt or redistribute the components which they cover. Please read carefully the terms 
 and conditions of the license agreement for each component before using any component. Any question 
-on a component license should be addressed to the component author and not to Mandrakesoft.
-The programs developed by Mandrakesoft S.A. are governed by the GPL License. Documentation written 
-by Mandrakesoft S.A. is governed by a specific license. Please refer to the documentation for 
+on a component license should be addressed to the component author and not to Mandriva.
+The programs developed by Mandriva S.A. are governed by the GPL License. Documentation written 
+by Mandriva S.A. is governed by a specific license. Please refer to the documentation for 
 further details.
 
 
@@ -69,9 +69,9 @@ further details.
 
 All rights to the components of the Software Products belong to their respective authors and are 
 protected by intellectual property and copyright laws applicable to software programs.
-Mandrakesoft S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
+Mandriva S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
 parts, by all means and for all purposes.
-\"Mandrake\", \"Mandrakelinux\" and associated logos are trademarks of Mandrakesoft S.A.  
+\"Mandriva\", \"Mandrivalinux\" and associated logos are trademarks of Mandriva S.A.  
 
 
 5. Governing Laws 
@@ -82,7 +82,7 @@ agreement.
 The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
-For any question on this document, please contact Mandrakesoft S.A.  
+For any question on this document, please contact Mandriva S.A.  
 ");
 }
 
@@ -132,7 +132,7 @@ N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
 
-For information on fixes which are available for this release of Mandrakelinux,
+For information on fixes which are available for this release of Mandrivalinux,
 consult the Errata available from:
 
 
@@ -140,7 +140,7 @@ consult the Errata available from:
 
 
 Information on configuring your system is available in the post
-install chapter of the Official Mandrakelinux User's Guide.",
+install chapter of the Official Mandrivalinux User's Guide.",
 N("http://www.mandrakelinux.com/en/errata.php3"));
 }
 

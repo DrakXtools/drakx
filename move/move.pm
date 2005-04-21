@@ -1,6 +1,6 @@
 package move; # $Id$ $
 
-#- Copyright (c) 2003-2004 Mandrakesoft
+#- Copyright (c) 2003-2004 Mandriva
 #-
 #- This program is free software; you can redistribute it and/or modify
 #- it under the terms of the GNU General Public License as published by
@@ -464,7 +464,7 @@ unplug it now.
 
 
 Click the button to reboot the machine, unplug it, remove write protection,
-plug the key again, and launch Mandrake Move again.")),
+plug the key again, and launch Mandriva Move again.")),
 				ok => N("Reboot") });
 	    reboot();
 	}
@@ -478,10 +478,10 @@ Windows partition instead.
 
 
 You may also proceed without an USB key - you'll still be
-able to use Mandrake Move as a normal live Mandrake
+able to use Mandriva Move as a normal live Mandriva
 Operating System.") :
 N("We did not detect any USB key on your system. If you
-plug in an USB key now, Mandrake Move will have the ability
+plug in an USB key now, Mandriva Move will have the ability
 to transparently save the data in your home directory and
 system wide configuration, for next boot on this computer
 or another one. Note: if you plug in a key now, wait several
@@ -489,7 +489,7 @@ seconds before detecting again.
 
 
 You may also proceed without an USB key - you'll still be
-able to use Mandrake Move as a normal live Mandrake
+able to use Mandriva Move as a normal live Mandriva
 Operating System.");
 	$o->ask_okcancel_({ title => N("Need a key to save your data"), 
 			    messages => formatAlaTeX($message),
@@ -670,7 +670,7 @@ N("An error occurred:
 
 This may come from corrupted system configuration files
 on the USB key, in this case removing them and then
-rebooting Mandrake Move would fix the problem. To do
+rebooting Mandriva Move would fix the problem. To do
 so, click on the corresponding button.
 
 

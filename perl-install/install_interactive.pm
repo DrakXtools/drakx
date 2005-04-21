@@ -160,7 +160,7 @@ the following error occurred: %s", formatError($@));
 		#- this save at least a cylinder (less than 8Mb).
 		$min_win += partition_table::raw::cylinder_size($hd);
 
-		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrakelinux installation.");
+		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrivalinux installation.");
 		$o->ask_okcancel('', formatAlaTeX(
                                             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                             N("WARNING!

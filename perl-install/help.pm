@@ -9,7 +9,7 @@ use common;
 #            you want it changed.
 sub acceptLicense() {
     N("Before continuing, you should carefully read the terms of the license. It
-covers the entire Mandrakelinux distribution. If you agree with all the
+covers the entire Mandrivalinux distribution. If you agree with all the
 terms it contains, check the \"%s\" box. If not, clicking on the \"%s\"
 button will reboot your computer.", N("Accept"), N("Quit"));
 }
@@ -82,7 +82,7 @@ With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
 sub chooseCd() {
-    N("The Mandrakelinux installation is distributed on several CD-ROMs. If a
+    N("The Mandrivalinux installation is distributed on several CD-ROMs. If a
 selected package is located on another CD-ROM, DrakX will eject the current
 CD and ask you to insert the required one. If you do not have the requested
 CD at hand, just click on \"%s\", the corresponding packages will not be
@@ -90,11 +90,11 @@ installed.", N("Cancel"));
 }
 sub choosePackages() {
     N("It's now time to specify which programs you wish to install on your system.
-There are thousands of packages available for Mandrakelinux, and to make it
+There are thousands of packages available for Mandrivalinux, and to make it
 simpler to manage, they have been placed into groups of similar
 applications.
 
-Mandrakelinux sorts package groups in four categories. You can mix and
+Mandrivalinux sorts package groups in four categories. You can mix and
 match applications from the various categories, so a ``Workstation''
 installation can still have applications from the ``Server'' category
 installed.
@@ -157,10 +157,10 @@ right to let you know the purpose of that package.
 !! If a server package has been selected, either because you specifically
 chose the individual package or because it was part of a group of packages,
 you'll be asked to confirm that you really want those servers to be
-installed. By default Mandrakelinux will automatically start any installed
+installed. By default Mandrivalinux will automatically start any installed
 services at boot time. Even if they are safe and have no known issues at
 the time the distribution was shipped, it is entirely possible that
-security holes were discovered after this version of Mandrakelinux was
+security holes were discovered after this version of Mandrivalinux was
 finalized. If you do not know what a particular service is supposed to do or
 why it's being installed, then click \"%s\". Clicking \"%s\" will install
 the listed services and they will be started automatically at boot time. !!
@@ -230,7 +230,7 @@ best suits your needs.");
 sub configureX_chooser() {
     N("X (for X Window System) is the heart of the GNU/Linux graphical interface
 on which all the graphical environments (KDE, GNOME, AfterStep,
-WindowMaker, etc.) bundled with Mandrakelinux rely upon.
+WindowMaker, etc.) bundled with Mandrivalinux rely upon.
 
 You'll see a list of different parameters to change to get an optimal
 graphical display.
@@ -313,12 +313,12 @@ want to check \"%s\" if your machine is to act as a server, or if you were
 not successful in getting the display configured.", N("No"));
 }
 sub doPartitionDisks() {
-    N("You now need to decide where you want to install the Mandrakelinux
+    N("You now need to decide where you want to install the Mandrivalinux
 operating system on your hard drive. If your hard drive is empty or if an
 existing operating system is using all the available space you will have to
 partition the drive. Basically, partitioning a hard drive means to
 logically divide it to create the space needed to install your new
-Mandrakelinux system.
+Mandrivalinux system.
 
 Because the process of partitioning a hard drive is usually irreversible
 and can lead to data losses, partitioning can be intimidating and stressful
@@ -345,7 +345,7 @@ data (see ``Erase entire disk'' solution) or resize your Microsoft Windows
 FAT or NTFS partition. Resizing can be performed without the loss of any
 data, provided you've previously defragmented the Windows partition.
 Backing up your data is strongly recommended. Using this option is
-recommended if you want to use both Mandrakelinux and Microsoft Windows on
+recommended if you want to use both Mandrivalinux and Microsoft Windows on
 the same computer.
 
    Before choosing this option, please understand that after this
@@ -354,7 +354,7 @@ than when you started. You'll have less free space under Microsoft Windows
 to store your data or to install new software.
 
  * \"%s\". If you want to delete all data and all partitions present on
-your hard drive and replace them with your new Mandrakelinux system, choose
+your hard drive and replace them with your new Mandrivalinux system, choose
 this option. Be careful, because you will not be able to undo this operation
 after you confirm.
 
@@ -425,13 +425,13 @@ will not be able to recover it.
 Click on \"%s\" when you're ready to format the partitions.
 
 Click on \"%s\" if you want to choose another partition for your new
-Mandrakelinux operating system installation.
+Mandrivalinux operating system installation.
 
 Click on \"%s\" if you wish to select partitions which will be checked for
 bad blocks on the disk.", N("Next"), N("Previous"), N("Advanced"));
 }
 sub installUpdates() {
-    N("By the time you install Mandrakelinux, it's likely that some packages will
+    N("By the time you install Mandrivalinux, it's likely that some packages will
 have been updated since the initial release. Bugs may have been fixed,
 security issues resolved. To allow you to benefit from these updates,
 you're now able to download them from the Internet. Check \"%s\" if you
@@ -451,7 +451,7 @@ exposed to the Internet. The trade-off that a higher security level is
 generally obtained at the expense of ease of use.
 
 If you do not know what to choose, keep the default option. You'll be able
-to change it later with the draksec tool, which is part of Mandrakelinux
+to change it later with the draksec tool, which is part of Mandrivalinux
 Control Center.
 
 Fill the \"%s\" field with the e-mail address of the person responsible for
@@ -459,7 +459,7 @@ security. Security messages will be sent to that address.", N("Security Administ
 }
 sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
-installation of your Mandrakelinux system. If partitions have already been
+installation of your Mandrivalinux system. If partitions have already been
 defined, either from a previous installation of GNU/Linux or by another
 partitioning tool, you can use existing partitions. Otherwise, hard drive
 partitions must be defined.
@@ -532,7 +532,7 @@ emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("S
 sub resizeFATChoose() {
     N("More than one Microsoft partition has been detected on your hard drive.
 Please choose the one which you want to resize in order to install your new
-Mandrakelinux operating system.
+Mandrivalinux operating system.
 
 Each partition is listed as follows: \"Linux name\", \"Windows name\"
 \"Capacity\".
@@ -570,7 +570,7 @@ sub selectInstallClass() {
 found on your machine.
 
 DrakX now needs to know if you want to perform a new installation or an
-upgrade of an existing Mandrakelinux system:
+upgrade of an existing Mandrivalinux system:
 
  * \"%s\". For the most part, this completely wipes out the old system.
 However, depending on your partitioning scheme, you can prevent some of
@@ -579,13 +579,13 @@ If you wish to change how your hard drives are partitioned, or to change
 the file system, you should use this option.
 
  * \"%s\". This installation class allows you to update the packages
-currently installed on your Mandrakelinux system. Your current partitioning
+currently installed on your Mandrivalinux system. Your current partitioning
 scheme and user data will not be altered. Most of the other configuration
 steps remain available and are similar to a standard installation.
 
-Using the ``Upgrade'' option should work fine on Mandrakelinux systems
+Using the ``Upgrade'' option should work fine on Mandrivalinux systems
 running version \"8.1\" or later. Performing an upgrade on versions prior
-to Mandrakelinux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
+to Mandrivalinux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
 }
 sub selectKeyboard() {
     N("Depending on the language you chose (), DrakX will automatically select a
@@ -620,7 +620,7 @@ the tree view and \"%s\" in the Advanced section.
 
 About UTF-8 (unicode) support: Unicode is a new character encoding meant to
 cover all existing languages. However full support for it in GNU/Linux is
-still under development. For that reason, Mandrakelinux's use of UTF-8 will
+still under development. For that reason, Mandrivalinux's use of UTF-8 will
 depend on the user's choices:
 
  * If you choose a language with a strong legacy encoding (latin1
@@ -740,7 +740,7 @@ know what you're doing.", N("First sector of drive (MBR)"), N("Skip"));
 }
 sub setupDefaultSpooler() {
     N("Now, it's time to select a printing system for your computer. Other
-operating systems may offer you one, but Mandrakelinux offers two. Each of
+operating systems may offer you one, but Mandrivalinux offers two. Each of
 the printing systems is best suited to particular types of configuration.
 
  * \"%s\" -- which is an acronym for ``print, do not queue'', is the choice
@@ -761,7 +761,7 @@ emulate a \"lpd\" server, make sure you turn on the \"cups-lpd\" daemon.
 options and for managing the printer.
 
 If you make a choice now, and later find that you do not like your printing
-system you may change it by running PrinterDrake from the Mandrakelinux
+system you may change it by running PrinterDrake from the Mandrivalinux
 Control Center and clicking on the \"%s\" button.", N("pdq"), N("pdq"), N("CUPS"), N("CUPS"), N("Expert"));
 }
 sub setupSCSI() {
@@ -831,7 +831,7 @@ the card if you feel the configuration is wrong.
 
  * \"%s\": if you wish to configure your Internet or local network access,
 you can do so now. Refer to the printed documentation or use the
-Mandrakelinux Control Center after the installation has finished to benefit
+Mandrivalinux Control Center after the installation has finished to benefit
 from full in-line help.
 
  * \"%s\": allows to configure HTTP and FTP proxy addresses if the machine
@@ -848,7 +848,7 @@ firewall settings.
  * \"%s\": if you wish to change your bootloader configuration, click this
 button. This should be reserved to advanced users. Refer to the printed
 documentation or the in-line help about bootloader configuration in the
-Mandrakelinux Control Center.
+Mandrivalinux Control Center.
 
  * \"%s\": through this entry you can fine tune which services will be run
 on your machine. If you plan to use this machine as a server it's a good
@@ -856,7 +856,7 @@ idea to review this setup.", N("Configure"), N("Keyboard"), N("Country / Region"
 }
 sub takeOverHdChoose() {
     N("Choose the hard drive you want to erase in order to install your new
-Mandrakelinux partition. Be careful, all data on this drive will be lost
+Mandrivalinux partition. Be careful, all data on this drive will be lost
 and will not be recoverable!");
 }
 sub takeOverHdConfirm() {

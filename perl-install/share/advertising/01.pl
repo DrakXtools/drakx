@@ -10,10 +10,10 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>What is Mandrakelinux?</b>"), center => 1 ],
+@text = ([ N("<b>What is Mandrivalinux?</b>"), center => 1 ],
          ' ',
-	 N("Welcome to <b>Mandrakelinux</b>!"),
+	 N("Welcome to <b>Mandrivalinux</b>!"),
 		 ' ',
-         N("Mandrakelinux is a <b>Linux distribution</b> that comprises the core of the system, called the <b>operating system</b> (based on the Linux kernel) together with <b>a lot of applications</b> meeting every need you could even think of."),
+         N("Mandrivalinux is a <b>Linux distribution</b> that comprises the core of the system, called the <b>operating system</b> (based on the Linux kernel) together with <b>a lot of applications</b> meeting every need you could even think of."),
          ' ',
-         N("Mandrakelinux is the most <b>user-friendly</b> Linux distribution today. It is also one of the <b>most widely used</b> Linux distributions worldwide!"));
+         N("Mandrivalinux is the most <b>user-friendly</b> Linux distribution today. It is also one of the <b>most widely used</b> Linux distributions worldwide!"));

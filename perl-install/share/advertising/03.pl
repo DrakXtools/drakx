@@ -12,7 +12,7 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>The GPL</b>"), center => 1 ],
          ' ',
-	 N("Most of the software included in the distribution and all of the Mandrakelinux tools are licensed under the <b>General Public License</b>."),
+	 N("Most of the software included in the distribution and all of the Mandrivalinux tools are licensed under the <b>General Public License</b>."),
 		 ' ',
          N("The GPL is at the heart of the open source model; it grants everyone the <b>freedom</b> to use, study, distribute and improve the software any way they want, provided they make the results available."),
          ' ',

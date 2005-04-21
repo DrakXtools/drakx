@@ -146,7 +146,7 @@ sub bestMirror {
     $possible[rand @possible];
 }
 
-#- hack to retrieve Mandrakelinux version...
+#- hack to retrieve Mandrivaalinux version...
 sub version() {
     require pkgs;
     my $pkg = pkgs::packageByName($::o->{packages}, 'mandrakelinux-release');

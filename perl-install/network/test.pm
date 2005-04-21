@@ -111,7 +111,7 @@ sub update_status {
 
 =head2 Test synchronously
 
-#- resolve and get ping to hostname from command line if given, else to Mandrakesoft
+#- resolve and get ping to hostname from command line if given, else to Mandriva
 use lib qw(/usr/lib/libDrakX);
 use network::test;
 
@@ -131,7 +131,7 @@ ping to host: $ping
 
 =head2 Test asynchronously
 
-#- resolve and get ping to hostname from command line if given, else to Mandrakesoft
+#- resolve and get ping to hostname from command line if given, else to Mandriva
 #- prints a "." every 10 miliseconds during connection test
 use lib qw(/usr/lib/libDrakX);
 use network::test;

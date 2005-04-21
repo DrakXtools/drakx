@@ -174,7 +174,7 @@ sub selectLanguage {
   
     $o->ask_warn('',
 formatAlaTeX(N("Your system is low on resources. You may have some problem installing
-Mandrakelinux. If that occurs, you can try a text install instead. For this,
+Mandrivalinux. If that occurs, you can try a text install instead. For this,
 press `F1' when booting on CDROM, then enter `text'."))) if $first_time && availableRamMB() < 70; # 70MB
 
 }
@@ -668,7 +668,7 @@ sub deselectFoundMedia {
     }
     if ($ask_copy_rpms_on_disk) {
 	#- don't be afraid, cleanup old RPMs if upgrade
-	eval { rm_rf("$::prefix/var/ftp/pub/Mandrakelinux", "$::prefix/var/ftp/pub/Mandrivalinux") if $o->{isUpgrade} };
+	eval { rm_rf("$::prefix/var/ftp/pub/Mandrivalinux", "$::prefix/var/ftp/pub/Mandrivalinux") if $o->{isUpgrade} };
 	my $w = ugtk2->new("");
 	$i = -1;
 	$w->sync;

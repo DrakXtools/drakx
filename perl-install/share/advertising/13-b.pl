@@ -12,7 +12,7 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>Choose your Favorite Desktop Environment</b>"), center => 1 ],
 	' ',
-	N("With PowerPack+, you will have the choice of the <b>graphical desktop environment</b>. Mandrakesoft has chosen <b>KDE</b> as the default one."),
+	N("With PowerPack+, you will have the choice of the <b>graphical desktop environment</b>. Mandriva has chosen <b>KDE</b> as the default one."),
 	' ',
 	N("KDE is one of the <b>most advanced</b> and <b>user-friendly</b> graphical desktop environment available. It includes a lot of integrated applications."),
 	' ',

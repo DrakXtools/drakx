@@ -951,7 +951,7 @@ Configure them first by clicking on 'Configure'")));
                                               update();
                                           });
 	} else {
-	    $widget_temp = N("This interface has not been configured yet.\nRun the \"Add an interface\" assistant from the Mandrakelinux Control Center");
+	    $widget_temp = N("This interface has not been configured yet.\nRun the \"Add an interface\" assistant from the Mandrivalinux Control Center");
 	}
 	$vbox_local->pack_start(gtkpack__(Gtk2::HBox->new(0,0),
 					  $widget_temp
@@ -1007,7 +1007,7 @@ sub configure_net {
                     N("Warning"),
                     #-PO: here "Add Connection" should be translated the same was as in control-center
                     N("You do not have any configured Internet connection.
-Run the \"%s\" assistant from the Mandrakelinux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
+Run the \"%s\" assistant from the Mandrivalinux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
         $in->exit;
     }
     my $cnx = {};
