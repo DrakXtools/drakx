@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Drak Bug Report 
-# Copyright (C) 2002-2004 Mandrakesoft (daouda at mandrakesoft dot com)
+# Copyright (C) 2002-2004 Mandriva (daouda at mandrakesoft dot com)
 #                                       Stew Benedict (sbenedict at mandrakesoft dot com) 
 #
 # This program is free software; you can redistribute it and/or modify
@@ -78,7 +78,7 @@ $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
 $wizard_name = "Bugzilla";
 
 $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-		          [ Gtk2::Label->new(N("Select Mandrakesoft Tool:")), $comb_app = Gtk2::ComboBox->new_text ],
+		          [ Gtk2::Label->new(N("Select Mandriva Tool:")), $comb_app = Gtk2::ComboBox->new_text ],
                           [ Gtk2::Label->new(N("or Application Name\n(or Full Path):")), 
 			  gtkpack_(Gtk2::HBox->new(0,5),
 				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 

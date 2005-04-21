@@ -134,7 +134,7 @@ sub __exit {
 
 sub version() {
     print 'Drakxtools version 10
-Copyright (C) 1999-2004 Mandrakesoft by <install@mandrakesoft.com>
+Copyright (C) 1999-2004 Mandriva by <install@mandrakesoft.com>
 ',  $::license, "\n";
 }
 
