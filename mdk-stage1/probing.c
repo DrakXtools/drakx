@@ -832,55 +832,68 @@ void get_medias(enum media_type media, char *** names, char *** models, enum med
 
 
 #ifndef DISABLE_NETWORK
-int net_device_available(char * device) {
-	struct ifreq req;
-	int s;
-    
-	s = socket(AF_INET, SOCK_DGRAM, 0);
-	if (s < 0) {
-		log_perror(device);
-		return 0;
-	}
-	strcpy(req.ifr_name, device);
-	if (ioctl(s, SIOCGIFFLAGS, &req)) {
-		/* if we can't get the flags, the networking device isn't available */
-		close(s);
-		return 0;
-	}
-	close(s);
-	return 1;
-}
+static int is_net_interface_blacklisted(char *intf)
+{
+	/* see detect_devicess::is_lan_interface() */
+	char * blacklist[] = { "lo", "ippp", "isdn", "plip", "ppp", "wifi", "sit", NULL };
+	char ** ptr = blacklist;
 
+	while (ptr && *ptr) {
+		if (!strncmp(intf, *ptr, strlen(*ptr)))
+			return 1;
+		ptr++;
+	}
+
+	return 0;
+}
 
 char ** get_net_devices(void)
 {
-	char * devices[] = {
-		"eth0", "eth1", "eth2", "eth3", "eth4", "eth5", "eth6", "eth7", "eth8", "eth9",
-		"tr0",
-		"plip0", "plip1", "plip2",
-		"fddi0",
-#ifdef ENABLE_USB
-		"usb0", "usb1", "usb2", "usb3",
-#endif
-		NULL
-	};
-	char ** ptr = devices;
 	char * tmp[50];
-	int i = 0;
 	static int already_probed = 0;
+	FILE * f;
+	int i = 0;
 
 	if (!already_probed) {
 		already_probed = 1; /* cut off loop brought by: probe_that_type => my_insmod => get_net_devices */
 		probe_that_type(NETWORK_DEVICES, BUS_ANY);
 	}
 
-	while (ptr && *ptr) {
-		if (net_device_available(*ptr))
-			tmp[i++] = strdup(*ptr);
-		ptr++;
+	/* use /proc/net/dev since SIOCGIFCONF doesn't work with some drivers (rt2500) */
+	f = fopen("/proc/net/dev", "rb");
+	if (f) {
+		char line[128];
+
+		/* skip the two first lines */
+		fgets(line, sizeof(line), f);
+		fgets(line, sizeof(line), f);
+
+		while (1) {
+			char *start, *end;
+			if (!fgets(line, sizeof(line), f))
+				break;
+			start = line;
+			while (*start == ' ')
+				start++;
+			end = strchr(start, ':');
+			if (end)
+				end[0] = '\0';
+			if (!is_net_interface_blacklisted(start)) {
+				log_message("found net interface %s", start);
+				tmp[i++] = strdup(start);
+			} else {
+				log_message("found net interface %s, but blacklisted", start);
+			}
+		}
+
+		fclose(f);
+	} else {
+		log_message("net: could not open devices file");
 	}
+
 	tmp[i++] = NULL;
 
 	return memdup(tmp, sizeof(char *) * i);
+
 }
 #endif /* DISABLE_NETWORK */
