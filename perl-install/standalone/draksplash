@@ -164,13 +164,21 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
 #- image file selection for new theme
 $first{widgets}{button}{file}->signal_connect(clicked => sub {
-	my $file_dialog = gtkset_modal(Gtk2::FileSelection->new(N("choose image")), 1);
-	$file_dialog->set_transient_for($window->{real_window});
+	my $file_dialog = my $file_dlg = Gtk2::FileChooserDialog->new(N("choose image"), $window->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok');
 
 	$file_dialog->set_filename($img_file || '~/');
-	$file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
-	$file_dialog->ok_button->signal_connect(clicked => sub { $img_file = $file_dialog->get_filename; $file_dialog->destroy });
 	$file_dialog->show;
+
+     while (my $answer = $file_dlg->run) {
+         if (member($answer, qw(cancel delete-event))) {
+             $file_dialog->destroy;
+             return;
+         } elsif ($answer eq 'ok') {
+             $img_file = $file_dialog->get_filename;
+             $file_dialog->destroy;
+             return;
+         }
+     }
 });
 #- changing theme name
 $first{widgets}{combo}{name}->entry->signal_connect(changed => sub { get_this_thm_res_conf(); $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
