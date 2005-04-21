@@ -30,9 +30,9 @@ use handle_configs;
 use services;
 
 my $companyname = "Mandriva";
-my $distroname = "Mandrakelinux";
-my $shortdistroname = "Mandrakelinux";
-my $domainname = "mandrakesoft.com";
+my $distroname = "Mandrivalinux";
+my $shortdistroname = "Mandrivalinux";
+my $domainname = "mandriva.com";
 
 foreach (@ARGV) {
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };

@@ -19,7 +19,7 @@ my $recstr = $printer::main::recstr;
 my $precstr = $printer::main::precstr;
 my $sprecstr = $printer::main::sprecstr;
 
-my $shortdistroname = "Mandrakelinux";
+my $shortdistroname = "Mandrivalinux";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by decompressing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
 ");
