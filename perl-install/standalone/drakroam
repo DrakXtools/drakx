@@ -271,7 +271,7 @@ sub UpdateStatus() {
 		/ESSID:"(.*?)"/ and $CurrentNet = $1;
 		/Mode:(\S*)\s/ and $CurrentMode = $1;
 		/key:(\S*)\s/ and $CurrentWEP = $1;
-		m!Quality:(\S*)/! and $CurrentSignal = $1;
+		m!Quality[:=](\S*)/! and $CurrentSignal = $1;
 	}
 	foreach (run_program::get_stdout($IFConfig, $device)) {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
@@ -282,7 +282,7 @@ sub UpdateStatus() {
 		else { $CurrentGW = "---.---.---.---" }
 	}
 	$net_field->set_text($CurrentNet);
-     $mode_field->set_text($CurrentMode);
+	$mode_field->set_text($CurrentMode);
 	$ip_field->set_text($CurrentIP);
 	$wep_field->set_text($CurrentWEP);
 	$gw_field->set_text($CurrentGW);
@@ -298,7 +298,7 @@ sub UpdateAvailable() {
 		/([^ ]+)([ \t]+)No scan results/ and  $device = $1;
 		/ESSID:"(.*?)"/ and $essid = $1;
 		/Mode:(\S*)/ and $mode = $1;
-		m!Quality:(\S*)/! and $signal = $1;
+		m!Quality[:=](\S*)/! and $signal = $1;
 		if (/key:(\S*)\s/) {
 			$wep = $1;
 			print "ESSID: $essid, Mode: $mode, WEP: $wep, Signal: $signal\n" if $::testing;
