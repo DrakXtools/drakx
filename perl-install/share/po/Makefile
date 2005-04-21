@@ -30,9 +30,6 @@ help:
 %.mo: %.po
 	msgfmt -o $@ $<
 
-merge2:
-	for i in $(POFILES); do ~/cvs/kde/kde-i18n/br/messages/_merge.sh old/$$i $$i; done > l
-
 merge:
 	for i in $(POFILES); do msgmerge -N -C $$i $$i DrakX.pot > $${i}t; mv $${i}t $$i;done
 
