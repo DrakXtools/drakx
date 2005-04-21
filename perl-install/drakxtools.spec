@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.2mdk
+Release: 0.3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.3mdk
+- drakbackup, drakfont, draksplash: switch to gtk+-2.6's new file selector
+- drakbackup, drakroam: fix layout
+- drakfont: filter file list so that only fonts are displayed
+
 * Wed Apr 20 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.2mdk
 - drakconnect (blino):
   o merge wireless steps and move advanced settings in advanced mode (#15501)
