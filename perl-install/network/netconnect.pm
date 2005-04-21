@@ -1057,7 +1057,7 @@ Do you really want to reconfigure this device?"),
                     name => sub { 
                         my $_msg = N("Zeroconf hostname resolution");
                         N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module) . "\n\n" .
-                          N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use");
+                          N("The following protocols can be used to configure a LAN connection. Please choose the one you want to use");
                     },
                     data => sub {
                         [ { val => \$protocol, type => "list", list => [ sort values %l10n_lan_protocols ] } ];
