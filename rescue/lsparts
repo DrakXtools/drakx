@@ -16,7 +16,7 @@
 # Detects partition types using signatures
 #
 
-use lib qw(/usr/lib/libDrakX ../perl-install);
+use lib qw(../perl-install /usr/lib/libDrakX);
 use common;
 use devices;
 use fs::type;
@@ -32,6 +32,8 @@ foreach (devices::read_proc_partitions_raw()) {
 	"Skipping <$_->{dev}> because too little blocks ($_->{size})" :
 	  $_->{dev} !~ /\d$/ ?
 	"Skipping <$_->{dev}> because doesn't end with a number (e.g. seems to not be a partition)" :
+	  $_->{dev} =~ /^loop\d+$/ ?
+	"Skipping <$_->{dev}>" :
 	  '') {
 	print STDERR "$err\n" if $verbose;
     } else {
