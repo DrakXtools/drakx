@@ -154,12 +154,20 @@ $AvailableList = Gtk2::SimpleList->new(
                                          );
 $AvailableList->get_selection->set_mode('single');
 
-my $NetLabel = Gtk2::WrappedLabel->new;
-my $IpLabel = Gtk2::WrappedLabel->new;
-my $GwLabel = Gtk2::WrappedLabel->new;
-my $ModeLabel = Gtk2::WrappedLabel->new;
-my $WepLabel = Gtk2::WrappedLabel->new;
-my $SignalLabel = Gtk2::WrappedLabel->new;
+my $NetLabel = Gtk2::WrappedLabel->new(N("Network:"));
+my $IpLabel = Gtk2::WrappedLabel->new(N("IP:"));
+my $GwLabel = Gtk2::WrappedLabel->new(N("Gateway:"));
+my $ModeLabel = Gtk2::WrappedLabel->new(N("Mode:"));
+my $WepLabel = Gtk2::WrappedLabel->new(N("Encryption:"));
+my $SignalLabel = Gtk2::WrappedLabel->new(N("Signal:"));
+
+my $net_field   = Gtk2::WrappedLabel->new;
+my $mode_field  = Gtk2::WrappedLabel->new;
+my $ip_field    = Gtk2::WrappedLabel->new;
+my $wep_field   = Gtk2::WrappedLabel->new;
+my $gw_field    = Gtk2::WrappedLabel->new;
+my $sig_field   = Gtk2::WrappedLabel->new;
+
 
 my $w = ugtk2->new('Drakroam');
 gtkadd(gtkset_border_width($w->{window}, 2),
@@ -217,8 +225,8 @@ gtkadd(gtkset_border_width($w->{window}, 2),
                 0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Status")), 2),
                           gtkpack(Gtk2::VBox->new,
                                   create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                                   [ $NetLabel, $IpLabel, $GwLabel ],
-                                                   [ $ModeLabel, $WepLabel, $SignalLabel ],
+                                                   [ $NetLabel,  $net_field,  $IpLabel,  $ip_field,  $GwLabel,     $gw_field ],
+                                                   [ $ModeLabel, $mode_field, $WepLabel, $wep_field, $SignalLabel, $sig_field ],
                                                   ),
                                   gtkpack(create_hbox(),
                                           gtksignal_connect(Gtk2::Button->new(N("Disconnect")), clicked => sub { &Disconnect }),
@@ -273,12 +281,12 @@ sub UpdateStatus() {
 		if (/^0.0.0.0\s*(\S*)\s/) { $CurrentGW = gethostbyaddr(inet_aton($1), AF_INET) }
 		else { $CurrentGW = "---.---.---.---" }
 	}
-	$NetLabel->set_text(N("Network: %s",  $CurrentNet));
-        $ModeLabel->set_text(N("Mode: %s", $CurrentMode));
-	$IpLabel->set_text(N("IP: %s", $CurrentIP));
-	$WepLabel->set_text(N("Encryption: %s", $CurrentWEP));
-	$GwLabel->set_text(N("Gateway: %s", $CurrentGW));
-	$SignalLabel->set_text(N("Signal: %s", $CurrentSignal));
+	$net_field->set_text($CurrentNet);
+     $mode_field->set_text($CurrentMode);
+	$ip_field->set_text($CurrentIP);
+	$wep_field->set_text($CurrentWEP);
+	$gw_field->set_text($CurrentGW);
+	$sig_field->set_text($CurrentSignal);
 }
 
 sub UpdateAvailable() {
