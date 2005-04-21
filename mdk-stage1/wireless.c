@@ -96,7 +96,7 @@ static int wireless_set_restricted_key(int socket, const char *ifname, const cha
 	unsigned int tmp;
 
 	while (sscanf(key + 2*key_len, "%2X", &tmp) == 1)
-		real_key[key_len++] = (unsigned char) tmp;
+		real_key[key_len++] = (char) tmp;
 
 	wrq.u.data.flags = IW_ENCODE_RESTRICTED;
 	wrq.u.data.pointer = (char *) real_key;
@@ -119,7 +119,9 @@ enum return_type configure_wireless(const char *ifname)
 		return RETURN_OK;
 	}
 
-	results = ask_from_entries_auto("Please enter your wireless settings.",
+	results = ask_from_entries_auto("Please enter your wireless settings. "
+                                        "The ESSID is your wireless network identifier. "
+                                        "The WEP key must be entered in hexadecimal, without any separator.",
 					questions, &answers, 32, questions_auto, NULL);
 	if (results != RETURN_OK) {
 		wireless_close_socket(wsock);
@@ -129,12 +131,6 @@ enum return_type configure_wireless(const char *ifname)
 	if (!wireless_set_mode_managed(wsock, ifname)) {
 		stg1_error_message("unable to set mode Managed on device \"%s\": %s", ifname, strerror(errno));
 		wireless_close_socket(wsock);
-		return RETURN_ERROR;
-	}
-
-	log_message("setting ESSID \"%s\" on device \"%s\"", answers[0], ifname);
-	if (!wireless_set_essid(wsock, ifname, answers[0])) {
-		stg1_error_message("unable to set ESSID \"%s\" on device \"%s\": %s", answers[0], ifname, strerror(errno));
 		return RETURN_ERROR;
 	}
 
@@ -150,6 +146,13 @@ enum return_type configure_wireless(const char *ifname)
 			stg1_error_message("unable to disable WEP key on device \"%s\": %s", ifname, strerror(errno));
 			return RETURN_ERROR;
 		}
+	}
+
+        /* most devices perform discovery when ESSID is set, it needs to be last */
+	log_message("setting ESSID \"%s\" on device \"%s\"", answers[0], ifname);
+	if (!wireless_set_essid(wsock, ifname, answers[0])) {
+		stg1_error_message("unable to set ESSID \"%s\" on device \"%s\": %s", answers[0], ifname, strerror(errno));
+		return RETURN_ERROR;
 	}
 
 	wireless_close_socket(wsock);
