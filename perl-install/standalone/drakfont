@@ -464,10 +464,6 @@ sub backend_mod() {
     }
 }
 
-sub create_fontsel() {
-    Gtk2::FontSelection->new;
-}
-
 sub interactive_mode() {
     $interactive = 1;
     $window1 = ugtk2->new('drakfont');
@@ -486,7 +482,7 @@ sub interactive_mode() {
 	   gtkpack_(Gtk2::VBox->new(0, 2), 
                  if_(!$::isEmbedded, 0, Gtk2::Banner->new("drakfont", N("DrakFont"))), 
                  0, Gtk2::WrappedLabel->new(N("Font List")),
-                 1, create_fontsel(),
+                 1, Gtk2::FontSelection->new,
                  0, create_okcancel(my $oc = {
                                      ok_clicked => sub { Gtk2->main_quit },
                                     },
