@@ -355,15 +355,10 @@ sub ConnectNow {
 	my ($row) = @_;
 	my @command = "";
 	push @command, "$IWConfig $device essid $KnownList->{data}[$row][0] ";
-	if ($KnownList->{data}[$row][1]) {
-		push @command, "mode $KnownList->{data}[$row][1] ";
-	}
-	if ($KnownList->{data}[$row][2]) {
-		push @command, "channel $KnownList->{data}[$row][2] ";
-	}
-	if ($KnownList->{data}[$row][4]) {
-		push @command, "key $KnownList->{data}[$row][4] ";
-	}
+     my %commands = (1 => 'mode', 2 => 'channel', 4 => 'key');
+     foreach (my ($key, $cmd) = each %commands) {
+         push @command, "$cmd $KnownList->{data}[$row][$key] " if $KnownList->{data}[$row][$key];
+     }
 	push @command, "; ";
 	if ($KnownList->{data}[$row][3]) {
 		push @command, "$IFConfig $device up; $DHClient $device";
