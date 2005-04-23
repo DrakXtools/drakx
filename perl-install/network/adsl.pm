@@ -379,7 +379,7 @@ METRIC=$metric
         $modules_conf->set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
         $::isStandalone and $modules_conf->write;
     }
-    #- remove the "speedtch off" alias that was written by Mandrivalinux 10.0
+    #- remove the "speedtch off" alias that was written by Mandrakelinux 10.0
     $adsl_device eq 'speedtouch' and $modules_conf->remove_alias('speedtch');
 
     if ($adsl_type eq "capi") {

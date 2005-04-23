@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # DrakxDM -- Display Manager chooser
-# Copyright (C) 2003-2004 Mandriva (tvignaud@mandrakesoft.com)
+# Copyright (C) 2003-2004 Mandriva (tvignaud@mandriva.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ my $cfg_file = '/etc/sysconfig/desktop';
 
 my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ],
           'KDM'   => [ N("KDM (KDE Display Manager)"), '/usr/bin/kdm', 'kdebase-kdm' ],
-          'KDE'   => [ N("MdkKDM (Mandrivalinux Display Manager)"), '/usr/bin/mdkkdm', 'mdkkdm' ],
+          'KDE'   => [ N("MdkKDM (Mandriva Linux Display Manager)"), '/usr/bin/mdkkdm', 'mdkkdm' ],
           'XDM'   => [ N("XDM (X Display Manager)"), '/usr/bin/X11/xdm', 'xorg-x11' ],
           );
 

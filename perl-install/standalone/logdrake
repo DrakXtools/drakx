@@ -2,7 +2,7 @@
 # $Id$
 
 # Copyright (C) 2001-2004 Mandriva
-# Yves Duret <yduret at mandrakesoft.com>
+# Yves Duret <yduret at mandriva.com>
 # some code is Copyright: (C) 1999, Michael T. Babcock <mikebabcock@pobox.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -47,7 +47,7 @@ $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
 $ugtk2::wm_icon = "logdrake";
-my $explain_title = N("Mandrivalinux Tools Logs");
+my $explain_title = N("Mandriva Linux Tools Logs");
 my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
 
 unless ($::isEmbedded) {

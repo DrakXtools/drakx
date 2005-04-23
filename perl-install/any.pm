@@ -730,7 +730,7 @@ sub selectLanguage {
 
         my $last_utf8 = $in->{locale}{utf8};
 	add2hash($common, { cancel => '',
-			    advanced_messages => formatAlaTeX(N("Mandrivalinux can support multiple languages. Select
+			    advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
 			    advanced_state => 1,

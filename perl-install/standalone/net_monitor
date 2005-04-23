@@ -4,7 +4,7 @@
 
 # Copyright (C) 1999-2004 Mandriva
 # Damien "Dam's" Krotkine
-# Thierry Vignaud <tvignaud@mandrakesoft.com>
+# Thierry Vignaud <tvignaud@mandriva.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -233,7 +233,7 @@ sub connection() {
 									  N("Disconnection from Internet complete.")) :
 						     ($isconnected ?
 						       N("Connection complete.") :
-						       N("Connection failed.\nVerify your configuration in the Mandrivalinux Control Center."))
+						       N("Connection failed.\nVerify your configuration in the Mandriva Linux Control Center."))
 						    );
  				            # remove the connection time timer if connection is down or failed
  				            $isconnected or Glib::Source->remove($ct_tag);

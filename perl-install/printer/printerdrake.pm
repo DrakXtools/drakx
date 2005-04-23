@@ -19,7 +19,7 @@ my $recstr = $printer::main::recstr;
 my $precstr = $printer::main::precstr;
 my $sprecstr = $printer::main::sprecstr;
 
-my $shortdistroname = "Mandrivalinux";
+my $shortdistroname = "Mandriva Linux";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by decompressing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
 ");
@@ -3926,7 +3926,7 @@ sub hplip_help {
     
     if ($hplipentry->{scan}) {
 	$text .= N("The scanner in your printer can be used with the usual SANE software, for example Kooka or XSane (Both in the Multimedia/Graphics menu). ");
-	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandrivalinux Control Center) to share your scanner on the network.\n\n");
+	$text .= N("Run Scannerdrake (Hardware/Scanner in Mandriva Linux Control Center) to share your scanner on the network.\n\n");
     }
 
     if (($hplipentry->{card} == 2) && ($deviceuri =~ m!/usb/!i)) {
