@@ -9,10 +9,10 @@ sub main_license() {
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Introduction
 
-The operating system and the different components available in the Mandrivalinux distribution 
+The operating system and the different components available in the Mandriva Linux distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
 restricted to, the set of programs, methods, rules and documentation related to the operating 
-system and the different components of the Mandrivalinux distribution.
+system and the different components of the Mandriva Linux distribution.
 
 
 1. License Agreement
@@ -47,7 +47,7 @@ liable for any special, incidental, direct or indirect damages whatsoever (inclu
 limitation damages for loss of business, interruption of business, financial loss, legal fees 
 and penalties resulting from a court judgment, or any other consequential loss) arising out 
 of the possession and use of software components or arising out of  downloading software components 
-from one of Mandrivalinux sites  which are prohibited or restricted in some countries by local laws.
+from one of Mandriva Linux sites  which are prohibited or restricted in some countries by local laws.
 This limited liability applies to, but is not restricted to, the strong cryptography components 
 included in the Software Products.
 
@@ -71,7 +71,7 @@ All rights to the components of the Software Products belong to their respective
 protected by intellectual property and copyright laws applicable to software programs.
 Mandriva S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
 parts, by all means and for all purposes.
-\"Mandriva\", \"Mandrivalinux\" and associated logos are trademarks of Mandriva S.A.  
+\"Mandriva\", \"Mandriva Linux\" and associated logos are trademarks of Mandriva S.A.  
 
 
 5. Governing Laws 
@@ -132,7 +132,7 @@ N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
 
-For information on fixes which are available for this release of Mandrivalinux,
+For information on fixes which are available for this release of Mandriva Linux,
 consult the Errata available from:
 
 
@@ -140,8 +140,8 @@ consult the Errata available from:
 
 
 Information on configuring your system is available in the post
-install chapter of the Official Mandrivalinux User's Guide.",
-N("http://www.mandrakelinux.com/en/errata.php3"));
+install chapter of the Official Mandriva Linux User's Guide.",
+N("http://www.mandrivalinux.com/en/errata.php3"));
 }
 
 1;
