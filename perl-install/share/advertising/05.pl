@@ -14,7 +14,7 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>Download Version</b>"), center => 1 ],
          ' ',
-	 N("You are now installing <b>Mandrivalinux Download</b>. This is the free version that Mandriva wants to keep <b>available to everyone</b>."),
+	 N("You are now installing <b>Mandriva Linux Download</b>. This is the free version that Mandriva wants to keep <b>available to everyone</b>."),
 		 ' ',
          N("The Download version <b>cannot include</b> all the software that is not open source. Therefore, you will not find in the Download version:"),
 	 N("	* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."),

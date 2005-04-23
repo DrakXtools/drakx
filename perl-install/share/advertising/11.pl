@@ -13,6 +13,6 @@ $border = 10;  #- for leftish text
 @text = ([ N("<b>Mandriva Products (Professional Solutions)</b>"), center => 1 ],
 	' ',
 	N("Below are the Mandriva products designed to meet the <b>professional needs</b>:"),
-	N("	* <b>Corporate Desktop</b>, The Mandrivalinux Desktop for Businesses."),
-	N("	* <b>Corporate Server</b>, The Mandrivalinux Server Solution."),
-	N("	* <b>Multi-Network Firewall</b>, The Mandrivalinux Security Solution."));
+	N("	* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."),
+	N("	* <b>Corporate Server</b>, The Mandriva Linux Server Solution."),
+	N("	* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."));

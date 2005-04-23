@@ -14,6 +14,6 @@ $border = 10;  #- for leftish text
          ' ',
 	 N("Welcome to the <b>world of open source</b>!"),
 		 ' ',
-         N("Mandrivalinux is committed to the open source model. This means that this new release is the result of <b>collaboration</b> between <b>Mandriva's team of developers</b> and the <b>worldwide community</b> of Mandrivalinux contributors."),
+         N("Mandriva Linux is committed to the open source model. This means that this new release is the result of <b>collaboration</b> between <b>Mandriva's team of developers</b> and the <b>worldwide community</b> of Mandriva Linux contributors."),
          ' ',
          N("We would like to <b>thank</b> everyone who participated in the development of this latest release."));

@@ -12,6 +12,6 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"), center => 1 ],
 	' ',
-	N("You are now installing <b>Mandrivalinux PowerPack+</b>."),
+	N("You are now installing <b>Mandriva Linux PowerPack+</b>."),
 	' ',
 	N("PowerPack+ is a <b>full-featured Linux solution</b> for small to medium-sized <b>networks</b>. PowerPack+ includes thousands of <b>desktop applications</b> and a comprehensive selection of world-class <b>server applications</b>."));

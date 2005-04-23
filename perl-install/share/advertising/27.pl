@@ -18,4 +18,4 @@ $border = 10;  #- for leftish text
 	' ',
 	N("This platform has just been <b>redesigned</b> to improve its efficiency and usability."),
 	' ',
-	[ N("Stop by today at <b>store.mandrakesoft.com</b>!"), center => 1 ]);
+	[ N("Stop by today at <b>store.mandriva.com</b>!"), center => 1 ]);

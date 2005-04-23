@@ -14,8 +14,8 @@ $border = 10;  #- for leftish text
 	' ',
 	N("<b>Mandriva Online</b> is a new premium service that Mandriva is proud to offer its customers!"),
 	' ',
-	N("Mandriva Online provides a wide range of valuable services for <b>easily updating</b> your Mandrivalinux systems:"),
+	N("Mandriva Online provides a wide range of valuable services for <b>easily updating</b> your Mandriva Linux systems:"),
 	N("	* <b>Perfect</b> system security (automated software updates)."),
 	N("	* <b>Notification</b> of updates (by e-mail or by an applet on the desktop)."),
 	N("	* Flexible <b>scheduled</b> updates."),
-	N("	* Management of <b>all your Mandrivalinux systems</b> with one account."));
+	N("	* Management of <b>all your Mandriva Linux systems</b> with one account."));

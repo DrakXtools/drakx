@@ -14,6 +14,6 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>Mandriva Products (Nomad Products)</b>"), center => 1 ],
 	' ',
-	N("Mandriva has developed two products that allow you to use Mandrivalinux <b>on any computer</b> and without any need to actually install it:"),
-	N("	* <b>Move</b>, a Mandrivalinux distribution that runs entirely from a bootable CD-ROM."),
-	N("	* <b>GlobeTrotter</b>, a Mandrivalinux distribution pre-installed on the ultra-compact “LaCie Mobile Hard Drive”."));
+	N("Mandriva has developed two products that allow you to use Mandriva Linux <b>on any computer</b> and without any need to actually install it:"),
+	N("	* <b>Move</b>, a Mandriva Linux distribution that runs entirely from a bootable CD-ROM."),
+	N("	* <b>GlobeTrotter</b>, a Mandriva Linux distribution pre-installed on the ultra-compact “LaCie Mobile Hard Drive”."));

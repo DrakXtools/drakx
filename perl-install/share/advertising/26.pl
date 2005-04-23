@@ -12,4 +12,4 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>The Open Source Model</b>"), center => 1 ],
 	' ',
-	N("Like all computer programming, open source software <b>requires time and people</b> for development. In order to respect the open source philosophy, Mandriva sells added value products and services to <b>keep improving Mandrivalinux</b>. If you want to <b>support the open source philosophy</b> and the development of Mandrivalinux, <b>please</b> consider buying one of our products or services!"));
+	N("Like all computer programming, open source software <b>requires time and people</b> for development. In order to respect the open source philosophy, Mandriva sells added value products and services to <b>keep improving Mandriva Linux</b>. If you want to <b>support the open source philosophy</b> and the development of Mandriva Linux, <b>please</b> consider buying one of our products or services!"));
