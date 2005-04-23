@@ -224,7 +224,7 @@ my @menu_items =
            create_dialog(N("About Harddrake"), 
 #-PO: Do not alter the <span ..> and </span> tags
                          N("This is HardDrake, a %s hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
-<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $distro_name, $harddrake::data::version) . "\n" .
+<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandriva.com&gt;\n\n", $distro_name, $harddrake::data::version) . "\n" .
                          formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{real_window}) });
        }, undef, '<Item>'
      ]
