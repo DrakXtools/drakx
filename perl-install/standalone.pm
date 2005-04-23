@@ -58,8 +58,8 @@ default mode: offer to configure autologin feature"),
 
 OPTIONS:
   --help            - print this help message.
-  --report          - program should be one of mandrakelinux tools
-  --incident        - program should be one of mandrakelinux tools"),
+  --report          - program should be one of Mandriva Linux tools
+  --incident        - program should be one of Mandriva Linux tools"),
            'drakconnect' => N_("[--add]
   --add             - \"add a network interface\" wizard
   --del             - \"delete a network interface\" wizard
@@ -82,7 +82,7 @@ OPTIONS:
            'draksec' => "[--debug]
 --debug: print debugging information",
            'drakTermServ' => N_("[OPTIONS]...
-Mandrivalinux Terminal Server Configurator
+Mandriva Linux Terminal Server Configurator
 --enable         : enable MTS
 --disable        : disable MTS
 --start          : start MTS
@@ -134,7 +134,7 @@ sub __exit {
 
 sub version() {
     print 'Drakxtools version 10
-Copyright (C) 1999-2004 Mandriva by <install@mandrakesoft.com>
+Copyright (C) 1999-2004 Mandriva by <install@mandriva.com>
 ',  $::license, "\n";
 }
 
