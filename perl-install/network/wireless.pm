@@ -31,6 +31,11 @@ sub convert_key_for_wpa_supplicant {
     }
 }
 
+sub wlan_ng_needed {
+    my ($module) = @_;
+    $module =~ /^prism2_/;
+}
+
 #- FIXME: to be improved (quotes, comments) and moved in common files
 sub wlan_ng_update_vars {
     my ($file, $vars) = @_;
@@ -43,36 +48,36 @@ sub wlan_ng_update_vars {
 }
 
 sub wlan_ng_configure {
-    my ($in, $ethntf, $module) = @_;
-    $in->do_pkgs->install('prism2-utils');
-    if ($ethntf->{WIRELESS_ESSID}) {
-        my $wlan_conf_file = "$::prefix/etc/wlan/wlan.conf";
-        my @wlan_devices = split(/ /, (cat_($wlan_conf_file) =~ /^WLAN_DEVICES="(.*)"/m)[0]);
-        push @wlan_devices, $ethntf->{DEVICE} unless member($ethntf->{DEVICE}, @wlan_devices);
-        #- enable device and make it use the choosen ESSID
-        wlan_ng_update_vars($wlan_conf_file,
-                            {
-                                WLAN_DEVICES => qq("@wlan_devices"),
-                                "SSID_$ethntf->{DEVICE}" => qq("$ethntf->{WIRELESS_ESSID}"),
-                                "ENABLE_$ethntf->{DEVICE}" => "y"
-                            });
-        my $wlan_ssid_file = "$::prefix/etc/wlan/wlancfg-$ethntf->{WIRELESS_ESSID}";
-        #- copy default settings for this ESSID if config file does not exist
-        -f $wlan_ssid_file or cp_f("$::prefix/etc/wlan/wlancfg-DEFAULT", $wlan_ssid_file);
-        #- enable/disable encryption
-        wlan_ng_update_vars($wlan_ssid_file,
-                            {
-                                (map { $_ => $ethntf->{WIRELESS_ENC_KEY} ? "true" : "false" } qw(lnxreq_hostWEPEncrypt lnxreq_hostWEPDecrypt dot11PrivacyInvoked dot11ExcludeUnencrypted)),
-                                AuthType => $ethntf->{WIRELESS_ENC_KEY} ? qq("sharedkey") : qq("opensystem"),
-                                if_($ethntf->{WIRELESS_ENC_KEY},
-                                    dot11WEPDefaultKeyID => 0,
-                                    dot11WEPDefaultKey0 => qq("$ethntf->{WIRELESS_ENC_KEY}")
-                                )
-                            });
-        #- hide settings for non-root users
-        chmod 0600, $wlan_conf_file;
-        chmod 0600, $wlan_ssid_file;
-    }
+    my ($essid, $key, $device, $module) = @_;
+    my $wlan_conf_file = "$::prefix/etc/wlan/wlan.conf";
+    my @wlan_devices = split(/ /, (cat_($wlan_conf_file) =~ /^WLAN_DEVICES="(.*)"/m)[0]);
+    push @wlan_devices, $device unless member($device, @wlan_devices);
+    #- enable device and make it use the choosen ESSID
+    wlan_ng_update_vars($wlan_conf_file,
+                        {
+                            WLAN_DEVICES => qq("@wlan_devices"),
+                            "SSID_$device" => qq("$essid"),
+                            "ENABLE_$device" => "y"
+                        });
+
+    my $wlan_ssid_file = "$::prefix/etc/wlan/wlancfg-$essid";
+    #- copy default settings for this ESSID if config file does not exist
+    -f $wlan_ssid_file or cp_f("$::prefix/etc/wlan/wlancfg-DEFAULT", $wlan_ssid_file);
+
+    #- enable/disable encryption
+    wlan_ng_update_vars($wlan_ssid_file,
+                        {
+                            (map { $_ => $key ? "true" : "false" } qw(lnxreq_hostWEPEncrypt lnxreq_hostWEPDecrypt dot11PrivacyInvoked dot11ExcludeUnencrypted)),
+                            AuthType => $key ? qq("sharedkey") : qq("opensystem"),
+                            if_($key,
+                                dot11WEPDefaultKeyID => 0,
+                                dot11WEPDefaultKey0 => qq("$key")
+                            )
+                        });
+    #- hide settings for non-root users
+    chmod 0600, $wlan_conf_file;
+    chmod 0600, $wlan_ssid_file;
+
     #- apply settings on wlan interface
     require services;
     services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
@@ -90,10 +95,7 @@ sub wpa_supplicant_get_driver {
 }
 
 sub wpa_supplicant_configure {
-    my ($in, $essid, $key) = @_;
-    require services;
-    $in->do_pkgs->install('wpa_supplicant');
-
+    my ($essid, $key) = @_;
     wpa_supplicant_add_network({
             ssid => qq("$essid"),
             psk => convert_key_for_wpa_supplicant($key),

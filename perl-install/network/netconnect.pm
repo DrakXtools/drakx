@@ -1277,6 +1277,14 @@ See iwpriv(8) man page for further information."),
                             $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
                             return 1, 8;
                         }
+                        if (network::wireless::wlan_ng_needed($module) && !$in->do_pkgs->ensure_is_installed('prism2-utils', '/sbin/wlanctl-ng')) {
+                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'prism2-utils'));
+                            return 1;
+                        }
+                        if ($wireless_enc_mode eq 'wpa-psk' && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
+                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'wpa_supplicant'));
+                            return 1;
+                        }
                     },
                     post => sub {
                         if ($wireless_enc_mode eq 'none') {
@@ -1287,11 +1295,11 @@ See iwpriv(8) man page for further information."),
                         }
                         if ($wireless_enc_mode eq 'wpa-psk') {
                             $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                            network::wireless::wpa_supplicant_configure($in, $ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
+                            network::wireless::wpa_supplicant_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
                         } else {
                             delete $ethntf->{WIRELESS_WPA_DRIVER};
                         }
-                        $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
+                        network::wireless::wlan_ng_needed($module) and network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
                         return "static_hostname";
                     },
                    },
