@@ -1284,12 +1284,12 @@ See iwpriv(8) man page for further information."),
                         } else {
                             #- keep the key even for WPA, so that drakconnect remembers it
                             $ethntf->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
-                            if ($wireless_enc_mode eq 'wpa-psk') {
-                                $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                                network::wireless::wpa_supplicant_configure($in, $ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
-                            } else {
-                                delete $ethntf->{WIRELESS_WPA_DRIVER};
-                            }
+                        }
+                        if ($wireless_enc_mode eq 'wpa-psk') {
+                            $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
+                            network::wireless::wpa_supplicant_configure($in, $ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
+                        } else {
+                            delete $ethntf->{WIRELESS_WPA_DRIVER};
                         }
                         $module =~ /^prism2_/ and network::wireless::wlan_ng_configure($in, $ethntf, $module);
                         return "static_hostname";
