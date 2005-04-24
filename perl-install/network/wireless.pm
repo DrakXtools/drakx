@@ -90,13 +90,13 @@ sub wpa_supplicant_get_driver {
 }
 
 sub wpa_supplicant_configure {
-    my ($in, $ethntf) = @_;
+    my ($in, $essid, $key) = @_;
     require services;
     $in->do_pkgs->install('wpa_supplicant');
 
     wpa_supplicant_add_network({
-            ssid => qq("$ethntf->{WIRELESS_ESSID}"),
-            psk => convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
+            ssid => qq("$essid"),
+            psk => convert_key_for_wpa_supplicant($key),
             scan_ssid => 1,
     });
 }
