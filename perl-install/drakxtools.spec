@@ -371,7 +371,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Mon Apr 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.6mdk
 - drakconnect (blino):
-  o fix WPA key
+  o fix WPA key (#15621)
   o allow to disable WPA even if no key is used
   o handle errors in wireless packages installation
 - drakroam: fix Signal Quality parsing (blino)
