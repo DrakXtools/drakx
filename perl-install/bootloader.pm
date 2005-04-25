@@ -475,7 +475,8 @@ sub add_kernel {
     #- normalize append and handle special options
     {
 	my ($simple, $dict) = unpack_append("$bootloader->{perImageAppend} $v->{append}");
-	if (-e "$::prefix/sbin/udev" && $kernel_str->{version} =~ /^2\.(\d+\.\d+)/ && $1 >= 6.8) {
+	if (-e "$::prefix/sbin/udev" && $kernel_str->{version} =~ /^2\.(\d+)\.(\d+)/ && 
+	      ($1 > 6 || $1 == 6 && $2 >= 8)) {
 	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
 	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
 	}
