@@ -12,102 +12,71 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-
-sub cat_ { local *F; open F, $_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l }
-sub chomp_ { my @l = map { my $l = $_; chomp $l; $l } @_; wantarray() ? @l : $l[0] }
-
-
-my @mounts = cat_('/proc/mounts');
-grep { (split)[1] =~ m|^/mnt$| } @mounts and print("/mnt is already mounted (according to /proc/mounts)\n"), exit 0;
+use lib qw(../perl-install /usr/lib/libDrakX);
+use common;
+use fs;
 
 
-system('drvinst'); #- class2text seems broken, I can't detect easily only modules for SCSI storage :-(
 
-print "\nPlease wait, trying to find your root device...\n";
+my @proc_mounts = fs::read_fstab('', '/proc/mounts');
 
 my $target = '/mnt';
--d $target || mkdir($target) or die "couldn't create $target\n";
 
+if (fs::get::mntpoint2part($target, \@proc_mounts)) {
+    print STDERR "$target is already mounted (according to /proc/mounts)\n";
+    exit 0;
+}
 
-my (undef, undef, @parts) = cat_('/proc/partitions');
+system('drvinst', 'STORAGE');
+
+print STDERR "\nPlease wait, trying to find your root device...\n";
+
+mkdir_p($target);
 
 my @fstab;
 my $root;
 
-M: foreach (@parts) {
-    my $dev = (split)[3] or next;
-    $dev = "/dev/$dev";
+foreach (devices::read_proc_partitions_raw()) {
+    my $dev = devices::make($_->{dev});
 
-    foreach my $fs ('ext3', 'ext2', 'reiserfs', 'xfs', 'jfs') {
-	my $where = $target;
-	if (!system("mount -t $fs $dev $where 2>/dev/null")) {
-	    if (-r "$where/etc/fstab" && -r "$where/etc/mandrake-release") {
-		print "=> found a Mandriva Linux root partition on $dev\n=> type $fs, version `",
-		      chomp_(cat_ "$where/etc/mandrake-release"),
-		      "'\n";
-		@fstab = cat_("$where/etc/fstab");
-		$root = $dev;
-		last M;
-	    } else {
-		system('umount', $where) and die "error unmounting $where\n";
-	    }
-	    last;
-	}
+    my $fs = find {
+	system("mount -t $_ $dev $target 2>/dev/null") == 0;
+    } fs::type::true_local_fs_types() or next;
+
+    if (my $release_file = common::release_file($target)) {
+	print STDERR "=> found a Mandriva Linux root partition on $dev\n=> type $fs, version `",
+	  chomp_(cat_("$target$release_file")), "'\n";
+	@fstab = fs::read_fstab($target, '/etc/fstab');
+	$root = $dev;
+	last;
+    } else {
+	system('umount', $target) == 0 or die "error unmounting $target\n";
     }
 }
 
 if ($root) {
-    print "\nMounting other partitions from fstab on $target...\n";
+    print STDERR "\nMounting other partitions from fstab on $target...\n";
     foreach (@fstab) {
-	next if /^\s*#/;
-	my ($dev, $where, $type, $opts) = split;
-	next if (!$type || $dev eq 'none' || $opts =~ /noauto/ ||
-                 $type =~ /^(supermount|swap|nfs)$/ ||
-                 $where eq '/' ||
-                 $where =~ m,proc|cdrom|floppy|/mnt/zip,
-		 );
-	$opts = join(',', grep { !/codepage=/ && !/iocharset/ } split(',', $opts)); #- vfat opts, we don't have the modules in rescue
-	$where = "$target$where";
-	-d $where || mkdir($where) or die "couldn't create $where\n";
-	print "\t$dev on $where type $type\n";
-	system("mount -t $type $dev $where -o $opts");
+	my ($valued_options, $options) = fs::mount_options::unpack($_);
+
+	next if 
+	  !$_->{fs_type} || $_->{device} eq 'none'
+	    || $valued_options->{noauto} || $valued_options->{supermount} 
+	    || $_->{mntpoint} eq '/'
+	    || member($_->{fs_type}, 'swap', 'nfs');
+
+	delete $valued_options->{'iocharset='};
+	delete $valued_options->{'codepage='};
+	fs::mount_options::pack($_, $valued_options, $options); #- vfat opts, we don't have the modules in rescue
+
+	my $where = "$target$_->{mntpoint}";
+	mkdir_p($where);
+	print STDERR "\t$_->{device} on $where type $_->{fs_type} options $_->{options}\n";
+	system("mount -t $_->{fs_type} /dev/$_->{device} $where -o $_->{options}");
 	system("cp -f /etc/mtab $target/etc/mtab"); #- to allow a nice chrooted "mount" or "df"
     }
-    print "\nYour system is ready on $target.\n\n";
+    print STDERR "\nYour system is ready on $target.\n\n";
 } else {
     die "Could not find your root device :-(.\n";
 }
 
-
-
-#-------------------------------------------------
-#- $Log$
-#- Revision 1.8  2005/04/19 13:10:25  prigaux
-#- mandriva switch
-#-
-#- Revision 1.7  2004/07/20 02:42:12  prigaux
-#- MandrakeSoft -> Mandrakesoft
-#-
-#- Revision 1.6  2003/08/03 21:50:06  prigaux
-#- - copy /etc/mtab to /mnt/etc/mtab to have a nice chrooted "mount" or "df"
-#- - some perl_checker compliance
-#-
-#- Revision 1.5  2001/11/05 17:03:54  gc
-#- honours hash in /etc/fstab to disable lines
-#-
-#- Revision 1.4  2001/10/24 22:34:01  gc
-#- - add a GUI to the rescue
-#-   - provide guessmounts with better efficiency and output, go to console, and reboot
-#-   - provide install_bootloader which runs lilo from /mnt if it seems safe
-#- - add lsparts to rescue, which prints partitions with detected types
-#-
-#- Revision 1.3  2001/09/07 18:22:54  gc
-#- ext3, xfs, jfs
-#-
-#- Revision 1.2  2001/06/10 22:41:21  prigaux
-#- pixelization (tested!)
-#-
-#- Revision 1.1  2001/06/10 21:08:33  gc
-#- - add 'guessmounts' that mimics RH's detecting of partitions when rescue starts
-#-
-#-
