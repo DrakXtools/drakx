@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: DrakX-it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-04-21 14:27+0200\n"
-"PO-Revision-Date: 2005-04-02 15:28+0200\n"
+"PO-Revision-Date: 2005-04-25 00:25+0200\n"
 "Last-Translator: Andrea Celli <a.celli@caltanet.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -7287,6 +7287,7 @@ msgstr "Configurazione post installazione"
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
+"Assicurati che gli \"Update Modules\" siano leggibili dal dispositivo %s"
 
 #: install_steps_interactive.pm:800
 #, c-format
@@ -8296,7 +8297,7 @@ msgstr "Slovenian"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 #: keyboard.pm:294
 #, c-format
@@ -8380,14 +8381,14 @@ msgstr "Thai (Pattachote)"
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (tastiera marocchina) (+latina/araba)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (fonetica) (+latina/araba)"
 
 #: keyboard.pm:313
 #, c-format
@@ -10229,7 +10230,7 @@ msgstr "Manuale"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Non è presente alcun disposivo che supporti il driver ndiswrapper %s!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10239,12 +10240,12 @@ msgstr "Seleziona il driver Windows (file .inf)"
 #: network/ndiswrapper.pm:41
 #, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "Impossibile installare il driver ndiswrapper %s!"
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "Impossibile caricare il modulo ndiswrapper!"
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -10252,11 +10253,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver ?"
 msgstr ""
+"Il dispositivo selezionato è già stato configurato con il driver %s.\n"
+"Vuoi davvero usare un driver ndiswrapper?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Impossibile trovare l'interfaccia ndiswrapper!"
 
 #: network/netconnect.pm:91 network/netconnect.pm:568
 #: network/netconnect.pm:572
@@ -10412,17 +10415,17 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:182
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "Open WEP"
 
 #: network/netconnect.pm:183
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "WEP ristretto"
 
 #: network/netconnect.pm:184
 #, c-format
 msgid "WPA Pre-Shared Key"
-msgstr ""
+msgstr "Chiave WPA \"pre-shared\""
 
 #: network/netconnect.pm:287 standalone/drakconnect:60
 #, c-format
@@ -11055,7 +11058,7 @@ msgstr "Scegli un driver ndiswrapper"
 #: network/netconnect.pm:1179
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "Usa il driver ndiswrapper %s"
 
 #: network/netconnect.pm:1179
 #, c-format
@@ -11065,7 +11068,7 @@ msgstr "Installa un nuovo driver"
 #: network/netconnect.pm:1191
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "Seleziona un dispositivo:"
 
 #: network/netconnect.pm:1216
 #, c-format
@@ -11135,7 +11138,7 @@ msgstr "Bitrate (in b/s)"
 #: network/netconnect.pm:1227
 #, c-format
 msgid "Encryption mode"
-msgstr ""
+msgstr "Modalità cifratura"
 
 #: network/netconnect.pm:1231 standalone/drakconnect:431
 #, c-format
@@ -21526,7 +21529,7 @@ msgstr "Selezione file"
 #: standalone/drakfont:590
 #, c-format
 msgid "Fonts"
-msgstr ""
+msgstr "Font"
 
 #: standalone/drakfont:653
 #, c-format
@@ -22036,7 +22039,7 @@ msgstr "Permessi"
 #: standalone/drakperm:58
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Aggiungi una nuova regola"
 
 #: standalone/drakperm:65 standalone/drakperm:100 standalone/drakperm:125
 #, c-format
@@ -26895,30 +26898,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Install. non riuscita"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "Nessun lettore di floppy disponibile"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr ""
-#~ "Per favore inserisci il floppy di aggiornamento moduli nell'unità %s"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-#~ msgstr "Tifinagh (+latina/araba)"
-
-#~ msgid "No network card"
-#~ msgstr "Nessuna scheda di rete"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Usa driver già installato (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Usa accesso Wi-Fi protetto (WPA)"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Non hai selezionato alcun font"
-
-#~ msgid "Save and close"
-#~ msgstr "Salva e chiudi"
