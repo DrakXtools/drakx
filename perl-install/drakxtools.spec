@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.5mdk
+Release: 0.6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Apr 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.6mdk
+- drakconnect (blino):
+  o fix WPA key
+  o allow to disable WPA even if no key is used
+  o handle errors in wireless packages installation
+- drakroam: fix Signal Quality parsing (blino)
+
 * Thu Apr 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.5mdk
 - mandrakesoft is now mandriva
 
