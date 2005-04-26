@@ -45,7 +45,7 @@ int mygethostbyname(char * name, struct in_addr * addr)
                 return -1;
 
         h = gethostbyname(name);
-	if (!h && ddomain) {
+	if (!h && domain) {
 		// gethostbyname from dietlibc doesn't support domain handling
 		char fully_qualified[500];
 		sprintf(fully_qualified, "%s.%s", name, domain);
