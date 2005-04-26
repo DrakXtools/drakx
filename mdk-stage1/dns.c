@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include <netdb.h>
 #include <sys/socket.h>
+#include <resolv.h>
 
 #include "network.h"
 #include "log.h"
@@ -41,7 +42,7 @@ int mygethostbyname(char * name, struct in_addr * addr)
 	struct hostent * h;
 
 	/* prevent from timeouts */
-	if (dns_server.s_addr == 0) 
+	if (_res.nscount == 0) 
 		return -1;
 
 	h = gethostbyname(name);
@@ -69,7 +70,7 @@ char * mygethostbyaddr(char * ipnum)
 	struct hostent * host;
 
         /* prevent from timeouts */
-        if (dns_server.s_addr == 0) 
+        if (_res.nscount == 0) 
                 return NULL;
 
 	if (!inet_aton(ipnum, &in))
