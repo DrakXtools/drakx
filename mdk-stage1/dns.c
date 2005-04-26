@@ -40,27 +40,26 @@ int mygethostbyname(char * name, struct in_addr * addr)
 {
 	struct hostent * h;
 
-        /* prevent from timeouts */
-        if (dns_server.s_addr == 0) 
-                return -1;
+	/* prevent from timeouts */
+	if (dns_server.s_addr == 0) 
+		return -1;
 
-        h = gethostbyname(name);
+	h = gethostbyname(name);
+
 	if (!h && domain) {
 		// gethostbyname from dietlibc doesn't support domain handling
 		char fully_qualified[500];
 		sprintf(fully_qualified, "%s.%s", name, domain);
 		h = gethostbyname(fully_qualified);
 	}
-	if (!h) {
-		log_message("unknown host %s", name);
-		return -1;
-	}
 
-	if (h->h_addr_list && (h->h_addr_list)[0]) {
+	if (h && h->h_addr_list && (h->h_addr_list)[0]) {
 		memcpy(addr, (h->h_addr_list)[0], sizeof(*addr));
 		log_message("is-at: %s", inet_ntoa(*addr));
 		return 0;
 	}
+
+	log_message("unknown host %s", name);
 	return -1;
 }
 
