@@ -38,7 +38,7 @@
 #include "adsl.h"
 
 
-static enum return_type adsl_connect(char * net_device, char * username, char * password, char * acname)
+static enum return_type adsl_connect(struct interface_info * intf, char * username, char * password, char * acname)
 {
 	char pppoe_call[500];
 	char * pppd_launch[] = { "/sbin/pppd", "pty", pppoe_call, "noipdefault", "noauth", "default-asyncmap", "defaultroute",
@@ -51,7 +51,7 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 	enum return_type status = RETURN_ERROR;
 	pid_t ppp_pid;
 
-	snprintf(pppoe_call, sizeof(pppoe_call), "/sbin/pppoe -p /var/run/pppoe.conf-adsl.pid.pppoe -I %s -T 80 -U -m 1412", net_device);
+	snprintf(pppoe_call, sizeof(pppoe_call), "/sbin/pppoe -p /var/run/pppoe.conf-adsl.pid.pppoe -I %s -T 80 -U -m 1412", intf->device);
 
         if (!streq(acname, "")) {
                 strcat(pppoe_call, "-C ");
@@ -89,10 +89,16 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 		if ((f = fopen("/var/run/pppd.tdb", "rb"))) {
 			while (1) {
 				char buf[500];
+				char *p;
 				if (!fgets(buf, sizeof(buf), f))
 					break;
-				if (strstr(buf, "IPLOCAL="))
+				p = strstr(buf, "IPLOCAL=");
+				if (p) {
+					struct sockaddr_in addr;
+					if (inet_aton(p + 8, &addr.sin_addr))
+						intf->ip = addr.sin_addr;
 					status = RETURN_OK;
+				}
 			}
 			fclose(f);
 			if (status == RETURN_OK) {
@@ -152,12 +158,12 @@ enum return_type perform_adsl(struct interface_info * intf)
 	wait_message("Waiting for ADSL connection to show up...");
 	my_insmod("ppp_generic", ANY_DRIVER_TYPE, NULL, 1);
 	my_insmod("ppp_async", ANY_DRIVER_TYPE, NULL, 1);
-	results = adsl_connect(intf->device, answers[0], answers[1], answers[2]);
+	results = adsl_connect(intf, answers[0], answers[1], answers[2]);
 	remove_wait_message();
 
 	if (results != RETURN_OK) {
 		wait_message("Retrying the ADSL connection...");
-		results = adsl_connect(intf->device, answers[0], answers[1], answers[2]);
+		results = adsl_connect(intf, answers[0], answers[1], answers[2]);
 		remove_wait_message();
 	} else {
 		intf->user = strdup(answers[0]);
