@@ -550,7 +550,7 @@ static enum return_type configure_network(struct interface_info * intf)
 	}
 
 	log_message("using hostname %s", hostname);
-	log_message("using daomin %s", domain);
+	log_message("using domain %s", domain);
 
 	return RETURN_OK;
 }
