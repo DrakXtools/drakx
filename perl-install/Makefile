@@ -112,8 +112,6 @@ get_needed_files: $(DIRS) mo_files
 		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/(lib(64)?)/.*?/,/\1/,' | sort | uniq >> $(TMPDIR)/list; \
 	done
 
-	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> $(TMPDIR)/list
-
 	install -d $(DEST)/etc
 	install -d $(DEST)/etc/sysconfig/network-scripts
 	install -d $(DEST)/lib
@@ -129,8 +127,8 @@ get_needed_files: $(DIRS) mo_files
 	install -d $(DEST)/usr/X11R6/lib/X11/locale
 	install -d $(MEDIA_INFO_DEST)
 	install -s $(LOCALFILES) $(DEST)/usr/bin
-#	cp -f $(LOCALFILES2) $(DEST)/usr/bin
-	ln -s ../X11R6/lib/X11 $(DEST)/usr/lib/X11
+
+	cp -a /usr/lib/X11 $(DEST)/usr/lib
 ifeq (sparc,$(ARCH))
 	cp -a /usr/X11R6/lib/X11/xkb $(DEST)/usr/X11R6/lib/X11
 	rm -f $(DEST)/usr/X11R6/lib/X11/xkb/compiled
@@ -142,6 +140,8 @@ endif
 ifeq (y,$(USE_PCMCIA))
 	install -s /sbin/cardmgr $(DEST)/usr/bin
 endif
+
+	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' | cpio -pdu $(DEST)
 
 	for i in `cat $(TMPDIR)/list`; do \
 	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
@@ -165,8 +165,8 @@ endif
 	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
-	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
+	cd $(DEST)/usr/bin ; mv insmod insmod_
 
 	perl -pe 's!^echo!/usr/bin/echo!' /bin/unicode_start > $(DEST)/usr/bin/unicode_start
 	chmod a+x $(DEST)/usr/bin/unicode_start
