@@ -257,7 +257,6 @@ spec_test:
 	@if [[ -z "$(RELEASE)"  ]]; then echo "unable to get spec release"; exit 2;fi
 
 tar:
-	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
 	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^all: help/all:/' share/po/Makefile
 	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm debug.log `find -name CVS`
 	cd ../$(PACKAGE)-$(PKGVERSION) && mv -f Makefile.drakxtools Makefile
