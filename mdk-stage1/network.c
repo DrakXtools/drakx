@@ -657,6 +657,9 @@ static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy
 	if (results == RETURN_OK) {
 		*http_proxy_host = answers[0];
 		*http_proxy_port = answers[1];
+	} else {
+		*http_proxy_host = NULL;
+		*http_proxy_port = NULL;
 	}
 
 	return results;
