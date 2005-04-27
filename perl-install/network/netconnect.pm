@@ -85,7 +85,7 @@ sub real_main {
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
-      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
+      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider, $adsl_vpi, $adsl_vci);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
@@ -923,7 +923,7 @@ If you do not know, choose 'use PPPoE'"),
                             $real_interface = "atm0";
                             $ethntf = $intf->{$real_interface} ||= {};
                             $ethntf->{DEVICE} = $real_interface;
-                            $ethntf->{ATM_ADDR} = join('.', hex($netc->{vpi}), hex($netc->{vci}));
+                            $ethntf->{ATM_ADDR} = undef;
                             $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
                         #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface
@@ -945,6 +945,7 @@ If you do not know, choose 'use PPPoE'"),
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
                         $netc->{NET_DEVICE} = member($adsl_type, 'pppoe', 'pptp') ? $ntf_name : 'ppp0';
                         $netc->{NET_INTERFACE} = 'ppp0';
+                        ($adsl_vpi, $adsl_vci) = map { hex($_) } @$netc{'vpi', 'vci'};
                     },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
@@ -956,9 +957,8 @@ If you do not know, choose 'use PPPoE'"),
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
                          if_($adsl_type ne "capi",
-                             #- FIXME: take the VPI/VCI settings as decimal, not hex
-                             { label => N("Virtual Path ID (VPI):"), val => \$netc->{vpi}, advanced => 1 },
-                             { label => N("Virtual Circuit ID (VCI):"), val => \$netc->{vci}, advanced => 1 }
+                             { label => N("Virtual Path ID (VPI):"), val => \$adsl_vpi, advanced => 1 },
+                             { label => N("Virtual Circuit ID (VCI):"), val => \$adsl_vci, advanced => 1 }
                             ),
                          if_($ntf_name eq "sagem",
                              { label => N("Encapsulation:"), val => \$netc->{Encapsulation}, list => [ keys %encapsulations ],
@@ -968,7 +968,11 @@ If you do not know, choose 'use PPPoE'"),
                         ];
                     },
                     post => sub {
-                        #- FIXME: update ATMADDR
+                        #- update ATM_ADDR for ATMARP connections
+                        exists $ethntf->{ATM_ADDR} and $ethntf->{ATM_ADDR} = join('.', $adsl_vpi, $adsl_vci);
+                        #- convert VPI/VCI back to hex
+                        @$netc{'vpi', 'vci'} = map { sprintf("%x", $_) } ($adsl_vpi, $adsl_vci);
+
                         $netc->{internet_cnx_choice} = 'adsl';
                         network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx); #FIXME
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
