@@ -80,6 +80,7 @@ sub rest_all() {
 
     foreach my $hd (uniq(@used_hds)) {
 	put_in_hash($hd->{geom}, $forced_geom);
+	partition_table::raw::compute_nb_cylinders($hd->{geom}, $hd->{totalsectors});
 
 	#- write the partition table
 	partition_table::raw::zero_MBR($hd);
