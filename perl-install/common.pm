@@ -248,8 +248,9 @@ sub release_file {
     find { -r "$o_dir$_" } map { "/etc/$_" } 'mandrakelinux-release', 'mandrake-release', 'release', 'redhat-release';
 }
 
-sub mandrake_release() {
-    chomp_(cat_(release_file()));
+sub mandrake_release {
+    my ($o_dir) = @_;
+    chomp_(cat_(release_file($o_dir)));
 }
 
 sub require_root_capability() {
