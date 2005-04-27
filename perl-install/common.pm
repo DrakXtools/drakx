@@ -250,7 +250,8 @@ sub release_file {
 
 sub mandrake_release {
     my ($o_dir) = @_;
-    chomp_(cat_(release_file($o_dir)));
+    my $f = release_file($o_dir);
+    $f && chomp_(cat_("$o_dir$f"));
 }
 
 sub require_root_capability() {
