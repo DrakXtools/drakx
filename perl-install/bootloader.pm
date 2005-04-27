@@ -147,8 +147,7 @@ sub add_boot_splash {
 sub read {
     my ($all_hds) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
-    my @methods = method_choices_raw();
-    foreach my $main_method (uniq(map { main_method($_) } @methods)) {
+    foreach my $main_method (main_method_choices()) {
 	my $f = $bootloader::{"read_$main_method"} or die "unknown bootloader method $main_method (read)";
 	my $bootloader = $f->($fstab);
 
@@ -833,6 +832,19 @@ sub main_method {
     $method =~ /(\w+)/ && $1;
 }
 
+sub config_files() {
+    my %files = (
+	lilo => '/etc/lilo.conf',
+	grub => '/boot/grub/menu.lst',
+	grub_install => '/boot/grub/install.sh',
+    );
+    
+    map_each { 
+	my $content = cat_("$::prefix/$::b");
+	{ main_method => main_method($::a), name => $::a, file => $::b, content => $content };
+    } %files;
+}
+
 sub method2text {
     my ($method) = @_;
     +{
@@ -861,6 +873,13 @@ sub method_choices {
 	  && !(/lilo-graphic/ && detect_devices::matching_desc__regexp('ProSavageDDR'))
 	  && !(/grub/ && isRAID($root_part));
     } method_choices_raw();
+}
+sub main_method_choices() {
+    uniq(map { main_method($_) } method_choices_raw());
+}
+sub configured_main_methods() {
+    my @bad_main_methods = map { if_(!$_->{content}, $_->{main_method}) } config_files();
+    difference2([ main_method_choices() ], \@bad_main_methods);
 }
 
 sub keytable {
@@ -1362,19 +1381,8 @@ sub install {
 sub update_for_renumbered_partitions {
     my ($in, $renumbering, $all_hds) = @_;
 
-    my %files = (
-		 lilo => '/etc/lilo.conf',
-		 grub => '/boot/grub/menu.lst',
-		 grub_install => '/boot/grub/install.sh',
-		 );
-
-    my %configs = map {
-	my $file = "$::prefix/$files{$_}";
-	if (-e $file) {
-	    my $f = cat_($file);
-	    $_ => { orig => $f, new => $f, file => $files{$_} };
-	} else { () }
-    } keys %files;
+    my @configs = grep { $_->{content} } config_files();
+    $_->{new} = $_->{orig} = $_->{content} foreach @configs;
 
     my @sorted_hds; {
  	my $grub2dev = read_grub_device_map();
@@ -1386,32 +1394,30 @@ sub update_for_renumbered_partitions {
     foreach (@$renumbering) {
 	my ($old, $new) = @$_;
 	log::l("renaming $old -> $new");
-	$_->{new} =~ s/\b$old/$new/g foreach values %configs;
+	$_->{new} =~ s/\b$old/$new/g foreach @configs;
 
-	$configs{grub} or next;
+	any { $_->{name} eq 'grub' } @configs or next;
 
 	my ($old_grub, $new_grub) = map { device_string2grub($_, [], \@sorted_hds) } $old, $new;
 	log::l("renaming $old_grub -> $new_grub");
-	$_->{new} =~ s/\Q$old_grub/$new_grub/g foreach values %configs;
+	$_->{new} =~ s/\Q$old_grub/$new_grub/g foreach @configs;
     }
 
-    any { $_->{orig} ne $_->{new} } values %configs or return 1; # no need to update
+    my @changed_configs = grep { $_->{orig} ne $_->{new} } @configs or return 1; # no need to update
 
     $in->ask_okcancel('', N("Your bootloader configuration must be updated because partition has been renumbered")) or return;
 
-    foreach (values %configs) {
-	if ($_->{new} ne $_->{orig}) {
-	    renamef("$::prefix/$_->{file}", "$::prefix/$_->{file}.old");
-	    output("$::prefix/$_->{file}", $_->{new});
-	}
+    foreach (@changed_configs) {
+	renamef("$::prefix/$_->{file}", "$::prefix/$_->{file}.old");
+	output("$::prefix/$_->{file}", $_->{new});
     }
 
     my $main_method = detect_main_method($all_hds);
-    my @needed = $main_method ? $main_method : ('lilo', 'grub');
-    if (find {
-	my $config = $_ eq 'grub' ? 'grub_install' : $_;
-	$configs{$config} && $configs{$config}{orig} ne $configs{$config}{new};
-    } @needed) {
+    my @needed = map { 
+	$_ eq 'grub' ? 'grub_install' : $_;
+    } $main_method ? $main_method : ('lilo', 'grub');
+
+    if (intersection(\@needed, [ map { $_->{name} } @changed_configs ])) {
 	$in->ask_warn('', N("The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\"", 
 			    N("Re-install Boot Loader")));
     }
