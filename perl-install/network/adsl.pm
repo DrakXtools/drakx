@@ -148,17 +148,15 @@ sleep 10
                              pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci}))
                             },
                   ppp_options => qq(
-lock 
-ipparam ppp0 
-default-asyncmap 
-hide-password 
-noaccomp 
-nobsdcomp 
-nodeflate 
-novj novjccomp 
-lcp-echo-interval 20 
-lcp-echo-failure 3 
-sync 
+default-asyncmap
+hide-password
+noaccomp
+nobsdcomp
+nodeflate
+novj novjccomp
+lcp-echo-interval 20
+lcp-echo-failure 3
+sync
 ),
                   },
 
@@ -220,7 +218,6 @@ noipdefault
 sync
 noaccomp
 linkname eciadsl
-noauth
 lcp-echo-interval 0)
                   },
                   pptp_modem =>
@@ -265,43 +262,16 @@ avmadsl)
                         capi => [ qw(isdn4k-utils) ], #- capi4linux service
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
-        output("$::prefix/etc/ppp/options",
-               $adsl_device eq "bewan" ?
-               qq(lock
-ipparam ppp0
-noipdefault
-noauth
-default-asyncmap
-defaultroute
-hide-password
-noaccomp
-noccp
-nobsdcomp
-nodeflate
-nopcomp
-novj novjccomp
-lcp-echo-interval 20
-lcp-echo-failure 3
-sync
-persist
-user $adsl->{login}
-name $adsl->{login}
-usepeerdns
-)
-               :
-               qq(lock
-noipdefault
-persist
-noauth
-usepeerdns
-defaultroute)
-              );
-        
+
 	my $pty_option = $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
 	my $plugin = $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
 	my $noipdefault = $adsl_type eq 'pptp' ? '' : 'noipdefault';
 	output("$::prefix/etc/ppp/peers/ppp0",
-qq(noauth
+qq(lock
+persist
+noauth
+usepeerdns
+defaultroute
 $noipdefault
 $modems{$adsl_device}{ppp_options}
 kdebug 1
@@ -310,9 +280,6 @@ noccp
 novj
 holdoff 4
 maxfail 25
-persist
-usepeerdns
-defaultroute
 $pty_option
 $plugin
 user "$adsl->{login}"
