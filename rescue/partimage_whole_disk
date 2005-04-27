@@ -45,10 +45,10 @@ sub save_all() {
 		       'save', devices::make($_->{device}), "$dir/$_->{device}");
 	}
     }
-    save_part_list($part_list);
+    save_part_list($hd->{geom}, $part_list);
 }
 sub rest_all() {
-    my $part_list = read_part_list();
+    my ($forced_geom, $part_list) = read_part_list();
     fs::type::set_fs_type($_, $_->{fs_type}) foreach @$part_list;
 
     my @used_hds;
@@ -79,7 +79,7 @@ sub rest_all() {
     }
 
     foreach my $hd (uniq(@used_hds)) {
-#	put_in_hash($hd->{geom}, { heads => 240, sectors => 63 });
+	put_in_hash($hd->{geom}, $forced_geom);
 
 	#- write the partition table
 	partition_table::raw::zero_MBR($hd);
@@ -117,19 +117,22 @@ sub rest_all() {
 
 sub lst_fields() { qw(device size fs_type saved) }
 sub save_part_list {
-    my ($part_list) = @_;
+    my ($geom, $part_list) = @_;
     my @l = map { join(' ', @$_{lst_fields()}) } @$part_list;
     log::l("save_part_list: $_") foreach @l;
     my $partimage = join(' ', @partimage_cmd);
     open(my $F, "| $partimage -z0 -Bfoo=bar -o save_file $dir/lst");
+    print $F join("/", $geom->{heads}, $geom->{sectors}), "\n";
     print $F "$_\n" foreach @l;
 }
 sub read_part_list() {
     my $partimage = join(' ', @partimage_cmd);
     open(my $F, "$partimage -z0 -Bfoo=bar rest_file $dir/lst |");
+    my $geom_string = <$F>;
+    my %geom; @geom{'heads', 'sectors'} = split('/', chomp_($geom_string));
     my @l = chomp_(cat__($F));
     log::l("read_part_list: $_") foreach @l;
-    [ map { my %l; @l{lst_fields()} = split; \%l } @l ];
+    \%geom, [ map { my %l; @l{lst_fields()} = split; \%l } @l ];
 }
 
 sub run_or_die {
