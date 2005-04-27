@@ -134,20 +134,22 @@ sub adsl_conf_backend {
     $bewan_module = $o_netcnx->{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $adsl_device eq "bewan";  
 
     # all supported modems came with their own pppoa module, so no need for "plugin pppoatm.so"
-    my %modems = (
-                  bewan => {
-                  start => qq(
+    my %modems =
+      (
+       bewan =>
+       {
+        start => qq(
 modprobe pppoatm
 #  ActivationMode=1
 modprobe $bewan_module
 # wait for the modem to be set up:
 sleep 10
 ),
-                  stop => qq(modprobe -r $bewan_module),
-                  plugin => {
+        stop => qq(modprobe -r $bewan_module),
+        plugin => {
                              pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci}))
-                            },
-                  ppp_options => qq(
+                  },
+        ppp_options => qq(
 default-asyncmap
 hide-password
 noaccomp
@@ -158,77 +160,81 @@ lcp-echo-interval 20
 lcp-echo-failure 3
 sync
 ),
-                  },
+       },
 
-                  speedtouch =>
-                  {
-                   modules => [ qw(speedtch) ],
-                   start => '/usr/bin/speedtouch-start --nocall',
-                   overide_script => 1,
-                   server => {
-                              pppoa => qq("/usr/sbin/pppoa3 -c")
-                             },
-                   plugin => {
-                              pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci})),
-                             },
-                   ppp_options => qq(
+       speedtouch =>
+       {
+        modules => [ qw(speedtch) ],
+        start => '/usr/bin/speedtouch-start --nocall',
+        overide_script => 1,
+        server => {
+                   pppoa => qq("/usr/sbin/pppoa3 -c")
+                  },
+        plugin => {
+                   pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci})),
+                  },
+        ppp_options => qq(
 sync
 noaccomp),
-                   aliases => [
-                               ['char-major-108', 'ppp_generic'],
-                               ['tty-ldisc-3', 'ppp_async'],
-                               ['tty-ldisc-13', 'n_hdlc'],
-                               ['tty-ldisc-14', 'ppp_synctty'],
-                               ['ppp-compress-21', 'bsd_comp'],
-                               ['ppp-compress-24', 'ppp_deflate'],
-                               ['ppp-compress-26', 'ppp_deflate']
-                              ],
+        aliases => [
+                    ['char-major-108', 'ppp_generic'],
+                    ['tty-ldisc-3', 'ppp_async'],
+                    ['tty-ldisc-13', 'n_hdlc'],
+                    ['tty-ldisc-14', 'ppp_synctty'],
+                    ['ppp-compress-21', 'bsd_comp'],
+                    ['ppp-compress-24', 'ppp_deflate'],
+                    ['ppp-compress-26', 'ppp_deflate']
+                   ],
+       },
+
+       sagem =>
+       {
+        modules => [ qw(eagle-usb) ],
+        start => 'grep -qs eagle-usb /var/run/usb/* || /sbin/eaglectrl -d',
+        stop =>  "/usr/bin/killall pppoa",
+        get_intf => '/sbin/eaglectrl -i',
+        server => {
+                   pppoa => q("/sbin/fctStartAdsl -t 1 -i"),
                   },
-                  sagem =>
-                  {
-                   modules => [ qw(eagle-usb) ],
-                   start => 'grep -qs eagle-usb /var/run/usb/* || /sbin/eaglectrl -d',
-                   stop =>  "/usr/bin/killall pppoa",
-                   get_intf => '/sbin/eaglectrl -i',
-                   server => {
-                              pppoa => q("/sbin/fctStartAdsl -t 1 -i"),
-                             },
-                   ppp_options => qq(
+        ppp_options => qq(
 mru 1492
 mtu 1492
 nobsdcomp
 nodeflate
 noaccomp -am
 novjccomp),
-                   aliases => [
-                               ['char-major-108', 'ppp_generic'],
-                               ['tty-ldisc-3', 'ppp_async'],
-                               ['tty-ldisc-13', 'n_hdlc'],
-                               ['tty-ldisc-14', 'ppp_synctty']
-                              ],
+        aliases => [
+                    ['char-major-108', 'ppp_generic'],
+                    ['tty-ldisc-3', 'ppp_async'],
+                    ['tty-ldisc-13', 'n_hdlc'],
+                    ['tty-ldisc-14', 'ppp_synctty']
+                   ],
+       },
+
+       eci =>
+       {
+        start => '/usr/bin/startmodem',
+        server => {
+                   pppoe => qq("/usr/bin/pppoeci -v 1 -vpi $netc->{vpi} -vci $netc->{vci}"),
                   },
-                  eci =>
-                  {
-                   start => '/usr/bin/startmodem',
-                   server => {
-                              pppoe => qq("/usr/bin/pppoeci -v 1 -vpi $netc->{vpi} -vci $netc->{vci}"),
-                             },
-                   ppp_options => qq(
+        ppp_options => qq(
 noipdefault
 sync
 noaccomp
 linkname eciadsl
 lcp-echo-interval 0)
                   },
-                  pptp_modem =>
-                  {
-                   server => {
-                              pptp => qq("/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
-                             },
+
+       pptp_modem =>
+       {
+        server => {
+                   pptp => qq("/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
                   },
-                  capi_modem =>
-                  {
-                   ppp_options => qq(
+       },
+
+       capi_modem =>
+       {
+        ppp_options => qq(
 connect /bin/true
 ipcp-accept-remote
 ipcp-accept-local
@@ -244,12 +250,12 @@ noccp
 noipx
 mru 1492
 mtu 1492),
-                   plugin => {
-                              capi => qq(capiplugin.so
+        plugin => {
+                   capi => qq(capiplugin.so
 avmadsl)
-                             },
                   },
-                 );
+       },
+      );
 
 
     if ($adsl_type =~ /^pp|^capi$/) {
