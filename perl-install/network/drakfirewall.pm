@@ -159,7 +159,7 @@ sub get_conf {
 
 This configures a personal firewall for this Mandriva Linux machine.
 For a powerful and dedicated firewall solution, please look to the
-specialized MandrakeSecurity Firewall distribution."), 1) or return;
+specialized Mandriva Security Firewall distribution."), 1) or return;
 
 	$in->ask_okcancel('', N("drakfirewall configurator
 
