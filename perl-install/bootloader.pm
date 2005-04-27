@@ -1129,14 +1129,19 @@ sub install_lilo {
     when_config_changed_lilo($bootloader);
 }
 
+sub install_raw_lilo {
+    my ($o_force_answer) = @_;
+
+    my $error;
+    my $answer = $o_force_answer || '';
+    run_program::rooted($::prefix, "echo $answer | lilo", '2>', \$error) or die "lilo failed: $error";
+}
+
 sub when_config_changed_lilo {
     my ($bootloader) = @_;
-
     if (!$::testing && arch() !~ /ia64/ && $bootloader->{method} =~ /lilo/) {
 	log::l("Installing boot loader on $bootloader->{boot}...");
-	my $error;
-	my $answer = $bootloader->{force_lilo_answer} || '';
-	run_program::rooted($::prefix, "echo $answer | lilo", '2>', \$error) or die "lilo failed: $error";
+	install_raw_lilo($bootloader->{force_lilo_answer});
     }
 }
 
@@ -1322,12 +1327,14 @@ sub install_grub {
 
     write_grub($bootloader, $all_hds);
 
-    if (!$::testing) {
-	log::l("Installing boot loader...");
-	my $error;
-	run_program::rooted($::prefix, "sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
-    }
+    install_raw_grub() if !$::testing;
 }
+sub install_raw_grub() {
+    log::l("Installing boot loader...");
+    my $error;
+    run_program::rooted($::prefix, "sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
+}
+
 sub when_config_changed_grub {
     my ($_bootloader) = @_;
     #- do not do anything
