@@ -152,10 +152,13 @@ sub set_resolution {
     
     foreach my $Screen ($o_Screen_ ? $o_Screen_ : $raw_X->get_Sections('Screen')) {
 	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
+
+	my $Mode_name = (any { $_->{l}{Modes} } @{$Screen->{Display} || []}) ? 'Modes' : 'Virtual';
+	my $Mode = sprintf($Mode_name eq 'Modes' ? '"%dx%d"' : '%d %d', @$resolution{'X', 'Y'});
 	
-	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} eq '32' ? 24 : $resolution->{Depth} };
+	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} eq '32' ? 24 : $resolution->{Depth} };	
 	$Screen->{Display} = [ map {
-	    { l => { Depth => { val => $_ }, Virtual => { val => join(' ', @$resolution{'X', 'Y'}) } } };
+	    { l => { Depth => { val => $_ }, $Mode_name => { val => $Mode } } };
 	} 8, 15, 16, 24 ];
     }
     add_gtf_ModeLines($raw_X, $resolution);
