@@ -257,6 +257,24 @@ avmadsl)
        },
       );
 
+    my %generic =
+      (
+       pppoe =>
+       {
+        server => '"pppoe -I ' . ($modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE}) . '"',
+        ppp_options => qq(default-asyncmap
+mru 1492
+mtu 1492
+noaccomp
+noccp
+nobsdcomp
+novjccomp
+nodeflate
+lcp-echo-interval 20
+lcp-echo-failure 3
+),
+       }
+      );
 
     if ($adsl_type =~ /^pp|^capi$/) {
         mkdir_p("$::prefix/etc/ppp");
@@ -269,9 +287,16 @@ avmadsl)
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
 
-	my $pty_option = $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
-	my $plugin = $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
+	my $pty_option =
+          exists $modems{$adsl_device}{server}{$adsl_type} ? "pty $modems{$adsl_device}{server}{$adsl_type}" :
+          exists $generic{$adsl_type}{server} ? "pty $generic{$adsl_type}{server}" :
+          "";
+	my $plugin = exists $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
 	my $noipdefault = $adsl_type eq 'pptp' ? '' : 'noipdefault';
+	my $ppp_options =
+          exists $modems{$adsl_device}{ppp_options} ? $modems{$adsl_device}{ppp_options} :
+          exists $generic{$adsl_type}{ppp_options} ? $generic{$adsl_type}{ppp_options} :
+          "";
 	output("$::prefix/etc/ppp/peers/ppp0",
 qq(lock
 persist
@@ -279,7 +304,7 @@ noauth
 usepeerdns
 defaultroute
 $noipdefault
-$modems{$adsl_device}{ppp_options}
+$ppp_options
 kdebug 1
 nopcomp
 noccp
@@ -304,37 +329,13 @@ user "$adsl->{login}"
                                    ONBOOT => 'yes',
                                   };
         }
-
-        if ($adsl_type eq 'pppoe') {
-            if (-f "$::prefix/etc/ppp/pppoe.conf") {
-                my $net_device = $modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE};
-                substInFile {
-                    s/ETH=.*\n/ETH=$net_device\n/;
-                    s/USER=.*\n/USER=$adsl->{login}\n/;
-                    s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
-                    s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
-                } "$::prefix/etc/ppp/pppoe.conf";
-            } else {
-                log::l("can not find pppoe.conf, make sure the rp-pppoe package is installed");
-            }
-        }
-
-#            pppoe => {
-#                      # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
-#                      connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start",
-#                      disconnect => qq(/usr/sbin/adsl-stop
-# /usr/bin/killall pppoe pppd\n),
-#                     },
-
     }
 
-    #- FIXME: 
-    #-   ppp0 and ippp0 are hardcoded
-    my $kind = $adsl_type eq 'pppoe' ? 'xDSL' : 'ADSL';
+    #- FIXME: ppp0 and ippp0 are hardcoded
     my $metric = network::tools::get_default_metric("adsl"); #- FIXME, do not override if already set
     output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
 ONBOOT=no
-TYPE=$kind
+TYPE=ADSL
 METRIC=$metric
 )) unless member($adsl_type, qw(manual dhcp));
 
