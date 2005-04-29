@@ -112,8 +112,8 @@ sub splash_choice() {
 
     my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings([ bootsplash::list_themes($cur_res) ], $theme->{name}), 10, -1);
     $theme_combo->entry->signal_connect(changed => sub {
-                                            $theme->{name} = $theme_combo->entry->get_text,
-                                            change_image($boot_pic, $theme->{name}, $cur_res)
+                                            $theme->{name} = $theme_combo->entry->get_text;
+                                            change_image($boot_pic, $theme->{name}, $cur_res);
                                         });
 
     my $_thm_button = Gtk2::Button->new(N("Install themes"));
