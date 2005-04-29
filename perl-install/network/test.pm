@@ -8,7 +8,7 @@ use Socket;
 sub new {
     my ($class, $o_hostname) = @_;
     bless {
-           hostname => $o_hostname || "mandrakesoft.com"
+           hostname => $o_hostname || "www.mandriva.com"
           }, $class;
 }
 
@@ -111,7 +111,7 @@ sub update_status {
 
 =head2 Test synchronously
 
-#- resolve and get ping to hostname from command line if given, else to Mandriva
+#- resolve and get ping to hostname from command line if given, else to www.mandriva.com
 use lib qw(/usr/lib/libDrakX);
 use network::test;
 
