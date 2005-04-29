@@ -29,15 +29,12 @@ use common;
 use interactive;
 use any;
 use bootloader;
-use detect_devices;
 use fsedit;
 use fs;
 use Config;
 use POSIX;
 use Xconfig::various;
 use log;
-
-my $splash_working = any { /^--splash$/ } @ARGV;
 
 my $in = 'interactive'->vnew('su');
 
@@ -52,244 +49,196 @@ if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     lilo_choice();
     $in->exit(0);
 }
+
 require ugtk2;
 ugtk2->import(qw(:helpers :wrappers :create));
 
-my $no_bootsplash;
-my $x_mode = Xconfig::various::runlevel() == 5;
-my $auto_mode = any::get_autologin();
-my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
-my $remove_theme = '/usr/share/bootsplash/scripts/remove-theme';
-
-my $w = ugtk2->new($splash_working ? N("Graphical boot theme selection") : N("System mode"));
-my $window = $w->{window};
-$::main_window = $w->{real_window} if !$::isEmbedded;
-
-$window->signal_connect(delete_event => sub { ugtk2->exit(0) });
-unless ($::isEmbedded) {
-    $window->set_border_width(2);
-
-    ### menus definition
-    # the menus are not shown but they provides shiny shortcut like C-q
-    my @menu_items = ([ N("/_File"), undef, undef, undef, '<Branch>' ],
-                      [ N("/File/_Quit"), N("<control>Q"), sub { ugtk2->exit(0) }, undef, '<Item>' ],
-                     );
-    create_factory_menu($w->{rwindow}, @menu_items);
-    ######### menus end
-}
-
-my @users = sort(list_users());
-my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
-
-my $user = member($auto_mode->{autologin}, @users) ? $auto_mode->{autologin} : $users[0];
-if (!$user) {
-    # no user, bad but add root anyway:
-    $user = "root";
-    push @users, $user;
-}
-my $user_combo = Gtk2::ComboBox->new_with_strings(\@users, $user);
-my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
-
-my %themes = 	('path' => '/usr/share/bootsplash/themes/',
-   	        'sysconfig' => '/etc/sysconfig/bootsplash',
-                'default' => 'Mandrivalinux',
-                'def_thmb' => '/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
-                'lilo' => {'file' => '/lilo/message',
-                           'thumb' => '/lilo/thumb.png' },
-                'boot' => {'path' => '/images/',
-                                #'thumb'=>'/images/thumb.png',
-                          },
-               );
-my $kernel_release = `uname -r`;
-chomp $kernel_release;
-
-require Xconfig::resolution_and_depth;
-my $cur_res;
-if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga})) {
-    $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
+if (any { /^--splash$/ } @ARGV) {
+    splash_choice();
 } else {
-    $no_bootsplash = 1; #- we can not select any theme we're not in Framebuffer mode :-/
-    $cur_res = '800x600';
+    autologin_choice();
 }
 
-$no_bootsplash = 0 if $::testing;
+sub run_boot_window {
+    my ($title, $pack_list, $apply_sub) = @_;
 
-my $splash_mode = !$no_bootsplash;
-my $keep_logo = 1;
+    my $w = ugtk2->new($title);
+    my $window = $w->{window};
+    $::main_window = $w->{real_window} if !$::isEmbedded;
 
-if (-r $themes{sysconfig}) {
-    local $_;
-    foreach (cat_($themes{sysconfig})) {
-	/^SPLASH=no/ and $splash_mode = 0;
-	/^THEME=(.*)/ and  -f "$themes{path}$1$themes{boot}{path}bootsplash-$cur_res.jpg" and $themes{default} = $1;
-	/^LOGO_CONSOLE=(.*)/ and $keep_logo = $1 ne 'no';
+    $window->signal_connect(delete_event => sub { ugtk2->exit(0) });
+    unless ($::isEmbedded) {
+        $window->set_border_width(2);
+        ### menus definition
+        # the menus are not shown but they provides shiny shortcut like C-q
+        my @menu_items = ([ N("/_File"), undef, undef, undef, '<Branch>' ],
+                          [ N("/File/_Quit"), N("<control>Q"), sub { ugtk2->exit(0) }, undef, '<Item>' ],
+                         );
+        create_factory_menu($w->{rwindow}, @menu_items);
+        ######### menus end
     }
+    gtkadd($window, gtkpack_(Gtk2::VBox->new(0,0),
+                             @$pack_list,
+                             0, create_okcancel({
+                                                 cancel_clicked => sub { ugtk2->exit(0) },
+                                                 ok_clicked => sub {
+                                                     $apply_sub->();
+                                                     ugtk2->exit(0);
+                                                 }
+                                                })));
+    $window->show_all;
+    gtkflush();
+    $w->main;
+    $in->exit(0);
 }
 
-my @boot_thms;
-chdir($themes{path}); #- we must change directory for correct @boot_thms assignement
-foreach (sort(all('.'))) {
-    if (-d "$themes{path}$_" && m/^[^.]/) {
-        -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
+sub splash_choice() {
+    require bootsplash;
+    require Xconfig::resolution_and_depth;
+    my $cur_res;
+    my $no_bootsplash;
+    if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga})) {
+        $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
+    } else {
+        $no_bootsplash = 1 unless $::testing; #- we can not select any theme we're not in Framebuffer mode :-/
+        $cur_res = '800x600';
     }
-}
-push @boot_thms, $themes{default} unless member($themes{default}, @boot_thms);
 
-my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);
+    my $theme = bootsplash::read_theme_config($cur_res);
+    $no_bootsplash and $theme->{enabled} = 0;
 
-my $boot_pic = gtkcreate_img($themes{def_thmb});
-change_image($boot_pic, $themes{default});
+    my $boot_pic = gtkcreate_img($bootsplash::default_thumbnail);
+    change_image($boot_pic, $theme->{name}, $cur_res);
 
-my $_thm_button = Gtk2::Button->new(N("Install themes"));
-my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
+    my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings([ bootsplash::list_themes($cur_res) ], $theme->{name}), 10, -1);
+    $theme_combo->entry->signal_connect(changed => sub {
+                                            $theme->{name} = $theme_combo->entry->get_text,
+                                            change_image($boot_pic, $theme->{name}, $cur_res)
+                                        });
 
-#- ******** action to take on changing combos values
+    my $_thm_button = Gtk2::Button->new(N("Install themes"));
+    my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
 
-$theme_combo->entry->signal_connect(changed => sub { change_image($boot_pic, $theme_combo->entry->get_text) });
-
-my ($x_box, $splash_box);
-my $boot_warn = 1;
-gtkadd($window,
-       gtkpack_(Gtk2::VBox->new(0,0),
-                ($splash_working ?
-                 (1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-                              0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode),
-                                               clicked => sub {
-                                                   $splash_mode = !$splash_mode;
-        					   if ($boot_warn && $no_bootsplash && $splash_mode) {
-						       if ($in->ask_yesorno(N("Warning"),
-						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
-                                                     N("Do you want to configure it now?") ])) {
-                                                           enable_framebuffer();
-                                                           #- it would be nice to get available themes for new cur_res here
-                                                       }
-                                                       $boot_warn = 0;
-						    }
-                                                   $splash_box->set_sensitive($splash_mode);
-                                               }),
-                              1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
-                                       gtkpack__(Gtk2::VBox->new(0, 5),
-                                                 N("Theme"),
-                                                 $theme_combo,
-						 #gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
-						 gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")), $keep_logo), clicked => sub { invbool(\$keep_logo) })
-                                                ),
-                                       Gtk2::VSeparator->new,
-                                       gtkpack__(Gtk2::VBox->new(0, 5),
-                                                 $boot_pic))
-                            ),
-                 )
-                 :
-                 (1, gtkpack__(Gtk2::VBox->new(0, 5),
-                               gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Launch the graphical environment when your system starts")),
-                                                               $x_mode),
-                                                 clicked => sub {
-                                                     $x_box->set_sensitive(!$x_mode);
-                                                     $x_mode = !$x_mode;
-                                                 }),
-                               gtkpack__(gtkset_sensitive($x_box = Gtk2::VBox->new(0, 0), $x_mode),
-                                         gtkpack__(Gtk2::VBox->new(0, 0),
-                                                   my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
-                                                                               N("Yes, I want autologin with this (user, desktop)")),
-                                                  ),
-                                         my $auto_box = create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                                                         [ Gtk2::Label->new(N("Default user")), $user_combo ],
-                                                                         [ Gtk2::Label->new(N("Default desktop")), $desktop_combo ],
-                                                                        ),
-                                        )
-                              )
-                 ),
-                 0, create_okcancel({
-                                     cancel_clicked => sub { ugtk2->exit(0) },
-                                     ok_clicked => sub {
-                                         Xconfig::various::runlevel($x_mode ? 5 : 3);
-                                         if ($splash_working) {
-                                             update_bootsplash($theme_combo->entry->get_text, $splash_mode, $keep_logo);
-                                         } else {
-                                             updateAutologin();
-                                         }
-                                         ugtk2->exit(0);
-                                     }
-                                    },
+    my $splash_box;
+    my $boot_warn = 1;
+    run_boot_window(N("Graphical boot theme selection"),
+                       [
+                        1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
+                                    0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $theme->{enabled}),
+                                                         clicked => sub {
+                                                             $theme->{enabled} = !$theme->{enabled};
+                                                             if ($boot_warn && $no_bootsplash && $theme->{enabled}) {
+                                                                 if ($in->ask_yesorno(N("Warning"),
+                                                                                      [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
+                                                                                        N("Do you want to configure it now?") ])) {
+                                                                     enable_framebuffer();
+                                                                     #- it would be nice to get available themes for new cur_res here
+                                                                 }
+                                                                 $boot_warn = 0;
+                                                             }
+                                                             $splash_box->set_sensitive($theme->{enabled});
+                                                         }),
+                                    1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
+                                               gtkpack__(Gtk2::VBox->new(0, 5),
+                                                         N("Theme"),
+                                                         $theme_combo,
+                                                         gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
+                                                                                         $theme->{keep_logo}),
+                                                                           clicked => sub { invbool(\$theme->{keep_logo}) })
+                                                        ),
+                                               Gtk2::VSeparator->new,
+                                               gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic))
                                    ),
+                       ],
+                       sub {
+                           bootsplash::set_logo_console($theme->{keep_logo});
+                           if ($theme->{enabled}) {
+                               bootsplash::switch_theme($theme->{name});
+                           } else {
+                               bootsplash::remove_theme();
+                           }
+                       });
+}
 
-                )
-               )
-      );
+sub autologin_choice() {
+    my @users = sort(list_users());
+    my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
 
-if (!$splash_working) {
+    my $x_mode = Xconfig::various::runlevel() == 5;
+    my $auto_mode = any::get_autologin();
+
+    my $user = member($auto_mode->{autologin}, @users) ? $auto_mode->{autologin} : $users[0];
+    if (!$user) {
+        # no user, bad but add root anyway:
+        $user = "root";
+        push @users, $user;
+    }
+    my $user_combo = Gtk2::ComboBox->new_with_strings(\@users, $user);
+    my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
+
+    my $auto_box = create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
+                                    [ Gtk2::Label->new(N("Default user")), $user_combo ],
+                                    [ Gtk2::Label->new(N("Default desktop")), $desktop_combo ]);
+    $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
+
+    my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
+                                N("Yes, I want autologin with this (user, desktop)"));
     $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[1]->get_active) });
     $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[0]->get_active) });
     $auto_buttons[1]->set_active(1) if $auto_mode->{autologin};
     $auto_buttons[0]->set_active(1) if !$auto_mode->{autologin};
-    $x_box->set_sensitive($x_mode);
-    $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
+
+    my $x_box;
+    run_boot_window(N("System mode"),
+                    [
+                     1, gtkpack__(Gtk2::VBox->new(0, 5),
+                                  gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Launch the graphical environment when your system starts")),
+                                                                  $x_mode),
+                                                    clicked => sub {
+                                                        $x_box->set_sensitive(!$x_mode);
+                                                        $x_mode = !$x_mode;
+                                                    }),
+                                  gtkpack__(gtkset_sensitive($x_box = Gtk2::VBox->new(0, 0), $x_mode),
+                                            gtkpack__(Gtk2::VBox->new(0, 0), @auto_buttons),
+                                            $auto_box
+                                           ))
+                    ],
+                    sub {
+                        Xconfig::various::runlevel($x_mode ? 5 : 3);
+                        $::testing and return;
+                        if ($auto_buttons[1]->get_active) {
+                            any::set_autologin($user_combo->entry->get_text, $desktop_combo->entry->get_text);
+                          } else {
+                              any::set_autologin();
+                          }
+                    });
 }
-
-$window->show_all;
-gtkflush();
-$w->main;
-$in->exit(0);
-
 
 sub lilo_choice() {
-  ask:
-    my $before = fs::fstab_to_string($all_hds);
-    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit;
-    if ($before ne fs::fstab_to_string($all_hds)) {
-	#- for /tmp using tmpfs when "clean /tmp" is chosen
-	fs::write_fstab($all_hds);
-    }
-    any::installBootloader($in, $bootloader, $all_hds) or goto ask;
+    do {
+        my $before = fs::fstab_to_string($all_hds);
+        any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit;
+        if ($before ne fs::fstab_to_string($all_hds)) {
+            #- for /tmp using tmpfs when "clean /tmp" is chosen
+            fs::write_fstab($all_hds);
+        }
+    } while !any::installBootloader($in, $bootloader, $all_hds);
 }
-
 
 
 #-------------------------------------------------------------
 # launch autologin functions
 #-------------------------------------------------------------
 
-sub updateAutologin() {
-    my ($usern, $deskt) = ($user_combo->entry->get_text, $desktop_combo->entry->get_text);
-    $::testing and return;
-    if ($auto_buttons[1]->get_active) {
-        any::set_autologin($usern, $deskt);
-    } else {
-        any::set_autologin();
-    }
-}
-
-sub update_bootsplash {
-    my ($theme, $splash_mode, $keep_logo) = @_;
-    #- theme scripts will update SPLASH value in sysconfig file
-    if (-x $switch_theme) {
-	my $logo_console = $keep_logo ? 'theme' : 'no';
-	if ($::testing) {
-	    if ($splash_mode) {
-		print "substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig}\n";
-		print "system($switch_theme, $theme)\n";
-	    } else {
-		print "system($remove_theme)\n";
-	    }
- 	} else {
-	    if ($splash_mode) {
-		substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig};
-		system($switch_theme, $theme);
-	    } else {
-		system($remove_theme);
-	    }
- 	}
-    }
-}
-
 sub change_image {
-    my ($boot_pic, $val) = @_;
-    my $img_file = $themes{path} . $val . $themes{boot}{path} . "bootsplash-$cur_res.jpg";
+    my ($boot_pic, $theme, $res) = @_;
+    my $img_file = bootsplash::get_theme_image($theme, $res);
     -f $img_file or return;
     my $boot_pixbuf = gtkcreate_pixbuf($img_file);
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
     $boot_pic->set_from_pixbuf($boot_pixbuf);
 }
+
 sub enable_framebuffer() {
     my $vga = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
     my ($current_entry) = cat_('/proc/cmdline') =~ /^BOOT_IMAGE=(\S+)/;
