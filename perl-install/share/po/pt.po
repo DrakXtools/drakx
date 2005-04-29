@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: DrakX-pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-04-21 14:27+0200\n"
-"PO-Revision-Date: 2005-04-21 20:41+0100\n"
+"PO-Revision-Date: 2005-04-25 01:31+0100\n"
 "Last-Translator: José Melo <mmodem00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgid "Continue without USB key"
 msgstr "Continuar sem chave USB"
 
 #: ../move/move.pm:462
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The USB key seems to have write protection enabled, but we can not safely\n"
 "unplug it now.\n"
@@ -87,12 +87,12 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandriva Move again."
 msgstr ""
-"A chave USB parece ter a protecção de escrita activada, mas não\n"
-"podemos desliga-la com segurança.\n"
+"A chave USB parece ter a protecção de escrita activada, mas é possível\n"
+"desliga-la agora em segurança.\n"
 "\n"
 "\n"
-"Clique no botão para reiniciar o computador, desligue-a, retire a\n"
-"protecção de escrita, volte-a a ligar e, execute o Mandriva Move."
+"Clique no botão para reiniciar o computador, remova-a, retire a protecção\n"
+"de escrita, volte-a a ligar, e execute o Mandriva Move novamente."
 
 #: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1320
 #, c-format
@@ -100,7 +100,7 @@ msgid "Reboot"
 msgstr "Reiniciar"
 
 #: ../move/move.pm:473
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your USB key does not have any valid Windows (FAT) partitions.\n"
 "We need one to continue (beside, it's more standard so that you\n"
@@ -113,11 +113,11 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
-"A sua chave USB não contém nenhuma partição Windows (FAT)\n"
-"válida. É preciso uma para prosseguir (até porque, é mais\n"
-"standard para que tenha a possibilidade de mover e aceder\n"
-"os seus ficheiros nas máquinas que correm Windows). Por\n"
-"favor ligue uma chave USB que tenha uma partição Windows.\n"
+"A sua chave USB não tem nenhuma partição Windows (FAT)\n"
+"válida. É preciso uma para continuar (além disso, é melhor\n"
+"para que tenha a possibilidade de mover e aceder os seus\n"
+"ficheiros nas máquinas que correm Windows). Por favor\n"
+"ligue uma chave USB que tenha uma partição Windows.\n"
 "\n"
 "\n"
 "Pode também proceder sem uma chave USB - continuará na\n"
@@ -125,7 +125,7 @@ msgstr ""
 "operativo Mandriva normal."
 
 #: ../move/move.pm:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "We did not detect any USB key on your system. If you\n"
 "plug in an USB key now, Mandriva Move will have the ability\n"
@@ -141,7 +141,7 @@ msgid ""
 msgstr ""
 "Não foi detectada nenhuma chave USB no seu sistema. Se ligar\n"
 "uma chave USB agora, o Mandriva Move irá ter a capacidade de\n"
-"guardar transparentemente os dados na sua directoria pessoal\n"
+"gravar transparentemente os dados na seu directório pessoal\n"
 "e na configuração global do sistema, para o próximo arranque\n"
 "neste computador ou num outro. Nota: se ligar agora uma chave,\n"
 "espere alguns segundos antes de ser detectada novamente.\n"
@@ -266,7 +266,7 @@ msgid "An error occurred"
 msgstr "Ocorreu um erro"
 
 #: ../move/move.pm:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred:\n"
 "\n"
@@ -290,8 +290,8 @@ msgstr ""
 "%s\n"
 "\n"
 "Isto pode vir de uma configuração corrompida no sistema\n"
-"de ficheiros da chave USB, nesse caso se a remover e reiniciar o Mandriva "
-"Move o problema pode ficar resolvido.\n"
+"de ficheiros da chave USB, nesse caso se a remover e\n"
+"reiniciar o Mandriva Move o problema pode ficar resolvido.\n"
 "Para o fazer, clique no botão correspondente.\n"
 "\n"
 "\n"
@@ -463,8 +463,7 @@ msgstr "Xorg %s com aceleração hardware 3D"
 #: Xconfig/card.pm:411
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
-msgstr ""
-"A sua placa pode ter suporte para aceleração hardware 3D com o Xorg %s."
+msgstr "A sua placa pode ter suporte para aceleração hardware 3D com o Xorg %s."
 
 #: Xconfig/card.pm:417
 #, c-format
@@ -868,8 +867,7 @@ msgstr ""
 #: any.pm:165
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr ""
-"Instalação do carregador de arranque falhada. Ocorreram os seguintes erros:"
+msgstr "Instalação do carregador de arranque falhada. Ocorreram os seguintes erros:"
 
 #: any.pm:171
 #, c-format
@@ -951,8 +949,7 @@ msgstr "Indicar o tamanho da RAM em MB"
 
 #: any.pm:276
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opção ``Restringir opções da linha de comando'' não tem uso sem senha"
 
 #: any.pm:277 any.pm:610 authentication.pm:182
@@ -1210,10 +1207,8 @@ msgstr "Por favor indique um nome de utilizador"
 
 #: any.pm:613
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"O nome de utilizador deve conter apenas letras minúsculas, números, `-' e `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "O nome de utilizador deve conter apenas letras minúsculas, números, `-' e `_'"
 
 #: any.pm:614
 #, c-format
@@ -1282,8 +1277,7 @@ msgstr "Autologin"
 #: any.pm:689
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Posso configurar o computador para ligar automaticamente um utilizador."
+msgstr "Posso configurar o computador para ligar automaticamente um utilizador."
 
 #: any.pm:690 help.pm:51
 #, c-format
@@ -1329,15 +1323,15 @@ msgid "Language choice"
 msgstr "Escolha da língua"
 
 #: any.pm:733
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Linux can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"O Mandriva Linux suporta várias línguas. Seleccione as\n"
-"linguagens que deseja instalar. Estas estarão disponíveis\n"
-"quando terminar a instalação e reiniciar o seu sistema."
+"O Mandriva Linux pode suportar várias línguas. Seleccione\n"
+"as línguas que deseja instalar. Estarão disponíveis quando\n"
+"terminar a instalação e reiniciar o seu sistema."
 
 #: any.pm:752 any.pm:773 help.pm:647
 #, c-format
@@ -1427,8 +1421,7 @@ msgstr ""
 
 #: any.pm:948
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Pode exportar com NFS ou SMB. Por favor escolha qual deseja usar."
 
 #: any.pm:973
@@ -1497,8 +1490,7 @@ msgstr "Ficheiro local:"
 
 #: authentication.pm:56
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 "Usar local para todas as autenticações e informações dadas pelo utilizador "
 "no ficheiro local"
@@ -1553,8 +1545,7 @@ msgstr "Directório Activo com SFU:"
 
 #: authentication.pm:60 authentication.pm:61
 #, c-format
-msgid ""
-"Kerberos is a secure system for providing network authentication services."
+msgid "Kerberos is a secure system for providing network authentication services."
 msgstr ""
 "Kerberos é um sistema seguro que providencia serviços de autenticação na "
 "rede."
@@ -1714,8 +1705,7 @@ msgstr "Idmap predefinido "
 #: authentication.pm:171
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr ""
-"Define a senha de administrador (root) e os métodos de autenticação da rede"
+msgstr "Define a senha de administrador (root) e os métodos de autenticação da rede"
 
 #: authentication.pm:172
 #, c-format
@@ -2498,8 +2488,7 @@ msgstr "Remover o ficheiro loopback?"
 
 #: diskdrake/interactive.pm:604
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Após alterar o tipo de partição %s, todos os dados desta partição serão "
 "perdidos"
@@ -2567,8 +2556,7 @@ msgstr "Todos os dados desta partição devem ser arquivados (backup)"
 #: diskdrake/interactive.pm:756
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"Após redimensionar a partição %s, todos os dados da partição serão perdidos"
+msgstr "Após redimensionar a partição %s, todos os dados da partição serão perdidos"
 
 #: diskdrake/interactive.pm:761
 #, c-format
@@ -2975,8 +2963,7 @@ msgstr "Mais outro"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Por favor digite o seu nome de utilizador, senha e nome de domínio para "
 "aceder a este servidor."
@@ -3117,8 +3104,7 @@ msgstr "Montar o sistema de ficheiros apenas para leitura."
 #: fs/mount_options.pm:130
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
-msgstr ""
-"Todos os I/O para o sistema de ficheiros devem ser feitos sincronizadamente."
+msgstr "Todos os I/O para o sistema de ficheiros devem ser feitos sincronizadamente."
 
 #: fs/mount_options.pm:134
 #, c-format
@@ -3231,8 +3217,7 @@ msgstr ""
 msgid ""
 "You may not be able to install lilo (since lilo does not handle a LV on "
 "multiple PVs)"
-msgstr ""
-"Pode não poder instalar o lilo (já que o lilo não gere um LV em vários PVs)"
+msgstr "Pode não poder instalar o lilo (já que o lilo não gere um LV em vários PVs)"
 
 #: fsedit.pm:415 fsedit.pm:417
 #, c-format
@@ -3251,8 +3236,7 @@ msgstr ""
 #: fsedit.pm:423
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr ""
-"Não pode usar um sistema de ficheiros encriptado para ponto de montagem %s"
+msgstr "Não pode usar um sistema de ficheiros encriptado para ponto de montagem %s"
 
 #: fsedit.pm:484
 #, c-format
@@ -3485,7 +3469,7 @@ msgstr ""
 "Aqui pode seleccionar um drive alternativo (seja OSS ou ALSA) para a sua "
 "placa de som (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:241
@@ -3757,17 +3741,17 @@ msgid "enable radio support"
 msgstr "activar o suporte de rádio"
 
 #: help.pm:11
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandriva Linux distribution. If you agree with all the\n"
 "terms it contains, check the \"%s\" box. If not, clicking on the \"%s\"\n"
 "button will reboot your computer."
 msgstr ""
-"Antes de continuar, deve ler atentamente os termos da licença. Ela\n"
+"Antes de continuar, deve ler atentamente os termos da licença. A licença\n"
 "cobre toda a distribuição Mandriva Linux. Se concorda com todos os termos\n"
-"presentes, active a caixa \"%s\". Se não, pode clicar no botão \"%s\" para\n"
-"reiniciar o seu computador."
+"presentes, active a caixa \"%s\". Se não, pode clicar no botão \"%s\"\n"
+"para reiniciar o seu computador."
 
 #: help.pm:14 install_steps_gtk.pm:556 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:731 standalone/drakautoinst:216
@@ -3939,7 +3923,7 @@ msgstr ""
 "\"b\" significa \"segundo ID SCSI mais baixo\", etc."
 
 #: help.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandriva Linux installation is distributed on several CD-ROMs. If a\n"
 "selected package is located on another CD-ROM, DrakX will eject the current\n"
@@ -3950,10 +3934,10 @@ msgstr ""
 "A instalação Mandriva Linux é distribuída em vários CD-ROMs. Se um pacote\n"
 "seleccionado estiver localizado noutro CD-ROM, o DrakX irá ejectar o actual\n"
 "CD e pedir para inserir o CD pedido. Se não tiver o CD em questão à mão,\n"
-"clique apenas em \"%s\", o pacote correspondente não será instalado."
+"clique apenas em \"%s\", os pacote correspondentes não será instalados."
 
 #: help.pm:92
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It's now time to specify which programs you wish to install on your system.\n"
 "There are thousands of packages available for Mandriva Linux, and to make "
@@ -4108,7 +4092,7 @@ msgid "Truly minimal install"
 msgstr "Verdadeira instalação mínima"
 
 #: help.pm:149
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you choose to install packages individually, the installer will present\n"
 "a tree containing all packages classified by groups and subgroups. While\n"
@@ -4144,10 +4128,10 @@ msgid ""
 "another installation. See the second tip of the last step on how to create\n"
 "such a floppy."
 msgstr ""
-"Se escolheu instalar pacotes individualmente, o instalador ira apresentar\n"
+"Se escolheu instalar pacotes individualmente, o instalador irá apresentar\n"
 "uma árvore contendo todos os pacotes classificados por grupos e subgrupos.\n"
-"Enquanto navega na árvore, pode seleccionar grupos inteiros, subgrupos, ou "
-"pacotes individuais.\n"
+"Enquanto pesquisa na árvore, pode seleccionar grupos inteiros, subgrupos,\n"
+"ou pacotes individuais.\n"
 "\n"
 "Sempre que seleccionar um pacote na árvore, uma descrição irá aparecer\n"
 "à sua direita para o informar acerca do propósito desse pacote.\n"
@@ -4306,7 +4290,7 @@ msgstr ""
 "que melhor sirva as suas necessidades."
 
 #: help.pm:231
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
@@ -4385,9 +4369,8 @@ msgstr ""
 "\n"
 "Monitor\n"
 "\n"
-"   Normalmente o instalador irá automáticamente detectar e configurar \n"
-"o ecrã/monitor ligado á sua máquina. Se não estiver correcto, pode "
-"escolher \n"
+"   Normalmente o instalador irá automáticamente detectar e configurar o\n"
+"ecrã/monitor ligado á sua máquina. Se não estiver correcto, pode escolher\n"
 "da lista o monitor que está ligado ao seu computador.\n"
 "\n"
 "\n"
@@ -4485,7 +4468,7 @@ msgstr ""
 "sucedido a configurar o monitor."
 
 #: help.pm:316
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now need to decide where you want to install the Mandriva Linux\n"
 "operating system on your hard drive. If your hard drive is empty or if an\n"
@@ -4579,10 +4562,10 @@ msgstr ""
 "utiliza todo o espaço disponível, irá ter que criar espaço livre para o\n"
 "GNU/Linux. Para o fazer, pode apagar a sua partição Microsoft Windows\n"
 "e dados (ver a solução ``Apagar o disco todo'') ou redimensionar a partição\n"
-"FAT ou NTFS do Microsoft Windows. Redimensionar pode ser feito sem a\n"
-"perda de qualquer dado, desde que préviamente tenha desfragmentado\n"
-"a partição Windows. É recomendado que faça cópias de segurança.\n"
-"É recomendado que use esta opção, se quer usar os dois sistemas\n"
+"FAT ou NTFS do Microsoft Windows. O redimensionamento pode ser feito\n"
+"sem a perda de qualquer dado, desde que préviamente tenha desfragmentado\n"
+"a partição Windows. Recomenda-se que faça cópias de segurança.\n"
+"Recomenda-se que use esta opção, se quer usar os dois sistemas\n"
 "operativos, Mandriva Linux e Microsoft Windows no mesmo computador.\n"
 "\n"
 "   Antes de escolher esta opção, por favor compreenda que a seguir a este\n"
@@ -4591,12 +4574,11 @@ msgstr ""
 "seus dados ou instalar novo software.\n"
 "\n"
 " * \"%s\". Se deseja apagar todos os dados e todas as partições presentes\n"
-"no disco rígido e substituí-los pelo seu novo sistema Mandriva Linux, "
-"escolha\n"
-"esta opção. Seja cuidadoso, porque não será mais capaz de desfazer esta\n"
-"operação após ter confirmado.\n"
+"no disco rígido e substituí-los pelo seu novo sistema Mandriva Linux,\n"
+"escolha esta opção. Seja cuidadoso, porque não será mais capaz de\n"
+"desfazer esta operação após ter confirmado.\n"
 "\n"
-"   !! Se escolher esta opção, todos os dados no disco serão apagados. !!\n"
+"   !! Se escolher esta opção, todos os dados no disco serão apagados!!\n"
 "\n"
 " * \"%s\": Esta opção aparece quando o disco rígido é inteiramente do\n"
 "sistema Microsoft Windows. Escolher esta opção irá simplesmente apagar\n"
@@ -4735,7 +4717,7 @@ msgid "Save packages selection"
 msgstr "Gravar selecção de pacotes"
 
 #: help.pm:412
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
 "reformat some of them and erase any data they contain. To do so, please\n"
@@ -4778,8 +4760,8 @@ msgstr ""
 "Clique em \"%s\" se deseja escolher outra partição para o seu novo\n"
 "sistema operativo Mandriva Linux.\n"
 "\n"
-"Clique em \"%s\" se deseja escolher partições para verificar se fisicamente\n"
-"há blocos defeituosos (\"bad blocks\") no disco."
+"Clique em \"%s\" se deseja escolher partições para verificar se\n"
+"fisicamente há blocos defeituosos (\"bad blocks\") no disco."
 
 #: help.pm:431 install_steps_gtk.pm:392 interactive.pm:434
 #: interactive/newt.pm:318 printer/printerdrake.pm:3676
@@ -4791,7 +4773,7 @@ msgid "Previous"
 msgstr "Anterior"
 
 #: help.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "By the time you install Mandriva Linux, it's likely that some packages will\n"
 "have been updated since the initial release. Bugs may have been fixed,\n"
@@ -4813,10 +4795,10 @@ msgstr ""
 "activa, ou \"%s\" se preferir instalar os pacotes actualizados mais tarde.\n"
 "\n"
 "Escolhendo \"%s\" mostra uma lista das localizações web de onde as\n"
-"actualizações podem ser descarregadas. Deve escolher a que estiver mais\n"
-"perto de si. Irá aparecer uma selecção de pacotes em árvore: reveja a\n"
-"selecção, e clique em \"%s\" para descarregar e instalar os pacotes\n"
-"seleccionados, ou clique em \"%s\" para abortar."
+"actualizações podem ser descarregadas. Deve escolher a que estiver\n"
+"mais perto de si. Irá aparecer uma selecção de pacotes em árvore:\n"
+"reveja a selecção, e clique em \"%s\" para descarregar e instalar os\n"
+"pacotes seleccionados, ou clique em \"%s\" para abortar."
 
 #: help.pm:444 help.pm:588 install_steps_gtk.pm:391
 #: install_steps_interactive.pm:156 standalone/drakbackup:4110
@@ -4825,7 +4807,7 @@ msgid "Install"
 msgstr "Instalar"
 
 #: help.pm:447
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level you desire\n"
 "for your machine. As a rule of thumb, the security level should be set\n"
@@ -4859,7 +4841,7 @@ msgid "Security Administrator"
 msgstr "Administrador de Segurança"
 
 #: help.pm:461
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandriva Linux system. If partitions have already been\n"
@@ -5016,7 +4998,7 @@ msgid "Toggle between normal/expert mode"
 msgstr "Alterna entre os modos normal/perito"
 
 #: help.pm:533
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "More than one Microsoft partition has been detected on your hard drive.\n"
 "Please choose the one which you want to resize in order to install your new\n"
@@ -5091,7 +5073,7 @@ msgstr ""
 "clique no botão \"%s\" para obter a lista completa dos países."
 
 #: help.pm:569
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is activated only if an existing GNU/Linux partition has been\n"
 "found on your machine.\n"
@@ -5178,7 +5160,7 @@ msgstr ""
 "permita mudar o teclado entre uma disposição Latim uma não Latim."
 
 #: help.pm:609
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The first step is to choose your preferred language.\n"
 "\n"
@@ -5230,7 +5212,7 @@ msgstr ""
 "Ao clicar no botão \"%s\" irá permitir-lhe escolher outras linguagens\n"
 "para instalar na sua área de trabalho, consequentemente instalará os\n"
 "ficheiros para a documentação do sistema e aplicações referentes à\n"
-"linguagem específicada . Porexemplo, se utilizadores espanhóis estão\n"
+"linguagem especificada . Porexemplo, se utilizadores espanhóis estão\n"
 "para usar a sua máquina, escolha Inglês como linguagem predefinida\n"
 "na vista em árvore e \"%s\" na secção Avançada.\n"
 "\n"
@@ -5247,13 +5229,12 @@ msgstr ""
 " * Outras linguagens irão usar unicode por omissão;\n"
 "\n"
 " * Finalmente, o unicode pode também ser forçado para uso através do\n"
-"por um pedido do utilizadorao selecionar a opção \"%s\", independentemente\n"
-"como as linguagens tenham sido escolhidas.\n"
+"por um pedido do utilizador ao selecionar a opção \"%s\",\n"
+"independentemente como as linguagens tenham sido escolhidas.\n"
 "\n"
-"Notar que não você não está limitado a escolher uma única linguagem\n"
-"adicional. Pode escolher várias, ou até as instalar ao selecionar a caixa\"%s"
-"\".\n"
-"Selecionar suporte para uma linguagem, quer dizer traduções, fontes,\n"
+"Notar que não está limitado a escolher uma única linguagem adicional.\n"
+"Pode escolher várias, ou até instala-las ao seleccionar a caixa\"%s\".\n"
+"Seleccionar suporte para uma linguagem, quer dizer traduções, fontes,\n"
 "verificadores de ortografia, etc., que será também instalados para essa\n"
 "linguagem.\n"
 "\n"
@@ -5475,7 +5456,7 @@ msgstr ""
 "esta opção apenas se souber o que está a fazer."
 
 #: help.pm:742
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other\n"
 "operating systems may offer you one, but Mandriva Linux offers two. Each of\n"
@@ -5599,7 +5580,7 @@ msgid "Sound card"
 msgstr "Placa de Som"
 
 #: help.pm:791
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -5787,7 +5768,7 @@ msgid "Services"
 msgstr "Serviços"
 
 #: help.pm:858
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandriva Linux partition. Be careful, all data on this drive will be lost\n"
@@ -6120,8 +6101,7 @@ msgstr "Tamanho da partição swap em MB: "
 #: install_interactive.pm:130
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
-"Não há partições FAT para usar como loopback (ou não têm espaço suficiente)"
+msgstr "Não há partições FAT para usar como loopback (ou não têm espaço suficiente)"
 
 #: install_interactive.pm:139
 #, c-format
@@ -6143,15 +6123,15 @@ msgid "Computing the size of the Windows partition"
 msgstr "A calcular o tamanho da partição Windows"
 
 #: install_interactive.pm:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
 msgstr ""
-"A sua partição Windows está demasiado fragmentada. Por favor reinicie o seu "
-"computador em Windows, execute a utilidade ``defrag'', depois recomece a "
-"instalação Mandriva Linux"
+"A sua partição Windows está demasiado fragmentada. Por favor reinicie o "
+"seu computador em Windows, execute a utilidade ``defrag'', depois "
+"recomece a instalação Mandriva Linux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6241,8 +6221,7 @@ msgstr "Não consigo encontrar espaço para instalar"
 #: install_interactive.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
-"O assistente de particionamento do DrakX encontrou as seguintes soluções:"
+msgstr "O assistente de particionamento DrakX encontrou as seguintes soluções:"
 
 #: install_interactive.pm:281
 #, c-format
@@ -6261,7 +6240,7 @@ msgstr "A desligar a rede"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:10
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -6385,14 +6364,13 @@ msgstr ""
 "\n"
 "O sistema operativo e os diferentes elementos disponíveis na distribuição "
 "Mandriva Linux \n"
-"deveriam ser chamados os \"Produtos de Software\" a partir daqui. Os "
-"Produtos de Software incluem, \n"
-"mas não se limitam a, o grupo de programas, métodos, regras e documentações "
-"relativos ao sistema operativo \n"
-"assim como os diferentes elementos da distribuição Mandriva Linux.\n"
+"irão ser chamados de \"Produtos de Software\" a partir daqui. Os Produtos "
+"de Software \n"
+"incluidos, mas não restringidos a, o grupo de programas, metodos, regras e documentação \n"
+"relativa ao sistema operativo e as diferentes componentes da distribuição Mandriva Linux.\n"
 "\n"
 "\n"
-"1. Termo de licença\n"
+"1. Acordo de licença\n"
 "\n"
 "Por favor leia com atenção este documento. Este documento é o termo de "
 "licença entre você e \n"
@@ -6425,7 +6403,7 @@ msgstr ""
 "ou qualquer ou perca consequente) \n"
 "decorrentes do uso ou da impossibilidade de usar os Produtos de Software, "
 "mesmo se a Mandriva S.A. foi \n"
-"avisada da possibilidade de ocorrimento de tais danos.\n"
+"avisada da possibilidade de ocorrer tais danos.\n"
 "\n"
 "LIMITAÇÃO DE RESPONSABILIDADE LIGADA A POSSESSÃO OU UTILIZAÇÃO DE PROGRAMAS "
 "PROIBIDOS EM CERTOS PAÍSES\n"
@@ -6577,7 +6555,7 @@ msgstr ""
 "e leis de copyright aplicavel aos programas software.\n"
 
 #: install_messages.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -6606,7 +6584,7 @@ msgstr ""
 "%s\n"
 "\n"
 "\n"
-"Informação em configurar o seu sistema está disponivel no\n"
+"Informação em configurar o seu sistema está disponível no\n"
 "capítulo pós-instalação do Guia Oficial do Utilizador do Mandriva Linux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
@@ -6639,7 +6617,7 @@ msgid "Entering step `%s'\n"
 msgstr "A entrar no passo `%s'\n"
 
 #: install_steps_gtk.pm:181
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandriva Linux. If that occurs, you can try a text install instead. For "
@@ -6647,10 +6625,8 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 "O seu sistema está baixo em recursos. Pode ter algum problema na\n"
-"instalação do Mandriva Linux. Se isso ocorrer, pode tentar instalar usando "
-"o\n"
-"modo texto. Para isso, prima `F1' no quadro de inicialização e escreva "
-"`text'."
+"instalação Mandriva Linux. Se isso ocorrer, pode tentar instalar usando o\n"
+"modo texto. Para tal, prima `F1' no quadro de inicialização e digite `text'."
 
 #: install_steps_gtk.pm:228 install_steps_interactive.pm:624
 #, c-format
@@ -6717,8 +6693,7 @@ msgstr "para manter %s"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr ""
-"Não pode seleccionar esse pacote pois não existe espaço livre para o instalar"
+msgstr "Não pode seleccionar esse pacote pois não existe espaço livre para o instalar"
 
 #: install_steps_gtk.pm:351
 #, c-format
@@ -6752,8 +6727,7 @@ msgstr ""
 #: install_steps_gtk.pm:384
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr ""
-"Não pode deixar de seleccionar este pacote. Ele tem que ser actualizado"
+msgstr "Não pode deixar de seleccionar este pacote. Ele tem que ser actualizado"
 
 #: install_steps_gtk.pm:389
 #, c-format
@@ -6891,7 +6865,7 @@ msgstr "Acordo da licença"
 #: install_steps_interactive.pm:89
 #, c-format
 msgid "Release Notes"
-msgstr "Notas da Versão Saida (release)"
+msgstr "Notas de Lançamento"
 
 #: install_steps_interactive.pm:119
 #, c-format
@@ -7162,9 +7136,9 @@ msgid "Post-install configuration"
 msgstr "Configuração pós-instalação"
 
 #: install_steps_interactive.pm:771
-#, fuzzy, c-format
+#, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr "Por favor Insira uma disquete com os módulos actualizados no drive %s"
+msgstr "Por favor certifique-se que a média Módulos de Actualização está no drive %s"
 
 #: install_steps_interactive.pm:800
 #, c-format
@@ -7188,9 +7162,8 @@ msgstr ""
 "Deseja instalar as actualizações ?"
 
 #: install_steps_interactive.pm:821
-#, fuzzy, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+#, c-format
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "A contactar o site Mandriva Linux para transferir a lista dos mirrors "
 "disponíveis..."
@@ -7198,8 +7171,7 @@ msgstr ""
 #: install_steps_interactive.pm:840
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
-msgstr ""
-"A contactar o mirror para transferir a lista dos pacotes disponíveis..."
+msgstr "A contactar o mirror para transferir a lista dos pacotes disponíveis..."
 
 #: install_steps_interactive.pm:844
 #, c-format
@@ -7273,8 +7245,7 @@ msgstr ""
 #: install_steps_interactive.pm:1030
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Nenhuma placa de som detectada. Tente \"harddrake\" depois da instalação"
+msgstr "Nenhuma placa de som detectada. Tente \"harddrake\" depois da instalação"
 
 #: install_steps_interactive.pm:1050
 #, c-format
@@ -7416,17 +7387,15 @@ msgstr ""
 "Pode preferir repetir a instalação.\n"
 
 #: install_steps_newt.pm:20
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr "Instalação do Mandriva Linux %s"
+msgstr "Instalação Mandriva Linux %s"
 
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr ""
-" <Tab>/<Alt-Tab> entre opções  | <Espaço> seleccione | <F12> próximo ecrâ"
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr " <Tab>/<Alt-Tab> entre opções  | <Espaço> seleccione | <F12> próximo ecrâ"
 
 #: interactive.pm:193
 #, c-format
@@ -8169,11 +8138,11 @@ msgid ""
 msgstr "Eslovaco"
 
 #: keyboard.pm:293
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr "Sindhi"
+msgstr "Sinhala"
 
 #: keyboard.pm:294
 #, c-format
@@ -8253,18 +8222,18 @@ msgid ""
 msgstr "Tailandês (Pattachote)"
 
 #: keyboard.pm:310
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr "Tifinagh (+latin/arábico)"
+msgstr "Tifinagh (disposição moroccan) (+latin/arábico)"
 
 #: keyboard.pm:311
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr "Tifinagh (+latin/arábico)"
+msgstr "Tifinagh (fonética) (+latin/arábico)"
 
 #: keyboard.pm:313
 #, c-format
@@ -10000,19 +9969,19 @@ msgid "BitTorrent"
 msgstr "BitTorrent"
 
 #: network/drakfirewall.pm:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "drakfirewall configurator\n"
 "\n"
 "This configures a personal firewall for this Mandriva Linux machine.\n"
 "For a powerful and dedicated firewall solution, please look to the\n"
-"specialized Mandriva Security Firewall distribution."
+"specialized MandrakeSecurity Firewall distribution."
 msgstr ""
 "Configurador drakfirewall\n"
 "\n"
 "Isto configura uma firewall pessoal para esta máquina Mandriva Linux.\n"
-"Para uma solução firewall poderosa e dedicada, por favor veja a \n"
-"distribuição especializada Mandriva Security Firewall."
+"Para uma solução poderosa e dedicada da firewall, por favor veja a \n"
+"distribuição especializada MandrakeSecurity Firewall."
 
 #: network/drakfirewall.pm:164
 #, c-format
@@ -10105,7 +10074,7 @@ msgstr "Manual"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Nenhum dispositivo de suporte ao driver %s ndiswrapper está presente!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10113,14 +10082,14 @@ msgid "Please select the Windows driver (.inf file)"
 msgstr "Por favor seleccione o driver Windows (ficheiro .inf)"
 
 #: network/ndiswrapper.pm:41
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr "Escolha um driver ndiswrapper"
+msgstr "Não é possível instalar o driver %s ndiswrapper!"
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "Não é possível carregar o módulo ndiswrapper"
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -10128,11 +10097,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver ?"
 msgstr ""
+"O dispositivo seleccionado já foi configurado com o driver %s.\n"
+"Deseja realmente usar o driver ndiswrapper?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Não é possível encontrar o interface ndiswrapper!"
 
 #: network/netconnect.pm:91 network/netconnect.pm:568
 #: network/netconnect.pm:572
@@ -10288,17 +10259,17 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:182
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "Abrir WEP"
 
 #: network/netconnect.pm:183
-#, fuzzy, c-format
+#, c-format
 msgid "Restricted WEP"
-msgstr "restringir"
+msgstr "WEP Restricto"
 
 #: network/netconnect.pm:184
 #, c-format
 msgid "WPA Pre-Shared Key"
-msgstr ""
+msgstr "Chave Pré-Partilhada WPA"
 
 #: network/netconnect.pm:287 standalone/drakconnect:60
 #, c-format
@@ -10820,13 +10791,13 @@ msgid "Configuring network device %s (driver %s)"
 msgstr "A configurar o dispositivo de rede %s (driver %s)"
 
 #: network/netconnect.pm:1060
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
 "Os seguintes protocolos podem ser usados para configurar uma conexão "
-"ethernet. Por favor escolha o que pretende usar"
+"LAN. Por favor escolha o que deseja usar"
 
 #: network/netconnect.pm:1094
 #, c-format
@@ -10929,9 +10900,9 @@ msgid "Choose an ndiswrapper driver"
 msgstr "Escolha um driver ndiswrapper"
 
 #: network/netconnect.pm:1179
-#, fuzzy, c-format
+#, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr "Escolha um driver ndiswrapper"
+msgstr "Use o driver ndiswrapper %s"
 
 #: network/netconnect.pm:1179
 #, c-format
@@ -10939,9 +10910,9 @@ msgid "Install a new driver"
 msgstr "Instalar um novo driver"
 
 #: network/netconnect.pm:1191
-#, fuzzy, c-format
+#, c-format
 msgid "Select a device:"
-msgstr "Seleccione um dispositivo !"
+msgstr "Seleccione um dispositivo:"
 
 #: network/netconnect.pm:1216
 #, c-format
@@ -11009,9 +10980,9 @@ msgid "Bitrate (in b/s)"
 msgstr "Bitrate (em b/s)"
 
 #: network/netconnect.pm:1227
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption mode"
-msgstr "Senha de encriptação"
+msgstr "Modo de encriptação"
 
 #: network/netconnect.pm:1231 standalone/drakconnect:431
 #, c-format
@@ -11946,14 +11917,12 @@ msgstr ""
 #: printer/printerdrake.pm:72
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
-"As impressoras nesta máquina estão disponíveis para outros computadores"
+msgstr "As impressoras nesta máquina estão disponíveis para outros computadores"
 
 #: printer/printerdrake.pm:77
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr ""
-"Encontrar automaticamente as impressoras disponíveis em máquinas remotas"
+msgstr "Encontrar automaticamente as impressoras disponíveis em máquinas remotas"
 
 #: printer/printerdrake.pm:82
 #, c-format
@@ -12126,8 +12095,7 @@ msgstr "Endereço IP do endereço/rede:"
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr ""
-"Escolha a rede ou endereço onde a impressoras locais devem estar disponíveis:"
+msgstr "Escolha a rede ou endereço onde a impressoras locais devem estar disponíveis:"
 
 #: printer/printerdrake.pm:244
 #, c-format
@@ -12147,8 +12115,7 @@ msgstr "Exemplos para IPs correctos:\n"
 #: printer/printerdrake.pm:277
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr ""
-"Este endereço/rede já está na lista, não pode ser adicionado novamente.\n"
+msgstr "Este endereço/rede já está na lista, não pode ser adicionado novamente.\n"
 
 #: printer/printerdrake.pm:346 printer/printerdrake.pm:416
 #, c-format
@@ -12184,14 +12151,12 @@ msgstr "Remover o servidor seleccionado"
 #: printer/printerdrake.pm:417
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr ""
-"Insira o endereço IP e a porta do endereço cujas impressoras deseja usar."
+msgstr "Insira o endereço IP e a porta do endereço cujas impressoras deseja usar."
 
 #: printer/printerdrake.pm:418
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
-"Se nenhuma porta for indicada, a 631 irá ser escolhida como predefinida."
+msgstr "Se nenhuma porta for indicada, a 631 irá ser escolhida como predefinida."
 
 #: printer/printerdrake.pm:422
 #, c-format
@@ -12304,8 +12269,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:627
 #, c-format
-msgid ""
-"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Auto-detecção de impressora (Local, TCP/Socket, impressoras SMB, e "
 "dispositivo URI)"
@@ -12313,8 +12277,7 @@ msgstr ""
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
-"Modificar o Intervalo de tempo para auto-detecção de impressora em rede"
+msgstr "Modificar o Intervalo de tempo para auto-detecção de impressora em rede"
 
 #: printer/printerdrake.pm:635
 #, c-format
@@ -12413,8 +12376,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:714
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
+msgid "There are no printers found which are directly connected to your machine"
 msgstr "Não encontrei nenhuma impressora ligada directamente à sua máquina"
 
 #: printer/printerdrake.pm:717
@@ -12694,8 +12656,7 @@ msgstr "Auto-detectar as impressoras ligadas directamente à rede local"
 #: printer/printerdrake.pm:1148
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr ""
-"Auto-detectar as impressoras ligadas a uma máquina sob Microsoft Windows"
+msgstr "Auto-detectar as impressoras ligadas a uma máquina sob Microsoft Windows"
 
 #: printer/printerdrake.pm:1151
 #, c-format
@@ -12840,8 +12801,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:1377
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Alternativamente, pode especificar um nome de dispositivo/ficheiro na linha "
 "de entrada"
@@ -13447,8 +13407,7 @@ msgstr "Escreva o Nome da Impressora e os Comentarios"
 #: printer/printerdrake.pm:2767 printer/printerdrake.pm:4064
 #, c-format
 msgid "Name of printer should contain only letters, numbers and the underscore"
-msgstr ""
-"O nome da impressora deve apenas conter letras, números e traços baixos"
+msgstr "O nome da impressora deve apenas conter letras, números e traços baixos"
 
 #: printer/printerdrake.pm:2773 printer/printerdrake.pm:4069
 #, c-format
@@ -14083,14 +14042,14 @@ msgstr ""
 "exemplo o Kooka ou o XSane (Ambos no menu Multimédia/Gráficos)"
 
 #: printer/printerdrake.pm:3929
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Run Scannerdrake (Hardware/Scanner in Mandriva Linux Control Center) to "
 "share your scanner on the network.\n"
 "\n"
 msgstr ""
-"Execute o Scannerdrake (no Mandriva Linux Control em Hardware/Scanner) para "
-"partilhar o seu scanner na rede.\n"
+"Execute o Scannerdrake (no Mandriva Linux Control em Hardware/Scanner) "
+"para partilhar o seu scanner na rede.\n"
 "\n"
 
 #: printer/printerdrake.pm:3933
@@ -14817,8 +14776,7 @@ msgstr "Não conseguiu criar a ligação /usr/share/sane/%s!"
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"Não conseguiu copiar o ficheiro de firmware %s para /usr/share/sane/firmware!"
+msgstr "Não conseguiu copiar o ficheiro de firmware %s para /usr/share/sane/firmware!"
 
 #: scanner.pm:121
 #, c-format
@@ -14837,14 +14795,12 @@ msgstr "Scannerdrake"
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
-"Não conseguiu instalar os pacotes precisos para partilhar o seu scanner."
+msgstr "Não conseguiu instalar os pacotes precisos para partilhar o seu scanner."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"O(s) seu(s) scanner(s) não irão estar disponíveis para utilizadores não-root."
+msgstr "O(s) seu(s) scanner(s) não irão estar disponíveis para utilizadores não-root."
 
 #: security/help.pm:11
 #, c-format
@@ -15050,8 +15006,7 @@ msgstr "Activar/Desactivar a verificação msec todas as horas."
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-" Enabling su only from members of the wheel group or allow su from any user."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 "Activa su só para membros do grupo wheel ou permite su a partir de "
 "qualquerutilizador."
@@ -15079,8 +15034,7 @@ msgstr "Activar/Desactivar sulogin(8) em nível único de utilizador."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Adiciona o nome como uma excepção na gestão da idade da senha por msec."
+msgstr "Adiciona o nome como uma excepção na gestão da idade da senha por msec."
 
 #: security/help.pm:102
 #, c-format
@@ -15092,8 +15046,7 @@ msgstr ""
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr ""
-"Define o tamanho do histórico da senha para evitar a reutilização das senhas."
+msgstr "Define o tamanho do histórico da senha para evitar a reutilização das senhas."
 
 #: security/help.pm:106
 #, c-format
@@ -15150,8 +15103,7 @@ msgstr ""
 #: security/help.pm:119
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr ""
-"se definido para sim, executa diáriamente as verificações de segurança."
+msgstr "se definido para sim, executa diáriamente as verificações de segurança."
 
 #: security/help.pm:120
 #, c-format
@@ -15171,8 +15123,7 @@ msgstr "se definido para sim, verifica o checksum dos ficheiros suid/sgid."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"se definido para sim, verifica as adições/remoções dos ficheiros suid root."
+msgstr "se definido para sim, verifica as adições/remoções dos ficheiros suid root."
 
 #: security/help.pm:124
 #, c-format
@@ -15193,8 +15144,7 @@ msgstr "se definido para sim, executa os testes chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "se definido, envia o relatório para este endereço de e-mail, caso contrário "
 "envia para root."
@@ -15202,8 +15152,7 @@ msgstr ""
 #: security/help.pm:128
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr ""
-"se definido para sim, reporta por e-mail os resultados das verificações."
+msgstr "se definido para sim, reporta por e-mail os resultados das verificações."
 
 #: security/help.pm:129
 #, c-format
@@ -15218,8 +15167,7 @@ msgstr "se definido para sim, executa alguns testes à base de dados rpm."
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"se definido para sim, reporta para syslog os resultados das verificações."
+msgstr "se definido para sim, reporta para syslog os resultados das verificações."
 
 #: security/help.pm:132
 #, c-format
@@ -15581,9 +15529,10 @@ msgid ""
 "Internet, you should choose a lower level."
 msgstr ""
 "Com este nível de segurança, o uso deste sistema como servidor tornou-se "
-"possível.\n"
-"A segurança agora suficientemente alta para usar o sistema como umservidor\n"
-"que aceita pode aceitar conexões muitos clientes. Nota: se a sua máquina é "
+"possível. "
+"A segurança é agora suficientemente alta para usar o sistema como um "
+"servidor\n"
+"que pode aceitar conexões de muitos clientes. Nota: se a sua máquina é "
 "apenas um cliente na Internet, deve escolher um nível mais baixo."
 
 #: security/level.pm:50
@@ -15617,8 +15566,7 @@ msgstr "Use libsafe para servidores"
 
 #: security/level.pm:63
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Uma livraria que protege contra ataques tipo 'buffer overflow' e 'format "
 "string'"
@@ -15706,8 +15654,7 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache é um servidor World Wide Web. É usado para servir ficheiros HTML e "
 "CGI."
@@ -16051,17 +15998,17 @@ msgid "Stop"
 msgstr "Parar"
 
 #: share/advertising/01.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>What is Mandriva Linux?</b>"
 msgstr "<b>O que é o Mandriva Linux?</b>"
 
 #: share/advertising/01.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to <b>Mandriva Linux</b>!"
 msgstr "Bem-vindo ao <b>Mandriva Linux</b>!"
 
 #: share/advertising/01.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Linux is a <b>Linux distribution</b> that comprises the core of the "
 "system, called the <b>operating system</b> (based on the Linux kernel) "
@@ -16074,13 +16021,13 @@ msgstr ""
 "necessidades."
 
 #: share/advertising/01.pl:19
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Linux is the most <b>user-friendly</b> Linux distribution today. It "
 "is also one of the <b>most widely used</b> Linux distributions worldwide!"
 msgstr ""
-"O Mandriva Linux é a distribuição Lunix que hoje é a mais <b>user-friendly</"
-"b>. É também uma das <b>mais usadas</b> distribuições Linux a nível mundial!"
+"O Mandriva Linux hoje é a distribuição Linux mais <b>amigável</b>. É "
+"também uma das <b>mais usadas</b> distribuições Linux a nível mundial!"
 
 #: share/advertising/02.pl:13
 #, c-format
@@ -16090,10 +16037,10 @@ msgstr "<b>Open Source</b>"
 #: share/advertising/02.pl:15
 #, c-format
 msgid "Welcome to the <b>world of open source</b>!"
-msgstr "Bemvindo ao <b>mundo do Open Source</b>!"
+msgstr "Bem-vindo ao <b>mundo do Open Source</b>!"
 
 #: share/advertising/02.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Linux is committed to the open source model. This means that this "
 "new release is the result of <b>collaboration</b> between <b>Mandriva's team "
@@ -16101,8 +16048,8 @@ msgid ""
 "contributors."
 msgstr ""
 "O Mandriva Linux está comprometido com o modelo open source. Isto significa "
-"que as novas versões são o resultado da <b>colaboração</b> entre a <b> "
-"Equipa de programadores da Mandriva</b> e a <b>comunidade mundial</b> de "
+"que estas novas versões são o resultado da <b>colaboração</b> entre a <b> "
+"Equipa Mandriva de programadores</b> e a <b>comunidade mundial</b> de "
 "contribuidores Mandriva Linux."
 
 #: share/advertising/02.pl:19
@@ -16111,7 +16058,7 @@ msgid ""
 "We would like to <b>thank</b> everyone who participated in the development "
 "of this latest release."
 msgstr ""
-"Gostariamos de <b>agradecer</b> a todos aqueles que participaram no "
+"Gostariamos de <b>agradecer</b> a todos os que participaram no "
 "desenvolvimento desta última versão."
 
 #: share/advertising/03.pl:13
@@ -16120,13 +16067,13 @@ msgid "<b>The GPL</b>"
 msgstr "<b>O GPL</b>"
 
 #: share/advertising/03.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Most of the software included in the distribution and all of the Mandriva "
 "Linux tools are licensed under the <b>General Public License</b>."
 msgstr ""
-"A maior parte do software incluido na distribuição e todas as ferramentas "
-"Mandraelinux são licensiadas sob a licença <b>GPL</b>."
+"A maior parte do software incluído na distribuição e todas as ferramentas "
+"Mandraelinux são licenciadas sob a licença <b>GPL</b>."
 
 #: share/advertising/03.pl:17
 #, c-format
@@ -16154,7 +16101,7 @@ msgid "<b>Join the Community</b>"
 msgstr "<b>Junte-se à Comunidade</b>"
 
 #: share/advertising/04.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Linux has one of the <b>biggest communities</b> of users and "
 "developers. The role of such a community is very wide, ranging from bug "
@@ -16183,13 +16130,13 @@ msgid "<b>Download Version</b>"
 msgstr "<b>Versão Download</b>"
 
 #: share/advertising/05.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are now installing <b>Mandriva Linux Download</b>. This is the free "
 "version that Mandriva wants to keep <b>available to everyone</b>."
 msgstr ""
 "Está agora a instalar o <b>Mandriva Linux Download</b>. Esta é a versão "
-"livre que o Mandriva quer manter <b>disponivel para toda a gente</b>."
+"livre que o Mandriva quer manter <b>disponível para toda a gente</b>."
 
 #: share/advertising/05.pl:19
 #, c-format
@@ -16202,8 +16149,7 @@ msgstr ""
 
 #: share/advertising/05.pl:20
 #, c-format
-msgid ""
-"\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
+msgid "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr ""
 "\t* <b>Proprietários dos drivers</b> (tal como drivers para NVIDIA®, ATI™, "
 "etc.)."
@@ -16218,12 +16164,12 @@ msgstr ""
 "Flash™, etc.)."
 
 #: share/advertising/05.pl:23
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will not have access to the <b>services included</b> in the other "
 "Mandriva products either."
 msgstr ""
-"Também não irá ter acesso aos <b>serviçõs incluidos</b> nos outros produtos "
+"Também não irá ter acesso aos <b>serviços incluidos</b> nos outros produtos "
 "Mandriva."
 
 #: share/advertising/06.pl:13
@@ -16232,7 +16178,7 @@ msgid "<b>Discovery, Your First Linux Desktop</b>"
 msgstr "<b>Discovery, O Seu Primeiro Linux Desktop</b>"
 
 #: share/advertising/06.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "You are now installing <b>Mandriva Linux Discovery</b>."
 msgstr "Está agora a instalar o <b>Mandriva Linux Discovery</b>."
 
@@ -16255,19 +16201,19 @@ msgid "<b>PowerPack, The Ultimate Linux Desktop</b>"
 msgstr "<b>PowerPack, O Último Linux Desktop</b>"
 
 #: share/advertising/07.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "You are now installing <b>Mandriva Linux PowerPack</b>."
 msgstr "Está agora a instalar o <b>Mandriva Linux PowerPack</b>."
 
 #: share/advertising/07.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PowerPack is Mandriva's <b>premier Linux desktop</b> product. PowerPack "
 "includes <b>thousands of applications</b> - everything from the most popular "
 "to the most advanced."
 msgstr ""
-"PowerPack é o <b>premier</b> Linux desktop da Mandriva. O PowerPack contém "
-"<b>milhares de aplicações</b> tudo desde o mais popular ao mais avançado."
+"PowerPack é o <b>premier Linux desktop</b> produto da Mandriva. O PowerPack "
+"contém <b>milhares de aplicações</b> tudo desde o mais popular ao mais avançado."
 
 #: share/advertising/08.pl:13
 #, c-format
@@ -16275,7 +16221,7 @@ msgid "<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"
 msgstr "<b>PowerPack+, A Solução Linux Desktop e Servidores</b>"
 
 #: share/advertising/08.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "You are now installing <b>Mandriva Linux PowerPack+</b>."
 msgstr "Está agora a instalar o <b>Mandriva Linux PowerPack+</b>."
 
@@ -16292,20 +16238,19 @@ msgstr ""
 "compreensiva selecção de classe mundial de <b>aplicações para servidores</b>."
 
 #: share/advertising/09.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Products</b>"
 msgstr "<b>Produtos Mandriva</b>"
 
 #: share/advertising/09.pl:15
-#, fuzzy, c-format
-msgid ""
-"<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
+#, c-format
+msgid "<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
 msgstr ""
-"<b>Mandriva</b> desenvolveu uma grande variedade de produtos <b>Mandriva "
+"A <b>Mandriva</b> desenvolveu uma grande variedade de produtos <b>Mandriva "
 "Linux</b>."
 
 #: share/advertising/09.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid "The Mandriva Linux products are:"
 msgstr "Os produtos Mandriva Linux são:"
 
@@ -16325,21 +16270,21 @@ msgid "\t* <b>PowerPack+</b>, The Linux Solution for Desktops and Servers."
 msgstr "\t* <b>PowerPack+</b>, A Solução Linux para Desktops e Servidores."
 
 #: share/advertising/09.pl:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\t* <b>Mandriva Linux for x86-64</b>, The Mandriva Linux solution for making "
 "the most of your 64-bit processor."
 msgstr ""
-"\t* <b>Mandriva Linux para x86-64</b>, A solução Mandriva Linux para tirar "
+"\t* <b>Mandriva Linux para x86-64</b>, A solução Mandriva Linux para tirar o "
 "melhor partido do seu processador 64-bit."
 
 #: share/advertising/10.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Products (Nomad Products)</b>"
 msgstr "<b>Produtos Mandriva (Produtos Nomad)</b>"
 
 #: share/advertising/10.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva has developed two products that allow you to use Mandriva Linux "
 "<b>on any computer</b> and without any need to actually install it:"
@@ -16348,30 +16293,30 @@ msgstr ""
 "Linux<b>em qualquer computer</b> e sem qualquer necessidade de o instalar:"
 
 #: share/advertising/10.pl:18
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\t* <b>Move</b>, a Mandriva Linux distribution that runs entirely from a "
 "bootable CD-ROM."
 msgstr ""
-"\t* <b>Move</b>, uma distribuição Mandriva Linux que corre inteiramente deCD-"
-"Rom de arranque."
+"\t* <b>Move</b>, uma distribuição Mandriva Linux que corre inteiramente de "
+"um CD-Rom de arranque."
 
 #: share/advertising/10.pl:19
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\t* <b>GlobeTrotter</b>, a Mandriva Linux distribution pre-installed on the "
 "ultra-compact “LaCie Mobile Hard Drive”."
 msgstr ""
-"\t* <b>GlobeTrotter</b>, uma distribuição Mandriva Linux pre-instalada no "
+"\t* <b>GlobeTrotter</b>, uma distribuição Mandriva Linux pré-instalada no "
 "seu ultra-compacto “LaCie Mobile Hard Drive”."
 
 #: share/advertising/11.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Products (Professional Solutions)</b>"
 msgstr "<b>Produtos Mandriva (Soluções Profissionais)</b>"
 
 #: share/advertising/11.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Below are the Mandriva products designed to meet the <b>professional needs</"
 "b>:"
@@ -16380,22 +16325,19 @@ msgstr ""
 "<b>necessidades profissionais</b>:"
 
 #: share/advertising/11.pl:16
-#, fuzzy, c-format
-msgid ""
-"\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
-msgstr "\t* <b>Corporate Desktop</b>, O Desktop Mandriva Linux para Negócios."
+#, c-format
+msgid "\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
+msgstr "\t* <b>Corporate Desktop</b>, O Mandriva Linux Desktop para Negócios."
 
 #: share/advertising/11.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid "\t* <b>Corporate Server</b>, The Mandriva Linux Server Solution."
 msgstr "\t* <b>Corporate Server</b>, A Solução Mandriva Linux para Servidores."
 
 #: share/advertising/11.pl:18
-#, fuzzy, c-format
-msgid ""
-"\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
-msgstr ""
-"\t* <b>Multi-Network Firewall</b>, A Solução Mandriva Linux de Segurança."
+#, c-format
+msgid "\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
+msgstr "\t* <b>Multi-Network Firewall</b>, A Solução Mandriva Linux de Segurança."
 
 #: share/advertising/12.pl:13
 #, c-format
@@ -16435,13 +16377,13 @@ msgid "<b>Choose your Favorite Desktop Environment</b>"
 msgstr "<b>Escolha o seu Ambiente de Trabalho Gráfico Favorito</b>"
 
 #: share/advertising/13-a.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "With PowerPack, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
 msgstr ""
 "Com o PowerPack, irá ter a escolha do <b>ambiente de trabalho gráfico</b>. A "
-"Mandriva escolheu o <b>KDE</b> como ambiente padrão."
+"Mandriva escolheu o <b>KDE</b> como o ambiente padrão."
 
 #: share/advertising/13-a.pl:17 share/advertising/13-b.pl:17
 #, c-format
@@ -16462,13 +16404,13 @@ msgstr ""
 "b>, <b>IceWM</b>, etc.) e escolha o seu favorito."
 
 #: share/advertising/13-b.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "With PowerPack+, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
 msgstr ""
 "Com o PowerPack+ irá ter a escolher de um <b>ambiente de trabalho gráfico</"
-"b>. A Mandriva escolheu o <b>KDE</b> como ambiente padrão."
+"b>. A Mandriva escolheu o <b>KDE</b> como o ambiente padrão."
 
 #: share/advertising/14.pl:15
 #, c-format
@@ -16505,10 +16447,8 @@ msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
-msgid ""
-"Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
-msgstr ""
-"O Discovery contém <b>Kontact</b>, o novo <b>grupo de soluções</b> KDE."
+msgid "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
+msgstr "O Discovery contém <b>Kontact</b>, o novo <b>grupo de soluções</b> KDE."
 
 #: share/advertising/15.pl:17
 #, c-format
@@ -16592,7 +16532,7 @@ msgid "<b>Enjoy the Wide Range of Applications</b>"
 msgstr "<b>Aprecie o Grande Número de Aplicações Disponiveis</b>"
 
 #: share/advertising/18.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "In the Mandriva Linux menu you will find <b>easy-to-use</b> applications for "
 "<b>all of your tasks</b>:"
@@ -16603,8 +16543,7 @@ msgstr ""
 #: share/advertising/18.pl:16
 #, c-format
 msgid "\t* Create, edit and share office documents with <b>OpenOffice.org</b>."
-msgstr ""
-"\t* Crie, edite e partilhe documentos office com o <b>OpenOffice.org</b>"
+msgstr "\t* Crie, edite e partilhe documentos office com o <b>OpenOffice.org</b>"
 
 #: share/advertising/18.pl:17
 #, c-format
@@ -16646,8 +16585,7 @@ msgstr "<b>Ambientes de Programação</b>"
 
 #: share/advertising/19.pl:15 share/advertising/22.pl:17
 #, c-format
-msgid ""
-"PowerPack gives you the best tools to <b>develop</b> your own applications."
+msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
 msgstr ""
 "O PowerPack dá-lhe as melhores ferramentas para <b>desenvolver</b> as suas "
 "aplicações."
@@ -16696,10 +16634,8 @@ msgstr ""
 
 #: share/advertising/20.pl:18
 #, c-format
-msgid ""
-"\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
-msgstr ""
-"\t* <b>Vim</b>: um editor de texto avançado com mais funções que o Vi padrão."
+msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
+msgstr "\t* <b>Vim</b>: um editor de texto avançado com mais funções que o Vi padrão."
 
 #: share/advertising/21.pl:15
 #, c-format
@@ -16794,8 +16730,7 @@ msgstr "\t* Envia e recebe os seus <b>e-mails</b>."
 #: share/advertising/23.pl:17
 #, c-format
 msgid "\t* Share your <b>agendas</b> and your <b>address books</b>."
-msgstr ""
-"\t* Partilha as suas <b>agendas</b> e os seus <b>livros de endereços</b>."
+msgstr "\t* Partilha as suas <b>agendas</b> e os seus <b>livros de endereços</b>."
 
 #: share/advertising/23.pl:18
 #, c-format
@@ -16809,16 +16744,14 @@ msgstr "<b>Servidores</b>"
 
 #: share/advertising/24.pl:17
 #, c-format
-msgid ""
-"Empower your business network with <b>premier server solutions</b> including:"
+msgid "Empower your business network with <b>premier server solutions</b> including:"
 msgstr ""
 "Enriqueça a rede da sua empresa através de <b>soluções premier de servidor</"
 "b> incluindo:"
 
 #: share/advertising/24.pl:18
 #, c-format
-msgid ""
-"\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
+msgid "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
 msgstr ""
 "\t* <b>Samba</b>: Serviços de ficheiros e impressão para clientes Microsoft® "
 "Windows®."
@@ -16848,8 +16781,7 @@ msgstr ""
 
 #: share/advertising/24.pl:22
 #, c-format
-msgid ""
-"\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
+msgid "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
 msgstr ""
 "\t* <b>ProFTPD</b>: o servidor FTP altamente configurável e com licença GPL "
 "para software de servidores FTP."
@@ -16864,20 +16796,19 @@ msgstr ""
 "mail."
 
 #: share/advertising/25.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Linux Control Center</b>"
 msgstr "<b>Centro de Controlo Mandriva Linux</b>"
 
 #: share/advertising/25.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The <b>Mandriva Linux Control Center</b> is an essential collection of "
 "Mandriva Linux-specific utilities designed to simplify the configuration of "
 "your computer."
 msgstr ""
 "O <b>Centro de Controlo Mandriva Linux</b> é uma colecção essencial de  "
-"utilidades específicas do Mandriva Linux para que simplificar a configuração "
-"do seu computador."
+"utilidades específicas Mandriva Linux para simplificar a configuração do seu computador."
 
 #: share/advertising/25.pl:17
 #, c-format
@@ -16897,7 +16828,7 @@ msgid "<b>The Open Source Model</b>"
 msgstr "<b>O Modelo Open Source</b>"
 
 #: share/advertising/26.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Like all computer programming, open source software <b>requires time and "
 "people</b> for development. In order to respect the open source philosophy, "
@@ -16919,7 +16850,7 @@ msgid "<b>Online Store</b>"
 msgstr "<b>Loja Online</b>"
 
 #: share/advertising/27.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To learn more about Mandriva products and services, you can visit our <b>e-"
 "commerce platform</b>."
@@ -16947,12 +16878,12 @@ msgid "Stop by today at <b>store.mandriva.com</b>!"
 msgstr "Pare por hoje em <b>store.mandriva.com</b>!"
 
 #: share/advertising/28.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Club</b>"
 msgstr "<b>Mandriva Club</b>"
 
 #: share/advertising/28.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<b>Mandriva Club</b> is the <b>perfect companion</b> to your Mandriva Linux "
 "product.."
@@ -16961,11 +16892,10 @@ msgstr ""
 "Mandriva Linux."
 
 #: share/advertising/28.pl:19
-#, fuzzy, c-format
-msgid ""
-"Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
+#, c-format
+msgid "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
 msgstr ""
-"Tire proveito de <b>valiosos benefícios</b>, juntando-se ao Mandriva club, "
+"Tire proveito dos <b>valiosos benefícios</b>, juntando-se ao Mandriva Club, "
 "tais como:"
 
 #: share/advertising/28.pl:20
@@ -16987,12 +16917,12 @@ msgstr ""
 "ou ATI™)."
 
 #: share/advertising/28.pl:22
-#, fuzzy, c-format
+#, c-format
 msgid "\t* Participation in Mandriva Linux <b>user forums</b>."
-msgstr "\t* Participação em <b>foruns para utilizadores</b> Mandriva Linuxe."
+msgstr "\t* Participação em <b>foruns de utilizadores</b> Mandriva Linux."
 
 #: share/advertising/28.pl:23
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\t* <b>Early and privileged access</b>, before public release, to Mandriva "
 "Linux <b>ISO images</b>."
@@ -17001,12 +16931,12 @@ msgstr ""
 "<b>imagens ISO</b> Mandriva Linux."
 
 #: share/advertising/29.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Online</b>"
 msgstr "<b>Mandriva Online</b>"
 
 #: share/advertising/29.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<b>Mandriva Online</b> is a new premium service that Mandriva is proud to "
 "offer its customers!"
@@ -17015,13 +16945,13 @@ msgstr ""
 "orgulhosa de apresentar aos seus clientes!"
 
 #: share/advertising/29.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Mandriva Online provides a wide range of valuable services for <b>easily "
 "updating</b> your Mandriva Linux systems:"
 msgstr ""
-"A Mandriva Online fornece uma grande variadade de valiosos serviçõs para "
-"<b>fácilmente actuaçizar</b> os seus sistemas Mandriva Linux."
+"A Mandriva Online fornece uma grande variedade de valiosos serviços para "
+"<b>fácilmente actualizar</b> os seus sistemas Mandriva Linux."
 
 #: share/advertising/29.pl:18
 #, c-format
@@ -17045,37 +16975,35 @@ msgid "\t* Flexible <b>scheduled</b> updates."
 msgstr "\t* Actualizações flexiveis e <b>programadas</b>."
 
 #: share/advertising/29.pl:21
-#, fuzzy, c-format
-msgid ""
-"\t* Management of <b>all your Mandriva Linux systems</b> with one account."
-msgstr ""
-"\t* Gerenciamento de <b>todo o seu sistema Mandriva Linux</b> com uma conta."
+#, c-format
+msgid "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
+msgstr "\t* Gerênciamento de <b>todo o seu sistema Mandriva Linux</b> com uma conta."
 
 #: share/advertising/30.pl:13
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Mandriva Expert</b>"
 msgstr "<b>Mandriva Expert</b>"
 
 #: share/advertising/30.pl:15
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do you require <b>assistance?</b> Meet Mandriva's technical experts on "
 "<b>our technical support platform</b> www.mandrivaexpert.com."
 msgstr ""
-"Requer <b>assitência?</b> Conheça os tecnicos da Mandriva peritos no suporte "
-"tecnico da nossa plataforma</b> www.mandrivaexpert.com."
+"Deseja <b>assitência?</b> Conheça os peritos tecnicos Mandriva na "
+"<b>nossa plataforma de suporte técnico</b> www.mandrivaexpert.com."
 
 #: share/advertising/30.pl:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Thanks to the help of <b>qualified Mandriva Linux experts</b>, you will save "
 "a lot of time."
 msgstr ""
-"Obirgado pela ajuda dos <b>peritos qualificados Mandriva Linux</b>, irá "
+"Obrigado pela ajuda dos <b>peritos qualificados Mandriva Linux</b>, irá "
 "poupar muito tempo."
 
 #: share/advertising/30.pl:19
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For any question related to Mandriva Linux, you have the possibility to "
 "purchase support incidents at <b>store.mandriva.com</b>."
@@ -17168,8 +17096,7 @@ msgstr "Ferramentas de Consola"
 #: share/compssUsers.pl:60
 #, c-format
 msgid "Editors, shells, file tools, terminals"
-msgstr ""
-"Editores, Linha de Comandos (shell), ferramentas de ficheiros, terminais"
+msgstr "Editores, Linha de Comandos (shell), ferramentas de ficheiros, terminais"
 
 #: share/compssUsers.pl:65 share/compssUsers.pl:165
 #, c-format
@@ -17377,11 +17304,10 @@ msgstr "Utilidades da Rede/Monitarização"
 #: share/compssUsers.pl:192
 #, c-format
 msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
-msgstr ""
-"Ferramentas de monitorização, contagem de processos, tcpdump, nmap, ..."
+msgstr "Ferramentas de monitorização, contagem de processos, tcpdump, nmap, ..."
 
 #: share/compssUsers.pl:196
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Wizards"
 msgstr "Assistentes Mandriva"
 
@@ -17530,7 +17456,7 @@ msgstr ""
 "                 : e gs para ghostscript apenas para esta."
 
 #: standalone.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "Mandriva Linux Terminal Server Configurator\n"
@@ -17548,18 +17474,18 @@ msgid ""
 msgstr ""
 "[OPÇÕES]...\n"
 "Configurador do Servidor de Terminais Mandriva Linux\n"
-"--enable         : activa o STM\n"
-"--disable        : desactiva o STM\n"
-"--start          : inicia o STM\n"
-"--stop           : pára o STM\n"
-"--adduser        : adiciona um utilizador do sistema ao STM (requer nome do "
+"--enable         : activa o MTS\n"
+"--disable        : desactiva o MTS\n"
+"--start          : inicia o MTS\n"
+"--stop           : pára o MTS\n"
+"--adduser        : adiciona um utilizador do sistema ao MTS (requer nome do "
 "utilizador)\n"
-"--deluser        : apaga um utilizador do sistema do STM (requer nome do "
+"--deluser        : apaga um utilizador do sistema do MTS (requer nome do "
 "utilizador)\n"
-"--addclient      : adiciona uma máquina cliente ao STM (requer endereços "
-"MAC, IP, e o nome da imagem nbi)\n"
-"--delclient      : apaga uma máquina cliente do STM (requer endereços MAC, "
-"IP, e o nome da imagem nbi)"
+"--addclient      : adiciona uma máquina cliente ao MTS (requer endereços "
+"MAC, IP, e o nome de imagem nbi)\n"
+"--delclient      : apaga uma máquina cliente do MTS (requer endereços MAC, "
+"IP, e o nome de imagem nbi)"
 
 #: standalone.pm:96
 #, c-format
@@ -17569,8 +17495,7 @@ msgstr "[teclado]"
 #: standalone.pm:97
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr ""
-"[--file=meuficheiro] [--word=minhapalavra] [--explain=regexp] [--alert]"
+msgstr "[--file=meuficheiro] [--word=minhapalavra] [--explain=regexp] [--alert]"
 
 #: standalone.pm:98
 #, c-format
@@ -17601,7 +17526,7 @@ msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
 #: standalone.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTION]...\n"
 "  --no-confirmation      do not ask first confirmation question in Mandriva "
@@ -17612,10 +17537,10 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[OPÇÃO]...\n"
-"  --no-confirmation      não pede pela primeira confirmação em modo Mandriva "
+"  --no-confirmation      não pede a primeira confirmação em modo Mandriva "
 "Update\n"
 "  --no-verify-rpm        não verifica as assinaturas dos pacotes\n"
-"  --changelog-first      mostra o registo das mudanças antes da lista dos "
+"  --changelog-first      mostra o registo de mudanças antes da lista dos "
 "ficheiros na janela de descrições\n"
 "  --merge-all-rpmnew     propõe fundir todos os ficheiros .rpmnew/.rpmsave "
 "encontrados"
@@ -18373,8 +18298,7 @@ msgstr ""
 #: standalone/drakTermServ:1149
 #, c-format
 msgid "Thin clients will not work with autologin. Disable autologin?"
-msgstr ""
-"Os clientes thin não irão funcionar com o autologin. Desactivar autologin?"
+msgstr "Os clientes thin não irão funcionar com o autologin. Desactivar autologin?"
 
 #: standalone/drakTermServ:1165
 #, c-format
@@ -18540,8 +18464,7 @@ msgstr "%s não encontrado...\n"
 #: standalone/drakTermServ:1810
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
-msgstr ""
-"/etc/hosts.allow e /etc/hosts.deny já estão configurados - não alterados"
+msgstr "/etc/hosts.allow e /etc/hosts.deny já estão configurados - não alterados"
 
 #: standalone/drakTermServ:1950
 #, c-format
@@ -18817,8 +18740,7 @@ msgstr ""
 #: standalone/drakbackup:475
 #, c-format
 msgid "Valid user list changed, rewriting config file."
-msgstr ""
-"A lista dos utilizadores válidos mudou, reescreva o ficheiro de configuração."
+msgstr "A lista dos utilizadores válidos mudou, reescreva o ficheiro de configuração."
 
 #: standalone/drakbackup:477
 #, c-format
@@ -19035,8 +18957,7 @@ msgstr ""
 
 #: standalone/drakbackup:1126
 #, c-format
-msgid ""
-"Error during sending file via FTP. Please correct your FTP configuration."
+msgid "Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 "Erro ao enviar os ficheiros por FTP. Por favor corrija a sua configuração "
 "FTP."
@@ -19071,8 +18992,7 @@ msgstr ""
 #: standalone/drakbackup:1159
 #, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr ""
-"Erro ao enviar correio eletrônico. O e-mail do seu relatório não foi enviado."
+msgstr "Erro ao enviar correio eletrônico. O e-mail do seu relatório não foi enviado."
 
 #: standalone/drakbackup:1160
 #, c-format
@@ -19095,8 +19015,7 @@ msgstr ""
 
 #: standalone/drakbackup:1424
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Estas opções podem arquivar (backup) e restaurar todos os ficheiros na "
 "directoria /etc.\n"
@@ -19506,10 +19425,8 @@ msgstr "Assegure-se que o daemon cron está incluído nos seus serviços."
 
 #: standalone/drakbackup:2165
 #, c-format
-msgid ""
-"If your machine is not on all the time, you might want to install anacron."
-msgstr ""
-"Se a sua máquina não está sempre ligada, pode querer instalar o anacron."
+msgid "If your machine is not on all the time, you might want to install anacron."
+msgstr "Se a sua máquina não está sempre ligada, pode querer instalar o anacron."
 
 #: standalone/drakbackup:2166
 #, c-format
@@ -20400,12 +20317,12 @@ msgstr ""
 "Certifique-se que a sua placa de video suporta o modo escolhido."
 
 #: standalone/drakbug:41
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Bug Report Tool"
 msgstr "Ferramenta Mandriva Linux para Comunicar Erros"
 
 #: standalone/drakbug:46
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Control Center"
 msgstr "Centro de Controlo Mandriva Linux"
 
@@ -20426,7 +20343,7 @@ msgid "HardDrake"
 msgstr "HardDrake"
 
 #: standalone/drakbug:51
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Online"
 msgstr "Mandriva Online"
 
@@ -20471,7 +20388,7 @@ msgid "Configuration Wizards"
 msgstr "Assistentes de Configuração"
 
 #: standalone/drakbug:81
-#, fuzzy, c-format
+#, c-format
 msgid "Select Mandriva Tool:"
 msgstr "Seleccione a Ferramenta Mandriva:"
 
@@ -20802,8 +20719,7 @@ msgstr ""
 
 #: standalone/drakconnect:752
 #, c-format
-msgid ""
-"Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Parabéns, o interface de rede \"%s\" foi apagado com sucesso"
 
 #: standalone/drakconnect:768
@@ -20851,8 +20767,7 @@ msgstr "Conectar..."
 msgid ""
 "Warning, another Internet connection has been detected, maybe using your "
 "network"
-msgstr ""
-"Cuidado, foi detectada outra conexão Internet, talvez a usar a sua rede"
+msgstr "Cuidado, foi detectada outra conexão Internet, talvez a usar a sua rede"
 
 #: standalone/drakconnect:874
 #, c-format
@@ -20894,23 +20809,22 @@ msgid "Started on boot"
 msgstr "Iniciado no arranque"
 
 #: standalone/drakconnect:954
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This interface has not been configured yet.\n"
 "Run the \"Add an interface\" assistant from the Mandriva Linux Control Center"
 msgstr ""
 "Este interface ainda não foi configurado.\n"
-"Use o assistente \"Adicionar um interface\" a partir do Centro de Controlo "
-"Mandriva Linux"
+"Execute o assistente \"Adicionar um interface\" do Centro de Controlo Mandriva Linux"
 
 #: standalone/drakconnect:1009 standalone/net_applet:61
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
 "Não tem qualquer conexão Internet configurada.\n"
-"Execute o assistente \"%s\" a partir do Centro de Controlo Mandriva Linux"
+"Execute o assistente \"%s\" do Centro de Controlo Mandriva Linux"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
 #: standalone/drakconnect:1010 standalone/net_applet:62
@@ -20959,7 +20873,7 @@ msgid "KDM (KDE Display Manager)"
 msgstr "KDM (KDE Display Manager)"
 
 #: standalone/drakedm:36
-#, fuzzy, c-format
+#, c-format
 msgid "MdkKDM (Mandriva Linux Display Manager)"
 msgstr "MdkKDM (Mandriva Linux Display Manager)"
 
@@ -21145,8 +21059,7 @@ msgstr "pronto"
 #: standalone/drakfont:222
 #, c-format
 msgid "Could not find any font in your mounted partitions"
-msgstr ""
-"Não conseguiu encontrar nenhum tipo de letra nas suas partições montadas"
+msgstr "Não conseguiu encontrar nenhum tipo de letra nas suas partições montadas"
 
 #: standalone/drakfont:257
 #, c-format
@@ -21260,7 +21173,7 @@ msgstr "Importar"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:511
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Copyright (C) 2001-2002 by Mandriva \n"
 "\n"
@@ -21398,9 +21311,9 @@ msgid "File Selection"
 msgstr "Selecção de Ficheiros"
 
 #: standalone/drakfont:590
-#, fuzzy, c-format
+#, c-format
 msgid "Fonts"
-msgstr "Lista dos Tipos de Letra"
+msgstr "Tipos de Letra"
 
 #: standalone/drakfont:653
 #, c-format
@@ -21815,18 +21728,18 @@ msgstr ""
 "Transparente Proxy Cache (SQUID)."
 
 #: standalone/drakhelp:17
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " drakhelp 0.1\n"
-"Copyright (C) 2003-2005 Mandriva.\n"
+"Copyright (C) 2003-2004 Mandriva.\n"
 "This is free software and may be redistributed under the terms of the GNU "
 "GPL.\n"
 "\n"
 "Usage: \n"
 msgstr ""
 " drakhelp 0.1\n"
-"Copyright © 2003-2005 Mandriva.\n"
-"Iste é software livre e pode ser redistribuido sob a licença GNU GPL.\n"
+"Copyright © 2003-2004 Mandriva.\n"
+"Este é software livre e pode ser redistribuido sob a licença GNU GPL.\n"
 "\n"
 "Uso: \n"
 
@@ -21837,8 +21750,7 @@ msgstr " --help                - mostra esta ajuda   \n"
 
 #: standalone/drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - carrega a página html de ajuda que se referem ao "
 "id_label\n"
@@ -21853,7 +21765,7 @@ msgstr ""
 "bem-vindo )\n"
 
 #: standalone/drakhelp:36
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Help Center"
 msgstr "Centro de Ajuda Mandriva Linux"
 
@@ -21907,9 +21819,9 @@ msgid "Permissions"
 msgstr "Permissões"
 
 #: standalone/drakperm:58
-#, fuzzy, c-format
+#, c-format
 msgid "Add a new rule"
-msgstr "Adicionar uma regra"
+msgstr "Adicionar uma nova regra"
 
 #: standalone/drakperm:65 standalone/drakperm:100 standalone/drakperm:125
 #, c-format
@@ -22137,8 +22049,7 @@ msgstr ""
 #: standalone/drakpxe:143
 #, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Por favor escolha que adaptador de rede será usado para o servidor dhcp."
+msgstr "Por favor escolha que adaptador de rede será usado para o servidor dhcp."
 
 #: standalone/drakpxe:144
 #, c-format
@@ -22196,8 +22107,7 @@ msgstr "Nenhuma imagem encontrada"
 
 #: standalone/drakpxe:197
 #, c-format
-msgid ""
-"No CD or DVD image found, please copy the installation program and rpm files."
+msgid "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 "Nenhuma imagem de CD ou DVD encontrada, por favor copie o programa de "
 "instalação e os ficheiros rpm."
@@ -22241,29 +22151,29 @@ msgid "Key"
 msgstr "Chave"
 
 #: standalone/drakroam:157
-#, fuzzy, c-format
+#, c-format
 msgid "Network:"
-msgstr "Rede"
+msgstr "Rede:"
 
 #: standalone/drakroam:158
-#, fuzzy, c-format
+#, c-format
 msgid "IP:"
-msgstr "IP: %s"
+msgstr "IP:"
 
 #: standalone/drakroam:160
-#, fuzzy, c-format
+#, c-format
 msgid "Mode:"
-msgstr "Modo"
+msgstr "Modo:"
 
 #: standalone/drakroam:161
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption:"
-msgstr "Encriptação"
+msgstr "Encriptação:"
 
 #: standalone/drakroam:162
-#, fuzzy, c-format
+#, c-format
 msgid "Signal:"
-msgstr "Sinal: %s"
+msgstr "Sinal:"
 
 #: standalone/drakroam:176
 #, c-format
@@ -24574,10 +24484,8 @@ msgstr "a lista dos drivers alternativos para esta placa de som"
 
 #: standalone/harddrake2:28
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
-"este é o bus físico no qual o disposito está conectado (ex: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "este é o bus físico no qual o disposito está conectado (ex: PCI, USB, ...)"
 
 #: standalone/harddrake2:30 standalone/harddrake2:145
 #, c-format
@@ -25105,8 +25013,7 @@ msgstr "Ficheiro de dispositivo"
 
 #: standalone/harddrake2:114
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "o ficheiro do dispositivo usado para comunicar com o driver do kernel para o "
 "rato"
@@ -25326,8 +25233,7 @@ msgstr "Misc"
 
 #: standalone/harddrake2:344
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Clique num dispositivo na árvore à esquerda para mostrar a sua informação "
 "aqui."
@@ -25393,7 +25299,7 @@ msgid "The change is done, but to be effective you must logout"
 msgstr "A mudança está feita, mas para ser efectiva é preciso sair/logout"
 
 #: standalone/logdrake:50
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Tools Logs"
 msgstr "Registos das Ferramentas Mandriva Linux"
 
@@ -25906,12 +25812,12 @@ msgid "Connection complete."
 msgstr "Conexão completa"
 
 #: standalone/net_monitor:236
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandriva Linux Control Center."
 msgstr ""
-"A conexão falhou.\n"
+"Conexão falhada.\n"
 "Verifique a sua configuração no Centro de Controlo Mandriva Linux."
 
 #: standalone/net_monitor:341
@@ -25944,8 +25850,7 @@ msgstr "Medidas locais"
 msgid ""
 "Warning, another internet connection has been detected, maybe using your "
 "network"
-msgstr ""
-"Aviso, outra conexão à Internet foi detectada, talvez usando a sua rede"
+msgstr "Aviso, outra conexão à Internet foi detectada, talvez usando a sua rede"
 
 #: standalone/net_monitor:478
 #, c-format
@@ -26122,8 +26027,7 @@ msgstr "Abortar o Scannerdrake."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Não pude instalar os pacotes necessários para configurar um scanner com o "
 "Scannerdrake."
@@ -26161,8 +26065,7 @@ msgstr "%s encontrado em %s, configurar automaticamente?"
 #: standalone/scannerdrake:116
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr ""
-"%s não está na lista na base de dados do scanner, configurar manualmente?"
+msgstr "%s não está na lista na base de dados do scanner, configurar manualmente?"
 
 #: standalone/scannerdrake:131
 #, c-format
@@ -26549,8 +26452,7 @@ msgstr "Nome/Endereço IP do endereço:"
 #: standalone/scannerdrake:705 standalone/scannerdrake:855
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Escolha o endereço onde os digitalizadores locais devem estar disponíveis:"
+msgstr "Escolha o endereço onde os digitalizadores locais devem estar disponíveis:"
 
 #: standalone/scannerdrake:716 standalone/scannerdrake:866
 #, c-format
@@ -26772,32 +26674,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Instalação falhada"
 
-#~ msgid "No floppy drive available"
-#~ msgstr "Nenhum drive de disquete disponível"
-
-#~ msgid "No network card"
-#~ msgstr "Nenhuma placa de rede"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Usar o driver já instalado (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Usar Acesso Protegido Wi-Fi (WPA)"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Não escolheu qualquer tipo de letra"
-
-#~ msgid "Save and close"
-#~ msgstr "Gravar e fechar"
-
-#~ msgid "Network: %s"
-#~ msgstr "Rede: %s"
-
-#~ msgid "Mode: %s"
-#~ msgstr "Modo: %s"
-
-#~ msgid "Encryption: %s"
-#~ msgstr "Encriptação: %s"
-
-#~ msgid "Gateway: %s"
-#~ msgstr "Gateway: %s"
