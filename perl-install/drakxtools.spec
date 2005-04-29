@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.6mdk
+Release: 0.7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr 29 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.7mdk
+- drakconnect (blino):
+  o don't write /etc/ppp/options anymore, adjust options in peer files
+  o display VPI/VCI values in decimal
+  o configure pppoe connections in a ppp peer file
+- drakroam (blino):
+  o do not write blank ESSID
+  o exit and warn when no wireless interface is found (#15244)
+- drakups: do not detect IR devices as UPSes (#15495)
+- XFdrake: if one prefer using "Modes" instead of "Virtual", keep it
+  as is (pixel)
+
 * Mon Apr 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.3-0.6mdk
 - drakconnect (blino):
   o fix WPA key (#15621)
