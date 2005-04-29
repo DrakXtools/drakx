@@ -109,7 +109,7 @@ if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_v
     $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
 } else {
     $no_bootsplash = 1; #- we can not select any theme we're not in Framebuffer mode :-/
-    $cur_res = '800x600'
+    $cur_res = '800x600';
 }
 
 $no_bootsplash = 0 if $::testing;
@@ -140,7 +140,7 @@ foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::ComboBox->new_text, 10, -1);
 }
 
-$combo{boot} = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);;
+$combo{boot} = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
@@ -167,8 +167,8 @@ gtkadd($window,
                                                      N("Do you want to configure it now?") ])) {
                                                            enable_framebuffer();
                                                            #- it would be nice to get available themes for new cur_res here
-                                                       };
-                                                       $boot_warn = 0
+                                                       }
+                                                       $boot_warn = 0;
 						    }
                                                    $splash_box->set_sensitive($splash_mode);
                                                }),
@@ -315,7 +315,7 @@ Be sure your video card supports the mode you choose."),
                          format => \&Xconfig::resolution_and_depth::to_string
                        },
                        map {
-                           { text => $_->{label}, val => \$entries{$_->{label}}, type => 'bool' }
+                           { text => $_->{label}, val => \$entries{$_->{label}}, type => 'bool' };
                        } grep { $_->{label} !~ /failsafe|floppy|memtest/ } @{$bootloader->{entries}}
                       ]);
         if ($vga) {
