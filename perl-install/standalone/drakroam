@@ -29,13 +29,22 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
 use run_program;
-
+use detect_devices;
 use Glib qw(TRUE FALSE);
 use ugtk2 qw(:create :helpers :wrappers);
 use Gtk2::SimpleList;
 use Socket;
 
 require_root_capability();
+
+unless (any { detect_devices::is_wireless_interface($_) } detect_devices::getNet()) {
+    ugtk2::err_dialog(N("Error"), N("You do not have any wireless interface.
+Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
+    ugtk2::exit(0);
+}
+
+
+
 
 # global settings
 my $route = '/sbin/route -n';
