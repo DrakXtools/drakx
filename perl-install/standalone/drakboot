@@ -135,12 +135,7 @@ foreach (sort(all('.'))) {
 }
 push @boot_thms, $themes{default} unless member($themes{default}, @boot_thms);
 
-my %combo = ('thms' => '', 'lilo' => '');
-foreach (keys(%combo)) {
-    $combo{$_} = gtkset_size_request(Gtk2::ComboBox->new_text, 10, -1);
-}
-
-$combo{boot} = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);
+my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
@@ -150,7 +145,7 @@ my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clic
 
 #- ******** action to take on changing combos values
 
-$combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
+$theme_combo->entry->signal_connect(changed => sub { change_image($boot_pic, $theme_combo->entry->get_text) });
 
 my ($x_box, $splash_box);
 my $boot_warn = 1;
@@ -175,7 +170,7 @@ gtkadd($window,
                               1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
                                        gtkpack__(Gtk2::VBox->new(0, 5),
                                                  N("Theme"),
-                                                 $combo{boot},
+                                                 $theme_combo,
 						 #gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
 						 gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")), $keep_logo), clicked => sub { invbool(\$keep_logo) })
                                                 ),
@@ -209,7 +204,7 @@ gtkadd($window,
                                      ok_clicked => sub {
                                          Xconfig::various::runlevel($x_mode ? 5 : 3);
                                          if ($splash_working) {
-                                             update_bootsplash($combo{boot}->entry->get_text, $splash_mode, $keep_logo);
+                                             update_bootsplash($theme_combo->entry->get_text, $splash_mode, $keep_logo);
                                          } else {
                                              updateAutologin();
                                          }
