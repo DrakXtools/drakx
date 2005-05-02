@@ -1207,7 +1207,7 @@ sub format_part_info {
     $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
     $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || isEmpty($part)) && !isSpecial($part) && !isLVM($hd);
-    $info .= N("Number of logical extents: %d", $part->{size} / $hd->cylinder_size) if $::expert && isLVM($hd);
+    $info .= N("Number of logical extents: %d\n", $part->{size} / $hd->cylinder_size) if $::expert && isLVM($hd);
     $info .= N("Formatted\n") if $part->{isFormatted};
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
