@@ -469,8 +469,7 @@ sub interactive_mode() {
     $interactive = 1;
     $window1 = ugtk2->new('drakfont');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
-    if ($::isEmbedded) {
-    } else {
+    if (!$::isEmbedded) {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("DrakFont"));
     }

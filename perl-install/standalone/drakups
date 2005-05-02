@@ -200,7 +200,7 @@ sub edit_row {
     # create new item if needed (that is when adding a new one) at end of list
     $iter ||= $model->append;
     my $dialog = Gtk2::Dialog->new;
-    $dialog->set_transient_for($w->{real_window}) unless $::isEmbedded;
+    $dialog->set_transient_for($w->{real_window});
     $dialog->set_modal(1);
 
     gtkpack_($dialog->vbox,

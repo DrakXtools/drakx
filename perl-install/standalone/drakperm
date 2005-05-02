@@ -236,7 +236,7 @@ sub row_setting_dialog {
     my ($title, $o_iter) = @_;
     
     my $dlg = Gtk2::Dialog->new;
-    $dlg->set_transient_for($w->{real_window}) unless $::isEmbedded;
+    $dlg->set_transient_for($w->{real_window});
     $dlg->set_title($title);
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);

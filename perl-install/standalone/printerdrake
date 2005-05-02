@@ -540,7 +540,7 @@ sub CreateTree {
 sub NewDialog {
     my ($title, $o_no_button) = @_;
     my $dialog = gtkset_border_width(Gtk2::Dialog->new, 10);
-    $dialog->set_transient_for($us->{wnd}{real_window}) if !$isEmbedded;
+    $dialog->set_transient_for($us->{wnd}{real_window});
     $dialog->set_position('center-on-parent');
     $dialog->set_title($title);
     $dialog->action_area->pack_start(gtkadd(Gtk2::HButtonBox->new,

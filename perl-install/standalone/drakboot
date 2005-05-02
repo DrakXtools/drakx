@@ -64,7 +64,7 @@ sub run_boot_window {
 
     my $w = ugtk2->new($title);
     my $window = $w->{window};
-    $::main_window = $w->{real_window} if !$::isEmbedded;
+    $::main_window = $w->{real_window};
 
     $window->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {

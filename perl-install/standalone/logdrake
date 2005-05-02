@@ -216,13 +216,14 @@ sub parse_file {
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
   unless ($::isEmbedded && $isExplain) {
+      local $::main_window = $my_win->{real_window};
       gtkadd($win_pb = gtkset_modal(Gtk2::Window->new('toplevel'), 1),
              gtkpack(Gtk2::VBox->new(2,0),
                      Gtk2::Label->new(" " . N("please wait, parsing file: %s", $descr) . " "),
                      $pbar = Gtk2::ProgressBar->new
                      )
              );
-      $win_pb->set_transient_for($my_win->{real_window}) unless $::isEmbedded;
+      $win_pb->set_transient_for($my_win->{real_window});
       $win_pb->set_position('center');
       $win_pb->realize;
       $win_pb->show_all;

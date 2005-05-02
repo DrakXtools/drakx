@@ -115,7 +115,7 @@ my $remove_but;
 
 sub pref_dialog() {
     my $dialog = gtkset_modal(gtkset_size_request(_create_dialog(N("Advanced preferences")), 600, -1), 1);
-    $dialog->set_transient_for($window->{real_window}) unless $::isEmbedded;
+    $dialog->set_transient_for($window->{real_window});
     
 
     # Create root tree:
