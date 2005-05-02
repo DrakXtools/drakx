@@ -286,15 +286,6 @@ our @tree =
 
 
      {
-      class => "ATA_STORAGE",
-      string => N("(E)IDE/ATA controllers"),
-      icon => "ide_hd.png",
-      configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
-      checked_on_boot => 1,
-     },
-
-     {
       class => "SATA_STORAGE",
       string => N("SATA controllers"),
       icon => "ide_hd.png",
@@ -317,6 +308,15 @@ our @tree =
           my @modules = list_modules::category2modules('disk/hardware_raid');
           f(grep { member($_->{driver}, @modules) } @devices);
       },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "ATA_STORAGE",
+      string => N("(E)IDE/ATA controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
      },
 
