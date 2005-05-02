@@ -138,14 +138,15 @@ sub splash_choice() {
                                                              }
                                                              $splash_box->set_sensitive($theme->{enabled});
                                                          }),
-                                    1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
-                                               gtkpack__(Gtk2::VBox->new(0, 5),
-                                                         N("Theme"),
+                                    0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
+                                               gtkadd(gtkcreate_frame(N("Theme")),
+                                                    gtkpack__(Gtk2::VBox->new(0, 5),
                                                          $theme_combo,
                                                          gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
                                                                                          $theme->{keep_logo}),
                                                                            clicked => sub { invbool(\$theme->{keep_logo}) })
                                                         ),
+                                               ),
                                                Gtk2::VSeparator->new,
                                                gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic))
                                    ),
