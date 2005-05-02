@@ -100,8 +100,9 @@ sub get_eth_cards {
             if ($drv && $drv =~ s!.*/!!) {
                 $a = $drv unless $detected_through_ethtool;
                 my %l;
-                my %sysfs_fields = (id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor");
-                $l{$_} = hex(chomp_(cat_("/sys/class/net/$interface/device/" . $sysfs_fields{$_}))) foreach keys %sysfs_fields;
+                my $dev_path = "/sys/class/net/$interface/device";
+                my $sysfs_fields = detect_devices::get_sysfs_device_id_map($dev_path);
+                $l{$_} = hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) foreach keys %$sysfs_fields;
                 my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
                 $description = $cards[0]{description} if @cards == 1;
             }

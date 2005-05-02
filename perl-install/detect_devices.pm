@@ -579,6 +579,14 @@ sub is_wireless_interface {
     c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
 }
 
+sub get_sysfs_device_id_map {
+    my ($dev_path) = @_;
+    my $is_usb = -f "$dev_path/bInterfaceNumber";
+    $is_usb ?
+      { id => '../idProduct', vendor => '../idVendor' } :
+      { id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor" };
+}
+
 sub getNet() {
     grep { is_lan_interface($_) }
       uniq(
