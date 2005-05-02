@@ -609,9 +609,7 @@ N("        - Create etherboot floppies/CDs:
         		
         	A basic example of creating a boot floppy for a 3Com 3c509 manually:
         		
-        	cat /usr/lib/etherboot/floppyload.bin \\
-        		/usr/share/etherboot/start16.bin \\			
-        		/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0") . "\n\n", "close");
+        	cat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0") . "\n\n", "close");
 }
 
 sub make_boot() {
@@ -619,7 +617,7 @@ sub make_boot() {
 	my $boot_box;
 	my $rom_path = "/usr/share/etherboot";
 	#- does not return list sorted
-	my @nics = sort(all("/usr/share/etherboot/zimg"));
+	my @nics = sort(all("/usr/share/etherboot/zdsk"));
 	my $list_nics = Gtk2::List->new;
 	my $nic;
 	
@@ -1462,7 +1460,7 @@ sub write_eb_image {
 		if (-e "/dev/fd0") {
 			my $result = $in->ask_okcancel('', N("Please insert floppy disk:"));
 			return if !($result);
-			$result = run_program::run("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /dev/fd0") if $result;
+			$result = run_program::run("cat $rom_path/zdsk/$nic > /dev/fd0") if $result;
 			if ($result) {
 				$in->ask_warn(N("Error"), N("Could not access the floppy!"));
 			} else {
@@ -1472,8 +1470,9 @@ sub write_eb_image {
 			$in->ask_warn(N("Error"), N("No floppy drive available!"));
 		}
 	} elsif ($type eq 'pxe') {
-		run_program::run("cat $rom_path/pxeprefix.bin $rom_path/start16.bin $rom_path/zimg/$nic > $tftpboot/$nic.pxe");
-		if (-e "$tftpboot/$nic.pxe") {
+		$nic =~ s/.zdsk/.zpxe/;
+		run_program::run("cp $rom_path/zpxe/$nic $tftpboot");
+		if (-e "$tftpboot/$nic") {
 			$in->ask_warn(N("Information"), N("PXE image is %s/%s", $tftpboot, $nic));
 		} else { 
 			$in->ask_warn(N("Error"), N("Error writing %s/%s", $tftpboot, $nic));
@@ -1481,7 +1480,7 @@ sub write_eb_image {
 	} else {
 		my $tmp = "/root/tmp";
 		mkdir_p("$tmp/eb");
-		run_program::run("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > $tmp/eb/eb.img");
+		run_program::run("cat $rom_path/zdsk/$nic > $tmp/eb/eb.img");
 		run_program::run("dd if=/dev/zero of=$tmp/eb/eb.img bs=512 seek=72 count=2808");
 		run_program::run("mkisofs -b eb.img -o $tmp/$nic.iso $tmp/eb");
 		rm_rf("$tmp/eb");
