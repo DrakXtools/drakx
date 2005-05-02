@@ -443,7 +443,7 @@ sub part_possible_actions {
         N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '$::expert',
-        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && ($part->{fs_type} eq "xfs" || $part->{fs_type} eq "reiserfs")',
+        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
@@ -461,6 +461,7 @@ sub part_possible_actions {
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
         isPrimary => 'isPrimary($part, $hd)',
+	LVM_resizable => '$part->{fs_type} eq "reiserfs" || (isMounted ? $part->{fs_type} eq "xfs" : $part->{fs_type} eq "ext3")',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
     if (isEmpty($part)) {
