@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon May  2 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.8mdk
+- ensure most sub dialogs reuse the icon of their main window
+- drakboot: improve layout
+
 * Fri Apr 29 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.7mdk
 - drakconnect (blino):
   o don't write /etc/ppp/options anymore, adjust options in peer files
