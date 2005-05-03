@@ -7,7 +7,7 @@ listlength(@ARGV) == 2 or die "usage: $0 /path/to/etc/pcmcia/config /path/to/mod
 my ($pcmcia_config, $modules_dep) = @ARGV;
 
 
-my @ignore_modules_in_deps = qw(pcmcia_core ds);
+my @ignore_modules_in_deps = qw(pcmcia_core pcmcia ds);
 
 my @conf_contents = cat_($pcmcia_config);
 die "uhm, problem, <$pcmcia_config> seems short in lines\n" if listlength(@conf_contents) < 10;
