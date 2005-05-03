@@ -91,8 +91,8 @@ my $std_device;
 my @tape_devices;
 my $in;
 
-# config. FILES -> Default PATH  & Global variables.
-my @user_list = $ENV{USER};
+# config. FILES -> Default PATH  & Global variables. 
+my @user_list;
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
 my $cfg_file = $cfg_dir . "drakbackup.conf";
 my $log_file = "/var/log/drakbackup";
@@ -127,6 +127,7 @@ if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	standalone::explanations("Running as $ENV{USER}...");
 	#- does not get defined when run from cron
 	$user_home = "/home/$ENV{USER}" if $user_home eq '';
+	@user_list = $ENV{USER};
 	$cfg_dir = "$user_home/.drakbackup/";
 	$conf{PATH_TO_SAVE} = $cfg_dir . "backups";
 	$log_file = $cfg_dir . "drakbackup.log";
@@ -156,6 +157,7 @@ sub setup_tooltips() {
 		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
 		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
 		'send_mail_to' => N("This should be a local user or email address that you want the backup results sent to. You will need to define a functioning mail server."),
+		'send_mail_from' => N("This should be the return address that you want the backup results sent from. Default is drakbakup."),
 		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
 		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
 		'dir_or_module' => N("Some protocols, like rsync, may be configured at the server end.  Rather than using a directory path, you would use the 'module' name for the service path."),
@@ -451,6 +453,8 @@ sub read_conf_file() {
 	$conf{MAX_SPACE} = 1000.0 if !exists($conf{MAX_SPACE});
 	$conf{USE_HD} = 1 if !exists($conf{USE_HD});
 	$conf{OPTION_COMP} = "tar.gz" if !exists($conf{OPTION_COMP});
+	$conf{FROM_MAIL} = "drakbackup" if !exists($conf{FROM_MAIL});
+	$conf{DEL_OLD} = 0 if !exists($conf{DEL_OLD});
 	# deal with users that may have been deleted from the system
 	check_valid_users() if $cfg_file_exist;
 	$use_hd = !($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET});
@@ -918,7 +922,7 @@ sub send_mail {
     my $datem = `date`;	
     use Mail::Mailer;
     my $mailer = Mail::Mailer->new('smtp', Server => $conf{SMTP_SERVER});
-    $mailer->open({ From    => 'drakbackup',
+    $mailer->open({ From    => $conf{FROM_MAIL},
                     To      => $conf{USER_MAIL},
                     Subject => "DrakBackup report on $datem",
                   })
@@ -959,9 +963,10 @@ sub build_backup_files() {
 	$tar_cmd .= "z" if $conf{OPTION_COMP} eq "tar.gz";
 	$tar_cmd .= " ";
 
+	clean_old_backups();
 	my $used_space = check_storage_quota($conf{PATH_TO_SAVE});
 	if ($used_space) {
-		my $msg = N("Backup quota exceeded!\n%d MB used vs %d MB allocated.", $used_space, $conf{MAX_SPACE});
+		my $msg = N("Backup destination quota exceeded!\n%d MB used vs %d MB allocated.", $used_space, $conf{MAX_SPACE});
 		show_warning("f", $msg);
 		$interactive and gtkset_mousecursor_normal();
 		$results .= $msg;
@@ -1240,6 +1245,14 @@ sub get_more_recent {
 sub clean_dest {
 	my ($wildcard) = @_;
 	system("cd $conf{PATH_TO_SAVE} && rm -f backup*$wildcard*");
+}
+
+sub clean_old_backups() {
+	if ($conf{DEL_OLD} && $conf{USE_HD}) {
+		foreach ('*_diff_*', '*_incr_*') {
+			system("find $conf{PATH_TO_SAVE} -name $_ -mtime +$conf{DEL_OLD} | xargs rm -f");
+		}
+	}
 }
 
 sub do_find {
@@ -1962,8 +1975,10 @@ sub advanced_where_hd {
 		$conf{MAX_SPACE} = int(0.8 * get_free_space($conf{PATH_TO_SAVE})) if -d $conf{PATH_TO_SAVE};
     }
 	my $adj = Gtk2::Adjustment->new($conf{MAX_SPACE}, 0.0, $conf{MAX_SPACE}, 10.0, 5.0, 0.0);
+	my $adj2 = Gtk2::Adjustment->new($conf{DEL_OLD}, 0.0, 300.0, 1.0, 10.0, 0.0);
     my $spinner;
-	
+	my $spinner2;
+
     my $size_group = Gtk2::SizeGroup->new('horizontal');
     my $label_size_group = Gtk2::SizeGroup->new('horizontal');
     gtkpack($advanced_box,
@@ -1975,22 +1990,26 @@ sub advanced_where_hd {
 				1, gtkset_sensitive($save_path_entry = Gtk2::Entry->new, $conf{USE_HD}),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
 					filedialog_generic(N("Directory to save to"), \$save_path_entry); 
-				}), $conf{USE_HD}),
-                               ),
+				}), $conf{USE_HD})),
 			),
 			0, Gtk2::VBox->new(0, 6),
 			0, gtkpack_(Gtk2::HBox->new(0,10),
-				0, gtkset_sensitive(my $l2 = Gtk2::Label->new(N("Maximum size\n allowed for Drakbackup (MB)")),  $conf{USE_HD}),
+				0, gtkset_sensitive(my $l2 = Gtk2::Label->new(N("Maximum disk space\n allocated for backups (MB)")),  $conf{USE_HD}),
 				1, gtkset_sensitive($spinner = Gtk2::SpinButton->new($adj, 0, 0), $conf{USE_HD}),
 			),
+			0, gtkpack_(Gtk2::HBox->new(0,10),
+				0, gtkset_sensitive(my $l3 = Gtk2::Label->new(N("Delete incremental or differential\n backups older than N days\n (0 is keep all backups) to save space")),  $conf{USE_HD}),
+				1, gtkset_sensitive($spinner2 = Gtk2::SpinButton->new($adj2, 0, 0), $conf{USE_HD}),
+			),			
 		),
 	);
-    $size_group->add_widget($_) foreach $select_box, $spinner;
-    $label_size_group->add_widget($_) foreach $l1, $l2;
+    $size_group->add_widget($_) foreach $select_box, $spinner, $spinner2;
+    $label_size_group->add_widget($_) foreach $l1, $l2, $l3;
 
     $button->add(gtkpack(Gtk2::HBox->new(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($conf{PATH_TO_SAVE});
 	$spinner->signal_connect('changed', sub { $conf{MAX_SPACE} = $spinner->get_text });
+	$spinner2->signal_connect('changed', sub { $conf{DEL_OLD} = $spinner2->get_text });
     $save_path_entry->signal_connect('changed', sub { 
 		$conf{PATH_TO_SAVE} = $save_path_entry->get_text;
 		if (-d $conf{PATH_TO_SAVE}) { 
@@ -2221,6 +2240,12 @@ sub advanced_options() {
 				0, gtkset_sensitive(my $mail_entry = Gtk2::Entry->new, $conf{SEND_MAIL}),
 			),
 			0, gtkpack_(Gtk2::HBox->new(0,10),
+				1, Gtk2::HBox->new(0,10),
+				0, N("Return address for sent mail:"),
+				1, Gtk2::HBox->new(0,10),
+				0, gtkset_sensitive(my $from_entry = Gtk2::Entry->new, $conf{SEND_MAIL}),
+			),
+			0, gtkpack_(Gtk2::HBox->new(0,10),
 				1, Gtk2::HBox->new(0,10),			
 				0, N("SMTP server for mail:"),
 				1, Gtk2::HBox->new(0,10),
@@ -2234,11 +2259,14 @@ sub advanced_options() {
     check_list([$check_mail, \$conf{SEND_MAIL}], [$check_del_hd_files, \$conf{DEL_HD_FILES}], [$check_backupignore, \$conf{BACKUPIGNORE}]);
     $mail_entry->set_text($conf{USER_MAIL});
     $mail_entry->signal_connect('changed', sub { $conf{USER_MAIL} = $mail_entry->get_text });
+    $from_entry->set_text($conf{FROM_MAIL});
+    $from_entry->signal_connect('changed', sub { $conf{FROM_MAIL} = $from_entry->get_text });    
     $smtp_entry->set_text($conf{SMTP_SERVER});
     $smtp_entry->signal_connect('changed', sub { $conf{SMTP_SERVER} = $smtp_entry->get_text });	
 	$entry_comp_mode->entry->signal_connect('changed', sub { $conf{OPTION_COMP} = $entry_comp_mode->entry->get_text });
 	set_help_tip($check_backupignore, 'backupignore');
 	set_help_tip($check_mail, 'send_mail_to');
+	set_help_tip($from_entry, 'send_mail_from');
 	set_help_tip($check_del_hd_files, 'delete_files');
     fonction_env(\$box_options, \&advanced_options, \&advanced_box);
     $up_box->show_all;
@@ -2507,6 +2535,7 @@ sub system_state() {
         $conf{OTHER_FILES} and $system_state .= "\t\t$_\n" foreach @other_files;
         $conf{USE_HD} and $system_state .= N("\n- Save on Hard drive on path: %s\n", $conf{PATH_TO_SAVE});
 		$conf{USE_HD} and $system_state .= N("\tLimit disk usage to %s MB\n", $conf{MAX_SPACE});
+		$conf{DEL_OLD} and $system_state .= N("\tDelete backups older than %s day(s)\n", $conf{DEL_OLD});
 
 		if ($conf{DEL_HD_FILES} && ($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET}) && $conf{DAEMON_MEDIA} ne 'hd')  {
 			$system_state .= N("\n- Delete hard drive tar files after backup.\n");	
@@ -2534,6 +2563,7 @@ sub system_state() {
 
 		$system_state .= N("\tUse .backupignore files\n") if $conf{BACKUPIGNORE};
 		$system_state .= N("\tSend mail to %s\n", $conf{USER_MAIL}) if $conf{SEND_MAIL};
+		$system_state .= N("\tSend mail from %s\n", $conf{FROM_MAIL}) if $conf{SEND_MAIL};
 		$system_state .= N("\tUsing SMTP server %s\n", $conf{SMTP_SERVER}) if $conf{SEND_MAIL};
 		
 		$conf{DAEMON_MEDIA} and $system_state .= N("\n- Daemon, %s via:\n", $conf{DAEMON_TIME_SPACE});
