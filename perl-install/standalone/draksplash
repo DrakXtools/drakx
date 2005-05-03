@@ -7,10 +7,6 @@ use common;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use interactive;
 
-#- convenience variables for true and false
-my $true = 1;
-
-
 my $in = 'interactive'->vnew('su');
 
 my $window = ugtk2->new('DrakSplash');
@@ -158,7 +154,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$boot_conf_frame{frame} = Gtk2::Frame->new(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, giv_exist_thm()) && thm_in_this_res() && get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res}));
+	member($theme{name}, giv_exist_thm()) && thm_in_this_res(0) && get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res}));
       });
 #- go to bootsplash configuration step 2
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
@@ -216,17 +212,17 @@ sub CloseAppWindow() {
 sub write_boot_thm {
 	my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
   	&set_thm_values;
-  	my $logo = $boot_conf_frame{widgets}{check}{logo}->get_active ? 'yes' : 'no';
-	my $quiet = $boot_conf_frame{widgets}{check}{quiet}->get_active ? 'yes' : 'no';
-	my $globalconf_file = $boot_conf_path.$theme{name}.'/global.config';
+  	my $logo = bool2yesno($boot_conf_frame{widgets}{check}{logo}->get_active);
+	my $quiet = bool2yesno($boot_conf_frame{widgets}{check}{quiet}->get_active);
+	my $globalconf_file = $boot_conf_path . $theme{name} . '/global.config';
 	my $cfg_file = $boot_conf_path . $theme{name} . "$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
 	#- verify all dir exists or create them
-     foreach my $dir ($boot_conf_path . $theme{name} . $cfg_path, $thm_path.$theme{name} . '/images/') {
+	foreach my $dir ($boot_conf_path . $theme{name} . $cfg_path, $thm_path . $theme{name} . '/images/') {
          mkdir_p($dir) if !-d $dir;
      }
 	#- copy image to dest by convert
-	system('convert -scale '.$theme{res}{res} . ' ' . $img_file . ' ' . $thm_path.$theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
-	system('/usr/share/bootsplash/scripts/rewritejpeg '.$thm_path.$theme{name}.'/images/bootsplash-'.$theme{res}{res}.'.jpg');
+	system('convert -scale ' . $theme{res}{res} . ' ' . $img_file . ' ' . $thm_path . $theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
+	system('/usr/share/bootsplash/scripts/rewritejpeg ' . $thm_path . $theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
 	#- write conf files
 	output($cfg_file, qq(# This is the configuration file for the $theme{res}{res} bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
@@ -275,7 +271,7 @@ sub get_this_thm_res_conf() {
 	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
 	  and thm_in_this_res(1) 
 	  and read_boot_conf();
-     my $file = $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg";
+     my $file = $thm_path . $theme{name} . "/images/bootsplash-" . $theme{res}{res} . ".jpg";
      $img_file = $file if -f $file;
 	  return 1;
 }
@@ -301,11 +297,11 @@ sub set_scale_values() {
 #- return=> (bool)
 sub thm_in_this_res {
   my ($check_res) = @_;
-  (-f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg") ? return 1 : $check_res == 1 ? return which_res_exist() : return 0;
+  (-f $thm_path . $theme{name} . "/images/bootsplash-" . $theme{res}{res} . ".jpg") ? return 1 : $check_res == 1 ? return which_res_exist() : return 0;
 }
 
 sub which_res_exist() {
-	chdir($thm_path.$theme{name}."/images/");
+	chdir($thm_path . $theme{name} . "/images/");
 	my $is_ok = 0;
 	foreach (@{$first{widget}{combo}{res}}) {
          next if !-f "bootsplash-$_.jpg";
@@ -350,8 +346,8 @@ sub tool_tip {
 	foreach (keys %{$ref->{widget}}) {
 		$_ eq 'tooltip' and next;
 	  	if ($ref->{widget}{$_}{$name}) {
-		  ! $adj{$name.'_tip'} and $adj{$name.'_tip'} = Gtk2::Tooltips->new;
-		  $adj{$name.'_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
+		  ! $adj{$name . '_tip'} and $adj{$name . '_tip'} = Gtk2::Tooltips->new;
+		  $adj{$name . '_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
 		}
 	}
 }
@@ -425,7 +421,7 @@ sub make_boot_frame() {
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
 		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-		my @rgb = map { hex($_)/255 } ($1, $2, $3) if $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
+		my @rgb = $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/ && map { hex($_)/255 } ($1, $2, $3);
 		$color->colorsel->set_current_color(gtkcolor(@rgb));
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
@@ -481,7 +477,7 @@ sub set_thm_values() {
 #- Desc  => create a new window with a preview of splash screen
 #- Args  => $img_file (str) full path to preview file
 sub show_prev {
- my ($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height) = @_;
+ my ($_txt_tl_xx, $_txt_tl_yy, $_txt_width, $_txt_height, $_prog_tl_xx, $_prog_tl_yy, $_prog_width, $_prog_height) = @_;
  $prev_window ||= Gtk2::Window->new('toplevel'); 
  $prev_window->set_title(
                          #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
