@@ -46,7 +46,8 @@ my $bootloader = bootloader::read($all_hds);
 
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     $::isWizard = 1;
-    lilo_choice();
+    eval { lilo_choice() };
+    die if $@ && $@ !~ /^wizcancel/;
     $in->exit(0);
 }
 
