@@ -105,13 +105,13 @@ sub splash_choice() {
         $cur_res = '800x600';
     }
 
-    my $theme = bootsplash::read_theme_config($cur_res);
+    my $theme = bootsplash::themes_read_sysconfig($cur_res);
     $no_bootsplash and $theme->{enabled} = 0;
 
     my $boot_pic = gtkcreate_img($bootsplash::default_thumbnail);
     change_image($boot_pic, $theme->{name}, $cur_res);
 
-    my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings([ bootsplash::list_themes($cur_res) ], $theme->{name}), 10, -1);
+    my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings([ bootsplash::themes_list_for_resolution($cur_res) ], $theme->{name}), 10, -1);
     $theme_combo->entry->signal_connect(changed => sub {
                                             $theme->{name} = $theme_combo->entry->get_text;
                                             change_image($boot_pic, $theme->{name}, $cur_res);
@@ -155,9 +155,9 @@ sub splash_choice() {
                        sub {
                            bootsplash::set_logo_console($theme->{keep_logo});
                            if ($theme->{enabled}) {
-                               bootsplash::switch_theme($theme->{name});
+                               bootsplash::switch($theme->{name});
                            } else {
-                               bootsplash::remove_theme();
+                               bootsplash::remove();
                            }
                        });
 }
@@ -234,7 +234,7 @@ sub lilo_choice() {
 
 sub change_image {
     my ($boot_pic, $theme, $res) = @_;
-    my $img_file = bootsplash::get_theme_image($theme, $res);
+    my $img_file = bootsplash::theme_get_image_for_resolution($theme, $res);
     -f $img_file or return;
     my $boot_pixbuf = gtkcreate_pixbuf($img_file);
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
