@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
@@ -6,540 +6,212 @@ use standalone;
 use common;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use interactive;
+use bootsplash;
+use Xconfig::resolution_and_depth;
 
 my $in = 'interactive'->vnew('su');
 
 my $window = ugtk2->new('DrakSplash');
-$window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
+$window->{rwindow}->signal_connect(delete_event => \&close_window);
+
+my ($image_area, $image_pixbuf);
+create_image_area();
 
 #- verification of package image magik
-unless ($in->do_pkgs->is_installed('ImageMagick')) {
+unless ($in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert')) {
     $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
         && $in->do_pkgs->install('ImageMagick')
-        or CloseAppWindow();
+        or close_window();
 }
 
-#- application vars
-my $tmp_path = '/tmp/draksplash/';
-mkdir($tmp_path) if !-d $tmp_path;
-my $thm_path = '/usr/share/bootsplash/themes/';
-my $boot_conf_path = '/etc/bootsplash/themes/';
-my $cfg_path = "/cfg/";
+my @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
 
-my $img_file;
+my %theme;
+set_theme('new_theme');
+set_resolution(@resolutions);
 
-my $prev_window;
+my @scale_settings = (
+		      [ 'tx', N("x coordinate of text box\nin number of characters") ],
+		      [ 'ty', N("y coordinate of text box\nin number of characters") ],
+		      [ 'tw', N("text width") ],
+		      [ 'th', N("text box height") ],
+		      [ 'px', N("the progress bar x coordinate\nof its upper left corner") ],
+		      [ 'py', N("the progress bar y coordinate\nof its upper left corner") ],
+		      [ 'pw', N("the width of the progress bar") ],
+		      [ 'ph', N("the height of the progress bar") ],
+		     );
+my %adj;
 
-my %font_size = ('h' =>16, 'w' =>8);
-my %theme = ('name' => 'new_theme',
-             'res' => {
-                 'res' => '800x600',
-                 'h' => '600',
-                 'w' => '800',
-             },
-             'boot_conf' => { 
-                 'tx' => 0,
-                 'ty' => 0,
-                 'tw' => 0,
-                 'th' => 0,
-                 'px' => 0,
-                 'py' => 0,
-                 'pw' => 0,
-                 'ph' => 0,
-                 'pc' => '0x21459d',
-             },
-             'boot_img' => ''
-             );
+gtkadd($window->{window},
+       gtkadd(Gtk2::HBox->new(1, 5),
+	      gtkadd(Gtk2::VBox->new(0, 5),
+		     gtkadd(Gtk2::Frame->new(N("first step creation")),
+			    create_packtable({ col_spacings => 10, row_spacings => 5 },
+					     [ Gtk2::Label->new(N("Theme name")),
+					       gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ bootsplash::themes_list() ], $theme{name}),
+								 changed => sub { set_theme($_[0]->entry->get_text) }) ],
+					     [ Gtk2::Label->new(N("final resolution")),
+					       gtksignal_connect(Gtk2::ComboBox->new_with_strings(\@resolutions, $theme{res}),
+								 changed => sub { set_resolution($_[0]->entry->get_text) }) ],
+					     [ Gtk2::Label->new(N("choose image file")),
+					       gtksignal_connect(Gtk2::Button->new(N("Browse")), clicked => \&choose_image) ])),
+		     gtkadd(Gtk2::Frame->new(N("Configure bootsplash picture")),
+			    create_packtable({ col_spacings => 10, row_spacings => 5 },
+					     (map { [ Gtk2::Label->new($_->[1]), new_scale($_->[0]) ] } @scale_settings),
+					     [ Gtk2::Label->new(N("the color of the progress bar")),
+					       gtksignal_connect(Gtk2::Button->new(N("Choose color")), clicked => \&choose_color) ],
+					     [ gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
+								     $theme{conf}{logo} = bool2yesno($_[0]->get_active);
+								 }) ])),
+		     gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
+		     gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_window)),
+	      $image_area));
 
-my %scale_size = ('tx' => ($theme{res}{w} / $font_size{w}),
-                  'ty' => ($theme{res}{h} / $font_size{h}),
-                  'tw' => ($theme{res}{w} / $font_size{w}),
-                  'th' => ($theme{res}{h} / $font_size{h}),
-                  'px' => $theme{res}{w},
-                  'py' => $theme{res}{h},
-                  'pw' => $theme{res}{w},
-                  'ph' => $theme{res}{h},
-                  );
-
-my %first = ('frame' => Gtk2::Frame->new(N("first step creation")),
-             'widget' => { 
-                 'label' => {
-                     'res' => N("final resolution"),
-                     'file' => N("choose image file"),
-                     'name' => N("Theme name")
-                     },
-                         'button' => {
-                             #'boot_conf' => N("Make bootsplash step 2"),
-                             #'lilo_conf' => N("Go to lilosplash configuration"),
-                             'file' => N("Browse"),
-                         },
-                 'combo' => { 
-                     'res' => ['800x600', '1024x768', '1280x1024'],
-                     'name' => [ $theme{name}, giv_exist_thm() ]
-                     },
-                          extras => {
-                                     res => {
-                                             noneditable => 1,
-                                            },
-                                    },
-             },
-             'pos' => [ 'name', 'res', 'file', 'boot_conf', #'save', #'kill'
-					],
-             );
-my %boot_conf_frame = ('frame' => Gtk2::Frame->new(N("Configure bootsplash picture")),
-                       'widget' => {
-                           'label' => {
-                               'tx' => N("x coordinate of text box\nin number of characters"),
-                               'ty' => N("y coordinate of text box\nin number of characters"),
-                               'tw' => N("text width"),
-                               'th' => N("text box height"),
-                               'px' => N("the progress bar x coordinate\nof its upper left corner"),
-                               'py' => N("the progress bar y coordinate\nof its upper left corner"),
-                               'pw' => N("the width of the progress bar"),
-                               'ph' => N("the height of the progress bar"),
-                               'pc' => N("the color of the progress bar")
-                               },
-                           #- must set scale values to true to get them created by mk_frame
-                           'scale' => {
-                               'tx' => 1,
-                               'ty' => 1,
-                               'tw' => 1,
-                               'th' => 1,
-                               'px' => 1,
-                               'py' => 1,
-                               'pw' => 1,
-                               'ph' => 1,
-                           },
-                           'button' => {
-                               #'annul' => N("Go back"),
-                               'prev' => N("Preview"),
-                               'kill' => N("Quit"),
-                               'save' => N("Save theme"),
-                               'pc' => N("Choose color"),
-                           },
-                           'check'  => {
-                               'logo' => N("Display logo on Console"),
-                               'quiet' => N("Make kernel message quiet by default"),
-                           },
-                       },
-                       'pos' => [ 'tx',
-                                  'ty',
-                                  'tw',
-                                  'th',
-                                  'px',
-                                  'py',
-                                  'pw',
-                                  'ph',
-                                  'pc',
-                                  'logo',
-                                  'quiet',
-                                  # 'annul',
-                                  'prev',
-                                  'save',
-                                  'kill',
-                                  ],
-                       );
-#- var action is used to hide/show the correct frame
-$first{frame}->add(mk_frame(\%first));
-my $first_vbox = Gtk2::VBox->new(0, 5);
-
-
-#****************************- Signal event actions
-#- change resolution 
-$first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
-	$theme{res}{res} = $first{widgets}{combo}{res}->entry->get_text;
-	($theme{res}{w}, $theme{res}{h}) = $theme{res}{res} =~ /([^x]+)x([^x]+)/;
-	&set_scale_size;
-	$boot_conf_frame{frame}->destroy;
-	$boot_conf_frame{frame} = Gtk2::Frame->new(N("Configure bootsplash picture"));
-	&make_boot_frame;
-	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, giv_exist_thm()) && thm_in_this_res(0) && get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res}));
-      });
-#- go to bootsplash configuration step 2
-#$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
-#- image file selection for new theme
-$first{widgets}{button}{file}->signal_connect(clicked => sub {
-	my $file_dialog = my $file_dlg = Gtk2::FileChooserDialog->new(N("choose image"), $window->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok');
-
-	$file_dialog->set_filename($img_file || '~/');
-	$file_dialog->show;
-
-     while (my $answer = $file_dlg->run) {
-         if (member($answer, qw(cancel delete-event))) {
-             $file_dialog->destroy;
-             return;
-         } elsif ($answer eq 'ok') {
-             $img_file = $file_dialog->get_filename;
-             $file_dialog->destroy;
-             return;
-         }
-     }
-});
-#- changing theme name
-$first{widgets}{combo}{name}->entry->signal_connect(changed => sub { get_this_thm_res_conf(); $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
-#**************************************************
-
-
-$first_vbox->add($first{frame});
-$first_vbox->add($boot_conf_frame{frame});
-&make_boot_frame;
-
-# set window attributes and show it
-
-unless ($::isEmbedded) {
-    $window->{rwindow}->set_border_width(5);
-    $window->{window}->add($first_vbox);
-    $window->{rwindow}->set_position('center');
-    $window->{rwindow}->show_all;
-#&show_act(\%first);
+my %scale_links = (tx => 'tw', ty => 'th', px => 'pw', py => 'ph');
+while (my ($n1, $n2) = each(%scale_links)) {
+    $adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
+    $adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
 }
 
-# Gtk event loop
+update_scale_values();
+
+$window->{rwindow}->set_border_width(5);
+$window->{rwindow}->set_position('center');
+$window->{rwindow}->show_all;
 $window->main;
 
 # Should never get here
 ugtk2->exit(0);
 
-### Callback function to close the window
-sub CloseAppWindow() {
+
+sub close_window() {
    ugtk2->exit(0);
 }
 
-#- ====## used funtions ##=====
-
-#- Desc  => write config file for boot theme and copy image in the right location
-sub write_boot_thm {
-	my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
-  	&set_thm_values;
-  	my $logo = bool2yesno($boot_conf_frame{widgets}{check}{logo}->get_active);
-	my $quiet = bool2yesno($boot_conf_frame{widgets}{check}{quiet}->get_active);
-	my $globalconf_file = $boot_conf_path . $theme{name} . '/global.config';
-	my $cfg_file = $boot_conf_path . $theme{name} . "$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
-	#- verify all dir exists or create them
-	foreach my $dir ($boot_conf_path . $theme{name} . $cfg_path, $thm_path . $theme{name} . '/images/') {
-         mkdir_p($dir) if !-d $dir;
-     }
-	#- copy image to dest by convert
-	system('convert -scale ' . $theme{res}{res} . ' ' . $img_file . ' ' . $thm_path . $theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
-	system('/usr/share/bootsplash/scripts/rewritejpeg ' . $thm_path . $theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
-	#- write conf files
-	output($cfg_file, qq(# This is the configuration file for the $theme{res}{res} bootsplash picture
-# this file is necessary to specify the coordinates of the text box on the
-# splash screen.
-
-# tx is the x coordinate of the text window in characters. default is 24
-# multiply width font width for coordinate in pixels.
-tx=$theme{boot_conf}{tx}
-
-# ty is the y coordinate of the text window in characters. default is 14
-ty=$theme{boot_conf}{ty}
-
-# tw is the width of the text window in characters. default is 130
-# note: this should at least be 80 as on the standard linux text console
-tw=$theme{boot_conf}{tw}
-
-# th is the height of the text window in characters. default is 44
-# NOTE: this should at least be 25 as on the standard linux text console
-th=$theme{boot_conf}{th}
-
-# px is the progress bar x coordinate of its upper left corner
-px=$theme{boot_conf}{px}
-
-# py is the progress bar y coordinate of its upper left corner
-py=$theme{boot_conf}{py}
-
-# pw is the with of the progress bar
-pw=$theme{boot_conf}{pw}
-
-# ph is the height of the progress bar
-ph=$theme{boot_conf}{ph}
-
-# pc is the color of the progress bar
-pc=$theme{boot_conf}{pc}));
-	output($globalconf_file, qq(# Display logo on console.
-LOGO_CONSOLE=$logo
-
-# Make kernel message quiet by default.
-QUIET=$quiet));
+sub read_theme_config {
+    my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
+    -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
+    -f $theme{conf}{silentjpeg} && load_image($theme{conf}{silentjpeg}) and $image_file = $theme{conf}{silentjpeg};
+    $theme{conf}{pc} ||= '0x21459d';
+    update_scale_values();
 }
 
-
-#- Desc  => read the current bootsplash theme configuration if exist
-sub get_this_thm_res_conf() {
-  	member($first{widgets}{combo}{name}->entry->get_text, giv_exist_thm())
-	  and $theme{name} = $first{widgets}{combo}{name}->entry->get_text
-	  and thm_in_this_res(1) 
-	  and read_boot_conf();
-     my $file = $thm_path . $theme{name} . "/images/bootsplash-" . $theme{res}{res} . ".jpg";
-     $img_file = $file if -f $file;
-	  return 1;
+sub set_theme {
+    my ($name) = @_;
+    $theme{name} = $name;
+    read_theme_config();
 }
 
-sub read_boot_conf {
-	chdir($boot_conf_path);
-     my $file = $theme{name} . "/$cfg_path/bootsplash-" . $theme{res}{res} . '.cfg';
-	if (-f $file) {
-          $theme{boot_conf} = { getVarsFromSh($file) };
-		&set_scale_values;
+sub set_resolution {
+    my ($res) = @_;
+    $theme{res} = $res;
+    ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
+    read_theme_config();
+}
+
+sub save_theme() {
+    my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
+    bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{image});
+    bootsplash::theme_write_config_for_resolution($theme{name}, $theme{res}, $theme{conf});
+}
+
+sub load_image {
+    my ($img) = @_;
+    $image_pixbuf = Gtk2::Gdk::Pixbuf->new_from_file($img);
+    $image_pixbuf->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
+    $image_area->set_size_request($theme{res_w}, $theme{res_w});
+    $image_area->queue_draw;
+    1;
+}
+
+sub choose_image() {
+    my $file_dialog = Gtk2::FileChooserDialog->new(N("choose image"), $window->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok');
+    $file_dialog->set_filename($theme{image} || '~/');
+    $file_dialog->show;
+    while (my $answer = $file_dialog->run) {
+	if (member($answer, qw(cancel delete-event))) {
+	    $file_dialog->destroy;
+	    return;
+	} elsif ($answer eq 'ok' && load_image(my $img = $file_dialog->get_filename)) {
+	    $theme{image} = $img;
+	    $file_dialog->destroy;
+	    return;
 	}
-}
-
-my %adj;
-sub set_scale_values() {
-    foreach (keys %{$theme{boot_conf}}) {
-        $adj{$_} and $adj{$_}->set_value($theme{boot_conf}{$_});
     }
 }
 
-#- Desc  => check if this theme is available in the current resolution else
-#-	    change the current resolution or display a ask_warn box
-#- return=> (bool)
-sub thm_in_this_res {
-  my ($check_res) = @_;
-  (-f $thm_path . $theme{name} . "/images/bootsplash-" . $theme{res}{res} . ".jpg") ? return 1 : $check_res == 1 ? return which_res_exist() : return 0;
+sub choose_color() {
+    my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
+    my @rgb = $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/ && map { hex($_)/255 } ($1, $2, $3);
+    $color->colorsel->set_current_color(gtkcolor(@rgb));
+    $color->cancel_button->signal_connect(clicked => sub { $color->destroy });
+    $color->ok_button->signal_connect(clicked => sub {
+					  my $colour = $color->colorsel->get_current_color;
+					  $theme{boot_conf}{pc} = "0x" . join('', map { print "$_\n"; sprintf("%x", $_*255) } $colour->red, $colour->green, $colour->blue);
+					  $color->destroy;
+				      });
 }
 
-sub which_res_exist() {
-	chdir($thm_path . $theme{name} . "/images/");
-	my $is_ok = 0;
-	foreach (@{$first{widget}{combo}{res}}) {
-         next if !-f "bootsplash-$_.jpg";
-         $is_ok = 1;
-         $first{widgets}{combo}{res}->entry->set_text($_);
-         last;
+
+#- Adjustement widgets
+sub new_scale {
+    my ($name) = @_;
+    my $w = Gtk2::HScale->new($adj{$name} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0));
+    $w->set_digits(0);
+    $w;
+}
+sub get_scale_max {
+    my ($name) = @_;
+    $theme{$name =~ /[xw]$/ ? "res_w" : "res_h"};
+}
+sub apply_scale {
+    my ($name) = @_;
+    $theme{conf}{$name} = $adj{$name}->get_value;
+    $image_area->queue_draw;
+}
+sub check_scale_value {
+    my ($changed, $linked) = @_;
+    my $max = get_scale_max($changed) - $adj{$changed}->get_value;
+    $adj{$linked}->get_value > $max and $adj{$linked}->set_value($max);
+}
+sub update_scale_values {
+    foreach (map { $_->[0] } @scale_settings) {
+	$adj{$_}->upper(get_scale_max($_));
+	$adj{$_}->set_value($theme{conf}{$_});
+    }
+}
+
+
+#- FIXME duplicate with draksplash2
+
+sub create_image_area() {
+    $image_area = Gtk2::DrawingArea->new;
+    $image_area->can_focus(1);
+    $image_area->add_events('button-press-mask');
+    $image_area->signal_connect(expose_event => \&image_expose);
+    my $keys = {
+	$Gtk2::Gdk::Keysyms{q} => \&close_window,
+	$Gtk2::Gdk::Keysyms{Escape} => \&close_window,
+    };
+
+    $image_area->signal_connect(key_press_event => sub {
+	my (undef, $event) = @_;
+
+	if (my $f = $keys->{$event->keyval}) {
+	    $f->(member('control-mask', @{$event->state}));
 	}
-	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res})) and return 0;
-	return 1;
-}	
+	1;
+    });
 
-#- Desc  => retrieve all installed theme
-#- Return=> @arr of available theme
-sub giv_exist_thm() {
-  chdir($thm_path);
-  my @thms_dirs;
-  foreach (glob("*")) {
-    -d  $_ && m/^[^.]/ 
-      and push @thms_dirs, $_;
-  }
-  return @thms_dirs;
+    $image_area->grab_focus;
+    $image_area->show;
+    $image_area;
 }
 
-#- Desc  => show only the right frame
-#- Args  => action(str)
-#- Return=> (bool)
-sub show_act {
-#    my ($action) = @_;
-#    foreach (@action_frame){
-#	if($_ == $action){
-#	    $_->{frame}->show_all ;
-#	}else{
-#	    $_->{frame}->hide;
-#	}
-#    }
-}
-
-#- Desc  => just add tooltips
-#- Args  => name of widget(str) and frame to work on it (\%hash)
-sub tool_tip {
-	my ($name, $ref) = @_;
-	foreach (keys %{$ref->{widget}}) {
-		$_ eq 'tooltip' and next;
-	  	if ($ref->{widget}{$_}{$name}) {
-		  ! $adj{$name . '_tip'} and $adj{$name . '_tip'} = Gtk2::Tooltips->new;
-		  $adj{$name . '_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
-		}
-	}
-}
-
-
-#- Desc  => just prepare widgets for a fram hash 
-#- Args  => $box(a Vbox widget to contain all widgets), \%frame (hash with complete definition of the frame)
-#- Return=> all hash{widgets} are created and packed in $box
-sub mk_frame {
-    my ($ref) = @_;
-    my @buttons;
-    my $u = create_packtable({ col_spacings => 10, row_spacings => 5 },
-                             map {
-                                 my @widgets;
-                                 my $pos = $_;
-
-                                 #- look for label
-                                 if ($ref->{widget}{label}{$pos}) {
-                                     my $w = $ref->{widgets}{label}{$pos} = Gtk2::Label->new($ref->{widget}{label}{$pos});
-                                     push @widgets, $w;
-                                 }
-
-                                 #- look for scale
-                                 if ($ref->{widget}{scale}{$pos}) {
-                                     my $w = $ref->{widgets}{scale}{$pos} = Gtk2::HScale->new($adj{$pos} =  Gtk2::Adjustment->new(0, 0, $scale_size{$pos}, 1, 10, 0));
-                                     $ref->{widgets}{scale}{$pos}->set_digits(0);
-                                     push @widgets, $w;
-                                 }
-                                 $adj{$pos} and $adj{$pos}->set_value($theme{boot_conf}{$pos});
-
-                                 #- look for combo
-                                 my @popdown;
-                                 if ($ref->{widget}{combo}{$pos}) {
-                                     @popdown = @{$ref->{widget}{combo}{$pos}};
-                                     my $w = $ref->{widgets}{combo}{$pos} = $ref->{widget}{extras}{$pos}{noneditable} ? Gtk2::ComboBox->new_text : Gtk2::Combo->new;
-                                     $w->set_popdown_strings(@popdown);
-                                     $w->set_active(0) if $w->isa('Gtk2::ComboBox');
-                                     push @widgets, $w;
-                                 }
-
-                                 #- look for checkbox
-                                 if ($ref->{widget}{check}{$pos}) {
-                                     my $w =  $ref->{widgets}{check}{$pos} = Gtk2::CheckButton->new($ref->{widget}{check}{$pos});
-                                     $ref->{widgets}{check}{$pos}->set_active(1);
-                                     push @widgets, $w;
-                                 }
-
-                                 #- look for button
-                                 if ($ref->{widget}{button}{$pos}) {
-                                     my $w =  $ref->{widgets}{button}{$pos} = Gtk2::Button->new($ref->{widget}{button}{$pos});
-                                     @widgets ?
-                                       push @widgets, $w
-                                         : push @buttons, $w;
-                                 }
-
-                                 #- look for tooltips
-                                 $ref->{widget}{tooltip}{$pos} and tool_tip($pos, \%$ref);
-                                 if_(@widgets, \@widgets);
-                             } @{$ref->{pos}}
-                            );
-    
-    gtkpack__(Gtk2::VBox->new,
-              gtkset_border_width($u, 3),
-              @buttons);
-}
-
-#- Desc  => prepare and set all signal_connect for boot_frame widget 
-sub make_boot_frame() {
-    $boot_conf_frame{frame}->add(mk_frame(\%boot_conf_frame));
-
-	#- open a color choose box
-	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
-		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-		my @rgb = $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/ && map { hex($_)/255 } ($1, $2, $3);
-		$color->colorsel->set_current_color(gtkcolor(@rgb));
-		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
-		$color->ok_button->signal_connect(clicked => sub {
-			my $colour = $color->colorsel->get_current_color;
-			$theme{boot_conf}{pc} = "0x" . join('', map { print "$_\n"; sprintf("%x", $_*255) } $colour->red, $colour->green, $colour->blue);
-			$color->destroy;
-		});
-	}); 
-	#- quit button
-	$boot_conf_frame{widgets}{button}{kill}->signal_connect(clicked => \&CloseAppWindow);
-	$boot_conf_frame{widgets}{button}{save}->signal_connect(clicked => \&write_boot_thm);
-	#- return to first screen
-	#$boot_conf_frame{widgets}{button}{annul}->signal_connect(clicked => sub { show_act( \%first ) } );
-	#- made a preview
-	$boot_conf_frame{widgets}{button}{prev}->signal_connect(clicked => sub {
-	  unless (-f $img_file) {
-	    $in->ask_warn(N("Notice"), N("You must choose an image file first!"));
-	    return 0;
-	  }
-	  #- calculation of the 2 angle of text box and progress bar
-	  set_thm_values();
-	  my $_w = $in->wait_message('', N("Generating preview..."));
-       my $txt_tl_xx 	= $theme{boot_conf}{tx}*$font_size{w}; 
-       my $txt_tl_yy 	= $theme{boot_conf}{ty}*$font_size{h};
-       my $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};
-       my $txt_height	= $theme{boot_conf}{th}*$font_size{h};
-       my $prog_tl_xx 	= $theme{boot_conf}{px};
-       my $prog_tl_yy 	= $theme{boot_conf}{py};
-       my $prog_width	= $theme{boot_conf}{pw};
-       my $prog_height  = $theme{boot_conf}{ph};
-	  show_prev($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height);
-	});
-	$boot_conf_frame{frame}->show_all;
-#	- check scales values are possibly correct
-	#&set_scale_values;
-	
-	foreach my $k (keys %{$theme{boot_conf}}) {
-		$k =~ m/[tp][hwyx]/
-		  and $adj{$k}->signal_connect(value_changed => \&check_boot_scales);
-	}
-}
-
-#- Desc  => set theme values from user entry (scales widgets)
-sub set_thm_values() {
-  foreach (keys %{$theme{boot_conf}}) {
-    	m/[tp][hwyx]/
-	  and $theme{boot_conf}{$_} = int($adj{$_}->get_value);
-  }
-}
-
-
-#- Desc  => destroy properly all widget of preview window
-#- Desc  => create a new window with a preview of splash screen
-#- Args  => $img_file (str) full path to preview file
-sub show_prev {
- my ($_txt_tl_xx, $_txt_tl_yy, $_txt_width, $_txt_height, $_prog_tl_xx, $_prog_tl_yy, $_prog_width, $_prog_height) = @_;
- $prev_window ||= Gtk2::Window->new('toplevel'); 
- $prev_window->set_title(
-                         #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
-                         N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
- my $prev_pic;
- eval { $prev_pic = gtkcreate_pixbuf($img_file) };
- if (my $err = $@) {
-     err_dialog(N("Error"),
-                #-PO: Do not alter the <span ..> and </span> tags
-                N("The image \"%s\" cannot be load due to the following issue:\n\n<span foreground=\"Red\">%s</span>", $img_file, $err),
-                { use_markup => 1 }
-               );
-     return;
- }
-
- $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
- $prev_window->add(Gtk2::Image->new_from_pixbuf($prev_pic));
- $prev_window->signal_connect(delete_event => sub {
-                                  $prev_window->destroy; undef($prev_window);
-                                  undef($prev_pic);
-                              });
- $prev_window->show_all;
-}
-
-#- Desc  => define the max size of boot's scales
-sub set_scale_size() {
-	 %scale_size = ('tx' => ($theme{res}{w} / $font_size{w}),
- 			'ty' => ($theme{res}{h} / $font_size{h}),
-			'tw' => ($theme{res}{w} / $font_size{w}),
-			'th' => ($theme{res}{h} / $font_size{h}),
-			'px' => $theme{res}{w},
-			'py' => $theme{res}{h},
-			'pw' => $theme{res}{w},
-			'ph' => $theme{res}{h},
-		      );
-}
-
-#- Desc  => verify that boot's  scales widgets are correctly set
-#- Args  => $obj (str) is the scale to check value
-
-sub check_boot_scales {
-  my ($obj) = @_;
-  my $tw = $adj{tw}->get_value;
-  my $tx = $adj{tx}->get_value;
-  my $th = $adj{th}->get_value;
-  my $ty = $adj{ty}->get_value;
-  my $pw = $adj{pw}->get_value;
-  my $ph = $adj{ph}->get_value;
-  my $px = $adj{px}->get_value;
-  my $py = $adj{py}->get_value;
-  my $max_xx = $scale_size{tw};
-  my $max_yy = $scale_size{th};
-  my $max_xres = $theme{res}{w};
-  my $max_yres = $theme{res}{h};
-  
-  $obj eq 'tw' and $max_xx < $tw + $tx and $adj{tx}->set_value($max_xx - $tw);
-  $obj eq 'tx' and $max_xx < $tw + $tx and $adj{tw}->set_value($max_xx - $tx);
-  $obj eq 'th' and $max_yy < $th + $ty and $adj{ty}->set_value($max_yy - $th);
-  $obj eq 'ty' and $max_yy < $th + $ty and $adj{th}->set_value($max_yy - $ty);
-  $obj eq 'pw' and $max_xres < $pw + $px and $adj{px}->set_value($max_xres - $pw);
-  $obj eq 'px' and $max_xres < $pw + $px and $adj{pw}->set_value($max_xres - $px);
-  $obj eq 'ph' and $max_yres < $ph + $py and $adj{py}->set_value($max_yres - $ph);
-  $obj eq 'py' and $max_yres < $ph + $py and $adj{ph}->set_value($max_yres - $py);
-  
+sub image_expose {
+    my ($widget) = @_;
+    my $window = $widget->window;
+    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf, 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf;
+    $window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
+    0;
 }
