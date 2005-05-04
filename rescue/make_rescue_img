@@ -43,7 +43,7 @@ sub installown($$) {
     my ($own, $dir) = @_;
     return if -e "$tmp$dir/" . basename($own);
     mkdir_p("$tmp$dir");
-    _ "cp $own $tmp$dir";
+    _ "cp -r $own $tmp$dir";
 }
 
 sub install_perl_script {
