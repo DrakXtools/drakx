@@ -63,7 +63,7 @@ if ($root) {
 	  !$_->{fs_type} || $_->{device} eq 'none'
 	    || $valued_options->{noauto} || $valued_options->{supermount} 
 	    || $_->{mntpoint} eq '/'
-	    || member($_->{fs_type}, 'swap', 'nfs');
+	    || member($_->{fs_type}, 'swap', 'nfs', 'ntfs');
 
 	delete $valued_options->{'iocharset='};
 	delete $valued_options->{'codepage='};
