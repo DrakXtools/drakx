@@ -1029,15 +1029,6 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    },
 
 
-                   alrd_end =>
-                   {
-                    name => N("Congratulations, the network and Internet configuration is finished.
-
-"),
-                           end => 1,
-                   },
-
-
                    lan_protocol =>
                    {
                     pre => sub  {
