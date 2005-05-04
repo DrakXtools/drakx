@@ -1022,21 +1022,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             return $ndiswrapper_next_step->();
                         }
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                        $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
+                        'lan_protocol';
                     },
-                   },
-
-                   lan_alrd_cfg =>
-                   {
-                    name => N("WARNING: this device has been previously configured to connect to the Internet.
-Modifying the fields below will override this configuration.
-Do you really want to reconfigure this device?"),
-                    type => "yesorno",
-                    default => "no",
-                    post => sub {
-                        my ($res) = @_;
-                        return $res ? "lan_protocol" : "alrd_end";
-                    }
                    },
 
 
