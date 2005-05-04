@@ -190,6 +190,8 @@ sub real_main {
           return "end";
       };
 
+      my $after_lan_intf_selection = sub { $is_wireless ? 'wireless' : 'lan_protocol' };
+
       my $after_start_on_boot_step = sub {
           if ($netc->{internet_cnx_choice} && exists $netc->{internet_cnx}{$netc->{internet_cnx_choice}}) {
               $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
@@ -271,7 +273,7 @@ sub real_main {
       };
 
       my $ndiswrapper_next_step = sub {
-          return $ndiswrapper_device ? 'lan_protocol' :
+          return $ndiswrapper_device ? $after_lan_intf_selection->() :
                  $ndiswrapper_driver ? 'ndiswrapper_select_device' :
                  'ndiswrapper_select_driver';
       };
@@ -1022,7 +1024,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             return $ndiswrapper_next_step->();
                         }
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                        'lan_protocol';
+                        return $after_lan_intf_selection->();
                     },
                    },
 
@@ -1154,7 +1156,7 @@ notation (for example, 1.2.3.4).")),
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
                             $delete_gateway_settings->($ntf_name);
                         }
-                        return $is_wireless ? "wireless" : "static_hostname";
+                        return "static_hostname";
                     },
                    },
 
@@ -1291,7 +1293,7 @@ See iwpriv(8) man page for further information."),
                             delete $ethntf->{WIRELESS_WPA_DRIVER};
                         }
                         network::wireless::wlan_ng_needed($module) and network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
-                        return "static_hostname";
+                        return "lan_protocol";
                     },
                    },
 
