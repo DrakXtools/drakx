@@ -860,8 +860,8 @@ sub method_choices_raw() {
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
       (
-       if_(whereis_binary('lilo'), 'lilo-graphic', 'lilo-menu'),
-       if_(whereis_binary('grub'), 'grub'),
+       if_(whereis_binary('lilo', $::prefix), 'lilo-graphic', 'lilo-menu'),
+       if_(whereis_binary('grub', $::prefix), 'grub'),
       );
 }
 sub method_choices {
