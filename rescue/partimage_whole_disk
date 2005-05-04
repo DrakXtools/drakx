@@ -20,6 +20,7 @@ sub usage() { die "partimage_whole_disk <save_all | rest_all> <dir> [<server>]\n
 @ARGV == 2 || @ARGV == 3 or usage();
 
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+$ENV{HOME} = '/';
 log::openLog("/var/log/partimage_whole_disk.log");
 my @partimage_cmd = ('partimage', if_($server, '-s', $server));
 my $all_hds = fsedit::get_hds({});
