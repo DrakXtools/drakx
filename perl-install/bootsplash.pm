@@ -3,6 +3,7 @@ package bootsplash;
 use common;
 
 my $themes_dir = "$::prefix/usr/share/bootsplash/themes/";
+my $themes_config_dir = "$::prefix/etc/bootsplash/themes/";
 my $sysconfig_file = '$::prefix/etc/sysconfig/bootsplash';
 my $bootsplash_scripts = "$::prefix/usr/share/bootsplash/scripts";
 my $default_theme = 'Mandrivalinux';
@@ -26,7 +27,6 @@ sub themes_read_sysconfig {
     \%theme;
 }
 
-
 sub theme_get_image_for_resolution {
     my ($theme, $res) = @_;
     $themes_dir . $theme . '/images/bootsplash-' . $res . ".jpg";
@@ -34,18 +34,12 @@ sub theme_get_image_for_resolution {
 
 sub theme_get_config_for_resolution {
     my ($theme, $res) = @_;
-    $themes_dir . $theme . '/cfg/bootsplash-' . $res . ".cfg";
+    $themes_config_dir . $theme . '/config/bootsplash-' . $res . ".cfg";
 }
-
-sub theme_get_global_config {
-    my ($theme) = @_;
-    $themes_dir . $theme . '/cfg/global.config';
-}
-
 
 sub theme_exists_for_resolution {
     my ($theme, $res) = @_;
-    -f theme_get_image_for_resolution($theme, $res);
+    -f theme_get_image_for_resolution($theme, $res) && -f theme_get_config_for_resolution($theme, $res);
 }
 
 sub themes_list() {
@@ -82,7 +76,7 @@ sub set_logo_console {
 }
 
 sub theme_set_image_for_resolution {
-    my ($name, $source_image, $res) = @_;
+    my ($name, $res, $source_image) = @_;
     my $dest_image = theme_get_image_for_resolution($name, $res);
     system('convert', '-scale', $res, $source_image, $dest_image);
     system($bootsplash_scripts . '/rewritejpeg',  $dest_image);
@@ -90,16 +84,16 @@ sub theme_set_image_for_resolution {
 
 sub theme_read_config_for_resolution {
     my ($theme, $res) = @_;
-    getVarsFromSh(theme_get_config_for_resolution($theme, $res));
+    +{ getVarsFromSh(theme_get_config_for_resolution($theme, $res)) };
 }
 
 sub theme_write_config_for_resolution {
     my ($name, $res, $conf) = @_;
 
-    my $global_config = theme_get_global_config($name);
     my $config = theme_get_config_for_resolution($name, $res);
-    my $theme_config_dir = $themes_dir . $name . '/cfg/';
-    -d $theme_config_dir or mkdir_p($theme_config_dir);
+    require File::Basename;
+    my $dir = File::Basename::dirname($config);
+    -d $dir or mkdir_p($dir);
 
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
@@ -135,16 +129,13 @@ ph=$conf->{ph}
 
 # pc is the color of the progress bar
 pc=$conf->{pc}
-));
 
-    output($global_config,
-	   qq(# Display logo on console.
-LOGO_CONSOLE=$conf->{logo}
+progress_enable=1
 
-# Make kernel message quiet by default.
-QUIET=$conf->{quiet}
+overpaintok=1
+# Display logo on console.
+LOGO_CONSOLE=$conf->{LOGO_CONSOLE}
 ));
 }
-
 
 1;
