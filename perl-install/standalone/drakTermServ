@@ -64,6 +64,7 @@ my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
 my @kernels = bootloader::installed_vmlinuz();
 my $cmd_line = 1;
+my $mknbi = "/usr/bin/mknbi-set";
 
 #- make sure terminal server and friends are installed
 my $ts = run_program::run("rpm -q terminal-server > /dev/null");
@@ -444,10 +445,37 @@ sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
 	$in->ask_warn(N("Information"), N("This will take a few minutes."));
 	gtkset_mousecursor_wait();
-	run_program::run("/usr/bin/mknbi-set -k /boot/$_") foreach @kernels;
+	#- use 1 kernel and estimate the nbi space needed
+	my $kcount = @kernels;
+	if (check_nbi_space($kernels[0], $kcount)) { 
+		$wizard_buttons->hide;
+		exit_wizard();
+	} else {
+		run_program::run("$mknbi -k /boot/$_") foreach @kernels;
+		$buff .= "\n\n\t" . N("Done!");	
+		text_view($buff, "wizard");
+	}
 	gtkset_mousecursor_normal();
-	$buff .= "\n\n\t" . N("Done!");	
-	text_view($buff, "wizard");
+}
+
+sub check_nbi_space {	
+	my ($kernel, $kcount) = @_;
+	log::explanations("Checking for adequate free space to create NBIs for $kcount kernel(s)");
+	my $nbi_count = `$mknbi -c -k /boot/$kernel`;
+	chomp $nbi_count;
+	if ($nbi_count eq '') {
+		$in->ask_warn(N("Error"), N("%s failed", $mknbi));
+		return 1;
+	}
+	my $needed_space = $nbi_count * $kcount * 2;
+    my $free = `df -P $tftpboot | tail -1`;
+    my @line_data = split(/[ \t,]+/, $free);
+	#- don't use more than 80% 
+    my $free_space = int($line_data[3] / 1024);
+	if ($needed_space > $free_space * 0.8) {
+		$in->ask_warn(N("Error"), N("Not enough space to create\nNBIs in %s.\nNeeded: %d MB, Free: %d MB", $tftpboot, $needed_space, $free_space));
+		return 1;
+	}
 }
 
 sub sync_users() {
@@ -737,8 +765,7 @@ sub make_nbi() {
 						if ($kernel) {
 							$in->ask_warn(N("Information"), N("This will take a few minutes."));
 							gtkset_mousecursor_wait();
-							build_n_update($list_model, $kernel, undef);
-							link_pxe($kernel, undef) if $conf{CREATE_PXE};
+							build_n_update($list_model, $kernel, undef) unless check_nbi_space($kernel, 1);
 							gtkset_mousecursor_normal(); 
 						} else {
 							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
@@ -753,10 +780,14 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build All Kernels -->")), clicked => sub {
 						$in->ask_warn(N("Information"), N("This will take a few minutes."));
-						gtkset_mousecursor_wait();						 
-						foreach (@kernels) {
-							build_n_update($list_model, $_, undef);
-							link_pxe($kernel, undef) if $conf{CREATE_PXE};
+						gtkset_mousecursor_wait();
+						my $kcount = @kernels;
+						if (check_nbi_space($kernels[0], $kcount)) {
+							return;
+						} else {
+							foreach (@kernels) {
+								build_n_update($list_model, $_, undef);
+							}
 						}
 						gtkset_mousecursor_normal(); 
 					}),
@@ -810,14 +841,14 @@ sub update_list {
 }
 
 sub build_n_update {
-    my ($list_model, $kernel, $nic) = @_;
+    my ($list_model, $kernel, $nic, $kcount) = @_;
 	my $command = "-k /boot/$kernel";
 	$command .= " -r $nic" if $nic;
-    run_program::run("/usr/bin/mknbi-set -v $command");
+    run_program::run("$mknbi -v $command") or $in->ask_warn(N("Error"), N("%s failed", $mknbi));
 	if ($conf{CREATE_PXE}) {
 		my $pxedir = get_platform_pxe();
 		cp_af("/boot/$kernel", $pxedir) if !-f "$pxedir/$kernel";
-		link_pxe($kernel, $nic) if $nic;
+		link_pxe($kernel, $nic);
 	}
     update_list($list_model);
 }
@@ -828,9 +859,12 @@ sub link_pxe {
 	$kernel =~ s|vmlinuz-||;
 	if ($nic) {
 		#- symlinkf does not work?
-		`ln -sf ../../initrd-$nic.$kernel.img $pxedir`;
+		run_program::run("ln -sf ../../initrd-$nic.$kernel.img $pxedir");
 	} else {
-		`ln -sf ../../initrd-*.$kernel.img $pxedir`;
+		foreach (glob_("$tftpboot/initrd*.$kernel.img")) {
+			my $img = basename($_); 
+			run_program::run("ln -sf ../../$img $pxedir");
+		}
 	}
 }
 
@@ -1189,7 +1223,9 @@ sub dhcpd_config() {
 	my @nservers;
 	my $button_msg;
 	my $new_config = 0;
-					
+	my $dh_button;
+	my $wrote = 0;
+				
 	#- entry boxes for data entry
 	my $box_subnet = Gtk2::HBox->new(0,0);
 	my $label_subnet = Gtk2::Label->new(N("Subnet:"));
@@ -1311,7 +1347,7 @@ sub dhcpd_config() {
 					N("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
 				Gtk2::HSeparator->new,
 				gtkadd(Gtk2::HBox->new,
-					Gtk2::Label->new(N("Dynamic IP Address Pool:")),
+					Gtk2::Label->new(N("Dynamic IP Address Pool\n(needed for PXE clients):")),
 				),
 				gtkadd(Gtk2::HBox->new(0,0),
 					gtkadd(Gtk2::VBox->new,
@@ -1324,10 +1360,10 @@ sub dhcpd_config() {
 					),
 				),
 				gtkadd(Gtk2::HBox->new),				
-				gtksignal_connect(Gtk2::Button->new($button_msg), clicked => 
+				gtksignal_connect($dh_button = Gtk2::Button->new($button_msg), clicked => 
 					sub { 
 						if ($new_config == 1) {
-							write_dhcpd_config("full", 
+							$wrote = write_dhcpd_config("full", 
 								$entry_subnet->get_text,
 								$entry_netmask->get_text,
 								$entry_routers->get_text,
@@ -1340,8 +1376,14 @@ sub dhcpd_config() {
 								$entry_ip_range_start->get_text,
 								$entry_ip_range_end->get_text); 
 						} else {
-							write_dhcpd_config("append", @nothing) if $dhcpd_conf !~ /dhcpd.conf.terminal-server/; 
+							if ($dhcpd_conf =~ /dhcpd.conf.terminal-server/) {
+								$wrote = 1;
+								$config_written = 1;
+							} else {
+								$wrote = write_dhcpd_config("append", @nothing);
+							} 
 						}
+						$dh_button->set_sensitive(0) if $wrote;
 					}
 				),
 				Gtk2::HBox->new(0,10),
@@ -1413,13 +1455,12 @@ sub write_dhcpd_config {
 	push @includes, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 	push @includes, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
 	push @includes, qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n);
-
 	if ($mode eq "append") {
 		append_to_file("/etc/dhcpd.conf", qq(include "/etc/dhcpd.conf.terminal-server";\n));
 		push @dhcpd_config, @includes;
 		push @dhcpd_config, qq(# Include client machine configurations\ninclude "$client_cfg";\n);
-		$config_written = output_p("/etc/dhcpd.conf.terminal-server", @dhcpd_config);
-		return;
+		$config_written = write_and_check("/etc/dhcpd.conf.terminal-server", @dhcpd_config);
+		return $config_written;
 	}
 
 	$nfs_subnet = $subnet;
@@ -1449,7 +1490,20 @@ sub write_dhcpd_config {
 	push @dhcpd_config, "}\n\n";
 	
 	push @dhcpd_config, qq(# Include client machine configurations\ninclude "$client_cfg";\n);
-	$config_written = output_p("/etc/dhcpd.conf", @dhcpd_config);
+	$config_written = write_and_check("/etc/dhcpd.conf", @dhcpd_config);
+	return $config_written;
+}
+
+sub write_and_check {
+	my ($ofile, @values) = @_;
+	output_p($ofile, @values);
+	my $written = cat_($ofile);
+	my $source = join("", @values);
+	if ($written ne $source) {
+		$in->ask_warn(N("Error"), N("Write to %s failed!", $ofile)); 
+		return 0;
+	}
+	return 1;
 }
 
 sub write_eb_image {
@@ -1502,7 +1556,7 @@ sub enable_ts() {
 	$buff[1] = "\tChecking default /etc/dhcpd.conf...\n";	
 	my $dhcpd_conf = cat_("/etc/dhcpd.conf");
 	if ($dhcpd_conf !~ /drakTermServ/) {
-		if (-e "/etc/dhcpd.conf") {
+		if (-f "/etc/dhcpd.conf") {
 			write_dhcpd_config("append", @nothing) if $dhcpd_conf !~ /dhcpd.conf.terminal-server/;
 		} else {
 			if ($cmd_line == 1) {
@@ -1515,9 +1569,8 @@ sub enable_ts() {
 		}
 	}
 	#- suggestion from jmdault - not always needed
-	if (! -e $client_cfg) {
-		log::explanations("Touch file $client_cfg");
-		`touch $client_cfg`;
+	if (! -f $client_cfg) {
+		touch($client_cfg);
 	}
 	my $buff_index = toggle_chkconfig("on", "dhcpd", 2);
 	$buff[$buff_index] = "\tSetting up default /etc/exports...\n";
@@ -1601,7 +1654,7 @@ sub start_ts() {
 	@buff = ();
 	if (-f $pcimap) {
 		$buff[0] = "Starting Terminal Server...\n\n";
-		`touch /etc/dhcpd.conf.etherboot.kernel` if ! -f "/etc/dhcpd.conf.etherboot.kernel";
+		touch("/etc/dhcpd.conf.etherboot.kernel") if ! -f "/etc/dhcpd.conf.etherboot.kernel";
 		my $buff_index = service_change("dhcpd", "start", 2);
 		$buff_index = service_change("portmap", "start", $buff_index);
 		$buff_index = service_change("clusternfs", "start", $buff_index);
