@@ -40,7 +40,10 @@ void set_next(unsigned int cluster, unsigned int val) {
     free_all();
     croak("fat::set_next: cluster %d outside filesystem", cluster);
   }
-  type_size == 1 ? *p : *((unsigned int *) p) = val;
+  if (type_size == 1)
+    *p = val;
+  else
+    *((unsigned int *) p) = val;
 }
 
 MODULE = resize_fat::c_rewritten PACKAGE = resize_fat::c_rewritten
@@ -48,7 +51,7 @@ MODULE = resize_fat::c_rewritten PACKAGE = resize_fat::c_rewritten
 PROTOTYPES: DISABLE
 
 
-void 
+void
 read_fat(fd, offset, size, magic)
   int fd
   int offset
