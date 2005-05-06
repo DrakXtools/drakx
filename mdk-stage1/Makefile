@@ -104,7 +104,7 @@ STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
 
 
 ifeq (DIETLIBC, $(L))
-STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
+STAGE1_NETWORK_LIBS = /usr/$(LIB)/dietlibc/bin-$(ARCH)/librpc.a
 else
 STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
 endif
@@ -149,15 +149,6 @@ BINS += stage1-cdrom stage1-network
 endif
 endif
 
-ifeq (i386, $(ARCH))
-DIRS = dietlibc
-endif
-ifeq (ppc, $(ARCH))
-DIRS = dietlibc
-endif
-ifeq (x86_64, $(ARCH))
-DIRS = dietlibc
-endif
 DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
 ifeq (i386, $(ARCH))
 DIRS += pcmcia_
@@ -246,7 +237,7 @@ localclean:
 tar-mkinitrd_helper: clean
 	rm -rf mkinitrd_helper-subdir
 	mkdir mkinitrd_helper-subdir
-	cd mkinitrd_helper-subdir ; cp -a ../dietlibc ../insmod-busybox ../Makefile.common ../insmod.h ../log.h . ; \
+	cd mkinitrd_helper-subdir ; cp -a ../insmod-busybox ../Makefile.common ../insmod.h ../log.h . ; \
 	    cp ../Makefile.mkinitrd_helper Makefile
 	tar cfj mkinitrd_helper.tar.bz2 mkinitrd_helper-subdir --exclude CVS
 	rm -rf mkinitrd_helper-subdir

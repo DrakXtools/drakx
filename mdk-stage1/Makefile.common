@@ -31,7 +31,7 @@ L = GLIBC
 endif
 
 ifeq (DIETLIBC, $(L))
-DIET = $(top_dir)/dietlibc/bin-$(ARCH)/diet
+DIET = diet
 endif
 
 #- flags used by all stuff
@@ -41,7 +41,7 @@ ifneq (ppc, $(ARCH))
 CFLAGS += -Werror
 endif
 
-DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I. -I$(top_dir)/bzlib
+DIETLIBC_INCLUDES = -I/usr/lib/dietlibc/include -I. -I$(top_dir)/bzlib
 GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
 INCLUDES = $($(L)_INCLUDES)
 

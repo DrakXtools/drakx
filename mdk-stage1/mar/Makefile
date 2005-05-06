@@ -39,10 +39,7 @@ libmar.a: mar-extract-only.o
 	ar -cru $@ $^
 	ranlib $@
 
-dietlibc:
-	make -C ../dietlibc
-
-mar-extract-only.o: dietlibc mar-extract-only.c mar-extract-only.h mar.h
+mar-extract-only.o: mar-extract-only.c mar-extract-only.h mar.h
 	$(DIET) gcc $(CFLAGS) $(INCLUDES) -c mar-extract-only.c
 
 mar-frontend.o: mar-frontend.c mar.h mar-extract-only.h
