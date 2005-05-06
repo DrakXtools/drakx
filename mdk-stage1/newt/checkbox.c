@@ -193,6 +193,8 @@ struct eventResult cbEvent(newtComponent co, struct event ev) {
     struct checkbox * cb = co->data;
     struct eventResult er;
     const char * cur;
+    er.result = ER_IGNORED;
+    er.u.focus = NULL;
 
     if (ev.when == EV_NORMAL) {
 	switch (ev.event) {

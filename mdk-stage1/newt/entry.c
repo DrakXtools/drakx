@@ -197,6 +197,8 @@ static struct eventResult entryEvent(newtComponent co,
     struct entry * en = co->data;
     struct eventResult er;
     int ch;
+    er.result = ER_IGNORED;
+    er.u.focus = NULL;
 
     if (ev.when == EV_NORMAL) {
 	switch (ev.event) {

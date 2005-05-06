@@ -15,6 +15,9 @@
 #ifndef _CONFIG_STAGE1_H_
 #define _CONFIG_STAGE1_H_
 
+#ifdef _GNU_SOURCE
+#   undef _GNU_SOURCE
+#endif
 #define _GNU_SOURCE 1
 
 

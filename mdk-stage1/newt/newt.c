@@ -397,7 +397,7 @@ int newtOpenWindow(int left, int top, int width, int height,
     n = 0;
     for (j = 0; j < height + 3; j++, row++) {
 	SLsmg_gotorc(row, col);
-	SLsmg_read_raw(currentWindow->buffer + n,
+	SLsmg_read_raw((SLsmg_Char_Type *)currentWindow->buffer + n,
 				currentWindow->width + 3);
 	n += currentWindow->width + 3;
     }
@@ -462,7 +462,7 @@ void newtPopWindow(void) {
     col = currentWindow->left - 1;
     for (j = 0; j < currentWindow->height + 3; j++, row++) {
 	SLsmg_gotorc(row, col);
-	SLsmg_write_raw(currentWindow->buffer + n,
+	SLsmg_write_raw((SLsmg_Char_Type *)currentWindow->buffer + n,
 				currentWindow->width + 3);
 	n += currentWindow->width + 3;
     }

@@ -220,7 +220,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 	
 	memcpy(&intf->ip, &breq->yiaddr, 4);
 
-	chptr = breq->vendor;
+	chptr = (unsigned char *) breq->vendor;
 	chptr += 4;
 	while (*chptr != 0xFF && (void *) chptr < (void *) breq->vendor + DHCP_VENDOR_LENGTH) {
 		char tmp_str[500];
@@ -307,7 +307,7 @@ static int get_vendor_code(struct bootp_request * bresp, unsigned char option, v
 	unsigned char * chptr;
 	unsigned int length, theOption;
 	
-	chptr = bresp->vendor + 4;
+	chptr = (unsigned char*) bresp->vendor + 4;
 	while (*chptr != 0xFF && *chptr != option) {
 		theOption = *chptr++;
 		if (!theOption)
@@ -483,7 +483,7 @@ static void add_vendor_code(struct bootp_request * breq, unsigned char option, u
 	unsigned char * chptr;
 	int theOption, theLength;
 
-	chptr = breq->vendor;
+	chptr = (unsigned char*) breq->vendor;
 	chptr += 4;
 	while (*chptr != 0xFF && *chptr != option) {
 		theOption = *chptr++;

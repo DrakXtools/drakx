@@ -23,7 +23,7 @@ all: libpcmcia.a
 clean:
 	rm -f *.o libpcmcia.a
 
-FLAGS = -D__linux__ -Wall -Werror -Os -fomit-frame-pointer -pipe -c -I.. -D_BSD_SOURCE
+FLAGS = -D__linux__ -Wall -Werror -Wno-deprecated-declarations -Os -fomit-frame-pointer -pipe -c -I.. -D_BSD_SOURCE
 
 
 OBJS = probe.o cardmgr.o lex_config.o yacc_config.o

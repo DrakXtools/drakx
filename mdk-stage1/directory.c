@@ -45,7 +45,7 @@ char * extract_list_directory(char * direct)
 	return strdup(tmp);
 }
 
-static enum return_type choose_iso_in_directory(char *directory, char *location_full) 
+static void choose_iso_in_directory(char *directory, char *location_full) 
 {
 	char **file;
 	char *stage2_isos[100] = { "Use directory as a mirror tree", "-----" };
@@ -90,7 +90,7 @@ static enum return_type choose_iso_in_directory(char *directory, char *location_
 						DISTRIB_NAME " Distribution.",
 						stage2_isos, file);
 			if (results == RETURN_BACK) {
-				return RETURN_BACK;
+				return;
 			} else if (results == RETURN_OK) {
 				if (!strcmp(*file, stage2_isos[0])) {
 					/* use directory as a mirror tree */

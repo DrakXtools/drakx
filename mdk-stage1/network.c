@@ -20,6 +20,9 @@
  */
 
 #include <stdlib.h>
+/* define _GNU_SOURCE so strndup is available */
+#define _GNU_SOURCE
+#include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <net/if.h>
@@ -47,9 +50,6 @@
 #include "network.h"
 #include "directory.h"
 #include "wireless.h"
-
-/* include it after config-stage1.h so that _GNU_SOURCE is defined and strndup is available */
-#include <string.h>
 
 static void error_message_net(void)  /* reduce code size */
 {

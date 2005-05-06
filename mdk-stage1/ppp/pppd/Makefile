@@ -28,7 +28,7 @@ all: $(TARGETS)
 clean:
 	rm -f *.o *.a $(BINTARGET) pppd
 
-FLAGS = -Wall -Werror -Os -fomit-frame-pointer -DDO_BSD_COMPRESS=0 -D_linux_=1 -DHAVE_MMAP -DNO_DRAND48 -D_BSD_SOURCE -D_GNU_SOURCE
+FLAGS = -Wall -Wno-deprecated-declarations -Werror -Os -fomit-frame-pointer -DDO_BSD_COMPRESS=0 -D_linux_=1 -DHAVE_MMAP -DNO_DRAND48 -D_BSD_SOURCE -D_GNU_SOURCE
 
 INCS = -I../include -I.
 
