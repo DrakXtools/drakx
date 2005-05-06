@@ -145,6 +145,7 @@ sub selectInstallClass {
 	@{$o->{orderedSteps}} = uniq(map {
 	    $_ eq 'selectInstallClass' ? ($_, 'doPartitionDisks', 'formatPartitions') : $_;
 	} @{$o->{orderedSteps}});
+    }
 }
 
 #------------------------------------------------------------------------------
