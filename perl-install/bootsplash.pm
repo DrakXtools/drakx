@@ -112,6 +112,7 @@ sub theme_write_config_for_resolution {
 
     my $config = theme_get_config_for_resolution($name, $res);
     create_path($config);
+    my $jpeg = theme_get_image_for_resolution($name, $res);
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
@@ -136,8 +137,8 @@ tw=$conf->{tw}
 th=$conf->{th}
 
 # name of the picture file (full path recommended)
-jpeg=$conf->{jpeg}
-silentjpeg=$conf->{silentjpeg}
+jpeg=$jpeg
+silentjpeg=$jpeg
 
 progress_enable=1
 
