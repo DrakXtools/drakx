@@ -25,22 +25,20 @@ unless ($in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert')) {
 }
 
 my @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
+my %scale_settings = (
+		      tx => [ 1/10, N("x coordinate of text box\nin number of characters") ],
+		      ty => [ 1/10, N("y coordinate of text box\nin number of characters") ],
+		      tw => [ 8/10, N("text width") ],
+		      th => [ 8/10, N("text box height") ],
+		      px => [ 2/10, N("the progress bar x coordinate\nof its upper left corner") ],
+		      py => [ 7/10, N("the progress bar y coordinate\nof its upper left corner") ],
+		      pw => [ 6/10, N("the width of the progress bar") ],
+		      ph => [ 1/10, N("the height of the progress bar") ],
+		     );
 
-my %theme;
+my (%theme, %adj);
 set_theme('new_theme');
 set_resolution(@resolutions);
-
-my @scale_settings = (
-		      [ 'tx', N("x coordinate of text box\nin number of characters") ],
-		      [ 'ty', N("y coordinate of text box\nin number of characters") ],
-		      [ 'tw', N("text width") ],
-		      [ 'th', N("text box height") ],
-		      [ 'px', N("the progress bar x coordinate\nof its upper left corner") ],
-		      [ 'py', N("the progress bar y coordinate\nof its upper left corner") ],
-		      [ 'pw', N("the width of the progress bar") ],
-		      [ 'ph', N("the height of the progress bar") ],
-		     );
-my %adj;
 
 gtkadd($window->{window},
        gtkadd(Gtk2::HBox->new(1, 5),
@@ -57,7 +55,7 @@ gtkadd($window->{window},
 					       gtksignal_connect(Gtk2::Button->new(N("Browse")), clicked => \&choose_image) ])),
 		     gtkadd(Gtk2::Frame->new(N("Configure bootsplash picture")),
 			    create_packtable({ col_spacings => 10, row_spacings => 5 },
-					     (map { [ Gtk2::Label->new($_->[1]), new_scale($_->[0]) ] } @scale_settings),
+					     (map { [ Gtk2::Label->new($scale_settings{$_}[1]), new_scale($_) ] } sort keys %scale_settings),
 					     [ Gtk2::Label->new(N("the color of the progress bar")),
 					       gtksignal_connect(Gtk2::Button->new(N("Choose color")), clicked => \&choose_color) ],
 					     [ gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
@@ -91,7 +89,7 @@ sub close_window() {
 sub read_theme_config {
     my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
     -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
-    -f $theme{conf}{silentjpeg} && load_image($theme{conf}{silentjpeg}) and $image_file = $theme{conf}{silentjpeg};
+    -f $theme{conf}{silentjpeg} && load_image($theme{conf}{silentjpeg}) and $theme{image} = $theme{conf}{silentjpeg};
     $theme{conf}{pc} ||= '0x21459d';
     update_scale_values();
 }
@@ -107,6 +105,11 @@ sub set_resolution {
     $theme{res} = $res;
     ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
     read_theme_config();
+    foreach (keys %scale_settings) {
+	$theme{conf}{$_} eq '' and $theme{conf}{$_} = get_scale_max($_) * $scale_settings{$_}[0];
+    }
+    update_scale_values();
+    $image_area->set_size_request($theme{res_w}, $theme{res_w});
 }
 
 sub save_theme() {
@@ -118,8 +121,7 @@ sub save_theme() {
 sub load_image {
     my ($img) = @_;
     $image_pixbuf = Gtk2::Gdk::Pixbuf->new_from_file($img);
-    $image_pixbuf->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
-    $image_area->set_size_request($theme{res_w}, $theme{res_w});
+    $image_pixbuf = $image_pixbuf->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
     $image_area->queue_draw;
     1;
 }
@@ -175,7 +177,7 @@ sub check_scale_value {
     $adj{$linked}->get_value > $max and $adj{$linked}->set_value($max);
 }
 sub update_scale_values {
-    foreach (map { $_->[0] } @scale_settings) {
+    foreach (keys %adj) {
 	$adj{$_}->upper(get_scale_max($_));
 	$adj{$_}->set_value($theme{conf}{$_});
     }
@@ -213,5 +215,9 @@ sub image_expose {
     my $window = $widget->window;
     $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf, 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf;
     $window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
+    my ($tx1, $ty1) = @{$theme{conf}}{'tx', 'ty'};
+    my ($tx2, $ty2) = ($tx1 + $theme{conf}{tw}, $ty1 + $theme{conf}{th});
+    $window->draw_line($widget->style->white_gc, $tx1, $ty1, $tx2, $ty2);
+    $window->draw_line($widget->style->white_gc, $tx1, $ty2, $tx2, $ty1);
     0;
 }
