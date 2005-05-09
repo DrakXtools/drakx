@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.8mdk
+Release: 0.9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,9 +369,35 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed May  4 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.9mdk
+- diskdrake (pixel):
+  o fix displaying number of logical extents
+  o allow resizing ext3 LV if not mounted
+  o allow resizing reiserfs LV even if not mounted
+- drakbackup (stew):
+  o clarify quota message, optional delete old backups (#15066)
+  o optional mail "From" address (#15293)
+  o fix automagic addition of /root to backups when not desired
+- drakconnect (blino):
+  o ask wireless settings before boot protocol selection
+  o remove useless warning in install, we never override configuration (#10827)
+- draksplash (blino):
+  o fix theme creation
+  o preview theme in real time, cleanups
+  o use default values for scale settings
+  o draw a cross inside the text box
+- drakTermServ (stew):
+  o update for new etherboot
+  o predict NBI disk space usage and check
+  o catch failed NBI creation (#13902)
+  o catch failed dhcpd.conf creation (#13943)
+  o misc small bug fixes
+
 * Mon May  2 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.8mdk
 - ensure most sub dialogs reuse the icon of their main window
 - drakboot: improve layout
+- drakconnect: fix USB devices detection for ndiswrapper (blino)
+- harddrake: fix SATA & hw RAID detection (detect them pior to detecting PATA)
 
 * Fri Apr 29 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.7mdk
 - drakconnect (blino):
