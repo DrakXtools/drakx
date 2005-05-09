@@ -2,9 +2,9 @@ package bootsplash;
 
 use common;
 
-my $themes_dir = "$::prefix/usr/share/bootsplash/themes/";
-my $themes_config_dir = "$::prefix/etc/bootsplash/themes/";
-my $sysconfig_file = '$::prefix/etc/sysconfig/bootsplash';
+my $themes_dir = "$::prefix/usr/share/bootsplash/themes";
+my $themes_config_dir = "$::prefix/etc/bootsplash/themes";
+my $sysconfig_file = "$::prefix/etc/sysconfig/bootsplash";
 my $bootsplash_scripts = "$::prefix/usr/share/bootsplash/scripts";
 my $default_theme = 'Mandrivalinux';
 our $default_thumbnail = '/usr/share/libDrakX/pixmaps/nosplash_thumb.png';
@@ -29,12 +29,12 @@ sub themes_read_sysconfig {
 
 sub theme_get_image_for_resolution {
     my ($theme, $res) = @_;
-    $themes_dir . $theme . '/images/bootsplash-' . $res . ".jpg";
+    $themes_dir . '/' . $theme . '/images/bootsplash-' . $res . ".jpg";
 }
 
 sub theme_get_config_for_resolution {
     my ($theme, $res) = @_;
-    $themes_config_dir . $theme . '/config/bootsplash-' . $res . ".cfg";
+    $themes_config_dir . '/' . $theme . '/config/bootsplash-' . $res . ".cfg";
 }
 
 sub theme_exists_for_resolution {
