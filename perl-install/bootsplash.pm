@@ -1,6 +1,7 @@
 package bootsplash;
 
 use common;
+use Xconfig::resolution_and_depth;
 
 my $themes_dir = "$::prefix/usr/share/bootsplash/themes";
 my $themes_config_dir = "$::prefix/etc/bootsplash/themes";
@@ -8,6 +9,16 @@ my $sysconfig_file = "$::prefix/etc/sysconfig/bootsplash";
 my $bootsplash_scripts = "$::prefix/usr/share/bootsplash/scripts";
 my $default_theme = 'Mandrivalinux';
 our $default_thumbnail = '/usr/share/libDrakX/pixmaps/nosplash_thumb.png';
+our @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
+
+sub get_framebuffer_resolution {
+    require bootloader;
+    my $bootloader = bootloader::read();
+    my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
+    $x_res ?
+      ($x_res->{X} . 'x' . $x_res->{Y}, 1) :
+      (first(@resolutions), 0);
+}
 
 sub themes_read_sysconfig {
     my ($res) = @_;
@@ -75,9 +86,17 @@ sub set_logo_console {
     substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $sysconfig_file;
 }
 
+sub create_path {
+    my ($file) = @_;
+    require File::Basename;
+    my $dir = File::Basename::dirname($file);
+    -d $dir or mkdir_p($dir);
+}
+
 sub theme_set_image_for_resolution {
     my ($name, $res, $source_image) = @_;
     my $dest_image = theme_get_image_for_resolution($name, $res);
+    create_path($dest_image);
     system('convert', '-scale', $res, $source_image, $dest_image);
     system($bootsplash_scripts . '/rewritejpeg',  $dest_image);
 }
@@ -91,10 +110,7 @@ sub theme_write_config_for_resolution {
     my ($name, $res, $conf) = @_;
 
     my $config = theme_get_config_for_resolution($name, $res);
-    require File::Basename;
-    my $dir = File::Basename::dirname($config);
-    -d $dir or mkdir_p($dir);
-
+    create_path($config);
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
