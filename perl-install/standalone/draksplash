@@ -41,7 +41,7 @@ set_theme('new_theme');
 set_resolution(@resolutions);
 
 gtkadd($window->{window},
-       gtkadd(Gtk2::HBox->new(1, 5),
+       gtkadd(Gtk2::HBox->new(0, 5),
 	      gtkadd(Gtk2::VBox->new(0, 5),
 		     gtkadd(Gtk2::Frame->new(N("first step creation")),
 			    create_packtable({ col_spacings => 10, row_spacings => 5 },
@@ -105,10 +105,6 @@ sub set_resolution {
     $theme{res} = $res;
     ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
     read_theme_config();
-    foreach (keys %scale_settings) {
-	$theme{conf}{$_} eq '' and $theme{conf}{$_} = get_scale_max($_) * $scale_settings{$_}[0];
-    }
-    update_scale_values();
     $image_area->set_size_request($theme{res_w}, $theme{res_w});
 }
 
@@ -177,6 +173,9 @@ sub check_scale_value {
     $adj{$linked}->get_value > $max and $adj{$linked}->set_value($max);
 }
 sub update_scale_values {
+    foreach (keys %scale_settings) {
+	$theme{conf}{$_} eq '' and $theme{conf}{$_} = get_scale_max($_) * $scale_settings{$_}[0];
+    }
     foreach (keys %adj) {
 	$adj{$_}->upper(get_scale_max($_));
 	$adj{$_}->set_value($theme{conf}{$_});
