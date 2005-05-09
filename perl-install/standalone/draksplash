@@ -14,7 +14,7 @@ my $in = 'interactive'->vnew('su');
 my $window = ugtk2->new('DrakSplash');
 $window->{rwindow}->signal_connect(delete_event => \&close_window);
 
-my ($image_area, $image_pixbuf);
+my ($image_area, @image_pixbuf);
 create_image_area();
 
 #- verification of package image magik
@@ -24,7 +24,6 @@ unless ($in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert')) {
         or close_window();
 }
 
-my @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
 my %scale_settings = (
 		      tx => [ 1/10, N("x coordinate of text box\nin number of characters") ],
 		      ty => [ 1/10, N("y coordinate of text box\nin number of characters") ],
@@ -36,40 +35,49 @@ my %scale_settings = (
 		      ph => [ 1/10, N("the height of the progress bar") ],
 		     );
 
-my (%theme, %adj);
+my %theme;
 set_theme('new_theme');
-set_resolution(@resolutions);
+set_resolution([ bootsplash::get_framebuffer_resolution() ]->[0]);
+
+my %adj;
+create_adj_widgets();
+
+my $mode;
+my $notebook = gtksignal_connect(Gtk2::Notebook->new, switch_page => sub {
+				     (undef, undef, $mode) = @_;
+				     $image_area->queue_draw;
+				 });
+$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
+				 create_scale_table('px', 'pw', 'py', 'ph'),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('image_silent') })),
+		       N("Silent bootsplash"));
+$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
+				 create_scale_table('tx', 'tw', 'ty', 'th'),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('image_verbose') })),
+		       N("Verbose bootsplash"));
+$notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
+				 gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
+						       $theme{conf}{logo} = bool2yesno($_[0]->get_active);
+						   })),
+		       N("Console bootsplash"));
 
 gtkadd($window->{window},
-       gtkpack__(Gtk2::HBox->new(0, 5),
-	      gtkpack__(Gtk2::VBox->new(0, 5),
-		     gtkadd(Gtk2::Frame->new(N("first step creation")),
-			    create_packtable({ col_spacings => 10, row_spacings => 5 },
-					     [ Gtk2::Label->new(N("Theme name")),
-					       gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ bootsplash::themes_list() ], $theme{name}),
-								 changed => sub { set_theme($_[0]->entry->get_text) }) ],
-					     [ Gtk2::Label->new(N("final resolution")),
-					       gtksignal_connect(Gtk2::ComboBox->new_with_strings(\@resolutions, $theme{res}),
-								 changed => sub { set_resolution($_[0]->entry->get_text) }) ],
-					     [ Gtk2::Label->new(N("choose image file")),
-					       gtksignal_connect(Gtk2::Button->new(N("Browse")), clicked => \&choose_image) ])),
-		     gtkadd(Gtk2::Frame->new(N("Configure bootsplash picture")),
-			    create_packtable({ col_spacings => 10, row_spacings => 5 },
-					     (map { [ Gtk2::Label->new($scale_settings{$_}[1]), new_scale($_) ] } sort keys %scale_settings),
-					     [ Gtk2::Label->new(N("the color of the progress bar")),
-					       gtksignal_connect(Gtk2::Button->new(N("Choose color")), clicked => \&choose_color) ],
-					     [ gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
-								     $theme{conf}{logo} = bool2yesno($_[0]->get_active);
-								 }) ])),
-		     gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
-		     gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_window)),
-	      $image_area));
-
-my %scale_links = (tx => 'tw', ty => 'th', px => 'pw', py => 'ph');
-while (my ($n1, $n2) = each(%scale_links)) {
-    $adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
-    $adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
-}
+       gtkpack(Gtk2::VBox->new(0, 5),
+	      gtkpack__(Gtk2::HBox->new(0, 5),
+			create_packtable({ col_spacings => 10, row_spacings => 5 },
+					 [ Gtk2::Label->new(N("Theme name")),
+					   gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ bootsplash::themes_list() ], $theme{name}),
+							     changed => sub { set_theme($_[0]->get_child->get_text) }) ],
+					 [ Gtk2::Label->new(N("final resolution")),
+					   gtksignal_connect(??Gtk2::ComboBox->new_with_strings(\@bootsplash::resolutions, $theme{res}),
+							     changed => sub { set_resolution($_[0]->get_text) }) ])),
+	       $notebook,
+	       gtkpack(Gtk2::HBox->new(0, 5),
+			 gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
+			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_window)))),
+gtkshow(gtkadd(Gtk2::Window->new('toplevel'), $image_area));
 
 update_scale_values();
 
@@ -81,7 +89,6 @@ $window->main;
 # Should never get here
 ugtk2->exit(0);
 
-
 sub close_window() {
    ugtk2->exit(0);
 }
@@ -89,7 +96,10 @@ sub close_window() {
 sub read_theme_config {
     my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
     -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
-    -f $theme{conf}{silentjpeg} && load_image($theme{conf}{silentjpeg}) and $theme{image} = $theme{conf}{silentjpeg};
+    if (-f $theme{conf}{silentjpeg}) {
+	load_image($theme{conf}{silentjpeg});
+	$theme{image_silent} = $theme{conf}{silentjpeg};
+    }
     $theme{conf}{pc} ||= '0x21459d';
     update_scale_values();
 }
@@ -105,33 +115,35 @@ sub set_resolution {
     $theme{res} = $res;
     ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
     read_theme_config();
-    $image_area->set_size_request($theme{res_w}, $theme{res_w});
+    $image_area->set_size_request($theme{res_w}, $theme{res_h});
 }
 
 sub save_theme() {
     my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
-    bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{image});
+    bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{image_silent});
     bootsplash::theme_write_config_for_resolution($theme{name}, $theme{res}, $theme{conf});
 }
 
 sub load_image {
     my ($img) = @_;
-    $image_pixbuf = Gtk2::Gdk::Pixbuf->new_from_file($img);
-    $image_pixbuf = $image_pixbuf->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
+    $image_pixbuf[0] = Gtk2::Gdk::Pixbuf->new_from_file($img);
+    $image_pixbuf[0] = $image_pixbuf[0]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
+    $image_pixbuf[2] = $image_pixbuf[1] = $image_pixbuf[0];
     $image_area->queue_draw;
-    1;
 }
 
-sub choose_image() {
+sub choose_image {
+    my ($name) = @_;
     my $file_dialog = Gtk2::FileChooserDialog->new(N("choose image"), $window->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok');
-    $file_dialog->set_filename($theme{image} || '~/');
+    $file_dialog->set_filename($theme{$name} || '~/');
     $file_dialog->show;
     while (my $answer = $file_dialog->run) {
 	if (member($answer, qw(cancel delete-event))) {
 	    $file_dialog->destroy;
 	    return;
-	} elsif ($answer eq 'ok' && load_image(my $img = $file_dialog->get_filename)) {
-	    $theme{image} = $img;
+	} elsif ($answer eq 'ok') {
+	    load_image(my $img = $file_dialog->get_filename);
+	    $theme{$name} = $img;
 	    $file_dialog->destroy;
 	    return;
 	}
@@ -152,11 +164,21 @@ sub choose_color() {
 
 
 #- Adjustement widgets
-sub new_scale {
-    my ($name) = @_;
-    my $w = Gtk2::HScale->new($adj{$name} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0));
-    $w->set_digits(0);
-    $w;
+sub create_adj_widgets() {
+    $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
+    my %scale_links = (tx => 'tw', ty => 'th', px => 'pw', py => 'ph');
+    while (my ($n1, $n2) = each(%scale_links)) {
+	$adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
+	$adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
+    }
+}
+sub create_scale_table {
+    my @settings = @_;
+    create_packtable({ col_spacings => 10, row_spacings => 5 }, map {
+	my $w = Gtk2::HScale->new($adj{$_});
+	$w->set_digits(0);
+	[ Gtk2::Label->new($scale_settings{$_}[1]), $w ];
+    } @settings);
 }
 sub get_scale_max {
     my ($name) = @_;
@@ -183,27 +205,16 @@ sub update_scale_values {
 }
 
 
-#- FIXME duplicate with draksplash2
-
 sub create_image_area() {
     $image_area = Gtk2::DrawingArea->new;
     $image_area->can_focus(1);
     $image_area->add_events('button-press-mask');
     $image_area->signal_connect(expose_event => \&image_expose);
-    my $keys = {
-	$Gtk2::Gdk::Keysyms{q} => \&close_window,
-	$Gtk2::Gdk::Keysyms{Escape} => \&close_window,
-    };
-
     $image_area->signal_connect(key_press_event => sub {
 	my (undef, $event) = @_;
-
-	if (my $f = $keys->{$event->keyval}) {
-	    $f->(member('control-mask', @{$event->state}));
-	}
+	member($event->keyval, 'q', 'Escape') and close_window();
 	1;
     });
-
     $image_area->grab_focus;
     $image_area->show;
     $image_area;
@@ -212,11 +223,15 @@ sub create_image_area() {
 sub image_expose {
     my ($widget) = @_;
     my $window = $widget->window;
-    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf, 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf;
-    $window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
-    my ($tx1, $ty1) = @{$theme{conf}}{'tx', 'ty'};
-    my ($tx2, $ty2) = ($tx1 + $theme{conf}{tw}, $ty1 + $theme{conf}{th});
-    $window->draw_line($widget->style->white_gc, $tx1, $ty1, $tx2, $ty2);
-    $window->draw_line($widget->style->white_gc, $tx1, $ty2, $tx2, $ty1);
+    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$mode], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$mode];
+    if ($mode == 0) { #- silent
+	$window->draw_rectangle($widget->style->white_gc, 1, @{$theme{conf}}{'px', 'py', 'pw', 'ph'});
+    } else { #- verbose or console
+	$window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
+	my ($tx1, $ty1) = @{$theme{conf}}{'tx', 'ty'};
+	my ($tx2, $ty2) = ($tx1 + $theme{conf}{tw}, $ty1 + $theme{conf}{th});
+	$window->draw_line($widget->style->white_gc, $tx1, $ty1, $tx2, $ty2);
+	$window->draw_line($widget->style->white_gc, $tx1, $ty2, $tx2, $ty1);
+    }
     0;
 }
