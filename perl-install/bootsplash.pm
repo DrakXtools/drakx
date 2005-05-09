@@ -97,7 +97,8 @@ sub theme_set_image_for_resolution {
     my ($name, $res, $source_image) = @_;
     my $dest_image = theme_get_image_for_resolution($name, $res);
     create_path($dest_image);
-    system('convert', '-scale', $res, $source_image, $dest_image);
+    #- Append an exclamation point to the geometry to force the image size to exactly the size you specify.
+    system('convert', '-geometry', $res . '!', $source_image, $dest_image);
     system($bootsplash_scripts . '/rewritejpeg',  $dest_image);
 }
 
