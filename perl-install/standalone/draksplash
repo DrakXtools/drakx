@@ -41,8 +41,8 @@ set_theme('new_theme');
 set_resolution(@resolutions);
 
 gtkadd($window->{window},
-       gtkadd(Gtk2::HBox->new(0, 5),
-	      gtkadd(Gtk2::VBox->new(0, 5),
+       gtkpack__(Gtk2::HBox->new(0, 5),
+	      gtkpack__(Gtk2::VBox->new(0, 5),
 		     gtkadd(Gtk2::Frame->new(N("first step creation")),
 			    create_packtable({ col_spacings => 10, row_spacings => 5 },
 					     [ Gtk2::Label->new(N("Theme name")),
