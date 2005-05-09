@@ -117,40 +117,32 @@ sub theme_write_config_for_resolution {
 # this file is necessary to specify the coordinates of the text box on the
 # splash screen.
 
-# tx is the x coordinate of the text window in characters. default is 24
-# multiply width font width for coordinate in pixels.
+# config file version
+version=3
+
+# should the picture be displayed?
+state=1
+
+# fgcolor is the text forground color.
+# bgcolor is the text background (i.e. transparent) color.
+fgcolor=7
+bgcolor=0
+
+# (tx, ty) are the (x, y) coordinates of the text window in pixels.
+# tw/th is the width/height of the text window in pixels.
 tx=$conf->{tx}
-
-# ty is the y coordinate of the text window in characters. default is 14
 ty=$conf->{ty}
-
-# tw is the width of the text window in characters. default is 130
-# note: this should at least be 80 as on the standard linux text console
 tw=$conf->{tw}
-
-# th is the height of the text window in characters. default is 44
-# NOTE: this should at least be 25 as on the standard linux text console
 th=$conf->{th}
 
-# px is the progress bar x coordinate of its upper left corner
-px=$conf->{px}
-
-# py is the progress bar y coordinate of its upper left corner
-py=$conf->{py}
-
-# pw is the with of the progress bar
-pw=$conf->{pw}
-
-# ph is the height of the progress bar
-ph=$conf->{ph}
-
-# pc is the color of the progress bar
-pc=$conf->{pc}
+# name of the picture file (full path recommended)
+jpeg=$conf->{jpeg}
+silentjpeg=$conf->{silentjpeg}
 
 progress_enable=1
 
 overpaintok=1
-# Display logo on console.
+
 LOGO_CONSOLE=$conf->{LOGO_CONSOLE}
 ));
 }
