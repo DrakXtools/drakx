@@ -657,7 +657,7 @@ my %IM2packages = (
                    'scim' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
-                              ja => [ qw(scim-anthy scim-uim uim-anthy scim-input-pad) ],
+                              ja => [ qw(scim-anthy scim-input-pad) ],
                               ko => [ qw(scim-hangul) ],
                               zh => [ qw(scim-pinyin scim-tables scim-chewing) ],
                              },
