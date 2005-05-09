@@ -95,18 +95,11 @@ sub run_boot_window {
 
 sub splash_choice() {
     require bootsplash;
-    require Xconfig::resolution_and_depth;
-    my $cur_res;
-    my $no_bootsplash;
-    if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga})) {
-        $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
-    } else {
-        $no_bootsplash = 1 unless $::testing; #- we can not select any theme we're not in Framebuffer mode :-/
-        $cur_res = '800x600';
-    }
+    my ($cur_res, $bootsplash_available) = bootsplash::get_framebuffer_resolution();
+    $bootsplash_available = 1 if $::testing;
 
     my $theme = bootsplash::themes_read_sysconfig($cur_res);
-    $no_bootsplash and $theme->{enabled} = 0;
+    $bootsplash_available or $theme->{enabled} = 0;
 
     my $boot_pic = gtkcreate_img($bootsplash::default_thumbnail);
     change_image($boot_pic, $theme->{name}, $cur_res);
@@ -128,7 +121,7 @@ sub splash_choice() {
                                     0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $theme->{enabled}),
                                                          clicked => sub {
                                                              $theme->{enabled} = !$theme->{enabled};
-                                                             if ($boot_warn && $no_bootsplash && $theme->{enabled}) {
+                                                             if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
                                                                  if ($in->ask_yesorno(N("Warning"),
                                                                                       [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
                                                                                         N("Do you want to configure it now?") ])) {
@@ -242,7 +235,7 @@ sub change_image {
 }
 
 sub enable_framebuffer() {
-    my $vga = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
+    my $vga = bootsplash::get_framebuffer_resolution();
     my ($current_entry) = cat_('/proc/cmdline') =~ /^BOOT_IMAGE=(\S+)/;
     my %entries = (
                    $current_entry => 1
