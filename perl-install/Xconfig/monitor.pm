@@ -226,7 +226,7 @@ sub probe_using_X {
     } or return;
 
     my $resolution = run_program::rooted_get_stdout($::prefix, 'monitor-probe-using-X', $card_Driver) or return;
-    generic_flat_panel($resolution);
+    generic_flat_panel(chomp_($resolution));
 }
 
 sub probe_DMI() {
