@@ -379,6 +379,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o force the exact image size when writing a theme
   o write bootsplash v3 configuration files (progress bar still
     missing)
+  o allow to modify progress bar and console box by dragging the mouse
+  o really get default vga mode
+  o shrink preview window on resolution change
+  o handle both silent and verbose images
 - localedrake (UTUMI Hirosi):
   o add support for iiimf
   o do not install anymore uim-anthy for japanese users
