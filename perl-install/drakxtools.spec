@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.9mdk
+Release: 0.10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May 10 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.10mdk
+- draksplash (blino):
+  o improved layout (separate window for image previews, notebook to
+    split silent/verbose/console settings)
+  o update scale factors when the theme name is changed too
+  o use default jpeg image path in config file for both silent and
+    verbose images
+  o force the exact image size when writing a theme
+  o write bootsplash v3 configuration files (progress bar still
+    missing)
+- localedrake (UTUMI Hirosi):
+  o add support for iiimf
+  o do not install anymore uim-anthy for japanese users
+
 * Wed May  4 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.9mdk
 - diskdrake (pixel):
   o fix displaying number of logical extents
