@@ -12,6 +12,7 @@ my $in = 'interactive'->vnew('su');
 
 my $window = ugtk2->new('DrakSplash');
 $window->{rwindow}->signal_connect(delete_event => \&close_window);
+my $preview_window = ugtk2->new('DrakSplash');
 
 my $current_rect = [];
 my $current_point;
@@ -80,7 +81,7 @@ gtkadd($window->{window},
 	       gtkpack(Gtk2::HBox->new(0, 5),
 			 gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
 			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_window)))),
-gtkshow(gtkadd(Gtk2::Window->new('toplevel'), $image_area));
+gtkshow(gtkadd($preview_window->{window}, $image_area));
 
 update_scale_values();
 
@@ -122,6 +123,7 @@ sub set_resolution {
     ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
     read_theme_config();
     $image_area->set_size_request($theme{res_w}, $theme{res_h});
+    $preview_window->shrink_topwindow();
 }
 
 sub save_theme() {
