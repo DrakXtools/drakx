@@ -557,6 +557,12 @@ my %IM_config =
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
             },
+   iiimf => {
+             GTK_IM_MODULE => 'iiim',
+             XIM => 'iiimx',
+             XIM_PROGRAM => 'iiimx',
+             XMODIFIERS => '@im=iiimx',
+            },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
                XIM => 'im-ja-xim-server',
@@ -654,6 +660,13 @@ set_default_im('scim',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UT
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
                    'chinput' =>  { generic => [ 'miniChinput' ] },
+                   'iiimf' => {
+                              generic => [ qw(iiimf-engines-unit) ],
+                              am => [ qw(iiimf-engines-unit) ],
+                              ja => [ qw(iiimf-engines-canna) ],
+                              ko => [ qw(iiimf-engines-sun-korea) ],
+                              zh => [ qw(iiimf-engines-sun-chinese) ],
+                             },
                    'scim' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
