@@ -10,6 +10,7 @@ use ugtk2 qw(:all);
 use Gtk2::Gdk::Keysyms;
 use MDK::Common;
 use Image::Magick;
+use bootsplash qw(:drawing);
 
 
 my $kernel_size = 1500; #- in KiB
@@ -158,51 +159,6 @@ sub color_index2gc {
     $window->get_colormap->rgb_find_color($gdk_color);
     $gc->set_rgb_fg_color($gdk_color);
     $gc;
-}
-
-sub rectangle2xywh {
-    my ($rect) = @_;
-
-    my $x = min($rect->[0]{X} , $rect->[1]{X});
-    my $y = min($rect->[0]{Y} , $rect->[1]{Y});
-    my $w = abs($rect->[0]{X} - $rect->[1]{X});
-    my $h = abs($rect->[0]{Y} - $rect->[1]{Y});
-    ($x, $y, $w, $h);
-}
-
-sub distance {
-    my ($p1, $p2) = @_;
-    sqr($p1->{X} - $p2->{X}) + sqr($p1->{Y} - $p2->{Y});
-}
-
-sub farthest {
-    my ($point, @others) = @_;
-    my $i = 0;
-    my $dist = 0;
-    my $farthest;
-    foreach (@others) {
-	my $d = distance($point, $_);
-	if ($d >= $dist) {
-	    $dist = $d;
-	    $farthest = $_;
-	}
-    }
-    $farthest;
-}
-
-sub nearest {
-    my ($point, @others) = @_;
-    my $i = 0;
-    my $dist;
-    my $nearest;
-    foreach (@others) {
-	my $d = distance($point, $_);
-	if (! defined $dist || $d < $dist) {
-	    $dist = $d;
-	    $nearest = $_;
-	}
-    }
-    $nearest;
 }
 
 sub create_popup() {

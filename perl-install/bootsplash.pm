@@ -2,6 +2,11 @@ package bootsplash;
 
 use common;
 use Xconfig::resolution_and_depth;
+use vars qw(@ISA %EXPORT_TAGS);
+
+@ISA = qw(Exporter);
+%EXPORT_TAGS = (drawing => [qw(rectangle2xywh xywh2rectangle distance farthest nearest)]);
+@EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 my $themes_dir = "$::prefix/usr/share/bootsplash/themes";
 my $themes_config_dir = "$::prefix/etc/bootsplash/themes";
@@ -146,6 +151,56 @@ overpaintok=1
 
 LOGO_CONSOLE=$conf->{LOGO_CONSOLE}
 ));
+}
+
+sub rectangle2xywh {
+    my ($rect) = @_;
+
+    my $x = min($rect->[0]{X} , $rect->[1]{X});
+    my $y = min($rect->[0]{Y} , $rect->[1]{Y});
+    my $w = abs($rect->[0]{X} - $rect->[1]{X});
+    my $h = abs($rect->[0]{Y} - $rect->[1]{Y});
+    ($x, $y, $w, $h);
+}
+
+sub xywh2rectangle {
+    my ($x, $y, $w, $h) = @_;
+    [ { X => $x, Y => $y }, { X => $x+$w, Y => $y+$w } ];
+}
+
+sub distance {
+    my ($p1, $p2) = @_;
+    sqr($p1->{X} - $p2->{X}) + sqr($p1->{Y} - $p2->{Y});
+}
+
+sub farthest {
+    my ($point, @others) = @_;
+    my $i = 0;
+    my $dist = 0;
+    my $farthest;
+    foreach (@others) {
+	my $d = distance($point, $_);
+	if ($d >= $dist) {
+	    $dist = $d;
+	    $farthest = $_;
+	}
+    }
+    $farthest;
+}
+
+sub nearest {
+    my ($point, @others) = @_;
+    my $i = 0;
+    my $dist;
+    my $nearest;
+    foreach (@others) {
+	my $d = distance($point, $_);
+	if (! defined $dist || $d < $dist) {
+	    $dist = $d;
+	    $nearest = $_;
+	}
+    }
+    $nearest;
 }
 
 1;
