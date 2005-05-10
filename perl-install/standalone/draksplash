@@ -53,12 +53,12 @@ my $notebook = gtksignal_connect(Gtk2::Notebook->new, switch_page => sub {
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
 				 create_scale_table('px', 'pw', 'py', 'ph'),
 				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('image_silent') })),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('silentjpeg') })),
 		       N("Silent bootsplash"));
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
 				 create_scale_table('tx', 'tw', 'ty', 'th'),
 				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('image_verbose') })),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('jpeg') })),
 		       N("Verbose bootsplash"));
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
 				 gtksignal_connect(Gtk2::CheckButton->new(N("Display logo on Console")), toggled => sub {
@@ -100,8 +100,10 @@ sub read_theme_config {
     my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
     -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
     if (-f $theme{conf}{silentjpeg}) {
-	load_image($theme{conf}{silentjpeg});
-	$theme{image_silent} = $theme{conf}{silentjpeg};
+	load_image($theme{conf}{silentjpeg}, 0);
+    }
+    if (-f $theme{conf}{jpeg}) {
+	load_image($theme{conf}{jpeg}, 1);
     }
     $theme{conf}{pc} ||= '0x21459d';
     update_scale_values();
@@ -109,6 +111,7 @@ sub read_theme_config {
 
 sub set_theme {
     my ($name) = @_;
+    @image_pixbuf = ();
     $theme{name} = $name;
     read_theme_config();
 }
@@ -123,15 +126,15 @@ sub set_resolution {
 
 sub save_theme() {
     my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
-    bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{image_silent});
+    bootsplash::theme_set_image_for_resolution($theme{name}, $theme{res}, $theme{conf}{silentjpeg});
     bootsplash::theme_write_config_for_resolution($theme{name}, $theme{res}, $theme{conf});
 }
 
 sub load_image {
-    my ($img) = @_;
-    $image_pixbuf[0] = Gtk2::Gdk::Pixbuf->new_from_file($img);
-    $image_pixbuf[0] = $image_pixbuf[0]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
-    $image_pixbuf[2] = $image_pixbuf[1] = $image_pixbuf[0];
+    my ($img, $mode) = @_;
+    $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img);
+    $image_pixbuf[$mode] = $image_pixbuf[$mode]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
+    $image_pixbuf[1-$mode] or $image_pixbuf[1-$mode] = $image_pixbuf[$mode];
     $image_area->queue_draw;
 }
 
@@ -146,7 +149,7 @@ sub choose_image {
 	    return;
 	} elsif ($answer eq 'ok') {
 	    load_image(my $img = $file_dialog->get_filename);
-	    $theme{$name} = $img;
+	    $theme{conf}{$name} = $img;
 	    $file_dialog->destroy;
 	    return;
 	}
@@ -228,7 +231,7 @@ sub create_image_area() {
 sub image_expose {
     my ($widget) = @_;
     my $window = $widget->window;
-    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$current_mode], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$current_mode];
+    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$current_mode>0], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$current_mode>0];
     if ($current_mode == 0) { #- silent
 	$window->draw_rectangle($widget->style->white_gc, 1, @{$theme{conf}}{'px', 'py', 'pw', 'ph'});
     } else { #- verbose or console
