@@ -1309,11 +1309,6 @@ sub during_install__l2charset {
     uc($c);
 }
 
-#- used in Makefile
-sub png_lang_files() {
-    print join(' ', map { "pixmaps/langs/lang-$_.png" } list_langs());
-}
-
 sub check() {
     $^W = 0;
     my ($warnings, $errors) = (0, 0);

@@ -98,133 +98,50 @@ install_pms: $(DIRS)
 mo_files : $(MOFILES)
 
 get_needed_files: $(DIRS) mo_files
-	eval `perl -V:version`; \
-	cat share/list `../tools/specific_arch share/list` | \
-	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
-	perl -lpe '@l = glob; m|\*.*/| && @l != 1 and die "no/multiple match for $$_\n"; $$_ = join("\n", @l)' > $(TMPDIR)/list
-	rpm -ql perl-Gtk2 perl-Glib | perl -lne 'print if m!^/usr/lib/perl5! && !/\.pod$$/ && ! -d' >> $(TMPDIR)/list
+	REP4PMS=$(REP4PMS) ../tools/install-xml-file-list share/list.xml $(DEST)
 
-	@missing=`perl -lne 'print if !-e $$_' $(TMPDIR)/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
-
-	find auto -follow -name "*.so" >> $(TMPDIR)/list
-
-	for i in $(LOCALFILES) `cat $(TMPDIR)/list` ; do \
-		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/(lib(64)?)/.*?/,/\1/,' | sort | uniq >> $(TMPDIR)/list; \
-	done
-
-	install -d $(DEST)/etc
-	install -d $(DEST)/etc/sysconfig/network-scripts
-	install -d $(DEST)/lib
-	install -d $(DEST)/$(LIB)
-	install -d $(DEST)/bin
-	install -d $(DEST)/usr/bin
-	install -d $(DEST)/usr/lib
-	install -d $(DEST)/usr/$(LIB)
-	install -d $(DEST)/usr/share
-	install -d $(DEST)/usr/share/langs
-	install -d $(DEST)/usr/share/gtk
-	install -d $(DEST)/usr/share/xmodmap
-	install -d $(DEST)/usr/X11R6/lib/X11/locale
-	install -d $(MEDIA_INFO_DEST)
-	install -s $(LOCALFILES) $(DEST)/usr/bin
-
-	cp -a /usr/lib/X11 $(DEST)/usr/lib
-ifeq (sparc,$(ARCH))
-	cp -a /usr/X11R6/lib/X11/xkb $(DEST)/usr/X11R6/lib/X11
-	rm -f $(DEST)/usr/X11R6/lib/X11/xkb/compiled
-	ln -s /tmp $(DEST)/usr/X11R6/lib/X11/xkb/compiled
-	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
-endif
-	cp -a /usr/X11R6/lib/X11/locale/{C,en_US.UTF-8,iso8859-1} $(DEST)/usr/X11R6/lib/X11/locale
-
-ifeq (y,$(USE_PCMCIA))
-	install -s /sbin/cardmgr $(DEST)/usr/bin
-endif
-
-	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' | cpio -pdu $(DEST)
-
-	for i in `cat $(TMPDIR)/list`; do \
-	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
-	      install -s $$i $(DEST)/lib; \
-	    elif (echo $$i | grep -q "lib64/[^/]*\.so"); then \
-	      install -s $$i $(DEST)/lib64; \
-	    else \
-	      d=$$i; \
-	      (echo $$d | grep -q "^[^/]") && d="$(REP4PMS)/$$d"; \
-	      d=`echo $(DEST)/$$d | sed 's/\/usr\/local\//\/usr\//'`; \
-	      install -d `dirname $$d` && \
-	      if (echo $$i | grep -q "\.pm"); then \
-	    	 perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
-	      elif (echo $$i | grep -q "\.so"); then \
-	    	      install -s $$i $$d; \
-	      else \
-	    	      cp -f $$i $$d; \
-	      fi; \
-	    fi; \
-	done
+	mv -f $(DEST)/{bin,sbin}/* $(DEST)/usr/bin
+	mv -f $(DEST)/usr/{lib,X11R6/lib}/*.so* $(DEST)/lib
+	rmdir $(DEST)/{bin,sbin}
+	cd $(DEST)/usr/bin ; mv insmod insmod_
 	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
-	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
-	rmdir $(DEST)/bin $(DEST)/sbin
-	cd $(DEST)/usr/bin ; mv insmod insmod_
+	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init
 
-	perl -pe 's!^echo!/usr/bin/echo!' /bin/unicode_start > $(DEST)/usr/bin/unicode_start
-	chmod a+x $(DEST)/usr/bin/unicode_start
+	cat share/symlinks `../tools/specific_arch share/symlinks` > $(DEST)/usr/share/symlinks
+
+	perl -I. -Mlang -e 'symlink "UTF-8", "$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
-
-ifeq (i386,$(ARCH))
-	cp ../tools/i386/busybox $(DEST)/usr/bin
-endif
-ifeq (x86_64,$(ARCH))
-	cp ../tools/x86_64/busybox $(DEST)/usr/bin/
-endif
 ifeq (ia64,$(ARCH))
 	ln -sf bash $(DEST)/usr/bin/sh
 else
 	ln -sf ash $(DEST)/usr/bin/sh
 endif
 
-	for i in fonts keyboards locales-skeleton keymaps; do tar xfj share/$$i.tar.bz2 -C $(DEST); done
-
-	cp /usr/X11R6/lib/X11/fonts/misc/cursor.pcf.gz /usr/X11R6/lib/X11/fonts/TTF/{Vera,VeraBd}.ttf $(DEST)/usr/X11R6/lib/X11/fonts
 	mkfontdir $(DEST)/usr/X11R6/lib/X11/fonts
 	fc-cache -f $(DEST)/usr/X11R6/lib/X11/fonts
 
-	grep ChangeLog CVS/Entries > $(STAGE2_DEST)/VERSION
-
-	gzip -9f $(DEST)/usr/share/ldetect-lst/*
-
-	cd share ; cp -a consolefonts devices $(DEST)/usr/share
-	cat share/symlinks `../tools/specific_arch share/symlinks` > $(DEST)/usr/share/symlinks
-	-cd share ; cp -f *.png $(DEST)/usr/share
-	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
-	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
-	cd share ; cp compssUsers.pl* rpmsrate $(MEDIA_INFO_DEST)
-
-	perl -I. -Mlang -e 'symlink "UTF-8", "$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
-
-	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
-
-	cp -f ../kernel/modules.description $(DEST)/lib/
 	for i in `ls ../kernel/all.kernels`; do cp -f ../kernel/all.kernels/$$i/modules.cz $(DEST)/lib/modules.cz-$$i; done
 	ls ../kernel/all.kernels | grep '^2' > $(STAGE2_DEST)/mdkinst.kernels
 
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
-
 # POFILES to disable for installation:
 # be,fur: too few messages translated; 
 # ta: font problem
 	rm -rf $(DEST)/usr/share/locale_special/{be,fur,ta}
 
 ifeq (y,$(USE_PCMCIA))
+	install -s /sbin/cardmgr $(DEST)/usr/bin
 	cp -a /etc/pcmcia $(DEST)/etc
 	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
 
-	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init
+	install -d $(MEDIA_INFO_DEST)
+	grep ChangeLog CVS/Entries > $(STAGE2_DEST)/VERSION
 
-	find $(DEST) -name CVS | xargs rm -rf
+	cd share ; cp compssUsers.pl* rpmsrate $(MEDIA_INFO_DEST)
+#	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
 full_stage2:
 	$(MAKE) stage2

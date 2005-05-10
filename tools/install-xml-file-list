@@ -1,0 +1,279 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+use XML::Parser;
+use Data::Dumper;
+use Config;
+use Cwd 'cwd';
+
+@ARGV == 2 or die "usage: install-xml-file-list <xml file> <destination>\n";
+my ($xml_file_list, $DEST) = @ARGV;
+
+my $initial_dir = cwd();
+my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
+my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
+
+my $base_cpio_options = '-pumd --quiet';
+
+system("rm -rf $DEST");
+
+my $tree = XML::Parser->new(Style => 'Tree')->parsefile($xml_file_list);
+
+my $main_node = decompose($tree);
+
+$main_node->{tag} eq 'list' or die "bad file $xml_file_list (main tag should be <list>)\n";
+
+handle_nodes({}, $main_node);
+
+install_needed_libraries();
+
+final_cleanup();
+
+sub final_cleanup() {
+    #- cpio creates directory 700, that's not nice
+    system("find $DEST -type d | xargs chmod 755");
+}
+
+sub handle_nodes {
+    my ($env, $e) = @_;
+    handle_node($env, decompose($_)) foreach @{$e->{l}};
+}
+sub handle_node {
+    my ($env, $node) = @_;
+
+    if (!$node->{tag} && $node->{text} !~ /\S/) {
+    } elsif (!$node->{tag}) {
+	install($env, $node->{text});
+    } elsif ($node->{tag} eq 'if') {
+	my $cond = valid_cond($node->{attr});
+	handle_nodes($env, $node) if $cond;
+    } elsif ($node->{tag} eq 'if-not') {
+	my $cond = valid_cond($node->{attr});
+	handle_nodes($env, $node) if !$cond;
+    } elsif (member($node->{tag}, 'from', 'to', 'mode', 'filter')) {
+	handle_nodes(add_to_env($env, $node->{tag} => $node->{attr}), $node);
+    } else {
+	warn "expecting tag <from>, not <$node->{tag}>\n";
+    }
+}
+
+sub valid_cond {
+    my ($attr) = @_;
+    every {
+	if ($_ eq 'ARCH') {
+	    $ARCH =~ /$attr->{$_}/;
+	} else {
+	    die "<if>: unknown condition $_\n";
+	}
+    } keys %$attr;
+}
+
+sub add_to_env {
+    my ($env, $tag, $attr) = @_;
+    my %env = map_each { $::a => +{%$::b} } %$env;
+    foreach (keys %$attr) {
+	!$env{$tag}{$_} or die qq(overriding attribute <$tag $_="$env{$tag}{$_}"> with $_="$attr->{$_}"\n); 
+	$env{$tag}{$_} = $attr->{$_};
+    }
+    \%env;
+}
+
+sub group_by_n {
+    my ($n, $l) = @_;
+    my (@r, $subl);
+    my $i = 0;
+    foreach (@$l) {
+	if ($i % $n == 0) {
+	    push @r, $subl = [];
+	}
+	push @$subl, $_;
+	$i++;
+    }
+    @r;
+}
+
+sub all_files_rec_ {
+    my ($d) = @_;
+
+    $d, -d $d && ! -l $d ? map {  all_files_rec_("$d/$_") } all($d) : ();
+}
+
+sub expand_macros {
+    my ($f) = @_;
+    $f =~ s!\bLIB\b!$LIB!g;
+    $f =~ s!\bARCH\b!$ARCH!ge;
+    $f =~ s!\bREP4PMS\b!$ENV{REP4PMS} || die "REP4PMS undefined\n"!ge;
+    $f;
+}
+
+my %needed_libraries;
+sub collect_needed_libraries {
+    my (@to_check) = @_;
+    while (@to_check) {
+	my $to_check = join(' ', @to_check);
+	my @l = `ldd $to_check 2>/dev/null` =~ m! => (/\S+)!g;
+	foreach (@l) {
+	    s!^(/lib(64)?/).*?/!$1! if $main_node->{attr}{'no-arch-libraries'}; #- replace /lib/tls or /lib/i686 with /lib
+	}
+	@to_check = grep { !$needed_libraries{$_}++ } @l;	
+	@to_check = ();
+    }
+}
+sub install_needed_libraries {
+    copy_files('', $DEST, [ keys %needed_libraries ], '', '--dereference');
+}
+
+sub copy_files {
+    my ($working_dir, $to_dir, $files, $b_flatten, @options) = @_;
+
+    if ($b_flatten) {
+	mkdir_p($to_dir);
+	my $options = join(' ', '-r', @options);
+	foreach (group_by_n(20, $files)) {
+	    warn "cp $options to_dir $to_dir from $working_dir: @$_\n" if $verbose;
+	    system("cd $working_dir ; cp $options @$_ $to_dir");
+	}
+    } else {
+	my $options = join(' ', $base_cpio_options, @options);
+	warn "cpio $options to_dir $to_dir from $working_dir: @$files\n" if $verbose;
+	open(my $F, "| cd $working_dir ; cpio $options $to_dir");
+	print $F "$_\n" foreach @$files;
+	close($F) or die "cpio $to_dir failed\n";
+    }
+}
+
+sub install {
+    my ($env, $text) = @_;
+
+    my $from_dir = $env->{from}{dir};
+    my $to_dir = $DEST . expand_macros($env->{to}{dir} || $env->{to}{flatten} && $from_dir || '');
+    my $working_dir = '.';
+
+    my $expand = $env->{from}{expand} || '';
+
+    my $disallow_from_dir = sub {
+	!$from_dir or die "from dir not allowed with $expand binary\n";
+    };
+
+    my $from_file = sub {
+	my ($rel, $b_full_glob, $b_recursive_dirs) = @_;
+	my $f = expand_macros($from_dir ? "$from_dir/$rel" : $rel);
+	my @l = $f;
+	chdir $working_dir;
+	if ($f =~ /\*/ || $b_full_glob) {
+	    @l = glob($f) or die "no match for $f\n"; 
+
+	    @l == 1 || $b_full_glob or die "multiple match for $f\n";	    
+	} else {
+	    -e $f or die "missing file $f\n";
+	}
+	if (@l == 1 && -d $l[0] && $b_recursive_dirs) {
+	    @l = all_files_rec_($l[0]);
+	}
+	@l = grep { !m!/CVS($|/)! } @l;
+	if (my $re = $env->{from}{matching}) {
+	    @l = grep { eval $re } @l;
+	}
+
+	collect_needed_libraries(grep { -x $_ } @l);
+
+	chdir $initial_dir;
+	@l;
+    };
+
+    my @files;
+    if ($expand eq 'tar') {
+	foreach (split(' ', $text)) {
+	    system('tar', 'xfj', $from_file->($_), '-C', $to_dir);
+	}
+	# not filling @files, things are already done
+
+    } elsif ($expand eq 'command') {
+	@files = chomp_(`$text`);
+
+    } elsif ($expand eq 'glob') {
+	#- glob done in $from_file
+	@files = split(' ', $text);
+
+    } elsif ($expand eq 'binary') {
+	$disallow_from_dir->();
+	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
+	foreach my $name (split(' ', $text)) {
+	    my @l = grep { -x $_ } map { "$_/$name" } @PATH;
+	    @l or die "can't find binary $name\n";
+	    if (my @m = grep { ! -l $_ } @l) {
+		@l = @m;
+	    }
+	    @l == 1 or die "many matches for binary $name: " . join(' ', @l) . "\n";
+	    push @files, @l;
+	}
+	$env->{filter}{command} ||= 'strip';
+
+    } elsif ($expand eq 'rpm') {
+	$disallow_from_dir->();
+	foreach my $rpm (split(' ', $text)) {
+	    my @l = chomp_(`rpm -ql $rpm`) or die "rpm $rpm must be installed\n";
+	    push @files, @l;
+	}
+
+    } elsif ($expand eq 'perl') {
+	$disallow_from_dir->();
+	$from_dir = '/usr/lib/perl5/vendor_perl/*';
+	@files = split(' ', $text);
+    } elsif ($expand eq 'main-perl') {
+	$disallow_from_dir->();
+	$from_dir = $Config{privlib};
+	@files = split(' ', $text);
+    } elsif ($expand) {
+	die "unknown expand method $expand\n";
+    } else {
+	@files = split(' ', $text);
+
+	$env->{filter}{command} ||= 'strip' if $to_dir =~ m!/bin$!;
+    }
+
+    if ($env->{to}{dir} && $from_dir) {
+	$working_dir = $from_dir;
+	undef $from_dir;
+    }
+
+    my @all_files = map { $from_file->($_, $expand eq 'glob', $expand ne 'rpm') } @files;
+
+    
+    my $copy_mode = $env->{mode}{copy} || '';
+    my @options = (
+	if_($copy_mode ne 'keep-links', '--dereference'),
+    );
+    copy_files($working_dir, $to_dir, \@all_files, $env->{to}{flatten}, @options);
+
+    {
+	chdir $to_dir;
+	foreach (group_by_n(20, \@all_files)) {
+	    my @l = $env->{to}{flatten} ? (map { basename($_) } @$_) : (map { "./$_" } @$_);
+	    @l = grep { ! -d $_ } @l;
+
+	    if (my $subst = $env->{filter}{subst}) {
+		system('perl', '-pi', '-e', $subst, @l);
+	    }
+	    if (my $command = $env->{filter}{command}) {
+		my @options = (
+		    if_($command eq 'gzip', '-9'),
+		    if_($command eq 'strip', '2>/dev/null'),
+		);
+		system(join(' ', $command, @options, @l));
+	    }
+	}
+	chdir $initial_dir;
+    }
+}
+
+sub decompose {
+    my ($tree) = @_;
+    my ($tag, $val) = @$tree;
+    if ($tag eq '0') {
+	{ text => $val };
+    } else {
+	my ($attr, @l) = @$val;
+	{ tag => $tag, attr => $attr, l => [ group_by2(@l) ] };
+    }
+}
