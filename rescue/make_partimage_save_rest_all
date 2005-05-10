@@ -1,24 +1,22 @@
 #!/bin/sh
 
-[ $# != 1 -a $# != 2 -a $# != 3 ] && { 
-    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir> [</data/box>]]" ; 
+[ $# -lt 1 ] && { 
+    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir> <data dirs>]" ; 
     exit 1
 }
 
-rpm=$1
-partimage_dir=$2
-local_where=$3
-
-where=/data/box
-[ -z "$local_where" ] && local_where=$where
+rpm=$1 ; shift
+partimage_dir=$1 ; shift
 
 if [ -n "$partimage_dir" ]; then
-    [ -d "$partimage_dir$local_where" ] || {
-	echo "can't find $partimage_dir$local_where"
+    first_data_dir="$partimage_dir$1"
+
+    [ -d "$first_data_dir" ] || {
+	echo "can't find $first_data_dir"
 	exit 1
     }
-    [ -r "$partimage_dir$local_where/lst" ] || {
-	echo "can't read $partimage_dir$local_where/*"
+    [ -r "$first_data_dir/lst" ] || {
+	echo "can't read $first_data_dir/*"
 	exit 1
     }
 fi
@@ -27,7 +25,7 @@ rm -rf .tmp
 mkdir -p .tmp/isolinux
 cp -f /usr/lib/syslinux/isolinux.bin ../isolinux/alt0/* .tmp/isolinux
 
-PARTIMAGE_DIR="$where" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img
+PARTIMAGE_DIR="$@" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img
 mkdir -p .tmp/install/stage2
 mv -f rescue.clp .tmp/install/stage2
 
@@ -52,9 +50,12 @@ label rescue
   append initrd=all.rdz $common_para
 EOF
 
-    if [ $action = rest_all ]; then
-	mkdir -p .tmp$where
-	ln -s $partimage_dir$local_where/* .tmp$where
+    if [ $action = rest_all -a -n "$partimage_dir" ]; then
+	for i in $*; do 
+	    dir=`dirname $i`
+	    mkdir -p .tmp$dir
+	    ln -s $partimage_dir$i .tmp$dir
+	done
     fi
 
     mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    

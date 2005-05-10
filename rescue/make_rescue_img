@@ -125,26 +125,32 @@ installown("../mdk-stage1/dhcp-client", "/usr/sbin");
 #- note that on biarch systems, we may need to have both /lib and /lib64
 __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
-if ($ENV{PARTIMAGE_DIR}) {
+if ($ENV{PARTIMAGE_RPM}) {
 
     install_perl_script('partimage_whole_disk', '/usr/sbin');
 
     _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
     my $server = 'partimaged';
     $server = 'leia';
+
+    my $default_dir = '/data/box';
+    my $partimage_dir = $ENV{PARTIMAGE_DIR} || $default_dir;
+    my @local_dirs = map { "/tmp/image$_" } split(' ', $partimage_dir);
+    my $local_dir = $local_dirs[0];
+    my $local_dirs = join(' ', @local_dirs);
+
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
-      drvinst NETWORK ; dhcp-client ; partimage_whole_disk save_all $ENV{PARTIMAGE_DIR} $server
+      drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server save_all $default_dir
       echo "Press enter"
       read
   fi
   if grep -q rest_all /proc/cmdline; then
-      local=/tmp/image$ENV{PARTIMAGE_DIR}
-      if [ -d \$local ]; then
-          partimage_whole_disk rest_all \$local
+      if [ -d $local_dir ]; then
+          partimage_whole_disk rest_all $local_dirs
       else
-          drvinst NETWORK ; dhcp-client ; partimage_whole_disk rest_all $ENV{PARTIMAGE_DIR} $server
+          drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server rest_all $partimage_dir
       fi
       echo "Press enter"
       read

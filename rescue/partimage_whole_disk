@@ -14,10 +14,13 @@ use Carp::Heavy;
 #- help getting the file in make_rescue_img
 BEGIN { partition_table::raw::default_type() }
 
-my ($action, $dir, $server) = @ARGV;
+my ($server);
+if ($ARGV[0] eq '-s') {
+    (undef, $server, @ARGV) = @ARGV;
+} 
+my $action = shift @ARGV;
 
-sub usage() { die "partimage_whole_disk <save_all | rest_all> <dir> [<server>]\n" }
-@ARGV == 2 || @ARGV == 3 or usage();
+sub usage() { die "partimage_whole_disk [-s <server>] (save_all <dir> | rest_all <dirs>)\n" }
 
 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 $ENV{HOME} = '/';
@@ -26,14 +29,24 @@ my @partimage_cmd = ('partimage', if_($server, '-s', $server));
 my $all_hds = fsedit::get_hds({});
 
 if ($action eq 'save_all') {
-    save_all();
+    @ARGV == 1 or usage();
+    save_all($ARGV[0]);
 } elsif ($action eq 'rest_all') {
-    rest_all();
+    @ARGV or usage();
+    rest_all(@ARGV);
 } else {
     usage();
 }
 
-sub save_all() {
+sub save_all {
+    my ($dir) = @_;
+
+    my $base_dir = $dir;
+    for (my $i = 0; read_part_list($dir); $i++) {
+	#- find a free dir
+	$dir = sprintf("$base_dir.%03d", $i);
+    }
+
     my $hd = $all_hds->{hds}[0] or die "no main hard drive\n";
     log::l("save_all on $hd->{device}");
     my $part_list = [ partition_table::get_normal_parts($hd) ];
@@ -46,27 +59,62 @@ sub save_all() {
 		       'save', devices::make($_->{device}), "$dir/$_->{device}");
 	}
     }
-    save_part_list($hd->{geom}, $part_list);
+    save_part_list($dir, $hd->{geom}, $part_list);
 }
-sub rest_all() {
-    my ($forced_geom, $part_list) = read_part_list();
-    fs::type::set_fs_type($_, $_->{fs_type}) foreach @$part_list;
+sub rest_all {
+    my (@dirs) = @_;
 
-    my @used_hds;
-    foreach my $part (@$part_list) {
-	if (my $hd = find { $part->{device} =~ /^\Q$_->{device}\E./ } fs::get::hds($all_hds)) {
-	    push @used_hds, $hd;
-	    put_in_hash($part, partition_table::hd2minimal_part($hd));
+    my %best;
+    DIRS: foreach (@dirs) {
+	my ($forced_geom, $part_list) = read_part_list($_) or log::l("read_part_list $_ failed"), next;
+	my %h = (dir => $_, forced_geom => $forced_geom, part_list => $part_list);
+	log::l("trying with $h{dir}");
+
+	($h{hd}) = my @used_hds = uniq(map {
+	    my $part = $_;
+	    find { $part->{device} =~ /^\Q$_->{device}\E./ } fs::get::hds($all_hds) 
+	      or log::l("can't find hard drive for partition $part->{device}"), next DIRS;
+	} @$part_list);
+
+	@used_hds >= 1 or log::l("no matching hd"), next;
+	@used_hds <= 1 or log::l("multiple hds: " . join(' ', map { $_->{device} } @used_hds)), next;
+
+	fs::type::set_fs_type($_, $_->{fs_type}) foreach @$part_list;
+	put_in_hash($_, partition_table::hd2minimal_part($h{hd})) foreach @$part_list;
+
+	($h{from_partimage}, my $other) = partition { $_->{saved} } @$part_list;
+	($h{from_resize}, $h{created}) = partition { member($_->{fs_type}, 'vfat', 'ntfs') } @$other;
+
+	$h{valid_resize} = every {
+	    my $part = fs::get::device2part($_->{device}, [ fs::get::fstab($all_hds) ]) or log::l("partition to resize is missing ($_->{device})");
+	    my $ok = $part && $part->{fs_type} eq $_->{fs_type};
+	    $ok or log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})"); 
+	    $ok;
+	} @{$h{from_resize}};
+	
+	$h{total} = sum(map { $_->{size} } @$part_list);
+	if ($h{total} > $h{hd}{totalsectors}) {
+	    log::l("discarding $h{dir} since total $h{total} > $h{hd}{totalsectors}");
+	} elsif ($h{valid_resize} < $best{valid_resize}) {
+	    log::l("discarding $h{dir} since it has invalid resize whereas $best{dir} has valid resize");
+	} elsif ($h{total} > $best{total}) {
+	    log::l("$h{dir} is better than $best{dir} since total $h{total} > $best{total}");
+	    %best = %h;
+	} else {
+	    log::l("$h{dir} is not better than $best{dir} since total $h{total} <= $best{total}");
 	}
     }
 
-    my ($from_partimage, $other) = partition { $_->{saved} } @$part_list;
-    my ($from_resize, $created) = partition { member($_->{fs_type}, 'vfat', 'ntfs') } @$other;
+    $best{dir} or die "no valid partimage data dirs\n";
+    my %h = %best;
+    log::l("chosen dir $h{dir}");
 
-    foreach (@$from_resize) {
+    my ($hd, $part_list) = ($h{hd}, $h{part_list});
+
+    foreach (@{$h{from_resize}}) {
 	#- resize first
 	my $part = fs::get::device2part($_->{device}, [ fs::get::fstab($all_hds) ]) or log::l("partition to resize is missing ($_->{device})"), next;
-	$_->{fs_type} eq $_->{fs_type} or log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})"), next;
+	$part->{fs_type} eq $_->{fs_type} or log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})"), next;
 
 	$_->{start} = $part->{start};
 	if ($_->{size} < $part->{size}) {
@@ -79,38 +127,37 @@ sub rest_all() {
 	}
     }
 
-    foreach my $hd (uniq(@used_hds)) {
-	put_in_hash($hd->{geom}, $forced_geom);
-	partition_table::raw::compute_nb_cylinders($hd->{geom}, $hd->{totalsectors});
+    put_in_hash($hd->{geom}, $h{forced_geom});
+    log::l("totalsectors $hd->{totalsectors} heads $hd->{geom}{heads} sectors $hd->{geom}{sectors}");
+    partition_table::raw::compute_nb_cylinders($hd->{geom}, $hd->{totalsectors});
 
-	#- write the partition table
-	partition_table::raw::zero_MBR($hd);
-	foreach my $part (grep { $_->{rootDevice} eq $hd->{device} } @$part_list) {
+    #- write the partition table
+    partition_table::raw::zero_MBR($hd);
+    foreach my $part (grep { $_->{rootDevice} eq $hd->{device} } @$part_list) {
 
-	    my $hole = find { isEmpty($_) && $_->{size} >= $part->{size} } partition_table::get_normal_parts_and_holes($hd) or die "not enough room";
-	    $part->{start} = $hole->{start};
+	my $hole = find { isEmpty($_) && $_->{size} >= $part->{size} } partition_table::get_normal_parts_and_holes($hd) or die "not enough room";
+	$part->{start} = $hole->{start};
 	    
-	    log::l("handling $part->{device}");
-	    my $extended = $part->{device} =~ /(\d+)$/ && $1 > 4 && $hd->hasExtended;
+	log::l("handling $part->{device}");
+	my $extended = $part->{device} =~ /(\d+)$/ && $1 > 4 && $hd->hasExtended;
 
-	    my %wanted_part = %$part;
-	    if ($extended || $part->{start} == 1) {
-		$part->{size} += $hd->{geom}{sectors};
-	    }
-	    partition_table::add($hd, $part, $extended && 'Extended');
-	    foreach ('device', 'size') {
-		$part->{$_} eq $wanted_part{$_} or log::l("bad $_ for $part->{device}: $part->{$_} != $wanted_part{$_}");
-	    }
+	my %wanted_part = %$part;
+	if ($extended || $part->{start} == 1) {
+	    $part->{size} += $hd->{geom}{sectors};
 	}
-	partition_table::write($hd);
+	partition_table::add($hd, $part, $extended && 'Extended');
+	foreach ('device', 'size') {
+	    $part->{$_} eq $wanted_part{$_} or log::l("bad $_ for $part->{device}: $part->{$_} != $wanted_part{$_}");
+	}
     }
+    partition_table::write($hd);
 
     #- restore from partimage
-    foreach (@$from_partimage) {
-	run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$dir/$_->{device}");
+    foreach (@{$h{from_partimage}}) {
+	run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$h{dir}/$_->{device}");
     }
 
-    foreach (@$created) {
+    foreach (@{$h{created}}) {
 	fs::format::part_raw($_, undef);
     }
     
@@ -119,21 +166,22 @@ sub rest_all() {
 
 sub lst_fields() { qw(device size fs_type saved) }
 sub save_part_list {
-    my ($geom, $part_list) = @_;
+    my ($dir, $geom, $part_list) = @_;
     my @l = map { join(' ', @$_{lst_fields()}) } @$part_list;
-    log::l("save_part_list: $_") foreach @l;
+    log::l("save_part_list $dir: $_") foreach @l;
     my $partimage = join(' ', @partimage_cmd);
     open(my $F, "| $partimage -z0 -Bfoo=bar -o save_file $dir/lst");
     print $F join("/", $geom->{heads}, $geom->{sectors}), "\n";
     print $F "$_\n" foreach @l;
 }
-sub read_part_list() {
+sub read_part_list {
+    my ($dir) = @_;
     my $partimage = join(' ', @partimage_cmd);
     open(my $F, "$partimage -z0 -Bfoo=bar rest_file $dir/lst |");
-    my $geom_string = <$F>;
+    my $geom_string = <$F> or return;
     my %geom; @geom{'heads', 'sectors'} = split('/', chomp_($geom_string));
     my @l = chomp_(cat__($F));
-    log::l("read_part_list: $_") foreach @l;
+    log::l("read_part_list $dir: $_") foreach @l;
     \%geom, [ map { my %l; @l{lst_fields()} = split; \%l } @l ];
 }
 
