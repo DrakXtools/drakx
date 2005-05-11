@@ -84,8 +84,8 @@ my %check_user_to_restore;
 my $remove_user_before_restore = 0;
 my @file_list_to_send_by_ftp;
 my $results;
-my @net_methods = ("ftp", "rsync", "ssh", "webdav");
-my @media_types = (translate(N_("hd")), "cd", translate(N_("tape")));
+my @net_methods = ("ftp", "rsync", "ssh");
+my @media_types = ("hd", "cd", "tape");
 my %cd_devices;
 my $std_device;
 my @tape_devices;
@@ -316,7 +316,6 @@ sub get_cd_info() {
 
 
 sub save_conf_file() {
-    write_sitecopyrc() if $conf{NET_PROTO} eq 'webdav';
     write_password_file() if $conf{NET_PROTO} eq 'rsync' && $conf{PASSWD};
 	return 1 if $conf{SEND_MAIL} && verify_mail_setup();
 	#- do not save this, but retain it for this session
@@ -486,22 +485,6 @@ sub check_valid_users() {
 		@user_list = @new_user_list;
 		save_conf_file();
 	}
-}
-
-sub write_sitecopyrc() {
-	#- FIXME - how to deal with existing sitecopyrc
-    my @cfg_list = ("site drakbackup\n",
-		     "\tserver $conf{HOST_NAME}\n",
-		     "\tremote /$conf{HOST_PATH}\n",
-		     "\tlocal $conf{PATH_TO_SAVE}\n",
-		     "\tusername $conf{LOGIN}\n",
-		     "\tpassword $conf{PASSWD}\n",
-		     "\tprotocol webdav\n"
-			);
-    output_p("$user_home/.sitecopyrc", @cfg_list);
-    chmod(0600, "$user_home/.sitecopyrc");
-    -d "$user_home/.sitecopy" or mkdir_p("$user_home/.sitecopy");
-    chmod(0700, "$user_home/.sitecopy");
 }
 
 sub write_password_file() {
@@ -687,25 +670,6 @@ sub ssh_client() {
 		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progress"));
     }
     return 0;
-}
-
-sub webdav_client() {
-    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
-	if (!(-e "$user_home/.sitecopy/drakbackup")) {
-		my $command = "sitecopy -f $conf{HOST_PATH}";
-		spawn_progress($command, "Initializing sitecopy");
-	}
-	my $command = "sitecopy -u drakbackup";
-	spawn_progress($command, "Running sitecopy...");
-		if ($log_buff =~ /Nothing to do - no changes found/) {
-		show_warning("w", N("WebDAV remote site already in sync!"));
-		return 1;
-	}
-	if ($log_buff !~ /Update completed successfully/) {
-		show_warning("f", N("WebDAV transfer failed!"));
-		return 1;
-	}
-	return 0;
 }
 
 sub rsync_client() {
@@ -903,7 +867,7 @@ sub build_tape() {
 	#- do the backup
 	$command = "tar -cvf $conf{TAPE_DEVICE} ";
 	if ($conf{DIRECT_TAPE}) {
-		($command, undef) = handle_ignores($command, undef, @files_for_direct_tape);
+		$command = handle_ignores($command, @files_for_direct_tape);
 		$command .= " @files_for_direct_tape";
 	} else {
 		$command .= " @file_list_to_send_by_ftp";
@@ -957,8 +921,7 @@ sub build_backup_files() {
     $conf{SEND_MAIL} and complete_results();
     -d  $conf{PATH_TO_SAVE} or mkdir_p($conf{PATH_TO_SAVE});
 	
-	$tar_cmd = "tar cp";
-	$tar_cmd .= "v" if $DEBUG;
+	$tar_cmd = "tar cpv";
 	$tar_cmd .= "j" if $conf{OPTION_COMP} eq "tar.bz2";
 	$tar_cmd .= "z" if $conf{OPTION_COMP} eq "tar.gz";
 	$tar_cmd .= " ";
@@ -990,7 +953,7 @@ sub build_backup_files() {
 	  	my $find_args_sys = $find_args;
 		my $first_done;
 		$ignore_files_list = '';
-	  	$find_args_sys = handle_ignores2("/etc", $find_args_sys) if $conf{BACKUPIGNORE};
+	  	handle_ignores2("/etc") if $conf{BACKUPIGNORE};
 	    if ($conf{SYS_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_sys";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{SYS_DIFFERENTIAL_BACKUPS};
@@ -1012,8 +975,7 @@ sub build_backup_files() {
 	  	}
 		if (!$first_done) {
 			my $list_file = name_list_file($incr);
-			do_find(undef, $find_args_sys, $list_file, @sys_files);
-			do_tar($tar_cmd_sys, "backup_$incr", undef, @sys_files);
+			do_tar($tar_cmd_sys, "backup_$incr", $list_file, @sys_files);
 		}
 		push_list("list_$incr") if $incr =~ /_sys/;
 		files_to_results($incr);
@@ -1030,7 +992,7 @@ sub build_backup_files() {
 		  my $find_args_user = $find_args;
 		  my $first_done;
 		  $ignore_files_list = '';
-	  	  $find_args_user = handle_ignores2($path_name, $find_args_user) if $conf{BACKUPIGNORE};
+	  	  handle_ignores2($path_name) if $conf{BACKUPIGNORE};
 		  if ($conf{USER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_user_";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{USER_DIFFERENTIAL_BACKUPS};
@@ -1040,7 +1002,7 @@ sub build_backup_files() {
 				my $list_file = name_list_file($incr . $user);
 				do_find($more_recent, $find_args_user, $list_file, $path_name);
 				if (check_rm_list($list_file)) {
-					do_tar($tar_cmd_cuser, "backup_$incr$user", $list_file, undef);
+					do_tar($tar_cmd_cuser, "backup_$incr$user", $list_file, $path_name);
 				}
 				$first_done = 1;
 		    } else {
@@ -1052,8 +1014,7 @@ sub build_backup_files() {
 		  }
 		  if (!$first_done) {
 			my $list_file = name_list_file($incr . $user);
-			do_find(undef, $find_args_user, $list_file, $path_name);
-			do_tar($tar_cmd_cuser, "backup_$incr$user", undef, $path_name);
+			do_tar($tar_cmd_cuser, "backup_$incr$user", $list_file, $path_name);
 		  }
 		  push_list("list_$incr$user") if $incr =~ /_user/;
 		  files_to_results("$incr$user");
@@ -1066,7 +1027,7 @@ sub build_backup_files() {
 		my $find_args_other = $find_args;
 		my $first_done;
 		$ignore_files_list = '';
-		($tar_cmd_other, $find_args_other) = handle_ignores($tar_cmd_other, $find_args_other, @other_files) if $conf{BACKUPIGNORE};
+		$tar_cmd_other = handle_ignores($tar_cmd_other, @other_files) if $conf{BACKUPIGNORE};
 		if ($conf{OTHER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_other";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{OTHER_DIFFERENTIAL_BACKUPS};
@@ -1088,8 +1049,7 @@ sub build_backup_files() {
 	  	}
 		if (!$first_done) {
 			my $list_file = name_list_file($incr);
-			do_find(undef, $find_args_other, $list_file, @other_files);
-			do_tar($tar_cmd_other, "backup_$incr", undef, @other_files);
+			do_tar($tar_cmd_other, "backup_$incr", $list_file, @other_files);
 		}
 		push_list("list_$incr") if $incr =~ /_other/;
 		files_to_results($incr);
@@ -1114,7 +1074,6 @@ sub build_backup_files() {
 		rsync_client() if $conf{DAEMON_MEDIA} eq 'rsync';
 		ssh_client() if $conf{DAEMON_MEDIA} eq 'ssh' && !$conf{USE_EXPECT};
 		do_expect("backup") if $conf{DAEMON_MEDIA} eq 'ssh' && $conf{USE_EXPECT};
-		webdav_client() if $conf{DAEMON_MEDIA} eq 'webdav';
 		build_cd() if $conf{DAEMON_MEDIA} eq 'cd';
 		build_tape() if $conf{DAEMON_MEDIA} eq 'tape';
 
@@ -1141,7 +1100,6 @@ sub build_backup_files() {
 			rsync_client() if $conf{NET_PROTO} eq 'rsync';
 			ssh_client() if $conf{NET_PROTO} eq 'ssh' && !$conf{USE_EXPECT};
 			do_expect("backup") if $conf{NET_PROTO} eq 'ssh' && $conf{USE_EXPECT};
-			webdav_client() if $conf{NET_PROTO} eq 'webdav';
 			$results .= N("\nDrakbackup activities via %s:\n\n", $conf{NET_PROTO});
 		}
 		
@@ -1225,6 +1183,7 @@ sub name_list_file {
 
 sub check_rm_list {
 	my ($list_file) = @_;
+	$list_file .= ".tmp";
 	if (!cat_($list_file)) {
 		unlink($list_file);
 		return 0;
@@ -1259,22 +1218,23 @@ sub do_find {
 	my ($newer, $more_args, $into, @where) = @_;
 	#- $newer may be undef - if it's defined then "-cnewer $newer"
 	$newer = $conf{PATH_TO_SAVE} . "/" . $newer if defined($newer);
-	defined($newer) ? system("find @where -cnewer $newer $more_args > $into") : system("find @where $more_args > $into");
-	#- someone on club complained about perms being too open
-	chmod(0600, $into) if -e $into;
+	defined($newer) ? system("find @where -cnewer $newer $more_args > $into.tmp") : system("find @where $more_args > $into.tmp");
 }
 
 sub do_tar {
 	my ($tar_cmd, $dest_file, $list_file, @files) = @_;
 	my $full_dest_file = $conf{PATH_TO_SAVE} . "/" . $dest_file . $the_time . "." . $conf{OPTION_COMP};
+	my $tmp_list = $list_file . ".tmp";
 	if ($conf{DIRECT_TAPE}) {
 		log::explanations("Direct tape backup - tar deferred...");
-		defined($list_file) ? push @files_for_direct_tape, $list_file : push @files_for_direct_tape, @files;
+		-e $tmp_list ? push @files_for_direct_tape, $tmp_list : push @files_for_direct_tape, @files;
 	} else {
 		#- if $list_file is undefined, then use the @files list
-		defined($list_file) ? system("$tar_cmd -f $full_dest_file -T $list_file") : system("$tar_cmd -f $full_dest_file @files");
+		-e $tmp_list ? system("$tar_cmd -f $full_dest_file --index-file=$list_file -T $tmp_list") : system("$tar_cmd -f $full_dest_file --index-file=$list_file @files");
+		unlink($tmp_list) if -e $tmp_list;
 	}
 	#- someone on club complained about perms being too open
+	chmod(0600, $list_file) if -e $list_file;
 	chmod(0600, $full_dest_file) if -e $full_dest_file;
 	push_list($dest_file);
 }
@@ -1296,28 +1256,25 @@ sub files_to_results {
 		$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
 	}
 	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
-
 }
 
 sub handle_ignores {
-	my ($tar_cmd, $find_args, @list) = @_;
+	my ($tar_cmd, @list) = @_;
 	foreach my $dir (@list) {
 		if (-d $dir) {
 			-f "$dir/.backupignore" and $tar_cmd .= " -X $dir/.backupignore";
-			$find_args = handle_ignores2($dir, $find_args);
+			handle_ignores2($dir);
 		}
 	}
-	return $tar_cmd, $find_args;
+	return $tar_cmd;
 }
 
 sub handle_ignores2 {
-	my ($dir, $find_args) = @_;
+	my ($dir) = @_;
 	my @ignore_files = cat_("$dir/.backupignore");
 	foreach (@ignore_files) {
 		$ignore_files_list .= $_;
 	}
-	$find_args .= " | grep -v -f $dir/.backupignore" if -f "$dir/.backupignore";
-	return $find_args;
 }
 
 sub require_rpm {
@@ -1338,7 +1295,6 @@ sub check_pkg_needs() {
 	@list_of_rpm_to_install = ();
 	if ($conf{USE_NET}) {
 		@extra_pkg = "rsync" if $conf{NET_PROTO} eq 'rsync';
-		@extra_pkg = ("sitecopy", "wget") if $conf{NET_PROTO} eq 'webdav';
 		@extra_pkg = "perl-Expect" if $conf{NET_PROTO} eq 'ssh' && ($conf{USE_EXPECT} || $conf{DRAK_KEYS});
 	}
 	@extra_pkg = "mt-st" if $conf{USE_TAPE};
@@ -2573,7 +2529,6 @@ sub system_state() {
 		$conf{DAEMON_MEDIA} eq 'ftp' and $system_state .= N("\t-Network by FTP.\n");    
 		$conf{DAEMON_MEDIA} eq 'ssh' and $system_state .= N("\t-Network by SSH.\n");    
 		$conf{DAEMON_MEDIA} eq 'rsync' and $system_state .= N("\t-Network by rsync.\n");    
-		$conf{DAEMON_MEDIA} eq 'webdav' and $system_state .= N("\t-Network by webdav.\n");    
     } else {
     	$system_state = N("No configuration, please click Wizard or Advanced.\n");
     }
@@ -3522,7 +3477,7 @@ sub restore_catalog_entry {
 		}			
 	}
 	
-	if ($media eq 'ftp' || $media eq 'webdav' || $media eq 'ssh' || $media eq 'rsync') { 
+	if ($media eq 'ftp' || $media eq 'ssh' || $media eq 'rsync') { 
 		#- show the user what we know of the connection from the catalog 
 		#- and the config file, let them override if necessary
 		
@@ -3554,8 +3509,8 @@ sub restore_catalog_entry {
 		}
 			
 		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if $media eq 'ftp';
-		$restore_result = restore_rsync_ssh_webdav($cat_entry, $vol_host, $dev_path, $username, $media, @restore_files) 
-			if $media eq 'rsync' || $media eq 'ssh' || $media eq 'webdav';
+		$restore_result = restore_rsync_ssh($cat_entry, $vol_host, $dev_path, $username, $media, @restore_files) 
+			if $media eq 'rsync' || $media eq 'ssh';
 	}
 
 	# cleanup our restore dir - unlink fails here?
@@ -3687,7 +3642,7 @@ sub restore_ftp {
     return 0;
 }
 
-sub restore_rsync_ssh_webdav {
+sub restore_rsync_ssh {
 	my ($cat_entry, $hostname, $hostpath, $username, $mode, @restore_files) = @_;
 	my $indv_files = @restore_files;
 	my $wild_card = catalog_to_wildcard($cat_entry);
