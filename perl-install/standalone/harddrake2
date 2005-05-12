@@ -233,23 +233,19 @@ my @menu_items =
 $ugtk2::wm_icon = "harddrake";
 $in = 'interactive'->vnew('su'); #require_root_capability();
 
-my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-gtkflush();
-
 %options = getVarsFromSh($conffile);
 
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
 $w = ugtk2->new(N("Harddrake2"));
-local $::main_window;   # fake diagnostics pragma
-my ($menubar, $factory);
-if ($::isEmbedded) {
-    ($menubar, $factory) = create_factory_menu($::Plug, @menu_items);
-} else {
-    $::main_window = $w->{real_window};
-    ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
-    $w->{window}->set_size_request(805, 550);
-}
+# fake diagnostics pragma:
+local $::main_window = $w->{real_window};
+
+my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+gtkflush() if !$::isEmbedded;
+
+my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
+$w->{window}->set_size_request(805, 550) if !$::isEmbedded;
 
 my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
