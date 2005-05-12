@@ -295,14 +295,15 @@ sub real_main {
                         my @_a = (N("(detected on port %s)", 'toto'), 
                           #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
                           N("(detected %s)", 'toto'), N("(detected)"));
-                        my @connections = 
-                          ([ N("Modem connection"),  "modem" ],
-                           [ N("ISDN connection"),   "isdn"  ],
-                           [ N("ADSL connection"),   "adsl"  ],
-                           [ N("Cable connection"),  "cable" ],
-                           [ N("LAN connection"),    "lan"   ],
-                           [ N("Wireless connection"), "lan" ],
-                          );
+                        my @connections = (
+                                          [ N("LAN connection"),    "lan"   ],
+                                          [ N("Wireless connection"), "lan" ],
+                                          [ N("ADSL connection"),   "adsl"  ],
+                                          [ N("Cable connection"),  "cable" ],
+                                          [ N("ISDN connection"),   "isdn"  ],
+                                          [ N("Modem connection"),  "modem" ],
+                                          [ N("DVB connection"), "dvb" ],
+                                         );
 
                         foreach (@connections) {
                             my ($string, $type) = @$_;
