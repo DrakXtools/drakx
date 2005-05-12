@@ -730,8 +730,8 @@ sub configureServices {
 sub configurePrinter {
     my ($o) = @_;
     eval {
-	$o->do_pkgs->install('foomatic-filters', 'foomatic-db-engine', 'foomatic-db', 'foomatic-db-hpijs', 'gimpprint-foomatic', 'postscript-ppds', 'printer-utils', 'printer-filters', 'printer-testpages',
-			     if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
+	$o->do_pkgs->install('foomatic-filters', 'foomatic-db-engine', 'foomatic-db', 'foomatic-db-hpijs', 'gutenprint-foomatic', 'postscript-ppds', 'printer-utils', 'printer-filters', 'printer-testpages',
+			     if_($o->do_pkgs->is_installed('gimp'), 'gutenprint-gimp2'));
     };
     if ($@ =~ /rpm not found/) {
 	log::l("ERROR: $@");

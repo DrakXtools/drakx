@@ -26,8 +26,8 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 			      'foomatic-db-hpijs', 'foomatic-db-engine',
 			      'printer-filters', 
 			      'printer-utils', 'printer-testpages', 
-			      'ghostscript', 'hplip-hpijs', 'gimpprint-ijs',
-			      'gimpprint-foomatic', 'gimpprint-escputil', 
+			      'ghostscript', 'hplip-hpijs', 'gutenprint-ijs',
+			      'gutenprint-foomatic', 'gutenprint-escputil', 
 			      'postscript-ppds', 'hplip-hpijs-ppds', 
 			      'hplip-model-data', 'nmap', 'scli' ],
 			    [qw(/usr/bin/foomatic-rip
@@ -39,8 +39,8 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 				/usr/share/printer-testpages/testprint.ps
 				/usr/bin/gs-common
 				/usr/bin/hpijs
-				/usr/bin/ijsgimpprint
-				/usr/share/foomatic/db/source/driver/gimp-print-ijs.xml
+				/usr/share/man/man1/ijsgutenprint.1.bz2
+				/usr/share/foomatic/db/source/driver/gutenprint-ijs.5.0.xml
 				/usr/bin/escputil
 				/usr/share/cups/model/postscript.ppd.gz
 				/usr/share/ppd/HP/HP-2000C-hpijs.ppd.gz
@@ -119,13 +119,13 @@ our %spoolers = ('pdq' => {
 		     'boot_spooler' => 'cups',
 		     'service' => 'cups',
 		     'local_queues' => 1,
-		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gimpprint-cups',
+		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups',
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
 					      /usr/bin/xpp
 					      /usr/lib/cups/filter/rastertolxx74 
-					      /usr/lib/cups/filter/rastertoprinter),
+					      /usr/lib/cups/filter/commandtoepson),
 					   $::isInstall ||
 					   !(-x '/usr/bin/wget') ?
 					   '/usr/bin/curl' :
