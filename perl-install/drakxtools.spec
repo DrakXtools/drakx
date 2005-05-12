@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.10mdk
+Release: 0.11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 12 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.11mdk
+- diskdrake: default to "Custom" when group fileshare exists (pixel, #15917)
+- drakbackup (stew):
+  o drop webdav support (can be mounted as a normal net filesystem
+    these days)
+  o remove translation on "tape" media selection (#15437)
+  o rework .backupignore handling (#12352)
+- drakconnect: netconnect.pm: reorder drakconnect first screen (blino)
+- drakups: fix detecting Wingman gamepad as UPS (#15750)
+- harddrake: ensure wait message is centered on mcc
+- harddrake service: fix PCMCIA breakage (#15742)
+- fix serial controllers detection (#15457)
+
 * Tue May 10 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.10mdk
 - draksplash (blino):
   o improved layout (separate window for image previews, notebook to
