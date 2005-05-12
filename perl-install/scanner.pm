@@ -1,7 +1,7 @@
 package scanner;
 # scanner.pm $Id$
-# Yves Duret <yduret at mandrakesoft.com>
-# Till Kamppeter <till at mandrakesoft.com>
+# Yves Duret <yduret at mandriva.com>
+# Till Kamppeter <till at mandriva.com>
 # Copyright (C) 2001-2004 Mandriva
 #
 # This program is free software; you can redistribute it and/or modify
