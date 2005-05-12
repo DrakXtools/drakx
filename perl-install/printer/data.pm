@@ -7,7 +7,7 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv
 	     $kernelversion $usbprintermodule
-	     $commonpackages $localqueuepackages);
+	     $commonpackages $gimpprintingpackages $localqueuepackages);
 
 
 # Kernel-specific data
@@ -20,6 +20,10 @@ our $usbprintermodule = ($kernelversion eq '2.6' ? "usblp" : "printer");
 # Packages which are always needed to run printerdrake
 our $commonpackages = [ [ 'foomatic-db-engine' ], 
 			[ '/usr/bin/foomatic-configure' ] ];
+
+# Packages which are needed to print with the GIMP
+our $gimpprintingpackages = [ [ 'gutenprint-gimp2' ], 
+			      [ '/usr/lib/gimp/2.0/plug-ins/print' ] ];
 
 # Packages which are needed to create and manage local print queues
 our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
