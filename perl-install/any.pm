@@ -927,7 +927,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 
 \"Custom\" permit a per-user granularity.
 "),
-				\@l, $l[$restrict ? 0 : 1]) or return;
+				\@l, $l[$restrict ? (getgrnam('fileshare') ? 2 : 0) : 1]) or return;
     $restrict = $r ne $l[1];
     my $custom = $r eq $l[2];
     if ($r ne $l[0]) {
