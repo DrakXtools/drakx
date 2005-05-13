@@ -302,7 +302,6 @@ sub real_main {
                                           [ N("Cable connection"),  "cable" ],
                                           [ N("ISDN connection"),   "isdn"  ],
                                           [ N("Modem connection"),  "modem" ],
-                                          [ N("DVB connection"), "dvb" ],
                                          );
 
                         foreach (@connections) {
