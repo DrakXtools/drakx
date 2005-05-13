@@ -372,6 +372,7 @@ dmiDetectMemory()
 void
 pci_probe()
   PPCODE:
+    //proc_pci_path = "/tmp/pci";
     struct pciusb_entries entries = pci_probe();
     char buf[2048];
     int i;
