@@ -102,7 +102,7 @@ sub expand_macros {
     my ($f) = @_;
     $f =~ s!\bLIB\b!$LIB!g;
     $f =~ s!\bARCH\b!$ARCH!ge;
-    $f =~ s!\bREP4PMS\b!$ENV{REP4PMS} || die "REP4PMS undefined\n"!ge;
+    $f =~ s!\$\((\w+)\)!$ENV{$1} || die "$1 undefined\n"!ge;
     $f;
 }
 
