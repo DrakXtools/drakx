@@ -600,7 +600,7 @@ sub getNet() {
 #}
 
 sub getUPS() {
-    my @usb_devices = map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ } grep { $_->{description} !~ /GamePad|IR Combo Device|Joystick/ } usb_probe();
+    my @usb_devices = map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_ } grep { $_->{description} !~ /GamePad|IR Combo Device|Joystick|SideWinder/ } usb_probe();
 
     # MGE serial PnP devices:
     (map {
