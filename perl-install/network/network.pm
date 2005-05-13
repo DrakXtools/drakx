@@ -160,6 +160,7 @@ sub write_interface_conf {
 
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
+                qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
@@ -416,7 +417,7 @@ sub read_all_conf {
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf());
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
-	my ($device) = /^ifcfg-([A-Za-z0-9.:]+)$/;
+	my ($device) = /^ifcfg-([A-Za-z0-9.:_-]+)$/;
 	next if $device =~ /.rpmnew$|.rpmsave$/;
 	if ($device && $device ne 'lo') {
 	    my $intf = findIntf($intf, $device);

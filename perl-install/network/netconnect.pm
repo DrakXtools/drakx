@@ -91,6 +91,7 @@ sub real_main {
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
       my ($is_wireless, $wireless_enc_mode, $wireless_enc_key);
+      my ($dvb_adapter, $dvb_ad, $dvb_net, $dvb_pid);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -130,11 +131,15 @@ sub real_main {
             grep { to_bool($is_wireless) == detect_devices::is_wireless_interface($_->[0]) } @all_cards;
       };
 
-      my $find_lan_module = sub { 
+      my $is_dvb_interface = sub { $_[0]{DEVICE} =~ /^dvb\d+_\d+/ };
+
+      my $find_lan_module = sub {
           if (my $dev = find { $_->{device} eq $ethntf->{DEVICE} } detect_devices::pcmcia_probe()) { # PCMCIA case
               $module = $dev->{driver};
           } elsif ($dev = find { $_->[0] eq $ethntf->{DEVICE} } @all_cards) {
               $module = $dev->[1];
+	  } elsif ($is_dvb_interface->($ethntf)) {
+	      $module = $dvb_adapter->{driver};
           } else { $module = "" }
       };
 
@@ -302,6 +307,7 @@ sub real_main {
                                           [ N("Cable connection"),  "cable" ],
                                           [ N("ISDN connection"),   "isdn"  ],
                                           [ N("Modem connection"),  "modem" ],
+                                          [ N("DVB connection"), "dvb" ],
                                          );
 
                         foreach (@connections) {
@@ -1288,6 +1294,46 @@ See iwpriv(8) man page for further information."),
                     },
                    },
 
+
+		   dvb =>
+		   {
+                    name => N("DVB configuration") . "\n\n" . N("Select the network interface to configure:"),
+                    data => [ { label => N("DVB Adapter"), type => "list", val => \$dvb_adapter, allow_empty_list => 1,
+				list => [ modules::probe_category("multimedia/dvb") ], format => sub { $_[0]{description} } } ],
+                    next => "dvb_adapter",
+		   },
+
+
+		   dvb_adapter =>
+		   {
+		    pre => sub {
+			use Fcntl qw(O_RDWR O_NONBLOCK);
+			my $previous_ethntf = find { $is_dvb_interface->($_) } values %$intf;
+			$dvb_ad = $previous_ethntf->{DVB_ADAPTER_ID};
+			$dvb_net = $previous_ethntf->{DVB_NETWORK_DEMUX};
+			$dvb_pid = $previous_ethntf->{DVB_NETWORK_PID};
+			if (my $device = find { sysopen(undef, $_, O_RDWR | O_NONBLOCK) } glob("/dev/dvb/adapter*/net*")) {
+			    ($dvb_ad, $dvb_net) = $device =~ m,/dev/dvb/adapter(\d+)/net(\d+),;
+			}
+		    },
+		    name => N("DVB adapter settings"),
+		    data => sub {
+                            [
+			     { label => N("Adapter card"), val => \$dvb_ad },
+                             { label => N("Net demux"), val => \$dvb_net },
+                             { label => N("PID"), val => \$dvb_pid },
+			    ];
+			},
+		    post => sub {
+			$ntf_name = 'dvb' . $dvb_ad . '_' . $dvb_net;
+			$ethntf = $intf->{$ntf_name} ||= {};
+			$ethntf->{DEVICE} = $ntf_name;
+			$ethntf->{DVB_ADAPTER_ID} = qq("$dvb_ad");
+			$ethntf->{DVB_NETWORK_DEMUX} = qq("$dvb_net");
+			$ethntf->{DVB_NETWORK_PID} = qq("$dvb_pid");
+			return "lan_protocol";
+		    },
+		   },
 
                    static_hostname =>
                    {
