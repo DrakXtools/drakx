@@ -134,21 +134,21 @@ sub splash_choice() {
 					});
 
     my $_thm_button = Gtk2::Button->new(N("Install themes"));
-    my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
 
     run_boot_window(N("Graphical boot theme selection"),
                        [
                         1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-                                    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new("Graphical boot mode:"), $mode_combo),
-                                    0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
-                                               gtkadd(gtkcreate_frame(N("Theme")),
-                                                    gtkpack__(Gtk2::VBox->new(0, 5),
-                                                         $theme_combo,
-                                                         gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
-                                                                                         $theme->{keep_logo}),
-                                                                           clicked => sub { invbool(\$theme->{keep_logo}) }))),
-                                               Gtk2::VSeparator->new,
-                                               gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic))),
+				    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new("Graphical boot mode:"), $mode_combo),
+				    0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
+					       gtkadd(gtkcreate_frame(N("Theme")),
+						      gtkpack__(Gtk2::VBox->new(0, 5),
+								$theme_combo,
+								gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
+												$theme->{keep_logo}),
+										  clicked => sub { invbool(\$theme->{keep_logo}) }))),
+					       Gtk2::VSeparator->new,
+					       gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic)),
+				    0, gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { exec '/usr/sbin/draksplash' })),
                        ],
                        sub {
                            bootsplash::set_logo_console($theme->{keep_logo});
