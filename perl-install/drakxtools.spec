@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.11mdk
+Release: 0.12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon May 16 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.12mdk
+- fix GtkTextView wrapper
+- drakups: do not detect MS joystick as UPS (#15930)
+
 * Thu May 12 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.11mdk
 - diskdrake: default to "Custom" when group fileshare exists (pixel, #15917)
 - drakbackup (stew):
