@@ -825,7 +825,11 @@ sub _text_insert {
             }
         }
     } else {
-        $buffer->set_text($t);
+        if ($opts{append}) {
+            $buffer->insert($buffer->get_end_iter, $t);
+        } else {
+            $buffer->set_text($t);
+        }
     }
     #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it will not scroll to the bottom when focusing (#3633)
