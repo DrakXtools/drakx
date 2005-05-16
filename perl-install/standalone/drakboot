@@ -43,6 +43,7 @@ fs::get_raw_hds('', $all_hds);
 fs::get_info_from_fstab($all_hds);
 my $fstab = [ fs::get::fstab($all_hds) ];
 my $bootloader = bootloader::read($all_hds);
+my $cmdline = cat_('/proc/cmdline');
 
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     $::isWizard = 1;
@@ -104,46 +105,50 @@ sub splash_choice() {
     my $boot_pic = gtkcreate_img($bootsplash::default_thumbnail);
     change_image($boot_pic, $theme->{name}, $cur_res);
 
-    my $theme_combo = gtkset_size_request(Gtk2::ComboBox->new_with_strings([ bootsplash::themes_list_for_resolution($cur_res) ], $theme->{name}), 10, -1);
+    my $theme_combo = Gtk2::ComboBox->new_with_strings([ bootsplash::themes_list_for_resolution($cur_res) ], $theme->{name});
     $theme_combo->entry->signal_connect(changed => sub {
                                             $theme->{name} = $theme_combo->entry->get_text;
                                             change_image($boot_pic, $theme->{name}, $cur_res);
                                         });
 
+    my $splash_box;
+    my $boot_warn = 1;
+    my %modes = (
+		 text => N("Text only"),
+		 verbose => N("Verbose"),
+		 silent => N("Silent"),
+		);
+    my $mode_combo = Gtk2::ComboBox->new_with_strings([ values %modes  ], $modes{$theme->{enabled} ? $cmdline =~ /\bsplash=silent\b/ ? 'silent' : 'verbose' : 'text'});
+    $mode_combo->entry->signal_connect( changed => sub {
+					    $theme->{enabled} = $mode_combo->entry->get_text ne $modes{text};
+					    if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
+						if ($in->ask_yesorno(N("Warning"),
+								     [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
+								       N("Do you want to configure it now?") ])) {
+						    enable_framebuffer();
+						    #- it would be nice to get available themes for new cur_res here
+						}
+						$boot_warn = 0;
+					    }
+					    $splash_box->set_sensitive($theme->{enabled});
+					});
+
     my $_thm_button = Gtk2::Button->new(N("Install themes"));
     my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
 
-    my $splash_box;
-    my $boot_warn = 1;
     run_boot_window(N("Graphical boot theme selection"),
                        [
                         1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-                                    0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $theme->{enabled}),
-                                                         clicked => sub {
-                                                             $theme->{enabled} = !$theme->{enabled};
-                                                             if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
-                                                                 if ($in->ask_yesorno(N("Warning"),
-                                                                                      [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
-                                                                                        N("Do you want to configure it now?") ])) {
-                                                                     enable_framebuffer();
-                                                                     #- it would be nice to get available themes for new cur_res here
-                                                                 }
-                                                                 $boot_warn = 0;
-                                                             }
-                                                             $splash_box->set_sensitive($theme->{enabled});
-                                                         }),
+                                    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new("Graphical boot mode:"), $mode_combo),
                                     0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
                                                gtkadd(gtkcreate_frame(N("Theme")),
                                                     gtkpack__(Gtk2::VBox->new(0, 5),
                                                          $theme_combo,
                                                          gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")),
                                                                                          $theme->{keep_logo}),
-                                                                           clicked => sub { invbool(\$theme->{keep_logo}) })
-                                                        ),
-                                               ),
+                                                                           clicked => sub { invbool(\$theme->{keep_logo}) }))),
                                                Gtk2::VSeparator->new,
-                                               gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic))
-                                   ),
+                                               gtkpack__(Gtk2::VBox->new(0, 5), $boot_pic))),
                        ],
                        sub {
                            bootsplash::set_logo_console($theme->{keep_logo});
@@ -152,6 +157,9 @@ sub splash_choice() {
                            } else {
                                bootsplash::remove();
                            }
+			   my $text = $mode_combo->entry->get_text;
+			   my $mode = find { $modes{$_} eq $text } keys %modes;
+			   set_splash_append($mode ne 'text' ? $mode : undef);
                        });
 }
 
@@ -234,9 +242,16 @@ sub change_image {
     $boot_pic->set_from_pixbuf($boot_pixbuf);
 }
 
+sub set_splash_append {
+    my ($val) = @_;
+    bootloader::set_append_with_key($bootloader, 'splash', undef);
+    bootloader::set_append_with_key($bootloader, 'splash', $val);
+    bootloader::install($bootloader, $all_hds);
+}
+
 sub enable_framebuffer() {
     my $vga = bootsplash::get_framebuffer_resolution();
-    my ($current_entry) = cat_('/proc/cmdline') =~ /^BOOT_IMAGE=(\S+)/;
+    my ($current_entry) = $cmdline =~ /^BOOT_IMAGE=(\S+)/;
     my %entries = (
                    $current_entry => 1
                   );
