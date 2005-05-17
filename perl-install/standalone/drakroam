@@ -127,7 +127,7 @@ my %available_roaming_daemons = (
 				      write_config => sub {},
 				      add_net => sub {
 					  my ($config, $essid) = @_;
-					  output_p("$config/$essid", qq(# essid specific config file));
+					  output_with_perm("$config/$essid", 0600, qq(# essid specific config file));
 				      },
 				      remove_net => sub {
 					  my ($config, $essid) = @_;
