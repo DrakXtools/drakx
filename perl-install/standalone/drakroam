@@ -106,11 +106,9 @@ my %available_roaming_daemons = (
 					  }
 					  output_with_perm($config, 0600, @contents);
 				      },
-				      add_net => sub {},
-				      remove_net => sub {},
 				     },
 		       waproamd => {
-				      config_location => '/etc/waproamd/scripts',
+				      config_location => '/etc/waproamd/keys',
 				      binary => '/usr/sbin/waproamd',
 				      start_options => sub {
 					  my ($interval, $device) = @_;
@@ -118,20 +116,17 @@ my %available_roaming_daemons = (
 				      },
 				      read_config => sub {
 					  my ($config) = @_;
-					  foreach my $net (all($config)) {
-					      $net eq "default" or next;
-					      print "Adding net $net\n" if $::testing;
-					      push @{$KnownList->{data}}, [$net];
+					  foreach my $file (all($config)) {
+					      my ($essid) = $file =~ /^(.*)\.wep$/ or next;
+					      &AddNet($essid, '', '', 1, cat_("$config/$file"));
 					  }
 				      },
-				      write_config => sub {},
-				      add_net => sub {
-					  my ($config, $essid) = @_;
-					  output_with_perm("$config/$essid", 0600, qq(# essid specific config file));
-				      },
-				      remove_net => sub {
-					  my ($config, $essid) = @_;
-					  system("rm -f $config/$essid");
+				      write_config => sub {
+					  my ($config) = @_;
+					  foreach my $row (@{$KnownList->{data}}) { # again, lame
+					      my $essid = $row->[0];
+					      output_with_perm("$config/$essid.wep", 0600, $row->[4]);
+					  }
 				      },
 				     },
 );
@@ -322,9 +317,9 @@ sub UpdateAvailable() {
 
 sub AddNet {
 	my ($essid, $mode, $channel, $dhcp, $key) = @_;
+	member($essid, map { $_->[0] } @{$KnownList->{data}}) and return;
 	print "Adding net $essid\n" if $::testing;
 	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $dhcp, $key ];
-	$_->{add_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
 }
 
 sub RemoveNet {
@@ -332,7 +327,6 @@ sub RemoveNet {
 	my $essid = $KnownList->{data}[$selected][0];
 	print "Removing net $essid\n" if $::testing;
 	splice @{$KnownList->{data}}, $selected, 1;
-	$_->{remove_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
 }
 
 sub ReadConfig() {
