@@ -41,7 +41,7 @@ sub ppp_read_conf {
     ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
     
     foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-        /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
+        /.*ATDT([\d#*]*)/ and $modem->{phone} ||= $1;
     }
     foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
         /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
@@ -81,7 +81,7 @@ sub ppp_configure {
     }
 
     my %toreplace = map { $_ => $modem->{$_} } qw(Authentication AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
-    $toreplace{phone} =~ s/\D//g;
+    $toreplace{phone} =~ s/[^\d#*]//g;
     if ($modem->{auto_dns} ne N("Automatic")) {
         $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
         $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
