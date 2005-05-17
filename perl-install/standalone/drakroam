@@ -104,7 +104,7 @@ my %available_roaming_daemons = (
 					      my $ifc = $row->[3] ? "$IFConfig \@DEV\@ up; $DHClient \@DEV\@" : "$IFUp \@DEV\@";
 					      push @contents, "$essid\t\t$iwc; $ifc\n";
 					  }
-					  output_with_perm($config, '600', @contents);
+					  output_with_perm($config, 0600, @contents);
 				      },
 				      add_net => sub {},
 				      remove_net => sub {},
