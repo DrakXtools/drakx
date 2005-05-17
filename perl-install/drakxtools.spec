@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.12mdk
+Release: 0.13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May 17 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.13mdk
+- drakboot (blino):
+  o add the "Create new theme" button back
+  o allow to choose between "text only", "verbose" and "silent"
+    bootsplash modes
+- drakconnect (blino):
+  o use iwpriv for WPA with rt2x00 drivers (since they don't support
+    wpa_supplicant)
+  o keep # and * characters in phone number (#16031)
+- drakroam:
+  o fix perms on /etc/wlandetect.conf (#16020)
+  o really write waproamd config files (blino)
+
 * Mon May 16 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.12mdk
 - fix GtkTextView wrapper
 - drakups: do not detect MS joystick as UPS (#15930)
