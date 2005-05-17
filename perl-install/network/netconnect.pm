@@ -90,7 +90,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
-      my ($is_wireless, $wireless_enc_mode, $wireless_enc_key);
+      my ($is_wireless, $wireless_enc_mode, $wireless_enc_key, $need_rt2x00_iwpriv);
       my ($dvb_adapter, $dvb_ad, $dvb_net, $dvb_pid);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
       my $success = 1;
@@ -1198,10 +1198,12 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{WIRELESS_ESSID} ||= "any";
                         ($wireless_enc_key, my $restricted) = network::wireless::get_wep_key_from_iwconfig($ethntf->{WIRELESS_ENC_KEY});
                         $wireless_enc_mode =
-                          exists $ethntf->{WIRELESS_WPA_DRIVER} ? 'wpa-psk' :
+                          $ethntf->{WIRELESS_WPA_DRIVER} || $ethntf->{WIRELESS_IWPRIV} =~ /WPAPSK/ ? 'wpa-psk' :
                           !$wireless_enc_key ? 'none' :
                           $restricted ? 'restricted' :
                           'open';
+                        $find_lan_module->();
+                        $need_rt2x00_iwpriv = member($module, "rt2400", "rt2500");
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
@@ -1244,8 +1246,9 @@ quality of the link, signal strength and noise level.
 
 See iwpspy(8) man page for further information."),
  },
-                             { label => N("Iwpriv command extra arguments"), val => \$ethntf->{WIRELESS_IWPRIV}, advanced => 1,
-                               help => N("Iwpriv enable to set up optionals (private) parameters of a wireless network
+                             if_(!$need_rt2x00_iwpriv,
+                                 { label => N("Iwpriv command extra arguments"), val => \$ethntf->{WIRELESS_IWPRIV}, advanced => 1,
+                                   help => N("Iwpriv enable to set up optionals (private) parameters of a wireless network
 interface.
 
 Iwpriv deals with parameters and setting specific to each driver (as opposed to
@@ -1255,7 +1258,7 @@ In theory, the documentation of each device driver should indicate how to use
 those interface specific commands and their effect.
 
 See iwpriv(8) man page for further information."),
-                             }
+                                 })
                             ];
                     },
                     complete => sub {
@@ -1271,23 +1274,29 @@ See iwpriv(8) man page for further information."),
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'prism2-utils'));
                             return 1;
                         }
-                        if ($wireless_enc_mode eq 'wpa-psk' && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
+                        if ($wireless_enc_mode eq 'wpa-psk' && !$need_rt2x00_iwpriv && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'wpa_supplicant'));
                             return 1;
                         }
                     },
                     post => sub {
-                        if ($wireless_enc_mode eq 'none') {
-                            delete $ethntf->{WIRELESS_ENC_KEY};
-                        } else {
+                        delete $ethntf->{WIRELESS_ENC_KEY};
+                        delete $ethntf->{WIRELESS_WPA_DRIVER};
+                        if ($wireless_enc_mode ne 'none') {
                             #- keep the key even for WPA, so that drakconnect remembers it
                             $ethntf->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
                         }
-                        if ($wireless_enc_mode eq 'wpa-psk') {
-                            $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                            network::wireless::wpa_supplicant_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
+                        if ($need_rt2x00_iwpriv) {
+                            #- use iwpriv for WPA with rt2x00 drivers, they don't plan to support wpa_supplicant
+                            $ethntf->{WIRELESS_IWPRIV} = $wireless_enc_mode eq 'wpa-psk' && qq(set AuthMode=WPAPSK
+set EncrypType=TKIP
+set WPAPSK="$wireless_enc_key"
+set TxRate=0);
                         } else {
-                            delete $ethntf->{WIRELESS_WPA_DRIVER};
+                            if ($wireless_enc_mode eq 'wpa-psk') {
+                                $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
+                                network::wireless::wpa_supplicant_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
+                            }
                         }
                         network::wireless::wlan_ng_needed($module) and network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
                         return "lan_protocol";
