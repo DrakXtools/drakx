@@ -73,6 +73,7 @@ our %l = (
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci farsync hdlc hostess_sv11 n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
+    usb_dsl => [ qw(cxacru eagle-usb speedtch usbatm xusbatm) ],
   },
 
   ################################################################################
@@ -217,7 +218,7 @@ our %l = (
     other => [
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
-      qw(btaudio eagle-usb speedtch),
+      qw(btaudio),
 
       arch() =~ /i.86/ ? 'aes-i586' : 'aes',
       if_(arch() =~ /sparc/, 'openprom'),
