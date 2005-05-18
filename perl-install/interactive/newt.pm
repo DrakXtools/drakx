@@ -313,7 +313,11 @@ sub ask_fromW_real {
     };
 
     my ($ok, $cancel) = ($common->{ok}, $common->{cancel});
-    $cancel = $::isWizard && !$::Wizard_no_previous ? N("Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    my ($need_to_die);
+    if (!defined $cancel && !defined $ok) {
+        $cancel = $::isWizard && !$::Wizard_no_previous ? N("Previous") : N("Cancel") ;
+        $need_to_die = 1;
+    }
     $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");
 
     my @okcancel = grep { $_ } $ok, $cancel;
@@ -373,6 +377,7 @@ sub ask_fromW_real {
 
     $form->FormDestroy;
     Newt::PopWindow();
+    die 'wizcancel' if $need_to_die;
     !$canceled;
 }
 
