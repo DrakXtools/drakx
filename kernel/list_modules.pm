@@ -187,7 +187,7 @@ our %l = (
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
     joystick => [ qw(cs461x ns558 emu10k1-gp fm801-gp iforce lightning ns558 vortex) ],
-    webcam => [ qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam ultracam usbvideo usbvision) ],
+    webcam => [ qw(cpia_usb cyber2000fb ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 ultracam usbvideo usbvision vicam w9968cf) ],
   },
 
   various => 
