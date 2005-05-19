@@ -458,6 +458,14 @@ our @tree =
      },
 
      {
+      class => "MISC_INPUT",
+      string => N("Tablet and touchscreen"),
+      icon => "hw_mouse.png",
+      detector => sub { f(modules::probe_category('input/tablet'), modules::probe_category('input/touchscreen')) },
+      checked_on_boot => 0,
+     },
+
+     {
       class => "MOUSE",
       string => N("Mouse"),
       icon => "hw_mouse.png",
