@@ -140,7 +140,7 @@ endif
 	grep ChangeLog CVS/Entries > $(STAGE2_DEST)/VERSION
 
 	cd share ; cp compssUsers.pl* rpmsrate $(MEDIA_INFO_DEST)
-#	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
+	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
 full_stage2:
 	$(MAKE) stage2
