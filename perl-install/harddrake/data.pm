@@ -3,6 +3,7 @@ package harddrake::data;
 use strict;
 use detect_devices;
 use common;
+use modules;
 
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(version tree);
@@ -349,11 +350,7 @@ our @tree =
       string => N("SATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { 
-          require list_modules;
-          my @modules = list_modules::category2modules('disk/sata');
-          f(grep { member($_->{driver}, @modules) } @devices);
-      },
+      detector => sub { f(modules::probe_category('disk/sata')) },
       checked_on_boot => 1,
      },
 
@@ -362,11 +359,7 @@ our @tree =
       string => N("RAID controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { 
-          require list_modules;
-          my @modules = list_modules::category2modules('disk/hardware_raid');
-          f(grep { member($_->{driver}, @modules) } @devices);
-      },
+      detector => sub { f(modules::probe_category('disk/hardware_raid')) },
       checked_on_boot => 1,
      },
 
