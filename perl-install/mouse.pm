@@ -274,6 +274,11 @@ sub detect_serial() {
 sub detect {
     my ($modules_conf) = @_;
 
+    # let more USB tablets and touchscreens magically work at install time
+    # through /dev/input/mice multiplexing:
+    modules::probe_category('input/tablet');
+    modules::probe_category('input/touchscreen');
+
     if (arch() =~ /^sparc/) {
 	return fullname2mouse("sunmouse|Sun - Mouse");
     }
