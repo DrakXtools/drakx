@@ -84,7 +84,9 @@ sub adsl_probe_info {
 }
 
 sub adsl_detect() {
+    require list_modules;
     require detect_devices;
+    my @modules = list_modules::category2modules('network/usb_dsl');
     my %compat = (
                   'speedtch'  => 'speedtouch',
                   'eagle-usb' => 'sagem',
@@ -93,8 +95,11 @@ sub adsl_detect() {
     return {
             bewan => [ detect_devices::getBewan() ],
             eci   => [ detect_devices::getECI() ],
-            map { my $drv = $_->{driver}; $drv = $compat{$drv} || $drv; $drv => [ $_ ] } modules::probe_category('network/usb_dsl'),
-           };
+            map {
+                my @devices = detect_devices::matching_driver($_);
+                $compat{$_} || $_ => \@devices;
+            } @modules,
+        };
 }
 
 sub sagem_set_parameters {
