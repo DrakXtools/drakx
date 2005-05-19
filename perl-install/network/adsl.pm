@@ -93,7 +93,7 @@ sub adsl_detect() {
     return {
             bewan => [ detect_devices::getBewan() ],
             eci   => [ detect_devices::getECI() ],
-            map { my $drv = $_->{driver}; $drv = $compat{$drv} || $drv; $drv => $_ } modules::probe_category('network/usb_dsl'),
+            map { my $drv = $_->{driver}; $drv = $compat{$drv} || $drv; $drv => [ $_ ] } modules::probe_category('network/usb_dsl'),
            };
 }
 
