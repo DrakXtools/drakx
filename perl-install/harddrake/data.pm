@@ -145,7 +145,6 @@ our @tree =
       class => "DVB",
       string => N("DVB card"),
       icon => "tv.png",
-      configurator => "/usr/bin/XawTV",
       detector => sub { f(modules::probe_category('multimedia/dvb')) },
       checked_on_boot => 1,
      },
