@@ -103,7 +103,6 @@ get_needed_files: $(DIRS) mo_files
 	mv -f $(DEST)/{bin,sbin}/* $(DEST)/usr/bin
 	mv -f $(DEST)/usr/{lib,X11R6/lib}/*.so* $(DEST)/lib
 	rmdir $(DEST)/{bin,sbin}
-	cd $(DEST)/usr/bin ; mv insmod insmod_
 	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init

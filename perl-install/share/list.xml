@@ -5,11 +5,12 @@
   cpio gzip bzip2
   <if-not ARCH="ppc">
     fdisk
+    rescuept
   </if-not>
   <if ARCH="ppc">
     pdisk 
   </if>
-  insmod insmod.old modinfo rmmod
+  insmod-25 modinfo-25 rmmod-25
   losetup
   lvm2 mdadm
 
@@ -108,7 +109,6 @@
 
   /usr/lib/rpm/rpmrc
   /usr/lib/rpm/macros
-  /sbin/rescuept
   /usr/share/locale/UTF-8
   /usr/share/terminfo/l/linux
   /usr/share/themes/Galaxy/gtk-2.0/gtkrc
