@@ -87,6 +87,7 @@ sub adsl_detect() {
     require list_modules;
     require detect_devices;
     my @modules = list_modules::category2modules('network/usb_dsl');
+    # return an hash compatible with what drakconnect expect us to return:
     my %compat = (
                   'speedtch'  => 'speedtouch',
                   'eagle-usb' => 'sagem',
