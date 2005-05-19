@@ -275,12 +275,25 @@ our @tree =
       checked_on_boot => 0,
      },
 
+
+
+     {
+      class => "GAMEPORT",
+      string => 
+      #-PO: these are joysticks controllers:
+      N("Game port controllers"),
+      icon => "joystick.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('multimedia/gameport')) },
+      checked_on_boot => 0,
+     },
+
      {
       class => "JOYSTICK",
       string => N("Joystick"),
       icon => "joystick.png",
       configurator => "",
-      detector => sub { f(grep { $_->{description} =~ /Joystick/ } @devices) },
+      detector => sub { f(modules::probe_category('multimedia/gameport')), f(grep { $_->{description} =~ /Joystick/ } @devices) },
       checked_on_boot => 0,
      },
 
