@@ -349,7 +349,7 @@ our @tree =
       string => N("Joystick"),
       icon => "joystick.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('multimedia/gameport')), f(grep { $_->{description} =~ /Joystick/ } @devices) },
+      detector => sub { f(modules::probe_category('input/joystick')), f(grep { $_->{description} =~ /Joystick/ } @devices) },
       checked_on_boot => 0,
      },
 
