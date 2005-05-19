@@ -855,13 +855,16 @@ sub method2text {
     }->{$method};
 }
 
-sub method_choices_raw() {
+sub method_choices_raw {
+    my ($b_prefix_mounted) = @_;
     is_xbox() ? 'cromwell' :
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
       (
-       if_(whereis_binary('lilo', $::prefix), 'lilo-graphic', 'lilo-menu'),
-       if_(whereis_binary('grub', $::prefix), 'grub'),
+       if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
+	   'lilo-graphic', 'lilo-menu'),
+       if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
+	   'grub'),
       );
 }
 sub method_choices {
@@ -872,14 +875,15 @@ sub method_choices {
 	!(/lilo/ && isLoopback($root_part))
 	  && !(/lilo-graphic/ && detect_devices::matching_desc__regexp('ProSavageDDR'))
 	  && !(/grub/ && isRAID($root_part));
-    } method_choices_raw();
+    } method_choices_raw(1);
 }
-sub main_method_choices() {
-    uniq(map { main_method($_) } method_choices_raw());
+sub main_method_choices {
+    my ($b_prefix_mounted) = @_;
+    uniq(map { main_method($_) } method_choices_raw($b_prefix_mounted));
 }
 sub configured_main_methods() {
     my @bad_main_methods = map { if_(!$_->{content}, $_->{main_method}) } config_files();
-    difference2([ main_method_choices() ], \@bad_main_methods);
+    difference2([ main_method_choices(1) ], \@bad_main_methods);
 }
 
 sub keytable {
@@ -1146,6 +1150,8 @@ sub install_lilo {
     write_lilo($bootloader, $all_hds);
 
     when_config_changed_lilo($bootloader);
+
+    configure_kdm_BootManager('Lilo');
 }
 
 sub install_raw_lilo {
@@ -1341,12 +1347,21 @@ EOF
     check_enough_space();
 }
 
+sub configure_kdm_BootManager {
+    my ($name) = @_;
+    eval { update_gnomekderc("$::prefix/usr/share/config/kdm/kdmrc", 'Shutdown' => (
+	BootManager => $name
+    )) };
+}
+
 sub install_grub {
     my ($bootloader, $all_hds) = @_;
 
     write_grub($bootloader, $all_hds);
 
     install_raw_grub() if !$::testing;
+
+    configure_kdm_BootManager('Grub');
 }
 sub install_raw_grub() {
     log::l("Installing boot loader...");
