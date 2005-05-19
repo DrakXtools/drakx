@@ -188,17 +188,24 @@ our %l = (
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
-    joystick => [
-      qw(iforce),
-      # there're more drivers in drivers/input/joystick but they support non USB or PCI devices
-      # and thus cannot be detected but by slow (and maybe dangerous?) load_category:
-      qw(a3d adi analog cobra db9 gamecon gf2k grip grip_mp guillemot interact),
-      qw(joydump magellan sidewinder spaceball spaceorb stinger tmdc turbografx warrior)
-    ],
     gameport => [ qw(cs461x ns558 emu10k1-gp fm801-gp lightning ns558 vortex) ],
     usb_sound => [ qw(audio dabusb dsbr100 snd-usb-audio snd-usb-usx2y) ],
     webcam => [ qw(cpia_usb cyber2000fb ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf) ],
   },
+
+  input => {
+      joystick => [
+          qw(iforce xpad),
+          # there're more drivers in drivers/input/joystick but they support non USB or PCI devices
+          # and thus cannot be detected but by slow (and maybe dangerous?) load_category:
+          qw(a3d adi analog cobra db9 gamecon gf2k grip grip_mp guillemot interact),
+          qw(joydump magellan sidewinder spaceball spaceorb stinger tmdc turbografx warrior)
+      ],
+      remote => [ qw(ati_remote) ],
+      # USB tablets and touchscreens:
+      tablet => [ qw(acecad aiptek wacom kbtab) ],
+      touchscreen => [ qw(mtouchusb touchkitusb) ],
+  }
 
   various => 
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
@@ -233,7 +240,7 @@ our %l = (
       arch() =~ /i.86/ ? 'aes-i586' : 'aes',
       if_(arch() =~ /sparc/, 'openprom'),
       
-      qw(wacom evdev), qw(usblp printer), 'floppy',
+      qw(evdev), qw(usblp printer), 'floppy',
 
       #- these need checking
       qw(rrunner meye),
