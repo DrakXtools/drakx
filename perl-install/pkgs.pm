@@ -640,6 +640,8 @@ sub read_rpmsrate {
 		$inv xor do {
 		    if (my ($p) = /^HW"(.*)"/) {
 			detect_devices::matching_desc__regexp($p);
+		    } elsif (($p) = /^HW_CAT"(.*)"/) {
+			modules::probe_category($p);
 		    } elsif (($p) = /^DRIVER"(.*)"/) {
 			detect_devices::matching_driver__regexp($p);
 		    } elsif (($p) = /^TYPE"(.*)"/) {
