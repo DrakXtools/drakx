@@ -96,10 +96,7 @@ sub adsl_detect() {
     return {
             bewan => [ detect_devices::getBewan() ],
             eci   => [ detect_devices::getECI() ],
-            map {
-                my @devices = detect_devices::matching_driver($_);
-                $compat{$_} || $_ => \@devices;
-            } @modules,
+            map { $compat{$_} || $_ => [ detect_devices::matching_driver($_) ] } @modules,
         };
 }
 
