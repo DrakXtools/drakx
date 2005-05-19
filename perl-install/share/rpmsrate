@@ -664,8 +664,8 @@ CAT_SYSTEM
   5 HW"DAC960|cpqarray" cpqarrayd
   5 DRIVER"^ISDN:" ibod isdn4net isdn4k-utils
   5 DRIVER"adiusbadsl" eagle-usb
-  5 CAT_KDE  DRIVER"bcm203x|bfusb|hci_usb" kdebluetooth 
-  5 !CAT_KDE || CAT_GNOME DRIVER"bcm203x|bfusb|hci_usb" gnome-bluetooth
+  5 CAT_KDE  HW_CAT"bus/bluetooth" kdebluetooth 
+  5 !CAT_KDE || CAT_GNOME HW_CAT"bus/bluetooth" gnome-bluetooth
   5 DRIVER"ipw2100" ipw2100-firmware
   5 DRIVER"ipw2200" ipw2200-firmware
   5 DRIVER"ath_pci" madwifi-kernel madwifi
