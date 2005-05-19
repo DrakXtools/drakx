@@ -234,11 +234,11 @@ our @tree =
      },
 
      {
-      class => "WAN",
-      string => N("WAN network cards"),
+      class => "ATM",
+      string => N("ATM network cards"),
       icon => "hw_network.png",
       configurator => "",
-      detector => sub { f(modules::probe_category('network/wan')) },
+      detector => sub { f(modules::probe_category('network/atm')) },
       checked_on_boot => 0,
      },
 
