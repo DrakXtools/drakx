@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.13mdk
+Release: 0.14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.14mdk
+- interactive layer: handle canceling wizards in text mode
+- hardware support:
+  o detect more webcams
+  o detect more ADSL USB modems (needs further drakconnect work)
+- harddrake:
+  o create new categories for USB audio, ATM, Bluetooth, WAN, and radio devices
+  o split joysticks category into real joystick and gameport controller ones
+- localedrake: clarify "other countries" vs "advanced" label depending if the
+  language is spoken in several countries and if the language needs an IM method
+
 * Tue May 17 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.13mdk
 - drakboot (blino):
   o add the "Create new theme" button back
