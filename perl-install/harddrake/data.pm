@@ -205,6 +205,52 @@ our @tree =
       checked_on_boot => 0,
      },
 
+
+     {
+      class => "USB_AUDIO",
+      string => N("USB sound devices"),
+      icon => "sound.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('multimedia/usb_sound')) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "RADIO",
+      string => N("Radio cards"),
+      icon => "tv.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('multimedia/radio')) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "WAN",
+      string => N("WAN network cards"),
+      icon => "hw_network.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('network/wan')) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "WAN",
+      string => N("WAN network cards"),
+      icon => "hw_network.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('network/wan')) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "BLUETOOTH",
+      string => N("Bluetooth devices"),
+      icon => "hw_network.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('bus/bluetooth')) },
+      checked_on_boot => 0,
+     },
+
      {
       class => "ETHERNET",
       string => N("Ethernetcard"),
