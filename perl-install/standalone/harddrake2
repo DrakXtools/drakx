@@ -583,6 +583,8 @@ sub simple_read_rpmsrate {
     map { split(' ', $_) } map {
         if (my ($p, $packages) = /[^!]HW"(.*)"(.*)/) {
             if_(detect_devices::matching_desc__regexp($p), $packages);
+        } elsif (($p, $packages) = /[^!]HW_CAT"(.*)"(.*)/) {
+            if_(modules::probe_category($p), $packages);
         } elsif (($p, $packages) = /[^!]DRIVER"(.*)"(.*)/) {
             if_(detect_devices::matching_driver__regexp($p), $packages);
         } else {
