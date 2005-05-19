@@ -205,7 +205,7 @@ our %l = (
       # USB tablets and touchscreens:
       tablet => [ qw(acecad aiptek wacom kbtab) ],
       touchscreen => [ qw(mtouchusb touchkitusb) ],
-  }
+  },
 
   various => 
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
