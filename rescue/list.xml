@@ -1,0 +1,233 @@
+<list no-arch-libraries="on">
+
+<from expand="binary">
+  bash sh
+
+  false true
+  pwd reset
+
+  ls
+  cp ln mkdir mknod mv rm rmdir   
+  chmod chown
+  dd touch
+
+  cat less
+  tail head tee
+  sort split cut
+  grep
+
+  cmp diff
+  find
+  file md5sum
+
+  gzip <!-- zcat and gunzip are hardlinks, they are handled in aliases to make it more apparent -->
+  bzip2 bunzip2 bzcat
+
+  df du
+
+  packdrake parsehdlist
+  cpio ftp tar
+  rsync
+  ssh scp
+  telnet
+
+  date
+  dmesg
+  chroot
+  sleep
+  sync update
+
+  eject
+  mount umount
+
+  ldconfig
+  mingetty init
+  reboot halt shutdown
+  kill killall5 ps strace
+
+  loadkeys tset
+
+  ping hostname ifconfig route
+
+  fdformat badblocks
+  e2fsck fsck.ext2 fsck.ext3 mkfs.ext2 resize2fs
+  debugfs tune2fs
+  fsck.xfs xfs_repair
+  resize_reiserfs reiserfsck
+  mkswap swapoff swapon
+  <if ARCH="i.86">
+    fsck.jfs
+  </if>
+  <if ARCH="i.86|x86_64|ia64">
+    ntfsresize
+    mkdosfs
+  </if>
+  <if ARCH="ppc">
+    hformat
+  </if>
+
+  <if-not ARCH="ppc">
+    fdisk gpart sfdisk
+    rescuept
+  </if-not>
+  <if ARCH="ppc">
+    pdisk 
+  </if>
+  parted partimage
+
+  mdadm lvm2
+  <if ARCH="i.86|x86_64|ia64">
+    dmraid
+  </if>
+
+  lsmod-25
+  insmod-25
+  rmmod-25
+
+  setserial
+  mt stinit
+
+  lspci lspcidrake
+
+  rpm
+  rpm2cpio rpmdb
+  rpme rpmi rpmu rpmquery rpmverify
+
+  vim-minimal hexedit
+
+  perl
+
+  <if ARCH="i.86|x86_64|ia64">
+    dmidecode 
+  </if>
+
+  <if ARCH="i.86|x86_64">
+    grub grub-install
+  </if>
+  <if ARCH="ia64">
+    efibootmgr 
+  </if>
+  <if ARCH="ppc">
+    ybin
+    mkofboot ofpath
+    nvsetenv
+  </if>
+  <if ARCH="sparc">
+    silo
+  </if>
+</from>
+
+<from>
+  /usr/lib/kbd/keymaps/include
+  <if ARCH="i.86|x86_64">    
+    /usr/lib/kbd/keymaps/i386/include
+    /usr/lib/kbd/keymaps/i386/azerty/be-latin1.kmap.gz <!-- this one is needed by be2-latin1 -->
+  </if>
+  /usr/share/misc/file/magic
+  /usr/share/terminfo/l/linux
+  /usr/share/pci.ids
+  /var/run/utmp
+
+  <if ARCH="i.86|x86_64">    
+    /boot/grub/stage1
+    /boot/grub/stage2
+    /usr/lib/extipl/aldebaran.bin
+  </if>
+
+  <if ARCH="ppc">
+    /usr/lib/yaboot/ofboot
+    /usr/lib/yaboot/yaboot    
+  </if>
+
+  <from expand="command">
+    perl -Mkeyboard -I../perl-install -le 'print foreach keyboard::loadkeys_files()'
+  </from>
+</from>
+
+<from dir="/usr/lib/rpm" expand="glob">
+  <mode copy="keep-links">
+    rpmrc
+    macros
+    rpmpopt-*
+    rpmd rpme rpmi rpmu rpmq rpmv
+  </mode>
+</from>
+
+<filter subst="/^__END__/ and $_ = '', close ARGV">
+<from expand="main-perl">
+  AutoLoader.pm
+  strict.pm
+  vars.pm
+  warnings/register.pm
+  warnings.pm
+  Carp.pm
+  Exporter.pm
+  ARCH-linux/CORE/libperl.so
+  ARCH-linux/auto/POSIX/autosplit.ix
+  ARCH-linux/auto/POSIX/load_imports.al
+  ARCH-linux/auto/POSIX/POSIX.so
+  ARCH-linux/POSIX.pm
+  ARCH-linux/XSLoader.pm
+</from>
+
+<from expand="perl">
+  packdrake.pm
+  Packdrakeng.pm
+</from>
+</filter>
+
+<from dir="/etc">
+  inputrc
+  termcap
+  protocols
+  services
+  ssh/ssh_config
+</from>
+
+<filter command="strip">
+<from dir="/LIB">
+  libnss_files.so.2
+  libnss_dns.so.2
+  libresolv.so.2
+  ld-linux*.so.2
+</from>
+</filter>
+
+<from dir="/usr/share/ldetect-lst" expand="glob">
+  <filter command="gzip">
+    *table
+  </filter>
+</from>
+
+<from dir="../kernel/all.kernels/$(MAIN_KERNEL)">
+  <to dir="/modules">
+    modules.cz
+    modules.dep
+  </to>
+</from>
+
+<filter command="../tools/simplify-drakx-modules">
+  <from dir="." expand="collect-perl-files ../perl-install /usr/lib/libDrakX">
+    <to dir="/usr/bin">
+      rescue-doc drvinst lsparts
+      guessmounts install_bootloader
+      <if ARCH="i.86|x86_64">
+	restore_ms_boot
+      </if>
+    </to>
+    <to dir="/usr/sbin">
+      partimage_whole_disk
+    </to>
+  </from>
+</filter>
+
+<from dir="../mdk-stage1">
+  <to dir="/usr/bin">
+    rescue-gui
+  </to>
+  <to dir="/usr/sbin">
+    dhcp-client
+  </to>
+</from>
+
+</list>
