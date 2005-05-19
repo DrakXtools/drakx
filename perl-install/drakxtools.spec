@@ -276,12 +276,14 @@ cat libDrakX.lang >> %name.list
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%update_menus
 [[ ! -e %_sbindir/kbdconfig ]] && %__ln_s -f keyboarddrake %_sbindir/kbdconfig
 [[ ! -e %_sbindir/mouseconfig ]] && %__ln_s -f mousedrake %_sbindir/mouseconfig
 [[ ! -e %_bindir/printtool ]] && %__ln_s -f ../sbin/printerdrake %_bindir/printtool
 :
 
 %postun
+%clean_menus
 for i in %_sbindir/kbdconfig %_sbindir/mouseconfig %_bindir/printtool;do
     [[ -L $i ]] && %__rm -f $i
 done
