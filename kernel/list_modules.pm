@@ -193,6 +193,8 @@ our %l = (
     webcam => [ qw(cpia_usb cyber2000fb ibmcam konicawc mod_quickcam ov511 ov511-alt ov518_decomp ovfx2 pwc quickcam se401 stv680 sn9c102 ultracam usbvideo usbvision vicam w9968cf) ],
   },
 
+  # USB input stuff get automagically loaded by hotplug and thus
+  # magically work through /dev/input/mice multiplexing:
   input => {
       joystick => [
           qw(iforce xpad),
