@@ -374,9 +374,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.15mdk
 - drakconnect, harddrake: detect all ADSL modems of each kind
 - harddrake GUI:
-  o detect yet more webcams
-  o list DVB cards in their own category
-  o install needed packages
+  o detect yet more webcams and USB audio devices
+  o DVB support:
+    * list DVB cards in their own category
+    * install needed packages for DVB
+  o list tablets and touchscreens in their own category
+  o fix detecting joysticks
+  o really list ATM devices
 - harddrake service: install/remove DVB drivers if needed
 
 * Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.14mdk
