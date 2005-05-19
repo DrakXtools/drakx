@@ -6,16 +6,24 @@ use Data::Dumper;
 use Config;
 use Cwd 'cwd';
 
-@ARGV == 2 or die "usage: install-xml-file-list <xml file> <destination>\n";
+my $want_sudo = $ARGV[0] eq '--sudo' && shift @ARGV;
+
+@ARGV == 2 or die "usage: install-xml-file-list [--sudo] <xml file> <destination>\n";
 my ($xml_file_list, $DEST) = @ARGV;
+
+my $sudo = '';
+if ($>) {
+    $sudo = "sudo" if $want_sudo;
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+#$verbose = 1;
 
 my $initial_dir = cwd();
 my $ARCH = arch() =~ /i.86/ ? 'i386' : arch();
 my $LIB = arch() =~ /x86_64/ ? "lib64" : "lib";
 
 my $base_cpio_options = '-pumd --quiet';
-
-system("rm -rf $DEST");
 
 my $tree = XML::Parser->new(Style => 'Tree')->parsefile($xml_file_list);
 
@@ -31,7 +39,7 @@ final_cleanup();
 
 sub final_cleanup() {
     #- cpio creates directory 700, that's not nice
-    system("find $DEST -type d | xargs chmod 755");
+    system("find $DEST -type d | xargs $sudo chmod 755");
 }
 
 sub handle_nodes {
@@ -92,6 +100,11 @@ sub group_by_n {
     @r;
 }
 
+sub identify_file {
+    my ($dev, $ino) = @_;
+    "$dev:$ino";
+}
+
 sub all_files_rec_ {
     my ($d) = @_;
 
@@ -123,6 +136,25 @@ sub install_needed_libraries {
     copy_files('', $DEST, [ keys %needed_libraries ], '', '--dereference');
 }
 
+sub collect_needed_perl_files {
+    my ($local_rep, $dest, @scripts) = @_;
+
+    my (%local, %global);
+    foreach my $script (@scripts) {
+	foreach (`strace -efile perl -cw -I$local_rep $script 2>&1`) {
+	    my ($f) = /^open\("(.*?)",.*\)\s*=\s*\d+$/ or next;
+	    if ($f =~ m!^\Q$local_rep\E/(.*)!) {
+		$local{$1} = 1;
+	    } elsif (begins_with($f, '/dev/')) {
+		# skip
+	    } elsif (begins_with($f, '/')) {
+		$global{$f} = 1;
+	    }
+	}
+    }
+    [ keys %local ], [ keys %global ];
+}
+
 sub copy_files {
     my ($working_dir, $to_dir, $files, $b_flatten, @options) = @_;
 
@@ -131,12 +163,12 @@ sub copy_files {
 	my $options = join(' ', '-r', @options);
 	foreach (group_by_n(20, $files)) {
 	    warn "cp $options to_dir $to_dir from $working_dir: @$_\n" if $verbose;
-	    system("cd $working_dir ; cp $options @$_ $to_dir");
+	    system("cd $working_dir ; $sudo cp $options @$_ $to_dir");
 	}
     } else {
 	my $options = join(' ', $base_cpio_options, @options);
 	warn "cpio $options to_dir $to_dir from $working_dir: @$files\n" if $verbose;
-	open(my $F, "| cd $working_dir ; cpio $options $to_dir");
+	open(my $F, "| cd $working_dir ; $sudo cpio $options $to_dir");
 	print $F "$_\n" foreach @$files;
 	close($F) or die "cpio $to_dir failed\n";
     }
@@ -145,8 +177,9 @@ sub copy_files {
 sub install {
     my ($env, $text) = @_;
 
-    my $from_dir = $env->{from}{dir};
+    my $from_dir = expand_macros($env->{from}{dir});
     my $to_dir = $DEST . expand_macros($env->{to}{dir} || $env->{to}{flatten} && $from_dir || '');
+    my $copy_mode = $env->{mode}{copy} || '';
     my $working_dir = '.';
 
     my $expand = $env->{from}{expand} || '';
@@ -165,7 +198,7 @@ sub install {
 
 	    @l == 1 || $b_full_glob or die "multiple match for $f\n";	    
 	} else {
-	    -e $f or die "missing file $f\n";
+	    -e $f or die "missing file $f ($rel) in $working_dir\n";
 	}
 	if (@l == 1 && -d $l[0] && $b_recursive_dirs) {
 	    @l = all_files_rec_($l[0]);
@@ -198,15 +231,32 @@ sub install {
     } elsif ($expand eq 'binary') {
 	$disallow_from_dir->();
 	my @PATH = qw(/sbin /bin /usr/bin /usr/sbin /usr/X11R6/bin);
-	foreach my $name (split(' ', $text)) {
+	foreach my $name (map { expand_macros($_) } split(' ', $text)) {
 	    my @l = grep { -x $_ } map { "$_/$name" } @PATH;
 	    @l or die "can't find binary $name\n";
-	    if (my @m = grep { ! -l $_ } @l) {
-		@l = @m;
+	    if (@l > 1) {
+		my @m = grep { ! -l $_ } @l;
+		if (@m == 1) {
+		    my $id = identify_file($m[0]);
+		    push @files, grep { -l $_ && identify_file($_) eq $id } @l;
+		}
+		@l = @m if @m;
 	    }
-	    @l == 1 or die "many matches for binary $name: " . join(' ', @l) . "\n";
-	    push @files, @l;
+	    if (@l > 1) {
+		warn "many matches for binary $name: " . join(' ', @l) . ", choosing $l[0]\n";
+	    }
+	    my $f = $l[0];
+	    while (1) {
+		push @files, $f;
+		my $l = readlink($f) or last;
+		if ($l =~ m!/!) {
+		    warn "keeping symlink $f -> $l as is\n";
+		    last;
+		}
+		$f = dirname($f) . '/' . $l;
+	    }
 	}
+	$copy_mode = 'keep-links';
 	$env->{filter}{command} ||= 'strip';
 
     } elsif ($expand eq 'rpm') {
@@ -224,6 +274,16 @@ sub install {
 	$disallow_from_dir->();
 	$from_dir = $Config{privlib};
 	@files = split(' ', $text);
+    } elsif ($expand =~ /collect-perl-files/) {
+	my (undef, $local, $to) = split(' ', $expand);
+
+	@files = split(' ', $text);
+	warn "collect-perl-files $local $to @files ($env->{filter}{command})\n";
+	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
+	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
+	copy_and_filter("$working_dir/$local", "$DEST$to", $local_perl_files, $env->{filter}, '', '--dereference');
+	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '--dereference');
+
     } elsif ($expand) {
 	die "unknown expand method $expand\n";
     } else {
@@ -238,33 +298,45 @@ sub install {
     }
 
     my @all_files = map { $from_file->($_, $expand eq 'glob', $expand ne 'rpm') } @files;
-
-    
-    my $copy_mode = $env->{mode}{copy} || '';
+   
     my @options = (
 	if_($copy_mode ne 'keep-links', '--dereference'),
     );
-    copy_files($working_dir, $to_dir, \@all_files, $env->{to}{flatten}, @options);
+    copy_and_filter($working_dir, $to_dir, \@all_files, $env->{filter}, $env->{to}{flatten}, @options);
+}
 
-    {
-	chdir $to_dir;
-	foreach (group_by_n(20, \@all_files)) {
-	    my @l = $env->{to}{flatten} ? (map { basename($_) } @$_) : (map { "./$_" } @$_);
-	    @l = grep { ! -d $_ } @l;
+sub copy_and_filter {
+    my ($working_dir, $to_dir, $all_files, $filter, $flatten, @copy_options) = @_;
 
-	    if (my $subst = $env->{filter}{subst}) {
-		system('perl', '-pi', '-e', $subst, @l);
-	    }
-	    if (my $command = $env->{filter}{command}) {
-		my @options = (
-		    if_($command eq 'gzip', '-9'),
-		    if_($command eq 'strip', '2>/dev/null'),
-		);
-		system(join(' ', $command, @options, @l));
-	    }
+    copy_files($working_dir, $to_dir, $all_files, $flatten, @copy_options);
+    apply_filter($to_dir, $filter, $all_files, $flatten);
+}
+
+sub apply_filter {
+    my ($to_dir, $filter, $all_files, $b_flatten) = @_;
+
+    chdir $to_dir;
+    foreach (group_by_n(20, $all_files)) {
+	my @l = $b_flatten ? (map { basename($_) } @$_) : (map { "./$_" } @$_);
+	@l = grep { ! -d $_ } @l;
+
+	if (my $subst = $filter->{subst}) {
+	    system('perl', '-pi', '-e', $subst, @l);
 	}
-	chdir $initial_dir;
+	if (my $command = $filter->{command}) {
+	    $command = $initial_dir . "/$command" if $command =~ m!^..?/!;
+	    if ($command =~ /simplify-drakx-modules/) {
+		@l = grep { !/\.so($|\.)/ } @l;
+	    }
+	    my @options = (
+		if_($command eq 'gzip', '-9f'),
+		if_($command eq 'strip', '2>/dev/null'),
+	    );
+	    warn "running $command @options @l\n";
+	    system(join(' ', $command, @options, @l));
+	}
     }
+    chdir $initial_dir;
 }
 
 sub decompose {
