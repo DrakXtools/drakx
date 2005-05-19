@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.15mdk
+- drakconnect, harddrake: detect all ADSL modems of each kind
+- harddrake GUI:
+  o detect yet more webcams
+  o list DVB cards in their own category
+  o install needed packages
+- harddrake service: install/remove DVB drivers if needed
+
 * Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.14mdk
 - interactive layer: handle canceling wizards in text mode
 - hardware support:
