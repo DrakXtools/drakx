@@ -193,7 +193,7 @@ sub write_preload_conf {
     push @l, map { if_($_->{driver} =~ /^Module:(.*)/, $1) } detect_devices::probeall();
     push @l, 'nvram' if detect_devices::isLaptop();
     push @l, map { $_->{driver} } probe_category('various/laptop');
-    push @l, map { $_->{driver} } probe_category('multimedia/joystick');
+    push @l, map { $_->{driver} } probe_category('input/joystick');
     push @l, map { $_->{driver} } probe_category('various/crypto');
     push @l, 'padlock' if cat_("/proc/cpuinfo") =~ /rng_en/;
     push @l, 'evdev' if detect_devices::getSynapticsTouchpads();
