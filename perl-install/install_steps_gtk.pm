@@ -174,7 +174,7 @@ sub selectLanguage {
   
     $o->ask_warn('',
 formatAlaTeX(N("Your system is low on resources. You may have some problem installing
-Mandrivalinux. If that occurs, you can try a text install instead. For this,
+Mandriva Linux. If that occurs, you can try a text install instead. For this,
 press `F1' when booting on CDROM, then enter `text'."))) if $first_time && availableRamMB() < 70; # 70MB
 
 }

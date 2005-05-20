@@ -818,7 +818,7 @@ Do you want to install the updates?")),
 	require crypto;
 	eval {
 	    my @mirrors = do {
-		my $_w = $o->wait_message('', N("Contacting Mandrivalinux web site to get the list of available mirrors..."));
+		my $_w = $o->wait_message('', N("Contacting Mandriva Linux web site to get the list of available mirrors..."));
 		crypto::mirrors($o->{distro_type});
 	    };
 	    #- if no mirror have been found, use current time zone and propose among available.
