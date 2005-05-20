@@ -962,7 +962,7 @@ sub exitInstall {
     eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
 
-Beware that some Mandrivalinux tools rely on the contents of some
+Beware that some Mandriva Linux tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
 " };
