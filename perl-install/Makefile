@@ -100,9 +100,7 @@ mo_files : $(MOFILES)
 get_needed_files: $(DIRS) mo_files
 	REP4PMS=$(REP4PMS) ../tools/install-xml-file-list share/list.xml $(DEST)
 
-	mv -f $(DEST)/{bin,sbin}/* $(DEST)/usr/bin
 	mv -f $(DEST)/usr/{lib,X11R6/lib}/*.so* $(DEST)/lib
-	rmdir $(DEST)/{bin,sbin}
 	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init
@@ -111,11 +109,11 @@ get_needed_files: $(DIRS) mo_files
 
 	perl -I. -Mlang -e 'symlink "UTF-8", "$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
 
-	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
+	perl -ane 'symlink "$$F[1]", "$(DEST)$$F[0]"' share/aliases
 ifeq (ia64,$(ARCH))
-	ln -sf bash $(DEST)/usr/bin/sh
+	ln -sf bash $(DEST)/bin/sh
 else
-	ln -sf ash $(DEST)/usr/bin/sh
+	ln -sf ash $(DEST)/bin/sh
 endif
 
 	mkfontdir $(DEST)/usr/X11R6/lib/X11/fonts
@@ -131,7 +129,7 @@ endif
 	rm -rf $(DEST)/usr/share/locale_special/{be,fur,ta}
 
 ifeq (y,$(USE_PCMCIA))
-	install -s /sbin/cardmgr $(DEST)/usr/bin
+	install -s /sbin/cardmgr $(DEST)/sbin
 	cp -a /etc/pcmcia $(DEST)/etc
 	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/all.kernels/.main`/modules.dep
 endif

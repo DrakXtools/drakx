@@ -308,7 +308,7 @@ sub load_raw_install {
 	my $m = '/tmp/' . name2file($_);
 	if (-e $m) {
             my $stdout;
-            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, split(' ', $options->{$_}));
+            my $rc = run_program::run(["insmod_", "insmod"], '2>', \$stdout, $m, split(' ', $options->{$_}));
             log::l(chomp_($stdout)) if $stdout;
             if ($rc) {
                 unlink $m;

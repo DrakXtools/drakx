@@ -348,7 +348,7 @@ sub insmod {
     if (! -r $f) {
 	die "can not find module $f\n";
     }
-    run_program::run(["/usr/bin/insmod_", "insmod"], "-f", $f, @_) or die("insmod $f failed");
+    run_program::run(["insmod_", "insmod"], "-f", $f, @_) or die("insmod $f failed");
     unlink $f;
 }
 
