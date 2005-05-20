@@ -1187,7 +1187,7 @@ sub g_auto_install {
 	$_->{mntpoint} && fs::format::known_type($_);
     } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services postInstall postInstallNonRooted); #- TODO modules bootloader 
 
     $o->{printer} = $::o->{printer} if $::o->{printer};
 
