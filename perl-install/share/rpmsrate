@@ -105,20 +105,21 @@ CAT_AUDIO
   3 CAT_KDE kdemultimedia-noatun
   3 timidity-instruments
   3 beep-media-player
-  3 DRIVER"^snd-" xmms-alsa gnome-alsamixer alsa-utils
+  5 DRIVER"^snd-" alsa-utils
+  3 DRIVER"^snd-" xmms-alsa gnome-alsamixer
 # the two following entries are for ISA sound cards and thus are not managed for now:
-  3 DRIVER"^snd-sb" cspctl
-  3 DRIVER"^sbawe" awesfx
-  3 DRIVER"snd-darla20|snd-darla24|snd-gina20|snd-gina24|snd-gina3g|snd-indi|snd-indigodj|snd-indigoio|snd-layla20|snd-layla24|snd-layla3g|snd-mia|snd-mona" echomixer
-  3 DRIVER"snd-emu10k1" as10k1
-  3 DRIVER"snd-hdsp" hdsploader hdspmixer rmedigicontrol
-  3 DRIVER"snd-ice1712|snd-ice1724" envy24control
+  5 DRIVER"^snd-sb" cspctl
+  5 DRIVER"^sbawe" awesfx
+  5 DRIVER"snd-darla20|snd-darla24|snd-gina20|snd-gina24|snd-gina3g|snd-indi|snd-indigodj|snd-indigoio|snd-layla20|snd-layla24|snd-layla3g|snd-mia|snd-mona" echomixer
+  5 DRIVER"snd-emu10k1" as10k1
+  5 DRIVER"snd-hdsp" hdsploader hdspmixer rmedigicontrol
+  5 DRIVER"snd-ice1712|snd-ice1724" envy24control
 # unmanaged ISA too:
-  3 DRIVER"snd-pcxhr" pcxhrloader
-  3 DRIVER"snd-sscape" sscape_ctl
-  3 DRIVER"snd-mixart" mixartloader
-  3 DRIVER"snd-usb-audio" us428control usx2yloader
-  3 DRIVER"^snd-vx" vxloader
+  5 DRIVER"snd-pcxhr" pcxhrloader
+  5 DRIVER"snd-sscape" sscape_ctl
+  5 DRIVER"snd-mixart" mixartloader
+  5 DRIVER"snd-usb-audio" us428control usx2yloader
+  5 DRIVER"^snd-vx" vxloader
   3 xmms-esd
   3 xmms-kjofol-skins
   3 xmms-more-vis-plugins
