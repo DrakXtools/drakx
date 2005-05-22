@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.15mdk
+Release: 0.16mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun May 22 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.16mdk
+- interactive layer: fix canceling managment in text mode
+- XFdrake: only run ldconfig if needed (aka only if GL config was
+  altered), thus speeding up auto-config of X in harddrake service
+- fix joystick detection (pixel, #16099)
+
 * Thu May 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.15mdk
 - drakconnect, harddrake: detect all ADSL modems of each kind
 - harddrake GUI:
