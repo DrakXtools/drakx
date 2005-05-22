@@ -164,7 +164,7 @@ sub card_config__not_listed {
 		       format => sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
 				       $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] } } ]) or return;
 
-    log::l("Xconfig::card: $r manually chosen");
+    log::explanations("Xconfig::card: $r manually chosen");
 
     $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, do not modify $card
 
@@ -215,20 +215,20 @@ sub configure_auto_install {
 	my @cards = probe();
 	my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards);
 	$card = $choice ? $choice->{code}() : do {
-	    log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{card_name}. Defaulting...');
+	    log::explanations('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{card_name}. Defaulting...');
 	    { Driver => $options->{allowFB} ? 'fbdev' : 'vesa' };
 	};
     }
 
     my ($glx_choice) = xfree_and_glx_choices($card);
-    log::l("Using $glx_choice->{text}");
+    log::explanations("Using $glx_choice->{text}");
     $glx_choice->{code}();
     set_glx_restrictions($card);
 
     install_server($card, $options, $do_pkgs);
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
 	$card->{VideoRam} = $options->{VideoRam_probed} || 4096;
-	log::l("argh, I need to know VideoRam! Taking " . ($options->{probed_VideoRam} ? "the probed" : "a default") . " value: VideoRam = $card->{VideoRam}");
+	log::explanations("argh, I need to know VideoRam! Taking " . ($options->{probed_VideoRam} ? "the probed" : "a default") . " value: VideoRam = $card->{VideoRam}");
     }
     to_raw_X($card, $raw_X);
     $card;
@@ -244,7 +244,7 @@ sub configure {
 	if ($options->{allowFB}) {
 	    $cards[0]{Driver} = 'fbdev';
 	} elsif ($auto) {
-	    log::l("Xconfig::card: auto failed (unknown card and no allowFB)");
+	    log::explanations("Xconfig::card: auto failed (unknown card and no allowFB)");
 	    return 0;
 	}
     }
@@ -265,7 +265,7 @@ sub configure {
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
 	if ($auto) {
-	    log::l("Xconfig::card: auto failed (needVideoRam)");
+	    log::explanations("Xconfig::card: auto failed (needVideoRam)");
 	    return;
 	}
 	$card->{VideoRam} = (find { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
@@ -319,7 +319,7 @@ sub install_server {
     if ($card->{Driver2} eq 'nvidia' &&
 	-e "$::prefix/usr/X11R6/$lib/modules/drivers/nvidia_drv.o" &&
 	-l "$::prefix/usr/X11R6/$lib/modules/extensions/libglx.so") {
-	log::l("Using specific NVIDIA driver and GLX extensions");
+	log::explanations("Using specific NVIDIA driver and GLX extensions");
 	$card->{Driver} = 'nvidia';
 	$card->{DRI_GLX_SPECIAL} = 1;
 	$card->{Options}{IgnoreEDID} = 1;
@@ -327,7 +327,7 @@ sub install_server {
     if ($card->{Driver2} eq 'fglrx' &&
 	-e "$::prefix/usr/X11R6/$lib/modules/dri/fglrx_dri.so" &&
 	-e "$::prefix/usr/X11R6/$lib/modules/drivers/fglrx_drv.o") {
-	log::l("Using specific ATI fglrx and DRI drivers");
+	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
 
@@ -352,7 +352,7 @@ sub xfree_and_glx_choose {
 				  interactive_help_id => 'configureX_xfree_and_glx',
 				},
 				sub { $_[0]{text} }, \@choices) or return;
-    log::l("Using $tc->{text}");
+    log::explanations("Using $tc->{text}");
     $tc->{code}();
     set_glx_restrictions($card);
     1;
@@ -364,7 +364,7 @@ sub multi_head_choices {
 
     my $has_multi_head = @cards > 1 || @cards && $cards[0]{MULTI_HEAD} > 1;
     my $disable_multi_head = any { 
-	$_->{Driver} or log::l("found card $_->{description} not supported by XF4, disabling multi-head support");
+	$_->{Driver} or log::explanations("found card $_->{description} not supported by XF4, disabling multi-head support");
 	!$_->{Driver};
     } @cards;
 
@@ -442,8 +442,8 @@ sub set_glx_restrictions {
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
     if (member($card->{card_name}, 'Matrox Millennium 200', 'Matrox Millennium 200', 'Matrox Mystique') && $card->{description} !~ /AGP/) {
-	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
-	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
+	log::explanations("disabling AGP mode for Matrox card, as it seems to be a PCI card");
+	log::explanations("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
 	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$::prefix/etc/X11/glx.conf";
     }
 }
@@ -490,7 +490,7 @@ sub check_bad_card {
     $bad_card ||= $card->{Driver} eq 'i810' || $card->{Driver} eq 'fbdev';
     $bad_card ||= member($card->{Driver}, 'nvidia', 'vmware') if !$::isStandalone; #- avoid testing during install at any price.
 
-    log::l("the graphics card does not like X in framebuffer") if $bad_card;
+    log::explanations("the graphics card does not like X in framebuffer") if $bad_card;
 
     !$bad_card;
 }
