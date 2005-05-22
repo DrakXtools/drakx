@@ -457,12 +457,21 @@ sub libgl_config {
 	nvidia => '.conf.nvidia',
 	fglrx => '.conf.ati',
     );
+    my $need_to_run_ldconfig;
+    my $link = "$dir/GL.conf";
     if (my $file = $driver_to_libgl_config{$Driver}) {
-	symlinkf($file, "$dir/GL.conf") if -e "$dir/$file";
-    } else {
-	eval { rm_rf("$dir/GL.conf") };
+        if (-e "$dir/$file" && readlink($link) ne $file) {
+            symlinkf($file, "$dir/GL.conf");
+            $need_to_run_ldconfig = 1;
+            log::explanations("ldconfig will be run because the GL library was enabled");
+        }
+    } elsif (-e $link) {
+	eval { rm_rf($link) };
+        $need_to_run_ldconfig = 2;
+        log::explanations("ldconfig will be run because the GL library was disabled");
+
     }
-    system("/sbin/ldconfig") if $::isStandalone;
+    system("/sbin/ldconfig") if $::isStandalone && $need_to_run_ldconfig;
 }
 
 sub add_to_card__using_Cards {
