@@ -461,6 +461,7 @@ our @tree =
       string => N("Tablet and touchscreen"),
       icon => "hw_mouse.png",
       detector => sub { f(modules::probe_category('input/tablet'), modules::probe_category('input/touchscreen')) },
+      configurator => "$sbindir/mousedrake",
       checked_on_boot => 0,
      },
 
