@@ -49,6 +49,8 @@ install_only:
 
 clean:
 	rm -rf images
+#	force taking new rpms from repository
+	rm -rf kernel/RPMS
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 

@@ -131,7 +131,7 @@ endif
 ifeq (y,$(USE_PCMCIA))
 	install -s /sbin/cardmgr $(DEST)/sbin
 	cp -a /etc/pcmcia $(DEST)/etc
-	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/all.kernels/.main`/modules.dep
+	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/RPMS/.main`/modules.dep
 endif
 
 	install -d $(MEDIA_INFO_DEST)

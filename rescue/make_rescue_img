@@ -51,7 +51,7 @@ substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
     _ "cd ../mdk-stage1 && make rescue-gui dhcp-client";
     -e "../kernel/all.kernels" or die "use ./update_kernel in gi/kernel first\n";
 
-    $ENV{MAIN_KERNEL} = chomp_(`cat ../kernel/all.kernels/.main`);
+    $ENV{MAIN_KERNEL} = chomp_(`cat ../kernel/RPMS/.main`);
 
     _ "../tools/install-xml-file-list list.xml $tmp";
 }

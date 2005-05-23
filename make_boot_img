@@ -5,10 +5,6 @@ use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
 
-# move stuff to new "kernel" directory
--d 'kernel' or die "directory kernel is missing\n";
-rename 'all.kernels', 'kernel/all.kernels';
-
 my $default_append = "ramdisk_size=128000";
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
 my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
@@ -36,9 +32,9 @@ sub mke2fs {
 _ "$sudo mkdir -p $tmp_mnt $tmp_mnt_initrd";
 mkdir "images";
 
-my $main = chomp_(cat_('kernel/all.kernels/.main'));
-my $main_BOOT = chomp_(cat_('kernel/all.kernels/.main-BOOT'));
-my @kernels = grep { /^2/ } grep { !/xbox/ } all('kernel/all.kernels');
+my $main = chomp_(cat_('kernel/RPMS/.main'));
+my $main_BOOT = chomp_(cat_('kernel/RPMS/.main-BOOT'));
+my @kernels = grep { !/xbox/ } all('kernel/all.kernels');
 my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
