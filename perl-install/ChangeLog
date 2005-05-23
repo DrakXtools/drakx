@@ -1,3 +1,1296 @@
+2005/05/22  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated simplified Chinese translation.
+
+2005/05/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* Xconfig/card.pm: ensure that explanations go into /var/log/explanations
+	is standalone
+	mode (log::explanations() just calls log::l() at install time)
+	(libgl_config) only run ldconfig if needed (aka only if GL config was
+	altered)
+
+	* share/po/help-zh_CN.pot, share/po/bn.po, share/po/ms.po, share/po/sk.po,
+	share/po/gl.po, share/po/pt_BR.po, share/po/th.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/be.po, share/po/pa_IN.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/he.po, share/po/da.po,
+	share/po/ca.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/help-ru.pot, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sc.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/help-de.pot, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/help-it.pot, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/hi.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/nl.po, share/po/help-fr.pot, share/po/tl.po, share/po/de.po,
+	share/po/help-es.pot, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: undo breakage
+
+	* drakxtools.spec: 10.3-0.16mdk
+
+	* interactive/newt.pm: fix canceling managment in text mode
+
+	* share/rpmsrate: us428control usx2yloader are for devices managed by
+	snd-usb-usx2y and not by snd-usb-audio
+	install synaptics related packages early in the install process
+	ensure sound utils got installed
+	install bluez-utils only if a bluetooth device is plugged
+	install joystick utils if a joystick is detected
+	install kradio qtradio with KDE and gnomeradio with GNOME if a radio
+	card is
+	present
+	do not install eroaster under KDE & GNOME since they've their own native
+	burner program
+	adiusbadsl has been replaced by eagle-usb in the pcitable in november
+	2004
+	automatically install wireless-tools if there's a wireless card
+	remove references to perl-GTK-Glade, perl-GTK-GLArea and perl-GTK-Gnome
+	since
+	they're obsoleted and not used by any core package
+	ispell packages are gone; let's replace them by aspell ones
+
+2005/05/20  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/help-zh_CN.pot, share/po/bn.po, share/po/ms.po, share/po/sk.po,
+	share/po/gl.po, share/po/pt_BR.po, share/po/th.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, install_steps_interactive.pm,
+	share/po/be.po, share/po/pa_IN.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, install_steps_newt.pm, share/po/da.po, share/po/ca.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/help-ru.pot, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/sc.po,
+	install_steps.pm, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/help-de.pot, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/help-it.pot, share/po/tg.po,
+	install_steps_gtk.pm, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/hi.po,
+	share/po/az.po, bootloader.pm, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/nl.po, share/po/help-fr.pot,
+	share/po/tl.po, share/po/de.po, share/po/help-es.pot, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/uz@Latn.po:
+	s/Mandrivalinux/Mandriva Linux/
+
+2005/05/20  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list.xml, commands.pm, share/aliases, Makefile, share/symlinks:
+	keep binaries in their "standard" binary dir instead of moving
+	everything to /usr/bin
+	(it used to be in /usr/bin when the stage1 was not exited)
+
+	* modules.pm: keep binaries in their "standard" binary dir instead of
+	moving everything to /usr/bin
+	(it used to be in /usr/bin when the stage1 was not exited)
+	fix titi sux
+
+	* install_any.pm: propagate postInstall and postInstallNonRooted in new
+	auto_install.cfg.pl
+
+2005/05/20  willysr
+
+	* share/po/id.po: Small update
+	Updated
+
+2005/05/19  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated simplified Chinese translation
+
+2005/05/19  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/aliases, rescue/list.ia64, rescue/list, rescue/list.alpha,
+	rescue/list.ppc, rescue/list.xml, rescue/list.sparc, rescue/list.x86_64,
+	rescue/list.i386, rescue/make_rescue_img: use install-xml-file-list
+
+	* share/list.xml, share/aliases, list.sparc: 
+	  - insmod_ is now a symlink to insmod-25
+	  - handle explictly insmod, modinfo and rmmod
+
+	* rescue/restore_ms_boot: rewrite using DrakX modules
+
+	* bootloader.pm: 
+	  - list the known bootloaders without checking the availability of the
+	binary (useful when we don't have the root partition mounted, eg in
+	restore_ms_boot)
+	  - tell kdm which is the installed bootloader
+
+	* tools/simplify-drakx-modules: also remove modules ending with __END__
+
+	* Makefile: revert wrongly committed temporary change
+	  - insmod_ is now a symlink to insmod-25
+	  - handle explictly insmod, modinfo and rmmod
+
+	* tools/install-xml-file-list: many changes for use with rescue list
+
+2005/05/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_detect) simplify again
+	(adsl_detect) explain
+	(adsl_detect) detect all ADSL modems of each kind (though drakconnect
+	is able to configure only one...)
+	(adsl_detect) typo fix
+	(adsl_detect) detect more ADSL USB modems
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/da.po, share/po/ca.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/tl.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/uz@Latn.po: update cataglog
+
+	* standalone/service_harddrake: uninstall DVB modules if needed
+
+	* harddrake/data.pm: really list ATM devices
+	fix DVB configurator
+	list tablets and touchscreens in their own category
+	fix detecting joysticks
+	add a DVB class
+	  - simplify through modules::probe_category()
+	  - ensure modules.pm is loaded since we used it for quite some time
+	list ATM, Bluetooth, WAN, USB audio devices in their own categories
+	split the old joystick category into gameport (aka joystick controllers)
+	and
+	joystick (real joysticks devices)
+
+	* standalone/harddrake2 (simple_read_rpmsrate) add support for HW_CAT
+	keyword that enable to match
+	a category from list_modules.pm
+
+	* share/rpmsrate: install proper softwares for DVB
+	kill another module list duplication thanks to the new HW_CAT keyword.
+	use the HW_CAT to stop copying (twice!) and syncing bluetooth driver
+	list from
+	list_modules.pm
+
+	* pkgs.pm (read_rpmsrate) add support for HW_CAT keyword that enable to
+	match
+	a category from list_modules.pm
+
+	* drakxtools.spec: real 10.3-0.15mdk
+	10.3-0.15mdk
+	main subpackage lacked update-menus calls since net_applet menu entry
+	was added
+	mandrakesoft => mandriva switch
+	10.3-0.14mdk
+
+	* share/po/br.po, share/po/fr.po: update
+	update cataglog
+
+	* mouse.pm (detect) handle quite's more tablets and touchscreens at
+	install time
+
+2005/05/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm (selectCountry) only speak about other countries if needed
+
+	* interactive/newt.pm: handle 'wizcancel'
+
+2005/05/17  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/05/17  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/modem.pm: keep # and * characters in phone number (#16031)
+
+	* network/netconnect.pm: use iwpriv for WPA with rt2x00 drivers (they
+	don't plan to support wpa_supplicant)
+
+	* standalone/drakroam: really write waproamd config files
+	fix another potential security bug (#16020)
+
+2005/05/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakroam: help testing
+	really fix permissions
+	fix perms on /etc/wlandetect.conf (#16020)
+	forward fix perms on /etc/wlandetect.conf (#16020)
+
+	* drakxtools.spec: 10.3-0.13mdk
+
+2005/05/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: add the "Create new theme" button back
+	allow to choose between "text only", "verbose" and "silent" bootsplash
+	modes
+
+2005/05/16  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Don't translate media types for config (#15437)
+	Don't translate media types for config (#15437)
+
+2005/05/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* mygtk2.pm (_text_insert) append option was ignored when using simplified
+	API
+
+	* drakxtools.spec: 10.3-0.12mdk
+
+2005/05/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: DVB support
+
+	* network/netconnect.pm: DVB support
+	hide DVB for now
+
+2005/05/13  Pixel  <pixel at mandrakesoft.com>
+
+	* c/stuff.xs.pl: add commented line to help debugging pci_probe
+
+	* share/list.xml, tools/install-xml-file-list: allow makefile like
+	variables
+
+2005/05/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) do not detect ms joystick as UPS (#15930)
+
+2005/05/12  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: reorder drakconnect first screen (to please our
+	flowered bearded boss)
+
+	* standalone/service_harddrake: fix PCMCIA controller reconfiguration
+	(#15742)
+	fix PCMCIA controller reconfiguration (#15742)
+
+2005/05/12  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: default to "Custom" when group fileshare exists (bugzilla
+	#15917)
+
+2005/05/12  Till Kamppeter  <till at mandrakesoft.com>
+
+	* install_steps.pm, share/rpmsrate: 
+	  - Gimp-Print was renamed to Gutenprint, adapted printerdrake/DrakX
+	appropriately.
+
+	* scanner.pm, standalone/printerdrake: 
+	  - Removed some remaining "Mandrake"s in printerdrake and scannerdrake.
+
+	* printer/printerdrake.pm: 
+	  - Let Gutenprint GIMP plug-in be installed by printerdrake when GIMP
+	is installed.
+
+	* printer/data.pm: 
+	  - Let Gutenprint GIMP plug-in be installed by printerdrake when GIMP
+	is installed.
+	  - Gimp-Print was renamed to Gutenprint, adapted printerdrake/DrakX
+	appropriately.
+
+2005/05/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.11mdk
+	one more fix in 10.2-24.102.2mdk
+	10.2-24.102.2mdk
+
+	* standalone/harddrake2: 
+	  - clean embedding stuff
+	  - center wait message on parent
+
+	* detect_devices.pm (getUPS) fix detecting Wingman gamepad as UPS (#15750)
+	(probeSerialDevices) really fix serial controllers detection (#15457)
+	(probeSerialDevices) fix serial controllers detection (#15457)
+	(probeSerialDevices) forward fix for  serial controllers detection
+	(#15457)
+
+	* harddrake/data.pm: forward fix SATA & hw RAID detection by detecting
+	them pior to PATA detection
+
+	* share/po/br.po: update
+
+2005/05/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po, share/po/vi.po, share/po/sv.po: updated Swedish and
+	Vietnamese file;
+	corrected references to old name in Portuguese file
+
+2005/05/11  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Drop webdav support (can be mounted as a normal
+	net filesystem these days)
+	Remove translation on "tape" media selection (#15437)
+	Rework .backupignore handling (#12352)
+
+2005/05/10  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/05/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/draksplash2: move rectangle2xywh(), distance(), farthest()
+	and nearest() from draksplash2 to bootsplash module, create
+	xywh2rectangle()
+
+	* ugtk2.pm: shrink real_window
+
+	* bootsplash.pm: really get default vga mode
+	move rectangle2xywh(), distance(), farthest() and nearest() from
+	draksplash2 to bootsplash module, create xywh2rectangle()
+
+	* standalone/draksplash: shrink preview window on resolution change
+	handle both silent and verbose images
+	allow to modify progress bar and console box by dragging the mouse
+
+2005/05/10  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list.i386, share/list.sparc, lang.pm, share/list.ia64,
+	tools/install-xml-file-list, share/list.alpha, share/list.xml,
+	share/list, share/list.x86_64, Makefile, share/list.ppc: create
+	install-xml-file-list and use it to replace share/list and
+	share/list.ARCH with share/list.xml
+
+	* rescue/make_rescue_img: 
+	  - handle multiple data dirs
+	  - choose a free data dir if the given one already exists
+	fix (for list_modules.pm)
+
+	* Xconfig/monitor.pm (probe_using_X): add missing chomp_
+
+	* rescue/make_partimage_save_rest_all, rescue/partimage_whole_disk: 
+	  - handle multiple data dirs
+	  - choose a free data dir if the given one already exists
+
+2005/05/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm: add support for iiimf (UTUMI Hirosi <utuhiro78@yahoo.co.jp>)
+
+	* drakxtools.spec: real 10.3-0.10mdk
+	10.3-0.10mdk
+
+	* share/rpmsrate: install cpqarrayd on Compaq Smart Array controllers
+
+2005/05/09  Funda Wang <fundawang at linux.net.cn>
+
+	* share/rpmsrate, lang.pm: Drop uim-anthy for ja locale, because the great
+	improvements of scim-anthy.
+	http://archives.mandrivalinux.com/cooker-i18n/2005-04/msg00052.php
+
+2005/05/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/draksplash: remove spurious characters
+	use a separate window for image previews, use a notebook to split
+	silent/verbose/console settings
+	fix layout, update scale factors when the theme name is changed too
+	use default values for scale settings and draw a cross inside the text
+	box
+
+	* standalone/drakboot: use bootsplash::get_framebuffer_resolution
+
+	* bootsplash.pm: use default jpeg image path in config file for both
+	silent and verbose images
+	write bootsplash v3 configuration files (progress bar still missing)
+	force the exact image size when writing a theme
+	add get_framebuffer_resolution and create_path
+	fix typos
+
+2005/05/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.9mdk
+	10.2-24.102.1mdk
+
+	* standalone/draksplash: better use gtkpack__() rather than gtkadd() when
+	adding multiple widgets
+
+2005/05/08  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/05/07  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: another small typo fixed in slovak translation
+	updated slovak translation
+
+2005/05/06  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/Makefile.common, mdk-stage1/Makefile,
+	mdk-stage1/mar/Makefile: use installed dietlibc, not our forked cvs
+	version
+
+2005/05/06  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/Makefile, mdk-stage1/config-stage1.h,
+	mdk-stage1/newt/newt.c, mdk-stage1/newt/button.c,
+	mdk-stage1/rp-pppoe/src/common.c, mdk-stage1/newt/entry.c,
+	mdk-stage1/dhcp.c, mdk-stage1/newt/checkbox.c, mdk-stage1/network.c,
+	mdk-stage1/directory.c, mdk-stage1/ppp/pppd/Makefile: Stage 1
+	compilation fixes for gcc 4.0 :
+	* more casts signed<->unsigned types
+	* make choose_iso_in_directory()'s return type "void"
+	* change order of .h files in network.c so strndup is included correctly
+	* newt: initialize some variables properly
+	* compile pcmcia and ppp with -Wno-deprecated-declarations, since they
+	use
+	deprecated types such as u_int32_t
+
+	* install2.pm: Add missing brace
+
+	* docs/HACKING: Document that dietlibc-devel is now required to build gi
+
+	* resize_fat/c_rewritten.xs: gcc 4.0 was choking on lvalues of
+	unpredictable type.
+
+	* mdk-stage1/Makefile: Fix path of librpc.a now that we use the system's
+	dietlibc
+
+2005/05/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/br.po: small typo error
+
+2005/05/05  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Predict NBI disk space usage and check.
+	Catch failed NBI creation. (#13902)
+	Catch failed dhcpd.conf creation (#13943)
+	Misc small bug fixes.
+
+2005/05/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/draksplash: preview theme in real time, cleanups
+
+	* bootsplash.pm: fix theme creation
+
+	* network/netconnect.pm: remove another useless step
+	ask wireless settings before boot protocol selection
+	remove useless warning in install, we never override configuration
+	(#10827)
+
+2005/05/04  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/guessmounts: don't try to mount ntfs
+
+	* bootloader.pm: lilo and grub are launched chrooted, so look for them in
+	$::prefix
+	(it worked during install since PATH contains /mnt/sbin and the like)
+
+	* rescue/partimage_whole_disk: run_program needs a proper HOME
+
+2005/05/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* rescue/make_rescue_img: Sometimes this tries to copy a directory
+
+2005/05/03  mareklaane
+
+	* share/po/et.po: Estonian translation updated.
+
+2005/05/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install2.pm: remove obsolete code (most of these steps are anyway
+	skipped in upgrade mode)
+
+	* tools/patch_pcmcia_config.pl: ds has been renamed pcmcia in 2.6 kernels
+
+	* standalone/drakboot, bootsplash.pm: new theme creation functions
+
+	* standalone/draksplash: perl_checker fixes, use bool2yesno
+	remove ugly dec2hex
+
+2005/05/03  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2005/05/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Clarify quota message, optional delete old
+	backups (#15066).
+	Optional mail "From" address (#15293).
+	Fix automagic addition of /root to backups when not desired.
+
+2005/05/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot: do not garbage the console on 'wizcancel'
+
+2005/05/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* detect_devices.pm, network/ethernet.pm, network/ndiswrapper.pm: fix USB
+	devices detection for ndiswrapper
+
+2005/05/02  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: fix displaying "Number of logical extents: %d"
+	  - allow resizing ext3 LV if not mounted
+	  - allow resizing reiserfs LV even if not mounted
+
+2005/05/02  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Update for new etherboot
+
+2005/05/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/localedrake: add comment
+
+	* standalone/drakperm, standalone/harddrake2, standalone/printerdrake,
+	standalone/logdrake, standalone/draksec, standalone/drakfloppy,
+	standalone/drakfont, standalone/drakups: embedding cleanups resulting in
+	reusing main window icon in sub dialogs
+
+	* harddrake/data.pm: fix SATA & hw RAID detection by detecting them pior
+	to PATA detection
+
+	* standalone/drakboot: fix boot style layout
+	embedding cleanups resulting in reusing main window icon in sub dialogs
+
+	* drakxtools.spec: 10.3-0.8mdk
+
+	* share/po/br.po: update
+
+2005/05/01  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/04/30  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+	melo + jorge
+
+2005/04/29  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Install epiphany-extensions when installing epiphany
+
+2005/04/29  huftis
+
+	* share/po/nn.po: Translated more strings.
+
+2005/04/29  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/04/29  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	indexhtml/po/da.po soft/urpmi/po/da.po
+	gi/perl-install/share/po/da.po
+
+2005/04/29  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: typo/perl_checker fixes
+	use new bootsplash module, really split autologin and bootsplash stuff
+	kill unneeded hash
+	perl_checker fixes
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: detect tokenring and wireless
+	cards in stage1
+
+	* network/tools.pm, network/test.pm: use www.mandriva.com to test
+	connection
+
+	* standalone/drakroam: exit and warn when no wireless interface is found
+	(#15244)
+	do not write blank ESSID
+
+	* bootsplash.pm: initial bootsplash module
+
+2005/04/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.7mdk
+
+2005/04/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: configure pppoe connections in a ppp peer file
+
+2005/04/28  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: if one prefer using "Modes" instead of "Virtual", keep
+	it as is
+
+2005/04/27  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, network/drakfirewall.pm, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/sc.po,
+	share/po/br.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/uk.po, share/po/mn.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/ta.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	Maybe the last Mandrake->Mandriva replacement.
+
+2005/04/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: display VPI/VCI values in decimal
+	update ATM_ADDR after with VPI/VCI values
+
+	* network/adsl.pm: reindent
+	don't write /etc/ppp/options anymore, adjust options in peer files
+
+	* share/rpmsrate: pptp-adsl is obsolete, prefer pptp-linux
+
+2005/04/27  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/partimage_whole_disk: after setting geometry H and S, we must
+	re-compute C
+	ensure we use the same geometry as used when saving
+
+	* common.pm: fix mandrake_release() when called with a prefix
+	allow using mandrake_release() with a prefix
+
+	* rescue/install_bootloader: use module bootloader.pm to handle more
+	bootloaders (esp. grub)
+
+	* bootloader.pm: 
+	  - create config_files() out of update_for_renumbered_partitions()
+	  - create main_method_choices() out of read()
+	  - create configured_main_methods() for rescue install_bootloader
+	  - rework update_for_renumbered_partitions()
+	create install_raw_grub() and install_raw_lilo()
+
+2005/04/26  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: always initialize proxy settings
+	fix typo
+
+	* mdk-stage1/adsl.c: detect IP address from DSL connection
+
+	* mdk-stage1/dns.c: fix dns resolution for DSL connections
+	enhance logging again, re-indent
+	fix typo (me sux)
+	enhance logging
+
+2005/04/26  Pixel  <pixel at mandrakesoft.com>
+
+	* mygtk2.pm: don't use ->set_uposition anymore, use ->move instead (as
+	suggested on gtk-perl mailing list)
+
+	* Makefile: remove obsolete change (C_RPM and C_DRAKX are not used in
+	c/stuff anymore)
+	start simplifying "make stage2"
+
+2005/04/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) do not detect IR devices as UPSes (#15495)
+
+	* share/po/br.po: add missing tags
+	update
+
+2005/04/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* standalone/drakxtv: corrected url
+
+	* share/po/cy.po: updated Welsh file
+
+	* share/po/it.po, share/po/ms.po, share/po/es.po: updated Italian and
+	Spanish files
+
+2005/04/25  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/guessmounts: rewrite using gi/perl-install modules
+
+	* bootloader.pm: using c::rpmvercmp is cleaner
+	fix comparing kernel version greater than 6.8
+
+2005/04/25  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/04/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfont: bump copyrigth notice
+	list myself
+	damien is no more working for us
+
+	* drakxtools.spec: add bug reference in 10.3-0.6mdk's changelog
+	10.3-0.6mdk
+
+	* share/po/br.po: update
+	sync with copyright bumping
+
+	* standalone/drakfirewall, standalone/logdrake, standalone/drakpxe,
+	standalone/finish-install.xsetup, standalone/drakvpn,
+	standalone/drakboot, standalone/drakTermServ, standalone/net_monitor,
+	standalone/drakbackup, standalone/listsupportedprinters,
+	standalone/printerdrake, standalone/fileshareset, standalone/drakedm,
+	standalone/drakroam, standalone/drakconnect, standalone/drakhelp,
+	standalone/XFdrake, standalone/drakbug, standalone/autosetupprintqueues,
+	standalone/drakupdate_fstab, standalone/draksound, standalone/drakxtv,
+	standalone/draksec, standalone/drakautoinst, standalone/drakproxy,
+	standalone/diskdrake, standalone/drakfloppy, standalone/drakgw,
+	standalone/scannerdrake: bump copyrigth notice
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: sync with copyright bumping
+
+2005/04/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: handle errors in wireless packages installation,
+	simplify
+	allow to disable WPA even if no key is used
+	fix WPA key
+
+	* network/wireless.pm: handle errors in wireless packages installation,
+	simplify
+	fix WPA key
+
+2005/04/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* standalone/harddrake2, standalone/drakfont: mandrakesoft.com ->
+	mandriva.com
+
+	* share/po/ms.po, share/po/pt_BR.po, share/po/th.po, share/po/be.po,
+	share/po/pa_IN.po, share/po/ko.po, share/po/sr.po, share/po/pl.po,
+	share/po/ca.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nn.po, share/po/tr.po,
+	share/po/ga.po, share/po/am.po, share/po/tg.po, share/po/fur.po,
+	share/po/ta.po, share/po/fr.po, share/po/tl.po, share/po/uz@Latn.po:
+	various Mandrake -> Mandriva changes
+	updated po files
+
+	* standalone/draksound: s/www.linux-mandrake.com/www.mandrivalinux.com/
+
+	* share/po/zh_CN.po: more Mandrake -> Mandriva changes
+	various Mandrake -> Mandriva changes
+
+	* standalone.pm: mandrakelinux -> Mandriva Linux
+
+	* share/advertising/25.pl, standalone/logdrake, share/advertising/02.pl,
+	standalone/net_monitor, share/advertising/27.pl,
+	network/drakfirewall.pm, share/advertising/08.pl, standalone/drakedm,
+	share/advertising/30.pl, share/advertising/10.pl,
+	share/advertising/18.pl, standalone/drakconnect, standalone/drakhelp,
+	share/advertising/01.pl, standalone/drakbug, network/adsl.pm,
+	printer/printerdrake.pm, help.pm, share/advertising/29.pl,
+	share/advertising/07.pl, share/advertising/09.pl,
+	share/advertising/04.pl, share/advertising/28.pl,
+	install_interactive.pm, share/advertising/26.pl, any.pm,
+	share/advertising/06.pl, share/advertising/03.pl, standalone/net_applet,
+	share/advertising/11.pl, share/advertising/05.pl,
+	standalone/scannerdrake: s/Mandrivalinux/Mandriva Linux/
+
+	* install_messages.pm: s/www.mandrakelinux.com/www.mandrivalinux.com/
+	s/Mandrivalinux/Mandriva Linux/
+
+	* share/po/bn.po, share/po/gl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/fi.po, share/po/he.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/br.po, share/po/mt.po,
+	share/po/mn.po, share/po/lt.po, share/po/cy.po, share/po/bs.po,
+	share/po/mk.po, share/po/is.po, share/po/af.po, share/po/hi.po,
+	share/po/az.po, share/po/nl.po, share/po/de.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po: more Mandrake ->
+	Mandriva changes
+	various Mandrake -> Mandriva changes
+	updated po files
+
+	* share/po/sk.po, share/po/DrakX.pot, share/po/sv.po, share/po/zh_TW.po,
+	share/po/sc.po, share/po/ru.po, share/po/sl.po, share/po/uk.po,
+	share/po/wa.po, share/po/pt.po, share/po/vi.po: various Mandrake ->
+	Mandriva changes
+
+2005/04/23  willysr
+
+	* share/po/id.po: Updated
+
+2005/04/22  willysr
+
+	* share/po/id.po: Updated
+
+2005/04/21  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/04/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/wireless.c: set SSID after all other settings, improve text,
+	fix cast
+
+	* standalone/drakroam: fix Signal Quality parsing (and re-indent)
+
+	* mdk-stage1/dhcp.c: support DHCP over Wireless, Token Ring (great),
+	Firewire, you name it
+	borrow some comments from pump
+
+	* mdk-stage1/probing.c: use /proc/net/dev to detect network interfaces,
+	instead of testing a limited set of interface names
+
+2005/04/21  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/drvinst: use detect_devices and simplify
+
+	* Makefile: use simplify-drakx-modules
+
+	* rescue/make_rescue_img: use get-needed-drakx-modules to handle perl
+	scripts using DrakX modules
+
+	* rescue/list.i386: dmidecode is useful
+
+	* tools/simplify-drakx-modules, tools/get-needed-drakx-modules: add some
+	scripts used in perl-install/Makefile and rescue/make_rescue_img
+
+	* common.pm, install_any.pm: create common::release_file() and use it
+
+	* fs/type.pm: perl_checker fix
+	create true_local_fs_types() out of isTrueLocalFS()
+
+	* log.pm: ensure the log is flushed ASAP when using a local file
+
+2005/04/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: switch from MandrakeSoft to Mandriva
+	update
+	update
+	update
+	update string for new drakroam
+
+	* share/advertising/25.pl, install_steps_interactive.pm,
+	standalone/finish-install.xsetup, share/advertising/27.pl,
+	share/po/help-ru.pot, share/advertising/08.pl, share/advertising/10.pl,
+	share/advertising/18.pl, share/compssUsers.pl, network/adsl.pm, help.pm,
+	install_steps.pm, share/advertising/29.pl, share/advertising/07.pl,
+	share/advertising/09.pl, share/advertising/13-b.pl,
+	share/po/help-de.pot, share/advertising/04.pl, crypto.pm,
+	network/test.pm, install_interactive.pm, share/advertising/26.pl,
+	standalone/net_applet, bootloader.pm, share/advertising/05.pl,
+	share/po/help-fr.pot, share/po/help-es.pot, share/po/help-zh_CN.pot,
+	share/advertising/02.pl, network/drakfirewall.pm, install_steps_newt.pm,
+	share/advertising/30.pl, share/advertising/01.pl,
+	share/advertising/28.pl, share/po/help-it.pot, any.pm,
+	install_steps_gtk.pm, share/advertising/03.pl, share/advertising/06.pl,
+	share/advertising/13-a.pl, install_messages.pm,
+	Xconfig/resolution_and_depth.pm, share/advertising/11.pl: switch from
+	MandrakeSoft to Mandriva
+
+	* standalone/scannerdrake: switch from MandrakeSoft to Mandriva in
+	scannerdrake & printerdrake
+	switch from MandrakeSoft to Mandriva in copyright notices
+
+	* standalone/drakbackup: switch from MandrakeSoft to Mandriva in copyright
+	notices
+	improve layout
+	(filedialog_generic) switch to gtk+-2.6's new file selector
+
+	* standalone/drakboot, standalone.pm, standalone/drakedm,
+	standalone/drakhelp, standalone/logdrake, standalone/net_monitor,
+	standalone/drakconnect, standalone/drakbug: switch from MandrakeSoft to
+	Mandriva
+	switch from MandrakeSoft to Mandriva in copyright notices
+
+	* standalone/drakfirewall, standalone/drakpxe, standalone/drakvpn,
+	standalone/drakTermServ, standalone/listsupportedprinters,
+	standalone/printerdrake, standalone/fileshareset, standalone/XFdrake,
+	standalone/drakupdate_fstab, scanner.pm, standalone/drakproxy,
+	standalone/drakfloppy, mouse.pm, standalone/autosetupprintqueues,
+	standalone/draksound, standalone/drakxtv, standalone/drakautoinst,
+	standalone/diskdrake, standalone/drakgw: switch from MandrakeSoft to
+	Mandriva in copyright notices
+
+	* printer/printerdrake.pm: switch from MandrakeSoft to Mandriva
+	switch from MandrakeSoft to Mandriva in scannerdrake & printerdrake
+
+	* standalone/draksplash: switch to gtk+-2.6's new file selector
+
+	* standalone/drakperm: perl_checker cleanups
+	(row_setting_dialog) set dialog's title (usability bug)
+
+	* share/po/af.po: fix doble messages
+	switch from MandrakeSoft to Mandriva
+	update
+	sync LAN string
+	update string for new drakroam
+
+	* share/po/Makefile: remove useless merge2 rule
+
+	* share/po/ja.po, share/po/sv.po, share/po/fi.po, share/po/ca.po,
+	share/po/eu.po, share/po/id.po, share/po/mt.po, share/po/uk.po,
+	share/po/tg.po, share/po/pt.po, share/po/vi.po, share/po/tl.po,
+	share/po/gl.po, share/po/sk.po, share/po/pl.po, share/po/da.po,
+	share/po/ar.po, share/po/nb.po, share/po/it.po, share/po/ru.po,
+	share/po/nl.po: switch from MandrakeSoft to Mandriva
+	update
+	sync LAN string
+	update string for new drakroam
+
+	* share/po/fr.po, share/po/cy.po: switch from MandrakeSoft to Mandriva
+	update
+	update
+	sync LAN string
+	update string for new drakroam
+
+	* standalone/drakfont: switch from MandrakeSoft to Mandriva in copyright
+	notices
+	inline useless create_fontsel()
+
+	* network/netconnect.pm: switch from MandrakeSoft to Mandriva
+	rename "ethernet connection" as "LAN connection" like anywhere since
+	we're going to support tokenring and not just LAN (what's more, these
+	steps are whered with wireless connections which have nothing to do
+	with ethernet....)
+
+	* drakxtools.spec: 10.3-0.5mdk
+	10.3-0.4mdk
+	10.3-0.3mdk
+
+	* standalone/drakroam (ConnectNow) simplify
+	(ConnectNow) simplify
+	(UpdateStatus) improve layout
+
+	* share/po/ms.po, share/po/pt_BR.po, share/po/et.po, share/po/sr.po,
+	share/po/ltg.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/es.po, share/po/lv.po, share/po/ga.po, share/po/lt.po,
+	share/po/mk.po, share/po/fur.po, share/po/de.po, share/po/bg.po,
+	share/po/el.po, share/po/uz@Latn.po, share/po/bn.po, share/po/th.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/DrakX.pot,
+	share/po/ko.po, share/po/he.po, share/po/ky.po, share/po/zh_CN.po,
+	share/po/sq.po, share/po/sr@Latn.po, share/po/hu.po, share/po/fa.po,
+	share/po/sc.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mn.po, share/po/am.po, share/po/bs.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/az.po, share/po/ta.po,
+	share/po/eo.po, share/po/cs.po: switch from MandrakeSoft to Mandriva
+	update
+	update string for new drakroam
+
+2005/04/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/ethernet.pm: we do want to use sysfs if ethtool fails
+
+	* mdk-stage1/Makefile, mdk-stage1/network.c, mdk-stage1/wireless.h:
+	initial wireless support (needs ESSID, and optionally a WEP key)
+
+	* network/netconnect.pm: allow to choose the wireless encryption mode
+	between "None", "Open WEP", "Restricted WEP" and "WPA Pre-Shared Key"
+	move ndiswrapper stuff in network::ndiswrapper
+	unload ndiswrapper first so that the newly installed .inf files will be
+	read
+	redetect interfaces after ndiswrapper setup (so that the ndiswrapper
+	module can be detected)
+
+	* mdk-stage1/wireless.c: fix hex key parsing
+	initial wireless support (needs ESSID, and optionally a WEP key)
+
+	* install_any.pm: do not care about the ISO volume name if it doesn't end
+	in -Disc\d+
+	handle DVD ISO images too (so that they get added installed for urpmi)
+
+	* network/wireless.pm, network/ndiswrapper.pm: allow to choose the
+	wireless encryption mode between "None", "Open WEP", "Restricted WEP"
+	and "WPA Pre-Shared Key"
+	move ndiswrapper stuff in network::ndiswrapper
+
+2005/04/20  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/make_partimage_save_rest_all: add a check
+
+2005/04/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfont (font_choice) filter file list so that only fonts
+	are displayed
+	switch to gtk+-2.6's new file selector
+
+	* network/ndiswrapper.pm (setup_device) move comment where it's
+	appropriate
+
+	* drakxtools.spec: 10.3-0.2mdk
+
+2005/04/19  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	indexhtml/po/da.po soft/drakstats/po/da.po
+	soft/mdkonline/po/da.po gi/perl-install/share/po/da.po
+
+2005/04/19  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/ethernet.pm: fix typo
+	fix Titi sux (we do want to use sysfs if ethtool fails)
+	do not write zeroed MAC addresses in iftab, it confuses ifrename
+
+	* standalone/drakroam: fix SSID listing
+	fix SSID listing
+
+	* network/tools.pm: move wireless stuff in wireless.pm
+	do not crash if modprobe fails
+	do not show empty ndiswrapper devices list
+
+	* mouse.pm: fix simplification ..
+	simplify again (Pixel)
+	kill unused variable, simplify
+	using same mouse for alternate_install should be useless
+	remove it for xbox controller, thus making this option obsolete
+	fix me sucks
+	always set synaptics touchpad as secondary and don't list them in
+	mousedrake
+
+	* network/netconnect.pm: simplify
+	fix ancient bug (Managed should be the default wireless mode, not
+	Secondary) and simplify
+	really use given encryption key
+	network::wireless is needed for wireless configuration
+	fix typo
+	improve ndiswrapper driver configuration (allow to select driver, device
+	and many errors handling)
+	fix missing step
+	move wireless stuff in wireless.pm
+	do not show empty ndiswrapper devices list
+	unload ndiswrapper first so that the newly installed .inf files will be
+	read
+
+	* network/wireless.pm: improve ndiswrapper driver configuration (allow to
+	select driver, device and many errors handling)
+	convert_key_for_wpa_supplicant is now in network::wireless
+	move wireless stuff in wireless.pm
+
+	* install_steps_gtk.pm: using same mouse for alternate_install should be
+	useless
+	remove it for xbox controller, thus making this option obsolete
+
+	* network/network.pm: move wireless stuff in wireless.pm
+
+2005/04/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ky.po, share/po/de.po: updated Kirghiz file
+
+2005/04/19  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/partimage_whole_disk: 
+	  - ".lst" makes the file hidden, use "lst" instead
+	  - default timeout is much too short
+
+	* rescue/install_bootloader, rescue/guessmounts, rescue/drvinst: mandriva
+	switch
+
+	* Xconfig/resolution_and_depth.pm: suggest 1280x1024 instead of 1280x960
+	which causes pbs
+
+	* rescue/restore_ms_boot: update copyright
+
+	* rescue/make_partimage_save_rest_all: 
+	  - allow specifying something else than /data/box
+	  - acpi=ht by default
+
+	* diskdrake/interactive.pm: fix comment
+
+	* rescue/rescue-doc: switch to mandriva
+
+	* rescue/lsparts: remove redundancy using gi/perl-install pms
+	mandriva switch
+
+2005/04/19  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/04/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: increase network check timeout to lower the load
+	remove useless assignments
+
+	* network/netconnect.pm: clean includes
+	merge wireless steps and move advanced settings in advanced mode
+	(#15501)
+	configure wpa driver in drakconnect, wpa_supplicant init script is
+	dropped
+
+	* mdk-stage1/config-stage1.h, mdk-stage1/network.c: move defines
+
+	* network/tools.pm: replace to_bool(grep) call with any
+
+	* mouse.pm: preselect synaptics touchpad if no external mouse is present
+	use detect_devices::getSynapticsTouchpads() to detect touchpads
+	always configure an universal mouse so that USB mices can be hotplugged
+
+	* network/isdn.pm: remove useless includes
+
+	* network/shorewall.pm: fix automatic net interface detection
+	fix automatic net interface detection
+
+	* network/network.pm: configure wpa driver in drakconnect, wpa_supplicant
+	init script is dropped
+
+	* detect_devices.pm: perl_checker fix
+	space fix
+	add getSynapticsTouchpads()
+
+	* modules.pm: append evdev in modprobe.preload if a touchpad is detected
+	use better laptop detection now that dmidecode is used
+
+2005/04/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: added/modified various keyboards on the list (for next
+	update of xorg-x11)
+
+	* share/po/be.po, share/po/bn.po, share/po/ms.po, share/po/ko.po,
+	share/po/ro.po, share/po/pl.po, share/po/gl.po, share/po/he.po,
+	share/po/cy.po, share/po/af.po, share/po/et.po, share/po/eo.po,
+	share/po/hr.po, share/po/el.po, share/po/sq.po: updated Welsh file;
+	fixed some menu errors
+
+2005/04/18  rstandtke
+
+	* share/po/de.po: some fixes
+
+2005/04/16  huftis
+
+	* share/po/nn.po: Translated a few strings.
+
+2005/04/15  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/04/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/config-stage1.h: new domain name
+
+	* mdk-stage1/thirdparty.c: really try to list partitions on USB keys or
+	hard disks
+
+	* mdk-stage1/directory.c: enlarge directory list
+
+2005/04/15  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm, install_any.pm: Change the name of the directory
+	where the rpms are copied
+
+	* crypto.pm: Update the name of the update media added by the installer
+
+2005/04/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.1mdk
+
+	* standalone/harddrake2: perl_checker cleanups
+
+2005/04/14  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/04/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: allow to modify METRIC settings in the wizard
+
+2005/04/14  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: When re-using the rpmsrate and compssUsers.pl
+	from a supplementary media,
+	always retrieve them locally in /tmp, instead of choosing the main
+	install
+	method (this wasn't working for http installs)
+
+2005/04/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix typo in drakxservices' description
+
+	* share/po/br.po: update
+	update
+
+2005/04/14  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: sync'ed with Arabeyes CVS
+
+2005/04/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakconnect: use get_interface_type() to decide if the wifi
+	settings page should be displayed
+
+	* network/tools.pm: consider a device as wifi even if it isn't plugged
+	(useful in manage wizard)
+
+2005/04/13  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/raw.pm: create default_type() out of zero_MBR()
+
+	* rescue/make_partimage_save_rest_all: fix typo
+
+	* rescue/make_rescue_img, rescue/partimage_whole_disk: we now use script
+	partimage_whole_disk around partimage
+
+	* resize_fat/any.pm: remove old debug code
+
+	* log.pm: cleanup and allow openLog() to force the log file
+
+	* rescue/list.i386: add ntfsresize
+
+	* rescue/tree/etc/rc.sysinit: mount /sys
+
+2005/04/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Remount CD1 if we cancel insertion of a supplementary CD
+	Eject CD-Rom when installation is finished
+
+	* install_steps.pm: Eject CD-Rom when installation is finished
+
+2005/04/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm (autologin) make autologin choice more user friendly (#4304)
+
+	* drakxtools.spec: fix 10.2-16mdk's changelog
+
+2005/04/12  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm, detect_devices.pm, network/tools.pm,
+	standalone/drakconnect: use sysfs as fallback to detect wireless
+	interfaces (rt2x00/prism2_*)
+
+2005/04/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: put text back
+	enabled kirghiz console kbd
+
+	* share/po/br.po: removing and re-adding file
+	removing and re-adding file
+	updated po file
+
+2005/04/12  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* network/tools.pm: Fix running ifup/ifdown not in chroot
+	Need to specify the full path of ifup/ifdown when a shell isn't used to
+	run them
+
+2005/04/12  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: fix direct-to-tape backup/restore issues (#15293)
+
+2005/04/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-24mdk
+
+	* share/po/br.po: update
+
+2005/04/12  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: Remove the duplicates for a320raid
+	Workarround for clean-rpmsrate regexp pb
+
 2005/04/12  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
 
 	* network/tools.pm: Fix running ifup/ifdown not in chroot
@@ -48610,7 +49903,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1038 2005/04/12 13:33:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1039 2005/04/12 13:43:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
