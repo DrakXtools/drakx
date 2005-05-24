@@ -1074,8 +1074,6 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
-                        delete $ethntf->{NETWORK};
-                        delete $ethntf->{BROADCAST};
                         delete $ethntf->{TYPE} if $netcnx->{type} ne 'adsl' || !member($adsl_type, qw(manual dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
                     },
