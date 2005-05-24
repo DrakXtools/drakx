@@ -657,7 +657,7 @@ sub read_rpmsrate {
 	$p->set_rate($rates->{$_});
 	$p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
     }
-    $packages->{needToCopy} = $need_to_copy;
+    push @{$packages->{needToCopy} ||= []}, @$need_to_copy;
 }
 
 sub readCompssUsers {
