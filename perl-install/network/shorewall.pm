@@ -16,14 +16,10 @@ sub check_iptables {
     my ($in) = @_;
 
     my $existing_config = -f "$::prefix/etc/sysconfig/iptables";
-
     $existing_config ||= $::isStandalone && do {
 	system('modprobe iptable_nat');
 	-x '/sbin/iptables' && listlength(`/sbin/iptables -t nat -nL`) > 8;
     };
-
-    !$existing_config || $in->ask_okcancel(N("Firewalling configuration detected!"),
-					   N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
 }
 
 sub set_config_file {
@@ -45,7 +41,7 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
-sub get_default_device() {
+sub get_ifcfg_interface() {
     my $netcnx = {};
     my $netc = {};
     my $intf = {};
@@ -53,51 +49,38 @@ sub get_default_device() {
     network::tools::get_default_gateway_interface($netc, $intf);
 }
 
-sub get_net_device() {
-    my $default_dev = get_default_device();
+sub get_shorewall_interface() {
+    my $default_dev = get_ifcfg_interface();
     $default_dev =~ /^ippp/ && "ippp+" ||
     $default_dev =~ /^ppp/ && "ppp+" ||
     $default_dev;
 }
 
-sub default_interfaces_silent() {
-    my %conf;
-    my @l = detect_devices::getNet() or return;
-    if (@l == 1) {
-	$conf{net_interface} = $l[0];
-    } else {
-	$conf{net_interface} = get_net_device() || $l[0];
-	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
-    }
-    \%conf;
-}
+sub ask_shorewall_interface {
+    my ($in, $interface) = @_;
+    my $modules_conf = modules::any_conf->read;
+    my @all_cards = network::ethernet::get_eth_cards($modules_conf);
+    my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
+    put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
 
-sub default_interfaces {
-	my ($in) = @_;
-	my %conf;
-	my $card_netconnect = get_net_device() || "eth0";
-	log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
-
-	my @l = detect_devices::getNet() or return;
-
-	my $modules_conf = modules::any_conf->read;
-	my @all_cards = network::ethernet::get_eth_cards($modules_conf);
-	my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
-	put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
-
-	$in->ask_from('',
-		N("Please enter the name of the interface connected to the internet.
+    $in->ask_from('',
+		  N("Please enter the name of the interface connected to the internet.
 
 Examples:
 		ppp+ for modem or DSL connections, 
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 "),
-      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
+		  [ { label => N("Net Device"), val => \$interface, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
+    $interface;
+}
 
-	$conf{net_interface} = $card_netconnect;
-	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
-     \%conf;
+sub read_default_interfaces {
+    my ($conf, $o_in) = @_;
+    my $interface = get_shorewall_interface();
+    $o_in and $interface = ask_shorewall_interface($o_in, $interface);
+    $conf->{net_interface} = $interface;
+    $conf->{loc_interface} = [  grep { $_ ne $interface } detect_devices::getNet() ];
 }
 
 sub read {
@@ -112,16 +95,15 @@ sub read {
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
     }
-    put_in_hash(\%conf, $o_in ? default_interfaces($o_in) : default_interfaces_silent());
-
+    read_default_interfaces(\%conf, $o_in);
     $conf{net_interface} && \%conf;
 }
 
 sub write {
     my ($conf) = @_;
-    my $default_dev = get_default_device();
-    my $use_pptp = $default_dev =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_dev") =~ /pptp/;
-	my $squid_port = network::network::read_squid_conf()->{http_port}[0];
+    my $default_intf = get_ifcfg_interface();
+    my $use_pptp = $default_intf =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_intf") =~ /pptp/;
+    my $squid_port = network::network::read_squid_conf()->{http_port}[0];
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
@@ -155,17 +137,9 @@ sub write {
 		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 	} "/etc/shorewall/rules";
 }
-    set_config_file('masq', 
-		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
-		   );
-		   
-    if ($conf->{disabled}) {
-	run_program::rooted($::prefix, 'chkconfig', '--del', 'shorewall');
-	run_program::run('service', '>', '/dev/null', 'shorewall', 'stop') if $::isStandalone;
-    } else {
-	run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
-	run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
-    }
+    set_config_file('masq', $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : ());
+
+    services::set_status('shorewall', !$conf->{disabled}, $::isInstall);
 }
 
 1;
