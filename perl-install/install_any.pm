@@ -2,13 +2,11 @@ package install_any; # $Id$
 
 use strict;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $boot_medium $current_medium $asked_medium @advertising_images);
-
-@ISA = qw(Exporter);
-%EXPORT_TAGS = (
+our @ISA = qw(Exporter);
+our %EXPORT_TAGS = (
     all => [ qw(getNextStep spawnShell addToBeDone) ],
 );
-@EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
+our @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 #-######################################################################################
 #- misc imports
@@ -28,10 +26,12 @@ use any;
 use log;
 
 #- boot medium (the first medium to take into account).
-$boot_medium = 1;
-$current_medium = $boot_medium;
-$asked_medium = $boot_medium;
+our $boot_medium = 1;
+our $current_medium = $boot_medium;
+our $asked_medium = $boot_medium;
+our @advertising_images;
 
+#- current ftp root (for getFile) ­- XXX must store this per media
 our $global_ftp_prefix;
 
 sub drakx_version() { 
@@ -236,7 +236,6 @@ sub getFile {
 	    my $f2 = "$postinstall_rpms/$f";
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
-	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
 	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can not open $f2: $!"); undef };
 	}
     } || errorOpeningFile($f);
