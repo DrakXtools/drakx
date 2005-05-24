@@ -52,26 +52,6 @@ sub read_interface_conf {
     \%intf;
 }
 
-sub read_dhcpd_conf {
-    my ($o_file) = @_;
-    my $s = cat_($o_file || "$::prefix/etc/dhcpd.conf");
-    { option_routers => [ $s =~ /^\s*option routers\s+(\S+);/mg ],
-      subnet_mask => [ if_($s =~ /^\s*option subnet-mask\s+(.*);/mg, split(' ', $1)) ],
-      domain_name => [ if_($s =~ /^\s*option domain-name\s+"(.*)";/mg, split(' ', $1)) ],
-      domain_name_servers => [ if_($s =~ /^\s*option domain-name-servers\s+(.*);/m, split(' ', $1)) ],
-      dynamic_bootp => [ if_($s =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*;/m, split(' ', $1)) ],
-      default_lease_time => [ if_($s =~ /^\s*default-lease-time\s+(.*);/m, split(' ', $1)) ],
-      max_lease_time => [ if_($s =~ /^\s*max-lease-time\s+(.*);/m, split(' ', $1)) ] };
-}
-
-sub read_squid_conf {
-    my ($o_file) = @_;
-    my $s = cat_($o_file || "$::prefix/etc/squid/squid.conf");
-    { http_port => [ $s =~ /^\s*http_port\s+(.*)/mg ],
-      cache_size => [ if_($s =~ /^\s*cache_dir diskd\s+(.*)/mg, split(' ', $1)) ],
-      admin_mail => [ if_($s =~ /^\s*err_html_text\s+(.*)/mg, split(' ', $1)) ] };
-}
-
 sub read_tmdns_conf() {
     my $file = "$::prefix/etc/tmdns.conf";
     cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
@@ -139,6 +119,14 @@ sub write_resolv_conf {
     }
 }
 
+sub update_broadcast_and_network {
+    my ($intf) = @_;
+    my @ip = split '\.', $intf->{IPADDR};
+    my @mask = split '\.', $intf->{NETMASK};
+    $intf->{BROADCAST} = join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask);
+    $intf->{NETWORK} = join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask);
+}
+
 sub write_interface_conf {
     my ($file, $intf, $_netc, $_prefix) = @_;
 
@@ -146,14 +134,8 @@ sub write_interface_conf {
     my (undef, $mac_address) = network::ethernet::get_eth_card_mac_address($intf->{DEVICE}); 
     $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
 
-    my @ip = split '\.', $intf->{IPADDR};
-    my @mask = split '\.', $intf->{NETMASK};
-
-    add2hash($intf, {
-		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
-		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
-		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::pcmcia_probe())),
-		    });
+    update_broadcast_and_network($intf);
+    $intf->{ONBOOT} ||= bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::pcmcia_probe()));
 
     defined($intf->{METRIC}) or $intf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($intf)),
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
