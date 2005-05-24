@@ -3,6 +3,7 @@
 #
 # author Guillaume Cottenceau (gc@mandrakesoft.com)
 # modified by Florin Grad (florin@mandrakesoft.com)
+# wizardified by Olivier Blin (oblin@mandriva.com)
 #
 # Copyright 2000-2005 Mandriva
 #
@@ -33,508 +34,407 @@ use network::ethernet;
 use run_program;
 use log;
 use c;
-use network::netconnect;
 use network::shorewall;
-
-$::isInstall and die "Not supported during install.\n";
-
-
-local $_ = join '', @ARGV;
-
-$::Wizard_pix_up = "drakgw.png";
-my $direct = /-direct/;
+use network::dhcpd;
+use network::squid;
+use services;
 
 my $sysconf_network = "/etc/sysconfig/network";
-my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
-my $masq_file = "/etc/shorewall/masq";
-my $dhcpd_conf = "/etc/dhcpd.conf";
-my $squid_conf = "/etc/squid/squid.conf";
-my $squid_port = network::network::read_squid_conf()->{http_port}[0] ||= "3128";
-my $cups_conf = "/etc/cups/cupsd.conf";
+my $masq_file = "$::prefix/etc/shorewall/masq";
+my $rules_file = "$::prefix/etc/shorewall/rules";
+my $cups_conf = "$::prefix/etc/cups/cupsd.conf";
 
 my $in = 'interactive'->vnew('su');
-my $shorewall = network::shorewall::read();
-
-$::Wizard_title = N("Internet Connection Sharing");
-
-$in->isa('interactive::gtk') and $::isWizard = 1;
-
-sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
-
-sub outpend { 
-    my $f = shift;
-    log::explanations("modified file $f");
-    append_to_file($f, @_);
-}
-
-sub start_daemons () {
-    return if $::testing;
-    my $cups_used = 0;
-    log::explanations("Starting daemons");
-    if (-f "/etc/rc.d/init.d/cups") {
-        if (system("/etc/rc.d/init.d/cups status >/dev/null") == 0) {
-           $cups_used = 1;
-           sys("/etc/rc.d/init.d/cups stop");
-        }
-    }
-    system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
-    system("/etc/rc.d/init.d/squid status >/dev/null") == 0 and sys("/etc/rc.d/init.d/squid stop");
-    system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
-
-    sys("/etc/rc.d/init.d/network restart >/dev/null");
-
-    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid';
-    sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
-}
-
-sub stop_daemons () {
-    return if $::testing;
-    log::explanations("Stopping daemons");
-    foreach (qw(dhcpd squid named)) {
-	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
-    }
-    sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd', 'squid';
-}
-
-my $wait_configuring;
-
-sub fatal_quit ($) {
-    log::l("[drakgw] FATAL: $_[0]");
-    undef $wait_configuring;
-    $in->ask_warn('', $_[0]);
-    quit_global($in, -1);
-}
 
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
-log::l("[drakgw] kernel_version $kernel_version");
+unless ($kernel_version >= 2.4) {
+    $in->ask_warn(N("Error"), N("Sorry, we support only 2.4 and above kernels."));
+    $in->exit(-1);
+}
 
-$kernel_version >= 2.4 or fatal_quit(N("Sorry, we support only 2.4 and above kernels."));
+my $netc = {};
+my $netcnx = {};
+my $intfs = {};
+network::network::read_all_conf($::prefix, $netc, $intfs, $netcnx);
+my $modules_conf = modules::any_conf->read;
+my %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } network::ethernet::get_eth_cards($modules_conf);
 
-begin:
+my $shorewall = network::shorewall::read();
+my $choice;
+my $gw_enabled;
+my ($lan_interface_name, $lan_intf, $internal_domain_name);
+my $use_dhcpd = 1;
+my $use_caching_dns = 1;
+my $use_caching_proxy = 1;
 
-#- **********************************
-#- * 0th step: verify if we are already set up
+my $resolv_conf = network::network::read_resolv_conf_raw();
+my $squid_conf = network::squid::read_squid_conf();
+my $dhcpd_conf = network::dhcpd::read_dhcpd_conf();
 
-if ($shorewall && -f $masq_file || -f "$masq_file.drakgwdisable" && grep { !/^#/ } cat_($masq_file) || grep { !/^#/ } cat_("$masq_file.drakgwdisable")) {
-    $::Wizard_no_previous = 1;
-    my $r;
-    if (-f "$masq_file.drakgwdisable") {
-	$r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
-N("The setup of Internet connection sharing has already been done.
-It's currently disabled.
-
-What would you like to do?"),
-				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
-	if ($r eq "enable") {
-	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
-		rename($_, "$_.old") if -f $_;
-		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
-	    }
-	    {
-		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
-		start_daemons();
-		print "add rules entries\n";
-		substInFile {
-		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-		} "/etc/shorewall/rules";
-		run_program::run('chkconfig', '--add', 'shorewall');
-		run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
-	    }
-            log::l("[drakgw] Enabled");
-         }
-	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', N("Internet Connection Sharing is now enabled."));
-	    quit_global($in, 0);
-	} elsif (!$shorewall->{disabled}) {
-	$r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
-N("The setup of Internet Connection Sharing has already been done.
-It's currently enabled.
-
-What would you like to do?"),
-				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
-	if ($r eq "disable") {
-	    if (!$::testing) {
-		my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
-		stop_daemons();
-	    }
-	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
-		if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" }
-	    }
-			print "remove rules entries\n";
-			substInFile {
-				s/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\n//;
-				s/REDIRECT\tloc\t$squid_port\ttcp\twww\t\-\n//;
-				s/ACCEPT\tfw\tnet\ttcp\twww\n//;
-			} "/etc/shorewall/rules";
-	    sys("/etc/init.d/shorewall restart >/dev/null");
-	    log::l("[drakgw] Disabled");
-	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', N("Internet Connection Sharing is now disabled."));
-	    quit_global($in, 0);
-	}
-	if ($r eq "dismiss") {
-	    quit_global($in, 0);
-	}
-	}
-	if ($r eq "dismiss") {
-	    quit_global($in, 0);
-	}
-    }
-
-
-#- **********************************
-#- * 1st step: detect/setup
-step_ask_confirm:
-
-$::Wizard_no_previous = 1;
-    
-$direct or $in->ask_okcancel(N("Internet Connection Sharing"),
-N("You are about to configure your computer to share its Internet connection.
+my $wiz;
+$wiz =
+  {
+   defaultimage => "drakgw.png",
+   name => N("Internet Connection Sharing"),
+   pages => {
+	     welcome =>
+	     {
+	      name =>  N("You are about to configure your computer to share its Internet connection.
 With that feature, other computers on your local network will be able to use this computer's Internet connection.
 
 Make sure you have configured your Network/Internet access using drakconnect before going any further.
 
-Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."), 1) or goto begin;
+Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."),
+	      post => sub {
+		  $gw_enabled = !$shorewall->{disabled} && grep { !/^#/ } cat_($masq_file);
+		  return $gw_enabled ? "reconfigure" : lan_interface_step();
+	      },
+	     },
 
+	     reconfigure =>
+	     {
+	      name => sub {
+		  $gw_enabled ?
+		    N("The setup of Internet Connection Sharing has already been done.
+It's currently enabled.
 
+What would you like to do?") :
+		    N("The setup of Internet connection sharing has already been done.
+It's currently disabled.
 
-step_detectsetup:
+What would you like to do?"); #- FIXME : not used for now
+	      },
+	      data => sub {
+		  [ { type => "list", val => \$choice, list => [ ($gw_enabled ? N_("Disable") : N_("Enable")), N_("Reconfigure") ] } ];
+	      },
+	      post => sub {
+		  if ($choice eq "Enable") {
+		      #- FIXME, not used for now
+		      #- gw_enable();
+		      return "end_enabled";
+		  } elsif ($choice eq "Disable") {
+		      gw_disable();
+		      return "end_disabled";
+		  } elsif ($choice eq "Reconfigure") {
+		      return lan_interface_step();
+		  }
+	      },
+	     },
 
-my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
-
-my %aliased_devices; 
-/^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
-
-my $card_netconnect = network::shorewall::get_net_device() || "eth0";
-log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
-
-my $modules_conf = modules::any_conf->read;
-my @all_cards = network::ethernet::get_eth_cards($modules_conf);
-my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
-put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
-
-$in->ask_from('',
-              N("Please enter the name of the interface connected to the internet.
-
-Examples:
-		ppp+ for modem or DSL connections, 
-		eth0, or eth1 for cable connection, 
-		ippp+ for a isdn connection.
-"),
-              [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ])
-  or goto step_ask_confirm;
-
-my @cards = grep {
-    log::l("[drakgw] Have network card: $_");
-    $_ ne $card_netconnect;
-} detect_devices::getNet();
-push @cards, $card_netconnect if $::testing;
-log::l("[drakgw] Available network cards: ", join(", ", @cards));
-
-my $format = sub {
-    $aliased_devices{$_[0]} ?
-      N("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
-      N("Interface %s", $_[0]);
-};
-
-#- setup the network interface we shall use
-
-step_interface_choice:
-my $device;
-if (!@cards)
-{
-    $in->ask_warn(N("No network adapter on your system!"), 
-		  N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
-    quit_global($in, 0);
-}
-elsif (@cards == 1)
-{
-    $device = $cards[0];
-    $in->ask_okcancel(N("Network interface"),
-N("There is only one configured network adapter on your system:
+	     one_lan_interface =>
+	     {
+	      name => sub {
+		  N("There is only one configured network adapter on your system:
 
 %s
 
-I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_detectsetup;
-} else {
-    $device = $in->ask_from_listf(N("Choose the network interface"),
-				    N("Please choose what network adapter will be connected to your Local Area Network."),
-				     $format,
-				    \@cards,
-				    ) or goto step_detectsetup;
-    defined $device or quit_global($in, 0);
-}
-log::explanations("Choosing network device: $device");
-my $conf = read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
+I am about to setup your Local Area Network with that adapter.", format_interfaces($lan_interface_name));
+	      },
+	      next => "lan_configure",
+	     },
 
-my $server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
-my $lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : "192.168.1.0";
-my $nameserver_ip = network::network::read_resolv_conf_raw()->{nameserver}[0] ||=  network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
-my $netmask = $conf->{NETMASK} ||= network::network::read_dhcpd_conf()->{subnet_mask}[0] ||= "255.255.255.0";
-my $start_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[0] ||= "16";
-my $end_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[1] ||= "253";
-my $default_lease = network::network::read_dhcpd_conf()->{max_lease_time}[0] ||= "21600";
-my $max_lease = network::network::read_dhcpd_conf()->{default_lease_time}[0] ||= "43200";
-my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{search}[0] ||= "homeland.net";
-my $squid_cache_size = network::network::read_squid_conf()->{cache_size}[1] ||= "100";
-my $squid_admin_mail = network::network::read_squid_conf()->{admin_mail}[0] ||= 'admin@mydomain.com';
-my $squid_visible_hostname = network::network::read_squid_conf()->{visible_hostname}[0] ||= 'myfirewall@mydomain.com';
+	     choose_lan_interface =>
+	     {
+	      name => N("Please choose what network adapter will be connected to your Local Area Network."),
+	      data => sub {
+		  [ { type => "list", val => \$lan_interface_name, list => $shorewall->{loc_interface}, format => \&format_interfaces } ];
+	      },
+	      post => sub {
+		  log::explanations("Choosing network device: $lan_interface_name");
+		  "lan_configure";
+	      },
+	     },
 
-my $reconf_dhcp_server_intf = 1;
+	     lan_configure =>
+	     {
+	      pre => sub {
+		  $lan_intf = $intfs->{$lan_interface_name} ||= {};
+		  $lan_intf->{DEVICE} = $lan_interface_name;
+		  $lan_intf->{ONBOOT} = 'yes';
+		  $lan_intf->{BOOTPROTO} = 'static';
+		  $lan_intf->{IPADDR} ||= "192.168.1.1";
+		  $lan_intf->{NETMASK} ||= "255.255.255.0";
+		  $internal_domain_name = $resolv_conf->{search}[0] ||= "homeland.net";
+	      },
+	      name => N("Local Area Network setings"),
+	      data => sub {
+		  [
+		   { label => N("Local Network adress"), val => \$lan_intf->{IPADDR} },
+		   { label => N("Netmask"), val => \$lan_intf->{NETMASK} },
+		   { label => N("The internal domain name"), val => \$internal_domain_name },
+		  ];
+	      },
+	      complete => sub {
+		  network::network::update_broadcast_and_network($lan_intf);
+		  if (my $conflict = find { $_->{NETWORK} eq $lan_intf->{NETWORK} } grep { $_->{DEVICE} ne $lan_intf->{DEVICE} } values %$intfs) {
+		      $in->ask_warn(N("Error"), N("Potential LAN address conflict found in current config of %s!\n", $conflict->{DEVICE}));
+		      return 1;
+		  }
+		  0;
+	      },
+	      post => sub {
+		  network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intfs) unless $::testing;
+		  return "dns";
+	      },
+	     },
 
-if (any { /$device/ } @configured_devices) {
-  step_warning_already_conf:
-    my $auto = N("Yes");
-    my $_dhcp_details = N("Yes");
+	     dns =>
+	     {
+	      pre => sub {
+		  $dhcpd_conf->{domain_name_servers}[0] = $resolv_conf->{nameserver}[0] ||= $lan_intf->{IPADDR};
+	      },
+	      name => N("Domain Name Server (DNS) configuration"),
+	      data => sub {
+		  my @disable = (disabled => sub { $use_caching_dns });
+		  [
+		   { text => N("Use this gateway as domain name server"), val => \$use_caching_dns, type => 'bool' },
+		   { label => N("The DNS Server IP"), val => \$dhcpd_conf->{domain_name_servers}[0], @disable },
+		  ];
+	      },
+ 	      complete => sub {
+		  $dhcpd_conf->{domain_name_servers}[0] eq $lan_intf->{IPADDR} or return 0;
+		  !$use_caching_dns || $::testing and return 0;
+		  #- install a caching name server if the specified DNS is the gateway
+		  unless ($in->do_pkgs->ensure_is_installed('caching-nameserver', '/var/named/named.local')) {
+		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'caching-nameserver'));
+		      return 1;
+		  }
+		  0;
+	      },
+	      post => sub {
+		  services::set_status($_, $use_caching_dns) foreach qw(named caching-nameserver);
+		  return "dhcpd";
+	      },
+	     },
 
-    $in->ask_from(N("Network interface already configured"),
-		  N("Warning, the network adapter (%s) is already configured.
-
-Do you want an automatic re-configuration?
-
-You can do it manually but you need to know what you're doing.", $device),
-		  [ { label => N("Automatic reconfiguration"), val => \$auto, list => [ N("Yes"), N("No (experts only)") ] },
-		    { val => N("Show current interface configuration"), clicked =>
-		      sub { $in->ask_okcancel(N("Current interface configuration"),
-					      N("Current configuration of `%s':
-
-Network: %s
-IP address: %s
-IP attribution: %s
-Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_interface_choice;
-
-    if ($auto ne N("Yes")) {
-	$reconf_dhcp_server_intf = 0;
-	$server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
-	$nameserver_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
-	$lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : $conf->{NETWORK};
-	$in->ask_from('',
-		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
-
-The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
-		      
-Otherwise, I can reconfigure your interface and (re)configure a DHCP server for you.
-
-"),
-                      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
-			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
-		  or goto step_warning_already_conf;
-	$in->ask_from('',
-		      N("DHCP Server Configuration.
+	     dhcpd =>
+	     {
+	      pre => sub {
+		  #- not editable
+		  $dhcpd_conf->{option_routers}[0] = $lan_intf->{IPADDR};
+		  $dhcpd_conf->{subnet_mask}[0] = $lan_intf->{NETMASK};
+		  $dhcpd_conf->{domain_name}[0] = $internal_domain_name;
+		  #- editable
+		  $dhcpd_conf->{dynamic_bootp}[0] ||= "16";
+		  $dhcpd_conf->{dynamic_bootp}[1] ||= "253";
+		  $dhcpd_conf->{default_lease_time}[0] ||= "21600";
+		  $dhcpd_conf->{max_lease_time}[0] ||= "43200";
+	      },
+	      name => N("DHCP Server Configuration.
 
 Here you can select different options for the DHCP server configuration.
 If you do not know the meaning of an option, simply leave it as it is."),
-			[ { label => N("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
-			{ label => N("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
-			{ label => N("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
-			{ label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
-			{ label => N("The DHCP end range"), val => \$end_range, type => 'entry' },
-			{ label => N("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
-			{ label => N("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
-			{ label => N("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
-	  or goto step_warning_already_conf;
+	      data => sub {
+		  my @advanced_disable = (advanced => 1, disabled => sub { !$use_dhcpd });
+		  [
+		   { text => N("Use automatic configuration (DHCP)"), val => \$use_dhcpd, type => 'bool' },
+		   { label => N("The DHCP start range"), val => \$dhcpd_conf->{dynamic_bootp}[0], @advanced_disable },
+		   { label => N("The DHCP end range"), val => \$dhcpd_conf->{dynamic_bootp}[1], @advanced_disable },
+		   { label => N("The default lease (in seconds)"), val => \$dhcpd_conf->{default_lease_time}[0], @advanced_disable },
+		   { label => N("The maximum lease (in seconds)"), val => \$dhcpd_conf->{max_lease_time}[0], @advanced_disable }
+		  ];
+	      },
+	      complete => sub {
+		  !$use_dhcpd || $::testing and return 0;
+		  unless ($in->do_pkgs->ensure_is_installed('dhcp-server', '/usr/sbin/dhcpd')) {
+		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'dhcp-server'));
+		      return 1;
+		  }
+		  0;
+	      },
+	      post => sub {
+		  network::dhcpd::write_dhcpd_conf($dhcpd_conf, $lan_intf->{DEVICE}) if $use_dhcpd;
+		  services::set_status("dhcpd", $use_dhcpd);
+		  return "proxy";
+	      }
+	     },
+
+	     proxy =>
+	     {
+	      pre => sub {
+		  $squid_conf->{http_port}[0] ||= "3128";
+		  $squid_conf->{cache_size}[1] ||= "100";
+		  $squid_conf->{admin_mail}[0] ||= 'admin@mydomain.com';
+		  $squid_conf->{visible_hostname}[0] ||= 'myfirewall@mydomain.com';
+	      },
+	      name => N("Proxy caching server (SQUID)"),
+	      data => sub {
+		  my @disable = (advanced => 1, disabled => sub { !$use_caching_proxy });
+		  [
+		   { text => N("Use this gateway as proxy caching server"), val => \$use_caching_proxy, type => 'bool' },
+		   { label => N("Admin mail"), val => \$squid_conf->{admin_mail}[0], @disable },
+		   { label => N("Visible hostname"), val => \$squid_conf->{visible_hostname}[0], @disable },
+		   { label => N("Proxy port"), val => \$squid_conf->{http_port}[0], advanced => 1, @disable },
+		   { label => N("Cache size (MB)"), val => \$squid_conf->{cache_size}[1], advanced => 1, @disable },
+		  ];
+	      },
+ 	      complete => sub {
+		  !$use_caching_proxy || $::testing and return 0;
+		  unless ($in->do_pkgs->ensure_is_installed('squid', '/usr/sbin/squid')) {
+		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'squid'));
+		      return 1;
+		  }
+		  0;
+	      },
+	      post => sub {
+		  network::squid::write_squid_conf($squid_conf, $lan_intf, $internal_domain_name) if $use_caching_proxy;
+		  services::set_status("squid", $use_caching_proxy);
+		  -f $cups_conf ? "cups" : end_step();
+	      },
+	     },
+
+	      cups =>
+	      {
+	       name => N("Broadcast printer information"),
+	       type => "yesorno",
+	       default => "yes",
+	       post => sub {
+		   update_cups() unless $::testing;
+		   end_step();
+	       },
+	      },
+
+	     end_no_lan_interface =>
+	     {
+	      name => N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."),
+	      end => 1,
+	     },
+
+	     end_enabled =>
+	     {
+	      name => N("Internet Connection Sharing is now enabled."),
+	      end => 1,
+	     },
+
+	     end_disabled =>
+	     {
+	      name => N("Internet Connection Sharing is now disabled."),
+	      end => 1,
+	     },
+
+	     end =>
+	     {
+	      name => N("Everything has been configured.
+You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP) and
+ a Transparent Proxy Cache server (SQUID)."),
+	      end => 1,
+	     },
+	    },
+};
+require wizards;
+wizards->new->safe_process($wiz, $in);
+
+
+
+sub format_interfaces {
+    my ($interface) = @_;
+    $eth_intf{$interface} || $interface;
+}
+
+sub lan_interface_step() {
+    network::shorewall::read_default_interfaces($shorewall, $in);
+    my $locals = @{$shorewall->{loc_interface}};
+    if ($locals == 0) {
+	return "end_no_lan_interface";
+    } elsif ($locals == 1) {
+	$lan_interface_name = $shorewall->{loc_interface}[0];
+	return "one_lan_interface";
+    } else {
+	return "choose_lan_interface";
     }
 }
 
-if (!($lan_address =~ s/\.0$//)) {
-    $in->ask_warn('', 
-		  N("The Local Network did not finish with `.0', bailing out."));
-    quit_global($in, 0);
-}
-log::explanations("Using LAN address <$lan_address>");
-
-
-#- test for potential conflict with other networks
-
-foreach (grep { $_ ne $device } @configured_devices) {
-    any { /$lan_address/ } cat_("/etc/sysconfig/network-scripts/ifcfg-$_") and
-      ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
+sub end_step() {
+    gw_configure();
+    log::l("[drakgw] Installation complete, exiting");
+    "end";
 }
 
+sub proxy_enable() {
+    substInFile {
+	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_conf->{http_port}[0]\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+    } $rules_file;
+}
 
-#- test for potential conflict with previous firewall config
-network::shorewall::check_iptables($in) or goto step_detectsetup;
-
-#- **********************************
-#- * 2nd step: configure
-
-$wait_configuring = $in->wait_message(N("Configuring..."),
-				      N("Configuring scripts, installing software, starting servers..."));
-
-
-#- setup the /etc/sysconfig/network-script/ script
-
-if ($reconf_dhcp_server_intf && !$::testing) {
-    log::explanations("Reconfiguring network parameters of $device");
-    my $network_scripts = "/etc/sysconfig/network-scripts";
-    my $ifcfg = "$network_scripts/ifcfg-$device";
-    renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
-    output($ifcfg,
-           join('', qq(DEVICE=$device
-BOOTPROTO=static
-IPADDR=$server_ip
-NETMASK=$netmask
-NETWORK=$lan_address.0
-BROADCAST=$lan_address.255
-ONBOOT=yes
-),
-                if_($conf && $conf->{MII_NOT_SUPPORTED},
-                    "MII_NOT_SUPPORTED=$conf->{MII_NOT_SUPPORTED}\n")
-));
+sub proxy_disable() {
+    substInFile {
+	s/REDIRECT\tmasq\t$squid_conf->{http_port}[0]\ttcp\twww\t\-\n//;
+	s/REDIRECT\tloc\t$squid_conf->{http_port}[0]\ttcp\twww\t\-\n//;
+	s/ACCEPT\tfw\tnet\ttcp\twww\n//;
+    } $rules_file;
 }
 
 
-#- install and setup the RPM packages
-
-my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
-		squid => '/usr/sbin/squid',
-		bind => '/usr/sbin/named',
-		shorewall => '/sbin/shorewall',
-		'caching-nameserver' => '/var/named/named.local');
-
-#- first: try to install all in one step
-my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
-@needed_to_install and $in->do_pkgs->install(@needed_to_install) if !$::testing;
-#- second: try one by one if failure detected
-if (!$::testing && any { !-e $rpm2file{$_} } keys %rpm2file) {
-    foreach (keys %rpm2file) {
-	-e $rpm2file{$_} or $in->do_pkgs->install($_);
-	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
+sub gw_disable() {
+    my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
+    return if $::testing;
+    services::set_status($_, 0) foreach qw(dhcpd squid named);
+    proxy_disable();
+    foreach ($network::dhcpd::dhcpd_conf_file, $network::squid::squid_conf_file, $masq_file) {
+	if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" }
     }
+    services::restart("shorewall");
 }
 
-put_in_hash($shorewall ||= {}, {
-    disabled => 0,
-    net_interface => $card_netconnect,
-    loc_interface => [ grep { $_ ne $card_netconnect } @cards ],
-    masquerade => { subnet => "$lan_address.0/$netmask" },
-});
+sub gw_configure() {
+    #- test for potential conflict with previous firewall config
+    if (network::shorewall::check_iptables($in)) {
+	$in->ask_warn(N("Firewalling configuration detected!"),
+		      N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
+    }
 
+    my $_wait_configuring = $in->wait_message(N("Configuring..."),
+					     N("Configuring scripts, installing software, starting servers..."));
 
-#- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
+    unless ($in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall')) {
+	$in->ask_warn(N("Error"), N("Could not install the %s package!", 'shorewall'));
+	$in->exit(-1);
+    }
 
-log::explanations("Enabling IPV4 forwarding");
-substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network if !$::testing;
+    $shorewall->{masquerade} = { subnet => "$lan_intf->{NETWORK}/$lan_intf->{NETMASK}" };
+    network::shorewall::write($shorewall);
 
+    #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
+    log::explanations("Enabling IPV4 forwarding");
+    substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network if !$::testing;
+    services::restart("network");
 
-#- setup the DHCP server
-
-if ($reconf_dhcp_server_intf && !$::testing) {
-    log::explanations("Configuring a DHCP server on $lan_address.0");
-    renamef($dhcpd_conf, "$dhcpd_conf.old");
-    output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
-	# default gateway
-	option routers $server_ip;
-	option subnet-mask $netmask;
-
-	option domain-name "$internal_domain_name";
-	option domain-name-servers $nameserver_ip;
-
-	range dynamic-bootp $lan_address.$start_range $lan_address.$end_range;
-	default-lease-time $default_lease;
-	max-lease-time $max_lease;
-}
-));
+    proxy_enable();
 }
 
-my $update_dhcp = '/usr/sbin/update_dhcp.pl';
--e $update_dhcp and system($update_dhcp);
+sub update_cups() {
+    #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
+    #- working correctly: 
+    #- 
+    #-  1. ServerName <server's IP address>  # because clients do necessarily 
+    #-                                       # know the server's name
+    #-
+    #-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
+    #-                                           # the local network.
+    #-
+    #-  3. BrowseOrder Deny,Allow
+    #-     BrowseDeny All
+    #-     BrowseAllow <IP mask for local net> # Only accept broadcast signals 
+    #-                                         # coming from local network
+    #-
+    #-  4. <Location />
+    #-     Order Deny,Allow
+    #-     Deny From All
+    #-     Allow From <IP mask for local net> # Allow only machines of local 
+    #-     </Location>                        # network to access the server
+    #-
+    #- These steps are only done when the CUPS package is installed.
 
+    #- Modify the root location block in /etc/cups/cupsd.conf
 
-#- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
-
-log::explanations("Update network interfaces list for dhcpd server");
-substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd if !$::testing;
-
-#- setup the transparent SQUID Proxy Cache server
-
-log::explanations("Configuring a Transparent Squid Proxy Cache server on $lan_address.0");
-renamef($squid_conf, "$squid_conf.old");
-output($squid_conf, qq(
-http_port $squid_port
-hierarchy_stoplist cgi-bin ?
-acl QUERY urlpath_regex cgi-bin \\?
-no_cache deny QUERY
-cache_dir diskd /var/spool/squid $squid_cache_size 16 256
-cache_store_log none
-auth_param basic children 5
-auth_param basic realm Squid proxy-caching web server
-auth_param basic credentialsttl 2 hours
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern .               0       20%     4320
-half_closed_clients off
-acl all src 0.0.0.0/0.0.0.0
-acl manager proto cache_object
-acl localhost src 127.0.0.1/255.255.255.255
-acl to_localhost dst 127.0.0.0/8
-acl SSL_ports port 443 563
-acl Safe_ports port 80          # http
-acl Safe_ports port 21          # ftp
-acl Safe_ports port 443 563     # https, snews
-acl Safe_ports port 70          # gopher
-acl Safe_ports port 210         # wais
-acl Safe_ports port 1025-65535  # unregistered ports
-acl Safe_ports port 280         # http-mgmt
-acl Safe_ports port 488         # gss-http
-acl Safe_ports port 591         # filemaker
-acl Safe_ports port 777         # multiling http
-acl CONNECT method CONNECT
-http_access allow manager localhost
-http_access deny manager
-http_access deny !Safe_ports
-http_access deny CONNECT !SSL_ports
-http_access deny to_localhost
-acl mynetwork src $lan_address.0/$netmask
-http_access allow mynetwork
-http_access allow localhost
-http_reply_access allow all
-icp_access allow all
-visible_hostname $squid_visible_hostname
-httpd_accel_host virtual
-httpd_accel_with_proxy on
-httpd_accel_uses_host_header on
-append_domain .$internal_domain_name
-err_html_text $squid_admin_mail
-deny_info ERR_CUSTOM_ACCESS_DENIED all
-memory_pools off
-coredump_dir /var/spool/squid
-ie_refresh on
-)) if !$::testing;
-
-#- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
-#- working correctly: 
-#- 
-#-  1. ServerName <server's IP address>  # because clients do necessarily 
-#-                                       # know the server's name
-#-
-#-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
-#-                                           # the local network.
-#-
-#-  3. BrowseOrder Deny,Allow
-#-     BrowseDeny All
-#-     BrowseAllow <IP mask for local net> # Only accept broadcast signals 
-#-                                         # coming from local network
-#-
-#-  4. <Location />
-#-     Order Deny,Allow
-#-     Deny From All
-#-     Allow From <IP mask for local net> # Allow only machines of local 
-#-     </Location>                        # network to access the server
-#-     
-#- These steps are only done when the CUPS package is installed.
-
-#- Modify the root location block in /etc/cups/cupsd.conf
-
-if (-f $cups_conf && !$::testing) {
     log::explanations("Updating CUPS configuration accordingly");
 
     substInFile {
-        s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
-        s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
+        s/^ServerName[^:].*\n//; $_ .= "ServerName $lan_intf->{IPADDR}\n" if eof;
+        s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_intf->{BROADCAST}\n" if eof;
         s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
         s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
-        s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
+        s/^BrowseAllow.*\n//; $_ .= "BrowseAllow \@IF($lan_interface_name)\n" if eof;
     } $cups_conf;
 
     my @cups_conf_content = cat_($cups_conf);
@@ -566,45 +466,10 @@ if (-f $cups_conf && !$::testing) {
 
     # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
     splice(@root_location, -1, 0, $_) foreach "Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
-					       "Allow From $lan_address.*\n";
+					       "Allow From \@IF($lan_interface_name)\n";
 
     # Put the changed root location block back into the file
     splice(@cups_conf_content, $root_location_start, 0, @root_location);
 
     output $cups_conf, @cups_conf_content;
-}
-
-
-#- start the daemons
-
-start_daemons();
-
-network::shorewall::write($shorewall);
-print "add rules entries\n";
-substInFile {
-	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-} "/etc/shorewall/rules";
-run_program::run('chkconfig', '--add', 'shorewall');
-run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
-
-#- bye-bye message
-
-undef $wait_configuring;
-
-$::Wizard_no_previous = 1;
-$::Wizard_finished = 1;
-
-$in->ask_okcancel(N("Congratulations!"), 
-N("Everything has been configured.
-You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP) and
- a Transparent Proxy Cache server (SQUID)."));
-
-
-log::l("[drakgw] Installation complete, exiting");
-quit_global($in, 0);
-
-sub quit_global {
-    my ($in, $exitcode) = @_;
-    $in->exit($exitcode);
-    goto begin;
 }
