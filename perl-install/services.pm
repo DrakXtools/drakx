@@ -320,49 +320,53 @@ sub services() {
 
 # the following functions are mostly by printer related modules
 
+sub service_exists {
+    my ($service) = @_;
+    -x "$::prefix/etc/rc.d/init.d/$service";
+}
 
 sub restart ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if !(-x "$::prefix/etc/rc.d/init.d/$service");
+    service_exists($service) or return 1;
     run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "restart");
+}
+
+sub restart_or_start ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    service_exists($service) or return 1;
+    is_service_running($service) ?
+      run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "restart") :
+      run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
 }
 
 sub start ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if !(-x "$::prefix/etc/rc.d/init.d/$service");
+    service_exists($service) or return 1;
     run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
-    return (($? >> 8) != 0) ? 0 : 1;
 }
 
 sub start_not_running_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if !(-x "$::prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "status");
-    if (($? >> 8) != 0) {
-	run_program::rooted($::prefix,
-			    "/etc/rc.d/init.d/$service", "start");
-    }
-    return (($? >> 8) != 0) ? 0 : 1;
+    service_exists($service) or return 1;
+    is_service_running($service) || run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "start");
 }
 
 sub stop ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if !(-x "$::prefix/etc/rc.d/init.d/$service");
+    service_exists($service) or return 1;
     run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "stop");
-    return (($? >> 8) != 0) ? 0 : 1;
 }
 
 sub is_service_running ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 0 if !(-x "$::prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "status");
-    # The exit status is not zero when the service is not running
-    return (($? >> 8) != 0) ? 0 : 1;
+    service_exists($service) or return 1;
+    run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", '>', '/dev/null', '2>', '/dev/null', "status");
 }
 
 sub starts_on_boot {
@@ -373,12 +377,23 @@ sub starts_on_boot {
 
 sub start_service_on_boot ($) {
     my ($service) = @_;
-    run_program::rooted($::prefix, "/sbin/chkconfig", "--add", $service) ? 1 : 0;
+    run_program::rooted($::prefix, "/sbin/chkconfig", "--add", $service);
 }
 
 sub do_not_start_service_on_boot ($) {
     my ($service) = @_;
-    run_program::rooted($::prefix, "/sbin/chkconfig", "--del", $service) ? 1 : 0;
+    run_program::rooted($::prefix, "/sbin/chkconfig", "--del", $service);
+}
+
+sub set_status {
+    my ($service, $enable, $o_dont_apply) = @_;
+    if ($enable) {
+	services::start_service_on_boot($service);
+	services::restart_or_start($service) unless $o_dont_apply;
+    } else {
+	services::do_not_start_service_on_boot($service);
+	services::stop($service) unless $o_dont_apply;
+    }
 }
 
 1;
