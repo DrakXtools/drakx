@@ -50,7 +50,7 @@ sub raw {
     my $args = $options->{sensitive_arguments} ? '<hidden arguments>' : join(' ', @args);
     log::explanations("running: $real_name $args" . ($root ? " with root $root" : ""));
 
-    return 1 if $root && $<;
+    return if $root && $<;
 
     $root ? ($root .= '/') : ($root = '');
     
