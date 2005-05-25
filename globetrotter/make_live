@@ -126,6 +126,11 @@ if ($rescue) {
     my $root = find_partition("MDK-ROOT", @parts);
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
     die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device};
+    print "\nPlease wait, disk is being checked, this can take quite some time\n\n";
+    run_program::run("e2fsck -C0 -y $_") foreach map {
+      my $p = find_partition($_, @parts);
+      if_($p, $p->{device}); # handle lost labels
+    } "MDK-PKGS", "MDK-HOME"; # MDK-ROOT"
     print "Please wait, disk reinstallation is in progress, this can take quite some time\n";
     print "Formating $root->{device}\n";
     system("mkfs.ext2 -j /dev/$root->{device} > /dev/null\n");
