@@ -298,6 +298,27 @@ sub config_X_proprietary_drivers() {
     substInFile { $_ = '' if $_ eq 'nvidia' } "$::prefix/etc/modules";
 }
 
+my $fstab;
+
+my $cleaner = before_leaving {
+  if (my $err = $@) {
+	  print "\n>> an error happened: $err\n";
+  }
+  print "Cleaning on exiting\n";
+  print "- Umounting partitions:\n";
+  print "\tumounting /proc\n";
+  eval { fs::umount("$::prefix/proc") };
+  # fs::umount("$::prefix/$_") foreach 'mnt/packages', 'mnt/share', 'home', '';
+  if ($fstab) {
+    print "\tumounting everything else\n";
+      eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
+  }
+  print "\tumounting /tmp\n";
+  eval { fs::umount("/tmp") } if $rescue;
+  print "Cleaning done\n";
+};
+
+
 $::prefix = $ARGV[0] || '/tmp/live_tree';
 
 -d $::prefix or mkdir $::prefix;
@@ -322,7 +343,7 @@ my ($root) = grep { $_->{mntpoint} eq "/" } @parts;
 print "Root is $root->{device}\n";
 run_program::run('tune2fs', '-L', "MDK-ROOT", "/dev/$root->{device}");
 # fs::mount_part($root, $::prefix);
-my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+$fstab = [ fsedit::get_all_fstab($all_hds) ];
 
 # we need to mount every fs we want to see into /etc/fstab !!!
 fs::mount_part($_, $::prefix) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
@@ -479,8 +500,5 @@ run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/p
 
 # for fast test replaying:
 run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
-
-system("umount $::prefix/proc");
-eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
 
 my_exit("Your disk was succesfully restored!\nYou can now reboot your machine.");
