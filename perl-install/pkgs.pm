@@ -1481,11 +1481,11 @@ sub new { my ($class, %h) = @_; bless \%h, $class }
 
 #- retrieve medium by id (usually a number) or an empty placeholder
 sub by_id {
-    my ($medium_id, $packages) = @_;
-    $packages = $::o->{packages} unless defined $packages;
-    log::l("select $medium_id among ".join(",",keys%{$packages->{mediums}}));
-    defined $packages->{mediums}{$medium_id}
-	? $packages->{mediums}{$medium_id}
+    my ($medium_id, $o_packages) = @_;
+    $o_packages = $::o->{packages} unless defined $o_packages;
+    log::l("select $medium_id among ".join(",",keys%{$o_packages->{mediums}}));
+    defined $o_packages->{mediums}{$medium_id}
+	? $o_packages->{mediums}{$medium_id}
 	: bless { invalid => 1 };
 }
 
