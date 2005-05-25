@@ -138,6 +138,7 @@ if ($rescue) {
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
     #my_exit("I cannot find any hard disk to restore!") if is_empty_hash_ref($root) || !$root->{device};
     my_exit("Your disk cannot be restored because there is no more a root partition!") if is_empty_hash_ref($root) || !$root->{device};
+    print "Packages partition was found on $pkg_dev->{device}\n";
     print "\nPlease wait, disk is being checked, this can take quite some time\n\n";
     run_program::run("e2fsck -C0 -y $_") foreach map {
       my $p = find_partition($_, @parts);
