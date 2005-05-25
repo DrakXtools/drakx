@@ -103,6 +103,16 @@ sub formatdisk {
         run_program::get_stdout('service', 'usb', 'start');
     }
 
+sub my_exit {
+    my ($msg) = @_;
+    print "\n\n==============================================================\n\n";
+    print $msg;
+    print "\n\nPress <RETURN> to return back to menu\n\n";
+    print "==============================================================\n\n";
+    <STDIN>;
+    exit(0);
+}
+
 sub find_partition {
   my ($label, @parts) = @_;
   find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq $label } @parts;
