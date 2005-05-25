@@ -41,7 +41,7 @@ my %appletstate = (
              connected => {
   		          colour => [ 'connected' ],
 			  changes => [ 'disconnected', 'error', 'busy' ],
-                          menu => [ 'downNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
+                          menu => [ 'downNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'wireless', 'monitorNetwork', 'refresh', 'help' ],
 			  tt => [ N_("Network is up on interface %s") ]
 			  },
              disconnected => {
@@ -68,6 +68,7 @@ my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => \&network::tools::start_interface },
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => \&network::tools::stop_interface },
                'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
+               'wireless' => { name => N("Manage wireless networks"), launch => sub { system("/usr/sbin/drakroam &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
                    name => N("Watched interface"),
