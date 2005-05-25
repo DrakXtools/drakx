@@ -1,0 +1,127 @@
+--- make_live	2005-05-25 17:42:35.000000000 +0200
++++ make_live	2005-05-25 17:46:41.000000000 +0200
+@@ -8,6 +8,7 @@
+ use standalone;
+ use interactive;
+ use common;
++use detect_devices;
+ use partition_table;
+ use fsedit;
+ use fs;
+@@ -321,8 +322,116 @@
+ 
+ $::prefix = $ARGV[0] || '/tmp/live_tree';
+ 
++#===========================================================================
++# Fix disk if it's a bogus one:
++
++my @packages2delete = qw(
++	Mandrake/RPMS/uqm-data-0.3-1mdk.noarch.rpm
++
++	Mandrake/RPMS2/kernel24-tmb-2.4.25-6.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-2.4.25-7.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-2.4.25-7.tmb.2mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-enterprise-2.4.25-6.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-enterprise-2.4.25-7.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-enterprise-2.4.25-7.tmb.2mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-i686-up-4GB-2.4.25-6.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-i686-up-4GB-2.4.25-7.tmb.1mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-i686-up-4GB-2.4.25-7.tmb.2mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel24-tmb-source-2.4.25-7.tmb.2mdk.i586.rpm
++
++	Mandrake/RPMS2/kernel-tmb-2.6.4-1.tmb.8mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel-tmb-enterprise-2.6.4-1.tmb.8mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel-tmb-i686-up-4GB-2.6.4-1.tmb.8mdk-1-1mdk.i586.rpm
++	Mandrake/RPMS2/kernel-tmb-source-2.6.4-1.tmb.8mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-2.4.25.5mdk-3-7mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-2.6.3.15mdk-3-8mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-enterprise-2.4.25.5mdk-3-7mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-enterprise-2.6.3.15mdk-3-8mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-i686-up-4GB-2.4.25.5mdk-3-7mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-i686-up-4GB-2.6.3.15mdk-3-8mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-p3-smp-64GB-2.4.25.5mdk-3-7mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-p3-smp-64GB-2.6.3.15mdk-3-8mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-smp-2.4.25.5mdk-3-7mdk.i586.rpm
++	Mandrake/RPMS2/kernel-win4lin-smp-2.6.3.15mdk-3-8mdk.i586.rpm
++	);
++
++# misc paths;
++my $pkgs_mount_path = "/mnt/mdk_pkgs";
++my $rescue_path = "/rescue-glob";
++my $cd_mount_path = "/mnt/cdrom-glob";
++
++# enable to retry fixing partitions if fixing failed:
++my $__need2befixed_mark = "Mandrake/RPMS/NEED_TO_BE_FIXED";
++my $need2befixed_mark = "$pkgs_mount_path/__need2befixed_mark";
++
++{
++    mkdir_p($pkgs_mount_path);
++
++    my $cleaner = before_leaving {
++	if (my $err = $@) {
++	    print "\n>> an error happened: $err\n";
++	}
++	print "Cleaning on end of fixing\n";
++	eval { fs::umount($_) } foreach $pkgs_mount_path, $cd_mount_path;
++	undef $@; # do not propagate fs::umount exceptions
++    };
++
++    print "Checking if the packages partition needs to be fixed\n";
++    # system("mount /dev/$pkg_dev->{device} $pkgs_mount_path");
++    fs::mount($pkg_dev->{device}, $pkgs_mount_path, 'ext3');
++    # my $pkgs_mount_path = "/home/qa/broken"; # FIXME: TESTING
++
++    if (any { -e "$pkgs_mount_path/$_" } @packages2delete, $__need2befixed_mark) {
++	print "Preparing to fixing the partition packages...\n";
++	touch($need2befixed_mark);
++
++	# Cleaning the packages so that we get back some free space:
++	unlink("$pkgs_mount_path/$_") foreach @packages2delete;
++
++
++	# Lookup rescue CD:
++
++	my $cdrom_path;
++
++	my @cdroms = map { $_->{device} } detect_devices::cdroms();
++
++	mkdir_p($cd_mount_path);
++
++	my ($found, $cdrom_dev);
++
++	foreach my $cdrom (@cdroms) {
++	    eval { fs::mount($cdrom, $cd_mount_path, 'iso9660', 1) } or next; # nicely handle empty drives
++	      if (-d "$cd_mount_path/$rescue_path") {
++		  $cdrom_dev = $cdrom;
++		  $found = 1;
++		  last;
++	      }
++	    fs:umount($cd_mount_path);
++	  }
++	undef $@; # do not propagate fs::mount exceptions
++
++	if ($found) {
++	    warn "Found rescue CDROM on $cdrom_dev\n";
++	} else {
++	    warn "I failed to found the rescue CDROM\nPress enter to return to the menu";
++	    <STDIN>;
++	    # TODO : replace by sg else if merged within make_live
++	    exit(0);
++	}
++
++
++	print "Fixing the partition packages... in progress\n";
++	# Copy Mandrake/base with the newly generated hdlists from the old repositery;
++	cp_af($_, "$pkgs_mount_path/Mandrake/base") foreach glob_("$cd_mount_path/$rescue_path/Mandrake/base/*");
++	cp_af($_, "$pkgs_mount_path/Mandrake/RPMS") foreach glob_("$cd_mount_path/$rescue_path/Mandrake/pkgs/*");
++	unlink($need2befixed_mark);
++	print "Fixing the partition packages... done\n";
++    }
++}
++
++
+ #===========================================================================
+ # Building the disk:
+ -d $::prefix or mkdir $::prefix;
+ print "Making live in $::prefix directory.\n";
+ 
