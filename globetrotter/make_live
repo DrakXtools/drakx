@@ -176,8 +176,8 @@ sub installPackages() {
 	#my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
 	my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
 	@l >= 1 or die  "can't find kernel";
-	@l <= 1 or die "too many kernels";
-	first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
+	@l <= 1 or warn "too many kernels";
+	first(`rpm -qp --qf '%{name}' $l[-1]` =~ /kernel-(.*)/);
     };
 
     my $kernel_version = c::kernel_version();
