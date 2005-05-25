@@ -134,11 +134,11 @@ if ($rescue) {
     $pkg_dev = find_partition("MDK-PKGS", @parts);
     #die "I cannot find the package partition which is needed in order to restore the system!"
     my_exit("Your disk cannot be restored because there is no more a restore partition!") if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device};
+    print "Packages partition was found on $pkg_dev->{device}\n";
     my $root = find_partition("MDK-ROOT", @parts);
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
     #my_exit("I cannot find any hard disk to restore!") if is_empty_hash_ref($root) || !$root->{device};
     my_exit("Your disk cannot be restored because there is no more a root partition!") if is_empty_hash_ref($root) || !$root->{device};
-    print "Packages partition was found on $pkg_dev->{device}\n";
     print "\nPlease wait, disk is being checked, this can take quite some time\n\n";
     run_program::run("e2fsck -C0 -y $_") foreach map {
       my $p = find_partition($_, @parts);
