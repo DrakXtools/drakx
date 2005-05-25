@@ -59,7 +59,7 @@ sub get_hds() {
 	my $all_hds = fsedit::get_hds();
      my $other;
 	($all_hds->{hds}, $other) = partition { $_->{usb_description} eq 'LaCie|LaCie Hard Drive USB' } @{$all_hds->{hds}};
-	die "I did not found any LaCie disk\n" if !$all_hds->{hds}[0];
+     my_exit("Your disk cannot be restored because it cannot be found!") if !$all_hds->{hds}[0];
 	$all_hds, $all_hds->{hds}[0]; # $other
 }
 
@@ -132,10 +132,12 @@ if ($rescue) {
     print "Looking for the package partition\n";
     my @parts = partition_table::get_normal_parts($hd);
     $pkg_dev = find_partition("MDK-PKGS", @parts);
-    die "I cannot find the package partition which is needed in order to restore the system!" if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device};
+    #die "I cannot find the package partition which is needed in order to restore the system!"
+    my_exit("Your disk cannot be restored because there is no more a restore partition!") if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device};
     my $root = find_partition("MDK-ROOT", @parts);
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
-    die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device};
+    #my_exit("I cannot find any hard disk to restore!") if is_empty_hash_ref($root) || !$root->{device};
+    my_exit("Your disk cannot be restored because there is no more a root partition!") if is_empty_hash_ref($root) || !$root->{device};
     print "\nPlease wait, disk is being checked, this can take quite some time\n\n";
     run_program::run("e2fsck -C0 -y $_") foreach map {
       my $p = find_partition($_, @parts);
