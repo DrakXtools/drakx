@@ -137,7 +137,7 @@ sub write {
 		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 	} "/etc/shorewall/rules";
 }
-    set_config_file('masq', $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : ());
+    set_config_file('masq', if_($conf->{masquerade}, [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]));
 
     services::set_status('shorewall', !$conf->{disabled}, $::isInstall);
 }
