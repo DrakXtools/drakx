@@ -129,7 +129,7 @@ if ($rescue) {
     print "Please wait, disk reinstallation is in progress, this can take quite some time\n";
     print "Formating $root->{device}\n";
     system("mkfs.ext2 -j /dev/$root->{device} > /dev/null\n");
-
+    run_program::run('tune2fs', '-L', "MDK-ROOT", "/dev/$root->{device}"); # prevent lost label if restore aborts before the end
 }
 
 sub installPackages() {
