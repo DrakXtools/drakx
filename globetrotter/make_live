@@ -481,3 +481,5 @@ run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
 
 system("umount $::prefix/proc");
 eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
+
+my_exit("Your disk was succesfully restored!\nYou can now reboot your machine.");
