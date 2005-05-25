@@ -657,13 +657,13 @@ sub chooseCD {
     #- the boot medium is already selected.
     $mediumsDescr{pkgs::mediumDescr($packages, $install_any::boot_medium)} = 1;
 
-    #- build mediumDescr according to mediums, this avoid asking multiple times
-    #- all the medium grouped together on only one CD.
+    #- build mediumDescr according to mediums, this avoids asking multiple times
+    #- all the media grouped together on only one CD.
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
-	$packages->{mediums}{$_}{ignored} and next;
+	$packages->{mediums}{$_}->ignored and next;
 	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
-	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}{selected};
+	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}->selected;
     }
 
     if (install_any::method_is_from_ISO_images($o->{method})) {
@@ -691,9 +691,13 @@ If only some CDs are missing, unselect them, then click Ok."),
 
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {
+	$packages->{mediums}{$_}->ignored and next;
 	my $descr = pkgs::mediumDescr($packages, $_);
-	$packages->{mediums}{$_}{ignored} and next;
-	$packages->{mediums}{$_}{selected} = $mediumsDescr{$descr};
+	if ($mediumsDescr{$descr}) {
+	    $packages->{mediums}{$_}->select;
+	} else {
+	    $packages->{mediums}{$_}->refuse;
+	}
 	log::l("select status of medium $_ is $packages->{mediums}{$_}{selected}");
     }
 }
@@ -850,7 +854,8 @@ Do you want to install the updates?")),
 	} else {
 	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
 	    #- this is possible by deselecting the medium (which can be re-selected above).
-	    delete $update_medium->{selected};
+	    #- delete $update_medium->{selected};
+	    $update_medium->refuse;
 	}
 	#- update urpmi even, because there is an hdlist available and everything is good,
 	#- this will allow user to update the medium but update his machine later.

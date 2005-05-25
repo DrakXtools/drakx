@@ -24,6 +24,7 @@ use detect_devices;
 use lang;
 use any;
 use log;
+use pkgs;
 
 #- boot medium (the first medium to take into account).
 our $boot_medium = 1;
@@ -68,7 +69,7 @@ sub changeMedium($$) {
 sub relGetFile($) {
     local $_ = $_[0];
     if (my ($arch) = m|\.([^\.]*)\.rpm$|) {
-	$_ = "$::o->{packages}{mediums}{$asked_medium}{rpmsdir}/$_";
+	$_ = install_medium::by_id($asked_medium)->{rpmsdir} . "/$_";
 	s/%{ARCH}/$arch/g;
 	s,^/+,,g;
     }
@@ -83,22 +84,6 @@ sub askChangeMedium($$) {
     } while $@; #- really it is not allowed to die in changeMedium!!! or install will core with rpmlib!!!
     log::l($allow ? "accepting medium $medium_name" : "refusing medium $medium_name");
     $allow;
-}
-
-#- guess the CD number from a media description.
-#- XXX lots of heuristics here, must design this properly
-sub getCDNumber {
-    my ($description) = @_;
-    (my $cd) = $description =~ /\b(?:CD|DVD) ?(\d+)\b/i;
-    if (!$cd) { #- test for single unnumbered DVD
-	$cd = 1 if $description =~ /\bDVD\b/i;
-    }
-    if (!$cd) { #- test for mini-ISO
-	$cd = 1 if $description =~ /\bmini.?cd\b/i;
-    }
-    #- don't mix suppl. cds with regular ones
-    if ($description =~ /suppl/i) { $cd += 100 }
-    $cd;
 }
 
 sub method_is_from_ISO_images($) {
@@ -170,8 +155,8 @@ sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
-    $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need to worry about.
-    my $current_method = $::o->{packages}{mediums}{$asked_medium}{method} || $::o->{method};
+    install_medium::by_id($asked_medium)->selected or return; #- not selected means no need to worry about.
+    my $current_method = install_medium::by_id($asked_medium)->method || $::o->{method};
 
     my $max = 32; #- always refuse after $max tries.
     if ($current_method eq "cdrom") {
@@ -203,7 +188,7 @@ sub errorOpeningFile($) {
 
     #- keep in mind the asked medium has been refused on this way.
     #- this means it is no more selected.
-    $::o->{packages}{mediums}{$asked_medium}{selected} = undef;
+    install_medium::by_id($asked_medium)->refuse;
 
     #- on cancel, we can expect the current medium to be undefined too,
     #- this enables remounting if selecting a package back.
@@ -213,7 +198,7 @@ sub errorOpeningFile($) {
 }
 sub getFile {
     my ($f, $o_method, $o_altroot) = @_;
-    my $current_method = ($asked_medium ? $::o->{packages}{mediums}{$asked_medium}{method} : '') || $::o->{method};
+    my $current_method = ($asked_medium ? install_medium::by_id($asked_medium)->method : '') || $::o->{method};
     log::l("getFile $f:$o_method ($asked_medium:$current_method)");
     my $rel = relGetFile($f);
     do {
@@ -225,7 +210,7 @@ sub getFile {
 	    crypto::getFile($f);
 	} elsif ($current_method eq "ftp") {
 	    require ftp;
-	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || $global_ftp_prefix || [] });
+	    ftp::getFile($rel, @{ install_medium::by_id($asked_medium)->{ftp_prefix} || $global_ftp_prefix || [] });
 	} elsif ($current_method eq "http") {
 	    require http;
 	    http::getFile(($ENV{URLPREFIX} || $o_altroot) . "/$rel");
@@ -494,7 +479,7 @@ sub selectSupplMedia {
 		eval {
 		    pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom", $o->{packages}, $medium_name, sub {
 			my ($supplmedium) = @_;
-			$supplmedium->{issuppl} = 1;
+			$supplmedium->mark_suppl;
 		    });
 		};
 		log::l("psUsingHdlists failed: $@") if $@;
@@ -591,10 +576,10 @@ sub setup_suppl_medium {
 	$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 	    and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
     }
-    $supplmedium->{selected} = 1;
+    $supplmedium->select;
     $supplmedium->{method} = $suppl_method;
     $supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
-    $supplmedium->{issuppl} = 1; #- remember it's a suppl medium
+    $supplmedium->mark_suppl;
 }
 
 sub _media_rank {
@@ -730,14 +715,14 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	}
     };
     foreach my $k (pkgs::allMediums($o->{packages})) {
-	my $m = $o->{packages}{mediums}{$k};
+	my $m = install_medium::by_id($k, $o->{packages});
 	#- don't copy rpms of supplementary media
-	next if $m->{issuppl};#- && $m->{medium} !~ /^\d+s$/; XXX handle suppl CDs
+	next if $m->is_suppl;
 	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
-	    my $cd_k = getCDNumber($m->{descr});
-	    my $cd_cur = getCDNumber($o->{packages}{mediums}{$current_medium}{descr});
+	    my $cd_k = $m->get_cd_number;
+	    my $cd_cur = install_medium::by_id($current_medium, $o->{packages})->get_cd_number;
 	    $cd_k ne $cd_cur and do {
 		askChangeMedium($o->{method}, $k)
 		    or next;
@@ -1008,8 +993,8 @@ sub install_urpmi {
     my @cfg;
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
-	if ($_->{ignored} || $_->{selected}) {
-	    my $curmethod = $_->{method} || $::o->{method};
+	if ($_->ignored || $_->selected) {
+	    my $curmethod = $_->method || $::o->{method};
 	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrivalinux" : '')
 		|| $_->{prefix} || ${{ nfs => "file://mnt/nfs", 
 					   disk => "file:/" . $hdInstallPath,
@@ -1864,6 +1849,5 @@ sub configure_pcmcia {
     #- make sure to be aware of loaded module by cardmgr.
     modules::read_already_loaded($modules_conf);
 }
-
 
 1;

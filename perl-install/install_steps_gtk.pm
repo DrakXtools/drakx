@@ -250,7 +250,7 @@ sub choosePackagesTree {
 			    },
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
-				pkgs::packageMedium($packages, $p)->{selected} or return;
+				pkgs::packageMedium($packages, $p)->selected or return;
 				$p->arch eq 'src'                       and return;
 				$p->flag_base                           and return 'base';
 				$p->flag_installed && !$p->flag_upgrade and return 'installed';
@@ -640,7 +640,7 @@ sub deselectFoundMedia {
     my $i = 0;
     my $totalsize = 0;
     foreach (@$hdlists) {
-	my $cd = install_any::getCDNumber($_->[3]);
+	my $cd = install_medium->new(descr => $_->[3])->get_cd_number;
 	if (!$cd || !@{$cdlist{$cd} || []}) {
 	    push @hdlist2, $_;
 	    $corresp[$i] = [ $i ];

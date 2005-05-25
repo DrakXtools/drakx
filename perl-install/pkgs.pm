@@ -15,7 +15,6 @@ use fs;
 use loopback;
 use c;
 
-
 our %preferred = map { $_ => undef } qw(lilo perl-base gstreamer-oss openjade ctags glibc curl sane-backends postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 libxpm4 zlib1 libncurses5 harddrake cups apache);
 
 #- lower bound on the left ( aka 90 means [90-100[ )
@@ -83,11 +82,6 @@ sub extractHeaders {
 	$_->update_header($f) or log::l("unable to open header file $f"), next;
 	log::l("read header file $f");
     }
-}
-
-sub isSupplCDMedium($) {
-    my ($medium) = @_;
-    $medium->{method} eq 'cdrom' && $medium->{medium} =~ /^\d+s$/;
 }
 
 #- TODO BEFORE TODO
@@ -229,7 +223,7 @@ sub packagesToInstall {
     my ($packages) = @_;
     my @packages;
     foreach (values %{$packages->{mediums}}) {
-	$_->{selected} or next;
+	$_->selected or next;
 	log::l("examining packagesToInstall of medium $_->{descr}");
 	push @packages, grep { $_->flag_selected } packagesOfMedium($packages, $_);
     }
@@ -262,7 +256,7 @@ sub packageRequest {
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
     foreach (values %{$packages->{mediums}}) {
-	!$_->{selected} && $pkg->id >= $_->{start} && $pkg->id <= $_->{end} and return;
+	!$_->selected && $pkg->id >= $_->{start} && $pkg->id <= $_->{end} and return;
     }
 
     return { $pkg->id => 1 };
@@ -376,7 +370,7 @@ sub psUpdateHdlistsDeps {
 
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
-	$_->{selected} || $_->{ignored} or next;
+	$_->selected || $_->ignored or next;
 	my $hdlistf = "$urpmidir/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	my $synthesisf = "$urpmidir/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	if (-s $hdlistf != $_->{hdlist_size}) {
@@ -446,8 +440,8 @@ sub psUsingHdlists {
     foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	my $supplmedium = psUsingHdlist($method, $o_packages, @$h);
-	$o_callback and $o_callback->($supplmedium, $o_hdlistsprefix, $method);
+	my $medium = psUsingHdlist($method, $o_packages, @$h);
+	$o_callback and $o_callback->($medium, $o_hdlistsprefix, $method);
     }
 
     log::l("psUsingHdlists read " . int(@{$o_packages->{depslist}}) .
@@ -462,16 +456,17 @@ sub psUsingHdlist {
     my $urpmidir = urpmidir();
     log::l("trying to read $hdlist for medium $medium_name");
 
-    my $m = { hdlist     => $hdlist,
-	      method     => $method,
-	      medium     => $medium_name,
-	      rpmsdir    => $rpmsdir, #- where is RPMS directory.
-	      descr      => $descr,
-	      fakemedium => $fakemedium,
-	      selected   => $selected, #- default value is only CD1, it is really the minimal.
-	      ignored    => !$selected, #- keep track of ignored medium by DrakX.
-	      pubkey     => [], #- all pubkey block here
-	    };
+    my $m = install_medium->new(
+	hdlist     => $hdlist,
+	method     => $method,
+	medium     => $medium_name,
+	rpmsdir    => $rpmsdir, #- where is RPMS directory.
+	descr      => $descr,
+	fakemedium => $fakemedium,
+	selected   => $selected, #- default value is only CD1, it is really the minimal.
+	ignored    => !$selected, #- keep track of ignored medium by DrakX.
+	pubkey     => [], #- all pubkey blocks here
+    );
 
     #- copy hdlist file directly to urpmi directory, this will be used
     #- for getting header of package during installation or after by urpmi.
@@ -517,7 +512,7 @@ sub psUsingHdlist {
     $packages->{mediums}{$medium_name} = $m;
 
     #- parse synthesis (if available) of directly hdlist (with packing).
-    if ($m->{ignored}) {
+    if ($m->ignored) {
 	log::l("ignoring packages in $hdlist");
     } else {
 	my $nb_suppl_pkg_skipped = 0;
@@ -980,7 +975,7 @@ sub installTransactionClosure {
 
     #- search first usable medium (sorted by medium ordering).
     foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
-	unless ($_->{selected}) {
+	unless ($_->selected) {
 	    #- this medium is not selected, but we have to make sure no package are left
 	    #- in $id2pkg.
 	    if (defined $_->{start} && defined $_->{end}) {
@@ -1008,7 +1003,7 @@ sub installTransactionClosure {
     ($min_id, $max_id) = ($medium->{start}, $medium->{end});
 
     #- Supplementary CD : switch temporarily to "cdrom" method
-    my $suppl_CD = isSupplCDMedium($medium);
+    my $suppl_CD = $medium->is_suppl_cd;
     $::o->{mainmethod} = $::o->{method};
     local $::o->{method} = do {
 	my $cdrom;
@@ -1025,7 +1020,7 @@ sub installTransactionClosure {
     } if $suppl_CD;
     #- it is sure at least one package will be installed according to medium chosen.
     install_any::useMedium($medium->{medium});
-    if (install_any::method_allows_medium_change($medium->{method})) {
+    if (install_any::method_allows_medium_change($medium->method)) {
 	my $pkg = $packages->{depslist}[$l[0]];
 
 	#- force changeCD callback to be called from main process.
@@ -1185,7 +1180,7 @@ sub install {
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
 						print $LOG "$f\n";
-						if (isSupplCDMedium($medium)) {
+						if ($medium->is_suppl_cd) {
 						    $fd = install_any::getFile($f, $::o->{method}, supplCDMountPoint());
 						} else {
 						    $fd = install_any::getFile($f, $::o->{method}, $medium->{prefix});
@@ -1241,7 +1236,7 @@ sub install {
 	    if (!$retry_pkg) {
 		my @badPackages;
 		foreach (@transToInstall) {
-		    if (!$_->flag_installed && packageMedium($packages, $_)->{selected} && !exists($ignoreBadPkg{$_->name})) {
+		    if (!$_->flag_installed && packageMedium($packages, $_)->selected && !exists($ignoreBadPkg{$_->name})) {
 			push @badPackages, $_;
 			log::l("bad package " . $_->fullname);
 		    } else {
@@ -1254,7 +1249,7 @@ sub install {
 		$retry_count = 3;
 	    } else {
 		my $name;
-		if (!$retry_pkg->flag_installed && packageMedium($packages, $retry_pkg)->{selected} && !exists($ignoreBadPkg{$retry_pkg->name})) {
+		if (!$retry_pkg->flag_installed && packageMedium($packages, $retry_pkg)->selected && !exists($ignoreBadPkg{$retry_pkg->name})) {
 		    if ($retry_count) {
 			log::l("retrying installing package " . $retry_pkg->fullname . " alone in a transaction");
 			--$retry_count;
@@ -1455,6 +1450,84 @@ sub hashtree2list {
 	push @todo, @{$h->{$e} || []};
     }
     @l;
+}
+
+package install_medium;
+
+use strict;
+
+#- list of fields :
+#-	descr (text description)
+#-	end (last rpm id)
+#-	fakemedium ("$descr ($method$medium_name)", used locally by urpmi)
+#-	hdlist
+#-	hdlist_size
+#-	ignored
+#-	issuppl (is a supplementary media)
+#-	key_ids (hashref, values are key ids)
+#-	medium (number of the medium)
+#-	method
+#-	prefix (for install_urpmi)
+#-	pubkey
+#-	rpmsdir
+#-	selected
+#-	start (first rpm id)
+#-	synthesis_hdlist_size
+#-	update (for install_urpmi)
+#-	with_hdlist (for install_urpmi)
+
+#- create a new medium
+sub new { my ($class, %h) = @_; bless \%h, $class }
+
+#- retrieve medium by id (usually a number) or an empty placeholder
+sub by_id {
+    my ($medium_id, $packages) = @_;
+    $packages = $::o->{packages} unless defined $packages;
+    log::l("select $medium_id among ".join(",",keys%{$packages->{mediums}}));
+    defined $packages->{mediums}{$medium_id}
+	? $packages->{mediums}{$medium_id}
+	: bless { invalid => 1 };
+}
+
+#- is this medium a supplementary medium ?
+sub is_suppl {
+    my ($self) = @_;
+    $self->{issuppl} || $self->{medium} =~ /^\d+s$/; #- XXX remove medium name kludge
+}
+
+sub mark_suppl { my ($self) = @_; $self->{issuppl} = 1 }
+
+#- is this medium a supplementary CD ?
+sub is_suppl_cd { my ($self) = @_; $self->{method} eq 'cdrom' && $self->is_suppl }
+
+sub method {
+    my ($self) = @_;
+    $self->{method};
+}
+
+sub selected { my ($self) = @_; $self->{selected} }
+sub select   { my ($self) = @_; $self->{selected} = 1 }
+#- unselect, keep it mind it was unselected
+sub refuse   { my ($self) = @_; $self->{selected} = undef }
+
+#- XXX this function seems to be obsolete
+sub ignored  { my ($self) = @_; $self->{ignored} }
+
+#- guess the CD number for this media.
+#- XXX lots of heuristics here, must design this properly
+sub get_cd_number {
+    my ($self) = @_;
+    my $description = $self->{descr};
+    (my $cd) = $description =~ /\b(?:CD|DVD) ?(\d+)\b/i;
+    if (!$cd) { #- test for single unnumbered DVD
+	$cd = 1 if $description =~ /\bDVD\b/i;
+    }
+    if (!$cd) { #- test for mini-ISO
+	$cd = 1 if $description =~ /\bmini.?cd\b/i;
+    }
+    #- don't mix suppl. cds with regular ones
+    if ($description =~ /suppl/i) { $cd += 100 }
+    $cd;
 }
 
 1;
