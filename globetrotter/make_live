@@ -103,6 +103,11 @@ sub formatdisk {
         run_program::get_stdout('service', 'usb', 'start');
     }
 
+sub find_partition {
+  my ($label, @parts) = @_;
+  find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq $label } @parts;
+}
+
 my $pkg_dev;
 if ($rescue) {
     system("mount -t tmpfs none /tmp");
@@ -116,9 +121,9 @@ if ($rescue) {
     my ($all_hds, $hd, $other) = get_hds();
     print "Looking for the package partition\n";
     my @parts = partition_table::get_normal_parts($hd);
-    my $pkg_dev = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-PKGS" } @parts;
+    $pkg_dev = find_partition("MDK-PKGS", @parts);
     die "I cannot find the package partition which is needed in order to restore the system!" if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device};
-    my $root = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-ROOT" } @parts;
+    my $root = find_partition("MDK-ROOT", @parts);
     $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
     die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device};
     print "Please wait, disk reinstallation is in progress, this can take quite some time\n";
