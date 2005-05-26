@@ -468,7 +468,7 @@ sub psUsingHdlist {
     my $newf = "$urpmidir/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     unless ($o_nocopy) {
 	my $w_wait;
-	$w_wait = $::o->wait_message(N("Please wait"), N("Downloading file %s...", $hdlist)) if $::o->{method} =~ /^(?:ftp|http|nfs)$/;
+	$w_wait = $::o->wait_message(N("Please wait"), N("Downloading file %s...", $hdlist)) if $method =~ /^(?:ftp|http|nfs)$/;
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
 	install_any::getAndSaveFile($o_fhdlist || "media/media_info/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
 	$m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
