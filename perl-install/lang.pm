@@ -610,6 +610,8 @@ my %IM_config =
                  },
 );
 
+$IM_config{'scim+uim'} = $IM_config{scim};
+
 sub get_ims() { keys %IM_config }
            
 
