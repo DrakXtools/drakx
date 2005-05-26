@@ -345,7 +345,7 @@ sub ask_from_normalize {
 		$e->{list} = $li = [ map { $li->[$_] } @places ];
 	    }
 	    $e->{type} = 'iconlist' if $e->{icon2f};
-	    $e->{type} = 'treelist' if $e->{separator};
+	    $e->{type} = 'treelist' if $e->{separator} && $e->{type} ne 'combo';
 	    add2hash_($e, { not_edit => 1 });
 	    $e->{type} ||= 'combo';
 
