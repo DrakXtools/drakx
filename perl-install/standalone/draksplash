@@ -10,23 +10,25 @@ use bootsplash;
 
 my $in = 'interactive'->vnew('su');
 
-my $window = ugtk2->new('DrakSplash');
-$window->{rwindow}->signal_connect(delete_event => \&close_window);
-my $preview_window = ugtk2->new('DrakSplash');
-
-my $current_rect = [];
-my $current_point;
-
-my ($image_area, @image_pixbuf);
-create_image_area();
-switch_to_mode(0);
-
 #- verification of package image magik
 unless ($in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert')) {
     $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
         && $in->do_pkgs->install('ImageMagick')
-        or close_window();
+        or close_all();
 }
+
+my $window = ugtk2->new('DrakSplash');
+$window->{rwindow}->signal_connect(delete_event => \&close_all);
+
+my @image_pixbuf;
+my $current_rect = [];
+my $current_point;
+
+my $preview_window = ugtk2->new('DrakSplash');
+my $image_area = create_image_area();
+my $scroll = create_scrolled_window($image_area);
+
+switch_to_mode(0);
 
 my %scale_settings = (
 		      tx => [ 1/10, N("x coordinate of text box\nin number of characters") ],
@@ -80,8 +82,8 @@ gtkadd($window->{window},
 	       $notebook,
 	       gtkpack(Gtk2::HBox->new(0, 5),
 			 gtksignal_connect(Gtk2::Button->new(N("Save theme")), clicked => \&save_theme),
-			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_window)))),
-gtkshow(gtkadd($preview_window->{window}, $image_area));
+			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_all)))),
+gtkshow(gtkadd($preview_window->{window}, $scroll));
 
 update_scale_values();
 
@@ -93,7 +95,7 @@ $window->main;
 # Should never get here
 ugtk2->exit(0);
 
-sub close_window() {
+sub close_all() {
    ugtk2->exit(0);
 }
 
@@ -117,13 +119,26 @@ sub set_theme {
     read_theme_config();
 }
 
-sub set_resolution {
-    my ($res) = @_;
-    $theme{res} = $res;
-    ($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
-    read_theme_config();
-    $image_area->set_size_request($theme{res_w}, $theme{res_h});
-    $preview_window->shrink_topwindow();
+{
+    my ($old_scroll_w, $old_scroll_h);
+
+    sub set_resolution {
+	my ($res) = @_;
+	$theme{res} = $res;
+	($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
+	read_theme_config();
+	$image_area->set_size_request($theme{res_w}, $theme{res_h});
+	#- try not to be larger than screen size minus toolbars size
+	my $w = min(Gtk2::Gdk->screen_width*0.9, $theme{res_w});
+	my $h = min(Gtk2::Gdk->screen_height*0.9, $theme{res_h});
+	#- do not resize and move the window again if size hasn't changed
+	if ($w != $old_scroll_w || $h !=  $old_scroll_h) {
+	    $scroll->set_size_request($w, $h);
+	    $preview_window->shrink_topwindow();
+	    $preview_window->{window}->move(0, 0);
+	    ($old_scroll_w, $old_scroll_h) = ($w, $h);
+	}
+    }
 }
 
 sub save_theme() {
@@ -214,7 +229,7 @@ sub update_scale_values {
 
 
 sub create_image_area() {
-    $image_area = Gtk2::DrawingArea->new;
+    my $image_area = Gtk2::DrawingArea->new;
     $image_area->can_focus(1);
     $image_area->add_events($_) foreach qw(button-press-mask pointer-motion-mask);
     $image_area->signal_connect(motion_notify_event => \&image_motion_notify);
@@ -222,7 +237,7 @@ sub create_image_area() {
     $image_area->signal_connect(expose_event => \&image_expose);
     $image_area->signal_connect(key_press_event => sub {
 	my (undef, $event) = @_;
-	member($event->keyval, 'q', 'Escape') and close_window();
+	member($event->keyval, 'q', 'Escape') and close_all();
 	1;
     });
     $image_area->grab_focus;
