@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.17mdk
+Release: 0.18mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri May 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.18mdk
+- drakgw, drakshorewall: misc fixes (blino)
+- draksplash (blino):
+  o use scrollbar in preview window
+  o try not to be larger than screen size minus toolbars size
+  o close_window -> close_all
+- harddrake: fix misdetecing USB mass storage devices (#13569)
+- localedrake:
+  o enable to select scim+uim again
+  o install needed packages for kinput2
+- net_applet: let user call drakroam (blino, #16019)
+
 * Tue May 24 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.17mdk
 - drakgw (blino):
   o wizardify
