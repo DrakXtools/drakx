@@ -667,6 +667,7 @@ my %IM2packages = (
                               ko => [ qw(iiimf-engines-sun-korea) ],
                               zh => [ qw(iiimf-engines-sun-chinese) ],
                              },
+                   kinput2 => { generic => [ 'kinput2-wnn' ] },
                    'scim' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
