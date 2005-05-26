@@ -602,7 +602,10 @@ sub ask_fromW {
               }
 		};
 		$get = sub { 
-		    my $s = $model ? { reverse %{$model->{indexes}} }->{$w->get_active} : $w->get_text;
+		    my $s;
+			if ($model) {
+				$s = { reverse %{$model->{indexes}} }->{$w->get_active};
+			} else { $s = $w->get_text }
 		    my $i = eval { find_index { $s eq $_ } @formatted_list };
 		    defined $i ? $e->{list}[$i] : $s;
 		};
