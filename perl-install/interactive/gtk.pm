@@ -150,19 +150,11 @@ sub create_treeview_list {
     };
 }
 
-sub create_treeview_tree {
-    my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
-
-    $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
+sub __create_tree_model {
+    my ($e) = @_;
 
     my $sep = quotemeta $e->{separator};
     my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
-    my $tree = Gtk2::TreeView->new_with_model($tree_model);
-    $tree->get_selection->set_mode('browse');
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
-    $tree->set_headers_visible(0);
 
     my ($build_value, $clean_image);
     if (exists $e->{image2f}) {
@@ -178,13 +170,14 @@ sub create_treeview_tree {
 	$clean_image = sub {};
     }
 
-    my (%wtree, %wleaves, $size, $selected_via_click);
+    my (%wtree, %wleaves, $size, $index);
     my $parent; $parent = sub {
 	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
 	my $s = '';
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
 	      $tree_model->append_set($s ? $parent->($s) : undef, $build_value->($_));
+         $tree_model->{indexes}{$_} = $index++;
 	    $clean_image->();
 	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
@@ -197,6 +190,8 @@ sub create_treeview_tree {
     mapn {
 	my ($root, $leaf) = $_[0] =~ /(.*)$sep(.+)/ ? ($1, $2) : ('', $_[0]);
 	my $iter = $tree_model->append_set($parent->($root), $build_value->($leaf));
+     $tree_model->{indexes}{$leaf} = $index++;
+
 	$clean_image->();
 	my $pathstr = $tree_model->get_path_str($iter);
 	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
@@ -205,6 +200,25 @@ sub create_treeview_tree {
     } $e->{formatted_list}, $e->{list};
     undef $_ foreach values %wtree;
     undef %wtree;
+    $tree_model, \@ordered_keys, \%precomp, \%wleaves;
+}
+
+sub create_treeview_tree {
+    my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
+
+    $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
+
+    my $sep = quotemeta $e->{separator};
+    my ($tree_model, $ordered_keys, $precomp, $wleaves) = __create_tree_model($e);
+    my @ordered_keys = @$ordered_keys;
+    my %precomp = %$precomp;
+    my %wleaves = %$wleaves;
+    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree->get_selection->set_mode('browse');
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
+    $tree->set_headers_visible(0);
 
     my $select = sub {
 	my ($path_str) = @_;
@@ -217,6 +231,8 @@ sub create_treeview_tree {
 
     my $curr = $tree_model->get_iter_first; #- default value
     $tree->expand_all if $tree_expanded;
+
+    my $selected_via_click;
 
     $tree->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
@@ -538,23 +554,36 @@ sub ask_fromW {
 	    }
 	} else {
 	    if ($e->{type} eq "combo") {
+             my $model;
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
+		$e->{formatted_list} = \@formatted_list;
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		my $width = $l[@l / 16]; # take the third octile (think quartile)
 
-		if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
-		    $w = Gtk2::ComboBox->new_text;
+		if (!$e->{separator}) {
+              if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
+                  $w = Gtk2::ComboBox->new_text;
+              } else {
+                  $w = Gtk2::Combo->new;
+                  $w->set_use_arrows_always(1);
+                  $w->entry->set_editable(!$e->{not_edit});
+                  $w->disable_activate;
+              }
+              $w->set_popdown_strings(@formatted_list);
+              $w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 		} else {
-		    $w = Gtk2::Combo->new;
-		    $w->set_use_arrows_always(1);
-		    $w->entry->set_editable(!$e->{not_edit});
-		    $w->disable_activate;
-		}
-
-		$w->set_popdown_strings(@formatted_list);
-		$w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
+              ($model) = __create_tree_model($e);
+              $w = Gtk2::ComboBox->new_with_model($model);
+              $w->pack_start(my $renderer = Gtk2::CellRendererText->new, 0);
+              $w->set_attributes($renderer, "text", 0);
+              $w->pack_start($renderer = Gtk2::CellRendererPixbuf->new, 0);
+              $w->set_attributes($renderer, "pixbuf", 1);
+              $w->pack_start($renderer = Gtk2::CellRendererText->new, 0);
+              $w->set_attributes($renderer, "text", 2);
+              $w->set_active($model->{indexes}{ ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0] });
+          }
 		($real_w, $w) = ($w, $w->entry);
 
 		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
@@ -568,7 +597,7 @@ sub ask_fromW {
 		    $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
 		};
 		$get = sub { 
-		    my $s = $w->get_text;
+		    my $s = $model ? { reverse %{$model->{indexes}} }->{$w->get_active} : $w->get_text;
 		    my $i = eval { find_index { $s eq $_ } @formatted_list };
 		    defined $i ? $e->{list}[$i] : $s;
 		};
