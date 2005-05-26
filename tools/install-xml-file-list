@@ -70,6 +70,8 @@ sub valid_cond {
     every {
 	if ($_ eq 'ARCH') {
 	    $ARCH =~ /$attr->{$_}/;
+	} elsif ($_ eq 'set') {
+	    $ENV{$attr->{$_}};
 	} else {
 	    die "<if>: unknown condition $_\n";
 	}
@@ -332,7 +334,7 @@ sub apply_filter {
 		if_($command eq 'gzip', '-9f'),
 		if_($command eq 'strip', '2>/dev/null'),
 	    );
-	    warn "running $command @options @l\n";
+	    warn "running $command @options @l\n" if $verbose;
 	    system(join(' ', $command, @options, @l));
 	}
     }
