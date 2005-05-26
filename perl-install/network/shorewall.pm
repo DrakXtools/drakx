@@ -12,7 +12,7 @@ use common;
 use log;
 
 
-sub check_iptables {
+sub check_iptables() {
     -f "$::prefix/etc/sysconfig/iptables" ||
     $::isStandalone && do {
 	system('modprobe iptable_nat');
