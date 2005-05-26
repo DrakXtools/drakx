@@ -594,7 +594,12 @@ sub ask_fromW {
 
 		$set = sub {
 		    my $s = may_apply($e->{format}, $_[0]);
-		    $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
+              next if !($s ne $w->get_text && $_[0] ne $w->get_text);
+              if ($model) {
+                  $w->set_active($model->{indexes}{$s});
+              } else  {
+                  $w->set_text($s);
+              }
 		};
 		$get = sub { 
 		    my $s = $model ? { reverse %{$model->{indexes}} }->{$w->get_active} : $w->get_text;
