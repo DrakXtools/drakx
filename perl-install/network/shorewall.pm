@@ -101,7 +101,7 @@ sub write {
     my ($conf) = @_;
     my $default_intf = get_ifcfg_interface();
     my $use_pptp = $default_intf =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_intf") =~ /pptp/;
-    my $squid_port = network::network::read_squid_conf()->{http_port}[0];
+    my $squid_port = network::squid::read_squid_conf()->{http_port}[0];
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
