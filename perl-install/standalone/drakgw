@@ -365,9 +365,7 @@ sub end_step() {
 
 sub delete_proxy_ports() {
     my $r = $shorewall->{redirects}{tcp};
-    use Data::Dumper;
     my @ports = grep { $r->{$_} eq 'www' } keys %$r;
-    print Dumper($r, \@ports);
     delete $r->{$_} foreach @ports;
 }
 
