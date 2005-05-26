@@ -270,7 +270,7 @@ sub getSCSI_26() {
 	    $s;
 	};
 
-	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../..";
+	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../../..";
 	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
 
 	my ($device) = readlink("$dir/block") =~ m!/block/(.*)!;
