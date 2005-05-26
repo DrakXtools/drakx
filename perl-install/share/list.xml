@@ -1,7 +1,7 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
-  ash echo
+  ash bsh echo
   cpio gzip bzip2
   <if-not ARCH="ppc">
     fdisk
@@ -54,6 +54,10 @@
   <if ARCH="ppc">
     hattrib hcopy hcd
     hformat hmount humount 
+  </if>
+
+  <if set="DEBUG_INSTALL">
+    strace
   </if>
 </from>
 
@@ -127,6 +131,10 @@
   <from expand="command">
     perl -Mlang -I. -le 'print foreach lang::console_font_files()'
   </from>
+
+  <if set="DEBUG_INSTALL">
+    /etc/termcap
+  </if>
 </from>
 
 <from dir="/usr/share/ldetect-lst">
@@ -258,6 +266,10 @@
   Net/FTP/I.pm
   Net/FTP/dataconn.pm
   Net/Netrc.pm
+  <if set="DEBUG_INSTALL">
+    perl5db.pl
+    Term/ReadLine.pm
+  </if>
 </from>
 
 <from expand="perl">
@@ -270,6 +282,12 @@
   ARCH-linux/URPM/Resolve.pm
   ARCH-linux/URPM/Signature.pm
   ARCH-linux/auto/URPM/URPM.so
+  <if set="DEBUG_INSTALL">
+    ARCH-linux/Term/ReadLine/Gnu.pm
+    ARCH-linux/Term/ReadLine/Gnu/XS.pm
+    ARCH-linux/auto/Term/ReadLine/Gnu/Gnu.so
+    ARCH-linux/auto/Term/ReadLine/Gnu/XS/autosplit.ix
+  </if>
 </from>
 
 <from expand="rpm" matching="m!^/usr/lib/perl5! and !/\.pod$/">
