@@ -390,7 +390,7 @@ sub gw_disable() {
 
 sub gw_configure() {
     #- test for potential conflict with previous firewall config
-    if (network::shorewall::check_iptables($in)) {
+    if (network::shorewall::check_iptables()) {
 	$in->ask_warn(N("Firewalling configuration detected!"),
 		      N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
     }
