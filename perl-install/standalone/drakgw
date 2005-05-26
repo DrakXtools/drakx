@@ -279,6 +279,11 @@ If you do not know the meaning of an option, simply leave it as it is."),
 	      post => sub {
 		  network::squid::write_squid_conf($squid_conf, $lan_intf, $internal_domain_name) if $use_caching_proxy;
 		  services::set_status("squid", $use_caching_proxy);
+		  if ($use_caching_proxy) {
+		      set_proxy_port($squid_conf->{http_port}[0]);
+		  } else {
+		      delete_proxy_ports();
+		  }
 		  -f $cups_conf ? "cups" : end_step();
 	      },
 	     },
@@ -350,26 +355,25 @@ sub end_step() {
     "end";
 }
 
-sub proxy_enable() {
-    substInFile {
-	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_conf->{http_port}[0]\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-    } $rules_file;
+sub delete_proxy_ports() {
+    my $r = $shorewall->{redirects}{tcp};
+    use Data::Dumper;
+    my @ports = grep { $r->{$_} eq 'www' } keys %$r;
+    print Dumper($r, \@ports);
+    delete $r->{$_} foreach @ports;
 }
 
-sub proxy_disable() {
-    substInFile {
-	s/REDIRECT\tmasq\t$squid_conf->{http_port}[0]\ttcp\twww\t\-\n//;
-	s/REDIRECT\tloc\t$squid_conf->{http_port}[0]\ttcp\twww\t\-\n//;
-	s/ACCEPT\tfw\tnet\ttcp\twww\n//;
-    } $rules_file;
+sub set_proxy_port {
+    my ($port) = @_;
+    $shorewall->{redirects}{tcp}{$port} = 'www';
 }
-
 
 sub gw_disable() {
     my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
     return if $::testing;
     services::set_status($_, 0) foreach qw(dhcpd squid named);
-    proxy_disable();
+    delete_proxy_ports();
+    network::shorewall::write($shorewall);
     foreach ($network::dhcpd::dhcpd_conf_file, $network::squid::squid_conf_file, $masq_file) {
 	if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" }
     }
@@ -398,8 +402,6 @@ sub gw_configure() {
     log::explanations("Enabling IPV4 forwarding");
     substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network if !$::testing;
     services::restart("network");
-
-    proxy_enable();
 }
 
 sub update_cups() {

@@ -83,12 +83,14 @@ sub read_default_interfaces {
 
 sub read {
     my ($o_in) = @_;
+    my @rules = get_config_file('rules');
     my %conf = (disabled => !glob_("$::prefix/etc/rc3.d/S*shorewall"),
                 ports => join(' ', map {
                     my $e = $_;
                     map { "$_/$e->[3]" } split(',', $e->[4]);
-                } grep { $_->[0] eq 'ACCEPT' && $_->[1] eq 'net' } get_config_file('rules'))
+                } grep { $_->[0] eq 'ACCEPT' && $_->[1] eq 'net' } @rules),
                );
+    $conf{redirects}{$_->[3]}{$_->[2]} = $_->[4] foreach grep { $_->[0] eq 'REDIRECT' } @rules;
 
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
@@ -101,7 +103,6 @@ sub write {
     my ($conf) = @_;
     my $default_intf = get_ifcfg_interface();
     my $use_pptp = $default_intf =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_intf") =~ /pptp/;
-    my $squid_port = network::squid::read_squid_conf()->{http_port}[0];
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
@@ -129,12 +130,10 @@ sub write {
 		    (map { 
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto; 
 		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
+		    (map {
+			map_each { [ 'REDIRECT', 'loc', $::a, $_, $::b, '-' ] } %{$conf->{redirects}{$_}};
+		    } keys %{$conf->{redirects}}),
 		   );
-		   if (cat_("/etc/shorewall/rules") !~ /^\s*REDIRECT\s*loc\s*$squid_port\s+(\S+)/mg && $squid_port && -f "/var/run/squid.pid" && grep { /Loc/i } cat_("/etc/shorewall/zones")) {
-	substInFile {
-		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-	} "/etc/shorewall/rules";
-}
     set_config_file('masq', if_($conf->{masquerade}, [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]));
 
     services::set_status('shorewall', !$conf->{disabled}, $::isInstall);
