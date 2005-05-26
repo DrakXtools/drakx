@@ -432,6 +432,7 @@ sub prep_net_suppl_media {
 
 sub remountCD1 {
     my ($o, $cdrom) = @_;
+    return if install_medium::by_id(1, $o->{packages})->method ne 'cdrom';
     openCdromTray($cdrom);
     $o->ask_warn('', N("Insert the CD 1 again"));
     mountCdrom("/tmp/image", $cdrom);
@@ -456,7 +457,6 @@ sub selectSupplMedia {
 	#- configure network if needed
 	prep_net_suppl_media($o) if !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/;
 	local $::isWizard = 0;
-	my $main_method = $o->{method};
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
 	    (my $cdromdev) = detect_devices::cdroms();
@@ -493,9 +493,9 @@ sub selectSupplMedia {
 		log::l("Umounting suppl. CD, back to medium 1");
 		eval { fs::umount("/mnt/cdrom") };
 		#- re-mount CD 1 if this was a cdrom install
-		$main_method eq 'cdrom' and remountCD1($o, $cdrom);
+		remountCD1($o, $cdrom);
 	    } else {
-		$main_method eq 'cdrom' and remountCD1($o, $cdrom);
+		remountCD1($o, $cdrom);
 		return 'error';
 	    }
 	} else {
