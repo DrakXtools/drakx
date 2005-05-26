@@ -605,9 +605,7 @@ sub install_urpmi {
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
     if ($pkg && ($pkg->flag_selected || $pkg->flag_installed)) {
-	install_any::install_urpmi($o->{method},
-				   $o->{packages},
-				   $o->{packages}{mediums});
+	install_any::install_urpmi($o->{method}, $o->{packages});
 	pkgs::saveCompssUsers($o->{packages}, $o->{compssUsers});
     }
 }

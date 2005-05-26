@@ -697,7 +697,7 @@ sub copy_rpms_on_disk {
     mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrivalinux var/ftp/pub/Mandrivalinux/media);
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
-	my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	my $name = install_medium::by_id($medium, $o->{packages})->{descr};
 	if (method_allows_medium_change($method)) {
 	    my $r;
 	    if ($method =~ /-iso$/) {
@@ -965,8 +965,9 @@ sub warnAboutFilesStillOpen() {
 }
 
 sub install_urpmi {
-    my ($method, $packages, $mediums) = @_;
+    my ($method, $packages) = @_;
 
+    my @mediums = values %{$packages->{mediums}};
     my $hdInstallPath = any::hdInstallPath();
 
     #- rare case where urpmi cannot be installed (no hd install path).
@@ -980,7 +981,7 @@ sub install_urpmi {
     #- import pubkey in rpmdb.
     my $db = pkgs::rpmDbOpenForInstall();
     $packages->parse_pubkeys(db => $db);
-    foreach my $medium (values %$mediums) {
+    foreach my $medium (@mediums) {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
 					     my (undef, undef, $_k, $id, $imported) = @_;
 					     if ($id) {
@@ -991,7 +992,7 @@ sub install_urpmi {
     }
 
     my @cfg;
-    foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
+    foreach (sort { $a->{medium} <=> $b->{medium} } @mediums) {
 	my $name = $_->{fakemedium};
 	if ($_->ignored || $_->selected) {
 	    my $curmethod = $_->method || $::o->{method};

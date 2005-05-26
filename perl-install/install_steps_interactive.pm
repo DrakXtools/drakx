@@ -655,12 +655,12 @@ sub chooseCD {
     my %mediumsDescr;
 
     #- the boot medium is already selected.
-    $mediumsDescr{pkgs::mediumDescr($packages, $install_any::boot_medium)} = 1;
+    $mediumsDescr{install_medium::by_id($install_any::boot_medium, $packages)->{descr}} = 1;
 
-    #- build mediumDescr according to mediums, this avoids asking multiple times
+    #- build mediumsDescr according to mediums, this avoids asking multiple times
     #- all the media grouped together on only one CD.
     foreach (@mediums) {
-	my $descr = pkgs::mediumDescr($packages, $_);
+	my $descr = install_medium::by_id($_, $packages)->{descr};
 	$packages->{mediums}{$_}->ignored and next;
 	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
 	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}->selected;
@@ -692,7 +692,7 @@ If only some CDs are missing, unselect them, then click Ok."),
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {
 	$packages->{mediums}{$_}->ignored and next;
-	my $descr = pkgs::mediumDescr($packages, $_);
+	my $descr = install_medium::by_id($_, $packages)->{descr};
 	if ($mediumsDescr{$descr}) {
 	    $packages->{mediums}{$_}->select;
 	} else {
@@ -730,7 +730,7 @@ sub installPackages {
 	#- if not using a cdrom medium or an iso image, always abort.
 	return if !install_any::method_allows_medium_change($method);
 
-	my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	my $name = install_medium::by_id($medium, $o->{packages})->{descr};
 	local $| = 1; print "\a";
 	my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(install_messages::com_license()), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");
 	if ($method =~ /-iso$/) {

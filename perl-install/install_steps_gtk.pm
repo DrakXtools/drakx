@@ -545,7 +545,7 @@ sub installPackages {
 	#- if not using a cdrom medium or an iso image, always abort.
 	return if !install_any::method_allows_medium_change($method);
 
-	my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	my $name = install_medium::by_id($medium, $o->{packages})->{descr};
 	local $| = 1; print "\a";
 	my $time = time();
 	my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(install_messages::com_license()), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");

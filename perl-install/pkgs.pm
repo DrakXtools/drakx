@@ -241,11 +241,6 @@ sub allMediums {
     } keys %{$packages->{mediums}};
 }
 
-sub mediumDescr {
-    my ($packages, $medium_name) = @_;
-    $packages->{mediums}{$medium_name}{descr};
-}
-
 sub packageRequest {
     my ($packages, $pkg) = @_;
 
@@ -1483,10 +1478,10 @@ sub new { my ($class, %h) = @_; bless \%h, $class }
 sub by_id {
     my ($medium_id, $o_packages) = @_;
     $o_packages = $::o->{packages} unless defined $o_packages;
-    log::l("select $medium_id among ".join(",",keys%{$o_packages->{mediums}}));
     defined $o_packages->{mediums}{$medium_id}
 	? $o_packages->{mediums}{$medium_id}
-	: bless { invalid => 1 };
+	#- if the medium is not known, return a placeholder
+	: bless { invalid => 1, medium => $medium_id };
 }
 
 #- is this medium a supplementary medium ?
