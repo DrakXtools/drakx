@@ -54,22 +54,28 @@ sub get_shorewall_interface() {
     $default_dev;
 }
 
-sub ask_shorewall_interface {
-    my ($in, $interface) = @_;
-    my $modules_conf = modules::any_conf->read;
-    my @all_cards = network::ethernet::get_eth_cards($modules_conf);
-    my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
-    put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
-
-    $in->ask_from('',
-		  N("Please enter the name of the interface connected to the internet.
+our $ask_shorewall_interface_label = N_("Please enter the name of the interface connected to the internet.
 
 Examples:
 		ppp+ for modem or DSL connections, 
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
-"),
-		  [ { label => N("Net Device"), val => \$interface, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
+");
+
+sub shorewall_interface_choices {
+    my ($refval) = @_;
+    my $modules_conf = modules::any_conf->read;
+    my @all_cards = network::ethernet::get_eth_cards($modules_conf);
+    my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
+    put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
+
+    [ { label => N("Net Device"), val => $refval, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ];
+}
+
+sub ask_shorewall_interface {
+    my ($in, $interface) = @_;
+
+    $in->ask_from('', translate($ask_shorewall_interface_label), shorewall_interface_choices(\$interface));
     $interface;
 }
 
@@ -77,6 +83,11 @@ sub read_default_interfaces {
     my ($conf, $o_in) = @_;
     my $interface = get_shorewall_interface();
     $o_in and $interface = ask_shorewall_interface($o_in, $interface);
+    set_net_interface($conf, $interface);
+}
+
+sub set_net_interface {
+    my ($conf, $interface) = @_;
     $conf->{net_interface} = $interface;
     $conf->{loc_interface} = [  grep { $_ ne $interface } detect_devices::getNet() ];
 }
