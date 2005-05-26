@@ -960,7 +960,7 @@ sub selectPackagesToUpgrade {
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
 
-sub supplCDMountPoint() { $::o->{mainmethod} eq 'cdrom' ? "/tmp/image" : "/mnt/cdrom" }
+sub supplCDMountPoint() { install_medium::by_id(1)->method eq 'cdrom' ? "/tmp/image" : "/mnt/cdrom" }
 
 sub installTransactionClosure {
     my ($packages, $id2pkg) = @_;
@@ -999,7 +999,6 @@ sub installTransactionClosure {
 
     #- Supplementary CD : switch temporarily to "cdrom" method
     my $suppl_CD = $medium->is_suppl_cd;
-    $::o->{mainmethod} = $::o->{method};
     local $::o->{method} = do {
 	my $cdrom;
 	cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
