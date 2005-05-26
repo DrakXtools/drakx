@@ -1,0 +1,114 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+my $SLASH_LOCATION = '/tmp/drakx-in-chroot';
+
+my $verbose = 0;
+my $prefix_ROOTED = '/mnt';
+my $IMAGE_LOCATION_ROOTED = '/tmp/image';
+my $STAGE2_LOCATION_ROOTED = '/tmp/stage2';
+my $LIVE_LOCATION_REL = 'install/stage2/live/';
+my $CLP_LOCATION_REL = 'install/stage2/';
+my $CLP_FILE_REL = $CLP_LOCATION_REL . 'mdkinst.clp';
+
+my ($repository, $dir) = @ARGV;
+my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
+
+my $sudo;
+if ($>) {
+    $sudo = "sudo";
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+if (-d $SLASH_LOCATION) {
+    umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
+    rm_rf($SLASH_LOCATION);
+}
+
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
+
+if (-d "$repository/$LIVE_LOCATION_REL") {
+    sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
+} elsif (-e "$repository/$CLP_FILE_REL") {
+    my $dev = find_free_loop();
+    sys("$sudo losetup -r -e gz $dev $repository/$CLP_FILE_REL");
+    sys("$sudo mount -r $dev $STAGE2_LOCATION");
+}
+
+sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
+sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
+create_initial_symlinks();
+create_initial_devices();
+
+output("$SLASH_LOCATION/etc/hosts", "127.0.0.1 localhost\n") if ! -e "$SLASH_LOCATION/etc/hosts";
+
+if (whereis_binary('Xnest')) {
+    my $DISPLAY = ':8';
+    system("Xnest $DISPLAY -ac -geometry 800x600 &");
+    $ENV{DISPLAY} = $DISPLAY;
+}
+
+if (my $pid = fork()) {
+    waitpid $pid, 0;
+    umount_all() == 0 or warn "umounting failed\n";
+} else {
+    $ENV{HOME} = '/';
+    my $cmd = '/usr/bin/install2 --local_install';
+    exec "$sudo chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
+}
+
+sub system_verbose { warn join(' ', @_), "\n" if $verbose; system(@_) }
+sub sys { &system_verbose; $? and die qq(running "@_" failed: $?\n) }
+
+sub find_free_loop() {
+    foreach (0..255) {
+	my $dev = "/dev/loop$_";
+	system("$sudo losetup $dev >/dev/null 2>&1") != 0 or next;
+	warn "found $dev\n";
+	return $dev;
+    }
+    die "no free loop found";
+}
+
+sub create_initial_symlinks() {
+    foreach (cat_or_die("$STAGE2_LOCATION/usr/share/symlinks")) {
+	my ($from, $to_) = split;
+	my $to = $SLASH_LOCATION . ($to_ || $from);
+	$from = "$STAGE2_LOCATION_ROOTED$from" if !$to_;
+	if (! -l $to) {
+	    symlink $from, $to or die "symlinking $to failed\n";
+	}
+    }
+}
+
+sub create_initial_devices() {
+    foreach (cat_or_die("$STAGE2_LOCATION/usr/share/devices")) {
+	my ($node, $type, $major, $minor) = split;
+	sys("$sudo mknod $SLASH_LOCATION$node $type $major $minor") if ! -e "$SLASH_LOCATION$node";
+    }
+}
+
+sub umount_all() {
+    my $err;
+    my @procs = ('/proc/bus/usb', '/proc', '/sys');
+    foreach ((map { "$prefix_ROOTED$_" } @procs, ''), @procs, $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED) {
+	my $dir = "$SLASH_LOCATION$_";
+	rmdir $dir;
+	if (-d $dir) {
+	    if (m!/proc/bus/usb!) {
+		system_verbose "$sudo umount $dir 2>/dev/null";
+		next;
+	    }
+	    my ($loop) = cat_('/proc/mounts') =~ m!^(/dev/loop\d+) \Q$dir\E !m;
+	    system_verbose "$sudo umount $dir";
+	    sys("$sudo losetup -d $loop") if $loop;
+	}
+	rmdir $dir;
+	if (-d $dir) {
+	    warn "$dir is busy\n";
+	    $err++;
+	}
+    }
+    $err;
+}

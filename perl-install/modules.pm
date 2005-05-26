@@ -56,7 +56,7 @@ sub cond_mapping_24_26 {
 # handles dependencies
 sub load_raw {
     my ($l, $h_options) = @_;
-    if ($::testing) {
+    if ($::testing || $::local_install) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
     } elsif ($::isInstall && !$::move) {
 	load_raw_install($l, $h_options);
@@ -287,7 +287,7 @@ sub cz_file() {
 sub extract_modules {
     my ($dir, @modules) = @_;
     my $cz = cz_file();
-    if (!-e $cz && !$::uml_install) {
+    if (!-e $cz && !$::local_install) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
 	require install_any;
         install_any::getAndSaveFile("install/stage2/live$cz", $cz) or die "failed to get modules $cz: $!";

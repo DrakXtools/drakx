@@ -33,7 +33,8 @@ sub new($$) {
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':9' : $ENV{DISPLAY};
 
-    if ($ENV{DISPLAY} =~ /^:\d/ && !$::testing || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
+    if (!$::local_install && 
+	($::testing ? $ENV{DISPLAY} ne $wanted_DISPLAY : $ENV{DISPLAY} =~ /^:\d/)) { #- is the display local or distant?
 	my $f = "/tmp/Xconf";
 	if (!$::testing) {
 	    devices::make("/dev/kbd");

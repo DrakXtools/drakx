@@ -112,7 +112,7 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $_ent_number, $auto) = @_;
 
-    if (!$::testing && !$::uml_install) {
+    if (!$::testing && !$::local_install) {
 	-d '/lib/modules/' . c::kernel_version() ||
 	  -s modules::cz_file() or die N("Can not access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
@@ -294,7 +294,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
-    return if $::uml_install;
+    return if $::local_install;
 
     $o->{modules_conf}->write;
 
@@ -407,7 +407,8 @@ sub main {
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
 	    kickstart => sub { $::auto_install = $v },
-	    uml_install => sub { $::uml_install = 1 },
+	    local_install => sub { $::local_install = 1 },
+	    uml_install => sub { $::uml_install = $::local_install = 1 },
 	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    theme     => sub { $o->{theme} = $v },
@@ -437,7 +438,7 @@ sub main {
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
-    log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
+    log::openLog($::testing && 'debug.log');
     log::l("second stage install running (", install_any::drakx_version(), ")");
 
     eval { output('/proc/sys/kernel/modprobe', "\n") } if !$::testing; #- disable kmod, otherwise we get a different behaviour in kernel vs kernel-BOOT
