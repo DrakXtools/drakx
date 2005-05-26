@@ -79,7 +79,7 @@ sub askChangeMedium($$) {
     my ($method, $medium_name) = @_;
     my $allow;
     do {
-	local $::o->{method} = $method = 'cdrom' if $medium_name =~ /^\d+s$/; #- Suppl CD
+	local $::o->{method} = $method = 'cdrom' if install_medium::by_id($medium_name)->is_suppl_cd;
 	eval { $allow = changeMedium($method, $medium_name) };
     } while $@; #- really it is not allowed to die in changeMedium!!! or install will core with rpmlib!!!
     log::l($allow ? "accepting medium $medium_name" : "refusing medium $medium_name");
@@ -184,7 +184,8 @@ sub errorOpeningFile($) {
     }
 
     #- Do not unselect supplementary CDs.
-    return if $asked_medium =~ /^\d+s$/;
+    #return if $asked_medium =~ /^\d+s$/;
+    return if install_medium::by_id($asked_medium)->is_suppl_cd;
 
     #- keep in mind the asked medium has been refused on this way.
     #- this means it is no more selected.
@@ -449,7 +450,6 @@ sub selectSupplMedia {
 	    'Network (http)' => 'http',
 	    'Network (ftp)' => 'ftp',
 	}->{$suppl};
-	#- by convention, the media names for suppl. CDs match /^\d+s$/
 	my $medium_name = $suppl_method eq 'cdrom'
 	    ? (max(map { $_->{medium} =~ /^(\d+)s$/ ? $1 : 0 } values %{$o->{packages}{mediums}}) + 1) . "s"
 	    : int(keys %{$o->{packages}{mediums}}) + 1;
