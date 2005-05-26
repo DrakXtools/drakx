@@ -13,10 +13,8 @@ use log;
 
 
 sub check_iptables {
-    my ($in) = @_;
-
-    my $existing_config = -f "$::prefix/etc/sysconfig/iptables";
-    $existing_config ||= $::isStandalone && do {
+    -f "$::prefix/etc/sysconfig/iptables" ||
+    $::isStandalone && do {
 	system('modprobe iptable_nat');
 	-x '/sbin/iptables' && listlength(`/sbin/iptables -t nat -nL`) > 8;
     };
