@@ -912,6 +912,10 @@ sub set {
 	move::handleI18NClp($locale->{lang});
 	put_in_hash(\%ENV, i18n_env($locale));
 	return;
+    } elsif (!$::isInstall) {
+	put_in_hash(\%ENV, i18n_env($locale));
+	bindtextdomain();
+	return;
     }
 
     my $lang = $locale->{lang};
