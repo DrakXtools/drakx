@@ -1,7 +1,7 @@
 <list no-arch-libraries="on">
 
 <from expand="binary">
-  ash bsh echo
+  ash echo
   cpio gzip bzip2
   <if-not ARCH="ppc">
     fdisk
@@ -57,7 +57,7 @@
   </if>
 
   <if set="DEBUG_INSTALL">
-    strace
+    strace bash
   </if>
 </from>
 

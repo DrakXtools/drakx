@@ -251,7 +251,7 @@ sub install {
 	    while (1) {
 		push @files, $f;
 		my $l = readlink($f) or last;
-		if ($l =~ m!/!) {
+		if ($l =~ m!/! && $l !~ m!^\.\..*/s?bin/[^/]+$!) {
 		    warn "keeping symlink $f -> $l as is\n";
 		    last;
 		}
