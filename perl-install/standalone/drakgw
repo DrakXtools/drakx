@@ -62,7 +62,7 @@ my %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } network::ethernet
 my $shorewall = network::shorewall::read();
 my $choice;
 my $gw_enabled;
-my ($lan_interface_name, $lan_intf, $internal_domain_name);
+my ($net_interface_name, $lan_interface_name, $lan_intf, $internal_domain_name);
 my $use_dhcpd = 1;
 my $use_caching_dns = 1;
 my $use_caching_proxy = 1;
@@ -87,11 +87,11 @@ Make sure you have configured your Network/Internet access using drakconnect bef
 Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."),
 	      post => sub {
 		  $gw_enabled = !$shorewall->{disabled} && grep { !/^#/ } cat_($masq_file);
-		  return $gw_enabled ? "reconfigure" : lan_interface_step();
+		  return $gw_enabled ? "ask_reconfigure" : "choose_net_interface";
 	      },
 	     },
 
-	     reconfigure =>
+	     ask_reconfigure =>
 	     {
 	      name => sub {
 		  $gw_enabled ?
@@ -116,7 +116,28 @@ What would you like to do?"); #- FIXME : not used for now
 		      gw_disable();
 		      return "end_disabled";
 		  } elsif ($choice eq "Reconfigure") {
-		      return lan_interface_step();
+		      return "choose_net_interface";
+		  }
+	      },
+	     },
+
+	     choose_net_interface =>
+	     {
+	      pre => sub {
+		  $net_interface_name = $shorewall->{net_interface};
+	      },
+	      name => translate($network::shorewall::ask_shorewall_interface_label),
+	      data => network::shorewall::shorewall_interface_choices(\$net_interface_name),
+	      post => sub {
+		  network::shorewall::set_net_interface($shorewall, $net_interface_name);
+		  my $locals = @{$shorewall->{loc_interface}};
+		  if ($locals == 0) {
+		      return "end_no_lan_interface";
+		  } elsif ($locals == 1) {
+		      $lan_interface_name = $shorewall->{loc_interface}[0];
+		      return "one_lan_interface";
+		  } else {
+		      return "choose_lan_interface";
 		  }
 	      },
 	     },
@@ -334,19 +355,6 @@ wizards->new->safe_process($wiz, $in);
 sub format_interfaces {
     my ($interface) = @_;
     $eth_intf{$interface} || $interface;
-}
-
-sub lan_interface_step() {
-    network::shorewall::read_default_interfaces($shorewall, $in);
-    my $locals = @{$shorewall->{loc_interface}};
-    if ($locals == 0) {
-	return "end_no_lan_interface";
-    } elsif ($locals == 1) {
-	$lan_interface_name = $shorewall->{loc_interface}[0];
-	return "one_lan_interface";
-    } else {
-	return "choose_lan_interface";
-    }
 }
 
 sub end_step() {
