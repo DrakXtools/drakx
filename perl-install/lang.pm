@@ -582,7 +582,7 @@ my %IM_config =
             XMODIFIERS => '@im=nabi',
            },
 
-   scim => {
+   'scim+(default)' => {
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
@@ -610,9 +610,8 @@ my %IM_config =
                  },
 );
 
-$IM_config{'scim+uim'} = $IM_config{scim};
-
-sub get_ims() { keys %IM_config }
+sub get_ims() { use MDK::Common; use Data::Dumper; output("/tmp/dbg", Dumper(\%IM_config));
+    keys %IM_config }
            
 
 
@@ -657,7 +656,7 @@ sub set_default_im {
 
 set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
 # CJK default input methods:
-set_default_im('scim',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
+set_default_im('scim+(default)',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
 
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
@@ -670,14 +669,13 @@ my %IM2packages = (
                               zh => [ qw(iiimf-engines-sun-chinese) ],
                              },
                    kinput2 => { generic => [ 'kinput2-wnn' ] },
-                   'scim' => {
+                   'scim+(default)' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
                               ja => [ qw(scim-anthy scim-input-pad) ],
                               ko => [ qw(scim-hangul) ],
                               zh => [ qw(scim-pinyin scim-tables scim-chewing) ],
                              },
-                   'scim+uim' => { generic => [ qw(scim-uim) ] },
                    'uim' => { generic => [ qw(uim-gtk uim-anthy) ] },
                    'vi' =>  { generic => [ 'x-unikey' ] },
                   );
@@ -690,6 +688,11 @@ sub IM2packages {
     my $packages = $IM2packages{$im}{$lang} || $IM2packages{$im}{generic};
     return $packages ? @$packages : $im;
 }
+
+# enable to select extra SCIM combinaisons:
+my @SCIM_aliasees = qw(anthy canna fcitx m17n prime skk uim);
+$IM2packages{"scim+$_"} = { generic => [ "scim-$_" ] } foreach @SCIM_aliasees;
+$IM_config{"scim+$_"} = $IM_config{'scim+(default)'} foreach @SCIM_aliasees; 
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
