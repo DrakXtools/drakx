@@ -3,7 +3,6 @@ package network::tools; # $Id$
 use strict;
 use common;
 use run_program;
-use fsedit;
 use c;
 use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
@@ -168,37 +167,6 @@ sub remove_initscript() {
         log::explanations("Removed internet service");
     }
 }
-
-sub use_windows {
-    my ($file) = @_;
-    my $all_hds = fsedit::get_hds(); 
-    fs::get_info_from_fstab($all_hds);
-    if (my $part = find { $_->{device_windobe} eq 'C' } fs::get::fstab($all_hds)) {
-	my $source = find { -d $_ && -r "$_/$file" } map { "$part->{mntpoint}/$_" } qw(windows/system winnt/system windows/system32/drivers winnt/system32/drivers);
-	log::explanations("Seek in $source to find firmware");
-	$source;
-    } else {
-	my $failed = N("No partition available");
-	log::explanations($failed);
-	undef, $failed;
-    }
-}
-
-sub use_floppy {
-    my ($in, $file) = @_;
-    my $floppy = detect_devices::floppy();
-    $in->ask_okcancel(N("Insert floppy"),
-		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
-    if (eval { fs::mount(devices::make($floppy), '/mnt', 'vfat', 'readonly'); 1 }) {
-	log::explanations("Mounting floppy device $floppy in /mnt");
-	'/mnt';
-    } else {
-	my $failed = N("Floppy access error, unable to mount device %s", $floppy);
-	log::explanations($failed);
-	undef, $failed;
-    }
-}
-
 
 sub is_dynamic_ip {
   my ($intf) = @_;

@@ -12,6 +12,7 @@ use fs;
 use mouse;
 use network::network;
 use network::tools;
+use network::thirdparty;
 use MDK::Common::Globals "network", qw($in);
 
 sub detect {
@@ -85,7 +86,7 @@ sub real_main {
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
-      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider, $adsl_vpi, $adsl_vci);
+      my ($adsl_type, @adsl_devices, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider, $adsl_vpi, $adsl_vci);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
@@ -775,28 +776,14 @@ Take a look at http://www.linmodems.org"),
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
                                list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $_[0] } } ],
+		    complete => sub {
+			exists $adsl_cards{$ntf_name} && !network::thirdparty::setup_device($in, 'dsl', $adsl_cards{$ntf_name}[0]);
+		    },
                     post => sub {
-                        my %packages = (
-                                        'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'eagle-usb',  "/sbin/eaglectrl" ],
-                                        'speedtouch' => [ 'speedtouch', "/usr/sbin/modem_run" ],
-                                       );
-                        return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
                         if (exists $adsl_cards{$ntf_name}) {
                             my $modem;
                             ($ntf_name, $modem) = @{$adsl_cards{$ntf_name}};
-                            # FIXME: check that the package installation succeeds, else retry or abort
-                            $in->do_pkgs->ensure_is_installed(@{$packages{$ntf_name}}) if $packages{$ntf_name};
-                            if ($ntf_name eq 'speedtouch') {
-                                $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "/usr/share/speedtouch/mgmt.o");
-                                return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
-                            }
                             $netcnx->{bus} = $modem->{bus} if $ntf_name eq 'bewan';
-                            if ($ntf_name eq 'bewan' && !$::testing) {
-                                if (my $unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
-                                    $in->do_pkgs->install(@$unicorn_packages);
-                                }
-                            }
                         }
                         if (exists($isdn_cards{$ntf_name})) {
                             require network::isdn;
@@ -832,61 +819,6 @@ Take a look at http://www.linmodems.org"),
                         }
                         return 'adsl_protocol';
                     },
-                   },
-
-
-                   adsl_speedtouch_firmware =>
-                   {
-                    name => N("You need the Alcatel microcode.
-You can provide it now via a floppy or your windows partition,
-or skip and do it later."),
-                    data => [ { label => "", val => \$adsl_answer, type => "list",
-                                list => [ N("Use a floppy"), N("Use my Windows partition"), N("Do it later") ], }
-                            ],
-                    post => sub {
-                        my $destination = "$::prefix/usr/share/speedtouch/";
-                        my ($file, $source, $mounted);
-                        if ($adsl_answer eq N("Use a floppy")) {
-                            $mounted = 1;
-                            $file = 'mgmt.o';
-                            ($source, $adsl_failed) = network::tools::use_floppy($in, $file);
-                        } elsif ($adsl_answer eq N("Use my Windows partition")) {
-                            ($source, $adsl_failed) = network::tools::use_windows($file = 'alcaudsl.sys');
-                        }
-                        return "adsl_no_firmawre" if $adsl_answer eq N("Do it later");
-
-                        my $_b = $mounted && before_leaving { fs::umount('/mnt') };
-                        if (!$adsl_failed) {
-                            if (-e "$source/$file") { 
-                                cp_af("$source/$file", $destination) if !$::testing;
-                            } else {
-                                $adsl_failed = N("Firmware copy failed, file %s not found", $file);
-                            }
-                        }
-                        log::explanations($adsl_failed || "Firmware copy $file in $destination succeeded");
-                        -e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
-
-                        # kept translations b/c we may want to reuse it later:
-                        my $_msg = N("Firmware copy succeeded");
-                        return $adsl_failed ? 'adsl_copy_firmware_failled' : 'adsl_provider';
-                    },
-                   },
-
-
-                   adsl_copy_firmware_failled =>
-                   {
-                    name => sub { $adsl_failed },
-                    next => 'adsl_provider',
-                   },
-
-
-                   "adsl_no_firmawre" =>
-                   {
-                    name => N("You need the Alcatel microcode.
-Download it at:
-%s
-and copy the mgmt.o in /usr/share/speedtouch", 'http://www.speedtouch.com/supuser.htm'),
-                    next => "adsl_provider",
                    },
 
 
@@ -1276,6 +1208,7 @@ See iwpriv(8) man page for further information."),
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'wpa_supplicant'));
                             return 1;
                         }
+			!network::thirdparty::setup_device($in, 'wireless', $module);
                     },
                     post => sub {
                         delete $ethntf->{WIRELESS_ENC_KEY};
