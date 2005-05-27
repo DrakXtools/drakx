@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.18mdk
+Release: 0.19mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri May 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.19mdk
+- drakedm: handle /etc/X11/dm.d/* entries (as proposed by Loic Baudry)
+- localedrake:
+  o display SCIM combinaisons in a sub menu
+  o enable to select extra SCIM combinaisons: scim+anthy, scim+canna,
+    scim+fcitx, scim+m17n, scim+prime, and scim+skk;
+
 * Fri May 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.18mdk
 - drakgw, drakshorewall: misc fixes (blino)
 - draksplash (blino):
