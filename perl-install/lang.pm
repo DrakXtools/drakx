@@ -610,8 +610,7 @@ my %IM_config =
                  },
 );
 
-sub get_ims() { use MDK::Common; use Data::Dumper; output("/tmp/dbg", Dumper(\%IM_config));
-    keys %IM_config }
+sub get_ims() { keys %IM_config }
            
 
 
