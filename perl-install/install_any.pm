@@ -1111,16 +1111,6 @@ sub install_urpmi {
 #-###############################################################################
 #- kde stuff
 #-###############################################################################
-sub kderc_largedisplay {
-    my ($prefix) = @_;
-
-    update_gnomekderc($_, 'KDE', 
-		     Contrast => 7,
-		     kfmIconStyle => "Large",
-		     kpanelIconStyle => "Normal", #- to change to Large when icons looks better
-		     KDEIconStyle => "Large") foreach list_skels($prefix, '.kderc');
-}
-
 sub kdemove_desktop_file {
     my ($prefix) = @_;
     my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk FLOPPY.kdelnk CDROM.kdelnk);

@@ -887,11 +887,7 @@ sub configureX {
     configureXAfter($o);
 }
 sub configureXAfter {
-    my ($o) = @_;
-    if ($o->{X}{default_depth} >= 16 && $o->{X}{resolution_wanted} >= 1024) {
-	log::l("setting large icon style for kde");
-	install_any::kderc_largedisplay($o->{prefix});
-    }
+    my ($_o) = @_;
 }
 
 #------------------------------------------------------------------------------
