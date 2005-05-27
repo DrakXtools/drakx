@@ -184,7 +184,6 @@ sub errorOpeningFile($) {
     }
 
     #- Do not unselect supplementary CDs.
-    #return if $asked_medium =~ /^\d+s$/;
     return if install_medium::by_id($asked_medium)->is_suppl_cd;
 
     #- keep in mind the asked medium has been refused on this way.
@@ -451,9 +450,7 @@ sub selectSupplMedia {
 	    'Network (http)' => 'http',
 	    'Network (ftp)' => 'ftp',
 	}->{$suppl};
-	my $medium_name = $suppl_method eq 'cdrom'
-	    ? (max(map { $_->{medium} =~ /^(\d+)s$/ ? $1 : 0 } values %{$o->{packages}{mediums}}) + 1) . "s"
-	    : int(keys %{$o->{packages}{mediums}}) + 1;
+	my $medium_name = int(keys %{$o->{packages}{mediums}}) + 1;
 	#- configure network if needed
 	prep_net_suppl_media($o) if !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/;
 	local $::isWizard = 0;

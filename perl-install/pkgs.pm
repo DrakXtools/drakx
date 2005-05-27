@@ -236,7 +236,7 @@ sub allMediums {
     sort {
 	#- put supplementary media at the end
 	my @x = ($a, $b);
-	foreach (@x) { /(\d+)s/ and $_ = 100 + $1 }
+	foreach (@x) { install_medium::by_id($_, $packages)->is_suppl and $_ += 100 }
 	$x[0] <=> $x[1];
     } keys %{$packages->{mediums}};
 }
@@ -1484,10 +1484,7 @@ sub by_id {
 }
 
 #- is this medium a supplementary medium ?
-sub is_suppl {
-    my ($self) = @_;
-    $self->{issuppl} || $self->{medium} =~ /^\d+s$/; #- XXX remove medium name kludge
-}
+sub is_suppl { my ($self) = @_; $self->{issuppl} }
 
 sub mark_suppl { my ($self) = @_; $self->{issuppl} = 1 }
 
