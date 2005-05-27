@@ -1794,12 +1794,8 @@ sub disable_user_view() {
 
 sub set_security {
     my ($o) = @_;
-    {
-	local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
-	local $ENV{DURING_INSTALL} = 1;
-	security::level::set($o->{security});
-    }
     require security::various;
+    security::level::set($o->{security});
     security::various::config_libsafe($::prefix, $o->{libsafe});
     security::various::config_security_user($::prefix, $o->{security_user});
 }
