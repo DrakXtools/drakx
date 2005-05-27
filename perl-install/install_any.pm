@@ -582,13 +582,6 @@ sub setup_suppl_medium {
     $supplmedium->mark_suppl;
 }
 
-sub _media_rank {
-    my ($x) = @_;
-    my ($y, $s) = $x =~ /(\d+)(s?)\)\.cz/;
-    $s and $y += 100;
-    $y;
-}
-
 sub load_rate_files {
     my ($o) = @_;
     #- must be done after getProvides
