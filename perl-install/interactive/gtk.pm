@@ -558,6 +558,8 @@ sub ask_fromW {
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 		$e->{formatted_list} = \@formatted_list;
+		my $sep = "\\" . $e->{separator};
+          my @flat_formatted_list = $e->{separator} ? map { top(split($sep, $_)) } @formatted_list : @formatted_list;
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		my $width = $l[@l / 16]; # take the third octile (think quartile)
@@ -582,6 +584,8 @@ sub ask_fromW {
               $w->set_attributes($renderer, "pixbuf", 1);
               $w->pack_start($renderer = Gtk2::CellRendererText->new, 0);
               $w->set_attributes($renderer, "text", 2);
+              ${$e->{val}} = top(split($sep, ${$e->{val}})) if $e->{separator};
+
               $w->set_active($model->{indexes}{ ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0] });
           }
 		($real_w, $w) = ($w, $w->entry);
@@ -596,18 +600,18 @@ sub ask_fromW {
 		    my $s = may_apply($e->{format}, $_[0]);
               next if !($s ne $w->get_text && $_[0] ne $w->get_text);
               if ($model) {
-                  $w->set_active($model->{indexes}{$s});
+                  $model->set($w->get_active_iter, 0 => may_apply($e->{format}, $s));
+                  #$w->set_active($model->{indexes}{$s});
               } else  {
                   $w->set_text($s);
               }
 		};
 		$get = sub { 
-		    my $s;
-			if ($model) {
-				$s = { reverse %{$model->{indexes}} }->{$w->get_active};
-			} else { $s = $w->get_text }
-		    my $i = eval { find_index { $s eq $_ } @formatted_list };
-		    defined $i ? $e->{list}[$i] : $s;
+		    my $s = $model ? $model->get($w->get_active_iter, 0) : $w->get_text;
+		    my $i = eval { find_index { $s eq $_ } @flat_formatted_list };
+		    $s = $e->{list}[$i] if defined $i;
+              $s = top(split($sep, $s)) if $e->{separator};
+            $s;
 		};
 	    } else {
                 $w = Gtk2::Entry->new;
