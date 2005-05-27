@@ -300,7 +300,7 @@ sub dont_run_directly_stage2() {
 }
 
 sub spawnShell() {
-    return if $::o->{localInstall} || $::testing || dont_run_directly_stage2();
+    return if $::local_install || $::testing || dont_run_directly_stage2();
 
     if (my $shellpid = fork()) {
         output('/var/run/drakx_shell.pid', $shellpid);
