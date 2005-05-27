@@ -1119,11 +1119,6 @@ sub kderc_largedisplay {
 		     kfmIconStyle => "Large",
 		     kpanelIconStyle => "Normal", #- to change to Large when icons looks better
 		     KDEIconStyle => "Large") foreach list_skels($prefix, '.kderc');
-
-    substInFile {
-	s/^(GridWidth)=85/$1=100/;
-	s/^(GridHeight)=70/$1=75/;
-    } $_ foreach list_skels($prefix, '.kde/share/config/kfmrc');
 }
 
 sub kdemove_desktop_file {

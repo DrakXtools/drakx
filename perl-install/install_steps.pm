@@ -550,18 +550,6 @@ EOF
     install_any::disable_user_view() if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
-    foreach (list_skels($o->{prefix}, '.kde/share/config/kfmrc')) {
-	my $found;
-	substInFile {
-	    $found ||= /KFM Misc Defaults/;
-	    $_ .= 
-"[KFM Misc Defaults]
-GridWidth=85
-GridHeight=70
-" if eof && !$found;
-	} $_; 
-    }
-
     #- move some file after an upgrade that may be seriously annoying.
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
