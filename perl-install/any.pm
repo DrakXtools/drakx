@@ -790,6 +790,10 @@ sub selectCountry {
 
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
+
+    my $format = sub { local $_ = $_[0]; s/(.*)\+(.*)/\1|\1+$2/ if /\+/ ; $_ };
+    $locale->{IM} = $format->($locale->{IM});
+
     $in->ask_from_(
 		  { title => N("Country / Region"), 
 		    messages => N("Please choose your country."),
@@ -803,12 +807,13 @@ sub selectCountry {
 				 list => \@best, sort => 1 }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
 		      list => [ @countries ], advanced => scalar(@best) },
-		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), sort => 0, 
-		      list => [ N_("None"), sort(lang::get_ims()) ], format => sub { uc(translate($_[0])) },
+		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), sort => 0, separator => '|', not_edit => 1,
+		      list => [ N_("None"), map { $format->($_) } sort(lang::get_ims()) ], format => sub { uc(translate($_[0])) },
                 advanced => !$locale->{IM} || $locale->{IM} eq 'None',
               },
 		  ]) or return;
 
+    $locale->{IM} =~ s/.*\|//;
     $locale->{country} = $other || !@best ? $ext_country : $country;
 }
 
