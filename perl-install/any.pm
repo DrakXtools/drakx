@@ -791,7 +791,7 @@ sub selectCountry {
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
 
-    my $format = sub { local $_ = $_[0]; s/(.*)\+(.*)/\1|\1+$2/ if /\+/ ; $_ };
+    my $format = sub { $_[0] =~ /(.*)\+(.*)/ ? "$1|$1+$2" : $_[0] };
     $locale->{IM} = $format->($locale->{IM});
 
     $in->ask_from_(
