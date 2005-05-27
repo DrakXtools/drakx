@@ -186,8 +186,8 @@ sub errorOpeningFile($) {
     #- Do not unselect supplementary CDs.
     return if install_medium::by_id($asked_medium)->is_suppl_cd;
 
-    #- keep in mind the asked medium has been refused on this way.
-    #- this means it is no more selected.
+    #- keep in mind the asked medium has been refused.
+    #- this means it is no longer selected.
     install_medium::by_id($asked_medium)->refuse;
 
     #- on cancel, we can expect the current medium to be undefined too,
@@ -547,7 +547,7 @@ sub selectSupplMedia {
 		$medium_name,
 		'', #- rpmsdir
 		"Supplementary media $medium_name", #- description
-		1, # selected
+		1, #- selected
 		$f,
 	    );
 	    close $f;
@@ -1096,7 +1096,7 @@ sub install_urpmi {
 
 ";
 	} else {
-	    #- remove not selected media by removing hdlist and synthesis files copied.
+	    #- remove deselected media by removing copied hdlist and synthesis files
 	    log::l("removing media $name");
 	    unlink "$::prefix/var/lib/urpmi/hdlist.$name.cz";
 	    unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";

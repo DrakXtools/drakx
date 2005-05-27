@@ -307,7 +307,7 @@ sub selectPackage {
 sub unselectPackage($$;$) {
     my ($packages, $pkg, $o_otherOnly) = @_;
 
-    #- base package are not unselectable,
+    #- base packages are not unselectable,
     #- and already unselected package are no more unselectable.
     $pkg->flag_base and return;
     $pkg->flag_selected or return;
@@ -337,16 +337,15 @@ sub unselectAllPackages($) {
     log::l("unselecting all packages...");
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
-	    #- keep track of package that should be kept selected.
+	    #- keep track of packages that should be kept selected.
 	    $keep_selected{$_->id} = $_;
-	    log::l("...keeping " . $_->fullname);
 	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
 	    $_->set_flag_required(0);
 	    $_->set_flag_requested(0);
 	}
     }
-    #- clean staten, in order to start with a brand new set...
+    #- clean state, in order to start with a brand new set...
     $packages->{state} = {};
     $packages->resolve_requested($packages->{rpmdb}, $packages->{state}, \%keep_selected,
 				 callback_choices => \&packageCallbackChoices);
@@ -433,8 +432,6 @@ sub psUsingHdlists {
     }
 
     foreach my $h (@hdlists) {
-	#- make sure the first medium is always selected!
-	#- by default select all image.
 	my $medium = psUsingHdlist($method, $o_packages, @$h);
 	$o_callback and $o_callback->($medium, $o_hdlistsprefix, $method);
     }
@@ -716,8 +713,8 @@ sub setSelectedFromCompssList {
     $min_level;
 }
 
-#- usefull to know the size it would take for a given min_level/max_size
-#- just saves the selected packages, call setSelectedFromCompssList and restores the selected packages
+#- useful to know the size it would take for a given min_level/max_size
+#- just save the selected packages, call setSelectedFromCompssList, and restore the selected packages
 sub saveSelected {
     my ($packages) = @_;
     my $state = delete $packages->{state};
@@ -971,7 +968,7 @@ sub installTransactionClosure {
     #- search first usable medium (sorted by medium ordering).
     foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
 	unless ($_->selected) {
-	    #- this medium is not selected, but we have to make sure no package are left
+	    #- this medium is not selected, but we have to make sure no package is left
 	    #- in $id2pkg.
 	    if (defined $_->{start} && defined $_->{end}) {
 		foreach ($_->{start} .. $_->{end}) {
@@ -1064,9 +1061,9 @@ sub install {
     #- for root loopback'ed /boot
     my $loop_boot = loopback::prepare_boot();
 
-    #- first stage to extract some important informations
-    #- about the packages selected. this is used to select
-    #- one or many transaction.
+    #- first stage to extract some important information
+    #- about the selected packages. This is used to select
+    #- one or many transactions.
     my ($total, $nb);
     foreach my $pkg (@$toInstall) {
 	$packages{$pkg->id} = $pkg;
