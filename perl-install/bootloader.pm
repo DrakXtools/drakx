@@ -782,7 +782,7 @@ wait for default boot.
 	}
     }
 
-    #- remove existing libsafe, do not care if the previous one was modified by the user?
+    #- remove existing failsafe, do not care if the previous one was modified by the user?
     @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
     add_kernel($bootloader, $kernels[0],
