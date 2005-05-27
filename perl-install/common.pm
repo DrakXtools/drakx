@@ -35,7 +35,7 @@ sub sprintf_fixutf8 {
 }
 
 sub N {
-    $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see ugtk2.pm
+    $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see mygtk2.pm
     my $s = shift @_; my $t = translate($s);
     sprintf_fixutf8 $t, @_;
 }
