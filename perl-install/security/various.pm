@@ -8,23 +8,23 @@ use common;
 sub config_libsafe {
     my $setting = @_ > 1;
     my ($prefix, $libsafe) = @_;
-    my %t = getVarsFromSh("$prefix/etc/sysconfig/system");
     if ($setting) {
-        $t{LIBSAFE} = bool2yesno($libsafe);
-        setVarsInSh("$prefix/etc/sysconfig/system", \%t);
+        addVarsInSh("$prefix/etc/sysconfig/system", { LIBSAFE => bool2yesno($libsafe) });
+    } else {
+	my %t = getVarsFromSh("$prefix/etc/sysconfig/system");
+	text2bool($t{LIBSAFE});
     }
-    text2bool($t{LIBSAFE});
 }
 
 sub config_security_user {
     my $setting = @_ > 1;
     my ($prefix, $sec_user) = @_;
-    my %t = getVarsFromSh("$prefix/etc/security/msec/security.conf");
     if ($setting) {
-        $t{MAIL_USER} = $sec_user;
-	setVarsInSh("$prefix/etc/security/msec/security.conf", \%t);
+	addVarsInSh("$prefix/etc/security/msec/security.conf", { MAIL_USER => $sec_user });
+    } else {
+	my %t = getVarsFromSh("$prefix/etc/security/msec/security.conf");
+	$t{MAIL_USER};
     }
-    $t{MAIL_USER};
 }
 
 1;
