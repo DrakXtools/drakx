@@ -812,9 +812,6 @@ sub setupBootloaderBefore {
 	@$dict = grep { $_->[1] ne 'ide-scsi' } @$dict;
     });
 
-    if ($o->{miscellaneous}{HDPARM}) {
-	bootloader::set_append_with_key($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
-    }
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
 	bootloader::set_append_with_key($o->{bootloader}, mem => 'nopentium');
     }
@@ -913,8 +910,6 @@ sub configureXAfter {
 sub miscellaneousBefore {
     my ($o) = @_;
 
-    my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
-    $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
     require security::level;
     require security::various;
     $o->{security} ||= security::level::get();
