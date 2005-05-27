@@ -29,6 +29,9 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakedm-mdk.png";
 
 my $in = 'interactive'->vnew('su');
 
+# directory in which display managers put a config file
+my $dm_dir = '/etc/X11/dm.d';
+
 my $cfg_file = '/etc/sysconfig/desktop';
 
 my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ],
@@ -36,6 +39,14 @@ my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ]
           'KDE'   => [ N("MdkKDM (Mandriva Linux Display Manager)"), '/usr/bin/mdkkdm', 'mdkkdm' ],
           'XDM'   => [ N("XDM (X Display Manager)"), '/usr/bin/X11/xdm', 'xorg-x11' ],
           );
+
+# add non hard-wired display managers
+foreach (grep { !/\.rpm/ } glob("$dm_dir/*")) {
+    my %l = map { /(\S+)=(.*)/ } cat_($_);
+    if ($l{NAME}) {
+	$dm{$l{NAME}} ||= [ $l{DESCRIPTION}, $l{EXEC}, $l{PACKAGE} ];
+    }
+}
 
 my $dm;
 
