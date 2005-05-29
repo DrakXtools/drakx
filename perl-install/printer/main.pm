@@ -674,9 +674,9 @@ sub read_ppd_options ($) {
 	"foomatic-configure -P -q" .
 	 if_($printer->{currentqueue}{ppd} &&
 	     ($printer->{currentqueue}{ppd} ne '1'),
-	     " --ppd " . ($printer->{currentqueue}{ppd} !~ m!^/! ?
+	     " --ppd \'" . ($printer->{currentqueue}{ppd} !~ m!^/! ?
 			    "/usr/share/cups/model/" : "") .
-			   $printer->{currentqueue}{ppd}) .
+			   $printer->{currentqueue}{ppd} . "\'") .
 	($printer->{OLD_QUEUE} ?
 	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 	 ($printer->{SPECIAL_OPTIONS} ?
