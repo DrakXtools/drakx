@@ -140,7 +140,7 @@ sub write_interface_conf {
     defined($intf->{METRIC}) or $intf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($intf)),
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR),
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
                 qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
@@ -291,6 +291,45 @@ sub gateway {
     join(".", @masked);
 }
 
+
+sub netprofile_set {
+    my ($netc, $profile) = @_;
+    $netc->{PROFILE} = $profile;
+    system('/sbin/set-netprofile', $netc->{PROFILE});
+    log::explanations(qq(Switching to "$netc->{PROFILE}" profile));
+}
+
+sub netprofile_save {
+    my ($netc) = @_;
+    system('/sbin/save-netprofile', $netc->{PROFILE});
+    log::explanations(qq(Saving "$netc->{PROFILE}" profile));
+}
+
+sub netprofile_delete {
+    my ($profile) = @_;
+    return if !$profile || $profile eq "default";
+    rm_rf("$::prefix/etc/netprofile/profiles/$profile");
+    log::explanations(qq(Deleting "$profile" profile));
+}
+
+sub netprofile_add {
+    my ($netc, $profile) = @_;
+    return if !$profile || $profile eq "default" || member($profile, netprofile_list());
+    system('/sbin/clone-netprofile', $netc->{PROFILE}, $profile);
+    log::explanations(qq("Creating "$profile" profile));
+}
+
+sub netprofile_list() {
+    map { if_(m!([^/]*)/$!, $1) } glob("$::prefix/etc/netprofile/profiles/*/");
+}
+
+sub netprofile_read {
+    my ($netc) = @_;
+    my $config = { getVarsFromSh("$::prefix/etc/netprofile/current") };
+    $netc->{PROFILE} = $config->{PROFILE} || 'default';
+}
+
+
 sub miscellaneous_choose {
     my ($in, $u) = @_;
 
@@ -398,6 +437,7 @@ sub read_all_conf {
     add2hash($netc, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf());
+
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
 	my ($device) = /^ifcfg-([A-Za-z0-9.:_-]+)$/;
 	next if $device =~ /.rpmnew$|.rpmsave$/;
@@ -407,6 +447,7 @@ sub read_all_conf {
 	    $intf->{DEVICE} ||= $device;
 	}
     }
+    netprofile_read($netc);
     if (my $default_intf = network::tools::get_default_gateway_interface($netc, $intf)) {
         $netcnx->{type} ||= network::tools::get_interface_type($intf->{$default_intf});
     }

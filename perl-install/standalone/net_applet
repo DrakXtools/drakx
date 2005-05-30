@@ -81,11 +81,11 @@ my %actions = (
                },
                'chooseProfile' => {
                    name => N("Profiles"),
-                   choices => sub { network::netconnect::get_profiles() },
-                   choice_selected => sub { $_[0] eq $netcnx->{PROFILE} },
+                   choices => sub { network::network::netprofile_list()) },
+                   choice_selected => sub { $_[0] eq $netc->{PROFILE} },
                    launch => sub {
-                       $netcnx->{PROFILE} = $_[0];
-                       network::tools::bg_command_as_root('/sbin/set-netprofile', $netcnx->{PROFILE});
+                       $netc->{PROFILE} = $_[0];
+                       network::tools::bg_command_as_root('/sbin/set-netprofile', $netc->{PROFILE});
                    }
                },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetworkForce() } },

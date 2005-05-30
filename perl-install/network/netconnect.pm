@@ -1524,47 +1524,9 @@ sub main {
     }
 }
 
-sub set_profile {
-    my ($netcnx) = @_;
-    system('/sbin/set-netprofile', $netcnx->{PROFILE});
-    log::explanations(qq(Switching to "$netcnx->{PROFILE}" profile));
-}
-
-sub save_profile {
-    my ($netcnx) = @_;
-    system('/sbin/save-netprofile', $netcnx->{PROFILE});
-    log::explanations(qq(Saving "$netcnx->{PROFILE}" profile));
-}
-
-sub del_profile {
-    my ($profile) = @_;
-    return if !$profile || $profile eq "default";
-    rm_rf("$::prefix/etc/netprofile/profiles/$profile");
-    log::explanations(qq(Deleting "$profile" profile));
-}
-
-sub add_profile {
-    my ($netcnx, $profile) = @_;
-    return if !$profile || $profile eq "default" || member($profile, get_profiles());
-    system('/sbin/clone-netprofile', $netcnx->{PROFILE}, $profile);
-    log::explanations(qq("Creating "$profile" profile));
-}
-
-sub get_profiles() {
-    map { if_(m!([^/]*)/$!, $1) } glob("$::prefix/etc/netprofile/profiles/*/");
-}
-
 sub read_net_conf {
     my ($netcnx, $netc, $intf) = @_;
-    my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
-
-    $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
     network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
-
-    foreach ('NET_DEVICE', 'NET_INTERFACE') {
-        $netc->{$_} = $netcnx->{$_} if $netcnx->{$_};
-    }
-    $netcnx->{$netcnx->{type}} ||= {} if $netcnx->{type};
 }
 
 sub start_internet {
