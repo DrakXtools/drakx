@@ -414,7 +414,8 @@ sub install_packages {
 }
 
 sub setup_device {
-    my ($in, $category, $driver) = @_;
+    my ($in, $category, $driver, $o_config, $o_fields) = @_;
+
     if (my $settings = find_settings($category, $driver)) {
 	log::explanations(qq(Found settings for driver "$driver" in category "$category"));
 
@@ -437,6 +438,10 @@ sub setup_device {
     } else {
 	log::explanations(qq(No settings found for driver "$driver" in category "$category"));
     }
+
+    #- assign requested settings, erase with undef if no settings have been found
+    $o_config->{$_} = $settings->{$_} foreach ($o_fields);
+
     1;
 }
 
