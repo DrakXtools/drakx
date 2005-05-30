@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.19mdk
+Release: 0.20mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon May 30 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.20mdk
+- handle more DVB cards
+- drakconnect: third party support update (blino):
+  o point the user to the relevant packages/documentation/url if
+    needed,
+  o do not allow to configure a device if its requirements aren't
+    satisfied
+- harddrake service: load drivers for newly added devices so that they
+  work out of the box on first boot after card plugging(AGP, IDE, DVB,
+  SCSI, TV)
+- printerdrake: support for PPD file names with spaces (till, #16172)
+
 * Fri May 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.19mdk
 - drakedm: handle /etc/X11/dm.d/* entries (as proposed by Loic Baudry)
 - localedrake:
