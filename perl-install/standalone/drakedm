@@ -41,7 +41,7 @@ my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ]
           );
 
 # add non hard-wired display managers
-foreach (grep { !/\.rpm/ } glob("$dm_dir/*")) {
+foreach (glob("$dm_dir/*.conf")) {
     my %l = map { /(\S+)=(.*)/ } cat_($_);
     if ($l{NAME}) {
 	$dm{$l{NAME}} ||= [ $l{DESCRIPTION}, $l{EXEC}, $l{PACKAGE} ];
