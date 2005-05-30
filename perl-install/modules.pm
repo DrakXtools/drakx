@@ -188,8 +188,7 @@ sub write_preload_conf {
     my ($conf) = @_;
     my @l;
     push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
-    push @l, intersection([ list_modules::category2modules('multimedia/dvb'), list_modules::category2modules('multimedia/tv') ],
-			  [ map { $_->{driver} } detect_devices::probeall() ]);
+    push @l, map { $_->{driver} } probe_category($_) foreach qw(multimedia/dvb multimedia/tv);
     push @l, map { if_($_->{driver} =~ /^Module:(.*)/, $1) } detect_devices::probeall();
     push @l, 'nvram' if detect_devices::isLaptop();
     push @l, map { $_->{driver} } probe_category('various/laptop');
