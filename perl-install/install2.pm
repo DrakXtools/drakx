@@ -448,7 +448,7 @@ sub main {
     }
     if ($::local_install) {
 	push @auto, 
-	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 
+#	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 
 	  'selectInstallClass', 'doPartitionDisks', 'formatPartitions', 'setupBootloader';
 	fs::mount_usbfs(''); #- do it now so that when_load doesn't do it
     }
