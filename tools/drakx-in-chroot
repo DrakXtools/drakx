@@ -12,7 +12,7 @@ my $LIVE_LOCATION_REL = 'install/stage2/live/';
 my $CLP_LOCATION_REL = 'install/stage2/';
 my $CLP_FILE_REL = $CLP_LOCATION_REL . 'mdkinst.clp';
 
-my ($repository, $dir) = @ARGV;
+(my $repository, my $dir, @ARGV) = @ARGV;
 my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
 
 my $sudo;
@@ -23,10 +23,11 @@ if ($>) {
 
 if (-d $SLASH_LOCATION) {
     umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
+    sys("$sudo rm -f $SLASH_LOCATION/var/lib/rpm");
     rm_rf($SLASH_LOCATION);
 }
 
-mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
+mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
 
 if (-d "$repository/$LIVE_LOCATION_REL") {
     sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
@@ -37,24 +38,30 @@ if (-d "$repository/$LIVE_LOCATION_REL") {
 }
 
 sys("$sudo mount -o bind $dir $SLASH_LOCATION$prefix_ROOTED");
+sys("$sudo mount -o bind $repository $SLASH_LOCATION$IMAGE_LOCATION_ROOTED");
 sys("$sudo mount -t proc none $SLASH_LOCATION/proc");
 create_initial_symlinks();
 create_initial_devices();
 
 output("$SLASH_LOCATION/etc/hosts", "127.0.0.1 localhost\n") if ! -e "$SLASH_LOCATION/etc/hosts";
 
+my $Xnest_pid;
 if (whereis_binary('Xnest')) {
     my $DISPLAY = ':8';
-    system("Xnest $DISPLAY -ac -geometry 800x600 &");
-    $ENV{DISPLAY} = $DISPLAY;
+    $Xnest_pid = fork();
+    if (!$Xnest_pid) {
+	exec 'Xnest', $DISPLAY, '-ac', '-geometry', '800x600' or die "Xnest failed\n";
+    }
+    $ENV{DISPLAY} = 'localhost' . $DISPLAY;
 }
 
 if (my $pid = fork()) {
     waitpid $pid, 0;
     umount_all() == 0 or warn "umounting failed\n";
+    kill 15, $Xnest_pid;
 } else {
     $ENV{HOME} = '/';
-    my $cmd = '/usr/bin/install2 --local_install';
+    my $cmd = join(' ', "/usr/bin/runinstall2 --local_install", @ARGV);
     exec "$sudo chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
 }
 

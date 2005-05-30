@@ -1567,7 +1567,7 @@ sub getHds {
 
     $o->{all_hds} = $all_hds;
     $o->{fstab} = [ fs::get::really_all_fstab($all_hds) ];
-    fs::merge_info_from_mtab($o->{fstab});
+    fs::merge_info_from_mtab($o->{fstab}) if !$::local_install;
 
     my @win = grep { isFat_or_NTFS($_) && maybeFormatted($_) && !$_->{is_removable} } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
@@ -1784,7 +1784,7 @@ my $clp_name = 'mdkinst.clp';
 sub clp_on_disk() { "$::prefix/tmp/$clp_name" }
 
 sub move_clp_to_disk() {
-    return if -e clp_on_disk();
+    return if -e clp_on_disk() || $::local_install;
 
     my ($loop, $current_clp) = devices::find_clp_loop($clp_name) or return;
     log::l("move_clp_to_disk: copying $current_clp to ", clp_on_disk());

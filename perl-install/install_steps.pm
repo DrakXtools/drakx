@@ -201,6 +201,14 @@ sub doPartitionDisksAfter {
 	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];
+
+    if ($::local_install) {
+	my $p = fs::get::mntpoint2part($::prefix, [ fs::read_fstab('', '/proc/mounts') ]);
+	my $part = fs::get::device2part($p->{device}, $o->{fstab});
+	$part->{mntpoint} = '/';
+	$part->{isMounted} = 1;
+    }
+
     fs::get::root_($o->{fstab}) or die "Oops, no root partition";
 
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) {
@@ -261,6 +269,8 @@ sub rebootNeeded($) {
 
 sub choosePartitionsToFormat($$) {
     my ($_o, $fstab) = @_;
+
+    return if $::local_install;
 
     foreach (@$fstab) {
 	$_->{mntpoint} = "swap" if isSwap($_);

@@ -294,7 +294,6 @@ sub addUser {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
-    return if $::local_install;
 
     $o->{modules_conf}->write;
 
@@ -341,6 +340,7 @@ sub start_i810fb() {
 #- MAIN
 #-######################################################################################
 sub main {
+#-    $SIG{__DIE__} = sub { warn "DIE " . backtrace() . "\n" };
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; log::l($msg);
 	$o->ask_warn('', $msg);
@@ -445,6 +445,12 @@ sub main {
     if ($::move) {
         require move;
         move::init($o);
+    }
+    if ($::local_install) {
+	push @auto, 
+	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 
+	  'selectInstallClass', 'doPartitionDisks', 'formatPartitions', 'setupBootloader';
+	fs::mount_usbfs(''); #- do it now so that when_load doesn't do it
     }
 
     cp_f(glob('/stage1/tmp/*'), '/tmp');
