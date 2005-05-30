@@ -429,16 +429,7 @@ sub real_main {
                         if ($isdn_name eq $my_isdn) {
                             return "isdn_ask";
                         } elsif ($isdn_name eq N("External ISDN modem")) {
-                            detect($modules_conf, $netc->{autodetect}, 'modem');
                             $netcnx->{type} = $netc->{isdntype} = 'isdn_external';
-                            $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
-                            network::isdn::read_config($netcnx->{isdn_external});
-                            #- FIXME: seems to be specific to ZyXEL Adapter Omni.net/TA 128/Elite 2846i
-                            #- it does not even work with TA 128 modems
-                            #- http://bugs.mandrakelinux.com/query.php?bug=1033
-                            $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
-                            require network::modem;
-                            $modem = $netcnx->{isdn_external};
                             return "modem";
                         }
 
@@ -568,9 +559,15 @@ Take a look at http://www.linmodems.org"),
                    modem =>
                    {
                     pre => sub {
-                        require network::modem;
-                        detect($modules_conf, $netc->{autodetect}, 'modem');
-                        $modem ||= $netcnx->{modem} ||= {};
+			require network::modem;
+			detect($modules_conf, $netc->{autodetect}, 'modem');
+			$modem = {};
+			if ($netcnx->{type} eq 'isdn_external') {
+			    #- FIXME: seems to be specific to ZyXEL Adapter Omni.net/TA 128/Elite 2846i
+			    #- it does not even work with TA 128 modems
+			    #- http://bugs.mandrakelinux.com/query.php?bug=1033
+			    $modem->{special_command} = 'AT&F&O2B40';
+			}
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
