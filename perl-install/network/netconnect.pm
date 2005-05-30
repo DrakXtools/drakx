@@ -570,55 +570,28 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         require network::modem;
                         detect($modules_conf, $netc->{autodetect}, 'modem');
+                        $modem ||= $netcnx->{modem} ||= {};
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
                         [ { label => N("Modem"), type => "list", val => \$modem_name, allow_empty_list => 1,
                             list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ];
                     },
+		    complete => sub {
+			my $driver = $netc->{autodetect}{modem}{$modem_name}{driver} or return 0;
+			!network::thirdparty::setup_device($in, 'rtc', $driver, $modem, qw(device));
+		    },
                     post => sub {
-                        $modem ||= $netcnx->{modem} ||= {};
                         return 'choose_serial_port' if $modem_name eq N("Manual choice");
-                        $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
-
-                        return "ppp_provider" if $ntf_name =~ m!^/dev/!;
-                        return "choose_serial_port" if !$ntf_name;
-
-                        my $type;
-
-                        my %pkgs2path = (
-                                         hcfpcimodem => "/usr/sbin/hcfpciconfig",
-                                         hsfmodem => "/usr/sbin/hsfconfig",
-                                         ltmodem => "/etc/devfs/conf.d/ltmodem.conf",
-                                         slmodem => "/usr/sbin/slmodemd",
-                                        );
-
-                        my %devices = (
-                                       hcfpcimodem => '/dev/ttySHSF0',
-                                       hsfmodem => '/dev/ttySHSF0',
-                                       ltmodem => '/dev/ttyS14',
-                                       slmodem => '/dev/ttySL0',
-                                      );
-
-                        if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
-                            $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
-                            $driver =~ /^Hsf:/ and $type = "hsfmodem";
-                            $driver =~ /^LT:/  and $type = "ltmodem";
-                            #- we may need a better agreement to use list_modules::category2modules('network/slmodem')
-                            member($driver, list_modules::category2modules('network/slmodem')) and $type = "slmodem";
-                            if ($type && (my $packages = $in->do_pkgs->check_kernel_module_packages("$type-kernel", if_(! -f $pkgs2path{$type}, $type)))) {
-                                $in->do_pkgs->install(@$packages);
-                                # start slmodemd when installing it (thus preventing the average user to have to restart
-                                # his machine in order to get a working connection):
-                                system("service slmodemd start") if $::isStandalone && $type eq 'slmodem';
-                                $modem->{device} = $devices{$type} || '/dev/modem';
-                                return "ppp_provider";
-                            }
-                        }
-
-                        return "no_supported_winmodem";
-                    },
-                   },
+			if (exists $netc->{autodetect}{modem}{$modem_name}{device}) {
+			    #- this is a serial probed modem
+			    $modem->{device} = $netc->{autodetect}{modem}{$modem_name}{device};
+			    return "ppp_provider";
+			} else {
+			    #- driver exists but device field hasn't been filled by network::thirdparty::setup_device
+			    return "no_supported_winmodem";
+			}
+		    },
 
                    choose_serial_port =>
                    {
@@ -632,7 +605,6 @@ Take a look at http://www.linmodems.org"),
                             list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ];
                         },
                     post => sub {
-                        $ntf_name = $modem->{device};
                         return 'ppp_provider';
                     },
                    },
