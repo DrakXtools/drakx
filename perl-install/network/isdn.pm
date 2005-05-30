@@ -111,9 +111,6 @@ sub read_config {
     }
 
     $isdn->{passwd} = network::tools::passwd_by_login($isdn->{login});
-    #$isdn->{description} = '';
-    #$isdn->{vendor} = '';
-    #$isdn->{passwd2} = '';
 }
 
 my $file = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
