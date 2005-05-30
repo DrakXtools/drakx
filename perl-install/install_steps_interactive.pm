@@ -1322,7 +1322,7 @@ Do you really want to quit now?"), 0);
 	{
 	 messages => formatAlaTeX(install_messages::install_completed()),
 	 interactive_help_id => 'exitInstall',
-	 ok => N("Reboot"),
+	 ok => $::local_install ? N("Quit") : N("Reboot"),
 	},      
 	[
 	 if_(arch() !~ /^ppc/,
