@@ -429,11 +429,10 @@ sub real_main {
                         if ($isdn_name eq $my_isdn) {
                             return "isdn_ask";
                         } elsif ($isdn_name eq N("External ISDN modem")) {
-                            $netcnx->{type} = $netc->{isdntype} = 'isdn_external';
+                            $netcnx->{type} = 'isdn_external';
                             return "modem";
                         }
 
-                        $netc->{isdntype} = 'isdn_internal';
                         # FIXME: some of these should be taken from isdn db
                         $netcnx->{isdn_internal} = $isdn = { map { $_ => $isdn_cards{$isdn_name}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
 
