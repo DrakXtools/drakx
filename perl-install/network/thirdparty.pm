@@ -55,6 +55,8 @@ use log;
 #-     function to call if the package installation fails
 #- o explanations:
 #-     additionnal text to display if the installation fails
+#- o no_club:
+#-     1 if the package isn't available on Mandriva club
 
 my $hotplug_firmware_prefix = "$::prefix/lib/hotplug/firmware";
 
@@ -198,8 +200,11 @@ my %network_settings = (
 
    {
     matching => 'eciadsl',
-    url => 'http://eciadsl.flashtux.org/',
     name => 'eciadsl',
+    explanations => N_("The ECI Hi-Focus modem cannot be supported due to binary driver distribution problem.
+
+You can find a driver on http://eciadsl.flashtux.org/"),
+    no_club => 1,
     tools => 1,
    },
 
@@ -262,17 +267,14 @@ sub warn_not_installed {
 
 sub warn_not_found {
     my ($in, $settings, $option, @packages) = @_;
-    my ($url, $expl);
-    if (ref $settings->{$option}) {
-	$url = $settings->{$option}{url};
-	$expl = $settings->{$option}{explanations};
-    }
-    $url ||= $settings->{url};
+    my %opt;
+    $opt{$_} = $settings->{$option}{$_} || $settings->{$_} foreach qw(url explanations no_club);
     $in->ask_warn(N("Error"),
-		  N("Some packages (%s) are required but aren't available. They can be found in Mandriva Club or in Mandriva commercial releases.", @packages) .
-		  if_($url, "\n\n" . N("The required files can also be installed from this URL:
-%s", $url)) .
-		  if_($expl, "\n\n" . translate($expl)));
+		  N("Some packages (%s) are required but aren't available.", @packages) .
+		  if_(!$opt{no_club}, N("These packages can be found in Mandriva Club or in Mandriva commercial releases.")) .
+		  if_($opt{url}, "\n\n" . N("The required files can also be installed from this URL:
+%s", $opt{url})) .
+		  if_($opt{explanations}, "\n\n" . translate($opt{explanations})));
 }
 
 sub is_file_installed {
@@ -414,9 +416,10 @@ sub install_packages {
 }
 
 sub setup_device {
-    my ($in, $category, $driver, $o_config, $o_fields) = @_;
+    my ($in, $category, $driver, $o_config, @o_fields) = @_;
 
-    if (my $settings = find_settings($category, $driver)) {
+    my $settings = find_settings($category, $driver);
+    if ($settings) {
 	log::explanations(qq(Found settings for driver "$driver" in category "$category"));
 
 	my $_w = $in->wait_message('', N("Looking for required software and drivers..."));
@@ -440,7 +443,7 @@ sub setup_device {
     }
 
     #- assign requested settings, erase with undef if no settings have been found
-    $o_config->{$_} = $settings->{$_} foreach ($o_fields);
+    $o_config->{$_} = $settings->{$_} foreach @o_fields;
 
     1;
 }
