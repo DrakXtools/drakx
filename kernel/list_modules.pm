@@ -206,7 +206,7 @@ our %l = (
       remote => [ qw(ati_remote) ],
       # USB tablets and touchscreens:
       tablet => [ qw(acecad aiptek wacom kbtab) ],
-      touchscreen => [ qw(ads7846_ts gunze hp680_ts_input mk712 mtouch mtouchusb touchkitusb) ],
+      touchscreen => [ qw(ads7846_ts gunze hp680_ts_input itmtouch mk712 mtouch mtouchusb touchkitusb) ],
   },
 
   various => 
