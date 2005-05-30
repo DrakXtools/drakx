@@ -140,9 +140,12 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->write;
         next;
     } elsif (member($Ident, qw(AGP ATA_STORAGE DVB SATA_STORAGE SCSI_CONTROLLER TV))) {
-        $modules_conf->remove_module(difference2([ uniq(map { $_->{driver} } values %$oldconfig) ], [ uniq(map { $_->{driver} } values %ID) ]));
+        my @old_drivers = uniq(map { $_->{driver} } values %$oldconfig);
+        my @new_drivers = uniq(map { $_->{driver} } values %ID);
+        $modules_conf->remove_module(difference2(\@old_drivers, \@new_drivers));
         # add agpgart and the like modules to modprobe.preload if needed:
         $modules_conf->write;
+        modules::load(difference2(\@new_drivers, \@old_drivers));
         next;
     } elsif ($Ident eq "PCMCIA_CONTROLLER") {
         harddrake::autoconf::pcmcia(keys %ID ? first(values(%ID))->{driver} : '');
