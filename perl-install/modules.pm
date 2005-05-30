@@ -188,12 +188,9 @@ sub write_preload_conf {
     my ($conf) = @_;
     my @l;
     push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
-    push @l, map { $_->{driver} } probe_category($_) foreach qw(multimedia/dvb multimedia/tv);
     push @l, map { if_($_->{driver} =~ /^Module:(.*)/, $1) } detect_devices::probeall();
     push @l, 'nvram' if detect_devices::isLaptop();
-    push @l, map { $_->{driver} } probe_category('various/laptop');
-    push @l, map { $_->{driver} } probe_category('input/joystick');
-    push @l, map { $_->{driver} } probe_category('various/crypto');
+    push @l, map { $_->{driver} } probe_category($_) foreach qw(multimedia/dvb multimedia/tv various/laptop input/joystick various/crypto);
     push @l, 'padlock' if cat_("/proc/cpuinfo") =~ /rng_en/;
     push @l, 'evdev' if detect_devices::getSynapticsTouchpads();
     my @l_26 = @l;
