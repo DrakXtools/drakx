@@ -588,6 +588,8 @@ Take a look at http://www.linmodems.org"),
 			    return "no_supported_winmodem";
 			}
 		    },
+		   },
+
 
                    choose_serial_port =>
                    {
