@@ -29,38 +29,19 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakedm-mdk.png";
 
 my $in = 'interactive'->vnew('su');
 
-# directory in which display managers put a config file
-my $dm_dir = '/etc/X11/dm.d';
-
 my $cfg_file = '/etc/sysconfig/desktop';
 
-my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ],
-          'KDM'   => [ N("KDM (KDE Display Manager)"), '/usr/bin/kdm', 'kdebase-kdm' ],
-          'KDE'   => [ N("MdkKDM (Mandriva Linux Display Manager)"), '/usr/bin/mdkkdm', 'mdkkdm' ],
-          'XDM'   => [ N("XDM (X Display Manager)"), '/usr/bin/X11/xdm', 'xorg-x11' ],
-          );
-
-# add non hard-wired display managers
-foreach (glob("$dm_dir/*.conf")) {
+my @list = map {
     my %l = map { /(\S+)=(.*)/ } cat_($_);
-    if ($l{NAME}) {
-	$dm{$l{NAME}} ||= [ $l{DESCRIPTION}, $l{EXEC}, $l{PACKAGE} ];
-    }
+    \%l;
+} sort(glob("/etc/X11/dm.d/*.conf"));
+
+if (!$::expert) {
+    @list = grep { -e $_->{EXEC} } @list;
 }
 
-my $dm;
-
-foreach (cat_($cfg_file)) {
-    $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
-}
-
-if (!$dm) {
-    $dm = 'KDE';
-    log::explanations("Defaulting to $dm for display manager")
-}
-
-my @raw_list = sort keys %dm;
-my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list);
+my ($dm_NAME) = cat_($cfg_file) =~ /^DISPLAYMANAGER=(.*)/m;
+my $dm = (find { uc($_->{NAME}) eq uc($dm_NAME) } @list) || $list[0];
 
 start:
 if ($in->ask_from(N("Choosing a display manager"),
@@ -73,19 +54,14 @@ several different X sessions on your local machine at the same time.")),
                                  list => \@list,
                                  val => \$dm,
                                  type => 'list',
-                                 format => sub { $dm{$_[0]}[0] },
-                                 sort => 1,
+                                 format => sub { $_[0]{DESCRIPTION} },
                                 }
                                ]
                               )
    ) {
-    ! -x $dm{$dm}[1] and do { $in->do_pkgs->ensure_is_installed($dm{$dm}[2], $dm{$dm}[1]) or goto start };
-    substInFile {
-        s/^(DISPLAYMANAGER)=.*(\n|)//;
-        s/^\n//g;
-        $_ .= "\nDISPLAYMANAGER=$dm\n" if eof;
-    } $cfg_file;
-    log::explanations(qq(Switching to "$dm" display manager));
+    $in->do_pkgs->ensure_is_installed($dm->{PACKAGE}, $dm->{EXEC}) or goto start;
+    addVarsInSh($cfg_file, { DISPLAYMANAGER => $dm->{NAME} });
+    log::explanations(qq(Switching to "$dm->{NAME}" display manager));
     if (any::running_window_manager()) {
         $in->ask_yesorno('', N("The change is done, do you want to restart the dm service?"), 1) and
 				$in->ask_yesorno('', N("You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"), 1) and
