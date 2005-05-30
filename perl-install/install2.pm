@@ -613,18 +613,16 @@ sub main {
     eval { output('/proc/splash', "verbose\n") };
   
     #-the main cycle
-    my $clicked = 0;
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
 	eval {
-	    &{$install2::{$o->{step}}}($clicked || $o->{steps}{$o->{step}}{noauto},
+	    &{$install2::{$o->{step}}}($o->{steps}{$o->{step}}{noauto},
 				       $o->{steps}{$o->{step}}{entered},
-				       $clicked ? 0 : $o->{steps}{$o->{step}}{auto});
+				       $o->{steps}{$o->{step}}{auto});
 	};
 	my $err = $@;
 	$o->kill_action;
-	$clicked = 0;
 	if ($err) {
 	    local $_ = $err;
 	    $o->kill_action;
