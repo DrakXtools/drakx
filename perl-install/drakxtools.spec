@@ -379,7 +379,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o do not allow to configure a device if its requirements aren't
     satisfied
 - harddrake service: load drivers for newly added devices so that they
-  work out of the box on first boot after card plugging(AGP, IDE, DVB,
+  work out of the box on first boot after card plugging (AGP, IDE, DVB,
   SCSI, TV)
 - printerdrake: support for PPD file names with spaces (till, #16172)
 
