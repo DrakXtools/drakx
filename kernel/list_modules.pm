@@ -70,7 +70,7 @@ our %l = (
       qw(ltmodem mwave ),
     ],
     slmodem => [
-      qw(slamr slusb snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
+      qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
     wan => [ qw(c101 cosa cyclomx cycx_drv dlci farsync hdlc hostess_sv11 n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
