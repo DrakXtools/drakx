@@ -338,10 +338,13 @@ sub real_main {
                    },
 
 
-                   hw_account => 
+                   isdn_account =>
                    {
-                    name => N("Connection Configuration") . "\n\n" .
-                    N("Please fill or check the field below"),
+                    pre => sub {
+                        network::isdn::get_info_providers_backend($isdn, $netc, $provider);
+                        $isdn->{huptimeout} ||= 180;
+                    },
+                    name => N("Connection Configuration") . "\n\n" . N("Please fill or check the field below"),
                     data => sub {
 			[
 			 { label => N("Your personal phone number"), val => \$isdn->{phone_in} },
@@ -530,13 +533,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                         [ { label => N("Provider:"), type => "list", val => \$provider, separator => '|',
                             list => [ N("Unlisted - edit manually"), network::isdn::read_providers_backend() ] } ];
                     },
-                    post => sub {
-                        network::isdn::get_info_providers_backend($isdn, $netc, $provider);
-                        $isdn->{huptimeout} = 180;
-                        $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
-                        add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
-                        return "hw_account";
-                    },
+		    next => "isdn_account",
                    },
 
 
