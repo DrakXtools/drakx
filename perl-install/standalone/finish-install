@@ -18,8 +18,6 @@ my $in = 'interactive'->vnew;
 
 sub ask_network() {
     my $modules_conf = modules::any_conf->read;
-    modules::load_category($modules_conf, 'net');
-
     require network::netconnect;
     network::netconnect::real_main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
 }
