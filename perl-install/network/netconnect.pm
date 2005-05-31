@@ -348,11 +348,11 @@ sub real_main {
                                  my ($dstruct, $field, $item) = @$_;
                                  $item->{val} = \$dstruct->{$field};
                                  if__(exists $dstruct->{$field}, $item);
-                             } ([ $netcnx, "irq", { label => N("Card IRQ") } ],
-                                [ $netcnx, "mem", { label => N("Card mem (DMA)") } ],
-                                [ $netcnx, "io",  { label => N("Card IO") } ],
-                                [ $netcnx, "io0", { label => N("Card IO_0") } ],
-                                [ $netcnx, "io1", { label => N("Card IO_1") } ],
+                             } ([ $isdn, "irq", { label => N("Card IRQ") } ],
+                                [ $isdn, "mem", { label => N("Card mem (DMA)") } ],
+                                [ $isdn, "io",  { label => N("Card IO") } ],
+                                [ $isdn, "io0", { label => N("Card IO_0") } ],
+                                [ $isdn, "io1", { label => N("Card IO_1") } ],
                                 [ $isdn, "phone_in",     { label => N("Your personal phone number") } ],
                                 [ $netc,   "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
                                 [ $isdn, "phone_out",    { label => N("Provider phone number") } ],
