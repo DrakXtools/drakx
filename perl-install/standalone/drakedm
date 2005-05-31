@@ -36,6 +36,12 @@ my @list = map {
     \%l;
 } sort(glob("/etc/X11/dm.d/*.conf"));
 
+my @_DESCRIPTIONS_for_i18n = (
+    N("GDM (GNOME Display Manager)"),
+    N("KDM (KDE Display Manager)"),
+    N("XDM (X Display Manager)"),
+);
+
 if (!$::expert) {
     @list = grep { -e $_->{EXEC} } @list;
 }
@@ -54,7 +60,7 @@ several different X sessions on your local machine at the same time.")),
                                  list => \@list,
                                  val => \$dm,
                                  type => 'list',
-                                 format => sub { $_[0]{DESCRIPTION} },
+                                 format => sub { translate($_[0]{DESCRIPTION}) },
                                 }
                                ]
                               )
