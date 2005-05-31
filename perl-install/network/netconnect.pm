@@ -344,11 +344,6 @@ sub real_main {
                     N("Please fill or check the field below"),
                     data => sub {
 			[
-			 { label => N("Card IRQ"), val => \$isdn->{irq} },
-			 { label => N("Card mem (DMA)"), val => \$isdn->{mem} },
-			 { label => N("Card IO"), val => \$isdn->{io} },
-			 { label => N("Card IO_0"), val => \$isdn->{io0} },
-			 { label => N("Card IO_1"), val => \$isdn->{io1} },
 			 { label => N("Your personal phone number"), val => \$isdn->{phone_in} },
 			 { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} },
 			 { label => N("Provider phone number"), val => \$isdn->{phone_out} },
@@ -359,6 +354,11 @@ sub real_main {
 			 { label => N("Connection timeout (in sec)"), val => \$isdn->{huptimeout} },
 			 { label => N("Account Login (user name)"), val => \$isdn->{login} },
 			 { label => N("Account Password"),  val => \$isdn->{passwd}, hidden => 1 },
+			 { label => N("Card IRQ"), val => \$isdn->{irq}, advanced => 1 },
+			 { label => N("Card mem (DMA)"), val => \$isdn->{mem}, advanced => 1 },
+			 { label => N("Card IO"), val => \$isdn->{io}, advanced => 1 },
+			 { label => N("Card IO_0"), val => \$isdn->{io0}, advanced => 1 },
+			 { label => N("Card IO_1"), val => \$isdn->{io1}, advanced => 1 },
 			];
 		    },
                     post => sub {
