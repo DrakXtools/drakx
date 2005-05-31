@@ -96,6 +96,7 @@ sub read_config {
 		 I4L_LOCALMSN => 'phone_in',
 		 I4L_REMOTE_OUT => 'phone_out',
 		 I4L_DIALMODE => 'dialing_mode',
+		 I4L_IDLETIME => 'huptimeout',
 		 I4L_MODULE => 'driver',
 		 I4L_TYPE => 'type',
 		 I4L_IRQ => 'irq',
