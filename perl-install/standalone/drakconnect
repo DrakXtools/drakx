@@ -41,7 +41,6 @@ use network::isdn;
 use network::adsl;
 use network::tools;
 use network::test;
-use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
 
 $ugtk2::wm_icon = "drakconnect";
@@ -53,14 +52,10 @@ if ($in->isa('interactive::gtk')) {
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
 network::netconnect::read_net_conf($netcnx, $netc, $intf);
-
 my $modules_conf = modules::any_conf->read;
-modules::load_category($modules_conf, 'net');
 
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "drakconnect.png";
-
-MDK::Common::Globals::init(in => $in);
 
 local $_ = join '', @ARGV;
 /--skip-wizard/ and manage($netc, $intf);
