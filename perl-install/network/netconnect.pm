@@ -343,31 +343,24 @@ sub real_main {
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => sub {
-                             [
-                             (map {
-                                 my ($dstruct, $field, $item) = @$_;
-                                 $item->{val} = \$dstruct->{$field};
-                                 if__(exists $dstruct->{$field}, $item);
-                             } ([ $isdn, "irq", { label => N("Card IRQ") } ],
-                                [ $isdn, "mem", { label => N("Card mem (DMA)") } ],
-                                [ $isdn, "io",  { label => N("Card IO") } ],
-                                [ $isdn, "io0", { label => N("Card IO_0") } ],
-                                [ $isdn, "io1", { label => N("Card IO_1") } ],
-                                [ $isdn, "phone_in",     { label => N("Your personal phone number") } ],
-                                [ $netc,   "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
-                                [ $isdn, "phone_out",    { label => N("Provider phone number") } ],
-                                [ $netc,   "dnsServer2",   { label => N("Provider DNS 1 (optional)") } ],
-                                [ $netc,   "dnsServer3",   { label => N("Provider DNS 2 (optional)") } ],
-                                [ $isdn, "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
-                                [ $isdn, "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
-                                [ $isdn, "huptimeout",   { label => N("Connection timeout (in sec)") } ],
-                               )
-                             ),
-                             ({ label => N("Account Login (user name)"), val => \$isdn->{login} },
-                              { label => N("Account Password"),  val => \$isdn->{passwd}, hidden => 1 },
-                             )
-                            ];
-                            },
+			[
+			 { label => N("Card IRQ"), val => \$isdn->{irq} },
+			 { label => N("Card mem (DMA)"), val => \$isdn->{mem} },
+			 { label => N("Card IO"), val => \$isdn->{io} },
+			 { label => N("Card IO_0"), val => \$isdn->{io0} },
+			 { label => N("Card IO_1"), val => \$isdn->{io1} },
+			 { label => N("Your personal phone number"), val => \$isdn->{phone_in} },
+			 { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} },
+			 { label => N("Provider phone number"), val => \$isdn->{phone_out} },
+			 { label => N("Provider DNS 1 (optional)"), val => \$netc->{dnsServer2} },
+			 { label => N("Provider DNS 2 (optional)"), val => \$netc->{dnsServer3} },
+			 { label => N("Dialing mode"),  list => ["auto", "manual"], val => \$isdn->{dialing_mode} },
+			 { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"], val => \$isdn->{speed} },
+			 { label => N("Connection timeout (in sec)"), val => \$isdn->{huptimeout} },
+			 { label => N("Account Login (user name)"), val => \$isdn->{login} },
+			 { label => N("Account Password"),  val => \$isdn->{passwd}, hidden => 1 },
+			];
+		    },
                     post => sub {
                         network::isdn::write_config($isdn);
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
