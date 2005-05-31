@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2005-05-22 20:07+0200\n"
+"POT-Creation-Date: 2005-05-31 13:03+0200\n"
 "PO-Revision-Date: 2005-02-24 21:42+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 "li proteccion siconte do scrijhaedje, ritchôkîz l' sere, eyet renondez\n"
 "Mandriva Move."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1320
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1325
 #, c-format
 msgid "Reboot"
 msgstr "Renonder l' éndjole"
@@ -181,17 +181,20 @@ msgstr "Tårdjîz on pô s' i vs plait, deteccion ey apontiaedje des éndjins..
 #: diskdrake/interactive.pm:240 diskdrake/interactive.pm:401
 #: diskdrake/interactive.pm:419 diskdrake/interactive.pm:556
 #: diskdrake/interactive.pm:561 diskdrake/smbnfs_gtk.pm:42 fsedit.pm:182
-#: install_any.pm:1698 install_any.pm:1721 install_steps.pm:82
+#: install_any.pm:1658 install_any.pm:1681 install_steps.pm:82
 #: install_steps_interactive.pm:38 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:41
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
-#: network/netconnect.pm:1013 network/netconnect.pm:1121
-#: network/netconnect.pm:1125 network/netconnect.pm:1129
-#: network/netconnect.pm:1134 network/netconnect.pm:1266
-#: network/netconnect.pm:1270 network/netconnect.pm:1274
-#: network/netconnect.pm:1278 network/netconnect.pm:1386
-#: network/netconnect.pm:1391 network/netconnect.pm:1411
-#: network/netconnect.pm:1622 printer/printerdrake.pm:244
+#: network/netconnect.pm:915 network/netconnect.pm:1021
+#: network/netconnect.pm:1025 network/netconnect.pm:1029
+#: network/netconnect.pm:1034 network/netconnect.pm:1166
+#: network/netconnect.pm:1170 network/netconnect.pm:1174
+#: network/netconnect.pm:1178 network/netconnect.pm:1287
+#: network/netconnect.pm:1292 network/netconnect.pm:1312
+#: network/netconnect.pm:1523 network/thirdparty.pm:265
+#: network/thirdparty.pm:272 network/thirdparty.pm:308
+#: network/thirdparty.pm:310 network/thirdparty.pm:331
+#: network/thirdparty.pm:355 printer/printerdrake.pm:244
 #: printer/printerdrake.pm:251 printer/printerdrake.pm:276
 #: printer/printerdrake.pm:422 printer/printerdrake.pm:427
 #: printer/printerdrake.pm:440 printer/printerdrake.pm:450
@@ -230,14 +233,15 @@ msgstr "Tårdjîz on pô s' i vs plait, deteccion ey apontiaedje des éndjins..
 #: standalone/drakconnect:692 standalone/drakconnect:707
 #: standalone/drakfloppy:297 standalone/drakfloppy:300
 #: standalone/drakfloppy:306 standalone/drakfont:210 standalone/drakfont:223
-#: standalone/drakfont:261 standalone/drakroam:41 standalone/draksplash:26
+#: standalone/drakfont:261 standalone/drakgw:51 standalone/drakgw:191
+#: standalone/drakgw:220 standalone/drakgw:261 standalone/drakgw:295
+#: standalone/drakgw:400 standalone/drakroam:41 standalone/draksplash:15
 #: standalone/drakxtv:107 standalone/finish-install:39 standalone/logdrake:169
 #: standalone/logdrake:438 standalone/logdrake:443 standalone/scannerdrake:59
 #: standalone/scannerdrake:202 standalone/scannerdrake:261
 #: standalone/scannerdrake:715 standalone/scannerdrake:726
 #: standalone/scannerdrake:865 standalone/scannerdrake:876
 #: standalone/scannerdrake:946 wizards.pm:95 wizards.pm:99 wizards.pm:121
-#: wizards2.pm:95 wizards2.pm:99 wizards2.pm:121
 #, c-format
 msgid "Error"
 msgstr "Aroke"
@@ -472,15 +476,16 @@ msgstr ""
 "Vos ploz eployî l' acceleråcion 3D di vosse cåte videyo avou Xorg %s,\n"
 "ASTEME: CI SOPOIRT EST CO ESPERIMINTÅ ET POUT DJALER VOSSE COPIUTRECE."
 
-#: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:116 any.pm:921
+#: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:116 any.pm:926
 #, c-format
 msgid "Custom"
 msgstr "A vosse môde"
 
 #: Xconfig/main.pm:115 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 printer/printerdrake.pm:744
-#: printer/printerdrake.pm:4405 printer/printerdrake.pm:4857
-#: standalone/draksplash:83 standalone/logdrake:174 standalone/net_applet:229
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1325
+#: printer/printerdrake.pm:744 printer/printerdrake.pm:4405
+#: printer/printerdrake.pm:4857 standalone/draksplash:85
+#: standalone/logdrake:174 standalone/net_applet:230
 #: standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
@@ -621,7 +626,7 @@ msgid "Resolutions"
 msgstr "Fintés"
 
 #: Xconfig/resolution_and_depth.pm:310 diskdrake/hd_gtk.pm:339
-#: install_steps_gtk.pm:283 mouse.pm:168 services.pm:162
+#: install_steps_gtk.pm:284 mouse.pm:168 services.pm:162
 #: standalone/drakbackup:1581 standalone/drakperm:251
 #, c-format
 msgid "Other"
@@ -638,7 +643,7 @@ msgid "Graphics card: %s"
 msgstr "Cåte grafike: %s"
 
 #: Xconfig/resolution_and_depth.pm:374 interactive.pm:433
-#: interactive/gtk.pm:767 interactive/http.pm:103 interactive/http.pm:156
+#: interactive/gtk.pm:808 interactive/http.pm:103 interactive/http.pm:156
 #: interactive/newt.pm:321 interactive/newt.pm:424 interactive/stdio.pm:39
 #: interactive/stdio.pm:142 interactive/stdio.pm:143 interactive/stdio.pm:172
 #: standalone/drakTermServ:200 standalone/drakTermServ:518
@@ -647,15 +652,15 @@ msgstr "Cåte grafike: %s"
 #: standalone/drakconnect:166 standalone/drakconnect:885
 #: standalone/drakconnect:972 standalone/drakconnect:1071
 #: standalone/drakfont:574 standalone/drakfont:586 standalone/drakroam:392
-#: standalone/draksplash:145 standalone/drakups:212 standalone/net_monitor:345
+#: standalone/draksplash:160 standalone/drakups:212 standalone/net_monitor:345
 #: ugtk2.pm:409 ugtk2.pm:506 ugtk2.pm:908 ugtk2.pm:931
 #, c-format
 msgid "Ok"
 msgstr "'l est bon"
 
 #: Xconfig/resolution_and_depth.pm:374 diskdrake/smbnfs_gtk.pm:81 help.pm:89
-#: help.pm:444 install_steps_gtk.pm:479 install_steps_interactive.pm:422
-#: install_steps_interactive.pm:827 interactive.pm:434 interactive/gtk.pm:771
+#: help.pm:444 install_steps_gtk.pm:480 install_steps_interactive.pm:422
+#: install_steps_interactive.pm:831 interactive.pm:434 interactive/gtk.pm:812
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/newt.pm:428 interactive/stdio.pm:39 interactive/stdio.pm:142
 #: interactive/stdio.pm:176 printer/printerdrake.pm:3676
@@ -664,7 +669,7 @@ msgstr "'l est bon"
 #: standalone/drakbackup:3947 standalone/drakconnect:165
 #: standalone/drakconnect:970 standalone/drakconnect:1070
 #: standalone/drakfont:586 standalone/drakfont:664 standalone/drakfont:741
-#: standalone/draksplash:145 standalone/drakups:219 standalone/logdrake:174
+#: standalone/draksplash:160 standalone/drakups:219 standalone/logdrake:174
 #: standalone/net_monitor:344 ugtk2.pm:403 ugtk2.pm:504 ugtk2.pm:513
 #: ugtk2.pm:908
 #, c-format
@@ -672,8 +677,8 @@ msgid "Cancel"
 msgstr "Rinoncî"
 
 #: Xconfig/resolution_and_depth.pm:374 diskdrake/hd_gtk.pm:153
-#: install_steps_gtk.pm:227 install_steps_gtk.pm:628 interactive.pm:528
-#: interactive/gtk.pm:637 interactive/gtk.pm:639 standalone/drakTermServ:285
+#: install_steps_gtk.pm:228 install_steps_gtk.pm:629 interactive.pm:528
+#: interactive/gtk.pm:678 interactive/gtk.pm:680 standalone/drakTermServ:285
 #: standalone/drakbackup:3881 standalone/drakbug:104
 #: standalone/drakconnect:161 standalone/drakconnect:246
 #: standalone/drakfont:509 standalone/drakperm:134 standalone/draksec:336
@@ -825,10 +830,10 @@ msgid ""
 "other"
 msgstr "ôte"
 
-#: any.pm:143 harddrake/sound.pm:191 interactive.pm:471 pkgs.pm:481
+#: any.pm:143 harddrake/sound.pm:191 interactive.pm:471 pkgs.pm:468
 #: standalone/drakconnect:168 standalone/drakconnect:646 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:244
-#: standalone/service_harddrake:203
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
 msgstr "Tårdjîz on pô, s' i vs plait"
@@ -990,7 +995,7 @@ msgid "Force No Local APIC"
 msgstr "Foirci a n' nén eployî l' APIC locå"
 
 #: any.pm:293 any.pm:637 authentication.pm:187 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:688 printer/printerdrake.pm:1663
+#: network/netconnect.pm:659 printer/printerdrake.pm:1663
 #: printer/printerdrake.pm:1784 standalone/drakbackup:1625
 #: standalone/drakbackup:3488 standalone/drakups:299
 #, c-format
@@ -1285,20 +1290,18 @@ msgstr ""
 msgid "Do you want to use this feature?"
 msgstr "Voloz vs eployî cisse fonccionålité chal?"
 
-#: any.pm:690 help.pm:180 help.pm:285 help.pm:444 install_any.pm:887
+#: any.pm:690 help.pm:180 help.pm:285 help.pm:444 install_any.pm:861
 #: interactive.pm:158 modules/interactive.pm:71 printer/printerdrake.pm:743
-#: standalone/drakbackup:2501 standalone/drakgw:287 standalone/drakgw:288
-#: standalone/drakgw:296 standalone/drakgw:306 standalone/draksec:55
-#: standalone/harddrake2:306 standalone/net_applet:309 ugtk2.pm:907
-#: wizards.pm:156 wizards2.pm:158
+#: standalone/drakbackup:2501 standalone/draksec:55 standalone/harddrake2:306
+#: standalone/net_applet:310 ugtk2.pm:907 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Oyi"
 
 #: any.pm:690 help.pm:180 help.pm:285 help.pm:313 help.pm:444
-#: install_any.pm:887 interactive.pm:158 modules/interactive.pm:71
+#: install_any.pm:861 interactive.pm:158 modules/interactive.pm:71
 #: standalone/drakbackup:2501 standalone/draksec:54 standalone/harddrake2:307
-#: standalone/net_applet:305 ugtk2.pm:907 wizards.pm:156 wizards2.pm:158
+#: standalone/net_applet:306 ugtk2.pm:907 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Neni"
@@ -1343,56 +1346,56 @@ msgstr "Eployî l' ecôdaedje unicôde"
 msgid "All languages"
 msgstr "Tos les lingaedjes"
 
-#: any.pm:794 help.pm:566 help.pm:855 install_steps_interactive.pm:947
+#: any.pm:798 help.pm:566 help.pm:855 install_steps_interactive.pm:952
 #, c-format
 msgid "Country / Region"
 msgstr "Payis/Redjon"
 
-#: any.pm:795
+#: any.pm:799
 #, c-format
 msgid "Please choose your country."
 msgstr "Tchoezixhoz vosse payis s' i vs plait."
 
-#: any.pm:797
+#: any.pm:801
 #, c-format
 msgid "Here is the full list of available countries"
 msgstr "Vochal li djivêye di tos les payis k' on pout tchoezi"
 
-#: any.pm:798
+#: any.pm:802
 #, c-format
 msgid "Other Countries"
 msgstr "Ôtes payis"
 
-#: any.pm:798 help.pm:51 help.pm:409 help.pm:431 help.pm:647 help.pm:722
+#: any.pm:802 help.pm:51 help.pm:409 help.pm:431 help.pm:647 help.pm:722
 #: interactive.pm:394
 #, c-format
 msgid "Advanced"
 msgstr "Sipepieus"
 
-#: any.pm:806
+#: any.pm:810
 #, c-format
 msgid "Input method:"
 msgstr "Metôde d' intrêye:"
 
-#: any.pm:807 install_any.pm:422 network/netconnect.pm:186
-#: network/netconnect.pm:380 network/netconnect.pm:385
-#: network/netconnect.pm:1377 printer/printerdrake.pm:105
+#: any.pm:811 install_any.pm:406 network/netconnect.pm:187
+#: network/netconnect.pm:381 network/netconnect.pm:386
+#: network/netconnect.pm:1278 printer/printerdrake.pm:105
 #: printer/printerdrake.pm:2199
 #, c-format
 msgid "None"
 msgstr "Nole"
 
-#: any.pm:921
+#: any.pm:926
 #, c-format
 msgid "No sharing"
 msgstr "Nou pårtaedje"
 
-#: any.pm:921
+#: any.pm:926
 #, c-format
 msgid "Allow all users"
 msgstr "Permete tos les uzeus"
 
-#: any.pm:925
+#: any.pm:930
 #, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
@@ -1407,7 +1410,7 @@ msgstr ""
 "\n"
 "«A vosse môde» vos permete des apontiaedjes diferins po tchaeke uzeu.\n"
 
-#: any.pm:937
+#: any.pm:942
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
@@ -1416,7 +1419,7 @@ msgstr ""
 "NFS: li sistinme di pårtaedjaedje di fitchîs tradicionel so Unix, k' est "
 "moens bén sopoirté avou MacOS eyet Windows."
 
-#: any.pm:940
+#: any.pm:945
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
@@ -1425,18 +1428,18 @@ msgstr ""
 "SMB: on sistinme di pårtaedjaedje di fitchîs eployî pa Windows, MacOS X eyet "
 "sacwants sistinmes Linux modienes."
 
-#: any.pm:948
+#: any.pm:953
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Vos ploz fé on pårtaedje avou NFS ou SMB. Li kék voloz vs?"
 
-#: any.pm:973
+#: any.pm:978
 #, c-format
 msgid "Launch userdrake"
 msgstr "Enonder userdrake"
 
-#: any.pm:973 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
+#: any.pm:978 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5166 standalone/drakTermServ:295
 #: standalone/drakbackup:4081 standalone/drakbug:126 standalone/drakfont:497
@@ -1446,7 +1449,7 @@ msgstr "Enonder userdrake"
 msgid "Close"
 msgstr "Clôre"
 
-#: any.pm:975
+#: any.pm:980
 #, c-format
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
@@ -1743,7 +1746,7 @@ msgstr "Nou scret"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Ci scret chal est trop simpe (i doet esse d' å moens %d letes)"
 
-#: authentication.pm:189 network/netconnect.pm:385 network/netconnect.pm:689
+#: authentication.pm:189 network/netconnect.pm:386 network/netconnect.pm:660
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:492
 #, c-format
 msgid "Authentication"
@@ -1880,7 +1883,7 @@ msgstr "Ostraleye"
 
 #: crypto.pm:16 crypto.pm:50 lang.pm:214 network/adsl_consts.pm:93
 #: network/adsl_consts.pm:102 network/adsl_consts.pm:114
-#: network/adsl_consts.pm:123 network/netconnect.pm:51
+#: network/adsl_consts.pm:123 network/netconnect.pm:52
 #, c-format
 msgid "Belgium"
 msgstr "Beldjike"
@@ -1950,7 +1953,7 @@ msgstr "Finlande"
 #: network/adsl_consts.pm:431 network/adsl_consts.pm:442
 #: network/adsl_consts.pm:454 network/adsl_consts.pm:466
 #: network/adsl_consts.pm:477 network/adsl_consts.pm:488
-#: network/netconnect.pm:48
+#: network/netconnect.pm:49
 #, c-format
 msgid "France"
 msgstr "France"
@@ -1978,7 +1981,7 @@ msgstr "Israyel"
 
 #: crypto.pm:32 crypto.pm:63 lang.pm:300 network/adsl_consts.pm:557
 #: network/adsl_consts.pm:569 network/adsl_consts.pm:580
-#: network/adsl_consts.pm:589 network/netconnect.pm:50 standalone/drakxtv:47
+#: network/adsl_consts.pm:589 network/netconnect.pm:51 standalone/drakxtv:47
 #, c-format
 msgid "Italy"
 msgstr "Itåleye"
@@ -1990,7 +1993,7 @@ msgstr "Djapon"
 
 #: crypto.pm:34 crypto.pm:65 lang.pm:352 network/adsl_consts.pm:620
 #: network/adsl_consts.pm:629 network/adsl_consts.pm:638
-#: network/adsl_consts.pm:647 network/netconnect.pm:49
+#: network/adsl_consts.pm:647 network/netconnect.pm:50
 #, c-format
 msgid "Netherlands"
 msgstr "Bas Payis"
@@ -2049,7 +2052,7 @@ msgstr "Taiwan"
 msgid "South Africa"
 msgstr "Nonne Afrike"
 
-#: crypto.pm:78 crypto.pm:108 lang.pm:416 network/netconnect.pm:52
+#: crypto.pm:78 crypto.pm:108 lang.pm:416 network/netconnect.pm:53
 #, c-format
 msgid "United States"
 msgstr "Estats Unis"
@@ -2156,7 +2159,7 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Clitchîz so ene pårticion s' i vs plait"
 
-#: diskdrake/hd_gtk.pm:208 diskdrake/smbnfs_gtk.pm:63 install_steps_gtk.pm:481
+#: diskdrake/hd_gtk.pm:208 diskdrake/smbnfs_gtk.pm:63 install_steps_gtk.pm:482
 #: standalone/drakbackup:2936 standalone/drakbackup:2996
 #, c-format
 msgid "Details"
@@ -2760,7 +2763,7 @@ msgstr "Lete del plake DOS: %s (dji saye d' adviner)\n"
 msgid "Type: "
 msgstr "Sôre: "
 
-#: diskdrake/interactive.pm:1197 install_steps_gtk.pm:295
+#: diskdrake/interactive.pm:1197 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
 msgstr "No: "
@@ -2933,7 +2936,7 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "Les clés d' ecriptaedje ni sont nén les minmes"
 
-#: diskdrake/interactive.pm:1295 network/netconnect.pm:1222
+#: diskdrake/interactive.pm:1295 network/netconnect.pm:1122
 #: standalone/drakconnect:430
 #, c-format
 msgid "Encryption key"
@@ -3273,7 +3276,7 @@ msgstr "Nén del plaece libe assez po l' atribouwaedje otomatike"
 msgid "Nothing to do"
 msgstr "Rén a fé"
 
-#: harddrake/data.pm:62 install_any.pm:1639
+#: harddrake/data.pm:62 install_any.pm:1599
 #, c-format
 msgid "Floppy"
 msgstr "Plakete"
@@ -3283,12 +3286,12 @@ msgstr "Plakete"
 msgid "Zip"
 msgstr "Plakete ZIP"
 
-#: harddrake/data.pm:88 install_any.pm:1640
+#: harddrake/data.pm:88 install_any.pm:1600
 #, c-format
 msgid "Hard Disk"
 msgstr "Deure plake"
 
-#: harddrake/data.pm:97 install_any.pm:1641
+#: harddrake/data.pm:97 install_any.pm:1601
 #, c-format
 msgid "CDROM"
 msgstr "Plake lazer"
@@ -3316,7 +3319,7 @@ msgstr "Cåte videyo"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "Cåte DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3351,34 +3354,34 @@ msgstr "Cåtes RDIS"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "Éndjins son USB"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Cåtes radio"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "Cåtes rantoele ATM"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "Cåtes rantoele WAN"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "Éndjins sins fyis Bluetooth"
 
 #: harddrake/data.pm:265
 #, c-format
 msgid "Ethernetcard"
 msgstr "Cåte rantoele"
 
-#: harddrake/data.pm:283 network/netconnect.pm:575
+#: harddrake/data.pm:283 network/netconnect.pm:573
 #, c-format
 msgid "Modem"
 msgstr "Modem"
@@ -3399,7 +3402,7 @@ msgid "AGP controllers"
 msgstr "Controleus AGP"
 
 #: harddrake/data.pm:325 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:979
+#: install_steps_interactive.pm:984
 #, c-format
 msgid "Printer"
 msgstr "Sicrirece"
@@ -3408,7 +3411,7 @@ msgstr "Sicrirece"
 #: harddrake/data.pm:339
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Pôrts di controleus d' djeus"
 
 #: harddrake/data.pm:348
 #, c-format
@@ -3466,7 +3469,7 @@ msgid "Bridges and system controllers"
 msgstr "Ponteas eyet controleus sistinme"
 
 #: harddrake/data.pm:448 help.pm:855 install_steps_interactive.pm:118
-#: install_steps_interactive.pm:939 standalone/keyboarddrake:29
+#: install_steps_interactive.pm:944 standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
 msgstr "Taprece"
@@ -3474,29 +3477,29 @@ msgstr "Taprece"
 #: harddrake/data.pm:461
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tabletes eyet waitroûles a toutchî"
 
-#: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:972
+#: harddrake/data.pm:470 help.pm:855 install_steps_interactive.pm:977
 #, c-format
 msgid "Mouse"
 msgstr "Sori"
 
-#: harddrake/data.pm:483
+#: harddrake/data.pm:484
 #, c-format
 msgid "UPS"
 msgstr "UPS"
 
-#: harddrake/data.pm:492
+#: harddrake/data.pm:493
 #, c-format
 msgid "Scanner"
 msgstr "Sicanrece"
 
-#: harddrake/data.pm:502 standalone/harddrake2:440
+#: harddrake/data.pm:503 standalone/harddrake2:440
 #, c-format
 msgid "Unknown/Others"
 msgstr "Nén cnoxhou|Ôtes"
 
-#: harddrake/data.pm:530
+#: harddrake/data.pm:531
 #, c-format
 msgid "cpu # "
 msgstr "processeu l° "
@@ -3595,8 +3598,8 @@ msgstr "Mineu:"
 msgid "Trouble shooting"
 msgstr ""
 
-#: harddrake/sound.pm:270 keyboard.pm:391 lang.pm:1072
-#: network/ndiswrapper.pm:95 network/netconnect.pm:561
+#: harddrake/sound.pm:270 keyboard.pm:391 lang.pm:1081
+#: network/ndiswrapper.pm:95 network/netconnect.pm:552
 #: printer/printerdrake.pm:1206 printer/printerdrake.pm:2230
 #: printer/printerdrake.pm:2316 printer/printerdrake.pm:2362
 #: printer/printerdrake.pm:2429 printer/printerdrake.pm:2464
@@ -3739,8 +3742,8 @@ msgstr ""
 "\n"
 "Li mineu do moumint po vosse cåte son «%s» est «%s» "
 
-#: harddrake/v4l.pm:14 standalone/net_applet:74 standalone/net_applet:75
-#: standalone/net_applet:77
+#: harddrake/v4l.pm:14 standalone/net_applet:75 standalone/net_applet:76
+#: standalone/net_applet:78
 #, c-format
 msgid "Auto-detect"
 msgstr "Deteccion otomatike"
@@ -3824,8 +3827,8 @@ msgstr ""
 "avou les termes del licince, clitchîz sol boesse «%s».\n"
 "Ôtrumint, clitchîz sol boton «%s» po renonder l' copiutrece."
 
-#: help.pm:14 install_steps_gtk.pm:551 install_steps_interactive.pm:92
-#: install_steps_interactive.pm:731 standalone/drakautoinst:216
+#: help.pm:14 install_steps_gtk.pm:552 install_steps_interactive.pm:92
+#: install_steps_interactive.pm:735 standalone/drakautoinst:216
 #, c-format
 msgid "Accept"
 msgstr "Accepter"
@@ -3918,12 +3921,12 @@ msgstr ""
 msgid "User name"
 msgstr "No di l' uzeu"
 
-#: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:232
-#: install_steps_gtk.pm:693 interactive.pm:433 interactive/newt.pm:321
-#: network/netconnect.pm:335 network/tools.pm:191 printer/printerdrake.pm:3678
-#: standalone/drakTermServ:383 standalone/drakbackup:3938
-#: standalone/drakbackup:4032 standalone/drakbackup:4049
-#: standalone/drakbackup:4067 ugtk2.pm:506
+#: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:233
+#: install_steps_gtk.pm:694 interactive.pm:433 interactive/newt.pm:321
+#: network/netconnect.pm:336 network/thirdparty.pm:321
+#: printer/printerdrake.pm:3678 standalone/drakTermServ:383
+#: standalone/drakbackup:3938 standalone/drakbackup:4032
+#: standalone/drakbackup:4049 standalone/drakbackup:4067 ugtk2.pm:506
 #, c-format
 msgid "Next"
 msgstr "Shuvant"
@@ -4150,7 +4153,7 @@ msgstr "Programaedje"
 msgid "Graphical Environment"
 msgstr "Evironmint grafike"
 
-#: help.pm:146 install_steps_gtk.pm:230 install_steps_interactive.pm:642
+#: help.pm:146 install_steps_gtk.pm:231 install_steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Tchoezi tchaeke pacaedje sepårumint"
@@ -4265,7 +4268,7 @@ msgstr ""
 "sicrirece. L' eterface prezintêye e nosse guide rishonne al cisse håynêye\n"
 "tins di l' astalåcion."
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:606
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:607
 #: standalone/drakbackup:2325 standalone/drakbackup:2329
 #: standalone/drakbackup:2333 standalone/drakbackup:2337
 #, c-format
@@ -4346,7 +4349,7 @@ msgstr ""
 "éndjole on sierveu d' eure ki pôreut ossu esse eployî pa d' ôtès\n"
 "copiutreces, par egzimpe les cenes d' ene rantoele locåle, si vos vloz."
 
-#: help.pm:217 install_steps_interactive.pm:874
+#: help.pm:217 install_steps_interactive.pm:879
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "L' ôrlodje di l' éndjolreye metowe e tins universel (GMT)"
@@ -4800,17 +4803,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Fé li plakete d' astalaedje otomatike"
 
-#: help.pm:409 install_steps_interactive.pm:1331
+#: help.pm:409 install_steps_interactive.pm:1336
 #, c-format
 msgid "Replay"
 msgstr "Rifé"
 
-#: help.pm:409 install_steps_interactive.pm:1331
+#: help.pm:409 install_steps_interactive.pm:1336
 #, c-format
 msgid "Automated"
 msgstr "Otomatike"
 
-#: help.pm:409 install_steps_interactive.pm:1334
+#: help.pm:409 install_steps_interactive.pm:1339
 #, c-format
 msgid "Save packages selection"
 msgstr "Schaper li tchuze des pacaedjes"
@@ -4865,7 +4868,7 @@ msgstr ""
 "Clitchîz so «%s» si vos vloz tchoezi les pårticions ki sront\n"
 "verifieyes po vey s' i gn a des måvas bloks sol deure plake."
 
-#: help.pm:431 install_steps_gtk.pm:387 interactive.pm:434
+#: help.pm:431 install_steps_gtk.pm:388 interactive.pm:434
 #: interactive/newt.pm:318 printer/printerdrake.pm:3676
 #: standalone/drakTermServ:362 standalone/drakbackup:3898
 #: standalone/drakbackup:3937 standalone/drakbackup:4048
@@ -4904,7 +4907,7 @@ msgstr ""
 "ey astaler les tchoezi(s) pacaedje(s), oudonbén clitchîz so «%s»\n"
 "po leyî ouve."
 
-#: help.pm:444 help.pm:588 install_steps_gtk.pm:386
+#: help.pm:444 help.pm:588 install_steps_gtk.pm:387
 #: install_steps_interactive.pm:156 standalone/drakbackup:4095
 #, c-format
 msgid "Install"
@@ -5704,8 +5707,8 @@ msgstr ""
 "metowe chal. Si c' est nén l' cene ki vos avoz, vos ploz clitchî chal\n"
 "po tchoezi èn ôte mineu."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1006
-#: install_steps_interactive.pm:1023
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1011
+#: install_steps_interactive.pm:1028
 #, c-format
 msgid "Sound card"
 msgstr "Cåte son"
@@ -5848,12 +5851,12 @@ msgstr ""
 "enonder so voste éndjole. Si vos l' vloz eployî po fé do sierveu c' est\n"
 "ene bone idêye di candjî et d' verifyî les valixhances chal."
 
-#: help.pm:855 install_steps_interactive.pm:965 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:970 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Coisse d' eureye"
 
-#: help.pm:855 install_steps_interactive.pm:1039
+#: help.pm:855 install_steps_interactive.pm:1044
 #, c-format
 msgid "TV card"
 msgstr "Cåte tévé"
@@ -5868,33 +5871,33 @@ msgstr "Cåte RDIS"
 msgid "Graphical Interface"
 msgstr "Eterface grafike"
 
-#: help.pm:855 install_any.pm:1662 install_steps_interactive.pm:1057
+#: help.pm:855 install_any.pm:1622 install_steps_interactive.pm:1062
 #: standalone/drakbackup:2019
 #, c-format
 msgid "Network"
 msgstr "Rantoele"
 
-#: help.pm:855 install_steps_interactive.pm:1072
+#: help.pm:855 install_steps_interactive.pm:1077
 #, c-format
 msgid "Proxies"
 msgstr "Procsis"
 
-#: help.pm:855 install_steps_interactive.pm:1083
+#: help.pm:855 install_steps_interactive.pm:1088
 #, c-format
 msgid "Security Level"
 msgstr "Livea di såvrité"
 
-#: help.pm:855 install_steps_interactive.pm:1097
+#: help.pm:855 install_steps_interactive.pm:1102
 #, c-format
 msgid "Firewall"
 msgstr "Côpe feu"
 
-#: help.pm:855 install_steps_interactive.pm:1113
+#: help.pm:855 install_steps_interactive.pm:1118
 #, c-format
 msgid "Bootloader"
 msgstr "Enondrece"
 
-#: help.pm:855 install_steps_interactive.pm:1126 services.pm:193
+#: help.pm:855 install_steps_interactive.pm:1131 services.pm:193
 #, c-format
 msgid "Services"
 msgstr "Siervices"
@@ -5958,13 +5961,13 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "Vos dvoz abwesner eto %s"
 
-#: install_any.pm:406
+#: install_any.pm:390
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "Avoz vs co ds ôtes sopoirts?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:409
+#: install_any.pm:393
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -5978,7 +5981,7 @@ msgstr ""
 "\n"
 "Avoz vs des ôtes sopoirts d' astalaedje a-z apontyî?"
 
-#: install_any.pm:422 printer/printerdrake.pm:3022
+#: install_any.pm:406 printer/printerdrake.pm:3022
 #: printer/printerdrake.pm:3029 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
@@ -5986,42 +5989,42 @@ msgstr ""
 msgid "CD-ROM"
 msgstr "Plake lazer"
 
-#: install_any.pm:422
+#: install_any.pm:406
 #, c-format
 msgid "Network (http)"
 msgstr "Rantoele (http)"
 
-#: install_any.pm:422
+#: install_any.pm:406
 #, c-format
 msgid "Network (ftp)"
 msgstr "Rantoele (ftp)"
 
-#: install_any.pm:451
+#: install_any.pm:436
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "Ristitchîz l' prumire plake lazer"
 
-#: install_any.pm:479 standalone/drakbackup:112
+#: install_any.pm:460 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "Nol éndjin di trové"
 
-#: install_any.pm:484
+#: install_any.pm:465
 #, c-format
 msgid "Insert the CD"
 msgstr "Sititchîz l' plake lazer"
 
-#: install_any.pm:489
+#: install_any.pm:470
 #, c-format
 msgid "Unable to mount CD-ROM"
 msgstr "Dji n' a savou monter l' plake lazer"
 
-#: install_any.pm:521 install_any.pm:525
+#: install_any.pm:502 install_any.pm:506
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Hårdêye do muroe?"
 
-#: install_any.pm:558
+#: install_any.pm:539
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -6030,7 +6033,7 @@ msgstr ""
 "Dji n' sai trover l' djivêye di fitchîs so ç' muroe ci. Acertinez vs ki "
 "l' eplaeçmint est corek."
 
-#: install_any.pm:725
+#: install_any.pm:699
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6042,13 +6045,13 @@ msgstr ""
 "Metoz li CDROM lomé «%s» dvins l' lijheu, s' i vs plait;\n"
 "et clitchîz so «'l est bon» on côp ki c' est fwait."
 
-#: install_any.pm:738
+#: install_any.pm:712
 #, c-format
 msgid "Copying in progress"
 msgstr "Dji copeye..."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:878
+#: install_any.pm:852
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -6074,7 +6077,7 @@ msgstr ""
 "Voloz vs vormint astaler ces sierveus?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:901
+#: install_any.pm:875
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -6088,22 +6091,22 @@ msgstr ""
 "\n"
 "Voloz vs vormint oister ces pacaedjes la?\n"
 
-#: install_any.pm:1349 partition_table.pm:603
+#: install_any.pm:1309 partition_table.pm:603
 #, c-format
 msgid "Error reading file %s"
 msgstr "Åk n' a nén stî come dji sayive di lére li fitchî %s"
 
-#: install_any.pm:1559
+#: install_any.pm:1519
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Les plakes shuvantes ont candjî d' no:"
 
-#: install_any.pm:1561
+#: install_any.pm:1521
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (lomêye divant %s)"
 
-#: install_any.pm:1599
+#: install_any.pm:1559
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -6112,42 +6115,42 @@ msgstr ""
 "Ene sacwè n' a nén stî: dji n' a trové nou valåbe éndjin po fé des noveas "
 "sistinmes di fitchîs. Loukîz vos éndjolreyes po saveur çou ki n' va nén"
 
-#: install_any.pm:1643
+#: install_any.pm:1603
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1643
+#: install_any.pm:1603
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1643
+#: install_any.pm:1603
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1666
+#: install_any.pm:1626
 #, c-format
 msgid "Please choose a media"
 msgstr "Tchoezixhoz on sopoirt s' i vs plait"
 
-#: install_any.pm:1698
+#: install_any.pm:1658
 #, c-format
 msgid "Bad media %s"
 msgstr "Måva sopoirt %s"
 
-#: install_any.pm:1710
+#: install_any.pm:1670
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Li fitchî egzistêye dedja. El voloz vs sipotchî?"
 
-#: install_any.pm:1761
+#: install_any.pm:1721
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Dji n' pou nén fé des waitroûlêyes divant l' pårtixhaedje"
 
-#: install_any.pm:1768
+#: install_any.pm:1728
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Les waitroûlêyes seront metowes el ridant %s après l' astalaedje"
@@ -6193,7 +6196,7 @@ msgstr ""
 "\n"
 "Voloz vs vormint continouwer?"
 
-#: install_interactive.pm:70 install_steps.pm:211
+#: install_interactive.pm:70 install_steps.pm:219
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
 msgstr "Vos dvoz aveur ene pårticion FAT montêye so /boot/efi"
@@ -6594,12 +6597,12 @@ msgstr ""
 msgid "http://www.mandrivalinux.com/en/errata.php3"
 msgstr "http://www.mandrivalinux.com/en/errata.php3"
 
-#: install_steps.pm:246
+#: install_steps.pm:254
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Vos avoz deus côps li pont d' montaedje %s"
 
-#: install_steps.pm:479
+#: install_steps.pm:489
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -6618,76 +6621,80 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Intrant e l' etape '%s'\n"
 
-#: install_steps_gtk.pm:176
+#: install_steps_gtk.pm:177
 #, c-format
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
-"Mandrivalinux. If that occurs, you can try a text install instead. For "
+"Mandriva Linux. If that occurs, you can try a text install instead. For "
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
+"Vosse sistinme a po di rsources. Vos pôrîz aveur des rujhes po\n"
+"l' astalåcion di Mandriva Linux. Si çoula arive, vos ploz sayî ene\n"
+"astalåcion e môde tecse. Po çoula, tchoûkîz sol tape «F1» a l' enondaedje\n"
+"et poy tapez «text»."
 
-#: install_steps_gtk.pm:223 install_steps_interactive.pm:624
+#: install_steps_gtk.pm:224 install_steps_interactive.pm:624
 #, c-format
 msgid "Package Group Selection"
 msgstr "Tchoezi les groupes di pacaedjes"
 
-#: install_steps_gtk.pm:249 install_steps_interactive.pm:567
+#: install_steps_gtk.pm:250 install_steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Grandeu å totå: %d / %d Mo"
 
-#: install_steps_gtk.pm:294
+#: install_steps_gtk.pm:295
 #, c-format
 msgid "Bad package"
 msgstr "Måva pacaedje"
 
-#: install_steps_gtk.pm:296
+#: install_steps_gtk.pm:297
 #, c-format
 msgid "Version: "
 msgstr "Modêye: "
 
-#: install_steps_gtk.pm:297
+#: install_steps_gtk.pm:298
 #, c-format
 msgid "Size: "
 msgstr "Grandeu: "
 
-#: install_steps_gtk.pm:297
+#: install_steps_gtk.pm:298
 #, c-format
 msgid "%d KB\n"
 msgstr "%d Ko\n"
 
-#: install_steps_gtk.pm:298
+#: install_steps_gtk.pm:299
 #, c-format
 msgid "Importance: "
 msgstr "Impôrtance: "
 
-#: install_steps_gtk.pm:331
+#: install_steps_gtk.pm:332
 #, c-format
 msgid "You can not select/unselect this package"
 msgstr "Vos n' poloz nén tchoezi/distchoezi ci pacaedje chal"
 
-#: install_steps_gtk.pm:335
+#: install_steps_gtk.pm:336
 #, c-format
 msgid "due to missing %s"
 msgstr "cåze di %s ki manke"
 
-#: install_steps_gtk.pm:336
+#: install_steps_gtk.pm:337
 #, c-format
 msgid "due to unsatisfied %s"
 msgstr "cåze di %s ki n' est nén satisfyî"
 
-#: install_steps_gtk.pm:337
+#: install_steps_gtk.pm:338
 #, c-format
 msgid "trying to promote %s"
 msgstr ""
 
-#: install_steps_gtk.pm:338
+#: install_steps_gtk.pm:339
 #, c-format
 msgid "in order to keep %s"
 msgstr "po wårder %s"
 
-#: install_steps_gtk.pm:343
+#: install_steps_gtk.pm:344
 #, c-format
 msgid ""
 "You can not select this package as there is not enough space left to install "
@@ -6696,27 +6703,27 @@ msgstr ""
 "Vos n' poloz tchoezi ci pacaedje chal ca n' a nén del plaece assez ki po "
 "l' astaler"
 
-#: install_steps_gtk.pm:346
+#: install_steps_gtk.pm:347
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Les pacaedjes ki shuvèt vont esse astalés"
 
-#: install_steps_gtk.pm:347
+#: install_steps_gtk.pm:348
 #, c-format
 msgid "The following packages are going to be removed"
 msgstr "Les pacaedjes ki shuvèt vont esse disastalés"
 
-#: install_steps_gtk.pm:371
+#: install_steps_gtk.pm:372
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
 msgstr "Ci pacaedje est obligatwere, vos n' poloz nén li distchoezi"
 
-#: install_steps_gtk.pm:373
+#: install_steps_gtk.pm:374
 #, c-format
 msgid "You can not unselect this package. It is already installed"
 msgstr "Vos n' poloz nén distchoezi ci pacaedje chal. Il est ddja astalé"
 
-#: install_steps_gtk.pm:376
+#: install_steps_gtk.pm:377
 #, c-format
 msgid ""
 "This package must be upgraded.\n"
@@ -6725,78 +6732,78 @@ msgstr ""
 "Ci pacaedje ci dvreut esse metou a djoû\n"
 "Estoz seur ki vos l' voloz distchoezi?"
 
-#: install_steps_gtk.pm:379
+#: install_steps_gtk.pm:380
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
 msgstr "Vos n' poloz nén distchoezi ci pacaedje chal. I l' fåt mete a djoû"
 
-#: install_steps_gtk.pm:384
+#: install_steps_gtk.pm:385
 #, c-format
 msgid "Show automatically selected packages"
 msgstr "Mostrer les pacaedjes tchoezis otomaticmint"
 
-#: install_steps_gtk.pm:389
+#: install_steps_gtk.pm:390
 #, c-format
 msgid "Load/Save selection"
 msgstr "Tcherdjî/schaper li tchuze des pacaedjes"
 
-#: install_steps_gtk.pm:390
+#: install_steps_gtk.pm:391
 #, c-format
 msgid "Updating package selection"
 msgstr "Metaedje a djoû del tchuze des pacaedjes"
 
-#: install_steps_gtk.pm:395
+#: install_steps_gtk.pm:396
 #, c-format
 msgid "Minimal install"
 msgstr "Astalåcion minimåle"
 
-#: install_steps_gtk.pm:409 install_steps_interactive.pm:483
+#: install_steps_gtk.pm:410 install_steps_interactive.pm:483
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Tchoezixhoz les pacaedjes k' vos voloz astaler"
 
-#: install_steps_gtk.pm:425 install_steps_interactive.pm:706
+#: install_steps_gtk.pm:426 install_steps_interactive.pm:710
 #, c-format
 msgid "Installing"
 msgstr "Astalant"
 
-#: install_steps_gtk.pm:432
+#: install_steps_gtk.pm:433
 #, c-format
 msgid "Estimating"
 msgstr "Dj' asteme"
 
-#: install_steps_gtk.pm:481
+#: install_steps_gtk.pm:482
 #, c-format
 msgid "No details"
 msgstr "Po vey les rclames"
 
-#: install_steps_gtk.pm:489
+#: install_steps_gtk.pm:490
 #, c-format
 msgid "Time remaining "
 msgstr "Tins ki dmeure "
 
-#: install_steps_gtk.pm:496
+#: install_steps_gtk.pm:497
 #, c-format
 msgid "Please wait, preparing installation..."
 msgstr "Tårdjîz on pô s' i vs plait, dj' aprestêye l' astalaedje"
 
-#: install_steps_gtk.pm:511
+#: install_steps_gtk.pm:512
 #, c-format
 msgid "%d packages"
 msgstr "%d pacaedjes"
 
-#: install_steps_gtk.pm:516
+#: install_steps_gtk.pm:517
 #, c-format
 msgid "Installing package %s"
 msgstr "Astalant li pacaedje %s"
 
-#: install_steps_gtk.pm:551 install_steps_interactive.pm:92
-#: install_steps_interactive.pm:731
+#: install_steps_gtk.pm:552 install_steps_interactive.pm:92
+#: install_steps_interactive.pm:735
 #, c-format
 msgid "Refuse"
 msgstr "Nén accepter"
 
-#: install_steps_gtk.pm:555 install_steps_interactive.pm:735
+#: install_steps_gtk.pm:556 install_steps_interactive.pm:739
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6811,29 +6818,29 @@ msgstr ""
 "Si vos n' l' avoz nén, clitchîz so «Rinoncî» po rinoncî a astaler a pårti\n"
 "di ci CDROM chal."
 
-#: install_steps_gtk.pm:570 install_steps_interactive.pm:746
+#: install_steps_gtk.pm:571 install_steps_interactive.pm:750
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Åk n' a nén stî come dj' arindjive les pacaedjes:"
 
-#: install_steps_gtk.pm:570 install_steps_gtk.pm:574
-#: install_steps_interactive.pm:746 install_steps_interactive.pm:750
+#: install_steps_gtk.pm:571 install_steps_gtk.pm:575
+#: install_steps_interactive.pm:750 install_steps_interactive.pm:754
 #, c-format
 msgid "Go on anyway?"
 msgstr "Dji continouwe tot l' minme?"
 
-#: install_steps_gtk.pm:574 install_steps_interactive.pm:750
+#: install_steps_gtk.pm:575 install_steps_interactive.pm:754
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Åk n' a nén stî come dj' astaléve les pacaedjes:"
 
-#: install_steps_gtk.pm:616 install_steps_interactive.pm:921
-#: install_steps_interactive.pm:1073
+#: install_steps_gtk.pm:617 install_steps_interactive.pm:926
+#: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "nén apontyî"
 
-#: install_steps_gtk.pm:679
+#: install_steps_gtk.pm:680
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -6843,7 +6850,7 @@ msgstr ""
 "Si vos vloz passer houte di sacwants d' zels, vos les ploz asteure "
 "distchoezi."
 
-#: install_steps_gtk.pm:688
+#: install_steps_gtk.pm:689
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -6856,7 +6863,7 @@ msgstr ""
 "L' astalaedje si frè-st adon a pårti del deure plake, eyet les pacaedjes "
 "vont dmorer disponibes on côp ki l' sistinme serè astalé."
 
-#: install_steps_gtk.pm:690
+#: install_steps_gtk.pm:691
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copyî les plakes lazer en etir"
@@ -6951,7 +6958,7 @@ msgstr "IDE"
 msgid "Configuring IDE"
 msgstr "Apontiant les éndjins IDE"
 
-#: install_steps_interactive.pm:256 network/tools.pm:181
+#: install_steps_interactive.pm:256
 #, c-format
 msgid "No partition available"
 msgstr "nole pårticion di disponibe"
@@ -7032,7 +7039,7 @@ msgstr "Dji cwir après les pacaedjes ki sont ddja astalés..."
 msgid "Finding packages to upgrade..."
 msgstr "Dji cwir après les pacaedjes a mete a djoû"
 
-#: install_steps_interactive.pm:421 install_steps_interactive.pm:826
+#: install_steps_interactive.pm:421 install_steps_interactive.pm:830
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Tchoezixhoz on muroe po nd aberweter des pacaedjes foû"
@@ -7123,12 +7130,12 @@ msgstr ""
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CDROM lomé «%s»"
 
-#: install_steps_interactive.pm:706
+#: install_steps_interactive.pm:710
 #, c-format
 msgid "Preparing installation"
 msgstr "Dj' aprestêye l' astalaedje"
 
-#: install_steps_interactive.pm:715
+#: install_steps_interactive.pm:719
 #, c-format
 msgid ""
 "Installing package %s\n"
@@ -7137,17 +7144,17 @@ msgstr ""
 "Astalant li pacaedje %s\n"
 "%d%%"
 
-#: install_steps_interactive.pm:764
+#: install_steps_interactive.pm:768
 #, c-format
 msgid "Post-install configuration"
 msgstr "Apontiaedje di post-astalåcion"
 
-#: install_steps_interactive.pm:771
+#: install_steps_interactive.pm:775
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: install_steps_interactive.pm:800
+#: install_steps_interactive.pm:804
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7167,78 +7174,80 @@ msgstr ""
 "\n"
 "Voloz vs astaler les pacaedjes metous a djoû?"
 
-#: install_steps_interactive.pm:821
+#: install_steps_interactive.pm:825
 #, c-format
 msgid ""
-"Contacting Mandrivalinux web site to get the list of available mirrors..."
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
+"Dj' atôche li waibe da Mandriva Linux po-z aveur li djivêye di muroes k' i "
+"gn a"
 
-#: install_steps_interactive.pm:840
+#: install_steps_interactive.pm:844
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Dj' atôche li muroe po-z aveur li djivêye des pacaedjes"
 
-#: install_steps_interactive.pm:844
+#: install_steps_interactive.pm:848
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Dji n' a savou m' raloyî å muroe %s"
 
-#: install_steps_interactive.pm:844
+#: install_steps_interactive.pm:848
 #, c-format
 msgid "Would you like to try again?"
 msgstr "Voloz vs rissayî?"
 
-#: install_steps_interactive.pm:870 standalone/drakclock:45
+#: install_steps_interactive.pm:875 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Dins kéne coisse d' eureye vikez?"
 
-#: install_steps_interactive.pm:875
+#: install_steps_interactive.pm:880
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Sincronijhaedje otomatike di l' eure (avou NTP)"
 
-#: install_steps_interactive.pm:883
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "NTP Server"
 msgstr "Sierveu NTP"
 
-#: install_steps_interactive.pm:925 steps.pm:30
+#: install_steps_interactive.pm:930 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Rascourti éndjolreye"
 
-#: install_steps_interactive.pm:938 install_steps_interactive.pm:946
-#: install_steps_interactive.pm:964 install_steps_interactive.pm:971
-#: install_steps_interactive.pm:1125 services.pm:133
+#: install_steps_interactive.pm:943 install_steps_interactive.pm:951
+#: install_steps_interactive.pm:969 install_steps_interactive.pm:976
+#: install_steps_interactive.pm:1130 services.pm:133
 #: standalone/drakbackup:1571
 #, c-format
 msgid "System"
 msgstr "Sistinme"
 
-#: install_steps_interactive.pm:978 install_steps_interactive.pm:1005
-#: install_steps_interactive.pm:1022 install_steps_interactive.pm:1038
-#: install_steps_interactive.pm:1049
+#: install_steps_interactive.pm:983 install_steps_interactive.pm:1010
+#: install_steps_interactive.pm:1027 install_steps_interactive.pm:1043
+#: install_steps_interactive.pm:1054
 #, c-format
 msgid "Hardware"
 msgstr "Éndjolreye"
 
-#: install_steps_interactive.pm:984 install_steps_interactive.pm:993
+#: install_steps_interactive.pm:989 install_steps_interactive.pm:998
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Sierveu CUPS å lon"
 
-#: install_steps_interactive.pm:984
+#: install_steps_interactive.pm:989
 #, c-format
 msgid "No printer"
 msgstr "Nole sicrirece"
 
-#: install_steps_interactive.pm:1026
+#: install_steps_interactive.pm:1031
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Avoz vs ene cåte son ISA?"
 
-#: install_steps_interactive.pm:1028
+#: install_steps_interactive.pm:1033
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7247,71 +7256,71 @@ msgstr ""
 "Enondez «alsaconf» ou «sndconfig» après l' astalåcion po-z apontyî vosse "
 "cåte son"
 
-#: install_steps_interactive.pm:1030
+#: install_steps_interactive.pm:1035
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Nole cåte son di detectêye. Sayîz «harddrake» après l' astalåcion"
 
-#: install_steps_interactive.pm:1050
+#: install_steps_interactive.pm:1055
 #, c-format
 msgid "Graphical interface"
 msgstr "Eterface grafike"
 
-#: install_steps_interactive.pm:1056 install_steps_interactive.pm:1071
+#: install_steps_interactive.pm:1061 install_steps_interactive.pm:1076
 #, c-format
 msgid "Network & Internet"
 msgstr "Rantoele locåle & daegnrece"
 
-#: install_steps_interactive.pm:1073
+#: install_steps_interactive.pm:1078
 #, c-format
 msgid "configured"
 msgstr "apontyî"
 
-#: install_steps_interactive.pm:1082 install_steps_interactive.pm:1096
+#: install_steps_interactive.pm:1087 install_steps_interactive.pm:1101
 #: steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Såvrité"
 
-#: install_steps_interactive.pm:1101
+#: install_steps_interactive.pm:1106
 #, c-format
 msgid "activated"
 msgstr "metou en alaedje"
 
-#: install_steps_interactive.pm:1101
+#: install_steps_interactive.pm:1106
 #, c-format
 msgid "disabled"
 msgstr "dismetou"
 
-#: install_steps_interactive.pm:1112
+#: install_steps_interactive.pm:1117
 #, c-format
 msgid "Boot"
 msgstr "Enondaedje"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1116
+#: install_steps_interactive.pm:1121
 #, c-format
 msgid "%s on %s"
 msgstr "%s so %s"
 
-#: install_steps_interactive.pm:1130 services.pm:175
+#: install_steps_interactive.pm:1135 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Siervices: %d en alaedje po %d eredjistrés"
 
-#: install_steps_interactive.pm:1140
+#: install_steps_interactive.pm:1145
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Vos n' avoz nén apontyî X11 (li sistinme di håynaedje grafike).\n"
 "Estoz vs seur di voleur çoula?"
 
-#: install_steps_interactive.pm:1220
+#: install_steps_interactive.pm:1225
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Dj' aprestêye l' enondrece"
 
-#: install_steps_interactive.pm:1230
+#: install_steps_interactive.pm:1235
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7324,12 +7333,12 @@ msgstr ""
 "mins vos dvroz eployî BootX ou ôte tchoi po-z enonder voste éndjole. "
 "L' årgumint a passer å nawea pol pårticion raecene est: root=%s"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1241
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Voloz vs eployî aboot?"
 
-#: install_steps_interactive.pm:1239
+#: install_steps_interactive.pm:1244
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7339,7 +7348,7 @@ msgstr ""
 "voloz vs ki dji saye di foirci l' astalåcion, minme si çoula pout\n"
 "distrure li prumire pårticion?"
 
-#: install_steps_interactive.pm:1260
+#: install_steps_interactive.pm:1265
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7348,22 +7357,22 @@ msgstr ""
 "Dins ç' livea di såvrité chal, l' accès åzès fitchîs des pårticions Windows "
 "n' est possibe ki po l' manaedjeu di l' éndjole."
 
-#: install_steps_interactive.pm:1289 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1294 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Metoz ene blanke plakete divins li lijheu %s"
 
-#: install_steps_interactive.pm:1294
+#: install_steps_interactive.pm:1299
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Metoz ene ôte plakete po-z î mete les mineus"
 
-#: install_steps_interactive.pm:1296
+#: install_steps_interactive.pm:1301
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Dji fé li plakete d' enondaedje otomatike"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1313
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7374,12 +7383,12 @@ msgstr ""
 "\n"
 "Voloz vs vormint cwiter asteure?"
 
-#: install_steps_interactive.pm:1324
+#: install_steps_interactive.pm:1329
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Fé li plakete d' astalaedje otomatike"
 
-#: install_steps_interactive.pm:1326
+#: install_steps_interactive.pm:1331
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -7396,8 +7405,8 @@ msgstr ""
 
 #: install_steps_newt.pm:20
 #, c-format
-msgid "Mandrivalinux Installation %s"
-msgstr ""
+msgid "Mandriva Linux Installation %s"
+msgstr "Astalåcion di Mandriva Linux %s"
 
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
@@ -7412,7 +7421,7 @@ msgstr ""
 msgid "Choose a file"
 msgstr "Tchoezixhoz on fitchî"
 
-#: interactive.pm:318 interactive/gtk.pm:489 standalone/drakbackup:1512
+#: interactive.pm:318 interactive/gtk.pm:505 standalone/drakbackup:1512
 #: standalone/drakfont:656 standalone/drakroam:218 standalone/drakups:301
 #: standalone/drakups:361 standalone/drakups:381 standalone/drakvpn:333
 #: standalone/drakvpn:694
@@ -7420,12 +7429,12 @@ msgstr "Tchoezixhoz on fitchî"
 msgid "Add"
 msgstr "Radjouter"
 
-#: interactive.pm:318 interactive/gtk.pm:489
+#: interactive.pm:318 interactive/gtk.pm:505
 #, c-format
 msgid "Modify"
 msgstr "Candjî"
 
-#: interactive.pm:318 interactive/gtk.pm:489 standalone/drakroam:202
+#: interactive.pm:318 interactive/gtk.pm:505 standalone/drakroam:202
 #: standalone/drakups:303 standalone/drakups:363 standalone/drakups:383
 #: standalone/drakvpn:333 standalone/drakvpn:694
 #, c-format
@@ -8738,7 +8747,7 @@ msgid "Gabon"
 msgstr "Gabon"
 
 #: lang.pm:269 network/adsl_consts.pm:944 network/adsl_consts.pm:955
-#: network/netconnect.pm:53
+#: network/netconnect.pm:54
 #, c-format
 msgid "United Kingdom"
 msgstr "Rweyåme Uni"
@@ -9468,18 +9477,18 @@ msgstr "Zambeye"
 msgid "Zimbabwe"
 msgstr "Zimbabwè"
 
-#: lang.pm:1073
+#: lang.pm:1082
 #, c-format
 msgid "You should install the following packages: %s"
 msgstr "Vos dvrîz astaler les pacaedjes shuvants: %s"
 
 #. -PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-#: lang.pm:1076 standalone/scannerdrake:135
+#: lang.pm:1085 standalone/scannerdrake:135
 #, c-format
 msgid ", "
 msgstr ", "
 
-#: lang.pm:1129
+#: lang.pm:1138
 #, c-format
 msgid "Welcome to %s"
 msgstr "Wilicome a %s"
@@ -9686,9 +9695,9 @@ msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:58 network/modem.pm:59 network/modem.pm:60
 #: network/modem.pm:85 network/modem.pm:99 network/modem.pm:104
-#: network/modem.pm:137 network/netconnect.pm:700 network/netconnect.pm:705
-#: network/netconnect.pm:717 network/netconnect.pm:722
-#: network/netconnect.pm:738 network/netconnect.pm:740
+#: network/modem.pm:137 network/netconnect.pm:671 network/netconnect.pm:676
+#: network/netconnect.pm:688 network/netconnect.pm:693
+#: network/netconnect.pm:709 network/netconnect.pm:711
 #, c-format
 msgid "Automatic"
 msgstr "Otomatike"
@@ -9903,12 +9912,12 @@ msgstr "Sagem USB (eployant PPPoA)"
 msgid "Sagem (using DHCP) USB"
 msgstr "Sagem USB (eployant DHCP)"
 
-#: network/adsl.pm:35 network/netconnect.pm:906
+#: network/adsl.pm:35 network/netconnect.pm:808
 #, c-format
 msgid "Connect to the Internet"
 msgstr "Si raloyî al rantoele daegnrece"
 
-#: network/adsl.pm:36 network/netconnect.pm:907
+#: network/adsl.pm:36 network/netconnect.pm:809
 #, c-format
 msgid ""
 "The most common way to connect with adsl is pppoe.\n"
@@ -9919,7 +9928,7 @@ msgstr ""
 "Mins nerén, gn a des ôtes raloyaedjes ki s' siervèt fok di pptp ou DHCP.\n"
 "Si vos n' e savoz rén, tchoezixhoz «eployî PPPoE»."
 
-#: network/adsl.pm:41 network/netconnect.pm:911
+#: network/adsl.pm:41 network/netconnect.pm:813
 #, c-format
 msgid "ADSL connection type:"
 msgstr "Sôre di raloyaedje ADSL:"
@@ -10049,36 +10058,36 @@ msgstr "Totafwait (nou côpe feu)"
 msgid "Other ports"
 msgstr "Ôtes pôrts"
 
-#: network/isdn.pm:124 network/netconnect.pm:547 network/netconnect.pm:661
-#: network/netconnect.pm:664 network/netconnect.pm:822
-#: network/netconnect.pm:826
+#: network/isdn.pm:121 network/netconnect.pm:538 network/netconnect.pm:632
+#: network/netconnect.pm:635 network/netconnect.pm:779
+#: network/netconnect.pm:783
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Nén el djivêye - apontyîz al mwin"
 
-#: network/isdn.pm:167 network/netconnect.pm:479
+#: network/isdn.pm:164 network/netconnect.pm:470
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:167 network/netconnect.pm:479
+#: network/isdn.pm:164 network/netconnect.pm:470
 #, c-format
 msgid "I do not know"
 msgstr "Dji n' sai nén"
 
-#: network/isdn.pm:168 network/netconnect.pm:479
+#: network/isdn.pm:165 network/netconnect.pm:470
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:169 network/netconnect.pm:479
+#: network/isdn.pm:166 network/netconnect.pm:470
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:58 network/modem.pm:59 network/modem.pm:60
-#: network/netconnect.pm:705 network/netconnect.pm:722
-#: network/netconnect.pm:738
+#: network/netconnect.pm:676 network/netconnect.pm:693
+#: network/netconnect.pm:709
 #, c-format
 msgid "Manual"
 msgstr "Al mwin"
@@ -10115,44 +10124,44 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr ""
 
-#: network/netconnect.pm:91 network/netconnect.pm:576
-#: network/netconnect.pm:580
+#: network/netconnect.pm:92 network/netconnect.pm:574
+#: network/netconnect.pm:581
 #, c-format
 msgid "Manual choice"
 msgstr "Tchoezi al mwin"
 
-#: network/netconnect.pm:91
+#: network/netconnect.pm:92
 #, c-format
 msgid "Internal ISDN card"
 msgstr "Cåte RDIS divintrinne"
 
-#: network/netconnect.pm:104 printer/printerdrake.pm:1418
+#: network/netconnect.pm:105 printer/printerdrake.pm:1418
 #: standalone/drakups:75
 #, c-format
 msgid "Manual configuration"
 msgstr "Apontiaedje manuwel"
 
-#: network/netconnect.pm:105
+#: network/netconnect.pm:106
 #, c-format
 msgid "Automatic IP (BOOTP/DHCP)"
 msgstr "Adresse IP otomatike (BOOTP/DHCP)"
 
-#: network/netconnect.pm:107
+#: network/netconnect.pm:108
 #, c-format
 msgid "Automatic IP (BOOTP/DHCP/Zeroconf)"
 msgstr "Adresse IP otomatike (BOOTP/DHCP/Zeroconf)"
 
-#: network/netconnect.pm:110
+#: network/netconnect.pm:111
 #, c-format
 msgid "Protocol for the rest of the world"
 msgstr "Protocole po les ôtes payis"
 
-#: network/netconnect.pm:112 standalone/drakconnect:574
+#: network/netconnect.pm:113 standalone/drakconnect:574
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "Protocole po l' Urope (EDSS1)"
 
-#: network/netconnect.pm:113 standalone/drakconnect:575
+#: network/netconnect.pm:114 standalone/drakconnect:575
 #, c-format
 msgid ""
 "Protocol for the rest of the world\n"
@@ -10161,188 +10170,188 @@ msgstr ""
 "Protocole po les ôtes payis \n"
 " nou canå D (lenes di fyis louwés)"
 
-#: network/netconnect.pm:153
+#: network/netconnect.pm:154 network/thirdparty.pm:183
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Modem USB Alcatel Speedtouch"
 
-#: network/netconnect.pm:154
+#: network/netconnect.pm:155
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Modem USB Sagem"
 
-#: network/netconnect.pm:155
+#: network/netconnect.pm:156
 #, c-format
 msgid "Bewan modem"
 msgstr "Modem Bewan"
 
-#: network/netconnect.pm:156
+#: network/netconnect.pm:157
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "Modem Hi-Focus ECI"
 
-#: network/netconnect.pm:160
+#: network/netconnect.pm:161
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Protocole DHCP d' apontiaedje dinamike des lodjoes"
 
-#: network/netconnect.pm:161
+#: network/netconnect.pm:162
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Apontiaedje TCP/IP manuwel"
 
-#: network/netconnect.pm:162
+#: network/netconnect.pm:163
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Protocole PPP pa tunel (PPTP)"
 
-#: network/netconnect.pm:163
+#: network/netconnect.pm:164
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP å dzeu d' Ethernet (PPPoE)"
 
-#: network/netconnect.pm:164
+#: network/netconnect.pm:165
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP å dzeu d' ATM (PPPoA)"
 
-#: network/netconnect.pm:165
+#: network/netconnect.pm:166
 #, c-format
 msgid "DSL over CAPI"
 msgstr "DSL å dzeu d' CAPI"
 
-#: network/netconnect.pm:169
+#: network/netconnect.pm:170
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Circût di lenes di fyis louwés (LLC) pa pontea ethernet"
 
-#: network/netconnect.pm:170
+#: network/netconnect.pm:171
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Forveyou circût (VC) pa pontea ethernet"
 
-#: network/netconnect.pm:171
+#: network/netconnect.pm:172
 #, c-format
 msgid "Routed IP LLC"
 msgstr "Circût di lenes di fyis louwés (LLC) pa routaedje IP"
 
-#: network/netconnect.pm:172
+#: network/netconnect.pm:173
 #, c-format
 msgid "Routed IP VC"
 msgstr "Forveyou circût (VC) pa routaedje IP"
 
-#: network/netconnect.pm:173
+#: network/netconnect.pm:174
 #, c-format
 msgid "PPPoA LLC"
 msgstr "Circût di lenes di fyis louwés (LLC) pa PPP å dzeu d' ATM (PPPoA)"
 
-#: network/netconnect.pm:174
+#: network/netconnect.pm:175
 #, c-format
 msgid "PPPoA VC"
 msgstr "Forveyou circût (VC) pa PPP å dzeu d' ATM (PPPoA)"
 
-#: network/netconnect.pm:178 standalone/drakconnect:509
+#: network/netconnect.pm:179 standalone/drakconnect:509
 #, c-format
 msgid "Script-based"
 msgstr "Pa scripe"
 
-#: network/netconnect.pm:179 standalone/drakconnect:509
+#: network/netconnect.pm:180 standalone/drakconnect:509
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:180 standalone/drakconnect:509
+#: network/netconnect.pm:181 standalone/drakconnect:509
 #, c-format
 msgid "Terminal-based"
 msgstr "Pa terminå"
 
-#: network/netconnect.pm:181 standalone/drakconnect:509
+#: network/netconnect.pm:182 standalone/drakconnect:509
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:182 standalone/drakconnect:509
+#: network/netconnect.pm:183 standalone/drakconnect:509
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:187
+#: network/netconnect.pm:188
 #, c-format
 msgid "Open WEP"
 msgstr ""
 
-#: network/netconnect.pm:188
+#: network/netconnect.pm:189
 #, c-format
 msgid "Restricted WEP"
 msgstr ""
 
-#: network/netconnect.pm:189
+#: network/netconnect.pm:190
 #, c-format
 msgid "WPA Pre-Shared Key"
 msgstr ""
 
-#: network/netconnect.pm:294 standalone/drakconnect:60
+#: network/netconnect.pm:295 standalone/drakconnect:60
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Apontiaedje del Rantoele"
 
-#: network/netconnect.pm:300
+#: network/netconnect.pm:301
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(detecté sol pôrt %s)"
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:302
+#: network/netconnect.pm:303
 #, c-format
 msgid "(detected %s)"
 msgstr "(%s detecté)"
 
-#: network/netconnect.pm:302
+#: network/netconnect.pm:303
 #, c-format
 msgid "(detected)"
 msgstr "(detecté)"
 
-#: network/netconnect.pm:304
+#: network/netconnect.pm:305
 #, c-format
 msgid "LAN connection"
 msgstr "Raloyaedje al rantoele locåle"
 
-#: network/netconnect.pm:305 network/netconnect.pm:324
+#: network/netconnect.pm:306 network/netconnect.pm:325
 #, c-format
 msgid "Wireless connection"
 msgstr "Raloyaedje sins fyis"
 
-#: network/netconnect.pm:306
+#: network/netconnect.pm:307
 #, c-format
 msgid "ADSL connection"
 msgstr "Raloyaedje ADSL"
 
-#: network/netconnect.pm:307
+#: network/netconnect.pm:308
 #, c-format
 msgid "Cable connection"
 msgstr "Raloyaedje viè cåbe TV"
 
-#: network/netconnect.pm:308
+#: network/netconnect.pm:309
 #, c-format
 msgid "ISDN connection"
 msgstr "Raloyaedje viè RDIS"
 
-#: network/netconnect.pm:309
+#: network/netconnect.pm:310
 #, c-format
 msgid "Modem connection"
 msgstr "Raloyaedje viè modem"
 
-#: network/netconnect.pm:310
+#: network/netconnect.pm:311
 #, c-format
 msgid "DVB connection"
 msgstr ""
 
-#: network/netconnect.pm:320
+#: network/netconnect.pm:321
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Tchoezixhoz li raloyaedje ki vos voloz apontyî"
 
-#: network/netconnect.pm:334
+#: network/netconnect.pm:335
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -10355,141 +10364,140 @@ msgstr ""
 "\n"
 "Clitchîz so «%s» po continouwer."
 
-#: network/netconnect.pm:342 network/netconnect.pm:958
+#: network/netconnect.pm:343 network/netconnect.pm:860
 #, c-format
 msgid "Connection Configuration"
 msgstr "Apontiaedje do raloyaedje"
 
-#: network/netconnect.pm:343 network/netconnect.pm:959
+#: network/netconnect.pm:344 network/netconnect.pm:861
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Rimplixhoz ou verifyîz les tchamps chal pa dzo"
 
-#: network/netconnect.pm:350 standalone/drakconnect:565
+#: network/netconnect.pm:351 standalone/drakconnect:565
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ del cåte"
 
-#: network/netconnect.pm:351 standalone/drakconnect:566
+#: network/netconnect.pm:352 standalone/drakconnect:566
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Canå DMA del cåte"
 
-#: network/netconnect.pm:352 standalone/drakconnect:567
+#: network/netconnect.pm:353 standalone/drakconnect:567
 #, c-format
 msgid "Card IO"
 msgstr "I/R del cåte"
 
-#: network/netconnect.pm:353 standalone/drakconnect:568
+#: network/netconnect.pm:354 standalone/drakconnect:568
 #, c-format
 msgid "Card IO_0"
 msgstr "I/R del cåte (0)"
 
-#: network/netconnect.pm:354
+#: network/netconnect.pm:355
 #, c-format
 msgid "Card IO_1"
 msgstr "I/R del cåte (1)"
 
-#: network/netconnect.pm:355
+#: network/netconnect.pm:356
 #, c-format
 msgid "Your personal phone number"
 msgstr "Li limero di telefone da vosse"
 
-#: network/netconnect.pm:356 network/netconnect.pm:962
+#: network/netconnect.pm:357 network/netconnect.pm:864
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "No do ahesseu (eg: walonet.be)"
 
-#: network/netconnect.pm:357 standalone/drakconnect:504
+#: network/netconnect.pm:358 standalone/drakconnect:504
 #, c-format
 msgid "Provider phone number"
 msgstr "Limero di telefone di l' ahesseu"
 
-#: network/netconnect.pm:358
+#: network/netconnect.pm:359
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "1î DNS do ahesseu (opcionel)"
 
-#: network/netconnect.pm:359
+#: network/netconnect.pm:360
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "2inme DNS do ahesseu (opcionel)"
 
-#: network/netconnect.pm:360 standalone/drakconnect:455
+#: network/netconnect.pm:361 standalone/drakconnect:455
 #, c-format
 msgid "Dialing mode"
 msgstr "Môde di houcaedje"
 
-#: network/netconnect.pm:361 standalone/drakconnect:460
+#: network/netconnect.pm:362 standalone/drakconnect:460
 #: standalone/drakconnect:528
 #, c-format
 msgid "Connection speed"
 msgstr "Roedeu do raloyaedje"
 
-#: network/netconnect.pm:362 standalone/drakconnect:465
+#: network/netconnect.pm:363 standalone/drakconnect:465
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Tårdjaedje (e seg) pol raloyaedje"
 
-#: network/netconnect.pm:365 network/netconnect.pm:386
-#: network/netconnect.pm:965 standalone/drakconnect:502
+#: network/netconnect.pm:366 network/netconnect.pm:387
+#: network/netconnect.pm:867 standalone/drakconnect:502
 #, c-format
 msgid "Account Login (user name)"
 msgstr "No d' elodjaedje do conte (no d' uzeu)"
 
-#: network/netconnect.pm:366 network/netconnect.pm:387
-#: network/netconnect.pm:966 standalone/drakconnect:503
+#: network/netconnect.pm:367 network/netconnect.pm:388
+#: network/netconnect.pm:868 standalone/drakconnect:503
 #, c-format
 msgid "Account Password"
 msgstr "Sicret do conte"
 
-#: network/netconnect.pm:382
+#: network/netconnect.pm:383
 #, c-format
 msgid "Cable: account options"
 msgstr "Raloyaedje pa cåbe: tchuzes pol conte"
 
-#: network/netconnect.pm:385
+#: network/netconnect.pm:386
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr "Eployî BPALogin (end a mezåjhe po Telstra)"
 
-#: network/netconnect.pm:419 network/netconnect.pm:775
-#: network/netconnect.pm:1004 network/netconnect.pm:1309
+#: network/netconnect.pm:420 network/netconnect.pm:746
+#: network/netconnect.pm:906 network/netconnect.pm:1210
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Tchoezixhoz l' eterface rantoele a-z apontyî"
 
-#: network/netconnect.pm:421 network/netconnect.pm:469
-#: network/netconnect.pm:776 network/netconnect.pm:1006
-#: network/shorewall.pm:96 standalone/drakconnect:720 standalone/drakgw:224
-#: standalone/drakvpn:221
+#: network/netconnect.pm:422 network/netconnect.pm:460
+#: network/netconnect.pm:747 network/netconnect.pm:908 network/shorewall.pm:72
+#: standalone/drakconnect:720 standalone/drakvpn:221
 #, c-format
 msgid "Net Device"
 msgstr "Éndjin rantoele"
 
-#: network/netconnect.pm:422 network/netconnect.pm:430
+#: network/netconnect.pm:423 network/netconnect.pm:431
 #, c-format
 msgid "External ISDN modem"
 msgstr "Cåte RDIS difoûtrinne"
 
-#: network/netconnect.pm:468 standalone/harddrake2:215
+#: network/netconnect.pm:459 standalone/harddrake2:215
 #, c-format
 msgid "Select a device!"
 msgstr "Tchoezixhoz èn éndjin!"
 
-#: network/netconnect.pm:477 network/netconnect.pm:487
-#: network/netconnect.pm:497 network/netconnect.pm:530
-#: network/netconnect.pm:544
+#: network/netconnect.pm:468 network/netconnect.pm:478
+#: network/netconnect.pm:488 network/netconnect.pm:521
+#: network/netconnect.pm:535
 #, c-format
 msgid "ISDN Configuration"
 msgstr "Apontiaedje pol RDIS"
 
-#: network/netconnect.pm:478
+#: network/netconnect.pm:469
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Kéne sôre di cåte avoz vs?"
 
-#: network/netconnect.pm:488
+#: network/netconnect.pm:479
 #, c-format
 msgid ""
 "\n"
@@ -10504,22 +10512,22 @@ msgstr ""
 "\n"
 "Si vos avoz ene cåte PCMCIA, vos dvoz cnoxhe l' IRQ et I/R di vosse cåte.\n"
 
-#: network/netconnect.pm:492
+#: network/netconnect.pm:483
 #, c-format
 msgid "Continue"
 msgstr "Continouwer"
 
-#: network/netconnect.pm:492
+#: network/netconnect.pm:483
 #, c-format
 msgid "Abort"
 msgstr "Rinoncî"
 
-#: network/netconnect.pm:498
+#: network/netconnect.pm:489
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Kéne est li cåte RDIS da vosse dins l' djivêye ?"
 
-#: network/netconnect.pm:516
+#: network/netconnect.pm:507
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10530,25 +10538,25 @@ msgstr ""
 "pus di fonccionålités kel libe mineu (come l' evoyaedje di facs, metans). Ké "
 "mineu voloz vs eployî?"
 
-#: network/netconnect.pm:518 standalone/drakconnect:117 standalone/drakups:251
+#: network/netconnect.pm:509 standalone/drakconnect:117 standalone/drakups:251
 #: standalone/harddrake2:132
 #, c-format
 msgid "Driver"
 msgstr "Mineu"
 
-#: network/netconnect.pm:530
+#: network/netconnect.pm:521
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Ké protocole voloz vs eployî?"
 
-#: network/netconnect.pm:532 standalone/drakconnect:117
+#: network/netconnect.pm:523 standalone/drakconnect:117
 #: standalone/drakconnect:311 standalone/drakconnect:573
 #: standalone/drakvpn:1142
 #, c-format
 msgid "Protocol"
 msgstr "Protocole"
 
-#: network/netconnect.pm:544
+#: network/netconnect.pm:535
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10557,13 +10565,13 @@ msgstr ""
 "Tchoezixhoz vosse ahesseu.\n"
 " S' i n' si trove nén el djivêye, tchoezixhoz «Unlisted»"
 
-#: network/netconnect.pm:546 network/netconnect.pm:660
-#: network/netconnect.pm:821
+#: network/netconnect.pm:537 network/netconnect.pm:631
+#: network/netconnect.pm:778
 #, c-format
 msgid "Provider:"
 msgstr "Ahesseu:"
 
-#: network/netconnect.pm:561
+#: network/netconnect.pm:552
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10572,52 +10580,52 @@ msgstr ""
 "Li modem da vosse n' est nén sopoirté på sistinme.\n"
 "Loukîz sol waibe http://www.linmodems.org/"
 
-#: network/netconnect.pm:573
+#: network/netconnect.pm:571
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Tchoezixhoz l' modem a-z apontyî:"
 
-#: network/netconnect.pm:627
+#: network/netconnect.pm:599
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Tchoezixhoz li pôrt séreye ki vosse modem est raloyî dzo"
 
-#: network/netconnect.pm:658
+#: network/netconnect.pm:629
 #, c-format
 msgid "Select your provider:"
 msgstr "Tchoezixhoz vost ahesseu:"
 
-#: network/netconnect.pm:682
+#: network/netconnect.pm:653
 #, c-format
 msgid "Dialup: account options"
 msgstr "Houcaedje pa modem: tchuzes pol conte"
 
-#: network/netconnect.pm:685
+#: network/netconnect.pm:656
 #, c-format
 msgid "Connection name"
 msgstr "No di raloyaedje"
 
-#: network/netconnect.pm:686
+#: network/netconnect.pm:657
 #, c-format
 msgid "Phone number"
 msgstr "Limero di telefone"
 
-#: network/netconnect.pm:687
+#: network/netconnect.pm:658
 #, c-format
 msgid "Login ID"
 msgstr "ID d' elodjaedje"
 
-#: network/netconnect.pm:702 network/netconnect.pm:735
+#: network/netconnect.pm:673 network/netconnect.pm:706
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "Houcaedje pa modem: Parametes IP"
 
-#: network/netconnect.pm:705
+#: network/netconnect.pm:676
 #, c-format
 msgid "IP parameters"
 msgstr "Parametes IP"
 
-#: network/netconnect.pm:706 network/netconnect.pm:1096
+#: network/netconnect.pm:677 network/netconnect.pm:996
 #: printer/printerdrake.pm:460 standalone/drakconnect:117
 #: standalone/drakconnect:327 standalone/drakconnect:915
 #: standalone/drakups:286
@@ -10625,129 +10633,79 @@ msgstr "Parametes IP"
 msgid "IP address"
 msgstr "Adresse IP"
 
-#: network/netconnect.pm:707
+#: network/netconnect.pm:678
 #, c-format
 msgid "Subnet mask"
 msgstr "Maske di dzo-rantoele"
 
-#: network/netconnect.pm:719
+#: network/netconnect.pm:690
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Houcaedje pa modem: Parametes DNS"
 
-#: network/netconnect.pm:722
+#: network/netconnect.pm:693
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:723
+#: network/netconnect.pm:694
 #, c-format
 msgid "Domain name"
 msgstr "No d' dominne"
 
-#: network/netconnect.pm:724 network/netconnect.pm:963
+#: network/netconnect.pm:695 network/netconnect.pm:865
 #: standalone/drakconnect:1033
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Prumî sierveu DNS (opcionel)"
 
-#: network/netconnect.pm:725 network/netconnect.pm:964
+#: network/netconnect.pm:696 network/netconnect.pm:866
 #: standalone/drakconnect:1034
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Deujhinme sierveu DNS (opcionel)"
 
-#: network/netconnect.pm:726
+#: network/netconnect.pm:697
 #, c-format
 msgid "Set hostname from IP"
 msgstr "Defini l' no do lodjoe d' après l' adresse IP"
 
-#: network/netconnect.pm:738 standalone/drakconnect:338
+#: network/netconnect.pm:709 standalone/drakconnect:338
 #, c-format
 msgid "Gateway"
 msgstr "Pasrele"
 
-#: network/netconnect.pm:739
+#: network/netconnect.pm:710
 #, c-format
 msgid "Gateway IP address"
 msgstr "Adresse IP del pasrele"
 
-#: network/netconnect.pm:775
+#: network/netconnect.pm:746
 #, c-format
 msgid "ADSL configuration"
 msgstr "Apontiaedje di l' ADSL"
 
-#: network/netconnect.pm:819
+#: network/netconnect.pm:776
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Tchoezixhoz vost ahesseu ADSL s' i vs plait"
 
-#: network/netconnect.pm:840
-#, c-format
-msgid ""
-"You need the Alcatel microcode.\n"
-"You can provide it now via a floppy or your windows partition,\n"
-"or skip and do it later."
-msgstr ""
-"I gn a mezåjhe do firmware d' Alcatel po fé roter l' éndjin.\n"
-"Vos l' ploz dner do côp avou ene plakete, el cweri dins\n"
-"l' pårticion Windows, ou co passer houte et l' leyî po pus tård."
-
-#: network/netconnect.pm:844 network/netconnect.pm:849
-#, c-format
-msgid "Use a floppy"
-msgstr "Eployî ene plakete"
-
-#: network/netconnect.pm:844 network/netconnect.pm:853
-#, c-format
-msgid "Use my Windows partition"
-msgstr "Eployî l' pårticion da Windows"
-
-#: network/netconnect.pm:844 network/netconnect.pm:856
-#, c-format
-msgid "Do it later"
-msgstr "El fé pus tård"
-
-#: network/netconnect.pm:863
-#, c-format
-msgid "Firmware copy failed, file %s not found"
-msgstr ""
-"Li copiaedje do firmware a fwait berwete; li fitchî %s n' a nén stî trové"
-
 #: network/netconnect.pm:870
-#, c-format
-msgid "Firmware copy succeeded"
-msgstr "Li copiaedje do firmware a stî comifåt"
-
-#: network/netconnect.pm:885
-#, c-format
-msgid ""
-"You need the Alcatel microcode.\n"
-"Download it at:\n"
-"%s\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"Vos avoz mezåjhe do microcôde d' alcatel\n"
-"Prindoz l' di\n"
-"%s\n"
-"et s' copyîz l' fitchî mgmt.o e /usr/share/speedtouch"
-
-#: network/netconnect.pm:968
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr "Idintifiant do forveyou tchmin (VPI):"
 
-#: network/netconnect.pm:969
+#: network/netconnect.pm:871
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr "Idintifiant do forveyou circût (VCI):"
 
-#: network/netconnect.pm:972
+#: network/netconnect.pm:874
 #, c-format
 msgid "Encapsulation:"
 msgstr "Ecapsulaedje:"
 
-#: network/netconnect.pm:994
+#: network/netconnect.pm:896 network/thirdparty.pm:204
 #, c-format
 msgid ""
 "The ECI Hi-Focus modem cannot be supported due to binary driver distribution "
@@ -10760,40 +10718,42 @@ msgstr ""
 "\n"
 "Vos l' pôroz trover sol waibe http://eciadsl.flashtux.org/"
 
-#: network/netconnect.pm:1006
+#: network/netconnect.pm:908
 #, c-format
 msgid "Manually load a driver"
 msgstr "Tcherdjî on mineu al mwin"
 
-#: network/netconnect.pm:1006
+#: network/netconnect.pm:908
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Eployî on mineu Windows (avou ndiswrapper)"
 
-#: network/netconnect.pm:1013 network/netconnect.pm:1274
-#: network/netconnect.pm:1278 printer/printerdrake.pm:3741
+#: network/netconnect.pm:915 network/netconnect.pm:1174
+#: network/netconnect.pm:1178 printer/printerdrake.pm:3741
+#: standalone/drakgw:220 standalone/drakgw:261 standalone/drakgw:295
+#: standalone/drakgw:400
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Li pacaedje %s èn pout nén esse astalé!"
 
-#: network/netconnect.pm:1048
+#: network/netconnect.pm:950
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "No do lodjoe d' après l' apontiaedje Zeroconf"
 
-#: network/netconnect.pm:1049 network/netconnect.pm:1083
+#: network/netconnect.pm:951 network/netconnect.pm:983
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "Apontiant l' éndjin di rantoele %s (mineu %s)"
 
-#: network/netconnect.pm:1050
+#: network/netconnect.pm:952
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
 
-#: network/netconnect.pm:1084
+#: network/netconnect.pm:984
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -10804,187 +10764,187 @@ msgstr ""
 "Totafwait doet esse sicrît come ene adresse IP, avou des\n"
 "ponts inte les limeros (metans: 1.2.3.4)."
 
-#: network/netconnect.pm:1091 standalone/drakconnect:384
+#: network/netconnect.pm:991 standalone/drakconnect:384
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Assiner li no d' lodjoe a pårti di l' adresse DHCP"
 
-#: network/netconnect.pm:1092 standalone/drakconnect:386
+#: network/netconnect.pm:992 standalone/drakconnect:386
 #, c-format
 msgid "DHCP host name"
 msgstr "No di lodjoe po DHCP"
 
-#: network/netconnect.pm:1097 standalone/drakconnect:332
-#: standalone/drakconnect:916 standalone/drakgw:320
+#: network/netconnect.pm:997 standalone/drakconnect:332
+#: standalone/drakconnect:916 standalone/drakgw:184
 #, c-format
 msgid "Netmask"
 msgstr "Maske rantoele"
 
-#: network/netconnect.pm:1099 standalone/drakconnect:448
+#: network/netconnect.pm:999 standalone/drakconnect:448
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr ""
 "Aler vey l' idintifiant del cåte rantoele (ça pout siervi po les poirtåves)"
 
-#: network/netconnect.pm:1101 standalone/drakconnect:449
+#: network/netconnect.pm:1001 standalone/drakconnect:449
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Tchôcaedje a tchôd del rantoele"
 
-#: network/netconnect.pm:1103 standalone/drakconnect:443
+#: network/netconnect.pm:1003 standalone/drakconnect:443
 #, c-format
 msgid "Start at boot"
 msgstr "En alaedje a l' enondaedje"
 
-#: network/netconnect.pm:1105 standalone/drakconnect:471
+#: network/netconnect.pm:1005 standalone/drakconnect:471
 #, c-format
 msgid "Metric"
 msgstr "Metrike"
 
-#: network/netconnect.pm:1107 standalone/drakconnect:380
+#: network/netconnect.pm:1007 standalone/drakconnect:380
 #: standalone/drakconnect:919
 #, c-format
 msgid "DHCP client"
 msgstr "Cliyint DHCP"
 
-#: network/netconnect.pm:1109 standalone/drakconnect:390
+#: network/netconnect.pm:1009 standalone/drakconnect:390
 #, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "Tårdjaedje (e seg) pol DHCP"
 
-#: network/netconnect.pm:1110 standalone/drakconnect:393
+#: network/netconnect.pm:1010 standalone/drakconnect:393
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Aveur les sierveus DNS avou l' DHCP"
 
-#: network/netconnect.pm:1111 standalone/drakconnect:394
+#: network/netconnect.pm:1011 standalone/drakconnect:394
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr "Aveur les sierveus YP avou l' DHCP"
 
-#: network/netconnect.pm:1112 standalone/drakconnect:395
+#: network/netconnect.pm:1012 standalone/drakconnect:395
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr "Aveur les sierveus NTPD avou l' DHCP"
 
-#: network/netconnect.pm:1121 printer/printerdrake.pm:1672
+#: network/netconnect.pm:1021 printer/printerdrake.pm:1672
 #: standalone/drakconnect:683
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "L' adresse IP doet esse del cogne 1.2.3.4"
 
-#: network/netconnect.pm:1125 standalone/drakconnect:687
+#: network/netconnect.pm:1025 standalone/drakconnect:687
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "Li maske rantoele doet esse del cogne 255.255.224.0"
 
-#: network/netconnect.pm:1129
+#: network/netconnect.pm:1029
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Adviertixhmint: l' adresse IP %s est normålmint rsiervêye!"
 
-#: network/netconnect.pm:1134 standalone/drakTermServ:1783
+#: network/netconnect.pm:1034 standalone/drakTermServ:1783
 #: standalone/drakTermServ:1784 standalone/drakTermServ:1785
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s est ddja en alaedje\n"
 
-#: network/netconnect.pm:1167
+#: network/netconnect.pm:1067
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Tchoezi on mineu ndiswrapper"
 
-#: network/netconnect.pm:1169
+#: network/netconnect.pm:1069
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr ""
 
-#: network/netconnect.pm:1169
+#: network/netconnect.pm:1069
 #, c-format
 msgid "Install a new driver"
 msgstr "Astaler on novea mineu"
 
-#: network/netconnect.pm:1181
+#: network/netconnect.pm:1081
 #, c-format
 msgid "Select a device:"
 msgstr "Tchoezixhoz èn éndjin:"
 
-#: network/netconnect.pm:1208
+#: network/netconnect.pm:1108
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Dinez les parametes wifi po cisse cåte sins fyis chal:"
 
-#: network/netconnect.pm:1211 standalone/drakconnect:415
+#: network/netconnect.pm:1111 standalone/drakconnect:415
 #, c-format
 msgid "Operating Mode"
 msgstr "Môde d' operåcion"
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Ad-hoc"
 msgstr ""
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Managed"
 msgstr "Manaedjî"
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Master"
 msgstr "Mwaisse"
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Repeater"
 msgstr "Repeteu"
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Secondary"
 msgstr "Segondaire"
 
-#: network/netconnect.pm:1212
+#: network/netconnect.pm:1112
 #, c-format
 msgid "Auto"
 msgstr "Otomatike"
 
-#: network/netconnect.pm:1214 standalone/drakconnect:416
+#: network/netconnect.pm:1114 standalone/drakconnect:416
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "No del rantoele (ESSID)"
 
-#: network/netconnect.pm:1215 standalone/drakconnect:417
+#: network/netconnect.pm:1115 standalone/drakconnect:417
 #, c-format
 msgid "Network ID"
 msgstr "Idintifiant Rantoele"
 
-#: network/netconnect.pm:1216 standalone/drakconnect:418
+#: network/netconnect.pm:1116 standalone/drakconnect:418
 #, c-format
 msgid "Operating frequency"
 msgstr "Frecwince d' operance"
 
-#: network/netconnect.pm:1217 standalone/drakconnect:419
+#: network/netconnect.pm:1117 standalone/drakconnect:419
 #, c-format
 msgid "Sensitivity threshold"
 msgstr ""
 
-#: network/netconnect.pm:1218 standalone/drakconnect:420
+#: network/netconnect.pm:1118 standalone/drakconnect:420
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr ""
 
-#: network/netconnect.pm:1219
+#: network/netconnect.pm:1119
 #, c-format
 msgid "Encryption mode"
 msgstr ""
 
-#: network/netconnect.pm:1223 standalone/drakconnect:431
+#: network/netconnect.pm:1123 standalone/drakconnect:431
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1224
+#: network/netconnect.pm:1124
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -10998,18 +10958,18 @@ msgid ""
 "or off."
 msgstr ""
 
-#: network/netconnect.pm:1231 standalone/drakconnect:432
+#: network/netconnect.pm:1131 standalone/drakconnect:432
 #, c-format
 msgid "Fragmentation"
 msgstr "Fragmintåcion"
 
-#: network/netconnect.pm:1232 standalone/drakconnect:433
+#: network/netconnect.pm:1132 standalone/drakconnect:433
 #, c-format
 msgid "Iwconfig command extra arguments"
 msgstr "Årgumints di rawete po iwconfig"
 
 # RATOURNAEDJE: ap, channel, commit, enc, power, retry, sens, txpower
-#: network/netconnect.pm:1233
+#: network/netconnect.pm:1133
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11025,12 +10985,12 @@ msgstr ""
 "Loukîz li pådje di man iwconfig(8) po pus di racsegnes."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1240 standalone/drakconnect:434
+#: network/netconnect.pm:1140 standalone/drakconnect:434
 #, c-format
 msgid "Iwspy command extra arguments"
 msgstr "Årgumints di rawete pol comande iwspy"
 
-#: network/netconnect.pm:1241
+#: network/netconnect.pm:1141
 #, c-format
 msgid ""
 "Iwspy is used to set a list of addresses in a wireless network\n"
@@ -11047,12 +11007,12 @@ msgstr ""
 "\n"
 "Loukîz l' pådje di man iwpspy(8) po pus di racsegnes."
 
-#: network/netconnect.pm:1250 standalone/drakconnect:435
+#: network/netconnect.pm:1150 standalone/drakconnect:435
 #, c-format
 msgid "Iwpriv command extra arguments"
 msgstr "Årgumints di rawete pol comande iwpriv"
 
-#: network/netconnect.pm:1251
+#: network/netconnect.pm:1151
 #, c-format
 msgid ""
 "Iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11081,7 +11041,7 @@ msgstr ""
 "\n"
 "Lijhoz l' pådje di manuel iwpriv(8) po pus di racsegnes."
 
-#: network/netconnect.pm:1266
+#: network/netconnect.pm:1166
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11090,7 +11050,7 @@ msgstr ""
 "Li frecwince doet aveur ene cawete «k», «M» ou «G» (par egzimpe, «2.46G» po "
 "ene frecwince di 2.46 GHz), oudonbén radjoutez des zeros assez."
 
-#: network/netconnect.pm:1270
+#: network/netconnect.pm:1170
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11099,37 +11059,37 @@ msgstr ""
 "Li frecwince doet aveur ene cawete «k», «M» ou «G» (par egzimpe, «2.46G» po "
 "ene frecwince di 2.46 GHz), oudonbén radjoutez des zeros assez."
 
-#: network/netconnect.pm:1309
+#: network/netconnect.pm:1210
 #, c-format
 msgid "DVB configuration"
 msgstr ""
 
-#: network/netconnect.pm:1310
+#: network/netconnect.pm:1211
 #, c-format
 msgid "DVB Adapter"
 msgstr ""
 
-#: network/netconnect.pm:1328
+#: network/netconnect.pm:1229
 #, c-format
 msgid "DVB adapter settings"
 msgstr ""
 
-#: network/netconnect.pm:1331
+#: network/netconnect.pm:1232
 #, c-format
 msgid "Adapter card"
 msgstr ""
 
-#: network/netconnect.pm:1332
+#: network/netconnect.pm:1233
 #, c-format
 msgid "Net demux"
 msgstr ""
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1234
 #, c-format
 msgid "PID"
 msgstr ""
 
-#: network/netconnect.pm:1361
+#: network/netconnect.pm:1262
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11141,67 +11101,67 @@ msgstr ""
 "Li no doet esse etir, metans: «mybox.mylab.myco.com».\n"
 "Vos poloz dner eto l' adresse IP del pasrele s' i gn en a ene."
 
-#: network/netconnect.pm:1366
+#: network/netconnect.pm:1267
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr "Et po fini, vos ploz eto dner les adresses IP di vosse sierveu DNS."
 
-#: network/netconnect.pm:1368 standalone/drakconnect:1032
+#: network/netconnect.pm:1269 standalone/drakconnect:1032
 #, c-format
 msgid "Host name (optional)"
 msgstr "No do lodjoe (opcionel)"
 
-#: network/netconnect.pm:1368
+#: network/netconnect.pm:1269
 #, c-format
 msgid "Host name"
 msgstr "No do lodjoe"
 
-#: network/netconnect.pm:1370
+#: network/netconnect.pm:1271
 #, c-format
 msgid "DNS server 1"
 msgstr "Sierveu DNS 1"
 
-#: network/netconnect.pm:1371
+#: network/netconnect.pm:1272
 #, c-format
 msgid "DNS server 2"
 msgstr "Sierveu DNS 2"
 
-#: network/netconnect.pm:1372
+#: network/netconnect.pm:1273
 #, c-format
 msgid "DNS server 3"
 msgstr "Sierveu DNS 3"
 
-#: network/netconnect.pm:1373
+#: network/netconnect.pm:1274
 #, c-format
 msgid "Search domain"
 msgstr "Dominne di cweraedje"
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1275
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr "Li prémetou dominne di cweraedje est pris do no do lodjoe"
 
-#: network/netconnect.pm:1375
+#: network/netconnect.pm:1276
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Pasrele (eg %s)"
 
-#: network/netconnect.pm:1377
+#: network/netconnect.pm:1278
 #, c-format
 msgid "Gateway device"
 msgstr "Éndjin di pasrele"
 
-#: network/netconnect.pm:1386
+#: network/netconnect.pm:1287
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "L' adresse IP do sierveu DNS doet esse del cogne 1.2.3.4"
 
-#: network/netconnect.pm:1391 standalone/drakconnect:692
+#: network/netconnect.pm:1292 standalone/drakconnect:692
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "L' adresse IP del pasrele doet esse del cogne 1.2.3.4"
 
-#: network/netconnect.pm:1404
+#: network/netconnect.pm:1305
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11214,17 +11174,17 @@ msgstr ""
 "pårtaedjeyes da sinne ki n' sont nén manaedjeyes pal rantoele.\n"
 "End a nén mezåjhe sol plupårt des rantoeles."
 
-#: network/netconnect.pm:1408
+#: network/netconnect.pm:1309
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "No do lodjoe Zero-apontiaedje"
 
-#: network/netconnect.pm:1411
+#: network/netconnect.pm:1312
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Li no d' lodjoe po zeroconf doet aveur on pont (.)"
 
-#: network/netconnect.pm:1421
+#: network/netconnect.pm:1322
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11235,57 +11195,57 @@ msgstr ""
 "Tchoezixhoz li cene ki vos vloz eployî.\n"
 "\n"
 
-#: network/netconnect.pm:1423
+#: network/netconnect.pm:1324
 #, c-format
 msgid "Internet connection"
 msgstr "Raloyaedje al rantoele daegnrece"
 
-#: network/netconnect.pm:1432
+#: network/netconnect.pm:1333
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "L' apontiaedje est fini, el voloz vs mete en alaedje?"
 
-#: network/netconnect.pm:1439
+#: network/netconnect.pm:1340
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Voloz vs permete ki les uzeus enondexhe li raloyaedje?"
 
-#: network/netconnect.pm:1459
+#: network/netconnect.pm:1360
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Voloz vs vos raloyî a tchaeke côp ki l' éndjole est enondêye?"
 
-#: network/netconnect.pm:1478
+#: network/netconnect.pm:1379
 #, c-format
 msgid "Automatically at boot"
 msgstr "En alaedje otomaticmint a l' enondaedje"
 
-#: network/netconnect.pm:1480
+#: network/netconnect.pm:1381
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr "Avou ene aplikete di corwaitaedje rantoele sol sicriftôr"
 
-#: network/netconnect.pm:1482
+#: network/netconnect.pm:1383
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr "Al mwin (l' eterface serè tolminme metowe en alaedje a l' enondaedje)"
 
-#: network/netconnect.pm:1491
+#: network/netconnect.pm:1392
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Kimint voloz vs houkî po vos raloyî?"
 
-#: network/netconnect.pm:1505
+#: network/netconnect.pm:1406
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr "I gn a mezåjhe di renonder li rantoele. El voloz vs fé?"
 
-#: network/netconnect.pm:1512 network/netconnect.pm:1583
+#: network/netconnect.pm:1413 network/netconnect.pm:1484
 #, c-format
 msgid "Network Configuration"
 msgstr "Apontiaedje del Rantoele"
 
-#: network/netconnect.pm:1513
+#: network/netconnect.pm:1414
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11296,27 +11256,27 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1522
+#: network/netconnect.pm:1423
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Voloz vs sayî di vos raloyî al rantoele daegnrece asteure?"
 
-#: network/netconnect.pm:1530 standalone/drakconnect:1064
+#: network/netconnect.pm:1431 standalone/drakconnect:1064
 #, c-format
 msgid "Testing your connection..."
 msgstr "Dji saye vosse raloyaedje..."
 
-#: network/netconnect.pm:1550
+#: network/netconnect.pm:1451
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Li sistinme est raloyî al rantoele daegnrece."
 
-#: network/netconnect.pm:1551
+#: network/netconnect.pm:1452
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Po des råjhons di såvrité, i va esse disraloyî tot d' shûte."
 
-#: network/netconnect.pm:1552
+#: network/netconnect.pm:1453
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11325,7 +11285,7 @@ msgstr ""
 "Li sistinme ni shonne nén esse raloyî al rantoele daegnrece.\n"
 "Sayîz di rapontyî li raloyaedje."
 
-#: network/netconnect.pm:1567
+#: network/netconnect.pm:1468
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11334,7 +11294,7 @@ msgstr ""
 "Proficiate, l' apontiaedje del rantoele (locåle et daegnrece) est fini.\n"
 "\n"
 
-#: network/netconnect.pm:1570
+#: network/netconnect.pm:1471
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11343,7 +11303,7 @@ msgstr ""
 "On côp ki ci sreut fwait, nos vos rcomindans di renonder l' evironmint\n"
 "X11 da vosse po nén risker des rujhes avou l' candjmint d' no di l' éndjole."
 
-#: network/netconnect.pm:1571
+#: network/netconnect.pm:1472
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11354,7 +11314,7 @@ msgstr ""
 "Sayîz vosse raloyaedje avou «net_monitor» ou «mcc». Si vosse raloyaedje ni "
 "va nén, motoit k' vos dvrîz renonder l' apontiaedje"
 
-#: network/netconnect.pm:1584
+#: network/netconnect.pm:1485
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11367,7 +11327,7 @@ msgstr ""
 "Clitchîz so «'l est bon» po wårder l' apontiaedje da vosse, ou so  «Rinoncî» "
 "po rapontyî li raloyaedje al rantoele.\n"
 
-#: network/netconnect.pm:1622
+#: network/netconnect.pm:1523
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11376,46 +11336,32 @@ msgstr ""
 "Åk n' a nén stî, ki ça n' esteut nén ratindou:\n"
 "%s"
 
-#: network/network.pm:316
+#: network/network.pm:337
 #, c-format
 msgid "Proxies configuration"
 msgstr "Apontiaedje des procsis"
 
-#: network/network.pm:317
+#: network/network.pm:338
 #, c-format
 msgid "HTTP proxy"
 msgstr "Procsi HTTP"
 
-#: network/network.pm:318
+#: network/network.pm:339
 #, c-format
 msgid "FTP proxy"
 msgstr "Procsi FTP"
 
-#: network/network.pm:321
+#: network/network.pm:342
 #, c-format
 msgid "Proxy should be http://..."
 msgstr "Li procsi doet esse http://..."
 
-#: network/network.pm:322
+#: network/network.pm:343
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "Li hårdêye doet cmincî avou «http:» ou «ftp:»"
 
-#: network/shorewall.pm:25
-#, c-format
-msgid "Firewalling configuration detected!"
-msgstr "Dj' a detecté l' apontiaedje d' on côpe feu!"
-
-#: network/shorewall.pm:26
-#, c-format
-msgid ""
-"Warning! An existing firewalling configuration has been detected. You may "
-"need some manual fixes after installation."
-msgstr ""
-"Asteme! Dj' a detecté on côpe feu ddja apontyî. I vos fåreut motoit on po "
-"d' apontiaedje manuwel après l' astalåcion."
-
-#: network/shorewall.pm:89 standalone/drakgw:217 standalone/drakvpn:214
+#: network/shorewall.pm:57 standalone/drakvpn:214
 #, c-format
 msgid ""
 "Please enter the name of the interface connected to the internet.\n"
@@ -11432,12 +11378,58 @@ msgstr ""
 "\t\teth0, ou eth1 po des raloyaedjes viè cåbe, \n"
 "\t\tippp+ po on raloyaedje viè RDIS (ISDN).\n"
 
-#: network/tools.pm:190
+#: network/thirdparty.pm:195
+#, c-format
+msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
+msgstr ""
+"Copyîz l' microcôde d' alcatel come fitchî «mgmt.o» e /usr/share/speedtouch"
+
+#: network/thirdparty.pm:265
+#, c-format
+msgid "Could not install the packages (%s)!"
+msgstr "Les pacaedjes %s èn polèt nén esse astalés!"
+
+#: network/thirdparty.pm:273
+#, c-format
+msgid "Some packages (%s) are required but aren't available."
+msgstr ""
+"I gn a mezåjhe di sacwants pacaedjes (%s) mins ki n' sont nén disponibes."
+
+#: network/thirdparty.pm:274
+#, c-format
+msgid ""
+"These packages can be found in Mandriva Club or in Mandriva commercial "
+"releases."
+msgstr ""
+"Ces pacaedjes la si plèt trover dins l' Club di Mandriva oudonbén dins les "
+"modêyes di Mandriva vindowes dins l' comiece."
+
+#: network/thirdparty.pm:275
+#, c-format
+msgid ""
+"The required files can also be installed from this URL:\n"
+"%s"
+msgstr ""
+"Les fitchîs k' end a mezåjhe polèt eto esse astalés a pårti d' cisse hårdêye "
+"ci:\n"
+"%s"
+
+#: network/thirdparty.pm:308
+#, c-format
+msgid "Unable to find \"%s\" on your Windows system!"
+msgstr "Dji n' a savou trover «%s» dins l' sistinme Windows da vosse!"
+
+#: network/thirdparty.pm:310
+#, c-format
+msgid "No Windows system has been detected!"
+msgstr "Nou sistinme Windows di trové!"
+
+#: network/thirdparty.pm:320
 #, c-format
 msgid "Insert floppy"
 msgstr "Metoz ene plakete divins l' lijheu"
 
-#: network/tools.pm:191
+#: network/thirdparty.pm:321
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -11446,10 +11438,60 @@ msgstr ""
 "Metoz ene plakete FAT-abwesnêye divins l' lijheu %s, avou l' fitchî %s e "
 "l' raecene, et clitchîz so %s"
 
-#: network/tools.pm:196
+#: network/thirdparty.pm:331
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Åk n' a nén stî tot lijhant l' plakete so l' éndjin %s"
+
+#: network/thirdparty.pm:341
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+"I gn a mezåjhe do firmware d' Alcatel po fé roter l' éndjin.\n"
+"Vos l' ploz dner do côp avou ene plakete, el cweri dins\n"
+"l' pårticion Windows, ou co passer houte et l' leyî po pus tård."
+
+#: network/thirdparty.pm:345 network/thirdparty.pm:347
+#, c-format
+msgid "Use a floppy"
+msgstr "Eployî ene plakete"
+
+#: network/thirdparty.pm:345
+#, c-format
+msgid "Use my Windows partition"
+msgstr "Eployî l' pårticion da Windows"
+
+#: network/thirdparty.pm:355
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr ""
+"Li copiaedje do firmware a fwait berwete; li fitchî %s n' a nén stî trové"
+
+#: network/thirdparty.pm:360 standalone/drakautoinst:252
+#: standalone/drakvpn:902 standalone/scannerdrake:405
+#, c-format
+msgid "Congratulations!"
+msgstr "Complumints!"
+
+#: network/thirdparty.pm:360
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr "Li copiaedje do firmware a stî comifåt"
+
+#: network/thirdparty.pm:425
+#, c-format
+msgid "Looking for required software and drivers..."
+msgstr "Dji cwir après les programes et les mineus k' end a mezåjhe..."
+
+#: network/thirdparty.pm:435
+#, c-format
+msgid "Please wait, running device configuration commands..."
+msgstr ""
+"Tårdjîz on pô s' i vs plait, dj' enonde les comandes d' apontiaedje des "
+"éndjins..."
 
 #: partition_table.pm:397
 #, c-format
@@ -11501,32 +11543,32 @@ msgstr ""
 "Çoula vout dire ki tot çki vos alez scrire el plake va fini come \n"
 "des crombès sacwès a l' astcheyance."
 
-#: pkgs.pm:23
+#: pkgs.pm:22
 #, c-format
 msgid "must have"
 msgstr "k' i fåt d' tote foice aveur"
 
-#: pkgs.pm:24
+#: pkgs.pm:23
 #, c-format
 msgid "important"
 msgstr "ki vént bén a pont"
 
-#: pkgs.pm:25
+#: pkgs.pm:24
 #, c-format
 msgid "very nice"
 msgstr "mo plaijhi a-z aveur"
 
-#: pkgs.pm:26
+#: pkgs.pm:25
 #, c-format
 msgid "nice"
 msgstr "plaijhi a-z aveur"
 
-#: pkgs.pm:27
+#: pkgs.pm:26
 #, c-format
 msgid "maybe"
 msgstr "ki vénreut co bén a pont"
 
-#: pkgs.pm:481
+#: pkgs.pm:468
 #, c-format
 msgid "Downloading file %s..."
 msgstr "Aberwetaedje do fitchî %s..."
@@ -18606,12 +18648,6 @@ msgstr ""
 "\n"
 "Les parametes di l' astalaedje otomatike sont ezès seccions sol hintche"
 
-#: standalone/drakautoinst:252 standalone/drakgw:597 standalone/drakvpn:902
-#: standalone/scannerdrake:405
-#, c-format
-msgid "Congratulations!"
-msgstr "Complumints!"
-
 #: standalone/drakautoinst:253
 #, c-format
 msgid ""
@@ -20687,12 +20723,12 @@ msgstr "Ocuper, ratinde"
 msgid "Modem sound"
 msgstr "Son do modem"
 
-#: standalone/drakconnect:553
+#: standalone/drakconnect:553 standalone/drakgw:108
 #, c-format
 msgid "Enable"
 msgstr "Mete en alaedje"
 
-#: standalone/drakconnect:553
+#: standalone/drakconnect:553 standalone/drakgw:108
 #, c-format
 msgid "Disable"
 msgstr "Essocter"
@@ -20723,7 +20759,7 @@ msgstr "Bus"
 msgid "Location on the bus"
 msgstr "Eplaeçmint sol bus"
 
-#: standalone/drakconnect:707 standalone/drakgw:247 standalone/drakpxe:138
+#: standalone/drakconnect:707 standalone/drakgw:325 standalone/drakpxe:138
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -20901,32 +20937,27 @@ msgstr "Sôre di raloyaedje: "
 msgid "Status:"
 msgstr "Sitatut:"
 
-#: standalone/drakedm:34
+#: standalone/drakedm:40
 #, c-format
 msgid "GDM (GNOME Display Manager)"
 msgstr "GDM (manaedjeu di håynaedje Gnome)"
 
-#: standalone/drakedm:35
+#: standalone/drakedm:41
 #, c-format
 msgid "KDM (KDE Display Manager)"
 msgstr "KDM (manaedjeu di håynaedje KDE)"
 
-#: standalone/drakedm:36
-#, c-format
-msgid "MdkKDM (Mandriva Linux Display Manager)"
-msgstr "MdkKDM ((manaedjeu di håynaedje Mandriva Linux)"
-
-#: standalone/drakedm:37
+#: standalone/drakedm:42
 #, c-format
 msgid "XDM (X Display Manager)"
 msgstr "XDM (manaedjeu di håynaedje X11)"
 
-#: standalone/drakedm:55
+#: standalone/drakedm:53
 #, c-format
 msgid "Choosing a display manager"
 msgstr "Tchoezixhant on manaedjeu di håynaedje"
 
-#: standalone/drakedm:56
+#: standalone/drakedm:54
 #, c-format
 msgid ""
 "X11 Display Manager allows you to graphically log\n"
@@ -20938,13 +20969,13 @@ msgstr ""
 "eyet do sopoirt po-z aveur sacwantès sessions grafikes e minme tins sol\n"
 "minme éndjole locåle."
 
-#: standalone/drakedm:79
+#: standalone/drakedm:72
 #, c-format
 msgid "The change is done, do you want to restart the dm service?"
 msgstr ""
 "Li candjmint a stî fwait, voloz renonder li siervice manaedjeu di håynaedje?"
 
-#: standalone/drakedm:80
+#: standalone/drakedm:73
 #, c-format
 msgid ""
 "You are going to close all running programs and lose your current session. "
@@ -21425,98 +21456,17 @@ msgstr "Oister les fontes foû di vosse sistinme"
 msgid "Post Uninstall"
 msgstr "Post-disastalaedje"
 
-#: standalone/drakgw:58 standalone/drakgw:191
-#, c-format
-msgid "Internet Connection Sharing"
-msgstr "Pårtaedje do raloyaedje al rantoele daegnrece"
-
-#: standalone/drakgw:111 standalone/drakvpn:51
+#: standalone/drakgw:51 standalone/drakvpn:51
 #, c-format
 msgid "Sorry, we support only 2.4 and above kernels."
 msgstr "Mande escuzes, mins nos n' sopoirtans k' les naweas 2.4 et å dzeu."
 
-#: standalone/drakgw:122
+#: standalone/drakgw:78
 #, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr "Li pårtaedje do raloyaedje al rantoele daegnrece est dismetou."
+msgid "Internet Connection Sharing"
+msgstr "Pårtaedje do raloyaedje al rantoele daegnrece"
 
-#: standalone/drakgw:123
-#, c-format
-msgid ""
-"The setup of Internet connection sharing has already been done.\n"
-"It's currently disabled.\n"
-"\n"
-"What would you like to do?"
-msgstr ""
-"L' apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece a ddja stî "
-"fwait.\n"
-"Il est pol moumint dismetou.\n"
-"\n"
-"Cwè voloz vs fé?"
-
-#: standalone/drakgw:127 standalone/drakvpn:127
-#, c-format
-msgid "enable"
-msgstr "mete en alaedje"
-
-#: standalone/drakgw:127 standalone/drakgw:154 standalone/drakvpn:101
-#: standalone/drakvpn:127
-#, c-format
-msgid "reconfigure"
-msgstr "rapontyî"
-
-#: standalone/drakgw:127 standalone/drakgw:154 standalone/drakvpn:101
-#: standalone/drakvpn:127 standalone/drakvpn:376 standalone/drakvpn:735
-#, c-format
-msgid "dismiss"
-msgstr "passer houte"
-
-#: standalone/drakgw:134
-#, c-format
-msgid "Enabling servers..."
-msgstr "Metant les sierveus en alaedje..."
-
-#: standalone/drakgw:146
-#, c-format
-msgid "Internet Connection Sharing is now enabled."
-msgstr ""
-"Asteure li pårtaedje do raloyaedje al rantoele daegnrece est en alaedje."
-
-#: standalone/drakgw:149
-#, c-format
-msgid "Internet Connection Sharing currently enabled"
-msgstr "Li pårtaedje do raloyaedje al rantoele daegnrece est en alaedje"
-
-#: standalone/drakgw:150
-#, c-format
-msgid ""
-"The setup of Internet Connection Sharing has already been done.\n"
-"It's currently enabled.\n"
-"\n"
-"What would you like to do?"
-msgstr ""
-"L' apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece a ddja stî "
-"fwait.\n"
-"Il est en alaedje pol moumint.\n"
-"\n"
-"Cwè voloz vs fé?"
-
-#: standalone/drakgw:154 standalone/drakvpn:101
-#, c-format
-msgid "disable"
-msgstr "dismete"
-
-#: standalone/drakgw:157
-#, c-format
-msgid "Disabling servers..."
-msgstr "Dismetant les sierveus..."
-
-#: standalone/drakgw:172
-#, c-format
-msgid "Internet Connection Sharing is now disabled."
-msgstr "Asteure li pårtaedje do raloyaedje al rantoele daegnrece est dismetou."
-
-#: standalone/drakgw:192
+#: standalone/drakgw:82
 #, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
@@ -21539,27 +21489,40 @@ msgstr ""
 "\n"
 "Note: vos åroz mezåjhe d' ene cåte rantoele po vosse rantoele locåle (LAN)."
 
-#: standalone/drakgw:236
+#: standalone/drakgw:98
 #, c-format
-msgid "Interface %s (using module %s)"
-msgstr "Eterface %s (ki eploye li module %s)"
+msgid ""
+"The setup of Internet Connection Sharing has already been done.\n"
+"It's currently enabled.\n"
+"\n"
+"What would you like to do?"
+msgstr ""
+"L' apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece a ddja stî "
+"fwait.\n"
+"Il est en alaedje pol moumint.\n"
+"\n"
+"Cwè voloz vs fé?"
 
-#: standalone/drakgw:237
+#: standalone/drakgw:102
 #, c-format
-msgid "Interface %s"
-msgstr "Eterface %s"
+msgid ""
+"The setup of Internet connection sharing has already been done.\n"
+"It's currently disabled.\n"
+"\n"
+"What would you like to do?"
+msgstr ""
+"L' apontiaedje do pårtaedje do raloyaedje al rantoele daegnrece a ddja stî "
+"fwait.\n"
+"Il est pol moumint dismetou.\n"
+"\n"
+"Cwè voloz vs fé?"
 
-#: standalone/drakgw:246 standalone/drakpxe:137
+#: standalone/drakgw:108
 #, c-format
-msgid "No network adapter on your system!"
-msgstr "Nole cåte rantoele so voste éndjole!"
+msgid "Reconfigure"
+msgstr "Rapontyî"
 
-#: standalone/drakgw:253
-#, c-format
-msgid "Network interface"
-msgstr "Eterface rantoele"
-
-#: standalone/drakgw:254
+#: standalone/drakgw:148
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -21574,12 +21537,7 @@ msgstr ""
 "\n"
 "Dji va-st apontyî vosse rantoele locåle avou cisse cåte la."
 
-#: standalone/drakgw:260 standalone/drakpxe:142
-#, c-format
-msgid "Choose the network interface"
-msgstr "Tchoezixhoz l' eterface rantoele"
-
-#: standalone/drakgw:261
+#: standalone/drakgw:159
 #, c-format
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
@@ -21587,96 +21545,44 @@ msgid ""
 msgstr ""
 "Tchoezixhoz kéne cåte rantoele va esse raloyeye a vosse rantoele locåle"
 
-#: standalone/drakgw:290
+#: standalone/drakgw:180
 #, c-format
-msgid "Network interface already configured"
-msgstr "L' eterface rantoele est ddja apontieye"
+msgid "Local Area Network setings"
+msgstr "Apontiaedjes del rantoele locåle"
 
-#: standalone/drakgw:291
-#, c-format
-msgid ""
-"Warning, the network adapter (%s) is already configured.\n"
-"\n"
-"Do you want an automatic re-configuration?\n"
-"\n"
-"You can do it manually but you need to know what you're doing."
-msgstr ""
-"Asteme, li cåte rantoele (%s) est ddja apontieye.\n"
-"\n"
-"Voloz vs rifé on rapontiaedje otomatike?\n"
-"\n"
-"Vos l' poloz fé manuwelmint mins vos dvoz saveur çou k' vos fjhoz."
-
-#: standalone/drakgw:296
-#, c-format
-msgid "Automatic reconfiguration"
-msgstr "Rapontiaedje otomatike"
-
-#: standalone/drakgw:296
-#, c-format
-msgid "No (experts only)"
-msgstr "Neni (po les spepieus)"
-
-#: standalone/drakgw:297
-#, c-format
-msgid "Show current interface configuration"
-msgstr "Mostrer l' apontiaedje di l' eterface do moumint"
-
-#: standalone/drakgw:298
-#, c-format
-msgid "Current interface configuration"
-msgstr "Apontiaedje di l' eterface do moumint"
-
-#: standalone/drakgw:299
-#, c-format
-msgid ""
-"Current configuration of `%s':\n"
-"\n"
-"Network: %s\n"
-"IP address: %s\n"
-"IP attribution: %s\n"
-"Driver: %s"
-msgstr ""
-"Apontiaedje do moumint di «%s»:\n"
-"\n"
-"Rantoele: %s\n"
-"Adresse IP: %s\n"
-"Atribouwaedje IP: %s\n"
-"Mineu: %s"
-
-#: standalone/drakgw:312
-#, c-format
-msgid ""
-"I can keep your current configuration and assume you already set up a DHCP "
-"server; in that case please verify I correctly read the Network that you use "
-"for your local network; I will not reconfigure it and I will not touch your "
-"DHCP server configuration.\n"
-"\n"
-"The default DNS entry is the Caching Nameserver configured on the firewall. "
-"You can replace that with your ISP DNS IP, for example.\n"
-"\t\t      \n"
-"Otherwise, I can reconfigure your interface and (re)configure a DHCP server "
-"for you.\n"
-"\n"
-msgstr ""
-"Dji pou wårder vost apontiaedje do moumint et supôzer ki vos avoz ddja "
-"apontyî on sierveu DHCP; dins ç' cas acertinez vs ki dj' a bén léjhou "
-"comifåt l' adresse rantoele eployeye pol rantoele locåle; dji n' va nén "
-"rapontyî çoula et nén candjî l' apontiaedje do sierveu DHCP.\n"
-"\n"
-"Li prémetowe intrêye est li sierveu di nos (DNS) di muchete so l' éndjole. "
-"Vos l' poloz replaecî avou l' DNS di vost ahesseu par egzimpe.\n"
-"\n"
-"Oudonbén, dji pou rapontyî vosse eterface rantoele eyet (r)apontyî on "
-"sierveu DHCP por vos.\n"
-"\n"
-
-#: standalone/drakgw:319
+#: standalone/drakgw:183
 #, c-format
 msgid "Local Network adress"
 msgstr "Adresse sol rantoele locåle"
 
-#: standalone/drakgw:323
+#: standalone/drakgw:185
+#, c-format
+msgid "The internal domain name"
+msgstr "Li no d' dominne eployî divintrinnmint"
+
+#: standalone/drakgw:191
+#, c-format
+msgid "Potential LAN address conflict found in current config of %s!\n"
+msgstr ""
+"I pout î aveur on conflit d' adresses pol rantoele locåle\n"
+"avou l' apontiaedje do moumint po %s !\n"
+
+#: standalone/drakgw:207
+#, c-format
+msgid "Domain Name Server (DNS) configuration"
+msgstr "Apontiaedje do sierveu d' nos (DNS)"
+
+#: standalone/drakgw:211
+#, c-format
+msgid "Use this gateway as domain name server"
+msgstr "Eployî cisse pasrele chal come sierveu d' nos"
+
+#: standalone/drakgw:212
+#, c-format
+msgid "The DNS Server IP"
+msgstr "IP do sierveu DNS"
+
+#: standalone/drakgw:244
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -21690,75 +21596,78 @@ msgstr ""
 "Si vos n' kinoxhoz nén li sins d' ene tchuze, leyîz l' simplumint come ele "
 "est."
 
-#: standalone/drakgw:327
+#: standalone/drakgw:251
 #, c-format
-msgid "(This) DHCP Server IP"
-msgstr "IP do sierveu DHCP"
+msgid "Use automatic configuration (DHCP)"
+msgstr "Apontiaedje otomatike (DHCP)"
 
-#: standalone/drakgw:328
-#, c-format
-msgid "The DNS Server IP"
-msgstr "IP do sierveu DNS"
-
-#: standalone/drakgw:329
-#, c-format
-msgid "The internal domain name"
-msgstr "Li no d' dominne eployî divintrinnmint"
-
-#: standalone/drakgw:330
+#: standalone/drakgw:252
 #, c-format
 msgid "The DHCP start range"
 msgstr "Comince del fortchete pol DHCP"
 
-#: standalone/drakgw:331
+#: standalone/drakgw:253
 #, c-format
 msgid "The DHCP end range"
 msgstr "Fén del fortchete pol DHCP"
 
-#: standalone/drakgw:332
+#: standalone/drakgw:254
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "Li prémetou tins di wårdaedje (e segondes) des adresses DHCP"
 
-#: standalone/drakgw:333
+#: standalone/drakgw:255
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "Li tins macsimom di wårdaedje (e segondes) des adresses DHCP"
 
-#: standalone/drakgw:334
+#: standalone/drakgw:281
 #, c-format
-msgid "Re-configure interface and DHCP server"
-msgstr "Rapontyî l' eterface et li sierveu DHCP"
+msgid "Proxy caching server (SQUID)"
+msgstr "Sierveu procsi d' muchete (SQUID)"
 
-#: standalone/drakgw:341
+#: standalone/drakgw:285
 #, c-format
-msgid "The Local Network did not finish with `.0', bailing out."
-msgstr "Li limero del rantoele locåle ni finixh nén pa «.0», dj' abandone."
+msgid "Use this gateway as proxy caching server"
+msgstr "Eployî cisse pasrele chal come sierveu procsi d' muchete"
 
-#: standalone/drakgw:351
+#: standalone/drakgw:286
 #, c-format
-msgid "Potential LAN address conflict found in current config of %s!\n"
+msgid "Admin mail"
+msgstr "Emile do manaedjeu"
+
+#: standalone/drakgw:287
+#, c-format
+msgid "Visible hostname"
+msgstr "Veyåve no do lodjoe"
+
+#: standalone/drakgw:288
+#, c-format
+msgid "Proxy port"
+msgstr "Pôrt do procsi"
+
+#: standalone/drakgw:289
+#, c-format
+msgid "Cache size (MB)"
+msgstr "Grandeu del muchete (Mo)"
+
+#: standalone/drakgw:314
+#, c-format
+msgid "Broadcast printer information"
 msgstr ""
-"I pout î aveur on conflit d' adresses pol rantoele locåle\n"
-"avou l' apontiaedje do moumint po %s !\n"
 
-#: standalone/drakgw:361
+#: standalone/drakgw:331
 #, c-format
-msgid "Configuring..."
-msgstr "Apontiant..."
-
-#: standalone/drakgw:362
-#, c-format
-msgid "Configuring scripts, installing software, starting servers..."
+msgid "Internet Connection Sharing is now enabled."
 msgstr ""
-"Apontiant les scripes, astalant les programes, enondant les sierveus..."
+"Asteure li pårtaedje do raloyaedje al rantoele daegnrece est en alaedje."
 
-#: standalone/drakgw:402 standalone/drakpxe:231 standalone/drakvpn:278
+#: standalone/drakgw:337
 #, c-format
-msgid "Problems installing package %s"
-msgstr "Åk n' a nén stî cwand dj' astaléve li pacaedje %s"
+msgid "Internet Connection Sharing is now disabled."
+msgstr "Asteure li pårtaedje do raloyaedje al rantoele daegnrece est dismetou."
 
-#: standalone/drakgw:598
+#: standalone/drakgw:343
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -21770,6 +21679,36 @@ msgstr ""
 "Vos ploz asteure pårtaedjî li raloyaedje al rantoele daegnrece avou d' ôtes "
 "copiutreces di vosse rantoele locåle, tot eployant l' apontiaedje otomatike "
 "des éndjoles (avou DHCP) eyet on procsi di muchete transparint (avou SQUID)."
+
+#: standalone/drakgw:378
+#, c-format
+msgid "Disabling servers..."
+msgstr "Dismetant les sierveus..."
+
+#: standalone/drakgw:392
+#, c-format
+msgid "Firewalling configuration detected!"
+msgstr "Dj' a detecté l' apontiaedje d' on côpe feu!"
+
+#: standalone/drakgw:393
+#, c-format
+msgid ""
+"Warning! An existing firewalling configuration has been detected. You may "
+"need some manual fixes after installation."
+msgstr ""
+"Asteme! Dj' a detecté on côpe feu ddja apontyî. I vos fåreut motoit on po "
+"d' apontiaedje manuwel après l' astalåcion."
+
+#: standalone/drakgw:396
+#, c-format
+msgid "Configuring..."
+msgstr "Apontiant..."
+
+#: standalone/drakgw:397
+#, c-format
+msgid "Configuring scripts, installing software, starting servers..."
+msgstr ""
+"Apontiant les scripes, astalant les programes, enondant les sierveus..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21867,7 +21806,7 @@ msgstr "Permissions"
 #: standalone/drakperm:58
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Radjouter ene novele rîle"
 
 #: standalone/drakperm:65 standalone/drakperm:100 standalone/drakperm:125
 #, c-format
@@ -22089,6 +22028,16 @@ msgstr ""
 "\n"
 "Note: vos åroz mezåjhe d' ene cåte rantoele po vosse rantoele locåle (LAN)."
 
+#: standalone/drakpxe:137
+#, c-format
+msgid "No network adapter on your system!"
+msgstr "Nole cåte rantoele so voste éndjole!"
+
+#: standalone/drakpxe:142
+#, c-format
+msgid "Choose the network interface"
+msgstr "Tchoezixhoz l' eterface rantoele"
+
 #: standalone/drakpxe:143
 #, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
@@ -22176,12 +22125,19 @@ msgstr ""
 msgid "Location of auto_install.cfg file"
 msgstr "Eplaeçmint do fitchî d' astalaedje otomatike «auto_install.cfg»"
 
+#: standalone/drakpxe:231 standalone/drakvpn:278
+#, c-format
+msgid "Problems installing package %s"
+msgstr "Åk n' a nén stî cwand dj' astaléve li pacaedje %s"
+
 #: standalone/drakroam:41
 #, c-format
 msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Vos n' avoz nole eterface sins fyis.\n"
+"Enondez l' macrea «%s» do cinte di controle di Mandriva Linux"
 
 #: standalone/drakroam:141
 #, c-format
@@ -22285,7 +22241,7 @@ msgid "Disconnect"
 msgstr "Si disraloyî"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:241 standalone/net_applet:90
+#: standalone/drakroam:241 standalone/net_applet:91
 #: standalone/printerdrake:238
 #, c-format
 msgid "Refresh"
@@ -22509,7 +22465,7 @@ msgstr ""
 "alsaconf ou sndconfig. Po çoula tapez «alsaconf» ou «sndconfig» sol roye di "
 "comande."
 
-#: standalone/draksplash:26
+#: standalone/draksplash:15
 #, c-format
 msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
@@ -22518,7 +22474,7 @@ msgstr ""
 "i gn a mezåjhe do pacaedje «ImageMagick» po k' ça rote comifåt.\n"
 "Clitchîz so «'l est bon» po-z astaler «ImageMagick» ou so «Rinoncî» po cwiter"
 
-#: standalone/draksplash:32
+#: standalone/draksplash:34
 #, c-format
 msgid ""
 "x coordinate of text box\n"
@@ -22527,7 +22483,7 @@ msgstr ""
 "cowordonêyes X (e caracteres)\n"
 "pol boesse di tecse"
 
-#: standalone/draksplash:33
+#: standalone/draksplash:35
 #, c-format
 msgid ""
 "y coordinate of text box\n"
@@ -22536,17 +22492,17 @@ msgstr ""
 "cowordonêyes Y (e caracteres)\n"
 "pol boesse di tecse"
 
-#: standalone/draksplash:34
+#: standalone/draksplash:36
 #, c-format
 msgid "text width"
 msgstr "lårdjeu do tecse"
 
-#: standalone/draksplash:35
+#: standalone/draksplash:37
 #, c-format
 msgid "text box height"
 msgstr "hôteur del boesse di tecse"
 
-#: standalone/draksplash:36
+#: standalone/draksplash:38
 #, c-format
 msgid ""
 "the progress bar x coordinate\n"
@@ -22555,7 +22511,7 @@ msgstr ""
 "cowordonêyes X del coine a hintche\n"
 "et å dzeu del bår d' avançmint"
 
-#: standalone/draksplash:37
+#: standalone/draksplash:39
 #, c-format
 msgid ""
 "the progress bar y coordinate\n"
@@ -22564,72 +22520,72 @@ msgstr ""
 "cowordonêyes Y del coine a hintche\n"
 "et å dzeu del bår d' avançmint"
 
-#: standalone/draksplash:38
+#: standalone/draksplash:40
 #, c-format
 msgid "the width of the progress bar"
 msgstr "li lårdjeu del bår d' avançmint"
 
-#: standalone/draksplash:39
+#: standalone/draksplash:41
 #, c-format
 msgid "the height of the progress bar"
 msgstr "li hôteur del bår d' avançmint"
 
-#: standalone/draksplash:56 standalone/draksplash:61
+#: standalone/draksplash:58 standalone/draksplash:63
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "Tchoezixhoz l' coleur del bår d' avançmint"
 
-#: standalone/draksplash:57 standalone/draksplash:62
+#: standalone/draksplash:59 standalone/draksplash:64
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Tchoezixhoz l' imådje"
 
-#: standalone/draksplash:58
+#: standalone/draksplash:60
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
-
-#: standalone/draksplash:63
-#, c-format
-msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Taijheuse waitroûlêye d' enondaedje"
 
 #: standalone/draksplash:65
+#, c-format
+msgid "Verbose bootsplash"
+msgstr "Badjawe waitroûlêye d' enondaedje"
+
+#: standalone/draksplash:67
 #, c-format
 msgid "Display logo on Console"
 msgstr "Håyner imådjete sol conzôle"
 
-#: standalone/draksplash:68
+#: standalone/draksplash:70
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "Waitroûlêye d' enondaedje sol conzôle"
 
-#: standalone/draksplash:74
+#: standalone/draksplash:76
 #, c-format
 msgid "Theme name"
 msgstr "No do tinme"
 
-#: standalone/draksplash:77
+#: standalone/draksplash:79
 #, c-format
 msgid "final resolution"
 msgstr "finté finåle"
 
-#: standalone/draksplash:82
+#: standalone/draksplash:84
 #, c-format
 msgid "Save theme"
 msgstr "Schaper l' tinme"
 
-#: standalone/draksplash:130
+#: standalone/draksplash:145
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "dji schape li tinme d' enondaedje di l' éndjole..."
 
-#: standalone/draksplash:145
+#: standalone/draksplash:160
 #, c-format
 msgid "choose image"
 msgstr "tchoezixhoz ene imådje"
 
-#: standalone/draksplash:162
+#: standalone/draksplash:177
 #, c-format
 msgid "ProgressBar color selection"
 msgstr "Tchuze del coleur pol bår d' avançmint"
@@ -22830,6 +22786,22 @@ msgstr ""
 "\n"
 "Cwè voloz vs fé?"
 
+#: standalone/drakvpn:101
+#, c-format
+msgid "disable"
+msgstr "dismete"
+
+#: standalone/drakvpn:101 standalone/drakvpn:127
+#, c-format
+msgid "reconfigure"
+msgstr "rapontyî"
+
+#: standalone/drakvpn:101 standalone/drakvpn:127 standalone/drakvpn:376
+#: standalone/drakvpn:735
+#, c-format
+msgid "dismiss"
+msgstr "passer houte"
+
 #: standalone/drakvpn:105
 #, c-format
 msgid "Disabling VPN..."
@@ -22861,6 +22833,11 @@ msgstr ""
 "Il est pol moumint dismetou.\n"
 "\n"
 "Cwè voloz vs fé?"
+
+#: standalone/drakvpn:127
+#, c-format
+msgid "enable"
+msgstr "mete en alaedje"
 
 #: standalone/drakvpn:135
 #, c-format
@@ -25430,110 +25407,115 @@ msgstr "Corwaitî li rantoele"
 
 #: standalone/net_applet:71
 #, c-format
+msgid "Manage wireless networks"
+msgstr "Manaedjî les rantoeles sins fyis"
+
+#: standalone/net_applet:72
+#, c-format
 msgid "Configure Network"
 msgstr "Apontyî li rantoele"
 
-#: standalone/net_applet:73
+#: standalone/net_applet:74
 #, c-format
 msgid "Watched interface"
 msgstr "Corwaiteyès eterfaces"
 
-#: standalone/net_applet:82
+#: standalone/net_applet:83
 #, c-format
 msgid "Profiles"
 msgstr "Profils"
 
-#: standalone/net_applet:91
+#: standalone/net_applet:92
 #, c-format
 msgid "Get Online Help"
 msgstr "Lére l' aidance so fyis"
 
-#: standalone/net_applet:223
+#: standalone/net_applet:224
 #, c-format
 msgid "Interactive intrusion detection"
 msgstr "Deteccion interactive des hacneus"
 
-#: standalone/net_applet:227
+#: standalone/net_applet:228
 #, c-format
 msgid "Always launch on startup"
 msgstr "El fé tofer a l' enondaedje"
 
-#: standalone/net_applet:280
+#: standalone/net_applet:281
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
 msgstr "Ene atake pa scanaedje des pôrts a stî sayeye pa %s."
 
-#: standalone/net_applet:281
+#: standalone/net_applet:282
 #, c-format
 msgid "The %s service has been attacked by %s."
 msgstr "Li siervice %s a stî ataké pa %s."
 
-#: standalone/net_applet:282
+#: standalone/net_applet:283
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
 msgstr "Ene atake pa cracaedje di screts a stî sayeye pa %s."
 
-#: standalone/net_applet:290
+#: standalone/net_applet:291
 #, c-format
 msgid "Active Firewall: intrusion detected"
 msgstr "Côpe-feu actif: detectaedje d' on hacneu"
 
-#: standalone/net_applet:301
+#: standalone/net_applet:302
 #, c-format
 msgid "Do you want to blacklist the attacker?"
 msgstr "Voloz vs mete li hacneu en ene noere djivêye?"
 
-#: standalone/net_applet:315
+#: standalone/net_applet:316
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr "Tofer mete en ene noere djivêye (èn pus dmander)"
 
-#: standalone/net_applet:318
+#: standalone/net_applet:319
 #, c-format
 msgid "Attack details"
 msgstr "Detays di l' atake"
 
-#: standalone/net_applet:322
+#: standalone/net_applet:323
 #, c-format
 msgid "Attack time: %s"
 msgstr "Date ey eure di l' atake: %s"
 
-#: standalone/net_applet:323
+#: standalone/net_applet:324
 #, c-format
 msgid "Network interface: %s"
 msgstr "Eterface rantoele: %s"
 
-#: standalone/net_applet:324
+#: standalone/net_applet:325
 #, c-format
 msgid "Attack type: %s"
 msgstr "Sôre d' atake: %s"
 
-#: standalone/net_applet:325
+#: standalone/net_applet:326
 #, c-format
 msgid "Protocol: %s"
 msgstr "Protocole: %s"
 
-#: standalone/net_applet:326
+#: standalone/net_applet:327
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr "Adresse IP do hacneu: %s"
 
-#: standalone/net_applet:327
+#: standalone/net_applet:328
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr "No d' lodjoe do hacneu: %s"
 
-#: standalone/net_applet:328
+#: standalone/net_applet:329
 #, c-format
 msgid "Service attacked: %s"
 msgstr "Siervice k' a stî ataké: %s"
 
-#: standalone/net_applet:329
+#: standalone/net_applet:330
 #, c-format
 msgid "Port attacked: %s"
 msgstr "Pôrt k' a stî ataké: %s"
 
-#: standalone/net_applet:330
+#: standalone/net_applet:331
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr "Sôre di l' atake ICMP: %s"
@@ -26328,7 +26310,7 @@ msgstr "Sacwants éndjins ont stî radjoutés: %s\n"
 msgid "- %s was added\n"
 msgstr "- %s a stî radjouté\n"
 
-#: standalone/service_harddrake:203
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Deteccion di l' éndjolreye en alaedje"
@@ -26478,7 +26460,7 @@ msgstr "Raptiti l' coxhlaedje"
 msgid "Toggle between flat and group sorted"
 msgstr "Passer di nou relijhaedje a on relijhaedje pa hopeas"
 
-#: wizards.pm:95 wizards2.pm:95
+#: wizards.pm:95
 #, c-format
 msgid ""
 "%s is not installed\n"
@@ -26487,34 +26469,123 @@ msgstr ""
 "%s n' est nén astalé\n"
 "Clitchîz so «Shuvant» po l' astaler oudonbén so «Rinoncî» po cwiter"
 
-#: wizards.pm:99 wizards2.pm:99
+#: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "L' astalaedje a fwait berwete"
 
+#~ msgid "Do it later"
+#~ msgstr "El fé pus tård"
+
+#~ msgid ""
+#~ "You need the Alcatel microcode.\n"
+#~ "Download it at:\n"
+#~ "%s\n"
+#~ "and copy the mgmt.o in /usr/share/speedtouch"
+#~ msgstr ""
+#~ "Vos avoz mezåjhe do microcôde d' alcatel\n"
+#~ "Prindoz l' di\n"
+#~ "%s\n"
+#~ "et s' copyîz l' fitchî mgmt.o e /usr/share/speedtouch"
+
+#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
+#~ msgstr "MdkKDM ((manaedjeu di håynaedje Mandriva Linux)"
+
+#~ msgid "Internet Connection Sharing currently disabled"
+#~ msgstr "Li pårtaedje do raloyaedje al rantoele daegnrece est dismetou."
+
+#~ msgid "Enabling servers..."
+#~ msgstr "Metant les sierveus en alaedje..."
+
+#~ msgid "Internet Connection Sharing currently enabled"
+#~ msgstr "Li pårtaedje do raloyaedje al rantoele daegnrece est en alaedje"
+
+#~ msgid "Interface %s (using module %s)"
+#~ msgstr "Eterface %s (ki eploye li module %s)"
+
+#~ msgid "Interface %s"
+#~ msgstr "Eterface %s"
+
+#~ msgid "Network interface"
+#~ msgstr "Eterface rantoele"
+
+#~ msgid "Network interface already configured"
+#~ msgstr "L' eterface rantoele est ddja apontieye"
+
+#~ msgid ""
+#~ "Warning, the network adapter (%s) is already configured.\n"
+#~ "\n"
+#~ "Do you want an automatic re-configuration?\n"
+#~ "\n"
+#~ "You can do it manually but you need to know what you're doing."
+#~ msgstr ""
+#~ "Asteme, li cåte rantoele (%s) est ddja apontieye.\n"
+#~ "\n"
+#~ "Voloz vs rifé on rapontiaedje otomatike?\n"
+#~ "\n"
+#~ "Vos l' poloz fé manuwelmint mins vos dvoz saveur çou k' vos fjhoz."
+
+#~ msgid "No (experts only)"
+#~ msgstr "Neni (po les spepieus)"
+
+#~ msgid "Show current interface configuration"
+#~ msgstr "Mostrer l' apontiaedje di l' eterface do moumint"
+
+#~ msgid "Current interface configuration"
+#~ msgstr "Apontiaedje di l' eterface do moumint"
+
+#~ msgid ""
+#~ "Current configuration of `%s':\n"
+#~ "\n"
+#~ "Network: %s\n"
+#~ "IP address: %s\n"
+#~ "IP attribution: %s\n"
+#~ "Driver: %s"
+#~ msgstr ""
+#~ "Apontiaedje do moumint di «%s»:\n"
+#~ "\n"
+#~ "Rantoele: %s\n"
+#~ "Adresse IP: %s\n"
+#~ "Atribouwaedje IP: %s\n"
+#~ "Mineu: %s"
+
+#~ msgid ""
+#~ "I can keep your current configuration and assume you already set up a "
+#~ "DHCP server; in that case please verify I correctly read the Network that "
+#~ "you use for your local network; I will not reconfigure it and I will not "
+#~ "touch your DHCP server configuration.\n"
+#~ "\n"
+#~ "The default DNS entry is the Caching Nameserver configured on the "
+#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
+#~ "\t\t      \n"
+#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
+#~ "server for you.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Dji pou wårder vost apontiaedje do moumint et supôzer ki vos avoz ddja "
+#~ "apontyî on sierveu DHCP; dins ç' cas acertinez vs ki dj' a bén léjhou "
+#~ "comifåt l' adresse rantoele eployeye pol rantoele locåle; dji n' va nén "
+#~ "rapontyî çoula et nén candjî l' apontiaedje do sierveu DHCP.\n"
+#~ "\n"
+#~ "Li prémetowe intrêye est li sierveu di nos (DNS) di muchete so "
+#~ "l' éndjole. Vos l' poloz replaecî avou l' DNS di vost ahesseu par "
+#~ "egzimpe.\n"
+#~ "\n"
+#~ "Oudonbén, dji pou rapontyî vosse eterface rantoele eyet (r)apontyî on "
+#~ "sierveu DHCP por vos.\n"
+#~ "\n"
+
+#~ msgid "(This) DHCP Server IP"
+#~ msgstr "IP do sierveu DHCP"
+
+#~ msgid "Re-configure interface and DHCP server"
+#~ msgstr "Rapontyî l' eterface et li sierveu DHCP"
+
+#~ msgid "The Local Network did not finish with `.0', bailing out."
+#~ msgstr "Li limero del rantoele locåle ni finixh nén pa «.0», dj' abandone."
+
 #~ msgid "Number of logical extents: %d"
 #~ msgstr "Nombe d' egztencions lodjikes: %d"
-
-#~ msgid ""
-#~ "Your system is low on resources. You may have some problem installing\n"
-#~ "Mandriva Linux. If that occurs, you can try a text install instead. For "
-#~ "this,\n"
-#~ "press `F1' when booting on CDROM, then enter `text'."
-#~ msgstr ""
-#~ "Vosse sistinme a po di rsources. Vos pôrîz aveur des rujhes po\n"
-#~ "l' astalåcion di Mandriva Linux. Si çoula arive, vos ploz sayî ene\n"
-#~ "astalåcion e môde tecse. Po çoula, tchoûkîz sol tape «F1» a "
-#~ "l' enondaedje\n"
-#~ "et poy tapez «text»."
-
-#~ msgid ""
-#~ "Contacting Mandriva Linux web site to get the list of available mirrors..."
-#~ msgstr ""
-#~ "Dj' atôche li waibe da Mandriva Linux po-z aveur li djivêye di muroes "
-#~ "k' i gn a"
-
-#~ msgid "Mandriva Linux Installation %s"
-#~ msgstr "Astalåcion di Mandriva Linux %s"
 
 #~ msgid ""
 #~ "WARNING: this device has been previously configured to connect to the "
