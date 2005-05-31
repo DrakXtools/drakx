@@ -24,6 +24,7 @@ I4L_SYSNAME=""
 I4L_LOCALMSN="$isdn->{phone_in}"
 I4L_REMOTE_OUT="$isdn->{phone_out}"
 I4L_DIALMODE="$isdn->{dialing_mode}"
+I4L_IDLETIME="$isdn->{huptimeout}"
 ) . if_($isdn->{speed} =~ /128/, 'SLAVE="ippp1"
 '));
 	output "$::prefix/etc/isdn/profile/card/mycard",

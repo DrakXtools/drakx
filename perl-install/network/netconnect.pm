@@ -360,7 +360,7 @@ sub real_main {
                                 [ $netc,   "dnsServer3",   { label => N("Provider DNS 2 (optional)") } ],
                                 [ $isdn, "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
                                 [ $isdn, "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
-                                [ $netcnx, "huptimeout",   { label => N("Connection timeout (in sec)") } ], #unused?
+                                [ $isdn, "huptimeout",   { label => N("Connection timeout (in sec)") } ],
                                )
                              ),
                              ({ label => N("Account Login (user name)"), val => \$isdn->{login} },
