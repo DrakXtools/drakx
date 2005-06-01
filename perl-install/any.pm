@@ -613,6 +613,13 @@ sub ask_user_one {
         $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
         length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
         member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
+	foreach ([ $u->{uid}, N("User ID") ],
+		 [ $u->{gid}, N("Group ID") ]) {
+	    my ($id, $name) = @$_;
+	    $id or next;
+	    $id =~ /^\d+$/ or $in->ask_warn('', N("%s must be a number", $name)), return 1;
+	    $id >= 500 or $in->ask_yesorno('', N("%s should be above 500. Accept anyway?", $name)) or return 1;
+	}
         return 0;
     };
     my $ret = $in->ask_from_(
@@ -637,6 +644,8 @@ sub ask_user_one {
           { label => N("Password"),val => \$u->{password}, hidden => 1 },
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
+	  { label => N("User ID"), val => \$u->{uid}, advanced => 1 },
+	  { label => N("Group ID"), val => \$u->{gid}, advanced => 1 },
 	    if_($security <= 3 && !$options{noicons} && @icons,
 	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
 	    ),
