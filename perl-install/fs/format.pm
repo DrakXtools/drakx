@@ -93,6 +93,14 @@ sub part_raw {
     if ($fs_type eq 'ext3') {
 	disable_forced_fsck($dev);
     }
+    if ($part->{device_LABEL}) {
+	if (member($fs_type, qw(ext2 ext3))) {
+	    run_program::run("tune2fs", "-L", $part->{device_LABEL}, devices::make($dev));
+	} else {
+	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $part->{fs_type}");
+	    delete $part->{device_LABEL}, $part->{prefer_device_LABEL};
+	}
+    }
 
     set_isFormatted($part, 1);
 }
