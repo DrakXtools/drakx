@@ -112,10 +112,13 @@ sub merge_fstabs {
 
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
-	$p->{fs_type} = $p2->{fs_type} if $p2->{fs_type} && !$loose;
-	$p->{options} = $p2->{options} if $p2->{options} && !$loose;
-	#- important to get isMounted property else DrakX may try to mount already mounted partitions :-(
-	add2hash($p, $p2);
+	if (!$loose) {
+	    $p->{fs_type} = $p2->{fs_type} if $p2->{fs_type};
+	    $p->{options} = $p2->{options} if $p2->{options};
+	    add2hash($p, $p2);
+	} else {
+	    $p->{isMounted} ||= $p2->{isMounted};
+	}
 	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
 
 	$p->{fs_type} && $p2->{fs_type} && $p->{fs_type} ne $p2->{fs_type}
