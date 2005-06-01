@@ -570,6 +570,7 @@ sub ModeLine_from_string {
 
 # http://home.comcast.net/~igpl/Aspect.html
 # movies http://www.technosound.co.uk/nav.php?pageid=hcg_widescreen
+# esp for 1360x768 http://www.winischhofer.at/linuxsispart1.shtml
 
 # www.dell.com/downloads/global/vectors/2003_cvt.pdf
 # file vesamodes in Xorg is DMT Standard Display Modes
@@ -595,22 +596,22 @@ our %ratio2resolutions = (
     '4/3' => [
 	qw(320x240 480x360 640x480 800x600 832x624 
 	   1024x768 1152x864 1280x960 1400x1050 
-	   1600x1200 1920x1440 2048x1536),
+	   1600x1200 1920x1440 2048x1536), # 400x300 512x384 768x576
     ],		# VGA=640x480, SVGA=800x600, XGA=1024x768, SXGA+=1400x1050, UXGA=1600x1200, QXGA=2048x1536
 
     # 1.5
     '3/2' => [ qw(360x240 720x480 1152x768) ],
 
     # 1.6
-    '16/10' => [ qw(1280x800 1440x900 1600x1000 1680x1050 1920x1200) ],
+    '16/10' => [ qw(1280x800 1440x900 1600x1000 1680x1050 1920x1200) ], # 320x200 640x400 960x600
                 # WSXGA+=1680x1050, WUXGA=1920x1200
 
     # 1.67
-    '15/9' => [ qw(1280x768) ],
+    '15/9' => [ qw(1280x768) ], # 800x480
 		# WXGA=1280x768 or ??? (should be 1366x768)
     
     # 1.78
-    '16/9' => [ qw(1280x720 1600x900 1920x1080) ],
+    '16/9' => [ qw(1280x720 1600x900 1920x1080) ], # 960x540 1024x576
 
 
     # now more weird things
@@ -618,14 +619,29 @@ our %ratio2resolutions = (
     # 1.32
     # '192/145' => [ qw(1152x870) ],
 
+    # 1.328
+    # '85/64' => [ qw(1360x1024) ],
+
     # 1.42
     # '17/12' => [ qw(544x384) ] ,
 
     # 1.56
     # '25/16' => [ qw(1600x1024) ], # WSXGA
 
+    # 1.707
+    # '128/75' => [ qw(1024x600) ],
+
+    # 1.767
+    # '53/30' => [ qw(848x480) ],
+
+    # 1.771
+    # '85/48' => [ qw(1360x768) ],
+
     # 1.775
-    # '71/15' => [ qw(852x480) ],
+    # '71/40' => [ qw(852x480) ],
+
+    # 1.783
+    # '107/60' => [ qw(856x480) ],
 
     N_("_:weird aspect ratio\nother") => [
 	# 2.13 = 32/15
