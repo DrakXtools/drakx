@@ -265,7 +265,6 @@ sub merge_info_from_mtab {
 	}
 	$_->{isMounted} = 1;
 	set_isFormatted($_, 1);
-	delete $_->{options};
     } 
     merge_fstabs('loose', $fstab, @l1, @l2);
 }
