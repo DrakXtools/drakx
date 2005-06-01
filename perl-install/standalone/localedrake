@@ -37,32 +37,7 @@ my $in = 'interactive'->vnew;
 $ugtk2::wm_icon = "localedrake";
 $::Wizard_title = N("LocaleDrake");
 
-sub select_country() {
-    any::selectCountry($in, $locale);  
-}
-
-eval {
-    local $::isWizard = 1;
-  language:
-    # keep around previous settings so that any::selectLanguage can keep UTF-8 flag:
-    local $::Wizard_no_previous = 1;
-    my $old_lang = $locale->{lang};
-    $in->{locale} = $locale;
-    $locale->{lang} = any::selectLanguage($in, $locale->{lang});
-    $locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
-    undef $::Wizard_no_previous;
-    select_country() or goto language;
-};
-if ($@) {
-    if ($@ =~ /^one lang only/) {
-	select_country() or $in->exit(0);
-    } elsif ($@ !~ /wizcancel/) {
-	die;
-    } else {
-        $in->exit(0);
-    }
-}
-
+any::selectLanguage_and_more_standalone($in, $locale);
 lang::write($locale, $>);
 
 my $msg = N("The change is done, but to be effective you must logout");

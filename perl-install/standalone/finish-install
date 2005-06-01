@@ -9,6 +9,7 @@ use authentication;
 use network::netconnect;
 use security::level;
 
+$ENV{SHARE_PATH} ||= "/usr/share";
 my $authentication = authentication::get();
 my $security = security::level::get();
 network::netconnect::read_net_conf(my $netcnx = {}, my $netc = {}, my $intf = {});
@@ -16,10 +17,19 @@ network::netconnect::read_net_conf(my $netcnx = {}, my $netc = {}, my $intf = {}
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
 
+sub ask_language() {
+    require lang;
+    my $locale = lang::read();
+    any::selectLanguage_and_more_standalone($in, $locale);
+    lang::write($locale);
+    lang::set($locale);
+    Gtk2->set_locale;
+}
+
 sub ask_network() {
     my $modules_conf = modules::any_conf->read;
     require network::netconnect;
-    network::netconnect::real_main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
+    network::netconnect::real_main($netcnx, $in, $modules_conf, $netc, undef, $intf);
 }
 
 sub ask_authentication() {
@@ -45,11 +55,20 @@ sub ask_users() {
     any::add_users($users, $authentication);
 }
 
-eval { ask_network() };
+sub call {
+    my ($f_name) = @_;
+    log::l("calling $f_name");
+    my $f = $::{$f_name} or internal_error "bad function $f_name";
+    eval { $f->() };
+    log::l("$f_name failed: $@") if $@;
+}
+
+call('ask_language');
+call('ask_network');
 $::WizardWindow->destroy; undef $::WizardWindow;
 $::Wizard_pix_up = 'redhat-config-users';
-eval { ask_authentication() };
-eval { ask_users() };
+call('ask_authentication');
+call('ask_users');
 setVarsInSh('/etc/sysconfig/finish-install', { FINISH_INSTALL => 'no' });
 
 $in->exit(0);

@@ -776,6 +776,31 @@ when your installation is complete and you restart your system.")),
     }
 }
 
+sub selectLanguage_and_more_standalone {
+    my ($in, $locale) = @_;
+    eval {
+	local $::isWizard = 1;
+      language:
+	# keep around previous settings so that selectLanguage can keep UTF-8 flag:
+	local $::Wizard_no_previous = 1;
+	my $old_lang = $locale->{lang};
+	$in->{locale} = $locale;
+	$locale->{lang} = selectLanguage($in, $locale->{lang});
+	$locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
+	undef $::Wizard_no_previous;
+	selectCountry($in, $locale) or goto language;
+    };
+    if ($@) {
+	if ($@ =~ /^one lang only/) {
+	    selectCountry($in, $locale) or $in->exit(0);
+	} elsif ($@ !~ /wizcancel/) {
+	    die;
+	} else {
+	    $in->exit(0);
+	}
+    }
+}
+
 sub selectCountry {
     my ($in, $locale) = @_;
 
