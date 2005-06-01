@@ -477,69 +477,73 @@ sub mount {
     my ($dev, $where, $fs, $b_rdonly, $o_options, $o_wait_message) = @_;
     log::l("mounting $dev on $where as type $fs, options $o_options");
 
-    -d $where or mkdir_p($where);
+    mkdir_p($where);
 
     $fs or log::l("not mounting $dev partition"), return;
 
-    my @fs_modules = qw(ext3 hfs jfs ntfs romfs reiserfs ufs xfs vfat);
+    {
+	my @fs_modules = qw(ext3 hfs jfs ntfs romfs reiserfs ufs xfs vfat);
+	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts), @fs_modules);
 
-    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs') && $::isStandalone || $::move) {
-	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
-	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die N("mounting partition %s in directory %s failed", $dev, $where);
-    } else {
-	my @types = ('ext2', 'proc', 'sysfs', 'usbfs', 'usbdevfs', 'iso9660', 'devfs', 'devpts', @fs_modules);
+	push @types, 'smb', 'smbfs', 'nfs', 'davfs' if !$::isInstall;
 
-	member($fs, @types) or log::l("skipping mounting $dev partition ($fs)"), return;
-
-	$where =~ s|/$||;
-
-	my $flag = c::MS_MGC_VAL();
-	$flag |= c::MS_RDONLY() if $b_rdonly;
-	my $mount_opt = "";
-
-	if ($fs eq 'vfat') {
-	    $mount_opt = 'check=relaxed';
-	} elsif ($fs eq 'reiserfs') {
-	    #- could be better if we knew if there is a /boot or not
-	    #- without knowing it, / is forced to be mounted with notail
-	    # if $where =~ m|/(boot)?$|;
-	    $mount_opt = 'notail'; #- notail in any case
-	} elsif ($fs eq 'jfs' && !$b_rdonly) {
-	    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
-	    #- needed if the system is dirty otherwise mounting read-write simply fails
-	    run_program::raw({ timeout => 60 * 60 }, "fsck.jfs", $dev) or do {
-		my $err = $?;
-		die "fsck.jfs failed" if $err & 0xfc00;
-	    };
-	} elsif ($fs eq 'ext2' && !$b_rdonly) {
-		$o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
-		foreach ('-a', '-y') {
-		    run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
-		    my $err = $?;
-		    if ($err & 0x0100) {
-			log::l("fsck corrected partition $dev");
-		    }
-		    if ($err & 0xfeff) {
-			my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
-			$_ eq '-y' ? die($txt) : cdie($txt);
-		    } else {
-			last;
-		    }
-		}
+	if (!member($fs, @types) && !$::move) {
+	    log::l("skipping mounting $dev partition ($fs)");
+	    return;
 	}
-	if (member($fs, @fs_modules)) {
-	    eval { modules::load($fs) };
-	} elsif ($fs eq 'iso9660') {
-	    eval { modules::load('isofs') };
+	if ($::isInstall) {
+	    if (member($fs, @fs_modules)) {
+		eval { modules::load($fs) };
+	    } elsif ($fs eq 'iso9660') {
+		eval { modules::load('isofs') };
+	    }
 	}
-	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
-	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
-	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
-    
-        eval { #- fail silently, /etc may be read-only
-	    append_to_file("/etc/mtab", "$dev $where $fs defaults 0 0\n");
-	};
     }
+
+    $where =~ s|/$||;
+
+    my @mount_opt = split(',', $o_options || '');
+
+    if ($fs eq 'vfat') {
+	@mount_opt = 'check=relaxed';
+    } elsif ($fs eq 'jfs' && !$b_rdonly) {
+	fsck_jfs($dev, $o_wait_message);
+    } elsif ($fs eq 'ext2' && !$b_rdonly) {
+	fsck_ext2($dev, $o_wait_message);
+    }
+
+    push @mount_opt, 'ro' if $b_rdonly;
+
+    log::l("calling mount -t $fs $dev $where @mount_opt");
+    $o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
+    run_program::run('mount', '-t', $fs, $dev, $where, if_(@mount_opt, '-o', join(',', @mount_opt))) or die N("mounting partition %s in directory %s failed", $dev, $where);
+}
+
+sub fsck_ext2 {
+    my ($dev, $o_wait_message) = @_;
+    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
+    foreach ('-a', '-y') {
+	run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
+	my $err = $?;
+	if ($err & 0x0100) {
+	    log::l("fsck corrected partition $dev");
+	}
+	if ($err & 0xfeff) {
+	    my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
+	    $_ eq '-y' ? die($txt) : cdie($txt);
+	} else {
+	    last;
+	}
+    }
+}
+sub fsck_jfs {
+    my ($dev, $o_wait_message) = @_;
+    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
+    #- needed if the system is dirty otherwise mounting read-write simply fails
+    run_program::raw({ timeout => 60 * 60 }, "fsck.jfs", $dev) or do {
+	my $err = $?;
+	die "fsck.jfs failed" if $err & 0xfc00;
+    };
 }
 
 #- takes the mount point to umount (can also be the device)

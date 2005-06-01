@@ -61,25 +61,6 @@ sub tr_ {
     eval "(tr/$set1/$set2/$s$d$c, print) while <>";
 }
 
-sub mount {
-    @_ or return cat("/proc/mounts");
-    my ($t, $r) = getopts(\@_, qw(tr));
-    my $fs = $t && shift;
-
-    @_ == 2 or die "usage: mount [-r] [-t <fs>] <device> <dir>\n",
-    "       (use -r for readonly)\n",
-    "       (if /dev/ is left off the device name, a temporary node will be created)\n";
-
-    my ($dev, $where) = @_;
-    $fs ||= $dev =~ /:/ ? "nfs" :
-            $dev =~ /fd/ ? "vfat" : "ext2";
-
-    require fs;
-    require modules;
-    modules::load_dependencies("/modules/modules.dep");
-    fs::mount($dev, $where, $fs, $r);
-}
-
 sub umount {
     @_ == 1 or die "umount expects a single argument\n";
 
