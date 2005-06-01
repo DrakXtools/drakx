@@ -157,7 +157,7 @@ sub setup_tooltips() {
 		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
 		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
 		'send_mail_to' => N("This should be a local user or email address that you want the backup results sent to. You will need to define a functioning mail server."),
-		'send_mail_from' => N("This should be the return address that you want the backup results sent from. Default is drakbakup."),
+		'send_mail_from' => N("This should be the return address that you want the backup results sent from. Default is drakbackup."),
 		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
 		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
 		'dir_or_module' => N("Some protocols, like rsync, may be configured at the server end.  Rather than using a directory path, you would use the 'module' name for the service path."),
@@ -1227,7 +1227,9 @@ sub do_tar {
 	my $tmp_list = $list_file . ".tmp";
 	if ($conf{DIRECT_TAPE}) {
 		log::explanations("Direct tape backup - tar deferred...");
-		-e $tmp_list ? push @files_for_direct_tape, $tmp_list : push @files_for_direct_tape, @files;
+		@files = cat_($tmp_list) and chomp @files if -e $tmp_list;
+		push @files_for_direct_tape, @files;
+		renamef($tmp_list, $list_file) if -e $tmp_list;
 	} else {
 		#- if $list_file is undefined, then use the @files list
 		-e $tmp_list ? system("$tar_cmd -f $full_dest_file --index-file=$list_file -T $tmp_list") : system("$tar_cmd -f $full_dest_file --index-file=$list_file @files");
@@ -3597,8 +3599,8 @@ sub restore_tape {
 				position_tape($cat_entry, $dev_path); 
 				get_tarfile_from_tape($dev_path);
 			}
-			return 1 if no_tarfile($tarfile);
-			untar("$cfg_dir/restores/$tarfile $restorefile", "files", $tarfile, $restorefile);
+			return 1 if no_tarfile("$conf{PATH_TO_SAVE}/$tarfile");
+			untar("$cfg_dir/restores/$conf{PATH_TO_SAVE}/$tarfile $restorefile", "files", $tarfile, $restorefile);
 		}
 	}
     return 0;
