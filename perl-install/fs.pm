@@ -566,7 +566,7 @@ sub mount_part {
     #- root carrier's link can not be mounted
     loopback::carryRootCreateSymlink($part, $o_prefix);
 
-    log::l("isMounted=$part->{isMounted}, real_mntpoint=$part->{real_mntpoint}, mntpoint=$part->{mntpoint}");
+    log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint'));
     if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
 	log::l("remounting partition on $o_prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
 	if ($::isInstall) { #- ensure partition will not be busy.
