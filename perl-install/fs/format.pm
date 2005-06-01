@@ -98,7 +98,8 @@ sub part_raw {
 	    run_program::run("tune2fs", "-L", $part->{device_LABEL}, devices::make($dev));
 	} else {
 	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $part->{fs_type}");
-	    delete $part->{device_LABEL}, $part->{prefer_device_LABEL};
+	    delete $part->{device_LABEL};
+	    delete $part->{prefer_device_LABEL};
 	}
     }
 
