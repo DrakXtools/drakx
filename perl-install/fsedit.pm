@@ -379,7 +379,7 @@ sub suggest_part {
     $part->{mntpoint} = $best->{mntpoint};
     fs::type::set_type_subpart($part, $best) if !isTrueFS($best) || !isTrueFS($part);
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
-    foreach ('options', 'lv_name', 'encrypt_key') {
+    foreach ('options', 'lv_name', 'encrypt_key', 'device_LABEL', 'prefer_device_LABEL') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
     1;
