@@ -598,7 +598,7 @@ sub ask_fromW {
 
 		$set = sub {
 		    my $s = may_apply($e->{format}, $_[0]);
-              next if !($s ne $w->get_text && $_[0] ne $w->get_text);
+              return if !($s ne $w->get_text && $_[0] ne $w->get_text);
               if ($model) {
                   $model->set($w->get_active_iter, 0 => may_apply($e->{format}, $s));
                   #$w->set_active($model->{indexes}{$s});
