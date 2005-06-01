@@ -926,7 +926,7 @@ sub miscellaneousAfter {
     $ENV{SECURE_LEVEL} = $o->{security}; #- deprecated with chkconfig 1.3.4-2mdk, uses /etc/sysconfig/msec
 
     addToBeDone {
-	addVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
+	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
 	    META_CLASS => $o->{meta_class} || 'PowerPack',
         });
 	substInFile { s/KEYBOARD_AT_BOOT=.*/KEYBOARD_AT_BOOT=yes/ } "$o->{prefix}/etc/sysconfig/usb" if detect_devices::usbKeyboards();
