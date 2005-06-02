@@ -168,8 +168,16 @@ sub write {
     modules::write_preload_conf($conf);
 }
 
+sub merge_into {
+    my ($conf, $conf2) = @_;
 
-
+    if (ref($conf) eq ref($conf2)) {
+	log::l("merging " . ref($conf));
+	add2hash($conf, $conf2);
+    } else {
+	log::l("not merging modules_conf " . ref($conf2) . " into " . ref($conf));	
+    }
+}
 
 ################################################################################
 sub read_handled {

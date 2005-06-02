@@ -145,6 +145,8 @@ sub selectInstallClass {
 	@{$o->{orderedSteps}} = uniq(map {
 	    $_ eq 'selectInstallClass' ? ($_, 'doPartitionDisks', 'formatPartitions') : $_;
 	} @{$o->{orderedSteps}});
+
+	$o->{modules_conf}->merge_into(modules::any_conf->read);
     }
 }
 
