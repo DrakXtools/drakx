@@ -779,6 +779,18 @@ sub matching_driver {
     my (@list) = @_;
     grep { member($_->{driver}, @list) } probeall();
 }
+sub probe_name {
+    my ($name) = @_;
+    map { $_->{driver} =~ /^$name:(.*)/ } probeall();
+}
+sub probe_unique_name {
+    my ($name) = @_;
+    my @l = uniq(probe_name($name));
+    if (@l > 1) {
+	log::l("oops, more than one $name from probe: ", join(' ', @l));
+    }
+    $l[0];
+}
 
 sub stringlist() { 
     map {

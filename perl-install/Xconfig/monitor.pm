@@ -230,11 +230,8 @@ sub probe_using_X {
 }
 
 sub probe_DMI() {
-    my ($res) = my @res = uniq(map { if_($_->{driver} =~ /^Resolution:(.*)/, $1) } detect_devices::probeall()) or return;
-    if (@res > 1) {
-	log::l("oops, more than one resolution from DMI and pci probe: ", join(' ', @res));
-    }
-    generic_flat_panel($res);
+    my $res = detect_devices::probe_unique_name('Resolution');
+    $res && generic_flat_panel($res);
 }
 
 sub generic_flat_panel {

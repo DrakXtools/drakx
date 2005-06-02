@@ -768,7 +768,7 @@ sub rpmsrate_always_flags {
 
     my $rpmsrate_flags_chosen = {};
     $rpmsrate_flags_chosen->{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
-    $rpmsrate_flags_chosen->{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
+    $rpmsrate_flags_chosen->{uc($_)} = 1 foreach detect_devices::probe_name('Flag');
     $rpmsrate_flags_chosen->{DOCS} = !$o->{excludedocs};
     $rpmsrate_flags_chosen->{UTF8} = $o->{locale}{utf8};
     $rpmsrate_flags_chosen->{BURNER} = 1 if detect_devices::burners();
@@ -814,7 +814,7 @@ sub default_packages {
     push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    push @l, map { if_($_->{driver} =~ /^Pkg:(.*)/, $1) } detect_devices::probeall();
+    push @l, detect_devices::probe_name('Pkg');
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
