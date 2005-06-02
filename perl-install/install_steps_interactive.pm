@@ -139,7 +139,7 @@ sub selectInstallClass {
     my ($o) = @_;
 
     if (my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix})) {
-	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part}{device} } @l));
+	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part} && $_->{part}{device} } @l));
 
 	my @releases = uniq(map { $_->{release} } @l);
 	if (@releases != @l) {
@@ -158,9 +158,10 @@ sub selectInstallClass {
 			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
 			} ]);
 	if (ref $p) {
-	    my $part = $p->{part};
-	    log::l("choosing to upgrade partition $part->{device}");
-	    $o->{migrate_device_names} = install_any::use_root_part($o->{all_hds}, $part, $o);
+	    if ($p->{part}) {
+		log::l("choosing to upgrade partition $p->{part}{device}");
+		$o->{migrate_device_names} = install_any::use_root_part($o->{all_hds}, $p->{part}, $o);
+	    }
 	    foreach (grep { $_->{mntpoint} } @{$o->{fstab}}) {
 		my ($options, $_unknown) = fs::mount_options::unpack($_);
 		$options->{encrypted} or next;

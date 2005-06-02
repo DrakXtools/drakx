@@ -1429,11 +1429,18 @@ sub suggest_mount_points {
 
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
+
+    if ($::local_install) {
+	my $f = common::release_file('/mnt') or return;
+	chomp(my $s = cat_("/mnt$f"));
+	$s =~ s/\s+for\s+\S+//;
+	return { release => $s, release_file => $f };
+    }
+
     map { 
 	my $handle = any::inspect($_, $prefix);
 	if (my $f = $handle && common::release_file($handle->{dir})) {
-	    my $s = cat_("$handle->{dir}$f");
-	    chomp($s);
+	    chomp(my $s = cat_("$handle->{dir}$f"));
 	    $s =~ s/\s+for\s+\S+//;
 	    log::l("find_root_parts found $_->{device}: $s");
 	    { release => $s, part => $_, release_file => $f };
@@ -1530,7 +1537,7 @@ sub use_root_part {
     my ($all_hds, $part, $o_in) = @_;
     my $migrate_device_names;
     {
-	my $handle = any::inspect($part, $::prefix) or die;
+	my $handle = any::inspect($part, $::prefix) or internal_error();
 
 	my @from_fstab = fs::read_fstab($handle->{dir}, '/etc/fstab', 'keep_default');
 
