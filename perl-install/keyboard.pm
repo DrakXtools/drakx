@@ -456,12 +456,25 @@ sub lang2keyboard {
     { KEYBOARD => $keyboards{$kb} ? $kb : 'us' }; #- handle incorrect keyboard mapping to us.
 }
 
+sub default {
+    my ($o_locale) = @_;
+
+    my $keyboard = from_usb() || lang2keyboard(($o_locale || lang::read())->{lang});
+    add2hash($keyboard, from_DMI());
+    $keyboard;
+}
+
 sub from_usb() {
     return if $::noauto;
     my ($usb_kbd) = detect_devices::usbKeyboards() or return;
     my $country_code = detect_devices::usbKeyboard2country_code($usb_kbd) or return;
     my $keyboard = $usb2keyboard[$country_code];
     $keyboard !~ /SKIP/ && { KEYBOARD => $keyboard };
+}
+
+sub from_DMI() {
+    my $XkbModel = detect_devices::probe_unique_name('XkbModel');
+    $XkbModel && { XkbModel => $XkbModel };
 }
 
 sub load {

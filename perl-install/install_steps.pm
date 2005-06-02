@@ -119,7 +119,7 @@ sub selectLanguage {
     $o->{keyboard} = { KEYBOARD => $o->{keyboard} } if $o->{keyboard} && !ref($o->{keyboard});
 
     if (!$o->{keyboard} || $o->{keyboard}{unsafe}) {
-	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{locale}{lang});
+	$o->{keyboard} = keyboard::default($o->{locale});
 	$o->{keyboard}{unsafe} = 1;
 	keyboard::setup($o->{keyboard});
     }
