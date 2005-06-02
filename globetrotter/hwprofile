@@ -21,26 +21,24 @@ use lib qw(/usr/lib/libDrakX);
 use common;
 use standalone;
 use Digest::MD5 qw(md5_hex);
-use network::tools;
-use network::netconnect;
+use network::network;
 
 # md5_hex call came from move::machine_ident() :
 my $id = "MDK" . md5_hex(join("", (map { (split)[1] } cat_("/proc/bus/pci/devices"))));
 
-my $netcnx = {};
+my $net = {};
 
 # first boot wizard:
 !glob_("/etc/netprofile/profiles/MDK*") and system('/usr/sbin/mdkmove');
 
 # create hardware profile if needed:
 if (! -d "/etc/netprofile/profiles/$id") {
-    network::tools::reread_net_conf($netcnx, {}, {});
-    network::netconnect::add_profile($netcnx, $id);
+    network::network::netprofile_read($net);
+    network::network::netprofile_add($net, $id);
 }
 
 # restore hardware profile:
-$netcnx->{PROFILE} = $id;
-eval { network::netconnect::set_profile($netcnx) };
+eval { network::network::netprofile_set($net, $id) };
 
 # redo ldconfig cache for libGL (since we've both ATI and NVIDIA GLX packages):
 system("/sbin/ldconfig");
