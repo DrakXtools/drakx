@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-05-31 13:03+0200\n"
-"PO-Revision-Date: 2005-05-29 16:00+0000\n"
+"PO-Revision-Date: 2005-06-02 22:49+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -1564,7 +1564,7 @@ msgstr "SSL"
 #: authentication.pm:104
 #, c-format
 msgid "security layout (SASL/Kerberos)"
-msgstr ""
+msgstr "öryggisupsetning (SASL/Kerberos)"
 
 #: authentication.pm:111 authentication.pm:149
 #, c-format
@@ -4924,6 +4924,76 @@ msgid ""
 "may find it a useful place to store a spare kernel and ramdisk images for\n"
 "emergency boot situations."
 msgstr ""
+"Hér þarft þú að ákveða hvaða disksneið þú vilt nota fyrir Mandriva Linux\n"
+"stýrikerfið. Ef disksneiðar hafa þegar verið skilgreindar, annað hvort\n"
+"frá fyrri uppsetningu á GNU/Linux, eða af öðru forriti til að stilla\n"
+"disksneiðar, þá getur þú notað þær. Annars verður þú að skilgreina\n"
+"disksneiðar.\n"
+"\n"
+"Til að skilgreina disksneiðar þá verður þú fyrst að velja disk. Þú getur\n"
+"valið disk sem þú ætlar að skipta með því að smella á ``hda'' fyrir\n"
+"fyrsta IDE tengda diskinn, ``hdb'' fyrir þann næsta, ``sda'' fyrir\n"
+"fyrsta SCSI diskinn o.s.frv.\n"
+"\n"
+"Til að skipta völdum diski, þá getur þú notað eftirfarandi aðgerðir:\n"
+"\n"
+" * \"%s\": þessi valkostur eyðir öllum disksneiðum á disknum\n"
+"\n"
+" * \"%s\": þessi valkostur býr sjálfkrafa til ext3 og diskminnissneið\n"
+"á lausu plássi á disknum.\n"
+"\n"
+"\"%s\": gefur þér aðgang að aukavalkostum:\n"
+"\n"
+" * \"%s\": vistar disksneiðatöfluna á disklingi. Gott ef síðar þarf að\n"
+"endurbyggja disksneiðatöfluna. Það er mælt með að þú gerir\n"
+"framkvæmir þetta skref.\n"
+"\n"
+" * \"%s\" leyfir þér að endurbyggja disksneiðatöfluna frá disklingi.\n"
+"\n"
+" * \"%s\": ef disksneiðataflan er skemmd, þá getur þú reynt að\n"
+"endurbyggja hana. Farðu varlega og mundu að þetta virkar ekki alltaf\n"
+"\n"
+" * \"%s\": hendir öllum breytingum og endurhleður disksneiðatöflunni\n"
+"eins og hún var upphaflega á disknum.\n"
+"\n"
+" * \"%s\": ef þú af-velur þennan valkost, þá verða notendur að\n"
+"tengja disklinga og geisladiska sjálfir við tengipunkta\n"
+"\n"
+" * \"%s\": notaðu þennan valkost ef þú vilt nota ráðgjafa til að skipta\n"
+"disknum þínum. Það er mæt með þessu ef þú hefur ekki nákvæmlega\n"
+"hvað á að gera hér.\n"
+"\n"
+" * \"%s\": notaðu þennan valkost ef þú vilt hætta við allar breytingar.\n"
+"\n"
+" * \"%s\": gefur þér aukalega valkosti (tegund, valkosti, forsníða)\n"
+"og gefur þér meiri upplýsingar um diskinn.\n"
+"\n"
+" * \"%s\": þegar þú hefur lokið við að skipta disknum þínum, þá\n"
+"skrifar þetta breytingarnar á diskinn.\n"
+"\n"
+"Þegar þú skilgreinir stærð disksneiðar, þá getur þú fínstillt stærðina\n"
+"á sneiðinni með örvalyklunum á lyklaborðinu.\n"
+"\n"
+"Athugið: Þú getur komist að öllum aðgerðum á skjánum frá\n"
+"lyklaborðinu. Þú færir þig á milli svæða með [Tab] og [Upp/Niður]\n"
+"örvalyklunum.\n"
+"\n"
+"Þegar disksneið er valin, þá getur þú notað:\n"
+"\n"
+" * Ctrl-c til að búa til nýja disksneið (þegar auð disksneið er valin)\n"
+"\n"
+" * Ctrl-d til að eyða disksneið\n"
+"\n"
+" * Ctrl-m til að setja tengipunkt\n"
+"\n"
+"Til að fá upplýsingar um mismunandi skráarkerfi, vinsamlega lestu\n"
+"kaflann um ext2FS í ``Reference Manual''.\n"
+"\n"
+"Ef þú ert að setja upp á PPC  tölvu, þá ættir þú að búa til litla HFS\n"
+"``ræsi-disksneið'' sem er að minnsta kosti 1M. Þessi disksneið\n"
+"verður notuð af yaboot ræsistjóranum. Ef þú gerir disksneiðina\n"
+"svolítið stærri t.d. 50MB þá er það góður staður til að geyma auka\n"
+"kjarna og ræsidisk-ímyndir fyrir óvæntar uppákomur."
 
 # ## skrytid
 #: help.pm:530
@@ -5008,6 +5078,9 @@ msgid ""
 "the\n"
 "list shown, click on the \"%s\" button to get the complete country list."
 msgstr ""
+"\"%s\": athugið val lands. Ef valið land er ekki rétt smelltu þá\n"
+"á \"%s\" hnappinn og veldu annað. Ef landið þitt er ekki á listanum,\n"
+"smelltu þá á \"%s\" hnappinn til að sjá heildalista landa."
 
 #: help.pm:569
 #, c-format
@@ -5034,6 +5107,26 @@ msgid ""
 "running version \"8.1\" or later. Performing an upgrade on versions prior\n"
 "to Mandriva Linux version \"8.1\" is not recommended."
 msgstr ""
+"Þetta skref er aðeins virkjað ef GNU/Linux disksneið hefur fundist á\n"
+"tölvunni þinni.\n"
+"\n"
+"DrakX þarf nú að vita hvort þú vilt setja upp nýtt kerfi eða hvort þú\n"
+"vilt uppfæra uppsett Mandriva Linux kerfi:\n"
+"\n"
+" * \"%s\". Þetta þurkar að mestu út gamla kerfið. En þó fer það\n"
+"svolítið eftir diskssneiðum sem þú hefur sett upp, þá getur þú\n"
+"varnað því að gögn (fyrst og fremst \"home\" möppur) verði\n"
+"yfirskrifuð. Ef þú vilt breyta hvernig diskunum er skipt, eða breyta\n"
+"skráarkerfinu, þá ættir þú að velja þennan valkost.\n"
+"\n"
+" * \"%s\". Þessi uppsenting leyfir þér að uppfæra pakkana sem nú\n"
+"eru uppsettir á Mandriva Linux kerfinu þínu. Disksneiðum og gögnum\n"
+"verður ekki breytt. Flest uppsetningarþrep eru enn aðgengileg\n"
+"og eru svipuð venjulegri uppfærslu.\n"
+"\n"
+"Að nota ``Uppfærslu'' aðgerðina ætti að virka vel á Mandrake Linux\n"
+"kerfum sem eru að keyra útgáfu \"8.1\" eða nýrri. Ekki er mælt með\n"
+"uppfærslu á eldri útgáfum en Mandriva Linux \"8.1\"."
 
 #: help.pm:591
 #, c-format
@@ -5055,6 +5148,21 @@ msgid ""
 "dialog will allow you to choose the key binding which will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
+"Byggt á því tungumáli sem þú velur, þá mun DrakX sjálfkrafa velja\n"
+"lyklaborðsuppsetningu. Athugaðu hvort valið hentar þér, eða veldu\n"
+"aðra lyklaborðsuppsetningu.\n"
+"\n"
+"Einnig gæti verið að lyklaborðið henti ekki þínum þörfum eða tungumáli\n"
+"Ef t.d. þú vilt hafa aðgang að íslensku lyklaborði í Sviss. Eða danskt\n"
+"lyklaborð og íslenskt umhverfi. Almennt talað í þannig umhverfi\n"
+"að tungumál og valið lyklaborð passa ekki saman. Hvort sem þú\n"
+"vilt þá getur þú valið lyklaborð af listanum.\n"
+"\n"
+"Smelltu á \"%s\" hnappinn til að sjá lista af mögulegum lyklaborðsuppsetningum.\n"
+"\n"
+"Ef þú velur lyklaborðsuppsetningu sem er ekki byggt á latnesku\n"
+"stafrófi, þá mun næsti gluggi leyfa þér að velja lyklasamsetningu\n"
+"sem víxlar til og frá latneska lyklaborðinu."
 
 #: help.pm:609
 #, c-format
@@ -6777,8 +6885,7 @@ msgstr ""
 
 #: install_steps_interactive.pm:825
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Hef samband við Mandriva Linux vefinn til að sækja lista yfir fáanlega "
 "spegla..."
@@ -10941,18 +11048,14 @@ msgstr ""
 "\t\tippp+ fyrir isdn tengi.\n"
 
 #: network/thirdparty.pm:195
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Þú þarft Alcatel míkrókóða uppfærslu.\n"
-"sæktu hana á:\n"
-"%s\n"
-"og afritaðu mgmt.o á /usr/share/speedtouch"
+msgstr "Afritaðu Alcatel míkrókóðan sem mgmt.o á /usr/share/speedtouch/"
 
 #: network/thirdparty.pm:265
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Gat ekki sett inn pakkana %s!"
+msgstr "Gat ekki sett inn pakkana (%s)!"
 
 #: network/thirdparty.pm:273
 #, c-format
@@ -10974,9 +11077,9 @@ msgid ""
 msgstr ""
 
 #: network/thirdparty.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Fjarlægja letur á þínu kerfi"
+msgstr "Finn ekki \"%s\" á Windows kerfinu þínu!"
 
 #: network/thirdparty.pm:310
 #, c-format
@@ -11043,9 +11146,9 @@ msgid "Looking for required software and drivers..."
 msgstr ""
 
 #: network/thirdparty.pm:435
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Augnablik, leita að og stilli tæki..."
+msgstr "Augnablik, keyri stilli-skipanir fyrir tæki..."
 
 #: partition_table.pm:397
 #, c-format
@@ -19958,9 +20061,9 @@ msgstr ""
 "Hvað vilt þú gera?"
 
 #: standalone/drakgw:108
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "endurstilla"
+msgstr "Endurstilla"
 
 #: standalone/drakgw:148
 #, c-format
@@ -19985,9 +20088,9 @@ msgid ""
 msgstr "Vinsamlega veldu hvaða nettengi verður tengt við staðarnetið þitt."
 
 #: standalone/drakgw:180
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Staðbundið IP-vistfang"
+msgstr "Stillingar staðbundins nets"
 
 #: standalone/drakgw:183
 #, c-format
@@ -20005,9 +20108,9 @@ msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
 
 #: standalone/drakgw:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "Uppsetning skjámiðlara"
+msgstr "Uppsetning nafnamiðlara léns (DNS)"
 
 #: standalone/drakgw:211
 #, c-format
@@ -20033,9 +20136,9 @@ msgstr ""
 "Ef þú veist ekki hvað þessar breytur þýða, láttu þær þá bara eiga sig."
 
 #: standalone/drakgw:251
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Sjálfvirk enduruppsetning"
+msgstr "Nota sjálfvirka uppsetningu (DHCP)"
 
 #: standalone/drakgw:252
 #, c-format
@@ -20073,24 +20176,24 @@ msgid "Admin mail"
 msgstr ""
 
 #: standalone/drakgw:287
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "Vélarnafn þjóns"
+msgstr "Sýnilegt vélarnafn"
 
 #: standalone/drakgw:288
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Eiginleiki"
+msgstr "Sel-gátt"
 
 #: standalone/drakgw:289
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "Stærð skyndiminnis"
+msgstr "Stærð skyndiminnis (MB)"
 
 #: standalone/drakgw:314
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Sýna upplýsingar um harðan disk"
+msgstr "Útvarpa upplýsingum um prentara"
 
 #: standalone/drakgw:331
 #, c-format
