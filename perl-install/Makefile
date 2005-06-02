@@ -217,3 +217,9 @@ trace_stage2:
 	[ -d $(DEST) ] || $(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
 	f=`perldoc -l Devel::Trace`; install -m 644 -D $$f $(DEST)$$f
 	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2
+
+# [pixel] for my grep looking for any .pm files
+pixel_standalone_links:
+	rm -rf .standalone_apps.swa
+	mkdir .standalone_apps.swa
+	for i in $(STANDALONEPMS_); do ln -sf ../standalone/$$i .standalone_apps.swa/$$i.pm; done
