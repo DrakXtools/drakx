@@ -477,7 +477,7 @@ sub from_DMI() {
     $XkbModel && { XkbModel => $XkbModel };
 }
 
-sub load {
+sub builtin_loadkeys {
     my ($keymap) = @_;
     return if $::testing;
 
@@ -573,7 +573,7 @@ sub setup_install {
 
     log::l("loading keymap $kmap");
     if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
-	load(scalar cat_($f));
+	builtin_loadkeys(scalar cat_($f));
     } elsif (-x '/bin/loadkeys') {
 	run_program::run('loadkeys', $kmap);
     } else {
