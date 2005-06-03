@@ -231,7 +231,7 @@ sub dd {
     }
     local (*IF, *OF); my ($tmp, $nb, $read);
     ref($h{if}) eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: can not open file $h{if}\n";
-    ref($h{of}) eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, O_CREAT|O_WRONLY) || die "error: can not open file $h{of}\n";
+    ref($h{of}) eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, c::O_CREAT()|c::O_WRONLY()) || die "error: can not open file $h{of}\n";
 
     $h{bs} = removeXiBSuffix($h{bs});
 
