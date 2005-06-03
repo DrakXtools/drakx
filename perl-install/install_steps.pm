@@ -121,7 +121,7 @@ sub selectLanguage {
     if (!$o->{keyboard} || $o->{keyboard}{unsafe}) {
 	$o->{keyboard} = keyboard::default($o->{locale});
 	$o->{keyboard}{unsafe} = 1;
-	keyboard::setup($o->{keyboard});
+	keyboard::setup_install($o->{keyboard});
     }
 
     $o->charsetChanged;
@@ -137,7 +137,7 @@ sub selectLanguage {
 sub selectKeyboard {
     my ($o) = @_;
     $o->{keyboard}{KBCHARSET} = lang::l2charset($o->{locale}{lang});
-    keyboard::setup($o->{keyboard});
+    keyboard::setup_install($o->{keyboard});
 
     addToBeDone {
 	keyboard::write($o->{keyboard});

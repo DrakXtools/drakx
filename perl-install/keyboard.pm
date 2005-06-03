@@ -564,7 +564,7 @@ sub setxkbmap {
     run_program::run('setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
 }
 
-sub setup {
+sub setup_install {
     my ($keyboard) = @_;
 
     return if arch() =~ /^sparc/;
