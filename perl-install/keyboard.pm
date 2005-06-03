@@ -524,25 +524,22 @@ sub parse_xkb_rules() {
 sub keyboard2full_xkb {
     my ($keyboard) = @_;
 
-    my $XkbLayout = keyboard2xkb($keyboard) or return { XkbDisable => '' };
+    my $Layout = keyboard2xkb($keyboard) or return { XkbDisable => '' };
+    if ($keyboard->{GRP_TOGGLE} && $Layout !~ /,/) {
+	$Layout = join(',', 'us', $Layout);
+    }
 
-    my $XkbModel = $keyboard->{XkbModel} ||
+    my $Model = $keyboard->{XkbModel} ||
       (arch() =~ /sparc/ ? 'sun' :
-	$XkbLayout eq 'jp' ? 'jp106' : 
-	$XkbLayout eq 'br' ? 'abnt2' : 'pc105');
+	$Layout eq 'jp' ? 'jp106' : 
+	$Layout eq 'br' ? 'abnt2' : 'pc105');
 
-    {
-	XkbLayout => 
-	   $XkbLayout =~ /,/ ? $XkbLayout :
-	   join(',', if_($keyboard->{GRP_TOGGLE}, 'us'), $XkbLayout),
-	XkbModel => $XkbModel,
-	XkbOptions => join(',', 
-			   if_($keyboard->{GRP_TOGGLE},
-			       "grp:$keyboard->{GRP_TOGGLE}", 
-			       'grp_led:scroll'),
-			   if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
-			   ),
-    };
+    my $Options = join(',', 
+	if_($keyboard->{GRP_TOGGLE}, "grp:$keyboard->{GRP_TOGGLE}", 'grp_led:scroll'),
+	if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
+    );
+
+    { XkbModel => $Model, XkbLayout => $Layout, XkbOptions => $Options };
 }
 
 sub xmodmap_file {
