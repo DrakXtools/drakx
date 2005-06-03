@@ -948,6 +948,11 @@ sub hasNetwork {
     0;
 }
 
+sub network_is_cheap {
+    my ($o) = @_;
+    member($o->{net}{type}, qw(adsl lan cable));
+}
+
 #------------------------------------------------------------------------------
 sub upNetwork {
     my ($o, $b_pppAvoided) = @_;
@@ -955,7 +960,7 @@ sub upNetwork {
     member($o->{method}, qw(ftp http nfs)) and return 1;
     $o->{modules_conf}->write;
     if (hasNetwork($o)) {
-	if ($o->{net}{type} =~ /adsl|lan|cable/) {
+	if (network_is_cheap($o)) {
 	    log::l("starting network ($o->{net}{type})");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
@@ -985,7 +990,7 @@ sub downNetwork {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    return 1;
-	} elsif (member($o->{net}{type}, qw(adsl lan cable))) {
+	} elsif (!network_is_cheap($o)) {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
