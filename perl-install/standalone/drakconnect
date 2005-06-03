@@ -794,7 +794,6 @@ sub apply {
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
-sub chk_internet() { `LC_ALL=C LANGUAGE=C /sbin/chkconfig --list | grep internet` =~ /:on/ ? 1 : 0 }
 
 sub update_intbutt() {
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
@@ -820,24 +819,6 @@ sub in_ifconfig {
     $intf eq '' and return 1;
     `/sbin/ifconfig` =~ /$intf/;
 }
-
-sub update2() {
-    undef $to_update;
-    network::tools::connected_bg(\$to_update);
-    if (defined $to_update) {
-        $isconnected = $to_update;
-        if ($isconnected != -1) {
-            if ($isconnected && !in_ifconfig($net->{net_interface})) {
-                $warning_label1->set(N("Warning, another Internet connection has been detected, maybe using your network"));
-                $isconnected = 0;
-            } else { $warning_label1->set("") }
-            update_intbutt();
-        }
-    }
-    update();
-    1;
-}
-
 
 my $net_test;
 sub update_network_status() {
