@@ -169,9 +169,7 @@ sub find {
 
 sub add {
     my ($exports, $mntpoint) = @_;
-    foreach (@$exports) {
-	$_->{mntpoint} eq $mntpoint and die 'add';
-    }
+    find($exports, $mntpoint) and die 'add';
     push @$exports, my $e = { mntpoint => $mntpoint };
     $e;
 }
