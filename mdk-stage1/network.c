@@ -287,9 +287,6 @@ static int save_netinfo(struct interface_info * intf)
 
 	if (hostname && !intf->boot_proto == BOOTPROTO_DHCP)
 		fprintf(f, "HOSTNAME=%s\n", hostname);
-	if (dhcp_hostname && !streq(dhcp_hostname, ""))
-		fprintf(f, "DHCP_HOSTNAME=%s\n", dhcp_hostname);
-	
 	if (gateway.s_addr != 0)
 		fprintf(f, "GATEWAY=%s\n", inet_ntoa(gateway));
 
@@ -307,9 +304,11 @@ static int save_netinfo(struct interface_info * intf)
 
 	fprintf(f, "DEVICE=%s\n", intf->device);
 
-	if (intf->boot_proto == BOOTPROTO_DHCP)
+	if (intf->boot_proto == BOOTPROTO_DHCP) {
 		fprintf(f, "BOOTPROTO=dhcp\n");
-	else if (intf->boot_proto == BOOTPROTO_STATIC) {
+		if (dhcp_hostname && !streq(dhcp_hostname, ""))
+			fprintf(f, "DHCP_HOSTNAME=%s\n", dhcp_hostname);
+	} else if (intf->boot_proto == BOOTPROTO_STATIC) {
 		fprintf(f, "BOOTPROTO=static\n");
 		fprintf(f, "IPADDR=%s\n", inet_ntoa(intf->ip));
 		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask));
