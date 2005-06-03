@@ -117,7 +117,6 @@ sub image_button_pressed {
     }
 
     my $point = { X => $event->x, Y => $event->y };
-    my $chosen_point;
 
     if ($current_rect) {
 	if (!@$current_rect) {
@@ -162,7 +161,7 @@ sub color_index2gc {
 }
 
 sub create_popup() {
-    my %l = my @l = (
+    my @l = (
 	     'Progress bar position' => sub { $current_rect = $progress_rect },
 	     'Progress bar color' => sub { $current_point = $progress_color },
 	     '' => sub {},
@@ -192,7 +191,7 @@ sub create_popup() {
 					$f->();
 				    }));
     }
-    $popup
+    $popup;
 }
 sub nb_steps() {
     $kernel_and_initrd_size / ($isolinux_mode ? $isolinux_block_size : $lilo_block_size);
@@ -202,53 +201,53 @@ sub read_parameters {
     my ($file) = @_;
     my %h = getVarsFromSh($file);
 
-    $entry_rect->[0]{X} = $h{'entry_x'};
-    $entry_rect->[0]{Y} = $h{'entry_y'};
-    $entry_rect->[1]{X} = $h{'entry_x'} + $h{'entry_w'};
-    $entry_rect->[1]{Y} = $h{'entry_y'} + $h{'entry_h'};
-    $entry_color->{Color} = $h{'entry_bg'} - 64;
-    $entry_selected_color->{Color} = $h{'entry_fg'} - 64;
+    $entry_rect->[0]{X} = $h{entry_x};
+    $entry_rect->[0]{Y} = $h{entry_y};
+    $entry_rect->[1]{X} = $h{entry_x} + $h{entry_w};
+    $entry_rect->[1]{Y} = $h{entry_y} + $h{entry_h};
+    $entry_color->{Color} = $h{entry_bg} - 64;
+    $entry_selected_color->{Color} = $h{entry_fg} - 64;
 
-    $timer_pos->{X} = $h{'timer_x'};
-    $timer_pos->{Y} = $h{'timer_y'};
-    $timer_bg->{Color} = $h{'timer_bg'} - 64;
-    $timer_fg->{Color} = $h{'timer_fg'} - 64;
+    $timer_pos->{X} = $h{timer_x};
+    $timer_pos->{Y} = $h{timer_y};
+    $timer_bg->{Color} = $h{timer_bg} - 64;
+    $timer_fg->{Color} = $h{timer_fg} - 64;
 
-    $progress_color->{Color} = $h{'progress_c'} - 64;
-    $progress_rect->[0]{X} = $h{'progress_x'};
-    $progress_rect->[0]{Y} = $h{'progress_y'};
-    $progress_rect->[1]{X} = $h{'progress_x'} + $h{'progress_real_w'};
-    $progress_rect->[1]{Y} = $h{'progress_y'} + $h{'progress_h'};
+    $progress_color->{Color} = $h{progress_c} - 64;
+    $progress_rect->[0]{X} = $h{progress_x};
+    $progress_rect->[0]{Y} = $h{progress_y};
+    $progress_rect->[1]{X} = $h{progress_x} + $h{progress_real_w};
+    $progress_rect->[1]{Y} = $h{progress_y} + $h{progress_h};
 
-    $isolinux_mode = $h{'isolinux_mode'};
+    $isolinux_mode = $h{isolinux_mode};
 }
 
 sub save_parameters {
     my ($file) = @_;
     my %h;
    
-    $h{'mode'} = (find { $image_size{X} eq $_->{X} } @modes)->{Vesa};
-    $h{'clear_h'} = $image_size{X};
-    $h{'clear_w'} = $image_size{Y};
+    $h{mode} = (find { $image_size{X} eq $_->{X} } @modes)->{Vesa};
+    $h{clear_h} = $image_size{X};
+    $h{clear_w} = $image_size{Y};
 
     if (!$isolinux_mode) {
-	($h{'entry_x'}, $h{'entry_y'}, $h{'entry_w'}, $h{'entry_h'}) = rectangle2xywh($entry_rect);
-	$h{'entry_w_chr'} = int($h{'entry_w'} / 8);
-	$h{'entry_h_chr'} = int($h{'entry_h'} / 16);
-	$h{'entry_bg'} = $entry_color->{Color} + 64;
-	$h{'entry_fg'} = $entry_selected_color->{Color} + 64;
+	($h{entry_x}, $h{entry_y}, $h{entry_w}, $h{entry_h}) = rectangle2xywh($entry_rect);
+	$h{entry_w_chr} = int($h{entry_w} / 8);
+	$h{entry_h_chr} = int($h{entry_h} / 16);
+	$h{entry_bg} = $entry_color->{Color} + 64;
+	$h{entry_fg} = $entry_selected_color->{Color} + 64;
 
-	$h{'timer_x'} = $timer_pos->{X};
-	$h{'timer_y'} = $timer_pos->{Y};
-	$h{'timer_bg'} = $timer_bg->{Color} + 64;
-	$h{'timer_fg'} = $timer_fg->{Color} + 64;
+	$h{timer_x} = $timer_pos->{X};
+	$h{timer_y} = $timer_pos->{Y};
+	$h{timer_bg} = $timer_bg->{Color} + 64;
+	$h{timer_fg} = $timer_fg->{Color} + 64;
     }
 
-    $h{'progress_c'} = $progress_color->{Color} + 64;
-    ($h{'progress_x'}, $h{'progress_y'}, $h{'progress_real_w'}, $h{'progress_h'}) = rectangle2xywh($progress_rect);
-    $h{'progress_w'} = int($h{'progress_real_w'} / nb_steps());
+    $h{progress_c} = $progress_color->{Color} + 64;
+    ($h{progress_x}, $h{progress_y}, $h{progress_real_w}, $h{progress_h}) = rectangle2xywh($progress_rect);
+    $h{progress_w} = int($h{progress_real_w} / nb_steps());
 
-    $h{'isolinux_mode'} = $isolinux_mode;
+    $h{isolinux_mode} = $isolinux_mode;
 
     output($file, map { "$_=$h{$_}\n" } sort keys %h);
 }
