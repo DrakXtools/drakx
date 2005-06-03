@@ -1207,12 +1207,11 @@ set TxRate=0);
 		   dvb_adapter =>
 		   {
 		    pre => sub {
-			use Fcntl qw(O_RDWR O_NONBLOCK);
 			my $previous_ethntf = find { $is_dvb_interface->($_) } values %$intf;
 			$dvb_ad = $previous_ethntf->{DVB_ADAPTER_ID};
 			$dvb_net = $previous_ethntf->{DVB_NETWORK_DEMUX};
 			$dvb_pid = $previous_ethntf->{DVB_NETWORK_PID};
-			if (my $device = find { sysopen(undef, $_, O_RDWR | O_NONBLOCK) } glob("/dev/dvb/adapter*/net*")) {
+			if (my $device = find { sysopen(undef, $_, 2 | c::O_NONBLOCK()) } glob("/dev/dvb/adapter*/net*")) {
 			    ($dvb_ad, $dvb_net) = $device =~ m,/dev/dvb/adapter(\d+)/net(\d+),;
 			}
 		    },
