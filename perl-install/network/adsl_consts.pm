@@ -583,7 +583,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
-                   method => 'manual',
+                   method => 'static',
                   },
 
                   N("Italy") . "|Tiscali.it, Alice" =>

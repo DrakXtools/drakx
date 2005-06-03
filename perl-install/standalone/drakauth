@@ -9,7 +9,8 @@ use interactive;
 use authentication;
 use network::network;
 
-read_all_conf('', my $netc = {}, my $_intf = {});
+my $net = {};
+network::network::read_net_conf($net);
 
 my $in = 'interactive'->vnew('su');
 
@@ -25,11 +26,11 @@ $in->ask_from(N("Authentication"), authentication::kind2description(@kinds),
 	       { label => N("Authentication"), val => \$kind, type => 'list' , list => \@kinds, format => \&authentication::kind2name },
 	      ]) or $in->exit;
 
-authentication::ask_parameters($in, $netc, $authentication, $kind) or goto main;
+authentication::ask_parameters($in, $net, $authentication, $kind) or goto main;
 
 eval { 
-    authentication::set($in, $netc, $authentication);
-    network::network::write_conf($netc);
+    authentication::set($in, $net, $authentication);
+    network::network::write_conf($net);
 };
 if (my $err = $@) {
     $in->ask_warn(N("Error"), formatError($err));

@@ -15,12 +15,45 @@ use any;
 use vars qw(@ISA @EXPORT);
 use log;
 
-@ISA = qw(Exporter);
-@EXPORT = qw(add2hosts addDefaultRoute configureNetwork2 dns dnsServers findIntf gateway guessHostname is_ip is_ip_forbidden masked_ip netmask read_all_conf read_conf read_interface_conf read_resolv_conf resolv sethostname write_conf write_resolv_conf);
+my $network_file = "$::prefix/etc/sysconfig/network";
+my $resolv_file = "$::prefix/etc/resolv.conf";
+my $tmdns_file = "$::prefix/etc/tmdns.conf";
 
-#-######################################################################################
-#- Functions
-#-######################################################################################
+
+@ISA = qw(Exporter);
+@EXPORT = qw(addDefaultRoute dns dnsServers gateway guessHostname is_ip is_ip_forbidden masked_ip netmask resolv sethostname);
+
+#- $net hash structure
+#-   autodetect
+#-   type
+#-   net_interface
+#-   PROFILE: selected netprofile
+#-   network (/etc/sysconfig/network) : GATEWAY GATEWAYDEV HOSTNAME NETWORKING NISDOMAIN
+#-     NETWORKING : networking flag : string : "yes" by default
+#-     FORWARD_IPV4 : forward IP flag : string : "false" by default
+#-     HOSTNAME : hostname : string : "localhost.localdomain" by default
+#-     GATEWAY : gateway
+#-     GATEWAYDEV : gateway interface
+#-     NISDOMAIN : nis domain
+#-   resolv (/etc/resolv.conf): dnsServer, dnsServer2, dnsServer3, DOMAINNAME, DOMAINNAME2, DOMAINNAME3
+#-     dnsServer : dns server 1
+#-     dnsServer2 : dns server 2
+#-     dnsServer3 : dns server 3 : note that we uses the dns1 for the LAN, and the 2 others for the internet conx
+#-     DOMAINNAME : domainname : string : $netc->{HOSTNAME} =~ /\.(.*)/ by default
+#-     DOMAINNAME2 : well it's another domainname : have to look further why we used 2
+#-   adsl: bus, Encapsulation, vpi, vci provider_id, method, login, passwd, ethernet_device, capi_card
+#-   cable: bpalogin, login, passwd
+#-   zeroconf: hostname
+#-   auth: LDAPDOMAIN WINDOMAIN
+#-   ifcfg (/etc/sysconfig/network-scripts/ifcfg-*):
+#-     key : device name
+#-     value : hash containing ifcfg file values
+#-       DHCP_HOSTNAME : If you have a dhcp and want to set the hostname
+#-       IPADDR : IP address
+#-       NETMASK : netmask
+#-       DEVICE : device name
+#-       BOOTPROTO : boot prototype : "bootp" or "dhcp" or "pump" or ...
+
 sub read_conf {
     my ($file) = @_;
     +{ getVarsFromSh($file) };
@@ -52,38 +85,48 @@ sub read_interface_conf {
     \%intf;
 }
 
-sub read_tmdns_conf() {
-    my $file = "$::prefix/etc/tmdns.conf";
-    cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
+sub read_zeroconf() {
+    cat_($tmdns_file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
 }
 
-sub write_conf {
-    my ($netc) = @_;
-    my $file = "$::prefix/etc/sysconfig/network";
+sub write_network_conf {
+    my ($net) = @_;
 
-    if ($netc->{HOSTNAME} && $netc->{HOSTNAME} =~ /\.(.+)$/) {
-	$netc->{DOMAINNAME} = $1;
+    if ($net->{network}{HOSTNAME} && $net->{network}{HOSTNAME} =~ /\.(.+)$/) {
+	$net->{resolv}{DOMAINNAME} = $1;
     }
-    $netc->{NETWORKING} = 'yes';
+    $net->{network}{NETWORKING} = 'yes';
 
-    setVarsInSh($file, $netc, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_zeroconf {
-    my ($file, $zhostname) = @_;
-    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $file };
+    my ($net, $in) = @_;
+    my $zhostname = $net->{zeroconf}{hostname};
+
+    if ($zhostname) {
+	$in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
+	$in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
+    }
+
+    #- write blank hostname even if disabled so that drakconnect does not assume zeroconf is enabled
+    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $tmdns_file } if $zhostname || -f $tmdns_file;
+
+    require services;
+    services::set_status('tmdns', $net->{zeroconf}{hostname});
 }
 
 sub write_resolv_conf {
-    my ($file, $netc) = @_;
+    my ($net) = @_;
+    my $resolv = $net->{resolv};
 
     my %new = (
-        search => [ grep { $_ } uniq(@$netc{'DOMAINNAME', 'DOMAINNAME2', 'DOMAINNAME3'}) ],
-        nameserver => [ grep { $_ } uniq(@$netc{'dnsServer', 'dnsServer2', 'dnsServer3'}) ],
+        search => [ grep { $_ } uniq(@$resolv{'DOMAINNAME', 'DOMAINNAME2', 'DOMAINNAME3'}) ],
+        nameserver => [ grep { $_ } uniq(@$resolv{'dnsServer', 'dnsServer2', 'dnsServer3'}) ],
     );
 
     my (%prev, @unknown);
-    foreach (cat_($file)) {
+    foreach (cat_($resolv_file)) {
 	s/\s+$//;
 	s/^[#\s]*//;
 
@@ -94,7 +137,7 @@ sub write_resolv_conf {
 	    push @unknown, $_;
 	}
     }
-    unlink $file if -l $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
+    unlink $resolv_file if -l $resolv_file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
 
     if (@{$new{search}} || @{$new{nameserver}}) {
 	$prev{$_} = [ difference2($prev{$_} || [], $new{$_}) ] foreach keys %new;
@@ -109,7 +152,7 @@ sub write_resolv_conf {
 	    my @old = map { "# nameserver $_\n" } @{$prev{nameserver}};
 	    @new, @old;
 	};
-	output_with_perm($file, 0644, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
+	output_with_perm($resolv_file, 0644, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
 
 	#-res_init();		# reinit the resolver so DNS changes take affect
 	1;
@@ -128,10 +171,16 @@ sub update_broadcast_and_network {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $_netc, $_prefix) = @_;
+    my ($net, $name) = @_;
+
+    my $file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$name";
+    #- prefer ifcfg-XXX files
+    unlink("$::prefix/etc/sysconfig/network-scripts/$name");
+
+    my $intf = $net->{ifcfg}{$name};
 
     require network::ethernet;
-    my (undef, $mac_address) = network::ethernet::get_eth_card_mac_address($intf->{DEVICE}); 
+    my (undef, $mac_address) = network::ethernet::get_eth_card_mac_address($intf->{DEVICE});
     $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
 
     update_broadcast_and_network($intf);
@@ -147,14 +196,15 @@ sub write_interface_conf {
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
     substInFile { s/^DEVICE='(`.*`)'/DEVICE=$1/g } $file; #- remove quotes if DEVICE is the result of a command
-
     chmod $intf->{WIRELESS_ENC_KEY} ? 0700 : 0755, $file; #- hide WEP key for non-root users
     log::explanations("written $intf->{DEVICE} interface configuration in $file");
 }
 
 sub add2hosts {
-    my ($file, $hostname, @ips) = @_;
+    my ($hostname, @ips) = @_;
     my ($sub_hostname) = $hostname =~ /(.*?)\./;
+
+    my $file = "$::prefix/etc/hosts";
 
     my %l;
     foreach (cat_($file)) {
@@ -170,35 +220,34 @@ sub add2hosts {
 
 # The interface/gateway needs to be configured before this will work!
 sub guessHostname {
-    my ($_prefix, $netc, $intf) = @_;
+    my ($net, $intf_name) = @_;
 
-    $intf->{isUp} && dnsServers($netc) or return 0;
-    $netc->{HOSTNAME} && $netc->{DOMAINNAME} and return 1;
+    $net->{ifcfg}{$intf_name}{isUp} && dnsServers($net) or return 0;
+    $net->{network}{HOSTNAME} && $net->{resolv}{DOMAINNAME} and return 1;
 
-    write_resolv_conf("$::prefix/etc/resolv.conf", $netc);
+    write_resolv_conf($net);
 
-    my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), Socket::AF_INET()) or log::explanations("reverse name lookup failed"), return 0;
+    my $name = gethostbyaddr(Socket::inet_aton($net->{ifcfg}{$intf_name}{IPADDR}), Socket::AF_INET()) or log::explanations("reverse name lookup failed"), return 0;
 
     log::explanations("reverse name lookup worked");
 
-    add2hash($netc, { HOSTNAME => $name });
+    $net->{network}{HOSTNAME} ||= $name;
     1;
 }
 
 sub addDefaultRoute {
-    my ($netc) = @_;
-    c::addDefaultRoute($netc->{GATEWAY}) if $netc->{GATEWAY};
+    my ($net) = @_;
+    c::addDefaultRoute($net->{network}{GATEWAY}) if $net->{network}{GATEWAY};
 }
 
 sub sethostname {
-    my ($netc) = @_;
+    my ($net) = @_;
     my $text;
-    syscall_("sethostname", $netc->{HOSTNAME}, length $netc->{HOSTNAME}) ? ($text="set sethostname to $netc->{HOSTNAME}") : ($text="sethostname failed: $!");
+    my $hostname = $net->{network}{HOSTNAME};
+    syscall_("sethostname", $hostname, length $hostname) ? ($text="set sethostname to $hostname") : ($text="sethostname failed: $!");
     log::explanations($text);
 
-    if (!$::isInstall) {
-      run_program::run("/usr/bin/run-parts", "--arg", $netc->{HOSTNAME}, "/etc/sysconfig/network-scripts/hostname.d");
-    }
+    run_program::run("/usr/bin/run-parts", "--arg", $hostname, "/etc/sysconfig/network-scripts/hostname.d") unless $::isInstall;
 }
 
 sub resolv($) {
@@ -210,15 +259,16 @@ sub resolv($) {
 }
 
 sub dnsServers {
-    my ($netc) = @_;
-    my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
+    my ($net) = @_;
+    #- FIXME: that's weird
+    my %used_dns; @used_dns{$net->{network}{dnsServer}, $net->{network}{dnsServer2}, $net->{network}{dnsServer3}} = (1, 2, 3);
     sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
 }
 
 sub findIntf {
-    my ($intf, $device) = @_;
-    $intf->{$device}{DEVICE} = undef;
-    $intf->{$device};
+    my ($net, $device) = @_;
+    $net->{ifcfg}{$device}{DEVICE} = undef;
+    $net->{ifcfg}{$device};
 }
 
 my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
@@ -293,16 +343,16 @@ sub gateway {
 
 
 sub netprofile_set {
-    my ($netc, $profile) = @_;
-    $netc->{PROFILE} = $profile;
-    system('/sbin/set-netprofile', $netc->{PROFILE});
-    log::explanations(qq(Switching to "$netc->{PROFILE}" profile));
+    my ($net, $profile) = @_;
+    $net->{PROFILE} = $profile;
+    system('/sbin/set-netprofile', $net->{PROFILE});
+    log::explanations(qq(Switching to "$net->{PROFILE}" profile));
 }
 
 sub netprofile_save {
-    my ($netc) = @_;
-    system('/sbin/save-netprofile', $netc->{PROFILE});
-    log::explanations(qq(Saving "$netc->{PROFILE}" profile));
+    my ($net) = @_;
+    system('/sbin/save-netprofile', $net->{PROFILE});
+    log::explanations(qq(Saving "$net->{PROFILE}" profile));
 }
 
 sub netprofile_delete {
@@ -313,9 +363,9 @@ sub netprofile_delete {
 }
 
 sub netprofile_add {
-    my ($netc, $profile) = @_;
+    my ($net, $profile) = @_;
     return if !$profile || $profile eq "default" || member($profile, netprofile_list());
-    system('/sbin/clone-netprofile', $netc->{PROFILE}, $profile);
+    system('/sbin/clone-netprofile', $net->{PROFILE}, $profile);
     log::explanations(qq("Creating "$profile" profile));
 }
 
@@ -324,9 +374,9 @@ sub netprofile_list() {
 }
 
 sub netprofile_read {
-    my ($netc) = @_;
+    my ($net) = @_;
     my $config = { getVarsFromSh("$::prefix/etc/netprofile/current") };
-    $netc->{PROFILE} = $config->{PROFILE} || 'default';
+    $net->{PROFILE} = $config->{PROFILE} || 'default';
 }
 
 
@@ -430,46 +480,45 @@ xml:readonly:$defaults_dir
     }
 }
 
-sub read_all_conf {
-    my ($_prefix, $netc, $intf, $o_netcnx) = @_;
-    $netc ||= {}; $intf ||= {};
-    my $netcnx = $o_netcnx || {};
-    add2hash($netc, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
-    add2hash($netc, read_resolv_conf());
-    add2hash($netc, read_tmdns_conf());
+sub read_net_conf {
+    my ($net) = @_;
+    add2hash($net->{network} ||= {}, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
+    add2hash($net->{resolv} ||= {}, read_resolv_conf());
+    add2hash($net->{zeroconf} ||= {}, read_zeroconf());
 
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
 	my ($device) = /^ifcfg-([A-Za-z0-9.:_-]+)$/;
 	next if $device =~ /.rpmnew$|.rpmsave$/;
 	if ($device && $device ne 'lo') {
-	    my $intf = findIntf($intf, $device);
+	    my $intf = findIntf($net, $device);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
 	    $intf->{DEVICE} ||= $device;
 	}
     }
-    netprofile_read($netc);
-    if (my $default_intf = network::tools::get_default_gateway_interface($netc, $intf)) {
-        $netcnx->{type} ||= network::tools::get_interface_type($intf->{$default_intf});
+    netprofile_read($net);
+    if (my $default_intf = network::tools::get_default_gateway_interface($net)) {
+	$net->{net_interface} = $default_intf;
+	$net->{type} = network::tools::get_interface_type($net->{ifcfg}{$default_intf});
     }
 }
 
 #- FIXME: this is buggy, use network::tools::get_default_gateway_interface
 sub probe_netcnx_type {
-    my ($_prefix, $_netc, $intf, $netcnx) = @_;
+    my ($net) = @_;
     #- try to probe $netcnx->{type} which is used almost everywhere.
-    unless ($netcnx->{type}) {
+    unless ($net->{type}) {
 	#- ugly hack to determine network type (avoid saying not configured in summary).
-	-e "$::prefix/etc/ppp/peers/adsl" and $netcnx->{type} ||= 'adsl'; # enough ?
-	-e "$::prefix/etc/ppp/ioptions1B" || -e "$::prefix/etc/ppp/ioptions2B" and $netcnx->{type} ||= 'isdn'; # enough ?
-	$intf->{ppp0} and $netcnx->{type} ||= 'modem';
-	$intf->{eth0} and $netcnx->{type} ||= 'lan';
+	-e "$::prefix/etc/ppp/peers/adsl" and $net->{type} ||= 'adsl'; # enough ?
+	-e "$::prefix/etc/ppp/ioptions1B" || -e "$::prefix/etc/ppp/ioptions2B" and $net->{type} ||= 'isdn'; # enough ?
+	$net->{ifcfg}{ppp0} and $net->{type} ||= 'modem';
+	$net->{ifcfg}{eth0} and $net->{type} ||= 'lan';
     }
 }
 
 sub easy_dhcp {
-    my ($modules_conf, $netc, $intf) = @_;
+    my ($net, $modules_conf) = @_;
 
-    return if text2bool($netc->{NETWORKING});
+    return if text2bool($net->{network}{NETWORKING});
 
     require modules;
     require network::ethernet;
@@ -483,87 +532,45 @@ sub easy_dhcp {
     my $dhcp_intf = $ether_dev[0];
     log::explanations("easy_dhcp: found $dhcp_intf");
 
-    put_in_hash($netc, {
-			NETWORKING => "yes",
-			DHCP => "yes",
-			NET_DEVICE => $dhcp_intf,
-			NET_INTERFACE => $dhcp_intf,
-		       });
-    $intf->{$dhcp_intf} ||= {};
-    put_in_hash($intf->{$dhcp_intf}, {
+    put_in_hash($net->{network}, {
+				  NETWORKING => "yes",
+				  DHCP => "yes",
+				  NET_DEVICE => $dhcp_intf,
+				  NET_INTERFACE => $dhcp_intf,
+				 });
+    $net->{ifcfg}{$dhcp_intf} ||= {};
+    put_in_hash($net->{ifcfg}{$dhcp_intf}, {
 				      DEVICE => $dhcp_intf,
 				      BOOTPROTO => 'dhcp',
 				      NETMASK => '255.255.255.0',
 				      ONBOOT => 'yes'
 				     });
+    $net->{type} = 'lan';
+    $net->{net_interface} = $dhcp_intf;
+
     1;
 }
 
-#- configureNetwork2 : configure the network interfaces.
-#- input
-#-  $prefix
-#-  $netc
-#-  $intf
-#- $netc input
-#-  NETWORKING : networking flag : string : "yes" by default
-#-  FORWARD_IPV4 : forward IP flag : string : "false" by default
-#-  HOSTNAME : hostname : string : "localhost.localdomain" by default
-#-  DOMAINNAME : domainname : string : $netc->{HOSTNAME} =~ /\.(.*)/ by default
-#-  DOMAINNAME2 : well it's another domainname : have to look further why we used 2
-#-  The following are facultatives
-#-  DHCP_HOSTNAME : If you have a dhcp and want to set the hostname
-#-  GATEWAY : gateway
-#-  GATEWAYDEV : gateway interface
-#-  NISDOMAIN : nis domain
-#-  $netc->{dnsServer} : dns server 1
-#-  $netc->{dnsServer2} : dns server 2
-#-  $netc->{dnsServer3} : dns server 3 : note that we uses the dns1 for the LAN, and the 2 others for the internet conx
-#- $intf input: for each $device (for example ethx)
-#-  $intf->{$device}{IPADDR} : IP address
-#-  $intf->{$device}{NETMASK} : netmask
-#-  $intf->{$device}{DEVICE} : DEVICE = $device
-#-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
-sub configureNetwork2 {
-    my ($in, $modules_conf, $_prefix, $netc, $intf) = @_;
-    my $etc = "$::prefix/etc";
+sub configure_network {
+    my ($net, $in, $modules_conf) = @_;
     if (!$::testing) {
         require network::ethernet;
         network::ethernet::update_iftab();
         network::ethernet::configure_eth_aliases($modules_conf);
 
-        $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
-        write_conf($netc);
-        write_resolv_conf("$etc/resolv.conf", $netc) unless $netc->{DHCP};
+        write_network_conf($net);
+        write_resolv_conf($net);
         if ($::isInstall && ! -e "/etc/resolv.conf") {
             #- symlink resolv.conf in install root too so that updates and suppl media can be added
-            symlink "$etc/resolv.conf", "/etc/resolv.conf";
+            symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
         }
-        foreach (grep { !/^ppp\d+/ } keys %$intf) {
-	    unlink("$etc/sysconfig/network-scripts/$_");
-	    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_", $intf->{$_}, $netc, $::prefix);
-	    $intf->{$_}{BOOTPROTO} eq "dhcp" and network::ethernet::install_dhcp_client($in, $intf->{$_});
-	}
-        add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME};
-        add2hosts("$etc/hosts", "localhost", "127.0.0.1");
+	write_interface_conf($net, $_) foreach keys %{$net->{ifcfg}};
+	network::ethernet::install_dhcp_client($in, $_->{DHCP_CLIENT}) foreach grep { $_->{BOOTPROTO} eq "dhcp" } values %{$net->{ifcfg}};
+        add2hosts($net->{network}{HOSTNAME}, "127.0.0.1") if $net->{network}{HOSTNAME};
+        add2hosts("localhost", "127.0.0.1");
+	write_zeroconf($net, $in);
 
-        if ($netc->{ZEROCONF_HOSTNAME}) {
-            $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
-            $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
-            write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});
-	    require services;
-            services::start_service_on_boot("tmdns");
-            services::restart("tmdns");
-        } else {
-            #- disable zeroconf
-            require services;
-            #- write blank hostname so that drakconnect does not assume zeroconf is enabled
-            -f "$etc/tmdns.conf" and write_zeroconf("$etc/tmdns.conf", '');
-            if (-f "$etc/rc.d/init.d/tmdns") {
-                services::stop("tmdns");
-                services::do_not_start_service_on_boot("tmdns");
-            }
-        }
-        any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
+        any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
     }
 }
 

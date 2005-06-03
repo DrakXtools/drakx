@@ -4,11 +4,6 @@ use strict;
 use common;
 use run_program;
 use c;
-use vars qw(@ISA @EXPORT @EXPORT_OK);
-use MDK::Common::System qw(getVarsFromSh);
-
-@ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend test_connected remove_initscript write_secret_backend start_interface stop_interface);
 
 sub write_secret_backend {
     my ($a, $b) = @_;
@@ -159,48 +154,39 @@ sub check_link_beat() {
                     });
 }
 
-sub remove_initscript() {
-    $::testing and return;
-    if (-e "$::prefix/etc/rc.d/init.d/internet") {
-        run_program::rooted($::prefix, "/sbin/chkconfig", "--del", "internet");
-        rm_rf("$::prefix/etc/rc.d/init.d/internet");
-        log::explanations("Removed internet service");
-    }
-}
-
 sub is_dynamic_ip {
-  my ($intf) = @_;
-  any { $_->{BOOTPROTO} !~ /^(none|static|)$/ } values %$intf;
+  my ($net) = @_;
+  any { $_->{BOOTPROTO} !~ /^(none|static|)$/ } values %{$net->{ifcfg}};
 }
 
 sub is_dynamic_host {
-  my ($intf) = @_;
-  any { defined $_->{DHCP_HOSTNAME} } values %$intf;
+  my ($net) = @_;
+  any { defined $_->{DHCP_HOSTNAME} } values %{$net->{ifcfg}};
 }
 
 #- returns interface whose IP address matchs given IP address, according to its network mask
 sub find_matching_interface {
-    my ($intf, $address) = @_;
+    my ($net, $address) = @_;
     my @ip = split '\.', $address;
     find {
-        my @intf_ip = split '\.', $intf->{$_}{IPADDR} or return;
-        my @mask = split '\.', $intf->{$_}{NETMASK} or return;
+        my @intf_ip = split '\.', $net->{ifcfg}{$_}{IPADDR} or return;
+        my @mask = split '\.', $net->{ifcfg}{$_}{NETMASK} or return;
         every { $_ } mapn { ($_[0] & $_[2]) == ($_[1] & $_[2]) } \@intf_ip, \@ip, \@mask;
-    } sort keys %$intf;
+    } sort keys %{$net->{ifcfg}};
 }
 
 #- returns gateway interface if found
 sub get_default_gateway_interface {
-    my ($netc, $intf) = @_;
-    my @intfs = sort keys %$intf;
+    my ($net) = @_;
+    my @intfs = sort keys %{$net->{ifcfg}};
     `$::prefix/sbin/ip route show` =~ /^default.*\s+dev\s+(\S+)/m && $1 ||
-    $netc->{GATEWAYDEV} ||
-    $netc->{GATEWAY} && find_matching_interface($intf, $netc->{GATEWAY}) ||
-    (find { get_interface_type($intf->{$_}) eq 'adsl' } @intfs) ||
-    (find { get_interface_type($intf->{$_}) eq 'isdn' && text2bool($intf->{$_}{DIAL_ON_IFUP}) } @intfs) ||
-    (find { get_interface_type($intf->{$_}) eq 'modem' } @intfs) ||
-    (find { get_interface_type($intf->{$_}) eq 'wifi' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs) ||
-    (find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs);
+    $net->{network}{GATEWAYDEV} ||
+    $net->{network}{GATEWAY} && find_matching_interface($net, $net->{network}{GATEWAY}) ||
+    (find { get_interface_type($net->{ifcfg}{$_}) eq 'adsl' } @intfs) ||
+    (find { get_interface_type($net->{ifcfg}{$_}) eq 'isdn' && text2bool($net->{ifcfg}{$_}{DIAL_ON_IFUP}) } @intfs) ||
+    (find { get_interface_type($net->{ifcfg}{$_}) eq 'modem' } @intfs) ||
+    (find { get_interface_type($net->{ifcfg}{$_}) eq 'wifi' && $net->{ifcfg}{$_}{BOOTPROTO} eq 'dhcp' } @intfs) ||
+    (find { get_interface_type($net->{ifcfg}{$_}) eq 'ethernet' && $net->{ifcfg}{$_}{BOOTPROTO} eq 'dhcp' } @intfs);
 }
 
 sub get_interface_status {
@@ -213,9 +199,9 @@ sub get_interface_status {
 
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
 sub get_internet_connection {
-    my ($netc, $intf, $o_gw_intf) = @_;
-    my $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
-    return $gw_intf, get_interface_status($gw_intf), $netc->{dnsServer};
+    my ($net, $o_gw_intf) = @_;
+    my $gw_intf = $o_gw_intf || get_default_gateway_interface($net) or return;
+    return $gw_intf, get_interface_status($gw_intf), $net->{resolv}{dnsServer};
 }
 
 sub get_interface_type {

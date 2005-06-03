@@ -29,25 +29,22 @@ use c;
 use interactive;
 use ugtk2 qw(:create :helpers :wrappers);
 use common;
-use network::netconnect;
+use network::network;
 use network::tools;
-use MDK::Common::Globals "network", qw($in);
 use POSIX;
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/net_monitor-mdk.png";
 
-if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
+if ("@ARGV" =~ /--status/) { print network::tools::connected(); exit(0) }
 my $force = "@ARGV" =~ /--force/;
 my $quiet = "@ARGV" =~ /--quiet/;
 my $connect = "@ARGV" =~ /--connect/;
 my $disconnect = "@ARGV" =~ /--disconnect/;
 my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 
-my $netcnx = {};
-my $netc = {};
-my $intf = {};
-network::netconnect::read_net_conf($netcnx, $netc, $intf);
-$default_intf ||= network::tools::get_default_gateway_interface($netc, $intf);
+my $net = {};
+network::network::read_net_conf($net);
+$default_intf ||= $net->{default}{interface};
 
 if ($force) {
     $connect and network::tools::start_interface($default_intf);
@@ -313,7 +310,7 @@ sub rescan() {
 	$monitor->{sta} = 0;
 	$monitor->{nba} = 0;
     }
-    $label_cnx_type->set_label(translate($netcnx->{type}));
+    $label_cnx_type->set_label(translate($net->{type}));
     $monitor->{$_} = 0 foreach 'sr', 'st';
     1;
 }
@@ -461,17 +458,17 @@ sub update() {
     }
     @interfaces = @intfs;
 	if ($isconnected != -2 && $isconnected != -1 && !$during_connection) {
-	    if ($isconnected == 1 && !in_ifconfig($netcnx->{NET_INTERFACE})) {
+	    if ($isconnected == 1 && !in_ifconfig($net->{net_interface})) {
 		$isconnected = 0;
 		$statusbar->pop(1);
 		$statusbar->push(1, N("Warning, another internet connection has been detected, maybe using your network"));
 	    } else {
-		#- translators : $netcnx->{type} is the type of network connection (modem, adsl...)
+		#- translators : $net->{type} is the type of network connection (modem, adsl...)
 		$statusbar->pop(1);
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
             $button_connect->set_sensitive(1);
-            $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", translate($netcnx->{type})) : N("Connect %s", $netcnx->{type}));
+            $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", translate($net->{type})) : N("Connect %s", $net->{type}));
 	}
     unless ($default_intf || @interfaces) {
 	$button_connect->set_sensitive(0);

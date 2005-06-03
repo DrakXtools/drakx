@@ -39,7 +39,6 @@ use c;
 use modules;
 use network::isdn;
 use network::adsl;
-use network::tools;
 use network::test;
 use POSIX ":sys_wait_h";
 
@@ -50,15 +49,15 @@ if ($in->isa('interactive::gtk')) {
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
 }
 
-my ($netcnx, $netc, $intf)  = ({}, {}, {});
-network::netconnect::read_net_conf($netcnx, $netc, $intf);
+my $net = {};
+network::network::read_net_conf($net);
 my $modules_conf = modules::any_conf->read;
 
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "drakconnect.png";
 
 local $_ = join '', @ARGV;
-/--skip-wizard/ and manage($netc, $intf);
+/--skip-wizard/ and manage();
 /--add/ and add_intf();
 /--del/ and del_intf();
 /--old/ and goto old;
@@ -66,7 +65,7 @@ if (/--install/) {
     $::isInstall = 1;
     add_intf();
 }
-/--internet/ and configure_net($netcnx, $netc, $intf);
+/--internet/ and configure_net();
 
 # default is to run wizard
 add_intf();
@@ -89,17 +88,17 @@ my $button_apply;
 
 
 my $hostname = chomp_(`hostname`);
-my $int_label = Gtk2::Label->new($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
-my $int_name = Gtk2::Label->new($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
+my $int_label = Gtk2::Label->new($net->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
+my $int_name = Gtk2::Label->new($net->{type} eq 'lan' ? $net->{network}{GATEWAY} : $net->{net_interface});
 my $isconnected = -1;
 
 my $int_connect = Gtk2::Button->new(N("Wait please"));
 $int_connect->set_sensitive(0);
 $int_connect->signal_connect(clicked => sub {
     if (!$isconnected) {
-        connect_backend($netc);
+        network::tools::connect_backend($net);
     } else {
-        disconnect_backend($netc);
+        network::tools::disconnect_backend($net);
     }
 });
 
@@ -132,7 +131,7 @@ $window1->{window}->add(
                                                               clicked => sub {
                                                                   local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                   eval { # For wizcancel
-                                                                      network::netconnect::main($netcnx, $in, $modules_conf, $netc, undef, $intf);
+                                                                      network::netconnect::safe_main($net, $in, $modules_conf);
                                                                       $button_apply->set_sensitive(1);
                                                                       update();
                                                                   };
@@ -165,7 +164,7 @@ $window1->{window}->add(
                                                                               Gtk2::Label->new(N("Please Wait... Applying the configuration")));
                                                                       $dialog->show_all;
                                                                       gtkflush();
-                                                                      apply($netc, $intf);
+                                                                      apply();
                                                                       $dialog->destroy;
                                                                   }
                                                                   update();
@@ -182,9 +181,7 @@ gtkflush();
 $window1->main;
 ugtk2->exit(0);
 
-sub manage {
-    my ($netc, $intf) = @_;
-
+sub manage() {
     my $p = {};
     my ($interface_menu, $selected, $apply_button);
     my $window = ugtk2->new('Manage Connection');
@@ -203,10 +200,10 @@ sub manage {
 	my $dev = detect_devices::is_lan_interface($_) ? $names{$_} : $_;
 	$p->{$dev} = {
                       name => $_ ,
-                      intf => $intf->{$_}
+                      intf => $net->{ifcfg}{$_}
                      };
     }
-    while (my ($device, $interface) = each %$intf) {
+    while (my ($device, $interface) = each %{$net->{ifcfg}}) {
         exists $names{$device} and next;
         my $type = network::tools::get_interface_type($interface);
         $p->{"$type ($device)"} = {
@@ -231,7 +228,7 @@ sub manage {
                                                          cancel_clicked => sub { $window->destroy; Gtk2->main_quit },
                                                          ok_clicked => sub {
                                                              if ($apply_button->get_property('sensitive')) {
-                                                                 save($netc, $p, $apply_button);
+                                                                 save($p, $apply_button);
                                                              }
                                                              $window->destroy;
                                                              Gtk2->main_quit;
@@ -239,18 +236,18 @@ sub manage {
                                                         },
                                                         undef, undef, '',
                                                         [ N("Help"), sub { exec("drakhelp --id internet-connection") unless fork() } ],
-                                                        [ N("Apply"), sub { save($netc, $p, $apply_button) }, 0, 1 ],
+                                                        [ N("Apply"), sub { save($p, $apply_button) }, 0, 1 ],
                                                        ),
                                     ),
                            );
     $apply_button = $oc->{buttons}{N("Apply")};
 
     each_index {
-	my ($name, $interface, $protocol) = ($_, $p->{$_}{name}, $p->{$_}{protocol});
+	my ($name, $interface) = ($_, $p->{$_}{name});
 	$p->{$name}{gui}{index} = $::i;
 	$p->{$name}{intf} ||= { DEVICE => $interface };
-	build_tree($netc, $p->{$name}{intf}, $name, $interface, $protocol);
-	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
+	build_tree($p->{$name}{intf}, $name);
+	build_notebook($p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $p->{$name}{gui}{notebook}));
     } (sort keys %$p);
 
@@ -264,20 +261,19 @@ sub manage {
 }
 
 sub build_tree {
-    my ($netc, $intf, $interface, $interface_name, $protocol) = @_;
+    my ($intf, $interface) = @_;
 
     if ($interface eq 'adsl') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'DHCP' => 1, 'Account' => 1, 'Options' => 1, 'Information' => 1 };
-	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_name);
+	network::adsl::adsl_probe_info($net);
 	$intf->{save} = sub {
-            $netc->{internet_cnx_choice} = 'adsl';
-            $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
-            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_name, $protocol);
+            $net->{type} = 'adsl';
+            network::adsl::adsl_conf_backend($in, $modules_conf, $net);
           };
     }
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
-	put_in_hash($intf, network::modem::ppp_read_conf({}, $netc));
+	put_in_hash($intf, network::modem::ppp_read_conf());
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
     elsif ($interface eq 'isdn') {
@@ -292,7 +288,7 @@ sub build_tree {
 }
 
 sub build_notebook {
-    my ($netc, $intf, $gui, $apply_button, $interface, $interface_name) = @_;
+    my ($intf, $gui, $apply_button, $interface, $interface_name) = @_;
 
     my $apply = sub { $apply_button->set_sensitive(1) };
     my $is_ethernet = detect_devices::is_lan_interface($interface);
@@ -340,14 +336,14 @@ sub build_notebook {
                 gtkpack_(Gtk2::VBox->new,
                          1, gtkadd(gtkcreate_frame(N("DNS servers")),
                                    gtkpack(Gtk2::VBox->new(0,0),
-                                           Gtk2::Label->new($intf->{dns1} || $netc->{dnsServer}),
-                                           if_($intf->{dns2} || $netc->{dnsServer2},
-						Gtk2::Label->new($intf->{dns2} || $netc->{dnsServer2})),
-                                           if_($intf->{dns3} || $netc->{dnsServer3},
-						Gtk2::Label->new($intf->{dns3} || $netc->{dnsServer3}))),
+                                           Gtk2::Label->new($intf->{dns1} || $net->{resolv}{dnsServer}),
+                                           if_($intf->{dns2} || $net->{resolv}{dnsServer2},
+						Gtk2::Label->new($intf->{dns2} || $net->{resolv}{dnsServer2})),
+                                           if_($intf->{dns3} || $net->{resolv}{dnsServer3},
+						Gtk2::Label->new($intf->{dns3} || $net->{resolv}{dnsServer3}))),
                                   ),
                          1, gtkadd(gtkcreate_frame(N("Search Domain")),
-                                   Gtk2::Label->new($intf->{domain} || $netc->{DOMAINNAME} || 'none'),
+                                   Gtk2::Label->new($intf->{domain} || $net->{resolv}{DOMAINNAME} || 'none'),
                                   ),
                         ),
                );
@@ -365,7 +361,7 @@ sub build_notebook {
 	    delete $gui->{intf}{BOOTPROTO};
 	}
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_name);
-	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
+	$gui->{netc}{$_}->set_text($net->{$_}) foreach keys %{$gui->{netc}};
     }
 
     if ($intf->{pages}{DHCP}) {
@@ -636,7 +632,7 @@ sub populate_notebook {
 }
 
 sub save {
-    my ($netc, $p, $apply_button) = @_;
+    my ($p, $apply_button) = @_;
 
     my $dialog = _create_dialog(N("Please wait"));
     gtkpack($dialog->vbox,
@@ -647,8 +643,8 @@ sub save {
     Glib::Timeout->add(200, sub {
                            gtkflush();
                            foreach (keys %$p) {
-                               save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
-                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
+                               save_notebook($p->{$_}{intf}, $p->{$_}{gui}) or return;
+                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($p->{$_}{intf});
                            }
                            system("/etc/rc.d/init.d/network restart");
                            $dialog->response(0);
@@ -661,9 +657,9 @@ sub save {
 }
 
 sub save_notebook {
-    my ($netc, $intf, $gui) = @_;
+    my ($intf, $gui) = @_;
 
-    $netc->{$_} = $gui->{netc}{$_}->get_text foreach keys %{$gui->{netc}};
+    $net->{$_} = $gui->{netc}{$_}->get_text foreach keys %{$gui->{netc}};
     $gui->{intf}{$_} and $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
     $gui->{intf_radio}{$_} and $intf->{$_} = $gui->{intf_radio}{$_} foreach keys %{$gui->{intf_radio}};
     $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
@@ -683,7 +679,7 @@ sub save_notebook {
             return 0;
         }
     }
-    if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
+    if ($net->{network}{GATEWAY} && !is_ip($net->{network}{GATEWAY})) {
         $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
         return 0;
     }
@@ -692,13 +688,13 @@ sub save_notebook {
 
 sub add_intf() {
     $::isWizard = 1;
-    network::netconnect::main($netcnx, $in, $modules_conf, $netc, undef, $intf);
+    network::netconnect::safe_main($net, $in, $modules_conf);
     $in->exit(0);
 }
 
 sub del_intf() {
     my ($intf2delete, $failure);
-    if (!keys %$intf) {
+    if (!keys %{$net->{ifcfg}}) {
       $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
       $in->exit(0);
     }
@@ -713,9 +709,9 @@ sub del_intf() {
                              no_back => 1,
                              name => N("Select the network interface to remove:"),
                              data =>  [ { label => N("Net Device"), val => \$intf2delete, allow_empty_list => 1,
-                                          list => [ keys %$intf ],
+                                          list => [ keys %{$net->{ifcfg}} ],
                                           format => sub {
-                                              my $type = network::tools::get_interface_type($intf->{$_[0]});
+                                              my $type = network::tools::get_interface_type($net->{ifcfg}{$_[0]});
                                               $ethernet_names{$_[0]} || ($type ? "$type ($_[0])" : $_[0]);
                                             }
                                         }
@@ -764,7 +760,7 @@ sub get_intf_ip {
 	$mask = /Mask:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/mso ? $1 : N("No Mask");
 	$state = /inet/ ? N("up") : N("down");
     } else {
-	$ip = $intf->{$interface}{IPADDR};
+	$ip = $net->{ifcfg}{$interface}{IPADDR};
 	$state = "n/a";
     }
     ($ip, $state, $mask);
@@ -782,7 +778,7 @@ sub update_list {
     }
     foreach my $interface (@new_intf) {
         my ($ip, $state) = get_intf_ip($interface);
-        $tree_model->set($intf{$interface}, map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), $interface, $ip , $intf->{$interface}{BOOTPROTO}, $new_intf{$interface}, $state));
+        $tree_model->set($intf{$interface}, map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), $interface, $ip , $net->{ifcfg}{$interface}{BOOTPROTO}, $new_intf{$interface}, $state));
     }
     foreach my $i (difference2([ keys %intf ], \@new_intf)) {
         $tree_model->remove($intf{$i});
@@ -791,13 +787,10 @@ sub update_list {
 }
 
 sub apply {
-    my ($netc, $intf) = @_;
+    my ($intf) = @_;
     my $dyn = $intf->{BOOTPROTO} ne 'static';
-    my $lintf = $intf;
-    #- always delete NETWORK and BROADCAST fields so that they get automatically recomputed by write_interface_conf
-    delete $lintf->{$_} foreach qw(NETWORK BROADCAST), if_($dyn, qw(IPADDR NETMASK));
-    network::network::sethostname($netc) if $dyn;
-    network::network::configureNetwork2($in, $modules_conf, '', $netc, { $lintf->{DEVICE} => $lintf });
+    network::network::sethostname($net) if $dyn;
+    network::network::configure_network($net, $in, $modules_conf);
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
@@ -814,8 +807,8 @@ my $to_update;
 sub update() {
     my $h = chomp_(`hostname`);
     $label_host->set_label($h);
-    $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
-    $int_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
+    $int_label->set($net->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
+    $int_name->set($net->{type} eq 'lan' ? $net->{network}{GATEWAY} : $net->{net_interface});
     update_list($modules_conf);
     update_intbutt() if $isconnected != -1;
     1;
@@ -830,11 +823,11 @@ sub in_ifconfig {
 
 sub update2() {
     undef $to_update;
-    connected_bg(\$to_update);
+    network::tools::connected_bg(\$to_update);
     if (defined $to_update) {
         $isconnected = $to_update;
         if ($isconnected != -1) {
-            if ($isconnected && !in_ifconfig($netcnx->{NET_INTERFACE})) {
+            if ($isconnected && !in_ifconfig($net->{net_interface})) {
                 $warning_label1->set(N("Warning, another Internet connection has been detected, maybe using your network"));
                 $isconnected = 0;
             } else { $warning_label1->set("") }
@@ -906,12 +899,12 @@ Configure them first by clicking on 'Configure'")));
 	#	Eth${_}Driver = $all_cards[$_]->[1]
 	my $interface = $all_cards[$_][0];
 	my ($ip, undef, $mask) = get_intf_ip($interface);
-	$mask ||= $intf->{$interface}{NETMASK};
+	$mask ||= $net->{ifcfg}{$interface}{NETMASK};
         @conf_data = ([ N("IP address"), \$ip ],
 		      [ N("Netmask"), \$mask ],
-		      [ N("Boot Protocol"), \$intf->{$interface}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
-		      [ N("Started on boot"), \$intf->{$interface}{ONBOOT} , ["yes", "no"] ],
-		      [ N("DHCP client"), \$intf->{$interface}{DHCP_CLIENT} ]
+		      [ N("Boot Protocol"), \$net->{ifcg}{$interface}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
+		      [ N("Started on boot"), \$net->{ifcg}{$interface}{ONBOOT} , ["yes", "no"] ],
+		      [ N("DHCP client"), \$net->{ifcfg}{$interface}{DHCP_CLIENT} ]
 		     );
 	my $i = 0;
 	my $size_group = Gtk2::SizeGroup->new('horizontal');
@@ -969,12 +962,12 @@ Configure them first by clicking on 'Configure'")));
                                       my @infos = @{$card_tab[2*$_]};
                                       each_index { ${$_->[1]} = $infos[2*$::i+1]->get_text } @{$card_tab[2*$_+1]};
                                       my $interface = $all_cards[$_][0];
-                                      if ($intf->{$interface}{BOOTPROTO} ne "static") {
-                                          delete @{$intf->{$interface}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
+                                      if ($net->{ifcfg}{$interface}{BOOTPROTO} ne "static") {
+                                          delete @{$net->{ifcfg}{$interface}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
                                       } else {
                                           if ($infos[1]->get_text ne "No ip") {
-                                              $intf->{$interface}{IPADDR}  = $infos[1]->get_text;
-                                              $intf->{$interface}{NETMASK} = $infos[3]->get_text;
+                                              $net->{ifcfg}{$interface}{IPADDR}  = $infos[1]->get_text;
+                                              $net->{ifcfg}{$interface}{NETMASK} = $infos[3]->get_text;
                                           }
                                       }
                                   }
@@ -987,17 +980,16 @@ Configure them first by clicking on 'Configure'")));
     $window->show_all;
     foreach (0..$#all_cards) {
 	my @infos = @{$card_tab[2*$_]};
-	$intf->{$all_cards[$_][0]}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
+	$net->{ifcfg}{$all_cards[$_][0]}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
     }
     $window->run;
 }
 
 
-sub configure_net {
-    my ($netcnx, $netc, $_intf) = @_;
+sub configure_net() {
     my $dialog = ugtk2->new('drakconnect');
     my $exit_dialogsub = sub { Gtk2->main_quit };
-    if (!$netcnx->{type}) {
+    if (!$net->{type}) {
         $in->ask_warn(
                     N("Warning"),
                     #-PO: here "Add Connection" should be translated the same was as in control-center
@@ -1005,8 +997,6 @@ sub configure_net {
 Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
         $in->exit;
     }
-    my $cnx = {};
-    $cnx = $netcnx->{$netcnx->{type}};
     unless ($::isEmbedded) {
         $dialog->{rwindow}->set_position('center');
         $dialog->{rwindow}->set_title(N("Internet connection configuration"));
@@ -1019,15 +1009,15 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
     my $i = 0;
 
     #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
-    if ($netcnx->{type} =~ /adsl/) {
+    if ($net->{type} eq 'adsl') {
 	require network::adsl;
-	network::adsl::adsl_probe_info($cnx, $netc, $intf);
+	network::adsl::adsl_probe_info($net);
     }
     my @conf_data = (
-                     [ N("Host name (optional)"), \$netc->{HOSTNAME} ],
-                     [ N("First DNS Server (optional)"),  \$netc->{dnsServer} ], # \$cnx->{dns1}
-                     [ N("Second DNS Server (optional)"), \$netc->{dnsServer2} ], #\$cnx->{dns2}
-                     [ N("Third DNS server (optional)"),  \$netc->{dnsServer3} ],
+                     [ N("Host name (optional)"), \$net->{network}{HOSTNAME} ],
+                     [ N("First DNS Server (optional)"),  \$net->{resolv}{dnsServer} ],
+                     [ N("Second DNS Server (optional)"), \$net->{resolv}{dnsServer2} ],
+                     [ N("Third DNS server (optional)"),  \$net->{reslov}{dnsServer3} ],
                     );
     my @infos;
     gtkpack($param_vbox,
@@ -1053,7 +1043,7 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
                                      1, gtkadd(gtkcreate_frame(N("Internet access")),
                                                gtkset_border_width(create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
                                                                                     [ Gtk2::Label->new(N("Connection type: ")),
-                                                                                      Gtk2::Label->new(translate($netcnx->{type})) ],
+                                                                                      Gtk2::Label->new(translate($net->{type})) ],
                                                                                     [ $int_label, $int_name ],
                                                                                     [ Gtk2::Label->new(N("Status:")),
                                                                                       $int_state = Gtk2::Label->new(N("Testing your connection...")) ]
@@ -1072,8 +1062,7 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
                                                                               update();
                                                                               $button_apply->set_sensitive(1);
                                                                           } else {
-                                                                              configureNetwork2($in, $modules_conf, '', $netc, $intf);
-                                                                              write_resolv_conf("/etc/resolv.conf", $netc);
+                                                                              network::network::configure_network($net, $in, $modules_conf);
                                                                           }
                                                                           $exit_dialogsub->();
                                                                       }),

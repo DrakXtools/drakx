@@ -6,7 +6,7 @@ use c;
 use common;
 use standalone;
 use Digest::MD5;
-use network::netconnect;
+use network::network;
 use network::tools;
 
 use mygtk2 qw(gtknew);
@@ -27,9 +27,7 @@ is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
 
-my $netcnx = {};
-my $netc = {};
-my $intf = {};
+my $net = {};
 my $watched_interface;
 
 $SIG{HUP} = sub {
@@ -72,7 +70,7 @@ my %actions = (
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
                    name => N("Watched interface"),
-                   choices => sub { N("Auto-detect"), sort keys %$intf },
+                   choices => sub { N("Auto-detect"), sort keys %{$net->{ifcfg}} },
                    choice_selected => sub { $watched_interface ? $_[0] eq $watched_interface : $_[0] eq N("Auto-detect") },
                    launch => sub {
                        $watched_interface = $_[0] eq N("Auto-detect") ? undef : $_[0];
@@ -82,10 +80,10 @@ my %actions = (
                'chooseProfile' => {
                    name => N("Profiles"),
                    choices => sub { network::network::netprofile_list() },
-                   choice_selected => sub { $_[0] eq $netc->{PROFILE} },
+                   choice_selected => sub { $_[0] eq $net->{PROFILE} },
                    launch => sub {
-                       $netc->{PROFILE} = $_[0];
-                       network::tools::bg_command_as_root('/sbin/set-netprofile', $netc->{PROFILE});
+                       $net->{PROFILE} = $_[0];
+                       network::tools::bg_command_as_root('/sbin/set-netprofile', $net->{PROFILE});
                    }
                },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetworkForce() } },
@@ -161,26 +159,17 @@ sub netMonitor() {
 sub checkNetwork() {
     my ($gw_intf, $_is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
-      network::tools::get_internet_connection($netc, $intf);
+      network::tools::get_internet_connection($net);
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 
     my $new_md5 = md5file($prog_name);
     if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub checkNetworkForce() {
-    $netcnx = {};
-    $netc = {};
-    $intf = {};
-    network::netconnect::read_net_conf($netcnx, $netc, $intf);
+    $net = {};
+    network::network::read_net_conf($net);
     undef $current_state;
     checkNetwork();
-}
-sub getIP {
-    my ($interface) = shift;
-    my $ifconfig = '/sbin/ifconfig';
-    my @lines = `$ifconfig $interface`;
-    my @ip = map { if_(/inet adr:([\d.]+)/, $1) } @lines;
-    return wantarray() ? @ip : $ip[0];
 }
 sub cronNetwork() {
     $timeout = Glib::Timeout->add(2000, sub {

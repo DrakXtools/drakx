@@ -54,12 +54,15 @@ $o = $::o = {
     steps        => \%steps::installSteps,
     orderedSteps => \@steps::orderedInstallSteps,
 
-#- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#-    intf => { eth0 => { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } },
+    #- for the list of fields available, see network/network.pm
+    net => {
+	    #- network => { HOSTNAME => 'abcd' },
+	    #- resolv => { DOMAINNAME => 'foo.xyz' },
+	    #- ifcfg => {
+	    #-   eth0 => { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' }
+	    #- },
+	    },
 
-    netc => {},
-    intf => {},
-             
 #-step : the current one
 #-prefix
 #-mouse
@@ -266,7 +269,7 @@ sub configureNetwork {
     my ($_clicked, $_ent_number, $auto) = @_;
     #- get current configuration of network device.
     require network::network;
-    eval { network::network::read_all_conf($o->{prefix}, $o->{netc}, $o->{intf}) };
+    eval { network::network::read_net_conf($o->{net}) };
     installStepsCall($o, $auto, 'configureNetwork') if !$o->{isUpgrade};
 }
 #------------------------------------------------------------------------------
@@ -480,17 +483,17 @@ sub main {
 	require network::network;
 	#- get stage1 network configuration if any.
 	log::l('found /tmp/network');
-	$o->{netc} ||= {};
-	add2hash($o->{netc}, network::network::read_conf('/tmp/network'));
+	#- FIXME: DOMAINNAME and DHCP_HOSTNAME shouldn't be in $o->{net}{network}
+	add2hash($o->{net}{network}, network::network::read_conf('/tmp/network'));
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
 	    my $l = network::network::read_interface_conf($file);
-	    $o->{intf}{$l->{DEVICE}} ||= $l;
+	    $o->{net}{ifcfg}{$l->{DEVICE}} ||= $l;
 	}
 	if (-e '/etc/resolv.conf') {
 	    my $file = '/etc/resolv.conf';
 	    log::l("found network config file $file");
-	    add2hash($o->{netc}, network::network::read_resolv_conf($file));
+	    add2hash($o->{net}{resolv}, network::network::read_resolv_conf($file));
 	}
     }
 

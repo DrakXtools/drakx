@@ -47,9 +47,8 @@ my $direct = grep { /-direct/ } @ARGV;
 #my $shorewall = network::shorewall::read();
 #
 #- get network configuration.
-my $netc = {};
-my $intf = {};
-network::network::read_all_conf('', $netc, $intf);
+my $net = {};
+network::network::read_net_conf($net);
 
 my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("PXE Server Configuration");
@@ -126,7 +125,7 @@ my @intf = grep { exists $_->{NETWORK} } map {
 	    print STDERR "$s\n";
 	    $s =~ /^(\S+)\s+\S+\s+$_->{NETMASK}\s+.*$_->{DEVICE}/ and $_->{NETWORK} = $1;
 	}
-    } $_ } values %$intf;
+    } $_ } values %{$net->{ifcfg}};
 if (@intf < 1) {
     #- no interface already configured found, ask user to configure.
     $in->ask_warn(N("No network adapter on your system!"), 
@@ -149,7 +148,7 @@ if (@intf < 1) {
 step_ip_range:
 
 #- read current configuration, or create a default suitable automatically.
-my $dhcpd_conf = parse_dhcpd_conf("/etc/dhcpd.conf", {}, $netc, $intf[0]);
+my $dhcpd_conf = parse_dhcpd_conf("/etc/dhcpd.conf", {}, $net, $intf[0]);
 
 #- get back default of ip.
 my $pool;
@@ -252,10 +251,10 @@ foreach my $i (0..99) {
     }
     defined $label or $label = "halt$i", last;
 }
-my $server = $intf[0]{IPADDR} || $netc->{HOSTNAME};
+my $server = $intf[0]{IPADDR} || $net->{network}{HOSTNAME};
 push @{$pxelinux_cfg->{entry}}, { label => $label, 
 				  kernel => "images/alt0/vmlinuz",
-				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$netc->{dnsServer},server:$server,directory:$dir root=/dev/ram3" };
+				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$net->{resolv}{dnsServer},server:$server,directory:$dir root=/dev/ram3" };
 build_pxelinux_cfg($pxelinux_cfg, "/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 
 #- make directory available for httpd.
@@ -269,7 +268,7 @@ start_daemons();
 
 #- sub for reading/writing dhcpd.conf and pxelinux.cfg/default...
 sub parse_dhcpd_conf {
-    my ($file, undef, $netc, $intf) = @_;
+    my ($file, undef, $net, $intf) = @_;
     my (%dhcpd_conf, $pool);
     local (*F, $_);
 
@@ -277,7 +276,8 @@ sub parse_dhcpd_conf {
     $dhcpd_conf{class_PXE} = 'PXE';
     $dhcpd_conf{class} = { PXE => undef, Etherboot => undef, known => undef };
     add2hash($dhcpd_conf{network} = { pool => [] }, $intf);
-    add2hash($dhcpd_conf{network}, $netc);
+    add2hash($dhcpd_conf{network}, $net->{network});
+    add2hash($dhcpd_conf{network}, $net->{resolv});
 
     if (open F, $file) {
 	while (<F>) {

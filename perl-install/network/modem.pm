@@ -8,12 +8,6 @@ use detect_devices;
 use mouse;
 use network::tools;
 
-sub first_modem {
-    my ($netc) = @_;
-    return "/mnt/root" if $::isInstall;
-    first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}});
-}
-
 sub get_user_home() {
     my $home;
     if ($ENV{USER} ne "root") {
@@ -25,13 +19,8 @@ sub get_user_home() {
     $home;
 }
 
-sub ppp_read_conf {
-    my ($netcnx, $netc) = @_;
-    my $modem = $netcnx->{$netcnx->{type}} ||= {};
-    if (my $detected_modem = first_modem($netc)) {
-        $modem->{device} ||= $detected_modem->{device};
-    }
-    $modem->{device} ||= '/dev/modem';
+sub ppp_read_conf() {
+    my $modem = {};
     my %l = getVarsFromSh(get_user_home() . "/.kde/share/config/kppprc");
     add2hash(\%l, getVarsFromSh("$::prefix/usr/share/config/kppprc"));
     $l{Authentication} = 4 if $l{Authentication} !~ /\d/;
@@ -58,14 +47,13 @@ sub ppp_read_conf {
     $modem->{auto_gateway} ||= defined $modem->{Gateway} && $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
     $modem->{auto_ip} ||=  defined $modem->{IPAddr} && $modem->{IPAddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
     $modem->{auto_dns} ||= $modem->{dns1} || $modem->{dns2} ? N("Manual") : N("Automatic");
-
+    $modem->{device} ||= '/dev/modem';
     $modem;
 }
 
 #-----modem conf
 sub ppp_configure {
     my ($in, $modem) = @_;
-    $modem or return;
     $in->do_pkgs->install('ppp') if !$::testing;
     $in->do_pkgs->install('kdenetwork-kppp') if !$::testing && $in->do_pkgs->is_installed('kdebase');
 

@@ -423,7 +423,7 @@ sub prep_net_suppl_media {
     #- from install_steps_interactive:
     local $::expert = $::expert;
     require network::netconnect;
-    network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+    network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
     require install_interactive;
     install_interactive::upNetwork($o);
     sleep(3);
@@ -902,7 +902,7 @@ sub set_authentication {
 	} 'configureNetwork';
     };
     require authentication;
-    authentication::set($o, $o->{netc}, $o->{authentication} ||= {}, $when_network_is_up);
+    authentication::set($o, $o->{net}, $o->{authentication} ||= {}, $when_network_is_up);
 }
 
 sub killCardServices() {
@@ -1147,7 +1147,7 @@ sub g_auto_install {
 	$_->{mntpoint} && fs::format::known_type($_);
     } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services postInstall postInstallNonRooted); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse net timezone superuser keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe useSupermount autoExitInstall X services postInstall postInstallNonRooted); #- TODO modules bootloader 
 
     $o->{printer} = $::o->{printer} if $::o->{printer};
 
@@ -1164,10 +1164,10 @@ sub g_auto_install {
     );
     $_ = { %{$_ || {}} }, delete @$_{@user_info_to_remove} foreach $o->{superuser}, @{$o->{users} || []};
 
-    if ($b_respect_privacy && $o->{netcnx}) {
-	if (my $type = $o->{netcnx}{type}) {
-	    my @netcnx_type_to_remove = qw(passwd passwd2 login phone_in phone_out);
-	    $_ = { %{$_ || {}} }, delete @$_{@netcnx_type_to_remove} foreach $o->{netcnx}{$type};
+    if ($b_respect_privacy && $o->{net}) {
+	if (my $type = $o->{net}{type}) {
+	    my @net_type_to_remove = qw(passwd login phone_in phone_out);
+	    $_ = { %{$_ || {}} }, delete @$_{@net_type_to_remove} foreach $o->{net}{$type};
 	}
     }
     my $warn_privacy = $b_respect_privacy ? "!! This file has been simplified to respect privacy when reporting problems.
@@ -1369,14 +1369,14 @@ sub generate_automatic_stage1_params {
 	if ($ENV{PROXY}) {
 	    push @ks, proxy_host => $ENV{PROXY}, proxy_port => $ENV{PROXYPORT};
 	}
-	my ($intf) = values %{$o->{intf}};
+	my ($intf) = first(values %{$o->{net}{ifcfg}});
 	push @ks, interface => $intf->{DEVICE};
 	if ($intf->{BOOTPROTO} eq 'dhcp') {
 	    push @ks, network => 'dhcp';
 	} else {
-	    push @ks, network => 'static', ip => $intf->{IPADDR}, netmask => $intf->{NETMASK}, gateway => $o->{netc}{GATEWAY};
+	    push @ks, network => 'static', ip => $intf->{IPADDR}, netmask => $intf->{NETMASK}, gateway => $o->{net}{network}{GATEWAY};
 	    require network::network;
-	    if (my @dnss = network::network::dnsServers($o->{netc})) {
+	    if (my @dnss = network::network::dnsServers($o->{net})) {
 		push @ks, dns => $dnss[0];
 	    }
 	}

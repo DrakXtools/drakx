@@ -116,7 +116,7 @@ my $file = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
 $file = "$::prefix$file" if !-e $file;
 
 sub get_info_providers_backend {
-    my ($isdn, $_netc, $name) = @_;
+    my ($isdn, $name) = @_;
     $name eq N("Unlisted - edit manually") and return;
     foreach (catMaybeCompressed($file)) {
 	chop;

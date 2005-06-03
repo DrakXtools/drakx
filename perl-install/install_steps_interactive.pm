@@ -785,10 +785,10 @@ sub configureNetwork {
 
     if ($o->{meta_class} eq 'firewall') {
 	require network::netconnect;
-	network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
     } else {
 	require network::network;
-	network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
+	network::network::easy_dhcp($o->{net}, $o->{modules_conf});
 	$o->SUPER::configureNetwork;
     }
 }
@@ -914,7 +914,7 @@ sub summaryBefore {
     #- get back network configuration.
     require network::network;
     eval {
-	network::network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}, $o->{netcnx} ||= {});
+	network::network::read_net_conf($o->{net});
     };
     log::l("summaryBefore: network configuration: ", formatError($@)) if $@;
 }
@@ -1061,14 +1061,11 @@ sub summary {
     push @l, {
 	group => N("Network & Internet"),
 	label => N("Network"),
-	val => sub { $o->{netcnx}{type} },
+	val => sub { $o->{net}{type} },
 	clicked => sub { 
 	    local $::expert = $::expert;
 	    require network::netconnect;
-	    network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
-	    #- in case netcnx type is not updated.
-	    require network::network;
-	    network::network::probe_netcnx_type($o->{prefix}, $o->{netc}, $o->{intf}, $o->{netcnx});
+	    network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
 	},
     };
 
@@ -1194,7 +1191,7 @@ sub setRootPassword {
 
     if ($o->{security} >= 1 || $clicked) {
 	require authentication;
-	authentication::ask_root_password_and_authentication($o, $o->{netc}, $sup, $o->{authentication} ||= {}, $o->{meta_class}, $o->{security});
+	authentication::ask_root_password_and_authentication($o, $o->{net}, $sup, $o->{authentication} ||= {}, $o->{meta_class}, $o->{security});
     }
     install_steps::setRootPassword($o);
 }

@@ -10,77 +10,23 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_conf_backend);
 
-
-sub get_wizard {
-    my ($wiz) = @_;
-    my $netc = $wiz->{var}{netc};
-
-    my %l = (
-	     'pppoe' =>  N("use PPPoE"),
-	     'pptp'  =>  N("use PPTP"),
-	     'dhcp'  =>  N("use DHCP"),
-	     'speedtouch' => N("Alcatel Speedtouch USB") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
-	     'sagem' =>  N("Sagem (using PPPoA) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
-	     'sagem_dhcp' =>  N("Sagem (using DHCP) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
-          # 'eci' => N("ECI Hi-Focus"), # this one needs eci agreement
-	    );
-    
-    $wiz->{var}{adsl} = {
-                         connection_list => \%l,
-                         type => "",
-                        };
-    add2hash($wiz->{pages},
-             {
-              adsl_old => {
-                       name => N("Connect to the Internet") . "\n\n" .
-                       N("The most common way to connect with adsl is pppoe.
-Some connections use PPTP, a few use DHCP.
-If you do not know, choose 'use PPPoE'"),
-                       data =>  [
-                                 {
-                                  label => N("ADSL connection type:"), val => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },
-                                ],
-                       pre => sub {
-                           $wiz->{var}{adsl}{type} = $l{sagem}; # debug
-                           $wiz->{var}{adsl}{type} ||= find { $netc->{autodetect}{adsl}{$_} } keys %l;
-                           print qq(\n\ntype is "$wiz->{var}{adsl}{type}"\n\n);
-                       },
-                       post => sub {
-                           $wiz->{var}{adsl}{type} = find { $l{$_} eq $wiz->{var}{adsl}{type} } keys %l;
-                           my $adsl   = $wiz->{var}{adsl}{connection};
-                           my $type   = $wiz->{var}{adsl}{type};
-                           my $netcnx = $wiz->{var}{netcnx};
-                           $netcnx->{type} = "adsl_$type";
-                                         
-                           $netcnx->{"adsl_$type"} = {};
-                           $netcnx->{"adsl_$type"}{vpivci} = '' if $type =~ /eci|speedtouch/;
-                           return 'ethernet' if $type eq 'dhcp';
-                           adsl_probe_info($adsl, $netc, $type);
-                           # my ($adsl, $netc, $intf, $adsl_type) = @_;
-                           # ask_info2($adsl, $netc);
-                           return "hw_account";
-                       },
-                      },
-             });
-}
-
 sub adsl_probe_info {
-    my ($adsl, $netc, $adsl_type, $o_adsl_modem) = @_;
+    my ($net) = @_;
     my $pppoe_file = "$::prefix/etc/ppp/pppoe.conf";
-    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type eq 'pppoe') && -f $pppoe_file;
+    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (!exists $net->{adsl}{method} || $net->{adsl}{method} eq 'pppoe') && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/ppp0 /etc/ppp/options /etc/ppp/options.adsl)) {
 	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
-    my $passwd = passwd_by_login($login);
-    if (!$netc->{vpi} && !$netc->{vci} && member($o_adsl_modem, qw(eci speedtouch))) {
-      ($netc->{vpi}, $netc->{vci}) = 
+    my $passwd = network::tools::passwd_by_login($login);
+    if (!$net->{adsl}{vpi} && !$net->{adsl}{vci}) {
+      ($net->{adsl}{vpi}, $net->{adsl}{vci}) =
 	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, map { sprintf("%x", $_) } $1, $2) } cat_("$::prefix/etc/ppp/peers/ppp0"));
     }
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
-    add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
-    add2hash($adsl, { login => $login, passwd => $passwd, passwd2 => '' });
+    add2hash($net->{resolv}, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
+    add2hash($net->{adsl}, { login => $login, passwd => $passwd });
 }
 
 sub adsl_detect() {
@@ -101,8 +47,10 @@ sub adsl_detect() {
 }
 
 sub sagem_set_parameters {
-    my ($netc) = @_;
-    my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi Encapsulation);
+    my ($net) = @_;
+    my %l = map { $_ => sprintf("%08s", $net->{adsl}{$_}) } qw(vci vpi Encapsulation);
+
+    my $static_ip =  $net->{adsl}{method} eq 'static' && $net->{ifcfg}{sagem}{IPADDR};
     foreach my $cfg_file (qw(/etc/analog/adiusbadsl.conf /etc/eagle-usb/eagle-usb.conf)) {
         substInFile {
             s/Linetype=.*\n/Linetype=0000000A\n/; #- use CMVs
@@ -110,16 +58,16 @@ sub sagem_set_parameters {
             s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
             s/STATIC_IP=.*\n//;
-            s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>! if $netc->{static_ip};
+            s!</eaglectrl>!STATIC_IP=$static_ip\n</eaglectrl>! if $static_ip;
             #- TODO: add ISP info, $netc->{provider_id}
         } "$::prefix$cfg_file";
     }
     #- create CMV symlinks for both POTS and ISDN lines
     foreach my $type (qw(p i)) {
         my $cmv;
-        my ($country) = $netc->{provider_id} =~ /^([a-zA-Z]+)\d+$/;
+        my ($country) = $net->{adsl}{provider_id} =~ /^([a-zA-Z]+)\d+$/;
         #- try to find a CMV for this specific ISP
-        $cmv = "$::prefix/etc/eagle-usb/CMVe${type}$netc->{provider_id}.txt" if $netc->{provider_id};
+        $cmv = "$::prefix/etc/eagle-usb/CMVe${type}$net->{adsl}{provider_id}.txt" if $net->{adsl}{provider_id};
         #- if not found, try to found a CMV for the country
         -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}${country}.txt";
         #- fallback on the generic CMV if no other matched
@@ -131,14 +79,13 @@ sub sagem_set_parameters {
 }
 
 sub adsl_conf_backend {
-    my ($in, $modules_conf, $adsl, $netc, $intf, $adsl_device, $adsl_type, $o_netcnx) = @_;
-    # FIXME: should not be needed:
-    defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
-    $netc->{adsltype} ||= "adsl_$adsl_type";
-    $adsl_type eq 'pptp' and $adsl_device = 'pptp_modem';
-    $adsl_type eq 'capi' and $adsl_device = 'capi_modem';
+    my ($in, $modules_conf, $net) = @_;
+
     my $bewan_module;
-    $bewan_module = $o_netcnx->{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $adsl_device eq "bewan";  
+    $bewan_module = $net->{adsl}{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $net->{adsl}{device} eq "bewan";
+
+    my $adsl_type = $net->{adsl}{method};
+    my $adsl_device = $net->{adsl}{device};
 
     # all supported modems came with their own pppoa module, so no need for "plugin pppoatm.so"
     my %modems =
@@ -154,7 +101,7 @@ sleep 10
 ),
         stop => qq(modprobe -r $bewan_module),
         plugin => {
-                             pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci}))
+                             pppoa => "pppoatm.so " . join('.', hex($net->{adsl}{vpi}), hex($net->{adsl}{vci}))
                   },
         ppp_options => qq(
 default-asyncmap
@@ -178,7 +125,7 @@ sync
                    pppoa => qq("/usr/sbin/pppoa3 -c")
                   },
         plugin => {
-                   pppoa => "pppoatm.so " . join('.', hex($netc->{vpi}), hex($netc->{vci})),
+                   pppoa => "pppoatm.so " . join('.', hex($net->{adsl}{vpi}), hex($net->{adsl}{vci})),
                   },
         ppp_options => qq(
 sync
@@ -222,7 +169,7 @@ novjccomp),
        {
         start => '/usr/bin/startmodem',
         server => {
-                   pppoe => qq("/usr/bin/pppoeci -v 1 -vpi $netc->{vpi} -vci $netc->{vci}"),
+                   pppoe => qq("/usr/bin/pppoeci -v 1 -vpi $net->{adsl}{vpi} -vci $net->{adsl}{vci}"),
                   },
         ppp_options => qq(
 noipdefault
@@ -268,7 +215,7 @@ avmadsl)
       (
        pppoe =>
        {
-        server => '"pppoe -I ' . ($modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE}) . '"',
+        server => '"pppoe -I ' . ($modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $net->{adsl}{ethernet_device}) . '"',
         ppp_options => qq(default-asyncmap
 mru 1492
 mtu 1492
@@ -320,15 +267,15 @@ holdoff 4
 maxfail 25
 $pty_option
 $plugin
-user "$adsl->{login}"
+user "$net->{adsl}{login}"
 ));
 
-        write_secret_backend($adsl->{login}, $adsl->{passwd});
+        network::tools::write_secret_backend($net->{adsl}{login}, $net->{adsl}{passwd});
 
-        if ($netc->{NET_DEVICE} =~ /^eth/) {
-            my $net_device = $netc->{NET_DEVICE};
-            $intf->{$net_device} = {
-                                   DEVICE => $net_device,
+	my $ethernet_device = $net->{adsl}{ethernet_device};
+	if ($ethernet_device =~ /^eth/) {
+            $net->{ifcfg}{$ethernet_device} = {
+                                   DEVICE => $ethernet_device,
                                    BOOTPROTO => 'none',
                                    NETMASK => '255.255.255.0',
                                    NETWORK => '10.0.0.0',
@@ -340,20 +287,17 @@ user "$adsl->{login}"
 
     #- FIXME: ppp0 and ippp0 are hardcoded
     my $metric = network::tools::get_default_metric("adsl"); #- FIXME, do not override if already set
-    output_with_perm("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 0705, qq(DEVICE=ppp0
-ONBOOT=no
-TYPE=ADSL
-METRIC=$metric
-)) unless member($adsl_type, qw(manual dhcp));
+    put_in_hash($net->{ifcfg}{ppp0}, {
+				      DEVICE => 'ppp0',
+				      TYPE => 'ADSL',
+				      METRIC => $metric,
+				     }) unless member($adsl_type, qw(static dhcp));
 
     #- remove file used with sagem for dhcp/static connections
     unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");
 
     #- set vpi, vci and encapsulation parameters for sagem
-    if ($adsl_device eq 'sagem') {
-	$netc->{static_ip} = $intf->{sagem}{IPADDR} if $adsl_type eq 'manual';
-	sagem_set_parameters($netc);
-    }
+    $adsl_device eq 'sagem' and sagem_set_parameters($net);
 
     #- set aliases
     if (exists $modems{$adsl_device}{aliases}) {
@@ -365,11 +309,9 @@ METRIC=$metric
 
     if ($adsl_type eq "capi") {
         require network::isdn;
-        network::isdn::setup_capi_conf($adsl->{capi});
-        services::stop("isdn4linux");
-        services::do_not_start_service_on_boot("isdn4linux");
-        services::start_service_on_boot("capi4linux");
-        services::start("capi4linux");
+        network::isdn::setup_capi_conf($net->{adsl}{capi_card});
+	services::set_status('isdn4linux', 0);
+	services::set_status('capi4linux', 1);
 
         #- install and run drdsl for dsl connections, once capi driver is loaded
         $in->do_pkgs->ensure_is_installed_if_available("drdsl", "/usr/sbin/drdsl");

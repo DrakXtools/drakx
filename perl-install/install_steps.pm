@@ -404,7 +404,7 @@ sub beforeInstallPackages {
     install_any::write_fstab($o);
 
     require network::network;
-    network::network::add2hosts("$o->{prefix}/etc/hosts", "localhost", "127.0.0.1");
+    network::network::add2hosts("localhost", "127.0.0.1");
 
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
@@ -655,10 +655,9 @@ sub selectMouse($) {
 sub configureNetwork {
     my ($o) = @_;
     require network::network;
-    network::network::configureNetwork2($o, $o->{modules_conf}, $o->{prefix}, $o->{netc}, $o->{intf});
+    network::network::configure_network($o->{net}, $o, $o->{modules_conf});
     if ($o->{method} =~ /ftp|http|nfs/) {
-	$o->{netcnx}{type} = 'lan';
-	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
+	$o->{net}{type} = 'lan';
     }
 
     configure_firewall($o) if !$o->{isUpgrade};
@@ -965,8 +964,8 @@ risk!
 #------------------------------------------------------------------------------
 sub hasNetwork {
     my ($o) = @_;
-    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no' and return 1;
-    log::l("no network seems to be configured for internet ($o->{netcnx}{type},$o->{netc}{NETWORKING})");
+    $o->{net}{type} && $o->{net}{network}{NETWORKING} ne 'no' and return 1;
+    log::l("no network seems to be configured for internet ($o->{net}{type},$o->{net}{network}{NETWORKING})");
     0;
 }
 
@@ -974,27 +973,23 @@ sub hasNetwork {
 sub upNetwork {
     my ($o, $b_pppAvoided) = @_;
 
-    #- do not destroy this file if prefix is '' or even '/' (could it happens ?).
-    if (length($o->{prefix}) > 1) {
-	-f "$o->{prefix}/etc/$_" && symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach qw(resolv.conf protocols services);
-    }
     member($o->{method}, qw(ftp http nfs)) and return 1;
     $o->{modules_conf}->write;
     if (hasNetwork($o)) {
-	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
-	    log::l("starting network ($o->{netcnx}{type})");
+	if ($o->{net}{type} =~ /adsl|lan|cable/) {
+	    log::l("starting network ($o->{net}{type})");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
 	} elsif (!$b_pppAvoided) {
-	    log::l("starting network (ppp: $o->{netcnx}{type})");
+	    log::l("starting network (ppp: $o->{net}{type})");
 	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
 	} else {
-	    log::l(qq(not starting network (b/c ppp avoided and type is "$o->{netcnx}{type})"));
+	    log::l(qq(not starting network (b/c ppp avoided and type is "$o->{net}{type})"));
 	}
     }
     $::testing;
@@ -1011,7 +1006,7 @@ sub downNetwork {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    return 1;
-	} elsif ($o->{netc}{type} !~ /adsl|lan|cable/) {
+	} elsif (member($o->{net}{type}, qw(adsl lan cable))) {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");

@@ -6,13 +6,15 @@ use common;
 use interactive;
 use any;
 use authentication;
+use network::network;
 use network::netconnect;
 use security::level;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
 my $authentication = authentication::get();
 my $security = security::level::get();
-network::netconnect::read_net_conf(my $netcnx = {}, my $netc = {}, my $intf = {});
+my $net = {};
+network::network::read_net_conf($net);
 
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
@@ -29,19 +31,19 @@ sub ask_language() {
 sub ask_network() {
     my $modules_conf = modules::any_conf->read;
     require network::netconnect;
-    network::netconnect::real_main($netcnx, $in, $modules_conf, $netc, undef, $intf);
+    network::netconnect::real_main($net, $in, $modules_conf);
 }
 
 sub ask_authentication() {
     my $meta_class = { getVarsFromSh("/etc/sysconfig/system") }->{META_CLASS};
 
     my $superuser = {};
-    authentication::ask_root_password_and_authentication($in, $netc, $superuser, $authentication, $meta_class, $security);
+    authentication::ask_root_password_and_authentication($in, $net, $superuser, $authentication, $meta_class, $security);
     authentication::set_root_passwd($superuser, $authentication);
 
     eval { 
-	authentication::set($in, $netc, $authentication);
-	network::network::write_conf($netc);
+	authentication::set($in, $net, $authentication);
+	network::network::write_network_conf($net);
     };
     if (my $err = $@) {
 	$in->ask_warn(N("Error"), formatError($err));

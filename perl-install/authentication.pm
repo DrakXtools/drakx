@@ -73,7 +73,7 @@ sub domain_to_ldap_domain {
 }
 
 sub ask_parameters {
-    my ($in, $netc, $authentication, $kind) = @_;
+    my ($in, $net, $authentication, $kind) = @_;
 
     #- keep only this authentication kind
     foreach (kinds()) {
@@ -81,15 +81,15 @@ sub ask_parameters {
     }
 
     if ($kind eq 'LDAP') {
-	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
+	$net->{auth}{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
 	$in->ask_from('',
 		     N("Authentication LDAP"),
-		     [ { label => N("LDAP Base dn"), val => \$netc->{LDAPDOMAIN} },
+		     [ { label => N("LDAP Base dn"), val => \$net->{auth}{LDAPDOMAIN} },
 		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
     } elsif ($kind eq 'AD') {
 	
-	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
+	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME};
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
 
 	$in->do_pkgs->install(qw(perl-Net-DNS));
@@ -125,10 +125,10 @@ sub ask_parameters {
 
     } elsif ($kind eq 'NIS') { 
 	$authentication->{NIS_server} ||= 'broadcast';
-	$netc->{NISDOMAIN} ||= $netc->{DOMAINNAME};
+	$net->{network}{NISDOMAIN} ||= $net->{resolv}{DOMAINNAME};
 	$in->ask_from('',
 		     N("Authentication NIS"),
-		     [ { label => N("NIS Domain"), val => \$netc->{NISDOMAIN} },
+		     [ { label => N("NIS Domain"), val => \$net->{network}{NISDOMAIN} },
 		       { label => N("NIS Server"), val => \$authentication->{NIS_server}, list => ["broadcast"], not_edit => 0 },
 		     ]) or return;
     } elsif ($kind eq 'winbind' || $kind eq 'SMBKRB') {
@@ -141,16 +141,16 @@ Should this setup fail for some reason and domain authentication is not working,
 The command 'wbinfo -t' will test whether your authentication secrets are good."))
 	  if $kind eq 'winbind';
 
-	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'SMBKRB';
+	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME} if $kind eq 'SMBKRB';
 	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
-	$netc->{WINDOMAIN} ||= $netc->{DOMAINNAME};
+	$net->{auth}{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
 	my $anonymous;
 	$in->ask_from('',
 		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
 		        [ if_($kind eq 'SMBKRB', 
 			  { label => N("Domain"), val => \$authentication->{AD_domain} }
 			     ),
-			  { label => N("Windows Domain"), val => \$netc->{WINDOMAIN} },
+			  { label => N("Windows Domain"), val => \$net->{auth}{WINDOMAIN} },
 			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 			  { label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
@@ -162,7 +162,7 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 }
 
 sub ask_root_password_and_authentication {
-    my ($in, $netc, $superuser, $authentication, $meta_class, $security) = @_;
+    my ($in, $net, $superuser, $authentication, $meta_class, $security) = @_;
 
     my $kind = to_kind($authentication);
     my @kinds = kinds($in->do_pkgs, $meta_class);
@@ -189,7 +189,7 @@ sub ask_root_password_and_authentication {
 { label => N("Authentication"), val => \$kind, type => 'list', list => \@kinds, format => \&kind2name, advanced => 1 },
         ]) or delete $superuser->{password};
 
-    ask_parameters($in, $netc, $authentication, $kind) or goto &ask_root_password_and_authentication;
+    ask_parameters($in, $net, $authentication, $kind) or goto &ask_root_password_and_authentication;
 }
 
 
@@ -205,7 +205,7 @@ sub get() {
 }
 
 sub set {
-    my ($in, $netc, $authentication, $o_when_network_is_up) = @_;
+    my ($in, $net, $authentication, $o_when_network_is_up) = @_;
 
     my $when_network_is_up = $o_when_network_is_up || sub { my ($f) = @_; $f->() };
 
@@ -230,7 +230,7 @@ sub set {
     } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
-	my $domain = $netc->{LDAPDOMAIN} || do {
+	my $domain = $net->{auth}{LDAPDOMAIN} || do {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
 	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
@@ -304,7 +304,7 @@ sub set {
 
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install(qw(ypbind autofs));
-	my $domain = $netc->{NISDOMAIN};
+	my $domain = $net->{auth}{NISDOMAIN};
 	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can not use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
 	substInFile {
@@ -324,7 +324,7 @@ sub set {
 #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($kind eq 'winbind') {
 
-	my $domain = uc $netc->{WINDOMAIN};
+	my $domain = uc $net->{auth}{WINDOMAIN};
 	
 	$in->do_pkgs->install('samba-winbind');
 
@@ -342,7 +342,7 @@ sub set {
 	});
     } elsif ($kind eq 'SMBKRB') {
 	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
-	my $domain = uc $netc->{WINDOMAIN};
+	my $domain = uc $net->{auth}{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);

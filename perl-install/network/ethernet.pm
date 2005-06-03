@@ -12,30 +12,15 @@ use network::tools;
 our @dhcp_clients = qw(dhclient dhcpcd pump dhcpxd);
 
 sub install_dhcp_client {
-    my ($in, $ethntf) = @_;
+    my ($in, $client) = @_;
     my %packages = (
         "dhclient" => "dhcp-client",
     );
-    my $client = $ethntf->{DHCP_CLIENT};
     #- use default dhcp client if none is provided
     $client ||= $dhcp_clients[0];
     $client = $packages{$client} if exists $packages{$client};
     $in->do_pkgs->install($client);
 }
-
-sub write_ether_conf {
-    my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
-    configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
-    $netc->{NETWORKING} = "yes";
-    if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
-	$netcnx->{type} = 'lan';
-	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
-	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
-    }
-    $::isStandalone and $modules_conf->write;
-    1;
-}
-
 
 sub mapIntfToDevice {
     my ($interface) = @_;

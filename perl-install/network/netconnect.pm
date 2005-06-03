@@ -5,15 +5,11 @@ use common;
 use log;
 use detect_devices;
 use list_modules;
-use run_program;
 use modules;
-use any;
-use fs;
 use mouse;
 use network::network;
 use network::tools;
 use network::thirdparty;
-use MDK::Common::Globals "network", qw($in);
 
 sub detect {
     my ($modules_conf, $auto_detect, $o_class) = @_;
@@ -39,11 +35,6 @@ sub detect {
     return;
 }
 
-sub init_globals {
-    my ($in) = @_;
-    MDK::Common::Globals::init(in => $in);
-}
-
 sub detect_timezone() {
     my %tmz2country = ( 
 		       'Europe/Paris' => N("France"),
@@ -63,31 +54,16 @@ sub detect_timezone() {
     \@country;
 }
 
-# load sub category's wizard pages into main wizard data structure
-sub get_subwizard {
-    my ($wiz, $type) = @_;
-    my %net_conf_callbacks = (adsl => sub { require network::adsl; &network::adsl::get_wizard },
-                              #cable => sub { require network::ethernet; &network::ethernet::get_wizard },
-                              #isdn => sub { require network::isdn; &network::isdn::get_wizard },
-                              #lan => sub { require network::ethernet; &network::ethernet::get_wizard },
-                              #modem => sub { require network::modem; &network::modem::get_wizard },
-                             );
-    $net_conf_callbacks{$type}->($wiz);
-}
-
-# configuring all network devices
 sub real_main {
-      my ($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
-      my $netc  = $o_netc  ||= {};
-      my $mouse = $o_mouse ||= {};
-      my $intf  = $o_intf  ||= {};
-      my $first_time = $o_first_time || 0;
-      my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf, %all_eth_intf);
+      my ($net, $in, $modules_conf) = @_;
+      #- network configuration should have been already read in $net at this point
+      my $mouse = $::o->{mouse} || {};
+      my ($cnx_type, @all_cards, %eth_intf, %all_eth_intf);
       my (%connections, @connection_list);
-      my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
+      my ($modem, $modem_name, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
-      my ($adsl_type, @adsl_devices, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider, $adsl_vpi, $adsl_vci);
-      my ($ntf_name, $gateway_ex, $up, $need_restart_network);
+      my (@adsl_devices, %adsl_cards, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider, $adsl_vpi, $adsl_vci);
+      my ($ntf_name, $gateway_ex, $up);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
@@ -98,8 +74,6 @@ sub real_main {
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
       my (%countries, @isp, $country, $provider, $old_provider);
-      my $config = {};
-      eval(cat_("$::prefix/etc/sysconfig/drakconnect"));
 
       my %l10n_lan_protocols = (
                                static => N("Manual configuration"),
@@ -114,16 +88,10 @@ sub real_main {
                             3 => N("Protocol for the rest of the world\nNo D-Channel (leased lines)"),
                            );
 
-      network::tools::remove_initscript();
-
-      init_globals($in);
-
-      read_net_conf($netcnx, $netc, $intf);
-
-      $netc->{autodetect} = {};
+      $net->{autodetect} = {};
 
       my $lan_detect = sub {
-          detect($modules_conf, $netc->{autodetect}, 'lan');
+          detect($modules_conf, $net->{autodetect}, 'lan');
           require network::ethernet;
           modules::interactive::load_category($in, $modules_conf, list_modules::ethernet_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
@@ -159,7 +127,7 @@ sub real_main {
 
       my %adsl_types = (
                         dhcp   => N("Dynamic Host Configuration Protocol (DHCP)"),
-                        manual => N("Manual TCP/IP configuration"),
+                        static => N("Manual TCP/IP configuration"),
                         pptp  => N("Point to Point Tunneling Protocol (PPTP)"),
                         pppoe  => N("PPP over Ethernet (PPPoE)"),
                         pppoa  => N("PPP over ATM (PPPoA)"),
@@ -191,60 +159,36 @@ sub real_main {
                                );
 
       my $offer_to_connect = sub {
-          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && !member($adsl_type, qw(manual dhcp));
-          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn isdn_external));
+	  if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
+	      member($net->{type}, qw(modem isdn isdn_external))) {
+	      return "ask_connect_now";
+	  }
           return "end";
       };
 
       my $after_lan_intf_selection = sub { $is_wireless ? 'wireless' : 'lan_protocol' };
 
       my $after_start_on_boot_step = sub {
-          if ($netc->{internet_cnx_choice} && exists $netc->{internet_cnx}{$netc->{internet_cnx_choice}}) {
-              $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
-          } else {
-              undef $netc->{NET_DEVICE};
-          }
-          if ($netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp)) && member($ntf_name, qw(sagem speedtouch))) {
-            #- we may need to write sagem specific parameters and load corresponding modules/programs (sagem/speedtouch)
-            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx);
-          }
-          network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
-          $network_configured = 1;
-          return "restart" if $need_restart_network && !$::isInstall && !$::expert;
+	  #- can't be done in adsl_account step because of static/dhcp adsl methods
+	  #- we need to write sagem specific parameters and load corresponding modules/programs (sagem/speedtouch)
+	  $net->{type} eq 'adsl' and network::adsl::adsl_conf_backend($in, $modules_conf, $net);
+
+          network::network::configure_network($net, $in, $modules_conf);
           return $offer_to_connect->();
       };
 
       my $goto_start_on_boot_ifneeded = sub {
-          return $after_start_on_boot_step->() if $netcnx->{type} eq "lan";
-          return "isdn_dial_on_boot" if  $netcnx->{type} eq 'isdn';
+          return $after_start_on_boot_step->() if $net->{type} eq "lan";
+          return "isdn_dial_on_boot" if  $net->{type} eq 'isdn';
           return "network_on_boot";
-      };
-
-      my $save_cnx = sub {
-          if (keys %$config) {
-              require Data::Dumper;
-              output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
-          }
-          return "allow_user_ctl";
-      };
-
-      my $handle_multiple_cnx = sub {
-          $need_restart_network = member($netcnx->{type}, qw(cable lan)) || $netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp));
-          my $nb = keys %{$netc->{internet_cnx}};
-          if (1 < $nb) {
-              return "multiple_internet_cnx";
-          } else {
-              $netc->{internet_cnx_choice} = $nb == 1 ? (keys %{$netc->{internet_cnx}})[0] : $netcnx->{type};
-              return $save_cnx->();
-          }
       };
 
       my $delete_gateway_settings = sub {
           my ($device) = @_;
           #- delete gateway settings if gateway device is invalid or matches the reconfigured device
-          if (!$netc->{GATEWAYDEV} || !exists $eth_intf{$netc->{GATEWAYDEV}} || $netc->{GATEWAYDEV} eq $device) {
-              delete $netc->{GATEWAY};
-              delete $netc->{GATEWAYDEV};
+          if (!$net->{network}{GATEWAYDEV} || !exists $eth_intf{$net->{network}{GATEWAYDEV}} || $net->{network}{GATEWAYDEV} eq $device) {
+              delete $net->{network}{GATEWAY};
+              delete $net->{network}{GATEWAYDEV};
           }
       };
 
@@ -258,7 +202,7 @@ sub real_main {
           #- redetect interfaces (so that the ndiswrapper module can be detected)
           $lan_detect->();
 
-          $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+          $ethntf = $net->{ifcfg}{$ntf_name} ||= { DEVICE => $ntf_name };
 
           1;
       };
@@ -297,10 +241,6 @@ sub real_main {
                    welcome =>
                    {
                     pre => sub {
-                        # keep b/c of translations in case they can be reused somewhere else:
-                        my @_a = (N("(detected on port %s)", 'toto'), 
-                          #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
-                          N("(detected %s)", 'toto'), N("(detected)"));
                         my @connections = (
                                           [ N("LAN connection"),    "lan"   ],
                                           [ N("Wireless connection"), "lan" ],
@@ -323,35 +263,24 @@ sub real_main {
                     data => \@connection_list,
                     post => sub {
                         $is_wireless = $cnx_type eq N("Wireless connection");
-                        #- why read again the net_conf here?
-                        read_net_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
-                        $type = $netcnx->{type} = $connections{$cnx_type};
-                        return $type;
+                        return $net->{type} = $connections{$cnx_type};
                     },
                    },
-
-                   prepare_detection =>
-                   {
-                    name => N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.",
-                              translate($type), N("Next")),
-                    post => $handle_multiple_cnx,
-                   },
-
 
                    isdn_account =>
                    {
                     pre => sub {
-                        network::isdn::get_info_providers_backend($isdn, $netc, $provider);
+                        network::isdn::get_info_providers_backend($isdn, $provider);
                         $isdn->{huptimeout} ||= 180;
                     },
                     name => N("Connection Configuration") . "\n\n" . N("Please fill or check the field below"),
                     data => sub {
 			[
 			 { label => N("Your personal phone number"), val => \$isdn->{phone_in} },
-			 { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} },
+			 { label => N("Provider name (ex provider.net)"), val => \$net->{resolv}{DOMAINNAME2} },
 			 { label => N("Provider phone number"), val => \$isdn->{phone_out} },
-			 { label => N("Provider DNS 1 (optional)"), val => \$netc->{dnsServer2} },
-			 { label => N("Provider DNS 2 (optional)"), val => \$netc->{dnsServer3} },
+			 { label => N("Provider DNS 1 (optional)"), val => \$net->{resolv}{dnsServer2} },
+			 { label => N("Provider DNS 2 (optional)"), val => \$net->{resolv}{dnsServer3} },
 			 { label => N("Dialing mode"),  list => ["auto", "manual"], val => \$isdn->{dialing_mode} },
 			 { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"], val => \$isdn->{speed} },
 			 { label => N("Connection timeout (in sec)"), val => \$isdn->{huptimeout} },
@@ -366,42 +295,33 @@ sub real_main {
 		    },
                     post => sub {
                         network::isdn::write_config($isdn);
-                        $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        $handle_multiple_cnx->();
+                        $net->{net_interface} = 'ippp0';
+                        "allow_user_ctl";
                     },
                    },
 
                    cable =>
                    {
                     pre => sub {
-                        $cable_no_auth = sub { $netc->{bpalogin} eq N("None") };
+                        $cable_no_auth = sub { $net->{cable}{bpalogin} eq N("None") };
                     },
                     name => N("Cable: account options"),
                     data => sub {
                         [
-                            { label => N("Authentication"), type => "list", val => \$netc->{bpalogin}, list => [ N("None"), N("Use BPALogin (needed for Telstra)") ] },
-                            { label => N("Account Login (user name)"), val => \$netcnx->{login}, disabled => $cable_no_auth },
-                            { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1, disabled => $cable_no_auth },
+                            { label => N("Authentication"), type => "list", val => \$net->{cable}{bpalogin}, list => [ N("None"), N("Use BPALogin (needed for Telstra)") ] },
+                            { label => N("Account Login (user name)"), val => \$net->{cable}{login}, disabled => $cable_no_auth },
+                            { label => N("Account Password"),  val => \$net->{cable}{passwd}, hidden => 1, disabled => $cable_no_auth },
                         ];
                     },
                     post => sub {
-                        if ($cable_no_auth->()) {
-                            if (-f "$::prefix/etc/rc.d/init.d/bpalogin") {
-                                require services;
-                                services::stop("bpalogin");
-                                services::do_not_start_service_on_boot("bpalogin");
-                            }
-                        } else {
-                            if ($in->do_pkgs->install("bpalogin")) {
-                                substInFile {
-                                    s/username\s+.*\n/username $netcnx->{login}\n/;
-                                    s/password\s+.*\n/password $netcnx->{passwd}\n/;
-                                } "$::prefix/etc/bpalogin.conf";
-                                require services;
-                                services::start_service_on_boot("bpalogin");
-                                services::restart("bpalogin");
-                            }
-                        }
+			my $use_bpalogin = !$cable_no_auth->();
+			if ($in->do_pkgs->install("bpalogin")) {
+			    substInFile {
+				s/username\s+.*\n/username $net->{cable}{login}\n/;
+				s/password\s+.*\n/password $net->{cable}{passwd}\n/;
+			    } "$::prefix/etc/bpalogin.conf";
+			}
+			services::set_status("bpalogin", $use_bpalogin);
                         $auto_ip = 1;
                         return "lan";
                     }
@@ -410,8 +330,8 @@ sub real_main {
                    isdn =>
                    {
                     pre=> sub {
-                        detect($modules_conf, $netc->{autodetect}, 'isdn');
-                        %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
+                        detect($modules_conf, $net->{autodetect}, 'isdn');
+                        %isdn_cards = map { $_->{description} => $_ } @{$net->{autodetect}{isdn}};
                     },
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
@@ -419,18 +339,15 @@ sub real_main {
                             list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ];
                     },
                     post => sub {
-                        # !intern_pci:
-                        # data => [ { val => \$isdn_type, type => "list", list => [ ,  ], } ],
-                        # post => sub {
                         if ($isdn_name eq $my_isdn) {
                             return "isdn_ask";
                         } elsif ($isdn_name eq N("External ISDN modem")) {
-                            $netcnx->{type} = 'isdn_external';
+                            $net->{type} = 'isdn_external';
                             return "modem";
                         }
 
                         # FIXME: some of these should be taken from isdn db
-                        $netcnx->{isdn_internal} = $isdn = { map { $_ => $isdn_cards{$isdn_name}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
+                        $isdn = { map { $_ => $isdn_cards{$isdn_name}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
 
                         if ($isdn->{id}) {
                             log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
@@ -489,7 +406,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 
                         },
                     post => sub {
-                        $netcnx->{isdn_internal} = $isdn = $isdn_cards{$isdn_name};
+                        $isdn = $isdn_cards{$isdn_name};
                         return "isdn_protocol";
                     }
                    },
@@ -549,9 +466,9 @@ Take a look at http://www.linmodems.org"),
                    {
                     pre => sub {
 			require network::modem;
-			detect($modules_conf, $netc->{autodetect}, 'modem');
+			detect($modules_conf, $net->{autodetect}, 'modem');
 			$modem = {};
-			if ($netcnx->{type} eq 'isdn_external') {
+			if ($net->{type} eq 'isdn_external') {
 			    #- FIXME: seems to be specific to ZyXEL Adapter Omni.net/TA 128/Elite 2846i
 			    #- it does not even work with TA 128 modems
 			    #- http://bugs.mandrakelinux.com/query.php?bug=1033
@@ -561,17 +478,17 @@ Take a look at http://www.linmodems.org"),
                     name => N("Select the modem to configure:"),
                     data => sub {
                         [ { label => N("Modem"), type => "list", val => \$modem_name, allow_empty_list => 1,
-                            list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ];
+                            list => [ keys %{$net->{autodetect}{modem}}, N("Manual choice") ], } ];
                     },
 		    complete => sub {
-			my $driver = $netc->{autodetect}{modem}{$modem_name}{driver} or return 0;
+			my $driver = $net->{autodetect}{modem}{$modem_name}{driver} or return 0;
 			!network::thirdparty::setup_device($in, 'rtc', $driver, $modem, qw(device));
 		    },
                     post => sub {
                         return 'choose_serial_port' if $modem_name eq N("Manual choice");
-			if (exists $netc->{autodetect}{modem}{$modem_name}{device}) {
+			if (exists $net->{autodetect}{modem}{$modem_name}{device}) {
 			    #- this is a serial probed modem
-			    $modem->{device} = $netc->{autodetect}{modem}{$modem_name}{device};
+			    $modem->{device} = $net->{autodetect}{modem}{$modem_name}{device};
 			    return "ppp_provider";
 			} else {
 			    #- driver exists but device field hasn't been filled by network::thirdparty::setup_device
@@ -590,7 +507,7 @@ Take a look at http://www.linmodems.org"),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
                         [ { val => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
-                            list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ];
+                            list => [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ];
                         },
                     post => sub {
                         return 'ppp_provider';
@@ -601,8 +518,7 @@ Take a look at http://www.linmodems.org"),
                    ppp_provider =>
                    {
                     pre => sub {
-                        network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
-                        $modem_conf_read = 1;
+                        add2hash($modem, network::modem::ppp_read_conf());
                         $in->do_pkgs->ensure_is_installed('kdenetwork-kppp-provider', $db_path);
                         my $p_db_path = "$::prefix$db_path";
                         @isp = map {
@@ -703,8 +619,8 @@ Take a look at http://www.linmodems.org"),
                         },
                     post => sub {
                         network::modem::ppp_configure($in, $modem);
-                        $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        $handle_multiple_cnx->();
+                        $net->{net_interface} = 'ppp0';
+                        "allow_user_ctl";
                     },
                    },
 
@@ -712,22 +628,21 @@ Take a look at http://www.linmodems.org"),
                    adsl =>
                    {
                     pre => sub {
-                        get_subwizard($wiz, 'adsl');
                         $lan_detect->();
                         @adsl_devices = keys %eth_intf;
 
-                        detect($modules_conf, $netc->{autodetect}, 'adsl');
+                        detect($modules_conf, $net->{autodetect}, 'adsl');
                         %adsl_cards = ();
-                        foreach my $modem_type (keys %{$netc->{autodetect}{adsl}}) {
-                            foreach my $modem (@{$netc->{autodetect}{adsl}{$modem_type}}) {
+                        foreach my $modem_type (keys %{$net->{autodetect}{adsl}}) {
+                            foreach my $modem (@{$net->{autodetect}{adsl}{$modem_type}}) {
                                 my $name = join(': ', $adsl_descriptions{$modem_type}, $modem->{description});
                                 $adsl_cards{$name} = [ $modem_type, $modem ];
                             }
                         }
                         push @adsl_devices, keys %adsl_cards;
 
-                        detect($modules_conf, $netc->{autodetect}, 'isdn');
-                        if (my @isdn_modems = @{$netc->{autodetect}{isdn}}) {
+                        detect($modules_conf, $net->{autodetect}, 'isdn');
+                        if (my @isdn_modems = @{$net->{autodetect}{isdn}}) {
                             require network::isdn;
                             %isdn_cards = map { $_->{description} => $_ } grep { $_->{driver} =~ /dsl/i } map { network::isdn::get_capi_card($_) } @isdn_modems;
                             push @adsl_devices, keys %isdn_cards;
@@ -743,12 +658,12 @@ Take a look at http://www.linmodems.org"),
                         if (exists $adsl_cards{$ntf_name}) {
                             my $modem;
                             ($ntf_name, $modem) = @{$adsl_cards{$ntf_name}};
-                            $netcnx->{bus} = $modem->{bus} if $ntf_name eq 'bewan';
+                            $net->{adsl}{bus} = $modem->{bus} if $ntf_name eq 'bewan';
                         }
                         if (exists($isdn_cards{$ntf_name})) {
                             require network::isdn;
-                            $netcnx->{capi} = $isdn_cards{$ntf_name};
-                            $adsl_type = "capi";
+                            $net->{adsl}{capi_card} = $isdn_cards{$ntf_name};
+                            $net->{adsl}{method} = "capi";
                             return 'adsl_account';
                         }
                         return 'adsl_provider';
@@ -769,12 +684,12 @@ Take a look at http://www.linmodems.org"),
                             list => [ sort(N("Unlisted - edit manually"), keys %adsl_data) ], sort => 0 } ];
                     },
                     post => sub {
-                        $adsl_type = 'pppoa' if member($ntf_name, qw(bewan speedtouch));
+                        $net->{adsl}{method} = 'pppoa' if member($ntf_name, qw(bewan speedtouch));
                         if ($adsl_provider ne N("Unlisted - edit manually")) {
                             $adsl_data = $adsl_data{$adsl_provider};
                             if ($adsl_provider ne $adsl_old_provider) {
-                                $netc->{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2 Encapsulation vpi vci provider_id);
-                                $adsl_type = $adsl_data->{method};
+                                $net->{adsl}{$_} = $adsl_data->{$_} foreach qw(Encapsulation vpi vci provider_id method);
+				$net->{resolv}{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2);
                             }
                         }
                         return 'adsl_protocol';
@@ -787,12 +702,10 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         # preselect right protocol for ethernet though connections:
                         if (!exists $adsl_descriptions{$ntf_name}) {
-                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                            $adsl_type ||= $ethntf->{BOOTPROTO} || "dhcp";
-                            #- FIXME: use static instead of manual as key in %adsl_types
-                            $adsl_type = "manual" if $adsl_type eq "static";
+                            $ethntf = $net->{ifcfg}{$ntf_name} ||= { DEVICE => $ntf_name };
+                            $net->{adsl}{method} ||= $ethntf->{BOOTPROTO} || "dhcp";
                             #- pppoa shouldn't be selected by default for ethernet devices, fallback on pppoe
-                            $adsl_type = "pppoe" if $adsl_type eq "pppoa";
+                            $net->{adsl}{method} = "pppoe" if $net->{adsl}{method} eq "pppoa";
                         }
                     },
                     name => N("Connect to the Internet") . "\n\n" .
@@ -800,38 +713,38 @@ Take a look at http://www.linmodems.org"),
 Some connections use PPTP, a few use DHCP.
 If you do not know, choose 'use PPPoE'"),
                     data =>  [
-                              { text => N("ADSL connection type:"), val => \$adsl_type, type => "list",
+                              { text => N("ADSL connection type:"), val => \$net->{adsl}{method}, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],
                                 format => sub { $adsl_types{$_[0]} },
                               },
                              ],
                     post => sub {
                         my $real_interface = $ntf_name;
-                        $netcnx->{type} = 'adsl';
+                        $net->{type} = 'adsl';
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
-                        if ($ntf_name eq "sagem"  && member($adsl_type, qw(manual dhcp))) {
+                        if ($ntf_name eq "sagem"  && member($net->{adsl}{method}, qw(static dhcp))) {
                             #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
                             #- it auto-detects dhcp/static modes thanks to encapsulation setting
-                            $ethntf = $intf->{sagem} ||= {};
+                            $ethntf = $net->{ifcfg}{sagem} ||= {};
                             $ethntf->{DEVICE} = "`/usr/sbin/fctStartAdsl -i`";
                             $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
-                        if ($ntf_name eq "speedtouch"  && member($adsl_type, qw(manual dhcp))) {
+                        if ($ntf_name eq "speedtouch"  && member($net->{adsl}{method}, qw(static dhcp))) {
                             #- use ATMARP with the atm0 interface
                             $real_interface = "atm0";
-                            $ethntf = $intf->{$real_interface} ||= {};
+                            $ethntf = $net->{ifcfg}{$real_interface} ||= {};
                             $ethntf->{DEVICE} = $real_interface;
                             $ethntf->{ATM_ADDR} = undef;
                             $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
                         #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface
-                        exists $intf->{$real_interface} and $delete_gateway_settings->($real_interface);
+                        exists $net->{ifcfg}{$real_interface} and $delete_gateway_settings->($real_interface);
                         # process static/dhcp ethernet devices:
-                        if (exists($intf->{$real_interface}) && member($adsl_type, qw(manual dhcp))) {
+                        if (exists($net->{ifcfg}{$real_interface}) && member($net->{adsl}{method}, qw(static dhcp))) {
                             $ethntf->{TYPE} = "ADSL";
-                            $auto_ip = $adsl_type eq 'dhcp';
+                            $auto_ip = $net->{adsl}{method} eq 'dhcp';
                             return 'lan_intf';
                         }
                         return 'adsl_account';
@@ -842,26 +755,26 @@ If you do not know, choose 'use PPPoE'"),
                    adsl_account =>
                    {
                     pre => sub {
-                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
-                        $netc->{NET_DEVICE} = member($adsl_type, 'pppoe', 'pptp') ? $ntf_name : 'ppp0';
-                        $netc->{NET_INTERFACE} = 'ppp0';
-                        ($adsl_vpi, $adsl_vci) = map { hex($_) } @$netc{'vpi', 'vci'};
+                        network::adsl::adsl_probe_info($net);
+                        member($net->{adsl}{method}, qw(pppoe pptp)) and $net->{adsl}{ethernet_device} = $ntf_name;
+                        $net->{net_interface} = 'ppp0';
+                        ($adsl_vpi, $adsl_vci) = (hex($net->{adsl}{vpi}), hex($net->{adsl}{vci}));
                     },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => sub {
                         [ 
-                         if_(0, { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} }),
-                         { label => N("First DNS Server (optional)"), val => \$netc->{dnsServer2} },
-                         { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
-                         { label => N("Account Login (user name)"), val => \$netcnx->{login} },
-                         { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
-                         if_($adsl_type ne "capi",
+                         if_(0, { label => N("Provider name (ex provider.net)"), val => \$net->{resolv}{DOMAINNAME2} }),
+                         { label => N("First DNS Server (optional)"), val => \$net->{resolv}{dnsServer2} },
+                         { label => N("Second DNS Server (optional)"), val => \$net->{resolv}{dnsServer3} },
+                         { label => N("Account Login (user name)"), val => \$net->{adsl}{login} },
+                         { label => N("Account Password"),  val => \$net->{adsl}{passwd}, hidden => 1 },
+                         if_($net->{adsl}{method} ne "capi",
                              { label => N("Virtual Path ID (VPI):"), val => \$adsl_vpi, advanced => 1 },
                              { label => N("Virtual Circuit ID (VCI):"), val => \$adsl_vci, advanced => 1 }
                             ),
                          if_($ntf_name eq "sagem",
-                             { label => N("Encapsulation:"), val => \$netc->{Encapsulation}, list => [ keys %encapsulations ],
+                             { label => N("Encapsulation:"), val => \$net->{adsl}{Encapsulation}, list => [ keys %encapsulations ],
                                format => sub { $encapsulations{$_[0]} }, advanced => 1,
                              },
                             ),
@@ -871,23 +784,16 @@ If you do not know, choose 'use PPPoE'"),
                         #- update ATM_ADDR for ATMARP connections
                         exists $ethntf->{ATM_ADDR} and $ethntf->{ATM_ADDR} = join('.', $adsl_vpi, $adsl_vci);
                         #- convert VPI/VCI back to hex
-                        @$netc{'vpi', 'vci'} = map { sprintf("%x", $_) } ($adsl_vpi, $adsl_vci);
+                        ($net->{adsl}{vpi}, $net->{adsl}{vci}) = map { sprintf("%x", $_) } ($adsl_vpi, $adsl_vci);
 
-                        $netc->{internet_cnx_choice} = 'adsl';
-                        network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $ntf_name, $adsl_type, $netcnx); #FIXME
-                        $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
-                        $handle_multiple_cnx->();
+			$net->{adsl}{device} =
+			  $net->{adsl}{method} eq 'pptp' ? 'pptp_modem' :
+			  $net->{adsl}{method} eq 'capi' ? 'capi_modem' :
+			  $ntf_name;
+                        network::adsl::adsl_conf_backend($in, $modules_conf, $net);
+                        "allow_user_ctl";
                     },
                    },
-
-
-                    adsl_unsupported_eci =>
-                    {
-                     name => N("The ECI Hi-Focus modem cannot be supported due to binary driver distribution problem.
-
-You can find a driver on http://eciadsl.flashtux.org/"),
-                     end => 1,
-                    },
 
 
                    lan =>
@@ -921,7 +827,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                         } elsif ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
                             return $ndiswrapper_next_step->();
                         }
-                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                        $ethntf = $net->{ifcfg}{$ntf_name} ||= { DEVICE => $ntf_name };
                         return $after_lan_intf_selection->();
                     },
                    },
@@ -951,8 +857,6 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    },
 
 
-                   # FIXME: is_install: no return for each card "last step" because of manual popping
-                   # better construct an hash of { current_netintf => next_step } which next_step = last_card ? next_eth_step : next_card ?
                    lan_intf =>
                    {
                     pre => sub  {
@@ -966,7 +870,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
-                        delete $ethntf->{TYPE} if $netcnx->{type} ne 'adsl' || !member($adsl_type, qw(manual dhcp));
+                        delete $ethntf->{TYPE} if $net->{type} ne 'adsl' || !member($net->{adsl}{method}, qw(static dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
                     },
                     name => sub { join('', 
@@ -989,7 +893,7 @@ notation (for example, 1.2.3.4).")),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
                           if_(!$is_wireless,
                               { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" }),
-                          if_($netcnx->{type} eq "lan",
+                          if_($net->{type} eq "lan",
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
                           { label => N("Metric"), val => \$ethntf->{METRIC}, advanced => 1 },
@@ -1005,7 +909,6 @@ notation (for example, 1.2.3.4).")),
                     },
                     complete => sub {
                         $ethntf->{BOOTPROTO} = $auto_ip ? "dhcp" : "static";
-                        $netc->{DHCP} = $auto_ip;
                         return 0 if $auto_ip;
                         if (!is_ip($ethntf->{IPADDR})) {
                             $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
@@ -1020,7 +923,7 @@ notation (for example, 1.2.3.4).")),
                           return 1, 0;
                         }
                         #- test if IP address is already used (do not test for sagem DSL devices since it may use many ifcfg files)
-                        if ($ntf_name ne "sagem" && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %$intf) {
+                        if ($ntf_name ne "sagem" && find { $_->{DEVICE} ne $ethntf->{DEVICE} && $_->{IPADDR} eq $ethntf->{IPADDR} } values %{$net->{ifcfg}}) {
                           $in->ask_warn(N("Error"), N("%s already in use\n", $ethntf->{IPADDR}));
                           return 1, 0;
                         }
@@ -1038,7 +941,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         #- FIXME: special case for sagem where $ethntf->{DEVICE} is the result of a command
                         #- we can't always use $ntf_name because of some USB DSL modems
-                        $netc->{$_} = $ntf_name eq "sagem" ? "sagem" : $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
+                        $net->{net_interface} = $ntf_name eq "sagem" ? "sagem" : $ethntf->{DEVICE};
                         if ($auto_ip) {
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
                             $delete_gateway_settings->($ntf_name);
@@ -1082,8 +985,6 @@ notation (for example, 1.2.3.4).")),
                    {
                     pre => sub {
                         require network::wireless;
-                        $ethntf->{wireless_eth} = 1;
-                        $netc->{wireless_eth} = 1;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
                         ($wireless_enc_key, my $restricted) = network::wireless::get_wep_key_from_iwconfig($ethntf->{WIRELESS_ENC_KEY});
@@ -1207,7 +1108,7 @@ set TxRate=0);
 		   dvb_adapter =>
 		   {
 		    pre => sub {
-			my $previous_ethntf = find { $is_dvb_interface->($_) } values %$intf;
+			my $previous_ethntf = find { $is_dvb_interface->($_) } values %{$net->{ifcfg}};
 			$dvb_ad = $previous_ethntf->{DVB_ADAPTER_ID};
 			$dvb_net = $previous_ethntf->{DVB_NETWORK_DEMUX};
 			$dvb_pid = $previous_ethntf->{DVB_NETWORK_PID};
@@ -1225,7 +1126,7 @@ set TxRate=0);
 			},
 		    post => sub {
 			$ntf_name = 'dvb' . $dvb_ad . '_' . $dvb_net;
-			$ethntf = $intf->{$ntf_name} ||= {};
+			$ethntf = $net->{ifcfg}{$ntf_name} ||= {};
 			$ethntf->{DEVICE} = $ntf_name;
 			$ethntf->{DVB_ADAPTER_ID} = qq("$dvb_ad");
 			$ethntf->{DVB_NETWORK_DEMUX} = qq("$dvb_net");
@@ -1238,13 +1139,13 @@ set TxRate=0);
                    {
                     pre => sub {
                         if ($ethntf->{IPADDR}) {
-                            $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
+                            $net->{resolv}{dnsServer} ||= dns($ethntf->{IPADDR});
                             $gateway_ex = gateway($ethntf->{IPADDR});
-                            # $netc->{GATEWAY} ||= gateway($ethntf->{IPADDR});
+                            # $net->{network}{GATEWAY} ||= gateway($ethntf->{IPADDR});
                             if ($ntf_name eq "sagem") {
                               my @sagem_ip = split(/\./, $ethntf->{IPADDR});
                               $sagem_ip[3] = 254;
-                              $netc->{GATEWAY} = join(".", @sagem_ip);
+                              $net->{network}{GATEWAY} = join(".", @sagem_ip);
                             }
                         }
                     },
@@ -1255,16 +1156,16 @@ You may also enter the IP address of the gateway if you have one.") .
  " " . # better looking text (to be merged into texts since some languages (eg: ja) doesn't need it
 N("Last but not least you can also type in your DNS server IP addresses."),
                     data => sub {
-                        [ { label => $auto_ip ? N("Host name (optional)") : N("Host name"), val => \$netc->{HOSTNAME} },
+                        [ { label => $auto_ip ? N("Host name (optional)") : N("Host name"), val => \$net->{network}{HOSTNAME} },
                           if_(!$auto_ip, 
-                              { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
-                              { label => N("DNS server 2"),  val => \$netc->{dnsServer2} },
-                              { label => N("DNS server 3"),  val => \$netc->{dnsServer3} },
-                              { label => N("Search domain"), val => \$netc->{DOMAINNAME}, 
+                              { label => N("DNS server 1"),  val => \$net->{resolv}{dnsServer} },
+                              { label => N("DNS server 2"),  val => \$net->{resolv}{dnsServer2} },
+                              { label => N("DNS server 3"),  val => \$net->{resolv}{dnsServer3} },
+                              { label => N("Search domain"), val => \$net->{resolv}{DOMAINNAME}, 
                                 help => N("By default search domain will be set from the fully-qualified host name") },
-                              { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
+                              { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$net->{network}{GATEWAY} },
                               if_(@all_cards > 1,
-                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ N_("None"), sort keys %all_eth_intf ],
+                                  { label => N("Gateway device"), val => \$net->{network}{GATEWAYDEV}, list => [ N_("None"), sort keys %all_eth_intf ],
                                     format => sub { $all_eth_intf{$_[0]} || translate($_[0]) } },
                                  ),
                              ),
@@ -1272,18 +1173,18 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     },
                     complete => sub {
                         foreach my $dns (qw(dnsServer dnsServer2 dnsServer3)) {
-                            if ($netc->{$dns} && !is_ip($netc->{$dns})) {
+                            if ($net->{resolv}{$dns} && !is_ip($net->{resolv}{$dns})) {
                                 $in->ask_warn(N("Error"), N("DNS server address should be in format 1.2.3.4"));
                                 return 1;
                             }
                         }
-                        if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
+                        if ($net->{network}{GATEWAY} && !is_ip($net->{network}{GATEWAY})) {
                             $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
                             return 1;
                         }
                     },
                     post => sub {
-                        $netc->{GATEWAYDEV} eq "None" and delete $netc->{GATEWAYDEV};
+                        $net->{network}{GATEWAYDEV} eq "None" and delete $net->{network}{GATEWAYDEV};
                         return "zeroconf";
                     }
                    },
@@ -1295,32 +1196,14 @@ N("Last but not least you can also type in your DNS server IP addresses."),
 This is the name your machine will use to advertise any of
 its shared resources that are not managed by the network.
 It is not necessary on most networks."),
-                    data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
+                    data => [ { label => N("Zeroconf Host name"), val => \$net->{zeroconf}{hostname} } ],
                     complete => sub {
-                        if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
+                        if ($net->{zeroconf}{hostname} =~ /\./) {
                             $in->ask_warn(N("Error"), N("Zeroconf host name must not contain a ."));
                             return 1;
                         }
                     },
-                    post => $handle_multiple_cnx,
-                   },
-
-
-                   multiple_internet_cnx =>
-                   {
-                    name => N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandriva Control Center"),
-                    data => sub {
-                        [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice},
-                            list => [ keys %{$netc->{internet_cnx}} ] } ];
-                    },
-                    post => $save_cnx,
-                   },
-
-
-                   apply_settings =>
-                   {
-                    name => N("Configuration is complete, do you want to apply settings?"),
-                    type => "yesorno",
+                    next => "allow_user_ctl",
                    },
 
 
@@ -1328,13 +1211,10 @@ It is not necessary on most networks."),
                    {
                     name => N("Do you want to allow users to start the connection?"),
                     type => "yesorno",
-                    default => sub { bool2yesno(text2bool($intf->{$netc->{NET_INTERFACE}}{USERCTL})) },
+                    default => sub { bool2yesno(text2bool($net->{ifcfg}{$net->{net_interface}}{USERCTL})) },
                     post => sub {
                         my ($res) = @_;
-                        $res = bool2yesno($res);
-                        $intf->{$netc->{NET_INTERFACE}}{USERCTL} = $res;
-                        my $ifcfg_file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$netc->{NET_INTERFACE}";
-                        -f $ifcfg_file and substInFile { s/^USERCTL.*\n//; $_ .= qq(USERCTL=$res\n) if eof } $ifcfg_file;
+                        $net->{ifcfg}{$net->{net_interface}}{USERCTL} = bool2yesno($res);
                         return $goto_start_on_boot_ifneeded->();
                     },
                    },
@@ -1342,20 +1222,12 @@ It is not necessary on most networks."),
 
                    network_on_boot =>
                    {
-                    pre => sub {
-                        # condition is :
-                        member($netc->{internet_cnx_choice}, ('adsl', 'isdn')); # and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
-                    },
                     name => N("Do you want to start the connection at boot?"),
                     type => "yesorno",
-                    default => sub { ($type eq 'modem' ? 'no' : 'yes') },
+                    default => sub { ($net->{type} eq 'modem' ? 'no' : 'yes') },
                     post => sub {
                         my ($res) = @_;
-                        $netc->{at_boot} = $res;
-                        $res = bool2yesno($res);
-                        $ethntf->{ONBOOT} = $res if $netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp));
-                        my $ifcfg_file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$netc->{NET_INTERFACE}";
-                        -f $ifcfg_file and substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=$res\n) if eof } $ifcfg_file;
+			$net->{ifcfg}{$net->{net_interface}} = bool2yesno($res);
                         return $after_start_on_boot_step->();
                     },
                    },
@@ -1364,7 +1236,7 @@ It is not necessary on most networks."),
                    isdn_dial_on_boot =>
                    {
                     pre => sub {
-                        $intf->{ippp0} ||= { DEVICE => "ippp0" }; # we want the ifcfg-ippp0 file to be written
+                        $net->{ifcfg}{ippp0} ||= { DEVICE => "ippp0" }; # we want the ifcfg-ippp0 file to be written
                         @isdn_dial_methods = ({ name => N("Automatically at boot"),
                                                 ONBOOT => 1, DIAL_ON_IFUP => 1 },
                                               { name => N("By using Net Applet in the system tray"),
@@ -1372,8 +1244,8 @@ It is not necessary on most networks."),
                                               { name => N("Manually (the interface would still be activated at boot)"),
                                                ONBOOT => 1, DIAL_ON_IFUP => 0 });
                         my $method =  find {
-                            $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) &&
-                              $_->{DIAL_ON_IFUP} eq text2bool($intf->{ippp0}{DIAL_ON_IFUP});
+                            $_->{ONBOOT} eq text2bool($net->{ifcfg}{ippp0}{ONBOOT}) &&
+                              $_->{DIAL_ON_IFUP} eq text2bool($net->{ifcfg}{ippp0}{DIAL_ON_IFUP});
                         } @isdn_dial_methods;
                         #- use net_applet by default
                         $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
@@ -1384,28 +1256,10 @@ It is not necessary on most networks."),
                     },
                     post => sub {
                         my $method = find { $_->{name} eq $isdn->{dial_method} } @isdn_dial_methods;
-                        $intf->{ippp0}{$_} = bool2yesno($method->{$_}) foreach qw(ONBOOT DIAL_ON_IFUP);
+                        $net->{ifcfg}{ippp0}{$_} = bool2yesno($method->{$_}) foreach qw(ONBOOT DIAL_ON_IFUP);
                         return $after_start_on_boot_step->();
                     },
                    },
-
-
-                   restart =>
-                   {
-                    name => N("The network needs to be restarted. Do you want to restart it?"),
-                    type => "yesorno",
-                    post => sub {
-                        my ($a) = @_;
-                        network::ethernet::write_ether_conf($in, $modules_conf, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
-                        if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
-                            $success = 0;
-                            $in->ask_okcancel(N("Network Configuration"),
-                                              N("A problem occurred while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
-                        }
-                        return $offer_to_connect->();
-                    },
-                   },
-
 
                    ask_connect_now =>
                    {
@@ -1413,20 +1267,20 @@ It is not necessary on most networks."),
                     type => "yesorno",
                     post => sub {
                         my ($a) = @_;
-                        my $type = $netc->{internet_cnx_choice};
+                        my $type = $net->{type};
                         $up = 1;
                         if ($a) {
                             # local $::isWizard = 0;
                             my $_w = $in->wait_message('', N("Testing your connection..."), 1);
-                            disconnect_backend($netc);
+                            network::tools::disconnect_backend($net);
                             sleep 1;
-                            connect_backend($netc);
+                            network::tools::connect_backend($net);
                             my $s = 30;
                             $type =~ /modem/ and $s = 50;
                             $type =~ /adsl/ and $s = 35;
                             $type =~ /isdn/ and $s = 20;
                             sleep $s;
-                            $up = connected();
+                            $up = network::tools::connected();
                         }
                         $success = $up;
                         return $a ? "disconnect" : "end";
@@ -1445,7 +1299,7 @@ Try to reconfigure your connection.");
                     no_back => 1,
                     end => 1,
                     post => sub {
-                        $::isInstall and disconnect_backend($netc);
+                        $::isInstall and network::tools::disconnect_backend($net);
                         return "end";
                     },
                    },
@@ -1466,42 +1320,31 @@ Test your connection via net_monitor or mcc. If your connection does not work, y
                   },
         };
 
-      my $use_wizard = 1;
-      if ($::isInstall) {
-          if ($first_time && $in->{method} =~ /^(ftp|http|nfs)$/) {
-              local $::isWizard;
-              !$::expert && !$o_noauto || $in->ask_okcancel(N("Network Configuration"),
-                                                            N("Because you are doing a network installation, your network is already configured.
+      #- keeping the translations in case someone want to restore these texts
+      if_(0,
+	  # keep b/c of translations in case they can be reused somewhere else:
+	  N("(detected on port %s)", 'toto'),
+	  #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
+	  N("(detected %s)", 'toto'), N("(detected)"),
+	  N("Network Configuration"),
+	  N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
-"), 1)
-                and do {
-                    $netcnx->{type} = 'lan';
-                    $netc->{$_} = 'eth0' foreach qw(NET_DEVICE NET_INTERFACE);
-                    $use_wizard = 0;
-                };
-        }
-      }
+"),
+	  N("The network needs to be restarted. Do you want to restart it?"),
+	  N("A problem occurred while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), #- nice one ...
+	  N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.", 'a', 'b'),
+	  N("Configuration is complete, do you want to apply settings?"),
+	  N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n"),
+	  N("Internet connection"),
+	  );
 
-      if ($use_wizard) {
-          require wizards;
-          $wiz->{var} = {
-                         netc  => $netc,
-                         mouse => $mouse,
-                         intf  => $intf,
-                        };
-          wizards->new->process($wiz, $in);
-      }
-
-    # install needed packages:
-    $network_configured or network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
-
-    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-    $netcnx->{type} =~ /adsl/ or run_program::rooted($::prefix, "/chkconfig --del adsl 2> /dev/null");
+      require wizards;
+      wizards->new->process($wiz, $in);
 }
 
-sub main {
-    my ($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
-    eval { real_main($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
+sub safe_main {
+    my ($net, $in, $modules_conf) = @_;
+    eval { real_main($net, $in, $modules_conf) };
     my $err = $@;
     if ($err) { # && $in->isa('interactive::gtk')
 	$err =~ /wizcancel/ and $in->exit(0);
@@ -1513,23 +1356,17 @@ sub main {
     }
 }
 
-sub read_net_conf {
-    my ($netcnx, $netc, $intf) = @_;
-    network::network::read_all_conf($::prefix, $netc, $intf, $netcnx);
-}
-
 sub start_internet {
     my ($o) = @_;
-    init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
+    #- FIXME, this has nothing to do there
     $::isStandalone or modules::load_category($o->{modules_conf}, 'network/*');
-    connect_backend($o->{netc});
+    network::tools::connect_backend($o->{net});
 }
 
 sub stop_internet {
     my ($o) = @_;
-    init_globals($o);
-    disconnect_backend($o->{netc});
+    network::tools::disconnect_backend($o->{net});
 }
 
 1;
@@ -1540,14 +1377,11 @@ sub stop_internet {
 
 use lib qw(/usr/lib/libDrakX);
 use network::netconnect;
+use modules;
 use Data::Dumper;
 
-use class_discard;
-
-local $in = class_discard->new;
-
-network::netconnect::init_globals($in);
 my %i;
+my $modules_conf = modules::any_conf->read;
 network::netconnect::detect($modules_conf, \%i);
 print Dumper(\%i),"\n";
 
