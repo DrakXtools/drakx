@@ -2,7 +2,7 @@ package install2; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($o $version);
+use vars qw($o);
 
 #-######################################################################################
 #- misc imports

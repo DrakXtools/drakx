@@ -228,10 +228,6 @@ sub is_active {
     member($dev, active_mds());
 }
 
-sub inactivate_all() { 
-    run_program::run('mdadm', '--stop', devices::make($_)) foreach active_mds();
-}
-
 sub prepare_prefixed {
     my ($raids) = @_;
 

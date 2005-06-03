@@ -8,7 +8,7 @@ use common;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isHiddenMacPart isFat_or_NTFS
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isFat_or_NTFS
    maybeFormatted set_isFormatted
 );
 
@@ -321,7 +321,6 @@ sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} 
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs') }
 sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
 sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
-sub isHiddenMacPart { defined $_[0]{isMap} }
 
 sub isTrueFS { isTrueLocalFS($_[0]) || member($_[0]{fs_type}, qw(nfs)) }
 sub isTrueLocalFS { member($_[0]{fs_type}, true_local_fs_types()) }
