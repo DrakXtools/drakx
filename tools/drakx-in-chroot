@@ -103,7 +103,7 @@ sub umount_all() {
 	my $dir = "$SLASH_LOCATION$_";
 	rmdir $dir;
 	if (-d $dir) {
-	    if (m!/proc/bus/usb!) {
+	    if (m!/proc/bus/usb! || begins_with($_, $prefix_ROOTED)) {
 		system_verbose "$sudo umount $dir 2>/dev/null";
 		next;
 	    }
