@@ -41,7 +41,7 @@ if (my @devices = modules::probe_category('multimedia/sound')) {
 	   $driver = $modules_conf->get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
 	   $_->{current_driver} = $driver if $driver;
 	   $_->{sound_slot_index} = $::i;
-	   harddrake::sound::config($in, $modules_conf, $_, $::i);
+	   harddrake::sound::config($in, $modules_conf, $_);
 	 } @devices;
 } else {
     $in->ask_warn(N("No Sound Card detected!"), 
