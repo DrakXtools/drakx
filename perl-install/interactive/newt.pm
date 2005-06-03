@@ -315,7 +315,7 @@ sub ask_fromW_real {
     my ($ok, $cancel) = ($common->{ok}, $common->{cancel});
     my ($need_to_die);
     if (!defined $cancel && !defined $ok) {
-        $cancel = $::isWizard && !$::Wizard_no_previous ? N("Previous") : N("Cancel") ;
+        $cancel = $::isWizard && !$::Wizard_no_previous ? N("Previous") : N("Cancel");
         $need_to_die = 1 if !($::isWizard && !$::Wizard_no_previous);
     }
     $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");

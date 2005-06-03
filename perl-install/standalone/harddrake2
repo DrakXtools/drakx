@@ -579,7 +579,7 @@ $password_w->set_visibility(0); #set_invisible_char('*');
 }
 
 
-sub simple_read_rpmsrate {
+sub simple_read_rpmsrate() {
     map { split(' ', $_) } map {
         if (my ($p, $packages) = /[^!]HW"(.*)"(.*)/) {
             if_(detect_devices::matching_desc__regexp($p), $packages);
