@@ -114,7 +114,6 @@ sub selectedSize {
     }
     $size;
 }
-sub correctedSelectedSize { correctSize(selectedSize($_[0]) / sqr(1024)) }
 
 sub size2time {
     my ($x, $max) = @_;
@@ -160,11 +159,6 @@ sub packageByName {
     }
     $best or log::l("unknown package `$name'");
     $best;
-}
-sub packageById {
-    my ($packages, $id) = @_;
-    my $pkg = $packages->{depslist}[$id]; #- do not log as id unsupported are still in depslist.
-    $pkg->is_arch_compat && $pkg;
 }
 
 sub analyse_kernel_name {
@@ -325,10 +319,6 @@ sub unselectPackage($$;$) {
 	log::l("   done");
     }
     1;
-}
-sub setPackageSelection($$$) {
-    my ($packages, $pkg, $value) = @_;
-    $value ? selectPackage($packages, $pkg) : unselectPackage($packages, $pkg);
 }
 
 sub unselectAllPackages($) {
