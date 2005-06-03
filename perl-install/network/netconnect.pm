@@ -1112,7 +1112,7 @@ set TxRate=0);
 			$dvb_ad = $previous_ethntf->{DVB_ADAPTER_ID};
 			$dvb_net = $previous_ethntf->{DVB_NETWORK_DEMUX};
 			$dvb_pid = $previous_ethntf->{DVB_NETWORK_PID};
-			if (my $device = find { sysopen(undef, $_, 2 | c::O_NONBLOCK()) } glob("/dev/dvb/adapter*/net*")) {
+			if (my $device = find { sysopen(undef, $_, c::O_RDWR | c::O_NONBLOCK()) } glob("/dev/dvb/adapter*/net*")) {
 			    ($dvb_ad, $dvb_net) = $device =~ m,/dev/dvb/adapter(\d+)/net(\d+),;
 			}
 		    },
