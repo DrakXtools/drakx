@@ -639,10 +639,6 @@ sub configureNetwork {
     my ($o) = @_;
     require network::network;
     network::network::configure_network($o->{net}, $o, $o->{modules_conf});
-    if ($o->{method} =~ /ftp|http|nfs/) {
-	$o->{net}{type} = 'lan';
-    }
-
     configure_firewall($o) if !$o->{isUpgrade};
 }
 
