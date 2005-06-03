@@ -55,7 +55,6 @@ sub find_matching_devices {
     foreach my $interface (all($net_path)) {
         my $dev_path = "$net_path/$interface/device";
         -l $dev_path or next;
-        my $is_usb = -f "$dev_path/bInterfaceNumber";
         my $map = detect_devices::get_sysfs_device_id_map($dev_path);
         if (every { hex(chomp_(cat_("$dev_path/" . $map->{$_}))) eq $device->{$_} } keys %$map) {
             my $driver = readlink("$net_path/$interface/driver");
