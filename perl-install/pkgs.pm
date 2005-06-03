@@ -198,19 +198,19 @@ sub bestKernelPackage {
 	#- favour versions corresponding to current BOOT version
 	@kernels = @l;
     }
-    my @prefered_exts = 
+    my @preferred_exts =
       is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
       !detect_devices::has_cpu_flag('pae') ? ('-i686-up-4GB', '-i586-up-1GB') :
-      detect_devices::hasSMP() ? '-smp' : 
+      detect_devices::hasSMP() ? '-smp' :
       '';
-    foreach my $prefered_ext (@prefered_exts, '') {
+    foreach my $prefered_ext (@preferred_exts, '') {
 	if (my @l = grep { $_->{ext} eq $prefered_ext } @kernels) {
 	    @kernels = @l;
 	}
     }
-    
-    log::l("bestKernelPackage (" . join(':', @prefered_exts) . "): " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
+
+    log::l("bestKernelPackage (" . join(':', @preferred_exts) . "): " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
     $preferred{'kernel-source-' . $kernels[0]{version}} = undef;
     $kernels[0]{pkg};
 }
