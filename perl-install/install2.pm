@@ -494,6 +494,8 @@ sub main {
 	    log::l("found network config file $file");
 	    add2hash($o->{net}{resolv} ||= {}, network::network::read_resolv_conf($file));
 	}
+	$o->{net}{type} = 'lan';
+	$o->{net}{net_interface}  = first(values %{$o->{net}{ifcfg}});
     }
 
     #- done after module dependencies are loaded for "vfat depends on fat"
