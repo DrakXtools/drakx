@@ -28,9 +28,10 @@ my $tmdns_file = "$::prefix/etc/tmdns.conf";
 #-   type
 #-   net_interface
 #-   PROFILE: selected netprofile
-#-   network (/etc/sysconfig/network) : GATEWAY GATEWAYDEV HOSTNAME NETWORKING NISDOMAIN
+#-   network (/etc/sysconfig/network) : NETWORKING FORWARD_IPV4 NETWORKING_IPV6 HOSTNAME GATEWAY GATEWAYDEV NISDOMAIN
 #-     NETWORKING : networking flag : string : "yes" by default
 #-     FORWARD_IPV4 : forward IP flag : string : "false" by default
+#-     NETWORKING_IPV6 : use IPv6, "yes" or "no"
 #-     HOSTNAME : hostname : string : "localhost.localdomain" by default
 #-     GATEWAY : gateway
 #-     GATEWAYDEV : gateway interface
@@ -97,7 +98,7 @@ sub write_network_conf {
     }
     $net->{network}{NETWORKING} = 'yes';
 
-    setVarsInSh($network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6));
 }
 
 sub write_zeroconf {
