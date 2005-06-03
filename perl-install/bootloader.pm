@@ -2,7 +2,6 @@ package bootloader; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(%vga_modes);
 
 #-######################################################################################
 #- misc imports
@@ -535,12 +534,6 @@ sub pack_append {
     } reverse @$dict) ];
 
     join(' ', @$simple, map { "$_->[0]=$_->[1]" } @$dict);
-}
-
-sub normalize_append {
-    my ($s) = @_;
-    my ($simple, $dict) = unpack_append($s);
-    pack_append($simple, $dict);
 }
 
 sub modify_append {
