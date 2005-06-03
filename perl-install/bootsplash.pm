@@ -94,9 +94,7 @@ sub set_logo_console {
 
 sub create_path {
     my ($file) = @_;
-    require File::Basename;
-    my $dir = File::Basename::dirname($file);
-    -d $dir or mkdir_p($dir);
+    mkdir_p(dirname($file));
 }
 
 sub theme_set_image_for_resolution {
