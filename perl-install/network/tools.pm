@@ -48,13 +48,13 @@ sub passwd_by_login {
 }
 
 sub connect_backend {
-    my ($netc) = @_;
-    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifup", $netc->{NET_INTERFACE});
+    my ($net) = @_;
+    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifup", $net->{net_interface});
 }
 
 sub disconnect_backend {
-    my ($netc) = @_;
-    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifdown", $netc->{NET_INTERFACE});
+    my ($net) = @_;
+    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifdown", $net->{net_interface});
 }
 
 sub bg_command_as_root {
