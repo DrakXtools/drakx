@@ -118,6 +118,7 @@ sub look_for_ISO_images() {
     $iso_dir =~ s!^/sysroot!!; $iso_dir =~ s![^/]*\.iso$!!;
 
     foreach my $iso_file (glob("$iso_dir/*.iso")) {
+	#- FIXME: I sux, it isn't needed to use a loop device for that, just read in the file
 	my $iso_dev = devices::set_loop($iso_file) or return;
 	if (sysopen($F, $iso_dev, 0)) {
 	    my $iso_ids = $get_iso_ids->($F);
@@ -820,7 +821,8 @@ sub default_packages {
     my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
     if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/
           || $dmi_Base_Board->{Manufacturer} =~ /^ACER/ && $dmi_Base_Board->{'Product Name'} =~ /TravelMate 610/) {
-        modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
+	#- FIXME : append correct options (wireless, ...)
+	modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 
     push @l, "grub" if isLoopback(fs::get::root($o->{fstab}));
@@ -1369,7 +1371,7 @@ sub generate_automatic_stage1_params {
 	if ($ENV{PROXY}) {
 	    push @ks, proxy_host => $ENV{PROXY}, proxy_port => $ENV{PROXYPORT};
 	}
-	my ($intf) = first(values %{$o->{net}{ifcfg}});
+	my $intf = first(values %{$o->{net}{ifcfg}});
 	push @ks, interface => $intf->{DEVICE};
 	if ($intf->{BOOTPROTO} eq 'dhcp') {
 	    push @ks, network => 'dhcp';
