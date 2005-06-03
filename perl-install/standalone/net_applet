@@ -81,7 +81,7 @@ my %actions = (
                },
                'chooseProfile' => {
                    name => N("Profiles"),
-                   choices => sub { network::network::netprofile_list()) },
+                   choices => sub { network::network::netprofile_list() },
                    choice_selected => sub { $_[0] eq $netc->{PROFILE} },
                    launch => sub {
                        $netc->{PROFILE} = $_[0];
