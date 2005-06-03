@@ -2,11 +2,11 @@ package bootsplash;
 
 use common;
 use Xconfig::resolution_and_depth;
-use vars qw(@ISA %EXPORT_TAGS);
 
-@ISA = qw(Exporter);
-%EXPORT_TAGS = (drawing => [qw(rectangle2xywh xywh2rectangle distance farthest nearest)]);
-@EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
+use Exporter;
+our @ISA = qw(Exporter);
+our %EXPORT_TAGS = (drawing => [qw(rectangle2xywh xywh2rectangle distance farthest nearest)]);
+our @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 my $themes_dir = "$::prefix/usr/share/bootsplash/themes";
 my $themes_config_dir = "$::prefix/etc/bootsplash/themes";
@@ -16,7 +16,7 @@ my $default_theme = 'Mandrivalinux';
 our $default_thumbnail = '/usr/share/libDrakX/pixmaps/nosplash_thumb.png';
 our @resolutions = uniq(map { "$_->{X}x$_->{Y}" } Xconfig::resolution_and_depth::bios_vga_modes());
 
-sub get_framebuffer_resolution {
+sub get_framebuffer_resolution() {
     require bootloader;
     require fsedit;
     my $bootloader = bootloader::read(fsedit::get_hds());
@@ -163,7 +163,7 @@ sub rectangle2xywh {
 }
 
 sub xywh2rectangle {
-    my ($x, $y, $w, $h) = @_;
+    my ($x, $y, $w, $_h) = @_;
     [ { X => $x, Y => $y }, { X => $x+$w, Y => $y+$w } ];
 }
 
@@ -174,7 +174,6 @@ sub distance {
 
 sub farthest {
     my ($point, @others) = @_;
-    my $i = 0;
     my $dist = 0;
     my $farthest;
     foreach (@others) {
@@ -189,7 +188,6 @@ sub farthest {
 
 sub nearest {
     my ($point, @others) = @_;
-    my $i = 0;
     my $dist;
     my $nearest;
     foreach (@others) {
