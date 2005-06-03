@@ -435,23 +435,6 @@ sub pkg_install {
     }
 }
 
-sub pkg_install_if_requires_satisfied {
-    my ($o, @l) = @_;
-    require pkgs;
-    $o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
-    foreach (@l) {
-	my %newSelection;
-	my $pkg = pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found";
-	pkgs::selectPackage($o->{packages}, $pkg, 0, \%newSelection);
-	if (scalar(keys %newSelection) == 1) {
-	    pkgs::selectPackage($o->{packages}, $pkg);
-	} else {
-	    log::l("pkg_install_if_requires_satisfied: not selecting $_ because of ", join(", ", keys %newSelection));
-	}
-    }
-    $o->installPackages;
-}
-
 sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
