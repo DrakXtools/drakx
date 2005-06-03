@@ -437,24 +437,6 @@ sub du {
     print &$f($_) >> 1, "\t$_\n" foreach @_ ? @_ : glob_("*");
 }
 
-sub  install_cpio($$;@) {
-    my ($dir, $name, @more) = @_; 
-
-    return "$dir/$name" if -e "$dir/$name";
-
-    my $cpio = "$dir.cpio.bz2";
-    -e $cpio or return;
-
-    eval { rm("-r", $dir) };
-    mkdir $dir, 0755;
-    require run_program;
-    
-    my $more = join " ", map { $_ && "$_ $_/*" } @more;
-    run_program::run("cd $dir ; $ENV{LD_LOADER} bzip2 -cd $cpio | $ENV{LD_LOADER} cpio -id $name $name/* $more");
-
-    "$dir/$name";
-}
-
 sub bug {
     my ($h) = getopts(\@_, "h");
     $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
