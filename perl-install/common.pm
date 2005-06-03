@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev untranslate);
+@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -72,13 +72,6 @@ sub translate {
     #- translation with context, kde-like 
     $s =~ s/^_:.*\n//;
     $s;
-}
-
-
-sub untranslate {
-    my $s = shift || return;
-    foreach (@_) { translate($_) eq $s and return $_ }
-    die "untranslate failed";
 }
 
 #- This is needed because text printed by Gtk2 will always be encoded
