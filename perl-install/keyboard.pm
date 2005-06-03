@@ -630,6 +630,17 @@ sub write {
     }
 }
 
+sub configure_xorg {
+    my ($keyboard) = @_;
+
+    require Xconfig::default;
+    my $xfree_conf = Xconfig::xfree->read;
+    if (!is_empty_array_ref($xfree_conf)) {
+	Xconfig::default::config_keyboard($xfree_conf, $keyboard);
+	$xfree_conf->write;
+    }
+}
+
 sub read() {
     my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return;
     if (!$keyboard{KEYBOARD}) {

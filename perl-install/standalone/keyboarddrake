@@ -48,14 +48,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 }
 
 keyboard::setxkbmap($keyboard);
-eval {
-    my $xfree_conf = Xconfig::xfree->read;
-    if (!is_empty_array_ref($xfree_conf)) {
-	my $xkb = keyboard::keyboard2full_xkb($keyboard);
-	$xfree_conf->set_keyboard($xkb);
-	$xfree_conf->write;
-    }
-};
+keyboard::configure_xorg($keyboard);
 
 keyboard::write($keyboard);
 system('/etc/init.d/keytable', 'restart');
