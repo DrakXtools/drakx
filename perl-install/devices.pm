@@ -8,31 +8,6 @@ use run_program;
 use log;
 use c;
 
-sub size {
-    my ($dev) = @_;
-    sysopen(my $F, $dev, 0) or log::l("open $dev: $!"), return 0;
-
-    my $valid_offset = sub { sysseek($F, $_[0], 0) && sysread($F, my $_a, 1) };
-
-    #- first try getting the size nicely
-    if (my $size = c::total_sectors(fileno $F)) {
-	return $size * $common::SECTORSIZE;
-    }
-
-    #- sad it did not work, well searching the size using the dichotomy algorithm!
-    my $low = 0;
-    my ($high, $mid);
-
-    #- first find n where 2^n < size <= 2^n+1
-    for ($high = 1; $high > 0 && $valid_offset->($high); $high *= 2) { $low = $high }
-
-    while ($low < $high - 1) {
-	$mid = int(($low + $high) / 2);
-	$valid_offset->($mid) ? $low : $high = $mid;
-    }
-    $low + 1;
-}
-
 sub del_loop {
     my ($dev) = @_;
     run_program::run("losetup", "-d", $dev);
@@ -240,25 +215,6 @@ sub read_proc_partitions_raw() {
 	@l{qw(major minor size dev)} = split; 
 	\%l;
     } @all;
-}
-
-sub from_devfs {
-    my ($dev) = @_;
-    my %from_devfs = reverse %to_devfs;
-    if (my $r = $from_devfs{$dev}) { 
-	return $r;
-    } elsif ($dev =~ /(.*?)(\d+)$/) {
-	my %from_devfs_prefix = reverse %to_devfs_prefix;
-	my $r = $from_devfs_prefix{$1};
-	return "$r$2" if $r;
-    }
-    $dev = "/dev/" . $dev;
-    if (-e $dev) {
-        my ($major, $minor) = unmakedev((stat($dev))[6]);
-        my $r = find { $_->{major} == $major && $_->{minor} == $minor } read_proc_partitions_raw();
-        $r and return $r->{dev};
-    }
-    undef;
 }
 
 sub simple_partition_scan {

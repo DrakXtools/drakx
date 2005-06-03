@@ -1105,10 +1105,6 @@ sub write_partitions {
     1;
 }
 
-sub unmount {
-    my ($_hd, $part) = @_;
-    fs::umount_part($part);
-}
 sub format_ {
     my ($in, $hd, $part, $all_hds) = @_;
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
