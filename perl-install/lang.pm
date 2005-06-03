@@ -1276,7 +1276,7 @@ sub load_mo {
 }
 
 
-#- used in Makefile during "make get_needed_files"
+#- used in share/list.xml during "make get_needed_files"
 sub console_font_files() {
     map { -e $_ ? $_ : "$_.gz" }
       (map { "/usr/lib/kbd/consolefonts/$_.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
