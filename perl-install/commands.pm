@@ -149,13 +149,6 @@ sub swapoff {
     fs::swapoff($_[0]);
 }
 
-sub uncpio {
-    @_ and die "uncpio reads from stdin\n";
-
-#    cpioInstallArchive(gzdopen(0, "r"), NULL, 0, NULL, NULL, &fail);
-}
-
-
 sub rights {
     my $r = '-' x 9;
     my @rights = (qw(x w r x w r x w r), ['t', 0], ['s', 3], ['s', 6]);
