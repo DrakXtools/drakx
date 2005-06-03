@@ -151,7 +151,7 @@ Please fill in its name, its driver and its port.", $model, $vendor);
                                  },
                                  post => sub {
                                      $port = '/dev/' . $port if $port !~ m!/dev/!;
-                                     return 'end',
+                                     return 'end';
                                  },
                                 },
                       end => {
@@ -196,9 +196,9 @@ sub load_access_conf() {
 # misc gui data
 
 sub edit_row {
-    my ($model, $iter) = @_;
+    my ($model, $o_iter) = @_;
     # create new item if needed (that is when adding a new one) at end of list
-    $iter ||= $model->append;
+    my $iter = $o_iter || $model->append;
     my $dialog = Gtk2::Dialog->new;
     $dialog->set_transient_for($w->{real_window});
     $dialog->set_modal(1);
