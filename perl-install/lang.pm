@@ -760,9 +760,6 @@ my %charset2kde_charset = (
     tis620 => 'tis620-0',
 );
 
-my @during_install__lang_having_their_LC_CTYPE = qw(ja ko ta);
-
-
 #- -------------------
 
 sub l2console_font {
