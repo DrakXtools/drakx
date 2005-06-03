@@ -60,11 +60,6 @@ $::Wizard_title = N("PXE Server Configuration");
 
 sub sys { system(@_) == 0 or log::l("[drakpxe] Warning, sys failed for $_[0]") }
 
-sub outpend { 
-    log::explanations("modified file $_[0]");
-    my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
-}
-
 sub start_daemons () {
     log::explanations("Starting daemons");
 
