@@ -5,11 +5,10 @@ use MDK::Common::System;
 use diagnostics;
 use strict;
 use run_program;
-use vars qw(@ISA @EXPORT $SECTORSIZE);
 
-@ISA = qw(Exporter);
-# no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
+use Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
