@@ -460,7 +460,6 @@ sub part_possible_actions {
     my %macros = (
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
-        isPrimary => 'isPrimary($part, $hd)',
 	LVM_resizable => '$part->{fs_type} eq "reiserfs" || (isMounted ? $part->{fs_type} eq "xfs" : $part->{fs_type} eq "ext3")',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );

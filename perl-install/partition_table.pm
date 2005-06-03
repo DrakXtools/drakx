@@ -34,12 +34,6 @@ sub description {
 	       $hd->{info}, $hd->{mntpoint}, $hd->{fs_type});
 }
 
-sub isPrimary {
-    my ($part, $hd) = @_;
-    foreach (@{$hd->{primary}{raw}}) { $part eq $_ and return 1 }
-    0;
-}
-
 sub adjustStartAndEnd {
     my ($hd, $part) = @_;
 
