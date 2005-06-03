@@ -1346,6 +1346,20 @@ sub loadO {
 	$o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
     }
 
+    #- backward compatibility for network fields
+    exists $o->{intf} and $o->{net}{ifcfg} = delete $o->{intf};
+    exists $o->{netcnx}{type} and $o->{net}{type} = delete $o->{netcnx}{type};
+    exists $o->{netc}{NET_INTERFACE} and $o->{net}{net_interface} = delete $o->{netc}{NET_INTERFACE};
+    my %netc_translation = (
+			    resolv => [ qw(dnsServer dnsServer2 dnsServer3 DOMAINNAME DOMAINNAME2 DOMAINNAME3) ],
+			    network => [ qw(NETWORKING FORWARD_IPV4 NETWORKING_IPV6 HOSTNAME GATEWAY GATEWAYDEV NISDOMAIN) ],
+			    auth => [ qw(LDAPDOMAIN WINDOMAIN) ],
+			   );
+    foreach my $dest (keys %netc_translation) {
+	exists $o->{netc}{$_} and $o->{net}{$dest}{$_} = delete $o->{netc}{$_} foreach @{$netc_translation{$dest}};
+    }
+    delete @$o{qw(netc netcnx)};
+
     $o;
 }
 
