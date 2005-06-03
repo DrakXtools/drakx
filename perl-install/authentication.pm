@@ -194,9 +194,14 @@ sub ask_root_password_and_authentication {
 
 
 sub get() {
-    my $system_auth = cat_("/etc/pam.d/system-auth");
+    my @pam_kinds = get_pam_authentication_kinds();
+    my @kinds = grep { intersection(\@pam_kinds, $kind2pam_kind{$_}) } keys %kind2pam_kind;
 
-    { md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/ };
+    my $system_auth = cat_("/etc/pam.d/system-auth");
+    { 
+	md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/, 
+	if_(@kinds, $kinds[0] => ''),
+    };
 }
 
 sub set {
@@ -383,6 +388,11 @@ sub get_raw_pam_authentication() {
     \%before_deny;
 }
 
+sub get_pam_authentication_kinds() {
+    my $before_deny = get_raw_pam_authentication();
+    map { s/pam_//; $_ } keys %{$before_deny->{auth}};
+}
+
 sub set_pam_authentication {
     my (@authentication_kinds) = @_;
     
@@ -445,11 +455,6 @@ sub set_pam_authentication {
 	    }
 	}
     } "$::prefix/etc/pam.d/system-auth";
-}
-
-sub get_pam_authentication_kinds() {
-    my $before_deny = get_raw_pam_authentication();
-    map { s/pam_//; $_ } keys %{$before_deny->{auth}};
 }
 
 sub set_nsswitch_priority {

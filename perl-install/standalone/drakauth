@@ -13,8 +13,7 @@ read_all_conf('', my $netc = {}, my $_intf = {});
 
 my $in = 'interactive'->vnew('su');
 
-
-my $authentication = {}; # TODO
+my $authentication = authentication::get();
 
 my $kind = authentication::to_kind($authentication);
 my $meta_class = { getVarsFromSh("/etc/sysconfig/system") }->{META_CLASS};
