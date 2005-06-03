@@ -814,9 +814,11 @@ sub tryWrite($) {
 }
 
 sub syslog() {
-    -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    my $LD_LOADER = $ENV{LD_LOADER} || "";
-    `$LD_LOADER /bin/dmesg`;
+    if (-r "/tmp/syslog") {
+	map { /<\d+>(.*)/ } cat_("/tmp/syslog");
+    } else {
+	`/bin/dmesg`;
+    }
 }
 
 sub get_mac_model() {

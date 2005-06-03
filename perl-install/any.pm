@@ -876,8 +876,8 @@ sub report_bug {
     join '', map { chomp; "$_\n" }
       header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
-      header("dmidecode"), `$ENV{LD_LOADER} dmidecode`,
-      header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
+      header("dmidecode"), `dmidecode`,
+      header("fdisk"), arch() =~ /ppc/ ? `pdisk -l` : `fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("/sys/bus/scsi/devices"), `ls -l /sys/bus/scsi/devices`,
       header("lsmod"), cat_("/proc/modules"),

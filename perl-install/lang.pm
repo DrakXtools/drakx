@@ -1289,8 +1289,7 @@ sub load_console_font {
     my ($name, $sfm, $acm) = l2console_font($locale, 1);
 
     require run_program;
-    run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 
-		     'consolechars', '-v', '-f', $name || 'lat0-16',
+    run_program::run('consolechars', '-v', '-f', $name || 'lat0-16',
 		     if_($sfm, '-u', $sfm), if_($acm, '-m', $acm));
 }
 
