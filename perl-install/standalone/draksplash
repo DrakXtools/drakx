@@ -134,7 +134,7 @@ sub set_theme {
 	#- do not resize and move the window again if size hasn't changed
 	if ($w != $old_scroll_w || $h !=  $old_scroll_h) {
 	    $scroll->set_size_request($w, $h);
-	    $preview_window->shrink_topwindow();
+	    $preview_window->shrink_topwindow;
 	    $preview_window->{window}->move(0, 0);
 	    ($old_scroll_w, $old_scroll_h) = ($w, $h);
 	}
@@ -148,7 +148,12 @@ sub save_theme() {
 }
 
 sub load_image {
-    my ($img, $mode) = @_;
+    my ($img, $o_mode) = @_;
+    my $mode = $o_mode;
+    unless ($mode) {
+	$mode = 0;
+	@image_pixbuf = ();
+    }
     $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img);
     $image_pixbuf[$mode] = $image_pixbuf[$mode]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
     $image_pixbuf[1-$mode] or $image_pixbuf[1-$mode] = $image_pixbuf[$mode];
@@ -248,7 +253,7 @@ sub create_image_area() {
 sub image_expose {
     my ($widget) = @_;
     my $window = $widget->window;
-    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$current_mode>0], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$current_mode>0];
+    $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$current_mode > 0], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$current_mode > 0];
     if ($current_mode == 0) { #- silent
 	$window->draw_rectangle($widget->style->white_gc, 1, @{$theme{conf}}{'px', 'py', 'pw', 'ph'});
     } else { #- verbose or console
