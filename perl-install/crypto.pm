@@ -146,11 +146,13 @@ sub bestMirror {
     $possible[rand @possible];
 }
 
-#- hack to retrieve Mandrivaalinux version...
+#- hack to retrieve Mandriva Linux version... XXX figure out something more robust
 sub version() {
     require pkgs;
-    my $pkg = pkgs::packageByName($::o->{packages}, 'mandrakelinux-release');
-    $pkg && $pkg->version || '9.1'; #- safe but dangerous ;-)
+    my $pkg = pkgs::packageByName($::o->{packages}, 'mandriva-release');
+    my $v = $pkg && $pkg->version || '10.2'; #- safe but dangerous ;-)
+    $v eq '2006.0' and $v = '10.2';
+    $v;
 }
 
 sub dir { $mirrors{$_[0]}[1] }
