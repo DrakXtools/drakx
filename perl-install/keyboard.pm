@@ -544,16 +544,7 @@ sub keyboard2full_xkb {
 
 sub xmodmap_file {
     my ($keyboard) = @_;
-    my $KEYBOARD = $keyboard->{KEYBOARD};
-    my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$KEYBOARD";
-    if (! -e $f) {
-	eval {
-	    require packdrake;
-	    my $packer = new packdrake("$ENV{SHARE_PATH}/xmodmap.cz2", quiet => 1);
-	    $packer->extract_archive("/tmp", "xmodmap.$KEYBOARD");
-	};
-	$f = "/tmp/xmodmap.$KEYBOARD";
-    }
+    my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$keyboard->{KEYBOARD}";
     -e $f && $f;
 }
 
@@ -583,16 +574,6 @@ sub setup_install {
     log::l("loading keymap $kmap");
     if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
-    } elsif (-e (my $packed_kmaps = "$ENV{SHARE_PATH}/keymaps.cz2")) {
-	my $kid = bg_command->new(sub {
-	    eval {
-		require packdrake;
-		my $packer = new packdrake($packed_kmaps, quiet => 1);
-		$packer->extract_archive(undef, "$kmap.bkmap");
-	    };
-	});
-	local $/ = undef;
-	eval { my $fd = $kid->{fd}; load(join('', <$fd>)) };
     } elsif (-x '/bin/loadkeys') {
 	run_program::run('loadkeys', $kmap);
     } else {
