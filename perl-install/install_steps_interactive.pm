@@ -50,7 +50,7 @@ sub kill_action {
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->{locale}{lang} = any::selectLanguage($o, $o->{locale}{lang}, $o->{locale}{langs} ||= {});
+    any::selectLanguage_install($o, $o->{locale});
     install_steps::selectLanguage($o);
 
     if ($o->isa('interactive::gtk')) {

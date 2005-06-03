@@ -709,80 +709,87 @@ sub autologin {
 }
 
 
-sub selectLanguage {
-    my ($in, $lang, $o_langs_) = @_;
+sub selectLanguage_install {
+    my ($in, $locale) = @_;
 
     my $common = { messages => N("Please choose a language to use."),
 		   title => N("Language choice"),
 		   interactive_help_id => 'selectLanguage' };
 
-    if ($::isInstall) {
-	my $langs = $o_langs_ || {};
-	my $using_images = $in->isa('interactive::gtk') && !$in->{vga16};
+    my $lang = $locale->{lang};
+    my $langs = $locale->{langs} ||= {};
+    my $using_images = $in->isa('interactive::gtk') && !$::o->{vga16};
 	
-	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
-	my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
+    my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
+    my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
 
-	#- since gtk version will use images (function image2f) we need to sort differently
-	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
-	my @langs = sort { $sort_func->($a) cmp $sort_func->($b) } lang::list_langs();
-	if (@langs > 15) {
-	    my $add_location = sub {
-		my ($l) = @_;
-		map { "$_|$l" } lang::l2location($l);
-	    };
-	    @langs = map { $add_location->($_) } @langs;
+    #- since gtk version will use images (function image2f) we need to sort differently
+    my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
+    my @langs = sort { $sort_func->($a) cmp $sort_func->($b) } lang::list_langs();
 
-	    #- to create the default value, use the first location for that value :/
-	    $lang = first($add_location->($lang));
-	}
+    if (@langs > 15) {
+	my $add_location = sub {
+	    my ($l) = @_;
+	    map { "$_|$l" } lang::l2location($l);
+	};
+	@langs = map { $add_location->($_) } @langs;
 
-        my $last_utf8 = $in->{locale}{utf8};
-	add2hash($common, { cancel => '',
-			    advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
+	#- to create the default value, use the first location for that value :/
+	$lang = first($add_location->($lang));
+    }
+
+    my $last_utf8 = $locale->{utf8};
+    add2hash($common, { cancel => '',
+			advanced_messages => formatAlaTeX(N("Mandriva Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
-			    advanced_state => 1,
-			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },
-                                           changed => sub {
-                                               if ($last_utf8 == $in->{locale}{utf8}) {
-                                                   $last_utf8 = $in->{locale}{utf8} = lang::utf8_should_be_needed({ lang => $listval2val->($lang), langs => $langs });
-                                               } else {
-                                                   $last_utf8 = -1;  #- disable auto utf8 once touched
-                                               }
-                                           } } });
+			advanced_state => 1,
+			callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },
+				       changed => sub {
+					   if ($last_utf8 == $locale->{utf8}) {
+					       $last_utf8 = $locale->{utf8} = lang::utf8_should_be_needed({ lang => $listval2val->($lang), langs => $langs });
+					   } else {
+					       $last_utf8 = -1;  #- disable auto utf8 once touched
+					   }
+				       } } });
 			    
-	$in->ask_from_($common,
-	[ { val => \$lang, separator => '|', 
-	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
-	    format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
-	    list => \@langs, sort => 0 },
-	    if_($o_langs_ && !$::move,
-                { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
-		{ val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
-	        map {
-		  { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
-		    text => $_->[1], advanced => 1,
-		    image => "langs/lang-$_->[0]",
-		  }; 
-	      } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs())
-	]) or return;
-	$langs->{$listval2val->($lang)} = 1;
-	$langs->{$_} or delete $langs->{$_} foreach keys %$langs;  #- clean hash
+    $in->ask_from_($common, [
+	{ val => \$lang, separator => '|', 
+	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
+	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
+	  list => \@langs, sort => 0 },
+      if_(!$::move,
+	  { val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
+	  { val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
+	map {
+	    { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
+	      text => $_->[1], advanced => 1,
+	      image => "langs/lang-$_->[0]",
+	  };
+	} sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs(),
+      ),
+    ]) or return;
+    %$langs = grep_each { $::b } %$langs;  #- clean hash
+    $langs->{$listval2val->($lang)} = 1;
 	
-	#- convert to the default locale for asked language
-	$listval2val->($lang);
+    #- convert to the default locale for asked language
+    $locale->{lang} = $listval2val->($lang);
+}
 
-    } else {
-	my @langs = sort { lang::l2name($a) cmp lang::l2name($b) } lang::list_langs(exclude_non_installed => 1);
-	die 'one lang only' if @langs == 1;
-	$in->ask_from_($common,
-		       [ { val => \$lang, type => 'list',
-                     format => sub { lang::l2name($_[0]) }, list => \@langs },
-                   { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
-               ]) or return;
-	$lang;
-    }
+sub selectLanguage_standalone {
+    my ($in, $locale) = @_;
+
+    my $common = { messages => N("Please choose a language to use."),
+		   title => N("Language choice"),
+		   interactive_help_id => 'selectLanguage' };
+
+    my @langs = sort { lang::l2name($a) cmp lang::l2name($b) } lang::list_langs(exclude_non_installed => 1);
+    die 'one lang only' if @langs == 1;
+    $in->ask_from_($common, [ 
+	{ val => \$locale->{lang}, type => 'list',
+	  format => sub { lang::l2name($_[0]) }, list => \@langs },
+	{ val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
+    ]);
 }
 
 sub selectLanguage_and_more_standalone {
@@ -793,8 +800,7 @@ sub selectLanguage_and_more_standalone {
 	# keep around previous settings so that selectLanguage can keep UTF-8 flag:
 	local $::Wizard_no_previous = 1;
 	my $old_lang = $locale->{lang};
-	$in->{locale} = $locale;
-	$locale->{lang} = selectLanguage($in, $locale->{lang});
+	selectLanguage_standalone($in, $locale);
 	$locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
 	undef $::Wizard_no_previous;
 	selectCountry($in, $locale) or goto language;
