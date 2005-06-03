@@ -35,7 +35,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 		    },
 		    { val => \$keyboard->{XkbModel},
 		      format => sub { $model2text->{$_[0]} },
-                separator => '|',
+		      separator => '|',
 		      list => $xkb_models },
 		]) or goto end;
 
