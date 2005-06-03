@@ -624,8 +624,6 @@ sub read() {
     if (!$keyboard{KEYBOARD}) {
 	add2hash(\%keyboard, grep { keyboard2kmap($_) eq $keyboard{KEYTABLE} } keyboards());
     }
-    $keyboard{DISABLE_WINDOWS_KEY} = bool2yesno(detect_devices::isLaptop());
-
     keyboard2text(\%keyboard) ? \%keyboard : {};
 }
 
