@@ -30,7 +30,7 @@ use Config;
 my ($bugzilla, $wizard_name);
 my $prog;
 my $incident = 0;
-my ($bugdesc, $table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $kernel);
+my ($table, $comb_app, $com_app, $button_pkg, $package, $distrocode);
 
 foreach (@ARGV) {
     next unless defined $_;
@@ -83,7 +83,7 @@ $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
 			  gtkpack_(Gtk2::HBox->new(0,5),
 				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
 				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
-				  )],
+				  ) ],
 			  [ Gtk2::Label->new(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
 			  [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
                          );
@@ -129,7 +129,7 @@ gtkadd($window->{window},
 if (defined $prog) {
     update_app($prog); 
     $comb_app->set_text($prog);
-};
+}
 $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text) });
 
 $button_pkg->signal_connect('clicked', sub { 

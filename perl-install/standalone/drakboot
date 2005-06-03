@@ -119,7 +119,7 @@ sub splash_choice() {
 		 silent => N("Silent"),
 		);
     my $mode_combo = Gtk2::ComboBox->new_with_strings([ values %modes  ], $modes{$theme->{enabled} ? $cmdline =~ /\bsplash=silent\b/ ? 'silent' : 'verbose' : 'text'});
-    $mode_combo->entry->signal_connect( changed => sub {
+    $mode_combo->entry->signal_connect(changed => sub {
 					    $theme->{enabled} = $mode_combo->entry->get_text ne $modes{text};
 					    if ($boot_warn && !$bootsplash_available && $theme->{enabled}) {
 						if ($in->ask_yesorno(N("Warning"),

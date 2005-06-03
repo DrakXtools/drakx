@@ -112,7 +112,7 @@ my @attacks_queue;
 
 if ($enable_activefw) {
     $activefw = activefw->new(sub {
-        my ($con, $msg) = @_;
+        my ($_con, $msg) = @_;
         handle_attack($msg->get_args_list) if
           $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
           $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
@@ -159,7 +159,7 @@ sub netMonitor() {
     checkNetwork();
 }
 sub checkNetwork() {
-    my ($gw_intf, $is_up, $gw_address) = $watched_interface ?
+    my ($gw_intf, $_is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($netc, $intf);
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
@@ -234,7 +234,7 @@ sub mainQuit() {
      Glib::Source->remove($timeout) if $timeout;
      Gtk2->main_quit;
 }
-sub getAutoStart {
+sub getAutoStart() {
     my %p = getVarsFromSh($onstartupfile);
     return to_bool($p{AUTOSTART} ne 'FALSE');
 }
@@ -245,7 +245,7 @@ sub setAutoStart {
 );
 }
 
-sub get_unprocessed_attacks {
+sub get_unprocessed_attacks() {
     my @packets = $activefw->get_reports;
     while (my @attack = splice(@packets, 0, 9)) {
         handle_attack(@attack);
@@ -266,7 +266,7 @@ sub set_attack_verdict {
 
 sub ask_attack_verdict {
     my ($attack) = @_;
-    my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @$attack;
+    my ($seq, $timestamp, $indev, $prefix, $_sensor, $protocol, $addr, $port, $icmp_type) = @$attack;
 
     unless ($interactive_cb->get_active) {
         #- let the daemon handle the blacklist policy in automatic mode
