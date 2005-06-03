@@ -460,7 +460,10 @@ sub bug {
     $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
 
     require detect_devices;
-    mount devices::make(detect_devices::floppy()), "/fd0";
+    require modules;
+    require fs;
+    modules::load_dependencies("/modules/modules.dep");
+    fs::mount(devices::make(detect_devices::floppy()), '/fd0', 'vfat');
 
     require install_any;
     output("/fd0/report.bug", install_any::report_bug());
