@@ -165,7 +165,7 @@ sub ask_root_password_and_authentication {
     my ($in, $netc, $superuser, $authentication, $meta_class, $security) = @_;
 
     my $kind = to_kind($authentication);
-    my @kinds = authentication::kinds($in->do_pkgs, $meta_class);
+    my @kinds = kinds($in->do_pkgs, $meta_class);
 
     $in->ask_from_({
 	 title => N("Set administrator (root) password and network authentication methods"), 
@@ -186,7 +186,7 @@ sub ask_root_password_and_authentication {
         } } }, [
 { label => N("Password"), val => \$superuser->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$kind, type => 'list', list => \@kinds, format => \&authentication::kind2name, advanced => 1 },
+{ label => N("Authentication"), val => \$kind, type => 'list', list => \@kinds, format => \&kind2name, advanced => 1 },
         ]) or delete $superuser->{password};
 
     ask_parameters($in, $netc, $authentication, $kind) or goto &ask_root_password_and_authentication;
@@ -195,6 +195,7 @@ sub ask_root_password_and_authentication {
 
 sub get() {
     my $system_auth = cat_("/etc/pam.d/system-auth");
+
     { md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/ };
 }
 
@@ -205,7 +206,7 @@ sub set {
 
     enable_shadow() if $authentication->{shadow};    
 
-    my $kind = authentication::to_kind($authentication);
+    my $kind = to_kind($authentication);
 
     log::l("authentication::set $kind");
 
