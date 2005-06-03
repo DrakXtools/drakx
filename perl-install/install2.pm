@@ -483,7 +483,6 @@ sub main {
 	require network::network;
 	#- get stage1 network configuration if any.
 	log::l('found /tmp/network');
-	#- FIXME: DOMAINNAME and DHCP_HOSTNAME shouldn't be in $o->{net}{network}
 	add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
