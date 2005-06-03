@@ -287,8 +287,6 @@ static int save_netinfo(struct interface_info * intf)
 
 	if (hostname && !intf->boot_proto == BOOTPROTO_DHCP)
 		fprintf(f, "HOSTNAME=%s\n", hostname);
-	if (domain)
-		fprintf(f, "DOMAINNAME=%s\n", domain);
 	if (dhcp_hostname && !streq(dhcp_hostname, ""))
 		fprintf(f, "DHCP_HOSTNAME=%s\n", dhcp_hostname);
 	
