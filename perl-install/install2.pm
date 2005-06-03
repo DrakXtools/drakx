@@ -484,7 +484,7 @@ sub main {
 	#- get stage1 network configuration if any.
 	log::l('found /tmp/network');
 	#- FIXME: DOMAINNAME and DHCP_HOSTNAME shouldn't be in $o->{net}{network}
-	add2hash($o->{net}{network}, network::network::read_conf('/tmp/network'));
+	add2hash($o->{net}{network} ||= {}, network::network::read_conf('/tmp/network'));
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
 	    my $l = network::network::read_interface_conf($file);
@@ -493,7 +493,7 @@ sub main {
 	if (-e '/etc/resolv.conf') {
 	    my $file = '/etc/resolv.conf';
 	    log::l("found network config file $file");
-	    add2hash($o->{net}{resolv}, network::network::read_resolv_conf($file));
+	    add2hash($o->{net}{resolv} ||= {}, network::network::read_resolv_conf($file));
 	}
     }
 
