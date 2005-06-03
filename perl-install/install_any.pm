@@ -118,14 +118,10 @@ sub look_for_ISO_images() {
     $iso_dir =~ s!^/sysroot!!; $iso_dir =~ s![^/]*\.iso$!!;
 
     foreach my $iso_file (glob("$iso_dir/*.iso")) {
-	#- FIXME: I sux, it isn't needed to use a loop device for that, just read in the file
-	my $iso_dev = devices::set_loop($iso_file) or return;
-	if (sysopen($F, $iso_dev, 0)) {
-	    my $iso_ids = $get_iso_ids->($F);
-	    push @{$iso_images{media}}, { file => $iso_file, %$iso_ids };
-	    close($F); #- needed to delete loop device
-	}
-	devices::del_loop($iso_dev);
+	sysopen($F, $iso_file, 0) or next;
+	my $iso_ids = $get_iso_ids->($F);
+	$iso_ids->{file} = $iso_file;
+	push @{$iso_images{media}}, $iso_ids;
     }
     1;
 }
