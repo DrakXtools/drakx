@@ -3,7 +3,7 @@ package tmp::compssUsers;
 use common;
 use ugtk2 qw(:helpers :wrappers :create);
 
-my $low_resources = availableRamMB() < 100 || detect_devices::ix86_cpu_frequency() < 450;
+my $low_resources = availableRamMB() < 100 || detect_devices::ix86_cpu_frequency() < 350;
 my $meta_class = $::o->{meta_class};
 my $desktop = $meta_class eq 'desktop';
 my $powerpack = $meta_class eq 'powerpack';
