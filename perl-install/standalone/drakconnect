@@ -644,7 +644,7 @@ sub save {
                            gtkflush();
                            foreach (keys %$p) {
                                save_notebook($p->{$_}{intf}, $p->{$_}{gui}) or return;
-                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($p->{$_}{intf});
+                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply();
                            }
                            system("/etc/rc.d/init.d/network restart");
                            $dialog->response(0);
@@ -786,10 +786,7 @@ sub update_list {
     }
 }
 
-sub apply {
-    my ($intf) = @_;
-    my $dyn = $intf->{BOOTPROTO} ne 'static';
-    network::network::sethostname($net) if $dyn;
+sub apply() {
     network::network::configure_network($net, $in, $modules_conf);
 }
 
