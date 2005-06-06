@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: DrakX-vi version\n"
 "Report-Msgid-Bugs-To: tmthanh@yahoo.com\n"
 "POT-Creation-Date: 2005-05-31 13:03+0200\n"
-"PO-Revision-Date: 2005-05-07 20:08+0700\n"
+"PO-Revision-Date: 2005-06-02 21:17+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team:  <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -2752,7 +2752,7 @@ msgstr "Cylinder %d đến %d\n"
 #: diskdrake/interactive.pm:1210
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Số lượng logical extents: %d\n"
 
 #: diskdrake/interactive.pm:1211
 #, c-format
@@ -3266,7 +3266,7 @@ msgstr "Videocard"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "DVB card"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3301,27 +3301,27 @@ msgstr "ISDN adapters"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "Thiết bị âm thanh USB"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Radio cards"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "ATM network cards"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "WAN network cards"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "Thiết bị bluetooth"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3358,7 +3358,7 @@ msgstr "Máy in"
 #: harddrake/data.pm:339
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Game port controllers"
 
 #: harddrake/data.pm:348
 #, c-format
@@ -3424,7 +3424,7 @@ msgstr "Bàn phím"
 #: harddrake/data.pm:461
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tablet và touchscreen"
 
 #: harddrake/data.pm:470 help.pm:855 install_steps_interactive.pm:977
 #, c-format
@@ -10263,7 +10263,7 @@ msgstr "Kết nối modem"
 #: network/netconnect.pm:311
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "Kết nối DVB"
 
 #: network/netconnect.pm:321
 #, c-format
@@ -10986,32 +10986,32 @@ msgstr ""
 #: network/netconnect.pm:1210
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "Cấu hình DVB"
 
 #: network/netconnect.pm:1211
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "DVB Adapter"
 
 #: network/netconnect.pm:1229
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "Thiết lập DVB adapter"
 
 #: network/netconnect.pm:1232
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "Adapter card"
 
 #: network/netconnect.pm:1233
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "Net demux"
 
 #: network/netconnect.pm:1234
 #, c-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: network/netconnect.pm:1262
 #, c-format
@@ -11306,23 +11306,19 @@ msgstr ""
 "\t\tippp+ cho kết nối ISDN.\n"
 
 #: network/thirdparty.pm:195
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Bạn cần alcatel microcode.\n"
-"Tải xuống tại\n"
-"%s\n"
-"và sao chép mgmt.o vào /usr/share/speedtouch"
+msgstr "Sap chép Alcatel microcode thành mgmt.o trong /usr/share/speedtouch/"
 
 #: network/thirdparty.pm:265
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Không cài đặt được các gói %s"
+msgstr "Không cài đặt được gói (%s)!"
 
 #: network/thirdparty.pm:273
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Cần một số gói tin (%s) nhưng hiện không thấy có."
 
 #: network/thirdparty.pm:274
 #, c-format
@@ -11330,6 +11326,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Những gói tin này có thể tìm thấy tại Mandriva Club hoặc phân phối thương "
+"mại của Mandriva."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11337,16 +11335,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Các tập tin cần thiết cũng có thể được cài đặt từ URL này:\n"
+"%s"
 
 #: network/thirdparty.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Gỡ bỏ phông chữ trong hệ thống"
+msgstr "Không tìm thấy \"%s\" trong hệ thống Windows!"
 
 #: network/thirdparty.pm:310
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Không phát hiện thấy hệ thống Windows!"
 
 #: network/thirdparty.pm:320
 #, c-format
@@ -11406,12 +11406,12 @@ msgstr "Hoàn thành sao chép firmware"
 #: network/thirdparty.pm:425
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Đang tìm kiếm phần mềm và driver..."
 
 #: network/thirdparty.pm:435
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Hãy đợi, đang phát hiện và cấu hình các thiết bị..."
+msgstr "Hãy chờ, đang chạy lệnh cấu hình thiết bị..."
 
 #: partition_table.pm:397
 #, c-format
@@ -17698,7 +17698,7 @@ msgstr "Hoàn thành!"
 #: standalone/drakTermServ:467 standalone/drakTermServ:847
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s lỗi"
 
 #: standalone/drakTermServ:476
 #, c-format
@@ -17707,6 +17707,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Không đủ không gian để tạo\n"
+"NBIs trong %s.\n"
+"Cần: %d MB, Dư: %d MB"
 
 #: standalone/drakTermServ:482
 #, c-format
@@ -18017,6 +18020,15 @@ msgid ""
 "        \t\t\n"
 "        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 msgstr ""
+"        - Tạo đĩa mềm/CD etherboot:\n"
+"        \tMáy khách không đĩa cần ảnh ROM trên NIC hoặc đĩa mềm khởi động,\n"
+"        \thay CD để khởi tạo boot sequence.  drakTermServ sẽ giúp tạo các "
+"ảnh\n"
+"        \tnày, dựa trên NIC nằm trong máy khách.\n"
+"        \t\t\n"
+"        \tĐây là ví dụ cơ bản để tự tạo đĩa mềm khởi động cho 3Com 3c509:\n"
+"        \t\t\n"
+"        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 
 #: standalone/drakTermServ:666
 #, c-format
@@ -18288,11 +18300,13 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Dynamic IP Address Pool\n"
+"(cần có cho PXE client):"
 
 #: standalone/drakTermServ:1503
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "Không ghi được vào %s !"
 
 #: standalone/drakTermServ:1515
 #, c-format
@@ -18568,6 +18582,8 @@ msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbakup."
 msgstr ""
+"Việc này dùng để sao lưu các kết quả gửi đi từ địa chỉ phản hồi. Mặc định là "
+"drakbakup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -18790,6 +18806,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"Đã vượt quá quota dành cho sao lưu!\n"
+"Dùng %d MB mà chỉ cho phép %d MB."
 
 #: standalone/drakbackup:951 standalone/drakbackup:983
 #, c-format
@@ -19121,6 +19139,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"Không gian đĩa tối đa\n"
+" dành cho sao lưu (MB)"
 
 #: standalone/drakbackup:1957
 #, c-format
@@ -19129,6 +19149,9 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"Xóa các sao lưu đã quá N ngày\n"
+"để tiết kiệm không gian đĩa\n"
+" (0 là giữ toàn bộ sao lưu)"
 
 #: standalone/drakbackup:2024
 #, c-format
@@ -19344,7 +19367,7 @@ msgstr "Gửi báo cáo mail sau mỗi lần sao lưu đến:"
 #: standalone/drakbackup:2200
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Địa chỉ trả lời cho thư gửi đi:"
 
 #: standalone/drakbackup:2206
 #, c-format
@@ -19495,7 +19518,7 @@ msgstr "\tGiới hạn sử dụng đĩa đến %s MB\n"
 #: standalone/drakbackup:2494
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\tXóa các sao lưu đã quá %s ngày\n"
 
 #: standalone/drakbackup:2497
 #, c-format
@@ -19609,7 +19632,7 @@ msgstr "\tGửi thư đến %s\n"
 #: standalone/drakbackup:2522
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tGửi mail từ %s\n"
 
 #: standalone/drakbackup:2523
 #, c-format
@@ -20128,17 +20151,17 @@ msgstr "<control>Q"
 #: standalone/drakboot:117
 #, c-format
 msgid "Text only"
-msgstr ""
+msgstr "Text only"
 
 #: standalone/drakboot:118
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "Verbose"
 
 #: standalone/drakboot:119
 #, c-format
 msgid "Silent"
-msgstr ""
+msgstr "Silent"
 
 #: standalone/drakboot:126
 #, c-format
@@ -21347,9 +21370,9 @@ msgstr ""
 "Bạn muốn làm gì?"
 
 #: standalone/drakgw:108
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "cấu hình lại"
+msgstr "Cấu hình lại"
 
 #: standalone/drakgw:148
 #, c-format
@@ -21374,9 +21397,9 @@ msgid ""
 msgstr "Hãy chọn adapter mạng nào sẽ được kết nối vào mạng cục bộ của bạn. "
 
 #: standalone/drakgw:180
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Địa Chỉ Mạng Cục Bộ"
+msgstr "Thiết lập mạng cục bộ"
 
 #: standalone/drakgw:183
 #, c-format
@@ -21395,14 +21418,14 @@ msgstr ""
 "Khả năng xung đột địa chỉ LAN được tìm ra trong cấu hình hiện thời của %s!\n"
 
 #: standalone/drakgw:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "Cấu hình máy chủ terminal"
+msgstr "Cấu hình Domain Name Server (DNS)"
 
 #: standalone/drakgw:211
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Dùng gateway này làm domain name server (dns)"
 
 #: standalone/drakgw:212
 #, c-format
@@ -21423,9 +21446,9 @@ msgstr ""
 "Nếu không biết ý nghĩa của tùy chọn nào đó, hãy để nguyên nó như vậy."
 
 #: standalone/drakgw:251
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Tự động cấu hình lại"
+msgstr "Dùng cấu hình tự động (DHCP)"
 
 #: standalone/drakgw:252
 #, c-format
@@ -21450,37 +21473,37 @@ msgstr "Kênh thuê tối đa (theo giây)"
 #: standalone/drakgw:281
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Proxy caching server (SQUID)"
 
 #: standalone/drakgw:285
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Dùng gateway này làm proxy caching server"
 
 #: standalone/drakgw:286
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "Admin mail"
 
 #: standalone/drakgw:287
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "Tên máy chủ ở xa"
+msgstr "Visible hostname"
 
 #: standalone/drakgw:288
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Đặc tính"
+msgstr "Proxy port"
 
 #: standalone/drakgw:289
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "Kích thước cache"
+msgstr "Kích thước cache (MB)"
 
 #: standalone/drakgw:314
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Thông tin đĩa cứng"
+msgstr "Loan truyền thông tin máy in"
 
 #: standalone/drakgw:331
 #, c-format
@@ -21959,6 +21982,8 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Bạn chưa có bất kỳ giao diện không dây nào.\n"
+"Hãy chạy trợ giúp \"%s\" từ Trung Tâm Điều Khiển Mandriva Linux"
 
 #: standalone/drakroam:141
 #, c-format
@@ -22355,22 +22380,22 @@ msgstr "chiều cao của thanh tiến trình"
 #: standalone/draksplash:58 standalone/draksplash:63
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "Chọn màu thanh tiến trình"
 
 #: standalone/draksplash:59 standalone/draksplash:64
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Chọn ảnh"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Silent bootsplash"
 
 #: standalone/draksplash:65
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Verbose bootsplash"
 
 #: standalone/draksplash:67
 #, c-format
@@ -22380,7 +22405,7 @@ msgstr "Hiển thị Logo trên Console"
 #: standalone/draksplash:70
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "Console bootsplash"
 
 #: standalone/draksplash:76
 #, c-format
@@ -25412,7 +25437,7 @@ msgstr "Theo dõi mạng"
 #: standalone/net_applet:71
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Quản lý mạng không dây"
 
 #: standalone/net_applet:72
 #, c-format
@@ -26678,42 +26703,3 @@ msgstr "Không cài đặt được"
 
 #~ msgid "%s BootSplash (%s) preview"
 #~ msgstr "Xem Trước Bootsplash %s (%s)"
-
-#  -PO: Do not alter the <span ..> and </span> tags
-#  -PO: Do not alter the <span ..> and </span> tags
-#~ msgid ""
-#~ "The image \"%s\" cannot be load due to the following issue:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-#~ msgstr ""
-#~ "Không thể nạp ảnh \"%s\" vì các lý do sau:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "Hiện không có ổ đĩa mềm"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr "Nạp một đĩa mềm chứa các mô-đun cập nhật vào ổ đĩa %s"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-#~ msgstr ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-
-#~ msgid "No network card"
-#~ msgstr "Không có card mạng nào"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Dùng driver đã được cài đặt (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Dùng truy cập Wi-Fi an toàn (WPA)"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Bạn chưa chọn phông chữ nào"
-
-#~ msgid "Save and close"
-#~ msgstr "Lưu và đóng"

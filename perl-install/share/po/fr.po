@@ -73,13 +73,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2005-05-31 13:03+0200\n"
-"PO-Revision-Date: 2005-05-23 15:29+0200\n"
+"PO-Revision-Date: 2005-06-06 22:30+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2;plural=(n>1);\n"
 
 #: ../move/move.pm:292
@@ -927,8 +927,8 @@ msgid ""
 "Assign a new Volume ID?"
 msgstr ""
 "LILO veut assigner un nouvel identifiant de volume au disque %s. Cependant, "
-"en modifiant l'identifiant de volume d'un disque de boot Windows NT, 2000 ou "
-"XP provoque une erreur fatale de Windows.\n"
+"modifier l'identifiant de volume d'un disque de boot Windows NT, 2000 ou XP "
+"provoque une erreur fatale de Windows.\n"
 "Cet avertissement ne s'applique pas à Windows 95, ou 98 ou aux disques de "
 "données sous NT.\n"
 "\n"
@@ -988,7 +988,7 @@ msgstr "Premier secteur de la partition racine"
 #: any.pm:235
 #, c-format
 msgid "On Floppy"
-msgstr "sur disquette"
+msgstr "Sur disquette"
 
 #: any.pm:237 help.pm:739 printer/printerdrake.pm:4061
 #, c-format
@@ -1409,8 +1409,9 @@ msgid ""
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Vous pouvez choisir d'autres langues.\n"
-"Elles seront disponibles après l'installation."
+"Mandriva Linux supporte de plusieurs langues.\n"
+"Choisissez les langues que vous souhaitez installer.\n"
+"Elles seront disponibles après l'installation du système."
 
 #: any.pm:752 any.pm:773 help.pm:647
 #, c-format
@@ -1510,7 +1511,7 @@ msgstr ""
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
-"Souhaitez-vous exporter par NFS (protocole Unix) ou SMB (protocole Windows) ?"
+"Souhaitez-vous partager par NFS (protocole Unix) ou SMB (protocole Windows) ?"
 
 #: any.pm:978
 #, c-format
@@ -2236,7 +2237,7 @@ msgid ""
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Votre disque possède une seule grosse partition Windows.\n"
+"Votre disque possède une seule grande partition Windows.\n"
 "Vous devriez la réduire pour pouvoir créer d'autres partitions :\n"
 "cliquez sur la partition puis sur « Redimensionner »."
 
@@ -2584,7 +2585,7 @@ msgstr ""
 #: diskdrake/interactive.pm:586
 #, c-format
 msgid "Remove the loopback file?"
-msgstr "Supprimer le fichier de boucle ?"
+msgstr "Supprimer le fichier de bouclage ?"
 
 #: diskdrake/interactive.pm:605
 #, c-format
@@ -2625,7 +2626,7 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"Il est impossible de désélectionner ce point de montage car il est\n"
+"Il est impossible de dé-sélectionner ce point de montage car il est\n"
 "utilisé pour du bouclage. Veuillez supprimer ce dernier d'abord."
 
 #: diskdrake/interactive.pm:686
@@ -2977,7 +2978,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Read-only"
-msgstr "Protégé en lecture"
+msgstr "Lecture seule"
 
 #: diskdrake/interactive.pm:1247
 #, c-format
@@ -3502,7 +3503,7 @@ msgstr "Imprimante"
 #: harddrake/data.pm:339
 #, c-format
 msgid "Game port controllers"
-msgstr "Controlleurs joystick"
+msgstr "Contrôleurs joystick"
 
 #: harddrake/data.pm:348
 #, c-format
@@ -7396,6 +7397,7 @@ msgstr "Configuration post-installation"
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
+"Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
 
 #: install_steps_interactive.pm:804
 #, c-format
@@ -8409,7 +8411,7 @@ msgstr "Slovénien"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "Cinghalais"
 
 #: keyboard.pm:294
 #, c-format
@@ -10371,6 +10373,8 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver ?"
 msgstr ""
+"Le périphérique sélectionné a déjà été configuré avec le pilote %s.\n"
+"Désirez vous vraiment utiliser le pilote ndiswrapper ?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
@@ -11357,7 +11361,7 @@ msgstr "Carte adaptatrice"
 #: network/netconnect.pm:1233
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "Net demux"
 
 #: network/netconnect.pm:1234
 #, c-format
@@ -11662,13 +11666,10 @@ msgstr ""
 "\t\tippp+ pour une connexion RNIS.\n"
 
 #: network/thirdparty.pm:195
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr ""
-"Vous avez besoin du microcode d'Alcatel.\n"
-"Téléchargez-le à\n"
-"%s\n"
-"et copiez le fichier mgmt.o dans /usr/share/speedtouch"
+"Copiez le microcode Alcatel sous le nom mgmt.o dans /usr/share/speedtouch"
 
 #: network/thirdparty.pm:265
 #, c-format
@@ -11679,6 +11680,7 @@ msgstr "Impossible d'installer les paquetages (%s) !"
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
 msgstr ""
+"Certains paquetages (%s) sont nécessaires mais ne sont pas disponibles."
 
 #: network/thirdparty.pm:274
 #, c-format
@@ -11686,6 +11688,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Ces paquetages sont disponibles dans les versions Mandriva Club et Mandriva "
+"commerciale."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11693,16 +11697,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Les fichiers requis peuvent aussi être installés à partir de cette URL :\n"
+"%s"
 
 #: network/thirdparty.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Retirer des polices de votre système"
+msgstr "Impossible de trouver « %s » sur votre système Windows"
 
 #: network/thirdparty.pm:310
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Aucun système Windows n'a été détecté !"
 
 #: network/thirdparty.pm:320
 #, c-format
@@ -11765,12 +11771,12 @@ msgstr "La copie du firmware a réussi."
 #: network/thirdparty.pm:425
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Recherche des logiciels et pilotes requis..."
 
 #: network/thirdparty.pm:435
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Veuillez patienter, détection et configuration des périphériques..."
+msgstr "Veuillez patienter, configuration des périphériques en cours..."
 
 #: partition_table.pm:397
 #, c-format
@@ -18282,6 +18288,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Pas assez de place pour créer\n"
+"les NBIs dans %s.\n"
+"Nécessaire : %d Mo, Libre : %d Mo"
 
 #: standalone/drakTermServ:482
 #, c-format
@@ -18590,6 +18599,17 @@ msgid ""
 "        \t\t\n"
 "        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 msgstr ""
+"        - Créer des disquettes ou CD Etherboot :\n"
+"        \tLes clients légers ont besoin soit d'une image ROM sur la carte "
+"réseau soit d'une disquette\n"
+"        \tou d'un CD d'amorçage pour lancer la séquence de boot. "
+"DrakTermServ permet de faciliter la création de ces\n"
+"        \timages, en fonction de la carte réseau du client.\n"
+"        \t\t\n"
+"        \tVoici un exemple simple de création manuelle d'une disquette "
+"d'amorçage pour une carte 3Com 3c509 :\n"
+"        \t\t\n"
+"        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 
 #: standalone/drakTermServ:666
 #, c-format
@@ -18863,6 +18883,8 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Plage d'adresses IP dynamiques\n"
+"(nécessaire pour les clients PXE) :"
 
 #: standalone/drakTermServ:1503
 #, c-format
@@ -19141,7 +19163,7 @@ msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server."
 msgstr ""
-"Ceci devrait être un nom d'utilisateur local ou une adresses courriel auquel "
+"Ceci devrait être un nom d'utilisateur local ou une adresse courriel auquel "
 "vous voulez que soient envoyés les résultats de la sauvegarde. Vous devrez "
 "avoir installé sur votre système un logiciel de transfert de courriel (MTA)."
 
@@ -19151,6 +19173,8 @@ msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbakup."
 msgstr ""
+"C'est l'adresse de l'émetteur du courriel contenant les résultats de la "
+"sauvegarde. La valeur par défaut est drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -19377,6 +19401,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"Quota de l'emplacement de sauvegarde dépassé !\n"
+"%d Mo utilisés, %d Mo alloués."
 
 #: standalone/drakbackup:951 standalone/drakbackup:983
 #, c-format
@@ -19715,6 +19741,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"Place disque maximum\n"
+" allouée pour les sauvegardes (Mo)"
 
 #: standalone/drakbackup:1957
 #, c-format
@@ -19723,6 +19751,9 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"Supprimer les sauvegardes incrémentales\n"
+" ou différentielles de plus de N jours\n"
+" (0 pour garder tout) pour faire de la place"
 
 #: standalone/drakbackup:2024
 #, c-format
@@ -19942,7 +19973,7 @@ msgstr "Envoyer un rapport par courriel après chaque sauvegarde à : "
 #: standalone/drakbackup:2200
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Adresse de l'émetteur du courriel :"
 
 #: standalone/drakbackup:2206
 #, c-format
@@ -20092,7 +20123,7 @@ msgstr "\tLimiter l'usage disque à %s Mo\n"
 #: standalone/drakbackup:2494
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\tSupprimer les sauvegardes de plus %s jour(s)\n"
 
 #: standalone/drakbackup:2497
 #, c-format
@@ -20206,7 +20237,7 @@ msgstr "\tEnvoyer un courriel à %s\n"
 #: standalone/drakbackup:2522
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tEnvoyer le courriel avec pour émetteur %s\n"
 
 #: standalone/drakbackup:2523
 #, c-format
@@ -21989,9 +22020,9 @@ msgstr ""
 "Veuillez choisir quelle carte réseau sera connectée à votre réseau local"
 
 #: standalone/drakgw:180
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Adresse de Réseau Local"
+msgstr "Configuration du Réseau Local"
 
 #: standalone/drakgw:183
 #, c-format
@@ -22001,7 +22032,7 @@ msgstr "Adresse de Réseau Local"
 #: standalone/drakgw:185
 #, c-format
 msgid "The internal domain name"
-msgstr "Le nom de domaine international"
+msgstr "Le nom de domaine interne"
 
 #: standalone/drakgw:191
 #, c-format
@@ -22018,7 +22049,7 @@ msgstr "Configuration du Serveur de noms (DNS)"
 #: standalone/drakgw:211
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Utiliser cette passerelle comme serveur DNS"
 
 #: standalone/drakgw:212
 #, c-format
@@ -22066,22 +22097,22 @@ msgstr "Délai maxi (en secondes)"
 #: standalone/drakgw:281
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Serveur proxy-cache (SQUID)"
 
 #: standalone/drakgw:285
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Utiliser cette passerelle comme serveur proxy-cache"
 
 #: standalone/drakgw:286
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "Courriel Admin"
 
 #: standalone/drakgw:287
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "Nom d'hôte du serveur"
+msgstr "Nom d'hôte visible"
 
 #: standalone/drakgw:288
 #, c-format
@@ -22094,9 +22125,9 @@ msgid "Cache size (MB)"
 msgstr "Taille du cache (MO)"
 
 #: standalone/drakgw:314
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Informations sur les disques durs"
+msgstr "Diffuser les informations imprimante"
 
 #: standalone/drakgw:331
 #, c-format
@@ -22584,6 +22615,8 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Vous n'avez pas configuré d'interface réseau sans fil.\n"
+"Lancez l'assistant « %s » à partir du Centre de Contrôle Mandriva Linux"
 
 #: standalone/drakroam:141
 #, c-format
@@ -22986,12 +23019,12 @@ msgstr "Choisir l'image"
 #: standalone/draksplash:60
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Mode silencieux"
 
 #: standalone/draksplash:65
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Mode verbeux"
 
 #: standalone/draksplash:67
 #, c-format
@@ -23001,7 +23034,7 @@ msgstr "Affiche le logo dans la console"
 #: standalone/draksplash:70
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "Mode console"
 
 #: standalone/draksplash:76
 #, c-format
@@ -26093,7 +26126,7 @@ msgstr "Surveillance Réseau"
 #: standalone/net_applet:71
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Gérer les réseaux sans fil"
 
 #: standalone/net_applet:72
 #, c-format
@@ -27165,274 +27198,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Échec de l'installation"
-
-#~ msgid ""
-#~ "Contacting Mandrivalinux web site to get the list of available mirrors..."
-#~ msgstr ""
-#~ "Téléchargement de la liste des miroirs disponibles depuis le serveur web "
-#~ "de Mandrivalinux ..."
-
-#~ msgid "Mandrivalinux Installation %s"
-#~ msgstr "Installation de Mandrivalinux %s"
-
-#~ msgid "Do it later"
-#~ msgstr "Le faire plus tard"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MdkDM (Gestionnaire de connexion de Mandriva Linux)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "Le partage de la connexion à Internet est désactivé"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "Activation des serveurs..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "Le partage de la connexion internet est activé"
-
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "Interface %s (utilisant le module %s)"
-
-#~ msgid "Interface %s"
-#~ msgstr "Interface %s"
-
-#~ msgid "Network interface"
-#~ msgstr "Carte réseau"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "Interface réseau déjà configurée"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "Attention, la carte réseau (%s) est déjà configurée.\n"
-#~ "\n"
-#~ "Désirez-vous une reconfiguration automatique ?\n"
-#~ "\n"
-#~ "Vous pouvez le faire manuellement, mais vous devez savoir ce que vous "
-#~ "faites."
-
-#~ msgid "No (experts only)"
-#~ msgstr "Non (pour les experts)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "Montrer la configuration actuelle"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "Configuration actuelle de l'interface"
-
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "Configuration actuelle de « %s » :\n"
-#~ "\n"
-#~ "Réseau : %s\n"
-#~ "Adresse IP : %s\n"
-#~ "Attribution de l'adresse : %s\n"
-#~ "Pilote : %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Je peux conserver votre configuration actuelle, et supposer que vous avez "
-#~ "déjà configuré un serveur DHCP ; dans ce cas, veuillez vérifier que j'ai "
-#~ "correctement lu l'adresse du réseau de Classe C que vous utilisez pour "
-#~ "votre réseau local ; je ne le reconfigurerai pas et je ne toucherai pas à "
-#~ "la configuration de votre serveur DHCP.\n"
-#~ "\n"
-#~ "L'entrée DNS par défaut est le serveur cache de nom configuré pour le "
-#~ "pare-feu. Vous pouvez par exemple la remplacer par l'adresse IP du "
-#~ "serveur DNS de votre fournisseur d'accès.\n"
-#~ "\t\t      \n"
-#~ "Sinon, je peux reconfigurer votre interface et (re)configurer un serveur "
-#~ "DHCP à votre place.\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "Adresse IP du serveur DHCP"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "Reconfigurer l'interface et le serveur DHCP"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "Le réseau local ne finissait pas par `.0', j'abandonne."
-
-#~ msgid "Number of logical extents: %d"
-#~ msgstr "Nombre d'unités d'allocation logiques : %d"
-
-#~ msgid ""
-#~ "WARNING: this device has been previously configured to connect to the "
-#~ "Internet.\n"
-#~ "Modifying the fields below will override this configuration.\n"
-#~ "Do you really want to reconfigure this device?"
-#~ msgstr ""
-#~ "ATTENTION : ce périphérique a déjà été configuré pour la connexion "
-#~ "internet.\n"
-#~ "La configuration actuelle sera écrasée par les modifications que vous "
-#~ "ferez.\n"
-#~ "Êtes-vous vraiment sûr de vouloir reconfigurer ce périphérique ?"
-
-#~ msgid ""
-#~ "        - Create etherboot floppies/CDs:\n"
-#~ "        \tThe diskless client machines need either ROM images on the NIC, "
-#~ "or a boot floppy\n"
-#~ "        \tor CD to initiate the boot sequence.  drakTermServ will help "
-#~ "generate these\n"
-#~ "        \timages, based on the NIC in the client machine.\n"
-#~ "        \t\t\n"
-#~ "        \tA basic example of creating a boot floppy for a 3Com 3c509 "
-#~ "manually:\n"
-#~ "        \t\t\n"
-#~ "        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
-#~ "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
-#~ msgstr ""
-#~ "        - Créer des disquettes ou CD etherboot :\n"
-#~ "        \t\tLes clients légers ont besoin d'une image d'amorçage placée "
-#~ "sur la mémoire morte (ROM) de la carte réseau,\n"
-#~ "        \t\tou bien d'un CD ou d'une disquette pour initier la séquence "
-#~ "d'amorçage. drakTermServ permet de générer ces images,\n"
-#~ "        \t\tbasées sur les cartes réseau des machines clientes.\n"
-#~ "        \t\t\n"
-#~ "        \t\tUn exemple simple de création manuelle de disquette "
-#~ "d'amorçage pour une carte 3Com 3c509 consiste à taper :\n"
-#~ "        \t\t\n"
-#~ "        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\n"
-#~ "        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-
-#~ msgid "Dynamic IP Address Pool:"
-#~ msgstr "Plages d'adresses IP dynamiques : "
-
-#~ msgid "hd"
-#~ msgstr "hd"
-
-#~ msgid "tape"
-#~ msgstr "Cartouche"
-
-#~ msgid "WebDAV remote site already in sync!"
-#~ msgstr "Le site distant WebDAV est déjà synchronisé !"
-
-#~ msgid "WebDAV transfer failed!"
-#~ msgstr "Échec du transfert WebDAV !"
-
-#~ msgid ""
-#~ "Backup quota exceeded!\n"
-#~ "%d MB used vs %d MB allocated."
-#~ msgstr ""
-#~ "Quota de sauvegarde dépassé !\n"
-#~ "%d Mo utilisés contre %d Mo alloués."
-
-#~ msgid ""
-#~ "Maximum size\n"
-#~ " allowed for Drakbackup (MB)"
-#~ msgstr ""
-#~ "Taille maximale\n"
-#~ " permise à Drakbackup (Mo)"
-
-#~ msgid "\t-Network by webdav.\n"
-#~ msgstr "\t-celle par webdav.\n"
-
-#~ msgid "Use graphical boot"
-#~ msgstr "Utiliser le démarrage graphique"
-
-#~ msgid "first step creation"
-#~ msgstr "Création de la 1ère étape"
-
-#~ msgid "choose image file"
-#~ msgstr "choisissez un fichier image"
-
-#~ msgid "Browse"
-#~ msgstr "Naviguer"
-
-#~ msgid "Configure bootsplash picture"
-#~ msgstr "Créer une image de démarrage"
-
-#~ msgid "the color of the progress bar"
-#~ msgstr "la couleur de la barre de progression"
-
-#~ msgid "Preview"
-#~ msgstr "Aperçu"
-
-#~ msgid "Choose color"
-#~ msgstr "Choisissez une couleur"
-
-#~ msgid "Make kernel message quiet by default"
-#~ msgstr "Rendre non bavards les messages noyau"
-
-#~ msgid "Notice"
-#~ msgstr "Mode d'emploi"
-
-#~ msgid "This theme does not yet have a bootsplash in %s!"
-#~ msgstr "Ces thèmes n'avaient pas encore d'image de démarrage dans %s !"
-
-#~ msgid "You must choose an image file first!"
-#~ msgstr "Vous devez choisir une image d'abord !"
-
-#~ msgid "Generating preview..."
-#~ msgstr "Création de l'aperçu..."
-
-#~ msgid "%s BootSplash (%s) preview"
-#~ msgstr "Aperçu de l'écran de démarrage %s (%s)"
-
-#~ msgid ""
-#~ "The image \"%s\" cannot be load due to the following issue:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-#~ msgstr ""
-#~ "L'image « %s » ne peut être chargée pour la raison suivante :\n"
-#~ "\n"
-#~ "<span foreground=\\\"Red\\\">%s</span>"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "Aucun lecteur de disquette disponible"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr "Insérez la disquette de mise à jour de modules dans le lecteur %s"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-#~ msgstr "Tifinagh (+latin/arabe)"
-
-#~ msgid "No network card"
-#~ msgstr "Aucune carte réseau"
-
-#~ msgid ""
-#~ "The following protocols can be used to configure an LAN connection. "
-#~ "Please choose the one you want to use"
-#~ msgstr ""
-#~ "Les protocoles suivants peuvent être utilisés pour configurer une "
-#~ "connexion LAN.\n"
-#~ "Veuillez sélectionner celui que vous désirez utiliser"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Utiliser un pilote déjà installé (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Utiliser la sécurité WPA"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Vous n'avez sélectionné aucune police"
-
-#~ msgid "Save and close"
-#~ msgstr "Sauver et quitter"
