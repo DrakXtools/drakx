@@ -323,9 +323,15 @@ sub read_lilo() {
 	$_;
     }
 
-    $_->{append} = remove_quotes_and_spaces($_->{append}) foreach \%b, @{$b{entries}};
-    $_->{label}  = remove_quotes_and_spaces($_->{label})  foreach @{$b{entries}};
-    $b{default} = remove_quotes_and_spaces($b{default}) if $b{default};
+    foreach ('append', 'default') {
+	$b{$_} = remove_quotes_and_spaces($b{$_}) if $b{$_};
+    }
+    foreach my $entry (@{$b{entries}}) {
+	foreach ('append', 'label') {
+	    $entry->{$_} = remove_quotes_and_spaces($entry->{$_}) if $entry->{$_};
+	}
+    }
+
     if (arch() =~ /ppc/) {
 	$b{method} = 'yaboot';
     } else {
