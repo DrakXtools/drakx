@@ -316,24 +316,6 @@ sub exitInstall {
     installStepsCall($o, $auto, 'exitInstall', getNextStep($::o) eq 'exitInstall');
 }
 
-sub start_i810fb() {
-    # keep the result otherwise monitor-edid does not return good results afterwards
-    eval { any::monitor_full_edid() };
-
-    my ($vga) = cat_('/proc/cmdline') =~ /vga=(\S+)/;
-    return if !$vga || listlength(cat_('/proc/fb'));
-
-    my %vga_to_xres = (0x311 => '640', 0x314 => '800', 0x317 => '1024');
-    my $xres = $vga_to_xres{$vga} || '800';
-
-    log::l("trying to load i810fb module with xres <$xres> (vga was <$vga>)");
-    eval { modules::load('intel-agp') };
-    eval {
-	my $opt = "xres=$xres hsync1=32 hsync2=48 vsync1=50 vsync2=70 vram=2 bpp=16 accel=1 mtrr=1"; #- this sucking i810fb does not accept floating point numbers in hsync!
-	modules::load_with_options([ 'i810fb' ], { i810fb => $opt }); 
-    };
-}
-
 
 #-######################################################################################
 #- MAIN
@@ -569,7 +551,10 @@ sub main {
 
     $o->{locale}{lang} = lang::set($o->{locale}) if $o->{locale}{lang} ne 'en_US' && !$::move; #- mainly for defcfg
 
-    start_i810fb();
+    # keep the result otherwise monitor-edid does not return good results afterwards
+    eval { any::monitor_full_edid() };
+
+    install_any::start_i810fb();
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
