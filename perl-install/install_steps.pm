@@ -782,6 +782,12 @@ sub setupBootloaderBefore {
 
     require bootloader;
 
+    #- auto_install backward compatibility
+    #- one should now use {message_text}
+    if ($o->{bootloader}{message} =~ m!^[^/]!) {
+	$o->{bootloader}{message_text} = delete $o->{bootloader}{message};
+    }
+
     #- remove previous ide-scsi lines
     bootloader::modify_append($o->{bootloader}, sub {
 	my ($_simple, $dict) = @_;
