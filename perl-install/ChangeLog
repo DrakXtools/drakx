@@ -1,3 +1,985 @@
+2005/06/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* harddrake/autoconf.pm: netconnect API change,
+	harddrake::autoconf::network_conf seems unused
+	anyway, and this easy_dhcp thing is already performed by hotplug
+
+	* network/network.pm: make it more readable
+	set system hostname when writing network configuration
+	update comments
+
+	* standalone/drakgw: drop unused variable, this file is modified in
+	network::shorewall now
+	new netconnect API
+
+	* network/adsl.pm: add ISP field in eagle-usb.conf
+
+	* bootsplash.pm: fix typo instead of trying to be perl_checker compliant
+	...
+
+	* network/shorewall.pm: API change (me sux)
+
+	* standalone/drakconnect: kill unused variables
+	simplify apply() since sethostname() is done by configure_network()
+	handle GATEWAY field again in manage interface
+	use real_main here since exceptions are handled
+
+	* standalone/draksplash: create adjustments before resolution is set so
+	that they get correct upper values
+	  - create update_scales_for_resolution() and
+	update_scale_values_from_conf() out of update_scale_values()
+	  - modify $adj{$_}{value} instead of calling $adj{$_}->set_value to
+	avoid some artefacts caused by callbacks
+	  - draw cross in progress bar
+	  - update_rect -> update_theme_from_rect
+	  - create update_rect out of switch_to_mode
+	really consider text box values
+
+	* printer/printerdrake.pm: new netconnect API
+
+2005/06/06  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Translated more strings
+
+2005/06/06  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm, install_any.pm: install2 functions should be steps
+	get rid of $clicked and $ent_number (obsolete)
+
+	* share/compssUsers.pl: change the default in case of low resources and
+	add the Icewm choice
+	make a special "low resources" choice
+
+	* bootloader.pm: 
+	  - put quotes if needed for root=xxx (quotes are needed for LABEL=...)
+	  - use LABEL=... if preferred
+	rewrite before adding more
+	keep read-only, read-write and label as verbatim as possible
+	(note that read-only will not appear by default anymore since "ro" is
+	the default)
+	use bootloader->{message_text} instead of bootloader->{message}
+
+	* share/rpmsrate, detect_devices.pm: make a special "low resources" choice
+
+	* install_steps.pm: get rid of $clicked and $ent_number (obsolete)
+	use bootloader->{message_text} instead of bootloader->{message}
+
+	* install_steps_interactive.pm: get rid of $clicked and $ent_number
+	(obsolete)
+	don't add us_intl, lang2keyboards() takes care of everything (bugzilla
+	#12979)
+
+	* keyboard.pm: default to "en" keyboard (as requested by pablo)
+
+	* standalone/bootloader-config: nicer error
+	  - put quotes if needed for root=xxx (quotes are needed for LABEL=...)
+	  - use LABEL=... if preferred
+
+	* install_steps_gtk.pm, install_steps_auto_install.pm: get rid of $clicked
+	and $ent_number (obsolete)
+
+2005/06/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: net interface is now in $net->{net_interface}
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* install2.pm: define $o->{net}{type} and $o->{net}{net_interface} for lan
+	installs
+	remove comment, stage1 now writes DOMAINNAME and DHCP_HOSTNAME in the
+	proper files
+	$o->{net}{network} and $o->{net}{resolv} may not exist at this stage of
+	installation (they are created by read_net_conf), create them if needed
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* mdk-stage1/network.c: write DHCP_HOSTNAME in /tmp/ifcfg-* file instead
+	of /tmp/network
+	domain name is already in /etc/resolv.conf (and stage2 reads this file
+	too), don't write it in /tmp/network
+
+	* standalone/drakconnect: drop unused subs
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* standalone/drakauth, network/modem.pm, network/adsl_consts.pm,
+	standalone/finish-install, authentication.pm, network/ethernet.pm,
+	network/isdn.pm, standalone/net_applet, standalone/drakautoinst,
+	standalone/drakpxe, install_steps_interactive.pm, network/netconnect.pm,
+	network/adsl.pm, standalone/net_monitor: 
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* install_steps.pm: introduce network_is_cheap(), use it, and fix a
+	boolean typo
+	$o->{net}{type} is already defined in more appropriate places
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* standalone/draksplash: perl_checker fixes, make mode optionnal in
+	load_image
+
+	* network/ndiswrapper.pm: drop unused variable, this is done in
+	detect_devices::get_sysfs_device_id_map()
+
+	* install_any.pm: do not use a loop device to read ISO image IDs, read
+	them directly in the file ...
+	provide backward compatibility for network fields in loadO
+	remove unneeded parentheses (keep first() to make it readable by
+	trainees ...)
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+	* network/network.pm: keep NETWORKING_IPV6 and FORWARD_IPV4 variables in
+	/etc/sysconfig/network
+	  - merge network settings in a $net hash (it modifies $o fields too):
+	o $netc becomes $net->{network} and $net->{resolv}
+	  o $intf becomes $net->{ifcfg}
+	  - move zeroconf config stuff in write_zeroconf
+	  - read_tmdns_conf -> read_zeroconf
+	  - read_all_conf -> read_net_conf
+	  - configureNetwork2 -> configure_network
+	  - configure_network: write ifcfg files for ppp interfaces too
+	  - don't install wireless-tools in configure_network, this package is
+	in basesystem
+	  - most functions don't need the file path as an argument in
+	network::network
+	  - drop network::tools::remove_initscript
+	  - don't export too much from network::network
+	  - don't export from network::tools
+	  - remove adsl_unsupported_eci step in drakconnect
+	  - drop passwd2 field in network::adsl
+	  - drop $net->{isdn_internal}
+	  - network::netconnect : main -> safe_main
+	  - use network::netconnect::real_main during install
+	  - don't read network config in network::netconnect::real_main
+	  - install_steps::upNetwork : resolv.conf is already symlinked by
+	network::network::configure_network when appropriate
+	  - try to fix install_any::generate_automatic_stage1_params to use a
+	real interface configuration
+	  - put authentication stuff in $net->{auth}
+	  - drop network::ethernet::write_ether_conf
+	  - drop network::adsl::get_wizard
+	  - use 'static' instead of 'manual' as ADSL method
+	  - drop first_modem and its workarounds in network::modem
+	  - drop deprecated "multiple_internet_cnx" step in drakconnect
+	  - don't save /etc/sysconfig/drakconnect anymore
+	  - drop MDK::Common::Globals stuff
+	  - drop getIP in net_applet (Pixel)
+	  - drop $netc->{DHCP}
+	  - configure_network(): write resolv.conf even if a dhcp interface is
+	configured
+
+2005/06/03  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: drop now unused variable
+	during_install__l2charset() was used by share/gen_locales.sh which is
+	now dropped
+	update comment
+	get rid of the few remaining $LD_LOADER
+	for finish-install
+
+	* install_steps.pm: dropping pkg_install_if_requires_satisfied() (old &
+	unused)
+	keyboard::setup() is better named keyboard::setup_install()
+
+	* authentication.pm: read existing authentication conf (only minimal
+	support for now)
+	simplify
+
+	* standalone/drakpxe: drop unused code (and one should use append_to_file
+	instead of this outpend)
+
+	* standalone/logdrake, fs/type.pm, install2.pm, raid.pm, c/stuff.xs.pl,
+	standalone/drakperm: remove unused code
+
+	* tools/drakx-in-chroot: don't rmdir directories in the chroot
+
+	* .perl_checker: add many non perl_checker compatible modules
+
+	* diskdrake/interactive.pm: remove unused isPrimary
+	drop old unused code
+
+	* commands.pm: drop oooold broken code
+	drop oooold deprecated code
+	inline old mount command which has been removed
+	keyboard::setup() is better named keyboard::setup_install()
+
+	* standalone/finish-install: add language selection to finish-install
+	adapt to network::netconnect::real_main() prototype change
+
+	* standalone/draksound: 4th parameter is not used, i suspect it's not
+	useful anymore since we pass the value in {sound_slot_index}
+
+	* detect_devices.pm: get rid of the few remaining $LD_LOADER
+
+	* standalone/XFdrake: drop setting $_ (unused)
+
+	* any.pm: get rid of the few remaining $LD_LOADER
+	don't use $in->{locale} as being $o->{locale} during install, it's much
+	better to pass $o->{locale}
+	for finish-install
+
+	* share/list.xml: more tools when debugging install
+
+	* common.pm: use "our" instead of "use vars"
+	drop untranslate which is unused and bad practice
+
+	* keyboard.pm: DISABLE_WINDOWS_KEY in /etc/sysconfig/keyboard since it is
+	unused
+	(AFAIK as i, flepied and lmontel knows)
+	(it was added by fpons, commit 1.108 on 2001/07/05)
+	rename load() into builtin_loadkeys()
+	drop obsolete code (keymaps.cz2 and xmodmap.cz2 are dead since
+	make_mdkinst_stage2 was dropped)
+	keyboard::setup() is better named keyboard::setup_install()
+	reformat keyboard2full_xkb()
+	create keyboard::configure_xorg() and use it
+	(and don't call it inside a eval, no error should occur)
+
+	* devices.pm: drop old unused code
+
+	* standalone/net_applet: make perl_checker happy
+	fix blino sux
+
+	* standalone/harddrake2, standalone/drakboot, standalone/draksplash2,
+	interactive/newt.pm, standalone/drakbug: make perl_checker happy
+
+	* standalone/drakauth: read existing authentication conf (only minimal
+	support for now)
+
+	* standalone/drakups: minimal changes to make me and perl_checker happy
+
+	* standalone/localedrake: use any::selectLanguage_and_more_standalone()
+
+	* standalone/fileshareset: use find() (which was unused)
+
+	* bootsplash.pm: 
+	  - perl_checker compliance
+	  - use "our" instead of "use vars"
+	simplify
+
+	* bootloader.pm: remove unused old code
+
+	* network/netconnect.pm: be more in drakx spirit, and more important
+	perl_checker warning clean
+
+	* pkgs.pm: remove unused code
+	make perl_checker happy
+
+	* install_steps_interactive.pm: don't use $in->{locale} as being
+	$o->{locale} during install, it's much better to pass $o->{locale}
+
+	* standalone/keyboarddrake: fix indentation (titi sux)
+	create keyboard::configure_xorg() and use it
+	(and don't call it inside a eval, no error should occur)
+
+	* partition_table.pm: remove unused isPrimary
+
+2005/06/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* crypto.pm: The mandrakelinux-release package doesn't exist any more, so
+	you can't
+	deduce the version from it. Something more robust than this needs to be
+	figured out.
+
+	* pkgs.pm: Typo fix
+
+2005/06/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* commands.pm (dd) reuse c::
+	(dd) make sysopen() call  readable
+
+	* c/stuff.xs.pl: remove doble
+	add O_CREAT
+	add O_WRONLY & O_RDWR
+
+	* network/netconnect.pm: help perl_checker
+	fix pixel sucks
+
+2005/06/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_steps.pm: random service doesn't exist anymore
+
+2005/06/02  pjetur
+
+	* share/po/is.po: Tidy up fuzzy messages
+	Fixes and msg sync
+
+2005/06/02  Pixel  <pixel at mandrakesoft.com>
+
+	* keyboard.pm: make perl_checker happy
+	  - create keyboard::default() and use it
+	  - it uses keyboard::from_DMI() to get XkbModel when possible
+
+	* install_steps.pm: 
+	  - create keyboard::default() and use it
+	  - it uses keyboard::from_DMI() to get XkbModel when possible
+	make perl_checker happy
+	revert very new titi sucks
+
+	* standalone/keyboarddrake: 
+	  - create keyboard::default() and use it
+	  - it uses keyboard::from_DMI() to get XkbModel when possible
+
+	* install_steps_interactive.pm: allow upgrading a chroot (using
+	drakx-in-chroot)
+
+	* Makefile: helper rule
+
+	* install2.pm: read in existing modprobe.conf on upgrade (bugzilla #13309)
+	allow upgrading a chroot (using drakx-in-chroot)
+
+	* share/list.xml: allow "perl -d" on install
+	allow "perl -d" on install
+
+	* install_any.pm: allow upgrading a chroot (using drakx-in-chroot)
+	create detect_devices::probe_name() &
+	detect_devices::probe_unique_name() and use them
+
+	* modules/any_conf.pm: read in existing modprobe.conf on upgrade (bugzilla
+	#13309)
+
+	* Xconfig/monitor.pm, modules.pm, detect_devices.pm,
+	install_interactive.pm: create detect_devices::probe_name() &
+	detect_devices::probe_unique_name() and use them
+
+2005/06/01  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: auto_install support for creating LABELed devices
+
+	* commands.pm, share/list.xml, Makefile: use command mount instead of
+	using directly the syscall (allows some cleanup)
+
+	* fs/format.pm: fix typo
+	set the LABEL after formatting, or drop it if we don't know how to set
+	it
+
+	* any.pm: allow specifying the uid and gid when creating a user (part of
+	bugzilla #15190)
+	add language selection to finish-install
+
+	* standalone/finish-install, standalone/localedrake: add language
+	selection to finish-install
+
+	* Xconfig/xfree.pm: add many resolutions, but don't allow them yet
+
+	* fs.pm: merge_fstabs doesn't mess around with options anymore in "loose"
+	mode
+	ensure reading existing fstab in suggest_mount_points doesn't get its
+	options
+	nicer log
+	use command mount instead of using directly the syscall (allows some
+	cleanup)
+
+2005/06/01  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Tape backup/restore fixes to work with new
+	.backupignore scheme, +bugs.
+
+2005/06/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_steps.pm (miscellaneousAfter) fix very old uncatched bug
+
+	* install_steps_interactive.pm (acceptLicense) fix exiting step license
+
+	* interactive/gtk.pm (ask_fromW) simplify
+	(ask_fromW) do not use next in callback
+
+2005/05/31  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn.pm: use services::set_status
+	read I4L_IDLETIME setting
+	handle huptimeout setting again (I4L_IDLETIME in isdn4net)
+
+	* network/netconnect.pm: 
+	  - rename "hw_account" step as "isdn_account"
+	  - remove unneeded code
+	  - don't overwrite huptimeout value
+	tag obscure isdn card settings as advanced
+	if__(exists $foo, $bar) returns $bar whatever $foo is, don't try to
+	make smart code that don't work (initial goal was probably to hide
+	some isdn settings if they weren't set)
+	really handle irq, mem, io, io0, io1 isdn paramaters (i.e. finish the
+	"fix parameters reading/writin in isdn config" commit from Titi)
+	handle huptimeout setting again (I4L_IDLETIME in isdn4net)
+
+	* standalone/drakconnect: remove dead code
+
+	* standalone/finish-install: remove unneded modules loading ('net'
+	category is deprecated for ages)
+
+2005/05/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2005/05/31  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: for drakx-finish-install
+
+	* standalone/drakedm: adding back translation of descriptions for some
+	known display managers
+
+2005/05/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+2005/05/31  willysr
+
+	* share/po/id.po: Updated
+
+2005/05/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: move netprofile stuff in network::network
+	add missing closing brace
+	external isdn modems don't require the "isdn_dial_on_boot" step
+	$netc->{isdntype} is unneeded
+	simply isdn external modem code (remove $netcnx->{isdn_external})
+	use network::thirdparty for modem devices
+
+	* any.pm, network/network.pm, standalone/net_applet: move netprofile stuff
+	in network::network
+
+	* network/thirdparty.pm: add no_club option to specify that no club
+	drivers are available (ECI)
+	allow to ask for some configuration fields (useful for "device" in "rtc"
+	category)
+
+	* network/isdn.pm: remove unneeded comments
+
+2005/05/30  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: don't skip selectLanguage, selectKeyboard and miscellaneous
+	by default in drakx-in-chroot
+	remove dead code
+	make drakx-in-chroot work
+
+	* standalone/drakedm: 
+	  - don't use hard written entries anymore
+	  - display the entries sorted as given
+	  - simplify code using more drakx functions
+	look for *.conf
+
+	* pkgs.pm: don't kill runaway processes in drakx-in-chroot since we don't
+	detect wether those are runaway processes or normal processes
+
+	* install_steps_interactive.pm: button "Reboot" is better called "Quit"
+	for chrooted installs
+
+	* install_steps.pm, tools/drakx-in-chroot, install_any.pm: make
+	drakx-in-chroot work
+
+2005/05/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix spacing in 10.3-0.20mdk's changelog
+	10.3-0.20mdk
+
+	* modules.pm (write_preload_conf) factorize modules managment
+	(write_preload_conf) simplify DVB & TV managment through
+	probe_category()
+
+	* standalone/service_harddrake: load drivers for newly added devices so
+	that they work out of the box on first
+	boot after card plugging for the following categorys: AGP ATA_STORAGE
+	DVB
+	SATA_STORAGE SCSI_CONTROLLER TV
+
+2005/05/29  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: 
+	  - Support for PPD file names with spaces (bug #16172).
+
+2005/05/28  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/05/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* common.pm: update comment
+
+	* network/netconnect.pm, network/tools.pm, network/thirdparty.pm: initial
+	import of network::thirdparty (this module factorizes the thirdparty
+	software/drivers/firmwares detection and installation code, it points
+	the user to the relevant packages/documentation/url if needed, and don't
+	allow to configure a device if its requirements aren't satisfied)
+
+2005/05/27  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakedm: handle /etc/X11/dm.d/* entries (as proposed by Loic
+	Baudry)
+
+	* install_steps.pm: kderc_largedisplay() is no more needed
+	kfm is gone for some time
+	  - since set_security doesn't depend on the bootloader password, we can
+	call it where it should
+	  - ensure we don't drop entries from /etc/sysconfig/system
+	remove unused and obsolete code
+	  - CLASS in /etc/sysconfig/system is deprected (is always "beginner")
+	  - SECURITY in /etc/sysconfig/system is unused (and always was)
+
+	* drakxtools.spec: we need latest perl-MDK-Common
+
+	* bootloader.pm: fix typo in comment
+
+	* security/various.pm: use addVarsInSh()
+
+	* install_any.pm: kderc_largedisplay() is no more needed
+	kfm is gone for some time
+	don't set DRAKX_PASSWORD and DURING_INSTALL for msec since msec doesn't
+	care about them anymore
+	replace $o->{localInstall} with $::local_install
+
+	* install2.pm: 
+	  - since set_security doesn't depend on the bootloader password, we can
+	call it where it should
+	  - ensure we don't drop entries from /etc/sysconfig/system
+
+2005/05/27  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm: Comment fixes, remove noisy log
+	Remove the naming convention with a trailing "s" for supplementary CDs
+	medium ids
+
+	* install_any.pm: Comment fixes, remove noisy log
+	Remove the naming convention with a trailing "s" for supplementary CDs
+	medium ids
+	Remove unused function
+
+2005/05/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm (get_ims) rollback debug statement
+	enable to select extra SCIM combinaisons: scim+anthy, scim+canna,
+	scim+fcitx, scim+m17n, scim+prime, and scim+skk;
+
+	* any.pm (selectCountry) fix warning and cleanup
+	(selectCountry) display SCIM combinaisons in a sub menu
+
+	* interactive/gtk.pm (ask_fromW) fix set/get from sub leaf of ComboBox
+	with tree
+
+	* drakxtools.spec: 10.3-0.19mdk
+
+	* share/po/br.po: update
+
+2005/05/26  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/shorewall.pm: create $ask_shorewall_interface_label,
+	shorewall_interface_choices()
+	and set_net_interface() out of ask_shorewall_interface() to avoid code
+	duplication
+	perl_checker fixes
+	better way to handle squid ports (read shorewall REDIRECT rules in
+	network::shorewall::read to avoid tricks in network::shorewall::write)
+	read_squid_conf() is now in network::squid
+	simplify check_iptables()
+
+	* standalone/drakgw: remove debug code
+	check_iptables() doesn't need a $in object anymore
+	add "choose_net_interface" step to have a real wizard step when asking
+	net interface
+	better way to handle squid ports (read shorewall REDIRECT rules in
+	network::shorewall::read to avoid tricks in network::shorewall::write)
+
+	* standalone/draksplash: 
+	  - use scrollbar in preview window
+	  - try not to be larger than screen size minus toolbars size
+	  - close_window -> close_all
+
+2005/05/26  Pixel  <pixel at mandrakesoft.com>
+
+	* share/devices: /dev/tty is needed to debug stage2
+
+	* lang.pm: for drakx-finish-install
+
+	* tools/install-xml-file-list: 
+	  - enhance script so that we don't have to list bsh
+	  - add bash when DEBUG_INSTALL
+	  - handle <if set="..."> tag
+	  - hide some stuff when non verbose
+
+	* share/list.xml: 
+	  - enhance script so that we don't have to list bsh
+	  - add bash when DEBUG_INSTALL
+	  - add stuff to enable perl debugging when DEBUG_INSTALL is set
+	  - ash is now a symlink, add bsh
+
+	* Makefile.config, commands, install2, share/aliases: switch from
+	/usr/bin/perl-install to /usr/lib/libDrakX
+
+	* install_steps_gtk.pm, tools/drakx-in-chroot, install2.pm, modules.pm:
+	replace unused $o->{localInstall} with $::local_install, partially used
+	instead of $::uml_install
+	and used in drakx-in-chroot
+
+	* share/symlinks: /etc/termcap is needed for perl debugging
+
+2005/05/26  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Factorize and ensure checking main installation method
+	Don't use the \d+s regexp on medium ids to see if that's suppl cds.
+	More refactorisation
+
+	* pkgs.pm: Show the "downloading hdlist" wait box only when downloading
+	hdlist from a network medium
+	Remove spurious field
+	More refactorisation
+
+	* install_steps.pm, install_steps_gtk.pm, install_steps_interactive.pm:
+	More refactorisation
+
+2005/05/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.18mdk
+
+	* share/rpmsrate: help emacs somewhat
+	list alternative IMs so that they're on CDs (in order not to break
+	updates):
+
+	* interactive.pm (ask_from_normalize) since we can now use ComboBoxes with
+	trees, do
+	not use big TreeView instead of small ComboBox when not asked for
+
+	* detect_devices.pm (getSCSI_26) fix of by one error resulting in
+	misdetecing USB mass
+	storage devices (#13569)
+
+	* interactive/gtk.pm (ask_fromW) help perl_checker
+	fix setting a combobox with a tree
+	(__create_tree_model, create_treeview_tree, ask_fromW) enable to use
+	ComboBoxes with trees
+
+	* lang.pm: enable to select scim+uim again
+	install needed packages for kinput2
+
+2005/05/25  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/05/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/shorewall.pm: use if_()
+
+	* standalone/net_applet: let user call drakroam (#16019)
+
+2005/05/25  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm, crypto.pm, install_any.pm,
+	install_steps_interactive.pm: Begin refactorization of install medium
+	handling code
+
+	* pkgs.pm: Mark an argument as optional
+	Begin refactorization of install medium handling code
+
+2005/05/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: rollback clean_rpmsrate's changes
+	install both as10k1 and ld10k1 for both snd-emu10k1 and snd-emu10k1x
+	driven sound cards
+
+2005/05/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: remove unneeded trick since network::network
+	always update NETWORK and
+	BROADCAST now
+
+	* network/shorewall.pm: 
+	  - split warning out of check_iptables()
+	  - get_default_device() -> get_ifcfg_interface()
+	  - get_net_device() -> get_shorewall_interface()
+	  - create ask_shorewall_interface() out of default_interfaces()
+	  - create read_default_interfaces() to replace default_interfaces() and
+	default_interfaces_silent()
+	  - use services::set_status() in write()
+
+	* network/network.pm: 
+	  - move read_dhcpd_conf() in network::dhcpd
+	  - move read_squid_conf() in network::squid
+	  - create update_broadcast_and_network() and force NETWORK and
+	BROADCAST variables update
+
+	* run_program.pm: fix return code when chroot can't be done
+
+	* standalone/drakgw: 
+	  - wizardify
+	  - allow not to enable DNS, dhcpd and proxy servers
+	  - allow not to enable CUPS broadcast
+	  - use @IF (network interface) instead of network address in CUPS
+	configuration
+
+	* network/squid.pm: initial import, move read_squid_conf() from
+	network::network and split write_squid_conf() from drakgw
+
+	* network/dhcpd.pm: initial import, move read_dhcpd_conf() from
+	network::network and split write_dhcpd_conf() from drakgw
+
+	* services.pm: 
+	  - introduce set_status(), restart_or_start() and service_exists()
+	  - cleanups (use run_program success status)
+
+2005/05/24  Pixel  <pixel at mandrakesoft.com>
+
+	* share/devices: fix typo
+
+	* pkgs.pm: ensure {needToCopy} is not dropped when calling read_rpmsrate()
+	more than once
+
+2005/05/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Modernize, remove old code
+
+2005/05/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.17mdk
+
+	* share/rpmsrate: list sb16_csp only once
+
+2005/05/23  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/Makefile: finish moving from list to list.xml
+
+	* rescue/make_rescue_img, Makefile: 
+	  - create kernel/RPMS/ to copy rpms before expanding them in
+	kernel/all.kernels
+	  - remove old compatability code
+	  - add some doc in update_kernel
+
+2005/05/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: use mousedrake to configure tablets & touchscreens
+
+	* share/po/fr.po: typo fix (blino)
+
+	* share/rpmsrate: install sb16_csp for SB sound cards
+	install ld10k1 for snd-emu10k1 and snd-emu10k1x
+	install hdspconf for snd-hdsp
+
 2005/05/22  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/zh_CN.po: Updated simplified Chinese translation.
@@ -49903,7 +50885,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1039 2005/04/12 13:43:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1040 2005/05/23 05:27:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
