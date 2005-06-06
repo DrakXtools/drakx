@@ -305,7 +305,7 @@ sub build_notebook {
                                                      my $proto = $gui->{intf}{BOOTPROTO};
                                                      my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
 
-                                                     foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
+                                                     foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{network}{GATEWAY}) {
                                                          $_->set_sensitive(to_bool($protocol eq "static"));
                                                      }
                                                      $gui->{sheet}{DHCP}->set_sensitive($intf->{BOOTPROTO} eq 'dhcp');
@@ -327,7 +327,7 @@ sub build_notebook {
                                 if_($is_ethernet,
                                     0, gtkpack(Gtk2::VBox->new(1,0),
                                                gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Gateway"))),
-                                               gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+                                               gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{network}{GATEWAY} = Gtk2::Entry->new,
                                                                                             key_press_event => $apply)),
                                            ),
                                 ),
@@ -354,14 +354,14 @@ sub build_notebook {
             $proto->set_popdown_strings(values %{$proto->{protocols}});
             $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO} || 'none'});
             if ($intf->{BOOTPROTO} ne 'static') {
-                $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
+                $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{network}{GATEWAY};
             }
 	} else {
-	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
+	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{network}{GATEWAY};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_name);
-	$gui->{netc}{$_}->set_text($net->{$_}) foreach keys %{$gui->{netc}};
+	$gui->{network}{$_}->set_text($net->{network}{$_}) foreach keys %{$gui->{network}};
     }
 
     if ($intf->{pages}{DHCP}) {
@@ -659,7 +659,7 @@ sub save {
 sub save_notebook {
     my ($intf, $gui) = @_;
 
-    $net->{$_} = $gui->{netc}{$_}->get_text foreach keys %{$gui->{netc}};
+    $net->{$_} = $gui->{network}{$_}->get_text foreach keys %{$gui->{network}};
     $gui->{intf}{$_} and $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
     $gui->{intf_radio}{$_} and $intf->{$_} = $gui->{intf_radio}{$_} foreach keys %{$gui->{intf_radio}};
     $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
