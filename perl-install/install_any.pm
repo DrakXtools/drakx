@@ -32,7 +32,7 @@ our $current_medium = $boot_medium;
 our $asked_medium = $boot_medium;
 our @advertising_images;
 
-#- current ftp root (for getFile) ­- XXX must store this per media
+#- current ftp root (for getFile) -- XXX must store this per media
 our $global_ftp_prefix;
 
 sub drakx_version() { 
