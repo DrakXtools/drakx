@@ -4,7 +4,6 @@ package network::shorewall; # $Id$
 
 
 use detect_devices;
-use network::netconnect;
 use network::ethernet;
 use network::network;
 use run_program;
@@ -40,11 +39,9 @@ sub get_config_file {
 }
 
 sub get_ifcfg_interface() {
-    my $netcnx = {};
-    my $netc = {};
-    my $intf = {};
-    network::netconnect::read_net_conf($netcnx, $netc, $intf);
-    network::tools::get_default_gateway_interface($netc, $intf);
+    my $net = {};
+    network::network::read_net_conf($net);
+    network::tools::get_default_gateway_interface($net);
 }
 
 sub get_shorewall_interface() {
