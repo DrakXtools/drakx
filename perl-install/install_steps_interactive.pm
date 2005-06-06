@@ -109,7 +109,7 @@ sub selectKeyboard {
 
     if ($::expert || $clicked || !($from_usb || @$l && $l->[0][1] >= 90) || listlength(lang::langs($o->{locale}{langs})) > 1) {
 	add2hash($o->{keyboard}, $from_usb);
-	my @best = uniq($from_usb ? $from_usb->{KEYBOARD} : (), (map { $_->[0] } @$l), 'us_intl');
+	my @best = uniq($from_usb ? $from_usb->{KEYBOARD} : (), map { $_->[0] } @$l);
 
 	my $format = sub { translate(keyboard::KEYBOARD2text($_[0])) };
 	my $other;
