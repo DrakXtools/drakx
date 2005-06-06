@@ -57,9 +57,9 @@ sub sagem_set_parameters {
             s/VCI=.*\n/VCI=$l{vci}\n/;
             s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
+            s/ISP=.*\n/ISP=$net->{adsl}{provider_id}\n/;
             s/STATIC_IP=.*\n//;
             s!</eaglectrl>!STATIC_IP=$static_ip\n</eaglectrl>! if $static_ip;
-            #- TODO: add ISP info, $netc->{provider_id}
         } "$::prefix$cfg_file";
     }
     #- create CMV symlinks for both POTS and ISDN lines
