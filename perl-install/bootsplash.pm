@@ -163,8 +163,8 @@ sub rectangle2xywh {
 }
 
 sub xywh2rectangle {
-    my ($x, $y, $w, $_h) = @_;
-    [ { X => $x, Y => $y }, { X => $x+$w, Y => $y+$w } ];
+    my ($x, $y, $w, $h) = @_;
+    [ { X => $x, Y => $y }, { X => $x+$w, Y => $y+$h } ];
 }
 
 sub distance {
