@@ -271,7 +271,7 @@ sub switch_to_mode {
     if ($current_mode == 0) { #- silent
 	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'px', 'py', 'pw', 'ph'});
     } else { #- verbose or console
-	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'px', 'py', 'pw', 'ph'});
+	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
     }
     undef $current_point;
     $image_area->queue_draw;
