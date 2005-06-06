@@ -82,8 +82,6 @@ unless ($::isEmbedded) {
 }
 $window1->{rwindow}->set_border_width(10);
 
-my $warning_label1;
-
 my $button_apply;
 
 
@@ -799,7 +797,6 @@ sub update_intbutt() {
     $int_connect->set_sensitive(1);
 }
 
-my $to_update;
 sub update() {
     my $h = chomp_(`hostname`);
     $label_host->set_label($h);
