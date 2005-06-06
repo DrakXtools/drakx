@@ -131,7 +131,7 @@ $window1->{window}->add(
                                                               clicked => sub {
                                                                   local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                   eval { # For wizcancel
-                                                                      network::netconnect::safe_main($net, $in, $modules_conf);
+                                                                      network::netconnect::real_main($net, $in, $modules_conf);
                                                                       $button_apply->set_sensitive(1);
                                                                       update();
                                                                   };
