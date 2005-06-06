@@ -99,6 +99,7 @@ sub write_network_conf {
     $net->{network}{NETWORKING} = 'yes';
 
     setVarsInSh($network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6));
+    $net->{network}{HOSTNAME} and sethostname($net) unless $::isInstall;
 }
 
 sub write_zeroconf {
