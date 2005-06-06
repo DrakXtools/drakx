@@ -85,8 +85,6 @@ gtkadd($window->{window},
 			 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&close_all)))),
 gtkshow(gtkadd($preview_window->{window}, $scroll));
 
-update_scale_values();
-
 $window->{rwindow}->set_border_width(5);
 $window->{rwindow}->set_position('center');
 $window->{rwindow}->show_all;
@@ -99,7 +97,7 @@ sub close_all() {
    ugtk2->exit(0);
 }
 
-sub read_theme_config {
+sub read_theme_config() {
     my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
     -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
     if (-f $theme{conf}{silentjpeg}) {
@@ -109,7 +107,7 @@ sub read_theme_config {
 	load_image($theme{conf}{jpeg}, 1);
     }
     $theme{conf}{pc} ||= '0x21459d';
-    update_scale_values();
+    update_scale_values_from_conf();
     update_rect();
 }
 
@@ -127,6 +125,7 @@ sub set_theme {
 	my ($res) = @_;
 	$theme{res} = $res;
 	($theme{res_w}, $theme{res_h}) = $theme{res} =~ /([^x]+)x([^x]+)/;
+	update_scales_for_resolution();
 	read_theme_config();
 	$image_area->set_size_request($theme{res_w}, $theme{res_h});
 	#- try not to be larger than screen size minus toolbars size
@@ -223,16 +222,13 @@ sub check_scale_value {
     my $max = get_scale_max($changed) - $adj{$changed}->get_value;
     $adj{$linked}->get_value > $max and $adj{$linked}->set_value($max);
 }
-sub update_scale_values {
-    foreach (keys %scale_settings) {
-	$theme{conf}{$_} eq '' and $theme{conf}{$_} = get_scale_max($_) * $scale_settings{$_}[0];
-    }
-    foreach (keys %adj) {
-	$adj{$_}->upper(get_scale_max($_));
-	$adj{$_}->set_value($theme{conf}{$_});
-    }
+sub update_scales_for_resolution() {
+    $theme{conf}{$_} ||= get_scale_max($_) * $scale_settings{$_}[0] foreach keys %scale_settings;
+    $adj{$_}->upper(get_scale_max($_)) foreach keys %adj;
 }
-
+sub update_scale_values_from_conf() {
+    $adj{$_}{value} = $theme{conf}{$_} foreach keys %adj;
+}
 
 sub create_image_area() {
     my $image_area = Gtk2::DrawingArea->new;
@@ -289,7 +285,7 @@ sub update_theme_from_rect() {
     } else { #- verbose or console
 	@{$theme{conf}}{'tx', 'ty', 'tw', 'th'} = bootsplash::rectangle2xywh($current_rect);
     }
-    update_scale_values();
+    update_scale_values_from_conf();
     $image_area->queue_draw;
 }
 
