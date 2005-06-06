@@ -3,6 +3,7 @@ package tmp::compssUsers;
 use common;
 use ugtk2 qw(:helpers :wrappers :create);
 
+my $low_resources = availableRamMB() < 100 || detect_devices::ix86_cpu_frequency() < 450;
 my $meta_class = $::o->{meta_class};
 my $desktop = $meta_class eq 'desktop';
 my $powerpack = $meta_class eq 'powerpack';
@@ -146,14 +147,18 @@ N_("Graphical Environment") =>
   { label => N_("KDE Workstation"),
     descr => N_("The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"),
     flags => [ qw(KDE X ACCESSIBILITY) ],
-    default_selected => 1,
+    default_selected => !$low_resources,
   },
   { label => N_("GNOME Workstation"),
     descr => N_("A graphical environment with user-friendly set of applications and desktop tools"),
     flags => [ qw(GNOME X ACCESSIBILITY) ], 
   },
+  { label => N_("IceWm Desktop"),
+    flags => [ qw(ICEWM X ACCESSIBILITY) ], 
+    default_selected => $low_resources,
+  },
   { label => N_("Other Graphical Desktops"),
-    descr => N_("Icewm, Window Maker, Enlightenment, Fvwm, etc"),
+    descr => N_("Window Maker, Enlightenment, Fvwm, etc"),
     flags => [ qw(GRAPHICAL_DESKTOP X ACCESSIBILITY) ], 
   },
 ],

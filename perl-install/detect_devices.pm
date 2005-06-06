@@ -441,6 +441,10 @@ sub getCPUs() {
     @cpus;
 }
 
+sub ix86_cpu_frequency() {
+    cat_('/proc/cpuinfo') =~ /cpu MHz\s*:\s*(\d+)/ && $1;
+}
+
 sub getSoundDevices() {
     modules::probe_category('multimedia/sound');
 }
