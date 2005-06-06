@@ -41,12 +41,12 @@ my %scale_settings = (
 		      ph => [ 1/10, N("the height of the progress bar") ],
 		     );
 
+my %adj;
+create_adj_widgets();
+
 my %theme;
 set_theme('new_theme');
 set_resolution([ bootsplash::get_framebuffer_resolution() ]->[0]);
-
-my %adj;
-create_adj_widgets();
 
 my $current_mode;
 my $notebook = gtksignal_connect(Gtk2::Notebook->new, switch_page => sub {
