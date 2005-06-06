@@ -443,9 +443,9 @@ sub lang2keyboards {
     my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map {
 	my $h = lang::analyse_locale_name($_);
 	#- example: pt_BR and pt
-	my @l = (if_($h->{country}, $h->{main} . '_' . $h->{country}), $h->{main});
+	my @l = (if_($h->{country}, $h->{main} . '_' . $h->{country}), $h->{main}, 'en');
 	my $k = find { $_ } map { $lang2keyboard{$_} } @l;
-	unpack_keyboards($k) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
+	unpack_keyboards($k) || internal_error();
     } @_;
     \@li;
 }
