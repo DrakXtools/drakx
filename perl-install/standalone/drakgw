@@ -52,10 +52,8 @@ unless ($kernel_version >= 2.4) {
     $in->exit(-1);
 }
 
-my $netc = {};
-my $netcnx = {};
-my $intfs = {};
-network::network::read_all_conf($::prefix, $netc, $intfs, $netcnx);
+my $net = {};
+network::network::read_net_conf($net);
 my $modules_conf = modules::any_conf->read;
 my %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } network::ethernet::get_eth_cards($modules_conf);
 
@@ -169,7 +167,7 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 	     lan_configure =>
 	     {
 	      pre => sub {
-		  $lan_intf = $intfs->{$lan_interface_name} ||= {};
+		  $lan_intf = $net->{ifcfg}{$lan_interface_name} ||= {};
 		  $lan_intf->{DEVICE} = $lan_interface_name;
 		  $lan_intf->{ONBOOT} = 'yes';
 		  $lan_intf->{BOOTPROTO} = 'static';
@@ -187,14 +185,14 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 	      },
 	      complete => sub {
 		  network::network::update_broadcast_and_network($lan_intf);
-		  if (my $conflict = find { $_->{NETWORK} eq $lan_intf->{NETWORK} } grep { $_->{DEVICE} ne $lan_intf->{DEVICE} } values %$intfs) {
+		  if (my $conflict = find { $_->{NETWORK} eq $lan_intf->{NETWORK} } grep { $_->{DEVICE} ne $lan_intf->{DEVICE} } values %{$net->{ifcfg}}) {
 		      $in->ask_warn(N("Error"), N("Potential LAN address conflict found in current config of %s!\n", $conflict->{DEVICE}));
 		      return 1;
 		  }
 		  0;
 	      },
 	      post => sub {
-		  network::network::configureNetwork2($in, $modules_conf, $::prefix, $netc, $intfs) unless $::testing;
+		  network::network::configure_network($net, $in, $modules_conf) unless $::testing;
 		  return "dns";
 	      },
 	     },

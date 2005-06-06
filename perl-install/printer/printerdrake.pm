@@ -4162,11 +4162,7 @@ sub check_network {
 		    if ($::isInstall) {
 			my $o = $in;
 			require network::netconnect;
-		        network::netconnect::main(
-			     $o->{netcnx} ||= {}, 
-			     $in, $o->{modules_conf}, $o->{netc}, $o->{mouse}, 
-			     $o->{intf});
-#    my ($prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+			network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
 		    } else {
 			system("/usr/sbin/drakconnect");
 		    }
