@@ -21,7 +21,7 @@ sub xconf {
 sub network_conf {
     my ($obj) = @_;
     require network::network;
-    network::network::easy_dhcp($obj->{modules_conf}, $obj->{netc}, $obj->{intf}) and $obj->{netcnx}{type} = 'lan';
+    network::network::easy_dhcp($obj->{net}, $obj->{modules_conf});
 }
 
 sub mouse_conf {
