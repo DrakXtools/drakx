@@ -296,11 +296,11 @@ sub formatMountPartitions {
 
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o, $rebuild_needed) = @_;
+    my ($o) = @_;
 
-    install_any::setPackages($o, $rebuild_needed);
+    install_any::setPackages($o);
     pkgs::selectPackagesAlreadyInstalled($o->{packages});
-    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages});
+    pkgs::selectPackagesToUpgrade($o->{packages}) if $o->{isUpgrade};
 }
 
 sub deselectFoundMedia {
@@ -312,7 +312,7 @@ sub selectSupplMedia { '' }
 sub askSupplMirror { '' }
 
 sub choosePackages {
-    my ($o, $packages, $_compssUsers, $first_time) = @_;
+    my ($o) = @_;
 
     #- now for upgrade, package that must be upgraded are
     #- selected first, after is used the same scheme as install.
@@ -325,12 +325,10 @@ sub choosePackages {
 
     add2hash_($o, { compssListLevel => 5 }) if !$::auto_install;
 
-    #- avoid destroying user selection of packages but only
-    #- for expert, as they may have done individual selection before.
-    if ($first_time || !$::expert) {
-	exists $o->{compssListLevel}
-	  and pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableCorrected);
-    }
+    #- !! destroying user selection of packages (they may have done individual selection before)
+    exists $o->{compssListLevel}
+	  and pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableCorrected);
+
     $availableCorrected;
 }
 
@@ -435,7 +433,7 @@ sub pkg_install {
     }
 }
 
-sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
+sub installPackages { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
 

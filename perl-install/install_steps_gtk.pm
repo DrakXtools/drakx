@@ -170,26 +170,26 @@ sub charsetChanged {
 #- Steps Functions
 #-######################################################################################
 sub selectLanguage {
-    my ($o, $first_time) = @_;
+    my ($o) = @_;
     $o->SUPER::selectLanguage;
   
     $o->ask_warn('',
 formatAlaTeX(N("Your system is low on resources. You may have some problem installing
 Mandriva Linux. If that occurs, you can try a text install instead. For this,
-press `F1' when booting on CDROM, then enter `text'."))) if $first_time && availableRamMB() < 70; # 70MB
+press `F1' when booting on CDROM, then enter `text'."))) if availableRamMB() < 70; # 70MB
 
 }
 
 #------------------------------------------------------------------------------
 sub selectMouse {
-    my ($o, $force) = @_;
+    my ($o) = @_;
     my %old = %{$o->{mouse}};
-    $o->SUPER::selectMouse($force) or return;
+    $o->SUPER::selectMouse or return;
     my $mouse = $o->{mouse};
     $mouse->{type} eq 'none' ||
       $old{type}   eq $mouse->{type}   && 
       $old{name}   eq $mouse->{name}   &&
-      $old{device} eq $mouse->{device} && !$force and return;
+      $old{device} eq $mouse->{device} and return;
 
     while (1) {
 	my $x_protocol_changed = mouse::change_mouse_live($mouse, \%old);

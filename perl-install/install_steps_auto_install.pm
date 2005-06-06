@@ -26,8 +26,7 @@ sub new {
 	@ISA = ($interactiveClass, @ISA);
 
 	foreach my $f (@{$o->{orderedSteps}}) {
-	    my $auto_name = member($f, @{$o->{interactiveSteps}}) ? 'noauto' : 'auto';
-	    $o->{steps}{$f}{$auto_name} = 1;
+	    $o->{steps}{$f}{auto} = 1 if !member($f, @{$o->{interactiveSteps}});
 	}
 
 	goto &{$::{$interactiveClass . "::"}{new}};

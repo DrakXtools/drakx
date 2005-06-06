@@ -389,16 +389,16 @@ sub formatMountPartitions {
 
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o, $rebuild_needed) = @_;
+    my ($o) = @_;
 
-    my $w = $o->wait_message('', $rebuild_needed ? N("Looking for available packages and rebuilding rpm database...") :
+    my $w = $o->wait_message('', $o->{isUpgrade} ? N("Looking for available packages and rebuilding rpm database...") :
 			     N("Looking for available packages..."));
-    install_any::setPackages($o, $rebuild_needed);
+    install_any::setPackages($o);
 
     $w->set(N("Looking at packages already installed..."));
     pkgs::selectPackagesAlreadyInstalled($o->{packages});
 
-    if ($rebuild_needed) {
+    if ($o->{isUpgrade}) {
 	$w->set(N("Finding packages to upgrade..."));
 	pkgs::selectPackagesToUpgrade($o->{packages});
     }
@@ -444,11 +444,11 @@ sub selectSupplMedia {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compssUsers, $_first_time) = @_;
+    my ($o) = @_;
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
-    $o->chooseCD($packages) if install_any::method_allows_medium_change($o->{method});
+    $o->chooseCD($o->{packages}) if install_any::method_allows_medium_change($o->{method});
 
     my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = &install_steps::choosePackages;
@@ -456,7 +456,7 @@ sub choosePackages {
 
     require pkgs;
 
-    my $min_size = pkgs::selectedSize($packages);
+    my $min_size = pkgs::selectedSize($o->{packages});
     undef $w;
     if ($min_size >= $availableC) {
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
@@ -467,12 +467,12 @@ sub choosePackages {
     my $min_mark = 4;
 
   chooseGroups:
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
+    $o->chooseGroups($o->{packages}, $o->{compssUsers}, $min_mark, \$individual) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
 
     ($o->{packages_}{ind}) =
-      pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
+      pkgs::setSelectedFromCompssList($o->{packages}, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
 
-    $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
+    $o->choosePackagesTree($o->{packages}) or goto chooseGroups if $individual;
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
     install_any::warnAboutNaughtyServers($o) or goto chooseGroups if !$o->{isUpgrade} && $o->{meta_class} ne 'firewall';
@@ -1226,7 +1226,7 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    my ($o, $ent_number) = @_;
+    my ($o) = @_;
     if (arch() =~ /ppc/) {
 	if (detect_devices::get_mac_generation() !~ /NewWorld/ && 
 	    detect_devices::get_mac_model() !~ /IBM/) {
@@ -1243,11 +1243,7 @@ N("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	if ($ent_number == 1) {
-	    any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
-	} else {
-	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
-	}
+	any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 	any::installBootloader($o, $o->{bootloader}, $o->{all_hds}) or die "already displayed";
     }
 }

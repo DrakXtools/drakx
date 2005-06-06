@@ -592,7 +592,7 @@ sub load_rate_files {
 }
 
 sub setPackages {
-    my ($o, $rebuild_needed) = @_;
+    my ($o) = @_;
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
@@ -600,8 +600,8 @@ sub setPackages {
 
 	1 while $suppl_method = $o->selectSupplMedia($suppl_method);
 
-	#- open rpm db according to right mode needed.
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($rebuild_needed);
+	#- open rpm db according to right mode needed (ie rebuilding database if upgrading)
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{isUpgrade});
 
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
