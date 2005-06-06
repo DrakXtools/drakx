@@ -40,7 +40,7 @@ my $tmdns_file = "$::prefix/etc/tmdns.conf";
 #-     dnsServer : dns server 1
 #-     dnsServer2 : dns server 2
 #-     dnsServer3 : dns server 3 : note that we uses the dns1 for the LAN, and the 2 others for the internet conx
-#-     DOMAINNAME : domainname : string : $netc->{HOSTNAME} =~ /\.(.*)/ by default
+#-     DOMAINNAME : domainname : string : $net->{network}{HOSTNAME} =~ /\.(.*)/ by default
 #-     DOMAINNAME2 : well it's another domainname : have to look further why we used 2
 #-   adsl: bus, Encapsulation, vpi, vci provider_id, method, login, passwd, ethernet_device, capi_card
 #-   cable: bpalogin, login, passwd
@@ -48,7 +48,7 @@ my $tmdns_file = "$::prefix/etc/tmdns.conf";
 #-   auth: LDAPDOMAIN WINDOMAIN
 #-   ifcfg (/etc/sysconfig/network-scripts/ifcfg-*):
 #-     key : device name
-#-     value : hash containing ifcfg file values
+#-     value : hash containing ifcfg file values, see write_interface_conf() for an exhaustive list
 #-       DHCP_HOSTNAME : If you have a dhcp and want to set the hostname
 #-       IPADDR : IP address
 #-       NETMASK : netmask
