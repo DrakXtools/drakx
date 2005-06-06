@@ -310,7 +310,7 @@ sub read_lilo() {
 		if (arch() =~ /ppc/ && $_ eq 'initrd') {
 		    $v = yaboot2file($v);
 		}
-		$e->{$_} = $v || 1 if !member($_, 'read-only');
+		$e->{$_} = $v || 1;
 	    }
 	}
     }
@@ -981,7 +981,7 @@ sub write_yaboot {
 	    #- xfs module on PPC requires larger initrd - say 6MB?
 	    push @entry_conf, "initrd-size=6144" if $bootloader->{xfsroot};
 	    push @entry_conf, qq(append=" $entry->{append}") if $entry->{append};
-	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
+	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only);
 	    push @conf, map { "\t$_" } @entry_conf;
 	} else {
 	    my $of_dev = dev2yaboot($entry->{kernel_or_dev});
@@ -1088,15 +1088,14 @@ sub write_lilo {
     foreach my $entry (@{$bootloader->{entries}}) {
 	push @conf, "$entry->{type}=" . $file2fullname->($entry->{kernel_or_dev});
 	my @entry_conf;
-	push @entry_conf, "label=" . make_label_lilo_compatible($entry->{label});
+	push @entry_conf, "label=" . make_label_lilo_compatible($entry->{label}) if $entry->{label};
 
 	if ($entry->{type} eq "image") {		
 	    push @entry_conf, "root=$entry->{root}" if $entry->{root};
 	    push @entry_conf, "initrd=" . $file2fullname->($entry->{initrd}) if $entry->{initrd};
 	    push @entry_conf, qq(append="$entry->{append}") if $entry->{append};
 	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
-	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
-	    push @entry_conf, grep { $entry->{$_} } qw(optional);
+	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only optional);
 	} else {
 	    delete $entry->{unsafe} if $entry->{table}; #- we can't have both
 	    push @entry_conf, map { "$_=$entry->{$_}" } grep { $entry->{$_} } qw(table boot-as);
