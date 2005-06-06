@@ -110,6 +110,7 @@ sub read_theme_config {
     }
     $theme{conf}{pc} ||= '0x21459d';
     update_scale_values();
+    update_rect();
 }
 
 sub set_theme {
@@ -254,30 +255,35 @@ sub image_expose {
     my ($widget) = @_;
     my $window = $widget->window;
     $window->draw_pixbuf($widget->style->white_gc, $image_pixbuf[$current_mode > 0], 0, 0, 0, 0, -1, -1, 'none', 0, 0) if $image_pixbuf[$current_mode > 0];
+    my $cross_gc;
     if ($current_mode == 0) { #- silent
 	$window->draw_rectangle($widget->style->white_gc, 1, @{$theme{conf}}{'px', 'py', 'pw', 'ph'});
+	$cross_gc = $widget->style->black_gc;
     } else { #- verbose or console
 	$window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
-	my ($tx1, $ty1) = @{$theme{conf}}{'tx', 'ty'};
-	my ($tx2, $ty2) = ($tx1 + $theme{conf}{tw}, $ty1 + $theme{conf}{th});
-	$window->draw_line($widget->style->white_gc, $tx1, $ty1, $tx2, $ty2);
-	$window->draw_line($widget->style->white_gc, $tx1, $ty2, $tx2, $ty1);
+	$cross_gc = $widget->style->white_gc;
+    }
+    $window->draw_line($cross_gc, $current_rect->[0]{X}, $current_rect->[0]{Y}, $current_rect->[1]{X}, $current_rect->[1]{Y});
+    $window->draw_line($cross_gc, $current_rect->[0]{X}, $current_rect->[1]{Y}, $current_rect->[1]{X}, $current_rect->[0]{Y});
+}
+
+sub update_rect() {
+    undef $current_point;
+    if ($current_mode == 0) { #- silent
+	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'px', 'py', 'pw', 'ph'});
+    } else { #- verbose or console
+	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
     }
 }
 
 sub switch_to_mode {
     my ($mode) = @_;
     $current_mode = $mode;
-    if ($current_mode == 0) { #- silent
-	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'px', 'py', 'pw', 'ph'});
-    } else { #- verbose or console
-	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
-    }
-    undef $current_point;
+    update_rect();
     $image_area->queue_draw;
 }
 
-sub update_rect() {
+sub update_theme_from_rect() {
     if ($current_mode == 0) { #- silent
 	@{$theme{conf}}{'px', 'py', 'pw', 'ph'} = bootsplash::rectangle2xywh($current_rect);
     } else { #- verbose or console
@@ -292,7 +298,7 @@ sub image_button_pressed {
     my $point = { X => $event->x, Y => $event->y };
     $current_point = bootsplash::nearest($point, @$current_rect);
     %$current_point = %$point;
-    update_rect();
+    update_theme_from_rect();
 }
 
 sub image_motion_notify {
@@ -300,5 +306,5 @@ sub image_motion_notify {
     member('button1-mask', @{$event->state}) or return;
     my $point = { X => $event->x, Y => $event->y };
     $current_point and %$current_point = %$point;
-    update_rect();
+    update_theme_from_rect();
 }
