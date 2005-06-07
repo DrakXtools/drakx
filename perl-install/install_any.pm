@@ -1665,24 +1665,82 @@ sub media_browser {
 
     my $dev = (find { $_->[1] eq $media_browser{dev} } @dev_and_text)->[0];
 
+    my $browse = sub {
+	my ($dir) = @_;
+
+      browse:
+	my $file = $in->ask_filename({ save => $save, 
+				       directory => $dir, 
+				       if_($o_suggested_name, file => "$dir/$o_suggested_name"),
+				   }) or return;
+	if (-e $file && $save) {
+	    $in->ask_yesorno('', N("File already exists. Overwrite it?")) or goto browse;
+	}
+	if ($save) {
+	    if (!open(my $_fh, ">>$file")) {
+		$in->ask_warn('', N("Permission denied"));
+		goto browse;
+	    }
+	    $file;
+	} else {
+	    open(my $fh, $file) or goto browse;
+	    $fh;
+	}
+    };
+    my $inspect_and_browse = sub {
+	my ($dev) = @_;
+
+	if (my $h = any::inspect($dev, $::prefix, $save)) {
+	    if (my $file = $browse->($h->{dir})) {
+		return $h, $file;
+	    }
+	    undef $h; #- help perl
+	} else {
+	    $in->ask_warn(N("Error"), formatError($@));
+	}
+	();
+    };
+
     if (member($dev, @network_protocols)) {
+	require install_interactive;
 	install_interactive::upNetwork($::o);
+
 	if ($dev eq 'HTTP') {
 	    require http;
-	    $media_browser{network} ||= 'http://';
+	    $media_browser{url} ||= 'http://';
+
+	    while (1) {
+		$in->ask_from('', 'URL', [
+		    { val => \$media_browser{url} }
+		]) or last;
+		    
+		if ($dev eq 'HTTP') {
+		    my $fh = http::getFile($media_browser{url});
+		    $fh and return '', $fh;
+		}
+	    }
+	} elsif ($dev eq 'NFS') {
+	    while (1) {
+		$in->ask_from('', 'NFS', [
+		    { val => \$media_browser{nfs} }
+		]) or last;
+
+		my ($kind) = fs::analyze_wild_device_name($media_browser{nfs});
+		if ($kind ne 'nfs') {
+		    $in->ask_warn('', N("Bad NFS name"));
+		    next;
+		}
+
+		my $nfs = fs::subpart_from_wild_device_name($media_browser{nfs});
+		$nfs->{fs_type} = 'nfs';
+
+		if (my ($h, $file) = $inspect_and_browse->($nfs)) {
+		    return $h, $file;
+		}
+	    }
 	} else {
 	    $in->ask_warn('', 'todo');
 	    goto ask_media;
-	}
-	while (1) {
-	    $in->ask_from('', 'URL', [
-		{ val => \$media_browser{network} }
-	    ]) or last;
-		    
-	    if ($dev eq 'HTTP') {
-		my $fh = http::getFile($media_browser{network});
-		$fh and return '', $fh;
-	    }
 	}
     } else {
 	if (!$dev->{fs_type} || $dev->{fs_type} eq 'auto' || $dev->{fs_type} =~ /:/) {
@@ -1694,27 +1752,11 @@ sub media_browser {
 		goto ask_media;
 	    }
 	}
-	my $file;
-	if (my $h = any::inspect($dev, $::prefix, $save)) {
-	    while (1) {
-		$file = $in->ask_filename({ save => $save, 
-					    directory => $h->{dir}, 
-					    if_($o_suggested_name, file => "$h->{dir}/$o_suggested_name"),
-					}) or last;
-		if (-e $file && $save) {
-		    $in->ask_yesorno('', N("File already exists. Overwrite it?")) or next;
-		}
-		if ($save) {
-		    return $h, $file;
-		} else {
-		    my $fh;
-		    open($fh, $file) and return $h, $fh;
-		}
-	    }
-	    undef $h; #- help perl
-	} else {
-	    $in->ask_warn(N("Error"), formatError($@));
+
+	if (my ($h, $file) = $inspect_and_browse->($dev)) {
+	    return $h, $file;
 	}
+
 	goto ask_media;
     }
 }
