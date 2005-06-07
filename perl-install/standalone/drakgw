@@ -398,7 +398,7 @@ sub gw_configure() {
 	$in->exit(-1);
     }
 
-    $shorewall->{masquerade} = { subnet => "$lan_intf->{NETWORK}/$lan_intf->{NETMASK}" };
+    $shorewall->{masq_subnet} = "$lan_intf->{NETWORK}/$lan_intf->{NETMASK}";
     network::shorewall::write($shorewall);
 
     #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network

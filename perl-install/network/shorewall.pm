@@ -101,7 +101,7 @@ sub read {
     $conf{redirects}{$_->[3]}{$_->[2]} = $_->[4] foreach grep { $_->[0] eq 'REDIRECT' } @rules;
 
     if (my ($e) = get_config_file('masq')) {
-	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
+	$conf{masq_subnet} = $e->[1];
     }
     read_default_interfaces(\%conf, $o_in);
     $conf{net_interface} && \%conf;
@@ -142,7 +142,7 @@ sub write {
 			map_each { [ 'REDIRECT', 'loc', $::a, $_, $::b, '-' ] } %{$conf->{redirects}{$_}};
 		    } keys %{$conf->{redirects}}),
 		   );
-    set_config_file('masq', if_($conf->{masquerade}, [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]));
+    set_config_file('masq', if_($conf->{masq_subnet}, [ $conf->{net_interface}, $conf->{masq_subnet} ]));
 
     services::set_status('shorewall', !$conf->{disabled}, $::isInstall);
 }
