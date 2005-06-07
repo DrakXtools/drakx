@@ -484,10 +484,10 @@ sub mount {
     $fs or log::l("not mounting $dev partition"), return;
 
     {
-	my @fs_modules = qw(ext3 hfs jfs ntfs romfs reiserfs ufs xfs vfat);
+	my @fs_modules = qw(ext3 hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
 	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts), @fs_modules);
 
-	push @types, 'smb', 'smbfs', 'nfs', 'davfs' if !$::isInstall;
+	push @types, 'smb', 'smbfs', 'davfs' if !$::isInstall;
 
 	if (!member($fs, @types) && !$::move) {
 	    log::l("skipping mounting $dev partition ($fs)");
@@ -508,6 +508,8 @@ sub mount {
 
     if ($fs eq 'vfat') {
 	@mount_opt = 'check=relaxed';
+    } elsif ($fs eq 'nfs') {
+	push @mount_opt, 'nolock' if $::isInstall;
     } elsif ($fs eq 'jfs' && !$b_rdonly) {
 	fsck_jfs($dev, $o_wait_message);
     } elsif ($fs eq 'ext2' && !$b_rdonly) {
