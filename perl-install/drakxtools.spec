@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.21mdk
+- bootloader-config, drakboot, diskdrake: fix some LABEL bugs (pixel)
+- drakauth: read existing authentication conf (pixel)
+- drakbackup: tape backup/restore fixes to work with new .backupignore
+  scheme & other bug fixes (stew)
+- drakboot: keep read-only, read-write and label as verbatim as
+  possible (pixel)
+- drakconnect (blino):
+  o big code base cleanups
+  o keep NETWORKING_IPV6 and FORWARD_IPV4 variables in
+    /etc/sysconfig/network
+  o fix old ISDN modems
+  o fix calling s2u on system hostname change
+- drakedm: get list of DM from /etc/X11/dm.d/*.conf (pixel)
+- draksplash: misc fixes (blino)
+- finish-install: add language selection to finish-install
+
 * Mon May 30 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.20mdk
 - handle more DVB cards
 - drakconnect: third party support update (blino):
