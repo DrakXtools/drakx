@@ -509,7 +509,7 @@ sub mount {
     if ($fs eq 'vfat') {
 	@mount_opt = 'check=relaxed';
     } elsif ($fs eq 'nfs') {
-	push @mount_opt, 'nolock' if $::isInstall;
+	push @mount_opt, 'nolock', 'soft', 'intr' if $::isInstall;
     } elsif ($fs eq 'jfs' && !$b_rdonly) {
 	fsck_jfs($dev, $o_wait_message);
     } elsif ($fs eq 'ext2' && !$b_rdonly) {
