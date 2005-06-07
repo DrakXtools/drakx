@@ -574,7 +574,7 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	eval { fs::mount(devices::make($part->{device}), $dir, $part->{fs_type}, !$b_rw) };
+	eval { fs::mount(fs::part2wild_device_name('', $part), $dir, $part->{fs_type}, !$b_rw) };
 	$@ and return;
     }
     my $h = before_leaving {
