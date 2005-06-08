@@ -35,9 +35,10 @@ sub ask_driver {
         $driver =~ s/\.inf$//;
 
         #- first uninstall the driver if present, may solve issues if it is corrupted
-        -d $::prefix . "$ndiswrapper_root/$driver" and system('ndiswrapper', '-e', $driver);
+        require run_program;
+        -d $::prefix . "$ndiswrapper_root/$driver" and run_program::rooted($::prefix, 'ndiswrapper', '-e', $driver);
 
-        unless (system('ndiswrapper', '-i', $inf_file) == 0) {
+        unless (run_program::rooted($::prefix, 'ndiswrapper', '-i', $inf_file)) {
             $in->ask_warn(N("Error"), N("Unable to install the %s ndiswrapper driver!", $driver));
             return undef;
         }
