@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.21mdk
+Release: 0.22mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -9,7 +9,7 @@ Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.072-1mdk, perl-Glib >= 1.072-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.23, mandrake-doc-common >= 9.2-5mdk
 Requires: foomatic-db-engine
 Requires: drakconf-icons
-Conflicts: drakconf < 10.3-0.4mdk
+Conflicts: drakconf < 10.3-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 Conflicts: bootloader-utils < 1.8-4mdk, bootsplash < 2.1.7-1mdk
@@ -371,6 +371,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jun  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.22mdk
+- drakfirewall (blino):
+  o do not crash when restarting shorewall
+  o do not write buggy shorewall masqfile when connection sharing is
+    disabled
+
 * Tue Jun  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.21mdk
 - bootloader-config, drakboot, diskdrake: fix some LABEL bugs (pixel)
 - drakauth: read existing authentication conf (pixel)
