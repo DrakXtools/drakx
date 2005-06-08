@@ -15,9 +15,9 @@ use any;
 use vars qw(@ISA @EXPORT);
 use log;
 
-my $network_file = "$::prefix/etc/sysconfig/network";
-my $resolv_file = "$::prefix/etc/resolv.conf";
-my $tmdns_file = "$::prefix/etc/tmdns.conf";
+my $network_file = "/etc/sysconfig/network";
+my $resolv_file = "/etc/resolv.conf";
+my $tmdns_file = "/etc/tmdns.conf";
 
 
 @ISA = qw(Exporter);
@@ -62,7 +62,7 @@ sub read_conf {
 
 sub read_resolv_conf_raw {
     my ($o_file) = @_;
-    my $s = cat_($o_file || "$::prefix/etc/resolv.conf");
+    my $s = cat_($o_file || $::prefix . $resolv_file);
     { nameserver => [ $s =~ /^\s*nameserver\s+(\S+)/mg ],
       search => [ if_($s =~ /^\s*search\s+(.*)/m, split(' ', $1)) ] };
 }
@@ -87,7 +87,7 @@ sub read_interface_conf {
 }
 
 sub read_zeroconf() {
-    cat_($tmdns_file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
+    cat_($::prefix . $tmdns_file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
 }
 
 sub write_network_conf {
@@ -98,13 +98,14 @@ sub write_network_conf {
     }
     $net->{network}{NETWORKING} = 'yes';
 
-    setVarsInSh($network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6));
+    setVarsInSh($::prefix . $network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6));
     $net->{network}{HOSTNAME} && !$::isInstall and sethostname($net);
 }
 
 sub write_zeroconf {
     my ($net, $in) = @_;
     my $zhostname = $net->{zeroconf}{hostname};
+    my $file = $::prefix . $tmdns_file;
 
     if ($zhostname) {
 	$in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
@@ -112,7 +113,7 @@ sub write_zeroconf {
     }
 
     #- write blank hostname even if disabled so that drakconnect does not assume zeroconf is enabled
-    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $tmdns_file } if $zhostname || -f $tmdns_file;
+    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $file } if $zhostname || -f $file;
 
     require services;
     services::set_status('tmdns', $net->{zeroconf}{hostname});
@@ -121,6 +122,7 @@ sub write_zeroconf {
 sub write_resolv_conf {
     my ($net) = @_;
     my $resolv = $net->{resolv};
+    my $file = $::prefix . $resolv_file;
 
     my %new = (
         search => [ grep { $_ } uniq(@$resolv{'DOMAINNAME', 'DOMAINNAME2', 'DOMAINNAME3'}) ],
@@ -128,7 +130,7 @@ sub write_resolv_conf {
     );
 
     my (%prev, @unknown);
-    foreach (cat_($resolv_file)) {
+    foreach (cat_($file)) {
 	s/\s+$//;
 	s/^[#\s]*//;
 
@@ -139,7 +141,7 @@ sub write_resolv_conf {
 	    push @unknown, $_;
 	}
     }
-    unlink $resolv_file if -l $resolv_file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
+    unlink $file if -l $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
 
     if (@{$new{search}} || @{$new{nameserver}}) {
 	$prev{$_} = [ difference2($prev{$_} || [], $new{$_}) ] foreach keys %new;
@@ -154,7 +156,7 @@ sub write_resolv_conf {
 	    my @old = map { "# nameserver $_\n" } @{$prev{nameserver}};
 	    @new, @old;
 	};
-	output_with_perm($resolv_file, 0644, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
+	output_with_perm($file, 0644, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
 
 	#-res_init();		# reinit the resolver so DNS changes take affect
 	1;
@@ -401,10 +403,12 @@ sub miscellaneous_choose {
 
 sub proxy_configure {
     my ($u) = @_;
-    setExportedVarsInSh("$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
-    chmod 0755, "$::prefix/etc/profile.d/proxy.sh";
-    setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
-    chmod 0755, "$::prefix/etc/profile.d/proxy.csh";
+    my $sh_file = "$::prefix/etc/profile.d/proxy.sh";
+    setExportedVarsInSh($sh_file,  $u, qw(http_proxy ftp_proxy));
+    chmod 0755, $sh_file;
+    my $csh_file = "$::prefix/etc/profile.d/proxy.csh";
+    setExportedVarsInCsh($csh_file, $u, qw(http_proxy ftp_proxy));
+    chmod 0755, $csh_file;
 
     #- KDE proxy settings
     my $kde_config_dir = "$::prefix/usr/share/config";
@@ -484,7 +488,7 @@ xml:readonly:$defaults_dir
 
 sub read_net_conf {
     my ($net) = @_;
-    add2hash($net->{network} ||= {}, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
+    add2hash($net->{network} ||= {}, read_conf($::prefix . $network_file));
     add2hash($net->{resolv} ||= {}, read_resolv_conf());
     add2hash($net->{zeroconf} ||= {}, read_zeroconf());
 

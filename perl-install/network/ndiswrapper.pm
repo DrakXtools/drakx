@@ -5,16 +5,16 @@ use common;
 use modules;
 use detect_devices;
 
-my $ndiswrapper_prefix = "$::prefix/etc/ndiswrapper";
+my $ndiswrapper_root = "/etc/ndiswrapper";
 
 sub installed_drivers() {
-    grep { -d "$ndiswrapper_prefix/$_" } all($ndiswrapper_prefix);
+    grep { -d $::prefix . "$ndiswrapper_root/$_" } all($::prefix . $ndiswrapper_root);
 }
 
 sub present_devices {
     my ($driver) = @_;
     my @supported_devices;
-    foreach (all("$ndiswrapper_prefix/$driver")) {
+    foreach (all($::prefix . "$ndiswrapper_root/$driver")) {
         my ($ids) = /^([0-9A-Z]{4}:[0-9A-Z]{4})\.[05]\.conf$/;
         $ids and push @supported_devices, $ids;
     }
@@ -35,7 +35,7 @@ sub ask_driver {
         $driver =~ s/\.inf$//;
 
         #- first uninstall the driver if present, may solve issues if it is corrupted
-        -d "$ndiswrapper_prefix/$driver" and system('ndiswrapper', '-e', $driver);
+        -d $::prefix . "$ndiswrapper_root/$driver" and system('ndiswrapper', '-e', $driver);
 
         unless (system('ndiswrapper', '-i', $inf_file) == 0) {
             $in->ask_warn(N("Error"), N("Unable to install the %s ndiswrapper driver!", $driver));
