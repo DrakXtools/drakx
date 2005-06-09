@@ -94,4 +94,4 @@ img:
 log: changelog
 
 changelog:
-	cvs2cl --accum -W 400 -U ../../soft/common/username
+	cvs2cl --accum -W 400 -U ../../soft/common/username -F TRUNK
