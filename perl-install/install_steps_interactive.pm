@@ -86,7 +86,7 @@ sub acceptLicense {
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
-		     more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ],
+		     if_(!$::globetrotter, more_buttons => [ [ N("Release Notes"), sub { $o->ask_warn(N("Release Notes"), $o->{release_notes}) }, 1 ] ]),
 		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
