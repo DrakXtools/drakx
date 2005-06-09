@@ -129,7 +129,7 @@ N("An error occurred, but I don't know how to handle it nicely.
 Continue at your own risk."). formatError($@) || $@ ]) if $@;
         }
     }
-    system("killall XFree86");
+    run_program::run('killall', 'Xorg');
     output_p("$::prefix/etc/rpm/macros", "%_install_langs all\n");
     system("service dm on");
     c::_exit(0);
