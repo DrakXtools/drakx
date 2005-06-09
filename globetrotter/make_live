@@ -8,6 +8,7 @@ use lib "../perl-install";
 use standalone;
 use interactive;
 use common;
+use detect_devices;
 use partition_table;
 use fsedit;
 use fs;
@@ -15,12 +16,16 @@ use any;
 use pkgs;
 use class_discard;
 use run_program;
+use modules;
+use modules::modules_conf;
+use modules::any_conf;
 use log;
 
 # my $in = interactive->vnew;
 
 $::isStandalone = undef;  # for /tmp/ddebug.log
 $::build_globetrotter = 1;
+$::no_ugtk_init = 1;
 
 my (%options, @new_ARGV);
 
@@ -46,17 +51,17 @@ if (!$rescue) {
 }
 
 my @suggestions = (
-                   { mntpoint => "/",     size => 4500 << 11, type => 0x483, ratio => 1, maxsize => 6000 << 11 },
+                   { mntpoint => "/",     size => 4500 << 11, type => 0x483, ratio => 1, maxsize => 6000 << 11, fs_type => 'ext3' },
                    # splited / and /usr:
                    # { mntpoint => "/",     size => 250 << 11, type => 0x483, ratio => 1, maxsize => 2000 << 11 },
                    # { mntpoint => "/usr",  size => 300 << 11, type => 0x483, ratio => 4, maxsize => 4000 << 11 },
-                   { mntpoint => "/home", size => 100 << 11, type => 0x483, ratio => 3 },
+                   { mntpoint => "/home", size => 2000 << 11, type => 0x483, ratio => 3, fs_type => 'ext3' },
 
                    # share partition with windows:
-                   { mntpoint => "/mnt/share",  size => 2000 << 11, type => 0xb, ratio => 2, maxsize => 10000 << 11 },
-                   { mntpoint => "/mnt/packages", size => 7500 << 11, type => 0x483, ratio => 3, maxsize => 7500 << 11 },
+                   { mntpoint => "/mnt/share",  size => 2000 << 11, type => 0xb, ratio => 3, fs_type => 'vfat' },
+                   { mntpoint => "/mnt/packages", size => 5000 << 11, type => 0x483, ratio => 3, maxsize => 5000 << 11, fs_type => 'ext3' },
                    # allocated last b/c end of disk is usually faster:
-                   { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11 },
+                   { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11, fs_type => 'swap' },
                   );
 
 
@@ -96,7 +101,8 @@ sub formatdisk {
     print "FORMATTING\n";
     foreach (partition_table::get_normal_parts($hd)) { 
         print qq(Formatting "$_->{device}" ($_->{mntpoint})\n); 
-        fs::format_part(undef, $_, $::prefix, undef) if !$::testing;
+        require fs::format;
+        fs::format::part(undef, $_, $::prefix, undef) if !$::testing;
     }
 }
 
@@ -115,7 +121,7 @@ sub my_exit {
     print "\n\nPress <RETURN> to return back to menu\n\n";
     print "==============================================================\n\n";
     <STDIN>;
-    exit(0);
+    c::_exit(0);
 }
 
 sub find_partition {
@@ -195,31 +201,36 @@ sub installPackages() {
     undef *c::kernel_version;
     *c::kernel_version = sub {
 	#my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
-	my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
+	my @l = glob_('/export/media/main/kernel-2.6.*');
 	@l >= 1 or die  "can't find kernel";
 	@l <= 1 or warn "too many kernels";
 	first(`rpm -qp --qf '%{name}' $l[-1]` =~ /kernel-(.*)/);
     };
 
     my $kernel_version = c::kernel_version();
+    # for third party drivers:
+    my $dkms_kernel_version = $kernel_version;
+    $dkms_kernel_version =~ s/\.(\d*mdk)$/-$1/;
 
     print "INSTALLING\n";
     install_any::setPackages(my $o = $::o =
-                             { 
+                             bless { 
                               prefix => $::prefix, 
                               meta_class => 'desktop', 
+			      modules_conf => modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf'),
                               default_packages => [
 				 #- for screenshots:
 				 qw(fb2png),
-				 qw(XFree86-server XFree86-xfs XFree86-FBDev),
+				 qw(xorg-x11-server xorg-x11-xfs xorg-x11-FBDev),
 				 qw(openssh-server), #- fred wants it
 				 qw(alsa-utils cdialog newt),
                      qw(k3b-dvd),
 				 qw(davfs nfs-utils samba-server sane-backends xsane xsane-gimp ntp),
                      qw(acpi acpid), #- so that removing acpi=ht will work
 				 qw(mountloop),	#- crypted folders
-				 qw(mandrake-doc-en mandrake-doc-fr mandrake-doc-drakxtools-en mandrake-doc-drakxtools-fr),
-				 qw(autologin),
+				 #- doc:
+						   (map { "mandrake-doc-$_" } map { ("Drakxtools-Guide-$_", "Command-Line-$_", "Quick-Startup-Plus-$_", "Starter-$_") } qw(de en es fr it)),
+				 qw(autologin grub),
 				 qw(synaptics),
 				 #- network conf:
 				 qw(wireless-tools pcmcia-cs),
@@ -227,47 +238,58 @@ sub installPackages() {
 				 qw(zcip dhcpcd tmdns),
 				 #- cnx stuff:
 				 qw(dhcp-client ppp kdenetwork-kppp ppp-pppoatm ppp-pppoe pptp-linux pptp-adsl rp-pppoe),
+				 "kernel-$kernel_version",
+				 #- for older machines:
+				 "kernel-i586-up-1GB-$kernel_version",
 				 #- ISDN stuff:
 				 # qw(isdn4net ibod isdn4k-utils), # not installed since it provides an interface (will be automatically installed by drakconnect)
 				 #- network file sharing:
 				 qw(nfs-utils-clients samba-client),
 				 #- network drivers and firmwares:
-				 qw(eagle-usb speedtouch speedtouch_mgmt unicorn),
-				 #- alt kernels:
-				 # glob_('/export/Mandrake/RPMS/kernel-2.4*'), #- for ISDN
+				 qw(eagle-usb ipw2100-firmware ipw2200-firmware ndiswrapper speedtouch speedtouch_mgmt unicorn),
 				 #- configuration:
-				 qw(drakconf drakcronat drakfirsttime drakxtools harddrake-ui mdkonline rpmdrake userdrake2),
+				 qw(drakconf drakcronat drakfirsttime drakxtools harddrake-ui mdkonline rpmdrake userdrake),
 				 qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
-				 "ATI_kernel-$kernel_version", qw(ATI_GLX ATI_GLX-utils NVIDIA_GLX libMesaGLU1), # ATI_GLX requires ATI_kernel
-				 "NVIDIA_kernel-$kernel_version",
+				 #qw(gcc),
+				 "ati-kernel-$dkms_kernel_version", "nvidia-kernel-$dkms_kernel_version", qw(ati nvidia dkms dkms-ati dkms-nvidia libMesaGLU1),
 				 # qw(hcfpcimodem hsflinmodem ltmodem), #- 2.4.x only
 				 qw(xinput), #- for some mice
-				 qw(bash-completion binutils  emacs-X11 ntsysv perl-doc perl-Term-Readline-Gnu),  #- allow debugging
+				 qw(bash-completion binutils  emacs-X11 ntsysv perl-doc perl-Term-Readline-Gnu vim-enhanced openssh-clients lftp diffstat),  #- allow debugging
 				 qw(openssh-askpass-gnome),  #- openssh-askpass for mountloop doesn't allow to click on ok/cancel buttons
 				 qw(clanbomber freeciv-client freeciv-server crack-attack kdegames),  #- more games
 				 qw(numlock),  # shorewall # not installed since its default config breaks network (will be automatically installed by drakfirewall)
-				 qw(xawtv zapping),  #- tv apps
-				 qw(scribus scribus-i18n-de scribus-i18n-fr),  #- John Jablonski says it's so much useful
-                     (map { "OpenOffice.org-l10n-$_" } qw(ar ca cs da de el en es eu fi fr it ja ko nl pl pt pt_BR ru sk sv tr zh_CN zh_TW)),
+				 qw(xawtv zapping kdetv),  #- tv apps
+				 #- locales:
+				 qw(scim-hangul scim-m17n scim-tables scim-uim),  #- Input Methods
+                     (map { "locales-$_" } qw(af am ar as az be bg bn br bs ca cs cy da de el en eo es et eu fa fi fo fr fur fy ga gd gl gu gv he hi hr hu hy id ik is it iu ja ka kl km kn ko ku kw ky li lo lt lv mi mk ml mn mr ms mt nds ne nl no oc pa ph pl pt ro ru sc se sk sl sq sr st sv sw ta te tg th tk tr tt uk ur uz vi wa xh yi zh zu)),
+                     (map { "kde-i18n-$_" } qw(af ar az be bg bn br bs ca cs cy da de el en_GB eo es et eu fa fi fo fr ga gl he hi hr hsb hu id is it ja ko ku lo lt lv mi mk mn ms mt nb nds nl nn nso oc pa pl pt pt_BR ro ru se sk sl sr ss sv ta tg th tr uk uz ven vi wa wen xh zh_CN.GB2312 zh_TW.Big5 zu)),
+                     (map { "koffice-i18n-$_" } qw(af az bg br ca cs cy da de el en_GB eo es et fa fi fr he hsb hu it ja lo lt mt nb nl nn pl pt pt_BR ru se sk sl sr sv ta tg th tr uk ven xh zh_CN zh_TW zu)),
+                     (map { "OpenOffice.org-l10n-$_" } qw(af ar ca cs cy da de el en es et eu fi fr he hu it ja ko nb nl nn ns pl pt pt_BR ru sk sl sv tr zh_CN zh_TW zu)),
+				 #- for GNOME:
+				 qw(gnome2),
+				 qw(mozilla-firefox gnome-terminal), # QA request
+                     (map { "mozilla-firefox-$_" } qw(af br ca cs da de devel el es fi fr ga he hu it ja ko nb nl pl pt pt_BR register ro ru sk sl sv tr zh_CN zh_TW)),
 				 qw(dosfstools mtools),
 				 qw(koffice konsole),
-				 qw(dynamic harddrake hotplug magicdev mandrake-globetrotter netprofile),
-				 qw(gnome2),
+				 qw(udev dynamic harddrake hotplug mandrake-globetrotter netprofile),
 				 qw(alsa-utils),
-				 qw(ipw2100 ipw2100_kernel ipw2100_kernel-2.6.3.13mdk), # ipw2100_kernel-$kernel_version,
+				 qw(mozilla-firefox),
+				 #- plugins:
+				 qw(acroread acroread-nppdf acroread-plugins FlashPlayer j2re RealPlayer RealPlayer-Codecs RealPlayer-rpnp),
+				 qw(kdebase-nsplugins kdebase-kcontrol-nsplugins),
                      #- fonts:
-				 qw(XFree86-100dpi-fonts XFree86-75dpi-fonts),
+				 qw(xorg-x11-100dpi-fonts xorg-x11-75dpi-fonts),
 				 qw(fonts-bitmap-tscii fonts-hebrew-elmar),
-                     (map { "fonts-ttf-$_" } qw(arabic armenian bengali big5 decoratives ethiopic gb2312 japanese kannada korean latex tamil thai tscii vera west_european)),
+                     (map { "fonts-ttf-$_" } qw(arabic armenian bengali big5 decoratives dejavu ethiopic gb2312 japanese kannada korean latex tamil thai tscii vera west_european)),
                      (map { "fonts-type1-$_" } qw(cyrillic greek hebrew)),
                      ],
-					    });
+					    }, 'install_any');
 
-    my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
-    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D', 'INSTALL';
-    $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
-
-    pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
+    my %rpmsrate_flags_chosen = map { $_ => 1 } map { @{$_->{flags}} } @{$o->{compssUsers}};
+    $rpmsrate_flags_chosen{$_} = 0 foreach qw(CAT_NETWORKING_MAIL_SERVERE);
+    $rpmsrate_flags_chosen{$_} = 1 foreach qw(CAT_AUDIO CAT_KDE CAT_GNOME CAT_NETWORKING CAT_OFFICE CAT_SYSTEM DVD USB SOUND BURNER UTF8 DOCS TV 3D INSTALL);
+    $rpmsrate_flags_chosen{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
+    pkgs::setSelectedFromCompssList($o->{packages}, \%rpmsrate_flags_chosen, 4, 0);
 
     my $unselect = sub {
         my ($pkg) = @_;
@@ -275,17 +297,19 @@ sub installPackages() {
         pkgs::unselectPackage($o->{packages}, $p) if $p;
     };
 
+    $unselect->("kernel-smp-$kernel_version");
+
     # unselect some packages whose services fsck up the box and whose services are not enabled by appropriate tools:
     # (shorewall must be deselected before iptables is)
     $unselect->($_) foreach qw(at hpoj shorewall iptables ntp tmdns zcip );
 
     # unselect uim since uim IM break first time wizard when selecting english:
-    $unselect->($_) foreach qw(uim-applet uim libuim0);
+    #$unselect->($_) foreach qw(uim-applet uim libuim0);
 
     my @toInstall = pkgs::packagesToInstall($o->{packages});
     local $ENV{DURING_INSTALL} = 1;
     $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
-    pkgs::install($::prefix, 0, \@toInstall, $o->{packages});
+    pkgs::install(0, \@toInstall, $o->{packages});
     
     eval { fs::umount("$::prefix/proc") };
 }
@@ -329,6 +353,9 @@ my $cleaner = before_leaving {
 
 $::prefix = $ARGV[0] || '/tmp/live_tree';
 
+
+#===========================================================================
+# Building the disk:
 -d $::prefix or mkdir $::prefix;
 print "Making live in $::prefix directory.\n";
 
@@ -351,7 +378,7 @@ my ($root) = grep { $_->{mntpoint} eq "/" } @parts;
 print "Root is $root->{device}\n";
 run_program::run('tune2fs', '-L', "MDK-ROOT", "/dev/$root->{device}");
 # fs::mount_part($root, $::prefix);
-$fstab = [ fsedit::get_all_fstab($all_hds) ];
+$fstab = [ fs::get::fstab($all_hds) ];
 
 # we need to mount every fs we want to see into /etc/fstab !!!
 fs::mount_part($_, $::prefix) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
@@ -404,7 +431,7 @@ my $bootloader = {
 		  bios => { '/dev/sda' => '0x80' },
                  };
 
-bootloader::suggest($bootloader, $all_hds->{hds}, $fstab,
+bootloader::suggest($bootloader, $all_hds,
                     vga_fb => 788, 
                     quiet => 1);
 
@@ -412,7 +439,7 @@ bootloader::suggest($bootloader, $all_hds->{hds}, $fstab,
 # $bootloader->{method} = 'lilo-graphic';
 $bootloader->{method} = 'grub';
 
-eval { bootloader::install($bootloader, $fstab, $all_hds->{hds}) };
+eval { bootloader::install($bootloader, $all_hds) };
 
 doRootSubst("$::prefix/boot/grub/menu.lst");
 run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
