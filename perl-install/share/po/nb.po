@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2005-05-31 13:03+0200\n"
-"PO-Revision-Date: 2005-06-06 10:40+0200\n"
+"PO-Revision-Date: 2005-06-09 16:32+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norsk Bokmål <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -731,7 +731,7 @@ msgstr "Er dette riktig oppsett?"
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "Tastatur-oppsett: %s\n"
+msgstr "Tastaturoppsett: %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
@@ -7013,7 +7013,7 @@ msgstr "Versjonsnotater"
 #: install_steps_interactive.pm:119
 #, c-format
 msgid "Please choose your keyboard layout."
-msgstr "Vennligst velg ditt tastatur-oppsett."
+msgstr "Vennligst velg ditt tastaturoppsett."
 
 #: install_steps_interactive.pm:121
 #, c-format
@@ -8288,7 +8288,7 @@ msgstr "Slovensk"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 #: keyboard.pm:294
 #, c-format
@@ -8337,14 +8337,14 @@ msgstr "Telugu"
 msgid ""
 "_: keyboard\n"
 "Tamil (ISCII-layout)"
-msgstr "Tamilsk (ISCII-layout)"
+msgstr "Tamilsk (ISCII-oppsett)"
 
 #: keyboard.pm:303
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tamil (Typewriter-layout)"
-msgstr "Tamilsk (skrivemaskin-layout)"
+msgstr "Tamilsk (skrivemaskin-oppsett)"
 
 #: keyboard.pm:304
 #, c-format
@@ -8372,14 +8372,14 @@ msgstr "Thai (Pattachote)"
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (marokansk oppsett)(+latinsk/arabisk)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (fonetisk) (+latinsk/arabisk)"
 
 #: keyboard.pm:313
 #, c-format
@@ -10222,7 +10222,7 @@ msgstr "Manuell"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Ingen enhet som støtter %s-ndiswrapperdriveren er til stede!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10232,7 +10232,7 @@ msgstr "Vennligst velg Windows-driveren (.inf-fil)"
 #: network/ndiswrapper.pm:41
 #, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "Klarte ikke å installere %s-ndiswrapperdriveren!"
 
 #: network/ndiswrapper.pm:89
 #, c-format
@@ -10245,11 +10245,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver ?"
 msgstr ""
+"Den valgte enheten har allerede blitt konfigurert med %s-driveren.\n"
+"Ønsker du virkelig å bruke en ndiswrapper-driver ?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Klarte ikke å finne ndiswrapper-grensesnitt!"
 
 #: network/netconnect.pm:92 network/netconnect.pm:574
 #: network/netconnect.pm:581
@@ -10405,17 +10407,17 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:188
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "Åpent WEP"
 
 #: network/netconnect.pm:189
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "Lukket WEP"
 
 #: network/netconnect.pm:190
 #, c-format
 msgid "WPA Pre-Shared Key"
-msgstr ""
+msgstr "WPA forhåndsdelt nøkkel"
 
 #: network/netconnect.pm:295 standalone/drakconnect:60
 #, c-format
@@ -10471,7 +10473,7 @@ msgstr "Modemtilkobling"
 #: network/netconnect.pm:311
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "DVB-tilkobling"
 
 #: network/netconnect.pm:321
 #, c-format
@@ -10984,7 +10986,7 @@ msgstr "Bruk en ndiswrapper-driver"
 #: network/netconnect.pm:1069
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "Bruk ndiswrapperdriveren %s"
 
 #: network/netconnect.pm:1069
 #, c-format
@@ -10994,7 +10996,7 @@ msgstr "Installer en ny driver"
 #: network/netconnect.pm:1081
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "Velg en enhet:"
 
 #: network/netconnect.pm:1108
 #, c-format
@@ -11064,7 +11066,7 @@ msgstr "Bitrate (i b/s)"
 #: network/netconnect.pm:1119
 #, c-format
 msgid "Encryption mode"
-msgstr ""
+msgstr "Krypteringsmodus"
 
 #: network/netconnect.pm:1123 standalone/drakconnect:431
 #, c-format
@@ -11204,22 +11206,22 @@ msgstr ""
 #: network/netconnect.pm:1210
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "DVB-konfigurasjon"
 
 #: network/netconnect.pm:1211
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "DVB-kontroller"
 
 #: network/netconnect.pm:1229
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "DVD-adapteroppsett"
 
 #: network/netconnect.pm:1232
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "Kontrollerkort"
 
 #: network/netconnect.pm:1233
 #, c-format
@@ -11229,7 +11231,7 @@ msgstr ""
 #: network/netconnect.pm:1234
 #, c-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: network/netconnect.pm:1262
 #, c-format
@@ -11524,23 +11526,19 @@ msgstr ""
 "\t\tippp+ for isdntilkobling.\n"
 
 #: network/thirdparty.pm:195
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Du trenger Alcatel-mikrokoden.\n"
-"Den kan lastes ned fra:\n"
-"%s\n"
-"og kopier mgmt.o til /usr/share/speedtouch/"
+msgstr "Du trenger Alcatel-mikrokoden som mgmt.o i /usr/share/speedtouch/"
 
 #: network/thirdparty.pm:265
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Kunne ikke installere %s-pakkene!"
+msgstr "Kunne ikke installerepakkene (%s)!"
 
 #: network/thirdparty.pm:273
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Noen pakker (%s) trengs, men er ikke tilgjengelige."
 
 #: network/thirdparty.pm:274
 #, c-format
@@ -11548,6 +11546,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Disse pakkene kan bli funnet på Mandriva Club eller i Mandriva kommersielle "
+"utgivelser."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11555,16 +11555,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Filene som trengs kan også installeres fra denne internettadressen:\n"
+"%s"
 
 #: network/thirdparty.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Fjern skrifttyper på systemet ditt"
+msgstr "Klarte ikke å finne \"%s\" på ditt Windows-system!"
 
 #: network/thirdparty.pm:310
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Inget Windows-system har blitt oppdaget!"
 
 #: network/thirdparty.pm:320
 #, c-format
@@ -11625,12 +11627,12 @@ msgstr "Firmwarekopiering vellykket"
 #: network/thirdparty.pm:425
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Ser etter programvare og drivere som trengs..."
 
 #: network/thirdparty.pm:435
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Vennligst vent, oppdager og setter opp enheter.."
+msgstr "Vennligst vent, kjører kommandoer for å sette opp enheter..."
 
 #: partition_table.pm:397
 #, c-format
@@ -17936,7 +17938,7 @@ msgstr "Ferdig!"
 #: standalone/drakTermServ:467 standalone/drakTermServ:847
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s feilet"
 
 #: standalone/drakTermServ:476
 #, c-format
@@ -17945,6 +17947,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Ikke nok plass til å opprette\n"
+"NBIer i %s.\n"
+"Trenger: %d MB, Ledig: %d MB"
 
 #: standalone/drakTermServ:482
 #, c-format
@@ -18509,7 +18514,7 @@ msgstr "Skriv oppsett"
 #: standalone/drakTermServ:1346
 #, c-format
 msgid "dhcpd Server Configuration"
-msgstr "dhcpd-tjener-oppsett"
+msgstr "dhcpd-tjeneroppsett"
 
 #: standalone/drakTermServ:1347
 #, c-format
@@ -20306,7 +20311,7 @@ msgstr "Vis sikkerhetskopiert oppsett"
 #: standalone/drakbackup:4299
 #, c-format
 msgid "Wizard Configuration"
-msgstr "Veiviser-oppsett"
+msgstr "Veiviseroppsett"
 
 #: standalone/drakbackup:4304
 #, c-format
@@ -20713,7 +20718,7 @@ msgstr "Sett opp vertsnavn..."
 #: standalone/drakconnect:150 standalone/drakconnect:878
 #, c-format
 msgid "LAN configuration"
-msgstr "LAN-oppsett"
+msgstr "Nettverksoppsett"
 
 #: standalone/drakconnect:155
 #, c-format
@@ -20938,7 +20943,7 @@ msgstr ""
 #: standalone/drakconnect:896
 #, c-format
 msgid "LAN Configuration"
-msgstr "LAN-oppsett"
+msgstr "Nettverksoppsett"
 
 #: standalone/drakconnect:908
 #, c-format
@@ -25566,7 +25571,7 @@ msgstr "Last"
 #: standalone/logdrake:429
 #, c-format
 msgid "Alert configuration"
-msgstr "Varsel-oppsett"
+msgstr "Varslingsoppsett"
 
 #: standalone/logdrake:430
 #, c-format
