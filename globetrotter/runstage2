@@ -16,7 +16,7 @@
 #- along with this program; if not, write to the Free Software
 #- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# i18n: IMPORTANT: to get correct namespace (drakconf instead of libDrakX)
+# i18n: IMPORTANT: to get correct namespace (libDrakX2 instead of libDrakX)
 BEGIN { unshift @::textdomains, 'libDrakX2' }
 c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
 
