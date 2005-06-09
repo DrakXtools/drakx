@@ -177,6 +177,9 @@ sub installPackages() {
     # help DrakX:
     mkdir_p("$::prefix/$_") foreach qw(tmp/headers var/lib/rpm root/drakx);
 
+    # help packages' post scripts:
+    run_program::run('mount', '-t', 'procfs', 'none', "$::prefix/proc");
+    run_program::run('makedev', "$::prefix/dev");
 
     undef *install_any::setDefaultPackages;
     *install_any::setDefaultPackages = sub {};
