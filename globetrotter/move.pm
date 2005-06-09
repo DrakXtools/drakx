@@ -146,10 +146,10 @@ sub automatic_xconf {
     local $o->{mouse}{device} = 'mouse';
     
     require Xconfig::default;
+    require class_discard;
     $o->{raw_X} = Xconfig::default::configure(class_discard->new, { KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
     
     require Xconfig::main;
-    require class_discard;
     Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
                                                      { allowNVIDIA_rpms => sub { [] }, allowATI_rpms => sub { [] }, allowFB => $o->{allowFB} });
 
