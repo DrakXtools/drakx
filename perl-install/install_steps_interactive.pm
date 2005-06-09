@@ -92,7 +92,7 @@ sub acceptLicense {
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
       or do {
 	  if ($::globetrotter) {
-	      system("killall Xorg");
+           run_program::run('killall', 'Xorg');
 	      exec("/sbin/reboot");
 	  }
 	  install_any::ejectCdrom();
