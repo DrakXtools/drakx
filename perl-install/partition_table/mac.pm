@@ -296,7 +296,7 @@ sub write($$$;$) {
                 $_->{pFlags} = 0x33;
 		$_->{isBoot} = 1;
 		log::l("writing a bootstrap at /dev/$_->{device}");
-		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table::mac::bootstrap_part);
+		$install_steps_interactive::new_bootstrap = 1 if !(defined $bootstrap_part);
 		$bootstrap_part = "/dev/" . $_->{device};
             } elsif (isSwap($_)) {
                 $_->{pType} = "Apple_UNIX_SVR2";

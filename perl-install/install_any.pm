@@ -704,7 +704,7 @@ sub copy_rpms_on_disk {
 	if (method_allows_medium_change($method)) {
 	    my $r;
 	    if ($method =~ /-iso$/) {
-		$r = install_any::changeIso($name);
+		$r = changeIso($name);
 	    } else {
 		cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(/mnt/cdrom|/tmp/image),
 		    and ($cdrom, my $mountpoint) = ($1, $2);

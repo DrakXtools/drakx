@@ -161,7 +161,7 @@ sub inactive_mds() {
 
 sub free_mds {
     my ($raids) = @_;
-    difference2([ map { "md$_" } 0 .. raid::max_nb() ], [ map { $_->{device} } @$raids ]);
+    difference2([ map { "md$_" } 0 .. max_nb() ], [ map { $_->{device} } @$raids ]);
 }
 
 sub detect_during_install {

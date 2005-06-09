@@ -382,7 +382,7 @@ sub grp_toggles {
 sub group_toggle_choose {
     my ($in, $keyboard) = @_;
 
-    if (my $grp_toggles = keyboard::grp_toggles($keyboard)) {
+    if (my $grp_toggles = grp_toggles($keyboard)) {
 	my $GRP_TOGGLE = $keyboard->{GRP_TOGGLE} || 'caps_toggle';
 	$GRP_TOGGLE = $in->ask_from_listf('', N("Here you can choose the key or key combination that will 
 allow switching between the different keyboard layouts
@@ -550,7 +550,7 @@ sub xmodmap_file {
 
 sub setxkbmap {
     my ($keyboard) = @_;
-    my $xkb = keyboard::keyboard2full_xkb($keyboard) or return;
+    my $xkb = keyboard2full_xkb($keyboard) or return;
     run_program::run('setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
     run_program::run('setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
 }

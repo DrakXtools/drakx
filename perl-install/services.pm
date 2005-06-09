@@ -388,11 +388,11 @@ sub do_not_start_service_on_boot ($) {
 sub set_status {
     my ($service, $enable, $o_dont_apply) = @_;
     if ($enable) {
-	services::start_service_on_boot($service);
-	services::restart_or_start($service) unless $o_dont_apply;
+	start_service_on_boot($service);
+	restart_or_start($service) unless $o_dont_apply;
     } else {
-	services::do_not_start_service_on_boot($service);
-	services::stop($service) unless $o_dont_apply;
+	do_not_start_service_on_boot($service);
+	stop($service) unless $o_dont_apply;
     }
 }
 

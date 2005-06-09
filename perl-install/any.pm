@@ -1083,7 +1083,7 @@ sub ask_window_manager_to_logout {
 sub ask_window_manager_to_logout_then_do {
     my ($wm, $pid, $action) = @_;
     if (fork()) {
-	any::ask_window_manager_to_logout($wm);
+	ask_window_manager_to_logout($wm);
 	return;
     }
     
