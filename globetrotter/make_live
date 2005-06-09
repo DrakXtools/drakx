@@ -41,6 +41,10 @@ if ($0 =~ /restore_globetrotter/) {
 
 @ARGV = @new_ARGV;
 
+if (!$rescue) {
+    die qq(\%_install_langs is not set to "all" in /etc/rpm/macros) if cat_('/etc/rpm/macros') !~ /\%_install_langs\s*all/;
+}
+
 my @suggestions = (
                    { mntpoint => "/",     size => 4500 << 11, type => 0x483, ratio => 1, maxsize => 6000 << 11 },
                    # splited / and /usr:
