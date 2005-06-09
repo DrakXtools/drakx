@@ -367,7 +367,9 @@ sub doRootSubst {
 
 #fs::merge_info_from_mtab($fstab);
 fs::write_fstab($all_hds, $::prefix);
-append_to_file("$::prefix/etc/fstab", "none /dev/pts devpts mode=0620 0 0");
+append_to_file("$::prefix/etc/fstab",
+    "none /dev/pts devpts mode=0620 0 0\n",
+    "none /proc proc defaults 0 0\n");
 doRootSubst("$::prefix/etc/fstab");
 
 my ($home) = grep { $_->{mntpoint} eq "/home" } @parts;
