@@ -126,7 +126,7 @@ after_autoconf:
             eval { &$f() };
             $o->ask_warn(N("Error"), [
 N("An error occurred, but I don't know how to handle it nicely.
-Continue at your own risk."), formatError($@) ]) if $@;
+Continue at your own risk."). formatError($@) || $@ ]) if $@;
         }
     }
     system("killall XFree86");
