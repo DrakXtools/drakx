@@ -12,7 +12,7 @@ LIBDEST = $(LIBDIR)/libDrakX
 DATADIR = $(PREFIX)/usr/share
 
 LANG_FILES = pixmaps/langs
-DISTFILES = hwprofile *.spec share/po/*.po share/po/Makefile share/po/i18n_compssUsers Makefile Makefile.config *.pm runstage2 $(LANG_FILES)
+DISTFILES = hwprofile *.spec share/po/*.po share/po/Makefile Makefile Makefile.config *.pm runstage2 $(LANG_FILES)
 
 .PHONY: all install clean
 
@@ -30,7 +30,7 @@ localcopy: clean
 	# cp -af ../perl-install/share/po ../$(PACKAGE)-$(PKGVERSION)/share/
 	mkdir ../$(PACKAGE)-$(PKGVERSION)/share/po
 	# cp -af ../perl-install/share/po/{fr.po,Makefile,i18n_compssUsers} ../$(PACKAGE)-$(PKGVERSION)/share/po
-	cp -af ../perl-install/share/po/{*.po,Makefile,i18n_compssUsers} ../$(PACKAGE)-$(PKGVERSION)/share/po
+	cp -af ../perl-install/share/po/{*.po,Makefile} ../$(PACKAGE)-$(PKGVERSION)/share/po
 	# enable fast build:
 	perl -pi -e 's!^.*msgmerge.*\n!!' ../$(PACKAGE)-$(PKGVERSION)/share/po/Makefile
 	cp -af ../perl-install/{help,pkgs,install*}.pm ../$(PACKAGE)-$(PKGVERSION)/
