@@ -140,7 +140,7 @@ my %network_settings = (
            "ipw${_}" =>
            {
             matching => "ipw${_}",
-            description => "Intel® PRO/Wireless ${_}",
+            description => "Intel(R) PRO/Wireless ${_}",
             url => "http://ipw${_}.sourceforge.net/",
 	    name => "ipw${_}",
             firmware =>
