@@ -224,4 +224,10 @@ sub get_default_metric {
     $idx * 10;
 }
 
+sub get_interface_ip_address {
+    my ($net, $interface) = @_;
+    `/sbin/ip addr show dev $interface` =~ /^\s*inet\s+([\d.]+)/m && $1 ||
+    $net->{ifcfg}{$interface}{IPADDR};
+}
+
 1;
