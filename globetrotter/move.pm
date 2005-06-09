@@ -26,7 +26,6 @@ use fs;
 use fsedit;
 use run_program;
 use partition_table qw(:types);
-use swap;
 use log;
 use lang;
 use detect_devices;
@@ -112,9 +111,10 @@ after_autoconf:
 
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
-    fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
+    require fs::mount_options;
+    fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
 
-    modules::write_conf();
+    $o->{modules_conf}->write;
     require mouse;
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
