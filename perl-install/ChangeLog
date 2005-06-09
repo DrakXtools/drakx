@@ -1,3 +1,92 @@
+2005/06/09  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Translated more strings, also fixed a few old ones :)
+
+2005/06/09  Pixel  <pixel at mandrakesoft.com>
+
+	* keyboard.pm, any.pm, partition_table/mac.pm, services.pm, modules.pm,
+	raid.pm, Xconfig/main.pm, modules/any_conf.pm, install_any.pm: don't
+	need prefixing with current package
+
+2005/06/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm (autologin) make autologin choice more user friendly (better fix
+	for #4304)
+
+2005/06/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: use prefix only once it has been defined by install
+
+	* network/ndiswrapper.pm: allow to install ndiswrapper drivers during
+	install
+	use prefix only once it has been defined by install
+
+2005/06/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.22mdk
+	bump conflict on drakconf due to blino's changes
+
+2005/06/07  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/06/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakgw: don't be fooled by if_ not short-circuiting and
+	auto-vivification, use $conf->{masq_subnet} instead of
+	$conf->{masquerade}{subnet} (i.e. do not write buggy shorewall masqfile
+	when connection sharing is disabled)
+
+	* network/shorewall.pm: do not crash when restarting shorewall
+	don't be fooled by if_ not short-circuiting and auto-vivification, use
+	$conf->{masq_subnet} instead of $conf->{masquerade}{subnet} (i.e. do not
+	write buggy shorewall masqfile when connection sharing is disabled)
+
+2005/06/07  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/finish-install: 
+	  - backport "add language selection"
+	  - add keyboard selection
+
+	* any.pm: allow inspecting nfs
+
+	* fs.pm: handle nfs mount (since we now use the /bin/mount instead of the
+	syscall, we get it for free)
+
+	* install_any.pm (media_browser): handle nfs
+
+2005/06/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.21mdk
+
+	* fs.pm (mount) use 'soft' & 'intr' options for nfs mounts
+
+2005/06/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: make it more readable
+
+2005/06/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/vi.po, share/po/fr.po: updated French and Vietnamese files
+
+	* share/po/cy.po: updated Welsh file
+
+2005/06/06  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: install2 functions should be steps
+	get rid of $clicked and $ent_number (obsolete)
+
+	* share/compssUsers.pl: change the default in case of low resources and
+	add the Icewm choice
+
+	* install_any.pm: replace strange "-" with a ascii compliant one
+	install2 functions should be steps
+	get rid of $clicked and $ent_number (obsolete)
+
+	* install_steps.pm, install_steps_gtk.pm, install_steps_auto_install.pm,
+	install_steps_interactive.pm: get rid of $clicked and $ent_number
+	(obsolete)
+
 2005/06/06  Olivier Blin <oblin at mandrakesoft.com>
 
 	* harddrake/autoconf.pm: netconnect API change,
@@ -50885,7 +50974,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1040 2005/05/23 05:27:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1041 2005/06/06 07:57:24 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
