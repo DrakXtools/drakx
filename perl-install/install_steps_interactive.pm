@@ -1213,6 +1213,7 @@ sub addUser {
     }
     add2hash($o, any::get_autologin());
     any::autologin($o, $o);
+    any::set_autologin($o->{autologin}, $o->{desktop}) if $::globetrotter;
 
     install_steps::addUser($o);
 }
