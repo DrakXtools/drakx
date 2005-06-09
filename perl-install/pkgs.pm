@@ -1200,7 +1200,7 @@ sub install {
 						       difference2([ $$, hashtree2list(getppid(), \%ppids) ],
 								   [ hashtree2list($$, \%ppids) ]) ]);
 	
-		if (@killpid && $::isInstall && !$::local_install) {
+		if (@killpid && $::isInstall && !$::local_install && !$::build_globetrotter) {
 		    foreach (@killpid) {
 			my ($prog, @para) = split("\0", cat_("/proc/$_/cmdline"));
 			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $_: " . join(' ', $prog, @para) . ".") if $prog ne '/usr/lib/gconfd-2';
