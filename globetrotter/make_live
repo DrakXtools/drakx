@@ -174,8 +174,8 @@ sub installPackages() {
     # ensure boot from USB will work:
     output_p("$::prefix/etc/sysconfig/mkinitrd", "forceusb=yes\n");
 
-    mkdir_p("$::prefix/var/lib/rpm");
-    mkdir_p("$::prefix/root/drakx");
+    # help DrakX:
+    mkdir_p("$::prefix/$_") foreach qw(tmp/headers var/lib/rpm root/drakx);
 
 
     undef *install_any::setDefaultPackages;
