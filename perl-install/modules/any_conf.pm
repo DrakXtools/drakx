@@ -128,7 +128,7 @@ sub set_sound_slot {
 sub read {
     my (undef, $o_file) = @_;
 
-    my $conf = modules::any_conf::vnew();
+    my $conf = vnew();
     $conf->read($o_file);
 }
 
@@ -183,7 +183,7 @@ sub merge_into {
 sub read_handled {
     my ($conf, $o_file) = @_;
     my $file = $o_file || $::prefix . $conf->file;
-    my $raw_conf = modules::any_conf::read_raw($file);
+    my $raw_conf = read_raw($file);
 
     foreach my $module (keys %$raw_conf) {
 	my $raw = $raw_conf->{$module};

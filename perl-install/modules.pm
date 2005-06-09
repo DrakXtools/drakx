@@ -149,9 +149,9 @@ sub load_parallel_zip {
 
     arch() !~ /ppc/ or return;
 
-    eval { modules::load('parport_pc') };
+    eval { load('parport_pc') };
     grep { 
-	eval { modules::load_and_configure($conf, $_); 1 };
+	eval { load_and_configure($conf, $_); 1 };
     } 'imm', 'ppa';
 }
 
