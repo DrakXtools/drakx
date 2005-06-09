@@ -244,7 +244,7 @@ sub installPackages() {
                      (map { "OpenOffice.org-l10n-$_" } qw(ar ca cs da de el en es eu fi fr it ja ko nl pl pt pt_BR ru sk sv tr zh_CN zh_TW)),
 				 qw(dosfstools mtools),
 				 qw(koffice konsole),
-				 qw(devfsd dynamic harddrake hotplug magicdev mandrake-globetrotter netprofile),
+				 qw(dynamic harddrake hotplug magicdev mandrake-globetrotter netprofile),
 				 qw(gnome2),
 				 qw(alsa-utils),
 				 qw(ipw2100 ipw2100_kernel ipw2100_kernel-2.6.3.13mdk), # ipw2100_kernel-$kernel_version,
@@ -412,8 +412,6 @@ run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
 substInFile {
     # use FB by default on versionned entries so that the initial versionned entry behave like those created by /sbin/installkernel:
     s/$/ vga=788/ if /^kernel.*\d\.\d\.\d/;
-    # set devfs=mount as well so that installkernel can properly install bootable 2.4.x kernels:
-    s/$/ devfs=mount/ if /^kernel/ && !/failsafe/;
 } "$::prefix/boot/grub/menu.lst";
 
 
