@@ -136,6 +136,8 @@ Continue at your own risk."). formatError($@) || $@ ]) if $@;
         run_program::run('chkconfig', 'dm', 'on');
         run_program::run('telinit', 'Q');
     }
+    # prevent dm service to fail to startup because of /tmp/.font-unix's permissions:
+    run_program::run('service', 'xfs', 'stop');
     c::_exit(0);
 }
 
