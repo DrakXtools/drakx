@@ -1,4 +1,161 @@
-2004-08-27 08:10  Thierry Vignaud <tvignaud@mandrakesoft.com>
+2005-06-09 13:43  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* Makefile: (changelog) only track HEAD changes
+
+2005-06-09 13:07  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: - sync with DrakX's API - add a few comments - we only
+	  need 4.6Gb for packages now (the DVD image) - update package
+	  list:   o for 10.0 -> LE2005 changes (eg: switch to dkms and the
+	  like)   o install all languages (marketing request)	o install
+	  multimedia plugins & Java runtime environment   o do not unselect
+	  anymore input methods
+
+2005-06-09 12:58  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: (installPackages) help packages' post-install scripts
+
+2005-06-09 12:58  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: (installPackages) help DrakX more
+
+2005-06-09 12:55  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: detect both old and new LaCie models
+
+2005-06-09 12:52  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: prevent building a disk w/o translation catalogs
+
+2005-06-09 12:50  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: prevent warning message about /proc to appear at boot
+
+2005-06-09 12:49  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: - urpmi syntax had changed - install all new media
+
+2005-06-09 12:48  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: devfs is dead
+
+2005-06-09 12:46  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: save X.org conf too on profile switch
+
+2005-06-09 12:31  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: set $::build_globetrotter
+
+2005-06-09 12:13  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: (install2::configMove) prevent dm service to fail to
+	  startup because of /tmp/.font-unix's permissions
+
+2005-06-09 12:11  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: (install2::configMove) workaround init reading inittab
+	  before any.pm alters it
+
+2005-06-09 12:09  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: sync with drakx's API
+
+2005-06-09 12:08  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: (automatic_xconf) class_discard is needed way earlier
+
+2005-06-09 12:07  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: (install2::configMove) fix killing X11 due to XFree86 ->
+	  X.org switch
+
+2005-06-09 12:06  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* move.pm: (install2::configMove) if formatError() returns nothing,
+	  better display the raw error
+
+2005-06-09 11:59  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* Makefile: fix build
+
+2005-06-09 11:59  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* .perl_checker: blacklist more pakcages
+
+2005-06-09 11:58  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* runstage2: fix comment
+
+2005-06-02 05:20  Olivier Blin <oblin at mandriva.com>
+
+	* hwprofile: fix netprofile stuff
+
+2005-05-25 10:56  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* fix-broken-hd.diff: fix broken hd
+
+2005-05-25 10:45  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: unmount partitions even when failled
+
+2005-05-25 10:41  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: display message earlier
+
+2005-05-25 10:40  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: on restoration, tell which one is the packages
+	  partition when found
+
+2005-05-25 10:39  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: nicely tell that the restoration is completed
+
+2005-05-25 10:39  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: use newly introduced my_exit() in order to display
+	  better messages
+
+2005-05-25 10:37  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: (my_exit) introduce it for smoother messages
+
+2005-05-25 10:36  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: handle smoothly packages partition with multiple
+	  kernel packages
+
+2005-05-25 10:35  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: fix fs checking prior to restoration, thus handling
+	  restoration on fscked hard disks
+
+2005-05-25 10:34  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: when we format the root fs prior to restoring the hd,
+	  set back the label on the fs so that we can handle an aborted
+	  restoration (power outrage, ...)
+
+2005-05-25 10:33  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: factorize some code through find_partition()
+
+2004-10-26 17:18  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* make_live: do not try to run killall until it has been installed
+
+2004-10-07 02:44  Pixel <pixel at mandriva.com>
+
+	* move.pm: - XFdrake can detect a auxmouse which was not detected
+	  by mousedrake so we need to call various_xfree_conf() - this
+	  implies adding parameter $do_pkgs to a few functions
+
+2004-08-27 08:11  Thierry Vignaud <tvignaud at mandriva.com>
+
+	* ChangeLog: initial commit
+
+2004-08-27 08:10  Thierry Vignaud <tvignaud at mandriva.com>
 
 	* Makefile: add changelog target
 
