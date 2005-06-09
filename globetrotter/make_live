@@ -444,7 +444,7 @@ if ($options{post}) {
     my $prof_cfg = "$::prefix/etc/netprofile/list";
     my @files = map { chomp_($_) } cat_($prof_cfg);
     # do not save the whole /etc/sysconfig;
-    push @files, (map { "/etc/X11/$_" } qw(XF86Config XF86Config-4)),
+    push @files, (map { "/etc/X11/$_" } qw(XF86Config XF86Config-4 xorg.conf)),
       (map { "/etc/sysconfig/$_" } qw(keyboard harddrake2/previous_hw harddisks)),
         (map { "/etc/$_" } qw(modprobe.conf modprobe.devfs modprobe.preload modules modules.conf modules.devfs)),
           qw(/etc/asound.state /etc/fstab /etc/ld.so.conf/GL.conf /etc/shorewall/);
