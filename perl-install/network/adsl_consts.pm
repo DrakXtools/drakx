@@ -733,6 +733,16 @@ our %adsl_data = (
                    dnsServer3 => '195.34.32.116',
                    method => 'pppoe',
                   },
+		  
+		  N("Senegal") . "|Sonatel Multimedia Sentoo" =>
+                  {
+                   provider_id => 'SN01',
+                   vpi => 0,
+                   vci => 35,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                   DOMAINNAME2 => 'sentoo.sn',
+                  },
 
                   N("Slovenia") . "|SiOL" =>
                   {
