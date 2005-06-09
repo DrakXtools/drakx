@@ -63,7 +63,7 @@ my @suggestions = (
 sub get_hds() {
 	my $all_hds = fsedit::get_hds();
      my $other;
-	($all_hds->{hds}, $other) = partition { $_->{usb_description} eq 'LaCie|LaCie Hard Drive USB' } @{$all_hds->{hds}};
+	($all_hds->{hds}, $other) = partition { $_->{usb_description} =~ /^LaCie|LaCie Hard( |)Drive USB/ } @{$all_hds->{hds}};
      my_exit("Your disk cannot be restored because it cannot be found!") if !$all_hds->{hds}[0];
 	$all_hds, $all_hds->{hds}[0]; # $other
 }
