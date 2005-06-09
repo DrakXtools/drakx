@@ -494,8 +494,7 @@ unlink $_ foreach glob("$::prefix/core.*");
 
 system("rsync -rvltp /export/ $::prefix/mnt/packages/") if !$rescue;
 unlink $_ foreach glob("$::prefix/var/lib/urpmi/*");
-run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'main', 'file:///mnt/packages/Mandrake/RPMS');
-run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/packages/Mandrake/RPMS2');
+run_program::rooted($::prefix, 'urpmi.addmedia', '--probe-hdlist', $_, "/mnt/packages/media/$_/") foreach qw(main contrib firmwares dkms modules plugins);
 
 # for fast test replaying:
 run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
