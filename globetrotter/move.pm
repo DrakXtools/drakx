@@ -131,7 +131,11 @@ Continue at your own risk."). formatError($@) || $@ ]) if $@;
     }
     run_program::run('killall', 'Xorg');
     output_p("$::prefix/etc/rpm/macros", "%_install_langs all\n");
-    system("service dm on");
+    # workaround init reading inittab before any.pm alters it:
+    if ($::o->{autologin}) {
+        run_program::run('chkconfig', 'dm', 'on');
+        run_program::run('telinit', 'Q');
+    }
     c::_exit(0);
 }
 
