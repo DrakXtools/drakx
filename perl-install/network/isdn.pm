@@ -56,7 +56,7 @@ defaultroute
     }
     services::enable('isdn4linux');
 
-    write_secret_backend($isdn->{login}, $isdn->{passwd});
+    network::tools::write_secret_backend($isdn->{login}, $isdn->{passwd});
 
     1;
 }
