@@ -9,7 +9,7 @@ use partition_table;
 use partition_table::raw;
 use detect_devices;
 use run_program;
-use loopback;
+use fs::loopback;
 use devices;
 use fsedit;
 use raid;
@@ -902,7 +902,7 @@ sub Loopback {
 
     my $handle = any::inspect($real_part) or $in->ask_warn('', N("This partition can not be used for loopback")), return;
 
-    my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part));
+    my ($min, $max) = (1, fs::loopback::getFree($handle->{dir}, $real_part));
     $max = min($max, 1 << (31 - 9)) if $real_part->{fs_type} eq 'vfat'; #- FAT does not handle file size bigger than 2GB
     my $part = { maxsize => $max, size => 0, loopback_device => $real_part, notFormatted => 1 };
     if (!fsedit::suggest_part($part, $all_hds)) {
@@ -921,7 +921,7 @@ sub Loopback {
 	     complete => sub {
 		 $part->{loopback_file} or $in->ask_warn('', N("Give a file name")), return 1, 0;
 		 $part->{loopback_file} =~ s|^([^/])|/$1|;
-		 if (my $size = loopback::verifFile($handle->{dir}, $part->{loopback_file}, $real_part)) {
+		 if (my $size = fs::loopback::verifFile($handle->{dir}, $part->{loopback_file}, $real_part)) {
 		     $size == -1 and $in->ask_warn('', N("File is already used by another loopback, choose another one")), return 1, 0;
 		     $in->ask_yesorno('', N("File already exists. Use it?")) or return 1, 0;
 		     delete $part->{notFormatted};

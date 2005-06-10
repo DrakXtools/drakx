@@ -11,9 +11,9 @@ use common;
 use partition_table;
 use partition_table::raw;
 use fs::type;
+use fs::loopback;
 use detect_devices;
 use devices;
-use loopback;
 use log;
 use fs;
 
@@ -424,7 +424,7 @@ Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) &&
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
-    loopback::check_circular_mounts($part, $all_hds);
+    fs::loopback::check_circular_mounts($part, $all_hds);
 }
 
 sub add {

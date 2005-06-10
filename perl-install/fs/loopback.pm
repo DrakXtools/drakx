@@ -1,4 +1,4 @@
-package loopback; # $Id$
+package fs::loopback; # $Id$
 
 use diagnostics;
 use strict;
@@ -6,7 +6,6 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use MDK::Common::System;
 use common;
 use fs::type;
 use fs;

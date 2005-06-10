@@ -6,6 +6,7 @@ use strict;
 use run_program;
 use common;
 use fs::type;
+use fs::loopback;
 use log;
 
 my %cmds = (
@@ -46,7 +47,7 @@ sub part {
 	raid::format_part($raids, $part);
     } elsif (isLoopback($part)) {
 	$wait_message->(N("Creating and formatting file %s", $part->{loopback_file})) if $wait_message;
-	loopback::format_part($part, $prefix);
+	fs::loopback::format_part($part, $prefix);
     } else {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	part_raw($part, $wait_message);

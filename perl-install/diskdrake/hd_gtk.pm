@@ -10,7 +10,6 @@ use fs::type;
 use detect_devices;
 use diskdrake::interactive;
 use run_program;
-use loopback;
 use devices;
 use raid;
 use any;

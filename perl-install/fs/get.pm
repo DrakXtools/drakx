@@ -5,6 +5,7 @@ use strict;
 
 use partition_table;
 use fs::type;
+use fs::loopback;
 use fs;
 use common;
 use log;
@@ -87,7 +88,7 @@ sub file2part {
 
     $file = $b_keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
     unless ($file =~ s/^$::prefix//) {
-	my $part = find { loopback::carryRootLoopback($_) } @$fstab or die;
+	my $part = find { fs::loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
 	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
     }

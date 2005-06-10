@@ -21,7 +21,6 @@ use detect_devices;
 use run_program;
 use devices;
 use fsedit;
-use loopback;
 use mouse;
 use modules;
 use modules::interactive;

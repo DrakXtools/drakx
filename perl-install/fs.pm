@@ -12,11 +12,11 @@ use fs::type;
 use fs::get;
 use fs::format;
 use fs::mount_options;
+use fs::loopback;
 use run_program;
 use detect_devices;
 use modules;
 use fsedit;
-use loopback;
 
 
 sub read_fstab {
@@ -305,13 +305,13 @@ sub prepare_write_fstab {
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
-	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
+	my $mntpoint = fs::loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
 	  isTrueLocalFS($_) && $_->{options} !~ /encryption=/ && (!$_->{is_removable} || member($_->{mntpoint}, fs::type::directories_needed_to_boot())) ? 
-	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
+	    (1, $_->{mntpoint} eq '/' ? 1 : fs::loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
 
 	if (($device eq 'none' || !$new{$device}) && ($mntpoint eq 'swap' || !$new{$mntpoint})) {
@@ -451,7 +451,7 @@ sub formatMount_part {
 	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $wait_message);
     }
     if (my $p = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
-	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) unless loopback::carryRootLoopback($part);
+	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) if !fs::loopback::carryRootLoopback($part);
     }
     if ($part->{toFormat}) {
 	fs::format::part($raids, $part, $prefix, $wait_message);
@@ -465,7 +465,7 @@ sub formatMount_all {
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
-    loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;
+    fs::loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;
 
     #- for fun :)
     #- that way, when install exits via ctrl-c, it gives hand to partition
@@ -568,7 +568,7 @@ sub mount_part {
     my ($part, $o_prefix, $b_rdonly, $o_wait_message) = @_;
 
     #- root carrier's link can not be mounted
-    loopback::carryRootCreateSymlink($part, $o_prefix);
+    fs::loopback::carryRootCreateSymlink($part, $o_prefix);
 
     log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint'));
     if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
@@ -601,7 +601,7 @@ sub mount_part {
 	    } elsif ($part->{options} =~ /encrypted/) {
 		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
 		return;
-	    } elsif (loopback::carryRootLoopback($part)) {
+	    } elsif (fs::loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || part2wild_device_name('', $part);
@@ -620,7 +620,7 @@ sub umount_part {
     unless ($::testing) {
 	if (isSwap($part)) {
 	    swapoff($part->{device});
-	} elsif (loopback::carryRootLoopback($part)) {
+	} elsif (fs::loopback::carryRootLoopback($part)) {
 	    umount("/initrd/loopfs");
 	} else {
 	    umount(($o_prefix || '') . $part->{mntpoint} || devices::make($part->{device}));

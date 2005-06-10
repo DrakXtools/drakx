@@ -12,7 +12,7 @@ use run_program;
 use detect_devices;
 use log;
 use fs;
-use loopback;
+use fs::loopback;
 use c;
 
 our %preferred = map { $_ => undef } qw(lilo perl-base gstreamer-oss openjade ctags glibc curl sane-backends postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 libxpm4 zlib1 libncurses5 harddrake cups apache);
@@ -1050,7 +1050,7 @@ sub install {
     return if !@$toInstall;
 
     #- for root loopback'ed /boot
-    my $loop_boot = loopback::prepare_boot();
+    my $loop_boot = fs::loopback::prepare_boot();
 
     #- first stage to extract some important information
     #- about the selected packages. This is used to select
@@ -1081,7 +1081,7 @@ sub install {
 	if ($nb == 0 && scalar(@transToInstall) == 0) {
 	    cleanHeaders();
 
-	    loopback::save_boot($loop_boot);
+	    fs::loopback::save_boot($loop_boot);
 	    return;
 	}
 
@@ -1265,7 +1265,7 @@ sub install {
 
     cleanHeaders();
 
-    loopback::save_boot($loop_boot);
+    fs::loopback::save_boot($loop_boot);
 }
 
 sub remove {

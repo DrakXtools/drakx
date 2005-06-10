@@ -13,7 +13,7 @@ use fs::get;
 use log;
 use any;
 use devices;
-use loopback;
+use fs::loopback;
 use detect_devices;
 use partition_table::raw;
 use run_program;
@@ -108,7 +108,7 @@ sub mkinitrd {
     my $initrd = $entry->{initrd};
     $::testing || -e "$::prefix/$initrd" and return 1;
 
-    my $loop_boot = loopback::prepare_boot();
+    my $loop_boot = fs::loopback::prepare_boot();
 
     modules::load('loop');
     my @options = (
@@ -121,7 +121,7 @@ sub mkinitrd {
     }
     add_boot_splash($entry->{initrd}, $entry->{vga});
 
-    loopback::save_boot($loop_boot);
+    fs::loopback::save_boot($loop_boot);
 
     -e "$::prefix/$initrd";
 }
