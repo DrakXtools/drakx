@@ -7,7 +7,6 @@ use strict;
 
 use log;
 use common;
-use MDK::Common::System;
 use resize_fat::boot_sector;
 use resize_fat::info_sector;
 use resize_fat::directory;

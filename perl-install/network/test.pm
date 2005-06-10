@@ -1,7 +1,7 @@
 package network::test;          # $Id$
 
 use strict;
-use MDK::Common;
+use common;
 use run_program;
 use Socket;
 

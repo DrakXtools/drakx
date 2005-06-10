@@ -2,7 +2,6 @@ package pkgs; # $Id$
 
 use strict;
 
-use MDK::Common::System;
 use URPM;
 use URPM::Resolve;
 use URPM::Signature;

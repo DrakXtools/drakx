@@ -5,7 +5,6 @@ use strict;
 
 use vars qw(%url2land %land2tzs %static_mirrors %mirrors);
 
-use MDK::Common::System;
 use common;
 use log;
 use ftp;

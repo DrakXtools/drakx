@@ -3,8 +3,6 @@ package fs; # $Id$
 use diagnostics;
 use strict;
 
-use MDK::Common::System;
-use MDK::Common::Various;
 use common;
 use log;
 use devices;

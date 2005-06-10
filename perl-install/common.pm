@@ -1,7 +1,6 @@
 package common; # $Id$
 
 use MDK::Common;
-use MDK::Common::System;
 use diagnostics;
 use strict;
 use run_program;
