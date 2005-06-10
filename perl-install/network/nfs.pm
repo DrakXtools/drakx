@@ -4,7 +4,6 @@ use strict;
 use diagnostics;
 
 use common;
-use network::network;
 use network::smbnfs;
 use log;
 

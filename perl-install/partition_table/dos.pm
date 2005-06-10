@@ -9,6 +9,7 @@ use vars qw(@ISA);
 use common;
 use partition_table::raw;
 use partition_table;
+use fs::type;
 use c;
 
 my @fields = qw(active start_head start_sec start_cyl pt_type end_head end_sec end_cyl start size);

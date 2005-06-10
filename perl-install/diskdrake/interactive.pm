@@ -7,6 +7,7 @@ use common;
 use fs::type;
 use fs::loopback;
 use fs::format;
+use fs::mount_options;
 use fs;
 use partition_table;
 use partition_table::raw;
@@ -258,7 +259,7 @@ sub general_possible_actions {
 
 sub Undo {
     my ($_in, $all_hds) = @_;
-    fsedit::undo($all_hds);
+    undo($all_hds);
 }
 
 sub Wizard {
@@ -1312,4 +1313,27 @@ sub update_bootloader_for_renumbered_partitions {
 
     require bootloader;
     bootloader::update_for_renumbered_partitions($in, \@renumbering, $all_hds);
+}
+
+sub undo_prepare {
+    my ($all_hds) = @_;
+    require Data::Dumper;
+    $Data::Dumper::Purity = 1;
+    foreach (@{$all_hds->{hds}}) {
+	my @h = @$_{@partition_table::fields2save};
+	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
+    }
+}
+sub undo {
+    my ($all_hds) = @_;
+    foreach (@{$all_hds->{hds}}) {
+	my $code = pop @{$_->{undo}} or next;
+	my $h; eval $code;
+	@$_{@partition_table::fields2save} = @$h;
+
+	if ($_->{hasBeenDirty}) {
+	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can not do it now since more undo may occur, and we must not needReboot now
+	}
+    }
+    
 }

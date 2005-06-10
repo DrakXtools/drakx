@@ -3,7 +3,6 @@ package network::isdn; # $Id$
 use strict;
 use network::isdn_consts;
 use common;
-use any;
 use modules;
 use run_program;
 use log;

@@ -11,7 +11,6 @@ use common;
 use detect_devices;
 use run_program;
 use network::tools;
-use any;
 use vars qw(@ISA @EXPORT);
 use log;
 

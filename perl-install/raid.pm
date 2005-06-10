@@ -11,7 +11,6 @@ use fs::type;
 use run_program;
 use devices;
 use modules;
-use fs;
 
 sub max_nb() { 31 }
 

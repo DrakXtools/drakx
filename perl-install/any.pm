@@ -12,7 +12,6 @@ use partition_table;
 use fs::type;
 use lang;
 use run_program;
-use keyboard;
 use devices;
 use modules;
 use log;

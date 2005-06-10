@@ -3,7 +3,6 @@ package network::adsl; # $Id$
 use common;
 use run_program;
 use network::tools;
-use network::ethernet;
 use modules;
 use vars qw(@ISA @EXPORT);
 

@@ -369,7 +369,7 @@ sub getIDE() {
 sub block_devices() {
     -d '/sys/block' 
       ? map { s|!|/|; $_ } all('/sys/block') 
-      : map { $_->{dev} } devices::read_proc_partitions_raw();
+      : map { $_->{dev} } do { require fs::proc_partitions; fs::proc_partitions::read_raw() };
 }
 
 sub getCompaqSmartArray() {

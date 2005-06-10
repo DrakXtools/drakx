@@ -2,7 +2,6 @@ package network::dhcpd;
 
 use strict;
 use common;
-use network::network;
 
 my $sysconf_dhcpd = "$::prefix/etc/sysconfig/dhcpd";
 my $dhcpd_conf_file = "$::prefix/etc/dhcpd.conf";

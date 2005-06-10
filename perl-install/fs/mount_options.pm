@@ -5,6 +5,7 @@ use strict;
 
 use common;
 use fs::type;
+use fs::get;
 use log;
 
 sub list() {

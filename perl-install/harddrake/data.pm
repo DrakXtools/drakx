@@ -267,7 +267,6 @@ our @tree =
       configurator => "$sbindir/drakconnect",
       detector => sub {
           require list_modules;
-          require network::ethernet;
           my @net_modules = list_modules::category2modules(list_modules::ethernet_categories());
           f(grep {
               $_->{media_type} && $_->{media_type} =~ /^NETWORK/

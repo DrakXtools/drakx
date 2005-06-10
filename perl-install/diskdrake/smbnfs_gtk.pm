@@ -3,7 +3,6 @@ package diskdrake::smbnfs_gtk; # $Id$
 use diagnostics;
 use strict;
 
-use any;
 use fs::get;
 use diskdrake::interactive;
 use common;

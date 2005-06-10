@@ -1,7 +1,6 @@
 package harddrake::autoconf;
 
 use common;
-use any;
 
 sub xconf {
     my ($modules_conf, $o) = @_;
@@ -9,10 +8,10 @@ sub xconf {
     log::l('automatic XFree configuration');
     
     require Xconfig::default;
+    require do_pkgs;
     $o->{raw_X} = Xconfig::default::configure(do_pkgs_standalone->new);
     
     require Xconfig::main;
-    require do_pkgs;
     Xconfig::main::configure_everything_auto_install($o->{raw_X}, do_pkgs_standalone->new, {}, { allowFB => 1 });
 
     modules::load_category($modules_conf, 'various/agpgart'); 

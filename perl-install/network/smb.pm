@@ -4,7 +4,7 @@ use strict;
 use diagnostics;
 
 use common;
-use fs;
+use fs::mount_options;
 use network::network;
 use network::smbnfs;
 

@@ -11,7 +11,6 @@ use Xconfig::screen;
 use Xconfig::test;
 use Xconfig::xfree;
 use common;
-use any;
 
 
 sub configure_monitor {

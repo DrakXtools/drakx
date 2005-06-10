@@ -3,8 +3,6 @@ package Xconfig::resolution_and_depth; # $Id$
 use diagnostics;
 use strict;
 
-use Xconfig::card;
-use Xconfig::monitor;
 use common;
 
 

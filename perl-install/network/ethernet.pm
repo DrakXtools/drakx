@@ -1,13 +1,9 @@
 package network::ethernet; # $Id$
 
 use c;
-use network::network;
-use modules;
-use modules::interactive;
 use detect_devices;
 use common;
 use run_program;
-use network::tools;
 
 our @dhcp_clients = qw(dhclient dhcpcd pump dhcpxd);
 

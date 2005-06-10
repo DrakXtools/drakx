@@ -11,8 +11,6 @@ use detect_devices;
 use diskdrake::interactive;
 use run_program;
 use devices;
-use raid;
-use any;
 use log;
 use fsedit;
 
@@ -108,7 +106,7 @@ sub try {
 sub try_ {
     my ($name, $f, @args) = @_;
 
-    fsedit::undo_prepare($all_hds) if $name ne 'Undo';
+    diskdrake::interactive::undo_prepare($all_hds) if $name ne 'Undo';
 
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {

@@ -1,7 +1,6 @@
 package http; # $Id$
 
 use IO::Socket;
-use network::network;
 
 my $sock;
 

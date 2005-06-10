@@ -1,5 +1,5 @@
-package modules::interactive;
-use interactive;
+package modules::interactive; # $Id$
+
 use modules;
 use common;
 

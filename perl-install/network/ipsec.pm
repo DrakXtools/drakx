@@ -3,11 +3,9 @@ package network::ipsec;
 
 
 use detect_devices;
-use network::netconnect;
 use run_program;
 use common;
 use log;
-use Data::Dumper;
 
 #- debugg functions ----------
 sub recreate_ipsec_conf {

@@ -1,7 +1,6 @@
 package authentication; # $Id$
 
 use common;
-use any;
 
 sub kinds { 
     my $no_para = @_ == 0;

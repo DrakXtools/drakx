@@ -3,7 +3,7 @@ package network::smbnfs; # $Id$
 use strict;
 use diagnostics;
 
-use fs;
+use fs::mount_options;
 
 
 sub new { 

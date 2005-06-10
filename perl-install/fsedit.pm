@@ -10,8 +10,10 @@ use vars qw(%suggestions);
 use common;
 use partition_table;
 use partition_table::raw;
+use fs::get;
 use fs::type;
 use fs::loopback;
+use fs::proc_partitions;
 use detect_devices;
 use devices;
 use log;
@@ -132,7 +134,7 @@ sub get_hds {
 	    my $handle_die_and_cdie = sub {
 		if ($hd->{readonly}) {
 		    log::l("using /proc/partitions since diskdrake failed :(");
-		    use_proc_partitions($hd);
+		    fs::proc_partitions::use_($hd);
 		    1;
 		} elsif (my $type = fs::type::type_subpart_from_magic($hd)) {
 		    #- non partitioned drive?
@@ -163,7 +165,7 @@ sub get_hds {
 		    if (listlength(partition_table::get_normal_parts($hd)) == 0) {
 			$handled = 1 if $handle_die_and_cdie->();
 		    } else {
-			compare_with_proc_partitions($hd) if $::isInstall;
+			fs::proc_partitions::compare($hd) if $::isInstall;
 		    }
 		} sub {
 		    my $err = $@;
@@ -191,7 +193,7 @@ Do you agree to lose all the partitions?
 		} else {
 		    #- using it readonly
 		    log::l("using /proc/partitions since diskdrake failed :(");
-		    use_proc_partitions($hd);
+		    fs::proc_partitions::use_($hd);
 		}
 	    }
 	    $hd or next;
@@ -240,44 +242,6 @@ Do you agree to lose all the partitions?
     fs::get_major_minor(fs::get::fstab($all_hds));
 
     $all_hds;
-}
-
-sub read_proc_partitions {
-    my ($hds) = @_;
-
-    my @all = devices::read_proc_partitions_raw();
-    my ($parts, $disks) = partition { $_->{dev} =~ /\d$/ && $_->{dev} !~ /^(sr|scd)/ } @all;
-
-    my $devfs_like = any { $_->{dev} =~ m|/disc$| } @$disks;
-
-    my %devfs2normal = map {
-	my (undef, $major, $minor) = devices::entry($_->{device});
-	my $disk = find { $_->{major} == $major && $_->{minor} == $minor } @$disks;
-	$disk->{dev} => $_->{device};
-    } @$hds;
-
-    my $prev_part;
-    foreach my $part (@$parts) {
-	my $dev;
-	if ($devfs_like) {
-	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("0x%x%02x", $part->{major}, $part->{minor});
-	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
-	} else {
-	    $dev = $part->{dev};
-	    if (my $hd = find { $part->{dev} =~ /^\Q$_->{device}\E./ } @$hds) {
-		put_in_hash($part, partition_table::hd2minimal_part($hd));
-	    }
-	}
-	undef $prev_part if $prev_part && ($prev_part->{rootDevice} || '') ne ($part->{rootDevice} || '');
-
-	$part->{device} = $dev;
-	$part->{size} *= 2;	# from KB to sectors
-	$part->{start} = $prev_part ? $prev_part->{start} + $prev_part->{size} : 0;
-	put_in_hash($part, fs::type::type_subpart_from_magic($part));
-	$prev_part = $part;
-	delete $part->{dev}; # cleanup
-    }
-    @$parts;
 }
 
 sub is_same_hd {
@@ -540,29 +504,6 @@ sub auto_allocate_vgs {
     1;
 }
 
-sub undo_prepare {
-    my ($all_hds) = @_;
-    require Data::Dumper;
-    $Data::Dumper::Purity = 1;
-    foreach (@{$all_hds->{hds}}) {
-	my @h = @$_{@partition_table::fields2save};
-	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
-    }
-}
-sub undo {
-    my ($all_hds) = @_;
-    foreach (@{$all_hds->{hds}}) {
-	my $code = pop @{$_->{undo}} or next;
-	my $h; eval $code;
-	@$_{@partition_table::fields2save} = @$h;
-
-	if ($_->{hasBeenDirty}) {
-	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can not do it now since more undo may occur, and we must not needReboot now
-	}
-    }
-    
-}
-
 sub change_type {
     my ($type, $hd, $part) = @_;
     $type->{pt_type} != $part->{pt_type} || $type->{fs_type} ne $part->{fs_type} or return;
@@ -606,33 +547,6 @@ sub rescuept($) {
 
 	partition_table::add($hd, $_, ($b ? 'Extended' : 'Primary'), 1);
     }
-}
-
-sub compare_with_proc_partitions {
-    my ($hd) = @_;
-
-    my @l1 = partition_table::get_normal_parts($hd);
-    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]);
-
-    #- /proc/partitions includes partition with type "empty" and a non-null size
-    #- so add them for comparison
-    my ($len1, $len2) = (int(@l1) + $hd->{primary}{nb_special_empty}, int(@l2));
-
-    if ($len1 != $len2 && arch() ne 'ppc') {
-	die sprintf(
-		    "/proc/partitions does not agree with drakx %d != %d:\n%s\n", $len1, $len2,
-		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));
-    }
-    $len2;
-}
-
-sub use_proc_partitions {
-    my ($hd) = @_;
-
-    partition_table::raw::zero_MBR($hd);
-    $hd->{readonly} = 1;
-    $hd->{getting_rid_of_readonly_allowed} = 1;
-    $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]) ] };
 }
 
 1;

@@ -5,7 +5,7 @@ use common;
 use any;
 use modules;
 use detect_devices;
-use mouse;
+use network::network;
 use network::tools;
 
 sub get_user_home() {

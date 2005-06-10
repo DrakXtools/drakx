@@ -2,7 +2,6 @@ package mygtk2;
 
 use diagnostics;
 use strict;
-use lang;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(gtknew gtkset gtkadd gtkval_register gtkval_modify);

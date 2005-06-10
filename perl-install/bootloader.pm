@@ -7,13 +7,13 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common;
-use partition_table;
 use fs::type;
 use fs::get;
+use fs::loopback;
+use fs::proc_partitions;
 use log;
 use any;
 use devices;
-use fs::loopback;
 use detect_devices;
 use partition_table::raw;
 use run_program;
@@ -255,7 +255,7 @@ sub read_grub {
 
 sub yaboot2dev {
     my ($of_path) = @_;
-    find { dev2yaboot($_) eq $of_path } map { "/dev/$_->{dev}" } devices::read_proc_partitions_raw();
+    find { dev2yaboot($_) eq $of_path } map { "/dev/$_->{dev}" } fs::proc_partitions::read_raw();
 }
 
 # assumes file is in /boot

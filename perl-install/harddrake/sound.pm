@@ -16,7 +16,6 @@ package harddrake::sound;
 
 use strict;
 use common;
-use interactive;
 use run_program;
 use modules;
 use list_modules;
