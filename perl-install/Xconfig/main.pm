@@ -9,6 +9,7 @@ use Xconfig::resolution_and_depth;
 use Xconfig::various;
 use Xconfig::screen;
 use Xconfig::test;
+use Xconfig::xfree;
 use common;
 use any;
 

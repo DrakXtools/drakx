@@ -7,6 +7,7 @@ use Xconfig::xfree;
 use keyboard;
 use common;
 use mouse;
+use modules::any_conf;
 
 
 sub configure {

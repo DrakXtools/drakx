@@ -10,6 +10,7 @@ use common;
 use partition_table::raw;
 use partition_table::dos;
 use partition_table;
+use fs::type;
 use c;
 
 my %gpt_types = (

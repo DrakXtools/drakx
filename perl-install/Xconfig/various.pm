@@ -158,6 +158,9 @@ sub setupFB {
     if ($::isInstall) {
 	($bootloader, $all_hds) = ($::o->{bootloader}, $::o->{all_hds});
     } else {
+	require fsedit;
+	require fs;
+	require bootloader;
 	$all_hds = fsedit::get_hds();
 	fs::get_info_from_fstab($all_hds);
 

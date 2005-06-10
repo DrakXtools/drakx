@@ -5,6 +5,8 @@ use common;
 use detect_devices;
 use run_program;
 use services;
+use fs::get;
+use fs;
 use log;
 
 #- network_settings is an hash of categories (rtc, dsl, wireless, ...)

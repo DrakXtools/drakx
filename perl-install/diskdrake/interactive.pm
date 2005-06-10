@@ -5,11 +5,13 @@ use strict;
 
 use common;
 use fs::type;
+use fs::loopback;
+use fs::format;
+use fs;
 use partition_table;
 use partition_table::raw;
 use detect_devices;
 use run_program;
-use fs::loopback;
 use devices;
 use fsedit;
 use raid;
