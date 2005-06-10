@@ -50,11 +50,11 @@ defaultroute
     services::stop("isdn4linux"); #- to be stopped before capi is loaded
     if ($isdn->{driver} eq "capidrv") {
         setup_capi_conf(get_capi_card($isdn));
-        services::set_status('capi4linux', 1);
+        services::enable('capi4linux');
     } else {
-        services::set_status('capi4linux', 0);
+        services::disable('capi4linux');
     }
-    services::set_status('isdn4linux', 1);
+    services::enable('isdn4linux');
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
