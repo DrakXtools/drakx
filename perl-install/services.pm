@@ -385,14 +385,24 @@ sub do_not_start_service_on_boot ($) {
     run_program::rooted($::prefix, "/sbin/chkconfig", "--del", $service);
 }
 
+sub enable {
+    my ($service, $o_dont_apply) = @_;
+    start_service_on_boot($service);
+    restart_or_start($service) unless $o_dont_apply;
+}
+
+sub disable {
+    my ($service, $o_dont_apply) = @_;
+    do_not_start_service_on_boot($service);
+    stop($service) unless $o_dont_apply;
+}
+
 sub set_status {
     my ($service, $enable, $o_dont_apply) = @_;
     if ($enable) {
-	start_service_on_boot($service);
-	restart_or_start($service) unless $o_dont_apply;
+	enable($service, $o_dont_apply);
     } else {
-	do_not_start_service_on_boot($service);
-	stop($service) unless $o_dont_apply;
+	disable($service, $o_dont_apply);
     }
 }
 
