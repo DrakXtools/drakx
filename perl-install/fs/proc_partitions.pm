@@ -58,7 +58,7 @@ sub compare {
     my ($hd) = @_;
 
     my @l1 = partition_table::get_normal_parts($hd);
-    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } read([$hd]);
+    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]);
 
     #- /proc/partitions includes partition with type "empty" and a non-null size
     #- so add them for comparison
@@ -78,5 +78,7 @@ sub use_ {
     partition_table::raw::zero_MBR($hd);
     $hd->{readonly} = 1;
     $hd->{getting_rid_of_readonly_allowed} = 1;
-    $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } read([$hd]) ] };
+    $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]) ] };
 }
+
+1;
