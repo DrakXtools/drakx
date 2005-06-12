@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.3\n"
 "POT-Creation-Date: 2005-05-31 13:03+0200\n"
-"PO-Revision-Date: 2005-04-29 23:58+0800\n"
+"PO-Revision-Date: 2005-06-12 17:53+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -3258,7 +3258,7 @@ msgstr "USB 声音设备"
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "无线电卡"
 
 #: harddrake/data.pm:238
 #, c-format
@@ -6388,6 +6388,9 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
+"您系统的资源过低。您在安装 Mandriva Linux 的过程中可能遇到问题。\n"
+"如果您真的遇到问题的话，可以试试文本安装。要进入文本安装，请在启动时按"
+"“F1”，然后输入“text”。"
 
 #: install_steps_gtk.pm:224 install_steps_interactive.pm:624
 #, c-format
@@ -6916,6 +6919,7 @@ msgstr ""
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
+"正在连接 Mandriva Linux 网站获得可用镜像的列表..."
 
 #: install_steps_interactive.pm:844
 #, c-format
@@ -7133,7 +7137,7 @@ msgstr ""
 #: install_steps_newt.pm:20
 #, c-format
 msgid "Mandriva Linux Installation %s"
-msgstr ""
+msgstr "Mandriva Linux 安装 %s"
 
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
@@ -10069,7 +10073,7 @@ msgstr "调制解调器连接"
 #: network/netconnect.pm:311
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "DVB 连接"
 
 #: network/netconnect.pm:321
 #, c-format
@@ -10786,22 +10790,22 @@ msgstr "速度应该有后缀 k, M 或 G(如“11M”代表 11M), 或者后带�
 #: network/netconnect.pm:1210
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "DVB 配置"
 
 #: network/netconnect.pm:1211
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "DVB 适配器"
 
 #: network/netconnect.pm:1229
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "DVB 适配器设置"
 
 #: network/netconnect.pm:1232
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "适配卡"
 
 #: network/netconnect.pm:1233
 #, c-format
@@ -10811,7 +10815,7 @@ msgstr ""
 #: network/netconnect.pm:1234
 #, c-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: network/netconnect.pm:1262
 #, c-format
@@ -11098,23 +11102,20 @@ msgstr ""
 "\t\tippp+ 代表 ISDN 连接。\n"
 
 #: network/thirdparty.pm:195
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr ""
-"您需要阿尔卡特微码。\n"
-"请从\n"
-"%s\n"
-"下载并将 mgmt.o 复制到 /usr/share/speedtouch"
+"将阿尔卡特微码复制到 /usr/share/speedtouch 并保存为 mgmt.o"
 
 #: network/thirdparty.pm:265
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "无法安装 %s 软件包!"
+msgstr "无法安装软件包(%s)!"
 
 #: network/thirdparty.pm:273
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "需要某些软件包(%s)，这些软件包不可用。"
 
 #: network/thirdparty.pm:274
 #, c-format
@@ -11122,6 +11123,7 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"这些软件包可以在 Mandriva Club 或 Mandriva Linux 零售产品中找到。"
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11129,16 +11131,17 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"所需的文件也可从以下 URL 安装:\n%s"
 
 #: network/thirdparty.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "删除系统中的字体"
+msgstr "在 Windows 系统中找不到“%s”!"
 
 #: network/thirdparty.pm:310
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "未检测到 Windows 系统!"
 
 #: network/thirdparty.pm:320
 #, c-format
@@ -11199,12 +11202,12 @@ msgstr "固件复制成功"
 #: network/thirdparty.pm:425
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "正在查找所需的软件或驱动程序..."
 
 #: network/thirdparty.pm:435
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "请稍候, 正在检测并配置设备..."
+msgstr "请稍候, 正在运行设备配置命令..."
 
 #: partition_table.pm:397
 #, c-format
@@ -12138,12 +12141,12 @@ msgstr "(请确认您的打印机已经连接好并且接通了电源)。\n"
 msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
-msgstr "您想激活上述打印机的打印功能, 还是要使用本地网络的打印机来打印?\n"
+msgstr "您想激活上述打印机的打印功能, 还是要使用局域网的打印机来打印?\n"
 
 #: printer/printerdrake.pm:731
 #, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr "您想使用本地网络的打印机来打印吗?\n"
+msgstr "您想使用局域网的打印机来打印吗?\n"
 
 #: printer/printerdrake.pm:733
 #, c-format
@@ -12383,7 +12386,7 @@ msgstr "自动探测这台机器连接的打印机"
 #: printer/printerdrake.pm:1145
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr "自动探测直接连接到本地网络的打印机"
+msgstr "自动探测直接连接到局域网的打印机"
 
 #: printer/printerdrake.pm:1148
 #, c-format
@@ -12776,7 +12779,7 @@ msgstr ""
 "将以明文出现在 Samba 向 Windows 服务器发送打印任务的命令行中。所以这个系统的"
 "所有用户都可以用下列命令看到密码:“ps auxwww”。\n"
 "\n"
-"我们建议您使用下面列出的替代方法之一(所有情况中您必须设法保证只有您的本地网络"
+"我们建议您使用下面列出的替代方法之一(所有情况中您必须设法保证只有您的局域网"
 "的计算机可以访问您的 Windows 服务器, 例如使用防火墙):\n"
 "\n"
 "使用 Windows 服务器上没有密码的账户, 如“GUEST”账户或者打印专用的账户。不要清"
@@ -17227,7 +17230,7 @@ msgstr "完成！"
 #: standalone/drakTermServ:467 standalone/drakTermServ:847
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s 失败"
 
 #: standalone/drakTermServ:476
 #, c-format
@@ -17236,6 +17239,8 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"没有足够的空间在 %s 创建 NBI。\n"
+"所需空间：%d MB，剩余空间：%d MB"
 
 #: standalone/drakTermServ:482
 #, c-format
@@ -17788,11 +17793,13 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"动态 IP 地址池\n"
+"(PXE 客户端需要):"
 
 #: standalone/drakTermServ:1503
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "写入 %s 失败!"
 
 #: standalone/drakTermServ:1515
 #, c-format
@@ -19692,17 +19699,17 @@ msgstr "<control>Q"
 #: standalone/drakboot:117
 #, c-format
 msgid "Text only"
-msgstr ""
+msgstr "只有文本"
 
 #: standalone/drakboot:118
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "详细"
 
 #: standalone/drakboot:119
 #, c-format
 msgid "Silent"
-msgstr ""
+msgstr "静默"
 
 #: standalone/drakboot:126
 #, c-format
@@ -20237,7 +20244,7 @@ msgstr "连接..."
 msgid ""
 "Warning, another Internet connection has been detected, maybe using your "
 "network"
-msgstr "警告, 检测到另外的 Internet 连接, 可能是通过本地网络"
+msgstr "警告, 检测到另外的 Internet 连接, 可能是通过局域网"
 
 #: standalone/drakconnect:874
 #, c-format
@@ -20895,7 +20902,7 @@ msgstr ""
 "您要做什么?"
 
 #: standalone/drakgw:108
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
 msgstr "重新配置"
 
@@ -20922,14 +20929,14 @@ msgid ""
 msgstr "请选择您将使用哪张网卡连接您的局域网。"
 
 #: standalone/drakgw:180
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "本地网络地址"
+msgstr "局域网设置"
 
 #: standalone/drakgw:183
 #, c-format
 msgid "Local Network adress"
-msgstr "本地网络地址"
+msgstr "局域网地址"
 
 #: standalone/drakgw:185
 #, c-format
@@ -20942,14 +20949,14 @@ msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "在当前的 %s 配置中发现可能的 LAN 地址冲突！\n"
 
 #: standalone/drakgw:207
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "终端服务器配置"
+msgstr "域名服务器(DNS)配置"
 
 #: standalone/drakgw:211
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "使用此网关作为域名服务器"
 
 #: standalone/drakgw:212
 #, c-format
@@ -20970,9 +20977,9 @@ msgstr ""
 "如果您不知道选项的含义, 那么就不管它, 不必进行修改。"
 
 #: standalone/drakgw:251
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "自动重新配置"
+msgstr "使用自动重新配置(DHCP)"
 
 #: standalone/drakgw:252
 #, c-format
@@ -20997,37 +21004,37 @@ msgstr "最长租期(以秒为单位)"
 #: standalone/drakgw:281
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "代理缓存服务器(SQUID)"
 
 #: standalone/drakgw:285
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "使用此网关作为代理缓存服务器"
 
 #: standalone/drakgw:286
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "管理员电子邮件"
 
 #: standalone/drakgw:287
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "远程主机名"
+msgstr "可见主机名"
 
 #: standalone/drakgw:288
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "属性"
+msgstr "代理端口"
 
 #: standalone/drakgw:289
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "缓存大小"
+msgstr "缓存大小(MB)"
 
 #: standalone/drakgw:314
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "硬盘信息"
+msgstr "广播打印机信息"
 
 #: standalone/drakgw:331
 #, c-format
@@ -21492,6 +21499,8 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"您没有任何无线网卡。\n"
+"请从 Mandriva Linux 控制中心运行“%s”助手"
 
 #: standalone/drakroam:141
 #, c-format
@@ -21867,22 +21876,22 @@ msgstr "进度条的高度"
 #: standalone/draksplash:58 standalone/draksplash:63
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "选择进度栏颜色"
 
 #: standalone/draksplash:59 standalone/draksplash:64
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "选择图片"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "静默启动屏幕"
 
 #: standalone/draksplash:65
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "详细静默屏幕"
 
 #: standalone/draksplash:67
 #, c-format
@@ -21892,7 +21901,7 @@ msgstr "在控制台显示 LOGO"
 #: standalone/draksplash:70
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "控制台屏幕"
 
 #: standalone/draksplash:76
 #, c-format
@@ -24648,7 +24657,7 @@ msgstr "监视网络"
 #: standalone/net_applet:71
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "管理无线网络"
 
 #: standalone/net_applet:72
 #, c-format
@@ -25684,98 +25693,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安装失败"
 
-#~ msgid "Do it later"
-#~ msgstr "稍后再做"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MdkKDM (Mandriva Linux 显示管理器)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "Internet 连接共享现在被禁用"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "正在启用服务器..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "Internet 连接共享现在已经启用"
-
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "网卡 %s(使用 %s 模块)"
-
-#~ msgid "Interface %s"
-#~ msgstr "网卡 %s"
-
-#~ msgid "Network interface"
-#~ msgstr "网卡"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "已完成网络配置"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "警告, 网卡(%s)已经配置过。\n"
-#~ "\n"
-#~ "您希望自动重新配置吗?\n"
-#~ "\n"
-#~ "如果您知道怎样做, 也可以手工配置。"
-
-#~ msgid "No (experts only)"
-#~ msgstr "无(仅对专家)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "修改当前网络接口的配置"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "当前接口配置"
-
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "“%s”的当前配置: \n"
-#~ "\n"
-#~ "网络: %s\n"
-#~ "IP 地址: %s\n"
-#~ "IP 属性: %s\n"
-#~ "其它: %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "我现在可以保留您当前的设置并假定您已经设置好了 DHCP 服务器；如果是这样的"
-#~ "话, 请检查我已经从本地网络上读取到了您正在使用的网络；我不会强行重新配置, "
-#~ "也不会更改您的 DHCP 服务器配置。\n"
-#~ "\n"
-#~ "默认的 DNS 项是配置在防火墙上的缓冲命名服务器。例如, 您可以将其替换为您的 "
-#~ "ISP DNS IP。\n"
-#~ "\t\t      \n"
-#~ "否则, 我就会重新配置您的接口并重新为您配置 DHCP 服务器。\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "(此)DHCP 服务器 IP"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "重新配置网卡和 DHCP 服务器"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "本地网络没有以“.0”结束, 已经修改。"
