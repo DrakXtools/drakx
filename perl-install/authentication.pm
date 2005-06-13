@@ -420,8 +420,7 @@ sub set_pam_authentication {
 	    }
 	    if ($module eq 'pam_unix' && $special{$type}) {
 		my @para_for_last = 
-		    $type eq 'auth' ? qw(likeauth nullok use_first_pass) :
-		    $type eq 'account' ? qw(use_first_pass) : @{[]};
+		    member($type, 'auth', 'account') ? qw(use_first_pass) : @{[]};
 		@para = difference2(\@para, \@para_for_last);
 
 		my ($before_noask, $ask) = partition { $_ eq 'castella' } @{$special{$type}};
