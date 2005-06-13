@@ -23,7 +23,7 @@ sub unpack {
 
     my ($non_defaults, $user_implies) = list();
 
-    my @auto_fs = fs::auto_fs();
+    my @auto_fs = fs::type::guessed_by_mount();
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
 		  vfat => [ qw(umask=0 umask=0022) ],

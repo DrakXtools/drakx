@@ -387,10 +387,6 @@ sub write_fstab {
     network::smb::save_credentials($_) foreach @$smb_credentials;
 }
 
-sub auto_fs() {
-    grep { chop; $_ && !/nodev/ } cat_("/etc/filesystems");
-}
-
 sub set_removable_mntpoints {
     my ($all_hds) = @_;
 

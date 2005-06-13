@@ -372,6 +372,10 @@ sub check {
     $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can not use ReiserFS for partitions smaller than 32MB");
 }
 
+sub guessed_by_mount() {
+    grep { $_ && !/nodev/ } chomp_(cat_('/etc/filesystems'));
+}
+
 sub directories_needed_to_boot() { 
     qw(/ /usr /var /boot /tmp);
 }
