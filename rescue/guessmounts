@@ -15,7 +15,7 @@
 use lib qw(../perl-install /usr/lib/libDrakX);
 use common;
 use fs;
-
+use fs::proc_partitions;
 
 
 my @proc_mounts = fs::read_fstab('', '/proc/mounts');
@@ -36,7 +36,7 @@ mkdir_p($target);
 my @fstab;
 my $root;
 
-foreach (devices::read_proc_partitions_raw()) {
+foreach (fs::proc_partitions::read_raw()) {
     my $dev = devices::make($_->{dev});
 
     my $fs = find {

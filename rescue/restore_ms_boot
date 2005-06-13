@@ -16,12 +16,13 @@ use lib qw(../perl-install /usr/lib/libDrakX);
 use common;
 use bootloader;
 use fs;
+use fs::proc_partitions;
 
 
 my @choices = map {
     my $type = typeFromMagic(devices::make($_->{dev}));
     if_($type && member($type, bootloader::main_method_choices()) , [ $_->{dev}, $type ]);
-} devices::read_proc_partitions_raw();
+} fs::proc_partitions::read_raw();
 
 my $choice;
 
@@ -54,6 +55,9 @@ Ok? <press Enter to continue, 'n' and Enter to cancel> ";
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.5  2005/06/13 04:33:50  prigaux
+#- move functions using /proc/partitions out of fsedit to fs::proc_partitions
+#-
 #- Revision 1.4  2005/05/19 08:59:54  prigaux
 #- rewrite using DrakX modules
 #-

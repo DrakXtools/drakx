@@ -18,8 +18,8 @@
 
 use lib qw(../perl-install /usr/lib/libDrakX);
 use common;
-use devices;
 use fs::type;
+use fs::proc_partitions;
 
 my $params = join '', @ARGV;
 my $verbose = $params =~ /-v/;
@@ -27,7 +27,7 @@ my $verbose = $params =~ /-v/;
 $params =~ /-h/ and die "usage: lsparts [-v]\n";
 
 
-foreach (devices::read_proc_partitions_raw()) {
+foreach (fs::proc_partitions::read_raw()) {
     if (my $err = $_->{size} <= 1 ?
 	"Skipping <$_->{dev}> because too little blocks ($_->{size})" :
 	  $_->{dev} !~ /\d$/ ?
