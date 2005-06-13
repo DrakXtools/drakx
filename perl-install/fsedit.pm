@@ -244,20 +244,6 @@ Do you agree to lose all the partitions?
     $all_hds;
 }
 
-sub is_same_hd {
-    my ($hd1, $hd2) = @_;
-    if ($hd1->{major} && $hd2->{major}) {
-	$hd1->{major} == $hd2->{major} && $hd1->{minor} == $hd2->{minor};
-    } elsif (my ($s1) = $hd1->{device} =~ m|https?://(.+?)/*$|) {
-	my ($s2) = $hd2->{device} =~ m|https?://(.+?)/*$|;
-	$s1 eq $s2;
-    } else {
-	$hd1->{devfs_device} && $hd2->{devfs_device} && $hd1->{devfs_device} eq $hd2->{devfs_device}
-	  || $hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
-	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device};
-    }
-}
-
 #- are_same_partitions() do not look at the device name since things may have changed
 sub are_same_partitions {
     my ($part1, $part2) = @_;

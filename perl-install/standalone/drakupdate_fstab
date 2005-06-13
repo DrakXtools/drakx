@@ -148,7 +148,7 @@ sub main {
     }
 
     my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name', 'verbatim_credentials') ];
-    my ($existing_fstab_entries, $fstab_) = partition { fsedit::is_same_hd($_, $part) } @$fstab;
+    my ($existing_fstab_entries, $fstab_) = partition { fs::get::is_same_hd($_, $part) } @$fstab;
 
     if ($debug) {
 	require Data::Dumper;

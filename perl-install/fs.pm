@@ -104,7 +104,7 @@ sub merge_fstabs {
     my ($loose, $fstab, @l) = @_;
 
     foreach my $p (@$fstab) {
-	my ($l1, $l2) = partition { fsedit::is_same_hd($_, $p) } @l;
+	my ($l1, $l2) = partition { fs::get::is_same_hd($_, $p) } @l;
 	my ($p2) = @$l1 or next;
 	@l = @$l2;
 
@@ -274,7 +274,7 @@ sub merge_info_from_fstab {
     my @l = grep { 
 	if ($uniq) {
 	    my $part = fs::get::mntpoint2part($_->{mntpoint}, $fstab);
-	    !$part || fsedit::is_same_hd($part, $_); #- keep it only if it is the mountpoint AND the same device
+	    !$part || fs::get::is_same_hd($part, $_); #- keep it only if it is the mountpoint AND the same device
 	} else {
 	    1;
 	}

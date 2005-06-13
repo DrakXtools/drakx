@@ -1569,7 +1569,7 @@ sub use_root_part {
 	my @from_fstab = fs::read_fstab($handle->{dir}, '/etc/fstab', 'keep_default');
 
 	my $root_from_fstab = fs::get::root_(\@from_fstab);
-	if (!fsedit::is_same_hd($root_from_fstab, $part)) {
+	if (!fs::get::is_same_hd($root_from_fstab, $part)) {
 	    $migrate_device_names = 1;
 	    log::l("from_fstab contained: $_->{device} $_->{mntpoint}") foreach @from_fstab;
 	    migrate_device_names($all_hds, \@from_fstab, $part, $root_from_fstab, $o_in);
