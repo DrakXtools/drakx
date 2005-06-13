@@ -157,7 +157,7 @@ END
     my $chat_file = "$::prefix/etc/sysconfig/network-scripts/chat-ppp0";
     output_with_perm($chat_file, 0600, @chat);
 
-    write_secret_backend($toreplace{login}, $toreplace{passwd});
+    network::tools::write_secret_backend($toreplace{login}, $toreplace{passwd});
 
     #- install kppprc file according to used configuration.
     mkdir_p("$::prefix/usr/share/config");
