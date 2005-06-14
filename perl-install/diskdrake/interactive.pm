@@ -699,7 +699,7 @@ sub Mount_point_raw_hd {
 
 sub Resize {
     my ($in, $hd, $part) = @_;
-    my (%nice_resize, $block_count, $free_block, $block_size);
+    my (%nice_resize);
     my ($min, $max) = (min_partition_size($hd), partition_table::next_start($hd, $part) - $part->{start});
 
     if (maybeFormatted($part)) {
@@ -717,15 +717,11 @@ sub Resize {
 	    $max = min($max, $nice_resize{fat}->max_size);	    
 	} elsif (member($part->{fs_type}, 'ext2', 'ext3')) {
 	    write_partitions($in, $hd) or return;
-	    my $dev = devices::make($part->{device});
-	    my $r = run_program::get_stdout('dumpe2fs', $dev);
-	    $r =~ /Block count:\s*(\d+)/ and $block_count = $1;
-	    $r =~ /Free blocks:\s*(\d+)/ and $free_block = $1;
-	    $r =~ /Block size:\s*(\d+)/ and $block_size = $1;
-	    log::l("dumpe2fs $nice_resize{ext2} gives: Block_count=$block_count, Free_blocks=$free_block, Block_size=$block_size");
-	    if ($block_count && $free_block && $block_size) {
-		$min = max($min, ($block_count - $free_block) * ($block_size / 512));
-		$nice_resize{ext2} = $dev;
+	    require diskdrake::resize_ext2;
+	    if ($nice_resize{ext2} = diskdrake::resize_ext2->new($part->{device}, devices::make($part->{device}))) {
+		$min = max($min, $nice_resize{ext2}->min_size);
+	    } else {
+		delete $nice_resize{ext2};
 	    }
 	} elsif ($part->{fs_type} eq 'ntfs') {
 	    write_partitions($in, $hd) or return;
@@ -798,9 +794,7 @@ sub Resize {
 	local *log::l = sub { $wait->set(join(' ', @_)) };
 	$nice_resize{fat}->resize($part->{size});
     } elsif ($nice_resize{ext2}) {
-	my $s = int($part->{size} / ($block_size / 512));
-	log::l("resize2fs $nice_resize{ext2} to size $s in block of $block_size bytes");
-	run_program::run("resize2fs", "-pf", $nice_resize{ext2}, $s);
+	$nice_resize{ext2}->resize($part->{size});
     } elsif ($nice_resize{ntfs}) {
 	log::l("ntfs resize to $part->{size} sectors");
 	$nice_resize{ntfs}->resize($part->{size});
