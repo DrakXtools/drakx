@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.22mdk
+Release: 0.23mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun 14 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.23mdk
+- drakauth: stop messing with likeauth and nullok options and keep
+  them on the pam_unix line (pixel, #12066)
+- drakboot:
+  o adapt to new grub
+  o don't drop "shade" and "viewport" lines (pixel, #16372)
+- drakconnect: add senegal ADSL provider entry (daouda)
+- XFdrake: protect quotes in monitor names (pixel, #16406)
+
 * Wed Jun  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.22mdk
 - drakfirewall (blino):
   o do not crash when restarting shorewall
