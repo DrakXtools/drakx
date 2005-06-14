@@ -1339,7 +1339,8 @@ sub write_grub {
     {
 	my $f = "$::prefix/boot/grub/install.sh";
 	my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
-	my ($stage1, $stage2, $menu_lst) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
+	my ($stage1, $stage2) = map { $file2grub->(glob("/lib/grub/*/$_")) } qw(stage1 stage2);
+	my ($menu_lst) = $file2grub->("/boot/grub/menu.lst");
 	renamef($f, "$f.old");
 	output_with_perm("$::prefix/boot/grub/install.sh", 0755,
 "grub --device-map=/boot/grub/device.map --batch <<EOF
