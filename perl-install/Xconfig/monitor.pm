@@ -209,6 +209,7 @@ sub probe_DDC() {
     if ($monitor->{EISA_ID}) {
 	$monitor->{VendorName} = "Plug'n Play";
 	$monitor->{ModelName} = $monitor->{monitor_name};
+	$monitor->{ModelName} =~ s/"/''/g;
     }
     configure_automatic($monitor) or return;
     $monitor;
