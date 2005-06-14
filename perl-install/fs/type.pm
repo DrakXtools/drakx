@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use common;
+use devices;
 
 
 our @ISA = qw(Exporter);
