@@ -1539,6 +1539,7 @@ sub new {
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string(common::N("_banner font:\nSans 14")));
     $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
     $darea->{text} = $text;
+    require lang;
     my $is_rtl = lang::text_direction_rtl();
 
     $darea->signal_connect(realize => \&set_pixmap);
