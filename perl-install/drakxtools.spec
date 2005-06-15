@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.23mdk
+Release: 0.24mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jun 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.24mdk
+- fix banner widget breaking rpmdrake and the like
+- XFdrake: prevent loading/unloading twice the same glx module on non
+  NV cards
+
 * Tue Jun 14 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.23mdk
 - drakauth: stop messing with likeauth and nullok options and keep
   them on the pam_unix line (pixel, #12066)
