@@ -69,7 +69,6 @@ sub to_raw_X {
     # This loads the NVIDIA GLX extension module.
     # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
     # IT WILL LOAD XFree86 glx module and the server will crash.
-    $raw_X->set_load_module("/usr/X11R6/$lib/modules/extensions/libglx.so", $card->{DRI_GLX_SPECIAL}); 
     if ($card->{Driver2} ne 'nvidia') {
         $raw_X->set_load_module("/usr/X11R6/$lib/modules/extensions/libglx.a", 1);
     }
