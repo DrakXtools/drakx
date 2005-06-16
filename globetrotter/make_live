@@ -536,4 +536,4 @@ run_program::rooted($::prefix, 'urpmi.addmedia', '--probe-hdlist', $_, "/mnt/pac
 # for fast test replaying:
 run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
 
-my_exit("Your disk was succesfully restored!\nYou can now reboot your machine.");
+my_exit($rescue ? "Your disk was succesfully restored!\nYou can now reboot your machine." : "Installation completed.");
