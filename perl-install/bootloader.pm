@@ -1266,6 +1266,11 @@ sub grub2file {
 sub write_grub {
     my ($bootloader, $all_hds) = @_;
 
+    {
+	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
+	cp_af(@files, "$::prefix/boot/grub");
+    }
+
     my $fstab = [ fs::get::fstab($all_hds) ]; 
     my @legacy_floppies = detect_devices::floppies();
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
@@ -1338,13 +1343,13 @@ sub write_grub {
     }
     {
 	my $f = "$::prefix/boot/grub/install.sh";
-	my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
-	my ($stage1, $stage2) = map { $file2grub->(glob("/lib/grub/*/$_")) } qw(stage1 stage2);
-	my ($menu_lst) = $file2grub->("/boot/grub/menu.lst");
+	my $boot_dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
+	my $files_dev = device2grub(fs::get::root_($fstab, 'boot'), \@sorted_hds);
 	renamef($f, "$f.old");
-	output_with_perm("$::prefix/boot/grub/install.sh", 0755,
+	output_with_perm($f, 0755,
 "grub --device-map=/boot/grub/device.map --batch <<EOF
-install $stage1 d $dev $stage2 p $menu_lst
+root $files_dev
+setup $boot_dev
 quit
 EOF
 ");
