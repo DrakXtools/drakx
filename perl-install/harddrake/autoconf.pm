@@ -27,7 +27,8 @@ sub mouse_conf {
     my ($modules_conf) = @_;
     require do_pkgs;
     require mouse;
-    mouse::write_conf(do_pkgs_standalone->new, $modules_conf, mouse::detect($modules_conf), 1);
+    mouse::write_conf(do_pkgs_standalone->new, $modules_conf, my $mouse = mouse::detect($modules_conf), 1);
+    mouse::load_modules($mouse);
 }
 
 sub pcmcia {
