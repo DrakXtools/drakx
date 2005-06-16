@@ -83,7 +83,7 @@ sub install2::configMove {
 
     require install_steps;
     install_steps::addUser($o); # for test, when replaying wizard on an already configured machine
-    while ($#{$o->{users}} ne -1) {
+    while ($#{$o->{users}} eq -1) {
         install_steps::addUser($o);
     }
 
