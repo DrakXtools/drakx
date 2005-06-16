@@ -450,8 +450,8 @@ sub libgl_config {
     my $dir = "$::prefix/etc/ld.so.conf.d/";
 
     my %driver_to_libgl_config = (
-	nvidia => '.conf.nvidia',
-	fglrx => '.conf.ati',
+	nvidia => '.nvidia.conf',
+	fglrx => '.ati.conf',
     );
     my $need_to_run_ldconfig;
     my $link = "$dir/GL.conf";
