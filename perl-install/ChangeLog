@@ -1,3 +1,333 @@
+2005/06/17  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/06/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/pa_IN.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* network/ndiswrapper.pm: no space before question marks
+
+2005/06/17  pjetur
+
+	* share/po/is.po: New entries and lots of "speling"
+
+2005/06/17  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: rewrite and document
+
+2005/06/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.25mdk
+
+	* standalone/harddrake2: fix undefined function after pixel cleanups
+	(#16472)
+
+	* Xconfig/card.pm (to_raw_X) fix 3D on ATI cards (adding 'load "glx"')
+	(to_raw_X) fix 3D on ATI cards (adding 'load "glx"')
+
+	* bootloader.pm (write_lilo) fix support for labels (eg: when switching
+	from GRUB to
+	LILO, let's prevent unmanagable 'root="LABEL=..."' to appear)
+	(read_grub) fix reading config with new grub (thus fixing detectloader,
+	thus
+	fixing bootloader-config, thus fixing installkernel)
+	typo fix
+	(write_lilo) fix support for labels (eg: when switching from GRUB to
+	LILO, let's prevent unmanagable 'root="LABEL=..."' to appear)
+
+2005/06/17  willysr
+
+	* share/po/id.po: Updated
+	Updated
+
+2005/06/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* harddrake/autoconf.pm: load mouse modules after the mouse has been
+	configured, since
+	modprobe.preload is read before harddrake is run
+
+2005/06/16  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: 
+	  - new grub has files in /lib/grub/i386-pc, copy them in /boot/grub (as
+	done by grub-install)
+	  - use "setup" grub command instead of "install" so that it handles
+	stage1.5 embedding if possible, and is simpler
+
+2005/06/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* modules.pm, harddrake/autoconf.pm: fix autoconfiguring synaptics (eg: on
+	globetrotter)
+
+	* Xconfig/card.pm (libgl_config) fix enabling 3D when multiple GL
+	libraries are installed (eg: globetrotter)
+	(libgl_config) fix enabling 3D when multiple GL libraries are installed
+	(eg: globetrotter)
+
+2005/06/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* Xconfig/card.pm (to_raw_X) really prevent loading/unloading twice the
+	same glx module on non NV cards
+	(to_raw_X) prevent loading/unloading twice the same glx module on non NV
+	cards
+	(to_raw_X) really prevent loading/unloading twice the same glx module on
+	non NV cards
+	(to_raw_X) prevent loading/unloading twice the same glx module on non NV
+	cards
+
+	* ugtk2.pm (Gtk2::Banner->new) load lang in order to prevent aborting
+
+	* drakxtools.spec: 10.3-0.24mdk
+
+2005/06/14  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/make_partimage_save_rest_all: die on error
+
+	* diskdrake/resize_ext2.pm: move ext2 resizing code here so that it's
+	easier to use
+
+	* diskdrake/interactive.pm: use diskdrake::resize_ext2
+
+	* rescue/list.xml: needed for partimage_whole_disk, before calling
+	resize2fs
+
+	* Xconfig/monitor.pm: quotes in monitor names causes havoc, replace them
+	(bugzilla #16406)
+
+	* fs/type.pm: for lsparts to work
+
+2005/06/14  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/06/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.23mdk
+
+	* bootloader.pm (write_grub) adapt to grub-0.97-2mdk
+
+2005/06/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/modem.pm: prefix write_secret_backend
+
+	* Makefile.config: don't install drakpxe, the PXE wizard is now in the
+	drakpxelinux package
+
+2005/06/13  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/guessmounts, rescue/restore_ms_boot, rescue/lsparts: move
+	functions using /proc/partitions out of fsedit to fs::proc_partitions
+
+	* fs/type.pm, fs/mount_options.pm, diskdrake/removable.pm: fs::auto_fs()
+	is now fs::type::guessed_by_mount() (still not a really nice name...)
+
+	* fs.pm: fsedit::is_same_hd is now fs:get::is_same_hd
+	fs::auto_fs() is now fs::type::guessed_by_mount() (still not a really
+	nice name...)
+
+	* authentication.pm: stop messing with likeauth and nullok options and
+	keep them on the pam_unix line (bugzilla #12066)
+	stop messing with likeauth and nullok options and keep them on the
+	pam_unix line (bugzilla #12066)
+	stop messing with likeauth and nullok options and keep them on the
+	pam_unix line (bugzilla #12066)
+
+	* fs/get.pm, fsedit.pm, standalone/drakupdate_fstab, install_any.pm:
+	fsedit::is_same_hd is now fs:get::is_same_hd
+
+2005/06/12  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/06/12  rstandtke
+
+	* share/po/de.po: some additions and fixes
+
+2005/06/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn.pm: write_secret_backend isn't exported anymore
+	use services::enable() and services::disable()
+
+	* network/pxe.pm: 
+	  - create network::pxe out of drakpxelinux (pxe configuration files
+	management)
+	  - get_items() -> network::pxe::read_pxelinux_conf()
+	  - don't read comments in pxelinux configuration file
+	  - store pxelinux configuration in a hash to avoid multiple cat_()
+	  - add network::pxe::list_pxelinux_labels() to get labels from a
+	pxelinux configuration
+	  - only overwrite pxelinux settings (prompt, timeout, ...) when pxe is
+	reconfigured
+	  - use network::network and network::tools to get hostname, domain
+	name, IP address, net interface
+	  - move row creation code in set_pxelinux_entry_at_iter() and factorize
+	  - use ensure_is_installed to make sure pxe is installed
+
+	* services.pm: create enable() and disable() out of set_status()
+
+	* network/adsl.pm: use services::enable() and services::disable()
+
+2005/06/10  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm, fs.pm: don't need use MDK::Common... when we have "use common"
+	(which is the standard for libDrakX modules)
+	move loopback.pm to fs/loopback.pm
+	(since it's tightly tight to many fs* things)
+
+	* network/isdn.pm: don't need use MDK::Common... when we have "use common"
+	(which is the standard for libDrakX modules)
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+
+	* resize_fat/main.pm, interactive.pm, standalone/drakTermServ, crypto.pm,
+	network/test.pm, commands.pm, security/msec.pm, common.pm,
+	install_any.pm: don't need use MDK::Common... when we have "use common"
+	(which is the standard for libDrakX modules)
+
+	* http.pm, network/network.pm, network/modem.pm, harddrake/autoconf.pm,
+	network/ipsec.pm, partition_table/dos.pm, network/smb.pm, devices.pm,
+	harddrake/v4l.pm, modules/interactive.pm, raid.pm,
+	diskdrake/smbnfs_gtk.pm, any.pm, mygtk2.pm, harddrake/sound.pm,
+	fs/mount_options.pm, authentication.pm, network/ethernet.pm,
+	network/dhcpd.pm, Xconfig/resolution_and_depth.pm, harddrake/data.pm,
+	network/smbnfs.pm, network/adsl.pm, detect_devices.pm, network/nfs.pm: 
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+
+	* bootloader.pm: don't drop "shade" and "viewport" lines (bugzilla #16372)
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+	move loopback.pm to fs/loopback.pm
+	(since it's tightly tight to many fs* things)
+
+	* standalone.pm, class_discard.pm: class_discard is a bad idea, now
+	unused, so drop it
+
+	* Xconfig/main.pm: 
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+	add some "use xxx;" (the idea is to see what the package needs, but i
+	may rollback after understanding better dependencies)
+
+	* Xconfig/various.pm, partition_table/gpt.pm, network/netconnect.pm,
+	network/thirdparty.pm, Xconfig/default.pm: add some "use xxx;" (the idea
+	is to see what the package needs, but i may rollback after understanding
+	better dependencies)
+
+	* fs/get.pm, install_steps.pm, install_steps_interactive.pm, fs/format.pm,
+	loopback.pm, fs/loopback.pm: move loopback.pm to fs/loopback.pm
+	(since it's tightly tight to many fs* things)
+
+	* diskdrake/hd_gtk.pm, fsedit.pm: 
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+	move loopback.pm to fs/loopback.pm
+	(since it's tightly tight to many fs* things)
+
+	* fs/proc_partitions.pm: make it work
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+
+	* diskdrake/interactive.pm: 
+	  - move functions using /proc/partitions out of fsedit to
+	fs::proc_partitions
+	  - remove unneeded "use xxx"
+	  - add some "use xxx" (nb: not completly needed because some other
+	modules may do it)
+	add some "use xxx;" (the idea is to see what the package needs, but i
+	may rollback after understanding better dependencies)
+	move loopback.pm to fs/loopback.pm
+	(since it's tightly tight to many fs* things)
+
+2005/06/09  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* network/adsl_consts.pm: 
+	  - added senegal ADSL provider entry
+
+2005/06/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: add get_interface_ip_address (with bits from
+	drakpxelinux)
+
+	* network/thirdparty.pm: remove non-ASCII character
+
+2005/06/09  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Translated more strings, also fixed a few old ones :)
+
+2005/06/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_steps_interactive.pm (addUser) apply autologin setting for
+	globetrotter
+	(acceptLicense) do not show "releases notes" for globetrotter
+	(acceptLicense) better use run_program for killing Xorg
+	(addUser) apply autologin setting for globetrotter
+	(acceptLicense) do not show "releases notes" for globetrotter
+	(acceptLicense) fix exiting step license
+
+	* pkgs.pm (install) do not kill runaway processes when building the
+	globetrotter
+	(bestKernelPackage) while building a globetrotter, do not look for a
+	specific kernel favour
+	(install) do not kill runaway processes when building the globetrotter
+	(bestKernelPackage) while building a globetrotter, do not look for a
+	specific kernel favour
+
+	* any.pm (autologin) make autologin choice more user friendly (better fix
+	for #4304)
+
+	* detect_devices.pm: forward: (getSCSI_26) fix of by one error resulting
+	in misdetecing USB mass storage devices (#13569)
+
+	* Xconfig/card.pm: forward: ensure that explanations go into
+	/var/log/explanations is standalone
+	mode (log::explanations() just calls log::l() at install time)
+	forward: ensure that explanations go into /var/log/explanations is
+	standalone
+	mode (log::explanations() just calls log::l() at install time)
+
+	* install_steps.pm (leavingStep) if formatError() returns nothing, better
+	display the raw error
+
 2005/06/09  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
 
 	* share/po/nb.po: Translated more strings, also fixed a few old ones :)
@@ -50974,7 +51304,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1041 2005/06/06 07:57:24 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1042 2005/06/09 08:57:25 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
