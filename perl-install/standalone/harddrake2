@@ -13,6 +13,7 @@ BEGIN { unshift @::textdomains, 'drakconf' }
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 use harddrake::data;  #- needs to stay after use-ugtk2 as long as this module defines globals containing some N()
+use fsedit;
 use POSIX qw(:sys_wait_h);
 
 
