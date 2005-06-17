@@ -230,7 +230,11 @@ sub read_grub {
         }
     }
     foreach (cat_("$::prefix/boot/grub/install.sh")) {
-        $b{boot} = grub2dev($1, $grub2dev) if /\s+d\s+(\(.*?\))/;
+        if (/\s+d\s+(\(.*?\))/) {
+            $b{boot} = grub2dev($1, $grub2dev);
+        } elsif (/^setup\s+(\(.*?\))/) {
+            $b{boot} = grub2dev($1, $grub2dev);
+        }
     }
 
     #- sanitize
