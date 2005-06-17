@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.24mdk
+Release: 0.25mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jun 17 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.25mdk
+- drakboot:
+  o make it use stage1_5 thus enabling to survive disk change, ie
+    geometry alteration (pixel)
+  o fix reading config with new grub (thus fixing detectloader,
+    bootloader-config & installkernel)
+- harddrake: make it load mouse modules on change, since
+  modprobe.preload is read before harddrake is run, thus fixing
+  synaptics (blino)
+
 * Wed Jun 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.24mdk
 - fix banner widget breaking rpmdrake and the like
 - XFdrake: prevent loading/unloading twice the same glx module on non
