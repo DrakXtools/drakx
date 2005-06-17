@@ -63,7 +63,7 @@ sub to_raw_X {
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
 
-    $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL} && $card->{Driver2} ne 'fglrx'); #- glx for everyone, except proprietary nvidia
+    $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL}); #- glx for everyone, except proprietary nvidia
     $raw_X->set_load_module('dri', $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL});
 
     # This loads the NVIDIA GLX extension module.
