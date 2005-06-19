@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-06-17 16:16+0200\n"
-"PO-Revision-Date: 2005-06-18 01:45+0000\n"
+"PO-Revision-Date: 2005-06-19 10:52+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -17423,7 +17423,7 @@ msgstr ""
 #: standalone/drakbackup:154
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr ""
+msgstr "Geyma lykilorð fyrir þetta kerfi í drakbackup uppsetningunni."
 
 #: standalone/drakbackup:155
 #, c-format
@@ -17431,6 +17431,8 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
+"Ef þú tilgreinir marglotu CD, þá mun aðeins fyrsta skrift forsníða diskinn. Annars "
+"verður diskurinn forsniðinn við hvert afrit."
 
 #: standalone/drakbackup:156
 #, c-format
@@ -17438,6 +17440,8 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
+"Þetta val mun vista skrárnar sem hafa breytst. Nákvæm hegðun fer eftir "
+"því hvort viðbótar- eða mismunar- hamur hefur verið valinn."
 
 #: standalone/drakbackup:157
 #, c-format
@@ -17445,6 +17449,8 @@ msgid ""
 "Incremental backups only save files that have changed or are new since the "
 "last backup."
 msgstr ""
+"Viðbótar-afrit vista aðeins skrár sem hafa breytst eða eru nýir frá því "
+"að síðasta afrit var tekið."
 
 #: standalone/drakbackup:158
 #, c-format
@@ -17461,6 +17467,8 @@ msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server."
 msgstr ""
+"Þetta ætti að vera netfang vélarnotanda eða netfang þess sem á "
+"að fylgjast með framvindu afrita. Þú verður að tilgreina gilt netfang."
 
 #: standalone/drakbackup:160
 #, c-format
@@ -17468,6 +17476,8 @@ msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
+"Þetta ætti að vera svarnetfangið, þ.e.a.s það netfang sem þú vilt að "
+"komi fram sem sendandi. Sjálfgefið er drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -17475,6 +17485,8 @@ msgid ""
 "Files or wildcards listed in a .backupignore file at the top of a directory "
 "tree will not be backed up."
 msgstr ""
+"Skrár eða skráarsamstæður sem eru skráðar í .backupignore skrá "
+"efst í möppu verða ekki afritaðar."
 
 #: standalone/drakbackup:162
 #, c-format
@@ -17483,6 +17495,9 @@ msgid ""
 "moved to the other media.  Enabling this option will remove the hard drive "
 "tar files after the backup."
 msgstr ""
+"Ef þú afritar á aðra miðla, þá verða skrárnar samt búnar til á diski, síðan "
+"færðar yfir á annan miðil. Ef þú krossar við hér munu skrárnar verða "
+"fjarlægðar af diskinum eftir afritun."
 
 #: standalone/drakbackup:163
 #, c-format
@@ -17491,6 +17506,9 @@ msgid ""
 "than using a directory path, you would use the 'module' name for the service "
 "path."
 msgstr ""
+"Sumar samskiptareglur, eins og rsync, má stilla á miðlaranum. Frekar "
+"en að nota möppuslóð, þá myndir þú benda á 'einingu' sem nafn þess "
+"sem á að afrita."
 
 #: standalone/drakbackup:164
 #, c-format
@@ -17498,11 +17516,13 @@ msgid ""
 "Custom allows you to specify your own day and time.  The other options use "
 "run-parts in /etc/crontab."
 msgstr ""
+"Sérsniðið leyfir þér að skilgreina þinn eigin dag og tíma.  Aðrir valkostir nota "
+"run-parts í /etc/crontab."
 
 #: standalone/drakbackup:327
 #, c-format
 msgid "No media selected for cron operation."
-msgstr ""
+msgstr "Enginn miðill valinn fyrir cron aðgerð."
 
 #: standalone/drakbackup:331
 #, c-format
@@ -22239,12 +22259,12 @@ msgstr ""
 #: standalone/drakvpn:1033
 #, c-format
 msgid "Authentication algorithm"
-msgstr "Auðkennialgrím"
+msgstr "Auðkennis-algrím"
 
 #: standalone/drakvpn:1035
 #, c-format
 msgid "Compression algorithm"
-msgstr "Þjöppunaralgrím"
+msgstr "Þjöppunar-algrím"
 
 #: standalone/drakvpn:1036
 #, c-format
@@ -22254,7 +22274,7 @@ msgstr "Þjappa"
 #: standalone/drakvpn:1043
 #, c-format
 msgid "Remote"
-msgstr "Nettengdur"
+msgstr "Fjarpunktur"
 
 #: standalone/drakvpn:1044
 #, c-format
@@ -22270,11 +22290,21 @@ msgid ""
 "remote anonymous\n"
 "remote ::1 [8000]"
 msgstr ""
+"remote (addressa | anonymous) [[port]] { setningar }\n"
+"tilgreinir gildi fyrsta fasa IKE fyrir hvern fjarpunkt.\n"
+"Sjálfgefið port er 500.  Ef anonymous er tilgreint, þá eiga\n"
+"setningarnar við alla mótaðila sem passa ekki við önnur\n"
+"auðkenni.\n"
+"\n"
+"Dæmi: \n"
+"\n"
+"remote anonymous\n"
+"remote ::1 [8000]"
 
 #: standalone/drakvpn:1052
 #, c-format
 msgid "Exchange mode"
-msgstr "Skiptiaðferð"
+msgstr "Samskiptahamur"
 
 #: standalone/drakvpn:1054
 #, c-format
@@ -22286,6 +22316,12 @@ msgid ""
 "modes are acceptable. The first exchange mode is what\n"
 "racoon uses when it is the initiator.\n"
 msgstr ""
+"skilgreinir samskiptaham fyrir fyrsta hluta þegar racoon er\n"
+"frumkvöðull. Það þýðir einnig viðsættanleg samskipti þegar\n"
+"racoon er hlustandi. Tilgreina má fleiri en einn ham með\n"
+"því að aðskilja þá með kommum. Allar tegundir eru leyfilegar\n"
+"Fyrsti samskiptahamurinn er það sem racoon notar þegar\n"
+"hann er frumkvöðull.\n"
 
 #: standalone/drakvpn:1060
 #, c-format
@@ -22314,7 +22350,7 @@ msgstr ""
 #: standalone/drakvpn:1076
 #, c-format
 msgid "Passive"
-msgstr "Þolmynd"
+msgstr "Hlutlaus"
 
 #: standalone/drakvpn:1078
 #, c-format
@@ -22323,6 +22359,8 @@ msgid ""
 "to on.  The default value is off.  It is useful for a\n"
 "server."
 msgstr ""
+"Ef þú vilt ekki hefja samninga, krossaðu þá við hér\n"
+"sjálfgefið er slökkt.  þetta er handhægt fyrir miðlara."
 
 #: standalone/drakvpn:1081
 #, c-format
@@ -22332,7 +22370,7 @@ msgstr "Tegund skírteinis"
 #: standalone/drakvpn:1083
 #, c-format
 msgid "My certfile"
-msgstr "Mín skírt-skrá"
+msgstr "Mín skírt.-skrá"
 
 #: standalone/drakvpn:1084
 #, c-format
@@ -22352,17 +22390,17 @@ msgstr "Nafn einkalykils"
 #: standalone/drakvpn:1087
 #, c-format
 msgid "Peers certfile"
-msgstr "Tengi skírt-skrá"
+msgstr "Tengi skírt.-skrá"
 
 #: standalone/drakvpn:1088
 #, c-format
 msgid "Name of the peers certificate"
-msgstr ""
+msgstr "Nafn skírteinis mótaðila"
 
 #: standalone/drakvpn:1089
 #, c-format
 msgid "Verify cert"
-msgstr "Staðfesta skírt"
+msgstr "Staðfesta skírteini"
 
 #: standalone/drakvpn:1091
 #, c-format
@@ -22370,6 +22408,8 @@ msgid ""
 "If you do not want to verify the peer's certificate for\n"
 "some reason, set this to off.  The default is on."
 msgstr ""
+"Ef þú vilt ekki staðfesta skírteini mótaðila af einhverri\n"
+"ástæðu, slökktu þá á þessu.  Sjálfgefið er kveikt."
 
 #: standalone/drakvpn:1093
 #, c-format
@@ -22402,6 +22442,27 @@ msgid ""
 "\n"
 "my_identifier user_fqdn \"myemail@mydomain.com\""
 msgstr ""
+"skilgreinir auðkenni sent til fjarlægrar vélar og tegund\n"
+"sem á að nota í fyrsta hluta samskipta.  address, FQDN,\n"
+"user_fqdn, keyid og asn1dn má nota sem einkenni.\n"
+"þetta er notað líkt og:\n"
+"\tmitt_merki address [addressa];\n"
+"\t\thér er gefin upp IP-addressan.  Þetta er sjálfgefið\n"
+"\t\tauðkenni ef þú gefur ekki upp neitt annað.\n"
+"\tmitt_merki user_fqdn strengur;\n"
+"\t\thér skal gefa upp full-formað lénsnafn notanda\n"
+"\tmitt_merki FQDN strengur;\n"
+"\t\thér skal gefa upp full-formað lénsnafn.\n"
+"\tmitt_merki keyid skrá;\n"
+"\t\thér skal gefa upp lykiltegund (KEY_ID).\n"
+"\tmitt_merki asn1dn [strengur];\n"
+"\t\thér skal gefa upp 'ASN.1 distinguished name'.  Ef\n"
+"\t\tþessu svæði er sleppt, þá leitar racoon(8) að DN\n"
+"\t\tí viðfangs-svæði í skírteini.\n"
+"\n"
+"Dæmi: \n"
+"\n"
+"mitt_merki user_fqdn \"minn_postur@katla.is\""
 
 #: standalone/drakvpn:1114
 #, c-format
@@ -22424,6 +22485,13 @@ msgid ""
 "\n"
 "For other transforms, this statement should not be used."
 msgstr ""
+"gefðu upp dulritunar-algrím sem á að nota fyrir\n"
+"fyrsta stig samskipta. Þetta verður að vera skilgreint.\n"
+"algrímið verður að vera eitt af eftirfarandi: \n"
+"\n"
+"DES, 3DES, blowfish, cast128 fyrir oakley.\n"
+"\n"
+"Fyrir aðrar uppsetningar ætti ekki að nota þessa setningu."
 
 #: standalone/drakvpn:1124
 #, c-format
@@ -22463,7 +22531,7 @@ msgstr "hver sem er"
 #: standalone/drakvpn:1138
 #, c-format
 msgid "Flag"
-msgstr "Fáni"
+msgstr "Flögg"
 
 #: standalone/drakvpn:1139
 #, c-format
@@ -22523,7 +22591,7 @@ msgstr "einkvæm"
 #: standalone/drakxtv:45
 #, c-format
 msgid "USA (broadcast)"
-msgstr "USA (loftnet)"
+msgstr "USA (útvarpað)"
 
 #: standalone/drakxtv:45
 #, c-format
@@ -22543,7 +22611,7 @@ msgstr "Kanada (kapal)"
 #: standalone/drakxtv:46
 #, c-format
 msgid "Japan (broadcast)"
-msgstr "Japan (loftnet)"
+msgstr "Japan (útvarpað)"
 
 #: standalone/drakxtv:46
 #, c-format
@@ -22553,7 +22621,7 @@ msgstr "Japan (kapal)"
 #: standalone/drakxtv:46
 #, c-format
 msgid "China (broadcast)"
-msgstr "Kína (loftnet)"
+msgstr "Kína (útvarpað)"
 
 #: standalone/drakxtv:47
 #, c-format
@@ -22578,7 +22646,7 @@ msgstr "Nýja sjáland"
 #: standalone/drakxtv:51
 #, c-format
 msgid "Australian Optus cable TV"
-msgstr "Ástralska Optus kapal TV"
+msgstr "Ástralskt Optus kapal TV"
 
 #: standalone/drakxtv:85
 #, c-format
@@ -22586,7 +22654,7 @@ msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
-"Vinsamleg,\n"
+"Vinsamlega,\n"
 "gefðu upp sjónvarpstaðal og land"
 
 #: standalone/drakxtv:87
@@ -22642,11 +22710,11 @@ msgid ""
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
 msgstr ""
-"Ekkert sjónvrpskort hefur fundist á vélinni þinni.  Vinsamlega athugið hvort "
+"Ekkert sjónvarpskort hefur fundist á vélinni þinni. Vinsamlega athugið hvort "
 "sjónvarpskort sem stutt er af Linux sé rétt tengt og uppsett.\n"
 "\n"
 "\n"
-"Þú getur leitað í vélbúnaðargagnagrunni á:\n"
+"Þú getur leitað í vélbúnaðar-gagnagrunni okkar á:\n"
 "\n"
 "\n"
 "http://www.mandrivalinux.com/en/hardware.php3"
@@ -22664,12 +22732,12 @@ msgstr "listi af aukareklum fyrir þetta hljóðkort"
 #: standalone/harddrake2:29
 #, c-format
 msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "Þetta er vélbúnaðarbrautin sem tækið er tengt á (þ.e. PCI USB,...)"
+msgstr "Þetta er vélbúnaðarbrautin sem tækið er tengt á (þ.e. PCI USB, ...)"
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
 #, c-format
 msgid "Bus identification"
-msgstr "Brautar auðkenning"
+msgstr "Brautar-auðkenni"
 
 #: standalone/harddrake2:32
 #, c-format
@@ -22689,7 +22757,7 @@ msgid ""
 msgstr ""
 "- pci tæki: hér er skráð PCI rauf, tæki og tegund þessa spjalds\n"
 "- eide tæki: tækið er annað hvort herra eða þræll (master/slave)\n"
-"- scsi tæki: scsi braut og scsi tækis númer"
+"- scsi tæki: scsi braut og scsi tækis-númer"
 
 #: standalone/harddrake2:38
 #, c-format
@@ -22735,7 +22803,7 @@ msgstr "Eining"
 #: standalone/harddrake2:46
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
-msgstr "eining GNU/LInux kjarnans sem meðhöndlar tækið"
+msgstr "eining GNU/Linux kjarnans sem meðhöndlar tækið"
 
 #: standalone/harddrake2:47
 #, c-format
@@ -22755,7 +22823,7 @@ msgstr "Snið"
 #: standalone/harddrake2:48
 #, c-format
 msgid "Cylinder/head/sectors geometry of the disk"
-msgstr "plötur/hausar/sneiðar snið disksins"
+msgstr "Plötur/hausar/sneiðar snið disksins"
 
 #: standalone/harddrake2:49
 #, c-format
@@ -22796,7 +22864,7 @@ msgstr "Aðaldisksneiðar"
 #: standalone/harddrake2:53
 #, c-format
 msgid "the number of the primary partitions"
-msgstr "númer aðaldisksneiða"
+msgstr "fjöldi aðaldisksneiða"
 
 #: standalone/harddrake2:54
 #, c-format
@@ -22826,7 +22894,7 @@ msgstr "PCI tækisnúmer"
 #: standalone/harddrake2:57
 #, c-format
 msgid "PCI function #"
-msgstr "PCI fall#"
+msgstr "PCI fall #"
 
 #: standalone/harddrake2:57
 #, c-format
@@ -22906,7 +22974,7 @@ msgstr "Stærð skyndiminnis"
 #: standalone/harddrake2:67
 #, c-format
 msgid "size of the (second level) cpu cache"
-msgstr "Stærð á (annars þreps) skyndiminni örgjörva"
+msgstr "stærð á (annars þreps) skyndiminni örgjörva"
 
 #. -PO: here "comas" is the medical coma, not the lexical coma!!
 #: standalone/harddrake2:70
@@ -22917,7 +22985,7 @@ msgstr "Coma villa"
 #: standalone/harddrake2:70
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Hvort þessi örgjörvi er haldinn Cyrix 6x86 Coma villunni"
+msgstr "hvort þessi örgjörvi er haldinn Cyrix 6x86 Coma villunni"
 
 #: standalone/harddrake2:71
 #, c-format
@@ -22982,12 +23050,12 @@ msgstr ""
 #: standalone/harddrake2:77
 #, c-format
 msgid "Is FPU present"
-msgstr "Er Fpu til staðar"
+msgstr "Er FPU til staðar"
 
 #: standalone/harddrake2:77
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "já þýðir að örgjörvinn hefur fleytitöluörgjörva"
+msgstr "já þýðir að örgjörvinn hefur fleytitölu-örgjörva"
 
 #: standalone/harddrake2:78
 #, c-format
@@ -22997,7 +23065,7 @@ msgstr "Hvort fleytitölu-örgjörvinn hefur sérstakt ígrip"
 #: standalone/harddrake2:78
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "já þýðir að fleytitöluörgjörvinn hefur tengt sig sérstöku ígripi"
+msgstr "já þýðir að fleytitölu-örgjörvinn hefur tengt sig sérstöku ígripi"
 
 #: standalone/harddrake2:79
 #, c-format
@@ -23008,7 +23076,7 @@ msgstr "F00f villa"
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"Eldri pentium örgjörvar voru gallaðir og frusu þegar þeir þýddu F00F "
+"eldri pentium örgjörvar voru gallaðir og frusu þegar þeir þýddu F00F "
 "aðgerðina"
 
 #: standalone/harddrake2:80
@@ -23022,18 +23090,18 @@ msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
 "after the \"halt\" instruction is used"
 msgstr ""
-"Sumir eldri i486DX örgjörvar gátu ekki snúið eðlilega til baka eftir að "
-"\"halt\" skipunin var framkvæmd"
+"Sumir eldri i486DX örgjörvar gátu ekki snúið eðlilega til baka til venjulegrar "
+"vinnslu eftir að \"halt\" skipunin var framkvæmd"
 
 #: standalone/harddrake2:82
 #, c-format
 msgid "sub generation of the cpu"
-msgstr "Undir-flokkur örgjörva"
+msgstr "undir-flokkur örgjörva"
 
 #: standalone/harddrake2:83
 #, c-format
 msgid "generation of the cpu (eg: 8 for Pentium III, ...)"
-msgstr "Ætt örgjörva (þ.e. 8 fyrir Pentium III,...)"
+msgstr "ætt örgjörva (þ.e. 8 fyrir Pentium III, ...)"
 
 #: standalone/harddrake2:84
 #, c-format
@@ -23043,7 +23111,7 @@ msgstr "Tegundarnafn"
 #: standalone/harddrake2:84
 #, c-format
 msgid "official vendor name of the cpu"
-msgstr "Uppgefið örgjörvanafn framleiðanda"
+msgstr "opinbert örgjörvanafn framleiðanda"
 
 #: standalone/harddrake2:85
 #, c-format
@@ -23063,12 +23131,12 @@ msgstr "númer örgjörvans"
 #: standalone/harddrake2:87
 #, c-format
 msgid "Model stepping"
-msgstr "tegundar-stig"
+msgstr "Tegundar-stig"
 
 #: standalone/harddrake2:87
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "Stig örgjörvans (undirtegundar (útgáfu) númer)"
+msgstr "stig örgjörvans (undirtegundar (útgáfu) númer)"
 
 #: standalone/harddrake2:88
 #, c-format
@@ -23088,7 +23156,7 @@ msgid ""
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
 "WP flaggið í CR0 vistfangi örgjörvans þvingar ritvörn á minnissvæði, og "
-"varnarþví óstýrðu aðgengi að minnisvæðum notanda (þ.e.a.s þetta er villuvörn)"
+"varnar því óstýrðu aðgengi að minnisvæðum notanda (þ.e.a.s þetta er villuvörn)"
 
 #: standalone/harddrake2:93
 #, c-format
@@ -23236,7 +23304,7 @@ msgstr "samskiptareglan sem gluggakerfið notar til samskipta við músina"
 #: standalone/harddrake2:318
 #, c-format
 msgid "Identification"
-msgstr "Auðkenning"
+msgstr "Auðkenni"
 
 #: standalone/harddrake2:129 standalone/harddrake2:145
 #, c-format
@@ -23290,7 +23358,7 @@ msgstr "/Finna _prentara sjálfkrafa"
 #: standalone/harddrake2:182
 #, c-format
 msgid "/Autodetect _modems"
-msgstr "/Finna _motöld sjálfkrafa"
+msgstr "/Finna _mótöld sjálfkrafa"
 
 #: standalone/harddrake2:183
 #, c-format
@@ -23380,7 +23448,7 @@ msgstr "Stilla einingu"
 #: standalone/harddrake2:267
 #, c-format
 msgid "Run config tool"
-msgstr "keyra stillieiningu"
+msgstr "Keyra stillieiningu"
 
 #: standalone/harddrake2:305 standalone/net_monitor:105
 #: standalone/net_monitor:106 standalone/net_monitor:111
@@ -23417,7 +23485,7 @@ msgstr "aðal"
 #: standalone/harddrake2:397
 #, c-format
 msgid "burner"
-msgstr "Brennari"
+msgstr "brennari"
 
 #: standalone/harddrake2:397
 #, c-format
@@ -23597,7 +23665,7 @@ msgstr "Dagatal"
 #: standalone/logdrake:157
 #, c-format
 msgid "Content of the file"
-msgstr "Innihald skrár"
+msgstr "Fundnar færslur"
 
 #: standalone/logdrake:161 standalone/logdrake:399
 #, c-format
@@ -23607,12 +23675,12 @@ msgstr "Póstvöktun"
 #: standalone/logdrake:168
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
-msgstr "Aðvörunarálfurinn stöðvaði óvænt:"
+msgstr "Aðvörunarráðgjafinn stöðvaði óvænt:"
 
 #: standalone/logdrake:221
 #, c-format
 msgid "please wait, parsing file: %s"
-msgstr "Augnablik vinn úr skrá: %s"
+msgstr "augnablik, vinn úr skrá: %s"
 
 #: standalone/logdrake:376
 #, c-format
@@ -23632,7 +23700,7 @@ msgstr "Ftp miðlari"
 #: standalone/logdrake:379
 #, c-format
 msgid "Postfix Mail Server"
-msgstr "Postfix póstþjónn"
+msgstr "Postfix póstþjónusta"
 
 #: standalone/logdrake:380
 #, c-format
@@ -23671,7 +23739,7 @@ msgid ""
 "\n"
 "Here, you'll be able to set up the alert system.\n"
 msgstr ""
-"Velkomin að póstuppsetningarforritnu.\n"
+"Velkomin að póst-uppsetningarforritinu.\n"
 "\n"
 "Hér getur þú stillt viðvörunarkerfi.\n"
 
@@ -23727,12 +23795,12 @@ msgstr "og gefðu upp nafn (eða IP) á SMTP miðlara sem þú vilt nota"
 #: standalone/logdrake:449
 #, c-format
 msgid "The wizard successfully configured the mail alert."
-msgstr "Álfurinn hefur sett upp póstvaktþjónustu."
+msgstr "Ráðgjafinn hefur sett upp póstvaktþjónustu."
 
 #: standalone/logdrake:455
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
-msgstr "Álfurinn hefur aftengt póstvaktþjónustu."
+msgstr "Ráðgjafinn hefur aftengt póstvaktþjónustu."
 
 #: standalone/logdrake:514
 #, c-format
@@ -23788,7 +23856,7 @@ msgstr "Neteftirlit"
 #: standalone/net_applet:69
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Sýsla með þráðlaus net"
 
 #: standalone/net_applet:70
 #, c-format
@@ -23823,17 +23891,17 @@ msgstr "Ræsa alltaf þegar kveikt á vél"
 #: standalone/net_applet:270
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "Port-skönnun hefur verið reynd af %s."
 
 #: standalone/net_applet:271
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr ""
+msgstr "Ráðist hefur verið á þjónustuna %s af %s."
 
 #: standalone/net_applet:272
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "Reynt hefur verið að brjóta upp lykilorð af %s."
 
 #: standalone/net_applet:280
 #, c-format
@@ -23848,7 +23916,7 @@ msgstr "Viltu setja árásaraðilann á svartan lista?"
 #: standalone/net_applet:305
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "Alltaf svartlista (ekki spyrja aftur)"
 
 #: standalone/net_applet:308
 #, c-format
@@ -23858,7 +23926,7 @@ msgstr "Árásarupplýsingar"
 #: standalone/net_applet:312
 #, c-format
 msgid "Attack time: %s"
-msgstr ""
+msgstr "Árásartími: %s"
 
 #: standalone/net_applet:313
 #, c-format
@@ -23898,7 +23966,7 @@ msgstr "Ráðist á gátt: %s"
 #: standalone/net_applet:320
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "Tegund af ICMP árás: %s"
 
 #: standalone/net_monitor:58 standalone/net_monitor:63
 #, c-format
@@ -23913,7 +23981,7 @@ msgstr "Tölulegar upplýsingar"
 #: standalone/net_monitor:104
 #, c-format
 msgid "Instantaneous"
-msgstr ""
+msgstr "Augnabliks"
 
 #: standalone/net_monitor:104
 #, c-format
@@ -23958,12 +24026,12 @@ msgstr "Augnablik, prófa tengingu..."
 #: standalone/net_monitor:185 standalone/net_monitor:198
 #, c-format
 msgid "Disconnecting from Internet "
-msgstr "Aftengjast frá Internetinu "
+msgstr "Aftengist frá Internetinu "
 
 #: standalone/net_monitor:185 standalone/net_monitor:198
 #, c-format
 msgid "Connecting to Internet "
-msgstr "Tengjast internetinu "
+msgstr "Tengist internetinu "
 
 #: standalone/net_monitor:229
 #, c-format
@@ -24019,7 +24087,7 @@ msgstr "Staðvær mæling"
 msgid ""
 "Warning, another internet connection has been detected, maybe using your "
 "network"
-msgstr "Viðvörun, skynja aðra Internettengingum kannski um staðarnetið þitt"
+msgstr "Viðvörun, skynja aðra Internettengingu, kannski um staðarnetið þitt"
 
 #: standalone/net_monitor:475
 #, c-format
@@ -24092,7 +24160,7 @@ msgstr "Beita síu"
 #: standalone/printerdrake:211 standalone/printerdrake:218
 #, c-format
 msgid "Def."
-msgstr ""
+msgstr "Sjá."
 
 #: standalone/printerdrake:211 standalone/printerdrake:218
 #, c-format
@@ -24217,7 +24285,7 @@ msgstr "Leita að nýjum myndskönnum ..."
 #: standalone/scannerdrake:79 standalone/scannerdrake:517
 #, c-format
 msgid "Re-generating list of configured scanners..."
-msgstr "Endurgeri lista af uppsettum myndskönnum ..."
+msgstr "Endurbyggi lista af uppsettum myndskönnum..."
 
 #: standalone/scannerdrake:101
 #, c-format
@@ -24257,12 +24325,12 @@ msgstr "Gátt: %s"
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (ÓSTUDDUR)"
 
 #: standalone/scannerdrake:144
 #, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%s er ekki stutt af Linux."
+msgstr "%s er ekki studdur af Linux."
 
 #: standalone/scannerdrake:171 standalone/scannerdrake:185
 #, c-format
@@ -24299,7 +24367,7 @@ msgid ""
 "manufacturer's home page, or on your Windows partition."
 msgstr ""
 "Þú ættir að finna skrána á geisladisk eða disklingi sem fylgdi með "
-"skannanum, á heimasíðu fremleiðanda, eða á windows disksneið."
+"skannanum, á heimasíðu framleiðanda, eða á windows disksneið."
 
 #: standalone/scannerdrake:180 standalone/scannerdrake:239
 #, c-format
@@ -24323,7 +24391,7 @@ msgid ""
 "everytime when they are turned on."
 msgstr ""
 "Það er mögulegt að skanninn þinn þurfi að fá vélbúnaðarskrá senda í hvert "
-"sinn er kveikt er á þeim."
+"sinn er kveikt er á honum."
 
 #: standalone/scannerdrake:230
 #, c-format
@@ -24332,7 +24400,7 @@ msgid ""
 "can be installed."
 msgstr ""
 "Til að gera það þá þarft þú að gefa upp vélbúnaðarskrá fyrir skannann svo "
-"hægt sé að setja það inn."
+"hægt sé að senda hana á skannann."
 
 #: standalone/scannerdrake:233
 #, c-format
@@ -24340,26 +24408,28 @@ msgid ""
 "If you have already installed your scanner's firmware you can update the "
 "firmware here by supplying the new firmware file."
 msgstr ""
+"Ef þú hefur þegar sett upp vélbúnað skannans þá getur þú uppfært "
+"vélbúnaðarskrána hér með því að gefa upp nýja vélbúnaðar-frumskrá."
 
 #: standalone/scannerdrake:235
 #, c-format
 msgid "Install firmware for the"
-msgstr ""
+msgstr "Setja inn vélbúnaðarskrá fyrir"
 
 #: standalone/scannerdrake:258
 #, c-format
 msgid "Select firmware file for the %s"
-msgstr "Veljið vélbúnaðarskrá fyrir %s"
+msgstr "Veljið vélbúnaðar-frumskrá fyrir %s"
 
 #: standalone/scannerdrake:276
 #, c-format
 msgid "Could not install the firmware file for the %s!"
-msgstr "Gat ekki sett inn vélbúnaðarskrá fyrir %s!"
+msgstr "Gat ekki sett inn vélbúnaðar-frumskrá fyrir %s!"
 
 #: standalone/scannerdrake:289
 #, c-format
 msgid "The firmware file for your %s was successfully installed."
-msgstr ""
+msgstr "Tókst eðlilega að setja inn vélbúnaðar-frumskrá fyrir %s."
 
 #: standalone/scannerdrake:299
 #, c-format
@@ -24385,12 +24455,12 @@ msgstr "Leita að mögulegum gáttum"
 #: standalone/scannerdrake:310 standalone/scannerdrake:356
 #, c-format
 msgid "Please select the device where your %s is attached"
-msgstr "Vinsamlega veldu gátt þar sem %s er tengdur"
+msgstr "Vinsamlega veldu tæki þar sem %s er tengdur"
 
 #: standalone/scannerdrake:311
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
-msgstr "(Athugið: Ekki er hægt að leita að hliðtengjum)"
+msgstr "(Athugið: Ekki er hægt að leita á hliðtengjum)"
 
 #: standalone/scannerdrake:313 standalone/scannerdrake:358
 #, c-format
@@ -24400,7 +24470,7 @@ msgstr "veldu tæki"
 #: standalone/scannerdrake:347
 #, c-format
 msgid "Searching for scanners..."
-msgstr "Leita að myndlesara..."
+msgstr "Leita að myndskanna..."
 
 #: standalone/scannerdrake:383
 #, c-format
@@ -24420,6 +24490,9 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"Ekki er hægt að stilla skannann %s algerlega sjálfvirkt.\n"
+"\n"
+"Handvirkra stillinga er þörf, Vinsamlega breytið stillingaskránni /etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:392 standalone/scannerdrake:401
 #, c-format
@@ -24427,6 +24500,8 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
+"Frekari upplýsingar má fá á rekils-handbókar síðunni. "
+"Gefið skipunina \"man sane-%s\" til að lesa hana."
 
 #: standalone/scannerdrake:394 standalone/scannerdrake:403
 #, c-format
@@ -24443,6 +24518,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"Skanninn %s hefur verið stilltur, en það er mögulegt að það þurfi að "
+"stilla hann frekar handvirkt til að hann virki rétt. "
 
 #: standalone/scannerdrake:399
 #, c-format
@@ -24450,11 +24527,13 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"Ef hann sést ekki í listum af uppsettum skönnum í aðalglugga Scannerdrake "
+"eða ef hann virkar ekki rétt, "
 
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "sýsla með stilliskrána /etc/saned/%s.conf. "
 
 #: standalone/scannerdrake:406
 #, c-format
@@ -24463,7 +24542,7 @@ msgid ""
 "You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
-"%s þinn hefur nú verið stilltur\n"
+"Skanninn %s hefur nú verið stilltur\n"
 "Þú getur nú skannað skjöl með því að velja \"Xsane\" eða \"Kooka\" í "
 "margmiðlun-grafík valmyndinni."
 
@@ -24478,7 +24557,7 @@ msgstr ""
 "Eftirfarandi myndskannar\n"
 "\n"
 "%s\n"
-"eru tiltækir á kerfinu þínu\n"
+"eru tiltækir á kerfinu þínu.\n"
 
 #: standalone/scannerdrake:432
 #, c-format
@@ -24491,7 +24570,7 @@ msgstr ""
 "Eftirfarandi myndskanni\n"
 "\n"
 "%s\n"
-"er tiltækur á kerfinu þínu\n"
+"er tiltækur á kerfinu þínu.\n"
 
 #: standalone/scannerdrake:435 standalone/scannerdrake:438
 #, c-format
@@ -24543,7 +24622,7 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"Þú getur einnig valið hvor myndskannar á fjarlægum vélum ættu að vera "
+"Þú getur einnig valið hvort myndskannar á fjarlægum vélum ættu að vera "
 "aðgengilegir frá þessari vél."
 
 #: standalone/scannerdrake:586
@@ -24627,7 +24706,7 @@ msgstr "Nota myndskanna frá öðrum vélum"
 #: standalone/scannerdrake:783
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr "Þetta eru vélarnar frá hverjum ætti að vera hægt að nota myndskanna:"
+msgstr "Frá þessum vélum ætti að vera hægt að nota myndskanna:"
 
 #: standalone/scannerdrake:940
 #, c-format
@@ -24636,14 +24715,14 @@ msgid ""
 "\n"
 "Do you want to install the saned package?"
 msgstr ""
-"saned þarf að vera uppsettur til að geta deilt lógískum skanna.\n"
+"saned þarf að vera uppsettur til að geta deilt staðbundnum myndskanna.\n"
 "\n"
 "Viltu setja inn saned pakkann?"
 
 #: standalone/scannerdrake:944 standalone/scannerdrake:948
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr "Skanninn þinn verður ekki boðinn fram á netinu."
+msgstr "Myndskanninn þinn verður ekki boðinn fram á netinu."
 
 #: standalone/service_harddrake:104
 #, c-format
@@ -24683,7 +24762,7 @@ msgstr "Viltu keyra viðeigandi stillingarforrit?"
 #: steps.pm:14
 #, c-format
 msgid "Language"
-msgstr "Veldu tungumál"
+msgstr "Velja tungumál"
 
 #: steps.pm:15
 #, c-format
@@ -24703,12 +24782,12 @@ msgstr "Leita að disk(um)"
 #: steps.pm:18
 #, c-format
 msgid "Select installation class"
-msgstr "Veldu innsetningarflokk"
+msgstr "Veldu innsetningartegund"
 
 #: steps.pm:19
 #, c-format
 msgid "Choose your keyboard"
-msgstr "Veldu lyklaborð"
+msgstr "Velja lyklaborð"
 
 #: steps.pm:21
 #, c-format
@@ -24723,7 +24802,7 @@ msgstr "Forsníða disksneiðar"
 #: steps.pm:23
 #, c-format
 msgid "Choose packages to install"
-msgstr "Veldu pakka til að setja inn"
+msgstr "Velja pakka til að setja inn"
 
 #: steps.pm:24
 #, c-format
@@ -24768,7 +24847,7 @@ msgstr "Setja inn uppfærslur"
 #: steps.pm:33
 #, c-format
 msgid "Exit install"
-msgstr "Hætta innsetningu"
+msgstr "Ljúka innsetningu"
 
 #: ugtk2.pm:908
 #, c-format
@@ -24783,7 +24862,7 @@ msgstr "Engin skrá valin"
 #: ugtk2.pm:970
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr ""
+msgstr "Þú hefur valið skrá, ekki möppu"
 
 #: ugtk2.pm:972
 #, c-format
