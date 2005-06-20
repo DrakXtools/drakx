@@ -821,6 +821,7 @@ If you do not know, choose 'use PPPoE'"),
                     },
                     post => sub {
                         if ($ntf_name eq "Manually load a driver") {
+			    require modules::interactive;
                             modules::interactive::load_category__prompt($in, $modules_conf, list_modules::ethernet_categories());
                             return 'lan';
                         } elsif ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
