@@ -149,22 +149,25 @@ sub get_geometries {
 
 sub get_geometry {
     my ($dev) = @_;
-    my $g = "";
-
     sysopen(my $F, $dev, 0) or return;
-    ioctl($F, c::HDIO_GETGEO(), $g) or return;
-    my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
-    $geom{totalcylinders} = $geom{cylinders};
 
-    my $total;
-    #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
-    if ($total = c::total_sectors(fileno $F)) {
-	compute_nb_cylinders(\%geom, $total);
-    } else {
-	$total = $geom{heads} * $geom{sectors} * $geom{cylinders};
+    my $total = c::total_sectors(fileno $F);
+
+    my $g = "";
+    my %geom;
+    if (ioctl($F, c::HDIO_GETGEO(), $g)) {
+	@geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
+	$geom{totalcylinders} = $geom{cylinders};
+
+	#- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
+	if ($total) {
+	    compute_nb_cylinders(\%geom, $total);
+	} else {
+	    $total = $geom{heads} * $geom{sectors} * $geom{cylinders};
+	}
     }
 
-    { geom => \%geom, totalsectors => $total };
+    { totalsectors => $total, if_($geom{heads}, geom => \%geom) };
 }
 
 sub openit { 
