@@ -1,3 +1,53 @@
+2005/06/20  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: install keychain when installing openssh-clients
+
+2005/06/20  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/06/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: add missing require
+	remove duplicate lan detection
+
+2005/06/20  Pixel  <pixel at mandrakesoft.com>
+
+	* devices.pm: enable creation of /dev/dm-x devices (not used at the
+	moment)
+
+	* fs/dmraid.pm, install2.pm: initial dmraid support
+
+	* fs.pm: 
+	  - change prototype of fs::get_major_minor()
+	  - use it in fs::proc_partitions::compare()
+	(not useful at the moment, but it may help in the future)
+
+	* partition_table/raw.pm: ignore HDIO_GETGEO fail (useful for dmraid)
+
+	* fs/proc_partitions.pm, fsedit.pm: initial dmraid support
+	  - change prototype of fs::get_major_minor()
+	  - use it in fs::proc_partitions::compare()
+	(not useful at the moment, but it may help in the future)
+
+2005/06/19  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/06/19  pjetur
+
+	* share/po/is.po: Updates and lots of speling corrected
+
+2005/06/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2005/06/18  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: rollback titi's commit (it was needed with 10.2 code, but
+	i've already committed code to handle it cleanly in cooker (see
+	$quotes_if_needed))
+
 2005/06/17  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
@@ -51304,7 +51354,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1042 2005/06/09 08:57:25 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1043 2005/06/17 23:46:34 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
