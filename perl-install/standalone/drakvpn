@@ -57,7 +57,7 @@ my $proc_version = "";
 my $ipsec_package = "";
 
 my $in = interactive->vnew('su');
-my $shorewall = network::shorewall::read();
+my $shorewall = network::shorewall::read($in);
 my @section_names;
 
 if ($kernel_version > 2.5) {
