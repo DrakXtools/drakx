@@ -207,20 +207,6 @@ step_detectsetup:
 my %aliased_devices; 
 /^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
 
-my $card_netconnect = network::shorewall::get_net_device() || "eth0";
-defined $card_netconnect and log::l("[drakvpn] Information from netconnect: ignore card $card_netconnect");
-
-	$in->ask_from('',
-		      N("Please enter the name of the interface connected to the internet.
-
-Examples:
-		ppp+ for modem or DSL connections, 
-		eth0, or eth1 for cable connection, 
-		ippp+ for a isdn connection.
-"),
-      [ { label => N("Net Device"), val => \$card_netconnect, list => [ detect_devices::getNet() ], not_edit => 0 } ])
-	or goto step_ask_confirm;
-
 #- **********************************
 #- * 2nd step: configure
 
