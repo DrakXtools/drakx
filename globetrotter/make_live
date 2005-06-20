@@ -231,7 +231,7 @@ sub installPackages() {
 				 qw(mountloop),	#- crypted folders
 				 #- doc:
 						   (map { "mandrake-doc-$_" } map { ("Drakxtools-Guide-$_", "Command-Line-$_", "Quick-Startup-Plus-$_", "Starter-$_") } qw(de en es fr it)),
-				 qw(autologin grub),
+				 qw(autologin),
 				 qw(synaptics),
 				 #- network conf:
 				 qw(wireless-tools pcmcia-cs),
@@ -436,20 +436,18 @@ bootloader::suggest($bootloader, $all_hds,
                     vga_fb => 788, 
                     quiet => 1);
 
-# LILO failled to boot from SCSI:
-# $bootloader->{method} = 'lilo-graphic';
-$bootloader->{method} = 'grub';
+$bootloader->{method} = 'lilo-graphic';
 
 eval { bootloader::install($bootloader, $all_hds) };
 
-doRootSubst("$::prefix/boot/grub/menu.lst");
-run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
+doRootSubst("$::prefix/etc/lilo.conf");
+run_program::rooted($::prefix, 'lilo');
 
-# fix GRUB configuration:
-substInFile {
-    # use FB by default on versionned entries so that the initial versionned entry behave like those created by /sbin/installkernel:
-    s/$/ vga=788/ if /^kernel.*\d\.\d\.\d/;
-} "$::prefix/boot/grub/menu.lst";
+## fix GRUB configuration:
+#substInFile {
+#    # use FB by default on versionned entries so that the initial versionned entry behave like those created by /sbin/installkernel:
+#    s/$/ vga=788/ if /^kernel.*\d\.\d\.\d/;
+#} "$::prefix/boot/grub/menu.lst";
 
 
 ## disable ISDN by default (bogus isdn4net came with an enabled interface :-():
