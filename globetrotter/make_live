@@ -3,8 +3,8 @@
 $::isInstall = 1; # for /root/drakx/ddebug.log
 
 use strict;
-use lib qw(/usr/lib/libDrakX);
-use lib "./perl-install";
+#use lib qw(/usr/lib/libDrakX);
+use lib "../perl-install";
 use standalone;
 use interactive;
 use common;
@@ -44,11 +44,11 @@ if ($0 =~ /restore_globetrotter/) {
     $rescue = 1;
 }
 
-if (!$rescue) {
-	die qq(\%_install_langs is not set to "all" in /etc/rpm/macros) if cat_('/etc/rpm/macros') !~ /\%_install_langs\s*all/;
-}
-
 @ARGV = @new_ARGV;
+
+if (!$rescue) {
+    die qq(\%_install_langs is not set to "all" in /etc/rpm/macros) if cat_('/etc/rpm/macros') !~ /\%_install_langs\s*all/;
+}
 
 my @suggestions = (
                    { mntpoint => "/",     size => 4500 << 11, type => 0x483, ratio => 1, maxsize => 6000 << 11, fs_type => 'ext3' },
@@ -59,7 +59,7 @@ my @suggestions = (
 
                    # share partition with windows:
                    { mntpoint => "/mnt/share",  size => 2000 << 11, type => 0xb, ratio => 3, fs_type => 'vfat' },
-                   { mntpoint => "/mnt/packages", size => 5100 << 11, type => 0x483, ratio => 3, maxsize => 5100 << 11, fs_type => 'ext3' },
+                   { mntpoint => "/mnt/packages", size => 5000 << 11, type => 0x483, ratio => 3, maxsize => 5000 << 11, fs_type => 'ext3' },
                    # allocated last b/c end of disk is usually faster:
                    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11, fs_type => 'swap' },
                   );
@@ -68,9 +68,8 @@ my @suggestions = (
 sub get_hds() {
 	my $all_hds = fsedit::get_hds();
      my $other;
-     # FIXME: TODO cat_("/sys/block/sda/device/info") =~ /Product: LaCie Hard Drive USB/;
 	($all_hds->{hds}, $other) = partition { $_->{usb_description} =~ /^LaCie|LaCie Hard( |)Drive USB/ } @{$all_hds->{hds}};
-    my_exit("Your disk cannot be restored because it cannot be found!") if !$all_hds->{hds}[0];
+     my_exit("Your disk cannot be restored because it cannot be found!") if !$all_hds->{hds}[0];
 	$all_hds, $all_hds->{hds}[0]; # $other
 }
 
@@ -183,9 +182,6 @@ sub installPackages() {
 
     # help DrakX:
     mkdir_p("$::prefix/$_") foreach qw(tmp/headers var/lib/rpm root/drakx);
-    #mkdir_p('/tmp/image');
-    #ln_sf('/export/media', '/tmp/image/media/');
-    #/tmp/image/media/media_info/hdlists:
 
     # help packages' post scripts:
     mkdir_p("$::prefix/proc");
@@ -199,10 +195,7 @@ sub installPackages() {
     *install_any::getFile = sub {
 	my ($f, $o_method) = @_;
 	log::l("getFile $f:$o_method");
-	open(my $F, '/export/' . install_any::relGetFile($f)) or do {
-		log::l("cannot access $f");
-	       	return;
-	};
+	open(my $F, '/export/' . install_any::relGetFile($f)) or return;
 	$F;
     };
 
@@ -230,6 +223,7 @@ sub installPackages() {
 				 #- for screenshots:
 				 qw(fb2png),
 				 qw(xorg-x11-server xorg-x11-xfs xorg-x11-FBDev),
+				 qw(openssh-server), #- fred wants it
 				 qw(alsa-utils cdialog newt),
                      qw(k3b-dvd),
 				 qw(davfs nfs-utils samba-server sane-backends xsane xsane-gimp ntp),
@@ -237,7 +231,7 @@ sub installPackages() {
 				 qw(mountloop),	#- crypted folders
 				 #- doc:
 						   (map { "mandrake-doc-$_" } map { ("Drakxtools-Guide-$_", "Command-Line-$_", "Quick-Startup-Plus-$_", "Starter-$_") } qw(de en es fr it)),
-				 qw(autologin),
+				 qw(autologin grub),
 				 qw(synaptics),
 				 #- network conf:
 				 qw(wireless-tools pcmcia-cs),
@@ -258,8 +252,7 @@ sub installPackages() {
 				 qw(drakconf drakcronat drakfirsttime drakxtools harddrake-ui mdkonline rpmdrake userdrake),
 				 qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 #qw(gcc),
-				 #"ati-kernel-$dkms_kernel_version", "nvidia-kernel-$dkms_kernel_version",
-				 qw(ati nvidia dkms patch dkms-ati dkms-nvidia libMesaGLU1),
+				 "ati-kernel-$dkms_kernel_version", "nvidia-kernel-$dkms_kernel_version", qw(ati nvidia dkms patch dkms-ati dkms-nvidia libMesaGLU1),
 				 # qw(hcfpcimodem hsflinmodem ltmodem), #- 2.4.x only
 				 qw(xinput), #- for some mice
 				 qw(bash-completion binutils  emacs-X11 ntsysv perl-doc perl-Term-Readline-Gnu vim-enhanced openssh-clients lftp diffstat),  #- allow debugging
@@ -284,7 +277,7 @@ sub installPackages() {
 				 qw(mozilla-firefox),
 				 #- plugins:
 				 qw(acroread acroread-nppdf acroread-plugins FlashPlayer j2re RealPlayer RealPlayer-Codecs RealPlayer-rpnp),
-				 qw(kdebase-nsplugins kdebase-kcontrol-nsplugins crossover-plugin-demo),
+				 qw(kdebase-nsplugins kdebase-kcontrol-nsplugins),
                      #- fonts:
 				 qw(xorg-x11-100dpi-fonts xorg-x11-75dpi-fonts),
 				 qw(fonts-bitmap-tscii fonts-hebrew-elmar),
@@ -295,7 +288,7 @@ sub installPackages() {
 
     my %rpmsrate_flags_chosen = map { $_ => 1 } map { @{$_->{flags}} } @{$o->{compssUsers}};
     $rpmsrate_flags_chosen{$_} = 0 foreach qw(CAT_NETWORKING_MAIL_SERVERE);
-    $rpmsrate_flags_chosen{$_} = 1 foreach qw(CAT_AUDIO CAT_KDE CAT_GNOME CAT_NETWORKING CAT_OFFICE CAT_SYSTEM DVD USB SOUND BURNER UTF8 DOCS TV 3D INSTALL CAT_VIDEO CAT_GRAPHICS CAT_PRINTER);
+    $rpmsrate_flags_chosen{$_} = 1 foreach qw(CAT_AUDIO CAT_KDE CAT_GNOME CAT_NETWORKING CAT_OFFICE CAT_SYSTEM DVD USB SOUND BURNER UTF8 DOCS TV 3D INSTALL);
     $rpmsrate_flags_chosen{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
     pkgs::setSelectedFromCompssList($o->{packages}, \%rpmsrate_flags_chosen, 4, 0);
 
@@ -309,7 +302,7 @@ sub installPackages() {
 
     # unselect some packages whose services fsck up the box and whose services are not enabled by appropriate tools:
     # (shorewall must be deselected before iptables is)
-    $unselect->($_) foreach qw(at cups hpoj shorewall iptables ntp tmdns zcip);
+    $unselect->($_) foreach qw(at hpoj shorewall iptables ntp tmdns zcip );
 
     # unselect uim since uim IM break first time wizard when selecting english:
     #$unselect->($_) foreach qw(uim-applet uim libuim0);
@@ -409,8 +402,6 @@ sub doRootSubst {
 
 #fs::merge_info_from_mtab($fstab);
 fs::write_fstab($all_hds, $::prefix);
-cp_af("reset-globetrotter.sh", "$::prefix/sbin");
-chmod(0755, "$::prefix/sbin");
 append_to_file("$::prefix/etc/fstab",
     "none /dev/pts devpts mode=0620 0 0\n",
     "none /proc proc defaults 0 0\n");
@@ -445,18 +436,21 @@ bootloader::suggest($bootloader, $all_hds,
                     vga_fb => 788, 
                     quiet => 1);
 
-$bootloader->{method} = 'lilo-graphic';
+# LILO failled to boot from SCSI:
+# $bootloader->{method} = 'lilo-graphic';
+$bootloader->{method} = 'grub';
 
 eval { bootloader::install($bootloader, $all_hds) };
 
-doRootSubst("$::prefix/etc/lilo.conf");
+doRootSubst("$::prefix/boot/grub/menu.lst");
+run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
 
-# fix LILO configuration:
+# fix GRUB configuration:
 substInFile {
-   s!root=(LABEL=MDK-ROOT)!root="\1"!g;
-} "$::prefix/etc/lilo.conf";
+    # use FB by default on versionned entries so that the initial versionned entry behave like those created by /sbin/installkernel:
+    s/$/ vga=788/ if /^kernel.*\d\.\d\.\d/;
+} "$::prefix/boot/grub/menu.lst";
 
-run_program::rooted($::prefix, 'lilo');
 
 ## disable ISDN by default (bogus isdn4net came with an enabled interface :-():
 #substInFile {
@@ -469,7 +463,7 @@ print "Post install misc configuration\n";
 
 # clean services:
 # cups-lpd ibod isdn4linux isdnlog)) {
-run_program::rooted($::prefix, '/sbin/chkconfig', '--del', $_) foreach qw(acon jserver oki4daemon postfix);
+run_program::rooted($::prefix, '/sbin/chkconfig', '--del', $_) foreach qw(acon jserver oki4daemon);
 #foreach my $service (qw(acon atd cups-lpd hpoj ibod iptables isdn4linux isdnlog jserver ntpd oki4daemon shorewall tmdns)) {
 #    run_program::rooted($::prefix, '/sbin/chkconfig', '--level', $_, $service, 'off') foreach qw(3 5);
 #}
@@ -480,10 +474,6 @@ foreach my $service (qw(alsa dm harddrake hotplug sound)) {
 }
 
 if ($options{post}) {
-    # fix xfs permissions:
-    mkdir_p("$::prefix/tmp/.font-unix/");
-    run_program::rooted($::prefix, 'chown', 'xfs.xfs',  '/tmp/.font-unix/');
-
     #-------------------------------------------------------------------
     # save a few more files in profiles
     my $prof_cfg = "$::prefix/etc/netprofile/list";
