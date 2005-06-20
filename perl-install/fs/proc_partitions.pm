@@ -23,9 +23,11 @@ sub read {
 
     my $devfs_like = any { $_->{dev} =~ m|/disc$| } @$disks;
 
+    fs::get_major_minor($hds);
+
     my %devfs2normal = map {
-	my (undef, $major, $minor) = devices::entry($_->{device});
-	my $disk = find { $_->{major} == $major && $_->{minor} == $minor } @$disks;
+	my $hd = $_;
+	my $disk = find { $_->{major} == $hd->{major} && $_->{minor} == $hd->{minor} } @$disks;
 	$disk->{dev} => $_->{device};
     } @$hds;
 

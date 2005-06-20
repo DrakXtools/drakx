@@ -239,7 +239,7 @@ Do you agree to lose all the partitions?
 
     $all_hds->{lvms} = [ lvms($all_hds) ];
 
-    fs::get_major_minor(fs::get::fstab($all_hds));
+    fs::get_major_minor([ fs::get::fstab($all_hds) ]);
 
     $all_hds;
 }

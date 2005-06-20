@@ -235,10 +235,13 @@ sub add2all_hds {
 }
 
 sub get_major_minor {
-    eval {
-	my (undef, $major, $minor) = devices::entry($_->{device});
-	($_->{major}, $_->{minor}) = ($major, $minor);
-    } foreach @_;
+    my ($fstab) = @_;
+    foreach (@$fstab) {
+	eval {
+	    my (undef, $major, $minor) = devices::entry($_->{device});
+	    ($_->{major}, $_->{minor}) = ($major, $minor);
+	} if !$_->{major};
+    }
 }
 
 sub merge_info_from_mtab {
@@ -406,7 +409,7 @@ sub get_raw_hds {
     push @{$all_hds->{raw_hds}}, detect_devices::removables();
     $_->{is_removable} = 1 foreach @{$all_hds->{raw_hds}};
 
-    get_major_minor(@{$all_hds->{raw_hds}});
+    get_major_minor($all_hds->{raw_hds});
 
     my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_default');
     $all_hds->{nfss} = [ grep { $_->{fs_type} eq 'nfs' } @fstab ];
