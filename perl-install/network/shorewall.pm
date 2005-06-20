@@ -69,17 +69,10 @@ sub shorewall_interface_choices {
     [ { label => N("Net Device"), val => $refval, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ];
 }
 
-sub ask_shorewall_interface {
-    my ($in, $interface) = @_;
-
-    $in->ask_from('', translate($ask_shorewall_interface_label), shorewall_interface_choices(\$interface));
-    $interface;
-}
-
 sub read_default_interfaces {
     my ($conf, $o_in) = @_;
     my $interface = get_shorewall_interface();
-    $o_in and $interface = ask_shorewall_interface($o_in, $interface);
+    $o_in and $o_in->ask_from('', translate($ask_shorewall_interface_label), shorewall_interface_choices(\$interface));
     set_net_interface($conf, $interface);
 }
 
