@@ -93,8 +93,6 @@ sub real_main {
 
       my $lan_detect = sub {
           detect($modules_conf, $net->{autodetect}, 'lan');
-          require network::ethernet;
-          modules::interactive::load_category($in, $modules_conf, list_modules::ethernet_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
