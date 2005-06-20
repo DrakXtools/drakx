@@ -50,12 +50,17 @@ sub find_clp_loop {
     undef;
 }
 
+sub get_dynamic_major {
+    my ($name) = @_;
+    cat_('/proc/devices') =~ /^(\d+) \Q$name\E$/m && $1;
+}
+
 sub init_device_mapper() {
     eval { modules::load('dm-mod') };
     make('urandom');
     my $control = '/dev/mapper/control';
     if (! -e $control) {
-	my ($major) = cat_('/proc/devices') =~ /(\d+) misc$/m or return;
+	my ($major) = get_dynamic_major('misc') or return;
 	my ($minor) = cat_('/proc/misc') =~ /(\d+) device-mapper$/m or return;
 	mkdir_p(dirname($control));
 	syscall_('mknod', $control, c::S_IFCHR() | 0600, makedev($major, $minor)) or die "mknod $control failed: $!";	
@@ -107,21 +112,22 @@ sub entry {
 	$type = c::S_IFBLK();
 	$major = 114;
 	$minor = 16 * $1 + ($2 || 0);
-    } elsif (/(.*?)(\d+)$/) {
-	    ($type, $major, $minor) =
-	     @{ ${{"fd"          => [ c::S_IFBLK(), 2,  0  ],
-		   "hidbp-mse-"  => [ c::S_IFCHR(), 10, 32 ],
-		   "lp"          => [ c::S_IFCHR(), 6,  0  ],
-		   "usb/lp"      => [ c::S_IFCHR(), 180, 0 ],
-		   "input/event" => [ c::S_IFCHR(), 13, 64 ],
-		   "loop"        => [ c::S_IFBLK(), 7,  0  ],
-		   "md"          => [ c::S_IFBLK(), 9,  0  ],
-		   "nst"         => [ c::S_IFCHR(), 9, 128 ],
-		   "sr"          => [ c::S_IFBLK(), 11, 0  ],
-		   "ttyS"        => [ c::S_IFCHR(), 4, 64  ],
-		   "ubd/"        => [ c::S_IFBLK(), 98, 0  ],
-	       }}{$1} };
-	    $minor += $2;
+    } elsif (my ($prefix, $nb) = /(.*?)(\d+)$/) {	
+	my $f = ${{"fd"          => sub { c::S_IFBLK(), 2,  0  },
+		   "hidbp-mse-"  => sub { c::S_IFCHR(), 10, 32 },
+		   "lp"          => sub { c::S_IFCHR(), 6,  0  },
+		   "usb/lp"      => sub { c::S_IFCHR(), 180, 0 },
+		   "input/event" => sub { c::S_IFCHR(), 13, 64 },
+		   "loop"        => sub { c::S_IFBLK(), 7,  0  },
+		   "md"          => sub { c::S_IFBLK(), 9,  0  },
+		   "nst"         => sub { c::S_IFCHR(), 9, 128 },
+		   "sr"          => sub { c::S_IFBLK(), 11, 0  },
+		   "ttyS"        => sub { c::S_IFCHR(), 4, 64  },
+		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
+		   "dm-"         => sub { c::S_IFBLK(), get_dynamic_major('device-mapper'), 0 },
+	       }}{$prefix} or internal_error("unknown device $prefix $nb");
+	($type, $major, $minor) = $f->();
+	$minor += $nb;
     }
     unless ($type) {
 	($type, $major, $minor) =
