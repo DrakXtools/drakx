@@ -98,12 +98,40 @@ sub lvms {
     @lvms;
 }
 
+sub handle_dmraid {
+    my ($drives) = @_;
+
+    @$drives > 1 or return;
+
+    devices::make($_->{device}) foreach @$drives;
+
+    require fs::dmraid;
+
+    my @pvs = fs::dmraid::pvs();
+    my @vgs = fs::dmraid::vgs();
+    log::l(sprintf('dmraid: pvs = [%s], vgs = [%s]',
+		   join(' ', @pvs),
+		   join(' ', map { $_->{device} } @vgs)));
+
+    my @used_hds = map {
+	my $part = fs::get::device2part($_, $drives) or log::l("handle_dmraid: can't find $_ in known drives");
+	if_($part, $part);
+    } @pvs;
+
+    @$drives = difference2($drives, \@used_hds);
+
+    push @$drives, @vgs;
+}
+
 sub get_hds {
     my ($o_flags, $o_in) = @_;
     my $flags = $o_flags || {};
     $flags->{readonly} && ($flags->{clearall} || $flags->{clear}) and die "conflicting flags readonly and clear/clearall";
 
     my @drives = detect_devices::hds();
+
+    #- replace drives used in dmraid by the merged name
+    handle_dmraid(\@drives);
 
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});

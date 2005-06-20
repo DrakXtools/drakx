@@ -210,7 +210,8 @@ sub formatPartitions {
     raid::prepare_prefixed($o->{all_hds}{raids});
 
     #- needed by lilo
-    if (my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}}) {
+    if (-d '/dev/mapper') {
+	my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}};
 	cp_af("/dev/$_", "$::prefix/dev") foreach 'mapper', @vgs;
     }
 }
