@@ -295,12 +295,18 @@ sub computeSize {
     my $max = $part->{maxsize} || $part->{size};
     return min($max, $best->{size}) unless $best->{ratio};
 
-    my $free_space = fs::get::free_space($all_hds);
-    my @l = my @L = grep { 
-	if ($free_space >= $_->{size}) {
-	    $free_space -= $_->{size};
+    my %free_space;
+    $free_space{$_->{rootDevice}} += $_->{size} foreach fs::get::holes($all_hds);
+
+    my @l = my @L = grep {
+	my @possible = $_->{hd} ? $_->{hd} : keys %free_space;
+	my $size = $_->{size};
+	if (my $dev = find { $free_space{$_} >= $size } @possible) {
+	    $free_space{$dev} -= $size;
 	    1;
 	} else { 0 } } @$suggestions;
+
+    my $free_space = $best->{hd} && $free_space{$best->{hd}} || sum(values %free_space);
 
     my $cylinder_size_maxsize_adjusted;
     my $tot_ratios = 0;
@@ -327,7 +333,7 @@ sub computeSize {
     }
     my $size = int min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
     #- verify other entry can fill the hole
-    (any { $_->{size} < $max - $size } @L) ? $size : $max;
+    (any { $_->{size} <= $max - $size } @L) ? $size : $max;
 }
 
 sub suggest_part {
