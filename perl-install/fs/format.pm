@@ -21,6 +21,18 @@ my %cmds = (
     swap     => [ 'util-linux', 'mkswap' ],
 );
 
+my %LABELs = ( #- option, length, handled_by_mount
+    ext2     => [ '-L', 16, 1 ],
+    ext3     => [ '-L', 16, 1 ],
+    reiserfs => [ '-l', 16, 1 ],
+    xfs      => [ '-L', 12, 1 ],
+    jfs      => [ '-L', 16, 1 ],
+    hfs      => [ '-l', 27, 0 ],
+    dos      => [ '-n', 11, 0 ],
+    vfat     => [ '-n', 11, 0 ],
+    swap     => [ '-L', 15, 1 ],
+);
+
 sub package_needed_for_partition_type {
     my ($part) = @_;
     my $l = $cmds{$part->{fs_type}} or return;
@@ -81,6 +93,24 @@ sub part_raw {
 	push @options, '-l', 'bootstrap';
     }
 
+    if ($part->{device_LABEL}) {
+	if ($LABELs{$fs_type}) {
+	    my ($option, $length, $handled_by_mount) = @{$LABELs{$fs_type}};
+	    if (length $part->{device_LABEL} > $length) {
+		my $short = substr($part->{device_LABEL}, 0, $length);
+		log::l("shortening LABEL $part->{device_LABEL} to $short");
+		$part->{device_LABEL} = $short;
+	    }
+	    delete $part->{prefer_device_LABEL} if !$handled_by_mount;
+
+	    push @options, $option, $part->{device_LABEL};
+	} else {
+	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $part->{fs_type}");
+	    delete $part->{device_LABEL};
+	    delete $part->{prefer_device_LABEL};
+	}
+    }
+
     my ($_pkg, $cmd, @first_options) = @{$cmds{$fs_type} || die N("I do not know how to format %s in type %s", $part->{device}, $part->{fs_type})};
 
     my @args = ($cmd, @first_options, @options, devices::make($dev));
@@ -93,15 +123,6 @@ sub part_raw {
 
     if ($fs_type eq 'ext3') {
 	disable_forced_fsck($dev);
-    }
-    if ($part->{device_LABEL}) {
-	if (member($fs_type, qw(ext2 ext3))) {
-	    run_program::run("tune2fs", "-L", $part->{device_LABEL}, devices::make($dev));
-	} else {
-	    log::l("dropping LABEL=$part->{device_LABEL} since we don't know how to set labels for fs_type $part->{fs_type}");
-	    delete $part->{device_LABEL};
-	    delete $part->{prefer_device_LABEL};
-	}
     }
 
     set_isFormatted($part, 1);
