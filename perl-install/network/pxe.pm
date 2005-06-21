@@ -249,15 +249,15 @@ sub find_next_profile_name {
 sub add_empty_profile {
     my ($profiles_conf) = @_;
     my $profile = find_next_profile_name($profiles_conf, "profile_");
-    $profiles_conf->{profiles}{boot}{$profile} = 1 ;
+    $profiles_conf->{profiles}{boot}{$profile} = 1;
 }
 
 sub copy_profile_for_type {
     my ($profile, $clone, $type) = @_;
     my ($pxe, $help) = get_pxelinux_profile_path($profile, $type);
     my ($clone_pxe, $clone_help) = get_pxelinux_profile_path($clone, $type);
-    -r $pxe && cp_f($pxe, $clone_pxe);
-    -r $help && cp_f($help, $clone_help);
+    -r $pxe and cp_f($pxe, $clone_pxe);
+    -r $help and cp_f($help, $clone_help);
 }
 
 sub clone_profile {
