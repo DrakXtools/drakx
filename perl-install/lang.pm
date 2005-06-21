@@ -689,7 +689,7 @@ sub IM2packages {
 }
 
 # enable to select extra SCIM combinaisons:
-my @SCIM_aliasees = qw(anthy canna fcitx m17n prime skk uim);
+my @SCIM_aliasees = qw(anthy canna ccinput fcitx m17n prime skk uim);
 $IM2packages{"scim+$_"} = { generic => [ "scim-$_" ] } foreach @SCIM_aliasees;
 $IM_config{"scim+$_"} = $IM_config{'scim+(default)'} foreach @SCIM_aliasees; 
 
