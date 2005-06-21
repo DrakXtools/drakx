@@ -7,6 +7,7 @@ use fs::format;
 use fs::type;
 use resize_fat::main;
 use diskdrake::resize_ntfs;
+use diskdrake::resize_ext2;
 use common;
 use partition_table::empty;
 use Carp::Heavy;
@@ -109,12 +110,29 @@ sub rest_all {
     my %h = %best;
     log::l("chosen dir $h{dir}");
 
-    my ($hd, $part_list) = ($h{hd}, $h{part_list});
-
     foreach (@{$h{from_resize}}) {
 	#- resize first
-	my $part = fs::get::device2part($_->{device}, [ fs::get::fstab($all_hds) ]) or log::l("partition to resize is missing ($_->{device})"), next;
-	$part->{fs_type} eq $_->{fs_type} or log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})"), next;
+	my $part = fs::get::device2part($_->{device}, [ fs::get::fstab($all_hds) ]);
+	if (!$part) {
+	    log::l("partition to resize is missing ($_->{device})");
+	    $_->{missing} = 1;
+	    next;
+	}
+	if ($part->{fs_type} ne $_->{fs_type}) {
+	    log::l("partition $_->{device} doesn't have the right filesystem ($part->{fs_type} != $_->{fs_type})");
+	    $_->{missing} = 1;
+	    next;
+	}
+
+	if (@{$h{from_resize}} == 1) {
+	    my $half_size = int($h{hd}{totalsectors} / 2) - 2 * $h{hd}->cylinder_size;
+	    my $suggested_total = $h{total} - $_->{size} + $half_size;
+	    log::l("resizing bigger? (size $_->{size}, half_size $half_size, total $h{total}, suggested_total $suggested_total)");
+	    if ($half_size > $_->{size} && $suggested_total < $h{hd}{totalsectors}) {
+		log::l("prefering to resize $_->{device} to size $half_size instead of $_->{size}");
+		$_->{size} = $half_size;
+	    }
+	}
 
 	$_->{start} = $part->{start};
 	if ($_->{size} < $part->{size}) {
@@ -127,26 +145,37 @@ sub rest_all {
 	}
     }
 
+    my $hd = $h{hd};
     put_in_hash($hd->{geom}, $h{forced_geom});
     log::l("totalsectors $hd->{totalsectors} heads $hd->{geom}{heads} sectors $hd->{geom}{sectors}");
     partition_table::raw::compute_nb_cylinders($hd->{geom}, $hd->{totalsectors});
 
+    #- grow the last ext3 partition
+    if (my $part = find { $_->{fs_type} eq 'ext3' } reverse @{$h{part_list}}) {
+	$part->{ratio} = 1;
+    }
+
     #- write the partition table
     partition_table::raw::zero_MBR($hd);
-    foreach my $part (grep { $_->{rootDevice} eq $hd->{device} } @$part_list) {
+    foreach my $part (grep { $_->{rootDevice} eq $hd->{device} } @{$h{part_list}}) {
+	next if $part->{missing};
 
-	my $hole = find { isEmpty($_) && $_->{size} >= $part->{size} } partition_table::get_normal_parts_and_holes($hd) or die "not enough room";
+	my $hole = find { isEmpty($_) && $_->{size} >= $part->{size} } partition_table::get_normal_parts_and_holes($hd) or die "not enough room for $part->{device}";
 	$part->{start} = $hole->{start};
 	    
 	log::l("handling $part->{device}");
 	my $extended = $part->{device} =~ /(\d+)$/ && $1 > 4 && $hd->hasExtended;
 
 	my %wanted_part = %$part;
-	if ($extended || $part->{start} == 1) {
-	    $part->{size} += $hd->{geom}{sectors};
+	if ($part->{ratio}) {
+	    $part->{size} = $hole->{size};
+	} else {
+	    $part->{size} += $hd->{geom}{sectors} if $extended;
+	    $part->{size} += $hd->cylinder_size if $part->{start} == 1;
 	}
+	log::l("adding $part->{device} with size $part->{size}");
 	partition_table::add($hd, $part, $extended && 'Extended');
-	foreach ('device', 'size') {
+	foreach ('device', if_(!$part->{ratio}, 'size')) {
 	    $part->{$_} eq $wanted_part{$_} or log::l("bad $_ for $part->{device}: $part->{$_} != $wanted_part{$_}");
 	}
     }
@@ -155,10 +184,21 @@ sub rest_all {
     #- restore from partimage
     foreach (@{$h{from_partimage}}) {
 	run_or_die(@partimage_cmd, 'restore', '-b', devices::make($_->{device}), "$h{dir}/$_->{device}");
+
+	if ($_->{ratio}) {
+	    my $resize = diskdrake::resize_ext2->new($_->{device}, devices::make($_->{device}));
+	    $resize->resize($_->{size});
+	}
     }
 
     foreach (@{$h{created}}) {
 	fs::format::part_raw($_, undef);
+    }
+
+    if (my @missing = grep { $_->{missing} } @{$h{part_list}}) {
+	my $missing = join('|', map { quotemeta($_->{device}) } @missing);
+	log::l("drop missing devices from fstab: $missing");
+	substInFile { $_ = '' if m!^/dev/($missing)\s! } "$::prefix/etc/fstab";
     }
     
     run_program::run('install_bootloader');
