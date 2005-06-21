@@ -239,7 +239,7 @@ sub list_profiles {
     sort(uniq(map { keys %{$profiles_conf->{profiles}{$_}} } qw(boot install)));
 }
 
-sub profiles_exist {
+sub profile_exists {
     my ($profiles_conf, $profile) = @_;
     member($profile, network::pxe::list_profiles($profiles_conf));
 }
