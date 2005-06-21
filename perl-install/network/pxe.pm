@@ -246,7 +246,7 @@ sub profile_exists {
 
 sub find_next_profile_name {
     my ($profiles_conf, $prefix) = @_;
-    my $i = undef;
+    my $i;
     /^$prefix(\d*)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_profiles($profiles_conf);
     "$prefix$i";
 }
