@@ -239,16 +239,21 @@ sub list_pxelinux_profiles {
     sort(uniq(map { keys %{$profiles_conf->{profiles}{$_}} } qw(boot install)));
 }
 
+sub profiles_exist {
+    my ($profiles_conf, $profile) = @_;
+    member($profile, network::pxe::list_pxelinux_profiles($profiles_conf));
+}
+
 sub find_next_profile_name {
     my ($profiles_conf, $prefix) = @_;
-    my $i = 1;
-    /^$prefix(\d+)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_pxelinux_profiles($profiles_conf);
+    my $i = undef;
+    /^$prefix(\d*)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_pxelinux_profiles($profiles_conf);
     "$prefix$i";
 }
 
 sub add_empty_profile {
-    my ($profiles_conf) = @_;
-    my $profile = find_next_profile_name($profiles_conf, "profile_");
+    my ($profiles_conf, $profile, $to_install) = @_;
+    $to_install and $profiles_conf->{profiles}{install}{$profile} = 1;
     $profiles_conf->{profiles}{boot}{$profile} = 1;
 }
 
