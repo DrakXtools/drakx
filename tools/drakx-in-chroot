@@ -12,6 +12,8 @@ my $LIVE_LOCATION_REL = 'install/stage2/live/';
 my $CLP_LOCATION_REL = 'install/stage2/';
 my $CLP_FILE_REL = $CLP_LOCATION_REL . 'mdkinst.clp';
 
+@ARGV >= 2 or die "usage: drakx-in-chroot <repository> <dir to install to> [options]\n";
+
 (my $repository, my $dir, @ARGV) = @ARGV;
 my $STAGE2_LOCATION = $SLASH_LOCATION . $STAGE2_LOCATION_ROOTED;
 
