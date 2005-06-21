@@ -197,12 +197,12 @@ sub set_profile_for_mac_address {
 }
 
 #- returns (profile_type, profile_name)
-sub pxelinux_profile_from_file {
+sub profile_from_file {
     my ($file) = @_;
     $file =~ m!(?:^|/)profiles/(\w+)/(.*)?$!;
 }
 
-sub read_pxelinux_profiles() {
+sub read_profiles() {
     my %profiles_conf;
 
     foreach (all($pxelinux_config_root)) {
@@ -211,7 +211,7 @@ sub read_pxelinux_profiles() {
 	    #- per MAC address settings
 	    #- the filename looks like 01-aa-bb-cc-dd-ee-ff
 	    #- where AA:BB:CC:DD:EE:FF is the MAC address
-	    my ($type, $name) = pxelinux_profile_from_file(readlink($file));
+	    my ($type, $name) = profile_from_file(readlink($file));
 	    tr/-/:/;
 	    my $mac_address = substr($_, 3);
 	    $profiles_conf{per_mac}{$mac_address} = { profile => $name, to_install => $type eq 'install' };
@@ -234,20 +234,20 @@ sub get_pxelinux_profile_path {
     "$root/$profile", "$root/help-$profile.txt";
 }
 
-sub list_pxelinux_profiles {
+sub list_profiles {
     my ($profiles_conf) = @_;
     sort(uniq(map { keys %{$profiles_conf->{profiles}{$_}} } qw(boot install)));
 }
 
 sub profiles_exist {
     my ($profiles_conf, $profile) = @_;
-    member($profile, network::pxe::list_pxelinux_profiles($profiles_conf));
+    member($profile, network::pxe::list_profiles($profiles_conf));
 }
 
 sub find_next_profile_name {
     my ($profiles_conf, $prefix) = @_;
     my $i = undef;
-    /^$prefix(\d*)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_pxelinux_profiles($profiles_conf);
+    /^$prefix(\d*)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_profiles($profiles_conf);
     "$prefix$i";
 }
 
