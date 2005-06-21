@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-06-17 16:16+0200\n"
-"PO-Revision-Date: 2005-06-19 10:52+0000\n"
+"PO-Revision-Date: 2005-06-22 01:08+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -4480,10 +4480,10 @@ msgid ""
 msgstr ""
 "Upplausn\n"
 "\n"
-"   Hér getur þú valið upplausn og litadýpt sem eru mögulegir fyrir þinn "
-"vélbúnað.\n"
-"Veldu þann sem best hæfir þínum þörfum (þú getur breytt þessum stillingum\n"
-"eftur uppsetningu). Dæmi um valda uppsetningu er sýnt á skjámyndinni."
+"   Hér getur þú valið upplausn og litadýpt sem eru mögulegir fyrir þinn\n"
+"vélbúnað. Veldu þann sem best hæfir þínum þörfum (þú getur breytt\n"
+"þessum stillingum eftir uppsetningu). Dæmi um valda uppsetningu er\n"
+"sýnt á skjámyndinni."
 
 #: help.pm:303
 #, c-format
@@ -5243,6 +5243,48 @@ msgid ""
 "by the entire system. Running the command as a regular user will only\n"
 "change the language settings for that particular user."
 msgstr ""
+"Fyrsta þrepið er að velja æskilegt tungumál.\n"
+"\n"
+"Val þitt á æskilegu tungumáli hefur áhrif á uppsetningarforritið,\n"
+"handbækur, og stýrikerfið í heild sinni. Veldu fyrst hvaða svæði\n"
+"þú er búsettur á, síðan tungumál sem þú notar.\n"
+"\n"
+"Ef þú smellir á \"%s\" hnappinn þá getur þú valið önnur tungumál\n"
+"sem verða sett upp á vinnustöðina þína, þá verða skrár sem tengjast\n"
+"því tungumáli settar upp á tölvuna. Til dæmis ef spænskir notendur\n"
+"munu nota tölvuna þína, veldu þá Ensku sem aðaltungumál í\n"
+"valglugganum og \"%s\" í ítarlegri hlutanum.\n"
+"\n"
+"Um UTF-8 (unicode) stuðning: Unicode er ný stafakóðun sem\n"
+"tekur til allra tungumála. En fullur stuðningur fyrir þessa kóðun er\n"
+"enn á þróunarstigi fyrir GNU/Linux. Þess vegna ætti val þitt á\n"
+"að nota UTF-8 að byggja á eftirfarandi:\n"
+"\n"
+" * Ef þú velur tungumál sem hefur sterkan stuðning í venjulegri\n"
+"stafakóðun (latnesk-1 tungumál, Rússneska, Kínverska, Kóreanska,\n"
+"Tælenska, Gríska, Tyrkneska og flest iso-8859-2 tungumál),\n"
+"þá verður eldri stafakóðun valin sjálfgefið;\n"
+"\n"
+" * Önnur tungumál munu sjálfgefið nota unicode;\n"
+"\n"
+" * Ef tvö eða fleiri tungumál eru valin og þau nota ekki sömu kóðun\n"
+"þá verður unicode notað fyrir allt kerfið;\n"
+"\n"
+" * Að lokum, hægt er að þvinga notkun unicode alls staðar í\n"
+"kerfinu með því að velja \"%s\" valkostinn óháð því hvaða\n"
+"tungumál hafa verið valin.\n"
+"\n"
+"Athugið að þú ert ekki takmarkaður við að velja eitt aukalegt tungumál.\n"
+"Þú getur valið nokkur eða jafnvel valið þau öll með því að krossa við\n"
+"\"%s\" reitinn. Ef þú velur stuðning fyrir tungumál þýðir það að\n"
+"þýðingar, letur, stafsetningar-leiðréttingar o.s.frv. verða einnig\n"
+"sett inn fyrir þessi tungumál.\n"
+"\n"
+"Til að víxla milli mismunandi tungumála sem eru uppsett á kerfinu\n"
+"þínu, þá getur þú keyrt \"localedrake\" skipunina sem \"root\" til\n"
+"að breyta sjálfgefnu tunguáli fyrir allt kerfið. Ef þú keyrir skipunina\n"
+"sem venjulegur notandi þá mun það einungis breyta uppsetningu\n"
+"tungumáls fyrir þann notanda."
 
 #: help.pm:647
 #, c-format
@@ -5285,6 +5327,37 @@ msgid ""
 "Test the buttons and check that the mouse pointer moves on-screen as you\n"
 "move your mouse about."
 msgstr ""
+"Venjulega er DrakX ekki í neinum vandræðum með að finna fjölda hnappa\n"
+"á músinni þinni. Ef DrakX lendir í vandræðum gerir það ráð fyrir tveggja\n"
+"hnappa mús og mun setja upp þriggja hnappa hermi. Þriðja hnappinn\n"
+"á tveggja hnappa mús má fá fram með því að smella samtímis á hægri\n"
+"og vinstri hnappana. DrakX mun sjálfkrafa vita hvort músin þín notar\n"
+"PS/2- , rað- eða usb-tengi.\n"
+"\n"
+"Ef þú hefur þriggja hnappa mús án skrunhjóls, þá getur þú valið \"%s\"\n"
+"mús. DrakX mun þá stilla músina þína þannig að þú getir hermt eftir\n"
+"skrunhjóli með því. Til að gera það, smelltu á miðhnappinn og færðu\n"
+"músina upp og niður.\n"
+"\n"
+"Ef þú af einhverri ástæðu vilt skilgreina aðra tegund músar, veldu hana\n"
+"þá úr listanum.\n"
+"\n"
+"Þú getur valið \"%s\" færsluna til að velja ``almenna'' músartegund\n"
+"sem mun virka með flestum músum.\n"
+"\n"
+"Ef þú velur aðra mús en sjálfgefna, þá birtist prufuskjár. Notið hnappana\n"
+"og hólið til að staðfesta að stillingar séu réttar og músin virki rétt.\n"
+"Ef Músin virkar ekki rétt sláðu þá á bilslána eða [Enter] til að hætta\n"
+"prófuninni og þú færð aftur upp lista af músum.\n"
+"\n"
+"Það kemur fyrir að skrunhjóla-mýs séu ekki skynjaðar sjálfvirkt,\n"
+"svo þú verður að velja músina úr lista. Athugaðu vel að velja rétt\n"
+"tengi rað/PS-2/USB sem músin er tengd við. Eftir að þið hafið\n"
+"valið mús og smellt á \"%s\" hnappinn, þá birtist músamynd á\n"
+"skjánum. Notið skrunhjólið til að staðfesta að það sé virkjað rétt.\n"
+"Þegar þú hreyfir hjólið, mun músarhjólið á skjánum hreyfast.\n"
+"Prófaðu hnappana líka til og hreyfðu bendilinn á skjánum til að\n"
+"staðfest að allt virki rétt."
 
 #: help.pm:681
 #, c-format
@@ -5345,6 +5418,39 @@ msgid ""
 "computer will never be connected to the Internet and you absolutely trust\n"
 "everybody who uses your computer, you can choose to have \"%s\"."
 msgstr ""
+"Þetta er ein mest áríðandi ákvörðun sem þú tekur fyrir öryggi GNU/Linux\n"
+"kerfis. Þú verður að gefa upp lykilorð fyrir \"root\". \"Root\" er kerfisstjóri\n"
+"og eini notandinn sem má framkvæma uppfærslur, bæta við notendum,\n"
+"breyta uppsetningu kerfisins, og svo framvegis. Í stuttu máli \"root\" má\n"
+"gera allt!. Þess vegnaverður þú að velja lykilorð sem er erfitt að giska á.\n"
+"DrakX mun segja þér ef lykilorðið er of einfalt. Eins og þú sérð þá þarft\n"
+"þú ekki að slá inn lykilorð, en við ráðleggjum þér alls ekki að hafa það\n"
+"þannig. GNU/Linux er alveg eins viðkvæmt fyrir villum kerfisstjóra og\n"
+"önnur stýrikerfi. Þar sem \"root\" getur farið framhjá öllum takmörkunum\n"
+"og óvart eytt öllum gögnum á disksneiðum með því að vísa kæruleysislega\n"
+"í disksneiðarnar, Það er áríðandi að það sé ekki einfalt að verða \"root\"\n"
+"\n"
+"Lykilorðið ætti að vera blanda af bókstöfum og tölum og að minnsta\n"
+"kosti 8 stafa langt. Aldrei skrifa niður \"root\" lykilorðið -- Þá verður\n"
+"allt of auðvelt að brjótast inn í kerfið.\n"
+"\n"
+"Hafið lykilorðið heldur ekki of langt eða flókið því þú verður að muna það!\n"
+"\n"
+"Lykilorðið verður ekki birt á skjánum þegar þú slærð það inn. Til að\n"
+"minnka hættu á innsláttarvillu ert þú beðinn um að slá lykilorðið tvisvar.\n"
+"Ef þú gerir þá sömu innsláttar villuna tvisvar verður þú að nota þetta\n"
+"``ranga'' lykilorð í fyrsta sinn þegar þú tengist sem \"root\".\n"
+"\n"
+"Ef þú vilt nota auðkenningar-miðlara til að stjórna aðgangi að tölvunni\n"
+"þinni, smelltu þá á \"%s\" hnappinn.\n"
+"\n"
+"Ef þú notar LDAP, NIS eða PDC Windows Domain auðkenningar-\n"
+"þjónustur, veldu réttan valkost fyrir \"%s\". Ef þú veist ekki hvað\n"
+"þú átt að nota spurðu þá net-stjórnandann.\n"
+"\n"
+"Ef þú átt í vandræðum með að muna lykilorð, eða ef tölvan þín verður\n"
+"aldrei tengd Internetinu, og þú treystir algerlega öllum þeim sem koma\n"
+"að tölvunni þinni, þá getur þú valið að hafa \"%s\"."
 
 #: help.pm:722
 #, c-format
@@ -5599,37 +5705,39 @@ msgstr ""
 " * \"%s\": sýna núverandi músastillingar og smelltu á hnappinn til að\n"
 "breyta því ef þörf krefur.\n"
 "\n"
-" * \"%s\": clicking on the \"%s\" button will open the printer\n"
-"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
-"Guide'' for more information on how to setup a new printer. The interface\n"
-"presented there is similar to the one used during installation.\n"
+" * \"%s\": með því að smella á \"%s\" hnappinn opnast prent-stillingar-\n"
+"ráðgjafi. Ráðfærið ykkur við viðeigandi kafla í ``Starter Guide'' varðandi\n"
+"frekari upplýsingar um hvernig á að setja upp nýjan prentara. Viðmótið\n"
+"sem sýnt er þar er svipað því sem er notað í uppsetningunni.\n"
 "\n"
-" * \"%s\": if a sound card is detected on your system, it is\n"
-"displayed here. If you notice the sound card displayed is not the one that\n"
-"is actually present on your system, you can click on the button and choose\n"
-"another driver.\n"
+" * \"%s\": Ef hljóðkort finnst á kerfinu þínu, þá verður það sýnt hér\n"
+"Ef þú tekur eftir því að það hljóðkort sem sýnt er hér sé ekki það\n"
+"sem er í raun í kerfinu þínu, þá getur þú smellt á hnappinn og valið\n"
+"annann rekil.\n"
 "\n"
-" * \"%s\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on \"%s\"\n"
-"to try to configure it manually.\n"
+" * \"%s\": Ef sjónvarpskort finnst í tölvunni þinni þá er það sýnt hér.\n"
+"Ef það er sjónvarpskort í tölvunni og það finnst ekki þá getur þú smellt\n"
+"á \"%s\" hnappinn og reynt að setja það inn handvirkt.\n"
 "\n"
-" * \"%s\": you can click on \"%s\" to change the parameters associated with\n"
-"the card if you feel the configuration is wrong.\n"
+" * \"%s\": þú getur smellt á \"%s\" til að breyta stillingum á kortinu ef\n"
+"þér finnst að uppsetningin sé röng.\n"
 "\n"
-" * \"%s\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
-"you, click on \"%s\" to reconfigure your graphical interface.\n"
+" * \"%s\": Sjálfgefið stillir DrakX skjákortið/skjáinn þinn í upplausnina\n"
+"\"800x600\" eða \"1024x768\". Ef það er ekki sú upplausn sem þú vilt\n"
+"nota smelltu þá á \"%s\" til að endurstilla skjáupplausnina.\n"
 "\n"
 " * \"%s\": Ef þú vilt stilla Internet eða aðrar nettengingar núna.\n"
+"Þá getur þú gert það hér. Skoðaðu handbókina eða notaðu Mandriva\n"
+"Linux stjórnborðið eftir að uppsetningu er lokið til að fá meiri hjálp.\n"
 "\n"
-" * \"%s\": allows to configure HTTP and FTP proxy addresses if the machine\n"
-"you're installing on is to be located behind a proxy server.\n"
+" * \"%s\": leyfir þér að stilla vefsel og FTP-sel ef vélin sem þú ert að\n"
+"setja upp á að tengjast netinu um sel.\n"
 "\n"
 " * \"%s\": hér getur þú endurstillt öryggisþrep sem þú settir áður\n"
 "í fyrra þrepi ().\n"
 "\n"
 " * \"%s\": ef þú ætlar að tengja vélina þína Internetinu, þá er\n"
-"góð hugmynd að vernda vélina þína með því að setja upp eldvvegg.\n"
+"góð hugmynd að vernda vélina þína með því að setja upp eldvegg.\n"
 "Lestu viðeigandi kafla í um uppsetningu eldveggs í ``Starter Guide''.\n"
 "\n"
 " * \"%s\": ef þú villt breyta stillingum ræsistjóra, smelltu á\n"
@@ -5814,7 +5922,7 @@ msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr ""
-"Finn ekki pakkalistaskrá á þessum spegli. Athugaðu hvort staðsetningin sé "
+"Finn ekki pakkalista-skrá á þessum spegli. Athugaðu hvort staðsetningin sé "
 "rétt."
 
 #: install_any.pm:711
@@ -5929,7 +6037,7 @@ msgstr "Aðgangi hafnað"
 #: install_any.pm:1729
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Rangt NFS nafn"
 
 #: install_any.pm:1750
 #, c-format
@@ -6051,7 +6159,7 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
-"Forritið sem breytir stærð FAT disksneiðarinnar getur ekki "
+"Forritið sem breytir stærð FAT disk-sneiðarinnar getur ekki "
 "unnið með þessa disksneið, \n"
 "eftirfarandi villa kom upp: %s"
 
@@ -6066,7 +6174,7 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
 "installation."
-msgstr ""
+msgstr "Windows disk-sneiðin þín er of sundurslitin. Vinsamlega endurræstu tölvuna þín undir Windows, keyrðu ``defrag'' forritið, endurræstu síðar Mandriva Linux uppsetninguna."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6152,7 +6260,7 @@ msgstr ""
 #: install_interactive.pm:271
 #, c-format
 msgid "I can not find any room for installing"
-msgstr "Get ekki fundið meira pláss fyrir uppsetningu"
+msgstr "Get ekki fundið neitt pláss fyrir uppsetningu"
 
 #: install_interactive.pm:275
 #, c-format
@@ -6348,6 +6456,34 @@ msgid ""
 "respective authors and are protected by intellectual property and \n"
 "copyright laws applicable to software programs.\n"
 msgstr ""
+"\n"
+"Aðvörun\n"
+"\n"
+"Vinsamlega lestu vandlega skilmálana hér að neðan. Ef þú ert ekki\n"
+"sátt(ur) við einhvern hluta þess þá mátt þú ekki setja inn næsta\n"
+"geisladisk. Ýttu á 'Neita' til að halda áfram uppsetningu á þess að\n"
+"nota þennan miðil.\n"
+"\n"
+"\n"
+"Sumt af þeim hugbúnaði sem er á næsta geisladiski er ekki dreift\n"
+"samkvæmt GPL eða sambærilegum leyfum. Hver og einn af þessum\n"
+"hugbúnaði er með sína eigin notkunarskilmála. Vinsamlega lestu\n"
+"þá vandlega og samþykktu þá sérstöku skilmála áður en þú notar\n"
+"eða dreifir umræddum hugbúnaði.\n"
+"Þessi leyfi munu almennt takmarka flutning, afritun (nema til geymslu),\n"
+"endurdreifingu, rannsókn á vinnslu kerfis, afkóðun, afþýðingu eða\n"
+"breytingu á hugbúnaðinum. Allar vanefndir á þessum skilmálum munu\n"
+"sjálfkrafa binda endi á leyfi þitt til að nota hugbúnaðinn. Nema sérstaklega\n"
+"sé tekið fram mátt þú ekki setja hugbúnaðinn upp á fleiri en einni vél,\n"
+"eða breyta þannig að hann sé nothæfur á netkerfi. Ef í vafa vinsamlega\n"
+"hafðu samband við dreifingaraðila eða höfund hugbúnaðarins.\n"
+"Flutningur til þriðja aðila eða afritun af þessum hugbúnaði eða\n"
+"handbókum er venjulega ekki leyfður.\n"
+"\n"
+"\n"
+"Allur réttur hugbúnaðar á næsta geisladiski er í höndum höfunda\n"
+"hvers hugbúnaðar fyrir sig og er varin af höfundarréttarlögum\n"
+"og lögum um hugbúnað.\n"
 
 #: install_messages.pm:131
 #, c-format
@@ -6371,7 +6507,7 @@ msgstr ""
 "Taktu disklinginn eða geisladiskinn úr drifinu og sláðu á ENTER.\n"
 "\n"
 "\n"
-"viðbætur og/eða lagfæringar á göllum sem gætu verið til\n"
+"Viðbætur og/eða lagfæringar á göllum sem gætu verið til\n"
 "staðar í þessari útgáfu af Mandriva Linux má finna á \n"
 "\n"
 "\n"
@@ -6390,7 +6526,7 @@ msgstr "http://www.mandrivalinux.com/en/errata.php3"
 #: install_steps.pm:253
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr "%s tengipunktur er nú þegar til"
+msgstr "Tengipunkturinn %s er nú þegar í notkun"
 
 #: install_steps.pm:469
 #, c-format
@@ -6408,7 +6544,7 @@ msgstr ""
 #: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
-msgstr "Hef skref `%s'\n"
+msgstr "Byrja skref `%s'\n"
 
 #: install_steps_gtk.pm:177
 #, c-format
@@ -6421,8 +6557,8 @@ msgstr ""
 "Ef vélin þín er vanbúin að einhverju leyti þá getur þú átt\n"
 "í vandræðum með að setja upp Mandriva Linux.\n"
 "Ef svo er, þá gætir þú reynt að nota texta-uppsetningu.\n"
-"Til þess ýttu á F1 þegar þú ræsir af geisladisknum\n"
-"og sláðu síðan inn `text'."
+"Til þess að gera það, ýttu á F1 þegar þú ræsir af\n"
+"geisladisknum og sláðu síðan inn `text'."
 
 #: install_steps_gtk.pm:224 install_steps_interactive.pm:624
 #, c-format
@@ -6472,12 +6608,12 @@ msgstr "vegna þess að %s vantar"
 #: install_steps_gtk.pm:337
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr "vegna þess að %s vantar"
+msgstr "vegna þess að %s er ekki uppfyllt"
 
 #: install_steps_gtk.pm:338
 #, c-format
 msgid "trying to promote %s"
-msgstr "reyni að hækka %s"
+msgstr "reyni að hækka vægi %s"
 
 #: install_steps_gtk.pm:339
 #, c-format
@@ -6632,7 +6768,7 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
-"Efturfarandi uppsetningarmiðlar hafa fundist.\n"
+"Eftirfarandi uppsetningar-miðlar hafa fundist.\n"
 "Ef þú vilt sleppa einhverjum af þeim, þá getur þú af-valið þá núna."
 
 #: install_steps_gtk.pm:689
@@ -6765,7 +6901,7 @@ msgid ""
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
 "Ekki pláss fyrir 1MB ræsigeira! Uppsetning mun halda áfram, "
-"en til að ræsa kerfið þitt verður þú að búa til ræsidisksneið "
+"en til að ræsa kerfið þitt verður þú að búa til ræsi-disksneið "
 "með DiskDrake"
 
 #: install_steps_interactive.pm:317
@@ -6777,7 +6913,7 @@ msgid ""
 msgstr ""
 "Þú þarft að búa til PPC PReP for-ræsingu! Uppsetningin mun "
 "halda áfram,en til að ræsa kerfið, þarft þú að búa til "
-"ræsidisksneið með DiskDrake"
+"ræsi-disksneið með DiskDrake"
 
 #: install_steps_interactive.pm:353
 #, c-format
@@ -6806,12 +6942,12 @@ msgstr "Ekki nægjanlegt diskminni fyrir innsetningu.  Bættu við það"
 #: install_steps_interactive.pm:393
 #, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr "Leita að fáanlegum pökkum og endurbyggi rpm gagnagrunn..."
+msgstr "Leita að tiltækum pökkum og endurbyggi rpm gagnagrunn..."
 
 #: install_steps_interactive.pm:394 install_steps_interactive.pm:452
 #, c-format
 msgid "Looking for available packages..."
-msgstr "Leita að fáanlegum pökkum..."
+msgstr "Leita að tiltækum pökkum..."
 
 #: install_steps_interactive.pm:397
 #, c-format
@@ -6935,7 +7071,7 @@ msgstr "Lokastillingar"
 #: install_steps_interactive.pm:775
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "Vinsamlega staðfestu að Uppfærslu-miðill sé í drifi %s"
 
 #: install_steps_interactive.pm:804
 #, c-format
@@ -9278,7 +9414,7 @@ msgstr "Viðföng"
 #: modules/interactive.pm:21 standalone/draksec:51
 #, c-format
 msgid "NONE"
-msgstr "ENGINN"
+msgstr "EKKERT"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -9825,22 +9961,22 @@ msgstr "Handvirkt"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Ekkert tæki sem styður %s ndiswrapper rekilinn er til staðar!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
 msgid "Please select the Windows driver (.inf file)"
-msgstr ""
+msgstr "Vinsamlega veldu Windows rekilinn (.inf skrá)"
 
 #: network/ndiswrapper.pm:42
 #, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "Get ekki sett inn %s ndiswrapper rekilinn!"
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "Get ekki hlaðið inn ndiswrapper reklinum!"
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -9848,11 +9984,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"Valið tæki hefur þegar verið sett upp með reklinum %s.\n"
+"vilt þú í raun nota ndiswrapper rekil?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Finn ekki ndiswrapper tengið!"
 
 #: network/netconnect.pm:69 network/netconnect.pm:482
 #: network/netconnect.pm:489
@@ -10057,7 +10195,7 @@ msgstr "Mótaldstenging"
 #: network/netconnect.pm:252
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "DVB tenging"
 
 #: network/netconnect.pm:262
 #, c-format
@@ -10407,12 +10545,12 @@ msgstr "Umlukinn:"
 #: network/netconnect.pm:805
 #, c-format
 msgid "Manually load a driver"
-msgstr ""
+msgstr "Hlaða rekli handvirkt"
 
 #: network/netconnect.pm:805
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
-msgstr ""
+msgstr "Nota Windows rekil (með ndiswrapper)"
 
 #: network/netconnect.pm:812 network/netconnect.pm:1066
 #: network/netconnect.pm:1070 printer/printerdrake.pm:3741
@@ -10437,7 +10575,7 @@ msgstr "Stilli nettæki %s (rekill %s)"
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
-msgstr ""
+msgstr "Eftirfarandi samskiptareglur má nota til að stilla staðarnets-tengingu. Vinsamlega veljið hverja þið viljið nota"
 
 #: network/netconnect.pm:879
 #, c-format
@@ -10474,7 +10612,7 @@ msgstr ""
 #: network/netconnect.pm:896 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
-msgstr "Netstillingar útskifanlegra tækja"
+msgstr "Netstillingar Útskiptanlegt tækja"
 
 #: network/netconnect.pm:898 standalone/drakconnect:432
 #, c-format
@@ -10505,12 +10643,12 @@ msgstr "Sækja vistföng DNS þjóna frá DHCP miðlara"
 #: network/netconnect.pm:906 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr ""
+msgstr "Ná í YP miðlara frá DHCP"
 
 #: network/netconnect.pm:907 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr ""
+msgstr "Ná í NTPD miðlara frá DHCP"
 
 #: network/netconnect.pm:915 printer/printerdrake.pm:1672
 #: standalone/drakconnect:672
@@ -10542,7 +10680,7 @@ msgstr "Velja ndiswrapper rekil"
 #: network/netconnect.pm:963
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "Nota ndiswrapper rekil %s"
 
 #: network/netconnect.pm:963
 #, c-format
@@ -10552,7 +10690,7 @@ msgstr "Setja inn nýjan rekil"
 #: network/netconnect.pm:975
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "Velja tæki:"
 
 #: network/netconnect.pm:1000
 #, c-format
@@ -10597,7 +10735,7 @@ msgstr "Sjálfvirkt"
 #: network/netconnect.pm:1006 standalone/drakconnect:405
 #, c-format
 msgid "Network name (ESSID)"
-msgstr ""
+msgstr "Netnafn (ESSID)"
 
 #: network/netconnect.pm:1007 standalone/drakconnect:406
 #, c-format
@@ -10607,7 +10745,7 @@ msgstr "Netauðkenni"
 #: network/netconnect.pm:1008 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
-msgstr ""
+msgstr "Vinnslutíðni"
 
 #: network/netconnect.pm:1009 standalone/drakconnect:408
 #, c-format
@@ -10627,7 +10765,7 @@ msgstr "Dulritunarmáti"
 #: network/netconnect.pm:1015 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
-msgstr ""
+msgstr "RTS/CTS"
 
 #: network/netconnect.pm:1016
 #, c-format
@@ -10651,7 +10789,7 @@ msgstr "Slitnir-pakkar"
 #: network/netconnect.pm:1024 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
-msgstr ""
+msgstr "Aukaviðföng fyrir iwconfig"
 
 #: network/netconnect.pm:1025
 #, c-format
@@ -10662,12 +10800,16 @@ msgid ""
 "\n"
 "See iwconfig(8) man page for further information."
 msgstr ""
+"Hér er hægt að bæta við aukalegum stillingum fyrir þráðlaus samskipti svo sem:\n"
+"ap, channel, commit, enc, power, retry, sens, txpower (nick er þegar sett sem vélarnafn).\n"
+"\n"
+"sjá nánar á man-síðunni iwconfig(8)."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
 #: network/netconnect.pm:1032 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
-msgstr "Auka viðföng fyrir Iwspy"
+msgstr "Auka viðföng fyrir iwspy"
 
 #: network/netconnect.pm:1033
 #, c-format
@@ -10710,40 +10852,49 @@ msgid ""
 "\n"
 "See iwpriv(8) man page for further information."
 msgstr ""
+"Iwpriv er notað til að setja aukalega (prívat) viðföng á þráðlausu neti\n"
+"\n"
+"Iwpriv sér um viðföng og stillingar sérhæfð fyrir hvern rekil (andstætt\n"
+"við iwconfig sem sér um þessa almennu).\n"
+"\n"
+"Samkvæmt bókinni ætti hver rekill að segja til um sín mismunandi vistföng,\n"
+"hvaða skipanir á að gefa og hvernig þau virka.\n"
+"\n"
+"sjá nánar á man-síðunni fyrir iwpriv(8)."
 
 #: network/netconnect.pm:1058
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
-msgstr ""
+msgstr "Tíðni ætti að hafa viðskeyti k, M eða G (t.d. \"2.46G\" fyrir 2.46 GHz tíðni), eða bæta við nógu mörgum núllum."
 
 #: network/netconnect.pm:1062
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
 "enough '0' (zeroes)."
-msgstr ""
+msgstr "Hraði ætti að hafa viðskeyti k, M eða G (t.d. \"11M\" fyrir 11M) eða bæta við nógu mörgum núllum."
 
 #: network/netconnect.pm:1102
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "DVB stillingar"
 
 #: network/netconnect.pm:1103
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "DVB tengi"
 
 #: network/netconnect.pm:1120
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "DVB tengi-stillingar"
 
 #: network/netconnect.pm:1123
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "Netkort"
 
 #: network/netconnect.pm:1124
 #, c-format
@@ -11087,6 +11238,9 @@ msgid ""
 "\n"
 "You can find a driver on http://eciadsl.flashtux.org/"
 msgstr ""
+"ECI Hi-Focus mótaldið er ekki stutt vegna dreifingarvandkvæða á vélamálsrekli.\n"
+"\n"
+"Þú getur fundið rekil á http://eciadsl.flashtux.org/"
 
 #: network/thirdparty.pm:267
 #, c-format
@@ -11096,14 +11250,14 @@ msgstr "Gat ekki sett inn pakkana (%s)!"
 #: network/thirdparty.pm:275
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Þarfnast nokkurra pakka (%s) sem eru ekki tiltækir."
 
 #: network/thirdparty.pm:276
 #, c-format
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
-msgstr ""
+msgstr "Þessa pakka má finna á Mandriva Club síðunum eða á seldum Mandriva dreifingum."
 
 #: network/thirdparty.pm:277
 #, c-format
@@ -11111,6 +11265,8 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Skrárnar má einnig setja upp frá þessari slóð:\n"
+"%s"
 
 #: network/thirdparty.pm:310
 #, c-format
@@ -11120,7 +11276,7 @@ msgstr "Finn ekki \"%s\" á Windows kerfinu þínu!"
 #: network/thirdparty.pm:312
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Ekkert Windows kerfi hefur fundist!"
 
 #: network/thirdparty.pm:322
 #, c-format
@@ -11147,8 +11303,8 @@ msgid ""
 "or skip and do it later."
 msgstr ""
 "Þú þarft Alcatel míkrókóða frumrekla.\n"
-"Þú getur sett hann inn núna af disklingi eða frá Windows disksneið,\n"
-"eða sleppt því og gert það seinna."
+"Þú getur sett hann inn núna af disklingi eða frá Windows disksneið\n"
+"- eða sleppt því og gert það seinna."
 
 #: network/thirdparty.pm:347 network/thirdparty.pm:349
 #, c-format
@@ -11179,7 +11335,7 @@ msgstr "Afritun frumrekla tókst"
 #: network/thirdparty.pm:427
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Leita að hugbúnaði og reklum..."
 
 #: network/thirdparty.pm:437
 #, c-format
@@ -11435,7 +11591,7 @@ msgstr ", HP prentari á USB"
 #: printer/main.pm:373
 #, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr ""
+msgstr ", HP prentari á HP JetDirect"
 
 #: printer/main.pm:375
 #, c-format
@@ -11445,27 +11601,27 @@ msgstr ", HP prentari"
 #: printer/main.pm:381
 #, c-format
 msgid ", multi-function device on parallel port #%s"
-msgstr ", margþætt tæki á á raðtengi - port \\#%s"
+msgstr ", fjölnota-tæki á á raðtengi - port \\#%s"
 
 #: printer/main.pm:384
 #, c-format
 msgid ", multi-function device on a parallel port"
-msgstr ", margþætt tæki á raðtengi"
+msgstr ", fjölnota-tæki á raðtengi"
 
 #: printer/main.pm:386
 #, c-format
 msgid ", multi-function device on USB"
-msgstr ""
+msgstr ", fjölnota-tæki á USB"
 
 #: printer/main.pm:388
 #, c-format
 msgid ", multi-function device on HP JetDirect"
-msgstr ""
+msgstr ", fjölnota-tæki á HP JetDirect"
 
 #: printer/main.pm:390
 #, c-format
 msgid ", multi-function device"
-msgstr ""
+msgstr ", fjölnota-tæki"
 
 #: printer/main.pm:394
 #, c-format
@@ -11526,7 +11682,7 @@ msgstr "HP prentari á USB"
 #: printer/main.pm:441
 #, c-format
 msgid "HP printer on HP JetDirect"
-msgstr ""
+msgstr "HP prentari á HP JetDirect"
 
 #: printer/main.pm:443
 #, c-format
@@ -11536,27 +11692,27 @@ msgstr "HP Prentari"
 #: printer/main.pm:449
 #, c-format
 msgid "Multi-function device on parallel port #%s"
-msgstr "Margþætt tæki á á raðtengi - port \\#%s"
+msgstr "Fjölnota-tæki á á raðtengi - port \\#%s"
 
 #: printer/main.pm:452
 #, c-format
 msgid "Multi-function device on a parallel port"
-msgstr "Margþætt tæki á raðtengi"
+msgstr "Fjölnota-tæki á raðtengi"
 
 #: printer/main.pm:454
 #, c-format
 msgid "Multi-function device on USB"
-msgstr ""
+msgstr "Fjölnota-tæki á USB"
 
 #: printer/main.pm:456
 #, c-format
 msgid "Multi-function device on HP JetDirect"
-msgstr ""
+msgstr "Fjölnota-tæki á HP jetDirect "
 
 #: printer/main.pm:458
 #, c-format
 msgid "Multi-function device"
-msgstr ""
+msgstr "Fjölnota-tæki"
 
 #: printer/main.pm:462
 #, c-format
@@ -11591,7 +11747,7 @@ msgstr "Notar skipun %s"
 #: printer/main.pm:483
 #, c-format
 msgid "URI: %s"
-msgstr ""
+msgstr "URI: %s"
 
 #: printer/main.pm:631 printer/printerdrake.pm:856
 #: printer/printerdrake.pm:2953
@@ -11635,7 +11791,7 @@ msgid ""
 "searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
-msgstr ""
+msgstr "HP Laserjet 1000 þarf að fá sendan hugbúnað eftir að kveikt er á honum. Sækið Windows reklapakkann frá HP vefsíðunni (vélbúnaðar-uppsetningin á meðfylgjandi geisladisk virkar ekki), og dragðu vélbúnaðar-skrána úr pakkanum með því að skoða þessa \"sjálf-afpakkandi keyrsluskrá\" í unzip forriti og leitaðu að skránni 'sihp1000.img'. Afritaðu þessa skrá inn í '/etc/printer' möppuna. Þaðan verður hún sótt af sjálfvirku upphleðslu-forriti og send á prentarann í hvert sinn er kveikt er á honum og hann er tengdur.\n"
 
 #: printer/printerdrake.pm:67
 #, c-format
@@ -11647,24 +11803,24 @@ msgstr "CUPS prentarastillingar"
 msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessible by remote machines and by which remote machines."
-msgstr ""
+msgstr "Hér getur þú valið hvort prentarar sem eru tengdir við þessa vél ættu að vera aðgengilegir frá öðrum vélum , og þá frá hvaða vélum."
 
 #: printer/printerdrake.pm:69
 #, c-format
 msgid ""
 "You can also decide here whether printers on remote machines should be "
 "automatically made available on this machine."
-msgstr ""
+msgstr "Þú getur einnig valið hér hvort prentarar sem eru boðnir fram á öðrum vélum séu sjálfkrafa virkir á þessari vél."
 
 #: printer/printerdrake.pm:72
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
+msgstr "Prentarar á þessari vél má nota frá öðrum vélum"
 
 #: printer/printerdrake.pm:77
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr ""
+msgstr "Sjálfkrafa finna tiltæka prentara á öðrum vélum"
 
 #: printer/printerdrake.pm:82
 #, c-format
@@ -11698,7 +11854,7 @@ msgid ""
 "CUPS server(s) is/are not in your local network, you have to enter the IP "
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
-msgstr ""
+msgstr "Til að fá aðgang að prenturum á fjarlægum CUPS miðlurum á þínu staðarneti þarft þú aðeins að kveikja á valkostinum \"Sjálfkrafa finna tiltæka prentara á öðrum vélum\". CUPS miðlararnir láta þína vél sjálfkrafa vita um sína prentara. Allir prentarar sem eru þekktir á þinni vél eru á \"Fjartengdir prentarar\" hlutanum í aðalglugganum á Printerdrake. Ef CUPS miðlararnir eru ekki á staðarnetinu þá verður þú að gefa upp IP-tölur og jafnvel port-númer hér til að fá upplýsingar um prentarana frá miðlurunum."
 
 #: printer/printerdrake.pm:115
 #, c-format
@@ -11738,12 +11894,21 @@ msgid ""
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
 msgstr ""
+"Þegar þessi valkostur er valinn, verður eftirfarandi athugað í hvert sinn er CUPS ræsir\n"
+"\n"
+"- ef LPD/LPRng er uppsettur, þá verður /etc/printcap ekki yfirskrifað ac CUPS\n"
+"\n"
+"- ef /etc/cups/cupsd.conf vantar þá verður verður hann búinn til\n"
+"\n"
+" - þegar upplýsingum um prentara er úvarpað, þá inniheldur það ekki nafnið \"localhost\" sem miðlaranafn.\n"
+"\n"
+"Ef eitthvað af fyrrgreindu getur valdið þér vandræðum, slökktu þá á þessum valkosti, en þá verður þú að sjá um þetta sjálfur."
 
 #: printer/printerdrake.pm:138 printer/printerdrake.pm:506
 #: printer/printerdrake.pm:4397
 #, c-format
 msgid "Remote CUPS server and no local CUPS daemon"
-msgstr ""
+msgstr "Fjartengdur CUPS miðlari og enginn staðbundinn CUPS forrit"
 
 #: printer/printerdrake.pm:141
 #, c-format
@@ -11763,7 +11928,7 @@ msgid ""
 "go directly to the server specified below. Note that it is not possible to "
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
-msgstr ""
+msgstr "Í þessum ham verður CUPS forritið stöðvað og allar prentbeiðnir verða sendar beint á prentarann tilgreindan hér að neðan. Ahugið að það er ekki mögulegt að skilgreina staðbundnar biðraðir og ef tilgreindur miðlari er ekki í gangi þá verður ekki prentað frá þessari vél."
 
 #: printer/printerdrake.pm:161 printer/printerdrake.pm:236
 #, c-format
@@ -11775,7 +11940,7 @@ msgstr "Deila staðbundnum prenturum"
 msgid ""
 "These are the machines and networks on which the locally connected printer"
 "(s) should be available:"
-msgstr ""
+msgstr "Þetta eru vélarnar og netið þar sem staðbundinn prentari(ar) ættu að vera tiltækir:"
 
 #: printer/printerdrake.pm:173
 #, c-format
@@ -11797,34 +11962,34 @@ msgstr "Fjarlægja valda vél/net"
 #: printer/printerdrake.pm:279 printer/printerdrake.pm:297
 #, c-format
 msgid "IP address of host/network:"
-msgstr ""
+msgstr "IP-tala á vél/neti:"
 
 #: printer/printerdrake.pm:237
 #, c-format
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr ""
+msgstr "Velja net eða vél þar sem prentari á þessari vél ætti að vera sýnilegur:"
 
 #: printer/printerdrake.pm:244
 #, c-format
 msgid "Host/network IP address missing."
-msgstr ""
+msgstr "Vél/net-tölu vantar."
 
 #: printer/printerdrake.pm:252
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr ""
+msgstr "IP-tala vélar/nets er ekki rétt\n"
 
 #: printer/printerdrake.pm:253 printer/printerdrake.pm:429
 #, c-format
 msgid "Examples for correct IPs:\n"
-msgstr ""
+msgstr "Dæmi um réttar IP-tölur:\n"
 
 #: printer/printerdrake.pm:277
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Þessi vél/net er þegar á listanum, það er ekki hægt að bæta henni við aftur.\n"
 
 #: printer/printerdrake.pm:346 printer/printerdrake.pm:416
 #, c-format
@@ -11838,6 +12003,8 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+"Bættu hér við CUPS miðlurum sem eru með prentara sem þú vilt nota. Þú þarf aðeins að gera þetta ef miðlararnir útvarpa ekki upplýsingum um sína prentara "
+"á staðarnetinu."
 
 #: printer/printerdrake.pm:358
 #, c-format
@@ -11847,22 +12014,22 @@ msgstr "Bæta við miðlara"
 #: printer/printerdrake.pm:364
 #, c-format
 msgid "Edit selected server"
-msgstr "Breyta völdum prentara"
+msgstr "Breyta völdum miðlara"
 
 #: printer/printerdrake.pm:373
 #, c-format
 msgid "Remove selected server"
-msgstr "Fjarlægja valinn prentara"
+msgstr "Fjarlægja valinn miðlara"
 
 #: printer/printerdrake.pm:417
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr ""
+msgstr "Gefðu upp IP-tölu og port á þeim prentara-miðlara sem þú vilt nota."
 
 #: printer/printerdrake.pm:418
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Ef ekkert port er uppgefið, 631 verður notað sjálfgefið."
 
 #: printer/printerdrake.pm:422
 #, c-format
@@ -11877,12 +12044,12 @@ msgstr "Uppgefið IP-vistfang er ekki rétt.\n"
 #: printer/printerdrake.pm:440 printer/printerdrake.pm:1924
 #, c-format
 msgid "The port number should be an integer!"
-msgstr ""
+msgstr "Port-númer ætti að vera tala!"
 
 #: printer/printerdrake.pm:451
 #, c-format
 msgid "This server is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Þessi miðlari er þegar á listanum, það er ekki hægt að bæta honum við aftur.\n"
 
 #: printer/printerdrake.pm:462 printer/printerdrake.pm:1951
 #: standalone/drakups:251 standalone/harddrake2:52
@@ -11939,7 +12106,7 @@ msgstr "Les prentara-upplýsingar..."
 #: printer/printerdrake.pm:587
 #, c-format
 msgid "Restarting CUPS..."
-msgstr ""
+msgstr "Endurræsi CUPS..."
 
 #: printer/printerdrake.pm:614 printer/printerdrake.pm:634
 #, c-format
@@ -11958,6 +12125,8 @@ msgid ""
 "Printers on remote CUPS servers do not need to be configured here; these "
 "printers will be automatically detected."
 msgstr ""
+"\n"
+"Ekki þarf að stilla fjartengda CUPS prentara hér, uppsetningar þeirra verða skynjaðar sjálfkrafa."
 
 #: printer/printerdrake.pm:620 printer/printerdrake.pm:4786
 #, c-format
@@ -11966,21 +12135,23 @@ msgid ""
 "WARNING: No local network connection active, remote printers can neither be "
 "detected nor tested!"
 msgstr ""
+"\n"
+"Aðvörun: staðarnettenging ekki virk, hvorki hægt að finna né prófa fjarlæga prentara!"
 
 #: printer/printerdrake.pm:627
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
-msgstr ""
+msgstr "Prentara-leitun (tengdir, TCP/Sökkull, SMB prentarar, og URI)"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "Breyta tímamörkum á leit að net-prenturum"
 
 #: printer/printerdrake.pm:635
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "Gefðu upp tímamörk fyrir leit að net-prenturum (í millisek) hér. "
 
 #: printer/printerdrake.pm:637
 #, c-format
@@ -12055,6 +12226,8 @@ msgid ""
 "\n"
 "There is one unknown printer directly connected to your system"
 msgstr ""
+"\n"
+"Það er einn óþekktur prentari tengdur beint við þína tölvu"
 
 #: printer/printerdrake.pm:711
 #, c-format
@@ -12062,11 +12235,13 @@ msgid ""
 "\n"
 "There are %d unknown printers directly connected to your system"
 msgstr ""
+"\n"
+"Það eru %d óþekktir prentarar tengdir beint við þína tölvu"
 
 #: printer/printerdrake.pm:714
 #, c-format
 msgid "There are no printers found which are directly connected to your machine"
-msgstr ""
+msgstr "það hafa engir prentarar fundist sem eru beintengdir við tölvuna þína"
 
 #: printer/printerdrake.pm:717
 #, c-format
@@ -12079,6 +12254,8 @@ msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
 msgstr ""
+"Vilt þú virkja prentun á þá prentara sem eru taldir upp hér að ofan "
+"eða prenta á prentara á staðarnetinu?\n"
 
 #: printer/printerdrake.pm:731
 #, c-format
@@ -12093,14 +12270,14 @@ msgstr "Viltu virkja prentun á ofangreindum prenturum?\n"
 #: printer/printerdrake.pm:734
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
+msgstr "Ert þú viss um að þú viljir setja upp prentun á þessari vél?\n"
 
 #: printer/printerdrake.pm:735
 #, c-format
 msgid ""
 "NOTE: Depending on the printer model and the printing system up to %d MB of "
 "additional software will be installed."
-msgstr ""
+msgstr "ATHUGIÐ: Eftir tegund prentara og prentkerfi verður allt að %d MB af aukahugbúnaði sett upp á tölvuna."
 
 #: printer/printerdrake.pm:774
 #, c-format
@@ -12155,7 +12332,7 @@ msgstr ""
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
-msgstr ""
+msgstr "Ef prentarinn þinn er ekki á listanum, veldu samhæfðan (sjá prentarar handbók) eða sambærilegan."
 
 #: printer/printerdrake.pm:875
 #, c-format
@@ -12188,6 +12365,12 @@ msgid ""
 "you access to all available printer drivers, driver options, and printer "
 "connection types."
 msgstr ""
+"\n"
+"Velkomin að prentara-uppsetningar-ráðgjafa\n"
+"\n"
+"Þessi ráðgjafi aðstoðar þig við að setja upp staðbundna eða fjartengda prentara frá þessari vél og einnig frá öðrum vélum á netinu.\n"
+"\n"
+"Þú verður beðinn um allar nauðsynlegar upplýsingar til að setja upp prentarann og sýnir þér alla mögulega prentara-rekla, rekla-valkosti, og prentara tengingar."
 
 #: printer/printerdrake.pm:1065
 #, c-format
@@ -12210,6 +12393,16 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"Velkomin að prentara-uppsetningar-ráðgjafa\n"
+"\n"
+"Þessi ráðgjafi aðstoðar þig við að setja upp prentara tengda við þessa tölvu , beintengda á netið eða fjartengda prentara á Windows tölvu.\n"
+"\n"
+"Vinsamlega tengdu og kveiktu á öllum prenturum tengdum við þessa tölvu svo að hægt sé að finna þá sjálfkrafa. Einnig verður að vera kveikt á netprenturum og Windows tölvur verða að vera tengdar og í gangi.\n"
+"\n"
+"Athugið að það tekur lengri tíma að leita að prenturum á neti en að leita að prenturum tengdri við þessa tölvu. Svo þú ættir að slökkva á prentaraleit á neti og leit að Windows prenturum ef þess er ekki þörf \n"
+"\n"
+"Smelltu á \"Næsta\" þegar þú ert tilbúinn, eða \"Hætta við\" ef þú vilt ekki setja upp prentara núna."
 
 #: printer/printerdrake.pm:1074
 #, c-format
@@ -12226,6 +12419,14 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"Velkomin að prentara-uppsetningar-ráðgjafa\n"
+"\n"
+"Þessi ráðgjafi aðstoðar þig við að setja upp prentara sem eru tengdir við þessa tölvu.\n"
+"\n"
+"Vinsamlega tengdu og kveiktu á öllum prenturum tengdum við þessa tölvu svo að hægt sé að finna þá sjálfkrafa.\n"
+"\n"
+"Smelltu á \"Næsta\" þegar þú ert tilbúinn, eða \"Hætta við\" ef þú vilt ekki setja upp prentara núna."
 
 #: printer/printerdrake.pm:1082
 #, c-format
@@ -12247,6 +12448,20 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"Velkomin að prentara-uppsetningar-ráðgjafa\n"
+"\n"
+"Þessi ráðgjafi aðstoðar þig við að setja upp prentara tengda við þessa "
+"tölvu eða beintengda á netið.\n"
+"\n"
+"Vinsamlega tengdu og kveiktu á öllum prenturum tengdum við þessa "
+"tölvu svo að hægt sé að finna þá sjálfkrafa. Einnig verður að vera "
+"kveikt á netprenturum.\n"
+"\n"
+"Athugið að það tekur lengri tíma að leita að prenturum á neti en að leita að prenturum tengdri við þessa tölvu. Svo þú ættir að slökkva á prentaraleit "
+"á neti ef þess er ekki þörf \n"
+"\n"
+"Smelltu á \"Næsta\" þegar þú ert tilbúinn, eða \"Hætta við\" ef þú vilt ekki setja upp prentara núna."
 
 #: printer/printerdrake.pm:1091
 #, c-format
@@ -12263,21 +12478,30 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"Velkomin að prentara-uppsetningar-ráðgjafa\n"
+"\n"
+"Þessi ráðgjafi aðstoðar þig við að setja upp prentara sem eru tengdir "
+"við þessa tölvu.\n"
+"\n"
+"Vinsamlega tengdu og kveiktu á öllum prenturum tengdum við þessa tölvu svo að hægt sé að finna þá sjálfkrafa.\n"
+"\n"
+"Smelltu á \"Næsta\" þegar þú ert tilbúinn, eða \"Hætta við\" ef þú vilt ekki setja upp prentara núna."
 
 #: printer/printerdrake.pm:1142
 #, c-format
 msgid "Auto-detect printers connected to this machine"
-msgstr "Finna sjálfkrafa staðværa prentara"
+msgstr "Finna sjálfkrafa staðbundna prentara"
 
 #: printer/printerdrake.pm:1145
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr ""
+msgstr "Finna sjálfkrafa prentara sem eru beintengdir við staðarnetið"
 
 #: printer/printerdrake.pm:1148
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr ""
+msgstr "Finna sjálfkrafa prentara sem eru tengdir við Microsoft Windows tölvur"
 
 #: printer/printerdrake.pm:1151
 #, c-format
@@ -12297,6 +12521,12 @@ msgid ""
 "the default option settings (paper input tray, printout quality, ...), "
 "select \"Printer\" in the \"Hardware\" section of the %s Control Center."
 msgstr ""
+"\n"
+"Til hamingju, prentarinn þinn er nú uppsettur og stilltur!\n"
+"\n"
+"Þú getur prentað með því að nota \"Prent\" skipunina í forritinu þínu (venjulega í \"Skrá\" valmyndinni.\n"
+"\n"
+"Ef þú vilt bæta við, fjarlægja, eða endurnefna prentara, eða ef þú vilt breyta sjálfgefnum stillingum (velja bakka, prentgæði, ...), veldu þá \"Prentara\" í vélbúnaðarhlutanum á %s Stjórnborðinu."
 
 #: printer/printerdrake.pm:1207 printer/printerdrake.pm:1437
 #: printer/printerdrake.pm:1500 printer/printerdrake.pm:1592
@@ -12313,7 +12543,7 @@ msgstr "Gat ekki sett inn pakkana %s!"
 #: printer/printerdrake.pm:1209
 #, c-format
 msgid "Skipping Windows/SMB server auto-detection"
-msgstr ""
+msgstr "Sleppi leit að Windows/SMB prenturum"
 
 #: printer/printerdrake.pm:1215 printer/printerdrake.pm:1360
 #: printer/printerdrake.pm:1598 printer/printerdrake.pm:1855
@@ -12345,7 +12575,7 @@ msgstr "Skynjaði %s"
 #: printer/printerdrake.pm:1302
 #, c-format
 msgid "Printer on parallel port #%s"
-msgstr "Prentari á raðtengi - port \\#%s"
+msgstr "Prentari á hliðtengi - port \\#%s"
 
 #: printer/printerdrake.pm:1263
 #, c-format
@@ -12369,12 +12599,12 @@ msgid ""
 "file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., "
 "equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB "
 "printer: /dev/usb/lp1, ...)."
-msgstr ""
+msgstr "Enginn prentari fannst! Til að setja handvirkt upp prentara sláðu inn tækisnafn/skráarnafn í innsetningarlínuna. (Hliðtengt port: /dev/lp0, /dev/lp1, ..., samsvara LPT1:, LPT2:, ..., fyrsti USB prentari: /dev/usb/lp0, annar usb prentari: /dev/usb/lp1, ...)."
 
 #: printer/printerdrake.pm:1352
 #, c-format
 msgid "You must enter a device or file name!"
-msgstr ""
+msgstr "Þú verður að gefa upp tæki eða skráarnaafn!"
 
 #: printer/printerdrake.pm:1361
 #, c-format
@@ -12401,31 +12631,31 @@ msgstr "Eftirfarandi prentari fannst. "
 msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
-msgstr ""
+msgstr "Ef þetta er ekki sá sem þú vilt stilla, sláðu þá inn tækis-nafn/skrá í inntakslínuna"
 
 #: printer/printerdrake.pm:1377
 #, c-format
 msgid "Alternatively, you can specify a device name/file name in the input line"
-msgstr ""
+msgstr "Eða, þú getur getur gefið upp tækis-nafn/skrá á inntakslínunni"
 
 #: printer/printerdrake.pm:1378 printer/printerdrake.pm:1387
 #, c-format
 msgid "Here is a list of all auto-detected printers. "
-msgstr ""
+msgstr "Hér er listi af öllum fundnum prenturum. "
 
 #: printer/printerdrake.pm:1380
 #, c-format
 msgid ""
 "Please choose the printer you want to set up or enter a device name/file "
 "name in the input line"
-msgstr ""
+msgstr "Vinsamlega veldu prentara sem þú vilt setja upp eða gefðu upp tækis-nafn/skráarnafn á inntakslínunni"
 
 #: printer/printerdrake.pm:1381
 #, c-format
 msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
-msgstr ""
+msgstr "Vinsamlega veldu þann prentara sem prentverk ættu að fara á eða sláðu inn tækis-nafn/skráarnafn á inntakslínunni"
 
 #: printer/printerdrake.pm:1385
 #, c-format
@@ -12434,11 +12664,13 @@ msgid ""
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
 msgstr ""
+"Stilling prentarans er að fullu sjálfvirk. Ef réttur prentari fannst ekki "
+"eða þú vilt stilla sjálfur prentvalkostina, veldu þá \"Handvirk uppsetning\"."
 
 #: printer/printerdrake.pm:1386
 #, c-format
 msgid "Currently, no alternative possibility is available"
-msgstr ""
+msgstr "Nú er enginn annar valkostur"
 
 #: printer/printerdrake.pm:1389
 #, c-format
@@ -12448,6 +12680,9 @@ msgid ""
 "detected or if you prefer a customized printer configuration, turn on "
 "\"Manual configuration\"."
 msgstr ""
+"Vinsamlega veldu þann prentara sem þú vilt setja upp. Stilling prentarans "
+"er að fullu sjálfvirk. Ef réttur prentari fannst ekki eða þú vilt stilla sjálfur "
+"prentvalkostina, veldu þá \"Handvirk uppsetning\"."
 
 #: printer/printerdrake.pm:1390
 #, c-format
@@ -12459,7 +12694,7 @@ msgstr "Veldu prentara sem á að fá send prentverkin."
 msgid ""
 "Please choose the port that your printer is connected to or enter a device "
 "name/file name in the input line"
-msgstr ""
+msgstr "Vinsamlega veldu það port sem prentarinn er tengdur við eða gefðu upp tækisnafn/skráarnafn á inntakslínunni"
 
 #: printer/printerdrake.pm:1393
 #, c-format
@@ -12722,7 +12957,7 @@ msgstr "TCP/Sökkul prentara-valkostir"
 msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) in the input fields."
-msgstr ""
+msgstr "Veljið einn af þeim prenturum sem hafa fundist, eða skráðu í svæðin vélarnafn eða IP-tölu og 'port-númer' ef þörf krefur (sjálfgefið 9100)."
 
 #: printer/printerdrake.pm:1916
 #, c-format
@@ -12731,7 +12966,7 @@ msgid ""
 "of the printer and optionally the port number (default is 9100). On HP "
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
-msgstr ""
+msgstr "Til að prenta á TCP eða sökkul-prentara, þá verður þú að gefa upp vélarnafn eða IP-tölu prentarans og jafnvel 'port-númer' (sjálfgefið er 9100). Á HP JetDirect miðlurum er 'port-númerið' vernjulega 9100, á öðrum miðlurum getur það verið eitthvað annað. Lesið leiðbeiningar með vélbúnaði."
 
 #: printer/printerdrake.pm:1920
 #, c-format
@@ -12764,7 +12999,7 @@ msgstr ""
 #: printer/printerdrake.pm:2042
 #, c-format
 msgid "A valid URI must be entered!"
-msgstr ""
+msgstr "Slóð verður að vera gild!"
 
 #: printer/printerdrake.pm:2147
 #, c-format
@@ -12776,7 +13011,7 @@ msgstr "Pípa inn í skipun"
 msgid ""
 "Here you can specify any arbitrary command line into which the job should be "
 "piped instead of being sent directly to a printer."
-msgstr ""
+msgstr "Hér getur þú skilgreint einhverja skipanalínu sem tekur við verkinu sem 'pípa' í stað þess að vera sent beint á prentara."
 
 #: printer/printerdrake.pm:2149
 #, c-format
@@ -12796,13 +13031,15 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"Á mörgum HP prenturum eru sérstakar stillingar mögulegar, viðhald (blek-magn "
+"spíssa-hreinsun, hausa-stillingar, ...) á öllum nýrri bleksprautu-prenturum, skönnun á fjölnota-tækjum, minniskortalesari á orenturum með kortalesara. "
 
 #: printer/printerdrake.pm:2194
 #, c-format
 msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
-msgstr ""
+msgstr "Til að virkja þessar aðgerðir á HP prentaranum þínum, þá verður að setja upp viðeigandi hugbúnað: "
 
 #: printer/printerdrake.pm:2195
 #, c-format
@@ -12810,33 +13047,33 @@ msgid ""
 "Either with the newer HPLIP which allows printer maintenance through the "
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
-msgstr ""
+msgstr "Annaðhvort með nýrri HPLIP sem veitir aðgang að prentaraviðhaldi um þægilega grafískra \"Verkfæratösku\" og prentun út á alla jaðra á PhotoSmart prenturum "
 
 #: printer/printerdrake.pm:2196
 #, c-format
 msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
-msgstr ""
+msgstr "eða með eldri HPOJ sem leyfa aðeins skanna- og minniskorta- aðgang, en gætu hjálpað til ef HPLIP virkar ekki. "
 
 #: printer/printerdrake.pm:2198
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "Hvað er val þitt (veldu \"ekkert\" fyrir aðra en HP prentara)? "
 
 #: printer/printerdrake.pm:2199 printer/printerdrake.pm:2200
 #: printer/printerdrake.pm:2226 printer/printerdrake.pm:2232
 #: printer/printerdrake.pm:2258
 #, c-format
 msgid "HPLIP"
-msgstr ""
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2199 printer/printerdrake.pm:2202
 #: printer/printerdrake.pm:2358 printer/printerdrake.pm:2364
 #: printer/printerdrake.pm:2375
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2207
 #, c-format
@@ -12845,6 +13082,9 @@ msgid ""
 "LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony "
 "IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"
 msgstr ""
+"Er prentarinn þinn fjölnotatæki frá HP eða Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3000/3200/3300/4345 með skanna, DeskJet 450, Sony "
+"IJP-V100), HP PhotoSmart eða HP LaserJet 2200?"
 
 #: printer/printerdrake.pm:2226 printer/printerdrake.pm:2358
 #, c-format
@@ -12854,7 +13094,7 @@ msgstr "Set inn %s pakka..."
 #: printer/printerdrake.pm:2233 printer/printerdrake.pm:2365
 #, c-format
 msgid "Only printing will be possible on the %s."
-msgstr ""
+msgstr "Aðeins prentun verður möguleg á %s."
 
 #: printer/printerdrake.pm:2248
 #, c-format
@@ -12864,12 +13104,12 @@ msgstr "Gat ekki fjarlægt gömlu HPOJ stillingarskrána %s fyrir %s! "
 #: printer/printerdrake.pm:2250
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Vinsamlega fjarlægðu skrána handvirkt og endurræstu HPOJ."
 
 #: printer/printerdrake.pm:2258 printer/printerdrake.pm:2375
 #, c-format
 msgid "Checking device and configuring %s..."
-msgstr ""
+msgstr "Athuga tæki og stilli %s..."
 
 #: printer/printerdrake.pm:2277
 #, c-format
@@ -12884,7 +13124,7 @@ msgstr "Set inn SANE pakka..."
 #: printer/printerdrake.pm:2319 printer/printerdrake.pm:2432
 #, c-format
 msgid "Scanning on the %s will not be possible."
-msgstr ""
+msgstr "Skönnun á %s verður ekki möguleg."
 
 #: printer/printerdrake.pm:2334
 #, c-format
@@ -12909,7 +13149,7 @@ msgstr "Skönnun á HP fjölnotatækinu þínu"
 #: printer/printerdrake.pm:2492
 #, c-format
 msgid "Photo memory card access on your HP multi-function device"
-msgstr "Ljósmyndakortalesari á HP fjölnotatækinu þínu"
+msgstr "Ljósmynda-kortalesari á HP fjölnotatækinu þínu"
 
 #: printer/printerdrake.pm:2509
 #, c-format
@@ -12953,7 +13193,7 @@ msgid ""
 "printer unaccessible from Windows clients. Do you really want to use this "
 "name?"
 msgstr ""
-"Prentaranafnið \"%s\" er langra en 12 stafir sem getur gert prentarann óaðgengilegann frá Windows biðlurum. Viltu í alvöru nota "
+"Prentaranafnið \"%s\" er lengra en 12 stafir sem getur gert prentarann óaðgengilegann frá Windows biðlurum. Viltu í alvöru nota "
 "þetta nafn?"
 
 #: printer/printerdrake.pm:2789
@@ -13327,6 +13567,11 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"Prufusíða(ur) hafa verið sendar á prentarann.\n"
+"Það getur tekið nokkurn tíma þar til prentarinn byrjar.\n"
+"Staða prentara:\n"
+"%s\n"
+"\n"
 
 #: printer/printerdrake.pm:3764
 #, c-format
@@ -13334,11 +13579,13 @@ msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
+"Prufusíða(ur) hafa verið sendar á prentarann.\n"
+"Það getur tekið nokkurn tíma þar til prentarinn byrjar.\n"
 
 #: printer/printerdrake.pm:3774
 #, c-format
 msgid "Did it work properly?"
-msgstr ""
+msgstr "Virkaði þetta eðlilega?"
 
 #: printer/printerdrake.pm:3798 printer/printerdrake.pm:5175
 #, c-format
@@ -13352,7 +13599,7 @@ msgid ""
 "the command \"%s <file>\" or a graphical printing tool: \"xpp <file>\" or "
 "\"kprinter <file>\". The graphical tools allow you to choose the printer and "
 "to modify the option settings easily.\n"
-msgstr ""
+msgstr "Til að prenta skrá frá skipanalínunni (skjáglugga) þá getur þú annað hvort notað skipunina \"%s <skrá>\" eða grafískt prent-tól: \"xpp <skrá>\" eða \"kprinter <skrá>\". Grafísku tólin leyfa þér að velja prentara og breyta stillingum auðveldlega.\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13360,7 +13607,7 @@ msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
 "because the file to print is provided by the application.\n"
-msgstr ""
+msgstr "Þessar skipanir getur þú einnig notað í mörgum forritum þar sem boðið er upp á svæðið \"Prent-skipun\", í því tilviki gefur þú sjaldnast upp skráarnafnið því að skráin sem á að prenta er gefin upp af forritinu.\n"
 
 #: printer/printerdrake.pm:3841 printer/printerdrake.pm:3858
 #: printer/printerdrake.pm:3868
@@ -13371,6 +13618,8 @@ msgid ""
 "particular printing job. Simply add the desired settings to the command "
 "line, e. g. \"%s <file>\". "
 msgstr ""
+"\n"
+"Skipunin \"%s\" leyfir þér einnig að breyta stillingum fyrir ákveðið prentverk. Einfaldlega bættu við æskilegum valkostum við skipanalínuna t.d. \"%s <skrá>\". "
 
 #: printer/printerdrake.pm:3844 printer/printerdrake.pm:3884
 #, c-format
@@ -13379,6 +13628,8 @@ msgid ""
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
+"Til að fá að vita um mögulega valkosti fyrir núverandi prentara, skoðið listann hér að neðan eða smellið á \"Prentara-valkostir\" hnappinn.%s%s%s\n"
+"\n"
 
 #: printer/printerdrake.pm:3848
 #, c-format
@@ -13386,6 +13637,8 @@ msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
 msgstr ""
+"Hér er listi af mögulegum prent-valkostum fyrir valinn prentara:\n"
+"\n"
 
 #: printer/printerdrake.pm:3853 printer/printerdrake.pm:3863
 #, c-format
@@ -13403,7 +13656,7 @@ msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
 "because the file to print is provided by the application.\n"
-msgstr ""
+msgstr "Þessar skipanir getur þú einnig notað í mörgum forritum þar sem boðið er upp á svæðið \"Prent-skipun\", í því tilviki gefur þú sjaldnast upp skráarnafnið því að skráin sem á að prenta er gefin upp af forritinu.\n"
 
 #: printer/printerdrake.pm:3860 printer/printerdrake.pm:3870
 #, c-format
@@ -13411,13 +13664,15 @@ msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
 msgstr ""
+"Til að fá lista af mögulegum valkostum fyrir núverandi prentara smelltu á"
+"\"Prentara-valkostir\" hnappinn."
 
 #: printer/printerdrake.pm:3873
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\" or \"%s <file>\".\n"
-msgstr ""
+msgstr "Til að prenta skrá frá skipanalínunni (skjáglugga) notaðu skipunina \"%s <skrá>\" eða \"%s <skrá>\".\n"
 
 #: printer/printerdrake.pm:3877
 #, c-format
@@ -13438,6 +13693,8 @@ msgid ""
 "a particular printing job. Simply add the desired settings to the command "
 "line, e. g. \"%s <file>\".\n"
 msgstr ""
+"\n"
+"Skipanirnar \"%s\" og \"%s\" leyfa þér einnig að breyta stillingum fyrir ákveðið prentverk. Einfaldlega bættu við æskilegum valkostum við skipanalínuna t.d. \"%s <skrá>\".\n"
 
 #: printer/printerdrake.pm:3891
 #, c-format
@@ -13467,7 +13724,7 @@ msgstr "Prenta á prentara \"%s\""
 #: printer/printerdrake.pm:3903
 #, c-format
 msgid "Print option list"
-msgstr "Valkostir á prentara"
+msgstr "Prentara-valkostir"
 
 #: printer/printerdrake.pm:3925
 #, c-format
@@ -13475,14 +13732,14 @@ msgid ""
 "Your %s is set up with HP's HPLIP driver software. This way many special "
 "features of your printer are supported.\n"
 "\n"
-msgstr ""
+msgstr "Prentarinn þinn \"%s\" er settur upp með HPLIP hugbúnaði frá HP. Með því eru margvíslegir aukakostir prentarans studdir.\n"
 
 #: printer/printerdrake.pm:3928
 #, c-format
 msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
-msgstr ""
+msgstr "Skannann í prentaranum má nota með venjulegum SANE hugbúnaði, til dæmis Kooka eða XSane (hvoru tveggja í Margmiðlun/Myndvinnsla valmyndinni). "
 
 #: printer/printerdrake.pm:3929
 #, c-format
@@ -13491,13 +13748,15 @@ msgid ""
 "share your scanner on the network.\n"
 "\n"
 msgstr ""
+"Keyrðu Scannerdrake (Vélbúnaður/Skanner í Mandriva Linux Stjórnborðinu) til að deila skannanum þínum á neti.\n"
+"\n"
 
 #: printer/printerdrake.pm:3933
 #, c-format
 msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
-msgstr ""
+msgstr "Minniskortið í prentaranum þínum er hægt að nota sem venjulegt USB minniskort eða lykil. "
 
 #: printer/printerdrake.pm:3934
 #, c-format
@@ -13506,6 +13765,8 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"Þegar þú setur kort í fjölnotatækið birtist disk-táknmynd á skjáborðinu þínu.\n"
+"\n"
 
 #: printer/printerdrake.pm:3936
 #, c-format
@@ -13534,12 +13795,12 @@ msgstr ""
 #: printer/printerdrake.pm:3941
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - blekmagn/ástand prentara\n"
 
 #: printer/printerdrake.pm:3942
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - hreinsa prent-spíssa\n"
 
 #: printer/printerdrake.pm:3943
 #, c-format
@@ -13602,7 +13863,7 @@ msgstr ""
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
-msgstr ""
+msgstr "CUPS styður ekki prentara á Novell miðlurum né prentara sem senda gögn inn í almennar prentskipanir.\n"
 
 #: printer/printerdrake.pm:4034
 #, c-format
@@ -13610,18 +13871,20 @@ msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
 msgstr ""
+"PDQ styður aðeins staðbundna prentara, fjartengda LPD prentara, og Sökkul/TCP "
+"prentara.\n"
 
 #: printer/printerdrake.pm:4036
 #, c-format
 msgid "LPD and LPRng do not support IPP printers.\n"
-msgstr ""
+msgstr "LPD og LPRng styðja ekki IPP prentara.\n"
 
 #: printer/printerdrake.pm:4038
 #, c-format
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
-msgstr ""
+msgstr "Auk þess er ekki hægt að flytja biðraðir sem hafa verið búnar til af þessu forriti eða \"foomatic-configure\"."
 
 #: printer/printerdrake.pm:4039
 #, c-format
@@ -13641,6 +13904,9 @@ msgid ""
 "Mark the printers which you want to transfer and click \n"
 "\"Transfer\"."
 msgstr ""
+"\n"
+"Merktu prentarana sem þú vilt flytja og smelltu á \n"
+"\"Flytja\"."
 
 #: printer/printerdrake.pm:4043
 #, c-format
@@ -13650,7 +13916,7 @@ msgstr "Ekki flytja prentara"
 #: printer/printerdrake.pm:4044 printer/printerdrake.pm:4060
 #, c-format
 msgid "Transfer"
-msgstr "Flutningur"
+msgstr "Flytja"
 
 #: printer/printerdrake.pm:4056
 #, c-format
@@ -13659,6 +13925,9 @@ msgid ""
 "Click \"Transfer\" to overwrite it.\n"
 "You can also type a new name or skip this printer."
 msgstr ""
+"Prentari sem heitir \"%s\" er þegar til undir %s. \n"
+"Smellti á \"Flytja\" til að yfirskrifa hann.\n"
+"Þú getur einnig gefið upp nýtt nafn eða sleppt þessum prentara."
 
 #: printer/printerdrake.pm:4077
 #, c-format
@@ -13675,12 +13944,12 @@ msgstr "Flyt %s..."
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
-msgstr ""
+msgstr "Þú hefur flutt fyrrum sjálfgefinn prentara (\"%s\"), Ætti hann að vera áfram sjálfgefinn prentari með nýja prentkerfinu %s?"
 
 #: printer/printerdrake.pm:4101
 #, c-format
 msgid "Refreshing printer data..."
-msgstr "Endurles prentara upplýsingar..."
+msgstr "Endurles prentara-upplýsingar..."
 
 #: printer/printerdrake.pm:4111
 #, c-format
@@ -13696,7 +13965,7 @@ msgstr "Stilla nettengingu núna"
 #: printer/printerdrake.pm:4156
 #, c-format
 msgid "Network functionality not configured"
-msgstr "Netmöguleikar ekki skilreindir"
+msgstr "Netmöguleikar ekki skilgreindir"
 
 #: printer/printerdrake.pm:4157
 #, c-format
@@ -13705,7 +13974,7 @@ msgid ""
 "access, but your network is not configured yet. If you go on without network "
 "configuration, you will not be able to use the printer which you are "
 "configuring now. How do you want to proceed?"
-msgstr ""
+msgstr "Þú ert nú að fara að setja upp fjartengdan prentara. Þetta þarfnast nets en netið er ekki stillt enn. Ef þú heldur áfram án þess að setja upp netið, þá munt þú ekki geta notað prentarann sem þú ert að setja upp núna. Hvað viltu gera?"
 
 #: printer/printerdrake.pm:4160
 #, c-format
@@ -13728,7 +13997,7 @@ msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
 "printer again."
-msgstr ""
+msgstr "Netið var ekki í gangi og var ekki hægt að ræsa það. Vinsamlega athugaðu stillingar og vélbúnað. Reyndu síðan að stilla fjartengdan prentara aftur."
 
 #: printer/printerdrake.pm:4202
 #, c-format
@@ -13738,17 +14007,17 @@ msgstr "Endurræsi prentkerfi..."
 #: printer/printerdrake.pm:4233
 #, c-format
 msgid "high"
-msgstr "Hátt"
+msgstr "hátt"
 
 #: printer/printerdrake.pm:4233
 #, c-format
 msgid "paranoid"
-msgstr "Taugaveiklað"
+msgstr "ofsóknaræði"
 
 #: printer/printerdrake.pm:4235
 #, c-format
 msgid "Installing a printing system in the %s security level"
-msgstr ""
+msgstr "Setja upp prentkerfi í öryggisþrepi \"%s\""
 
 #: printer/printerdrake.pm:4236
 #, c-format
@@ -13764,6 +14033,11 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
+"Þú ert um það bil að fara að setja upp prentkerfi %s á kerfi sem keyrir á öryggisþrepi %s.\n"
+"\n"
+"Þetta prentkerfi keyrir sem bakgrunns-forrrit sem bíður eftir verkefnum og sér síðan um þau. Það er einnig hægt að komast að þessu forriti frá tölvum um netið svo þetta er árásarpunktur í tölvuneti. Þess vegna eru aðeins fáein valin forrit ræst á þessu öryggisþrepi.\n"
+"\n"
+"Viltu í alvöru setja upp prentun á þessari tölvu?"
 
 #: printer/printerdrake.pm:4272
 #, c-format
@@ -13816,14 +14090,14 @@ msgid ""
 "directly to the server specified below. Note that it is not possible to "
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
-msgstr ""
+msgstr "í þessum ham það er ekkert staðbundið prentkerfi. allar prentbeiðnir fara beint á miðlarann sem er tiltekinn hér að neðan. Athugið að það er ekki hægt að skilgreina staðbundnar prent-biðraðir og ef miðlarinn er ekki í gangi þá er ekki hægt að prenta frá þessari vél."
 
 #: printer/printerdrake.pm:4400
 #, c-format
 msgid ""
 "Enter the host name or IP of your CUPS server and click OK if you want to "
 "use this mode, click \"Quit\" otherwise."
-msgstr ""
+msgstr "Gefðu upp vélarnafn eða IP-tölu á CUPS miðlara og Smelltu á \"Í Lagi\" ef þú vilt nota þennan ham, smelltu annars á \"Hætta\"."
 
 #: printer/printerdrake.pm:4414
 #, c-format
@@ -13843,19 +14117,19 @@ msgstr "Staðbundið CUPS prentkerfi eða fjartengdur CUPS þjónn?"
 #: printer/printerdrake.pm:4455
 #, c-format
 msgid "The CUPS printing system can be used in two ways: "
-msgstr ""
+msgstr "CUPS prentkerfið má nota á tvo vegu: "
 
 #: printer/printerdrake.pm:4457
 #, c-format
 msgid "1. The CUPS printing system can run locally. "
-msgstr ""
+msgstr "1. CUPS prentkerfið getur keyrt á þessari vél. "
 
 #: printer/printerdrake.pm:4458
 #, c-format
 msgid ""
 "Then locally connected printers can be used and remote printers on other "
 "CUPS servers in the same network are automatically discovered. "
-msgstr ""
+msgstr "Þá er hægt að nota tengda prentara og prentarar tengdir við aðra CUPS miðlara munu á sama neti munu sjálfkrafa verða virkir"
 
 #: printer/printerdrake.pm:4459
 #, c-format
@@ -13864,12 +14138,12 @@ msgid ""
 "are needed: Additional software packages need to be installed, the CUPS "
 "daemon has to run in the background and needs some memory, and the IPP port "
 "(port 631) is opened. "
-msgstr ""
+msgstr "Ókostir við þessa aðferð er að miðlarinn notar meira af tölvuafli og minni. Þörf er á að setja inn aukapakka, CUPS miðlari þarf að keyra í bakgrunni, þarfnast minnis og IPP-gáttin (port 631) þarf að vera opin. "
 
 #: printer/printerdrake.pm:4461
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
-msgstr ""
+msgstr "2. Allar prentbeiðnir eru sjálfkrafa sendar á fjartengdan CUPS miðlara. "
 
 #: printer/printerdrake.pm:4462
 #, c-format
@@ -13877,25 +14151,25 @@ msgid ""
 "Here local resource occupation is reduced to a minimum. No CUPS daemon is "
 "started or port opened, no software infrastructure for setting up local "
 "print queues is installed, so less memory and disk space is used. "
-msgstr ""
+msgstr "Hér er staðbundin tölvunotkun í lágmarki. Enginn CUPS miðlari er ræstur né gátt opnuð, enginn hugbúnaður til að sjá um prentbiðraðir er uppsettur, svo minnisnotkun og disknotkun er í lágmarki. "
 
 #: printer/printerdrake.pm:4463
 #, c-format
 msgid ""
 "Disadvantage is that it is not possible to define local printers then and if "
 "the specified server is down it cannot be printed at all from this machine. "
-msgstr ""
+msgstr "Ókostur er að það er ekki hægt að skilgreina staðbundna prentara og ef tilgreindur miðlari er ekki í gangi þá er ekki hægt að prenta frá þessari vél. "
 
 #: printer/printerdrake.pm:4465
 #, c-format
 msgid "How should CUPS be set up on your machine?"
-msgstr ""
+msgstr "Hvernig ætti CUPS að vera sett upp á þinni vél?"
 
 #: printer/printerdrake.pm:4469 printer/printerdrake.pm:4484
 #: printer/printerdrake.pm:4488 printer/printerdrake.pm:4494
 #, c-format
 msgid "Remote server, specify Name or IP here:"
-msgstr ""
+msgstr "Fjartengdur miðlari, gefðu upp nafn eða IP-tölu hér:"
 
 #: printer/printerdrake.pm:4483
 #, c-format
@@ -13925,7 +14199,7 @@ msgstr "Set inn Foomatic..."
 #: printer/printerdrake.pm:4593
 #, c-format
 msgid "Could not install %s packages, %s cannot be started!"
-msgstr ""
+msgstr "Gat ekki sett inn pakkann %s, ekki hægt að ræsa %s!"
 
 #: printer/printerdrake.pm:4785
 #, c-format
@@ -13933,17 +14207,17 @@ msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
 "it. "
-msgstr ""
+msgstr "Eftirfarandi prentarar eru uppsettir. Tvísmellið á prentara til að breyta stillingum hans; til að gera hann að sjálfgefnum prentara eða til að skoða upplýsingar um hann. "
 
 #: printer/printerdrake.pm:4815
 #, c-format
 msgid "Display all available remote CUPS printers"
-msgstr ""
+msgstr "Sýna alla tiltæka fjartengda CUPS prentara"
 
 #: printer/printerdrake.pm:4816
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
-msgstr ""
+msgstr "Endurnýna prentaralista (til að sýna alla tiltæka CUPS prentara)"
 
 #: printer/printerdrake.pm:4827
 #, c-format
@@ -14008,17 +14282,17 @@ msgstr "Prentaranafn, lýsing, staðsetning"
 #: printer/printerdrake.pm:5171 printer/printerdrake.pm:5248
 #, c-format
 msgid "Printer manufacturer, model, driver"
-msgstr ""
+msgstr "Prentara-framleiðandi, tegund, rekill"
 
 #: printer/printerdrake.pm:5172 printer/printerdrake.pm:5249
 #, c-format
 msgid "Printer manufacturer, model"
-msgstr ""
+msgstr "Prentara-framleiðandi, tegund"
 
 #: printer/printerdrake.pm:5178 printer/printerdrake.pm:5259
 #, c-format
 msgid "Set this printer as the default"
-msgstr "Setja þennan prentara sjálfgefinn"
+msgstr "Setja þennan prentara sem sjálfgefinn"
 
 #: printer/printerdrake.pm:5183 printer/printerdrake.pm:5265
 #: printer/printerdrake.pm:5267
@@ -14080,7 +14354,7 @@ msgstr "Sjálfgefinn prentari"
 #: printer/printerdrake.pm:5339
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
-msgstr ""
+msgstr "Prentarinn \"%s\" er nú settur sem sjálfgefinn prentari."
 
 #: raid.pm:41
 #, c-format
@@ -24510,7 +24784,7 @@ msgid ""
 "Multimedia/Graphics in the applications menu."
 msgstr ""
 "Síðan getur þú skannað skjöl með því að velja \"Xsane\" eða \"Kooka\" í "
-"margmiðlun-grafík valmyndinni."
+"Margmiðlun/Myndvinnsla valmyndinni."
 
 #: standalone/scannerdrake:398
 #, c-format
