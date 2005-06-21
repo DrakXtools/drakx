@@ -10,7 +10,8 @@ our $pxelinux_client_root = $tftp_root . $client_path;
 our $pxelinux_images = $pxelinux_client_root . '/images';
 our $pxelinux_help_file = $pxelinux_client_root . '/help.txt';
 our $pxelinux_message_file = $pxelinux_client_root . '/messages';
-our $pxelinux_config_file = $pxelinux_client_root . '/pxelinux.cfg/default';
+my $pxelinux_config_root = $pxelinux_client_root . '/pxelinux.cfg';
+our $pxelinux_config_file = $pxelinux_config_root . '/default';
 our $pxe_config_file = '/etc/pxe.conf';
 
 my @global_pxelinux_settings = qw(PROMPT DEFAULT DISPLAY TIMEOUT F1);
@@ -177,6 +178,105 @@ sub write_pxe_conf {
     s/mtftp_address.*/mtftp_address=$ip_address/;
     s/domain.*/domain=$domainname/;
   } $pxe_config_file;
+}
+
+
+sub get_pxelinux_config_file_for_mac_address {
+    my ($mac_address) = @_;
+    #- 01 is the hardware type: Ethernet (ARP type 1)
+    $pxelinux_config_root . "/" . join('-', '01', split(/:/, $mac_address));
+}
+
+sub set_profile_for_mac_address {
+    my ($profile, $to_install, $mac_address) = @_;
+    if ($profile) {
+	symlinkf("profiles/" . ($to_install ? "install/" : "boot/") . $profile, get_pxelinux_config_file_for_mac_address($mac_address));
+    } else {
+	unlink get_pxelinux_config_file_for_mac_address($mac_address);
+    }
+}
+
+#- returns (profile_type, profile_name)
+sub pxelinux_profile_from_file {
+    my ($file) = @_;
+    $file =~ m!(?:^|/)profiles/(\w+)/(.*)?$!;
+}
+
+sub read_pxelinux_profiles() {
+    my %profiles_conf;
+
+    foreach (all($pxelinux_config_root)) {
+	my $file = $pxelinux_config_root . '/' . $_;
+        if (-l $file && /^01(?:-([0-9a-z]{2}))+$/) {
+	    #- per MAC address settings
+	    #- the filename looks like 01-aa-bb-cc-dd-ee-ff
+	    #- where AA:BB:CC:DD:EE:FF is the MAC address
+	    my ($type, $name) = pxelinux_profile_from_file(readlink($file));
+	    tr/-/:/;
+	    my $mac_address = substr($_, 3);
+	    $profiles_conf{per_mac}{$mac_address} = { profile => $name, to_install => $type eq 'install' };
+	}
+    }
+
+    foreach my $type (qw(boot install)) {
+        my $root = $pxelinux_config_root . '/profiles/' . $type;
+        mkdir_p($root);
+        $profiles_conf{profiles}{$type}{$_} = 1 foreach all($root);
+    }
+
+    \%profiles_conf;
+}
+
+#- returns (pxelinux entries file, help file)
+sub get_pxelinux_profile_path {
+    my ($profile, $type) = @_;
+    my $root = $pxelinux_config_root . '/profiles/' . $type;
+    "$root/$profile", "$root/help-$profile.txt";
+}
+
+sub list_pxelinux_profiles {
+    my ($profiles_conf) = @_;
+    sort(uniq(map { keys %{$profiles_conf->{profiles}{$_}} } qw(boot install)));
+}
+
+sub find_next_profile_name {
+    my ($profiles_conf, $prefix) = @_;
+    my $i = 1;
+    /^$prefix(\d+)$/ && $1 >= $i and $i = $1 + 1 foreach network::pxe::list_pxelinux_profiles($profiles_conf);
+    "$prefix$i";
+}
+
+sub add_empty_profile {
+    my ($profiles_conf) = @_;
+    my $profile = find_next_profile_name($profiles_conf, "profile_");
+    $profiles_conf->{profiles}{boot}{$profile} = 1 ;
+}
+
+sub copy_profile_for_type {
+    my ($profile, $clone, $type) = @_;
+    my ($pxe, $help) = get_pxelinux_profile_path($profile, $type);
+    my ($clone_pxe, $clone_help) = get_pxelinux_profile_path($clone, $type);
+    -r $pxe && cp_f($pxe, $clone_pxe);
+    -r $help && cp_f($help, $clone_help);
+}
+
+sub clone_profile {
+    my ($profiles_conf, $profile) = @_;
+    my $clone = find_next_profile_name($profiles_conf, $profile);
+    if (exists $profiles_conf->{profiles}{install}{$profile}) {
+	$profiles_conf->{profiles}{install}{$clone} = 1;
+	copy_profile_for_type($profile, $clone, 'install');
+    }
+    $profiles_conf->{profiles}{boot}{$clone} = 1;
+    copy_profile_for_type($profile, $clone, 'boot');
+}
+
+sub remove_profile {
+    my ($profiles_conf, $profile) = @_;
+    foreach my $type (qw(boot install)) {
+	delete $profiles_conf->{profiles}{$type}{$profile};
+	unlink foreach get_pxelinux_profile_path($profile, $type);
+    }
 }
 
 1;
