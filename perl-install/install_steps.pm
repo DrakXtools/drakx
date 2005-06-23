@@ -647,7 +647,7 @@ sub configureNetwork {
 	    http_proxy => $proxy,
 	    ftp_proxy => $proxy,
 	});
-	network::network::proxy_configure($::o->{miscellaneous});
+	network::network::proxy_configure($o->{miscellaneous});
     }
 }
 
