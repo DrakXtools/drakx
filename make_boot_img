@@ -744,6 +744,32 @@ sub isolinux {
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom'));
+
+    xbox_stage1() if arch() =~ /i.86/;
+}
+
+sub xbox_stage1() {
+    my $dir = 'isolinux/xbox';
+
+    eval { rm_rf($dir) }; mkdir_p($dir);
+
+    my $xbox_kernel = find { /xbox/ } all('kernel/all.kernels') or return;
+
+    _ "cp kernel/all.kernels/$xbox_kernel/vmlinuz $dir";
+    initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$xbox_kernel");
+    rename("images/all.rdz-$xbox_kernel", "$dir/initrd");
+
+    _ "cp /usr/share/cromwell/xromwell-installer.xbe $dir/default.xbe";
+    output("$dir/linuxboot.cfg", <<EOF);
+kernel $dir/vmlinuz
+initrd $dir/initrd
+append root=/dev/ram3 ramdisk_size=36000 automatic=method:cdrom
+EOF
+}
+
+sub xromwell {
+    _ "cp /usr/share/cromwell/xromwell_installer.xbe default.xbe";
+    _ "cp /usr/share/cromwell/linuxboot.cfg .";
 }
 
 sub boot_iso {
