@@ -1068,15 +1068,15 @@ sub summary {
 	},
     };
 
-    $::o->{miscellaneous} ||= {};
+    $o->{miscellaneous} ||= {};
     push @l, {
 	group => N("Network & Internet"),
 	label => N("Proxies"),
-	val => sub { $::o->{miscellaneous}{http_proxy} || $::o->{miscellaneous}{ftp_proxy} ? N("configured") : N("not configured") },
+	val => sub { $o->{miscellaneous}{http_proxy} || $o->{miscellaneous}{ftp_proxy} ? N("configured") : N("not configured") },
 	clicked => sub { 
 	    require network::network;
-         network::network::miscellaneous_choose($o, $::o->{miscellaneous});
-         network::network::proxy_configure($::o->{miscellaneous}) if !$::testing;
+	    network::network::miscellaneous_choose($o, $o->{miscellaneous});
+	    network::network::proxy_configure($o->{miscellaneous}) if !$::testing;
 	},
     };
 
