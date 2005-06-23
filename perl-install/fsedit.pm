@@ -105,7 +105,7 @@ sub handle_dmraid {
 
     devices::make($_->{device}) foreach @$drives;
 
-    require fs::dmraid;
+    eval { require fs::dmraid; 1 } or return;
 
     my @pvs = fs::dmraid::pvs();
     my @vgs = fs::dmraid::vgs();
