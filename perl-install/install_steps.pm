@@ -637,6 +637,18 @@ sub configureNetwork {
     require network::network;
     network::network::configure_network($o->{net}, $o, $o->{modules_conf});
     configure_firewall($o) if !$o->{isUpgrade};
+
+    #- only a http proxy can be used by stage1
+    #- the method is http even for ftp connections through a http proxy
+    #- use this http proxy for both http and ftp connections
+    if ($o->{method} eq "http" && $ENV{PROXY}) {
+	my $proxy = "http://$ENV{PROXY}" . ($ENV{PROXYPORT} && ":$ENV{PROXYPORT}");
+	add2hash($o->{miscellaneous} ||= {}, {
+	    http_proxy => $proxy,
+	    ftp_proxy => $proxy,
+	});
+	network::network::proxy_configure($::o->{miscellaneous});
+    }
 }
 
 sub configure_firewall {
