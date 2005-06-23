@@ -155,7 +155,6 @@ sub version() {
 }
 
 sub dir { $mirrors{$_[0]}[1] }
-sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
     my ($file, $o_host) = @_;
@@ -210,15 +209,6 @@ sub getPackages {
 	pkgs::selectPackagesToUpgrade($packages, $update_medium);
     }
     return $update_medium;
-}
-
-sub get {
-    my ($mirror, $dir, @files) = @_;
-    foreach (@files) {
-	log::l("crypto: downloading $_");
-	ftp($mirror)->get($_, "$dir/$_"); 
-    }
-    int @files;
 }
 
 1;
