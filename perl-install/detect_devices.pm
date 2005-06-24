@@ -449,7 +449,7 @@ sub getSoundDevices() {
     modules::probe_category('multimedia/sound');
 }
 
-sub isTVcard { member($_[0]{driver}, qw(bttv saa7134)) }
+sub isTVcard { member($_[0]{driver}, qw(bttv cx88 saa7134)) }
 
 sub getTVcards() { modules::probe_category('multimedia/tv') }
 
