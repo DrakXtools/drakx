@@ -849,7 +849,6 @@ sub openInstallLog() {
     open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
     CORE::select((CORE::select($LOG), $| = 1)[0]);
     c::rpmErrorSetCallback(fileno $LOG);
-#-    c::rpmSetVeryVerbose();
     $LOG;
 }
 
@@ -883,14 +882,6 @@ sub rpmDbOpen {
 }
 
 sub rpmDbOpenForInstall() {
-
-    #- there is a bug in rpm 4.2 where all operations for accessing rpmdb files are not
-    #- always done using prefix, we need to setup a symlink in /var/lib/rpm for that ...
-    if (! -d '/var/lib/rpm') {
-	mkdir_p('/var/lib');
-	symlinkf "$::prefix/var/lib/rpm", "/var/lib/rpm";
-    }
-
     my $db = URPM::DB::open($::prefix, 1);
     $db and log::l("opened rpmdb for writing in $::prefix");
     $db;
