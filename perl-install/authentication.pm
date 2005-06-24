@@ -303,7 +303,7 @@ sub set {
 
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install(qw(ypbind autofs));
-	my $domain = $net->{auth}{NISDOMAIN};
+	my $domain = $net->{network}{NISDOMAIN};
 	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can not use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
 	substInFile {
