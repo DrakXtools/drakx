@@ -86,8 +86,6 @@ my $cfg_file = $< ? "$ENV{HOME}/.net_monitorrc" : "/etc/sysconfig/net_monitorrc"
 my %config = getVarsFromSh($cfg_file);
 my $use_same_scale = text2bool($config{use_same_scale});
 
-MDK::Common::Globals::init(in => $in);
-
 gtkadd($window1->{window},
        gtkpack_(Gtk2::VBox->new(0,5),
                 1, gtkpack_(Gtk2::HBox->new(0,5),
