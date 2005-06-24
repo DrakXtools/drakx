@@ -30,7 +30,7 @@ authentication::ask_parameters($in, $net, $authentication, $kind) or goto main;
 
 eval { 
     authentication::set($in, $net, $authentication);
-    network::network::write_conf($net);
+    network::network::write_network_conf($net); #- for NISDOMAIN
 };
 if (my $err = $@) {
     $in->ask_warn(N("Error"), formatError($err));
