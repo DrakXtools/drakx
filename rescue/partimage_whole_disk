@@ -194,14 +194,15 @@ sub rest_all {
     foreach (@{$h{created}}) {
 	fs::format::part_raw($_, undef);
     }
+    
+    run_program::run('install_bootloader');
 
     if (my @missing = grep { $_->{missing} } @{$h{part_list}}) {
 	my $missing = join('|', map { quotemeta($_->{device}) } @missing);
 	log::l("drop missing devices from fstab: $missing");
+	$::prefix = '/mnt';
 	substInFile { $_ = '' if m!^/dev/($missing)\s! } "$::prefix/etc/fstab";
     }
-    
-    run_program::run('install_bootloader');
 }
 
 sub lst_fields() { qw(device size fs_type saved) }
