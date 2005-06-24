@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.26mdk
+Release: 0.27mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jun 24 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.27mdk
+- diskdrake (pixel):
+  o enhanced dmraid support
+  o some free space computing for LVM
+  o support labels for more file systems
+- drakauth (blino, pixel):
+  o fix crash (#16564)
+  o fix NISDOMAIN
+- localedrake: add scim-ccinput support (funda wang)
+- net_monitor: fix crash (blino)
+- more PXE infrastructure (blino)
+
 * Mon Jun 20 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.26mdk
 - drakconnect: don't strip VLAN and MTU fields from ifcfg files (blino)
 - diskdrake: initial dmraid support (pixel)
