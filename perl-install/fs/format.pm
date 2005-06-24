@@ -10,9 +10,9 @@ use fs::loopback;
 use log;
 
 my %cmds = (
-    ext2     => [ 'e2fsprogs', 'mke2fs', '-F' ],
-    ext3     => [ 'e2fsprogs', 'mke2fs', '-F', '-j' ],
-    reiserfs => [ 'reiserfsprogs', 'mkreiserfs', '-ff' ],
+    ext2     => [ 'e2fsprogs', 'mkfs.ext2', '-F' ],
+    ext3     => [ 'e2fsprogs', 'mkfs.ext2', '-F', '-j' ],
+    reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],
     jfs      => [ 'jfsprogs', 'mkfs.jfs', '-f' ],
     hfs      => [ 'hfsutils', 'hformat' ],
@@ -115,8 +115,8 @@ sub part_raw {
 
     my @args = ($cmd, @first_options, @options, devices::make($dev));
 
-    if ($cmd eq 'mke2fs' && $wait_message) {
-	mke2fs($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+    if ($cmd eq 'mkfs.ext2' && $wait_message) {
+	mkfs_ext2($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
 	run_program::raw({ timeout => 60 * 60 }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
@@ -128,7 +128,7 @@ sub part_raw {
     set_isFormatted($part, 1);
 }
 
-sub mke2fs {
+sub mkfs_ext2 {
     my ($wait_message, @args) = @_;
 
     open(my $F, "@args |");
