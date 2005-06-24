@@ -80,10 +80,10 @@ sub ask_parameters {
     }
 
     if ($kind eq 'LDAP') {
-	$net->{auth}{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
+	$authentication->{LDAPDOMAIN} ||= domain_to_ldap_domain($net->{resolv}{DOMAINNAME});
 	$in->ask_from('',
 		     N("Authentication LDAP"),
-		     [ { label => N("LDAP Base dn"), val => \$net->{auth}{LDAPDOMAIN} },
+		     [ { label => N("LDAP Base dn"), val => \$authentication->{LDAPDOMAIN} },
 		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
     } elsif ($kind eq 'AD') {
@@ -142,14 +142,14 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 
 	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME} if $kind eq 'SMBKRB';
 	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
-	$net->{auth}{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
+	$authentication->{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
 	my $anonymous;
 	$in->ask_from('',
 		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
 		        [ if_($kind eq 'SMBKRB', 
 			  { label => N("Domain"), val => \$authentication->{AD_domain} }
 			     ),
-			  { label => N("Windows Domain"), val => \$net->{auth}{WINDOMAIN} },
+			  { label => N("Windows Domain"), val => \$authentication->{WINDOMAIN} },
 			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 			  { label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
@@ -229,7 +229,7 @@ sub set {
     } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
-	my $domain = $net->{auth}{LDAPDOMAIN} || do {
+	my $domain = $authentication->{LDAPDOMAIN} || do {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
 	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
@@ -323,7 +323,7 @@ sub set {
 #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($kind eq 'winbind') {
 
-	my $domain = uc $net->{auth}{WINDOMAIN};
+	my $domain = uc $authentication->{WINDOMAIN};
 	
 	$in->do_pkgs->install('samba-winbind');
 
@@ -341,7 +341,7 @@ sub set {
 	});
     } elsif ($kind eq 'SMBKRB') {
 	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
-	my $domain = uc $net->{auth}{WINDOMAIN};
+	my $domain = uc $authentication->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);
