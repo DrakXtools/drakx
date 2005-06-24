@@ -115,7 +115,7 @@ sub scan4channels() {
 
 my @devices = detect_devices::getTVcards();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
-my ($devices, $devices_ok) = partition { detect_devices::isTVcard($_) } @devices;
+my ($devices, $devices_ok) = partition { detect_devices::isTVcardConfigurable($_) } @devices;
 
 my $modules_conf;
 
@@ -124,7 +124,7 @@ if (@devices = @$devices) {
     my $not_canceled = 1;
     # TODO: That need some work for multiples TV cards
     each_index {
-	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcard($_) } @devices)) {
+	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcardConfigurable($_) } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
 
