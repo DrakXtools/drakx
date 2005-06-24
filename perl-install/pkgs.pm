@@ -881,6 +881,10 @@ sub rpmDbOpen {
     $db;
 }
 
+sub rpmDbCleanLogs() {
+    unlink glob("$::prefix/var/lib/rpm/__db.*");
+}
+
 sub rpmDbOpenForInstall() {
     my $db = URPM::DB::open($::prefix, 1);
     $db and log::l("opened rpmdb for writing in $::prefix");
@@ -1036,6 +1040,8 @@ sub install {
     my %packages;
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
+    #- avoid potential problems with rpm db personality change
+    rpmDbCleanLogs();
 
     return if !@$toInstall;
 
