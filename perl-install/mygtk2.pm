@@ -435,6 +435,7 @@ sub _gtk_any_Window {
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
+	$w->set_default_size(delete $opts->{default_width} || -1, delete $opts->{default_height} || -1) if exists $opts->{default_width} || exists $opts->{default_height};
 	my $icon_no_error = $opts->{icon_no_error};
 	if (my $name = delete $opts->{icon} || delete $opts->{icon_no_error}) {
 	    if (my $f = _find_imgfile($name)) {
