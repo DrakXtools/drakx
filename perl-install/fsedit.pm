@@ -107,16 +107,13 @@ sub handle_dmraid {
 
     eval { require fs::dmraid; 1 } or return;
 
-    my @pvs = fs::dmraid::pvs();
     my @vgs = fs::dmraid::vgs();
-    log::l(sprintf('dmraid: pvs = [%s], vgs = [%s]',
-		   join(' ', @pvs),
-		   join(' ', map { $_->{device} } @vgs)));
+    log::l(sprintf('dmraid: ' . join(' ', map { "$_->{device} [" . join(' ', @{$_->{disks}}) . "]" } @vgs)));
 
     my @used_hds = map {
 	my $part = fs::get::device2part($_, $drives) or log::l("handle_dmraid: can't find $_ in known drives");
 	if_($part, $part);
-    } @pvs;
+    } map { @{$_->{disks}} } @vgs;
 
     @$drives = difference2($drives, \@used_hds);
 

@@ -40,16 +40,18 @@ sub pvs_and_vgs() {
 }
 
 sub vgs() {
+    my @l = pvs_and_vgs();
+    my %vg2pv; push @{$vg2pv{$_->{vg}}}, $_->{pv} foreach @l;
     map {
 	my $dev = "mapper/$_->{vg}";
 	my $vg = fs::subpart_from_wild_device_name("/dev/$dev");
-	add2hash($vg, { media_type => 'hd', prefix => $dev, bus => "dm_$_->{format}" });
-	$vg;
-    } grep { $_->{status} eq 'ok' } uniq_ { $_->{vg} } pvs_and_vgs();
-}
+	add2hash($vg, { media_type => 'hd', prefix => $dev, bus => "dm_$_->{format}", disks => $vg2pv{$_->{vg}} });
 
-sub pvs() {
-    map { $_->{pv} } grep { $_->{status} eq 'ok' } pvs_and_vgs();
+	#- device should exist, created by dmraid(8) using libdevmapper
+	#- if it doesn't, we suppose it's not in use
+	if_(-e "/dev/$dev", $vg); 
+
+    } grep { $_->{status} eq 'ok' } uniq_ { $_->{vg} } @l;
 }
 
 1;
