@@ -4,6 +4,7 @@ use strict;
 use common;
 use run_program;
 use c;
+use Socket;
 
 sub write_secret_backend {
     my ($a, $b) = @_;
@@ -179,7 +180,8 @@ sub find_matching_interface {
 sub get_default_gateway_interface {
     my ($net) = @_;
     my @intfs = sort keys %{$net->{ifcfg}};
-    `$::prefix/sbin/ip route show` =~ /^default.*\s+dev\s+(\S+)/m && $1 ||
+    my $routes = get_routes();
+    (find { $routes->{$_}{gateway} } keys %$routes) ||
     $net->{network}{GATEWAYDEV} ||
     $net->{network}{GATEWAY} && find_matching_interface($net, $net->{network}{GATEWAY}) ||
     (find { get_interface_type($net->{ifcfg}{$_}) eq 'adsl' } @intfs) ||
@@ -190,11 +192,9 @@ sub get_default_gateway_interface {
 }
 
 sub get_interface_status {
-    my ($gw_intf) = @_;
-    my @routes = `$::prefix/sbin/ip route show`;
-    my $is_up = any { /\s+dev\s+$gw_intf(?:\s+|$)/ } @routes;
-    my ($gw_address) = join('', @routes) =~ /^default\s+via\s+(\S+).*\s+dev\s+$gw_intf(?:\s+|$)/m;
-    return $is_up, $gw_address;
+    my ($intf) = @_;
+    my $routes = get_routes();
+    return $routes->{$intf}{network}, $routes->{$intf}{gateway};
 }
 
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
@@ -228,6 +228,24 @@ sub get_interface_ip_address {
     my ($net, $interface) = @_;
     `/sbin/ip addr show dev $interface` =~ /^\s*inet\s+([\d.]+)/m && $1 ||
     $net->{ifcfg}{$interface}{IPADDR};
+}
+
+sub host_hex_to_dotted {
+    my ($address) = @_;
+    inet_ntoa(pack('N', unpack('L', pack('H8', $address))));
+}
+
+sub get_routes {
+    my %routes;
+    foreach (cat_("/proc/net/route")) {
+	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+(?:[0-9A-F]+)\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
+	    hex($2) and $routes{$1}{network} = host_hex_to_dotted($2);
+	    hex($3) and $routes{$1}{gateway} = host_hex_to_dotted($3);
+           $4 and $routes{$1}{metric} = $4;
+	}
+    }
+    #- TODO: handle IPv6 with /proc/net/ipv6_route
+    \%routes;
 }
 
 1;
