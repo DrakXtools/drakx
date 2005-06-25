@@ -235,7 +235,7 @@ sub host_hex_to_dotted {
     inet_ntoa(pack('N', unpack('L', pack('H8', $address))));
 }
 
-sub get_routes {
+sub get_routes() {
     my %routes;
     foreach (cat_("/proc/net/route")) {
 	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+(?:[0-9A-F]+)\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
