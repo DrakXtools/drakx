@@ -57,9 +57,10 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
         substInFile { 
             log::explanations("switch X.org driver from nvidia to nv") if /Driver "nv.+"/;
             s!Driver "nv.*"!Driver "nv"!g; 
-        } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+        } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config", "/etc/X11/xorg.conf";
     }
 }
+exit 0;
 
 my $is_globetrotter = -f '/usr/sbin/mdkmove';
 
