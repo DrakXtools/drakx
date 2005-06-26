@@ -527,6 +527,17 @@ unlink $_ foreach glob("$::prefix/core.*");
 
 
 system("rsync -rvltp /export/ $::prefix/mnt/packages/") if !$rescue;
+if ($rescue) {
+    foreach (glob("$::prefix/home/*/")) {
+        next if /lost\+found/;
+        my (undef, undef, undef, undef, $uid) = stat($_);
+        my $name = $_;
+        $name =~ s!/$!!;
+        $name =~ s!.*/!!;
+        run_program::rooted($::prefix, "adduser", "-u", $uid, "$name");
+    }
+}
+
 unlink $_ foreach glob("$::prefix/var/lib/urpmi/*");
 run_program::rooted($::prefix, 'urpmi.addmedia', '--probe-hdlist', $_, "/mnt/packages/media/$_/") foreach qw(main contrib firmwares dkms modules plugins);
 
