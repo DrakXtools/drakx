@@ -55,7 +55,7 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
         # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     } else {
         substInFile { 
-            log::explanations("switch XFree86 driver from nvidia to nv") if /Driver "nv.+"/;
+            log::explanations("switch X.org driver from nvidia to nv") if /Driver "nv.+"/;
             s!Driver "nv.*"!Driver "nv"!g; 
         } $_ foreach grep { -e $_ } "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     }
