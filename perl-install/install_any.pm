@@ -415,7 +415,7 @@ Do you have a supplementary installation media to configure?",
 	'', $msg,
 	[ {
 	    val => \my $suppl,
-	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ],
+	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)"), N_("Network (nfs)") ],
 	    type => 'list',
 	    format => \&translate,
 	} ],
@@ -461,6 +461,7 @@ sub selectSupplMedia {
 	    'CD-ROM' => 'cdrom',
 	    'Network (http)' => 'http',
 	    'Network (ftp)' => 'ftp',
+	    'Network (nfs)' => 'nfs',
 	}->{$suppl};
 	my $medium_name = int(keys %{$o->{packages}{mediums}}) + 1;
 	#- configure network if needed
@@ -514,6 +515,19 @@ sub selectSupplMedia {
 		$url = $o->askSupplMirror(N("URL of the mirror?")) or return 'error';
 		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
+	    } elsif ($suppl_method eq 'nfs') {
+		$o->ask_from_(
+		    { title => N("NFS setup"), messages => N("Please enter the hostname and directory of your NFS media") },
+		    [ { label => N("Hostname of the NFS mount ?"), val => \my $host }, { label => N("Directory"), val => \my $dir } ],
+		) or return 'error';
+		$dir =~ s!/+\z!!; $dir eq '' and $dir = '/';
+		return 'error' if !$host || !$dir || substr($dir, 0, 1) ne '/';
+		my $mediadir = '/mnt/nfsmedia' . $medium_name;
+		$url = "$::prefix$mediadir";
+		-d $url or mkdir_p($url);
+		eval { fs::mount("$host:$dir", "$::prefix$mediadir", 'nfs'); 1 }
+		    or do { log::l("Mount failed: $@"); return 'error' };
+		#- TODO add $mediadir in fstab for post-installation
 	    } else {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
 		$url =~ s!/+\z!!;
@@ -543,10 +557,12 @@ sub selectSupplMedia {
 		    http::getFile("$url/media_info/hdlist.cz");
 		} elsif ($suppl_method eq 'ftp') {
 		    getFile("media_info/hdlist.cz");
+		} elsif ($suppl_method eq 'nfs') {
+		    getFile("$url/media_info/hdlist.cz");
 		} else { undef }
 	    };
 	    if (!defined $f) {
-		log::l($@) if $@;
+		log::l($@ || "hdlist.cz unavailable");
 		#- no hdlist found
 		$o->ask_warn('', N("Can't find a package list file on this mirror. Make sure the location is correct."));
 		useMedium($prev_asked_medium);
