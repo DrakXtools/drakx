@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.27mdk
+Release: 0.28mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jun 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.28mdk
+- drakxtv:
+  o enable to configure cx88 driver
+  o update card lists from kernel-2.6.12
+- net_applet: reduce fork()/exec() pressure on system (blino)
+- service_harddrake: fix switch from nvidia to nv for X.org
+
 * Fri Jun 24 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.27mdk
 - diskdrake (pixel):
   o enhanced dmraid support
