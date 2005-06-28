@@ -525,9 +525,11 @@ sub selectSupplMedia {
 		my $mediadir = '/mnt/nfsmedia' . $medium_name;
 		$url = "$::prefix$mediadir";
 		-d $url or mkdir_p($url);
-		eval { fs::mount("$host:$dir", "$::prefix$mediadir", 'nfs'); 1 }
+		my $dev = "$host:$dir";
+		eval { fs::mount($dev, $url, 'nfs'); 1 }
 		    or do { log::l("Mount failed: $@"); return 'error' };
-		#- TODO add $mediadir in fstab for post-installation
+		#- add $mediadir in fstab for post-installation
+		push @{$o->{all_hds}{nfss}}, { fs_type => 'nfs', mntpoint => $mediadir, device => $dev, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 	    } else {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
 		$url =~ s!/+\z!!;
