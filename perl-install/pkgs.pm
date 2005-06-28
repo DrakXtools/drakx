@@ -1445,7 +1445,8 @@ use strict;
 #-	key_ids (hashref, values are key ids)
 #-	medium (number of the medium)
 #-	method
-#-	prefix (for install_urpmi)
+#-	prefix
+#-	finalprefix (for install_urpmi)
 #-	pubkey
 #-	rpmsdir
 #-	selected

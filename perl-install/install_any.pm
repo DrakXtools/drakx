@@ -596,10 +596,13 @@ sub selectSupplMedia {
 
 sub setup_suppl_medium {
     my ($supplmedium, $url, $suppl_method) = @_;
-    $supplmedium->{prefix} = $url; #- for install_urpmi
+    $supplmedium->{prefix} = $url;
     if ($suppl_method eq 'ftp') {
 	$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 	    and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
+    } elsif ($suppl_method eq 'nfs') { #- once installed, path changes
+	$supplmedium->{finalprefix} = $supplmedium->{prefix};
+	$supplmedium->{finalprefix} =~ s/^\Q$::prefix//;
     }
     $supplmedium->select;
     $supplmedium->{method} = $suppl_method;
@@ -763,7 +766,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     ejectCdrom() if $o->{method} eq "cdrom";
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
-    #- shoud be enough to fool errorOpeningFile
+    #- should be enough to fool errorOpeningFile
     $current_medium = 1;
     our $copied_rpms_on_disk = 1;
 }
@@ -1016,13 +1019,15 @@ sub install_urpmi {
 	if ($_->ignored || $_->selected) {
 	    my $curmethod = $_->method || $::o->{method};
 	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrivalinux" : '')
-		|| $_->{prefix} || ${{ nfs => "file://mnt/nfs", 
-					   disk => "file:/" . $hdInstallPath,
-					   ftp => $ENV{URLPREFIX},
-					   http => $ENV{URLPREFIX},
-					   cdrom => "removable://mnt/cdrom" }}{$curmethod} ||
-		       #- for live_update or live_install script.
-		       readlink("/tmp/image/media") =~ m,^(/.*)/media/*$, && "removable:/$1") . "/$_->{rpmsdir}";
+		|| $_->{finalprefix}
+		|| $_->{prefix}
+		|| ${{ nfs => "file://mnt/nfs", 
+		       disk => "file:/" . $hdInstallPath,
+		       ftp => $ENV{URLPREFIX},
+		       http => $ENV{URLPREFIX},
+		       cdrom => "removable://mnt/cdrom" }}{$curmethod}
+		|| #- for live_update or live_install script.
+		   readlink("/tmp/image/media") =~ m,^(/.*)/media/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 	    #- use list file only if visible password or macro.
 	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- }
 
