@@ -254,7 +254,7 @@ foreach my $i (0..99) {
 my $server = $intf[0]{IPADDR} || $net->{network}{HOSTNAME};
 push @{$pxelinux_cfg->{entry}}, { label => $label, 
 				  kernel => "images/alt0/vmlinuz",
-				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$net->{resolv}{dnsServer},server:$server,directory:$dir root=/dev/ram3" };
+				  append => "initrd=images/alt0/all.rdz vga=788 " . ($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "") . "automatic=met:http,netw:dhcp,int:eth0,dns:$net->{resolv}{dnsServer},ser:$server,dir:$dir" };
 build_pxelinux_cfg($pxelinux_cfg, "/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 
 #- make directory available for httpd.

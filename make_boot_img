@@ -5,7 +5,7 @@ use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
 
-my $default_append = "ramdisk_size=128000";
+my $default_append = '';
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
 my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
 my $default_vga = "vga=788 splash=silent";
@@ -137,6 +137,7 @@ F3 boot.msg
 EOF
 
     my @l = map {
+	$_->{append} =~ s/\s+/ /g;
 	"label $_->{label}\n" .
 	"  kernel $_->{kernel}\n" .
 	($_->{initrd} ? "  append initrd=$_->{initrd} $_->{append}\n" : '');
