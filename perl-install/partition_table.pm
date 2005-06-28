@@ -119,8 +119,8 @@ sub assign_device_numbers {
 	    my $dev = $hd->{prefix} . $i;
 	    my $renumbered = $_->{device} && $dev ne $_->{device};
 	    if ($renumbered) {
-		require fs;
-		eval { fs::umount_part($_) }; #- at least try to umount it
+		require fs::mount;
+		eval { fs::mount::umount_part($_) }; #- at least try to umount it
 		will_tell_kernel($hd, del => $_, 'delay_del');
 		push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ];
 	    }

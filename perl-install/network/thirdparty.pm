@@ -321,9 +321,9 @@ sub find_file_on_floppy {
     my $h;
     $in->ask_okcancel(N("Insert floppy"),
 		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
-    if (eval { fs::mount(devices::make($floppy), $mountpoint, 'vfat', 'readonly'); 1 }) {
+    if (eval { fs::mount::mount(devices::make($floppy), $mountpoint, 'vfat', 'readonly'); 1 }) {
 	log::explanations("Mounting floppy device $floppy in $mountpoint");
-	$h = before_leaving { fs::umount($mountpoint) };
+	$h = before_leaving { fs::mount::umount($mountpoint) };
 	if ($h->{file} = first(glob("$mountpoint/$file"))) {
 	    log::explanations("Found $h->{file} on floppy device");
 	} else {

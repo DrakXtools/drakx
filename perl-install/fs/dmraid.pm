@@ -10,6 +10,7 @@ use common;
 use modules;
 use devices;
 use fs::type;
+use fs::wild_device;
 use run_program;
 
 
@@ -44,7 +45,7 @@ sub vgs() {
     my %vg2pv; push @{$vg2pv{$_->{vg}}}, $_->{pv} foreach @l;
     map {
 	my $dev = "mapper/$_->{vg}";
-	my $vg = fs::subpart_from_wild_device_name("/dev/$dev");
+	my $vg = fs::wild_device::to_subpart("/dev/$dev");
 	add2hash($vg, { media_type => 'hd', prefix => $dev, bus => "dm_$_->{format}", disks => $vg2pv{$_->{vg}} });
 
 	#- device should exist, created by dmraid(8) using libdevmapper

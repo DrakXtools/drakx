@@ -3,6 +3,8 @@ package common; # $Id$
 use MDK::Common;
 use diagnostics;
 use strict;
+
+use log;
 use run_program;
 
 use Exporter;

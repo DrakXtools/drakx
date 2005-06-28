@@ -312,7 +312,7 @@ sub installPackages() {
     $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
     pkgs::install(0, \@toInstall, $o->{packages});
     
-    eval { fs::umount("$::prefix/proc") };
+    eval { fs::mount::umount("$::prefix/proc") };
 }
 
 sub config_X_proprietary_drivers() {
@@ -340,14 +340,14 @@ my $cleaner = before_leaving {
   print "Cleaning on exiting\n";
   print "- Umounting partitions:\n";
   print "\tumounting /proc\n";
-  eval { fs::umount("$::prefix/proc") };
+  eval { fs::mount::umount("$::prefix/proc") };
   # fs::umount("$::prefix/$_") foreach 'mnt/packages', 'mnt/share', 'home', '';
   if ($fstab) {
     print "\tumounting everything else\n";
-      eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
+      eval { fs::mount::umount_all($fstab) } or system("umount $::prefix"); 
   }
   print "\tumounting /tmp\n";
-  eval { fs::umount("/tmp") } if $rescue;
+  eval { fs::mount::umount("/tmp") } if $rescue;
   print "Cleaning done\n";
 };
 
@@ -382,7 +382,7 @@ run_program::run('tune2fs', '-L', "MDK-ROOT", "/dev/$root->{device}");
 $fstab = [ fs::get::fstab($all_hds) ];
 
 # we need to mount every fs we want to see into /etc/fstab !!!
-fs::mount_part($_, $::prefix) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
+fs::mount::part($_) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
 
 symlink("$::prefix/mnt/packages", "/export") if $rescue;
 

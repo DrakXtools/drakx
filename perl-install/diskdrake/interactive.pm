@@ -573,7 +573,7 @@ First remove a primary partition and create an extended partition."));
     if ($migrate_files eq 'migrate') {
 	format_($in, $hd, $part, $all_hds) or return;
 	migrate_files($in, $hd, $part);
-	fs::mount_part($part);
+	fs::mount::part($part);
     }
 }
 
@@ -676,7 +676,7 @@ Remove the loopback first")), return 1;
     if ($migrate_files eq 'migrate') {
 	format_($in, $hd, $part, $all_hds) or return;
 	migrate_files($in, $hd, $part);
-	fs::mount_part($part);
+	fs::mount::part($part);
     }
 }
 sub Mount_point_raw_hd {
@@ -827,7 +827,7 @@ sub Mount {
     my ($in, $hd, $part) = @_;
     write_partitions($in, $hd) or return;
     my $w;
-    fs::mount_part($part, $::prefix, 0, sub {
+    fs::mount::part($part, 0, sub {
         	my ($msg) = @_;
         	$w ||= $in->wait_message('', $msg);
         	$w->set($msg);
@@ -875,7 +875,7 @@ sub Add2LVM {
 }
 sub Unmount {
     my ($_in, $_hd, $part) = @_;
-    fs::umount_part($part);
+    fs::mount::umount_part($part);
 }
 sub RemoveFromRAID { 
     my ($_in, $_hd, $part, $all_hds) = @_;
@@ -1110,7 +1110,7 @@ sub format_ {
     }
     $part->{isFormatted} = 0; #- force format;
     my ($_w, $wait_message) = fs::format::wait_message($in);
-    fs::format::part($all_hds->{raids}, $part, $::prefix, $wait_message);
+    fs::format::part($all_hds, $part, $wait_message);
     1;
 }
 

@@ -120,7 +120,7 @@ sub add_kernel() {
 
     my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can not find root partition\n";
     my %opts = (
-		root => fs::part2wild_device_name('', $root_part), 
+		root => fs::wild_device::from_part('', $root_part), 
 		initrd_options => $initrd_options,
 		if_($label, label => $label),
 		if_($bootloader->{default_vga}, vga => $bootloader->{default_vga}),

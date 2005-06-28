@@ -259,7 +259,7 @@ sub when_load_category {
     } elsif ($category eq 'bus/usb') {
 	$conf->add_probeall('usb-interface', $name);
         -f '/proc/bus/usb/devices' or eval {
-            require fs; fs::mount_usbfs('');
+            require fs::mount; fs::mount::usbfs('');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
             sleep 4;
             load("usbkbd", "keybdev") if detect_devices::usbKeyboards();

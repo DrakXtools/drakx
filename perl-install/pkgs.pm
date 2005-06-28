@@ -1257,7 +1257,7 @@ sub install {
 
     log::l("closing install.log file");
     close $LOG;
-    eval { fs::umount("/mnt/cdrom") };
+    eval { fs::mount::umount("/mnt/cdrom") };
 
     cleanHeaders();
 

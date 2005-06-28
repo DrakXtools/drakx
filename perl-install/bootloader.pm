@@ -714,7 +714,7 @@ sub suggest {
     my ($bootloader, $all_hds, %options) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
-    my $root = isLoopback($root_part) ? '/dev/loop7' : fs::part2wild_device_name('', $root_part);
+    my $root = isLoopback($root_part) ? '/dev/loop7' : fs::wild_device::from_part('', $root_part);
     my $boot = fs::get::root($fstab, 'boot')->{device};
     #- PPC xfs module requires enlarged initrd
     my $xfsroot = $root_part->{fs_type} eq 'xfs';

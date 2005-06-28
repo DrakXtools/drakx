@@ -11,6 +11,7 @@ use fs::get;
 use fs::format;
 use fs::mount_options;
 use fs::loopback;
+use fs::mount;
 use run_program;
 use detect_devices;
 use modules;
@@ -75,7 +76,7 @@ sub read_fstab {
 		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
 
-	put_in_hash($h, subpart_from_wild_device_name($dev));
+	put_in_hash($h, fs::wild_device::to_subpart($dev));
 
 	if ($h->{device_LABEL} && member('keep_device_LABEL', @reading_options)) {
 	    $h->{prefer_device_LABEL} = 1;
@@ -124,98 +125,6 @@ sub merge_fstabs {
 	    log::l("err, fstab and partition table do not agree for $p->{device} type: $p->{fs_type} vs $p2->{fs_type}");
     }
     @l;
-}
-
-sub analyze_wild_device_name {
-    my ($dev) = @_;
-
-    if ($dev =~ m!^/u?dev/(.*)!) {
-	'dev', $dev;
-    } elsif ($dev !~ m!^/! && (-e "/dev/$dev" || -e "$::prefix/dev/$dev")) {
-	'dev', "/dev/$dev";
-    } elsif ($dev =~ /^LABEL=(.*)/) {
-	'label', $1;
-    } elsif ($dev eq 'none' || $dev eq 'rootfs') {
-	'virtual';
-    } elsif ($dev =~ m!^(\S+):/\w!) {
-	'nfs';
-    } elsif ($dev =~ m!^//\w!) {
-	'smb';
-    } elsif ($dev =~ m!^http://!) {
-	'dav';
-    }
-}
-
-sub subpart_from_wild_device_name {
-    my ($dev) = @_;
-
-    my $part = { device => $dev, faked_device => 1 }; #- default
-
-    if (my ($kind, $val) = analyze_wild_device_name($dev)) {
-	if ($kind eq 'label') {	    
-	    $part->{device_LABEL} = $val;
-	} elsif ($kind eq 'dev') {
-	    my %part = (faked_device => 0);
-	    if (my $rdev = (stat "$::prefix$dev")[6]) {
-		($part{major}, $part{minor}) = unmakedev($rdev);
-	    }
-
-	    my $symlink = readlink("$::prefix$dev");
-	    $dev =~ s!/u?dev/!!;
-
-	    if ($symlink && $symlink =~ m|^[^/]+$|) {
-		$part{device_alias} = $dev;
-		$dev = $symlink;
-	    }
-
-	    if (my (undef, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
-		$part{part_number} = $part_number if $part_number;
-		$part{devfs_device} = $dev;
-	    } else {
-		my $part_number = devices::part_number(\%part);
-		$part{part_number} = $part_number if $part_number;
-	    }
-	    $part{device} = $dev;
-	    return \%part;
-	}
-    } else {
-	if ($dev =~ m!^/! && -f "$::prefix$dev") {
-	    #- it must be a loopback file or directory to bind
-	} else {
-	    log::l("part_from_wild_device_name: unknown device $dev");
-	}
-    }
-    $part;
-}
-
-sub part2wild_device_name {
-    my ($prefix, $part) = @_;
-
-    if ($part->{prefer_device_LABEL}) {
-	'LABEL=' . $part->{device_LABEL};
-    } elsif ($part->{prefer_devfs_name}) {
-	"/dev/$part->{devfs_device}";
-    } elsif ($part->{device_alias}) {
-	"/dev/$part->{device_alias}";
-    } else {
-	my $faked_device = exists $part->{faked_device} ? 
-	    $part->{faked_device} : 
-	    do {
-		#- in case $part has been created without using subpart_from_wild_device_name()
-		my ($kind) = analyze_wild_device_name($part->{device});
-		$kind ? $kind ne 'dev' : $part->{device} =~ m!^/!;
-	    };
-	if ($faked_device) {
-	    $part->{device};
-	} elsif ($part->{device} =~ m!^/dev/!) {
-	    log::l("ERROR: i have a full device $part->{device}, this should not happen. use subpart_from_wild_device_name() instead of creating bad part data-structures!");
-	    $part->{device};
-	} else {
-	    my $dev = "/dev/$part->{device}";
-	    eval { devices::make("$prefix$dev") };
-	    $dev;
-	}
-    }
 }
 
 sub add2all_hds {
@@ -302,17 +211,17 @@ sub prepare_write_fstab {
 	my $device = 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
-	  part2wild_device_name($o_prefix, $_);
+	  fs::wild_device::from_part($o_prefix, $_);
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
-	my $mntpoint = fs::loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
+	my $mntpoint = fs::type::carry_root_loopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
 	  isTrueLocalFS($_) && $_->{options} !~ /encryption=/ && (!$_->{is_removable} || member($_->{mntpoint}, fs::type::directories_needed_to_boot())) ? 
-	    (1, $_->{mntpoint} eq '/' ? 1 : fs::loopback::carryRootLoopback($_) ? 0 : 2) : 
+	    (1, $_->{mntpoint} eq '/' ? 1 : fs::type::carry_root_loopback($_) ? 0 : 2) : 
 	    (0, 0);
 
 	if (($device eq 'none' || !$new{$device}) && ($mntpoint eq 'swap' || !$new{$mntpoint})) {
@@ -421,222 +330,6 @@ sub get_raw_hds {
     ];
 }
 
-
-################################################################################
-# mounting functions
-################################################################################
-sub set_loop {
-    my ($part) = @_;
-    $part->{real_device} ||= devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
-}
-
-sub swapon {
-    my ($dev) = @_;
-    log::l("swapon called with $dev");
-    syscall_('swapon', devices::make($dev), 0) or die "swapon($dev) failed: $!";
-}
-
-sub swapoff {
-    my ($dev) = @_;
-    syscall_('swapoff', devices::make($dev)) or die "swapoff($dev) failed: $!";
-}
-
-sub formatMount_part {
-    my ($part, $raids, $fstab, $prefix, $wait_message) = @_;
-
-    if (isLoopback($part)) {
-	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $wait_message);
-    }
-    if (my $p = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
-	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) if !fs::loopback::carryRootLoopback($part);
-    }
-    if ($part->{toFormat}) {
-	fs::format::part($raids, $part, $prefix, $wait_message);
-    }
-    mount_part($part, $prefix, 0, $wait_message);
-}
-
-sub formatMount_all {
-    my ($raids, $fstab, $prefix, $wait_message) = @_;
-    formatMount_part($_, $raids, $fstab, $prefix, $wait_message) 
-      foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
-
-    #- ensure the link is there
-    fs::loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;
-
-    #- for fun :)
-    #- that way, when install exits via ctrl-c, it gives hand to partition
-    eval {
-	my ($_type, $major, $minor) = devices::entry(fs::get::root($fstab)->{device});
-	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
-    };
-}
-
-sub mount {
-    my ($dev, $where, $fs, $b_rdonly, $o_options, $o_wait_message) = @_;
-    log::l("mounting $dev on $where as type $fs, options $o_options");
-
-    mkdir_p($where);
-
-    $fs or log::l("not mounting $dev partition"), return;
-
-    {
-	my @fs_modules = qw(ext3 hfs jfs nfs ntfs romfs reiserfs ufs xfs vfat);
-	my @types = (qw(ext2 proc sysfs usbfs usbdevfs iso9660 devfs devpts), @fs_modules);
-
-	push @types, 'smb', 'smbfs', 'davfs' if !$::isInstall;
-
-	if (!member($fs, @types) && !$::move) {
-	    log::l("skipping mounting $dev partition ($fs)");
-	    return;
-	}
-	if ($::isInstall) {
-	    if (member($fs, @fs_modules)) {
-		eval { modules::load($fs) };
-	    } elsif ($fs eq 'iso9660') {
-		eval { modules::load('isofs') };
-	    }
-	}
-    }
-
-    $where =~ s|/$||;
-
-    my @mount_opt = split(',', $o_options || '');
-
-    if ($fs eq 'vfat') {
-	@mount_opt = 'check=relaxed';
-    } elsif ($fs eq 'nfs') {
-	push @mount_opt, 'nolock', 'soft', 'intr' if $::isInstall;
-    } elsif ($fs eq 'jfs' && !$b_rdonly) {
-	fsck_jfs($dev, $o_wait_message);
-    } elsif ($fs eq 'ext2' && !$b_rdonly) {
-	fsck_ext2($dev, $o_wait_message);
-    }
-
-    push @mount_opt, 'ro' if $b_rdonly;
-
-    log::l("calling mount -t $fs $dev $where @mount_opt");
-    $o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
-    run_program::run('mount', '-t', $fs, $dev, $where, if_(@mount_opt, '-o', join(',', @mount_opt))) or die N("mounting partition %s in directory %s failed", $dev, $where);
-}
-
-sub fsck_ext2 {
-    my ($dev, $o_wait_message) = @_;
-    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
-    foreach ('-a', '-y') {
-	run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
-	my $err = $?;
-	if ($err & 0x0100) {
-	    log::l("fsck corrected partition $dev");
-	}
-	if ($err & 0xfeff) {
-	    my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
-	    $_ eq '-y' ? die($txt) : cdie($txt);
-	} else {
-	    last;
-	}
-    }
-}
-sub fsck_jfs {
-    my ($dev, $o_wait_message) = @_;
-    $o_wait_message->(N("Checking %s", $dev)) if $o_wait_message;
-    #- needed if the system is dirty otherwise mounting read-write simply fails
-    run_program::raw({ timeout => 60 * 60 }, "fsck.jfs", $dev) or do {
-	my $err = $?;
-	die "fsck.jfs failed" if $err & 0xfc00;
-    };
-}
-
-#- takes the mount point to umount (can also be the device)
-sub umount {
-    my ($mntpoint) = @_;
-    $mntpoint =~ s|/$||;
-    log::l("calling umount($mntpoint)");
-
-    syscall_('umount2', $mntpoint, 0) or do {
-	kill 15, fuzzy_pidofs('^fam\b');
-	syscall_('umount2', $mntpoint, 0) or die N("error unmounting %s: %s", $mntpoint, $!);
-    };
-
-    substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- do not care about error, if we can not read, we will not manage to write... (and mess mtab)
-}
-
-sub mount_part {
-    my ($part, $o_prefix, $b_rdonly, $o_wait_message) = @_;
-
-    #- root carrier's link can not be mounted
-    fs::loopback::carryRootCreateSymlink($part, $o_prefix);
-
-    log::l("mount_part: " . join(' ', map { "$_=$part->{$_}" } 'device', 'mntpoint', 'isMounted', 'real_mntpoint'));
-    if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
-	log::l("remounting partition on $o_prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
-	if ($::isInstall) { #- ensure partition will not be busy.
-	    require install_any;
-	    install_any::getFile('XXX');
-	}
-	eval {
-	    umount($part->{real_mntpoint});
-	    rmdir $part->{real_mntpoint};
-	    symlinkf "$o_prefix$part->{mntpoint}", $part->{real_mntpoint};
-	    delete $part->{real_mntpoint};
-	    $part->{isMounted} = 0;
-	};
-    }
-
-    return if $part->{isMounted};
-
-    unless ($::testing) {
-	if (isSwap($part)) {
-	    $o_wait_message->(N("Enabling swap partition %s", $part->{device})) if $o_wait_message;
-	    swapon($part->{device});
-	} else {
-	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
-
-	    my $mntpoint = ($o_prefix || '') . $part->{mntpoint};
-	    if (isLoopback($part) || $part->{encrypt_key}) {
-		set_loop($part);
-	    } elsif ($part->{options} =~ /encrypted/) {
-		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
-		return;
-	    } elsif (fs::loopback::carryRootLoopback($part)) {
-		$mntpoint = "/initrd/loopfs";
-	    }
-	    my $dev = $part->{real_device} || part2wild_device_name('', $part);
-	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $part->{options}, $o_wait_message);
-	}
-    }
-    $part->{isMounted} = 1;
-    set_isFormatted($part, 1); #- assume that if mount works, partition is formatted
-}
-
-sub umount_part {
-    my ($part, $o_prefix) = @_;
-
-    $part->{isMounted} || $part->{real_mntpoint} or return;
-
-    unless ($::testing) {
-	if (isSwap($part)) {
-	    swapoff($part->{device});
-	} elsif (fs::loopback::carryRootLoopback($part)) {
-	    umount("/initrd/loopfs");
-	} else {
-	    umount(($o_prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
-	    devices::del_loop(delete $part->{real_device}) if $part->{real_device};
-	}
-    }
-    $part->{isMounted} = 0;
-}
-
-sub umount_all($;$) {
-    my ($fstab, $prefix) = @_;
-
-    log::l("unmounting all filesystems");
-
-    foreach (sort { $b->{mntpoint} cmp $a->{mntpoint} } @$fstab) {
-	$_->{mntpoint} and umount_part($_, $prefix);
-    }
-}
-
 ################################################################################
 # various functions
 ################################################################################
@@ -652,7 +345,7 @@ sub df {
 	return; #- will not even try!
     } else {
 	mkdir_p($dir);
-	eval { mount(devices::make($part->{device}), $dir, $part->{fs_type}, 'readonly') };
+	eval { fs::mount::mount(devices::make($part->{device}), $dir, $part->{fs_type}, 'readonly') };
 	if ($@) {
 	    set_isFormatted($part, 0);
 	    unlink $dir;
@@ -662,19 +355,12 @@ sub df {
     my (undef, $free) = MDK::Common::System::df($dir);
 
     if (!$part->{isMounted}) {
-	umount($dir);
+	fs::mount::umount($dir);
 	unlink($dir);
     }
 
     $part->{free} = 2 * $free if defined $free;
     $part->{free};
-}
-
-sub mount_usbfs {
-    my ($prefix) = @_;
-    
-    my $fs = cat_('/proc/filesystems') =~ /usbfs/ ? 'usbfs' : 'usbdevfs';
-    mount('none', "$prefix/proc/bus/usb", $fs);
 }
 
 1;

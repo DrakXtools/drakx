@@ -12,12 +12,6 @@ use fs;
 use log;
 
 
-sub carryRootLoopback {
-    my ($part) = @_;
-    $_->{mntpoint} eq '/' and return 1 foreach @{$part->{loopback} || []};
-    0;
-}
-
 sub check_circular_mounts {
     my ($part, $all_hds) = @_;
 
@@ -30,7 +24,7 @@ sub check_circular_mounts {
 	@seen > 1 && $part->{mntpoint} eq $base_mntpoint and die N("Circular mounts %s\n", join(", ", @seen));
 	if (my $part = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
 	    #- '/' carrier is a special case, it will be mounted first
-	    $check->($part, @seen) if !carryRootLoopback($part);
+	    $check->($part, @seen) if !fs::type::carry_root_loopback($part);
 	}
 	if (isLoopback($part)) {
 	    $check->($part->{loopback_device}, @seen);
@@ -40,34 +34,34 @@ sub check_circular_mounts {
 }
 
 sub carryRootCreateSymlink {
-    my ($part, $prefix) = @_;
+    my ($part) = @_;
 
-    carryRootLoopback($part) or return;
+    fs::type::carry_root_loopback($part) or return;
 
-    my $mntpoint = "$prefix$part->{mntpoint}";
+    my $mntpoint = fs::get::mntpoint_prefixed($part);
     unless (-e $mntpoint) {
 	eval { mkdir_p(dirname($mntpoint)) };
 	#- do non-relative link for install, should be changed to relative link before rebooting
 	symlink "/initrd/loopfs", $mntpoint;
 
 	mkdir_p("/initrd/loopfs/lnx4win/boot");
-	symlink "/initrd/loopfs/lnx4win/boot", "$prefix/boot";
+	symlink "/initrd/loopfs/lnx4win/boot", "$::prefix/boot";
     }
     #- indicate kernel to keep initrd
-    mkdir_p("$prefix/initrd");
+    mkdir_p("$::prefix/initrd");
 }
 
 
 sub format_part {
-    my ($part, $prefix) = @_;
-    fs::mount_part($part->{loopback_device}, $prefix);
-    create($part, $prefix);
+    my ($part) = @_;
+    fs::mount::part($part->{loopback_device});
+    create($part);
     fs::format::part_raw($part, undef);
 }
 
 sub create {
-    my ($part, $prefix) = @_;
-    my $f = $part->{device} = "$prefix$part->{loopback_device}{mntpoint}$part->{loopback_file}";
+    my ($part) = @_;
+    my $f = $part->{device} = fs::get::mntpoint_prefixed($part->{loopback_device}) . $part->{loopback_file};
     return if -e $f;
 
     eval { mkdir_p(dirname($f)) };

@@ -63,8 +63,8 @@ sub tr_ {
 sub umount {
     @_ == 1 or die "umount expects a single argument\n";
 
-    require fs;
-    fs::umount($_[0]);
+    require fs::mount;
+    fs::mount::umount($_[0]);
 }
 
 sub mkdir_ {
@@ -139,13 +139,13 @@ sub chown_ {
 
 sub swapon {
     @_ == 1 or die "swapon <file>\n";
-    require fs;
-    fs::swapon($_[0]);
+    require fs::mount;
+    fs::mount::swapon($_[0]);
 }
 sub swapoff {
     @_ == 1 or die "swapoff <file>\n";
-    require fs;
-    fs::swapoff($_[0]);
+    require fs::mount;
+    fs::mount::swapoff($_[0]);
 }
 
 sub rights {
@@ -437,7 +437,7 @@ sub bug {
     require modules;
     require fs;
     modules::load_dependencies("/modules/modules.dep");
-    fs::mount(devices::make(detect_devices::floppy()), '/fd0', 'vfat');
+    fs::mount::mount(devices::make(detect_devices::floppy()), '/fd0', 'vfat');
 
     require install_any;
     output("/fd0/report.bug", install_any::report_bug());

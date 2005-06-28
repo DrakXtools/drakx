@@ -177,11 +177,11 @@ sub selectInstallClass {
 sub doPartitionDisksBefore {
     my ($o) = @_;
     eval { 
-	eval { fs::umount("$o->{prefix}/sys") };
-	eval { fs::umount("$o->{prefix}/proc/bus/usb") };
-	eval { fs::umount("$o->{prefix}/proc") };
-	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
-	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
+	eval { fs::mount::umount("$::prefix/sys") };
+	eval { fs::mount::umount("$::prefix/proc/bus/usb") };
+	eval { fs::mount::umount("$::prefix/proc") };
+	eval {          fs::mount::umount_all($o->{fstab}) };
+	eval { sleep 1; fs::mount::umount_all($o->{fstab}) } if $@; #- HACK
     } if $o->{fstab} && !$::testing;
 }
 
@@ -220,8 +220,8 @@ sub doPartitionDisksAfter {
 
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
-	fs::mount_part($_, $o->{prefix}) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} }
-						 grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
+	fs::mount::part($_) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} }
+				    grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/nfsimage| &&
@@ -290,7 +290,7 @@ sub choosePartitionsToFormat($$) {
 
 sub formatMountPartitions {
     my ($o) = @_;
-    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, undef);
+    fs::format::formatMount_all($o->{all_hds}, $o->{fstab}, undef);
 }
 
 #------------------------------------------------------------------------------
@@ -596,7 +596,7 @@ sub updatemodules {
 
     my $mount_dir = '/updatemodules';
     find {
-	eval { fs::mount($dev, $mount_dir, $_, 0); 1 };
+	eval { fs::mount::mount($dev, $mount_dir, $_, 0); 1 };
     } 'ext2', 'vfat' or log::l("updatemodules: can't mount $dev"), return;
 
     my $dir = "$mount_dir$rel_dir";
@@ -623,7 +623,7 @@ sub updatemodules {
 	}
     }
 
-    fs::umount($mount_dir);
+    fs::mount::umount($mount_dir);
 }
 
 #------------------------------------------------------------------------------

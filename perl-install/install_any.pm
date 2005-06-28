@@ -49,7 +49,7 @@ my %iso_images;
 sub mountCdrom {
     my ($mountpoint, $o_cdrom) = @_;
     $o_cdrom = $cdrom if !defined $o_cdrom;
-    eval { fs::mount($o_cdrom, $mountpoint, "iso9660", 'readonly') };
+    eval { fs::mount::mount($o_cdrom, $mountpoint, "iso9660", 'readonly') };
 }
 
 sub useMedium($) {
@@ -135,13 +135,13 @@ sub changeIso($) {
     my ($iso_label) = @_;
     my $iso_info = find_ISO_image_labelled($iso_label) or return;
 
-    eval { fs::umount($iso_images{mountpoint}) };
+    eval { fs::mount::umount($iso_images{mountpoint}) };
     $@ and warnAboutFilesStillOpen();
     devices::del_loop($iso_images{loopdev});
 
     $iso_images{loopdev} = devices::set_loop($iso_info->{file});
     eval { 
-	fs::mount($iso_images{loopdev}, $iso_images{mountpoint}, "iso9660", 'readonly');
+	fs::mount::mount($iso_images{loopdev}, $iso_images{mountpoint}, "iso9660", 'readonly');
 	log::l("using ISO image '$iso_label'");
 	1;
     };
@@ -501,7 +501,7 @@ sub selectSupplMedia {
 		#- umount supplementary CD. Will re-ask for it later
 		getFile("XXX"); #- close still opened filehandles
 		log::l("Umounting suppl. CD, back to medium 1");
-		eval { fs::umount("/mnt/cdrom") };
+		eval { fs::mount::umount("/mnt/cdrom") };
 		#- re-mount CD 1 if this was a cdrom install
 		remountCD1($o, $cdrom);
 	    } else {
@@ -526,7 +526,7 @@ sub selectSupplMedia {
 		$url = "$::prefix$mediadir";
 		-d $url or mkdir_p($url);
 		my $dev = "$host:$dir";
-		eval { fs::mount($dev, $url, 'nfs'); 1 }
+		eval { fs::mount::mount($dev, $url, 'nfs'); 1 }
 		    or do { log::l("Mount failed: $@"); return 'error' };
 		#- add $mediadir in fstab for post-installation
 		push @{$o->{all_hds}{nfss}}, { fs_type => 'nfs', mntpoint => $mediadir, device => $dev, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
@@ -978,7 +978,7 @@ sub ejectCdrom {
 
     #- umount BEFORE opening the cdrom device otherwise the umount will
     #- D state if the cdrom is already removed
-    $o_mountpoint and eval { fs::umount($o_mountpoint) };
+    $o_mountpoint and eval { fs::mount::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
     return if is_xbox();
     openCdromTray($cdrom);
@@ -1261,7 +1261,7 @@ sub getAndSaveAutoInstallFloppies {
 
 	foreach my $img (@imgs) {
 	    my $dev = devices::set_loop($img) or log::l("couldn't set loopback device"), return;
-	    find { eval { fs::mount($dev, $mountdir, $_, 0); 1 } } qw(ext2 vfat) or return;
+	    find { eval { fs::mount::mount($dev, $mountdir, $_, 0); 1 } } qw(ext2 vfat) or return;
 
 	    if (-e "$mountdir/menu.lst") {
 		# hd_grub boot disk is different than others
@@ -1291,7 +1291,7 @@ sub getAndSaveAutoInstallFloppies {
 		$@ and log::l("Warning: <", formatError($@), ">");
 	    }
 	
-	    fs::umount($mountdir);
+	    fs::mount::umount($mountdir);
 	    devices::del_loop($dev);
 	}
 	rmdir $mountdir;
@@ -1322,7 +1322,7 @@ sub loadO {
 	unless ($::testing) {
             my $dev = devices::make(detect_devices::floppy());
             foreach my $fs (arch() =~ /sparc/ ? 'romfs' : ('ext2', 'vfat')) {
-                eval { fs::mount($dev, '/mnt', $fs, 'readonly'); 1 } and goto mount_ok;
+                eval { fs::mount::mount($dev, '/mnt', $fs, 'readonly'); 1 } and goto mount_ok;
             }
             die "Could not mount floppy [$dev]";
           mount_ok:
@@ -1331,7 +1331,7 @@ sub loadO {
 	-e $f or $f .= '.pl';
 
 	my $_b = before_leaving {
-	    fs::umount("/mnt") unless $::testing;
+	    fs::mount::umount("/mnt") unless $::testing;
 	    modules::unload(qw(vfat fat));
 	};
 	$o = loadO($O, $f);
@@ -1747,13 +1747,13 @@ sub media_browser {
 		    { val => \$media_browser{nfs} }
 		]) or last;
 
-		my ($kind) = fs::analyze_wild_device_name($media_browser{nfs});
+		my ($kind) = fs::wild_device::analyze($media_browser{nfs});
 		if ($kind ne 'nfs') {
 		    $in->ask_warn('', N("Bad NFS name"));
 		    next;
 		}
 
-		my $nfs = fs::subpart_from_wild_device_name($media_browser{nfs});
+		my $nfs = fs::wild_device::to_subpart($media_browser{nfs});
 		$nfs->{fs_type} = 'nfs';
 
 		if (my ($h, $file) = $inspect_and_browse->($nfs)) {

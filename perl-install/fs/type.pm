@@ -380,3 +380,8 @@ sub guessed_by_mount() {
 sub directories_needed_to_boot() { 
     qw(/ /usr /var /boot /tmp);
 }
+
+sub carry_root_loopback {
+    my ($part) = @_;
+    any { $_->{mntpoint} eq '/' } @{$part->{loopback} || []};
+}

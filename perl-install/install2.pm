@@ -187,9 +187,9 @@ sub formatPartitions {
     devices::make("$o->{prefix}/dev/null");
     chmod 0666, "$o->{prefix}/dev/null";
 
-    eval { fs::mount('none', "$o->{prefix}/proc", 'proc') };
-    eval { fs::mount('none', "$o->{prefix}/sys", 'sysfs') };
-    eval { fs::mount_usbfs($o->{prefix}) };
+    eval { fs::mount::mount('none', "$::prefix/proc", 'proc') };
+    eval { fs::mount::mount('none', "$::prefix/sys", 'sysfs') };
+    eval { fs::mount::usbfs($::prefix) };
 
     install_any::screenshot_dir__and_move();
     install_any::move_clp_to_disk();
@@ -422,7 +422,7 @@ sub main {
     log::l("second stage install running (", install_any::drakx_version(), ")");
 
     eval { output('/proc/sys/kernel/modprobe', "\n") } if !$::local_install && !$::testing; #- disable kmod, otherwise we get a different behaviour in kernel vs kernel-BOOT
-    eval { fs::mount('none', '/sys', 'sysfs', 1) };
+    eval { fs::mount::mount('none', '/sys', 'sysfs', 1) };
 
     if ($::move) {
         require move;
@@ -432,13 +432,13 @@ sub main {
 	push @auto, 
 #	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
 	  'doPartitionDisks', 'formatPartitions', 'setupBootloader';
-	fs::mount_usbfs(''); #- do it now so that when_load doesn't do it
+	fs::mount::usbfs(''); #- do it now so that when_load doesn't do it
     }
 
     cp_f(glob('/stage1/tmp/*'), '/tmp');
 
     #- free up stage1 memory
-    eval { fs::umount($_) } foreach qw(/stage1/proc/bus/usb /stage1/proc /stage1);
+    eval { fs::mount::umount($_) } foreach qw(/stage1/proc/bus/usb /stage1/proc /stage1);
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::move ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;

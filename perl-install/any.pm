@@ -573,12 +573,12 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	eval { fs::mount(fs::part2wild_device_name('', $part), $dir, $part->{fs_type}, !$b_rw) };
+	eval { fs::mount::mount(fs::wild_device::from_part('', $part), $dir, $part->{fs_type}, !$b_rw) };
 	$@ and return;
     }
     my $h = before_leaving {
 	if (!$part->{isMounted} && $dir) {
-	    fs::umount($dir);
+	    fs::mount::umount($dir);
 	    unlink($dir);
 	}
     };

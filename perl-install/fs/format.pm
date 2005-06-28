@@ -52,14 +52,14 @@ sub check_package_is_installed {
 }
 
 sub part {
-    my ($raids, $part, $prefix, $wait_message) = @_;
+    my ($all_hds, $part, $wait_message) = @_;
     if (isRAID($part)) {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	require raid;
-	raid::format_part($raids, $part);
+	raid::format_part($all_hds->{raids}, $part);
     } elsif (isLoopback($part)) {
 	$wait_message->(N("Creating and formatting file %s", $part->{loopback_file})) if $wait_message;
-	fs::loopback::format_part($part, $prefix);
+	fs::loopback::format_part($part);
     } else {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	part_raw($part, $wait_message);
@@ -72,8 +72,7 @@ sub part_raw {
     $part->{isFormatted} and return;
 
     if ($part->{encrypt_key}) {
-	require fs;
-	fs::set_loop($part);
+	fs::mount::set_loop($part);
     }
 
     my $dev = $part->{real_device} || $part->{device};
@@ -178,5 +177,38 @@ sub wait_message {
 	}
     };
 }
+
+
+sub formatMount_part {
+    my ($part, $all_hds, $fstab, $wait_message) = @_;
+
+    if (isLoopback($part)) {
+	formatMount_part($part->{loopback_device}, $all_hds, $fstab, $wait_message);
+    }
+    if (my $p = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
+	formatMount_part($p, $all_hds, $fstab, $wait_message) if !fs::type::carry_root_loopback($part);
+    }
+    if ($part->{toFormat}) {
+	fs::format::part($all_hds, $part, $wait_message);
+    }
+    fs::mount::part($part, 0, $wait_message);
+}
+
+sub formatMount_all {
+    my ($all_hds, $fstab, $wait_message) = @_;
+    formatMount_part($_, $all_hds, $fstab, $wait_message) 
+      foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
+
+    #- ensure the link is there
+    fs::loopback::carryRootCreateSymlink($_) foreach @$fstab;
+
+    #- for fun :)
+    #- that way, when install exits via ctrl-c, it gives hand to partition
+    eval {
+	my ($_type, $major, $minor) = devices::entry(fs::get::root($fstab)->{device});
+	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
+    };
+}
+
 
 1;

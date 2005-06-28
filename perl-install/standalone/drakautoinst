@@ -82,11 +82,11 @@ do {
     };
     $again = $@; #- grrr... $@ is localized in code block :-(
 } while $again;
-fs::mount($dev, $mountdir, 'vfat', 0);
+fs::mount::mount($dev, $mountdir, 'vfat', 0);
 
 if (-f $imagefile2) {
     do {
-        eval { fs::umount($mountdir) };
+        eval { fs::mount::umount($mountdir) };
         $in->ask_okcancel('', N("Insert another blank floppy in drive %s (for drivers disk)", $floppy), 1) or quit_global($in, 0);
         log::explanations(N("Creating auto install floppy (drivers disk)"));
         my $_w = $in->wait_message('', N("Creating auto install floppy"));
@@ -96,7 +96,7 @@ if (-f $imagefile2) {
         };
         $again = $@; #- grrr... $@ is localized in code block :-(
     } while $again;
-    fs::mount($dev, $mountdir, 'ext2', 0);
+    fs::mount::mount($dev, $mountdir, 'ext2', 0);
 }
 
 my $cfgfile = "$mountdir/auto_inst.cfg";
@@ -245,7 +245,7 @@ my $str = join('',
 $str =~ s/ {8}/\t/g; #- replace all 8 space char by only one tabulation, this reduces file size so much :-)
 output($cfgfile, $str);
 
-fs::umount($mountdir);
+fs::mount::umount($mountdir);
 
 $in->ask_okcancel(N("Congratulations!"), 
 N("The floppy has been successfully generated.

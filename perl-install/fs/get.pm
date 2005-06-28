@@ -6,6 +6,7 @@ use strict;
 use partition_table;
 use fs::type;
 use fs::loopback;
+use fs::wild_device;
 use fs;
 use common;
 use log;
@@ -70,7 +71,7 @@ sub hds_fstab_and_holes {
 
 sub device2part {
     my ($dev, $fstab) = @_;
-    my $subpart = fs::subpart_from_wild_device_name($dev);
+    my $subpart = fs::wild_device::to_subpart($dev);
     my $part = find { is_same_hd($subpart, $_) } @$fstab;
     log::l("fs::get::device2part: unknown device <<$dev>>") if !$part;
     $part;
@@ -88,7 +89,7 @@ sub file2part {
 
     $file = $b_keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
     unless ($file =~ s/^$::prefix//) {
-	my $part = find { fs::loopback::carryRootLoopback($_) } @$fstab or die;
+	my $part = find { fs::type::carry_root_loopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
 	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
     }
@@ -138,6 +139,11 @@ sub is_same_hd {
 	  || $hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
 	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device};
     }
+}
+
+sub mntpoint_prefixed {
+    my ($part) = @_;
+    $::prefix . $part->{mntpoint};
 }
 
 1;
