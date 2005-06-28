@@ -42,7 +42,7 @@ my $all_hds = fsedit::get_hds();
 fs::get_raw_hds('', $all_hds);
 fs::get_info_from_fstab($all_hds);
 my $fstab = [ fs::get::fstab($all_hds) ];
-my $bootloader = bootloader::read($all_hds);
+my $bootloader = bootloader::read($all_hds) or die "no bootloader found\n";
 my $cmdline = cat_('/proc/cmdline');
 
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
