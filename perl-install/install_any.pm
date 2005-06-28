@@ -415,7 +415,7 @@ Do you have a supplementary installation media to configure?",
 	'', $msg,
 	[ {
 	    val => \my $suppl,
-	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)"), N_("Network (nfs)") ],
+	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)"), N_("Network (NFS)") ],
 	    type => 'list',
 	    format => \&translate,
 	} ],
