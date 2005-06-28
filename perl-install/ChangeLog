@@ -1,3 +1,228 @@
+2005/06/28  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakboot: handle no bootloader configuration found with a
+	clean error
+
+	* fs/loopback.pm, any.pm, diskdrake/interactive.pm, fs/get.pm, pkgs.pm,
+	fs.pm, install_steps.pm, standalone/drakautoinst, bootloader.pm,
+	fs/dmraid.pm, install_steps_interactive.pm, network/thirdparty.pm,
+	fs/type.pm, install2.pm, common.pm, modules.pm, fs/format.pm,
+	fs/mount.pm, commands.pm, install_any.pm, fs/wild_device.pm,
+	standalone/bootloader-config, partition_table.pm: try to cleanup fs.pm
+	(to have simpler dependencies between modules, esp. have some modules
+	only required by diskdrake):
+	  - move some functions from fs to fs::mount
+	  (most keep their name, except mount_part and mount_usbfs)
+	  - move formatMount_part and formatMount_all from fs to fs::format
+	  - move some functions from fs to fs::wild_device
+	  (part2wild_device_name -> fs::wild_device::from_part)
+	  (subpart_from_wild_device_name -> fs::wild_device::to_subpart)
+	  (analyze_wild_device_name -> fs::wild_device::analyse)
+	
+	  - formatMount_part(), formatMount_all(), fs::mount::part() don't take
+	a prefix anymore
+	  the current situation was quite muddy
+	  we now rely on fs::get::mntpoint_prefixed() which will maybe depend on
+	a field in $part
+	  for now, we mount every part in chroot, it seems to be what's wanted
+	
+	  - fs::format::part() now expect $all_hds instead of $raids
+	
+	  - fs::type::carryRootLoopback is now fs::get::carry_root_loopback()
+	  - in fs::loopback, most functions don't want a prefix anymore
+
+	* standalone/drakpxe: 
+	  - since we don't use a ramdisk for the stage2 anymore, remove
+	ramdisk_size=128000
+	(hopefully the initrd doesn't have the limitation or we won't hit the
+	stupid low default max size of the kernel)
+	  - use the short aliases for automatic stage1 (cf
+	mdk-stage1/automatic.c)
+
+	* tools/drakx-in-chroot: help getting rid of existing files
+
+2005/06/28  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: New translations
+
+	* install_any.pm: Add NFS supplementary media in fstab
+	Fix install_urpmi with nfs suppl media
+
+	* pkgs.pm: Fix install_urpmi with nfs suppl media
+
+2005/06/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: upcase protocol names
+	update
+	update strings from CVS
+
+	* install_any.pm: upcase protocol names
+	(ask_if_suppl_media) upcase protocol name
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: upcase protocol
+	names
+	update strings from CVS
+
+	* share/po/ga.po, share/po/cy.po: update
+	upcase protocol names
+	update strings from CVS
+
+	* share/po/br.po: update
+	upcase protocol names
+	update
+	update strings from CVS
+
+2005/06/27  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Missing translation
+
+	* install_any.pm: Support NFS supplementary media
+
+2005/06/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.28mdk
+
+2005/06/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* bootloader.pm (write_grub) fix root when using labels and switching from
+	LILO to GRUB
+
+	* standalone/service_harddrake: fix switch from nvidia to nv for X.org
+	we now use X.org instead of XFree86
+
+2005/06/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: use empty prototype
+	don't fork to get route with "ip route", use /proc/net/route instead
+	(TODO: handle IPv6 with /proc/net/ipv6_route)
+
+2005/06/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: remove MDK::Common::Globals::init (fix crash)
+
+	* authentication.pm: fix NISDOMAIN
+
+	* standalone/drakauth: use network::network::write_network_conf (fix
+	crash)
+
+2005/06/24  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/partimage_whole_disk: fixing fstab must be done after mounting
+	/mnt
+
+	* fs/format.pm, share/list.xml: normalize mke2fs and mkreiserfs into
+	mkfs.<fs_type>
+
+	* rescue/list.xml: add mkfs.ext2
+
+	* fs/dmraid.pm, fsedit.pm: handle dmraid device not there, keeping the raw
+	hds
+
+	* mygtk2.pm: add "default_width" and "default_height" for Gtk2::Window
+
+	* authentication.pm: replace remaining $net->{auth} with $authentication
+	(since those variables are no more written in sysconfig/network)
+
+2005/06/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm: Remove DB logs before doing an install.
+	Remove rpm 4.2 bug workaround, it may confuse rpm in some cases
+
+2005/06/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.27mdk
+
+	* detect_devices.pm: rename isTVcard() as isTVcardConfigurable() since
+	it's more meaninfull regarding its purpose
+	enable to configure cx88 driver
+
+	* harddrake/v4l.pm: enable to configure cx88 driver
+	do not use tree branches for vendor when there's only one device
+	update card lists from kernel-2.6.12
+	(config) do not use a combo
+
+	* standalone/drakxtv: rename isTVcard() as isTVcardConfigurable() since
+	it's more meaninfull regarding its purpose
+
+2005/06/23  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/06/23  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/06/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/po/fr.po: fix titypo
+
+	* crypto.pm: remove unused get() and ftp()
+
+	* install_steps.pm: don't use $::o but $o
+	use http proxy settings from stage1 as post-install proxy settings for
+	both http and ftp connections
+
+2005/06/23  pjetur
+
+	* share/po/is.po: Finsalize printer setup and more spelling/tidy
+
+2005/06/23  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: cleanup (old titi commit)
+
+	* fsedit.pm: handle dmraid require fail
+
+2005/06/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Punctuation fix
+
+2005/06/22  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/06/21  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: Added scim-ccinput support.
+
+2005/06/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/pxe.pm: perl_checker
+	fix typo
+	strip "pxelinux_" in profiles-related-only functions
+	  - add profiles_exist
+	  - enhance find_next_profile_name
+	  - add_empty_profile now needs a profile name
+	perl_checker/suxiness fixes
+	  - basic profiles support
+	  - per_mac address configuration support
+	  - give config file path as argument in
+	network::pxe::{read,write}_pxelinux_conf
+	  - add write_conf in drakpxelinux to ease profile handling
+
+2005/06/21  pjetur
+
+	* share/po/is.po: Mostly printer wizard strings
+
+2005/06/21  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/format.pm: handle creation of labels for every filesystem types
+
 2005/06/20  Frederic Lepied  <flepied at mandrakesoft.com>
 
 	* share/rpmsrate: install keychain when installing openssh-clients
