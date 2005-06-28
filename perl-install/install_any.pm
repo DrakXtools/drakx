@@ -415,7 +415,7 @@ Do you have a supplementary installation media to configure?",
 	'', $msg,
 	[ {
 	    val => \my $suppl,
-	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)"), N_("Network (NFS)") ],
+	    list => [ N_("None"), N_("CD-ROM"), N_("Network (HTTP)"), N_("Network (FTP)"), N_("Network (NFS)") ],
 	    type => 'list',
 	    format => \&translate,
 	} ],
@@ -459,9 +459,9 @@ sub selectSupplMedia {
 	#- translate to method name
 	$suppl_method = {
 	    'CD-ROM' => 'cdrom',
-	    'Network (http)' => 'http',
-	    'Network (ftp)' => 'ftp',
-	    'Network (nfs)' => 'nfs',
+	    'Network (HTTP)' => 'http',
+	    'Network (FTP)' => 'ftp',
+	    'Network (NFS)' => 'nfs',
 	}->{$suppl};
 	my $medium_name = int(keys %{$o->{packages}{mediums}}) + 1;
 	#- configure network if needed
