@@ -331,7 +331,6 @@ sub main {
 	install_steps_auto_install_non_interactive::errorInStep($o, $msg);
     };
     $ENV{PERL_BADLANG} = 1;
-    $ENV{LD_ASSUME_KERNEL} = '2.4.1';
     delete $ENV{TERMINFO};
     umask 022;
 
