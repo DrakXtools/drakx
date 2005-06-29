@@ -53,11 +53,14 @@ sub save_all {
     my $part_list = [ partition_table::get_normal_parts($hd) ];
 
     foreach (@$part_list) {
-	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap');
+	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap') && $_->{mntpoint} ne '/home';
 	if ($_->{saved}) {
 	    run_or_die(@partimage_cmd,
 		       '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
 		       'save', devices::make($_->{device}), "$dir/$_->{device}");
+	}
+	if ($_->{mntpoint} eq '/home') {
+	    $_->{size} = min($_->{size}, 1024 * 1024 * 2); # not greater than 1GB
 	}
     }
     save_part_list($dir, $hd->{geom}, $part_list);
@@ -141,7 +144,8 @@ sub rest_all {
 	    my $resize = $resize_pkg->new($_->{device}, devices::make($_->{device}));
 	    $resize->resize($_->{size});
 	} else {
-	    log::l("no need to resize $_->{device} since $_->{size} >= $part->{size}");
+	    log::l("no need to resize, instead setting $_->{device}'s size to $part->{size} instead of $_->{size}");
+	    $_->{size} = $part->{size};
 	}
     }
 
@@ -194,15 +198,23 @@ sub rest_all {
     foreach (@{$h{created}}) {
 	fs::format::part_raw($_, undef);
     }
-    
-    run_program::run('install_bootloader');
+
+    run_program::run('guessmounts');
 
     if (my @missing = grep { $_->{missing} } @{$h{part_list}}) {
 	my $missing = join('|', map { quotemeta($_->{device}) } @missing);
-	log::l("drop missing devices from fstab: $missing");
+	log::l("drop missing devices from fstab and lilo.conf: $missing");
 	$::prefix = '/mnt';
 	substInFile { $_ = '' if m!^/dev/($missing)\s! } "$::prefix/etc/fstab";
+
+	my $match;
+	substInFile { 
+	    /^\S/ and $match = m!^other=/dev/($missing)$!; 
+	    $_ = '' if $match;
+	} "$::prefix/etc/lilo.conf";
     }
+    
+    run_program::run('install_bootloader');
 }
 
 sub lst_fields() { qw(device size fs_type saved) }
