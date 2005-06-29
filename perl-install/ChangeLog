@@ -1,3 +1,17 @@
+2005/06/29  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/dmraid.pm: the output of "dmraid -r" is not enough, "dmraid -s" is
+	more important.
+	add some sample output for easy debugging
+
+	* rescue/partimage_whole_disk: {mntpoint} is not set, so take the last
+	ext3 partition as being /home
+	  - don't save /home and want a size <1GB (since it will be grown to fit
+	disk)
+	  - fix keeping the small size of the existing windows partition
+	(otherwise the filesystem is small in a (much) bigger partition)
+	  - remove "windows" entry from lilo.conf if windows not there
+
 2005/06/28  Pixel  <pixel at mandrakesoft.com>
 
 	* standalone/drakboot: handle no bootloader configuration found with a
