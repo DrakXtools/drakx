@@ -53,15 +53,19 @@ sub save_all {
     my $part_list = [ partition_table::get_normal_parts($hd) ];
 
     foreach (@$part_list) {
-	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap') && $_->{mntpoint} ne '/home';
-	if ($_->{saved}) {
-	    run_or_die(@partimage_cmd,
-		       '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
-		       'save', devices::make($_->{device}), "$dir/$_->{device}");
-	}
-	if ($_->{mntpoint} eq '/home') {
-	    $_->{size} = min($_->{size}, 1024 * 1024 * 2); # not greater than 1GB
-	}
+	$_->{saved} = !member($_->{fs_type}, 'ntfs', 'vfat', 'swap');
+    }
+
+    #- shrink and don't save the last ext3 partition (which is the /home partition)
+    if (my $part = find { isTrueLocalFS($_) } reverse @$part_list) {
+	$part->{size} = min($part->{size}, 1024 * 1024 * 2); # not greater than 1GB
+	$part->{saved} = 0;
+    }
+
+    foreach (grep { $_->{saved} } @$part_list) {
+	run_or_die(@partimage_cmd,
+		   '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
+		   'save', devices::make($_->{device}), "$dir/$_->{device}");
     }
     save_part_list($dir, $hd->{geom}, $part_list);
 }
@@ -155,7 +159,7 @@ sub rest_all {
     partition_table::raw::compute_nb_cylinders($hd->{geom}, $hd->{totalsectors});
 
     #- grow the last ext3 partition
-    if (my $part = find { $_->{fs_type} eq 'ext3' } reverse @{$h{part_list}}) {
+    if (my $part = find { isTrueLocalFS($_) } reverse @{$h{part_list}}) {
 	$part->{ratio} = 1;
     }
 
