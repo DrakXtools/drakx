@@ -3,7 +3,6 @@ package activefw;
 use Net::DBus;
 use Net::DBus::Binding::Watch;
 use Gtk2::Helper;
-use POSIX qw(strftime);
 use Socket;
 
 sub new {
@@ -122,7 +121,8 @@ sub get_whitelist {
 
 sub format_date {
     my ($timestamp) = @_;
-    strftime("%c", localtime($timestamp));
+    require c;
+    c::strftime("%c", localtime($timestamp));
 }
 
 sub get_service {
