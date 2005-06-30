@@ -38,6 +38,7 @@ print '
 #include <net/route.h>
 #include <netinet/in.h>
 #include <linux/sockios.h>
+#include <locale.h>
 
 // for ethtool structs:
 typedef unsigned long long u64;
@@ -240,6 +241,13 @@ init_setlocale()
    CODE:
    setlocale(LC_ALL, "");
    setlocale(LC_NUMERIC, "C"); /* otherwise eval "1.5" returns 1 in fr_FR for example */
+
+char *
+setlocale(category, locale = 0) 
+    int     category
+    char *      locale
+
+
 
 char *
 bindtextdomain(domainname, dirname)
@@ -773,6 +781,7 @@ get_iso_volume_ids(int fd)
        MS_MGC_VAL O_WRONLY O_RDWR O_CREAT O_NONBLOCK F_SETFL F_GETFL WNOHANG
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT CDROM_DRIVE_STATUS
        LOG_WARNING LOG_INFO LOG_LOCAL1
+       LC_COLLATE
        ) ],
 );
 
