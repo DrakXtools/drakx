@@ -1,13 +1,12 @@
 package network::activefw;
 
-use Net::DBus;
-use Net::DBus::Binding::Watch;
 use Gtk2::Helper;
 use Socket;
 
 sub new {
     my ($type, $filter) = @_;
 
+    require Net::DBus;
     my $bus = Net::DBus->system;
     my $con = $bus->{connection};
 
@@ -38,6 +37,7 @@ sub set_DBus_watch {
     $con->set_watch_callbacks(sub {
         my ($con, $watch) = @_;
         my $flags = $watch->get_flags;
+        require Net::DBus::Binding::Watch;
         if ($flags & &Net::DBus::Binding::Watch::READABLE) {
             Gtk2::Helper->add_watch($watch->get_fileno, 'in', sub {
                 $watch->handle(&Net::DBus::Binding::Watch::READABLE);
@@ -70,6 +70,7 @@ sub call_method {
 
 sub blacklist {
     my ($o, $seq, $blacklist) = @_;
+    require Net::DBus::Binding::Watch;
     $o->call_method('Blacklist',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
@@ -77,18 +78,21 @@ sub blacklist {
 
 sub unblacklist {
     my ($o, $addr) = @_;
+    require Net::DBus::Binding::Watch;
     $o->call_method('UnBlacklist',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
 
 sub whitelist {
     my ($o, $addr) = @_;
+    require Net::DBus::Binding::Watch;
     $o->call_method('Whitelist',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
 
 sub unwhitelist {
     my ($o, $addr) = @_;
+    require Net::DBus::Binding::Watch;
     $o->call_method('UnWhitelist',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
@@ -100,6 +104,7 @@ sub get_interactive {
 
 sub set_interactive {
     my ($o, $mode) = @_;
+    require Net::DBus::Binding::Watch;
     $o->call_method('SetMode',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
 }
