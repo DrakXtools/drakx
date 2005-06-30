@@ -1,4 +1,4 @@
-package activefw;
+package network::activefw;
 
 use Net::DBus;
 use Net::DBus::Binding::Watch;

@@ -109,7 +109,7 @@ my $interactive_cb;
 my @attacks_queue;
 
 if ($enable_activefw) {
-    $activefw = activefw->new(sub {
+    $activefw = network::activefw->new(sub {
         my ($_con, $msg) = @_;
         handle_attack($msg->get_args_list) if
           $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
@@ -263,9 +263,9 @@ sub ask_attack_verdict {
         return;
     }
 
-    my $ip_addr = activefw::get_ip_address($addr);
-    my $hostname = activefw::resolve_address($ip_addr);
-    my $service = activefw::get_service($port);
+    my $ip_addr = network::activefw::get_ip_address($addr);
+    my $hostname = network::activefw::resolve_address($ip_addr);
+    my $service = network::activefw::get_service($port);
 
     my $msg = $prefix eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $hostname)
             : $prefix eq "SERV" ? N("The %s service has been attacked by %s.", $service , $hostname)
@@ -309,7 +309,7 @@ sub ask_attack_verdict {
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
                           1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", activefw::format_date($timestamp)),
+                              N("Attack time: %s", network::activefw::format_date($timestamp)),
                               N("Network interface: %s", $indev),
                               N("Attack type: %s", $prefix),
                               if_($protocol, N("Protocol: %s", $protocol)),

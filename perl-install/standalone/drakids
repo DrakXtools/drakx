@@ -39,7 +39,7 @@ $whitelist->set_headers_clickable(1);
 $whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelist->get_model);
 $whitelist->get_column(0)->set_sort_column_id(0);
 
-my $activefw = activefw->new(sub {
+my $activefw = network::activefw->new(sub {
     my ($con, $msg) = @_;
     handle_blacklist($msg->get_args_list) if
       $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
@@ -127,13 +127,13 @@ sub handle_blacklist {
     push @{$blacklist->{data}}, [
         $addr,
         $timestamp,
-        activefw::format_date($timestamp),
-        activefw::resolve_address(activefw::get_ip_address($addr)),
+        network::activefw::format_date($timestamp),
+        network::activefw::resolve_address(network::activefw::get_ip_address($addr)),
         $prefix eq 'SCAN' ? N("Port scanning") :
         $prefix eq 'SERV' ? N("Service attack") :
         $prefix eq 'PASS' ? N("Password cracking") :
         '',
-        activefw::get_service($port) || '',
+        network::activefw::get_service($port) || '',
         $indev,
         $protocol || '',
     ];
@@ -160,7 +160,7 @@ sub clear_whitelist {
 
 sub handle_whitelist {
     my ($addr) = @_;
-    push @{$whitelist->{data}}, [ $addr, activefw::resolve_address(activefw::get_ip_address($addr)) ];
+    push @{$whitelist->{data}}, [ $addr, network::activefw::resolve_address(network::activefw::get_ip_address($addr)) ];
 }
 
 sub get_selected_whitelist {
