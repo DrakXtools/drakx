@@ -20,5 +20,5 @@ WriteMakefile(
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> "-I/usr/include/rpm " . ($pcmcia_dir && " -I$pcmcia_dir -I$pcmcia_dir/.."), 
+    'INC'	=> ($pcmcia_dir && " -I$pcmcia_dir -I$pcmcia_dir/.."), 
 );
