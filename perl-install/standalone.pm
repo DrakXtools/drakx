@@ -15,7 +15,7 @@ $::isStandalone = 1;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
 
-c::setlocale();
+c::init_setlocale();
 c::bindtextdomain('libDrakX', "/usr/share/locale");
 
 $::license = N_("This program is free software; you can redistribute it and/or modify

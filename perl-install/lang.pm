@@ -1249,7 +1249,7 @@ sub bindtextdomain() {
     #- NB: not using $::isInstall to make it work more easily at install and standalone
     my $localedir = "$ENV{SHARE_PATH}/locale" . ($::prefix ? "_special" : '');
 
-    c::setlocale();
+    c::init_setlocale();
     c::bind_textdomain_codeset('libDrakX', 'UTF-8');
     $::need_utf8_i18n = 1;
     c::bindtextdomain('libDrakX', $localedir);

@@ -21,7 +21,7 @@ sub new {
 	    local $ENV{LC_CTYPE} = "en_US.UTF-8";
 	    Newt::Init(1);
 	}
-	c::setlocale();
+	c::init_setlocale();
     } else {
 	Newt::Init(0);
     }

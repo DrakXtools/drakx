@@ -236,7 +236,7 @@ get_ext2_label(device_name)
   RETVAL
 
 void
-setlocale()
+init_setlocale()
    CODE:
    setlocale(LC_ALL, "");
    setlocale(LC_NUMERIC, "C"); /* otherwise eval "1.5" returns 1 in fr_FR for example */
