@@ -847,7 +847,7 @@ sub openInstallLog() {
     my $f = "$::prefix/root/drakx/install.log";
     open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
     CORE::select((CORE::select($LOG), $| = 1)[0]);
-    URPM::rpmErrorSetCallback(fileno $LOG);
+    URPM::rpmErrorWriteTo(fileno $LOG);
     $LOG;
 }
 
