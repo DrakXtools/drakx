@@ -35,6 +35,7 @@ if (-d "$repository/$LIVE_LOCATION_REL") {
     sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
 } elsif (-e "$repository/$CLP_FILE_REL") {
     my $dev = find_free_loop();
+    sys("$sudo modprobe gzloop");
     sys("$sudo losetup -r -e gz $dev $repository/$CLP_FILE_REL");
     sys("$sudo mount -r $dev $STAGE2_LOCATION");
 }
