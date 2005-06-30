@@ -846,6 +846,7 @@ sub default_packages {
     push @l, "numlock" if $o->{miscellaneous}{numlock};
     push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
+    push @l, "dmraid" if any { $_->{bus} =~ /^dmraid_/ } $o->{all_hds}{hds};
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     push @l, detect_devices::probe_name('Pkg');
 
