@@ -844,11 +844,10 @@ sub computeGroupSize {
 
 
 sub openInstallLog() {
-
     my $f = "$::prefix/root/drakx/install.log";
     open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
     CORE::select((CORE::select($LOG), $| = 1)[0]);
-    c::rpmErrorSetCallback(fileno $LOG);
+    URPM::rpmErrorSetCallback(fileno $LOG);
     $LOG;
 }
 
@@ -864,7 +863,7 @@ sub rpmDbOpen {
 	    my $rebuilddb_dir = "$::prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
-	    URPM::DB::rebuild($::prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
+	    URPM::DB::rebuild($::prefix) or log::l("rebuilding of rpm database failed: " . URPM::rpmErrorString()), c::_exit(2);
 
 	    c::_exit(0);
 	}
@@ -1133,7 +1132,7 @@ sub install {
 			print OUTPUT "inst:$id:start:0:$size_typical\ninst:$id:progress:0:$size_typical\nclose:$id\n";
 		    }
 		} else { eval {
-		    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", c::rpmErrorString();
+		    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
 		    my $trans = $db->create_transaction($::prefix);
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
@@ -1147,7 +1146,7 @@ sub install {
 		    }
 
 		    my @checks = $trans->check; @checks and log::l("check failed : " . join("\n               ", @checks));
-		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
+		    $trans->order or die "error ordering package list: " . URPM::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
@@ -1172,7 +1171,7 @@ sub install {
 								      my ($p) = @_;
 								      $check_installed ||= $pkg->compare_pkg($p) == 0;
 								  });
-						$check_installed or log::l($pkg->name . " not installed, " . c::rpmErrorString());
+						$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
 						$check_installed and print OUTPUT "close:$id\n";
 					    }, callback_inst => sub {
 						my ($_data, $type, $id, $subtype, $amount, $total) = @_;
@@ -1271,7 +1270,7 @@ sub remove {
 
     return if !@{$toRemove || []};
 
-    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", c::rpmErrorString();
+    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction($::prefix);
 
     foreach my $p (@$toRemove) {

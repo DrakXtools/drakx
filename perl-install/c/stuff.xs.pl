@@ -81,17 +81,6 @@ print '
 #undef Fflush
 #undef Mkdir
 #undef Stat
-#include <rpm/rpmlib.h>
-#include <rpm/rpmio.h>
-
-void rpmError_callback_empty(void) {}
-
-int rpmError_callback_data;
-void rpmError_callback(void) {
-  if (rpmErrorCode() != RPMERR_UNLINK && rpmErrorCode() != RPMERR_RMDIR) {
-    write(rpmError_callback_data, rpmErrorString(), strlen(rpmErrorString()));
-  }
-}
 
 ';
 
@@ -754,21 +743,6 @@ get_iso_volume_ids(int fd)
     }
   }
 
-';
-
-print '
-const char *
-rpmErrorString()
-
-void
-rpmErrorSetCallback(fd)
-  int fd
-  CODE:
-  rpmError_callback_data = fd;
-  rpmErrorSetCallback(rpmError_callback);
-
-int
-rpmvercmp(char *a, char *b);
 ';
 
 @macros = (
