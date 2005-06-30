@@ -605,7 +605,7 @@ get_hw_address(const char* ifname)
         RETVAL = NULL;
         return;
     }
-    a = ifr.ifr_hwaddr.sa_data;
+    a = (unsigned char*)ifr.ifr_hwaddr.sa_data;
     asprintf(&res, "%02x:%02x:%02x:%02x:%02x:%02x", a[0],a[1],a[2],a[3],a[4],a[5]);
     RETVAL= res;
   OUTPUT:
@@ -759,11 +759,6 @@ get_iso_volume_ids(int fd)
 print '
 const char *
 rpmErrorString()
-
-void
-rpmSetVeryVerbose()
-  CODE:
-  rpmSetVerbosity(RPMMESS_DEBUG);
 
 void
 rpmErrorSetCallback(fd)
