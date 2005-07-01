@@ -215,6 +215,7 @@ sub get_scale_max {
 sub apply_scale {
     my ($name) = @_;
     $theme{conf}{$name} = $adj{$name}->get_value;
+    update_rect();
     $image_area->queue_draw;
 }
 sub check_scale_value {
