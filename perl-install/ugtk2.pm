@@ -835,7 +835,7 @@ sub new {
     my ($type, $title, %opts) = @_;
 
     my $o = bless { %opts }, $type;
-    while (my $e = shift @tempory::objects) { $e->destroy } #- uh ?
+    while (my $e = shift @tempory::objects) { $e->destroy }
 
     my $window = gtknew(
 	'MagicWindow',
