@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
-"POT-Creation-Date: 2005-07-01 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 16:44+0200\n"
 "PO-Revision-Date: 2005-06-23 13:46+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -315,8 +315,8 @@ msgid "No CDROM support"
 msgstr "CD toetuseta"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:92
-#: diskdrake/interactive.pm:1035 diskdrake/interactive.pm:1045
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1039 diskdrake/interactive.pm:1049
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Read carefully!"
 msgstr "Lugege hoolega!"
@@ -942,7 +942,7 @@ msgstr ""
 msgid "The passwords do not match"
 msgstr "Paroolid ei klapi"
 
-#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1284
+#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1299
 #, c-format
 msgid "Please try again"
 msgstr "Palun proovige veel"
@@ -1772,24 +1772,24 @@ msgstr "Grub"
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:931
+#: bootloader.pm:934
 #, c-format
 msgid "not enough room in /boot"
 msgstr "/boot on liiga täis"
 
-#: bootloader.pm:1403
+#: bootloader.pm:1406
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Alglaadurit ei ole võimalik paigaldada partitsioonile %s\n"
 
-#: bootloader.pm:1437
+#: bootloader.pm:1440
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr "Alglaaduri seadistust tuleb uuendada, sest partitsioon on ümber seatud"
 
-#: bootloader.pm:1450
+#: bootloader.pm:1453
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1798,7 +1798,7 @@ msgstr ""
 "Alglaadurit ei ole võimalik korrektselt paigaldada. Teil tuleb ette võtta "
 "alglaadimine päästerežiimis (rescue) ja valida \"%s\""
 
-#: bootloader.pm:1451
+#: bootloader.pm:1454
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Alglaaduri taaspaigaldamine"
@@ -2086,12 +2086,12 @@ msgid "Server: "
 msgstr "Server: "
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:521
-#: diskdrake/interactive.pm:1177 diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1259
 #, c-format
 msgid "Mount point: "
 msgstr "Haakepunkt: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1259
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Options: %s"
 msgstr "Eelistused: %s"
@@ -2179,7 +2179,7 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1192
+#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1196
 #, c-format
 msgid "Empty"
 msgstr "Tühi"
@@ -2439,12 +2439,12 @@ msgstr "Loo uus partitsioon"
 msgid "Start sector: "
 msgstr "Algsektor: "
 
-#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:915
+#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:919
 #, c-format
 msgid "Size in MB: "
 msgstr "Suurus (MB): "
 
-#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:916
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:920
 #, c-format
 msgid "Filesystem type: "
 msgstr "Failisüsteemi tüüp: "
@@ -2586,97 +2586,97 @@ msgstr "Valige olemasolev LVM, millele lisada"
 msgid "LVM name?"
 msgstr "LVM nimi?"
 
-#: diskdrake/interactive.pm:900
+#: diskdrake/interactive.pm:904
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Seda partitsiooni ei saa loopback-ina kasutada"
 
-#: diskdrake/interactive.pm:913
+#: diskdrake/interactive.pm:917
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:918
 #, c-format
 msgid "Loopback file name: "
 msgstr "Loopback faili nimi:"
 
-#: diskdrake/interactive.pm:919
+#: diskdrake/interactive.pm:923
 #, c-format
 msgid "Give a file name"
 msgstr "Failinimi"
 
-#: diskdrake/interactive.pm:922
+#: diskdrake/interactive.pm:926
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "See fail on juba loopback-ina kasutusel, valige mõni muu"
 
-#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:927
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Fail on juba olemas. Kas kasutada seda?"
 
-#: diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Mount options"
 msgstr "Haakimise valikud"
 
-#: diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:957
 #, c-format
 msgid "Various"
 msgstr "Mitmesugust"
 
-#: diskdrake/interactive.pm:1017
+#: diskdrake/interactive.pm:1021
 #, c-format
 msgid "device"
 msgstr "seade"
 
-#: diskdrake/interactive.pm:1018
+#: diskdrake/interactive.pm:1022
 #, c-format
 msgid "level"
 msgstr "tase"
 
-#: diskdrake/interactive.pm:1019
+#: diskdrake/interactive.pm:1023
 #, c-format
 msgid "chunk size in KiB"
 msgstr "ühiku suurus (KiB)"
 
-#: diskdrake/interactive.pm:1036
+#: diskdrake/interactive.pm:1040
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Vaadake ette: see võib olla ohtlik."
 
-#: diskdrake/interactive.pm:1051
+#: diskdrake/interactive.pm:1055
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Mis tüüpi partitsioonid teete?"
 
-#: diskdrake/interactive.pm:1089
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Muudatuste rakendamiseks vajate alglaadimist"
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Ketta %s partitsioonitabel salvestatakse!"
 
-#: diskdrake/interactive.pm:1107
+#: diskdrake/interactive.pm:1111
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Partitsiooni %s vormindamisel hävivad sellel kõik andmed"
 
-#: diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Liiguta failid uuele partitsioonile"
 
-#: diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Hide files"
 msgstr "Failide peitmine"
 
-#: diskdrake/interactive.pm:1124
+#: diskdrake/interactive.pm:1128
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2685,108 +2685,108 @@ msgstr ""
 "Kataloogis %s on juba andmed\n"
 "(%s)"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1139
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Failide liigutamine uuele partitsioonile"
 
-#: diskdrake/interactive.pm:1139
+#: diskdrake/interactive.pm:1143
 #, c-format
 msgid "Copying %s"
 msgstr "%s kopeerimine"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1147
 #, c-format
 msgid "Removing %s"
 msgstr "%s eemaldamine"
 
-#: diskdrake/interactive.pm:1157
+#: diskdrake/interactive.pm:1161
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "partitsioon %s kannab nüüd nime %s"
 
-#: diskdrake/interactive.pm:1158
+#: diskdrake/interactive.pm:1162
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partitsioone on muudetud: "
 
-#: diskdrake/interactive.pm:1178 diskdrake/interactive.pm:1237
+#: diskdrake/interactive.pm:1182 diskdrake/interactive.pm:1244
 #, c-format
 msgid "Device: "
 msgstr "Seade: "
 
-#: diskdrake/interactive.pm:1179
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "Devfs name: "
 msgstr "Devfs nimi: "
 
-#: diskdrake/interactive.pm:1180
+#: diskdrake/interactive.pm:1184
 #, c-format
 msgid "Volume label: "
 msgstr "Kettatähis: "
 
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:1185
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS kettatähis: %s (arvatavasti)\n"
 
-#: diskdrake/interactive.pm:1185 diskdrake/interactive.pm:1194
-#: diskdrake/interactive.pm:1255
+#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Type: "
 msgstr "Tüüp: "
 
-#: diskdrake/interactive.pm:1189 install_steps_gtk.pm:296
+#: diskdrake/interactive.pm:1193 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
 msgstr "Nimi: "
 
-#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1200
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Algus: sektor %s\n"
 
-#: diskdrake/interactive.pm:1197
+#: diskdrake/interactive.pm:1201
 #, c-format
 msgid "Size: %s"
 msgstr "Suurus: %s"
 
-#: diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorit"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Silindrid %d kuni %d\n"
 
-#: diskdrake/interactive.pm:1202
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Loogiliste partitsioonide arv: %d\n"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Formatted\n"
 msgstr "Vormindatud\n"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Not formatted\n"
 msgstr "Vormindamata\n"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "Mounted\n"
 msgstr "Haagitud\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2795,7 +2795,7 @@ msgstr ""
 "Loopback-fail(id):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2804,27 +2804,27 @@ msgstr ""
 "Partitsioonilt toimub alglaadimine\n"
 "    (MS-DOS-i, mitte LiLo jaoks)\n"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Level %s\n"
 msgstr "Tase %s\n"
 
-#: diskdrake/interactive.pm:1212
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Ühiku suurus %d KiB\n"
 
-#: diskdrake/interactive.pm:1213
+#: diskdrake/interactive.pm:1220
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-kettad %s\n"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1222
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback faili nimi: %s"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1225
 #, c-format
 msgid ""
 "\n"
@@ -2837,7 +2837,7 @@ msgstr ""
 "juhtpartitsiooniga, parem oleks\n"
 "seda mitte puutuda.\n"
 
-#: diskdrake/interactive.pm:1221
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid ""
 "\n"
@@ -2851,73 +2851,73 @@ msgstr ""
 "võimaldab mitme operatsioonisüsteemi\n"
 "laadimist.\n"
 
-#: diskdrake/interactive.pm:1238
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Read-only"
 msgstr "Ainult lugemisõigusega"
 
-#: diskdrake/interactive.pm:1239
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Size: %s\n"
 msgstr "Suurus: %s\n"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1247
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geomeetria: %s silindrit, %s pead, %s sektorit\n"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "Info: "
 msgstr "Info: "
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-kettad %s\n"
 
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Partitsioonitabeli tüüp: %s\n"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "kanalil %d id %d\n"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Failisüsteemi krüptovõti"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Valige failisüsteemi krüptovõti"
 
-#: diskdrake/interactive.pm:1283
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "See krüptovõti on liiga lihtne (peaks olema vähemalt %d märki)"
 
-#: diskdrake/interactive.pm:1284
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Krüptovõtmed ei klapi"
 
-#: diskdrake/interactive.pm:1287 network/netconnect.pm:1013
+#: diskdrake/interactive.pm:1302 network/netconnect.pm:1013
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
 msgstr "Krüptovõti"
 
-#: diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Krüptovõti (uuesti)"
 
-#: diskdrake/interactive.pm:1289 standalone/drakvpn:1017
+#: diskdrake/interactive.pm:1304 standalone/drakvpn:1017
 #: standalone/drakvpn:1102
 #, c-format
 msgid "Encryption algorithm"
@@ -3133,12 +3133,12 @@ msgstr "Kirjutamisõiguse andmine tavakasutajale"
 msgid "Give read-only access to ordinary users"
 msgstr "Lugemisõiguse andmine tavakasutajale"
 
-#: fs/type.pm:372
+#: fs/type.pm:375
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "JFS ei ole kasutatav alla 16MB partitsioonidel"
 
-#: fs/type.pm:373
+#: fs/type.pm:376
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "ReiserFS ei ole kasutatav alla 32MB partitsioonidel"
@@ -3199,8 +3199,10 @@ msgstr ""
 
 #: fsedit.pm:390
 #, c-format
-msgid "You can not use a LVM Logical Volume for mount point %s"
-msgstr "Te ei saa haakepunkti %s jaoks kasutada LVM loogilist ketast"
+msgid ""
+"You can not use a LVM Logical Volume for mount point %s since it spans "
+"physical volumes"
+msgstr ""
 
 #: fsedit.pm:392
 #, c-format
@@ -9589,12 +9591,17 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "See ongi %s"
 
-#: lvm.pm:117
+#: lvm.pm:130
+#, c-format
+msgid "Physical volume %s is still in use"
+msgstr ""
+
+#: lvm.pm:139
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Eemaldage esmalt kettarühmad (logical volumes)\n"
 
-#: lvm.pm:150
+#: lvm.pm:172
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
@@ -20446,8 +20453,7 @@ msgstr "Mandriva Linuxi juhtimiskeskus"
 msgid "Synchronization tool"
 msgstr "Sünkroniseerimisvahend"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
-#: standalone/drakbug:151 standalone/drakbug:155
+#: standalone/drakbug:49 standalone/drakbug:149
 #, c-format
 msgid "Standalone Tools"
 msgstr "Autonoomsed vahendid"
@@ -20552,12 +20558,12 @@ msgstr ""
 msgid "Report"
 msgstr "Raport"
 
-#: standalone/drakbug:164
+#: standalone/drakbug:159
 #, c-format
 msgid "Not installed"
 msgstr "Pole paigaldatud"
 
-#: standalone/drakbug:176
+#: standalone/drakbug:171
 #, c-format
 msgid "Package not installed"
 msgstr "Pakett ei ole paigaldatud"
@@ -26518,6 +26524,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Paigaldamine ebaõnnestus!"
+
+#~ msgid "You can not use a LVM Logical Volume for mount point %s"
+#~ msgstr "Te ei saa haakepunkti %s jaoks kasutada LVM loogilist ketast"
 
 #~ msgid ""
 #~ "You've selected a LVM Logical Volume as root (/).\n"

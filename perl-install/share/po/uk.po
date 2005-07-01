@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uk\n"
-"POT-Creation-Date: 2005-07-01 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 16:44+0200\n"
 "PO-Revision-Date: 2005-03-01 01:29+0200\n"
 "Last-Translator: Taras Boychuk <btr1@ukrpost.net>\n"
 "Language-Team: ukrainian <uk@li.org>\n"
@@ -326,8 +326,8 @@ msgid "No CDROM support"
 msgstr "Немає підтримки CDROM"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:92
-#: diskdrake/interactive.pm:1035 diskdrake/interactive.pm:1045
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1039 diskdrake/interactive.pm:1049
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Read carefully!"
 msgstr "Читайте уважно!"
@@ -969,7 +969,7 @@ msgstr ""
 msgid "The passwords do not match"
 msgstr "Паролі не співпадають"
 
-#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1284
+#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1299
 #, c-format
 msgid "Please try again"
 msgstr "Будь ласка, спробуйте ще раз"
@@ -1800,17 +1800,17 @@ msgstr "Grub"
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:931
+#: bootloader.pm:934
 #, c-format
 msgid "not enough room in /boot"
 msgstr "недостатньо місця в /boot"
 
-#: bootloader.pm:1403
+#: bootloader.pm:1406
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Ви не можете встановити завантажувач в розділ %s\n"
 
-#: bootloader.pm:1437
+#: bootloader.pm:1440
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1819,7 +1819,7 @@ msgstr ""
 "Конфігурація Вашого завантажувача має бути поновлена, бо розділи були "
 "перенумеровані"
 
-#: bootloader.pm:1450
+#: bootloader.pm:1453
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1828,7 +1828,7 @@ msgstr ""
 "Завантажувач не може бути коректно встановлений. Вам необхідно завантажити "
 "rescue, і вибрати \"%s\""
 
-#: bootloader.pm:1451
+#: bootloader.pm:1454
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Перевстановити завантажувач"
@@ -2116,12 +2116,12 @@ msgid "Server: "
 msgstr "Сервер: "
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:521
-#: diskdrake/interactive.pm:1177 diskdrake/interactive.pm:1252
+#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1259
 #, c-format
 msgid "Mount point: "
 msgstr "Точка монтування: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1259
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Options: %s"
 msgstr "Параметри: %s"
@@ -2208,7 +2208,7 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1192
+#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1196
 #, c-format
 msgid "Empty"
 msgstr "Порожній"
@@ -2470,12 +2470,12 @@ msgstr "Створити новий розділ"
 msgid "Start sector: "
 msgstr "Початковий сектор: "
 
-#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:915
+#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:919
 #, c-format
 msgid "Size in MB: "
 msgstr "Розмір (Мб): "
 
-#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:916
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:920
 #, c-format
 msgid "Filesystem type: "
 msgstr "Тип файлової системи: "
@@ -2618,99 +2618,99 @@ msgstr "Виберіть існуючий LVM, до якого додати"
 msgid "LVM name?"
 msgstr "Назва LVM?"
 
-#: diskdrake/interactive.pm:900
+#: diskdrake/interactive.pm:904
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Цей розділ не може використовуватися для зворотнього монтування"
 
-#: diskdrake/interactive.pm:913
+#: diskdrake/interactive.pm:917
 #, c-format
 msgid "Loopback"
 msgstr "Зворотнє монтування"
 
-#: diskdrake/interactive.pm:914
+#: diskdrake/interactive.pm:918
 #, c-format
 msgid "Loopback file name: "
 msgstr "Назва файла зворотнього монтування: "
 
-#: diskdrake/interactive.pm:919
+#: diskdrake/interactive.pm:923
 #, c-format
 msgid "Give a file name"
 msgstr "Вкажіть назву файла"
 
-#: diskdrake/interactive.pm:922
+#: diskdrake/interactive.pm:926
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Файл вже використовується іншим пристроєм зворотнього монтування, виберіть "
 "інший"
 
-#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:927
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Файл вже існує. Користуватися ним?"
 
-#: diskdrake/interactive.pm:946
+#: diskdrake/interactive.pm:950
 #, c-format
 msgid "Mount options"
 msgstr "Параметри монтування:"
 
-#: diskdrake/interactive.pm:953
+#: diskdrake/interactive.pm:957
 #, c-format
 msgid "Various"
 msgstr "Різноманітне"
 
-#: diskdrake/interactive.pm:1017
+#: diskdrake/interactive.pm:1021
 #, c-format
 msgid "device"
 msgstr "пристрій"
 
-#: diskdrake/interactive.pm:1018
+#: diskdrake/interactive.pm:1022
 #, c-format
 msgid "level"
 msgstr "рівень"
 
-#: diskdrake/interactive.pm:1019
+#: diskdrake/interactive.pm:1023
 #, c-format
 msgid "chunk size in KiB"
 msgstr "розмір ділянки в Кб"
 
-#: diskdrake/interactive.pm:1036
+#: diskdrake/interactive.pm:1040
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Обережно: ця операція небезпечна."
 
-#: diskdrake/interactive.pm:1051
+#: diskdrake/interactive.pm:1055
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Який тип розбиття на розділи?"
 
-#: diskdrake/interactive.pm:1089
+#: diskdrake/interactive.pm:1093
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Щоб зміни почали діяти, Вам слід перезавантажити комп'ютер"
 
-#: diskdrake/interactive.pm:1098
+#: diskdrake/interactive.pm:1102
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Таблицю розділів диску %s буде записано на диск!"
 
-#: diskdrake/interactive.pm:1107
+#: diskdrake/interactive.pm:1111
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Після форматування розділу %s всі дані на ньому будуть втрачені"
 
-#: diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Перемістити файли в новий розділ"
 
-#: diskdrake/interactive.pm:1123
+#: diskdrake/interactive.pm:1127
 #, c-format
 msgid "Hide files"
 msgstr "Сховати файли"
 
-#: diskdrake/interactive.pm:1124
+#: diskdrake/interactive.pm:1128
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2719,108 +2719,108 @@ msgstr ""
 "Тека %s вже містить дані\n"
 "(%s)"
 
-#: diskdrake/interactive.pm:1135
+#: diskdrake/interactive.pm:1139
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Переміщення файлів у новий розділ"
 
-#: diskdrake/interactive.pm:1139
+#: diskdrake/interactive.pm:1143
 #, c-format
 msgid "Copying %s"
 msgstr "Копіювання %s"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1147
 #, c-format
 msgid "Removing %s"
 msgstr "Видалення %s"
 
-#: diskdrake/interactive.pm:1157
+#: diskdrake/interactive.pm:1161
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "розділ %s відомий, як %s"
 
-#: diskdrake/interactive.pm:1158
+#: diskdrake/interactive.pm:1162
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Нумерацію розділів буде змінено: "
 
-#: diskdrake/interactive.pm:1178 diskdrake/interactive.pm:1237
+#: diskdrake/interactive.pm:1182 diskdrake/interactive.pm:1244
 #, c-format
 msgid "Device: "
 msgstr "Пристрій: "
 
-#: diskdrake/interactive.pm:1179
+#: diskdrake/interactive.pm:1183
 #, c-format
 msgid "Devfs name: "
 msgstr "Назва devfs"
 
-#: diskdrake/interactive.pm:1180
+#: diskdrake/interactive.pm:1184
 #, c-format
 msgid "Volume label: "
 msgstr "Мітка тому: "
 
-#: diskdrake/interactive.pm:1181
+#: diskdrake/interactive.pm:1185
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Літера диску в ДОСі: %s (припущення)\n"
 
-#: diskdrake/interactive.pm:1185 diskdrake/interactive.pm:1194
-#: diskdrake/interactive.pm:1255
+#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1198
+#: diskdrake/interactive.pm:1262
 #, c-format
 msgid "Type: "
 msgstr "Тип: "
 
-#: diskdrake/interactive.pm:1189 install_steps_gtk.pm:296
+#: diskdrake/interactive.pm:1193 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
 msgstr "Назва: "
 
-#: diskdrake/interactive.pm:1196
+#: diskdrake/interactive.pm:1200
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Початок: сектор %s\n"
 
-#: diskdrake/interactive.pm:1197
+#: diskdrake/interactive.pm:1201
 #, c-format
 msgid "Size: %s"
 msgstr "Розмір: %s"
 
-#: diskdrake/interactive.pm:1199
+#: diskdrake/interactive.pm:1203
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s секторів"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1205
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Від циліндра %d до циліндра %d \n"
 
-#: diskdrake/interactive.pm:1202
+#: diskdrake/interactive.pm:1206
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr ""
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Formatted\n"
 msgstr "Форматований\n"
 
-#: diskdrake/interactive.pm:1204
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Not formatted\n"
 msgstr "Не форматований\n"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1209
 #, c-format
 msgid "Mounted\n"
 msgstr "Змонтований\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2829,7 +2829,7 @@ msgstr ""
 "Файл(и) зворотнього монтування: \n"
 "  %s\n"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2838,27 +2838,27 @@ msgstr ""
 "Типовий розділ для завантаження системи\n"
 "     (для завантаження ДОСу, не для lilo)\n"
 
-#: diskdrake/interactive.pm:1211
+#: diskdrake/interactive.pm:1218
 #, c-format
 msgid "Level %s\n"
 msgstr "Рівень %s\n"
 
-#: diskdrake/interactive.pm:1212
+#: diskdrake/interactive.pm:1219
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Розмір ділянки %d в Кб\n"
 
-#: diskdrake/interactive.pm:1213
+#: diskdrake/interactive.pm:1220
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Диски RAID %s\n"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1222
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Назви файлів зворотнього монтування: %s"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1225
 #, c-format
 msgid ""
 "\n"
@@ -2871,7 +2871,7 @@ msgstr ""
 "Driver, Вам мабуть не потрібно\n"
 "його змінювати.\n"
 
-#: diskdrake/interactive.pm:1221
+#: diskdrake/interactive.pm:1228
 #, c-format
 msgid ""
 "\n"
@@ -2884,74 +2884,74 @@ msgstr ""
 "можливості подвійного \n"
 "завантаження системи.\n"
 
-#: diskdrake/interactive.pm:1238
+#: diskdrake/interactive.pm:1245
 #, c-format
 msgid "Read-only"
 msgstr "Тільки для читання"
 
-#: diskdrake/interactive.pm:1239
+#: diskdrake/interactive.pm:1246
 #, c-format
 msgid "Size: %s\n"
 msgstr "Розмір: %s\n"
 
-#: diskdrake/interactive.pm:1240
+#: diskdrake/interactive.pm:1247
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрія: %s циліндрів, %s головок, %s секторів\n"
 
-#: diskdrake/interactive.pm:1241
+#: diskdrake/interactive.pm:1248
 #, c-format
 msgid "Info: "
 msgstr "Інформація: "
 
-#: diskdrake/interactive.pm:1242
+#: diskdrake/interactive.pm:1249
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Диски LVM %s\n"
 
-#: diskdrake/interactive.pm:1243
+#: diskdrake/interactive.pm:1250
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Тип таблиці розділів: %s\n"
 
-#: diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1251
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "на каналі %d id %d\n"
 
-#: diskdrake/interactive.pm:1279
+#: diskdrake/interactive.pm:1294
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Ключ шифрування файлової системи"
 
-#: diskdrake/interactive.pm:1280
+#: diskdrake/interactive.pm:1295
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Виберіть ключ шифрування Вашої файлової системи"
 
-#: diskdrake/interactive.pm:1283
+#: diskdrake/interactive.pm:1298
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Цей пароль занадто простий (він повинен бути хоча б %d літер завдовжки)"
 
-#: diskdrake/interactive.pm:1284
+#: diskdrake/interactive.pm:1299
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Ключі шифрування не співпадають"
 
-#: diskdrake/interactive.pm:1287 network/netconnect.pm:1013
+#: diskdrake/interactive.pm:1302 network/netconnect.pm:1013
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
 msgstr "Ключ шифрування"
 
-#: diskdrake/interactive.pm:1288
+#: diskdrake/interactive.pm:1303
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Ключ шифрування (знову)"
 
-#: diskdrake/interactive.pm:1289 standalone/drakvpn:1017
+#: diskdrake/interactive.pm:1304 standalone/drakvpn:1017
 #: standalone/drakvpn:1102
 #, c-format
 msgid "Encryption algorithm"
@@ -3172,12 +3172,12 @@ msgstr "Дати доступ для запису звичайним корис�
 msgid "Give read-only access to ordinary users"
 msgstr "Дати доступ тільки для запису звичайним користувачам"
 
-#: fs/type.pm:372
+#: fs/type.pm:375
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "JFS не можна користуватися на розділах, менших за 16 Мб."
 
-#: fs/type.pm:373
+#: fs/type.pm:376
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Ви не можете використовувати ReiserFS на розділах, менших за 32Мб."
@@ -3238,8 +3238,10 @@ msgstr ""
 
 #: fsedit.pm:390
 #, c-format
-msgid "You can not use a LVM Logical Volume for mount point %s"
-msgstr "Для точки монтування %s не можна користуватися логічним томом LVM"
+msgid ""
+"You can not use a LVM Logical Volume for mount point %s since it spans "
+"physical volumes"
+msgstr ""
 
 #: fsedit.pm:392
 #, c-format
@@ -9615,12 +9617,17 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "Ласкаво просимо до %s"
 
-#: lvm.pm:117
+#: lvm.pm:130
+#, c-format
+msgid "Physical volume %s is still in use"
+msgstr ""
+
+#: lvm.pm:139
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Спочатку зітріть логічні томи\n"
 
-#: lvm.pm:150
+#: lvm.pm:172
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
@@ -20551,8 +20558,7 @@ msgstr "Центр керування Мандріва лінакс"
 msgid "Synchronization tool"
 msgstr "Програма для синхронізації"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
-#: standalone/drakbug:151 standalone/drakbug:155
+#: standalone/drakbug:49 standalone/drakbug:149
 #, c-format
 msgid "Standalone Tools"
 msgstr "Самостійні інструменти"
@@ -20657,12 +20663,12 @@ msgstr ""
 msgid "Report"
 msgstr "Звіт"
 
-#: standalone/drakbug:164
+#: standalone/drakbug:159
 #, c-format
 msgid "Not installed"
 msgstr "Не встановлено"
 
-#: standalone/drakbug:176
+#: standalone/drakbug:171
 #, c-format
 msgid "Package not installed"
 msgstr "Пакунок не встановлено"
@@ -26643,6 +26649,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
+
+#~ msgid "You can not use a LVM Logical Volume for mount point %s"
+#~ msgstr "Для точки монтування %s не можна користуватися логічним томом LVM"
 
 #~ msgid ""
 #~ "You've selected a LVM Logical Volume as root (/).\n"
