@@ -55,11 +55,17 @@ sub hds_fstab {
     map { partition_table::get_normal_parts($_) } @_;
 }
 
+sub vg_free_space {
+    my ($hd) = @_;
+    my @parts = partition_table::get_normal_parts($hd);
+    $hd->{totalsectors} - sum map { $_->{size} } @parts;
+}
+
 sub hds_fstab_and_holes {
     map {
 	if (isLVM($_)) {
 	    my @parts = partition_table::get_normal_parts($_);
-	    my $free = $_->{totalsectors} - sum map { $_->{size} } @parts;
+	    my $free = vg_free_space($_);
 	    my $free_part = { start => 0, size => $free, pt_type => 0, rootDevice => $_->{VG_name} };
 	    @parts, if_($free >= $_->cylinder_size, $free_part);
 	} else {
