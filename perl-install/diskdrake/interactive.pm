@@ -882,10 +882,17 @@ sub RemoveFromRAID {
     raid::removeDisk($all_hds->{raids}, $part);
 }
 sub RemoveFromLVM {
-    my ($_in, $_hd, $part, $all_hds) = @_;
+    my ($in, $_hd, $part, $all_hds) = @_;
     isPartOfLVM($part) or die;
     my ($lvm, $other_lvms) = partition { $_->{VG_name} eq $part->{lvm} } @{$all_hds->{lvms}};
     if (@{$lvm->[0]{disks}} > 1) {
+	my ($used, $_total) = lvm::pv_physical_extents($part);
+	if ($used) {
+	    $in->ask_yesorno('', N("Physical volume %s is still in use.
+Do you want to move used physical extents on this volume to other volumes?", $part->{device})) or return;
+	    my $_w = $in->wait_message('', N("Moving physical extents"));
+	    lvm::pv_move($part);
+	}
 	lvm::vg_reduce($lvm->[0], $part);
     } else {
 	lvm::vg_destroy($lvm->[0]);

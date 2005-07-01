@@ -77,6 +77,12 @@ sub pv_to_vg {
     get_pv_field($pv, 'vg_name') =~ /(\S+)/ && $1;
 }
 
+sub pv_move {
+    my ($pv) = @_;
+    my $dev = expand_symlinks(devices::make($pv->{device}));
+    lvm_cmd('pvmove', '-v', $dev) or die N("Moving used physical extents to other physical volumes failed");
+}
+
 sub update_size {
     my ($lvm) = @_;
     $lvm->{extent_size} = to_int(run_program::get_stdout('lvm2', 'vgs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'vg_extent_size', $lvm->{VG_name}));
