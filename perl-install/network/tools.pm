@@ -238,10 +238,10 @@ sub host_hex_to_dotted {
 sub get_routes() {
     my %routes;
     foreach (cat_("/proc/net/route")) {
-	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+(?:[0-9A-F]+)\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
-	    hex($2) and $routes{$1}{network} = host_hex_to_dotted($2);
-	    hex($3) and $routes{$1}{gateway} = host_hex_to_dotted($3);
-           $4 and $routes{$1}{metric} = $4;
+	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+[0-9A-F]+\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
+	    if (hex($2)) { $routes{$1}{network} = host_hex_to_dotted($2) }
+	    elsif (hex($3)) { $routes{$1}{gateway} = host_hex_to_dotted($3) }
+	    elsif ($4) { $routes{$1}{metric} = $4 }
 	}
     }
     #- TODO: handle IPv6 with /proc/net/ipv6_route
