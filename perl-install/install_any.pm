@@ -1022,7 +1022,7 @@ sub install_urpmi {
     my @cfg;
     foreach (sort { $a->{medium} <=> $b->{medium} } @mediums) {
 	my $name = $_->{fakemedium};
-	if ($_->ignored || $_->selected) {
+	if ($_->selected) {
 	    my $curmethod = $_->method || $::o->{method};
 	    my $dir = (($copied_rpms_on_disk ? "/var/ftp/pub/Mandrivalinux" : '')
 		|| $_->{finalprefix}
