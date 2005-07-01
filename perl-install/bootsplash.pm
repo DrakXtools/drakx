@@ -117,6 +117,13 @@ sub theme_write_config_for_resolution {
     my $config = theme_get_config_for_resolution($name, $res);
     create_path($config);
     my $jpeg = theme_get_image_for_resolution($name, $res);
+
+    # progress/text rectangles border/inter coordinates
+    my ($pb_x1, $pb_x2, $pb_y1, $pb_y2) = ($conf->{px}, $conf->{px} + $conf->{pw}, $conf->{py}, $conf->{py} + $conf->{ph});
+    my ($pi_x1, $pi_x2, $pi_y1, $pi_y2) = ($pb_x1 + 1, $pb_x2 - 1, $pb_y1 + 1, $pb_y2 - 1);
+    my ($tb_x1, $tb_x2, $tb_y1, $tb_y2) = ($conf->{tx}, $conf->{tx} + $conf->{tw}, $conf->{ty}, $conf->{ty} + $conf->{th});
+    my ($ti_x1, $ti_x2, $ti_y1, $ti_y2) = ($tb_x1 + 1, $tb_x2 - 1, $tb_y1 + 1, $tb_y2 - 1);
+
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
@@ -140,11 +147,37 @@ ty=$conf->{ty}
 tw=$conf->{tw}
 th=$conf->{th}
 
+# ttf message output parameters
+text_x=20
+text_y=550
+text_size=20
+text_color=0xeef4ff
+
 # name of the picture file (full path recommended)
 jpeg=$jpeg
 silentjpeg=$jpeg
 
 progress_enable=1
+
+# background
+# b(order) or i(nter) ?
+box silent noover $pb_x1 $pb_y1 $pb_x2 $pb_y2 #040454
+# progress bar
+box silent inter  $pi_x1 $pi_y1 $pi_x1 $pi_y2 #eeeeee #eeeeee #21449c #21449c
+box silent        $pi_x1 $pi_y1 $pi_x2 $pi_y2 #eeeeee #eeeeee #21449c #21449c
+# black border (top, bottom, left, right)
+box silent        $pb_x1 $pb_y1 $pb_x2 $pb_y1 #313234
+box silent        $pb_x1 $pb_y2 $pb_x2 $pb_y2 #889499
+box silent        $pb_x1 $pb_y1 $pb_x1 $pb_y2 #313234
+box silent        $pb_x2 $pb_y1 $pb_x2 $pb_y2 #889499
+
+# text box
+box noover        $ti_x1 $ti_y1 $ti_x2 $ti_y2 #011763
+# black border (top, bottom, left, right)
+box               $tb_x1 $tb_y1 $tb_x2 $tb_y1 #313234
+box               $tb_x1 $tb_y2 $tb_x2 $tb_y2 #889499
+box               $tb_x1 $tb_y1 $tb_x1 $tb_y2 #313234
+box               $tb_x2 $tb_y1 $tb_x2 $tb_y2 #889499
 
 overpaintok=1
 
