@@ -126,9 +126,9 @@ sub vg_add {
 sub vg_reduce {
     my ($lvm_vg, $part_pv) = @_;
 
-    lvm_cmd('vgchange', '-a', 'n', $lvm_vg->{VG_name});
     lvm_cmd('vgreduce', $lvm_vg->{VG_name}, devices::make($part_pv->{device})) or die N("Physical volume %s is still in use", $part_pv->{device});
     @{$lvm_vg->{disks}} = difference2($lvm_vg->{disks}, [ $part_pv ]);
+    update_size($lvm_vg);
     delete $part_pv->{lvm};
     set_isFormatted($part_pv, 0);
 }
