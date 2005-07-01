@@ -111,13 +111,18 @@ sub write {
 	push @{$ports_by_proto{$3}}, $1;
     }
 
+    my $interface_settings = sub {
+        my ($zone, $interface) = @_;
+        [ $zone, $interface, 'detect', if_(detect_devices::is_bridge_interface($interface), 'routeback') ];
+    };
+
     set_config_file("zones", 
 		    [ 'net', 'Net', 'Internet zone' ],
 		    if_($conf->{loc_interface}[0], [ 'loc', 'Local', 'Local' ]),
 		   );
     set_config_file('interfaces',
-		    [ 'net', $conf->{net_interface}, 'detect' ],
-		    (map { [ 'loc', $_, 'detect' ] } @{$conf->{loc_interface} || []}),
+                   $interface_settings->('net', $conf->{net_interface}),
+                   (map { $interface_settings->('loc', $_) } @{$conf->{loc_interface} || []}),
 		   );
     set_config_file('policy',
 		    if_($conf->{loc_interface}[0], [ 'loc', 'net', 'ACCEPT' ], [ 'loc', 'fw', 'ACCEPT' ], [ 'fw', 'loc', 'ACCEPT' ]),
