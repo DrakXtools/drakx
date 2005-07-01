@@ -344,6 +344,9 @@ sub isMounted { $_[0]{isMounted} }
 sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
 sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) || isUBD($_[0]) }
 
+#- not for partitions, but for hds:
+sub is_dmraid { $_[0]{bus} =~ /^dmraid_/ }
+
 sub can_be_this_fs_type {
     my ($part, $fs_type) = @_;
     can_be_one_of_those_fs_types($part, $fs_type);
