@@ -68,7 +68,10 @@ sub get_pv_field {
     my $dev = expand_symlinks(devices::make($pv->{device}));
     run_program::get_stdout('lvm2', 'pvs', '--noheadings', '--nosuffix', '-o', $field, $dev);
 }
-
+sub pv_physical_extents {
+    my ($pv) = @_;
+    split(' ', lvm::get_pv_field($pv, 'pv_pe_alloc_count,pv_pe_count'))
+}
 sub pv_to_vg {
     my ($pv) = @_;
     get_pv_field($pv, 'vg_name') =~ /(\S+)/ && $1;
