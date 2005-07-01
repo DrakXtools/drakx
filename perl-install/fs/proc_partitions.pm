@@ -59,8 +59,6 @@ sub read {
 sub compare {
     my ($hd) = @_;
 
-    $hd->{bus} =~ /^dmraid_/ and log::l("skipping /proc/partititions check for dmraid $hd->{device}"), return;
-
     my @l1 = partition_table::get_normal_parts($hd);
     my @l2 = grep { $_->{rootDevice} eq $hd->{device} } &read([$hd]);
 

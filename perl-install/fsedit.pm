@@ -190,7 +190,7 @@ sub get_hds {
 		    if (listlength(partition_table::get_normal_parts($hd)) == 0) {
 			$handled = 1 if $handle_die_and_cdie->();
 		    } else {
-			fs::proc_partitions::compare($hd) if $::isInstall;
+			fs::proc_partitions::compare($hd) if !fs::type::is_dmraid($hd) && $::isInstall;
 		    }
 		} sub {
 		    my $err = $@;
