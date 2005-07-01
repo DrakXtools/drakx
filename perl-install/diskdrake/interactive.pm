@@ -1208,7 +1208,10 @@ sub format_part_info {
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
     $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
-    $info .= sprintf "LVM %s\n", $part->{lvm} if isPartOfLVM($part);
+    if (isPartOfLVM($part)) {
+	$info .= sprintf "LVM %s\n", $part->{lvm};
+	$info .= sprintf "Used physical extents %d / %d\n", split(' ', lvm::get_pv_field($part, 'pv_pe_alloc_count,pv_pe_count'));
+    }
     $info .= N("Loopback file(s):\n   %s\n", join(", ", map { $_->{loopback_file} } @{$part->{loopback}})) if isPartOfLoopback($part);
     $info .= N("Partition booted by default\n    (for MS-DOS boot, not for lilo)\n") if $part->{active} && $::expert;
     if (isRAID($part)) {
