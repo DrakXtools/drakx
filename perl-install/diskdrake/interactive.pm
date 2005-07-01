@@ -700,7 +700,7 @@ sub Mount_point_raw_hd {
 sub Resize {
     my ($in, $hd, $part) = @_;
     my (%nice_resize);
-    my ($min, $max) = (min_partition_size($hd), partition_table::next_start($hd, $part) - $part->{start});
+    my ($min, $max) = (min_partition_size($hd), max_partition_size($hd, $part));
 
     if (maybeFormatted($part)) {
 	# here we may have a non-formatted or a formatted partition
@@ -813,7 +813,7 @@ filesystem checks will be run on your next boot into Windows(TM)"));
 	set_isFormatted($part, 1);
     } else {
 	set_isFormatted($part, 0);
-	partition_table::verifyParts($hd);
+	partition_table::verifyParts($hd) if !isLVM($hd);
 	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can not format
     }
 
@@ -1273,6 +1273,14 @@ sub format_raw_hd_info {
 #- logical partition.
 sub min_partition_size { $_[0]->cylinder_size + 2*$_[0]{geom}{sectors} }
 
+sub max_partition_size {
+    my ($hd, $part) = @_;
+    if (isLVM($hd)) {
+	$part->{size} + fs::get::vg_free_space($hd);
+    } else {
+	partition_table::next_start($hd, $part) - $part->{start};
+    }
+}
 
 sub choose_encrypt_key {
     my ($in, $options) = @_;
