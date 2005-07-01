@@ -820,7 +820,7 @@ wait for default boot.
 	$bootloader->{default} ||= $preferred;
     }
     $bootloader->{default} ||= "linux";
-    $bootloader->{method} ||= first(method_choices($fstab));
+    $bootloader->{method} ||= first(method_choices($all_hds));
 }
 
 sub detect_main_method {
@@ -870,13 +870,16 @@ sub method_choices_raw {
       );
 }
 sub method_choices {
-    my ($fstab) = @_;
+    my ($all_hds) = @_;
+    my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
+    my $boot_part = fs::get::root($fstab, 'boot');
+    my $boot_disk = fs::get::part2hd($boot_part, $all_hds);
 
     grep {
-	!(/lilo/ && isLoopback($root_part))
-	  && !(/lilo-graphic/ && detect_devices::matching_desc__regexp('ProSavageDDR'))
-	  && !(/grub/ && isRAID($root_part));
+	(!/lilo/ || !isLoopback($root_part) && !fs::type::is_dmraid($boot_disk))
+	  && (!/lilo-graphic/ || !detect_devices::matching_desc__regexp('ProSavageDDR'))
+	  && (!/grub/ || !isRAID($root_part));
     } method_choices_raw(1);
 }
 sub main_method_choices {

@@ -255,7 +255,7 @@ sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
     return if is_xbox();
-    my @method_choices = bootloader::method_choices($fstab);
+    my @method_choices = bootloader::method_choices($all_hds);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append_simple($b, 'noapic');
     my $prev_force_nolapic = my $force_nolapic = bootloader::get_append_simple($b, 'nolapic');
