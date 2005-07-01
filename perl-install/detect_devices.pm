@@ -583,6 +583,11 @@ sub is_wireless_interface {
     c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
 }
 
+sub is_bridge_interface {
+    my ($interface) = @_;
+    -f "/sys/class/net/$interface/bridge/bridge_id";
+}
+
 sub get_sysfs_device_id_map {
     my ($dev_path) = @_;
     my $is_usb = -f "$dev_path/bInterfaceNumber";
