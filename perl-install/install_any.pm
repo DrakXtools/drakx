@@ -313,8 +313,11 @@ sub start_i810fb() {
 sub spawnShell() {
     return if $::local_install || $::testing || dont_run_directly_stage2();
 
+    my $shellpid_file = '/var/run/drakx_shell.pid';
+    return if -e $shellpid_file && -d '/proc/' . chomp_(cat_($shellpid_file));
+
     if (my $shellpid = fork()) {
-        output('/var/run/drakx_shell.pid', $shellpid);
+        output($shellpid_file, $shellpid);
         return;
     }
 
