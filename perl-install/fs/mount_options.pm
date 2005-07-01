@@ -108,7 +108,7 @@ sub pack {
 sub help() {
     (
 
-	'grpquota' => '',
+	'grpquota' => N("Enable group disk quota accounting and optionally enforce limits"),
 
 	'noatime' => N("Do not update inode access times on this file system
 (e.g, for faster access on the news spool to speed up news servers)."),
@@ -138,7 +138,7 @@ system again. This option implies the options noexec, nosuid, and nodev
 (unless overridden by subsequent options, as in the option line
 user,exec,dev,suid )."),
 
-	'usrquota' => '',
+	'usrquota' => N("Enable user disk quota accounting enabled, and optionally enforce limits"),
 
         'umask=0' => N("Give write access to ordinary users"),
 
