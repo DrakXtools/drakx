@@ -71,9 +71,7 @@ sub get_pv_field {
 
 sub pv_to_vg {
     my ($pv) = @_;
-    my $z = get_pv_field($pv, 'vg_name');
-    warn "$pv->{device} $z\n";
-    $z =~ /(\S+)/ && $1;
+    get_pv_field($pv, 'vg_name') =~ /(\S+)/ && $1;
 }
 
 sub update_size {
