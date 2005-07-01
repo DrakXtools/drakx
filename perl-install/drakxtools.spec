@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.29mdk
+Release: 0.30mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul  1 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.30mdk
+- diskdrake:
+  o misc LVM enhancements (pixel, the "Anne" effect, #16168, #16176,
+    #16189, #16668)
+  o enhanced dmraid support (pixel)
+  o don't allow labels on "/" for !extX fs since mkinitrd only handle
+    ext2/ext3 labels (pixel)
+  o describe "grpquota" and "usrquota" mount options (#15671)
+- drakbug: fix reporting bugs for "Standalone Tools" and prevent shell
+  parsing unquoted bugzilla URL(blino & me, #16580)
+- drakfirewall (blino):
+  o add 'routeback' option for bridge interfaces in shorewall
+    interfaces file
+  o don't write loc to fw ACCEPT rules, we always reset the policy to
+    accept (#16087)
+- draksplash (blino):
+  o write progress bars in bootsplash config files
+  o update crossbars when scale values are modified
+- net_applet: reduce memory footprint (#15308)
+
 * Thu Jun 30 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.29mdk
 - do not load librpm when not needed (rafael, me)
 - diskdrake: enhanced dmraid support (pixel)
