@@ -63,7 +63,7 @@ sub check {
     1;
 }
 
-sub get_vg {
+sub pv_to_vg {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
     run_program::get_stdout('lvm2', 'pvs', '--noheadings', '-o', 'vg_name', $dev) =~ /(\S+)/ && $1;

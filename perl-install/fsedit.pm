@@ -84,7 +84,7 @@ sub lvms {
 
     my @lvms;
     foreach (@pvs) {
-	my $name = lvm::get_vg($_) or next;
+	my $name = lvm::pv_to_vg($_) or next;
 	my $lvm = find { $_->{VG_name} eq $name } @lvms;
 	if (!$lvm) {
 	    $lvm = new lvm($name);
