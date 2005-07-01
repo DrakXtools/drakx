@@ -46,7 +46,7 @@ my $mdk_app = {
 	       N("Mandriva Linux Control Center") => 'drakconf',
 	       N("First Time Wizard") => 'drakfw',
 	       N("Synchronization tool") => 'draksync',  
-	       N("Standalone Tools") => ['adduserdrake', 'diskdrake', 'drakautoinst', 'drakbackup', 'drakboot', 'DrakBug', 'DrakClock', 'DrakConnect', 'drakfloppy', 'drakfirewall', 'drakfont', 'drakgw', 'DrakSec', 'draksplash', 'drakvpn', 'drakxservices', 'drakxtools', 'drakxtv', 'keyboardrake', 'logdrake', 'mousedrake', 'net_monitor', 'printerdrake', 'scannerdrake', 'XFdrake'],
+	       N("Standalone Tools") => 'drakxtools',
 	       N("HardDrake") => 'harddrake2',
 	       N("Mandriva Online") => 'mdkonline',
 	       N("Menudrake") => 'menudrake',
@@ -60,7 +60,7 @@ my $mdk_app = {
 	      };
 
 my @generic_tool = keys %$mdk_app; 
-my @all_drakxtools = @{ $mdk_app->{N("Standalone Tools")} };
+my @all_drakxtools = ('adduserdrake', 'diskdrake', 'drakautoinst', 'drakbackup', 'drakboot', 'DrakBug', 'DrakClock', 'DrakConnect', 'drakfloppy', 'drakfirewall', 'drakfont', 'drakgw', 'DrakSec', 'draksplash', 'drakvpn', 'drakxservices', 'drakxtools', 'drakxtv', 'keyboardrake', 'logdrake', 'mousedrake', 'net_monitor', 'printerdrake', 'scannerdrake', 'XFdrake');
 push(@generic_tool,@all_drakxtools);
 
 my $kernel_release = chomp_(`uname -r`);
