@@ -80,6 +80,11 @@ sub get_lv_size {
     to_int(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_size', "/dev/$lvm_device"));
 }
 
+sub lv_nb_segments {
+    my ($lv) = @_;
+    to_int(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '-o', 'seg_count', "/dev/$lv->{device}"));
+}
+
 sub get_lvs {
     my ($lvm) = @_;
     my @l = run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_name', $lvm->{VG_name}) =~ /(\S+)/g;
@@ -139,6 +144,12 @@ sub lv_create {
     suggest_lv_name($lvm, $lv);
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
     lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
+
+    if ($lv->{mntpoint} eq '/boot' && lv_nb_segments($lv) > 1) {
+	lvm_cmd_or_die('lvremove', '-f', "/dev/$lv->{device}");
+	die "/boot on multiple segments Logical Volume is useless\n";
+    }
+
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
     set_isFormatted($lv, 0);
     my $list = $lvm->{primary}{normal} ||= [];

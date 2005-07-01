@@ -385,13 +385,13 @@ sub check_mntpoint {
     cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
+
+    #- NB: if the LV doesn't exist, lv_nb_segments returns undef
     die N("You can not use a LVM Logical Volume for mount point %s", $mntpoint)
-      if $mntpoint eq '/boot' && isLVM($part);
+      if $mntpoint eq '/boot' && isLVM($part) && lvm::lv_nb_segments($part) > 1;
     cdie N("You've selected a LVM Logical Volume as root (/).
-The bootloader is not able to handle this without a /boot partition.
-Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) && !fs::get::has_mntpoint("/boot", $all_hds);
-    cdie N("You may not be able to install lilo (since lilo does not handle a LV on multiple PVs)")
-      if 0; # arch() =~ /i.86/ && $mntpoint eq '/' && isLVM($hd) && @{$hd->{disks} || []} > 1;
+The bootloader is not able to handle this when the volume spans physical volumes.
+You should create a /boot partition first") if $mntpoint eq "/" && isLVM($part) && lvm::lv_nb_segments($part) != 1 && !fs::get::has_mntpoint("/boot", $all_hds);
 
     cdie N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/root));
