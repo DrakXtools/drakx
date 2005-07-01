@@ -885,8 +885,12 @@ sub RemoveFromLVM {
     my ($_in, $_hd, $part, $all_hds) = @_;
     isPartOfLVM($part) or die;
     my ($lvm, $other_lvms) = partition { $_->{VG_name} eq $part->{lvm} } @{$all_hds->{lvms}};
-    lvm::vg_destroy($lvm->[0]);
-    $all_hds->{lvms} = $other_lvms;
+    if (@{$lvm->[0]{disks}} > 1) {
+	lvm::vg_reduce($lvm->[0], $part);
+    } else {
+	lvm::vg_destroy($lvm->[0]);
+	$all_hds->{lvms} = $other_lvms;
+    }
 }
 sub ModifyRAID { 
     my ($in, $_hd, $part, $all_hds) = @_;
