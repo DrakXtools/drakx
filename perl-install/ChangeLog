@@ -1,3 +1,143 @@
+2005/07/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* ugtk2.pm: remove spurious comment
+	(Gtk2::ComboBox->get_text, Gtk2::OptionMenu->get_text) fix non selected
+	case
+
+	* network/tools.pm: remove useless grouping and rewrite code to be safer
+
+	* network/shorewall.pm: add 'routeback' option for bridge interfaces in
+	shorewall interfaces file
+
+	* detect_devices.pm: add is_bridge_interface
+
+	* network/drakfirewall.pm: fix port range syntax for samba (backport from
+	10.1 updates)
+
+	* network/activefw.pm: remove unneeded requires, added in the wrong
+	place...
+
+	* standalone/drakbug: set the "" string as active in the combo box when a
+	custom binary is
+	selected, to avoid default selection of the last combo box item
+	(this allow to remove the "scannerdrake" hack)
+	simplify
+	use the 'drakxtools' component for "Standalone Tools" (really fix
+	#16580) and split drakxtools components out of the main hash
+
+2005/07/01  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/type.pm: new function is_dmraid()
+
+	* fs/get.pm: create vg_free_space()
+
+	* diskdrake/interactive.pm: handle pvmove
+	create lvm::pv_physical_extents() and use it
+	  - correctly compute the max size on a VG (bugzilla #16189)
+	  - don't verifyParts on lvm
+	add "Used physical extents %d / %d\n" for PV details
+	handle vgreduce
+	a PV has no "Options" (bugzilla #16168)
+
+	* install_steps_auto_install.pm: allow restarting a failed auto_install
+	without rebooting (a la blino)
+
+	* fsedit.pm: move skipping dmraid drives test in fsedit (and use
+	fs::type::is_dmraid)
+	better name
+	replace lv_nb_segments() with lv_nb_pvs()
+	(which is really what lilo cares about. lilo error is "mapped boot
+	device cannot be on multiple real devices")
+	lilo only accept /boot (or /) on a LV if it uses only one PV, so
+	correctly warn/error this
+
+	* install_any.pm: use fs::type::is_dmraid()
+	don't spawn a new shell if it's already running (useful when using the
+	no-reboot-restart-install blino trick)
+
+	* any.pm, bootloader.pm: 
+	  - lilo doesn't work on dmraid so forcing grub
+	  - method_choices() now wants $all_hds instead of $fstab
+
+	* lvm.pm: handle pvmove
+	  - we can keep vg available when using vgreduce
+	  - we must update the vg total size after removing a pv
+	fix message
+	create lvm::pv_physical_extents() and use it
+	remove debug code from previous commit
+	create generic function get_pv_field()
+	better name
+	replace lv_nb_segments() with lv_nb_pvs()
+	(which is really what lilo cares about. lilo error is "mapped boot
+	device cannot be on multiple real devices")
+	handle vgreduce
+	better error message, and translate it
+	lilo only accept /boot (or /) on a LV if it uses only one PV, so
+	correctly warn/error this
+
+	* fs/format.pm: mkinitrd only handle ext2/ext3 labels, so disallow labels
+	on "/" for other fs types
+
+	* fs/proc_partitions.pm: move skipping dmraid drives test in fsedit (and
+	use fs::type::is_dmraid)
+
+	* fs/dmraid.pm: in standalone, missing dmraid implies we don't have dmraid
+	devices, so make it clean and don't call dmraid
+
+2005/07/01  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Don't write ignored media in urpmi.cfg (bug 15537)
+
+2005/07/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: add bug reference to 10-34.9.100mdk
+	fix 10-34.9.100mdk's changelog
+	10-34.9.100mdk
+
+	* fs/mount_options.pm: describe "grpquota" and "usrquota" mount options
+	(#15671)
+
+	* share/po/fr.po: update
+	update strings from CVS
+	update
+	update strings from CVS
+
+	* standalone/drakbug: fix shell parsing unquoted bugzilla URL (#16580)
+
+	* .perl_checker: ensure we don't try to parse warnings.pm
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/tl.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: update strings from CVS
+	update strings from CVS
+
+	* share/po/br.po: update strings from CVS
+	update strings from CVS
+	update
+
+2005/07/01  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: add nvu in CAT_WWW CAT_DEVELOPMENT
+
+2005/07/01  willysr
+
+	* share/po/id.po: Updated
+
 2005/06/30  Pixel  <pixel at mandrakesoft.com>
 
 	* install_any.pm: install dmraid if needed
