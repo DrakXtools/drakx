@@ -835,13 +835,13 @@ sub new {
     my ($type, $title, %opts) = @_;
 
     my $o = bless { %opts }, $type;
-    while (my $e = shift @tempory::objects) { $e->destroy }
+    while (my $e = shift @tempory::objects) { $e->destroy } #- uh ?
 
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	child => $o->{window} = gtknew('VBox'),
+	child => gtknew('VBox'),
 	modal => $grab || $o->{grab} || $o->{modal},
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
@@ -1439,7 +1439,7 @@ sub entry {
 
 sub get_text {
     my ($w) = @_;
-    $w->{strings}[$w->get_history];
+    $w->get_history == -1 ? '' : $w->{strings}[$w->get_history];
 }
 
 sub set_text {
@@ -1483,7 +1483,7 @@ sub entry {
 
 sub get_text {
     my ($w) = @_;
-    $w->{strings}[$w->get_active];
+    $w->get_active == -1 ? '' : $w->{strings}[$w->get_active];
 }
 
 sub set_text {
