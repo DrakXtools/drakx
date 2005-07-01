@@ -63,10 +63,17 @@ sub check {
     1;
 }
 
+sub get_pv_field {
+    my ($pv, $field) = @_;
+    my $dev = expand_symlinks(devices::make($pv->{device}));
+    run_program::get_stdout('lvm2', 'pvs', '--noheadings', '--nosuffix', '-o', $field, $dev);
+}
+
 sub pv_to_vg {
-    my ($part) = @_;
-    my $dev = expand_symlinks(devices::make($part->{device}));
-    run_program::get_stdout('lvm2', 'pvs', '--noheadings', '-o', 'vg_name', $dev) =~ /(\S+)/ && $1;
+    my ($pv) = @_;
+    my $z = get_pv_field($pv, 'vg_name');
+    warn "$pv->{device} $z\n";
+    $z =~ /(\S+)/ && $1;
 }
 
 sub update_size {
