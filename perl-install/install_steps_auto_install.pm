@@ -105,7 +105,12 @@ sub errorInStep {
     print "$err\n\n";
     print "switch to console f2 for a shell\n";
     print "Press <Enter> to reboot\n";
-    <STDIN>;
+
+    my $answer = <STDIN>;
+    if ($answer =~ /restart/i) {
+	log::l("restarting install");
+	c::_exit(0x35);
+    }
     c::_exit(0);
 }
 
