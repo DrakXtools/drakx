@@ -80,9 +80,13 @@ sub get_lv_size {
     to_int(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_size', "/dev/$lvm_device"));
 }
 
-sub lv_nb_segments {
+sub lv_to_pvs {
     my ($lv) = @_;
-    to_int(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '-o', 'seg_count', "/dev/$lv->{device}"));
+    map { m!(\S+)\(! } run_program::get_stdout('lvm2', 'lvs', '--noheadings', '-o', 'devices', "/dev/$lv->{device}");
+}
+sub lv_nb_pvs {
+    my ($lv) = @_;
+    listlength(lv_to_pvs($lv));      
 }
 
 sub get_lvs {
@@ -155,7 +159,7 @@ sub lv_create {
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
     lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
 
-    if ($lv->{mntpoint} eq '/boot' && lv_nb_segments($lv) > 1) {
+    if ($lv->{mntpoint} eq '/boot' && lv_nb_pvs($lv) > 1) {
 	lvm_cmd_or_die('lvremove', '-f', "/dev/$lv->{device}");
 	die N("The bootloader can't handle /boot on multiple physicals volumes");
     }
