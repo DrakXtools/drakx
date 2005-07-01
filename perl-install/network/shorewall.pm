@@ -133,9 +133,7 @@ sub write {
     set_config_file('rules',
     		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
 		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
-		    (map { 
-			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto; 
-		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
+		    (map_each { [ 'ACCEPT', 'net', 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto),
 		    (map {
 			map_each { [ 'REDIRECT', 'loc', $::a, $_, $::b, '-' ] } %{$conf->{redirects}{$_}};
 		    } keys %{$conf->{redirects}}),
