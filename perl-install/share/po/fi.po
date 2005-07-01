@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - LE2005 Release\n"
-"POT-Creation-Date: 2005-06-28 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 15:58+0200\n"
 "PO-Revision-Date: 2005-04-03 20:59+0300\n"
 "Last-Translator: Thomas Backlund <tmb@mandrake.org>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -176,7 +176,7 @@ msgstr "Odota hetki, tunnistetaan ja asetetaan laitteistoa..."
 #: diskdrake/interactive.pm:243 diskdrake/interactive.pm:404
 #: diskdrake/interactive.pm:422 diskdrake/interactive.pm:558
 #: diskdrake/interactive.pm:563 diskdrake/smbnfs_gtk.pm:41 fsedit.pm:209
-#: install_any.pm:1721 install_any.pm:1773 install_steps.pm:81
+#: install_any.pm:1725 install_any.pm:1777 install_steps.pm:81
 #: install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
@@ -1373,7 +1373,7 @@ msgstr "Lisäasetukset"
 msgid "Input method:"
 msgstr "Syöttömenetelmä:"
 
-#: any.pm:848 install_any.pm:418 network/netconnect.pm:154
+#: any.pm:848 install_any.pm:421 network/netconnect.pm:154
 #: network/netconnect.pm:305 network/netconnect.pm:310
 #: network/netconnect.pm:1168 printer/printerdrake.pm:105
 #: printer/printerdrake.pm:2199
@@ -1438,7 +1438,7 @@ msgstr "Käynnistä Userdrake"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -1819,47 +1819,47 @@ msgstr ""
 msgid "Re-install Boot Loader"
 msgstr "Asenna käynnistyslataaja uudelleen"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "KB"
 msgstr "kt"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "MB"
 msgstr "Mt"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "GB"
 msgstr "Gt"
 
-#: common.pm:138
+#: common.pm:139
 #, c-format
 msgid "TB"
 msgstr "Tt"
 
-#: common.pm:146
+#: common.pm:147
 #, c-format
 msgid "%d minutes"
 msgstr "%d minuuttia"
 
-#: common.pm:148
+#: common.pm:149
 #, c-format
 msgid "1 minute"
 msgstr "1 minuutti"
 
-#: common.pm:150
+#: common.pm:151
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekuntia"
 
-#: common.pm:252
+#: common.pm:253
 #, c-format
 msgid "kdesu missing"
 msgstr "kdesu puuttuu"
 
-#: common.pm:255
+#: common.pm:256
 #, c-format
 msgid "consolehelper missing"
 msgstr "consolehelper puuttuu"
@@ -3013,31 +3013,6 @@ msgstr "Asennetaan paketteja..."
 msgid "Removing packages..."
 msgstr "Poistetaan paketteja..."
 
-#: fs.pm:519
-#, c-format
-msgid "Mounting partition %s"
-msgstr "Liitetään osiota %s"
-
-#: fs.pm:520
-#, c-format
-msgid "mounting partition %s in directory %s failed"
-msgstr "osion %s liittäminen hakemistoon %s epäonnistui"
-
-#: fs.pm:525 fs.pm:542
-#, c-format
-msgid "Checking %s"
-msgstr "Tarkistetaan %s"
-
-#: fs.pm:558 partition_table.pm:385
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "virhe irrotettaessa %s: %s"
-
-#: fs.pm:590
-#, c-format
-msgid "Enabling swap partition %s"
-msgstr "Otetaan käyttöön sivutusosiota %s"
-
 #: fs/format.pm:57 fs/format.pm:64
 #, c-format
 msgid "Formatting partition %s"
@@ -3058,10 +3033,40 @@ msgstr "en osaa alustaa %s tyyppiä %s"
 msgid "%s formatting of %s failed"
 msgstr "%s alustus %s epäonnistui"
 
-#: fs/loopback.pm:30
+#: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
 msgstr "Sisäkkäiset liitokset %s\n"
+
+#: fs/mount.pm:72
+#, c-format
+msgid "Mounting partition %s"
+msgstr "Liitetään osiota %s"
+
+#: fs/mount.pm:73
+#, c-format
+msgid "mounting partition %s in directory %s failed"
+msgstr "osion %s liittäminen hakemistoon %s epäonnistui"
+
+#: fs/mount.pm:78 fs/mount.pm:95
+#, c-format
+msgid "Checking %s"
+msgstr "Tarkistetaan %s"
+
+#: fs/mount.pm:111 partition_table.pm:385
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "virhe irrotettaessa %s: %s"
+
+#: fs/mount.pm:140
+#, c-format
+msgid "Enabling swap partition %s"
+msgstr "Otetaan käyttöön sivutusosiota %s"
+
+#: fs/mount_options.pm:111
+#, c-format
+msgid "Enable group disk quota accounting and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3135,6 +3140,12 @@ msgstr ""
 "voi irrottaa tiedostojärjestelmän. Tämä optio valitsee\n"
 "myös optiot noexec, nosuid ja nodev (ellei tätä estetä\n"
 "seuraavilla optioilla, esim. user,exec,dev,suid)."
+
+#: fs/mount_options.pm:141
+#, c-format
+msgid ""
+"Enable user disk quota accounting enabled, and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3211,30 +3222,19 @@ msgstr ""
 "Mikään käynnistyslataaja ei osaa käsitellä tätä ilman /boot -osiota.\n"
 "Lisää /boot -osio, jos haluat käyttää LILO:a tai GRUB:a"
 
-#: fsedit.pm:388
+#: fsedit.pm:390
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
 msgstr "Et voi käyttää LVM loogista taltiota liitepisteelle %s"
 
-#: fsedit.pm:390
+#: fsedit.pm:392
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
+"You should create a /boot partition first"
 msgstr ""
-"Olet valinnut LVM-osion juuriosioksi (/).\n"
-"Mikään käynnistyslataaja ei osaa käsitellä tätä ilman /boot -osiota.\n"
-"Lisää /boot -osio, jos haluat käyttää LILO:a tai GRUB:a"
-
-#: fsedit.pm:393
-#, c-format
-msgid ""
-"You may not be able to install lilo (since lilo does not handle a LV on "
-"multiple PVs)"
-msgstr ""
-"Et ehkä pysty asentamaan LILOa, koska LILO ei osaa käsitellä monista "
-"fyysisistä osioista koostuvia loogisia osioita."
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3265,7 +3265,7 @@ msgstr "Vapaa tila ei riitä automaattiseen varaukseen"
 msgid "Nothing to do"
 msgstr "Ei mitään tekemistä"
 
-#: harddrake/data.pm:62 install_any.pm:1656
+#: harddrake/data.pm:62 install_any.pm:1660
 #, c-format
 msgid "Floppy"
 msgstr "Levyke"
@@ -3275,12 +3275,12 @@ msgstr "Levyke"
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88 install_any.pm:1657
+#: harddrake/data.pm:88 install_any.pm:1661
 #, c-format
 msgid "Hard Disk"
 msgstr "Levy"
 
-#: harddrake/data.pm:97 install_any.pm:1658
+#: harddrake/data.pm:97 install_any.pm:1662
 #, c-format
 msgid "CDROM"
 msgstr "CD-ROM"
@@ -4226,7 +4226,7 @@ msgstr ""
 "luotu toisen asennuksen lopussa. Katso edellisen vaiheen toisesta\n"
 "vihjeestä, miten luot sellaisen levykkeen."
 
-#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:895
+#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:899
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
 #: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:295
 #: ugtk2.pm:907 wizards.pm:156
@@ -4234,7 +4234,7 @@ msgstr ""
 msgid "No"
 msgstr "Ei"
 
-#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:895 interactive.pm:157
+#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:899 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
 #: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
 #: standalone/net_applet:299 ugtk2.pm:907 wizards.pm:156
@@ -5793,7 +5793,7 @@ msgstr "ISDN-kortti"
 msgid "Graphical Interface"
 msgstr "Graafinen käyttöliittymä"
 
-#: help.pm:855 install_any.pm:1679 install_steps_interactive.pm:1062
+#: help.pm:855 install_any.pm:1683 install_steps_interactive.pm:1062
 #: standalone/drakbackup:2021
 #, c-format
 msgid "Network"
@@ -5881,13 +5881,13 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "Sinun täytyy myös alustaa %s"
 
-#: install_any.pm:402
+#: install_any.pm:405
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "Onko sinulla muita asennuksen lisälevyä?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:405
+#: install_any.pm:408
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -5900,7 +5900,7 @@ msgstr ""
 "\n"
 "Onki sinulla lisää asennusmedioita joita haluat määrittää?"
 
-#: install_any.pm:418 printer/printerdrake.pm:3022
+#: install_any.pm:421 printer/printerdrake.pm:3022
 #: printer/printerdrake.pm:3029 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
@@ -5908,74 +5908,74 @@ msgstr ""
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (HTTP)"
 msgstr "Verkko (HTTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (FTP)"
 msgstr "Verkko (FTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
 msgstr ""
 
-#: install_any.pm:448
+#: install_any.pm:451
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "Aseta CD 1 uudelleen"
 
-#: install_any.pm:473 standalone/drakbackup:112
+#: install_any.pm:476 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "Laitetta ei löydetty"
 
-#: install_any.pm:478
+#: install_any.pm:481
 #, c-format
 msgid "Insert the CD"
 msgstr "Aseta CD"
 
-#: install_any.pm:483
+#: install_any.pm:486
 #, c-format
 msgid "Unable to mount CD-ROM"
 msgstr "CD-ROM ei voida liittää"
 
-#: install_any.pm:515 install_any.pm:534
+#: install_any.pm:518 install_any.pm:537
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Peilipalvelimen URL?"
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "NFS setup"
 msgstr ""
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Directory"
 msgstr ""
 
-#: install_any.pm:569
+#: install_any.pm:572
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "En löydä hdlist tiedostoa tässä peilipalvelimessa."
 
-#: install_any.pm:732
+#: install_any.pm:735
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -5986,13 +5986,13 @@ msgstr ""
 "\n"
 "Aseta CD-levy nimeltä \"%s\" CD-asemaan ja valitse OK kun olet valmis."
 
-#: install_any.pm:745
+#: install_any.pm:748
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopiointi käynnissä"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:886
+#: install_any.pm:890
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -6017,7 +6017,7 @@ msgstr ""
 "Haluatko todella asentaa nämä palvelimet?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:909
+#: install_any.pm:913
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -6030,22 +6030,22 @@ msgstr ""
 "\n"
 "Haluatko varmasti poistaa nämä paketit?\n"
 
-#: install_any.pm:1345 partition_table.pm:597
+#: install_any.pm:1349 partition_table.pm:597
 #, c-format
 msgid "Error reading file %s"
 msgstr "Virhe lukiessa tiedostoa %s"
 
-#: install_any.pm:1576
+#: install_any.pm:1580
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Seuraava(t) levy(t) uudelleennimettiin:"
 
-#: install_any.pm:1578
+#: install_any.pm:1582
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (oli ennen nimetty %s)"
 
-#: install_any.pm:1616
+#: install_any.pm:1620
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -6054,52 +6054,52 @@ msgstr ""
 "On tapahtunut virhe - ei löytynyt ainuttakaan laitetta, joille voi luoda "
 "uuden tiedostojärjestelmän. Tarkista laitteistosi korjataksesi ongelman"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1683
+#: install_any.pm:1687
 #, c-format
 msgid "Please choose a media"
 msgstr "Ole hyvä ja valitse media"
 
-#: install_any.pm:1699
+#: install_any.pm:1703
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Tiedosto jo olemassa. Korvaa?"
 
-#: install_any.pm:1703
+#: install_any.pm:1707
 #, c-format
 msgid "Permission denied"
 msgstr "Ei oikeuksia"
 
-#: install_any.pm:1752
+#: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: install_any.pm:1773
+#: install_any.pm:1777
 #, c-format
 msgid "Bad media %s"
 msgstr "Huono media %s"
 
-#: install_any.pm:1820
+#: install_any.pm:1824
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Kuvakaappauksia ei voida tehdä ennen osiointia"
 
-#: install_any.pm:1827
+#: install_any.pm:1831
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Kuvakaappaukset löytyvät asennuksen jälkeen hakemistosta %s"
@@ -9733,10 +9733,15 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "Tervetuloa %s:n"
 
-#: lvm.pm:112
+#: lvm.pm:117
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Poista ensin loogiset osiot\n"
+
+#: lvm.pm:150
+#, c-format
+msgid "The bootloader can't handle /boot on multiple physicals volumes"
+msgstr ""
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -20635,8 +20640,8 @@ msgstr "Mandriva Linux Ohjauskeskus"
 msgid "Synchronization tool"
 msgstr "Synkronointityökalu"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:148
-#: standalone/drakbug:150 standalone/drakbug:154
+#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
+#: standalone/drakbug:151 standalone/drakbug:155
 #, c-format
 msgid "Standalone Tools"
 msgstr "Itsenäisiä työkaluja"
@@ -20741,13 +20746,13 @@ msgid "Report"
 msgstr "Raportti"
 
 # Asennuksen sivuvalikko
-#: standalone/drakbug:163
+#: standalone/drakbug:164
 #, c-format
 msgid "Not installed"
 msgstr "Ei asennettu"
 
 # Asennuksen sivuvalikko
-#: standalone/drakbug:175
+#: standalone/drakbug:176
 #, c-format
 msgid "Package not installed"
 msgstr "Pakettia ei asennettu"
@@ -26742,6 +26747,22 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Asennus epäonnistui"
+
+#~ msgid ""
+#~ "You've selected a LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a /boot partition"
+#~ msgstr ""
+#~ "Olet valinnut LVM-osion juuriosioksi (/).\n"
+#~ "Mikään käynnistyslataaja ei osaa käsitellä tätä ilman /boot -osiota.\n"
+#~ "Lisää /boot -osio, jos haluat käyttää LILO:a tai GRUB:a"
+
+#~ msgid ""
+#~ "You may not be able to install lilo (since lilo does not handle a LV on "
+#~ "multiple PVs)"
+#~ msgstr ""
+#~ "Et ehkä pysty asentamaan LILOa, koska LILO ei osaa käsitellä monista "
+#~ "fyysisistä osioista koostuvia loogisia osioita."
 
 #~ msgid "use PPPoE"
 #~ msgstr "käytä PPPoE"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.3\n"
-"POT-Creation-Date: 2005-06-28 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 15:58+0200\n"
 "PO-Revision-Date: 2005-06-18 01:24+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -164,7 +164,7 @@ msgstr "请稍候, 正在检测并配置设备..."
 #: diskdrake/interactive.pm:243 diskdrake/interactive.pm:404
 #: diskdrake/interactive.pm:422 diskdrake/interactive.pm:558
 #: diskdrake/interactive.pm:563 diskdrake/smbnfs_gtk.pm:41 fsedit.pm:209
-#: install_any.pm:1721 install_any.pm:1773 install_steps.pm:81
+#: install_any.pm:1725 install_any.pm:1777 install_steps.pm:81
 #: install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
@@ -1344,7 +1344,7 @@ msgstr "高级"
 msgid "Input method:"
 msgstr "输入法:"
 
-#: any.pm:848 install_any.pm:418 network/netconnect.pm:154
+#: any.pm:848 install_any.pm:421 network/netconnect.pm:154
 #: network/netconnect.pm:305 network/netconnect.pm:310
 #: network/netconnect.pm:1168 printer/printerdrake.pm:105
 #: printer/printerdrake.pm:2199
@@ -1403,7 +1403,7 @@ msgstr "运行“Drak 用户管理”"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -1764,47 +1764,47 @@ msgstr "无法正确安装启动引导程序。您需要以抢救方式启动并
 msgid "Re-install Boot Loader"
 msgstr "重新安装启动引导程序"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "KB"
 msgstr "KB"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "MB"
 msgstr "MB"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:138
+#: common.pm:139
 #, c-format
 msgid "TB"
 msgstr "TB"
 
-#: common.pm:146
+#: common.pm:147
 #, c-format
 msgid "%d minutes"
 msgstr "%d 分钟"
 
-#: common.pm:148
+#: common.pm:149
 #, c-format
 msgid "1 minute"
 msgstr "1 分钟"
 
-#: common.pm:150
+#: common.pm:151
 #, c-format
 msgid "%d seconds"
 msgstr "%d 秒钟"
 
-#: common.pm:252
+#: common.pm:253
 #, c-format
 msgid "kdesu missing"
 msgstr "缺少 kdesu"
 
-#: common.pm:255
+#: common.pm:256
 #, c-format
 msgid "consolehelper missing"
 msgstr "缺少 consolehelper"
@@ -2942,31 +2942,6 @@ msgstr "正在安装软件包..."
 msgid "Removing packages..."
 msgstr "正在删除软件包..."
 
-#: fs.pm:519
-#, c-format
-msgid "Mounting partition %s"
-msgstr "正在挂载分区 %s"
-
-#: fs.pm:520
-#, c-format
-msgid "mounting partition %s in directory %s failed"
-msgstr "将分区 %s 挂载于目录 %s 失败"
-
-#: fs.pm:525 fs.pm:542
-#, c-format
-msgid "Checking %s"
-msgstr "正在检查 %s"
-
-#: fs.pm:558 partition_table.pm:385
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "卸载 %s 出错: %s"
-
-#: fs.pm:590
-#, c-format
-msgid "Enabling swap partition %s"
-msgstr "正在启用 swap 分区 %s"
-
 #: fs/format.pm:57 fs/format.pm:64
 #, c-format
 msgid "Formatting partition %s"
@@ -2987,10 +2962,40 @@ msgstr "不知道如何将 %s 格式化成 %s 类型"
 msgid "%s formatting of %s failed"
 msgstr "%s 格式化 %s 失败"
 
-#: fs/loopback.pm:30
+#: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
 msgstr "循环装载 %s\n"
+
+#: fs/mount.pm:72
+#, c-format
+msgid "Mounting partition %s"
+msgstr "正在挂载分区 %s"
+
+#: fs/mount.pm:73
+#, c-format
+msgid "mounting partition %s in directory %s failed"
+msgstr "将分区 %s 挂载于目录 %s 失败"
+
+#: fs/mount.pm:78 fs/mount.pm:95
+#, c-format
+msgid "Checking %s"
+msgstr "正在检查 %s"
+
+#: fs/mount.pm:111 partition_table.pm:385
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "卸载 %s 出错: %s"
+
+#: fs/mount.pm:140
+#, c-format
+msgid "Enabling swap partition %s"
+msgstr "正在启用 swap 分区 %s"
+
+#: fs/mount_options.pm:111
+#, c-format
+msgid "Enable group disk quota accounting and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3059,6 +3064,12 @@ msgstr ""
 "允许普通用户装载文件系统。装载用户的用户名将写入 mtab, 这样他就可以稍候\n"
 "再次拆卸文件系统。此选项意味着选项 noexec, nosuid 以及 nodev(除非在选项\n"
 "行中用单独的选项 user, exec, dev, suid 加以覆盖)。"
+
+#: fs/mount_options.pm:141
+#, c-format
+msgid ""
+"Enable user disk quota accounting enabled, and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3134,28 +3145,19 @@ msgstr ""
 "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
 "所以, 请增加一个 /boot 分区。"
 
-#: fsedit.pm:388
+#: fsedit.pm:390
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
 msgstr "不能用 LVM 逻辑卷做 %s 挂载点"
 
-#: fsedit.pm:390
+#: fsedit.pm:392
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
+"You should create a /boot partition first"
 msgstr ""
-"您选择了把 LVM 卷作为根(/)。\n"
-"如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
-"所以, 请增加一个 /boot 分区。"
-
-#: fsedit.pm:393
-#, c-format
-msgid ""
-"You may not be able to install lilo (since lilo does not handle a LV on "
-"multiple PVs)"
-msgstr "您可能无法安装 lilo(因为 lilo 不能处理多轨道的启动光盘)"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3184,7 +3186,7 @@ msgstr "没有足够的空闲空间供自动分配"
 msgid "Nothing to do"
 msgstr "不做任何事"
 
-#: harddrake/data.pm:62 install_any.pm:1656
+#: harddrake/data.pm:62 install_any.pm:1660
 #, c-format
 msgid "Floppy"
 msgstr "软盘"
@@ -3194,12 +3196,12 @@ msgstr "软盘"
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88 install_any.pm:1657
+#: harddrake/data.pm:88 install_any.pm:1661
 #, c-format
 msgid "Hard Disk"
 msgstr "硬盘"
 
-#: harddrake/data.pm:97 install_any.pm:1658
+#: harddrake/data.pm:97 install_any.pm:1662
 #, c-format
 msgid "CDROM"
 msgstr "CDROM"
@@ -4102,7 +4104,7 @@ msgstr ""
 "多台计算机, 此选项可能非常有用。单击此图标后, 您需要插入另外一次安装结束后创"
 "建的那张软盘。参看最后一步的第二条提示, 其中描述了如何创建这样的软盘。"
 
-#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:895
+#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:899
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
 #: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:295
 #: ugtk2.pm:907 wizards.pm:156
@@ -4110,7 +4112,7 @@ msgstr ""
 msgid "No"
 msgstr "否"
 
-#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:895 interactive.pm:157
+#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:899 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
 #: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
 #: standalone/net_applet:299 ugtk2.pm:907 wizards.pm:156
@@ -5610,7 +5612,7 @@ msgstr "ISDN 卡"
 msgid "Graphical Interface"
 msgstr "图形界面"
 
-#: help.pm:855 install_any.pm:1679 install_steps_interactive.pm:1062
+#: help.pm:855 install_any.pm:1683 install_steps_interactive.pm:1062
 #: standalone/drakbackup:2021
 #, c-format
 msgid "Network"
@@ -5692,13 +5694,13 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "您还必须格式化 %s"
 
-#: install_any.pm:402
+#: install_any.pm:405
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "您有其它赠品介质吗?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:405
+#: install_any.pm:408
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -5711,7 +5713,7 @@ msgstr ""
 "\n"
 "您是否有要配置的赠品安装介质?"
 
-#: install_any.pm:418 printer/printerdrake.pm:3022
+#: install_any.pm:421 printer/printerdrake.pm:3022
 #: printer/printerdrake.pm:3029 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
@@ -5719,74 +5721,74 @@ msgstr ""
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (HTTP)"
 msgstr "网络 (HTTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (FTP)"
 msgstr "网络 (FTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
 msgstr ""
 
-#: install_any.pm:448
+#: install_any.pm:451
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "再次插入第一张光盘"
 
-#: install_any.pm:473 standalone/drakbackup:112
+#: install_any.pm:476 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "没有发现设备"
 
-#: install_any.pm:478
+#: install_any.pm:481
 #, c-format
 msgid "Insert the CD"
 msgstr "插入光盘"
 
-#: install_any.pm:483
+#: install_any.pm:486
 #, c-format
 msgid "Unable to mount CD-ROM"
 msgstr "无法挂载 CD-ROM"
 
-#: install_any.pm:515 install_any.pm:534
+#: install_any.pm:518 install_any.pm:537
 #, c-format
 msgid "URL of the mirror?"
 msgstr "镜像的 URL?"
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "NFS setup"
 msgstr ""
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Directory"
 msgstr ""
 
-#: install_any.pm:569
+#: install_any.pm:572
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "无法在此镜像上找到软件包列表文件。请确定位置正确。"
 
-#: install_any.pm:732
+#: install_any.pm:735
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -5797,13 +5799,13 @@ msgstr ""
 "\n"
 "请在驱动器中插入标有“%s”的光盘, 然后单击“确定”。"
 
-#: install_any.pm:745
+#: install_any.pm:748
 #, c-format
 msgid "Copying in progress"
 msgstr "复制进行中"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:886
+#: install_any.pm:890
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -5826,7 +5828,7 @@ msgstr ""
 "您真要安装这些服务器吗?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:909
+#: install_any.pm:913
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -5839,22 +5841,22 @@ msgstr ""
 "\n"
 "您确定要删除这些软件包吗?\n"
 
-#: install_any.pm:1345 partition_table.pm:597
+#: install_any.pm:1349 partition_table.pm:597
 #, c-format
 msgid "Error reading file %s"
 msgstr "请取文件 %s 出错"
 
-#: install_any.pm:1576
+#: install_any.pm:1580
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "下列盘片已重命名:"
 
-#: install_any.pm:1578
+#: install_any.pm:1582
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s(以前的名称为 %s)"
 
-#: install_any.pm:1616
+#: install_any.pm:1620
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -5862,52 +5864,52 @@ msgid ""
 msgstr ""
 "发生错误！新建文件系统时找不到可用的设备。请检查您的硬件以确定问题的原因"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1683
+#: install_any.pm:1687
 #, c-format
 msgid "Please choose a media"
 msgstr "请选择介质"
 
-#: install_any.pm:1699
+#: install_any.pm:1703
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "文件已经存在。覆盖吗?"
 
-#: install_any.pm:1703
+#: install_any.pm:1707
 #, c-format
 msgid "Permission denied"
 msgstr "没有权限"
 
-#: install_any.pm:1752
+#: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
 msgstr "无效的 NFS 名称"
 
-#: install_any.pm:1773
+#: install_any.pm:1777
 #, c-format
 msgid "Bad media %s"
 msgstr "无效的介质 %s"
 
-#: install_any.pm:1820
+#: install_any.pm:1824
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "无法在分区完成之前进行屏幕捕捉"
 
-#: install_any.pm:1827
+#: install_any.pm:1831
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "安装完成后, 所有的屏幕抓图都会保存到 %s 之中"
@@ -9288,10 +9290,15 @@ msgstr "、"
 msgid "Welcome to %s"
 msgstr "欢迎使用 %s"
 
-#: lvm.pm:112
+#: lvm.pm:117
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "请先删除逻辑卷\n"
+
+#: lvm.pm:150
+#, c-format
+msgid "The bootloader can't handle /boot on multiple physicals volumes"
+msgstr ""
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -19840,8 +19847,8 @@ msgstr "Mandriva Linux 控制中心"
 msgid "Synchronization tool"
 msgstr "同步工具"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:148
-#: standalone/drakbug:150 standalone/drakbug:154
+#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
+#: standalone/drakbug:151 standalone/drakbug:155
 #, c-format
 msgid "Standalone Tools"
 msgstr "独立工具"
@@ -19945,12 +19952,12 @@ msgstr ""
 msgid "Report"
 msgstr "报告"
 
-#: standalone/drakbug:163
+#: standalone/drakbug:164
 #, c-format
 msgid "Not installed"
 msgstr "没有安装"
 
-#: standalone/drakbug:175
+#: standalone/drakbug:176
 #, c-format
 msgid "Package not installed"
 msgstr "软件包未安装"
@@ -25591,6 +25598,20 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#~ msgid ""
+#~ "You've selected a LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a /boot partition"
+#~ msgstr ""
+#~ "您选择了把 LVM 卷作为根(/)。\n"
+#~ "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
+#~ "所以, 请增加一个 /boot 分区。"
+
+#~ msgid ""
+#~ "You may not be able to install lilo (since lilo does not handle a LV on "
+#~ "multiple PVs)"
+#~ msgstr "您可能无法安装 lilo(因为 lilo 不能处理多轨道的启动光盘)"
 
 #~ msgid "use PPPoE"
 #~ msgstr "使用 PPPoE"

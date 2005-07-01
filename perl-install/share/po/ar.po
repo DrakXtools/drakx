@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2005-06-28 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 15:58+0200\n"
 "PO-Revision-Date: 2005-03-03 01:06+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -175,7 +175,7 @@ msgstr "الرجاء الانتظار، جاري اكتشاف وتهيئة ال�
 #: diskdrake/interactive.pm:243 diskdrake/interactive.pm:404
 #: diskdrake/interactive.pm:422 diskdrake/interactive.pm:558
 #: diskdrake/interactive.pm:563 diskdrake/smbnfs_gtk.pm:41 fsedit.pm:209
-#: install_any.pm:1721 install_any.pm:1773 install_steps.pm:81
+#: install_any.pm:1725 install_any.pm:1777 install_steps.pm:81
 #: install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
@@ -1360,7 +1360,7 @@ msgstr "متقدم"
 msgid "Input method:"
 msgstr "طريقة الإدخال:"
 
-#: any.pm:848 install_any.pm:418 network/netconnect.pm:154
+#: any.pm:848 install_any.pm:421 network/netconnect.pm:154
 #: network/netconnect.pm:305 network/netconnect.pm:310
 #: network/netconnect.pm:1168 printer/printerdrake.pm:105
 #: printer/printerdrake.pm:2199
@@ -1423,7 +1423,7 @@ msgstr "تشغيل userdrake"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -1792,47 +1792,47 @@ msgstr ""
 msgid "Re-install Boot Loader"
 msgstr "إعادة تثبيت مُحمِّل الإقلاع"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "KB"
 msgstr "ك.ب."
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "MB"
 msgstr "م.ب."
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "GB"
 msgstr "غ.ب."
 
-#: common.pm:138
+#: common.pm:139
 #, c-format
 msgid "TB"
 msgstr "ت.ب."
 
-#: common.pm:146
+#: common.pm:147
 #, c-format
 msgid "%d minutes"
 msgstr "%d دقائق"
 
-#: common.pm:148
+#: common.pm:149
 #, c-format
 msgid "1 minute"
 msgstr "دقيقة واحدة"
 
-#: common.pm:150
+#: common.pm:151
 #, c-format
 msgid "%d seconds"
 msgstr "%d ثوان"
 
-#: common.pm:252
+#: common.pm:253
 #, c-format
 msgid "kdesu missing"
 msgstr "kdesu مفقود"
 
-#: common.pm:255
+#: common.pm:256
 #, c-format
 msgid "consolehelper missing"
 msgstr "consolehelper مفقود"
@@ -2976,32 +2976,6 @@ msgstr "جاري تركيب الحزم..."
 msgid "Removing packages..."
 msgstr "حذف الحزم..."
 
-# y, c-format
-#: fs.pm:519
-#, c-format
-msgid "Mounting partition %s"
-msgstr "تركيب التجزيء %s"
-
-#: fs.pm:520
-#, c-format
-msgid "mounting partition %s in directory %s failed"
-msgstr "فشل تركيب التجزيء %s في الدليل %s"
-
-#: fs.pm:525 fs.pm:542
-#, c-format
-msgid "Checking %s"
-msgstr "جاري التأكد من %s"
-
-#: fs.pm:558 partition_table.pm:385
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "خطأ في فكّ %s: %s"
-
-#: fs.pm:590
-#, c-format
-msgid "Enabling swap partition %s"
-msgstr "جاري تمكين تجزيء التبديل %s"
-
 #: fs/format.pm:57 fs/format.pm:64
 #, c-format
 msgid "Formatting partition %s"
@@ -3022,10 +2996,41 @@ msgstr "لا أعرف كيف أنسّق %s في النوع %s"
 msgid "%s formatting of %s failed"
 msgstr "%s تنسيق %s قد فشل"
 
-#: fs/loopback.pm:30
+#: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
 msgstr "تركيبات حلقيّة %s\n"
+
+# y, c-format
+#: fs/mount.pm:72
+#, c-format
+msgid "Mounting partition %s"
+msgstr "تركيب التجزيء %s"
+
+#: fs/mount.pm:73
+#, c-format
+msgid "mounting partition %s in directory %s failed"
+msgstr "فشل تركيب التجزيء %s في الدليل %s"
+
+#: fs/mount.pm:78 fs/mount.pm:95
+#, c-format
+msgid "Checking %s"
+msgstr "جاري التأكد من %s"
+
+#: fs/mount.pm:111 partition_table.pm:385
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "خطأ في فكّ %s: %s"
+
+#: fs/mount.pm:140
+#, c-format
+msgid "Enabling swap partition %s"
+msgstr "جاري تمكين تجزيء التبديل %s"
+
+#: fs/mount_options.pm:111
+#, c-format
+msgid "Enable group disk quota accounting and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3097,6 +3102,12 @@ msgstr ""
 "الملفات مجدّداً. هذا الخيار تدلّ عليه الخيارات noexec، nosuid، وnodev\n"
 "(إلا إذا تخطّته خيارات إضافيّة، كسطر الخيار\n"
 "user، exec، dev، suid(. "
+
+#: fs/mount_options.pm:141
+#, c-format
+msgid ""
+"Enable user disk quota accounting enabled, and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3172,28 +3183,19 @@ msgstr ""
 "لا يستطيع أي محمّل إقلاع التعامل مع ذلك بدون تجزيء /boot.\n"
 "الرجاء التأكد من إضافة تجزيء /boot"
 
-#: fsedit.pm:388
+#: fsedit.pm:390
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
 msgstr "لا يمكنك استخدام كتلة LVM المنطقيّة لمكان التركيب %s"
 
-#: fsedit.pm:390
+#: fsedit.pm:392
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
+"You should create a /boot partition first"
 msgstr ""
-"لقد اخترت تجزيء كتلة منطقيّة LVM كدليل جزر (/).\n"
-"لا يستطيع محمّل الإقلاع التعامل مع ذلك بدون تجزيء /boot.\n"
-"الرجاء التأكّد من أن تضيف تجزيء /boot"
-
-#: fsedit.pm:393
-#, c-format
-msgid ""
-"You may not be able to install lilo (since lilo does not handle a LV on "
-"multiple PVs)"
-msgstr "قد لا تتمكّن من تثبيت lilo (حيث أن lilo لا يمكنه تولّي LV على عدّة PV)"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3224,7 +3226,7 @@ msgstr "لا توجد مساحة كافية للتحديد الآلي"
 msgid "Nothing to do"
 msgstr "لا شيء لعمله"
 
-#: harddrake/data.pm:62 install_any.pm:1656
+#: harddrake/data.pm:62 install_any.pm:1660
 #, c-format
 msgid "Floppy"
 msgstr "القرص المرن"
@@ -3234,12 +3236,12 @@ msgstr "القرص المرن"
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88 install_any.pm:1657
+#: harddrake/data.pm:88 install_any.pm:1661
 #, c-format
 msgid "Hard Disk"
 msgstr "القرص الصّلب"
 
-#: harddrake/data.pm:97 install_any.pm:1658
+#: harddrake/data.pm:97 install_any.pm:1662
 #, c-format
 msgid "CDROM"
 msgstr "القرص المدمج"
@@ -4171,7 +4173,7 @@ msgstr ""
 "نهاية تثبيت آخر. انظر التّلميح الثّاني من الخطوة الأخيرة عن كيفيّة\n"
 "إنشاء قرص مرن كهذا."
 
-#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:895
+#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:899
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
 #: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:295
 #: ugtk2.pm:907 wizards.pm:156
@@ -4179,7 +4181,7 @@ msgstr ""
 msgid "No"
 msgstr "لا"
 
-#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:895 interactive.pm:157
+#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:899 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
 #: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
 #: standalone/net_applet:299 ugtk2.pm:907 wizards.pm:156
@@ -5752,7 +5754,7 @@ msgstr "بطاقة ISDN"
 msgid "Graphical Interface"
 msgstr "الواجهة الرسومية"
 
-#: help.pm:855 install_any.pm:1679 install_steps_interactive.pm:1062
+#: help.pm:855 install_any.pm:1683 install_steps_interactive.pm:1062
 #: standalone/drakbackup:2021
 #, c-format
 msgid "Network"
@@ -5839,13 +5841,13 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "عليك أيضا تنسيق %s"
 
-#: install_any.pm:402
+#: install_any.pm:405
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "هل لديك أوساط إضافيّة أخرى؟"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:405
+#: install_any.pm:408
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -5858,7 +5860,7 @@ msgstr ""
 "\n"
 "هل لديك أوساط تثبيت إضافية لتهيئها؟"
 
-#: install_any.pm:418 printer/printerdrake.pm:3022
+#: install_any.pm:421 printer/printerdrake.pm:3022
 #: printer/printerdrake.pm:3029 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
@@ -5866,75 +5868,75 @@ msgstr ""
 msgid "CD-ROM"
 msgstr "القرص المدمج"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (HTTP)"
 msgstr "الشبكة (HTTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (FTP)"
 msgstr "الشبكة (FTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
 msgstr ""
 
-#: install_any.pm:448
+#: install_any.pm:451
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "أدخل القرص المدمج 1 مجدّدا"
 
 #
-#: install_any.pm:473 standalone/drakbackup:112
+#: install_any.pm:476 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "لم يُعثر على أي جهاز"
 
-#: install_any.pm:478
+#: install_any.pm:481
 #, c-format
 msgid "Insert the CD"
 msgstr "أدخل القرص المدمج"
 
-#: install_any.pm:483
+#: install_any.pm:486
 #, c-format
 msgid "Unable to mount CD-ROM"
 msgstr "تعذّر تجهيز القرص المدمج"
 
-#: install_any.pm:515 install_any.pm:534
+#: install_any.pm:518 install_any.pm:537
 #, c-format
 msgid "URL of the mirror?"
 msgstr "عنوان URL للمرآة؟"
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "NFS setup"
 msgstr ""
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Directory"
 msgstr ""
 
-#: install_any.pm:569
+#: install_any.pm:572
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "لم يمكن العثور على ملف hdlist على هذه المرآة. تأكد من صحة الموقع."
 
-#: install_any.pm:732
+#: install_any.pm:735
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -5945,13 +5947,13 @@ msgstr ""
 "من فضلك أدخل القرص المدمج المسّمى \"%s\" في السواقة واضغط على موافق عندما "
 "تنتهي."
 
-#: install_any.pm:745
+#: install_any.pm:748
 #, c-format
 msgid "Copying in progress"
 msgstr "جاري النسخ"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:886
+#: install_any.pm:890
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -5975,7 +5977,7 @@ msgstr ""
 "هل أنت متأكد أنك تريد تثبيت هذه الخادمات الآن؟\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:909
+#: install_any.pm:913
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -5988,22 +5990,22 @@ msgstr ""
 "\n"
 "هل تريد حذف هذه الحزم فعلاً؟\n"
 
-#: install_any.pm:1345 partition_table.pm:597
+#: install_any.pm:1349 partition_table.pm:597
 #, c-format
 msgid "Error reading file %s"
 msgstr "خطأ في قراءة الملف %s"
 
-#: install_any.pm:1576
+#: install_any.pm:1580
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "تمّ تغيير أسماء القرص التّالي أو الأقراص التّالية:"
 
-#: install_any.pm:1578
+#: install_any.pm:1582
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (المسمّى %s سابقاً)"
 
-#: install_any.pm:1616
+#: install_any.pm:1620
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -6012,52 +6014,52 @@ msgstr ""
 "لقد ظهر خطأ - لم يعثر على أجهزة صالحة يمكن إنشاء أنظمة ملفات جديدة عليها. "
 "تأكد من العتاد الخاص بك لمعرفة سبب هذه المشكلة"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1683
+#: install_any.pm:1687
 #, c-format
 msgid "Please choose a media"
 msgstr "الرجاء اختيار وسط"
 
-#: install_any.pm:1699
+#: install_any.pm:1703
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "الملف موجود مسبقاً. هل تريد الكتابة عليه؟"
 
-#: install_any.pm:1703
+#: install_any.pm:1707
 #, c-format
 msgid "Permission denied"
 msgstr "غير مسموح لك بذلك"
 
-#: install_any.pm:1752
+#: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: install_any.pm:1773
+#: install_any.pm:1777
 #, c-format
 msgid "Bad media %s"
 msgstr "الوسط %s سيء"
 
-#: install_any.pm:1820
+#: install_any.pm:1824
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "لا يمكنني عمل لقطات للشاشة قبل التجزئة"
 
-#: install_any.pm:1827
+#: install_any.pm:1831
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "ستكون لقطات الشاشة موجودة بعد التثبيت في %s"
@@ -9505,10 +9507,15 @@ msgstr "، "
 msgid "Welcome to %s"
 msgstr "أهلا في %s"
 
-#: lvm.pm:112
+#: lvm.pm:117
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "حذف الكتل المنطقية أولاً\n"
+
+#: lvm.pm:150
+#, c-format
+msgid "The bootloader can't handle /boot on multiple physicals volumes"
+msgstr ""
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -20200,8 +20207,8 @@ msgstr "مركز تحكّم ماندريبا لينكس"
 msgid "Synchronization tool"
 msgstr "أداة المزامنة"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:148
-#: standalone/drakbug:150 standalone/drakbug:154
+#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
+#: standalone/drakbug:151 standalone/drakbug:155
 #, c-format
 msgid "Standalone Tools"
 msgstr "الأدوات المنفصلة"
@@ -20306,12 +20313,12 @@ msgstr ""
 msgid "Report"
 msgstr "تقرير"
 
-#: standalone/drakbug:163
+#: standalone/drakbug:164
 #, c-format
 msgid "Not installed"
 msgstr "غير مثبت"
 
-#: standalone/drakbug:175
+#: standalone/drakbug:176
 #, c-format
 msgid "Package not installed"
 msgstr "لم يتم تثبيت الحزمة"
@@ -26275,6 +26282,20 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "فشل التّثبيت"
+
+#~ msgid ""
+#~ "You've selected a LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a /boot partition"
+#~ msgstr ""
+#~ "لقد اخترت تجزيء كتلة منطقيّة LVM كدليل جزر (/).\n"
+#~ "لا يستطيع محمّل الإقلاع التعامل مع ذلك بدون تجزيء /boot.\n"
+#~ "الرجاء التأكّد من أن تضيف تجزيء /boot"
+
+#~ msgid ""
+#~ "You may not be able to install lilo (since lilo does not handle a LV on "
+#~ "multiple PVs)"
+#~ msgstr "قد لا تتمكّن من تثبيت lilo (حيث أن lilo لا يمكنه تولّي LV على عدّة PV)"
 
 #~ msgid "use PPPoE"
 #~ msgstr "استخدام PPPoE"

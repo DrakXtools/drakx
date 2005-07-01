@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-pl\n"
-"POT-Creation-Date: 2005-06-28 15:58+0200\n"
+"POT-Creation-Date: 2005-07-01 15:58+0200\n"
 "PO-Revision-Date: 28/03/2005 09:34\n"
 "Last-Translator: Tomasz Bednarski <bednarski@skrzynka.pl>\n"
 "Language-Team: polski\n"
@@ -179,7 +179,7 @@ msgstr "Proszę czekać, wykrywanie i konfiguracja urządzeń..."
 #: diskdrake/interactive.pm:243 diskdrake/interactive.pm:404
 #: diskdrake/interactive.pm:422 diskdrake/interactive.pm:558
 #: diskdrake/interactive.pm:563 diskdrake/smbnfs_gtk.pm:41 fsedit.pm:209
-#: install_any.pm:1721 install_any.pm:1773 install_steps.pm:81
+#: install_any.pm:1725 install_any.pm:1777 install_steps.pm:81
 #: install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
@@ -1378,7 +1378,7 @@ msgstr "Zaawansowane"
 msgid "Input method:"
 msgstr "Metoda wejściowa:"
 
-#: any.pm:848 install_any.pm:418 network/netconnect.pm:154
+#: any.pm:848 install_any.pm:421 network/netconnect.pm:154
 #: network/netconnect.pm:305 network/netconnect.pm:310
 #: network/netconnect.pm:1168 printer/printerdrake.pm:105
 #: printer/printerdrake.pm:2199
@@ -1445,7 +1445,7 @@ msgstr "Uruchom userdrake"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -1828,47 +1828,47 @@ msgstr ""
 msgid "Re-install Boot Loader"
 msgstr "Przeinstaluj program rozruchowy"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "KB"
 msgstr "KB"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "MB"
 msgstr "MB"
 
-#: common.pm:130
+#: common.pm:131
 #, c-format
 msgid "GB"
 msgstr "GB"
 
-#: common.pm:138
+#: common.pm:139
 #, c-format
 msgid "TB"
 msgstr "TB"
 
-#: common.pm:146
+#: common.pm:147
 #, c-format
 msgid "%d minutes"
 msgstr "%d minut(y)"
 
-#: common.pm:148
+#: common.pm:149
 #, c-format
 msgid "1 minute"
 msgstr "1 minuta"
 
-#: common.pm:150
+#: common.pm:151
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekund"
 
-#: common.pm:252
+#: common.pm:253
 #, c-format
 msgid "kdesu missing"
 msgstr "brak kdesu"
 
-#: common.pm:255
+#: common.pm:256
 #, c-format
 msgid "consolehelper missing"
 msgstr "brak consolehelper"
@@ -3019,31 +3019,6 @@ msgstr "Instalowanie pakietów..."
 msgid "Removing packages..."
 msgstr "Usuwanie pakietów..."
 
-#: fs.pm:519
-#, c-format
-msgid "Mounting partition %s"
-msgstr "Montowanie partycji %s"
-
-#: fs.pm:520
-#, c-format
-msgid "mounting partition %s in directory %s failed"
-msgstr "montowanie partycji %s do katalogu %s zakończyło się niepowodzeniem"
-
-#: fs.pm:525 fs.pm:542
-#, c-format
-msgid "Checking %s"
-msgstr "Sprawdzanie %s"
-
-#: fs.pm:558 partition_table.pm:385
-#, c-format
-msgid "error unmounting %s: %s"
-msgstr "błąd odmontowania %s; %s"
-
-#: fs.pm:590
-#, c-format
-msgid "Enabling swap partition %s"
-msgstr "Włączanie partycji swap %s"
-
 #: fs/format.pm:57 fs/format.pm:64
 #, c-format
 msgid "Formatting partition %s"
@@ -3064,10 +3039,40 @@ msgstr "Nie wiadomo jak sformatować %s typu %s"
 msgid "%s formatting of %s failed"
 msgstr "%s formatowania z %s zakończone niepowodzeniem"
 
-#: fs/loopback.pm:30
+#: fs/loopback.pm:24
 #, c-format
 msgid "Circular mounts %s\n"
 msgstr "Zapętlone montowanie %s\n"
+
+#: fs/mount.pm:72
+#, c-format
+msgid "Mounting partition %s"
+msgstr "Montowanie partycji %s"
+
+#: fs/mount.pm:73
+#, c-format
+msgid "mounting partition %s in directory %s failed"
+msgstr "montowanie partycji %s do katalogu %s zakończyło się niepowodzeniem"
+
+#: fs/mount.pm:78 fs/mount.pm:95
+#, c-format
+msgid "Checking %s"
+msgstr "Sprawdzanie %s"
+
+#: fs/mount.pm:111 partition_table.pm:385
+#, c-format
+msgid "error unmounting %s: %s"
+msgstr "błąd odmontowania %s; %s"
+
+#: fs/mount.pm:140
+#, c-format
+msgid "Enabling swap partition %s"
+msgstr "Włączanie partycji swap %s"
+
+#: fs/mount_options.pm:111
+#, c-format
+msgid "Enable group disk quota accounting and optionally enforce limits"
+msgstr ""
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3144,6 +3149,12 @@ msgstr ""
 "\"noexec\", \"nosuid\" oraz \"nodev\" (chyba że zostanie ono pominięte\n"
 "przez inne opcje w wierszu opcji user, exec, dev, suid)."
 
+#: fs/mount_options.pm:141
+#, c-format
+msgid ""
+"Enable user disk quota accounting enabled, and optionally enforce limits"
+msgstr ""
+
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Give write access to ordinary users"
@@ -3219,30 +3230,19 @@ msgstr ""
 "Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
 "Pamiętaj więc o dodaniu partycji /boot."
 
-#: fsedit.pm:388
+#: fsedit.pm:390
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
 msgstr "Nie można użyć Logicznego Woluminu LVM dla punktu montowania %s"
 
-#: fsedit.pm:390
+#: fsedit.pm:392
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
-"The bootloader is not able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
+"The bootloader is not able to handle this when the volume spans physical "
+"volumes.\n"
+"You should create a /boot partition first"
 msgstr ""
-"Jako partycję root (/) wybrano logiczny wolumen LVM.\n"
-"Żaden program rozruchowy nie jest w stanie obsłużyć go bez partycji /boot.\n"
-"Pamiętaj więc o dodaniu partycji /boot."
-
-#: fsedit.pm:393
-#, c-format
-msgid ""
-"You may not be able to install lilo (since lilo does not handle a LV on "
-"multiple PVs)"
-msgstr ""
-"Możesz nie mieć możliwości zainstalowania lilo (ponieważ lilo nie\n"
-"obsługuje LV na wielu PLV)"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3273,7 +3273,7 @@ msgstr "Brak wolnego miejsca dla automatycznego rozmieszczenia"
 msgid "Nothing to do"
 msgstr "Brak czynności do wykonania"
 
-#: harddrake/data.pm:62 install_any.pm:1656
+#: harddrake/data.pm:62 install_any.pm:1660
 #, c-format
 msgid "Floppy"
 msgstr "Stacja dysków"
@@ -3283,12 +3283,12 @@ msgstr "Stacja dysków"
 msgid "Zip"
 msgstr "Napęd zip"
 
-#: harddrake/data.pm:88 install_any.pm:1657
+#: harddrake/data.pm:88 install_any.pm:1661
 #, c-format
 msgid "Hard Disk"
 msgstr "Dysk"
 
-#: harddrake/data.pm:97 install_any.pm:1658
+#: harddrake/data.pm:97 install_any.pm:1662
 #, c-format
 msgid "CDROM"
 msgstr "CDROM"
@@ -4242,7 +4242,7 @@ msgstr ""
 "instalacji. Zobacz drugą podpowiedź ostatniego kroku zawierającą\n"
 "informację o tym jak utworzyć taką dyskietkę."
 
-#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:895
+#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:899
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
 #: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:295
 #: ugtk2.pm:907 wizards.pm:156
@@ -4250,7 +4250,7 @@ msgstr ""
 msgid "No"
 msgstr "Nie"
 
-#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:895 interactive.pm:157
+#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:899 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
 #: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
 #: standalone/net_applet:299 ugtk2.pm:907 wizards.pm:156
@@ -5852,7 +5852,7 @@ msgstr "Karta ISDN"
 msgid "Graphical Interface"
 msgstr "Interfejs graficzny"
 
-#: help.pm:855 install_any.pm:1679 install_steps_interactive.pm:1062
+#: help.pm:855 install_any.pm:1683 install_steps_interactive.pm:1062
 #: standalone/drakbackup:2021
 #, c-format
 msgid "Network"
@@ -5939,13 +5939,13 @@ msgstr ""
 msgid "You must also format %s"
 msgstr "Należy także sformatować %s"
 
-#: install_any.pm:402
+#: install_any.pm:405
 #, c-format
 msgid "Do you have further supplementary media?"
 msgstr "Czy posiadasz inne dodatkowe nośniki?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:405
+#: install_any.pm:408
 #, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
@@ -5959,7 +5959,7 @@ msgstr ""
 "\n"
 "Czy posiadasz dodatkowe nośniki instalacyjne do skonfigurowania?"
 
-#: install_any.pm:418 printer/printerdrake.pm:3022
+#: install_any.pm:421 printer/printerdrake.pm:3022
 #: printer/printerdrake.pm:3029 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
@@ -5967,74 +5967,74 @@ msgstr ""
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (HTTP)"
 msgstr "Sieć (HTTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (FTP)"
 msgstr "Sieć (FTP)"
 
-#: install_any.pm:418
+#: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
 msgstr ""
 
-#: install_any.pm:448
+#: install_any.pm:451
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "Włóż ponownie płytę CD 1"
 
-#: install_any.pm:473 standalone/drakbackup:112
+#: install_any.pm:476 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "Nie znaleziono urządzeń"
 
-#: install_any.pm:478
+#: install_any.pm:481
 #, c-format
 msgid "Insert the CD"
 msgstr "Włóż płytę CD"
 
-#: install_any.pm:483
+#: install_any.pm:486
 #, c-format
 msgid "Unable to mount CD-ROM"
 msgstr "Nie można zamontować CD-ROM-u"
 
-#: install_any.pm:515 install_any.pm:534
+#: install_any.pm:518 install_any.pm:537
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Adres URL dla serwera zwierciadlanego?"
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "NFS setup"
 msgstr ""
 
-#: install_any.pm:520
+#: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
 msgstr ""
 
-#: install_any.pm:521
+#: install_any.pm:524
 #, c-format
 msgid "Directory"
 msgstr ""
 
-#: install_any.pm:569
+#: install_any.pm:572
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
 msgstr "Nie można znaleźć pliku hdlist dla tego serwera zwierciadlanego"
 
-#: install_any.pm:732
+#: install_any.pm:735
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6045,13 +6045,13 @@ msgstr ""
 "\n"
 "Włóż płytę opisaną \"%s\" do kieszeni napędu i naciśnij Ok."
 
-#: install_any.pm:745
+#: install_any.pm:748
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopiowanie w toku"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:886
+#: install_any.pm:890
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -6075,7 +6075,7 @@ msgstr ""
 "Czy na pewno chcesz zainstalować te serwery?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:909
+#: install_any.pm:913
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -6088,22 +6088,22 @@ msgstr ""
 "\n"
 "czy naprawdę chcesz usunąć te pakiety?\n"
 
-#: install_any.pm:1345 partition_table.pm:597
+#: install_any.pm:1349 partition_table.pm:597
 #, c-format
 msgid "Error reading file %s"
 msgstr "Błąd odczytu pliku %s"
 
-#: install_any.pm:1576
+#: install_any.pm:1580
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "Zmieniono nazwy następujących dysków: "
 
-#: install_any.pm:1578
+#: install_any.pm:1582
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (wcześniejsza nazwa: %s)"
 
-#: install_any.pm:1616
+#: install_any.pm:1620
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -6112,52 +6112,52 @@ msgstr ""
 "Wystąpił błąd - nie znaleziono urządzeń, na których można utworzyć nowe\n"
 "systemy plików. Sprawdź sprzęt, by wykryć przyczynę problemu"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1660
+#: install_any.pm:1664
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1683
+#: install_any.pm:1687
 #, c-format
 msgid "Please choose a media"
 msgstr "Proszę wybrać nośnik"
 
-#: install_any.pm:1699
+#: install_any.pm:1703
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Plik już istnieje. Nadpisać?"
 
-#: install_any.pm:1703
+#: install_any.pm:1707
 #, c-format
 msgid "Permission denied"
 msgstr "Dostęp zabroniony"
 
-#: install_any.pm:1752
+#: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
 msgstr ""
 
-#: install_any.pm:1773
+#: install_any.pm:1777
 #, c-format
 msgid "Bad media %s"
 msgstr "Nieprawidłowy nośnik %s"
 
-#: install_any.pm:1820
+#: install_any.pm:1824
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Nie można pobrać zrzutu ekranu przed partycjonowaniem"
 
-#: install_any.pm:1827
+#: install_any.pm:1831
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Zrzuty ekranu będą dostępne po instalacji w %s"
@@ -9643,10 +9643,15 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "Witaj w %s"
 
-#: lvm.pm:112
+#: lvm.pm:117
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Zacznij od usunięcia logicznych dysków (LV)\n"
+
+#: lvm.pm:150
+#, c-format
+msgid "The bootloader can't handle /boot on multiple physicals volumes"
+msgstr ""
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -20570,8 +20575,8 @@ msgstr "Centrum Sterowania Mandriva Linux"
 msgid "Synchronization tool"
 msgstr "Narzędzie synchronizacji"
 
-#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:148
-#: standalone/drakbug:150 standalone/drakbug:154
+#: standalone/drakbug:49 standalone/drakbug:63 standalone/drakbug:149
+#: standalone/drakbug:151 standalone/drakbug:155
 #, c-format
 msgid "Standalone Tools"
 msgstr "Samodzielne urządzenia"
@@ -20676,12 +20681,12 @@ msgstr ""
 msgid "Report"
 msgstr "Raport"
 
-#: standalone/drakbug:163
+#: standalone/drakbug:164
 #, c-format
 msgid "Not installed"
 msgstr "Nie zainstalowano"
 
-#: standalone/drakbug:175
+#: standalone/drakbug:176
 #, c-format
 msgid "Package not installed"
 msgstr "Pakiet nie jest zainstalowany"
@@ -26583,6 +26588,23 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacja zakończyła się niepowodzeniem"
+
+#~ msgid ""
+#~ "You've selected a LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a /boot partition"
+#~ msgstr ""
+#~ "Jako partycję root (/) wybrano logiczny wolumen LVM.\n"
+#~ "Żaden program rozruchowy nie jest w stanie obsłużyć go bez partycji /"
+#~ "boot.\n"
+#~ "Pamiętaj więc o dodaniu partycji /boot."
+
+#~ msgid ""
+#~ "You may not be able to install lilo (since lilo does not handle a LV on "
+#~ "multiple PVs)"
+#~ msgstr ""
+#~ "Możesz nie mieć możliwości zainstalowania lilo (ponieważ lilo nie\n"
+#~ "obsługuje LV na wielu PLV)"
 
 #~ msgid "use PPPoE"
 #~ msgstr "użyj PPPoE"
