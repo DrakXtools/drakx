@@ -100,7 +100,8 @@ sub part_raw {
 		log::l("shortening LABEL $part->{device_LABEL} to $short");
 		$part->{device_LABEL} = $short;
 	    }
-	    delete $part->{prefer_device_LABEL} if !$handled_by_mount;
+	    delete $part->{prefer_device_LABEL}
+	      if !$handled_by_mount || $part->{mntpoint} eq '/' && !member($fs_type, 'ext2', 'ext3');
 
 	    push @options, $option, $part->{device_LABEL};
 	} else {
