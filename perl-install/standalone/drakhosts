@@ -103,7 +103,7 @@ sub add_modify_entry {
   }
 
   gtkpack_($dialog->vbox,
-	   0, gtkadd(Gtk2::Frame->new(N("Please $wanted information")),
+	   0, gtkadd(Gtk2::Frame->new(N("Please %s information", $wanted)),
 		     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 			      0, $label_and_widgets->(N("IP address:"), $ip),
 			      0, $label_and_widgets->(N("Host name:"), $hostname),
@@ -113,9 +113,9 @@ sub add_modify_entry {
 	   0, create_okcancel({
 			       cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
-				 is_ip($ip->get_text()) or err_dialog(N("Error!"), N("Please enter a valid IP address.")) and return;
-				 my $testip = chomp_($ip->get_text());
-				 my $testname = chomp_($hostname->get_text());
+				 is_ip($ip->get_text) or err_dialog(N("Error!"), N("Please enter a valid IP address.")) and return;
+				 my $testip = chomp_($ip->get_text);
+				 my $testname = chomp_($hostname->get_text);
 				 my $toldip = chomp_($oldip);
 				 if ($testip !~ /$toldip/ or $wanted =~ /add/) {
 				   foreach my $a (@listhosts) {
@@ -128,14 +128,14 @@ sub add_modify_entry {
 				   $iter = $model->append;
 				   $i = "-1";
 				   push @listhosts, {
-						     ip => $ip->get_text(),
-						     hostname => $hostname->get_text(),
-						     alias => $alias->get_text(),
+						     ip => $ip->get_text,
+						     hostname => $hostname->get_text,
+						     alias => $alias->get_text,
 						    };
 				 }
-				 $listhosts[$i]{hostname} = $hostname->get_text();
-				 $listhosts[$i]{alias} = $alias->get_text();
-				 $listhosts[$i]{ip} = $ip->get_text();
+				 $listhosts[$i]{hostname} = $hostname->get_text;
+				 $listhosts[$i]{alias} = $alias->get_text;
+				 $listhosts[$i]{ip} = $ip->get_text;
 				 $model->set($iter,
 					     COLUMN_IP, $listhosts[$i]{ip},
 					     COLUMN_HOSTNAME, $listhosts[$i]{hostname},
@@ -174,7 +174,7 @@ sub create_model() {
 		 COLUMN_IP, $a->{ip},
 		 COLUMN_HOSTNAME, $a->{hostname},
 		 COLUMN_ALIAS, $a->{alias},
-	       ),
+		);
 	     }
   return $model;
 }
