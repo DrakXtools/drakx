@@ -310,7 +310,7 @@ sub add_columns {
     $renderer->signal_connect(edited => \&cell_edited, $model);
     $renderer->set_data(column => $::i);
     $treeview->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
-  } N("Share Directory"), N("Hosts Wildcard"), N("General Options"), N("More options");
+  } N("Share Directory"), N("Hosts Wildcard"), N("General Options"), N("More Options");
 }
 
 
