@@ -244,20 +244,21 @@ sub add_modify_entry {
 				 $anongid->get_text and $anong = "anongid=" . $anongid->get_text;
 				 map { $_ and $all_right = $_ . "," . $all_right  } $luserid->get_text, $anonu, $anong, $lsync->get_text, $lsecure->get_text, $lr->get_text;
 				 if ($wanted =~ /add/) {
-				   -d $dir->get_text or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+				     my $test_dir = $dir->get_text;
+				     -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
 				   $iter = $model->append;
 				   $i = "-1";
 				   push @listshare, {
-						     dir => $dir->get_text(),
-						     access => $access->get_text(),
+						     dir => $dir->get_text,
+						     access => $access->get_text,
 						     right => $all_right,
-						     options => $options->get_text(),
+						     options => $options->get_text,
 						    };
 				 }
 				 $listshare[$i]{right} = $all_right;
-				 $listshare[$i]{access} = $access->get_text();
-				 $listshare[$i]{dir} = $dir->get_text();
-				 $listshare[$i]{options} = $options->get_text();
+				 $listshare[$i]{access} = $access->get_text;
+				 $listshare[$i]{dir} = $dir->get_text;
+				 $listshare[$i]{options} = $options->get_text;
 				 $model->set($iter,
 					     COLUMN_DIR, $listshare[$i]{dir},
 					     COLUMN_ACCESS, $listshare[$i]{access},
@@ -298,7 +299,7 @@ sub create_model() {
 		COLUMN_ACCESS, $a->{access},
 		COLUMN_RIGHT, $a->{right},
 		COLUMN_OPTIONS, $a->{options},
-	       ),
+		);
 	     }
   return $model;
 }
