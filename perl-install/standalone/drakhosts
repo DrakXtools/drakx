@@ -58,7 +58,7 @@ sub get_host_data {
 # 127.0.0.1        localhost.localdomain localhost
 # 10.0.1.253        guibpiv.guibland.com
   foreach (cat_($HOSTS)) {
-    my ($ip, $name, $alias) = $_ =~ /^(\d\S*)\s+(\S*)\s+(.*)$/;
+    my ($ip, $name, $alias) = /^(\d\S*)\s+(\S*)\s+(.*)$/;
     $ip and push @listhosts, {
 			      ip => $ip,
 			      hostname => $name,
