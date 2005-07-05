@@ -238,7 +238,7 @@ sub add_modify_entry {
 				 my ($anonu, $anong);
 				 $anonuid->get_text and $anonu = "anonuid=" . $anonuid->get_text;
 				 $anongid->get_text and $anong = "anongid=" . $anongid->get_text;
-				 my $all_right = join(",", $luserid->get_text, $anonu, $anong, $lsync->get_text, $lsecure->get_text, $lr->get_text);
+				 my $all_right = join(",", grep { defined $_ } $luserid->get_text, $anonu, $anong, $lsync->get_text, $lsecure->get_text, $lr->get_text);
 				 if ($wanted =~ /add/) {
 				     my $test_dir = $dir->get_text;
 				     -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
