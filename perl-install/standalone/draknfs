@@ -26,7 +26,6 @@ use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
-use any;
 
 use interactive;
 # must come *after* definition of textdomains for proper initialisation
@@ -115,9 +114,21 @@ wildcards: machine names may contain the wildcard characters * and ?. For instan
 IP networks:  you can also export directories to all hosts  on  an  IP  (sub-)network simultaneously. for example, either `/255.255.252.0' or  `/22'  appended to the network base address result.
 ");
 
-my $help_userid = N("");
+my $help_userid = N("root_squash: map requests from uid/gid 0 to the anonymous uid/gid.
 
-my $help_global = N("");
+no_root_squash: turn off root squashing. This option is mainly useful for diskless clients.
+
+all_squash: map all uids and gids to the anonymous  user. Useful  for  NFS-exported public FTP directories, news spool directories, etc. The opposite option is no_all_squash, which is the default  setting.
+
+anonuid and anongid: explicitly  set the uid and gid of the anonymous account.
+");
+
+my $help_global = N("secure: this option requires that requests originate on an internet port less than IPPORT_RESERVED (1024). This option is on by default. To turn it off, specify insecure.
+
+rw: allow both read and write requests on this NFS volume. The default is to disallow any request which changes the filesystem. This can also be made explicit by using the ro option.
+
+async: allows the NFS server to violate the NFS protocol and reply to requests before any changes made by that request have been committed to stable storage (e.g. disc drive).
+");
 
 sub help_b {
   my ($tittle, $help_data) = @_;
