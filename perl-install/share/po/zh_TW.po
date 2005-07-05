@@ -1,4 +1,4 @@
-# translation of zh_TW.po to 繁體中文
+# translation of zh_TW.po to 正體中文
 # translation of zh_TW.po to Chinese Traditional
 # translation of DrakX-zh_TW.po to Chinese Traditional
 # drakbootdisk messages in Traditional Chinese
@@ -13,13 +13,14 @@
 # hilbert <h@mandrake.org>, 2004.
 # Shiva Huang <blueshiva@giga.net.tw>, 2005.
 # Shiva Huang <shivahuang@gmail.com>, 2005.
+# You-Cheng Hsieh <yochenhsieh@xuite.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
 "PO-Revision-Date: 2005-03-19 13:18+0800\n"
-"Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
+"Last-Translator: You-Cheng Hsieh <yochenhsieh@xuite.net>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -68,7 +69,7 @@ msgstr "重試"
 #: ../move/move.pm:453 ../move/move.pm:497
 #, c-format
 msgid "Continue without USB key"
-msgstr "不用 USB key 而繼續"
+msgstr "不用 USB 隨身碟而繼續"
 
 #: ../move/move.pm:462
 #, c-format
@@ -105,6 +106,13 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
+"您的 USB 隨身碟沒有可用的 Windows (FAT) 分割區。我們需要它才能\n"
+"繼續 (而且，這樣您才能從使用 Windows 的電腦移動與存取您的檔案。)\n"
+"請插入具有 Windows 分割區的 USB 隨身碟。\n"
+"\n"
+"\n"
+"您也可以在沒有 USB 隨身碟的情況下繼續 ─ 而且您仍然可以像使用一\n"
+"個普通的 Mandriva live 作業系統一樣使用 Mandriva Move。"
 
 #: ../move/move.pm:483
 #, c-format
@@ -121,6 +129,14 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
+"我們並未從您的系統偵測到任何 USB 隨身碟。如果您現在插入一個\n"
+"USB 隨身碟，Mandriva Move 將可以儲存您的家目錄與系統設定以作為\n"
+"下次在這台或其他電腦開機使用。注意：如果您現在插入隨身碟，請等\n"
+"候幾秒鐘以再次偵測。\n"
+"\n"
+"\n"
+"您也可以在沒有 USB 隨身碟的狀態下繼續 ─ 而且您仍然可以像使用一\n"
+"個普通的 Mandriva live 作業系統一樣使用 Mandriva Move。"
 
 #: ../move/move.pm:494
 #, c-format
@@ -234,8 +250,8 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"發生了一個錯誤, 但我不知道該如何妥善處置它.\n"
-"要繼續安裝工作的話請小心."
+"發生了一個錯誤，但我不知道該如何妥善處置它。\n"
+"要繼續安裝工作的話請小心。"
 
 #: ../move/move.pm:660 install_steps_interactive.pm:37
 #, c-format
@@ -261,6 +277,19 @@ msgid ""
 "a look at log files in console #3 and #4 to try to\n"
 "guess what's happening."
 msgstr ""
+"發生一個錯誤：\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"這也許是由於 USB 隨身碟中的系統設定檔損毀造成的，將它們\n"
+"移除並重新啟動 Mandriva Move 也許可以解決問題。如果要這\n"
+"麼做，請按下對應的按鈕。\n"
+"\n"
+"\n"
+"您也許想重新開機並移除 USB 隨身碟，或在其他作業系統下檢\n"
+"視它的內容，或甚至檢查第三與第四個終端機中的記錄檔以猜測\n"
+"可能發生的原因。"
 
 #: ../move/move.pm:681
 #, c-format
@@ -270,29 +299,29 @@ msgstr "移除系統設定檔案"
 #: ../move/move.pm:682
 #, c-format
 msgid "Simply reboot"
-msgstr "簡單地重新開機"
+msgstr "只要重新開機"
 
 #: ../move/tree/mdk_totem:50 ../move/tree/mdk_totem:96
 #, c-format
 msgid "You can only run with no CDROM support"
-msgstr "您只能以沒有 CDROM 支援下跑"
+msgstr "您只能在沒有光碟機支援的狀態下執行"
 
 #: ../move/tree/mdk_totem:71
 #, c-format
 msgid "Kill those programs"
-msgstr "殺死那些程式"
+msgstr "結束那些程式"
 
 #: ../move/tree/mdk_totem:72
 #, c-format
 msgid "No CDROM support"
-msgstr "沒有 CDROM 支援"
+msgstr "沒有光碟機支援"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:92
 #: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1056
 #: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Read carefully!"
-msgstr "詳細閱讀！"
+msgstr "仔細閱讀！"
 
 #: ../move/tree/mdk_totem:77
 #, c-format
@@ -300,7 +329,7 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
-"您可以在下列程式執行時使用別台光碟機：\n"
+"您無法在下列程式執行時使用別台光碟機：\n"
 "%s"
 
 #: ../move/tree/mdk_totem:101
@@ -366,7 +395,7 @@ msgstr "選取一個 X 伺服器"
 #: Xconfig/card.pm:188
 #, c-format
 msgid "Multi-head configuration"
-msgstr "多頭端(Multi-head)設定"
+msgstr "多顯示器輸出端設定"
 
 #: Xconfig/card.pm:189
 #, c-format
@@ -374,13 +403,13 @@ msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
-"您的系統支援多頭端(multiple head)設定組態.\n"
-"您打算怎麼做呢?"
+"您的系統支援多顯示器輸出端設定組態。\n"
+"您打算怎麼做呢？"
 
 #: Xconfig/card.pm:258
 #, c-format
 msgid "Can not install Xorg package: %s"
-msgstr "無法安裝 Xorg 套件: %s"
+msgstr "無法安裝 Xorg 套件：%s"
 
 #: Xconfig/card.pm:268
 #, c-format
@@ -395,22 +424,22 @@ msgstr "Xorg 設定"
 #: Xconfig/card.pm:347
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
-msgstr "您想要有哪一個 Xorg 設定?"
+msgstr "您想要用哪一個 Xorg 設定？"
 
 #: Xconfig/card.pm:380
 #, c-format
 msgid "Configure all heads independently"
-msgstr "獨立設定所有頭端(head)"
+msgstr "獨立設定所有顯示器輸出端"
 
 #: Xconfig/card.pm:381
 #, c-format
 msgid "Use Xinerama extension"
-msgstr "使用 Xinerama 延伸"
+msgstr "使用 Xinerama 全景延伸顯示"
 
 #: Xconfig/card.pm:386
 #, c-format
 msgid "Configure only card \"%s\"%s"
-msgstr "僅設定 \"%s\"%s 卡"
+msgstr "僅設定 \"%s\"%s 顯示卡"
 
 #: Xconfig/card.pm:398 Xconfig/various.pm:23
 #, c-format
@@ -420,17 +449,17 @@ msgstr "Xorg %s"
 #: Xconfig/card.pm:405 Xconfig/various.pm:22
 #, c-format
 msgid "Xorg %s with 3D hardware acceleration"
-msgstr "Xorg %s 含 3D 硬體加速功能"
+msgstr "Xorg %s 包含 3D 硬體加速功能"
 
 #: Xconfig/card.pm:407
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
-msgstr "您的顯示卡搭配 Xorg %s 有 3D 硬體加速功能."
+msgstr "您的顯示卡搭配 Xorg %s 可以有 3D 硬體加速功能。"
 
 #: Xconfig/card.pm:413
 #, c-format
 msgid "Xorg %s with EXPERIMENTAL 3D hardware acceleration"
-msgstr "Xorg %s 搭配實驗性質 3D 硬體加速"
+msgstr "Xorg %s 搭配實驗性質的 3D 硬體加速"
 
 #: Xconfig/card.pm:415
 #, c-format
@@ -439,7 +468,7 @@ msgid ""
 "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER."
 msgstr ""
 "您的顯示卡搭配 Xorg %s 能夠啟用 3D 硬體加速功能，\n"
-"但是請注意，這是實驗性質的支援項目，而且可能會凍結您的電腦。"
+"但是請注意，這是實驗性質的支援項目，而且可能會使您的電腦停止回應。"
 
 #: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:116 any.pm:963
 #, c-format
@@ -504,7 +533,7 @@ msgstr ""
 #: Xconfig/monitor.pm:111
 #, c-format
 msgid "Choose a monitor for head #%d"
-msgstr "選取一個螢幕給頭端(head) #%d"
+msgstr "選取一個螢幕給顯示輸出端 #%d"
 
 #: Xconfig/monitor.pm:111
 #, c-format
@@ -530,7 +559,7 @@ msgstr "廠商"
 #: Xconfig/monitor.pm:129
 #, c-format
 msgid "Plug'n Play probing failed. Please select the correct monitor"
-msgstr "隨插即用 Plug'n Play 偵測失敗, 請選擇正確的螢幕"
+msgstr "隨插即用顯示器偵測失敗，請選擇正確的螢幕"
 
 #: Xconfig/monitor.pm:137
 #, c-format
@@ -665,7 +694,7 @@ msgstr "您想要測試設定值嗎？"
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "警告：測試這張顯示卡時可能會凍結您的系統"
+msgstr "警告：測試這張顯示卡時可能會使您的系統停止回應"
 
 #: Xconfig/test.pm:69
 #, c-format
@@ -691,7 +720,7 @@ msgstr "這是正確的設定值嗎？"
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "鍵盤布局： %s\n"
+msgstr "鍵盤形式： %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
@@ -726,7 +755,7 @@ msgstr "顯示卡： %s\n"
 #: Xconfig/various.pm:38
 #, c-format
 msgid "Graphics memory: %s kB\n"
-msgstr "顯示卡繪圖記憶體： %s kB\n"
+msgstr "顯示卡記憶體： %s kB\n"
 
 #: Xconfig/various.pm:40
 #, c-format
@@ -774,7 +803,7 @@ msgstr ""
 "所以這張顯示卡能用 frame-buffer 工作。\n"
 "\n"
 "若是要使用的話，您需要在重新開機之前連接您的顯示卡與電視。\n"
-"然後選擇 \"TVout\" 這個開機載入項目\n"
+"然後選擇 \"TVout\" 這個開機選單項目\n"
 "\n"
 "您要使用這項功能嗎？"
 
@@ -788,7 +817,7 @@ msgstr "您的電視用什麼標準？"
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "其他"
 
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
@@ -801,7 +830,7 @@ msgstr "請稍候"
 #: any.pm:142
 #, c-format
 msgid "Bootloader installation in progress"
-msgstr "開機載入器安裝中"
+msgstr "開機載入程式安裝中"
 
 #: any.pm:153
 #, c-format
@@ -813,11 +842,16 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"LILO 想要分配新的磁區標籤給分割區 %s。但是，改變 Windows NT、2000，\n"
+"或 XP 開機磁區的磁區標籤會造成致命的 Windows 錯誤。\n"
+"這個警告並不適用於 Windows 95、98，或 NT 的資料磁區。\n"
+"\n"
+"要分配一個新的磁區標籤？"
 
 #: any.pm:164
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr "開機程式安裝失敗, 發生如下之錯誤："
+msgstr "開機程式安裝失敗，發生如下之錯誤："
 
 #: any.pm:170
 #, c-format
@@ -829,12 +863,12 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"您也許需要改變您的 Open Firmware 上面的開機裝置設定, \n"
-"以便於開啟開機啟動程式的功能。如果您開機時並沒有開到\n"
-"開機程式的任何訊息, 於重新開機時按住 Command-Option-O-F, \n"
-"然後輸入: setenv boot-device %s,\\\\:tbxi\n"
-"然後再輸入: shut-down\n"
-"然後你下一次開機時應該就可以看到開機啟動程式的訊息了。"
+"您也許需要改變您的 Open Firmware 上面的開機裝置設定，\n"
+"以便於開啟開機啟動程式的功能。如果您開機時並沒有看到\n"
+"開機程式的任何訊息，請於重新開機時按住 Command-Option-O-F，\n"
+"然後輸入：setenv boot-device %s,\\\\:tbxi\n"
+"然後再輸入：shut-down\n"
+"然後您下一次開機時應該就可以看到開機啟動程式的訊息了。"
 
 #: any.pm:208
 #, c-format
@@ -845,11 +879,11 @@ msgid ""
 "\n"
 "On which drive are you booting?"
 msgstr ""
-"您決定要將開機載入器安裝於分割區上面.\n"
-"這意旨你已經有一個開機載入器於你開機的硬碟上\n"
-"(比方 System Commander).\n"
+"您決定要將開機載入程式安裝於分割區上面。\n"
+"這表示您已經有一個開機載入程式在您開機的硬碟上\n"
+"(例如：System Commander)。\n"
 "\n"
-"您正用那顆硬碟開機呢?"
+"您目前是用那顆硬碟開機呢？"
 
 #: any.pm:231 help.pm:739
 #, c-format
@@ -859,7 +893,7 @@ msgstr "硬碟的第一個扇區 (MBR)"
 #: any.pm:232
 #, c-format
 msgid "First sector of the root partition"
-msgstr "根分隔區的第一扇區"
+msgstr "根分割區的第一扇區"
 
 #: any.pm:234
 #, c-format
@@ -879,7 +913,7 @@ msgstr "LILO/GRUB 安裝"
 #: any.pm:241
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "您要將開機載入器安裝在那裡?"
+msgstr "您要將開機載入程式安裝在那裡？"
 
 #: any.pm:267 standalone/drakboot:261
 #, c-format
@@ -889,7 +923,7 @@ msgstr "開機樣式組態設定"
 #: any.pm:269 any.pm:301
 #, c-format
 msgid "Bootloader main options"
-msgstr "開機載入器主要選項"
+msgstr "開機載入程式主要選項"
 
 #: any.pm:273
 #, c-format
@@ -900,7 +934,7 @@ msgstr "輸入記憶體大小 (以 MB 為單位)"
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
-msgstr "選項 ``限制命令列選項'' 在沒有設定密碼的情況下會無用"
+msgstr "選項 ``限制命令列選項'' 在沒有設定密碼的情況下會無法使用"
 
 #: any.pm:276 any.pm:609 authentication.pm:181
 #, c-format
@@ -915,7 +949,7 @@ msgstr "請再試一次"
 #: any.pm:281 any.pm:304
 #, c-format
 msgid "Bootloader to use"
-msgstr "要用的開機載入器"
+msgstr "要用的開機載入程式"
 
 #: any.pm:283 any.pm:306
 #, c-format
@@ -925,7 +959,7 @@ msgstr "開機裝置"
 #: any.pm:285
 #, c-format
 msgid "Delay before booting default image"
-msgstr "在開機到預設的影像前的延遲"
+msgstr "以預設的核心影像開機之前等待的時間"
 
 #: any.pm:286
 #, c-format
@@ -973,7 +1007,7 @@ msgstr "每次開機時清理 /tmp"
 #: any.pm:297
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "需要的話, 輸入精確的記憶體大小 (找到 %d MB)"
+msgstr "若有需要的話，請輸入正確的記憶體大小 (找到 %d MB)"
 
 #: any.pm:305
 #, c-format
@@ -983,7 +1017,7 @@ msgstr "啟動訊息"
 #: any.pm:307
 #, c-format
 msgid "Open Firmware Delay"
-msgstr "開啟 Firmware 延遲"
+msgstr "Open Firmware 延遲"
 
 #: any.pm:308
 #, c-format
@@ -993,22 +1027,22 @@ msgstr "核心啟動時間逾時"
 #: any.pm:309
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "允許 CD 開機?"
+msgstr "允許光碟開機？"
 
 #: any.pm:310
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "允許 OF 開機?"
+msgstr "允許 Open Firmware 開機？"
 
 #: any.pm:311
 #, c-format
 msgid "Default OS?"
-msgstr "預設 OS?"
+msgstr "預設的作業系統？"
 
 #: any.pm:364
 #, c-format
 msgid "Image"
-msgstr "影像"
+msgstr "核心影像"
 
 #: any.pm:365 any.pm:375
 #, c-format
@@ -1018,17 +1052,17 @@ msgstr "根目錄"
 #: any.pm:366 any.pm:388
 #, c-format
 msgid "Append"
-msgstr "附加"
+msgstr "附加參數"
 
 #: any.pm:368 standalone/drakboot:263 standalone/drakboot:267
 #, c-format
 msgid "Video mode"
-msgstr "視訊模式"
+msgstr "顯示模式"
 
 #: any.pm:370
 #, c-format
 msgid "Initrd"
-msgstr ""
+msgstr "Initrd"
 
 #: any.pm:371
 #, c-format
@@ -1053,12 +1087,12 @@ msgstr "Initrd-大小"
 #: any.pm:391
 #, c-format
 msgid "NoVideo"
-msgstr ""
+msgstr "沒有 Video 參數"
 
 #: any.pm:402
 #, c-format
 msgid "Empty label not allowed"
-msgstr "標籤空白不被允許"
+msgstr "不允許空白標籤"
 
 #: any.pm:403
 #, c-format
@@ -1078,7 +1112,7 @@ msgstr "這個標籤已經被用過了"
 #: any.pm:418
 #, c-format
 msgid "Which type of entry do you want to add?"
-msgstr "您要新增哪一類的項目?"
+msgstr "您要新增哪一類的項目？"
 
 #: any.pm:419
 #, c-format
@@ -1106,8 +1140,8 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"到此為止有這些選項於您的開機選單.\n"
-"您可以建立多的選項或修改既有的選項."
+"目前有這些選項在您的開機選單中。\n"
+"您可以建立更多的選項或修改既有的選項。"
 
 #: any.pm:595
 #, c-format
@@ -1117,7 +1151,7 @@ msgstr "存取 X 程式"
 #: any.pm:596
 #, c-format
 msgid "access to rpm tools"
-msgstr "存取 rpm 工具程式"
+msgstr "存取 RPM 套件工具程式"
 
 #: any.pm:597
 #, c-format
@@ -1127,7 +1161,7 @@ msgstr "允許 \"su\""
 #: any.pm:598
 #, c-format
 msgid "access to administrative files"
-msgstr "存取管理權限的的檔案"
+msgstr "存取系統管理者權限的檔案"
 
 #: any.pm:599
 #, c-format
@@ -1158,7 +1192,7 @@ msgstr "請輸入使用者名稱"
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "使用者名稱只能含有小寫英文字母, 數字, `-' 與 `_'"
+msgstr "使用者名稱只能含有小寫英文字母、數字、`-' 與 `_'"
 
 #: any.pm:613
 #, c-format
@@ -1168,7 +1202,7 @@ msgstr "這個使用者名稱太長了"
 #: any.pm:614
 #, c-format
 msgid "This user name has already been added"
-msgstr "這個使用者早就已經被加入過了"
+msgstr "這個使用者已經加入過了"
 
 #: any.pm:615 any.pm:646
 #, c-format
@@ -1181,14 +1215,14 @@ msgid "Group ID"
 msgstr "群組 ID"
 
 #: any.pm:619
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "UIN 必須是數字。\n"
+msgstr "%s 必須是數字"
 
 #: any.pm:620
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s 必須大於 500。還是要接受嗎？"
 
 #: any.pm:625
 #, c-format
@@ -1232,7 +1266,7 @@ msgstr "登入名稱"
 #: any.pm:645
 #, c-format
 msgid "Shell"
-msgstr "命令殼"
+msgstr "Shell"
 
 #: any.pm:649
 #, c-format
@@ -1247,27 +1281,27 @@ msgstr "自動登入"
 #: any.pm:697
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "我能夠設定您的電腦自動以某個使用者身份登入系統."
+msgstr "我能夠設定您的電腦自動以某個使用者身份登入系統。"
 
 #: any.pm:698
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "關閉本資料夾"
+msgstr "使用此功能"
 
 #: any.pm:699
 #, c-format
 msgid "Choose the default user:"
-msgstr "選取預設的使用者:"
+msgstr "選取預設的使用者："
 
 #: any.pm:700
 #, c-format
 msgid "Choose the window manager to run:"
-msgstr "選取您想使用的視窗管理員:"
+msgstr "選取您想使用的視窗管理程式："
 
 #: any.pm:712 any.pm:779
 #, c-format
 msgid "Please choose a language to use."
-msgstr "請選擇要使用那個語系."
+msgstr "請選擇要使用那個語言。"
 
 #: any.pm:713 any.pm:780
 #, c-format
@@ -1281,8 +1315,8 @@ msgid ""
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
-"Mandriva Linux 能支援多種語言. 選擇您想安裝的語言.\n"
-"他們將可使用於您的安裝完成與您重新開始您的系統之後."
+"Mandriva Linux 能支援多種語言，請選擇您想安裝的語言。\n"
+"它們將可供您完成安裝並重新啟動系統之後使用。"
 
 #: any.pm:759 any.pm:788 help.pm:647
 #, c-format
@@ -1302,7 +1336,7 @@ msgstr "國家/地區"
 #: any.pm:836
 #, c-format
 msgid "Please choose your country."
-msgstr "請選擇您的國家."
+msgstr "請選擇您的國家。"
 
 #: any.pm:838
 #, c-format
@@ -1323,7 +1357,7 @@ msgstr "進階"
 #: any.pm:847
 #, c-format
 msgid "Input method:"
-msgstr "輸入方式:"
+msgstr "輸入法："
 
 #: any.pm:848 install_any.pm:421 network/netconnect.pm:154
 #: network/netconnect.pm:305 network/netconnect.pm:310
@@ -1352,31 +1386,31 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"您要允許使用者能夠分享他們自己的目錄嗎?\n"
+"您要允許使用者能夠分享他們自己的目錄嗎？\n"
 "若是要開放將允許使用者能在 konqueror 或者是 nautilus 內\n"
-"點選 \"Share\"\n"
+"點選 \"分享\"\n"
 "\n"
-"\"Custom\" 允許每一個使用者粒度.\n"
+"\"自訂\" 允許每一個使用者自行設定。\n"
 
 #: any.pm:979
 #, c-format
 msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
-msgstr "NFS: 傳統 Unix 檔案分享系統, 跟著少的 Mac 與 Windows 支援."
+msgstr "NFS：傳統的 Unix 檔案分享系統，但 Mac 與 Windows 的支援較不足。"
 
 #: any.pm:982
 #, c-format
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
-msgstr "SMB: 一個 Windows, Mac OS X 與許多先進的 Linux 系統用的檔案分享系統."
+msgstr "SMB：一個 Windows、Mac OS X 與許多先進的 Linux 系統用的檔案分享系統。"
 
 #: any.pm:990
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
-msgstr "您能夠用 NFS 或者是 SMB 匯出. 請選擇您想要用那一個."
+msgstr "您能夠用 NFS 或者是 SMB 匯出。請選擇您想要用那一個。"
 
 #: any.pm:1015
 #, c-format
@@ -1399,8 +1433,8 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
-"每個使用者的分享都是使用 \"fileshare\" 群組.\n"
-"您可以執行 userdrake 在該群組內加入使用者."
+"每個使用者的分享都是使用 \"fileshare\" 群組。\n"
+"您可以執行 userdrake 在該群組內加入使用者。"
 
 #: authentication.pm:23
 #, c-format
@@ -1420,7 +1454,7 @@ msgstr "NIS"
 #: authentication.pm:26
 #, c-format
 msgid "Smart Card"
-msgstr ""
+msgstr "智慧卡"
 
 #: authentication.pm:27 authentication.pm:152
 #, c-format
@@ -1440,7 +1474,7 @@ msgstr ""
 #: authentication.pm:55
 #, c-format
 msgid "Local file:"
-msgstr "本地端檔案:"
+msgstr "本地端檔案："
 
 #: authentication.pm:55
 #, c-format
@@ -1451,7 +1485,7 @@ msgstr ""
 #: authentication.pm:56
 #, c-format
 msgid "LDAP:"
-msgstr "LDAP:"
+msgstr "LDAP："
 
 #: authentication.pm:56
 #, c-format
@@ -1463,7 +1497,7 @@ msgstr ""
 #: authentication.pm:57
 #, c-format
 msgid "NIS:"
-msgstr "NIS:"
+msgstr "NIS："
 
 #: authentication.pm:57
 #, c-format
@@ -1523,7 +1557,7 @@ msgstr "簡單"
 #: authentication.pm:101
 #, c-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: authentication.pm:102
 #, c-format
@@ -1533,7 +1567,7 @@ msgstr "SSL"
 #: authentication.pm:103
 #, c-format
 msgid "security layout (SASL/Kerberos)"
-msgstr "安全性佈置 (SASL/Kerberos)"
+msgstr "安全性配置 (SASL/Kerberos)"
 
 #: authentication.pm:110 authentication.pm:148
 #, c-format
@@ -1560,7 +1594,7 @@ msgstr "LDAP 使用者資料庫"
 #: authentication.pm:115
 #, c-format
 msgid "Use Anonymous BIND "
-msgstr ""
+msgstr "使用匿名 BIND"
 
 #: authentication.pm:116
 #, c-format
@@ -1608,15 +1642,15 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
-"要能夠在 W2K PDC 下正常使用, 您或許需要使用管理者權限在 Windows 主機那邊執行:"
+"要能夠在 W2K PDC 下正常使用，您或許需要使用管理者權限在 Windows 主機那邊執行："
 "C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add然後"
-"重新啟動伺服器.\n"
-"您另外還需要網域管理者帳號密碼以便於能夠加入機器到 Windows(TM) 網域內.\n"
-"如果網路沒有被啟用, DrakX 程式會於網路設定步驟後企圖加入網域若是這樣設定失敗"
-"且網域認證莫名其妙不能作用的話, 執行'smbpasswd -j DOMAIN -U USER%%PASSWORD' "
-"指令, 其中的 DOMAIN 為你的Windows(tm)網域名稱, USER 與 PASSWORD 為管理者的帳"
-"號與密碼.\n"
-"最後使用 'wbinfo -t' 測試確認認證功能是否可以正常工作."
+"重新啟動伺服器。\n"
+"您另外還需要網域管理者帳號密碼以便於能夠加入機器到 Windows(TM) 網域內。\n"
+"如果網路沒有被啟用，DrakX 程式會於網路設定步驟後企圖加入網域若是這樣設定失敗"
+"且網域認證莫名其妙不能作用的話，執行'smbpasswd -j DOMAIN -U USER%%PASSWORD' "
+"指令，其中的 DOMAIN 為你的 Windows(tm) 網域名稱，USER 與 PASSWORD 為管理者的帳"
+"號與密碼。\n"
+"最後使用 'wbinfo -t' 測試確認認證功能是否可以正常工作。"
 
 #: authentication.pm:148
 #, c-format
@@ -1714,7 +1748,7 @@ msgstr "Grub"
 #: bootloader.pm:856
 #, c-format
 msgid "Yaboot"
-msgstr ""
+msgstr "Yaboot"
 
 #: bootloader.pm:934
 #, c-format
@@ -1724,7 +1758,7 @@ msgstr "/boot 沒有足夠的空間"
 #: bootloader.pm:1406
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
-msgstr "您不能把開機載入程式安裝在 %s 分割區上\n"
+msgstr "您無法把開機載入程式安裝在 %s 分割區上\n"
 
 #: bootloader.pm:1440
 #, c-format
@@ -1824,7 +1858,7 @@ msgstr "加拿大"
 #: network/adsl_consts.pm:900 network/adsl_consts.pm:911
 #, c-format
 msgid "Switzerland"
-msgstr "Switzerland"
+msgstr "瑞士"
 
 #: crypto.pm:19 lang.pm:242
 #, c-format
@@ -1955,7 +1989,7 @@ msgstr "瑞典"
 #: crypto.pm:40 crypto.pm:70 lang.pm:387
 #, c-format
 msgid "Slovakia"
-msgstr "Slovakia"
+msgstr "斯洛伐克"
 
 #: crypto.pm:41 crypto.pm:76 lang.pm:401 network/adsl_consts.pm:920
 #, c-format
@@ -1985,6 +2019,9 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
+"WebDAV 是一個讓您從本地端掛載網路伺服器的目錄的通訊協定，並像本地端檔案\n"
+"系統一樣處理它 (需要該網路伺服器設定為 WebDAV 伺服器)。如果您想要增加\n"
+" WebDAV 掛載點，請選擇 \"新增\"。"
 
 #: diskdrake/dav.pm:25
 #, c-format
@@ -2263,17 +2300,17 @@ msgstr "需要有更多的分割區的話，請刪除一個主分割區以建立
 #: diskdrake/interactive.pm:360
 #, c-format
 msgid "No supermount"
-msgstr ""
+msgstr "不使用 supermount"
 
 #: diskdrake/interactive.pm:361
 #, c-format
 msgid "Supermount"
-msgstr ""
+msgstr "Supermount"
 
 #: diskdrake/interactive.pm:362
 #, c-format
 msgid "Supermount except for CDROM drives"
-msgstr ""
+msgstr "在光碟機以外的裝置使用 supermount"
 
 #: diskdrake/interactive.pm:368 help.pm:530
 #, c-format
@@ -2298,7 +2335,7 @@ msgstr "重新載入硬碟分割表"
 #: diskdrake/interactive.pm:374
 #, c-format
 msgid "Removable media automounting"
-msgstr "可移除式裝置自動掛載"
+msgstr "自動掛載可移除式裝置"
 
 #: diskdrake/interactive.pm:387 diskdrake/interactive.pm:413
 #, c-format
@@ -2377,7 +2414,7 @@ msgstr "開始的磁區："
 #: diskdrake/interactive.pm:519 diskdrake/interactive.pm:926
 #, c-format
 msgid "Size in MB: "
-msgstr "大小 (MB):"
+msgstr "大小 (MB)："
 
 #: diskdrake/interactive.pm:520 diskdrake/interactive.pm:927
 #, c-format
@@ -2497,6 +2534,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
+"開機時便會執行檔案系統檢查。"
 
 #: diskdrake/interactive.pm:840
 #, c-format
@@ -2506,7 +2545,7 @@ msgstr "選取一存在的磁碟陣列加入到"
 #: diskdrake/interactive.pm:842 diskdrake/interactive.pm:859
 #, c-format
 msgid "new"
-msgstr "新的"
+msgstr "新增"
 
 #: diskdrake/interactive.pm:857
 #, c-format
@@ -2583,7 +2622,7 @@ msgstr "階層"
 #: diskdrake/interactive.pm:1030
 #, c-format
 msgid "chunk size in KiB"
-msgstr "組塊大小以 Kib 計量"
+msgstr "組塊大小以 KiB 計量"
 
 #: diskdrake/interactive.pm:1047
 #, c-format
@@ -2626,7 +2665,7 @@ msgid ""
 "Directory %s already contains data\n"
 "(%s)"
 msgstr ""
-"%s 目錄已經包含了資料了\n"
+"%s 目錄已經包含資料了\n"
 "(%s)"
 
 #: diskdrake/interactive.pm:1146
@@ -2647,7 +2686,7 @@ msgstr "正在移除 %s"
 #: diskdrake/interactive.pm:1168
 #, c-format
 msgid "partition %s is now known as %s"
-msgstr "該分割區 %s 目前被認知為 %s"
+msgstr "分割區 %s 現在被命名為 %s 了"
 
 #: diskdrake/interactive.pm:1169
 #, c-format
@@ -3020,6 +3059,8 @@ msgid ""
 "bits to take effect. (This seems safe, but is in fact rather unsafe if you\n"
 "have suidperl(1) installed.)"
 msgstr ""
+"不允許 set-user-identifier 或 set-group-identifier 作用。\n"
+"(這樣似乎是安全的，但當您有安裝 suidperl(1) 時則不然。)"
 
 #: fs/mount_options.pm:129
 #, c-format
@@ -3030,6 +3071,7 @@ msgstr "以唯讀方式掛載檔案系統。"
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr ""
+"所有對於此檔案系統的存取 (I/O) 動作必須同步。"
 
 #: fs/mount_options.pm:135
 #, c-format
@@ -3093,6 +3135,13 @@ msgid ""
 "\n"
 "Do you agree to lose all the partitions?\n"
 msgstr ""
+"我無法讀取 %s 裝置的磁碟分割表，它已經嚴重毀損："
+"(\n"
+"我可以試著繼續，並清除壞掉的分割區 (將失去所有資料！)。\n"
+"另一種方法是不允許 DrakX 更改磁碟分割表。\n"
+"(錯誤是 %s)\n"
+"\n"
+"您同意要清除所有的分割區嗎？\n"
 
 #: fsedit.pm:381
 #, c-format
