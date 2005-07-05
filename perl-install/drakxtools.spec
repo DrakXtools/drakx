@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.30mdk
+Release: 0.31mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jul  5 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.31mdk
+- drakfloppy: do not package it anymore since kernel is too big
+  (#10565)
+- drakhosts, draknfs: new tools (antoine)
+- harddrake service: fix faillure on startup
+
 * Fri Jul  1 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.30mdk
 - diskdrake:
   o misc LVM enhancements (pixel, the "Anne" effect, #16168, #16176,
