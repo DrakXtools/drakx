@@ -217,16 +217,17 @@ my $okcancel = create_okcancel({
 
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
+		 0, Gtk2::Label->new("Here you cann add, remove and alter host definitions."),
 		 1, create_scrolled_window($treeview),
-		 0, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Add a host")), clicked => sub {
+		 0, gtkpack_(gtkset_border_width(create_hbox('edge', 3)),
+                             0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
 						    eval { add_modify_entry($model, $treeview, "add") };
 						    my $err = $@;
 						    if ($err) {
                                                       err_dialog(N("Error"), N("Failed to add host.") . "\n\n" . $err);
                                                     }
                                                   }),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Modify a host")), clicked => sub {
+                             0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
 						    eval { add_modify_entry($model, $treeview, "modify") };
 						    my $err = $@;
 						    if ($err) {
@@ -234,14 +235,13 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                     }
                                                   }),
 
-                             0, gtksignal_connect(Gtk2::Button->new(N("Remove a host")), clicked => sub {
+                             0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 						    eval { remove_entry($model, $treeview) };
 						    my $err = $@;
 						    if ($err) {
                                                       err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
                                                     }
                                                   }),
-			     0, Gtk2::VSeparator->new,
 			    ),
 		 if_($::isEmbedded, 0, $okcancel),
 		),

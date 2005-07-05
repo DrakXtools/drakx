@@ -340,16 +340,18 @@ my $okcancel = create_okcancel({
 
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
+		 0, Gtk2::Label->new("Here you cann add, remove and alter NFS shares."),
 		 1, create_scrolled_window($treeview),
 		 0, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Add an NFS share")), clicked => sub {
+                       1, gtkpack_(create_hbox('edge'),
+                             0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
 						    eval { add_modify_entry($model, $treeview, "add") };
 						    my $err = $@;
 						    if ($err) {
                                                       err_dialog(N("Error"), N("Failed to add NFS share.") . "\n\n" . $err);
                                                     }
                                                   }),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Modify an NFS share")), clicked => sub {
+                             0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
 						    eval { add_modify_entry($model, $treeview, "modify") };
 						    my $err = $@;
 						    if ($err) {
@@ -357,13 +359,14 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                     }
                                                   }),
 
-                             0, gtksignal_connect(Gtk2::Button->new(N("Remove an NFS share")), clicked => sub {
+                             0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 						    eval { remove_entry($model, $treeview) };
 						    my $err = $@;
 						    if ($err) {
                                                       err_dialog(N("Error"), N("Failed to remove an NFS share.") . "\n\n" . $err);
                                                     }
                                                   }),
+                    ),
 			     0, Gtk2::VSeparator->new,
                              0, gtksignal_connect(Gtk2::Button->new(N("Reload NFS server")), clicked => sub {
 						    system("/sbin/service nfs reload");
