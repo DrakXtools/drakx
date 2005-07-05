@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2005-07-01 16:44+0200\n"
+"POT-Creation-Date: 2005-07-05 16:34+0200\n"
 "PO-Revision-Date: 2005-07-03 07:59+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
@@ -224,12 +224,13 @@ msgstr "Augnablik, leita að og stilli tæki..."
 #: standalone/drakbackup:4324 standalone/drakclock:124
 #: standalone/drakconnect:672 standalone/drakconnect:676
 #: standalone/drakconnect:681 standalone/drakconnect:696
-#: standalone/drakfloppy:297 standalone/drakfloppy:300
-#: standalone/drakfloppy:306 standalone/drakfont:210 standalone/drakfont:223
-#: standalone/drakfont:261 standalone/drakgw:50 standalone/drakgw:188
-#: standalone/drakgw:217 standalone/drakgw:258 standalone/drakgw:292
-#: standalone/drakgw:397 standalone/drakroam:41 standalone/draksplash:15
-#: standalone/drakxtv:107 standalone/finish-install:49 standalone/logdrake:168
+#: standalone/drakfont:210 standalone/drakfont:223 standalone/drakfont:261
+#: standalone/drakgw:50 standalone/drakgw:188 standalone/drakgw:217
+#: standalone/drakgw:258 standalone/drakgw:292 standalone/drakgw:397
+#: standalone/drakhosts:227 standalone/drakhosts:234 standalone/drakhosts:242
+#: standalone/draknfs:351 standalone/draknfs:358 standalone/draknfs:366
+#: standalone/drakroam:41 standalone/draksplash:15 standalone/drakxtv:107
+#: standalone/finish-install:49 standalone/logdrake:168
 #: standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59
 #: standalone/scannerdrake:202 standalone/scannerdrake:261
 #: standalone/scannerdrake:715 standalone/scannerdrake:726
@@ -314,8 +315,8 @@ msgid "No CDROM support"
 msgstr "Enginn CDROM stuðningur"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:92
-#: diskdrake/interactive.pm:1039 diskdrake/interactive.pm:1049
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1056
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Read carefully!"
 msgstr "Lestu vandlega!"
@@ -672,11 +673,11 @@ msgstr "Hætta við"
 #: Xconfig/resolution_and_depth.pm:372 diskdrake/hd_gtk.pm:150
 #: install_steps_gtk.pm:228 install_steps_gtk.pm:629 interactive.pm:527
 #: interactive/gtk.pm:677 interactive/gtk.pm:679 standalone/drakTermServ:284
-#: standalone/drakbackup:3883 standalone/drakbug:104
+#: standalone/drakbackup:3883 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
-#: standalone/drakfont:509 standalone/drakperm:133 standalone/draksec:336
-#: standalone/draksec:338 standalone/draksec:356 standalone/draksec:358
-#: ugtk2.pm:1040 ugtk2.pm:1041
+#: standalone/drakfont:509 standalone/draknfs:131 standalone/draknfs:133
+#: standalone/drakperm:133 standalone/draksec:336 standalone/draksec:338
+#: standalone/draksec:356 standalone/draksec:358 ugtk2.pm:1040 ugtk2.pm:1041
 #, c-format
 msgid "Help"
 msgstr "Hjálp"
@@ -823,7 +824,7 @@ msgstr "annað"
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:245
-#: standalone/service_harddrake:207
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
 msgstr "Augnablik"
@@ -934,15 +935,17 @@ msgstr "Sláðu inn vinnsluminni í MB"
 
 #: any.pm:275
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+"Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
 
 #: any.pm:276 any.pm:609 authentication.pm:181
 #, c-format
 msgid "The passwords do not match"
 msgstr "Mismunandi lykilorð"
 
-#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1299
+#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1306
 #, c-format
 msgid "Please try again"
 msgstr "Reyndu aftur"
@@ -1075,8 +1078,7 @@ msgstr "Net snið"
 msgid "Label"
 msgstr "Auðkenni"
 
-#: any.pm:382 any.pm:392 harddrake/v4l.pm:358 standalone/drakfloppy:84
-#: standalone/drakfloppy:90 standalone/draksec:52
+#: any.pm:382 any.pm:392 harddrake/v4l.pm:358 standalone/draksec:52
 #, c-format
 msgid "Default"
 msgstr "Sjálfgefið"
@@ -1192,7 +1194,8 @@ msgstr "Vinsamlega sláðu inn notandanafn"
 
 #: any.pm:612
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Notandanafnið má bara innihalda litla stafi, tölustafi, `-' og `_'"
 
 #: any.pm:613
@@ -1282,7 +1285,8 @@ msgstr "Skrá notanda sjálfkrafa inn"
 #: any.pm:697
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Ég get stillt tölvuna þína til að stimpla sjálfkrafa inn ákveðinn notanda."
+msgstr ""
+"Ég get stillt tölvuna þína til að stimpla sjálfkrafa inn ákveðinn notanda."
 
 #: any.pm:698
 #, c-format
@@ -1408,11 +1412,13 @@ msgstr ""
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
-msgstr "SMB: skráarkerfi notað af Windows, Mac OS X og mörgum nýlegum Linux kerfum."
+msgstr ""
+"SMB: skráarkerfi notað af Windows, Mac OS X og mörgum nýlegum Linux kerfum."
 
 #: any.pm:990
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Þú getur miðlað með NFS eða SMB. Veldu hvort þú vilt nota."
 
 #: any.pm:1015
@@ -1423,7 +1429,7 @@ msgstr "Ræsa userdrake"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -1481,8 +1487,10 @@ msgstr "Staðbundin skrá:"
 
 #: authentication.pm:55
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
-msgstr "Nota staðbundna skrá fyrir allar auðkenningar og upplýsingar um notanda"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
+"Nota staðbundna skrá fyrir allar auðkenningar og upplýsingar um notanda"
 
 #: authentication.pm:56
 #, c-format
@@ -1533,7 +1541,8 @@ msgstr "Upplýsingaveita með SFU:"
 
 #: authentication.pm:59 authentication.pm:60
 #, c-format
-msgid "Kerberos is a secure system for providing network authentication services."
+msgid ""
+"Kerberos is a secure system for providing network authentication services."
 msgstr "Kerberos er öruggt kerfi til auðkenningar-þjónustu yfir net."
 
 #: authentication.pm:60
@@ -1710,7 +1719,8 @@ msgstr "Ekkert lykilorð"
 #: authentication.pm:183
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Þetta lykilorð er of einfalt (það verður að vera a.m.k. %d stafa langt)"
+msgstr ""
+"Þetta lykilorð er of einfalt (það verður að vera a.m.k. %d stafa langt)"
 
 #: authentication.pm:188 network/netconnect.pm:310 network/netconnect.pm:565
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
@@ -2079,12 +2089,12 @@ msgid "Server: "
 msgstr "Miðlari: "
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:521
-#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1188 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Mount point: "
 msgstr "Tengipunktur: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1273
 #, c-format
 msgid "Options: %s"
 msgstr "Valkostir: %s"
@@ -2172,7 +2182,7 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1196
+#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1203
 #, c-format
 msgid "Empty"
 msgstr "Autt"
@@ -2247,7 +2257,28 @@ msgstr "Færa í snillingsham"
 msgid "Continue anyway?"
 msgstr "Halda samt áfram?"
 
-#: diskdrake/interactive.pm:278
+#: diskdrake/interactive.pm:280
+#, c-format
+msgid "Quit without saving"
+msgstr "Hætta án þess að vista"
+
+#: diskdrake/interactive.pm:280
+#, c-format
+msgid "Quit without writing the partition table?"
+msgstr "Hætta án þess að skrifa sneiðatöfluna?"
+
+#: diskdrake/interactive.pm:285
+#, c-format
+msgid "Do you want to save /etc/fstab modifications"
+msgstr "Viltu vista /etc/fstab breytingar"
+
+#: diskdrake/interactive.pm:292 install_steps_interactive.pm:329
+#, c-format
+msgid "You need to reboot for the partition table modifications to take place"
+msgstr ""
+"Þú verður að ræsa tölvuna aftur svo breytingar á sneiðatöflunni taki gildi"
+
+#: diskdrake/interactive.pm:297
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -2257,26 +2288,6 @@ msgstr ""
 "Þú ættir að forsníða disksneiðina %s.\n"
 "Annars verður engin færsla fyrir tengipunkt %s skráð í fstab.\n"
 "Hætta samt?"
-
-#: diskdrake/interactive.pm:285
-#, c-format
-msgid "Quit without saving"
-msgstr "Hætta án þess að vista"
-
-#: diskdrake/interactive.pm:285
-#, c-format
-msgid "Quit without writing the partition table?"
-msgstr "Hætta án þess að skrifa sneiðatöfluna?"
-
-#: diskdrake/interactive.pm:290
-#, c-format
-msgid "Do you want to save /etc/fstab modifications"
-msgstr "Viltu vista /etc/fstab breytingar"
-
-#: diskdrake/interactive.pm:297 install_steps_interactive.pm:329
-#, c-format
-msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Þú verður að ræsa tölvuna aftur svo breytingar á sneiðatöflunni taki gildi"
 
 #: diskdrake/interactive.pm:310 help.pm:530
 #, c-format
@@ -2433,12 +2444,12 @@ msgstr "Búa til nýja disksneið"
 msgid "Start sector: "
 msgstr "Byrjunar geiri: "
 
-#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:919
+#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:926
 #, c-format
 msgid "Size in MB: "
 msgstr "Stærð í MB: "
 
-#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:927
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tegund skráakerfis: "
@@ -2471,7 +2482,8 @@ msgstr "Fjarlægja sýndardisk-skrá?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr "Eftir breytingu á sneið %s, hafa öll gögn á þessari disksneið tapast"
 
 #: diskdrake/interactive.pm:619
@@ -2537,7 +2549,8 @@ msgstr "Öll gögn á þessari disksneið ætti að afrita"
 #: diskdrake/interactive.pm:755
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "Eftir stærðarbreytingu á sneið %s, hafa öll gögn á þessari disksneið tapast"
+msgstr ""
+"Eftir stærðarbreytingu á sneið %s, hafa öll gögn á þessari disksneið tapast"
 
 #: diskdrake/interactive.pm:760
 #, c-format
@@ -2578,99 +2591,111 @@ msgstr "Veldu LVM sem til er fyrir til að bæta við"
 msgid "LVM name?"
 msgstr "LVM nafn?"
 
-#: diskdrake/interactive.pm:904
+#: diskdrake/interactive.pm:891
+#, c-format
+msgid ""
+"Physical volume %s is still in use.\n"
+"Do you want to move used physical extents on this volume to other volumes?"
+msgstr ""
+
+#: diskdrake/interactive.pm:893
+#, c-format
+msgid "Moving physical extents"
+msgstr ""
+
+#: diskdrake/interactive.pm:911
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Það er ekki hægt að nota þessa sneið fyrir sýndardisk"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:924
 #, c-format
 msgid "Loopback"
 msgstr "Sýndardiskur"
 
-#: diskdrake/interactive.pm:918
+#: diskdrake/interactive.pm:925
 #, c-format
 msgid "Loopback file name: "
 msgstr "Skráarnafn sýndardisks: "
 
-#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:930
 #, c-format
 msgid "Give a file name"
 msgstr "Gefðu upp skráarnafn"
 
-#: diskdrake/interactive.pm:926
+#: diskdrake/interactive.pm:933
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Skrá er þegar notuð sem annar sýndardiskur, veldu annan"
 
-#: diskdrake/interactive.pm:927
+#: diskdrake/interactive.pm:934
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "Skráin er þegar til. Nota hana?"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:957
 #, c-format
 msgid "Mount options"
 msgstr "Tengistillingar"
 
-#: diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:964
 #, c-format
 msgid "Various"
 msgstr "Ýmislegt"
 
-#: diskdrake/interactive.pm:1021
+#: diskdrake/interactive.pm:1028
 #, c-format
 msgid "device"
 msgstr "tæki"
 
-#: diskdrake/interactive.pm:1022
+#: diskdrake/interactive.pm:1029
 #, c-format
 msgid "level"
 msgstr "stig"
 
-#: diskdrake/interactive.pm:1023
+#: diskdrake/interactive.pm:1030
 #, c-format
 msgid "chunk size in KiB"
 msgstr "blokkarstærð í KiB"
 
-#: diskdrake/interactive.pm:1040
+#: diskdrake/interactive.pm:1047
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Varaðu þig: þessi aðgerð er hættuleg."
 
-#: diskdrake/interactive.pm:1055
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Hvaða tegund af disksneiðingu?"
 
-#: diskdrake/interactive.pm:1093
+#: diskdrake/interactive.pm:1100
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Þú þarft að endurræsa áður en breytingar taka gildi"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Disksneiðatafla drifs %s mun verða skrifuð á disk!"
 
-#: diskdrake/interactive.pm:1111
+#: diskdrake/interactive.pm:1118
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Eftir að diskssneið %s hefur verið forsniðin, hafa öll gögn á þessari "
 "disksneið tapast"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1134
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Flytja skrár á nýju disksneiðina"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1134
 #, c-format
 msgid "Hide files"
 msgstr "Fela skrár"
 
-#: diskdrake/interactive.pm:1128
+#: diskdrake/interactive.pm:1135
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2679,108 +2704,108 @@ msgstr ""
 "Mappa %s inniheldur nú þegar gögn\n"
 "(%s)"
 
-#: diskdrake/interactive.pm:1139
+#: diskdrake/interactive.pm:1146
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Færi skrár á nýju disksneiðina"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1150
 #, c-format
 msgid "Copying %s"
 msgstr "Afrita %s"
 
-#: diskdrake/interactive.pm:1147
+#: diskdrake/interactive.pm:1154
 #, c-format
 msgid "Removing %s"
 msgstr "Fjarlægi %s"
 
-#: diskdrake/interactive.pm:1161
+#: diskdrake/interactive.pm:1168
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "disksneið %s er nú þekkt sem %s"
 
-#: diskdrake/interactive.pm:1162
+#: diskdrake/interactive.pm:1169
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Disksneiðar hafa verið endurnúmeraðar: "
 
-#: diskdrake/interactive.pm:1182 diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1251
 #, c-format
 msgid "Device: "
 msgstr "Tæki: "
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Devfs name: "
 msgstr "Devfs nafn: "
 
-#: diskdrake/interactive.pm:1184
+#: diskdrake/interactive.pm:1191
 #, c-format
 msgid "Volume label: "
 msgstr "Diskauðkenni: "
 
-#: diskdrake/interactive.pm:1185
+#: diskdrake/interactive.pm:1192
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS drifstafur: %s (aðeins ágiskun)\n"
 
-#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1198
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1196 diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "Type: "
 msgstr "Tegund: "
 
-#: diskdrake/interactive.pm:1193 install_steps_gtk.pm:296
+#: diskdrake/interactive.pm:1200 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
 msgstr "Nafn: "
 
-#: diskdrake/interactive.pm:1200
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Byrja: geiri %s\n"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Size: %s"
 msgstr "Stærð: %s"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s geirar"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1212
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Sívalningur %d til %d\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1213
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Fjöldi sýndarsneiða (LV): %d\n"
 
-#: diskdrake/interactive.pm:1207
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid "Formatted\n"
 msgstr "Forsniðinn\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid "Not formatted\n"
 msgstr "Ekki forsniðinn\n"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid "Mounted\n"
 msgstr "Tengdur\n"
 
-#: diskdrake/interactive.pm:1210
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1222
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2789,7 +2814,7 @@ msgstr ""
 "Sýndartengdar skrár:\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1216
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2798,27 +2823,27 @@ msgstr ""
 "Sjálfgefin disksneið ræst\n"
 "    (fyrir MS-DOS ræsingu, ekki fyrir LILO)\n"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1225
 #, c-format
 msgid "Level %s\n"
 msgstr "Stig %s\n"
 
-#: diskdrake/interactive.pm:1219
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Blokkarstærð %d KiB\n"
 
-#: diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-diskar %s\n"
 
-#: diskdrake/interactive.pm:1222
+#: diskdrake/interactive.pm:1229
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Skráarnafn sýndardisks: %s"
 
-#: diskdrake/interactive.pm:1225
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid ""
 "\n"
@@ -2831,7 +2856,7 @@ msgstr ""
 "Reklasneið. Þú ættir sennilega\n"
 "að láta hana í eiga sig.\n"
 
-#: diskdrake/interactive.pm:1228
+#: diskdrake/interactive.pm:1235
 #, c-format
 msgid ""
 "\n"
@@ -2844,73 +2869,73 @@ msgstr ""
 "er til að geta ræst mismunandi\n"
 "kerfi á vélinni þinni.\n"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Read-only"
 msgstr "Ritvarið"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1253
 #, c-format
 msgid "Size: %s\n"
 msgstr "Stærð: %s\n"
 
-#: diskdrake/interactive.pm:1247
+#: diskdrake/interactive.pm:1254
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Disksnið: %s sívalningar, %s hausar, %s geirar\n"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1255
 #, c-format
 msgid "Info: "
 msgstr "Upplýsingar: "
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1256
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-diskar %s\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1257
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Tegund disksneiðartöflu: %s\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1258
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "á gagnabraut %d auðk. %d\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1301
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Dulritunarlykill skráakerfis"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Veldu dulritunarlykil fyrir skráakerfið"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Þetta lykilorð er of einfalt (verður að vera minnst %d stafa langt)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "Dulritunarlyklarnir eru mismunandi"
 
-#: diskdrake/interactive.pm:1302 network/netconnect.pm:1013
+#: diskdrake/interactive.pm:1309 network/netconnect.pm:1013
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
 msgstr "Dulritunarlykill"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1310
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Dulritunarlykill (aftur)"
 
-#: diskdrake/interactive.pm:1304 standalone/drakvpn:1017
+#: diskdrake/interactive.pm:1311 standalone/drakvpn:1017
 #: standalone/drakvpn:1102
 #, c-format
 msgid "Encryption algorithm"
@@ -2943,7 +2968,8 @@ msgstr "Önnur"
 
 #: diskdrake/smbnfs_gtk.pm:176
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Vinsamlega gefðu upp notandanafn, lykilorð og nafn léns til að fá aðgang að "
 "þessum miðlara."
@@ -3111,7 +3137,8 @@ msgstr ""
 
 #: fs/mount_options.pm:141
 #, c-format
-msgid "Enable user disk quota accounting enabled, and optionally enforce limits"
+msgid ""
+"Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
 
 #: fs/mount_options.pm:143
@@ -3496,7 +3523,7 @@ msgstr ""
 "Hér getur þú valið annan rekil (annað hvort OSS eða ALSA) fyrir hljóðkortið "
 "þitt (%s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:240
@@ -3566,9 +3593,9 @@ msgstr "Vandamálaleit"
 #: standalone/drakTermServ:325 standalone/drakTermServ:1135
 #: standalone/drakTermServ:1196 standalone/drakTermServ:1861
 #: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:125
-#: standalone/drakclock:224 standalone/drakconnect:969
-#: standalone/drakfloppy:291 standalone/drakups:27 standalone/harddrake2:478
-#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#: standalone/drakclock:224 standalone/drakconnect:969 standalone/drakups:27
+#: standalone/harddrake2:478 standalone/scannerdrake:51
+#: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "Aðvörun"
@@ -7130,7 +7157,8 @@ msgstr ""
 
 #: install_steps_interactive.pm:825
 #, c-format
-msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Hef samband við Mandriva Linux vefinn til að sækja lista yfir fáanlega "
 "spegla..."
@@ -7212,7 +7240,8 @@ msgstr ""
 #: install_steps_interactive.pm:1035
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
+msgstr ""
+"Ekkert hljóðkort fannst. Reyndu að keyra \"harddrake\" eftir uppsetningu"
 
 #: install_steps_interactive.pm:1055
 #, c-format
@@ -7361,8 +7390,10 @@ msgstr "Mandriva Linux uppsetning %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr "  <Tab>/<Alt-Tab> milli hluta   |   <Bilslá> velur   |   <F12> næsti skjár "
+msgid ""
+"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr ""
+"  <Tab>/<Alt-Tab> milli hluta   |   <Bilslá> velur   |   <F12> næsti skjár "
 
 #: interactive.pm:192
 #, c-format
@@ -7370,21 +7401,23 @@ msgid "Choose a file"
 msgstr "Veldu skrá"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakbackup:1514
-#: standalone/drakfont:656 standalone/drakroam:218 standalone/drakups:301
-#: standalone/drakups:361 standalone/drakups:381 standalone/drakvpn:319
-#: standalone/drakvpn:680
+#: standalone/drakfont:656 standalone/drakhosts:223 standalone/draknfs:347
+#: standalone/drakroam:218 standalone/drakups:301 standalone/drakups:361
+#: standalone/drakups:381 standalone/drakvpn:319 standalone/drakvpn:680
 #, c-format
 msgid "Add"
 msgstr "Bæta við"
 
-#: interactive.pm:317 interactive/gtk.pm:505
+#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:230
+#: standalone/draknfs:354
 #, c-format
 msgid "Modify"
 msgstr "Breyta"
 
-#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakroam:202
-#: standalone/drakups:303 standalone/drakups:363 standalone/drakups:383
-#: standalone/drakvpn:319 standalone/drakvpn:680
+#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:238
+#: standalone/draknfs:362 standalone/drakroam:202 standalone/drakups:303
+#: standalone/drakups:363 standalone/drakups:383 standalone/drakvpn:319
+#: standalone/drakvpn:680
 #, c-format
 msgid "Remove"
 msgstr "Fjarlægja"
@@ -9440,17 +9473,22 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "Velkomin(n) að %s"
 
-#: lvm.pm:130
+#: lvm.pm:83
+#, c-format
+msgid "Moving used physical extents to other physical volumes failed"
+msgstr ""
+
+#: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr ""
 
-#: lvm.pm:139
+#: lvm.pm:145
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Fjarlægðu sýndardrifin fyrst\n"
 
-#: lvm.pm:172
+#: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
@@ -10493,7 +10531,7 @@ msgstr "IP viðföng"
 #: network/netconnect.pm:582 network/netconnect.pm:890
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:878
-#: standalone/drakups:286
+#: standalone/drakhosts:192 standalone/drakups:286
 #, c-format
 msgid "IP address"
 msgstr "IP vistfang"
@@ -10985,14 +11023,15 @@ msgstr ""
 #: network/netconnect.pm:1157
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
-msgstr "Síðast en ekki síst getur þú einnig slegið inn IP-tölu DNS nafnamiðlara."
+msgstr ""
+"Síðast en ekki síst getur þú einnig slegið inn IP-tölu DNS nafnamiðlara."
 
 #: network/netconnect.pm:1159 standalone/drakconnect:992
 #, c-format
 msgid "Host name (optional)"
 msgstr "Vélarnafn (þarf ekki)"
 
-#: network/netconnect.pm:1159
+#: network/netconnect.pm:1159 standalone/drakhosts:192
 #, c-format
 msgid "Host name"
 msgstr "Heiti vélar"
@@ -11354,7 +11393,8 @@ msgstr "Settu diskling í drif"
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
 "press %s"
-msgstr "Settu FAT forsniðinn diskling í drif %s með %s í rótarmöppu og ýttu á %s"
+msgstr ""
+"Settu FAT forsniðinn diskling í drif %s með %s í rótarmöppu og ýttu á %s"
 
 #: network/thirdparty.pm:333
 #, c-format
@@ -12070,7 +12110,8 @@ msgstr "IP-tala á vél/neti:"
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr "Velja net eða vél þar sem prentari á þessari vél ætti að vera sýnilegur:"
+msgstr ""
+"Velja net eða vél þar sem prentari á þessari vél ætti að vera sýnilegur:"
 
 #: printer/printerdrake.pm:244
 #, c-format
@@ -12248,7 +12289,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:627
 #, c-format
-msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid ""
+"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr "Prentara-leitun (tengdir, TCP/Sökkull, SMB prentarar, og URI)"
 
 #: printer/printerdrake.pm:629
@@ -12351,13 +12393,15 @@ msgstr ""
 
 #: printer/printerdrake.pm:714
 #, c-format
-msgid "There are no printers found which are directly connected to your machine"
+msgid ""
+"There are no printers found which are directly connected to your machine"
 msgstr "það hafa engir prentarar fundist sem eru beintengdir við tölvuna þína"
 
 #: printer/printerdrake.pm:717
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr " (vertu viss um að allir þínir prentarar séu tengdir og kveikt á þeim).\n"
+msgstr ""
+" (vertu viss um að allir þínir prentarar séu tengdir og kveikt á þeim).\n"
 
 #: printer/printerdrake.pm:730
 #, c-format
@@ -12775,7 +12819,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:1377
 #, c-format
-msgid "Alternatively, you can specify a device name/file name in the input line"
+msgid ""
+"Alternatively, you can specify a device name/file name in the input line"
 msgstr "Eða, þú getur getur gefið upp tækis-nafn/skrá á inntakslínunni"
 
 #: printer/printerdrake.pm:1378 printer/printerdrake.pm:1387
@@ -14034,7 +14079,10 @@ msgid ""
 "The memory card readers in your printer can be accessed using HP's Printer "
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
-msgstr "Hægt er að fá aðgang að minniskorta-lesurum í prentaranum þínumm með því að nota HP prentaratólið (Valmynd: Kerfi/Eftirlit/HP Printer Toolbox) smellið á \"Access Photo Cards...\" hnappinn á \"Functions\" flipanum. "
+msgstr ""
+"Hægt er að fá aðgang að minniskorta-lesurum í prentaranum þínumm með því að "
+"nota HP prentaratólið (Valmynd: Kerfi/Eftirlit/HP Printer Toolbox) smellið á "
+"\"Access Photo Cards...\" hnappinn á \"Functions\" flipanum. "
 
 #: printer/printerdrake.pm:3937
 #, c-format
@@ -14043,7 +14091,8 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
-"Athugið að þetta er mjög hægvirkt, lestur á myndum frá myndavél eða um USB kortalesara er oftast mun hraðvirkara.\n"
+"Athugið að þetta er mjög hægvirkt, lestur á myndum frá myndavél eða um USB "
+"kortalesara er oftast mun hraðvirkara.\n"
 "\n"
 
 #: printer/printerdrake.pm:3940
@@ -14053,7 +14102,8 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
-"HP prentaratólið (Valmynd: Kerfi/Eftirlit/HP Printer Toolbox) býður upp á fjöldan allann af stöðuskjám og viðhaldstólum fyrir %s:\n"
+"HP prentaratólið (Valmynd: Kerfi/Eftirlit/HP Printer Toolbox) býður upp á "
+"fjöldan allann af stöðuskjám og viðhaldstólum fyrir %s:\n"
 "\n"
 
 #: printer/printerdrake.pm:3941
@@ -14091,9 +14141,17 @@ msgid ""
 "device, you only need to use \"scannerdrake\" if you want to share the "
 "scanner on the network."
 msgstr ""
-"Fjölnota-tækið þitt var stillt sjálfkrafa til að geta skannnað. Nú getur þú skannað með \"scanimage\" (\"scanimage -d hp:%s\" til að tilgreina þennann skanna ef þú ert með fleiri en einn) frá skipanalínunni, eða með því að nota grafísku viðmótin \"xscanimage\" eða \"xsane\". Ef þú notar GIMP, þá getur þú einnig skannað með því að fara á réttan stað í \"File\"/\"Aquire\" valmyndinni. Einnig má nota \"man scanimage\" frá skipanalínunni til að fá meiri upplýsingar.\n"
+"Fjölnota-tækið þitt var stillt sjálfkrafa til að geta skannnað. Nú getur þú "
+"skannað með \"scanimage\" (\"scanimage -d hp:%s\" til að tilgreina þennann "
+"skanna ef þú ert með fleiri en einn) frá skipanalínunni, eða með því að nota "
+"grafísku viðmótin \"xscanimage\" eða \"xsane\". Ef þú notar GIMP, þá getur "
+"þú einnig skannað með því að fara á réttan stað í \"File\"/\"Aquire\" "
+"valmyndinni. Einnig má nota \"man scanimage\" frá skipanalínunni til að fá "
+"meiri upplýsingar.\n"
 "\n"
-"Þú þarft ekki að keyra \"scannerdrake\" til þess að setja upp skönnun á þessu tæki, þú þarft aðeins að nota \"scannerdrake\" ef þú vilt deila þessum skanna á neti."
+"Þú þarft ekki að keyra \"scannerdrake\" til þess að setja upp skönnun á "
+"þessu tæki, þú þarft aðeins að nota \"scannerdrake\" ef þú vilt deila þessum "
+"skanna á neti."
 
 #: printer/printerdrake.pm:3985
 #, c-format
@@ -14107,7 +14165,15 @@ msgid ""
 "have more than one HP printer with photo card drives. In \"MtoolsFM\" you "
 "can switch between drive letters with the field at the upper-right corners "
 "of the file lists."
-msgstr "Prentarinn þinn var sjálfkrafa settur upp til að veita aðgang að myndkorta-lesurum frá tölvunni þinni. Nú getur þú fengið aðgang að ljósmyndunum þínum með því að nota grafíska forritið \"MtoolsFM\" (valmynd: \"Forrit\" -> \"Skráartól\" ->\"Mtools Skráarstjóri\") eða skipanalínuforritin \"mtools\" (til að fá nánari upplýsingar, sláið inn \"man mtools\"). Þú ættir að finna kortin undir drifstafnum \"p:\", eða þar nálægt ef þú hefur fleiri en einn HP prentara með myndkorta-lesurum. Í \"MtoolsFM\" getur þú víxlað milli Diska með svæðinu í efra hægra horni á skráarlistum."
+msgstr ""
+"Prentarinn þinn var sjálfkrafa settur upp til að veita aðgang að myndkorta-"
+"lesurum frá tölvunni þinni. Nú getur þú fengið aðgang að ljósmyndunum þínum "
+"með því að nota grafíska forritið \"MtoolsFM\" (valmynd: \"Forrit\" -> "
+"\"Skráartól\" ->\"Mtools Skráarstjóri\") eða skipanalínuforritin \"mtools"
+"\" (til að fá nánari upplýsingar, sláið inn \"man mtools\"). Þú ættir að "
+"finna kortin undir drifstafnum \"p:\", eða þar nálægt ef þú hefur fleiri en "
+"einn HP prentara með myndkorta-lesurum. Í \"MtoolsFM\" getur þú víxlað milli "
+"Diska með svæðinu í efra hægra horni á skráarlistum."
 
 #: printer/printerdrake.pm:4028 printer/printerdrake.pm:4055
 #: printer/printerdrake.pm:4090
@@ -14124,7 +14190,10 @@ msgid ""
 "overtaken, but jobs will not be transferred.\n"
 "Not all queues can be transferred due to the following reasons:\n"
 msgstr ""
-"Þú getur afritað prentarastillingar sem þú hefur gert fyrir prent-biðröðina %s yfir á núverandi prent-biðraðakerfi %s. Allar  stillingar (prentara-nafn, lýsingar, staðsetning, tenginga-tegund, og sjálfgefnar stillingar) eru fluttar yfir, en verk verða ekki flutt.\n"
+"Þú getur afritað prentarastillingar sem þú hefur gert fyrir prent-biðröðina %"
+"s yfir á núverandi prent-biðraðakerfi %s. Allar  stillingar (prentara-nafn, "
+"lýsingar, staðsetning, tenginga-tegund, og sjálfgefnar stillingar) eru "
+"fluttar yfir, en verk verða ekki flutt.\n"
 "Ekki er hægt að flytja allar biðraðir vegna eftirfarandi ástæðna:\n"
 
 #: printer/printerdrake.pm:4032
@@ -14450,7 +14519,8 @@ msgstr ""
 #: printer/printerdrake.pm:4461
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
-msgstr "2. Allar prentbeiðnir eru sjálfkrafa sendar á fjartengdan CUPS miðlara. "
+msgstr ""
+"2. Allar prentbeiðnir eru sjálfkrafa sendar á fjartengdan CUPS miðlara. "
 
 #: printer/printerdrake.pm:4462
 #, c-format
@@ -14777,7 +14847,8 @@ msgstr "Leyfa/banna beina innskráningu kerfisstjóra."
 msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
-msgstr "Leyfa/Banna lista af notendum kerfisins í innskráningar-glugga (kdm og gdm)."
+msgstr ""
+"Leyfa/Banna lista af notendum kerfisins í innskráningar-glugga (kdm og gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -14866,7 +14937,8 @@ msgstr ""
 "/etc/security/msec/server.<SERVER_LEVEL>.\n"
 "\n"
 "/etc/security/msec/server er notað af \"chkconfig --add\" til að ákvarða\n"
-"hvort eigi að bæta við þjónustu ef hún er skráð þar, þegar pakkar eru settir inn."
+"hvort eigi að bæta við þjónustu ef hún er skráð þar, þegar pakkar eru settir "
+"inn."
 
 #: security/help.pm:72
 #, c-format
@@ -14922,8 +14994,10 @@ msgstr "Virkja/Aftengja msec athugun á klukkustundar fresti."
 
 #: security/help.pm:90
 #, c-format
-msgid " Enabling su only from members of the wheel group or allow su from any user."
-msgstr " Leyfa su aðeins frá meðlimum wheel hópsins eða leyfa su frá öllum notendum."
+msgid ""
+" Enabling su only from members of the wheel group or allow su from any user."
+msgstr ""
+" Leyfa su aðeins frá meðlimum wheel hópsins eða leyfa su frá öllum notendum."
 
 #: security/help.pm:92
 #, c-format
@@ -14933,7 +15007,8 @@ msgstr "Nota lykilorð til að auðkenna notendur."
 #: security/help.pm:94
 #, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr "Virkja/Aftengja athugun á hvort ethernet-korta séu í opnum (promiscuous) ham."
+msgstr ""
+"Virkja/Aftengja athugun á hvort ethernet-korta séu í opnum (promiscuous) ham."
 
 #: security/help.pm:96
 #, c-format
@@ -14948,12 +15023,15 @@ msgstr " Virkja/Aftengja sulogin(8) í eins-notanda ham."
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Bæta við nafninu sem undantekningu á úreldingu lykilorða-höndlunar msec."
+msgstr ""
+"Bæta við nafninu sem undantekningu á úreldingu lykilorða-höndlunar msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Setja hámarks-liftíma lykilorða \"max\" og biðtíma þar til notandi verður \"óvirkur\"."
+msgstr ""
+"Setja hámarks-liftíma lykilorða \"max\" og biðtíma þar til notandi verður "
+"\"óvirkur\"."
 
 #: security/help.pm:104
 #, c-format
@@ -14965,7 +15043,9 @@ msgstr "Setja lengd lykilborðs-sögu til að varna endurnotkun lykilorða."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr "Setja lágmarkslengd lykilorða og einnig lágmarksfjölda tölustafa og lágmarksfjölda upphafsstafa."
+msgstr ""
+"Setja lágmarkslengd lykilorða og einnig lágmarksfjölda tölustafa og "
+"lágmarksfjölda upphafsstafa."
 
 #: security/help.pm:108
 #, c-format
@@ -15014,7 +15094,9 @@ msgstr "ef sett já, keyra daglegar öryggisathuganir."
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "ef sett já, leita eftir breytingum á sgid skrám - forritum sem keyra í nafni hóps."
+msgstr ""
+"ef sett já, leita eftir breytingum á sgid skrám - forritum sem keyra í nafni "
+"hóps."
 
 #: security/help.pm:121
 #, c-format
@@ -15029,7 +15111,8 @@ msgstr "ef sett já, staðfesta gátsummu á suid/sgid skrám."
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "ef sett já, þá er fylgst með breytingum á suid forritum - sem keyra sem root."
+msgstr ""
+"ef sett já, þá er fylgst með breytingum á suid forritum - sem keyra sem root."
 
 #: security/help.pm:124
 #, c-format
@@ -15044,11 +15127,14 @@ msgstr "ef sett já, athuga skrár/möppur sem allir geta skrifað í að vild."
 #: security/help.pm:126
 #, c-format
 msgid "if set to yes, run chkrootkit checks."
-msgstr "ef sett já, keyra chkrootkit prófanir - athugar hvort nokkur þekkt innbrotskerfi hafa verið sett upp."
+msgstr ""
+"ef sett já, keyra chkrootkit prófanir - athugar hvort nokkur þekkt "
+"innbrotskerfi hafa verið sett upp."
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr "ef sett, senda skýrslur í pósti á þetta netfang, annars senda á root."
 
 #: security/help.pm:128
@@ -15084,7 +15170,9 @@ msgstr "Setja lengd skipanasögu skeljar. Gildið -1 þýðir ótakmarkað."
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr "Setja hvenær skel fellur á tíma. Gildið núll þýðir að skelin fellur aldrei á tíma."
+msgstr ""
+"Setja hvenær skel fellur á tíma. Gildið núll þýðir að skelin fellur aldrei á "
+"tíma."
 
 #: security/help.pm:136
 #, c-format
@@ -15392,7 +15480,8 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr "Lykilorð eru nú virk, en ekki er mælt með notkun að tölvan sé nettengd."
+msgstr ""
+"Lykilorð eru nú virk, en ekki er mælt með notkun að tölvan sé nettengd."
 
 #: security/level.pm:45
 #, c-format
@@ -15432,7 +15521,8 @@ msgstr ""
 msgid ""
 "This is similar to the previous level, but the system is entirely closed and "
 "security features are at their maximum."
-msgstr "Líkt fyrra þrepi, en kerfið er nú alveg lokað og öryggið er á hæsta stigi."
+msgstr ""
+"Líkt fyrra þrepi, en kerfið er nú alveg lokað og öryggið er á hæsta stigi."
 
 #: security/level.pm:55
 #, c-format
@@ -15456,8 +15546,10 @@ msgstr "Nota libsafe fyrir þjónustur"
 
 #: security/level.pm:63
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
-msgstr "Undirforritasafn sem ver gegn yfirflæði á minnissvæðum og prentstrengjum."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
+msgstr ""
+"Undirforritasafn sem ver gegn yfirflæði á minnissvæðum og prentstrengjum."
 
 #: security/level.pm:64
 #, c-format
@@ -15536,7 +15628,8 @@ msgstr "HardDrake athugar vélbúnað og stillir ný og breytt jaðartæki."
 
 #: services.pm:35
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er vefmiðlari, sem veitir aðgang að HTML skjölum og CGI."
 
 #: services.pm:36
@@ -15884,14 +15977,19 @@ msgid ""
 "system, called the <b>operating system</b> (based on the Linux kernel) "
 "together with <b>a lot of applications</b> meeting every need you could even "
 "think of."
-msgstr "Mandriva Linux er <b>Linux dreifing</b> sem samanstendur af kjarna kerfisins, kallað <b>stýrikerfi</b> (byggt á Linux kjarnanum) og síðan <b>fjölda forrita</b> sem uppfylla allar hugsanlegar þarfir þínar."
+msgstr ""
+"Mandriva Linux er <b>Linux dreifing</b> sem samanstendur af kjarna "
+"kerfisins, kallað <b>stýrikerfi</b> (byggt á Linux kjarnanum) og síðan "
+"<b>fjölda forrita</b> sem uppfylla allar hugsanlegar þarfir þínar."
 
 #: share/advertising/01.pl:19
 #, c-format
 msgid ""
 "Mandriva Linux is the most <b>user-friendly</b> Linux distribution today. It "
 "is also one of the <b>most widely used</b> Linux distributions worldwide!"
-msgstr "Mandriva Linux er <b>notenda-vænsta</b> Linux dreifingin í dag. Hún er einnig ein <b>mest notaða</b> Linux dreifing í heimi!"
+msgstr ""
+"Mandriva Linux er <b>notenda-vænsta</b> Linux dreifingin í dag. Hún er "
+"einnig ein <b>mest notaða</b> Linux dreifing í heimi!"
 
 #: share/advertising/02.pl:13
 #, c-format
@@ -15910,14 +16008,18 @@ msgid ""
 "new release is the result of <b>collaboration</b> between <b>Mandriva's team "
 "of developers</b> and the <b>worldwide community</b> of Mandriva Linux "
 "contributors."
-msgstr "Mandriva Linux hefur einbeitt sér að opnum og frjálsum hugbúnaði. Þetta þýðir að þessi nýja útgáfa er árangur<b>samvinnu</b> milli <b>Forritarateyma Mandriva</b> og <b>alheims samfélagi</b> Mandriva Linux stuðningsmanna."
+msgstr ""
+"Mandriva Linux hefur einbeitt sér að opnum og frjálsum hugbúnaði. Þetta "
+"þýðir að þessi nýja útgáfa er árangur<b>samvinnu</b> milli <b>Forritarateyma "
+"Mandriva</b> og <b>alheims samfélagi</b> Mandriva Linux stuðningsmanna."
 
 #: share/advertising/02.pl:19
 #, c-format
 msgid ""
 "We would like to <b>thank</b> everyone who participated in the development "
 "of this latest release."
-msgstr "Við viljum <b>þakka</b> öllum sem tóku þátt í hönnun þessarar nýjustu útgáfu."
+msgstr ""
+"Við viljum <b>þakka</b> öllum sem tóku þátt í hönnun þessarar nýjustu útgáfu."
 
 #: share/advertising/03.pl:13
 #, c-format
@@ -15929,7 +16031,9 @@ msgstr "<b>GPL</b>"
 msgid ""
 "Most of the software included in the distribution and all of the Mandriva "
 "Linux tools are licensed under the <b>General Public License</b>."
-msgstr "Mest af þeim hugbúnaði sem er í dreifingunni og öll Mandriva Linux tól eru bundin af leyfi opins og frjáls hugbúnaðar <b>General Public License</b>."
+msgstr ""
+"Mest af þeim hugbúnaði sem er í dreifingunni og öll Mandriva Linux tól eru "
+"bundin af leyfi opins og frjáls hugbúnaðar <b>General Public License</b>."
 
 #: share/advertising/03.pl:17
 #, c-format
@@ -15937,7 +16041,10 @@ msgid ""
 "The GPL is at the heart of the open source model; it grants everyone the "
 "<b>freedom</b> to use, study, distribute and improve the software any way "
 "they want, provided they make the results available."
-msgstr "GPL er hjarta opins og frjáls hugbúnaðar; það veitir hverjum sem er <b>frelsi</b> til að nota, rannsaka, dreifa og bæta hugbúnaðinn á hvaða hátt sem þeir vilja, svo framarlega að þeir veiti sama aðgang að sínum breytingum."
+msgstr ""
+"GPL er hjarta opins og frjáls hugbúnaðar; það veitir hverjum sem er "
+"<b>frelsi</b> til að nota, rannsaka, dreifa og bæta hugbúnaðinn á hvaða hátt "
+"sem þeir vilja, svo framarlega að þeir veiti sama aðgang að sínum breytingum."
 
 #: share/advertising/03.pl:19
 #, c-format
@@ -15960,7 +16067,11 @@ msgid ""
 "developers. The role of such a community is very wide, ranging from bug "
 "reporting to the development of new applications. The community plays a "
 "<b>key role</b> in the Mandriva Linux world."
-msgstr "Mandriva Linux hefur eitt af <b>stærstu samfélögum</b> notanda og hönnuða. Tilgangur slíks samfélags er mjög stór, allt frá villuleit og tilkynningum, til hönnunar nýrra forrita. Samfélagið er <b>stór þáttur</b> í Mandriva Linux heiminum."
+msgstr ""
+"Mandriva Linux hefur eitt af <b>stærstu samfélögum</b> notanda og hönnuða. "
+"Tilgangur slíks samfélags er mjög stór, allt frá villuleit og tilkynningum, "
+"til hönnunar nýrra forrita. Samfélagið er <b>stór þáttur</b> í Mandriva "
+"Linux heiminum."
 
 #: share/advertising/04.pl:17
 #, c-format
@@ -15968,7 +16079,10 @@ msgid ""
 "To <b>learn more</b> about our dynamic community, please visit <b>www."
 "mandrivalinux.com</b> or directly <b>www.mandrivalinux.com/en/cookerdevel."
 "php3</b> if you would like to get <b>involved</b> in the development."
-msgstr "Til að <b>læra meira</b> um okkar virka samfélag, vinsamlega heimsækið <b>http://www.mandrivalinux.com</b> eða beint á <b>www.mandrivalinux.com/en/cookerdevel.php3</b> ef þú vilt taka <b>meiri þátt</b> í hönnuninni."
+msgstr ""
+"Til að <b>læra meira</b> um okkar virka samfélag, vinsamlega heimsækið "
+"<b>http://www.mandrivalinux.com</b> eða beint á <b>www.mandrivalinux.com/en/"
+"cookerdevel.php3</b> ef þú vilt taka <b>meiri þátt</b> í hönnuninni."
 
 #: share/advertising/05.pl:15
 #, c-format
@@ -15980,18 +16094,23 @@ msgstr "<b>Sótt netútgáfa</b>"
 msgid ""
 "You are now installing <b>Mandriva Linux Download</b>. This is the free "
 "version that Mandriva wants to keep <b>available to everyone</b>."
-msgstr "Þú er nú að setja upp <b>Mandriva Linux Download</b>. þetta er ókeypis útgáfan sem Mandriva vill halda <b>opinni fyrir alla</b>."
+msgstr ""
+"Þú er nú að setja upp <b>Mandriva Linux Download</b>. þetta er ókeypis "
+"útgáfan sem Mandriva vill halda <b>opinni fyrir alla</b>."
 
 #: share/advertising/05.pl:19
 #, c-format
 msgid ""
 "The Download version <b>cannot include</b> all the software that is not open "
 "source. Therefore, you will not find in the Download version:"
-msgstr "Opna netútgáfan getur <b>aðeins</b> innihaldið hugbúnað sem er opinn og frjáls. Þess vegna finnur þú ekki í opnu netútgáfunni:"
+msgstr ""
+"Opna netútgáfan getur <b>aðeins</b> innihaldið hugbúnað sem er opinn og "
+"frjáls. Þess vegna finnur þú ekki í opnu netútgáfunni:"
 
 #: share/advertising/05.pl:20
 #, c-format
-msgid "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
+msgid ""
+"\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr "\t* <b>Lokaða rekla</b> (eins og rekla fyrir NVIDIA®, ATI™, o.s.frv.)."
 
 #: share/advertising/05.pl:21
@@ -16000,15 +16119,17 @@ msgid ""
 "\t* <b>Proprietary software</b> (such as Acrobat® Reader®, RealPlayer®, "
 "Flash™, etc.)."
 msgstr ""
-"\t* <b>Lokaðan hugbúnað</b> (eins og Acrobat® Reader®, RealPlayer®, "
-"Flash™, o.s.frv.)."
+"\t* <b>Lokaðan hugbúnað</b> (eins og Acrobat® Reader®, RealPlayer®, Flash™, "
+"o.s.frv.)."
 
 #: share/advertising/05.pl:23
 #, c-format
 msgid ""
 "You will not have access to the <b>services included</b> in the other "
 "Mandriva products either."
-msgstr "Þú hefur heldur ekki aðgang að <b>inniföldum þjónustum</b> sem eru í öðrum Mandriva Linux vörum."
+msgstr ""
+"Þú hefur heldur ekki aðgang að <b>inniföldum þjónustum</b> sem eru í öðrum "
+"Mandriva Linux vörum."
 
 #: share/advertising/06.pl:13
 #, c-format
@@ -16027,7 +16148,11 @@ msgid ""
 "distribution. It includes a hand-picked selection of <b>premium software</b> "
 "for office, multimedia and Internet activities. Its menu is task-oriented, "
 "with a single application per task."
-msgstr "Discovery er <b>auðveldasta</b> og <b>notendavænsta</b> Linux dreifingin. Það inniheldur sérvalinn <b>gæða-hugbúnað</b> fyrir skrifstofuna, margmiðlun og netvinnslu. Valmynd þess er sett upp athafnir í huga, með eitt forrit fyrir hvert verk."
+msgstr ""
+"Discovery er <b>auðveldasta</b> og <b>notendavænsta</b> Linux dreifingin. "
+"Það inniheldur sérvalinn <b>gæða-hugbúnað</b> fyrir skrifstofuna, margmiðlun "
+"og netvinnslu. Valmynd þess er sett upp athafnir í huga, með eitt forrit "
+"fyrir hvert verk."
 
 #: share/advertising/07.pl:13
 #, c-format
@@ -16045,7 +16170,10 @@ msgid ""
 "PowerPack is Mandriva's <b>premier Linux desktop</b> product. PowerPack "
 "includes <b>thousands of applications</b> - everything from the most popular "
 "to the most advanced."
-msgstr "PowerPack er <b>hágæða Linux vinnustöð</b> frá Mandriva. PowerPack inniheldur <b>þúsundir forritapakka</b> - allt frá þeim vinsælustu til þeirra bestu."
+msgstr ""
+"PowerPack er <b>hágæða Linux vinnustöð</b> frá Mandriva. PowerPack "
+"inniheldur <b>þúsundir forritapakka</b> - allt frá þeim vinsælustu til "
+"þeirra bestu."
 
 #: share/advertising/08.pl:13
 #, c-format
@@ -16064,7 +16192,10 @@ msgid ""
 "sized <b>networks</b>. PowerPack+ includes thousands of <b>desktop "
 "applications</b> and a comprehensive selection of world-class <b>server "
 "applications</b>."
-msgstr "PowerPack+ er <b>fullvaxin Linux lausn</b> fyrir lítil eða meðalstór <b>netkerfi</b>. PowerPack+ inniheldur þúsundir <b>vinnustöðva forrita</b> og fullkomið safn af heims-klassa <b>miðlara lausnum</b>."
+msgstr ""
+"PowerPack+ er <b>fullvaxin Linux lausn</b> fyrir lítil eða meðalstór "
+"<b>netkerfi</b>. PowerPack+ inniheldur þúsundir <b>vinnustöðva forrita</b> "
+"og fullkomið safn af heims-klassa <b>miðlara lausnum</b>."
 
 #: share/advertising/09.pl:13
 #, c-format
@@ -16073,8 +16204,10 @@ msgstr "<b>Mandriva vörur</b>"
 
 #: share/advertising/09.pl:15
 #, c-format
-msgid "<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
-msgstr "<b>Mandriva</b> hefur þróað fjöldann allann af <b>Mandriva Linux</b> vörum."
+msgid ""
+"<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
+msgstr ""
+"<b>Mandriva</b> hefur þróað fjöldann allann af <b>Mandriva Linux</b> vörum."
 
 #: share/advertising/09.pl:17
 #, c-format
@@ -16101,7 +16234,9 @@ msgstr "\t* <b>PowerPack+</b>, Linux lausnin fyrir vinnustöðvar og miðlara."
 msgid ""
 "\t* <b>Mandriva Linux for x86-64</b>, The Mandriva Linux solution for making "
 "the most of your 64-bit processor."
-msgstr "\t* <b>Mandriva Linux fyrir x86-64</b>, Mandriva Linux lausnin til að fá það mesta út úr 64-bita örgjörvanum þínum."
+msgstr ""
+"\t* <b>Mandriva Linux fyrir x86-64</b>, Mandriva Linux lausnin til að fá það "
+"mesta út úr 64-bita örgjörvanum þínum."
 
 #: share/advertising/10.pl:15
 #, c-format
@@ -16113,21 +16248,27 @@ msgstr "<b>Mandriva vörur (Flakkara vörur)</b>"
 msgid ""
 "Mandriva has developed two products that allow you to use Mandriva Linux "
 "<b>on any computer</b> and without any need to actually install it:"
-msgstr "Mandriva hefur þróað tvær vörur sem leyfa þér að nota Mandriva Linux <b>á hvaða vél sem er</b> og án þess að setja það upp:"
+msgstr ""
+"Mandriva hefur þróað tvær vörur sem leyfa þér að nota Mandriva Linux <b>á "
+"hvaða vél sem er</b> og án þess að setja það upp:"
 
 #: share/advertising/10.pl:18
 #, c-format
 msgid ""
 "\t* <b>Move</b>, a Mandriva Linux distribution that runs entirely from a "
 "bootable CD-ROM."
-msgstr "\t* <b>Move</b>, Mandriva Linux dreifing sem keyrir óstudd frá ræsanlegum geisladisk."
+msgstr ""
+"\t* <b>Move</b>, Mandriva Linux dreifing sem keyrir óstudd frá ræsanlegum "
+"geisladisk."
 
 #: share/advertising/10.pl:19
 #, c-format
 msgid ""
 "\t* <b>GlobeTrotter</b>, a Mandriva Linux distribution pre-installed on the "
 "ultra-compact “LaCie Mobile Hard Drive”."
-msgstr "\t* <b>GlobeTrotter</b>, Mandriva Linux dreifing sem er foruppsett á örsmáa diskinn “LaCie Mobile Hard Drive”."
+msgstr ""
+"\t* <b>GlobeTrotter</b>, Mandriva Linux dreifing sem er foruppsett á örsmáa "
+"diskinn “LaCie Mobile Hard Drive”."
 
 #: share/advertising/11.pl:13
 #, c-format
@@ -16139,12 +16280,16 @@ msgstr "<b>Mandriva Vörur (Viðskiptalausnir)</b>"
 msgid ""
 "Below are the Mandriva products designed to meet the <b>professional needs</"
 "b>:"
-msgstr "Hér að neðan eru Mandriva lausnir hannaðar til að mæta ströngustu <b>viðskiptaþörfum</b>:"
+msgstr ""
+"Hér að neðan eru Mandriva lausnir hannaðar til að mæta ströngustu "
+"<b>viðskiptaþörfum</b>:"
 
 #: share/advertising/11.pl:16
 #, c-format
-msgid "\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
-msgstr "\t* <b>Fyrirtækja vinnustöð</b>, Mandriva Linux vinnustöð fyrir fyrirtæki."
+msgid ""
+"\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
+msgstr ""
+"\t* <b>Fyrirtækja vinnustöð</b>, Mandriva Linux vinnustöð fyrir fyrirtæki."
 
 #: share/advertising/11.pl:17
 #, c-format
@@ -16153,7 +16298,8 @@ msgstr "\t* <b>Fyristækismiðlari</b>, Mandriva Linux miðlaralausnin."
 
 #: share/advertising/11.pl:18
 #, c-format
-msgid "\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
+msgid ""
+"\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
 msgstr "\t* <b>Fjöl-nota eldveggur</b>, Mandriva Linux öryggiskerfið."
 
 #: share/advertising/12.pl:13
@@ -16166,21 +16312,27 @@ msgstr "<b>KDE valkostur</b>"
 msgid ""
 "With your Discovery, you will be introduced to <b>KDE</b>, the most advanced "
 "and user-friendly <b>graphical desktop environment</b> available."
-msgstr "Með Discovery, þá munt þú kynnast <b>KDE</b>, öflugasta og notendavænsta <b>grafíska skjáborðsumhverfi</b> sem til er."
+msgstr ""
+"Með Discovery, þá munt þú kynnast <b>KDE</b>, öflugasta og notendavænsta "
+"<b>grafíska skjáborðsumhverfi</b> sem til er."
 
 #: share/advertising/12.pl:17
 #, c-format
 msgid ""
 "KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you "
 "will not ever think of running another operating system!"
-msgstr "KDE gerir þín <b>fyrstu skref</b> í Linux svo <b>auðveld</b> að þú munt aldrei leiða hugann að öðru stýrikerfi!"
+msgstr ""
+"KDE gerir þín <b>fyrstu skref</b> í Linux svo <b>auðveld</b> að þú munt "
+"aldrei leiða hugann að öðru stýrikerfi!"
 
 #: share/advertising/12.pl:19
 #, c-format
 msgid ""
 "KDE also includes a lot of <b>well integrated applications</b> such as "
 "Konqueror, the web browser and Kontact, the personal information manager."
-msgstr "KDE inniheldur einnig mikið af <b>vel samhæfðum forritum</b> eins og Konqueror, vefvafrarann og Kontact persónulegu dagbókina þína."
+msgstr ""
+"KDE inniheldur einnig mikið af <b>vel samhæfðum forritum</b> eins og "
+"Konqueror, vefvafrarann og Kontact persónulegu dagbókina þína."
 
 #: share/advertising/13-a.pl:13 share/advertising/13-b.pl:13
 #, c-format
@@ -16192,28 +16344,36 @@ msgstr "<b>Veldu uppáhalds gluggaumhverfið þitt</b>"
 msgid ""
 "With PowerPack, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
-msgstr "Með PowerPack, þá getur þú valið <b>glugga umhverfi</b>. Mandriva hefur valið <b>KDE</b> sem það sjálfgefna."
+msgstr ""
+"Með PowerPack, þá getur þú valið <b>glugga umhverfi</b>. Mandriva hefur "
+"valið <b>KDE</b> sem það sjálfgefna."
 
 #: share/advertising/13-a.pl:17 share/advertising/13-b.pl:17
 #, c-format
 msgid ""
 "KDE is one of the <b>most advanced</b> and <b>user-friendly</b> graphical "
 "desktop environment available. It includes a lot of integrated applications."
-msgstr "KDE er eitt <b>vinsælasta</b> og <b>notendavænsta</b> gluggaumhverfi sem til er. það innifelur fullt af innbyggðum forritum."
+msgstr ""
+"KDE er eitt <b>vinsælasta</b> og <b>notendavænsta</b> gluggaumhverfi sem til "
+"er. það innifelur fullt af innbyggðum forritum."
 
 #: share/advertising/13-a.pl:19 share/advertising/13-b.pl:19
 #, c-format
 msgid ""
 "But we advise you to try all available ones (including <b>GNOME</b>, "
 "<b>IceWM</b>, etc.) and pick your favorite."
-msgstr "En við ráðleggjum þér að prófa öll tiltæk gluggaumhverfi (þar með talið <b>GNOME</b>, <b>IceWM</b>, o.s.frv) og veldu það sem þér líkar best."
+msgstr ""
+"En við ráðleggjum þér að prófa öll tiltæk gluggaumhverfi (þar með talið "
+"<b>GNOME</b>, <b>IceWM</b>, o.s.frv) og veldu það sem þér líkar best."
 
 #: share/advertising/13-b.pl:15
 #, c-format
 msgid ""
 "With PowerPack+, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
-msgstr "Með PowerPack+, þá getur þú valið <b>glugga umhverfi</b>. Mandriva hefur valið <b>KDE</b> sem það sjálfgefna."
+msgstr ""
+"Með PowerPack+, þá getur þú valið <b>glugga umhverfi</b>. Mandriva hefur "
+"valið <b>KDE</b> sem það sjálfgefna."
 
 #: share/advertising/14.pl:15
 #, c-format
@@ -16230,14 +16390,18 @@ msgstr "Með Discovery, þá munt þú uppgötva <b>OpenOffice.org</b>."
 msgid ""
 "It is a <b>full-featured office suite</b> that includes word processor, "
 "spreadsheet, presentation and drawing applications."
-msgstr "Það er <b>fullbúið skrifstofukerfi</b> sem inniheldur ritvinnslu, töflureikni, glæruvinnslu og teikniforrit."
+msgstr ""
+"Það er <b>fullbúið skrifstofukerfi</b> sem inniheldur ritvinnslu, "
+"töflureikni, glæruvinnslu og teikniforrit."
 
 #: share/advertising/14.pl:21
 #, c-format
 msgid ""
 "OpenOffice.org can read and write most types of <b>Microsoft® Office</b> "
 "documents such as Word, Excel and PowerPoint® files."
-msgstr "OpenOffice.org getur lesið og skrifað flestar tegundir af <b>Microsoft® Office</b> skjölum, eins og Word, Excel og PowerPoint® skrár."
+msgstr ""
+"OpenOffice.org getur lesið og skrifað flestar tegundir af <b>Microsoft® "
+"Office</b> skjölum, eins og Word, Excel og PowerPoint® skrár."
 
 #: share/advertising/15.pl:13
 #, c-format
@@ -16246,7 +16410,8 @@ msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
-msgid "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
+msgid ""
+"Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
 msgstr "Discovery inniheldur <b>Kontact</b>, nýja KDE <b>hópvinnslukerfið</b>."
 
 #: share/advertising/15.pl:17
@@ -16256,7 +16421,8 @@ msgid ""
 "an <b>address book</b>, a <b>calendar</b>, plus a tool for taking <b>notes</"
 "b>!"
 msgstr ""
-"Meira en bara fullvaxinn <b>póst forrit</b>, Kontact er líka <b>vistfangabók</b>, <b>dagbók</b> og einnig tól til að taka niður "
+"Meira en bara fullvaxinn <b>póst forrit</b>, Kontact er líka "
+"<b>vistfangabók</b>, <b>dagbók</b> og einnig tól til að taka niður "
 "<b>athugasemdir</b>!"
 
 #: share/advertising/15.pl:19
@@ -16264,7 +16430,9 @@ msgstr ""
 msgid ""
 "It is the easiest way to communicate with your contacts and to organize your "
 "time."
-msgstr "Það er auðveldasta leiðin til að hafa samskipti við tengiliði og hafa stjórn á tíma sínum."
+msgstr ""
+"Það er auðveldasta leiðin til að hafa samskipti við tengiliði og hafa stjórn "
+"á tíma sínum."
 
 #: share/advertising/16.pl:13
 #, c-format
@@ -16332,19 +16500,24 @@ msgstr "<b>Njóttu mikils fjölda forrita</b>"
 msgid ""
 "In the Mandriva Linux menu you will find <b>easy-to-use</b> applications for "
 "<b>all of your tasks</b>:"
-msgstr "Í Mandriva Linux valmyndinni þá finnur þú <b>auðnotanleg</b> forrit fyrir <b>öll þín verk</b>:"
+msgstr ""
+"Í Mandriva Linux valmyndinni þá finnur þú <b>auðnotanleg</b> forrit fyrir "
+"<b>öll þín verk</b>:"
 
 #: share/advertising/18.pl:16
 #, c-format
 msgid "\t* Create, edit and share office documents with <b>OpenOffice.org</b>."
-msgstr "\t* Búa til, sýsla með og deila skrifstofuskjölum með <b>OpenOffice.org</b>."
+msgstr ""
+"\t* Búa til, sýsla með og deila skrifstofuskjölum með <b>OpenOffice.org</b>."
 
 #: share/advertising/18.pl:17
 #, c-format
 msgid ""
 "\t* Manage your personal data with the integrated personal information "
 "suites <b>Kontact</b> and <b>Evolution</b>."
-msgstr "Sýslaðu með þínar persónulegu upplýsingar með dagbókar-tólunum <b>Kontact</b> og <b>Evolution</b>."
+msgstr ""
+"Sýslaðu með þínar persónulegu upplýsingar með dagbókar-tólunum <b>Kontact</"
+"b> og <b>Evolution</b>."
 
 #: share/advertising/18.pl:18
 #, c-format
@@ -16377,8 +16550,11 @@ msgstr "<b>Þróunarumhverfi</b>"
 
 #: share/advertising/19.pl:15 share/advertising/22.pl:17
 #, c-format
-msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
-msgstr "PowerPack lætur þér í hendur bestu tækin til <b>hönnunar</b> á þínum eigin forritum."
+msgid ""
+"PowerPack gives you the best tools to <b>develop</b> your own applications."
+msgstr ""
+"PowerPack lætur þér í hendur bestu tækin til <b>hönnunar</b> á þínum eigin "
+"forritum."
 
 #: share/advertising/19.pl:17
 #, c-format
@@ -16394,7 +16570,9 @@ msgstr ""
 msgid ""
 "PowerPack also ships with <b>GCC</b>, the leading Linux compiler and <b>GDB</"
 "b>, the associated debugger."
-msgstr "PowerPack kemur einnig með <b>GCC</b>, vinsælasta Linux þýðandanum og samtvinnaði aflúsarinn, <b>GDB</b>."
+msgstr ""
+"PowerPack kemur einnig með <b>GCC</b>, vinsælasta Linux þýðandanum og "
+"samtvinnaði aflúsarinn, <b>GDB</b>."
 
 #: share/advertising/20.pl:13
 #, c-format
@@ -16420,8 +16598,11 @@ msgstr "\t* <b>XEmacs</b>: annar opinn frumkóða ritill og forritunar umhverfi.
 
 #: share/advertising/20.pl:18
 #, c-format
-msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
-msgstr "\t* <b>Vim</b>: háþróaður texta-ritill með meiri möguleikum en hinn rótgróni Vi."
+msgid ""
+"\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
+msgstr ""
+"\t* <b>Vim</b>: háþróaður texta-ritill með meiri möguleikum en hinn rótgróni "
+"Vi."
 
 #: share/advertising/21.pl:15
 #, c-format
@@ -16433,7 +16614,9 @@ msgstr "<b>Þróunarforritunarmál</b>"
 msgid ""
 "With all these <b>powerful tools</b>, you will be able to write applications "
 "in <b>dozens of programming languages</b>:"
-msgstr "Með öllum þessum <b>öflugu tólum</b>, þá getur þú skrifað forrit í <b>tugum forritunarmála</b>:"
+msgstr ""
+"Með öllum þessum <b>öflugu tólum</b>, þá getur þú skrifað forrit í <b>tugum "
+"forritunarmála</b>:"
 
 #: share/advertising/21.pl:18
 #, c-format
@@ -16487,8 +16670,9 @@ msgid ""
 "leading Linux compiler <b>GCC</b>, you will be able to create applications "
 "in <b>many different languages</b> (C, C++, Java™, Perl, Python, etc.)."
 msgstr ""
-"Með öflugu samþættu þróunarumhverfi <b>KDevelop</b> og hinum þekkta leiðandi Linux þýðanda <b>GCC</b>, þá getur þú skrifað forrit í <b>mörgum "
-"mismunandi forritunarmálum</b> (C, C++, Java™, Perl, Python, o.fl.)."
+"Með öflugu samþættu þróunarumhverfi <b>KDevelop</b> og hinum þekkta leiðandi "
+"Linux þýðanda <b>GCC</b>, þá getur þú skrifað forrit í <b>mörgum mismunandi "
+"forritunarmálum</b> (C, C++, Java™, Perl, Python, o.fl.)."
 
 #: share/advertising/23.pl:13
 #, c-format
@@ -16503,8 +16687,8 @@ msgid ""
 "allow you to:"
 msgstr ""
 "PowerPack+ gefur þér aðgang að <b>Kolab</b>, sem er fullvaxinn "
-"<b>hópvinnslumiðlari</b> sem mun, þökk sé biðlaranum <b>Kontact</b>, "
-"leyfa þér að:"
+"<b>hópvinnslumiðlari</b> sem mun, þökk sé biðlaranum <b>Kontact</b>, leyfa "
+"þér að:"
 
 #: share/advertising/23.pl:16
 #, c-format
@@ -16528,13 +16712,17 @@ msgstr "<b>Þjónustur</b>"
 
 #: share/advertising/24.pl:17
 #, c-format
-msgid "Empower your business network with <b>premier server solutions</b> including:"
-msgstr "Bættu þjónustu fyrirtækjanetsins með <b>hágæða miðlara lausnum</b> svo sem:"
+msgid ""
+"Empower your business network with <b>premier server solutions</b> including:"
+msgstr ""
+"Bættu þjónustu fyrirtækjanetsins með <b>hágæða miðlara lausnum</b> svo sem:"
 
 #: share/advertising/24.pl:18
 #, c-format
-msgid "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
-msgstr "\t* <b>Samba</b>: Skráa og prent þjónustur fyrir Microsoft® Windows® vélar."
+msgid ""
+"\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
+msgstr ""
+"\t* <b>Samba</b>: Skráa og prent þjónustur fyrir Microsoft® Windows® vélar."
 
 #: share/advertising/24.pl:19
 #, c-format
@@ -16546,18 +16734,23 @@ msgstr "\t* <b>Apache</b>: Mest notaði vefmiðlarinn."
 msgid ""
 "\t* <b>MySQL</b> and <b>PostgreSQL</b>: The world's most popular open source "
 "databases."
-msgstr "\t* <b>MySQL</b> og <b>PostgreSQL</b>: Heimsins vinsælustu opnu og frjálsu gagnagrunnar."
+msgstr ""
+"\t* <b>MySQL</b> og <b>PostgreSQL</b>: Heimsins vinsælustu opnu og frjálsu "
+"gagnagrunnar."
 
 #: share/advertising/24.pl:21
 #, c-format
 msgid ""
 "\t* <b>CVS</b>: Concurrent Versions System, the dominant open source network-"
 "transparent version control system."
-msgstr "\t* <b>CVS</b>: Concurrent Versions System, ríkjandi net-útgáfustjórnunarkerfi opins hugbúnaðar."
+msgstr ""
+"\t* <b>CVS</b>: Concurrent Versions System, ríkjandi net-"
+"útgáfustjórnunarkerfi opins hugbúnaðar."
 
 #: share/advertising/24.pl:22
 #, c-format
-msgid "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
+msgid ""
+"\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
 msgstr "\t* <b>ProFTPD</b>: Feiknaöflugur FTP miðlara (GPL) hugbúnaður."
 
 #: share/advertising/24.pl:23
@@ -16565,7 +16758,8 @@ msgstr "\t* <b>ProFTPD</b>: Feiknaöflugur FTP miðlara (GPL) hugbúnaður."
 msgid ""
 "\t* <b>Postfix</b> and <b>Sendmail</b>: The popular and powerful mail "
 "servers."
-msgstr "\t* <b>Postfix</b> og <b>Sendmail</b>: Vinsælir og öflugir póstmiðlarar."
+msgstr ""
+"\t* <b>Postfix</b> og <b>Sendmail</b>: Vinsælir og öflugir póstmiðlarar."
 
 #: share/advertising/25.pl:13
 #, c-format
@@ -16578,7 +16772,9 @@ msgid ""
 "The <b>Mandriva Linux Control Center</b> is an essential collection of "
 "Mandriva Linux-specific utilities designed to simplify the configuration of "
 "your computer."
-msgstr "<b>Mandriva Linux Stjórnborðið</b> er grunnur nauðsynlegra Mandriva Linux-sértækra tóla, hönnuð til að einfalda uppsetningu tölvunnar þinnar."
+msgstr ""
+"<b>Mandriva Linux Stjórnborðið</b> er grunnur nauðsynlegra Mandriva Linux-"
+"sértækra tóla, hönnuð til að einfalda uppsetningu tölvunnar þinnar."
 
 #: share/advertising/25.pl:17
 #, c-format
@@ -16586,7 +16782,10 @@ msgid ""
 "You will immediately appreciate this collection of <b>more than 60</b> handy "
 "utilities for <b>easily configuring your system</b>: hardware devices, mount "
 "points, network and Internet, security level of your computer, etc."
-msgstr "Þú munt strax kunna að meta þetta safn af <b>meira en 60</b> handhægum tólum til að <b>auðvelda stillingu tölvunnar</b>: jaðartækja, tengipunkta, staðarnets og Internets, öryggisþrep tölvunnar o.s.frv."
+msgstr ""
+"Þú munt strax kunna að meta þetta safn af <b>meira en 60</b> handhægum tólum "
+"til að <b>auðvelda stillingu tölvunnar</b>: jaðartækja, tengipunkta, "
+"staðarnets og Internets, öryggisþrep tölvunnar o.s.frv."
 
 #: share/advertising/26.pl:13
 #, c-format
@@ -16604,7 +16803,11 @@ msgid ""
 "our products or services!"
 msgstr ""
 "Eins og öll forritun, þá þarfnast opinn hugbúnaður <b>tíma og mannskaps</b> "
-"til hönnunnar. Til þess að virða stefnu opins hugbúnaðar, þá selur Mandriva virðisaukandi vörur og þjónustu til að <b>halda áfram að bæta Mandriva Linux</b>. Ef þú vilt <b>styðja stefnu opins hugbúnaðar</b> í verki og þróun Mandriva Linux, <b>vinsamlega</b> kannaðu hvort þú getur keypt eitthvað af okkar vörum eða þjónustu!"
+"til hönnunnar. Til þess að virða stefnu opins hugbúnaðar, þá selur Mandriva "
+"virðisaukandi vörur og þjónustu til að <b>halda áfram að bæta Mandriva "
+"Linux</b>. Ef þú vilt <b>styðja stefnu opins hugbúnaðar</b> í verki og þróun "
+"Mandriva Linux, <b>vinsamlega</b> kannaðu hvort þú getur keypt eitthvað af "
+"okkar vörum eða þjónustu!"
 
 #: share/advertising/27.pl:13
 #, c-format
@@ -16616,7 +16819,9 @@ msgstr "<b>Vefverslun</b>"
 msgid ""
 "To learn more about Mandriva products and services, you can visit our <b>e-"
 "commerce platform</b>."
-msgstr "Til að læra meira um Mandriva vörur og þjónustu, þá getur þú heimsótt <b>vefverslun okkar</b>."
+msgstr ""
+"Til að læra meira um Mandriva vörur og þjónustu, þá getur þú heimsótt "
+"<b>vefverslun okkar</b>."
 
 #: share/advertising/27.pl:17
 #, c-format
@@ -16628,7 +16833,9 @@ msgstr "Þar finnur þú allar okkar vörur, þjónustu og vörur frá þriðja 
 msgid ""
 "This platform has just been <b>redesigned</b> to improve its efficiency and "
 "usability."
-msgstr "Þetta umhverfi hefur nýlega verið <b>endurskipulagt</b> til að auka skilvirkni."
+msgstr ""
+"Þetta umhverfi hefur nýlega verið <b>endurskipulagt</b> til að auka "
+"skilvirkni."
 
 #: share/advertising/27.pl:21
 #, c-format
@@ -16651,7 +16858,8 @@ msgstr ""
 
 #: share/advertising/28.pl:19
 #, c-format
-msgid "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
+msgid ""
+"Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
 msgstr ""
 
 #: share/advertising/28.pl:20
@@ -16718,7 +16926,8 @@ msgstr ""
 
 #: share/advertising/29.pl:21
 #, c-format
-msgid "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
+msgid ""
+"\t* Management of <b>all your Mandriva Linux systems</b> with one account."
 msgstr ""
 
 #: share/advertising/30.pl:13
@@ -16740,14 +16949,18 @@ msgstr ""
 msgid ""
 "Thanks to the help of <b>qualified Mandriva Linux experts</b>, you will save "
 "a lot of time."
-msgstr "Þökk sé hjálp <b>sérfróðra Mandriva Linux sérfræðinga</b>, þá sparar þú mikinn tíma."
+msgstr ""
+"Þökk sé hjálp <b>sérfróðra Mandriva Linux sérfræðinga</b>, þá sparar þú "
+"mikinn tíma."
 
 #: share/advertising/30.pl:19
 #, c-format
 msgid ""
 "For any question related to Mandriva Linux, you have the possibility to "
 "purchase support incidents at <b>store.mandriva.com</b>."
-msgstr "Varðandi allar spurningar um Mandriva Linux, þá hefur þú möguleika á að kaupa þjónustu fyrir hvert tilvik á <b>store.mandriva.com</b>."
+msgstr ""
+"Varðandi allar spurningar um Mandriva Linux, þá hefur þú möguleika á að "
+"kaupa þjónustu fyrir hvert tilvik á <b>store.mandriva.com</b>."
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -17976,7 +18189,9 @@ msgstr ""
 msgid "Configuration changed - restart clusternfs/dhcpd?"
 msgstr "Stillingum breytt - endurræsa clusternfs/dhcpd?"
 
-#: standalone/drakautoinst:38
+#: standalone/drakautoinst:38 standalone/drakhosts:116
+#: standalone/drakhosts:123 standalone/draknfs:38 standalone/draknfs:74
+#: standalone/draknfs:244
 #, c-format
 msgid "Error!"
 msgstr "Villa!"
@@ -18395,7 +18610,8 @@ msgstr ""
 
 #: standalone/drakbackup:1090
 #, c-format
-msgid "Error during sending file via FTP. Please correct your FTP configuration."
+msgid ""
+"Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 
 #: standalone/drakbackup:1092
@@ -18443,7 +18659,8 @@ msgstr ""
 
 #: standalone/drakbackup:1395
 #, c-format
-msgid "These options can backup and restore all files in your /etc directory.\n"
+msgid ""
+"These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 
 #: standalone/drakbackup:1396
@@ -18855,7 +19072,8 @@ msgstr ""
 
 #: standalone/drakbackup:2142
 #, c-format
-msgid "If your machine is not on all the time, you might want to install anacron."
+msgid ""
+"If your machine is not on all the time, you might want to install anacron."
 msgstr ""
 
 #: standalone/drakbackup:2143
@@ -18908,7 +19126,7 @@ msgstr "Hvar"
 msgid "When"
 msgstr "Hvenær"
 
-#: standalone/drakbackup:2271
+#: standalone/drakbackup:2271 standalone/draknfs:230
 #, c-format
 msgid "More Options"
 msgstr "Fleiri valkostir"
@@ -19604,21 +19822,21 @@ msgstr ""
 msgid "Drakbackup"
 msgstr ""
 
-#: standalone/drakboot:76 standalone/drakfloppy:47 standalone/harddrake2:190
-#: standalone/harddrake2:191 standalone/harddrake2:192 standalone/logdrake:69
+#: standalone/drakboot:76 standalone/harddrake2:190 standalone/harddrake2:191
+#: standalone/harddrake2:192 standalone/logdrake:69
 #: standalone/printerdrake:138 standalone/printerdrake:139
 #: standalone/printerdrake:140
 #, c-format
 msgid "/_File"
 msgstr "/_Skrá"
 
-#: standalone/drakboot:77 standalone/drakfloppy:48 standalone/logdrake:75
+#: standalone/drakboot:77 standalone/logdrake:75
 #, c-format
 msgid "/File/_Quit"
 msgstr "/Skrá/_Hætta"
 
-#: standalone/drakboot:77 standalone/drakfloppy:48 standalone/harddrake2:192
-#: standalone/logdrake:75 standalone/printerdrake:140
+#: standalone/drakboot:77 standalone/harddrake2:192 standalone/logdrake:75
+#: standalone/printerdrake:140
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -19730,7 +19948,7 @@ msgstr "Mandriva Linux Stjórnborð"
 msgid "Synchronization tool"
 msgstr ""
 
-#: standalone/drakbug:49 standalone/drakbug:149
+#: standalone/drakbug:49 standalone/drakbug:152
 #, c-format
 msgid "Standalone Tools"
 msgstr "Sjálfstæð tæki"
@@ -19812,7 +20030,7 @@ msgstr "Pakki: "
 msgid "Kernel:"
 msgstr "Kjarni:"
 
-#: standalone/drakbug:100
+#: standalone/drakbug:101
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -19822,17 +20040,17 @@ msgid ""
 "version, and /proc/cpuinfo."
 msgstr ""
 
-#: standalone/drakbug:106
+#: standalone/drakbug:107
 #, c-format
 msgid "Report"
 msgstr "Skýrsla"
 
-#: standalone/drakbug:159
+#: standalone/drakbug:162
 #, c-format
 msgid "Not installed"
 msgstr "Ekki settur inn"
 
-#: standalone/drakbug:171
+#: standalone/drakbug:174
 #, c-format
 msgid "Package not installed"
 msgstr "Pakki ekki settur inn"
@@ -20057,7 +20275,7 @@ msgstr "Slökkva"
 msgid "Media class"
 msgstr ""
 
-#: standalone/drakconnect:594 standalone/drakfloppy:136
+#: standalone/drakconnect:594
 #, c-format
 msgid "Module name"
 msgstr "Nafn einingar"
@@ -20110,7 +20328,8 @@ msgstr ""
 
 #: standalone/drakconnect:741
 #, c-format
-msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid ""
+"Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Til hamingju, tekist hefur að fjarlægja nettengið \"%s\""
 
 #: standalone/drakconnect:757
@@ -20291,123 +20510,6 @@ msgid ""
 msgstr ""
 "Öll keyrandi gluggaforrit verður lokað og núverandi lota mun tapast. Ert þú "
 "viss um að þú viljir rendurræsa dm þjónustuna?"
-
-#: standalone/drakfloppy:41
-#, c-format
-msgid "drakfloppy"
-msgstr "drakfloppy"
-
-#: standalone/drakfloppy:78
-#, c-format
-msgid "Boot disk creation"
-msgstr "Búa til ræsidisk"
-
-#: standalone/drakfloppy:79
-#, c-format
-msgid "General"
-msgstr "Almennt"
-
-#: standalone/drakfloppy:82 standalone/harddrake2:147
-#, c-format
-msgid "Device"
-msgstr "Tæki"
-
-#: standalone/drakfloppy:88
-#, c-format
-msgid "Kernel version"
-msgstr "Kjarna útgáfa"
-
-#: standalone/drakfloppy:103
-#, c-format
-msgid "Preferences"
-msgstr "Valkostir"
-
-#: standalone/drakfloppy:117
-#, c-format
-msgid "Advanced preferences"
-msgstr "Ítarlegri valkostir"
-
-#: standalone/drakfloppy:136
-#, c-format
-msgid "Size"
-msgstr "Stærð"
-
-#: standalone/drakfloppy:139
-#, c-format
-msgid "Mkinitrd optional arguments"
-msgstr "Mkinitrd auka-viðföng"
-
-#: standalone/drakfloppy:141
-#, c-format
-msgid "force"
-msgstr "Þvinga"
-
-#: standalone/drakfloppy:142
-#, c-format
-msgid "omit raid modules"
-msgstr "sleppa raid einingum"
-
-#: standalone/drakfloppy:143
-#, c-format
-msgid "if needed"
-msgstr "ef þörf"
-
-#: standalone/drakfloppy:144
-#, c-format
-msgid "omit scsi modules"
-msgstr "sleppa scsi einingum"
-
-#: standalone/drakfloppy:147
-#, c-format
-msgid "Add a module"
-msgstr "Bæta við einingu"
-
-# ## skrytid
-#: standalone/drakfloppy:156
-#, c-format
-msgid "Remove a module"
-msgstr "Fjarlægja einingu"
-
-#: standalone/drakfloppy:291
-#, c-format
-msgid "Be sure a media is present for the device %s"
-msgstr "Vertu viss um að miðill sé til staðar fyrir tæki %s"
-
-#: standalone/drakfloppy:297
-#, c-format
-msgid ""
-"There is no medium or it is write-protected for device %s.\n"
-"Please insert one."
-msgstr ""
-"Það er enginn miðill eða hann er ritvarinn fyrir tæki %s.\n"
-"Vinsamlega settu inn miðil."
-
-#: standalone/drakfloppy:300
-#, c-format
-msgid "Unable to fork: %s"
-msgstr "Get ekki kvíslað: %s"
-
-#: standalone/drakfloppy:303
-#, c-format
-msgid "Floppy creation completed"
-msgstr "Disklingur tilbúinn"
-
-#: standalone/drakfloppy:303
-#, c-format
-msgid "The creation of the boot floppy has been successfully completed \n"
-msgstr "Lokið hefur verið við að búa til ræsi-diskling \n"
-
-#. -PO: Do not alter the <span ..> and </span> tags
-#: standalone/drakfloppy:308
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk:\n"
-"\n"
-"<span foreground=\"Red\"><tt>%s</tt></span>"
-msgstr ""
-"Get ekki örugglega lokað mkbootdisk:\n"
-"\n"
-"<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #: standalone/drakfont:183
 #, c-format
@@ -21005,7 +21107,8 @@ msgstr " --help                - Sýnir þessa hjálp     \n"
 
 #: standalone/drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
 #: standalone/drakhelp:24
@@ -21028,6 +21131,240 @@ msgid ""
 msgstr ""
 "Ekki hægt að sýna %s \n"
 ". Engin hjálparfærsla af þessari tegund\n"
+
+#: standalone/drakhosts:106
+#, c-format
+msgid "Please %s information"
+msgstr ""
+
+#: standalone/drakhosts:108
+#, c-format
+msgid "IP address:"
+msgstr ""
+
+#: standalone/drakhosts:109
+#, c-format
+msgid "Host name:"
+msgstr ""
+
+#: standalone/drakhosts:110
+#, c-format
+msgid "Host Aliases:"
+msgstr ""
+
+#: standalone/drakhosts:116
+#, c-format
+msgid "Please enter a valid IP address."
+msgstr ""
+
+#: standalone/drakhosts:123
+#, c-format
+msgid "Same IP is already in %s file."
+msgstr ""
+
+#: standalone/drakhosts:192
+#, c-format
+msgid "Host Aliases"
+msgstr ""
+
+#: standalone/drakhosts:227
+#, c-format
+msgid "Failed to add host."
+msgstr ""
+
+#: standalone/drakhosts:234
+#, c-format
+msgid "Failed to Modify host."
+msgstr ""
+
+#: standalone/drakhosts:242
+#, c-format
+msgid "Failed to remove host."
+msgstr ""
+
+#: standalone/draknfs:38
+#, c-format
+msgid "You are not root. Exiting..."
+msgstr ""
+
+#: standalone/draknfs:69
+#, c-format
+msgid "Directory Selection"
+msgstr ""
+
+#: standalone/draknfs:74
+#, c-format
+msgid "Should be a directory."
+msgstr ""
+
+#: standalone/draknfs:103
+#, c-format
+msgid ""
+"NFS clients may be specified in a number of ways:\n"
+"single host: You may specify a host either by an abbreviated name recognized "
+"be the resolver, the fully qualified domain name, or an IP address.\n"
+"\n"
+"netgroups: NIS netgroups may be given as @group.\n"
+"\n"
+"wildcards: machine names may contain the wildcard characters * and ?. For "
+"instance: *.cs.foo.edu  matches  all  hosts  in the domain cs.foo.edu.\n"
+"\n"
+"IP networks:  you can also export directories to all hosts  on  an  IP  "
+"(sub-)network simultaneously. for example, either `/255.255.252.0' or  "
+"`/22'  appended to the network base address result.\n"
+msgstr ""
+
+#: standalone/draknfs:113
+#, c-format
+msgid ""
+"root_squash: map requests from uid/gid 0 to the anonymous uid/gid.\n"
+"\n"
+"no_root_squash: turn off root squashing. This option is mainly useful for "
+"diskless clients.\n"
+"\n"
+"all_squash: map all uids and gids to the anonymous  user. Useful  for  NFS-"
+"exported public FTP directories, news spool directories, etc. The opposite "
+"option is no_all_squash, which is the default  setting.\n"
+"\n"
+"anonuid and anongid: explicitly  set the uid and gid of the anonymous "
+"account.\n"
+msgstr ""
+
+#: standalone/draknfs:122
+#, c-format
+msgid ""
+"secure: this option requires that requests originate on an internet port "
+"less than IPPORT_RESERVED (1024). This option is on by default. To turn it "
+"off, specify insecure.\n"
+"\n"
+"rw: allow both read and write requests on this NFS volume. The default is to "
+"disallow any request which changes the filesystem. This can also be made "
+"explicit by using the ro option.\n"
+"\n"
+"async: allows the NFS server to violate the NFS protocol and reply to "
+"requests before any changes made by that request have been committed to "
+"stable storage (e.g. disc drive).\n"
+msgstr ""
+
+#: standalone/draknfs:167
+#, c-format
+msgid "dir path"
+msgstr ""
+
+#: standalone/draknfs:206
+#, c-format
+msgid "NFS directory"
+msgstr ""
+
+#: standalone/draknfs:208
+#, c-format
+msgid "Directory:"
+msgstr ""
+
+#: standalone/draknfs:211
+#, c-format
+msgid "Host access"
+msgstr ""
+
+#: standalone/draknfs:213
+#, c-format
+msgid "Access:"
+msgstr ""
+
+#: standalone/draknfs:213 standalone/draknfs:218
+#, c-format
+msgid "Help User ID"
+msgstr ""
+
+#: standalone/draknfs:216
+#, c-format
+msgid "User ID Mapping"
+msgstr ""
+
+#: standalone/draknfs:218
+#, c-format
+msgid "User ID:"
+msgstr ""
+
+#: standalone/draknfs:219
+#, c-format
+msgid "anonuid:"
+msgstr ""
+
+#: standalone/draknfs:220
+#, c-format
+msgid "anongid:"
+msgstr ""
+
+#: standalone/draknfs:223 standalone/draknfs:313
+#, c-format
+msgid "General Options"
+msgstr ""
+
+#: standalone/draknfs:225
+#, c-format
+msgid "Force sync:"
+msgstr ""
+
+#: standalone/draknfs:225
+#, c-format
+msgid "Help General options"
+msgstr ""
+
+#: standalone/draknfs:226
+#, c-format
+msgid "port below 1024:"
+msgstr ""
+
+#: standalone/draknfs:227
+#, c-format
+msgid "Read/Write request:"
+msgstr ""
+
+#: standalone/draknfs:232
+#, c-format
+msgid "options:"
+msgstr ""
+
+#: standalone/draknfs:244
+#, c-format
+msgid "Please enter a directory to share."
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "Share Directory"
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "Hosts Wildcard"
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "More options"
+msgstr ""
+
+#: standalone/draknfs:351
+#, c-format
+msgid "Failed to add NFS share."
+msgstr ""
+
+#: standalone/draknfs:358
+#, c-format
+msgid "Failed to Modify NFS share."
+msgstr ""
+
+#: standalone/draknfs:366
+#, c-format
+msgid "Failed to remove an NFS share."
+msgstr ""
+
+#: standalone/draknfs:371
+#, c-format
+msgid "Reload NFS server"
+msgstr ""
 
 #: standalone/drakperm:21
 #, c-format
@@ -23392,7 +23729,8 @@ msgstr "listi af aukareklum fyrir þetta hljóðkort"
 
 #: standalone/harddrake2:29
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr "Þetta er vélbúnaðarbrautin sem tækið er tengt á (þ.e. PCI USB, ...)"
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
@@ -23913,8 +24251,10 @@ msgstr "Tækisskrá"
 
 #: standalone/harddrake2:115
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
-msgstr "tækisskráin sem notuð er til að hafa samband við kjarnarrekil músarinnar"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
+msgstr ""
+"tækisskráin sem notuð er til að hafa samband við kjarnarrekil músarinnar"
 
 #: standalone/harddrake2:116
 #, c-format
@@ -23987,6 +24327,11 @@ msgstr "Villur"
 #, c-format
 msgid "FPU"
 msgstr "FPU"
+
+#: standalone/harddrake2:147
+#, c-format
+msgid "Device"
+msgstr "Tæki"
 
 #: standalone/harddrake2:148
 #, c-format
@@ -24131,7 +24476,8 @@ msgstr "Ýmisl"
 
 #: standalone/harddrake2:341
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Smelltu á tæki í vinstri glugganum til að birta upplýsingar hér."
 
 #: standalone/harddrake2:393
@@ -24926,8 +25272,10 @@ msgstr "Stöðva Scannerdrake."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr "Gat ekki sett upp pakka sem þarf til að setja upp skanner með Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+"Gat ekki sett upp pakka sem þarf til að setja upp skanner með Scannerdrake."
 
 #: standalone/scannerdrake:61
 #, c-format
@@ -25359,7 +25707,8 @@ msgstr "Þú verður að gefa upp vélarnafn eða IP-vistfang.\n"
 #: standalone/scannerdrake:727 standalone/scannerdrake:877
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "Þessi vél er nú þegar á listanum, þú getur ekki bætt henni við aftur.\n"
+msgstr ""
+"Þessi vél er nú þegar á listanum, þú getur ekki bætt henni við aftur.\n"
 
 #: standalone/scannerdrake:782
 #, c-format
@@ -25387,27 +25736,27 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Myndskanninn þinn verður ekki boðinn fram á netinu."
 
-#: standalone/service_harddrake:105
+#: standalone/service_harddrake:104
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Nokkur tæki í \"%s\" vélbúnaðarhlutanum voru fjarlægð:\n"
 
-#: standalone/service_harddrake:106
+#: standalone/service_harddrake:105
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s var fjarlægt\n"
 
-#: standalone/service_harddrake:109
+#: standalone/service_harddrake:108
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Nokkrum tækjum var bætt við: %s\n"
 
-#: standalone/service_harddrake:110
+#: standalone/service_harddrake:109
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s var bætt við\n"
 
-#: standalone/service_harddrake:207
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Vélbúnaðarskönnun í gangi"
@@ -25570,6 +25919,77 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
+
+#~ msgid "drakfloppy"
+#~ msgstr "drakfloppy"
+
+#~ msgid "Boot disk creation"
+#~ msgstr "Búa til ræsidisk"
+
+#~ msgid "General"
+#~ msgstr "Almennt"
+
+#~ msgid "Kernel version"
+#~ msgstr "Kjarna útgáfa"
+
+#~ msgid "Preferences"
+#~ msgstr "Valkostir"
+
+#~ msgid "Advanced preferences"
+#~ msgstr "Ítarlegri valkostir"
+
+#~ msgid "Size"
+#~ msgstr "Stærð"
+
+#~ msgid "Mkinitrd optional arguments"
+#~ msgstr "Mkinitrd auka-viðföng"
+
+#~ msgid "force"
+#~ msgstr "Þvinga"
+
+#~ msgid "omit raid modules"
+#~ msgstr "sleppa raid einingum"
+
+#~ msgid "if needed"
+#~ msgstr "ef þörf"
+
+#~ msgid "omit scsi modules"
+#~ msgstr "sleppa scsi einingum"
+
+#~ msgid "Add a module"
+#~ msgstr "Bæta við einingu"
+
+# ## skrytid
+#~ msgid "Remove a module"
+#~ msgstr "Fjarlægja einingu"
+
+#~ msgid "Be sure a media is present for the device %s"
+#~ msgstr "Vertu viss um að miðill sé til staðar fyrir tæki %s"
+
+#~ msgid ""
+#~ "There is no medium or it is write-protected for device %s.\n"
+#~ "Please insert one."
+#~ msgstr ""
+#~ "Það er enginn miðill eða hann er ritvarinn fyrir tæki %s.\n"
+#~ "Vinsamlega settu inn miðil."
+
+#~ msgid "Unable to fork: %s"
+#~ msgstr "Get ekki kvíslað: %s"
+
+#~ msgid "Floppy creation completed"
+#~ msgstr "Disklingur tilbúinn"
+
+#~ msgid "The creation of the boot floppy has been successfully completed \n"
+#~ msgstr "Lokið hefur verið við að búa til ræsi-diskling \n"
+
+#~ msgid ""
+#~ "Unable to properly close mkbootdisk:\n"
+#~ "\n"
+#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
+#~ msgstr ""
+#~ "Get ekki örugglega lokað mkbootdisk:\n"
+#~ "\n"
+#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #~ msgid "You can not use a LVM Logical Volume for mount point %s"
 #~ msgstr "Þú getur ekki notað LVM sýndardisk fyrir tengipunkt %s"
@@ -26508,4 +26928,3 @@ msgstr "Innsetning mistókst"
 
 #~ msgid "Compact"
 #~ msgstr "Samþjappað"
-

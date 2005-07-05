@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
-"POT-Creation-Date: 2005-07-01 16:44+0200\n"
+"POT-Creation-Date: 2005-07-05 16:34+0200\n"
 "PO-Revision-Date: 2005-06-14 15:45-0300\n"
 "Last-Translator: Lisiane Sztoltz Teixeira <lisiane@conectiva.com>\n"
 "Language-Team: Brazilian portuguese <lisiane@mandriva.com>\n"
@@ -235,12 +235,13 @@ msgstr "Por favor aguarde, detectando e configurando dispositivos..."
 #: standalone/drakbackup:4324 standalone/drakclock:124
 #: standalone/drakconnect:672 standalone/drakconnect:676
 #: standalone/drakconnect:681 standalone/drakconnect:696
-#: standalone/drakfloppy:297 standalone/drakfloppy:300
-#: standalone/drakfloppy:306 standalone/drakfont:210 standalone/drakfont:223
-#: standalone/drakfont:261 standalone/drakgw:50 standalone/drakgw:188
-#: standalone/drakgw:217 standalone/drakgw:258 standalone/drakgw:292
-#: standalone/drakgw:397 standalone/drakroam:41 standalone/draksplash:15
-#: standalone/drakxtv:107 standalone/finish-install:49 standalone/logdrake:168
+#: standalone/drakfont:210 standalone/drakfont:223 standalone/drakfont:261
+#: standalone/drakgw:50 standalone/drakgw:188 standalone/drakgw:217
+#: standalone/drakgw:258 standalone/drakgw:292 standalone/drakgw:397
+#: standalone/drakhosts:227 standalone/drakhosts:234 standalone/drakhosts:242
+#: standalone/draknfs:351 standalone/draknfs:358 standalone/draknfs:366
+#: standalone/drakroam:41 standalone/draksplash:15 standalone/drakxtv:107
+#: standalone/finish-install:49 standalone/logdrake:168
 #: standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59
 #: standalone/scannerdrake:202 standalone/scannerdrake:261
 #: standalone/scannerdrake:715 standalone/scannerdrake:726
@@ -325,8 +326,8 @@ msgid "No CDROM support"
 msgstr "Sem suporte a CD-ROM"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:92
-#: diskdrake/interactive.pm:1039 diskdrake/interactive.pm:1049
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1046 diskdrake/interactive.pm:1056
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Read carefully!"
 msgstr "Leia com atenção!"
@@ -686,11 +687,11 @@ msgstr "Cancelar"
 #: Xconfig/resolution_and_depth.pm:372 diskdrake/hd_gtk.pm:150
 #: install_steps_gtk.pm:228 install_steps_gtk.pm:629 interactive.pm:527
 #: interactive/gtk.pm:677 interactive/gtk.pm:679 standalone/drakTermServ:284
-#: standalone/drakbackup:3883 standalone/drakbug:104
+#: standalone/drakbackup:3883 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
-#: standalone/drakfont:509 standalone/drakperm:133 standalone/draksec:336
-#: standalone/draksec:338 standalone/draksec:356 standalone/draksec:358
-#: ugtk2.pm:1040 ugtk2.pm:1041
+#: standalone/drakfont:509 standalone/draknfs:131 standalone/draknfs:133
+#: standalone/drakperm:133 standalone/draksec:336 standalone/draksec:338
+#: standalone/draksec:356 standalone/draksec:358 ugtk2.pm:1040 ugtk2.pm:1041
 #, c-format
 msgid "Help"
 msgstr "Ajuda"
@@ -839,7 +840,7 @@ msgstr "outro"
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:245
-#: standalone/service_harddrake:207
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
 msgstr "Por favor, aguarde"
@@ -965,7 +966,7 @@ msgstr ""
 msgid "The passwords do not match"
 msgstr "As senhas não conferem"
 
-#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1299
+#: any.pm:276 any.pm:609 authentication.pm:181 diskdrake/interactive.pm:1306
 #, c-format
 msgid "Please try again"
 msgstr "Por favor, tente novamente"
@@ -1098,8 +1099,7 @@ msgstr "Perfil de Rede"
 msgid "Label"
 msgstr "Nome"
 
-#: any.pm:382 any.pm:392 harddrake/v4l.pm:358 standalone/drakfloppy:84
-#: standalone/drakfloppy:90 standalone/draksec:52
+#: any.pm:382 any.pm:392 harddrake/v4l.pm:358 standalone/draksec:52
 #, c-format
 msgid "Default"
 msgstr "Padrão"
@@ -1456,7 +1456,7 @@ msgstr "Abrir o Userdrake"
 #: any.pm:1015 printer/printerdrake.pm:3900 printer/printerdrake.pm:3903
 #: printer/printerdrake.pm:3904 printer/printerdrake.pm:3905
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:294
-#: standalone/drakbackup:4083 standalone/drakbug:127 standalone/drakfont:497
+#: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
 #: standalone/printerdrake:547
 #, c-format
@@ -2123,12 +2123,12 @@ msgid "Server: "
 msgstr "Servidor:"
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:521
-#: diskdrake/interactive.pm:1181 diskdrake/interactive.pm:1259
+#: diskdrake/interactive.pm:1188 diskdrake/interactive.pm:1266
 #, c-format
 msgid "Mount point: "
 msgstr "Ponto de montagem: "
 
-#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1266
+#: diskdrake/dav.pm:111 diskdrake/interactive.pm:1273
 #, c-format
 msgid "Options: %s"
 msgstr "Opções: %s"
@@ -2216,7 +2216,7 @@ msgstr "HFS"
 msgid "Windows"
 msgstr "Windows"
 
-#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1196
+#: diskdrake/hd_gtk.pm:336 diskdrake/interactive.pm:1203
 #, c-format
 msgid "Empty"
 msgstr "Vazia"
@@ -2291,7 +2291,29 @@ msgstr "Mudar para modo expert"
 msgid "Continue anyway?"
 msgstr "Continuar mesmo assim?"
 
-#: diskdrake/interactive.pm:278
+#: diskdrake/interactive.pm:280
+#, c-format
+msgid "Quit without saving"
+msgstr "Sair sem salvar"
+
+#: diskdrake/interactive.pm:280
+#, c-format
+msgid "Quit without writing the partition table?"
+msgstr "Sair sem gravar na tabela de partição?"
+
+#: diskdrake/interactive.pm:285
+#, c-format
+msgid "Do you want to save /etc/fstab modifications"
+msgstr "Você quer salvar as modificações do /etc/fstab"
+
+#: diskdrake/interactive.pm:292 install_steps_interactive.pm:329
+#, c-format
+msgid "You need to reboot for the partition table modifications to take place"
+msgstr ""
+"Você precisa reiniciar o computador para que as modificações na tabela de "
+"partição tenham efeito"
+
+#: diskdrake/interactive.pm:297
 #, c-format
 msgid ""
 "You should format partition %s.\n"
@@ -2302,28 +2324,6 @@ msgstr ""
 "Caso contrário, nenhuma entrada para o ponto de montagem %s será escrita no "
 "fstab.\n"
 "Sair assim mesmo?"
-
-#: diskdrake/interactive.pm:285
-#, c-format
-msgid "Quit without saving"
-msgstr "Sair sem salvar"
-
-#: diskdrake/interactive.pm:285
-#, c-format
-msgid "Quit without writing the partition table?"
-msgstr "Sair sem gravar na tabela de partição?"
-
-#: diskdrake/interactive.pm:290
-#, c-format
-msgid "Do you want to save /etc/fstab modifications"
-msgstr "Você quer salvar as modificações do /etc/fstab"
-
-#: diskdrake/interactive.pm:297 install_steps_interactive.pm:329
-#, c-format
-msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Você precisa reiniciar o computador para que as modificações na tabela de "
-"partição tenham efeito"
 
 #: diskdrake/interactive.pm:310 help.pm:530
 #, c-format
@@ -2479,12 +2479,12 @@ msgstr "Criar uma nova partição"
 msgid "Start sector: "
 msgstr "Setor inicial: "
 
-#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:919
+#: diskdrake/interactive.pm:519 diskdrake/interactive.pm:926
 #, c-format
 msgid "Size in MB: "
 msgstr "Tamanho em MB: "
 
-#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:920
+#: diskdrake/interactive.pm:520 diskdrake/interactive.pm:927
 #, c-format
 msgid "Filesystem type: "
 msgstr "Tipo do Sistema de Arquivos: "
@@ -2630,98 +2630,110 @@ msgstr "Escolha um LVM existente para adicionar"
 msgid "LVM name?"
 msgstr "Nome do LVM?"
 
-#: diskdrake/interactive.pm:904
+#: diskdrake/interactive.pm:891
+#, c-format
+msgid ""
+"Physical volume %s is still in use.\n"
+"Do you want to move used physical extents on this volume to other volumes?"
+msgstr ""
+
+#: diskdrake/interactive.pm:893
+#, c-format
+msgid "Moving physical extents"
+msgstr ""
+
+#: diskdrake/interactive.pm:911
 #, c-format
 msgid "This partition can not be used for loopback"
 msgstr "Essa partição não pode ser usada para loopback"
 
-#: diskdrake/interactive.pm:917
+#: diskdrake/interactive.pm:924
 #, c-format
 msgid "Loopback"
 msgstr "Loopback"
 
-#: diskdrake/interactive.pm:918
+#: diskdrake/interactive.pm:925
 #, c-format
 msgid "Loopback file name: "
 msgstr "Nome do arquivo loopback: "
 
-#: diskdrake/interactive.pm:923
+#: diskdrake/interactive.pm:930
 #, c-format
 msgid "Give a file name"
 msgstr "Forneça um nome para o arquivo"
 
-#: diskdrake/interactive.pm:926
+#: diskdrake/interactive.pm:933
 #, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "O arquivo já está sendo utilizado por outro loopback, escolha outro"
 
-#: diskdrake/interactive.pm:927
+#: diskdrake/interactive.pm:934
 #, c-format
 msgid "File already exists. Use it?"
 msgstr "O arquivo já existe. Usá-lo?"
 
-#: diskdrake/interactive.pm:950
+#: diskdrake/interactive.pm:957
 #, c-format
 msgid "Mount options"
 msgstr "Opções de montagem"
 
-#: diskdrake/interactive.pm:957
+#: diskdrake/interactive.pm:964
 #, c-format
 msgid "Various"
 msgstr "Vários"
 
-#: diskdrake/interactive.pm:1021
+#: diskdrake/interactive.pm:1028
 #, c-format
 msgid "device"
 msgstr "dispositivo"
 
-#: diskdrake/interactive.pm:1022
+#: diskdrake/interactive.pm:1029
 #, c-format
 msgid "level"
 msgstr "nível"
 
-#: diskdrake/interactive.pm:1023
+#: diskdrake/interactive.pm:1030
 #, c-format
 msgid "chunk size in KiB"
 msgstr "tamanho quebrado (chunk) em KiB"
 
-#: diskdrake/interactive.pm:1040
+#: diskdrake/interactive.pm:1047
 #, c-format
 msgid "Be careful: this operation is dangerous."
 msgstr "Tenha cuidado: essa operação é perigosa."
 
-#: diskdrake/interactive.pm:1055
+#: diskdrake/interactive.pm:1062
 #, c-format
 msgid "What type of partitioning?"
 msgstr "Qual o tipo de particionamento?"
 
-#: diskdrake/interactive.pm:1093
+#: diskdrake/interactive.pm:1100
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Você precisará reiniciar para que as modificações tenham efeito"
 
-#: diskdrake/interactive.pm:1102
+#: diskdrake/interactive.pm:1109
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "A tabela de partição do drive %s está para ser gravada no disco!"
 
-#: diskdrake/interactive.pm:1111
+#: diskdrake/interactive.pm:1118
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Após formatar a partição %s, todos os dados desta partição serão perdidos"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1134
 #, c-format
 msgid "Move files to the new partition"
 msgstr "Mover arquivos para nova partição"
 
-#: diskdrake/interactive.pm:1127
+#: diskdrake/interactive.pm:1134
 #, c-format
 msgid "Hide files"
 msgstr "Esconder arquivos"
 
-#: diskdrake/interactive.pm:1128
+#: diskdrake/interactive.pm:1135
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2730,108 +2742,108 @@ msgstr ""
 "O diretório %s já contém alguns dados\n"
 "(%s)"
 
-#: diskdrake/interactive.pm:1139
+#: diskdrake/interactive.pm:1146
 #, c-format
 msgid "Moving files to the new partition"
 msgstr "Movendo arquivos para a nova partição"
 
-#: diskdrake/interactive.pm:1143
+#: diskdrake/interactive.pm:1150
 #, c-format
 msgid "Copying %s"
 msgstr "Copiando %s"
 
-#: diskdrake/interactive.pm:1147
+#: diskdrake/interactive.pm:1154
 #, c-format
 msgid "Removing %s"
 msgstr "Removendo %s"
 
-#: diskdrake/interactive.pm:1161
+#: diskdrake/interactive.pm:1168
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "a partição %s agora chama-se %s"
 
-#: diskdrake/interactive.pm:1162
+#: diskdrake/interactive.pm:1169
 #, c-format
 msgid "Partitions have been renumbered: "
 msgstr "Partições renumeradas:"
 
-#: diskdrake/interactive.pm:1182 diskdrake/interactive.pm:1244
+#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1251
 #, c-format
 msgid "Device: "
 msgstr "Dispositivo: "
 
-#: diskdrake/interactive.pm:1183
+#: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Devfs name: "
 msgstr "Nome do sist de arquivos do disp.:"
 
-#: diskdrake/interactive.pm:1184
+#: diskdrake/interactive.pm:1191
 #, c-format
 msgid "Volume label: "
 msgstr "Nome do Volume:"
 
-#: diskdrake/interactive.pm:1185
+#: diskdrake/interactive.pm:1192
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Letra do drive no DOS: %s (apena um palpite)\n"
 
-#: diskdrake/interactive.pm:1189 diskdrake/interactive.pm:1198
-#: diskdrake/interactive.pm:1262
+#: diskdrake/interactive.pm:1196 diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1269
 #, c-format
 msgid "Type: "
 msgstr "Tipo: "
 
-#: diskdrake/interactive.pm:1193 install_steps_gtk.pm:296
+#: diskdrake/interactive.pm:1200 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
 msgstr "Nome: "
 
-#: diskdrake/interactive.pm:1200
+#: diskdrake/interactive.pm:1207
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Iniciar: setor: %s\n"
 
-#: diskdrake/interactive.pm:1201
+#: diskdrake/interactive.pm:1208
 #, c-format
 msgid "Size: %s"
 msgstr "Tamanho: %s"
 
-#: diskdrake/interactive.pm:1203
+#: diskdrake/interactive.pm:1210
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s setores"
 
-#: diskdrake/interactive.pm:1205
+#: diskdrake/interactive.pm:1212
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cilindro %d para %d\n"
 
-#: diskdrake/interactive.pm:1206
+#: diskdrake/interactive.pm:1213
 #, c-format
 msgid "Number of logical extents: %d\n"
 msgstr "Número de extensões lógicas: %d\n"
 
-#: diskdrake/interactive.pm:1207
+#: diskdrake/interactive.pm:1214
 #, c-format
 msgid "Formatted\n"
 msgstr "Formatado\n"
 
-#: diskdrake/interactive.pm:1208
+#: diskdrake/interactive.pm:1215
 #, c-format
 msgid "Not formatted\n"
 msgstr "Não formatado\n"
 
-#: diskdrake/interactive.pm:1209
+#: diskdrake/interactive.pm:1216
 #, c-format
 msgid "Mounted\n"
 msgstr "Montado\n"
 
-#: diskdrake/interactive.pm:1210
+#: diskdrake/interactive.pm:1217
 #, c-format
 msgid "RAID %s\n"
 msgstr "RAID %s\n"
 
-#: diskdrake/interactive.pm:1215
+#: diskdrake/interactive.pm:1222
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2840,7 +2852,7 @@ msgstr ""
 "Loopback arquivo(s):\n"
 "   %s\n"
 
-#: diskdrake/interactive.pm:1216
+#: diskdrake/interactive.pm:1223
 #, c-format
 msgid ""
 "Partition booted by default\n"
@@ -2849,27 +2861,27 @@ msgstr ""
 "Partição de inicialização padrão\n"
 "    (para inicialização do MS-DOS, não para o lilo)\n"
 
-#: diskdrake/interactive.pm:1218
+#: diskdrake/interactive.pm:1225
 #, c-format
 msgid "Level %s\n"
 msgstr "Nível %s\n"
 
-#: diskdrake/interactive.pm:1219
+#: diskdrake/interactive.pm:1226
 #, c-format
 msgid "Chunk size %d KiB\n"
 msgstr "Tamanho do pedaço %d KiB\n"
 
-#: diskdrake/interactive.pm:1220
+#: diskdrake/interactive.pm:1227
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Discos RAID %s\n"
 
-#: diskdrake/interactive.pm:1222
+#: diskdrake/interactive.pm:1229
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Nome do arquivo loopback: %s"
 
-#: diskdrake/interactive.pm:1225
+#: diskdrake/interactive.pm:1232
 #, c-format
 msgid ""
 "\n"
@@ -2882,7 +2894,7 @@ msgstr ""
 "partição Driver, você provavelmente\n"
 "não deveria mexer nela.\n"
 
-#: diskdrake/interactive.pm:1228
+#: diskdrake/interactive.pm:1235
 #, c-format
 msgid ""
 "\n"
@@ -2895,73 +2907,73 @@ msgstr ""
 "Bootstrap é para o\n"
 "dual boot do seu sistema.\n"
 
-#: diskdrake/interactive.pm:1245
+#: diskdrake/interactive.pm:1252
 #, c-format
 msgid "Read-only"
 msgstr "Somente leitura"
 
-#: diskdrake/interactive.pm:1246
+#: diskdrake/interactive.pm:1253
 #, c-format
 msgid "Size: %s\n"
 msgstr "Tamanho: %s\n"
 
-#: diskdrake/interactive.pm:1247
+#: diskdrake/interactive.pm:1254
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometria: %s cilindros, %s cabeças, %s setores\n"
 
-#: diskdrake/interactive.pm:1248
+#: diskdrake/interactive.pm:1255
 #, c-format
 msgid "Info: "
 msgstr "Informação: "
 
-#: diskdrake/interactive.pm:1249
+#: diskdrake/interactive.pm:1256
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Discos LVM %s\n"
 
-#: diskdrake/interactive.pm:1250
+#: diskdrake/interactive.pm:1257
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Tipo da tabela de partição: %s\n"
 
-#: diskdrake/interactive.pm:1251
+#: diskdrake/interactive.pm:1258
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "no barramento %d id %d\n"
 
-#: diskdrake/interactive.pm:1294
+#: diskdrake/interactive.pm:1301
 #, c-format
 msgid "Filesystem encryption key"
 msgstr "Chave criptográfica do sistema de arquivos"
 
-#: diskdrake/interactive.pm:1295
+#: diskdrake/interactive.pm:1302
 #, c-format
 msgid "Choose your filesystem encryption key"
 msgstr "Escolha a sua chave criptográfica do sistema de arquivos"
 
-#: diskdrake/interactive.pm:1298
+#: diskdrake/interactive.pm:1305
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Essa chave é muito simples (deve ter ao menos %d caracteres)"
 
-#: diskdrake/interactive.pm:1299
+#: diskdrake/interactive.pm:1306
 #, c-format
 msgid "The encryption keys do not match"
 msgstr "As chaves criptográficas não conferem"
 
-#: diskdrake/interactive.pm:1302 network/netconnect.pm:1013
+#: diskdrake/interactive.pm:1309 network/netconnect.pm:1013
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
 msgstr "Chave criptográfica"
 
-#: diskdrake/interactive.pm:1303
+#: diskdrake/interactive.pm:1310
 #, c-format
 msgid "Encryption key (again)"
 msgstr "Chave criptográfica (novamente)"
 
-#: diskdrake/interactive.pm:1304 standalone/drakvpn:1017
+#: diskdrake/interactive.pm:1311 standalone/drakvpn:1017
 #: standalone/drakvpn:1102
 #, c-format
 msgid "Encryption algorithm"
@@ -3625,9 +3637,9 @@ msgstr "Resolução de problemas"
 #: standalone/drakTermServ:325 standalone/drakTermServ:1135
 #: standalone/drakTermServ:1196 standalone/drakTermServ:1861
 #: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:125
-#: standalone/drakclock:224 standalone/drakconnect:969
-#: standalone/drakfloppy:291 standalone/drakups:27 standalone/harddrake2:478
-#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#: standalone/drakclock:224 standalone/drakconnect:969 standalone/drakups:27
+#: standalone/harddrake2:478 standalone/scannerdrake:51
+#: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "Aviso"
@@ -7654,21 +7666,23 @@ msgid "Choose a file"
 msgstr "Escolher o arquivo"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakbackup:1514
-#: standalone/drakfont:656 standalone/drakroam:218 standalone/drakups:301
-#: standalone/drakups:361 standalone/drakups:381 standalone/drakvpn:319
-#: standalone/drakvpn:680
+#: standalone/drakfont:656 standalone/drakhosts:223 standalone/draknfs:347
+#: standalone/drakroam:218 standalone/drakups:301 standalone/drakups:361
+#: standalone/drakups:381 standalone/drakvpn:319 standalone/drakvpn:680
 #, c-format
 msgid "Add"
 msgstr "Adicionar"
 
-#: interactive.pm:317 interactive/gtk.pm:505
+#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:230
+#: standalone/draknfs:354
 #, c-format
 msgid "Modify"
 msgstr "Modificar"
 
-#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakroam:202
-#: standalone/drakups:303 standalone/drakups:363 standalone/drakups:383
-#: standalone/drakvpn:319 standalone/drakvpn:680
+#: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:238
+#: standalone/draknfs:362 standalone/drakroam:202 standalone/drakups:303
+#: standalone/drakups:363 standalone/drakups:383 standalone/drakvpn:319
+#: standalone/drakvpn:680
 #, c-format
 msgid "Remove"
 msgstr "Remover"
@@ -9728,17 +9742,22 @@ msgstr ", "
 msgid "Welcome to %s"
 msgstr "Bem-vindo a %s"
 
-#: lvm.pm:130
+#: lvm.pm:83
+#, c-format
+msgid "Moving used physical extents to other physical volumes failed"
+msgstr ""
+
+#: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
 msgstr ""
 
-#: lvm.pm:139
+#: lvm.pm:145
 #, c-format
 msgid "Remove the logical volumes first\n"
 msgstr "Remova os volumes lógicos primeiro\n"
 
-#: lvm.pm:172
+#: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
@@ -10780,7 +10799,7 @@ msgstr "Parâmetros de IP"
 #: network/netconnect.pm:582 network/netconnect.pm:890
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:878
-#: standalone/drakups:286
+#: standalone/drakhosts:192 standalone/drakups:286
 #, c-format
 msgid "IP address"
 msgstr "Endereço IP"
@@ -11286,7 +11305,7 @@ msgstr "Você pode também digitar os endereços IP do servidor DNS."
 msgid "Host name (optional)"
 msgstr "Nome da máquina (opcional)"
 
-#: network/netconnect.pm:1159
+#: network/netconnect.pm:1159 standalone/drakhosts:192
 #, c-format
 msgid "Host name"
 msgstr "Nome da máquina"
@@ -18873,7 +18892,9 @@ msgstr ""
 msgid "Configuration changed - restart clusternfs/dhcpd?"
 msgstr "Configuração modificada - reiniciar clusternfs/dhcpd?"
 
-#: standalone/drakautoinst:38
+#: standalone/drakautoinst:38 standalone/drakhosts:116
+#: standalone/drakhosts:123 standalone/draknfs:38 standalone/draknfs:74
+#: standalone/draknfs:244
 #, c-format
 msgid "Error!"
 msgstr "Erro!"
@@ -19880,7 +19901,7 @@ msgstr "Onde"
 msgid "When"
 msgstr "Quando"
 
-#: standalone/drakbackup:2271
+#: standalone/drakbackup:2271 standalone/draknfs:230
 #, c-format
 msgid "More Options"
 msgstr "Mais Opções"
@@ -20614,21 +20635,21 @@ msgstr ""
 msgid "Drakbackup"
 msgstr "Drakbackup"
 
-#: standalone/drakboot:76 standalone/drakfloppy:47 standalone/harddrake2:190
-#: standalone/harddrake2:191 standalone/harddrake2:192 standalone/logdrake:69
+#: standalone/drakboot:76 standalone/harddrake2:190 standalone/harddrake2:191
+#: standalone/harddrake2:192 standalone/logdrake:69
 #: standalone/printerdrake:138 standalone/printerdrake:139
 #: standalone/printerdrake:140
 #, c-format
 msgid "/_File"
 msgstr "/_Arquivo"
 
-#: standalone/drakboot:77 standalone/drakfloppy:48 standalone/logdrake:75
+#: standalone/drakboot:77 standalone/logdrake:75
 #, c-format
 msgid "/File/_Quit"
 msgstr "/Arquivo/_Sair"
 
-#: standalone/drakboot:77 standalone/drakfloppy:48 standalone/harddrake2:192
-#: standalone/logdrake:75 standalone/printerdrake:140
+#: standalone/drakboot:77 standalone/harddrake2:192 standalone/logdrake:75
+#: standalone/printerdrake:140
 #, c-format
 msgid "<control>Q"
 msgstr "<control>S"
@@ -20748,7 +20769,7 @@ msgstr "Centro de Controle Mandriva Linux"
 msgid "Synchronization tool"
 msgstr "Ferramenta de sincronização"
 
-#: standalone/drakbug:49 standalone/drakbug:149
+#: standalone/drakbug:49 standalone/drakbug:152
 #, c-format
 msgid "Standalone Tools"
 msgstr "Ferramentas dedicadas"
@@ -20832,7 +20853,7 @@ msgstr "Pacote: "
 msgid "Kernel:"
 msgstr "Kernel:"
 
-#: standalone/drakbug:100
+#: standalone/drakbug:101
 #, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
@@ -20849,17 +20870,17 @@ msgstr ""
 "saída do comando lspci, versão do kernel, e o conteúdo do arquivo /proc/"
 "cpuinfo."
 
-#: standalone/drakbug:106
+#: standalone/drakbug:107
 #, c-format
 msgid "Report"
 msgstr "Enviar"
 
-#: standalone/drakbug:159
+#: standalone/drakbug:162
 #, c-format
 msgid "Not installed"
 msgstr "Não instalado"
 
-#: standalone/drakbug:171
+#: standalone/drakbug:174
 #, c-format
 msgid "Package not installed"
 msgstr "Pacote não instalado"
@@ -21084,7 +21105,7 @@ msgstr "Desabilitar"
 msgid "Media class"
 msgstr "Classe da mídia"
 
-#: standalone/drakconnect:594 standalone/drakfloppy:136
+#: standalone/drakconnect:594
 #, c-format
 msgid "Module name"
 msgstr "Nome do módulo"
@@ -21320,122 +21341,6 @@ msgid ""
 msgstr ""
 "Todos os seus programas serão fechados e você irá perder a sessão corrente. "
 "Você tem certeza de que deseja reinicializar o serviço dm?"
-
-#: standalone/drakfloppy:41
-#, c-format
-msgid "drakfloppy"
-msgstr "drakfloppy"
-
-#: standalone/drakfloppy:78
-#, c-format
-msgid "Boot disk creation"
-msgstr "Criação de discos de boot"
-
-#: standalone/drakfloppy:79
-#, c-format
-msgid "General"
-msgstr "Geral"
-
-#: standalone/drakfloppy:82 standalone/harddrake2:147
-#, c-format
-msgid "Device"
-msgstr "Dispositivo"
-
-#: standalone/drakfloppy:88
-#, c-format
-msgid "Kernel version"
-msgstr "Versão do kernel"
-
-#: standalone/drakfloppy:103
-#, c-format
-msgid "Preferences"
-msgstr "Preferências "
-
-#: standalone/drakfloppy:117
-#, c-format
-msgid "Advanced preferences"
-msgstr "Opções Avançadas"
-
-#: standalone/drakfloppy:136
-#, c-format
-msgid "Size"
-msgstr "Tamanho"
-
-#: standalone/drakfloppy:139
-#, c-format
-msgid "Mkinitrd optional arguments"
-msgstr "Argumentos opcionais mkinitrd"
-
-#: standalone/drakfloppy:141
-#, c-format
-msgid "force"
-msgstr "forçar"
-
-#: standalone/drakfloppy:142
-#, c-format
-msgid "omit raid modules"
-msgstr "omitir módulos raid"
-
-#: standalone/drakfloppy:143
-#, c-format
-msgid "if needed"
-msgstr "se necessário"
-
-#: standalone/drakfloppy:144
-#, c-format
-msgid "omit scsi modules"
-msgstr "omitir módulos scsi"
-
-#: standalone/drakfloppy:147
-#, c-format
-msgid "Add a module"
-msgstr "Adicionar um módulo"
-
-#: standalone/drakfloppy:156
-#, c-format
-msgid "Remove a module"
-msgstr "Remover um módulo"
-
-#: standalone/drakfloppy:291
-#, c-format
-msgid "Be sure a media is present for the device %s"
-msgstr "Certifique-se de que há um disco no dispositivo %s"
-
-#: standalone/drakfloppy:297
-#, c-format
-msgid ""
-"There is no medium or it is write-protected for device %s.\n"
-"Please insert one."
-msgstr ""
-"Não há nenhum disco no dispositivo %s.\n"
-"Por favor insira um disco ou verifique se ele está protegido contra gravação."
-
-#: standalone/drakfloppy:300
-#, c-format
-msgid "Unable to fork: %s"
-msgstr "Não foi possível dividir: %s"
-
-#: standalone/drakfloppy:303
-#, c-format
-msgid "Floppy creation completed"
-msgstr "Criação do disquete finalizada"
-
-#: standalone/drakfloppy:303
-#, c-format
-msgid "The creation of the boot floppy has been successfully completed \n"
-msgstr "A criação do disquete de boot foi terminada com sucesso \n"
-
-#. -PO: Do not alter the <span ..> and </span> tags
-#: standalone/drakfloppy:308
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk:\n"
-"\n"
-"<span foreground=\"Red\"><tt>%s</tt></span>"
-msgstr ""
-"Não foi possível fechar adequadamente o mkbootdisk:\n"
-"\n"
-"<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #: standalone/drakfont:183
 #, c-format
@@ -22092,6 +21997,240 @@ msgid ""
 msgstr ""
 "%s não pode ser exibido. \n"
 "Nenhum tópico de ajuda neste tipo \n"
+
+#: standalone/drakhosts:106
+#, c-format
+msgid "Please %s information"
+msgstr ""
+
+#: standalone/drakhosts:108
+#, c-format
+msgid "IP address:"
+msgstr ""
+
+#: standalone/drakhosts:109
+#, c-format
+msgid "Host name:"
+msgstr ""
+
+#: standalone/drakhosts:110
+#, c-format
+msgid "Host Aliases:"
+msgstr ""
+
+#: standalone/drakhosts:116
+#, c-format
+msgid "Please enter a valid IP address."
+msgstr ""
+
+#: standalone/drakhosts:123
+#, c-format
+msgid "Same IP is already in %s file."
+msgstr ""
+
+#: standalone/drakhosts:192
+#, c-format
+msgid "Host Aliases"
+msgstr ""
+
+#: standalone/drakhosts:227
+#, c-format
+msgid "Failed to add host."
+msgstr ""
+
+#: standalone/drakhosts:234
+#, c-format
+msgid "Failed to Modify host."
+msgstr ""
+
+#: standalone/drakhosts:242
+#, c-format
+msgid "Failed to remove host."
+msgstr ""
+
+#: standalone/draknfs:38
+#, c-format
+msgid "You are not root. Exiting..."
+msgstr ""
+
+#: standalone/draknfs:69
+#, c-format
+msgid "Directory Selection"
+msgstr ""
+
+#: standalone/draknfs:74
+#, c-format
+msgid "Should be a directory."
+msgstr ""
+
+#: standalone/draknfs:103
+#, c-format
+msgid ""
+"NFS clients may be specified in a number of ways:\n"
+"single host: You may specify a host either by an abbreviated name recognized "
+"be the resolver, the fully qualified domain name, or an IP address.\n"
+"\n"
+"netgroups: NIS netgroups may be given as @group.\n"
+"\n"
+"wildcards: machine names may contain the wildcard characters * and ?. For "
+"instance: *.cs.foo.edu  matches  all  hosts  in the domain cs.foo.edu.\n"
+"\n"
+"IP networks:  you can also export directories to all hosts  on  an  IP  "
+"(sub-)network simultaneously. for example, either `/255.255.252.0' or  "
+"`/22'  appended to the network base address result.\n"
+msgstr ""
+
+#: standalone/draknfs:113
+#, c-format
+msgid ""
+"root_squash: map requests from uid/gid 0 to the anonymous uid/gid.\n"
+"\n"
+"no_root_squash: turn off root squashing. This option is mainly useful for "
+"diskless clients.\n"
+"\n"
+"all_squash: map all uids and gids to the anonymous  user. Useful  for  NFS-"
+"exported public FTP directories, news spool directories, etc. The opposite "
+"option is no_all_squash, which is the default  setting.\n"
+"\n"
+"anonuid and anongid: explicitly  set the uid and gid of the anonymous "
+"account.\n"
+msgstr ""
+
+#: standalone/draknfs:122
+#, c-format
+msgid ""
+"secure: this option requires that requests originate on an internet port "
+"less than IPPORT_RESERVED (1024). This option is on by default. To turn it "
+"off, specify insecure.\n"
+"\n"
+"rw: allow both read and write requests on this NFS volume. The default is to "
+"disallow any request which changes the filesystem. This can also be made "
+"explicit by using the ro option.\n"
+"\n"
+"async: allows the NFS server to violate the NFS protocol and reply to "
+"requests before any changes made by that request have been committed to "
+"stable storage (e.g. disc drive).\n"
+msgstr ""
+
+#: standalone/draknfs:167
+#, c-format
+msgid "dir path"
+msgstr ""
+
+#: standalone/draknfs:206
+#, c-format
+msgid "NFS directory"
+msgstr ""
+
+#: standalone/draknfs:208
+#, c-format
+msgid "Directory:"
+msgstr ""
+
+#: standalone/draknfs:211
+#, c-format
+msgid "Host access"
+msgstr ""
+
+#: standalone/draknfs:213
+#, c-format
+msgid "Access:"
+msgstr ""
+
+#: standalone/draknfs:213 standalone/draknfs:218
+#, c-format
+msgid "Help User ID"
+msgstr ""
+
+#: standalone/draknfs:216
+#, c-format
+msgid "User ID Mapping"
+msgstr ""
+
+#: standalone/draknfs:218
+#, c-format
+msgid "User ID:"
+msgstr ""
+
+#: standalone/draknfs:219
+#, c-format
+msgid "anonuid:"
+msgstr ""
+
+#: standalone/draknfs:220
+#, c-format
+msgid "anongid:"
+msgstr ""
+
+#: standalone/draknfs:223 standalone/draknfs:313
+#, c-format
+msgid "General Options"
+msgstr ""
+
+#: standalone/draknfs:225
+#, c-format
+msgid "Force sync:"
+msgstr ""
+
+#: standalone/draknfs:225
+#, c-format
+msgid "Help General options"
+msgstr ""
+
+#: standalone/draknfs:226
+#, c-format
+msgid "port below 1024:"
+msgstr ""
+
+#: standalone/draknfs:227
+#, c-format
+msgid "Read/Write request:"
+msgstr ""
+
+#: standalone/draknfs:232
+#, c-format
+msgid "options:"
+msgstr ""
+
+#: standalone/draknfs:244
+#, c-format
+msgid "Please enter a directory to share."
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "Share Directory"
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "Hosts Wildcard"
+msgstr ""
+
+#: standalone/draknfs:313
+#, c-format
+msgid "More options"
+msgstr ""
+
+#: standalone/draknfs:351
+#, c-format
+msgid "Failed to add NFS share."
+msgstr ""
+
+#: standalone/draknfs:358
+#, c-format
+msgid "Failed to Modify NFS share."
+msgstr ""
+
+#: standalone/draknfs:366
+#, c-format
+msgid "Failed to remove an NFS share."
+msgstr ""
+
+#: standalone/draknfs:371
+#, c-format
+msgid "Reload NFS server"
+msgstr ""
 
 #: standalone/drakperm:21
 #, c-format
@@ -25266,6 +25405,11 @@ msgstr "Erros"
 msgid "FPU"
 msgstr "FPU"
 
+#: standalone/harddrake2:147
+#, c-format
+msgid "Device"
+msgstr "Dispositivo"
+
 #: standalone/harddrake2:148
 #, c-format
 msgid "Partitions"
@@ -26674,27 +26818,27 @@ msgstr ""
 msgid "Your scanner(s) will not be available on the network."
 msgstr "Seu scanner não estará disponível para a rede."
 
-#: standalone/service_harddrake:105
+#: standalone/service_harddrake:104
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Alguns dispositivos na classe de hardware \"%s\" foram removidos:\n"
 
-#: standalone/service_harddrake:106
+#: standalone/service_harddrake:105
 #, c-format
 msgid "- %s was removed\n"
 msgstr "- %s foi removido\n"
 
-#: standalone/service_harddrake:109
+#: standalone/service_harddrake:108
 #, c-format
 msgid "Some devices were added: %s\n"
 msgstr "Alguns dispositivos foram adicionados: %s\n"
 
-#: standalone/service_harddrake:110
+#: standalone/service_harddrake:109
 #, c-format
 msgid "- %s was added\n"
 msgstr "- %s foi adicionado\n"
 
-#: standalone/service_harddrake:207
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Hardware probing in progress"
 msgstr "Detecção de hardware em progresso"
@@ -26858,6 +27002,77 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Falha na instalação"
+
+#~ msgid "drakfloppy"
+#~ msgstr "drakfloppy"
+
+#~ msgid "Boot disk creation"
+#~ msgstr "Criação de discos de boot"
+
+#~ msgid "General"
+#~ msgstr "Geral"
+
+#~ msgid "Kernel version"
+#~ msgstr "Versão do kernel"
+
+#~ msgid "Preferences"
+#~ msgstr "Preferências "
+
+#~ msgid "Advanced preferences"
+#~ msgstr "Opções Avançadas"
+
+#~ msgid "Size"
+#~ msgstr "Tamanho"
+
+#~ msgid "Mkinitrd optional arguments"
+#~ msgstr "Argumentos opcionais mkinitrd"
+
+#~ msgid "force"
+#~ msgstr "forçar"
+
+#~ msgid "omit raid modules"
+#~ msgstr "omitir módulos raid"
+
+#~ msgid "if needed"
+#~ msgstr "se necessário"
+
+#~ msgid "omit scsi modules"
+#~ msgstr "omitir módulos scsi"
+
+#~ msgid "Add a module"
+#~ msgstr "Adicionar um módulo"
+
+#~ msgid "Remove a module"
+#~ msgstr "Remover um módulo"
+
+#~ msgid "Be sure a media is present for the device %s"
+#~ msgstr "Certifique-se de que há um disco no dispositivo %s"
+
+#~ msgid ""
+#~ "There is no medium or it is write-protected for device %s.\n"
+#~ "Please insert one."
+#~ msgstr ""
+#~ "Não há nenhum disco no dispositivo %s.\n"
+#~ "Por favor insira um disco ou verifique se ele está protegido contra "
+#~ "gravação."
+
+#~ msgid "Unable to fork: %s"
+#~ msgstr "Não foi possível dividir: %s"
+
+#~ msgid "Floppy creation completed"
+#~ msgstr "Criação do disquete finalizada"
+
+#~ msgid "The creation of the boot floppy has been successfully completed \n"
+#~ msgstr "A criação do disquete de boot foi terminada com sucesso \n"
+
+#~ msgid ""
+#~ "Unable to properly close mkbootdisk:\n"
+#~ "\n"
+#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
+#~ msgstr ""
+#~ "Não foi possível fechar adequadamente o mkbootdisk:\n"
+#~ "\n"
+#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #~ msgid "You can not use a LVM Logical Volume for mount point %s"
 #~ msgstr "Você não pode usar um Volume Lógico LVM para o ponto de montagem %s"
