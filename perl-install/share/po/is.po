@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-07-03 07:59+0000\n"
+"PO-Revision-Date: 2005-07-05 09:32+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -2462,7 +2462,7 @@ msgstr "Valkostur: "
 #: diskdrake/interactive.pm:528
 #, c-format
 msgid "Logical volume name "
-msgstr "Nafn lógiskrar disksneiðar"
+msgstr "Nafn sýndardisks"
 
 #: diskdrake/interactive.pm:558
 #, c-format
@@ -3222,6 +3222,8 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"Þú getur ekki notað sýndardisk (LVM) á tengipunkti %s því það spannar "
+"marga raunverulega diska"
 
 #: fsedit.pm:392
 #, c-format
@@ -3231,6 +3233,10 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Þú hefur valið sýndardisk (LVM) sem rót (/).\n"
+"Ræsistjórinn getur ekki notað þetta þegar sýndardiskurinn spannar marga "
+"raunverulega diska.\n"
+"Þú ættir að búa til /boot disksneið fyrst"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -9481,17 +9487,17 @@ msgstr ""
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Raundiskur %s er enn í notkun"
 
 #: lvm.pm:145
 #, c-format
 msgid "Remove the logical volumes first\n"
-msgstr "Fjarlægðu sýndardrifin fyrst\n"
+msgstr "Fjarlægðu sýndardiskana fyrst\n"
 
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
-msgstr ""
+msgstr "Ræsistjórinn getur ekki unnið með /boot sem spannar marga diska"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -16860,7 +16866,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
-msgstr ""
+msgstr "Nýttu þér <b>verðmæta kosti</b> þess að ganga í Mandriva kúbbinn, svo sem:"
 
 #: share/advertising/28.pl:20
 #, c-format
@@ -16868,6 +16874,8 @@ msgid ""
 "\t* <b>Special discounts</b> on products and services of our online store "
 "<b>store.mandriva.com</b>."
 msgstr ""
+"\t* <b>Sérstaka afslætti</b> á vörum og þjónustu í vefverslun okkar "
+"<b>store.mandriva.com</b>."
 
 #: share/advertising/28.pl:21
 #, c-format
@@ -16875,11 +16883,13 @@ msgid ""
 "\t* Access to <b>commercial applications</b> (for example to NVIDIA® or ATI™ "
 "drivers)."
 msgstr ""
+"\t* Aðgang að <b>seldum forritum</b> (til dæmis að NVIDIA® eða ATI™ "
+"reklum)."
 
 #: share/advertising/28.pl:22
 #, c-format
 msgid "\t* Participation in Mandriva Linux <b>user forums</b>."
-msgstr ""
+msgstr "\t* Taktu þátt í <b>vefráðstefnum notenda</b> Mandriva Linux."
 
 #: share/advertising/28.pl:23
 #, c-format
@@ -16887,11 +16897,13 @@ msgid ""
 "\t* <b>Early and privileged access</b>, before public release, to Mandriva "
 "Linux <b>ISO images</b>."
 msgstr ""
+"\t* <b>Forgangs-aðgangur</b> - áður en almenningi er hleypt að - að Mandriva "
+"Linux <b>ISO ímyndum</b>."
 
 #: share/advertising/29.pl:13
 #, c-format
 msgid "<b>Mandriva Online</b>"
-msgstr "<b>Mandriva beint</b>"
+msgstr "<b>Mandriva Online</b>"
 
 #: share/advertising/29.pl:15
 #, c-format
@@ -16899,6 +16911,8 @@ msgid ""
 "<b>Mandriva Online</b> is a new premium service that Mandriva is proud to "
 "offer its customers!"
 msgstr ""
+"<b>Mandriva Online</b> er ný forgangsþjónusta sem Mandriva er stolt "
+"að kynna sínum viðskiptavinum!"
 
 #: share/advertising/29.pl:17
 #, c-format
@@ -16906,11 +16920,13 @@ msgid ""
 "Mandriva Online provides a wide range of valuable services for <b>easily "
 "updating</b> your Mandriva Linux systems:"
 msgstr ""
+"Mandriva Online veitir margs konar verðmæta þjónustu til að <b>auðvelda "
+"upppfærslu</b> á Mandriva Linux kerfunum þínum:"
 
 #: share/advertising/29.pl:18
 #, c-format
 msgid "\t* <b>Perfect</b> system security (automated software updates)."
-msgstr ""
+msgstr "\t* <b>Fullkomið</b> kerfisöryggi (sjálfvirkar hugbúnaðar-uppfærslur)."
 
 #: share/advertising/29.pl:19
 #, c-format
@@ -16918,17 +16934,19 @@ msgid ""
 "\t* <b>Notification</b> of updates (by e-mail or by an applet on the "
 "desktop)."
 msgstr ""
+"\t* <b>Tilkynningar</b> um uppfærslur (með tölvu-pósti eða "
+"auðkennt með táknmynd á skjáborðinu)."
 
 #: share/advertising/29.pl:20
 #, c-format
 msgid "\t* Flexible <b>scheduled</b> updates."
-msgstr ""
+msgstr "\t* Sveigjanlegar <b>áætlaðar</b> uppfærslur."
 
 #: share/advertising/29.pl:21
 #, c-format
 msgid ""
 "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
-msgstr ""
+msgstr "\t* Stjórn á <b>öllum Mandriva Linux kerfunum þínum</b> sem einn notandi."
 
 #: share/advertising/30.pl:13
 #, c-format
@@ -16941,8 +16959,8 @@ msgid ""
 "Do you require <b>assistance?</b> Meet Mandriva's technical experts on "
 "<b>our technical support platform</b> www.mandrivaexpert.com."
 msgstr ""
-"Þarft þú <b>aðstoð?</b> Hafið samband við tæknisérfræðinga Mandriva á "
-"<b>okkar þjónustu-borði</b> www.mandrivaexpert.com."
+"Þarft þú <b>aðstoð?</b> Hafðu samband við tæknisérfræðinga Mandriva á "
+"<b>þjónustu-borði okkar</b> www.mandrivaexpert.com."
 
 #: share/advertising/30.pl:17
 #, c-format
@@ -17016,7 +17034,7 @@ msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
 msgstr ""
-"Tól og tæki til að lesa og senda póst og fréttir (mutt,tin...) og til að "
+"Tól og tæki til að lesa og senda póst, fréttir (mutt,tin...) og til að "
 "flakka á vefnum"
 
 #: share/compssUsers.pl:50
@@ -17132,7 +17150,7 @@ msgstr "DNS/NIS"
 #: share/compssUsers.pl:110
 #, c-format
 msgid "Domain Name and Network Information Server"
-msgstr "Nafnaþjónustur og upplýsingaveitur"
+msgstr "Nafnaþjónustur og net-upplýsingaveitur"
 
 #: share/compssUsers.pl:113
 #, c-format
@@ -17246,7 +17264,7 @@ msgstr "Webmin"
 #: share/compssUsers.pl:192
 #, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Webmin stillingar á fjartengdri tölvu um vef"
+msgstr "Webmin, stillingar á fjartengdri tölvu um vef"
 
 #: share/compssUsers.pl:196
 #, c-format
@@ -17285,6 +17303,19 @@ msgid ""
 "along with this program; if not, write to the Free Software\n"
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 msgstr ""
+"Þetta forrit er frjáls hugbúnaður; þú mátt endurrita hann og/eða breyta\n"
+"samkvæmt skilmálum \"GNU General Public License\" eins og það er\n"
+"útgefið af \"Free Software Foundation;\"; annað hvort útgáfa 2 af leyfinu,\n"
+"eða (að þínu vali) einhver síðari útgáfa.\n"
+"\n"
+"Þessu forriti er dreift í þeirri von að það sé gagnlegt, en ÁN\n"
+"NOKKURAR ÁBYRGÐAR; einnig án óbeinnar SÖLUÁBYRGÐAR eða\n"
+"HÆFNI TIL NOKKURS HLUTAR. Sjá nánar í \"GNU General Public\n"
+"License\" leyfinu.\n"
+"\n"
+"Þú ættir að hafa fengið afrit af \"GNU General Public License\" með\n"
+"þessu forriti; ef ekki, skrifaðu til Free Software Foundation, Inc.,\n"
+"59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 
 #: standalone.pm:40
 #, c-format
@@ -17301,6 +17332,17 @@ msgid ""
 "--help                : show this message.\n"
 "--version             : show version number.\n"
 msgstr ""
+"[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
+"Afrit- og endurheimtunar- forrit\n"
+"\n"
+"--default             : vista sjálfgefnar möppur.\n"
+"--debug               : sýna öll aflúsunarskilaboð.\n"
+"--show-conf           : listi af skrám eða möppum sem á að taka afrit af.\n"
+"--config-info         : útskýra uppsetninga-skrá (fyrir þá sem eru "
+"ekki í X gluggakerfi).\n"
+"--daemon              : nota púka-uppsetningu (keyra í bakgrunni). \n"
+"--help                : sýna þetta.\n"
+"--version             : sýna útgáfunúmer.\n"
 
 #: standalone.pm:52
 #, c-format
@@ -17311,6 +17353,11 @@ msgid ""
 "  --splash          - enable to configure boot theme\n"
 "default mode: offer to configure autologin feature"
 msgstr ""
+"[--boot] [--splash]\n"
+"VALKOSTIR:\n"
+"  --boot            - virkja til að stilla ræsistjóra\n"
+"  --splash          - virkja til að stilla ræsiþema\n"
+"sjálfgefinn hamur: bjóðast til að stilla sjálfkrafa innstimplun"
 
 #: standalone.pm:57
 #, c-format
@@ -17322,6 +17369,12 @@ msgid ""
 "  --report          - program should be one of Mandriva Linux tools\n"
 "  --incident        - program should be one of Mandriva Linux tools"
 msgstr ""
+"[OPTIONS] [PROGRAM_NAME]\n"
+"\n"
+"VALKOSTIR:\n"
+"  --help            - prenta þetta.\n"
+"  --report          - forrit ætti að vera eitt af Mandriva Linux tólunum\n"
+"  --incident        - forrit ætti að vera eitt af Mandriva Linux tólunum"
 
 #: standalone.pm:63
 #, c-format
@@ -17333,6 +17386,12 @@ msgid ""
 "  --internet        - configure internet\n"
 "  --wizard          - like --add"
 msgstr ""
+"[--add]\n"
+"  --add             - ráðgjafi til að\"bæta við nettæki\"\n"
+"  --del             - ráðgjafi til að \"eyða nettæki\"\n"
+"  --skip-wizard     - sýsla með tengingar\n"
+"  --internet        - sýsla með Internetið\n"
+"  --wizard          - sama og --add"
 
 #: standalone.pm:69
 #, c-format
@@ -17351,6 +17410,19 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"\n"
+"Forrit til að flytja inn og sýsla með letur\n"
+"\n"
+"OPTIONS:\n"
+"--windows_import : flytja inn frá öllum tiltækum Windows disksneiðum.\n"
+"--xls_fonts      : sýna öll letur sem eru þegar til frá xls\n"
+"--install        : bæta við hvaða leturskrá eða möppu sem vill.\n"
+"--uninstall      : fjarlægja letur eða möppu með letri.\n"
+"--replace        : skipta út letrum ef þegar til\n"
+"--application    : 0 engin forrit.\n"
+"                 : 1 öll tiltæk forrit studd.\n"
+"                 : nafn forrits, eins og so fyrir staroffice \n"
+"                 : og gs fyrir ghostscript."
 
 #: standalone.pm:84
 #, c-format
@@ -17369,6 +17441,18 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
+"[OPTIONS]...\n"
+"Mandriva Linux Skjámiðlara stillingar\n"
+"--enable         : virkja MTS\n"
+"--disable        : aftengja MTS\n"
+"--start          : ræsa MTS\n"
+"--stop           : stöðva MTS\n"
+"--adduser        : bæta notanda við MTS (þarfnast notandanafns)\n"
+"--deluser        : eyða notanda úr MTS (þarfnast notandanafns)\n"
+"--addclient      : bæta biðlara-vél við MTS (þarfnast MAC addressu, IP, "
+"nbi ímyndar-nafns)\n"
+"--delclient      : eyða biðlara-vél úr MTS (þarfnast MAC addressu, "
+"IP, nbi ímyndar-nafns)"
 
 #: standalone.pm:96
 #, c-format
@@ -17393,6 +17477,15 @@ msgid ""
 "--status : returns 1 if connected 0 otherwise, then exit.\n"
 "--quiet : do not be interactive. To be used with (dis)connect."
 msgstr ""
+"[OPTIONS]\n"
+"Net & Internet tengingar og eftirlitsforrit\n"
+"\n"
+"--defaultintf tæki : sýna sjálfgefið þetta tæki\n"
+"--connect : tengjast Internetinu ef ekki þegar tengdur\n"
+"--disconnect : aftengjast internetinu ef tengdur\n"
+"--force : notað með (dis)connect : þvinga (af)tengingu.\n"
+"--status : skilar 1 ef tengdur, annars 0, hætta síðan.\n"
+"--quiet : ekki gagnvirkt. notist með --(dis)connect."
 
 #: standalone.pm:107
 #, c-format
@@ -17436,8 +17529,8 @@ msgid ""
 "       XFdrake resolution"
 msgstr ""
 " [allt]\n"
-"       XFdrake [--noauto] monitor\n"
-"       XFdrake resolution"
+"       XFdrake [--noauto] skjár\n"
+"       XFdrake upplausn"
 
 #: standalone.pm:146
 #, c-format
@@ -17468,7 +17561,7 @@ msgstr "Þú þarft að skrá þig út og inn aftur til að breytingar taki gild
 #: standalone/drakTermServ:74
 #, c-format
 msgid "Useless without Terminal Server"
-msgstr ""
+msgstr "Gagnslaust án Skjámiðlara"
 
 #: standalone/drakTermServ:106 standalone/drakTermServ:112
 #, c-format
@@ -17609,7 +17702,7 @@ msgstr ""
 #: standalone/drakTermServ:444
 #, c-format
 msgid "Creating net boot images for all kernels"
-msgstr ""
+msgstr "Bý til net-ræsi-ímyndir fyrir alla kjarna"
 
 #: standalone/drakTermServ:445 standalone/drakTermServ:765
 #: standalone/drakTermServ:781
@@ -17625,7 +17718,7 @@ msgstr "Lokið!"
 #: standalone/drakTermServ:466 standalone/drakTermServ:846
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s mistókst"
 
 #: standalone/drakTermServ:475
 #, c-format
@@ -17634,6 +17727,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Ekki nægilegt pláss til að búa til\n"
+"NBIs í %s.\n"
+"Þarfnast: %d MB, Laust: %d MB"
 
 #: standalone/drakTermServ:481
 #, c-format
@@ -17856,7 +17952,7 @@ msgstr "Sjálfgefin kjarnaútgáfa"
 #: standalone/drakTermServ:733
 #, c-format
 msgid "Create PXE images."
-msgstr ""
+msgstr "Búa til PXE ímyndir."
 
 #: standalone/drakTermServ:763
 #, c-format
@@ -17866,12 +17962,12 @@ msgstr ""
 #: standalone/drakTermServ:770
 #, c-format
 msgid "No kernel selected!"
-msgstr ""
+msgstr "Enginn kjarni valinn!"
 
 #: standalone/drakTermServ:773
 #, c-format
 msgid "Build Single NIC -->"
-msgstr ""
+msgstr "Byggja eitt NIC -->"
 
 #: standalone/drakTermServ:777
 #, c-format
@@ -17905,6 +18001,9 @@ msgid ""
 " the one in the Terminal Server database.\n"
 "Delete/re-add the user to the Terminal Server to enable login."
 msgstr ""
+"!!! Táknar að lykilorðið í gagnagrunni kerfisins er annað en\n"
+" það sem er í gagnagrunni skjámiðlarans.\n"
+"Eyddu/bættu við aftur, notanda í grunn skjámiðlara til að virkja innskráningu."
 
 #: standalone/drakTermServ:937
 #, c-format
@@ -17914,7 +18013,7 @@ msgstr "Bæta við notanda -->"
 #: standalone/drakTermServ:943
 #, c-format
 msgid "<-- Del User"
-msgstr ""
+msgstr "<-- Eyða notanda"
 
 #: standalone/drakTermServ:979
 #, c-format
@@ -17924,7 +18023,7 @@ msgstr "tegund: %s"
 #: standalone/drakTermServ:983
 #, c-format
 msgid "local config: %s"
-msgstr ""
+msgstr "staðbundnar stillingar: %s"
 
 #: standalone/drakTermServ:1013
 #, c-format
@@ -17932,13 +18031,13 @@ msgid ""
 "Allow local hardware\n"
 "configuration."
 msgstr ""
-"Leyfa staðbundna\n"
+"Leyfa staðbundnar\n"
 "vélbúnaðarstillingar."
 
 #: standalone/drakTermServ:1022
 #, c-format
 msgid "No net boot images created!"
-msgstr ""
+msgstr "Engar net-ræsi-ímyndir búnar til!"
 
 #: standalone/drakTermServ:1041
 #, c-format
@@ -18008,16 +18107,18 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
+"Þú verður að endurræsa gluggastjórann til að virkja breytingar að fullu.\n"
+"(service dm restart - í stjórnskjá)"
 
 #: standalone/drakTermServ:1180
 #, c-format
 msgid "Thin clients will not work with autologin. Disable autologin?"
-msgstr ""
+msgstr "Biðlararnir munu ekki virka með sjálfvirkri innskráningu. Aftengja sjálfvirka innskráningu?"
 
 #: standalone/drakTermServ:1196
 #, c-format
 msgid "All clients will use %s"
-msgstr ""
+msgstr "Allir biðlarar munu nota %s"
 
 #: standalone/drakTermServ:1230
 #, c-format
@@ -18057,12 +18158,12 @@ msgstr "Nafnaþjónar:"
 #: standalone/drakTermServ:1284
 #, c-format
 msgid "IP Range Start:"
-msgstr ""
+msgstr "Byrjun IP talnarunu:"
 
 #: standalone/drakTermServ:1285
 #, c-format
 msgid "IP Range End:"
-msgstr ""
+msgstr "Endir IP talnarunu:"
 
 #: standalone/drakTermServ:1327
 #, c-format
@@ -18086,6 +18187,9 @@ msgid ""
 "from your running system.\n"
 "You can modify as needed."
 msgstr ""
+"Flest af eftirfarandi gildum var fengið\n"
+"frá þínu kerfi.\n"
+"Þú getur breytt þessu að vild."
 
 #: standalone/drakTermServ:1349
 #, c-format
@@ -18093,11 +18197,13 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Talna-pottur breytilegra IP-talna \n"
+"(Þörf fyrir PXE biðlara):"
 
 #: standalone/drakTermServ:1502
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "Mistókst að skrifa í %s!"
 
 #: standalone/drakTermServ:1514
 #, c-format
@@ -18122,7 +18228,7 @@ msgstr "Ekkert disklingadrif aðgengilegt!"
 #: standalone/drakTermServ:1529
 #, c-format
 msgid "PXE image is %s/%s"
-msgstr ""
+msgstr "PXE ímynd er %s/%s"
 
 #: standalone/drakTermServ:1531
 #, c-format
@@ -18132,22 +18238,22 @@ msgstr "Villa við að skrifa %s/%s"
 #: standalone/drakTermServ:1541
 #, c-format
 msgid "Etherboot ISO image is %s"
-msgstr ""
+msgstr "Etherboot ISO ímynd er %s"
 
 #: standalone/drakTermServ:1543
 #, c-format
 msgid "Something went wrong! - Is mkisofs installed?"
-msgstr ""
+msgstr "Eitthvað mistókst! - Er 'mkisofs' uppsett?"
 
 #: standalone/drakTermServ:1564
 #, c-format
 msgid "Need to create /etc/dhcpd.conf first!"
-msgstr ""
+msgstr "Þarf að búa til /etc/dhcpd.conf fyrst!"
 
 #: standalone/drakTermServ:1723
 #, c-format
 msgid "%s passwd bad in Terminal Server - rewriting...\n"
-msgstr ""
+msgstr "%s lykilorð slæmt í skjámiðlara - endurskrifa...\n"
 
 #: standalone/drakTermServ:1736
 #, c-format
@@ -18157,17 +18263,17 @@ msgstr "%s er ekki notandi..\n"
 #: standalone/drakTermServ:1737
 #, c-format
 msgid "%s is already a Terminal Server user\n"
-msgstr ""
+msgstr "%s er nú þegar notandi skjámiðlara\n"
 
 #: standalone/drakTermServ:1739
 #, c-format
 msgid "Addition of %s to Terminal Server failed!\n"
-msgstr ""
+msgstr "Mistókst að bæta %s við sem notanda skjámiðlara!\n"
 
 #: standalone/drakTermServ:1741
 #, c-format
 msgid "%s added to Terminal Server\n"
-msgstr ""
+msgstr "%s bætt við Skjámiðlara\n"
 
 #: standalone/drakTermServ:1758
 #, c-format
@@ -18182,7 +18288,7 @@ msgstr "%s fannst ekki...\n"
 #: standalone/drakTermServ:1861
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
-msgstr ""
+msgstr "/etc/hosts.allow og /etc/hosts.deny þegar uppsett - ekki breytt"
 
 #: standalone/drakTermServ:2001
 #, c-format
@@ -18199,12 +18305,12 @@ msgstr "Villa!"
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr ""
+msgstr "Ég get ekki fundið ímyndar-skrá `%s'."
 
 #: standalone/drakautoinst:41
 #, c-format
 msgid "Auto Install Configurator"
-msgstr "Uppsetning sjáfvirkrar innsetningar"
+msgstr "Stilling sjáfvirkrar uppsetningar"
 
 #: standalone/drakautoinst:42
 #, c-format
@@ -18221,6 +18327,18 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
+"Þú ert um það bil að fara að setja upp diskling fyrir sjálfvirka uppsetningu. "
+"Þessi aðferð getur verið varasöm og ætti því að meðhöndlast með varúð.\n"
+"\n"
+"Með þessarri aðferð, þá getur þú endurspilað uppsetninguna sem þú "
+"framkvæmdir á þessarri tölvu, og látið spyrja þig gagnvirkt í sumum "
+"þrepum uppsetningarinnar til að geta breytt gildum.\n"
+"\n"
+"Til að gæta hámarksöryggis, þá er disksneiðing og forsneiðing diska "
+"aldrei framkvæmd sjálfkrafa, hvað sem þú velur í uppsetningu á "
+"þessarri tölvu.\n"
+"\n"
+"Ýttu á \"Í lagi\" til að halda áfram."
 
 #: standalone/drakautoinst:60
 #, c-format
@@ -18243,6 +18361,8 @@ msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
 msgstr ""
+"Vinsamlega veldu fyrir hvert þrep hvort þín uppsetning verður endurspiluð "
+"eða hvort hún verður handvirk"
 
 #: standalone/drakautoinst:77 standalone/drakautoinst:78
 #: standalone/drakautoinst:92
@@ -18268,6 +18388,10 @@ msgid ""
 "\n"
 "The parameters of the auto-install are available in the sections on the left"
 msgstr ""
+"\n"
+"Velkomin(n).\n"
+"\n"
+"Gildi sjálfvirkrar uppsetningar eru tiltæk í svæðunum til vinstri"
 
 #: standalone/drakautoinst:251
 #, c-format
@@ -18275,6 +18399,8 @@ msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
 msgstr ""
+"Sjálfvirkur uppsetningar-disklingur hefur verið búinn til.\n"
+"Þú getur nú endurspilað uppsetninguna þína."
 
 #: standalone/drakautoinst:287
 #, c-format
@@ -18297,6 +18423,8 @@ msgid ""
 "Expect is an extension to the TCL scripting language that allows interactive "
 "sessions without user intervention."
 msgstr ""
+"Expect er viðbót við TCL skriftu-forritunarmálið sem leyfir gagnvirkar "
+"lotur án afskipta notanda."
 
 #: standalone/drakbackup:154
 #, c-format
@@ -18309,8 +18437,8 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
-"Ef þú tilgreinir marglotu CD, þá mun aðeins fyrsta skrift forsníða diskinn. "
-"Annars verður diskurinn forsniðinn við hvert afrit."
+"Ef þú tilgreinir marglotu geisla-disk, þá mun aðeins fyrsta skrift forsníða "
+"diskinn. Annars verður diskurinn forsniðinn við hvert afrit."
 
 #: standalone/drakbackup:156
 #, c-format
@@ -18404,7 +18532,7 @@ msgstr "Enginn miðill valinn fyrir cron aðgerð."
 #: standalone/drakbackup:331
 #, c-format
 msgid "No interval selected for cron operation."
-msgstr ""
+msgstr "Ekkert bil valið fyrir cron aðgerð."
 
 #: standalone/drakbackup:378
 #, c-format
@@ -18414,7 +18542,7 @@ msgstr ""
 #: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
+msgstr "\"%s\" er hvorki gilt netfang né notandanafn á þessarri vél!"
 
 #: standalone/drakbackup:469 standalone/logdrake:442
 #, c-format
@@ -18422,21 +18550,23 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
+"\"%s\" er notandi á þessarri vél, en þú hefur ekki valið staðbundna smtp "
+"þjónustu, svo þú verður að nota fullt netfang!"
 
 #: standalone/drakbackup:478
 #, c-format
 msgid "Valid user list changed, rewriting config file."
-msgstr ""
+msgstr "Notendalisti hefur breyst, endurskrifa uppsetningasrká."
 
 #: standalone/drakbackup:480
 #, c-format
 msgid "Old user list:\n"
-msgstr ""
+msgstr "Gamli notendalistinn:\n"
 
 #: standalone/drakbackup:482
 #, c-format
 msgid "New user list:\n"
-msgstr ""
+msgstr "Nýji notendalistinn:\n"
 
 #: standalone/drakbackup:511
 #, c-format
@@ -18444,6 +18574,8 @@ msgid ""
 "\n"
 "                      DrakBackup Report \n"
 msgstr ""
+"\n"
+"                      DrakBackup skýrsla \n"
 
 #: standalone/drakbackup:512
 #, c-format
@@ -18451,6 +18583,8 @@ msgid ""
 "\n"
 "                      DrakBackup Daemon Report\n"
 msgstr ""
+"\n"
+"                      DrakBackup Bakvinnslu-Skýrsla\n"
 
 #: standalone/drakbackup:518
 #, c-format
@@ -18460,6 +18594,10 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"                    DrakBackup Ítar-skýrsla\n"
+"\n"
+"\n"
 
 #: standalone/drakbackup:543 standalone/drakbackup:614
 #: standalone/drakbackup:670
@@ -18475,11 +18613,15 @@ msgid ""
 "If you've already done this process you'll probably\n"
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
+"%s er til, eyða?\n"
+"\n"
+"Ef þú hefur þegar framkvæmt þessa aðgerð þá verður þú sennilega\n"
+" að eyða færslunni úr authorized_keys á miðlaranum."
 
 #: standalone/drakbackup:605
 #, c-format
 msgid "This may take a moment to generate the keys."
-msgstr ""
+msgstr "Það mun taka smástund að búa til lyklana."
 
 #: standalone/drakbackup:612
 #, c-format
@@ -18489,7 +18631,7 @@ msgstr "Get ekki ræst %s."
 #: standalone/drakbackup:629
 #, c-format
 msgid "No password prompt on %s at port %s"
-msgstr ""
+msgstr "Ekki beðið um lykilorð á %s á gátt %s"
 
 #: standalone/drakbackup:630
 #, c-format
@@ -18499,7 +18641,7 @@ msgstr "Rangt lykilorð á %s"
 #: standalone/drakbackup:631
 #, c-format
 msgid "Permission denied transferring %s to %s"
-msgstr ""
+msgstr "Beiðni hafnað um flutning frá %s til %s"
 
 #: standalone/drakbackup:632
 #, c-format
@@ -18509,7 +18651,7 @@ msgstr "Finn ekki %s á %s"
 #: standalone/drakbackup:636
 #, c-format
 msgid "%s not responding"
-msgstr ""
+msgstr "%s svarar ekki"
 
 #: standalone/drakbackup:640
 #, c-format
@@ -18521,31 +18663,37 @@ msgid ""
 "\n"
 "without being prompted for a password."
 msgstr ""
+"Flutningur tókst eðlilega\n"
+"Þú vilt kannski staðfesta að þú getir skráð þig inn á miðlara með:\n"
+"\n"
+"ssh -i %s %s@%s\n"
+"\n"
+"án þess að vera beðinn um lykilorð."
 
 #: standalone/drakbackup:690
 #, c-format
 msgid "No CD-R/DVD-R in drive!"
-msgstr ""
+msgstr "Ekkert CD-R/DVD-R í drifi!"
 
 #: standalone/drakbackup:694
 #, c-format
 msgid "Does not appear to be recordable media!"
-msgstr ""
+msgstr "Þetta lítur ekki út fyrir að vera skrifanlegur miðill!"
 
 #: standalone/drakbackup:699
 #, c-format
 msgid "Not erasable media!"
-msgstr ""
+msgstr "Ekki hægt að þurrka út á miðli!"
 
 #: standalone/drakbackup:741
 #, c-format
 msgid "This may take a moment to erase the media."
-msgstr ""
+msgstr "Það getur tekið smástund að þurrka út miðil."
 
 #: standalone/drakbackup:799
 #, c-format
 msgid "Permission problem accessing CD."
-msgstr ""
+msgstr "Aðgangs-heimildar vandræði á geisladisk."
 
 #: standalone/drakbackup:826
 #, c-format
@@ -18558,6 +18706,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"Afritunarkvóti meir en fullnotaður!\n"
+"%d MB notuð en %d MB frátekin."
 
 #: standalone/drakbackup:951 standalone/drakbackup:983
 #, c-format
@@ -18582,12 +18732,12 @@ msgstr "Afrita aðrar skrár..."
 #: standalone/drakbackup:1058
 #, c-format
 msgid "Hard Disk Backup Progress..."
-msgstr ""
+msgstr "Frramvinda diskafritunar..."
 
 #: standalone/drakbackup:1063
 #, c-format
 msgid "No changes to backup!"
-msgstr ""
+msgstr "Engar breytingar til að afrita!"
 
 #: standalone/drakbackup:1080 standalone/drakbackup:1103
 #, c-format
@@ -18607,17 +18757,20 @@ msgid ""
 " FTP connection problem: It was not possible to send your backup files by "
 "FTP.\n"
 msgstr ""
+"\n"
+" FTP tengivandamál: Það var ekki mögulegt að senda afritunarskrárnar með "
+"FTP.\n"
 
 #: standalone/drakbackup:1090
 #, c-format
 msgid ""
 "Error during sending file via FTP. Please correct your FTP configuration."
-msgstr ""
+msgstr "Villa við sendingu skráa um FTP. Vinsamlega leiðréttið FTP uppsetninguna."
 
 #: standalone/drakbackup:1092
 #, c-format
 msgid "file list sent by FTP: %s\n"
-msgstr ""
+msgstr "skráarlisti sendur um FTP: %s\n"
 
 #: standalone/drakbackup:1108
 #, c-format
@@ -18626,6 +18779,9 @@ msgid ""
 "Drakbackup activities via CD:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aðgerðir um CD:\n"
+"\n"
 
 #: standalone/drakbackup:1113
 #, c-format
@@ -18634,11 +18790,14 @@ msgid ""
 "Drakbackup activities via tape:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aðgerðir um segulband:\n"
+"\n"
 
 #: standalone/drakbackup:1122
 #, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr ""
+msgstr "Villa við að senda póst. Afritunarskýrsla var ekki send."
 
 #: standalone/drakbackup:1123
 #, c-format
@@ -18648,7 +18807,7 @@ msgstr " Villa við sendingu pósts. \n"
 #: standalone/drakbackup:1153
 #, c-format
 msgid "Can not create catalog!"
-msgstr ""
+msgstr "Get ekki búið til skráalista!"
 
 #: standalone/drakbackup:1394
 #, c-format
@@ -18656,40 +18815,42 @@ msgid ""
 "\n"
 "Please check all options that you need.\n"
 msgstr ""
+"\n"
+"Vinsamlega krossaðu við alla valkosti sem þú þarfnast.\n"
 
 #: standalone/drakbackup:1395
 #, c-format
 msgid ""
 "These options can backup and restore all files in your /etc directory.\n"
-msgstr ""
+msgstr "Þessir valkostir geta afritað og endurheimt allar skrár í /etc möppunni.\n"
 
 #: standalone/drakbackup:1396
 #, c-format
 msgid "Backup your System files. (/etc directory)"
-msgstr ""
+msgstr "Afrita kerfisskrárnar. (/etc mappa)"
 
 #: standalone/drakbackup:1397 standalone/drakbackup:1461
 #: standalone/drakbackup:1527
 #, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr ""
+msgstr "Nota viðbótar/mismuna afrit (ekki yfirskrifa eldri afrit)"
 
 #: standalone/drakbackup:1399 standalone/drakbackup:1463
 #: standalone/drakbackup:1529
 #, c-format
 msgid "Use Incremental Backups"
-msgstr ""
+msgstr "Nota viðbótarafrit"
 
 #: standalone/drakbackup:1399 standalone/drakbackup:1463
 #: standalone/drakbackup:1529
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Nota mismunarafrit"
 
 #: standalone/drakbackup:1401
 #, c-format
 msgid "Do not include critical files (passwd, group, fstab)"
-msgstr ""
+msgstr "Innifela ekki krítískar skrár (passwd, group, fstab)"
 
 #: standalone/drakbackup:1402
 #, c-format
@@ -18703,17 +18864,17 @@ msgstr ""
 #: standalone/drakbackup:1433
 #, c-format
 msgid "Please check all users that you want to include in your backup."
-msgstr ""
+msgstr "Vinsamlega krossaðu við alla notendur sem þú vilt afrita skrár frá."
 
 #: standalone/drakbackup:1460
 #, c-format
 msgid "Do not include the browser cache"
-msgstr ""
+msgstr "Ekki innifela disk-flýtiminni vafra"
 
 #: standalone/drakbackup:1514
 #, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr ""
+msgstr "Veldu skrár eða möppur og smelltu á 'Í lagi'"
 
 #: standalone/drakbackup:1515 standalone/drakfont:657
 #, c-format
@@ -18738,12 +18899,12 @@ msgstr "Net aðferð:"
 #: standalone/drakbackup:1604
 #, c-format
 msgid "Use Expect for SSH"
-msgstr ""
+msgstr "Nota Expect fyrir SSH"
 
 #: standalone/drakbackup:1605
 #, c-format
 msgid "Create/Transfer backup keys for SSH"
-msgstr ""
+msgstr "Búa til/Flytja dulritunarlykla fyrir SSH"
 
 #: standalone/drakbackup:1607
 #, c-format
@@ -18753,7 +18914,7 @@ msgstr "Flytja núna"
 #: standalone/drakbackup:1609
 #, c-format
 msgid "Other (not drakbackup) keys in place already"
-msgstr ""
+msgstr "Aðrir (ekki drakbackup) lyklar eru þegar til staðar"
 
 #: standalone/drakbackup:1612
 #, c-format
@@ -18763,7 +18924,7 @@ msgstr "Heiti vélar eða IP."
 #: standalone/drakbackup:1617
 #, c-format
 msgid "Directory (or module) to put the backup on this host."
-msgstr ""
+msgstr "Mappa (eða eining) sem á að setja afrit á þessarri vél."
 
 #: standalone/drakbackup:1629
 #, c-format
@@ -18773,7 +18934,7 @@ msgstr "Muna þetta lykilorð"
 #: standalone/drakbackup:1645
 #, c-format
 msgid "Need hostname, username and password!"
-msgstr ""
+msgstr "Vantar vélarnafn, notendanafn og lykilorð!"
 
 #: standalone/drakbackup:1736
 #, c-format
@@ -18798,7 +18959,7 @@ msgstr "Viðbætanleg CD-lota"
 #: standalone/drakbackup:1753
 #, c-format
 msgid "CDRW media"
-msgstr ""
+msgstr "CDRW miðill"
 
 #: standalone/drakbackup:1759
 #, c-format
@@ -18813,7 +18974,7 @@ msgstr " Eyða núna "
 #: standalone/drakbackup:1766
 #, c-format
 msgid "DVD+RW media"
-msgstr ""
+msgstr "DVD+RW miðill"
 
 #: standalone/drakbackup:1768
 #, c-format
@@ -18838,12 +18999,12 @@ msgstr "Nota segulband til afritatöku"
 #: standalone/drakbackup:1846
 #, c-format
 msgid "Device name to use for backup"
-msgstr ""
+msgstr "Tækisnafn sem á að nota til afritunar"
 
 #: standalone/drakbackup:1852
 #, c-format
 msgid "Backup directly to tape"
-msgstr ""
+msgstr "Afrita beint á segulband"
 
 #: standalone/drakbackup:1858
 #, c-format
@@ -18858,7 +19019,7 @@ msgstr "Þurka út af segulbandi fyrir afritun"
 #: standalone/drakbackup:1870
 #, c-format
 msgid "Eject tape after the backup"
-msgstr ""
+msgstr "Skjóta út segulbandi eftir afritun"
 
 #: standalone/drakbackup:1946
 #, c-format
@@ -18876,6 +19037,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"Heildardiskpláss\n"
+" frátekið fyrir afrit (MB)"
 
 #: standalone/drakbackup:1959
 #, c-format
@@ -18884,6 +19047,9 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"Eyða viðbótar eða mismunar afritum\n"
+" eldri en N daga gömlum (0 þýðir að\n"
+" vista öll afrit) til að spara pláss"
 
 #: standalone/drakbackup:2026
 #, c-format
@@ -18893,7 +19059,7 @@ msgstr "CDROM / DVDROM"
 #: standalone/drakbackup:2031
 #, c-format
 msgid "HardDrive / NFS"
-msgstr ""
+msgstr "Diskur / NFS"
 
 #: standalone/drakbackup:2046 standalone/drakbackup:2047
 #: standalone/drakbackup:2052
@@ -18933,17 +19099,17 @@ msgstr "janúar"
 #: standalone/drakbackup:2060
 #, c-format
 msgid "February"
-msgstr "Febrúar"
+msgstr "febrúar"
 
 #: standalone/drakbackup:2060
 #, c-format
 msgid "March"
-msgstr "Mars"
+msgstr "mars"
 
 #: standalone/drakbackup:2061
 #, c-format
 msgid "April"
-msgstr "Apríl"
+msgstr "apríl"
 
 #: standalone/drakbackup:2061
 #, c-format
@@ -18953,37 +19119,37 @@ msgstr "maí"
 #: standalone/drakbackup:2061
 #, c-format
 msgid "June"
-msgstr "Júní"
+msgstr "júní"
 
 #: standalone/drakbackup:2061
 #, c-format
 msgid "July"
-msgstr "Júlí"
+msgstr "júlí"
 
 #: standalone/drakbackup:2061
 #, c-format
 msgid "August"
-msgstr "Ágúst"
+msgstr "ágúst"
 
 #: standalone/drakbackup:2061
 #, c-format
 msgid "September"
-msgstr "September"
+msgstr "september"
 
 #: standalone/drakbackup:2062
 #, c-format
 msgid "October"
-msgstr "Október"
+msgstr "október"
 
 #: standalone/drakbackup:2062
 #, c-format
 msgid "November"
-msgstr "Nóvember"
+msgstr "nóvember"
 
 #: standalone/drakbackup:2062
 #, c-format
 msgid "December"
-msgstr "Desember"
+msgstr "desember"
 
 #: standalone/drakbackup:2065
 #, c-format
@@ -19003,12 +19169,12 @@ msgstr "þriðjudagur"
 #: standalone/drakbackup:2066
 #, c-format
 msgid "Wednesday"
-msgstr "Miðvikudagur"
+msgstr "miðvikudagur"
 
 #: standalone/drakbackup:2066
 #, c-format
 msgid "Thursday"
-msgstr "Fimmtudagur"
+msgstr "fimmtudagur"
 
 #: standalone/drakbackup:2066
 #, c-format
@@ -19023,7 +19189,7 @@ msgstr "laugardagur"
 #: standalone/drakbackup:2098
 #, c-format
 msgid "Use daemon"
-msgstr "Nota þjón"
+msgstr "Nota þjónustu"
 
 #: standalone/drakbackup:2102
 #, c-format
@@ -19033,7 +19199,7 @@ msgstr "Vinsamlega veldu tímabil milli afrita"
 #: standalone/drakbackup:2108
 #, c-format
 msgid "Custom setup/crontab entry:"
-msgstr ""
+msgstr "Sérsniðin setup/crontab færsla:"
 
 #: standalone/drakbackup:2113
 #, c-format
@@ -19068,18 +19234,18 @@ msgstr "Veldu miðil fyrir afrit."
 #: standalone/drakbackup:2141
 #, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr ""
+msgstr "Vinsamlega staðfestu að cron þjónustan sé innifalin í þínum þjónustum."
 
 #: standalone/drakbackup:2142
 #, c-format
 msgid ""
 "If your machine is not on all the time, you might want to install anacron."
-msgstr ""
+msgstr "Ef ekki er alltaf kveikt á vélinni þinni, þá ættir þú að setja upp anacron."
 
 #: standalone/drakbackup:2143
 #, c-format
 msgid "Note that currently all 'net' media also use the hard drive."
-msgstr ""
+msgstr "Athugið að nú nota allir 'net' miðlar einnig diskinn."
 
 #: standalone/drakbackup:2190
 #, c-format
@@ -19094,12 +19260,12 @@ msgstr "Nota .backupignore skrár"
 #: standalone/drakbackup:2196
 #, c-format
 msgid "Send mail report after each backup to:"
-msgstr ""
+msgstr "Senda skýrslu í pósti eftir hverja afritun til:"
 
 #: standalone/drakbackup:2202
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Svar-netfang fyrir sendan póst:"
 
 #: standalone/drakbackup:2208
 #, c-format
@@ -19109,7 +19275,7 @@ msgstr "SMTP miðlari fyrir póst:"
 #: standalone/drakbackup:2213
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
-msgstr ""
+msgstr "Eyða tar skrám af diski eftir skrift á aðra miðla."
 
 #: standalone/drakbackup:2256
 #, c-format
@@ -19134,7 +19300,7 @@ msgstr "Fleiri valkostir"
 #: standalone/drakbackup:2284
 #, c-format
 msgid "Backup destination not configured..."
-msgstr "Áfangastaður afrits ekki skilreindur..."
+msgstr "Áfangastaður afrits ekki skilgreindur..."
 
 #: standalone/drakbackup:2304 standalone/drakbackup:4228
 #, c-format
@@ -19149,12 +19315,12 @@ msgstr "Veldu hvert þú vilt taka afrit"
 #: standalone/drakbackup:2323
 #, c-format
 msgid "Hard Drive used to prepare backups for all media"
-msgstr ""
+msgstr "Diskur notaður til að forvinna afrit fyrir alla miðla"
 
 #: standalone/drakbackup:2323
 #, c-format
 msgid "Across Network"
-msgstr "yfir net"
+msgstr "Yfir net"
 
 #: standalone/drakbackup:2323
 #, c-format
@@ -19164,12 +19330,12 @@ msgstr "Á geisladisk"
 #: standalone/drakbackup:2323
 #, c-format
 msgid "On Tape Device"
-msgstr "Áá segulband"
+msgstr "Á segulband"
 
 #: standalone/drakbackup:2369
 #, c-format
 msgid "Backup Users"
-msgstr ""
+msgstr "Afrita notendur"
 
 #: standalone/drakbackup:2370
 #, c-format
@@ -19189,7 +19355,7 @@ msgstr "Afrita kerfi"
 #: standalone/drakbackup:2386
 #, c-format
 msgid "Select user manually"
-msgstr ""
+msgstr "Velja notendur handvirkt"
 
 #: standalone/drakbackup:2415
 #, c-format
@@ -19202,6 +19368,8 @@ msgid ""
 "\n"
 "Backup Sources: \n"
 msgstr ""
+"\n"
+"Afritunar-uppsprettur: \n"
 
 #: standalone/drakbackup:2488
 #, c-format
@@ -19209,6 +19377,8 @@ msgid ""
 "\n"
 "- System Files:\n"
 msgstr ""
+"\n"
+"- Kerfisskrár:\n"
 
 #: standalone/drakbackup:2490
 #, c-format
@@ -19216,6 +19386,8 @@ msgid ""
 "\n"
 "- User Files:\n"
 msgstr ""
+"\n"
+"- Notandaskrár:\n"
 
 #: standalone/drakbackup:2492
 #, c-format
@@ -19223,6 +19395,8 @@ msgid ""
 "\n"
 "- Other Files:\n"
 msgstr ""
+"\n"
+"- Aðrar skrár:\n"
 
 #: standalone/drakbackup:2494
 #, c-format
@@ -19230,16 +19404,18 @@ msgid ""
 "\n"
 "- Save on Hard drive on path: %s\n"
 msgstr ""
+"\n"
+"- Vista á hörðum disk eða á slóð: %s\n"
 
 #: standalone/drakbackup:2495
 #, c-format
 msgid "\tLimit disk usage to %s MB\n"
-msgstr ""
+msgstr "\tTakmarka disknotkun við %s MB\n"
 
 #: standalone/drakbackup:2496
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\tEyða afritum eldri en %s dag(a)\n"
 
 #: standalone/drakbackup:2499
 #, c-format
@@ -19247,6 +19423,8 @@ msgid ""
 "\n"
 "- Delete hard drive tar files after backup.\n"
 msgstr ""
+"\n"
+"- Eyða safnskrám af diski eftir afritun.\n"
 
 #: standalone/drakbackup:2504
 #, c-format
@@ -19254,6 +19432,8 @@ msgid ""
 "\n"
 "- Burn to CD"
 msgstr ""
+"\n"
+"- Brenna á geisladisk"
 
 #: standalone/drakbackup:2505
 #, c-format
@@ -19268,7 +19448,7 @@ msgstr " á tæki: %s"
 #: standalone/drakbackup:2507
 #, c-format
 msgid " (multi-session)"
-msgstr ""
+msgstr " (marg-lotu)"
 
 #: standalone/drakbackup:2508
 #, c-format
@@ -19276,6 +19456,8 @@ msgid ""
 "\n"
 "- Save to Tape on device: %s"
 msgstr ""
+"\n"
+"- Vista á segulband eða á tæki: %s"
 
 #: standalone/drakbackup:2509
 #, c-format
@@ -19285,7 +19467,7 @@ msgstr "\t\tEyða=%s"
 #: standalone/drakbackup:2511
 #, c-format
 msgid "\tBackup directly to Tape\n"
-msgstr ""
+msgstr "\tAfrita beint á segulband\n"
 
 #: standalone/drakbackup:2513
 #, c-format
@@ -19293,6 +19475,8 @@ msgid ""
 "\n"
 "- Save via %s on host: %s\n"
 msgstr ""
+"\n"
+"- Vista um %s á vél: %s\n"
 
 #: standalone/drakbackup:2514
 #, c-format
@@ -19300,6 +19484,8 @@ msgid ""
 "\t\t user name: %s\n"
 "\t\t on path: %s \n"
 msgstr ""
+"\t\t notendanafn: %s\n"
+"\t\t á slóð: %s \n"
 
 #: standalone/drakbackup:2515
 #, c-format
@@ -19313,17 +19499,17 @@ msgstr ""
 #: standalone/drakbackup:2516
 #, c-format
 msgid "\tDo not include System Files\n"
-msgstr ""
+msgstr "\tEkki innifela kerfisskrár\n"
 
 #: standalone/drakbackup:2518
 #, c-format
 msgid "\tBackups use tar and bzip2\n"
-msgstr ""
+msgstr "\tAfrit nota tar og bzip2\n"
 
 #: standalone/drakbackup:2519
 #, c-format
 msgid "\tBackups use tar and gzip\n"
-msgstr ""
+msgstr "\tAfrit nota tar og gzip\n"
 
 #: standalone/drakbackup:2520
 #, c-format
@@ -19338,17 +19524,17 @@ msgstr "\tNota .backupignore skrár\n"
 #: standalone/drakbackup:2523
 #, c-format
 msgid "\tSend mail to %s\n"
-msgstr ""
+msgstr "\tSenda póst á %s\n"
 
 #: standalone/drakbackup:2524
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tSenda póst frá %s\n"
 
 #: standalone/drakbackup:2525
 #, c-format
 msgid "\tUsing SMTP server %s\n"
-msgstr "\tNota SMTP þjón %s\n"
+msgstr "\tNota SMTP miðlara %s\n"
 
 #: standalone/drakbackup:2527
 #, c-format
@@ -19356,41 +19542,43 @@ msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
+"\n"
+"- Þjónusta, %s um:\n"
 
 #: standalone/drakbackup:2528
 #, c-format
 msgid "\t-Hard drive.\n"
-msgstr ""
+msgstr "\t-Diskur.\n"
 
 #: standalone/drakbackup:2529
 #, c-format
 msgid "\t-CD-R.\n"
-msgstr ""
+msgstr "\t-CD-R.\n"
 
 #: standalone/drakbackup:2530
 #, c-format
 msgid "\t-Tape \n"
-msgstr ""
+msgstr "\t-Band \n"
 
 #: standalone/drakbackup:2531
 #, c-format
 msgid "\t-Network by FTP.\n"
-msgstr ""
+msgstr "\t-Net um FTP.\n"
 
 #: standalone/drakbackup:2532
 #, c-format
 msgid "\t-Network by SSH.\n"
-msgstr ""
+msgstr "\t-Net um SSH.\n"
 
 #: standalone/drakbackup:2533
 #, c-format
 msgid "\t-Network by rsync.\n"
-msgstr ""
+msgstr "\t-Net um rsync.\n"
 
 #: standalone/drakbackup:2535
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr ""
+msgstr "Engar stillingar, vinsamlega smellið á ráðgjafa eða Ítarlegra.\n"
 
 #: standalone/drakbackup:2540
 #, c-format
@@ -19398,6 +19586,8 @@ msgid ""
 "List of data to restore:\n"
 "\n"
 msgstr ""
+"Listi af gögnum sem hægt er að endurheimta:\n"
+"\n"
 
 #: standalone/drakbackup:2542
 #, c-format
@@ -19407,7 +19597,7 @@ msgstr "- Endurheimta kerfisskrár.\n"
 #: standalone/drakbackup:2544 standalone/drakbackup:2554
 #, c-format
 msgid "   - from date: %s %s\n"
-msgstr ""
+msgstr "   - frá dags.: %s %s\n"
 
 #: standalone/drakbackup:2547
 #, c-format
@@ -19436,17 +19626,17 @@ msgstr "Vinsamlega afveldu eða fjarlægðu næst."
 #: standalone/drakbackup:2743
 #, c-format
 msgid "Backup files are corrupted"
-msgstr ""
+msgstr "Afritunarskrár eru skemmdar"
 
 #: standalone/drakbackup:2764
 #, c-format
 msgid "          All of your selected data have been          "
-msgstr ""
+msgstr "          Öll valin gögn hafa verið                   "
 
 #: standalone/drakbackup:2765
 #, c-format
 msgid "          Successfully Restored on %s       "
-msgstr ""
+msgstr "          Tókst að endurheimta á %s         "
 
 #: standalone/drakbackup:2885
 #, c-format
@@ -19456,12 +19646,12 @@ msgstr "         Endurheimta uppsetningu       "
 #: standalone/drakbackup:2913
 #, c-format
 msgid "OK to restore the other files."
-msgstr ""
+msgstr "'Í lagi' til að endurheimta aðrar skrár."
 
 #: standalone/drakbackup:2929
 #, c-format
 msgid "User list to restore (only the most recent date per user is important)"
-msgstr ""
+msgstr "Notandalisti til að enduheimta (aðeins nýjustu gögn notanda eru gild)"
 
 #: standalone/drakbackup:2994
 #, c-format
@@ -19486,7 +19676,7 @@ msgstr "Mappa með afritum"
 #: standalone/drakbackup:3091
 #, c-format
 msgid "Select another media to restore from"
-msgstr ""
+msgstr "Veldu annann miðil sem á að endurheimta frá"
 
 #: standalone/drakbackup:3093
 #, c-format
@@ -19496,7 +19686,7 @@ msgstr "Annar miðill"
 #: standalone/drakbackup:3098
 #, c-format
 msgid "Restore system"
-msgstr "Endurheimta kerfið"
+msgstr "Endurheimta kerfi"
 
 #: standalone/drakbackup:3099
 #, c-format
@@ -19511,7 +19701,7 @@ msgstr "Endurheimta annað"
 #: standalone/drakbackup:3102
 #, c-format
 msgid "Select path to restore (instead of /)"
-msgstr ""
+msgstr "Veldu slóð sem á að endurheimta (í stað /)"
 
 #: standalone/drakbackup:3106 standalone/drakbackup:3388
 #, c-format
@@ -19521,7 +19711,7 @@ msgstr "Endurheimta í möppu"
 #: standalone/drakbackup:3109
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
-msgstr ""
+msgstr "Gera afrit áður en endurheimt (aðeins fyrir viðbótar-afrit.)"
 
 #: standalone/drakbackup:3111
 #, c-format
@@ -19531,12 +19721,12 @@ msgstr "Fjarlægja heimsvæði notanda áður en endurheimt hefst."
 #: standalone/drakbackup:3196
 #, c-format
 msgid "Filename text substring to search for (empty string matches all):"
-msgstr ""
+msgstr "Leita að skrá sem inniheldur eftirfarandi texta í nafni (auður finnur allt):"
 
 #: standalone/drakbackup:3199
 #, c-format
 msgid "Search Backups"
-msgstr ""
+msgstr "Leita í afritum"
 
 #: standalone/drakbackup:3217
 #, c-format
@@ -19546,7 +19736,7 @@ msgstr "Fann enga samsvörun..."
 #: standalone/drakbackup:3221
 #, c-format
 msgid "Restore Selected"
-msgstr "Endurheimta val"
+msgstr "Endurheimta valið"
 
 #: standalone/drakbackup:3356
 #, c-format
@@ -19554,6 +19744,8 @@ msgid ""
 "Click date/time to see backup files.\n"
 "Ctrl-Click files to select multiple files."
 msgstr ""
+"Smelltu dags/tíma til að sjá afritunarskrár.\n"
+"Ctrl-Smelltu á skrár til að velja margar skrár."
 
 #: standalone/drakbackup:3362
 #, c-format
@@ -19561,6 +19753,8 @@ msgid ""
 "Restore Selected\n"
 "Catalog Entry"
 msgstr ""
+"Endurheimta valda\n"
+"yfirlits-færslu"
 
 #: standalone/drakbackup:3371
 #, c-format
@@ -19574,7 +19768,7 @@ msgstr ""
 #: standalone/drakbackup:3448
 #, c-format
 msgid "Backup files not found at %s."
-msgstr "Afrita skrár fundust ekki á %s."
+msgstr "Afritunarskrár fundust ekki á %s."
 
 #: standalone/drakbackup:3461
 #, c-format
@@ -19587,11 +19781,13 @@ msgid ""
 "Insert the CD with volume label %s\n"
 " in the CD drive under mount point /mnt/cdrom"
 msgstr ""
+"Settu inn geisladisk merktan %s\n"
+" í geisladrifið sem tengt er á /mnt/cdrom"
 
 #: standalone/drakbackup:3463
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
-msgstr ""
+msgstr "Ekki réttur geisladiskur. Diskur er merktur %s."
 
 #: standalone/drakbackup:3473
 #, c-format
@@ -19604,11 +19800,13 @@ msgid ""
 "Insert the tape with volume label %s\n"
 " in the tape drive device %s"
 msgstr ""
+"Settu inn segulband merkt %s\n"
+" í bandstöðvar-tæki %s"
 
 #: standalone/drakbackup:3475
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
-msgstr ""
+msgstr "Ekki rétt merkt segulband. Segulband er merkt %s."
 
 #: standalone/drakbackup:3486
 #, c-format
@@ -19618,7 +19816,7 @@ msgstr "Endurheimta um net"
 #: standalone/drakbackup:3486
 #, c-format
 msgid "Restore Via Network Protocol: %s"
-msgstr ""
+msgstr "Endurheimta með samskiptareglu: %s"
 
 #: standalone/drakbackup:3487
 #, c-format
@@ -19628,7 +19826,7 @@ msgstr "Vélarheiti"
 #: standalone/drakbackup:3488
 #, c-format
 msgid "Host Path or Module"
-msgstr ""
+msgstr "Slóð eða einingu"
 
 #: standalone/drakbackup:3495
 #, c-format
@@ -19648,7 +19846,7 @@ msgstr "Þörf er á vélarheiti"
 #: standalone/drakbackup:3509
 #, c-format
 msgid "Path or Module required"
-msgstr ""
+msgstr "Slóð eða einingar er þörf"
 
 #: standalone/drakbackup:3522
 #, c-format
@@ -19658,7 +19856,7 @@ msgstr "Skrár endurheimtar..."
 #: standalone/drakbackup:3525
 #, c-format
 msgid "Restore Failed..."
-msgstr "Endurheimting mistókst..."
+msgstr "Endurheimt mistókst..."
 
 #: standalone/drakbackup:3543
 #, c-format
@@ -19683,12 +19881,12 @@ msgstr "Sérsniðin endurheimt"
 #: standalone/drakbackup:3780 standalone/drakbackup:3829
 #, c-format
 msgid "Restore From Catalog"
-msgstr "Endurheimta frá lista"
+msgstr "Endurheimta frá yfirliti"
 
 #: standalone/drakbackup:3801
 #, c-format
 msgid "Unable to find backups to restore...\n"
-msgstr ""
+msgstr "Get ekki fundið afrit til að endurheimta...\n"
 
 #: standalone/drakbackup:3802
 #, c-format
@@ -19698,12 +19896,12 @@ msgstr "Staðfestið að %s sé rétt slóð"
 #: standalone/drakbackup:3803
 #, c-format
 msgid " and the CD is in the drive"
-msgstr ""
+msgstr " og geisladiskurinn sé í drifinu"
 
 #: standalone/drakbackup:3805
 #, c-format
 msgid "Backups on unmountable media - Use Catalog to restore"
-msgstr ""
+msgstr "Afrit eru á ótengjanlegum miðli - notaðu yfirlit til að endurheimta"
 
 #: standalone/drakbackup:3821
 #, c-format
@@ -19713,7 +19911,7 @@ msgstr "CD á réttum stað - áfram."
 #: standalone/drakbackup:3826
 #, c-format
 msgid "Browse to new restore repository."
-msgstr ""
+msgstr "Flakka á nýjan endurheimtunarstað."
 
 #: standalone/drakbackup:3827
 #, c-format
@@ -19743,7 +19941,7 @@ msgstr "Eftirfarandi pakka þarf að setja inn:\n"
 #: standalone/drakbackup:4122
 #, c-format
 msgid "Please select data to restore..."
-msgstr ""
+msgstr "Vinsamlega veldu gögn til að enduheimta..."
 
 #: standalone/drakbackup:4162
 #, c-format
@@ -19788,12 +19986,12 @@ msgstr "Skoða afritsstillingar."
 #: standalone/drakbackup:4301
 #, c-format
 msgid "Wizard Configuration"
-msgstr "Álfa- uppsetning"
+msgstr "Ráðgjafa uppsetning"
 
 #: standalone/drakbackup:4306
 #, c-format
 msgid "Advanced Configuration"
-msgstr "Ítarlegri uppsetning"
+msgstr "Ítarleg uppsetning"
 
 #: standalone/drakbackup:4311
 #, c-format
@@ -19803,12 +20001,12 @@ msgstr "Skoða stillingar"
 #: standalone/drakbackup:4315
 #, c-format
 msgid "View Last Log"
-msgstr ""
+msgstr "Skoða síðasta annál"
 
 #: standalone/drakbackup:4320
 #, c-format
 msgid "Backup Now"
-msgstr ""
+msgstr "Afrita núna"
 
 #: standalone/drakbackup:4324
 #, c-format
@@ -19816,11 +20014,13 @@ msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
 msgstr ""
+"Engin uppsetningarskrá fannst \n"
+"vinsamlega smelltu á Ráðgjafa eða Ítarleg."
 
 #: standalone/drakbackup:4344 standalone/drakbackup:4347
 #, c-format
 msgid "Drakbackup"
-msgstr ""
+msgstr "Drakbackup"
 
 #: standalone/drakboot:76 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
@@ -19844,17 +20044,17 @@ msgstr "<control>Q"
 #: standalone/drakboot:117
 #, c-format
 msgid "Text only"
-msgstr ""
+msgstr "Aðeins texti"
 
 #: standalone/drakboot:118
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "Mælskt"
 
 #: standalone/drakboot:119
 #, c-format
 msgid "Silent"
-msgstr ""
+msgstr "þögult"
 
 #: standalone/drakboot:126
 #, c-format
@@ -19908,22 +20108,22 @@ msgstr "Sjálfgefið skjáborð"
 #: standalone/drakboot:187
 #, c-format
 msgid "No, I do not want autologin"
-msgstr ""
+msgstr "Nei, ég vill ekki sjálfvirka innstimplun"
 
 #: standalone/drakboot:188
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
-msgstr ""
+msgstr "Já, ég vill sjálfvirka innskráningu með þessum (notanda, skjáborð)"
 
 #: standalone/drakboot:195
 #, c-format
 msgid "System mode"
-msgstr ""
+msgstr "Kerfishamur"
 
 #: standalone/drakboot:198
 #, c-format
 msgid "Launch the graphical environment when your system starts"
-msgstr ""
+msgstr "Ræsa grafískt viðmót þegar kerfi ræsir"
 
 #: standalone/drakboot:264
 #, c-format
@@ -19946,12 +20146,12 @@ msgstr "Mandriva Linux Stjórnborð"
 #: standalone/drakbug:48
 #, c-format
 msgid "Synchronization tool"
-msgstr ""
+msgstr "Samræmingartól"
 
 #: standalone/drakbug:49 standalone/drakbug:152
 #, c-format
 msgid "Standalone Tools"
-msgstr "Sjálfstæð tæki"
+msgstr "Sjálfstæð tól"
 
 #: standalone/drakbug:50
 #, c-format
@@ -19961,7 +20161,7 @@ msgstr "HardDrake"
 #: standalone/drakbug:51
 #, c-format
 msgid "Mandriva Online"
-msgstr "Mandriva beint"
+msgstr "Mandriva Online"
 
 #: standalone/drakbug:52
 #, c-format
@@ -19971,7 +20171,7 @@ msgstr "Menudrake"
 #: standalone/drakbug:53
 #, c-format
 msgid "Msec"
-msgstr "Msek"
+msgstr "Msec"
 
 #: standalone/drakbug:54
 #, c-format
@@ -20001,12 +20201,12 @@ msgstr "Userdrake"
 #: standalone/drakbug:59
 #, c-format
 msgid "Configuration Wizards"
-msgstr "Stilli-álfar"
+msgstr "Stilli-ráðgjafar"
 
 #: standalone/drakbug:81
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr ""
+msgstr "Veldu Mandriva tól:"
 
 #: standalone/drakbug:82
 #, c-format
@@ -20014,6 +20214,8 @@ msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
+"eða forritsnafn\n"
+"(eða fulla slóð):"
 
 #: standalone/drakbug:85
 #, c-format
@@ -20273,7 +20475,7 @@ msgstr "Slökkva"
 #: standalone/drakconnect:593 standalone/harddrake2:50
 #, c-format
 msgid "Media class"
-msgstr ""
+msgstr "Flokkur miðils"
 
 #: standalone/drakconnect:594
 #, c-format
@@ -20524,7 +20726,7 @@ msgstr "Afveljið uppsett letur"
 #: standalone/drakfont:208
 #, c-format
 msgid "parse all fonts"
-msgstr ""
+msgstr "vinna öll letur"
 
 #: standalone/drakfont:210
 #, c-format
@@ -20694,6 +20896,21 @@ msgid ""
 " along with this program; if not, write to the Free Software\n"
 " Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
+"Þetta forrit er frjáls hugbúnaður; þú mátt endurrita hann og/eða breyta\n"
+"samkvæmt skilmálum \"GNU General Public License\" eins og það er\n"
+"útgefið af \"Free Software Foundation;\"; annað hvort útgáfa 2 af leyfinu,\n"
+"eða (að þínu vali) einhver síðari útgáfa.\n"
+"\n"
+"\n"
+"Þessu forriti er dreift í þeirri von að það sé gagnlegt, en ÁN\n"
+"NOKKURAR ÁBYRGÐAR; einnig án óbeinnar SÖLUÁBYRGÐAR eða\n"
+"HÆFNI TIL NOKKURS HLUTAR. Sjá nánar í \"GNU General Public\n"
+"License\" leyfinu.\n"
+"\n"
+"\n"
+"Þú ættir að hafa fengið afrit af \"GNU General Public License\" með\n"
+"þessu forriti; ef ekki, skrifaðu til Free Software Foundation, Inc.,\n"
+"59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
 #: standalone/drakfont:536
 #, c-format
@@ -21004,17 +21221,17 @@ msgstr "Hámarksleigutími (í sekúndum)"
 #: standalone/drakgw:278
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Vefsels-þjónusta (SQUID)"
 
 #: standalone/drakgw:282
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr "Nota þessa netgátt sem vefsel"
+msgstr "Nota þessa netgátt sem vefsels-þjónustu"
 
 #: standalone/drakgw:283
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "Netfang kerfisstjóra"
 
 #: standalone/drakgw:284
 #, c-format
@@ -21029,7 +21246,7 @@ msgstr "Sel-gátt"
 #: standalone/drakgw:286
 #, c-format
 msgid "Cache size (MB)"
-msgstr "Stærð skyndiminnis (MB)"
+msgstr "Stærð biðminnis (MB)"
 
 #: standalone/drakgw:311
 #, c-format
@@ -21054,6 +21271,10 @@ msgid ""
 "Area Network, using automatic network configuration (DHCP) and\n"
 " a Transparent Proxy Cache server (SQUID)."
 msgstr ""
+"Allt hefur verið uppsett.\n"
+"Þú getur nú deilt Internet tengingunni með öðrum vélum á staðarnetinu, "
+"með því að nota sjálfvirka netuppsetningu (DHCP) og \n"
+"gagnsæja vefsels-þjónustu (SQUID)."
 
 #: standalone/drakgw:375
 #, c-format
@@ -21082,7 +21303,7 @@ msgstr "Uppsetning..."
 #: standalone/drakgw:394
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
-msgstr ""
+msgstr "Stilli skriftur, set upp hugbúnað, ræsi þjónustur..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21109,19 +21330,19 @@ msgstr " --help                - Sýnir þessa hjálp     \n"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
+msgstr " --id <id_label>       - hlaða inn html hjálparsíðunni sem vitnar í id_label\n"
 
 #: standalone/drakhelp:24
 #, c-format
 msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
-msgstr ""
+msgstr " --doc <link>          - tengill á aðra vefsíðu ( fyrir WM velkominn forsíðu)\n"
 
 #: standalone/drakhelp:36
 #, c-format
 msgid "Mandriva Linux Help Center"
-msgstr "Mandriva Linux hjálp"
+msgstr "Mandriva Linux hjálparmiðstöð"
 
 #: standalone/drakhelp:36
 #, c-format
@@ -21409,7 +21630,7 @@ msgstr "Aðgangsheimildir"
 #: standalone/drakperm:57
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Bæta við nýrri reglu"
 
 #: standalone/drakperm:64 standalone/drakperm:99 standalone/drakperm:124
 #, c-format
@@ -21602,11 +21823,13 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Þú hefur ekki neitt þráðlaust tengi.\n"
+"keyrðu \"%s\" leiðbeinandan frá Mandriva Linux Stjórnborðinu"
 
 #: standalone/drakroam:141
 #, c-format
 msgid "ESSID"
-msgstr ""
+msgstr "ESSID"
 
 #: standalone/drakroam:142 standalone/drakvpn:1129
 #, c-format
@@ -21621,22 +21844,22 @@ msgstr "Rás"
 #: standalone/drakroam:145
 #, c-format
 msgid "Key"
-msgstr ""
+msgstr "Lykill"
 
 #: standalone/drakroam:161
 #, c-format
 msgid "Network:"
-msgstr ""
+msgstr "Net:"
 
 #: standalone/drakroam:162
 #, c-format
 msgid "IP:"
-msgstr ""
+msgstr "IP:"
 
 #: standalone/drakroam:164
 #, c-format
 msgid "Mode:"
-msgstr ""
+msgstr "Hamur:"
 
 #: standalone/drakroam:165
 #, c-format
@@ -21646,17 +21869,17 @@ msgstr "Dulritun:"
 #: standalone/drakroam:166
 #, c-format
 msgid "Signal:"
-msgstr ""
+msgstr "Merki:"
 
 #: standalone/drakroam:180
 #, c-format
 msgid "Roaming"
-msgstr ""
+msgstr "Flökkun"
 
 #: standalone/drakroam:183 standalone/drakroam:266
 #, c-format
 msgid "Roaming: %s"
-msgstr ""
+msgstr "Flakka: %s"
 
 #: standalone/drakroam:183 standalone/drakroam:265 standalone/drakvpn:1047
 #: standalone/drakvpn:1063 standalone/drakvpn:1076
@@ -21667,17 +21890,17 @@ msgstr "af"
 #: standalone/drakroam:190
 #, c-format
 msgid "Scan interval (sec): "
-msgstr ""
+msgstr "Skönnunartíðni (sek): "
 
 #: standalone/drakroam:193
 #, c-format
 msgid "Set"
-msgstr ""
+msgstr "Setja"
 
 #: standalone/drakroam:198
 #, c-format
 msgid "Known Networks (Drag up/down or edit)"
-msgstr ""
+msgstr "Þekkt net (Dragið upp/niður eða breytið)"
 
 #: standalone/drakroam:206
 #, c-format
@@ -21687,7 +21910,7 @@ msgstr "Tengjast"
 #: standalone/drakroam:214
 #, c-format
 msgid "Available Networks"
-msgstr ""
+msgstr "Tiltæk net"
 
 #: standalone/drakroam:229
 #, c-format
@@ -21926,7 +22149,7 @@ msgid ""
 "the progress bar x coordinate\n"
 "of its upper left corner"
 msgstr ""
-"x hnit framvindusúlu\n"
+"x hnit framvindustiku\n"
 "á efra vinstra horni"
 
 #: standalone/draksplash:39
@@ -21935,48 +22158,48 @@ msgid ""
 "the progress bar y coordinate\n"
 "of its upper left corner"
 msgstr ""
-"y hnit framvindusúlu\n"
+"y hnit framvindustiku\n"
 "á efra vinstra horni"
 
 #: standalone/draksplash:40
 #, c-format
 msgid "the width of the progress bar"
-msgstr "breidd framvindusúlu"
+msgstr "breidd framvindustiku"
 
 #: standalone/draksplash:41
 #, c-format
 msgid "the height of the progress bar"
-msgstr "hæð framvindusúlu"
+msgstr "hæð framvindustiku"
 
 #: standalone/draksplash:58 standalone/draksplash:63
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "Velja lit framvindu-stiku"
 
 #: standalone/draksplash:59 standalone/draksplash:64
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Velja mynd"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Þögul ræsimynd"
 
 #: standalone/draksplash:65
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Mælsk ræsimynd"
 
 #: standalone/draksplash:67
 #, c-format
 msgid "Display logo on Console"
-msgstr "Birta merki á stjórnskjá"
+msgstr "Birta táknmerki á stjórnskjá"
 
 #: standalone/draksplash:70
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "Skjá-ræsimynd"
 
 #: standalone/draksplash:76
 #, c-format
@@ -21996,7 +22219,7 @@ msgstr "Vista þema"
 #: standalone/draksplash:145
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr "vista smellimynda-þema..."
+msgstr "vista ræsimynda-þema..."
 
 #: standalone/draksplash:165
 #, c-format
