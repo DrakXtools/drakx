@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.3\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-06-18 01:24+0800\n"
+"PO-Revision-Date: 2005-07-07 06:25+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -2548,11 +2548,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"物理卷 %s 仍在使用中。\n"
+"您是否想要将此卷上已用的物理扩展分区移动到其它卷上？"
 
 #: diskdrake/interactive.pm:893
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "移动物理扩展分区"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -3007,7 +3009,7 @@ msgstr "正在启用 swap 分区 %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "启用群组磁盘配额记账及可选强制限制"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3081,7 +3083,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
-msgstr ""
+msgstr "启用用户磁盘配额记账及可选强制限制"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3163,6 +3165,7 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"您不能为挂载点 %s 使用 LVM 逻辑卷，因为该卷跨越了多个物理卷"
 
 #: fsedit.pm:392
 #, c-format
@@ -3172,6 +3175,9 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"您将 LVM 逻辑卷选为 root(/)。\n"
+"引导程序无法识别跨越多个物理卷的卷。\n"
+"您应该先创建 /boot 分区"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -5748,7 +5754,7 @@ msgstr "网络 (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "网络 (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -5778,22 +5784,22 @@ msgstr "镜像的 URL?"
 #: install_any.pm:523
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "NFS 设置"
 
 #: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "请输入您 NFS 介质的主机名和目录"
 
 #: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "NFS 挂载的主机名？"
 
 #: install_any.pm:524
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "目录"
 
 #: install_any.pm:572
 #, c-format
@@ -9309,12 +9315,12 @@ msgstr "欢迎使用 %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "将已用的物理卷扩展分区移动到其它物理卷失败"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "物理卷 %s 仍在使用中"
 
 #: lvm.pm:145
 #, c-format
@@ -9324,7 +9330,7 @@ msgstr "请先删除逻辑卷\n"
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
-msgstr ""
+msgstr "引导程序无法识别多个物理卷上的 /boot"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -18116,13 +18122,12 @@ msgstr ""
 "要能够正常工作的邮件服务器。"
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"这应该是以逗号分隔的本地用户或电子邮件列表, 备份结果将会发送给这些人。您还需"
-"要能够正常工作的邮件服务器。"
+"这应该是您想要用来发送备份结果的邮件地址。默认为 drakbackup。"
 
 #: standalone/drakbackup:161
 #, c-format
@@ -21083,22 +21088,22 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "IP 地址："
 
 #: standalone/drakhosts:109
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "主机名："
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "主机别名："
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "请输入有效的 IP 地址。"
 
 #: standalone/drakhosts:123
 #, c-format
@@ -21108,7 +21113,7 @@ msgstr ""
 #: standalone/drakhosts:192
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "主机别名。"
 
 #: standalone/drakhosts:227
 #, c-format
@@ -21133,12 +21138,12 @@ msgstr ""
 #: standalone/draknfs:69
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "目录选择"
 
 #: standalone/draknfs:74
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "应该为目录。"
 
 #: standalone/draknfs:103
 #, c-format
@@ -21197,27 +21202,27 @@ msgstr ""
 #: standalone/draknfs:206
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "NFS 目录"
 
 #: standalone/draknfs:208
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "目录："
 
 #: standalone/draknfs:211
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "主机访问"
 
 #: standalone/draknfs:213
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "访问："
 
 #: standalone/draknfs:213 standalone/draknfs:218
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "帮助用户 ID"
 
 #: standalone/draknfs:216
 #, c-format
@@ -21227,7 +21232,7 @@ msgstr ""
 #: standalone/draknfs:218
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "用户 ID："
 
 #: standalone/draknfs:219
 #, c-format
@@ -21242,72 +21247,72 @@ msgstr ""
 #: standalone/draknfs:223 standalone/draknfs:313
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "常规选项"
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Force sync:"
-msgstr ""
+msgstr "强制同步："
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Help General options"
-msgstr ""
+msgstr "帮助常规选项"
 
 #: standalone/draknfs:226
 #, c-format
 msgid "port below 1024:"
-msgstr ""
+msgstr "1024 以下的端口："
 
 #: standalone/draknfs:227
 #, c-format
 msgid "Read/Write request:"
-msgstr ""
+msgstr "读/写请求："
 
 #: standalone/draknfs:232
 #, c-format
 msgid "options:"
-msgstr ""
+msgstr "选项："
 
 #: standalone/draknfs:244
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "请输入要共享的目录。"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "共享目录"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "主机通配符"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "More options"
-msgstr ""
+msgstr "更多选项"
 
 #: standalone/draknfs:351
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "添加 NFS 共享失败。"
 
 #: standalone/draknfs:358
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "修改 NFS 共享失败。"
 
 #: standalone/draknfs:366
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "删除 NFS 共享失败。"
 
 #: standalone/draknfs:371
 #, c-format
 msgid "Reload NFS server"
-msgstr ""
+msgstr "重新装入 NFS 服务器"
 
 #: standalone/drakperm:21
 #, c-format
