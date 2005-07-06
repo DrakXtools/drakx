@@ -184,7 +184,7 @@ our %l = (
       ),
     ],
     tv => [ qw(bt878 bttv cx8800 cx88-blackbird dpc7146 ivtv saa7134 zr36067) ],
-    dvb => [ qw(budget budget-av budget-ci cinergyT2 dvb-ttusb-budget dvb-usb-a800 dvb-dibusb dvb-usb-dibusb-mb dvb-ttpci dvb-usb-digitv dvb-usb-dtt200u dvb-usb-nova-t-usb2 dvb-usb-umt-010 dvb-usb-vp7045 hexium_orion hexium_gemini skystar2) ],
+    dvb => [ qw(budget budget-av budget-ci cinergyT2 dvb-ttusb-budget dvb-usb-a800 dvb-dibusb dvb-usb-dibusb-mb dvb-ttpci dvb-usb-digitv dvb-usb-dtt200u dvb-usb-nova-t-usb2 dvb-usb-umt-010 dvb-usb-vp7045 hexium_orion hexium_gemini pluto2 skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
