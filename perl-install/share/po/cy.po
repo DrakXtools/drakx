@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mandriva DrakX.cy\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-06-28 17:01+0200\n"
+"PO-Revision-Date: 2005-06-28 21:37-0000\n"
 "Last-Translator: Rhoslyn Prys <post@meddal.com>\n"
 "Language-Team: Cymraeg <post@meddal.com>\n"
 "MIME-Version: 1.0\n"
@@ -1219,14 +1219,14 @@ msgid "Group ID"
 msgstr "Enw Grŵp"
 
 #: any.pm:619
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "Rhaid i ddewis %s fod yn rhif!"
+msgstr "Rhaid i %s fod yn rhif!"
 
 #: any.pm:620
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "Dylai %s fod dros 500. Parhau beth bynnag?"
 
 #: any.pm:625
 #, c-format
@@ -1288,9 +1288,9 @@ msgid "I can set up your computer to automatically log on one user."
 msgstr "Mewngofnodi'n awtomatig ar gyfer un defnyddiwr."
 
 #: any.pm:698
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Ydych chi eisiau defnyddio'r nodwedd?"
+msgstr "Defnyddiwch y nodwedd"
 
 #: any.pm:699
 #, c-format
@@ -6088,7 +6088,7 @@ msgstr "Mynediad wedi ei wrthod."
 #: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Enw NFS gwael"
 
 #: install_any.pm:1777
 #, c-format
@@ -10161,7 +10161,7 @@ msgid "Unable to load the ndiswrapper module!"
 msgstr "methu llwytho'r modiwl ndiswrapper!"
 
 #: network/ndiswrapper.pm:95
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
@@ -17422,9 +17422,9 @@ msgstr ""
 "defnyddio."
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Bwrdd Gwaith Plucker"
+msgstr "Bwrdd Gwaith IceWm"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -17432,9 +17432,9 @@ msgid "Other Graphical Desktops"
 msgstr "Byrddau Gwaith Graffigol Eraill"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, ag ati"
+msgstr "Window Maker, Enlightenment, Fvwm, ag ati"
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -18833,7 +18833,7 @@ msgstr ""
 "gweithredol."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
@@ -26747,6 +26747,32 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Methodd y gosod"
 
+#~ msgid "You can not use a LVM Logical Volume for mount point %s"
+#~ msgstr ""
+#~ "Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
+
+#~ msgid ""
+#~ "You've selected a LVM Logical Volume as root (/).\n"
+#~ "The bootloader is not able to handle this without a /boot partition.\n"
+#~ "Please be sure to add a /boot partition"
+#~ msgstr ""
+#~ "Rydych wedi dewis Cyfrol Resymegol LVM fel gwraidd (/)\n"
+#~ "Nid oes cychwynnwr yn gallu trin hwn heb raniad /boot\n"
+#~ "Cofiwch ychwanegu rhaniad /boot"
+
+#~ msgid ""
+#~ "You may not be able to install lilo (since lilo does not handle a LV on "
+#~ "multiple PVs)"
+#~ msgstr ""
+#~ "Efallai na fydd modd i chi osod lilo (gan nad yw lilo'n trin LV ar PV "
+#~ "lluosog)"
+
+#~ msgid "Network (http)"
+#~ msgstr "Rhwydwaith (http)"
+
+#~ msgid "Network (ftp)"
+#~ msgstr "Rhwydwaith (ftp)"
+
 #~ msgid "drakfloppy"
 #~ msgstr "drakfloppy"
 
@@ -26817,26 +26843,6 @@ msgstr "Methodd y gosod"
 #~ "Methu cau mkbootdisk yn iawn: \n"
 #~ "\n"
 #~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr ""
-#~ "Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "Rydych wedi dewis Cyfrol Resymegol LVM fel gwraidd (/)\n"
-#~ "Nid oes cychwynnwr yn gallu trin hwn heb raniad /boot\n"
-#~ "Cofiwch ychwanegu rhaniad /boot"
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Efallai na fydd modd i chi osod lilo (gan nad yw lilo'n trin LV ar PV "
-#~ "lluosog)"
 
 #~ msgid "use PPPoE"
 #~ msgstr "defnyddiwch PPPoE"
