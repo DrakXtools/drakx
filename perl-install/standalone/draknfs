@@ -63,25 +63,18 @@ sub quit_all() {
 }
 
 sub restart_dialog {
-  wait_action("system nfs restart");
+  wait_action("service nfs restart");
 }
 
 sub reload_dialog {
-  wait_action("system nfs reload");
+  wait_action("service nfs reload");
 }
 
 sub wait_action {
-  my ($cmd) = @_;
-  my $w = $in->wait_message(N("NFS server"), N("Restarting/reloading your NFS server..."));
-  sleep(1);
-  system("$cmd");
-  sleep(1);
-  my $err = $@;
-  undef $w;
-  if ($err) {
-    err_dialog(N("Error"), N("NFS server cant restart:") . "\n\n" . $err);
-  }
-  undef $w;
+    my ($cmd) = @_;
+    my $w = $in->wait_message(N("NFS server"), N("Restarting/Reloading NFS server..."));
+    run_program::get_stdout($cmd) !~ /unknown|error/ or err_dialog(N("Error!"), N("Error Restarting/Reloading NFS server")) and return;
+    undef $w;
 }
 
 my %size_groups = map { $_ => Gtk2::SizeGroup->new('horizontal') } qw(label widget button);
@@ -130,7 +123,8 @@ sub write_conf {
   }
 }
 
-my $help_access = N("<span weight=\"bold\">NFS clients</span> may be specified in a number of ways:
+my $help_access;
+$help_access = N("<span weight=\"bold\">NFS clients</span> may be specified in a number of ways:
 
 
 <span foreground=\"royalblue3\">single host:</span> a host either by an abbreviated name recognized be the resolver, fully qualified domain name, or an IP address
@@ -142,7 +136,7 @@ my $help_access = N("<span weight=\"bold\">NFS clients</span> may be specified i
 <span foreground=\"royalblue3\">wildcards:</span> machine names may contain the wildcard characters * and ?. For instance: *.cs.foo.edu  matches all  hosts  in the domain cs.foo.edu.
 
 
-<span foreground=\"royalblue3\">IP networks:</span> you can also export directories to all hosts on an IP (sub-)network simultaneously. for example, either `/255.255.252.0' or  `\/22'  appended to the network base address result.
+<span foreground=\"royalblue3\">IP networks:</span> you can also export directories to all hosts on an IP (sub-)network simultaneously. for example, either `/255.255.252.0' or  `/22'  appended to the network base address result.
 ");
 
 my $help_userid = N("<span weight=\"bold\">User ID options</span>
