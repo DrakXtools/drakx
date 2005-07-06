@@ -350,11 +350,11 @@ sub add_modify_entry {
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
 				 my $all_right = join(",", grep { defined $_ } $luserid->get_text, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
+				 my $test_dir = $dir->get_text;
+				 -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+				 my $test_access = $access->child->get_text;
+				 $test_access or err_dialog(N("Error!"), N("You must specify hosts access.")) and return;
 				 if ($wanted =~ /add/) {
-				   my $test_dir = $dir->get_text;
-				   -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
-				   my $test_access = $access->child->get_text;
-				   $test_access or err_dialog(N("Error!"), N("You must specify hosts access.")) and return;
 				   $iter = $model->append;
 				   $i = "-1";
 				   push @listshare, {
