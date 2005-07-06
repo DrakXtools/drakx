@@ -219,13 +219,13 @@ sub get_access_list {
   network::network::read_net_conf($net);
   my $interface ||= $net->{net_interface};
   my $ip_address = network::tools::get_interface_ip_address($net, $interface);
-  my $domain = chomp_(`dnsdomainame`);
+  my $domain = chomp_(`dnsdomainname`);
   my @o = split(/\./, $ip_address);
   my $ipnet;
   if ($ip_address) {
     $ipnet = $o[0] . "." . $o[1] . "." . $o[2] . ".0";
   } else { $ipnet = "ip_address" }
-  my @all = split(", ", qq(*, $domain, $ipnet/8, $ipnet/24, $ipnet/32));
+  my @all = split(", ", qq(*, *.$domain, $ipnet/8, $ipnet/24, $ipnet/32));
   return @all;
 }
 
@@ -356,7 +356,7 @@ sub add_modify_entry {
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { $lr_data = "" }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { $lsecure_data = "" }
 				 my $all_right = join(",", grep { defined $_ } $luserid->get_text, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
-				 print "---------- $all_right";
+				 print "---------- $all_right -----\n";
 				 if ($wanted =~ /add/) {
 				   my $test_dir = $dir->get_text;
 				   -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
