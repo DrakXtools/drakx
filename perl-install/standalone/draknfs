@@ -352,11 +352,10 @@ sub add_modify_entry {
 				 my ($anonu, $anong);
 				 $anonuid->get_text and $anonu = "anonuid=" . $anonuid->get_text;
 				 $anongid->get_text and $anong = "anongid=" . $anongid->get_text;
-				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { $lsync_data = "" }
-				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { $lr_data = "" }
-				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { $lsecure_data = "" }
+				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { undef $lsync_data }
+				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
+				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
 				 my $all_right = join(",", grep { defined $_ } $luserid->get_text, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
-				 print "---------- $all_right -----\n";
 				 if ($wanted =~ /add/) {
 				   my $test_dir = $dir->get_text;
 				   -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
