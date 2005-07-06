@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-07-01 22:55+0700\n"
+"PO-Revision-Date: 2005-07-06 18:19+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -2614,11 +2614,14 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Volume fisik %s sedang digunakan.\n"
+"Apakah Anda hendak memindahkan perluasan fisik yang digunakan pada volume "
+"ini pada volume lain?"
 
 #: diskdrake/interactive.pm:893
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Memindahkan perluasan fisik"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -3546,7 +3549,7 @@ msgstr ""
 "Di sini Anda dapat dipilih driver alternatif (OSS atau ALSA) untuk kartu "
 "suara Anda (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:240
@@ -9873,7 +9876,8 @@ msgstr "Selamat Datang di %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Pemindahan perluasan fisik yang dipakai pada volume fisik lain "
+"gagal"
 
 #: lvm.pm:135
 #, c-format
@@ -21956,67 +21960,67 @@ msgstr ""
 #: standalone/drakhosts:106
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "Harap %s informasi"
 
 #: standalone/drakhosts:108
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Alamat IP:"
 
 #: standalone/drakhosts:109
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Nama host:"
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Alias host:"
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Harap masukkan alamat IP valid."
 
 #: standalone/drakhosts:123
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "IP yang sama sudah berada dalam %s file"
 
 #: standalone/drakhosts:192
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Alias host"
 
 #: standalone/drakhosts:227
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Gagal menambahkan host."
 
 #: standalone/drakhosts:234
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Gagal untuk memodifikasi host."
 
 #: standalone/drakhosts:242
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Gagal untuk menghapus host."
 
 #: standalone/draknfs:38
 #, c-format
 msgid "You are not root. Exiting..."
-msgstr ""
+msgstr "Anda bukan root. Keluar..."
 
 #: standalone/draknfs:69
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Pemilihan Direktori"
 
 #: standalone/draknfs:74
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Seharusnya sebuah direktori."
 
 #: standalone/draknfs:103
 #, c-format
@@ -22034,6 +22038,18 @@ msgid ""
 "(sub-)network simultaneously. for example, either `/255.255.252.0' or  "
 "`/22'  appended to the network base address result.\n"
 msgstr ""
+"Klien NFS dapat ditentukan melalui beberapa cara:\n"
+"host tunggal: Anda bisa menentukan sebuah host entah melalui nama singkatan yang "
+"dikenali resolver, nama domain yang fully qualified, atau alamat IP.\n"
+"\n"
+"netgroup: NIS netgroup dapat diberikan sebagai @group.\n"
+"\n"
+"wildcard: nama mesin dapat mengandung karakter wildcard * dan ?. Sebagai contoh: "
+"*.cs.foo.edu  sesuai dengan semua host pada domain cs.foo.edu.\n"
+"\n"
+"IP Network:  Anda juga dapat mengeksport direktori pada semua host pada sebuah IP "
+"(sub-)network secara bersamaan. sebagai contoh, entah `/255.255.252.0' atau  "
+"`/22'  ditambahkan sebagai alamat dasar jaringan.\n"
 
 #: standalone/draknfs:113
 #, c-format
@@ -22050,6 +22066,16 @@ msgid ""
 "anonuid and anongid: explicitly  set the uid and gid of the anonymous "
 "account.\n"
 msgstr ""
+"root_squash: memetakan permintaan dari uid/gid 0 pada uid/gid anonim.\n"
+"\n"
+"no_root_squash: menonaktifkan root squash. Opsi ini sangat berguna untuk klien "
+"tanpa disk.\n"
+"\n"
+"all_squash: memetakan semua uid dan gid pada pengguna anonim. Berguna untuk "
+"direktori publik yang diekspor NFS, direktori spoll berita, dll. Opsi kebalikannya "
+"adalah no_all_squash, yang merupakan setting defaultnya.\n"
+"\n"
+"anonuid dan anongid: secara eksplisit menentukan uid dan gid dari account anonim.\n"
 
 #: standalone/draknfs:122
 #, c-format
@@ -22066,126 +22092,137 @@ msgid ""
 "requests before any changes made by that request have been committed to "
 "stable storage (e.g. disc drive).\n"
 msgstr ""
+"secure: opsi ini mengharapkan permintaan yang berasal dari port internet kurang "
+"dari IPPORT_RESERVED (1024). Opsi ini aktif secara default. Untuk menonaktifkannya "
+"tentukan insecure.\n"
+"\n"
+"rw: mengijinkan baik permintaan baca dan tulis pada volume NFS ini. Defaultnya adalah "
+"menolak sembarang permintaan yang merubah sistem file. Hal ini juga bisa dibuat secara "
+"eksplisit dengan menggunakan opsi ro.\n"
+"\n"
+"async: mengijinkan server NFS untuk melanggar protokol NFS dan membalas permintaan sebelum "
+"sembarang perubahan yang dilakukan oleh permintaan disimpan secara permanen pada penyimpanan "
+"permanen (misalnya disk drive).\n"
 
 #: standalone/draknfs:167
 #, c-format
 msgid "dir path"
-msgstr ""
+msgstr "path dir"
 
 #: standalone/draknfs:206
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Direktori NFS"
 
 #: standalone/draknfs:208
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Direktori:"
 
 #: standalone/draknfs:211
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Akses host"
 
 #: standalone/draknfs:213
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "Akses:"
 
 #: standalone/draknfs:213 standalone/draknfs:218
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Bantuan ID Pengguna"
 
 #: standalone/draknfs:216
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Pemetaan ID Pengguna"
 
 #: standalone/draknfs:218
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "ID Pengguna:"
 
 #: standalone/draknfs:219
 #, c-format
 msgid "anonuid:"
-msgstr ""
+msgstr "anonuid:"
 
 #: standalone/draknfs:220
 #, c-format
 msgid "anongid:"
-msgstr ""
+msgstr "anongid:"
 
 #: standalone/draknfs:223 standalone/draknfs:313
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "Opsi Umum"
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Force sync:"
-msgstr ""
+msgstr "Paksa sync:"
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Help General options"
-msgstr ""
+msgstr "Bantuan Opsi Umum"
 
 #: standalone/draknfs:226
 #, c-format
 msgid "port below 1024:"
-msgstr ""
+msgstr "port dibawah 1024:"
 
 #: standalone/draknfs:227
 #, c-format
 msgid "Read/Write request:"
-msgstr ""
+msgstr "Permintaan Baca/Tulis:"
 
 #: standalone/draknfs:232
 #, c-format
 msgid "options:"
-msgstr ""
+msgstr "opsi-opsi:"
 
 #: standalone/draknfs:244
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Harap masukkan sebuah direktori untuk share."
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "Direktori Share"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Wildcard Host"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "More options"
-msgstr ""
+msgstr "Opsi Lain"
 
 #: standalone/draknfs:351
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Gagal untuk menambah share NFS."
 
 #: standalone/draknfs:358
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Gagal untuk memodifikasi share NFS."
 
 #: standalone/draknfs:366
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Gagal untuk menghapus sebuah share NFS."
 
 #: standalone/draknfs:371
 #, c-format
 msgid "Reload NFS server"
-msgstr ""
+msgstr "Muat ulang server NFS"
 
 #: standalone/drakperm:21
 #, c-format
