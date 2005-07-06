@@ -13,7 +13,7 @@ our %l = (
   ################################################################################
   network => 
   {
-    atm => [ qw(ambassador eni firestream he horizon idt77252 iphase lanai nicstar zatm) ],
+    atm => [ qw(ambassador eni firestream fore_200e he horizon idt77252 iphase lanai nicstar zatm) ],
     main => [
       if_(arch() =~ /ppc/, qw(bmac ibm_emac mace oaknet sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
