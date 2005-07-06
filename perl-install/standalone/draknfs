@@ -434,6 +434,30 @@ sub add_columns {
   } N("Share Directory"), N("Hosts Wildcard"), N("General Options"), N("Custom Options");
 }
 
+sub cell_edited {
+  my ($cell, $path_string, $new_text, $model) = @_;
+  my $path = Gtk2::TreePath->new_from_string($path_string);
+  my $column = $cell->get_data("column");
+  my $iter = $model->get_iter($path);
+
+  if ($column == COLUMN_DIR) {
+    my $i = ($path->get_indices)[0];
+    $listshare[$i]{dir} = $new_text;
+    -d $new_text or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+    $model->set($iter, $column, $listshare[$i]{dir});
+  } elsif ($column == COLUMN_ACCESS) {
+    my $i = ($path->get_indices)[0];
+    $listshare[$i]{access} = $new_text;
+    $model->set($iter, $column, $listshare[$i]{access});
+  } elsif ($column == COLUMN_RIGHT) {
+    err_dialog(N("Error!"), N("Please use the modify button to set right access.")) and return;
+  } elsif ($column == COLUMN_OPTIONS) {
+    my $i = ($path->get_indices)[0];
+    $listshare[$i]{options} = $new_text;
+    $model->set($iter, $column, $listshare[$i]{options});
+  }
+  write_conf();
+}
 
 ###############
 # Main Program
@@ -451,6 +475,19 @@ my $treeview = Gtk2::TreeView->new_with_model($model);
 $treeview->set_rules_hint(TRUE);
 $treeview->get_selection->set_mode('single');
 add_columns($treeview);
+
+# double clic and popup modify window
+$treeview->signal_connect(button_press_event => sub {
+			    my (undef, $event) = @_;
+			    my $model = $treeview->get_model;
+			    my $selection = $treeview->get_selection;
+			    my $iter = $selection->get_selected;
+			    if ($iter) {
+			      my $path = $model->get_path($iter);
+			      my $i = ($path->get_indices)[0];
+			      add_modify_entry($model, $treeview, "modify") if $event->type eq '2button-press';
+			    }
+			  });
 
 # create menu
 my @items = get_items();
