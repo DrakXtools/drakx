@@ -1361,12 +1361,12 @@ sub start_internet {
     #- give a chance for module to be loaded using kernel-BOOT modules...
     #- FIXME, this has nothing to do there
     $::isStandalone or modules::load_category($o->{modules_conf}, 'network/*');
-    network::tools::connect_backend($o->{net});
+    network::tools::start_interface($o->{net}{net_interface});
 }
 
 sub stop_internet {
     my ($o) = @_;
-    network::tools::disconnect_backend($o->{net});
+    network::tools::stop_interface($o->{net}{net_interface});
 }
 
 1;
