@@ -142,7 +142,7 @@ sub add_modify_entry {
 					     COLUMN_ALIAS, $listhosts[$i]{alias},
 					    );
 				 $dialog->destroy;
-				 write_conf_hosts();
+#				 write_conf_hosts();
 			       },
 			      },
 			     ),
@@ -162,7 +162,7 @@ sub remove_entry {
       $model->remove($iter);
       splice @listhosts, $i, 1;
     }
-  write_conf_hosts();
+#  write_conf_hosts();
 }
 
 sub create_model() {
@@ -249,6 +249,9 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                       err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
                                                     }
                                                   }),
+			     0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
+				 write_conf_hosts();
+			     }),
 			     if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })),
 			    ),
 		 ),

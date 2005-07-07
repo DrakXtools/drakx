@@ -407,7 +407,7 @@ sub add_modify_entry {
 					     COLUMN_OPTIONS, $listshare[$i]{options},
 					    );
 				 $dialog->destroy;
-				 write_conf();
+#				 write_conf();
 			       },
 			      },
 			     ),
@@ -427,7 +427,7 @@ sub remove_entry {
       $model->remove($iter);
       splice @listshare, $i, 1;
     }
-  write_conf();
+#  write_conf();
 }
 
 sub create_model() {
@@ -556,6 +556,10 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 						 err_dialog(N("Error"), N("Failed to remove an NFS share.") . "\n\n" . $err);
 					     }
 					 }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
+					     write_conf();
+					 }),
+
 					 if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_all)),
 					 ),
 			     ),
