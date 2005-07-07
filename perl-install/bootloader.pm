@@ -251,7 +251,7 @@ sub read_grub {
 	$b{default} = min($b{default}, scalar(@{$b{entries}}) - 1);
 	$b{default} = $b{entries}[$b{default}]{label};
     }
-    $b{method} = 'grub';
+    $b{method} = $b{splashimage} ? 'grub-graphic' :  'grub-menu';
 
     \%b;
 }
@@ -852,7 +852,8 @@ sub method2text {
     +{
 	'lilo-graphic' => N("LILO with graphical menu"),
 	'lilo-menu'    => N("LILO with text menu"),
-	'grub'         => N("Grub"),
+	'grub-graphic' => N("Grub with graphical menu"),
+	'grub-menu'    => N("Grub with text menu"),
 	'yaboot'       => N("Yaboot"),
     }->{$method};
 }
@@ -866,7 +867,7 @@ sub method_choices_raw {
        if_(!$b_prefix_mounted || whereis_binary('lilo', $::prefix), 
 	   'lilo-graphic', 'lilo-menu'),
        if_(!$b_prefix_mounted || whereis_binary('grub', $::prefix), 
-	   'grub'),
+	   'grub-graphic', 'grub-menu'),
       );
 }
 sub method_choices {
@@ -1282,11 +1283,6 @@ sub write_grub {
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
-    if (get_append_with_key($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
-	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
-	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
-    }
-
     my $file2grub = sub {
 	my ($file) = @_;
 	if ($file =~ m!^\(.*\)/!) {
@@ -1296,6 +1292,18 @@ sub write_grub {
 	    device2grub($part, \@sorted_hds) . $rel_file;
 	}
     };
+
+    if (get_append_with_key($bootloader, 'console') =~ /ttyS(\d),(\d+)/) {
+	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
+	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
+    } elsif ($bootloader->{splashimage} eq '' && $bootloader->{method} eq 'grub-graphic') {
+	$bootloader->{splashimage} ||= $file2grub->("/boot/grub/mdv-grub_splash.xpm.gz");
+	$bootloader->{viewport} ||= "3 2 77 22";
+	$bootloader->{shade} ||= "1";
+    } elsif ($bootloader->{method} eq 'grub-menu') {
+	delete $bootloader->{$_} foreach qw(splashimage viewport shade);
+    }
+
     {
 	my @conf;
 
