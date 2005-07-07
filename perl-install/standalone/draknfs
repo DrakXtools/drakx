@@ -39,10 +39,18 @@ use constant NUM_COLUMNS => 4;
 
 my $CONF = "/etc/exports";
 my @listshare;
-my @listuserid = qw(root_squash no_root_squash all_squash no_all_squash); push @listuserid, "";
-# root_squash : Map root user as anonymous
-# all_squash : map all users to a precise user
-# no_root_squash : Allow real remote root access
+my $root_squash = N("map root user as anonymous");
+my $all_squash = N("map all users to anonymous user");
+my $no_all_squash = N("allow real remote user access");
+my $no_root_squash = N("allow real remote root access");
+my @listuserid_data = split(", ", qq($root_squash, $all_squash, $no_all_squash, $no_root_squash)); push @listuserid_data, "";
+
+my $userid_data = {
+		   root_squash => $root_squash,
+		   no_root_squash => $no_root_squash,
+		   all_squash => $all_squash,
+		   no_all_squash => $no_all_squash,
+		  };
 
 my @yesno = qw(yes no); push @yesno, "";
 
@@ -199,13 +207,13 @@ sub help_b {
 		      gtkpack_($dialog->vbox,
 			       1, $help_data,
 			       0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub {
-						      $dialog->destroy;
+				   $dialog->destroy;
 						    }
 						   ),
 			      );
 		      $dialog->show_all;
 		    }
-		   );
+		    );
 }
 
 sub get_access_list {
@@ -241,7 +249,7 @@ sub add_modify_entry {
     $_ and $access->append_text($_);
   }
 
-  $luserid->set_popdown_strings(@listuserid);
+  $luserid->set_popdown_strings(@listuserid_data);
   $lr->set_popdown_strings(@yesno);
   $lsync->set_popdown_strings(@yesno);
   $lsecure->set_popdown_strings(@yesno);
@@ -252,7 +260,7 @@ sub add_modify_entry {
 
 # test if modify or add a nfs share
   my $dialog = new Gtk2::Dialog();
-  $dialog->set_title("Draknfs $wanted entry");
+  $dialog->set_title("Draknfs entry");
   $dialog->set_position('center');
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
@@ -281,7 +289,15 @@ sub add_modify_entry {
       } elsif ($opt =~ m/anonuid=(\d+)/) {
 	$anonuid->set_text($1);
       } elsif ($opt =~ m/(no_root_squash|root_squash|all_squash|no_all_squash)/) {
-	$luserid->set_text($opt);
+	if ($opt =~ /no_root_squash/) {
+	  $luserid->set_text($userid_data->{no_root_squash});
+	} elsif ($opt =~ /root_squash/) {
+	  $luserid->set_text($userid_data->{root_squash});
+	} elsif ($opt =~ /all_squash/) {
+	  $luserid->set_text($userid_data->{all_squash});
+	} elsif ($opt =~ /no_all_squash/) {
+	  $luserid->set_text($userid_data->{no_all_squash});
+	}
       } elsif ($opt =~ m/(\bsecure\b|\binsecure\b)/) {
 	if ($opt =~ /insecure/) { $lsecure->set_text("no") } else { $lsecure->set_text("yes") }
       } else { next }
@@ -289,7 +305,7 @@ sub add_modify_entry {
   }
 
   $luserid->signal_connect(changed => sub {
-			     if ($luserid->get_text =~ /no_root_squash/) {
+			     if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
 			       $anongid->set_sensitive(0);
 			       $anonuid->set_sensitive(0);
 			     } else {
@@ -297,17 +313,18 @@ sub add_modify_entry {
 			       $anonuid->set_sensitive(1);
 			     }
 			   });
-  if ($luserid->get_text =~ /no_root_squash/) {
-    $anongid->set_sensitive(0);
-    $anonuid->set_sensitive(0);
-  }
 
   if ($wanted =~ /add/) {
     # default choice root_squash and ro
-    $luserid->set_text("root_squash");
+    $luserid->set_text($userid_data->{no_root_squash});
     $lr->set_text("yes");
     $lsecure->set_text("");
     $lsync->set_text("");
+  }
+
+  if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
+    $anongid->set_sensitive(0);
+    $anonuid->set_sensitive(0);
   }
 
   gtkpack_($dialog->vbox,
@@ -349,7 +366,22 @@ sub add_modify_entry {
 				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { undef $lsync_data }
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
-				 my $all_right = join(",", grep { defined $_ } $luserid->get_text, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
+				 # test $luserid->get_text
+				 my $luserid_toput;
+				 if ($luserid->get_text =~ /root/) {
+				   if ($luserid->get_text =~ /no/) {
+				     $luserid_toput = "no_root_squash";
+				   } else {
+				     $luserid_toput = "root_squash";
+				   }
+				 } else {
+				   if ($luserid->get_text =~ /no/) {
+				     $luserid_toput = "no_all_squash";
+				   } else {
+				     $luserid_toput = "all_squash";
+  				   }
+				 }
+				 my $all_right = join(",", grep { defined $_ } $luserid_toput, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
 				 my $test_dir = $dir->get_text;
 				 -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
 				 my $test_access = $access->child->get_text;
@@ -495,12 +527,6 @@ my $factory = Gtk2::ItemFactory->new('Gtk2::MenuBar', '<main>', undef);
 $factory->create_items('menu', @items);
 my $menu = $factory->get_widget('<main>');
 
-my $okcancel = create_okcancel({
-				cancel_clicked => sub { ugtk2->exit },
-				ok_clicked => \&write_conf,
-			       },
-			      );
-
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares."),
@@ -530,8 +556,8 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 						 err_dialog(N("Error"), N("Failed to remove an NFS share.") . "\n\n" . $err);
 					     }
 					 }),
+					 if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_all)),
 					 ),
-			     if_($::isEmbedded, 0, $okcancel),
 			     ),
 		 ),
 	);
