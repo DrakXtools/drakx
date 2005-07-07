@@ -94,9 +94,9 @@ my $int_connect = Gtk2::Button->new(N("Wait please"));
 $int_connect->set_sensitive(0);
 $int_connect->signal_connect(clicked => sub {
     if (!$isconnected) {
-        network::tools::connect_backend($net);
+        network::tools::start_interface($net->{net_interface});
     } else {
-        network::tools::disconnect_backend($net);
+        network::tools::stop_interface($net->{net_interface});
     }
 });
 
