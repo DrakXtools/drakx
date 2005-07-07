@@ -48,43 +48,41 @@ sub passwd_by_login {
     }
 }
 
-sub connect_backend {
-    my ($net) = @_;
-    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifup", $net->{net_interface});
-}
-
-sub disconnect_backend {
-    my ($net) = @_;
-    run_program::raw({ detach => 1, root => $::prefix }, "/sbin/ifdown", $net->{net_interface});
-}
-
-sub bg_command_as_root {
+sub wrap_command_for_root {
     my ($name, @args) = @_;
     #- FIXME: duplicate code from common::require_root_capability
-    if (check_for_xserver() && fuzzy_pidofs(qr/\bkwin\b/) > 0) {
-        run_program::raw({ detach => 1 }, "kdesu", "--ignorebutton", "-c", "$name @args");
-    } else {
-	run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @args);
-    }
+    check_for_xserver() && fuzzy_pidofs(qr/\bkwin\b/) > 0 ?
+      ("kdesu", "--ignorebutton", "-c", "$name @args") :
+      ([ 'consolehelper', $name ], @args);
 }
 
-sub user_run_interface_command {
-    my ($command, $intf) = @_;
-    if (system("/usr/sbin/usernetctl $intf report") == 0) {
-        run_program::raw({ detach => 1 }, $command, $intf);
-    } else {
-        bg_command_as_root($command, $intf);
-    }
+sub run_interface_command {
+    my ($command, $intf, $detach) = @_;
+    my @command =
+      !$> || system("/usr/sbin/usernetctl $intf report") == 0 ?
+	($command, $intf) :
+	wrap_command_for_root($command, $intf);
+    run_program::raw({ detach => $detach, root => $::prefix }, @command);
 }
 
 sub start_interface {
-    my ($intf) = @_;
-    user_run_interface_command('/sbin/ifup', $intf);
+    my ($intf, $detach) = @_;
+    run_interface_command('/sbin/ifup', $intf, $detach);
 }
 
 sub stop_interface {
-    my ($intf) = @_;
-    user_run_interface_command('/sbin/ifdown', $intf);
+    my ($intf, $detach) = @_;
+    run_interface_command('/sbin/ifdown', $intf, $detach);
+}
+
+sub start_net_interface {
+    my ($net, $detach) = @_;
+    start_interface($net->{net_interface}, $detach);
+}
+
+sub stop_net_interface {
+    my ($net, $detach) = @_;
+    stop_interface($net->{net_interface}, $detach);
 }
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }

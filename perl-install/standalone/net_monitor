@@ -47,8 +47,8 @@ network::network::read_net_conf($net);
 $default_intf ||= $net->{default}{interface};
 
 if ($force) {
-    $connect and network::tools::start_interface($default_intf);
-    $disconnect and network::tools::stop_interface($default_intf);
+    $connect and network::tools::start_interface($default_intf, 1);
+    $disconnect and network::tools::stop_interface($default_intf, 1);
     $connect = $disconnect = 0;
 }
 $quiet and exit(0);
@@ -251,8 +251,8 @@ sub connection() {
 
     $tool_pid = 
       $wasconnected == 1 
-	? network::tools::stop_interface($default_intf)
-        : network::tools::start_interface($default_intf);
+	? network::tools::stop_interface($default_intf, 1)
+        : network::tools::start_interface($default_intf, 1);
 }
 
 sub graph_window_width() { $width - $left_border }

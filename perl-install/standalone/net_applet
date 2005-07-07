@@ -63,8 +63,8 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
 	    );
 
 my %actions = (
-               'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => \&network::tools::start_interface },
-               'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => \&network::tools::stop_interface },
+               'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
+               'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
                'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
                'wireless' => { name => N("Manage wireless networks"), launch => sub { system("/usr/sbin/drakroam &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
@@ -82,8 +82,9 @@ my %actions = (
                    choices => sub { network::network::netprofile_list() },
                    choice_selected => sub { $_[0] eq $net->{PROFILE} },
                    launch => sub {
-                       $net->{PROFILE} = $_[0];
-                       network::tools::bg_command_as_root('/sbin/set-netprofile', $net->{PROFILE});
+		       require run_program;
+		       $net->{PROFILE} = $_[0];
+		       run_program::raw({ detach => 1 }, network::tools::wrap_command_for_root('/sbin/set-netprofile', $net->{PROFILE}));
                    }
                },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetworkForce() } },

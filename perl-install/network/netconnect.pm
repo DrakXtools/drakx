@@ -1272,9 +1272,9 @@ It is not necessary on most networks."),
                         if ($a) {
                             # local $::isWizard = 0;
                             my $_w = $in->wait_message('', N("Testing your connection..."), 1);
-                            network::tools::disconnect_backend($net);
+                            network::tools::stop_net_interface($net, 0);
                             sleep 1;
-                            network::tools::connect_backend($net);
+                            network::tools::start_net_interface($net, 1);
                             my $s = 30;
                             $type =~ /modem/ and $s = 50;
                             $type =~ /adsl/ and $s = 35;
@@ -1361,12 +1361,12 @@ sub start_internet {
     #- give a chance for module to be loaded using kernel-BOOT modules...
     #- FIXME, this has nothing to do there
     $::isStandalone or modules::load_category($o->{modules_conf}, 'network/*');
-    network::tools::start_interface($o->{net}{net_interface});
+    network::tools::start_net_interface($o->{net}, 1);
 }
 
 sub stop_internet {
     my ($o) = @_;
-    network::tools::stop_interface($o->{net}{net_interface});
+    network::tools::stop_net_interface($o->{net}, 1);
 }
 
 1;
