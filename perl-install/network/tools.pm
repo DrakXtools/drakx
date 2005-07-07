@@ -85,6 +85,17 @@ sub stop_net_interface {
     stop_interface($net->{net_interface}, $detach);
 }
 
+sub start_ifplugd {
+    my ($interface) = @_;
+    run_program::run('/sbin/ifplugd', '-b', '-i', $interface);
+}
+
+sub stop_ifplugd {
+    my ($interface) = @_;
+    my $ifplugd = chomp_(cat_("/var/run/ifplugd.$interface.pid"));
+    $ifplugd and kill(15, $ifplugd);
+}
+
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 # request a ref on a bg_connect and a ref on a scalar
