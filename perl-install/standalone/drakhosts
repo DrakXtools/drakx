@@ -209,11 +209,18 @@ $treeview->set_rules_hint(TRUE);
 $treeview->get_selection->set_mode('single');
 add_columns($treeview);
 
-my $okcancel = create_okcancel({
-				cancel_clicked => sub { ugtk2->exit },
-				ok_clicked => \&write_conf_hosts,
-			       },
-			      );
+$treeview->signal_connect(button_press_event => sub {
+			    my (undef, $event) = @_;
+			    my $model = $treeview->get_model;
+			    my $selection = $treeview->get_selection;
+			    my $iter = $selection->get_selected;
+			    if ($iter) {
+			      my $path = $model->get_path($iter);
+			      my $i = ($path->get_indices)[0];
+			      add_modify_entry($model, $treeview, "modify") if $event->type eq '2button-press';
+			    }
+			  });
+
 
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
@@ -242,9 +249,9 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                       err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
                                                     }
                                                   }),
+			     if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })),
 			    ),
-		 if_($::isEmbedded, 0, $okcancel),
-		),
+		 ),
        );
 
 $W->show_all;
