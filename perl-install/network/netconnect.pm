@@ -1308,7 +1308,7 @@ Try to reconfigure your connection.");
                     no_back => 1,
                     end => 1,
                     post => sub {
-                        $::isInstall and network::tools::disconnect_backend($net);
+                        $::isInstall and network::tools::stop_net_interface($net, 0);
                         return "end";
                     },
                    },
