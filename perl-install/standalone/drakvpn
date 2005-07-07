@@ -308,7 +308,7 @@ step_configure_ipsec_conf:
 @section_names = network::ipsec::get_section_names_ipsec_conf($ipsec,$kernel_version) if $ipsec;
 
 my $choice = $section_names[0];
-my $d = $in->ask_from_list(N("%s entries", $ipsec_conf),
+my $d = $in->ask_from_list_(N("%s entries", $ipsec_conf),
 N("The %s file contents
 is divided into sections.\n
 You can now:\n
