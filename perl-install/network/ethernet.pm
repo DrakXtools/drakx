@@ -107,7 +107,7 @@ sub get_eth_cards_names {
 #- returns (link_type, mac_address)
 sub get_eth_card_mac_address {
     my ($intf) = @_;
-    `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s([0-9a-z:]+)\s|;
+    `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\s|;
 }
 
 #- write interfaces MAC address in iftab
