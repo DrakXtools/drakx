@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.32mdk
+Release: 0.33mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.33mdk
+- drakboot: add support for graphical grub (Herton Ronaldo Krzes)
+- draknfs: various adjustement in main windows (antoine)
+- drakvpn: fix untranslated strings (#16736)
+
 * Thu Jul  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.32mdk
 - drakconnect: do not restart network to apply modifications, run ifup
   or ifplugd instead (blino)
