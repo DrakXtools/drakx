@@ -846,8 +846,10 @@ sub build_n_update {
     run_program::run("$mknbi -v $command") or $in->ask_warn(N("Error"), N("%s failed", $mknbi));
 	if ($conf{CREATE_PXE}) {
 		my $pxedir = get_platform_pxe();
-		cp_af("/boot/$kernel", $pxedir) if !-f "$pxedir/$kernel";
-		link_pxe($kernel, $nic);
+		if (-d $pxedir) {
+			cp_af("/boot/$kernel", $pxedir) if !-f "$pxedir/$kernel";
+			link_pxe($kernel, $nic);
+		}
 	}
     update_list($list_model);
 }
