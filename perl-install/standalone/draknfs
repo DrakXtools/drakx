@@ -328,6 +328,17 @@ sub add_modify_entry {
     $anonuid->set_sensitive(0);
   }
 
+  my $advanced = Gtk2::CheckButton->new("Enable advanced options");
+  $advanced->set_active(0);
+  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
+  $advanced->signal_connect(clicked => sub {
+      if ($advanced->get_active =~ /1/) {
+	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(1) }
+      } else {
+	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
+      }
+  });
+
   gtkpack_($dialog->vbox,
 	   0, gtkadd(Gtk2::Frame->new(N("NFS directory")),
 		     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
@@ -348,6 +359,7 @@ sub add_modify_entry {
 		    ),
 	   0, gtkadd(Gtk2::Frame->new(N("Advanced Options")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+			      0, $advanced,
 			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
 			      0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
 			      0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
