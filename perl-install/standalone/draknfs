@@ -201,6 +201,7 @@ sub create_pango_help_box {
 sub help_b {
   my ($tittle, $help_data) = @_;
   gtksignal_connect(new Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub {
+
 		      my $dialog = new Gtk2::Dialog();
 		      $dialog->set_title(N("Help"));
 		      $dialog->set_modal(1);
@@ -498,7 +499,7 @@ sub cell_edited {
 my $model = create_model();
 
 my $window = ugtk2->new("Draknfs $version");
-$window->{rwindow}->set_size_request(530, 300) unless $::isEmbedded;
+$window->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 $window->{rwindow}->set_position('center') if !$::isEmbedded;
 my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
@@ -527,42 +528,45 @@ my $factory = Gtk2::ItemFactory->new('Gtk2::MenuBar', '<main>', undef);
 $factory->create_items('menu', @items);
 my $menu = $factory->get_widget('<main>');
 
+my $okcancel = create_okcancel({
+				cancel_clicked => sub { ugtk2->exit },
+				ok_clicked => \&write_conf,
+			       },
+			      );
+
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
-		 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares."),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakNFS add/remove/alter NFS shares"))),
 		 0, $menu,
-		 1, create_scrolled_window($treeview),
-		 0, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
-			     1, gtkpack_(create_hbox('edge'),
+		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares.")),
+		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+			     1, create_scrolled_window($treeview),
+			     0, gtkpack_(create_vbox('start'),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-					     eval { add_modify_entry($model, $treeview, "add") };
-					     my $err = $@;
-					     if ($err) {
-						 err_dialog(N("Error"), N("Failed to add NFS share.") . "\n\n" . $err);
-					     }
-					 }),
+								eval { add_modify_entry($model, $treeview, "add") };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to add NFS share.") . "\n\n" . $err);
+								}
+							      }),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-					     eval { add_modify_entry($model, $treeview, "modify") };
-					     my $err = $@;
-					     if ($err) {
-						 err_dialog(N("Error"), N("Failed to Modify NFS share.") . "\n\n" . $err);
-					     }
-					 }),
-
+								eval { add_modify_entry($model, $treeview, "modify") };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to Modify NFS share.") . "\n\n" . $err);
+								}
+							      }),
+					 
 					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-					     eval { remove_entry($model, $treeview) };
-					     my $err = $@;
-					     if ($err) {
-						 err_dialog(N("Error"), N("Failed to remove an NFS share.") . "\n\n" . $err);
-					     }
-					 }),
-					 0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
-					     write_conf();
-					 }),
-
-					 if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_all)),
-					 ),
-			     ),
+								eval { remove_entry($model, $treeview) };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to remove an NFS share.") . "\n\n" . $err);
+								}
+							      }),
+					),
+			    ),
+		 if_(!$::isEmbedded, 0, $okcancel),
 		 ),
 	);
 
