@@ -21,7 +21,7 @@ sub recreate_ipsec_conf {
 					print "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]\n";
 				} else {
 					print "\t$ipsec->{$key1}{$key2}[0]=$ipsec->{$key1}{$key2}[1]\n";
-				};
+				}
 			}
 		}
 	} else { 
@@ -40,8 +40,8 @@ sub recreate_ipsec_conf {
 					$ipsec->{$key1}{protocol} . "/" .
 					$ipsec->{$key1}{mode} . "/" .
 					$ipsec->{$key1}{src_dest} . "/" .
-					$ipsec->{$key1}{level} . ";\n"
-			}; 
+					$ipsec->{$key1}{level} . ";\n";
+			}
 		}
 	}
 }
@@ -57,7 +57,7 @@ sub recreate_racoon_conf {
 			print "}\n$racoon->{$key1}\n" if ! $racoon->{$key1}{1};
 		} else {
 			print "$racoon->{$key1}\n" if ! $racoon->{$key1}{1};
-		};
+		}
 			$in_a_section = "n";
 			$in_a_proposal_section = "n";
 		foreach my $key2 (ikeys %{$racoon->{$key1}}) {
@@ -106,7 +106,7 @@ sub recreate_ipsec_conf1_k24 {
 				print "$key1-->$key2-->$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]\n";
 			} else {
 				print "\t$key2-->$ipsec->{$key1}{$key2}[0]=$ipsec->{$key1}{$key2}[1]\n";
-			};
+			}
 		}
 	}
 }
@@ -122,7 +122,7 @@ sub start_daemons () {
 	    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'ipsec';
 	} else {
 
-	};
+	}
 	    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'shorewall';
 }
 
@@ -132,9 +132,9 @@ sub stop_daemons () {
 	if (-e "/etc/rc.d/init.d/ipsec") {
     	foreach (qw(ipsec)) {
 			system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
-	    };
+	    }
 		sys("/sbin/chkconfig --level 345 $_ off") && -e "/etc/rc.d/init.d/$_" foreach 'ipsec';
-	};
+	}
 	    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall stop >/dev/null");
 
 }
@@ -181,7 +181,7 @@ sub read_racoon_conf {
 			$line =~ /(.*)#(.*)/ if $line !~ /^#/; #- define before and after comment
 #			print "--line-->$line\n";
 	                my $data_part = $1;
-        	        my $comment_part = "#".$2;
+        	        my $comment_part = "#" . $2;
 			if ($data_part) {
 				$data_part =~ s/,//g;
 #				print "@@".$data_part."->".$comment_part."\n";
@@ -211,7 +211,7 @@ sub read_racoon_conf {
 					$nb++;
 					put_in_hash(\%conf, { $nb => $line });
 					$in_a_section = "n";
-				};
+				}
 			} elsif ($line =~ /^sainfo|^remote|^listen|^timer|^padding/ && $in_a_section eq "n") {
 				$i=1;
 				$nb++;
@@ -227,8 +227,8 @@ sub read_racoon_conf {
 			} else {
 				put_in_hash($conf{$nb} ||= {}, { $i => [@line1]  });
 				$i++;
-			};
-	};
+			}
+	}
 	
 \%conf;
 }
@@ -237,22 +237,15 @@ sub display_racoon_conf {
 	my ($racoon) = @_;
 	my $display = "";
 	my $prefix_to_simple_line = "";
-	my $pt;
 	foreach my $key1 (ikeys %$racoon) {
 		if (!$racoon->{$key1}{1}) {
 			$display .= $prefix_to_simple_line . $racoon->{$key1} . "\n";
 			$prefix_to_simple_line = "";
 		} else {
 			foreach my $key2 (ikeys %{$racoon->{$key1}}) {
-				if ($key2 > 1) {
-					$pt = $racoon->{$key1}{$key2-1}[0];
-				} else {
-					$pt = $racoon->{$key1}{1}[0];
-				};
 				my $t = $racoon->{$key1}{1}[0];
 				my $f = $racoon->{$key1}{$key2}[0];
 				my $list_length = scalar @{$racoon->{$key1}{$key2}};
-				my $already_read = 0;
 				my $line = "";
 				
 				if ($racoon->{$key1}{$key2}[0] eq "sainfo" && !$racoon->{$key1}{$key2}[2]) {
@@ -278,8 +271,6 @@ sub display_racoon_conf {
 						} else {
 							$line .= "$c "; 
 						}
-	
-						$already_read = 1;
 					}
 				}
 	
@@ -308,22 +299,15 @@ sub write_racoon_conf {
 	my ($racoon_conf, $racoon) = @_;
 	my $display = "";
 	my $prefix_to_simple_line = "";
-	my $pt;
 	foreach my $key1 (ikeys %$racoon) {
 		if (!$racoon->{$key1}{1}) {
 			$display .= $prefix_to_simple_line . $racoon->{$key1} . "\n";
 			$prefix_to_simple_line = "";
 		} else {
 			foreach my $key2 (ikeys %{$racoon->{$key1}}) {
-				if ($key2 > 1) {
-					$pt = $racoon->{$key1}{$key2-1}[0];
-				} else {
-					$pt = $racoon->{$key1}{1}[0];
-				};
 				my $t = $racoon->{$key1}{1}[0];
 				my $f = $racoon->{$key1}{$key2}[0];
 				my $list_length = scalar @{$racoon->{$key1}{$key2}};
-				my $already_read = 0;
 				my $line = "";
 
 				if ($racoon->{$key1}{$key2}[0] eq "sainfo" && !$racoon->{$key1}{$key2}[2]) {
@@ -349,9 +333,7 @@ sub write_racoon_conf {
 						} else {
 							$line .= "$c "; 
 						}
-	
-						$already_read = 1;
-					}
+                          }
 				}
 
 				if ($f =~ /^timer|^listen|^padding|^remote|^sainfo/) {
@@ -392,7 +374,7 @@ sub get_section_names_racoon_conf {
 				if ($s !~ /^#|^proposal/) {
 					$section_title .=  $separator . $s;
 					$separator = " ";
-				};
+				}
 			}
 			push(@section_names, $section_title) if $section_title ne "";
 		}
@@ -425,11 +407,11 @@ sub matched_section_key_number_racoon_conf {
 				if ($s !~ /^#|^proposal/) {
 					$section_title .=  $separator . $s;
 					$separator = " ";
-				};
-			};
+				}
+			}
 			if ($section_title eq $section_name) {
 				return $key1;
-			};
+			}
 		}
 	}
 
@@ -450,7 +432,7 @@ sub already_existing_section_racoon_conf {
 				if ($s !~ /^#|^proposal/) {
 					$section_title .=  $separator . $s;
 					$separator = " ";
-				};
+				}
 			}
 
 			$section_title eq $section_name;
@@ -524,7 +506,7 @@ sub read_ipsec_conf {
 						$nb++;
 						put_in_hash(\%conf, { $nb => $line });
 						$in_a_conn = "n";
-					};
+					}
 				} elsif ($line =~ /^conn|^config|^version/ && $in_a_conn eq "n") {
 					@line1 = split /\s+/,$line;
 					$i=1;
@@ -542,8 +524,8 @@ sub read_ipsec_conf {
 					@line1 = split /=/,$line;
 					put_in_hash($conf{$nb} ||= {}, { $i => [$line1[0], $line1[1]] });
 					$i++;
-				};
-		};
+				}
+		}
 	
 	} else {
 	#- kernel 2.6 part -------------------------------
@@ -577,10 +559,10 @@ sub read_ipsec_conf {
 				} else {
 					$nb++;
 					put_in_hash(\%conf, { $nb => $myline });
-				};
-			};
+				}
+			}
 	
-		};
+		}
 
 	\%conf;
 }
@@ -599,7 +581,7 @@ sub write_ipsec_conf {
 						print $ADD "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]\n";
 					} else {
 						print $ADD "\t$ipsec->{$key1}{$key2}[0]=$ipsec->{$key1}{$key2}[1]\n" if $ipsec->{$key1}{$key2}[0] && $ipsec->{$key1}{$key2}[1];
-					};
+					}
 				}
 			}
 	} else {
@@ -619,8 +601,8 @@ sub write_ipsec_conf {
 						$ipsec->{$key1}{protocol} . "/" .
 						$ipsec->{$key1}{mode} . "/" .
 						$ipsec->{$key1}{src_dest} . "/" .
-						$ipsec->{$key1}{level} . ";\n"
-			}; 
+						$ipsec->{$key1}{level} . ";\n";
+			}
 		}
 		open(my $ADD, "> $ipsec_conf") or die "Can not open the $ipsec_conf file for writing";
 			print $ADD $display;
@@ -642,7 +624,7 @@ sub display_ipsec_conf {
 					$display .= "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]\n";
 				} else {
 					$display .= "\t$ipsec->{$key1}{$key2}[0]=$ipsec->{$key1}{$key2}[1]\n";
-				};
+				}
 			}
 		}
 
@@ -682,7 +664,7 @@ sub get_section_names_ipsec_conf {
 			foreach my $key2 (ikeys %{$ipsec->{$key1}}) {
 				if ($ipsec->{$key1}{$key2}[0] =~ m/(^conn|^config|^version)/) {
 					push(@section_names, "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]");
-				};
+				}
 			}
 		}
 
@@ -691,7 +673,7 @@ sub get_section_names_ipsec_conf {
 		foreach my $key1 (ikeys %$ipsec) {
 				if ($ipsec->{$key1}{command} =~ m/(^spdadd)/) {
 					push(@section_names, "$ipsec->{$key1}{src_range} $ipsec->{$key1}{dst_range}");
-				};
+				}
 		}
 	}
 
@@ -756,7 +738,7 @@ sub already_existing_section_ipsec_conf {
 				return "already existing";
 			}
 		}
-	};
+	}
 	return "no";
 }
 

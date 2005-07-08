@@ -27,8 +27,8 @@ sub lpstat_lpv() {
     
     my $currentitem = -1;
     for my $line (@lpstat) {
-	chomp ($line);
-	if (!($line =~ m!^\s*$!)) {
+	chomp($line);
+	if ($line !~ m!^\s*$!) {
 	    if ($line =~ m!^printer\s+(\S+)\s+(\S.*)$!) {
 		# Beginning of new printer's entry
 		my $name = $1;
@@ -51,7 +51,7 @@ sub lpstat_lpv() {
 		my $name = $1;
 		my $uri = $2;
 		if (defined($itemshash->{$name})) {
-		    if ($uri !~ /:/) {$uri = "file:" . $uri};
+		    if ($uri !~ /:/) { $uri = "file:" . $uri }
 		    $currentitem = $itemshash->{$name};
 		    if (($currentitem <= $#items) &&
 			($items[$currentitem]{queuename} eq $name)) {
@@ -136,7 +136,7 @@ sub get_remote_queues {
 sub queue_enabled {
     my ($queue) = @_;
     0 != grep {
-	/\b$queue\b.*\benabled\b/i
+	/\b$queue\b.*\benabled\b/i;
     } run_program::rooted_get_stdout($::prefix, 'lpstat', '-p', $queue);
 }
 

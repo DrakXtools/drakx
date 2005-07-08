@@ -152,11 +152,11 @@ sub configured() {
 		port => $port, 
 		val => { 
 		    DESCRIPTION => $description,
-		    ($backend ? ( BACKEND => $backend ) : ()),
+		    ($backend ? (BACKEND => $backend) : ()),
 		    ($firmwareline ? 
-		     ( FIRMWARELINE => $firmwareline ) : ()),
+		     (FIRMWARELINE => $firmwareline) : ()),
 		}
-	    }
+	    };
 	}
     }
     close LIST;
@@ -207,8 +207,8 @@ sub nonroot_access_for_parport {
 
 	# Modify /etc/xinetd.d/saned to let saned run as root
 	my @sanedxinetdconf = cat_("/etc/xinetd.d/saned");
-	( s/(user\s*=\s*).*$/$1root/ ) foreach @sanedxinetdconf;
-	( s/(group\s*=\s*).*$/$1root/ ) foreach @sanedxinetdconf;
+	s/(user\s*=\s*).*$/$1root/ foreach @sanedxinetdconf;
+	s/(group\s*=\s*).*$/$1root/ foreach @sanedxinetdconf;
 	output("/etc/xinetd.d/saned", @sanedxinetdconf);
 
 	# Read list of hosts to where to export the local scanners
@@ -241,8 +241,8 @@ sub nonroot_access_for_parport {
 	if (-r "/etc/xinetd.d/saned") {
 	    # Modify /etc/xinetd.d/saned to let saned run as saned
 	    my @sanedxinetdconf = cat_("/etc/xinetd.d/saned");
-	    ( s/(user\s*=\s*).*$/$1saned/ ) foreach @sanedxinetdconf;
-	    ( s/(group\s*=\s*).*$/$1saned/ ) foreach @sanedxinetdconf;
+	    s/(user\s*=\s*).*$/$1saned/ foreach @sanedxinetdconf;
+	    s/(group\s*=\s*).*$/$1saned/ foreach @sanedxinetdconf;
 	    output("/etc/xinetd.d/saned", @sanedxinetdconf);
 	    # Restart xinetd
 	    services::restart("xinetd") if $sanedrunning;
@@ -284,7 +284,7 @@ sub detect {
 		my ($device) = grep { sprintf("%04x", $_->{vendor}) eq $vendor && sprintf("%04x", $_->{id}) eq $id } @devices;
 
 		if ($device) {
-              $driver = $device->{driver}
+              $driver = $device->{driver};
 		} else {
               warn "i failled to lookupp $vendorid && $productid";
 		}

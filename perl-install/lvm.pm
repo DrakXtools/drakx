@@ -70,7 +70,7 @@ sub get_pv_field {
 }
 sub pv_physical_extents {
     my ($pv) = @_;
-    split(' ', lvm::get_pv_field($pv, 'pv_pe_alloc_count,pv_pe_count'))
+    split(' ', lvm::get_pv_field($pv, 'pv_pe_alloc_count,pv_pe_count'));
 }
 sub pv_to_vg {
     my ($pv) = @_;

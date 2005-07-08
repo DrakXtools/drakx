@@ -80,9 +80,9 @@ sub printer_type($) {
 
 sub SIGHUP_daemon {
     my ($service) = @_;
-    if ($service eq "cupsd") { $service = "cups" };
+    if ($service eq "cupsd") { $service = "cups" }
     # PDQ and remote CUPS have no daemons, exit.
-    if (($service eq "pdq") || ($service eq "rcups")) { return 1 };
+    if (($service eq "pdq") || ($service eq "rcups")) { return 1 }
     # CUPS needs auto-correction for its configuration
     run_program::rooted($::prefix, "/usr/sbin/correctcupsconfig") if $service eq "cups";
     # Name of the daemon
@@ -741,7 +741,7 @@ sub set_jap_textmode {
     # When installing CUPS later it will not work.
     return 1 if (! -r "$::prefix/etc/cups/mime.convs");
     substInFile {
-        s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!        
+        s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!;
     } "$::prefix/etc/cups/mime.convs";
     return 1;
 }
@@ -1008,7 +1008,7 @@ sub networkaddress {
     my ($address) = @_;
 
     if ($address =~ /\.255$/) {
-	while ($address =~ s/\.255$//) {};
+	while ($address =~ s/\.255$//) {}
 	$address .= ".*";
     }
  
@@ -1295,7 +1295,7 @@ sub read_cups_config {
     my @localips = printer::detect::getIPsOfLocalMachine();
     @{$printer->{cupsconfig}{root}{AllowFrom}} =
 	grep {
-	    !member($_, @localips)
+	    !member($_, @localips);
 	} @{$printer->{cupsconfig}{root}{AllowFrom}};
 
     # Keyword "Deny from" 
@@ -1393,7 +1393,7 @@ sub write_cups_config {
 	     "Allow From " .
 	     join("\nAllow From ", 
 		  grep {
-		      !member($_, @localips)
+		      !member($_, @localips);
 		  } @{$printer->{cupsconfig}{clientnetworks}}) .
 	     "\n" : "") .
 	    "</Location>\n";
@@ -1410,7 +1410,7 @@ sub write_cups_config {
 						@{$printer->{cupsconfig}{clientnetworks}}));
 	} else {
 	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
-					      'BrowseAddress')
+					      'BrowseAddress');
 	}
 	# Set "BrowseAllow" lines
 	if ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) {
@@ -1469,7 +1469,7 @@ sub read_client_conf() {
 sub write_client_conf {
     my ($daemonless_cups, $remote_cups_server) = @_;
     # Create the directory for client.conf if needed
-    (-d "$::prefix/etc/cups/" ) || mkdir("$::prefix/etc/cups/") || return 1;
+    (-d "$::prefix/etc/cups/") || mkdir("$::prefix/etc/cups/") || return 1;
     my (@client_conf) = cat_("$::prefix/etc/cups/client.conf");
     if ($daemonless_cups) {
 	handle_configs::set_directive(\@client_conf, 
@@ -1836,7 +1836,7 @@ sub poll_ppd_base {
 			 $isrecommended && $isfoomatic &&
 			 (my @foundkeys = grep {
 			     /^$mf\|$model\|/ && !/CUPS/i &&
-			     $thedb{$_}{driver} eq "PPD" 
+			     $thedb{$_}{driver} eq "PPD";
 			 } keys %thedb)) {
 		    # Expert mode: "Foomatic + Postscript" driver is
 		    # recommended and there was a PostScript PPD? Make
@@ -1856,7 +1856,7 @@ sub poll_ppd_base {
 			 $isrecommended && $isfoomatic &&
 			 (@foundkeys = grep {
 			     /^$mf\|$model\|.*$sprecstr/ && 
-			     !/CUPS/i && $thedb{$_}{driver} eq "PPD" 
+			     !/CUPS/i && $thedb{$_}{driver} eq "PPD";
 			 } keys %thedb)) {
 		    # Expert mode: Foomatic driver other than "Foomatic +
 		    # Postscript" is recommended and there was a PostScript 
@@ -1885,7 +1885,7 @@ sub poll_ppd_base {
 		#my ($devidmake, $devidmodel) = ppd_devid_data($ppd);
 		#$thedb{$key}{devidmake} = $devidmake;
 		#$thedb{$key}{devidmodel} = $devidmodel;
-	    }
+	    };
 	}
 	close $PPDS;
 	scalar(keys %thedb) - $driversthere > 5 and last;
@@ -1932,7 +1932,7 @@ sub configure_queue($) {
 			"-N", $printer->{currentqueue}{desc},
 			"-L", $printer->{currentqueue}{loc},
 			@{$printer->{currentqueue}{options}}
-			) or return 0;;
+			) or return 0;
     if ($printer->{currentqueue}{ppd} &&
 	($printer->{currentqueue}{ppd} ne '1')) {
 	# Add a comment line containing the path of the used PPD file to the
@@ -2580,7 +2580,7 @@ sub remove_hpoj_config {
 		my $host = $1;
 		if ($file =~ /$host/) {
 		    closedir PTALDIR;
-		    unlink ($file) or return $file;
+		    unlink($file) or return $file;
 		    printer::services::restart("hpoj");
 		    return undef;
 		} 
@@ -2590,7 +2590,7 @@ sub remove_hpoj_config {
 		     (grep { /$d->{val}{SERIALNUMBER}/ } 
 		      chomp_(cat_($file))))) {
 		    closedir PTALDIR;
-		    unlink ($file) or return $file;
+		    unlink($file) or return $file;
 		    printer::services::restart("hpoj");
 		    return undef;
 		}

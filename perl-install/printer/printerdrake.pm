@@ -33,7 +33,7 @@ sub config_cups {
     local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 }
 
     #$in->set_help('configureRemoteCUPSServer') if $::isInstall;
     #- hack to handle cups remote server printing,
@@ -94,8 +94,8 @@ sub config_cups {
 		},
 		disabled => sub {
 		    $daemonless_cups ||
-		    (!$printer->{cupsconfig}{localprintersshared} &&
-		     !$printer->{cupsconfig}{remotebroadcastsaccepted});
+		    !$printer->{cupsconfig}{localprintersshared} &&
+		     !$printer->{cupsconfig}{remotebroadcastsaccepted};
 		} },
 	      { val => N("Additional CUPS servers: ") .
 		     ($#{$browsepoll->{list}} >= 0 ?
@@ -523,7 +523,7 @@ N("Examples for correct IPs:\n") .
 			 type => 'list',
 			 sort => 0,
 			 list => [ N("Off"),
-				   N("On, Name or IP of remote server:") ]},
+				   N("On, Name or IP of remote server:") ] },
 		       { val => \$rserver, 
 			 disabled => sub {
 			     $modechoice ne 
@@ -533,7 +533,7 @@ N("Examples for correct IPs:\n") .
 		     )) {
 		    # OK was clicked, update the data
 		    $daemonless_cups = 
-			($modechoice eq N("On, Name or IP of remote server:"));
+			$modechoice eq N("On, Name or IP of remote server:");
 		    $remote_cups_server = $rserver;
 		}
 	    } else {
@@ -550,8 +550,8 @@ N("Examples for correct IPs:\n") .
 		printer::main::set_jap_textmode($jap_textmode);
 		# Switch state of daemon-less CUPS mode and write
 		# client.conf
-		if (($daemonless_cups && $printer->{SPOOLER} ne "rcups") ||
-		    (!$daemonless_cups && $printer->{SPOOLER} eq "rcups")) {
+		if ($daemonless_cups && $printer->{SPOOLER} ne "rcups" ||
+		    !$daemonless_cups && $printer->{SPOOLER} eq "rcups") {
 		    my $oldspooler = $printer->{SPOOLER};
 		    $printer->{SPOOLER} = ($daemonless_cups ? 
 					  "rcups" : "cups");
@@ -643,8 +643,8 @@ Printers on remote CUPS servers do not need to be configured here; these printer
 					 }
 					 return 0;
 				     }
-				 }},
-			       [ { val => \$timeout } ] ); 
+				 } },
+			       [ { val => \$timeout } ]);
 			  0; 
 		      } },
 		    ],
@@ -747,7 +747,7 @@ sub first_time_dialog {
 					\@choices, $quit);
 	return 0 if $choice ne $do_it;
     
-	if ($havelocalnetworks && !@autodetected ) {
+	if ($havelocalnetworks && !@autodetected) {
 	    return set_cups_daemon_mode($printer, $in);
 	} else {
 	    $printer->{SPOOLER} = "cups";
@@ -932,11 +932,11 @@ sub generate_queuename {
     my $ml = 12;
     if (length($queue) > $ml) {
 	my %parts;
-	$parts{'make'} = $make;
-	$parts{'model'} = $model;
+	$parts{make} = $make;
+	$parts{model} = $model;
 	# Go through the two components, begin with model name, then
 	# make and then driver
-	for my $part (qw/model make/) {
+	foreach my $part (qw(model make)) {
 	    $parts{$part} =~ s/[^a-zA-Z0-9_]/ /g; 
 
 	    # Split the component into words, cutting always at the
@@ -946,39 +946,39 @@ sub generate_queuename {
 		split(/(?<=[a-zA-Z])(?![a-zA-Z])|(?<=[a-z])(?=[A-Z])/,
 		      $parts{$part});
 	    # Go through all words
-	    for (@words) {
+	    foreach (@words) {
 		# Do not abbreviate words of less than 3 letters
-		next if ($_ !~ /[a-zA-Z]{3,}$/);
+		next if !/[a-zA-Z]{3,}$/;
 	        while (1) {
 		    # Remove the last letter
 		    chop;
 		    # Build the shortened component ...
 		    $parts{$part} = join('', @words);
 		    # ... and the queue name
-		    $queue = "$parts{'make'} $parts{'model'}";
+		    $queue = "$parts{make} $parts{model}";
 		    $queue =~ s/\s+//g;
 		    # Stop if the queue name has 12 characters or
 		    # less, if there is only one letter left, or if
 		    # the manufacturer name is reduced to three
 		    # characters.
 		    last if ((length($queue) <= $ml) ||
-			     ($_ !~ /[a-zA-Z]{2,}$/) ||
+			     (!/[a-zA-Z]{2,}$/) ||
 			     (($part eq 'make') && 
-			      (length($parts{'make'}) <= 3)));
+			      (length($parts{make}) <= 3)));
 		}
 		$parts{$part} = join('', @words);
-		$queue = "$parts{'make'} $parts{'model'}";
+		$queue = "$parts{make} $parts{model}";
 		$queue =~ s/\s+//g;
 		last if (length($queue) <= $ml);
 	    }
 	    last if (length($queue) <= $ml);
 	}
 	while ((length($queue) > $ml) &&
-	       (length($parts{'model'}) > 3)) {
+	       (length($parts{model}) > 3)) {
 	    # Queue name too long? Remove last words from model name.
-	    $parts{'model'} =~
-		s/[^a-zA-Z0-9]+[a-zA-Z0-9]*$// || last;
-	    $queue = "$parts{'make'} $parts{'model'}";
+	    last if !($parts{model} =~
+		s/[^a-zA-Z0-9]+[a-zA-Z0-9]*$//);
+	    $queue = "$parts{make} $parts{model}";
 	    $queue =~ s/\s+//g;
 	}
 	if (length($queue) > $ml) {
@@ -1003,7 +1003,7 @@ sub generate_queuename {
 		$queue .= $i;
 	    }
 	    last if (!$printer->{configured}{$queue});
-	    $i ++;
+	    $i++;
 	}
     }
 
@@ -1173,7 +1173,7 @@ Congratulations, your printer is now installed and configured!
 
 You can print using the \"Print\" command of your application (usually in the \"File\" menu).
 
-If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the %s Control Center.", $shortdistroname))
+If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the %s Control Center.", $shortdistroname));
     }
 }
 
@@ -1315,8 +1315,8 @@ sub setup_local_autoscan {
 	for (my $i = 0; $i <= $#prefixes; $i++) {
 	    my $firstinlist = $first =~ m!^$prefixes[$i]!;
 	    my $secondinlist = $second =~ m!^$prefixes[$i]!;
-	    if ($firstinlist && !$secondinlist) { return -1 };
-	    if ($secondinlist && !$firstinlist) { return 1 };
+	    if ($firstinlist && !$secondinlist) { return -1 }
+	    if ($secondinlist && !$firstinlist) { return 1 }
 	}
 	return $first cmp $second;
     } keys(%$menuentries);
@@ -1338,7 +1338,7 @@ sub setup_local_autoscan {
     }
     if ($in) {
 #	$printer->{expert} or $in->set_help('configurePrinterDev') if $::isInstall;
-	if ($#menuentrieslist < 0) { # No menu entry
+	if (@menuentrieslist < 1) { # No menu entry
 	    # auto-detection has failed, we must do all manually
 	    $do_auto_detect = 0;
 	    $printer->{MANUAL} = 1;
@@ -1455,7 +1455,7 @@ sub setup_lpd {
     local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 }
 
 #    $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
@@ -1536,7 +1536,7 @@ sub setup_smb {
     local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 }
 
 #    $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
@@ -1544,7 +1544,7 @@ sub setup_smb {
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^smb:/) {
 	$uri = $printer->{currentqueue}{connect};
-	my $parameters = $1 if $uri =~ m!^\s*smb://(.*)$!;
+	my $parameters = $uri =~ m!^\s*smb://(.*)$! && $1;
 	# Get the user's login and password from the URI
 	if ($parameters =~ m!([^@]*)@([^@]+)!) {
 	    my $login = $1;
@@ -1638,7 +1638,7 @@ sub setup_smb {
 	    unshift(@menuentrieslist, $menustr);
 	    $menuchoice = $menustr;
 	}
-	if ($#menuentrieslist < 0) {
+	if (@menuentrieslist < 1) {
 	    $autodetect = 0;
 	} elsif ($menuchoice eq "") {
 	    $menuchoice = $menuentrieslist[0];
@@ -1743,7 +1743,7 @@ sub setup_ncp {
     local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 }
 
 #    $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
@@ -1818,7 +1818,7 @@ sub setup_socket {
     local $::isEmbedded = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 }
 
 #    $in->set_help('setupSocket') if $::isInstall;
 
@@ -1895,7 +1895,7 @@ sub setup_socket {
 	    unshift(@menuentrieslist, $menustr);
 	    $menuchoice = $menustr;
 	}
-	if ($#menuentrieslist < 0) {
+	if (@menuentrieslist < 1) {
 	    $autodetect = 0;
 	} elsif ($menuchoice eq "") {
 	    $menuchoice = $menuentrieslist[0];
@@ -1969,7 +1969,7 @@ sub setup_socket {
 		  "nc") . " " .
 		N("Aborting"));
 	    return 0;
-	}
+	};
     }
 
     # Auto-detect printer model
@@ -2185,8 +2185,8 @@ sub setup_common {
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
-		if (($device =~ m!/usb/!) &&
-		    ($printer->{SPOOLER} eq 'cups')) {
+		if ($device =~ m!/usb/! &&
+		    $printer->{SPOOLER} eq 'cups') {
 		    my $choice = $in->ask_from_list
 			(N("Add a new printer"),
 			 N("On many HP printers there are special functions available, maintenance (ink level checking, nozzle cleaning. head alignment, ...) on all not too old inkjets, scanning on multi-function devices, and memory card access on printers with card readers. ") .
@@ -2223,7 +2223,7 @@ sub setup_common {
 		    $hplipinstallfailed = 1;
 		} else {
 		    $w = $in->wait_message(N("Printerdrake"),
-					   N("Installing %s package...",N("HPLIP")))
+					   N("Installing %s package...", N("HPLIP")))
 			if !$printer->{noninteractive};
 		    $in->do_pkgs->install('hplip')
 			or do {
@@ -2255,15 +2255,15 @@ sub setup_common {
 	    undef $w;
 	    $w = $in->wait_message(
 		 N("Printerdrake"),
-		 N("Checking device and configuring %s...",N("HPLIP")))
+		 N("Checking device and configuring %s...", N("HPLIP")))
 		if !$printer->{noninteractive};
 
 	    if (!$hplipinstallfailed) {
 		if ($isHPLIP) {
 		    my @uris = printer::main::start_hplip_manual();
-		    my @menu; my %menuhash;
-		    for my $item (@uris) {
-			if ($item =~ m!^hp:/(usb|par|net)/(\S*?)(\?\S*|)$!){
+		    my (@menu, %menuhash);
+		    foreach my $item (@uris) {
+			if ($item =~ m!^hp:/(usb|par|net)/(\S*?)(\?\S*|)$!) {
 			    my $modelname = "HP " . $2;
 			    $modelname =~ s/_/ /g;
 			    push(@menu, $modelname);
@@ -2355,7 +2355,7 @@ sub setup_common {
 			$hpojinstallfailed = 1;
 		    } else {
 			$w = $in->wait_message(N("Printerdrake"),
-					       N("Installing %s package...",N("HPOJ")))
+					       N("Installing %s package...", N("HPOJ")))
 			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
 			    or do {
@@ -2372,7 +2372,7 @@ sub setup_common {
 		undef $w;
 		$w = $in->wait_message
 		    (N("Printerdrake"),
-		     N("Checking device and configuring %s...",N("HPOJ")))
+		     N("Checking device and configuring %s...", N("HPOJ")))
 		    if !$printer->{noninteractive};
 		
 		eval { $ptaldevice = printer::main::configure_hpoj
@@ -2735,7 +2735,7 @@ sub setup_common {
 		$descr !~ /$guessedmake/i &&
 		($guessedmake ne "hp" ||
 		 $descr !~ /Hewlett[\s-]+Packard/i))
-            { $printer->{DBENTRY} = "" };
+            { $printer->{DBENTRY} = "" }
 	}
     }
 
@@ -2891,7 +2891,7 @@ sub get_db_entry {
 	    if ($matchstr !~ /$guessedmake/i &&
 		($guessedmake ne "hp" ||
 		 $matchstr !~ /Hewlett[\s-]+Packard/i))
-	    { $printer->{DBENTRY} = "" };
+	    { $printer->{DBENTRY} = "" }
 	}
 	if ($printer->{DBENTRY} eq "") {
 	    # Set the OLD_CHOICE to a non-existing value
@@ -3335,7 +3335,7 @@ sub unhexify {
     my $output = "";
     my $hexmode = 0;
     my $firstdigit = "";
-    for (my $i = 0; $i < length($input); $i ++) {
+    for (my $i = 0; $i < length($input); $i++) {
 	my $c = substr($input, $i, 1);
 	if ($hexmode) {
 	    if ($c eq ">") {
@@ -4311,15 +4311,15 @@ sub install_spooler {
 
     # Install all packages needed to run printerdrake and the chosen spooler
     $packages = $spoolers{$spooler}{packages2add};
-    push (@{$packages->[0]}, @{$commonpackages->[0]});
-    push (@{$packages->[0]}, @{$localqueuepackages->[0]}) if
+    push @{$packages->[0]}, @{$commonpackages->[0]};
+    push @{$packages->[0]}, @{$localqueuepackages->[0]} if
 	$spoolers{$spooler}{local_queues};
-    push (@{$packages->[1]}, @{$commonpackages->[1]});
-    push (@{$packages->[1]}, @{$localqueuepackages->[1]}) if
+    push @{$packages->[1]}, @{$commonpackages->[1]};
+    push @{$packages->[1]}, @{$localqueuepackages->[1]} if
 	$spoolers{$spooler}{local_queues};
     if (files_exist("/usr/bin/gimp") || files_exist("/usr/bin/gimp-2.2")) {
-	push (@{$packages->[0]}, @{$gimpprintingpackages->[0]});
-	push (@{$packages->[1]}, @{$gimpprintingpackages->[1]});
+	push @{$packages->[0]}, @{$gimpprintingpackages->[0]};
+	push @{$packages->[1]}, @{$gimpprintingpackages->[1]};
     }
     if (@{$packages->[0]} && !files_exist(@{$packages->[1]})) {
 	undef $w;
@@ -4396,7 +4396,7 @@ sub assure_remote_server_is_set {
 	    if (!$in->ask_from_
 		({ title => N("Remote CUPS server and no local CUPS daemon"),
 		   messages => N("In this mode there is no local printing system, all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine.") .
-		       "\n\n". 
+		       "\n\n" . 
 		       N("Enter the host name or IP of your CUPS server and click OK if you want to use this mode, click \"Quit\" otherwise."),
 		   cancel => N("Quit"),
 		   callbacks => {
@@ -4481,7 +4481,7 @@ sub set_cups_daemon_mode {
 	     type => 'list',
 	     sort => 0,
 	     list => [ N("Local CUPS printing system"),
-		       N("Remote server, specify Name or IP here:") ]},
+		       N("Remote server, specify Name or IP here:") ] },
 	   { val => \$remote_cups_server, 
 	     disabled => sub {
 		 $modechoice ne 
@@ -4608,7 +4608,7 @@ sub wizard_close {
     undef $::isWizard;
     $::WizardWindow->destroy if defined $::WizardWindow;
     undef $::WizardWindow;
-};
+}
 
 #- Program entry point for configuration of the printing system.
 sub main {
@@ -4760,7 +4760,7 @@ sub mainwindow_interactive {
 		$cursorpos = 
 		    $printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
 	    } elsif (($printer->{SPOOLER} eq "cups") ||
-		     ($printer->{SPOOLER} eq "rcups")){
+		     ($printer->{SPOOLER} eq "rcups")) {
 		$cursorpos = find { /!$printer->{DEFAULT}:[^!]*$/ } printer::cups::get_formatted_remote_queues($printer);
 	    }
 	}
@@ -4843,7 +4843,7 @@ sub mainwindow_interactive {
 			# Save the cursor position
 			$cursorpos = $menuchoice;
 			$menuchoice = '@usermode';
-			1 
+			1;
 			},
 			    val => ($printer->{expert} ? N("Normal Mode") :
 				    N("Expert Mode")) },
@@ -5035,7 +5035,7 @@ sub add_printer {
 		    goto step_5 if $printer->{expert} || $printer->{MANUAL};
 		    goto step_4 if $printer->{MANUALMODEL};
 		    goto step_3_9;
-		}
+		};
 	    }
 	    configure_queue($printer, $in) or die 'wizcancel';
 	    undef $printer->{MANUAL} if $printer->{MANUAL};
@@ -5100,7 +5100,7 @@ sub add_printer {
 	    edit_printer($printer, $in, $upNetwork, $queue);
 	    return 1;
 	}
-    };
+    }
 
     # Delete some variables
     cleanup($printer);
@@ -5362,6 +5362,6 @@ sub final_cleanup {
 	delete($printer->{configured}{$queue}{queuedata}{menuentry});
     }
     foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB CONFIGLPD noninteractive expert))
-    { delete $printer->{$_} };
+    { delete $printer->{$_} }
 }
 
