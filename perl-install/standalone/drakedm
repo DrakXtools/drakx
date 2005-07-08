@@ -71,7 +71,7 @@ several different X sessions on your local machine at the same time.")),
     if (any::running_window_manager()) {
         $in->ask_yesorno('', N("The change is done, do you want to restart the dm service?"), 1) and
 				$in->ask_yesorno('', N("You are going to close all running programs and lose your current session. Are you really sure that you want to restart the dm service?"), 1) and
-              run_program::run("nohup", "/etc/rc.d/init.d/dm", "restart");
+                      system("nohup /etc/rc.d/init.d/dm restart &>/dev/null");
     }
 }
 
