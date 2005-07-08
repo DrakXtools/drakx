@@ -654,9 +654,10 @@ sub configureNetwork {
 sub configure_firewall {
     my ($o) = @_;
 
+    #- set up a firewall if ports have been specified or if the security level is high enough
     if (exists $o->{firewall_ports} || $o->{security} >= 3) {
 	require network::drakfirewall;
-	$o->{firewall_ports} ||= network::drakfirewall::default_ports($o->do_pkgs);
+	$o->{firewall_ports} ||= ''; #- don't open any port by default
 	network::drakfirewall::set_ports($o->do_pkgs, 0, $o->{firewall_ports});
     }
 }
