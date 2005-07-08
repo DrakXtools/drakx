@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-06-28 21:00+0900\n"
+"PO-Revision-Date: 2005-07-08 21:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2588,11 +2588,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"物理ボリューム %s は使用中です。\n"
+"このボリュームの使用中の物理エクステントを他のボリュームに移動しますか？"
 
 #: diskdrake/interactive.pm:893
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "物理エクステントを移動"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -3053,7 +3055,7 @@ msgstr "swapパーティション %s を有効にしています"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "グループディスク割当てを有効にしオプションで制限を強制する"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3130,6 +3132,7 @@ msgstr ""
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
+"ユーザディスク割当てを有効にしオプションで制限を強制する"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3211,6 +3214,8 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"LMV論理ボリュームは物理ボリュームに及ぶので、マウントポイント %s には使用でき"
+"ません。"
 
 #: fsedit.pm:392
 #, c-format
@@ -3220,6 +3225,9 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"LVM論理ボリュームをルート(/)に選択されました。\n"
+"このボリュームが物理ボリュームに及ぶ場合はブートローダはこれを扱えません。\n"
+"まず /boot パーティションを作成してください。"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -5832,7 +5840,7 @@ msgstr "ネットワーク(FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "ネットワーク(NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -5862,17 +5870,17 @@ msgstr "ミラーのURL"
 #: install_any.pm:523
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "NFSの設定"
 
 #: install_any.pm:523
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "NFSメディアのホスト名とディレクトリを入力してください"
 
 #: install_any.pm:524
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "NFSマウントのホスト名？"
 
 #: install_any.pm:524
 #, c-format
@@ -9439,12 +9447,12 @@ msgstr "%s へようこそ"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "使用中の物理エクステントを他の物理ボリュームに移動できませんでした"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "物理ボリューム %s は使用中です"
 
 #: lvm.pm:145
 #, c-format
@@ -9454,7 +9462,7 @@ msgstr "まず論理ボリュームを削除してください\n"
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
-msgstr ""
+msgstr "ブートローダは複数の物理ボリューム上の /boot を扱えません"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -21390,62 +21398,62 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "IPアドレス:"
 
 #: standalone/drakhosts:109
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "ホスト名:"
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "ホストエイリアス:"
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "有効なIPアドレスを入力してください"
 
 #: standalone/drakhosts:123
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "同じIPが既に %s ファイルにあります"
 
 #: standalone/drakhosts:192
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "ホストエイリアス"
 
 #: standalone/drakhosts:227
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "ホストの追加に失敗しました"
 
 #: standalone/drakhosts:234
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "ホストの変更に失敗しました"
 
 #: standalone/drakhosts:242
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "ホストの削除に失敗しました"
 
 #: standalone/draknfs:38
 #, c-format
 msgid "You are not root. Exiting..."
-msgstr ""
+msgstr "root権限で実行されていません。終了します.."
 
 #: standalone/draknfs:69
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "ディレクトリの選択"
 
 #: standalone/draknfs:74
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "ディレクトリを指定してください"
 
 #: standalone/draknfs:103
 #, c-format
@@ -21463,6 +21471,19 @@ msgid ""
 "(sub-)network simultaneously. for example, either `/255.255.252.0' or  "
 "`/22'  appended to the network base address result.\n"
 msgstr ""
+"NFSクライアントは様々な方法で指定することができます:\n"
+"単一ホスト: レゾルバによって認識される省略名、FQDN(完全修飾ドメイン名)または"
+"IPアドレスでホストを指定できます。\n"
+"\n"
+"ネットグループ: NISネットグループを@groupとして指定できます。\n"
+"\n"
+"ワイルドカード: マシン名にワイルドカード文字 * と ? を使うことができます。\n"
+"(例: *.cs.foo.edu はドメイン cs.foo.deu の全てのホストと合致します。)"
+"\n"
+"IPネットワーク: IP(サブ)ネットワーク上の全てのホストに同時にディレクトリをエ"
+"クスポートすることもできます。\n"
+"(例: either `/255.255.252.0' or  `/22'  appended to the network base address "
+"result.\n"
 
 #: standalone/draknfs:113
 #, c-format
@@ -21479,6 +21500,14 @@ msgid ""
 "anonuid and anongid: explicitly  set the uid and gid of the anonymous "
 "account.\n"
 msgstr ""
+"root_squash: uid/gid 0 からの要求を匿名uid/gidにマップします。\n"
+"\n"
+"no_root_squash: root_sqaushを無効にします。このオプションは主にディスクレスク"
+"ライアントに有用です。\n"
+"\n"
+"all_squash: 全てのuidとgidを匿名ユーザにマップします。NFSからエクスポートされ"
+"た公開FTPディレクトリやニューススプールディレクトリ等に有用です。これと反対の"
+"オプションはno_all_squashで、デフォルトではこちらに設定にされています。\n"
 
 #: standalone/draknfs:122
 #, c-format
@@ -21495,126 +21524,136 @@ msgid ""
 "requests before any changes made by that request have been committed to "
 "stable storage (e.g. disc drive).\n"
 msgstr ""
+"secure: このオプションが有効な場合は、要求はIPPORT_RESERVED(1024)より下のイン"
+"ターネットポートからのものでなければなりません。デフォルトで有効になっていま"
+"す。無効にする場合は insecure を指定してください。\n"
+"\n"
+"rw: このNFSボリューム上で読み書き両方の要求を許可します。デフォルトの設定では"
+"ファイルシステムを変更する要求は全て禁止します。こちらはroオプションで明示的"
+"に指定することもできます。\n"
+"\n"
+"async: NFSサーバにNFSプロトコルに違反して、要求によって生じる変更が安定記憶("
+"例: ディスクドライブ)にコミットされる前にその要求に応答することを許可します。\n"
 
 #: standalone/draknfs:167
 #, c-format
 msgid "dir path"
-msgstr ""
+msgstr "dirのパス"
 
 #: standalone/draknfs:206
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "NFSディレクトリ"
 
 #: standalone/draknfs:208
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "ディレクトリ:"
 
 #: standalone/draknfs:211
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "ホストアクセス"
 
 #: standalone/draknfs:213
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "アクセス:"
 
 #: standalone/draknfs:213 standalone/draknfs:218
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "ユーザIDのヘルプ"
 
 #: standalone/draknfs:216
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "ユーザIDマッピング"
 
 #: standalone/draknfs:218
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "ユーザID:"
 
 #: standalone/draknfs:219
 #, c-format
 msgid "anonuid:"
-msgstr ""
+msgstr "anonuid:"
 
 #: standalone/draknfs:220
 #, c-format
 msgid "anongid:"
-msgstr ""
+msgstr "anongid:"
 
 #: standalone/draknfs:223 standalone/draknfs:313
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "全般オプション"
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Force sync:"
-msgstr ""
+msgstr "syncを強制:"
 
 #: standalone/draknfs:225
 #, c-format
 msgid "Help General options"
-msgstr ""
+msgstr "全般オプションのヘルプ"
 
 #: standalone/draknfs:226
 #, c-format
 msgid "port below 1024:"
-msgstr ""
+msgstr "1024より下のポート:"
 
 #: standalone/draknfs:227
 #, c-format
 msgid "Read/Write request:"
-msgstr ""
+msgstr "読み/書き要求:"
 
 #: standalone/draknfs:232
 #, c-format
 msgid "options:"
-msgstr ""
+msgstr "オプション:"
 
 #: standalone/draknfs:244
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "共有するディレクトリを入力してください"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "ディレクトリを共有"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "ホストワイルドカード"
 
 #: standalone/draknfs:313
 #, c-format
 msgid "More options"
-msgstr ""
+msgstr "その他のオプション"
 
 #: standalone/draknfs:351
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "NFS共有の追加に失敗しました"
 
 #: standalone/draknfs:358
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "NFS共有の変更に失敗しました"
 
 #: standalone/draknfs:366
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "NFS共有の削除に失敗しました"
 
 #: standalone/draknfs:371
 #, c-format
 msgid "Reload NFS server"
-msgstr ""
+msgstr "NFSサーバをリロード"
 
 #: standalone/drakperm:21
 #, c-format
