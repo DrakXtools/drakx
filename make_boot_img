@@ -716,7 +716,7 @@ sub syslinux_all_files {
     @$kernels or die "syslinux_all_files: no kernel\n";
 
     $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
-    my $bootspash_cfg = '/etc/bootsplash/themes/Mandrakelinux/config/bootsplash-800x600.cfg';
+    my $bootspash_cfg = '/etc/bootsplash/themes/Mandriva/config/bootsplash-800x600.cfg';
     -e $bootspash_cfg or die "can't find $bootspash_cfg";
 
     each_index {
