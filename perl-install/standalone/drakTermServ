@@ -26,6 +26,7 @@ use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use run_program;
 use bootloader;
+use network::pxe;
 
 use Config;
 use POSIX;
@@ -828,7 +829,8 @@ sub clear_nbi {
 	if ($conf{CREATE_PXE}) {
 		my $pxe = get_platform_pxe();
 		$nbi =~ s|$tftpboot/|$pxe|;
-		unlink($nbi);		
+		unlink($nbi);
+		del_pxe_entry($nbi) if -d $pxe;	
 	}
 	return $result;
 }
@@ -840,7 +842,7 @@ sub update_list {
 }
 
 sub build_n_update {
-    my ($list_model, $kernel, $nic, $kcount) = @_;
+    my ($list_model, $kernel, $nic) = @_;
 	my $command = "-k /boot/$kernel";
 	$command .= " -r $nic" if $nic;
     run_program::run("$mknbi -v $command") or $in->ask_warn(N("Error"), N("%s failed", $mknbi));
@@ -849,9 +851,39 @@ sub build_n_update {
 		if (-d $pxedir) {
 			cp_af("/boot/$kernel", $pxedir) if !-f "$pxedir/$kernel";
 			link_pxe($kernel, $nic);
+			add_pxe_entry($kernel, $nic);
 		}
 	}
     update_list($list_model);
+}
+
+sub add_pxe_entry {
+	my ($kernel, $nic) = @_;
+	my $pxeconf = get_platform_pxe() . "pxelinux.cfg/default";
+	$kernel =~ s|vmlinuz-||;
+	my $label = uc($nic) . "." . uc($kernel);	
+	my $conf = network::pxe::read_pxelinux_conf($pxeconf, undef);
+	push @{$conf->{entries}}, {label => $label , kernel => "vmlinuz-$kernel", initrd => "initrd-$nic.$kernel.img" };
+	network::pxe::write_pxelinux_conf($conf, $pxeconf);
+}
+
+sub del_pxe_entry {
+	my ($nbi) = @_;
+	my $pxeconf = get_platform_pxe() . "pxelinux.cfg/default";
+	$nbi = basename($nbi);
+	$nbi =~ s|initrd-||;
+	$nbi =~ s|.img||;
+	my $conf = network::pxe::read_pxelinux_conf($pxeconf, undef);
+
+	my $index = 0;
+	foreach (@{$conf->{entries}}) {
+		if ($_->{label} eq uc($nbi)) {
+			splice @{$conf->{entries}}, $index, 1;
+			last;	
+		}
+		$index++;
+	}
+	network::pxe::write_pxelinux_conf($conf, $pxeconf);
 }
 
 sub link_pxe {
