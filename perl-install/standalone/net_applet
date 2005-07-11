@@ -112,10 +112,7 @@ my @attacks_queue;
 if ($enable_activefw) {
     $activefw = network::activefw->new(sub {
         my ($_con, $msg) = @_;
-        handle_attack($msg->get_args_list) if
-          $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-          $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-          $msg->get_member eq "Attack";
+        handle_attack($msg->get_args_list) if $msg->get_member eq "Attack";
     });
 }
 

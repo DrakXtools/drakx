@@ -40,26 +40,17 @@ $whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelis
 $whitelist->get_column(0)->set_sort_column_id(0);
 
 my $activefw = network::activefw->new(sub {
-    my ($con, $msg) = @_;
-    handle_blacklist($msg->get_args_list) if
-      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-      $msg->get_member eq "Blacklist";
-
-    handle_whitelist($msg->get_args_list) if
-      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-      $msg->get_member eq "Whitelist";
-
-    clear_lists() if
-      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-      $msg->get_member eq "Clear";
-
-    handle_init() if
-      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
-      $msg->get_member eq "Init";
+    my ($_con, $msg) = @_;
+    my $member = $msg->get_member;
+    if ($member eq 'Blacklist') {
+	handle_blacklist($msg->get_args_list);
+    } elsif ($member eq 'Whitelist') {
+	handle_whitelist($msg->get_args_list);
+    } elsif ($member eq 'Clear') {
+	clear_lists();
+    } elsif ($member eq 'Init') {
+	handle_init();
+    }
 });
 init_lists();
 
@@ -99,7 +90,7 @@ sub sort_by_column {
 }
 
 sub handle_init {
-    $activefw->find_daemon;
+    $activefw->attach_daemon;
     init_lists();
 }
 
