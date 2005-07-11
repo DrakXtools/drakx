@@ -1236,7 +1236,7 @@ It is not necessary on most networks."),
                     default => sub { ($net->{type} eq 'modem' ? 'no' : 'yes') },
                     post => sub {
                         my ($res) = @_;
-			$net->{ifcfg}{$net->{net_interface}} = bool2yesno($res);
+			$net->{ifcfg}{$net->{net_interface}}{ONBOOT} = bool2yesno($res);
                         return $after_start_on_boot_step->();
                     },
                    },
