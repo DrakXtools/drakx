@@ -90,7 +90,7 @@ sub sort_by_column {
     $model->set_sort_column_id($col_id, $old_id == $col_id && $old_order ne 'descending' ? 'ascending' : 'descending');
 }
 
-sub handle_init {
+sub handle_init() {
     $activefw->attach_daemon;
     init_lists();
 }
@@ -103,19 +103,19 @@ sub list_remove_addr {
     }
 }
 
-sub init_blacklist {
+sub init_blacklist() {
     my @packets = $activefw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
         handle_blacklist(@blacklist);
     }
 }
 
-sub clear_blacklist {
+sub clear_blacklist() {
     @{$blacklist->{data}} = ();
 }
 
 sub handle_blacklist {
-    my ($timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
+    my ($timestamp, $indev, $prefix, $_sensor, $protocol, $addr, $port, $_icmp_type) = @_;
     push @{$blacklist->{data}}, [
         $addr,
         $timestamp,
@@ -131,7 +131,7 @@ sub handle_blacklist {
     ];
 }
 
-sub get_selected_blacklist {
+sub get_selected_blacklist() {
     uniq(map { $blacklist->{data}[$_][0] } $blacklist->get_selected_indices);
 }
 
@@ -142,11 +142,11 @@ sub unblacklist {
     list_remove_addr($blacklist->{data}, @addr);
 }
 
-sub init_whitelist {
+sub init_whitelist() {
     handle_whitelist($_) foreach $activefw->get_whitelist;
 }
 
-sub clear_whitelist {
+sub clear_whitelist() {
     @{$whitelist->{data}} = ();
 }
 
@@ -155,7 +155,7 @@ sub handle_whitelist {
     push @{$whitelist->{data}}, [ $addr, network::activefw::resolve_address(network::activefw::get_ip_address($addr)) ];
 }
 
-sub get_selected_whitelist {
+sub get_selected_whitelist() {
     uniq(map { $whitelist->{data}[$_][0] } $whitelist->get_selected_indices);
 }
 
@@ -172,12 +172,12 @@ sub unwhitelist {
     list_remove_addr($whitelist->{data}, @addr);
 }
 
-sub init_lists {
+sub init_lists() {
     init_blacklist();
     init_whitelist();
 }
 
-sub clear_lists {
+sub clear_lists() {
     clear_blacklist();
     clear_whitelist();
 }
