@@ -1,3 +1,234 @@
+2005/07/11  Olivier Blin <oblin at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.34mdk
+
+	* network/netconnect.pm: really write modem/adsl ifcfg files (fix ONBOOT
+	setting)
+	don't restart network service at drakconnect startup
+
+2005/07/08  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* standalone/draknfs: always display ok_cancel button
+	add a checkbox to enable/disable advanced options
+	various adjustement in main windows
+
+2005/07/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_steps.pm: don't open any port by default in the firewall
+	always enable firewall if security level >= 3 (even if no ports have to
+	be opened)
+
+2005/07/08  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: don't try to manipulate PXE stuff if the
+	directory isn't present
+
+2005/07/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.33mdk
+
+	* printer/cups.pm, printer/main.pm, lvm.pm, network/ipsec.pm, scanner.pm,
+	printer/printerdrake.pm: reduce the overall perl_checker warnings
+
+	* standalone/drakedm: do not write in /nohup.out (#16768)
+
+	* share/po/ja.po: update
+
+2005/07/07  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* standalone/draknfs: add an apply button
+	use simple userid combolist, few other fix
+
+	* standalone/drakhosts: add an apply button
+	add double clic event
+
+2005/07/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: use stop_net_interface
+	do not restart network to apply modifications, run ifup or ifplugd
+	instead
+	remove connect/diconnect_backend
+	add start/stop_net_interface
+	add detach parameter to start/stop_interface
+	use start/stop_interface instead of connect/disconnect_backend
+
+	* network/ethernet.pm: stricter regexp for MAC addresses
+
+	* share/po/fr.po: fix buggy translation about uid (#16726)
+
+	* network/tools.pm: add start/stop_ifplugd
+	remove connect/diconnect_backend
+	add start/stop_net_interface
+	add detach parameter to start/stop_interface
+
+	* standalone/net_applet, standalone/net_monitor: remove
+	connect/diconnect_backend
+	add start/stop_net_interface
+	add detach parameter to start/stop_interface
+
+	* standalone/drakconnect: remove connect/diconnect_backend
+	add start/stop_net_interface
+	add detach parameter to start/stop_interface
+	use start/stop_interface
+
+2005/07/07  pjetur
+
+	* share/po/is.po: Latest updates
+
+2005/07/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* drakxtools.spec: use my own email address :|
+	update requires for perl-MDK-Common (need distrib())
+
+2005/07/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakvpn: fix untranslated strings (#16736)
+
+	* bootloader.pm: add support for graphical grub (Herton Ronaldo Krzes)
+
+	* drakxtools.spec: 10.3-0.32mdk
+
+2005/07/06  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* standalone/draknfs: fix test of directory and test of hosts access in
+	alter mode
+	add editcell (disable by default) , add double clic support
+	display wait message box while reloading/restarting nfs server
+	fix undefined options
+	fix domain in hosts access combobox
+	fix ip/8 in comboboxentry
+	button to close draknfs
+	"Reload  NFS server" hput in a menu
+	using icons for "dir path" button
+	an editable combolist for Access
+	various typor fix
+	"close" button in help dialog box
+	use pango for text field
+
+2005/07/06  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/07/06  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/07/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po: updated po file
+
+	* share/po/cy.po: updated Welsh file
+
+2005/07/06  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Be less polite, lots of corrections, new strings
+	translated etcetc.
+	Be less polite;) (no please in norwegian), updated translations etc..
+
+2005/07/06  willysr
+
+	* share/po/id.po: Updated
+
+2005/07/05  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* Makefile.config: add drakhosts and draknfs tools
+
+	* standalone/drakhosts: fix string pb
+	fix some comment
+	move drakhosts and draknfs tools from soft/ to
+	gi/perl-install/standalone
+
+	* standalone/draknfs: various other fix to be able to build drakxtools
+	various fix ("standalone/draknfs", line 140, character 38-48) thx tv
+	add help, remove unwanted use
+	move drakhosts and draknfs tools from soft/ to
+	gi/perl-install/standalone
+
+2005/07/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakhosts: perl_checker fix
+
+	* standalone/draknfs: don't keep undefined options
+	use join()
+	perl_checker/translation fixes
+
+	* network/pxe.pm: switch to Mandriva
+
+2005/07/05  pjetur
+
+	* share/po/is.po: Latest updates
+
+2005/07/05  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: don't suggest to format partition if we need
+	to reboot
+
+2005/07/05  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/07/05  tsdgeos
+
+	* share/po/ca.po: small updates
+
+2005/07/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.3-0.31mdk
+	put newly added draknfs and drakhosts tools in the gtk backend package
+
+	* Makefile.config: sort newly entries added by pixel & antoine
+	do not package drakfloppy anymore since kernel is too big (#10565)
+
+	* standalone/draknfs (add_columns) reuse existing translation
+	fix layout somewhat
+
+	* share/po/ko.po, share/po/br.po, share/po/ga.po, share/po/cy.po,
+	share/po/fr.po: update
+	update strings from CVS
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: update strings from
+	CVS
+
+	* standalone/drakhosts: fix layout somewhat
+
+2005/07/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po, share/po/gl.po, share/po/wa.po: updated Japanese,
+	Galician and Walloon files
+
+2005/07/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: rollback bogus change that mistakely went
+	in
+
+	* share/po/br.po: typo fix
+
+	* standalone/drakbackup: fix build (perl_checker fix)
+
+2005/07/03  pjetur
+
+	* share/po/is.po: Mostly syntax checking and msg consistency
+
+2005/07/01  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
 2005/07/01  Olivier Blin <oblin at mandrakesoft.com>
 
 	* ugtk2.pm: remove spurious comment
