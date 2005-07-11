@@ -16,11 +16,7 @@ sub new {
     set_DBus_watch($con);
     $con->dispatch;
 
-    my $o = bless {
-        bus => $bus,
-        daemon => $daemon
-    }, $type;
-
+    my $o = bless { bus => $bus }, $type;
     $o->find_daemon;
 
     $o;
