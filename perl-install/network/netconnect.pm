@@ -1340,7 +1340,7 @@ Test your connection via net_monitor or mcc. If your connection does not work, y
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "),
 	  N("The network needs to be restarted. Do you want to restart it?"),
-	  N("A problem occurred while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), #- nice one ...
+	  N("A problem occurred while restarting the network: \n\n%s", 'foo'),
 	  N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.", 'a', 'b'),
 	  N("Configuration is complete, do you want to apply settings?"),
 	  N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n"),
