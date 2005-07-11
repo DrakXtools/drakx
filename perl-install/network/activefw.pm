@@ -11,7 +11,7 @@ sub new {
     my $con = $bus->{connection};
 
     $con->add_filter($filter);
-    $con->add_match("type='signal',interface='com.mandrakesoft.activefirewall'");
+    $con->add_match("type='signal',interface='com.mandriva.activefirewall'");
 
     set_DBus_watch($con);
     $con->dispatch;
@@ -24,8 +24,8 @@ sub new {
 
 sub find_daemon {
     my ($o) = @_;
-    my $service = $o->{bus}->get_service("com.mandrakesoft.activefirewall.daemon");
-    $o->{daemon} = $service->get_object("/com/mandrakesoft/activefirewall", "com.mandrakesoft.activefirewall.daemon");
+    my $service = $o->{bus}->get_service("com.mandriva.activefirewall.daemon");
+    $o->{daemon} = $service->get_object("/com/mandriva/activefirewall", "com.mandriva.activefirewall.daemon");
 }
 
 sub set_DBus_watch {
