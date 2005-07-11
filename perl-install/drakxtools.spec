@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.33mdk
+Release: 0.34mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jul 11 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.34mdk
+- really write modem/adsl ifcfg files (fix ONBOOT setting)
+- don't restart network service at drakconnect startup
+- draknfs (Antoine):
+  o always display ok_cancel button
+  o add a checkbox to enable/disable advanced options
+- drakTermServ (Stew):
+  don't try to manipulate PXE stuff if the directory isn't present
+
 * Fri Jul  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.33mdk
 - drakboot: add support for graphical grub (Herton Ronaldo Krzes)
 - draknfs: various adjustement in main windows (antoine)
