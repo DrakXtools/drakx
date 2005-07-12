@@ -58,6 +58,7 @@ my @yesno = qw(yes no);
 sub get_items {
     my @items = (
 		 [ "/_File", undef, undef, undef, '<Branch>', ],
+		 [ "/_File/_Write conf", undef, \&write_conf, 1, '<StockItem>', 'gtk-execute' ],
 		 [ "/_File/_Exit", undef, \&quit_all, 1, '<StockItem>', 'gtk-quit' ],
 
 		 [ "/_NFS Server", undef, undef, undef, '<Branch>', ],
@@ -130,7 +131,7 @@ sub write_conf {
   foreach my $a (@listshare) {
     append_to_file($CONF, "$a->{dir} $a->{access}($a->{right}) $a->{options}\n");
   }
-  ugtk2->exit;
+
 }
 
 my $help_access;
@@ -600,7 +601,7 @@ my $menu = $factory->get_widget('<main>');
 
 my $okcancel = create_okcancel({
 				cancel_clicked => sub { ugtk2->exit },
-				ok_clicked => \&write_conf,
+				ok_clicked => sub { write_conf; ugtk2->exit; },
 			       },
 			      );
 
