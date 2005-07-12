@@ -53,7 +53,7 @@ my $userid_data = {
 		   no_all_squash => $no_all_squash,
 		  };
 
-my @yesno = qw(yes no); push @yesno, "";
+my @yesno = qw(yes no);
 
 sub get_items {
     my @items = (
@@ -203,7 +203,6 @@ sub create_pango_help_box {
 sub help_b {
   my ($tittle, $help_data) = @_;
   gtksignal_connect(new Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub {
-
 		      my $dialog = new Gtk2::Dialog();
 		      $dialog->set_title(N("Help"));
 		      $dialog->set_modal(1);
@@ -305,6 +304,8 @@ sub add_modify_entry {
 	if ($opt =~ /insecure/) { $lsecure->set_text("no") } else { $lsecure->set_text("yes") }
       } else { next }
     }
+    map { if ($_->get_text =~ //) { $_->set_text("yes") } } $lsecure, $lsync;
+    $lr->get_text =~ // and $lr->set_text("no");
   }
 
   $luserid->signal_connect(changed => sub {
@@ -321,8 +322,8 @@ sub add_modify_entry {
     # default choice root_squash and ro
     $luserid->set_text($userid_data->{no_root_squash});
     $lr->set_text("yes");
-    $lsecure->set_text("");
-    $lsync->set_text("");
+    $lsecure->set_text("yes");
+    $lsync->set_text("no");
   }
 
   if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
@@ -330,16 +331,30 @@ sub add_modify_entry {
     $anonuid->set_sensitive(0);
   }
 
-  my $advanced = Gtk2::CheckButton->new("Enable advanced options");
-  $advanced->set_active(0);
-  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
-  $advanced->signal_connect(clicked => sub {
-      if ($advanced->get_active =~ /1/) {
-	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(1) }
-      } else {
-	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
-      }
-  });
+# old method to hide advanced option
+#  my $advanced = Gtk2::CheckButton->new("Enable advanced options");
+#  $advanced->set_active(0);
+#  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
+#  $advanced->signal_connect(clicked => sub {
+#      if ($advanced->get_active =~ /1/) {
+#	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(1) }
+#      } else {
+#	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
+#      }
+#  });
+
+  my $expender = Gtk2::Expander->new('Advanced options');
+  $expender->add(gtkpack_(Gtk2::VBox->new,
+                          0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
+                          0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
+                          0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
+			 ),
+		);
+  $expender->signal_connect(activate => sub {
+			      gtkset_size_request($dialog, -1, -1);
+			      gtkflush();
+			    });
+
 
   gtkpack_($dialog->vbox,
 	   0, gtkadd(Gtk2::Frame->new(N("NFS directory")),
@@ -359,17 +374,14 @@ sub add_modify_entry {
 			      0, $label_and_widgets->(N("Anonymous Group ID:"), $anongid, ""),
 			     ),
 		    ),
-	   0, gtkadd(Gtk2::Frame->new(N("Advanced Options")),
+	   0, gtkadd(Gtk2::Frame->new(N("")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $advanced,
-			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
-			      0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
-			      0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
-			     ),
-		    ),
-	   0, gtkadd(Gtk2::Frame->new(N("Custom Options")),
-                     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $label_and_widgets->(N("options:"), $options, ""),
+#			      0, $advanced,
+			      0, $expender,
+#			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
+#			      0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
+#			      0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
+#			      0, $label_and_widgets->(N("Custom options:"), $options, ""),
 			     ),
 		    ),
 	   0, create_okcancel({
@@ -550,8 +562,8 @@ my $okcancel = create_okcancel({
 
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
-		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakNFS add/remove/alter NFS shares"))),
 		 0, $menu,
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakNFS manage NFS shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares.")),
 		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 			     1, create_scrolled_window($treeview),
@@ -570,7 +582,6 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 								  err_dialog(N("Error"), N("Failed to Modify NFS share.") . "\n\n" . $err);
 								}
 							      }),
-					 
 					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 								eval { remove_entry($model, $treeview) };
 								my $err = $@;
