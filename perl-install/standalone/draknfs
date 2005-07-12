@@ -28,6 +28,7 @@ use interactive;
 use ugtk2 qw(:ask :wrappers :create :dialogs);
 
 my $in = 'interactive'->vnew('su');
+$in->do_pkgs->ensure_is_installed('nfs-utils', '/usr/sbin/rpc.nfsd') or return;
 
 use constant FALSE => 0;
 use constant TRUE => 1;
