@@ -130,6 +130,7 @@ sub write_conf {
   foreach my $a (@listshare) {
     append_to_file($CONF, "$a->{dir} $a->{access}($a->{right}) $a->{options}\n");
   }
+  ugtk2->exit;
 }
 
 my $help_access;
