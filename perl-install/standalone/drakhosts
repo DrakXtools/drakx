@@ -91,6 +91,7 @@ sub add_modify_entry {
   $dialog->set_title("Drakhosts $wanted entry");
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
+  $dialog->set_size_request(250, -1);
 
   if ($wanted =~ /modify/) {
     $iter = $selection->get_selected;
@@ -200,7 +201,7 @@ sub add_columns {
 my $model = create_model();
 
 my $window = ugtk2->new("Drakhosts $version");
-$window->{rwindow}->set_size_request(400, 300) unless $::isEmbedded;
+$window->{rwindow}->set_size_request(500, 400) unless $::isEmbedded;
 my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 
@@ -221,41 +222,51 @@ $treeview->signal_connect(button_press_event => sub {
 			    }
 			  });
 
+my $okcancel = create_okcancel({
+				cancel_clicked => sub { ugtk2->exit },
+				ok_clicked => sub { write_conf_hosts; ugtk2->exit; },
+			       },
+			      );
+
+
 
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
-		 0, Gtk2::Label->new("Here you cann add, remove and alter host definitions."),
-		 1, create_scrolled_window($treeview),
-		 0, gtkpack_(gtkset_border_width(create_hbox('edge', 3)),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-						    eval { add_modify_entry($model, $treeview, "add") };
-						    my $err = $@;
-						    if ($err) {
-                                                      err_dialog(N("Error"), N("Failed to add host.") . "\n\n" . $err);
-                                                    }
-                                                  }),
-                             0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-						    eval { add_modify_entry($model, $treeview, "modify") };
-						    my $err = $@;
-						    if ($err) {
-                                                      err_dialog(N("Error"), N("Failed to Modify host.") . "\n\n" . $err);
-                                                    }
-                                                  }),
-
-                             0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-						    eval { remove_entry($model, $treeview) };
-						    my $err = $@;
-						    if ($err) {
-                                                      err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
-                                                    }
-                                                  }),
-			     0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
-				 write_conf_hosts();
-			     }),
-			     if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakHOSTS manage hosts definitions"))),
+		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares.")),
+		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+			     1, create_scrolled_window($treeview),
+			     0, gtkpack_(gtkset_border_width(create_vbox('start', 3)),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
+								eval { add_modify_entry($model, $treeview, "add") };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to add host.") . "\n\n" . $err);
+								}
+							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
+								eval { add_modify_entry($model, $treeview, "modify") };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to Modify host.") . "\n\n" . $err);
+								}
+							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
+								eval { remove_entry($model, $treeview) };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
+								}
+							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
+								write_conf_hosts();
+							      }),
+					 if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })),
+					),
 			    ),
-		 ),
+		 0, $okcancel,
+		),
        );
-
+	
 $W->show_all;
 Gtk2->main;
