@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 
-my $version = "0.2";
+my $version = "0.3";
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
@@ -233,6 +233,33 @@ sub get_access_list {
   return @all;
 }
 
+sub get_data_from_id {
+    my ($id, $what) = @_;
+    my $data;
+    if ($what =~ /passwd/) {
+	setpwent();
+	($data) = (getpwuid($id))[0];
+	endpwent();
+    } else {
+	setgrent();
+	($data) = (getgrgid($id))[0];
+	endgrent();
+    }
+    return $data;
+}
+
+sub get_user_or_group {
+  my ($what) = @_;
+  my $conf = "/etc/" . $what;
+  my @data; local $_;
+  foreach (cat_($conf)) {
+    push @data, "$1 [$2]" if m/^([^#:]+):[^:]+:([^:]+):/;
+  }
+  push @data, " ";
+  return sort(@data);
+}
+
+
 sub add_modify_entry {
   my ($widget, $treeview, $wanted) = @_;
   my $model = $treeview->get_model;
@@ -243,10 +270,11 @@ sub add_modify_entry {
   undef $i;
   undef $iter;
 
-  $_ = Gtk2::Entry->new foreach $dir, $anongid, $anonuid, $options;
+  $_ = Gtk2::Entry->new foreach $dir, $options;
   $_ = Gtk2::OptionMenu->new foreach $lr, $luserid, $lsecure, $lsync;
 
   $access = Gtk2::ComboBoxEntry->new_text;
+#  $access = Gtk2::OptionMenu;
   foreach (get_access_list()) {
     $_ and $access->append_text($_);
   }
@@ -266,6 +294,12 @@ sub add_modify_entry {
   $dialog->set_position('center');
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
+
+  my $anonuid = Gtk2::ComboBox->new_with_strings([ get_user_or_group('passwd') ]);
+  $anonuid->set_wrap_width(3);
+
+  my $anongid = Gtk2::ComboBox->new_with_strings([ get_user_or_group('group') ]);
+  $anongid->set_wrap_width(3);
 
   if ($wanted =~ /modify/) {
     $iter = $selection->get_selected;
@@ -287,9 +321,11 @@ sub add_modify_entry {
       } elsif ($opt =~ m/\bsync\b|\basync\b/) {
 	if ($opt =~ /sync/) { $lsync->set_text("yes") } else { $lsync->set_text("no") }
       } elsif ($opt =~ m/anongid=(\d+)/) {
-	$anongid->set_text($1);
+        my $gdata = get_data_from_id($1, 'group') . " [$1]";
+        $anongid->set_text($gdata);
       } elsif ($opt =~ m/anonuid=(\d+)/) {
-	$anonuid->set_text($1);
+        my $udata = get_data_from_id($1, 'passwd') . " [$1]";
+        $anonuid->set_text($udata);
       } elsif ($opt =~ m/(no_root_squash|root_squash|all_squash|no_all_squash)/) {
 	if ($opt =~ /no_root_squash/) {
 	  $luserid->set_text($userid_data->{no_root_squash});
@@ -388,8 +424,16 @@ sub add_modify_entry {
 			       cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
 				 my ($anonu, $anong);
-				 $anonuid->get_text and $anonu = "anonuid=" . $anonuid->get_text;
-				 $anongid->get_text and $anong = "anongid=" . $anongid->get_text;
+				 if ($anonuid->get_text) {
+				     my ($uid) = $anonuid->get_text =~ /\[(\S*)\]/;
+				     $anonu = "anonuid=" . $uid;
+				 }
+                                 if ($anongid->get_text) {
+				     my ($gid) = $anongid->get_text =~ /\[(\S*)\]/;
+				     $anong = "anongid=" . $gid;
+                                 }
+				 #$anonuid->get_text and $anonu = "anonuid=" . $anonuid->get_text;
+				 #$anongid->get_text and $anong = "anongid=" . $anongid->get_text;
 				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { undef $lsync_data }
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
