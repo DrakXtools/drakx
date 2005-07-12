@@ -390,13 +390,13 @@ sub gw_configure() {
 		      N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
     }
 
-    my $_wait_configuring = $in->wait_message(N("Configuring..."),
-					     N("Configuring scripts, installing software, starting servers..."));
-
     unless ($in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall')) {
 	$in->ask_warn(N("Error"), N("Could not install the %s package!", 'shorewall'));
 	$in->exit(-1);
     }
+
+    my $_wait_configuring = $in->wait_message(N("Configuring..."),
+                                              N("Configuring firewall..."));
 
     $shorewall->{masq_subnet} = "$lan_intf->{NETWORK}/$lan_intf->{NETMASK}";
     network::shorewall::write($shorewall);
