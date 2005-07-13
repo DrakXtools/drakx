@@ -1,67 +1,24 @@
 package network::activefw;
 
-use Gtk2::Helper;
+use dbus_object;
 use Socket;
 
+our @ISA = qw(dbus_object);
+
 sub new {
-    my ($type, $filter) = @_;
+    my ($type, $bus, $filter) = @_;
 
-    require Net::DBus;
-    my $bus = Net::DBus->system;
     my $con = $bus->{connection};
-
     $con->add_filter($filter);
-    $con->add_match("type='signal',interface='com.mandriva.activefirewall'");
+    $con->add_match("type='signal',interface='com.mandriva.monitoring.activefirewall'");
 
-    set_DBus_watch($con);
-    $con->dispatch;
-
-    my $o = bless { bus => $bus }, $type;
-    $o->find_daemon;
-
+    my $o = dbus_object::new($type,
+			     $bus,
+			     "com.mandriva.monitoring",
+			     "/com/mandriva/monitoring/activefirewall",
+			     "com.mandriva.monitoring.activefirewall");
+    dbus_object::set_gtk2_watch($o);
     $o;
-}
-
-sub find_daemon {
-    my ($o) = @_;
-    my $service = $o->{bus}->get_service("com.mandriva.activefirewall.daemon");
-    $o->{daemon} = $service->get_object("/com/mandriva/activefirewall", "com.mandriva.activefirewall.daemon");
-}
-
-sub set_DBus_watch {
-    my ($con) = @_;
-    $con->set_watch_callbacks(sub {
-        my ($con, $watch) = @_;
-        my $flags = $watch->get_flags;
-        require Net::DBus::Binding::Watch;
-        if ($flags & &Net::DBus::Binding::Watch::READABLE) {
-            Gtk2::Helper->add_watch($watch->get_fileno, 'in', sub {
-                $watch->handle(&Net::DBus::Binding::Watch::READABLE);
-                $con->dispatch;
-                1;
-            });
-        }
-        #- do nothing for WRITABLE watch, we dispatch when needed
-    }, undef, undef); #- do nothing when watch is disabled or toggled yet
-}
-
-sub dispatch {
-    my ($o) = @_;
-    $o->{bus}{connection}->dispatch;
-}
-
-sub call_method {
-    my ($o, $method, @args) = @_;
-    my @ret;
-    eval {
-        @ret = $o->{daemon}->$method(@args);
-    };
-    if ($@) {
-        print "($method) exception: $@\n";
-        $o->dispatch;
-        return;
-    }
-    @ret;
 }
 
 sub blacklist {

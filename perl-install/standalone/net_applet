@@ -30,6 +30,8 @@ my $current_md5 = md5file($prog_name);
 my $net = {};
 my $watched_interface;
 
+my $dbus = dbus_object::system_bus();
+
 $SIG{HUP} = sub {
     print "received SIGHUP, reloading network configuration\n";
     checkNetworkForce();
@@ -110,7 +112,7 @@ my $interactive_cb;
 my @attacks_queue;
 
 if ($enable_activefw) {
-    $activefw = network::activefw->new(sub {
+    $activefw = network::activefw->new($dbus, sub {
         my ($_con, $msg) = @_;
         handle_attack($msg->get_args_list) if $msg->get_member eq "Attack";
     });

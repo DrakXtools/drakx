@@ -8,6 +8,7 @@ use standalone;
 use Socket;
 use mygtk2 qw(gtknew);
 use POSIX qw(strftime);
+use dbus_object;
 use network::activefw;
 
 use Gtk2::SimpleList;
@@ -40,7 +41,7 @@ $whitelist->set_headers_clickable(1);
 $whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelist->get_model);
 $whitelist->get_column(0)->set_sort_column_id(0);
 
-my $activefw = network::activefw->new(sub {
+my $activefw = network::activefw->new(dbus_object::system_bus(), sub {
     my ($_con, $msg) = @_;
     my $member = $msg->get_member;
     if ($member eq 'Blacklist') {
@@ -91,7 +92,7 @@ sub sort_by_column {
 }
 
 sub handle_init() {
-    $activefw->attach_daemon;
+    $activefw->attach_object;
     init_lists();
 }
 
