@@ -196,7 +196,10 @@ sub go2State {
     my ($state_type, $interface) = @_;
     if ($current_state ne $state_type) {
         $current_state = $state_type;
-        $menu and $menu->destroy;
+        if ($menu) {
+            $menu->remove($wireless_networks{$_}{menuitem}) foreach keys %wireless_networks;
+            $menu->destroy;
+        }
         $menu = setState($state_type, $interface);
     }
 }
