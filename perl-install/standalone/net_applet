@@ -231,9 +231,11 @@ sub setState {
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
 
     if ($state_type ne 'notconfigured') {
-        $add_action->('wireless');
-        $menu->append($_->{menuitem}) foreach values %wireless_networks;
-        $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+        if (detect_devices::has_wireless()) {
+            $add_action->('wireless');
+            $menu->append($_->{menuitem}) foreach values %wireless_networks;
+            $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+        }
         $add_action->('chooseInterface') ;
     }
 
