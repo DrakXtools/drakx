@@ -34,41 +34,21 @@ my $watched_interface;
 my $dbus = dbus_object::system_bus();
 my $monitor = network::monitor->new($dbus);
 
-my $keyring_pixbuf = Gtk2::Gdk::Pixbuf->new_from_file("/usr/share/pixmaps/keyring-small.png"); #- provided by usermode, required by drakxtools
-my %link_level_pixbufs = map { $_ => Gtk2::Gdk::Pixbuf->new_from_file("wifi-$_.png") } qw(20 40 60 80 100);
+my %pixbufs =
+  (
+      state => { map { $_ => gtkcreate_pixbuf($_) } qw(connected disconnected) },
+      link_level => { map { $_ => gtkcreate_pixbuf("wifi-$_.png") } qw(20 40 60 80 100) },
+      keyring => gtkcreate_pixbuf("/usr/share/pixmaps/keyring-small.png"), #- provided by usermode, required by drakxtools
+  );
 my %wireless_networks;
-
-$SIG{HUP} = sub {
-    print "received SIGHUP, reloading network configuration\n";
-    checkNetworkForce();
-};
-
-my %appletstate = (
-             connected => {
-  		          colour => [ 'connected' ],
-			  changes => [ 'disconnected', 'error', 'busy' ],
-                          menu => [ 'downNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'wireless', 'monitorNetwork', 'refresh', 'help' ],
-			  tt => [ N_("Network is up on interface %s") ]
-			  },
-             disconnected => {
-			      colour => [ 'disconnected' ],
-			      changes => [ 'connected', 'error', 'busy' ],
-			      menu => [ 'upNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'refresh', 'help' ],
-			      tt => [
-                            #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-                            N_("Network is down on interface %s. Click on \"Configure Network\"")
-                           ]
-                             },
-             notconfigured => {
-  		          colour => [ 'disconnected' ],
-			  changes => [ 'connected' ],
-			  menu => [ 'confNetwork', 'refresh', 'help' ],
-			  tt => [
-                                 N_("You do not have any configured Internet connection.
-Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)"))
-                                ]
-			  }
-	    );
+my %tooltips =
+  (
+      connected => N_("Network is up on interface %s"),
+      #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
+      disconnected => N_("Network is down on interface %s. Click on \"Configure Network\""),
+      notconfigured => N_("You do not have any configured Internet connection.
+Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")),
+  );
 
 my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
@@ -95,8 +75,8 @@ my %actions = (
 		       run_program::raw({ detach => 1 }, network::tools::wrap_command_for_root('/sbin/set-netprofile', $net->{PROFILE}));
                    }
                },
-	       'refresh' => { name => N("Refresh"), launch => sub { checkNetworkForce() } },
-               'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
+               'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } },
+               'quit' => { name => N("Quit"), launch => \&mainQuit },
               );
 
 gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
@@ -129,6 +109,12 @@ cronNetwork();
 get_unprocessed_attacks() if $enable_activefw;
 
 $icon->show_all;
+
+$SIG{HUP} = sub {
+    print "received SIGHUP, reloading network configuration\n";
+    checkNetworkForce();
+};
+
 Gtk2->main;
 
 ugtk2::exit(0);
@@ -172,7 +158,7 @@ sub checkWireless() {
             $net->{menuitem} = Gtk2::MenuItem->new;
             $net->{menuitem}->add(gtkshow(gtkpack_(Gtk2::HBox->new,
                                                    1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
-                                                   0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($keyring_pixbuf),
+                                                   0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
                                                    0, $net->{level_image} = Gtk2::Image->new)));
             undef $current_state; #- force menu redraw
         }
@@ -180,7 +166,7 @@ sub checkWireless() {
         my $approx_level = 20+int($net->{level}/20)*20;
         $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
         $net->{keyring_image}->visible(defined $net->{flags});
-        $net->{level_image}->set_from_pixbuf($link_level_pixbufs{$approx_level});
+        $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
@@ -216,31 +202,42 @@ sub go2State {
 }
 sub setState {
     my ($state_type, $interface) = @_;
-    my $arr = $appletstate{$state_type}{menu};
-    my $tmp = gtkcreate_pixbuf($appletstate{$state_type}{colour}[0]);
-    $img->set_from_pixbuf($tmp);
-    gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($appletstate{$state_type}{tt}[0]), $interface)));
+
+    $img->set_from_pixbuf($pixbufs{state}{$state_type eq 'connected' ? 'connected' : 'disconnected'});
+    gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($tooltips{$state_type}), $interface)));
+
     my $menu = Gtk2::Menu->new;
-    foreach (@$arr) {
-        my $name = ref($actions{$_}{name}) eq 'CODE' ? $actions{$_}{name}->($interface) : $actions{$_}{name};
-        my $launch = $actions{$_}{launch};
-        if ($actions{$_}{choices}) {
-           my $selected = $actions{$_}{choice_selected};
-           $menu->append(gtkshow(create_menu($name, map {
-               my $choice = $_;
-               my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
-               gtksignal_connect($w, activate => sub { $launch->($choice) });
-               $w->set_draw_as_radio(1);
-               $w;
-           } $actions{$_}{choices}->())));
-       } else {
-           $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
-       }
-    }
-    $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    $menu->append($_->{menuitem}) foreach values %wireless_networks;
+    my $add_action = sub {
+        my ($action) = @_;
+        my $name = ref($actions{$action}{name}) eq 'CODE' ? $actions{$action}{name}->($interface) : $actions{$action}{name};
+        my $launch = $actions{$action}{launch};
+        if ($actions{$action}{choices}) {
+            my $selected = $actions{$action}{choice_selected};
+            $menu->append(gtkshow(create_menu($name, map {
+                my $choice = $_;
+                my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
+                gtksignal_connect($w, activate => sub { $launch->($choice) });
+                $w->set_draw_as_radio(1);
+                $w;
+            } $actions{$action}{choices}->())));
+        } else {
+            $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
+        }
+    };
+
+    $state_type eq 'connected' and $add_action->($_) foreach qw(downNetwork monitorNetwork);
+    $state_type eq 'disconnected' and $add_action->('upNetwork') ;
+    $add_action->('confNetwork');
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
 
+    if ($state_type ne 'notconfigured') {
+        $add_action->('wireless');
+        $menu->append($_->{menuitem}) foreach values %wireless_networks;
+        $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+        $add_action->('chooseInterface') ;
+    }
+
+    $add_action->('chooseProfile');
     if ($enable_activefw) {
         $menu->append($interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
                                                                                 $activefw->get_interactive),
@@ -248,7 +245,9 @@ sub setState {
     }
     $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
                                             toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
-    $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
+    $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+    $add_action->('help');
+    $add_action->('quit');
     $menu;
 }
 sub mainQuit() {
