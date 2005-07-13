@@ -37,7 +37,7 @@ use Socket;
 
 require_root_capability();
 
-unless (any { detect_devices::is_wireless_interface($_) } detect_devices::getNet()) {
+unless (detect_devices::has_wireless()) {
     ugtk2::err_dialog(N("Error"), N("You do not have any wireless interface.
 Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
     ugtk2::exit(0) if !$::testing;
