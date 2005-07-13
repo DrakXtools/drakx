@@ -577,6 +577,7 @@ sub configure_network {
 
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
     }
+    kill(1, `pidof -x net_applet`); #- make net_applet reload the configuration
 }
 
 1;
