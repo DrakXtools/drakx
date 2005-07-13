@@ -228,7 +228,7 @@ sub setState {
     };
 
     $state_type eq 'connected' and $add_action->($_) foreach qw(downNetwork monitorNetwork);
-    $state_type eq 'disconnected' and $add_action->('upNetwork') ;
+    $state_type eq 'disconnected' and $add_action->('upNetwork');
     $add_action->('confNetwork');
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
 
@@ -238,7 +238,7 @@ sub setState {
             $menu->append($_->{menuitem}) foreach values %wireless_networks;
             $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
         }
-        $add_action->('chooseInterface') ;
+        $add_action->('chooseInterface');
     }
 
     $add_action->('chooseProfile');
