@@ -151,21 +151,19 @@ sub netMonitor() {
 sub checkWireless() {
     my $networks = $monitor->list_wireless;
     foreach (keys %$networks) {
-        my $new = !exists $wireless_networks{$_};
         my $net = $wireless_networks{$_} ||= {};
-        if ($new) {
-            $net->{image} = Gtk2::Image->new;
-            $net->{menuitem} = Gtk2::MenuItem->new;
-            $net->{menuitem}->add(gtkshow(gtkpack_(Gtk2::HBox->new,
-                                                   1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
-                                                   0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
-                                                   0, $net->{level_image} = Gtk2::Image->new)));
+        put_in_hash($net, $networks->{$_});
+        unless (exists $net->{menuitem}) {
+            $net->{menuitem} = Gtk2::CheckMenuItem->new;
+            $net->{menuitem}->add(gtkpack_(gtkshow(Gtk2::HBox->new),
+                                           1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
+                                           0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
+                                           0, $net->{level_image} = Gtk2::Image->new));
             undef $current_state; #- force menu redraw
         }
-        put_in_hash($net, $networks->{$_});
-        my $approx_level = 20+int($net->{signal_level}/20)*20;
         $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
         $net->{keyring_image}->visible(defined $net->{flags});
+        my $approx_level = 20 + int($net->{signal_level}/20)*20;
         $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
