@@ -44,8 +44,9 @@ my %wireless_networks;
 my %tooltips =
   (
       connected => N_("Network is up on interface %s"),
-      #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-      disconnected => N_("Network is down on interface %s. Click on \"Configure Network\""),
+      disconnected =>
+        #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
+        N_("Network is down on interface %s. Click on \"Configure Network\""),
       notconfigured => N_("You do not have any configured Internet connection.
 Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")),
   );
