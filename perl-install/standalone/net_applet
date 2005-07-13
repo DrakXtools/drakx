@@ -163,7 +163,7 @@ sub checkWireless() {
             undef $current_state; #- force menu redraw
         }
         put_in_hash($net, $networks->{$_});
-        my $approx_level = 20+int($net->{level}/20)*20;
+        my $approx_level = 20+int($net->{signal_level}/20)*20;
         $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
         $net->{keyring_image}->visible(defined $net->{flags});
         $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
