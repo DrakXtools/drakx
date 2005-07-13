@@ -190,7 +190,7 @@ sub get_default_gateway_interface {
     my ($net) = @_;
     my @intfs = sort keys %{$net->{ifcfg}};
     my $routes = get_routes();
-    (find { $routes->{$_}{gateway} } keys %$routes) ||
+    (find { $routes->{$_}{gateway} } sort keys %$routes) ||
     $net->{network}{GATEWAYDEV} ||
     $net->{network}{GATEWAY} && find_matching_interface($net, $net->{network}{GATEWAY}) ||
     (find { get_interface_type($net->{ifcfg}{$_}) eq 'adsl' } @intfs) ||
