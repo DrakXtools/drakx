@@ -1,3 +1,33 @@
+2005/07/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: remove spurious spaces
+	po fix
+	simplify
+	don't destroy wireless menuitems on menu destroy
+	show wireless options only if a wireless card is present
+	fix typo
+	reorganize interface
+	first draft of wireless support
+	use dbus_object;
+
+	* network/monitor.pm, dbus_object.pm: initial import
+
+	* standalone/drakroam: use detect_devices::has_wireless()
+
+	* network/network.pm: make net_applet reload the configuration
+
+	* detect_devices.pm: add has_wireless
+
+	* standalone/drakids, network/activefw.pm: use dbus_object;
+
+2005/07/13  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: new strings translated
+
+2005/07/12  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
 2005/07/12  Antoine Ginies  <aginies at mandrakesoft.com> 
 
 	* standalone/draknfs: move menu above banner, use expander to show/hide
