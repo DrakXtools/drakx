@@ -164,7 +164,7 @@ sub checkWireless() {
         }
         $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
         $net->{keyring_image}->visible(defined $net->{flags});
-        my $approx_level = 20 + int($net->{signal_level}/20)*20;
+        my $approx_level = 20 + int(min($net->{signal_level}, 80)/20)*20;
         $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
