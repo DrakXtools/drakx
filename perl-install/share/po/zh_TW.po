@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-03-19 13:18+0800\n"
+"PO-Revision-Date: 2005-07-15 03:00+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@xuite.net>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2706,7 +2706,7 @@ msgstr "Devfs 名稱："
 #: diskdrake/interactive.pm:1191
 #, c-format
 msgid "Volume label: "
-msgstr "磁區標籤：\""
+msgstr "磁區標籤："
 
 #: diskdrake/interactive.pm:1192
 #, c-format
@@ -3117,7 +3117,7 @@ msgstr "小於 32MB 的分割區不能使用 ReiserFS 格式"
 #: fsedit.pm:27
 #, c-format
 msgid "with /usr"
-msgstr "掛載為 /usr"
+msgstr "將 /usr 分別掛載"
 
 #: fsedit.pm:32
 #, c-format
@@ -3216,7 +3216,7 @@ msgstr "沒有做任何動作"
 #: harddrake/data.pm:62 install_any.pm:1660
 #, c-format
 msgid "Floppy"
-msgstr "軟碟片"
+msgstr "軟碟機"
 
 #: harddrake/data.pm:72
 #, c-format
@@ -3256,7 +3256,7 @@ msgstr "顯示卡"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "數位電視卡"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3291,27 +3291,27 @@ msgstr "ISDN 介面卡"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "USB 音效裝置"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "廣播卡"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "ATM 網路卡"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "WAN 網路卡"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "藍芽裝置"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3348,7 +3348,7 @@ msgstr "印表機"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "搖桿埠控制器"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3414,7 +3414,7 @@ msgstr "鍵盤"
 #: harddrake/data.pm:460
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tablet 與觸控螢幕"
 
 #: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:977
 #, c-format
@@ -3486,7 +3486,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"您的卡現在正在使用 %s\"%s\" 驅動程式 (您的卡預設驅動程式為 \"%s\")"
+"您的音效卡現在正在使用 %s\"%s\" 驅動程式 (您的音效卡預設的驅動程式為 \"%s\")"
 
 #: harddrake/sound.pm:242
 #, c-format
@@ -3507,6 +3507,18 @@ msgid ""
 "- the new ALSA api that provides many enhanced features but requires using "
 "the ALSA library.\n"
 msgstr ""
+"OSS (Open Sound System) 是最早的音效 API。它是一套不依賴於作業系統的"
+"音效 API (可用於大多數的 UNIX(tm) 系統)，但它的功能非常基本且有限。\n"
+"甚至，OSS 的驅動程式還重新開發已有的功能。\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) 是一個模組化的架構並且\n"
+"支援相當多的 ISA、USB 與 PCI 音效卡。\n"
+"\n"
+"它同時也提供了一個較 OSS 高階的 API。\n"
+"\n"
+"若使用 ALSA，您可以選擇要使用：\n"
+"- 相容於 OSS 的舊 API\n"
+"- 提供許多強化的功能但需要使用 ALSA 函式庫的新 ALSA API。\n"
 
 #: harddrake/sound.pm:256 harddrake/sound.pm:341 standalone/drakups:146
 #, c-format
@@ -3545,11 +3557,16 @@ msgid ""
 "\n"
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
+"舊的 \"%s\" 驅動程式已被列入黑名單。\n"
+"\n"
+"它曾被回報會導致核心在解除模組時產生 Oops 錯誤。\n"
+"\n"
+"於下一次開機時將只會使用新的 \"%s\" 驅動程式。"
 
 #: harddrake/sound.pm:277
 #, c-format
 msgid "No open source driver"
-msgstr "無開放原始碼的驅動程式"
+msgstr "無開放原始碼的驅動程式可用"
 
 #: harddrake/sound.pm:278
 #, c-format
@@ -3576,7 +3593,7 @@ msgstr "未知的驅動程式"
 #: harddrake/sound.pm:287
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "錯誤：您的音效卡驅動程式 \"%s\" 沒有列出"
+msgstr "錯誤：您的音效卡驅動程式 \"%s\" 不在列表中"
 
 #: harddrake/sound.pm:301
 #, c-format
@@ -3607,6 +3624,21 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"傳統的音效除錯與測試是執行以下指令：\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" 會告訴您您的音效卡預設使用何種驅動程式。\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" 將告訴您正在使用何種驅動程式。\n"
+"\n"
+"- \"/sbin/lsmod\" 讓您可以檢查音效模組 (驅動程式) 是否已經載入。\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" 與 \"/sbin/chkconfig --list alsa\" 將\n"
+"告訴您音效與 ALSA 服務是否被設定為在 initlevel 3 執行。\n"
+"\n"
+"- \"aumix -q\" 會告訴您音量是否設為靜音\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" 將指出哪個程式在使用音效卡。\n"
 
 #: harddrake/sound.pm:330
 #, c-format
@@ -3670,7 +3702,7 @@ msgstr ""
 #: harddrake/v4l.pm:395
 #, c-format
 msgid "Card model:"
-msgstr "卡模組："
+msgstr "介面卡型號："
 
 #: harddrake/v4l.pm:396
 #, c-format
@@ -3760,41 +3792,33 @@ msgid ""
 "security), choose the desired user and window manager, then click on\n"
 "\"%s\". If you're not interested in this feature, uncheck the \"%s\" box."
 msgstr ""
-"GNU/Linux 是一個多使用者的系統, 簡單說每個使用者都有其獨立的\n"
-"喜好設定, 他們的檔案等等. 您可以閱讀 ``Starter Guide 初學者導覽''\n"
-"以便於學習有關多使用者系統. 不同於系統管理者 \"root\"\n"
-"此時你新增的使用者將不被授權於改變除了他們的檔案\n"
-"與設定, 以保護系統免於非故意的或惡意的\n"
-"對系統造成衝擊的改變. 您需要建立至少\n"
-"一個一般使用者給你自己 -- 這是你應該用於\n"
-"一般日常操作的帳號. 雖然這是非常容易以 root\n"
-"登入來做任何事與全部的事, 這也是非常危險的! 一個\n"
-"非常簡單的錯誤可能造成系統將再也不能正常工作. 若\n"
-"你以一般使用者的身份犯了一連串的錯誤, 最糟的情況將是\n"
-"你遺失某些資訊, 但是不影響整個系統.\n"
+"GNU/Linux 是一個多使用者的系統，那表示每個使用者都可以擁有各自的\n"
+"偏好設定、檔案等等。不同於系統管理者 \"root\" 您在這新增的使用者\n"
+"將僅被授權於改變他們自己的檔案與設定，以保護系統免於遭受到無意或\n"
+"惡意的對整個系統造成衝擊的改變。您需要建立至少一個一般使用者給您\n"
+"自己 -- 這是您應該用於一般日常操作的帳號。雖然使用 \"root\" 登入\n"
+"來做任何事是非常容易的，但這也是非常危險的！一個非常簡單的錯誤就\n"
+"可能造成系您的統再也不能正常工作。但是若您以一般使用者的身份犯了\n"
+"一連串嚴重的錯誤，最糟的情況將僅僅是您遺失某些資訊，但並不影響整\n"
+"個系統。\n"
 "\n"
-"第一行問你一真實名稱. 當然這並非必要\n"
-"-- 你事實上可以輸入任何你喜歡的. DrakX 將會用你打於此行\n"
-"的地一個字且複製它到 \"%s\" 行, 使用者將輸入\n"
-"以登入系統的名稱. 入你喜歡, 你可以推翻\n"
-"預設值且改變使用者名稱. 下一步是輸入一個密碼.\n"
-"以安全性觀點來看, 一個沒有特權(一般)使用者密碼是\n"
-"沒有 \"root\" 密碼來的重要, 但是這不構成理由以\n"
-"使它空白或過於簡單來忽略它: 畢竟您的檔案可能是\n"
-"於危險中.\n"
+"第一個欄位詢問您的真實名稱。當然這並非必要 -- 事實上您可以輸入任\n"
+"何您喜歡的名字。DrakX 會將您輸入於此欄位的第一個字複製到 \"%s\" \n"
+"欄，作為使用者登入系統時輸入的名稱。若您喜歡，您可以不使用預設值\n"
+"並改變使用者名稱。下一步是輸入一個密碼。從安全性的觀點而言，一個\n"
+"一般使用者的密碼並不如 \"root\" 密碼來的重要，但是這並不構成輕忽\n"
+"地使用空白或過於簡單的密碼的理由：畢竟您的檔案可能正處於危險中。\n"
 "\n"
-"一旦您點選 \"%s\", 您可以新增其他使用者. 新增使用者給你的\n"
-"每一個朋友: 例如您的父親或姊妹. 當你已經完成\n"
-"新增使用者, 點選 \"%s\" .\n"
+"一旦您點選 \"%s\"，您可以新增其他使用者。新增使用者給您的每一個\n"
+"朋友、您的父親或姊妹。當您全部新增完成後，請點選 \"%s\" 。\n"
 "\n"
-"點選 \"%s\" 按鈕允許您改變預設 \"shell 貝殼命令列\" 給\n"
-"那位使用者 (預設為bash).\n"
+"點選 \"%s\" 按鈕允許您改變預設的 \"shell\" 給這位使用者 (預設值\n"
+"為 bash)。\n"
 "\n"
-"當你已經完成新增使用者, 你將會被要求選擇一\n"
-"電腦開機時可以自動登入系統的使用者. 若\n"
-"你對那個特色有興趣 (且不太關心本地端\n"
-"安全性), 選擇希望的使用者與視窗管理員, 然後點選 \"%s\".\n"
-"若你對這個特色有沒有興趣, 不選取 \"%s\" 盒子."
+"當您完成新增使用者之後，您將會被要求選擇一位使用者在電腦開機時自\n"
+"動登入系統。如果您對這個功能有興趣 (且不太關心本地端安全性)，請\n"
+"選擇想要登入的使用者與視窗管理員，然後勾選 \"%s\"。若您對這個功\n"
+"能沒有興趣，請不要勾選 \"%s\"。"
 
 #: help.pm:51 printer/printerdrake.pm:1662 printer/printerdrake.pm:1783
 #, c-format
@@ -3814,7 +3838,7 @@ msgstr "下一步"
 #: help.pm:51
 #, c-format
 msgid "Do you want to use this feature?"
-msgstr "您想要使用這個功能嗎?"
+msgstr "您想要使用這個功能嗎？"
 
 #: help.pm:54
 #, c-format
@@ -3850,7 +3874,7 @@ msgid ""
 "\"second lowest SCSI ID\", etc."
 msgstr ""
 "目前所列出來的是硬碟機上偵測到已經存在的 Linux 分割區.\n"
-"您可以保留巫師模式做的選擇, 因為他們對一般安裝是不錯的.\n"
+"您可以保留精靈模式做的選擇，因為他們對一般安裝是不錯的。\n"
 "如果您做任何改變的話, 您至少要定義出一塊當作根分割區 (\"/\").\n"
 "別選擇一個太小的分割區, 否則您將無法安裝足夠的軟體.\n"
 "如果您想儲存您的資料到一個分離的分割區, 你需要建立一個\"/home\" 分割區\n"
@@ -3884,8 +3908,8 @@ msgid ""
 "CD at hand, just click on \"%s\", the corresponding packages will not be\n"
 "installed."
 msgstr ""
-"Mandriva Linux 安裝片包含數張光碟片. 若一所選擇的套件是位於另一張光碟,\n"
-"DrakeX 會彈出現在的光碟且要求您放入所要求的正確光碟片.\n"
+"Mandriva Linux 安裝片包含數張光碟片。若所選擇的套件是位於另一張光碟上，\n"
+"DrakeX 會退出現在的光碟且要求您放入所要求的正確光碟片。\n"
 "若您沒有要求的光碟在手上的話, 就按下 \"%s\", 對應的套件不會被安裝."
 
 #: help.pm:92
@@ -3951,14 +3975,14 @@ msgstr ""
 "現在是指定那個程式您想要裝在您的系統上. Mandriva Linux 有上千個套件,\n"
 "為了簡單管理, 相似性質的應用程式已經被分類到群組裡.\n"
 "\n"
-"Mandriva Linux 分類套件群組於四個範疇. 你能由不同範疇混合與配對應用程式,\n"
-"所以一個 ``工作站''安裝也能安裝``伺服器''範疇安裝的應用程式.\n"
+"Mandriva Linux 分類套件群組於四個類別. 你能由不同類別混合與配對應用程式,\n"
+"所以一個 ``工作站''安裝也能安裝``伺服器''類別安裝的應用程式.\n"
 "\n"
 " * \"%s\": 如果您計畫用您的機器當作一個工作站, 選擇一個或\n"
-"更多的群組於工作站範疇.\n"
+"更多的群組於工作站類別.\n"
 "\n"
 " * \"%s\": 如果您計畫用您的機器來程式設計, 選擇適當\n"
-"的群組於那個範疇. 特別的 \"LSB\" 群組將設定您的系統使之盡量符合\n"
+"的群組於那個類別。特別的 \"LSB\" 群組將設定您的系統使之盡量符合\n"
 "Linux Standard Bases 規範.\n"
 "\n"
 "   選擇 \"LSB\" 群組除了預設的 \"2.6\" 也將安裝 \"2.4\" 核心系列,\n"
@@ -3972,7 +3996,6 @@ msgstr ""
 "如果您像要有圖形介面可用, 至少一個要被選擇.\n"
 "\n"
 "移動滑鼠游標到一個群組上方將顯示一段關於該群組簡短的解釋文字\n"
-"text about that group.\n"
 "\n"
 "你能選取 \"%s\" 方塊盒, 若您對所提供的套件熟悉或您想要有對於什麼\n"
 "將被安裝有全部控制, 這將會有用\n"
@@ -4377,7 +4400,7 @@ msgstr ""
 "因為分割硬碟的動作程序通常是無法回復的\n"
 "且能導致資料遺失, 若您是一位不熟練的使用者,\n"
 "割硬碟的動作是脅迫恫嚇與充滿著緊張壓力的. 幸運的是\n"
-"DrakX 包含巫師模式以簡化這程序. 於繼續此步驟前,\n"
+"DrakX 包含精靈模式以簡化這程序。於繼續此步驟前，\n"
 "先詳細閱讀其他部份與全部, 慢慢來.\n"
 "\n"
 "根據您的硬碟設定值, 有數個選項可用:\n"
@@ -4385,7 +4408,7 @@ msgstr ""
 " * \"%s\". 該項目將會執行自動劃分您空白的磁碟.\n"
 "若您使用此選項, 將沒有進一步的提示.\n"
 "\n"
-" * \"%s\". 巫師模式已經偵測一個或更多已經存在的 Linux 硬碟\n"
+" * \"%s\"。精靈模式已經偵測一個或多個已經存在的 Linux 硬碟\n"
 "分割. 若您想要使用他們, 選此選項. 您將會\n"
 "被要求選擇關於每一個分割的掛載點.\n"
 "就有的掛載點預設為被選擇, 且大部分最好保留\n"
@@ -4857,6 +4880,9 @@ msgid ""
 "the\n"
 "list shown, click on the \"%s\" button to get the complete country list."
 msgstr ""
+"\"%s\"：檢視目前選擇的國家。如果您不在這個國家，\n"
+"請按下 \"%s\" 按鈕並選擇另一個。如果您的國家不在選單中，\n"
+"請按下 \"%s\" 按鈕來看完整的國家清單。"
 
 #: help.pm:569
 #, c-format
@@ -4883,6 +4909,22 @@ msgid ""
 "running version \"8.1\" or later. Performing an upgrade on versions prior\n"
 "to Mandriva Linux version \"8.1\" is not recommended."
 msgstr ""
+"這個步驟是在您的機器上找到已經存在的 GNU/Linux 分割區才會啟用。\n"
+"\n"
+"DrakX 需要知道您是要安裝新的系統或者升級既有的 Mandriva Linux 系統：\n"
+"\n"
+" * \"%s\". 大致來說，這將會完全抹除舊的系統。然而，根據您的分割區配\n"
+"置方式，您可以避免部分現存的資料 (例如 \"home\" 之中的目錄) 被完全\n"
+"抹除。如果您想要改變您的硬碟分割方式，或改變檔案系統，您應該使用這\n"
+"個選項。\n"
+"\n"
+" * \"%s\". 這個安裝方式讓您更新目前安裝在您的 Mandriva Linux 中的套\n"
+"件。您目前的分割方式和使用者資料不會被改變。大部分其他的設定步驟仍\n"
+"然會出現並且和標準的安裝過程相似。\n"
+"\n"
+"使用 ``更新'' 選項應該在 Mandriva Linux 版本 \"8.1\" 或更新的系統上\n"
+"可以正常運作。不建議從 Mandriva Linux 版本 \"8.1\" 或更早的系統進行"
+"更新。"
 
 #: help.pm:591
 #, c-format
@@ -4905,7 +4947,7 @@ msgid ""
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
 "根據您所選的語言 (), DrakX 將會自動選擇一個特別的鍵盤設定型態. 檢查所選擇的\n"
-"符合您或選擇另一個鍵盤布局\n"
+"是否適合您或選擇另一個鍵盤形式。\n"
 "\n"
 "您或許沒有精確對應於您的語言的鍵盤: 例如, 如果您是一個說英文的瑞士本國人,\n"
 "您或許有瑞士鍵盤. 或如果您說英文且在魁北克 (Quebec), 您或許發現您自己在一個\n"
@@ -4914,8 +4956,8 @@ msgstr ""
 "\n"
 "點選 \"%s\" 按鈕以顯示一個支援的鍵盤清單.\n"
 "\n"
-"如果您根據一個非拉丁語系字母選擇一個鍵盤布局, 下一步對話視窗將允許您選擇\n"
-"鍵捆綁以便切換於拉丁與非拉丁鍵盤布局之中."
+"如果您根據一個非拉丁語系字母選擇一個鍵盤形式，下一個對話窗將允許您選擇\n"
+"按鍵組合以便切換於拉丁與非拉丁鍵盤形式之中。"
 
 #: help.pm:609
 #, c-format
@@ -4963,42 +5005,41 @@ msgid ""
 msgstr ""
 "第一步驟是選擇您偏好的語言.\n"
 "\n"
-"您的偏好語言選擇將一般來說影響安裝, 文件, 與系統. 先選擇您在的區域, 然後\n"
-"您說的語言.\n"
+"您選擇的偏好語言一般來說將影響安裝、文件、與系統。先選擇您在的區域，然後\n"
+"是您說的語言.\n"
 "\n"
 "點選 \"%s\" 按鍵將允許您選擇其他語言來安裝在您的工作站上, 因此, 安裝特殊語"
 "言\n"
 "檔案給系統文件與應用程式. 例如, 如果西班牙使用者會用您的機器, 在樹狀檢視中\n"
 "選擇英文當預設語言且在進階部份選擇 \"%s\".\n"
 "\n"
-"關於 UTF-8 (unicode) 支援: Unicode 是一個新的字元編碼以含蓋全部存在的語言.\n"
+"關於 UTF-8 (unicode) 支援：Unicode 是一個新的字元編碼以涵蓋所有存在的語言。\n"
 "然而, 在 GNU/Linux 下完全的支援仍然在開發中. 因為那個原因, Mandriva Linux "
 "的\n"
-" UTF-8 使用將根據使用者的選擇:\n"
+" UTF-8 使用將根據使用者的選擇而定：\n"
 "\n"
-" * 如果您選擇一個有強烈舊式編碼的語言 (latin1 語言, 俄羅斯, 日本, 中國,\n"
+" * 如果您選擇一個有偏重傳統編碼的語言 (latin1 語言、俄羅斯文、日文、中文、\n"
 "韓國, 泰國, 希臘, 土耳其, 大多的 iso-8859-2 語言)\n"
 "\n"
 " * 其他語言將使用 unicode 為預設;\n"
 "\n"
 " * 如果兩個或兩個以上的語言被需要, 且那些語言不用相同的編碼, 則 unicode 將被"
-"用於\n"
-"整個系統;\n"
+"用於整個系統；\n"
 "\n"
-" * 最後, unicode 也可以被強制使用遍布系統, 藉由使用者的選擇 \"%s\" 選項\n"
+" * 最後，unicode 也可以被強制使用於整個系統，藉由使用者的選擇 \"%s\" 選項\n"
 "來要求之.\n"
 "\n"
 "記得您不被限制於選擇一個單一的附加語言. 您可以選擇數個, 或甚至藉由選擇\n"
-" \"%s\" 方塊安裝他們全部. 選擇支援對語言來說是指翻譯, 字型, 拼字檢查等等,\n"
+" \"%s\" 方塊安裝他們全部。選擇支援該種語言是指翻譯、字型、拼字檢查等等，\n"
 "將也會被安裝給那個語言.\n"
-"為了切換於不同的安裝於您系統上的語言之間, 您可以用 \"root\" 發射\n"
-"\"localedrake\" 命令來改變用於整個系統上的語言. 用一般使用者執行命令\n"
+"為了切換於不同的安裝於您系統上的語言之間，您可以用 \"root\" 執行\n"
+"\"localedrake\" 程式來改變用於整個系統上的語言。用一般使用者執行程式\n"
 "將只會改變對於那個特別使用者的語言設定."
 
 #: help.pm:647
 #, c-format
 msgid "Espanol"
-msgstr ""
+msgstr "西班牙語"
 
 #: help.pm:650
 #, c-format
@@ -5050,18 +5091,16 @@ msgstr ""
 "部\n"
 "的滑鼠.\n"
 "\n"
-"如果您選擇一個不同於預設值的滑鼠, 一個測試螢幕將會顯示. 使用案件與滾輪來\n"
-"校驗設定值是正確的且滑鼠正確工作. 如果滑鼠不能工作, 按下空白鍵或 [Return] "
+"如果您選擇一個不同於預設值的滑鼠，將會顯示一個測試畫面。使用按鍵與滾輪來\n"
+"確認設定值是正確的且滑鼠正確工作。如果滑鼠不能工作，請按下空白鍵或 [Return] "
 "鍵\n"
 "以取消測試且您將回到滑鼠清單.\n"
 "\n"
 "某些情況下, 滾輪滑鼠不能被自動偵測, 所以您將需要從清單中選擇您的滑鼠.\n"
-"確定選擇一個對應於您的滑鼠連接的埠的一項. 選擇一個滑鼠且按下 \"%s\" 鍵後,\n"
+"確定選擇一個對應於您的滑鼠連接埠的項目。選擇一個滑鼠且按下 \"%s\" 鍵後，\n"
 "一個滑鼠影像將顯示在螢幕上.\n"
-" 請捲動滑鼠滾輪以確定它正確被驅動. 當您滾動\n"
-"滑鼠滾輪, 您將看見螢幕上滾動滾輪移動.\n"
-" 測試按鍵且檢查滑鼠指標當您移動\n"
-"您的滑鼠時在螢幕上移動."
+"請捲動滑鼠滾輪以確定它正確被啟動。當您滾動滾輪，您將看見螢幕上的滾輪移動。\n"
+"測試按鍵並檢查當您移動您的滑鼠時游標是否在螢幕上移動。"
 
 #: help.pm:681
 #, c-format
@@ -5124,15 +5163,15 @@ msgid ""
 msgstr ""
 "這是最重要的 GNU/Linux 系統安全性決定點: 你一定要輸入 \"root\" 密碼.\n"
 "\"root\" 是系統管理員且是被授權做更新, 增加使用者, 變更整個系統設定等等\n"
-"的人. 簡而言之, \"root\"能做任何事! 那就是為什麼您必須要選擇一個困難猜測\n"
+"的人。簡而言之，\"root\" 能做任何事！那就是為什麼您必須要選擇一個很難猜中\n"
 "的密碼. DrakX 將告訴您您的密碼是否太簡單. 就像您所見的一樣, 您並不被強制輸"
 "入\n"
 "一個密碼, 但是我們強烈建議如此. GNU/Linux 就像其他任何作業系統一般易於受\n"
-"操作手錯誤影響. 因為 \"root\" 可以克服全部限制且藉由不小心存取分割, 可以\n"
-"不經意地抹除全部分割上的資料, 困難變成 \"root\" 是重要的.\n"
+"操作手誤影響。因為 \"root\" 可以克服全部限制且藉由不小心存取分割，可以\n"
+"不經意地抹除所有分割上的資料，因此讓成為 \"root\" 身分很困難是極重要的。\n"
 "\n"
 "密碼應該是一組字母與數字字元且至少 8 個字元長. 絕不寫下 \"root\" 密碼 - \n"
-"它使得太容易妥協您的系統(安全性).\n"
+"它使得太容易掌控您的系統(安全性)。\n"
 "\n"
 "一個警告: 別把密碼設定太長或太複雜, 因為您必須能記住它!\n"
 "\n"
@@ -5146,7 +5185,7 @@ msgstr ""
 "選適合的一個給 \"%s\". 如果您不知道選那一個, 向網路管理者詢問相關資訊.\n"
 "\n"
 "如果您遇到記住密碼的問題, 或如果您的電腦將永遠不連上網際網路且您絕對相信\n"
-"任何使用您的電腦的人, 您可以選擇有 \"%s\"."
+"所有使用您電腦的人，您可以選擇 \"%s\"."
 
 #: help.pm:722
 #, c-format
@@ -5216,7 +5255,7 @@ msgstr ""
 " * \"%s\" 是 ``Common Unix Printing System (通用 Unix 列印系統)'', 這是一套\n"
 "對於直接列印到本地端印表機上, 或者是到地球另一端都相當出色的選擇. 它的設定\n"
 "是相當簡單且可以當成古老的 lpd 列印系統的伺服器端或者是用戶端使用, 所以它是\n"
-"相容於需要列印服務比較舊的作業系統. 相當強力, 基本設定幾乎跟 \"pdq\" 一樣\n"
+"相容於需要列印服務比較舊的作業系統。相當強大，基本設定幾乎跟 \"pdq\" 一樣\n"
 "簡單. 如果您希望能夠模擬 \"lpd\" 伺服器, 確定您開啟 \"cups-lpd\" daemon.\n"
 "\"%s\" 提供了圖形的介面前端給列印, 選擇列印的選項, 管理印表機.\n"
 "\n"
@@ -5226,7 +5265,7 @@ msgstr ""
 #: help.pm:765
 #, c-format
 msgid "pdq"
-msgstr ""
+msgstr "pdq"
 
 #: help.pm:765 printer/cups.pm:115 printer/data.pm:122
 #, c-format
