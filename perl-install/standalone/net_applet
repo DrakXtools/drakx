@@ -216,7 +216,8 @@ sub generate_menu {
         my ($action) = @_;
         my $name = ref($actions{$action}{name}) eq 'CODE' ? $actions{$action}{name}->($interface) : $actions{$action}{name};
         my $launch = $actions{$action}{launch};
-        if ($actions{$action}{choices}) {
+        my @choices = exists $actions{$action}{choices} && $actions{$action}{choices}->();
+        if (@choices > 1) {
             my $selected = $actions{$action}{choice_selected};
             gtkshow(create_menu($name, map {
                 my $choice = $_;
