@@ -216,19 +216,22 @@ sub generate_menu {
         my ($action) = @_;
         my $name = ref($actions{$action}{name}) eq 'CODE' ? $actions{$action}{name}->($interface) : $actions{$action}{name};
         my $launch = $actions{$action}{launch};
-        my @choices = exists $actions{$action}{choices} && $actions{$action}{choices}->();
-        if (@choices > 1) {
+        my @choices = exists $actions{$action}{choices} ? $actions{$action}{choices}->() : ();
+        my $w;
+        if (@choices == 0) {
+            $w = gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) });
+        } elsif (@choices > 1) {
             my $selected = $actions{$action}{choice_selected};
-            gtkshow(create_menu($name, map {
+            $w = gtkshow(create_menu($name, map {
                 my $choice = $_;
                 my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
                 gtksignal_connect($w, activate => sub { $launch->($choice) });
                 $w->set_draw_as_radio(1);
                 $w;
             } $actions{$action}{choices}->()));
-        } else {
-            gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) });
         }
+        #- don't add submenu if only one choice exists
+        $w;
     };
 
     my (@settings, @actions);
@@ -266,7 +269,7 @@ sub generate_menu {
         $menu->append($_) foreach @actions;
         $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     }
-    $menu->append(gtkshow(create_menu(N("Settings"), @settings)));
+    $menu->append(gtkshow(create_menu(N("Settings"), grep { $_ } @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append($create_item->('help'));
     $menu->append($create_item->('quit'));
