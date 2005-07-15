@@ -471,6 +471,7 @@ sub selectSupplMedia {
 	prep_net_suppl_media($o) if !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/;
 	local $::isWizard = 0;
 	local $o->{method} = $suppl_method;
+	my $postinstall_rpms_tmp = $postinstall_rpms;
 	if ($suppl_method eq 'cdrom') {
 	    (my $cdromdev) = detect_devices::cdroms();
 	    $o->ask_warn('', N("No device found")), return 'error' if !$cdromdev;
@@ -489,6 +490,7 @@ sub selectSupplMedia {
 		useMedium($medium_name);
 
 		#- probe for an hdlists file and then look for all hdlists listed herein
+		$postinstall_rpms = '';
 		eval {
 		    pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom", $o->{packages}, $medium_name, sub {
 			my ($supplmedium) = @_;
@@ -541,6 +543,7 @@ sub selectSupplMedia {
 	    require http if $suppl_method eq 'http';
 	    require ftp if $suppl_method eq 'ftp';
 	    #- first, try to find an hdlists file
+	    $postinstall_rpms = '';
 	    eval { pkgs::psUsingHdlists($o, $suppl_method, $url, $o->{packages}, $medium_name, \&setup_suppl_medium) };
 	    if ($@) {
 		log::l("psUsingHdlists failed: $@");
@@ -573,6 +576,7 @@ sub selectSupplMedia {
 		useMedium($prev_asked_medium);
 		return 'error';
 	    }
+	    $postinstall_rpms = '';
 	    my $supplmedium = pkgs::psUsingHdlist(
 		$suppl_method,
 		$o->{packages},
@@ -592,6 +596,7 @@ sub selectSupplMedia {
 		$suppl_method = 'error';
 	    }
 	}
+	$postinstall_rpms = $postinstall_rpms_tmp;
     } else {
 	$suppl_method = '';
     }
