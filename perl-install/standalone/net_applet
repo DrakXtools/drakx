@@ -10,6 +10,7 @@ use network::network;
 use network::tools;
 
 use mygtk2 qw(gtknew);
+use dbus_object;
 use network::activefw;
 use network::monitor;
 
@@ -201,59 +202,73 @@ sub go2State {
             }
             $menu->destroy;
         }
-        $menu = setState($state_type, $interface);
+        $menu = generate_menu($state_type, $interface);
     }
 }
-sub setState {
+sub generate_menu {
     my ($state_type, $interface) = @_;
 
     $img->set_from_pixbuf($pixbufs{state}{$state_type eq 'connected' ? 'connected' : 'disconnected'});
     gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($tooltips{$state_type}), $interface)));
 
     my $menu = Gtk2::Menu->new;
-    my $add_action = sub {
+    my $create_item = sub {
         my ($action) = @_;
         my $name = ref($actions{$action}{name}) eq 'CODE' ? $actions{$action}{name}->($interface) : $actions{$action}{name};
         my $launch = $actions{$action}{launch};
         if ($actions{$action}{choices}) {
             my $selected = $actions{$action}{choice_selected};
-            $menu->append(gtkshow(create_menu($name, map {
+            gtkshow(create_menu($name, map {
                 my $choice = $_;
                 my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
                 gtksignal_connect($w, activate => sub { $launch->($choice) });
                 $w->set_draw_as_radio(1);
                 $w;
-            } $actions{$action}{choices}->())));
+            } $actions{$action}{choices}->()));
         } else {
-            $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
+            gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) });
         }
     };
 
-    $state_type eq 'connected' and $add_action->($_) foreach qw(downNetwork monitorNetwork);
-    $state_type eq 'disconnected' and $add_action->('upNetwork');
-    $add_action->('confNetwork');
-    $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+    my (@settings, @actions);
+    my $has_wireless = detect_devices::has_wireless();
+
+    if ($state_type eq 'connected') {
+        push @actions, $create_item->($_) foreach qw(downNetwork monitorNetwork);
+    } elsif ($state_type eq 'disconnected') {
+        push @actions, $menu->append($create_item->('upNetwork'));
+    }
+    push @actions, $create_item->('confNetwork');
 
     if ($state_type ne 'notconfigured') {
-        if (detect_devices::has_wireless()) {
-            $add_action->('wireless');
+        if ($has_wireless) {
+            push @actions, $create_item->('wireless');
             $menu->append($_->{menuitem}) foreach values %wireless_networks;
             $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
         }
-        $add_action->('chooseInterface');
+        push @settings, $create_item->('chooseInterface');
     }
 
-    $add_action->('chooseProfile');
+    push @settings, $create_item->('chooseProfile');
     if ($enable_activefw) {
-        $menu->append($interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
-                                                                                $activefw->get_interactive),
-                                                                  toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
+        $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
+                                                                  $activefw->get_interactive),
+                                                    toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) }));
+        push @settings, $interactive_cb;
     }
-    $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
-                                            toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
+    push @settings, gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
+                                              toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) }));
+
+    if ($has_wireless) {
+        $menu->append(gtkshow(create_menu(N("Actions"), @actions)));
+    } else {
+        $menu->append($_) foreach @actions;
+        $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+    }
+    $menu->append(gtkshow(create_menu(N("Settings"), @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    $add_action->('help');
-    $add_action->('quit');
+    $menu->append($create_item->('help'));
+    $menu->append($create_item->('quit'));
     $menu;
 }
 sub mainQuit() {
