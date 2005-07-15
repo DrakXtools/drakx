@@ -411,7 +411,7 @@ sub add_modify_entry {
 			      0, $label_and_widgets->(N("Anonymous Group ID:"), $anongid, ""),
 			     ),
 		    ),
-	   0, gtkadd(Gtk2::Frame->new(N("")),
+	   0, gtkadd(Gtk2::Frame->new(""),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 #			      0, $advanced,
 			      0, $expender,
