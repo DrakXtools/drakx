@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.34mdk
+Release: 0.35mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul 15 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.35mdk
+- net_applet: initial wireless support
+- drakgw: move wait message after package installation
+  (or else the interface isn't active)
+- draknfs (Antoine):
+  o move menu above banner
+  o use expander to show/hide advanced options,
+  o remove empty value in advanced option
+  o change draknfs tittle (thx Fabrice Facorat)
+  o add exit on ok button
+  o ensure nfs-utils is installed
+- drakTermServ (Stew): add/remove entries to default PXE config
+
 * Mon Jul 11 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.34mdk
 - really write modem/adsl ifcfg files (fix ONBOOT setting)
 - don't restart network service at drakconnect startup
