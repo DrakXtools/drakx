@@ -9,8 +9,8 @@ sub new {
     dbus_object::new($type,
 		       $bus,
 		       "com.mandriva.monitoring",
-		       "/com/mandriva/monitoring/network",
-		       "com.mandriva.monitoring.network");
+		       "/com/mandriva/monitoring/wireless",
+		       "com.mandriva.monitoring.wireless");
 }
 
 sub list_wireless {
