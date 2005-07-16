@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-05 16:34+0200\n"
-"PO-Revision-Date: 2005-07-16 02:00+0300\n"
+"PO-Revision-Date: 2005-07-16 13:53+0300\n"
 "Last-Translator: dovix <dovix2003@yahoo.com>\n"
 "Language-Team: Hebrew <mdk-hebrew@iglu.org.il>\n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,11 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandriva Move again."
 msgstr ""
+"נראה שמפתח ה-USB מכיל הגנת כתיבה מופעלת, אבל אין אפשרות לנתק אותו באופן בטוח כעת.\n"
+"\n"
+"\n"
+"לחץ על הכפתור לאתחול מחדש של המחשב, נתק את מפתח ה-USB, בטל את הגנת הכתיבה,\n"
+"חבר את המפתח מחדש, והפעל את התקליטור מחדש."
 
 #: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1319
 #, c-format
@@ -98,6 +103,14 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
+"מפתח ה-USB שלך אינו מכיל מחיצות ווינדוס (מסוג FAT).\n"
+"מחיצה כזו נדרשת להמשך (ומאחר וסוג מחיצה זה תקני יותר,\n"
+"יהיה באפשרותך לנייד אותו ולגשת לקבצים שלך מכל המחשבים\n"
+"מבוססי ווינדוס). עליך לחבר מפתח USB הכולל מחיצה מסוג זה.\n"
+"\n"
+"\n"
+"יש באפשרותך להמשיך גם ללא מפתח USB מתאים - במקרה\n"
+"זה ניתן יהיה להשתמש במערכת ללא שמירת הגדרות."
 
 #: ../move/move.pm:483
 #, c-format
@@ -114,6 +127,17 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
+"לא זוהה אף מפתח USB המחובר למערכת שלך. אם\n"
+"יש ברשותך מפתח כזה, המערכת תוכל לשמור הגדרות\n"
+"שבוצעו בחשבון המשתמש שלך והגדרות מערכת. הגדרות\n"
+"אלו ישוחזרו בהפעלה הבאה של המערכת.\n"
+"הערה: לאחר חיבור מפתח USB עליך להמתין מספר שניות\n"
+"לפני בקשת זיהוי חוזרת.\n"
+"\n"
+"\n"
+"יש באפשרותך להמשיך גם ללא מפתח USB מתאים -\n"
+"במקרה זה ניתן יהיה להשתמש במערכת ללא שמירת\n"
+"הגדרות."
 
 #: ../move/move.pm:494
 #, c-format
@@ -782,7 +806,7 @@ msgstr "באיזה תקן שידור הטלוויזיה שלך משתמשת?"
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "אחר"
 
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
@@ -1487,7 +1511,7 @@ msgstr "מדריך Active Directory עם Winbind:"
 #: authentication.pm:85
 #, c-format
 msgid "Authentication LDAP"
-msgstr ""
+msgstr "אימות LDAP"
 
 #: authentication.pm:86
 #, c-format
@@ -1522,7 +1546,7 @@ msgstr "שיטת אבטחה (SASL/Kerberos)"
 #: authentication.pm:110 authentication.pm:148
 #, c-format
 msgid "Authentication Active Directory"
-msgstr ""
+msgstr "אימות Active Directory"
 
 #: authentication.pm:111 authentication.pm:150 diskdrake/smbnfs_gtk.pm:180
 #, c-format
@@ -1564,7 +1588,7 @@ msgstr "הצפנה"
 #: authentication.pm:129
 #, c-format
 msgid "Authentication NIS"
-msgstr ""
+msgstr "אימות NIS"
 
 #: authentication.pm:130
 #, c-format
@@ -2247,17 +2271,17 @@ msgstr ""
 #: diskdrake/interactive.pm:360
 #, c-format
 msgid "No supermount"
-msgstr ""
+msgstr "ללא עיגון מחיצות אוטומטי"
 
 #: diskdrake/interactive.pm:361
 #, c-format
 msgid "Supermount"
-msgstr ""
+msgstr "עיגון מחיצות אוטומטי (Supermount)"
 
 #: diskdrake/interactive.pm:362
 #, c-format
 msgid "Supermount except for CDROM drives"
-msgstr ""
+msgstr "עיגון מחיצות אוטומטי למעט כונני תקליטורים"
 
 #: diskdrake/interactive.pm:368 help.pm:530
 #, c-format
@@ -3208,7 +3232,7 @@ msgstr "כרטיס מסך"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "כרטיס DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3243,27 +3267,27 @@ msgstr "מתאמי ISDN"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "התקני קול USB"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "כרטיסי רדיו"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "כרטיסי רשת ATM"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "כרטיסי רשת WAN"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "התקני שן כחולה"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3300,7 +3324,7 @@ msgstr "מדפסת"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "בקרי יציאת משחק"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3366,7 +3390,7 @@ msgstr "מקלדת"
 #: harddrake/data.pm:460
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "מחשב לוח ומסך מגע"
 
 #: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:977
 #, c-format
@@ -4930,7 +4954,7 @@ msgstr "עם הדמיית גלגלת"
 #: help.pm:681
 #, c-format
 msgid "Universal | Any PS/2 & USB mice"
-msgstr ""
+msgstr "כללי | כל עכבר PS/2 ו-USB"
 
 #: help.pm:684
 #, c-format
@@ -5348,7 +5372,7 @@ msgstr "רשת (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "רשת (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -5378,7 +5402,7 @@ msgstr "כתובת URL של אתר המראה?"
 #: install_any.pm:523
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "הגדרת NFS"
 
 #: install_any.pm:523
 #, c-format
@@ -5393,7 +5417,7 @@ msgstr ""
 #: install_any.pm:524
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "ספרייה"
 
 #: install_any.pm:572
 #, c-format
@@ -5516,7 +5540,7 @@ msgstr "הגישה נדחתה"
 #: install_any.pm:1756
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "שם NFS לא-תקין"
 
 #: install_any.pm:1777
 #, c-format
@@ -7614,7 +7638,7 @@ msgstr "סלובנית"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "סינהלה"
 
 #: keyboard.pm:294
 #, c-format
@@ -7698,14 +7722,14 @@ msgstr "תאילנדית (פטאצ'וטה)"
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "טיפינג (פריסה מרוקאית) (+לטינית/ערבית)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "טיפינג (פונטית) (+לטינית/ערבית)"
 
 #: keyboard.pm:313
 #, c-format
@@ -9672,12 +9696,12 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:155
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "WEP פתוח"
 
 #: network/netconnect.pm:156
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "WEP מוגבל"
 
 #: network/netconnect.pm:157
 #, c-format
@@ -9722,7 +9746,7 @@ msgstr "חיבור מודם"
 #: network/netconnect.pm:250
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "חיבור DVB"
 
 #: network/netconnect.pm:260
 #, c-format
@@ -10166,7 +10190,7 @@ msgstr "חיבור באתחול המערכת"
 #: network/netconnect.pm:899 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
-msgstr ""
+msgstr "מטרי"
 
 #: network/netconnect.pm:901 standalone/drakconnect:369
 #: standalone/drakconnect:882
@@ -10234,7 +10258,7 @@ msgstr "התקנת מנהל התקן חדש"
 #: network/netconnect.pm:974
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "עליך לבחור התקן:"
 
 #: network/netconnect.pm:999
 #, c-format
@@ -10304,7 +10328,7 @@ msgstr "קצב סיביות - סל\"ש"
 #: network/netconnect.pm:1010
 #, c-format
 msgid "Encryption mode"
-msgstr ""
+msgstr "אופן הצפנה"
 
 #: network/netconnect.pm:1014 standalone/drakconnect:420
 #, c-format
@@ -10428,22 +10452,22 @@ msgstr ""
 #: network/netconnect.pm:1101
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "תצורת DVB"
 
 #: network/netconnect.pm:1102
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "מתאם DVB"
 
 #: network/netconnect.pm:1119
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "הגדרות מתאם DVB"
 
 #: network/netconnect.pm:1122
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "כרטיס מתאם"
 
 #: network/netconnect.pm:1123
 #, c-format
@@ -10820,7 +10844,7 @@ msgstr "לא נמצא \"%s\" במערכת החלונות שלך!"
 #: network/thirdparty.pm:312
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "לא זוהתה מערכת ווינדוס!"
 
 #: network/thirdparty.pm:322
 #, c-format
@@ -10879,7 +10903,7 @@ msgstr "העתקת הקושחה הסתיימה בהצלחה"
 #: network/thirdparty.pm:427
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "מחפש תוכנה ומנהלי התקנים דרושים..."
 
 #: network/thirdparty.pm:437
 #, c-format
@@ -11476,7 +11500,7 @@ msgstr ""
 #: printer/printerdrake.pm:161 printer/printerdrake.pm:236
 #, c-format
 msgid "Sharing of local printers"
-msgstr ""
+msgstr "שיתוף מדפסות מקומיות"
 
 #: printer/printerdrake.pm:162
 #, c-format
@@ -17457,13 +17481,13 @@ msgstr ""
 "יהיה עליך להגדיר שרת דוא\"ל פעיל כדי לאפשר תכונה זו."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"זוהי כתובת דוא\"ל או משתמש במחשב במקומי אליהם ברצונך לשלוח את תוצאות הגיבוי. "
-"יהיה עליך להגדיר שרת דוא\"ל פעיל כדי לאפשר תכונה זו."
+"זוהי כתובת הדואר החוזרת בהודעה שתכלול את תוצאות הגיבוי. "
+"ברירת המחדל היא drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -20050,7 +20074,7 @@ msgid ""
 msgstr ""
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
 msgstr "הגדרה מחדש"
 
@@ -20072,9 +20096,9 @@ msgid ""
 msgstr "נא לבחור את מתאם הרשת שיהיה מחובר אל הרשת המקומית שלך"
 
 #: standalone/drakgw:177
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "כתובת רשת מקומית"
+msgstr "הגדרות רשת מקומית"
 
 #: standalone/drakgw:180
 #, c-format
@@ -20092,9 +20116,9 @@ msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "ישנו חשש להתנגשות כתובות LAN בתצורה הנוכחית של %s!\n"
 
 #: standalone/drakgw:204
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "הגדרת Terminal Server"
+msgstr "הגדרות שרת כתובות מתחם (DNS)"
 
 #: standalone/drakgw:208
 #, c-format
@@ -20116,9 +20140,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakgw:248
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "הגדרת תצורה מחדש באופן אוטומטי"
+msgstr "השתמש בזיהוי רשת אוטומטי (DHCP)"
 
 #: standalone/drakgw:249
 #, c-format
@@ -20156,24 +20180,24 @@ msgid "Admin mail"
 msgstr ""
 
 #: standalone/drakgw:284
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "שם שרת מרוחק"
+msgstr "שם מתחם נראה"
 
 #: standalone/drakgw:285
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "מאפיין"
+msgstr "יציאת שרת מתווך"
 
 #: standalone/drakgw:286
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "גודל מטמון"
+msgstr "גודל מטמון (מ\"ב)"
 
 #: standalone/drakgw:311
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "מידע על הכונן הקשיח"
+msgstr "שדר מידע אודות המדפסת"
 
 #: standalone/drakgw:328
 #, c-format
@@ -23730,7 +23754,7 @@ msgstr "ניטור הרשת"
 #: standalone/net_applet:69
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "ניהול רשתות אלחוטיות"
 
 #: standalone/net_applet:70
 #, c-format
@@ -23790,7 +23814,7 @@ msgstr "האם ברצונך להוסיף את המתקיף לרשימה השחו
 #: standalone/net_applet:305
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "חסום באופן תמידי (אל תשאל שנית)"
 
 #: standalone/net_applet:308
 #, c-format
