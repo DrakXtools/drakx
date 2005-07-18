@@ -297,4 +297,18 @@ sub unpack_with_refs {
     @r;
 }
 
+sub md5file {
+    require Digest::MD5;
+    my @md5 = map {
+        my $sum;
+	if (open(my $FILE, $_)) {
+            binmode($FILE);
+            $sum = Digest::MD5->new->addfile($FILE)->hexdigest;
+            close($FILE);
+        }
+        $sum;
+    } @_;
+    return wantarray() ? @md5 : $md5[0];
+}
+
 1;
