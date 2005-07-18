@@ -154,7 +154,11 @@ sub load_image {
 	$mode = 0;
 	@image_pixbuf = ();
     }
-    $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img);
+    eval { $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img) };
+    if ($@) {
+        $in->ask_warn(N("Error"), N("Unable to load image file %s", $img));
+        return;
+    }
     $image_pixbuf[$mode] = $image_pixbuf[$mode]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
     $image_pixbuf[1-$mode] or $image_pixbuf[1-$mode] = $image_pixbuf[$mode];
     $image_area->queue_draw;
