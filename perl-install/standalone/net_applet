@@ -191,7 +191,7 @@ sub cronUpdate() {
 }
 sub go2State {
     my ($state_type, $interface) = @_;
-    if ($current_state ne $state_type || $current_state ne $interface) {
+    if ($current_state ne $state_type || $current_interface ne $interface) {
         $current_state = $state_type;
         $current_interface = $interface;
         if ($menu) {
