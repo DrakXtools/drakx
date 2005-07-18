@@ -87,7 +87,8 @@ sub add_modify_entry {
 
 # test if modify or add a host
 
-  my $dialog = new Gtk2::Dialog();
+  my $dialog = _create_dialog();
+  $dialog->set_transient_for($::main_window);
   $dialog->set_title("Drakhosts $wanted entry");
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
@@ -201,6 +202,7 @@ sub add_columns {
 my $model = create_model();
 
 my $window = ugtk2->new("Drakhosts $version");
+$::main_window = $window->{real_window};
 $window->{rwindow}->set_size_request(500, 400) unless $::isEmbedded;
 my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });

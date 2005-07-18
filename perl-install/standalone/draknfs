@@ -204,7 +204,8 @@ sub create_pango_help_box {
 sub help_b {
   my ($tittle, $help_data) = @_;
   gtksignal_connect(new Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub {
-		      my $dialog = new Gtk2::Dialog();
+		      my $dialog = _create_dialog();
+		      $dialog->set_transient_for($::main_window);
 		      $dialog->set_title(N("Help"));
 		      $dialog->set_modal(1);
 		      gtkpack_($dialog->vbox,
@@ -290,7 +291,9 @@ sub add_modify_entry {
   $button->signal_connect(clicked => sub { $file_dialog->show });
 
 # test if modify or add a nfs share
-  my $dialog = new Gtk2::Dialog();
+  my $dialog = _create_dialog();
+  $dialog->set_transient_for($::main_window);
+  local $::main_window = $dialog;
   $dialog->set_title("Draknfs entry");
   $dialog->set_position('center');
   $dialog->set_modal(1);
@@ -570,6 +573,7 @@ sub cell_edited {
 my $model = create_model();
 
 my $window = ugtk2->new("Draknfs $version");
+$::main_window = $window->{real_window};
 $window->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 $window->{rwindow}->set_position('center') if !$::isEmbedded;
 my $W = $window->{window};
