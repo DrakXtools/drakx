@@ -5,7 +5,6 @@ use lib qw(/usr/lib/libDrakX);
 use c;
 use common;
 use standalone;
-use Digest::MD5;
 use network::network;
 use network::tools;
 
@@ -21,13 +20,12 @@ use ugtk2 qw(:create :helpers :wrappers);
 my $enable_activefw;
 
 my ($eventbox, $img);
-my ($current_state, $menu, $timeout);
+my ($current_state, $menu, $timeout, $update_timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
-my $current_md5 = common::md5file($prog_name);
 
 my $net = {};
 my $watched_interface;
@@ -170,9 +168,6 @@ sub checkNetwork() {
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($net);
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
-
-    my $new_md5 = common::md5file($prog_name);
-    if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub checkNetworkForce() {
     $net = {};
@@ -185,6 +180,13 @@ sub cronNetwork() {
                                       checkNetwork();
                                       1;
                                   });
+}
+sub cronUpdate() {
+    my $current_md5 = common::md5file($prog_name);
+    $update_timeout = Glib::Timeout->add(60000, sub {
+        my $new_md5 = common::md5file($prog_name);
+        $new_md5 ne $current_md5 and  exec($prog_name);
+    });
 }
 sub go2State {
     my ($state_type, $interface) = @_;
@@ -271,6 +273,7 @@ sub generate_menu {
 }
 sub mainQuit() {
      Glib::Source->remove($timeout) if $timeout;
+     Glib::Source->remove($update_timeout) if $update_timeout;
      Gtk2->main_quit;
 }
 sub getAutoStart() {
