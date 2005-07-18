@@ -20,7 +20,7 @@ use ugtk2 qw(:create :helpers :wrappers);
 my $enable_activefw;
 
 my ($eventbox, $img);
-my ($current_state, $menu, $timeout, $update_timeout);
+my ($current_state, $current_interface, $menu, $timeout, $update_timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
@@ -57,7 +57,7 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
 my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
-               'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
+               'monitorNetwork' => { name => N("Monitor Network"), launch => \&netMonitor },
                'wireless' => { name => N("Manage wireless networks"), launch => sub { system("/usr/sbin/drakroam &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
@@ -89,11 +89,9 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
              )
       );
 $eventbox->signal_connect(button_press_event => sub {
-			      if ($_[1]->button == 1) {
-				  is_running('net_monitor') or netMonitor();
-			      }
-                              $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
-                          });
+    $_[1]->button == 1 and netMonitor();
+    $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
+});
 
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 
@@ -140,8 +138,10 @@ sub shouldStart() {
     return getAutoStart();
 }
 sub netMonitor() {
-    system("/usr/sbin/net_monitor&");
-    checkNetwork();
+    unless (is_running('net_monitor')) {
+        system("/usr/sbin/net_monitor --defaultintf $current_interface &")
+        checkNetwork();
+    }
 }
 sub checkWireless() {
     my $networks = $monitor->list_wireless;
@@ -165,10 +165,11 @@ sub checkWireless() {
 }
 sub checkNetwork() {
     checkWireless();
-    my ($gw_intf, $_is_up, $gw_address) = $watched_interface ?
+    my ($_is_up, $gw_address);
+    ($current_interface, $_is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($net);
-    go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
+    go2State($gw_address ? 'connected' : $current_interface ? 'disconnected' : 'notconfigured', $current_interface);
 }
 sub checkNetworkForce() {
     $net = {};
