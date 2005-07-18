@@ -95,7 +95,7 @@ our %l = (
 	'53c7,8xx',
         qw(AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
         qw(atp870u dc395x dc395x_trm dmx3191d dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
-        qw(qla1280 qla2x00 qlogicfas qlogicfc),
+        qw(qla1280 qla2x00 qla2xxx qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
