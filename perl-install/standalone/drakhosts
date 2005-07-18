@@ -92,7 +92,7 @@ sub add_modify_entry {
   $dialog->set_title("Drakhosts $wanted entry");
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
-  $dialog->set_size_request(250, -1);
+  $dialog->set_size_request(300, -1);
 
   if ($wanted =~ /modify/) {
     $iter = $selection->get_selected;
