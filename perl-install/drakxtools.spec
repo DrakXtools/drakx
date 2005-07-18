@@ -386,7 +386,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o make sub dialogs modal and transcient to their main window
   o improve layout (hidden buttons)
 - draksplash: do not die if loaded file isn't an image (blino, #16829)
-- drakxtv: really display sg when there's no card (#16716)
+- drakxtv: really display sg when there's no card (blino, #16716)
 - require perl-Net-DBus (for net_applet and drakids) (blino)
 
 * Fri Jul 15 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.35mdk
