@@ -145,7 +145,7 @@ if (@devices = @$devices_ok) {
 }
 
 # we failed to detect any TV card:
-if (!$devices && !$devices_ok) {
+if (is_empty_array_ref($devices) && is_empty_array_ref($devices_ok)) {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
                                                           #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                                           N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
