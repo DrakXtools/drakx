@@ -28,7 +28,7 @@ struct pci_module_map_full {
 ';
 
 my %t = ( 
-    network => 'network/main|gigabit|tokenring|wireless',
+    network => 'network/main|gigabit|tokenring|wireless|pcmcia',
     medias  => 'disk/scsi|hardware_raid|sata',
 );
 
