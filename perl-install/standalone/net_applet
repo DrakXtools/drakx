@@ -229,7 +229,7 @@ sub generate_menu {
     };
 
     my (@settings, @actions);
-    my $has_wireless = detect_devices::has_wireless();
+    my $has_wireless = detect_devices::has_wireless() && keys %wireless_networks;
 
     if ($state_type eq 'connected') {
         push @actions, $create_item->($_) foreach qw(downNetwork monitorNetwork);
