@@ -259,7 +259,7 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/net_applet <<EOF
 #!/bin/sh
 DESKTOP=\$1
 case \$DESKTOP in
-   KDE|GNOME|IceWM|Fluxbox|XFce4) exec /usr/bin/net_applet;;
+   kde|GNOME|IceWM|Fluxbox|XFce4) exec /usr/bin/net_applet;;
 esac
 EOF
 
