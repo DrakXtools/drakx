@@ -139,7 +139,7 @@ sub shouldStart() {
 }
 sub netMonitor() {
     unless (is_running('net_monitor')) {
-        system("/usr/sbin/net_monitor --defaultintf $current_interface &")
+        system("/usr/sbin/net_monitor --defaultintf $current_interface &");
         checkNetwork();
     }
 }
@@ -165,11 +165,10 @@ sub checkWireless() {
 }
 sub checkNetwork() {
     checkWireless();
-    my ($_is_up, $gw_address);
-    ($current_interface, $_is_up, $gw_address) = $watched_interface ?
+    my ($gw_intf, $_is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($net);
-    go2State($gw_address ? 'connected' : $current_interface ? 'disconnected' : 'notconfigured', $current_interface);
+    go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 }
 sub checkNetworkForce() {
     $net = {};
@@ -192,8 +191,9 @@ sub cronUpdate() {
 }
 sub go2State {
     my ($state_type, $interface) = @_;
-    if ($current_state ne $state_type) {
+    if ($current_state ne $state_type || $current_state ne $interface) {
         $current_state = $state_type;
+        $current_interface = $interface;
         if ($menu) {
             foreach (keys %wireless_networks) {
                 $wireless_networks{$_}{menuitem}->get_parent and $menu->remove($wireless_networks{$_}{menuitem});
