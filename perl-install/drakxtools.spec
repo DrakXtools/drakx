@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.35mdk
+Release: 0.36mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jul 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.36mdk
+- drakconnect: write firewire mac_addresses again (oblin)
+- draknfs:
+  o fix displaying help the second time
+  o make sub dialogs modal and transcient to their main window
+  o advanced options' help:
+    * improve layout
+    * fix text phrasing
+    * make it consistent with the GUI (ensure labels are named the
+      same way on buttons and in help) and speak about labels not
+      actual option names in config file
+- drakhosts:
+  o make sub dialogs modal and transcient to their main window
+  o improve layout (hidden buttons)
+- draksplash: do not die if loaded file isn't an image (blino, #16829)
+- drakxtv: really display sg when there's no card (#16716)
+- require perl-Net-DBus (for net_applet and drakids) (blino)
+
 * Fri Jul 15 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.35mdk
 - net_applet: initial wireless support
 - drakgw: move wait message after package installation
