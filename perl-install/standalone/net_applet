@@ -27,7 +27,7 @@ add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
-my $current_md5 = md5file($prog_name);
+my $current_md5 = common::md5file($prog_name);
 
 my $net = {};
 my $watched_interface;
@@ -140,16 +140,6 @@ sub shouldStart() {
     }
     return getAutoStart();
 }
-sub md5file {
-    my @md5;
-    foreach my $file (@_) {
-	open(my $FILE, $file) or do { print STDERR "Can not open '$file': $!"; push @md5, "" };
-	binmode($FILE);
-	push @md5, Digest::MD5->new->addfile($FILE)->hexdigest;
-	close($FILE);
-    }
-    return wantarray() ? @md5 : $md5[0];
-}
 sub netMonitor() {
     system("/usr/sbin/net_monitor&");
     checkNetwork();
@@ -181,7 +171,7 @@ sub checkNetwork() {
       network::tools::get_internet_connection($net);
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 
-    my $new_md5 = md5file($prog_name);
+    my $new_md5 = common::md5file($prog_name);
     if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub checkNetworkForce() {
