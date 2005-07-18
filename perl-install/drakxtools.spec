@@ -6,7 +6,7 @@ Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.072-1mdk, perl-Glib >= 1.072-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.23, mandrake-doc-common >= 9.2-5mdk
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.072-1mdk, perl-Glib >= 1.072-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.23, mandrake-doc-common >= 9.2-5mdk, perl-Net-DBus
 Requires: foomatic-db-engine
 Requires: drakconf-icons
 Conflicts: drakconf < 10.3-0.6mdk
