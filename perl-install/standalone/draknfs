@@ -209,7 +209,7 @@ sub help_b {
 		      $dialog->set_title(N("Help"));
 		      $dialog->set_modal(1);
 		      gtkpack_($dialog->vbox,
-			       1, $help_data,
+			       1, create_pango_help_box($help_data),
 			       0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub {
 				   $dialog->destroy;
 						    }
@@ -385,7 +385,7 @@ sub add_modify_entry {
 
   my $expender = Gtk2::Expander->new('Advanced options');
   $expender->add(gtkpack_(Gtk2::VBox->new,
-                          0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
+                          0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), $help_global)),
                           0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
                           0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
 			 ),
@@ -404,12 +404,12 @@ sub add_modify_entry {
 		     ),
 	   0, gtkadd(Gtk2::Frame->new(N("Host access")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $label_and_widgets->(N("Access:"), $access, help_b(N_("Hosts Access"), create_pango_help_box($help_access))),
+			      0, $label_and_widgets->(N("Access:"), $access, help_b(N_("Hosts Access"), $help_access)),
 			     ),
 		    ),
 	   0, gtkadd(Gtk2::Frame->new(N("User ID Mapping")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $label_and_widgets->(N("User ID:"), $luserid, help_b(N_("Help User ID"), create_pango_help_box($help_userid))),
+			      0, $label_and_widgets->(N("User ID:"), $luserid, help_b(N_("Help User ID"), $help_userid)),
 			      0, $label_and_widgets->(N("Anonymous user ID:"), $anonuid, ""),
 			      0, $label_and_widgets->(N("Anonymous Group ID:"), $anongid, ""),
 			     ),
@@ -418,7 +418,7 @@ sub add_modify_entry {
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 #			      0, $advanced,
 			      0, $expender,
-#			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), create_pango_help_box($help_global))),
+#			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), $help_global)),
 #			      0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
 #			      0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
 #			      0, $label_and_widgets->(N("Custom options:"), $options, ""),
