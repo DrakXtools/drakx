@@ -165,17 +165,16 @@ my $help_userid = N("<span weight=\"bold\">User ID options</span>
 <span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set the uid and gid of the anonymous account.
 ");
 
-my $help_global = N("<span weight=\"bold\">Advanced Options</span>
-
-
-<span foreground=\"royalblue3\">secure:</span> this option requires that requests originate on an internet port less than IPPORT_RESERVED (1024). This option is on by default. To turn it off, specify insecure.
-
-
-<span foreground=\"royalblue3\">rw:</span> allow both read and write requests on this NFS volume. The default is to disallow any request which changes the filesystem. This can also be made explicit by using the ro option.
-
-
-<span foreground=\"royalblue3\">async:</span> allows the NFS server to violate the NFS protocol and reply to requests before any changes made by that request have been committed to stable storage (e.g. disc drive).
-");
+my %adv_options = (
+	sync => N("Synchronous access:"),
+	secured => N("Secured Connection:"),
+	ro => N("Read-Only share:"),
+);
+my $help_global = join("\n\n\n", N("<span weight=\"bold\">Advanced Options</span>"),
+N("<span foreground=\"royalblue3\">%s:</span> this option requires that requests originate on an internet port less than IPPORT_RESERVED (1024). This option is on by default.", $adv_options{secured}),
+N("<span foreground=\"royalblue3\">%s:</span> allow either only read or both read and write requests on this NFS volume. The default is to disallow any request which changes the filesystem. This can also be made explicit by using this option.", $adv_options{ro}),
+N("<span foreground=\"royalblue3\">%s:</span> disallows the NFS server to violate the NFS protocol and to reply to requests before any changes made by these requests have been committed to stable storage (e.g. disc drive).", $adv_options{sync}),
+);
 
 sub create_pango_help_box {
   # perl code from draksec
@@ -385,9 +384,9 @@ sub add_modify_entry {
 
   my $expender = Gtk2::Expander->new('Advanced options');
   $expender->add(gtkpack_(Gtk2::VBox->new,
-                          0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), $help_global)),
-                          0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
-                          0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
+                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Help Adcanced options"), $help_global)),
+                          0, $label_and_widgets->($adv_options{secure}, $lsecure, ""),
+                          0, $label_and_widgets->($adv_options{ro}, $lr, ""),
 			 ),
 		);
   $expender->signal_connect(activate => sub {
@@ -418,9 +417,9 @@ sub add_modify_entry {
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 #			      0, $advanced,
 			      0, $expender,
-#			      0, $label_and_widgets->(N("Synchronous access:"), $lsync, help_b(N_("Help Adcanced options"), $help_global)),
-#			      0, $label_and_widgets->(N("Secured Connection:"), $lsecure, ""),
-#			      0, $label_and_widgets->(N("Read-Only share:"), $lr, ""),
+#			      0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Help Adcanced options"), $help_global)),
+#			      0, $label_and_widgets->($adv_options{secured}, $lsecure, ""),
+#			      0, $label_and_widgets->($adv_options{ro}, $lr, ""),
 #			      0, $label_and_widgets->(N("Custom options:"), $options, ""),
 			     ),
 		    ),
