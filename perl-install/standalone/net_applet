@@ -110,6 +110,7 @@ if ($enable_activefw) {
 
 checkNetworkForce();
 cronNetwork();
+cronUpdate();
 get_unprocessed_attacks() if $enable_activefw;
 
 $icon->show_all;
