@@ -441,12 +441,13 @@ foreach (@classes) {
     $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq N("Unknown/Others");
 }
 
-$SIG{CHLD} = sub {
+sub reap_children() {
     undef $pid;
     # reap zombies
     my $child_pid;
     do { $child_pid = waitpid(-1, POSIX::WNOHANG) } until $child_pid > 0;
 };
+$SIG{CHLD} = \&reap_children;
 
 $w->{rwindow}->signal_connect(delete_event => \&quit_global);
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
@@ -480,6 +481,7 @@ $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no dev
         }
     }
 }
+$SIG{CHLD} = \&reap_children;
 undef $wait;
 gtkset_mousecursor_normal();
 
