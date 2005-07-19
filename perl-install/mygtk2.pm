@@ -498,7 +498,7 @@ sub _gtk__MagicWindow {
 	}
 
 	set_main_window_size($::WizardWindow);
-	$sub_child->set_border_width($rpmdrake::VERSION ? 0 : 10);
+	$sub_child->set_border_width($::noborderWhenEmbedded ? 0 : 10);
 
 	$w = $::WizardWindow;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
