@@ -385,6 +385,9 @@ sub _create_dialog {
 sub create_dialog {
     my ($title, $label, $o_options) = @_;
     my $ret = 0;
+    $o_options ||= {};
+    $o_options->{transient_for} = $::main_window if !$o_options->{transient_for} && $::main_window;
+
     my $dialog =  gtkset_border_width(_create_dialog($title, $o_options), 10);
     $dialog->set_border_width(10);
     my $text = ref($label) ? $label : $o_options->{use_markup} ? gtknew('WrappedLabel', text_markup => $label) : gtknew('WrappedLabel', text => $label);
