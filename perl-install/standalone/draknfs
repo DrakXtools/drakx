@@ -230,7 +230,7 @@ sub get_access_list {
   if ($ip_address) {
     $ipnet = $o[0] . "." . $o[1] . "." . $o[2] . ".0";
   } else { $ipnet = "ip_address" }
-  my @all = split(", ", qq(*, *.$domain, $ipnet/8, $ipnet/24, $ipnet/32));
+  my @all = split(", ", qq(*, *.$domain, $ipnet/8, $ipnet/24));
   return @all;
 }
 
