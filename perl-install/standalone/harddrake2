@@ -238,6 +238,7 @@ $in = 'interactive'->vnew('su'); #require_root_capability();
 
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
+$::noborderWhenEmbedded = 1;
 $w = ugtk2->new(N("Harddrake2"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};

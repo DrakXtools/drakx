@@ -113,6 +113,7 @@ my $stringsearch = '';
 
 sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() }
 
+$::noborderWhenEmbedded = 1;
 $us->{wnd} = ugtk2->new(N("%s Printer Management Tool", $distroname) . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
 
