@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.36mdk
+Release: 0.37mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jul 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.37mdk
+- fix layout for programms embedded with their menubar (eg: harddrake,
+  printerdrake, rpmdrake)
+- draknfs: remove ipnet/32 in access_list (antoine)
+- harddrake2: really reap zombie children and let be able to run a
+  second config tool again (#16851)
+- net_applet: misc improvments (blino)
+
 * Mon Jul 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.36mdk
 - drakconnect: write firewire mac_addresses again (oblin)
 - draknfs:
