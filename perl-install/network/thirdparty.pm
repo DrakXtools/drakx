@@ -138,20 +138,19 @@ my %network_settings = (
     },
    },
 
-   (map { (
-           "ipw${_}" =>
-           {
-            matching => "ipw${_}",
-            description => "Intel(R) PRO/Wireless ${_}",
-            url => "http://ipw${_}.sourceforge.net/",
-	    name => "ipw${_}",
-            firmware =>
-	    {
-	     test_file => ($_ == 2100 ? "ipw2100-*.fw" :  "ipw-*.fw"),
-	    },
+   (map {
+       {
+           matching => "ipw${_}",
+           description => "Intel(R) PRO/Wireless ${_}",
+           url => "http://ipw${_}.sourceforge.net/",
+	   name => "ipw${_}",
+           firmware =>
+	   {
+               url => "http://ipw${_}.sourceforge.net/firmware.php",
+               test_file => ($_ == 2100 ? "ipw2100-*.fw" :  "ipw-*.fw"),
            },
-          );
-      } (2100, 2200)),
+       }
+   } (2100, 2200)),
 
    {
     matching => 'prism54',
