@@ -410,8 +410,8 @@ foreach (@classes) {
             my $hd = $_;
             my $info = find { $_->{device} eq $hd->{device} } @{$all_hds->{hds}};
             $hd->{geometry} = join('/', map { $info->{geom}{$_} } qw(cylinders heads sectors)) . " (CHS)";
-            $hd->{primary_partitions} = @{$info->{primary}{normal}};
-            $hd->{extended_partitions} = @{$info->{extended}};
+            $hd->{primary_partitions} = @{$info->{primary}{normal}} if $info->{primary}{normal};
+            $hd->{extended_partitions} = @{$info->{extended}} if $info->{extended};
             $hd->{primary_partitions} .= " (" . join(', ', map { $_->{device} }@{$info->{primary}{normal}}) . ")" if $hd->{primary_partitions};
             if ($hd->{extended_partitions}) {
                 $hd->{extended_partitions} .= " (" . join(', ', map { $_->{normal}{device} }@{$info->{extended}}) . ")";
