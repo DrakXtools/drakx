@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-07-18 19:19+0200\n"
-"PO-Revision-Date: 2005-07-06 18:19+0700\n"
+"PO-Revision-Date: 2005-07-19 19:50+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1785,12 +1785,12 @@ msgstr "LILO dengan menu teks"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "Grub dengan menu grafis"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "Grub dengan menu teks"
 
 #: bootloader.pm:857
 #, c-format
@@ -3554,7 +3554,7 @@ msgstr ""
 "Di sini Anda dapat dipilih driver alternatif (OSS atau ALSA) untuk kartu "
 "suara Anda (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:240
@@ -21756,7 +21756,7 @@ msgstr "Setting Local Area Network"
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "Alamat IP Lokal"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21906,7 +21906,7 @@ msgstr "Mengkonfigurasi..."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Mengkonfigurasi firewall.."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21999,7 +21999,7 @@ msgstr "Alias host"
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS mengelola definisi host"
 
 #: standalone/drakhosts:246
 #, c-format
@@ -22019,37 +22019,37 @@ msgstr "Gagal untuk menghapus host."
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "petakan pengguna root sebagai anonim"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "petakan semua pengguna pada pengguna anonim"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "allow real remote user access"
-msgstr ""
+msgstr "ijinkan akses remote pengguna"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "ijinkan akses remote root"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "server NFS"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Menjalankan ulang/Memuat ulang server NFS..."
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Kesalahan Menjalankan ulang/Memuat ulang server NFS"
 
 #: standalone/draknfs:102
 #, c-format
@@ -22087,6 +22087,27 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">Klien-klien NFS</span> dapat ditentukan dengan berbagai "
+"cara:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">host tunggal:</span> sebuah host dapat merupakan "
+"sebuah nama singkatan yang dikenali oleh resolver, nama domain yang fully qualified, "
+"atau sebuah alamat IP\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">netgroup:</span> netgroup NIS dapat diberikan sebagai "
+"@group.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">wildcard:</span> nama mesin dapat mengandung karakter "
+"wildcard * dan ?. Sebagai contoh: *.cs.foo.edu  cocok semua host dalam domain "
+"cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Network IP:</span> Anda juga mengeksport direktori "
+"pada semua host-host pada sebuah IP (sub-)network secara bersamaan. sebagai contoh, "
+"apakah `/255.255.252.0' atau  `/22'  ditambahkan hasil pada alamat dasar jaringan.\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -22111,26 +22132,45 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Opsi-opsi ID Pengguna</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> memetakan permintaan dari uid/"
+"gid 0 pada uid/gid anonim.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> menonaktifkan root squas."
+"Opsi ini berguna untuk klien tanpa disk(diskless).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> memetakan semua uid dan gid pada "
+"pengguan anonim. Berguna untuk direktori FTP publik yang diekspor dari NFS, direktori "
+"spool berita, dll. Opsi sebaliknya adalah no_all_squash, yang merupakan setting "
+"default .\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid dan anongid:</span> menentukan uid dan gid dari "
+"account anonim secara eksplisit.\n"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Akses sinkronous:"
 
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Koneksi Aman:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Share Read-Only:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Opsi-opsi Tingkat Lanjut</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -22139,6 +22179,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> opsi ini mengasumsikan permintaan "
+"yang berasal dari sebuah port internet kurang dari IPPORT_RESERVED (1024). "
+"Opsi ini aktif secara default."
 
 #: standalone/draknfs:175
 #, c-format
@@ -22148,6 +22191,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> mengijinkan baik permintaan baca atau "
+"baca dan tulis pada volume NFS ini. Defaultnya adalah untuk tidak mengijinkan sembarang "
+"permintaan yang merubah sistem file. Hal ini juga bisa dilakukan secara eksplisit dengan "
+"menggunakan opsi ini."
 
 #: standalone/draknfs:176
 #, c-format
@@ -22156,11 +22203,14 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> tidak mengijinkan server NFS untuk melanggar "
+"protokol NFS dan membalas permintaan sebelum sembarang perubahan yang dilakukan oleh permintaan "
+"telah disimpan pada penyimpanan yang stabil (misalnya disk drive)."
 
 #: standalone/draknfs:387
 #, c-format
 msgid "Help Adcanced options"
-msgstr ""
+msgstr "Bantuan Opsi Tingkat Lanjut"
 
 #: standalone/draknfs:399
 #, c-format
@@ -22185,7 +22235,7 @@ msgstr "Akses:"
 #: standalone/draknfs:406
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Akses Host"
 
 #: standalone/draknfs:409
 #, c-format
@@ -22205,12 +22255,12 @@ msgstr "Bantuan ID Pengguna"
 #: standalone/draknfs:412
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "ID Pengguna Anonim:"
 
 #: standalone/draknfs:413
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "ID Grup Anonim:"
 
 #: standalone/draknfs:460 standalone/draknfs:552
 #, c-format
@@ -22220,7 +22270,7 @@ msgstr "Harap masukkan sebuah direktori untuk share."
 #: standalone/draknfs:462
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Anda harus menentukan akses host."
 
 #: standalone/draknfs:540
 #, c-format
@@ -22240,17 +22290,17 @@ msgstr "Opsi Umum"
 #: standalone/draknfs:540
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Opsi Kustomisasi"
 
 #: standalone/draknfs:559
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Harap gunakan tombol modifikasi untuk menentukan hak akses."
 
 #: standalone/draknfs:614
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS mengelola share NFS"
 
 #: standalone/draknfs:623
 #, c-format
@@ -22953,7 +23003,7 @@ msgstr "menyimpan tema Bootsplash..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Tidak dapat memuat file image %s"
 
 #: standalone/draksplash:169
 #, c-format
@@ -26021,7 +26071,7 @@ msgstr "Selalu jalankan pada pembukaan"
 #: standalone/net_applet:271
 #, c-format
 msgid "Actions"
-msgstr ""
+msgstr "Aksi"
 
 #: standalone/net_applet:330
 #, c-format
