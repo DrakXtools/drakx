@@ -15,9 +15,7 @@ use network::monitor;
 
 use Gtk2::TrayIcon;
 
-use ugtk2 qw(:create :helpers :wrappers);
-
-my $enable_activefw;
+use ugtk2 qw(:create :helpers :wrappers :dialogs);
 
 my ($eventbox, $img);
 my ($current_state, $current_interface, $menu, $timeout, $update_timeout);
@@ -98,22 +96,21 @@ my $activefw;
 my $interactive_cb;
 my @attacks_queue;
 
-if ($enable_activefw) {
-    $activefw = network::activefw->new($dbus, sub {
-        my ($_con, $msg) = @_;
-        my $member = $msg->get_member;
-        if ($member eq 'Attack') {
-            handle_attack($msg->get_args_list);
-        } elsif ($member eq 'Init') {
-            $activefw->attach_object;
-        }
-    });
-}
+$activefw = network::activefw->new($dbus, sub {
+    my ($_con, $msg) = @_;
+    my $member = $msg->get_member;
+    if ($member eq 'Attack') {
+        handle_attack($msg->get_args_list);
+    } elsif ($member eq 'Init') {
+        $activefw->attach_object;
+        checkNetworkForce();
+    }
+});
 
 checkNetworkForce();
 cronNetwork();
 cronUpdate();
-get_unprocessed_attacks() if $enable_activefw;
+get_unprocessed_attacks();
 
 $icon->show_all;
 
@@ -256,10 +253,12 @@ sub generate_menu {
     }
 
     push @settings, $create_item->('chooseProfile');
-    if ($enable_activefw) {
+    my $interactive;
+    eval { $interactive = $activefw->get_interactive };
+    if (defined $interactive) {
         $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
-                                                                  $activefw->get_interactive),
-                                                    toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) }));
+                                                                  $interactive),
+                                                    toggled => sub { eval { $activefw->set_interactive(to_bool($_[0]->get_active)) } }));
         push @settings, $interactive_cb;
     }
     push @settings, gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
@@ -294,7 +293,7 @@ sub setAutoStart {
 }
 
 sub get_unprocessed_attacks() {
-    my @packets = $activefw->get_reports;
+    my @packets = eval { $activefw->get_reports };
     while (my @attack = splice(@packets, 0, 9)) {
         handle_attack(@attack);
     }
@@ -307,7 +306,8 @@ sub handle_attack {
 
 sub set_attack_verdict {
     my ($seq, $verdict) = @_;
-    $activefw->blacklist($seq, $verdict);
+    eval { $activefw->blacklist($seq, $verdict) };
+    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
     shift @attacks_queue;
     @attacks_queue and ask_attack_verdict($attacks_queue[0]);
 }
