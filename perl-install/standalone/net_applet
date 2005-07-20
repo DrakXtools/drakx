@@ -25,7 +25,6 @@ my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
-my $prog_name = "/usr/bin/net_applet";
 
 my $net = {};
 my $watched_interface;
@@ -182,10 +181,9 @@ sub cronNetwork() {
                                   });
 }
 sub cronUpdate() {
-    my $current_md5 = common::md5file($prog_name);
+    my $current_md5 = common::md5file($0);
     $update_timeout = Glib::Timeout->add(60000, sub {
-        my $new_md5 = common::md5file($prog_name);
-        $new_md5 ne $current_md5 and  exec($prog_name);
+        common::md5file($0) ne $current_md5 and exec($0);
     });
 }
 sub go2State {
