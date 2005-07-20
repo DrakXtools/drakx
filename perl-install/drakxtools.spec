@@ -373,7 +373,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Tue Jul 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.37mdk
 - fix layout for programms embedded with their menubar (eg: harddrake,
-  printerdrake, rpmdrake)
+  printerdrake, rpmdrake) (#13931)
 - draknfs: remove ipnet/32 in access_list (antoine)
 - harddrake2: really reap zombie children and let be able to run a
   second config tool again (#16851)
