@@ -1,3 +1,171 @@
+2005/07/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/wireless.pm: allow to read/write wpa_supplicant config files
+
+	* network/monitor.pm: get network ids and current network
+
+	* standalone/net_applet: show active wireless network in the menu
+	use $0 instead of hardcoded path
+
+	* network/netconnect.pm: use wpa_supplicant_add_network_simple
+
+2005/07/19  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* standalone/draknfs: remove ipnet/32 in access_list
+
+2005/07/19  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/thirdparty.pm: fix ipw data structure and add firmware url
+
+2005/07/19  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* mygtk2.pm: Don't put a border around embbeded rpmdrake
+
+2005/07/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (create_dialog) make dialogs transient if possible
+
+	* standalone/harddrake2: do not draw a border around the main window while
+	embedded
+	really reap zombie children; side-effect: we can now run a second
+	config tool again (#16851)
+	let's work with "perl -w"
+
+	* standalone/draknfs: fix phrasing
+
+	* drakxtools.spec: 10.3-0.37mdk
+
+	* mygtk2.pm (_gtk__MagicWindow) fix layout for programms embedded with
+	their
+	menubar through the newly introduced $::noborderWhenEmbedded flag
+
+	* standalone/printerdrake: do not draw a border around the main window
+	while embedded
+
+2005/07/19  willysr
+
+	* share/po/id.po: Updated
+
+2005/07/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: remove useless test
+	fix typo
+	update menu if interface has been modified
+	factorize code to netMonitor() and use $current_interface
+	really check for new version
+	check for new version every minute instead of every 2 seconds
+	simplify
+	don't use actions submenu when no wireless network is detected
+	use common::md5file
+
+	* common.pm: import md5file from net_applet/mdkonline/userdrake
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: add pcmcia network card ids
+	in the pci table, so that cardbus card get a chance to be automatically
+	loaded
+
+	* network/ethernet.pm: get_eth_card_mac_address: handle firewire
+	mac_addresses again
+
+	* drakxtools.spec: add drakids
+	require perl-Net-DBus (for net_applet and drakids)
+	KDE is now lowercased in the DESKTOP variable
+
+	* standalone/drakxtv: really show a warning if no tv card is detected
+
+	* install_steps.pm: do not die and loop on the exitInstall step if the
+	install images
+	can't be saved (#16881)
+
+	* Makefile.config: add drakids
+
+	* standalone/draksplash: do not die if loaded file isn't an image (#16829)
+
+2005/07/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2005/07/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix 10.3-0.36mdk's changelog
+	10.3-0.36mdk
+
+	* standalone/draknfs: advanced help:
+	  - ensure labels are named the same way on buttons and in help (and
+	thus that
+	help is consistent with the GUI, which wasn't), and speak about labels
+	not
+	  actual option names in config file,
+	  - split in small paragraphs in order to ease translators' job
+	  - fix text phrasing
+	  - improve layout
+	(help_b) fix displaying help the second time
+	make sub dialogs modal and transcient to their main window
+
+	* share/po/br.po, share/po/fr.po: update
+	update strings from CVS
+
+	* share/po/ga.po, share/po/cy.po: update
+	update
+	update strings from CVS
+
+	* standalone/drakhosts (add_modify_entry) improve layout (especially
+	hidden buttons)
+	make sub dialogs modal and transcient to their main window
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: update strings from
+	CVS
+
+2005/07/17  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/07/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/monitor.pm: new naming scheme
+
+	* standalone/net_applet: rescale pixbufs to 16x16, use default.png if
+	wifi- images aren't available
+	don't add submenu if only one choice exists (and really do it)
+	don't show choices menus if only one choice is possible
+	put settings and actions in submenus when needed
+
+	* drakxtools.spec: 10.3-0.35mdk
+
+	* standalone/draknfs: don't translate the empty string
+
+2005/07/15  Warly  <warly at mandrakesoft.com>
+
+	* install_any.pm: workarround problem in supplementary media
+
+2005/07/14  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: new translations
+
+2005/07/14  shivahuang
+
+	* share/po/zh_TW.po: updated po files
+
+2005/07/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: don't have a random result, sort
+
 2005/07/13  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/net_applet: remove spurious spaces
