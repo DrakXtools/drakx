@@ -148,6 +148,7 @@ sub checkWireless() {
         put_in_hash($net, $networks->{$_});
         unless (exists $net->{menuitem}) {
             $net->{menuitem} = Gtk2::CheckMenuItem->new;
+            $net->{menuitem}->set_draw_as_radio(1);
             $net->{menuitem}->add(gtkpack_(gtkshow(Gtk2::HBox->new),
                                            1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
                                            0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
@@ -158,6 +159,7 @@ sub checkWireless() {
         $net->{keyring_image}->visible(defined $net->{flags});
         my $approx_level = 20 + int(min($net->{signal_level}, 80)/20)*20;
         $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
+        $net->{menuitem}->set_active($net->{current});
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
