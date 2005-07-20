@@ -10,13 +10,13 @@ sub new {
 
     my $con = $bus->{connection};
     $con->add_filter($filter);
-    $con->add_match("type='signal',interface='com.mandriva.monitoring.activefirewall'");
+    $con->add_match("type='signal',interface='com.mandriva.monitoring.activefw'");
 
     my $o = dbus_object::new($type,
 			     $bus,
 			     "com.mandriva.monitoring",
-			     "/com/mandriva/monitoring/activefirewall",
-			     "com.mandriva.monitoring.activefirewall");
+			     "/com/mandriva/monitoring/activefw",
+			     "com.mandriva.monitoring.activefw");
     dbus_object::set_gtk2_watch($o);
     $o;
 }
