@@ -3,6 +3,8 @@ package network::wireless;
 use strict;
 use common;
 
+my $wpa_supplicant_conf = "/etc/wpa_supplicant.conf";
+
 sub convert_wep_key_for_iwconfig {
     #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
     #- else consider the key as hexadecimal, do not strip dashes
@@ -94,79 +96,104 @@ sub wpa_supplicant_get_driver {
     "wext";
 }
 
-sub wpa_supplicant_configure {
+sub wpa_supplicant_add_network_simple {
     my ($essid, $key) = @_;
-    wpa_supplicant_add_network({
-            ssid => qq("$essid"),
-            psk => convert_key_for_wpa_supplicant($key),
-            scan_ssid => 1,
-    });
+    my $conf = wpa_supplicant_read_conf();
+    push @$conf, {
+        ssid => qq("$essid"),
+        psk => convert_key_for_wpa_supplicant($key),
+        scan_ssid => 1,
+    };
+    wpa_supplicant_write_conf($conf);
 }
 
-sub wpa_supplicant_add_network {
-    my ($new_network) = @_;
-    my $wpa_supplicant_conf = "$::prefix/etc/wpa_supplicant.conf";
-    my $s;
-    my %network;
-    foreach (cat_($wpa_supplicant_conf)) {
-        if (%network) {
+sub wpa_supplicant_read_conf() {
+    my @conf;
+    my $network;
+    foreach (cat_($::prefix . $wpa_supplicant_conf)) {
+        if ($network) {
             #- in a "network = {}" block
-            if (/^\s*(\w+)=(.*?)(\s*#.*)?$/) {
-                push @{$network{entries}}, { key => $1, value => $2, comment => $3 };
-                $1 eq 'ssid' and $network{ssid} = $2;
+            if (/^\s*(\w+)=(.*?)(?:\s*#.*)?$/) {
+                $network->{$1} = $2;
+            } elsif (/^\}/) {
+                #- end of network block
+                push @conf, $network;
+                undef $network;
+            }
+        } elsif (/^\s*network={/) {
+            #- beginning of a new network block
+            $network = {};
+        }
+    }
+    \@conf;
+}
+
+sub wpa_supplicant_write_conf {
+    my ($conf) = @_;
+    my $buf;
+    my @conf = @$conf;
+    my $network;
+    foreach (cat_($::prefix . $wpa_supplicant_conf)) {
+        if ($network) {
+            #- in a "network = {}" block
+            if (/^\s*(\w+)=(.*)$/) {
+                push @{$network->{entries}}, { key => $1, value => $2 };
+                member($1, qw(ssid bssid)) and $network->{$1} = $2;
             } elsif (/^\}/) {
                 #- end of network block, write it
-                $s .= "network={$network{comment}\n";
-                my $update = $network{ssid} eq $new_network->{ssid};
-                foreach (@{$network{entries}}) {
+                $buf .= "network={$network->{comment}\n";
+
+                my $new_network = find {
+                    my $current = $_;
+                    any { exists $network->{$_} && $network->{$_} eq $current->{$_} } qw(ssid bssid)
+                } @conf;
+
+                foreach (@{$network->{entries}}) {
                     my $key = $_->{key};
-                    if ($update) {
+                    if ($new_network) {
                         #- do not write entry if not provided in the new network
                         exists $new_network->{$key} or next;
                         #- update value from the new network
                         $_->{value} = delete $new_network->{$key};
                     }
-                    if ($key) {
-                        $s .= "    $key=$_->{value}$_->{comment}\n";
-                    } else {
-                        $s .= " $_->{comment}\n";
-                    }
+                    $buf .= "    ";
+                    $buf .= "$key=$_->{value}" if $key;
+                    $buf .= "$_->{comment}\n";
                 }
-                if ($update) {
+                if ($new_network) {
+                    #- write new keys
                     while (my ($key, $value) = each(%$new_network)) {
-                        $s .= "    $key=$value\n";
+                        $buf .= "    $key=$value\n";
                     }
                 }
-                $s .= "}\n";
-                undef %network;
-                $update and undef $new_network;
+                $buf .= "}\n";
+                $new_network and @conf = grep { $_ != $new_network } @conf;;
+                undef $network;
             } else {
                 #- unrecognized, keep it anyway
-                push @{$network{entries}}, { comment => $_ };
+                push @{$network->{entries}}, { comment => $_ };
             }
         } else {
-            if (/^\s*network={(.*)/) {
+            if (/^\s*network={/) {
                 #- beginning of a new network block
-                $network{comment} = $1;
+                $network = {};
             } else {
                 #- keep other options, comments
-                $s .= $_;
+                $buf .= $_;
             }
         }
     }
-    if ($new_network) {
-        #- network wasn't found, write it
-        $s .= "\nnetwork={\n";
-        #- write ssid first
-        if (my $ssid = delete $new_network->{ssid}) {
-            $s .= "    ssid=$ssid\n";
+
+    #- write remaining networks
+    foreach (@conf) {
+        $buf .= "\nnetwork={\n";
+        while (my ($key, $value) = each(%$_)) {
+            $buf .= "    $key=$value\n";
         }
-        while (my ($key, $value) = each(%$new_network)) {
-            $s .= "    $key=$value\n";
-        }
-        $s .= "}\n";
+        $buf .= "}\n";
     }
-    output($wpa_supplicant_conf, $s);
+
+    output($wpa_supplicant_conf, $buf);
     #- hide keys for non-root users
     chmod 0600, $wpa_supplicant_conf;
 }
