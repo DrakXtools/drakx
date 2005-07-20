@@ -101,7 +101,12 @@ my @attacks_queue;
 if ($enable_activefw) {
     $activefw = network::activefw->new($dbus, sub {
         my ($_con, $msg) = @_;
-        handle_attack($msg->get_args_list) if $msg->get_member eq "Attack";
+        my $member = $msg->get_member;
+        if ($member eq 'Attack') {
+            handle_attack($msg->get_args_list);
+        } elsif ($member eq 'Init') {
+            $activefw->attach_object;
+        }
     });
 }
 
