@@ -138,6 +138,7 @@ sub configure_eth_aliases {
             $modules_conf->set_alias($card->[0], $card->[1]);
         }
     }
+    $::isStandalone and $modules_conf->write;
 }
 
 1;
