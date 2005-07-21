@@ -770,6 +770,7 @@ get_iso_volume_ids(int fd)
     if (voldesc.type[0] == ISO_VD_PRIMARY && !strncmp(voldesc.id, ISO_STANDARD_ID, sizeof(voldesc.id))) {
       XPUSHs(sv_2mortal(newSVpv(voldesc.volume_id, length_of_space_padded(voldesc.volume_id, sizeof(voldesc.volume_id)))));
       XPUSHs(sv_2mortal(newSVpv(voldesc.application_id, length_of_space_padded(voldesc.application_id, sizeof(voldesc.application_id)))));
+      XPUSHs(sv_2mortal(newSVpv(voldesc.volume_set_id, length_of_space_padded(voldesc.volume_set_id, sizeof(voldesc.volume_set_id)))));
     }
   }
 
