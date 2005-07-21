@@ -308,9 +308,9 @@ user "$net->{adsl}{login}"
 
     if ($adsl_type eq "capi") {
         require network::isdn;
-        network::isdn::setup_capi_conf($net->{adsl}{capi_card});
-	services::disable('isdn4linux');
-	services::enable('capi4linux');
+        network::isdn::setup_capi_conf($in, $net->{adsl}{capi_card});
+        services::disable('isdn4linux');
+        services::enable('capi4linux');
 
         #- install and run drdsl for dsl connections, once capi driver is loaded
         $in->do_pkgs->ensure_is_installed_if_available("drdsl", "/usr/sbin/drdsl");

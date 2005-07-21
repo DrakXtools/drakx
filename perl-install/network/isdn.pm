@@ -7,12 +7,11 @@ use modules;
 use run_program;
 use log;
 use network::tools;
-use MDK::Common::Globals "network", qw($in);
 use services;
 
 
 sub write_config {
-    my ($isdn) = @_;
+    my ($in, $isdn) = @_;
     $in->do_pkgs->install('isdn4net', if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
 
     output_with_perm("$::prefix/etc/isdn/profile/link/myisp", 0600,
@@ -47,7 +46,7 @@ defaultroute
 
     services::stop("isdn4linux"); #- to be stopped before capi is loaded
     if ($isdn->{driver} eq "capidrv") {
-        setup_capi_conf(get_capi_card($isdn));
+        setup_capi_conf($in, get_capi_card($in, $isdn));
         services::enable('capi4linux');
     } else {
         services::disable('capi4linux');
@@ -61,7 +60,7 @@ defaultroute
 
 
 sub setup_capi_conf {
-    my ($capi_card) = @_;
+    my ($in, $capi_card) = @_;
 
     $in->do_pkgs->ensure_is_installed('isdn4k-utils', "/etc/rc.d/init.d/capi4linux"); #- capi4linux service
     is_module_installed($capi_card->{driver}) or $in->do_pkgs->install(@{$capi_card->{packages}});
@@ -176,7 +175,7 @@ sub is_module_installed {
 
 
 sub get_capi_card {
-    my ($isdn) = @_;
+    my ($in, $isdn) = @_;
 
     my $capi_card = find { 
         hex($isdn->{vendor}) == $_->{vendor} && hex($isdn->{id}) == $_->{id};

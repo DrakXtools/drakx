@@ -302,7 +302,7 @@ sub real_main {
 			];
 		    },
                     post => sub {
-                        network::isdn::write_config($isdn);
+                        network::isdn::write_config($in, $isdn);
                         $net->{net_interface} = 'ippp0';
                         "allow_user_ctl";
                     },
@@ -366,7 +366,7 @@ sub real_main {
                         $isdn->{driver} = $isdn_cards{$isdn_name}{driver}; #- do not let config overwrite default driver
 
                         #- let the user choose hisax or capidrv if both are available
-                        $isdn->{driver} ne "capidrv" && network::isdn::get_capi_card($isdn) and return "isdn_driver";
+                        $isdn->{driver} ne "capidrv" && network::isdn::get_capi_card($in, $isdn) and return "isdn_driver";
                         return "isdn_protocol";
                     },
                    },
@@ -652,7 +652,7 @@ Take a look at http://www.linmodems.org"),
                         detect($modules_conf, $net->{autodetect}, 'isdn');
                         if (my @isdn_modems = @{$net->{autodetect}{isdn}}) {
                             require network::isdn;
-                            %isdn_cards = map { $_->{description} => $_ } grep { $_->{driver} =~ /dsl/i } map { network::isdn::get_capi_card($_) } @isdn_modems;
+                            %isdn_cards = map { $_->{description} => $_ } grep { $_->{driver} =~ /dsl/i } map { network::isdn::get_capi_card($in, $_) } @isdn_modems;
                             push @adsl_devices, keys %isdn_cards;
                         }
                     },
