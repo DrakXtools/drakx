@@ -260,9 +260,6 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 								  err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
 								}
 							      }),
-					 0, gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub {
-								write_conf_hosts();
-							      }),
 					 if_($::isEmbedded, 0, gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })),
 					),
 			    ),
