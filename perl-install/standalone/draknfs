@@ -254,7 +254,7 @@ sub get_user_or_group {
   my $conf = "/etc/" . $what;
   my @data; local $_;
   foreach (cat_($conf)) {
-    push @data, "$1 [$2]" if m/^([^#:]+):[^:]+:([^:]+):/;
+    push @data, "$1 [$2]" if m/^([^#:]+):[^:]+:([^:]+):/ and $2 > 499;
   }
   push @data, " ";
   return sort(@data);
@@ -385,7 +385,7 @@ sub add_modify_entry {
   my $expender = Gtk2::Expander->new('Advanced options');
   $expender->add(gtkpack_(Gtk2::VBox->new,
                           0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Adcanced Options Help"), $help_global)),
-                          0, $label_and_widgets->($adv_options{secure}, $lsecure, ""),
+                          0, $label_and_widgets->($adv_options{secured}, $lsecure, ""),
                           0, $label_and_widgets->($adv_options{ro}, $lr, ""),
 			 ),
 		);
