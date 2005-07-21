@@ -69,7 +69,6 @@ sub read_pxelinux_conf {
 	}
 	if (exists $entry->{label} && (exists $entry->{localboot} || exists $entry->{kernel} && exists $entry->{initrd})) {
 	    $entry->{info} = $info->{$entry->{label}};
-	    exists $entry->{vga} and $entry->{vga} = $vga_bios_to_resolution{$entry->{vga}};
 	    push @{$conf{entries}}, $entry;
 	    $entry = {};
 	}
