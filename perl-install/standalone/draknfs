@@ -42,9 +42,9 @@ my $CONF = "/etc/exports";
 my @listshare;
 my $root_squash = N("map root user as anonymous");
 my $all_squash = N("map all users to anonymous user");
-my $no_all_squash = N("allow real remote user access");
+my $no_all_squash = N("No user UID mapping");
 my $no_root_squash = N("allow real remote root access");
-my @listuserid_data = split(", ", qq($root_squash, $all_squash, $no_all_squash, $no_root_squash)); push @listuserid_data, "";
+my @listuserid_data = split(", ", qq($root_squash, $all_squash, $no_all_squash, $no_root_squash));
 
 my $userid_data = {
 		   root_squash => $root_squash,
@@ -268,8 +268,7 @@ sub add_modify_entry {
   my $iter;
   my ($i, $dir, $access, $right, $anonuid, $anongid, $options);
   my ($lr, $luserid, $lsecure, $lsync, $lr_data, $lsync_data, $lsecure_data);
-  undef $i;
-  undef $iter;
+  undef $i; undef $iter;
 
   $_ = Gtk2::Entry->new foreach $dir, $options;
   $_ = Gtk2::OptionMenu->new foreach $lr, $luserid, $lsecure, $lsync;
@@ -299,10 +298,8 @@ sub add_modify_entry {
   $dialog->set_resizable(1);
 
   my $anonuid = Gtk2::ComboBox->new_with_strings([ get_user_or_group('passwd') ]);
-  $anonuid->set_wrap_width(3);
-
   my $anongid = Gtk2::ComboBox->new_with_strings([ get_user_or_group('group') ]);
-  $anongid->set_wrap_width(3);
+  $_->set_wrap_width(3) foreach $anonuid, $anongid;
 
   if ($wanted =~ /modify/) {
     $iter = $selection->get_selected;
@@ -332,13 +329,13 @@ sub add_modify_entry {
         my $udata = get_data_from_id($1, 'passwd') . " [$1]";
         $anonuid->set_text($udata);
       } elsif ($opt =~ m/(no_root_squash|root_squash|all_squash|no_all_squash)/) {
-	if ($opt =~ /no_root_squash/) {
+	if ($opt =~ /^no_root_squash/) {
 	  $luserid->set_text($userid_data->{no_root_squash});
-	} elsif ($opt =~ /root_squash/) {
+	} elsif ($opt =~ /^root_squash/) {
 	  $luserid->set_text($userid_data->{root_squash});
-	} elsif ($opt =~ /all_squash/) {
+	} elsif ($opt =~ /^all_squash/) {
 	  $luserid->set_text($userid_data->{all_squash});
-	} elsif ($opt =~ /no_all_squash/) {
+	} elsif ($opt =~ /^no_all_squash/) {
 	  $luserid->set_text($userid_data->{no_all_squash});
 	}
       } elsif ($opt =~ m/(\bsecure\b|\binsecure\b)/) {
@@ -350,12 +347,12 @@ sub add_modify_entry {
   }
 
   $luserid->signal_connect(changed => sub {
-			     if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
-			       $anongid->set_sensitive(0);
-			       $anonuid->set_sensitive(0);
+			     if ($luserid->get_text =~ /$userid_data->{root_squash}/) {
+			       $_->set_sensitive(1) foreach $anongid, $anonuid;
 			     } else {
-			       $anongid->set_sensitive(1);
-			       $anonuid->set_sensitive(1);
+			       print "plus possible \n";
+			       $_->set_text("") foreach $anongid, $anonuid;
+			       $_->set_sensitive(0) foreach $anongid, $anonuid;
 			     }
 			   });
 
@@ -367,22 +364,9 @@ sub add_modify_entry {
     $lsync->set_text("no");
   }
 
-  if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
-    $anongid->set_sensitive(0);
-    $anonuid->set_sensitive(0);
+  if ($luserid->get_text !~ /$userid_data->{root_squash}/) {
+    $_->set_sensitive(0) foreach $anongid, $anonuid;
   }
-
-# old method to hide advanced option
-#  my $advanced = Gtk2::CheckButton->new("Enable advanced options");
-#  $advanced->set_active(0);
-#  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
-#  $advanced->signal_connect(clicked => sub {
-#      if ($advanced->get_active =~ /1/) {
-#	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(1) }
-#      } else {
-#	  foreach ($lsync, $lr, $lsecure) { $_->set_sensitive(0) }
-#      }
-#  });
 
   my $expender = Gtk2::Expander->new('Advanced options');
   $expender->add(gtkpack_(Gtk2::VBox->new,
@@ -395,7 +379,6 @@ sub add_modify_entry {
 			      gtkset_size_request($dialog, -1, -1);
 			      gtkflush();
 			    });
-
 
   gtkpack_($dialog->vbox,
 	   0, gtkadd(Gtk2::Frame->new(N("NFS directory")),
@@ -417,12 +400,7 @@ sub add_modify_entry {
 		    ),
 	   0, gtkadd(Gtk2::Frame->new(""),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-#			      0, $advanced,
 			      0, $expender,
-#			      0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Help Adcanced options"), $help_global)),
-#			      0, $label_and_widgets->($adv_options{secured}, $lsecure, ""),
-#			      0, $label_and_widgets->($adv_options{ro}, $lr, ""),
-#			      0, $label_and_widgets->(N("Custom options:"), $options, ""),
 			     ),
 		    ),
 	   0, create_okcancel({
@@ -437,26 +415,21 @@ sub add_modify_entry {
 				     my ($gid) = $anongid->get_text =~ /\[(\S*)\]/;
 				     $anong = "anongid=" . $gid;
                                  }
-				 #$anonuid->get_text and $anonu = "anonuid=" . $anonuid->get_text;
-				 #$anongid->get_text and $anong = "anongid=" . $anongid->get_text;
 				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { undef $lsync_data }
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
 				 # test $luserid->get_text
 				 my $luserid_toput;
-				 if ($luserid->get_text =~ /root/) {
-				   if ($luserid->get_text =~ /no/) {
+				 if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
 				     $luserid_toput = "no_root_squash";
-				   } else {
+				 } elsif ($luserid->get_text =~ /$userid_data->{root_squash}/) {
 				     $luserid_toput = "root_squash";
-				   }
-				 } else {
-				   if ($luserid->get_text =~ /no/) {
+				 } elsif ($luserid->get_text =~ /$userid_data->{no_all_squash}/) {
 				     $luserid_toput = "no_all_squash";
-				   } else {
+				 } elsif ($luserid->get_text =~ /$userid_data->{all_squash}/) {
 				     $luserid_toput = "all_squash";
-  				   }
 				 }
+
 				 my $all_right = join(",", grep { defined $_ } $luserid_toput, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
 				 my $test_dir = $dir->get_text;
 				 -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
