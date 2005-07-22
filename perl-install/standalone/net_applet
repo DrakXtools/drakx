@@ -162,6 +162,8 @@ sub checkWireless() {
                         my $error = $@;
                         err_dialog(N("Error"), N("Unable to select wireless network: %s", $error));
                     }
+                } else {
+                    run_drakroam();
                 }
                 checkNetworkForce();
             });
