@@ -36,4 +36,10 @@ sub list_wireless {
     \%networks;
 }
 
+sub select_network {
+    my ($o, $id) = @_;
+    $networks = $o->call_method('SelectNetwork',
+                                Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $id));
+}
+
 1;
