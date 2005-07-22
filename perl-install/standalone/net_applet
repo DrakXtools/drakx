@@ -211,9 +211,7 @@ sub go2State {
         $current_state = $state_type;
         $current_interface = $interface;
         if ($menu) {
-            foreach (keys %wireless_networks) {
-                $wireless_networks{$_}{menuitem}->get_parent and $menu->remove($wireless_networks{$_}{menuitem});
-            }
+            $_->{menuitem}->get_parent and $menu->remove($_->{menuitem}) foreach values %wireless_networks;
             $menu->destroy;
         }
         $menu = generate_menu($state_type, $interface);
