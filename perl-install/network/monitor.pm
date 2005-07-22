@@ -26,6 +26,7 @@ sub list_wireless {
     while ($networks =~ /^(\d+)\t(.*?)\t(.*?)\t(.*)$/mg) {
         if (my $net = $networks{$3} || find { $_->{ssid} eq $2 } values(%networks)) {
             $net->{id} = $1;
+            $net->{ssid} ||= $2;
             $net->{current} = to_bool($4 eq '[CURRENT]');
         }
     }
