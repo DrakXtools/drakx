@@ -598,6 +598,45 @@ static enum return_type bringup_networking(struct interface_info * intf)
 }
 
 
+static char * auto_select_up_intf(void)
+{
+#define SIOCETHTOOL     0x8946
+#define ETHTOOL_GLINK           0x0000000a /* Get link status (ethtool_value) */
+
+	struct ethtool_value {
+		uint32_t     cmd;
+		uint32_t     data;
+	};
+
+	char ** interfaces, ** ptr;
+	interfaces = get_net_devices();
+
+	int s;
+	s = socket(AF_INET, SOCK_DGRAM, 0);
+	if (s < 0) {
+		return NULL;
+	}
+
+	ptr = interfaces;
+	while (ptr && *ptr) {
+                struct ifreq ifr;
+		struct ethtool_value edata;
+                strncpy(ifr.ifr_name, *ptr, IFNAMSIZ);
+		edata.cmd = ETHTOOL_GLINK;
+		ifr.ifr_data = (caddr_t)&edata;
+		if (ioctl(s, SIOCETHTOOL, &ifr) == 0 && edata.data) {
+			close(s);
+			return *ptr;
+		}
+		ptr++;
+	}
+
+	close(s);
+
+        return NULL;
+}
+
+
 static char * interface_select(void)
 {
 	char ** interfaces, ** ptr;
@@ -625,6 +664,14 @@ static char * interface_select(void)
 
 	if (count == 1)
 		return *interfaces;
+
+        /* this can't be done in ask_from_list_comments_auto because "auto" isn't in the interfaces list */
+        choice = get_auto_value("interface");
+        if (choice && streq(choice, "auto")) {
+                choice = auto_select_up_intf();
+                if (choice)
+                        return choice;
+        }
 
 	i = 0;
 	while (interfaces[i]) {
