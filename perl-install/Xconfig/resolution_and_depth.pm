@@ -236,7 +236,7 @@ sub set_default_background {
       sort {
 	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1];
       } map {
-	  if (my ($X, $Y) = /^Mandrivalinux-(\d+)x(\d+).png$/) {
+	  if (my ($X, $Y) = /^Mandriva-(\d+)x(\d+).png$/) {
 	      [
 		  $_, 
 		  int(abs($ratio - $X / $Y) * 100), #- we want the nearest ratio (precision .01)
