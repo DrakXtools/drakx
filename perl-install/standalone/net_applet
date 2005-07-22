@@ -167,8 +167,8 @@ sub generate_wireless_menuitem {
     undef $current_state; #- force menu redraw
 }
 sub update_wireless_item {
-    my ($net) = @_;
-    $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
+    my ($net, $ap_address) = @_;
+    $net->{ssid_label}->set_text($net->{ssid} || "[$ap_address]");
     $net->{keyring_image}->visible(defined $net->{flags});
     my $approx_level = 20 + int(min($net->{signal_level}, 80)/20)*20;
     $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
@@ -183,7 +183,7 @@ sub checkWireless() {
         my $net = $wireless_networks{$_} ||= {};
         put_in_hash($net, $networks->{$_});
         exists $net->{menuitem} or generate_wireless_menuitem($net);
-        update_wireless_item($net);
+        update_wireless_item($net, $_);
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
