@@ -155,13 +155,26 @@ sub checkWireless() {
                                            1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
                                            0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
                                            0, $net->{level_image} = Gtk2::Image->new));
+            $net->{activate} = $net->{menuitem}->signal_connect('activate' => sub {
+                if (exists $net->{id}) {
+                    eval { $monitor->select_network($net->{id}) };
+                    if ($@) {
+                        my $error = $@;
+                        err_dialog(N("Error"), N("Unable to select wireless network: %s", $error));
+                    }
+                }
+                checkNetworkForce();
+            });
             undef $current_state; #- force menu redraw
         }
         $net->{ssid_label}->set_text($net->{ssid} || "[$_]");
         $net->{keyring_image}->visible(defined $net->{flags});
         my $approx_level = 20 + int(min($net->{signal_level}, 80)/20)*20;
         $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
+
+        $net->{menuitem}->signal_handler_block($net->{activate});
         $net->{menuitem}->set_active($net->{current});
+        $net->{menuitem}->signal_handler_unblock($net->{activate});
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
