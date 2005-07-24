@@ -94,6 +94,7 @@ sub stop_ifplugd {
     my ($interface) = @_;
     my $ifplugd = chomp_(cat_("/var/run/ifplugd.$interface.pid"));
     $ifplugd and kill(15, $ifplugd);
+    sleep 1;
 }
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
