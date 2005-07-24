@@ -215,7 +215,7 @@ sub add2hosts {
         push @{$l{$ip}}, difference2([ split /\s+/, $aliases ], [ $hostname, $sub_hostname ]);
     } cat_($file);
 
-    push @{$l{$_}}, $hostname, if_($sub_hostname, $sub_hostname) foreach grep { $_ } @ips;
+    unshift @{$l{$_}}, $hostname, if_($sub_hostname, $sub_hostname) foreach grep { $_ } @ips;
 
     log::explanations("writing host information to $file");
     output($file, map { "$_\t\t" . join(" ", @{$l{$_}}) . "\n" } keys %l);
@@ -571,8 +571,8 @@ sub configure_network {
         }
 	write_interface_conf($net, $_) foreach keys %{$net->{ifcfg}};
 	network::ethernet::install_dhcp_client($in, $_->{DHCP_CLIENT}) foreach grep { $_->{BOOTPROTO} eq "dhcp" } values %{$net->{ifcfg}};
-        add2hosts($net->{network}{HOSTNAME}, "127.0.0.1") if $net->{network}{HOSTNAME};
         add2hosts("localhost", "127.0.0.1");
+        add2hosts($net->{network}{HOSTNAME}, "127.0.0.1") if $net->{network}{HOSTNAME};
 	write_zeroconf($net, $in);
 
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
