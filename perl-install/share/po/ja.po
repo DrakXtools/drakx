@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "POT-Creation-Date: 2005-07-18 19:19+0200\n"
-"PO-Revision-Date: 2005-07-08 21:00+0900\n"
+"PO-Revision-Date: 2005-07-25 22:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1756,12 +1756,12 @@ msgstr "テキスト表示のLILO"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "グラフィカル表示のGrub"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "テキスト表示のGrub"
 
 #: bootloader.pm:857
 #, c-format
@@ -21193,7 +21193,7 @@ msgstr "ローカルネットワークの設定"
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "ローカルIPアドレス"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21342,7 +21342,7 @@ msgstr "設定中.."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "ファイアウォールを設定.."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21398,7 +21398,7 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "%s の情報をお願いします"
 
 #: standalone/drakhosts:110
 #, c-format
@@ -21433,7 +21433,7 @@ msgstr "ホストエイリアス"
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTSはホストの定義を管理します"
 
 #: standalone/drakhosts:246
 #, c-format
@@ -21453,37 +21453,37 @@ msgstr "ホストの削除に失敗しました"
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "rootユーザを匿名としてマップ"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "すべてのユーザを匿名ユーザにマップ"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "allow real remote user access"
-msgstr ""
+msgstr "実リモートユーザアクセスを許可"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "実リモートrootアクセスを許可"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "NFSサーバ"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "NFSサーバを再スタート/リロード.."
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "NFSサーバの再スタート/リロードのエラー"
 
 #: standalone/draknfs:102
 #, c-format
@@ -21521,6 +21521,27 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">NFSクライアント</span> は様々な方法で設定することができ"
+"ます:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">単一ホスト:</span> レゾルバによって認識される"
+"省略名、FQDN(完全修飾ドメイン名)またはIPアドレス\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">ネットグループ:</span> NISネットグループを "
+"@group として指定できます\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">ワイルドカード:</span> マシン名にワイルドカー"
+"ド文字 * と ? を使うことができます。(例: *.cs.foo.edu はドメイン cs.foo.deu "
+"の全てのホストと合致します。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">IPネットワーク:</span> IP(サブ)ネットワーク上"
+"の全てのホストに同時にディレクトリをエクスポートすることもできます。\n"
+"(例: either `/255.255.252.0' or  `/22'  appended to the network base address "
+"result.\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -21545,26 +21566,45 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">ユーザIDのオプション</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> uid/gid 0 からの要求を匿"
+"名uid/gidにマップします。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> root_sqaushを無効にし"
+"ます。このオプションは主にディスクレスクライアントに有用です。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> 全てのuidとgidを匿名ユーザ"
+"にマップします。NFSからエクスポートされた公開FTPディレクトリやニューススプー"
+"ルディレクトリ等に有用です。デフォルトではこれと反対のオプションno_all_squash"
+"に設定されています。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid and anongid:</span> 匿名アカウントの"
+"uidとgidを明示的に指定します。\n"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "同期アクセス:"
 
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "安全な接続:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "読み込み専用の共有:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">上級オプション</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -21573,6 +21613,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> このオプションを有効にすると、要求"
+"がIPPORT_RESERVED(1024)より小さいインターネットポートからのものであることが必"
+"要条件になります。デフォルトで有効になっています。"
 
 #: standalone/draknfs:175
 #, c-format
@@ -21582,6 +21625,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> このNFSボリューム上で読み書きのい"
+"ずかまたは両方の要求を許可します。デフォルトの設定では、ファイルシステムを変"
+"更する要求は拒否します。このオプションを使ってこれを明示的に指定することもで"
+"きます。"
 
 #: standalone/draknfs:176
 #, c-format
@@ -21590,11 +21637,14 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> NFSサーバがNFSプロトコルに違反して"
+"要求によって生じる変更が安定記憶(例: ディスクドライブ)にコミットされる前にこ"
+"れらの要求に応答することを禁止します。"
 
 #: standalone/draknfs:387
 #, c-format
 msgid "Help Adcanced options"
-msgstr ""
+msgstr "上級オプションのヘルプ"
 
 #: standalone/draknfs:399
 #, c-format
@@ -21619,7 +21669,7 @@ msgstr "アクセス:"
 #: standalone/draknfs:406
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "ホストアクセス"
 
 #: standalone/draknfs:409
 #, c-format
@@ -21639,12 +21689,12 @@ msgstr "ユーザIDのヘルプ"
 #: standalone/draknfs:412
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "匿名ユーザID:"
 
 #: standalone/draknfs:413
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "匿名グループID:"
 
 #: standalone/draknfs:460 standalone/draknfs:552
 #, c-format
@@ -21654,7 +21704,7 @@ msgstr "共有するディレクトリを入力してください"
 #: standalone/draknfs:462
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "ホストアクセスを指定してください"
 
 #: standalone/draknfs:540
 #, c-format
@@ -21674,17 +21724,17 @@ msgstr "全般オプション"
 #: standalone/draknfs:540
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "カスタムオプション"
 
 #: standalone/draknfs:559
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "正しいアクセスを設定するには変更ボタンを使用してください"
 
 #: standalone/draknfs:614
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFSはNFS共有を管理します"
 
 #: standalone/draknfs:623
 #, c-format
@@ -22367,7 +22417,7 @@ msgstr "起動スプラッシュのテーマを保存中.."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "イメージファイル %s をロードできません"
 
 #: standalone/draksplash:169
 #, c-format
@@ -25413,7 +25463,7 @@ msgstr "起動時に開始"
 #: standalone/net_applet:271
 #, c-format
 msgid "Actions"
-msgstr ""
+msgstr "動作"
 
 #: standalone/net_applet:330
 #, c-format
