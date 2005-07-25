@@ -7,7 +7,7 @@ chomp($ver = <STDIN>);
 print F 
 q(Subject: [DrakX] DrakX snapshot #), $ver, q( uploaded
 From: DrakX Builder Robot <devel@mandriva.com>
-To: changelog@linux-mandrake.com
+To: changelog@mandrivalinux.com
 Reply-To: install@mandriva.com
 
 );
