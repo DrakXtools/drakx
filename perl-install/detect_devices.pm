@@ -475,9 +475,7 @@ sub getInputDevices() {
 }
 
 sub getSynapticsTouchpads() {
-    grep {
-        member($_->{description}, "|SynPS/2 Synaptics TouchPad", "|AlpsPS/2 ALPS TouchPad");
-    } getInputDevices();
+    grep { $_->{description} =~ m,^\|(?:SynPS/2 Synaptics TouchPad$|AlpsPS/2 ALPS), } getInputDevices();
 }
 
 sub getSerialModem {
