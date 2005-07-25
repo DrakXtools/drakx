@@ -1,7 +1,7 @@
 /*
- * Guillaume Cottenceau (gc at mandrakesoft.com)
+ * Guillaume Cottenceau (gc at mandriva.com)
  *
- * Copyright 2002 Mandrakesoft
+ * Copyright 2002 Mandriva
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
