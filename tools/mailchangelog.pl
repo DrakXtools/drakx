@@ -6,9 +6,9 @@ chomp($ver = <STDIN>);
 
 print F 
 q(Subject: [DrakX] DrakX snapshot #), $ver, q( uploaded
-From: DrakX Builder Robot <devel@mandrakesoft.com>
+From: DrakX Builder Robot <devel@mandriva.com>
 To: changelog@linux-mandrake.com
-Reply-To: install@mandrakesoft.com
+Reply-To: install@mandriva.com
 
 );
 print F foreach <STDIN>;
