@@ -31,7 +31,7 @@ sub menu_lst {
 timeout 0
 default 0
 
-title Mandrake Install
+title Mandriva Install
 
 root ($hd,$grub_partition_number)
 kernel $directory/isolinux/alt0/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk,partition:$hd_linux$partition_number,directory:$directory
@@ -60,7 +60,7 @@ sub print_form {
     print
       p(),
       start_form(-name => 'form', -action => $cgi_name, -method => 'get'),
-      ul("Please choose the partition where Mandrakelinux is copied.",
+      ul("Please choose the partition where Mandrivalinux is copied.",
 	 li(popup_menu(-name => "hd", -default => 'hd0', 
 		       -values => [ 'hd0' .. 'hd3' ],
 		       -labels => { hd0 => '1st BIOS hard drive (usually hda or sda)',
@@ -94,7 +94,7 @@ sub print_form {
 				  })),
        ),
       p(),
-      ul("Please enter the directory containing the Mandrakelinux Distribution (relative to the partition chosen above)",
+      ul("Please enter the directory containing the Mandrivalinux Distribution (relative to the partition chosen above)",
 	 li(textfield(-name => 'directory', -default => '/cooker/i586', size => 40)),
 	 ),
       p(submit(-name => 'Go')),
