@@ -141,7 +141,12 @@ sub write {
     set_config_file('masq', if_($conf->{masq_subnet}, [ $conf->{net_interface}, $conf->{masq_subnet} ]));
 
     require services;
-    services::set_status('shorewall', !$conf->{disabled}, $::isInstall);
+    if ($conf->{disabled}) {
+        services::disable('shorewall', $::isInstall);
+        run_program::rooted($::prefix, '/sbin/shorewall', 'clear') unless $::isInstall;
+    } else {
+        services::enable('shorewall', $::isInstall);
+    }
 }
 
 1;
