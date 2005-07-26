@@ -579,7 +579,8 @@ sub configure_network {
     }
 
     #- make net_applet reload the configuration
-    my $pid = chomp_(`pidof -x net_applet`) and kill 1, $pid;
+    my $pid = chomp_(`pidof -x net_applet`);
+    $pid and kill 1, $pid;
 }
 
 1;
