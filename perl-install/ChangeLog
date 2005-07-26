@@ -1,3 +1,104 @@
+2005/07/26  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: no_all_squash as default
+
+2005/07/26  Olivier Blin <oblin at mandriva.com>
+
+	* network/network.pm: fix variable declaration
+	kill(signal, <empty string>) sends the signal to the calling process,
+	avoid it
+
+	* network/shorewall.pm: don't write alias interfaces in shorewall
+	interfaces file
+	run shorewall clear if firewall is stopped (#17046)
+
+2005/07/26  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate: install eva for chinese users (Funda Wang)
+
+	* share/po/br.po: update
+
+2005/07/26  Warly  <warly at mandriva.com>
+
+	* fs/mount_options.pm: workarround ntfs mount bug
+
+2005/07/25  Olivier Blin <oblin at mandriva.com>
+
+	* drakxtools.spec: revert wrong fix (DESKTOP contains KDE when xinit.d
+	scripts are run)
+
+	* detect_devices.pm: fix alps touchpads detection
+
+2005/07/25  pjetur
+
+	* share/po/is.po: Sync of messages
+
+2005/07/25  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* tools/shift_img.c, tools/make_lang_png_transparent.c, tools/syncrpms:
+	fix email addressses in copyright and bump them
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+	* tools/hd_grub.cgi: last mdk->mdv switches
+
+	* tools/cvslog2changelog.pl: fix email addressses
+
+	* tools/genmodparm, tools/gencryptofiles: last mdk->mdv switches
+	fix email addressses in copyright and bump them
+
+	* tools/mailchangelog.pl: fix ml addresss
+	fix email addressses
+
+2005/07/24  Olivier Blin <oblin at mandriva.com>
+
+	* network/tools.pm: wait a second for ifplugd to be actually killed
+
+	* network/network.pm: write hosts in correct order in /etc/hosts
+
+2005/07/23  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/07/22  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: improve User id mapping, keep 4 options
+	(no_all_squash is the default
+	one)
+	remove duplicate entry in access list
+
+2005/07/22  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: mandrake_desk is now desktop-common-data
+
+2005/07/22  Funda Wang <fundawang at linux.net.cn>
+
+	* Xconfig/resolution_and_depth.pm: Adopt to new mandriva-theme package
+	naming schema, see bug#16977.
+
+2005/07/22  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/network.c, mdk-stage1/doc/TECH-INFOS: if interface is "auto",
+	try to detect the first interface with a link beat
+
+	* standalone/net_applet: really use ap address for hidden ssid
+	split
+	use has_wireless
+	simplify
+	run drakroam to configure a wireless network when selected (if not
+	already configured)
+	use run_program
+	select a wireless network for association on click
+
+	* network/monitor.pm: allow to select a wireless network
+	add some comments, use meaningfull variable names
+	use ssid from configuration if found for the MAC address (useful for
+	hidden essid)
+
+2005/07/21  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/sound.pm: typo fix (#16944)
+
 2005/07/21  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/pxe.pm: don't translate vga resolution
