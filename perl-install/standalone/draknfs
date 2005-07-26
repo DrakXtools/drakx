@@ -350,7 +350,6 @@ sub add_modify_entry {
 			     if ($luserid->get_text =~ /$userid_data->{root_squash}/) {
 			       $_->set_sensitive(1) foreach $anongid, $anonuid;
 			     } else {
-			       print "plus possible \n";
 			       $_->set_text("") foreach $anongid, $anonuid;
 			       $_->set_sensitive(0) foreach $anongid, $anonuid;
 			     }
@@ -358,7 +357,7 @@ sub add_modify_entry {
 
   if ($wanted =~ /add/) {
     # default choice root_squash and ro
-    $luserid->set_text($userid_data->{no_root_squash});
+    $luserid->set_text($userid_data->{no_all_squash});
     $lr->set_text("yes");
     $lsecure->set_text("yes");
     $lsync->set_text("no");
