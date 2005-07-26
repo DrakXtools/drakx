@@ -79,7 +79,8 @@ sub read_default_interfaces {
 sub set_net_interface {
     my ($conf, $interface) = @_;
     $conf->{net_interface} = $interface;
-    $conf->{loc_interface} = [  grep { $_ ne $interface } detect_devices::getNet() ];
+    #- keep all other interfaces (but alias interfaces) in local zone
+    $conf->{loc_interface} = [  grep { !/:/ && $_ ne $interface } detect_devices::getNet() ];
 }
 
 sub read {
