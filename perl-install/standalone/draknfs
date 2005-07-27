@@ -369,7 +369,7 @@ sub add_modify_entry {
 
   my $expender = Gtk2::Expander->new('Advanced options');
   $expender->add(gtkpack_(Gtk2::VBox->new,
-                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Adcanced Options Help"), $help_global)),
+                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Advanced Options Help"), $help_global)),
                           0, $label_and_widgets->($adv_options{secured}, $lsecure, ""),
                           0, $label_and_widgets->($adv_options{ro}, $lr, ""),
 			 ),
