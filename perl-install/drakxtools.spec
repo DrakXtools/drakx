@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.37mdk
+Release: 0.38mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jul 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.38mdk
+- enforce GNOME button order when not under KDE
+- make more dialogs transient if possible
+- drakconnect (blino):
+  o fix ISDN configuration
+  o fix writing module aliases
+  o write hosts in correct order in /etc/hosts (#15039)
+  o do not kill mcc (#17024)
+- drakfirewall (blino):
+  o don't write alias interfaces in shorewall interfaces file
+  o run shorewall clear if firewall is stopped (#17046)
+- drakhosts, draknfs: improved GIU (antoine)
+- draksound: fix intel support (#16944)
+- mousedrake: fix alps touchpads detection (blino)
+- net_applet (blino):
+  o enable activefw
+  o misc wireless enhancements
+- XFdrake: adopt to new mandriva-theme package naming schema (Funda
+  Wang, #16977)
+
 * Tue Jul 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.37mdk
 - fix layout for programms embedded with their menubar (eg: harddrake,
   printerdrake, rpmdrake) (#13931)
