@@ -7,6 +7,7 @@ use standalone;
 
 use Socket;
 use mygtk2 qw(gtknew);
+use ugtk2 qw(:dialogs);
 use POSIX qw(strftime);
 use dbus_object;
 use network::activefw;
@@ -104,6 +105,7 @@ sub list_remove_addr {
     }
 }
 
+#- may throw an exception
 sub init_blacklist() {
     my @packets = $activefw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
@@ -138,11 +140,16 @@ sub get_selected_blacklist() {
 
 sub unblacklist {
     my @addr = @_;
-    $activefw->unblacklist($_) foreach @addr;
-    #- delete from the list even if the above calls were unsuccessful
+    eval { $activefw->unblacklist($_) foreach @addr };
+    if ($@) {
+        my $error = $@;
+        err_dialog(N("Error"), N("Unable to remove from blacklist: %s", $error));
+        return;
+    }
     list_remove_addr($blacklist->{data}, @addr);
 }
 
+#- may throw an exception
 sub init_whitelist() {
     handle_whitelist($_) foreach $activefw->get_whitelist;
 }
@@ -163,19 +170,32 @@ sub get_selected_whitelist() {
 sub whitelist {
     my @addr = @_;
     unblacklist(@addr);
-    $activefw->whitelist($_) foreach @addr;
+    eval { $activefw->whitelist($_) foreach @addr };
+    if ($@) {
+        my $error = $@;
+        err_dialog(N("Error"), N("Unable to move in whitelist: %s", $error));
+    }
 }
 
 sub unwhitelist {
     my @addr = @_;
-    $activefw->unwhitelist($_) foreach @addr;
-    #- delete from the list even if the above calls were unsuccessful
+    eval { $activefw->unwhitelist($_) foreach @addr };
+    if ($@) {
+        my $error = $@;
+        err_dialog(N("Error"), N("Unable to remove from whitelist: %s", $error));
+    }
     list_remove_addr($whitelist->{data}, @addr);
 }
 
 sub init_lists() {
-    init_blacklist();
-    init_whitelist();
+    eval {
+        init_blacklist();
+        init_whitelist();
+    };
+    if ($@) {
+        my $error = $@;
+        err_dialog(N("Error"), N("Unable to contact the Active Firewall daemon: %s", $error));
+    }
 }
 
 sub clear_lists() {
