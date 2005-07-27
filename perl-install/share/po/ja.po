@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
-"POT-Creation-Date: 2005-07-18 19:19+0200\n"
+"POT-Creation-Date: 2005-07-27 17:26+0200\n"
 "PO-Revision-Date: 2005-07-25 22:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -181,10 +181,10 @@ msgstr "デバイスの検出と設定を行っています。お待ちくださ
 #: network/netconnect.pm:1070 network/netconnect.pm:1074
 #: network/netconnect.pm:1078 network/netconnect.pm:1186
 #: network/netconnect.pm:1191 network/netconnect.pm:1211
-#: network/netconnect.pm:1364 network/thirdparty.pm:267
-#: network/thirdparty.pm:274 network/thirdparty.pm:310
-#: network/thirdparty.pm:312 network/thirdparty.pm:333
-#: network/thirdparty.pm:357 printer/printerdrake.pm:244
+#: network/netconnect.pm:1364 network/thirdparty.pm:266
+#: network/thirdparty.pm:273 network/thirdparty.pm:309
+#: network/thirdparty.pm:311 network/thirdparty.pm:332
+#: network/thirdparty.pm:356 printer/printerdrake.pm:244
 #: printer/printerdrake.pm:251 printer/printerdrake.pm:276
 #: printer/printerdrake.pm:422 printer/printerdrake.pm:427
 #: printer/printerdrake.pm:440 printer/printerdrake.pm:450
@@ -225,14 +225,15 @@ msgstr "デバイスの検出と設定を行っています。お待ちくださ
 #: standalone/drakgw:50 standalone/drakgw:188 standalone/drakgw:217
 #: standalone/drakgw:258 standalone/drakgw:292 standalone/drakgw:394
 #: standalone/drakhosts:246 standalone/drakhosts:253 standalone/drakhosts:260
-#: standalone/draknfs:623 standalone/draknfs:630 standalone/draknfs:637
+#: standalone/draknfs:597 standalone/draknfs:604 standalone/draknfs:611
 #: standalone/drakroam:41 standalone/draksplash:15 standalone/draksplash:159
 #: standalone/drakxtv:107 standalone/finish-install:49 standalone/logdrake:168
-#: standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59
-#: standalone/scannerdrake:202 standalone/scannerdrake:261
-#: standalone/scannerdrake:715 standalone/scannerdrake:726
-#: standalone/scannerdrake:865 standalone/scannerdrake:876
-#: standalone/scannerdrake:946 wizards.pm:95 wizards.pm:99 wizards.pm:121
+#: standalone/logdrake:437 standalone/logdrake:442 standalone/net_applet:160
+#: standalone/scannerdrake:59 standalone/scannerdrake:202
+#: standalone/scannerdrake:261 standalone/scannerdrake:715
+#: standalone/scannerdrake:726 standalone/scannerdrake:865
+#: standalone/scannerdrake:876 standalone/scannerdrake:946 wizards.pm:95
+#: wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "エラー"
@@ -472,9 +473,9 @@ msgstr "カスタム"
 #: Xconfig/main.pm:115 diskdrake/dav.pm:26 help.pm:14
 #: install_steps_interactive.pm:85 install_steps_interactive.pm:1319
 #: printer/printerdrake.pm:744 printer/printerdrake.pm:4401
-#: printer/printerdrake.pm:4853 standalone/drakhosts:266
-#: standalone/draksplash:85 standalone/logdrake:173 standalone/net_applet:85
-#: standalone/scannerdrake:477
+#: printer/printerdrake.pm:4853 standalone/drakhosts:263 standalone/drakids:69
+#: standalone/drakids:77 standalone/draksplash:85 standalone/logdrake:173
+#: standalone/net_applet:81 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "終了"
@@ -640,7 +641,7 @@ msgstr "グラフィックカード: %s"
 #: standalone/drakconnect:935 standalone/drakconnect:1031
 #: standalone/drakfont:574 standalone/drakfont:586 standalone/drakroam:392
 #: standalone/draksplash:169 standalone/drakups:212 standalone/net_monitor:340
-#: ugtk2.pm:409 ugtk2.pm:506 ugtk2.pm:908 ugtk2.pm:931
+#: ugtk2.pm:412 ugtk2.pm:510 ugtk2.pm:916 ugtk2.pm:939
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -657,8 +658,8 @@ msgstr "OK"
 #: standalone/drakconnect:933 standalone/drakconnect:1030
 #: standalone/drakfont:586 standalone/drakfont:664 standalone/drakfont:741
 #: standalone/draksplash:169 standalone/drakups:219 standalone/logdrake:173
-#: standalone/net_monitor:339 ugtk2.pm:403 ugtk2.pm:504 ugtk2.pm:513
-#: ugtk2.pm:908
+#: standalone/net_monitor:339 ugtk2.pm:406 ugtk2.pm:508 ugtk2.pm:517
+#: ugtk2.pm:916
 #, c-format
 msgid "Cancel"
 msgstr "キャンセル"
@@ -670,7 +671,7 @@ msgstr "キャンセル"
 #: standalone/drakconnect:153 standalone/drakconnect:236
 #: standalone/drakfont:509 standalone/draknfs:208 standalone/drakperm:133
 #: standalone/draksec:336 standalone/draksec:338 standalone/draksec:356
-#: standalone/draksec:358 ugtk2.pm:1040 ugtk2.pm:1041
+#: standalone/draksec:358 ugtk2.pm:1048 ugtk2.pm:1049
 #, c-format
 msgid "Help"
 msgstr "ヘルプ"
@@ -817,7 +818,7 @@ msgstr "その他"
 
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:245
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:246
 #: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
@@ -1425,7 +1426,7 @@ msgstr "userdrakeを起動"
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:295
 #: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
-#: standalone/printerdrake:547
+#: standalone/printerdrake:548
 #, c-format
 msgid "Close"
 msgstr "閉じる"
@@ -2207,7 +2208,7 @@ msgstr "種類"
 
 #. -PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: diskdrake/hd_gtk.pm:359 diskdrake/interactive.pm:455
-#: standalone/drakperm:123 standalone/printerdrake:235
+#: standalone/drakperm:123 standalone/printerdrake:236
 #, c-format
 msgid "Delete"
 msgstr "削除"
@@ -3480,7 +3481,7 @@ msgstr "UPS"
 msgid "Scanner"
 msgstr "スキャナ"
 
-#: harddrake/data.pm:502 standalone/harddrake2:441
+#: harddrake/data.pm:502 standalone/harddrake2:442
 #, c-format
 msgid "Unknown/Others"
 msgstr "不明/その他"
@@ -3593,7 +3594,7 @@ msgstr "不具合対策"
 #: standalone/drakTermServ:1230 standalone/drakTermServ:1895
 #: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:125
 #: standalone/drakclock:224 standalone/drakconnect:969 standalone/drakups:27
-#: standalone/harddrake2:478 standalone/scannerdrake:51
+#: standalone/harddrake2:480 standalone/scannerdrake:51
 #: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
@@ -3722,8 +3723,8 @@ msgstr ""
 "\n"
 "現在のドライバは %s で、お使いのサウンドカードは %s です。"
 
-#: harddrake/v4l.pm:12 standalone/net_applet:67 standalone/net_applet:68
-#: standalone/net_applet:70
+#: harddrake/v4l.pm:12 standalone/net_applet:63 standalone/net_applet:64
+#: standalone/net_applet:66
 #, c-format
 msgid "Auto-detect"
 msgstr "自動検出"
@@ -3890,10 +3891,10 @@ msgstr "ユーザ名"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:233
 #: install_steps_gtk.pm:694 interactive.pm:432 interactive/newt.pm:321
-#: network/thirdparty.pm:323 printer/printerdrake.pm:3678
+#: network/thirdparty.pm:322 printer/printerdrake.pm:3678
 #: standalone/drakTermServ:383 standalone/drakbackup:3940
 #: standalone/drakbackup:4034 standalone/drakbackup:4051
-#: standalone/drakbackup:4069 ugtk2.pm:506
+#: standalone/drakbackup:4069 ugtk2.pm:510
 #, c-format
 msgid "Next"
 msgstr "次へ"
@@ -4204,16 +4205,16 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:904
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
-#: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:355
-#: ugtk2.pm:907 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:309 standalone/net_applet:374
+#: ugtk2.pm:915 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "いいえ"
 
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:904 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
-#: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
-#: standalone/net_applet:359 ugtk2.pm:907 wizards.pm:156
+#: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:308
+#: standalone/net_applet:378 ugtk2.pm:915 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "はい"
@@ -4795,7 +4796,7 @@ msgstr ""
 #: interactive/newt.pm:318 printer/printerdrake.pm:3676
 #: standalone/drakTermServ:362 standalone/drakbackup:3900
 #: standalone/drakbackup:3939 standalone/drakbackup:4050
-#: standalone/drakbackup:4065 ugtk2.pm:504
+#: standalone/drakbackup:4065 ugtk2.pm:508
 #, c-format
 msgid "Previous"
 msgstr "戻る"
@@ -7376,7 +7377,7 @@ msgid "Choose a file"
 msgstr "ファイルを選択"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakbackup:1514
-#: standalone/drakfont:656 standalone/drakhosts:242 standalone/draknfs:619
+#: standalone/drakfont:656 standalone/drakhosts:242 standalone/draknfs:593
 #: standalone/drakroam:218 standalone/drakups:301 standalone/drakups:361
 #: standalone/drakups:381 standalone/drakvpn:319 standalone/drakvpn:680
 #, c-format
@@ -7384,13 +7385,13 @@ msgid "Add"
 msgstr "追加"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:249
-#: standalone/draknfs:626
+#: standalone/draknfs:600
 #, c-format
 msgid "Modify"
 msgstr "変更"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:256
-#: standalone/draknfs:633 standalone/drakroam:202 standalone/drakups:303
+#: standalone/draknfs:607 standalone/drakroam:202 standalone/drakups:303
 #: standalone/drakups:363 standalone/drakups:383 standalone/drakvpn:319
 #: standalone/drakvpn:680
 #, c-format
@@ -7402,7 +7403,7 @@ msgstr "削除"
 msgid "Basic"
 msgstr "基本"
 
-#: interactive.pm:432 interactive/newt.pm:321 ugtk2.pm:506
+#: interactive.pm:432 interactive/newt.pm:321 ugtk2.pm:510
 #, c-format
 msgid "Finish"
 msgstr "完了"
@@ -9965,29 +9966,29 @@ msgstr "全て(ファイアウォールなし)"
 msgid "Other ports"
 msgstr "その他のポート"
 
-#: network/isdn.pm:118 network/netconnect.pm:459 network/netconnect.pm:546
+#: network/isdn.pm:117 network/netconnect.pm:459 network/netconnect.pm:546
 #: network/netconnect.pm:549 network/netconnect.pm:692
 #: network/netconnect.pm:696
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "該当なし - 手動で編集"
 
-#: network/isdn.pm:161 network/netconnect.pm:391
+#: network/isdn.pm:160 network/netconnect.pm:391
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA/PCMCIA"
 
-#: network/isdn.pm:161 network/netconnect.pm:391
+#: network/isdn.pm:160 network/netconnect.pm:391
 #, c-format
 msgid "I do not know"
 msgstr "不明"
 
-#: network/isdn.pm:162 network/netconnect.pm:391
+#: network/isdn.pm:161 network/netconnect.pm:391
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:163 network/netconnect.pm:391
+#: network/isdn.pm:162 network/netconnect.pm:391
 #, c-format
 msgid "USB"
 msgstr "USB"
@@ -10078,7 +10079,7 @@ msgstr ""
 "その他のプロトコル\n"
 "No D-Channel (leased lines)"
 
-#: network/netconnect.pm:121 network/thirdparty.pm:185
+#: network/netconnect.pm:121 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch USB モデム"
@@ -10427,7 +10428,7 @@ msgid "Which protocol do you want to use?"
 msgstr "どのプロトコルを使いますか？"
 
 #: network/netconnect.pm:444 standalone/drakconnect:109
-#: standalone/drakconnect:300 standalone/drakconnect:562
+#: standalone/drakconnect:300 standalone/drakconnect:562 standalone/drakids:25
 #: standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
@@ -11295,14 +11296,14 @@ msgstr ""
 "\t\teth0, eth1(ケーブル接続の場合)\n"
 "\t\tippp+(ISDN接続の場合)\n"
 
-#: network/thirdparty.pm:197
+#: network/thirdparty.pm:196
 #, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr ""
 "Alcatel microcode を/usr/share/speedtouch に mgmt.o という名前でコピーしてく"
 "ださい。"
 
-#: network/thirdparty.pm:206
+#: network/thirdparty.pm:205
 #, c-format
 msgid ""
 "The ECI Hi-Focus modem cannot be supported due to binary driver distribution "
@@ -11314,24 +11315,24 @@ msgstr ""
 "\n"
 "http://eciadsl.flashtux.org/ からダウンロードできます。"
 
-#: network/thirdparty.pm:267
+#: network/thirdparty.pm:266
 #, c-format
 msgid "Could not install the packages (%s)!"
 msgstr "パッケージ(%s)をインストールできませんでした"
 
-#: network/thirdparty.pm:275
+#: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
 msgstr "パッケージ(%s)が必要ですが入手できません"
 
-#: network/thirdparty.pm:276
+#: network/thirdparty.pm:275
 #, c-format
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr "これらのパッケージはMandrivaクラブまたはMandrivaの有償版にあります"
 
-#: network/thirdparty.pm:277
+#: network/thirdparty.pm:276
 #, c-format
 msgid ""
 "The required files can also be installed from this URL:\n"
@@ -11340,22 +11341,22 @@ msgstr ""
 "必要なファイルは次のURLからもインストールできます:\n"
 "%s"
 
-#: network/thirdparty.pm:310
+#: network/thirdparty.pm:309
 #, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
 msgstr "Windowsシステムに %s がみつかりません"
 
-#: network/thirdparty.pm:312
+#: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
 msgstr "Windowsシステムを検出できませんでした"
 
-#: network/thirdparty.pm:322
+#: network/thirdparty.pm:321
 #, c-format
 msgid "Insert floppy"
 msgstr "フロッピーを挿入"
 
-#: network/thirdparty.pm:323
+#: network/thirdparty.pm:322
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -11364,12 +11365,12 @@ msgstr ""
 "%2$s をルートディレクトリに置いて、FAT形式のフロッピーをドライブ %1$s に\n"
 "挿入し、%3$s を押してください。"
 
-#: network/thirdparty.pm:333
+#: network/thirdparty.pm:332
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "フロッピーアクセスエラー: デバイス %s をマウントできません"
 
-#: network/thirdparty.pm:343
+#: network/thirdparty.pm:342
 #, c-format
 msgid ""
 "You need the Alcatel microcode.\n"
@@ -11380,38 +11381,38 @@ msgstr ""
 "フロッピー/Windowsパーティションから今供給するか、スキップして\n"
 "後で行うことができます。"
 
-#: network/thirdparty.pm:347 network/thirdparty.pm:349
+#: network/thirdparty.pm:346 network/thirdparty.pm:348
 #, c-format
 msgid "Use a floppy"
 msgstr "フロッピーを使う"
 
-#: network/thirdparty.pm:347
+#: network/thirdparty.pm:346
 #, c-format
 msgid "Use my Windows partition"
 msgstr "Windowsのパーティションを使う"
 
-#: network/thirdparty.pm:357
+#: network/thirdparty.pm:356
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "ファームウェアのコピーに失敗。ファイル %s が見つかりません。"
 
-#: network/thirdparty.pm:362 standalone/drakautoinst:250
+#: network/thirdparty.pm:361 standalone/drakautoinst:250
 #: standalone/drakvpn:888 standalone/scannerdrake:405
 #, c-format
 msgid "Congratulations!"
 msgstr "おめでとうございます"
 
-#: network/thirdparty.pm:362
+#: network/thirdparty.pm:361
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "ファームウェアをコピーしました"
 
-#: network/thirdparty.pm:427
+#: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
 msgstr "必要なソフトウェアとドライバーを探しています.."
 
-#: network/thirdparty.pm:437
+#: network/thirdparty.pm:436
 #, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "デバイス設定コマンドを実行しています。お待ちください.."
@@ -11504,7 +11505,7 @@ msgstr "(%s で)"
 msgid "(on this machine)"
 msgstr "(このマシンで)"
 
-#: printer/cups.pm:115 standalone/printerdrake:187
+#: printer/cups.pm:115 standalone/printerdrake:188
 #, c-format
 msgid "Configured on other machines"
 msgstr "設定済み(他のマシンで)"
@@ -11630,7 +11631,7 @@ msgstr "推奨"
 msgid "Unknown model"
 msgstr "不明なモデル"
 
-#: printer/main.pm:354 standalone/printerdrake:186
+#: printer/main.pm:354 standalone/printerdrake:187
 #, c-format
 msgid "Configured on this machine"
 msgstr "設定済み(このマシンで)"
@@ -12196,7 +12197,7 @@ msgstr "CUPSサーバの名前またはIPがありません"
 #: printer/printerdrake.pm:4562 printer/printerdrake.pm:4571
 #: printer/printerdrake.pm:4586 printer/printerdrake.pm:4784
 #: printer/printerdrake.pm:5236 printer/printerdrake.pm:5313
-#: standalone/printerdrake:67 standalone/printerdrake:554
+#: standalone/printerdrake:67 standalone/printerdrake:555
 #, c-format
 msgid "Printerdrake"
 msgstr "Printerdrake"
@@ -12905,7 +12906,7 @@ msgstr "リモートプリンタ名がありません"
 #: standalone/drakTermServ:1554 standalone/drakTermServ:1563
 #: standalone/drakTermServ:1575 standalone/drakbackup:499
 #: standalone/drakbackup:605 standalone/drakbackup:640
-#: standalone/drakbackup:741 standalone/drakroam:390 standalone/harddrake2:258
+#: standalone/drakbackup:741 standalone/drakroam:390 standalone/harddrake2:259
 #, c-format
 msgid "Information"
 msgstr "情報"
@@ -13396,14 +13397,14 @@ msgid "Name of printer"
 msgstr "プリンタの名前"
 
 #: printer/printerdrake.pm:2791 standalone/drakconnect:592
-#: standalone/harddrake2:39 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: standalone/harddrake2:39 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "Description"
 msgstr "説明"
 
-#: printer/printerdrake.pm:2792 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: printer/printerdrake.pm:2792 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "Location"
 msgstr "プリンタの場所"
@@ -15850,7 +15851,7 @@ msgstr ""
 "このサービスについての\n"
 "追加情報はありません。"
 
-#: services.pm:224 ugtk2.pm:1018
+#: services.pm:224 ugtk2.pm:1026
 #, c-format
 msgid "Info"
 msgstr "情報"
@@ -18320,8 +18321,8 @@ msgstr "設定を変更しました - clusternfs/dhcpdを再起動しますか�
 
 #: standalone/drakautoinst:38 standalone/drakhosts:118
 #: standalone/drakhosts:125 standalone/draknfs:86 standalone/draknfs:107
-#: standalone/draknfs:460 standalone/draknfs:462 standalone/draknfs:552
-#: standalone/draknfs:559
+#: standalone/draknfs:434 standalone/draknfs:436 standalone/draknfs:526
+#: standalone/draknfs:533
 #, c-format
 msgid "Error!"
 msgstr "エラー"
@@ -19955,7 +19956,7 @@ msgstr "バックアップを作成"
 msgid "Restore"
 msgstr "復元"
 
-#: standalone/drakbackup:4095 standalone/harddrake2:478
+#: standalone/drakbackup:4095 standalone/harddrake2:480
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "以下のパッケージをインストールします:\n"
@@ -20046,8 +20047,8 @@ msgstr "Drakbackup"
 
 #: standalone/drakboot:76 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
-#: standalone/printerdrake:138 standalone/printerdrake:139
-#: standalone/printerdrake:140
+#: standalone/printerdrake:139 standalone/printerdrake:140
+#: standalone/printerdrake:141
 #, c-format
 msgid "/_File"
 msgstr "/ファイル(_F)"
@@ -20058,7 +20059,7 @@ msgid "/File/_Quit"
 msgstr "/ファイル(F)/終了(_Q)"
 
 #: standalone/drakboot:77 standalone/harddrake2:192 standalone/logdrake:75
-#: standalone/printerdrake:140
+#: standalone/printerdrake:141
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -20394,8 +20395,8 @@ msgstr "お待ちください"
 msgid "Interface"
 msgstr "インターフェース"
 
-#: standalone/drakconnect:109 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: standalone/drakconnect:109 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "State"
 msgstr "状態"
@@ -20421,7 +20422,7 @@ msgid "Configure Local Area Network..."
 msgstr "LANを設定"
 
 #: standalone/drakconnect:155 standalone/drakconnect:237
-#: standalone/drakconnect:241 standalone/drakhosts:263
+#: standalone/drakconnect:241
 #, c-format
 msgid "Apply"
 msgstr "適用"
@@ -20657,7 +20658,7 @@ msgstr ""
 "Mandriva Linuxコントロールセンタの \"インターフェースを追加\" を実行してくだ"
 "さい"
 
-#: standalone/drakconnect:971 standalone/net_applet:55
+#: standalone/drakconnect:971 standalone/net_applet:51
 #, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -20667,7 +20668,7 @@ msgstr ""
 "Mandriva Linuxコントロールセンタの \"%s\" を実行してください。"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:972 standalone/drakroam:42 standalone/net_applet:56
+#: standalone/drakconnect:972 standalone/drakroam:42 standalone/net_applet:52
 #, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "新しいネットワーク・インターフェースを設定 (LAN/ISDN/ADSL等)"
@@ -21450,6 +21451,76 @@ msgstr "ホストの変更に失敗しました"
 msgid "Failed to remove host."
 msgstr "ホストの削除に失敗しました"
 
+#: standalone/drakids:20
+#, fuzzy, c-format
+msgid "Date"
+msgstr "状態"
+
+#: standalone/drakids:21 standalone/drakids:37
+#, fuzzy, c-format
+msgid "Attacker"
+msgstr "攻撃の詳細"
+
+#: standalone/drakids:22
+#, fuzzy, c-format
+msgid "Attack type"
+msgstr "攻撃のタイプ: %s"
+
+#: standalone/drakids:23
+#, fuzzy, c-format
+msgid "Service"
+msgstr "サービス"
+
+#: standalone/drakids:24
+#, c-format
+msgid "Network interface"
+msgstr "ネットワークインターフェース"
+
+#: standalone/drakids:60 standalone/net_applet:330
+#, fuzzy, c-format
+msgid "Active Firewall"
+msgstr "ファイアウォール"
+
+#: standalone/drakids:63
+#, c-format
+msgid "Blacklist"
+msgstr ""
+
+#: standalone/drakids:67
+#, fuzzy, c-format
+msgid "Remove from blacklist"
+msgstr "LVMから削除"
+
+#: standalone/drakids:68
+#, c-format
+msgid "Move to whitelist"
+msgstr ""
+
+#: standalone/drakids:72
+#, c-format
+msgid "Whitelist"
+msgstr ""
+
+#: standalone/drakids:76
+#, fuzzy, c-format
+msgid "Remove from whitelist"
+msgstr "LVMから削除"
+
+#: standalone/drakids:125
+#, fuzzy, c-format
+msgid "Port scanning"
+msgstr "共有しない"
+
+#: standalone/drakids:126
+#, fuzzy, c-format
+msgid "Service attack"
+msgstr "攻撃されたサービス: %s"
+
+#: standalone/drakids:127
+#, fuzzy, c-format
+msgid "Password cracking"
+msgstr "パスワード(再入力)"
+
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
@@ -21461,9 +21532,9 @@ msgid "map all users to anonymous user"
 msgstr "すべてのユーザを匿名ユーザにマップ"
 
 #: standalone/draknfs:45
-#, c-format
-msgid "allow real remote user access"
-msgstr "実リモートユーザアクセスを許可"
+#, fuzzy, c-format
+msgid "No user UID mapping"
+msgstr "ユーザIDマッピング"
 
 #: standalone/draknfs:46
 #, c-format
@@ -21641,112 +21712,112 @@ msgstr ""
 "要求によって生じる変更が安定記憶(例: ディスクドライブ)にコミットされる前にこ"
 "れらの要求に応答することを禁止します。"
 
-#: standalone/draknfs:387
-#, c-format
-msgid "Help Adcanced options"
+#: standalone/draknfs:372
+#, fuzzy, c-format
+msgid "Advanced Options Help"
 msgstr "上級オプションのヘルプ"
 
-#: standalone/draknfs:399
+#: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
 msgstr "NFSディレクトリ"
 
-#: standalone/draknfs:401
+#: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
 msgstr "ディレクトリ:"
 
-#: standalone/draknfs:404
+#: standalone/draknfs:388
 #, c-format
 msgid "Host access"
 msgstr "ホストアクセス"
 
-#: standalone/draknfs:406
+#: standalone/draknfs:390
 #, c-format
 msgid "Access:"
 msgstr "アクセス:"
 
-#: standalone/draknfs:406
+#: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
 msgstr "ホストアクセス"
 
-#: standalone/draknfs:409
+#: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
 msgstr "ユーザIDマッピング"
 
-#: standalone/draknfs:411
+#: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
 msgstr "ユーザID:"
 
-#: standalone/draknfs:411
+#: standalone/draknfs:395
 #, c-format
 msgid "Help User ID"
 msgstr "ユーザIDのヘルプ"
 
-#: standalone/draknfs:412
+#: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
 msgstr "匿名ユーザID:"
 
-#: standalone/draknfs:413
+#: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
 msgstr "匿名グループID:"
 
-#: standalone/draknfs:460 standalone/draknfs:552
+#: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
 msgid "Please enter a directory to share."
 msgstr "共有するディレクトリを入力してください"
 
-#: standalone/draknfs:462
+#: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
 msgstr "ホストアクセスを指定してください"
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Share Directory"
 msgstr "ディレクトリを共有"
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Hosts Wildcard"
 msgstr "ホストワイルドカード"
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "General Options"
 msgstr "全般オプション"
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
 msgstr "カスタムオプション"
 
-#: standalone/draknfs:559
+#: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
 msgstr "正しいアクセスを設定するには変更ボタンを使用してください"
 
-#: standalone/draknfs:614
+#: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
 msgstr "DrakNFSはNFS共有を管理します"
 
-#: standalone/draknfs:623
+#: standalone/draknfs:597
 #, c-format
 msgid "Failed to add NFS share."
 msgstr "NFS共有の追加に失敗しました"
 
-#: standalone/draknfs:630
+#: standalone/draknfs:604
 #, c-format
 msgid "Failed to Modify NFS share."
 msgstr "NFS共有の変更に失敗しました"
 
-#: standalone/draknfs:637
+#: standalone/draknfs:611
 #, c-format
 msgid "Failed to remove an NFS share."
 msgstr "NFS共有の削除に失敗しました"
@@ -21859,7 +21930,7 @@ msgstr "選んだルールを削除"
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/drakperm:124 standalone/drakups:302 standalone/drakups:362
 #: standalone/drakups:382 standalone/drakvpn:319 standalone/drakvpn:680
-#: standalone/printerdrake:232
+#: standalone/printerdrake:233
 #, c-format
 msgid "Edit"
 msgstr "編集"
@@ -22092,7 +22163,7 @@ msgid "Disconnect"
 msgstr "切断"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:241 standalone/printerdrake:238
+#: standalone/drakroam:241 standalone/printerdrake:239
 #, c-format
 msgid "Refresh"
 msgstr "更新"
@@ -22467,7 +22538,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "自動検出"
 
-#: standalone/drakups:101 standalone/harddrake2:245
+#: standalone/drakups:101 standalone/harddrake2:246
 #, c-format
 msgid "Detection in progress"
 msgstr "検出中です"
@@ -24407,7 +24478,7 @@ msgid "class of hardware device"
 msgstr "ハードウェアデバイスのクラス"
 
 #: standalone/harddrake2:51 standalone/harddrake2:83
-#: standalone/printerdrake:211
+#: standalone/printerdrake:212
 #, c-format
 msgid "Model"
 msgstr "モデル"
@@ -24869,7 +24940,7 @@ msgstr "グラフィカルデスクトップが使用するマウスプロトコ
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:318
+#: standalone/harddrake2:319
 #, c-format
 msgid "Identification"
 msgstr "識別"
@@ -24911,14 +24982,14 @@ msgstr "機能"
 
 #. -PO: please keep all "/" characters !!!
 #: standalone/harddrake2:176 standalone/logdrake:76
-#: standalone/printerdrake:134 standalone/printerdrake:147
+#: standalone/printerdrake:135 standalone/printerdrake:148
 #, c-format
 msgid "/_Options"
 msgstr "/オプション(_O)"
 
 #: standalone/harddrake2:177 standalone/harddrake2:203 standalone/logdrake:78
-#: standalone/printerdrake:159 standalone/printerdrake:161
-#: standalone/printerdrake:164 standalone/printerdrake:166
+#: standalone/printerdrake:160 standalone/printerdrake:162
+#: standalone/printerdrake:165 standalone/printerdrake:167
 #, c-format
 msgid "/_Help"
 msgstr "/ヘルプ(_H)"
@@ -24948,7 +25019,7 @@ msgstr "/パラレルZipドライブを自動検出(_Z)"
 msgid "/_Upload the hardware list"
 msgstr "/ハードウェアのリストを送信(_U)"
 
-#: standalone/harddrake2:192 standalone/printerdrake:140
+#: standalone/harddrake2:192 standalone/printerdrake:141
 #, c-format
 msgid "/_Quit"
 msgstr "/終了(_Q)"
@@ -24970,12 +25041,12 @@ msgid ""
 "in fields displayed on the right frame (\"Information\")"
 msgstr "デバイスを選択すると右のフレームにデバイスの情報が表示されます。"
 
-#: standalone/harddrake2:222 standalone/printerdrake:164
+#: standalone/harddrake2:222 standalone/printerdrake:165
 #, c-format
 msgid "/_Report Bug"
 msgstr "/バグ報告(_R)"
 
-#: standalone/harddrake2:224 standalone/printerdrake:166
+#: standalone/harddrake2:224 standalone/printerdrake:167
 #, c-format
 msgid "/_About..."
 msgstr "/情報(_A)"
@@ -25001,85 +25072,85 @@ msgstr ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
-#: standalone/harddrake2:241
+#: standalone/harddrake2:242
 #, c-format
 msgid "Harddrake2"
 msgstr "Harddrake2"
 
-#: standalone/harddrake2:255
+#: standalone/harddrake2:256
 #, c-format
 msgid "Detected hardware"
 msgstr "検出したハードウェア"
 
-#: standalone/harddrake2:260
+#: standalone/harddrake2:261
 #, c-format
 msgid "Configure module"
 msgstr "モジュールを設定"
 
-#: standalone/harddrake2:267
+#: standalone/harddrake2:268
 #, c-format
 msgid "Run config tool"
 msgstr "設定ツールを実行"
 
-#: standalone/harddrake2:305 standalone/net_monitor:103
+#: standalone/harddrake2:306 standalone/net_monitor:103
 #: standalone/net_monitor:104 standalone/net_monitor:109
 #, c-format
 msgid "unknown"
 msgstr "不明"
 
-#: standalone/harddrake2:306 standalone/printerdrake:298
-#: standalone/printerdrake:336
+#: standalone/harddrake2:307 standalone/printerdrake:299
+#: standalone/printerdrake:337
 #, c-format
 msgid "Unknown"
 msgstr "不明"
 
-#: standalone/harddrake2:326
+#: standalone/harddrake2:327
 #, c-format
 msgid "Misc"
 msgstr "その他"
 
-#: standalone/harddrake2:341
+#: standalone/harddrake2:342
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "情報を表示するには左のデバイスをクリックしてください。"
 
-#: standalone/harddrake2:393
+#: standalone/harddrake2:394
 #, c-format
 msgid "secondary"
 msgstr "２次"
 
-#: standalone/harddrake2:393
+#: standalone/harddrake2:394
 #, c-format
 msgid "primary"
 msgstr "１次"
 
-#: standalone/harddrake2:397
+#: standalone/harddrake2:398
 #, c-format
 msgid "burner"
 msgstr "ライタ"
 
-#: standalone/harddrake2:397
+#: standalone/harddrake2:398
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:543 standalone/harddrake2:546
+#: standalone/harddrake2:546 standalone/harddrake2:549
 #, c-format
 msgid "Upload the hardware list"
 msgstr "ハードウェアのリストを送信"
 
-#: standalone/harddrake2:548
+#: standalone/harddrake2:551
 #, c-format
 msgid "Account:"
 msgstr "アカウント:"
 
-#: standalone/harddrake2:549
+#: standalone/harddrake2:552
 #, c-format
 msgid "Password:"
 msgstr "パスワード:"
 
-#: standalone/harddrake2:550
+#: standalone/harddrake2:553
 #, c-format
 msgid "Hostname:"
 msgstr "ホスト名:"
@@ -25207,7 +25278,7 @@ msgstr "検索"
 msgid "A tool to monitor your logs"
 msgstr "ログを監視するツール"
 
-#: standalone/logdrake:128 standalone/net_applet:276 standalone/net_monitor:94
+#: standalone/logdrake:128 standalone/net_applet:293 standalone/net_monitor:94
 #, c-format
 msgid "Settings"
 msgstr "設定"
@@ -25397,150 +25468,160 @@ msgstr "マウスのテスト"
 msgid "Please test your mouse:"
 msgstr "マウスをテストしてください:"
 
-#: standalone/net_applet:51
+#: standalone/net_applet:47
 #, c-format
 msgid "Network is up on interface %s"
 msgstr "インターフェース %s のネットワークが動作"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:54
+#: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr ""
 "インターフェース %s のネットワークが落ちています。'ネットワークを設定'をク"
 "リックしてください"
 
-#: standalone/net_applet:60 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "%s に接続"
 
-#: standalone/net_applet:61 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "%s を切断"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:58
 #, c-format
 msgid "Monitor Network"
 msgstr "ネットワークをモニタ"
 
-#: standalone/net_applet:63
+#: standalone/net_applet:59
 #, c-format
 msgid "Manage wireless networks"
 msgstr "ワイヤレスネットワークを管理"
 
-#: standalone/net_applet:64
+#: standalone/net_applet:60
 #, c-format
 msgid "Configure Network"
 msgstr "ネットワークを設定"
 
-#: standalone/net_applet:66
+#: standalone/net_applet:62
 #, c-format
 msgid "Watched interface"
 msgstr "監視中のインターフェース"
 
-#: standalone/net_applet:75
+#: standalone/net_applet:71
 #, c-format
 msgid "Profiles"
 msgstr "プロファイル"
 
-#: standalone/net_applet:84
+#: standalone/net_applet:80
 #, c-format
 msgid "Get Online Help"
 msgstr "オンラインヘルプを見る"
 
-#: standalone/net_applet:262
+#: standalone/net_applet:160
+#, fuzzy, c-format
+msgid "Unable to select wireless network: %s"
+msgstr "ワイヤレスネットワークを管理"
+
+#: standalone/net_applet:279
 #, c-format
 msgid "Interactive intrusion detection"
 msgstr "インタラクティブ侵入検知"
 
-#: standalone/net_applet:267
+#: standalone/net_applet:284
 #, c-format
 msgid "Always launch on startup"
 msgstr "起動時に開始"
 
-#: standalone/net_applet:271
+#: standalone/net_applet:288
 #, c-format
 msgid "Actions"
 msgstr "動作"
 
 #: standalone/net_applet:330
+#, fuzzy, c-format
+msgid "Unable to contact daemon"
+msgstr "ミラー %s に接続できません"
+
+#: standalone/net_applet:349
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
 msgstr "%s がポートスキャン攻撃を試みました"
 
-#: standalone/net_applet:331
+#: standalone/net_applet:350
 #, c-format
 msgid "The %s service has been attacked by %s."
 msgstr "サービス %s が %s によって攻撃されました"
 
-#: standalone/net_applet:332
+#: standalone/net_applet:351
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
 msgstr "%s がパスワードクラック攻撃を試みました"
 
-#: standalone/net_applet:340
+#: standalone/net_applet:359
 #, c-format
 msgid "Active Firewall: intrusion detected"
 msgstr "アクティブなファイアウォール: 侵入を検知しました "
 
-#: standalone/net_applet:351
+#: standalone/net_applet:370
 #, c-format
 msgid "Do you want to blacklist the attacker?"
 msgstr "この攻撃者をブラックリストに載せますか？"
 
-#: standalone/net_applet:365
+#: standalone/net_applet:384
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr "常にブラックリストに載せる(今後は確認しない)"
 
-#: standalone/net_applet:368
+#: standalone/net_applet:387
 #, c-format
 msgid "Attack details"
 msgstr "攻撃の詳細"
 
-#: standalone/net_applet:372
+#: standalone/net_applet:391
 #, c-format
 msgid "Attack time: %s"
 msgstr "攻撃の時間: %s"
 
-#: standalone/net_applet:373
+#: standalone/net_applet:392
 #, c-format
 msgid "Network interface: %s"
 msgstr "ネットワークインターフェース: %s"
 
-#: standalone/net_applet:374
+#: standalone/net_applet:393
 #, c-format
 msgid "Attack type: %s"
 msgstr "攻撃のタイプ: %s"
 
-#: standalone/net_applet:375
+#: standalone/net_applet:394
 #, c-format
 msgid "Protocol: %s"
 msgstr "プロトコル: %s"
 
-#: standalone/net_applet:376
+#: standalone/net_applet:395
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr "攻撃者のIPアドレス: %s"
 
-#: standalone/net_applet:377
+#: standalone/net_applet:396
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr "攻撃者のhostname: %s"
 
-#: standalone/net_applet:378
+#: standalone/net_applet:397
 #, c-format
 msgid "Service attacked: %s"
 msgstr "攻撃されたサービス: %s"
 
-#: standalone/net_applet:379
+#: standalone/net_applet:398
 #, c-format
 msgid "Port attacked: %s"
 msgstr "攻撃されたポート: %s"
 
-#: standalone/net_applet:380
+#: standalone/net_applet:399
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr "ICMP攻撃のタイプ: %s"
@@ -25678,149 +25759,149 @@ msgstr "インターネット接続が設定されていません"
 msgid "Reading data of installed printers..."
 msgstr "インストールしたプリンタのデータを読み込み中.."
 
-#: standalone/printerdrake:116
+#: standalone/printerdrake:117
 #, c-format
 msgid "%s Printer Management Tool"
 msgstr "%s プリンタの管理ツール"
 
-#: standalone/printerdrake:130 standalone/printerdrake:131
-#: standalone/printerdrake:132 standalone/printerdrake:133
-#: standalone/printerdrake:141 standalone/printerdrake:142
-#: standalone/printerdrake:146
+#: standalone/printerdrake:131 standalone/printerdrake:132
+#: standalone/printerdrake:133 standalone/printerdrake:134
+#: standalone/printerdrake:142 standalone/printerdrake:143
+#: standalone/printerdrake:147
 #, c-format
 msgid "/_Actions"
 msgstr "/アクション(_A)"
 
-#: standalone/printerdrake:130 standalone/printerdrake:142
+#: standalone/printerdrake:131 standalone/printerdrake:143
 #, c-format
 msgid "/_Add Printer"
 msgstr "/プリンタを追加(_A)"
 
-#: standalone/printerdrake:131
+#: standalone/printerdrake:132
 #, c-format
 msgid "/Set as _Default"
 msgstr "/デフォルトに指定(_D)"
 
-#: standalone/printerdrake:132
+#: standalone/printerdrake:133
 #, c-format
 msgid "/_Edit"
 msgstr "/編集(_E)"
 
-#: standalone/printerdrake:133
+#: standalone/printerdrake:134
 #, c-format
 msgid "/_Delete"
 msgstr "/削除(_D)"
 
-#: standalone/printerdrake:134
+#: standalone/printerdrake:135
 #, c-format
 msgid "/_Expert mode"
 msgstr "/エキスパートモード(_E)"
 
-#: standalone/printerdrake:139
+#: standalone/printerdrake:140
 #, c-format
 msgid "/_Refresh"
 msgstr "/更新(_R)"
 
-#: standalone/printerdrake:146
+#: standalone/printerdrake:147
 #, c-format
 msgid "/_Configure CUPS"
 msgstr "/CUPSを設定(_C)"
 
-#: standalone/printerdrake:181
+#: standalone/printerdrake:182
 #, c-format
 msgid "Search:"
 msgstr "検索:"
 
-#: standalone/printerdrake:184
+#: standalone/printerdrake:185
 #, c-format
 msgid "Apply filter"
 msgstr "フィルタを適用"
 
-#: standalone/printerdrake:211 standalone/printerdrake:218
+#: standalone/printerdrake:212 standalone/printerdrake:219
 #, c-format
 msgid "Def."
 msgstr "Def."
 
-#: standalone/printerdrake:211 standalone/printerdrake:218
+#: standalone/printerdrake:212 standalone/printerdrake:219
 #, c-format
 msgid "Printer Name"
 msgstr "プリンタ名"
 
-#: standalone/printerdrake:211
+#: standalone/printerdrake:212
 #, c-format
 msgid "Connection Type"
 msgstr "接続の種類"
 
-#: standalone/printerdrake:218
+#: standalone/printerdrake:219
 #, c-format
 msgid "Server Name"
 msgstr "サーバ名"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:226
+#: standalone/printerdrake:227
 #, c-format
 msgid "Add Printer"
 msgstr "プリンタを追加"
 
-#: standalone/printerdrake:226
+#: standalone/printerdrake:227
 #, c-format
 msgid "Add a new printer to the system"
 msgstr "システムに新規プリンタを追加"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:229
+#: standalone/printerdrake:230
 #, c-format
 msgid "Set as default"
 msgstr "デフォルトに設定"
 
-#: standalone/printerdrake:229
+#: standalone/printerdrake:230
 #, c-format
 msgid "Set selected printer as the default printer"
 msgstr "選んだプリンタをデフォルトにする"
 
-#: standalone/printerdrake:232
+#: standalone/printerdrake:233
 #, c-format
 msgid "Edit selected printer"
 msgstr "選んだプリンタを編集"
 
-#: standalone/printerdrake:235
+#: standalone/printerdrake:236
 #, c-format
 msgid "Delete selected printer"
 msgstr "選んだプリンタを削除"
 
-#: standalone/printerdrake:238
+#: standalone/printerdrake:239
 #, c-format
 msgid "Refresh the list"
 msgstr "リストを更新"
 
 #. -PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:241
+#: standalone/printerdrake:242
 #, c-format
 msgid "Configure CUPS"
 msgstr "CUPSを設定"
 
-#: standalone/printerdrake:241
+#: standalone/printerdrake:242
 #, c-format
 msgid "Configure CUPS printing system"
 msgstr "CUPS印刷システムを設定"
 
-#: standalone/printerdrake:299 standalone/printerdrake:337
+#: standalone/printerdrake:300 standalone/printerdrake:338
 #, c-format
 msgid "Enabled"
 msgstr "有効"
 
-#: standalone/printerdrake:300 standalone/printerdrake:338
+#: standalone/printerdrake:301 standalone/printerdrake:339
 #, c-format
 msgid "Disabled"
 msgstr "無効"
 
-#: standalone/printerdrake:560
+#: standalone/printerdrake:561
 #, c-format
 msgid "Authors: "
 msgstr "作者: "
 
 #. -PO: here %s is the version number
-#: standalone/printerdrake:570
+#: standalone/printerdrake:571
 #, c-format
 msgid "Printer Management %s"
 msgstr "プリンタの管理 (%s)"
@@ -26430,47 +26511,47 @@ msgstr "更新をインストール"
 msgid "Exit install"
 msgstr "インストール終了"
 
-#: ugtk2.pm:908
+#: ugtk2.pm:916
 #, c-format
 msgid "Is this correct?"
 msgstr "正しいですか？"
 
-#: ugtk2.pm:968
+#: ugtk2.pm:976
 #, c-format
 msgid "No file chosen"
 msgstr "ファイルが選択されていません"
 
-#: ugtk2.pm:970
+#: ugtk2.pm:978
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "ファイルではなくディレクトリを選んでください"
 
-#: ugtk2.pm:972
+#: ugtk2.pm:980
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "ディレクトリではなくファイルを選んでください"
 
-#: ugtk2.pm:974
+#: ugtk2.pm:982
 #, c-format
 msgid "No such directory"
 msgstr "指定されたディレクトリは存在しません"
 
-#: ugtk2.pm:974
+#: ugtk2.pm:982
 #, c-format
 msgid "No such file"
 msgstr "指定されたファイルは存在しません"
 
-#: ugtk2.pm:1055
+#: ugtk2.pm:1063
 #, c-format
 msgid "Expand Tree"
 msgstr "ツリーを展開する"
 
-#: ugtk2.pm:1056
+#: ugtk2.pm:1064
 #, c-format
 msgid "Collapse Tree"
 msgstr "ツリーを折りたたむ"
 
-#: ugtk2.pm:1057
+#: ugtk2.pm:1065
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "フラット表示/グループ別表示を切り替える"
@@ -26489,6 +26570,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "インストール失敗"
+
+#~ msgid "allow real remote user access"
+#~ msgstr "実リモートユーザアクセスを許可"
 
 #~ msgid "Grub"
 #~ msgstr "GRUB"
@@ -26891,9 +26975,6 @@ msgstr "インストール失敗"
 
 #~ msgid "Interface %s"
 #~ msgstr "インターフェース %s"
-
-#~ msgid "Network interface"
-#~ msgstr "ネットワークインターフェース"
 
 #~ msgid "Network interface already configured"
 #~ msgstr "ネットワークインターフェースは設定済みです"

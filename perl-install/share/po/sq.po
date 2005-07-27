@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 9.2\n"
-"POT-Creation-Date: 2005-07-18 19:19+0200\n"
+"POT-Creation-Date: 2005-07-27 17:26+0200\n"
 "PO-Revision-Date: 2004-09-15 13:33+0200\n"
 "Last-Translator: Naim Daka <naim70@freesurf.ch>\n"
 "Language-Team: Albanian <LL@li.org>\n"
@@ -148,10 +148,10 @@ msgstr "Një moment ju lutemi, konfigurim i nivelit të sigurisë..."
 #: network/netconnect.pm:1070 network/netconnect.pm:1074
 #: network/netconnect.pm:1078 network/netconnect.pm:1186
 #: network/netconnect.pm:1191 network/netconnect.pm:1211
-#: network/netconnect.pm:1364 network/thirdparty.pm:267
-#: network/thirdparty.pm:274 network/thirdparty.pm:310
-#: network/thirdparty.pm:312 network/thirdparty.pm:333
-#: network/thirdparty.pm:357 printer/printerdrake.pm:244
+#: network/netconnect.pm:1364 network/thirdparty.pm:266
+#: network/thirdparty.pm:273 network/thirdparty.pm:309
+#: network/thirdparty.pm:311 network/thirdparty.pm:332
+#: network/thirdparty.pm:356 printer/printerdrake.pm:244
 #: printer/printerdrake.pm:251 printer/printerdrake.pm:276
 #: printer/printerdrake.pm:422 printer/printerdrake.pm:427
 #: printer/printerdrake.pm:440 printer/printerdrake.pm:450
@@ -192,14 +192,15 @@ msgstr "Një moment ju lutemi, konfigurim i nivelit të sigurisë..."
 #: standalone/drakgw:50 standalone/drakgw:188 standalone/drakgw:217
 #: standalone/drakgw:258 standalone/drakgw:292 standalone/drakgw:394
 #: standalone/drakhosts:246 standalone/drakhosts:253 standalone/drakhosts:260
-#: standalone/draknfs:623 standalone/draknfs:630 standalone/draknfs:637
+#: standalone/draknfs:597 standalone/draknfs:604 standalone/draknfs:611
 #: standalone/drakroam:41 standalone/draksplash:15 standalone/draksplash:159
 #: standalone/drakxtv:107 standalone/finish-install:49 standalone/logdrake:168
-#: standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59
-#: standalone/scannerdrake:202 standalone/scannerdrake:261
-#: standalone/scannerdrake:715 standalone/scannerdrake:726
-#: standalone/scannerdrake:865 standalone/scannerdrake:876
-#: standalone/scannerdrake:946 wizards.pm:95 wizards.pm:99 wizards.pm:121
+#: standalone/logdrake:437 standalone/logdrake:442 standalone/net_applet:160
+#: standalone/scannerdrake:59 standalone/scannerdrake:202
+#: standalone/scannerdrake:261 standalone/scannerdrake:715
+#: standalone/scannerdrake:726 standalone/scannerdrake:865
+#: standalone/scannerdrake:876 standalone/scannerdrake:946 wizards.pm:95
+#: wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
 msgstr "Gabim"
@@ -425,9 +426,9 @@ msgstr "Personalizim"
 #: Xconfig/main.pm:115 diskdrake/dav.pm:26 help.pm:14
 #: install_steps_interactive.pm:85 install_steps_interactive.pm:1319
 #: printer/printerdrake.pm:744 printer/printerdrake.pm:4401
-#: printer/printerdrake.pm:4853 standalone/drakhosts:266
-#: standalone/draksplash:85 standalone/logdrake:173 standalone/net_applet:85
-#: standalone/scannerdrake:477
+#: printer/printerdrake.pm:4853 standalone/drakhosts:263 standalone/drakids:69
+#: standalone/drakids:77 standalone/draksplash:85 standalone/logdrake:173
+#: standalone/net_applet:81 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Braktise"
@@ -596,7 +597,7 @@ msgstr "Kartelë grafike: %s"
 #: standalone/drakconnect:935 standalone/drakconnect:1031
 #: standalone/drakfont:574 standalone/drakfont:586 standalone/drakroam:392
 #: standalone/draksplash:169 standalone/drakups:212 standalone/net_monitor:340
-#: ugtk2.pm:409 ugtk2.pm:506 ugtk2.pm:908 ugtk2.pm:931
+#: ugtk2.pm:412 ugtk2.pm:510 ugtk2.pm:916 ugtk2.pm:939
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -613,8 +614,8 @@ msgstr "Ok"
 #: standalone/drakconnect:933 standalone/drakconnect:1030
 #: standalone/drakfont:586 standalone/drakfont:664 standalone/drakfont:741
 #: standalone/draksplash:169 standalone/drakups:219 standalone/logdrake:173
-#: standalone/net_monitor:339 ugtk2.pm:403 ugtk2.pm:504 ugtk2.pm:513
-#: ugtk2.pm:908
+#: standalone/net_monitor:339 ugtk2.pm:406 ugtk2.pm:508 ugtk2.pm:517
+#: ugtk2.pm:916
 #, c-format
 msgid "Cancel"
 msgstr "Anulo"
@@ -626,7 +627,7 @@ msgstr "Anulo"
 #: standalone/drakconnect:153 standalone/drakconnect:236
 #: standalone/drakfont:509 standalone/draknfs:208 standalone/drakperm:133
 #: standalone/draksec:336 standalone/draksec:338 standalone/draksec:356
-#: standalone/draksec:358 ugtk2.pm:1040 ugtk2.pm:1041
+#: standalone/draksec:358 ugtk2.pm:1048 ugtk2.pm:1049
 #, c-format
 msgid "Help"
 msgstr "Ndihmë"
@@ -772,7 +773,7 @@ msgstr ""
 
 #: any.pm:142 harddrake/sound.pm:190 interactive.pm:470 pkgs.pm:458
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:245
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:246
 #: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
@@ -1378,7 +1379,7 @@ msgstr "Nise userdrake"
 #: printer/printerdrake.pm:5162 standalone/drakTermServ:295
 #: standalone/drakbackup:4083 standalone/drakbug:126 standalone/drakfont:497
 #: standalone/drakroam:242 standalone/net_monitor:118
-#: standalone/printerdrake:547
+#: standalone/printerdrake:548
 #, c-format
 msgid "Close"
 msgstr "Mbylle"
@@ -2149,7 +2150,7 @@ msgstr "Tipi"
 
 #. -PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: diskdrake/hd_gtk.pm:359 diskdrake/interactive.pm:455
-#: standalone/drakperm:123 standalone/printerdrake:235
+#: standalone/drakperm:123 standalone/printerdrake:236
 #, c-format
 msgid "Delete"
 msgstr "Zhduke"
@@ -3431,7 +3432,7 @@ msgstr "CUPS"
 msgid "Scanner"
 msgstr "Skaneri"
 
-#: harddrake/data.pm:502 standalone/harddrake2:441
+#: harddrake/data.pm:502 standalone/harddrake2:442
 #, c-format
 msgid "Unknown/Others"
 msgstr "I pa njoftur/Tjerët"
@@ -3548,7 +3549,7 @@ msgstr "Telashe gjatë ndaljes"
 #: standalone/drakTermServ:1230 standalone/drakTermServ:1895
 #: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:125
 #: standalone/drakclock:224 standalone/drakconnect:969 standalone/drakups:27
-#: standalone/harddrake2:478 standalone/scannerdrake:51
+#: standalone/harddrake2:480 standalone/scannerdrake:51
 #: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
@@ -3680,8 +3681,8 @@ msgstr ""
 "\n"
 "Piloti aktual i kartëlës së zërit \"%s\" është \"%s\" "
 
-#: harddrake/v4l.pm:12 standalone/net_applet:67 standalone/net_applet:68
-#: standalone/net_applet:70
+#: harddrake/v4l.pm:12 standalone/net_applet:63 standalone/net_applet:64
+#: standalone/net_applet:66
 #, c-format
 msgid "Auto-detect"
 msgstr "Auto-zbulues"
@@ -3861,10 +3862,10 @@ msgstr "Emri i përdoruesit"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:233
 #: install_steps_gtk.pm:694 interactive.pm:432 interactive/newt.pm:321
-#: network/thirdparty.pm:323 printer/printerdrake.pm:3678
+#: network/thirdparty.pm:322 printer/printerdrake.pm:3678
 #: standalone/drakTermServ:383 standalone/drakbackup:3940
 #: standalone/drakbackup:4034 standalone/drakbackup:4051
-#: standalone/drakbackup:4069 ugtk2.pm:506
+#: standalone/drakbackup:4069 ugtk2.pm:510
 #, c-format
 msgid "Next"
 msgstr "Tjetri"
@@ -4183,16 +4184,16 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:904
 #: interactive.pm:157 modules/interactive.pm:71 standalone/drakbackup:2503
-#: standalone/draksec:54 standalone/harddrake2:308 standalone/net_applet:355
-#: ugtk2.pm:907 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:309 standalone/net_applet:374
+#: ugtk2.pm:915 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Jo"
 
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:904 interactive.pm:157
 #: modules/interactive.pm:71 printer/printerdrake.pm:743
-#: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:307
-#: standalone/net_applet:359 ugtk2.pm:907 wizards.pm:156
+#: standalone/drakbackup:2503 standalone/draksec:55 standalone/harddrake2:308
+#: standalone/net_applet:378 ugtk2.pm:915 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Po"
@@ -4812,7 +4813,7 @@ msgstr ""
 #: interactive/newt.pm:318 printer/printerdrake.pm:3676
 #: standalone/drakTermServ:362 standalone/drakbackup:3900
 #: standalone/drakbackup:3939 standalone/drakbackup:4050
-#: standalone/drakbackup:4065 ugtk2.pm:504
+#: standalone/drakbackup:4065 ugtk2.pm:508
 #, c-format
 msgid "Previous"
 msgstr "Mbrapa"
@@ -7475,7 +7476,7 @@ msgid "Choose a file"
 msgstr "Zgjedhe një skedare"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakbackup:1514
-#: standalone/drakfont:656 standalone/drakhosts:242 standalone/draknfs:619
+#: standalone/drakfont:656 standalone/drakhosts:242 standalone/draknfs:593
 #: standalone/drakroam:218 standalone/drakups:301 standalone/drakups:361
 #: standalone/drakups:381 standalone/drakvpn:319 standalone/drakvpn:680
 #, c-format
@@ -7483,13 +7484,13 @@ msgid "Add"
 msgstr "Shto"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:249
-#: standalone/draknfs:626
+#: standalone/draknfs:600
 #, c-format
 msgid "Modify"
 msgstr "Ndryshoje"
 
 #: interactive.pm:317 interactive/gtk.pm:505 standalone/drakhosts:256
-#: standalone/draknfs:633 standalone/drakroam:202 standalone/drakups:303
+#: standalone/draknfs:607 standalone/drakroam:202 standalone/drakups:303
 #: standalone/drakups:363 standalone/drakups:383 standalone/drakvpn:319
 #: standalone/drakvpn:680
 #, c-format
@@ -7501,7 +7502,7 @@ msgstr "Zhduke"
 msgid "Basic"
 msgstr "Bazik"
 
-#: interactive.pm:432 interactive/newt.pm:321 ugtk2.pm:506
+#: interactive.pm:432 interactive/newt.pm:321 ugtk2.pm:510
 #, c-format
 msgid "Finish"
 msgstr "Përfundo"
@@ -10065,29 +10066,29 @@ msgstr "Gjithçka (asnjë mur-i-zjarrtë)"
 msgid "Other ports"
 msgstr "Porta të tjera"
 
-#: network/isdn.pm:118 network/netconnect.pm:459 network/netconnect.pm:546
+#: network/isdn.pm:117 network/netconnect.pm:459 network/netconnect.pm:546
 #: network/netconnect.pm:549 network/netconnect.pm:692
 #: network/netconnect.pm:696
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr ""
 
-#: network/isdn.pm:161 network/netconnect.pm:391
+#: network/isdn.pm:160 network/netconnect.pm:391
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:161 network/netconnect.pm:391
+#: network/isdn.pm:160 network/netconnect.pm:391
 #, c-format
 msgid "I do not know"
 msgstr "Nuk e di"
 
-#: network/isdn.pm:162 network/netconnect.pm:391
+#: network/isdn.pm:161 network/netconnect.pm:391
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:163 network/netconnect.pm:391
+#: network/isdn.pm:162 network/netconnect.pm:391
 #, fuzzy, c-format
 msgid "USB"
 msgstr "LSB"
@@ -10176,7 +10177,7 @@ msgstr ""
 "Protokol për pjesën tjetër të botës\n"
 "Pa D-Kanal (vija të huazuara)"
 
-#: network/netconnect.pm:121 network/thirdparty.pm:185
+#: network/netconnect.pm:121 network/thirdparty.pm:184
 #, fuzzy, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch usb"
@@ -10524,7 +10525,7 @@ msgid "Which protocol do you want to use?"
 msgstr "Cilin protokol dëshironi ta përdorni?"
 
 #: network/netconnect.pm:444 standalone/drakconnect:109
-#: standalone/drakconnect:300 standalone/drakconnect:562
+#: standalone/drakconnect:300 standalone/drakconnect:562 standalone/drakids:25
 #: standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
@@ -11364,7 +11365,7 @@ msgstr ""
 "\t\teth0, ose ma kablo lidhëse eth1, \n"
 "\t\tippp+ për një lidhje isdn.\n"
 
-#: network/thirdparty.pm:197
+#: network/thirdparty.pm:196
 #, fuzzy, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr ""
@@ -11373,7 +11374,7 @@ msgstr ""
 "%s\n"
 "dhe kopjone mgmt.o në /usr/share/speedtouch"
 
-#: network/thirdparty.pm:206
+#: network/thirdparty.pm:205
 #, c-format
 msgid ""
 "The ECI Hi-Focus modem cannot be supported due to binary driver distribution "
@@ -11382,46 +11383,46 @@ msgid ""
 "You can find a driver on http://eciadsl.flashtux.org/"
 msgstr ""
 
-#: network/thirdparty.pm:267
+#: network/thirdparty.pm:266
 #, fuzzy, c-format
 msgid "Could not install the packages (%s)!"
 msgstr "Instalimi i pakove %s"
 
-#: network/thirdparty.pm:275
+#: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
 msgstr ""
 
-#: network/thirdparty.pm:276
+#: network/thirdparty.pm:275
 #, c-format
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
 
-#: network/thirdparty.pm:277
+#: network/thirdparty.pm:276
 #, c-format
 msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
 
-#: network/thirdparty.pm:310
+#: network/thirdparty.pm:309
 #, fuzzy, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
 msgstr "Zhdukni polisat në sistemin tuaj"
 
-#: network/thirdparty.pm:312
+#: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
 msgstr ""
 
-#: network/thirdparty.pm:322
+#: network/thirdparty.pm:321
 #, c-format
 msgid "Insert floppy"
 msgstr "Futeni disketën"
 
-#: network/thirdparty.pm:323
+#: network/thirdparty.pm:322
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -11430,12 +11431,12 @@ msgstr ""
 "Futni një disketë të formuar FAT në mjetin %s me %s në repertorin root dhe "
 "shtypni mbi %s"
 
-#: network/thirdparty.pm:333
+#: network/thirdparty.pm:332
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Gabim hyrës në floppy, i pa mudnur montimi mbi mjetin %s?"
 
-#: network/thirdparty.pm:343
+#: network/thirdparty.pm:342
 #, c-format
 msgid ""
 "You need the Alcatel microcode.\n"
@@ -11446,38 +11447,38 @@ msgstr ""
 "Ju mund ta pranoni atë tani nëpërmjes disketës floppy apo ndrajes windows,\n"
 "ose braktiseni atë dhe kryeni më vonë."
 
-#: network/thirdparty.pm:347 network/thirdparty.pm:349
+#: network/thirdparty.pm:346 network/thirdparty.pm:348
 #, c-format
 msgid "Use a floppy"
 msgstr "Përdore një disketë floppy"
 
-#: network/thirdparty.pm:347
+#: network/thirdparty.pm:346
 #, c-format
 msgid "Use my Windows partition"
 msgstr "Përdore ndrajen time Windows"
 
-#: network/thirdparty.pm:357
+#: network/thirdparty.pm:356
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Kopjimi i Firmware dështoi, skedarje %s nuk është prezente"
 
-#: network/thirdparty.pm:362 standalone/drakautoinst:250
+#: network/thirdparty.pm:361 standalone/drakautoinst:250
 #: standalone/drakvpn:888 standalone/scannerdrake:405
 #, c-format
 msgid "Congratulations!"
 msgstr "Urime!"
 
-#: network/thirdparty.pm:362
+#: network/thirdparty.pm:361
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Kopjim i sukseshëm i Firmware"
 
-#: network/thirdparty.pm:427
+#: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
 msgstr ""
 
-#: network/thirdparty.pm:437
+#: network/thirdparty.pm:436
 #, fuzzy, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "Një moment ju lutemi, konfigurim i nivelit të sigurisë..."
@@ -11571,7 +11572,7 @@ msgstr "(mbi %s)"
 msgid "(on this machine)"
 msgstr "(mbi këtë makinë)"
 
-#: printer/cups.pm:115 standalone/printerdrake:187
+#: printer/cups.pm:115 standalone/printerdrake:188
 #, c-format
 msgid "Configured on other machines"
 msgstr "Konfigurim në makina tjera"
@@ -11697,7 +11698,7 @@ msgstr "rekomandohet"
 msgid "Unknown model"
 msgstr "Model i pa njoftur"
 
-#: printer/main.pm:354 standalone/printerdrake:186
+#: printer/main.pm:354 standalone/printerdrake:187
 #, c-format
 msgid "Configured on this machine"
 msgstr "Konfigurohet në këtë makinë"
@@ -12270,7 +12271,7 @@ msgstr "Ftuesi/rrjeti adresa IP mungon."
 #: printer/printerdrake.pm:4562 printer/printerdrake.pm:4571
 #: printer/printerdrake.pm:4586 printer/printerdrake.pm:4784
 #: printer/printerdrake.pm:5236 printer/printerdrake.pm:5313
-#: standalone/printerdrake:67 standalone/printerdrake:554
+#: standalone/printerdrake:67 standalone/printerdrake:555
 #, c-format
 msgid "Printerdrake"
 msgstr "Printerdrake"
@@ -12990,7 +12991,7 @@ msgstr "Emri i stampuesit të largët mungonë!"
 #: standalone/drakTermServ:1554 standalone/drakTermServ:1563
 #: standalone/drakTermServ:1575 standalone/drakbackup:499
 #: standalone/drakbackup:605 standalone/drakbackup:640
-#: standalone/drakbackup:741 standalone/drakroam:390 standalone/harddrake2:258
+#: standalone/drakbackup:741 standalone/drakroam:390 standalone/harddrake2:259
 #, c-format
 msgid "Information"
 msgstr "Informacion"
@@ -13487,14 +13488,14 @@ msgid "Name of printer"
 msgstr "Emri i stampuesit"
 
 #: printer/printerdrake.pm:2791 standalone/drakconnect:592
-#: standalone/harddrake2:39 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: standalone/harddrake2:39 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "Description"
 msgstr "Përshkrimi"
 
-#: printer/printerdrake.pm:2792 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: printer/printerdrake.pm:2792 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "Location"
 msgstr "Lokalizimi"
@@ -15982,7 +15983,7 @@ msgstr ""
 "Asnjë informacion mbi\n"
 "këtë servis, kemi ndjesë."
 
-#: services.pm:224 ugtk2.pm:1018
+#: services.pm:224 ugtk2.pm:1026
 #, c-format
 msgid "Info"
 msgstr "Informacion"
@@ -18314,8 +18315,8 @@ msgstr "Ndryshimi i konfigurimit - rinise clusternfs/dhcpd?"
 
 #: standalone/drakautoinst:38 standalone/drakhosts:118
 #: standalone/drakhosts:125 standalone/draknfs:86 standalone/draknfs:107
-#: standalone/draknfs:460 standalone/draknfs:462 standalone/draknfs:552
-#: standalone/draknfs:559
+#: standalone/draknfs:434 standalone/draknfs:436 standalone/draknfs:526
+#: standalone/draknfs:533
 #, c-format
 msgid "Error!"
 msgstr "Gabim!"
@@ -19975,7 +19976,7 @@ msgstr "Ndërtoje një Regjistrim"
 msgid "Restore"
 msgstr "Riparo"
 
-#: standalone/drakbackup:4095 standalone/harddrake2:478
+#: standalone/drakbackup:4095 standalone/harddrake2:480
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Pakot e radhitura duhet të instalohen:\n"
@@ -20066,8 +20067,8 @@ msgstr "Drakbackup"
 
 #: standalone/drakboot:76 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
-#: standalone/printerdrake:138 standalone/printerdrake:139
-#: standalone/printerdrake:140
+#: standalone/printerdrake:139 standalone/printerdrake:140
+#: standalone/printerdrake:141
 #, c-format
 msgid "/_File"
 msgstr "/_Skedare"
@@ -20078,7 +20079,7 @@ msgid "/File/_Quit"
 msgstr "/Skedare/_Braktise"
 
 #: standalone/drakboot:77 standalone/harddrake2:192 standalone/logdrake:75
-#: standalone/printerdrake:140
+#: standalone/printerdrake:141
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -20406,8 +20407,8 @@ msgstr "Një moment ju lutemi"
 msgid "Interface"
 msgstr "Interfaci"
 
-#: standalone/drakconnect:109 standalone/printerdrake:211
-#: standalone/printerdrake:218
+#: standalone/drakconnect:109 standalone/printerdrake:212
+#: standalone/printerdrake:219
 #, c-format
 msgid "State"
 msgstr "Gjendje"
@@ -20433,7 +20434,7 @@ msgid "Configure Local Area Network..."
 msgstr "Konfiguroni Rrjetin Lokal..."
 
 #: standalone/drakconnect:155 standalone/drakconnect:237
-#: standalone/drakconnect:241 standalone/drakhosts:263
+#: standalone/drakconnect:241
 #, c-format
 msgid "Apply"
 msgstr "Aplikoje"
@@ -20668,7 +20669,7 @@ msgstr ""
 "Ky interfac nuk është i konfiguruar ende.\n"
 "Nise asistentin konfigurues në dritaren kryesore"
 
-#: standalone/drakconnect:971 standalone/net_applet:55
+#: standalone/drakconnect:971 standalone/net_applet:51
 #, fuzzy, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -20678,7 +20679,7 @@ msgstr ""
 "Nise asistentin konfigurues në dritaren kryesore"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:972 standalone/drakroam:42 standalone/net_applet:56
+#: standalone/drakconnect:972 standalone/drakroam:42 standalone/net_applet:52
 #, fuzzy, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Zgjedheni kartelën e rrjetit"
@@ -21451,6 +21452,76 @@ msgstr ""
 msgid "Failed to remove host."
 msgstr ""
 
+#: standalone/drakids:20
+#, fuzzy, c-format
+msgid "Date"
+msgstr "Gjendje"
+
+#: standalone/drakids:21 standalone/drakids:37
+#, fuzzy, c-format
+msgid "Attacker"
+msgstr "Asnjë detaj"
+
+#: standalone/drakids:22
+#, fuzzy, c-format
+msgid "Attack type"
+msgstr "tipi: %s"
+
+#: standalone/drakids:23
+#, fuzzy, c-format
+msgid "Service"
+msgstr "Serviset"
+
+#: standalone/drakids:24
+#, c-format
+msgid "Network interface"
+msgstr "Interfac rrjeti"
+
+#: standalone/drakids:60 standalone/net_applet:330
+#, fuzzy, c-format
+msgid "Active Firewall"
+msgstr "Mur i Zjarrt"
+
+#: standalone/drakids:63
+#, c-format
+msgid "Blacklist"
+msgstr ""
+
+#: standalone/drakids:67
+#, fuzzy, c-format
+msgid "Remove from blacklist"
+msgstr "Zhduke nga LVM"
+
+#: standalone/drakids:68
+#, c-format
+msgid "Move to whitelist"
+msgstr ""
+
+#: standalone/drakids:72
+#, c-format
+msgid "Whitelist"
+msgstr ""
+
+#: standalone/drakids:76
+#, fuzzy, c-format
+msgid "Remove from whitelist"
+msgstr "Zhduke nga LVM"
+
+#: standalone/drakids:125
+#, fuzzy, c-format
+msgid "Port scanning"
+msgstr "Asnjë ndarje"
+
+#: standalone/drakids:126
+#, fuzzy, c-format
+msgid "Service attack"
+msgstr "Lloji i shërbimi_t:"
+
+#: standalone/drakids:127
+#, fuzzy, c-format
+msgid "Password cracking"
+msgstr "Parulla (përsëri)"
+
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
@@ -21463,7 +21534,7 @@ msgstr ""
 
 #: standalone/draknfs:45
 #, c-format
-msgid "allow real remote user access"
+msgid "No user UID mapping"
 msgstr ""
 
 #: standalone/draknfs:46
@@ -21592,112 +21663,112 @@ msgid ""
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
 
-#: standalone/draknfs:387
-#, c-format
-msgid "Help Adcanced options"
-msgstr ""
+#: standalone/draknfs:372
+#, fuzzy, c-format
+msgid "Advanced Options Help"
+msgstr "Konfigurimi me Përparsi"
 
-#: standalone/draknfs:399
+#: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
 msgstr ""
 
-#: standalone/draknfs:401
+#: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
 msgstr ""
 
-#: standalone/draknfs:404
+#: standalone/draknfs:388
 #, c-format
 msgid "Host access"
 msgstr ""
 
-#: standalone/draknfs:406
+#: standalone/draknfs:390
 #, c-format
 msgid "Access:"
 msgstr ""
 
-#: standalone/draknfs:406
+#: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
 msgstr ""
 
-#: standalone/draknfs:409
+#: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
 msgstr ""
 
-#: standalone/draknfs:411
+#: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
 msgstr ""
 
-#: standalone/draknfs:411
+#: standalone/draknfs:395
 #, c-format
 msgid "Help User ID"
 msgstr ""
 
-#: standalone/draknfs:412
+#: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
 msgstr ""
 
-#: standalone/draknfs:413
+#: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
 msgstr ""
 
-#: standalone/draknfs:460 standalone/draknfs:552
+#: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
 msgid "Please enter a directory to share."
 msgstr ""
 
-#: standalone/draknfs:462
+#: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
 msgstr ""
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Share Directory"
 msgstr ""
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Hosts Wildcard"
 msgstr ""
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "General Options"
 msgstr ""
 
-#: standalone/draknfs:540
+#: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
 msgstr ""
 
-#: standalone/draknfs:559
+#: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
 msgstr ""
 
-#: standalone/draknfs:614
+#: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
 msgstr ""
 
-#: standalone/draknfs:623
+#: standalone/draknfs:597
 #, c-format
 msgid "Failed to add NFS share."
 msgstr ""
 
-#: standalone/draknfs:630
+#: standalone/draknfs:604
 #, c-format
 msgid "Failed to Modify NFS share."
 msgstr ""
 
-#: standalone/draknfs:637
+#: standalone/draknfs:611
 #, c-format
 msgid "Failed to remove an NFS share."
 msgstr ""
@@ -21811,7 +21882,7 @@ msgstr "Zhduki rregullat e zgjedhura"
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/drakperm:124 standalone/drakups:302 standalone/drakups:362
 #: standalone/drakups:382 standalone/drakvpn:319 standalone/drakvpn:680
-#: standalone/printerdrake:232
+#: standalone/printerdrake:233
 #, c-format
 msgid "Edit"
 msgstr "Botoje"
@@ -22043,7 +22114,7 @@ msgid "Disconnect"
 msgstr "Shkëpute..."
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:241 standalone/printerdrake:238
+#: standalone/drakroam:241 standalone/printerdrake:239
 #, c-format
 msgid "Refresh"
 msgstr "Rifreskoje"
@@ -22432,7 +22503,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Auto-zbulues"
 
-#: standalone/drakups:101 standalone/harddrake2:245
+#: standalone/drakups:101 standalone/harddrake2:246
 #, c-format
 msgid "Detection in progress"
 msgstr "Zbulimi në vazhdim e sipër"
@@ -23993,7 +24064,7 @@ msgid "class of hardware device"
 msgstr "klasë e materialit hardver"
 
 #: standalone/harddrake2:51 standalone/harddrake2:83
-#: standalone/printerdrake:211
+#: standalone/printerdrake:212
 #, c-format
 msgid "Model"
 msgstr "Modeli"
@@ -24458,7 +24529,7 @@ msgstr ""
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:318
+#: standalone/harddrake2:319
 #, fuzzy, c-format
 msgid "Identification"
 msgstr "Identifikues i Bus"
@@ -24500,14 +24571,14 @@ msgstr ""
 
 #. -PO: please keep all "/" characters !!!
 #: standalone/harddrake2:176 standalone/logdrake:76
-#: standalone/printerdrake:134 standalone/printerdrake:147
+#: standalone/printerdrake:135 standalone/printerdrake:148
 #, c-format
 msgid "/_Options"
 msgstr "/_Opcionet"
 
 #: standalone/harddrake2:177 standalone/harddrake2:203 standalone/logdrake:78
-#: standalone/printerdrake:159 standalone/printerdrake:161
-#: standalone/printerdrake:164 standalone/printerdrake:166
+#: standalone/printerdrake:160 standalone/printerdrake:162
+#: standalone/printerdrake:165 standalone/printerdrake:167
 #, c-format
 msgid "/_Help"
 msgstr "/_Ndihmë"
@@ -24537,7 +24608,7 @@ msgstr ""
 msgid "/_Upload the hardware list"
 msgstr ""
 
-#: standalone/harddrake2:192 standalone/printerdrake:140
+#: standalone/harddrake2:192 standalone/printerdrake:141
 #, c-format
 msgid "/_Quit"
 msgstr "/_Braktise"
@@ -24561,12 +24632,12 @@ msgstr ""
 "Mbasi që ta zgjedhni një mjet, ju keni mundësi ti shiqoni zonat e "
 "shpjegimeve të paraqitura në kallëpin e caktuar (\"Informacion\")"
 
-#: standalone/harddrake2:222 standalone/printerdrake:164
+#: standalone/harddrake2:222 standalone/printerdrake:165
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Raport Bug(i)"
 
-#: standalone/harddrake2:224 standalone/printerdrake:166
+#: standalone/harddrake2:224 standalone/printerdrake:167
 #, c-format
 msgid "/_About..."
 msgstr "/_Në lidhje me..."
@@ -24592,44 +24663,44 @@ msgstr ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
-#: standalone/harddrake2:241
+#: standalone/harddrake2:242
 #, fuzzy, c-format
 msgid "Harddrake2"
 msgstr "HardDrake"
 
-#: standalone/harddrake2:255
+#: standalone/harddrake2:256
 #, c-format
 msgid "Detected hardware"
 msgstr "Materiali i zbuluar"
 
-#: standalone/harddrake2:260
+#: standalone/harddrake2:261
 #, c-format
 msgid "Configure module"
 msgstr "Konfigurim i modulit"
 
-#: standalone/harddrake2:267
+#: standalone/harddrake2:268
 #, c-format
 msgid "Run config tool"
 msgstr "Nise veglën për konfigurim"
 
-#: standalone/harddrake2:305 standalone/net_monitor:103
+#: standalone/harddrake2:306 standalone/net_monitor:103
 #: standalone/net_monitor:104 standalone/net_monitor:109
 #, c-format
 msgid "unknown"
 msgstr "i pa njoftur"
 
-#: standalone/harddrake2:306 standalone/printerdrake:298
-#: standalone/printerdrake:336
+#: standalone/harddrake2:307 standalone/printerdrake:299
+#: standalone/printerdrake:337
 #, c-format
 msgid "Unknown"
 msgstr "I pa njoftur"
 
-#: standalone/harddrake2:326
+#: standalone/harddrake2:327
 #, c-format
 msgid "Misc"
 msgstr "Të Ndryshme"
 
-#: standalone/harddrake2:341
+#: standalone/harddrake2:342
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
@@ -24637,42 +24708,42 @@ msgstr ""
 "Kliko në një mjet në anën e majtë të drurit, në urdhër për të paraqitur "
 "informacionin e tij këtu."
 
-#: standalone/harddrake2:393
+#: standalone/harddrake2:394
 #, c-format
 msgid "secondary"
 msgstr "sekondar"
 
-#: standalone/harddrake2:393
+#: standalone/harddrake2:394
 #, c-format
 msgid "primary"
 msgstr "primar"
 
-#: standalone/harddrake2:397
+#: standalone/harddrake2:398
 #, c-format
 msgid "burner"
 msgstr "gdhendës"
 
-#: standalone/harddrake2:397
+#: standalone/harddrake2:398
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:543 standalone/harddrake2:546
+#: standalone/harddrake2:546 standalone/harddrake2:549
 #, c-format
 msgid "Upload the hardware list"
 msgstr ""
 
-#: standalone/harddrake2:548
+#: standalone/harddrake2:551
 #, fuzzy, c-format
 msgid "Account:"
 msgstr "Monto"
 
-#: standalone/harddrake2:549
+#: standalone/harddrake2:552
 #, c-format
 msgid "Password:"
 msgstr "Shifra:"
 
-#: standalone/harddrake2:550
+#: standalone/harddrake2:553
 #, c-format
 msgid "Hostname:"
 msgstr "Emri ftues:"
@@ -24801,7 +24872,7 @@ msgstr "hulumto"
 msgid "A tool to monitor your logs"
 msgstr "Një vegël për të shiquar skedaret zhurnale"
 
-#: standalone/logdrake:128 standalone/net_applet:276 standalone/net_monitor:94
+#: standalone/logdrake:128 standalone/net_applet:293 standalone/net_monitor:94
 #, c-format
 msgid "Settings"
 msgstr "Rregullimet"
@@ -24997,148 +25068,158 @@ msgstr "Test i minit"
 msgid "Please test your mouse:"
 msgstr "Ju lutemi testone minin tuaj:"
 
-#: standalone/net_applet:51
+#: standalone/net_applet:47
 #, fuzzy, c-format
 msgid "Network is up on interface %s"
 msgstr "Interfac rrjeti"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:54
+#: standalone/net_applet:50
 #, fuzzy, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr "Funksionimet e rrjetit nuk janë konfiguruar"
 
-#: standalone/net_applet:60 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "Lidhja e %s"
 
-#: standalone/net_applet:61 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "Shkëputja e %s"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:58
 #, fuzzy, c-format
 msgid "Monitor Network"
 msgstr "Riparo Via Rrjet"
 
-#: standalone/net_applet:63
+#: standalone/net_applet:59
 #, c-format
 msgid "Manage wireless networks"
 msgstr ""
 
-#: standalone/net_applet:64
+#: standalone/net_applet:60
 #, fuzzy, c-format
 msgid "Configure Network"
 msgstr "Konfigurim i rrjetin"
 
-#: standalone/net_applet:66
+#: standalone/net_applet:62
 #, fuzzy, c-format
 msgid "Watched interface"
 msgstr "Interfaci"
 
-#: standalone/net_applet:75
+#: standalone/net_applet:71
 #, c-format
 msgid "Profiles"
 msgstr "Profilet"
 
-#: standalone/net_applet:84
+#: standalone/net_applet:80
 #, c-format
 msgid "Get Online Help"
 msgstr ""
 
-#: standalone/net_applet:262
+#: standalone/net_applet:160
+#, fuzzy, c-format
+msgid "Unable to select wireless network: %s"
+msgstr "Nuk mundur të kontaktohet pasqyrja %s"
+
+#: standalone/net_applet:279
 #, fuzzy, c-format
 msgid "Interactive intrusion detection"
 msgstr "Grafues i funksioneve bashkëvepruese"
 
-#: standalone/net_applet:267
+#: standalone/net_applet:284
 #, c-format
 msgid "Always launch on startup"
 msgstr ""
 
-#: standalone/net_applet:271
+#: standalone/net_applet:288
 #, c-format
 msgid "Actions"
 msgstr ""
 
 #: standalone/net_applet:330
+#, fuzzy, c-format
+msgid "Unable to contact daemon"
+msgstr "Nuk mundur të kontaktohet pasqyrja %s"
+
+#: standalone/net_applet:349
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
 msgstr ""
 
-#: standalone/net_applet:331
+#: standalone/net_applet:350
 #, fuzzy, c-format
 msgid "The %s service has been attacked by %s."
 msgstr "Kjo ngjarje është ndryshuar."
 
-#: standalone/net_applet:332
+#: standalone/net_applet:351
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
 msgstr ""
 
-#: standalone/net_applet:340
+#: standalone/net_applet:359
 #, fuzzy, c-format
 msgid "Active Firewall: intrusion detected"
 msgstr "Zbulimi i Konfigurimi të Murit të Zjarrtë"
 
-#: standalone/net_applet:351
+#: standalone/net_applet:370
 #, fuzzy, c-format
 msgid "Do you want to blacklist the attacker?"
 msgstr "Dëshironi ta mbyllni lojën?"
 
-#: standalone/net_applet:365
+#: standalone/net_applet:384
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr ""
 
-#: standalone/net_applet:368
+#: standalone/net_applet:387
 #, fuzzy, c-format
 msgid "Attack details"
 msgstr "Asnjë detaj"
 
-#: standalone/net_applet:372
+#: standalone/net_applet:391
 #, fuzzy, c-format
 msgid "Attack time: %s"
 msgstr "Veprimi:%s"
 
-#: standalone/net_applet:373
+#: standalone/net_applet:392
 #, c-format
 msgid "Network interface: %s"
 msgstr "Interfac rrjeti: %s"
 
-#: standalone/net_applet:374
+#: standalone/net_applet:393
 #, fuzzy, c-format
 msgid "Attack type: %s"
 msgstr "tipi: %s"
 
-#: standalone/net_applet:375
+#: standalone/net_applet:394
 #, c-format
 msgid "Protocol: %s"
 msgstr "Protokoli: %s"
 
-#: standalone/net_applet:376
+#: standalone/net_applet:395
 #, fuzzy, c-format
 msgid "Attacker IP address: %s"
 msgstr "Adresa statike IP"
 
-#: standalone/net_applet:377
+#: standalone/net_applet:396
 #, fuzzy, c-format
 msgid "Attacker hostname: %s"
 msgstr "Gabim gjatë marrjes së emrit të host: %s\n"
 
-#: standalone/net_applet:378
+#: standalone/net_applet:397
 #, fuzzy, c-format
 msgid "Service attacked: %s"
 msgstr "Lloji i shërbimi_t:"
 
-#: standalone/net_applet:379
+#: standalone/net_applet:398
 #, fuzzy, c-format
 msgid "Port attacked: %s"
 msgstr "Porta: %s"
 
-#: standalone/net_applet:380
+#: standalone/net_applet:399
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr ""
@@ -25272,149 +25353,149 @@ msgstr "Konfigurimi i lidhjes internet"
 msgid "Reading data of installed printers..."
 msgstr "Leximi i të dhënave të stampuesve të instaluar..."
 
-#: standalone/printerdrake:116
+#: standalone/printerdrake:117
 #, fuzzy, c-format
 msgid "%s Printer Management Tool"
 msgstr "Menagjer i Stampuesit \n"
 
-#: standalone/printerdrake:130 standalone/printerdrake:131
-#: standalone/printerdrake:132 standalone/printerdrake:133
-#: standalone/printerdrake:141 standalone/printerdrake:142
-#: standalone/printerdrake:146
+#: standalone/printerdrake:131 standalone/printerdrake:132
+#: standalone/printerdrake:133 standalone/printerdrake:134
+#: standalone/printerdrake:142 standalone/printerdrake:143
+#: standalone/printerdrake:147
 #, c-format
 msgid "/_Actions"
 msgstr "/_Akcionet"
 
-#: standalone/printerdrake:130 standalone/printerdrake:142
+#: standalone/printerdrake:131 standalone/printerdrake:143
 #, c-format
 msgid "/_Add Printer"
 msgstr "/_Shtoje një Stampues"
 
-#: standalone/printerdrake:131
+#: standalone/printerdrake:132
 #, c-format
 msgid "/Set as _Default"
 msgstr "/Paraqite sikur me _Marrëveshje"
 
-#: standalone/printerdrake:132
+#: standalone/printerdrake:133
 #, c-format
 msgid "/_Edit"
 msgstr "/_Boto"
 
-#: standalone/printerdrake:133
+#: standalone/printerdrake:134
 #, c-format
 msgid "/_Delete"
 msgstr "/_Zhduke"
 
-#: standalone/printerdrake:134
+#: standalone/printerdrake:135
 #, c-format
 msgid "/_Expert mode"
 msgstr "/_Modë ekspert"
 
-#: standalone/printerdrake:139
+#: standalone/printerdrake:140
 #, c-format
 msgid "/_Refresh"
 msgstr "/_Rifreskoje"
 
-#: standalone/printerdrake:146
+#: standalone/printerdrake:147
 #, c-format
 msgid "/_Configure CUPS"
 msgstr "/_Konfigurim i CUPS"
 
-#: standalone/printerdrake:181
+#: standalone/printerdrake:182
 #, c-format
 msgid "Search:"
 msgstr "Hulumto:"
 
-#: standalone/printerdrake:184
+#: standalone/printerdrake:185
 #, c-format
 msgid "Apply filter"
 msgstr "Aplikoje filterin"
 
-#: standalone/printerdrake:211 standalone/printerdrake:218
+#: standalone/printerdrake:212 standalone/printerdrake:219
 #, c-format
 msgid "Def."
 msgstr "Përcaktim"
 
-#: standalone/printerdrake:211 standalone/printerdrake:218
+#: standalone/printerdrake:212 standalone/printerdrake:219
 #, c-format
 msgid "Printer Name"
 msgstr "Stampoje Emrin"
 
-#: standalone/printerdrake:211
+#: standalone/printerdrake:212
 #, c-format
 msgid "Connection Type"
 msgstr "Tip i Lidhjes"
 
-#: standalone/printerdrake:218
+#: standalone/printerdrake:219
 #, c-format
 msgid "Server Name"
 msgstr "Emri i Serverit"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:226
+#: standalone/printerdrake:227
 #, c-format
 msgid "Add Printer"
 msgstr "Shtoje një Stampues"
 
-#: standalone/printerdrake:226
+#: standalone/printerdrake:227
 #, c-format
 msgid "Add a new printer to the system"
 msgstr "Shtoje një stampues të ri në sistem"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:229
+#: standalone/printerdrake:230
 #, c-format
 msgid "Set as default"
 msgstr "Paraqite sikur me marrëveshje"
 
-#: standalone/printerdrake:229
+#: standalone/printerdrake:230
 #, c-format
 msgid "Set selected printer as the default printer"
 msgstr "Paraqite stampuesin e zgjedhur sikur me marrëveshje"
 
-#: standalone/printerdrake:232
+#: standalone/printerdrake:233
 #, c-format
 msgid "Edit selected printer"
 msgstr "Botoje stampuesin e zgjedhur"
 
-#: standalone/printerdrake:235
+#: standalone/printerdrake:236
 #, c-format
 msgid "Delete selected printer"
 msgstr "Zhduke stampuesin e zgjedhur"
 
-#: standalone/printerdrake:238
+#: standalone/printerdrake:239
 #, c-format
 msgid "Refresh the list"
 msgstr "Rifreskoje listën"
 
 #. -PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:241
+#: standalone/printerdrake:242
 #, c-format
 msgid "Configure CUPS"
 msgstr "Konfigurim i CUPS"
 
-#: standalone/printerdrake:241
+#: standalone/printerdrake:242
 #, c-format
 msgid "Configure CUPS printing system"
 msgstr "Konfiguroje sistemin CUPS stampues"
 
-#: standalone/printerdrake:299 standalone/printerdrake:337
+#: standalone/printerdrake:300 standalone/printerdrake:338
 #, c-format
 msgid "Enabled"
 msgstr "Aktiv"
 
-#: standalone/printerdrake:300 standalone/printerdrake:338
+#: standalone/printerdrake:301 standalone/printerdrake:339
 #, c-format
 msgid "Disabled"
 msgstr "Jo aktiv"
 
-#: standalone/printerdrake:560
+#: standalone/printerdrake:561
 #, c-format
 msgid "Authors: "
 msgstr "Autorët: "
 
 #. -PO: here %s is the version number
-#: standalone/printerdrake:570
+#: standalone/printerdrake:571
 #, fuzzy, c-format
 msgid "Printer Management %s"
 msgstr "Menagjer i Stampuesit \n"
@@ -25999,47 +26080,47 @@ msgstr "Instaloi azhurnimet"
 msgid "Exit install"
 msgstr "Fundi i instalimit"
 
-#: ugtk2.pm:908
+#: ugtk2.pm:916
 #, c-format
 msgid "Is this correct?"
 msgstr "Është kjo korrekt?"
 
-#: ugtk2.pm:968
+#: ugtk2.pm:976
 #, fuzzy, c-format
 msgid "No file chosen"
 msgstr "zgjedhësi i file"
 
-#: ugtk2.pm:970
+#: ugtk2.pm:978
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr ""
 
-#: ugtk2.pm:972
+#: ugtk2.pm:980
 #, fuzzy, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Emri '/' mund të jetë vetëm një directory, jo një kyç"
 
-#: ugtk2.pm:974
+#: ugtk2.pm:982
 #, fuzzy, c-format
 msgid "No such directory"
 msgstr "Nuk është një directory"
 
-#: ugtk2.pm:974
+#: ugtk2.pm:982
 #, fuzzy, c-format
 msgid "No such file"
 msgstr "File `%s' nuk u gjet\n"
 
-#: ugtk2.pm:1055
+#: ugtk2.pm:1063
 #, c-format
 msgid "Expand Tree"
 msgstr "Qeverise Drurin Gjinealogjik"
 
-#: ugtk2.pm:1056
+#: ugtk2.pm:1064
 #, c-format
 msgid "Collapse Tree"
 msgstr "Zvogëloje Drurin Gjinealogjik"
 
-#: ugtk2.pm:1057
+#: ugtk2.pm:1065
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Kalo mes radhitjes alfabetike dhe grupore"
@@ -26316,9 +26397,6 @@ msgstr "Instalimi dështio"
 
 #~ msgid "Interface %s"
 #~ msgstr "Interfaci %s"
-
-#~ msgid "Network interface"
-#~ msgstr "Interfac rrjeti"
 
 #~ msgid "Network interface already configured"
 #~ msgstr "Interfaci i Rrjetit është veçse i konfiguraur"
