@@ -840,6 +840,7 @@ my %charset2kde_font = (
   'utf_vi' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
   #- script based
   'utf_armn' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
+  'utf_cyr2' => [ "Nimbus Sans L,10", "Monospace,10" ],
   'utf_beng' => [ "Mukti Narrow,14", "Mitra Mono,12", "Mukti Narrow,14" ],
   'utf_deva' => [ "Raghindi,14", ],
   'utf_ethi' => [ "GF Zemen Unicode,15" ],
