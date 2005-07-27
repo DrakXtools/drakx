@@ -600,6 +600,66 @@ N("Examples for correct IPs:\n") .
     return $retvalue;
 }
 
+sub config_auto_admin {
+    my ($printer, $in) = @_;
+
+    local $::isWizard = 0;
+    local $::isEmbedded = 0;
+
+    # Read current configuration
+    printer::main::get_auto_admin($printer);
+
+    # Configuration dialog
+    my $waitforgui =
+	N("Allow pop-up windows, package installation possible");
+    my $nogui =
+	N("No pop-up windows, package installation not possible");
+    my $autoqueuesetupmode =
+	$printer->{autoqueuesetupgui} ? $waitforgui : $nogui;
+    if ($in->ask_from_
+	({ 
+	    title => N("Printer auto administration"),
+	    messages => N("Here you can configure printer administration tasks which should be done automatically."),
+	     },
+	     [
+	      { val => N("Do automatic configuration of new printers") },
+	      { text => N("when a USB printer is connected and turned on"), 
+		type => 'bool',
+		val => \$printer->{autoqueuesetuponnewprinter} },
+	      { text => N("when the printing system is started"), 
+		type => 'bool',
+		val => \$printer->{autoqueuesetuponspoolerstart} },
+	      { text => N("when Printerdrake is started"), 
+		type => 'bool',
+		val => \$printer->{autoqueuesetuponstart} },
+	      { val => N("Mode for automatic printer setup:") },
+	      { val => \$autoqueuesetupmode,
+		list => [ $waitforgui, $nogui ], 
+		not_edit => 1, sort => 0,
+		type => 'list' },
+	      { val => N("Re-enable disabled printers") },
+	      { text => N("when a USB printer is connected and turned on"), 
+		type => 'bool',
+		val => \$printer->{enablequeuesonnewprinter} },
+	      { text => N("when the printing system is started"), 
+		type => 'bool',
+		val => \$printer->{enablequeuesonspoolerstart} },
+	      ]
+	     )
+	    ) {
+	# Auto queue setup mode
+	$printer->{autoqueuesetupgui} =
+	    ($autoqueuesetupmode eq $waitforgui ? 1 : 0);
+	# Save new settings
+	printer::main::set_auto_admin($printer);
+	return 1;
+    } else {
+	# Reset original settings
+	printer::main::get_auto_admin($printer);
+	return 0;
+    }
+}
+
 sub choose_printer_type {
     my ($printer, $in, $upNetwork) = @_;
     my $havelocalnetworks = check_network($printer, $in, $upNetwork, 1) &&
@@ -4683,13 +4743,16 @@ sub init {
     # Save the user mode, so that the same one is used on the next start
     # of Printerdrake
     printer::main::set_usermode($printer->{expert});
-    
+
+    # Get the settings for printer auto administration
+    printer::main::get_auto_admin($printer);
+
     # only experts should be asked for the spooler also for background
     # installation of print it should not be asked for the spooler,
     # as this feature is only supported for CUPS.
     $printer->{SPOOLER} ||= 'cups'
 	if (!$printer->{expert} || $::noX || $::autoqueue) && !$::isInstall;
-    
+
     # If we have chosen a spooler, install it and mark it as default 
     # spooler. Spooler installation is ommitted on background queue
     # installation, because this only works when CUPS is already running

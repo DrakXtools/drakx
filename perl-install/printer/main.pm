@@ -689,8 +689,6 @@ sub read_ppd_options ($) {
     return $COMBODATA->{args};
 }
 
-my %sysconfig = getVarsFromSh("$::prefix/etc/sysconfig/printing");
-
 sub set_cups_special_options {
     my ($queue) = @_;
     # Set some special CUPS options
@@ -714,6 +712,8 @@ sub set_cups_special_options {
     return 1;
 }
 
+my %sysconfig = getVarsFromSh("$::prefix/etc/sysconfig/printing");
+
 sub set_cups_autoconf {
     my ($autoconf) = @_;
     $sysconfig{CUPS_CONFIG} = $autoconf ? "automatic" : "manual";
@@ -733,6 +733,52 @@ sub set_usermode {
 }
 
 sub get_usermode() { $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
+
+sub set_auto_admin {
+    my ($printer) = @_;
+    $sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED} = 
+	$printer->{enablequeuesonnewprinter} ? "yes" : "no";
+    $sysconfig{AUTO_SETUP_QUEUES_ON_PRINTER_CONNECTED} = 
+	$printer->{autoqueuesetuponnewprinter} ? "yes" : "no";
+    $sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} = 
+	$printer->{enablequeuesonspoolerstart} ? "yes" : "no";
+    $sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START} = 
+	$printer->{autoqueuesetuponspoolerstart} ? "yes" : "no";
+    $sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START} = 
+	$printer->{autoqueuesetuponstart} ? "yes" : "no";
+    $sysconfig{AUTO_SETUP_QUEUES_MODE} = 
+	$printer->{autoqueuesetupgui} ? "waitforgui" : "nogui";
+    setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig);
+    return 1;
+}
+
+sub get_auto_admin {
+    my ($printer) = @_;
+    $printer->{enablequeuesonnewprinter} = 
+	(!defined($sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED}) ||
+	 ($sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED} =~ /yes/i) ?
+	 1 : 0);
+    $printer->{autoqueuesetuponnewprinter} = 
+	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTER_CONNECTED}) ||
+	 ($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTER_CONNECTED} =~ /yes/i) ?
+	 1 : 0);
+    $printer->{enablequeuesonspoolerstart} = 
+	(!defined($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START}) ||
+	 ($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} =~ /yes/i) ?
+	 1 : 0);
+    $printer->{autoqueuesetuponspoolerstart} = 
+	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START}) ||
+	 ($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START} =~ /yes/i) ?
+	 1 : 0);
+    $printer->{autoqueuesetuponstart} = 
+	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START}) ||
+	 ($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START} =~ /yes/i) ?
+	 1 : 0);
+    $printer->{autoqueuesetupgui} = 
+	(!defined($sysconfig{AUTO_SETUP_QUEUES_MODE}) ||
+	 ($sysconfig{AUTO_SETUP_QUEUES_MODE} =~ /waitforgui/i) ?
+	 1 : 0);
+}
 
 sub set_jap_textmode {
     my $textmode = ($_[0] ? 'cjk' : '');

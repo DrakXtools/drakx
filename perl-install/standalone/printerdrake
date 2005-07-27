@@ -21,7 +21,8 @@
 
 use strict;
 
-# i18n: IMPORTANT: to get correct namespace (userdrake instead of libDrakX)
+# i18n: IMPORTANT: to get correct namespace (printerdrake instead of 
+# libDrakX)
 BEGIN { unshift @::textdomains, 'drakconf' }
 
 use lib qw(/usr/lib/libDrakX);
@@ -165,6 +166,7 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
 						  %printer::main::thedb = 
 						      ();
                                               }, undef, '<CheckItem>' ],
+                                            [ N("/_Options") . N("/Configure _Auto Administration"), undef, \&ConfigAutoAdmin, undef, '<StockItem>', 'gtk-autoadmin' ],
                                             [ N("/_Help"), undef, undef, undef, '<Branch>' ],
 					    if_(-x "/usr/sbin/drakhelp_inst",
 						[ N("/_Help") . N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
@@ -415,6 +417,13 @@ sub ConfigCUPS() {
     foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") }
     $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
     $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
+    Refresh($stringsearch);
+    activate_mainwindow();
+}
+
+sub ConfigAutoAdmin() {
+    deactivate_mainwindow();
+    printer::printerdrake::config_auto_admin($printer, $in);
     Refresh($stringsearch);
     activate_mainwindow();
 }
