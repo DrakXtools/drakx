@@ -56,6 +56,7 @@ my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
                'monitorNetwork' => { name => N("Monitor Network"), launch => \&run_net_monitor },
+               'monitorAFW' => { name => N("Active Firewall"), launch => \&run_drakids },
                'wireless' => { name => N("Manage wireless networks"), launch => \&run_drakroam },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
@@ -138,11 +139,14 @@ sub shouldStart() {
     }
     return getAutoStart();
 }
-sub run_net_monitor() { 
+sub run_net_monitor() {
     run_program::raw({ detach => 1 }, '/usr/sbin/net_monitor', '--defaultintf', $current_interface) unless is_running('net_monitor');
 }
-sub run_drakroam() { 
+sub run_drakroam() {
     run_program::raw({ detach => 1 }, '/usr/sbin/drakroam') unless is_running('drakroam');
+}
+sub run_drakids() {
+    run_program::raw({ detach => 1 }, '/usr/sbin/drakids') unless is_running('drakids');
 }
 sub generate_wireless_menuitem {
     my ($net) = @_;
@@ -257,7 +261,7 @@ sub generate_menu {
     my $has_wireless = detect_devices::has_wireless();
 
     if ($state_type eq 'connected') {
-        push @actions, $create_item->($_) foreach qw(downNetwork monitorNetwork);
+        push @actions, $create_item->($_) foreach qw(downNetwork monitorNetwork monitorAFW);
     } elsif ($state_type eq 'disconnected') {
         push @actions, $menu->append($create_item->('upNetwork'));
     }
