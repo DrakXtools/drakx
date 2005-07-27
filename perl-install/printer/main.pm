@@ -3037,7 +3037,7 @@ sub usbdevice {
 }
 
 sub config_sane {
-    my ($backend) = $_;
+    my ($backend) = @_;
 
     # Add HPOJ/HPLIP backend to /etc/sane.d/dll.conf if needed (no
     # individual config file /etc/sane.d/hplip.conf or
