@@ -89,6 +89,11 @@ upload_only:
 	upload $(IMAGES_DEST)/alternatives '' ;\
 	upload $(ROOTDEST)/isolinux '' ;\
 	echo
+    ifeq (i386,$(ARCH))
+	upload $(ROOTDEST)/linuxboot.cfg '' ;\
+	upload $(ROOTDEST)/default.xbe '' ;\
+    endif
+
 
 isolinux-graphic.bmp.parameters: isolinux-graphic.bmp isolinux
 	perl -I perl-install perl-install/standalone/draksplash2 --isolinux --kernel isolinux/alt0/vmlinuz --initrd isolinux/alt0/all.rdz $<
