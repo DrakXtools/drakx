@@ -57,6 +57,10 @@ my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
 my $commandline = $_;
 
+# Suppress some wait messages to avoid windows popping up if no new print 
+# queue has to be set up
+$commandline =~ /-onlyautoqueue/ and $::autoqueue = 1;
+
 # Data structure for GTK2 main window
 my $us = {};
 $us->{VERSION} = '10.2';
@@ -64,8 +68,9 @@ $us->{VERSION} = '10.2';
 # Check whether Foomatic is installed and install it if necessary
 #printer::printerdrake::install_foomatic($in);
 
-my $w = $in->wait_message(N("Printerdrake"),
-                          N("Reading data of installed printers..."));
+my $w = $::autoqueue ||
+    $in->wait_message(N("Printerdrake"),
+		      N("Reading data of installed printers..."));
 
 # Get what was installed before
 eval { $printer = printer::main::getinfo('') };
@@ -106,6 +111,9 @@ $printer->{SPOOLER} ||= 'cups';
 
 # Initialization
 printer::printerdrake::init($printer, $security, $in, undef);
+
+# Stop here when we are supposed to only automatically set up print queues
+$commandline =~ /-onlyautoqueue/ and exit 0;
 
 # GTK2 main window
 

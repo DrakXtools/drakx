@@ -678,6 +678,10 @@ sub first_time_dialog {
     return 1 if printer::default::get_spooler() || $::isInstall;
 
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
+    # Now, where the first-time dialog will be displayed, all subsequent
+    # wait messages should be displayed, also if we are in GUI auto queue
+    # setup mode
+    undef $::autoqueue;
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
@@ -763,13 +767,11 @@ sub configure_new_printers {
     # there is already a queue for them. If there is no queue for an
     # auto-detected printer, a queue gets set up non-interactively.
 
-    # Experts can have weird things as self-made CUPS backends, so do not
-    # automatically pollute the system with unwished queues in expert
-    # mode
-    return 1 if $printer->{expert};
+    # Stop here if auto queue setup is not selected 
+    return 1 if !($printer->{autoqueuesetuponstart} || $::autoqueue);
     
     # Wait message
-    my $w = $::noX || 
+    my $w = $::noX || $::autoqueue || 
 	$in->wait_message(N("Printerdrake"),
 			  N("Searching for new printers..."));
 
@@ -780,7 +782,7 @@ sub configure_new_printers {
     # kernel modules and causes a new hotplug signal which leads to
     # recursive calls of the hotplug script.
     require services;
-    services::stop("hpoj") if !$::noX;
+    services::stop("hpoj") if !$::noX && !$::autoqueue;
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
@@ -788,7 +790,7 @@ sub configure_new_printers {
 
     # We are ready with auto-detection, so we restart HPOJ here. If it 
     # is not installed or not configured, this command has no effect.
-    services::start("hpoj") if !$::noX;
+    services::start("hpoj") if !$::noX && !$::autoqueue;
 
     # No printer found? So no need of new queues.
     return 1 if !@autodetected;
@@ -4293,7 +4295,7 @@ sub install_spooler {
     return 0 unless security_check($spooler, $security, $o_in);
     # should not happen
     return 0 if $spooler !~ /^(rcups|cups|lpd|lprng|pqd)$/;
-    my $w = $o_in && $o_in->wait_message(N("Printerdrake"), N("Checking installed software..."));
+    my $w = $::noX || $::autoqueue || ($o_in && $o_in->wait_message(N("Printerdrake"), N("Checking installed software...")));
 
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
     my $packages = $spoolers{$spooler}{packages2rm};
@@ -4429,7 +4431,7 @@ sub assure_default_printer_is_set {
     my ($printer, $in) = @_;
     if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
 	(!defined($printer->{DEFAULT}) || !$printer->{DEFAULT})) {
-	my $_w = $::noX || 
+	my $_w = $::noX || $::autoqueue || 
 	    $in->wait_message(N("Printerdrake"),
 			      N("Setting Default Printer..."));
 	$printer->{DEFAULT} = printer::default::get_printer($printer);
@@ -4686,7 +4688,7 @@ sub init {
     # installation of print it should not be asked for the spooler,
     # as this feature is only supported for CUPS.
     $printer->{SPOOLER} ||= 'cups'
-	if (!$printer->{expert} || $::noX) && !$::isInstall;
+	if (!$printer->{expert} || $::noX || $::autoqueue) && !$::isInstall;
     
     # If we have chosen a spooler, install it and mark it as default 
     # spooler. Spooler installation is ommitted on background queue
@@ -4695,7 +4697,7 @@ sub init {
 	return 0 unless ($::noX || 
 			 install_spooler($printer, $security, $in->do_pkgs, $in, $upNetwork));
 	assure_remote_server_is_set($printer, $in)
-	    if ($printer->{SPOOLER} eq "rcups") && !$::noX;
+	    if ($printer->{SPOOLER} eq "rcups") && !$::noX && !$::autoqueue;
 	printer::main::read_configured_queues($printer)
 	    if (($printer->{SPOOLER} ne "rcups") &&
 		(keys(%{$printer->{configured}}) == 0));

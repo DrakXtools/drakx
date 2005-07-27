@@ -24,24 +24,61 @@ use standalone;
 use printer::printerdrake;
 use printer::main;
 
+# Read mode in which we will run
+my $commandline = join('', @ARGV);
+$commandline =~ /-(auto|nogui|gui|waitforgui)\b/;
+my $gui = $1;
+$gui ||= "auto";
+
+if ($gui ne "nogui") {
+    # Auto-detect whether we go in non-X mode or not
+    my $desktopuser = `cat /var/run/console.lock`;
+    if (!$desktopuser) {
+	if ($gui eq "auto") {
+	    # Non-X mode
+	    $gui = "nogui";
+	} elsif ($gui eq "waitforgui") {
+	    # Wait until a user logs in on the system's X console
+	    while (!($desktopuser = `cat /var/run/console.lock`)) {
+		sleep(5);
+	    }
+	    # Wait for the window manager to start
+	    sleep(10);
+	    $gui = "gui";
+	} else {
+	    # "gui" was requested but no user logged in
+	    die "Cannot start in '--gui' mode, no user logged in!\n";
+	}
+    } else {
+	# X mode (a user is logged in)
+	$gui = "gui";
+    }
+
+    if ($gui eq "gui") {
+	# Allow root's windows to be opened on the user's display and
+	# start printerdrake then, in a mode to do nothing else than
+	# automatically setting up print queues.
+	system "export DISPLAY=\"localhost:0.0\"; USER=$desktopuser; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost > /tmp/pderror 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> /tmp/pderror 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> /tmp/pderror 2>&1\"";
+	exit 0;
+    }
+}
+
 # Data structure for printer data
 my $printer;
 
-# Dummy variable needed to call the subroutines of the printerdrak.pm module
-# The real data structure is not needed for non-interactive mode
+# Dummy variable needed to call the subroutines of the printerdrake.pm
+# module. The real data structure is not needed for non-interactive
+# non-X mode
 my $in;
 
 # Run the subroutines of printerdrake.pm in non-interactive non-X mode
 $::noX = 1;
 
+# Subroutines of printerdrake.pm used for automatic setup of print queues
+$::autoqueue = 1;
+
 # Do not let printerdrake ask for the spooler
 $printer->{SPOOLER} ||= 'cups';
-
-# Were we in expert mode last time?
-$printer->{expert} = printer::main::get_usermode();
-
-# Do not auto-install queues in expert mode
-exit 0 if $printer->{expert};
 
 # Get info about already installed print queues
 eval { $printer = printer::main::getinfo('') };
