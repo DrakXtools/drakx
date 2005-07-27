@@ -768,11 +768,6 @@ append root=/dev/ram3 ramdisk_size=36000 automatic=method:cdrom
 EOF
 }
 
-sub xromwell {
-    _ "cp /usr/share/cromwell/xromwell_installer.xbe default.xbe";
-    _ "cp /usr/share/cromwell/linuxboot.cfg .";
-}
-
 sub boot_iso {
     my ($iso, $kernels) = @_;
 
