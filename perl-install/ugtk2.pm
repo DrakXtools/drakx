@@ -495,6 +495,7 @@ sub create_packtable {
     gtkset_border_width($w, $::isInstall ? 3 : 10);
 }
 
+my $wm_is_kde;
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $_o_spread, @other) = @_;
     # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
@@ -514,6 +515,10 @@ sub create_okcancel {
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
     $w->{wizcancel} = gtknew('Button', text => N("Cancel"), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
+    if (!defined $wm_is_kde) {
+        require any;
+        $wm_is_kde = !$::isInstall && any::running_window_manager() eq "kwin" || 0;
+    }
     my $f = sub { $w->{buttons}{$_[0][0]} = gtknew('Button', text => $_[0][0], clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
                   map { $f->($_) } grep { !$_->[2] && !$_->[3] } @other);
@@ -528,9 +533,9 @@ sub create_okcancel {
         push @right, $bprev, $bok;
     } else { 
         # normal mode: cancel/ok button follow GNOME's HIG
-        unshift @left, $bprev;
+        unshift @left, ($wm_is_kde ? $bok : $bprev);
         push @left, gtknew('Label') if $ok && $cancel; # space buttons but if there's only one button
-        push @right, $bok;
+        push @right, ($wm_is_kde ? $bprev : $bok);
     }
 
     gtknew('VBox', spacing => 5, children_loose => [
