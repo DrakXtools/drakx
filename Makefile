@@ -91,7 +91,7 @@ upload_only:
 	echo
     ifeq (i386,$(ARCH))
 	upload $(ROOTDEST)/linuxboot.cfg '' ;\
-	upload $(ROOTDEST)/default.xbe '' ;\
+	upload $(ROOTDEST)/default.xbe '' ;
     endif
 
 
