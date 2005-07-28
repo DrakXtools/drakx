@@ -619,9 +619,9 @@ static char * auto_select_up_intf(void)
 
 	ptr = interfaces;
 	while (ptr && *ptr) {
-                struct ifreq ifr;
+		struct ifreq ifr;
 		struct ethtool_value edata;
-                strncpy(ifr.ifr_name, *ptr, IFNAMSIZ);
+		strncpy(ifr.ifr_name, *ptr, IFNAMSIZ);
 		edata.cmd = ETHTOOL_GLINK;
 		ifr.ifr_data = (caddr_t)&edata;
 		if (ioctl(s, SIOCETHTOOL, &ifr) == 0 && edata.data) {
@@ -633,7 +633,7 @@ static char * auto_select_up_intf(void)
 
 	close(s);
 
-        return NULL;
+	return NULL;
 }
 
 
@@ -665,13 +665,13 @@ static char * interface_select(void)
 	if (count == 1)
 		return *interfaces;
 
-        /* this can't be done in ask_from_list_comments_auto because "auto" isn't in the interfaces list */
-        choice = get_auto_value("interface");
-        if (choice && streq(choice, "auto")) {
-                choice = auto_select_up_intf();
-                if (choice)
-                        return choice;
-        }
+	/* this can't be done in ask_from_list_comments_auto because "auto" isn't in the interfaces list */
+	choice = get_auto_value("interface");
+	if (choice && streq(choice, "auto")) {
+		choice = auto_select_up_intf();
+		if (choice)
+			return choice;
+	}
 
 	i = 0;
 	while (interfaces[i]) {
