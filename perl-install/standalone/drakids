@@ -141,12 +141,11 @@ sub get_selected_blacklist() {
 sub unblacklist {
     my @addr = @_;
     eval { $activefw->unblacklist($_) foreach @addr };
-    if ($@) {
-        my $error = $@;
-        err_dialog(N("Error"), N("Unable to remove from blacklist: %s", $error));
-        return;
+    if (!$@) {
+        list_remove_addr($blacklist->{data}, @addr);
+    } else {
+        err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
     }
-    list_remove_addr($blacklist->{data}, @addr);
 }
 
 #- may throw an exception
@@ -171,20 +170,17 @@ sub whitelist {
     my @addr = @_;
     unblacklist(@addr);
     eval { $activefw->whitelist($_) foreach @addr };
-    if ($@) {
-        my $error = $@;
-        err_dialog(N("Error"), N("Unable to move in whitelist: %s", $error));
-    }
+    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
 }
 
 sub unwhitelist {
     my @addr = @_;
     eval { $activefw->unwhitelist($_) foreach @addr };
-    if ($@) {
-        my $error = $@;
-        err_dialog(N("Error"), N("Unable to remove from whitelist: %s", $error));
+    if (!$@) {
+        list_remove_addr($whitelist->{data}, @addr);
+    } else {
+        err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
     }
-    list_remove_addr($whitelist->{data}, @addr);
 }
 
 sub init_lists() {
@@ -192,10 +188,7 @@ sub init_lists() {
         init_blacklist();
         init_whitelist();
     };
-    if ($@) {
-        my $error = $@;
-        err_dialog(N("Error"), N("Unable to contact the Active Firewall daemon: %s", $error));
-    }
+    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
 }
 
 sub clear_lists() {

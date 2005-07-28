@@ -159,10 +159,7 @@ sub generate_wireless_menuitem {
     $net->{activate} = $net->{menuitem}->signal_connect('activate' => sub {
         if (exists $net->{id}) {
             eval { $monitor->select_network($net->{id}) };
-            if ($@) {
-                my $error = $@;
-                err_dialog(N("Error"), N("Unable to select wireless network: %s", $error));
-            }
+            $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
         } else {
             run_drakroam();
         }
