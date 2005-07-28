@@ -85,7 +85,7 @@ sub get_service {
 
 sub get_ip_address {
     my ($addr) = @_;
-    inet_ntoa(pack('N', $addr));
+    inet_ntoa(pack('L', $addr));
 }
 
 sub resolve_address {
