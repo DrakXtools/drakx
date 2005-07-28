@@ -117,7 +117,11 @@ void process_cmdline(void)
 			break;
 		i++;
 	}
-	
+
+	if (IS_AUTOMATIC && strcmp(get_auto_value("thirdparty"), "")) {
+		set_param(MODE_THIRDPARTY);
+	}
+
 	log_message("\tgot %d args", param_number);
 }
 
