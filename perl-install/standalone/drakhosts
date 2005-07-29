@@ -104,8 +104,12 @@ sub add_modify_entry {
     $oldip = $listhosts[$i]{ip};
   }
 
+  if ($wanted =~ /modify/) { $text = N("Please modify information"); }
+  if ($wanted =~ /delete/) { $text = N("Please delete information"); }
+  if ($wanted =~ /add/) { $text = N("Please add information"); }
+  
   gtkpack_($dialog->vbox,
-	   0, gtkadd(Gtk2::Frame->new(N("Please %s information", $wanted)),
+	   0, gtkadd(Gtk2::Frame->new($text)),
 		     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 			      0, $label_and_widgets->(N("IP address:"), $ip),
 			      0, $label_and_widgets->(N("Host name:"), $hostname),
