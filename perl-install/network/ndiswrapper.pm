@@ -60,7 +60,7 @@ sub find_matching_devices {
         if (every { hex(chomp_(cat_("$dev_path/" . $map->{$_}))) eq $device->{$_} } keys %$map) {
             my $driver = readlink("$net_path/$interface/driver");
             $driver =~ s!.*/!!;
-            push @devices, [ $interface, $driver ];
+            push @devices, [ $interface, $driver ] if $driver;
         }
     }
 
