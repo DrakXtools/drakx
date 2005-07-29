@@ -33,6 +33,7 @@ our %alsa2oss =
         ),
      "snd-ad1816a" => [ "ad1816" ], # isa
      "snd-ad1848"  => [ "ad1848", "pss" ], # isa
+     "snd-ad1889"  => [ "ad1889" ],
      "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "sb" ], # isa
      "snd-als4000" => [ "unknown" ],
@@ -126,7 +127,7 @@ our %oss2alsa =
      if_(arch() =~ /ppc/, "dmasound_pmac" => [ "snd-powermac" ]),
      "ad1816"  => [ "snd-ad1816a" ],
      "ad1848"  => [ "snd-ad1848", "snd-cs4236" ],
-     "ad1889"  => [ "unknown" ],
+     "ad1889"  => [ "snd-ad1889" ],
      "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
      "audio"   => [ "snd-usb-audio" ], # usb
