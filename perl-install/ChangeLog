@@ -1,3 +1,116 @@
+2005/07/29  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/network.c: do not crash if automatic mode isn't used
+
+2005/07/29  rstandtke
+
+	* share/po/de.po: some additions and fixes
+
+2005/07/29  Warly  <warly at mandriva.com>
+
+	* share/rpmsrate, share/compssUsers.pl: add THEMES category
+
+2005/07/28  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: install xsettings-kde when installing KDE
+
+2005/07/28  Olivier Blin <oblin at mandriva.com>
+
+	* network/activefw.pm: don't needlessly swap bytes
+
+	* mdk-stage1/network.c: don't corrupt the choice variable
+	fix indentation
+
+	* mdk-stage1/tools.c: use thirdparty mode if the "thirdparty" automatic
+	keyword is specified
+
+	* standalone/net_applet, standalone/drakids: simplify error messages
+
+2005/07/28  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/sound.pm: emphasize if drivers are OSS or ALSA based (#15902)
+
+	* tools/shift_img.c, tools/make_lang_png_transparent.c: bump copyright
+	notices
+
+2005/07/27  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: allow to run drakids
+
+	* standalone/drakids: handle dbus failures
+
+	* any.pm, devices.pm, fs/type.pm, install2.pm, fsedit.pm, bootloader.pm,
+	install_any.pm, partition_table/raw.pm, fs/dmraid.pm: backport of dmraid
+	support
+
+2005/07/27  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: updated pot file
+
+	* standalone/draknfs: corrected small typo
+
+	* crypto.pm: oups; fixed bad change
+	fixed KDE font for extended cyrillic languages
+
+	* lang.pm: fixed KDE font for extended cyrillic languages
+
+2005/07/27  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/rpmsrate: bd deserves better treatment.
+
+2005/07/27  Till Kamppeter  <till at mandriva.com>
+
+	* standalone/printerdrake, printer/printerdrake.pm: 
+	  - Added dialog to configure automatic queue creating and automatic
+	queue re-enabling
+	  - Started implementation of configurable, partially interactive print
+	queue auto setup.
+
+	* standalone/autosetupprintqueues, printer/detect.pm: 
+	  - Started implementation of configurable, partially interactive print
+	queue auto setup.
+
+	* printer/main.pm: 
+	  - Added dialog to configure automatic queue creating and automatic
+	queue re-enabling
+	  - Fixed "config_sane()" function, it did not add the backend name to
+	/etc/sane.d/dll.conf
+
+2005/07/27  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* ugtk2.pm (create_okcancel) enforce GNOME button order when not under KDE
+	(aka rollback
+	old IHM team request since they never achieved to complete the plan ie
+	enforcing the same button order in both GNOME and KDE)
+
+	* drakxtools.spec: 10.3-0.38mdk
+
+	* share/po/fr.po: update
+
+	* detect_devices.pm (getUPS) blacklist all WingMan devices (#16995)
+	(getUPS) do not detect Logitech devices as UPSes (#16994)
+
+	* security/msec.pm: forward #14364/#15049 fix:
+	(load_values) fix getting value when it's defined but 0
+	(get_function_value) fix getting value when it's 0
+
 2005/07/26  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draknfs: no_all_squash as default
