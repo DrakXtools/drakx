@@ -88,11 +88,11 @@ upload_only:
 	upload $(IMAGES_DEST) '*.iso*' ;\
 	upload $(IMAGES_DEST)/alternatives '' ;\
 	upload $(ROOTDEST)/isolinux '' ;\
+	if [ "$(ARCH)" = "i386" ]; then\
+	  upload $(ROOTDEST) linuxboot.cfg;\
+	  upload $(ROOTDEST) default.xbe;\
+	fi;\
 	echo
-    ifeq (i386,$(ARCH))
-	upload $(ROOTDEST)/linuxboot.cfg '' ;\
-	upload $(ROOTDEST)/default.xbe '' ;
-    endif
 
 
 isolinux-graphic.bmp.parameters: isolinux-graphic.bmp isolinux
