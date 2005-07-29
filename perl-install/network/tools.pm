@@ -97,7 +97,7 @@ sub stop_ifplugd {
     sleep 1;
 }
 
-sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
+sub connected() { gethostbyname("www.mandriva.com") ? 1 : 0 }
 
 # request a ref on a bg_connect and a ref on a scalar
 sub connected_bg__raw {
