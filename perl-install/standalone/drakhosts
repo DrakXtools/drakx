@@ -109,7 +109,7 @@ sub add_modify_entry {
   if ($wanted =~ /add/) { $text = N("Please add information"); }
   
   gtkpack_($dialog->vbox,
-	   0, gtkadd(Gtk2::Frame->new($text)),
+	   0, gtkadd(Gtk2::Frame->new($text),
 		     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
 			      0, $label_and_widgets->(N("IP address:"), $ip),
 			      0, $label_and_widgets->(N("Host name:"), $hostname),
