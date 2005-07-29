@@ -58,7 +58,7 @@ sub find_matching_devices {
         -l $dev_path or next;
         my $map = detect_devices::get_sysfs_device_id_map($dev_path);
         if (every { hex(chomp_(cat_("$dev_path/" . $map->{$_}))) eq $device->{$_} } keys %$map) {
-            my $driver = readlink("$net_path/$interface/driver");
+            my $driver = readlink("$net_path/$interface/device/driver");
             $driver =~ s!.*/!!;
             push @devices, [ $interface, $driver ] if $driver;
         }

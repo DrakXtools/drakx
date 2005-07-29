@@ -77,11 +77,11 @@ sub get_eth_cards {
         # 5) try to match a device through sysfs for driver & device description:
         #     (eg: ipw2100 driver for intel centrino do not support ETHTOOL)
         if (!$description) {
-            my $drv = readlink("/sys/class/net/$interface/driver");
+            my $dev_path = "/sys/class/net/$interface/device";
+            my $drv = readlink("$dev_path/driver");
             if ($drv && $drv =~ s!.*/!!) {
                 $a = $drv unless $detected_through_ethtool;
                 my %l;
-                my $dev_path = "/sys/class/net/$interface/device";
                 my $sysfs_fields = detect_devices::get_sysfs_device_id_map($dev_path);
                 $l{$_} = hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) foreach keys %$sysfs_fields;
                 my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
