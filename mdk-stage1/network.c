@@ -666,7 +666,7 @@ static char * interface_select(void)
 		return *interfaces;
 
 	/* this can't be done in ask_from_list_comments_auto because "auto" isn't in the interfaces list */
-	if (streq(get_auto_value("interface"), "auto")) {
+	if (IS_AUTOMATIC && streq(get_auto_value("interface"), "auto")) {
 		choice = auto_select_up_intf();
 		if (choice)
 			return choice;
