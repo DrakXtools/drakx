@@ -497,6 +497,8 @@ Take a look at http://www.linmodems.org"),
 			if (exists $net->{autodetect}{modem}{$modem_name}{device}) {
 			    #- this is a serial probed modem
 			    $modem->{device} = $net->{autodetect}{modem}{$modem_name}{device};
+			}
+			if (exists $modem->{device}) {
 			    return "ppp_provider";
 			} else {
 			    #- driver exists but device field hasn't been filled by network::thirdparty::setup_device
