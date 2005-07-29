@@ -17,12 +17,14 @@ CAT_GNOME
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore gtk-engines2 
     gconf-editor desktop-printing eog gpdf
-  5 !CAT_KDE || CAT_GNOME  gdm
+  !CAT_KDE || CAT_GNOME 
+    5 gdm 
+    4 CAT_THEMES gdm-themes gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme
   3 gnome-pilot
   2 bug-buddy
 
 CAT_KDE
-  5 galaxy-kde galaxy-kde-kwin kdeartwork kdeartwork-kde-classic kdebase-nsplugins kdebase-progs krozat mandrakegalaxy xsettings-kde
+  5 galaxy-kde galaxy-kde-kwin kdebase-nsplugins kdebase-progs krozat mandrakegalaxy xsettings-kde
   5 kdebase-kdm
   5 kde-i18n-af kde-i18n-ar
   5 kdebase-servicemenu zip
@@ -33,6 +35,7 @@ CAT_KDE
   5 kdegraphics-kuickshow
   3 kdeutils-kedit kdeutils-khexedit kdeutils-kjots kdeutils-ktimer
   4 CAT_GRAPHICS || PHOTO kdegraphics-common
+  4 CAT_THEMES kdeartwork kdeartwork-kde-classic
 
 CAT_VIDEO
   5 CAT_GNOME totem xine-esd
@@ -636,6 +639,7 @@ CAT_X
     LOCALES"zh" fonts-ttf-chinese 
     LOCALES"zh_CN" fonts-ttf-gb2312
     LOCALES"zh_TW" taipeifonts fonts-ttf-big5
+  5 CAT_THEMES bootsplash-themes
 
 DOCS
   5 man info man-pages
