@@ -19,7 +19,7 @@ use Gtk2::TrayIcon;
 use ugtk2 qw(:create :helpers :wrappers :dialogs);
 
 my ($eventbox, $img);
-my ($current_state, $current_interface, $menu, $timeout, $update_timeout);
+my ($current_state, $current_interface, $menu, $wireless_menu, $timeout, $update_timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
@@ -219,7 +219,9 @@ sub go2State {
         $current_state = $state_type;
         $current_interface = $interface;
         if ($menu) {
-            $_->{menuitem}->get_parent and $menu->remove($_->{menuitem}) foreach values %wireless_networks;
+            if (my $m = $wireless_menu && $wireless_menu->get_submenu) {
+                $_->{menuitem}->get_parent and $m->remove($_->{menuitem}) foreach values %wireless_networks;
+            }
             $menu->destroy;
         }
         $menu = generate_menu($state_type, $interface);
@@ -254,22 +256,18 @@ sub generate_menu {
         $w;
     };
 
-    my (@settings, @actions);
+    my (@settings);
     my $has_wireless = detect_devices::has_wireless();
 
     if ($state_type eq 'connected') {
-        push @actions, $create_item->($_) foreach qw(downNetwork monitorNetwork monitorAFW);
+        $menu->append($create_item->($_)) foreach qw(downNetwork monitorNetwork monitorAFW);
     } elsif ($state_type eq 'disconnected') {
-        push @actions, $menu->append($create_item->('upNetwork'));
+        $menu->append($create_item->('upNetwork'));
     }
-    push @actions, $create_item->('confNetwork');
+    $menu->append($create_item->('confNetwork'));
 
     if ($state_type ne 'notconfigured') {
-        if ($has_wireless) {
-            push @actions, $create_item->('wireless');
-            $menu->append($_->{menuitem}) foreach values %wireless_networks;
-            $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-        }
+        $menu->append($create_item->('wireless')) if $has_wireless;
         push @settings, $create_item->('chooseInterface');
     }
 
@@ -285,12 +283,9 @@ sub generate_menu {
     push @settings, gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
                                               toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) }));
 
-    if ($has_wireless) {
-        $menu->append(gtkshow(create_menu(N("Actions"), @actions)));
-    } else {
-        $menu->append($_) foreach @actions;
-        $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    }
+    $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+    $has_wireless and $menu->append(gtkshow($wireless_menu = create_menu(N("Wireless networks"),
+                                                                         map { $_->{menuitem} } values %wireless_networks)));
     $menu->append(gtkshow(create_menu(N("Settings"), grep { $_ } @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append($create_item->('help'));
