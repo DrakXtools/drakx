@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.38mdk
+Release: 0.39mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -371,6 +371,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul 29 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.39mdk
+- do not detect WingMan & Logitech devices as UPSes (#16995, #16994)
+- drakconnect: fix testing network connection (blino)
+- draksound: emphasize if drivers are OSS or ALSA based (#15902)
+- localedrake: fixed KDE font for extended cyrillic languages (pablo)
+- net_applet: add support for active firewall (blino)
+- printerdrake (till):
+  o fix configuring sane
+  o print queue auto setup
+
 * Wed Jul 27 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.38mdk
 - enforce GNOME button order when not under KDE
 - make more dialogs transient if possible
