@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-06-23 13:46+0200\n"
+"PO-Revision-Date: 2005-07-30 17:30+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1766,12 +1766,12 @@ msgstr "LiLo tekstirežiimis"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "Grub graafilises režiimis"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "Grub tekstirežiimis"
 
 #: bootloader.pm:857
 #, c-format
@@ -2598,11 +2598,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Füüsiline ketas %s on veel kasutusel.\n"
+"Kas soovite liigutada selle ketta füüsilise sisu teistele ketastele?"
 
 #: diskdrake/interactive.pm:893
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Füüsilise sisu liigutamine"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -3062,7 +3064,7 @@ msgstr "Vormindan saaleala %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Ketta grupikvootide arvestuse ja võimalusel limiitide kehtestamise lubamine"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3070,7 +3072,7 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Inode juurdepääsu kordi sellel failisüsteemil ei värskendada\n"
+"Inode juurdepääsu kordi sellel failisüsteemil ei värskendata\n"
 "(nt. kiiremaks juurdepääsuks uudistepuhvrile uudisteserveri kiirendamiseks)."
 
 #: fs/mount_options.pm:116
@@ -3140,6 +3142,7 @@ msgstr ""
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
+"Ketta kasutajakvootide arvestuse ja võimalusel limiitide kehtestamise lubamine"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3221,6 +3224,8 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"LVM loogilist ketast ei saa kasutada haakepunkti %s jaoks, sest see "
+"ketas hõlmab mitut füüsilist ketast"
 
 #: fsedit.pm:392
 #, c-format
@@ -3230,6 +3235,10 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Valisite juurpartitsiooniks (/) LVM loogilise ketta.\n"
+"Alglaadur ei suuda seda käsitleda, kui ketas hõlmab mitut füüsilist "
+"ketast.\n"
+"Kõigepealt tuleks luua partitsioon /boot"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -4071,7 +4080,7 @@ msgstr ""
 "\"2.4\",\n"
 "mitte muidu vaikimisi paigaldatavast seeriast \"2.6\".\n"
 "Seda tehakse täieliku ühilduvuse saavutamiseks LSB standardiga.\n"
-"Kui te aga jätate grupi \"LSB\" valimata, saate ikkagi süsteemi,\n"
+"Kui Te aga jätate grupi \"LSB\" valimata, saate ikkagi süsteemi,\n"
 "mis vastab peaaegu täielikult LSB standardile.\n"
 "\n"
 " * \"%s\": kui arvuti peab täitma serveri ülesandeid, saate siit valida,\n"
@@ -5378,7 +5387,7 @@ msgstr ""
 "tuvastab\n"
 "automaatselt, kas tegemist on PS/2, jadapordi või USB-hiirega.\n"
 "\n"
-"Kui teil on kolme nupuga, aga ilma rattata hiir, võite valida tüübiks\n"
+"Kui Teil on kolme nupuga, aga ilma rattata hiir, võite valida tüübiks\n"
 "\"%s\". DrakX seadistab seejärel hiire nii, et saate matkida hiireratast.\n"
 "Selleks klõpsake keskmist nuppu ja liigutage hiirt üles või alla.\n"
 "\n"
@@ -5951,7 +5960,7 @@ msgstr "Võrk (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Võrk (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -5981,22 +5990,22 @@ msgstr "Peegli URL?"
 #: install_any.pm:525
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "NFS-i seadistamine"
 
 #: install_any.pm:525
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Palun andke NFS-andmekandja masinanimi ja kataloog"
 
 #: install_any.pm:526
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "NFS-i andmekandja masinanimi?"
 
 #: install_any.pm:526
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "Kataloog"
 
 #: install_any.pm:575
 #, c-format
@@ -6943,7 +6952,7 @@ msgstr ""
 "Vahetage CD!\n"
 "\n"
 "Palun sisestage CD nimega \"%s\" CD-seadmesse ja klõpsake nupule \"Olgu\".\n"
-"Kui teil sellist ei ole, klõpsake nupule \"Loobu\"."
+"Kui Teil sellist ei ole, klõpsake nupule \"Loobu\"."
 
 #: install_steps_gtk.pm:571 install_steps_interactive.pm:750
 #, c-format
@@ -9614,22 +9623,22 @@ msgstr "See ongi %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Füüsilise sisu liigutamine teistele füüsilistele ketastele ebaõnnestus"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Füüsiline ketas %s on veel kasutusel"
 
 #: lvm.pm:145
 #, c-format
 msgid "Remove the logical volumes first\n"
-msgstr "Eemaldage esmalt kettarühmad (logical volumes)\n"
+msgstr "Eemaldage esmalt loogilised kettad\n"
 
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
-msgstr ""
+msgstr "Alglaadur ei suuda käsitleda mitmel füüsilisel kettal paiknevat partitsiooni /boot"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -10018,22 +10027,22 @@ msgstr "Nimeserver"
 #: network/drakfirewall.pm:22
 #, c-format
 msgid "SSH server"
-msgstr "SSH server"
+msgstr "SSH-server"
 
 #: network/drakfirewall.pm:27
 #, c-format
 msgid "FTP server"
-msgstr "FTP server"
+msgstr "FTP-server"
 
 #: network/drakfirewall.pm:32
 #, c-format
 msgid "Mail Server"
-msgstr "Meiliserver"
+msgstr "E-posti server"
 
 #: network/drakfirewall.pm:37
 #, c-format
 msgid "POP and IMAP Server"
-msgstr "POP ja IMAP server"
+msgstr "POP- ja IMAP-server"
 
 #: network/drakfirewall.pm:42
 #, c-format
@@ -10053,7 +10062,7 @@ msgstr "CUPS-server"
 #: network/drakfirewall.pm:60
 #, c-format
 msgid "Echo request (ping)"
-msgstr "Echo soov (ping)"
+msgstr "Echo päring (ping)"
 
 #: network/drakfirewall.pm:65
 #, c-format
@@ -10091,7 +10100,7 @@ msgstr ""
 #: network/drakfirewall.pm:181
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "Millistel teenustel soovite lubada kasutada Internetiühendust?"
+msgstr "Milliste teenustega soovite lubada Internetist ühendust võtta?"
 
 #: network/drakfirewall.pm:182
 #, c-format
@@ -12706,7 +12715,7 @@ msgstr ""
 "sisse lülitatud.\n"
 "\n"
 "Pange tähele, et võrguprinteri(te) automaattuvastus võtab rohkem aega kui "
-"ainult selle masinaga ühendatud printeri(te) tuvastamine. Nii et kui teil "
+"ainult selle masinaga ühendatud printeri(te) tuvastamine. Nii et kui Teil "
 "seda vaja ei ole, lülitage võrgus ja/või Windowsi taga olevate printeri(te) "
 "automaattuvastus välja.\n"
 "\n"
@@ -12734,7 +12743,7 @@ msgstr ""
 "Nõustaja aitab Teil paigaldada printeri(d), mis on ühendatud selle "
 "arvutiga.\n"
 "\n"
-"Kui teil on printer(eid), mis on ühendatud selle masinaga, ühendage palun "
+"Kui Teil on printer(eid), mis on ühendatud selle masinaga, ühendage palun "
 "see/need arvutiga ja lülitage sisse, et seda/neid saaks automaatselt "
 "tuvastada.\n"
 "\n"
@@ -12773,7 +12782,7 @@ msgstr ""
 "\n"
 "Pange tähele, et võrguprinterite automaattuvastus võtab rohkem aega kui "
 "ainult selle masinaga ühendatud printeri(te) automaatne tuvastamine. Nii et "
-"kui te seda ei vaja, lülitage võrguprinterite automaattuvastus välja.\n"
+"kui Te seda ei vaja, lülitage võrguprinterite automaattuvastus välja.\n"
 "\n"
 "Kui olete valmis, klõpsake nupule \"Edasi\", või \"Loobu\", kui Te ei soovi "
 "praegu printeri(te) seadistamisega tegelda."
@@ -12799,7 +12808,7 @@ msgstr ""
 "Nõustaja aitab Teil paigaldada printeri(d), mis on ühendatud selle "
 "arvutiga.\n"
 "\n"
-"Kui teil on printer(eid), mis on ühendatud selle masinaga, ühendage palun "
+"Kui Teil on printer(eid), mis on ühendatud selle masinaga, ühendage palun "
 "see/need arvutiga ja lülitage sisse, et seda/neid saaks automaatselt "
 "tuvastada.\n"
 "\n"
@@ -13223,7 +13232,7 @@ msgstr ""
 "näiteks käsuga \"ps auxwww\".\n"
 "\n"
 "Soovitame selle asemel kasutada üht alltoodud alternatiividest (igatahes "
-"tuleks teil tagada, et Teie Windowsi serverisse pääsevad ligi ainult "
+"tuleks Teil tagada, et Teie Windowsi serverisse pääsevad ligi ainult "
 "kohtvõrgu masinad; selleks sobib hästi kasutada tulemüüri):\n"
 "\n"
 "Kasutage Windowsi serveris paroolitut kontot, olgu selleks konto \"GUEST\" "
@@ -14465,7 +14474,7 @@ msgid ""
 msgstr ""
 "Kavatsesite hakata seadistama võrguprinterit. Selleks läheb vaja töötavat "
 "võrguühendust, aga Teil on võrk veel seadistamata. Kui Te jätkate ilma võrku "
-"seadistamata, et ole Teil võimalik kasutada printerit, mida te tahate "
+"seadistamata, et ole Teil võimalik kasutada printerit, mida Te tahate "
 "seadistada. Kuidas peaks nüüd edasi talitama?"
 
 #: printer/printerdrake.pm:4160
@@ -15277,18 +15286,18 @@ msgstr "Kui on \"jah\", käivitatakse chkrootkit kontroll."
 msgid ""
 "if set, send the mail report to this email address else send it to root."
 msgstr ""
-"Kui on lubatud, saadab meiliraporti sellele aadressile, muidu "
+"Kui on lubatud, saadab e-postiga raporti sellele aadressile, muidu "
 "administraatorile."
 
 #: security/help.pm:128
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr "Kui on \"jah\", antakse kontrolli tulemustest teada meilitsi."
+msgstr "Kui on \"jah\", antakse kontrolli tulemustest teada e-postitsi."
 
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr "Meili ei saadeta, kui hoiatusi pole"
+msgstr "E-kirja ei saadeta, kui hoiatusi pole"
 
 #: security/help.pm:130
 #, c-format
@@ -15559,7 +15568,7 @@ msgstr "Vajaduse puudumisel teadet ei saadeta"
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
-"Kui on lubatud, saadab meiliraporti sellele aadressile, muidu "
+"Kui on lubatud, saadab e-postiga raporti sellele aadressile, muidu "
 "administraatorile."
 
 #: security/l10n.pm:59
@@ -15940,8 +15949,8 @@ msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix on meili transpordiagent, see tähendab rakendus,\n"
-"mis toimetab meili ühest masinast teise."
+"Postfix on e-posti transpordiagent, see tähendab rakendus,\n"
+"mis toimetab e-kirju ühest masinast teise."
 
 #: services.pm:74
 #, c-format
@@ -16459,7 +16468,7 @@ msgid ""
 "With your Discovery, you will be introduced to <b>KDE</b>, the most advanced "
 "and user-friendly <b>graphical desktop environment</b> available."
 msgstr ""
-"Discovery korral on teil võimalik kasutusele võtta <b>KDE</b> - kõige "
+"Discovery korral on Teil võimalik kasutusele võtta <b>KDE</b> - kõige "
 "täiuslikum ja kasutajasõbralikum <b>graafiline töökeskkond</b>."
 
 #: share/advertising/12.pl:17
@@ -16492,7 +16501,7 @@ msgid ""
 "With PowerPack, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
 msgstr ""
-"PowerPack võimaldab teil valida meelepärase <b>graafilise töökeskkonna</b>. "
+"PowerPack võimaldab Teil valida meelepärase <b>graafilise töökeskkonna</b>. "
 "Mandriva on selleks vaikimisi valinud <b>KDE</b>."
 
 #: share/advertising/13-a.pl:17 share/advertising/13-b.pl:17
@@ -16520,7 +16529,7 @@ msgid ""
 "With PowerPack+, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
 msgstr ""
-"PowerPack+ võimaldab teil valida meelepärase <b>graafilise töökeskkonna</b>. "
+"PowerPack+ võimaldab Teil valida meelepärase <b>graafilise töökeskkonna</b>. "
 "Mandriva on selleks vaikimisi valinud <b>KDE</b>."
 
 #: share/advertising/14.pl:15
@@ -16531,7 +16540,7 @@ msgstr "<b>OpenOffice.org</b>"
 #: share/advertising/14.pl:17
 #, c-format
 msgid "With Discovery, you will discover <b>OpenOffice.org</b>."
-msgstr "Discovery korral on teil võimalik kasutada <b>OpenOffice.org-i</b>."
+msgstr "Discovery korral on Teil võimalik kasutada <b>OpenOffice.org-i</b>."
 
 #: share/advertising/14.pl:19
 #, c-format
@@ -18796,7 +18805,7 @@ msgid ""
 msgstr ""
 "Siia saab kirjutada komadega eraldatult kohalikud kasutajad või nende e-"
 "posti aadressid, kellele/kuhu antakse teada varunduse tulemustest. Selleks "
-"läheb vaja toimivat meiliedastusagenti."
+"läheb vaja toimivat e-posti serverit."
 
 #: standalone/drakbackup:160
 #, c-format
@@ -18938,7 +18947,7 @@ msgid ""
 msgstr ""
 "%s on olemas, kas kustutada?\n"
 "\n"
-"Kui te olete selle protsessi juba sooritanud, tuleks Teil\n"
+"Kui Te olete selle protsessi juba sooritanud, tuleks Teil\n"
 " ka kirje kustutada serveris autoriseeritud võtmete seast."
 
 #: standalone/drakbackup:605
@@ -19119,12 +19128,12 @@ msgstr ""
 #: standalone/drakbackup:1122
 #, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr "Viga meili saatmisel. Raportimeili ei õnnestunud saata."
+msgstr "Viga e-kirja saatmisel. Raportit ei õnnestunud saata."
 
 #: standalone/drakbackup:1123
 #, c-format
 msgid " Error while sending mail. \n"
-msgstr " Viga meili saatmisel. \n"
+msgstr " Viga e-kirja saatmisel. \n"
 
 #: standalone/drakbackup:1153
 #, c-format
@@ -21500,7 +21509,7 @@ msgstr "Kohtvõrgu seadistused"
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "Kohalik IP-aadress"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21538,7 +21547,7 @@ msgstr ""
 "DHCP serveri seadistused.\n"
 "\n"
 "Siin saab valida erinevaid võimalusi DHCP-serveri seadistustele.\n"
-"Kui te ei tea mõne valiku tähendust, jätke see puutumata."
+"Kui Te ei tea mõne valiku tähendust, jätke see puutumata."
 
 #: standalone/drakgw:248
 #, c-format
@@ -21650,7 +21659,7 @@ msgstr "Seadistamine..."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Tulemüüri seadistamine..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21707,77 +21716,77 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "Palun %s info"
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "IP-aadress:"
 
 #: standalone/drakhosts:111
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Masinanimi:"
 
 #: standalone/drakhosts:112
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Masina aliased:"
 
 #: standalone/drakhosts:118
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Palun andke sobiv IP-aadress."
 
 #: standalone/drakhosts:125
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "See IP esineb juba %s-failis."
 
 #: standalone/drakhosts:194
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Masina aliased"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS - masina defintsioonide haldamine"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Masina lisamine ebaõnnestus."
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Masina muutmine ebaõnnestus."
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Masina eemaldamine ebaõnnestus."
 
 #: standalone/drakids:20
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "Olek"
+msgstr "Kuupäev"
 
 #: standalone/drakids:21 standalone/drakids:37
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Rünnaku üksikasjad"
+msgstr "Ründaja"
 
 #: standalone/drakids:22
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Rünnaku tüüp: %s"
+msgstr "Rünnaku tüüp"
 
 #: standalone/drakids:23
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
-msgstr "Teenused"
+msgstr "Teenus"
 
 #: standalone/drakids:24
 #, c-format
@@ -21785,94 +21794,94 @@ msgid "Network interface"
 msgstr "Võrguliides"
 
 #: standalone/drakids:60 standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall"
-msgstr "Tulemüür"
+msgstr "Aktiivne tulemüür"
 
 #: standalone/drakids:63
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Must nimekiri"
 
 #: standalone/drakids:67
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Eemalda LVMist"
+msgstr "Eemalda mustast nimekirjast"
 
 #: standalone/drakids:68
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Liiguta valgesse nimekirja"
 
 #: standalone/drakids:72
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Valge nimekiri"
 
 #: standalone/drakids:76
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Eemalda LVMist"
+msgstr "Eemalda valgest nimekirjast"
 
 #: standalone/drakids:125
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Jagamiseta"
+msgstr "Pordi skaneerimine"
 
 #: standalone/drakids:126
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Rünnatu teenus: %s"
+msgstr "Teenuse rünnak"
 
 #: standalone/drakids:127
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Parool (uuesti)"
+msgstr "Parooli lahtimurdmine"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "Administraatori sidumine anonüümsena"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "Kõigi kasutajate sidumine anonüümsena"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Kasutaja UID-d ei seota"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "Administraatori kaugligipääsu lubamine"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "NFS-server"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "NFS-serveri taaskäivitamine..."
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Viga NFS-serveri taaskäivitamisel"
 
 #: standalone/draknfs:102
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Kataloogi valimine"
 
 #: standalone/draknfs:107
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Peab olema kataloog."
 
 #: standalone/draknfs:138
 #, c-format
@@ -21900,6 +21909,25 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">NFS-i klienti</span> võib määrata mitmel moel:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">üksikmasin:</span> masin kas nimelahendajale "
+"tuntud lühinime, täielikult kvalifitseeritud nime või IP-aadressi järgi\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">võrgugrupid:</span> NIS-võrgugrupid võib anda "
+"kui @grupp.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">metamärgid:</span> masinanimed võivad sisaldada "
+"metamärke * ja ?. Näiteks *.cs.foo.edu korral sobivad kõik masinad domeenis "
+"cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">IP-võrgud:</span> kataloogid võib ka eksportida "
+"kõigile masinatele IP-(alam-)võrgus korraga, lisades näiteks `/255.255.252.0' "
+"või `/22' võrgu baasaadressile.\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -21924,26 +21952,45 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Kasutaja ID valikud</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> kõik uid/"
+"gid 0 päringud seotakse anonüümse uid/gid-iga.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> administraatori "
+"sidumist ei lubata. See on kasulik peamiselt kettata klientide korral.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> kõik uid-d ja gid-d "
+"seaotakse anonüümse kasutajaga. Kasulik NFS-eksporditud avalike "
+"FTP-kataloogide, uudiste puhverkataloogide jms, korral. Vastand on "
+"vaikimisi kasutatav no_all_squash.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid ja anongid:</span> anonüümse "
+"konto uid ja gid vahetu määramine.\n"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Sünkroonne ligipääs:"
 
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Turvaline ühendus:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Kirjutuskaitstud ressurss:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Muud valikud</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -21952,6 +21999,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> see nõuab, et päringud tuleksid "
+"Internetipordist, mis on väiksem kui IPPORT_RESERVED (1024). Vaikimisi "
+"on sisse lülitatud."
 
 #: standalone/draknfs:175
 #, c-format
@@ -21961,6 +22011,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> võimaldab lubada antud NFS-kettal "
+"kas ainult lugemis- või nii lugemis- kui ka kirjutamispäringuid. Vaikimisi "
+"on keelatud kõik päringud, mis failisüsteemi muudavad. Seda saab antud "
+"valikuga ka vahetult määrata."
 
 #: standalone/draknfs:176
 #, c-format
@@ -21969,116 +22023,119 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> NFS-serveril keelatakse rikkuda "
+"NFS-i protokolli ja vastata päringutele enne, kui nende päringutega tehtud "
+"muudatused on salvestatud stabiilsele andmekandjale (nt. füüsilisele kettale)."
 
 #: standalone/draknfs:372
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Muud seadistused"
+msgstr "Muude valikute abi"
 
 #: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "NFS-kataloog"
 
 #: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Kataloog"
 
 #: standalone/draknfs:388
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Masina ligipääs"
 
 #: standalone/draknfs:390
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "Ligipääs:"
 
 #: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Masinate ligipääs"
 
 #: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Kasutaja ID sidumine"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "Kasutaja ID:"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Kasutaja ID abi"
 
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "Anonüümse kasutaja ID:"
 
 #: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "Anonüümse grupi ID:"
 
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Palun määrake jagatav kataloog."
 
 #: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Masina ligipääs tuleb määrata."
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "Jagatud kataloog"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Masinate metamärgid"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "Üldised valikud"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Kohandatud valikud"
 
 #: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Palun kasutage ligipääsu määramiseks muutmisnuppu."
 
 #: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS - NFS-ressursside haldamine"
 
 #: standalone/draknfs:597
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "NFS-ressursi lisamine ebaõnnestus."
 
 #: standalone/draknfs:604
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "NFS-ressursi muutmine ebaõnnestus."
 
 #: standalone/draknfs:611
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "NFS-ressursi eemaldamine ebaõnnestus."
 
 #: standalone/drakperm:21
 #, c-format
@@ -22754,7 +22811,7 @@ msgstr "Käivituslogo teema salvestamine..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Pildifaili %s laadimine ebaõnnestus"
 
 #: standalone/draksplash:169
 #, c-format
@@ -23346,7 +23403,7 @@ msgstr ""
 "Siin saab määrata põhiseadistused.\n"
 "Kõik muud sektsioonid ainult täpsustavad seda.\n"
 "Ülejäänud seadistused on lisavõimalused. Kui\n"
-"te neid ei siin globaalselt ei määra, võite\n"
+"Te neid ei siin globaalselt ei määra, võite\n"
 "seadistada neid kõiki omaette sektsioonis.\n"
 
 #: standalone/drakvpn:437
@@ -25579,7 +25636,7 @@ msgstr "Faili sisu"
 #: standalone/logdrake:161 standalone/logdrake:399
 #, c-format
 msgid "Mail alert"
-msgstr "Meilihoiatus"
+msgstr "Hoiatus e-kirjaga"
 
 #: standalone/logdrake:168
 #, c-format
@@ -25609,7 +25666,7 @@ msgstr "FTP server"
 #: standalone/logdrake:379
 #, c-format
 msgid "Postfix Mail Server"
-msgstr "Postfix meiliserver"
+msgstr "Postfix e-posti server"
 
 #: standalone/logdrake:380
 #, c-format
@@ -25629,17 +25686,17 @@ msgstr "Xinetd teenus"
 #: standalone/logdrake:394
 #, c-format
 msgid "Configure the mail alert system"
-msgstr "Meilihoiatuste süsteemi seadistamine"
+msgstr "E-kirjaga hoiatamise süsteemi seadistamine"
 
 #: standalone/logdrake:395
 #, c-format
 msgid "Stop the mail alert system"
-msgstr "Peata meilihoiatuse süsteem"
+msgstr "Peata e-kirjaga hoiatamise süsteem"
 
 #: standalone/logdrake:402
 #, c-format
 msgid "Mail alert configuration"
-msgstr "Meilihoiatuse seadistamine"
+msgstr "E-kirjaga hoiatamise seadistamine"
 
 #: standalone/logdrake:403
 #, c-format
@@ -25704,12 +25761,12 @@ msgstr "ja sisestage SMTP serveri nimi (või IP), mida soovite kasutada"
 #: standalone/logdrake:449
 #, c-format
 msgid "The wizard successfully configured the mail alert."
-msgstr "Nõustaja seadistas edukalt meilihoiatuse."
+msgstr "Nõustaja seadistas edukalt e-kirjaga hoiatamise."
 
 #: standalone/logdrake:455
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
-msgstr "Nõustaja keelustas edukalt meilihoiatused."
+msgstr "Nõustaja keelustas edukalt e-kirjaga hoiatamise."
 
 #: standalone/logdrake:514
 #, c-format
@@ -25788,9 +25845,9 @@ msgid "Get Online Help"
 msgstr "Abi"
 
 #: standalone/net_applet:160
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to select wireless network: %s"
-msgstr "Traadita ühenduste haldamine"
+msgstr "Traadita võrgu valimine ebaõnnestus: %s"
 
 #: standalone/net_applet:279
 #, c-format
@@ -25805,12 +25862,12 @@ msgstr "Alati käivitatakse käivitumisel"
 #: standalone/net_applet:288
 #, c-format
 msgid "Actions"
-msgstr ""
+msgstr "Toimingud"
 
 #: standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Ühendust peegliga %s ei saadud"
+msgstr "Ühendust deemoniga ei saadud"
 
 #: standalone/net_applet:349
 #, c-format
