@@ -3,13 +3,13 @@
 # Danny Zeng <danny@zeng.com.cn>, 2000, 2002
 # Jesse Kuang <kjx@mandriva.com>, 2002
 # Shiyu Tang <shiyutang@netscape.net>, 2003, 2004
-# Funda Wang <fundawang@linux.net.cn>, 2002, 2003, 2004
+# Funda Wang <fundawang@linux.net.cn>, 2002, 2003, 2004, 2005
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.3\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-07-07 06:25+0800\n"
+"PO-Revision-Date: 2005-08-01 05:03+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -1729,12 +1729,12 @@ msgstr "文本菜单 LILO"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "图形菜单 Grub"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "文本菜单 Grub"
 
 #: bootloader.pm:857
 #, c-format
@@ -8068,14 +8068,14 @@ msgstr "泰国语(Pattachote)"
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (摩洛哥布局)(+拉丁/阿拉伯语)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (音标)(+拉丁/阿拉伯语)"
 
 #: keyboard.pm:313
 #, c-format
@@ -10836,7 +10836,7 @@ msgstr "适配卡"
 #: network/netconnect.pm:1132
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "网络互斥"
 
 #: network/netconnect.pm:1133
 #, c-format
@@ -17599,6 +17599,13 @@ msgid ""
 "        \t\t\n"
 "        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 msgstr ""
+"        - 创建 etherboot 软盘/光盘:\n"
+"        \t无盘工作站需要网卡上的 ROM 映像，或者启动软盘或者光盘才能初始化启动过程。\n"
+"        \tdrakTermServ 将帮助您根据客户机上的网卡生成这些映像。\n"
+"        \t\t\n"
+"        \t例如，为 3ComA 3c509 手动生成启动软盘的命令为:\n"
+"        \t\t\n"
+"        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 
 #: standalone/drakTermServ:666
 #, c-format
@@ -18679,6 +18686,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"分配给备份的最大\n"
+" 磁盘空间(MB)"
 
 #: standalone/drakbackup:1959
 #, c-format
@@ -18687,11 +18696,13 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"删除 N 天前的增量或差异备份\n"
+" (0 代表保留全部备份)以便节省空间"
 
 #: standalone/drakbackup:2026
 #, c-format
 msgid "CD-R / DVD-R"
-msgstr "CDROM / DVDROM"
+msgstr "CD-R / DVD-R"
 
 #: standalone/drakbackup:2031
 #, c-format
@@ -20888,7 +20899,7 @@ msgstr "局域网设置"
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "本地 IP 寻址"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21035,7 +21046,7 @@ msgstr "正在配置..."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "正在配置防火墙..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21088,7 +21099,7 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "请%s信息"
 
 #: standalone/drakhosts:110
 #, c-format
@@ -21113,137 +21124,137 @@ msgstr "请输入有效的 IP 地址。"
 #: standalone/drakhosts:125
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "%s 文件中已经有同样的 IP 了。"
 
 #: standalone/drakhosts:194
 #, c-format
 msgid "Host Aliases"
-msgstr "主机别名。"
+msgstr "主机别名"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS 可管理主机定义"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "添加主机失败。"
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "修改主机失败。"
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "删除主机失败。"
 
 #: standalone/drakids:20
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "状态"
+msgstr "日期"
 
 #: standalone/drakids:21 standalone/drakids:37
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "攻击细节"
+msgstr "攻击者"
 
 #: standalone/drakids:22
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "攻击类型: %s"
+msgstr "攻击类型"
 
 #: standalone/drakids:23
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
 msgstr "服务"
 
 #: standalone/drakids:24
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface"
-msgstr "网卡: %s"
+msgstr "网卡"
 
 #: standalone/drakids:60 standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall"
-msgstr "防火墙"
+msgstr "激活防火墙"
 
 #: standalone/drakids:63
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "黑名单"
 
 #: standalone/drakids:67
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "从 LVM 中移除"
+msgstr "从黑名单中移除"
 
 #: standalone/drakids:68
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "移动到白名单"
 
 #: standalone/drakids:72
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "白名单"
 
 #: standalone/drakids:76
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "从 LVM 中移除"
+msgstr "从白名单中移除"
 
 #: standalone/drakids:125
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "禁止共享"
+msgstr "端口扫描"
 
 #: standalone/drakids:126
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "攻击的服务: %s"
+msgstr "服务攻击"
 
 #: standalone/drakids:127
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "密码(请再输一次)"
+msgstr "密码破解"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "将 root 用户映射为匿名者"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "将所有用户映射为匿名用户"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "无用户 UID 映射"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "允许真正的远程 root 访问"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "NFS 服务器"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "正在重新启动/重新装入 NFS 服务器..."
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "重新启动/重新装入 NFS 服务器出错"
 
 #: standalone/draknfs:102
 #, c-format
@@ -21281,6 +21292,22 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"您必须以以下几种方式指定 <span weight=\"bold\">NFS 客户端</span>:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">单主机:</span> 主机既可以是可被解释器识别的缩写，"
+"全称域名，也可以是 IP 地址\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">网络组:</span> 可以通过 @group 的格式指定 NIS 网络组。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">通配符:</span> 机器名可包含通配符，如 "
+"* 和 ?。例如：*.cs.foo.edu 可匹配域 cs.food.edu 中的全部主机。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">IP 子网:</span> 您还可以同时将目录导出给 IP 子"
+"网中的全部主机。例如，追加到网络基地址后的“/255.255.252.0”或“/22”。\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -21305,26 +21332,44 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">用户 ID 选项</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> 将请求从 uid/gid 0 映射到匿名"
+" uid/gid。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> 关闭根挤压。"
+"此选项特别适合于无盘工作站。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> 将全部 uid 和 gid 映射到"
+"匿名用户。一般用于通过 NFS 导出的公开 FTP 目录，新闻池目录等等。具有相反功能"
+"的选项是，该设置是默认设置。\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid 和 anongid:</span> 显式设置"
+"匿名账户的 uid 和 gid。\n"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "同步访问:"
 
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "安全连接:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "只读共享:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">高级选项</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -21333,6 +21378,8 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> 此选项需要发出请求的互联网端口小于"
+" IPPORT_RESERVED (1024)。此选项默认打开。"
 
 #: standalone/draknfs:175
 #, c-format
@@ -21342,6 +21389,8 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> 允许此 NFS 卷上的只读或读写请求。"
+"默认值为不允许任何会更改文件系统的请求。您也可以显式使用此选项。"
 
 #: standalone/draknfs:176
 #, c-format
@@ -21350,11 +21399,13 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> 禁止 NFS 暴露 NFS 协议，并在请求"
+"对存储设备发生实际更改之前先回复请求。"
 
 #: standalone/draknfs:372
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "高级配置"
+msgstr "高级选项帮助"
 
 #: standalone/draknfs:383
 #, c-format
@@ -21364,7 +21415,7 @@ msgstr "NFS 目录"
 #: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
-msgstr "目录："
+msgstr "目录:"
 
 #: standalone/draknfs:388
 #, c-format
@@ -21374,22 +21425,22 @@ msgstr "主机访问"
 #: standalone/draknfs:390
 #, c-format
 msgid "Access:"
-msgstr "访问："
+msgstr "访问:"
 
 #: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "主机访问"
 
 #: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "用户 ID 映射"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
-msgstr "用户 ID："
+msgstr "用户 ID:"
 
 #: standalone/draknfs:395
 #, c-format
@@ -21399,12 +21450,12 @@ msgstr "帮助用户 ID"
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "匿名用户 ID:"
 
 #: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "匿名组 ID:"
 
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
@@ -21414,7 +21465,7 @@ msgstr "请输入要共享的目录。"
 #: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "您必须指定主机访问。"
 
 #: standalone/draknfs:514
 #, c-format
@@ -21434,17 +21485,17 @@ msgstr "常规选项"
 #: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "自定义选项"
 
 #: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "请使用修改按钮设定访问权限。"
 
 #: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS 可管理 NFS 共享"
 
 #: standalone/draknfs:597
 #, c-format
@@ -22123,7 +22174,7 @@ msgstr "保存开机画面主题..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "无法装入图像文件 %s"
 
 #: standalone/draksplash:169
 #, c-format
@@ -23454,7 +23505,7 @@ msgstr ""
 #: standalone/drakvpn:1079
 #, c-format
 msgid "My identifier"
-msgstr ""
+msgstr "我的身份"
 
 #: standalone/drakvpn:1080
 #, c-format
@@ -24892,9 +24943,9 @@ msgid "Get Online Help"
 msgstr "获得在线帮助"
 
 #: standalone/net_applet:160
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to select wireless network: %s"
-msgstr "管理无线网络"
+msgstr "无法选择无线网络: %s"
 
 #: standalone/net_applet:279
 #, c-format
@@ -24909,12 +24960,12 @@ msgstr "启动时自动调用"
 #: standalone/net_applet:288
 #, c-format
 msgid "Actions"
-msgstr ""
+msgstr "动作"
 
 #: standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "无法连接镜像 %s"
+msgstr "无法连接守护程序"
 
 #: standalone/net_applet:349
 #, c-format
@@ -25920,244 +25971,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "安装失败"
 
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "Local Network adress"
-#~ msgstr "局域网地址"
-
-#~ msgid "Configuring scripts, installing software, starting servers..."
-#~ msgstr "正在配置脚本, 安装软件, 启动服务程序 ..."
-
-#~ msgid "Force sync:"
-#~ msgstr "强制同步："
-
-#~ msgid "Help General options"
-#~ msgstr "帮助常规选项"
-
-#~ msgid "port below 1024:"
-#~ msgstr "1024 以下的端口："
-
-#~ msgid "Read/Write request:"
-#~ msgstr "读/写请求："
-
-#~ msgid "options:"
-#~ msgstr "选项："
-
-#~ msgid "More options"
-#~ msgstr "更多选项"
-
-#~ msgid "Reload NFS server"
-#~ msgstr "重新装入 NFS 服务器"
-
-#~ msgid "drakfloppy"
-#~ msgstr "Drak 启动软盘"
-
-#~ msgid "Boot disk creation"
-#~ msgstr "创建启动盘"
-
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgid "Kernel version"
-#~ msgstr "内核版本"
-
-#~ msgid "Preferences"
-#~ msgstr "首选项"
-
-#~ msgid "Advanced preferences"
-#~ msgstr "高级设置"
-
-#~ msgid "Size"
-#~ msgstr "大小"
-
-#~ msgid "Mkinitrd optional arguments"
-#~ msgstr "Mkinitrd 可选参数"
-
-#~ msgid "force"
-#~ msgstr "强迫"
-
-#~ msgid "omit raid modules"
-#~ msgstr "省略 RAID 模块"
-
-#~ msgid "if needed"
-#~ msgstr "当需要时"
-
-#~ msgid "omit scsi modules"
-#~ msgstr "省略 scsi 模块"
-
-#~ msgid "Add a module"
-#~ msgstr "增加模块"
-
-#~ msgid "Remove a module"
-#~ msgstr "卸载模块"
-
-#~ msgid "Be sure a media is present for the device %s"
-#~ msgstr "确定设备 %s 的介质存在"
-
-#~ msgid ""
-#~ "There is no medium or it is write-protected for device %s.\n"
-#~ "Please insert one."
-#~ msgstr ""
-#~ "设备 %s 介质不存在或被写保护。\n"
-#~ "请插入介质。"
-
-#~ msgid "Unable to fork: %s"
-#~ msgstr "无法创建进程: %s"
-
-#~ msgid "Floppy creation completed"
-#~ msgstr "完成创建软盘"
-
-#~ msgid "The creation of the boot floppy has been successfully completed \n"
-#~ msgstr "创建启动软盘已经成功地完成了\n"
-
-#~ msgid ""
-#~ "Unable to properly close mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-#~ msgstr ""
-#~ "无法正确关闭 mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr "不能用 LVM 逻辑卷做 %s 挂载点"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "您选择了把 LVM 卷作为根(/)。\n"
-#~ "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
-#~ "所以, 请增加一个 /boot 分区。"
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr "您可能无法安装 lilo(因为 lilo 不能处理多轨道的启动光盘)"
-
-#~ msgid "use PPPoE"
-#~ msgstr "使用 PPPoE"
-
-#~ msgid "use PPTP"
-#~ msgstr "使用 PPTP"
-
-#~ msgid "use DHCP"
-#~ msgstr "使用 DHCP"
-
-#~ msgid "Alcatel Speedtouch USB"
-#~ msgstr "阿尔卡特 Speedtouch USB"
-
-#~ msgid " - detected"
-#~ msgstr " - 已检测"
-
-#~ msgid "Sagem (using PPPoA) USB"
-#~ msgstr "Sagem (使用 PPPoA) USB"
-
-#~ msgid "Sagem (using DHCP) USB"
-#~ msgstr "Sagem (使用 DHCP) USB"
-
-#~ msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm 等"
-
-#~ msgid ""
-#~ "Warning, another Internet connection has been detected, maybe using your "
-#~ "network"
-#~ msgstr "警告, 检测到另外的 Internet 连接, 可能是通过局域网"
-
-#~ msgid "PXE Server Configuration"
-#~ msgstr "PXE 服务器配置"
-
-#~ msgid "Installation Server Configuration"
-#~ msgstr "安装服务器配置"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "您将要在您的电脑上配置一个安装服务器, 这包括安装一个 PXE 服务器并把它配"
-#~ "置\n"
-#~ "为 DHCP 服务器和 TFTP 服务器。\n"
-#~ "使用此特性, 您局域网上的其它电脑就能够从这个服务器安装系统。\n"
-#~ "\n"
-#~ "继续之前, 请一定要使用“Drak 连接”配置您的网络和互联网连接。\n"
-#~ "\n"
-#~ "注意: 要建立一个局域网(LAN), 您需要专用的网卡。"
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "您系统中没有网卡！"
-
-#~ msgid "Choose the network interface"
-#~ msgstr "选择网卡"
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr "请选择哪个网卡将用于 DHCP 服务器。"
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "网卡 %s(在网络 %s 上)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "DHCP 服务器可以让其它电脑用 PXE 启动, 并得到指定范围内的地址。\n"
-#~ "\n"
-#~ "网络地址是 %s 而子网掩码是 %s。\n"
-#~ "\n"
-
-#~ msgid "The DHCP start ip"
-#~ msgstr "DHCP 起始 IP"
-
-#~ msgid "The DHCP end ip"
-#~ msgstr "DHCP 终止 IP"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "请指定在哪里可以找到安装镜像。\n"
-#~ "\n"
-#~ "如果您还没有这个目录, 请复制 CD 或 DVD 的内容。\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "安装映像目录"
-
-#~ msgid "No image found"
-#~ msgstr "没有发现映像"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr "没有发现 CD 或 DVD 映像, 请复制安装程序和 RPM 文件。"
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "请指定 auto_install.cfg 位于什么地方。\n"
-#~ "\n"
-#~ "如果您不想设置自动安装模式就保留空白。\n"
-#~ "\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "auto_install.cfg 文件的位置"
