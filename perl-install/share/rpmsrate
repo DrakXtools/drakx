@@ -14,9 +14,10 @@ CAT_GRAPHICAL_DESKTOP
 
 CAT_GNOME
   5 gnome-panel nautilus nautilus-filesharing gnome-control-center metacity 
+  5 yelp gnome2
   4 gnome-applets gtk-themes file-roller
-    gnome-utils gucharmap xlockmore gtk-engines2 
-    gconf-editor desktop-printing eog gpdf
+    gnome-utils gucharmap xlockmore 
+    gconf-editor desktop-printing eog evince
   !CAT_KDE || CAT_GNOME 
     5 gdm 
     4 CAT_THEMES gdm-themes gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme
@@ -64,7 +65,7 @@ CAT_OFFICE
   5 CAT_KDE kdenetwork-kdict
   5 CAT_KDE kdepim-karm
   4 acroread acroread-nppdf
-  3 gnumeric
+  4 CAT_GNOME gnumeric
   3 gaddr xpdf gv
   3 wv ical
   2 units lyx
@@ -78,8 +79,7 @@ CAT_OFFICE
     3 kdegraphics-kdvi
   CAT_GNOME
     4 gnome-pim
-    3 gnome-pilot-conduits Guppi
-    2 ggv 
+    3 gnome-pilot-conduits 
 
 CAT_SPELLCHECK
   5 aspell-br aspell-ca
@@ -114,7 +114,7 @@ CAT_AUDIO
   3 timidity-instruments
   3 beep-media-player
   5 DRIVER"^snd-" alsa-utils
-  3 DRIVER"^snd-" xmms-alsa gnome-alsamixer
+  3 DRIVER"^snd-" xmms-alsa gnome-alsamixer gstreamer-alsa
 # the two following entries are for ISA sound cards and thus are not managed for now:
   5 DRIVER"^snd-sb" cspctl
   5 DRIVER"^snd-sb|^sbawe" sb16_csp
@@ -243,7 +243,7 @@ CAT_NETWORKING_INSTANT_MESSAGING
   3 ayttm
   3 licq-console licq-rms
   CAT_GNOME
-    3 gnomeicu gabber
+    3 gnomeicu gossip
     3 gtk+licq
 
 CAT_NETWORKING_IRC
