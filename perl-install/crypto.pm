@@ -328,7 +328,7 @@ cookeri586:ftp://ftp.physics.auth.gr/pub/mirrors/Mandrakelinux/devel/cooker/i586
 cookeri586:ftp://ftp.planetmirror.com/pub/Mandrake/devel/cooker/i586/media/main
 cookeri586:ftp://ftp.prew.hu/pub/Linux/Mandrakelinux/devel/cooker/i586/media/main
 cookeri586:ftp://ftp.ps.pl/mirrors/mandrake/devel/cooker/i586/media/main
-cookeri586:ftp://ftp.rediris.es/pub/linux/distributions/mandrakelinux/devel/cooker/i586/media/main
+cookeri586:ftp://ftp.rediris.es/mirror/mandrake-devel/cooker/i586/
 cookeri586:ftp://ftp.riken.go.jp/pub/Linux/mandrake/devel/cooker/i586/media/main
 cookeri586:ftp://ftp.sun.ac.za/pub/linux/mandrake/pub/Linux/distributions/devel/cooker/i586/media/main
 cookeri586:ftp://ftp.sunet.se/pub/Linux/distributions/mandrakelinux/devel/cooker/i586/media/main
@@ -373,7 +373,7 @@ cookeri586:http://fr2.rpmfind.net/linux/Mandrakelinux/devel/cooker/i586/media/ma
 cookeri586:http://ftp.ale.org/pub/mirrors/mandrake/devel/cooker/i586/media/main
 cookeri586:http://ftp.heanet.ie/pub/mandrake/Mandrakelinux/devel/cooker/i586/media/main
 cookeri586:http://ftp.nluug.nl/ftp/pub/os/Linux/distr/Mandrakelinux/devel/cooker/i586/media/main
-cookeri586:http://ftp.rediris.es/pub/linux/distributions/mandrakelinux/devel/cooker/i586/media/main
+cookeri586:http://ftp.rediris.es/mirror/mandrake-devel/cooker/i586/
 cookeri586:http://ftp.riken.go.jp/Linux/mandrake/devel/cooker/i586/media/main
 cookeri586:http://ftp.surfnet.nl/ftp/pub/os/Linux/distr/Mandrakelinux/devel/cooker/i586/media/main
 cookeri586:http://gd.tuwien.ac.at/pub/linux/Mandrakelinux/devel/cooker/i586/media/main
