@@ -123,13 +123,14 @@ our %spoolers = ('pdq' => {
 		     'boot_spooler' => 'cups',
 		     'service' => 'cups',
 		     'local_queues' => 1,
-		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups',
+		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups', 'desktop-printing',
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
 					      /usr/bin/xpp
 					      /usr/lib/cups/filter/rastertolxx74 
-					      /usr/lib/cups/filter/commandtoepson),
+					      /usr/lib/cups/filter/commandtoepson
+					      /usr/bin/eggcups),
 					   $::isInstall ||
 					   !(-x '/usr/bin/wget') ?
 					   '/usr/bin/curl' :
