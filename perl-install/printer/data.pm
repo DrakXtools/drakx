@@ -32,7 +32,7 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 			      'printer-utils', 'printer-testpages', 
 			      'ghostscript', 'hplip-hpijs', 'gutenprint-ijs',
 			      'gutenprint-foomatic', 'gutenprint-escputil', 
-			      'postscript-ppds', 'hplip-hpijs-ppds', 
+			      'postscript-ppds', 
 			      'hplip-model-data', 'nmap', 'scli' ],
 			    [qw(/usr/bin/foomatic-rip
 				/usr/share/foomatic/db/source/driver/ljet4.xml
@@ -47,7 +47,6 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 				/usr/share/foomatic/db/source/driver/gutenprint-ijs.5.0.xml
 				/usr/bin/escputil
 				/usr/share/cups/model/postscript.ppd.gz
-				/usr/share/ppd/HP/HP-2000C-hpijs.ppd.gz
 				/usr/share/hplip/data/xml/models.xml
 				/usr/bin/nmap
 				/usr/bin/scli)] ];
