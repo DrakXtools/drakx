@@ -18,11 +18,14 @@ CAT_GNOME
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore 
     gconf-editor desktop-printing eog evince
-  !CAT_KDE || CAT_GNOME 
-    5 gdm 
-    4 CAT_THEMES gdm-themes gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme
+  4 CAT_THEMES gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme
+
   3 gnome-pilot
   2 bug-buddy
+
+!CAT_KDE || CAT_GNOME 
+    5 gdm 
+    4 CAT_THEMES gdm-themes
 
 CAT_KDE
   5 galaxy-kde galaxy-kde-kwin kdebase-nsplugins kdebase-progs krozat mandrakegalaxy xsettings-kde
