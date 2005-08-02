@@ -108,7 +108,7 @@ sub get_eth_cards_names {
 sub get_eth_card_mac_address {
     my ($intf) = @_;
     #- don't look for 6 bytes addresses only because of firewire
-    `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s((?:[0-9a-f]{2}:?)+)\s|;
+    `$::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s((?:[0-9a-f]{2}:?)+)\s|;
 }
 
 #- write interfaces MAC address in iftab
