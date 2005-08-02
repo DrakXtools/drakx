@@ -398,6 +398,7 @@ sub gw_configure() {
     my $_wait_configuring = $in->wait_message(N("Configuring..."),
                                               N("Configuring firewall..."));
 
+    $shorewall->{disabled} = 0;
     $shorewall->{masq_subnet} = "$lan_intf->{NETWORK}/$lan_intf->{NETMASK}";
     network::shorewall::write($shorewall);
 
