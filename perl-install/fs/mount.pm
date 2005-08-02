@@ -58,6 +58,8 @@ sub mount {
 
     if ($fs eq 'vfat') {
 	@mount_opt = 'check=relaxed';
+    } elsif ($fs eq 'ntfs') {
+	@mount_opt = () if $::isInstall; # esp. drop nls=xxx option so that we don't need kernel module nls_xxx
     } elsif ($fs eq 'nfs') {
 	push @mount_opt, 'nolock', 'soft', 'intr' if $::isInstall;
     } elsif ($fs eq 'jfs' && !$b_rdonly) {

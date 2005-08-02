@@ -221,13 +221,9 @@ sub set_default {
 			      });
     }
     if ($part->{fs_type} eq 'ntfs') {
-	put_in_hash($options, { ro => 1,
-	                        'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
-	                          });
-	eval { modules::load("nls_$opts{iocharset}") };
-	if (!$@) {
-	    add2hash($options, { 'nls=' => $opts{iocharset} })
-	}
+	put_in_hash($options, { ro => 1, 'nls=' => $opts{iocharset},
+				'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
+			      });
     }
     if (fs::type::can_be_this_fs_type($part, 'iso9660')) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
