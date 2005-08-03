@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.39mdk
+Release: 0.40mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -372,6 +372,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug  3 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.40mdk
+- do not write rules conflicting with udev ones
+- don't package dbus stuff && finish-install in drakxtools-backend
+- diskdrake: minimal reiser4 support (pixel, #15839)
+- drakclock: add some ntp servers from brazil (pixel, #16879)
+- drakconnect (blino):
+  o apply gateway modifications (#17260)
+  o fix applying DNS change (#17253)
+  * fix for new sysfs tree architecture
+- drakgw: make sure shorewall gets enabled (blino, #17238)
+- draksound: handle a couple more drivers
+- net_applet: put wireless items in a submenu (blino)
+
 * Fri Jul 29 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.39mdk
 - do not detect WingMan & Logitech devices as UPSes (#16995, #16994)
 - drakconnect: fix testing network connection (blino)
