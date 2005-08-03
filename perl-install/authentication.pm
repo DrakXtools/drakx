@@ -358,6 +358,8 @@ sub set {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
+    } elsif ($kind eq 'smartcard') {
+
     }
 }
 

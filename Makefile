@@ -71,7 +71,7 @@ upload:
 	$(MAKE) upload_only
 
 upload_only:
-	function upload() { rel=`echo $$1 | sed 's!$(ROOTDEST)/!!'`; rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$rel; } ;\
+	function upload() { rel=`echo $$1 | sed 's!$(ROOTDEST)/!!'`; rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/x86_64/$$rel; } ;\
 	upload $(MEDIA_INFO_DEST) 'compssUsers.pl*' ;\
 	upload $(MEDIA_INFO_DEST) rpmsrate ;\
 	upload $(STAGE2_DEST) '*.clp' ;\

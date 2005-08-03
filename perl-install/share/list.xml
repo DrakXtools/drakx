@@ -117,6 +117,17 @@
   /usr/share/themes/Galaxy/gtk-2.0/gtkrc
   /bin/brltty
 
+  /lib64/tls/libc-2.3.5.so
+  /lib64/tls/libc.so.6
+  /lib64/tls/libm-2.3.5.so
+  /lib64/tls/libm.so.6
+  /lib64/tls/libpthread-0.10.so
+  /lib64/tls/libpthread.so.0
+  /lib64/tls/librt-2.3.5.so
+  /lib64/tls/librt.so.1
+  /lib64/tls/libthread_db-1.0.so
+  /lib64/tls/libthread_db.so.1
+
   <from expand="glob">
     /etc/gtk-2.0/gdk-pixbuf.loaders.*
     /etc/gtk-2.0/gtk.immodules.*
@@ -236,6 +247,10 @@
   ARCH-linux/Socket.pm
   ARCH-linux/_h2ph_pre.ph
   ARCH-linux/asm/unistd.ph
+  <if ARCH="x86_64">
+  ARCH-linux/asm-i386/unistd.ph 
+  ARCH-linux/asm-x86_64/unistd.ph 
+  </if>
   <if ARCH="ia64">
   ARCH-linux/asm-i386/unistd.ph 
   ARCH-linux/asm-x86_64/unistd.ph 
