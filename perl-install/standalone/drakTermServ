@@ -422,11 +422,11 @@ sub client_type() {
 	$check_allow_thin->set_active($conf{ALLOW_THIN});
 	my $check_sync_kbd = Gtk2::CheckButton->new(N("Sync client X keyboard settings with server."));
 	$check_sync_kbd->set_active($conf{SYNC_KBD});
-    text_view(N("Please select default client type.
+    text_view(N("Please select default client type (Fat is the default type if 'Use thin' is unchecked).
     'Thin' clients run everything off the server's CPU/RAM, using the client display.
     'Fat' clients use their own CPU/RAM but the server's filesystem."), "wizard");
     gtkpack_($$central_widget,
-		0, gtkpack_(Gtk2::HBox->new(1,0), 
+		0, gtkpack_(Gtk2::HBox->new(0,0), 
 			1, Gtk2::VBox->new,
 			0, gtksignal_connect($check_allow_thin, clicked => sub { 
 					invbool \$conf{ALLOW_THIN};
