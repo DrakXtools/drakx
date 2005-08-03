@@ -64,6 +64,8 @@ if (my $pid = fork()) {
     kill 15, $Xnest_pid;
 } else {
     $ENV{HOME} = '/';
+    # to kept sync with gi/mdk-stage1/init.c::env:
+    $ENV{LD_LIBRARY_PATH}='/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib:/lib64:/usr/lib64:/usr/X11R6/lib64:/mnt/lib64:/mnt/usr/lib64:/mnt/usr/X11R6/lib64';
     my $cmd = join(' ', "/usr/bin/runinstall2 --local_install", @ARGV);
     exec "$sudo chroot $SLASH_LOCATION $cmd" or die "exec $cmd in $SLASH_LOCATION failed\n";
 }
