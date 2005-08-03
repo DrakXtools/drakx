@@ -174,7 +174,7 @@ sub create_logo_window {
 
     mygtk2::may_destroy($o->{logo_window});
 
-    my $file = $o->{meta_class} eq 'firewall' ? "logo-mandrake-Firewall.png" : "logo-mandrake.png";
+    my $file = $o->{meta_class} eq 'firewall' ? "logo-mandriva-Firewall.png" : "logo-mandriva.png";
 
     $o->{logo_window} =
       gtknew('Window', 
@@ -210,7 +210,7 @@ q(<fontconfig>
 sub init_sizes() {
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     $::stepswidth = $::rootwidth <= 640 ? 0 : 200 if !$::move;
-    ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (500, 40);
+    ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (800, 75);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
     ($::real_windowwidth, $::real_windowheight) = (576, 418);
     $::move and $::windowwidth -= 100;
