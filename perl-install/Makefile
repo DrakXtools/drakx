@@ -101,7 +101,7 @@ get_needed_files: $(DIRS) mo_files
 	REP4PMS=$(REP4PMS) ../tools/install-xml-file-list share/list.xml $(DEST)
 	$(SUDO) chmod u-s -R $(DEST)
 
-	mv -f $(DEST)/usr/{lib,X11R6/lib}/*.so* $(DEST)/lib
+	mv -f $(DEST)/usr/{$(LIB),X11R6/$(LIB)}/*.so* $(DEST)/$(LIB)
 	../tools/simplify-drakx-modules $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	cp -f $(STAGE1)/init-stage2 $(DEST)/etc/init
