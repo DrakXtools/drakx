@@ -104,7 +104,7 @@ STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
 
 
 ifeq (DIETLIBC, $(L))
-STAGE1_NETWORK_LIBS = /usr/$(LIB)/dietlibc/lib-$(ARCH)/librpc.a
+STAGE1_NETWORK_LIBS = /usr/lib/dietlibc/lib-$(ARCH)/librpc.a
 else
 STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
 endif
