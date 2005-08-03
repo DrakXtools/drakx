@@ -640,6 +640,7 @@ sub save {
 
     Glib::Timeout->add(200, sub {
                            gtkflush();
+                           delete $net->{network}{GATEWAY};
                            foreach (keys %$p) {
                                save_notebook($p->{$_}{intf}, $p->{$_}{gui}) or return;
                                $p->{$_}{intf}{save} and $p->{$_}{intf}{save}->();
@@ -658,7 +659,9 @@ sub save {
 sub save_notebook {
     my ($intf, $gui) = @_;
 
-    $net->{$_} = $gui->{network}{$_}->get_text foreach keys %{$gui->{network}};
+    if ($gui->{network}{GATEWAY}->is_sensitive && $gui->{network}{GATEWAY}->get_text) {
+        $net->{network}{GATEWAY} =  $gui->{network}{GATEWAY}->get_text;
+    }
     $gui->{intf}{$_} and $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
     $gui->{intf_radio}{$_} and $intf->{$_} = $gui->{intf_radio}{$_} foreach keys %{$gui->{intf_radio}};
     $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
