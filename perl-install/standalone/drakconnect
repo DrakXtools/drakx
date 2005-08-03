@@ -642,8 +642,9 @@ sub save {
                            gtkflush();
                            foreach (keys %$p) {
                                save_notebook($p->{$_}{intf}, $p->{$_}{gui}) or return;
-                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply();
+                               $p->{$_}{intf}{save} and $p->{$_}{intf}{save}->();
                            }
+                           apply();
                            system("/etc/rc.d/init.d/network restart");
                            $dialog->response(0);
                        });
