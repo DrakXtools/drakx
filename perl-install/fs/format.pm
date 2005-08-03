@@ -13,6 +13,7 @@ my %cmds = (
     ext2     => [ 'e2fsprogs', 'mkfs.ext2', '-F' ],
     ext3     => [ 'e2fsprogs', 'mkfs.ext2', '-F', '-j' ],
     reiserfs => [ 'reiserfsprogs', 'mkfs.reiserfs', '-ff' ],
+    reiser4  => [ 'reiser4progs', 'mkfs.reiser4', '-f' ],
     xfs      => [ 'xfsprogs', 'mkfs.xfs', '-f', '-q' ],
     jfs      => [ 'jfsprogs', 'mkfs.jfs', '-f' ],
     hfs      => [ 'hfsutils', 'hformat' ],
