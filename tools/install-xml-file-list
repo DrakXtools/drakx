@@ -129,8 +129,8 @@ sub collect_needed_libraries {
 	my @l = `ldd $to_check 2>/dev/null` =~ m! => (/\S+)!g;
 	foreach (@l) {
 	    if ($main_node->{attr}{'no-arch-libraries'}) {
-		#- replace /lib/i686 with /lib (but keep /lib/tls)
-		s!^(/lib(64)?/).*?/!$1! if !m!/tls/!;
+		#- replace /lib/tls or /lib/i686 with /lib
+		s!^(/lib(64)?/).*?/!$1!;
 	    }
 	}
 	@to_check = grep { !$needed_libraries{$_}++ } @l;	
