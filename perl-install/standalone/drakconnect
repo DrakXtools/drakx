@@ -983,11 +983,6 @@ Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a ne
     my $param_vbox = Gtk2::VBox->new(0,0);
     my $i = 0;
 
-    #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
-    if ($net->{type} eq 'adsl') {
-	require network::adsl;
-	network::adsl::adsl_probe_info($net);
-    }
     my @conf_data = (
                      [ N("Host name (optional)"), \$net->{network}{HOSTNAME} ],
                      [ N("First DNS Server (optional)"),  \$net->{resolv}{dnsServer} ],
