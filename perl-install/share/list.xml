@@ -104,8 +104,6 @@
   /etc/imrc
   /etc/im_palette.pal
   /etc/X11/xserver/SecurityPolicy
-  /etc/gtk-2.0/gdk-pixbuf.loaders.*
-  /etc/gtk-2.0/gtk.immodules.*
   /etc/pango/ARCH/pango.modules
   /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-xpm.so
   /usr/LIB/gtk-2.0/*/loaders/libpixbufloader-png.so
@@ -120,6 +118,8 @@
   /bin/brltty
 
   <from expand="glob">
+    /etc/gtk-2.0/gdk-pixbuf.loaders.*
+    /etc/gtk-2.0/gtk.immodules.*
     /etc/brltty/text.*.tbl
     /etc/brltty/brltty-??.hlp
     /lib/brltty/libbrlttyb??.so
