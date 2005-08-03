@@ -1,3 +1,120 @@
+2005/08/03  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakconnect: apply gateway modifications (#17260)
+	don't save configuration dozens of times
+	use apply()
+	fix typo (#17253, me sux)
+	remove deprecated code
+
+2005/08/03  Pixel  <pixel at mandriva.com>
+
+	* tools/install-xml-file-list: don't need /lib/tls files anymore (since
+	rpm works without nptl)
+
+	* timezone.pm: add some ntp servers from brazil (bugzilla #16879)
+
+	* fs/format.pm, fs/type.pm: minimal (and quite hidden) reiser4 support in
+	diskdrake (bugzilla #15839)
+
+	* Xconfig/resolution_and_depth.pm: suggest 1280x1024 instead of 1280x960
+	which causes pbs (backported from HEAD)
+
+2005/08/03  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* docs/HACKING: 
+	  - update
+	  - make it arch neutral
+
+	* share/po/br.po: update
+
+2005/08/02  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakgw: make sure shorewall gets enabled
+
+	* network/ethernet.pm: ip isn't localized
+
+	* install_steps_gtk.pm: load xpad module for xbox (Stew)
+
+2005/08/02  Pixel  <pixel at mandriva.com>
+
+	* share/rpmsrate: gdm (and so gdm-themes) is special, but not
+	gnome-icon-theme and the like
+
+	* fs/mount.pm, fs/mount_options.pm: workaround missing nls_xxx module
+	during install differently
+
+2005/08/02  Till Kamppeter  <till at mandriva.com>
+
+	* printer/data.pm: 
+	  - Removed automatic installation of "hplip-hpijs-ppds" package, the
+	PPDs in this package are already generated with the installed
+	  Foomatic data.
+	Made "desktop-printing" package being installed automatically when
+	CUPS is used with a local daemon.
+
+2005/08/02  tsdgeos
+
+	* share/po/ca.po: updates
+
+2005/08/02  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/ga.po: update
+
+2005/08/02  Warly  <warly at mandriva.com>
+
+	* share/logo-mandrake.png: new installation banner
+
+	* share/rpmsrate: add kat in KDE
+
+2005/08/01  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: Fix GNOME default applications
+
+2005/08/01  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/08/01  Olivier Blin <oblin at mandriva.com>
+
+	* share/po/fr.po: fix ndiswrapper translation
+
+	* drakxtools.spec: don't package dbus stuff in drakxtools-backend
+	don't package finish-install in drakxtools-newt
+
+2005/08/01  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* crypto.pm: fix rediris.es paths (Yukiko Bando)
+
+2005/07/31  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/07/31  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* any.pm: fix last commit
+	(devfssymlinkf) do not write rules conflicting with udev ones (blacklist
+	dvd
+	and mouse, only accepting modem for now)
+
+	* share/po/br.po: update
+
+2005/07/31  willysr
+
+	* share/po/id.po: updated
+
+2005/07/30  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/07/30  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/07/29  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/sound.pm: add new snd-ad1889 driver from ALSA CVS
+	handle snd-riptide
+
 2005/07/29  Olivier Blin <oblin at mandriva.com>
 
 	* mdk-stage1/network.c: do not crash if automatic mode isn't used
