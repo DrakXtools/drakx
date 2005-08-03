@@ -321,7 +321,7 @@ sub get_monitors {
     my @raw_monitors = $raw_X->get_Sections('Monitor');
     map { 
 	my $h = raw_export_section($_, [ 'Identifier', @monitor_fields ]);
-	$h->{ModeLine} = $_->{ModeLine};
+	$h->{ModeLine} = $_->{ModeLine} if $_->{ModeLine};
 	$h;
     } @raw_monitors;
 }
@@ -331,7 +331,7 @@ sub set_monitors {
     mapn { 
 	my ($raw_monitor, $monitor) = @_;
 	raw_import_section($raw_monitor, $monitor, \@monitor_fields);
-	$raw_monitor->{ModeLine} = $monitor->{ModeLine};
+	$raw_monitor->{ModeLine} = $monitor->{ModeLine} if $monitor->{ModeLine};
     } \@raw_monitors, \@monitors;
 }
 sub get_or_new_monitors {
