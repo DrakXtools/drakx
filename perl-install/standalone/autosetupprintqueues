@@ -32,14 +32,14 @@ $gui ||= "auto";
 
 if ($gui ne "nogui") {
     # Auto-detect whether we go in non-X mode or not
-    my $desktopuser = `cat /var/run/console.lock`;
+    my $desktopuser = `cat /var/run/console.lock 2>/dev/null`;
     if (!$desktopuser) {
 	if ($gui eq "auto") {
 	    # Non-X mode
 	    $gui = "nogui";
 	} elsif ($gui eq "waitforgui") {
 	    # Wait until a user logs in on the system's X console
-	    while (!($desktopuser = `cat /var/run/console.lock`)) {
+	    while (!($desktopuser = `cat /var/run/console.lock 2>/dev/null`)) {
 		sleep(5);
 	    }
 	    # Wait for the window manager to start
@@ -58,7 +58,8 @@ if ($gui ne "nogui") {
 	# Allow root's windows to be opened on the user's display and
 	# start printerdrake then, in a mode to do nothing else than
 	# automatically setting up print queues.
-	system "export DISPLAY=\"localhost:0.0\"; USER=$desktopuser; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost > /tmp/pderror 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> /tmp/pderror 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> /tmp/pderror 2>&1\"";
+	my $errfile = "/dev/null";
+	system "export DISPLAY=\"localhost:0.0\"; USER=$desktopuser; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost > $errfile 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> $errfile 2>&1\"";
 	exit 0;
     }
 }
