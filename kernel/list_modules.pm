@@ -95,11 +95,11 @@ our %l = (
 	'53c7,8xx',
         qw(AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
         qw(atp870u dc395x dc395x_trm dmx3191d dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
-        qw(qla1280 qla2x00 qlogicfas qlogicfc),
+        qw(qla1280 qla2x00 qla2xxx qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
-      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp lpfcdd), # ncr53c8xx
+      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
@@ -118,7 +118,7 @@ our %l = (
        ),
       ),
     ],
-    pcmcia => [ qw(aha152x_cs nsp_cs ide-cs) ], #ide_cs
+    pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
     raw => [ qw(sd_mod) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(sbp2) ],
@@ -138,7 +138,7 @@ our %l = (
       if_(arch() !~ /^ppc/, qw(i2c-hydra i2c-ibm_iic i2c-mpc)),
     ],
     pcmcia => [
-      if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
+      if_(arch() !~ /^sparc/, qw(au1x00_ss i82365 i82092 pd6729 tcic vrc4171_card vrc4173_cardu yenta_socket)), # cb_enabler
     ],
     usb_keyboard => [ qw(usbkbd keybdev) ],
    #serial_cs

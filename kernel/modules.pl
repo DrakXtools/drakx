@@ -26,7 +26,7 @@ my %modules_only_for_all_img = (
 
   'disk/scsi' => [
     # ISA cards:
-    qw(NCR53c406a aha152x psi240i qlogicfc wd7000 sim710 t128 ultrastor), '53c7,8xx',
+    qw(NCR53c406a aha152x psi240i qlogicfas qlogicfc wd7000 sim710 t128 ultrastor), '53c7,8xx',
     qw(qla2x00 in2000 pas16 a100u2w seagate g_NCR5380),
     if_(arch() =~ /x86_64/, qw(53c7,8xx nsp32 initio advansys atp870u)), #- old
     qw(AM53C974), # deprecated by tmscsim
@@ -92,7 +92,7 @@ my @modules_removed_from_stage1 = flatten_and_check(\%modules_removed_from_stage
 my %images = (
     pcmcia  => 'fs/cdrom|loopback disk/cdrom|raw|pcmcia bus/pcmcia',
     cdrom   => 'fs/cdrom|loopback disk/cdrom|raw|scsi',
-    network  => '',
+    network  => 'bus/usb|usb_keyboard|pcmcia disk/raw|usb',
     network_drivers => 'fs/network|loopback network/main|pcmcia|usb|raw|gigabit',
     all     => 'fs/cdrom disk/cdrom|raw bus/usb|usb_keyboard disk/usb|scsi fs/loopback|local bus/pcmcia disk/ide|pcmcia|sata|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit|wireless|tokenring bus/firewire disk/firewire',
 );
