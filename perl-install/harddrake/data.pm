@@ -446,7 +446,7 @@ our @tree =
       class => "KEYBOARD",
       string => N("Keyboard"),
       icon => "usb.png",
-      configurator => "$sbindir/keyboardrake",
+      configurator => "$sbindir/keyboarddrake",
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i } @devices),
             # USB devices are filtered out since we already catch them through probeall():
