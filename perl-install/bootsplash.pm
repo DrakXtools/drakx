@@ -123,6 +123,8 @@ sub theme_write_config_for_resolution {
     my ($pi_x1, $pi_x2, $pi_y1, $pi_y2) = ($pb_x1 + 1, $pb_x2 - 1, $pb_y1 + 1, $pb_y2 - 1);
     my ($tb_x1, $tb_x2, $tb_y1, $tb_y2) = ($conf->{tx}, $conf->{tx} + $conf->{tw}, $conf->{ty}, $conf->{ty} + $conf->{th});
     my ($ti_x1, $ti_x2, $ti_y1, $ti_y2) = ($tb_x1 + 1, $tb_x2 - 1, $tb_y1 + 1, $tb_y2 - 1);
+    my $pc = $conf->{pc};
+    $pc =~ s/^0x/#/;
 
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
@@ -160,11 +162,11 @@ silentjpeg=$jpeg
 progress_enable=1
 
 # background
-# b(order) or i(nter) ?
+# b(order) or i(nter)
 box silent noover $pb_x1 $pb_y1 $pb_x2 $pb_y2 #040454
 # progress bar
-box silent inter  $pi_x1 $pi_y1 $pi_x1 $pi_y2 #eeeeee #eeeeee #21449c #21449c
-box silent        $pi_x1 $pi_y1 $pi_x2 $pi_y2 #eeeeee #eeeeee #21449c #21449c
+box silent inter  $pi_x1 $pi_y1 $pi_x1 $pi_y2 $pc $pc $pc $pc
+box silent        $pi_x1 $pi_y1 $pi_x2 $pi_y2 $pc $pc $pc $pc
 # black border (top, bottom, left, right)
 box silent        $pb_x1 $pb_y1 $pb_x2 $pb_y1 #313234
 box silent        $pb_x1 $pb_y2 $pb_x2 $pb_y2 #889499
