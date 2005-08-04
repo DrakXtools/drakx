@@ -332,7 +332,7 @@ $tree->get_selection->signal_connect('changed' => sub {
             }
             
             # if we've valid driver, let's offer to configure it, else hide buttons 
-            show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^Removable:|\|/, $module_cfg_button);
+            show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^kbd|^Mouse:USB|^mouse\d|^Removable:|\|/, $module_cfg_button);
             
             $current_configurator = $configurators[$idx];
             show_hide($current_configurator && -x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
@@ -443,10 +443,9 @@ foreach (@classes) {
 }
 
 sub reap_children() {
-    undef $pid;
     # reap zombies
     my $child_pid;
-    do { $child_pid = waitpid(-1, POSIX::WNOHANG) } until $child_pid > 0;
+    do { $child_pid = waitpid(-1, POSIX::WNOHANG); undef $pid if $pid == $child_pid } until $child_pid > 0;
 };
 $SIG{CHLD} = \&reap_children;
 
