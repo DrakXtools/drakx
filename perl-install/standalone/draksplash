@@ -97,10 +97,10 @@ sub read_theme_config() {
     my $conf = bootsplash::theme_get_config_for_resolution($theme{name}, $theme{res});
     -f $conf and $theme{conf} = bootsplash::theme_read_config_for_resolution($theme{name}, $theme{res});
     if (-f $theme{conf}{silentjpeg}) {
-	load_image($theme{conf}{silentjpeg}, 0);
+	load_image($theme{conf}{silentjpeg}, 0, 1);
     }
     if (-f $theme{conf}{jpeg}) {
-	load_image($theme{conf}{jpeg}, 1);
+	load_image($theme{conf}{jpeg}, 1, 1);
     }
     $theme{conf}{pc} ||= '0x21459d';
     update_scale_values_from_conf();
@@ -144,19 +144,14 @@ sub save_theme() {
 }
 
 sub load_image {
-    my ($img, $o_mode) = @_;
-    my $mode = $o_mode;
-    unless ($mode) {
-	$mode = 0;
-	@image_pixbuf = ();
-    }
+    my ($img, $mode, $o_no_warn) = @_;
     eval { $image_pixbuf[$mode] = Gtk2::Gdk::Pixbuf->new_from_file($img) };
     if ($@) {
-        $in->ask_warn(N("Error"), N("Unable to load image file %s", $img));
+        $in->ask_warn(N("Error"), N("Unable to load image file %s", $img)) unless $o_no_warn;
         return;
     }
     $image_pixbuf[$mode] = $image_pixbuf[$mode]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
-    $image_pixbuf[1-$mode] or $image_pixbuf[1-$mode] = $image_pixbuf[$mode];
+    $image_pixbuf[1-$mode] ||= $image_pixbuf[$mode];
     $image_area->queue_draw;
     1;
 }
@@ -167,7 +162,8 @@ sub choose_image {
     $file_dialog->set_filename($theme{$type} || '~/');
     $file_dialog->show;
     while ($file_dialog->run eq 'ok') {
-        if (load_image(my $img = $file_dialog->get_filename)) {
+        @image_pixbuf = ();
+        if (load_image(my $img = $file_dialog->get_filename, 0)) {
 	    $theme{conf}{$type} = $img;
 	    last;
 	}
