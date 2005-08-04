@@ -1,3 +1,5 @@
+# translation of pl.po to 
+# translation of pl.po to
 # translation of DrakX-pl.po to polski
 # translation of pl.po to Polish
 # Polish translation file
@@ -7,15 +9,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-pl\n"
+"Project-Id-Version: pl\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 28/03/2005 09:34\n"
+"PO-Revision-Date: 2005-07-31 21:37+0200\n"
 "Last-Translator: Tomasz Bednarski <bednarski@skrzynka.pl>\n"
-"Language-Team: polski\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -1232,14 +1234,14 @@ msgid "Group ID"
 msgstr "ID grupy"
 
 #: any.pm:619
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "Opcja %s musi być liczbą!"
+msgstr "Opcja %s musi być liczbą"
 
 #: any.pm:620
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "Opcja %s powinna mieć wartość wyższą niż 500. Czy kontynuować mimo to?"
 
 #: any.pm:625
 #, c-format
@@ -1303,9 +1305,9 @@ msgstr ""
 "systemie."
 
 #: any.pm:698
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Czy chcesz wykorzystać tą funkcję?"
+msgstr "Wykorzystaj tą funkcję"
 
 #: any.pm:699
 #, c-format
@@ -1789,12 +1791,12 @@ msgstr "LILO z menu tekstowym"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "Grub z graficznym menu"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "Grub z tekstowym menu"
 
 #: bootloader.pm:857
 #, c-format
@@ -2361,17 +2363,17 @@ msgstr ""
 #: diskdrake/interactive.pm:360
 #, c-format
 msgid "No supermount"
-msgstr ""
+msgstr "Bez opcji supermount"
 
 #: diskdrake/interactive.pm:361
 #, c-format
 msgid "Supermount"
-msgstr ""
+msgstr "Supermount"
 
 #: diskdrake/interactive.pm:362
 #, c-format
 msgid "Supermount except for CDROM drives"
-msgstr ""
+msgstr "Supermount z pominięciem napędów CDROM"
 
 #: diskdrake/interactive.pm:368 help.pm:530
 #, c-format
@@ -2626,11 +2628,14 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Fizyczny wolumin %s jest nadal w użyciu.\n"
+"Czy chcesz przenieść fizyczne obszary wykorzystane na tym urządzeniu na inne "
+"urządzenie?"
 
 #: diskdrake/interactive.pm:893
-#, c-format
+#, fuzzy, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Przenoszenie obszarów"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -2808,9 +2813,9 @@ msgid "Cylinder %d to %d\n"
 msgstr "Cylinder %d do %d\n"
 
 #: diskdrake/interactive.pm:1213
-#, c-format
+#, fuzzy, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Liczba logicznych obszarów: %d\n"
 
 #: diskdrake/interactive.pm:1214
 #, c-format
@@ -3091,6 +3096,7 @@ msgstr "Włączanie partycji swap %s"
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
+"Włącz ewidencję udziałów dyskowych dla grup i opcjonalnie narzuć limity"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3108,7 +3114,7 @@ msgid ""
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
 "Może być montowany tylko wyłącznie (np.,\n"
-"opcja -a nie spowoduje zamontowanie systemu plików)"
+"opcja -a nie spowoduje zamontowanie systemu plików)."
 
 #: fs/mount_options.pm:119
 #, c-format
@@ -3172,6 +3178,8 @@ msgstr ""
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
+"Włącz ewidencję udziałów dyskowych dla użytkowników i opcjonalnie narzuć "
+"limity"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3249,11 +3257,13 @@ msgstr ""
 "Pamiętaj więc o dodaniu partycji /boot."
 
 #: fsedit.pm:390
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"Nie można użyć logicznego woluminu LVM dla punktu montowania %s jeżeli "
+"zakres przekracza wielkość fizyczną woluminów"
 
 #: fsedit.pm:392
 #, c-format
@@ -3263,6 +3273,10 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Logiczny wolumin LVM został określony jako root (/)\n"
+"Menedżer ładowania nie obsługuje tej opcji jeżeli wielkość woluminu "
+"przekracza fizyczny rozmiar woluminów.\n"
+"Rozpocznij od utworzenia partycji /boot"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3336,7 +3350,7 @@ msgstr "Karta graficzna"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "Karta DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3371,27 +3385,27 @@ msgstr "Karty ISDN"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "Urządzenia dźwiękowe USB"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Karty radiowe"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "Karty sieciowe ATM"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "Karty sieciowe WAN"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "Urządzenia Bluetooth"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3428,7 +3442,7 @@ msgstr "Drukarka"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Kontrolery portów gier"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3494,7 +3508,7 @@ msgstr "Klawiatura"
 #: harddrake/data.pm:460
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tablet i ekran dotykowy"
 
 #: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:977
 #, c-format
@@ -6000,7 +6014,7 @@ msgstr "Sieć (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Sieć (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -6030,12 +6044,12 @@ msgstr "Adres URL dla serwera zwierciadlanego?"
 #: install_any.pm:525
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Konfiguracja NFS"
 
 #: install_any.pm:525
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Wprowadź nazwę komputera i katalog nośnika NFS"
 
 #: install_any.pm:526
 #, c-format
@@ -6045,7 +6059,7 @@ msgstr ""
 #: install_any.pm:526
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "Katalog"
 
 #: install_any.pm:575
 #, c-format
@@ -6165,7 +6179,7 @@ msgstr "Dostęp zabroniony"
 #: install_any.pm:1761
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Niepoprawna nazwa NFS"
 
 #: install_any.pm:1782
 #, c-format
@@ -7321,7 +7335,7 @@ msgstr "Konfiguracja poinstalacyjna"
 #: install_steps_interactive.pm:775
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "Upewnij się, że nośnik Update Modules znajduje się w napędzie %s"
 
 #: install_steps_interactive.pm:804
 #, c-format
@@ -7894,11 +7908,11 @@ msgid ""
 msgstr "szwajcarski (układ francuski)"
 
 #: keyboard.pm:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Cherokee syllabics"
-msgstr "arabski"
+msgstr "Cherokee syllabics"
 
 #: keyboard.pm:206
 #, c-format
@@ -7978,11 +7992,11 @@ msgid ""
 msgstr "Dvoraka (szwedzki)"
 
 #: keyboard.pm:222
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dzongkha/Tibetan"
-msgstr "bośniacki"
+msgstr "Dzongkha/Tibetan"
 
 #: keyboard.pm:223
 #, c-format
@@ -7992,11 +8006,11 @@ msgid ""
 msgstr "estoński"
 
 #: keyboard.pm:227
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Faroese"
-msgstr "grecki"
+msgstr "Faroese"
 
 #: keyboard.pm:229
 #, c-format
@@ -8258,11 +8272,11 @@ msgid ""
 msgstr "polski (maszynistki)"
 
 #: keyboard.pm:277
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Pashto"
-msgstr "polski"
+msgstr "Pashto"
 
 #: keyboard.pm:278
 #, c-format
@@ -8314,11 +8328,11 @@ msgid ""
 msgstr "Saami (szwedzki/fiński)"
 
 #: keyboard.pm:289
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Sindhi"
-msgstr "tajski"
+msgstr "Sindhi"
 
 #: keyboard.pm:291
 #, c-format
@@ -8332,7 +8346,7 @@ msgstr "słoweński"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 #: keyboard.pm:294
 #, c-format
@@ -8391,11 +8405,11 @@ msgid ""
 msgstr "tamilski (maszynistki)"
 
 #: keyboard.pm:304
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Kedmanee)"
-msgstr "tajski"
+msgstr "Tajski (Kedmanee)"
 
 #: keyboard.pm:305
 #, c-format
@@ -8405,25 +8419,25 @@ msgid ""
 msgstr "tajski (TIS-820)"
 
 #: keyboard.pm:307
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Pattachote)"
-msgstr "tajski"
+msgstr "Tajski (Pattachote)"
 
 #: keyboard.pm:310
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (układ marokijski) (+łaciński/arabski)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "Tifinagh (fonetyczny) (+łaciński/arabski)"
 
 #: keyboard.pm:313
 #, c-format
@@ -8433,11 +8447,11 @@ msgid ""
 msgstr "tadżycki"
 
 #: keyboard.pm:315
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Turkmen"
-msgstr "niemiecki"
+msgstr "Turkmeński"
 
 #: keyboard.pm:316
 #, c-format
@@ -9666,14 +9680,15 @@ msgid "Welcome to %s"
 msgstr "Witaj w %s"
 
 #: lvm.pm:83
-#, c-format
+#, fuzzy, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
+"Przenoszenie fizycznych obszarów na inne fizyczne woluminy nie powiodło się"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Fizyczny wolumin %s jest nadal w użyciu"
 
 #: lvm.pm:145
 #, c-format
@@ -9684,6 +9699,8 @@ msgstr "Zacznij od usunięcia logicznych dysków (LV)\n"
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
+"Menedżer ładowania nie obsługuje partycji /boot zlokalizowanej na wielu "
+"fizycznych woluminach"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -10217,9 +10234,9 @@ msgid "Manual"
 msgstr "Ręcznie"
 
 #: network/ndiswrapper.pm:27
-#, c-format
+#, fuzzy, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Brak urządzenia obsługującego sterownik ndiswrapper %s!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10227,14 +10244,14 @@ msgid "Please select the Windows driver (.inf file)"
 msgstr "Wybierz sterownik dla systemu Windows (plik .inf)"
 
 #: network/ndiswrapper.pm:42
-#, c-format
+#, fuzzy, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "Instalacja sterownika ndiswrapper dla urządzenia %s jest niemożliwa!"
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "Załadowanie modułu ndiswrapper jest niemożliwe!"
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -10242,11 +10259,14 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"Wybrane urządzenie zostało już skonfigurowane z wykorzystaniem sterownika %"
+"s.\n"
+"Czy na pewno chcesz użyć sterownika ndiswrapper?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Odszukanie interfejsu modułu ndiswrapper jest niemożliwe!"
 
 #: network/netconnect.pm:69 network/netconnect.pm:489
 #: network/netconnect.pm:496
@@ -10401,17 +10421,17 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:155
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "Otwórz WEP"
 
 #: network/netconnect.pm:156
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "Zastrzeżony WEP"
 
 #: network/netconnect.pm:157
 #, c-format
 msgid "WPA Pre-Shared Key"
-msgstr ""
+msgstr "Klucz WPA Pre-Shared Key"
 
 #: network/netconnect.pm:247 standalone/drakconnect:56
 #, c-format
@@ -10451,7 +10471,7 @@ msgstr "Połączenie modemowe"
 #: network/netconnect.pm:259
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "Połączenie DVB"
 
 #: network/netconnect.pm:269
 #, c-format
@@ -10853,7 +10873,7 @@ msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
-"Do konfiguracji połączenia LANowego można użyć poniższych protokołów. "
+"Do konfiguracji połączenia sieci lokalnej można użyć poniższych protokołów. "
 "Wybierz ten, który ma zostać użyty"
 
 #: network/netconnect.pm:887
@@ -10959,7 +10979,7 @@ msgstr "Wybieranie sterownika ndiswrapper"
 #: network/netconnect.pm:971
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "Użyj sterownika ndiswrapper %s"
 
 #: network/netconnect.pm:971
 #, c-format
@@ -10969,7 +10989,7 @@ msgstr "Instalacja nowego sterownika"
 #: network/netconnect.pm:983
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "Wybierz urządzenie:"
 
 #: network/netconnect.pm:1008
 #, c-format
@@ -11039,7 +11059,7 @@ msgstr "Stopa bitowa (w b/s)"
 #: network/netconnect.pm:1019
 #, c-format
 msgid "Encryption mode"
-msgstr ""
+msgstr "Tryb szyfrowania"
 
 #: network/netconnect.pm:1023 standalone/drakconnect:420
 #, c-format
@@ -11174,22 +11194,22 @@ msgstr ""
 #: network/netconnect.pm:1110
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "Konfiguracja DVB"
 
 #: network/netconnect.pm:1111
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "Adapter DVB"
 
 #: network/netconnect.pm:1128
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "Konfiguracja adaptera DVB"
 
 #: network/netconnect.pm:1131
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "Adapter"
 
 #: network/netconnect.pm:1132
 #, c-format
@@ -11199,7 +11219,7 @@ msgstr ""
 #: network/netconnect.pm:1133
 #, c-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: network/netconnect.pm:1161
 #, c-format
@@ -11524,13 +11544,9 @@ msgstr ""
 "\t\tippp+ dla połączenia isdn.\n"
 
 #: network/thirdparty.pm:196
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Potrzebujesz mikrokodu alcatela.\n"
-"Pobierz go ze strony\n"
-"%s\n"
-"i skopiuj plik mgmt.o do /usr/share/speedtouch"
+msgstr "Skopiuj mikrokod Alcatela do pliku mgmt.o w /usr/share/speedtouch"
 
 #: network/thirdparty.pm:205
 #, c-format
@@ -11546,14 +11562,14 @@ msgstr ""
 "Można go znaleźć na stronie http://eciadsl.flashtux.org/"
 
 #: network/thirdparty.pm:266
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Nie można zainstalować pakietów %s!"
+msgstr "Instalacja pakietów jest niemożliwa (%s)!"
 
 #: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Niektóre pakiety (%s) są wymagane, ale są niedostępne."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11561,6 +11577,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Pakiety te można znaleźć w Klubie Mandriva lub komercyjnych wydaniach "
+"Mandrivy."
 
 #: network/thirdparty.pm:276
 #, c-format
@@ -11568,16 +11586,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Wymagane pliki mogą zostać zainstalowane również z tego adresu URL:\n"
+"%s"
 
 #: network/thirdparty.pm:309
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Usuń fonty z systemu"
+msgstr "Odszukanie \"%s\" w systemie Windows jest niemożliwe!"
 
 #: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Nie wykryto systemu Windows!"
 
 #: network/thirdparty.pm:321
 #, c-format
@@ -11638,12 +11658,12 @@ msgstr "Kopiowanie firmware zakończone powodzeniem"
 #: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Wyszukiwanie wymaganego oprogramowania i sterowników..."
 
 #: network/thirdparty.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Proszę czekać, wykrywanie i konfiguracja urządzeń..."
+msgstr "Proszę czekać, wykonywanie instrukcji konfiguracyjnych..."
 
 #: partition_table.pm:391
 #, c-format
@@ -17528,9 +17548,9 @@ msgstr ""
 "narzędzi graficznych"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Biurko Plucker"
+msgstr "Pulpit IceWM"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -17538,9 +17558,9 @@ msgid "Other Graphical Desktops"
 msgstr "Inne środowiska graficzne"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, itd."
+msgstr "Window Maker, Enlightenment, Fvwm, itd."
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -18035,15 +18055,18 @@ msgstr "Gotowe!"
 #: standalone/drakTermServ:467 standalone/drakTermServ:848
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s nie powiodło się"
 
 #: standalone/drakTermServ:476
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Not enough space to create\n"
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Niewystarczająca ilość miejsca na utworzenie\n"
+"NBI w %s.\n"
+"Potrzebne: %d MB, Wolne: %d MB"
 
 #: standalone/drakTermServ:482
 #, c-format
@@ -18638,7 +18661,7 @@ msgstr ""
 #: standalone/drakTermServ:1536
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "Zapis do %s nie powiódł się!"
 
 #: standalone/drakTermServ:1548
 #, c-format
@@ -18917,14 +18940,13 @@ msgstr ""
 "tym systemie należy posiadać skonfigurowany serwer pocztowy."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"To powinna być rozdzielona przecinkami lista lokalnych użytkowników lub "
-"adresów e-mail, do których ma być przesyłana lista wyników archiwizacji. Na "
-"tym systemie należy posiadać skonfigurowany serwer pocztowy."
+"To powinien być zwrotny adres, z którego przychodzić będą wyniki "
+"archiwizacji. Domyślna wartość to drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -21594,9 +21616,9 @@ msgstr ""
 "Co chcesz zrobić?"
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "rekonfigurować"
+msgstr "Rekonfigurować"
 
 #: standalone/drakgw:145
 #, c-format
@@ -21623,14 +21645,14 @@ msgstr ""
 "z siecią lokalną (LAN)."
 
 #: standalone/drakgw:177
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Adres sieci lokalnej"
+msgstr "Ustawienia sieci lokalnej"
 
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "Lokalny adres IP"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21644,14 +21666,14 @@ msgstr ""
 "W bieżącej konfiguracji wykryto możliwy konflikt adresów sieciowych: %s!\n"
 
 #: standalone/drakgw:204
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "Konfiguracja serwera terminali"
+msgstr "Konfiguracja serwera nazw domen (DNS)"
 
 #: standalone/drakgw:208
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Wykorzystaj poniższą bramę jako serwer nazw domen"
 
 #: standalone/drakgw:209
 #, c-format
@@ -21672,9 +21694,9 @@ msgstr ""
 "Jeśli nie rozumiesz znaczenia opcji, po prostu nie zmieniaj jej wartości."
 
 #: standalone/drakgw:248
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Automatyczna rekonfiguracja"
+msgstr "Wykorzystaj automatyczną konfigurację (DHCP)"
 
 #: standalone/drakgw:249
 #, c-format
@@ -21699,32 +21721,32 @@ msgstr "Maksymalna dzierżawa (w sekundach)"
 #: standalone/drakgw:278
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Serwer buforujący proxy (SQUID)"
 
 #: standalone/drakgw:282
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Użyj poniższej bramy jako serwer buforujący proxy"
 
 #: standalone/drakgw:283
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "Adres e-mail administratora"
 
 #: standalone/drakgw:284
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "Nazwa zdalnego komputera"
+msgstr "Wyświetlana nazwa komputera"
 
 #: standalone/drakgw:285
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Właściwość"
+msgstr "Port proxy"
 
 #: standalone/drakgw:286
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "Rozmiar cache"
+msgstr "Rozmiar cache (MB)"
 
 #: standalone/drakgw:311
 #, fuzzy, c-format
@@ -21781,7 +21803,7 @@ msgstr "Konfiguracja..."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Konfiguracja zapory sieciowej..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -21844,72 +21866,72 @@ msgstr ""
 #: standalone/drakhosts:110
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Adres IP:"
 
 #: standalone/drakhosts:111
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Nazwa komputera:"
 
 #: standalone/drakhosts:112
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Aliasy komputera:"
 
 #: standalone/drakhosts:118
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Wprowadź prawidłowy adres IP."
 
 #: standalone/drakhosts:125
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "Taki sam numer IP znajduje się już w pliku %s."
 
 #: standalone/drakhosts:194
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Aliasy komputera"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS służy do zarządzania definicjami komputerów"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Dodanie komputera nie powiodło się."
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Zmiana ustawień komputera nie powiodła się."
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Usunięcie komputera nie powiodło się."
 
 #: standalone/drakids:20
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "Stan"
+msgstr "Data"
 
 #: standalone/drakids:21 standalone/drakids:37
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Szczegóły ataku"
+msgstr "Intruz"
 
 #: standalone/drakids:22
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Typ ataku: %s"
+msgstr "Typ ataku"
 
 #: standalone/drakids:23
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
-msgstr "Usługi"
+msgstr "Usługa"
 
 #: standalone/drakids:24
 #, c-format
@@ -21917,49 +21939,49 @@ msgid "Network interface"
 msgstr "Interfejs sieciowy"
 
 #: standalone/drakids:60 standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall"
-msgstr "Zapora sieciowa"
+msgstr "Aktywna zapora sieciowa"
 
 #: standalone/drakids:63
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Czarna lista"
 
 #: standalone/drakids:67
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Usuń z LVM"
+msgstr "Usuń z czarnej listy"
 
 #: standalone/drakids:68
-#, c-format
+#, fuzzy, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Przenieś do listy zaufanych"
 
 #: standalone/drakids:72
-#, c-format
+#, fuzzy, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Lista zaufanych"
 
 #: standalone/drakids:76
 #, fuzzy, c-format
 msgid "Remove from whitelist"
-msgstr "Usuń z LVM"
+msgstr "Usuń z listy zaufanych"
 
 #: standalone/drakids:125
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Bez współdzielenia"
+msgstr "Skanowanie portów"
 
 #: standalone/drakids:126
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Zaatakowana usługa: %s"
+msgstr "Zaatakowana usługa"
 
 #: standalone/drakids:127
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Hasło (powtórnie)"
+msgstr "Łamanie haseł"
 
 #: standalone/draknfs:43
 #, c-format
@@ -21984,7 +22006,7 @@ msgstr ""
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "Serwer NFS"
 
 #: standalone/draknfs:85
 #, c-format
@@ -21999,12 +22021,12 @@ msgstr ""
 #: standalone/draknfs:102
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Wybór katalogu"
 
 #: standalone/draknfs:107
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Obiekt powinien być katalogiem."
 
 #: standalone/draknfs:138
 #, c-format
@@ -22065,12 +22087,12 @@ msgstr ""
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Bezpieczne połączenie:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Udział tylko do odczytu:"
 
 #: standalone/draknfs:173
 #, c-format
@@ -22103,19 +22125,19 @@ msgid ""
 msgstr ""
 
 #: standalone/draknfs:372
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Konfiguracja zaawansowana"
+msgstr "Pomoc do konfiguracji zaawansowanej"
 
 #: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Katalog NFS"
 
 #: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Katalog:"
 
 #: standalone/draknfs:388
 #, c-format
@@ -22125,7 +22147,7 @@ msgstr ""
 #: standalone/draknfs:390
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "Dostęp:"
 
 #: standalone/draknfs:390
 #, c-format
@@ -22160,7 +22182,7 @@ msgstr ""
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Wprowadź nazwę współdzielonego katalogu."
 
 #: standalone/draknfs:436
 #, c-format
@@ -22170,7 +22192,7 @@ msgstr ""
 #: standalone/draknfs:514
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "Współdzielony katalog"
 
 #: standalone/draknfs:514
 #, c-format
@@ -22180,12 +22202,12 @@ msgstr ""
 #: standalone/draknfs:514
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "Opcje ogólne"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Różne opcje"
 
 #: standalone/draknfs:533
 #, c-format
@@ -22195,22 +22217,22 @@ msgstr ""
 #: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS służy do konfiguracji udziałów NFS"
 
 #: standalone/draknfs:597
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Dodanie udziału NFS nie powiodło się."
 
 #: standalone/draknfs:604
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Zmiana ustawień udziału NFS nie powiodła się."
 
 #: standalone/draknfs:611
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Usunięcie udziału NFS nie powiodło się."
 
 #: standalone/drakperm:21
 #, c-format
@@ -22255,7 +22277,7 @@ msgstr "Prawa dostępu"
 #: standalone/drakperm:57
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Dodaj nową regułę"
 
 #: standalone/drakperm:64 standalone/drakperm:99 standalone/drakperm:124
 #, c-format
@@ -22453,7 +22475,7 @@ msgstr ""
 #: standalone/drakroam:141
 #, c-format
 msgid "ESSID"
-msgstr ""
+msgstr "ESSID"
 
 #: standalone/drakroam:142 standalone/drakvpn:1129
 #, c-format
@@ -22468,7 +22490,7 @@ msgstr "Kanał"
 #: standalone/drakroam:145
 #, c-format
 msgid "Key"
-msgstr ""
+msgstr "Klucz"
 
 #: standalone/drakroam:161
 #, c-format
@@ -22498,12 +22520,12 @@ msgstr "Sygnał:"
 #: standalone/drakroam:180
 #, c-format
 msgid "Roaming"
-msgstr ""
+msgstr "Roaming"
 
 #: standalone/drakroam:183 standalone/drakroam:266
 #, c-format
 msgid "Roaming: %s"
-msgstr ""
+msgstr "Roaming: %s"
 
 #: standalone/drakroam:183 standalone/drakroam:265 standalone/drakvpn:1047
 #: standalone/drakvpn:1063 standalone/drakvpn:1076
@@ -22522,9 +22544,9 @@ msgid "Set"
 msgstr "Ustaw"
 
 #: standalone/drakroam:198
-#, c-format
+#, fuzzy, c-format
 msgid "Known Networks (Drag up/down or edit)"
-msgstr ""
+msgstr "Znane sieci "
 
 #: standalone/drakroam:206
 #, c-format
@@ -22534,7 +22556,7 @@ msgstr "Połącz"
 #: standalone/drakroam:214
 #, c-format
 msgid "Available Networks"
-msgstr ""
+msgstr "Dostępne sieci"
 
 #: standalone/drakroam:229
 #, c-format
@@ -22841,12 +22863,12 @@ msgstr "wysokość paska postępu"
 #: standalone/draksplash:58 standalone/draksplash:63
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "Wybierz kolor paska postępu"
 
 #: standalone/draksplash:59 standalone/draksplash:64
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Wybierze obrazek"
 
 #: standalone/draksplash:60
 #, c-format
@@ -22891,7 +22913,7 @@ msgstr "zapisywanie ekranu powitalnego tematu..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Załadowanie obrazka %s było niemożliwe"
 
 #: standalone/draksplash:169
 #, c-format
@@ -25832,7 +25854,7 @@ msgstr "Monitorowanie sieci"
 #: standalone/net_applet:59
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Zarządzanie sieciami bezprzewodowymi"
 
 #: standalone/net_applet:60
 #, c-format
@@ -25875,9 +25897,9 @@ msgid "Actions"
 msgstr ""
 
 #: standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Nie można skontaktować się z serwerem zwierciadlanym %s"
+msgstr "Nie można skontaktować się z demonem"
 
 #: standalone/net_applet:349
 #, c-format
@@ -26905,627 +26927,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacja zakończyła się niepowodzeniem"
-
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "Local Network adress"
-#~ msgstr "Adres sieci lokalnej"
-
-#~ msgid "Configuring scripts, installing software, starting servers..."
-#~ msgstr ""
-#~ "Konfiguracja skryptów, instalowanie programów, uruchamianie serwerów..."
-
-#~ msgid "drakfloppy"
-#~ msgstr "drakfloppy"
-
-#~ msgid "Boot disk creation"
-#~ msgstr "Tworzenie dysku startowego"
-
-#~ msgid "General"
-#~ msgstr "Ogólne"
-
-#~ msgid "Kernel version"
-#~ msgstr "Wersja jądra"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferencje"
-
-#~ msgid "Advanced preferences"
-#~ msgstr "Zaawansowane preferencje"
-
-#~ msgid "Size"
-#~ msgstr "Rozmiar"
-
-#~ msgid "Mkinitrd optional arguments"
-#~ msgstr "Dodatkowe argumenty mkinitrd"
-
-#~ msgid "force"
-#~ msgstr "wymuś"
-
-#~ msgid "omit raid modules"
-#~ msgstr "pomiń moduły RAID"
-
-#~ msgid "if needed"
-#~ msgstr "jeśli potrzebny"
-
-#~ msgid "omit scsi modules"
-#~ msgstr "pomiń moduły SCSI"
-
-#~ msgid "Add a module"
-#~ msgstr "Dodaj moduł"
-
-#~ msgid "Remove a module"
-#~ msgstr "Usuń moduł"
-
-#~ msgid "Be sure a media is present for the device %s"
-#~ msgstr "Upewnij się że nośnik jest obecny dla urządzenia %s"
-
-#~ msgid ""
-#~ "There is no medium or it is write-protected for device %s.\n"
-#~ "Please insert one."
-#~ msgstr ""
-#~ "Brak nośnika lub jest on tylko do odczytu dla urządzenia %s.\n"
-#~ "Włóż go do napędu."
-
-#~ msgid "Unable to fork: %s"
-#~ msgstr "Nie można rozdzielić procesów: %s"
-
-#~ msgid "Floppy creation completed"
-#~ msgstr "Zakończono tworzenie dyskietki"
-
-#~ msgid "The creation of the boot floppy has been successfully completed \n"
-#~ msgstr "Tworzenie dyskietki startowej zostało pomyślnie zakończone\n"
-
-#~ msgid ""
-#~ "Unable to properly close mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-#~ msgstr ""
-#~ "Nie można poprawnie zamknąć mkbootdiska:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr "Nie można użyć Logicznego Woluminu LVM dla punktu montowania %s"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "Jako partycję root (/) wybrano logiczny wolumen LVM.\n"
-#~ "Żaden program rozruchowy nie jest w stanie obsłużyć go bez partycji /"
-#~ "boot.\n"
-#~ "Pamiętaj więc o dodaniu partycji /boot."
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Możesz nie mieć możliwości zainstalowania lilo (ponieważ lilo nie\n"
-#~ "obsługuje LV na wielu PLV)"
-
-#~ msgid "use PPPoE"
-#~ msgstr "użyj PPPoE"
-
-#~ msgid "use PPTP"
-#~ msgstr "użyj PPTP"
-
-#~ msgid "use DHCP"
-#~ msgstr "użyj DHCP"
-
-#~ msgid "Alcatel Speedtouch USB"
-#~ msgstr "Alcatel Speedtouch USB"
-
-#~ msgid " - detected"
-#~ msgstr "- wykryto"
-
-#~ msgid "Sagem (using PPPoA) USB"
-#~ msgstr "Sagem (wykorzystujący PPPoA) USB"
-
-#~ msgid "Sagem (using DHCP) USB"
-#~ msgstr "Sagem (wykorzystujący DHCP) USB"
-
-#~ msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, itd."
-
-#~ msgid ""
-#~ "Warning, another Internet connection has been detected, maybe using your "
-#~ "network"
-#~ msgstr ""
-#~ "Ostrzeżenie, wykryto inne połączenie Internetowe, być może używające "
-#~ "twojej sieci"
-
-#~ msgid "PXE Server Configuration"
-#~ msgstr "Konfiguracja serwera PXE"
-
-#~ msgid "Installation Server Configuration"
-#~ msgstr "Konfiguracja serwera instalacyjnego"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "Masz możliwość skonfigurowania komputera tak aby pracował jako serwer "
-#~ "PXE,\n"
-#~ "DHCP i TFTP - dzięki czemu będzie mógł pracować jako serwer "
-#~ "instalacyjny.\n"
-#~ "Dzięki tej funkcji, inne komputery w sieci lokalnej będą miały możliwość "
-#~ "przeprowadzenia instalacji z wykorzystaniem tego komputera.\n"
-#~ "\n"
-#~ "Upewnij się, że skonfigurowano dostęp do sieci/Internetu przy użyciu\n"
-#~ "programu drakconnect, zanim dokonasz dalszych czynności.\n"
-#~ "\n"
-#~ "Uwaga:  wymagana jest dedykowana karta sieciowa włączająca komputer w "
-#~ "sieć lokalną (LAN)."
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "Nie wykryto w systemie karty sieciowej!"
-
-#~ msgid "Choose the network interface"
-#~ msgstr "Wybierz interfejs sieciowy"
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr "Wybierz kartę sieciową, którą ma być wykorzystywana na serwer DHCP."
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "Interfejs %s (w sieci %s)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Serwer DHCP pozwoli innym komputerom na uruchomienie przy użyciu PXE\n"
-#~ "z wykorzystaniem jednego adresu z puli.\n"
-#~ "\n"
-#~ "Adres sieciowy to %s i wykorzystuje maskę %s.\n"
-#~ "\n"
-
-#~ msgid "The DHCP start ip"
-#~ msgstr "Początkowy adres IP dla DHCP"
-
-#~ msgid "The DHCP end ip"
-#~ msgstr "Końcowy adres IP dla DHCP"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Wskaż, gdzie został zapisany obraz instalacyjny.\n"
-#~ "\n"
-#~ "Jeśli nie posiadasz istniejącego katalogu, skopiuj zawartość płyty CD lub "
-#~ "DVD.\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "Katalog obrazu instalacyjnego"
-
-#~ msgid "No image found"
-#~ msgstr "Nie znaleziono obrazu"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr ""
-#~ "Nie znaleziono obrazów CD lub DVD, skopiuj program instalacyjny i pliki "
-#~ "rpm."
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Wskaż gdzie zapisany jest plik auto_install.cfg.\n"
-#~ "\n"
-#~ "Pozostaw pole puste jeśli nie chcesz ustawiać trybu automatycznej "
-#~ "instalacji.\n"
-#~ "\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Położenie pliku auto_install.cfg"
-
-#~ msgid "Do it later"
-#~ msgstr "Zrób to później"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MdkKDM (Menedżer wyświetlania Mandriva Linux)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "Współdzielenie połączenia z Internetem jest wyłączone"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "Włączenie serwerów..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "Współdzielenie połączenia z Internetem jest włączone"
-
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "Interfejs %s (moduł %s)"
-
-#~ msgid "Interface %s"
-#~ msgstr "Interfejs %s"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "Interfejs sieciowy już został skonfigurowany"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "Ostrzeżenie, karta sieciowa (%s) została już skonfigurowana.\n"
-#~ "\n"
-#~ "Czy chcesz automatyczną rekonfigurację?\n"
-#~ "\n"
-#~ "Można zrobić to ręcznie lecz trzeba znać odpowiednie ustawienia."
-
-#~ msgid "No (experts only)"
-#~ msgstr "Nie (tylko eksperci)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "Wyświetl konfigurację bieżącego interfejsu"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "Konfiguracja bieżącego interfejsu"
-
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "Aktualna konfiguracja \"%s\":\n"
-#~ "\n"
-#~ "Sieć: %s\n"
-#~ "Adres IP: %s\n"
-#~ "Maska IP: %s\n"
-#~ "Sterownik: %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Można zachować bieżące ustawienia oraz upewnić się, że skonfigurowany "
-#~ "został serwer DHCP. W tym przypadku należy sprawdzić czy została "
-#~ "pomyślnie odczytana sieć używana dla sieci lokalnej. Nie zostanie ona "
-#~ "przekonfigurowana i ustawienia serwera DHCP nie zostaną zmienione.\n"
-#~ "\n"
-#~ "Domyślny wpis DNS jest cache'ującym serwerem nazw skonfigurowanym na\n"
-#~ "zaporze ogniowej. Można zastąpić go np. adresem IP serwera DNS "
-#~ "providera.\n"
-#~ "\t\t       \n"
-#~ "Także, można przekonfigurować interfejs oraz (prze)konfigurować serwer "
-#~ "DHCP.\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "(Ten) Numer IP serwera DHCP"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "Przekonfiguruj interfejs oraz serwer DHCP"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "Sieć lokalna nie kończy się na \".0\", zwolniono."
-
-#~ msgid "Number of logical extents: %d"
-#~ msgstr "Liczba logicznych rozszerzeń: %d"
-
-#~ msgid ""
-#~ "WARNING: this device has been previously configured to connect to the "
-#~ "Internet.\n"
-#~ "Modifying the fields below will override this configuration.\n"
-#~ "Do you really want to reconfigure this device?"
-#~ msgstr ""
-#~ "OSTRZEŻENIE: Urządzenie to zostało poprzednio skonfigurowane do "
-#~ "połączenia z Internetem.\n"
-#~ "Modyfikacja poniższych pól nadpisze konfigurację.\n"
-#~ "Czy na pewno chcesz przekonfigurować to urządzenie?"
-
-#~ msgid ""
-#~ "        - Create etherboot floppies/CDs:\n"
-#~ "        \tThe diskless client machines need either ROM images on the NIC, "
-#~ "or a boot floppy\n"
-#~ "        \tor CD to initiate the boot sequence.  drakTermServ will help "
-#~ "generate these\n"
-#~ "        \timages, based on the NIC in the client machine.\n"
-#~ "        \t\t\n"
-#~ "        \tA basic example of creating a boot floppy for a 3Com 3c509 "
-#~ "manually:\n"
-#~ "        \t\t\n"
-#~ "        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
-#~ "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
-#~ msgstr ""
-#~ "        - Tworzenie płyt CD/dyskietek startowych z sieci:\n"
-#~ "        \t\tBezdyskowe maszyny klienckie wymagają albo obrazów ROM\n"
-#~ "        \t\tna urządzeniu NIC albo dyskietek startowych (lub płyt CD)\n"
-#~ "        \t\tw celu zainicjowania sekwencji uruchamiania.\n"
-#~ "        \t\tdrakTermServ pomoże w generacji tych obrazów pobieranych\n"
-#~ "        \t\tprzez interfejs sieciowy maszyny klienckiej.\n"
-#~ "        \t\t\n"
-#~ "        \t\tProsty przykład ręcznego tworzenia dyskietki startowej\n"
-#~ "        \t\tdla karty sieciowej 3Com 3c509:\n"
-#~ "        \t\t\n"
-#~ "        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
-#~ "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
-
-#~ msgid "Dynamic IP Address Pool:"
-#~ msgstr "Pula dynamicznych adresów IP:"
-
-#~ msgid "hd"
-#~ msgstr "hd"
-
-#~ msgid "tape"
-#~ msgstr "taśma"
-
-#~ msgid "WebDAV remote site already in sync!"
-#~ msgstr "Strona zdalna WebDAV jest już zsynchronizowana!"
-
-#~ msgid "WebDAV transfer failed!"
-#~ msgstr "Błąd przesyłania WebDAV!"
-
-#~ msgid ""
-#~ "Backup quota exceeded!\n"
-#~ "%d MB used vs %d MB allocated."
-#~ msgstr ""
-#~ "Przekroczono limit na archiwa!\n"
-#~ "Użyto %d Mb, zaś zaalokowano %d Mb."
-
-#~ msgid ""
-#~ "Maximum size\n"
-#~ " allowed for Drakbackup (MB)"
-#~ msgstr ""
-#~ "Maksymalny rozmiar\n"
-#~ " dostępny dla Drakbackup (Mb)"
-
-#~ msgid "\t-Network by webdav.\n"
-#~ msgstr "\t-Sieć przez webdav.\n"
-
-#~ msgid "Use graphical boot"
-#~ msgstr "Użycie graficznego uruchamiania"
-
-#~ msgid "first step creation"
-#~ msgstr "tworzenie pierwszego kroku"
-
-#~ msgid "choose image file"
-#~ msgstr "wybierz plik obrazu"
-
-#~ msgid "Browse"
-#~ msgstr "Przeglądaj"
-
-#~ msgid "Configure bootsplash picture"
-#~ msgstr "Konfiguracja obrazu ekranu powitalnego"
-
-#~ msgid "the color of the progress bar"
-#~ msgstr "kolor paska postępu"
-
-#~ msgid "Preview"
-#~ msgstr "Podgląd"
-
-#~ msgid "Choose color"
-#~ msgstr "Wybierz kolor"
-
-#~ msgid "Make kernel message quiet by default"
-#~ msgstr "Wyłączone domyślnie komunikaty jądra"
-
-#~ msgid "Notice"
-#~ msgstr "Uwaga"
-
-#~ msgid "This theme does not yet have a bootsplash in %s!"
-#~ msgstr "Ten temat nie posiada jeszcze ekranu powitalnego w %s!"
-
-#~ msgid "You must choose an image file first!"
-#~ msgstr "należy wybrać plik obrazu!"
-
-#~ msgid "Generating preview..."
-#~ msgstr "Tworzenie podglądu..."
-
-#~ msgid "%s BootSplash (%s) preview"
-#~ msgstr "Podgląd tematu %s ekranu powitalnego (%s)"
-
-#~ msgid ""
-#~ "The image \"%s\" cannot be load due to the following issue:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-#~ msgstr ""
-#~ "Obraz \"%s\" nie może zostać załadowany z poniższego powodu:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "Niedostępna stacja dyskietek"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr "Włóż dyskietkę z uaktualnionymi modułami do stacji %s"
-
-#, fuzzy
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-#~ msgstr "jugosłowiański (łaciński)"
-
-#~ msgid "No network card"
-#~ msgstr "Brak karty sieciowej"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Wykorzystaj aktualnie zainstalowany sterownik (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Użycie protokołu Wi-Fi Protected Access (WPA)"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Nie wybrano żadnego fontu"
-
-#~ msgid "The Mandriva Linux 10.1 products are:"
-#~ msgstr "Produktami Mandriva Linux 10.1 są:"
-
-#~ msgid ""
-#~ "\t* <b>Mandriva Linux 10.1 for x86-64</b>, The Mandriva Linux solution "
-#~ "for making the most of your 64-bit processor."
-#~ msgstr ""
-#~ "\t* <b>Mandriva Linux 10.1 dla x86-64</b>, edycja Mandriva Linux dla "
-#~ "procesorów 64-ro bitowych."
-
-#~ msgid "No browser available! Please install one"
-#~ msgstr "Brak dostępnych przeglądarek! Proszę jakąś zainstalować"
-
-#~ msgid ""
-#~ "No browser is installed on your system, Please install one if you want to "
-#~ "browse the help system"
-#~ msgstr ""
-#~ "W systemie nie zainstalowano przeglądarki. Zainstaluj jakąś, jeśli chcesz "
-#~ "przeglądać system pomocy"
-
-#~ msgid ""
-#~ "Insert a floppy in drive\n"
-#~ "All data on this floppy will be lost"
-#~ msgstr ""
-#~ "Włóż dyskietkę do stacji.\n"
-#~ "Wszystkie zapisane na niej dane zostaną utracone"
-
-#~ msgid "Insert a FAT formatted floppy in drive %s"
-#~ msgstr "Włóż sformatowaną (FAT) dyskietkę do stacji %s"
-
-#~ msgid "This floppy is not FAT formatted"
-#~ msgstr "Ten dysk nie jest sformatowany."
-
-#~ msgid ""
-#~ "To use this saved packages selection, boot installation with ``linux "
-#~ "defcfg=floppy''"
-#~ msgstr ""
-#~ "Aby użyć zapisaną listę pakietów, należy uruchomić instalację z opcją "
-#~ "''linux defcfg=floppy''"
-
-#~ msgid "Load/Save on floppy"
-#~ msgstr "Odczytaj/Zapisz na dyskietkę"
-
-#~ msgid ""
-#~ "Please choose load or save package selection on floppy.\n"
-#~ "The format is the same as auto_install generated floppies."
-#~ msgstr ""
-#~ "Wybierz odczyt lub zapis listy wybranych pakietów\n"
-#~ "na dyskietkę. Format jest identyczny z dyskiem automatycznej\n"
-#~ "instalacji."
-
-#~ msgid "Load from floppy"
-#~ msgstr "Odczytaj z dyskietki"
-
-#~ msgid "Save on floppy"
-#~ msgstr "Zapisz na dyskietkę"
-
-#~ msgid "Package selection"
-#~ msgstr "Wybór pakietów"
-
-#~ msgid "Loading from floppy"
-#~ msgstr "Odczytywanie z dyskietki"
-
-#~ msgid "Insert a floppy containing package selection"
-#~ msgstr "Włóż dyskietkę zawierającą listę wybranych pakietów"
-
-#~ msgid "Application:"
-#~ msgstr "Aplikacja:"
-
-#~ msgid "Release: "
-#~ msgstr "Wydanie: "
-
-#~ msgid "Summary: "
-#~ msgstr "Zestawienie: "
-
-#~ msgid "Bug Description/System Information"
-#~ msgstr "Opis błędu/Informacje systemowe"
-
-#~ msgid "YOUR TEXT HERE"
-#~ msgstr "TUTAJ TWÓJ TEKST"
-
-#~ msgid "Submit kernel version"
-#~ msgstr "Zatwierdź wersję jądra"
-
-#~ msgid "Submit cpuinfo"
-#~ msgstr "Zgłoś cpuinfo"
-
-#~ msgid "Submit lspci"
-#~ msgstr "Zgłoś lspci"
-
-#~ msgid "NOT FOUND"
-#~ msgstr "NIE ZNALEZIONO"
-
-#~ msgid "connecting to %s..."
-#~ msgstr "nawiązywanie połączenia z %s ..."
-
-#~ msgid "Please enter a package name."
-#~ msgstr "Podaj nazwę pakietu."
-
-#~ msgid "Please enter summary text."
-#~ msgstr "Podaj tekst zestawienia."
-
-#~ msgid "Loading printer configuration... Please wait"
-#~ msgstr "Wczytywanie konfiguracji drukarki... proszę czekać"
-
-#, fuzzy
-#~ msgid "The "
-#~ msgstr "Motyw"
-
-#~ msgid "%s (was %s)"
-#~ msgstr "%s (było %s)"
-
-#~ msgid "Root password"
-#~ msgstr "Hasło roota"
-
-#~ msgid "Do you want to recover your system?"
-#~ msgstr "Czy chcesz przywrócić swój system?"
-
-#~ msgid "Samba server"
-#~ msgstr "Serwer Samby"
-
-#~ msgid "Move"
-#~ msgstr "Przesuń"
-
-#~ msgid "Which disk do you want to move it to?"
-#~ msgstr "Na który dysk chcesz przenieść ?"
-
-#~ msgid "Sector"
-#~ msgstr "Sektor"
-
-#~ msgid "Which sector do you want to move it to?"
-#~ msgstr "Na który sektor chcesz przenieść ?"
-
-#~ msgid "Moving"
-#~ msgstr "Przenoszenie"
-
-#~ msgid "Moving partition..."
-#~ msgstr "Przenoszenie partycji..."
-
-#~ msgid "Error opening %s for writing: %s"
-#~ msgstr "Błąd otwarcia %s do zapisu: %s"

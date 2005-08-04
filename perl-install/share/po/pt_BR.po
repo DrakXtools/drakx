@@ -1,6 +1,8 @@
+# translation of pt_BR.po to
 # tradução de pt_BR.po para Português do Brasil
 # DRAKX PT_BR PO FILE
 # Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
+# Lisiane Sztoltz Teixeira <lisiane@mandriva.com>
 # Andrei Bosco Bezerra Torres <andrei_bosco@yahoo.com.br>, 2000, 2003.
 # Bruno Dorfman Buys <brunobuys@zipmail.com.br>, 2002.
 # Tiago da Cruz Bezerra <tiagocruz18@uol.com.br>,2002 2003, 2004.
@@ -8,19 +10,19 @@
 # Carlinhos Cecconi <carlinux@terra.com.br>, 2003, 2004.
 # Deivi Lopes Kuhn <deivikuhn@yahoo.com.br>, 2003, 2004.
 # Cristiano Otto Von Trompczynski <cris@mandriva.com>, 2005.
-# Lisiane Sztoltz Teixeira <lisiane@mandriva.com>
+# Arthur R. Mello <renato@conectiva.com.br>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-06-14 15:45-0300\n"
-"Last-Translator: Lisiane Sztoltz Teixeira <lisiane@conectiva.com>\n"
-"Language-Team: Brazilian portuguese <lisiane@mandriva.com>\n"
+"PO-Revision-Date: 2005-08-04 10:38-0300\n"
+"Last-Translator: Arthur R. Mello <renato@conectiva.com.br>\n"
+"Language-Team:  <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -54,8 +56,8 @@ msgid ""
 "The USB key seems to have write protection enabled. Please\n"
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
-"A chave USB deve estar com proteção de gravação. Desconecte-a por favor,\n"
-"remova a proteção, e conecte novamente."
+"A chave USB deve estar com proteção de gravação. Desconecte-a\n"
+"por favor, remova a proteção, e conecte a novamente."
 
 #: ../move/move.pm:452
 #, c-format
@@ -77,8 +79,9 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandriva Move again."
 msgstr ""
-"A chave USB deve estar com proteção de gravação e não é possível desconectá-"
-"la-n  com segurança agora.\n"
+"A chave USB parece estar com proteção de gravação, mas não é possível "
+"desconectá-la\n"
+"com segurança agora.\n"
 "\n"
 "\n"
 "Clique no botão para reiniciar o computador, retire a chave USB, remova a\n"
@@ -104,13 +107,13 @@ msgid ""
 "Operating System."
 msgstr ""
 "Sua chave USB não tem nenhuma partição do Windows válida  (FAT).\n"
-"Será necessário uma para continuar. Além do que, por ser um padrão\n"
+"Será necessário uma para continuar (além do mais, por ser um padrão\n"
 "comum (FAT), você poderá mover e trabalhar com seus\n"
-" arquivos em máquinas que rodam Windows. Em vez disso,\n"
-"por favor conecte sua chave USB contendo uma partição\n"
-" Windows. \n"
+" arquivos em máquinas que rodem Windows). Por favor conecte uma chave USB "
+"contendo uma partição Windows. \n"
 "\n"
-"Você pode também continuar sem uma chave USB e usar\n"
+"\n"
+"Você também pode continuar sem uma chave USB e usar\n"
 " o Mandriva Move como um sistema operacional Live CD\n"
 " do Mandriva Linux."
 
@@ -137,6 +140,7 @@ msgstr ""
 " conectar uma chave USB agora, aguarde alguns segundos para\n"
 " detectá-la novamente.\n"
 "\n"
+"\n"
 "Você pode também continuar sem uma chave USB e usar o \n"
 " Mandriva Move como um sistema operacional Live CD do Mandriva\n"
 " Linux."
@@ -149,7 +153,7 @@ msgstr "É necessário uma chave USB para gravar seus dados"
 #: ../move/move.pm:496
 #, c-format
 msgid "Detect USB key again"
-msgstr "Detectando novamente uma chave USB"
+msgstr "Detectar novamente uma chave USB"
 
 #: ../move/move.pm:517
 #, c-format
@@ -160,8 +164,7 @@ msgstr "Configurando a chave USB"
 #, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
 msgstr ""
-"Por favor aguarde, está sendo feita a configuração do sistema de arquivos da "
-"chave USB..."
+"Por favor aguarde, carregando os arquivos de configuração na chave USB..."
 
 #: ../move/move.pm:546
 #, c-format
@@ -290,21 +293,21 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"O erro pode ter vindo da configuração corrompida do sistema\n"
-"de arquivos da chave USB, e neste caso a remoção da chave e\n"
-" o boot novamente do Mandriva Move devem resolver o \n"
-"problema.  Para fazer isso, clique no botão correspondente.\n"
+"O erro pode ter vindo de arquivos de configuração do sistema\n"
+"corrompidos na chave USB, neste caso remover os mesmos e\n"
+" e reinicializar o Mandriva Move deve resolver o \n"
+"problema. Para fazer isso, clique no botão correspondente.\n"
 "\n"
 "\n"
 "Você também pode reiniciar e remover a chave USB, ou\n"
-"examinar seu conteúdo a partir de outro S.O., ou também\n"
+"examinar seu conteúdo a partir de outro S.O., ou ainda\n"
 "olhar o arquivo de registro (log) no console #3 e #4\n"
 "e tentar verificar o que está acontecendo."
 
 #: ../move/move.pm:681
 #, c-format
 msgid "Remove system config files"
-msgstr "Remover os arquivos de config do sistema"
+msgstr "Remover os arquivos de configuração do sistema"
 
 #: ../move/move.pm:682
 #, c-format
@@ -339,8 +342,8 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
-"Você não pode usar um outro CD-ROM enquanto os seguintes programas estiverem "
-"em execução:\n"
+"Você não pode usar um outro CD-ROM enquanto os seguintes programas\n"
+"estiverem em execução:\n"
 "%s"
 
 #: ../move/tree/mdk_totem:101
@@ -406,7 +409,7 @@ msgstr "Escolha um servidor X"
 #: Xconfig/card.pm:188
 #, c-format
 msgid "Multi-head configuration"
-msgstr "Configuração multi-cabeça"
+msgstr "Configuração multi-terminal"
 
 #: Xconfig/card.pm:189
 #, c-format
@@ -414,7 +417,7 @@ msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
-"Seu sistema suporta configuração de múltiplas cabeças.\n"
+"Seu sistema suporta configuração de múltiplos terminais.\n"
 "O que você quer fazer?"
 
 #: Xconfig/card.pm:258
@@ -440,7 +443,7 @@ msgstr "Qual configuração do Xorg você deseja ter?"
 #: Xconfig/card.pm:380
 #, c-format
 msgid "Configure all heads independently"
-msgstr "Configurar todas as cabeças independentemente"
+msgstr "Configurar todos os terminais independentemente"
 
 #: Xconfig/card.pm:381
 #, c-format
@@ -527,7 +530,7 @@ msgstr "Opções"
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
 msgstr ""
-"O seu arquivo de configuração do Xorg está com problemas, e portanto será "
+"O seu arquivo de configuração do Xorg está com problemas, e portanto será\n"
 "ignorado."
 
 #: Xconfig/main.pm:186
@@ -546,7 +549,7 @@ msgstr ""
 #: Xconfig/monitor.pm:111
 #, c-format
 msgid "Choose a monitor for head #%d"
-msgstr "Escolha um monitor para o cabeçalho #%d"
+msgstr "Escolha um monitor para o terminal #%d"
 
 #: Xconfig/monitor.pm:111
 #, c-format
@@ -594,9 +597,10 @@ msgstr ""
 "sincronização\n"
 "horizontal, que é a taxa em que scanlines são mostradas.\n"
 "\n"
-"É MUITO IMPORTANTE que você não especifique um tipo de monitor com taxa de\n"
-"atualização muito além das capacidades do seu monitor: você pode danificar "
-"seu monitor. \n"
+"É MUITO IMPORTANTE que você não especifique um tipo de monitor com taxa de "
+"atualização\n"
+"muito além das capacidades do seu monitor: você pode danificar seu "
+"monitor. \n"
 " Se estiver com dúvidas, escolha as características mais conservadoras."
 
 #: Xconfig/monitor.pm:144
@@ -771,7 +775,7 @@ msgstr "Placa de vídeo: %s\n"
 #: Xconfig/various.pm:38
 #, c-format
 msgid "Graphics memory: %s kB\n"
-msgstr "Memória de vídeo: %s kb\n"
+msgstr "Memória de vídeo: %s kB\n"
 
 #: Xconfig/various.pm:40
 #, c-format
@@ -801,7 +805,7 @@ msgid ""
 "Would you like Xorg to start when you reboot?"
 msgstr ""
 "Eu posso fazer seu computador iniciar automaticamente a interface gráfica "
-"(Xorg) após a inicialização.\n"
+"(Xorg) durante a inicialização.\n"
 "Você gostaria de iniciar automaticamente a interface gráfica ao iniciar a "
 "sua máquina?"
 
@@ -861,10 +865,9 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"O LILO precisa designar um novo Nome de Volume (ID) para o drive %s. No "
-"entanto, \n"
-"modificar o ID de um disco de boot do Windows NT, 2000 ou XP é  um erro "
-"fatal do Windows.\n"
+"O LILO precisa designar um novo Nome de Volume (ID) para o drive %s.  No\n"
+"entanto, modificar o ID de um disco de boot do Windows NT, 2000 ou XP é um "
+"erro fatal do Windows.\n"
 "Este problema não ocorre em Windows 95 ou 98, ou em discos de dados NT.\n"
 "\n"
 "Especificar um novo Nome de Volume (ID)?"
@@ -888,9 +891,9 @@ msgid ""
 msgstr ""
 "Você pode precisar mudar seu dispositivo de boot Open Firmware\n"
 " para ativar o gerenciador de inicialização. Se você não ver o\n"
-" prompt do gerenciador durante o boot, pressione e mantenha pressionada a "
-"combinação Command-Option-O-F ao reiniciar\n"
-" e digite: setenv boot-device %s,\\\\:tbxi\n"
+" prompt do gerenciador durante o boot,  mantenha pressionada a combinação "
+"Command-Option-O-F ao reiniciar e digite:\n"
+" setenv boot-device %s,\\\\:tbxi\n"
 " Então, digite: shut-down\n"
 "No próximo boot, você verá o prompt do gerenciador de inicialização."
 
@@ -960,7 +963,7 @@ msgstr "Indique o tamanho da RAM em MB"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
-"A opção 'Restringir opções da linha de comando' não tem uso sem uma senha"
+"A opção \"Restringi opções da linha de comando\" não tem uso sem uma senha"
 
 #: any.pm:276 any.pm:609 authentication.pm:181
 #, c-format
@@ -1033,7 +1036,7 @@ msgstr "Limpar /tmp a cada inicialização"
 #: any.pm:297
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Se necessário, indique o tamanho preciso da RAM (%d MB encontrados)"
+msgstr "Se necessário, indique o tamanho exato da RAM (%d MB encontrados)"
 
 #: any.pm:305
 #, c-format
@@ -1048,7 +1051,7 @@ msgstr "Atraso do Open Firmware"
 #: any.pm:308
 #, c-format
 msgid "Kernel Boot Timeout"
-msgstr "Tempo limite do boot do kernel"
+msgstr "Tempo limite de boot do kernel"
 
 #: any.pm:309
 #, c-format
@@ -1123,7 +1126,7 @@ msgstr "Não é permitido o campo de nome vazio"
 #: any.pm:403
 #, c-format
 msgid "You must specify a kernel image"
-msgstr "Você precisa especificar uma imagem de kernel"
+msgstr "Você precisa especificar uma imagem do kernel"
 
 #: any.pm:403
 #, c-format
@@ -1148,17 +1151,17 @@ msgstr "Linux"
 #: any.pm:419
 #, c-format
 msgid "Other OS (SunOS...)"
-msgstr "Outros SOs (SunOS...)"
+msgstr "Outro S.O. (SunOS...)"
 
 #: any.pm:420
 #, c-format
 msgid "Other OS (MacOS...)"
-msgstr "Outros SOs (MacOS...)"
+msgstr "Outro S.O. (MacOS...)"
 
 #: any.pm:420
 #, c-format
 msgid "Other OS (Windows...)"
-msgstr "Outros SOs (Windows...)"
+msgstr "Outro S.O. (Windows...)"
 
 #: any.pm:448
 #, c-format
@@ -1166,7 +1169,7 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Aqui estão as diferentes entradas contidas no menu de boot.\n"
+"Aqui estão as entradas contidas no menu de boot.\n"
 "Você pode adicionar mais ou modificar as existentes."
 
 #: any.pm:595
@@ -1219,7 +1222,7 @@ msgstr "Por favor, informe um nome de usuário"
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
-"O nome do usuário pode conter apenas letras minúsculas, números e os "
+"O nome do usuário deve conter apenas letras minúsculas, números e os "
 "caracteres `-' e `_'"
 
 #: any.pm:613
@@ -1230,7 +1233,7 @@ msgstr "Nome de usuário muito grande"
 #: any.pm:614
 #, c-format
 msgid "This user name has already been added"
-msgstr "Este usuário já foi adicionado"
+msgstr "Este nome de usuário já foi adicionado"
 
 #: any.pm:615 any.pm:646
 #, c-format
@@ -1243,14 +1246,14 @@ msgid "Group ID"
 msgstr "ID do Grupo"
 
 #: any.pm:619
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "A opção %s tem que ser um número!"
+msgstr "A opção %s tem que ser um número"
 
 #: any.pm:620
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s deve ser acima de 500. Aceitar mesmo assim?"
 
 #: any.pm:625
 #, c-format
@@ -1314,9 +1317,9 @@ msgstr ""
 "através de um usuário."
 
 #: any.pm:698
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Você quer usar este recurso ?"
+msgstr "Usar este recurso"
 
 #: any.pm:699
 #, c-format
@@ -1417,7 +1420,8 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"Você deseja permitir aos usuários que compartilhem seus diretórios?\n"
+"Você deseja permitir aos usuários que compartilhem alguns de seus "
+"diretórios?\n"
 "Ao habilitar isto, bastará aos usuários simplesmente clicar em "
 "\"Compartilhamento\" no Konqueror e no Nautilus.\n"
 "\n"
@@ -1429,7 +1433,7 @@ msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
-"NFS:o tradicional sistema de transferência de arquivos Unix, com pouco "
+"NFS:o tradicional sistema de compartilhamento de arquivos Unix, com pouco "
 "suporte em Mac e Windows."
 
 #: any.pm:982
@@ -1532,9 +1536,9 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
-"Diga ao seu computador para usar LDAP para algum serviço de  autenticação, "
-"ou para todos. O LDAP consolida e centraliza certos tipos de informação "
-"dentro de sua organização."
+"Diga ao seu computador para usar LDAP para algum serviço de autenticação, ou "
+"para todos. O LDAP consolida e centraliza certos tipos de informação dentro "
+"de sua organização."
 
 #: authentication.pm:57
 #, c-format
@@ -1726,13 +1730,13 @@ msgstr "Usar ldmap para armazenar UID/SID"
 #: authentication.pm:156
 #, c-format
 msgid "Default Idmap "
-msgstr "ldmap padrão "
+msgstr "Ldmap padrão "
 
 #: authentication.pm:170
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
 msgstr ""
-"Defina a senha do administrar (root) e os métodos de autenticação da rede"
+"Defina a senha do administrador (root) e os métodos de autenticação da rede"
 
 #: authentication.pm:171
 #, c-format
@@ -1800,12 +1804,12 @@ msgstr "LILO com menu de texto"
 #: bootloader.pm:855
 #, c-format
 msgid "Grub with graphical menu"
-msgstr ""
+msgstr "Grub com menu gráfico"
 
 #: bootloader.pm:856
 #, c-format
 msgid "Grub with text menu"
-msgstr ""
+msgstr "Grubo com menu de texto"
 
 #: bootloader.pm:857
 #, c-format
@@ -2235,7 +2239,7 @@ msgstr "Tipos de sistema de arquivos:"
 #: diskdrake/hd_gtk.pm:357 diskdrake/hd_gtk.pm:359 diskdrake/hd_gtk.pm:365
 #, c-format
 msgid "Use ``%s'' instead"
-msgstr "Em vez disso, usar ``%s''"
+msgstr "Em vez disso, usar \"%s\""
 
 #: diskdrake/hd_gtk.pm:357 diskdrake/interactive.pm:470
 #, c-format
@@ -2260,7 +2264,7 @@ msgstr "Remover"
 #: diskdrake/hd_gtk.pm:365
 #, c-format
 msgid "Use ``Unmount'' first"
-msgstr "Usar ``Desmontar'' primeiro"
+msgstr "Usar \"Desmontar\" primeiro"
 
 #: diskdrake/interactive.pm:194
 #, c-format
@@ -2368,7 +2372,7 @@ msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
 msgstr ""
-"Para ter mais partições, remova  uma para possibilitar a criação de partição "
+"Para ter mais partições, remova uma para possibilitar a criação de partição "
 "estendida"
 
 #: diskdrake/interactive.pm:360
@@ -2503,7 +2507,7 @@ msgstr "Preferência: "
 #: diskdrake/interactive.pm:528
 #, c-format
 msgid "Logical volume name "
-msgstr "Nome de volume lógico"
+msgstr "Nome do volume lógico"
 
 #: diskdrake/interactive.pm:558
 #, c-format
@@ -2642,11 +2646,13 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Volume físico %s ainda está sendo utilizado.\n"
+"Você quer mover as extensões físicas usadas neste volume pra outros volumes?"
 
 #: diskdrake/interactive.pm:893
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Movendo extensões físicas"
 
 #: diskdrake/interactive.pm:911
 #, c-format
@@ -2716,7 +2722,7 @@ msgstr "Qual o tipo de particionamento?"
 #: diskdrake/interactive.pm:1100
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr "Você precisará reiniciar para que as modificações tenham efeito"
+msgstr " Você precisará reiniciar para que as modificações tenham efeito"
 
 #: diskdrake/interactive.pm:1109
 #, c-format
@@ -2781,7 +2787,7 @@ msgstr "Dispositivo: "
 #: diskdrake/interactive.pm:1190
 #, c-format
 msgid "Devfs name: "
-msgstr "Nome do sist de arquivos do disp.:"
+msgstr "Nome do sistema de arquivos do dispositivo:"
 
 #: diskdrake/interactive.pm:1191
 #, c-format
@@ -2855,7 +2861,7 @@ msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr ""
-"Loopback arquivo(s):\n"
+"Arquivo(s) de Loopback:\n"
 "   %s\n"
 
 #: diskdrake/interactive.pm:1223
@@ -2875,7 +2881,7 @@ msgstr "Nível %s\n"
 #: diskdrake/interactive.pm:1226
 #, c-format
 msgid "Chunk size %d KiB\n"
-msgstr "Tamanho do pedaço %d KiB\n"
+msgstr "Tamanho quebrado (chunk) %d KiB\n"
 
 #: diskdrake/interactive.pm:1227
 #, c-format
@@ -3008,7 +3014,7 @@ msgstr "Qual nome de usuário"
 #: diskdrake/smbnfs_gtk.pm:167
 #, c-format
 msgid "Another one"
-msgstr "Mais outra"
+msgstr "Mais uma"
 
 #: diskdrake/smbnfs_gtk.pm:176
 #, c-format
@@ -3105,7 +3111,7 @@ msgstr "Habilitando partição Swap %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Habilitar quota de disco para o grupo e limites reforçados opicionais"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3113,7 +3119,7 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
-"Não atualiza o tempo de acesso ao inode no sistema de arquivos\n"
+"Não atualize o tempo de acesso ao inode neste sistema de arquivos\n"
 "(ex. para um acesso mais rápido ao spoll de notícias, para acelerar os "
 "servidores de notícias)."
 
@@ -3186,6 +3192,7 @@ msgstr ""
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
+"Habilita a quota de disco para usuário, e limites reforçados opicionalmente"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3269,6 +3276,8 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"Você não pode utilizar um Volume Lógico LVM para o ponto de montagem %s, "
+"pois o mesmoparece uma extensão física"
 
 #: fsedit.pm:392
 #, c-format
@@ -3278,11 +3287,15 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Você selecionou um Volume Lógico LVM como root (/).\n"
+"O gerenciador de inicialização não consegue utilizá-la quando o volume é uma "
+"extensão física. \n"
+"Você deve adicionar uma partição /boot primeiro"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr "Esse diretório deveria permanecer dentro do sistema de arquivo root"
+msgstr "Esse diretório deveria permanecer dentro do sistema de arquivos root"
 
 #: fsedit.pm:400 fsedit.pm:402
 #, c-format
@@ -3297,7 +3310,7 @@ msgstr ""
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
-"Você não pode usar um sistema de arquivos criptografado como ponto de "
+"Você não pode usar um sistema de arquivos criptografados como ponto de "
 "montagem %s"
 
 #: fsedit.pm:465
@@ -3323,7 +3336,7 @@ msgstr "Zip"
 #: harddrake/data.pm:88 install_any.pm:1666
 #, c-format
 msgid "Hard Disk"
-msgstr "Disco"
+msgstr "Disco Rígido"
 
 #: harddrake/data.pm:97 install_any.pm:1667
 #, c-format
@@ -3542,7 +3555,7 @@ msgstr "CPU # "
 #: standalone/drakconnect:637
 #, c-format
 msgid "Please Wait... Applying the configuration"
-msgstr "Por favor aguarde... aplicando a configuração"
+msgstr "Por favor aguarde... Aplicando a configuração"
 
 #: harddrake/sound.pm:226
 #, c-format
@@ -3609,8 +3622,8 @@ msgid ""
 msgstr ""
 "OSS (Open Sound System ou Sistema de Som Aberto) foi a primeira API de som. "
 "Ela é uma API de som independente de sistema operacional (funciona na "
-"maioria dos sistemas Unix) mas é uma API muito básica e limitada.\n"
-"Ainda por cima, todos os drivers OSS reinventam a roda.\n"
+"maioria dos sistemas Unix(tm)) mas é uma API muito básica e limitada.\n"
+"Ainda por cima, todos os drivers OSS reinventaram a roda.\n"
 "\n"
 "ALSA (Arquitetura Avançada de Som Linux) é uma arquitetura modular que "
 "suporta um grande número de placas ISA, USB e PCI.\n"
@@ -3739,6 +3752,7 @@ msgstr ""
 "\n"
 "- \"/sbin/lsmod\" permitirá verificar se o seu módulo (driver) \n"
 "esta carregado ou não\n"
+"\n"
 "- \"/sbin/chkconfig --list sound\" e \"/sbin/chkconfig --list alsa\"\n"
 "mostrará se seu som e os serviços alsa estão configurados para\n"
 "executar no nível de execução 3\n"
@@ -3936,17 +3950,17 @@ msgstr ""
 "usuário para cada um dos seus amigos: seu pai ou sua irmã, por exemplo.\n"
 "Depois que terminar de adicionar os usuários, clique em \"%s\".\n"
 "\n"
-"Clicando no botão \"%s\"  você poderá mudar o \"shell\" padrão do usuário\n"
+"Clicando no botão \"%s\" você poderá mudar o \"shell\" padrão do usuário\n"
 "(o padrão é o bash).\n"
 "\n"
 "Quando você terminar de adicionar usuários, você poderá escolher um usuário\n"
-"para que você acesse automaticamente o sistema quando o computador for "
+"para que ele acesse automaticamente o sistema quando o computador for "
 "iniciado.\n"
 "Caso você esteja interessado neste recurso (e não precisar de muita\n"
 "segurança local), escolha o usuário e o gerenciador de janelas,\n"
 "e então clique em \"%s\". Se não estiver interessado nesse recurso, "
 "desmarque\n"
-"a seleção da caixa \"%s\""
+"a opção \"%s\""
 
 #: help.pm:51 printer/printerdrake.pm:1662 printer/printerdrake.pm:1783
 #, c-format
@@ -4012,7 +4026,6 @@ msgstr ""
 "\n"
 "Cada partição é listada da seguinte forma: \"Nome\", \"Capacidade\".\n"
 "\n"
-"\n"
 "\"Nome\" é codificado da seguinte maneira: \"tipo do disco rígido\", "
 "\"número\n"
 "do disco rígido\", \"número da partição\" (por exemplo, \"hda1\").\n"
@@ -4049,8 +4062,8 @@ msgstr ""
 "O instalador do Mandriva Linux está espalhado em diferentes CD-ROMs.\n"
 "Se o pacote selecionado estiver localizado em outro CD-ROM, O DrakX irá\n"
 "ejetar o CD atual e pedir para você inserir o CD necessário. Se você não "
-"tiver com o \n"
-"CD em mãos, basta clicar em \"%s\", e os pacotes correspondentes não\n"
+"tiver com o CD em mãos, basta clicar em \"%s\", e os pacotes correspondentes "
+"não\n"
 "serão instalados."
 
 #: help.pm:92
@@ -4156,9 +4169,9 @@ msgstr ""
 "Se você iniciar uma instalação no modo \"%s\", você pode desmarcar todos\n"
 "os grupos e prevenir a instalação de qualquer pacote adicional. Isto é útil "
 "para\n"
-"reparar ou atualizar uma sistema já existente.\n"
+"reparar ou atualizar um sistema já existente.\n"
 "\n"
-"Se você não selecionar nenhum grupo quando de uma instalação regular (o "
+"Se você não selecionar nenhum grupo quando em uma instalação regular (o "
 "oposto\n"
 "de uma atualização), uma caixa de diálogo aparecerá propondo diferentes\n"
 "opções para uma instalação mínima:\n"
@@ -4166,8 +4179,8 @@ msgstr ""
 " * \"%s\": Instala o mínimo de pacotes possíveis para se ter uma estação\n"
 "de trabalho gráfica.\n"
 "\n"
-" * \"%s\": Instala a base do sistema acrescida de utilitários e\n"
-"documentação. Instalação útil para configurar um servidor.\n"
+" * \"%s\": Instala a base do sistema acrescida de utilitários básicos e\n"
+"documentação. Esta Instalação é útil para configurar um servidor.\n"
 "\n"
 " * \"%s\": Instala os pacotes mínimos necessários para obter um sistema\n"
 "Linux funcionando. Com esta instalação você terá somente interface de\n"
@@ -4260,7 +4273,7 @@ msgstr ""
 "descrição sobre o pacote aparecerá na janela da direita.\n"
 "\n"
 "!! Quando um pacote de servidor foi selecionado, intencionalmente ou por\n"
-"ser parte de um grupo, será pedido para que você confirme se  realmente "
+"ser parte de um grupo, será pedido para que você confirme se realmente "
 "deseja que\n"
 "estes servidores sejam instalados. Por padrão, no Mandriva Linux qualquer\n"
 "serviço instalado será iniciado quando a máquina for iniciada.\n"
@@ -4317,7 +4330,8 @@ msgid ""
 "manual is similar to the one used during installation."
 msgstr ""
 "\"%s\": clique no botão \"%s\" para abrir o assistente de configuração de\n"
-"impressora. Consulte o capítulo correspondente do ``Guia do Iniciante' para\n"
+"impressora. Consulte o capítulo correspondente do \"Guia do Iniciante\" "
+"para\n"
 "mais informações sobre como configurar uma nova impressora. A interface\n"
 "apresentada no manual é similar à utilizada durante a instalação."
 
@@ -4349,7 +4363,7 @@ msgid ""
 "server. In general, select only those services you really need. !!"
 msgstr ""
 "Esta janela é utilizada para selecionar quais serviços você deseja iniciar\n"
-"durante o período de inicialização (boot) da máquina.\n"
+"durante o processo de inicialização (boot) da máquina.\n"
 "\n"
 "O DrakX irá listar todos os serviços disponíveis na instalação atual.\n"
 "Reveja cuidadosamente e desabilite aqueles que não são sempre necessários \n"
@@ -4533,7 +4547,7 @@ msgstr ""
 "\n"
 "Teste\n"
 "\n"
-"...Dependendo do seu hardware, esta opção pode não ser mostrada.\n"
+"   Dependendo do seu hardware, esta opção pode não ser mostrada.\n"
 "\n"
 "   O sistema testará a resolução gráfica escolhida.\n"
 "Se você ver a mensagem durante o teste e responder \"%s\",\n"
@@ -4549,7 +4563,7 @@ msgstr ""
 "   Aqui você pode escolher se deseja que o computador inicie\n"
 "automaticamente em modo gráfico. Obviamente, você vai querer marcar o\n"
 "\"%s\" se a sua máquina é um servidor, ou caso não tenha conseguido obter\n"
-"uma boa configuração de resolução de vídeo."
+"uma boa configuração de vídeo."
 
 #: help.pm:288
 #, c-format
@@ -4736,14 +4750,15 @@ msgstr ""
 "seu \n"
 "disco rígido será apagado, sendo assim, todo ele particionado do início.\n"
 "\n"
-"   !! SE você escolher esta opção, todo os dados do seu disco rígido serão "
+"   !! Se você escolher esta opção, todo os dados do seu disco rígido serão "
 "perdidos. !!\n"
 "\n"
 "* \"%s\": escolha esta opção se você quiser particionar manualmente o seu\n"
 "disco rígido. Tenha cuidado -- ela é muito poderosa, mas muito perigosa. "
 "Você\n"
 "pode perder todos os seus dados facilmente. Escolha essa solução somente\n"
-"se souber o que faz ou já tiver experiência com particionamento. Para mais\n"
+"se souber o que está fazendo ou já tiver experiência com particionamento. "
+"Para mais\n"
 "informações de como usar o utilitário DiskDrake, leia a seção 'Gerenciando "
 "suas \n"
 "Partições' do 'Guia do Iniciante'."
@@ -4815,7 +4830,7 @@ msgid ""
 "\"mformat a:\", or \"fdformat /dev/fd0\" followed by \"mkfs.vfat\n"
 "/dev/fd0\"."
 msgstr ""
-"E aqui estamos!. A instalação agora está completa e o seu GNU/Linux está\n"
+"E aqui estamos! A instalação agora está completa e o seu GNU/Linux está\n"
 "pronto para ser usado. Clique em \"%s\" para reiniciar o sistema. Não "
 "esqueça\n"
 "de remover a mídia de instalação (CD-ROM ou disquete). A primeira coisa\n"
@@ -4845,7 +4860,7 @@ msgstr ""
 "\n"
 " * \"%s\": salva a seleção de pacotes feita nesta instalação.\n"
 "Para usar esta seleção em outra instalação, insira o disquete e inicie\n"
-"a instalação. No 'prompt', pressione a tecla F1 e digite >>linux\n"
+"a instalação. No 'prompt', pressione a tecla F1 e digite >> linux\n"
 "defcfg=\"floppy\" << e pressione [Enter].\n"
 "\n"
 "(*) Você precisa de um disquete formatado com FAT. Para criar um pelo\n"
@@ -4919,7 +4934,7 @@ msgstr ""
 "\n"
 "Clique em \"%s\" para selecionar partições as quais você deseja que sejam "
 "verificadas, \n"
-"para a busca por blocos ruins."
+"para a busca por blocos defeituosos."
 
 #: help.pm:431 install_steps_gtk.pm:388 interactive.pm:433
 #: interactive/newt.pm:318 printer/printerdrake.pm:3676
@@ -4957,7 +4972,7 @@ msgstr ""
 "as atualizações. Escolha a mais próxima de você. Quando a árvore de\n"
 "seleção de pacotes aparecer, marque o que desejar e pressione \"%s\" para\n"
 "fazer o download e instalar o(s) pacote(s) selecionado(s), ou \"%s\" para\n"
-"interromper.."
+"interromper."
 
 #: help.pm:444 help.pm:588 install_steps_gtk.pm:387
 #: install_steps_interactive.pm:155 standalone/drakbackup:4097
@@ -4985,15 +5000,15 @@ msgstr ""
 "a máquina. Em geral, o nível da segurança deve ser ajustado para o mais alto "
 "possível, \n"
 "se a máquina contiver dados cruciais, ou se for uma máquina exposta\n"
-"diretamente à Internet.  Contudo, os níveis mais altos de segurança\n"
+"diretamente à Internet. Contudo, os níveis mais altos de segurança\n"
 "diminuem a facilidade de uso do computador.\n"
 "\n"
 "Se você não souber o que escolher, fique com a opção padrão. Você poderá\n"
-"trocar o nível de segurança depois usando a ferramenta draksec,  no Centro\n"
+"trocar o nível de segurança depois usando a ferramenta draksec, no Centro\n"
 "de Controle Mandriva Linux.\n"
 "\n"
 "Preencha o campo \"%s\" com o endereço de e-mail da pessoa  responsável\n"
-"pela segurança.Assim, mensagens de segurança serão enviadas para esse "
+"pela segurança. Assim, mensagens de segurança serão enviadas para esse "
 "endereço."
 
 #: help.pm:458
@@ -5083,8 +5098,8 @@ msgstr ""
 "devem ser definidas.\n"
 "\n"
 "Para criar partições, você deve primeiro selecionar um disco rígido. Você\n"
-"pode selecionar o disco clicando em ``hda'' para o primeiro drive IDE,\n"
-"``hdb'' para o segundo,  ``sda'' para o primeiro drive SCSI e assim por\n"
+"pode selecionar o disco clicando em \"hda\" para o primeiro drive IDE,\n"
+"\"hdb\" para o segundo, \"sda\" para o primeiro drive SCSI e assim por\n"
 "diante.\n"
 "\n"
 "Para particionar o disco selecionado, você pode usar as seguintes opções:\n"
@@ -5143,8 +5158,9 @@ msgstr ""
 " * Ctrl-m para especificar um ponto de montagem\n"
 "\n"
 "Para mais informações sobre os diferentes tipos de sistemas de arquivos \n"
-"disponíveis, por favor, leia o capítulo sobre ext2FS do ``Manual de "
-"Referência''.\n"
+"disponíveis, por favor, leia o capítulo sobre ext2FS do \"Manual de "
+"Referência\".\n"
+"\n"
 "Se você está instalando em uma Máquina PPC, você vai precisar criar uma\n"
 "pequena partição \"bootstrap\" HFS de no mínimo 1MB para usar com o \n"
 "gerenciador de boot yaboot. Se você quiser criar uma partição um\n"
@@ -5271,8 +5287,7 @@ msgstr ""
 " * \"%s\": na maioria das vezes, isto remove completamente o sistema "
 "antigo.\n"
 "Porém, dependendo do seu modo de particionamento, você pode evitar que\n"
-"alguns dos dados existentes sejam sobrescritos (como o  diretório \"home"
-"\").\n"
+"alguns dos dados existentes sejam sobrescritos (como o diretório \"home\").\n"
 "Se você deseja mudar o particionamento dos seus discos rígidos, ou mudar o "
 "sistema de arquivos, você deve usar esta opção.\n"
 "\n"
@@ -5282,8 +5297,8 @@ msgstr ""
 "dos outros passos de configuração permanecerão disponíveis, semelhantes a "
 "uma instalação normal.\n"
 "\n"
-"O uso da opção ``Atualizar'' deve funcionar bem em sistemas Mandriva Linux \n"
-"versão \"8.1\" ou superior. Executar um atualização de versões anteriores\n"
+"O uso da opção \"Atualizar\" deve funcionar bem em sistemas Mandriva Linux \n"
+"versão \"8.1\" ou superior. Executar uma atualização de versões anteriores\n"
 "ao Mandriva Linux \"8.1\" não é recomendado."
 
 #: help.pm:591
@@ -5309,14 +5324,14 @@ msgstr ""
 "Dependendo do idioma que você escolheu, o DrakX escolherá uma\n"
 "configuração de teclado particular para você. Selecione esta opção ou\n"
 "escolha um outro layout de teclado.\n"
+"\n"
 "Contudo, você pode ter um teclado que não corresponde exatamente\n"
 "ao idioma que você escolheu: por exemplo, se você for um suíço, porém\n"
 "o idioma é o inglês, você pode preferir continuar usando um teclado suíço.\n"
-"Ou se você fala inglês mas mora no Quebec, você pode estar na mesma\n"
+"Ou se você fala inglês mas mora em Quebec, você pode estar na mesma\n"
 "situação quando sua língua nativa e seu teclado não são os mesmos. Nestes\n"
-"casos, este passo da instalação  permitirá que você escolha o teclado "
-"apropriado\n"
-"na lista.\n"
+"casos, este passo da instalação permitirá que você escolha o teclado "
+"apropriado na lista.\n"
 "\n"
 "Clique em \"%s\" para ver uma lista completa com os teclados disponíveis. \n"
 "\n"
@@ -5368,7 +5383,7 @@ msgid ""
 "by the entire system. Running the command as a regular user will only\n"
 "change the language settings for that particular user."
 msgstr ""
-"O primeiro passo é escolher o seu idioma preferida.\n"
+"O primeiro passo é escolher o seu idioma preferido.\n"
 "\n"
 "A escolha de seu idioma preferido afetará a documentação do sistema, o "
 "instalador\n"
@@ -5376,9 +5391,9 @@ msgstr ""
 "e o idioma que você fala.\n"
 "\n"
 "Clicando em \"%s\" você poderá selecionar outros idiomas para serem\n"
-"instalados no seu sistema. Ao selecionar outros idiomas também serão "
-"instalados os\n"
-"arquivos específicos para documentação e aplicativos. Por exemplo, se\n"
+"instalados no seu sistema. Ao selecionar outros idiomas também serão \n"
+"instalados os arquivos específicos para documentação e aplicativos. Por "
+"exemplo, se\n"
 "você pretende adicionar usuários espanhóis na sua máquina, selecione\n"
 "Inglês como idioma padrão na árvore de visualização e \"%s\" na seção\n"
 "Avançado.\n"
@@ -5389,14 +5404,14 @@ msgstr ""
 "está em desenvolvimento. Por essa razão, o uso dele no Mandriva Linux \n"
 "dependerá da escolha do usuário:\n"
 "\n"
-"* Se você escolher idiomas legados, que possuem uma codificação  forte "
+"* Se você escolher idiomas legados, que possuem uma codificação forte "
 "(idiomas\n"
 "latinos, Russo, Japonês, Chinês, Coreano, Thai, Grego, Turco e a maioria dos "
 "idiomas com iso-8859-2), a codificação legada será usada por padrão;\n"
 "\n"
 "* Outros idiomas usarão o unicode por padrão;\n"
 "\n"
-"* Se dois ou mais idiomas forem requeridos, e tais idiomas  não\n"
+"* Se dois ou mais idiomas forem requeridos, e tais idiomas não\n"
 "usarem a mesma codificação, então o unicode irá ser usado em todo o "
 "sistema;\n"
 "\n"
@@ -5406,10 +5421,10 @@ msgstr ""
 "selecionado(s).\n"
 "\n"
 "Note que você não está limitado a escolher um único idioma. Você pode\n"
-"selecionar vários, ou instalar todos selecionando a caixa \"%s\".  "
-"Selecionar o suporte para um idioma significa que as traduções, fontes, "
-"dicionários e corretores ortográficos, entre outros itens, serão também "
-"instaladas para este idioma.\n"
+"selecionar vários, ou instalar todos selecionando a opção \"%s\". Selecionar "
+"o suporte para um idioma significa que as traduções, fontes, dicionários e "
+"corretores ortográficos, entre outros itens, serão também instaladas para "
+"este idioma.\n"
 "\n"
 "Para trocar entre os vários idiomas instalados no sistema, você pode\n"
 "executar o comando \"/usr/sbin/localedrake\" como \"root\" para alterar o\n"
@@ -5475,8 +5490,8 @@ msgstr ""
 "Se por alguma razão você quiser especificar um tipo diferente de mouse,\n"
 "selecione o tipo da lista.\n"
 "\n"
-"Você pode selecionar a entrada \"%s\" para escolher um tipo de  mouse\n"
-"``genérico'' o qual deve funcionar com todos os mouses novos.\n"
+"Você pode selecionar a entrada \"%s\" para escolher um tipo de mouse\n"
+"\"genérico\" o qual deve funcionar com todos os mouses novos.\n"
 "\n"
 "Se você escolher um mouse diferente do padrão, uma tela será mostrada.\n"
 "Use os botões e a roda para verificar se as configurações estão corretas\n"
@@ -5484,9 +5499,8 @@ msgstr ""
 "corretamente, pressione a barra de espaços ou o [Enter] para \n"
 "cancelar o teste e voltar para a lista de escolhas.\n"
 "\n"
-"Ocasionalmente, a roda do mouse (wheel)  não será detectada automaticamente, "
-"e \n"
-"então você necessitará selecionar seu mouse de uma lista. Escolha\n"
+"Ocasionalmente, a roda do mouse (wheel) não será detectada automaticamente,\n"
+"e então você necessitará selecionar seu mouse de uma lista. Escolha\n"
 "corretamente a porta que seu mouse está conectado. Após selecionar\n"
 "um mouse e ter pressionado no botão \"%s\", uma imagem do mouse será\n"
 "mostrada na tela. Mova toda a roda do mouse para assegurar-se de que\n"
@@ -5554,30 +5568,31 @@ msgid ""
 "everybody who uses your computer, you can choose to have \"%s\"."
 msgstr ""
 "Este ponto é crucial para a segurança do seu sistema GNU/Linux: você\n"
-"deverá digitar a senha de \"root\". \"Root\" é o administrador do sistema, "
-"e \n"
-"é o único autorizado a fazer atualizações, adicionar usuários e mudar\n"
-" configurações gerais do computador. Em suma: \"root\" pode tudo! Por isso\n"
+"deverá digitar a senha de \"root\". \"Root\" é o administrador do sistema,\n"
+"e é o único autorizado a fazer atualizações, adicionar usuários e mudar\n"
+" configurações gerais do computador. Em suma: \"root\" pode fazer tudo! Por "
+"isso\n"
 "você deve escolher uma senha difícil de adivinhar - o DrakX irá avisá-lo se "
-"a senha que você digitar for\n"
-" muito fácil. Você pode também escolher não digitar uma senha, mas nós\n"
-" desaconselhamos fortemente esta opção. Não pense que por ter iniciado o\n"
-" computador em GNU/Linux você está a salvo de problemas. O \"root\"\n"
+"a senha que você digitar formuito simples. Você pode também escolher não\n"
+"digitar uma senha, mas nós desaconselhamos fortemente esta opção. O sistema\n"
+"GNU/Linux é tão vulnerável a erros cometidos pelo operador como qualquer "
+"outro.\n"
+"O \"root\"\n"
 "pode contornar todas as limitações do sistema e desavisadamente apagar \n"
-" todos os dados de uma partição, por exemplo. É muito importante, portanto, "
-"que a senha\n"
-"de \"root\" seja difícil.\n"
+" todos os dados de uma partição, por exemplo. É muito importante, portanto,  "
+"que seja\n"
+"difícil se tornar \"root\".\n"
 "\n"
-"A senha deve ser um mistura de caracteres alfanuméricos, com  pelo menos 8 \n"
-"caracteres. Nunca escreva a senha \"root\" num papel -- isso facilita para \n"
+"A senha deve ser um mistura de caracteres alfanuméricos, com pelo menos 8 \n"
+"caracteres. Nunca escreva a senha de \"root\" num papel -- isso facilita "
+"para \n"
 " alguém comprometer seu sistema\n"
 "\n"
 "Porém, não faça também uma senha muito complicada e longa, porque você\n"
 " deve ser capaz de lembrá-la!\n"
 "\n"
 "A senha não será mostrada na tela enquanto você digita. Portanto você\n"
-"deverá digitar a  senha duas vezes para reduzir a chance de erro. Se "
-"ocorrer\n"
+"deverá digitar a senha duas vezes para reduzir a chance de erro. Se ocorrer\n"
 "de você digitar o mesmo erro duas vezes, você deverá fazer o primeiro login\n"
 "no sistema com esta senha \"errada\".\n"
 "\n"
@@ -5593,7 +5608,7 @@ msgstr ""
 "Se você tiver problemas para lembrar de suas senhas, se seu computador "
 "nunca\n"
 " será conectado à internet ou se você confiar em absolutamente todas as\n"
-"pessoas que usam seu computador, você pode escolher ter \"%s\"."
+"pessoas que usam seu computador, você pode escolher usar \"%s\"."
 
 #: help.pm:722
 #, c-format
@@ -5621,17 +5636,16 @@ msgid ""
 "know what you're doing."
 msgstr ""
 "Um gerenciador de inicialização (ou boot loader) é um pequeno programa que é "
-"mostrado na inicialização (boot)\n"
-"de um computador. Ele é responsável por iniciar todo o sistema. Normalmente, "
-"a sua\n"
-"instalação é totalmente automática. O DrakX irá analisar o setor de\n"
-"boot de seu disco e proceder de acordo com o que for encontrado nele:\n"
+"mostrado na inicialização (boot)de um computador. Ele é responsável por\n"
+"iniciar todo o sistema. Normalmente, a sua instalação é totalmente "
+"automática.\n"
+"O DrakX irá analisar o setor de boot de seu disco e proceder de acordo com\n"
+"o que for encontrado nele:\n"
 "\n"
-" * se um setor de boot Windows for encontrado, ele será substituído por um "
-"setor\n"
-"de boot GRUB/LILO. Desta forma, você será capaz de carregar qualquer "
-"sistema\n"
-"GNU/Linux ou qualquer outro sistema operacional instalado em sua máquina.\n"
+" * se um setor de boot Windows for encontrado, ele será substituído por um\n"
+"setor de boot GRUB/LILO. Desta forma, você será capaz de carregar qualquer\n"
+"sistema GNU/Linux ou qualquer outro sistema operacional instalado em sua "
+"máquina.\n"
 "\n"
 " * se um setor de boot GRUB ou LILO for encontrado, ele será substituído por "
 "um novo.\n"
@@ -5672,17 +5686,18 @@ msgid ""
 "Control Center and clicking on the \"%s\" button."
 msgstr ""
 "Aqui você seleciona o sistema de impressão para o seu computador.\n"
-"Outros sistemas operacionais podem oferecer-lhe apenas um, mas o Mandriva "
-"Linux \n"
-"oferece dois.\n"
+"Outros sistemas operacionais podem oferecer-lhe apenas um, mas o Mandriva\n"
+"Linux oferece dois. Cada um se encaixa melhor em um tipo particular de "
+"configuração.\n"
 "\n"
-" * \"%s\" -- que significa 'print, do not queue' ou 'imprima não deixe na "
-"fila', e é a escolha caso você\n"
-"tenha uma conexão direta com sua impressora e você queira ser capaz de\n"
-"corrigir falhas na impressão, e também se você não possuir impressoras em "
-"rede.\n"
-"(\"%s\" trabalhará apenas com  redes muito simples e é um tanto lento para\n"
-"redes). Escolha \"pdq\" se for sua primeira experiência com GNU/Linux. \n"
+" * \"%s\" -- que significa 'print, do not queue' ou 'imprima não deixe na\n"
+"fila', e é a escolha caso você tenha uma conexão direta com sua\n"
+"impressora e você queira ser capaz decorrigir falhas na impressão, e\n"
+"também se você não possuir impressoras em rede. (\"%s\" só funcionará em "
+"redes\n"
+"bem simples e se tornará lento quando usado em redes). É recomendado que vc "
+"use \"pdq\"\n"
+"se este é sua primeira experiência com GNU/Linux.\n"
 "\n"
 " * \"%s\" -- 'Common Unix Printing System' ou 'Sistema de Impressão Comum do "
 "Unix', é excelente para imprimir em\n"
@@ -5738,27 +5753,26 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"O DrakX tentará localizar primeiramente qualquer dispositivo IDE presente em "
-"sua máquina. Ele também tentará \n"
-"encontrar um ou mais placas PCI SCSI. Se o DrakX encontrar um adaptador "
-"SCSI\n"
-" ele instalará automaticamente o driver apropriado.\n"
+"O DrakX tentará localizar primeiramente qualquer dispositivo IDE presente "
+"em\n"
+"sua máquina. Ele também tentará encontrar um ou mais placas PCI SCSI. Se o\n"
+"DrakX encontrar um adaptador SCSI ele instalará automaticamente o driver\n"
+"apropriado.\n"
 "\n"
-"Como a detecção do hardware não é à prova de falhas, o DrakX pode falhar ao "
-"tentar detectar seus discos. Se isso\n"
-" acontecer, você precisará especificar seu hardware manualmente. \n"
+"Como a detecção do hardware não é à prova de falhas, o DrakX pode falhar ao\n"
+"tentar detectar seus discos. Se isso acontecer, você precisará especificar "
+"seu\n"
+"hardware manualmente. \n"
 "\n"
-"Se você tiver que especificar manualmente o seu adaptador, p DrakX "
-"perguntará\n"
-"se você quer especificar opções para ele. Você pode deixar que o DrakX\n"
-"examine o hardware para descobrir as opções. Isso normalmente funciona\n"
-"bem.\n"
+"Se você tiver que especificar manualmente o seu adaptador, o DrakX\n"
+"perguntará se você quer especificar opções para ele. Você pode deixar\n"
+"que o DrakX examine o hardware para descobrir as opções. Isso\n"
+"normalmente funciona bem.\n"
 "\n"
-"Se o DrakX não conseguir detectar as opções automaticamente para determinar "
-"quais\n"
-" parâmetros são necessários passar ao hardware,  você precisará fornecer "
-"configurar o para o driver\n"
-" manualmente."
+"Se o DrakX não conseguir detectar as opções automaticamente para determinar\n"
+"quais parâmetros são necessários passar ao hardware, você precisará "
+"fornecer\n"
+"configurar o para o driver manualmente."
 
 #: help.pm:786
 #, c-format
@@ -5864,7 +5878,7 @@ msgstr ""
 "lista mostrada, pressione \"%s\" para obter a lista completa dos\n"
 "países.\n"
 "\n"
-" * \"%s\": Por padrão, o DrakX  deduz seu fuso horário baseado no país\n"
+" * \"%s\": Por padrão, o DrakX deduz seu fuso horário baseado no país\n"
 "escolhido. Pressione o botão \"%s\" para mudar caso não esteja correto.\n"
 "\n"
 " * \"%s\": verifique a configuração do mouse atual e mude-a se for "
@@ -5873,15 +5887,14 @@ msgstr ""
 " * \"%s\": clique no botão \"%s\" para abrir o assistente de\n"
 "configuração da impressora. Veja o capítulo correspondente no\n"
 "'Guia do Iniciante' para saber mais sobre como configurar uma\n"
-"impressora. A interface utilizada no manual é semelhante à  usada\n"
+"impressora. A interface utilizada no manual é semelhante à usada\n"
 "durante a instalação\n"
 "\n"
 " * \"%s\": se uma placa de som for detectada no seu sistema, ela\n"
-"será mostrada aqui. Se a placa mostrada for diferente daquela que se "
-"encontra\n"
-"no seu sistema, clique no botão e escolha a correta.\n"
+"será mostrada aqui. Se a placa mostrada for diferente daquela que se\n"
+"encontra no seu sistema, clique no botão e escolha a correta.\n"
 "\n"
-" * \"%s\":se uma placa de TV foi detectada no seu sistema, ela será  "
+" * \"%s\":se uma placa de TV foi detectada no seu sistema, ela será "
 "indicada \n"
 "aqui. Se existe uma placa e ela não foi detectada, clique\n"
 "no botão \"%s\" para tentar configurá-la manualmente.\n"
@@ -5895,9 +5908,8 @@ msgstr ""
 "\n"
 " * \"%s\": se você deseja configurar a Internet ou o acesso a uma rede\n"
 "local, você pode fazê-lo agora. Verifique a documentação impressa ou use\n"
-"o Centro de Controle Mandriva Linux após a instalação ter terminado para "
-"utilizar\n"
-"a ajuda integrada completa.\n"
+"o Centro de Controle Mandriva Linux após a instalação ter terminado para\n"
+"utilizar a ajuda integrada completa.\n"
 "\n"
 " * \"%s\": permite configurar endereços de proxies HTTP e FTP se a máquina\n"
 "que você está instalando estiver localizada atrás de um servidor proxy.\n"
@@ -5907,15 +5919,14 @@ msgstr ""
 "\n"
 " * \"%s\": se você pretende conectar a sua máquina à Internet, é uma boa\n"
 "idéia protegê-la contra intrusos, configurando um firewall. Veja o capítulo\n"
-"correspondente no ``Guia do Usuário'' para mais detalhes sobre como\n"
+"correspondente no \"Guia do Usuário\" para mais detalhes sobre como\n"
 "configurar um firewall.\n"
 "\n"
 " * \"%s\": se você deseja mudar sua configuração do gerenciador de\n"
-"inicialização, clique neste botão. Recomendado apenas para usuários "
-"avançados.\n"
-"Veja documentação impressa ou a ajuda integrada, sobre como configurar o "
-"gerenciador de inicialização\n"
-"no Centro de Controle do Mandriva Linux.\n"
+"inicialização, clique neste botão. Recomendado apenas para usuários\n"
+"avançados. Veja documentação impressa ou a ajuda integrada, sobre\n"
+"como configurar o gerenciador de inicialização no Centro de Controle\n"
+"do Mandriva Linux.\n"
 "\n"
 " * \"%s\": você poderá escolher aqui quais serviços que serão iniciados\n"
 "em sua máquina. Se você pretende usar sua máquina como servidor, é uma\n"
@@ -6069,7 +6080,7 @@ msgstr "Rede (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Rede (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -6099,22 +6110,22 @@ msgstr "URL do servidor espelho (mirror)?"
 #: install_any.pm:525
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Configuração NFS"
 
 #: install_any.pm:525
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Por favor, entre o nome do servidor e o diretório da mídia NFS"
 
 #: install_any.pm:526
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Nome do servidor do ponto de montagem NFS"
 
 #: install_any.pm:526
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "Diretório"
 
 #: install_any.pm:575
 #, c-format
@@ -6164,7 +6175,7 @@ msgstr ""
 "caso, você deve atualizá-los o mais cedo possível.\n"
 "\n"
 "\n"
-"Você realmente quer instalar destes servidores?\n"
+"Você realmente quer instalar estes servidores?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:918
@@ -6239,7 +6250,7 @@ msgstr "Permissão negada"
 #: install_any.pm:1761
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Nome NFS inválido"
 
 #: install_any.pm:1782
 #, c-format
@@ -6284,7 +6295,7 @@ msgid ""
 msgstr ""
 "Você precisa ter uma partição raiz.\n"
 "Para isso, crie um partição (ou clique em uma existente).\n"
-"Em seguida, escolha a ação 'Ponto de montagem' e configure-a com '/'"
+"Em seguida, escolha a ação 'Ponto de montagem' e configure-a como '/'"
 
 #: install_interactive.pm:67
 #, c-format
@@ -6376,8 +6387,8 @@ msgid ""
 "installation."
 msgstr ""
 "Sua partição Windows está muito fragmentada. Por favor, reinicie seu "
-"computador no modo Windows, execute o utilitário ``defrag'' e  então "
-"reinicie a instalação do Mandriva Linux."
+"computador no modo Windows, execute o utilitário \"defrag\" e então reinicie "
+"a instalação do Mandriva Linux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6462,7 +6473,7 @@ msgid ""
 "When you are done, do not forget to save using `w'"
 msgstr ""
 "Você pode agora particionar %s.\n"
-"Quando terminar, não esqueça de salvar usando `w'"
+"Quando terminar, não esqueça de salvar usando 'w'"
 
 #: install_interactive.pm:271
 #, c-format
@@ -6615,7 +6626,7 @@ msgstr ""
 "\n"
 "O sistema operacional e os diferentes elementos disponíveis na distribuição "
 "Mandriva Linux \n"
-"serão chamados os \"Softwares\" a partir daqui. Os softwares incluem, \n"
+"serão chamados de \"Softwares\" a partir daqui. Os softwares incluem, \n"
 "mas não se limitam a eles, o grupo de programas, métodos, regras e "
 "documentações relativos ao sistema operacional \n"
 "assim como os diferentes elementos da distribuição Mandriva Linux.\n"
@@ -6629,12 +6640,12 @@ msgstr ""
 "Ao instalar, duplicar ou utilizar os Softwares de qualquer maneira, você "
 "está aceitando explicitamente \n"
 "e completamente os termos e condições desta Licença. \n"
-"Se não aceitar qualquer parte da Licença, não lhe é permitido  instalar, "
+"Se não aceitar qualquer parte da Licença, não lhe é permitido instalar, "
 "duplicar ou \n"
 "utilizar os Softwares. \n"
 "Qualquer tentativa de instalar, duplicar ou utilizar os Softwares de uma "
 "maneira que não \n"
-"corresponda com os termos e condições desta Licença é  proibida, e vai tirar-"
+"corresponda com os termos e condições desta Licença é proibida, e vai tirar-"
 "lhe os seus direitos \n"
 "sob esta Licença. Sem direitos sob esta Licença, você deverá imediatamente "
 "destruir todas as cópias dos \n"
@@ -6646,7 +6657,7 @@ msgstr ""
 "Os Softwares e a documentação são fornecidos \"como eles são\",  sem nenhuma "
 "garantia, \n"
 "tanto quanto for permitido pela lei.\n"
-"A Mandriva S.A. não vai ser, sob  nenhuma circunstância e tanto quanto for "
+"A Mandriva S.A. não vai ser, sob nenhuma circunstância e tanto quanto for "
 "permitido pela lei, responsável por qualquer\n"
 "acidente particular, por danos diretos ou indiretos (inclusive os "
 "resultantes de perda de lucros, interrupção\n"
@@ -6674,7 +6685,7 @@ msgstr ""
 "Softwares.\n"
 "\n"
 "\n"
-"3. A licença GPL e as licenças relacionadas\n"
+"3. A licença GPL e as Licenças Relacionadas\n"
 "Os Softwares consistem de elementos criados por pessoas ou organizações "
 "diferentes. \n"
 "A maioria deles são publicados sob os termos e condições da licença GNU  - "
@@ -6696,7 +6707,7 @@ msgstr ""
 "\n"
 "4. Direitos de Propriedade Intelectual\n"
 "\n"
-"Todos os direitos dos elementos dos Programas  pertencem aos seus autores "
+"Todos os direitos dos elementos dos Programas pertencem aos seus autores "
 "respectivos \n"
 "e são protegidos pela propriedade intelectual e pelas leis de Direitos "
 "Autorais, aplicáveis aos Softwares.\n"
@@ -6860,7 +6871,7 @@ msgid ""
 "\"\n"
 msgstr ""
 "Alguns pacotes importantes não foram instalados corretamente.\n"
-" O seu drive de CD-ROM ou o seu CD-ROM está defeituoso.\n"
+" O seu drive de CD-ROM ou o seu CD-ROM estão defeituosos.\n"
 " Verifique o CD-ROM em um computador instalado, usando \"rpm -qpl media/main/"
 "*.rpm\"\n"
 
@@ -6988,7 +6999,7 @@ msgstr "Você não pode desmarcar essa pacote. Ele precisa ser atualizado"
 #: install_steps_gtk.pm:385
 #, c-format
 msgid "Show automatically selected packages"
-msgstr "Mostra automaticamente os pacotes selecionados"
+msgstr "Mostrar automaticamente os pacotes selecionados"
 
 #: install_steps_gtk.pm:390
 #, c-format
@@ -7264,7 +7275,7 @@ msgstr ""
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr ""
-"Sem swap suficiente para completar a instalação, por favor,  adicione mais"
+"Sem swap suficiente para completar a instalação, por favor, adicione mais"
 
 #: install_steps_interactive.pm:393
 #, c-format
@@ -7324,7 +7335,7 @@ msgstr "Salvar"
 #: install_steps_interactive.pm:505
 #, c-format
 msgid "Bad file"
-msgstr "Arquivo ruim"
+msgstr "Arquivo corrompido"
 
 #: install_steps_interactive.pm:581
 #, c-format
@@ -7663,7 +7674,7 @@ msgstr "Instalação do Mandriva Linux %s"
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
-" <Tab>/<Alt-Tab> move entre opções  | <Espaço> seleciona | <F12> próxima "
+"  <Tab>/<Alt-Tab> move entre opções  | <Espaço> seleciona | <F12> próxima "
 "tela "
 
 #: interactive.pm:192
@@ -7788,192 +7799,244 @@ msgstr "Reenviar"
 msgid ""
 "_: keyboard\n"
 "Czech (QWERTZ)"
-msgstr "Tcheco (QWERTZ)"
+msgstr ""
+"_: teclado\n"
+"Tcheco (QWERTZ)"
 
 #: keyboard.pm:172 keyboard.pm:207
 #, c-format
 msgid ""
 "_: keyboard\n"
 "German"
-msgstr "Alemão"
+msgstr ""
+"_: teclado\n"
+"Alemão"
 
 #: keyboard.pm:173
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak"
-msgstr "Dvorak"
+msgstr ""
+"_: teclado\n"
+"Dvorak"
 
 #: keyboard.pm:174 keyboard.pm:224
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Spanish"
-msgstr "Espanhol"
+msgstr ""
+"_: teclado\n"
+"Espanhol"
 
 #: keyboard.pm:175 keyboard.pm:225
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Finnish"
-msgstr "Finlandês"
+msgstr ""
+"_: teclado\n"
+"Finlandês"
 
 #: keyboard.pm:176 keyboard.pm:228
 #, c-format
 msgid ""
 "_: keyboard\n"
 "French"
-msgstr "Francês"
+msgstr ""
+"_: teclado\n"
+"Francês"
 
 #: keyboard.pm:177 keyboard.pm:272
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Norwegian"
-msgstr "Norueguês"
+msgstr ""
+"_: teclado\n"
+"Norueguês"
 
 #: keyboard.pm:178
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish"
-msgstr "Polonês"
+msgstr ""
+"_: teclado\n"
+"Polonês"
 
 #: keyboard.pm:179 keyboard.pm:284
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Russian"
-msgstr "Russo"
+msgstr ""
+"_: teclado\n"
+"Russo"
 
 #: keyboard.pm:181 keyboard.pm:290
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swedish"
-msgstr "Sueco"
+msgstr ""
+"_: teclado\n"
+"Sueco"
 
 #: keyboard.pm:182 keyboard.pm:320
 #, c-format
 msgid "UK keyboard"
-msgstr "Inglês (UK)"
+msgstr "Teclado inglês (UK)"
 
 #: keyboard.pm:183 keyboard.pm:323
 #, c-format
 msgid "US keyboard"
-msgstr "Americano (US)"
+msgstr "Teclado americano (US)"
 
 #: keyboard.pm:185
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Albanian"
-msgstr "Albanês"
+msgstr ""
+"_: teclado\n"
+"Albanês"
 
 #: keyboard.pm:186
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (old)"
-msgstr "Armênio (velho)"
+msgstr ""
+"_: teclado\n"
+"Armênio (velho)"
 
 #: keyboard.pm:187
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (typewriter)"
-msgstr "Armênio (máquina de escrever)"
+msgstr ""
+"_: teclado\n"
+"Armênio (máquina de escrever)"
 
 #: keyboard.pm:188
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (phonetic)"
-msgstr "Armênio (fonético)"
+msgstr ""
+"_: teclado\n"
+"Armênio (fonético)"
 
 #: keyboard.pm:189
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Arabic"
-msgstr "Árabe"
+msgstr ""
+"_: teclado\n"
+"Árabe"
 
 #: keyboard.pm:190
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Azerbaidjani (latin)"
-msgstr "Azerbaijão (latino)"
+msgstr ""
+"_: teclado\n"
+"Azerbaijão (latino)"
 
 #: keyboard.pm:191
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Belgian"
-msgstr "Belga"
+msgstr ""
+"_: teclado\n"
+"Belga"
 
 #: keyboard.pm:192
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bengali (Inscript-layout)"
-msgstr "Bengali (layout Inscript)"
+msgstr ""
+"_: teclado\n"
+"Bengali (layout Inscript)"
 
 #: keyboard.pm:193
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bengali (Probhat)"
-msgstr "Bengali (layout Probhat)"
+msgstr ""
+"_: teclado\n"
+"Bengali (layout Probhat)"
 
 #: keyboard.pm:194
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bulgarian (phonetic)"
-msgstr "Búlgaro (fonético)"
+msgstr ""
+"_: teclado\n"
+"Búlgaro (fonético)"
 
 #: keyboard.pm:195
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bulgarian (BDS)"
-msgstr "Búlgaro (BDS)"
+msgstr ""
+"_: teclado\n"
+"Búlgaro (BDS)"
 
 #: keyboard.pm:196
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Brazilian (ABNT-2)"
-msgstr "Brasileiro (ABNT-2)"
+msgstr ""
+"_: teclado\n"
+"Brasileiro (ABNT-2)"
 
 #: keyboard.pm:197
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bosnian"
-msgstr "Bósnio"
+msgstr ""
+"_: teclado\n"
+"Bósnio"
 
 #: keyboard.pm:198
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Belarusian"
-msgstr "Bielo-russo"
+msgstr ""
+"_: teclado\n"
+"Bielo-russo"
 
 #: keyboard.pm:200
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swiss (German layout)"
-msgstr "Suíço (layout Alemão)"
+msgstr ""
+"_: teclado\n"
+"Suíço (layout Alemão)"
 
 #: keyboard.pm:202
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swiss (French layout)"
-msgstr "Suíço (layout Francês)"
+msgstr ""
+"_: teclado\n"
+"Suíço (layout Francês)"
 
 #: keyboard.pm:204
 #, c-format
@@ -7989,598 +8052,766 @@ msgstr ""
 msgid ""
 "_: keyboard\n"
 "Czech (QWERTY)"
-msgstr "Tcheco (QWERTY)"
+msgstr ""
+"_: teclado\n"
+"Tcheco (QWERTY)"
 
 #: keyboard.pm:208
 #, c-format
 msgid ""
 "_: keyboard\n"
 "German (no dead keys)"
-msgstr "Alemão (sem teclas mortas)"
+msgstr ""
+"_: teclado\n"
+"Alemão (sem teclas mortas)"
 
 #: keyboard.pm:209
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Devanagari"
-msgstr "Devanagari"
+msgstr ""
+"_: teclado\n"
+"Devanagari"
 
 #: keyboard.pm:210
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Danish"
-msgstr "Dinamarquês"
+msgstr ""
+"_: teclado\n"
+"Dinamarquês"
 
 #: keyboard.pm:211
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (US)"
-msgstr "Dvorak (US)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (US)"
 
 #: keyboard.pm:213
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Esperanto)"
-msgstr "Dvorak (Esperanto)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (Esperanto)"
 
 #: keyboard.pm:215
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (French)"
-msgstr "Dvorak (Francês)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (Francês)"
 
 #: keyboard.pm:217
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (UK)"
-msgstr "Dvorak (UK)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (UK)"
 
 #: keyboard.pm:218
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Norwegian)"
-msgstr "Dvorak (Norueguês)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (Norueguês)"
 
 #: keyboard.pm:220
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Polish)"
-msgstr "Dvorak (Polonês)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (Polonês)"
 
 #: keyboard.pm:221
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Swedish)"
-msgstr "Dvorak (Sueco)"
+msgstr ""
+"_: teclado\n"
+"Dvorak (Sueco)"
 
 #: keyboard.pm:222
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dzongkha/Tibetan"
-msgstr "Dzongkha/Tibetano"
+msgstr ""
+"_: teclado\n"
+"Dzongkha/Tibetano"
 
 #: keyboard.pm:223
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Estonian"
-msgstr "Estoniano"
+msgstr ""
+"_: teclado\n"
+"Estoniano"
 
 #: keyboard.pm:227
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Faroese"
-msgstr "Faroese"
+msgstr ""
+"_: teclado\n"
+"Faroese"
 
 #: keyboard.pm:229
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Georgian (\"Russian\" layout)"
-msgstr "Georgiano (layout \"Russo\")"
+msgstr ""
+"_: teclado\n"
+"Georgiano (layout \"Russo\")"
 
 #: keyboard.pm:230
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Georgian (\"Latin\" layout)"
-msgstr "Georgiano (layout \"Latino\")"
+msgstr ""
+"_: teclado\n"
+"Georgiano (layout \"Latino\")"
 
 #: keyboard.pm:231
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Greek"
-msgstr "Grego"
+msgstr ""
+"_: teclado\n"
+"Grego"
 
 #: keyboard.pm:232
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Greek (polytonic)"
-msgstr "Grego (politônico)"
+msgstr ""
+"_: teclado\n"
+"Grego (politônico)"
 
 #: keyboard.pm:233
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Gujarati"
-msgstr "Gujarati"
+msgstr ""
+"_: teclado\n"
+"Gujarati"
 
 #: keyboard.pm:234
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Gurmukhi"
-msgstr "Gurmukhi"
+msgstr ""
+"_: teclado\n"
+"Gurmukhi"
 
 #: keyboard.pm:235
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Croatian"
-msgstr "Croata"
+msgstr ""
+"_: teclado\n"
+"Croata"
 
 #: keyboard.pm:236
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Hungarian"
-msgstr "Húngaro"
+msgstr ""
+"_: teclado\n"
+"Húngaro"
 
 #: keyboard.pm:237
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Irish"
-msgstr "Irlanda"
+msgstr ""
+"_: teclado\n"
+"Irlanda"
 
 #: keyboard.pm:238
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Israeli"
-msgstr "Israelense"
+msgstr ""
+"_: teclado\n"
+"Israelense"
 
 #: keyboard.pm:239
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Israeli (phonetic)"
-msgstr "Israelense (Fonético)"
+msgstr ""
+"_: teclado\n"
+"Israelense (Fonético)"
 
 #: keyboard.pm:240
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Iranian"
-msgstr "Iraniano"
+msgstr ""
+"_: teclado\n"
+"Iraniano"
 
 #: keyboard.pm:241
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Icelandic"
-msgstr "Islandês"
+msgstr ""
+"_: teclado\n"
+"Islandês"
 
 #: keyboard.pm:242
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Italian"
-msgstr "Italiano"
+msgstr ""
+"_: teclado\n"
+"Italiano"
 
 #: keyboard.pm:243
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Inuktitut"
-msgstr "Inuktitut"
+msgstr ""
+"_: teclado\n"
+"Inuktitut"
 
 #: keyboard.pm:248
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Japanese 106 keys"
-msgstr "Japonês 106 teclas"
+msgstr ""
+"_: teclado\n"
+"Japonês 106 teclas"
 
 #: keyboard.pm:249
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Kannada"
-msgstr "Kannada"
+msgstr ""
+"_: teclado\n"
+"Kannada"
 
 #: keyboard.pm:252
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Korean"
-msgstr "Teclado Coreano"
+msgstr ""
+"_: teclado\n"
+"Teclado Coreano"
 
 #: keyboard.pm:254
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
-msgstr "Kurdish (manuscrito árabe)"
+msgstr ""
+"_: teclado\n"
+"Kurdish (manuscrito árabe)"
 
 #: keyboard.pm:255
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Kyrgyz"
-msgstr "Kyrgyz"
+msgstr ""
+"_: teclado\n"
+"Kyrgyz"
 
 #: keyboard.pm:256
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Latin American"
-msgstr "Latino-americano"
+msgstr ""
+"_: teclado\n"
+"Latino-americano"
 
 #: keyboard.pm:258
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Laotian"
-msgstr "Laociano"
+msgstr ""
+"_: teclado\n"
+"Laociano"
 
 #: keyboard.pm:259
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian AZERTY (old)"
-msgstr "Lituânio AZERTY (velho)"
+msgstr ""
+"_: teclado\n"
+"Lituânio AZERTY (velho)"
 
 #: keyboard.pm:261
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian AZERTY (new)"
-msgstr "Lituânio AZERTY (novo)"
+msgstr ""
+"_: teclado\n"
+"Lituânio AZERTY (novo)"
 
 #: keyboard.pm:262
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"number row\" QWERTY"
-msgstr "Lituânio \"número de colunas\" QWERTY"
+msgstr ""
+"_: teclado\n"
+"Lituânio \"número de colunas\" QWERTY"
 
 #: keyboard.pm:263
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"phonetic\" QWERTY"
-msgstr "Lituânio \"fonético\" QWERTY"
+msgstr ""
+"_: teclado\n"
+"Lituânio \"fonético\" QWERTY"
 
 #: keyboard.pm:264
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Latvian"
-msgstr "Letoniano"
+msgstr ""
+"_: teclado\n"
+"Letoniano"
 
 #: keyboard.pm:265
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Malayalam"
-msgstr "Malayalam"
+msgstr ""
+"_: teclado\n"
+"Malayalam"
 
 #: keyboard.pm:266
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Macedonian"
-msgstr "Macedônio"
+msgstr ""
+"_: teclado\n"
+"Macedônio"
 
 #: keyboard.pm:267
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Myanmar (Burmese)"
-msgstr "Myanmar (Birmanês)"
+msgstr ""
+"_: teclado\n"
+"Myanmar (Birmanês)"
 
 #: keyboard.pm:268
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Mongolian (cyrillic)"
-msgstr "Mongoliano (cirílico)"
+msgstr ""
+"_: teclado\n"
+"Mongoliano (cirílico)"
 
 #: keyboard.pm:269
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Maltese (UK)"
-msgstr "Maltês (Reino Unido)"
+msgstr ""
+"_: teclado\n"
+"Maltês (Reino Unido)"
 
 #: keyboard.pm:270
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Maltese (US)"
-msgstr "Maltês (EUA)"
+msgstr ""
+"_: teclado\n"
+"Maltês (EUA)"
 
 #: keyboard.pm:271
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dutch"
-msgstr "Holandês"
+msgstr ""
+"_: teclado\n"
+"Holandês"
 
 #: keyboard.pm:273
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Oriya"
-msgstr "Oriya"
+msgstr ""
+"_: teclado\n"
+"Oriya"
 
 #: keyboard.pm:274
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish (qwerty layout)"
-msgstr "Polonês (layout QWERTY)"
+msgstr ""
+"_: teclado\n"
+"Polonês (layout QWERTY)"
 
 #: keyboard.pm:275
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish (qwertz layout)"
-msgstr "Polonês (layout QWERTZ)"
+msgstr ""
+"_: teclado\n"
+"Polonês (layout QWERTZ)"
 
 #: keyboard.pm:277
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Pashto"
-msgstr "Pashto"
+msgstr ""
+"_: teclado\n"
+"Pashto"
 
 #: keyboard.pm:278
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Portuguese"
-msgstr "Português"
+msgstr ""
+"_: teclado\n"
+"Português"
 
 #: keyboard.pm:280
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Canadian (Quebec)"
-msgstr "Canadense (Quebec)"
+msgstr ""
+"_: teclado\n"
+"Canadense (Quebec)"
 
 #: keyboard.pm:282
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Romanian (qwertz)"
-msgstr "Romeno (QWERTZ)"
+msgstr ""
+"_: teclado\n"
+"Romeno (QWERTZ)"
 
 #: keyboard.pm:283
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Romanian (qwerty)"
-msgstr "Romeno (qwerty)"
+msgstr ""
+"_: teclado\n"
+"Romeno (qwerty)"
 
 #: keyboard.pm:285
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Russian (phonetic)"
-msgstr "Russo (Fonético)"
+msgstr ""
+"_: teclado\n"
+"Russo (Fonético)"
 
 #: keyboard.pm:286
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Saami (norwegian)"
-msgstr "Saami (Norueguês)"
+msgstr ""
+"_: teclado\n"
+"Saami (Norueguês)"
 
 #: keyboard.pm:287
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Saami (swedish/finnish)"
-msgstr "Saami (suíço/finlandês)"
+msgstr ""
+"_: teclado\n"
+"Saami (suíço/finlandês)"
 
 #: keyboard.pm:289
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Sindhi"
-msgstr "Sindhi"
+msgstr ""
+"_: teclado\n"
+"Sindhi"
 
 #: keyboard.pm:291
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovenian"
-msgstr "Esloveno"
+msgstr ""
+"_: teclado\n"
+"Esloveno"
 
 #: keyboard.pm:293
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr "Sinhala"
+msgstr ""
+"_: teclado\n"
+"Sinhala"
 
 #: keyboard.pm:294
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTZ)"
-msgstr "Eslovaco (QWERTZ)"
+msgstr ""
+"_: teclado\n"
+"Eslovaco (QWERTZ)"
 
 #: keyboard.pm:295
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTY)"
-msgstr "Eslovaco (QWERTY)"
+msgstr ""
+"_: teclado\n"
+"Eslovaco (QWERTY)"
 
 #: keyboard.pm:297
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Serbian (cyrillic)"
-msgstr "Sérvio (cirílico)"
+msgstr ""
+"_: teclado\n"
+"Sérvio (cirílico)"
 
 #: keyboard.pm:298
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Syriac"
-msgstr "Sírio"
+msgstr ""
+"_: teclado\n"
+"Sírio"
 
 #: keyboard.pm:299
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Syriac (phonetic)"
-msgstr "Sírio (fonético)"
+msgstr ""
+"_: teclado\n"
+"Sírio (fonético)"
 
 #: keyboard.pm:300
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Telugu"
-msgstr "Telugu"
+msgstr ""
+"_: teclado\n"
+"Telugu"
 
 #: keyboard.pm:302
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tamil (ISCII-layout)"
-msgstr "Tamil (layout ISCII)"
+msgstr ""
+"_: teclado\n"
+"Tamil (layout ISCII)"
 
 #: keyboard.pm:303
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tamil (Typewriter-layout)"
-msgstr "Tamil (máquina de escrever)"
+msgstr ""
+"_: teclado\n"
+"Tamil (máquina de escrever)"
 
 #: keyboard.pm:304
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Kedmanee)"
-msgstr "Tailandês (Kedmanee)"
+msgstr ""
+"_: teclado\n"
+"Tailandês (Kedmanee)"
 
 #: keyboard.pm:305
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (TIS-820)"
-msgstr "Tailandês (TIS-820)"
+msgstr ""
+"_: teclado\n"
+"Tailandês (TIS-820)"
 
 #: keyboard.pm:307
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Pattachote)"
-msgstr "Tailandês (Pattachote)"
+msgstr ""
+"_: teclado\n"
+"Tailandês (Pattachote)"
 
 #: keyboard.pm:310
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr "Tifinagh (layout moroccan) (+latino/árabe)"
+msgstr ""
+"_: teclado\n"
+"Tifinagh (layout moroccan) (+latino/árabe)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr "Tifinagh (fonético) (+latino/árabe)"
+msgstr ""
+"_: teclado\n"
+"Tifinagh (fonético) (+latino/árabe)"
 
 #: keyboard.pm:313
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tajik"
-msgstr "Teclado Tailandês"
+msgstr ""
+"_: teclado\n"
+"Tailandês"
 
 #: keyboard.pm:315
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkmen"
-msgstr "Turkmen"
+msgstr ""
+"_: teclado\n"
+"Turkmen"
 
 #: keyboard.pm:316
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkish (traditional \"F\" model)"
-msgstr "Turco (modelo \"F\" tradicional)"
+msgstr ""
+"_: teclado\n"
+"Turco (modelo \"F\" tradicional)"
 
 #: keyboard.pm:317
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkish (modern \"Q\" model)"
-msgstr "Turco (modelo moderno \"Q\")"
+msgstr ""
+"_: teclado\n"
+"Turco (modelo moderno \"Q\")"
 
 #: keyboard.pm:319
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Ukrainian"
-msgstr "Ucraniano"
+msgstr ""
+"_: teclado\n"
+"Ucraniano"
 
 #: keyboard.pm:322
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Urdu keyboard"
-msgstr "Urdu"
+msgstr ""
+"_: teclado\n"
+"Teclado Urdu"
 
 #: keyboard.pm:324
 #, c-format
 msgid "US keyboard (international)"
-msgstr "Americano (Internacional)"
+msgstr "Teclado Americano (Internacional)"
 
 #: keyboard.pm:325
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Uzbek (cyrillic)"
-msgstr "Usbequistão (Cirílico)"
+msgstr ""
+"_: teclado\n"
+"Usbequistão (Cirílico)"
 
 #: keyboard.pm:327
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Vietnamese \"numeric row\" QWERTY"
-msgstr "Vietnamita \"número de linhas\" QWERTY"
+msgstr ""
+"_: teclado\n"
+"Vietnamita \"número de linhas\" QWERTY"
 
 #: keyboard.pm:328
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Yugoslavian (latin)"
-msgstr "Iugoslavo (latim)"
+msgstr ""
+"_: teclado\n"
+"Iugoslavo (latim)"
 
 #: keyboard.pm:335
 #, c-format
 msgid "Right Alt key"
-msgstr "Tecla Alt da esquerda"
+msgstr "Tecla Alt da direita"
 
 #: keyboard.pm:336
 #, c-format
@@ -8625,7 +8856,7 @@ msgstr "Tecla \"Windows\" da esquerda"
 #: keyboard.pm:344
 #, c-format
 msgid "Right \"Windows\" key"
-msgstr "Tecla \"Windows\" direita"
+msgstr "Tecla \"Windows\" da direita"
 
 #: keyboard.pm:345
 #, c-format
@@ -9751,12 +9982,12 @@ msgstr "Bem-vindo a %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Falha ao mover extensão física usada para outro volume físico"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Volume físico %s ainda em uso"
 
 #: lvm.pm:145
 #, c-format
@@ -9767,6 +9998,8 @@ msgstr "Remova os volumes lógicos primeiro\n"
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
+"O gerenciador de inicialização não funciona com /boot em múltiplos volumes "
+"físicos "
 
 #: modules/interactive.pm:21 standalone/drakconnect:1028
 #, c-format
@@ -9806,7 +10039,7 @@ msgstr "Você tem alguma interface %s?"
 #: modules/interactive.pm:71
 #, c-format
 msgid "See hardware info"
-msgstr "Ver informação do hardware"
+msgstr "Ver informações do hardware"
 
 #: modules/interactive.pm:82
 #, c-format
@@ -10258,7 +10491,7 @@ msgstr ""
 #: network/drakfirewall.pm:198
 #, c-format
 msgid "Everything (no firewall)"
-msgstr "Todas (sem firewall)"
+msgstr "Todos (sem firewall)"
 
 #: network/drakfirewall.pm:200
 #, c-format
@@ -10325,6 +10558,8 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"O dispositivo selecionado já foi configurado com o driver %s.\n"
+"Você realmente quer usar um driver ndiswrapper?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
@@ -10622,7 +10857,7 @@ msgstr "ES da Placa"
 #: network/netconnect.pm:300 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
-msgstr "ES_O da Placa"
+msgstr "ES_0 da Placa"
 
 #: network/netconnect.pm:301
 #, c-format
@@ -10912,7 +11147,7 @@ msgstr "Carregar um driver manualmente"
 #: network/netconnect.pm:812
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
-msgstr "Utilizar um driver d Windows (com ndiswrapper)"
+msgstr "Utilizar um driver do Windows (com ndiswrapper)"
 
 #: network/netconnect.pm:819 network/netconnect.pm:1074
 #: network/netconnect.pm:1078 printer/printerdrake.pm:3741
@@ -10925,7 +11160,7 @@ msgstr "Não foi possível instalar o pacote %s!"
 #: network/netconnect.pm:855
 #, c-format
 msgid "Zeroconf hostname resolution"
-msgstr "Resolvendo do nome da máquina Zeroconf"
+msgstr "Resolvendo o nome da máquina Zeroconf"
 
 #: network/netconnect.pm:856 network/netconnect.pm:886
 #, c-format
@@ -11162,7 +11397,7 @@ msgstr "Fragmentação"
 #: network/netconnect.pm:1032 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
-msgstr "argumentos extras do comando Iwconfig"
+msgstr "Argumentos extras do comando Iwconfig"
 
 #: network/netconnect.pm:1033
 #, c-format
@@ -11183,7 +11418,7 @@ msgstr ""
 #: network/netconnect.pm:1040 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
-msgstr "argumento extras do comando iwspy"
+msgstr "Argumento extras do comando iwspy"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -11207,7 +11442,7 @@ msgstr ""
 #: network/netconnect.pm:1050 standalone/drakconnect:424
 #, c-format
 msgid "Iwpriv command extra arguments"
-msgstr "argumentos extras do comando iwpriv"
+msgstr "Argumentos extras do comando iwpriv"
 
 #: network/netconnect.pm:1051
 #, c-format
@@ -11298,7 +11533,7 @@ msgid ""
 msgstr ""
 "Por favor, digite o nome da sua máquina.\n"
 "Ele deve ser um nome de máquina totalmente qualificado,\n"
-"como por exemplo 'minhamaquina.ab.minhaempresa.com.br' .\n"
+"como por exemplo 'minhamaquina.minhaempresa.com.br' .\n"
 "Você também pode digitar o endereço IP de um gateway, se você tiver um."
 
 #: network/netconnect.pm:1166
@@ -11612,13 +11847,9 @@ msgstr ""
 "\t\tippp+ para uma conexão de isdn.\n"
 
 #: network/thirdparty.pm:196
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Você precisa do alcatel microcode.\n"
-"Faça o download em\n"
-"%s\n"
-"e copie o arquivo mgmt.o para /usr/share/speedtouch"
+msgstr "Copie o Alcatel Microcode para mgmt.o em /usr/share/speedtouch"
 
 #: network/thirdparty.pm:205
 #, c-format
@@ -11634,14 +11865,14 @@ msgstr ""
 "Você pode encontrar um driver em http://eciadsl.flashtux.org/"
 
 #: network/thirdparty.pm:266
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Não foi possível instalar %s pacotes!"
+msgstr "Não foi possível instalar os pacotes (%s)!"
 
 #: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Alguns pacotes (%s) que são requeridos não estão disponiveis."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11649,6 +11880,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Estes pacotes podem ser encontrados nas distribuições Mandriva Club e "
+"Mandriva Commercial."
 
 #: network/thirdparty.pm:276
 #, c-format
@@ -11656,16 +11889,18 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Os arquivos necessários também podem ser instalados desta URL:\n"
+"%s"
 
 #: network/thirdparty.pm:309
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "Remover as fontes do seu sistema"
+msgstr "Impossível encontrar \"%s\" no seu sistema Windows!"
 
 #: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Nenhum sistema Windows foi detectado!"
 
 #: network/thirdparty.pm:321
 #, c-format
@@ -11695,7 +11930,7 @@ msgid ""
 msgstr ""
 "Você precisa do microcode Alcatel.\n"
 "Você pode fornecê-lo agora através de disquete, da sua partição\n"
-"Windows, ou pode ignorar este passo agora ou fazê-lo mais tarde."
+"Windows, ou pode ignorar este passo agora e fazê-lo mais tarde."
 
 #: network/thirdparty.pm:346 network/thirdparty.pm:348
 #, c-format
@@ -11705,7 +11940,7 @@ msgstr "Usar um disquete"
 #: network/thirdparty.pm:346
 #, c-format
 msgid "Use my Windows partition"
-msgstr "Use minha partição Windows"
+msgstr "Usar minha partição Windows"
 
 #: network/thirdparty.pm:356
 #, c-format
@@ -11726,12 +11961,13 @@ msgstr "A cópia do Firmware foi feita com sucesso"
 #: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "Procurando softwares e drivers requeridos..."
 
 #: network/thirdparty.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Por favor aguarde, detectando e configurando dispositivos..."
+msgstr ""
+"Por favor aguarde, executando comandos deconfiguração dos dispositivos..."
 
 #: partition_table.pm:391
 #, c-format
@@ -11852,7 +12088,7 @@ msgstr "PDQ"
 #: printer/data.pm:73
 #, c-format
 msgid "LPD - Line Printer Daemon"
-msgstr "LPD - Serviço de Impressor em Linha"
+msgstr "LPD - Serviço de Impressão em Fila"
 
 #: printer/data.pm:74
 #, c-format
@@ -17436,7 +17672,7 @@ msgstr "Estação de Jogos"
 #: share/compssUsers.pl:35
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr "Programas de divertimento: arcade, tabuleiro, estratégia, etc."
+msgstr "Programas de entretenimento: arcade, tabuleiro, estratégia, etc."
 
 #: share/compssUsers.pl:38
 #, c-format
@@ -17608,7 +17844,7 @@ msgstr "Web/FTP"
 #: share/compssUsers.pl:123
 #, c-format
 msgid "Apache, Pro-ftpd"
-msgstr "Apache; Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
 
 #: share/compssUsers.pl:126
 #, c-format
@@ -17663,9 +17899,9 @@ msgstr ""
 "Um ambiente gráfico com um conjunto de aplicativos e ferramentas  amigáveis"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Ambiente de Trabalho Plucker"
+msgstr "Ambiente de Trabalho IceWm"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -17673,9 +17909,9 @@ msgid "Other Graphical Desktops"
 msgstr "Outros Ambientes Gráficos"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -19083,14 +19319,13 @@ msgstr ""
 "servidor ativo de e-mail."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"Esta deveria ser uma lista de usuários locais ou endereços de correio "
-"eletrônico para os quais será enviado o resultado das operações de backup. "
-"Você precisará definir um servidor ativo de e-mail"
+"Esta deve ser uma lista de usuários locais ou endereços de e-mail, para os "
+"quais será enviado o resultado das operações de backup. Drakbackup é o padrão"
 
 #: standalone/drakbackup:161
 #, c-format
@@ -19098,7 +19333,7 @@ msgid ""
 "Files or wildcards listed in a .backupignore file at the top of a directory "
 "tree will not be backed up."
 msgstr ""
-"Os arquivos ou curingas listados no arquivo .backupignore, contido no topo "
+"Os arquivos ou coringas listados no arquivo .backupignore, contido no topo "
 "da árvore de diretórios, não entrarão no backup."
 
 #: standalone/drakbackup:162
@@ -21763,9 +21998,9 @@ msgstr ""
 "O que você gostaria de fazer?"
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "reconfigurar"
+msgstr "Reconfigurar"
 
 #: standalone/drakgw:145
 #, c-format
@@ -21791,14 +22026,14 @@ msgstr ""
 "Por favor, escolha qual adaptador de rede será conectado à sua Rede Local."
 
 #: standalone/drakgw:177
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Endereço da Rede Local"
+msgstr "Configurações da Rede Local"
 
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP adress"
-msgstr ""
+msgstr "Endereço de IP local"
 
 #: standalone/drakgw:182
 #, c-format
@@ -21813,14 +22048,14 @@ msgstr ""
 "s!\n"
 
 #: standalone/drakgw:204
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "Configuração do Mandriva Linux Terminal Server"
+msgstr "Configuração Servidor de Nomes do Domínio (DNS)"
 
 #: standalone/drakgw:208
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Usar este gateway como servidor de nomes do domínio (DNS)"
 
 #: standalone/drakgw:209
 #, c-format
@@ -21842,9 +22077,9 @@ msgstr ""
 "deixe como está."
 
 #: standalone/drakgw:248
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Configuração automática"
+msgstr "Usar configuração automática (DHCP)"
 
 #: standalone/drakgw:249
 #, c-format
@@ -21869,37 +22104,37 @@ msgstr "Concessão máxima (em segundos)"
 #: standalone/drakgw:278
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Servidor Proxy (SQUID)"
 
 #: standalone/drakgw:282
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Usar este gateway como servidor Proxy"
 
 #: standalone/drakgw:283
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "E-mail do Administrador"
 
 #: standalone/drakgw:284
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "Nome do host remoto"
+msgstr "Nome do domínio visível"
 
 #: standalone/drakgw:285
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Propriedade"
+msgstr "Porta do proxy"
 
 #: standalone/drakgw:286
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "Tamanho do cache"
+msgstr "Tamanho do cache (MB)"
 
 #: standalone/drakgw:311
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Informação de discos rígidos"
+msgstr "Transmitir as informações sobre a impressora"
 
 #: standalone/drakgw:328
 #, c-format
@@ -21951,7 +22186,7 @@ msgstr "Configurando..."
 #: standalone/drakgw:399
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Configurando firewall..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -22008,57 +22243,57 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "Por favor, %s informação"
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Endereço IP:"
 
 #: standalone/drakhosts:111
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Nome do servidor:"
 
 #: standalone/drakhosts:112
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Pseudônimos do Servidor:"
 
 #: standalone/drakhosts:118
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Por favor, insira um endereço IP válido."
 
 #: standalone/drakhosts:125
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "Um IP igual já se encontra no arquivo %s."
 
 #: standalone/drakhosts:194
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Pseudônimos de Servidor"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS gerencia definições do domínio."
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Falha ao adicionar domínio."
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Falha ao Modificar domínio."
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Falha ao remover domínio."
 
 #: standalone/drakids:20
 #, fuzzy, c-format
@@ -22133,12 +22368,12 @@ msgstr "Senha (de novo)"
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "mapear usuário root como anônimo"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "mapear todos os usuário como anônimos"
 
 #: standalone/draknfs:45
 #, c-format
@@ -22148,32 +22383,32 @@ msgstr ""
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "permitir acesso remoto real ao root"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "Servidor NFS"
 
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Reiniciando/Recarregando servidor NFS"
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Erro enquanto Reiniciando/Recarregando servidor NFS"
 
 #: standalone/draknfs:102
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Seleção de Diretório"
 
 #: standalone/draknfs:107
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Deve ser um diretório"
 
 #: standalone/draknfs:138
 #, c-format
@@ -22201,6 +22436,28 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">Clientes NFS</span> podem ser especificados de algumas "
+"maneiras:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">domínio simples:</span> um domínio pode ser "
+"um nome abreviado reconhecido, um nome de domínio totalmente qualificado, ou "
+"um endereço de IP.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">grupos de rede:</span> grupos de rede NIS "
+"podem ser passados como @grupo.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">coringas:</span> nomes de máquinas podem "
+"conter os caracteres coringas * e ?. Por exemplo: *.cs.foo.edu combina com "
+"todos os servidores no domínio cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Redes IP:</span> você pode também exportar "
+"diretórios para todos os servidores em uma (sub-) rede IP simultaneamente. "
+"Por exemplo, tanto '/255.255.252.0' ou '/22' são adicionados ao resultado do "
+"endereço base da rede.\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -22225,26 +22482,46 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Opções do ID de Usuário</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> mapeia requisições com "
+"uid/gid igual a 0 para o uid/gid de usuário anônimo.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> desabilita a opção "
+"root squashing. Esta opção é útil principalmente para clientes com pouco "
+"espaço em disco.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> mapeia todos os uids e os "
+"gids para os usuário anônimos. Útil para diretórios FTP públicos exportados "
+"por NFS, diretórios que são repositórios de noticias, etc. A opção oposta é "
+"'no_all_squash', que é habilitada por padrão.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid e anongid:</span> ajusta "
+"explicitamente o uid e o gid das contas anônimas.\n"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Acesso síncrono:"
 
 #: standalone/draknfs:170
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Conexão segura:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Compartilhamento de apenas leitura:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Opções Avançadas</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -22253,6 +22530,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> esta opção requer que as "
+"requisições sejam originárias da internet sejam de portas menores que "
+"IPPORT_RESERVED (1024). Esta opção é usada por padrão."
 
 #: standalone/draknfs:175
 #, c-format
@@ -22262,6 +22542,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> permite requisições tanto como "
+"somente leitura e como escrita e leitura nesta partição NFS. O padrão é "
+"desabilitar qualquer requisição que altere o sistema de arquivos. Isto "
+"também pode ser feito explicitamente usando esta opção."
 
 #: standalone/draknfs:176
 #, c-format
@@ -22270,6 +22554,10 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> desabilita o servidor NFS de "
+"violar o protocolo NFS e responder a requisições antes que qualquer mudança "
+"feita por essas requisições sejam aplicadas no armazenamento estável (ex. "
+"disco rígido)."
 
 #: standalone/draknfs:372
 #, fuzzy, c-format
@@ -22279,107 +22567,107 @@ msgstr "Configuração Avançada"
 #: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Diretório NFS"
 
 #: standalone/draknfs:385
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Diretório:"
 
 #: standalone/draknfs:388
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Acesso ao domínio"
 
 #: standalone/draknfs:390
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "Acesso:"
 
 #: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Acesso aos domínios"
 
 #: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Mapeando ID de usuário"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "ID de usuário:"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Ajuda sobre ID de usuário"
 
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "ID de usuário anônimo:"
 
 #: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "ID de grupo anônimo:"
 
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Por favor, entre um diretório para ser compartilhado."
 
 #: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Você deve especificar acesso aos domínios"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "Compartilhar Diretório"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Domínios Coringas"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "Opções Gerais"
 
 #: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Opções Personalizadas"
 
 #: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Por favor, use o botão modificar para corrigir o acesso"
 
 #: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS gerencia compartilhamentos NFS"
 
 #: standalone/draknfs:597
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Falha ao adicionar compartilhamento NFS"
 
 #: standalone/draknfs:604
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Falha ao Modificar compartilhamento NFS."
 
 #: standalone/draknfs:611
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Falha ao remover um compartilhamento NFS."
 
 #: standalone/drakperm:21
 #, c-format
@@ -23063,7 +23351,7 @@ msgstr "Salvando o tema da tela de apresentação..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Impossível carregar arquivo de imagem %s"
 
 #: standalone/draksplash:169
 #, c-format
@@ -26096,7 +26384,7 @@ msgstr "Monitorar Rede"
 #: standalone/net_applet:59
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Gerenciamento de redes wireless"
 
 #: standalone/net_applet:60
 #, c-format
@@ -26136,7 +26424,7 @@ msgstr "Sempre ativar ao iniciar a máquina"
 #: standalone/net_applet:288
 #, c-format
 msgid "Actions"
-msgstr ""
+msgstr "Ações"
 
 #: standalone/net_applet:330
 #, fuzzy, c-format
@@ -27090,7 +27378,7 @@ msgstr "Configurar rede"
 #: steps.pm:28
 #, c-format
 msgid "Install bootloader"
-msgstr "Instalar o gerenciador de inicialização"
+msgstr "Instalar bootloader"
 
 #: steps.pm:29
 #, c-format
@@ -27171,381 +27459,8 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Falha na instalação"
 
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "Local Network adress"
-#~ msgstr "Endereço da Rede Local"
-
-#~ msgid "Configuring scripts, installing software, starting servers..."
-#~ msgstr "Configurando scripts, instalando programas, iniciando servidores..."
-
-#~ msgid "drakfloppy"
-#~ msgstr "drakfloppy"
-
-#~ msgid "Boot disk creation"
-#~ msgstr "Criação de discos de boot"
-
-#~ msgid "General"
-#~ msgstr "Geral"
-
-#~ msgid "Kernel version"
-#~ msgstr "Versão do kernel"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferências "
-
-#~ msgid "Advanced preferences"
-#~ msgstr "Opções Avançadas"
-
-#~ msgid "Size"
-#~ msgstr "Tamanho"
-
-#~ msgid "Mkinitrd optional arguments"
-#~ msgstr "Argumentos opcionais mkinitrd"
-
-#~ msgid "force"
-#~ msgstr "forçar"
-
-#~ msgid "omit raid modules"
-#~ msgstr "omitir módulos raid"
-
-#~ msgid "if needed"
-#~ msgstr "se necessário"
-
-#~ msgid "omit scsi modules"
-#~ msgstr "omitir módulos scsi"
-
-#~ msgid "Add a module"
-#~ msgstr "Adicionar um módulo"
-
-#~ msgid "Remove a module"
-#~ msgstr "Remover um módulo"
-
-#~ msgid "Be sure a media is present for the device %s"
-#~ msgstr "Certifique-se de que há um disco no dispositivo %s"
-
-#~ msgid ""
-#~ "There is no medium or it is write-protected for device %s.\n"
-#~ "Please insert one."
-#~ msgstr ""
-#~ "Não há nenhum disco no dispositivo %s.\n"
-#~ "Por favor insira um disco ou verifique se ele está protegido contra "
-#~ "gravação."
-
-#~ msgid "Unable to fork: %s"
-#~ msgstr "Não foi possível dividir: %s"
-
-#~ msgid "Floppy creation completed"
-#~ msgstr "Criação do disquete finalizada"
-
-#~ msgid "The creation of the boot floppy has been successfully completed \n"
-#~ msgstr "A criação do disquete de boot foi terminada com sucesso \n"
-
-#~ msgid ""
-#~ "Unable to properly close mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-#~ msgstr ""
-#~ "Não foi possível fechar adequadamente o mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr "Você não pode usar um Volume Lógico LVM para o ponto de montagem %s"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "Você selecionou uma partição LVM Volume Lógico como root (/).\n"
-#~ "O gerenciador de inicialização não consegue utilizá-la sem uma\n"
-#~ "partição /boot. Não esqueça de adicionar uma partição /boot"
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Talvez você não possa instalar o LILO (pois o LILO não gera um LVM em "
-#~ "vários PVs)"
-
-#~ msgid ""
-#~ "Your system is low on resources. You may have some problem installing\n"
-#~ "Mandrivalinux. If that occurs, you can try a text install instead. For "
-#~ "this,\n"
-#~ "press `F1' when booting on CDROM, then enter `text'."
-#~ msgstr ""
-#~ "Seu sistema está com poucos recursos. Você pode ter problemas ao "
-#~ "instalar\n"
-#~ " o Mandriva Linux. Se isto ocorrer, tente efetuar, em vez disso, uma "
-#~ "instalação em modo texto. Para isto, \n"
-#~ "pressione `F1' durante o boot do seu CD-ROM, e então digite `text'."
-
-#~ msgid ""
-#~ "Contacting Mandrivalinux web site to get the list of available mirrors..."
-#~ msgstr ""
-#~ "Contatando o site do Mandriva Linux, para obter a lista de servidores "
-#~ "disponíveis ..."
-
-#~ msgid "Mandrivalinux Installation %s"
-#~ msgstr "Instalação do Mandriva Linux %s"
-
-#~ msgid "use PPPoE"
-#~ msgstr "usar PPPoE"
-
-#~ msgid "use PPTP"
-#~ msgstr "usar PPTP"
-
-#~ msgid "use DHCP"
-#~ msgstr "usar DHCP"
-
-#~ msgid "Alcatel Speedtouch USB"
-#~ msgstr "Alcatel Speedtouch USB"
-
-#~ msgid " - detected"
-#~ msgstr " - detectado"
-
-#~ msgid "Sagem (using PPPoA) USB"
-#~ msgstr "Sagem (usando PPPoA) USB"
-
-#~ msgid "Sagem (using DHCP) USB"
-#~ msgstr "Sagem (usando DHCP) USB"
-
-#~ msgid ""
-#~ "The selected device has already been configured with the %s driver.\n"
-#~ "Do you really want to use a ndiswrapper driver ?"
-#~ msgstr ""
-#~ "O dispositivo selecionado já foi configurado com o driver %s.\n"
-#~ "Você realmente deseja usar um driver ndiswrapper?"
-
-#~ msgid "Do it later"
-#~ msgstr "Fazê-lo mais tarde"
-
-#~ msgid ""
-#~ "You need the Alcatel microcode.\n"
-#~ "Download it at:\n"
-#~ "%s\n"
-#~ "and copy the mgmt.o in /usr/share/speedtouch"
-#~ msgstr ""
-#~ "Você precisa do Alcatel microcode.\n"
-#~ "Baixe-o de:\n"
-#~ "%s\n"
-#~ "e copie o arquivo mgmt.o para /usr/share/speedtouch"
-
-#~ msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-#~ msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-
-#~ msgid ""
-#~ "This should be the return address that you want the backup results sent "
-#~ "from. Default is drakbakup."
-#~ msgstr ""
-#~ "Este deve ser um e-mail de retorno, o qual será usado para enviar os "
-#~ "resultados do backup para outros e-mails. O padrão é o drakbakup."
-
-#~ msgid ""
-#~ "Warning, another Internet connection has been detected, maybe using your "
-#~ "network"
-#~ msgstr ""
-#~ "Atenção, outra conexão à Internet foi detectada, talvez utilizando sua "
-#~ "rede"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MdkKDM (gerenciador de display do Mandriva Linux)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "O Compartilhamento da Conexão à Internet está desativado"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "Ativando servidores..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "O Compartilhamento da Conexão à Internet está ativo"
-
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "Interface %s (usando módulo %s)"
-
-#~ msgid "Interface %s"
-#~ msgstr "Interface %s"
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "Nenhum adaptador de rede em seu sistema!"
-
-#~ msgid "Choose the network interface"
-#~ msgstr "Escolha a interface de rede"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "Interface de Rede já configurada"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "Atenção, o adaptador de rede (%s) já foi configurado.\n"
-#~ "\n"
-#~ "Você quer fazer uma reconfiguração automática?\n"
-#~ "\n"
-#~ "Você pode fazê-la manualmente, mas você precisa saber o que está fazendo."
-
-#~ msgid "Automatic reconfiguration"
-#~ msgstr "Reconfiguração automática"
-
-#~ msgid "No (experts only)"
-#~ msgstr "Não (apenas para experts)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "Exibir a configuração atual da interface"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "Configuração atual da interface"
-
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "Configuração atual de `%s':\n"
-#~ "\n"
-#~ "Rede: %s\n"
-#~ "Endereço IP: %s\n"
-#~ "Atributo IP: %s\n"
-#~ "Driver: %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "É possível manter sua configuração atual e assumir que já configurou um "
-#~ "servidor DHCP; nesse caso, verifique por favor se as informações "
-#~ "utilizadas na sua rede local foram lidas corretamente; não será feita a "
-#~ "reconfiguração, e a configuração do seu servidor DHCP não será tocada.\n"
-#~ "\n"
-#~ "O valor padrão do DNS é o Servidor de Nomes configurado no firewall. Você "
-#~ "pode alterá-lo para o IP do DNS do seu ISP, por exemplo.\n"
-#~ "\t\t      \n"
-#~ "Caso contrário, é possível reconfigurar sua interface e (re)configurar um "
-#~ "servidor DHCP para você.\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "O IP deste servidor DHCP"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "Reconfigurar interface e servidor DHCP"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "A Rede Local não termina com `.0', desistindo."
-
-#~ msgid "PXE Server Configuration"
-#~ msgstr "Configuração do Servidor PXE"
-
-#~ msgid "Installation Server Configuration"
-#~ msgstr "Configuração do Servidor de Instalação"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "Você está prestes a configurar o seu computador para instalar um servidor "
-#~ "PXE como\n"
-#~ "um servidor DHCP e um servidor TFTP para criar um servidor de "
-#~ "instalação.\n"
-#~ "Com este recurso, outros computadores na sua rede local serão instaláveis "
-#~ "através deste computador.\n"
-#~ "\n"
-#~ "Certifique-se, antes de continuar, de ter configurado seu acesso à Rede/"
-#~ "Internet utilizando o drakconnect.\n"
-#~ "\n"
-#~ "Nota: você precisa de um Adaptador de Rede dedicado para criar um Rede "
-#~ "Local (LAN)."
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr ""
-#~ "Por favor, escolha qual adaptador de rede você quer usar para o servidor "
-#~ "DHCP."
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "Interface %s (na rede %s)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "O servidor DHCP permitirá que outros computadores inicializem através do "
-#~ "PXE na faixa de endereço fornecido.\n"
-#~ "\n"
-#~ "O endereço da rede é %s, utilizando a máscara de rede %s.\n"
-#~ "\n"
-
-#~ msgid "The DHCP start ip"
-#~ msgstr "IP inicial do intervalo de DHCP"
-
-#~ msgid "The DHCP end ip"
-#~ msgstr "IP final do intervalo de DHCP"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Por favor, indique onde a imagem da instalação estará disponível.\n"
-#~ "\n"
-#~ "Se o diretório não existir, favor copiar o conteúdo do CD ou DVD.\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "Diretório da imagem da instalação"
-
-#~ msgid "No image found"
-#~ msgstr "Nenhuma imagem encontrada"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr ""
-#~ "Nenhuma imagem de CD ou DVD encontrada, favor copiar o programa de "
-#~ "instalação e arquivos rpm."
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Favor indicar onde o arquivo auto_install.cfg está localizado.\n"
-#~ "\n"
-#~ "Deixe em branco se você não quiser configurar o modo de instalação "
-#~ "automática.\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Localização do arquivo auto_install.cfg"
+#~ msgid "allow real remote user access"
+#~ msgstr "permitir acesso remoto real aos usuários"
+
+#~ msgid "Help Adcanced options"
+#~ msgstr "Ajuda sobre Opções Avançadas"
