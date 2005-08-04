@@ -158,18 +158,12 @@ sub real_main {
                                );
 
       my $offer_to_connect = sub {
-	  network::tools::stop_ifplugd($net->{net_interface});
-
 	  if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
 	      member($net->{type}, qw(modem isdn isdn_external))) {
 	      return "ask_connect_now";
 	  } else {
 	      network::tools::stop_net_interface($net, 0);
-	      if ($ethntf->{MII_NOT_SUPPORTED} eq "yes" || $::isInstall) {
-		  network::tools::start_net_interface($net, 0);
-	      } else {
-		  network::tools::start_ifplugd($net->{net_interface});
-	      }
+	      network::tools::start_net_interface($net, 0);
 	  }
           return "end";
       };

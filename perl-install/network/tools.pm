@@ -60,7 +60,7 @@ sub run_interface_command {
     my ($command, $intf, $detach) = @_;
     my @command =
       !$> || system("/usr/sbin/usernetctl $intf report") == 0 ?
-	($command, $intf) :
+	($command, $intf, if_(!$::isInstall, "boot")) :
 	wrap_command_for_root($command, $intf);
     run_program::raw({ detach => $detach, root => $::prefix }, @command);
 }
@@ -83,18 +83,6 @@ sub start_net_interface {
 sub stop_net_interface {
     my ($net, $detach) = @_;
     stop_interface($net->{net_interface}, $detach);
-}
-
-sub start_ifplugd {
-    my ($interface) = @_;
-    run_program::run('/sbin/ifplugd', '-b', '-i', $interface);
-}
-
-sub stop_ifplugd {
-    my ($interface) = @_;
-    my $ifplugd = chomp_(cat_("/var/run/ifplugd.$interface.pid"));
-    $ifplugd and kill(15, $ifplugd);
-    sleep 1;
 }
 
 sub connected() { gethostbyname("www.mandriva.com") ? 1 : 0 }
