@@ -96,13 +96,24 @@ sub wpa_supplicant_get_driver {
     "wext";
 }
 
-sub wpa_supplicant_add_network_simple {
-    my ($essid, $key) = @_;
+sub wpa_supplicant_add_network {
+    my ($essid, $enc_mode, $key) = @_;
     my $conf = wpa_supplicant_read_conf();
     push @$conf, {
         ssid => qq("$essid"),
-        psk => convert_key_for_wpa_supplicant($key),
         scan_ssid => 1,
+        $enc_mode eq 'wpa-psk' ?
+	  (
+	      psk => convert_key_for_wpa_supplicant($key),
+	  ) :
+	member($enc_mode, qw(open restricted)) ?
+	  (
+	      key_mgmt => 'NONE',
+	      wep_key0 => convert_key_for_wpa_supplicant($key),
+	      wep_tx_keyidx => 0,
+	      auth_alg => 'SHARED',
+	  ) :
+	  ()
     };
     wpa_supplicant_write_conf($conf);
 }

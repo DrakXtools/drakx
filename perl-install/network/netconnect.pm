@@ -1089,7 +1089,7 @@ set TxRate=0);
                         } else {
                             if ($wireless_enc_mode eq 'wpa-psk') {
                                 $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                                network::wireless::wpa_supplicant_add_network_simple($ethntf->{WIRELESS_ESSID}, $wireless_enc_key);
+                                network::wireless::wpa_supplicant_add_network($ethntf->{WIRELESS_ESSID}, $wireless_enc_mode, $wireless_enc_key);
                             }
                         }
                         network::wireless::wlan_ng_needed($module) and network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
