@@ -113,7 +113,6 @@ sub real_main {
 
       my $is_ifplugd_blacklisted = sub {
           member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
-	  $is_wireless ||
 	  find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe();
       };
 
@@ -895,8 +894,7 @@ notation (for example, 1.2.3.4).")),
                            { label => N("Netmask"), val => \$ethntf->{NETMASK}, disabled => sub { $auto_ip } },
                           ),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
-                          if_(!$is_wireless,
-                              { text => N("Network Hotplugging"), val => \$ifplugd, type => "bool" }),
+			  { text => N("Network Hotplugging"), val => \$ifplugd, type => "bool" },
                           if_($net->{type} eq "lan",
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
