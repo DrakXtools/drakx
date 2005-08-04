@@ -70,7 +70,7 @@ sub real_main {
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
       my ($is_wireless, $wireless_enc_mode, $wireless_enc_key, $need_rt2x00_iwpriv);
       my ($dvb_adapter, $dvb_ad, $dvb_net, $dvb_pid);
-      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $hotplug, $track_network_id); # lan config
+      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $ifplugd, $track_network_id); # lan config
       my $success = 1;
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
@@ -111,7 +111,7 @@ sub real_main {
           } else { $module = "" }
       };
 
-      my $is_hotplug_blacklisted = sub {
+      my $is_ifplugd_blacklisted = sub {
           bool2yesno(member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
                      $is_wireless ||
                      find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe());
@@ -727,7 +727,7 @@ If you do not know, choose 'use PPPoE'"),
                         $net->{type} = 'adsl';
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
-                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
+                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_ifplugd_blacklisted->();
                         if ($ntf_name eq "sagem"  && member($net->{adsl}{method}, qw(static dhcp))) {
                             #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
                             #- it auto-detects dhcp/static modes thanks to encapsulation setting
@@ -872,8 +872,8 @@ If you do not know, choose 'use PPPoE'"),
                         $peeryp = $ethntf->{PEERYP} =~ /yes/;
                         $peerntpd = $ethntf->{PEERNTPD} =~ /yes/;
                         # blacklist bogus driver, enable ifplugd support else:
-                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
-                        $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
+                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_ifplugd_blacklisted->();
+                        $ifplugd = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{TYPE} if $net->{type} ne 'adsl' || !member($net->{adsl}{method}, qw(static dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
@@ -897,7 +897,7 @@ notation (for example, 1.2.3.4).")),
                           ),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
                           if_(!$is_wireless,
-                              { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" }),
+                              { text => N("Network Hotplugging"), val => \$ifplugd, type => "bool" }),
                           if_($net->{type} eq "lan",
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
@@ -942,7 +942,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{PEERDNS} = bool2yesno($peerdns);
                         $ethntf->{PEERYP} = bool2yesno($peeryp);
                         $ethntf->{PEERNTPD} = bool2yesno($peerntpd);
-                        $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
+                        $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$ifplugd);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         #- FIXME: special case for sagem where $ethntf->{DEVICE} is the result of a command
                         #- we can't always use $ntf_name because of some USB DSL modems
