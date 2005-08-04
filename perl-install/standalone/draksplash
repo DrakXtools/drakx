@@ -182,7 +182,7 @@ sub choose_color() {
     $color->cancel_button->signal_connect(clicked => sub { $color->destroy });
     $color->ok_button->signal_connect(clicked => sub {
 					  my $colour = $color->colorsel->get_current_color;
-					  $theme{conf}{pc} = "0x" . join('', map { print "$_\n"; sprintf("%x", $_*255) } $colour->red, $colour->green, $colour->blue);
+					  $theme{conf}{pc} = "0x" . join('', map { sprintf("%x", $_/255) } $colour->red, $colour->green, $colour->blue);
 					  $color->destroy;
 				      });
 }
