@@ -112,9 +112,9 @@ sub real_main {
       };
 
       my $is_ifplugd_blacklisted = sub {
-          bool2yesno(member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
-                     $is_wireless ||
-                     find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe());
+          member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
+	  $is_wireless ||
+	  find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe();
       };
 
       my %adsl_descriptions = (
@@ -727,7 +727,7 @@ If you do not know, choose 'use PPPoE'"),
                         $net->{type} = 'adsl';
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
-                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_ifplugd_blacklisted->();
+                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_ifplugd_blacklisted->());
                         if ($ntf_name eq "sagem"  && member($net->{adsl}{method}, qw(static dhcp))) {
                             #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
                             #- it auto-detects dhcp/static modes thanks to encapsulation setting
@@ -872,8 +872,7 @@ If you do not know, choose 'use PPPoE'"),
                         $peeryp = $ethntf->{PEERYP} =~ /yes/;
                         $peerntpd = $ethntf->{PEERNTPD} =~ /yes/;
                         # blacklist bogus driver, enable ifplugd support else:
-                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_ifplugd_blacklisted->();
-                        $ifplugd = !text2bool($ethntf->{MII_NOT_SUPPORTED});
+                        $ifplugd = !text2bool($ethntf->{MII_NOT_SUPPORTED}) && !$is_ifplugd_blacklisted->();
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{TYPE} if $net->{type} ne 'adsl' || !member($net->{adsl}{method}, qw(static dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
