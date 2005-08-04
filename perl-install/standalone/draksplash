@@ -10,12 +10,8 @@ use bootsplash;
 
 my $in = 'interactive'->vnew('su');
 
-#- verification of package image magik
-unless ($in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert')) {
-    $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
-        && $in->do_pkgs->install('ImageMagick')
-        or close_all();
-}
+$in->do_pkgs->ensure_is_installed('ImageMagick', '/usr/bin/convert') or close_all();
+$in->do_pkgs->ensure_is_installed('netpbm', '/usr/bin/jpegtopnm') or close_all();
 
 my $window = ugtk2->new('DrakSplash');
 $window->{rwindow}->signal_connect(delete_event => \&close_all);
