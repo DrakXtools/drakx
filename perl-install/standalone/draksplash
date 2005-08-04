@@ -102,7 +102,7 @@ sub read_theme_config() {
     if (-f $theme{conf}{jpeg}) {
 	load_image($theme{conf}{jpeg}, 1, 1);
     }
-    $theme{conf}{pc} ||= '0x21459d';
+    $theme{conf}{pc} ||= '#21459d';
     update_scale_values_from_conf();
     update_rect();
 }
@@ -173,12 +173,12 @@ sub choose_image {
 
 sub choose_color() {
     my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-    my @rgb = $theme{conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/ && map { hex($_)/255 } ($1, $2, $3);
+    my @rgb = $theme{conf}{pc} =~ m/#(.{2})(.{2})(.{2})/ && map { hex($_)/255 } ($1, $2, $3);
     $color->colorsel->set_current_color(gtkcolor(@rgb));
     $color->cancel_button->signal_connect(clicked => sub { $color->destroy });
     $color->ok_button->signal_connect(clicked => sub {
 					  my $colour = $color->colorsel->get_current_color;
-					  $theme{conf}{pc} = "0x" . join('', map { sprintf("%x", $_/255) } $colour->red, $colour->green, $colour->blue);
+					  $theme{conf}{pc} = "#" . join('', map { sprintf("%x", $_/255) } $colour->red, $colour->green, $colour->blue);
 					  $color->destroy;
 				      });
 }

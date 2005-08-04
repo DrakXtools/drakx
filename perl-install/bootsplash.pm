@@ -126,7 +126,6 @@ sub theme_write_config_for_resolution {
     my ($tb_x1, $tb_x2, $tb_y1, $tb_y2) = ($conf->{tx}, $conf->{tx} + $conf->{tw}, $conf->{ty}, $conf->{ty} + $conf->{th});
     my ($ti_x1, $ti_x2, $ti_y1, $ti_y2) = ($tb_x1 + 1, $tb_x2 - 1, $tb_y1 + 1, $tb_y2 - 1);
     my $pc = $conf->{pc};
-    $pc =~ s/^0x/#/;
 
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
