@@ -145,7 +145,7 @@ sub wpa_supplicant_write_conf {
 
                 my $new_network = find {
                     my $current = $_;
-                    any { exists $network->{$_} && $network->{$_} eq $current->{$_} } qw(ssid bssid)
+                    any { exists $network->{$_} && $network->{$_} eq $current->{$_} } qw(ssid bssid);
                 } @conf;
 
                 foreach (@{$network->{entries}}) {
@@ -167,7 +167,7 @@ sub wpa_supplicant_write_conf {
                     }
                 }
                 $buf .= "}\n";
-                $new_network and @conf = grep { $_ != $new_network } @conf;;
+                $new_network and @conf = grep { $_ != $new_network } @conf;
                 undef $network;
             } else {
                 #- unrecognized, keep it anyway
