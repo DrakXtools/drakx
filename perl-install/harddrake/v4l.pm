@@ -385,8 +385,10 @@ sub config {
     $conf{gbuffers} = min($max_gbuffers, $conf{gbuffers});
     $conf{card}  = $default if !defined $cards_list{$conf{card}};
     $conf{tuner} = -1 if !defined $tuners_lst{$conf{tuner}};
-    $conf{pll}   = -1 if !defined $pll_lst{$conf{tuner}};
-    $conf{radio} =  0 if $conf{radio} !~ /(0|1)/;
+    if ($driver eq 'bttv') {
+        $conf{pll}   = -1 if !defined $pll_lst{$conf{tuner}};
+        $conf{radio} =  0 if $conf{radio} !~ /(0|1)/;
+    }
 
 
     if ($in->ask_from("BTTV configuration", N("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
@@ -402,11 +404,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
                       ))
     {
         $conf{card} = $cards_list{$conf{card}};
-
-        my $options = 
-            'radio=' . ($conf{radio} ? 1 : 0) . ' ' .
-            join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers));
-        if ($options) {
+        if (my $options = join(' ', if_($driver eq 'bttv', 'radio=' . ($conf{radio} ? 1 : 0)), map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers))) {
             log::l(qq([harddrake::v4l] set "$options" options for $driver));
 #             log::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
               $modules_conf->set_options($driver, $options);
