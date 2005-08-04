@@ -193,8 +193,8 @@ sub create_adj_widgets() {
     $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
     my %scale_links = (tx => 'tw', ty => 'th', px => 'pw', py => 'ph');
     while (my ($n1, $n2) = each(%scale_links)) {
-	$adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
-	$adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
+	$adj{$n1}{on_change} = $adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
+	$adj{$n2}{on_change} = $adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
     }
 }
 sub create_scale_table {
@@ -225,9 +225,11 @@ sub update_scales_for_resolution() {
     $adj{$_}->upper(get_scale_max($_)) foreach keys %adj;
 }
 sub update_scale_values_from_conf() {
-    # this is broken !
-    # use ->set_value
-    $adj{$_}{value} = $theme{conf}{$_} foreach keys %adj;
+    foreach (keys %adj) {
+        $adj{$_}->signal_handler_block($adj{$_}{on_change});
+        $adj{$_}->set_value($theme{conf}{$_}) ;
+        $adj{$_}->signal_handler_unblock($adj{$_}{on_change})
+    };
 }
 
 sub create_image_area() {
