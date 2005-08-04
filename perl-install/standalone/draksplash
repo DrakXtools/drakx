@@ -162,24 +162,21 @@ sub load_image {
     $image_pixbuf[$mode] = $image_pixbuf[$mode]->scale_simple($theme{res_w}, $theme{res_h}, 'hyper');
     $image_pixbuf[1-$mode] or $image_pixbuf[1-$mode] = $image_pixbuf[$mode];
     $image_area->queue_draw;
+    1;
 }
 
 sub choose_image {
-    my ($name) = @_;
+    my ($type) = @_;
     my $file_dialog = Gtk2::FileChooserDialog->new(N("choose image"), $window->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok');
-    $file_dialog->set_filename($theme{$name} || '~/');
+    $file_dialog->set_filename($theme{$type} || '~/');
     $file_dialog->show;
-    while (my $answer = $file_dialog->run) {
-	if (member($answer, qw(cancel delete-event))) {
-	    $file_dialog->destroy;
-	    return;
-	} elsif ($answer eq 'ok') {
-	    load_image(my $img = $file_dialog->get_filename);
-	    $theme{conf}{$name} = $img;
-	    $file_dialog->destroy;
-	    return;
+    while ($file_dialog->run eq 'ok') {
+        if (load_image(my $img = $file_dialog->get_filename)) {
+	    $theme{conf}{$type} = $img;
+	    last;
 	}
     }
+    $file_dialog->destroy;
 }
 
 sub choose_color() {
