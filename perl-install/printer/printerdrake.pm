@@ -3372,6 +3372,22 @@ sub get_printer_info {
 		# This is needed to have the device not blocked by the
 		# spooler backend.
 		$printer->{currentqueue}{connect} = 'file:/dev/null';
+	    } elsif (($printer->{currentqueue}{driver} =~
+		      m!^\s*capt\s*$!) || 
+		     ($printer->{currentqueue}{ppd} && 
+		      ($printer->{currentqueue}{ppd} =~ 
+		       m!Canon-LBP-\d*-capt.ppd!))) {
+		# Check whether printer is on USB
+		if ($printer->{currentqueue}{connect} !~
+		    m!^\s*(usb):!) {
+		    $::noX || 
+			$in->ask_warn(N("Canon LBP-810/1120 (CAPT) configuration"),
+				      N("The driver for this printer only supports printers locally connected via USB, no printers on remote machines or print server boxes or on the parallel port. Please connect your printer to the USB or configure it on the machine where it is directly connected to."));
+		    return 0;
+		}
+		# This is needed to have the device not blocked by the
+		# spooler backend.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
 	    } elsif ($printer->{currentqueue}{printer} eq 'HP-LaserJet_1000') {
 		$in->ask_warn(N("Firmware-Upload for HP LaserJet 1000"),
 			      $hp1000fwtext);
