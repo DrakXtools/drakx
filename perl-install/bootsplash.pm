@@ -109,8 +109,10 @@ sub theme_set_image_for_resolution {
 sub theme_read_config_for_resolution {
     my ($theme, $res) = @_;
     my $file = theme_get_config_for_resolution($theme, $res);
-    my ($pb_x1, $pb_y1, $pb_x2, $pb_y2) = cat_($file) =~ /^box silent noover (\d+) (\d+) (\d+) (\d+)/m;
-    { px => $pb_x1, pw => $pb_x2 - $pb_x1, py => $pb_y1, ph => $pb_y2 - $pb_y1, getVarsFromSh($file) };
+    my $contents = cat_($file);
+    my ($pb_x1, $pb_y1, $pb_x2, $pb_y2) = $contents =~ /^box\s+silent\s+noover\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/m;
+    my ($pc) = $contents =~ /^box\s+silent\s+inter\s+\d+\s+\d+\s+\d+\s+\d+\s+(#\w+)/m;
+    { pc => $pc, px => $pb_x1, pw => $pb_x2 - $pb_x1, py => $pb_y1, ph => $pb_y2 - $pb_y1, getVarsFromSh($file) };
 }
 
 sub theme_write_config_for_resolution {
