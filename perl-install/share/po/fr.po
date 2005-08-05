@@ -73,13 +73,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-08-01 14:09+0200\n"
+"PO-Revision-Date: 2005-08-05 23:01+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms: nplurals=2;plural=(n>1);\n"
 
 #: ../move/move.pm:292
@@ -1302,12 +1302,12 @@ msgid "This user name has already been added"
 msgstr "Ce nom d'utilisateur est déjà utilisé"
 
 #: any.pm:615 any.pm:646
-#, fuzzy, c-format
+#, c-format
 msgid "User ID"
 msgstr "Utilisateur"
 
 #: any.pm:616 any.pm:647
-#, fuzzy, c-format
+#, c-format
 msgid "Group ID"
 msgstr "Groupe"
 
@@ -2721,6 +2721,9 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Le volume physique %s est toujours utilisé.\n"
+"Voulez-vous déplacer les Physical Extents PE de ce volume vers d'autres "
+"volumes ?"
 
 #: diskdrake/interactive.pm:893
 #, c-format
@@ -3190,7 +3193,7 @@ msgstr "Activer la partition d'échange %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Activer les quotas de groupes et imposer (facultativement) les limites"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3271,6 +3274,7 @@ msgstr ""
 msgid ""
 "Enable user disk quota accounting enabled, and optionally enforce limits"
 msgstr ""
+"Activer les quotas utilisateur et imposer (facultativement) les limites"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3663,7 +3667,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:240
@@ -9838,6 +9842,8 @@ msgstr "Bienvenue sur %s"
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
 msgstr ""
+"Le déplacement des Physical Extents (PE) utilisés vers d'autres volumes a "
+"échoué"
 
 #: lvm.pm:135
 #, c-format
@@ -19243,7 +19249,7 @@ msgstr ""
 "avoir installé sur votre système un logiciel de transfert de courriel (MTA)."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
@@ -22186,7 +22192,7 @@ msgstr ""
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please %s information"
-msgstr ""
+msgstr "Pouvez-vous %s l'information"
 
 #: standalone/drakhosts:110
 #, c-format
@@ -22239,94 +22245,94 @@ msgid "Failed to remove host."
 msgstr "Impossible d'enlever un hôte."
 
 #: standalone/drakids:20
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "État"
+msgstr "Date"
 
 #: standalone/drakids:21 standalone/drakids:37
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Détails de l'attaque"
+msgstr "Agresseur"
 
 #: standalone/drakids:22
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Type d'attaque : %s"
+msgstr "Type d'attaque"
 
 #: standalone/drakids:23
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
-msgstr "Services"
+msgstr "Service"
 
 #: standalone/drakids:24
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface"
-msgstr "Interface réseau : %s"
+msgstr "Interface réseau"
 
 #: standalone/drakids:60 standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall"
-msgstr "Pare Feu"
+msgstr "Pare-Feu actif"
 
 #: standalone/drakids:63
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Liste noire"
 
 #: standalone/drakids:67
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Supprimer du LVM"
+msgstr "Supprimer de la liste noire"
 
 #: standalone/drakids:68
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Déplacer vers la liste blanche"
 
 #: standalone/drakids:72
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Liste blanche"
 
 #: standalone/drakids:76
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Supprimer du LVM"
+msgstr "Supprimer de la liste blanche"
 
 #: standalone/drakids:125
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Pas de partage"
+msgstr "Balayage de ports"
 
 #: standalone/drakids:126
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Service attaqué : %s"
+msgstr "Attaque de service"
 
 #: standalone/drakids:127
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Mot de passe (vérification)"
+msgstr "Piratage de mot de passe"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "Associer l'utilisateur root à l'utilisateur anonymous"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "Associer tous les utilisateurs à l'utilisateur anonymous"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Pas de transformation de l'identifiant utilisateur"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "Autoriser les accès distants de root"
 
 #: standalone/draknfs:85
 #, c-format
@@ -22336,12 +22342,12 @@ msgstr "Serveur NFS"
 #: standalone/draknfs:85
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Relancer/Recharger le serveur NFS..."
 
 #: standalone/draknfs:86
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Erreur de relance/rechargement du serveur NFS"
 
 #: standalone/draknfs:102
 #, c-format
@@ -22351,7 +22357,7 @@ msgstr "Sélection du répertoire"
 #: standalone/draknfs:107
 #, c-format
 msgid "Should be a directory."
-msgstr "Celà devrait être un répertoire."
+msgstr "Cela devrait être un répertoire."
 
 #: standalone/draknfs:138
 #, c-format
@@ -22379,6 +22385,28 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">Client NFS</span> peut être précisé de plusieurs "
+"manières :\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">hôte unique</span> un client identifié par "
+"un nom abrégé connu de la résolution de nom, un nom complet qualifié (FQDN) "
+"ou une adresse IP\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Nom de groupe réseau</span> un nom de groupe "
+"réseau NIS peut être donné au format @groupe.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Caractères jokers</span> un nom pouvant "
+"contenir les caractères joker * et ?. Par exemple : *.cs.foo.edu correspond "
+"à toutes les machines du domaine cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Réseaux IP :</span> vous pouvez aussi "
+"exporter des répertoires à toutes les machines d'un (sous) réseau IP "
+"simultanément en ajoutant un masque à la fin de l'adresse du (sous) réseau. "
+"Exemple : 192.168.1.0/255.255.255.0' ou 192.168.1.0/24\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -22403,6 +22431,29 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Options Correspondance des utilisateurs</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Associer l'utilisateur root à l'utilisateur "
+"anonymous (root_squash) :</span> Transforme les requêtes des UID/GID 0 en "
+"UID/GID anonymes.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Autoriser les accès distants de root "
+"(no_root_squash) :</span> Ne pas transformer les UID/GID 0. Cette option est "
+"particulièrement utiles pour les stations sans disque.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Associer tous les utilisateurs à "
+"l'utilisateur anonymous (all_squash) :</span> Convertit tous les UID/GID en "
+"utilisateur anonyme. Utiles pour exporter avec NFS des répertoires publics "
+"de FTP, des répertoires de News, etc... L'option inverse est no_all_squash, "
+"qui s'applique par défaut.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Utilisateur et groupe anonymous (anonuid et "
+"anongid) :</span> Ces options donnent explicitement l'UID et le GID du "
+"compte anonyme.\n"
 
 #: standalone/draknfs:169
 #, c-format
@@ -22417,7 +22468,7 @@ msgstr "Connexion sécurisée :"
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Partage lecture seule :"
 
 #: standalone/draknfs:173
 #, c-format
@@ -22431,6 +22482,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s :</span> cette option oblige que la "
+"requête soit initiée à partir d'un port IP inférieur à IPPORT_RESERVED "
+"(1024). Cette option est activée par défaut."
 
 #: standalone/draknfs:175
 #, c-format
@@ -22440,6 +22494,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s :</span> permet soit la lecture seule "
+"soit la lecture/écriture sur ce volume NFS. Par défaut, les requêtes de "
+"modification sont refusées. Cette option permet de rendre ce comportement "
+"explicite."
 
 #: standalone/draknfs:176
 #, c-format
@@ -22448,16 +22506,20 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s :</span> interdit au serveur NFS de "
+"violer le protocole NFS en répondant aux requêtes avant que les traitements "
+"associés ne soient réellement effectués sur le support de stockage (disque "
+"par exemple)."
 
 #: standalone/draknfs:372
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Configuration manuelle"
+msgstr "Aide sur les options avancées"
 
 #: standalone/draknfs:383
 #, c-format
 msgid "NFS directory"
-msgstr "Répertoire NFS :"
+msgstr "Répertoire NFS"
 
 #: standalone/draknfs:385
 #, c-format
@@ -22467,7 +22529,7 @@ msgstr "Répertoire :"
 #: standalone/draknfs:388
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Accès client"
 
 #: standalone/draknfs:390
 #, c-format
@@ -22477,32 +22539,32 @@ msgstr "Accès :"
 #: standalone/draknfs:390
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Accès clients"
 
 #: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Correspondance des utilisateurs"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "Utilisateur :"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Aide Utilisateur"
 
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "Utilisateur anonymous :"
 
 #: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "Groupe anonymous :"
 
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
@@ -22512,7 +22574,7 @@ msgstr "Veuillez entrer un répertoire à partager."
 #: standalone/draknfs:436
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Vous devez préciser les accès clients."
 
 #: standalone/draknfs:514
 #, c-format
@@ -22522,7 +22584,7 @@ msgstr "Partager le répertoire"
 #: standalone/draknfs:514
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Clients autorisés"
 
 #: standalone/draknfs:514
 #, c-format
@@ -22537,7 +22599,7 @@ msgstr "Options personalisées"
 #: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Utilisez le bouton de modification pour définir les droits d'accès."
 
 #: standalone/draknfs:588
 #, c-format
@@ -26346,9 +26408,9 @@ msgid "Get Online Help"
 msgstr "Aide en ligne"
 
 #: standalone/net_applet:160
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to select wireless network: %s"
-msgstr "Gérer les réseaux sans fil"
+msgstr "Impossible de sélectionner le réseau sans fil : %s"
 
 #: standalone/net_applet:279
 #, c-format
@@ -26366,9 +26428,9 @@ msgid "Actions"
 msgstr "Actions"
 
 #: standalone/net_applet:330
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Impossible d'accéder au miroir %s"
+msgstr "Impossible de contacter le serveur"
 
 #: standalone/net_applet:349
 #, c-format
