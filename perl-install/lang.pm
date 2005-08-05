@@ -1224,7 +1224,6 @@ sub configure_kdeglobals {
     	      Language => getLANGUAGE($locale->{lang}, $locale->{country}, $locale->{utf8}),
     	  ));
 
-    if ($prev_kde_charset ne $kde_charset) {
     log::explanations("Configuring KDE regarding fonts");
         update_gnomekderc($kdeglobals, WM => (
        		      activeFont => charset2kde_font($charset,0),
@@ -1242,7 +1241,6 @@ sub configure_kdeglobals {
         update_gnomekderc("$confdir/kdesktoprc", FMSettings => (
        		      StandardFont => charset2kde_font($charset, 0),
        		  ));
-    }
 }
 
 sub bindtextdomain() {
