@@ -68,7 +68,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
-      my ($is_wireless, $wireless_enc_mode, $wireless_enc_key, $need_rt2x00_iwpriv);
+      my ($is_wireless, $wireless_enc_mode, $wireless_enc_key, $need_rt2x00_iwpriv, $wireless_roaming, $need_wpa_supplicant);
       my ($dvb_adapter, $dvb_ad, $dvb_net, $dvb_pid);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $ifplugd, $track_network_id); # lan config
       my $success = 1;
@@ -894,7 +894,7 @@ notation (for example, 1.2.3.4).")),
                            { label => N("Netmask"), val => \$ethntf->{NETMASK}, disabled => sub { $auto_ip } },
                           ),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
-			  { text => N("Network Hotplugging"), val => \$ifplugd, type => "bool" },
+			  { text => N("Network Hotplugging"), val => \$ifplugd, type => "bool", disabled => sub { $wireless_roaming } },
                           if_($net->{type} eq "lan",
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
@@ -987,6 +987,9 @@ notation (for example, 1.2.3.4).")),
                    {
                     pre => sub {
                         require network::wireless;
+                        $find_lan_module->();
+                        $need_rt2x00_iwpriv = member($module, qw(rt2400 rt2500));
+                        $wireless_roaming = delete $ethntf->{WIRELESS_MODE} eq 'Roaming' && !$need_rt2x00_iwpriv;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
                         ($wireless_enc_key, my $restricted) = network::wireless::get_wep_key_from_iwconfig($ethntf->{WIRELESS_ENC_KEY});
@@ -995,24 +998,27 @@ notation (for example, 1.2.3.4).")),
                           !$wireless_enc_key ? 'none' :
                           $restricted ? 'restricted' :
                           'open';
-                        $find_lan_module->();
-                        $need_rt2x00_iwpriv = member($module, "rt2400", "rt2500");
+                        delete $ethntf->{WIRELESS_ENC_KEY};
+                        delete $ethntf->{WIRELESS_IWPRIV};
+                        delete $ethntf->{WIRELESS_WPA_DRIVER};
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
                             [
                              { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE},
                                list => [ N_("Ad-hoc"), N_("Managed"), N_("Master"), N_("Repeater"), N_("Secondary"), N_("Auto") ],
-                               format => \&translate },
+                               format => \&translate,
+                               disabled => sub { $wireless_roaming } },
                              { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
-                             { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
-                             { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
-                             { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
-                             { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
                              { label => N("Encryption mode"), val => \$wireless_enc_mode,
                                list => [ sort { $wireless_enc_modes{$a} cmp $wireless_enc_modes{$b} } keys %wireless_enc_modes ],
                                format => sub { $wireless_enc_modes{$_[0]} } },
                              { label => N("Encryption key"), val => \$wireless_enc_key, disabled => sub { $wireless_enc_mode eq 'none' } },
+                             { text => N("Allow access point roaming"), val => \$wireless_roaming, type => "bool" },
+                             { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
+                             { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
+                             { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
+                             { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
                              { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS}, advanced => 1,
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
@@ -1067,32 +1073,37 @@ See iwpriv(8) man page for further information."),
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'prism2-utils'));
                             return 1;
                         }
-                        if ($wireless_enc_mode eq 'wpa-psk' && !$need_rt2x00_iwpriv && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
+                        $need_wpa_supplicant = ($wireless_roaming || $wireless_enc_mode eq 'wpa-psk') && !$need_rt2x00_iwpriv;
+                        if ($need_wpa_supplicant && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
                             $in->ask_warn(N("Error"), N("Could not install the %s package!", 'wpa_supplicant'));
                             return 1;
                         }
 			!network::thirdparty::setup_device($in, 'wireless', $module);
                     },
                     post => sub {
-                        delete $ethntf->{WIRELESS_ENC_KEY};
-                        delete $ethntf->{WIRELESS_WPA_DRIVER};
-                        if ($wireless_enc_mode ne 'none') {
+                        if ($wireless_roaming) {
+                            $ethntf->{MII_NOT_SUPPORTED} = 'no';
+                            $ethntf->{WIRELESS_MODE} = 'Roaming';
+                        } elsif (member($wireless_enc_mode, qw(open restricted))) {
                             #- keep the key even for WPA, so that drakconnect remembers it
                             $ethntf->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
-                        }
-                        if ($need_rt2x00_iwpriv) {
-                            #- use iwpriv for WPA with rt2x00 drivers, they don't plan to support wpa_supplicant
+                        } elsif ($need_rt2x00_iwpriv) {
+                            #- use iwpriv for WPA with rt2400/rt2500 drivers, they don't plan to support wpa_supplicant
                             $ethntf->{WIRELESS_IWPRIV} = $wireless_enc_mode eq 'wpa-psk' && qq(set AuthMode=WPAPSK
 set EncrypType=TKIP
 set WPAPSK="$wireless_enc_key"
 set TxRate=0);
-                        } else {
-                            if ($wireless_enc_mode eq 'wpa-psk') {
-                                $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
-                                network::wireless::wpa_supplicant_add_network($ethntf->{WIRELESS_ESSID}, $wireless_enc_mode, $wireless_enc_key);
-                            }
                         }
-                        network::wireless::wlan_ng_needed($module) and network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
+
+                        if ($need_wpa_supplicant) {
+                            $ethntf->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($module);
+                            network::wireless::wpa_supplicant_add_network($ethntf->{WIRELESS_ESSID}, $wireless_enc_mode, $wireless_enc_key);
+                        }
+
+                        if (network::wireless::wlan_ng_needed($module)) {
+                            network::wireless::wlan_ng_configure($ethntf->{WIRELESS_ESSID}, $wireless_enc_key, $ethntf->{DEVICE}, $module);
+                        }
+
                         return "lan_protocol";
                     },
                    },
