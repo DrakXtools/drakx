@@ -284,9 +284,9 @@ sub detect {
 		my ($device) = grep { sprintf("%04x", $_->{vendor}) eq $vendor && sprintf("%04x", $_->{id}) eq $id } @devices;
 
 		if ($device) {
-              $driver = $device->{driver};
+		    $driver = $device->{driver};
 		} else {
-              warn "i failled to lookupp $vendorid && $productid";
+		    #warn "Failed to lookup $vendorid and $productid!\n";
 		}
                  
 		# We have vendor and product ID, look up the scanner in
@@ -373,7 +373,7 @@ sub detect {
 	@res = grep { ! $_->{configured} } @res;
     }
     # blacklist device that have a driver b/c of buggy sane-find-scanner:
-    return grep { member($_->{driver}, qw(scanner unknown)) } @res;
+    return grep { member($_->{val}{driver}, qw(scanner unknown)) } @res;
 }
 
 sub resolve_symlinks {
@@ -391,7 +391,7 @@ sub resolve_symlinks {
 	return $file;
     }
     while (1) {
-	my $ls = `ls -l $file`;
+	my $ls = `ls -l $file 2> /dev/null`;
 	if ($ls =~ m!\s($file)\s*\->\s*(\S+)\s*$!) {
 	    my $target = $2;
 	    if ($target !~ m!^/! && $file =~ m!^(.*)/[^/]+$!) {
