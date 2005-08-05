@@ -210,9 +210,9 @@ sub wpa_supplicant_write_conf {
         $buf .= "}\n";
     }
 
-    output($wpa_supplicant_conf, $buf);
+    output($::prefix . $wpa_supplicant_conf, $buf);
     #- hide keys for non-root users
-    chmod 0600, $wpa_supplicant_conf;
+    chmod 0600, $::prefix . $wpa_supplicant_conf;
 }
 
 1;
