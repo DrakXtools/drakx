@@ -132,7 +132,8 @@ sub new($$) {
     }
   OK:
     $ENV{DISPLAY} = $wanted_DISPLAY;
-    if (is_xbox()) {
+    require detect_devices;
+    if (detect_devices::is_xbox()) {
         modules::load('xpad');
         run_program::run('xset', 'm', '1/8', '1');
     }

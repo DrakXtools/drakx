@@ -359,7 +359,7 @@ sub configure_sound_slots {
         if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
             $altered ||= $default_driver;
             $modules_conf->set_sound_slot("sound-slot-$::i", $_->{driver});
-	    $modules_conf->set_options($_->{driver}, "xbox=1") if $_->{driver} eq "snd-intel8x0" && is_xbox();
+	    $modules_conf->set_options($_->{driver}, "xbox=1") if $_->{driver} eq "snd-intel8x0" && detect_devices::is_xbox();
         }
     } detect_devices::getSoundDevices();
     $modules_conf->write if $altered && $::isStandalone;

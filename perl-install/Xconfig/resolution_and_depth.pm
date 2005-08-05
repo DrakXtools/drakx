@@ -42,10 +42,10 @@ sub bios_vga_modes() { @bios_vga_modes }
 sub size2default_resolution {
     my ($size) = @_; #- size in inch
 
+    require detect_devices;
     if (arch() =~ /ppc/) {
-	require detect_devices;
 	return "1024x768" if detect_devices::get_mac_model() =~ /^PowerBook|^iMac/;
-    } elsif (is_xbox()) {
+    } elsif (detect_devices::is_xbox()) {
 	return "640x480";
     }
 

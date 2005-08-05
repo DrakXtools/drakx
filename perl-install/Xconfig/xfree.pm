@@ -692,7 +692,8 @@ Section "ServerFlags"
     AllowMouseOpenFail # allows the server to start up even if the mouse does not work
 END
 
-$default_header .= <<'END_XBOX' if is_xbox(); 
+require detect_devices;
+$default_header .= <<'END_XBOX' if detect_devices::is_xbox();
     Option "PciProbe1" "false"
     Option "PciProbe2" "false"
     Option "PciForceConfig1" "false"

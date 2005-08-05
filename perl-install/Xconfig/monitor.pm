@@ -11,7 +11,7 @@ use log;
 
 
 sub good_default_monitor() {
-  is_xbox() ? 'Generic|640x480 @ 60 Hz' :
+  detect_devices::is_xbox() ? 'Generic|640x480 @ 60 Hz' :
     arch() =~ /ppc/ ? 
       (detect_devices::get_mac_model() =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768') :
       (detect_devices::isLaptop() ? 'Generic|Flat Panel 1024x768' : 'Generic|1024x768 @ 70 Hz');

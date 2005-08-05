@@ -208,7 +208,7 @@ sub zero_MBR {
     bless $hd, default_type();
     $hd->{primary} = $hd->clear_raw;
     delete $hd->{extended};
-    if (is_xbox()) {
+    if (detect_devices::is_xbox()) {
         my $part = { start => 1, size => 15632048, pt_type => 0x0bf, isFormatted => 1 };
         partition_table::dos::compute_CHS($hd, $part);
 	$hd->{primary}{raw}[0] = $part;

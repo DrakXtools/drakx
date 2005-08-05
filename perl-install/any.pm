@@ -132,7 +132,7 @@ sub setupBootloader {
 
 sub installBootloader {
     my ($in, $b, $all_hds) = @_;
-    return if is_xbox();
+    return if detect_devices::is_xbox();
     install_acpi_pkgs($in->do_pkgs, $b);
 
     eval { run_program::rooted($::prefix, 'echo | lilo -u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
@@ -254,7 +254,7 @@ sub setupBootloader__mbr_or_not {
 sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
-    return if is_xbox();
+    return if detect_devices::is_xbox();
     my @method_choices = bootloader::method_choices($all_hds);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append_simple($b, 'noapic');

@@ -319,7 +319,7 @@ sub hd_possible_actions_interactive {
 
 sub Clear_all {
     my ($in, $hd, $all_hds) = @_;
-    return if is_xbox(); #- do not let them wipe the OS
+    return if detect_devices::is_xbox(); #- do not let them wipe the OS
     my @parts = partition_table::get_normal_parts($hd);
     foreach (@parts) {
 	RemoveFromLVM($in, $hd, $_, $all_hds) if isPartOfLVM($_);

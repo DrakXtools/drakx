@@ -989,7 +989,7 @@ sub ejectCdrom {
     #- D state if the cdrom is already removed
     $o_mountpoint and eval { fs::mount::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
-    return if is_xbox();
+    return if detect_devices::is_xbox();
     openCdromTray($cdrom);
 }
 

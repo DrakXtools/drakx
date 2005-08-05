@@ -860,7 +860,7 @@ sub method2text {
 
 sub method_choices_raw {
     my ($b_prefix_mounted) = @_;
-    is_xbox() ? 'cromwell' :
+    detect_devices::is_xbox() ? 'cromwell' :
     arch() =~ /ppc/ ? 'yaboot' : 
     arch() =~ /ia64/ ? 'lilo' : 
       (

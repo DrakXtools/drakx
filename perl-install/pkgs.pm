@@ -193,7 +193,7 @@ sub bestKernelPackage {
     }
     my @preferred_exts =
       $::build_globetrotter ? '' :
-      is_xbox() ? '-xbox' :
+      detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
       !detect_devices::has_cpu_flag('pae') ? ('-i686-up-4GB', '-i586-up-1GB') :
       detect_devices::hasSMP() ? '-smp' :

@@ -86,7 +86,7 @@ my %mice =
  N_("Universal") =>
  [ [ 'input/mice' ],
    [ [ 7, 'ps/2', 'ExplorerPS/2', N_("Any PS/2 & USB mice") ],
-     if_(is_xbox(), [ 5, 'ps/2', 'IMPS/2', N_("Microsoft Xbox Controller S") ]),
+     if_(detect_devices::is_xbox(), [ 5, 'ps/2', 'IMPS/2', N_("Microsoft Xbox Controller S") ]),
    ] ],
     ),
 
@@ -295,7 +295,7 @@ sub detect {
     if (c::kernel_version() =~ /^\Q2.6/) {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
         if (cat_('/proc/bus/input/devices') =~ /^H: Handlers=mouse/m) {
-            if (is_xbox()) {
+            if (detect_devices::is_xbox()) {
                 return fullname2mouse('Universal|Microsoft Xbox Controller S');
             }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);

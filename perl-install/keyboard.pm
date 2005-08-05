@@ -360,7 +360,7 @@ sub KEYBOARD2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
 sub keyboards() { map { { KEYBOARD => $_ } } keys %keyboards }
 sub keyboard2one {
     my ($keyboard, $nb) = @_;
-    ref $keyboard or (is_xbox() ? return undef : internal_error());
+    ref $keyboard or (detect_devices::is_xbox() ? return undef : internal_error());
     my $l = $keyboards{$keyboard->{KEYBOARD}} or return;
     $l->[$nb];
 }

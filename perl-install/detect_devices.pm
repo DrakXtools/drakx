@@ -905,6 +905,11 @@ sub is_i586() {
     $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
       !has_cpu_flag('cmov');
 }
+
+sub is_xbox() {
+    any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } detect_devices::pci_probe();
+}
+
 sub has_cpu_flag {
     my ($flag) = @_;
     cat_('/proc/cpuinfo') =~ /^flags.*\b$flag\b/m;
