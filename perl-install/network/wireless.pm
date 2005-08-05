@@ -99,7 +99,7 @@ sub wpa_supplicant_get_driver {
 sub wpa_supplicant_add_network {
     my ($essid, $enc_mode, $key) = @_;
     my $conf = wpa_supplicant_read_conf();
-    push @$conf, {
+    my $network = {
         ssid => qq("$essid"),
         scan_ssid => 1,
         $enc_mode eq 'wpa-psk' ?
@@ -115,7 +115,17 @@ sub wpa_supplicant_add_network {
 	  ) :
 	  ()
     };
+    @$conf = difference2($conf, [ wpa_supplicant_find_similar($conf, $network) ]);
+    push @$conf, $network;
     wpa_supplicant_write_conf($conf);
+}
+
+sub wpa_supplicant_find_similar {
+    my ($conf, $network) = @_;
+    grep {
+        my $current = $_;
+        any { exists $network->{$_} && $network->{$_} eq $current->{$_} } qw(ssid bssid);
+    } @$conf;
 }
 
 sub wpa_supplicant_read_conf() {
@@ -154,11 +164,7 @@ sub wpa_supplicant_write_conf {
                 #- end of network block, write it
                 $buf .= "network={$network->{comment}\n";
 
-                my $new_network = find {
-                    my $current = $_;
-                    any { exists $network->{$_} && $network->{$_} eq $current->{$_} } qw(ssid bssid);
-                } @conf;
-
+                my $new_network = first(wpa_supplicant_find_similar(\@conf, $network));
                 foreach (@{$network->{entries}}) {
                     my $key = $_->{key};
                     if ($new_network) {
