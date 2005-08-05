@@ -282,7 +282,7 @@ our @tree =
       string => N("Modem"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { detect_devices::getModem($modules_conf) },
+      detector => sub { f(detect_devices::getModem($modules_conf)) },
       # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
