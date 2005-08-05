@@ -25,7 +25,7 @@ sub get_wep_key_from_iwconfig {
 
 sub convert_key_for_wpa_supplicant {
     my ($key) = @_;
-    if ($key =~ /^([[:xdigit:]]{4}[\:-])+[[:xdigit:]]{2,}$/) {
+    if ($key =~ /^([[:xdigit:]]{4}[\:-]?)+[[:xdigit:]]{2,}$/) {
         $key =~ s/[\:-]//g;
         return lc($key);
     } else {
