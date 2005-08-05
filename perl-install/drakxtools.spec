@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.40mdk
+Release: 0.41mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -372,6 +372,30 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Aug  5 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.41mdk
+- drakconnect (blino):
+  o allow to use WEP keys in wpa_supplicant
+  o use ifplugd for wireless interfaces
+  o use ifup/ifdown with the boot option to handle ifplugd
+- draksplash (blino):
+  o handle progress bar color
+  o install jpegtopnm if needed
+- drakTermServ: GUI enhancements (stew)
+- drakUPS: do not detect some keyboards as UPSes
+- drakxtv: fix configuring drivers other than bttv
+- autosetupprintqueues: fix logs (till, #17264)
+- harddrake:
+  o do not detect PCI/USB modems twice (as modems and as unknown
+    devices)
+  o run keyboardrake for keyboards
+  o do not offer to configure driver of keyboards and mice (#17254)
+- localedrake: fix global KDE config when switching locales and when
+  font changes whereas KDE charset doesn't (Mashrab Kuvatov)
+- printerdrake: Added special handling for the "capt" driver (Canon
+  LBP-810/1120 winprinters) (till)
+- scannerdrake: fix detecting scanners
+- XFdrake (pixel): don't have empty ModeLines lying around (#16960)
+
 * Wed Aug  3 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.40mdk
 - do not write rules conflicting with udev ones
 - don't package dbus stuff && finish-install in drakxtools-backend
