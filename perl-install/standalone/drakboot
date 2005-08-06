@@ -138,7 +138,7 @@ sub splash_choice() {
     run_boot_window(N("Graphical boot theme selection"),
                        [
                         1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-				    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new("Graphical boot mode:"), $mode_combo),
+				    0, gtkpack__(Gtk2::HBox->new(0, 5), Gtk2::Label->new(N("Graphical boot mode:")), $mode_combo),
 				    0, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $theme->{enabled}),
 					       gtkadd(gtkcreate_frame(N("Theme")),
 						      gtkpack__(Gtk2::VBox->new(0, 5),
