@@ -8,28 +8,33 @@ style "font"
 style "red" = "font"
 {
   bg[NORMAL] = { 1.0, 0, 0 }
+  bg[ACTIVE] = { 0.9, 0, 0 }
   bg[PRELIGHT] = { 0.9, 0, 0 }
 }
 style "darkred" = "font"
 {
   bg[NORMAL] = { 0.7, 0, 0 }
+  bg[ACTIVE] = { 0.6, 0, 0 }
   bg[PRELIGHT] = { 0.6, 0, 0 }
 }
 style "green" = "font"
 {
   bg[NORMAL] = { 0, 1.0, 0 }
+  bg[ACTIVE] = { 0, 0.9, 0 }
   bg[PRELIGHT] = { 0, 0.9, 0 }
   fg[NORMAL] = { 0, 0, 0 }
 }
 style "blue" = "font"
 {
   bg[NORMAL] = { 0, 0, 1.0 }
+  bg[ACTIVE] = { 0, 0, 0.9 }
   bg[PRELIGHT] = { 0, 0, 0.9 }
 }
 style "white" = "font"
 {
   bg[NORMAL] = { 1.0, 1.0, 1.0 }
-  bg[PRELIGHT] = { 0.67, 0.67, 0.67 }
+  bg[ACTIVE] = { 0.9, 0.9, 0.9 }
+  bg[PRELIGHT] = { 0.9, 0.9, 0.9 }
   fg[NORMAL] = { 0, 0, 0 }
 }
 
