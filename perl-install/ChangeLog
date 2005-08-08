@@ -1,3 +1,37 @@
+2005/08/08  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: fix bug #17255 (modify empty /etc/exports file)
+
+	* standalone/drakhosts: fix bug #17255
+
+2005/08/08  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: initial IPv6 support (6to4 tunnel)
+
+	* network/ethernet.pm: do not write aliases interfaces in iftab
+
+	* network/network.pm: keep MS_DNS1, MS_DNS2 and DOMAIN variables in ifcfg
+	files
+	initial IPv6 support (6to4 tunnel)
+
+2005/08/08  Pixel  <pixel at mandriva.com>
+
+	* raid.pm, install2.pm: write /etc/mdadm.conf when creating a new md
+	(bugzilla #15502)
+
+	* any.pm, drakxtools.spec: in standalone, use monitor-edid's new option
+	--try-in-console
+
+	* share/keymaps.tar.bz2: rebuild keymaps with NR_KEYS==256 when it was
+	previously 255
+
+	* diskdrake/smbnfs_gtk.pm: differentiate (nfs)servers on ip first to have
+	less dups (bugzilla #17236)
+
+2005/08/08  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: typo fix
+
 2005/08/08  Pixel  <pixel at mandriva.com>
 
 	* share/list.xml: add mandriva macros for rpm so that _hkp_keyserver_query
