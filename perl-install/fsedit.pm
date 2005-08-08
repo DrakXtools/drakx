@@ -360,7 +360,7 @@ sub suggest_part {
     $part->{mntpoint} = $best->{mntpoint};
     fs::type::set_type_subpart($part, $best) if !isTrueFS($best) || !isTrueFS($part);
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
-    foreach ('options', 'lv_name', 'encrypt_key', 'device_LABEL', 'prefer_device_LABEL') {
+    foreach ('options', 'lv_name', 'encrypt_key', 'device_LABEL', 'prefer_device_LABEL', 'primaryOrExtended') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
     1;
@@ -433,7 +433,7 @@ sub allocatePartitions {
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
 	    my $hd = fs::get::part2hd($part, $all_hds);
-	    add($hd, $part, $all_hds, {});
+	    add($hd, $part, $all_hds, { primaryOrExtended => $part->{primaryOrExtended} });
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};
 	}
