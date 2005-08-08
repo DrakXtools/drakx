@@ -109,6 +109,7 @@ sub selectKeyboard {
     if ($::expert || $clicked || !($from_usb || @$l && $l->[0][1] >= 90) || listlength(lang::langs($o->{locale}{langs})) > 1) {
 	add2hash($o->{keyboard}, $from_usb);
 	my @best = uniq($from_usb ? $from_usb->{KEYBOARD} : (), map { $_->[0] } @$l);
+	@best = () if @best == 1;
 
 	my $format = sub { translate(keyboard::KEYBOARD2text($_[0])) };
 	my $other;
@@ -121,12 +122,12 @@ sub selectKeyboard {
 			advanced_label => N("More"),
 			callbacks => { changed => sub { $other = $_[0] == 1 } },
 		      },
-		      [ if_(@best > 1, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
-					 list => [ @best ] }),
+		      [ if_(@best, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
+				     list => [ @best ] }),
 			{ val => \$ext_keyboard, type => 'list', format => $format,
 			  list => [ difference2([ keyboard::KEYBOARDs() ], \@best) ], advanced => @best > 1 }
 		      ]);
-	$o->{keyboard}{KEYBOARD} = @best <= 1 || $other ? $ext_keyboard : $KEYBOARD;
+	$o->{keyboard}{KEYBOARD} = !@best || $other ? $ext_keyboard : $KEYBOARD;
 	delete $o->{keyboard}{unsafe};
     }
     keyboard::group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
