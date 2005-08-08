@@ -303,6 +303,7 @@ sub add_modify_entry {
 
   if ($wanted =~ /modify/) {
     $iter = $selection->get_selected;
+    $iter or info_dialog(N("Error"), N("Please add an NFS share to be able to modify it.")) and return;
     my $path = $model->get_path($iter);
     $i = ($path->get_indices)[0];
     $dir->set_text($listshare[$i]{dir});
