@@ -70,7 +70,7 @@ sub real_main {
       my (@ndiswrapper_drivers, $ndiswrapper_driver, $ndiswrapper_device);
       my ($is_wireless, $wireless_enc_mode, $wireless_enc_key, $need_rt2x00_iwpriv, $wireless_roaming, $need_wpa_supplicant);
       my ($dvb_adapter, $dvb_ad, $dvb_net, $dvb_pid);
-      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $ifplugd, $track_network_id); # lan config
+      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $peeryp, $peerntpd, $ifplugd, $track_network_id, $ipv6_tunnel, $need_network_restart);
       my $success = 1;
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
@@ -160,7 +160,9 @@ sub real_main {
 	  if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
 	      member($net->{type}, qw(modem isdn isdn_external))) {
 	      return "ask_connect_now";
-	  } else {
+	  } elsif ($need_network_restart) {
+              services::restart("network");
+          } else {
 	      network::tools::stop_net_interface($net, 0);
 	      network::tools::start_net_interface($net, 0);
 	  }
@@ -872,6 +874,7 @@ If you do not know, choose 'use PPPoE'"),
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{TYPE} if $net->{type} ne 'adsl' || !member($net->{adsl}{method}, qw(static dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
+                        $ipv6_tunnel = text2bool($ethntf->{IPV6TO4INIT});
                     },
                     name => sub { join('', 
                                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
@@ -896,6 +899,7 @@ notation (for example, 1.2.3.4).")),
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
                           { label => N("Metric"), val => \$ethntf->{METRIC}, advanced => 1 },
+                          { text => N("Enable IPv6 to IPv4 tunnel"), val => \$ipv6_tunnel, type => "bool", advanced => 1 },
                           if_($auto_ip,
                               { label => N("DHCP client"), val => \$ethntf->{DHCP_CLIENT},
                                 list => \@network::ethernet::dhcp_clients, advanced => 1 },
@@ -941,6 +945,13 @@ notation (for example, 1.2.3.4).")),
                         #- FIXME: special case for sagem where $ethntf->{DEVICE} is the result of a command
                         #- we can't always use $ntf_name because of some USB DSL modems
                         $net->{net_interface} = $ntf_name eq "sagem" ? "sagem" : $ethntf->{DEVICE};
+                        $need_network_restart = $ipv6_tunnel xor text2bool($ethntf->{IPV6TO4INIT});
+                        if ($ipv6_tunnel) {
+                            $net->{network}{NETWORKING_IPV6} = "yes";
+                            $net->{network}{IPV6_DEFAULTDEV} = "tun6to4";
+                        }
+                        $ethntf->{IPV6INIT} = bool2yesno($ipv6_tunnel);
+                        $ethntf->{IPV6TO4INIT} = bool2yesno($ipv6_tunnel);
                         if ($auto_ip) {
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
                             $delete_gateway_settings->($ntf_name);

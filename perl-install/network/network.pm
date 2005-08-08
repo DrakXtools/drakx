@@ -30,11 +30,12 @@ my $tmdns_file = "/etc/tmdns.conf";
 #-   network (/etc/sysconfig/network) : NETWORKING FORWARD_IPV4 NETWORKING_IPV6 HOSTNAME GATEWAY GATEWAYDEV NISDOMAIN
 #-     NETWORKING : networking flag : string : "yes" by default
 #-     FORWARD_IPV4 : forward IP flag : string : "false" by default
-#-     NETWORKING_IPV6 : use IPv6, "yes" or "no"
 #-     HOSTNAME : hostname : string : "localhost.localdomain" by default
 #-     GATEWAY : gateway
 #-     GATEWAYDEV : gateway interface
 #-     NISDOMAIN : nis domain
+#-     NETWORKING_IPV6 : use IPv6, "yes" or "no"
+#-     IPV6_DEFAULTDEV
 #-   resolv (/etc/resolv.conf): dnsServer, dnsServer2, dnsServer3, DOMAINNAME, DOMAINNAME2, DOMAINNAME3
 #-     dnsServer : dns server 1
 #-     dnsServer2 : dns server 2
@@ -53,6 +54,8 @@ my $tmdns_file = "/etc/tmdns.conf";
 #-       NETMASK : netmask
 #-       DEVICE : device name
 #-       BOOTPROTO : boot prototype : "bootp" or "dhcp" or "pump" or ...
+#-       IPV6INIT
+#-       IPV6TO4INIT
 
 sub read_conf {
     my ($file) = @_;
@@ -97,7 +100,7 @@ sub write_network_conf {
     }
     $net->{network}{NETWORKING} = 'yes';
 
-    setVarsInSh($::prefix . $network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6));
+    setVarsInSh($::prefix . $network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6 IPV6_DEFAULTDEV));
     $net->{network}{HOSTNAME} && !$::isInstall and sethostname($net);
 }
 
@@ -195,6 +198,7 @@ sub write_interface_conf {
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS VLAN MTU),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
                 qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
+                qw(IPV6INIT IPV6TO4INIT),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
