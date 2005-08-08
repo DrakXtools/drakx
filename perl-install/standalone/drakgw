@@ -213,10 +213,7 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 		  $dhcpd_conf->{domain_name_servers}[0] eq $lan_intf->{IPADDR} or return 0;
 		  !$use_caching_dns || $::testing and return 0;
 		  #- install a caching name server if the specified DNS is the gateway
-		  unless ($in->do_pkgs->ensure_is_installed('caching-nameserver', '/var/named/named.local')) {
-		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'caching-nameserver'));
-		      return 1;
-		  }
+		  $in->do_pkgs->ensure_is_installed('caching-nameserver', '/var/named/named.local') or return 1;
 		  0;
 	      },
 	      post => sub {
@@ -254,10 +251,7 @@ If you do not know the meaning of an option, simply leave it as it is."),
 	      },
 	      complete => sub {
 		  !$use_dhcpd || $::testing and return 0;
-		  unless ($in->do_pkgs->ensure_is_installed('dhcp-server', '/usr/sbin/dhcpd')) {
-		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'dhcp-server'));
-		      return 1;
-		  }
+		  $in->do_pkgs->ensure_is_installed('dhcp-server', '/usr/sbin/dhcpd') or return 1;
 		  0;
 	      },
 	      post => sub {
@@ -288,10 +282,7 @@ If you do not know the meaning of an option, simply leave it as it is."),
 	      },
  	      complete => sub {
 		  !$use_caching_proxy || $::testing and return 0;
-		  unless ($in->do_pkgs->ensure_is_installed('squid', '/usr/sbin/squid')) {
-		      $in->ask_warn(N("Error"), N("Could not install the %s package!", 'squid'));
-		      return 1;
-		  }
+		  $in->do_pkgs->ensure_is_installed('squid', '/usr/sbin/squid') or return 1;
 		  0;
 	      },
 	      post => sub {
@@ -390,10 +381,7 @@ sub gw_configure() {
 		      N("Warning! An existing firewalling configuration has been detected. You may need some manual fixes after installation."));
     }
 
-    unless ($in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall')) {
-	$in->ask_warn(N("Error"), N("Could not install the %s package!", 'shorewall'));
-	$in->exit(-1);
-    }
+    $in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall') or $in->exit(-1);
 
     my $_wait_configuring = $in->wait_message(N("Configuring..."),
                                               N("Configuring firewall..."));

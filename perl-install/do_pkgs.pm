@@ -15,7 +15,10 @@ sub ensure_is_installed {
     if (! $o_file || ! -e "$::prefix$o_file") {
 	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto;
-	$do->install($pkg) or return;
+	if (!$do->install($pkg)) {
+	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
+	    return;
+	}
     }
     if ($o_file && ! -e "$::prefix$o_file") {
 	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));
@@ -30,7 +33,10 @@ sub ensure_binary_is_installed {
     if (!whereis_binary($binary, $::prefix)) {
 	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto;
-	$do->install($pkg) or return;
+	if (!$do->install($pkg)) {
+	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
+	    return;
+	}
     }
     if (!whereis_binary($binary, $::prefix)) {
 	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));

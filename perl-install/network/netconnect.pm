@@ -810,10 +810,7 @@ If you do not know, choose 'use PPPoE'"),
                     complete => sub {
                         if ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
                             require network::ndiswrapper;
-                            unless ($in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper')) {
-                                $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
-                                return 1;
-                            }
+                            $in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper') or return 1;
                             undef $ndiswrapper_driver;
                             undef $ndiswrapper_device;
                             unless (network::ndiswrapper::installed_drivers()) {
@@ -1069,14 +1066,12 @@ See iwpriv(8) man page for further information."),
                             $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
                             return 1, 8;
                         }
-                        if (network::wireless::wlan_ng_needed($module) && !$in->do_pkgs->ensure_is_installed('prism2-utils', '/sbin/wlanctl-ng')) {
-                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'prism2-utils'));
-                            return 1;
+                        if (network::wireless::wlan_ng_needed($module)) {
+			    $in->do_pkgs->ensure_is_installed('prism2-utils', '/sbin/wlanctl-ng') or return 1;
                         }
                         $need_wpa_supplicant = ($wireless_roaming || $wireless_enc_mode eq 'wpa-psk') && !$need_rt2x00_iwpriv;
-                        if ($need_wpa_supplicant && !$in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant')) {
-                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'wpa_supplicant'));
-                            return 1;
+                        if ($need_wpa_supplicant) {
+			     $in->do_pkgs->ensure_is_installed('wpa_supplicant', '/usr/sbin/wpa_supplicant') or return 1;
                         }
 			!network::thirdparty::setup_device($in, 'wireless', $module);
                     },
