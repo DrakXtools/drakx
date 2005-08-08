@@ -1,3 +1,136 @@
+2005/08/08  Pixel  <pixel at mandriva.com>
+
+	* share/list.xml: add mandriva macros for rpm so that _hkp_keyserver_query
+	is nil
+	help debugging
+
+	* install_steps.pm: acpi=on on every recent bios, not only laptops
+
+	* mygtk2.pm: really make the wizard banner icon a warning instead of an
+	error
+	more explicit error
+
+	* share/rpmsrate: cleanup "alternative IMs" already listed with flag 5
+	(and anyway, warly says this listing of "alternative IMs" is not the
+	right way to achieve having them on CDs)
+
+	* install_any.pm: cleanup
+
+	* fsedit.pm: have the ability to prefer primary partitions in
+	auto_installs
+
+	* network/netconnect.pm, do_pkgs.pm, standalone/drakgw: it's better to
+	warn package installation failure in ensure_is_installed than each
+	callers (bugzilla #17251)
+
+2005/08/07  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/08/06  mbukovjan
+
+	* share/po/cs.po: Updated Czech translations.
+
+2005/08/06  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakboot: translate "Graphical boot mode:" (#17333)
+
+2005/08/05  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: handle access point roaming using wpa_supplicant
+
+	* keyboard.pm, any.pm, install_steps_gtk.pm, mouse.pm,
+	diskdrake/interactive.pm, Xconfig/monitor.pm, pkgs.pm,
+	harddrake/sound.pm, detect_devices.pm, Xconfig/resolution_and_depth.pm,
+	bootloader.pm, Xconfig/xfree.pm, install_any.pm, partition_table/raw.pm:
+	move is_xbox from common to detect_devices
+
+	* network/wireless.pm: handle prefix
+	overwrite previous wpa_supplicant entries with same ssid or bssid
+	better handling for hex keys in wpa_supplicant
+
+2005/08/05  Pixel  <pixel at mandriva.com>
+
+	* share/keyboards.tar.bz2: keycode 211 is the abnt2 specific key, adding
+	it (bugzilla #16942)
+
+2005/08/05  Till Kamppeter  <till at mandriva.com>
+
+	* scanner.pm: 
+	  - Bug fixes in scanner::detect() function
+	o Fixed 'grep' filter to filter out non-scanner devices by the
+	    "driver" field (in the very end of the function)
+	  o Fixed franglish in a warning message
+	  - Suppressed console message of "ls" in the
+	  scanner::resolve_symlinks() function.
+
+2005/08/05  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/data.pm: do not detect PCI/USB modems twice (as modems and as
+	unknown devices)
+
+	* lang.pm (configure_kdeglobals) fix kde config when switching between ar
+	&& uz
+
+	* drakxtools.spec: 10.3-0.41mdk
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+	* share/po/fr.po: fix translation
+	update (Berthy)
+
+2005/08/04  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: allow to use WEP keys in wpa_supplicant
+	use ifplugd for wireless interfaces
+	make is_ifplugd_blacklisted return a boolean
+	s/hotplug/ifplugd/
+	use ifup/ifdown with the boot option to handle ifplugd
+
+	* network/wireless.pm: allow to use WEP keys in wpa_supplicant
+	perl_checker fixes
+
+	* standalone/draksplash: make sure hex colors are 6 chars long
+	directly use # as color prefix
+	don't warn if automatic image loading fails
+	update progress bar adjustments from preview
+	fix progress bar color
+	fix typo (really handle progress bar color)
+	make sure jpegtopnm is available (thanks to Anne Nicolas)
+	simplify
+
+	* bootsplash.pm: load progress bar color from config file
+	directly use # as color prefix
+	read progress bar settings
+	really write progress bar color in configuration files
+
+	* network/tools.pm: use ifup/ifdown with the boot option to handle ifplugd
+
+2005/08/04  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/pl.po, share/po/pt_BR.po: updated Polish and Brazilian files
+
+2005/08/04  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Added special handling for the "capt" driver (Canon LBP-810/1120
+	winprinters).
+
+2005/08/04  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/data.pm: fix keyboardrake path (thus enabling to run a config
+	tool for keyboards)
+
+	* harddrake/v4l.pm (config) do not set radio but for bttv driver
+	(config) do not set radio but for bttv driver
+	(config) do not set radio but for bttv driver
+	(config) do not set radio but for bttv driver
+
+	* standalone/harddrake2: do not offer to configure driver of keyboards and
+	mice (#17254)
+
+	* detect_devices.pm (getUPS) blacklist all keyboards
+
 2005/08/03  Olivier Blin <oblin at mandriva.com>
 
 	* standalone/drakconnect: apply gateway modifications (#17260)
