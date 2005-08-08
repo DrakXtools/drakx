@@ -1432,17 +1432,23 @@ sub update_for_renumbered_partitions {
 	} %$grub2dev;
     }
 
+    #- NB: we make the changes with an added string inside so that hda5 is only renamed once to hda6
+
     foreach (@$renumbering) {
 	my ($old, $new) = @$_;
 	log::l("renaming $old -> $new");
-	$_->{new} =~ s/\b$old/$new/g foreach @configs;
+	(my $lnew = $new) =~ s/(\d+)$/__DRAKX_DONE__$1/;
+	$_->{new} =~ s/\b$old/$lnew/g foreach @configs;
 
 	any { $_->{name} eq 'grub' } @configs or next;
 
 	my ($old_grub, $new_grub) = map { device_string2grub($_, [], \@sorted_hds) } $old, $new;
 	log::l("renaming $old_grub -> $new_grub");
-	$_->{new} =~ s/\Q$old_grub/$new_grub/g foreach @configs;
+	(my $lnew_grub = $new_grub) =~ s/\)$/__DRAKX_DONE__)/;
+	$_->{new} =~ s/\Q$old_grub/$lnew_grub/g foreach @configs;
     }
+
+    $_->{new} =~ s/__DRAKX_DONE__//g foreach @configs;
 
     my @changed_configs = grep { $_->{orig} ne $_->{new} } @configs or return 1; # no need to update
 
