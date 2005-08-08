@@ -145,8 +145,9 @@ sub import_tree {
 
     my $add_server = sub {
 	my ($server) = @_;
+	my $identifier = $server->{ip} || $server->{name};
 	my $name = $server->{name} || $server->{ip};
-	$servers_displayed{$name} ||= do {
+	$servers_displayed{$identifier} ||= do {
 	    my $w = $tree_model->append_set(undef, [ 0 => $icons{server}, 1 => $name ]);
 	    $wservers{$tree_model->get_path_str($w)} = $server;
 	    $w;
