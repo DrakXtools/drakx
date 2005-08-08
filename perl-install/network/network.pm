@@ -56,6 +56,9 @@ my $tmdns_file = "/etc/tmdns.conf";
 #-       BOOTPROTO : boot prototype : "bootp" or "dhcp" or "pump" or ...
 #-       IPV6INIT
 #-       IPV6TO4INIT
+#-       MS_DNS1
+#-       MS_DNS2
+#-       DOMAIN
 
 sub read_conf {
     my ($file) = @_;
@@ -195,7 +198,7 @@ sub write_interface_conf {
     defined($intf->{METRIC}) or $intf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($intf)),
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS VLAN MTU),
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS VLAN MTU MS_DNS1 MS_DNS2 DOMAIN),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
                 qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
                 qw(IPV6INIT IPV6TO4INIT),
