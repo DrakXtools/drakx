@@ -127,6 +127,7 @@ sub make {
     if (my $raw_part = get_md_info($dev)) {
 	$part->{UUID} = $raw_part->{UUID};
     }
+    write_conf($raids) if $::isStandalone;
 }
 
 sub format_part {
@@ -227,7 +228,7 @@ sub is_active {
     member($dev, active_mds());
 }
 
-sub prepare_prefixed {
+sub write_conf {
     my ($raids) = @_;
 
     @$raids or return;

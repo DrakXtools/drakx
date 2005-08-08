@@ -207,7 +207,7 @@ sub formatPartitions {
     }
 
     require raid;
-    raid::prepare_prefixed($o->{all_hds}{raids});
+    raid::write_conf($o->{all_hds}{raids});
 
     #- needed by lilo
     if (-d '/dev/mapper') {
