@@ -476,7 +476,11 @@ sub _gtk__MagicWindow {
 
 	    my $banner;
 	    if (!$::isEmbedded && !$::isInstall && $::Wizard_title) {
-		$banner = Gtk2::Banner->new($opts->{icon_no_error}, $::Wizard_title) or log::l("ERROR: missing wizard banner");
+		if (_find_imgfile($opts->{icon_no_error})) {
+		    $banner = Gtk2::Banner->new($opts->{icon_no_error}, $::Wizard_title);
+		} else { 
+		    log::l("ERROR: missing wizard banner $opts->{icon_no_error}");
+		}
 	    }
 	    $::WizardTable = gtknew('VBox', if_($banner, children_tight => [ $banner ]));
 
