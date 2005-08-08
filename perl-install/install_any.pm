@@ -434,7 +434,7 @@ sub prep_net_suppl_media {
     $net_suppl_media_configured = 1;
     my ($o) = @_;
     #- install basesystem now
-    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
+    $o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
     #- from install_steps_interactive:
     local $::expert = $::expert;
     require network::netconnect;
