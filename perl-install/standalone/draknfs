@@ -153,16 +153,16 @@ $help_access = N("<span weight=\"bold\">NFS clients</span> may be specified in a
 my $help_userid = N("<span weight=\"bold\">User ID options</span>
 
 
-<span foreground=\"royalblue3\">root_squash:</span> map requests from uid/gid 0 to the anonymous uid/gid.
+<span foreground=\"royalblue3\">map root user as anonymou:</span> map requests from uid/gid 0 to the anonymous uid/gid (root_squash).
 
 
-<span foreground=\"royalblue3\">no_root_squash:</span> turn off root squashing. This option is mainly useful for diskless clients.
+<span foreground=\"royalblue3\">allow real remote root access:</span> turn off root squashing. This option is mainly useful for diskless clients (no_root_squash).
 
 
-<span foreground=\"royalblue3\">all_squash:</span> map all uids and gids to the anonymous  user. Useful  for  NFS-exported public FTP directories, news spool directories, etc. The opposite option is no_all_squash, which is the default  setting.
+<span foreground=\"royalblue3\">map all users to anonymous user:</span> map all uids and gids to the anonymous  user (all_squash). Useful for NFS-exported public FTP directories, news spool directories, etc. The opposite option is no user UID mapping (no_all_squash), which is the default setting.
 
 
-<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set the uid and gid of the anonymous account.
+<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly set the uid and gid of the anonymous account.
 ");
 
 my %adv_options = (
