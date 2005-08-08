@@ -113,7 +113,8 @@ sub get_eth_card_mac_address {
 
 #- write interfaces MAC address in iftab
 sub update_iftab() {
-    foreach my $intf (detect_devices::getNet()) {
+    #- skip aliases interfaces
+    foreach my $intf (grep { !/:\d+$/ } detect_devices::getNet()) {
         my ($link_type, $mac_address) = get_eth_card_mac_address($intf) or next;
         #- do not write zeroed MAC addresses in iftab, it confuses ifrename
         $mac_address =~ /^[0:]+$/ and next;
