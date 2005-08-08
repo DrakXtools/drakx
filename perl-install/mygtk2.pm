@@ -243,7 +243,7 @@ sub _gtk__Pixbuf {
 
     if (!$w) {
 	my $name = delete $opts->{file} or internal_error("missing file");
-	my $file = _find_imgfile($name) or internal_error("can not find $name");
+	my $file = _find_imgfile($name) or internal_error("can not find image $name");
 	$w = Gtk2::Gdk::Pixbuf->new_from_file($file);
     }
     $w;
@@ -258,11 +258,11 @@ sub _gtk__Image {
     }
 
     if (my $name = delete $opts->{file}) {
-	my $file = _find_imgfile(may_apply($w->{format}, $name)) or internal_error("can not find $name");
+	my $file = _find_imgfile(may_apply($w->{format}, $name)) or internal_error("can not find image $name");
 	$w->set_from_file($file);
     } elsif (my $file_ref = delete $opts->{file_ref}) {
 	my $set = sub {
-	    my $file = _find_imgfile(may_apply($w->{format}, $$file_ref)) or internal_error("can not find $$file_ref");
+	    my $file = _find_imgfile(may_apply($w->{format}, $$file_ref)) or internal_error("can not find image $$file_ref");
 	    $w->set_from_file($file);
 	};
 	gtkval_register($w, $file_ref, $set);
