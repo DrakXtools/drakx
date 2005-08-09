@@ -682,10 +682,13 @@ my %IM2packages = (
 sub IM2packages {
     my ($locale) = @_;
     my $im = $locale->{IM};
-    return if $im eq "None";
-    my $lang = analyse_locale_name($locale->{lang})->{main};
-    my $packages = $IM2packages{$im}{$lang} || $IM2packages{$im}{generic};
-    return $packages ? @$packages : $im;
+    if ($im eq "None") {
+	();
+    } else {
+	my $lang = analyse_locale_name($locale->{lang})->{main};
+	my $l = $IM2packages{$im}{$lang} || $IM2packages{$im}{generic} || [ $im ];
+	@$l;
+    }
 }
 
 # enable to select extra SCIM combinaisons:
