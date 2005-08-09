@@ -495,36 +495,23 @@ sub getLANGUAGE {
 #
 # in order to configure an IM, one has to:
 # - put generic configuration in %IM_config
-# - put locale specific configuration in %IM_XIM_program
 
-
-# This set XIM_PROGRAM field for IM that needs a different value
-# depending on locale:
-my %IM_XIM_program =
-  (
-   chinput => {
-               'zh_CN' => 'chinput -gb',
-               'zh_CN.UTF-8' => 'chinput -gb',
-               'zh_HK' => 'chinput -big5',
-               'zh_HK.UTF-8' => 'chinput -big5',
-               'en_SG' => 'chinput -gb',
-               'en_SG.UTF-8' => 'chinput -gb',
-               'zh_TW' => 'chinput -big5',
-               'zh_TW.UTF-8' => 'chinput -big5',
-              },
-  );
 
 # This set generic IM fields.
-#
-#- XMODIFIERS is the environnement variable used by the X11 XIM protocol
+my @IM_i18n_fields = (
+ 'XMODIFIERS', 
+#-      is the environnement variable used by the X11 XIM protocol
 #-	it is of the form XIMODIFIERS="@im=foo"
-#- XIM is used by some programs, it usually is the like XIMODIFIERS
+ 'XIM', 
+#-      is used by some programs, it usually is the like XIMODIFIERS
 #-	with the "@im=" part stripped
-#- GTK_IM_MODULE the module to use for Gtk programs ("xim" to use an X11
+ 'GTK_IM_MODULE', 
+#-      the module to use for Gtk programs ("xim" to use an X11
 #-	XIM server; or a a native gtk module if exists)
-#- XIM_PROGRAM the program to run (usually the same as XIM value, but
+ 'XIM_PROGRAM',
+#-      the program to run (usually the same as XIM value, but
 #-	in some cases different, particularly if parameters are needed;
-#-	If it is locale dependent it should be defined in %IM_XIM_program)
+);
 my %IM_config =
   (
    ami => {
@@ -539,10 +526,14 @@ my %IM_config =
    chinput => {
                GTK_IM_MODULE => 'xim',
                XIM => 'chinput',
-               # bogus entry overwriten by %IM_XIM_program, just for read()
-               XIM_PROGRAM => 'chinput',
                XMODIFIERS => '@im=Chinput',
-               },
+	       XIM_PROGRAM => {
+		   'zh_CN' => 'chinput -gb',
+		   'en_SG' => 'chinput -gb',
+		   'zh_HK' => 'chinput -big5',
+		   'zh_TW' => 'chinput -big5',
+	       },	       
+	      },
    fcitx => {
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
@@ -985,9 +976,14 @@ sub read {
     my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2);
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
-    if ($h{XIM_PROGRAM}) {
-	$locale->{IM} = find { $IM_config{$_}{XIM_PROGRAM} eq $h{XIM_PROGRAM} } keys %IM_config;
-	$locale->{IM} ||= find { member($h{XIM_PROGRAM}, values %{$IM_XIM_program{$_}}) } keys %IM_XIM_program;
+    if (find { $h{$_} } @IM_i18n_fields) {
+	my @l = keys %IM_config;
+	foreach my $field ('XMODIFIERS', 'XIM_PROGRAM') {
+	    $h{$field} or next;
+	    my @m = grep { $h{$field} eq $IM_config{$_}{$field} } @l or last;
+	    @l = @m;
+	}
+	$locale->{IM} = $l[0] if @l;
     }
     $locale;
 }
@@ -1065,11 +1061,17 @@ sub write {
     my $im = $locale->{IM};
     if ($im) {
         log::explanations(qq(Configuring "$im" IM));
-        delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
-        add2hash($h, { XIM_PROGRAM => $IM_XIM_program{$im}{$h->{LC_NAME}} });
+	foreach (@IM_i18n_fields) {
+	    $h->{$_} = $IM_config{$im}{$_};
+	}
+        $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
 
-        add2hash($h, $IM_config{$locale->{IM}});
-        $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
+	if (ref $h->{XIM_PROGRAM}) {
+	    $h->{XIM_PROGRAM} = 
+	      $h->{XIM_PROGRAM}{$locale->{lang}} ||
+		$h->{XIM_PROGRAM}{getlocale_for_country($locale->{lang}, $locale->{country})};
+	}
+
         my @packages = IM2packages($locale);
         if (@packages && $b_user_only) {
             require interactive;
