@@ -558,7 +558,7 @@ sub ask_fromW {
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 		$e->{formatted_list} = \@formatted_list;
-		my $sep = "\\" . $e->{separator};
+		my $sep = quotemeta $e->{separator};
           my @flat_formatted_list = $e->{separator} ? map { top(split($sep, $_)) } @formatted_list : @formatted_list;
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
