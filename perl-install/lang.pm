@@ -583,7 +583,17 @@ my %IM_config =
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
+	    default_for_lang => 'am ja ko zh_CN zh_TW',
            },
+
+   (map {
+       ("scim+$_" => {
+            GTK_IM_MODULE => 'scim',
+            XIM_PROGRAM => 'scim -d',
+            XMODIFIERS => '@im=SCIM',
+       });
+   } qw(anthy canna ccinput fcitx m17n prime skk uim)),
+
    skim => {
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
@@ -603,7 +613,8 @@ my %IM_config =
            },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
-                  XMODIFIERS => '@im=unikey'
+                  XMODIFIERS => '@im=unikey',
+		  default_for_lang => 'vi',
                  },
 );
 
@@ -636,23 +647,13 @@ my %IM_locale_specific_config = (
                       },
           );
 
-my %default_im;
 
 sub get_default_im {
     my ($lang) = @_;
-    $default_im{$lang}{IM};
+    find { 
+	member($lang, split(' ', $IM_config{$_}{default_for_lang}));
+    } keys %IM_config;
 }
-
-sub set_default_im {
-    my ($im, @langs) = @_;
-    foreach (@langs) {
-        $default_im{$_}{IM} = $im;
-    }
-}
-
-set_default_im('x-unikey',  qw(vi));
-# CJK default input methods:
-set_default_im('scim+(default)', qw(am ja ko zh_CN zh_TW));
 
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
@@ -685,10 +686,9 @@ sub IM2packages {
     } else { () }
 }
 
-# enable to select extra SCIM combinaisons:
+# enable to select extra SCIM combinations:
 my @SCIM_aliasees = qw(anthy canna ccinput fcitx m17n prime skk uim);
 $IM2packages{"scim+$_"} = { generic => [ "scim-$_" ] } foreach @SCIM_aliasees;
-$IM_config{"scim+$_"} = $IM_config{'scim+(default)'} foreach @SCIM_aliasees; 
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
