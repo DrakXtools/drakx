@@ -1,3 +1,79 @@
+2005/08/09  Frederic Lepied  <flepied at mandriva.com>
+
+	* share/rpmsrate: tuxracer => ppracer
+
+2005/08/09  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* c/smp-dmi.c: map more closely to dmidecode behaviour's, aka
+	mmap(/dev/mem) and find/read
+	the raw DMI table in a whole.
+
+2005/08/09  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/pt_BR.po: updated Brazilian po file
+
+2005/08/09  Pixel  <pixel at mandriva.com>
+
+	* lang.pm: we can't differentiate all the scim+xxx IMs, so we ensure we
+	prefer "scim+(default)"
+	create lang::write_and_install() which takes a $do_pkgs
+	simplify
+	  - it's better to use $locale->{lang} whenever possible
+	  - less generic name for %locale2encoding
+	move %IM2packages into %IM_config
+	  - get rid of %IM_XIM_program, replacing it with a more powerful
+	XIM_PROGRAM field
+	  - in read(), use more fields to recognise the IM
+	  - move extra scim combinations in %IM_config
+	  - drop set_default_im(), moving data directly in %IM_config
+	simplify (we access get_default_im with short lang name)
+	remove wrong unused line
+	simplify (not useful since values and main key are equal)
+	  - simplify IM choice using {format} to its full power
+	  - {IM} is '' instead of either '' or 'None'
+	cleanup IM2packages()
+
+	* install_steps.pm: create lang::write_and_install() which takes a
+	$do_pkgs
+	fix typo
+
+	* docs/README: fix
+	replace mandrake with mandriva
+
+	* any.pm: image2f has slightly changed
+	  - simplify IM choice using {format} to its full power
+	  - {IM} is '' instead of either '' or 'None'
+
+	* standalone/finish-install, standalone/localedrake,
+	install_steps_interactive.pm: create lang::write_and_install() which
+	takes a $do_pkgs
+
+	* share/rpmsrate: there's no kernel-enterprise anymore
+
+	* interactive.pm: image2f has slightly changed
+
+	* interactive/gtk.pm: really make ComboBox with tree inside work
+	modify ComboBox with a tree inside to follow previous
+	__create_tree_model() change
+	fix indentation
+	better that way
+	revamp code
+	simplify
+	no need to explicitly show
+	don't apply {format} twice
+
+2005/08/09  rstandtke
+
+	* share/po/de.po: some fixes
+
+2005/08/09  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.42mdk
+
+	* share/po/ga.po: update
+
+	* lang.pm: readd lost comments
+
 2005/08/08  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draknfs: fix bug #17255 (modify empty /etc/exports file)
