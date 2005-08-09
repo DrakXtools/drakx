@@ -154,70 +154,59 @@ sub __create_tree_model {
     my ($e) = @_;
 
     my $sep = quotemeta $e->{separator};
-    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
+    my $tree_model = Gtk2::TreeStore->new("Glib::String", if_($e->{image2f}, "Gtk2::Gdk::Pixbuf"));
 
-    my ($build_value, $clean_image);
-    if (exists $e->{image2f}) {
-	my $to_unref;
-	$build_value = sub {
-	    my ($text, $image) = $e->{image2f}->($_[0]);
-	    [ $text  ? (0 => $text) : @{[]},
-	      $image ? (1 => $to_unref = gtkcreate_pixbuf($image)) : @{[]} ];
-	};
-	$clean_image = sub { undef $to_unref };
-    } else {
-	$build_value = sub { [ 0 => $_[0] ] };
-	$clean_image = sub {};
-    }
+    my $build_value = sub {
+	my ($v) = @_;
+	my $type = 0;
+	if ($e->{image2f}) {
+	    my $image = $e->{image2f}->($_[0]);
+	    ($type, $v) = (1, gtkcreate_pixbuf($image)) if $image; 
+	}
+	[ $type => $v ];
+    };
 
-    my (%wtree, %wleaves, $size, $index);
-    my $parent; $parent = sub {
+    my (%wtree, $parent);
+    $parent = sub {
 	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
 	my $s = '';
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
 	      $tree_model->append_set($s ? $parent->($s) : undef, $build_value->($_));
-         $tree_model->{indexes}{$_} = $index++;
-	    $clean_image->();
-	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
 	$wtree{$s};
     };
 
-    #- do some precomputing to not slowdown selection change and key press
-    my (%precomp, @ordered_keys);
-    mapn {
-	my ($root, $leaf) = $_[0] =~ /(.*)$sep(.+)/ ? ($1, $2) : ('', $_[0]);
+    $tree_model->{path_str_list} = [ map {
+	my ($root, $leaf) = /(.*)$sep(.+)/ ? ($1, $2) : ('', $_);
 	my $iter = $tree_model->append_set($parent->($root), $build_value->($leaf));
-     $tree_model->{indexes}{$leaf} = $index++;
 
-	$clean_image->();
-	my $pathstr = $tree_model->get_path_str($iter);
-	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
-	push @ordered_keys, $pathstr;
-	$wleaves{$_[0]} = $pathstr;
-    } $e->{formatted_list}, $e->{list};
+	$tree_model->get_path_str($iter);
+    } @{$e->{formatted_list}} ];
+
     undef $_ foreach values %wtree;
     undef %wtree;
-    $tree_model, \@ordered_keys, \%precomp, \%wleaves;
+
+    $tree_model;
 }
 
 sub create_treeview_tree {
     my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
 
-    $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
-
-    my $sep = quotemeta $e->{separator};
-    my ($tree_model, $ordered_keys, $precomp, $wleaves) = __create_tree_model($e);
-    my @ordered_keys = @$ordered_keys;
-    my %precomp = %$precomp;
-    my %wleaves = %$wleaves;
+    my $tree_model = __create_tree_model($e);
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
-    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
+    {
+	my $col = Gtk2::TreeViewColumn->new;
+	$col->pack_start(my $texrender = Gtk2::CellRendererText->new, 0);
+	$col->add_attribute($texrender, text => 0);
+	if ($e->{image2f}) {
+	    $col->pack_start(my $pixrender = Gtk2::CellRendererPixbuf->new, 0);
+	    $col->add_attribute($pixrender, pixbuf => 1);
+	}
+	$tree->append_column($col);
+    }
     $tree->set_headers_visible(0);
 
     my $select = sub {
@@ -240,7 +229,9 @@ sub create_treeview_tree {
 	undef $curr if ref $curr;
 	my $path = $tree_model->get_path($curr = $iter);
 	if (!$tree_model->iter_has_child($iter)) {
-	    ${$e->{val}} = $precomp{$path->to_string}{listvalue};
+	    my $path_str = $path->to_string;
+	    my $i = find_index { $path_str eq $_ } @{$tree_model->{path_str_list}};
+	    ${$e->{val}} = $e->{list}[$i];
 	    &$changed;
 	} else {
 	    $tree->expand_row($path, 0) if $selected_via_click;
@@ -283,18 +274,21 @@ sub create_treeview_tree {
 	    my $word = quotemeta $starting_word;
 	    my ($after, $best);
 
+	    my $sep = quotemeta $e->{separator};
 	    my $currpath = $tree_model->get_path_str($curr);
-	    foreach my $v (@ordered_keys) { 
+	    mapn {
+		my ($path_str, $v) = @_;
 		$next &&= !$after;
-		$after ||= $v eq $currpath;
-		if ($precomp{$v}{value} =~ /$start_reg$word/i) {
+		$after ||= $path_str eq $currpath;
+		$v =~ s/.*$sep//;
+		if ($v =~ /$start_reg$word/i) {
 		    if ($after && !$next) {
-			($best, $after) = ($v, 0);
+			($best, $after) = ($path_str, 0);
 		    } else {
-			$best ||= $v;
+			$best ||= $path_str;
 		    }
 		}
-	    }
+	    } $tree_model->{path_str_list}, $e->{formatted_list};
 
 	    if (defined $best) {
 		$select->($best);
@@ -313,8 +307,14 @@ sub create_treeview_tree {
 
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
+	my $i = find_index { $v eq $_ } @{$e->{formatted_list}};
+
 	my ($model, $iter) = $tree->get_selection->get_selected;
-	$select->($wleaves{$v} || return) if !$model || $wleaves{$v} ne $model->get_path_str($iter);
+
+	my $new_path_str = $tree_model->{path_str_list}[$i];
+	my $old_path_str = $model && $tree_model->get_path_str($iter);
+	
+	$select->($new_path_str) if $new_path_str ne $old_path_str;
 	undef $iter if ref $iter;
     };
 }
@@ -576,7 +576,7 @@ sub ask_fromW {
               $w->set_popdown_strings(@formatted_list);
               $w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 		} else {
-              ($model) = __create_tree_model($e);
+              $model = __create_tree_model($e);
               $w = Gtk2::ComboBox->new_with_model($model);
               $w->pack_start(my $renderer = Gtk2::CellRendererText->new, 0);
               $w->set_attributes($renderer, "text", 0);
