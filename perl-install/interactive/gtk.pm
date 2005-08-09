@@ -558,8 +558,6 @@ sub ask_fromW {
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 		$e->{formatted_list} = \@formatted_list;
-		my $sep = quotemeta $e->{separator};
-		my @flat_formatted_list = $e->{separator} ? map { top(split($sep, $_)) } @formatted_list : @formatted_list;
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		my $width = $l[@l / 16]; # take the third octile (think quartile)
@@ -597,18 +595,24 @@ sub ask_fromW {
 		$set = sub {
 		    my $s = may_apply($e->{format}, $_[0]);
 		    if ($model) {
-			$model->set($w->get_active_iter, 0 => $s);
-			#$w->set_active($model->{indexes}{$s});
+			eval {
+			    my $i = find_index { $s eq $_ } @{$e->{formatted_list}};
+			    my $path_str = $model->{path_str_list}[$i];
+			    $w->set_active_iter($model->get_iter_from_string($path_str));
+			};
 		    } else {
 			$w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
 		    }
 		};
-		$get = sub { 
-		    my $s = $model ? $model->get($w->get_active_iter, 0) : $w->get_text;
-		    my $i = eval { find_index { $s eq $_ } @flat_formatted_list };
-		    $s = $e->{list}[$i] if defined $i;
-		    $s = top(split($sep, $s)) if $e->{separator};
-		    $s;
+		$get = sub {
+		    my $i = $model ? do {
+			my $s = $model->get_string_from_iter($w->get_active_iter);
+			eval { find_index { $s eq $_ } @{$model->{path_str_list}} };
+		    } : do {
+			my $s = $w->get_text;
+			eval { find_index { $s eq $_ } @formatted_list };
+		    };
+		    defined $i ? $e->{list}[$i] : $w->get_text;
 		};
 	    } else {
                 $w = Gtk2::Entry->new;
