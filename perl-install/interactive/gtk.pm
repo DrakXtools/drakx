@@ -554,40 +554,40 @@ sub ask_fromW {
 	    }
 	} else {
 	    if ($e->{type} eq "combo") {
-             my $model;
+		my $model;
 
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 		$e->{formatted_list} = \@formatted_list;
 		my $sep = quotemeta $e->{separator};
-          my @flat_formatted_list = $e->{separator} ? map { top(split($sep, $_)) } @formatted_list : @formatted_list;
+		my @flat_formatted_list = $e->{separator} ? map { top(split($sep, $_)) } @formatted_list : @formatted_list;
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		my $width = $l[@l / 16]; # take the third octile (think quartile)
 
 		if (!$e->{separator}) {
-              if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
-                  $w = Gtk2::ComboBox->new_text;
-              } else {
-                  $w = Gtk2::Combo->new;
-                  $w->set_use_arrows_always(1);
-                  $w->entry->set_editable(!$e->{not_edit});
-                  $w->disable_activate;
-              }
-              $w->set_popdown_strings(@formatted_list);
-              $w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
+		    if ($e->{not_edit} && $width < 160) { #- ComboBoxes do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
+			$w = Gtk2::ComboBox->new_text;
+		    } else {
+			$w = Gtk2::Combo->new;
+			$w->set_use_arrows_always(1);
+			$w->entry->set_editable(!$e->{not_edit});
+			$w->disable_activate;
+		    }
+		    $w->set_popdown_strings(@formatted_list);
+		    $w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 		} else {
-              $model = __create_tree_model($e);
-              $w = Gtk2::ComboBox->new_with_model($model);
-              $w->pack_start(my $renderer = Gtk2::CellRendererText->new, 0);
-              $w->set_attributes($renderer, "text", 0);
-              $w->pack_start($renderer = Gtk2::CellRendererPixbuf->new, 0);
-              $w->set_attributes($renderer, "pixbuf", 1);
-              $w->pack_start($renderer = Gtk2::CellRendererText->new, 0);
-              $w->set_attributes($renderer, "text", 2);
-              ${$e->{val}} = top(split($sep, ${$e->{val}})) if $e->{separator};
+		    $model = __create_tree_model($e);
+		    $w = Gtk2::ComboBox->new_with_model($model);
+		    $w->pack_start(my $renderer = Gtk2::CellRendererText->new, 0);
+		    $w->set_attributes($renderer, "text", 0);
+		    $w->pack_start($renderer = Gtk2::CellRendererPixbuf->new, 0);
+		    $w->set_attributes($renderer, "pixbuf", 1);
+		    $w->pack_start($renderer = Gtk2::CellRendererText->new, 0);
+		    $w->set_attributes($renderer, "text", 2);
+		    ${$e->{val}} = top(split($sep, ${$e->{val}})) if $e->{separator};
 
-              $w->set_active($model->{indexes}{ ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0] });
-          }
+		    $w->set_active($model->{indexes}{ ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0] });
+		}
 		($real_w, $w) = ($w, $w->entry);
 
 		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
@@ -598,19 +598,19 @@ sub ask_fromW {
 
 		$set = sub {
 		    my $s = may_apply($e->{format}, $_[0]);
-              if ($model) {
-                  $model->set($w->get_active_iter, 0 => $s);
-                  #$w->set_active($model->{indexes}{$s});
-              } else  {
-                  $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
-              }
+		    if ($model) {
+			$model->set($w->get_active_iter, 0 => $s);
+			#$w->set_active($model->{indexes}{$s});
+		    } else {
+			$w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
+		    }
 		};
 		$get = sub { 
 		    my $s = $model ? $model->get($w->get_active_iter, 0) : $w->get_text;
 		    my $i = eval { find_index { $s eq $_ } @flat_formatted_list };
 		    $s = $e->{list}[$i] if defined $i;
-              $s = top(split($sep, $s)) if $e->{separator};
-            $s;
+		    $s = top(split($sep, $s)) if $e->{separator};
+		    $s;
 		};
 	    } else {
                 $w = Gtk2::Entry->new;
