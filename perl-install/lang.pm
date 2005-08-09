@@ -646,13 +646,13 @@ sub get_default_im {
 sub set_default_im {
     my ($im, @langs) = @_;
     foreach (@langs) {
-        $default_im{$_}{IM} = $im foreach $_, analyse_locale_name($_)->{main};
+        $default_im{$_}{IM} = $im;
     }
 }
 
-set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
+set_default_im('x-unikey',  qw(vi));
 # CJK default input methods:
-set_default_im('scim+(default)',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
+set_default_im('scim+(default)', qw(am ja ko zh_CN zh_TW));
 
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
