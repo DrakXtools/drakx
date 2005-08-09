@@ -222,8 +222,8 @@ sub create_treeview_tree {
 
     my $select = sub {
 	my ($path_str) = @_;
-	$tree->expand_to_path(Gtk2::TreePath->new_from_string($path_str));
 	my $path = Gtk2::TreePath->new_from_string($path_str);
+	$tree->expand_to_path($path);
 	$tree->set_cursor($path, undef, 0);
         gtkflush();  #- workaround gtk2 bug not honouring centering on the given row if node was closed
 	$tree->scroll_to_cell($path, undef, 1, 0.5, 0);
