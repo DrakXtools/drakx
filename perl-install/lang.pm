@@ -636,9 +636,9 @@ sub get_ims() { keys %IM_config }
 # Locale configuration regarding encoding/IM
 
 #- ENC is used by some versions or rxvt
-my %locale2encoding = (
-                       'ja_JP' => 'eucj',
-                       'ko_KR' => 'kr',
+my %locale2ENC = (
+                       'ja' => 'eucj',
+                       'ko' => 'kr',
                        'zh_CN' => 'gb',
                        # zh_SG zh_HK were reported as missing by make check:
                        'zh_HK' => 'big5',
@@ -650,7 +650,7 @@ my %IM_locale_specific_config = (
            #-XFree86 has an internal XIM for Thai that enables syntax checking etc.
            #-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
            #-and convert them to right ones, 'Strict' refuses bad sequences
-           'th_TH' => {
+           'th' => {
                        XIM_PROGRAM => '/bin/true', #- it's an internal module
                        XMODIFIERS => '"@im=BasicCheck"',
                       },
@@ -1046,9 +1046,9 @@ sub write {
 	
     }
 
-    add2hash($h, $IM_locale_specific_config{$h->{LANG}});
-    $h->{ENC} = $locale2encoding{$h->{LANG}};
-    $h->{ENC} = 'utf8' if member($h->{LANG}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
+    add2hash($h, $IM_locale_specific_config{$locale->{lang}});
+    $h->{ENC} = $locale2ENC{$locale->{lang}};
+    $h->{ENC} = 'utf8' if $h->{ENC} && $locale->{utf8};
 
     my $im = $locale->{IM};
     if ($im) {
