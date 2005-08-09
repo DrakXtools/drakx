@@ -512,6 +512,8 @@ my @IM_i18n_fields = (
 #-      the program to run (usually the same as XIM value, but
 #-	in some cases different, particularly if parameters are needed;
 );
+
+# keep the 'packages' field in sync with share/rpmsrate:
 my %IM_config =
   (
    ami => {
@@ -600,7 +602,7 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
 	    packages => { generic => "scim-$_" },
        });
-   } qw(anthy canna ccinput fcitx m17n prime skk uim)),
+   } qw(anthy canna ccinput fcitx m17n prime skk uim)), # enable to select extra SCIM combinations
 
    skim => {
             GTK_IM_MODULE => 'scim',
