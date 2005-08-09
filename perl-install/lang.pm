@@ -1007,6 +1007,17 @@ sub i18n_env {
     $h;
 }
 
+sub write_and_install {
+    my ($locale, $do_pkgs, $b_user_only, $b_dont_touch_kde_files) = @_;
+
+    my @packages = IM2packages($locale);
+    if (@packages && !$b_user_only) {
+	log::explanations("Installing IM packages: ", join(', ', @packages));
+	$do_pkgs->install(@packages);
+    }
+    &write($locale, $b_user_only, $b_dont_touch_kde_files);
+}
+
 sub write { 
     my ($locale, $b_user_only, $b_dont_touch_kde_files) = @_;
 
@@ -1062,23 +1073,6 @@ sub write {
 	      $h->{XIM_PROGRAM}{$locale->{lang}} ||
 		$h->{XIM_PROGRAM}{getlocale_for_country($locale->{lang}, $locale->{country})};
 	}
-
-        my @packages = IM2packages($locale);
-        if (@packages && $b_user_only) {
-            require interactive;
-            interactive->vnew->ask_warn(N("Warning"),
-                                       N("You should install the following packages: %s", 
-                                         join(
-                                              #-PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
-                                              N(", "),
-                                              @packages,
-                                             ),
-                                        )
-                                      );
-        } elsif (@packages) {
-            log::explanations("Installing IM packages: ", join(', ', @packages));
-            do_pkgs_standalone->new->install(@packages);
-        }
     }
 
     #- deactivate translations on console for most CJK, RTL and complex languages

@@ -24,7 +24,7 @@ if (defined $klang) {
     my $locale = lang::read($>);
     $klang and $locale->{lang} = $lang;
     $kcountry and $locale->{country} = $country;
-    lang::write($locale, $>, 'dont_touch_kde_files') if $apply;
+    lang::write_and_install($locale, do_pkgs_standalone->new, $>, 'dont_touch_kde_files') if $apply;
 
     #- help KDE defaulting to the right charset
     print lang::charset2kde_charset(lang::l2charset($lang)), "\n";
@@ -38,7 +38,19 @@ $ugtk2::wm_icon = "localedrake";
 $::Wizard_title = N("LocaleDrake");
 
 any::selectLanguage_and_more_standalone($in, $locale);
-lang::write($locale, $>);
+
+if ($> && lang::IM2packages($locale)) {
+    $in->ask_warn(N("Warning"),
+		  N("You should install the following packages: %s", 
+		    join(
+			#-PO: the following is used to combine packages names. eg: "initscripts, harddrake, yudit"
+			N(", "),
+			lang::IM2packages($locale)
+		    ),
+		)
+	      );
+}
+lang::write_and_install($locale, $in->do_pkgs, $>);
 
 my $msg = N("The change is done, but to be effective you must logout");
 if (my $wm = $> && any::running_window_manager()) {

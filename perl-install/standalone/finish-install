@@ -23,7 +23,7 @@ sub ask_language() {
     require lang;
     my $locale = lang::read();
     any::selectLanguage_and_more_standalone($in, $locale);
-    lang::write($locale);
+    lang::write_and_install($locale, $in->do_pkgs);
     lang::set($locale);
     Gtk2->set_locale;
 }

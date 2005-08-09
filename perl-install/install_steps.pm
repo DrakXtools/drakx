@@ -129,7 +129,7 @@ sub selectLanguage {
 	lang::write_langs($o->{locale}{langs});
     } 'formatPartitions';
     addToBeDone {
-	lang::write($o->{locale});
+	lang::write_and_install($o->{locale}, $o->do_pkgs);
     } 'installPackages';
 }
 #------------------------------------------------------------------------------
