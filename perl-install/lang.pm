@@ -512,9 +512,6 @@ my %IM_XIM_program =
                'zh_TW' => 'chinput -big5',
                'zh_TW.UTF-8' => 'chinput -big5',
               },
-   xcin => {
-            'zh_TW' => 'xcin'
-           },
   );
 
 # This set generic IM fields.
