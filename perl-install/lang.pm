@@ -1050,11 +1050,10 @@ sub write {
     $h->{ENC} = $locale2ENC{$locale->{lang}};
     $h->{ENC} = 'utf8' if $h->{ENC} && $locale->{utf8};
 
-    my $im = $locale->{IM};
-    if ($im) {
-        log::explanations(qq(Configuring "$im" IM));
+    if ($locale->{IM}) {
+        log::explanations(qq(Configuring "$locale->{IM}" IM));
 	foreach (@IM_i18n_fields) {
-	    $h->{$_} = $IM_config{$im}{$_};
+	    $h->{$_} = $IM_config{$locale->{IM}}{$_};
 	}
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
 
