@@ -12,6 +12,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/mman.h>
 
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -49,6 +50,34 @@ dump_raw_data(void *data, unsigned int length)
 	}
 }
 
+
+#define DEFAULT_MEM_DEV "/dev/mem"
+
+void *mem_chunk(u32 base, u32 len, const char *devmem)
+{
+    void *p;
+    int fd;
+    off_t mmoffset;
+    void *mmp;
+
+    if ((fd = open(devmem, O_RDONLY)) < 0)
+	return NULL;
+
+    if ((p = malloc(len)) == NULL)
+	return NULL;
+
+    mmoffset = base % getpagesize();
+    mmp = mmap(0, mmoffset + len, PROT_READ, MAP_SHARED, fd, base - mmoffset);
+    if (mmp == MAP_FAILED) {
+	free(p);
+	return NULL;
+    }
+
+    memcpy(p, (u8 *)mmp + mmoffset, len);
+    munmap(mmp, mmoffset + len);
+    close(fd);
+    return p;
+}
 
 
 struct dmi_header
@@ -135,78 +164,65 @@ static char *dmi_processor_family(u8 code)
 
 typedef int (*dmi_decode)(u8 * data);
 
-static int decode_handle(int fd, u32 base, int len, int num, dmi_decode decode)
+static int decode_handle(u32 base, int len, int num, dmi_decode decode)
 {
-	u8 *buf = malloc(len);
-	struct dmi_header *dm;
-	u8 *data;
-	int i = 0;
-	int ret = 0;
-	
-	if (lseek(fd, (long)base, 0) == -1) {
-		perror("dmi: lseek");
-		return;
-	}
-	if (read(fd, buf, len)!=len) {
-		perror("dmi: read");
-		return;
-	}
-	data = buf;
-	while(i<num && data+sizeof(struct dmi_header)<=buf+len)
-	{
-		u8 *next;
-		struct dmi_header *dm = (struct dmi_header *)data;
+    u8 *buf;
+    u8 *data;
+    int i = 0;
+    int ret = 0;
 
-		/* look for the next handle */
-		next=data+dm->length;
-		while(next-buf+1<len && (next[0]!=0 || next[1]!=0))
-			next++;
-		next+=2;
-		if(next-buf<=len)
-			ret += decode(data);
-		else {
-			ret = 0; /* TRUNCATED */
-			break;
-		}
-		data=next;
-		i++;
+    if ((buf = mem_chunk(base, len, DEFAULT_MEM_DEV)) == NULL)
+	return 0;
+
+    data = buf;
+    while(i<num && data+sizeof(struct dmi_header)<=buf+len)
+    {
+	u8 *next;
+	struct dmi_header *dm = (struct dmi_header *)data;
+
+	/* look for the next handle */
+	next=data+dm->length;
+	while(next-buf+1<len && (next[0]!=0 || next[1]!=0))
+	    next++;
+	next+=2;
+	if(next-buf<=len)
+	    ret += decode(data);
+	else {
+	    ret = 0; /* TRUNCATED */
+	    break;
 	}
-	free(buf);
-	return ret;
+	data=next;
+	i++;
+    }
+
+    free(buf);
+    return ret;
 }
 
 static int dmi_detect(dmi_decode decode) {
-  	unsigned char buf[20];
-	int fd = open("/dev/mem", O_RDONLY);
-	long fp = 0xE0000L;
-	int ret = 0;
+    u8 *buf;
+    long fp;
+    int ret;
 
-	if (fd == -1) {
-		perror("/dev/mem");
-		exit(1);
+    if ((buf = mem_chunk(0xf0000, 0x10000, DEFAULT_MEM_DEV)) == NULL) {
+	perror("dmi_detect");
+	exit(1);
+    }
+
+    for (fp = 0; fp <= 0xfff0; fp += 16) {
+	if (memcmp(buf + fp, "_DMI_", 5) == 0) {
+	    u8 *p = buf + fp;
+	    u16 num = p[13]<<8|p[12];
+	    u16 len = p[7]<<8|p[6];
+	    u32 base = p[11]<<24|p[10]<<16|p[9]<<8|p[8];
+
+	    ret = decode_handle(base, len, num, decode);
+	    break;
 	}
-	if (lseek(fd, fp, 0) == -1) {
-		perror("seek");
-		exit(1);
-	}
-	
-	while (fp < 0xFFFFF)
-	{
-		if (read(fd, buf, 16) != 16)
-			perror("read");
-		
-		if (memcmp(buf, "_DMI_", 5) == 0) {
-			u16 num = buf[13]<<8|buf[12];
-			u16 len = buf[7]<<8|buf[6];
-			u32 base = buf[11]<<24|buf[10]<<16|buf[9]<<8|buf[8];
-			
-			ret = decode_handle(fd, base, len, num, decode);
-			break;
-		}
-		fp += 16;
-	}
-	close(fd);
-	return ret;
+    }
+
+    free(buf);
+    return ret;
 }
 
 static int processor(u8 *data) {
@@ -300,3 +316,10 @@ int dmiDetectMemory(void) {
 	int s2 = dmi_detect(memory_in_MB_type17);
 	return s1 > s2 ? s1 : s2;
 }
+
+#ifdef TEST
+int main(void)
+{
+  printf("Memory Size: %d MB\n", dmiDetectMemory());
+}
+#endif
