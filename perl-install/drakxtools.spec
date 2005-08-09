@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.41mdk
+Release: 0.42mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -372,6 +372,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug  9 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.42mdk
+- localedrake: fix switch to a language that need an input methd (#17352)
+- diskdrake (pixel):
+  o differentiate (nfs)servers on ip first to have less dups (#17236)
+  o fix update boot loader on renumbering partitions (#16786)
+  o write /etc/mdadm.conf when creating a new md (#15502)
+- drakconnect (blino):
+  o do not write aliases interfaces in iftab
+  o handle access point roaming using wpa_supplicant
+  o initial IPv6 support (6to4 tunnel)
+  o keep MS_DNS1, MS_DNS2 and DOMAIN variables in ifcfg files
+  o overwrite previous wpa_supplicant entries with same SSID or BSSID
+- drakhosts, draknfs: do not crash when config file is empty (antoine,
+  #17255)
+
 * Fri Aug  5 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.41mdk
 - drakconnect (blino):
   o allow to use WEP keys in wpa_supplicant
