@@ -578,15 +578,13 @@ sub ask_fromW {
 		} else {
 		    $model = __create_tree_model($e);
 		    $w = Gtk2::ComboBox->new_with_model($model);
-		    $w->pack_start(my $renderer = Gtk2::CellRendererText->new, 0);
-		    $w->set_attributes($renderer, "text", 0);
-		    $w->pack_start($renderer = Gtk2::CellRendererPixbuf->new, 0);
-		    $w->set_attributes($renderer, "pixbuf", 1);
-		    $w->pack_start($renderer = Gtk2::CellRendererText->new, 0);
-		    $w->set_attributes($renderer, "text", 2);
-		    ${$e->{val}} = top(split($sep, ${$e->{val}})) if $e->{separator};
 
-		    $w->set_active($model->{indexes}{ ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0] });
+		    $w->pack_start(my $texrender = Gtk2::CellRendererText->new, 0);
+		    $w->add_attribute($texrender, text => 0);
+		    if ($e->{image2f}) {
+			$w->pack_start(my $pixrender = Gtk2::CellRendererPixbuf->new, 0);
+			$w->add_attribute($pixrender, pixbuf => 1);
+		    }
 		}
 		($real_w, $w) = ($w, $w->entry);
 
