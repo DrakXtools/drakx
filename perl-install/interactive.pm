@@ -51,7 +51,7 @@ use do_pkgs;
 #-           tree_expanded boolean telling wether the tree should be wide open by default
 #-           quit_if_double_click boolean
 #-           allow_empty_list disables the special cases for 0 and 1 element lists
-#-           image2f is a subroutine which takes a value of the list as parameter, and returns an array (text, image_file_name))
+#-           image2f is a subroutine which takes a value of the list as parameter, and returns image_file_name
 #-     entry (the default) (with hidden)
 #
 #- heritate from this class and you'll get all made interactivity for same steps.

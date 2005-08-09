@@ -752,7 +752,7 @@ when your installation is complete and you restart your system.")),
 			    
     $in->ask_from_($common, [
 	{ val => \$lang, separator => '|', 
-	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
+	  if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ && "langs/lang-$name2l{$_[0]}" }),
 	  format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1 . lang::l2name($2) : lang::l2name($_[0]) },
 	  list => \@langs, sort => 0 },
       if_(!$::move,
