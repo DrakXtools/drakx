@@ -533,7 +533,8 @@ my %IM_config =
 		   'zh_HK' => 'chinput -big5',
 		   'zh_TW' => 'chinput -big5',
 	       },	       
-	      },
+	       packages => { generic => 'miniChinput' },
+              },
    fcitx => {
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
@@ -550,6 +551,13 @@ my %IM_config =
              XIM => 'iiimx',
              XIM_PROGRAM => 'iiimx',
              XMODIFIERS => '@im=iiimx',
+	     packages => {
+		 generic => 'iiimf-engines-unit',
+		 am => 'iiimf-engines-unit',
+		 ja => 'iiimf-engines-canna',
+		 ko => 'iiimf-engines-sun-korea',
+		 zh => 'iiimf-engines-sun-chinese',
+	     },
             },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
@@ -562,6 +570,7 @@ my %IM_config =
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
+	       packages => { generic => 'kinput2-wnn' },
               },
    nabi => {
             GTK_IM_MODULE => 'xim',
@@ -575,6 +584,13 @@ my %IM_config =
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    default_for_lang => 'am ja ko zh_CN zh_TW',
+	    packages => {
+		generic => 'scim scim-m17n scim-tables',
+		am => 'scim scim-tables ',
+		ja => 'scim-anthy scim-input-pad',
+		ko => 'scim-hangul',
+		zh => 'scim-pinyin scim-tables scim-chewing',
+	    },
            },
 
    (map {
@@ -582,6 +598,7 @@ my %IM_config =
             GTK_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
+	    packages => { generic => "scim-$_" },
        });
    } qw(anthy canna ccinput fcitx m17n prime skk uim)),
 
@@ -595,6 +612,7 @@ my %IM_config =
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
+	   packages => { generic => 'uim-gtk uim-anthy' },
           },
    xcin => {
             XIM => 'xcin',
@@ -646,40 +664,14 @@ sub get_default_im {
     } keys %IM_config;
 }
 
-# keep the following list in sync with share/rpmsrate:
-my %IM2packages = (
-                   'chinput' =>  { generic => [ 'miniChinput' ] },
-                   'iiimf' => {
-                              generic => [ qw(iiimf-engines-unit) ],
-                              am => [ qw(iiimf-engines-unit) ],
-                              ja => [ qw(iiimf-engines-canna) ],
-                              ko => [ qw(iiimf-engines-sun-korea) ],
-                              zh => [ qw(iiimf-engines-sun-chinese) ],
-                             },
-                   kinput2 => { generic => [ 'kinput2-wnn' ] },
-                   'scim+(default)' => {
-                              generic => [ qw(scim scim-m17n scim-tables) ],
-                              am => [ qw(scim scim-tables ) ],
-                              ja => [ qw(scim-anthy scim-input-pad) ],
-                              ko => [ qw(scim-hangul) ],
-                              zh => [ qw(scim-pinyin scim-tables scim-chewing) ],
-                             },
-                   'uim' => { generic => [ qw(uim-gtk uim-anthy) ] },
-                  );
-
 sub IM2packages {
     my ($locale) = @_;
     if ($locale->{IM}) {
-	my $per_lang = $IM2packages{$locale->{IM}} || {};
+	my $per_lang = $IM_config{$locale->{IM}}{packages} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
-	my $l = $per_lang->{$lang} || $per_lang->{generic} || [ $locale->{IM} ];
-	@$l;
+	split(' ', $per_lang->{$lang} || $per_lang->{generic} || $locale->{IM});
     } else { () }
 }
-
-# enable to select extra SCIM combinations:
-my @SCIM_aliasees = qw(anthy canna ccinput fcitx m17n prime skk uim);
-$IM2packages{"scim+$_"} = { generic => [ "scim-$_" ] } foreach @SCIM_aliasees;
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
