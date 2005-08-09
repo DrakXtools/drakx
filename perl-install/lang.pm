@@ -681,14 +681,12 @@ my %IM2packages = (
 
 sub IM2packages {
     my ($locale) = @_;
-    my $im = $locale->{IM};
-    if ($im eq "None") {
-	();
-    } else {
+    if ($locale->{IM}) {
+	my $per_lang = $IM2packages{$locale->{IM}} || {};
 	my $lang = analyse_locale_name($locale->{lang})->{main};
-	my $l = $IM2packages{$im}{$lang} || $IM2packages{$im}{generic} || [ $im ];
+	my $l = $per_lang->{$lang} || $per_lang->{generic} || [ $locale->{IM} ];
 	@$l;
-    }
+    } else { () }
 }
 
 # enable to select extra SCIM combinaisons:
@@ -1069,7 +1067,7 @@ sub write {
     $h->{ENC} = 'utf8' if member($h->{LANG}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
 
     my $im = $locale->{IM};
-    if ($im && $im ne 'None') {
+    if ($im) {
         log::explanations(qq(Configuring "$im" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, { XIM_PROGRAM => $IM_XIM_program{$im}{$h->{LC_NAME}} });
