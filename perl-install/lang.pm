@@ -673,7 +673,6 @@ my %IM2packages = (
                               zh => [ qw(scim-pinyin scim-tables scim-chewing) ],
                              },
                    'uim' => { generic => [ qw(uim-gtk uim-anthy) ] },
-                   'vi' =>  { generic => [ 'x-unikey' ] },
                   );
 
 sub IM2packages {
