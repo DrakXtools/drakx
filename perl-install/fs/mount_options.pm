@@ -40,7 +40,7 @@ sub unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
-    $non_defaults->{encrypted} = 1 if !$part->{isFormatted} || isSwap($part);
+    $non_defaults->{encrypted} = 1;
 
     $non_defaults->{supermount} = 1 if $part->{fs_type} =~ /:/ || member($part->{fs_type}, 'auto', @auto_fs);
 
