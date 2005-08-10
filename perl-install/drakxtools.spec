@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.42mdk
+Release: 0.43mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -372,6 +372,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug 10 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.43mdk
+- diskdrake: fix misc bugs with encrypted folders (pixel, #16893 & #17142) 
+- harddrake service: speedup startup on some old machines
+- mousedrake: do write an udev rule for serial mice (pixel, #17114)
+
 * Tue Aug  9 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.42mdk
 - localedrake: fix switch to a language that need an input methd (#17352)
 - diskdrake (pixel):
