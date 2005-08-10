@@ -825,7 +825,10 @@ sub Format {
 }
 sub Mount {
     my ($in, $hd, $part) = @_;
+
+    ensure_we_have_encrypt_key_if_needed($in, $part) or return;
     write_partitions($in, $hd) or return;
+
     my $w;
     fs::mount::part($part, 0, sub {
         	my ($msg) = @_;
@@ -975,7 +978,7 @@ sub Options {
 			  if (!check($in, $hd, $part, $all_hds)) {
 			      $options->{encrypted} = 0;
 			  } elsif (!$part->{encrypt_key} && !isSwap($part)) {
-			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in, $options)) {
+			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in, $options, '')) {
 				  $options->{'encryption='} = $encrypt_algo;
 				  $part->{encrypt_key} = $encrypt_key;
 			      } else {
@@ -1115,9 +1118,23 @@ sub write_partitions {
     1;
 }
 
+sub ensure_we_have_encrypt_key_if_needed {
+    my ($in, $part) = @_;
+
+    if ($part->{options} =~ /encrypted/ && !$part->{encrypt_key}) {
+	my ($options, $unknown) = fs::mount_options::unpack($part);
+	$part->{encrypt_key} = choose_encrypt_key($in, $options, 'skip_encrypt_algo') or return;
+	fs::mount_options::pack($part, $options, $unknown);
+    }
+    1;
+}
+
 sub format_ {
     my ($in, $hd, $part, $all_hds) = @_;
+
+    ensure_we_have_encrypt_key_if_needed($in, $part) or return;
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
+
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     if ($::isStandalone) {
 	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
@@ -1293,7 +1310,7 @@ sub max_partition_size {
 }
 
 sub choose_encrypt_key {
-    my ($in, $options) = @_;
+    my ($in, $options, $skip_encrypt_algo) = @_;
 
     my ($encrypt_key, $encrypt_key2);
     my @algorithms = map { "AES$_" } 128, 196, 256, 512, 1024, 2048;
@@ -1311,8 +1328,12 @@ sub choose_encrypt_key {
         } } }, [
 { label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
-{ label => N("Encryption algorithm"), type => 'list', val => \$encrypt_algo, list => \@algorithms }
-    ]) && ($encrypt_key, $encrypt_algo);
+if_(!$skip_encrypt_algo,
+{ label => N("Encryption algorithm"), type => 'list', val => \$encrypt_algo, list => \@algorithms },
+),
+    ]) or return;
+
+    $skip_encrypt_algo ? $encrypt_key : ($encrypt_key, $encrypt_algo);
 }
 
 
