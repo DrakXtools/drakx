@@ -1,3 +1,63 @@
+2005/08/10  Olivier Blin <oblin at mandriva.com>
+
+	* network/monitor.pm, standalone/net_applet: compute approx_level in
+	network::monitor::list_wireless
+
+2005/08/10  Pixel  <pixel at mandriva.com>
+
+	* fs/mount_options.pm: i don't know if it's really the best choice here,
+	but that way it always allow to select "encrypted"
+
+	* diskdrake/interactive.pm: ask the encrypt_key when we have "encrypted"
+	set but we don't have the encrypt_key
+	don't be sure of anything of setting encryption (it may help bugzilla
+	#16893)
+
+	* install_any.pm: 
+	  - if we have a lot of memory, keep the clp in tmpfs
+	  - check the size available in $::prefix/tmp for the case it's on its
+	own filesystem (bug #15377)
+	  - also check the size available in other cases
+	create clp_on_tmpfs() for future use
+
+	* fs/type.pm: {bad_fs_type_magic} is wrong info when we have "encryption"
+	(bugzilla #16893 is about this too)
+
+	* Xconfig/card.pm: please perl_checker
+	special option for RS480 using fglrx
+
+	* any.pm: 
+	  - our udev rules must come before standard mandriva rules to be able
+	to shadow them
+	  - special mouse rule *is* needed for serial mouse
+
+	* install2.pm: 
+	  - if we have a lot of memory, keep the clp in tmpfs
+	  - check the size available in $::prefix/tmp for the case it's on its
+	own filesystem (bug #15377)
+	  - also check the size available in other cases
+
+	* fs/mount.pm: remove encryption=xxx and encrypted option before passing
+	them to mount() since we take care of the encrypted loopback ourself
+	(bugzilla #17142)
+
+	* pkgs.pm: on upgrade, have not only the upgraded packages, but also the
+	installed packages in package_list.pl (bugzilla #15296)
+
+	* do_pkgs.pm: be a little safer and shorter
+
+2005/08/10  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.43mdk
+
+	* Xconfig/card.pm (install_server) there's only one ati package again
+
+	* detect_devices.pm (floppies) in standalone mode, usb-storage is loaded
+	by hotplug. manually
+	loading it just slows down harddrake service startup
+
+	* share/rpmsrate: doc was renamed
+
 2005/08/09  Frederic Lepied  <flepied at mandriva.com>
 
 	* share/rpmsrate: tuxracer => ppracer
