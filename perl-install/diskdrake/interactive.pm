@@ -982,6 +982,9 @@ sub Options {
 				  $options->{encrypted} = 0;
 			      }
 			  }
+			  #- don't be sure of anything
+			  set_isFormatted($part, 0);
+			  $part->{notFormatted} = 0;
 		      } else {
 			  delete $options->{'encryption='};
 			  delete $part->{encrypt_key};
