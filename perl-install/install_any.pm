@@ -1888,20 +1888,46 @@ sub write_fstab {
     fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$o->{isUpgrade} || $o->{migrate_device_names};
 }
 
-my $clp_name = 'mdkinst.clp';
-sub clp_on_tmpfs() { "/tmp/$clp_name" }
-sub clp_on_disk() { "$::prefix/tmp/$clp_name" }
+sub move_clp_to_disk {
+    my ($fstab) = @_;
 
-sub move_clp_to_disk() {
-    return if -e clp_on_disk() || $::local_install;
+    our $clp_on_disk;
+    return if $clp_on_disk || $::local_install;
 
+    my $clp_name = 'mdkinst.clp';
     my ($loop, $current_clp) = devices::find_clp_loop($clp_name) or return;
-    log::l("move_clp_to_disk: copying $current_clp to ", clp_on_disk());
-    cp_af($current_clp, clp_on_disk());
-    run_program::run('losetup', '-r', $loop, clp_on_disk());
+    my $clp_size = (-s $current_clp) / 1024; #- put in KiB
 
-    #- in $current_clp eq "/tmp/$clp_name"
-    unlink clp_on_tmpfs();
+    my $clp_dir;
+    if (availableRamMB() > 400) {
+	$clp_dir = '/tmp'; #- on tmpfs
+    } else {
+	my $tmp = fs::get::mntpoint2part('/tmp', $fstab);
+	if ($tmp && fs::df($tmp, $::prefix) / 2 > $clp_size * 1.2) { #- we want at least 20% free afterwards
+	    $clp_dir = "$::prefix/tmp";
+	} else {
+	    my $root = fs::get::mntpoint2part('/', $fstab);
+	    my $root_free_MB = fs::df($root, $::prefix) / 2 / 1024;
+	    my $wanted_size_MB = $o->{isUpgrade} || fs::get::mntpoint2part('/usr', $fstab) ? 150 : 300;
+	    log::l("clp: root free $root_free_MB MB, wanted at least $wanted_size_MB MB");
+	    if ($root_free_MB > $wanted_size_MB) {
+		$clp_dir = $tmp ? $::prefix : "$::prefix/tmp";
+	    } else {
+		$clp_dir = '/tmp'; #- on tmpfs
+		if (availableRamMB() < 200) {
+		    log::l("ERROR: not much ram (" . availableRamMB() . " MB), we're going in the wall!");
+		}
+	    }
+	}
+    }
+    $clp_on_disk = "$clp_dir/$clp_name";
+
+    if ($current_clp ne $clp_on_disk) {
+	log::l("move_clp_to_disk: copying $current_clp to $clp_on_disk");
+	cp_af($current_clp, $clp_on_disk);
+	run_program::run('losetup', '-r', $loop, $clp_on_disk);
+	unlink $current_clp if $current_clp eq "/tmp/$clp_name";
+    }
 }
 
 #-###############################################################################

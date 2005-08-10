@@ -192,7 +192,7 @@ sub formatPartitions {
     eval { fs::mount::usbfs($::prefix) };
 
     install_any::screenshot_dir__and_move();
-    install_any::move_clp_to_disk();
+    install_any::move_clp_to_disk($o->{fstab});
 
     any::rotate_logs($o->{prefix});
 
@@ -624,7 +624,7 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-    unlink install_any::clp_on_disk();
+    unlink $install_any::clp_on_disk;
     install_any::clean_postinstall_rpms();
     install_any::log_sizes($o);
     install_any::remove_advertising($o);
