@@ -360,7 +360,7 @@ sub can_be_one_of_those_fs_types {
 
 sub maybeFormatted { 
     my ($part) = @_;
-    $part->{isFormatted} || !$part->{notFormatted} && !$part->{bad_fs_type_magic};
+    $part->{isFormatted} || !$part->{notFormatted} && (!$part->{bad_fs_type_magic} || $part->{options} =~ /encrypted/);
 }
 sub set_isFormatted {
     my ($part, $val) = @_;
