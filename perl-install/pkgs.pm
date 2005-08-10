@@ -1306,7 +1306,7 @@ sub selected_leaves {
     my @leaves;
 
     foreach (@{$packages->{depslist}}) {
-	$_->flag_requested && !$_->flag_base and push @leaves, $_->name;
+	($_->flag_requested || $_->flag_installed) && !$_->flag_base and push @leaves, $_->name;
     }
     \@leaves;
 }
