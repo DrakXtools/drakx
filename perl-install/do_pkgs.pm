@@ -68,8 +68,7 @@ sub check_kernel_module_packages {
     my ($do, $base_name, $o_ext_name) = @_;
     
     require bootloader;
-    my ($short_name) = $base_name =~ /^(.*)-kernel$/;
-    my @rpms = $do->are_available("dkms-$short_name",
+    my @rpms = $do->are_available(if_($base_name =~ /^(.*)-kernel$/, "dkms-$1"),
                                   map {
                                       $base_name . '-' . bootloader::vmlinuz2version($_);
                                   } bootloader::installed_vmlinuz());
