@@ -171,8 +171,7 @@ sub update_wireless_item {
     my ($net, $ap_address) = @_;
     $net->{ssid_label}->set_text($net->{ssid} || "[$ap_address]");
     $net->{keyring_image}->visible(defined $net->{flags});
-    my $approx_level = 20 + int(min($net->{signal_level}, 80)/20)*20;
-    $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$approx_level});
+    $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$net->{approx_level}});
 
     $net->{menuitem}->signal_handler_block($net->{activate});
     $net->{menuitem}->set_active($net->{current});

@@ -22,6 +22,7 @@ sub list_wireless {
     #- bssid / frequency / signal level / flags / ssid
     while ($results =~ /^((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\t(\d+)\t(\d+)\t(.*?)\t(.*)$/mg) {
         $networks{$1} = { frequency => $2, signal_level => $3, flags => $4, ssid => $5 };
+        $networks{$1}{approx_level} = 20 + min(80, int($3/20)*20);
     }
     my $list;
     eval { $list = $o->call_method('ListNetworks') };
