@@ -145,8 +145,10 @@ sub part {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
 	    my $mntpoint = fs::get::mntpoint_prefixed($part);
+	    my $options = $part->{options};
 	    if (isLoopback($part) || $part->{encrypt_key}) {
 		set_loop($part);
+		$options = join(',', grep { !/^(encryption=|encrypted$)/ } split(',', $options)); #- we take care of this, don't let it mount see it
 	    } elsif ($part->{options} =~ /encrypted/) {
 		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
 		return;
@@ -154,7 +156,7 @@ sub part {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || fs::wild_device::from_part('', $part);
-	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $part->{options}, $o_wait_message);
+	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $options, $o_wait_message);
 	}
     }
     $part->{isMounted} = 1;
