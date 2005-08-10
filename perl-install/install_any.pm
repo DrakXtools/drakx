@@ -1889,6 +1889,7 @@ sub write_fstab {
 }
 
 my $clp_name = 'mdkinst.clp';
+sub clp_on_tmpfs() { "/tmp/$clp_name" }
 sub clp_on_disk() { "$::prefix/tmp/$clp_name" }
 
 sub move_clp_to_disk() {
@@ -1900,7 +1901,7 @@ sub move_clp_to_disk() {
     run_program::run('losetup', '-r', $loop, clp_on_disk());
 
     #- in $current_clp eq "/tmp/$clp_name"
-    unlink "/tmp/$clp_name";
+    unlink clp_on_tmpfs();
 }
 
 #-###############################################################################
