@@ -1,7 +1,9 @@
+# EDIT IN CVS NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
+
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.43mdk
+Release: 0.44mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -23,7 +25,8 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, modutils >= 2.3.11, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: module-init-tools
 Requires: %{name}-backend = %version-%release
 Requires: monitor-edid >= 1.5
 Requires: netprofile
@@ -372,6 +375,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug 11 2005 Flavio Bruno Leitner <flavio@mandriva.com> 10.3-0.44mdk 
+- changed requires from modutils to module-init-tools
+
 * Wed Aug 10 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.43mdk
 - diskdrake: fix misc bugs with encrypted folders (pixel, #16893 & #17142) 
 - harddrake service: speedup startup on some old machines
