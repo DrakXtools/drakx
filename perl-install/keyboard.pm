@@ -143,8 +143,8 @@ our %lang2keyboard =
   'wa'  => 'be:90 fr:5',
   'xh'  => 'us_intl',
   'yi'  => 'il_phonetic:90 il:10 us_intl:10',
-'zh_CN' => 'us',
-'zh_TW' => 'us',
+'zh_CN' => 'us:90',
+'zh_TW' => 'us:90',
   'zu'  => 'us_intl',
 );
 
