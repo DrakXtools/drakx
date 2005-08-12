@@ -59,7 +59,7 @@ init_lists();
 
 $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
 my $w = ugtk2->new(N("Active Firewall"));
-gtkpack($w->{window},
+gtkadd($w->{window},
         gtknew('Notebook', children => [
             gtknew('Label', text => N("Blacklist")),
             gtknew('VBox', spacing => 5, children => [
