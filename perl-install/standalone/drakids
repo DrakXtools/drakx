@@ -99,10 +99,8 @@ sub handle_init() {
 
 sub list_remove_addr {
     my ($list, @addr) = @_;
-    #- workaround buggy Gtk2::SimpleList array abstraction, it corrupts references
-    foreach (0 .. $#{$list}) {
-        member($list->[$_][0], @addr) and splice @$list, $_, 1;
-    }
+    #- workaround buggy Gtk2::SimpleList array abstraction, it destroys references
+    @$list = map { member($_->[0], @addr) ? () : [ @$_ ] } @$list;
 }
 
 #- may throw an exception
