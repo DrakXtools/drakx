@@ -18,18 +18,21 @@ use Gtk2::TrayIcon;
 
 use ugtk2 qw(:create :helpers :wrappers :dialogs);
 
-my ($eventbox, $img);
-my ($current_state, $current_interface, $menu, $wireless_menu, $timeout, $update_timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
-add_icon_path("/usr/share/libDrakX/pixmaps/");
+shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 # Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
+
+my ($eventbox, $img, $balloon);
+my ($current_state, $current_interface, $menu, $wireless_menu, $timeout, $update_timeout);
+add_icon_path("/usr/share/libDrakX/pixmaps/");
 
 my $net = {};
 my $watched_interface;
 
 my $dbus = dbus_object::system_bus();
 my $monitor = network::monitor->new($dbus);
+my ($activefw, $interactive_cb, @attacks_queue);
 
 my %pixbufs =
   (
@@ -92,11 +95,19 @@ $eventbox->signal_connect(button_press_event => sub {
     $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
 });
 
-shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
+$icon->show_all;
 
-my $activefw;
-my $interactive_cb;
-my @attacks_queue;
+$balloon = Gtk2::Balloon->new_from_window($icon->window);
+$balloon->add_events('button-press-mask');
+$balloon->signal_connect(hide => sub {
+    #- on timeout, apply default policy
+    exists $attacks_queue[0]->{handled} or set_blacklist_verdict($attacks_queue[0]->{seq}, undef);
+});
+$balloon->signal_connect(button_press_event => sub {
+    $attacks_queue[0]->{handled} = 1;
+    Gtk2::Balloon::hide_text($balloon);
+    ask_attack_verdict($attacks_queue[0]);
+});
 
 $activefw = network::activefw->new($dbus, sub {
     my ($_con, $msg) = @_;
@@ -113,8 +124,6 @@ checkNetworkForce();
 cronNetwork();
 cronUpdate();
 get_unprocessed_attacks();
-
-$icon->show_all;
 
 $SIG{HUP} = sub {
     print "received SIGHUP, reloading network configuration\n";
@@ -315,40 +324,42 @@ sub get_unprocessed_attacks() {
 }
 
 sub handle_attack {
-    push @attacks_queue, [ @_ ];
-    @attacks_queue == 1 and ask_attack_verdict($attacks_queue[0]);
+    my $attack = { mapn { $_[0] => $_[1] } [ 'seq', 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type'], \@_ };
+    $attack->{ip_addr} = network::activefw::get_ip_address($attack->{addr});
+    $attack->{hostname} = network::activefw::resolve_address($attack->{ip_addr});
+    $attack->{service} = network::activefw::get_service($attack->{port});
+    $attack->{msg} = $attack->{prefix} eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $attack->{hostname})
+      : $attack->{prefix} eq "SERV" ? N("The %s service has been attacked by %s.", $attack->{service}, $attack->{hostname})
+      : $attack->{prefix} eq "PASS" ? N("A password cracking attack has been attempted by %s.", $attack->{hostname})
+      : undef;
+    push @attacks_queue, $attack;
+    @attacks_queue == 1 and notify_attack($attacks_queue[0]);
 }
 
-sub set_attack_verdict {
+sub set_blacklist_verdict {
     my ($seq, $verdict) = @_;
+    #- default is to blacklist
+    defined $verdict or $verdict = 1;
+
     eval { $activefw->blacklist($seq, $verdict) };
     $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+
     shift @attacks_queue;
-    @attacks_queue and ask_attack_verdict($attacks_queue[0]);
+    #- wait for some time so that the new balloon is noticeable
+    @attacks_queue and Glib::Timeout->add(500, sub { notify_attack($attacks_queue[0]); 0; });
+}
+
+sub notify_attack {
+    my ($attack) = @_;
+    unless ($attack->{msg}) {
+        print "unhandled attack type, skipping\n";
+        return;
+    }
+    Gtk2::Balloon::show_text($balloon, $attack->{msg}, 5000);
 }
 
 sub ask_attack_verdict {
     my ($attack) = @_;
-    my ($seq, $timestamp, $indev, $prefix, $_sensor, $protocol, $addr, $port, $icmp_type) = @$attack;
-
-    unless ($interactive_cb->get_active) {
-        #- let the daemon handle the blacklist policy in automatic mode
-        set_attack_verdict($seq, undef);
-        return;
-    }
-
-    my $ip_addr = network::activefw::get_ip_address($addr);
-    my $hostname = network::activefw::resolve_address($ip_addr);
-    my $service = network::activefw::get_service($port);
-
-    my $msg = $prefix eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $hostname)
-            : $prefix eq "SERV" ? N("The %s service has been attacked by %s.", $service , $hostname)
-            : $prefix eq "PASS" ? N("A password cracking attack has been attempted by %s.", $hostname)
-            : undef;
-    unless ($msg) {
-        print "unhandled attack type, skipping\n";
-        return;
-    }
 
     my $w = Gtk2::Window->new;
     $w->set_title(N("Active Firewall: intrusion detected"));
@@ -361,19 +372,19 @@ sub ask_attack_verdict {
                    0, Gtk2::Image->new_from_stock('gtk-dialog-warning', 'dialog'),
                    0, gtknew('Label', text => "   "),
                    1, gtknew('VBox', children => [
-                       0, $msg,
+                       0, $attack->{msg},
                        0, N("Do you want to blacklist the attacker?")
                    ])
                ]),
                gtknew('HButtonBox', layout => 'edge', children_loose => [
                    $no = gtknew('Button', text => N("No"), clicked => sub {
                        $w->destroy;
-                       set_attack_verdict($seq, 0);
+                       set_blacklist_verdict($attack->{seq}, 0);
                    }),
                    $yes = gtknew('Button', text => N("Yes"), clicked => sub {
                        $auto->get_active and $interactive_cb->set_active(0);
                        $w->destroy;
-                       set_attack_verdict($seq, 1);
+                       set_blacklist_verdict($attack->{seq}, 1);
                    })
                ]),
                $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
@@ -383,26 +394,83 @@ sub ask_attack_verdict {
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
                           1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", network::activefw::format_date($timestamp)),
-                              N("Network interface: %s", $indev),
-                              N("Attack type: %s", $prefix),
-                              if_($protocol, N("Protocol: %s", $protocol)),
-                              N("Attacker IP address: %s", $ip_addr),
-                              if_($hostname ne $ip_addr, N("Attacker hostname: %s", $hostname)),
-                              if_($service, N("Service attacked: %s", $service)),
-                              if_($port, N("Port attacked: %s", $port)),
-                              if_($icmp_type, N("Type of ICMP attack: %s", $icmp_type))
+                              N("Attack time: %s", network::activefw::format_date($attack->{timestamp})),
+                              N("Network interface: %s", $attack->{indev}),
+                              N("Attack type: %s", $attack->{prefix}),
+                              if_($attack->{protocol}, N("Protocol: %s", $attack->{protocol})),
+                              N("Attacker IP address: %s", $attack->{ip_addr}),
+                              if_($attack->{hostname} ne $attack->{ip_addr}, N("Attacker hostname: %s", $attack->{hostname})),
+                              if_($attack->{service}, N("Service attacked: %s", $attack->{service})),
+                              if_($attack->{port}, N("Port attacked: %s", $attack->{port})),
+                              if_($attack->{icmp_type}, N("Type of ICMP attack: %s", $attack->{icmp_type}))
                           ])
                       ])),
            ]));
     $yes->grab_focus;
     gtksignal_connect($w, delete_event => sub {
-        if ($auto->get_active) {
-            $interactive_cb->set_active(0);
-            set_attack_verdict($seq, 1);
-        } else {
-            set_attack_verdict($seq, 0);
-        }
+        $auto->get_active and $interactive_cb->set_active(0);
+        #- apply default policy
+        set_blacklist_verdict($attack->{seq}, undef);
     });
     $w->show_all;
 }
+
+package Gtk2::Balloon;
+
+use ugtk2 qw(:wrappers);
+
+sub new_from_window {
+    my ($_class, $window) = @_;
+    my $w = Gtk2::Window->new('GTK_WINDOW_POPUP');
+    $w->{ref_window} = $window;
+    $w->set_name("gtk-tooltips");
+    $w->set_app_paintable(1);
+    $w->set_resizable(0);
+    $w->set_border_width(4);
+    $w->signal_connect("expose_event" => sub {
+        my $req = $w->size_request;
+        $w->get_style->paint_flat_box($w->window, 'normal', 'out', undef, $w, "tooltip",
+                                      0, 0, $req->width, $req->height);
+    });
+    ugtk2::gtkadd($w, $w->{label} = ugtk2::gtkset_alignment(ugtk2::gtkset_line_wrap(Gtk2::Label->new, 1), 0.5, 0.5));
+}
+
+sub show_text {
+    my ($balloon, $text, $timeout) = @_;
+    $balloon->{label}->set_text($text);
+    $balloon->{label}->show;
+    my ($ref_x, $ref_y) = $balloon->{ref_window}->get_origin;
+    my (undef, undef, $ref_w, $ref_h) = $balloon->{ref_window}->get_geometry;
+    my ($x, $y) = ($ref_x, $ref_y);
+    my $req = $balloon->size_request;
+    my ($w, $h) = ($req->width, $req->height);
+
+    #- code mostly from gtktooltips.c
+    $x += $ref_w / 2 - $w / 2 - $balloon->get_border_width;
+
+    my $screen = Gtk2::Gdk::Screen->get_default;
+    my $monitor_num = $screen->get_monitor_at_window($balloon->{ref_window});
+    my ($monitor) = $screen->get_monitor_geometry($monitor_num);
+    if ($x + $w > $monitor->x + $monitor->width) {
+        $x = $monitor->x + $monitor->width - $w - $balloon->get_border_width;
+    } elsif ($x < $monitor->x) {
+        $x = $monitor->x + $balloon->get_border_width;
+    }
+    if ($y + $h + $ref_h + $balloon->get_border_width > $monitor->y + $monitor->height) {
+        $y = $y - $h - $balloon->get_border_width;
+    } else {
+        $y += $ref_h + $balloon->get_border_width;
+    }
+    $balloon->move($x, $y);
+    $balloon->show;
+
+    $balloon->{timeout} = Glib::Timeout->add($timeout, sub { $balloon->hide; 0 });
+}
+
+sub hide_text {
+    my ($balloon) = @_;
+    Glib::Source->remove($balloon->{timeout});
+    $balloon->hide;
+}
+
+1;
