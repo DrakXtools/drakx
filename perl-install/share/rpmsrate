@@ -656,7 +656,7 @@ CAT_SYSTEM
   5 HIGH_SECURITY libsafe kernel-secure lads
   5 BIGMEM kernel
   5 SMP kernel-smp
-  5 PCMCIA pcmcia-cs laptop-mode-tools
+  5 PCMCIA pcmcia-cs
   5 USB hotplug
 
   5 HW"HighPoint Technologies Inc.\|HPT37|Promise Technology.*FastTrak" || DRIVER"ata_piix|i2o_block|megaraid|sata_sil" mdadm dmraid
@@ -704,7 +704,7 @@ CAT_SYSTEM
 
   5 CAT_KDE TYPE"laptop" kdeutils-klaptop
   5 !CAT_KDE TYPE"laptop" cpufreqd
-  5 TYPE"laptop" cpufreq apmd hotkeys
+  5 TYPE"laptop" cpufreq apmd hotkeys laptop-mode-tools
   3 evms evms-gui evms-cli evms-ncurses
   
   4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc bc
