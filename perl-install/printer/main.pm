@@ -803,8 +803,9 @@ sub get_jap_textmode() {
 # Handling of /etc/cups/cupsd.conf
 
 sub read_cupsd_conf() {
-    # If /etc/cups/cupsd.conf a default cupsd.conf will be put out to avoid
-    # writing of a broken cupsd.conf file when we write it back later.
+    # If /etc/cups/cupsd.conf does not exist a default cupsd.conf will be 
+    # put out to avoid writing of a broken cupsd.conf file when we write 
+    # it back later.
     my @cupsd_conf = cat_("$::prefix/etc/cups/cupsd.conf");
     if (!@cupsd_conf) {
 	@cupsd_conf = map { /\n$/s or "$_\n" } split('\n',
@@ -1977,6 +1978,13 @@ sub configure_queue($) {
 			  ("-d", "raw"))),
 			"-N", $printer->{currentqueue}{desc},
 			"-L", $printer->{currentqueue}{loc},
+			if_($printer->{SPOOLER} eq "cups",
+			    "--backend-dont-disable=" . 
+			    $printer->{currentqueue}{dd},
+			    "--backend-attempts=" . 
+			    $printer->{currentqueue}{att},
+			    "--backend-delay=" . 
+			    $printer->{currentqueue}{delay}),
 			@{$printer->{currentqueue}{options}}
 			) or return 0;
     if ($printer->{currentqueue}{ppd} &&

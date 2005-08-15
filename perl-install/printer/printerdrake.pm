@@ -660,6 +660,77 @@ sub config_auto_admin {
     }
 }
 
+sub config_backend_error_handling {
+    my ($printer, $in) = @_;
+
+    local $::isEmbedded = 0;
+
+    # Get currentconfiguration
+    my $dontdisable = $printer->{currentqueue}{dd};
+    my $infiniteretries = ($printer->{currentqueue}{att} == 0);
+    my $retries = ($printer->{currentqueue}{att} != 0 ?
+		   $printer->{currentqueue}{att} : 1);
+    my $delay = $printer->{currentqueue}{delay};
+    my $queue = $printer->{currentqueue}{queue};
+
+    # Configuration dialog
+    if ($in->ask_from_
+	({ 
+	    title =>
+		N("Communication error handling for the printer \"%s\"",
+		  $queue),
+	    messages => N("Here you can configure how errors during the communication between your computer and the printer \"%s\" should be handled (for example if the printer is not turned on).", $queue),
+	    callbacks => {
+		complete => sub {
+		    unless (($retries =~ /^[0-9]+$/) && ($retries > 0)) {
+			$in->ask_warn(N("Error"), N("The number of retries should be an integer number of at least 1!"));
+			return 1, 0;
+		    }
+		    unless ($delay =~ /^[0-9]+$/) {
+			$in->ask_warn(N("Error"), N("The delay between retries should be a positive integer number!"));
+			return 1, 1;
+		    }
+		    return 0;
+		},
+		changed => sub {
+		    return 0;
+		}
+	    }
+	     },
+	     [
+	      { text => N("Do not disable the printer"), 
+		type => 'bool',
+		val => \$dontdisable },
+	      { text => N("Retry infinitely often"), 
+		type => 'bool',
+		val => \$infiniteretries },
+	      { val => N("Number of retries") }, 
+	      { val => \$retries, 
+		disabled => sub {
+		    $infiniteretries;
+		} },
+	      { val => N("Delay between retries (in sec)") }, 
+	      { val => \$delay, 
+		disabled => sub {
+		    ($retries eq 1) && !$infiniteretries;
+		} },
+	      ]
+	     )
+	    ) {
+	# Apply new settings
+	$dontdisable = "0" if $dontdisable eq "";
+	$retries = "0" if $retries eq "";
+	$delay = "0" if $delay eq "";
+	$printer->{currentqueue}{dd} = $dontdisable;
+	$printer->{currentqueue}{att} =
+	    ($infiniteretries ? "0" : $retries);
+	$printer->{currentqueue}{delay} = $delay;
+	return 1;
+    } else {
+	return 0;
+    }
+}
+
 sub choose_printer_type {
     my ($printer, $in, $upNetwork) = @_;
     my $havelocalnetworks = check_network($printer, $in, $upNetwork, 1) &&
@@ -887,6 +958,9 @@ sub configure_new_printers {
 					 printer  => "",
 					 driver   => "",
 					 connect  => "",
+					 dd       => 1,
+					 att      => 0,
+					 delay    => 30,
 					 spooler  => $printer->{SPOOLER},
 				       };
 	    undef $w;
@@ -5041,6 +5115,9 @@ sub add_printer {
 				 printer  => "",
 				 driver   => "",
 				 connect  => "",
+				 dd       => 1,
+				 att      => 0,
+				 delay    => 30,
 				 spooler  => $printer->{SPOOLER},
 			     };
     #- Do all the configuration steps for a new queue
@@ -5265,6 +5342,10 @@ What do you want to modify on this printer?",
 			      if_(($printer->{SPOOLER} !~ /cups/) ||
 				  printer::cups::queue_enabled($queue),
 				  N("Disable Printer"))),
+			  if_(($printer->{SPOOLER} eq "cups") &&
+			      $printer->{configured}{$queue} &&
+			      ($printer->{configured}{$queue}{queuedata}{connect} !~ m!^hp:/!), 
+			      N("Printer communication error handling")),
 			  N("Print test pages"),
 			  N("Learn how to use this printer"),
 			  if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
@@ -5348,11 +5429,17 @@ What do you want to modify on this printer?",
 		    $in->ask_warn(N("Enable Printer"),
 				  N("Printer \"%s\" is now enabled.", 
 				    $queue));
+		$modify = N("Disable Printer");
 	    } elsif ($modify eq N("Disable Printer")) {
 		printer::main::enable_disable_queue($printer, $queue, 0) &&
 		    $in->ask_warn(N("Disable Printer"),
 				  N("Printer \"%s\" is now disabled.", 
 				    $queue));
+		$modify = N("Enable Printer");
+	    } elsif ($modify eq N("Printer communication error handling")) {
+		config_backend_error_handling($printer, $in) &&
+		    get_printer_info($printer, $in) &&
+		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Print test pages")) {
 		print_testpages($printer, $in, $upNetwork);
 	    } elsif ($modify eq N("Learn how to use this printer")) {
