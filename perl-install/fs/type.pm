@@ -310,7 +310,7 @@ sub type_subpart_from_magic {
     $p;
 }
 
-sub true_local_fs_types() { qw(ext3 ext2 reiserfs xfs jfs) }
+sub true_local_fs_types() { qw(ext3 ext2 reiserfs reiser4 xfs jfs) }
 
 sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
