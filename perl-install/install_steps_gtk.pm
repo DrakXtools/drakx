@@ -186,9 +186,9 @@ press `F1' when booting on CDROM, then enter `text'."))) if availableRamMB() < 7
 
 #------------------------------------------------------------------------------
 sub selectMouse {
-    my ($o) = @_;
+    my ($o, $force) = @_;
     my %old = %{$o->{mouse}};
-    $o->SUPER::selectMouse or return;
+    $o->SUPER::selectMouse($force) or return;
     my $mouse = $o->{mouse};
     $mouse->{type} eq 'none' ||
       $old{type}   eq $mouse->{type}   && 
@@ -200,7 +200,7 @@ sub selectMouse {
 	mouse::test_mouse_install($mouse, $x_protocol_changed) and return;
 
 	%old = %$mouse;
-	$o->SUPER::selectMouse(1);
+	$o->SUPER::selectMouse;
 	$mouse = $o->{mouse};
     } 
 }
