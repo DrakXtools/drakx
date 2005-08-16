@@ -192,7 +192,7 @@ sub formatPartitions {
     eval { fs::mount::usbfs($::prefix) };
 
     install_any::screenshot_dir__and_move();
-    install_any::move_clp_to_disk($o->{fstab});
+    install_any::move_clp_to_disk($o);
 
     any::rotate_logs($o->{prefix});
 

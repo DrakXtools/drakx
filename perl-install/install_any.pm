@@ -1889,7 +1889,7 @@ sub write_fstab {
 }
 
 sub move_clp_to_disk {
-    my ($fstab) = @_;
+    my ($o) = @_;
 
     our $clp_on_disk;
     return if $clp_on_disk || $::local_install;
@@ -1902,13 +1902,13 @@ sub move_clp_to_disk {
     if (availableRamMB() > 400) {
 	$clp_dir = '/tmp'; #- on tmpfs
     } else {
-	my $tmp = fs::get::mntpoint2part('/tmp', $fstab);
+	my $tmp = fs::get::mntpoint2part('/tmp', $o->{fstab});
 	if ($tmp && fs::df($tmp, $::prefix) / 2 > $clp_size * 1.2) { #- we want at least 20% free afterwards
 	    $clp_dir = "$::prefix/tmp";
 	} else {
-	    my $root = fs::get::mntpoint2part('/', $fstab);
+	    my $root = fs::get::mntpoint2part('/', $o->{fstab});
 	    my $root_free_MB = fs::df($root, $::prefix) / 2 / 1024;
-	    my $wanted_size_MB = $o->{isUpgrade} || fs::get::mntpoint2part('/usr', $fstab) ? 150 : 300;
+	    my $wanted_size_MB = $o->{isUpgrade} || fs::get::mntpoint2part('/usr', $o->{fstab}) ? 150 : 300;
 	    log::l("clp: root free $root_free_MB MB, wanted at least $wanted_size_MB MB");
 	    if ($root_free_MB > $wanted_size_MB) {
 		$clp_dir = $tmp ? $::prefix : "$::prefix/tmp";
