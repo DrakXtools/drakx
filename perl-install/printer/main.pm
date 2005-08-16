@@ -756,16 +756,16 @@ sub get_auto_admin {
     my ($printer) = @_;
     $printer->{enablequeuesonnewprinter} = 
 	(!defined($sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED}) ||
-	 ($sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED} =~ /yes/i) ?
-	 1 : 0);
+	 ($sysconfig{ENABLE_QUEUES_ON_PRINTER_CONNECTED} =~ /no/i) ?
+	 0 : 1);
     $printer->{autoqueuesetuponnewprinter} = 
 	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTER_CONNECTED}) ||
 	 ($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTER_CONNECTED} =~ /yes/i) ?
 	 1 : 0);
     $printer->{enablequeuesonspoolerstart} = 
 	(!defined($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START}) ||
-	 ($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} =~ /yes/i) ?
-	 1 : 0);
+	 ($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} =~ /no/i) ?
+	 0 : 1);
     $printer->{autoqueuesetuponspoolerstart} = 
 	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START}) ||
 	 ($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START} =~ /yes/i) ?

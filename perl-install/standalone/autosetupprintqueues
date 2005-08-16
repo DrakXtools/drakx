@@ -30,6 +30,8 @@ $commandline =~ /-(auto|nogui|gui|waitforgui)\b/;
 my $gui = $1;
 $gui ||= "auto";
 
+$gui = "nogui" if (! -x "/usr/X11R6/bin/X");
+
 if ($gui ne "nogui") {
     # Auto-detect whether we go in non-X mode or not
     my $desktopuser = `cat /var/run/console.lock 2>/dev/null`;
@@ -58,8 +60,15 @@ if ($gui ne "nogui") {
 	# Allow root's windows to be opened on the user's display and
 	# start printerdrake then, in a mode to do nothing else than
 	# automatically setting up print queues.
+	my $userhome =
+	    `getent passwd $desktopuser|awk -F: '{print \$6}' 2>&1`;
+	chomp $userhome;
 	my $errfile = "/dev/null";
-	system "export DISPLAY=\"localhost:0.0\"; USER=$desktopuser; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost > $errfile 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> $errfile 2>&1\"";
+	if (-r "$userhome/.Xauthority") {
+	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; export XAUTHORITY=$userhome/.Xauthority; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1;";
+	} else {
+	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost >> $errfile 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> $errfile 2>&1\"";
+	}
 	exit 0;
     }
 }

@@ -615,7 +615,8 @@ sub config_auto_admin {
     my $nogui =
 	N("No pop-up windows, package installation not possible");
     my $autoqueuesetupmode =
-	$printer->{autoqueuesetupgui} ? $waitforgui : $nogui;
+	($printer->{autoqueuesetupgui} && -x "/usr/X11R6/bin/X") ? 
+	$waitforgui : $nogui;
     if ($in->ask_from_
 	({ 
 	    title => N("Printer auto administration"),
@@ -632,9 +633,11 @@ sub config_auto_admin {
 	      { text => N("when Printerdrake is started"), 
 		type => 'bool',
 		val => \$printer->{autoqueuesetuponstart} },
-	      { val => N("Mode for automatic printer setup:") },
+	      if_(-x "/usr/X11R6/bin/X", 
+		  { val => N("Mode for automatic printer setup:") }),
 	      { val => \$autoqueuesetupmode,
-		list => [ $waitforgui, $nogui ], 
+		list => [ if_(-x "/usr/X11R6/bin/X", $waitforgui), 
+			  $nogui ], 
 		not_edit => 1, sort => 0,
 		type => 'list' },
 	      { val => N("Re-enable disabled printers") },
@@ -822,7 +825,8 @@ sub first_time_dialog {
 	    my @printerlist = 
 	      map {
 		  my $entry = $_->{val}{DESCRIPTION};
-		  $entry ||= "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
+		  $entry = "$_->{val}{MANUFACTURER} $_->{val}{MODEL}"
+		      if (length($entry) < 5) or ($entry !~ /\S+\s+\S+/);
 		  if_($entry, "  -  $entry\n");
 	      } @autodetected;
 	    my $unknown_printers = @autodetected - @printerlist;
@@ -941,11 +945,73 @@ sub configure_new_printers {
 	}
     }
 
+    my %printerselectedlist;
+    if (!$::noX) {
+	my @widgets;
+	foreach my $p (@autodetected) {
+	    if (!member($p->{port}, @blacklist)) {
+		my $entry = $p->{val}{DESCRIPTION};
+		$entry = "$p->{val}{MANUFACTURER} $p->{val}{MODEL}"
+		    if (length($entry) < 5) or ($entry !~ /\S+\s+\S+/);
+		$entry = N("Unknown model") if $entry !~ /\S/;
+		$entry = N("%s on %s", $entry, $p->{port});
+		$printerselectedlist{$p->{port}} = 1;
+		push (@widgets,
+		      { text => $entry, 
+			type => 'bool',
+			val => \$printerselectedlist{$p->{port}} });
+	    }
+	}
+	# Do not show empty dialog
+	return 1 if $#widgets < 0;
+	my $morethanone = ($#widgets > 0);
+	# Add entry to turn off auto queue setup
+	my $donotsetupagain = 0;
+	push (@widgets, { val => "__________" });
+	push (@widgets, { text =>
+			      N("Do not do automatic printer setup again"),
+			  type => 'bool',
+			  val => \$donotsetupagain });
+	undef $w;
+	if ($in->ask_from_
+	    ({ 
+		title => ($morethanone ?
+			  N("New printers found") :
+			  N("New printer found")),
+		messages => ($morethanone ?
+			     N("The following new printers were found and Printerdrake can automatically set them up for you. If you do not want to have all of them set up, unselect the ones which should be skipped, or click \"Cancel\" to set up none of them.\n") :
+			     N("The following new printer was found and printerdrake can automatically set it up for you. If you do not want to have it set up, unselect it, or click \"Cancel\".\n")) .
+			     N("Note that for certain printer models additional packages need to be installed. So keep your installation media handy.\n"),
+	    },
+	     \@widgets )) {
+	    # Turn off auto queue setup if the user wishes it
+	    if ($donotsetupagain) {
+		# Read current configuration
+		printer::main::get_auto_admin($printer);
+		# Turn off automatic print queue setup
+		$printer->{autoqueuesetuponnewprinter} = 0;
+		$printer->{autoqueuesetuponspoolerstart} = 0;
+		$printer->{autoqueuesetuponstart} = 0;
+		# Save new settings
+		printer::main::set_auto_admin($printer);
+		# Tell the user what evil thing he has done and
+		# how he can fix it.
+		$in->ask_warn(N("Printerdrake"), 
+			      N("Now you have turned off automatic printer setup.\n\n") . 
+			      N("You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's main menu. ", N("Options"), N("Configure Auto Administration")) .
+			      N("There you can also choose in which situation automatic printer setup is done (On Printerdrake startup, on printing system startup, when connecting a new USB printer)."));
+	    }
+	} else {
+	    return 1;
+	}
+    }
+
     # Now install queues for all auto-detected printers which have no queue
     # yet
     $printer->{noninteractive} = 1; # Suppress all interactive steps
     foreach my $p (@autodetected) {
-	if (!member($p->{port}, @blacklist)) {
+	if (!member($p->{port}, @blacklist) &&
+	    ($::noX || $printerselectedlist{$p->{port}})) {
 	    # Initialize some variables for queue setup
 	    $printer->{NEW} = 1;
 	    $printer->{TYPE} = "LOCAL";
@@ -966,7 +1032,7 @@ sub configure_new_printers {
 	    undef $w;
 	    $w = $::noX || 
 		$in->wait_message(N("Printerdrake"),
-				  N("Found printer on %s...",
+				  N("Configuring printer on %s...",
 				    $p->{port}));
 	    # Do configuration of multi-function devices and look up
 	    # model name in the printer database
@@ -3218,11 +3284,11 @@ my %drv_x125_options = (
                              'usb:/dev/usb/lp0' => " -o Device=usb_lp1",
                              'usb:/dev/usb/lp1' => " -o Device=usb_lp2",
                              'usb:/dev/usb/lp2' => " -o Device=usb_lp3",
-                             'usb:/dev/usb/lp3' => " -o Device=usb_lp3",
+                             'usb:/dev/usb/lp3' => " -o Device=usb_lp4",
                              'file:/dev/usb/lp0' => " -o Device=usb_lp1",
                              'file:/dev/usb/lp1' => " -o Device=usb_lp2",
                              'file:/dev/usb/lp2' => " -o Device=usb_lp3",
-                             'file:/dev/usb/lp3' => " -o Device=usb_lp3",
+                             'file:/dev/usb/lp3' => " -o Device=usb_lp4",
                              );
 
 sub get_printer_info {
@@ -3864,8 +3930,9 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	  #{ text => N("Plain text test page"), type => 'bool',
 	  #  val => \$options{ascii} }
 	  if_($::isWizard,
-	   { text => N("Do not print any test page"), type => 'bool', 
-	     val => \$res2 })
+	   ({ val => "__________" },
+	    { text => N("Do not print any test page"), type => 'bool', 
+	      val => \$res2 }))
 	  ]);
     $res2 = 1 if !($options{standard} || $options{altletter} || $options{alta4} || $options{photo} || $options{ascii});
     if ($res1 && !$res2) {
