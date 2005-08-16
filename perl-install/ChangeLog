@@ -1,3 +1,125 @@
+2005/08/16  Olivier Blin <oblin at mandriva.com>
+
+	* share/rpmsrate: required for easy-wifi
+
+2005/08/16  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/de.po: updated German file
+
+2005/08/16  Pixel  <pixel at mandriva.com>
+
+	* install_steps_gtk.pm: fix "Mouse" button in summary doing nothing
+
+	* fs/type.pm: add reiser4 to the true_local_fs_types()
+
+	* share/rpmsrate: don't have digikam (and some more) twice
+
+	* install_any.pm, install2.pm: fix typo
+
+	* Xconfig/xfree.pm: add some more commented resolutions (also see bugzilla
+	#17526)
+
+2005/08/16  Till Kamppeter  <till at mandriva.com>
+
+	* standalone/autosetupprintqueues, printer/main.pm,
+	printer/printerdrake.pm: 
+	  - Improved the auto queue setup pop-up window display on the user's
+	desktop according to the suggestions in bug #17370.
+	  - Ask the user whether he wants really have a new printer set up
+	  before doing the auto queue setup.
+	  - Do always a fully non-interactive auto queue setup when X is not
+	  installed
+	  - First-time dialog could show garbage as printer model name for some
+	  models. Fixed.
+	  - Separated "Print no test pages" entry on the wizard page for
+	  printing test pages.
+	  - Changed the defaults for automatic re-enabling of disabled queues to
+	  "no", due to the new CUPS backend wrapper queues should not get
+	  disabled automatically any more.
+	  - Typo corrections.
+
+	* share/rpmsrate: 
+	  - Let digiKam get installed on KDE systems. For KDE it is the default
+	application when plugging a digital camera now.
+
+2005/08/16  xalba
+
+	* share/po/eu.po: eguneraketa
+
+2005/08/15  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Added per-printer configurable handling of CUPS backend errors. This
+	way CUPS does not disable print queues automatically any more (for
+	  example if printer not turned on).
+
+2005/08/14  Funda Wang <fundawang at linux.net.cn>
+
+	* share/rpmsrate: Install scim-qtimm for locales that use scim as their
+	default IM.
+
+2005/08/14  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/08/13  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/08/13  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate: install scim-tomoe for japanese users
+	fix installing laptop-mode-tools on laptops
+
+	* share/po/br.po, share/po/ga.po: update
+
+2005/08/12  mareklaane
+
+	* share/po/et.po: Updated Estonian translations.
+
+2005/08/12  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakids: use gtkadd
+	improve list removal workaround using a copying grep
+
+	* standalone/net_applet: perl_checker fixes
+	  - store attack details in a hash
+	  - add a Gtk2::Balloon custom pseudo-widget
+	  - use balloons to notify attacks
+	  - show attack window on balloon click
+
+2005/08/12  rstandtke
+
+	* share/po/de.po: some fixes
+
+2005/08/11  Frederic Lepied  <flepied at mandriva.com>
+
+	* share/rpmsrate: install laptop-mode-tools on laptops
+
+2005/08/11  Funda Wang <fundawang at linux.net.cn>
+
+	* keyboard.pm: Revert removal of keyboard layout weight of zh. (bug#16873)
+
+2005/08/11  mbukovjan
+
+	* share/po/cs.po: Fix bug #17383
+
+2005/08/11  Olivier Blin <oblin at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.44mdk (and add a warning about CVS)
+
+2005/08/11  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* do_pkgs.pm (check_kernel_module_packages) handle ati_igp
+
+	* drakxtools.spec: 10.2-24.5.102mdk
+
+	* Xconfig/card.pm (install_server) install ati_igp-kernel too
+	(install_server) ati-igp was renamed ati_igp
+	(install_server) install alternative ATI driver if needed (again)
+
+	* share/po/br.po: update
+
 2005/08/10  Olivier Blin <oblin at mandriva.com>
 
 	* network/monitor.pm, standalone/net_applet: compute approx_level in
