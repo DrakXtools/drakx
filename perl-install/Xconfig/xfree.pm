@@ -590,21 +590,22 @@ our %ratio2resolutions = (
 
     # 1.25
     '5/4' => [ qw(640x512 720x576 1280x1024 1800x1440) ],
-		# SXGA=1280x1024
+		# SXGA=1280x1024 QSXGA=2560x2048
 
     # 1.33
     '4/3' => [
 	qw(320x240 480x360 640x480 800x600 832x624 
 	   1024x768 1152x864 1280x960 1400x1050 
-	   1600x1200 1920x1440 2048x1536), # 400x300 512x384 768x576
-    ],		# VGA=640x480, SVGA=800x600, XGA=1024x768, SXGA+=1400x1050, UXGA=1600x1200, QXGA=2048x1536
+	   1600x1200 1920x1440 2048x1536), # 768x576 1792x1344 1856x1392
+	    # DBLSCAN: 400x300 416x312 512x384 576x432 700x525 896x672 928x696 960x720
+    ],		# VGA=640x480, SVGA=800x600, XGA=1024x768, SXGA+=1400x1050, UXGA=1600x1200, QXGA=2048x1536 QSXGA+=2800x2100, QUXGA=3200x2400
 
     # 1.5
-    '3/2' => [ qw(360x240 720x480 1152x768) ],
+    '3/2' => [ qw(360x240 720x480 1152x768) ], # 576x384 (DBLSCAN of 1152x768)
 
     # 1.6
-    '16/10' => [ qw(1280x800 1440x900 1600x1000 1680x1050 1920x1200) ], # 320x200 640x400 960x600
-                # WSXGA+=1680x1050, WUXGA=1920x1200
+    '16/10' => [ qw(1280x800 1440x900 1600x1000 1680x1050 1920x1200) ], # 320x200 640x400 960x600 2560x1600
+                # WSXGA+=1680x1050, WUXGA=1920x1200, WQUXGA=3840x2400
 
     # 1.67
     '15/9' => [ qw(1280x768) ], # 800x480
@@ -626,7 +627,7 @@ our %ratio2resolutions = (
     # '17/12' => [ qw(544x384) ] ,
 
     # 1.56
-    # '25/16' => [ qw(1600x1024) ], # WSXGA
+    # '25/16' => [ qw(1600x1024) ], # WSXGA, (DBLSCAN 800x512)
 
     # 1.707
     # '128/75' => [ qw(1024x600) ],
@@ -653,7 +654,7 @@ our %ratio2resolutions = (
 	# 4.0 = 4/1
 	qw(3072x768 3456x864 3840x960 4800x1200),
 
-	# ?? 352x288
+	# ?? 352x288 640x350 (DBLSCAN 320x175) 720x400 (DBLSCAN 360x200)
     ],
 );
 
@@ -666,7 +667,10 @@ foreach my $ratio (keys %ratio2resolutions) {
 	foreach (@{$ratio2resolutions{$ratio}}) {
 	    my ($x, $y) = /(\d+)x(\d+)/;
 	    my $y2 = round($x * $eval);
-	    $y == $y2 or die "bad resolution $_ for ratio $ratio, it should be $x x $y2\n";
+	    $y == $y2 or do {
+		my $good_ratio = (find { m!^(\d+)/(\d+)$! && $y == round($x * $2 / $1) } keys %ratio2resolutions) || '??';
+		die "bad ratio $ratio for resolution $_, it should be $good_ratio\n";
+	    }
 	}
     }
 }
