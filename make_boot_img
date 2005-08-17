@@ -251,7 +251,7 @@ sub boot_img_i386 {
 
     __ "$sudo umount $tmp_mnt 2>/dev/null";
 
-    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 7000 : 1440);
+    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 8000 : 1440);
     my $mk_options = $type eq 'all' ? '' : '-f 1 -r 16 -s 2'; # keep the FAT bookkeeping as small as possible
     _ "mkdosfs $mk_options $img";
     _ "$sudo syslinux-graphic $img";
