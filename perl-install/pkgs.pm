@@ -1084,55 +1084,34 @@ sub install {
 	#- extract headers for parent as they are used by callback.
 	extractHeaders(\@transToInstall, $packages->{mediums});
 
+	my $close = sub {
+	    my ($pkg) = @_;
+	    #- update flag associated to package.
+	    $pkg->set_flag_installed(1);
+	    $pkg->set_flag_upgrade(0);
+	    #- update obsoleted entry.
+	    my $rejected = $packages->{state}{rejected};
+	    foreach (keys %$rejected) {
+		if (delete $rejected->{$_}{closure}{$pkg->fullname}) {
+		    %{$rejected->{$_}{closure}} or delete $rejected->{$_};
+		}
+	    }
+	};
+
 	my ($retry_pkg, $retry_count);
 	while ($retry_pkg || @transToInstall) {
-	    local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
-	    if (my $pid = fork()) {
-		close OUTPUT;
-		my $error_msg = '';
-		local $_;
-		while (<INPUT>) {
-		    if (/^die:(.*)/) {
-			$error_msg = $1;
-			last;
-		    } else {
-			chomp;
-			my @params = split ":";
-			if ($params[0] eq 'close') {
-			    my $pkg = $packages->{depslist}[$params[1]];
-			    #- update flag associated to package.
-			    $pkg->set_flag_installed(1);
-			    $pkg->set_flag_upgrade(0);
-			    #- update obsoleted entry.
-			    foreach (keys %{$packages->{state}{rejected}}) {
-				if (exists $packages->{state}{rejected}{$_}{closure}{$pkg->fullname}) {
-				    delete $packages->{state}{rejected}{$_}{closure}{$pkg->fullname};
-				    %{$packages->{state}{rejected}{$_}{closure}} or delete $packages->{state}{rejected}{$_};
-				}
-			    }
-			} else {
-			    installCallback($packages, @params);
-			}
-		    }
-		}
-		$error_msg and $error_msg .= join('', <INPUT>);
-		waitpid $pid, 0;
-		close INPUT;
-		$error_msg and die $error_msg;
-	    } else {
-		#- child process will run each transaction.
-		$SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
+
 		my @prev_pids = grep { /^\d+$/ } all("/proc");
-		close INPUT;
-		select((select(OUTPUT), $| = 1)[0]);
 		if ($::testing) {
 		    my $size_typical = $nb ? int($total/$nb) : 0;
 		    foreach (@transToInstall) {
 			log::l("i would install ", $_->name, " now");
 			my $id = $_->id;
-			print OUTPUT "inst:$id:start:0:$size_typical\ninst:$id:progress:0:$size_typical\nclose:$id\n";
+			installCallback($packages, inst => $id, start => 0, $size_typical);
+			installCallback($packages, inst => $id, progress => 0, $size_typical);
+			$close->($_);
 		    }
-		} else { eval {
+		} else {
 		    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
 		    my $trans = $db->create_transaction($::prefix);
 		    if ($retry_pkg) {
@@ -1173,41 +1152,28 @@ sub install {
 								      $check_installed ||= $pkg->compare_pkg($p) == 0;
 								  });
 						$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
-						$check_installed and print OUTPUT "close:$id\n";
-					    }, callback_inst => sub {
-						my ($_data, $type, $id, $subtype, $amount, $total) = @_;
-						print OUTPUT "$type:$id:$subtype:$amount:$total\n";
-					    });
+						$check_installed and $close->($pkg);
+					    }, callback_inst => \&installCallback,
+					);
 		    log::l("transactions done, now trying to close still opened fd");
 		    install_any::getFile('XXX'); #- close still opened fd.
 
 		    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
-		}; $@ and print OUTPUT "die:$@\n" }
-		close OUTPUT;
+		}
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
 		my @allpids = grep { /^\d+$/ } all("/proc");
-		my %ppids;
-		foreach (@allpids) {
-		    push @{$ppids{$1 || 1}}, $_
-		      if cat_("/proc/$_/status") =~ /^PPid:\s+(\d+)/m;
-		}
-		my @killpid = difference2(\@allpids, [ @prev_pids, 
-						       difference2([ $$, hashtree2list(getppid(), \%ppids) ],
-								   [ hashtree2list($$, \%ppids) ]) ]);
+		my @killpid = difference2(\@allpids, \@prev_pids);
 	
 		if (@killpid && $::isInstall && !$::local_install && !$::build_globetrotter) {
 		    foreach (@killpid) {
-			my ($prog, @para) = split("\0", cat_("/proc/$_/cmdline"));
+			my ($prog, @para) = split("\0", cat_("/proc/$_/cmdline") || readlink("/proc/$_/exe"));
 			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $_: " . join(' ', $prog, @para) . ".") if $prog ne '/usr/lib/gconfd-2';
 		    }
 		    kill 15, @killpid;
 		    sleep 2;
 		    kill 9, @killpid;
 		}
-
-		c::_exit(0);
-	    }
 
 	    #- if we are using a retry mode, this means we have to split the transaction with only
 	    #- one package for each real transaction.
@@ -1416,18 +1382,6 @@ sub naughtyServers {
 	my $p = packageByName($packages, $_);
 	$p && $p->flag_selected;
     } naughtyServers_list('quiet');
-}
-
-sub hashtree2list {
-    my ($e, $h) = @_;
-    my @l;
-    my @todo = $e;
-    while (@todo) {
-	my $e = shift @todo;
-	push @l, $e;
-	push @todo, @{$h->{$e} || []};
-    }
-    @l;
 }
 
 package install_medium;

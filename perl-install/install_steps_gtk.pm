@@ -439,7 +439,7 @@ sub installPackages {
     ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', spacing => 10));
 
     my $advertize = sub {
-	my ($update) = @_;
+	my ($update, $o_chroot_dir) = @_;
 	@install_any::advertising_images or return;
 	foreach ($msg, $progress, $text) {
 	    $show_advertising ? $_->hide : $_->show;
@@ -449,6 +449,7 @@ sub installPackages {
 	if ($show_advertising && $update) {
 	    $change_time = time();
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
+	    $f =~ s/\Q$o_chroot_dir// if $o_chroot_dir;
 	    log::l("advertising $f");
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon.png/;
@@ -522,7 +523,7 @@ sub installPackages {
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 	    gtkset($text, text => (split /\n/, c::from_utf8($p->summary))[0] || '');
-	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
+	    $advertize->(1, $::prefix) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
 	    $progress->set_fraction($total ? $amount / $total : 0);
