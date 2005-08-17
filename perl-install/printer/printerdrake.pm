@@ -2027,9 +2027,14 @@ sub setup_socket {
     my ($uri, $remotehost, $remoteport);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~  m!^(socket:|ptal://?hpjd:)!) {
+	$printer->{currentqueue}{connect} =~ 
+	m!^(socket:|ptal://?hpjd:|hp:/net/)!) {
 	$uri = $printer->{currentqueue}{connect};
-	if ($uri =~ m!^ptal:!) {
+	if ($uri =~ m!^hp:!) {
+	    if ($uri =~ m!^hp:/net/[^\?]+\?ip=(\d+\.\d+\.\d+\.\d+)!) {
+		($remotehost, $remoteport) = ($1, 9100);
+	    }
+	} elsif ($uri =~ m!^ptal:!) {
 	    if ($uri =~ m!^ptal://?hpjd:([^/:]+):([0-9]+)/?\s*$!) {
 		my $ptalport = $2 - 9100;
 		($remotehost, $remoteport) = ($1, $ptalport);
@@ -2061,9 +2066,9 @@ sub setup_socket {
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    if ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
-             $host = $1;
-             $port = $2;
-         }
+		$host = $1;
+		$port = $2;
+	    }
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
 		$menustr .= N(", host \"%s\", port %s",
@@ -2082,7 +2087,7 @@ sub setup_socket {
 	    $menuentries->{$a} cmp $menuentries->{$b};
 	} keys(%$menuentries);
 	if ($printer->{configured}{$queue} &&
-	    $printer->{currentqueue}{connect} =~ m!^(socket:|ptal://?hpjd:)! &&
+	    $printer->{currentqueue}{connect} =~ m!^(socket:|ptal://?hpjd:|hp:/net/)! &&
 	    $menuchoice eq "") {
 	    my $menustr;
 	    if ($printer->{currentqueue}{make}) {
@@ -2387,7 +2392,8 @@ sub setup_common {
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
-		if ($device =~ m!/usb/! &&
+		if (($device =~ m!/usb/! ||
+		     $device =~ m!^socket://!) &&
 		    $printer->{SPOOLER} eq 'cups') {
 		    my $choice = $in->ask_from_list
 			(N("Add a new printer"),
@@ -2461,13 +2467,15 @@ sub setup_common {
 		if !$printer->{noninteractive};
 
 	    if (!$hplipinstallfailed) {
-		if ($isHPLIP) {
+		if ($isHPLIP && ($device !~ m!^socket://!)) {
 		    my @uris = printer::main::start_hplip_manual();
 		    my (@menu, %menuhash);
 		    foreach my $item (@uris) {
 			if ($item =~ m!^hp:/(usb|par|net)/(\S*?)(\?\S*|)$!) {
-			    my $modelname = "HP " . $2;
+			    my $modelname = $2;
 			    $modelname =~ s/_/ /g;
+			    $modelname = "HP " . $modelname 
+				if $modelname !~ m!^HP\s!i;
 			    push(@menu, $modelname);
 			    $menuhash{$modelname} = $item;
 			}
@@ -2486,6 +2494,17 @@ sub setup_common {
 		} else {
 		    $hplipdevice = printer::main::start_hplip
 			($device, $hplipentry, @autodetected);
+		    if (!$hplipentry) {
+			$hplipentry = 
+			    printer::main::hplip_device_entry_from_uri
+			    ($hplipdevice);
+		    }
+		    if ($makemodel !~ /\S/) {
+			$makemodel = $hplipentry->{model};
+			$makemodel =~ s/_/ /g;
+			$makemodel = "HP " . $makemodel 
+			    if $makemodel !~ m!^HP\s!i;
+		    }
 		}
 	    }
 
@@ -2758,6 +2777,16 @@ sub setup_common {
 
     #- Search the database entry which matches the detected printer best
     my $descr = "";
+    if ((!$do_auto_detect) &&
+	($makemodel =~ m!^(\S+)\s+(.*?)$!)) {
+	my $mk = $1;
+	my $md = $2;
+	@autodetected = ({ port => $device,
+			   val => { CLASS => 'PRINTER',
+				    MANUFACTURER => $mk,
+				    MODEL => $md,
+				    DESCRIPTION => $makemodel } });
+    }
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
 	my ($automake, $automodel, $autodescr, $autocmdset, $autosku) =
@@ -2778,6 +2807,12 @@ sub setup_common {
 	    $descr =~ s/ /|/;
 	} elsif ($automake) {
 	    $descr = "$descrmake|";
+	} elsif ($makemodel =~ /\S/) {
+	    $descr = $makemodel;
+	    $descr =~ s/ /|/;
+	} else {
+	    $printer->{DBENTRY} = "";
+	    last;
 	}
 	# Remove manufacturer's name from the beginning of the
 	# description (do not do this with manufacturer names which
@@ -5430,8 +5465,11 @@ What do you want to modify on this printer?",
 	    #- Which printer type did we have before (check 
 	    #- beginning of URI)
 	    if ($printer->{configured}{$queue}) {
-		if ($printer->{currentqueue}{connect} =~ m!^ptal://?hpjd!) {
-		    $printer->{TYPE} = "socket";
+		if (($printer->{currentqueue}{connect} =~ 
+		     m!^ptal://?hpjd!) ||
+		    ($printer->{currentqueue}{connect} =~ 
+		     m!^hp:/net!)) {
+		    $printer->{TYPE} = "SOCKET";
 		} else {
 		    foreach my $type (qw(file parallel serial usb ptal hp
 					 mtink lpd socket smb ncp

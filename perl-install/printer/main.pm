@@ -29,7 +29,7 @@ our %printer_type = (
     N("Printer on remote CUPS server")              => "CUPS",
     N("Printer on remote lpd server")               => "LPD",
     N("Network printer (TCP/Socket)")               => "SOCKET",
-    N("Printer on SMB/Windows 95/98/NT server")     => "SMB",
+    N("Printer on SMB/Windows server")              => "SMB",
     N("Printer on NetWare server")                  => "NCP",
     N("Enter a printer device URI")                 => "URI",
     N("Pipe job into a command")                    => "POSTPIPE"
@@ -2472,6 +2472,8 @@ sub hplip_simple_model {
     my ($model) = @_;
     my $simplemodel = $model;
     $simplemodel =~ s/[^A-Za-z0-9]//g;
+    $simplemodel =~ s/HewlettPackard/HP/gi;
+    $simplemodel =~ s/HP//gi;
     $simplemodel =~ s/(DeskJet\d+C?)([a-z]*?)/$1/gi;
     $simplemodel =~ s/((LaserJet|OfficeJet|PhotoSmart|PSC)\d+)([a-z]*?)/$1/gi;
     $simplemodel =~ s/DeskJet/DJ/gi;
@@ -2486,8 +2488,8 @@ sub hplip_simple_model {
 sub hplip_device_entry {
     my ($device, @autodetected) = @_;
 
-    # Currently, only devices on USB work
-    return undef if $device !~ /usb/i;
+    # Currently, only devices on USB or TCP/Socket work
+    return undef if ($device !~ /usb/i) && ($device !~ m!^socket://!i);
 
     if (!$hplipdevicesdb) {
 	# Read the HPLIP device database if not done already
@@ -2505,6 +2507,11 @@ sub hplip_device_entry {
 	    # Exact match
 	    return $entry;
 	}
+	my $hpmodelstr = "HP_" . $modelstr;
+	if ($entry = $hplipdevicesdb->{$hpmodelstr}) {
+	    # Exact match
+	    return $entry;
+	}
 	# More 'fuzzy' matching
 	my $simplemodel = hplip_simple_model($modelstr);
 	foreach my $key (keys %{$hplipdevicesdb}) {
@@ -2517,7 +2524,7 @@ sub hplip_device_entry {
 	    $simplekey =~ s/(\d\d\d)0(C?)$/$1\\d$2/;
 	    $simplekey =~ s/(\d\d)0(\dC?)$/$1\\d$2/;
 	    return $hplipdevicesdb->{$key} if 
-		$simplemodel =~ m/^$simplekey$/;
+		$simplemodel =~ m/^$simplekey$/i;
 	}
 	# Device not supported
 	return undef;
@@ -2558,6 +2565,8 @@ sub start_hplip {
 	     $device =~ m!/dev/lp! ||
 	     $device =~ /printers/) {
 	$bus = "par";
+    } elsif ($device =~ m!^socket://!) {
+	$bus = "net";
     } else {
 	return undef;
     }
@@ -2566,26 +2575,50 @@ sub start_hplip {
     printer::services::start_not_running_service("hplip");
 
     # Determine HPLIP device URI for the CUPS queue
-    foreach my $a (@autodetected) {
-	$device eq $a->{port} or next;
+    if ($bus eq "net") {
+	$device =~ m!^socket://([^:]+)(|:\d+)$!;
+	my $host = $1;
+	my $ip;
+	if ($host !~ m!^\d+\.\d+\.\d+\.\d+$!) {
+	    my $addr = gethostbyname("$host");
+	    my ($a,$b,$c,$d) = unpack('C4',$addr);
+	    $ip = sprintf("%d.%d.%d.%d", $a, $b, $c, $d);
+	} else {
+	    $ip = $host;
+	}
 	open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-	     '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
-	     die 'Could not run "/usr/lib/cups/backend/hp"!';
+	     "/bin/sh -c \"export LC_ALL=C; /usr/bin/hp-makeuri $ip\" |") or
+	     die "Could not run \"/usr/bin/hp-makeuri $ip\"!";
 	while (my $line = <$F>) {
-	    if (($line =~ m!^direct\s+(hp:/$bus/(\S+)\?serial=(\S+))\s+!) ||
-		($line =~ m!^direct\s+(hp:/$bus/(\S+))\s+!)) {
+	    if ($line =~ m!(hp:/net/\S+)!) {
 		my $uri = $1;
-		my $modelstr = $2;
-		my $serial = $3;
-		if ((uc($modelstr) eq uc($hplipentry->{model})) &&
-		    (!$serial ||
-		     (uc($serial) eq uc($a->{val}{SERIALNUMBER})))) {
-		    close $F;
-		    return $uri;
-		}
+		close $F;
+		return $uri;
 	    }
 	}
 	close $F;
+    } else {
+	foreach my $a (@autodetected) {
+	    $device eq $a->{port} or next;
+	    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+		 '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
+		 die 'Could not run "/usr/lib/cups/backend/hp"!';
+	    while (my $line = <$F>) {
+		if (($line =~ m!^direct\s+(hp:/$bus/(\S+)\?serial=(\S+))\s+!) ||
+		    ($line =~ m!^direct\s+(hp:/$bus/(\S+))\s+!)) {
+		    my $uri = $1;
+		    my $modelstr = $2;
+		    my $serial = $3;
+		    if ((uc($modelstr) eq uc($hplipentry->{model})) &&
+			(!$serial ||
+			 (uc($serial) eq uc($a->{val}{SERIALNUMBER})))) {
+			close $F;
+			return $uri;
+		    }
+		}
+	    }
+	    close $F;
+	}
 	last;
     }
     # HPLIP URI not found
