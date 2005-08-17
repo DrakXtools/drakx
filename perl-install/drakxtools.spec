@@ -271,7 +271,7 @@ EOF
 
 mv $RPM_BUILD_ROOT%_sbindir/service_harddrake_confirm $RPM_BUILD_ROOT%_datadir/harddrake/confirm
 
-chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/{harddrake2,net_applet}}
+chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/{conf*,service_harddrake},%_sysconfdir/X11/xinit.d/{harddrake2,net_applet}}
 # temporary fix until we reenable this feature
 rm -f $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2
 
