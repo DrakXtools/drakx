@@ -1061,6 +1061,7 @@ sub install {
     log::l("pkgs::install the following: ", join(" ", map { $_->name } values %packages));
 
     URPM::read_config_files();
+    URPM::add_macro(join(' ', '__dbi_cdb', URPM::expand('%__dbi_cdb'), 'nofsync'));
     my $LOG = openInstallLog();
 
     #- do not modify/translate the message used with installCallback since
