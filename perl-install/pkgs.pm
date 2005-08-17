@@ -1030,8 +1030,8 @@ sub installTransactionClosure {
 }
 
 sub installCallback {
-#    my $msg = shift;
-#    log::l($msg .": ". join(',', @_));
+#    my (undef, $msg, @para) = @_;
+#    log::l("$msg: " . join(',', @para));
 }
 
 sub install {
@@ -1066,7 +1066,7 @@ sub install {
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
     #- place (install_steps_gtk.pm,...).
-    installCallback($packages, 'user', undef, 'install', $nb, $total);
+    installCallback($packages, user => undef, install => $nb, $total);
 
     do {
 	my @transToInstall = installTransactionClosure($packages, \%packages);
@@ -1152,8 +1152,8 @@ sub install {
 		    log::l("rpm transactions start");
 		    my $fd; #- since we return the "fileno", perl does not know we're still using it, and so closes it, and :-(
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
-						my ($data, $_type, $id) = @_;
-						my $pkg = defined $id && $data->{depslist}[$id];
+						my ($packages, $_type, $id) = @_;
+						my $pkg = defined $id && $packages->{depslist}[$id];
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
 						print $LOG "$f\n";
@@ -1164,8 +1164,8 @@ sub install {
 						}
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
-						my ($data, $_type, $id) = @_;
-						my $pkg = defined $id && $data->{depslist}[$id] or return;
+						my ($packages, $_type, $id) = @_;
+						my $pkg = defined $id && $packages->{depslist}[$id] or return;
 						my $check_installed;
 						$db->traverse_tag('name', [ $pkg->name ], sub {
 								      my ($p) = @_;
@@ -1284,7 +1284,7 @@ sub remove {
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
     #- place (install_steps_gtk.pm,...).
-    installCallback($db, 'user', undef, 'remove', scalar @$toRemove);
+    installCallback($db, user => undef, remove => scalar @$toRemove);
 
     if (my @probs = $trans->run(undef, force => 1)) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
