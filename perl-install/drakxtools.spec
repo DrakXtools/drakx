@@ -47,7 +47,8 @@ Conflicts: drakxtools-newt < 10-51mdk
 Summary: The drakxtools via http
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Net_SSLeay >= 1.22-1mdk, perl-Authen-PAM >= 0.14-1mdk, perl-CGI >= 2.91-1mdk
-PreReq: rpm-helper
+Requires(pre): rpm-helper
+Requires(post): rpm-helper
 
 %package -n drakx-finish-install
 Summary: First boot configuration
@@ -61,7 +62,8 @@ Requires: %{name}-newt = %version-%release
 Requires: hwdb-clients
 Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
-Prereq: rpm-helper
+Requires(pre): rpm-helper
+Requires(post): rpm-helper
 
 %package -n harddrake-ui
 Summary: Main Hardware Configuration/Information Tool
