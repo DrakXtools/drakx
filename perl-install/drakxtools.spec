@@ -371,7 +371,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %defattr(-,root,root)
 %dir %_sysconfdir/drakxtools_http
 %config(noreplace) %_sysconfdir/pam.d/miniserv
-%config(noreplace) %_sysconfdir/init.d/drakxtools_http
+%_sysconfdir/init.d/drakxtools_http
 %config(noreplace) %_sysconfdir/drakxtools_http/conf
 %config(noreplace) %_sysconfdir/drakxtools_http/authorised_progs
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
