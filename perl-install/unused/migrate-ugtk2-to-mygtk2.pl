@@ -2,7 +2,7 @@ use MDK::Common;
 
 BEGIN {
     @ARGV or warn(<<EOF), exit 1;
-usage: unused/migrate-ugtk2-to-mygtk2.pl -pi <file.pm>
+usage: $0 -pi <file.pm>
 
 - an emacs is launched with a script fixing the closing "children => [ ...",
   simply save the file and exit this emacs
@@ -217,7 +217,8 @@ END {
     if (defined $^I) {
 	foreach (@args) {
 	    warn "$_: closing children using emacs\n";
-	    system('emacs', '-q', '-l', 'unused/migrate-ugtk2-to-mygtk2.el', $_, '-f', 'my-close-children') 
+	    (my $el = $0) =~ s/\.pl$/.el/ or die ".el missing";
+	    system('emacs', '-q', '-l', $el, $_, '-f', 'my-close-children') 
 	}
     }
 }
