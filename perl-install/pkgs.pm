@@ -1308,7 +1308,6 @@ am-utils
 
     my @new_80 = qw(
 jabber
-MySQL
 am-utils
 boa
 cups
@@ -1321,14 +1320,12 @@ openssh-server
 pidentd
 proftpd
 rwall
-rwho
 squid
 webmin
 wu-ftpd
 );
 
     my @new_81 = qw(
-apache-mod_perl
 ftp-server-krb5
 telnet-server-krb5
 ypserv
@@ -1346,8 +1343,6 @@ ucd-snmp
 );
 
     my @new_92 = qw(
-DansGuardian
-MySQL-Max
 clusternfs
 gkrellm-server
 lisa
@@ -1359,12 +1354,26 @@ saned
 vsftpd
 );
 
+    my @new_2006 = qw(
+apache-conf
+bpalogin
+cfengine-cfservd
+freeradius
+mDNSResponder
+openslp
+pxe
+routed
+sendmail
+spamassassin-spamd
+);
+
     my @not_warned = qw(
 nfs-utils-clients
 portmap
+howl
 ); # X server
 
-    (@new_80, @new_81, @new_82, @new_92, if_(!$quiet, @not_warned));
+    (@new_80, @new_81, @new_82, @new_92, @new_2006, if_(!$quiet, @not_warned));
 }
 
 sub naughtyServers {
