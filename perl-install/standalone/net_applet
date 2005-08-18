@@ -327,6 +327,7 @@ sub handle_attack {
     my $attack = { mapn { $_[0] => $_[1] } [ 'seq', 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type' ], \@_ };
     $attack->{ip_addr} = network::ifw::get_ip_address($attack->{addr});
     $attack->{hostname} = network::ifw::resolve_address($attack->{ip_addr});
+    $attack->{protocol} = network::ifw::get_protocol($attack->{protocol});
     $attack->{service} = network::ifw::get_service($attack->{port});
     $attack->{msg} = $attack->{prefix} eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $attack->{hostname})
       : $attack->{prefix} eq "SERV" ? N("The %s service has been attacked by %s.", $attack->{service}, $attack->{hostname})
@@ -361,12 +362,11 @@ sub notify_attack {
 sub ask_attack_verdict {
     my ($attack) = @_;
 
-    my $w = Gtk2::Window->new;
-    $w->set_title(N("Interactive Firewall: intrusion detected"));
-    $w->set_icon(gtknew('Pixbuf', file => "/usr/lib/libDrakX/icons/drakfirewall.png"));
+    my $w = ugtk2->new(N("Interactive Firewall: intrusion detected"),
+                   icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
     my ($yes, $no, $auto);
 
-    gtkadd($w,
+    gtkadd($w->{window},
            gtknew('VBox', spacing => 5, children_loose => [
                gtknew('HBox', children => [
                    0, Gtk2::Image->new_from_stock('gtk-dialog-warning', 'dialog'),
@@ -376,6 +376,29 @@ sub ask_attack_verdict {
                        0, N("Do you want to blacklist the attacker?")
                    ])
                ]),
+               gtksignal_connect(gtkadd(Gtk2::Expander->new(N("Attack details")),
+                                        gtknew('HBox', children => [
+                                            0, gtknew('Label', text => "     "),
+                                            1, gtknew('VBox', children_loose => [
+                                                N("Attack time: %s", network::ifw::format_date($attack->{timestamp})),
+                                                N("Network interface: %s", $attack->{indev}),
+                                                N("Attack type: %s", $attack->{prefix}),
+                                                if_($attack->{protocol}, N("Protocol: %s", $attack->{protocol})),
+                                                N("Attacker IP address: %s", $attack->{ip_addr}),
+                                                if_($attack->{hostname} ne $attack->{ip_addr}, N("Attacker hostname: %s", $attack->{hostname})),
+                                                (
+                                                    $attack->{service} ne $attack->{port} ?
+                                                      N("Service attacked: %s", $attack->{service}) :
+                                                      N("Port attacked: %s", $attack->{port}),
+                                                ),
+                                                if_($attack->{icmp_type}, N("Type of ICMP attack: %s", $attack->{icmp_type}))
+                                            ]),
+                                        ])),
+                                 activate => sub { $_[0]->get_expanded and $w->{window}->shrink_topwindow }
+                             ),
+               $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
+                   $no->set_sensitive(!$_[0]->get_active);
+               }),
                gtknew('HButtonBox', layout => 'edge', children_loose => [
                    $no = gtknew('Button', text => N("No"), clicked => sub {
                        $w->destroy;
@@ -387,32 +410,14 @@ sub ask_attack_verdict {
                        set_blacklist_verdict($attack->{seq}, 1);
                    })
                ]),
-               $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
-                   $no->set_sensitive(!$_[0]->get_active);
-               }),
-               gtkadd(Gtk2::Expander->new(N("Attack details")),
-                      gtknew('HBox', children => [
-                          0, gtknew('Label', text => "     "),
-                          1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", network::ifw::format_date($attack->{timestamp})),
-                              N("Network interface: %s", $attack->{indev}),
-                              N("Attack type: %s", $attack->{prefix}),
-                              if_($attack->{protocol}, N("Protocol: %s", $attack->{protocol})),
-                              N("Attacker IP address: %s", $attack->{ip_addr}),
-                              if_($attack->{hostname} ne $attack->{ip_addr}, N("Attacker hostname: %s", $attack->{hostname})),
-                              if_($attack->{service}, N("Service attacked: %s", $attack->{service})),
-                              if_($attack->{port}, N("Port attacked: %s", $attack->{port})),
-                              if_($attack->{icmp_type}, N("Type of ICMP attack: %s", $attack->{icmp_type}))
-                          ])
-                      ])),
            ]));
     $yes->grab_focus;
-    gtksignal_connect($w, delete_event => sub {
+    gtksignal_connect($w->{window}, delete_event => sub {
         $auto->get_active and $interactive_cb->set_active(0);
         #- apply default policy
         set_blacklist_verdict($attack->{seq}, undef);
     });
-    $w->show_all;
+    $w->{window}->show_all;
 }
 
 package Gtk2::Balloon;
