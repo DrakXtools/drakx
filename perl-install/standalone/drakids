@@ -35,7 +35,7 @@ foreach (0, 1, 2) {
 }
 
 my $whitelist = Gtk2::SimpleList->new(addr => 'hidden',
-                                      N("Attacker") => 'text',
+                                      N("Allowed addresses") => 'text',
                                   );
 $whitelist->get_selection->set_mode('multiple');
 $whitelist->set_headers_clickable(1);
