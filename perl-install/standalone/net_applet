@@ -59,7 +59,7 @@ my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
                'monitorNetwork' => { name => N("Monitor Network"), launch => \&run_net_monitor },
-               'monitorAFW' => { name => N("Active Firewall"), launch => \&run_drakids },
+               'monitorAFW' => { name => N("Interactive Firewall"), launch => \&run_drakids },
                'wireless' => { name => N("Manage wireless networks"), launch => \&run_drakroam },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
@@ -168,7 +168,7 @@ sub generate_wireless_menuitem {
     $net->{activate} = $net->{menuitem}->signal_connect('activate' => sub {
         if (exists $net->{id}) {
             eval { $monitor->select_network($net->{id}) };
-            $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+            $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
         } else {
             run_drakroam();
         }
@@ -342,7 +342,7 @@ sub set_blacklist_verdict {
     defined $verdict or $verdict = 1;
 
     eval { $ifw->blacklist($seq, $verdict) };
-    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+    $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 
     shift @attacks_queue;
     #- wait for some time so that the new balloon is noticeable
@@ -362,7 +362,7 @@ sub ask_attack_verdict {
     my ($attack) = @_;
 
     my $w = Gtk2::Window->new;
-    $w->set_title(N("Active Firewall: intrusion detected"));
+    $w->set_title(N("Interactive Firewall: intrusion detected"));
     $w->set_icon(gtknew('Pixbuf', file => "/usr/lib/libDrakX/icons/drakfirewall.png"));
     my ($yes, $no, $auto);
 

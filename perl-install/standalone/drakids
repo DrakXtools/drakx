@@ -58,7 +58,7 @@ my $ifw = network::ifw->new(dbus_object::system_bus(), sub {
 init_lists();
 
 $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
-my $w = ugtk2->new(N("Active Firewall"));
+my $w = ugtk2->new(N("Interactive Firewall"));
 gtkadd($w->{window},
         gtknew('Notebook', children => [
             gtknew('Label', text => N("Blacklist")),
@@ -142,7 +142,7 @@ sub unblacklist {
     if (!$@) {
         list_remove_addr($blacklist->{data}, @addr);
     } else {
-        err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+        err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
     }
 }
 
@@ -168,7 +168,7 @@ sub whitelist {
     my @addr = @_;
     unblacklist(@addr);
     eval { $ifw->whitelist($_) foreach @addr };
-    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+    $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 }
 
 sub unwhitelist {
@@ -177,7 +177,7 @@ sub unwhitelist {
     if (!$@) {
         list_remove_addr($whitelist->{data}, @addr);
     } else {
-        err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+        err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
     }
 }
 
@@ -186,7 +186,7 @@ sub init_lists() {
         init_blacklist();
         init_whitelist();
     };
-    $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
+    $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 }
 
 sub clear_lists() {
