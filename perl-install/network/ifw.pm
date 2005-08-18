@@ -83,6 +83,11 @@ sub get_service {
     getservbyport($port, undef) || $port;
 }
 
+sub get_protocol {
+    my ($protocol) = @_;
+    getprotobynumber($protocol) || $protocol;
+}
+
 sub get_ip_address {
     my ($addr) = @_;
     inet_ntoa(pack('L', $addr));
