@@ -1310,15 +1310,12 @@ am-utils
 jabber
 MySQL
 am-utils
-apache
 boa
-cfengine
 cups
 drakxtools-http
 finger-server
 imap
 leafnode
-lpr
 ntp
 openssh-server
 pidentd
@@ -1333,15 +1330,12 @@ wu-ftpd
     my @new_81 = qw(
 apache-mod_perl
 ftp-server-krb5
-mcserv
-samba
 telnet-server-krb5
 ypserv
 );
 
     my @new_82 = qw(
 LPRng
-httpd-naat
 inn
 netatalk
 nfs-utils
@@ -1352,8 +1346,6 @@ ucd-snmp
 );
 
     my @new_92 = qw(
-apache2
-apache2-mod_perl
 DansGuardian
 MySQL-Max
 clusternfs
