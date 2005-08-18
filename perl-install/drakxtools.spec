@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.44mdk
+Release: 0.45mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.45mdk
+- rpmlint fixes
+- diskdrake: better reiser4 support (pixel)
+- drakids (blino):
+  o use "Allowed addresses" instead of "Attacker" in whitelist
+  o improve list removal workaround using a copying grep
+- keyboardrake: revert removal of keyboard layout weight of zh.
+  (Funda Wang, #16873)
+- printerdrake: misc enhancements
+- net_applet (blino):
+  o use balloons to notify attacks
+  o show attack window on balloon click
+
 * Thu Aug 11 2005 Flavio Bruno Leitner <flavio@mandriva.com> 10.3-0.44mdk 
 - changed requires from modutils to module-init-tools
 
