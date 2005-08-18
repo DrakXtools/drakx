@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.45mdk
+Release: 0.46mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Aug 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.46mdk
+- drakconnect: only install bpalogin if needed (blino)
+- drakTermServ (stew):
+  o client tree edit fix (#17653),
+  o write to floppy (#17655)
+- harddrake service: use the new way to blacklist modules (#12731)
+- harddrake GUI: only install HW packages of high priority
+- net_applet: cosmetic fixes (blino)
+- printerdrake: removed stuff for automatic print queue setup when
+  starting CUPS (till)
+
 * Thu Aug 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.45mdk
 - rpmlint fixes
 - diskdrake: better reiser4 support (pixel)
