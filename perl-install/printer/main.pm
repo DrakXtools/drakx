@@ -742,8 +742,6 @@ sub set_auto_admin {
 	$printer->{autoqueuesetuponnewprinter} ? "yes" : "no";
     $sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} = 
 	$printer->{enablequeuesonspoolerstart} ? "yes" : "no";
-    $sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START} = 
-	$printer->{autoqueuesetuponspoolerstart} ? "yes" : "no";
     $sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START} = 
 	$printer->{autoqueuesetuponstart} ? "yes" : "no";
     $sysconfig{AUTO_SETUP_QUEUES_MODE} = 
@@ -766,10 +764,6 @@ sub get_auto_admin {
 	(!defined($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START}) ||
 	 ($sysconfig{ENABLE_QUEUES_ON_SPOOLER_START} =~ /no/i) ?
 	 0 : 1);
-    $printer->{autoqueuesetuponspoolerstart} = 
-	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START}) ||
-	 ($sysconfig{AUTO_SETUP_QUEUES_ON_SPOOLER_START} =~ /yes/i) ?
-	 1 : 0);
     $printer->{autoqueuesetuponstart} = 
 	(!defined($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START}) ||
 	 ($sysconfig{AUTO_SETUP_QUEUES_ON_PRINTERDRAKE_START} =~ /yes/i) ?

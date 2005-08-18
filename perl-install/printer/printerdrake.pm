@@ -611,9 +611,9 @@ sub config_auto_admin {
 
     # Configuration dialog
     my $waitforgui =
-	N("Allow pop-up windows, package installation possible");
+	N("Allow pop-up windows, canceling setup and package installation possible");
     my $nogui =
-	N("No pop-up windows, package installation not possible");
+	N("No pop-up windows, canceling setup and package installation not possible");
     my $autoqueuesetupmode =
 	($printer->{autoqueuesetupgui} && -x "/usr/X11R6/bin/X") ? 
 	$waitforgui : $nogui;
@@ -627,9 +627,6 @@ sub config_auto_admin {
 	      { text => N("when a USB printer is connected and turned on"), 
 		type => 'bool',
 		val => \$printer->{autoqueuesetuponnewprinter} },
-	      { text => N("when the printing system is started"), 
-		type => 'bool',
-		val => \$printer->{autoqueuesetuponspoolerstart} },
 	      { text => N("when Printerdrake is started"), 
 		type => 'bool',
 		val => \$printer->{autoqueuesetuponstart} },
@@ -1118,7 +1115,6 @@ sub turnoffautosetup {
     printer::main::get_auto_admin($printer);
     # Turn off automatic print queue setup
     $printer->{autoqueuesetuponnewprinter} = 0;
-    $printer->{autoqueuesetuponspoolerstart} = 0;
     $printer->{autoqueuesetuponstart} = 0;
     # Save new settings
     printer::main::set_auto_admin($printer);
