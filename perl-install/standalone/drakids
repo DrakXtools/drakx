@@ -10,7 +10,7 @@ use mygtk2 qw(gtknew);
 use ugtk2 qw(:dialogs);
 use POSIX qw(strftime);
 use dbus_object;
-use network::activefw;
+use network::ifw;
 
 use Gtk2::SimpleList;
 
@@ -42,7 +42,7 @@ $whitelist->set_headers_clickable(1);
 $whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelist->get_model);
 $whitelist->get_column(0)->set_sort_column_id(0);
 
-my $activefw = network::activefw->new(dbus_object::system_bus(), sub {
+my $ifw = network::ifw->new(dbus_object::system_bus(), sub {
     my ($_con, $msg) = @_;
     my $member = $msg->get_member;
     if ($member eq 'Blacklist') {
@@ -93,7 +93,7 @@ sub sort_by_column {
 }
 
 sub handle_init() {
-    $activefw->attach_object;
+    $ifw->attach_object;
     init_lists();
 }
 
@@ -105,7 +105,7 @@ sub list_remove_addr {
 
 #- may throw an exception
 sub init_blacklist() {
-    my @packets = $activefw->get_blacklist;
+    my @packets = $ifw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
         handle_blacklist(@blacklist);
     }
@@ -120,13 +120,13 @@ sub handle_blacklist {
     push @{$blacklist->{data}}, [
         $addr,
         $timestamp,
-        network::activefw::format_date($timestamp),
-        network::activefw::resolve_address(network::activefw::get_ip_address($addr)),
+        network::ifw::format_date($timestamp),
+        network::ifw::resolve_address(network::ifw::get_ip_address($addr)),
         $prefix eq 'SCAN' ? N("Port scanning") :
         $prefix eq 'SERV' ? N("Service attack") :
         $prefix eq 'PASS' ? N("Password cracking") :
         '',
-        network::activefw::get_service($port) || '',
+        network::ifw::get_service($port) || '',
         $indev,
         $protocol || '',
     ];
@@ -138,7 +138,7 @@ sub get_selected_blacklist() {
 
 sub unblacklist {
     my @addr = @_;
-    eval { $activefw->unblacklist($_) foreach @addr };
+    eval { $ifw->unblacklist($_) foreach @addr };
     if (!$@) {
         list_remove_addr($blacklist->{data}, @addr);
     } else {
@@ -148,7 +148,7 @@ sub unblacklist {
 
 #- may throw an exception
 sub init_whitelist() {
-    handle_whitelist($_) foreach $activefw->get_whitelist;
+    handle_whitelist($_) foreach $ifw->get_whitelist;
 }
 
 sub clear_whitelist() {
@@ -157,7 +157,7 @@ sub clear_whitelist() {
 
 sub handle_whitelist {
     my ($addr) = @_;
-    push @{$whitelist->{data}}, [ $addr, network::activefw::resolve_address(network::activefw::get_ip_address($addr)) ];
+    push @{$whitelist->{data}}, [ $addr, network::ifw::resolve_address(network::ifw::get_ip_address($addr)) ];
 }
 
 sub get_selected_whitelist() {
@@ -167,13 +167,13 @@ sub get_selected_whitelist() {
 sub whitelist {
     my @addr = @_;
     unblacklist(@addr);
-    eval { $activefw->whitelist($_) foreach @addr };
+    eval { $ifw->whitelist($_) foreach @addr };
     $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
 }
 
 sub unwhitelist {
     my @addr = @_;
-    eval { $activefw->unwhitelist($_) foreach @addr };
+    eval { $ifw->unwhitelist($_) foreach @addr };
     if (!$@) {
         list_remove_addr($whitelist->{data}, @addr);
     } else {

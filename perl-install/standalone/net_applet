@@ -10,7 +10,7 @@ use network::tools;
 use run_program;
 use mygtk2 qw(gtknew);
 use dbus_object;
-use network::activefw;
+use network::ifw;
 use network::monitor;
 use detect_devices;
 
@@ -32,7 +32,7 @@ my $watched_interface;
 
 my $dbus = dbus_object::system_bus();
 my $monitor = network::monitor->new($dbus);
-my ($activefw, $interactive_cb, @attacks_queue);
+my ($ifw, $interactive_cb, @attacks_queue);
 
 my %pixbufs =
   (
@@ -109,13 +109,13 @@ $balloon->signal_connect(button_press_event => sub {
     ask_attack_verdict($attacks_queue[0]);
 });
 
-$activefw = network::activefw->new($dbus, sub {
+$ifw = network::ifw->new($dbus, sub {
     my ($_con, $msg) = @_;
     my $member = $msg->get_member;
     if ($member eq 'Attack') {
         handle_attack($msg->get_args_list);
     } elsif ($member eq 'Init') {
-        $activefw->attach_object;
+        $ifw->attach_object;
         checkNetworkForce();
     }
 });
@@ -281,11 +281,11 @@ sub generate_menu {
 
     push @settings, $create_item->('chooseProfile');
     my $interactive;
-    eval { $interactive = $activefw->get_interactive };
+    eval { $interactive = $ifw->get_interactive };
     if (defined $interactive) {
         $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
                                                                   $interactive),
-                                                    toggled => sub { eval { $activefw->set_interactive(to_bool($_[0]->get_active)) } }));
+                                                    toggled => sub { eval { $ifw->set_interactive(to_bool($_[0]->get_active)) } }));
         push @settings, $interactive_cb;
     }
     push @settings, gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
@@ -317,7 +317,7 @@ sub setAutoStart {
 }
 
 sub get_unprocessed_attacks() {
-    my @packets = eval { $activefw->get_reports };
+    my @packets = eval { $ifw->get_reports };
     while (my @attack = splice(@packets, 0, 9)) {
         handle_attack(@attack);
     }
@@ -325,9 +325,9 @@ sub get_unprocessed_attacks() {
 
 sub handle_attack {
     my $attack = { mapn { $_[0] => $_[1] } [ 'seq', 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type' ], \@_ };
-    $attack->{ip_addr} = network::activefw::get_ip_address($attack->{addr});
-    $attack->{hostname} = network::activefw::resolve_address($attack->{ip_addr});
-    $attack->{service} = network::activefw::get_service($attack->{port});
+    $attack->{ip_addr} = network::ifw::get_ip_address($attack->{addr});
+    $attack->{hostname} = network::ifw::resolve_address($attack->{ip_addr});
+    $attack->{service} = network::ifw::get_service($attack->{port});
     $attack->{msg} = $attack->{prefix} eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $attack->{hostname})
       : $attack->{prefix} eq "SERV" ? N("The %s service has been attacked by %s.", $attack->{service}, $attack->{hostname})
       : $attack->{prefix} eq "PASS" ? N("A password cracking attack has been attempted by %s.", $attack->{hostname})
@@ -341,7 +341,7 @@ sub set_blacklist_verdict {
     #- default is to blacklist
     defined $verdict or $verdict = 1;
 
-    eval { $activefw->blacklist($seq, $verdict) };
+    eval { $ifw->blacklist($seq, $verdict) };
     $@ and err_dialog(N("Active Firewall"), N("Unable to contact daemon"));
 
     shift @attacks_queue;
@@ -394,7 +394,7 @@ sub ask_attack_verdict {
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
                           1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", network::activefw::format_date($attack->{timestamp})),
+                              N("Attack time: %s", network::ifw::format_date($attack->{timestamp})),
                               N("Network interface: %s", $attack->{indev}),
                               N("Attack type: %s", $attack->{prefix}),
                               if_($attack->{protocol}, N("Protocol: %s", $attack->{protocol})),

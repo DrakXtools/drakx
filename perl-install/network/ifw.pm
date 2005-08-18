@@ -1,4 +1,4 @@
-package network::activefw;
+package network::ifw;
 
 use dbus_object;
 use Socket;
@@ -10,13 +10,13 @@ sub new {
 
     my $con = $bus->{connection};
     $con->add_filter($filter);
-    $con->add_match("type='signal',interface='com.mandriva.monitoring.activefw'");
+    $con->add_match("type='signal',interface='com.mandriva.monitoring.ifw'");
 
     my $o = dbus_object::new($type,
 			     $bus,
 			     "com.mandriva.monitoring",
-			     "/com/mandriva/monitoring/activefw",
-			     "com.mandriva.monitoring.activefw");
+			     "/com/mandriva/monitoring/ifw",
+			     "com.mandriva.monitoring.ifw");
     dbus_object::set_gtk2_watch($o);
     $o;
 }
