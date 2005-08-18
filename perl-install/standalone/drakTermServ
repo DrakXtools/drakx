@@ -1027,7 +1027,8 @@ sub maintain_clients() {
 			$client = $value;
 			$citer = $iter;
 		} else {
-			$client = '';
+			$citer = $model->iter_parent($iter);
+			$client = $model->get($citer, 0);
 		}
 		$button_edit->set_sensitive(1);
 		$button_config->set_sensitive(1);
@@ -1126,7 +1127,6 @@ sub maintain_clients() {
 							} else {
 								$check_hdw_config->set_active(0);
 							}	
-								
 							my $result = delclient($client);
 							if ($result == 0) {
 								$model->remove($citer);
@@ -1547,8 +1547,8 @@ sub write_eb_image {
 		if (-e "/dev/fd0") {
 			my $result = $in->ask_okcancel('', N("Please insert floppy disk:"));
 			return if !($result);
-			$result = run_program::run("cat $rom_path/zdsk/$nic > /dev/fd0") if $result;
-			if ($result) {
+			$result = run_program::run("cat $rom_path/zdsk/$nic > /dev/fd0");
+			if ($result == 0) {
 				$in->ask_warn(N("Error"), N("Could not access the floppy!"));
 			} else {
 				$in->ask_warn(N("Information"), N("Floppy can be removed now"));
