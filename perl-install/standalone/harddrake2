@@ -584,12 +584,12 @@ $password_w->set_visibility(0); #set_invisible_char('*');
 
 sub simple_read_rpmsrate() {
     map { split(' ', $_) } map {
-        if (my ($p, $packages) = /[^!]HW"(.*)"(.*)/) {
-            if_(detect_devices::matching_desc__regexp($p), $packages);
-        } elsif (($p, $packages) = /[^!]HW_CAT"(.*)"(.*)/) {
-            if_(modules::probe_category($p), $packages);
-        } elsif (($p, $packages) = /[^!]DRIVER"(.*)"(.*)/) {
-            if_(detect_devices::matching_driver__regexp($p), $packages);
+        if (my ($priority, $p, $packages) = /(\d+)\s*[^!]HW"(.*)"(.*)/) {
+            if_(3 < $priority && detect_devices::matching_desc__regexp($p), $packages);
+        } elsif (($priority, $p, $packages) = /(\d+)\s*[^!]HW_CAT"(.*)"(.*)/) {
+            if_(3 < $priority && modules::probe_category($p), $packages);
+        } elsif (($priority, $p, $packages) = /(\d+)\s*[^!]DRIVER"(.*)"(.*)/) {
+            if_(3 < $priority && detect_devices::matching_driver__regexp($p), $packages);
         } else {
             ();
         }
