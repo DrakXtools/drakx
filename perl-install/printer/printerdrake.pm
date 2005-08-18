@@ -812,10 +812,6 @@ sub first_time_dialog {
     return 1 if printer::default::get_spooler() || $::isInstall;
 
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
-    # Now, where the first-time dialog will be displayed, all subsequent
-    # wait messages should be displayed, also if we are in GUI auto queue
-    # setup mode
-    undef $::autoqueue;
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
@@ -879,13 +875,37 @@ sub first_time_dialog {
 
     while (1) {
 	# Show dialog
-	my $do_it = N("Yes");
-	my $quit = N("Quit");
-	my @choices = ($do_it, $quit);
-	my $choice = $in->ask_from_list(N("Printerdrake"), $dialogtext, 
+	my $donotsetupagain = 0;
+	my $choice;
+	if ($::autoqueue) {
+	    $choice = $in->ask_from_
+		({ 
+		    title => N("Printerdrake"),
+		    messages => $dialogtext,
+		    cancel => N("Quit"),
+		    ok => N("Yes") },
+		 [ { text => N("Do not do automatic printer setup and do not do it again"),
+		     type => 'bool',
+		     val => \$donotsetupagain } ] );
+	    
+	    # Turn off auto queue setup if the user wishes it
+	    turnoffautosetup($printer, $in) if $donotsetupagain;
+
+	    # Now, where the first-time dialog was displayed, all
+	    # subsequent wait messages should be displayed, also if we
+	    # are in GUI auto queue setup mode
+	    undef $::autoqueue;
+
+	    return 0 if !$choice;
+	} else {
+	    my $do_it = N("Yes");
+	    my $quit = N("Quit");
+	    my @choices = ($do_it, $quit);
+	    $choice = $in->ask_from_list(N("Printerdrake"), $dialogtext, 
 					\@choices, $quit);
-	return 0 if $choice ne $do_it;
-    
+	    return 0 if $choice ne $do_it;
+	}
+
 	if ($havelocalnetworks && !@autodetected) {
 	    return set_cups_daemon_mode($printer, $in);
 	} else {
@@ -985,22 +1005,7 @@ sub configure_new_printers {
 	    },
 	     \@widgets )) {
 	    # Turn off auto queue setup if the user wishes it
-	    if ($donotsetupagain) {
-		# Read current configuration
-		printer::main::get_auto_admin($printer);
-		# Turn off automatic print queue setup
-		$printer->{autoqueuesetuponnewprinter} = 0;
-		$printer->{autoqueuesetuponspoolerstart} = 0;
-		$printer->{autoqueuesetuponstart} = 0;
-		# Save new settings
-		printer::main::set_auto_admin($printer);
-		# Tell the user what evil thing he has done and
-		# how he can fix it.
-		$in->ask_warn(N("Printerdrake"), 
-			      N("Now you have turned off automatic printer setup.\n\n") . 
-			      N("You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's main menu. ", N("Options"), N("Configure Auto Administration")) .
-			      N("There you can also choose in which situation automatic printer setup is done (On Printerdrake startup, on printing system startup, when connecting a new USB printer)."));
-	    }
+	    turnoffautosetup($printer, $in) if $donotsetupagain;
 	} else {
 	    return 1;
 	}
@@ -1103,6 +1108,26 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	$printer->{complete} = 0;
     }
     undef $printer->{noninteractive};
+}
+
+sub turnoffautosetup {
+    # Turn off auto queue setup if the user wishes it
+    my ($printer, $in) = @_;
+    local $::isEmbedded = 0;
+    # Read current configuration
+    printer::main::get_auto_admin($printer);
+    # Turn off automatic print queue setup
+    $printer->{autoqueuesetuponnewprinter} = 0;
+    $printer->{autoqueuesetuponspoolerstart} = 0;
+    $printer->{autoqueuesetuponstart} = 0;
+    # Save new settings
+    printer::main::set_auto_admin($printer);
+    # Tell the user what evil thing he has done and
+    # how he can fix it.
+    $in->ask_warn(N("Printerdrake"), 
+		  N("Now you have turned off automatic printer setup.\n\n") . 
+		  N("You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's main menu. ", N("Options"), N("Configure Auto Administration")) .
+		  N("There you can also choose in which situation automatic printer setup is done (On Printerdrake startup, on printing system startup, when connecting a new USB printer)."));
 }
 
 sub generate_queuename {
