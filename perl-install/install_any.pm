@@ -903,7 +903,7 @@ to upgrade as soon as possible.
 Do you really want to install these servers?
 ", join(", ", @naughtyServers))), [ N_("Yes"), N_("No") ], 'Yes') or return;
     if ($r ne 'Yes') {
-	log::l("unselecting naughty servers");
+	log::l("unselecting naughty servers: " . join(' ', @naughtyServers));
 	pkgs::unselectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_)) foreach @naughtyServers;
     }
     1;
