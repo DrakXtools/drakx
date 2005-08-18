@@ -1,3 +1,94 @@
+2005/08/18  Olivier Blin <oblin at mandriva.com>
+
+	* network/ifw.pm, standalone/net_applet, network/activefw.pm: new name is
+	Interactive Firewall
+
+	* standalone/drakids: new name is Interactive Firewall
+	use "Allowed addresses" instead of "Attacker" in whitelist
+
+	* network/netconnect.pm: install bpalogin if needed only
+
+	* drakxtools.spec: activefw -> ifw
+
+	* share/rpmsrate: Interactive Firewall is mandatory
+
+2005/08/18  Pixel  <pixel at mandriva.com>
+
+	* pkgs.pm: update naughtyServers for new distro
+	(naughtyServers_list): those packages don't exist anymore
+
+	* install_any.pm: log more precisely the "naughty servers" unselected
+
+2005/08/18  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Removed stuff for automatic print queue setup when starting CUPS.
+	  - Small menu text improvement.
+	  - When printerdrake's first-time dialog appears on plugging a USB
+	printer, the user can now also turn off print queue auto-setup
+	  before starting printerdrake and so without needing the printing
+	  infrastructure to be installed.
+
+	* printer/main.pm: 
+	  - Removed stuff for automatic print queue setup when starting CUPS.
+	  - Small menu text improvement.
+
+2005/08/18  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.45mdk
+
+	* standalone/harddrake2 (simple_read_rpmsrate) only install HW packages of
+	weigh 4 or 5
+
+2005/08/17  Pixel  <pixel at mandriva.com>
+
+	* pkgs.pm: don't fork anymore to install rpms
+	during install, use "nofsync" for rpm database (=> speedup x2)
+	cleanup
+
+	* install_steps_gtk.pm: don't fork anymore to install rpms
+
+	* share/rpmsrate: lsof is nice
+	scim-qtimm was already mentioned
+
+	* share/list.xml: have gdb when debugging
+
+	* unused/migrate-ugtk2-to-mygtk2.pl: allow using from far away, not only
+	gi/perl-install
+
+2005/08/17  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Added automatic setup of Ethernet-connected HP printers with HPLIP.
+	  - Taken into account that HPLIP sometimes uses model names with "HP"
+	in the beginning and sometimes not.
+	  - Fixed problem of cursor in printer model list pointing to random,
+	  completely unrelated printer when no model name was auto-detected.
+	  - For setting the cursor onto the correct model in the printer model
+	  list also taken into account a model name detected only by HPLIP.
+	  - When one chooses "Printer Connection Type" in the "Edit" menu of
+	  an Ethernet-connected printer which is under the control of HPLIP or
+	  HPOJ, "LOCAL" was pre-selected as connection type and not
+	  "SOCKET". Fixed.
+	  - Replaced "Windows 95/98/NT" by simply "Windows" in the connection
+	  type menu. There are many more Windows versions than 95, 98, and NT
+	  currently.
+	  - Made matching of detected printer model name with HPLIP database
+	  more reliable.
+
+2005/08/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* Xconfig/card.pm: add missing spaces
+	(install_server) fix installing ati packages
+
+	* docs/HACKING: we need xfsdump for /sbin/dump.xfs
+
+	* drakxtools.spec: do not tag rpmsrate as an executable
+	do not tag harddrake init script as config file
+	fix prereq
+
+	* share/po/br.po, share/po/cy.po, share/po/ga.po: update
+
 2005/08/16  Olivier Blin <oblin at mandriva.com>
 
 	* share/rpmsrate: required for easy-wifi
