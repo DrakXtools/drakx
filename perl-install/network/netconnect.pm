@@ -316,14 +316,15 @@ sub real_main {
                             { label => N("Account Password"),  val => \$net->{cable}{passwd}, hidden => 1, disabled => $cable_no_auth },
                         ];
                     },
+                    complete => sub {
+                        !$cable_no_auth->() && !$in->do_pkgs->ensure_is_installed('bpalogin', '/usr/sbin/bpalogin');
+                    },
                     post => sub {
-			my $use_bpalogin = !$cable_no_auth->();
-			if ($in->do_pkgs->install("bpalogin")) {
-			    substInFile {
-				s/username\s+.*\n/username $net->{cable}{login}\n/;
-				s/password\s+.*\n/password $net->{cable}{passwd}\n/;
-			    } "$::prefix/etc/bpalogin.conf";
-			}
+                        my $use_bpalogin = !$cable_no_auth->();
+                        $use_bpalogin and substInFile {
+                            s/username\s+.*\n/username $net->{cable}{login}\n/;
+                            s/password\s+.*\n/password $net->{cable}{passwd}\n/;
+                        } "$::prefix/etc/bpalogin.conf";
 			services::set_status("bpalogin", $use_bpalogin);
                         $auto_ip = 1;
                         return "lan";
