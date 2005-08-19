@@ -126,9 +126,9 @@ sub handle_blacklist {
         $prefix eq 'SERV' ? N("Service attack") :
         $prefix eq 'PASS' ? N("Password cracking") :
         '',
-        network::ifw::get_service($port) || '',
+        network::ifw::get_service($port),
         $indev,
-        $protocol || '',
+        network::ifw::get_protocol($protocol),
     ];
 }
 
