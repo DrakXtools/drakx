@@ -394,7 +394,7 @@ sub ask_attack_verdict {
                                                 if_($attack->{icmp_type}, N("Type of ICMP attack: %s", $attack->{icmp_type}))
                                             ]),
                                         ])),
-                                 activate => sub { $_[0]->get_expanded and $w->{window}->shrink_topwindow }
+                                 activate => sub { $_[0]->get_expanded and $w->shrink_topwindow }
                              ),
                $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
                    $no->set_sensitive(!$_[0]->get_active);
