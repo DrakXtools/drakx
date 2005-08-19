@@ -15,6 +15,7 @@ use network::monitor;
 use detect_devices;
 
 use Gtk2::TrayIcon;
+use Gtk2::NotificationBubble;
 
 use ugtk2 qw(:create :helpers :wrappers :dialogs);
 
@@ -23,7 +24,7 @@ shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --f
 # Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
 
-my ($eventbox, $img, $balloon);
+my ($eventbox, $img, $bubble);
 my ($current_state, $current_interface, $menu, $wireless_menu, $timeout, $update_timeout);
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 
@@ -97,15 +98,15 @@ $eventbox->signal_connect(button_press_event => sub {
 
 $icon->show_all;
 
-$balloon = Gtk2::Balloon->new_from_window($icon->window);
-$balloon->add_events('button-press-mask');
-$balloon->signal_connect(hide => sub {
+$bubble = Gtk2::NotificationBubble->new;
+$bubble->attach($icon);
+$bubble->signal_connect(timeout => sub {
     #- on timeout, apply default policy
     exists $attacks_queue[0]{handled} or set_blacklist_verdict($attacks_queue[0]{seq}, undef);
 });
-$balloon->signal_connect(button_press_event => sub {
+$bubble->signal_connect(clicked => sub {
     $attacks_queue[0]{handled} = 1;
-    Gtk2::Balloon::hide_text($balloon);
+    $bubble->hide;
     ask_attack_verdict($attacks_queue[0]);
 });
 
@@ -346,7 +347,7 @@ sub set_blacklist_verdict {
     $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 
     shift @attacks_queue;
-    #- wait for some time so that the new balloon is noticeable
+    #- wait for some time so that the new bubble is noticeable
     @attacks_queue and Glib::Timeout->add(500, sub { notify_attack($attacks_queue[0]); 0 });
 }
 
@@ -356,7 +357,8 @@ sub notify_attack {
         print "unhandled attack type, skipping\n";
         return;
     }
-    Gtk2::Balloon::show_text($balloon, $attack->{msg}, 5000);
+    $bubble->set(N("Interactive Firewall"), gtkcreate_img("/usr/lib/libDrakX/icons/drakfirewall.png"), $attack->{msg});
+    $bubble->show(5000);
 }
 
 sub ask_attack_verdict {
@@ -419,63 +421,3 @@ sub ask_attack_verdict {
     });
     $w->{window}->show_all;
 }
-
-package Gtk2::Balloon;
-
-use ugtk2 qw(:wrappers);
-
-sub new_from_window {
-    my ($_class, $window) = @_;
-    my $w = Gtk2::Window->new('GTK_WINDOW_POPUP');
-    $w->{ref_window} = $window;
-    $w->set_name("gtk-tooltips");
-    $w->set_app_paintable(1);
-    $w->set_resizable(0);
-    $w->set_border_width(4);
-    $w->signal_connect("expose_event" => sub {
-        my $req = $w->size_request;
-        $w->get_style->paint_flat_box($w->window, 'normal', 'out', undef, $w, "tooltip",
-                                      0, 0, $req->width, $req->height);
-    });
-    ugtk2::gtkadd($w, $w->{label} = ugtk2::gtkset_alignment(ugtk2::gtkset_line_wrap(Gtk2::Label->new, 1), 0.5, 0.5));
-}
-
-sub show_text {
-    my ($balloon, $text, $timeout) = @_;
-    $balloon->{label}->set_text($text);
-    $balloon->{label}->show;
-    my ($ref_x, $ref_y) = $balloon->{ref_window}->get_origin;
-    my (undef, undef, $ref_w, $ref_h) = $balloon->{ref_window}->get_geometry;
-    my ($x, $y) = ($ref_x, $ref_y);
-    my $req = $balloon->size_request;
-    my ($w, $h) = ($req->width, $req->height);
-
-    #- code mostly from gtktooltips.c
-    $x += $ref_w / 2 - $w / 2 - $balloon->get_border_width;
-
-    my $screen = Gtk2::Gdk::Screen->get_default;
-    my $monitor_num = $screen->get_monitor_at_window($balloon->{ref_window});
-    my ($monitor) = $screen->get_monitor_geometry($monitor_num);
-    if ($x + $w > $monitor->x + $monitor->width) {
-        $x = $monitor->x + $monitor->width - $w - $balloon->get_border_width;
-    } elsif ($x < $monitor->x) {
-        $x = $monitor->x + $balloon->get_border_width;
-    }
-    if ($y + $h + $ref_h + $balloon->get_border_width > $monitor->y + $monitor->height) {
-        $y = $y - $h - $balloon->get_border_width;
-    } else {
-        $y += $ref_h + $balloon->get_border_width;
-    }
-    $balloon->move($x, $y);
-    $balloon->show;
-
-    $balloon->{timeout} = Glib::Timeout->add($timeout, sub { $balloon->hide; 0 });
-}
-
-sub hide_text {
-    my ($balloon) = @_;
-    Glib::Source->remove($balloon->{timeout});
-    $balloon->hide;
-}
-
-1;
