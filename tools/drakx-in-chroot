@@ -23,6 +23,8 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
+undef $ENV{TMPDIR}; # prevent packdrake faillure on creating temporary files
+
 if (-d $SLASH_LOCATION) {
     umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
     sys("$sudo rm -rf $SLASH_LOCATION/var/lib/rpm $SLASH_LOCATION/dev/mapper");
