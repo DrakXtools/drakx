@@ -602,7 +602,7 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
 	    packages => { generic => "scim-$_" },
        });
-   } qw(anthy canna ccinput fcitx m17n prime skk uim)), # enable to select extra SCIM combinations
+   } qw(anthy canna ccinput fcitx m17n prime pinyin skk uim)), # enable to select extra SCIM combinations
 
    skim => {
             GTK_IM_MODULE => 'scim',
