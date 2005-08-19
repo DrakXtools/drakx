@@ -352,6 +352,7 @@ sub do_wizard() {
 	$main_buttons->hide;
 	$in_wizard = 1;
 	$config_written = 0;
+	%conf = '';
 	wizard_step(\&client_type, 1);
 }
 
