@@ -31,10 +31,6 @@ add_icon_path("/usr/share/libDrakX/pixmaps/");
 my $net = {};
 my $watched_interface;
 
-my $dbus = dbus_object::system_bus();
-my $monitor = network::monitor->new($dbus);
-my ($ifw, $interactive_cb, @attacks_queue);
-
 my %pixbufs =
   (
       state => { map { $_ => gtkcreate_pixbuf($_) } qw(connected disconnected) },
@@ -98,6 +94,22 @@ $eventbox->signal_connect(button_press_event => sub {
 
 $icon->show_all;
 
+my ($dbus, $monitor, $ifw, $interactive_cb, @attacks_queue);
+eval { $dbus = dbus_object::system_bus() };
+eval { $monitor = network::monitor->new($dbus) } if $dbus;
+eval {
+    $ifw = network::ifw->new($dbus, sub {
+        my ($_con, $msg) = @_;
+        my $member = $msg->get_member;
+        if ($member eq 'Attack') {
+            handle_attack($msg->get_args_list);
+        } elsif ($member eq 'Init') {
+            $ifw->attach_object;
+            checkNetworkForce();
+        }
+    });
+} if $dbus;
+
 $bubble = Gtk2::NotificationBubble->new;
 $bubble->attach($icon);
 $bubble->signal_connect(timeout => sub {
@@ -108,17 +120,6 @@ $bubble->signal_connect(clicked => sub {
     $attacks_queue[0]{handled} = 1;
     $bubble->hide;
     ask_attack_verdict($attacks_queue[0]);
-});
-
-$ifw = network::ifw->new($dbus, sub {
-    my ($_con, $msg) = @_;
-    my $member = $msg->get_member;
-    if ($member eq 'Attack') {
-        handle_attack($msg->get_args_list);
-    } elsif ($member eq 'Init') {
-        $ifw->attach_object;
-        checkNetworkForce();
-    }
 });
 
 checkNetworkForce();
@@ -188,7 +189,7 @@ sub update_wireless_item {
     $net->{menuitem}->signal_handler_unblock($net->{activate});
 }
 sub checkWireless() {
-    my $networks = $monitor->list_wireless;
+    my $networks = eval { $monitor->list_wireless };
     foreach (keys %$networks) {
         my $net = $wireless_networks{$_} ||= {};
         put_in_hash($net, $networks->{$_});
@@ -266,7 +267,7 @@ sub generate_menu {
     };
 
     my (@settings);
-    my $has_wireless = detect_devices::has_wireless();
+    my $has_wireless = $monitor && detect_devices::has_wireless();
 
     if ($state_type eq 'connected') {
         $menu->append($create_item->($_)) foreach qw(downNetwork monitorNetwork monitorAFW);
