@@ -56,7 +56,7 @@ my %actions = (
                'upNetwork' => { name => sub { N("Connect %s", $_[0]) }, launch => sub { network::tools::start_interface($_[0], 1) } },
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
                'monitorNetwork' => { name => N("Monitor Network"), launch => \&run_net_monitor },
-               'monitorAFW' => { name => N("Interactive Firewall"), launch => \&run_drakids },
+               'monitorIFW' => { name => N("Interactive Firewall"), launch => \&run_drakids },
                'wireless' => { name => N("Manage wireless networks"), launch => \&run_drakroam },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
@@ -268,9 +268,12 @@ sub generate_menu {
 
     my (@settings);
     my $has_wireless = $monitor && detect_devices::has_wireless();
+    my $interactive;
+    eval { $interactive = $ifw->get_interactive };
 
     if ($state_type eq 'connected') {
-        $menu->append($create_item->($_)) foreach qw(downNetwork monitorNetwork monitorAFW);
+        $menu->append($create_item->($_)) foreach qw(downNetwork monitorNetwork);
+        $menu->append($create_item->('monitorIFW')) if defined $interactive;
     } elsif ($state_type eq 'disconnected') {
         $menu->append($create_item->('upNetwork'));
     }
@@ -282,8 +285,6 @@ sub generate_menu {
     }
 
     push @settings, $create_item->('chooseProfile');
-    my $interactive;
-    eval { $interactive = $ifw->get_interactive };
     if (defined $interactive) {
         $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
                                                                   $interactive),
