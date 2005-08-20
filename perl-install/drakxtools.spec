@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.46mdk
+Release: 0.47mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Aug 20 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.47mdk
+- net_applet:
+  o use Gtk2::NotificationBubble for IFW
+  o do not crash when unexpanding details in IFW window
+  o do not fail to start if messagebus is down
+  o do not show drakids in menu if IFW isn't available
+- drakids: display protocol as text
+- drakconnect: install bpalogin if needed only
+- localedrake (Thierry): enable to select scim+pinyin
+- drakTermServ (Stew): ignore config file for First Time Wizard,
+  assume defaults (#17673)
+
 * Fri Aug 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.46mdk
 - drakconnect: only install bpalogin if needed (blino)
 - drakTermServ (stew):
