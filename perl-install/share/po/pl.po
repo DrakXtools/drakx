@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-08-20 15:39+0200\n"
+"PO-Revision-Date: 2005-08-20 22:57+0200\n"
 "Last-Translator: Tomasz Bednarski <bednarski@skrzynka.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1321,7 +1321,7 @@ msgstr "Wybierz uruchamiane środowisko graficzne:"
 #: any.pm:712 any.pm:779
 #, c-format
 msgid "Please choose a language to use."
-msgstr "Wybierz język używany w systemie."
+msgstr "Wybierz język używany w systemie"
 
 #: any.pm:713 any.pm:780
 #, c-format
@@ -22010,6 +22010,7 @@ msgstr ""
 
 #: standalone/draknfs:153
 #, c-format
+#, fuzzy
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -22031,6 +22032,21 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly  set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Opcje ID użytkownika</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">root_squash:</span> mapuje żądania od uid/gip 0 na anonimowy uid/gid.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">no_root_squash:</span> wyłącza root "
+"squashing. Ta opcja jest przydatna głównie w zastosowaniach na klientach bezdyskowych.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">all_squash:</span> mapuje wszystkie identyfikator uid i gid na użytkownika anonimowego. Przydane w przypadku publicznych katalogów FTP eksportowanych przez NFS itd. Opcja ta jest przeciwieństwem opcji no_all_squash, która jest aktywowana domyślnie.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid i anongid:</span> explicitly  set "
+"the uid and gid of the anonymous account.\n"
 
 #: standalone/draknfs:169
 #, c-format
