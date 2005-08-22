@@ -44,6 +44,8 @@ my $previous_button;
 my $cancel_button;
 my $next_button;
 my $main_buttons;
+my $progress;
+my $plabel;
 my $in_wizard = 0;
 my $config_written = 0;
 my $clients_set = 0;
@@ -63,19 +65,12 @@ my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
 my @kernels = bootloader::installed_vmlinuz();
+my $kcount = @kernels;
 my $cmd_line = 1;
 my $mknbi = "/usr/bin/mknbi-set";
 
 #- make sure terminal server and friends are installed
-my $ts = run_program::run("rpm -q terminal-server > /dev/null");
-if ($ts != 1) {
-	run_program::run("urpmi --auto terminal-server >/dev/null 2>/dev/null") unless $::testing;
-	$ts = run_program::run("rpm -q terminal-server > /dev/null");
-	if ($ts != 1 && !$::testing) {
-		warn(N("Useless without Terminal Server"));
-		exit(1);
-	}
-}
+$in->do_pkgs->ensure_is_installed('terminal-server', '/usr/bin/drakTermServ') or $in->exit(-1);
 
 if ("@ARGV" =~ /--enable/) {
 	enable_ts();
@@ -218,6 +213,10 @@ sub interactive_mode() {
 
 	my $s_buttons = Gtk2::HBox->new;
 	gtkpack_($s_buttons,
+		1, gtksignal_connect(Gtk2::Button->new(N("dhcpd Config")), clicked => sub { 
+			destroy_widget(); 
+			dhcpd_config(); 
+		}),
 		1, gtksignal_connect(Gtk2::Button->new(N("Enable Server")), clicked => sub {
 			destroy_widget();
 			gtkset_mousecursor_wait(); 
@@ -311,6 +310,7 @@ sub interactive_mode() {
   	$main_buttons->set_current_page(2);
 	$main_buttons->set_current_page(1);
 	$main_buttons->set_current_page(0);
+	gtksignal_connect($main_buttons, switch_page => sub { destroy_widget() });
 	gtkflush(); 
     $window1->main;
     ugtk2->exit(0);
@@ -445,21 +445,17 @@ sub client_type() {
 sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
 	$in->ask_warn(N("Information"), N("This will take a few minutes."));
-	gtkset_mousecursor_wait();
-	#- use 1 kernel and estimate the nbi space needed
-	my $kcount = @kernels;
 	if (check_nbi_space($kernels[0], $kcount)) { 
 		$wizard_buttons->hide;
 		exit_wizard();
 	} else {
-		run_program::run("$mknbi -k /boot/$_") foreach @kernels;
-		$buff .= "\n\n\t" . N("Done!");	
+		build_w_progress(undef, undef);
+		$buff .= "\n\n\t" . N("Done!");
 		text_view($buff, "wizard");
 	}
-	gtkset_mousecursor_normal();
 }
 
-sub check_nbi_space {	
+sub check_nbi_space {
 	my ($kernel, $kcount) = @_;
 	log::explanations("Checking for adequate free space to create NBIs for $kcount kernel(s)");
 	my $nbi_count = `$mknbi -c -k /boot/$kernel`;
@@ -756,7 +752,13 @@ sub make_nbi() {
     	$nbi = $model->get($iter, 0);
 		$nbi_iter = $iter;
 	});
-					
+	my $button_i586_kernel;
+	if (arch() eq "i686" && !(any { /i586/ } @kernels)) {
+		$button_i586_kernel = Gtk2::Button->new(N("Install i586 kernel for older clients"));
+		gtksignal_connect($button_i586_kernel, clicked => sub {
+			$in->do_pkgs->install('kernel-i586-up-1GB-2.6');
+		});		
+	}					
 	gtkpack($status_box,
 		$nbi_box = gtkpack_(Gtk2::VBox->new(1,10),
 			0, gtkadd(Gtk2::HBox->new(0,10),
@@ -766,7 +768,7 @@ sub make_nbi() {
 						if ($kernel) {
 							$in->ask_warn(N("Information"), N("This will take a few minutes."));
 							gtkset_mousecursor_wait();
-							build_n_update($list_model, $kernel, undef) unless check_nbi_space($kernel, 1);
+							build_n_update($kernel, $list_model, undef) unless check_nbi_space($kernel, 1);
 							gtkset_mousecursor_normal(); 
 						} else {
 							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
@@ -774,24 +776,22 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build Single NIC -->")), clicked => sub { 
 						if ($nic) {
-							build_n_update($list_model, $kernel, $nic);
+							build_n_update($kernel, $list_model, $nic);
 						} else {
 							$in->ask_warn(N("Error"), N("No NIC selected!"));
 						}
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build All Kernels -->")), clicked => sub {
 						$in->ask_warn(N("Information"), N("This will take a few minutes."));
-						gtkset_mousecursor_wait();
 						my $kcount = @kernels;
 						if (check_nbi_space($kernels[0], $kcount)) {
 							return;
 						} else {
-							foreach (@kernels) {
-								build_n_update($list_model, $_, undef);
-							}
+							build_w_progress($list_model, undef);
+							make_nbi(); 
 						}
-						gtkset_mousecursor_normal(); 
 					}),
+					$button_i586_kernel,
 					$combo_default_kernel,
 					$check_pxe,
 					gtksignal_connect(Gtk2::Button->new(N("<-- Delete")), clicked => sub { 
@@ -843,7 +843,7 @@ sub update_list {
 }
 
 sub build_n_update {
-    my ($list_model, $kernel, $nic) = @_;
+    my ($kernel, $list_model, $nic) = @_;
 	my $command = "-k /boot/$kernel";
 	$command .= " -r $nic" if $nic;
     run_program::run("$mknbi -v $command") or $in->ask_warn(N("Error"), N("%s failed", $mknbi));
@@ -855,7 +855,44 @@ sub build_n_update {
 			add_pxe_entry($kernel, $nic);
 		}
 	}
-    update_list($list_model);
+    update_list($list_model) if $list_model;
+}
+
+sub build_w_progress {
+	my ($widget, $nic) = @_;
+	gtkset_mousecursor_wait();
+	show_progress();
+	my $k = 1;
+	foreach (@kernels) {
+		build_n_update($_, $widget, $nic);
+		update_progress($k, $kcount, $_);
+		$k++;
+	}
+	destroy_widget();
+	gtkset_mousecursor_normal();
+}
+
+sub show_progress() {
+	my $progress_box;
+	destroy_widget();
+	gtkpack($status_box,
+		$progress_box = gtkpack_(Gtk2::VBox->new(0,10),
+			0, Gtk2::Label->new(N("Building images for kernel:")),
+			0, $plabel = Gtk2::Label->new(''),
+			0, $progress = Gtk2::ProgressBar->new,
+			1, Gtk2::HBox->new(0,0)
+		)
+	);
+	$central_widget = \$progress_box;
+	$progress_box->show_all;
+	mygtk2::flush();
+}
+
+sub update_progress {
+	my ($fraction, $total, $kernel) = @_;
+	$plabel->set_text($kernel);
+	$progress->set_fraction($fraction / $total);
+	mygtk2::flush();
 }
 
 sub add_pxe_entry {
@@ -1152,8 +1189,6 @@ sub maintain_clients() {
 								$button_delete->set_sensitive(0);
 							}
 						}),
-					gtksignal_connect(Gtk2::Button->new(N("dhcpd Config...")), clicked => 
-						sub { $client_box->destroy; dhcpd_config() }),
 				),
 				create_scrolled_window($tree_clients),
 			),
