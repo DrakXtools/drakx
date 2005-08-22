@@ -72,8 +72,8 @@ Requires: %name = %version-%release
 Requires: sane-backends
 
 %description
-Contains many Mandrivalinux applications simplifying users and
-administrators life on a Mandrivalinux machine. Nearly all of
+Contains many Mandriva Linux applications simplifying users and
+administrators life on a Mandriva Linux machine. Nearly all of
 them work both under XFree (graphical environment) and in console
 (text environment), allowing easy distant work.
 
@@ -109,8 +109,8 @@ net_applet: applet to check network connection
 See package %name
 
 %description newt
-Contains many Mandrivalinux applications simplifying users and
-administrators life on a Mandrivalinux machine. Nearly all of
+Contains many Mandriva Linux applications simplifying users and
+administrators life on a Mandriva Linux machine. Nearly all of
 them work both under XFree (graphical environment) and in console
 (text environment), allowing easy distant work.
 
