@@ -1229,7 +1229,7 @@ sub device2grub {
 }
 
 sub read_grub_device_map() {
-    my %grub2dev = map { m!\((.*)\) /dev/(.*)$! } cat_("$::prefix/boot/grub/device.map");
+    my %grub2dev = map { m!\((.*)\)\s+/dev/(.*)$! } cat_("$::prefix/boot/grub/device.map");
     \%grub2dev;
 }
 sub write_grub_device_map {
