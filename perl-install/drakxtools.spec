@@ -379,10 +379,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Mon Aug 22 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.48mdk
 - from Pixel:
-  o mousedrake: don't use a udev rule, this doesn't always work for
-    input/mice, and never for ttySL0
-  o fix Mandrivalinux to Mandriva Linux in description (Eskild Hustvedt)
-    simplify previous commit (the /tty/ was there for serial mice)
+  o mousedrake: don't use a udev rule, this doesn't always work
+    for input/mice, and never for ttySL0
+  o fix Mandrivalinux to Mandriva Linux in description
+    (Eskild Hustvedt)
+  o diskdrake: enhance grub device.map parsing (#17732)
 
 * Sat Aug 20 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.47mdk
 - net_applet:
