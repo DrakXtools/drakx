@@ -916,7 +916,9 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
 ") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^sr/ && $if !~ /^sd[a-z]/;
 
-    output_p("$::prefix/etc/udev/rules.d/20-$of.rules", qq(KERNEL=="$if", SYMLINK="$of"\n)) 
+    #- add a specific udev script, we can't do it with a udev rule,
+    #- eg, ttySL0 is a symlink
+    output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
       if $of !~ /dvd/;
 
     #- when creating a symlink on the system, use devfs name if devfs is mounted
