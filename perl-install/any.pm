@@ -916,7 +916,7 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
 ") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^sr/ && $if !~ /^sd[a-z]/;
 
-    output_p("$::prefix/etc/udev/rules.d/20-$of.rules", qq(KERNEL="$if", SYMLINK="$of"\n)) 
+    output_p("$::prefix/etc/udev/rules.d/20-$of.rules", qq(KERNEL=="$if", SYMLINK="$of"\n)) 
       if $of !~ /mouse|dvd/ || $if =~ /^tty/;
 
     #- when creating a symlink on the system, use devfs name if devfs is mounted
