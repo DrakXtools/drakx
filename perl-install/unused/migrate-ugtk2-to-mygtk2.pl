@@ -174,6 +174,10 @@ sub dorepl_new {
 	    if ($class_ eq 'TextView' || !$class) {
 		$s = "$pre, text => ";
 	    }
+	} elsif ($f eq 'gtkset_text') {
+	    if ($class_ eq 'Entry' || !$class) {
+		$s = "$pre, text => ";
+	    }
 	}
 
 	if (!$s) {
