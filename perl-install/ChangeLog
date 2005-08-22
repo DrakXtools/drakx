@@ -1,3 +1,130 @@
+2005/08/22  Olivier Blin <oblin at mandriva.com>
+
+	* any.pm: add udev rule for mouse back
+	make clear that KERNEL is a match in udev rule
+
+	* drakxtools.spec: add diskdrake fix in 10.3-0.48mdk
+	10.3-0.48mdk
+
+2005/08/22  Pixel  <pixel at mandriva.com>
+
+	* install_steps_gtk.pm: function $advertize must work when chrooted or
+	not, we can't really know if we're chrooted or not
+
+	* drakxtools.spec: fix Mandrivalinux to Mandriva Linux (thanks to Eskild
+	Hustvedt)
+
+	* network/modem.pm: devfssymlinkf handle this case
+
+	* any.pm: don't use a udev rule, this doesn't always work for input/mice,
+	and never for ttySL0
+	simplify previous commit (the /tty/ was there for serial mice)
+
+	* bootloader.pm: enhance grub device.map parsing (bugzilla #17732)
+
+2005/08/21  tbednarski
+
+	* share/po/pl.po: string translations
+
+2005/08/20  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: do not show drakids in menu if Interactive
+	Firewall isn't available
+	do not fail to start if messagebus is down
+
+	* drakxtools.spec: 10.3-0.47mdk
+
+2005/08/20  tbednarski
+
+	* share/po/pl.po: some typos corrections
+
+2005/08/19  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakids: try to get protocol as text
+
+	* standalone/net_applet: use Gtk2::NotificationBubble (and drop
+	Gtk2::Balloon)
+	do not crash when unexpanding details in Interactive Firewall window
+
+2005/08/19  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Ignore config file for First Time Wizard,
+	assume defaults (17673)
+
+2005/08/19  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* tools/drakx-in-chroot: prevent packdrake faillure on creating temporary
+	files
+
+	* share/themes-galaxy.rc: enforce no stock icon policy (Frederic Crozat)
+
+	* lang.pm: enable to select scim+pinyin
+
+	* share/po/fr.po: typo fix (this message is confusing since any.pm really
+	expect a
+	number and loudly complains when given a string)
+
+2005/08/18  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: bump priority for gstreamer-alsa
+
+2005/08/18  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/08/18  Olivier Blin <oblin at mandriva.com>
+
+	* network/activefw.pm: new name is Interactive Firewall
+
+	* standalone/net_applet: cosmetic fixes (use ugtk2 to have nice borders,
+	shrink window on expander hide, reorder buttons)
+	switch to Interactive Firewall
+	new name is Interactive Firewall
+
+	* standalone/drakids: switch to Interactive Firewall
+	new name is Interactive Firewall
+
+	* network/netconnect.pm: install bpalogin if needed only
+
+	* drakxtools.spec: activefw -> ifw
+
+	* network/ifw.pm: add get_protocol
+	new name is Interactive Firewall
+
+	* share/rpmsrate: Interactive Firewall is mandatory
+
+2005/08/18  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: New strings translated
+
+2005/08/18  Pixel  <pixel at mandriva.com>
+
+	* pkgs.pm: update naughtyServers for new distro
+
+	* install_any.pm: log more precisely the "naughty servers" unselected
+
+2005/08/18  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Client tree edit fix (17653), Write to floppy
+	(17655)
+
+2005/08/18  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Removed stuff for automatic print queue setup when starting CUPS.
+	  - Small menu text improvement.
+
+2005/08/18  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.46mdk
+	10.3-0.45mdk
+
+	* standalone/harddrake2 (simple_read_rpmsrate) only install HW packages of
+	weigh 4 or 5
+
+	* standalone/service_harddrake: use the new way to blacklist modules
+	(#12731)
+
 2005/08/18  Olivier Blin <oblin at mandriva.com>
 
 	* network/ifw.pm, standalone/net_applet, network/activefw.pm: new name is
