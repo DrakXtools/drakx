@@ -130,8 +130,11 @@
   /var/run/utmp
 
   <if ARCH="i.86|x86_64">    
-    /boot/grub/stage1
-    /boot/grub/stage2
+    <from dir="/lib/grub/ARCH-mandriva" expand="glob">
+      stage1
+      stage2
+      *_stage1_5
+    </from>
     /usr/lib/extipl/aldebaran.bin
   </if>
 
