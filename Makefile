@@ -35,7 +35,7 @@ install_only:
 
     ifeq (i386,$(ARCH))
 	rm -rf $(ROOTDEST)/isolinux
-	[ -d isolinux/xbox ] && mv -f isolinux/xbox/{linuxboot.cfg,default.xbe} $(ROOTDEST)
+	if [ -d isolinux/xbox ]; then mv -f isolinux/xbox/{linuxboot.cfg,default.xbe} $(ROOTDEST); fi
 	cp -af isolinux $(ROOTDEST)
     endif
 
