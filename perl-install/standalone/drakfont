@@ -578,11 +578,9 @@ sub appli_choice() {
 	  );
 }
 
-my $select_font_msg;
-
 sub font_choice() {
     my $file_dialog;
-    $select_font_msg = N("Select the font file or directory and click on 'Add'");
+    my $_select_font_msg = N("Select the font file or directory and click on 'Add'");
     $file_dialog = Gtk2::FileChooserDialog->new(N("File Selection"), $window1->{real_window}, 'open', N("Cancel") => 'cancel', N("Ok") => 'ok'); # 'select_folder'
     $file_dialog->set_select_multiple(1);
 
