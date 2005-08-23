@@ -237,7 +237,7 @@ sub set_default_background {
       sort {
 	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[3] <=> $b->[3];
       } map {
-	  if (my ($X, $Y) = /^$theme{THEME}-(\d+)x(\d+).png$/) {
+	  if (my ($X, $Y) = /^\Q$theme{THEME}\E-(\d+)x(\d+).png$/) {
 	      [
 		  $_, 
 		  int(abs($ratio - $X / $Y) * 100), #- we want the nearest ratio (precision .01)
