@@ -1,0 +1,495 @@
+#!/usr/bin/perl
+#
+# Copyright (C) 2005 by Mandriva aginies _ateuh_ mandriva.com
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+my $version = "0.1 test release";
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use standalone;
+use common;
+use network::network;
+use interactive;
+use ugtk2 qw(:ask :wrappers :create :dialogs);
+use mygtk2 qw(gtknew);
+
+# use libconf 
+use Libconf::Templates;
+use Libconf::Glueconf::Samba::Smb_conf;
+
+my $in = 'interactive'->vnew('su');
+$in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
+
+use constant FALSE => 0;
+use constant TRUE => 1;
+use constant COLUMN_PATH => 0;
+use constant COLUMN_COMMENT => 1;
+use constant COLUMN_BROWSEABLE => 2;
+use constant COLUMN_PUBLIC => 3;
+use constant COLUMN_WRITABLE => 4;
+use constant COLUMN_CREATE_MASK => 5;
+use constant COLUMN_DIRECTORY_MASK => 6;
+use constant COLUMN_READ_LIST => 7;
+use constant COLUMN_WRITE_LIST => 8;
+use constant COLUMN_ADMIN_USERS => 9;
+use constant COLUMN_VALID_USERS => 10;
+use constant COLUMN_HIDE_DOT_FILES => 11;
+use constant COLUMN_HIDE_FILES => 12;
+use constant COLUMN_PRESERVE_CASE => 13;
+use constant COLUMN_FORCE_CREATE_MODE => 14;
+use constant COLUMN_FORCE_GROUP => 15;
+use constant COLUMN_DEFAULT_CASE => 16;
+use constant NUM_COLUMNS => 17;
+
+my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
+my (@listshare);
+my @yesno = qw(yes no);
+my @default_case = qw(upper lower);
+
+my %adv_options = (
+		   read_list => N("Read List"),
+		   write_list => N("Write List"),
+		   admin_users => N("Admin users"),
+		   valid_users => N("Valid users"),
+		   hide_dot_files => N("Hide dot files"),
+		   hide_files => N("Hide files"),
+		   force_group => N("Force Group"),
+		   force_create_mode => N("Force create group"),
+		   default_case => N("Default case"),
+		   preserve_case => N("Preserve case"),
+		   create_mask => N("Create mask"),
+		   directory_mask => N("Directory mask"),
+		  );
+
+sub get_items {
+    my @items = (
+		 [ "/_File", undef, undef, undef, '<Branch>', ],
+		 [ "/_File/_Write conf", undef, \&write_conf, 1, '<StockItem>', 'gtk-execute' ],
+		 [ "/_File/_Exit", undef, \&quit_all, 1, '<StockItem>', 'gtk-quit' ],
+
+		 [ "/_Samba Server", undef, undef, undef, '<Branch>', ],
+		 [ "/_Samba Server/_Restart", undef, \&restart_dialog, 1, '<StockItem>', 'gtk-execute' ],
+		 [ "/_Samba Server/R_eload", undef, \&reload_dialog, 1, '<StockItem>', 'gtk-refresh' ],
+		 );
+    return @items;
+}
+
+sub quit_all() {
+  ugtk2->exit;
+}
+
+sub restart_dialog {
+  wait_action("service smb restart");
+}
+
+sub reload_dialog {
+  wait_action("service smb reload");
+}
+
+sub wait_action {
+    my ($cmd) = @_;
+    my $w = $in->wait_message(N("Samba server"), N("Restarting/Reloading Samba server..."));
+    run_program::get_stdout($cmd) !~ /unknown|error/ or err_dialog(N("Error!"), N("Error Restarting/Reloading Samba server")) and return;
+    undef $w;
+}
+
+my %size_groups = map { $_ => Gtk2::SizeGroup->new('horizontal') } qw(label widget button);
+my $label_and_widgets = sub {
+  my ($label, $widget, $button) = @_;
+  gtkpack_(Gtk2::HBox->new(0,5),
+           0, gtkadd_widget($size_groups{label}, $label),
+           1, gtkadd_widget($size_groups{widget}, $widget),
+	   2, gtkadd_widget($size_groups{button}, $button),
+          );
+};
+
+my $fdwidget = sub {
+  my ($data, $label) = @_;
+  my $fd = new Gtk2::FileSelection(N("Directory Selection"));
+  $fd->set_modal(TRUE);
+  $fd->signal_connect("destroy", sub { $fd->hide });
+  $fd->ok_button->signal_connect(clicked => sub {
+				   my $file = $fd->get_filename;
+				   -d $file or err_dialog(N("Error!"), N("Should be a directory.")) and return;
+				   $data->set_text($file);
+				   $fd->hide;
+				 }, $fd);
+  $fd->cancel_button->signal_connect(clicked => sub { $fd->hide });
+  return $fd;
+};
+
+sub get_samba_share() {
+  undef @listshare;
+  foreach my $clef (keys %$samba) {
+    if ($samba->{$clef}{printable} =~ /yes/i) {
+      print "$clef is a printer\n";
+    } elsif ($clef =~ /global/ or $clef =~ /print\$/ or $clef =~ /cdrom/ or $clef eq "homes" or $clef eq "profiles") {
+      print "unwanted (special shares)\n";
+    } else {
+      push @listshare, {
+			path => $samba->{$clef}{path},
+			comment => $samba->{$clef}{comment},
+			browseable => $samba->{$clef}{browseable},
+			public => $samba->{$clef}{public},
+			writable => $samba->{$clef}{writable},
+			create_mask => $samba->{$clef}{'create mask'},
+			directory_mask => $samba->{$clef}{'directory mask'},
+			read_list => $samba->{$clef}{'read list'},
+			write_list => $samba->{$clef}{'write list'},
+			admin_users => $samba->{$clef}{'admin users'},
+			valid_users => $samba->{$clef}{'valid users'},
+			hide_dot_files => $samba->{$clef}{'hide dot files'},
+			hide_files => $samba->{$clef}{'hide files'},
+			preserve_case => $samba->{$clef}{'preserve case'},
+			force_create_mode => $samba->{$clef}{'force create mode'},
+			force_group => $samba->{$clef}{'force group'},
+			default_case => $samba->{$clef}{'default case'},
+		       };
+    }
+  }
+  return @listshare;
+}
+
+sub create_smbuser {
+  my ($list) = @_;
+  my @users = split(" ", $list);
+  foreach my $user (@users) {
+    if (!any { /^$user:/ } cat_("/etc/samba/smbpasswd")) {
+      system("smbpasswd -a $user -n");
+    }
+  }
+}
+
+sub write_conf {
+  $samba->write_conf("/etc/samba/smb.conf");
+}
+
+sub create_pango_help_box {
+  # perl code from draksec
+  my ($help) = @_;
+  my $text = Gtk2::TextView->new;
+  use Gtk2::Pango;
+  my %common_opts = ('left-margin' => '10', 'right-margin' => '10');
+  gtktext_insert($text, [ map  {
+    if (s!^/span>!!) {
+      [ $_, \%common_opts ];
+    } elsif (s!span !!) {
+      my %tags = %common_opts;
+      while (s!(\w+?)="(\w+?)"!!) {
+	$tags{weight} ||= Gtk2::Pango->PANGO_WEIGHT_BOLD if $1 eq 'foreground';
+	$tags{$1} = $2 eq "bold" ? Gtk2::Pango->PANGO_WEIGHT_BOLD : $2;
+      }
+      s/^>//;
+      [ $_, \%tags ];
+    } else {
+      [ $_, \%common_opts ];
+    }
+  } split("<", formatAlaTeX($help)) ]);
+  gtkset_size_request(create_scrolled_window($text), 350, 300);
+}
+
+sub help_b {
+  my ($tittle, $help_data) = @_;
+  gtksignal_connect(new Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub {
+		      my $dialog = _create_dialog();
+		      $dialog->set_transient_for($::main_window);
+		      $dialog->set_title(N("Help"));
+		      $dialog->set_modal(1);
+		      gtkpack_($dialog->vbox,
+			       1, create_pango_help_box($help_data),
+			       0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub {
+				   $dialog->destroy;
+						    }
+						   ),
+			      );
+		      $dialog->show_all;
+		    }
+		    );
+}
+
+sub modify_entry {
+  my ($widget, $treeview) = @_;
+  my $model = $treeview->get_model;
+  my $selection = $treeview->get_selection;
+  my $iter;
+
+  my ($dir, $i, $path, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case);
+
+  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask;
+  $_ = Gtk2::Entry->new foreach $read_list, $write_list, $admin_users, $valid_users, $force_group, $force_create_mode;
+  $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_files, $hide_dot_files;
+
+  $default_case->set_popdown_strings(@default_case);
+  $_->set_popdown_strings(@yesno) foreach $browseable, $public, $writable, $hide_files, $hide_dot_files, $preserve_case;
+
+  my $file_dialog = $fdwidget->($dir, "");
+  my $button = Gtk2::Button->new_from_stock('gtk-open');
+  $button->signal_connect(clicked => sub { $file_dialog->show });
+
+  my $w = ugtk2->new(N("DrakSamba entry"),
+		     icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
+
+  $iter = $selection->get_selected;
+  $iter or info_dialog(N("Error"), N("Please add a Samba share to be able to modify it.")) and return;
+  my $path = $model->get_path($iter);
+  $i = ($path->get_indices)[0];
+
+  $dir->set_text($listshare[$i]{path});
+  $comment->set_text($listshare[$i]{comment});
+  $browseable->set_text($listshare[$i]{browseable});
+  $public->set_text($listshare[$i]{public});
+  $writable->set_text($listshare[$i]{writable});
+
+  $create_mask->set_text($listshare[$i]{create_mask});
+  $directory_mask->set_text($listshare[$i]{directory_mask});
+  $read_list->set_text($listshare[$i]{read_list});
+  $write_list->set_text($listshare[$i]{write_list});
+  $admin_users->set_text($listshare[$i]{admin_users});
+  $valid_users->set_text($listshare[$i]{valid_users});
+  $force_group->set_text($listshare[$i]{force_group});
+  $force_create_mode->set_text($listshare[$i]{force_create_mode});
+  $default_case->set_text($listshare[$i]{default_case});
+  $preserve_case->set_text($listshare[$i]{preserve_case});
+  $hide_files->set_text($listshare[$i]{hide_files});
+  $hide_dot_files->set_text($listshare[$i]{hide_dot_files});
+
+  my $expander_user = Gtk2::Expander->new('Advanced user options');
+  $expander_user->add(gtkpack_(Gtk2::VBox->new,
+#                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Advanced Options Help"), $help_global)),
+			       0, gtkadd(Gtk2::Frame->new(N("Samba user access")),
+					 gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+						  0, $label_and_widgets->($adv_options{read_list}, $read_list, ""),
+						  0, $label_and_widgets->($adv_options{write_list}, $write_list, ""),
+						  0, $label_and_widgets->($adv_options{admin_users}, $admin_users, ""),
+						  0, $label_and_widgets->($adv_options{valid_users}, $valid_users, ""),
+						  ),
+					 ),
+			       0, gtkadd(Gtk2::Frame->new(N("Mask options")),
+					 gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+						  0, $label_and_widgets->($adv_options{create_mask}, $create_mask, ""),
+						  0, $label_and_widgets->($adv_options{directory_mask}, $directory_mask, ""),
+						  0, $label_and_widgets->($adv_options{force_group}, $force_group, ""),
+						  0, $label_and_widgets->($adv_options{force_create_mode}, $force_create_mode, ""),
+						  ),
+					 ),
+			       ),
+		      );
+  
+  
+  my $expander_file = Gtk2::Expander->new('Advanced file options');
+  $expander_file->add(gtkpack_(Gtk2::VBox->new,
+			       0, gtkadd(Gtk2::Frame->new(N("Display options")),
+					 gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+						  0, $label_and_widgets->($adv_options{hide_dot_files}, $hide_dot_files, ""),
+						  0, $label_and_widgets->($adv_options{hide_files}, $hide_files, ""),
+						  0, $label_and_widgets->($adv_options{default_case}, $default_case, ""),
+						  0, $label_and_widgets->($adv_options{preserve_case}, $preserve_case, ""),
+						  ),
+					 ),
+			       ),
+		      );
+  
+  $_->signal_connect(activate => sub {
+			      $w->shrink_topwindow;
+#                              gtkflush();
+			  }) foreach $expander_file, $expander_user;
+  
+  gtkadd($w->{window},
+	 gtknew('VBox', spacing => 0, children_loose => [
+							 gtkadd(Gtk2::Frame->new(N("Samba share directory")),
+								gtkpack_(gtkset_border_width(Gtk2::VBox->new, 3),
+									 0, $label_and_widgets->(N("Directory:"), $dir, $button),
+									 0, $label_and_widgets->(N("Comment:"), $comment, ""),
+									 0, $label_and_widgets->(N("Browseable:"), $browseable, ""),
+									 0, $label_and_widgets->(N("Public:"), $public, ""),
+									 0, $label_and_widgets->(N("Writable:"), $writable, ""),
+									 ),
+								),
+							 gtkadd(Gtk2::Frame->new(""),
+								gtkpack_(gtkset_border_width(Gtk2::VBox->new, 3),
+									 0, $expander_user,
+									 0, $expander_file,
+									 ),
+								),
+							 create_okcancel({
+							     cancel_clicked => sub { $w->destroy },
+							     ok_clicked => sub {
+								 $model->set($iter,
+									     COLUMN_PATH, $dir->get_text,
+									     COLUMN_COMMENT, $comment->get_text,
+									     COLUMN_BROWSEABLE, $browseable->get_text,
+									     COLUMN_PUBLIC, $public->get_text,
+									     COLUMN_WRITABLE, $writable->get_text,
+									     COLUMN_CREATE_MASK, $create_mask->get_text,
+									     COLUMN_DIRECTORY_MASK, $directory_mask->get_text,
+									     COLUMN_READ_LIST, $read_list->get_text,
+									     COLUMN_WRITE_LIST, $write_list->get_text,
+									     COLUMN_ADMIN_USERS, $admin_users->get_text,
+									     COLUMN_VALID_USERS, $valid_users->get_text,
+									     COLUMN_HIDE_DOT_FILES, $hide_dot_files->get_text,
+									     COLUMN_HIDE_FILES, $hide_files->get_text,
+									     COLUMN_PRESERVE_CASE, $preserve_case->get_text,
+									     COLUMN_FORCE_CREATE_MODE, $force_create_mode->get_text,
+									     COLUMN_FORCE_GROUP, $force_group->get_text,
+									     COLUMN_DEFAULT_CASE, $default_case->get_text,
+									     );
+								 $w->destroy;
+							     },
+							 },
+									 ),
+							 ]
+		),
+	 );
+  $w->{window}->show_all;
+}
+
+sub remove_entry {
+  my ($widget, $treeview) = @_;
+  my $model = $treeview->get_model;
+  my $selection = $treeview->get_selection;
+  my $iter = $selection->get_selected;
+    if ($iter) {
+      my $path = $model->get_path($iter);
+      my $i = ($path->get_indices)[0];
+      ask_okcancel("Remove entry ?", "Remove $listshare[$i]{path}") or return;
+      $model->remove($iter);
+      splice @listshare, $i, 1;
+    }
+}
+
+sub create_model() {
+  get_samba_share();
+  my $model = Gtk2::ListStore->new("Glib::String", "Glib::String",  "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+  foreach my $a (@listshare) {
+    my $iter = $model->append;
+    $model->set($iter,
+		COLUMN_PATH, $a->{path},
+		COLUMN_COMMENT, $a->{comment},
+		COLUMN_BROWSEABLE, $a->{browseable},
+		COLUMN_PUBLIC, $a->{public},
+		COLUMN_WRITABLE, $a->{writable},
+		COLUMN_CREATE_MASK, $a->{create_mask},
+		COLUMN_DIRECTORY_MASK, $a->{directory_mask},
+		COLUMN_READ_LIST, $a->{read_list},
+		COLUMN_WRITE_LIST, $a->{write_list},
+		COLUMN_ADMIN_USERS, $a->{admin_users},
+		COLUMN_VALID_USERS, $a->{valid_users},
+		COLUMN_HIDE_DOT_FILES, $a->{hide_dot_files},
+		COLUMN_HIDE_FILES, $a->{hide_files},
+		COLUMN_PRESERVE_CASE, $a->{preserve_case},
+		COLUMN_FORCE_CREATE_MODE, $a->{force_create_mode},
+		COLUMN_FORCE_GROUP, $a->{force_group},
+		COLUMN_DEFAULT_CASE, $a->{default_case},
+		);
+	     }
+  return $model;
+}
+
+# add colum to model
+sub add_columns {
+  my $treeview = shift;
+  my $model = $treeview->get_model;
+  each_index {
+    my $renderer = Gtk2::CellRendererText->new;
+    $renderer->set(editable => 0);
+    $renderer->signal_connect(edited => \&cell_edited, $model);
+    $renderer->set_data(column => $::i);
+    $treeview->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
+  } N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case"),;
+}
+
+###############
+# Main Program
+###############
+# create model
+my $model = create_model();
+
+my $window = ugtk2->new("DrakSamba $version");
+$::main_window = $window->{real_window};
+$window->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
+$window->{rwindow}->set_position('center') if !$::isEmbedded;
+my $W = $window->{window};
+$W->signal_connect(delete_event => sub { ugtk2->exit });
+
+my $treeview = Gtk2::TreeView->new_with_model($model);
+$treeview->set_rules_hint(TRUE);
+$treeview->get_selection->set_mode('single');
+add_columns($treeview);
+
+# double clic and popup modify window
+$treeview->signal_connect(button_press_event => sub {
+			    my (undef, $event) = @_;
+			    my $model = $treeview->get_model;
+			    my $selection = $treeview->get_selection;
+			    my $iter = $selection->get_selected;
+			    if ($iter) {
+			      my $path = $model->get_path($iter);
+			      my $i = ($path->get_indices)[0];
+			      modify_entry($model, $treeview) if $event->type eq '2button-press';
+			    }
+			  });
+
+# create menu
+my @items = get_items();
+my $factory = Gtk2::ItemFactory->new('Gtk2::MenuBar', '<main>', undef);
+$factory->create_items('menu', @items);
+my $menu = $factory->get_widget('<main>');
+
+my $okcancel = create_okcancel({
+				cancel_clicked => sub { ugtk2->exit },
+				ok_clicked => sub { write_conf; ugtk2->exit },
+			       },
+			      );
+
+# main interface
+$W->add(gtkpack_(Gtk2::VBox->new(0,0),
+		 0, $menu,
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakSamba manage Samba shares"))),
+		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter Samba shares.")),
+		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+			     1, create_scrolled_window($treeview),
+			     0, gtkpack_(create_vbox('start'),
+#					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
+#								eval { add_entry($model, $treeview) };
+#								my $err = $@;
+#								if ($err) {
+#								  err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
+#								}
+#							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
+								eval { modify_entry($model, $treeview) };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to Modify Samba share.") . "\n\n" . $err);
+								}
+							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
+								eval { remove_entry($model, $treeview) };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
+								}
+							      }),
+					),
+			    ),
+		 0, $okcancel,
+		 ),
+	);
+
+$W->show_all;
+Gtk2->main;
