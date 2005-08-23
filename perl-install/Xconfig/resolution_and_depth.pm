@@ -232,11 +232,12 @@ sub set_default_background {
 
     my $ratio = $resolution->{X} / $resolution->{Y};
     my $dir = "$::prefix/usr/share/mdk/backgrounds";
+    my %theme = getVarsFromSh('/etc/sysconfig/bootsplash');
     my @l = 
       sort {
 	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1];
       } map {
-	  if (my ($X, $Y) = /^Mandriva-(\d+)x(\d+).png$/) {
+	  if (my ($X, $Y) = /^$theme{THEME}-(\d+)x(\d+).png$/) {
 	      [
 		  $_, 
 		  int(abs($ratio - $X / $Y) * 100), #- we want the nearest ratio (precision .01)
