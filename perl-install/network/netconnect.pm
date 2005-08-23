@@ -1092,7 +1092,6 @@ See iwpriv(8) man page for further information."),
                             $ethntf->{MII_NOT_SUPPORTED} = 'no';
                             $ethntf->{WIRELESS_MODE} = 'Roaming';
                         } elsif (member($wireless_enc_mode, qw(open restricted))) {
-                            #- keep the key even for WPA, so that drakconnect remembers it
                             $ethntf->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
                         } elsif ($need_rt2x00_iwpriv) {
                             #- use iwpriv for WPA with rt2400/rt2500 drivers, they don't plan to support wpa_supplicant
