@@ -172,7 +172,9 @@ sub analyse_kernel_name {
 sub packages2kernels {
     my ($packages) = @_;
 
-    map { 
+     sort { 
+	$a->{ext} cmp $b->{ext} || URPM::rpmvercmp($b->{version}, $a->{version});
+    } map { 
 	if (my ($ext, $version) = analyse_kernel_name($_->name)) {
 	    { pkg => $_, ext => $ext, version => $version };
 	} else {
