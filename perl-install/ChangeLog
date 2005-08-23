@@ -1,3 +1,74 @@
+2005/08/23  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: fix network restart condition for 6to4
+	remove deprecated comment
+
+	* network/wireless.pm: use wext driver for ipw cards in wpa_supplicant
+
+2005/08/23  Pixel  <pixel at mandriva.com>
+
+	* rescue/list.xml: 
+	  - grub files have moved
+	  - add *_stage1_5 grub files
+
+	* Xconfig/resolution_and_depth.pm: be safer
+	fix sort
+
+	* keyboard.pm: making us-intl the default console keyboard mapping (it was
+	introduced in console-tools by Andreas to allow: compose '\'' 'c' to
+	'ç')
+
+2005/08/23  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Enable tape hardware compression (17565)
+	Request window size for standalone
+
+2005/08/23  Warly  <warly at mandriva.com>
+
+	* Xconfig/resolution_and_depth.pm: use the current theme name
+
+2005/08/22  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/08/22  Olivier Blin <oblin at mandriva.com>
+
+	* drakxtools.spec: add diskdrake fix in 10.3-0.48mdk
+	10.3-0.48mdk
+
+2005/08/22  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+2005/08/22  Pixel  <pixel at mandriva.com>
+
+	* install_steps_gtk.pm: function $advertize must work when chrooted or
+	not, we can't really know if we're chrooted or not
+
+	* any.pm: don't use a udev rule, this doesn't always work for input/mice,
+	and never for ttySL0
+
+	* network/modem.pm: devfssymlinkf handle this case
+
+	* bootloader.pm: enhance grub device.map parsing (bugzilla #17732)
+
+2005/08/22  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Code cleanups
+	Clear main window on tab change
+	Suggestions from Diago:
+	Offer to install i586 kernel for old clients
+	  Progress display while creating all kernel images
+	  Move dhcpd config to more logical area
+
+2005/08/22  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm, standalone/scannerdrake: 
+	  - Fixed bug #17718 in both printerdrake and scannerdrake.
+
+	* standalone/printerdrake: 
+	  - Updated version number (bug #17719).
+
 2005/08/22  Olivier Blin <oblin at mandriva.com>
 
 	* any.pm: add udev rule for mouse back
