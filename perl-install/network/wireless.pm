@@ -92,7 +92,6 @@ sub wpa_supplicant_get_driver {
     $module =~ /^ath_/ ? "madwifi" :
     $module =~ /^at76c50|atmel_/ ? "atmel" :
     $module eq "ndiswrapper" ? "ndiswrapper" :
-    $module =~ /^ipw2[12]00$/ ? "ipw" :
     "wext";
 }
 
