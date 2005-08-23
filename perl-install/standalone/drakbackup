@@ -825,8 +825,12 @@ sub build_tape() {
 	if ($log_buff =~ /DR_OPEN/) {
 		show_warning("f", N("No tape in %s!", $conf{TAPE_DEVICE}));
 		return 1;
-	}	
-	
+	}
+	#- enable compression if configured
+	if ($conf{HDW_COMP}) {
+		$command = "mt -f $conf{TAPE_DEVICE} compression";
+		spawn_progress($command, "Enabling compression");	
+	}
 	#- try to roll to the end of the data if we're not erasing
 	$command = "mt -f $conf{TAPE_DEVICE} rewind";
 	# if we're using the rewinding device, change modes briefly
@@ -857,7 +861,6 @@ sub build_tape() {
 		$command = "tar -C $cfg_dir -cf $conf{TAPE_DEVICE} drakbackup.label;";
 		spawn_progress($command, "Creating tape label");
 		unlink $f;
-
 	}
 	# restore device setup
 	if (!$conf{TAPE_NOREWIND}) {
@@ -1855,6 +1858,12 @@ sub advanced_where_tape {
 			),
 			0, Gtk2::VBox->new(0, 5),
 	 		0, gtkpack_(Gtk2::HBox->new(0,10),
+	    		0, gtkset_sensitive(Gtk2::Label->new(N("Use tape hardware compression (EXPERIMENTAL)")), $conf{USE_TAPE}),
+	    		1, Gtk2::VBox->new(0, 5),
+	    		0, gtkset_sensitive(my $hdw_compression = Gtk2::CheckButton->new, $conf{USE_TAPE}),
+			),
+			0, Gtk2::VBox->new(0, 5),
+	 		0, gtkpack_(Gtk2::HBox->new(0,10),
 	    		0, gtkset_sensitive(Gtk2::Label->new(N("Do not rewind tape after backup")), $conf{USE_TAPE}),
 	    		1, Gtk2::VBox->new(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_rewind = Gtk2::CheckButton->new, $conf{USE_TAPE}),
@@ -1899,6 +1908,11 @@ sub advanced_where_tape {
     });
 	gtksignal_connect(gtkset_active($direct_to_tape, $conf{DIRECT_TAPE}), toggled => sub { 
 		$conf{DIRECT_TAPE} = $conf{DIRECT_TAPE} ? 0 : 1;
+		destroy_widget();
+		$current_widget->($previous_function);
+    });
+	gtksignal_connect(gtkset_active($hdw_compression, $conf{HDW_COMP}), toggled => sub { 
+		$conf{HDW_COMP} = $conf{HDW_COMP} ? 0 : 1;
 		destroy_widget();
 		$current_widget->($previous_function);
     });
@@ -4346,7 +4360,7 @@ sub interactive_mode() {
 	$in->isa('interactive::gtk') and $::isWizard = 0;
     $my_win = ugtk2->new(N("Drakbackup"));
     $window1 = $my_win->{window};
-
+    $my_win->{rwindow}->set_size_request(600,440);
     $my_win->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     read_conf_file();     
 
