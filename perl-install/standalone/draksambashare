@@ -268,8 +268,8 @@ sub modify_entry {
   $hide_files->set_text($listshare[$i]{hide_files});
   $hide_dot_files->set_text($listshare[$i]{hide_dot_files});
 
-  my $expander_user = Gtk2::Expander->new('Advanced user options');
-  $expander_user->add(gtkpack_(Gtk2::VBox->new,
+  my $expander_user = Gtk2::Expander->new('User options');
+  $expander_user->add(gtkpack_(Gtk2::HBox->new,
 #                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Advanced Options Help"), $help_global)),
 			       0, gtkadd(Gtk2::Frame->new(N("Samba user access")),
 					 gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
@@ -291,7 +291,7 @@ sub modify_entry {
 		      );
   
   
-  my $expander_file = Gtk2::Expander->new('Advanced file options');
+  my $expander_file = Gtk2::Expander->new('File options');
   $expander_file->add(gtkpack_(Gtk2::VBox->new,
 			       0, gtkadd(Gtk2::Frame->new(N("Display options")),
 					 gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
@@ -320,7 +320,7 @@ sub modify_entry {
 									 0, $label_and_widgets->(N("Writable:"), $writable, ""),
 									 ),
 								),
-							 gtkadd(Gtk2::Frame->new(""),
+							 gtkadd(Gtk2::Frame->new("Advanced options"),
 								gtkpack_(gtkset_border_width(Gtk2::VBox->new, 3),
 									 0, $expander_user,
 									 0, $expander_file,
