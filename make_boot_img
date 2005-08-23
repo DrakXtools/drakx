@@ -750,11 +750,10 @@ sub isolinux {
 }
 
 sub xbox_stage1() {
-    my $dir = 'isolinux/xbox';
-
-    eval { rm_rf($dir) }; mkdir_p($dir);
-
     my $xbox_kernel = find { /xbox/ } all('kernel/all.kernels') or return;
+
+    my $dir = 'isolinux/xbox';
+    eval { rm_rf($dir) }; mkdir_p($dir);
 
     _ "cp kernel/all.kernels/$xbox_kernel/vmlinuz $dir";
     initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$xbox_kernel");
