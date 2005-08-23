@@ -946,7 +946,7 @@ notation (for example, 1.2.3.4).")),
                         #- FIXME: special case for sagem where $ethntf->{DEVICE} is the result of a command
                         #- we can't always use $ntf_name because of some USB DSL modems
                         $net->{net_interface} = $ntf_name eq "sagem" ? "sagem" : $ethntf->{DEVICE};
-                        $need_network_restart = $ipv6_tunnel xor text2bool($ethntf->{IPV6TO4INIT});
+                        $need_network_restart = $ipv6_tunnel ^ text2bool($ethntf->{IPV6TO4INIT});
                         if ($ipv6_tunnel) {
                             $net->{network}{NETWORKING_IPV6} = "yes";
                             $net->{network}{IPV6_DEFAULTDEV} = "tun6to4";
