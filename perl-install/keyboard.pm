@@ -321,7 +321,7 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "ur" => [ N_("_: keyboard\nUrdu keyboard"),  "us",              "ur",    1 ],
  "us" => [ N_("US keyboard"),    "us",              "en_US", 0 ],
- "us_intl" => [ N_("US keyboard (international)"), "us-latin1", "us_intl", 0 ],
+ "us_intl" => [ N_("US keyboard (international)"), "us-intl", "us_intl", 0 ],
  "uz" => [ N_("_: keyboard\nUzbek (cyrillic)"), "uz.uni",         "uz",    1 ],
 # old XKB layout
  "vn" => [ N_("_: keyboard\nVietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
