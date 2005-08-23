@@ -339,7 +339,7 @@ sub Auto_allocate {
     my $suggestions = partitions_suggestions($in) or return;
 
     my %all_hds_ = %$all_hds;
-    $all_hds_{hds} = [ sort { $a == $hd ? -1 : 1 } @{$all_hds->{hds}} ];
+    $all_hds_{hds} = [ sort { $a == $hd ? -1 : 1 } fs::get::hds($all_hds) ];
 
     eval { fsedit::auto_allocate(\%all_hds_, $suggestions) };
     if ($@) {
