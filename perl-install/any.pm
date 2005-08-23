@@ -919,7 +919,7 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
     #- add a specific udev script, we can't do it with a udev rule,
     #- eg, ttySL0 is a symlink
     output_with_perm("$::prefix/etc/udev/conf.d/$of.conf", 0755, "ln -sf $if /dev/$of\n")
-      if $of !~ /dvd/;
+      if $of !~ /dvd|mouse/;
 
     #- when creating a symlink on the system, use devfs name if devfs is mounted
     symlinkf($devfs_if, "$::prefix/dev/$if") if $devfs_if ne $if && detect_devices::dev_is_devfs();
