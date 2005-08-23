@@ -235,7 +235,7 @@ sub set_default_background {
     my %theme = getVarsFromSh('/etc/sysconfig/bootsplash');
     my @l = 
       sort {
-	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1];
+	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[3] <=> $b->[3];
       } map {
 	  if (my ($X, $Y) = /^$theme{THEME}-(\d+)x(\d+).png$/) {
 	      [
