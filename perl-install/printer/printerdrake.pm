@@ -3093,8 +3093,12 @@ sub get_db_entry {
 		$printer->{DBENTRY} = "$make|$model";
 	    }
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
-	} elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
-	    # Do we have a native CUPS driver or a PostScript PPD file?
+	}
+	if ($printer->{configured}{$queue}{queuedata}{ppd} ||
+	    ($printer->{DBENTRY} eq "") ||
+	    !exists($printer::main::thedb{$printer->{DBENTRY}})) {
+	    # Do we have a native CUPS driver, a PostScript PPD file,
+	    # or a pre-built Foomatic PPD file?
 	    $printer->{DBENTRY} =
 		printer::main::get_descr_from_ppd($printer) ||
 		$printer->{DBENTRY};
@@ -3104,7 +3108,8 @@ sub get_db_entry {
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
 	}
 	my ($make, $model);
-	if ($printer->{DBENTRY} eq "") {
+	if (($printer->{DBENTRY} eq "") ||
+	    !exists($printer::main::thedb{$printer->{DBENTRY}})) {
 	    # Point the list cursor at least to manufacturer and model of 
 	    # the printer
 	    $printer->{DBENTRY} = "";
@@ -3127,7 +3132,8 @@ sub get_db_entry {
 		}
 	    }
 	}
-	if ($printer->{DBENTRY} eq "") {
+	if (($printer->{DBENTRY} eq "") ||
+	    !exists($printer::main::thedb{$printer->{DBENTRY}})) {
 	    # Exact match of make and model did not work, try to clean
 	    # up the model name
 	    $model =~ s/PS//;
@@ -3140,7 +3146,9 @@ sub get_db_entry {
 		}
 	    }
 	}
-	if ($printer->{DBENTRY} eq "" && $make ne "") {
+	if ((($printer->{DBENTRY} eq "") ||
+	     !exists($printer::main::thedb{$printer->{DBENTRY}})) &&
+	    $make ne "") {
 	    # Exact match with cleaned-up model did not work, try a best match
 	    my $matchstr = "$make|$model";
 	    $printer->{DBENTRY} = 
@@ -3153,7 +3161,8 @@ sub get_db_entry {
 		 $matchstr !~ /Hewlett[\s-]+Packard/i))
 	    { $printer->{DBENTRY} = "" }
 	}
-	if ($printer->{DBENTRY} eq "") {
+	if (($printer->{DBENTRY} eq "") ||
+	    !exists($printer::main::thedb{$printer->{DBENTRY}})) {
 	    # Set the OLD_CHOICE to a non-existing value
 	    $printer->{OLD_CHOICE} = "XXX";
 	}
