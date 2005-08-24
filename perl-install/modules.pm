@@ -140,6 +140,12 @@ sub load_category {
 	eval { load_and_configure($conf, $_->{driver}, $_->{options}) };
 	$_->{error} = $@;
 
+	if ($_->{error} && member($_->{driver}, 'ahci', 'ata_piix')) {
+	    #- HACK: ahci and ata_piix handle the same hardware, it only depends on the bios configuration
+	    $_->{driver} = $_->{driver} eq 'ahci' ? 'ata_piix' : 'ahci';
+	    redo;
+	}
+
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
     }
     grep { !($_->{error} && $_->{try}) } @l;
