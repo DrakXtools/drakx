@@ -584,7 +584,9 @@ sub setup_install {
 	setxkbmap($keyboard);
     } else {
 	my $f = xmodmap_file($keyboard);
-	eval { run_program::run('xmodmap', $f) } if $f && !$::testing && $ENV{DISPLAY};
+	#- timeout is needed for drakx-in-chroot to kill xmodmap when it gets crazy with:
+	#- please release the following keys within 2 seconds: Alt_L (keysym 0xffe9, keycode 64)
+	eval { run_program::raw({ timeout => 3 }, 'xmodmap', $f) } if $f && !$::testing && $ENV{DISPLAY};
     }
 }
 
