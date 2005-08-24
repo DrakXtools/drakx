@@ -265,7 +265,7 @@ sub modify_entry {
   $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_files, $hide_dot_files, $inherit_permissions;
 
   $default_case->set_popdown_strings(@default_case);
-  $_->set_popdown_strings(@yesno) foreach $browseable, $public, $writable, $hide_files, $hide_dot_files, $preserve_case;
+  $_->set_popdown_strings(@yesno) foreach $browseable, $public, $writable, $hide_files, $hide_dot_files, $preserve_case, $inherit_permissions;
 
   my $file_dialog = $fdwidget->($dir, "");
   my $button = Gtk2::Button->new_from_stock('gtk-open');
