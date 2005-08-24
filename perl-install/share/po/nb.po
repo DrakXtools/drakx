@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-08-18 23:17+0200\n"
+"PO-Revision-Date: 2005-08-24 10:01+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norwegian Bokmål <nb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18319,6 +18319,14 @@ msgid ""
 "        \t\t\n"
 "        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 msgstr ""
+"        - Opprett etherboot-disketter/CDer:\n"
+"        \tDe diskløse klientmaskinene trenger enten ROM-imagefil på nettverkskortet, oppstartsdiskett\n"
+"        \teller en CD for å initialisere oppstartssekvensen.  drakTermServ vil hjelpe til med å generere disse\n"
+"        \timagefilene, basert på nettverkskortet i klientmaskinen.\n"
+"        \t\t\n"
+"        \tEt grunnleggende eksempel på oppretting av en oppstartsdiskett for et 3Com 3509 manuelt::\n"
+"        \t\t\n"
+"        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 
 #: standalone/drakTermServ:666
 #, c-format
@@ -18593,6 +18601,8 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Dynamisk IP-adresserekke\n"
+"(trengs for PXE-klienter):"
 
 #: standalone/drakTermServ:1536
 #, c-format
@@ -18870,14 +18880,14 @@ msgstr ""
 "posttjener satt opp på ditt system."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"Dette bør være en lokal bruker eller e-postadresse som du vil ha "
-"sikkerhetskopieringsresultatene sendt til. Du vil trenge en fungerende "
-"posttjener satt opp på ditt system."
+"Dette bør være returdadressen som du vil ha "
+"sikkerhetskopieringsresultatene "
+"sendt fra. Standard er drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -19440,6 +19450,9 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"Slett inkrementelle eller differentielle\n"
+" sikkerhetskopier eldre enn N dager\n"
+" (0 beholder alle sikkerhetskopier) for å spare plass"
 
 #: standalone/drakbackup:2026
 #, c-format
@@ -21585,7 +21598,7 @@ msgstr "Oppsett av domenenavn-tjener (DNS)"
 #: standalone/drakgw:208
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Bruk denne standardruteren som domenenavn-tjener"
 
 #: standalone/drakgw:209
 #, c-format
@@ -21633,12 +21646,12 @@ msgstr "Maksimum leieavtale (i sekunder)"
 #: standalone/drakgw:278
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Proxy-hurtiglagertjener (SQUID)"
 
 #: standalone/drakgw:282
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Bruk denne standardruteren som proxy-hurtiglagertjener"
 
 #: standalone/drakgw:283
 #, c-format
@@ -21651,9 +21664,9 @@ msgid "Visible hostname"
 msgstr "Synlig vertsnavn"
 
 #: standalone/drakgw:285
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Eiendom"
+msgstr "Proxy-port"
 
 #: standalone/drakgw:286
 #, c-format
@@ -21661,9 +21674,9 @@ msgid "Cache size (MB)"
 msgstr "Hurtigminnestørrelse (MB)"
 
 #: standalone/drakgw:311
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Harddiskinformasjon"
+msgstr "Kringkast skriverinformasjon"
 
 #: standalone/drakgw:328
 #, c-format
@@ -21805,7 +21818,7 @@ msgstr "Vertsaliaser"
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS håndterer hosts-definisjoner"
 
 #: standalone/drakhosts:246
 #, c-format
@@ -21833,9 +21846,9 @@ msgid "Attacker"
 msgstr "Angriper"
 
 #: standalone/drakids:22
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Angrepstype: %s"
+msgstr "Angrepstype"
 
 #: standalone/drakids:23
 #, c-format
@@ -21878,9 +21891,9 @@ msgid "Remove from whitelist"
 msgstr "Fjern fra hvitliste"
 
 #: standalone/drakids:125
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Ingen deling"
+msgstr "Port-skanning"
 
 #: standalone/drakids:126
 #, c-format
@@ -22001,12 +22014,12 @@ msgstr "Sikker tilkobling"
 #: standalone/draknfs:171
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Skrivebeskyttet delt ressurs:"
 
 #: standalone/draknfs:173
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Avanserte valg</span>"
 
 #: standalone/draknfs:174
 #, c-format
@@ -22081,12 +22094,12 @@ msgstr "Hjelp BrukerID"
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "Anonym bruker-ID"
 
 #: standalone/draknfs:397
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "Anonym gruppe-ID"
 
 #: standalone/draknfs:434 standalone/draknfs:526
 #, c-format
@@ -22116,17 +22129,17 @@ msgstr "Generelle valg"
 #: standalone/draknfs:514
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Egendefinerte valg"
 
 #: standalone/draknfs:533
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Vennligst bruk endre-knappen for å sette riktige rettigheter"
 
 #: standalone/draknfs:588
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS håndterer delte NFS-ressurser"
 
 #: standalone/draknfs:597
 #, c-format
@@ -22823,7 +22836,7 @@ msgstr "lagrer bootsplash-tema..."
 #: standalone/draksplash:159
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Klarte ikke å laste inn bildefil %s"
 
 #: standalone/draksplash:169
 #, c-format
