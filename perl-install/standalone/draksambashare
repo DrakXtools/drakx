@@ -241,8 +241,7 @@ sub modify_entry {
   my $button = Gtk2::Button->new_from_stock('gtk-open');
   $button->signal_connect(clicked => sub { $file_dialog->show });
 
-  my $w = ugtk2->new(N("DrakSamba entry"),
-		     icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
+  my $w = ugtk2->new(N("DrakSamba entry"));
 
   $iter = $selection->get_selected;
   $iter or info_dialog(N("Error"), N("Please add a Samba share to be able to modify it.")) and return;
@@ -438,8 +437,6 @@ $treeview->signal_connect(button_press_event => sub {
 			    my $selection = $treeview->get_selection;
 			    my $iter = $selection->get_selected;
 			    if ($iter) {
-			      my $path = $model->get_path($iter);
-			      my $i = ($path->get_indices)[0];
 			      modify_entry($model, $treeview) if $event->type eq '2button-press';
 			    }
 			  });
