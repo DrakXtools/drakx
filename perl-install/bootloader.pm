@@ -852,8 +852,8 @@ sub method2text {
     +{
 	'lilo-graphic' => N("LILO with graphical menu"),
 	'lilo-menu'    => N("LILO with text menu"),
-	'grub-graphic' => N("Grub with graphical menu"),
-	'grub-menu'    => N("Grub with text menu"),
+	'grub-graphic' => N("GRUB with graphical menu"),
+	'grub-menu'    => N("GRUB with text menu"),
 	'yaboot'       => N("Yaboot"),
     }->{$method};
 }
