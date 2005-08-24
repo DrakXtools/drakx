@@ -177,7 +177,7 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 	      name => N("Local Area Network setings"),
 	      data => sub {
 		  [
-		   { label => N("Local IP adress"), val => \$lan_intf->{IPADDR} },
+		   { label => N("Local IP address"), val => \$lan_intf->{IPADDR} },
 		   { label => N("Netmask"), val => \$lan_intf->{NETMASK} },
 		   { label => N("The internal domain name"), val => \$internal_domain_name },
 		  ];
