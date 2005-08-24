@@ -1,3 +1,103 @@
+2005/08/24  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: add share name
+	fix inherit_permission pb
+	ergo fix in modify dialog box, add more advanced options, re-enable add
+	button (launch a wizard)
+	cosmetics fix
+
+2005/08/24  Olivier Blin <oblin at mandriva.com>
+
+	* interactive/gtk.pm: do not crash in create_treeview_tree with
+	allow_empty_list and really empty list (#17718)
+
+2005/08/24  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Updated translations
+
+2005/08/24  Pixel  <pixel at mandriva.com>
+
+	* keyboard.pm: small timeout when calling xmodmap (for drakx-in-chroot)
+
+	* .perl_checker: put back packdrake
+
+	* modules.pm: ahci and ata_piix handle the same hardware, it only depends
+	on the bios configuration, so try each one...
+	rewrite code to allow next commit
+
+2005/08/24  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Don't use "X -ac" for thin clients (Diogo)
+
+2005/08/24  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Support for one pre-built PPD being linked from multiple printer
+	database entries.
+	  - Added support for pre-built PPDs for non-PostScript drivers,
+	  especially PCL-XL PPDs from Ricoh.
+
+	* printer/printerdrake.pm: 
+	  - Reverted workarounds for bug #17718, the bug is now really fixed,
+	the problem was in /usr/lib/libDrakX/interactive/gtk.pm.
+	  - Fixed problem of current printer/driver not chosen in printer/driver
+	  list when choosing "Printer manufacturer, model, driver" in the
+	  printer editing menu (occured mainly in expert mode and with
+	  printers with manufacturer-supplied PPD).
+
+	* standalone/scannerdrake: 
+	  - Reverted workarounds for bug #17718, the bug is now really fixed,
+	the problem was in /usr/lib/libDrakX/interactive/gtk.pm.
+
+2005/08/24  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* .perl_checker: blacklist packdrake again
+	blacklist a few packages for draksambashare
+	packdrake is now perl_checker aware
+
+2005/08/23  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: adjust modify dialog box (ergo)
+	first release, need various debug/improvement/test
+
+2005/08/23  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakfont: perl_checker cleanup, $select_font_msg is unused
+
+	* share/rpmsrate: fluxbox is in main now
+
+2005/08/23  Pixel  <pixel at mandriva.com>
+
+	* any.pm: don't write /etc/udev/conf.d/mouse.conf, udev now handles it
+	using /etc/sysconfig/mouse
+
+	* diskdrake/interactive.pm: auto allocate on the current LV first (only
+	partially fix bug #16175 since it will also auto allocate on other
+	drives)
+
+	* rescue/list.xml: 
+	  - grub files have moved
+	  - add *_stage1_5 grub files
+
+	* pkgs.pm: for bestKernelPackage(), sort kernels to have higher version
+	first
+
+	* Xconfig/resolution_and_depth.pm: be safer
+	fix sort
+
+2005/08/23  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Enable tape hardware compression (17565)
+	Request window size for standalone
+
+2005/08/23  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/ga.po: update
+
+2005/08/23  Warly  <warly at mandriva.com>
+
+	* Xconfig/resolution_and_depth.pm: use the current theme name
+
 2005/08/23  Olivier Blin <oblin at mandriva.com>
 
 	* network/netconnect.pm: fix network restart condition for 6to4
