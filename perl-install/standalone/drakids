@@ -16,23 +16,11 @@ use Gtk2::SimpleList;
 
 use ugtk2 qw(:create :helpers :wrappers);
 
-my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
-                                      timestamp => 'hidden',
-                                      N("Date") => 'text',
-                                      N("Attacker") => 'text',
-                                      N("Attack type") => 'text',
-                                      N("Service") => 'text',
-                                      N("Network interface") => 'text',
-                                      N("Protocol") => 'text',
-                                  );
+my $loglist = create_attack_list();
+$loglist->get_selection->set_mode('single');
+
+my $blacklist = create_attack_list();
 $blacklist->get_selection->set_mode('multiple');
-$blacklist->set_headers_clickable(1);
-foreach (0, 1, 2) {
-    $blacklist->get_column($_)->signal_connect('clicked', \&sort_by_column, $blacklist->get_model);
-    #- sort on timestamp if Date column is clicked
-    #- sort columns include hidden columns while list columns don't
-    $blacklist->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
-}
 
 my $whitelist = Gtk2::SimpleList->new(addr => 'hidden',
                                       N("Allowed addresses") => 'text',
@@ -42,10 +30,15 @@ $whitelist->set_headers_clickable(1);
 $whitelist->get_column(0)->signal_connect('clicked', \&sort_by_column, $whitelist->get_model);
 $whitelist->get_column(0)->set_sort_column_id(0);
 
+my $w = ugtk2->new(N("Interactive Firewall"),
+                   icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
+
 my $ifw = network::ifw->new(dbus_object::system_bus(), sub {
     my ($_con, $msg) = @_;
     my $member = $msg->get_member;
-    if ($member eq 'Blacklist') {
+    if ($member eq 'Attack') {
+        handle_log($msg->get_args_list);
+    } elsif ($member eq 'Blacklist') {
 	handle_blacklist($msg->get_args_list);
     } elsif ($member eq 'Whitelist') {
 	handle_whitelist($msg->get_args_list);
@@ -53,14 +46,22 @@ my $ifw = network::ifw->new(dbus_object::system_bus(), sub {
 	clear_lists();
     } elsif ($member eq 'Init') {
 	handle_init();
+    } elsif ($member eq 'ManageRequest') {
+	$w->{window}->present;
     }
 });
 init_lists();
 
-$ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
-my $w = ugtk2->new(N("Interactive Firewall"));
 gtkadd($w->{window},
         gtknew('Notebook', children => [
+            gtknew('Label', text => N("Log")),
+            gtknew('VBox', spacing => 5, children => [
+                1, gtknew('ScrolledWindow', width => 600, height => 400, child => $loglist),
+                0, gtknew('HButtonBox', layout => 'edge', children_loose => [
+                    gtknew('Button', text => N("Clear logs"), clicked => \&clear_log),
+                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                ]),
+            ]),
             gtknew('Label', text => N("Blacklist")),
             gtknew('VBox', spacing => 5, children => [
                 1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
@@ -108,6 +109,7 @@ sub init_blacklist() {
     my @packets = $ifw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
         handle_blacklist(@blacklist);
+        handle_log(@blacklist);
     }
 }
 
@@ -116,20 +118,7 @@ sub clear_blacklist() {
 }
 
 sub handle_blacklist {
-    my ($timestamp, $indev, $prefix, $_sensor, $protocol, $addr, $port, $_icmp_type) = @_;
-    push @{$blacklist->{data}}, [
-        $addr,
-        $timestamp,
-        network::ifw::format_date($timestamp),
-        network::ifw::resolve_address(network::ifw::get_ip_address($addr)),
-        $prefix eq 'SCAN' ? N("Port scanning") :
-        $prefix eq 'SERV' ? N("Service attack") :
-        $prefix eq 'PASS' ? N("Password cracking") :
-        '',
-        network::ifw::get_service($port),
-        $indev,
-        network::ifw::get_protocol($protocol),
-    ];
+    attack_list_add($blacklist, network::ifw::attack_to_hash(\@_));
 }
 
 sub get_selected_blacklist() {
@@ -183,13 +172,77 @@ sub unwhitelist {
 
 sub init_lists() {
     eval {
+        init_loglist();
         init_blacklist();
         init_whitelist();
     };
-    $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
+    $@ and print "$@\n", err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 }
 
 sub clear_lists() {
+    clear_loglist();
     clear_blacklist();
     clear_whitelist();
+}
+
+sub create_attack_list() {
+    my $attacklist = Gtk2::SimpleList->new(addr => 'hidden',
+                                           timestamp => 'hidden',
+                                           N("Date") => 'text',
+                                           N("Attacker") => 'text',
+                                           N("Attack type") => 'text',
+                                           N("Service") => 'text',
+                                           N("Network interface") => 'text',
+                                           N("Protocol") => 'text',
+                                       );
+    $attacklist->set_headers_clickable(1);
+    foreach (0, 1, 2) {
+        $attacklist->get_column($_)->signal_connect('clicked', \&sort_by_column, $attacklist->get_model);
+        #- sort on timestamp if Date column is clicked
+        #- sort columns include hidden columns while list columns don't
+        $attacklist->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
+    }
+    $attacklist;
+}
+
+sub attack_list_add {
+    my ($attacklist, $attack) = @_;
+    push @{$attacklist->{data}}, [
+        $attack->{addr},
+        $attack->{timestamp},
+        $attack->{date},
+        $attack->{hostname},
+        $attack->{type},
+        $attack->{service},
+        $attack->{indev},
+        $attack->{protocol},
+    ];
+}
+
+#- may throw an exception
+sub init_loglist() {
+    my @packets = $ifw->get_reports(1);
+    while (my @attack = splice(@packets, 0, 10)) {
+        handle_log(@attack);
+    }
+}
+
+sub clear_loglist() {
+    @{$loglist->{data}} = ();
+}
+
+sub handle_log {
+    attack_list_add($loglist, network::ifw::attack_to_hash(\@_));
+}
+
+sub clear_log {
+    eval {
+        $ifw->clear_processed_reports;
+        $ifw->send_alert_ack;
+    };
+    if (!$@) {
+        clear_loglist();
+    } else {
+        err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
+    }
 }

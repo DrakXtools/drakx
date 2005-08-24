@@ -2,6 +2,7 @@ package network::ifw;
 
 use dbus_object;
 use Socket;
+use common;
 
 our @ISA = qw(dbus_object);
 
@@ -58,8 +59,9 @@ sub set_interactive {
 }
 
 sub get_reports {
-    my ($o) = @_;
-    $o->call_method('GetReports');
+    my ($o, $o_include_processed) = @_;
+    $o->call_method('GetReports',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, to_bool($o_include_processed)));
 }
 
 sub get_blacklist {
@@ -70,6 +72,21 @@ sub get_blacklist {
 sub get_whitelist {
     my ($o) = @_;
     $o->call_method('GetWhitelist');
+}
+
+sub clear_processed_reports {
+    my ($o) = @_;
+    $o->call_method('ClearProcessedReports');
+}
+
+sub send_alert_ack {
+    my ($o) = @_;
+    $o->call_method('SendAlertAck');
+}
+
+sub send_manage_request {
+    my ($o) = @_;
+    $o->call_method('SendManageRequest');
 }
 
 sub format_date {
@@ -104,6 +121,28 @@ sub resolve_address {
         alarm 0;
     };
     $hostname || $ip_addr;
+}
+
+sub attack_to_hash {
+    my ($args) = @_;
+    my $attack = { mapn { $_[0] => $_[1] } [ 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type', 'seq' ], $args };
+    $attack->{port} = unpack('S', pack('n', $attack->{port}));
+    $attack->{date} = format_date($attack->{timestamp});
+    $attack->{ip_addr} = get_ip_address($attack->{addr});
+    $attack->{hostname} = resolve_address($attack->{ip_addr});
+    $attack->{protocol} = get_protocol($attack->{protocol});
+    $attack->{service} = get_service($attack->{port});
+    $attack->{type} =
+        $attack->{prefix} eq 'SCAN' ? N("Port scanning")
+      : $attack->{prefix} eq 'SERV' ? N("Service attack")
+      : $attack->{prefix} eq 'PASS' ? N("Password cracking")
+      : undef;
+    $attack->{msg} =
+        $attack->{prefix} eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $attack->{hostname})
+      : $attack->{prefix} eq "SERV" ? N("The %s service has been attacked by %s.", $attack->{service}, $attack->{hostname})
+      : $attack->{prefix} eq "PASS" ? N("A password cracking attack has been attempted by %s.", $attack->{hostname})
+      : undef;
+    $attack;
 }
 
 1;
