@@ -306,16 +306,18 @@ sub create_treeview_tree {
     });
 
     $tree, sub {
-	my $v = may_apply($e->{format}, $_[0]);
-	my $i = find_index { $v eq $_ } @{$e->{formatted_list}};
+        my $v = may_apply($e->{format}, $_[0]);
+        eval {
+            my $i = find_index { $v eq $_ } @{$e->{formatted_list}};
 
-	my ($model, $iter) = $tree->get_selection->get_selected;
+            my ($model, $iter) = $tree->get_selection->get_selected;
 
-	my $new_path_str = $tree_model->{path_str_list}[$i];
-	my $old_path_str = $model && $tree_model->get_path_str($iter);
-	
-	$select->($new_path_str) if $new_path_str ne $old_path_str;
-	undef $iter if ref $iter;
+            my $new_path_str = $tree_model->{path_str_list}[$i];
+            my $old_path_str = $model && $tree_model->get_path_str($iter);
+
+            $select->($new_path_str) if $new_path_str ne $old_path_str;
+            undef $iter if ref $iter;
+        };
     };
 }
 
