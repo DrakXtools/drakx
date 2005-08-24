@@ -180,27 +180,6 @@ sub create_smbuser {
 }
 
 sub write_conf {
-  foreach my $clef (@listshare) {
-    $samba->{$clef};
-    $samba->{$clef}{path};
-    $samba->{$clef}{comment};
-    $samba->{$clef}{browseable};
-    $samba->{$clef}{public};
-    $samba->{$clef}{writable};
-    $samba->{$clef}{'create mask'};
-    $samba->{$clef}{'directory mask'};
-    $samba->{$clef}{'read list'};
-    $samba->{$clef}{'write list'};
-    $samba->{$clef}{'admin users'};
-    $samba->{$clef}{'valid users'};
-    $samba->{$clef}{'hide dot files'};
-    $samba->{$clef}{'hide files'};
-    $samba->{$clef}{'preserve case'};
-    $samba->{$clef}{'force create mode'};
-    $samba->{$clef}{'force group'};
-    $samba->{$clef}{'default case'};
-    $samba->{$clef}{'inherit permissions'};
-  }
   $samba->write_conf("/etc/samba/smb.conf");
 }
 
@@ -282,7 +261,8 @@ sub modify_entry {
 
   my ($dir, $i, $path, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
 
-  $_ = Gtk2::Entry->new foreach $share_name, $dir, $path, $comment, $create_mask, $directory_mask;
+  $share_name = Gtk2::Label->new;
+  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask;
   $_ = Gtk2::Entry->new foreach $read_list, $write_list, $admin_users, $valid_users, $force_group, $force_create_mode;
   $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_files, $hide_dot_files, $inherit_permissions;
 
@@ -322,7 +302,7 @@ sub modify_entry {
   $hide_dot_files->set_text($listshare[$i]{hide_dot_files});
   $inherit_permissions->set_text($listshare[$i]{inherit_permissions});
 
-  my $expander_user = Gtk2::Expander->new('User options');
+  my $expander_user = Gtk2::Expander->new('User options (user access, mask option, force mode)');
   $expander_user->add(gtkpack_(Gtk2::HBox->new,
 #                          0, $label_and_widgets->($adv_options{sync}, $lsync, help_b(N_("Advanced Options Help"), $help_global)),
 			       0, gtkadd(Gtk2::Frame->new(N("Samba user access")),
@@ -345,7 +325,7 @@ sub modify_entry {
 			       ),
 		      );
   
-  my $expander_file = Gtk2::Expander->new('File options');
+  my $expander_file = Gtk2::Expander->new('File options (hide files, case)');
   $expander_file->add(gtkpack_(Gtk2::VBox->new,
 			       0, gtkadd(Gtk2::Frame->new(N("Display options")),
 					 gtkpack_(gtkset_border_width(Gtk2::HBox->new, 1),
@@ -387,12 +367,14 @@ sub modify_entry {
 							 gtkadd(Gtk2::Frame->new("Advanced options"),
 								gtkpack_(gtkset_border_width(Gtk2::VBox->new, 1),
 									 0, $expander_user,
+									 0, Gtk2::HSeparator->new,
 									 0, $expander_file,
 									 ),
 								),
 							 create_okcancel({
 							     cancel_clicked => sub { $w->destroy },
 							     ok_clicked => sub {
+							       my $share = $share_name->get_text;
 							       # update gui treeview
 							       $model->set($iter,
 									   COLUMN_SHARE_NAME, $share_name->get_text,
@@ -416,11 +398,29 @@ sub modify_entry {
 									     COLUMN_INHERIT_PERMISSIONS, $inherit_permissions->get_text,
 									     );
 							       # update $samba with the new value
-
-								 $w->destroy;
+							       $samba->{$share};
+							       $samba->{$share}{path} = $dir->get_text;
+							       $samba->{$share}{comment} = $comment->get_text;
+							       $samba->{$share}{browseable} = $browseable->get_text;
+							       $samba->{$share}{public} = $public->get_text;
+							       $samba->{$share}{writable} = $writable->get_text;
+							       $samba->{$share}{'create mask'} = $create_mask->get_text;
+							       $samba->{$share}{'directory mask'} = $directory_mask->get_text;
+							       $samba->{$share}{'read list'} = $read_list->get_text;
+							       $samba->{$share}{'write list'} = $write_list->get_text;
+							       $samba->{$share}{'admin users'} = $admin_users->get_text;
+							       $samba->{$share}{'valid users'} = $valid_users->get_text;
+							       $samba->{$share}{'hide dot files'} = $hide_dot_files->get_text;
+							       $samba->{$share}{'hide files'} = $hide_files->get_text;
+							       $samba->{$share}{'preserve case'} = $preserve_case->get_text;
+							       $samba->{$share}{'force create mode'} = $force_create_mode->get_text;
+							       $samba->{$share}{'force group'} = $force_group->get_text;
+							       $samba->{$share}{'default case'} = $default_case->get_text;
+							       $samba->{$share}{'inherit permissions'} = $inherit_permissions->get_text;
+							       $w->destroy;
 							     },
-							 },
-									 ),
+									 },
+									),
 							 ]
 		),
 	 );
