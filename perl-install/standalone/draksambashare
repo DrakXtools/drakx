@@ -95,11 +95,11 @@ sub quit_all() {
   ugtk2->exit;
 }
 
-sub restart_dialog {
+sub restart_dialog() {
   wait_action("service smb restart");
 }
 
-sub reload_dialog {
+sub reload_dialog() {
   wait_action("service smb reload");
 }
 
@@ -179,7 +179,7 @@ sub create_smbuser {
   }
 }
 
-sub write_conf {
+sub write_conf() {
   $samba->write_conf("/etc/samba/smb.conf");
 }
 
@@ -375,6 +375,13 @@ sub modify_entry {
 							     cancel_clicked => sub { $w->destroy },
 							     ok_clicked => sub {
 							       my $share = $share_name->get_text;
+							       $comment->get_text or $::in->ask_warn(N("Information"), N("Please enter a Comment for this share."));
+							       ! -d $samba->{$share}{path} or $::in->ask_warn(N("Error"), N("Please provide a directory."));
+							       map {
+								 if ($_ and !/^\d+$/) {
+								   $::in->ask_warn(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
+								 }
+							       } $create_mask->get_text, $directory_mask->get_text;
 							       # update gui treeview
 							       $model->set($iter,
 									   COLUMN_SHARE_NAME, $share_name->get_text,
@@ -401,22 +408,22 @@ sub modify_entry {
 							       $samba->{$share};
 							       $samba->{$share}{path} = $dir->get_text;
 							       $samba->{$share}{comment} = $comment->get_text;
-							       $samba->{$share}{browseable} = $browseable->get_text;
-							       $samba->{$share}{public} = $public->get_text;
-							       $samba->{$share}{writable} = $writable->get_text;
-							       $samba->{$share}{'create mask'} = $create_mask->get_text;
-							       $samba->{$share}{'directory mask'} = $directory_mask->get_text;
-							       $samba->{$share}{'read list'} = $read_list->get_text;
-							       $samba->{$share}{'write list'} = $write_list->get_text;
-							       $samba->{$share}{'admin users'} = $admin_users->get_text;
-							       $samba->{$share}{'valid users'} = $valid_users->get_text;
-							       $samba->{$share}{'hide dot files'} = $hide_dot_files->get_text;
-							       $samba->{$share}{'hide files'} = $hide_files->get_text;
-							       $samba->{$share}{'preserve case'} = $preserve_case->get_text;
-							       $samba->{$share}{'force create mode'} = $force_create_mode->get_text;
-							       $samba->{$share}{'force group'} = $force_group->get_text;
-							       $samba->{$share}{'default case'} = $default_case->get_text;
-							       $samba->{$share}{'inherit permissions'} = $inherit_permissions->get_text;
+							       $browseable->get_text and $samba->{$share}{browseable} = $browseable->get_text or delete $samba->{$share}{browseable};
+							       $public->get_text and $samba->{$share}{public} = $public->get_text or delete $samba->{$share}{public};
+							       $writable->get_text and $samba->{$share}{writable} = $writable->get_text or delete $samba->{$share}{writable};
+							       $create_mask->get_text and $samba->{$share}{'create mask'} = $create_mask->get_text or delete $samba->{$share}{'create mask'};
+							       $directory_mask->get_text and $samba->{$share}{'directory mask'} = $directory_mask->get_text or delete $samba->{$share}{'directory mask'};
+							       $read_list->get_text and $samba->{$share}{'read list'} = $read_list->get_text or delete $samba->{$share}{'read list'};
+							       $write_list->get_text and $samba->{$share}{'write list'} = $write_list->get_text or delete $samba->{$share}{'write list'};
+							       $admin_users->get_text and $samba->{$share}{'admin users'} = $admin_users->get_text or delete $samba->{$share}{'admin users'};
+							       $valid_users->get_text and $samba->{$share}{'valid users'} = $valid_users->get_text or delete $samba->{$share}{'valid users'};
+							       $hide_dot_files->get_text and $samba->{$share}{'hide dot files'} = $hide_dot_files->get_text or delete $samba->{$share}{'hide dot files'};
+							       $hide_files->get_text and $samba->{$share}{'hide files'} = $hide_files->get_text or delete $samba->{$share}{'hide files'};
+							       $preserve_case->get_text and $samba->{$share}{'preserve case'} = $preserve_case->get_text or delete $samba->{$share}{'preserve case'};
+							       $force_create_mode->get_text and $samba->{$share}{'force create mode'} = $force_create_mode->get_text or delete $samba->{$share}{'force create mode'};
+							       $force_group->get_text and $samba->{$share}{'force group'} = $force_group->get_text or delete $samba->{$share}{'force group'};
+							       $default_case->get_text and $samba->{$share}{'default case'} = $default_case->get_text or delete $samba->{$share}{'default case'};
+							       $inherit_permissions->get_text and $samba->{$share}{'inherit permissions'} = $inherit_permissions->get_text or delete $samba->{$share}{'inherit permissions'};
 							       $w->destroy;
 							     },
 									 },
