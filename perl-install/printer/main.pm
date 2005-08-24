@@ -616,7 +616,7 @@ sub read_printer_db {
 			    if (defined($ppds->{$driver})) {
 				$entry->{ppd} = $ppds->{$driver};
 				$ppds->{$driver} =~ m!([^/]+)$!;
-				$linkedppds{$1} = $entry->{ENTRY};
+				push(@{$linkedppds{$1}}, $entry->{ENTRY});
 			    } else {
 				undef $entry->{ppd};
 			    }
@@ -637,7 +637,7 @@ sub read_printer_db {
 			    if (defined($ppds->{$driver})) {
 				$entry->{ppd} = $ppds->{$driver};
 				$ppds->{$driver} =~ m!([^/]+)$!;
-				$linkedppds{$1} = $entry->{ENTRY};
+				push(@{$linkedppds{$1}}, $entry->{ENTRY});
 			    } else {
 				undef $entry->{ppd};
 			    }
@@ -1883,24 +1883,60 @@ sub poll_ppd_base {
 		my ($filename, $ppdkey);
 		$ppd =~ m!([^/]+\.ppd)(\.gz|\.bz2|)$!;
 		if (($filename = $1) && 
-		    ($ppdkey = $linkedppds{$filename}) &&
-		    (defined($thedb{$ppdkey}))) {
-		    # Save the autodetection data
-		    $devidmake = $thedb{$ppdkey}{devidmake};
-		    $devidmodel = $thedb{$ppdkey}{devidmodel};
-		    $deviddesc = $thedb{$ppdkey}{deviddesc};
-		    $devidcmdset = $thedb{$ppdkey}{devidcmdset};
-		    # Remove the old entry
-		    delete $thedb{$ppdkey};
-		    if (!$printer->{expert}) {
-			# Remove driver part in recommended mode
-			$key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
-		    } else {
-			# If the Foomatic entry is "recommended" let
-			# the new PPD entry be "recommended"
-			$key =~ s/\s*$sprecstr//g;
-			$key .= " $precstr" if $ppdkey =~ m!$precstr!;
+		    ($#{$linkedppds{$filename}} >= 0)) {
+		    foreach $ppdkey (@{$linkedppds{$filename}}) {
+			next if !defined($thedb{$ppdkey});
+			# Save the autodetection data
+			$devidmake = $thedb{$ppdkey}{devidmake};
+			$devidmodel = $thedb{$ppdkey}{devidmodel};
+			$deviddesc = $thedb{$ppdkey}{deviddesc};
+			$devidcmdset = $thedb{$ppdkey}{devidcmdset};
+			# We must preserve make and model if we have one
+			# PPD for multiple printers
+			my $oldmake = $thedb{$ppdkey}{make};
+			my $oldmodel = $thedb{$ppdkey}{model};
+			# Remove the old entry
+			delete $thedb{$ppdkey};
+			my $newkey = $key;
+			if (!$printer->{expert}) {
+			    # Remove driver part in recommended mode
+			    $newkey =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+			} else {
+			    # If the Foomatic entry is "recommended" let
+			    # the new PPD entry be "recommended"
+			    $newkey =~ s/\s*$sprecstr//g;
+			    $newkey .= " $precstr" 
+				if $ppdkey =~ m!$precstr!;
+			    # Remove duplicate "recommended" tags and have 
+			    # the "recommended" tag at the end
+			    $newkey =~
+				s/(\s*$sprecstr)(.*?)(\s*$sprecstr)/$2$3/;
+			    $newkey =~ s/(\s*$sprecstr)(.+)$/$2$1/;
+			}
+			# If the PPD serves for multiple printers, conserve
+			# the make and model of the original entry
+			if (($#{$linkedppds{$filename}} > 0)) {
+			    $newkey =~
+				s/^([^\|]+)(\|[^\|]+)(\|.*|)$/$oldmake$2$3/;
+			    $newkey =~
+				s/^([^\|]+\|)([^\|]+)(\|.*|)$/$1$oldmodel$3/;
+			}
+			# Create the new entry
+			$thedb{$newkey}{ppd} = $ppd;
+			$thedb{$newkey}{make} = $mf;
+			$thedb{$newkey}{model} = $model;
+			$thedb{$newkey}{driver} = $driver;
+			# Recover saved autodetection data
+			$thedb{$newkey}{devidmake} = $devidmake
+			    if $devidmake;
+			$thedb{$newkey}{devidmodel} = $devidmodel
+			    if $devidmodel;
+			$thedb{$newkey}{deviddesc} = $deviddesc
+			    if $deviddesc;
+			$thedb{$newkey}{devidcmdset} = $devidcmdset
+			    if $devidcmdset;
 		    }
+		    next;
 		} elsif (!$printer->{expert}) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
