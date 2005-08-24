@@ -38,6 +38,7 @@ our %printer_type = (
 our %printer_type_inv = reverse %printer_type;
 
 our %thedb;
+our %linkedppds;
 
 our $hplipdevicesdb;
 
@@ -499,11 +500,18 @@ sub read_printer_db {
 	"foomatic-configure -O -q |") or
 	die "Could not run foomatic-configure";
 
+    %linkedppds = ();
     my $entry = {};
+    @{$entry->{drivers}} = (); 
     my $inentry = 0;
     my $indrivers = 0;
+    my $inppds = 0;
+    my $inppd = 0;
     my $inautodetect = 0;
     my $autodetecttype = "";
+    my $ppds = {};
+    my $ppddriver = "";
+    my $ppdfile = "";
     local $_;
     while (<$DBPATH>) {
 	chomp;
@@ -516,6 +524,31 @@ sub read_printer_db {
 		    $indrivers = 0;
 		} elsif (m!^\s*<driver>(.+)</driver>\s*$!) {
 		    push @{$entry->{drivers}}, $1;
+		}
+	    } elsif ($inppds) {
+		# We are inside the ppds block of a printers entry
+		if ($inppd) {
+		    # We are inside a PPD entry in the ppds block
+		    if (m!^\s*</ppd>\s*$!) {
+			# End of ppds block
+			$inppd = 0;
+			if ($ppddriver && $ppdfile) {
+			    $ppds->{$ppddriver} = $ppdfile;
+			}
+			$ppddriver = "";
+			$ppdfile = "";
+		    } elsif (m!^\s*<driver>(.+)</driver>\s*$!) {
+			$ppddriver = $1;
+		    } elsif (m!^\s*<ppdfile>(.+)</ppdfile>\s*$!) {
+			$ppdfile = $1;
+		    }
+		} else {
+		    if (m!^\s*</ppds>\s*$!) {
+			# End of ppds block
+			$inppds = 0;
+		    } elsif (m!^\s*<ppd>\s*$!) {
+			$inppd = 1;
+		    }
 		}
 	    } elsif ($inautodetect) {
 		# We are inside the autodetect block of a printers entry
@@ -580,6 +613,13 @@ sub read_printer_db {
 			    $entry->{ENTRY} =~ 
 				s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
 			    $entry->{driver} = $driver;
+			    if (defined($ppds->{$driver})) {
+				$entry->{ppd} = $ppds->{$driver};
+				$ppds->{$driver} =~ m!([^/]+)$!;
+				$linkedppds{$1} = $entry->{ENTRY};
+			    } else {
+				undef $entry->{ppd};
+			    }
 			    # Duplicate contents of $entry because it is multiply entered to the database
 			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
 			}
@@ -592,11 +632,21 @@ sub read_printer_db {
 			$entry->{ENTRY} =~ 
 			    s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
 			if ($entry->{defaultdriver}) {
-			    $entry->{driver} = $entry->{defaultdriver};
+			    my $driver = $entry->{defaultdriver};
+			    $entry->{driver} = $driver;
+			    if (defined($ppds->{$driver})) {
+				$entry->{ppd} = $ppds->{$driver};
+				$ppds->{$driver} =~ m!([^/]+)$!;
+				$linkedppds{$1} = $entry->{ENTRY};
+			    } else {
+				undef $entry->{ppd};
+			    }
 			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
 			}
 		    }
 		    $entry = {};
+		    @{$entry->{drivers}} = (); 
+		    $ppds = {};
 		} elsif (m!^\s*<id>\s*([^\s<>]+)\s*</id>\s*$!) {
 		    # Foomatic printer ID
 		    $entry->{printer} = $1;
@@ -612,7 +662,9 @@ sub read_printer_db {
 		} elsif (m!^\s*<drivers>\s*$!) {
 		    # Drivers block
 		    $indrivers = 1;
-		    @{$entry->{drivers}} = (); 
+		} elsif (m!^\s*<ppds>\s*$!) {
+		    # PPDs block
+		    $inppds = 1;
 		} elsif (m!^\s*<autodetect>\s*$!) {
 		    # Autodetect block
 		    $inautodetect = 1;
@@ -1632,7 +1684,7 @@ sub ppd_entry_str {
 	    $descr =~ s/CUPS\+Gimp-Print/CUPS + Gimp-Print/i;
 	} elsif ($descr =~ /Series CUPS/i) {
 	    $descr =~ s/Series CUPS/Series, CUPS/i;
-	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic)/i) {
+	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic|PCL|PXL)/i) {
 	    $descr .= ", PostScript";
 	}
 	# Split model and driver
@@ -1642,20 +1694,26 @@ sub ppd_entry_str {
 	     /^\s*(Generic\s*PostScript\s*Printer)\s*,?\s*(.*)$/i ||
 	    $descr =~
 	     /^\s*(PostScript\s*Printer)\s*,?\s*(.*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(Foomatic.*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(GhostScript.*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(CUPS.*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,?\s*(Foomatic.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,?\s*(GhostScript.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,?\s*(CUPS.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,\s+(PS.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,\s+(PXL.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,\s+(PCL.*)$/i ||
 	    $descr =~
-	     /^([^,]+[^,\s])\s*,?\s*(\(v?\.?\s*\d\d\d\d\.\d\d\d\).*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(v\d+\.\d+.*)$/i ||
-	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(PostScript.*)$/i ||
-	    $descr =~ /^([^,]+)\s*,?\s*(.+)$/) {
+	     /^([^,]+?)\s*,?\s*(\(v?\.?\s*\d\d\d\d\.\d\d\d\).*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,?\s*(v?\.?\s*\d+\.\d+.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,?\s*(PostScript.*)$/i ||
+	    $descr =~ /^([^,]+?)\s*,\s*(.+?)$/) {
 	    $model = $1;
 	    $driver = $2;
 	    $model =~ s/[\-\s,]+$//;
 	    $driver =~ s/\b(PS|PostScript\b)/PostScript/gi;
 	    $driver =~ s/(PostScript)(.*)(PostScript)/$1$2/i;
+	    $driver =~ s/\b(PXL|PCL[\s\-]*(6|XL)\b)/PCL-XL/gi;
+	    $driver =~ s/(PCL-XL)(.*)(PCL-XL)/$1$2/i;
+	    $driver =~ s/\b(PCL[\s\-]*(|4|5|5c|5e)\b)/PCL/gi;
+	    $driver =~ s/(PCL)(.*)(PCL)/$1$2/i;
 	    $driver =~ 
 	      s/^\s*(\(?v?\.?\s*\d\d\d\d\.\d\d\d\)?|v\d+\.\d+)([,\s]*)(.*?)\s*$/$3$2$1/i;
 	    $driver =~ s/,\s*\(/ (/g;
@@ -1669,7 +1727,13 @@ sub ppd_entry_str {
 	} else {
 	    # Some PPDs do not have the ", <driver>" part.
 	    $model = $descr;
-	    $driver = "PostScript";
+	    if ($model =~ /\b(PXL|PCL[\s\-]*(6|XL))\b/i) {
+		$driver = "PCL-XL";
+	    } elsif ($model =~ /\b(PCL[\s\-]*(|4|5|5c|5e)\b)/i) {
+		$driver = "PCL";
+	    } else {
+		$driver = "PostScript";
+	    }
 	}
     }
     # Remove manufacturer's name from the beginning of the model
@@ -1695,7 +1759,7 @@ sub ppd_entry_str {
 	$model =~ s/Oki\s+//i;
     }
     # Try again to remove manufacturer's name from the beginning of the 
-    # model name, this with the cleaned manufacturer name
+    # model name, this time with the cleaned manufacturer name
     $model =~ s/^$mf[\s\-]+//i 
 	if $mf && $mf !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
     # Translate "(recommended)" in the driver string
@@ -1814,10 +1878,34 @@ sub poll_ppd_base {
 		    $key = $keynolang;
 		}
 	        my ($devidmake, $devidmodel, $deviddesc, $devidcmdset);
-		if (!$printer->{expert}) {
+		# Replace an existing printer entry if it has linked
+		# to the current PPD file.
+		my ($filename, $ppdkey);
+		$ppd =~ m!([^/]+\.ppd)(\.gz|\.bz2|)$!;
+		if (($filename = $1) && 
+		    ($ppdkey = $linkedppds{$filename}) &&
+		    (defined($thedb{$ppdkey}))) {
+		    # Save the autodetection data
+		    $devidmake = $thedb{$ppdkey}{devidmake};
+		    $devidmodel = $thedb{$ppdkey}{devidmodel};
+		    $deviddesc = $thedb{$ppdkey}{deviddesc};
+		    $devidcmdset = $thedb{$ppdkey}{devidcmdset};
+		    # Remove the old entry
+		    delete $thedb{$ppdkey};
+		    if (!$printer->{expert}) {
+			# Remove driver part in recommended mode
+			$key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+		    } else {
+			# If the Foomatic entry is "recommended" let
+			# the new PPD entry be "recommended"
+			$key =~ s/\s*$sprecstr//g;
+			$key .= " $precstr" if $ppdkey =~ m!$precstr!;
+		    }
+		} elsif (!$printer->{expert}) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
 		    $key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+
 		    # Only replace an existing printer entry if
 		    #  - its driver is not the same as the driver of the
 		    #    new one
@@ -1901,7 +1989,7 @@ sub poll_ppd_base {
 			 } keys %thedb)) {
 		    # Expert mode: Foomatic driver other than "Foomatic +
 		    # Postscript" is recommended and there was a PostScript 
-		    # PPD which was recommended? Make The Foomatic driver
+		    # PPD which was recommended? Make the Foomatic driver
 		    # the recommended one
 		    foreach my $sourcekey (@foundkeys) {
 			# Remove the "recommended" tag
@@ -1913,6 +2001,12 @@ sub poll_ppd_base {
 			delete $thedb{$sourcekey};
 		    }
 		}
+		
+		# Remove duplicate "recommended" tags and have the
+		# "recommended" tag at the end
+		$key =~ s/(\s*$sprecstr)(.*?)(\s*$sprecstr)/$2$3/;
+		$key =~ s/(\s*$sprecstr)(.+)$/$2$1/;
+		# Create the new entry
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{make} = $mf;
 		$thedb{$key}{model} = $model;
