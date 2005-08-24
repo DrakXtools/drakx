@@ -125,7 +125,7 @@ sub resolve_address {
 
 sub attack_to_hash {
     my ($args) = @_;
-    my $attack = { mapn { $_[0] => $_[1] } [ 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type', 'seq' ], $args };
+    my $attack = { mapn { $_[0] => $_[1] } [ 'timestamp', 'indev', 'prefix', 'sensor', 'protocol', 'addr', 'port', 'icmp_type', 'seq', 'processed' ], $args };
     $attack->{port} = unpack('S', pack('n', $attack->{port}));
     $attack->{date} = format_date($attack->{timestamp});
     $attack->{ip_addr} = get_ip_address($attack->{addr});
