@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.48mdk
+Release: 0.49mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,35 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug 24 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.49mdk
+- interactive layer: do not crash when given an empty list (blino, #17718)
+- diskdrake, XFdrake: misc bug fixes (pixel)
+- drakbackup: enable tape hardware compression (stew, #17565)
+- draknetconnect (blino):
+  o fix network restart condition for 6to4
+  o use wext driver for ipw cards in wpa_supplicant
+- drakids (blino):
+  o add log tab
+  o allow to clear logs
+- drakTermServ (stew, Diogo):
+  o don't use "X -ac" for thin clients
+  o clear main window on tab change
+  o offer to install i586 kernel for old clients
+  o progress display while creating all kernel images
+  o move dhcpd config to more logical area
+- net_applet (blino):
+  o allow to whitelist attackers in popup
+  o show attacks of unknown type
+  o stop icon blinking when drakids is run or clear logs, or when an
+    Interactive Firewall alert isn't processed
+  o present drakids window on click on menu if drakids is already run
+- printerdrake (till):
+  o fixed problem of current printer/driver not chosen in the printer
+    editing menu (in expert mode and with manufacturer-supplied PPD)
+  o support for one pre-built PPD:
+    * for non-PostScript drivers (eg: PCL-XL PPDs from Ricoh)
+    * being linked from multiple printer database entries
+
 * Mon Aug 22 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.48mdk
 - from Pixel:
   o mousedrake: don't use a udev rule, this doesn't always work
