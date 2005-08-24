@@ -22,9 +22,9 @@ sub new {
     $o;
 }
 
-sub blacklist {
+sub set_blacklist_verdict {
     my ($o, $seq, $blacklist) = @_;
-    $o->call_method('Blacklist',
+    $o->call_method('SetBlacklistVerdict',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
 }
