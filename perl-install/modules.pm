@@ -132,16 +132,17 @@ sub load_category {
 	  if_($category =~ /net/, 'bmac', 'gmac', 'mace', 'airport'),
       ) : (),
     );
-    grep {
+    my @l = (probe_category($category),
+	     map { { driver => $_, description => $_, try => 1 } } @try_modules);
+
+    foreach (@l) {
 	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
 	eval { load_and_configure($conf, $_->{driver}, $_->{options}) };
 	$_->{error} = $@;
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
-
-	!($_->{error} && $_->{try});
-    } probe_category($category),
-      map { { driver => $_, description => $_, try => 1 } } @try_modules;
+    }
+    grep { !($_->{error} && $_->{try}) } @l;
 }
 
 sub load_parallel_zip {
