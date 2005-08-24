@@ -117,13 +117,12 @@ eval {
 $bubble = Gtk2::NotificationBubble->new;
 $bubble->attach($icon);
 $bubble->signal_connect(timeout => sub {
-    #- on timeout, apply default policy
-    set_blacklist_verdict($attacks_queue[0]{seq}, undef);
+    set_verdict($attacks_queue[0], \&apply_verdict_ignore);
 });
 $bubble->signal_connect(clicked => sub {
     $bubble->hide;
-    $ifw_alert = 0;
     eval { $ifw->send_alert_ack };
+    $ifw_alert = 0;
     update_tray_icon();
     ask_attack_verdict($attacks_queue[0]);
 });
@@ -348,17 +347,30 @@ sub handle_attack {
     @attacks_queue == 1 and notify_attack($attacks_queue[0]);
 }
 
-sub set_blacklist_verdict {
-    my ($seq, $verdict) = @_;
-    #- default is to blacklist
-    defined $verdict or $verdict = 1;
-
-    eval { $ifw->blacklist($seq, $verdict) };
+sub set_verdict {
+    my ($attack, $apply_verdict) = @_;
+    eval { $apply_verdict->($attack) };
     $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 
     shift @attacks_queue;
     #- wait for some time so that the new bubble is noticeable
     @attacks_queue and Glib::Timeout->add(500, sub { notify_attack($attacks_queue[0]); 0 });
+}
+
+sub apply_verdict_blacklist {
+    my ($attack) = @_;
+    $ifw->set_blacklist_verdict($attack->{seq}, 1);
+}
+
+sub apply_verdict_ignore {
+    my ($attack) = @_;
+    $ifw->set_blacklist_verdict($attack->{seq}, 0);
+}
+
+sub apply_verdict_whitelist {
+    my ($attack) = @_;
+    $ifw->whitelist($attack->{addr});
+    apply_verdict_ignore($attack);
 }
 
 sub notify_attack {
@@ -385,7 +397,9 @@ sub ask_attack_verdict {
 
     my $w = ugtk2->new(N("Interactive Firewall: intrusion detected"),
                        icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
-    my ($yes, $no, $auto);
+    my ($blacklist, $whitelist, $ignore, $auto);
+
+    my $update_automatic_mode = sub { $auto->get_active and $interactive_cb->set_active(0) };
 
     gtkadd($w->{window},
            gtknew('VBox', spacing => 5, children_loose => [
@@ -394,7 +408,7 @@ sub ask_attack_verdict {
                    0, gtknew('Label', text => "   "),
                    1, gtknew('VBox', children => [
                        0, $attack->{msg},
-                       0, N("Do you want to blacklist the attacker?")
+                       0, N("What do you want to do with this attacker?")
                    ])
                ]),
                gtksignal_connect(gtkadd(Gtk2::Expander->new(N("Attack details")),
@@ -418,25 +432,29 @@ sub ask_attack_verdict {
                                  activate => sub { $_[0]->get_expanded and $w->shrink_topwindow }
                              ),
                $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
-                   $no->set_sensitive(!$_[0]->get_active);
+                   $whitelist->set_sensitive(!$_[0]->get_active);
+                   $ignore->set_sensitive(!$_[0]->get_active);
                }),
                gtknew('HButtonBox', layout => 'edge', children_loose => [
-                   $no = gtknew('Button', text => N("No"), clicked => sub {
+                   $blacklist = gtknew('Button', text => N("Blacklist"), clicked => sub {
                        $w->destroy;
-                       set_blacklist_verdict($attack->{seq}, 0);
+                       $update_automatic_mode->();
+                       set_verdict($attack, \&apply_verdict_blacklist);
                    }),
-                   $yes = gtknew('Button', text => N("Yes"), clicked => sub {
-                       $auto->get_active and $interactive_cb->set_active(0);
+                   $whitelist = gtknew('Button', text => N("Whitelist"), clicked => sub {
                        $w->destroy;
-                       set_blacklist_verdict($attack->{seq}, 1);
-                   })
+                       $update_automatic_mode->();
+                       set_verdict($attack, \&apply_verdict_whitelist);
+                   }),
+                   $ignore = gtknew('Button', text => N("Ignore"), clicked => sub {
+                       $w->destroy;
+                       set_verdict($attack, \&apply_verdict_ignore);
+                   }),
                ]),
            ]));
-    $yes->grab_focus;
+    $blacklist->grab_focus;
     gtksignal_connect($w->{window}, delete_event => sub {
-        $auto->get_active and $interactive_cb->set_active(0);
-        #- apply default policy
-        set_blacklist_verdict($attack->{seq}, undef);
+        set_verdict($attack, \&apply_verdict_ignore);
     });
     $w->{window}->show_all;
 }
