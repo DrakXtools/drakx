@@ -452,6 +452,7 @@ sub ask_attack_verdict {
                    }),
                ]),
            ]));
+    eval { $auto->set_active(!$ifw->get_interactive) };
     $blacklist->grab_focus;
     gtksignal_connect($w->{window}, delete_event => sub {
         set_verdict($attack, \&apply_verdict_ignore);
