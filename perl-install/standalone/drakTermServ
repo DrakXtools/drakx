@@ -178,7 +178,7 @@ ca::ctrlaltdel:/sbin/reboot -f
 1:2345:respawn:/sbin/mingetty tty1
 
 # Connect to X server
-x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
+x:5:respawn:/usr/X11R6/bin/X -query $server_ip\n";
 
 	my $inittab_file = "/etc/inittab$suffix";
 	output_p($inittab_file, $inittab);	
