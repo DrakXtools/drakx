@@ -1383,7 +1383,7 @@ sub install_grub {
     if (!$::testing) {
 	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
 	cp_af(@files, "$::prefix/boot/grub");
-	install_raw_grub() 
+	install_raw_grub(); 
     }
 
     configure_kdm_BootManager('Grub');
