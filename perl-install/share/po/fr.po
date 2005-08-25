@@ -73,7 +73,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-19 17:36+0200\n"
+"PO-Revision-Date: 2005-08-25 16:37+0200\n"
 "Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -3202,11 +3202,9 @@ msgid "Enabling swap partition %s"
 msgstr "Activer la partition d'échange %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr ""
-"Vous ne pouvez pas utiliser de système de fichiers crypté pour le point de "
-"montage %s"
+msgstr "Utiliser un système de fichiers crypté"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -10386,7 +10384,7 @@ msgstr "Piratage de mot de passe"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "Attaque « %s »"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10404,9 +10402,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "Une tentative de cassage des mots de passe a été effectuée par %s."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "Une tentative de scan de ports a été effectuée par %s."
+msgstr "Une attaque « %s » a été tentée par %s"
 
 #: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
 #: network/netconnect.pm:547 network/netconnect.pm:690
@@ -11133,7 +11131,7 @@ msgstr "Métrique"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Activer le tunnel IPv6 sur IPv4"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -12083,9 +12081,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Imprimante réseau autonome (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "Imprimante sur serveur SMB (Windows 95/98/NT)"
+msgstr "Imprimante sur serveur SMB/Windows"
 
 #: printer/main.pm:33
 #, c-format
@@ -12809,7 +12807,7 @@ msgstr "Nombre de boutons"
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Délai entre les essais (en secondes)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -13012,14 +13010,14 @@ msgid "Do not do automatic printer setup again"
 msgstr ""
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Aucune imprimante trouvée !"
+msgstr "De nouvelles imprimantes ont été trouvée !"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Aucune imprimante trouvée !"
+msgstr "Une nouvelle imprimante a été trouvée !"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -14388,9 +14386,9 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Configuration du Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3589
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Configuration du Canon LBP-460/660"
+msgstr "Configuration du Canon LBP-810/1120 (CAPT)"
 
 #: printer/printerdrake.pm:3590
 #, fuzzy, c-format
@@ -18436,9 +18434,9 @@ msgid "Terminal Server Configuration"
 msgstr "Configuration du Serveur de Terminaux"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "Configuration de dhcpd..."
+msgstr "Configuration de dhcpd"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -21125,9 +21123,9 @@ msgid "Graphical boot theme selection"
 msgstr "Sélection du thème graphique de démarrage"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Sélection du thème graphique de démarrage"
+msgstr "Mode de démarrage graphique :"
 
 #: standalone/drakboot:143
 #, c-format
@@ -22512,17 +22510,17 @@ msgid "Failed to remove host."
 msgstr "Impossible d'enlever un hôte."
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Autoriser tous les utilisateurs"
+msgstr "Adresses autorisées"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:61 standalone/net_applet:183
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Pare-Feu actif"
+msgstr "Pare-Feu interactif"
 
 #: standalone/drakids:57
 #, c-format
@@ -23311,9 +23309,9 @@ msgid "Create mask"
 msgstr "Créer"
 
 #: standalone/draksambashare:75 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Répertoire"
+msgstr "Masque de répertoire"
 
 #: standalone/draksambashare:76
 #, fuzzy, c-format
@@ -23321,7 +23319,7 @@ msgid "Inherit permissions"
 msgstr "Permissions"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Serveur Samba"
 
@@ -23351,14 +23349,14 @@ msgid "Name of the share:"
 msgstr "Nom du certificat"
 
 #: standalone/draksambashare:245 standalone/draksambashare:402
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Appliquer"
+msgstr "Commentaire :"
 
 #: standalone/draksambashare:246
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Chemin"
+msgstr "Chemin :"
 
 #: standalone/draksambashare:251
 #, c-format
@@ -23428,7 +23426,7 @@ msgstr "Nom de partage de l'imprimante"
 #: standalone/draksambashare:406
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Publique :"
 
 #: standalone/draksambashare:407
 #, fuzzy, c-format
@@ -23464,7 +23462,7 @@ msgstr "naviguer"
 #: standalone/draksambashare:543
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "Publique"
 
 #: standalone/draksambashare:543
 #, fuzzy, c-format
@@ -26955,19 +26953,19 @@ msgid "Always launch on startup"
 msgstr "Toujours lancer au démarrage"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Gérer les réseaux sans fil"
+msgstr "Réseaux sans fil"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "Pare Feu actif : intrusion détectée"
+msgstr "Pare Feu interactif : intrusion détectée"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Voulez-vous mettre l'attaquant en liste noire ?"
+msgstr "Que voulez-vous faire avec ect attaquant ?"
 
 #: standalone/net_applet:414
 #, c-format
