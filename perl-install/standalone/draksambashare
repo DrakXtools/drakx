@@ -138,7 +138,7 @@ sub get_samba_share() {
   foreach my $clef (keys %$samba) {
     if ($samba->{$clef}{printable} =~ /yes/i || $clef =~ /print\$/) {
       print "$clef is a printer\n";
-    } elsif ($clef =~ /global/ || $clef =~ /cdrom$/ || $clef eq "homes" || $clef eq "Profiles") {
+    } elsif ($clef =~ /global/ || $clef =~ /cdrom$/ || $clef eq "Profiles") {
       print "unwanted (special shares)\n";
     } else {
       push @listshare, {
@@ -422,7 +422,9 @@ sub modify_entry {
 							       my $share = $share_name->get_text;
 							       my $test_dir = $dir->get_text;
 							       $comment->get_text or err_dialog(N("Information"), N("Please enter a Comment for this share.")) and return 1;
-							       -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+							       if ($share !~ 'homes' and !-d $test_dir) {
+								   err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+							       }
 							       foreach ($create_mask->get_text, $directory_mask->get_text) {
 								   if ($_ && !/^\d+$/) {
 								       err_dialog(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
