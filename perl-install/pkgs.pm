@@ -247,7 +247,8 @@ sub packageRequest {
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
     foreach (values %{$packages->{mediums}}) {
-	!$_->selected && $pkg->id >= $_->{start} && $pkg->id <= $_->{end} and return;
+	#- XXX $_ should always be an object here
+	!$_->{selected} && $pkg->id >= $_->{start} && $pkg->id <= $_->{end} and return;
     }
 
     return { $pkg->id => 1 };
