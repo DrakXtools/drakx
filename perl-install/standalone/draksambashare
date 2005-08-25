@@ -243,6 +243,27 @@ sub help_b {
 		    );
 }
 
+sub printdollar_section() {
+    $samba->{'print$'};
+    $samba->{'print$'}{browseable} = "yes";
+    $samba->{'print$'}{path} = "/var/lib/samba/printers";
+    $samba->{'print$'}{browseable} = "yes";
+    $samba->{'print$'}{'write list'} = "\@adm root";
+    $samba->{'print$'}{'guest ok'} = "yes";
+    $samba->{'print$'}{'inherit permissions'} = "yes";
+}
+
+sub printer_section() {
+    $samba->{'pdf-gen'};
+    $samba->{'pdf-gen'}{path} = "/var/tmp";
+    $samba->{'pdf-gen'}{'guest ok'} = "no";
+    $samba->{'pdf-gen'}{printable} = "yes";
+    $samba->{'pdf-gen'}{comment} = "PDF Generator (only valid users)";
+    $samba->{'pdf-gen'}{printing} = "bsd";
+    $samba->{'pdf-gen'}{'print command'} = "/usr/share/samba/scripts/print-pdf \"%s\" \"%H\" \"//%L/%u\" \"%m\" \"%I\" \"%J\" &";
+    $samba->{'pdf-gen'}{'lpq command'} = "/bin/true";
+}
+
 sub add_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
