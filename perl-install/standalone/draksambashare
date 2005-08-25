@@ -35,29 +35,25 @@ use Libconf::Glueconf::Samba::Smb_conf;
 my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
-local *FALSE;
-
-use constant FALSE => 0;
-use constant TRUE => 1;
-use constant COLUMN_SHARE_NAME => 0;
-use constant COLUMN_PATH => 1;
-use constant COLUMN_COMMENT => 2;
-use constant COLUMN_BROWSEABLE => 3;
-use constant COLUMN_PUBLIC => 4;
-use constant COLUMN_WRITABLE => 5;
-use constant COLUMN_CREATE_MASK => 6;
-use constant COLUMN_DIRECTORY_MASK => 7;
-use constant COLUMN_READ_LIST => 8;
-use constant COLUMN_WRITE_LIST => 9;
-use constant COLUMN_ADMIN_USERS => 10;
-use constant COLUMN_VALID_USERS => 11;
-use constant COLUMN_HIDE_DOT_FILES => 12;
-use constant COLUMN_HIDE_FILES => 13;
-use constant COLUMN_PRESERVE_CASE => 14;
-use constant COLUMN_FORCE_CREATE_MODE => 15;
-use constant COLUMN_FORCE_GROUP => 16;
-use constant COLUMN_DEFAULT_CASE => 17;
-use constant COLUMN_INHERIT_PERMISSIONS => 18;
+local *COLUMN_SHARE_NAME; use constant COLUMN_SHARE_NAME => 0;
+local *COLUMN_PATH; use constant COLUMN_PATH => 1;
+local *COLUMN_COMMENT; use constant COLUMN_COMMENT => 2;
+local *COLUMN_BROWSEABLE; use constant COLUMN_BROWSEABLE => 3;
+local *COLUMN_PUBLIC; use constant COLUMN_PUBLIC => 4;
+local *COLUMN_WRITABLE; use constant COLUMN_WRITABLE => 5;
+local *COLUMN_CREATE_MASK; use constant COLUMN_CREATE_MASK => 6;
+local *COLUMN_DIRECTORY_MASK; use constant COLUMN_DIRECTORY_MASK => 7;
+local *COLUMN_READ_LIST; use constant COLUMN_READ_LIST => 8;
+local *COLUMN_WRITE_LIST; use constant COLUMN_WRITE_LIST => 9;
+local *COLUMN_ADMIN_USERS; use constant COLUMN_ADMIN_USERS => 10;
+local *COLUMN_VALID_USERS; use constant COLUMN_VALID_USERS => 11;
+local *COLUMN_HIDE_DOT_FILES; use constant COLUMN_HIDE_DOT_FILES => 12;
+local *COLUMN_HIDE_FILES; use constant COLUMN_HIDE_FILES => 13;
+local *COLUMN_PRESERVE_CASE; use constant COLUMN_PRESERVE_CASE => 14;
+local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 15;
+local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 16;
+local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 17;
+local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 18;
 
 my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
 my (@listshare);
@@ -125,7 +121,7 @@ my $label_and_widgets = sub {
 my $fdwidget = sub {
   my ($data) = @_;
   my $fd = new Gtk2::FileSelection(N("Directory Selection"));
-  $fd->set_modal(TRUE);
+  $fd->set_modal(1);
   $fd->signal_connect("destroy", sub { $fd->hide });
   $fd->ok_button->signal_connect(clicked => sub {
 				   my $file = $fd->get_filename;
@@ -229,7 +225,7 @@ sub help_b {
 }
 
 sub add_entry {
-  my ($_widget, $treeview) = @_;
+  my ($treeview) = @_;
   my $model = $treeview->get_model;
   use wizards;
   my $w = wizards->new;
@@ -483,7 +479,7 @@ sub create_model() {
 # add colum to model
 sub add_columns {
   my $treeview = shift;
-  my $model = $treeview->get_model;
+#  my $model = $treeview->get_model;
   each_index {
     my $renderer = Gtk2::CellRendererText->new;
     $renderer->set(editable => 0);
@@ -506,14 +502,14 @@ my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 
 my $treeview = Gtk2::TreeView->new_with_model($model);
-$treeview->set_rules_hint(TRUE);
+$treeview->set_rules_hint(1);
 $treeview->get_selection->set_mode('single');
 add_columns($treeview);
 
 # double clic and popup modify window
 $treeview->signal_connect(button_press_event => sub {
 			    my (undef, $event) = @_;
-			    my $model = $treeview->get_model;
+			    #my $model = $treeview->get_model;
 			    my $selection = $treeview->get_selection;
 			    my $iter = $selection->get_selected;
 			    if ($iter) {
