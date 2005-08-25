@@ -29,6 +29,7 @@ if (-d $SLASH_LOCATION) {
     umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
     sys("$sudo rm -rf $SLASH_LOCATION/var/lib/rpm $SLASH_LOCATION/dev/mapper");
     rm_rf($SLASH_LOCATION);
+    rm_rf(glob("$dir/*")) if $ENV{CLEAN};
 }
 
 mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
@@ -79,7 +80,7 @@ sub find_free_loop() {
     foreach (0..255) {
 	my $dev = "/dev/loop$_";
 	system("$sudo losetup $dev >/dev/null 2>&1") != 0 or next;
-	warn "found $dev\n";
+	warn "found free loop $dev\n";
 	return $dev;
     }
     die "no free loop found";
@@ -114,7 +115,7 @@ sub umount_all() {
 		system_verbose "$sudo umount $dir 2>/dev/null";
 		next;
 	    }
-	    my ($loop) = cat_('/proc/mounts') =~ m!^(/dev/loop\d+) \Q$dir\E !m;
+	    my ($loop) = cat_('/proc/mounts') =~ m!^(/dev/loop\d+) .*\Q$dir\E !m;
 	    system_verbose "$sudo umount $dir";
 	    sys("$sudo losetup -d $loop") if $loop;
 	}
