@@ -138,7 +138,7 @@ sub get_samba_share() {
   foreach my $clef (keys %$samba) {
     if ($samba->{$clef}{printable} =~ /yes/i || $clef =~ /print\$/) {
       print "$clef is a printer\n";
-    } elsif ($clef =~ /global/ || $clef =~ /cdrom$/ || $clef eq "homes" || $clef eq "profiles") {
+    } elsif ($clef =~ /global/ || $clef =~ /cdrom$/ || $clef eq "homes" || $clef eq "Profiles") {
       print "unwanted (special shares)\n";
     } else {
       push @listshare, {
@@ -228,23 +228,70 @@ sub add_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
   use wizards;
+  my ($wiz_addshare_name, $wiz_addshare_comment, $wiz_addshare_path, $wiz_addshare_browseable, $wiz_addshare_public);
   my $w = wizards->new;
   my $wiz = {
 	     name => N("Add a Samba share"),
 	     pages => {
 		       welcome => {
-				   name => N("test"),
+				   name => N("Goal of this wizard is to easily create a new Samba share."),
 				   no_back => 1,
-				   next => 'endadd',
+				   next => 'add_share',
 				  },
-		       endadd => {
-				  name => N("Congratulations"),
-				  data => [ { label => N("The wizard successfully added the Samba share.") } ],
-				  no_back => 1,
-				  end => 1,
-                                  next => 0,
-				 },
-                      }
+		       add_share => {
+				     name => N("Add a Samba share"),
+				     data => [
+					      { label => N("Name of the share:"), val => \$wiz_addshare_name },
+					      { label => N("Comment:"), val => \$wiz_addshare_comment },
+					      { label => N("Path:"), val => \$wiz_addshare_path },
+					     ],
+				     complete => sub {
+				       foreach my $clef (keys %$samba) {
+					 if ($clef =~ /$wiz_addshare_name/) {
+					   err_dialog(N("Error"), N("Share with the same name already exist or share name empty, please choose another name.")) and return 'add_img';
+					 }
+				       }
+				       if (!$wiz_addshare_path) {
+					 err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'add_share';
+				       }
+				       if (!$wiz_addshare_comment) {
+					 err_dialog(N("Error"), N("Please enter a Comment for this share.")) and return 'add_share';
+				       }
+				       if (! -d $wiz_addshare_path) {
+					 mkdir_p($wiz_addshare_path) or err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'add_share';
+				       }
+				     },
+				     post => sub {
+				       # update iter
+				       my $iter = $model->append;
+				       $model->set($iter,
+						   COLUMN_SHARE_NAME, $wiz_addshare_name,
+						   COLUMN_PATH, $wiz_addshare_path,
+						   COLUMN_COMMENT, $wiz_addshare_comment,
+						  );
+				       my $share = $wiz_addshare_name;
+				       # update listshare
+				       push @listshare, {
+							 share_name => $share,
+							 path => $wiz_addshare_path,
+							 comment => $wiz_addshare_comment,
+							};
+				       # update samba conf
+				       $samba->{$share};
+				       $samba->{$share}{path} = $wiz_addshare_path;
+				       $samba->{$share}{comment} = $wiz_addshare_comment;
+				       return;
+				     },
+				     next => 'end_add',
+				    },
+		       end_add => {
+			   name => N("Congratulations"),
+				   data => [ { label => N("The wizard successfully added the Samba share. Now just double click on it in treeview to modify it") } ],
+				   no_back => 1,
+				   end => 1,
+				   next => 0,
+				  },
+		      }
 	    };
   $w->process($wiz, $in);
   $::isWizard = 0;
@@ -348,12 +395,13 @@ sub modify_entry {
   gtkadd($w->{window},
 	 gtknew('VBox', spacing => 0, children_loose => [
 							 gtkadd(Gtk2::Frame->new(N("Samba share directory")),
-								gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+								gtkpack_(gtkset_border_width(Gtk2::HBox->new, 1),
 									 0, gtkpack_(gtkset_border_width(Gtk2::VBox->new, 0),
 										     0, $label_and_widgets->(N("Share name:"), $share_name),
 										     0, $label_and_widgets->(N("Directory:"), $dir, $button),
 										     0, $label_and_widgets->(N("Comment:"), $comment, ""),
 										     ),
+									 0, Gtk2::VSeparator->new,
 									 0, gtkpack_(gtkset_border_width(Gtk2::VBox->new, 0),
 										     0, $label_and_widgets->(N("Public:"), $public, ""),
 										     0, $label_and_widgets->(N("Writable:"), $writable, ""),
@@ -432,6 +480,9 @@ sub modify_entry {
   $w->{window}->show_all;
 }
 
+sub do_it_add {
+}
+
 sub remove_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
@@ -440,9 +491,11 @@ sub remove_entry {
     if ($iter) {
       my $path = $model->get_path($iter);
       my $i = ($path->get_indices)[0];
-      ask_okcancel("Remove entry ?", "Remove $listshare[$i]{path}") and return;
+      my $share = $listshare[$i]{share_name};
+      ask_okcancel("Remove entry ?", "Remove $share") or return;
       $model->remove($iter);
       splice @listshare, $i, 1;
+      delete $samba->{$share};
     }
 }
 
@@ -540,10 +593,13 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
 								eval { add_entry($treeview) };
 								my $err = $@;
-								if ($err) {
+								$::WizardWindow->destroy if defined $::WizardWindow;
+                                                                undef $::WizardWindow;
+                                                                if ($err && $err !~ /wizcancel/) {
 								  err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
 								}
 							      }),
+					 0, Gtk2::HSeparator->new,
 					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
 								eval { modify_entry($treeview) };
 								my $err = $@;
