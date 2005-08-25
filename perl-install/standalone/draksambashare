@@ -376,11 +376,12 @@ sub modify_entry {
 							     cancel_clicked => sub { $w->destroy },
 							     ok_clicked => sub {
 							       my $share = $share_name->get_text;
-							       #$comment->get_text or $::in->ask_warn(N("Information"), N("Please enter a Comment for this share."));
-							       #! -d $samba->{$share}{path} or $::in->ask_warn(N("Error"), N("Please provide a directory."));
+							       my $test_dir = $dir->get_text;
+							       $comment->get_text or err_dialog(N("Information"), N("Please enter a Comment for this share.")) and return 1;
+							       -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
 							       foreach ($create_mask->get_text, $directory_mask->get_text) {
 								   if ($_ && !/^\d+$/) {
-								       $::in->ask_warn(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
+								       err_dialog(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
 								   }
 							       }
 							       # update gui treeview
