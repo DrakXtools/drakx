@@ -320,7 +320,6 @@ sub add_entry {
 sub modify_printers_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
-  my $selection = $treeview->get_selection;
   my ($dir, $i, $path, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable);
 
   $share_name = Gtk2::Label->new;
@@ -328,7 +327,7 @@ sub modify_printers_entry {
   $_ = Gtk2::OptionMenu->new foreach $browseable, $printable, $guest_ok;
   $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok;
 
-  my $iter = $selection->get_selected;
+  my $iter = $treeview->get_selection->get_selected;
   $iter or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;
   $path = $model->get_path($iter);
   $i = ($path->get_indices)[0];
@@ -382,8 +381,6 @@ sub modify_printers_entry {
 sub modify_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
-  my $selection = $treeview->get_selection;
-  my $iter;
 
   my ($dir, $i, $path, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
 
@@ -402,7 +399,7 @@ sub modify_entry {
   my $w = ugtk2->new(N("DrakSamba entry"));
   $w->{window}->set_modal(1);
 
-  $iter = $selection->get_selected;
+  my $iter = $treeview->get_selection->get_selected;
   $iter or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
   $path = $model->get_path($iter);
   $i = ($path->get_indices)[0];
@@ -566,8 +563,7 @@ sub modify_entry {
 sub remove_entry {
   my ($treeview, $type) = @_;
   my $model = $treeview->get_model;
-  my $selection = $treeview->get_selection;
-  my $iter = $selection->get_selected;
+  my $iter = $treeview->get_selection->get_selected;
   my $share;
     if ($iter) {
       my $path = $model->get_path($iter);
@@ -635,7 +631,6 @@ sub create_model_printers() {
 # add colum to model
 sub add_columns {
   my $treeview = shift;
-#  my $model = $treeview->get_model;
   each_index {
     my $renderer = Gtk2::CellRendererText->new;
     $renderer->set_data(column => $::i);
