@@ -730,21 +730,21 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                              1, create_scrolled_window($treeview_printers),
                              0, gtkpack_(create_vbox('start'),
-                                         0, gtksignal_connect(Gtk2::Button->new(N("Add pdf-gen")), clicked => sub {
-								eval { add_pdfgen_entry($treeview_printers) };
-								my $err = $@;
-								if ($err) {
-								  err_dialog(N("Error"), N("Failed to add pdf-gen.") . "\n\n" . $err);
-								}
-							      }),
-					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
-                                                                eval { add_printers_entry($treeview_printers) };
-                                                                my $err = $@;
-                                                                if ($err) {
-                                                                  err_dialog(N("Error"), N("Failed to add printers.") . "\n\n" . $err);
-                                                                }
-                                                              }),
-                                         0, Gtk2::HSeparator->new,
+#                                         0, gtksignal_connect(Gtk2::Button->new(N("Add pdf-gen")), clicked => sub {
+#								eval { add_pdfgen_entry($treeview_printers) };
+#								my $err = $@;
+#								if ($err) {
+#								  err_dialog(N("Error"), N("Failed to add pdf-gen.") . "\n\n" . $err);
+#								}
+#							      }),
+#					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
+#                                                                eval { add_printers_entry($treeview_printers) };
+#                                                                my $err = $@;
+#                                                                if ($err) {
+#                                                                  err_dialog(N("Error"), N("Failed to add printers.") . "\n\n" . $err);
+#                                                                }
+#                                                              }),
+#                                         0, Gtk2::HSeparator->new,
                                          0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
                                                                 eval { modify_printers_entry($treeview_printers) };
                                                                 my $err = $@;
