@@ -295,10 +295,17 @@ sub image_button_pressed {
     update_theme_from_rect();
 }
 
+sub restrict_to_interval {
+    my ($x, $min, $max) = @_;
+    max($min, min($max, $x));
+}
+
 sub image_motion_notify {
     my (undef, $event) = @_;
     member('button1-mask', @{$event->state}) or return;
-    my $point = { X => $event->x, Y => $event->y };
-    $current_point and %$current_point = %$point;
+    %$current_point = (
+        X => restrict_to_interval($event->x, 0, $theme{res_w}),
+        Y => restrict_to_interval($event->y, 0, $theme{res_h}),
+    ) if $current_point;
     update_theme_from_rect();
 }
