@@ -1,3 +1,4 @@
+# Translation of nny to Norwegian Nynorsk
 # Translation of nn to Norwegian Nynorsk
 # translation of DrakX-nn.po to Norwegian Nynorsk
 # translation of nn.po to Norwegian Nynorsk
@@ -7,9 +8,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nn\n"
+"Project-Id-Version: nny\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-22 20:58+0200\n"
+"PO-Revision-Date: 2005-08-25 22:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -931,8 +932,7 @@ msgstr "Minnestorleik i MiB"
 
 #: any.pm:275
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:276 any.pm:609 authentication.pm:181
@@ -1189,10 +1189,8 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:612
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
 #: any.pm:613
 #, c-format
@@ -1412,8 +1410,7 @@ msgstr ""
 
 #: any.pm:991
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
 #: any.pm:1016
@@ -1483,10 +1480,8 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:55
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
-msgstr ""
-"Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
+msgid "Use local for all authentication and information user tell in local file"
+msgstr "Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
 
 #: authentication.pm:56
 #, c-format
@@ -1537,8 +1532,7 @@ msgstr "Active Directory med SFU:"
 
 #: authentication.pm:59 authentication.pm:60
 #, c-format
-msgid ""
-"Kerberos is a secure system for providing network authentication services."
+msgid "Kerberos is a secure system for providing network authentication services."
 msgstr "Kerberos er eit trygt system for nettverksautentiseringstenester."
 
 #: authentication.pm:60
@@ -1787,8 +1781,7 @@ msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr ""
-"Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
+msgstr "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
 #: bootloader.pm:1467
 #, c-format
@@ -2272,8 +2265,7 @@ msgstr "Vil du lagra endringar i «/etc/fstab»"
 #: diskdrake/interactive.pm:292 install_steps_interactive.pm:330
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
+msgstr "Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
 
 #: diskdrake/interactive.pm:297
 #, c-format
@@ -2479,8 +2471,7 @@ msgstr "Vil du fjerna filmonteringsfila?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "vera tapt"
@@ -2969,8 +2960,7 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:179 standalone/drakbackup:3503
@@ -3064,9 +3054,9 @@ msgid "Enabling swap partition %s"
 msgstr "Slår på vekslepartisjonen «%s»"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Du kan ikkje bruka eit kryptert filsystem for monteringspunktet «%s»"
+msgstr "Bruk kryptert filsystem"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3143,7 +3133,7 @@ msgstr ""
 "av seinare val, eksempelvis «user,exec,dev,suid»)."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "Bruk brukarkvoter og handhev grenser (valfritt)."
 
@@ -3530,10 +3520,9 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr ""
-"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
+msgstr "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:242
@@ -5715,8 +5704,7 @@ msgstr "Katalog"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr ""
-"Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
+msgstr "Finn ikkje pakkelistfila på denne spegelen. Sjå til at adressa er rett."
 
 #: install_any.pm:740
 #, c-format
@@ -6859,8 +6847,7 @@ msgstr ""
 
 #: install_steps_interactive.pm:826
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr "Kontaktar Mandriva Linux-nettstaden for oversikt over speglar …"
 
 #: install_steps_interactive.pm:845
@@ -6933,8 +6920,7 @@ msgstr "Har du eit ISA-lydkort?"
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr ""
-"Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
+msgstr "Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
 
 #: install_steps_interactive.pm:1036
 #, c-format
@@ -7091,8 +7077,7 @@ msgstr "Mandriva Linux-installering %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 "  <Tab>/<Alt-Tab>: flytt mellom element  | <Mellomrom>: vel | <F12> neste "
 "skjermbilete "
@@ -9682,24 +9667,24 @@ msgid "Other ports"
 msgstr "Andre portar"
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Inga deling"
+msgstr "Portskanning"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Teneste_type:"
+msgstr "Tenesteåtak"
 
 #: network/ifw.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Passord (på nytt)"
+msgstr "Passordknekking"
 
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "«%s»-åtak"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10439,7 +10424,7 @@ msgstr "Matrisk"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Bruk IPv6 til IPv4-tunnelering"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11097,8 +11082,7 @@ msgstr "Nokre pakkar («%s») trengst, men er ikkje tilgjengelege."
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
-msgstr ""
-"Desse pakkane finn du i Mandriva Club, og i kommersielle Mandriva-utgåver."
+msgstr "Desse pakkane finn du i Mandriva Club, og i kommersielle Mandriva-utgåver."
 
 #: network/thirdparty.pm:276
 #, c-format
@@ -11994,8 +11978,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:616
 #, c-format
-msgid ""
-"No pop-up windows, canceling setup and package installation not possible"
+msgid "No pop-up windows, canceling setup and package installation not possible"
 msgstr ""
 
 #: printer/printerdrake.pm:622
@@ -12117,8 +12100,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:758
 #, c-format
-msgid ""
-"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Automatisk skrivaroppdaging (lokal, TCP/Socket, SMB-skrivarar og einings-URI-"
 "ar)"
@@ -12225,8 +12207,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:846
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
+msgid "There are no printers found which are directly connected to your machine"
 msgstr "Fann ingen skrivarar kopla direkte til maskina"
 
 #: printer/printerdrake.pm:849
@@ -12256,8 +12237,7 @@ msgstr "Ønskjer du å bruka utskrift på skrivarane ovanfor?\n"
 #: printer/printerdrake.pm:866
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
-"Er du sikker på at du vil setja opp utskriftssystemet på denne maskina?\n"
+msgstr "Er du sikker på at du vil setja opp utskriftssystemet på denne maskina?\n"
 
 #: printer/printerdrake.pm:867
 #, c-format
@@ -12713,8 +12693,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:1600
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Du kan òg velja einings- eller filnamnet på linje"
 
 #: printer/printerdrake.pm:1601 printer/printerdrake.pm:1610
@@ -14109,8 +14088,7 @@ msgstr "LPD og LPRng støttar ikkje IPP-skrivarar.\n"
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
-msgstr ""
-"I tillegg kan ikkje køar laga i programmet «foomatic-configure» overførast."
+msgstr "I tillegg kan ikkje køar laga i programmet «foomatic-configure» overførast."
 
 #: printer/printerdrake.pm:4323
 #, c-format
@@ -14404,8 +14382,7 @@ msgstr ""
 #: printer/printerdrake.pm:4745
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
-msgstr ""
-"2  Alle utskrifter vert sendt direkte til ein CUPS-tenar på nettverket."
+msgstr "2  Alle utskrifter vert sendt direkte til ein CUPS-tenar på nettverket."
 
 #: printer/printerdrake.pm:4746
 #, c-format
@@ -14679,8 +14656,7 @@ msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
+msgstr "Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -14887,8 +14863,7 @@ msgstr "Slå på/av msec-basert tryggleikskontroll."
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-" Enabling su only from members of the wheel group or allow su from any user."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr " Berre goda su frå medlemmar i wheel-gruppa eller frå alle brukarar."
 
 #: security/help.pm:92
@@ -14931,8 +14906,7 @@ msgstr "Vel storleik på passordlogg for å hindra gjenbruk av passord."
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr ""
-"Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
+msgstr "Vel minstelengd på passord og minimum tal på siffer og store bokstavar."
 
 #: security/help.pm:108
 #, c-format
@@ -14966,8 +14940,7 @@ msgstr ""
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr ""
-"Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
+msgstr "Kontroller løyve til filer i heimemappe til brukarar viss sett til «ja»."
 
 #: security/help.pm:118
 #, c-format
@@ -15009,8 +14982,7 @@ msgstr "Rapporter eigarlause filer viss sett til «ja»."
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"Kontroller om filer og mapper er skrivbare for alle viss sett til «ja»."
+msgstr "Kontroller om filer og mapper er skrivbare for alle viss sett til «ja»."
 
 #: security/help.pm:126
 #, c-format
@@ -15019,8 +14991,7 @@ msgstr "Køyr «chkrootkit»-kontrollar viss sett til «ja»."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr "Send rapport på e-post til denne adressa, eller til «root» viss tom."
 
 #: security/help.pm:128
@@ -15041,8 +15012,7 @@ msgstr "Køyr nokre kontrollar mot rpm-databasen viss sett til «ja»."
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"Rapporter resultatet av kontrollar til systemloggen viss sett til «ja»."
+msgstr "Rapporter resultatet av kontrollar til systemloggen viss sett til «ja»."
 
 #: security/help.pm:132
 #, c-format
@@ -15434,10 +15404,8 @@ msgstr "Bruk libsafe for tenarar"
 
 #: security/level.pm:63
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
-msgstr ""
-"Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
+msgid "A library which defends against buffer overflow and format string attacks."
+msgstr "Eit bibliotek som vernar mot overflytsfeil og strengformateringsangrep."
 
 #: security/level.pm:64
 #, c-format
@@ -15512,13 +15480,11 @@ msgstr ""
 msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
-msgstr ""
-"HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
+msgstr "HardDrake køyrer eit maskinvaresøk, og kan setja opp ny og endra maskinvare."
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
 #: services.pm:36
@@ -15686,16 +15652,14 @@ msgstr ""
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr ""
-"Postfix er eit program for overføring av elektronisk post mellom maskiner."
+msgstr "Postfix er eit program for overføring av elektronisk post mellom maskiner."
 
 #: services.pm:74
 #, c-format
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr ""
-"Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
+msgstr "Lagrar og gjenopprettar systementropigrunnlag for betre slumptalsgenerering."
 
 #: services.pm:76
 #, c-format
@@ -15908,8 +15872,7 @@ msgstr ""
 msgid ""
 "We would like to <b>thank</b> everyone who participated in the development "
 "of this latest release."
-msgstr ""
-"Me ønskjer å <b>takka</b> alle som har delteke i utviklinga av denne utgåva."
+msgstr "Me ønskjer å <b>takka</b> alle som har delteke i utviklinga av denne utgåva."
 
 #: share/advertising/03.pl:13
 #, c-format
@@ -15999,8 +15962,7 @@ msgstr ""
 
 #: share/advertising/05.pl:20
 #, c-format
-msgid ""
-"\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
+msgid "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr "\t– <b>Godseigde drivarar</b> (som drivarar for NVIDIA® og ATI™)."
 
 #: share/advertising/05.pl:21
@@ -16093,10 +16055,8 @@ msgstr "<b>Mandriva-produkt</b>"
 
 #: share/advertising/09.pl:15
 #, c-format
-msgid ""
-"<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
-msgstr ""
-"<b>Mandriva</b> har utvikla eit vidt spekter <b>Mandriva Linux</b>-produkt."
+msgid "<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
+msgstr "<b>Mandriva</b> har utvikla eit vidt spekter <b>Mandriva Linux</b>-produkt."
 
 #: share/advertising/09.pl:17
 #, c-format
@@ -16173,8 +16133,7 @@ msgstr "Her er Mandriva-produkta utvikla for <b>profesjonelle brukarar</b>:"
 
 #: share/advertising/11.pl:16
 #, c-format
-msgid ""
-"\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
+msgid "\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
 msgstr "\t– <b>Corporate Desktop</b> – Mandriva Linux for verksemder."
 
 #: share/advertising/11.pl:17
@@ -16184,8 +16143,7 @@ msgstr "\t– <b>Corporate Server</b> – Mandriva Linux-tenar."
 
 #: share/advertising/11.pl:18
 #, c-format
-msgid ""
-"\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
+msgid "\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
 msgstr "\t– <b>Multi-Network Firewall</b> – Mandriva Linux-tryggleiksløysing."
 
 #: share/advertising/12.pl:13
@@ -16296,10 +16254,8 @@ msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
-msgid ""
-"Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
-msgstr ""
-"Discovery inneheld <b>Kontact</b>, som er KDE <b>gruppevareløysing</b>."
+msgid "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
+msgstr "Discovery inneheld <b>Kontact</b>, som er KDE <b>gruppevareløysing</b>."
 
 #: share/advertising/15.pl:17
 #, c-format
@@ -16359,8 +16315,7 @@ msgstr "<b>Bruk multimedia</b>"
 #: share/advertising/17.pl:15
 #, c-format
 msgid "Discovery will also make <b>multimedia</b> very easy for you:"
-msgstr ""
-"Discovery gjer deg òg veldig enkelt å oppleva <b>multimedieinnhald</b>:"
+msgstr "Discovery gjer deg òg veldig enkelt å oppleva <b>multimedieinnhald</b>:"
 
 #: share/advertising/17.pl:16
 #, c-format
@@ -16401,8 +16356,7 @@ msgstr "\t– Lag, rediger og del kontordokument med <b>OpenOffice.org</b>."
 msgid ""
 "\t* Manage your personal data with the integrated personal information "
 "suites <b>Kontact</b> and <b>Evolution</b>."
-msgstr ""
-"\t– Handter personleg data med programma <b>Kontact</b> og <b>Evolution</b>."
+msgstr "\t– Handter personleg data med programma <b>Kontact</b> og <b>Evolution</b>."
 
 #: share/advertising/18.pl:18
 #, c-format
@@ -16419,8 +16373,7 @@ msgstr "\t– Delta i nettprat med <b>Kopete</b>."
 msgid ""
 "\t* Listen to your <b>audio CDs</b> and <b>music files</b>, watch your "
 "<b>videos</b>."
-msgstr ""
-"\t– Høyr på <b>lyd-CD-ar</b> og <b>musikkfiler</b>, og sjå <b>filmar</b>."
+msgstr "\t– Høyr på <b>lyd-CD-ar</b> og <b>musikkfiler</b>, og sjå <b>filmar</b>."
 
 #: share/advertising/18.pl:21
 #, c-format
@@ -16434,8 +16387,7 @@ msgstr "<b>Utviklingsmiljø</b>"
 
 #: share/advertising/19.pl:15 share/advertising/22.pl:17
 #, c-format
-msgid ""
-"PowerPack gives you the best tools to <b>develop</b> your own applications."
+msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
 msgstr ""
 "PowerPack gjev deg dei beste verktøya for å <b>utvikla</b> dine eigne "
 "program."
@@ -16471,7 +16423,9 @@ msgstr "PowerPack lèt deg velja mellom desse <b>populære skriveprogramma</b>:"
 #: share/advertising/20.pl:16
 #, c-format
 msgid "\t* <b>Emacs</b>: a customizable and real time display editor."
-msgstr "\t– <b>Emacs</b> – eit funksjonsrikt skriveprogram som kan skreddarsyast til alle behov."
+msgstr ""
+"\t– <b>Emacs</b> – eit funksjonsrikt skriveprogram som kan skreddarsyast til "
+"alle behov."
 
 #: share/advertising/20.pl:17
 #, c-format
@@ -16482,8 +16436,7 @@ msgstr "\t– <b>XEmacs</b> – eit anna skriveprogram og utviklingsmiljø."
 
 #: share/advertising/20.pl:18
 #, c-format
-msgid ""
-"\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
+msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
 msgstr "\t– <b>Vim</b> – eit avansert skriveprogram med fleire funksjonar enn Vi."
 
 #: share/advertising/21.pl:15
@@ -16496,7 +16449,9 @@ msgstr "<b>Programmeringsspråk</b>"
 msgid ""
 "With all these <b>powerful tools</b>, you will be able to write applications "
 "in <b>dozens of programming languages</b>:"
-msgstr "Med alle desse <b>kraftige verktøya</b> kan du skriva program i fleire <b>titals programmeringsspråk</b>:"
+msgstr ""
+"Med alle desse <b>kraftige verktøya</b> kan du skriva program i fleire "
+"<b>titals programmeringsspråk</b>:"
 
 #: share/advertising/21.pl:18
 #, c-format
@@ -16549,7 +16504,10 @@ msgid ""
 "With the powerful integrated development environment <b>KDevelop</b> and the "
 "leading Linux compiler <b>GCC</b>, you will be able to create applications "
 "in <b>many different languages</b> (C, C++, Java™, Perl, Python, etc.)."
-msgstr "Med det kraftige integrerte utviklingsmiljøet <b>KDevelop</b> og den leiande Linux-kompilatoren <b>GCC</b> kan laga program i <b>mange forskjellige språk</b> (C, C++, Java™, Perl, Python, med fleire)."
+msgstr ""
+"Med det kraftige integrerte utviklingsmiljøet <b>KDevelop</b> og den leiande "
+"Linux-kompilatoren <b>GCC</b> kan laga program i <b>mange forskjellige "
+"språk</b> (C, C++, Java™, Perl, Python, med fleire)."
 
 #: share/advertising/23.pl:13
 #, c-format
@@ -16564,7 +16522,8 @@ msgid ""
 "allow you to:"
 msgstr ""
 "PowerPack+ gjev deg tilgang til <b>Kolab</b>, ein funksjonsrik "
-"<b>gruppevaretenar</b>, som saman med klientprogramvaren <b>Kontact</b> lèt deg:"
+"<b>gruppevaretenar</b>, som saman med klientprogramvaren <b>Kontact</b> lèt "
+"deg:"
 
 #: share/advertising/23.pl:16
 #, c-format
@@ -16588,15 +16547,15 @@ msgstr "<b>Tenarar</b>"
 
 #: share/advertising/24.pl:17
 #, c-format
-msgid ""
-"Empower your business network with <b>premier server solutions</b> including:"
+msgid "Empower your business network with <b>premier server solutions</b> including:"
 msgstr "Styrk bedriftsnettverket med <b>førsteklasses tenarløysingar</b>, som:"
 
 #: share/advertising/24.pl:18
 #, c-format
-msgid ""
-"\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
-msgstr "\t– <b>Samba</b> – fil- og utskriftstenester for Microsoft® Windows®-klientar."
+msgid "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
+msgstr ""
+"\t– <b>Samba</b> – fil- og utskriftstenester for Microsoft® Windows®-"
+"klientar."
 
 #: share/advertising/24.pl:19
 #, c-format
@@ -16609,28 +16568,33 @@ msgid ""
 "\t* <b>MySQL</b> and <b>PostgreSQL</b>: The world's most popular open source "
 "databases."
 msgstr ""
-"\t– <b>MySQL</b> og <b>PostgreSQL</b> – verdas mest populære databasar basert "
-"på open kjeldekode."
+"\t– <b>MySQL</b> og <b>PostgreSQL</b> – verdas mest populære databasar "
+"basert på open kjeldekode."
 
 #: share/advertising/24.pl:21
 #, c-format
 msgid ""
 "\t* <b>CVS</b>: Concurrent Versions System, the dominant open source network-"
 "transparent version control system."
-msgstr "\t– <b>CVS</b> – det dominerande open kjeldekode-baserte nettverkstransparente versjonskontrollsystemet."
+msgstr ""
+"\t– <b>CVS</b> – det dominerande open kjeldekode-baserte "
+"nettverkstransparente versjonskontrollsystemet."
 
 #: share/advertising/24.pl:22
 #, c-format
-msgid ""
-"\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
-msgstr "\t– <b>ProFTPD</b> – ein GPL-lisensiert FTP-tenar som kan spesialtilpassast dine behov."
+msgid "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
+msgstr ""
+"\t– <b>ProFTPD</b> – ein GPL-lisensiert FTP-tenar som kan spesialtilpassast "
+"dine behov."
 
 #: share/advertising/24.pl:23
 #, c-format
 msgid ""
 "\t* <b>Postfix</b> and <b>Sendmail</b>: The popular and powerful mail "
 "servers."
-msgstr "\t– <b>Postfix</b> og <b>Sendmail</b> – dei populære og kraftige e-posttenarane."
+msgstr ""
+"\t– <b>Postfix</b> og <b>Sendmail</b> – dei populære og kraftige e-"
+"posttenarane."
 
 #: share/advertising/25.pl:13
 #, c-format
@@ -16643,7 +16607,9 @@ msgid ""
 "The <b>Mandriva Linux Control Center</b> is an essential collection of "
 "Mandriva Linux-specific utilities designed to simplify the configuration of "
 "your computer."
-msgstr "<b>Mandriva Linux-kontrollsenteret</b> er ei uunnverleg samling Mandriva Linux-spesifikke verktøy for oppsett av maskina."
+msgstr ""
+"<b>Mandriva Linux-kontrollsenteret</b> er ei uunnverleg samling Mandriva "
+"Linux-spesifikke verktøy for oppsett av maskina."
 
 #: share/advertising/25.pl:17
 #, c-format
@@ -16651,7 +16617,10 @@ msgid ""
 "You will immediately appreciate this collection of <b>more than 60</b> handy "
 "utilities for <b>easily configuring your system</b>: hardware devices, mount "
 "points, network and Internet, security level of your computer, etc."
-msgstr "Du vil setja pris på denne samlinga av <b>meir enn 60</b> nyttige verktøy for <b>raskt og enkelt oppsett av systemet</b>: maskinvare, monteringspunkt, nettverk og Internett, tryggleiksnivå, med meir."
+msgstr ""
+"Du vil setja pris på denne samlinga av <b>meir enn 60</b> nyttige verktøy "
+"for <b>raskt og enkelt oppsett av systemet</b>: maskinvare, monteringspunkt, "
+"nettverk og Internett, tryggleiksnivå, med meir."
 
 #: share/advertising/26.pl:13
 #, c-format
@@ -16667,7 +16636,12 @@ msgid ""
 "Mandriva Linux</b>. If you want to <b>support the open source philosophy</b> "
 "and the development of Mandriva Linux, <b>please</b> consider buying one of "
 "our products or services!"
-msgstr "Som alle dataprogram, krev open kjeldekode <b>tid og resursar</b> for utvikling. For å respektera filosofien bak open kjeldekode-rørsla, sel Mandriva produkt og tenester for å <b>forbetra Mandriva Linux</b>. Viss du ønskjer å <b>støtta open kjeldekode</b> og utvikling av Mandriva Linux, vurder å kjøpa éi av produkta og tenestene våre."
+msgstr ""
+"Som alle dataprogram, krev open kjeldekode <b>tid og resursar</b> for "
+"utvikling. For å respektera filosofien bak open kjeldekode-rørsla, sel "
+"Mandriva produkt og tenester for å <b>forbetra Mandriva Linux</b>. Viss du "
+"ønskjer å <b>støtta open kjeldekode</b> og utvikling av Mandriva Linux, "
+"vurder å kjøpa éi av produkta og tenestene våre."
 
 #: share/advertising/27.pl:13
 #, c-format
@@ -16693,7 +16667,9 @@ msgstr "Her finn du alle produkta våre, kundetenester og tredjepartsprodukt."
 msgid ""
 "This platform has just been <b>redesigned</b> to improve its efficiency and "
 "usability."
-msgstr "Plattforma er nett <b>nyutvikla</b> for å gjera ho meir effektiv og lett å bruka."
+msgstr ""
+"Plattforma er nett <b>nyutvikla</b> for å gjera ho meir effektiv og lett å "
+"bruka."
 
 #: share/advertising/27.pl:21
 #, c-format
@@ -16710,12 +16686,13 @@ msgstr "<b>Mandriva-klubben</b>"
 msgid ""
 "<b>Mandriva Club</b> is the <b>perfect companion</b> to your Mandriva Linux "
 "product.."
-msgstr "<b>Mandriva-klubben</b> er den <b>perfekte partnar</b> til Mandriva Linux-produktet ditt."
+msgstr ""
+"<b>Mandriva-klubben</b> er den <b>perfekte partnar</b> til Mandriva Linux-"
+"produktet ditt."
 
 #: share/advertising/28.pl:19
 #, c-format
-msgid ""
-"Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
+msgid "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
 msgstr "Dra nytte av <b>fordelane</b> ved å verta med i Mandriva Club:"
 
 #: share/advertising/28.pl:20
@@ -16724,8 +16701,8 @@ msgid ""
 "\t* <b>Special discounts</b> on products and services of our online store "
 "<b>store.mandriva.com</b>."
 msgstr ""
-"\t– <b>Rabattar</b> på produkt og tenester i nettbutikken vår, "
-"<b>store.mandriva.com</b>."
+"\t– <b>Rabattar</b> på produkt og tenester i nettbutikken vår, <b>store."
+"mandriva.com</b>."
 
 #: share/advertising/28.pl:21
 #, c-format
@@ -16744,7 +16721,9 @@ msgstr "\t– Tilgang til <b>brukarforum</b> for Mandriva Linux."
 msgid ""
 "\t* <b>Early and privileged access</b>, before public release, to Mandriva "
 "Linux <b>ISO images</b>."
-msgstr "\t– <b>Priviligert tilgang</b> til <b>ISO-bilete</b> av Mandriva Linux, før andre."
+msgstr ""
+"\t– <b>Priviligert tilgang</b> til <b>ISO-bilete</b> av Mandriva Linux, før "
+"andre."
 
 #: share/advertising/29.pl:13
 #, c-format
@@ -16756,14 +16735,18 @@ msgstr "<b>Mandriva Online</b>"
 msgid ""
 "<b>Mandriva Online</b> is a new premium service that Mandriva is proud to "
 "offer its customers!"
-msgstr "<b>Mandriva Online</b> er den nye tenesta Mandriva er stolt over å kunna tilby kundar."
+msgstr ""
+"<b>Mandriva Online</b> er den nye tenesta Mandriva er stolt over å kunna "
+"tilby kundar."
 
 #: share/advertising/29.pl:17
 #, c-format
 msgid ""
 "Mandriva Online provides a wide range of valuable services for <b>easily "
 "updating</b> your Mandriva Linux systems:"
-msgstr "Mandriva Online har eit vidt spekter tenester for <b>enkel oppdatering</b> av Mandriva Linux-system:"
+msgstr ""
+"Mandriva Online har eit vidt spekter tenester for <b>enkel oppdatering</b> "
+"av Mandriva Linux-system:"
 
 #: share/advertising/29.pl:18
 #, c-format
@@ -16786,8 +16769,7 @@ msgstr "\t– Fleksible <b>oppdateringsplanar</b>."
 
 #: share/advertising/29.pl:21
 #, c-format
-msgid ""
-"\t* Management of <b>all your Mandriva Linux systems</b> with one account."
+msgid "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
 msgstr "\t– Handtering av <b>alle Mandriva Linux-systema dine</b> frå éin konto."
 
 #: share/advertising/30.pl:13
@@ -16801,8 +16783,8 @@ msgid ""
 "Do you require <b>assistance?</b> Meet Mandriva's technical experts on "
 "<b>our technical support platform</b> www.mandrivaexpert.com."
 msgstr ""
-"Treng du <b>hjelp</b>? Møt Mandrivas tekniske ekspertar på "
-"<b>vår tekniske støtteplattform</b>, www.mandrivaexpert.com."
+"Treng du <b>hjelp</b>? Møt Mandrivas tekniske ekspertar på <b>vår tekniske "
+"støtteplattform</b>, www.mandrivaexpert.com."
 
 #: share/advertising/30.pl:17
 #, c-format
@@ -16816,7 +16798,9 @@ msgstr "Takka vera <b>kvalifiserte Mandriva Linux-ekspertar</b> sparar du mykje 
 msgid ""
 "For any question related to Mandriva Linux, you have the possibility to "
 "purchase support incidents at <b>store.mandriva.com</b>."
-msgstr "For eventuelle spørsmål om Mandriva Linux, kan du kjøpa kundestøtte på <b>store.mandriva.com</b>."
+msgstr ""
+"For eventuelle spørsmål om Mandriva Linux, kan du kjøpa kundestøtte på "
+"<b>store.mandriva.com</b>."
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -16838,8 +16822,8 @@ msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
-"Kontorprogramvare: Teksthandsamarar (KWord, AbiWord), rekneark "
-"(KSpread, gnumeric), PDF-viseprogram, med meir"
+"Kontorprogramvare: Teksthandsamarar (KWord, AbiWord), rekneark (KSpread, "
+"gnumeric), PDF-viseprogram, med meir"
 
 #: share/compssUsers.pl:34
 #, c-format
@@ -17746,9 +17730,9 @@ msgid "Delete All NBIs"
 msgstr "Slett alle NBI-ar"
 
 #: standalone/drakTermServ:880
-#, c-format
+#, fuzzy, c-format
 msgid "Building images for kernel:"
-msgstr ""
+msgstr "Lag nettverksoppstartsbilete for alle kjernar"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -18485,8 +18469,7 @@ msgstr ""
 
 #: standalone/drakbackup:1093
 #, c-format
-msgid ""
-"Error during sending file via FTP. Please correct your FTP configuration."
+msgid "Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 
 #: standalone/drakbackup:1095
@@ -18542,8 +18525,7 @@ msgstr ""
 
 #: standalone/drakbackup:1398
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr "Her kan du ta kopi av og gjenoppretta alle filer i «/etc»-mappa.\n"
 
 #: standalone/drakbackup:1399
@@ -18960,8 +18942,7 @@ msgstr "Hugs å sjekka at at cron-tenesta vert starta automatisk."
 
 #: standalone/drakbackup:2156
 #, c-format
-msgid ""
-"If your machine is not on all the time, you might want to install anacron."
+msgid "If your machine is not on all the time, you might want to install anacron."
 msgstr ""
 
 #: standalone/drakbackup:2157
@@ -18997,8 +18978,7 @@ msgstr "SMTP-tenar for e-post:"
 #: standalone/drakbackup:2227
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
-msgstr ""
-"Slett reservekopifilene frå harddisken etter kopiering til andre medium"
+msgstr "Slett reservekopifilene frå harddisken etter kopiering til andre medium"
 
 #: standalone/drakbackup:2270
 #, c-format
@@ -20213,8 +20193,7 @@ msgstr "Plassering på bussen"
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
-msgstr ""
-"Fann ikkje noko nettverkskort. Prøv å køyra maskinvareoppsettverktøyet."
+msgstr "Fann ikkje noko nettverkskort. Prøv å køyra maskinvareoppsettverktøyet."
 
 #: standalone/drakconnect:708
 #, c-format
@@ -20239,8 +20218,7 @@ msgstr ""
 
 #: standalone/drakconnect:745
 #, c-format
-msgid ""
-"Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Nettverksgrensesnittet «%s» er no fjerna."
 
 #: standalone/drakconnect:761
@@ -20793,9 +20771,9 @@ msgid "Local Area Network setings"
 msgstr "Lokalnettoppsett"
 
 #: standalone/drakgw:180
-#, c-format
+#, fuzzy, c-format
 msgid "Local IP address"
-msgstr ""
+msgstr "IP-adresse"
 
 #: standalone/drakgw:182
 #, c-format
@@ -20957,8 +20935,7 @@ msgstr ""
 
 #: standalone/drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
 #: standalone/drakhelp:24
@@ -21889,7 +21866,7 @@ msgstr "Endra oppsett"
 #: standalone/draksambashare:397
 #, fuzzy, c-format
 msgid "Samba share directory"
-msgstr "Ikkje ein katalog"
+msgstr "Mappa finst ikkje"
 
 #: standalone/draksambashare:400
 #, fuzzy, c-format
@@ -21913,14 +21890,13 @@ msgstr ""
 
 #: standalone/draksambashare:430
 #, c-format
-msgid ""
-"Create mask, create mode and directory mask should be numeric. ie: 0755."
+msgid "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
 
 #: standalone/draksambashare:543
 #, fuzzy, c-format
 msgid "Share directory"
-msgstr "Ikkje ein katalog"
+msgstr "Mappa finst ikkje"
 
 #: standalone/draksambashare:543
 #, fuzzy, c-format
@@ -23707,8 +23683,7 @@ msgstr "oversikta over alternative drivarar for lydkortet"
 
 #: standalone/harddrake2:29
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
@@ -24209,8 +24184,7 @@ msgstr "Einingsfil"
 
 #: standalone/harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
 #: standalone/harddrake2:116
@@ -24436,8 +24410,7 @@ msgstr "Ymse"
 
 #: standalone/harddrake2:342
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om eininga her."
 
 #: standalone/harddrake2:394
@@ -24737,8 +24710,7 @@ msgstr "Tenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr ""
-"Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
+msgstr "Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
 
 #: standalone/logdrake:421
 #, c-format
@@ -24818,8 +24790,7 @@ msgstr "Nettverket køyrer på grensesnittet %s"
 #: standalone/net_applet:52
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr ""
-"Nettverket køyrer ikkje på grensesnittet %s. Trykk på «Set opp nettverk»."
+msgstr "Nettverket køyrer ikkje på grensesnittet %s. Trykk på «Set opp nettverk»."
 
 #: standalone/net_applet:58 standalone/net_monitor:469
 #, c-format
@@ -25246,8 +25217,7 @@ msgstr "Avbryt skannaroppsett."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikkje installera pakkar nødvendige for å setja opp skannarar."
 
 #: standalone/scannerdrake:61
@@ -25843,34 +25813,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Feil ved installering."
 
-#~ msgid ""
-#~ "Enable user disk quota accounting enabled, and optionally enforce limits"
-#~ msgstr "Bruk brukarkvoter og handhev grenser (valfritt)."
-
-#~ msgid "Printer on SMB/Windows 95/98/NT server"
-#~ msgstr "Skrivar på SMB-/Windows 95/98/NT-tenar"
-
-#~ msgid "Found printer on %s..."
-#~ msgstr "Fann skrivar på «%s» …"
-
-#~ msgid "Useless without Terminal Server"
-#~ msgstr "Kan ikkje brukast utan terminaltenar"
-
-#~ msgid "dhcpd Config..."
-#~ msgstr "dhcpd-oppsett …"
-
-#, fuzzy
-#~ msgid "Unable to select wireless network: %s"
-#~ msgstr "Klarte ikkje kontakta spegelen «%s»"
-
-#, fuzzy
-#~ msgid "Interactive intrusion detection"
-#~ msgstr "Automatisk val av skrivar"
-
-#, fuzzy
-#~ msgid "Active Firewall: intrusion detected"
-#~ msgstr "Fann gammalt brannmuroppsett."
-
-#, fuzzy
-#~ msgid "Do you want to blacklist the attacker?"
-#~ msgstr "Vil du slå på limtastar?"
