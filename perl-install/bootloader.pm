@@ -1274,11 +1274,6 @@ sub grub2file {
 sub write_grub {
     my ($bootloader, $all_hds) = @_;
 
-    {
-	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
-	cp_af(@files, "$::prefix/boot/grub");
-    }
-
     my $fstab = [ fs::get::fstab($all_hds) ]; 
     my @legacy_floppies = detect_devices::floppies();
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
@@ -1385,7 +1380,11 @@ sub install_grub {
 
     write_grub($bootloader, $all_hds);
 
-    install_raw_grub() if !$::testing;
+    if (!$::testing) {
+	my @files = grep { /(stage1|stage2|_stage1_5)$/ } glob("$::prefix/lib/grub/*/*");
+	cp_af(@files, "$::prefix/boot/grub");
+	install_raw_grub() 
+    }
 
     configure_kdm_BootManager('Grub');
 }
