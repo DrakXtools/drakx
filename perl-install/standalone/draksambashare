@@ -54,9 +54,10 @@ local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 15;
 local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 16;
 local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 17;
 local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 18;
+use constant COLUMN_PRINTABLE => 3; use constant COLUMN_PRINT_COMMAND => 4; use constant COLUMN_GUEST_OK => 5;
 
 my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
-my (@listshare);
+my (@listshare, @listprinters);
 my @yesno = qw(yes no); push @yesno, ""; 
 my @default_case = qw(upper lower); push @default_case, "";
 
@@ -165,6 +166,23 @@ sub get_samba_share() {
     }
   }
   return @listshare;
+}
+
+sub get_samba_printers() {
+  undef @listprinters;
+  foreach my $clef (keys %$samba) {
+    if ($samba->{$clef}{printable} =~ /yes/i || $clef =~ /print\$/) {
+      push @listprinters, {
+			   path => $samba->{$clef}{path},
+			   comment => $samba->{$clef}{comment},
+			   browseable => $samba->{$clef}{'browseable'},
+			   printable => $samba->{$clef}{printable},
+			   print_command => $samba->{$clef}{'print command'},
+			   guest_ok => $samba->{$clef}{'guest ok'},
+			  };
+    }
+  }
+  return @listprinters;
 }
 
 sub create_smbuser {
@@ -529,6 +547,23 @@ sub create_model() {
 		);
 	     }
   return $model;
+}
+
+sub create_model_printers() {
+  get_samba_printers();
+  my $model_printers = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+  foreach my $a (@listprinters) {
+    my $iter = $model_printers->append;
+    $model_printers->set($iter,
+			 COLUMN_PATH, $a->{path},
+			 COLUMN_COMMENT, $a->{comment},
+			 COLUMN_BROWSEABLE, $a->{browseable},
+			 COLUMN_PRINTABLE, $a->{printable},
+			 COLUMN_PRINT_COMMAND, $a->{print_command},
+			 COLUMN_GUEST_OK, $a->{guest_ok},
+			);
+  }
+  return $model_printers;
 }
 
 # add colum to model
