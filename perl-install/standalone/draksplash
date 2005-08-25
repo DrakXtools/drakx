@@ -223,9 +223,9 @@ sub update_scales_for_resolution() {
 sub update_scale_values_from_conf() {
     foreach (keys %adj) {
         $adj{$_}->signal_handler_block($adj{$_}{on_change});
-        $adj{$_}->set_value($theme{conf}{$_}) ;
-        $adj{$_}->signal_handler_unblock($adj{$_}{on_change})
-    };
+        $adj{$_}->set_value($theme{conf}{$_});
+        $adj{$_}->signal_handler_unblock($adj{$_}{on_change});
+    }
 }
 
 sub create_image_area() {
