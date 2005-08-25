@@ -1164,20 +1164,6 @@ sub install {
 		    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
 		}
 
-		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
-		my @allpids = grep { /^\d+$/ } all("/proc");
-		my @killpid = difference2(\@allpids, \@prev_pids);
-	
-		if (@killpid && $::isInstall && !$::local_install && !$::build_globetrotter) {
-		    foreach (@killpid) {
-			my ($prog, @para) = split("\0", cat_("/proc/$_/cmdline") || readlink("/proc/$_/exe"));
-			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $_: " . join(' ', $prog, @para) . ".") if $prog ne '/usr/lib/gconfd-2';
-		    }
-		    kill 15, @killpid;
-		    sleep 2;
-		    kill 9, @killpid;
-		}
-
 	    #- if we are using a retry mode, this means we have to split the transaction with only
 	    #- one package for each real transaction.
 	    if (!$retry_pkg) {
