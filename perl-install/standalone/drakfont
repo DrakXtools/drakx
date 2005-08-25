@@ -491,6 +491,7 @@ sub interactive_mode() {
                                     [ N("Options"),   \&appli_choice, 1 ],
                                     [ N("Uninstall"), \&uninstall, 1 ],
                                     [ N("Import"),    \&advanced_install, 1 ],
+                                    [ N("Get Windows Fonts"), sub { $windows = 1; import_status(); $windows = 0 }, 1 ],
                                    ),
                 ),
           );
