@@ -194,10 +194,13 @@ sub may_be_a_hd {
 sub get_scsi_driver {
     my (@l) = @_;
     my %host2driver = map { if_(m!.*/(.*)/(.*)!, $2, $1) } glob("/proc/scsi/*/*");
+    # find driver of host controller from sysfs:
     foreach (@l) {
-	if (my $driver = $host2driver{$_->{host}}) {
-	    $_->{driver} = $driver;
-	}
+	next if $_->{driver};
+	my $host = readlink("/sys/block/$_->{device}/device");
+     $host =~ s!/host.*!!;
+	$_->{driver} = readlink("/sys/block/$_->{device}/$host/driver");
+	$_->{driver} =~ s!.*/!!;
     }
 }
 
