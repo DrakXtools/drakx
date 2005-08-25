@@ -253,7 +253,7 @@ sub printdollar_section() {
     $samba->{'print$'}{'inherit permissions'} = "yes";
 }
 
-sub printer_section() {
+sub pdf_section() {
     $samba->{'pdf-gen'};
     $samba->{'pdf-gen'}{path} = "/var/tmp";
     $samba->{'pdf-gen'}{'guest ok'} = "no";
@@ -275,57 +275,53 @@ sub add_entry {
 	     pages => {
 		       welcome => {
 				   name => N("Goal of this wizard is to easily create a new Samba share."),
-				   no_back => 1,
-				   next => 'add_share',
-				  },
-		       add_share => {
-				     name => N("Add a Samba share"),
-				     data => [
-					      { label => N("Name of the share:"), val => \$wiz_addshare_name },
-					      { label => N("Comment:"), val => \$wiz_addshare_comment },
-					      { label => N("Path:"), val => \$wiz_addshare_path },
+				   data => [
+					    { label => N("Name of the share:"), val => \$wiz_addshare_name },
+					    { label => N("Comment:"), val => \$wiz_addshare_comment },
+					    { label => N("Path:"), val => \$wiz_addshare_path },
 					     ],
-				     complete => sub {
-				       foreach my $clef (keys %$samba) {
-					 if ($clef =~ /$wiz_addshare_name/) {
-					   err_dialog(N("Error"), N("Share with the same name already exist or share name empty, please choose another name.")) and return 'add_img';
-					 }
+				   complete => sub {
+				     foreach my $clef (keys %$samba) {
+				       if ($clef =~ /$wiz_addshare_name/) {
+					 err_dialog(N("Error"), N("Share with the same name already exist or share name empty, please choose another name.")) and return 'welcome';
 				       }
-				       if (!$wiz_addshare_path) {
-					 err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'add_share';
-				       }
-				       if (!$wiz_addshare_comment) {
-					 err_dialog(N("Error"), N("Please enter a Comment for this share.")) and return 'add_share';
-				       }
-				       if (! -d $wiz_addshare_path) {
-					 mkdir_p($wiz_addshare_path) or err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'add_share';
-				       }
-				     },
-				     post => sub {
-				       # update iter
-				       my $iter = $model->append;
-				       $model->set($iter,
-						   COLUMN_SHARE_NAME, $wiz_addshare_name,
-						   COLUMN_PATH, $wiz_addshare_path,
-						   COLUMN_COMMENT, $wiz_addshare_comment,
-						  );
-				       my $share = $wiz_addshare_name;
-				       # update listshare
-				       push @listshare, {
-							 share_name => $share,
-							 path => $wiz_addshare_path,
-							 comment => $wiz_addshare_comment,
-							};
-				       # update samba conf
-				       $samba->{$share};
-				       $samba->{$share}{path} = $wiz_addshare_path;
-				       $samba->{$share}{comment} = $wiz_addshare_comment;
-				       return;
-				     },
-				     next => 'end_add',
-				    },
+				     }
+				     if (!$wiz_addshare_path) {
+				       err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'welcome';
+				     }
+				     if (!$wiz_addshare_comment) {
+				       err_dialog(N("Error"), N("Please enter a Comment for this share.")) and return 'welcome';
+				     }
+				     if (! -d $wiz_addshare_path) {
+				       mkdir_p($wiz_addshare_path) or err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'welcome';
+				     }
+				   },
+				   post => sub {
+				     # update iter
+				     my $iter = $model->append;
+				     $model->set($iter,
+						 COLUMN_SHARE_NAME, $wiz_addshare_name,
+						 COLUMN_PATH, $wiz_addshare_path,
+						 COLUMN_COMMENT, $wiz_addshare_comment,
+						);
+				     my $share = $wiz_addshare_name;
+				     # update listshare
+				     push @listshare, {
+						       share_name => $share,
+						       path => $wiz_addshare_path,
+						       comment => $wiz_addshare_comment,
+						      };
+				     # update samba conf
+				     $samba->{$share};
+				     $samba->{$share}{path} = $wiz_addshare_path;
+				     $samba->{$share}{comment} = $wiz_addshare_comment;
+				     return;
+				   },
+				   no_back => 1,
+				   next => 'end_add',
+				  },
 		       end_add => {
-			   name => N("Congratulations"),
+				   name => N("Congratulations"),
 				   data => [ { label => N("The wizard successfully added the Samba share. Now just double click on it in treeview to modify it") } ],
 				   no_back => 1,
 				   end => 1,
@@ -336,6 +332,52 @@ sub add_entry {
   $w->process($wiz, $in);
   $::isWizard = 0;
   gtkset_mousecursor_normal();
+}
+
+sub add_printers_entry {
+  my ($treeview) = @_;
+  my $model = $treeview->get_model;
+  use wizards;
+  my $w = wizards->new;
+  my %print = (
+	       1 => N('pdf-gen - a pdf generator'),
+	       2 => N('print$ - '),
+	       3 => N('printers - all printers available'),
+	      );
+  my $wiz_todo;
+  my $wiz = {
+	     name => N("Add Special Printer share"),
+	     pages => {
+		       welcome => {
+				   name => N("Goal of this wizard is to easily create a new Samba share."),
+				   data => [
+					    { label => "", type => 'list', val => \$wiz_todo, list => [ keys %print ], format => sub { $print{$_[0]} } }
+					   ],
+				   no_back => 1,
+				   post => sub {
+				     my $iter = $model->append;
+				     if ($wiz_todo == 1) {
+				       pdf_section;
+				     } elsif ($wiz_todo == 2) {
+				       printdollar_section;
+				     } elsif ($wiz_todo == 3) {
+				       print "a\n";
+				     }
+				     return;
+				   },
+				  },
+		       end_add => {
+				   name => N("Congratulations"),
+				   data => [ { label => N("The wizard successfully the Samba share") } ],
+				   no_back => 1,
+				   end => 1,
+				   next => 0,
+				  },
+		      }
+	    };
+  $w->process($wiz, $in);
+  $::isWizard = 0;
+#  gtkset_mousecursor_normal();
 }
 
 sub modify_printers_entry {
@@ -753,14 +795,16 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 #								  err_dialog(N("Error"), N("Failed to add pdf-gen.") . "\n\n" . $err);
 #								}
 #							      }),
-#					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
-#                                                                eval { add_printers_entry($treeview_printers) };
-#                                                                my $err = $@;
-#                                                                if ($err) {
-#                                                                  err_dialog(N("Error"), N("Failed to add printers.") . "\n\n" . $err);
-#                                                                }
-#                                                              }),
-#                                         0, Gtk2::HSeparator->new,
+					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
+                                                                eval { add_printers_entry($treeview_printers) };
+                                                                my $err = $@;
+								$::WizardWindow->destroy if defined $::WizardWindow;
+								undef $::WizardWindow;
+								if ($err && $err !~ /wizcancel/) {
+                                                                  err_dialog(N("Error"), N("Failed to add printers.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+                                         0, Gtk2::HSeparator->new,
                                          0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
                                                                 eval { modify_printers_entry($treeview_printers) };
                                                                 my $err = $@;
