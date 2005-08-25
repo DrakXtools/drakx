@@ -422,7 +422,7 @@ sub modify_entry {
 							       my $share = $share_name->get_text;
 							       my $test_dir = $dir->get_text;
 							       $comment->get_text or err_dialog(N("Information"), N("Please enter a Comment for this share.")) and return 1;
-							       if ($share !~ 'homes' and !-d $test_dir) {
+							       if ($share !~ /^homes$/ and !-d $test_dir) {
 								   err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
 							       }
 							       foreach ($create_mask->get_text, $directory_mask->get_text) {
