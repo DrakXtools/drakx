@@ -673,7 +673,8 @@ sub add_addons {
     @l;
 }
 
-sub pci_probe() {
+my (@pci, @usb);
+sub pci_probe__real() {
     add_addons($pcitable_addons, map {
 	my %l;
 	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
@@ -682,8 +683,15 @@ sub pci_probe() {
 	\%l;
     } c::pci_probe());
 }
+sub pci_probe() {
+    if ($::isStandalone && @pci) {
+	    @pci;
+    } else {
+	    @pci = pci_probe__real();
+    }
+}
 
-sub usb_probe() {
+sub usb_probe__real() {
     -e "/proc/bus/usb/devices" or return;
 
     add_addons($usbtable_addons, map {
@@ -694,6 +702,13 @@ sub usb_probe() {
 	$l{bus} = 'USB';
 	\%l;
     } c::usb_probe());
+}
+sub usb_probe() {
+    if ($::isStandalone && @usb) {
+	    @usb;
+    } else {
+	    @usb = usb_probe__real();
+    }
 }
 
 sub firewire_probe() {
@@ -824,11 +839,13 @@ sub tryWrite($) {
     sysopen($F, devices::make($_[0]), 1 | c::O_NONBLOCK()) && $F;
 }
 
+my @dmesg;
 sub syslog() {
     if (-r "/tmp/syslog") {
 	map { /<\d+>(.*)/ } cat_("/tmp/syslog");
     } else {
-	`/bin/dmesg`;
+	@dmesg = `/bin/dmesg` if !@dmesg;
+	@dmesg;
     }
 }
 
