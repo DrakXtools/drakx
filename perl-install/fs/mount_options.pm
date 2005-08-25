@@ -138,7 +138,7 @@ system again. This option implies the options noexec, nosuid, and nodev
 (unless overridden by subsequent options, as in the option line
 user,exec,dev,suid )."),
 
-	'usrquota' => N("Enable user disk quota accounting enabled, and optionally enforce limits"),
+	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
 
         'umask=0' => N("Give write access to ordinary users"),
 
