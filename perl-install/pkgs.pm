@@ -1104,7 +1104,6 @@ sub install {
 	my ($retry_pkg, $retry_count);
 	while ($retry_pkg || @transToInstall) {
 
-		my @prev_pids = grep { /^\d+$/ } all("/proc");
 		if ($::testing) {
 		    my $size_typical = $nb ? int($total/$nb) : 0;
 		    foreach (@transToInstall) {
