@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-25 17:04+0200\n"
+"PO-Revision-Date: 2005-08-25 20:24+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norwegian Bokmål <nb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2290,12 +2290,12 @@ msgstr "Avslutt uten å skrive partisjonstabellen?"
 #: diskdrake/interactive.pm:285
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
-msgstr "Ønsker du å lagre modifiseringen av /etc/fstab"
+msgstr "Ønsker du å lagre endringene av /etc/fstab"
 
 #: diskdrake/interactive.pm:292 install_steps_interactive.pm:330
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
+msgstr "Du må starte maskinen på nytt for at endringene skal tre i kraft"
 
 #: diskdrake/interactive.pm:297
 #, c-format
@@ -2693,7 +2693,7 @@ msgstr "Hva slags type partisjonering?"
 #: diskdrake/interactive.pm:1106
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
+msgstr "Du må starte maskinen på nytt for at endringene skal tre i kraft"
 
 #: diskdrake/interactive.pm:1115
 #, c-format
@@ -3088,9 +3088,9 @@ msgid "Enabling swap partition %s"
 msgstr "Aktiverer swap-partisjon %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Du kan ikke bruke ett kryptert filsystem som monteringspunkt %s"
+msgstr "Bruk et kryptert filsystem"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3171,7 +3171,7 @@ msgstr ""
 "user,exec,dev,suid )."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "Aktiver bokføring av brukerdiskkvota og valgfritt påfør grenser"
 
@@ -3218,7 +3218,7 @@ msgid ""
 msgstr ""
 "Jeg kan ikke lese partisjonstabellen på %s, den er for ødelagt for meg :(\n"
 "Jeg kan forsøke å blanke ut dårlige partisjoner (ALLE DATA vil gå tapt!)\n"
-"Den andre løsningen er å ikke la DrakX modifisere partisjonstabellen.\n"
+"Den andre løsningen er å ikke la DrakX endre på partisjonstabellen.\n"
 "(feilen er %s)\n"
 "\n"
 "Vil du miste alle partisjonene?\n"
@@ -6696,7 +6696,7 @@ msgstr ""
 "forfattere og er beskyttet\n"
 "av opphavrettlover som gjelder for programvare. Mandriva S.A. forbeholder "
 "seg retten til å\n"
-"modifisere eller tilpasse programvareproduktene helt eller delvis, på alle "
+"endre på eller tilpasse programvareproduktene helt eller delvis, på alle "
 "måter og for alle formål.\n"
 "\"Mandriva\", \"Mandriva Linux\" og tilhørende logoer er varemerker "
 "tilhørende Mandriva S.A.\n"
@@ -6782,7 +6782,7 @@ msgstr ""
 "du bruker eller distribuerer de videre. \n"
 "Slike lisenser vil generelt forhindre overføring, kopiering \n"
 "(foruten sikkerhetskopier), videre distribuering, reverse engineering, \n"
-"de-assembly, dekompilering eller modifisering av komponentet. \n"
+"de-assembly, dekompilering eller endring på komponentet. \n"
 "Enhvert brudd på avtalen vil øyeblikkelig opphøre dine rettigheter under\n"
 "den spesifikke lisensen. Med mindre lisensens vilkår gir deg slike\n"
 "rettigheter, så kan du vanligvis ikke installere programmene på mere nn\n"
@@ -10249,7 +10249,7 @@ msgstr "Passordknekking"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "\"%s\"-angrep"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10267,9 +10267,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "Et passordcrackeangrep har blitt forsøkt av %s."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "Et portskannerangrep har blitt forsøkt av %s."
+msgstr "Et \"%s\"-angrep har blitt forsøkt av %s."
 
 #: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
 #: network/netconnect.pm:547 network/netconnect.pm:690
@@ -10989,7 +10989,7 @@ msgstr "Metrisk"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Aktiver IPv6 til IPv4-tunnel"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11112,7 +11112,7 @@ msgstr "Krypteringsmodus"
 #: network/netconnect.pm:1026
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Tillatt gjennomstreifing av aksesspunkt"
 
 #: network/netconnect.pm:1027 standalone/drakconnect:406
 #, c-format
@@ -11926,9 +11926,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Nettverksskriver (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "Skriver på SMB/Windows 95/98/NT-server"
+msgstr "Skriver på SMB/Windows-tjener"
 
 #: printer/main.pm:33
 #, c-format
@@ -12555,17 +12555,17 @@ msgstr "Starter CUPS på nytt..."
 #: printer/printerdrake.pm:614
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr ""
+msgstr "Tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon mulig"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid "No pop-up windows, canceling setup and package installation not possible"
-msgstr ""
+msgstr "Ikke tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon ikke mulig"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Automatisk oppdagelse av skriver"
+msgstr "Automatisk administrasjon av skriver"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12573,41 +12573,43 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Her kan du sette opp skriveradministrasjonsoppgaver som skal bli utført "
+"automatisk."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Bruk automatisk oppsett (DHCP)"
+msgstr "Gjør automatisk oppsett av nye skrivere"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (Vær sikker på at skriveren din er koblet til og skrudd på).\n"
+msgstr "når en USB-skriver er tilkoblet og skrudd på"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Denne skriveren er deaktivert"
+msgstr "når Printerdrake er startet"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Modus for automatisk skriveroppsett:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Tilgjengelige skrivere"
+msgstr "Reaktiver deaktiverte skrivere"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Endrer utskriftssystemet"
+msgstr "når utskriftssystemet er startet"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Bruker/vedlikeholder skriveren \"%s\""
+msgstr "Kommunikasjonsfeilhåndtering for skriveren \"%s\""
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12616,36 +12618,38 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Her kan du sette opp hvordan feil under kommunikasjon mellom skriveren \"%s\" og "
+"maskinen din bør håndteres (for eksempel hvis skriveren er skrudd på)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Portnummer burde være ett tall!"
+msgstr "Antall forsøk bør være et tall på minst 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Tidsavbruddet må være et positivt (integer) tall!"
+msgstr "Mellomrommet mellom nye forsøk må være et positivt tall!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Deaktiver skriver"
+msgstr "Ikke deaktiver skriveren"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Prøv på nytt uendelig antall ganger"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Antall knapper"
+msgstr "Antall forsøk"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Mellomrom mellom forsøk (i sekunder)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12832,7 +12836,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not do automatic printer setup and do not do it again"
-msgstr ""
+msgstr "Ikke gjør automatisk oppsett av skriveren og ikke gjør det igjen"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12842,17 +12846,17 @@ msgstr "Søker etter nye skrivere..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "Ikke gjør automatisk oppsett av skriver på nytt"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Ingen skriver funnet!"
+msgstr "Ny skriver funnet"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Ingen skriver funnet!"
+msgstr "Nye skrivere funnet!"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12861,6 +12865,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"De følgende nye skriverene ble funnet og Printerdrake kan automatisk sette "
+"de opp for deg. Hvis du ikke ønsker å ha dem alle satt opp, velg vekk de du "
+"ænsker å hoppe over, eller klikk \"Avbryt\" for å ikke sette opp noen av dem.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12869,6 +12876,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"Den følgende nye skriveren ble funnet og printerdrake kan automatisk sette "
+"den opp for deg. Hvis du ikke ønsker å sette den opp, velg den vekk eller klikk "
+"\"Avbryt\".\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12876,6 +12886,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Merk at for enkelte skrivermodeller så trengs det at ekstra pakker trengs "
+"å installeres. Så ha installasjonsmedia for hånden.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12940,6 +12952,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Nå har du skrudd av automatisk printeroppsett.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12947,11 +12961,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Du kan skru den tilbake på igjen ved å velge \"%s\" -> \"%s\" i Printerdrake's "
+"hovedmeny. "
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Fjernadministrasjon"
+msgstr "Sett opp automatisk administrasjon"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12960,6 +12976,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Der kan du også velg i hvilken situasjon automatisk oppsett av skriver skal gjøres "
+"(Under Printerdrake-oppsett, under oppstart av utskriftssystem, når tilkoblet en ny "
+"USB-skriver)"
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2420
@@ -14186,12 +14205,12 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Canon LBP-460/660-oppsett"
 
 #: printer/printerdrake.pm:3589
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Canon LBP-460/660-oppsett"
+msgstr "Canon LBP-810/1120 (CAPT)-oppsett"
 
 #: printer/printerdrake.pm:3590
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -14199,9 +14218,9 @@ msgid ""
 "where it is directly connected to."
 msgstr ""
 "Driveren for denne skriveren støtter bare lokale skrivere koblet til via "
-"USB, ingen skrivere på fjernmaskiner eller skrivertjenerbokser. Koble "
-"skriveren til en lokal USB-port eller sett den opp på maskinen hvor den er "
-"koblet til."
+"USB, ingen skrivere på eksterne maskiner, skrivertjenerbokser eller tilkoblet "
+"via parallellport. Koble skriveren til en lokal USB-port eller sett den opp på "
+"maskinen hvor den er koblet til."
 
 #: printer/printerdrake.pm:3597
 #, c-format
@@ -14476,7 +14495,7 @@ msgid ""
 "line, e. g. \"%s <file>\".\n"
 msgstr ""
 "\n"
-"\"%s\"- og \"%s\"-kommandoene tillater deg også å modifisere valgene for en "
+"\"%s\"- og \"%s\"-kommandoene tillater deg også å endre på valgene for en "
 "spesifik skriverjobb. Bare legg til de ønskede valgene til kommandolinjen, "
 "feks. \"%s <fil>\".\n"
 
@@ -15185,9 +15204,9 @@ msgid "Disable Printer"
 msgstr "Deaktiver skriver"
 
 #: printer/printerdrake.pm:5480 printer/printerdrake.pm:5574
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Skrivertilkoblingstype"
+msgstr "Feilhåndtering ved skriverkommunikasjon"
 
 #: printer/printerdrake.pm:5481 printer/printerdrake.pm:5578
 #, c-format
@@ -17792,7 +17811,7 @@ msgid ""
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 msgstr ""
 "Dette programmet er fri programvare; du kan redistribuere det og/eller\n"
-"modifisere det ifølge betingelsene til \"GNU General Public License\" som\n"
+"endre på det ifølge betingelsene til \"GNU General Public License\" som\n"
 "definert av Free Software Foundation, enten versjon 2, eller etter ditt "
 "ønske\n"
 "en hvilken som helst senere versjon.\n"
@@ -18077,9 +18096,9 @@ msgid "Terminal Server Configuration"
 msgstr "Oppsett av terminaltjener"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "dhcpd-oppsett..."
+msgstr "dhcpd-oppsett"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -18192,7 +18211,7 @@ msgstr "Avbryt Veiviser"
 #: standalone/drakTermServ:394
 #, c-format
 msgid "Please save dhcpd config!"
-msgstr "Vennligst lagre dhcpd-oppsettet!"
+msgstr "Du må lagre dhcpd-oppsettet!"
 
 #: standalone/drakTermServ:422
 #, c-format
@@ -18205,7 +18224,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Synkroniserer klients X-tastaturoppsett med tjener."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -18213,7 +18232,8 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Velg standard klienttype.\n"
+"Velg standard klienttype (Tykk er standardtypen hvis 'Bruk Tynn' ikke "
+"er sjekket av.\n"
 "    'Tynne' klienter kjører alt fra tjenerens CPU/RAM ved bruk av klientens "
 "skjerm.\n"
 "    'Tykke' klienter bruker deres egen CPU/RAM, men tjenerens filsystem."
@@ -18380,7 +18400,7 @@ msgstr ""
 "XDMCP, mens tykke klienter kjører mesteparten\n"
 "av programvaren på klientmaskinen. En spesiell inttab, %s blir\n"
 "\t\t\tskrevet for tynne klienter. Systemoppsettsfilene xdm-config, kdmrc, og "
-"gdm.conf blir modifiserte\n"
+"gdm.conf blir endret på\n"
 "\t\t\thvis tynne klienter blir brukt, for å aktivere XDMCP. Siden det er "
 "sikkerhetsproblematikk rundt bruken av XDMCP,\n"
 "\t\t\tså blir hosts.deny og hosts.allow endret for å begrense tilgangen til "
@@ -18598,7 +18618,7 @@ msgstr "Opprett PXE-imagefiler"
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "Installer i586-kjerne for eldre klienter"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18641,9 +18661,9 @@ msgid "Delete All NBIs"
 msgstr "Slett alle NBIer"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Oppretter nettverksoppstartsfiler for alle kjerner"
+msgstr "Oppretter imagefiler for kjerne:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -19661,7 +19681,7 @@ msgstr "Ta sikkerhetskopi direkte til bånd"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "Bruk hardware-komprimering av tape (EKSPERIMENTELT)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -20740,9 +20760,9 @@ msgid "Graphical boot theme selection"
 msgstr "Grafisk oppstartstemavalg"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Grafisk oppstartstemavalg"
+msgstr "Grafisk oppstartsmodus:"
 
 #: standalone/drakboot:143
 #, c-format
@@ -21572,7 +21592,7 @@ msgid ""
 " Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
 "Dette programmet er fri programvare; du kan redistribuere det og/eller\n"
-" modifisere det ifølge betingelsene til GNU General Public License som\n"
+" endre på det ifølge betingelsene til GNU General Public License som\n"
 " definert av Free Software Foundation, enten versjon 2, eller (etter ditt "
 "ønske)\n"
 " en hvilken som helst senere versjon.\n"
@@ -22042,22 +22062,22 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Legg til en vert for å kunne endre på den."
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Vennligst %s informasjon"
+msgstr "Vennligst endre på informasjon"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Vennligst %s informasjon"
+msgstr "Vennligst slett informasjon"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Vennligst %s informasjon"
+msgstr "Vennligst legg til informasjon"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -22110,27 +22130,27 @@ msgid "Failed to remove host."
 msgstr "Klarte ikke å fjerne vert."
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Tillat alle brukere"
+msgstr "Tillatte adresser"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:61 standalone/net_applet:183
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Aktiv brannmur"
+msgstr "Interaktiv brannmur"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "Logg"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Fjern alle"
+msgstr "Tøm logger"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
@@ -22385,7 +22405,7 @@ msgstr ""
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Vennligst legg til en delt NFS-ressurs for å kunne endre på den."
 
 #: standalone/draknfs:373
 #, c-format
@@ -22445,7 +22465,7 @@ msgstr "Anonym gruppe-ID"
 #: standalone/draknfs:435 standalone/draknfs:527 standalone/draksambashare:426
 #, c-format
 msgid "Please enter a directory to share."
-msgstr "Vennligst tast inn en katalog som skal deles."
+msgstr "Tast inn en katalog som skal deles."
 
 #: standalone/draknfs:437
 #, c-format
@@ -22475,7 +22495,7 @@ msgstr "Egendefinerte valg"
 #: standalone/draknfs:534
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr "Vennligst bruk endre-knappen for å sette riktige rettigheter"
+msgstr "Bruk endre-knappen for å sette riktige rettigheter"
 
 #: standalone/draknfs:589
 #, c-format
@@ -22485,17 +22505,17 @@ msgstr "DrakNFS håndterer delte NFS-ressurser"
 #: standalone/draknfs:598
 #, c-format
 msgid "Failed to add NFS share."
-msgstr "Klarte ikke å legge til NFS-deling."
+msgstr "Klarte ikke å legge til delt NFS-ressurs."
 
 #: standalone/draknfs:605
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr "Klarte ikke å endre NFS-deling."
+msgstr "Klarte ikke å endre delt NFS-ressurs."
 
 #: standalone/draknfs:612
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr "Klarte ikke å fjerne NFS-deling."
+msgstr "Klarte ikke å fjerne delt NFS-ressurs."
 
 #: standalone/drakperm:21
 #, c-format
@@ -22849,104 +22869,104 @@ msgid "on"
 msgstr "på"
 
 #: standalone/draksambashare:64
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Fjern liste"
+msgstr "Les liste"
 
 #: standalone/draksambashare:65
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Hvitlist"
+msgstr "Skriv liste"
 
 #: standalone/draksambashare:66 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Legg til bruker"
+msgstr "Admin-brukere"
 
 #: standalone/draksambashare:67 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Legg til bruker"
+msgstr "Gyldige brukere"
 
 #: standalone/draksambashare:68 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Gjem filer"
+msgstr "Gjem filer med prikk foran seg"
 
 #: standalone/draksambashare:70
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Gruppe"
+msgstr "Tving gruppe"
 
 #: standalone/draksambashare:71
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Tving gruppeopprettelse"
 
 #: standalone/draksambashare:72 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Standardbruker"
+msgstr "Standardtilfelle"
 
 #: standalone/draksambashare:73 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Valg: "
+msgstr "Bevar forskjell mellom store og små bokstaver"
 
 #: standalone/draksambashare:74 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Opprett"
+msgstr "Opprett maske"
 
 #: standalone/draksambashare:75 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Katalog"
+msgstr "Katalogmaske"
 
 #: standalone/draksambashare:76
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Rettigheter"
+msgstr "Arv rettigheter"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Samba-tjener"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "Starter NFS-tjener på nytt"
+msgstr "Starter Samba-tjener på nytt..."
 
 #: standalone/draksambashare:107
-#, fuzzy, c-format
+#, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "Feil ved omstart av NFS-tjener"
+msgstr "Feil ved omstart av Samba-tjener"
 
 #: standalone/draksambashare:234 standalone/draksambashare:242
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Legg til delt Samba-ressurs"
 
 #: standalone/draksambashare:237
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "Målet til denne veiviseren er å enkelt opprette en ny, delt Samba-ressurs."
 
 #: standalone/draksambashare:244
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Navn på sertifikat"
+msgstr "Navnet på den delte ressursen:"
 
 #: standalone/draksambashare:245 standalone/draksambashare:402
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Utfør"
+msgstr "Kommentar:"
 
 #: standalone/draksambashare:246
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Filbane"
+msgstr "Sti:"
 
 #: standalone/draksambashare:251
 #, c-format
@@ -22954,16 +22974,18 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Delt ressurs med det samme navnet eksisterer allerede, eller så er navnet tomt, "
+"vennligst velg et annet navn."
 
 #: standalone/draksambashare:255 standalone/draksambashare:261
 #, c-format
 msgid "Can\\'t create the directory, please enter a correct path."
-msgstr ""
+msgstr "Can\\'t ikke opprette katalogen, vennlig oppgi en korrekt sti."
 
 #: standalone/draksambashare:258 standalone/draksambashare:424
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Vennligst tast inn en katalog som skal deles."
+msgstr "Vennligst tast inn en kommenter for denne ressursen."
 
 #: standalone/draksambashare:288 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:449 standalone/logdrake:455
@@ -22977,131 +22999,133 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Veiviser la vellykket til den delte Samba-ressursen. Nå kan du enkelt bare dobbeltklikke "
+"på den i trevisning for å endre på den"
 
 #: standalone/draksambashare:321
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "DrakSamba-oppføring"
 
 #: standalone/draksambashare:325
 #, c-format
 msgid "Please add a Samba share to be able to modify it."
-msgstr ""
+msgstr "Vennligst legg til en delt Samba-ressurs for å kunne endre på den."
 
 #: standalone/draksambashare:352
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Samba-tjener"
+msgstr "Samba-brukertilgang"
 
 #: standalone/draksambashare:360
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Basisinstillinger"
+msgstr "Maske-instillinger"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "Spesifiser instillinger"
+msgstr "Visningsinstillinger"
 
 #: standalone/draksambashare:397
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Del katalog"
+msgstr "Delt Samba-ressurskatalog"
 
 #: standalone/draksambashare:400
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "Delenavn"
+msgstr "Navn på delt ressurs:"
 
 #: standalone/draksambashare:406
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Offentlig:"
 
 #: standalone/draksambashare:407
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "Skriv"
+msgstr "Skrivbar:"
 
 #: standalone/draksambashare:408
 #, c-format
 msgid "Browseable:"
-msgstr ""
+msgstr "Lesbar:"
 
 #: standalone/draksambashare:430
 #, c-format
 msgid "Create mask, create mode and directory mask should be numeric. ie: 0755."
-msgstr ""
+msgstr "Opprett maske, opprettelsesmodus og katalogmaske bør være nummerisk. Feks.: 0755."
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
 msgstr "Del katalog"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "Utfør"
+msgstr "Kommentar"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "utforsk"
+msgstr "Lesbar"
 
 #: standalone/draksambashare:543
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "Offentlig"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "Skriv"
+msgstr "Skrivbar"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Les"
+msgstr "Leseliste"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Hvitlist"
+msgstr "Skriveliste"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Din skrivermodell"
+msgstr "Tving opprettelsesmodus"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "PFS-gruppe"
+msgstr "Tving gruppe"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Rettigheter"
+msgstr "Arv rettigheter"
 
 #: standalone/draksambashare:590
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFS håndterer delte NFS-ressurser"
+msgstr "DrakSamba håndterer håndterer delte Samba-ressurser"
 
 #: standalone/draksambashare:601
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "Klarte ikke å legge til NFS-deling."
+msgstr "Klarte ikke å legge til delt Samba-ressurs."
 
 #: standalone/draksambashare:609
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "Klarte ikke å endre NFS-deling."
+msgstr "Klarte ikke å endre på delt Samba-ressurs."
 
 #: standalone/draksambashare:616
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "Klarte ikke å fjerne NFS-deling."
+msgstr "Klarte ikke å fjerne delt NFS-ressurs."
 
 #: standalone/draksec:49
 #, c-format
@@ -24282,7 +24306,7 @@ msgstr ""
 "Du kan nå:\n"
 "  - vis\t\t (vis filas innhold)\n"
 "  - legg til\t\t\t (legg til et avsnitt)\n"
-"  - rediger \t\t\t (modifiser parametre til en eksisterende tilkobling)\n"
+"  - rediger \t\t\t (endre parametre til en eksisterende tilkobling)\n"
 "  - fjern \t\t (fjern et eksisterende avsnitt)\n"
 "  - utfør \t\t (skriver endringene til den virkelige fila)"
 
@@ -25222,12 +25246,12 @@ msgid ""
 "type in your tv norm and country"
 msgstr ""
 "Vennligst,\n"
-"skriv inn din tv-standard og land"
+"skriv inn ditt land og det's tv-standard"
 
 #: standalone/drakxtv:87
 #, c-format
 msgid "TV norm:"
-msgstr "TV standard:"
+msgstr "TV-standard:"
 
 #: standalone/drakxtv:88
 #, c-format
@@ -26469,7 +26493,7 @@ msgstr "Få hjelp på nett"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Automatisk interaktiv brannmur-modus"
 
 #: standalone/net_applet:309
 #, c-format
@@ -26477,19 +26501,19 @@ msgid "Always launch on startup"
 msgstr "Kjør alltid under oppstart"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Håndter trådløse nettverk"
+msgstr "Trådløse nettverk"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "Aktiv brannmur: innbrudd oppdaget"
+msgstr "Interaktiv brannmur: innbrudd oppdaget"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Ønsker du å svarteliste angriperen?"
+msgstr "Hva ønsker du å gjøre med denne angriperen?"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26730,9 +26754,9 @@ msgid "/_Configure CUPS"
 msgstr "/_Innstilinger for CUPS"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Fjernadministrasjon"
+msgstr "/Sett opp Fjernadministrasjon"
 
 #: standalone/printerdrake:192
 #, c-format
