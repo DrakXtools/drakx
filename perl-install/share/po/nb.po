@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "POT-Creation-Date: 2005-07-27 17:26+0200\n"
-"PO-Revision-Date: 2005-08-24 10:01+0200\n"
+"PO-Revision-Date: 2005-08-25 09:03+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norwegian Bokmål <nb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3079,7 +3079,7 @@ msgstr "Aktiverer swap-partisjon %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Aktiver bokføring av gruppediskkvota og valgfritt påfør grenser"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3157,7 +3157,7 @@ msgstr ""
 #: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting enabled, and optionally enforce limits"
-msgstr ""
+msgstr "Aktiver bokføring av brukerdiskkvota og valgfritt påfør grenser"
 
 #: fs/mount_options.pm:143
 #, c-format
@@ -3238,7 +3238,7 @@ msgstr ""
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
-msgstr ""
+msgstr "Du kan ikke bruke LVM Logisk Volum for monteringspunkt %s siden det omfanger fysiske volum"
 
 #: fsedit.pm:392
 #, c-format
@@ -3248,6 +3248,9 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Du har valgt et LVM Logisk Volum som root-partisjon (/).\n"
+"Oppstartslasteren er ikke i stand til å håndtere dette når volumet omfanger fysiske volum. "
+"Du burde opprette en /boot-partisjon først"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -19111,6 +19114,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"Kvota på sikkerhetsdestinasjon er overskredet!\n"
+"%d MB brukt mot %d MB tilegnet."
 
 #: standalone/drakbackup:951 standalone/drakbackup:983
 #, c-format
@@ -21908,22 +21913,22 @@ msgstr "Passordknekking"
 #: standalone/draknfs:43
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "tilorde root-bruker som anonym"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "tilordne alle brukere til anonym bruker"
 
 #: standalone/draknfs:45
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Ingen tilordning av bruker-UID"
 
 #: standalone/draknfs:46
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "tillat ekte ekstern root-tilgang"
 
 #: standalone/draknfs:85
 #, c-format
@@ -21951,7 +21956,7 @@ msgid "Should be a directory."
 msgstr "Burde være en katalog."
 
 #: standalone/draknfs:138
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "<span weight=\"bold\">NFS clients</span> may be specified in a number of "
 "ways:\n"
@@ -21976,6 +21981,27 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">NFS-klienter</span> kan bli spesifisert på en rekke måter:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">enkel vert:</span> a host either by an "
+"abbreviated name recognized be the resolver, fully qualified domain name, or "
+"an IP address\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">netgroups:</span> NIS netgroups may be given "
+"as @group.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">wildcards:</span> machine names may contain "
+"the wildcard characters * and ?. For instance: *.cs.foo.edu  matches all  "
+"hosts  in the domain cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">IP networks:</span> you can also export "
+"directories to all hosts on an IP (sub-)network simultaneously. for example, "
+"either `/255.255.252.0' or  `/22'  appended to the network base address "
+"result.\n"
 
 #: standalone/draknfs:153
 #, c-format
@@ -22079,7 +22105,7 @@ msgstr ""
 #: standalone/draknfs:393
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Tilordning av Bruker-ID"
 
 #: standalone/draknfs:395
 #, c-format
