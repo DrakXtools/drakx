@@ -18,7 +18,7 @@
 
 all: usb-ids.h
 
-usb-ids.h: /usr/share/ldetect-lst/usbtable update-usb-ids.pl
+usb-ids.h: /usr/share/ldetect-lst/usbtable.gz update-usb-ids.pl
 	perl update-usb-ids.pl > $@ || rm -f $@
 
 clean:

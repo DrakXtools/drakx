@@ -198,9 +198,7 @@
 </filter>
 
 <from dir="/usr/share/ldetect-lst" expand="glob">
-  <filter command="gzip">
-    *table
-  </filter>
+    *table.gz
 </from>
 
 <from dir="../kernel/all.kernels/$(MAIN_KERNEL)">
