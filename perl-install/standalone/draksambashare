@@ -54,7 +54,7 @@ local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 15;
 local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 16;
 local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 17;
 local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 18;
-use constant COLUMN_PRINTABLE => 3; use constant COLUMN_PRINT_COMMAND => 4; use constant COLUMN_GUEST_OK => 5;
+use constant COLUMN_PRINTABLE => 4; use constant COLUMN_PRINT_COMMAND => 5; use constant COLUMN_GUEST_OK => 6;
 
 my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
 my (@listshare, @listprinters);
@@ -173,6 +173,7 @@ sub get_samba_printers() {
   foreach my $clef (keys %$samba) {
     if ($samba->{$clef}{printable} =~ /yes/i || $clef =~ /print\$/) {
       push @listprinters, {
+			   share_name => $clef,
 			   path => $samba->{$clef}{path},
 			   comment => $samba->{$clef}{comment},
 			   browseable => $samba->{$clef}{'browseable'},
@@ -551,10 +552,11 @@ sub create_model() {
 
 sub create_model_printers() {
   get_samba_printers();
-  my $model_printers = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+  my $model_printers = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
   foreach my $a (@listprinters) {
     my $iter = $model_printers->append;
     $model_printers->set($iter,
+			 COLUMN_SHARE_NAME, $a->{share_name},
 			 COLUMN_PATH, $a->{path},
 			 COLUMN_COMMENT, $a->{comment},
 			 COLUMN_BROWSEABLE, $a->{browseable},
@@ -578,11 +580,22 @@ sub add_columns {
   } N("Share name"), N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case"), N("Inherit Permissions");
 }
 
+sub add_columns_printers {
+  my $treeview_printers = shift;
+  each_index {
+    my $renderer = Gtk2::CellRendererText->new;
+    $renderer->set(editable => 0);
+    $renderer->set_data(column => $::i);
+    $treeview_printers->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
+  } N("Share directory"), N("Comment"), N("Browseable"), N("Printable"), N("Print Command"), N("Guest OK");
+}
+
 ###############
 # Main Program
 ###############
 # create model
 my $model = create_model();
+my $model_printers = create_model_printers();
 
 my $window = ugtk2->new("DrakSamba $version");
 $::main_window = $window->{real_window};
@@ -596,10 +609,14 @@ $treeview->set_rules_hint(1);
 $treeview->get_selection->set_mode('single');
 add_columns($treeview);
 
+my $treeview_printers = Gtk2::TreeView->new_with_model($model_printers);
+$treeview_printers->set_rules_hint(1);
+$treeview_printers->get_selection->set_mode('single');
+add_columns_printers($treeview_printers);
+
 # double clic and popup modify window
 $treeview->signal_connect(button_press_event => sub {
 			    my (undef, $event) = @_;
-			    #my $model = $treeview->get_model;
 			    my $selection = $treeview->get_selection;
 			    my $iter = $selection->get_selected;
 			    if ($iter) {
@@ -619,40 +636,80 @@ my $okcancel = create_okcancel({
 			       },
 			      );
 
+gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+                                                      1, create_scrolled_window($treeview),
+						      0, gtkpack_(create_vbox('start'),
+								  0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
+								      eval { add_entry($treeview) };
+								      my $err = $@;
+								      $::WizardWindow->destroy if defined $::WizardWindow;
+								      undef $::WizardWindow;
+								      if ($err && $err !~ /wizcancel/) {
+									  err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
+								      }
+								  }),
+								  0, Gtk2::HSeparator->new,
+								  0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
+								      eval { modify_entry($treeview) };
+								      my $err = $@;
+								      if ($err) {
+									  err_dialog(N("Error"), N("Failed to Modify Samba share.") . "\n\n" . $err);
+								      }
+								  }),
+								  0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
+								      eval { remove_entry($treeview) };
+								      my $err = $@;
+								      if ($err) {
+									  err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
+								      }
+								  }),
+								 ),
+						     ),
+               gtkshow(Gtk2::Label->new(N("Disk Share"))));
+
+gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+                             1, create_scrolled_window($treeview_printers),
+                             0, gtkpack_(create_vbox('start'),
+                                         0, gtksignal_connect(Gtk2::Button->new(N("Add pdf-gen")), clicked => sub {
+								eval { add_pdfgen_entry($treeview_printers) };
+								my $err = $@;
+								if ($err) {
+								  err_dialog(N("Error"), N("Failed to add pdf-gen.") . "\n\n" . $err);
+								}
+							      }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
+                                                                eval { add_printers_entry($treeview_printers) };
+                                                                my $err = $@;
+                                                                if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to add printers.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+                                         0, Gtk2::HSeparator->new,
+                                         0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
+                                                                eval { modify_printers_entry($treeview_printers) };
+                                                                my $err = $@;
+                                                                if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to Modify.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+                                         0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
+                                                                eval { remove_printers_entry($treeview_printers) };
+                                                                my $err = $@;
+                                                                if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to remove.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+					),
+			    ),
+	       gtkshow(Gtk2::Label->new(N("Printers"))));
+$nb->set_show_border(0);
+
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, $menu,
 		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakSamba manage Samba shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter Samba shares.")),
-		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
-			     1, create_scrolled_window($treeview),
-			     0, gtkpack_(create_vbox('start'),
-					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-								eval { add_entry($treeview) };
-								my $err = $@;
-								$::WizardWindow->destroy if defined $::WizardWindow;
-                                                                undef $::WizardWindow;
-                                                                if ($err && $err !~ /wizcancel/) {
-								  err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
-								}
-							      }),
-					 0, Gtk2::HSeparator->new,
-					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-								eval { modify_entry($treeview) };
-								my $err = $@;
-								if ($err) {
-								  err_dialog(N("Error"), N("Failed to Modify Samba share.") . "\n\n" . $err);
-								}
-							      }),
-					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-								eval { remove_entry($treeview) };
-								my $err = $@;
-								if ($err) {
-								  err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
-								}
-							      }),
-					),
-			    ),
+		 1, $nb,
 		 0, $okcancel,
 		 ),
 	);
