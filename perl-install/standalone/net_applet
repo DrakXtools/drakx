@@ -301,9 +301,9 @@ sub generate_menu {
 
     push @settings, $create_item->('chooseProfile');
     if (defined $interactive) {
-        $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
-                                                                  $interactive),
-                                                    toggled => sub { eval { $ifw->set_interactive(to_bool($_[0]->get_active)) } }));
+        $interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive Firewall automatic mode")),
+                                                                  !$interactive),
+                                                    toggled => sub { eval { $ifw->set_interactive(to_bool(!$_[0]->get_active)) } }));
         push @settings, $interactive_cb;
     }
     push @settings, gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
@@ -399,7 +399,7 @@ sub ask_attack_verdict {
                        icon => "/usr/lib/libDrakX/icons/drakfirewall.png");
     my ($blacklist, $whitelist, $ignore, $auto);
 
-    my $update_automatic_mode = sub { $auto->get_active and $interactive_cb->set_active(0) };
+    my $update_automatic_mode = sub { $auto->get_active and $interactive_cb->set_active(1) };
 
     gtkadd($w->{window},
            gtknew('VBox', spacing => 5, children_loose => [
