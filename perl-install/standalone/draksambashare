@@ -725,7 +725,7 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 								  }),
 								 ),
 						     ),
-               gtkshow(Gtk2::Label->new(N("Disk Share"))));
+               gtkshow(Gtk2::Label->new(N("File Share"))));
 
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                              1, create_scrolled_window($treeview_printers),
