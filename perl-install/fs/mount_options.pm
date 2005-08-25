@@ -108,6 +108,8 @@ sub pack {
 sub help() {
     (
 
+	'encrypted' => N("Use an encrypted file system"),
+
 	'grpquota' => N("Enable group disk quota accounting and optionally enforce limits"),
 
 	'noatime' => N("Do not update inode access times on this file system
