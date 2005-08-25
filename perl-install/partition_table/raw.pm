@@ -19,6 +19,7 @@ if_(arch() =~ /ppc/,
     [ 'grub', 0, "\xEBH", 0x17e, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
     [ 'grub', 0, "\xEBH", 0x181, "GRUB \0" ],
+    [ 'grub', 0, "\xEBH", 0x176, "GRUB \0" ], #- Conectiva 10
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
     [ 'lilo', 0x6 + 0x40,  "LILO" ], #- when relocated in lilo's bsect_update(), variable "space" on paragraph boundary gives 0x40
