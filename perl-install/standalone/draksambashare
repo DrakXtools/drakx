@@ -176,7 +176,7 @@ sub get_samba_printers() {
 			   share_name => $clef,
 			   path => $samba->{$clef}{path},
 			   comment => $samba->{$clef}{comment},
-			   browseable => $samba->{$clef}{'browseable'},
+			   browseable => $samba->{$clef}{browseable},
 			   printable => $samba->{$clef}{printable},
 			   print_command => $samba->{$clef}{'print command'},
 			   guest_ok => $samba->{$clef}{'guest ok'},
@@ -317,6 +317,68 @@ sub add_entry {
   gtkset_mousecursor_normal();
 }
 
+sub modify_printers_entry {
+  my ($treeview) = @_;
+  my $model = $treeview->get_model;
+  my $selection = $treeview->get_selection;
+  my ($dir, $i, $path, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable);
+
+  $share_name = Gtk2::Label->new;
+  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $print_command;
+  $_ = Gtk2::OptionMenu->new foreach $browseable, $printable, $guest_ok;
+  $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok;
+
+  my $iter = $selection->get_selected;
+  $iter or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;
+  $path = $model->get_path($iter);
+  $i = ($path->get_indices)[0];
+  
+  $share_name->set_text($listprinters[$i]{share_name});
+  $dir->set_text($listprinters[$i]{path});
+  $comment->set_text($listprinters[$i]{comment});
+  $browseable->set_text($listprinters[$i]{browseable});
+  $guest_ok->set_text($listprinters[$i]{guest_ok});
+  $printable->set_text($listprinters[$i]{printable});
+  $print_command->set_text($listprinters[$i]{print_command});
+
+  my $file_dialog = $fdwidget->($dir, "");
+  my $button = Gtk2::Button->new_from_stock('gtk-open');
+  $button->signal_connect(clicked => sub { $file_dialog->show });
+  
+  my $dialog = _create_dialog();
+  $dialog->set_transient_for($::main_window);
+  local $::main_window = $dialog;
+  $dialog->set_title("DrakSamba Printers entry");
+  $dialog->set_position('center');
+  $dialog->set_modal(1);
+  $dialog->set_resizable(1);
+  
+  gtkpack_($dialog->vbox,
+           0, gtkadd(Gtk2::Frame->new(N("Printer share")),
+                     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+			      0, $label_and_widgets->(N("Printer name:"), $share_name, ""),
+			      0, $label_and_widgets->(N("Directory:"), $dir, $button),
+			      ),
+                     ),
+           0, gtkadd(Gtk2::Frame->new(N("Options")),
+                     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
+			      0, $label_and_widgets->(N("Printable"), $printable, ""),
+			      0, $label_and_widgets->(N("Browseable:"), $browseable, ""),
+			      0, $label_and_widgets->(N("Guest ok:"), $guest_ok, ""),
+			      0, $label_and_widgets->(N("Print command:"), $print_command, ""),
+			      ),
+                     ),
+	   0, create_okcancel({
+			       cancel_clicked => sub { $dialog->destroy },
+			       ok_clicked => sub {
+				 $dialog->destroy;
+			       }
+			      },
+			     ),
+	   );
+  $dialog->show_all;
+}
+
 sub modify_entry {
   my ($treeview) = @_;
   my $model = $treeview->get_model;
@@ -341,7 +403,7 @@ sub modify_entry {
   $w->{window}->set_modal(1);
 
   $iter = $selection->get_selected;
-  $iter or info_dialog(N("Error"), N("Please add a Samba share to be able to modify it.")) and return;
+  $iter or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
   $path = $model->get_path($iter);
   $i = ($path->get_indices)[0];
 
@@ -501,21 +563,23 @@ sub modify_entry {
   $w->{window}->show_all;
 }
 
-sub do_it_add {
-}
-
 sub remove_entry {
-  my ($treeview) = @_;
+  my ($treeview, $type) = @_;
   my $model = $treeview->get_model;
   my $selection = $treeview->get_selection;
   my $iter = $selection->get_selected;
+  my $share;
     if ($iter) {
       my $path = $model->get_path($iter);
       my $i = ($path->get_indices)[0];
-      my $share = $listshare[$i]{share_name};
+      if ($type eq 'share') {
+	$share = $listshare[$i]{share_name};
+      } else {
+	$share = $listprinters[$i]{share_name};
+      }
       ask_okcancel("Remove entry ?", "Remove $share") or return;
       $model->remove($iter);
-      splice @listshare, $i, 1;
+      if ($type eq 'share') { splice @listshare, $i, 1 } else { splice @listshare, $i, 1 }
       delete $samba->{$share};
     }
 }
@@ -574,7 +638,6 @@ sub add_columns {
 #  my $model = $treeview->get_model;
   each_index {
     my $renderer = Gtk2::CellRendererText->new;
-    $renderer->set(editable => 0);
     $renderer->set_data(column => $::i);
     $treeview->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
   } N("Share name"), N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case"), N("Inherit Permissions");
@@ -584,10 +647,9 @@ sub add_columns_printers {
   my $treeview_printers = shift;
   each_index {
     my $renderer = Gtk2::CellRendererText->new;
-    $renderer->set(editable => 0);
     $renderer->set_data(column => $::i);
     $treeview_printers->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
-  } N("Share directory"), N("Comment"), N("Browseable"), N("Printable"), N("Print Command"), N("Guest OK");
+  } N("Printer name"), N("Share directory"), N("Comment"), N("Browseable"), N("Printable"), N("Print Command"), N("Guest OK");
 }
 
 ###############
@@ -605,23 +667,21 @@ my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 
 my $treeview = Gtk2::TreeView->new_with_model($model);
-$treeview->set_rules_hint(1);
-$treeview->get_selection->set_mode('single');
 add_columns($treeview);
-
 my $treeview_printers = Gtk2::TreeView->new_with_model($model_printers);
-$treeview_printers->set_rules_hint(1);
-$treeview_printers->get_selection->set_mode('single');
 add_columns_printers($treeview_printers);
+
+$_->set_rules_hint(1) foreach $treeview_printers, $treeview;
+$_->get_selection->set_mode('single') foreach $treeview_printers, $treeview;
 
 # double clic and popup modify window
 $treeview->signal_connect(button_press_event => sub {
 			    my (undef, $event) = @_;
-			    my $selection = $treeview->get_selection;
-			    my $iter = $selection->get_selected;
-			    if ($iter) {
-			      modify_entry($treeview) if $event->type eq '2button-press';
-			    }
+			    $treeview->get_selection->get_selected and modify_entry($treeview) if $event->type eq '2button-press';
+			  });
+$treeview_printers->signal_connect(button_press_event => sub {
+			    my (undef, $event) = @_;
+			    $treeview_printers->get_selection->get_selected and modify_printers_entry($treeview_printers) if $event->type eq '2button-press';
 			  });
 
 # create menu
@@ -657,7 +717,7 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 								      }
 								  }),
 								  0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-								      eval { remove_entry($treeview) };
+								      eval { remove_entry($treeview, "share") };
 								      my $err = $@;
 								      if ($err) {
 									  err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
@@ -693,7 +753,7 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                                 }
                                                               }),
                                          0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-                                                                eval { remove_printers_entry($treeview_printers) };
+                                                                eval { remove_entry($treeview_printers, "printers") };
                                                                 my $err = $@;
                                                                 if ($err) {
                                                                   err_dialog(N("Error"), N("Failed to remove.") . "\n\n" . $err);
