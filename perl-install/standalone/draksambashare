@@ -1005,7 +1005,7 @@ $printer_list->signal_connect(button_press_event => sub {
 $user_list->signal_connect(button_press_event => sub {
 				my (undef, $event) = @_;
 				my ($selected) = $user_list->get_selected_indices;
-				$user_list->{data}[$selected][0] and modify_user_pass($selected) if $event->type eq '2button-press';
+				$user_list->{data}[$selected][0] and modify_user_info($user_list->{data}[$selected][0], "", "change") if $event->type eq '2button-press';
 			      });
 
 # create menu
