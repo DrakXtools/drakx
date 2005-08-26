@@ -898,12 +898,12 @@ sub modify_user_info {
 	   0, create_okcancel({
 			    cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
-			      system("smbpasswd -a $user");
-			      set_user_passwd($user, $passwd);
-			      $dialog->destroy;
-			    }
-			   },
-			  ),
+				 system("smbpasswd -a $user -n");
+				 set_user_passwd($user, $passwd);
+				 $dialog->destroy;
+			       }
+			      },
+			     ),
 	  );
   $dialog->show_all;
 }
