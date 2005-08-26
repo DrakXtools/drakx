@@ -442,7 +442,7 @@ sub modify_printers_entry {
   my ($dir, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable, $write_list, $printing, $lpq_command, $create_mode, $writable, $use_client_driver, $inherit_permissions);
 
   $share_name = Gtk2::Label->new;
-  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $print_command, $write_list, $printing, $lpq_command, $create_mode;
+  $_ = Gtk2::Entry->new foreach $dir, $comment, $print_command, $write_list, $printing, $lpq_command, $create_mode;
   $_ = Gtk2::OptionMenu->new foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
   $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
 
@@ -506,7 +506,7 @@ sub modify_entry {
   my ($dir, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
 
   $share_name = Gtk2::Label->new;
-  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask, $hide_files;
+  $_ = Gtk2::Entry->new foreach $dir, $comment, $create_mask, $directory_mask, $hide_files;
   $_ = Gtk2::Entry->new foreach $read_list, $write_list, $admin_users, $valid_users, $force_group, $force_create_mode;
   $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_dot_files, $inherit_permissions;
 
