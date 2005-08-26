@@ -69,7 +69,7 @@ sub to_raw_X {
     # This loads the NVIDIA GLX extension module.
     # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
     # IT WILL LOAD XFree86 glx module and the server will crash.
-    $raw_X->set_load_module("/usr/X11R6/$lib/modules/extensions/libglx.so", $card->{DRI_GLX_SPECIAL}); 
+    $raw_X->set_load_module($card->{DRI_GLX_SPECIAL}, to_bool($card->{DRI_GLX_SPECIAL})); 
     $raw_X->remove_Section('DRI');
 
     $raw_X->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
@@ -310,19 +310,25 @@ sub install_server {
     $do_pkgs->install(@packages) if @packages;
     -x $prog or die "server not available (should be in $prog)";
 
+    my $modules_dir = "/usr/X11R6/$lib/modules";
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{Driver2} eq 'nvidia' &&
-	-e "$::prefix/usr/X11R6/$lib/modules/drivers/nvidia_drv.o" &&
-	-l "$::prefix/usr/X11R6/$lib/modules/extensions/libglx.so") {
-	log::explanations("Using specific NVIDIA driver and GLX extensions");
-	$card->{Driver} = 'nvidia';
-	$card->{DRI_GLX_SPECIAL} = 1;
-	$card->{Options}{IgnoreEDID} = 1;
+	-e "$::prefix$modules_dir/drivers/nvidia_drv.o") {
+	#- when there is extensions/libglx.a, it means extensions/libglx.so is not xorg's libglx, so it may be nvidia's
+	#- new nvidia packages have libglx.so in extensions/nvidia instead of simply extensions/
+	my $libglx_a = -e "$::prefix$modules_dir/extensions/libglx.a";
+	my $libglx = find { -l "$::prefix$_" } "$modules_dir/extensions/nvidia/libglx.so", if_($libglx_a, "$modules_dir/extensions/libglx.so");
+	if ($libglx) {
+	    log::explanations("Using specific NVIDIA driver and GLX extensions");
+	    $card->{Driver} = 'nvidia';
+	    $card->{DRI_GLX_SPECIAL} = $libglx;
+	    $card->{Options}{IgnoreEDID} = 1;
+	}
     }
     if ($card->{Driver2} eq 'fglrx' &&
-	-e "$::prefix/usr/X11R6/$lib/modules/dri/fglrx_dri.so" &&
-	-e "$::prefix/usr/X11R6/$lib/modules/drivers/fglrx_drv.o") {
+	-e "$::prefix$modules_dir/dri/fglrx_dri.so" &&
+	-e "$::prefix$modules_dir/drivers/fglrx_drv.o") {
 	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
