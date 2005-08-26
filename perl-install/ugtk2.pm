@@ -1544,7 +1544,7 @@ sub new {
     my $darea = Gtk2::DrawingArea->new;
     my $d_height = 75;
     $darea->set_size_request(-1, $d_height);
-    $darea->modify_font(Gtk2::Pango::FontDescription->from_string(common::N("_banner font:\nSans 14")));
+    $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans 14"));
     $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
     $darea->{text} = $text;
     require lang;
