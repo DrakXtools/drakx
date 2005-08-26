@@ -38,6 +38,13 @@ $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
 my $printer_list = create_printer_list();
 my $share_list = create_share_list();
+my $user_list = create_user_list();
+
+sub create_user_list() {
+  my $user_list = Gtk2::SimpleList->new(N("User name") => 'text',
+				       );
+  $user_list;
+}
 
 sub create_share_list() {
   my $share_list = Gtk2::SimpleList->new(N("Share name") => 'text',
@@ -541,10 +548,10 @@ sub modify_printers_entry {
   if ($s eq "printers") { $printable->set_text("yes");
 			  $printing->set_text("");
 			  $_->set_sensitive(0) foreach $printable, $printing;
-			};
+		      }
   if ($s eq "pdf-gen") { $printing->set_text("bsd");
                           $printing->set_sensitive(0);
-                        };
+		     }
 
   gtkpack_($dialog->vbox,
 	   0, gtkadd(Gtk2::Frame->new(N("Printer share")),
@@ -874,6 +881,10 @@ sub add_data_share_list {
   }
 }
 
+sub add_data_user_list {
+}
+
+
 sub add_data_printer_list {
   my ($printer_list) = @_;
   get_samba_printers();
@@ -903,7 +914,8 @@ sub add_data_printer_list {
 # create model
 add_data_share_list($share_list);
 add_data_printer_list($printer_list);
-$_->set_rules_hint(1) foreach $share_list, $printer_list;
+add_data_user_list($user_list);
+$_->set_rules_hint(1) foreach $share_list, $printer_list, $user_list;
 
 my $window = ugtk2->new("DrakSamba $version");
 $::main_window = $window->{real_window};
@@ -923,6 +935,12 @@ $printer_list->signal_connect(button_press_event => sub {
 				my (undef, $event) = @_;
 				my ($selected) = $printer_list->get_selected_indices;
 				$printer_list->{data}[$selected][0] and modify_printers_entry($selected) if $event->type eq '2button-press';
+			      });
+
+$user_list->signal_connect(button_press_event => sub {
+				my (undef, $event) = @_;
+				my ($selected) = $user_list->get_selected_indices;
+				$user_list->{data}[$selected][0] and modify_user_pass($selected) if $event->type eq '2button-press';
 			      });
 
 # create menu
@@ -969,7 +987,8 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 										       }),
 								 ),
 						     ),
-               gtkshow(Gtk2::Label->new(N("File Share"))));
+               gtkshow(Gtk2::Label->new(N("File Share")))
+	      );
 
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 			     1, create_scrolled_window($printer_list),
@@ -1003,7 +1022,40 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
 					),
 			    ),
-	       gtkshow(Gtk2::Label->new(N("Printers"))));
+	       gtkshow(Gtk2::Label->new(N("Printers")))
+	      );
+
+gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
+			     1, create_scrolled_window($user_list),
+                             0, gtkpack_(create_vbox('start'),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Change password")), clicked => sub {
+                                                                eval { change_passwd() };
+                                                                my $err = $@;
+								if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to change user password.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+                                         0, Gtk2::HSeparator->new,
+                                         0, gtksignal_connect(Gtk2::Button->new(N("Add user")), clicked => sub {
+                                                                eval { add_user_entry() };
+                                                                my $err = $@;
+                                                                if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to add user.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+					 0, gtksignal_connect(Gtk2::Button->new(N("Delete user")), clicked => sub {
+								my ($selected) = $user_list->get_selected_indices;
+                                                                eval { delete_user_entry($selected) };
+                                                                my $err = $@;
+                                                                if ($err) {
+                                                                  err_dialog(N("Error"), N("Failed to delete user.") . "\n\n" . $err);
+                                                                }
+                                                              }),
+					),
+			    ),
+	       gtkshow(Gtk2::Label->new(N("Samba Users")))
+	      );
+
 $nb->set_show_border(0);
 
 # main interface
