@@ -44,7 +44,7 @@ sub create_share_list() {
 					 N("Share directory") => 'text',
 					 N("Comment") => 'text',
 					 N("Browseable") => 'text',
-					 N("Public") => 'text',
+					 N("Public") => 'bool',
 					 N("Writable") => 'text',
 					 N("Create mask") => 'text',
 					 N("Directory mask") => 'text',
@@ -447,7 +447,8 @@ sub modify_printers_entry {
   $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
 
   $selected or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;
-  $share_name->set_text($printer_list->{data}[$selected][0]);
+  my $s = $printer_list->{data}[$selected][0];
+  $share_name->set_text($s);
   $dir->set_text($printer_list->{data}[$selected][1]);
   $comment->set_text($printer_list->{data}[$selected][2]);
   $browseable->set_text($printer_list->{data}[$selected][3]);
@@ -520,8 +521,8 @@ sub modify_entry {
   $w->{window}->set_modal(1);
 
   $selected or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
-
-  $share_name->set_text($share_list->{data}[$selected][0]);
+  my $s = $share_list->{data}[$selected][0];
+  $share_name->set_text($s);
   $dir->set_text($share_list->{data}[$selected][1]);
   $comment->set_text($share_list->{data}[$selected][2]);
   $browseable->set_text($share_list->{data}[$selected][3]);
