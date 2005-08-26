@@ -630,7 +630,6 @@ sub modify_printers_entry {
 				   }
 				   # update gui SimpleList
 				   remove_entry($selected, $printer_list);
-				   my $share = $share_name->get_text;
 				   push @{$printer_list->{data}}, [
 								   $pixbuf_printer,
 								   $share,
@@ -893,7 +892,7 @@ sub remove_user {
   system("smbpasswd -x $user");
 }
 
-sub get_user {
+sub get_user() {
   my $conf = "/etc/passwd";
   my @data; local $_;
   foreach (cat_($conf)) {
