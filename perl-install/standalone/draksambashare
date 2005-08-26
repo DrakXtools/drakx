@@ -575,7 +575,53 @@ sub modify_printers_entry {
 	   0, create_okcancel({
 			       cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
-				 $dialog->destroy;
+				   my $share = $share_name->get_text;
+				   my $test_dir = $dir->get_text;
+				   $comment->get_text or err_dialog(N("Information"), N("Please enter a Comment for this share.")) and return 1;
+				   if (!-d $test_dir) {
+				       err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+				   }
+				   foreach ($create_mode->get_text) {
+				       if ($_ && !/^\d+$/) {
+					   err_dialog(N("Error"), N("create mode should be numeric. ie: 0755.")) and return 1;
+				       }
+				   }
+				   # update gui SimpleList
+				   remove_entry($selected, $printer_list);
+				   my $share = $share_name->get_text;
+				   push @{$printer_list->{data}}, [
+								   $share,
+								   $dir->get_text,
+								   $comment->get_text,
+								   $browseable->get_text,
+								   $printable->get_text,
+								   $print_command->get_text,
+								   $lpq_command->get_text,
+								   $guest_ok->get_text,
+								   $writable->get_text,
+								   $write_list->get_text,
+								   $inherit_permissions->get_text,
+								   $printing->get_text,
+								   $create_mode->get_text,
+								   $use_client_driver->get_text,
+								   ];
+				   # update $samba
+				   $samba->{$share}{path} = $dir->get_text;
+				   $samba->{$share}{comment} = $comment->get_text;
+				   $browseable->get_text and $samba->{$share}{browseable} = $browseable->get_text || delete $samba->{$share}{browseable};
+				   $printable->get_text and $samba->{$share}{printable} = $printable->get_text || delete $samba->{$share}{printable};
+				   $print_command->get_text and $samba->{$share}{'print command'} = $print_command->get_text || delete $samba->{$share}{'print_command'};
+				   $lpq_command->get_text and $samba->{$share}{'lpq command'} = $lpq_command->get_text || delete $samba->{$share}{'lpq command'};
+				   $guest_ok->get_text and $samba->{$share}{'guest ok'} = $guest_ok->get_text || delete $samba->{$share}{'guest ok'};
+				   $writable->get_text and $samba->{$share}{writable} = $writable->get_text || delete $samba->{$share}{writable};
+				   $write_list->get_text and $samba->{$share}{'write list'} = $write_list->get_text || delete $samba->{$share}{'write list'};
+				   $inherit_permissions->get_text and $samba->{$share}{'inherit permissions'} = $inherit_permissions->get_text || delete $samba->{$share}{'inherit permissions'};
+				   $printing->get_text and $samba->{$share}{printing} = $printing->get_text || delete $samba->{$share}{printing};
+				   $create_mode->get_text and $samba->{$share}{'create mode'} = $create_mode->get_text || delete $samba->{$share}{'create mode'};
+				   $use_client_driver->get_text and $samba->{$share}{'use client driver'} = $use_client_driver->get_text || delete $samba->{$share}{'use client driver'};
+
+				   # 
+				   $dialog->destroy;
 			       }
 			      },
 			     ),
@@ -696,7 +742,7 @@ sub modify_entry {
 							 create_okcancel({
 							     cancel_clicked => sub { $w->destroy },
 							     ok_clicked => sub {
-							       my $share = $share_name->get_text;
+ 							       my $share = $share_name->get_text;
 							       my $test_dir = $dir->get_text;
 							       $comment->get_text or err_dialog(N("Information"), N("Please enter a Comment for this share.")) and return 1;
 							       if ($share !~ /^homes$/ and !-d $test_dir) {
@@ -786,7 +832,6 @@ sub modify_entry {
 sub remove_entry {
   my ($selected, $list) = @_;
   my $share_name = $list->{data}[$selected][0];
-  ask_okcancel("Remove entry ?", "Remove $share_name") or return;
   splice @{$list->{data}}, $selected, 1;
   delete $samba->{$share_name};
 }
@@ -905,6 +950,7 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 										       }),
 								  0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 											 my ($selected) = $share_list->get_selected_indices;
+											 ask_okcancel("Remove entry ?", "Remove $share_list->{data}[$selected][0]") or return;
 											 eval { remove_entry($selected, $share_list) };
 											 my $err = $@;
 											 if ($err) {
@@ -938,6 +984,7 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
                                          0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 								my ($selected) = $printer_list->get_selected_indices;
+								ask_okcancel("Remove entry ?", "Remove $printer_list->{data}[$selected][0]") or return;
                                                                 eval { remove_entry($selected, $printer_list) };
                                                                 my $err = $@;
                                                                 if ($err) {
