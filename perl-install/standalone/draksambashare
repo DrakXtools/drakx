@@ -416,6 +416,7 @@ sub add_printers_entry() {
 				   next => 'end_add',
 				   post => sub {
 				     if ($wiz_todo == 1) {
+				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A pdf gnerator already exist.")) and return 'welcome';
 				       &pdf_section;
 				       push @{$printer_list->{data}}, [
 								       'pdf-gen',
@@ -438,6 +439,7 @@ sub add_printers_entry() {
 							 guest_ok => $samba->{'pdf-gen'}{'guest ok'},
 							};
 				     } elsif ($wiz_todo == 2) {
+				       exists $samba->{'print$'} || exists $samba->{printers} and err_dialog(N("Error"), N("Printers and print\$ already exist.")) and return 'welcome';
 				       &printdollar_section;
 				       &printers_section;
 				       push @{$printer_list->{data}}, [
@@ -450,7 +452,7 @@ sub add_printers_entry() {
 								       ];
 				       push @{$printer_list->{data}}, [
 								       'printers',
-								       $samba->{printers}{path},			       
+								       $samba->{printers}{path},
 								       $samba->{printers}{comment},
 								       $samba->{printers}{browseable},
 								       $samba->{printers}{printable},
@@ -535,6 +537,14 @@ sub modify_printers_entry {
   $dialog->set_position('center');
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
+
+  if ($s eq "printers") { $printable->set_text("yes");
+			  $printing->set_text("");
+			  $_->set_sensitive(0) foreach $printable, $printing;
+			};
+  if ($s eq "pdf-gen") { $printing->set_text("bsd");
+                          $printing->set_sensitive(0);
+                        };
 
   gtkpack_($dialog->vbox,
 	   0, gtkadd(Gtk2::Frame->new(N("Printer share")),
