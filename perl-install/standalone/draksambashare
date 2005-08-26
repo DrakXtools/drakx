@@ -319,15 +319,15 @@ sub pdf_section() {
 
 sub printers_section() {
   $samba->{printers};
-  $samba->{comment} = "All Printers";
-  $samba->{browseable} = "no";
-  $samba->{'guest ok'} = "yes";
-  $samba->{'create mode'} = "0700";
-  $samba->{path} = "/var/spool/samba";
-  $samba->{writable} = "no";
-  $samba->{printable} = "yes";
-  $samba->{'print command'} = 'lpr-cups -P %p -o raw %s -r';
-  $samba->{'use client driver'} = "yes";
+  $samba->{printers}{comment} = "All Printers";
+  $samba->{printers}{browseable} = "no";
+  $samba->{printers}{'guest ok'} = "yes";
+  $samba->{printers}{'create mode'} = "0700";
+  $samba->{printers}{path} = "/var/spool/samba";
+  $samba->{printers}{writable} = "no";
+  $samba->{printers}{printable} = "yes";
+  $samba->{printers}{'print command'} = 'lpr-cups -P %p -o raw %s -r';
+  $samba->{printers}{'use client driver'} = "yes";
 }
 
 sub add_entry() {
@@ -408,25 +408,26 @@ sub add_printers_entry() {
 	     name => N("Add Special Printer share"),
 	     pages => {
 		       welcome => {
-				   name => N("Goal of this wizard is to easily create a new Samba share."),
+				   name => N("Goal of this wizard is to easily create a new special printer Samba share."),
 				   data => [
 					    { label => "", type => 'list', val => \$wiz_todo, list => [ keys %print ], format => sub { $print{$_[0]} } }
 					   ],
 				   no_back => 1,
+				   next => 'end_add',
 				   post => sub {
 				     if ($wiz_todo == 1) {
 				       &pdf_section;
-				       push @{$share_list->{data}}, [
-								     $samba->{'pdf-gen'},
-								     $samba->{'pdf-gen'}{path},
-								     $samba->{'pdf-gen'}{printable},
-								     $samba->{'pdf-gen'}{comment},
-								     $samba->{'pdf-gen'}{printing},
-								     $samba->{'pdf-gen'}{'print command'},
-								     $samba->{'pdf-gen'}{'lpq command'},
-								     $samba->{'pdf-gen'}{'guest ok'},
+				       push @{$printer_list->{data}}, [
+								       'pdf-gen',
+								       $samba->{'pdf-gen'}{path},
+								       $samba->{'pdf-gen'}{comment}, "",
+								       $samba->{'pdf-gen'}{printable},
+								       $samba->{'pdf-gen'}{'print command'},
+								       $samba->{'pdf-gen'}{'lpq command'},
+								       $samba->{'pdf-gen'}{'guest ok'}, "", "", "",
+								       $samba->{'pdf-gen'}{printing}, "", "",
 								     ];
-				       push @listshare, {
+				       push @listprinters, {
 							 share_name => $samba->{'pdf-gen'},
 							 path => $samba->{'pdf-gen'}{path},
 							 comment => $samba->{'pdf-gen'}{comment},
@@ -439,7 +440,47 @@ sub add_printers_entry() {
 				     } elsif ($wiz_todo == 2) {
 				       &printdollar_section;
 				       &printers_section;
-				     }
+				       push @{$printer_list->{data}}, [
+								       'print$',
+								       $samba->{'print$'}{path}, "",
+								       $samba->{'print$'}{browseable}, "", "", "",
+								       $samba->{'print$'}{'guest ok'}, "",
+								       $samba->{'print$'}{'write list'},
+								       $samba->{'print$'}{'inherit permissions'},
+								       ];
+				       push @{$printer_list->{data}}, [
+								       'printers',
+								       $samba->{printers}{path},			       
+								       $samba->{printers}{comment},
+								       $samba->{printers}{browseable},
+								       $samba->{printers}{printable},
+								       $samba->{printers}{'print command'}, "",
+								       $samba->{printers}{'guest ok'},
+								       $samba->{printers}{writable}, "", "", "",
+								       $samba->{printers}{'create mode'},
+								       $samba->{printers}{'use client driver'},
+								       ];
+				       push @listprinters, {
+					   share_name => 'print$',
+					   path => $samba->{'print$'}{path},
+					   browseable => $samba->{'print$'}{browseable},
+					   write_list => $samba->{'print$'}{'write list'},
+					   guest_ok => $samba->{'print$'}{'guest ok'},
+					   inherit_permissions => $samba->{'print$'}{'inherit permissions'},
+				       };
+				       push @listprinters, {
+					   share_name => "printers",
+					   comment => $samba->{printers}{comment},
+					   browseable => $samba->{printers}{browseable},
+					   guest_ok => $samba->{printers}{'guest ok'},
+					   create_mode => $samba->{printers}{'create mode'},
+					   path => $samba->{printers}{path},
+					   writable => $samba->{printers}{writable},
+					   printable => $samba->{printers}{printable},
+					   print_command => $samba->{printers}{'print command'},
+					   use_client_driver => $samba->{printers}{'use client driver'},
+				       };
+				   }
 				     return;
 				   },
 				  },
@@ -539,6 +580,7 @@ sub modify_entry {
 
   my $w = ugtk2->new(N("DrakSamba entry"));
   $w->{window}->set_modal(1);
+  $w->{window}->set_position('center');
 
   my $s = $share_list->{data}[$selected][0];
   $s or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
@@ -710,7 +752,6 @@ sub modify_entry {
 										 default_case => $samba->{$share}{'default case'},
 										 inherit_permissions => $samba->{$share}{'inherit permissions'},
 										};
-
 							       $w->destroy;
 							     },
 									 },
