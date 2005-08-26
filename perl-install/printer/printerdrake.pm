@@ -3995,10 +3995,10 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	  { text => N("Photo test page"), type => 'bool', val => \$options{photo} },
 	  #{ text => N("Plain text test page"), type => 'bool',
 	  #  val => \$options{ascii} }
-	  if_($::isWizard,
-	   ({ val => "__________" },
-	    { text => N("Do not print any test page"), type => 'bool', 
-	      val => \$res2 }))
+	  #if_($::isWizard,
+	  # ({ val => "__________" },
+	  #  { text => N("Do not print any test page"), type => 'bool', 
+	  #    val => \$res2 }))
 	  ]);
     $res2 = 1 if !($options{standard} || $options{altletter} || $options{alta4} || $options{photo} || $options{ascii});
     if ($res1 && !$res2) {
