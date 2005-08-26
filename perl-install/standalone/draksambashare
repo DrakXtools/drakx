@@ -27,6 +27,7 @@ use network::network;
 use interactive;
 use ugtk2 qw(:ask :wrappers :create :dialogs);
 use mygtk2 qw(gtknew);
+use Gtk2::SimpleList;
 
 # use libconf 
 use Libconf::Templates;
@@ -47,14 +48,49 @@ local *COLUMN_READ_LIST; use constant COLUMN_READ_LIST => 8;
 local *COLUMN_WRITE_LIST; use constant COLUMN_WRITE_LIST => 9;
 local *COLUMN_ADMIN_USERS; use constant COLUMN_ADMIN_USERS => 10;
 local *COLUMN_VALID_USERS; use constant COLUMN_VALID_USERS => 11;
-local *COLUMN_HIDE_DOT_FILES; use constant COLUMN_HIDE_DOT_FILES => 12;
-local *COLUMN_HIDE_FILES; use constant COLUMN_HIDE_FILES => 13;
-local *COLUMN_PRESERVE_CASE; use constant COLUMN_PRESERVE_CASE => 14;
-local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 15;
-local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 16;
-local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 17;
-local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 18;
-use constant COLUMN_PRINTABLE => 4; use constant COLUMN_PRINT_COMMAND => 5; use constant COLUMN_GUEST_OK => 6;
+local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 12;
+local *COLUMN_HIDE_DOT_FILES; use constant COLUMN_HIDE_DOT_FILES => 13;
+local *COLUMN_HIDE_FILES; use constant COLUMN_HIDE_FILES => 14;
+local *COLUMN_PRESERVE_CASE; use constant COLUMN_PRESERVE_CASE => 15;
+local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 16;
+local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 17;
+local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 18;
+
+my $printer_list = create_printer_list();
+
+sub create_printer_list() {
+   my $printer_list = Gtk2::SimpleList->new(N("Printer name") => 'text',
+                                           N("Path") => 'text',
+                                           N("Comment") => 'text',
+                                           N("Browseable") => 'text',
+                                           N("Printable") => 'text',
+                                           N("Print Command") => 'text',
+                                           N("LPQ command") => 'text',
+                                           N("Guest ok") => 'text',
+                                           N("Writable") => 'text',
+                                           N("Write list") => 'text',
+                                           N("Inherit permissions") => 'text',
+                                           N("Printing") => 'text',
+                                           N("Create mode") => 'text',
+                                           N("Use client driver") => 'text',
+					  );
+  $printer_list->set_headers_clickable(1);
+  foreach (0, 1, 2, 3) {
+    $printer_list->get_column($_)->signal_connect('clicked', \&sort_by_column, $printer_list->get_model);
+    $printer_list->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
+  }
+  $printer_list;
+}
+
+sub sort_by_column {
+    my ($column, $model) = @_;
+    my $col_id = $column->get_sort_column_id;
+    my ($old_id, $old_order) = $model->get_sort_column_id;
+    $model->set_sort_column_id($col_id, $old_id == $col_id && $old_order ne 'descending' ? 'ascending' : 'descending');
+}
+
+#path comment browseable printable print command guest ok writable write list inherit permissions printing lpq command create mode use client driver
+
 
 my $samba = new Libconf::Glueconf::Samba::Smb_conf({ filename => '/etc/samba/smb.conf', show_commented_info => 1 });
 my (@listshare, @listprinters);
@@ -179,7 +215,14 @@ sub get_samba_printers() {
 			   browseable => $samba->{$clef}{browseable},
 			   printable => $samba->{$clef}{printable},
 			   print_command => $samba->{$clef}{'print command'},
+			   lpq_command => $samba->{$clef}{'lpq command'},
 			   guest_ok => $samba->{$clef}{'guest ok'},
+			   writable => $samba->{$clef}{writable},
+			   write_list => $samba->{$clef}{'write list'},
+			   inherit_permissions => $samba->{$clef}{'inherit permissions'},
+			   printing => $samba->{$clef}{printing},
+			   create_mode => $samba->{$clef}{'create mode'},
+			   use_client_driver => $samba->{$clef}{'use client driver'},
 			  };
     }
   }
@@ -244,24 +287,37 @@ sub help_b {
 }
 
 sub printdollar_section() {
-    $samba->{'print$'};
-    $samba->{'print$'}{browseable} = "yes";
-    $samba->{'print$'}{path} = "/var/lib/samba/printers";
-    $samba->{'print$'}{browseable} = "yes";
-    $samba->{'print$'}{'write list'} = "\@adm root";
-    $samba->{'print$'}{'guest ok'} = "yes";
-    $samba->{'print$'}{'inherit permissions'} = "yes";
+  $samba->{'print$'};
+  $samba->{'print$'}{browseable} = "yes";
+  $samba->{'print$'}{path} = "/var/lib/samba/printers";
+  $samba->{'print$'}{browseable} = "yes";
+  $samba->{'print$'}{'write list'} = "\@adm root";
+  $samba->{'print$'}{'guest ok'} = "yes";
+  $samba->{'print$'}{'inherit permissions'} = "yes";
 }
 
 sub pdf_section() {
-    $samba->{'pdf-gen'};
-    $samba->{'pdf-gen'}{path} = "/var/tmp";
-    $samba->{'pdf-gen'}{'guest ok'} = "no";
-    $samba->{'pdf-gen'}{printable} = "yes";
-    $samba->{'pdf-gen'}{comment} = "PDF Generator (only valid users)";
-    $samba->{'pdf-gen'}{printing} = "bsd";
-    $samba->{'pdf-gen'}{'print command'} = "/usr/share/samba/scripts/print-pdf \"%s\" \"%H\" \"//%L/%u\" \"%m\" \"%I\" \"%J\" &";
-    $samba->{'pdf-gen'}{'lpq command'} = "/bin/true";
+  $samba->{'pdf-gen'};
+  $samba->{'pdf-gen'}{path} = "/var/tmp";
+  $samba->{'pdf-gen'}{'guest ok'} = "no";
+  $samba->{'pdf-gen'}{printable} = "yes";
+  $samba->{'pdf-gen'}{comment} = "PDF Generator (only valid users)";
+  $samba->{'pdf-gen'}{printing} = "bsd";
+  $samba->{'pdf-gen'}{'print command'} = '/usr/share/samba/scripts/print-pdf %s %H \//%L/%u\ %m %I %J &';
+  $samba->{'pdf-gen'}{'lpq command'} = "/bin/true";
+}
+
+sub printers_section() {
+  $samba->{printers};
+  $samba->{comment} = "All Printers";
+  $samba->{browseable} = "no";
+  $samba->{'guest ok'} = "yes";
+  $samba->{'create mode'} = "0700";
+  $samba->{path} = "/var/spool/samba";
+  $samba->{writable} = "no";
+  $samba->{printable} = "yes";
+  $samba->{'print command'} = 'lpr-cups -P %p -o raw %s -r';
+  $samba->{'use client driver'} = "yes";
 }
 
 sub add_entry {
@@ -335,14 +391,11 @@ sub add_entry {
 }
 
 sub add_printers_entry {
-  my ($treeview) = @_;
-  my $model = $treeview->get_model;
   use wizards;
   my $w = wizards->new;
   my %print = (
-	       1 => N('pdf-gen - a pdf generator'),
-	       2 => N('print$ - '),
-	       3 => N('printers - all printers available'),
+	       1 => N("pdf-gen - a pdf generator"),
+	       2 => N("printers - all printers available"),
 	      );
   my $wiz_todo;
   my $wiz = {
@@ -355,13 +408,11 @@ sub add_printers_entry {
 					   ],
 				   no_back => 1,
 				   post => sub {
-				     my $iter = $model->append;
 				     if ($wiz_todo == 1) {
 				       pdf_section;
 				     } elsif ($wiz_todo == 2) {
 				       printdollar_section;
-				     } elsif ($wiz_todo == 3) {
-				       print "a\n";
+				       printers_section;
 				     }
 				     return;
 				   },
@@ -377,36 +428,38 @@ sub add_printers_entry {
 	    };
   $w->process($wiz, $in);
   $::isWizard = 0;
-#  gtkset_mousecursor_normal();
+  #  gtkset_mousecursor_normal()
 }
 
 sub modify_printers_entry {
-  my ($treeview) = @_;
-  my $model = $treeview->get_model;
-  my ($dir, $i, $path, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable);
+  my ($selected) = @_;
+  my ($dir, $i, $path, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable, $write_list, $printing, $lpq_command, $create_mode, $writable, $use_client_driver, $inherit_permissions);
 
   $share_name = Gtk2::Label->new;
-  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $print_command;
-  $_ = Gtk2::OptionMenu->new foreach $browseable, $printable, $guest_ok;
-  $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok;
+  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $print_command, $write_list, $printing, $lpq_command, $create_mode;
+  $_ = Gtk2::OptionMenu->new foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
+  $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
 
-  my $iter = $treeview->get_selection->get_selected;
-  $iter or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;
-  $path = $model->get_path($iter);
-  $i = ($path->get_indices)[0];
-  
-  $share_name->set_text($listprinters[$i]{share_name});
-  $dir->set_text($listprinters[$i]{path});
-  $comment->set_text($listprinters[$i]{comment});
-  $browseable->set_text($listprinters[$i]{browseable});
-  $guest_ok->set_text($listprinters[$i]{guest_ok});
-  $printable->set_text($listprinters[$i]{printable});
-  $print_command->set_text($listprinters[$i]{print_command});
+  $selected or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;
+  $share_name->set_text($printer_list->{data}[$selected][0]);
+  $dir->set_text($printer_list->{data}[$selected][1]);
+  $comment->set_text($printer_list->{data}[$selected][2]);
+  $browseable->set_text($printer_list->{data}[$selected][3]);
+  $printable->set_text($printer_list->{data}[$selected][4]);
+  $print_command->set_text($printer_list->{data}[$selected][5]);
+  $lpq_command->set_text($printer_list->{data}[$selected][6]);
+  $guest_ok->set_text($printer_list->{data}[$selected][7]);
+  $writable->set_text($printer_list->{data}[$selected][8]);
+  $write_list->set_text($printer_list->{data}[$selected][9]);
+  $inherit_permissions->set_text($printer_list->{data}[$selected][10]);
+  $printing->set_text($printer_list->{data}[$selected][11]);
+  $create_mode->set_text($printer_list->{data}[$selected][12]);
+  $use_client_driver->set_text($printer_list->{data}[$selected][13]);
 
   my $file_dialog = $fdwidget->($dir, "");
   my $button = Gtk2::Button->new_from_stock('gtk-open');
   $button->signal_connect(clicked => sub { $file_dialog->show });
-  
+
   my $dialog = _create_dialog();
   $dialog->set_transient_for($::main_window);
   local $::main_window = $dialog;
@@ -414,7 +467,7 @@ sub modify_printers_entry {
   $dialog->set_position('center');
   $dialog->set_modal(1);
   $dialog->set_resizable(1);
-  
+
   gtkpack_($dialog->vbox,
            0, gtkadd(Gtk2::Frame->new(N("Printer share")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
@@ -527,12 +580,11 @@ sub modify_entry {
 					 ),
 			       ),
 		      );
-  
+
   $_->signal_connect(activate => sub {
-			      $w->shrink_topwindow;
-#                              gtkflush();
-			  }) foreach $expander_file, $expander_user;
-  
+		       $w->shrink_topwindow;
+		     }) foreach $expander_file, $expander_user;
+
   gtkadd($w->{window},
 	 gtknew('VBox', spacing => 0, children_loose => [
 							 gtkadd(Gtk2::Frame->new(N("Samba share directory")),
@@ -643,6 +695,14 @@ sub remove_entry {
     }
 }
 
+sub remove_entry {
+  my ($selected, $list) = @_;
+  my $share_name = $list->{data}[$selected][0];
+  ask_okcancel("Remove entry ?", "Remove $share_name") or return;
+  splice @{$list->{data}}, $selected, 1;
+  delete $samba->{$share_name};
+}
+
 sub create_model() {
   get_samba_share();
   my $model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String",  "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
@@ -661,34 +721,40 @@ sub create_model() {
 		COLUMN_WRITE_LIST, $a->{write_list},
 		COLUMN_ADMIN_USERS, $a->{admin_users},
 		COLUMN_VALID_USERS, $a->{valid_users},
+		COLUMN_INHERIT_PERMISSIONS, $a->{inherit_permissions},
 		COLUMN_HIDE_DOT_FILES, $a->{hide_dot_files},
 		COLUMN_HIDE_FILES, $a->{hide_files},
 		COLUMN_PRESERVE_CASE, $a->{preserve_case},
 		COLUMN_FORCE_CREATE_MODE, $a->{force_create_mode},
 		COLUMN_FORCE_GROUP, $a->{force_group},
 		COLUMN_DEFAULT_CASE, $a->{default_case},
-		COLUMN_INHERIT_PERMISSIONS, $a->{inherit_permissions},
 		);
 	     }
   return $model;
 }
 
-sub create_model_printers() {
+sub add_data_printer_list {
+  my ($printer_list) = @_;
   get_samba_printers();
-  my $model_printers = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
-  foreach my $a (@listprinters) {
-    my $iter = $model_printers->append;
-    $model_printers->set($iter,
-			 COLUMN_SHARE_NAME, $a->{share_name},
-			 COLUMN_PATH, $a->{path},
-			 COLUMN_COMMENT, $a->{comment},
-			 COLUMN_BROWSEABLE, $a->{browseable},
-			 COLUMN_PRINTABLE, $a->{printable},
-			 COLUMN_PRINT_COMMAND, $a->{print_command},
-			 COLUMN_GUEST_OK, $a->{guest_ok},
-			);
+  foreach my $data (@listprinters) {
+    print "$data->{share_name}\n";
+    push @{$printer_list->{data}}, [
+				    $data->{share_name},
+				    $data->{path},
+				    $data->{comment},
+				    $data->{browseable},
+				    $data->{printable},
+				    $data->{print_command},
+				    $data->{lpq_command},
+				    $data->{guest_ok},
+				    $data->{writable},
+				    $data->{write_list},
+				    $data->{inherit_permissions},
+				    $data->{printing},
+				    $data->{create_mode},
+				    $data->{use_client_driver},
+				   ];
   }
-  return $model_printers;
 }
 
 # add colum to model
@@ -698,24 +764,16 @@ sub add_columns {
     my $renderer = Gtk2::CellRendererText->new;
     $renderer->set_data(column => $::i);
     $treeview->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
-  } N("Share name"), N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case"), N("Inherit Permissions");
+  } N("Share name"), N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Inherit Permissions"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case");
 }
 
-sub add_columns_printers {
-  my $treeview_printers = shift;
-  each_index {
-    my $renderer = Gtk2::CellRendererText->new;
-    $renderer->set_data(column => $::i);
-    $treeview_printers->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
-  } N("Printer name"), N("Share directory"), N("Comment"), N("Browseable"), N("Printable"), N("Print Command"), N("Guest OK");
-}
 
 ###############
 # Main Program
 ###############
 # create model
 my $model = create_model();
-my $model_printers = create_model_printers();
+add_data_printer_list($printer_list);
 
 my $window = ugtk2->new("DrakSamba $version");
 $::main_window = $window->{real_window};
@@ -726,21 +784,21 @@ $W->signal_connect(delete_event => sub { ugtk2->exit });
 
 my $treeview = Gtk2::TreeView->new_with_model($model);
 add_columns($treeview);
-my $treeview_printers = Gtk2::TreeView->new_with_model($model_printers);
-add_columns_printers($treeview_printers);
 
-$_->set_rules_hint(1) foreach $treeview_printers, $treeview;
-$_->get_selection->set_mode('single') foreach $treeview_printers, $treeview;
+$_->set_rules_hint(1) foreach $treeview;
+$_->get_selection->set_mode('single') foreach $treeview;
 
 # double clic and popup modify window
 $treeview->signal_connect(button_press_event => sub {
 			    my (undef, $event) = @_;
 			    $treeview->get_selection->get_selected and modify_entry($treeview) if $event->type eq '2button-press';
 			  });
-$treeview_printers->signal_connect(button_press_event => sub {
-			    my (undef, $event) = @_;
-			    $treeview_printers->get_selection->get_selected and modify_printers_entry($treeview_printers) if $event->type eq '2button-press';
-			  });
+
+$printer_list->signal_connect(button_press_event => sub {
+				my (undef, $event) = @_;
+				my ($selected) = $printer_list->get_selected_indices;
+				$selected and modify_printers_entry($selected) if $event->type eq '2button-press';
+			      });
 
 # create menu
 my @items = get_items();
@@ -786,17 +844,10 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
                gtkshow(Gtk2::Label->new(N("File Share"))));
 
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
-                             1, create_scrolled_window($treeview_printers),
+			     1, create_scrolled_window($printer_list),
                              0, gtkpack_(create_vbox('start'),
-#                                         0, gtksignal_connect(Gtk2::Button->new(N("Add pdf-gen")), clicked => sub {
-#								eval { add_pdfgen_entry($treeview_printers) };
-#								my $err = $@;
-#								if ($err) {
-#								  err_dialog(N("Error"), N("Failed to add pdf-gen.") . "\n\n" . $err);
-#								}
-#							      }),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Add printers")), clicked => sub {
-                                                                eval { add_printers_entry($treeview_printers) };
+                                                                eval { add_printers_entry() };
                                                                 my $err = $@;
 								$::WizardWindow->destroy if defined $::WizardWindow;
 								undef $::WizardWindow;
@@ -806,14 +857,16 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
                                          0, Gtk2::HSeparator->new,
                                          0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-                                                                eval { modify_printers_entry($treeview_printers) };
+								my ($selected) = $printer_list->get_selected_indices;
+                                                                eval { modify_printers_entry($selected) };
                                                                 my $err = $@;
                                                                 if ($err) {
                                                                   err_dialog(N("Error"), N("Failed to Modify.") . "\n\n" . $err);
                                                                 }
                                                               }),
                                          0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-                                                                eval { remove_entry($treeview_printers, "printers") };
+								my ($selected) = $printer_list->get_selected_indices;
+                                                                eval { remove_entry($selected, $printer_list) };
                                                                 my $err = $@;
                                                                 if ($err) {
                                                                   err_dialog(N("Error"), N("Failed to remove.") . "\n\n" . $err);
