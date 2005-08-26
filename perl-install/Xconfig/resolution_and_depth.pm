@@ -232,7 +232,7 @@ sub set_default_background {
 
     my $ratio = $resolution->{X} / $resolution->{Y};
     my $dir = "$::prefix/usr/share/mdk/backgrounds";
-    my %theme = getVarsFromSh('/etc/sysconfig/bootsplash');
+    my %theme = getVarsFromSh("$::prefix/etc/sysconfig/bootsplash");
     my @l = 
       sort {
 	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[3] <=> $b->[3];
