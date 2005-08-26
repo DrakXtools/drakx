@@ -1104,7 +1104,11 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 										       }),
 								 ),
 						     ),
-               gtkshow(Gtk2::Label->new(N("File Share")))
+               gtkshow(gtkpack_(Gtk2::HBox->new(0,0),
+				0, Gtk2::Image->new_from_file($fileshare_icon),
+				0, Gtk2::Label->new(N("File share")),
+			       ),
+		      ),
 	      );
 
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
@@ -1139,7 +1143,11 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
 					),
 			    ),
-	       gtkshow(Gtk2::Label->new(N("Printers")))
+	       gtkshow(gtkpack_(Gtk2::HBox->new(0,0),
+				0, Gtk2::Image->new_from_file($printershare_icon),
+				0, Gtk2::Label->new(N("Printers"))
+			       ),
+		      ),
 	      );
 
 gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
@@ -1180,7 +1188,10 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 							     ),
 					),
 			    ),
-	       gtkshow(Gtk2::Label->new(N("Samba Users")))
+               gtkshow(gtkpack_(Gtk2::HBox->new(0,0),
+				0, Gtk2::Image->new_from_file($sambauser_icon),
+				0, Gtk2::Label->new(N("Samba Users"))),
+		      ),
 	      );
 
 $nb->set_show_border(0);
