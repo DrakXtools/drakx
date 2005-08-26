@@ -258,16 +258,6 @@ sub get_samba_printers() {
   return @listprinters;
 }
 
-sub create_smbuser {
-  my ($list) = @_;
-  my @users = split(" ", $list);
-  foreach my $user (@users) {
-    if (!any { /^$user:/ } cat_("/etc/samba/smbpasswd")) {
-      system("smbpasswd -a $user -n");
-    }
-  }
-}
-
 sub write_conf() {
   $samba->write_conf("/etc/samba/smb.conf");
 }
@@ -370,13 +360,13 @@ sub add_entry() {
 				       }
 				     }
 				     if (!$wiz_addshare_path) {
-				       err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'welcome';
+				       err_dialog(N("Error"), N("Can't create the directory, please enter a correct path.")) and return 'welcome';
 				     }
 				     if (!$wiz_addshare_comment) {
 				       err_dialog(N("Error"), N("Please enter a Comment for this share.")) and return 'welcome';
 				     }
 				     if (! -d $wiz_addshare_path) {
-				       mkdir_p($wiz_addshare_path) or err_dialog(N("Error"), N("Can\'t create the directory, please enter a correct path.")) and return 'welcome';
+				       mkdir_p($wiz_addshare_path) or err_dialog(N("Error"), N("Can't create the directory, please enter a correct path.")) and return 'welcome';
 				     }
 				   },
 				   post => sub {
@@ -767,7 +757,7 @@ sub modify_entry {
 									 0, Gtk2::HSeparator->new,
 									 0, $expander_file,
 									 ),
-								),
+							       ),
 							 create_okcancel({
 							     cancel_clicked => sub { $w->destroy },
 							     ok_clicked => sub {
@@ -781,6 +771,14 @@ sub modify_entry {
 								   if ($_ && !/^\d+$/) {
 								       err_dialog(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
 								   }
+							       }
+							       foreach ($read_list->get_text, $write_list->get_text, $admin_users->get_text, $valid_users->get_text) {
+								 my @users = split(" ", $_);
+								 foreach my $user (@users) {
+								   if (!any { /^$user:/ } cat_("/etc/samba/smbpasswd") and !/\@/) {
+								     err_dialog(N("Error"), N("Please create this Samba user: %s", $user)) and return;
+								   }
+								 }
 							       }
 							       # update gui SimpleList
                                                                remove_entry($selected, $share_list);
@@ -874,7 +872,7 @@ sub get_user {
   my $conf = "/etc/passwd";
   my @data; local $_;
   foreach (cat_($conf)) {
-    push @data, "$1" if m/^([^#:]+):[^:]+:([^:]+):/ and $2 > 499;
+      push @data, $1 if m/^([^#:]+):[^:]+:([^:]+):/ and $2 > 499;
   }
   push @data, " ";
   return sort(@data);
@@ -934,15 +932,11 @@ sub modify_user_info {
 
 sub set_user_passwd {
   my ($user, $passwd) = @_;
-  print "here\n";
-  local *F;
-  open(F, "|smbpasswd $user\n");
-  print F "
-$passwd\n
-$passwd\n
-\n
-";
-  close F;
+  my $F;
+  open($F, '|' . qq(smbpasswd $user -s));
+  print $F "$passwd\n";
+  print $F "$passwd\n";
+  close $F;
 }
 
 sub add_data_share_list {
