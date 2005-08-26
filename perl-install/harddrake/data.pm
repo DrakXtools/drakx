@@ -304,7 +304,7 @@ our @tree =
      {
       class => "MEMORY",
       string => N("Memory"),
-      icon => "memory.png",
+      icon => "hw-memory.png",
       configurator => "",
       detector => sub { grep { member($_->{name}, 'Cache', 'Memory Module') } detect_devices::dmidecode() },
       checked_on_boot => 0,
@@ -391,7 +391,7 @@ our @tree =
      {
       class => "PCMCIA_CONTROLLER",
       string => N("PCMCIA controllers"),
-      icon => "scsi.png",
+      icon => "hw-pcmcia.png",
       configurator => "",
       detector => sub { f(detect_devices::pcmcia_controller_probe()) },
       checked_on_boot => 1,
@@ -418,7 +418,7 @@ our @tree =
      {
       class => "USB_HUB",
       string => N("USB ports"),
-      icon => "usb.png",
+      icon => "hw-usb.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /Hub/ } @devices) },
       checked_on_boot => 0,
@@ -427,7 +427,7 @@ our @tree =
      {
       class => "SMB_CONTROLLER",
       string => N("SMBus controllers"),
-      icon => "usb.png",
+      icon => "hw-smbus.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) },
       checked_on_boot => 0,
@@ -445,7 +445,7 @@ our @tree =
      {
       class => "KEYBOARD",
       string => N("Keyboard"),
-      icon => "usb.png",
+      icon => "hw-keyboard.png",
       configurator => "$sbindir/keyboarddrake",
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i } @devices),
