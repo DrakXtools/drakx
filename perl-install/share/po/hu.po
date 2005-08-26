@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-26 17:41+0200\n"
+"PO-Revision-Date: 2005-08-26 22:52+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -10306,7 +10306,7 @@ msgstr "Kézi"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Nem található olyan eszköz, amely támogatná a(z) \"%s\" Ndiswrapper-meghajtót."
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10316,12 +10316,12 @@ msgstr "Válassza ki a windowsos meghajtóprogramot (.inf-fájl)"
 #: network/ndiswrapper.pm:42
 #, c-format
 msgid "Unable to install the %s ndiswrapper driver!"
-msgstr ""
+msgstr "Nem sikerült telepíteni a(z) \"%s\" Ndiswrapper-meghajtót."
 
 #: network/ndiswrapper.pm:89
 #, c-format
 msgid "Unable to load the ndiswrapper module!"
-msgstr ""
+msgstr "Nem sikerült betölteni az Ndiswrapper modult."
 
 #: network/ndiswrapper.pm:95
 #, c-format
@@ -10329,11 +10329,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"A kijelölt eszköz már be lett állítva a(z) \"%s\" meghajtóprogrammal.\n"
+"Valóban szeretne Ndiswrapper-meghajtóprogramot használni?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Az Ndiswrapper-felület nem található."
 
 #: network/netconnect.pm:69 network/netconnect.pm:485
 #: network/netconnect.pm:492
@@ -10490,17 +10492,17 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:154
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "Nyílt WEP"
 
 #: network/netconnect.pm:155
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "Korlátozott WEP"
 
 #: network/netconnect.pm:156
 #, c-format
 msgid "WPA Pre-Shared Key"
-msgstr ""
+msgstr "WPA előzetesen megosztott kulcs"
 
 # címfelirat
 #: network/netconnect.pm:242 standalone/drakconnect:56
@@ -10936,6 +10938,8 @@ msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
+"A következő protokollok használhatók egy helyi hálózati kapcsolat beállításához. "
+"Válassza ki, melyiket szeretné használni."
 
 #: network/netconnect.pm:882
 #, c-format
@@ -11045,7 +11049,7 @@ msgstr "Ndiswrapper-meghajtó kiválasztása"
 #: network/netconnect.pm:973
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "A(z) \"%s\" Ndiswrapper-meghajtóprogram használata"
 
 #: network/netconnect.pm:973
 #, c-format
@@ -11110,7 +11114,7 @@ msgstr "Titkosítási mód"
 #: network/netconnect.pm:1026
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Roaming engedélyezése a hozzáférési pontra"
 
 #: network/netconnect.pm:1027 standalone/drakconnect:406
 #, c-format
@@ -11265,32 +11269,32 @@ msgstr ""
 #: network/netconnect.pm:1120
 #, c-format
 msgid "DVB configuration"
-msgstr ""
+msgstr "DVB-beállítás"
 
 #: network/netconnect.pm:1121
 #, c-format
 msgid "DVB Adapter"
-msgstr ""
+msgstr "DVB-adapter"
 
 #: network/netconnect.pm:1138
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
+msgstr "A DVB-adapter beállításai"
 
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Adapter card"
-msgstr ""
+msgstr "Adapterkártya"
 
 #: network/netconnect.pm:1142
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "Hálózati demux"
 
 #: network/netconnect.pm:1143
 #, c-format
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: network/netconnect.pm:1171
 #, c-format
@@ -11656,14 +11660,14 @@ msgstr ""
 "%s"
 
 #: network/thirdparty.pm:309
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "A rendszerben található betűtípusok eltávolítása"
+msgstr "Nem található \"%s\" a Windows-rendszerben."
 
 #: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Nem található Windows-rendszer."
 
 #: network/thirdparty.pm:321
 #, c-format
@@ -11724,12 +11728,12 @@ msgstr "A firmware másolása megtörtént"
 #: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
-msgstr ""
+msgstr "A szükséges szoftver és meghajtóprogramok keresése..."
 
 #: network/thirdparty.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Kis türelmet - az eszközök azonosítása és beállítása..."
+msgstr "Kis türelmet - az eszközök beállítása..."
 
 #: partition_table.pm:391
 #, c-format
@@ -12551,17 +12555,17 @@ msgstr "A CUPS újraindítása..."
 #: printer/printerdrake.pm:614
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr ""
+msgstr "Felugró ablakok engedélyezése - a beállítás és a csomagtelepítés megszakítható"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid "No pop-up windows, canceling setup and package installation not possible"
-msgstr ""
+msgstr "Felugró ablakok tiltása - a beállítás és a csomagtelepítés nem szakítható meg"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Automatikus nyomtatófelderítés"
+msgstr "Automatikus nyomtatóadminisztráció"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12569,41 +12573,43 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Itt beállítható, hogy milyen nyomtatóadminisztrációs tevékenységek "
+"legyenek automatikusan elvégezve."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Távoli nyomtató beállítása"
+msgstr "Új nyomtatók automatikus beállítása"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (csatlakoztassa az összes nyomtatót, és kapcsolja be azokat)\n"
+msgstr "egy USB-s nyomtató csatlakoztatását és bekapcsolását követően"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Ez a nyomtató le van tiltva"
+msgstr "a PrinterDrake program elindításakor"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Az automatikus nyomtatóbeállítás üzemmódja:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Az elérhető nyomtatók"
+msgstr "A letiltott nyomtatók ismételt engedélyezése"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Nyomtatási rendszer módosítása"
+msgstr "a nyomtatási rendszer indításakor"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "A(z) \"%s\" nyomtató használata és karbantartása"
+msgstr "A(z) \"%s\" nyomtatóval való kommunikációs hibák kezelése"
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12612,36 +12618,41 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Itt beállítható, hogy hogyan legyenek kezelve a számítógép és a(z) "
+"\"%s\" nyomtató közti kommunikáció hibái (példa: a nyomtató "
+"nincs bekapcsolva)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "A portnak egész számnak kell lennie!"
+msgstr ""
+"Az ismételt próbálkozások száma legalább 1 kell, hogy legyen, továbbá "
+"csak egész szám lehet."
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "A várakozási időnek pozitív egész számnak kell lennie"
+msgstr "Az ismételt próbálkozások közti időnek pozitív egész számnak kell lennie."
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "A nyomtató letiltása"
+msgstr "A nyomtató ne legyen letiltva"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Végtelen számú ismételt próbálkozás"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Gombok száma"
+msgstr "Ismételt próbálkozások száma"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Az ismételt próbálkozások közti idő (másodperc)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12827,7 +12838,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not do automatic printer setup and do not do it again"
-msgstr ""
+msgstr "Ne legyen automatikus nyomtatóbeállítás és ne hajtsa ismét végre"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12837,17 +12848,17 @@ msgstr "Új nyomtatók keresése..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "Ne legyen újabb automatikus nyomtatóbeállítás"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Nyomtató nem található."
+msgstr "A rendszer új nyomtatókat talált"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Nyomtató nem található."
+msgstr "A rendszer új nyomtatót talált"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12945,9 +12956,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Távoli adminisztráció"
+msgstr "Automatikus adminisztráció beállítása"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -14199,9 +14210,9 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Canon LBP-460/660 beállítása"
 
 #: printer/printerdrake.pm:3589
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Canon LBP-460/660 beállítása"
+msgstr "Canon LBP-810/1120 (CAPT) beállítása"
 
 #: printer/printerdrake.pm:3590
 #, fuzzy, c-format
@@ -15207,9 +15218,9 @@ msgid "Disable Printer"
 msgstr "A nyomtató letiltása"
 
 #: printer/printerdrake.pm:5480 printer/printerdrake.pm:5574
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "A nyomtató kapcsolódási típusa"
+msgstr "A nyomtatóval való kommunikáció hibáinak kezelése"
 
 #: printer/printerdrake.pm:5481 printer/printerdrake.pm:5578
 #, c-format
@@ -22155,147 +22166,147 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Ahhoz, hogy módosítást végezhessen, vegyen fel egy gépet."
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Részletes információ"
+msgstr "Módosítsa az információt"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Részletes információ"
+msgstr "Törölje az információt"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Részletes információ"
+msgstr "Adjon meg információt"
 
 #: standalone/drakhosts:115
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "IP-cím:"
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Gépnév:"
 
 #: standalone/drakhosts:117
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Gép-álnevek:"
 
 #: standalone/drakhosts:123
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Érvényes IP-címet adjon meg."
 
 #: standalone/drakhosts:129
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "Ez az IP-cím már szerepel a(z) \"%s\" fájlban."
 
 #: standalone/drakhosts:198
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Gép-álnevek"
 
 #: standalone/drakhosts:239
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS - gépdefiníciók kezelése"
 
 #: standalone/drakhosts:248
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Nem sikerült felvenni a gépet."
 
 #: standalone/drakhosts:255
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Nem sikerült módosítani a gépet."
 
 #: standalone/drakhosts:262
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Nem sikerült eltávolítani a gépet."
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Az összes felhasználó engedélyezése"
+msgstr "Engedélyezett címek"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:61 standalone/net_applet:183
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Tűzfal"
+msgstr "Interaktív tűzfal"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "Napló"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Teljes törlés"
+msgstr "Naplók törlése"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Feketelista"
 
 #: standalone/drakids:69
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Eltávolítás LVM-ből"
+msgstr "Eltávolítás a feketelistáról"
 
 #: standalone/drakids:70
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Áthelyezés a fehérlistára"
 
 #: standalone/drakids:74 standalone/net_applet:444
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Fehérlista"
 
 #: standalone/drakids:78
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Eltávolítás LVM-ből"
+msgstr "Eltávolítás a fehérlistáról"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
 #: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:183
 #: standalone/net_applet:353
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
+msgstr "Nem sikerült kapcsolódni a szolgáltatáshoz"
 
 #: standalone/drakids:191
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "Állapot"
+msgstr "Dátum"
 
 #: standalone/drakids:192
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "A támadás részletei"
+msgstr "Támadó"
 
 #: standalone/drakids:193
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "A támadás típusa: %s"
+msgstr "A támadás típusa"
 
 #: standalone/drakids:194
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
-msgstr "Szolgáltatások"
+msgstr "Szolgáltatás"
 
 #: standalone/drakids:195
 #, c-format
