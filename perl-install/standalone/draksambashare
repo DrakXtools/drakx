@@ -37,9 +37,9 @@ my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
 my $icon_path = "/usr/lib/libDrakX/icons";
-my $fileshare_icon = "$icon_path/smbnfs_server.png";
-my $printershare_icon = "$icon_path/printerdrake.png";
-my $sambauser_icon = "$icon_path/ic82-users-40.png";
+my $fileshare_icon = "$icon_path/IC-winacces2-16.png";
+my $printershare_icon = "$icon_path/IC-sambaprt-16.png";
+my $sambauser_icon = "$icon_path/ic82-users-16.png";
 my $pixbuf_file = Gtk2::Gdk::Pixbuf->new_from_file($fileshare_icon);
 my $pixbuf_printer = Gtk2::Gdk::Pixbuf->new_from_file($printershare_icon);
 my $pixbuf_user = Gtk2::Gdk::Pixbuf->new_from_file($sambauser_icon);
@@ -1188,7 +1188,7 @@ $nb->set_show_border(0);
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, $menu,
-		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakSamba manage Samba shares"))),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('IC-winacces1-48', N("DrakSamba manage Samba shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter Samba shares.")),
 		 1, $nb,
 		 0, $okcancel,
