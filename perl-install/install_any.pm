@@ -1795,9 +1795,9 @@ sub media_browser {
 sub log_sizes {
     my ($o) = @_;
     my @df = MDK::Common::System::df($o->{prefix});
-    log::l(sprintf "Installed: %s(df), %s(rpm)",
-	   formatXiB($df[0] - $df[1], 1024),
-	   formatXiB(sum(run_program::rooted_get_stdout($o->{prefix}, 'rpm', '-qa', '--queryformat', '%{size}\n')))) if -x "$o->{prefix}/bin/rpm";
+    log::l(sprintf "Installed: %dMB(df), %dMB(rpm)",
+	   ($df[0] - $df[1]) / 1024,
+	   sum(run_program::rooted_get_stdout($o->{prefix}, 'rpm', '-qa', '--queryformat', '%{size}\n')) / 1024 / 1024) if -x "$o->{prefix}/bin/rpm";
 }
 
 sub X_options_from_o {
