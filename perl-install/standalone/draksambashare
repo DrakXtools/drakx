@@ -36,27 +36,37 @@ use Libconf::Glueconf::Samba::Smb_conf;
 my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
-local *COLUMN_SHARE_NAME; use constant COLUMN_SHARE_NAME => 0;
-local *COLUMN_PATH; use constant COLUMN_PATH => 1;
-local *COLUMN_COMMENT; use constant COLUMN_COMMENT => 2;
-local *COLUMN_BROWSEABLE; use constant COLUMN_BROWSEABLE => 3;
-local *COLUMN_PUBLIC; use constant COLUMN_PUBLIC => 4;
-local *COLUMN_WRITABLE; use constant COLUMN_WRITABLE => 5;
-local *COLUMN_CREATE_MASK; use constant COLUMN_CREATE_MASK => 6;
-local *COLUMN_DIRECTORY_MASK; use constant COLUMN_DIRECTORY_MASK => 7;
-local *COLUMN_READ_LIST; use constant COLUMN_READ_LIST => 8;
-local *COLUMN_WRITE_LIST; use constant COLUMN_WRITE_LIST => 9;
-local *COLUMN_ADMIN_USERS; use constant COLUMN_ADMIN_USERS => 10;
-local *COLUMN_VALID_USERS; use constant COLUMN_VALID_USERS => 11;
-local *COLUMN_INHERIT_PERMISSIONS; use constant COLUMN_INHERIT_PERMISSIONS => 12;
-local *COLUMN_HIDE_DOT_FILES; use constant COLUMN_HIDE_DOT_FILES => 13;
-local *COLUMN_HIDE_FILES; use constant COLUMN_HIDE_FILES => 14;
-local *COLUMN_PRESERVE_CASE; use constant COLUMN_PRESERVE_CASE => 15;
-local *COLUMN_FORCE_CREATE_MODE; use constant COLUMN_FORCE_CREATE_MODE => 16;
-local *COLUMN_FORCE_GROUP; use constant COLUMN_FORCE_GROUP => 17;
-local *COLUMN_DEFAULT_CASE; use constant COLUMN_DEFAULT_CASE => 18;
-
 my $printer_list = create_printer_list();
+my $share_list = create_share_list();
+
+sub create_share_list() {
+  my $share_list = Gtk2::SimpleList->new(N("Share name") => 'text',
+					 N("Share directory") => 'text',
+					 N("Comment") => 'text',
+					 N("Browseable") => 'text',
+					 N("Public") => 'text',
+					 N("Writable") => 'text',
+					 N("Create mask") => 'text',
+					 N("Directory mask") => 'text',
+					 N("Read list") => 'text',
+					 N("Write list") => 'text',
+					 N("Admin users") => 'text',
+					 N("Valid users") => 'text',
+					 N("Inherit Permissions") => 'text',
+					 N("Hide dot files") => 'text',
+					 N("Hide files") => 'text',
+					 N("Preserve case") => 'text',
+					 N("Force create mode") => 'text',
+					 N("Force group") => 'text',
+					 N("Default case") => 'text',
+					);
+  $share_list->set_headers_clickable(1);
+  foreach (0, 1, 2, 3) {
+    $share_list->get_column($_)->signal_connect('clicked', \&sort_by_column, $share_list->get_model);
+    $share_list->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
+  }
+  $share_list;
+}
 
 sub create_printer_list() {
    my $printer_list = Gtk2::SimpleList->new(N("Printer name") => 'text',
@@ -321,8 +331,6 @@ sub printers_section() {
 }
 
 sub add_entry {
-  my ($treeview) = @_;
-  my $model = $treeview->get_model;
   use wizards;
   my ($wiz_addshare_name, $wiz_addshare_comment, $wiz_addshare_path, $wiz_addshare_browseable, $wiz_addshare_public);
   my $w = wizards->new;
@@ -353,13 +361,11 @@ sub add_entry {
 				     }
 				   },
 				   post => sub {
-				     # update iter
-				     my $iter = $model->append;
-				     $model->set($iter,
-						 COLUMN_SHARE_NAME, $wiz_addshare_name,
-						 COLUMN_PATH, $wiz_addshare_path,
-						 COLUMN_COMMENT, $wiz_addshare_comment,
-						);
+				     push @{$printer_list->{data}}, [
+								     $wiz_addshare_name,
+								     $wiz_addshare_path,
+								     $wiz_addshare_comment,
+								    ];
 				     my $share = $wiz_addshare_name;
 				     # update listshare
 				     push @listshare, {
@@ -495,18 +501,16 @@ sub modify_printers_entry {
 }
 
 sub modify_entry {
-  my ($treeview) = @_;
-  my $model = $treeview->get_model;
-
+  my ($selected) = @_;
   my ($dir, $i, $path, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
 
   $share_name = Gtk2::Label->new;
-  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask;
+  $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask, $hide_files;
   $_ = Gtk2::Entry->new foreach $read_list, $write_list, $admin_users, $valid_users, $force_group, $force_create_mode;
-  $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_files, $hide_dot_files, $inherit_permissions;
+  $_ = Gtk2::OptionMenu->new foreach $browseable, $public, $writable, $default_case, $preserve_case, $hide_dot_files, $inherit_permissions;
 
   $default_case->set_popdown_strings(@default_case);
-  $_->set_popdown_strings(@yesno) foreach $browseable, $public, $writable, $hide_files, $hide_dot_files, $preserve_case, $inherit_permissions;
+  $_->set_popdown_strings(@yesno) foreach $browseable, $public, $writable, $hide_dot_files, $preserve_case, $inherit_permissions;
 
   my $file_dialog = $fdwidget->($dir, "");
   my $button = Gtk2::Button->new_from_stock('gtk-open');
@@ -515,31 +519,27 @@ sub modify_entry {
   my $w = ugtk2->new(N("DrakSamba entry"));
   $w->{window}->set_modal(1);
 
-  my $iter = $treeview->get_selection->get_selected;
-  $iter or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
-  $path = $model->get_path($iter);
-  $i = ($path->get_indices)[0];
+  $selected or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
 
-  $share_name->set_text($listshare[$i]{share_name});
-  $dir->set_text($listshare[$i]{path});
-  $comment->set_text($listshare[$i]{comment});
-  $browseable->set_text($listshare[$i]{browseable});
-  $public->set_text($listshare[$i]{public});
-  $writable->set_text($listshare[$i]{writable});
-
-  $create_mask->set_text($listshare[$i]{create_mask});
-  $directory_mask->set_text($listshare[$i]{directory_mask});
-  $read_list->set_text($listshare[$i]{read_list});
-  $write_list->set_text($listshare[$i]{write_list});
-  $admin_users->set_text($listshare[$i]{admin_users});
-  $valid_users->set_text($listshare[$i]{valid_users});
-  $force_group->set_text($listshare[$i]{force_group});
-  $force_create_mode->set_text($listshare[$i]{force_create_mode});
-  $default_case->set_text($listshare[$i]{default_case});
-  $preserve_case->set_text($listshare[$i]{preserve_case});
-  $hide_files->set_text($listshare[$i]{hide_files});
-  $hide_dot_files->set_text($listshare[$i]{hide_dot_files});
-  $inherit_permissions->set_text($listshare[$i]{inherit_permissions});
+  $share_name->set_text($share_list->{data}[$selected][0]);
+  $dir->set_text($share_list->{data}[$selected][1]);
+  $comment->set_text($share_list->{data}[$selected][2]);
+  $browseable->set_text($share_list->{data}[$selected][3]);
+  $public->set_text($share_list->{data}[$selected][4]);
+  $writable->set_text($share_list->{data}[$selected][5]);
+  $create_mask->set_text($share_list->{data}[$selected][6]);
+  $directory_mask->set_text($share_list->{data}[$selected][7]);
+  $read_list->set_text($share_list->{data}[$selected][8]);
+  $write_list->set_text($share_list->{data}[$selected][9]);
+  $admin_users->set_text($share_list->{data}[$selected][10]);
+  $valid_users->set_text($share_list->{data}[$selected][11]);
+  $inherit_permissions->set_text($share_list->{data}[$selected][12]);
+  $hide_dot_files->set_text($share_list->{data}[$selected][13]);
+  $hide_files->set_text($share_list->{data}[$selected][14]);
+  $preserve_case->set_text($share_list->{data}[$selected][15]);
+  $force_create_mode->set_text($share_list->{data}[$selected][16]);
+  $force_group->set_text($share_list->{data}[$selected][17]);
+  $default_case->set_text($share_list->{data}[$selected][18]);
 
   my $expander_user = Gtk2::Expander->new('User options (user access, mask option, force mode)');
   $expander_user->add(gtkpack_(Gtk2::HBox->new,
@@ -623,28 +623,29 @@ sub modify_entry {
 								       err_dialog(N("Error"), N("Create mask, create mode and directory mask should be numeric. ie: 0755.")) and return 1;
 								   }
 							       }
-							       # update gui treeview
-							       $model->set($iter,
-									   COLUMN_SHARE_NAME, $share_name->get_text,
-									     COLUMN_PATH, $dir->get_text,
-									     COLUMN_COMMENT, $comment->get_text,
-									     COLUMN_BROWSEABLE, $browseable->get_text,
-									     COLUMN_PUBLIC, $public->get_text,
-									     COLUMN_WRITABLE, $writable->get_text,
-									     COLUMN_CREATE_MASK, $create_mask->get_text,
-									     COLUMN_DIRECTORY_MASK, $directory_mask->get_text,
-									     COLUMN_READ_LIST, $read_list->get_text,
-									     COLUMN_WRITE_LIST, $write_list->get_text,
-									     COLUMN_ADMIN_USERS, $admin_users->get_text,
-									     COLUMN_VALID_USERS, $valid_users->get_text,
-									     COLUMN_HIDE_DOT_FILES, $hide_dot_files->get_text,
-									     COLUMN_HIDE_FILES, $hide_files->get_text,
-									     COLUMN_PRESERVE_CASE, $preserve_case->get_text,
-									     COLUMN_FORCE_CREATE_MODE, $force_create_mode->get_text,
-									     COLUMN_FORCE_GROUP, $force_group->get_text,
-									     COLUMN_DEFAULT_CASE, $default_case->get_text,
-									     COLUMN_INHERIT_PERMISSIONS, $inherit_permissions->get_text,
-									     );
+							       # update gui SimpleList
+                                                               remove_entry($selected, $share_list);
+							       push @{$share_list->{data}}, [
+											     $share_name->get_text,
+											     $dir->get_text,
+											     $comment->get_text,
+											     $browseable->get_text,
+											     $public->get_text,
+											     $writable->get_text,
+											     $create_mask->get_text,
+											     $directory_mask->get_text,
+											     $read_list->get_text,
+											     $write_list->get_text,
+											     $admin_users->get_text,
+											     $valid_users->get_text,
+											     $hide_dot_files->get_text,
+											     $hide_files->get_text,
+											     $preserve_case->get_text,
+											     $force_create_mode->get_text,
+											     $force_group->get_text,
+											     $default_case->get_text,
+											     $inherit_permissions->get_text,
+											    ];
 							       # update $samba with the new value
 							       # $samba->{$share};
 							       $samba->{$share}{path} = $dir->get_text;
@@ -665,34 +666,38 @@ sub modify_entry {
 							       $force_group->get_text and $samba->{$share}{'force group'} = $force_group->get_text || delete $samba->{$share}{'force group'};
 							       $default_case->get_text and $samba->{$share}{'default case'} = $default_case->get_text || delete $samba->{$share}{'default case'};
 							       $inherit_permissions->get_text and $samba->{$share}{'inherit permissions'} = $inherit_permissions->get_text || delete $samba->{$share}{'inherit permissions'};
+
+							       # update listshare
+							       push @listshare, {
+										 share_name => $share,
+										 path => $samba->{$share}{path},
+										 comment => $samba->{$share}{comment},
+										 browseable => $samba->{$share}{browseable},
+										 public => $samba->{$share}{public},
+										 writable => $samba->{$share}{writable},
+										 create_mask => $samba->{$share}{'create mask'},
+										 directory_mask => $samba->{$share}{'directory mask'},
+										 read_list => $samba->{$share}{'read list'},
+										 write_list => $samba->{$share}{'write list'},
+										 admin_users => $samba->{$share}{'admin users'},
+										 valid_users => $samba->{$share}{'valid users'},
+										 hide_dot_files => $samba->{$share}{'hide dot files'},
+										 hide_files => $samba->{$share}{'hide files'},
+										 preserve_case => $samba->{$share}{'preserve case'},
+										 force_create_mode => $samba->{$share}{'force create mode'},
+										 force_group => $samba->{$share}{'force group'},
+										 default_case => $samba->{$share}{'default case'},
+										 inherit_permissions => $samba->{$share}{'inherit permissions'},
+										};
+
 							       $w->destroy;
 							     },
 									 },
 									),
-							 ]
-		),
-	 );
+							]
+	       ),
+	);
   $w->{window}->show_all;
-}
-
-sub remove_entry {
-  my ($treeview, $type) = @_;
-  my $model = $treeview->get_model;
-  my $iter = $treeview->get_selection->get_selected;
-  my $share;
-    if ($iter) {
-      my $path = $model->get_path($iter);
-      my $i = ($path->get_indices)[0];
-      if ($type eq 'share') {
-	$share = $listshare[$i]{share_name};
-      } else {
-	$share = $listprinters[$i]{share_name};
-      }
-      ask_okcancel("Remove entry ?", "Remove $share") or return;
-      $model->remove($iter);
-      if ($type eq 'share') { splice @listshare, $i, 1 } else { splice @listshare, $i, 1 }
-      delete $samba->{$share};
-    }
 }
 
 sub remove_entry {
@@ -703,41 +708,38 @@ sub remove_entry {
   delete $samba->{$share_name};
 }
 
-sub create_model() {
+sub add_data_share_list {
+  my ($share_list) = @_;
   get_samba_share();
-  my $model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String",  "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
-  foreach my $a (@listshare) {
-    my $iter = $model->append;
-    $model->set($iter,
-		COLUMN_SHARE_NAME, $a->{share_name},
-		COLUMN_PATH, $a->{path},
-		COLUMN_COMMENT, $a->{comment},
-		COLUMN_BROWSEABLE, $a->{browseable},
-		COLUMN_PUBLIC, $a->{public},
-		COLUMN_WRITABLE, $a->{writable},
-		COLUMN_CREATE_MASK, $a->{create_mask},
-		COLUMN_DIRECTORY_MASK, $a->{directory_mask},
-		COLUMN_READ_LIST, $a->{read_list},
-		COLUMN_WRITE_LIST, $a->{write_list},
-		COLUMN_ADMIN_USERS, $a->{admin_users},
-		COLUMN_VALID_USERS, $a->{valid_users},
-		COLUMN_INHERIT_PERMISSIONS, $a->{inherit_permissions},
-		COLUMN_HIDE_DOT_FILES, $a->{hide_dot_files},
-		COLUMN_HIDE_FILES, $a->{hide_files},
-		COLUMN_PRESERVE_CASE, $a->{preserve_case},
-		COLUMN_FORCE_CREATE_MODE, $a->{force_create_mode},
-		COLUMN_FORCE_GROUP, $a->{force_group},
-		COLUMN_DEFAULT_CASE, $a->{default_case},
-		);
-	     }
-  return $model;
+  foreach my $data (@listshare) {
+    push @{$share_list->{data}}, [
+				  $data->{share_name},
+				  $data->{path},
+				  $data->{comment},
+				  $data->{browseable},
+				  $data->{public},
+				  $data->{writable},
+				  $data->{create_mask},
+				  $data->{directory_mask},
+				  $data->{read_list},
+				  $data->{write_list},
+				  $data->{admin_users},
+				  $data->{valid_users},
+				  $data->{inherit_permissions},
+				  $data->{hide_dot_files},
+				  $data->{hide_files},
+				  $data->{preserve_case},
+				  $data->{force_create_mode},
+				  $data->{force_group},
+				  $data->{default_case},
+				 ];
+  }
 }
 
 sub add_data_printer_list {
   my ($printer_list) = @_;
   get_samba_printers();
   foreach my $data (@listprinters) {
-    print "$data->{share_name}\n";
     push @{$printer_list->{data}}, [
 				    $data->{share_name},
 				    $data->{path},
@@ -757,22 +759,11 @@ sub add_data_printer_list {
   }
 }
 
-# add colum to model
-sub add_columns {
-  my $treeview = shift;
-  each_index {
-    my $renderer = Gtk2::CellRendererText->new;
-    $renderer->set_data(column => $::i);
-    $treeview->insert_column_with_attributes(-1, $_, $renderer, 'text' => $::i);
-  } N("Share name"), N("Share directory"), N("Comment"), N("Browseable"), N("Public"), N("Writable"), N("Create mask"), N("Directory mask"), N("Read list"), N("Write list"), N("Admin users"), N("Valid users"), N("Inherit Permissions"), N("Hide dot files"), N("Hide files"), N("Preserve case"), N("Force create mode"), N("Force group"), N("Default case");
-}
-
-
 ###############
 # Main Program
 ###############
 # create model
-my $model = create_model();
+add_data_share_list($share_list);
 add_data_printer_list($printer_list);
 
 my $window = ugtk2->new("DrakSamba $version");
@@ -782,17 +773,12 @@ $window->{rwindow}->set_position('center') if !$::isEmbedded;
 my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 
-my $treeview = Gtk2::TreeView->new_with_model($model);
-add_columns($treeview);
-
-$_->set_rules_hint(1) foreach $treeview;
-$_->get_selection->set_mode('single') foreach $treeview;
-
 # double clic and popup modify window
-$treeview->signal_connect(button_press_event => sub {
-			    my (undef, $event) = @_;
-			    $treeview->get_selection->get_selected and modify_entry($treeview) if $event->type eq '2button-press';
-			  });
+$share_list->signal_connect(button_press_event => sub {
+			      my (undef, $event) = @_;
+			      my ($selected) = $share_list->get_selected_indices;
+			      $selected and modify_entry($selected) if $event->type eq '2button-press';
+			    });
 
 $printer_list->signal_connect(button_press_event => sub {
 				my (undef, $event) = @_;
@@ -813,32 +799,34 @@ my $okcancel = create_okcancel({
 			      );
 
 gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
-                                                      1, create_scrolled_window($treeview),
+                                                      1, create_scrolled_window($share_list),
 						      0, gtkpack_(create_vbox('start'),
 								  0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-								      eval { add_entry($treeview) };
-								      my $err = $@;
-								      $::WizardWindow->destroy if defined $::WizardWindow;
-								      undef $::WizardWindow;
-								      if ($err && $err !~ /wizcancel/) {
-									  err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
-								      }
-								  }),
+											 eval { add_entry() };
+											 my $err = $@;
+											 $::WizardWindow->destroy if defined $::WizardWindow;
+											 undef $::WizardWindow;
+											 if ($err && $err !~ /wizcancel/) {
+											   err_dialog(N("Error"), N("Failed to add Samba share.") . "\n\n" . $err);
+											 }
+										       }),
 								  0, Gtk2::HSeparator->new,
 								  0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-								      eval { modify_entry($treeview) };
-								      my $err = $@;
-								      if ($err) {
-									  err_dialog(N("Error"), N("Failed to Modify Samba share.") . "\n\n" . $err);
-								      }
-								  }),
+											 my ($selected) = $share_list->get_selected_indices;
+											 eval { modify_entry($selected, $share_list) };
+											 my $err = $@;
+											 if ($err) {
+											   err_dialog(N("Error"), N("Failed to Modify Samba share.") . "\n\n" . $err);
+											 }
+										       }),
 								  0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-								      eval { remove_entry($treeview, "share") };
-								      my $err = $@;
-								      if ($err) {
-									  err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
-								      }
-								  }),
+											 my ($selected) = $share_list->get_selected_indices;
+											 eval { remove_entry($selected, $share_list) };
+											 my $err = $@;
+											 if ($err) {
+											   err_dialog(N("Error"), N("Failed to remove a Samba share.") . "\n\n" . $err);
+											 }
+										       }),
 								 ),
 						     ),
                gtkshow(Gtk2::Label->new(N("File Share"))));
