@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-07-31 16:08+0700\n"
+"PO-Revision-Date: 2005-08-26 11:34+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: ../move/move.pm:292
 #, c-format
 msgid "Which USB key do you want to format?"
-msgstr "USB mana yang ingin di format?"
+msgstr "USB mana yang hendak diformat?"
 
 #: ../move/move.pm:296
 #, c-format
@@ -3093,10 +3093,9 @@ msgid "Enabling swap partition %s"
 msgstr "Aktifkan partisi swap %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr ""
-"Anda tidak dapat menggunakan sistem file terenkripsi untuk mount point %s"
+msgstr "Gunakan sistem file terenkripsi"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3178,10 +3177,10 @@ msgstr ""
 "opsi)."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
-"Mengaktifkan akuntasi quota grup dan memaksa batas disk secara opsional"
+"Mengaktifkan akuntasi quota pengguna dan memaksa batas disk secara opsional"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -10419,7 +10418,7 @@ msgstr "Pembobolan katasandi"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "Serangan \"%s\""
 
 #: network/ifw.pm:141
 #, c-format
@@ -10437,9 +10436,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "Serangan password cracking telah dicoba oleh %s."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "Serangan port scanning telah dicoba oleh %s."
+msgstr "Sebuah serangan \"%s\" telah dicoba oleh %s."
 
 #: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
 #: network/netconnect.pm:547 network/netconnect.pm:690
@@ -11162,7 +11161,7 @@ msgstr "Metrik"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Aktifkan tunnel IPv6 ke IPv4"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11285,7 +11284,7 @@ msgstr "Mode enkripsi"
 #: network/netconnect.pm:1026
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Ijinkan roaming akses point"
 
 #: network/netconnect.pm:1027 standalone/drakconnect:406
 #, c-format
@@ -12089,9 +12088,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Printer jaringan (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "Printer pada server SMB/windows 95/98/NT"
+msgstr "Printer pada server SMB/Windows"
 
 #: printer/main.pm:33
 #, c-format
@@ -12705,60 +12704,61 @@ msgstr "Menjalankan ulang CUPS..."
 #: printer/printerdrake.pm:614
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr ""
+msgstr "Ijinkan jendela pop-up membatalkan setup dan installasi paket dimungkinkan"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, canceling setup and package installation not possible"
-msgstr ""
+msgstr "Tanpa jendela pop-up, membatalkan setup dan installasi paket tidak dimungkinkan"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Deteksi otomatis printer"
+msgstr "Administrasi otomatis printer"
 
 #: printer/printerdrake.pm:623
 #, c-format
 msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
-msgstr ""
+msgstr "Disini Anda bisa mengkonfigurasikan tugas-tugas administrasi printer "
+"yang seharusnya dilakukan secara otomatis"
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Konfigurasi printer remote"
+msgstr "Lakukan konfigurasi otomatis pada printer baru"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (Pastikan semua printer Anda terhubung dan hidup).\n"
+msgstr "ketika sebuah printer USB terhubung dan dinyalakan"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Printer ini tidak aktif"
+msgstr "ketika Printerdrake dijalankan"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Mode untuk setup otomatis printer:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Printer yang tersedia"
+msgstr "Mengaktifkan kembali printer yang non-aktif"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Ubah sistem pencetakan"
+msgstr "ketika sistem pencetakan dijalankan"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Menggunakan/Perawatan printer \"%s\""
+msgstr "Kesalahan penanganan kesalahan untuk printer \"%s\""
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12767,36 +12767,39 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Disini Anda bisa mengkonfigurasi bagaimana kesalahan selama komunikasi "
+"antara komputer dan printer \"%s\" ditangani (misalnya jika printer "
+"tidak diaktifkan)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Nomor port harus berupa bilangan bulat"
+msgstr "Jumlah percobaan harus berupa bilangan integer dan minimal 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Timeout harus berupa bilangan integer positif!"
+msgstr "Jeda antar percobaan harus berupa bilangan integer positif!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Nonaktifkan Printer"
+msgstr "Jangan nonaktifkan printer"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Percobaan kembali seringkali terjadi"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Jumlah tombol"
+msgstr "Jumlah percobaan"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Jeda antar percobaan (dalam detik)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12806,7 +12809,7 @@ msgstr "Pilih koneksi Printer"
 #: printer/printerdrake.pm:746
 #, c-format
 msgid "How is the printer connected?"
-msgstr "Bagaimana printer ini disambung ke komputer?"
+msgstr "Bagaimana printer ini tersambung dengan komputer?"
 
 #: printer/printerdrake.pm:748
 #, c-format
@@ -12986,7 +12989,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not do automatic printer setup and do not do it again"
-msgstr ""
+msgstr "Jangan lakukan setup printer otomatis dan jangan lakukan lagi"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12996,17 +12999,17 @@ msgstr "Mencari printer baru..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "Jangan lakukan setup printer otomatis lagi"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#,  c-format
 msgid "New printers found"
 msgstr "Tidak ada printer yang ditemukan!"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Tidak ada printer yang ditemukan!"
+msgstr "Printer baru ditemukan"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -13015,6 +13018,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"Printer-printer baru berikut ditemukan dan Printerdrake dapat secara otomatis "
+"melakukan setup untuk Anda. Jika Anda tidak ingin semua di-setup, hapus yang "
+"yang akan dilewati, atau klik \"Batal\" untuk membatalkan semua.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -13023,6 +13029,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"Printer-printer baru berikut ditemukan dan printerdrake dapat secara otomatis "
+"melakukan setup untuk Anda. Jika Anda tidak ingin semua di-setup, hapus pilihan "
+"atau klik \"Batal\".\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -13030,6 +13039,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Perhatikan bahwa untuk beberapa model printer, paket tambahan harus "
+"diinstall. Pastikan untuk membawa media installasi Anda.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -13094,6 +13105,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Sekarang Anda telah menonaktifkan setup printer otomatis.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -13101,11 +13114,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Anda dapat mengaktifkannya kembali dengan memilih \"%s\" -> \"%s\" pada menu "
+"utama Printerdrake"
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Administrasi remote"
+msgstr "Konfigurasi Administrasi Otomatis"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -13114,6 +13129,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Disana Anda juga dapat memilih pada situasi mana setup printer otomatis dilakukan "
+"(pada awal Printerdrake, pada awal sistem pencetakan, ketika menghubungkan printer "
+"USB baru)."
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2420
@@ -14339,12 +14357,12 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Konfigurasi Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3589
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Konfigurasi Canon LBP-460/660"
+msgstr "Konfigurasi LBP-810/1120 (CAPT)"
 
 #: printer/printerdrake.pm:3590
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -14352,8 +14370,9 @@ msgid ""
 "where it is directly connected to."
 msgstr ""
 "Driver untuk printer ini hanya mendukung printer lokal via USB, tanpa "
-"printer pada komputer remote atau server cetak. Silahkan hubungkan printer "
-"Anda ke port USB lokal atau konfigurasikan pada komputer dimana ia terhubung."
+"printer pada komputer remote atau server cetak atau pada port parallel. "
+"Silahkan hubungkan printer Anda ke port USB lokal atau konfigurasikan "
+"pada komputer dimana ia terhubung secara langsung."
 
 #: printer/printerdrake.pm:3597
 #, c-format
@@ -15326,9 +15345,9 @@ msgid "Disable Printer"
 msgstr "Nonaktifkan Printer"
 
 #: printer/printerdrake.pm:5480 printer/printerdrake.pm:5574
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Tipe koneksi printer"
+msgstr "Penanganan kesalahan komunikasi printer"
 
 #: printer/printerdrake.pm:5481 printer/printerdrake.pm:5578
 #, c-format
@@ -18236,9 +18255,9 @@ msgid "Terminal Server Configuration"
 msgstr "Konfigurasi Server Terminal"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "Konfig dhcpd..."
+msgstr "Konfigurasi dhcpd"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -18365,7 +18384,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Sinkronisasi setting keyboard Klien X dengan server."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -18373,7 +18392,8 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Silahkan pilih tipe default klien.\n"
+"Silahkan pilih tipe default klien (Fat adalah tipe default jika 'Gunakan thin' "
+"tidak dpilih).\n"
 "    Klien 'Thin' menjalankan semua pada CPU/RAM server, menggunakan tampilan "
 "klien.\n"
 "    Klien 'Fat' menggunakan CPU/RAM miliknya, tetapi sistem file server."
@@ -18768,7 +18788,7 @@ msgstr "Buat image PXE."
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "Install kernel i586 untuk klien yang lebih tua"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18811,9 +18831,9 @@ msgid "Delete All NBIs"
 msgstr "Hapus Semua NBI"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Pembuatan image boot net untuk semua kernel"
+msgstr "Membuat image untuk kernel:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -19827,7 +19847,7 @@ msgstr "Backup langsung pada pita"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "Gunakan kompresi perangkat keras tape (EKSPERIMENTAL)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -20910,9 +20930,9 @@ msgid "Graphical boot theme selection"
 msgstr "Pemilihan tema boot grafis"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Gunakan boot grafis"
+msgstr "Mode boot grafis:"
 
 #: standalone/drakboot:143
 #, c-format
@@ -22215,22 +22235,22 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Harap tambahkan sebuah host agar dapat dimodifikasi"
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Harap %s informasi"
+msgstr "Harap modifikasi informasi"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Harap %s informasi"
+msgstr "Harap hapus informasi"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Harap %s informasi"
+msgstr "Harap tambahkan informasi"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -22283,27 +22303,27 @@ msgid "Failed to remove host."
 msgstr "Gagal untuk menghapus host."
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Izinkan semua pengguna"
+msgstr "Alamat yang diijinkan"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:61 standalone/net_applet:183
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Firewall Aktif"
+msgstr "Firewall Interaktif"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Hapus semua"
+msgstr "Bersihlah log"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
@@ -22457,7 +22477,7 @@ msgstr ""
 "hasil pada alamat dasar jaringan.\n"
 
 #: standalone/draknfs:153
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -22484,18 +22504,18 @@ msgstr ""
 "<span weight=\"bold\">Opsi-opsi ID Pengguna</span>\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">root_squash:</span> memetakan permintaan "
-"dari uid/gid 0 pada uid/gid anonim.\n"
+"<span foreground=\"royalblue3\">petakan pengguna root sebagai anonim:</span> "
+"memetakan permintaan dari uid/gid 0 pada uid/gid anonim (root_squash).\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">no_root_squash:</span> menonaktifkan root "
-"squas.Opsi ini berguna untuk klien tanpa disk(diskless).\n"
+"<span foreground=\"royalblue3\">ijinkan akses root remote:</span> menonaktifkan root "
+"squas.Opsi ini berguna untuk klien tanpa disk (no_root_squash).\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">all_squash:</span> memetakan semua uid dan "
-"gid pada pengguan anonim. Berguna untuk direktori FTP publik yang diekspor "
-"dari NFS, direktori spool berita, dll. Opsi sebaliknya adalah no_all_squash, "
-"yang merupakan setting default .\n"
+"<span foreground=\"royalblue3\">petakan semua pengguna pada pengguna anonim:</span> "
+"memetakan semua uid dan gid pada pengguan anonim. Berguna untuk direktori FTP "
+"publik yang diekspor dari NFS, direktori spool berita, dll. Opsi sebaliknya adalah "
+"tanpa pemetaan UID pengguna (no_all_squash), yang merupakan setting default .\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">anonuid dan anongid:</span> menentukan uid "
@@ -22560,7 +22580,7 @@ msgstr ""
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Harap tambahkan sebuah share NFS agar dapat dimodifikasi."
 
 #: standalone/draknfs:373
 #, c-format
@@ -23025,64 +23045,64 @@ msgid "on"
 msgstr "aktif"
 
 #: standalone/draksambashare:64
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Daftar Hapus"
+msgstr "Daftar Baca"
 
 #: standalone/draksambashare:65
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Daftar putih"
+msgstr "Daftar Tulis"
 
 #: standalone/draksambashare:66 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Tambah pengguna"
+msgstr "Pengguna admin"
 
 #: standalone/draksambashare:67 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Tambah pengguna"
+msgstr "Pengguna sah"
 
 #: standalone/draksambashare:68 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Sembunyikan file"
+msgstr "Sembunyikan file bertitik"
 
 #: standalone/draksambashare:70
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Grup"
+msgstr "Paksa Grup"
 
 #: standalone/draksambashare:71
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Paksa pembuatan grup"
 
 #: standalone/draksambashare:72 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Pengguna default"
+msgstr "Kasus default"
 
 #: standalone/draksambashare:73 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Preferensi"
+msgstr "Kasus yang sudah disiapkan"
 
 #: standalone/draksambashare:74 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Buat"
+msgstr "Buat mask"
 
 #: standalone/draksambashare:75 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Direktori"
+msgstr "Direktori mask"
 
 #: standalone/draksambashare:76
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Izin"
+msgstr "Mewarisi izin"
 
 #: standalone/draksambashare:106
 #, c-format
@@ -23090,39 +23110,40 @@ msgid "Samba server"
 msgstr "Server Samba"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "Menjalankan ulang/Memuat ulang server NFS..."
+msgstr "Menjalankan ulang/Memuat ulang server Samba..."
 
 #: standalone/draksambashare:107
-#, fuzzy, c-format
+#, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "Kesalahan Menjalankan ulang/Memuat ulang server NFS"
+msgstr "Kesalahan Menjalankan ulang/Memuat ulang server Samba"
 
 #: standalone/draksambashare:234 standalone/draksambashare:242
-#, fuzzy, c-format
+#, c-format
 msgid "Add a Samba share"
-msgstr "Server Samba"
+msgstr "Tambah sebuah share Samba"
 
 #: standalone/draksambashare:237
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "Tujuan dari wizard ini adalah untuk memudahkan pembuatan "
+"share Samba baru"
 
 #: standalone/draksambashare:244
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Nama sertifikat"
+msgstr "Nama share:"
 
 #: standalone/draksambashare:245 standalone/draksambashare:402
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Setujui"
+msgstr "Komentar"
 
 #: standalone/draksambashare:246
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Path"
+msgstr "Path:"
 
 #: standalone/draksambashare:251
 #, c-format
@@ -23130,16 +23151,18 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Share dengan nama yang sama sudah ada atau nama share kosong, harap pilih "
+"nama yang lain."
 
 #: standalone/draksambashare:255 standalone/draksambashare:261
 #, c-format
 msgid "Can\\'t create the directory, please enter a correct path."
-msgstr ""
+msgstr "Tidak bisa membuat direktori, harap masukkan path yang benar."
 
 #: standalone/draksambashare:258 standalone/draksambashare:424
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Harap masukkan sebuah direktori untuk share."
+msgstr "Harap masukkan sebuah komentar untuk share ini."
 
 #: standalone/draksambashare:288 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:449 standalone/logdrake:455
@@ -23153,132 +23176,135 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Wizard berhasil menambahkan share Samba. Sekarang klik kanan padanya dalam "
+"struktur pohon untuk memodifikasinya"
 
 #: standalone/draksambashare:321
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "Masukkan DrakSamba"
 
 #: standalone/draksambashare:325
 #, c-format
 msgid "Please add a Samba share to be able to modify it."
-msgstr ""
+msgstr "Harap tambahkan sebuah share Samba agar dapat dimodifikasi."
 
 #: standalone/draksambashare:352
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Server Samba"
+msgstr "Akses pengguna Samba"
 
 #: standalone/draksambashare:360
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Opsi dasar"
+msgstr "Opsi mask"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "Tentukan opsi"
+msgstr "Opsi Tampilan"
 
 #: standalone/draksambashare:397
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Direktori Share"
+msgstr "Direktori share Samba"
 
 #: standalone/draksambashare:400
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "Nama share"
+msgstr "Nama share:"
 
 #: standalone/draksambashare:406
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Publik:"
 
 #: standalone/draksambashare:407
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "Tulis"
+msgstr "Dapat ditulis"
 
 #: standalone/draksambashare:408
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "Jelajah"
+msgstr "Dapat dijelajahi:"
 
 #: standalone/draksambashare:430
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
+"Mask pembuatan, mode pembuatan dan direktori mask harus angka. misalnya: 0755."
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Direktori Share"
+msgstr "Direktori share"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "Setujui"
+msgstr "Komentar"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "Jelajah"
+msgstr "Dapat dijelajahi"
 
 #: standalone/draksambashare:543
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "Publik"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "Tulis"
+msgstr "Dapat ditulis"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Baca"
+msgstr "Daftar Baca"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Daftar putih"
+msgstr "Daftar tulis"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Model printer Anda"
+msgstr "Paksa pembuatan mode"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "Grup PFS"
+msgstr "Paksa grup"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Izin"
+msgstr "Wariskan ijin"
 
 #: standalone/draksambashare:590
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFS mengelola share NFS"
+msgstr "DrakSamba mengelola share Samba"
 
 #: standalone/draksambashare:601
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "Gagal untuk menambah share NFS."
+msgstr "Gagal untuk menambah share Samba."
 
 #: standalone/draksambashare:609
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "Gagal untuk memodifikasi share NFS."
+msgstr "Gagal untuk memodifikasi share Samba."
 
 #: standalone/draksambashare:616
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "Gagal untuk menghapus sebuah share NFS."
+msgstr "Gagal untuk menghapus sebuah share Samba."
 
 #: standalone/draksec:49
 #, c-format
@@ -26669,7 +26695,7 @@ msgstr "Dapatkan Bantuan Online"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Mode Firewall Interaktif Otomatis"
 
 #: standalone/net_applet:309
 #, c-format
@@ -26677,19 +26703,19 @@ msgid "Always launch on startup"
 msgstr "Selalu jalankan pada pembukaan"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Mengelola jaringan nirkabel"
+msgstr "Jaringan nirkabel"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "Firewall Aktif: intrusi terdeteksi"
+msgstr "Firewall Interaktif: intrusi terdeteksi"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Apakah Anda ingin mem-blacklist penyerang?"
+msgstr "Apa yang hendak Anda lakukan dengan penyerang?"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26929,9 +26955,9 @@ msgid "/_Configure CUPS"
 msgstr "/_Konfigurasi CUPS"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Administrasi remote"
+msgstr "/Konfigurasi Administrasi _Otomatis"
 
 #: standalone/printerdrake:192
 #, c-format
@@ -27699,7 +27725,7 @@ msgstr "Installasi gagal"
 #~ msgid ""
 #~ "Enable user disk quota accounting enabled, and optionally enforce limits"
 #~ msgstr ""
-#~ "Mengaktifkan akuntasi quota grup dan memaksa batas disk secara opsional"
+#~ "Mengaktifkan akuntasi quota pengguna dan memaksa batas disk secara opsional"
 
 #~ msgid "Printer on SMB/Windows 95/98/NT server"
 #~ msgstr "Printer pada server SMB/windows 95/98/NT"
