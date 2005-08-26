@@ -1,4 +1,3 @@
-# translation of hu.po to Hungarian
 # translation of DrakX-hu.po to Hungarian
 # Copyright (C) 2000-2001,2003, 2004, 2005 Free Software Foundation, Inc.
 # Emese Kovacs <emese@gnome.hu>, 2000-2001.
@@ -7,15 +6,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-hu\n"
+"Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-04-01 23:51+0200\n"
+"PO-Revision-Date: 2005-08-26 17:41+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -153,8 +152,7 @@ msgstr "Az USB-kulcs beállítása"
 #: ../move/move.pm:517
 #, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
-msgstr ""
-"Kis türelmet - a rendszer beállítási fájljainak elhelyezése az USB-kulcson..."
+msgstr "Kis türelmet - a rendszer beállítási fájljainak elhelyezése az USB-kulcson..."
 
 #: ../move/move.pm:546
 #, c-format
@@ -949,8 +947,7 @@ msgstr "A fizikai memória mérete MB-ban"
 
 #: any.pm:275
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "\"A parancssorban átadható paraméterek korlátozása\" beállításnak jelszó "
 "nélkül nincs értelme"
@@ -1209,8 +1206,7 @@ msgstr "Adjon meg egy felhasználónevet"
 
 #: any.pm:612
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "A felhasználónév csak a következőket tartalmazhatja: kisbetűk, számok, \"-\" "
 "és \"_\""
@@ -1236,14 +1232,14 @@ msgid "Group ID"
 msgstr "Csoportazonosító"
 
 #: any.pm:619
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "A(z) %s értéknek számnak kell lennie!"
+msgstr "A(z) \"%s\" értéknek számnak kell lennie"
 
 #: any.pm:620
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "A(z) \"%s\" értéknek 500-nál nagyobbnak kell lennie. Mégis elfogadja?"
 
 #: any.pm:625
 #, c-format
@@ -1307,9 +1303,9 @@ msgstr ""
 "bejelentkezzen."
 
 #: any.pm:698
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Szeretné használni ezt a lehetőséget?"
+msgstr "A lehetőség használata"
 
 #: any.pm:699
 #, c-format
@@ -1433,13 +1429,11 @@ msgstr ""
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
-msgstr ""
-"SMB: Windows, Mac OS X és Linux alatt használatos fájlmegosztási módszer."
+msgstr "SMB: Windows, Mac OS X és Linux alatt használatos fájlmegosztási módszer."
 
 #: any.pm:991
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr ""
 "Exportálás NFS-sel vagy Sambával végezhető. Válassza ki, melyiket kívánja "
 "használni."
@@ -1510,8 +1504,7 @@ msgstr "Helyi fájl:"
 
 #: authentication.pm:55
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr "Helyi fájlok használata minden azonosításhoz"
 
 #: authentication.pm:56
@@ -1564,8 +1557,7 @@ msgstr "Active Directory SFU-val:"
 
 #: authentication.pm:59 authentication.pm:60
 #, c-format
-msgid ""
-"Kerberos is a secure system for providing network authentication services."
+msgid "Kerberos is a secure system for providing network authentication services."
 msgstr ""
 "A Kerberos egy hálózati azonosítási szolgáltatásokat nyújtó biztonságos "
 "rendszer."
@@ -1726,8 +1718,7 @@ msgstr "Alapértelmezett Idmap "
 #: authentication.pm:170
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr ""
-"A rendszergazdai (root) jelszó és a hálózati azonosítási módszerek beállítása"
+msgstr "A rendszergazdai (root) jelszó és a hálózati azonosítási módszerek beállítása"
 
 #: authentication.pm:171
 #, c-format
@@ -1794,12 +1785,12 @@ msgstr "LILO, szöveges menüvel"
 #: bootloader.pm:855
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "GRUB, grafikus menüvel"
 
 #: bootloader.pm:856
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB, szöveges menüvel"
 
 #: bootloader.pm:857
 #, c-format
@@ -2308,8 +2299,7 @@ msgstr "El szeretné menteni az /etc/fstab fájlban végrehajtott módosítások
 #: diskdrake/interactive.pm:292 install_steps_interactive.pm:330
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr ""
-"A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
+msgstr "A partíciós tábla változásai csak a gép újraindítása után lépnek érvénybe"
 
 #: diskdrake/interactive.pm:297
 #, c-format
@@ -2515,10 +2505,8 @@ msgstr "El szeretné távolítani a loopback-fájlt?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"A(z) %s partíció típusának módosítása után a partíción levő adatok elvesznek"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "A(z) %s partíció típusának módosítása után a partíción levő adatok elvesznek"
 
 #: diskdrake/interactive.pm:619
 #, c-format
@@ -2583,8 +2571,7 @@ msgstr "Készítsen biztonsági mentést erről a partícióról"
 #: diskdrake/interactive.pm:755
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"A(z) %s partíció átméretezésekor a partíción található adatok elvesznek"
+msgstr "A(z) %s partíció átméretezésekor a partíción található adatok elvesznek"
 
 #: diskdrake/interactive.pm:760
 #, c-format
@@ -2632,11 +2619,14 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"A(z) \"%s\" fizikai kötet még használatban van.\n"
+"Kívánja áthelyezni a kötet használatban levő fizikai kiterjedéseit (extent) "
+"más kötetekre?"
 
 #: diskdrake/interactive.pm:896
 #, c-format
 msgid "Moving physical extents"
-msgstr ""
+msgstr "Fizikai kiterjedések áthelyezése"
 
 #: diskdrake/interactive.pm:914
 #, c-format
@@ -2661,8 +2651,7 @@ msgstr "Adjon meg egy fájlnevet"
 #: diskdrake/interactive.pm:936
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr ""
-"Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
+msgstr "Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
 
 #: diskdrake/interactive.pm:937
 #, c-format
@@ -2818,7 +2807,7 @@ msgstr "A(z) %d. cilindertől a(z) %d.-ig\n"
 #: diskdrake/interactive.pm:1233
 #, c-format
 msgid "Number of logical extents: %d\n"
-msgstr ""
+msgstr "Logikai kiterjedések száma: %d\n"
 
 #: diskdrake/interactive.pm:1234
 #, c-format
@@ -3005,8 +2994,7 @@ msgstr "Másik"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Adja meg a gép eléréséhez szükséges felhasználónevet, jelszót és "
 "tartománynevet."
@@ -3102,14 +3090,14 @@ msgid "Enabling swap partition %s"
 msgstr "A(z) %s lapozópartíció bekapcsolása"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Titkosított fájlrendszer nem használható ehhez a csatolási ponthoz: %s"
+msgstr "Titkosított fájlrendszer használata"
 
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Csoport-lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások érvényesítésével"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -3194,7 +3182,7 @@ msgstr ""
 #: fs/mount_options.pm:143
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr ""
+msgstr "Felhasználói lemezkvóta bekapcsolása, esetlegesen bizonyos korlátozások érvényesítésével"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -3277,6 +3265,8 @@ msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
+"A(z) \"%s\" csatolási ponthoz nem használható az LVM-es logikai kötet, mivel "
+"több fizikai köteten foglal helyet."
 
 #: fsedit.pm:392
 #, c-format
@@ -3286,6 +3276,10 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Egy LVM-es logikai kötetet jelölt ki gyökér-fájlrendszerként (/).\n"
+"A rendszerbetöltő nem képes kezelni ezt abban az esetben, ha a logikai kötet\n"
+"több fizikai köteten helyezkedik el.\n"
+"Először hozzon létre egy /boot partíciót."
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3359,7 +3353,7 @@ msgstr "Videokártya"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "DVB-kártya"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3394,27 +3388,27 @@ msgstr "ISDN-kártyák"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "USB-s hangeszközök"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Rádiókártyák"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "ATM hálózati kártyák"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "WAN hálózati kártyák"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "Bluetooth-eszközök"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3451,7 +3445,7 @@ msgstr "Nyomtató"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Játékport-vezérlők"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3517,7 +3511,7 @@ msgstr "Billentyűzet"
 #: harddrake/data.pm:460
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tábla és érintőképernyő"
 
 #: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:978
 #, c-format
@@ -3579,7 +3573,7 @@ msgstr ""
 "Itt kiválaszthat egy alternatív meghajtót (OSS vagy ALSA) a hangkártyához (%"
 "s)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:242
@@ -6031,7 +6025,7 @@ msgstr "Hálózat (FTP)"
 #: install_any.pm:421
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Hálózat (NFS)"
 
 #: install_any.pm:451
 #, c-format
@@ -6061,22 +6055,22 @@ msgstr "A tükörkiszolgáló címe?"
 #: install_any.pm:525
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "NFS-beállítás"
 
 #: install_any.pm:525
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "Adja meg az NFS-adathordozó gépnevét és könyvtárát"
 
 #: install_any.pm:526
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "Az NFS-csatolás gépneve?"
 
 #: install_any.pm:526
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "Könyvtár"
 
 #: install_any.pm:575
 #, c-format
@@ -6196,7 +6190,7 @@ msgstr "Hozzáférés megtagadva"
 #: install_any.pm:1761
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Helytelen NFS-név"
 
 #: install_any.pm:1782
 #, c-format
@@ -6399,8 +6393,7 @@ msgstr "Több merevlemeze van. Melyikre kívánja telepíteni a Linuxt?"
 #: install_interactive.pm:219
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
-"MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
+msgstr "MINDEN létező partíció és rajtuk minden adat elvész a(z) \"%s\" meghajtón"
 
 #: install_interactive.pm:232
 #, c-format
@@ -6936,8 +6929,7 @@ msgstr "\"%s\" megtartása érdekében"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr ""
-"Nem választhatja ki ezt a csomagot, mert nincs elég hely a merevlemezen."
+msgstr "Nem választhatja ki ezt a csomagot, mert nincs elég hely a merevlemezen."
 
 #: install_steps_gtk.pm:351
 #, c-format
@@ -6971,8 +6963,7 @@ msgstr ""
 #: install_steps_gtk.pm:384
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr ""
-"Nem törölheti ennek a csomagnak a kijelölését. Ez a csomag frissítendő!"
+msgstr "Nem törölheti ennek a csomagnak a kijelölését. Ez a csomag frissítendő!"
 
 #: install_steps_gtk.pm:389
 #, c-format
@@ -7250,14 +7241,12 @@ msgstr ""
 #: install_steps_interactive.pm:387
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr ""
-"A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
+msgstr "A lapozóterület mérete nem elég nagy. Növelje meg a telepítés befejezéséhez."
 
 #: install_steps_interactive.pm:394
 #, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr ""
-"A rendelkezésre álló csomagok keresése és az RPM-adatbázis újraépítése..."
+msgstr "A rendelkezésre álló csomagok keresése és az RPM-adatbázis újraépítése..."
 
 #: install_steps_interactive.pm:395 install_steps_interactive.pm:453
 #, c-format
@@ -7284,8 +7273,7 @@ msgstr "Válasszon tükörkiszolgálót, ahonnan letölti a csomagokat"
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%d "
 "> %d)"
-msgstr ""
-"A rendszeren nem maradt elég hely a telepítéshez vagy frissítéshez (%d > %d)"
+msgstr "A rendszeren nem maradt elég hely a telepítéshez vagy frissítéshez (%d > %d)"
 
 #: install_steps_interactive.pm:496
 #, c-format
@@ -7387,7 +7375,7 @@ msgstr "Telepítés utáni beállítások"
 #: install_steps_interactive.pm:776
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
+msgstr "Tegye be a frissítési modulokat tartalmazó adathordozót a(z) \"%s\" meghajtóba"
 
 #: install_steps_interactive.pm:805
 #, c-format
@@ -7410,8 +7398,7 @@ msgstr ""
 
 #: install_steps_interactive.pm:826
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Kapcsolódás a Mandriva Linux webkiszolgálójához; az elérhető "
 "tükörkiszolgálók listájának lekérdezése..."
@@ -7648,10 +7635,8 @@ msgstr "Mandriva Linux-telepítés %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr ""
-"<Tab>/<Alt+Tab> lépegetés | <Szóköz> kiválasztás | <F12> következő képernyő "
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr "<Tab>/<Alt+Tab> lépegetés | <Szóköz> kiválasztás | <F12> következő képernyő "
 
 #: interactive.pm:192
 #, c-format
@@ -8403,7 +8388,7 @@ msgstr "szlovén"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "sinhala"
 
 #: keyboard.pm:294
 #, c-format
@@ -8487,14 +8472,14 @@ msgstr "thaiföldi (Pattachote)"
 msgid ""
 "_: keyboard\n"
 "Tifinagh (moroccan layout) (+latin/arabic)"
-msgstr ""
+msgstr "tifinagh (marokkói kiosztás) (+latin/arab)"
 
 #: keyboard.pm:311
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (phonetic) (+latin/arabic)"
-msgstr ""
+msgstr "tifinagh (fonetikus) (+latin/arab)"
 
 #: keyboard.pm:313
 #, c-format
@@ -9728,12 +9713,12 @@ msgstr "Üdvözöljük - %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Nem sikerült áthelyezni a használatban levő fizikai kiterjedéseket más fizikai kötetekre"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "A(z) \"%s\" fizikai kötet még használatban van"
 
 #: lvm.pm:145
 #, c-format
@@ -9744,6 +9729,8 @@ msgstr "Először törölje az összes logikai kötetet\n"
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
 msgstr ""
+"A rendszerbetöltő nem képes olyan /boot fájlrendszert kezelni, amely "
+"több fizikai köteten helyezkedik el"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1027
 #, c-format
@@ -10243,44 +10230,44 @@ msgid "Other ports"
 msgstr "Egyéb portok"
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Nincs megosztás"
+msgstr "Portszkenelés"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "A megtámadott szolgáltatás: %s"
+msgstr "Szolgáltatás támadása"
 
 #: network/ifw.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Jelszó (még egyszer)"
+msgstr "Jelszófeltörés"
 
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "\"%s\" támadás"
 
 #: network/ifw.pm:141
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr "Portszkeneléses támadás megkísérelve %s által."
+msgstr "Portszkeneléses támadás megkísérelve \"%s\" által."
 
 #: network/ifw.pm:142
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr "A(z) %s szolgáltatás megtámadva %s által."
+msgstr "A(z) \"%s\" szolgáltatás megtámadva \"%s\" által."
 
 #: network/ifw.pm:143
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr "Jelszófeltörési támadás megkísérelve %s által."
+msgstr "Jelszófeltörési támadás megkísérelve \"%s\" által."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "Portszkeneléses támadás megkísérelve %s által."
+msgstr "\"%s\" támadás megkísérelve \"%s\" által."
 
 #: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
 #: network/netconnect.pm:547 network/netconnect.pm:690
@@ -10554,7 +10541,7 @@ msgstr "Modemes kapcsolat"
 #: network/netconnect.pm:254
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "DVB-kapcsolat"
 
 #: network/netconnect.pm:264
 #, c-format
@@ -11000,7 +10987,7 @@ msgstr "Mérték"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "\"IPv6-ból IPv4-be\" alagút bekapcsolása"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11068,7 +11055,7 @@ msgstr "Új meghajtóprogram telepítése"
 #: network/netconnect.pm:985
 #, c-format
 msgid "Select a device:"
-msgstr ""
+msgstr "Válasszon egy eszközt:"
 
 #: network/netconnect.pm:1014
 #, c-format
@@ -11118,7 +11105,7 @@ msgstr "Hálózati név (ESSID)"
 #: network/netconnect.pm:1022
 #, c-format
 msgid "Encryption mode"
-msgstr ""
+msgstr "Titkosítási mód"
 
 #: network/netconnect.pm:1026
 #, c-format
@@ -11355,8 +11342,7 @@ msgstr "Keresési tartomány"
 #: network/netconnect.pm:1184
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
-msgstr ""
-"Alapértelmezésben a keresési tartomány a teljes gépnévből lesz meghatározva"
+msgstr "Alapértelmezésben a keresési tartomány a teljes gépnévből lesz meghatározva"
 
 #: network/netconnect.pm:1185
 #, c-format
@@ -11424,8 +11410,7 @@ msgstr "A rendszertálcán levő hálózati alkalmazással"
 #: network/netconnect.pm:1263
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
-msgstr ""
-"Kézzel (a csatoló ebben az esetben is aktiválva lesz rendszerindításkor)"
+msgstr "Kézzel (a csatoló ebben az esetben is aktiválva lesz rendszerindításkor)"
 
 #: network/netconnect.pm:1272
 #, c-format
@@ -11625,13 +11610,9 @@ msgstr ""
 "\t\tippp+ - ISDN-kapcsolat esetén\n"
 
 #: network/thirdparty.pm:196
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Szüksége lesz az Alcatel mikrokódra.\n"
-"Töltse le innen:\n"
-"%s\n"
-"majd másolja az mgmt.o fájlt a /usr/share/speedtouch helyre."
+msgstr "Másolja az Alcatel-mikrokódot mgmt.o fájlnéven a /usr/share/speedtouch/ helyre"
 
 #: network/thirdparty.pm:205
 #, c-format
@@ -11647,14 +11628,14 @@ msgstr ""
 "A meghajtóprogramot innen lehet letölteni: http://eciadsl.flashtux.org/"
 
 #: network/thirdparty.pm:266
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "Nem sikerült telepíteni a(z) %s csomagokat."
+msgstr "Nem sikerült telepíteni a csomagokat (%s)."
 
 #: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
+msgstr "Bizonyos csomagokra (%s) szükség van, de nem elérhetők."
 
 #: network/thirdparty.pm:275
 #, c-format
@@ -11662,6 +11643,8 @@ msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
+"Ezek a csomagok a Mandriva Club szolgáltatáson keresztül, továbbá a Mandriva "
+"kereskedelmi kiadásaiból szerezhetők meg."
 
 #: network/thirdparty.pm:276
 #, c-format
@@ -11669,6 +11652,8 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"A szükséges fájlok telepíthetők erről a címről is:\n"
+"%s"
 
 #: network/thirdparty.pm:309
 #, fuzzy, c-format
@@ -11936,9 +11921,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Hálózati nyomtató (TCP-/aljazat-alapú)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "SMB/Windows 95/98/NT-nyomtató"
+msgstr "SMB-/Windows-kiszolgálón levő nyomtató"
 
 #: printer/main.pm:33
 #, c-format
@@ -12440,8 +12425,7 @@ msgstr "Példák helyesen megadott IP-címekre:\n"
 #: printer/printerdrake.pm:277
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr ""
-"Ez a gép/hálózat már szerepel a listában; nem vehető fel még egyszer.\n"
+msgstr "Ez a gép/hálózat már szerepel a listában; nem vehető fel még egyszer.\n"
 
 #: printer/printerdrake.pm:346 printer/printerdrake.pm:416
 #, c-format
@@ -12571,8 +12555,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:616
 #, c-format
-msgid ""
-"No pop-up windows, canceling setup and package installation not possible"
+msgid "No pop-up windows, canceling setup and package installation not possible"
 msgstr ""
 
 #: printer/printerdrake.pm:622
@@ -12694,8 +12677,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:758
 #, c-format
-msgid ""
-"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Automatikus nyomtatófelderítés (helyi, TCP/aljazat, SMB-nyomtatók és eszköz-"
 "URI)"
@@ -12801,8 +12783,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:846
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
+msgid "There are no printers found which are directly connected to your machine"
 msgstr "Nem található olyan nyomtató, amely a géphez közvetlenül csatlakozna."
 
 #: printer/printerdrake.pm:849
@@ -13297,8 +13278,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:1600
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Ehelyett megadhat egy eszköznevet illetve fájlnevet a beviteli sorban"
 
 #: printer/printerdrake.pm:1601 printer/printerdrake.pm:1610
@@ -13830,8 +13810,7 @@ msgstr "A(z) %s eszközön csak nyomtatás lesz lehetséges."
 #: printer/printerdrake.pm:2477
 #, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
-"Nem lehet törölni a HPOJ korábbi beállítási fájlját (fájl: %s, eszköz: %s) "
+msgstr "Nem lehet törölni a HPOJ korábbi beállítási fájlját (fájl: %s, eszköz: %s) "
 
 #: printer/printerdrake.pm:2479
 #, c-format
@@ -13907,8 +13886,7 @@ msgstr "Adja meg a nyomtatónevet és a megjegyzéseket"
 #: printer/printerdrake.pm:3025 printer/printerdrake.pm:4348
 #, c-format
 msgid "Name of printer should contain only letters, numbers and the underscore"
-msgstr ""
-"A nyomtató nevében csak angol betű, számjegy és az aláhúzás szerepelhet."
+msgstr "A nyomtató nevében csak angol betű, számjegy és az aláhúzás szerepelhet."
 
 #: printer/printerdrake.pm:3031 printer/printerdrake.pm:4353
 #, c-format
@@ -14584,8 +14562,7 @@ msgstr ""
 msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
-msgstr ""
-"A nyomtató memóriakártya-olvasói normál USB-s tárolóeszközként érhetők el. "
+msgstr "A nyomtató memóriakártya-olvasói normál USB-s tárolóeszközként érhetők el. "
 
 #: printer/printerdrake.pm:4218
 #, c-format
@@ -15117,8 +15094,7 @@ msgstr "A Foomatic telepítése..."
 #: printer/printerdrake.pm:4877
 #, c-format
 msgid "Could not install %s packages, %s cannot be started!"
-msgstr ""
-"Nem sikerült telepíteni a(z) %s csomagokat, ezért a(z) %s nem indítható."
+msgstr "Nem sikerült telepíteni a(z) %s csomagokat, ezért a(z) %s nem indítható."
 
 #: printer/printerdrake.pm:5072
 #, c-format
@@ -15308,8 +15284,7 @@ msgstr "Nem sikerült létrehozni /usr/share/sane/%s nevű linket."
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"Nem sikerült a(z) %s firmware-fájlt átmásolni ide: /usr/share/sane/firmware"
+msgstr "Nem sikerült a(z) %s firmware-fájlt átmásolni ide: /usr/share/sane/firmware"
 
 #: scanner.pm:121
 #, c-format
@@ -15328,8 +15303,7 @@ msgstr "ScannerDrake"
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
-"Nem sikerült telepíteni a lapolvasó(k) megosztásához szükséges csomagokat."
+msgstr "Nem sikerült telepíteni a lapolvasó(k) megosztásához szükséges csomagokat."
 
 #: scanner.pm:202
 #, c-format
@@ -15533,14 +15507,12 @@ msgstr ""
 #: security/help.pm:84
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-"A libsafe bekapcsolása/kikapcsolása, amennyiben megtalálható a rendszeren"
+msgstr "A libsafe bekapcsolása/kikapcsolása, amennyiben megtalálható a rendszeren"
 
 #: security/help.pm:86
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-"A szokásostól eltérő IPv4-csomagok naplózásának bekapcsolása/kikapcsolása"
+msgstr "A szokásostól eltérő IPv4-csomagok naplózásának bekapcsolása/kikapcsolása"
 
 #: security/help.pm:88
 #, c-format
@@ -15549,8 +15521,7 @@ msgstr "Az msec óránkénti biztonsági ellenőrzéseinek bekapcsolása/kikapcs
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-" Enabling su only from members of the wheel group or allow su from any user."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 "Annak meghatározása, hogy az 'su' parancs használata csak a 'wheel' nevű\n"
 "csoport tagjainak számára legyen lehetséges, vagy pedig bármely felhasználó\n"
@@ -15581,8 +15552,7 @@ msgstr "Az sulogin(8) engedélyezése/letiltása egyfelhasználós szinten"
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-"Az adott név felvétele az msec-féle jelszóelévülés-kezelés alóli kivételként"
+msgstr "Az adott név felvétele az msec-féle jelszóelévülés-kezelés alóli kivételként"
 
 #: security/help.pm:102
 #, c-format
@@ -15660,8 +15630,7 @@ msgstr "Ha igenre van állítva: a napi biztonsági ellenőrzések végrehajtás
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
-"Ha igenre van állítva: SGID-s fájlok létrehozásának/törlésének ellenőrzése"
+msgstr "Ha igenre van állítva: SGID-s fájlok létrehozásának/törlésének ellenőrzése"
 
 #: security/help.pm:121
 #, c-format
@@ -15692,8 +15661,7 @@ msgstr "Ha igenre van állítva: figyelmeztetés a tulajdonos nélküli fájlokr
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"Ha igenre van állítva: a mindenki által írható fájlok/könyvtárak ellenőrzése"
+msgstr "Ha igenre van állítva: a mindenki által írható fájlok/könyvtárak ellenőrzése"
 
 #: security/help.pm:126
 #, c-format
@@ -15702,8 +15670,7 @@ msgstr "Ha igenre van állítva: chkrootkit ellenőrzések elvégzése"
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Ha be van állítva: a jelentés ezen email-címre való küldése; máskülönben a\n"
 "rendszergazdának"
@@ -15726,8 +15693,7 @@ msgstr "Ha igenre van állítva: ellenőrzések elvégzése az RPM-adatbázison"
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"Ha igenre van állítva: az ellenőrzés eredményének írása a rendszernaplóba"
+msgstr "Ha igenre van állítva: az ellenőrzés eredményének írása a rendszernaplóba"
 
 #: security/help.pm:132
 #, c-format
@@ -15917,8 +15883,7 @@ msgstr "A jelszótörténeti lista mérete"
 #: security/l10n.pm:40
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr ""
-"A minimális jelszóhossz és a számjegyek illetve a nagybetűk minimális száma"
+msgstr "A minimális jelszóhossz és a számjegyek illetve a nagybetűk minimális száma"
 
 #: security/l10n.pm:41
 #, c-format
@@ -16149,8 +16114,7 @@ msgstr "A libsafe használata kiszolgálókhoz"
 
 #: security/level.pm:63
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Könyvtár, amely védelmet nyújt a puffertúlcsordulásos és a formátumsztringes "
 "támadások ellen."
@@ -16237,8 +16201,7 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Az Apache egy WWW-kiszolgáló. HTML-fájlokat és CGI-t tesz elérhetővé\n"
 "a hálózaton keresztül."
@@ -16738,8 +16701,7 @@ msgstr ""
 
 #: share/advertising/05.pl:20
 #, c-format
-msgid ""
-"\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
+msgid "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr "\t- <b>zárt meghajtóprogramok</b> (például NVIDIA®- és ATI™-meghajtók)"
 
 #: share/advertising/05.pl:21
@@ -16747,8 +16709,7 @@ msgstr "\t- <b>zárt meghajtóprogramok</b> (például NVIDIA®- és ATI™-megh
 msgid ""
 "\t* <b>Proprietary software</b> (such as Acrobat® Reader®, RealPlayer®, "
 "Flash™, etc.)."
-msgstr ""
-"\t- <b>zárt szoftver</b> (például Acrobat® Reader®, RealPlayer®, Flash™)"
+msgstr "\t- <b>zárt szoftver</b> (például Acrobat® Reader®, RealPlayer®, Flash™)"
 
 #: share/advertising/05.pl:23
 #, c-format
@@ -16833,8 +16794,7 @@ msgstr "<b>Mandriva-termékek</b>"
 
 #: share/advertising/09.pl:15
 #, c-format
-msgid ""
-"<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
+msgid "<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> products."
 msgstr ""
 "A <b>Mandriva</b> széles skálával rendelkezik <b>Mandriva Linux</b>-"
 "termékekből."
@@ -16911,13 +16871,11 @@ msgstr "<b>Mandriva-termékek (professzionális megoldások)</b>"
 msgid ""
 "Below are the Mandriva products designed to meet the <b>professional needs</"
 "b>:"
-msgstr ""
-"A <b>professzionális igények</b> kielégítésére tervezett Mandriva-termékek:"
+msgstr "A <b>professzionális igények</b> kielégítésére tervezett Mandriva-termékek:"
 
 #: share/advertising/11.pl:16
 #, c-format
-msgid ""
-"\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
+msgid "\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
 msgstr ""
 "\t- <b>Corporate Desktop</b> - az üzleti célra szánt Mandriva Linux-"
 "munkaasztal"
@@ -16929,10 +16887,8 @@ msgstr "\t- <b>Corporate Server</b> - Mandriva Linux-kiszolgálói megoldás"
 
 #: share/advertising/11.pl:18
 #, c-format
-msgid ""
-"\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
-msgstr ""
-"\t- <b>Multi-Network Firewall</b> - biztonsági megoldás Mandriva Linuxszal"
+msgid "\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
+msgstr "\t- <b>Multi-Network Firewall</b> - biztonsági megoldás Mandriva Linuxszal"
 
 #: share/advertising/12.pl:13
 #, c-format
@@ -17046,8 +17002,7 @@ msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
-msgid ""
-"Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
+msgid "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
 msgstr ""
 "A Discovery tartalmazza a <b>Kontact</b> alkalmazást, az új KDE-alapú "
 "<b>munkacsoportos megoldást</b>."
@@ -17077,8 +17032,7 @@ msgstr "<b>Böngészés az interneten</b>"
 #: share/advertising/16.pl:15
 #, c-format
 msgid "Discovery will give you access to <b>every Internet resource</b>:"
-msgstr ""
-"A Discovery elérést biztosít az <b>összes internetes szolgáltatáshoz</b>:"
+msgstr "A Discovery elérést biztosít az <b>összes internetes szolgáltatáshoz</b>:"
 
 #: share/advertising/16.pl:16
 #, c-format
@@ -17185,8 +17139,7 @@ msgstr "<b>Fejlesztőkörnyezetek</b>"
 
 #: share/advertising/19.pl:15 share/advertising/22.pl:17
 #, c-format
-msgid ""
-"PowerPack gives you the best tools to <b>develop</b> your own applications."
+msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
 msgstr ""
 "A PowerPack a legjobb eszközöket nyújtja saját alkalmazások "
 "<b>fejlesztéséhez</b>."
@@ -17239,8 +17192,7 @@ msgstr ""
 
 #: share/advertising/20.pl:18
 #, c-format
-msgid ""
-"\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
+msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
 msgstr ""
 "\t- <b>Vim</b>: fejlett szövegszerkesztő, a szabványos Vi fejlettebb "
 "változata"
@@ -17354,18 +17306,15 @@ msgstr "<b>Kiszolgálók</b>"
 
 #: share/advertising/24.pl:17
 #, c-format
-msgid ""
-"Empower your business network with <b>premier server solutions</b> including:"
+msgid "Empower your business network with <b>premier server solutions</b> including:"
 msgstr ""
 "Erősítse meg üzleti hálózatát <b>professzionális kiszolgáló-megoldásokkal</"
 "b>, mint például:"
 
 #: share/advertising/24.pl:18
 #, c-format
-msgid ""
-"\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
-msgstr ""
-"\t- <b>Samba</b>: fájl- és nyomtatószolgáltatások windowsos kliensekhez"
+msgid "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
+msgstr "\t- <b>Samba</b>: fájl- és nyomtatószolgáltatások windowsos kliensekhez"
 
 #: share/advertising/24.pl:19
 #, c-format
@@ -17392,10 +17341,8 @@ msgstr ""
 
 #: share/advertising/24.pl:22
 #, c-format
-msgid ""
-"\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
-msgstr ""
-"\t- <b>ProFTPD</b>: nagymértékben testreszabható GPL licencű FTP-kiszolgáló"
+msgid "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
+msgstr "\t- <b>ProFTPD</b>: nagymértékben testreszabható GPL licencű FTP-kiszolgáló"
 
 #: share/advertising/24.pl:23
 #, c-format
@@ -17507,10 +17454,8 @@ msgstr ""
 
 #: share/advertising/28.pl:19
 #, c-format
-msgid ""
-"Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
-msgstr ""
-"Használja ki a Mandriva Club-tagsággal járó <b>előnyöket</b>, mint például:"
+msgid "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such as:"
+msgstr "Használja ki a Mandriva Club-tagsággal járó <b>előnyöket</b>, mint például:"
 
 #: share/advertising/28.pl:20
 #, c-format
@@ -17570,8 +17515,7 @@ msgstr ""
 #: share/advertising/29.pl:18
 #, c-format
 msgid "\t* <b>Perfect</b> system security (automated software updates)."
-msgstr ""
-"\t- <b>tökéletes</b> rendszerbiztonság (automatizált szoftverfrissítés)"
+msgstr "\t- <b>tökéletes</b> rendszerbiztonság (automatizált szoftverfrissítés)"
 
 #: share/advertising/29.pl:19
 #, c-format
@@ -17589,10 +17533,8 @@ msgstr "\t- rugalmas, <b>ütemezett</b> frissítések"
 
 #: share/advertising/29.pl:21
 #, c-format
-msgid ""
-"\t* Management of <b>all your Mandriva Linux systems</b> with one account."
-msgstr ""
-"\t- az <b>összes Mandriva Linux-rendszer</b> kezelése egyetlen azonosítóval"
+msgid "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
+msgstr "\t- az <b>összes Mandriva Linux-rendszer</b> kezelése egyetlen azonosítóval"
 
 #: share/advertising/30.pl:13
 #, c-format
@@ -17680,8 +17622,7 @@ msgstr "Internetes munkaállomás"
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr ""
-"Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web böngészéséhez"
+msgstr "Eszközök levelezéshez, hírkezeléshez (mutt, tin, ...) és a web böngészéséhez"
 
 #: share/compssUsers.pl:50
 #, c-format
@@ -17877,13 +17818,12 @@ msgstr "GNOME-munkaállomás"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr ""
-"Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
+msgstr "Grafikus környezet felhasználóbarát alkalmazásokkal és segédprogramokkal"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Plucker munkaasztal"
+msgstr "IceWm-munkaasztal"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -17891,9 +17831,9 @@ msgid "Other Graphical Desktops"
 msgstr "Más grafikus környezetek"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "IceWM, WindowMaker, Enlightenment, Fvwm, ..."
+msgstr "WindowMaker, Enlightenment, Fvwm, ..."
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -18203,8 +18143,7 @@ msgstr "A módosítások érvénybe lépéséhez újra kell indítani a rendszer
 #: standalone/XFdrake:90
 #, c-format
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
-msgstr ""
-"Jelentkezzen ki, majd nyomja meg a Ctrl+Alt+BackSpace billentyűkombinációt"
+msgstr "Jelentkezzen ki, majd nyomja meg a Ctrl+Alt+BackSpace billentyűkombinációt"
 
 #: standalone/XFdrake:94
 #, c-format
@@ -18236,9 +18175,9 @@ msgid "Terminal Server Configuration"
 msgstr "A terminálkiszolgáló beállítása"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "dhcpd beállítása..."
+msgstr "dhcpd beállítása"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -18979,8 +18918,7 @@ msgstr "Az IP-címtartomány vége:"
 #: standalone/drakTermServ:1397
 #, c-format
 msgid "Append TS Includes To Existing Config"
-msgstr ""
-"A terminálkiszolgálóval kapcsolatos részek hozzáfűzése a meglevő beállításhoz"
+msgstr "A terminálkiszolgálóval kapcsolatos részek hozzáfűzése a meglevő beállításhoz"
 
 #: standalone/drakTermServ:1399
 #, c-format
@@ -19360,8 +19298,7 @@ msgstr "Az intervallumos Cron-időzítés csak a rendszergazda számára elérhe
 #: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\": email-címként helytelen, helyi felhasználóként pedig nem létezik."
+msgstr "\"%s\": email-címként helytelen, helyi felhasználóként pedig nem létezik."
 
 #: standalone/drakbackup:469 standalone/logdrake:442
 #, c-format
@@ -19375,8 +19312,7 @@ msgstr ""
 #: standalone/drakbackup:478
 #, c-format
 msgid "Valid user list changed, rewriting config file."
-msgstr ""
-"Az érvényes felhasználói lista változott - a beállítási fájl módosítása."
+msgstr "Az érvényes felhasználói lista változott - a beállítási fájl módosítása."
 
 #: standalone/drakbackup:480
 #, c-format
@@ -19581,10 +19517,8 @@ msgstr ""
 
 #: standalone/drakbackup:1093
 #, c-format
-msgid ""
-"Error during sending file via FTP. Please correct your FTP configuration."
-msgstr ""
-"Hiba a fájl FTP-vel való átvitele közben. Ellenőrizze az FTP-beállításokat."
+msgid "Error during sending file via FTP. Please correct your FTP configuration."
+msgstr "Hiba a fájl FTP-vel való átvitele közben. Ellenőrizze az FTP-beállításokat."
 
 #: standalone/drakbackup:1095
 #, c-format
@@ -19639,8 +19573,7 @@ msgstr ""
 
 #: standalone/drakbackup:1398
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Ezekkel a funkciókkal a /etc könyvtár összes fájlja elmenthető illetve "
 "visszatölthető.\n"
@@ -19697,8 +19630,7 @@ msgstr "A böngésző-gyorstár kihagyása"
 #: standalone/drakbackup:1517
 #, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr ""
-"Válassza ki a fájlokat illetve könyvtárakat, majd kattintson az \"OK\" gombra"
+msgstr "Válassza ki a fájlokat illetve könyvtárakat, majd kattintson az \"OK\" gombra"
 
 #: standalone/drakbackup:1518 standalone/drakfont:655
 #, c-format
@@ -19748,8 +19680,7 @@ msgstr "Gépnév vagy IP-cím"
 #: standalone/drakbackup:1620
 #, c-format
 msgid "Directory (or module) to put the backup on this host."
-msgstr ""
-"A könyvtár (vagy modul), amelybe a mentésfájlok kerüljenek ezen a gépen"
+msgstr "A könyvtár (vagy modul), amelybe a mentésfájlok kerüljenek ezen a gépen"
 
 #: standalone/drakbackup:1632
 #, c-format
@@ -20063,10 +19994,8 @@ msgstr "Győződjön meg arról, hogy a cron szolgáltatás aktiválva van."
 
 #: standalone/drakbackup:2156
 #, c-format
-msgid ""
-"If your machine is not on all the time, you might want to install anacron."
-msgstr ""
-"Ha a gépe nincs mindig bekapcsolva, akkor javasolt az anacron telepítése."
+msgid "If your machine is not on all the time, you might want to install anacron."
+msgstr "Ha a gépe nincs mindig bekapcsolva, akkor javasolt az anacron telepítése."
 
 #: standalone/drakbackup:2157
 #, c-format
@@ -20103,8 +20032,7 @@ msgstr "SMTP-kiszolgáló a levelezéshez:"
 #: standalone/drakbackup:2227
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
-msgstr ""
-"A merevlemezen levő \"tar\"-fájlok törlése más médiumra való mentés után"
+msgstr "A merevlemezen levő \"tar\"-fájlok törlése más médiumra való mentés után"
 
 #: standalone/drakbackup:2270
 #, c-format
@@ -20875,17 +20803,17 @@ msgstr "<control>Q"
 #: standalone/drakboot:117
 #, c-format
 msgid "Text only"
-msgstr ""
+msgstr "Csak szöveg"
 
 #: standalone/drakboot:118
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "Részletes"
 
 #: standalone/drakboot:119
 #, c-format
 msgid "Silent"
-msgstr ""
+msgstr "Tömör"
 
 #: standalone/drakboot:126
 #, c-format
@@ -20913,9 +20841,9 @@ msgid "Graphical boot theme selection"
 msgstr "A grafikus rendszerindítás témájának kiválasztása"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Grafikus rendszerindítás használata"
+msgstr "Grafikus rendszerindítási mód:"
 
 #: standalone/drakboot:143
 #, c-format
@@ -21381,8 +21309,7 @@ msgstr ""
 
 #: standalone/drakconnect:745
 #, c-format
-msgid ""
-"Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "A(z) \"%s\" hálózati csatoló el lett távolítva."
 
 #: standalone/drakconnect:761
@@ -21985,9 +21912,9 @@ msgstr ""
 "Mit szeretne tenni?"
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "Beállítás újból"
+msgstr "Ismételt beállítás"
 
 #: standalone/drakgw:145
 #, c-format
@@ -22012,14 +21939,14 @@ msgid ""
 msgstr "Válassza ki, hogy milyen kártyával csatlakozik a helyi hálózathoz."
 
 #: standalone/drakgw:177
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "Helyi hálózati cím"
+msgstr "A helyi hálózat beállításai"
 
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP address"
-msgstr ""
+msgstr "Helyi IP-cím"
 
 #: standalone/drakgw:182
 #, c-format
@@ -22032,14 +21959,14 @@ msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Hálózati címhibát észleltem az aktuális konfigurációban: %s!\n"
 
 #: standalone/drakgw:204
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "A terminálkiszolgáló beállítása"
+msgstr "A tartománynév-kiszolgáló (DNS) beállítása"
 
 #: standalone/drakgw:208
 #, c-format
 msgid "Use this gateway as domain name server"
-msgstr ""
+msgstr "Ezen átjáró tartománynév-kiszolgálóként való használata"
 
 #: standalone/drakgw:209
 #, c-format
@@ -22060,9 +21987,9 @@ msgstr ""
 "Ha egy opció jelentését nem ismeri, akkor ne módosítsa azt."
 
 #: standalone/drakgw:245
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Automatikus újrakonfigurálás"
+msgstr "Automatikus beállítás (DHCP) használata"
 
 # IP Range Lower Limit: The lowest IP address that should be served by a DHCP server.
 #: standalone/drakgw:246
@@ -22090,37 +22017,37 @@ msgstr "A maximális élettartam (másodpercben)"
 #: standalone/drakgw:272
 #, c-format
 msgid "Proxy caching server (SQUID)"
-msgstr ""
+msgstr "Gyorstárazó proxy-kiszolgáló (Squid)"
 
 #: standalone/drakgw:276
 #, c-format
 msgid "Use this gateway as proxy caching server"
-msgstr ""
+msgstr "Az átjáró használata gyorstárazó proxy-kiszolgálóként"
 
 #: standalone/drakgw:277
 #, c-format
 msgid "Admin mail"
-msgstr ""
+msgstr "Adminisztrátori levélcím"
 
 #: standalone/drakgw:278
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "A távoli gép neve"
+msgstr "Látható gépnév"
 
 #: standalone/drakgw:279
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "Tulajdonos"
+msgstr "Proxy-port"
 
 #: standalone/drakgw:280
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "Gyorstárméret"
+msgstr "Gyorstárméret (MB)"
 
 #: standalone/drakgw:302
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "Merevlemez-jellemzők"
+msgstr "Nyomtatóinformáció sugárzása (broadcast)"
 
 #: standalone/drakgw:319
 #, c-format
@@ -22172,7 +22099,7 @@ msgstr "Beállítás..."
 #: standalone/drakgw:387
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "A tűzfal beállítása..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -22197,8 +22124,7 @@ msgstr " --help                - jelen segítség megjelenítése\n"
 
 #: standalone/drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <azonosító>      - a megadott azonosítócímkéjű HTML segítség "
 "betöltése\n"
@@ -22677,7 +22603,7 @@ msgstr "Engedélyek"
 #: standalone/drakperm:57
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Új szabály felvétele"
 
 #: standalone/drakperm:64 standalone/drakperm:99 standalone/drakperm:124
 #, c-format
@@ -22871,6 +22797,8 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Nincs vezeték nélküli felület.\n"
+"Indítsa el a(z) \"%s\" segédalkalmazást a Mandriva Linux Vezérlőközpontból."
 
 # Extended Service Set ID. The ESSID is the identifying name of a
 # wireless network
@@ -23170,8 +23098,7 @@ msgstr "Böngészés"
 
 #: standalone/draksambashare:430
 #, c-format
-msgid ""
-"Create mask, create mode and directory mask should be numeric. ie: 0755."
+msgid "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
 
 #: standalone/draksambashare:543
@@ -23514,22 +23441,22 @@ msgstr "a folyamatjelző magassága"
 #: standalone/draksplash:54 standalone/draksplash:59
 #, c-format
 msgid "Choose progress bar color"
-msgstr ""
+msgstr "Válassza ki a folyamatjelző színét"
 
 #: standalone/draksplash:55 standalone/draksplash:60
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Válasszon képet"
 
 #: standalone/draksplash:56
 #, c-format
 msgid "Silent bootsplash"
-msgstr ""
+msgstr "Tömör szövegű indítókép"
 
 #: standalone/draksplash:61
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "Részletes szövegű indítókép"
 
 #: standalone/draksplash:63
 #, c-format
@@ -23539,7 +23466,7 @@ msgstr "Logó megjelenítése a konzolon"
 #: standalone/draksplash:66
 #, c-format
 msgid "Console bootsplash"
-msgstr ""
+msgstr "Konzolos indítókép"
 
 #: standalone/draksplash:72
 #, c-format
@@ -23564,7 +23491,7 @@ msgstr "indításikép-téma mentése..."
 #: standalone/draksplash:150
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Nem sikerült betölteni a(z) \"%s\" képfájlt"
 
 #: standalone/draksplash:161
 #, c-format
@@ -25456,10 +25383,8 @@ msgstr "A hangkártyához használható alternatív meghajtók"
 
 #: standalone/harddrake2:29
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr ""
-"Ez a fizikai busz, amelyre az eszköz csatlakoztatva van (PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgstr "Ez a fizikai busz, amelyre az eszköz csatlakoztatva van (PCI, USB, ...)"
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
 #, c-format
@@ -25793,8 +25718,7 @@ msgstr "Van-e az FPU-nak IRQ-vektora"
 #: standalone/harddrake2:78
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
-"Ha igen, akkor az aritmetikai társprocesszor rendelkezik kivételvektorral"
+msgstr "Ha igen, akkor az aritmetikai társprocesszor rendelkezik kivételvektorral"
 
 #: standalone/harddrake2:79
 #, c-format
@@ -25804,8 +25728,7 @@ msgstr "F00F-hiba"
 #: standalone/harddrake2:79
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
-msgstr ""
-"A korai Pentiumok hibásak voltak - az F00F bájtkód értelmezésekor lefagytak"
+msgstr "A korai Pentiumok hibásak voltak - az F00F bájtkód értelmezésekor lefagytak"
 
 #: standalone/harddrake2:80
 #, c-format
@@ -25982,8 +25905,7 @@ msgstr "Eszközfájl"
 
 #: standalone/harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr "Az egér kernelbeli meghajtójával kommunikáló eszközfájl"
 
 #: standalone/harddrake2:116
@@ -26208,8 +26130,7 @@ msgstr "Vegyes"
 
 #: standalone/harddrake2:342
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Ha a bal oldali fában rákattint egy eszközre, megjelennek itt az eszköz "
 "adatai."
@@ -26617,7 +26538,7 @@ msgstr "Hálózatfigyelés"
 #: standalone/net_applet:62
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Vezeték nélküli hálózatok kezelése"
 
 #: standalone/net_applet:63
 #, c-format
@@ -26642,7 +26563,7 @@ msgstr "Online segítség"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Interaktív tűzfal - automatikus mód"
 
 #: standalone/net_applet:309
 #, c-format
@@ -26650,19 +26571,19 @@ msgid "Always launch on startup"
 msgstr "Minden rendszerindításnál induljon el"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Vezeték nélküli kapcsolat"
+msgstr "Vezeték nélküli hálózatok"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "Aktív tűzfal: behatolási kísérlet történt"
+msgstr "Interaktív tűzfal: behatolási kísérlet történt"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Szeretné feketelistára tenni a támadót?"
+msgstr "Mit szeretne tenni a támadóval?"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26903,9 +26824,9 @@ msgid "/_Configure CUPS"
 msgstr "/A _CUPS beállítása"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Távoli adminisztráció"
+msgstr "/A_utomatikus adminisztráció beállítása"
 
 #: standalone/printerdrake:192
 #, c-format
@@ -27024,8 +26945,7 @@ msgstr "Kilépés a Scannerdrake programból."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Nem sikerült telepíteni a lapolvasó-beállításhoz szükséges csomagokat."
 
 #: standalone/scannerdrake:61
@@ -27671,2022 +27591,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "A telepítés hibával ért véget."
 
-#~ msgid "Printer on SMB/Windows 95/98/NT server"
-#~ msgstr "SMB/Windows 95/98/NT-nyomtató"
-
-#~ msgid "Found printer on %s..."
-#~ msgstr "A rendszer nyomtatót talált itt: %s..."
-
-#~ msgid "Useless without Terminal Server"
-#~ msgstr "Terminálkiszolgáló nélkül értelmetlen"
-
-#~ msgid ""
-#~ "Please select default client type.\n"
-#~ "    'Thin' clients run everything off the server's CPU/RAM, using the "
-#~ "client display.\n"
-#~ "    'Fat' clients use their own CPU/RAM but the server's filesystem."
-#~ msgstr ""
-#~ "Válassza ki az alapértelmezett klienstípust.\n"
-#~ "A \"vékony\" kliensek mindent a kiszolgálón futtatnak (annak "
-#~ "processzorát\n"
-#~ "és memóriáját használva), de a kliens képernyőjét használva.\n"
-#~ "A \"teljes értékű\" kliensek a saját processzorukat és memóriájukat\n"
-#~ "használják, de a kiszolgáló fájlrendszerét."
-
-#~ msgid "dhcpd Config..."
-#~ msgstr "dhcpd beállítása..."
-
-#~ msgid ""
-#~ "package 'ImageMagick' is required to be able to complete configuration.\n"
-#~ "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-#~ msgstr ""
-#~ "A helyes működéshez szükség van az ImageMagick csomagra.\n"
-#~ "Az ImageMagick telepítéséhez kattintson az \"OK\" gombra;\n"
-#~ "kilépéshez a \"Mégsem\" gombra."
-
-#, fuzzy
-#~ msgid "Unable to select wireless network: %s"
-#~ msgstr "Nem sikerült kapcsolódni ehhez a tükörkiszolgálóhoz: %s"
-
-#~ msgid "Interactive intrusion detection"
-#~ msgstr "Interaktív behatolásfelderítés"
-
-#~ msgid "Active Firewall: intrusion detected"
-#~ msgstr "Aktív tűzfal: behatolási kísérlet történt"
-
-#~ msgid "Do you want to blacklist the attacker?"
-#~ msgstr "Szeretné feketelistára tenni a támadót?"
-
-#~ msgid "Grub"
-#~ msgstr "GRUB"
-
-#~ msgid "Local Network adress"
-#~ msgstr "Helyi hálózati cím"
-
-#~ msgid "Configuring scripts, installing software, starting servers..."
-#~ msgstr "Szkriptek beállítása, szoftvertelepítés, kiszolgálók indítása..."
-
-#~ msgid "drakfloppy"
-#~ msgstr "drakfloppy"
-
-#~ msgid "Boot disk creation"
-#~ msgstr "Rendszerindító lemez készítése"
-
-#~ msgid "General"
-#~ msgstr "Általános"
-
-#~ msgid "Kernel version"
-#~ msgstr "A kernel verziója"
-
-#~ msgid "Preferences"
-#~ msgstr "Beállítások"
-
-#~ msgid "Advanced preferences"
-#~ msgstr "Speciális beállítások"
-
-#~ msgid "Size"
-#~ msgstr "Méret"
-
-#~ msgid "Mkinitrd optional arguments"
-#~ msgstr "Az mkinitrd opcionális argumentumai"
-
-#~ msgid "force"
-#~ msgstr "felülírás"
-
-#~ msgid "omit raid modules"
-#~ msgstr "a RAID modulok kihagyása"
-
-#~ msgid "if needed"
-#~ msgstr "ha szükséges"
-
-#~ msgid "omit scsi modules"
-#~ msgstr "a SCSI modulok kihagyása"
-
-#~ msgid "Add a module"
-#~ msgstr "Modul hozzáadása"
-
-#~ msgid "Remove a module"
-#~ msgstr "Modul eltávolítása"
-
-#~ msgid "Be sure a media is present for the device %s"
-#~ msgstr "Biztosítsa, hogy a(z) %s eszközben legyen adathordozó"
-
-#~ msgid ""
-#~ "There is no medium or it is write-protected for device %s.\n"
-#~ "Please insert one."
-#~ msgstr ""
-#~ "A(z) %s eszközben nincs adathordozó, vagy írásvédett.\n"
-#~ "Helyezzen be egyet, illetve szüntesse meg az írásvédelmet."
-
-#~ msgid "Unable to fork: %s"
-#~ msgstr "Nem sikerült létrehozni új példányt: %s"
-
-#~ msgid "Floppy creation completed"
-#~ msgstr "A floppy elkészítve"
-
-#~ msgid "The creation of the boot floppy has been successfully completed \n"
-#~ msgstr "A rendszerindító floppy elkészítve \n"
-
-#~ msgid ""
-#~ "Unable to properly close mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-#~ msgstr ""
-#~ "Az mkbootdisk program lezárása sikertelen:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr "Nem használható LVM logikai kötet a(z) %s csatolási ponthoz"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "LVM-es logikai kötetet választott ki gyökérfájlrendszernek (/).\n"
-#~ "A rendszerindító program ezt nem tudja kezelni /boot partíció nélkül,\n"
-#~ "ezért mindenképpen hozzon létre egy /boot partíciót."
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Elképzelhető, hogy a LILO nem lesz telepíthető (mivel a LILO nem kezeli a "
-#~ "több fizikai köteten levő logikai köteteket)."
-
-#~ msgid "use PPPoE"
-#~ msgstr "PPPOE használata"
-
-#~ msgid "use PPTP"
-#~ msgstr "PPTP használata"
-
-#~ msgid "use DHCP"
-#~ msgstr "DHCP használata"
-
-#~ msgid "Alcatel Speedtouch USB"
-#~ msgstr "Alcatel Speedtouch USB"
-
-#~ msgid " - detected"
-#~ msgstr " - felismerve"
-
-#~ msgid "Sagem (using PPPoA) USB"
-#~ msgstr "Sagem (PPPoA-t használó) USB"
-
-#~ msgid "Sagem (using DHCP) USB"
-#~ msgstr "Sagem (DHCP-t használó) USB"
-
-#~ msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-#~ msgstr "IceWM, WindowMaker, Enlightenment, Fvwm, ..."
-
-#~ msgid ""
-#~ "Warning, another Internet connection has been detected, maybe using your "
-#~ "network"
-#~ msgstr ""
-#~ "Figyelmeztetés: Egy másik internetkapcsolat is létezik, esetlegesen a "
-#~ "hálózatot használva."
-
-#~ msgid "PXE Server Configuration"
-#~ msgstr "PXE-kiszolgáló beállítása"
-
-#~ msgid "Installation Server Configuration"
-#~ msgstr "Telepítési kiszolgáló beállítása"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "A következő lépésben a számítógépen beállításra kerül egy PXE-"
-#~ "kiszolgáló,\n"
-#~ "amely DHCP- és TFTP-szolgáltatásokat lesz képes nyújtani. Ez lehetővé\n"
-#~ "teszi, hogy a gép telepítési kiszolgálóként funkcionáljon a helyi "
-#~ "hálózat\n"
-#~ "más gépei számára, vagyis a többi gép telepíthető lesz ezen gépet\n"
-#~ "használva forrásként.\n"
-#~ "\n"
-#~ "Mielőtt továbblépne, állítsa be a hálózat- illetve internetelérést\n"
-#~ "a DrakConnect programmal (ha ez még nem történt meg).\n"
-#~ "\n"
-#~ "Megjegyzés: helyi hálózat (LAN) létrehozásához szükség lesz egy "
-#~ "speciálisan\n"
-#~ "erre a célra használt hálózati csatolóra."
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "Nem található hálózati csatolókártya a számítógépben."
-
-#~ msgid "Choose the network interface"
-#~ msgstr "Hálózati csatoló kiválasztása"
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr ""
-#~ "Válassza ki, melyik hálózati csatolót szeretné használni a DHCP-"
-#~ "kiszolgálóhoz."
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "\"%s\" csatoló (ezen a hálózaton: %s)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "A DHCP-kiszolgáló lehetővé teszi más gépek számára a PXE módszerrel való "
-#~ "rendszerindítást - a megadott címtartományt használva.\n"
-#~ "\n"
-#~ "A hálózati cím %s a következő hálózati maszkot használva: %s.\n"
-#~ "\n"
-
-# IP Range Lower Limit: The lowest IP address that should be served by a DHCP server.
-#~ msgid "The DHCP start ip"
-#~ msgstr "A DHCP-címtartomány kezdete"
-
-#~ msgid "The DHCP end ip"
-#~ msgstr "A DHCP-címtartomány vége"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Adja meg a telepítési képfájl helyét.\n"
-#~ "\n"
-#~ "Ha nincs ilyen könyvtár, akkor másolja le a CD illetve a DVD tartalmát.\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "A telepítési képfájl könyvtára"
-
-#~ msgid "No image found"
-#~ msgstr "Képfájl (image) nem található"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr ""
-#~ "Nem található sem CD-, sem DVD-képfájl. Másolja le a telepítőprogramot és "
-#~ "az RPM-fájlokat."
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Adja meg az auto_install.cfg fájl helyét.\n"
-#~ "\n"
-#~ "Ha nem kíván automatikus telepítési módot beállítani, akkor hagyja "
-#~ "üresen.\n"
-#~ "\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Az auto_install.cfg fájl helye"
-
-#~ msgid "Do it later"
-#~ msgstr "Később"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MdkKDM (Mandriva Linux bejelentkezéskezelő)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "Az internetkapcsolat megosztása nincs engedélyezve"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "A kiszolgálók engedélyezése..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "Az internetkapcsolat megosztása engedélyezve van"
-
-# az interface (hálókártya) milyen modult használ
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "\"%s\" csatoló (a felhasznált modul: %s)"
-
-#~ msgid "Interface %s"
-#~ msgstr "%s csatoló"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "Hálózati csatoló már be lett állítva"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "Figyelmeztetés: A hálózati kártya (%s) már be van állítva.\n"
-#~ "\n"
-#~ "Szeretne automatikus újrakonfigurálást?\n"
-#~ "\n"
-#~ "Elvégezheti Ön is kézzel, de csak ha biztos abban, hogy mit tesz."
-
-#~ msgid "No (experts only)"
-#~ msgstr "Nem (szakértők számára)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "Jelenlegi csatolóbeállítás megjelenítése"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "Jelenlegi csatolóbeállítás"
-
-# attribution:
-# The attribution of IP addresses, talking about the network: a
-# server gives names to workstations so they can talk.
-# How the IP address is attributed: static (eg: manual config), DHCP,
-# bootp, ...
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "\"%s\" jelenlegi beállítása:\n"
-#~ "\n"
-#~ "Hálózat: %s\n"
-#~ "IP-cím: %s\n"
-#~ "IP-címkiosztás: %s\n"
-#~ "Meghajtó: %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Megtartható a jelenlegi beállítás; ekkor feltételezve lesz, hogy már "
-#~ "megtörtént egy DHCP-kiszolgáló beállítása. Ebben az esetben ellenőrizze, "
-#~ "hogy helyesen lettek-e meghatározva a helyi hálózat adatai. Nem történik "
-#~ "újrakonfigurálás, és a DHCP-kiszolgáló beállításai sem kerülnek "
-#~ "módosításra.\n"
-#~ "\n"
-#~ "Az alapértelmezett DNS a tűzfalhoz beállított gyorstárazó névkiszolgáló "
-#~ "(caching nameserver). Ez helyettesíthető például a szolgáltató DNS-ének "
-#~ "IP-címével.\n"
-#~ "\n"
-#~ "Újra is konfigurálható a csatoló illetve beállítható egy DHCP-"
-#~ "kiszolgáló.\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "A DHCP-kiszolgáló IP-címe"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "Csatoló és DHCP-kiszolgáló újrakonfigurálása"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "A helyi hálózati cím nem \".0\"-ra végződik, kilépek."
-
-#~ msgid "Number of logical extents: %d"
-#~ msgstr "Logikai kiterjedések száma: %d"
-
-#~ msgid ""
-#~ "WARNING: this device has been previously configured to connect to the "
-#~ "Internet.\n"
-#~ "Modifying the fields below will override this configuration.\n"
-#~ "Do you really want to reconfigure this device?"
-#~ msgstr ""
-#~ "Figyelmeztetés: ez az eszköz már be lett állítva internet-hozzáféréshez.\n"
-#~ "A lenti mezők módosításával felül lehet bírálni a beállításokat.\n"
-#~ "Szeretné módosítani az eszköz beállításait?"
-
-#~ msgid ""
-#~ "        - Create etherboot floppies/CDs:\n"
-#~ "        \tThe diskless client machines need either ROM images on the NIC, "
-#~ "or a boot floppy\n"
-#~ "        \tor CD to initiate the boot sequence.  drakTermServ will help "
-#~ "generate these\n"
-#~ "        \timages, based on the NIC in the client machine.\n"
-#~ "        \t\t\n"
-#~ "        \tA basic example of creating a boot floppy for a 3Com 3c509 "
-#~ "manually:\n"
-#~ "        \t\t\n"
-#~ "        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
-#~ "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
-#~ msgstr ""
-#~ "        - Etherboot-floppyk illetve -CD-k létrehozása:\n"
-#~ "        \tA lemez nélküli kliensgépeknek az indítási folyamat\n"
-#~ "        \telindításához szükségük van NIC-beli ROM-képmásokra vagy egy\n"
-#~ "        \tindítólemezre (floppy vagy CD). A DrakTermServ segítséget "
-#~ "nyújt\n"
-#~ "        \tezen képmások elkészítésében - a kliensgép hálózati kártyája\n"
-#~ "        \talapján.\n"
-#~ "\n"
-#~ "        \tEgy alapvető példa egy indítási lemez kézzel való "
-#~ "elkészítésére\n"
-#~ "        \t(3Com 3c509 kártya esetére):\n"
-#~ "\n"
-#~ "        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
-#~ "        \t\t/usr/share/etherboot/start16.bin \\\n"
-#~ "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
-
-#~ msgid "Dynamic IP Address Pool:"
-#~ msgstr "Dinamikus IP-cím-készlet:"
-
-#~ msgid "hd"
-#~ msgstr "merevlemez"
-
-#~ msgid "tape"
-#~ msgstr "szalag"
-
-#~ msgid "WebDAV remote site already in sync!"
-#~ msgstr "A távoli WebDAV-hely már szinkronban van."
-
-#~ msgid "WebDAV transfer failed!"
-#~ msgstr "A WebDAV-átvitel sikertelen volt."
-
-#~ msgid ""
-#~ "Backup quota exceeded!\n"
-#~ "%d MB used vs %d MB allocated."
-#~ msgstr ""
-#~ "A mentési kvóta túl lett lépve.\n"
-#~ "%d MB felhasználva; %d MB lefoglalva."
-
-#~ msgid ""
-#~ "Maximum size\n"
-#~ " allowed for Drakbackup (MB)"
-#~ msgstr ""
-#~ "A DrakBackup program számára\n"
-#~ "engedélyezett maximális méret (MB)"
-
-#~ msgid "\t-Network by webdav.\n"
-#~ msgstr "\t-Hálózat webdav használatával\n"
-
-#~ msgid "first step creation"
-#~ msgstr "első lépés - létrehozás"
-
-#~ msgid "choose image file"
-#~ msgstr "válasszon egy képfájlt"
-
-#~ msgid "Configure bootsplash picture"
-#~ msgstr "Az indítási kép beállítása"
-
-#~ msgid "the color of the progress bar"
-#~ msgstr "a folyamatjelző színe"
-
-#~ msgid "Preview"
-#~ msgstr "Előnézet"
-
-#~ msgid "Choose color"
-#~ msgstr "Válasszon egy színt"
-
-#~ msgid "Make kernel message quiet by default"
-#~ msgstr "Alapértelmezésben ne legyenek kernelüzenetek"
-
-#~ msgid "Notice"
-#~ msgstr "Megjegyzés"
-
-#~ msgid "This theme does not yet have a bootsplash in %s!"
-#~ msgstr "Ennek a témának nincs %s indítási képe."
-
-#~ msgid "You must choose an image file first!"
-#~ msgstr "Először ki kell választania egy képfájlt."
-
-#~ msgid "Generating preview..."
-#~ msgstr "Előnézet elkészítése..."
-
-#~ msgid "%s BootSplash (%s) preview"
-#~ msgstr "%s indítási képének előnézete (%s)"
-
-#~ msgid ""
-#~ "The image \"%s\" cannot be load due to the following issue:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-#~ msgstr ""
-#~ "Nem sikerült betölteni a(z) \"%s\" képet a következő miatt:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\">%s</span>"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "Nincs elérhető floppy-meghajtó"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr ""
-#~ "Tegye be a frissítőmodulokat tartalmazó floppyt a(z) \"%s\" meghajtóba"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Tifinagh (+latin/arabic)"
-#~ msgstr "tifinagh (+latin/arab)"
-
-#~ msgid "No network card"
-#~ msgstr "Hálózati kártya nem található"
-
-#~ msgid ""
-#~ "The following protocols can be used to configure an ethernet connection. "
-#~ "Please choose the one you want to use"
-#~ msgstr ""
-#~ "A következő protokollokkal lehet beállítani Ethernet-kapcsolatot. "
-#~ "Válassza ki, melyiket szeretné használni."
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Már telepített meghajtóprogram használata (%s)"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Wi-Fi Védett Elérés (WPA) használata"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Nem jelölt ki egyetlen betűtípust sem"
-
-#~ msgid "Save and close"
-#~ msgstr "Mentés és bezárás"
-
-#~ msgid "No browser available! Please install one"
-#~ msgstr "Nincs elérhető böngésző. Telepítsen egyet."
-
-#~ msgid ""
-#~ "No browser is installed on your system, Please install one if you want to "
-#~ "browse the help system"
-#~ msgstr ""
-#~ "Nincs telepítve böngésző a gépre. Ha szeretné elérni a segítségrendszert, "
-#~ "telepítsen egy böngészőt."
-
-#~ msgid ""
-#~ "Insert a floppy in drive\n"
-#~ "All data on this floppy will be lost"
-#~ msgstr ""
-#~ "Helyezzen be egy floppylemezt a meghajtóba!\n"
-#~ "A lemezen található adatok elvesznek"
-
-#~ msgid "Insert a FAT formatted floppy in drive %s"
-#~ msgstr ""
-#~ "Helyezzen egy FAT fájlrendszerre formázott floppyt a(z) \"%s\" meghajtóba"
-
-#~ msgid "This floppy is not FAT formatted"
-#~ msgstr "Ezen a floppyn nincs FAT fájlrendszer"
-
-#~ msgid ""
-#~ "To use this saved packages selection, boot installation with ``linux "
-#~ "defcfg=floppy''"
-#~ msgstr ""
-#~ "Ha fel akarja később használni ezt a csomagkijelölést, akkor a telepítést "
-#~ "\"linux defcfg=floppy\" paraméterrel indítsa el."
-
-#~ msgid "Load/Save on floppy"
-#~ msgstr "Betöltés/floppyra mentés"
-
-#~ msgid ""
-#~ "Please choose load or save package selection on floppy.\n"
-#~ "The format is the same as auto_install generated floppies."
-#~ msgstr ""
-#~ "Válasszon egy funkciót annak megfelelően, hogy betölteni kíván egy\n"
-#~ "csomagkijelölést vagy a jelenlegi kijelölést szeretné elmenteni.\n"
-#~ "A formátum ugyanaz, mint az automatikus telepítőfloppyknál."
-
-#~ msgid "Load from floppy"
-#~ msgstr "Betöltés floppyról"
-
-#~ msgid "Save on floppy"
-#~ msgstr "Mentés floppyra"
-
-#~ msgid "Package selection"
-#~ msgstr "Csomagkijelölés"
-
-#~ msgid "Loading from floppy"
-#~ msgstr "Betöltés floppyról"
-
-#~ msgid "Insert a floppy containing package selection"
-#~ msgstr "Tegye be a csomagkijelölést tartalmazó floppyt a meghajtóba"
-
-#, fuzzy
-#~ msgid "Active Firewall : intrusion detected"
-#~ msgstr "A tűzfal beállításait sikerült felismerni."
-
-#, fuzzy
-#~ msgid "Do you want to blacklist the attacker ?"
-#~ msgstr "Befejezi a játékot?"
-
-#~ msgid "Application:"
-#~ msgstr "Alkalmazás:"
-
-#~ msgid "Release: "
-#~ msgstr "Kiadás: "
-
-#~ msgid "Summary: "
-#~ msgstr "Összefoglalás: "
-
-#~ msgid "Bug Description/System Information"
-#~ msgstr "Hibaleírás/rendszerinformáció"
-
-#~ msgid "YOUR TEXT HERE"
-#~ msgstr "AZ ÖN SZÖVEGÉNEK HELYE"
-
-#~ msgid "Submit kernel version"
-#~ msgstr "A kernelverzió küldése"
-
-#~ msgid "Submit cpuinfo"
-#~ msgstr "cpuinfo lista küldése"
-
-#~ msgid "Submit lspci"
-#~ msgstr "lspci lista küldése"
-
-#~ msgid "NOT FOUND"
-#~ msgstr "NEM TALÁLHATÓ"
-
-#~ msgid "connecting to %s..."
-#~ msgstr "csatlakozás ehhez: %s ..."
-
-#~ msgid "Please enter a package name."
-#~ msgstr "Adjon meg egy csomagnevet."
-
-#~ msgid "Please enter summary text."
-#~ msgstr "Adja meg az összefoglaló szöveget."
-
-#~ msgid "Loading printer configuration... Please wait"
-#~ msgstr "Nyomtatóbeállítások betöltése..."
-
-#~ msgid "The "
-#~ msgstr "A(z) "
-
-#~ msgid "%s (was %s)"
-#~ msgstr "%s (korábban: %s)"
-
-#~ msgid "Root password"
-#~ msgstr "Rendszergazdai jelszó"
-
-#~ msgid "Do you want to recover your system?"
-#~ msgstr "Szeretné helyreállítani a rendszert?"
-
-#~ msgid "Move"
-#~ msgstr "Áthelyezés"
-
-#~ msgid "Which disk do you want to move it to?"
-#~ msgstr "Melyik lemezre szeretné áthelyezni?"
-
-#~ msgid "Sector"
-#~ msgstr "Szektor"
-
-#~ msgid "Which sector do you want to move it to?"
-#~ msgstr "Melyik szektorra szeretné áthelyezni?"
-
-#~ msgid "Moving"
-#~ msgstr "Áthelyezés"
-
-#~ msgid "Moving partition..."
-#~ msgstr "Partíció áthelyezése..."
-
-#~ msgid "Error opening %s for writing: %s"
-#~ msgstr "Hiba történt %s írásra való megnyitásánál: %s"
-
-#~ msgid ""
-#~ "This is HardDrake, a Mandriva Linux hardware configuration tool.\n"
-#~ "<span foreground=\"royalblue3\">Version:</span> %s\n"
-#~ "<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;"
-#~ "tvignaud@mandriva.com&gt;\n"
-#~ "\n"
-#~ msgstr ""
-#~ "HardDrake - Mandriva Linux hardverbeállítási program.\n"
-#~ "<span foreground=\"royalblue3\">Verzió:</span> %s\n"
-#~ "<span foreground=\"royalblue3\">Szerző:</span> Thierry Vignaud &lt;"
-#~ "tvignaud@mandriva.com&gt;\n"
-#~ "\n"
-
-#~ msgid "Use Anonymous Bind"
-#~ msgstr "Névtelen BIND használata "
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "NO"
-#~ msgstr "NEM"
-
-#~ msgid "YES"
-#~ msgstr "IGEN"
-
-#~ msgid ""
-#~ "The following options can be set to customize your\n"
-#~ "system security. If you need an explanation, look at the help tooltip.\n"
-#~ msgstr ""
-#~ "A következő opciókkal be lehet állítani a rendszer biztonságát.\n"
-#~ "Ha magyarázatra van szüksége, olvassa el a tippszöveget.\n"
-
-#~ msgid "The %s is not known by this version of Scannerdrake."
-#~ msgstr "A ScannerDrake jelenleg használt verziója nem támogatja ezt: %s."
-
-#~ msgid "Hide Release Notes"
-#~ msgstr "Verzióinformáció elrejtése"
-
-#~ msgid "Czech (QWERTZ)"
-#~ msgstr "cseh (QWERTZ)"
-
-#~ msgid "German"
-#~ msgstr "német"
-
-#~ msgid "Dvorak"
-#~ msgstr "Dvorak-féle"
-
-#~ msgid "Spanish"
-#~ msgstr "spanyol"
-
-#~ msgid "Finnish"
-#~ msgstr "finn"
-
-#~ msgid "French"
-#~ msgstr "francia"
-
-#~ msgid "Norwegian"
-#~ msgstr "norvég"
-
-#~ msgid "Polish"
-#~ msgstr "lengyel"
-
-#~ msgid "Russian"
-#~ msgstr "orosz"
-
-#~ msgid "Swedish"
-#~ msgstr "svéd"
-
-#~ msgid "Albanian"
-#~ msgstr "albán"
-
-#~ msgid "Armenian (old)"
-#~ msgstr "örmény (régi)"
-
-#~ msgid "Armenian (typewriter)"
-#~ msgstr "örmény (írógép)"
-
-#~ msgid "Armenian (phonetic)"
-#~ msgstr "örmény (fonetikus)"
-
-#~ msgid "Arabic"
-#~ msgstr "arab"
-
-#~ msgid "Azerbaidjani (latin)"
-#~ msgstr "azerbajdzsáni (latin)"
-
-#~ msgid "Belgian"
-#~ msgstr "belga"
-
-#~ msgid "Bengali"
-#~ msgstr "bengáli"
-
-#~ msgid "Bulgarian (phonetic)"
-#~ msgstr "bolgár (fonetikus)"
-
-#~ msgid "Bulgarian (BDS)"
-#~ msgstr "bolgár (BDS)"
-
-#~ msgid "Brazilian (ABNT-2)"
-#~ msgstr "brazil (ABNT-2)"
-
-#~ msgid "Bosnian"
-#~ msgstr "boszniai"
-
-#~ msgid "Belarusian"
-#~ msgstr "fehérorosz"
-
-#~ msgid "Swiss (German layout)"
-#~ msgstr "svájci (német kiosztás)"
-
-#~ msgid "Swiss (French layout)"
-#~ msgstr "svájci (francia kiosztás)"
-
-#~ msgid "Czech (QWERTY)"
-#~ msgstr "cseh (QWERTY)"
-
-#~ msgid "German (no dead keys)"
-#~ msgstr "német (\"dead key\" nélkül)"
-
-#~ msgid "Devanagari"
-#~ msgstr "devanagari"
-
-#~ msgid "Danish"
-#~ msgstr "dán"
-
-#~ msgid "Dvorak (US)"
-#~ msgstr "Dvorak-féle (USA)"
-
-#~ msgid "Dvorak (Esperanto)"
-#~ msgstr "Dvorak-féle (eszperantó)"
-
-#~ msgid "Dvorak (Norwegian)"
-#~ msgstr "Dvorak-féle (norvég)"
-
-#~ msgid "Dvorak (Swedish)"
-#~ msgstr "Dvorak-féle (svéd)"
-
-#~ msgid "Estonian"
-#~ msgstr "észt"
-
-#~ msgid "Georgian (\"Russian\" layout)"
-#~ msgstr "grúz (\"orosz\" kiosztás)"
-
-#~ msgid "Georgian (\"Latin\" layout)"
-#~ msgstr "grúz (\"latin\" kiosztás)"
-
-#~ msgid "Greek"
-#~ msgstr "görög"
-
-#~ msgid "Greek (polytonic)"
-#~ msgstr "görög (politon)"
-
-#~ msgid "Gujarati"
-#~ msgstr "gudzsarati"
-
-#~ msgid "Gurmukhi"
-#~ msgstr "gurmukhi"
-
-#~ msgid "Hungarian"
-#~ msgstr "magyar"
-
-#~ msgid "Croatian"
-#~ msgstr "horvát"
-
-#~ msgid "Irish"
-#~ msgstr "ír"
-
-#~ msgid "Israeli"
-#~ msgstr "izraeli"
-
-#~ msgid "Israeli (Phonetic)"
-#~ msgstr "izraeli (fonetikus)"
-
-#~ msgid "Iranian"
-#~ msgstr "iráni"
-
-#~ msgid "Icelandic"
-#~ msgstr "izlandi"
-
-#~ msgid "Italian"
-#~ msgstr "olasz"
-
-#~ msgid "Inuktitut"
-#~ msgstr "inuktitut"
-
-#~ msgid "Japanese 106 keys"
-#~ msgstr "japán 106 billentyűs"
-
-#~ msgid "Kannada"
-#~ msgstr "kannada"
-
-#~ msgid "Korean keyboard"
-#~ msgstr "koreai billentyűzet"
-
-#~ msgid "Kyrgyz keyboard"
-#~ msgstr "kirgiz billentyűzet"
-
-#~ msgid "Latin American"
-#~ msgstr "latin-amerikai"
-
-#~ msgid "Laotian"
-#~ msgstr "laoszi"
-
-#~ msgid "Lithuanian AZERTY (old)"
-#~ msgstr "litván AZERTY (régi)"
-
-#~ msgid "Lithuanian AZERTY (new)"
-#~ msgstr "litván AZERTY (új)"
-
-#~ msgid "Lithuanian \"number row\" QWERTY"
-#~ msgstr "litván \"számsor\" QWERTY"
-
-#~ msgid "Lithuanian \"phonetic\" QWERTY"
-#~ msgstr "litván \"fonetikus\" QWERTY"
-
-#~ msgid "Latvian"
-#~ msgstr "lett"
-
-#~ msgid "Malayalam"
-#~ msgstr "malayalam"
-
-#~ msgid "Macedonian"
-#~ msgstr "macedón"
-
-#~ msgid "Myanmar (Burmese)"
-#~ msgstr "myanmar (burmai)"
-
-#~ msgid "Mongolian (cyrillic)"
-#~ msgstr "mongol (cirill)"
-
-#~ msgid "Maltese (UK)"
-#~ msgstr "máltai (UK)"
-
-#~ msgid "Maltese (US)"
-#~ msgstr "máltai (US)"
-
-#~ msgid "Dutch"
-#~ msgstr "holland"
-
-#~ msgid "Oriya"
-#~ msgstr "oriya"
-
-#~ msgid "Polish (qwerty layout)"
-#~ msgstr "lengyel (qwerty)"
-
-#~ msgid "Polish (qwertz layout)"
-#~ msgstr "lengyel (qwertz)"
-
-#~ msgid "Portuguese"
-#~ msgstr "portugál"
-
-#~ msgid "Canadian (Quebec)"
-#~ msgstr "kanadai (Quebec)"
-
-#~ msgid "Romanian (qwertz)"
-#~ msgstr "román (qwertz)"
-
-#~ msgid "Romanian (qwerty)"
-#~ msgstr "román (qwerty)"
-
-#~ msgid "Russian (Phonetic)"
-#~ msgstr "orosz (fonetikus)"
-
-#~ msgid "Saami (norwegian)"
-#~ msgstr "saami (norvég)"
-
-#~ msgid "Saami (swedish/finnish)"
-#~ msgstr "saami (svéd/finn)"
-
-#~ msgid "Slovenian"
-#~ msgstr "szlovén"
-
-#~ msgid "Slovakian (QWERTZ)"
-#~ msgstr "szlovák (QWERTZ)"
-
-#~ msgid "Slovakian (QWERTY)"
-#~ msgstr "szlovák (QWERTY)"
-
-#~ msgid "Serbian (cyrillic)"
-#~ msgstr "szerb (cirill)"
-
-#~ msgid "Syriac"
-#~ msgstr "szír"
-
-#~ msgid "Syriac (phonetic)"
-#~ msgstr "szír (fonetikus)"
-
-#~ msgid "Telugu"
-#~ msgstr "telugu"
-
-#~ msgid "Tamil (ISCII-layout)"
-#~ msgstr "tamil (ISCII kiosztás)"
-
-#~ msgid "Tamil (Typewriter-layout)"
-#~ msgstr "tamil (írógép-kiosztás)"
-
-#~ msgid "Thai keyboard"
-#~ msgstr "thaiföldi billentyűzet"
-
-#~ msgid "Tajik keyboard"
-#~ msgstr "tádzsik billentyűzet"
-
-#~ msgid "Turkish (traditional \"F\" model)"
-#~ msgstr "török (hagyományos \"F\" modell)"
-
-#~ msgid "Turkish (modern \"Q\" model)"
-#~ msgstr "török (modern \"Q\" modell)"
-
-#~ msgid "Ukrainian"
-#~ msgstr "ukrán"
-
-#~ msgid "Uzbek (cyrillic)"
-#~ msgstr "üzbég (cirill)"
-
-#~ msgid "Vietnamese \"numeric row\" QWERTY"
-#~ msgstr "vietnámi \"számsor\" QWERTY"
-
-#~ msgid "Yugoslavian (latin)"
-#~ msgstr "jugoszláv (latin)"
-
-#~ msgid "No devices found"
-#~ msgstr "Eszköz nem található"
-
-#~ msgid "Remote CUPS server and no local CUPS daemon: "
-#~ msgstr "Távoli CUPS-kiszolgáló, nincs helyi CUPS-szolgáltatás: "
-
-#~ msgid "Could not install necessary packages, %s cannot be started!"
-#~ msgstr ""
-#~ "Nem sikerült telepíteni a szükséges csomagokat, ezért a(z) %s nem "
-#~ "indítható."
-
-#~ msgid ""
-#~ "You do not have any configured Internet connection.\n"
-#~ "Please run \"Internet access\" in control center."
-#~ msgstr ""
-#~ "Nincs beállítva egyetlen internetkapcsolat sem.\n"
-#~ "Kapcsolat létrehozásához használja az \"Internet-hozzáférés\"\n"
-#~ "funkciót a Mandriva Linux Vezérlőközpontban."
-
-#~ msgid ""
-#~ "Welcome to the UPS configuration utility.\n"
-#~ "\n"
-#~ "Here, you'll be add a new UPS to your system.\n"
-#~ msgstr ""
-#~ "Üdvözli az UPS-beállító.\n"
-#~ "\n"
-#~ "A programmal új UPS-t vehet fel a rendszerébe.\n"
-
-#~ msgid "Enable multiple profiles"
-#~ msgstr "Több profil engedélyezése"
-
-#~ msgid ""
-#~ "You now have the opportunity to download updated packages. These "
-#~ "packages\n"
-#~ "have been updated after the distribution was released. They may\n"
-#~ "contain security or bug fixes.\n"
-#~ "\n"
-#~ "To download these packages, you will need to have a working Internet \n"
-#~ "connection.\n"
-#~ "\n"
-#~ "Do you want to install the updates ?"
-#~ msgstr ""
-#~ "Lehetősége van arra, hogy letöltse a disztribúció kiadása után "
-#~ "frissített\n"
-#~ "csomagokat. Ez általában biztonsági javításokat és hibajavításokat "
-#~ "jelent.\n"
-#~ "\n"
-#~ "A funkció használatához szükség van egy beállított internetkapcsolatra.\n"
-#~ "\n"
-#~ "Szeretné feltelepíteni a frissítéseket?"
-
-#~ msgid "Installing bootloader"
-#~ msgstr "Rendszerindító program telepítése"
-
-#~ msgid ""
-#~ "You may now provide options to module %s.\n"
-#~ "Options are in format ``name=value name2=value2...''.\n"
-#~ "For instance, ``io=0x300 irq=7''"
-#~ msgstr ""
-#~ "Itt lehet megadni a(z) %s modul paramétereit\n"
-#~ "a következő formátumban: \"név1=érték1 név2=érték2 ...\".\n"
-#~ "Például: \"io=0x300 irq=7\""
-
-#~ msgid ""
-#~ "Iwspy is used to set a list of addresses in a wireless network\n"
-#~ "interface and to read back quality of link information for each of "
-#~ "those.\n"
-#~ "\n"
-#~ "This information is the same as the one available in /proc/net/wireless:\n"
-#~ "quality of the link, signal strength and noise level.\n"
-#~ "\n"
-#~ "See iwpspy(8) man page for further information."
-#~ msgstr ""
-#~ "Az Iwspy program funkciója vezeték nélküli hálózati csatolók\n"
-#~ "címlistáinak beállítása és kapcsolatminőségi információk lekérdezése\n"
-#~ "azoktól.\n"
-#~ "\n"
-#~ "Ez az információ megegyezik a /proc/net/wireless fájlban levővel:\n"
-#~ "kapcsolatminőség, jelerősség és zajszint.\n"
-#~ "\n"
-#~ "További információ az iwspy(8) kézikönyvben."
-
-#~ msgid "Configuring printer..."
-#~ msgstr "A nyomtató beállítása..."
-
-#~ msgid "Configuring applications..."
-#~ msgstr "Alkalmazások beállítása..."
-
-#~ msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
-#~ msgstr "A nyomtató felvétele a StarOffice/OpenOffice.org/GIMP programba"
-
-#~ msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
-#~ msgstr "A nyomtató eltávolítása a StarOffice/OpenOffice.org/GIMP programból"
-
-#~ msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
-#~ msgstr "A nyomtató felvétele a StarOffice/OpenOffice.org/GIMP programba"
-
-#~ msgid ""
-#~ "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/"
-#~ "GIMP."
-#~ msgstr ""
-#~ "A(z) \"%s\" nyomtató sikeresen fel lett véve a StarOffice/OpenOffice.org/"
-#~ "GIMP programba."
-
-#~ msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-#~ msgstr ""
-#~ "A(z) \"%s\" nyomtatót nem sikerült felvenni a StarOffice/OpenOffice.org/"
-#~ "GIMP programba."
-
-#~ msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
-#~ msgstr "A nyomtató eltávolítása a StarOffice/OpenOffice.org/GIMP programból"
-
-#~ msgid ""
-#~ "The printer \"%s\" was successfully removed from Star Office/OpenOffice."
-#~ "org/GIMP."
-#~ msgstr ""
-#~ "A(z) \"%s\" nyomtató sikeresen el lett távolítva a StarOffice/OpenOffice."
-#~ "org/GIMP programból."
-
-#~ msgid ""
-#~ "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
-#~ msgstr ""
-#~ "A(z) \"%s\" nyomtatót nem sikerült eltávolítani a StarOffice/OpenOffice."
-#~ "org/GIMP programból."
-
-#~ msgid "<b>Congratulations for choosing Mandriva Linux!</b>"
-#~ msgstr ""
-#~ "<b>Gratulálunk ahhoz, hogy a Mandriva Linux rendszert választotta</b>"
-
-#~ msgid ""
-#~ "We would like to thank everyone who participated in the development of "
-#~ "this latest release."
-#~ msgstr ""
-#~ "Szeretnénk köszönetet mondani mindazoknak, akik részt vettek ennek a "
-#~ "verziónak a fejlesztésében."
-
-#~ msgid "<b>Discovery</b>"
-#~ msgstr "<b>Discovery</b>"
-
-#~ msgid ""
-#~ "The menu is task-oriented, with a single selected application per task."
-#~ msgstr "A menü feladatorientált, feladatonként egy alkalmazással."
-
-#~ msgid ""
-#~ "The powerful Open Source graphical desktop environment KDE is the desktop "
-#~ "of choice for the Discovery Pack."
-#~ msgstr ""
-#~ "A Discovery rendszer a fejlett, nyílt forráskódú KDE grafikus asztali "
-#~ "környezetet használja."
-
-#~ msgid "<b>OpenOffice.org</b>: The complete Linux office suite."
-#~ msgstr "<b>OpenOffice.org</b>: a teljes irodai csomag Linuxhoz."
-
-#~ msgid ""
-#~ "<b>WRITER</b> is a powerful word processor for creating all types of text "
-#~ "documents. Documents may include images, diagrams and tables."
-#~ msgstr ""
-#~ "A <b>Writer</b> egy fejlett szövegszerkesztő minden dokumentumtípushoz. A "
-#~ "dokumentumok tartalmazhatnak képeket, diagramokat és táblázatokat is."
-
-#~ msgid ""
-#~ "<b>CALC</b> is a feature-packed spreadsheet which enables you to compute, "
-#~ "analyze and manage all of your data."
-#~ msgstr ""
-#~ "A <b>Calc</b> egy nagy tudású táblázatkezelő, amely lehetővé teszi az "
-#~ "adatok kezelését, elemzését és számítások végzését."
-
-#~ msgid ""
-#~ "<b>IMPRESS</b> is the fastest, most powerful way to create effective "
-#~ "multimedia presentations."
-#~ msgstr ""
-#~ "Az <b>Impress</b> segítségével a leggyorsabb és leghatékonyabb módon "
-#~ "készíthetők hatásos multimédiás bemutatók."
-
-#~ msgid ""
-#~ "<b>DRAW</b> will produce everything from simple diagrams to dynamic 3D "
-#~ "illustrations."
-#~ msgstr ""
-#~ "A <b>Draw</b> segítségével az egyszerű diagramoktól kezdve a dinamikus "
-#~ "háromdimenziós rajzokig bármi elkészíthető."
-
-#~ msgid "<b>Surf The Internet</b>"
-#~ msgstr "<b>Böngésszen az interneten</b>"
-
-#~ msgid ""
-#~ "More than just a full-featured email client, <b>Kontact</b> also includes "
-#~ "an address book, a calendar and scheduling program, plus a tool for "
-#~ "taking notes!"
-#~ msgstr ""
-#~ "A teljes értékű levelezőprogramon kívül a <b>Kontact</b> tartalmaz "
-#~ "címjegyzékkezelőt, naptárt, határidőnaplót és jegyzetkészítőt is."
-
-#~ msgid "You can also:"
-#~ msgstr "Lehetősége van továbbá:"
-
-#~ msgid "\t* browse the Web"
-#~ msgstr "\t* a web böngészésére"
-
-#~ msgid "\t* chat"
-#~ msgstr "\t* társalgásra"
-
-#~ msgid "\t* organize a video-conference"
-#~ msgstr "\t* videokonferencia szervezésére"
-
-#~ msgid "\t* create your own Web site"
-#~ msgstr "\t* saját weboldal létrehozására"
-
-#~ msgid "<b>Multimedia</b>: Software for every need!"
-#~ msgstr "<b>Multimédia</b>: alkalmazások minden igényhez"
-
-#~ msgid "Listen to audio CDs with <b>KsCD</b>."
-#~ msgstr "Hallgasson zenei CD-ket a <b>KsCD</b>-vel."
-
-#~ msgid "Listen to music files and watch videos with <b>Totem</b>."
-#~ msgstr "Hallgasson zenét és nézzen videókat a <b>Totem</b>mel."
-
-#~ msgid ""
-#~ "View and edit images and photos with <b>GQview</b> and <b>The Gimp!</b>"
-#~ msgstr ""
-#~ "Nézzen és szerkesszen képeket illetve fotókat a <b>GQview</b>-val és a "
-#~ "<b>GIMP</b>-pel."
-
-#~ msgid "Become a <b>Mandriva Club</b> member!"
-#~ msgstr "Legyen tagja a <b>Mandriva Club</b>nak"
-
-#~ msgid ""
-#~ "Take advantage of valuable benefits, products and services by joining "
-#~ "Mandriva Club, such as:"
-#~ msgstr "Használja ki a Mandriva Club-tagsággal járó előnyöket:"
-
-#~ msgid "\t* Full access to commercial applications"
-#~ msgstr "\t* teljes hozzáférés kereskedelmi alkalmazásokhoz"
-
-#~ msgid ""
-#~ "\t* Special download mirror list exclusively for Mandriva Club Members"
-#~ msgstr ""
-#~ "\t* letöltési tükörkiszolgálók kizárólagosan a Mandriva Club-tagok számára"
-
-#~ msgid "\t* Voting for software to put in Mandriva Linux"
-#~ msgstr "\t* szavazás a Mandriva Linux rendszerbe felveendő alkalmazásokról"
-
-#~ msgid "\t* Plus much more"
-#~ msgstr "\t* ..."
-
-#~ msgid "For more information, please visit <b>www.mandrakeclub.com</b>"
-#~ msgstr "További információk a <b>www.mandrivaclub.com</b> weboldalon."
-
-#~ msgid "Do you require assistance?"
-#~ msgstr "Szüksége van segítségre?"
-
-#~ msgid "<b>Mandriva Expert</b> is the primary source for technical support."
-#~ msgstr ""
-#~ "A <b>Mandriva Expert</b> az elsődleges forrás a technikai támogatáshoz."
-
-#~ msgid ""
-#~ "If you have Linux questions, subscribe to Mandriva Expert at <b>www."
-#~ "mandrivaexpert.com</b>"
-#~ msgstr ""
-#~ "Ha Linuxszal kapcsolatos kérdései vannak, iratkozzon fel a Mandriva "
-#~ "Expertre a <b>www.mandrivaexpert.com</b> weboldalon."
-
-#~ msgid "Installation of %s failed. The following error occurred:"
-#~ msgstr "A(z) %s telepítése nem sikerült a következő hiba miatt:"
-
-#~ msgid ""
-#~ "We need to install ntp package\n"
-#~ " to enable Network Time Protocol\n"
-#~ "\n"
-#~ "Do you want to install ntp ?"
-#~ msgstr ""
-#~ "A hálózati időprotokoll (NTP)\n"
-#~ "használatához telepíteni kell\n"
-#~ "az ntp csomagot.\n"
-#~ "\n"
-#~ "Szeretné telepíteni?"
-
-#~ msgid ""
-#~ "The setup of a VPN connection has already been done.\n"
-#~ "\n"
-#~ "It's currently enabled.\n"
-#~ "\n"
-#~ "What would you like to do ?"
-#~ msgstr ""
-#~ "Egy VPN-kapcsolat beállítása már megtörtént.\n"
-#~ "\n"
-#~ "A kapcsolat jelenleg engedélyezett.\n"
-#~ "\n"
-#~ "Mit szeretne tenni?"
-
-#~ msgid ""
-#~ "The setup of a VPN connection has already been done.\n"
-#~ "\n"
-#~ "It's currently disabled.\n"
-#~ "\n"
-#~ "What would you like to do ?"
-#~ msgstr ""
-#~ "Egy VPN-kapcsolat beállítása már megtörtént.\n"
-#~ "\n"
-#~ "A kapcsolat jelenleg le van tiltva.\n"
-#~ "\n"
-#~ "Mit szeretne tenni?"
-
-#~ msgid "Set of tools to read and send mail and news and to browse the Web"
-#~ msgstr "Eszközök levelezéshez, hírkezeléshez és a web böngészéséhez"
-
-#~ msgid ""
-#~ "Before continuing, you should carefully read the terms of the license. "
-#~ "It\n"
-#~ "covers the entire Mandriva Linux distribution. If you do agree with all "
-#~ "the\n"
-#~ "terms in it, check the \"%s\" box. If not, clicking on the \"%s\" button\n"
-#~ "will reboot your computer."
-#~ msgstr ""
-#~ "Mielőtt továbblépne, olvassa át alaposan a licencegyezményt, amely az\n"
-#~ "egész Mandriva Linux disztribúcióra érvényes. Ha elfogadja az abban\n"
-#~ "szereplő feltételeket, akkor jelölje be a(z) \"%s\" opciót.\n"
-#~ "Ha nem fogadja el valamelyik feltételt, akkor kattintson a(z)\n"
-#~ "\"%s\" gombra - ezzel újraindítja a számítógépet."
-
-#~ msgid ""
-#~ "The Mandriva Linux installation is distributed on several CD-ROMs. If a\n"
-#~ "selected package is located on another CD-ROM, DrakX will eject the "
-#~ "current\n"
-#~ "CD and ask you to insert the correct CD as required."
-#~ msgstr ""
-#~ "A Mandriva Linux telepítőanyag több CD-n helyezkedik el. Ha egy "
-#~ "kiválasztott\n"
-#~ "csomag egy másik CD-n található, akkor a telepítő kiadja az\n"
-#~ "aktuális CD-t, és megkéri Önt, hogy helyezze be a megfelelőt."
-
-#~ msgid "Use auto detection"
-#~ msgstr "Automatikus felderítés"
-
-#~ msgid ""
-#~ "\"%s\": clicking on the \"%s\" button will open the printer "
-#~ "configuration\n"
-#~ "wizard. Consult the corresponding chapter of the ``Starter Guide'' for "
-#~ "more\n"
-#~ "information on how to setup a new printer. The interface presented there "
-#~ "is\n"
-#~ "similar to the one used during installation."
-#~ msgstr ""
-#~ "\"%s\": a(z) \"%s\" gombra kattintva elindul a nyomtatóbeállítási\n"
-#~ "varázsló. Nyomtatóbeállítással kapcsolatos további információkat a\n"
-#~ "felhasználói kézikönyvből lehet szerezni. Az ott bemutatott felület "
-#~ "hasonló\n"
-#~ "ahhoz, ami a telepítéskor megjelenik."
-
-#~ msgid ""
-#~ "This dialog is used to choose which services you wish to start at boot\n"
-#~ "time.\n"
-#~ "\n"
-#~ "DrakX will list all the services available on the current installation.\n"
-#~ "Review each one carefully and uncheck those which are not needed at boot\n"
-#~ "time.\n"
-#~ "\n"
-#~ "A short explanatory text will be displayed about a service when it is\n"
-#~ "selected. However, if you are not sure whether a service is useful or "
-#~ "not,\n"
-#~ "it is safer to leave the default behavior.\n"
-#~ "\n"
-#~ "!! At this stage, be very careful if you intend to use your machine as a\n"
-#~ "server: you will probably not want to start any services that you do not\n"
-#~ "need. Please remember that several services can be dangerous if they are\n"
-#~ "enabled on a server. In general, select only the services you really "
-#~ "need.\n"
-#~ "!!"
-#~ msgstr ""
-#~ "Ebben a párbeszédablakban lehet kijelölni az automatikusan elindítandó\n"
-#~ "szolgáltatásokat.\n"
-#~ "\n"
-#~ "A telepítő megjeleníti a jelenleg telepített összes szolgáltatás "
-#~ "listáját.\n"
-#~ "Vizsgálja meg a listát alaposan, és törölje a kijelölést azok mellől,\n"
-#~ "amelyek automatikus elindítására nincs szükség.\n"
-#~ "\n"
-#~ "Egy szolgáltatás kiválasztásakor megjelenik a hozzá tartozó rövid "
-#~ "leírás.\n"
-#~ "Ha nem tudja biztosan, hogy a szolgáltatásra szükség van-e vagy\n"
-#~ "sem, akkor ne változtassa meg az alapértelmezett indítási módot.\n"
-#~ "\n"
-#~ "Gondosan járjon el, ha a gépet kiszolgálónak fogja használni,\n"
-#~ "ne indítson el egy olyan szolgáltatást sem automatikusan, amelyre nincs\n"
-#~ "szükség. A feleslegesen elindított szolgáltatások biztonsági kockázatot\n"
-#~ "jelentenek. Csak a tényleges feladatot ellátó szolgáltatásokat "
-#~ "engedélyezze."
-
-#~ msgid ""
-#~ "Graphic Card\n"
-#~ "\n"
-#~ "   The installer will normally automatically detect and configure the\n"
-#~ "graphic card installed on your machine. If it is not the case, you can\n"
-#~ "choose from this list the card you actually have installed.\n"
-#~ "\n"
-#~ "   In the situation where different servers are available for your card,\n"
-#~ "with or without 3D acceleration, you are asked to choose the server that\n"
-#~ "best suits your needs."
-#~ msgstr ""
-#~ "Grafikus kártya\n"
-#~ "\n"
-#~ "A telepítő általában felismeri és beállítja a gépben levő grafikus "
-#~ "kártyát.\n"
-#~ "Ha nem így történik, kiválaszthatja a grafikus kártyák listájából a\n"
-#~ "megfelelőt.\n"
-#~ "\n"
-#~ "Ha több grafikus modul is elérhető az Ön kártyájához - 3D gyorsítással\n"
-#~ "illetve a nélkül -, akkor kiválaszthatja az Önnek leginkább megfelelőt."
-
-#~ msgid ""
-#~ "Monitor\n"
-#~ "\n"
-#~ "   The installer will normally automatically detect and configure the\n"
-#~ "monitor connected to your machine. If it is incorrect, you can choose "
-#~ "from\n"
-#~ "this list the monitor you actually have connected to your computer."
-#~ msgstr ""
-#~ "Monitor\n"
-#~ "\n"
-#~ "A telepítő általában automatikusan megállapítja a monitor típusát, és\n"
-#~ "beállítja azt. Ha nem így történik, kiválaszthatja ebből a listából a\n"
-#~ "monitor típusát."
-
-#~ msgid ""
-#~ "Resolution\n"
-#~ "\n"
-#~ "   Here you can choose the resolutions and color depths available for "
-#~ "your\n"
-#~ "hardware. Choose the one that best suits your needs (you will be able to\n"
-#~ "change that after installation though). A sample of the chosen\n"
-#~ "configuration is shown in the monitor picture."
-#~ msgstr ""
-#~ "Felbontás\n"
-#~ "\n"
-#~ "Itt kiválaszthatja a kívánt felbontási és színmélységi értékeket az\n"
-#~ "elérhető értékek listájából. Válassza ki az igényeinek legjobban "
-#~ "megfelelő\n"
-#~ "értékeket. A beállítások tetszőlegesen módosíthatók a telepítés után is.\n"
-#~ "A képernyőn egy mintakép fog megjelenni a kiválasztott beállítások\n"
-#~ "szemléltetésére."
-
-#~ msgid ""
-#~ "In the situation where different servers are available for your card, "
-#~ "with\n"
-#~ "or without 3D acceleration, you are asked to choose the server that best\n"
-#~ "suits your needs."
-#~ msgstr ""
-#~ "Ha több grafikus modul is elérhető az Ön kártyájához - 3D gyorsítással\n"
-#~ "illetve a nélkül -, akkor kiválaszthatja az Önnek leginkább megfelelőt."
-
-#~ msgid ""
-#~ "Options\n"
-#~ "\n"
-#~ "   Here you can choose whether you want to have your machine "
-#~ "automatically\n"
-#~ "switch to a graphical interface at boot. Obviously, you want to check\n"
-#~ "\"%s\" if your machine is to act as a server, or if you were not "
-#~ "successful\n"
-#~ "in getting the display configured."
-#~ msgstr ""
-#~ "Beállítások\n"
-#~ "\n"
-#~ "Itt beállítható, hogy rendszerindításkor grafikus üzemmódba váltson-e a\n"
-#~ "rendszer. Ha a gép kiszolgálóként fog üzemelni, vagy nem sikerült "
-#~ "megfelelően\n"
-#~ "beállítani a grafikus üzemmódot, akkor a(z) \"%s\" lehetőséget érdemes "
-#~ "választani."
-
-#~ msgid ""
-#~ "At the time you are installing Mandriva Linux, it is likely that some\n"
-#~ "packages will have been updated since the initial release. Bugs may have\n"
-#~ "been fixed, security issues resolved. To allow you to benefit from these\n"
-#~ "updates, you are now able to download them from the Internet. Check \"%s"
-#~ "\"\n"
-#~ "if you have a working Internet connection, or \"%s\" if you prefer to\n"
-#~ "install updated packages later.\n"
-#~ "\n"
-#~ "Choosing \"%s\" will display a list of places from which updates can be\n"
-#~ "retrieved. You should choose one near to you. A package-selection tree "
-#~ "will\n"
-#~ "appear: review the selection, and press \"%s\" to retrieve and install "
-#~ "the\n"
-#~ "selected package(s), or \"%s\" to abort."
-#~ msgstr ""
-#~ "Lehetséges, hogy amikor Ön a Mandriva Linux rendszert telepíti, már\n"
-#~ "frissítésre kerültek bizonyos csomagok a rendszer kiadása óta.\n"
-#~ "Elképzelhető, hogy bizonyos hibák ki lettek javítva, illetve\n"
-#~ "hogy meg lettek oldva bizonyos felmerült biztonsági problémák. Ezeket\n"
-#~ "a frissítéseket Ön letöltheti az interneten keresztül.\n"
-#~ "Válassza a(z) \"%s\" lehetőséget, ha van működő internetkapcsolata. Ha\n"
-#~ "inkább később kívánja telepíteni a frissítéseket, akkor a(z) \"%s\"\n"
-#~ "lehetőséget válassza.\n"
-#~ "\n"
-#~ "Ha a(z) \"%s\" lehetőséget választja, akkor megjelenik egy lista azon\n"
-#~ "helyekről, amelyekről a frissítések letölthetők. Válasszon közülük egy\n"
-#~ "Önhöz közel levőt.\n"
-#~ "Ezt követően egy csomagválasztási fa jelenik meg. Ha telepíteni kívánja "
-#~ "a\n"
-#~ "kijelölt csomagokat, akkor nyomja le a(z) \"%s\" gombot. Ha nem kíván\n"
-#~ "csomagokat telepíteni, akkor a(z) \"%s\" gombot nyomja le."
-
-#~ msgid ""
-#~ "At this point, DrakX will allow you to choose the security level desired\n"
-#~ "for the machine. As a rule of thumb, the security level should be set\n"
-#~ "higher if the machine will contain crucial data, or if it will be a "
-#~ "machine\n"
-#~ "directly exposed to the Internet. The trade-off of a higher security "
-#~ "level\n"
-#~ "is generally obtained at the expense of ease of use.\n"
-#~ "\n"
-#~ "If you do not know what to choose, stay with the default option. You "
-#~ "will\n"
-#~ "be able to change that security level later with tool draksec from the\n"
-#~ "Mandrake Control Center.\n"
-#~ "\n"
-#~ "The \"%s\" field can inform the system of the user on this computer who\n"
-#~ "will be responsible for security. Security messages will be sent to that\n"
-#~ "address."
-#~ msgstr ""
-#~ "Most kiválaszthat egy biztonsági szintet a gép számára. Alapszabály,\n"
-#~ "hogy ha fontos adatok vannak tárolva a gépen, vagy a gép kapcsolódik\n"
-#~ "az internetre, akkor érdemes magasabbra venni a biztonsági szintet.\n"
-#~ "Magasabb szint esetén viszont általában nehézkesebb a gép használata.\n"
-#~ "\n"
-#~ "Ha nem biztos benne, hogy mit volna érdemes választani, akkor válassza\n"
-#~ "az alapértelmezés szerinti lehetőséget. A biztonsági szint később is\n"
-#~ "módosítható a Mandriva Vezérlőközpontban elérhető \"draksec\" eszközzel.\n"
-#~ "\n"
-#~ "A(z) \"%s\" mező informálja a rendszert a biztonságért felelős "
-#~ "felhasználó\n"
-#~ "(ezen gép egyik felhasználója) személyéről. A biztonsági üzenetek azon\n"
-#~ "felhasználó címére lesznek küldve."
-
-#~ msgid ""
-#~ "\"%s\": check the current country selection. If you are not in this\n"
-#~ "country, click on the \"%s\" button and choose another one. If your "
-#~ "country\n"
-#~ "is not in the first list shown, click the \"%s\" button to get the "
-#~ "complete\n"
-#~ "country list."
-#~ msgstr ""
-#~ "\"%s\": ellenőrizze a jelenlegi országbeállítást. Ha az nem\n"
-#~ "megfelelő, kattintson a(z) \"%s\" gombra és válasszon egy másik "
-#~ "országot.\n"
-#~ "Ha a kívánt ország nem szerepel az elsőként megjelenített listában, "
-#~ "akkor\n"
-#~ "kattintson a(z) \"%s\" gombra a teljes országlista megjelenítéséhez."
-
-#~ msgid "GRUB"
-#~ msgstr "GRUB"
-
-#~ msgid "/dev/hda"
-#~ msgstr "/dev/hda"
-
-#~ msgid "/dev/hdb"
-#~ msgstr "/dev/hdb"
-
-#~ msgid "/dev/fd0"
-#~ msgstr "/dev/fd0"
-
-#~ msgid "Delay before booting the default image"
-#~ msgstr "Várakozási idő az alapértelmezett rendszer betöltése előtt"
-
-#~ msgid ""
-#~ "After you have configured the general bootloader parameters, the list of\n"
-#~ "boot options that will be available at boot time will be displayed.\n"
-#~ "\n"
-#~ "If there are other operating systems installed on your machine they will\n"
-#~ "automatically be added to the boot menu. You can fine-tune the existing\n"
-#~ "options by clicking \"%s\" to create a new entry; selecting an entry and\n"
-#~ "clicking \"%s\" or \"%s\" to modify or remove it. \"%s\" validates your\n"
-#~ "changes.\n"
-#~ "\n"
-#~ "You may also not want to give access to these other operating systems to\n"
-#~ "anyone who goes to the console and reboots the machine. You can delete "
-#~ "the\n"
-#~ "corresponding entries for the operating systems to remove them from the\n"
-#~ "bootloader menu, but you will need a boot disk in order to boot those "
-#~ "other\n"
-#~ "operating systems!"
-#~ msgstr ""
-#~ "Miután beállította az általános rendszerbetöltő-paramétereket, "
-#~ "megjelenik\n"
-#~ "a betöltési lehetőségek listája, amely rendszerindításkor lesz elérhető.\n"
-#~ "\n"
-#~ "Ha vannak más operációs rendszerek is a gépen, azok automatikusan fel\n"
-#~ "lesznek véve a betöltési menübe. Az aktuális beállítások módosíthatók. "
-#~ "Új\n"
-#~ "elemet a(z) \"%s\" funkcióval lehet felvenni. Egy elem módosításához\n"
-#~ "jelölje ki az elemet, majd kattintson a(z) \"%s\" gombra; eltávolításhoz\n"
-#~ "pedig a kijelölést követően a(z) \"%s\" gombra. A módosítások a(z)\n"
-#~ "\"%s\" gombbal érvényesíthetők.\n"
-#~ "\n"
-#~ "Ha valamelyik operációs rendszert nem akarja elérhetővé tenni, akkor\n"
-#~ "törölheti annak rendszerbetöltési bejegyzéseit, de ebben az esetben\n"
-#~ "később csak indítólemezzel tudja majd azt az operációs rendszert "
-#~ "elindítani."
-
-#~ msgid ""
-#~ "\"%s\": if a sound card is detected on your system, it is displayed "
-#~ "here.\n"
-#~ "If you notice the sound card displayed is not the one that is actually\n"
-#~ "present on your system, you can click on the button and choose another\n"
-#~ "driver."
-#~ msgstr ""
-#~ "\"%s\": ha a telepítő hangkártyát észlel a gépben, az itt fog\n"
-#~ "megjelenni. Ha az itt megjelenő hangkártya nem azonos a gépben levővel,\n"
-#~ "akkor kattintson a gombra és válasszon egy másik meghajtóprogramot."
-
-#~ msgid ""
-#~ "No ethernet network adapter has been detected on your system.\n"
-#~ "I cannot set up this connection type."
-#~ msgstr ""
-#~ "Ethernet hálózati kártya nem található a gépben.\n"
-#~ "Nem lehet beállítani ezt a kapcsolattípust."
-
-#~ msgid ""
-#~ "Please choose which network adapter you want to use to connect to "
-#~ "Internet."
-#~ msgstr ""
-#~ "Válassza ki, hogy melyik hálózati csatolón keresztül szeretne csatlakozni "
-#~ "az internetre."
-
-#~ msgid ""
-#~ "To submit a bug report, click on the button report.\n"
-#~ "This will open  a web browser window on %s\n"
-#~ " where you'll find a form to fill in.  The information displayed above "
-#~ "will be \n"
-#~ "transferred to that server."
-#~ msgstr ""
-#~ "Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
-#~ "Ekkor megjelenik a(z) \"%s\" weboldal egy böngészőablakban,\n"
-#~ "ahol egy kitöltendő űrlap lesz látható. A fenti információk el lesznek\n"
-#~ "küldve azon kiszolgálónak."
-
-#~ msgid ""
-#~ "To submit a bug report, click the report button, which will open your "
-#~ "default browser\n"
-#~ "to Anthill where you will be able to upload the above information as a "
-#~ "bug report."
-#~ msgstr ""
-#~ "Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
-#~ "Ekkor megjelenik az Anthill weboldal egy böngészőablakban,\n"
-#~ "ahol a fenti információk elküldhetők hibabejelentésként."
-
-#~ msgid ""
-#~ "Here, you can setup the security level and administrator of your "
-#~ "machine.\n"
-#~ "\n"
-#~ "\n"
-#~ "The Security Administrator is the one who will receive security alerts if "
-#~ "the\n"
-#~ "'Security Alerts' option is set. It can be a username or an email.\n"
-#~ "\n"
-#~ "\n"
-#~ "The Security Level menu allows you to select one of the six preconfigured "
-#~ "security levels\n"
-#~ "provided with msec. These levels range from poor security and ease of "
-#~ "use, to\n"
-#~ "paranoid config, suitable for very sensitive server applications:\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-#~ "very\n"
-#~ "easy to use security level. It should only be used for machines not "
-#~ "connected to\n"
-#~ "any network and that are not accessible to everybody.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-#~ "security\n"
-#~ "recommended for a computer that will be used to connect to the Internet "
-#~ "as a\n"
-#~ "client.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">High</span>: There are already some\n"
-#~ "restrictions, and more automatic checks are run every night.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-#~ "enough\n"
-#~ "to use the system as a server which can accept connections from many "
-#~ "clients. If\n"
-#~ "your machine is only a client on the Internet, you should choose a lower "
-#~ "level.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-#~ "previous\n"
-#~ "level, but the system is entirely closed and security features are at "
-#~ "their\n"
-#~ "maximum"
-#~ msgstr ""
-#~ "Itt lehet beállítani a biztonsági szintet és a gép biztonsági "
-#~ "adminisztrátorát.\n"
-#~ "\n"
-#~ "\n"
-#~ "A biztonsági adminisztrátor az a személy, aki a 'Biztonsági "
-#~ "figyelmeztetések'\n"
-#~ "opció bekapcsolt állapota esetén a biztonsággal kapcsolatos "
-#~ "figyelmeztetéseket\n"
-#~ "meg fogja kapni. Felhasználói névvel vagy email-címmel adható meg.\n"
-#~ "\n"
-#~ "\n"
-#~ "A 'Biztonsági szint' menüben több különböző előre beállított (msec) "
-#~ "biztonsági\n"
-#~ "szint közül lehet választani. A szintek a gyenge biztonságot de könnyebb\n"
-#~ "használhatóságot nyújtótól a paranoiás szintig (az utóbbi a nagyon "
-#~ "érzékeny\n"
-#~ "kiszolgálóalkalmazásokhoz használható) terjednek.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Alacsony</span>: Egyáltalán nem "
-#~ "biztonságos,\n"
-#~ "de könnyű használatot nyújtó biztonsági szint. Csak olyan gépeken "
-#~ "javasolt a\n"
-#~ "használata, amelyek nincsenek hálózatba kötve és csak kevesek által\n"
-#~ "használhatók.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Szabványos</span>: Ez a szabványos\n"
-#~ "biztonsági szint, amely akkor javasolt, ha a gép kliensként fog "
-#~ "kapcsolódni\n"
-#~ "az internetre.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Magas</span>: Már vannak bizonyos\n"
-#~ "megszorítások és több automatikus ellenőrzés fut éjszakánként.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Magasabb</span>: Ez a biztonsági szint\n"
-#~ "már elég magas ahhoz, hogy a gép kiszolgálóként legyen használva - "
-#~ "hálózaton\n"
-#~ "keresztül csatlakozó kliensek kiszolgálására. Ha a gép az interneten "
-#~ "csak\n"
-#~ "kliensként van jelen, akkor érdemesebb egy alacsonyabb szintet "
-#~ "választani.\n"
-#~ "\n"
-#~ "\n"
-#~ "<span foreground=\"royalblue3\">Paranoiás</span>: Az előző szinthez "
-#~ "hasonló,\n"
-#~ "de itt a rendszer teljesen zárt. Ez a legbiztonságosabb szint."
-
-#~ msgid ""
-#~ "Winbind allows a system to retrieve information about users and to "
-#~ "authenticate users by using in an Windows domain."
-#~ msgstr ""
-#~ "A Winbind lehetővé teszi egy rendszer számára, hogy felhasználókkal "
-#~ "kapcsolatos információkat kérdezzen le és felhasználóazonosítást végezzen "
-#~ "egy windowsos tartományban."
-
-#~ msgid "chunk size"
-#~ msgstr "szeletméret"
-
-#~ msgid "mkraid failed (maybe raidtools are missing?)"
-#~ msgstr "Az mkraid végrehajtása nem sikerült (talán hiányzik a raidtools?)"
-
-#~ msgid "mkraid failed"
-#~ msgstr "mkraid sikertelen"
-
-#~ msgid "<b>Mandrake Control Center</b>"
-#~ msgstr "<b>Mandriva Vezérlőközpont</b>"
-
-#~ msgid ""
-#~ "The Mandrake Control Center is an essential collection of Mandrake-"
-#~ "specific utilities for simplifying the configuration of your computer."
-#~ msgstr ""
-#~ "A Mandriva Vezérlőközpont a rendszer beállításához nélkülözhetetlen "
-#~ "alkalmazásokat tartalmaz."
-
-#~ msgid ""
-#~ "Find all Mandriva products and services at <b>Mandriva Store</b> -- our "
-#~ "full service e-commerce platform."
-#~ msgstr ""
-#~ "Az összes Mandriva-terméket és -szolgáltatást megtalálhatja a <b>Mandriva "
-#~ "Store</b> webáruházban."
-
-#~ msgid ""
-#~ "Take advantage of valuable benefits, products and services by joining "
-#~ "MandrakeClub, such as:"
-#~ msgstr "Használja ki a MandrakeClub-tagsággal járó előnyöket:"
-
-#~ msgid ""
-#~ "\t* Special download mirror list exclusively for MandrakeClub Members"
-#~ msgstr ""
-#~ "\t* letöltési tükörkiszolgálók kizárólagosan a MandrakeClub-tagok számára"
-
-#~ msgid "\t* Special discounts for products and services at MandrakeStore"
-#~ msgstr ""
-#~ "\t* kedvezmények bizonyos termékekre és szolgáltatásokra a MandrakeStore "
-#~ "áruházban"
-
-#~ msgid ""
-#~ "[OPTIONS] [PROGRAM_NAME]\n"
-#~ "\n"
-#~ "OPTIONS:\n"
-#~ "  --help            - print this help message.\n"
-#~ "  --report          - program should be one of mandrake tools\n"
-#~ "  --incident        - program should be one of mandrake tools"
-#~ msgstr ""
-#~ "[OPCIÓK] [PROGRAMNÉV]\n"
-#~ "\n"
-#~ "OPCIÓK:\n"
-#~ "  --help            - jelen segítség megjelenítése\n"
-#~ "  --report          - paraméter: programnév (a Mandrake-eszközök egyike)\n"
-#~ "  --incident        - paraméter: programnév (a Mandrake-eszközök egyike)"
-
-#~ msgid ""
-#~ "This interface has not been configured yet.\n"
-#~ "Run the \"Add an interface\" assistant from the Mandrake Control Center"
-#~ msgstr ""
-#~ "Ez a csatoló még nem lett beállítva.\n"
-#~ "Használja a \"Csatoló felvétele\" funkciót a Mandrake Vezérlőközpontban."
-
-#~ msgid "The alert wizard had unexpectly failled:"
-#~ msgstr "Probléma lépett fel a figyelmeztetési varázslóban:"
-
-#~ msgid ""
-#~ "Connection failed.\n"
-#~ "Verify your configuration in the Mandriva Control Center."
-#~ msgstr ""
-#~ "A kapcsolódás nem sikerült.\n"
-#~ "Ellenőrizze a beállításokat a Mandriva Vezérlőközpontban."
-
-#~ msgid "The package %s is needed. Install it?"
-#~ msgstr "Szükség van a(z) %s csomagra. Szeretné telepíteni?"
-
-#~ msgid "ignore"
-#~ msgstr "ignorálás"
-
-#~ msgid "no"
-#~ msgstr "nem"
-
-#~ msgid "yes"
-#~ msgstr "igen"
-
-#~ msgid "SILO Installation"
-#~ msgstr "A SILO telepítése"
-
-#~ msgid "First sector of boot partition"
-#~ msgstr "A rendszerindítási partíció első szektora"
-
-#~ msgid "Bootloader installation"
-#~ msgstr "A rendszerindító program telepítése"
-
-#~ msgid "SILO"
-#~ msgstr "SILO"
-
-#~ msgid "Alcatel speedtouch usb"
-#~ msgstr "Alcatel Speed Touch USB"
-
-#~ msgid "Sagem (using pppoa) usb"
-#~ msgstr "Sagem (PPPoA-t használó) USB"
-
-#~ msgid "Harddrake2 version %s"
-#~ msgstr "HardDrake2 verzió %s"
-
-#~ msgid "transmitted"
-#~ msgstr "átvitt"
-
-#~ msgid "received"
-#~ msgstr "fogadott"
-
-#~ msgid ""
-#~ "You can export using NFS or SMB. Please select which you'd like to use."
-#~ msgstr ""
-#~ "Exportálás NFS-sel vagy Sambával végezhető. Válassza ki, melyiket kívánja "
-#~ "használni."
-
-#~ msgid ""
-#~ "You can export using NFS or Samba. Please select which you'd like to use."
-#~ msgstr ""
-#~ "Exportálás NFS-sel vagy Sambával végezhető. Válassza ki, melyiket kívánja "
-#~ "használni."
-
-#~ msgid "You must be root to read configuration file. \n"
-#~ msgstr ""
-#~ "A beállítási fájl olvasásához rendszergazdai jogosultság szükséges. \n"
-
-#~ msgid "Can not open %s!"
-#~ msgstr "%s megnyitása nem sikerült."
-
-#~ msgid ""
-#~ "Your card can have 3D hardware acceleration support but only with Xorg %"
-#~ "s.\n"
-#~ "Your card is supported by Xorg %s which may have a better support in 2D."
-#~ msgstr ""
-#~ "A kártya támogat hardveres 3D-s gyorsítást, de csak az Xorg %s "
-#~ "verzióban.\n"
-#~ "Az Xorg %s is használható; elképzelhető, hogy abban jobb a 2D-s támogatás."
-
-#~ msgid ""
-#~ "Your card can have 3D hardware acceleration support but only with Xorg %"
-#~ "s,\n"
-#~ "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.\n"
-#~ "Your card is supported by Xorg %s which may have a better support in 2D."
-#~ msgstr ""
-#~ "A kártya támogat hardveres 3D-s gyorsítást, de csak az Xorg %s "
-#~ "verzióban.\n"
-#~ "EZ KÍSÉRLETI JELLEGŰ; HASZNÁLATA AKÁR A GÉP LEFAGYÁSÁHOZ IS VEZETHET.\n"
-#~ "Az Xorg %s verzió is használható; elképzelhető, hogy ebben jobb a 2D-s\n"
-#~ "támogatás."
-
-#~ msgid "Xpmac (installation display driver)"
-#~ msgstr "Xpmac (telepítési meghajtóprogram)"
-
-#~ msgid "4 billion colors (32 bits)"
-#~ msgstr "4 milliárd szín (32 bites)"
-
-#~ msgid "XFree86 server: %s\n"
-#~ msgstr "XFree86: %s\n"
-
-#~ msgid "Here is the full list of keyboards available"
-#~ msgstr "Itt található a billentyűzetek listája"
-
-#~ msgid "Please insert the Boot floppy used in drive %s"
-#~ msgstr "Tegye be a rendszerindító floppyt a(z) \"%s\" meghajtóba"
-
-#~ msgid "XawTV is not installed!"
-#~ msgstr "Az XawTV program nincsen telepítve."
-
-#~ msgid "Provider dns 1 (optional)"
-#~ msgstr "Elsődleges DNS-kiszolgáló (nem kötelező)"
-
-#~ msgid "Provider dns 2 (optional)"
-#~ msgstr "Másodlagos DNS-kiszolgáló (nem kötelező)"
-
-#~ msgid "DHCP Client"
-#~ msgstr "DHCP-kliens"
-
-#~ msgid ""
-#~ "Change\n"
-#~ "Restore Path"
-#~ msgstr ""
-#~ "A visszaállítási\n"
-#~ "útvonal módosítása"
-
-#~ msgid "European protocol"
-#~ msgstr "Európai protokoll"
-
-#~ msgid "Found \"%s\" interface do you want to use it ?"
-#~ msgstr ""
-#~ "\"%s\" felületet észlelt a program. Szeretné használni ezt a felületet?"
-
-#~ msgid "What kind is your ISDN connection?"
-#~ msgstr "Milyen típusú az ISDN-kapcsolat?"
-
-#~ msgid "Do you want to start a new configuration ?"
-#~ msgstr "Szeretné beállítani az eszközt?"
-
-#~ msgid ""
-#~ "I have detected an ISDN PCI card, but I do not know its type. Please "
-#~ "select a PCI card on the next screen."
-#~ msgstr ""
-#~ "A telepítő talált egy ISDN PCI kártyát, de nem ismerte fel a típusát. "
-#~ "Válasszon ki egy PCI kártyát a következő képernyőn."
-
-#~ msgid "No ISDN PCI card found. Please select one on the next screen."
-#~ msgstr ""
-#~ "A telepítő nem talált ISDN PCI kártyát. Válasszon ki egyet a következő "
-#~ "képernyőn."
-
-#~ msgid "DrakTermServ"
-#~ msgstr "DrakTermServ"
-
-#~ msgid "Under Devel ... please wait."
-#~ msgstr "Fejlesztés alatt..."
-
-#~ msgid "Windows (FAT32)"
-#~ msgstr "Windows (FAT32)"
-
-#~ msgid ""
-#~ "This uses the same syntax as the command line program 'cdrecord'. "
-#~ "'cdrecord -scanbus' would also show you the device number."
-#~ msgstr ""
-#~ "Ugyanazt a szintaxist használja, amit a 'cdrecord' nevű (parancssori) "
-#~ "program. A 'cdrecord -scanbus' paranccsal lekérdezhető az eszközszám."
-
-#~ msgid ""
-#~ "Enter your CD Writer device name\n"
-#~ " ex: 0,1,0"
-#~ msgstr ""
-#~ "Adja meg a CD-író eszközazonosítóját,\n"
-#~ "például: 0,1,0"
-
-#~ msgid "Scientific Workstation"
-#~ msgstr "Tudományos munkaállomás"
-
-#~ msgid "Scientific applications such as gnuplot"
-#~ msgstr "Tudományos alkalmazások, mint például a Gnuplot"
-
-#~ msgid "Can not create log file!"
-#~ msgstr "Naplófájl nem hozható létre."
-
-#~ msgid "Please select media for backup..."
-#~ msgstr "Válasszon mentési médiumot..."
-
-#~ msgid "Configuration of a remote printer"
-#~ msgstr "Távoli nyomtató beállítása"
-
-#~ msgid "Gnome Workstation"
-#~ msgstr "GNOME-munkaállomás"
-
-#~ msgid "Running \"%s\" ..."
-#~ msgstr "\"%s\" végrehajtása..."
-
-#~ msgid "utopia 25"
-#~ msgstr "utopia 25"
-
-#~ msgid "On Hard Drive"
-#~ msgstr "Merevlemezre"
-
-#~ msgid "Messages"
-#~ msgstr "Üzenetek"
-
-#~ msgid "Syslog"
-#~ msgstr "Rendszernapló"
-
-#~ msgid "Compact"
-#~ msgstr "Kompakt"
