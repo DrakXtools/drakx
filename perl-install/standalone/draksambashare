@@ -153,6 +153,11 @@ sub get_items() {
 		 [ "/_Samba Server", undef, undef, undef, '<Branch>', ],
 		 [ "/_Samba Server/_Restart", undef, \&restart_dialog, 1, '<StockItem>', 'gtk-execute' ],
 		 [ "/_Samba Server/R_eload", undef, \&reload_dialog, 1, '<StockItem>', 'gtk-refresh' ],
+
+		 [ "/_About/Report a bug", undef, sub { unless (fork()) { exec("drakbug --report draksambashare &") } }, 1, '<StockItem>', 'gtk-stop' ],
+		 [ "/_About/About...", undef, sub {
+		     create_dialog(N("About Draksambashare"), N("Mandriva Linux \nRelease: %s\nAuthor: Antoine Ginies\n\nThis is a simple tool to easily manage Samba configuration.", $version));
+		 }, 1, '<StockItem>', 'gtk-preferences' ],
 		 );
     return @items;
 }
@@ -1034,7 +1039,7 @@ add_data_printer_list($printer_list);
 add_data_user_list($user_list);
 $_->set_rules_hint(1) foreach $share_list, $printer_list, $user_list;
 
-my $window = ugtk2->new("DrakSamba $version");
+my $window = ugtk2->new("DrakSamba");
 $::main_window = $window->{real_window};
 $window->{rwindow}->set_size_request(600, 410) unless $::isEmbedded;
 $window->{rwindow}->set_position('center') if !$::isEmbedded;
