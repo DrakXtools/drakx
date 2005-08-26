@@ -208,7 +208,7 @@ sub selectMouse {
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
-    my $w = ugtk2->new('');
+    my $w = ugtk2->new(N("Package Group Selection"));
     my $w_size = gtknew('Label', text => &$size_to_display);
 
     my $entry = sub {
@@ -596,7 +596,7 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 sub summary_prompt {
     my ($o, $l, $check_complete) = @_;
 
-    my $w = ugtk2->new('');
+    my $w = ugtk2->new(N("Summary"));
 
     my $set_entry_labels;
     my @table;

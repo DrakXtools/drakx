@@ -801,7 +801,7 @@ sub installUpdates {
     $o->hasNetwork or return;
 
     if (is_empty_hash_ref($u)) {
-	$o->ask_yesorno_({ messages => formatAlaTeX(
+	$o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -1304,7 +1304,7 @@ sub generateAutoInstFloppy {
 sub exitInstall {
     my ($o, $alldone) = @_;
 
-    return $o->{step} = '' if !$alldone && !$o->ask_yesorno('', 
+    return $o->{step} = '' if !$alldone && !$o->ask_yesorno(N("Warning"), 
 N("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
@@ -1315,6 +1315,7 @@ Do you really want to quit now?"), 0);
 
     $o->ask_from_no_check(
 	{
+	 title => N("Congratulations"),
 	 messages => formatAlaTeX(install_messages::install_completed()),
 	 interactive_help_id => 'exitInstall',
 	 ok => $::local_install ? N("Quit") : N("Reboot"),
@@ -1322,7 +1323,7 @@ Do you really want to quit now?"), 0);
 	[
 	 if_(arch() !~ /^ppc/,
 	     { val => \ (my $_t1 = N("Generate auto install floppy")), clicked => sub {
-		   my $t = $o->ask_from_list_('', 
+		   my $t = $o->ask_from_list_(N("Generate auto install floppy"), 
 N("The auto install can be fully automated if wanted,
 in that case it will take over the hard drive!!
 (this is meant for installing on another box).
