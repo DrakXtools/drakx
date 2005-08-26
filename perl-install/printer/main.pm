@@ -742,24 +742,48 @@ sub read_ppd_options ($) {
 }
 
 sub set_cups_special_options {
-    my ($queue) = @_;
+    my ($printer, $queue) = @_;
     # Set some special CUPS options
-    my @lpoptions = chomp_(cat_("$::prefix/etc/cups/lpoptions"));
-    # If nothing is already configured, set text file borders of half an inch
-    # and decrease the font size a little bit, so nothing of the text gets
-    # cut off by unprintable borders.
-    if (!any { /$queue.*\s(page-(top|bottom|left|right)|lpi|cpi)=/ } @lpoptions) {
-	run_program::rooted($::prefix, "lpoptions",
-			    "-p", $queue,
-			    "-o", "page-top=36", "-o", "page-bottom=36",
-			    "-o", "page-left=36", "-o page-right=36",
-			    "-o", "cpi=12", "-o", "lpi=7", "-o", "wrap");
+    my @lpoptions = cat_("$::prefix/etc/cups/lpoptions");
+    # If nothing is already configured, set text file borders of half
+    # an inch so nothing of the text gets cut off by unprintable
+    # borders. Do this only when the driver is not Gutenprint, as with
+    # Gutenprint this will break PostScript printing
+    if ((($queue eq $printer->{currentqueue}{$queue}) &&
+	 (($printer->{currentqueue}{driver} =~ /guten.*print/i) ||
+	  ($printer->{currentqueue}{ppd} =~ /guten.*print/i))) ||
+	((defined($printer->{configured}{$queue})) &&
+	 (($printer->{configured}{$queue}{queuedata}{driver} =~
+	   /guten.*print/i) ||
+	  ($printer->{configured}{$queue}{queuedata}{ppd} =~
+	   /guten.*print/i))) ||
+	(($printer->{SPOOLER} eq "cups") &&
+	 (-r "$::prefix/etc/cups/ppd/$queue.ppd") &&
+	 (`grep -ic gutenprint $::prefix/etc/cups/ppd/$queue.ppd` > 2))) {
+	# Remove page margin settings
+	foreach (@lpoptions) {
+	    s/\s*page-(top|bottom|left|right)=\S+//g if /$queue/;
+	}
+	output("$::prefix/etc/cups/lpoptions", @lpoptions);
+    } else {
+	if (!any { /$queue.*\spage-(top|bottom|left|right)=/ } @lpoptions) {
+	    run_program::rooted($::prefix, "lpoptions",
+				"-p", $queue,
+				"-o", "page-top=36", "-o", "page-bottom=36",
+				"-o", "page-left=36", "-o page-right=36");
+	}
     }
-    # Let images fill the whole page by default
+    # Let images fill the whole page by default and let text be word-wrapped
+    # and printed in a slightly smaller font
     if (!any { /$queue.*\s(scaling|natural-scaling|ppi)=/ } @lpoptions) {
 	run_program::rooted($::prefix, "lpoptions",
 			    "-p", $queue,
 			    "-o", "scaling=100");
+    }
+    if (!any { /$queue.*\s(cpi|lpi)=/ } @lpoptions) {
+	run_program::rooted($::prefix, "lpoptions",
+			    "-p", $queue,
+			    "-o", "cpi=12", "-o", "lpi=7", "-o", "wrap");
     }
     return 1;
 }
@@ -2127,12 +2151,6 @@ sub configure_queue($) {
 			    "-C", "up", $printer->{currentqueue}{queue});
     }
 
-    # In case of CUPS set some more useful defaults for text and image 
-    # printing
-    if ($printer->{SPOOLER} eq "cups") {
-	set_cups_special_options($printer->{currentqueue}{queue});
-    }
-
     # Check whether a USB printer is configured and activate USB printing if so
     my $useUSB = 0;
     foreach (values %{$printer->{configured}}) {
@@ -2169,6 +2187,14 @@ sub configure_queue($) {
     $printer->{configured}{$printer->{currentqueue}{queue}}{args} = {};
     $printer->{configured}{$printer->{currentqueue}{queue}}{args} =
 	$printer->{ARGS};
+
+    # In case of CUPS set some more useful defaults for text and image 
+    # printing
+    if ($printer->{SPOOLER} eq "cups") {
+	set_cups_special_options($printer,
+				 $printer->{currentqueue}{queue});
+    }
+
     # Clean up
     delete($printer->{ARGS});
     $printer->{OLD_CHOICE} = "";
@@ -2369,7 +2395,7 @@ sub copy_foomatic_queue {
 			"-C", $oldspooler, $oldqueue);
     # In case of CUPS set some more useful defaults for text and image printing
     if ($printer->{SPOOLER} eq "cups") {
-	set_cups_special_options($newqueue);
+	set_cups_special_options($printer, $newqueue);
     }
 }
 
