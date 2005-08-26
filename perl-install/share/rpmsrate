@@ -23,10 +23,6 @@ CAT_GNOME
   3 gnome-pilot
   2 bug-buddy
 
-!CAT_KDE || CAT_GNOME 
-    5 gdm 
-    4 CAT_THEMES gdm-themes
-
 CAT_KDE
   5 galaxy-kde galaxy-kde-kwin kdebase-nsplugins kdebase-progs krozat mandriva-galaxy xsettings-kde
   5 kdebase-kdm kat
@@ -609,6 +605,10 @@ CAT_X
   5 LOCALES"zh_TW" scim-chewing
   5 LOCALES"am" || LOCALES"ja" || LOCALES"ko" || LOCALES"zh" CAT_KDE scim-qtimm
   5 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK rxvt-unicode
+
+  !CAT_KDE || CAT_GNOME 
+    5 gdm 
+    4 CAT_THEMES gdm-themes
   
   4 vim-enhanced
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives fonts-ttf-west_european
