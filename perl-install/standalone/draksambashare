@@ -1188,7 +1188,7 @@ $nb->set_show_border(0);
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, $menu,
-		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('IC-winacces1-48', N("DrakSamba manage Samba shares"))),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakSamba manage Samba shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter Samba shares.")),
 		 1, $nb,
 		 0, $okcancel,
