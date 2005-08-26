@@ -1580,6 +1580,7 @@ sub setup_local_autoscan {
 		     });
 		return 0 if $device eq "";
 	    } else {
+		local $::isWizard = 0;
 		$in->ask_warn(N("Printer auto-detection"),
 			      N("No printer found!"));
 		return 0;
