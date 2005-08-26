@@ -1,3 +1,306 @@
+2005/08/26  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: test if printer share already exist
+	update printer_list from printer dialog box
+	major adjustemnt in printer dialog box
+	fix printer wizard
+	now we can modify first entry
+	fix pb with $path
+	some perl_checker fix (why mine is not up to date, while i am running
+	cooker ?)
+	now display share name in modification dialog box
+	re-enable set_rules_hint
+	use simpleList to display share
+	improvement in perl code (use Gtk::SimpleList)
+
+2005/08/26  Olivier Blin <oblin at mandriva.com>
+
+	* pixmaps/wifi-080.png, pixmaps/wifi-040.png, pixmaps/wifi-060.png,
+	pixmaps/wifi-100.png, pixmaps/wifi-020.png: add new neat wifi icons from
+	Hélène
+
+2005/08/26  Pixel  <pixel at mandriva.com>
+
+	* install_any.pm: more precise log_size during install
+
+	* share/rpmsrate: lshw is not that important
+	gdm must only be installed when CAT_X is selected
+
+	* Xconfig/resolution_and_depth.pm: fix missing prefix when reading
+	sysconfig bootsplash
+
+	* any.pm: 
+	  - don't open advanced languages by default
+	  - replace "Advanced" button with "Multi languages"
+
+	* Xconfig/card.pm: handle nvidia's libglx.so being now in
+	extensions/nvidia instead of extensions
+	(when there is extensions/libglx.a, it means extensions/libglx.so is not
+	xorg's libglx, so it may be nvidia's)
+
+2005/08/26  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Gutenprint does not print correctly when margins are set in the CUPS
+	configuration, so do not set margins when creating a queue with
+	  Gutenprint, or remove the margins when switching the driver of an
+	  existing queue to Gutenprint.
+
+2005/08/26  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* lang.pm: reduce font size (especially for latin scripts) at install time
+	b/c of
+	new gtk+/cairo
+
+	* standalone/icons/harddrake2/hw-keyboard.png,
+	standalone/icons/harddrake2/hw-pcmcia.png,
+	standalone/icons/harddrake2/hw-usb.png,
+	standalone/icons/harddrake2/hw-smbus.png,
+	standalone/icons/harddrake2/hw-memory.png: add a few more icons for
+	harddrake GUI
+
+	* pixmaps/steps_done.png: add new icon for 'done' state for steps
+
+	* ugtk2.pm (Gtk2::Banner->new) use proper style for banner at install time
+	(Gtk2::Banner->new) banners are smaller at install time
+	(Gtk2::Banner->new) use proper GC (text_gc is for rendering on editable
+	widgets
+	whereas fg_gc is for rendering on non editable widgets)
+	(Gtk2::Banner->new) use bold font on banners (IHM team request)
+	(Gtk2::Banner->new) translating it is useless w/o a require on common
+
+	* harddrake/data.pm: add a few more icons in order to desambiguate some
+	categories that
+	were using the same icon
+
+	* share/themes-galaxy.rc: use the same background under category as in
+	root window
+	new step category's color (on IHM team request)
+	new background color (on IHM team request)
+	at install time, banner text is blue
+
+	* install_gtk.pm (update_steps_position) render passed steps as bold and
+	current step as bold italic as requested by IHM team
+	(create_steps_window) leave around references on text widget and on
+	unmarked text for steps
+	(create_steps_window) underline step categories (and render them as bold
+	btw)
+	(create_steps_window) precreate pixbuf for 'done' state too
+
+2005/08/26  willysr
+
+	* share/po/id.po: Updated
+
+2005/08/25  Antoine Ginies  <aginies at mandriva.com> 
+
+	* Makefile.config: add draksambashare tool
+
+	* standalone/draksambashare: add printer wizard
+	add special printer section
+	few adjustement
+	disableadd pdf-gen and add printer
+	use file share instead of disk share
+	various improvement in printers tab
+	add notebook support and printers tab
+	first step to integrate printers share
+	cosmetic fix
+	enable empty path for homes share
+	fix profiles pb, add a wizard to add a share, some ergo adjustement
+	try to fix undeclared variable
+	use err_diag instead of ask_warn
+	various perl_checker fix
+
+2005/08/25  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: Updated
+
+2005/08/25  huftis
+
+	* share/po/nn.po: Updated translation.
+	Updated translation.
+
+2005/08/25  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/draksplash: fix lame errors (perl_checker)
+	restrict mouse motion to image
+
+	* standalone/drakfont: allow to import Windows Fonts (#15531)
+
+	* standalone/net_applet: rephrase IFW interactive/automatic checkbox label
+	in the settings menu
+
+2005/08/25  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: bah, DrakX finished for real *grml*
+	finished translation :)
+	translated more new strings
+
+2005/08/25  Pixel  <pixel at mandriva.com>
+
+	* partition_table/raw.pm: conectiva 10's grub detection (thanks to
+	bogdano)
+
+	* bootloader.pm: perl_checker compliance
+	install grub stage files in install_grub(), not write_grub() (bugzilla
+	#17830) (thanks to herton)
+
+	* pkgs.pm: remove now unused variable (cf previous commit)
+	don't kill "runaway" processes anymore, it should not be needed for
+	ejecting cd (?)
+
+	* mdk-stage1/pci-resource/Makefile, share/list.xml,
+	mdk-stage1/usb-resource/Makefile, rescue/list.xml: ldetect-lst tables
+	are now compressed
+
+	* tools/drakx-in-chroot: 
+	  - allow to easy clean existing chroot
+	  - more fuzzy detection of mounted loop (to "losetup -d" it)
+	  - better log message for loop
+
+2005/08/25  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Strange typing bug workaround
+
+2005/08/25  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po, share/po/fr.po: update
+	sync with copyright bumping
+
+	* detect_devices.pm (get_scsi_driver) kill dead variable
+	since ldetect runs gzip, time spent in some of these detect functions
+	was a significant part of mcc's startup time
+	(get_scsi_driver) find driver of host controller from sysfs in all
+	cases (not just usb-storage case)
+
+	* fs/mount_options.pm (help) document 'encrypted' option (#13562)
+	typo fix (Per Oyvind Karlsen)
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: sync with copyright bumping
+
+2005/08/24  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: dont write unused var in smb.conf
+	enable change in smb.conf
+
+2005/08/24  Olivier Blin <oblin at mandriva.com>
+
+	* interactive/gtk.pm: do not crash in create_treeview_tree with
+	allow_empty_list and really empty list (#17718)
+
+	* standalone/net_applet: preset automatic mode in popup
+	allow to whitelist attackers in popup
+	  - net_applet: stop icon blink when an Interactive Firewall alert isn't
+	processed
+	  - drakids: add log tab
+	  - drakids: allow to clear logs
+	  - net_applet: stop icon blinking when drakids is run or clear logs
+	  - net_applet: present drakids window on click on menu if drakids is
+	already run
+	  - factorize packet reading to network::ifw::attack_to_hash
+
+	* network/ifw.pm: handle additionnal parameter to differentiate processed
+	alerts and notifications from automatic mode
+	rename for new mandi API
+	show attacks of unknown type
+	  - net_applet: stop icon blink when an Interactive Firewall alert isn't
+	processed
+	  - drakids: add log tab
+	  - drakids: allow to clear logs
+	  - net_applet: stop icon blinking when drakids is run or clear logs
+	  - net_applet: present drakids window on click on menu if drakids is
+	already run
+	  - factorize packet reading to network::ifw::attack_to_hash
+
+	* standalone/drakids: 
+	  - net_applet: stop icon blink when an Interactive Firewall alert isn't
+	processed
+	  - drakids: add log tab
+	  - drakids: allow to clear logs
+	  - net_applet: stop icon blinking when drakids is run or clear logs
+	  - net_applet: present drakids window on click on menu if drakids is
+	already run
+	  - factorize packet reading to network::ifw::attack_to_hash
+
+2005/08/24  Pixel  <pixel at mandriva.com>
+
+	* .perl_checker: put back packdrake
+
+	* modules.pm: ahci and ata_piix handle the same hardware, it only depends
+	on the bios configuration, so try each one...
+	rewrite code to allow next commit
+
+2005/08/24  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Seems "X -ac" is required (Diogo)
+
+2005/08/24  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm, standalone/scannerdrake: 
+	  - Reverted workarounds for bug #17718, the bug is now really fixed,
+	the problem was in /usr/lib/libDrakX/interactive/gtk.pm.
+
+2005/08/24  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* bootloader.pm: Grub really is named GRUB (and it makes the pull-down
+	menu more consistent btw...)
+
+	* standalone/drakgw: typo fix
+
+	* drakxtools.spec: 10.3-0.49mdk
+
+	* share/po/pt_BR.po, share/po/et.po, share/po/ja.po, share/po/pl.po,
+	share/po/ca.po, share/po/nb.po, share/po/zh_CN.po, share/po/eu.po,
+	share/po/id.po, share/po/nn.po, share/po/cy.po, share/po/is.po,
+	share/po/pt.po, share/po/fr.po, share/po/de.po, share/po/cs.po: Grub
+	really is named GRUB (and it makes the pull-down menu more consistent
+	btw...)
+	Grub really is named GRUB (and it makes the pull-down menu more
+	consistent btw...)
+	typo fix
+
+	* .perl_checker: blacklist packdrake again
+
+	* share/po/br.po: Grub really is named GRUB (and it makes the pull-down
+	menu more consistent btw...)
+	Grub really is named GRUB (and it makes the pull-down menu more
+	consistent btw...)
+	typo fix
+	update
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/th.po, share/po/hr.po, share/po/be.po, share/po/pa_IN.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/fi.po, share/po/he.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/ru.po, share/po/sc.po, share/po/sl.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/uk.po, share/po/mn.po,
+	share/po/am.po, share/po/lt.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/vi.po, share/po/ta.po,
+	share/po/nl.po, share/po/tl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/uz@Latn.po: Grub really is named GRUB (and it
+	makes the pull-down menu more consistent btw...)
+	typo fix
+
 2005/08/24  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draksambashare: add share name
