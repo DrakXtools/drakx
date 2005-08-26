@@ -36,18 +36,28 @@ use Libconf::Glueconf::Samba::Smb_conf;
 my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
+my $icon_path = "/usr/lib/libDrakX/icons";
+my $fileshare_icon = "$icon_path/smbnfs_server.png";
+my $printershare_icon = "$icon_path/printerdrake.png";
+my $sambauser_icon = "$icon_path/ic82-users-40.png";
+my $pixbuf_file = Gtk2::Gdk::Pixbuf->new_from_file($fileshare_icon);
+my $pixbuf_printer = Gtk2::Gdk::Pixbuf->new_from_file($printershare_icon);
+my $pixbuf_user = Gtk2::Gdk::Pixbuf->new_from_file($sambauser_icon);
+
 my $printer_list = create_printer_list();
 my $share_list = create_share_list();
 my $user_list = create_user_list();
 
 sub create_user_list() {
-  my $user_list = Gtk2::SimpleList->new(N("User name") => 'text',
+  my $user_list = Gtk2::SimpleList->new('' => 'pixbuf',
+					N("User name") => 'text',
 				       );
   $user_list;
 }
 
 sub create_share_list() {
-  my $share_list = Gtk2::SimpleList->new(N("Share name") => 'text',
+    my $share_list = Gtk2::SimpleList->new('' => 'pixbuf',
+					 N("Share name") => 'text',
 					 N("Share directory") => 'text',
 					 N("Comment") => 'text',
 					 N("Browseable") => 'text',
@@ -68,7 +78,10 @@ sub create_share_list() {
 					 N("Default case") => 'text',
 					);
   $share_list->set_headers_clickable(1);
-  foreach (0, 1, 2, 3) {
+  foreach ($share_list->get_columns()) {
+    $_->set_resizable(1);
+  }
+  foreach (1, 2, 3) {
     $share_list->get_column($_)->signal_connect('clicked', \&sort_by_column, $share_list->get_model);
     $share_list->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
   }
@@ -76,23 +89,24 @@ sub create_share_list() {
 }
 
 sub create_printer_list() {
-   my $printer_list = Gtk2::SimpleList->new(N("Printer name") => 'text',
-                                           N("Path") => 'text',
-                                           N("Comment") => 'text',
-                                           N("Browseable") => 'text',
-                                           N("Printable") => 'text',
-                                           N("Print Command") => 'text',
-                                           N("LPQ command") => 'text',
-                                           N("Guest ok") => 'text',
-                                           N("Writable") => 'text',
-                                           N("Write list") => 'text',
-                                           N("Inherit permissions") => 'text',
-                                           N("Printing") => 'text',
-                                           N("Create mode") => 'text',
-                                           N("Use client driver") => 'text',
-					  );
+   my $printer_list = Gtk2::SimpleList->new('' => 'pixbuf',
+					    N("Printer name") => 'text',
+					    N("Path") => 'text',
+					    N("Comment") => 'text',
+					    N("Browseable") => 'text',
+					    N("Printable") => 'text',
+					    N("Print Command") => 'text',
+					    N("LPQ command") => 'text',
+					    N("Guest ok") => 'text',
+					    N("Writable") => 'text',
+					    N("Write list") => 'text',
+					    N("Inherit permissions") => 'text',
+					    N("Printing") => 'text',
+					    N("Create mode") => 'text',
+					    N("Use client driver") => 'text',
+					   );
   $printer_list->set_headers_clickable(1);
-  foreach (0, 1, 2, 3) {
+  foreach (1, 2, 3) {
     $printer_list->get_column($_)->signal_connect('clicked', \&sort_by_column, $printer_list->get_model);
     $printer_list->get_column($_)->set_sort_column_id($_ == 0 ? 1 : $_ + 2);
   }
@@ -370,7 +384,8 @@ sub add_entry() {
 				     }
 				   },
 				   post => sub {
-				     push @{$printer_list->{data}}, [
+				     push @{$share_list->{data}}, [
+								     $pixbuf_file,
 								     $wiz_addshare_name,
 								     $wiz_addshare_path,
 								     $wiz_addshare_comment,
@@ -428,6 +443,7 @@ sub add_printers_entry() {
 				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A pdf gnerator already exist.")) and return 'welcome';
 				       &pdf_section;
 				       push @{$printer_list->{data}}, [
+								       $pixbuf_printer,
 								       'pdf-gen',
 								       $samba->{'pdf-gen'}{path},
 								       $samba->{'pdf-gen'}{comment}, "",
@@ -452,6 +468,7 @@ sub add_printers_entry() {
 				       &printdollar_section;
 				       &printers_section;
 				       push @{$printer_list->{data}}, [
+								       $pixbuf_printer,
 								       'print$',
 								       $samba->{'print$'}{path}, "",
 								       $samba->{'print$'}{browseable}, "", "", "",
@@ -460,6 +477,7 @@ sub add_printers_entry() {
 								       $samba->{'print$'}{'inherit permissions'},
 								       ];
 				       push @{$printer_list->{data}}, [
+								       $pixbuf_printer,
 								       'printers',
 								       $samba->{printers}{path},
 								       $samba->{printers}{comment},
@@ -519,21 +537,21 @@ sub modify_printers_entry {
   $_->set_popdown_strings(@yesno) foreach $browseable, $printable, $guest_ok, $writable, $use_client_driver, $inherit_permissions;
 
 
-  my $s = $printer_list->{data}[$selected][0];
+  my $s = $printer_list->{data}[$selected][1];
   $s or info_dialog(N("Error"), N("Please add or select a Samba printer share to be able to modify it.")) and return;  $share_name->set_text($s);
-  $dir->set_text($printer_list->{data}[$selected][1]);
-  $comment->set_text($printer_list->{data}[$selected][2]);
-  $browseable->set_text($printer_list->{data}[$selected][3]);
-  $printable->set_text($printer_list->{data}[$selected][4]);
-  $print_command->set_text($printer_list->{data}[$selected][5]);
-  $lpq_command->set_text($printer_list->{data}[$selected][6]);
-  $guest_ok->set_text($printer_list->{data}[$selected][7]);
-  $writable->set_text($printer_list->{data}[$selected][8]);
-  $write_list->set_text($printer_list->{data}[$selected][9]);
-  $inherit_permissions->set_text($printer_list->{data}[$selected][10]);
-  $printing->set_text($printer_list->{data}[$selected][11]);
-  $create_mode->set_text($printer_list->{data}[$selected][12]);
-  $use_client_driver->set_text($printer_list->{data}[$selected][13]);
+  $dir->set_text($printer_list->{data}[$selected][2]);
+  $comment->set_text($printer_list->{data}[$selected][3]);
+  $browseable->set_text($printer_list->{data}[$selected][4]);
+  $printable->set_text($printer_list->{data}[$selected][5]);
+  $print_command->set_text($printer_list->{data}[$selected][6]);
+  $lpq_command->set_text($printer_list->{data}[$selected][7]);
+  $guest_ok->set_text($printer_list->{data}[$selected][8]);
+  $writable->set_text($printer_list->{data}[$selected][9]);
+  $write_list->set_text($printer_list->{data}[$selected][10]);
+  $inherit_permissions->set_text($printer_list->{data}[$selected][11]);
+  $printing->set_text($printer_list->{data}[$selected][12]);
+  $create_mode->set_text($printer_list->{data}[$selected][13]);
+  $use_client_driver->set_text($printer_list->{data}[$selected][14]);
 
   my $file_dialog = $fdwidget->($dir, "");
   my $button = Gtk2::Button->new_from_stock('gtk-open');
@@ -609,6 +627,7 @@ sub modify_printers_entry {
 				   remove_entry($selected, $printer_list);
 				   my $share = $share_name->get_text;
 				   push @{$printer_list->{data}}, [
+								   $pixbuf_printer,
 								   $share,
 								   $dir->get_text,
 								   $comment->get_text,
@@ -668,27 +687,27 @@ sub modify_entry {
   $w->{window}->set_modal(1);
   $w->{window}->set_position('center');
 
-  my $s = $share_list->{data}[$selected][0];
+  my $s = $share_list->{data}[$selected][1];
   $s or info_dialog(N("Error"), N("Please add or select a Samba share to be able to modify it.")) and return;
   $share_name->set_text($s);
-  $dir->set_text($share_list->{data}[$selected][1]);
-  $comment->set_text($share_list->{data}[$selected][2]);
-  $browseable->set_text($share_list->{data}[$selected][3]);
-  $public->set_text($share_list->{data}[$selected][4]);
-  $writable->set_text($share_list->{data}[$selected][5]);
-  $create_mask->set_text($share_list->{data}[$selected][6]);
-  $directory_mask->set_text($share_list->{data}[$selected][7]);
-  $read_list->set_text($share_list->{data}[$selected][8]);
-  $write_list->set_text($share_list->{data}[$selected][9]);
-  $admin_users->set_text($share_list->{data}[$selected][10]);
-  $valid_users->set_text($share_list->{data}[$selected][11]);
-  $inherit_permissions->set_text($share_list->{data}[$selected][12]);
-  $hide_dot_files->set_text($share_list->{data}[$selected][13]);
-  $hide_files->set_text($share_list->{data}[$selected][14]);
-  $preserve_case->set_text($share_list->{data}[$selected][15]);
-  $force_create_mode->set_text($share_list->{data}[$selected][16]);
-  $force_group->set_text($share_list->{data}[$selected][17]);
-  $default_case->set_text($share_list->{data}[$selected][18]);
+  $dir->set_text($share_list->{data}[$selected][2]);
+  $comment->set_text($share_list->{data}[$selected][3]);
+  $browseable->set_text($share_list->{data}[$selected][4]);
+  $public->set_text($share_list->{data}[$selected][5]);
+  $writable->set_text($share_list->{data}[$selected][6]);
+  $create_mask->set_text($share_list->{data}[$selected][7]);
+  $directory_mask->set_text($share_list->{data}[$selected][8]);
+  $read_list->set_text($share_list->{data}[$selected][9]);
+  $write_list->set_text($share_list->{data}[$selected][10]);
+  $admin_users->set_text($share_list->{data}[$selected][11]);
+  $valid_users->set_text($share_list->{data}[$selected][12]);
+  $inherit_permissions->set_text($share_list->{data}[$selected][13]);
+  $hide_dot_files->set_text($share_list->{data}[$selected][14]);
+  $hide_files->set_text($share_list->{data}[$selected][15]);
+  $preserve_case->set_text($share_list->{data}[$selected][16]);
+  $force_create_mode->set_text($share_list->{data}[$selected][17]);
+  $force_group->set_text($share_list->{data}[$selected][18]);
+  $default_case->set_text($share_list->{data}[$selected][19]);
 
   my $expander_user = Gtk2::Expander->new('User options (user access, mask option, force mode)');
   $expander_user->add(gtkpack_(Gtk2::HBox->new,
@@ -783,6 +802,7 @@ sub modify_entry {
 							       # update gui SimpleList
                                                                remove_entry($selected, $share_list);
 							       push @{$share_list->{data}}, [
+											     $pixbuf_file,
 											     $share_name->get_text,
 											     $dir->get_text,
 											     $comment->get_text,
@@ -858,7 +878,7 @@ sub modify_entry {
 
 sub remove_entry {
   my ($selected, $list) = @_;
-  my $share_name = $list->{data}[$selected][0];
+  my $share_name = $list->{data}[$selected][1];
   splice @{$list->{data}}, $selected, 1;
   delete $samba->{$share_name};
 }
@@ -914,6 +934,7 @@ sub modify_user_info {
 				   }
 				   system("smbpasswd -a $user_selected -n");
 				   push @{$user_list->{data}}, [
+								$pixbuf_user,
 								$user_selected,
 							       ];
 				   push @listusers, {
@@ -942,8 +963,10 @@ sub set_user_passwd {
 sub add_data_share_list {
   my ($share_list) = @_;
   get_samba_share();
+
   foreach my $data (@listshare) {
     push @{$share_list->{data}}, [
+				  $pixbuf_file,
 				  $data->{share_name},
 				  $data->{path},
 				  $data->{comment},
@@ -972,6 +995,7 @@ sub add_data_user_list {
   get_samba_user();
   foreach my $data (@listusers) {
     push @{$user_list->{data}}, [
+				 $pixbuf_user,
 				 $data->{user_name},
 				];
   }
@@ -982,6 +1006,7 @@ sub add_data_printer_list {
   get_samba_printers();
   foreach my $data (@listprinters) {
     push @{$printer_list->{data}}, [
+				    $pixbuf_printer,
 				    $data->{share_name},
 				    $data->{path},
 				    $data->{comment},
@@ -1020,19 +1045,19 @@ $W->signal_connect(delete_event => sub { ugtk2->exit });
 $share_list->signal_connect(button_press_event => sub {
 			      my (undef, $event) = @_;
 			      my ($selected) = $share_list->get_selected_indices;
-			      $share_list->{data}[$selected][0] and modify_entry($selected) if $event->type eq '2button-press';
+			      $share_list->{data}[$selected][1] and modify_entry($selected) if $event->type eq '2button-press';
 			    });
 
 $printer_list->signal_connect(button_press_event => sub {
 				my (undef, $event) = @_;
 				my ($selected) = $printer_list->get_selected_indices;
-				$printer_list->{data}[$selected][0] and modify_printers_entry($selected) if $event->type eq '2button-press';
+				$printer_list->{data}[$selected][1] and modify_printers_entry($selected) if $event->type eq '2button-press';
 			      });
 
 $user_list->signal_connect(button_press_event => sub {
 				my (undef, $event) = @_;
 				my ($selected) = $user_list->get_selected_indices;
-				$user_list->{data}[$selected][0] and modify_user_info($user_list->{data}[$selected][0], "", "change") if $event->type eq '2button-press';
+				$user_list->{data}[$selected][1] and modify_user_info($user_list->{data}[$selected][1], "", "change") if $event->type eq '2button-press';
 			      });
 
 # create menu
@@ -1070,7 +1095,7 @@ gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack_(gtkset_border_width(Gtk2::
 										       }),
 								  0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 											 my ($selected) = $share_list->get_selected_indices;
-											 ask_okcancel("Remove entry ?", "Remove $share_list->{data}[$selected][0]") or return;
+											 ask_okcancel("Remove entry ?", "Remove $share_list->{data}[$selected][1]") or return;
 											 eval { remove_entry($selected, $share_list) };
 											 my $err = $@;
 											 if ($err) {
@@ -1105,7 +1130,7 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
                                          0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
 								my ($selected) = $printer_list->get_selected_indices;
-								ask_okcancel("Remove entry ?", "Remove $printer_list->{data}[$selected][0]") or return;
+								ask_okcancel("Remove entry ?", "Remove $printer_list->{data}[$selected][1]") or return;
                                                                 eval { remove_entry($selected, $printer_list) };
                                                                 my $err = $@;
                                                                 if ($err) {
@@ -1122,7 +1147,7 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                              0, gtkpack_(create_vbox('start'),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Change password")), clicked => sub {
 								my ($selected) = $user_list->get_selected_indices;
-                                                                eval { modify_user_info($user_list->{data}[$selected][0], "", "change") };
+                                                                eval { modify_user_info($user_list->{data}[$selected][1], "", "change") };
                                                                 my $err = $@;
 								if ($err) {
                                                                   err_dialog(N("Error"), N("Failed to change user password.") . "\n\n" . $err);
@@ -1138,9 +1163,9 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                               }),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Delete user")), clicked => sub {
 								my ($selected) = $user_list->get_selected_indices;
-								ask_okcancel("Remove entry ?", "Remove $user_list->{data}[$selected][0]") or return;
+								ask_okcancel("Remove entry ?", "Remove $user_list->{data}[$selected][1]") or return;
                                                                 eval {
-								  remove_user($user_list->{data}[$selected][0]);
+								  remove_user($user_list->{data}[$selected][1]);
 								  remove_entry($selected, $user_list);
 								};
                                                                 my $err = $@;
@@ -1163,7 +1188,7 @@ $nb->set_show_border(0);
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, $menu,
-		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakSamba manage Samba shares"))),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('IC-winacces1-48', N("DrakSamba manage Samba shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter Samba shares.")),
 		 1, $nb,
 		 0, $okcancel,
