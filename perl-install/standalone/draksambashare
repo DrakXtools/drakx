@@ -225,7 +225,6 @@ sub get_samba_user() {
   undef @listusers;
   foreach (cat_("/etc/samba/smbpasswd")) {
     my ($user) = m!^(\w+):!;
-    print $user;
     $user and push @listusers, {
 				user_name => $user,
 			       };
@@ -871,6 +870,17 @@ sub remove_user {
   system("smbpasswd -x $user");
 }
 
+sub get_user {
+  my $conf = "/etc/passwd";
+  my @data; local $_;
+  foreach (cat_($conf)) {
+    push @data, "$1" if m/^([^#:]+):[^:]+:([^:]+):/ and $2 > 499;
+  }
+  push @data, " ";
+  return sort(@data);
+}
+
+
 sub modify_user_info {
   my ($user, $passwd, $todo) = @_;
   my ($buser, $bpasswd);
@@ -880,7 +890,8 @@ sub modify_user_info {
   $dialog->set_position('center');
   $dialog->set_resizable(0);
   if ($todo eq "add") {
-    $buser = Gtk2::Entry->new;
+    $buser = Gtk2::ComboBox->new_with_strings([ get_user() ]);
+    $buser->set_wrap_width(3);
   } else {
     $buser = Gtk2::Label->new;
     $buser->set_text($user);
@@ -898,8 +909,21 @@ sub modify_user_info {
 	   0, create_okcancel({
 			    cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
-				 system("smbpasswd -a $user -n");
-				 set_user_passwd($user, $passwd);
+				 my $user_selected = $buser->get_text;
+				 if ($todo eq "add") {
+				   if (any { /^$user_selected:/ } cat_("/etc/samba/smbpasswd")) {
+				     err_dialog(N("Error"), ("Samba User already exist")) and return;
+				   }
+				   system("smbpasswd -a $user_selected -n");
+				   push @{$user_list->{data}}, [
+								$user_selected,
+							       ];
+				   push @listusers, {
+						     user_name => $user_selected,
+						    };
+				 }
+				 my $passwd_e = $bpasswd->get_text;
+				 set_user_passwd($user_selected, $passwd_e);
 				 $dialog->destroy;
 			       }
 			      },
@@ -910,6 +934,15 @@ sub modify_user_info {
 
 sub set_user_passwd {
   my ($user, $passwd) = @_;
+  print "here\n";
+  local *F;
+  open(F, "|smbpasswd $user\n");
+  print F "
+$passwd\n
+$passwd\n
+\n
+";
+  close F;
 }
 
 sub add_data_share_list {
@@ -1121,6 +1154,11 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
                                                                   err_dialog(N("Error"), N("Failed to delete user.") . "\n\n" . $err);
                                                                 }
                                                               }),
+                                         0, Gtk2::HSeparator->new,
+					 0, gtksignal_connect(Gtk2::Button->new(N("Userdrake")), clicked => sub {
+								run_program::raw({ detach => 1 }, 'userdrake');
+							      }
+							     ),
 					),
 			    ),
 	       gtkshow(Gtk2::Label->new(N("Samba Users")))
