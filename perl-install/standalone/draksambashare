@@ -765,6 +765,7 @@ sub add_data_printer_list {
 # create model
 add_data_share_list($share_list);
 add_data_printer_list($printer_list);
+$_->set_rules_hint(1) foreach $share_list, $printer_list;
 
 my $window = ugtk2->new("DrakSamba $version");
 $::main_window = $window->{real_window};
