@@ -1,5 +1,84 @@
 2005/08/26  Antoine Ginies  <aginies at mandriva.com> 
 
+	* standalone/draksambashare: add user tab
+	test if printer share already exist
+	update printer_list from printer dialog box
+	major adjustemnt in printer dialog box
+	fix printer wizard
+
+2005/08/26  Olivier Blin <oblin at mandriva.com>
+
+	* pixmaps/wifi-080.png, pixmaps/wifi-040.png, pixmaps/wifi-060.png,
+	pixmaps/wifi-100.png, pixmaps/wifi-020.png: add new neat wifi icons from
+	Hélène
+
+2005/08/26  Pixel  <pixel at mandriva.com>
+
+	* share/list.xml: xorg modules: replace .a and .o with .so
+
+	* share/rpmsrate: lshw is not that important
+	gdm must only be installed when CAT_X is selected
+
+	* any.pm: 
+	  - don't open advanced languages by default
+	  - replace "Advanced" button with "Multi languages"
+
+	* Xconfig/card.pm: handle nvidia's libglx.so being now in
+	extensions/nvidia instead of extensions
+	(when there is extensions/libglx.a, it means extensions/libglx.so is not
+	xorg's libglx, so it may be nvidia's)
+
+2005/08/26  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Gutenprint does not print correctly when margins are set in the CUPS
+	configuration, so do not set margins when creating a queue with
+	  Gutenprint, or remove the margins when switching the driver of an
+	  existing queue to Gutenprint.
+
+2005/08/26  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* lang.pm: reduce font size (especially for latin scripts) at install time
+	b/c of
+	new gtk+/cairo
+
+	* standalone/icons/harddrake2/hw-keyboard.png,
+	standalone/icons/harddrake2/hw-pcmcia.png,
+	standalone/icons/harddrake2/hw-usb.png,
+	standalone/icons/harddrake2/hw-smbus.png,
+	standalone/icons/harddrake2/hw-memory.png: add a few more icons for
+	harddrake GUI
+
+	* pixmaps/steps_done.png: add new icon for 'done' state for steps
+
+	* ugtk2.pm (Gtk2::Banner->new) use proper style for banner at install time
+	(Gtk2::Banner->new) banners are smaller at install time
+	(Gtk2::Banner->new) use proper GC (text_gc is for rendering on editable
+	widgets
+	whereas fg_gc is for rendering on non editable widgets)
+	(Gtk2::Banner->new) use bold font on banners (IHM team request)
+	(Gtk2::Banner->new) translating it is useless w/o a require on common
+
+	* harddrake/data.pm: add a few more icons in order to desambiguate some
+	categories that
+	were using the same icon
+
+	* share/themes-galaxy.rc: use the same background under category as in
+	root window
+	new step category's color (on IHM team request)
+	new background color (on IHM team request)
+	at install time, banner text is blue
+
+	* install_gtk.pm (update_steps_position) render passed steps as bold and
+	current step as bold italic as requested by IHM team
+	(create_steps_window) leave around references on text widget and on
+	unmarked text for steps
+	(create_steps_window) underline step categories (and render them as bold
+	btw)
+	(create_steps_window) precreate pixbuf for 'done' state too
+
+2005/08/26  Antoine Ginies  <aginies at mandriva.com> 
+
 	* standalone/draksambashare: test if printer share already exist
 	update printer_list from printer dialog box
 	major adjustemnt in printer dialog box
