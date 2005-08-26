@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 
-my $version = "0.1 test release";
+my $version = "0.2";
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
@@ -44,7 +44,7 @@ sub create_share_list() {
 					 N("Share directory") => 'text',
 					 N("Comment") => 'text',
 					 N("Browseable") => 'text',
-					 N("Public") => 'bool',
+					 N("Public") => 'text',
 					 N("Writable") => 'text',
 					 N("Create mask") => 'text',
 					 N("Directory mask") => 'text',
@@ -537,20 +537,41 @@ sub modify_printers_entry {
   $dialog->set_resizable(1);
 
   gtkpack_($dialog->vbox,
-           0, gtkadd(Gtk2::Frame->new(N("Printer share")),
-                     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $label_and_widgets->(N("Printer name:"), $share_name, ""),
-			      0, $label_and_widgets->(N("Directory:"), $dir, $button),
-			      ),
-                     ),
-           0, gtkadd(Gtk2::Frame->new(N("Options")),
-                     gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
-			      0, $label_and_widgets->(N("Printable"), $printable, ""),
-			      0, $label_and_widgets->(N("Browseable:"), $browseable, ""),
-			      0, $label_and_widgets->(N("Guest ok:"), $guest_ok, ""),
-			      0, $label_and_widgets->(N("Print command:"), $print_command, ""),
-			      ),
-                     ),
+	   0, gtkadd(Gtk2::Frame->new(N("Printer share")),
+		  gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
+			   0, gtkpack_(gtkset_border_width(Gtk2::VBox->new, 1),
+				       0, $label_and_widgets->(N("Printer name:"), $share_name, ""),
+				       0, $label_and_widgets->(N("Comment:"), $comment, ""),
+				       0, $label_and_widgets->(N("Directory:"), $dir, $button),
+				      ),
+			   0, Gtk2::VSeparator->new,
+			   0, gtkpack_(gtkset_border_width(Gtk2::VBox->new, 1),
+				       0, $label_and_widgets->(N("Writable:"), $writable, ""),
+				       0, $label_and_widgets->(N("Browseable:"), $browseable, ""),
+				       0, $label_and_widgets->(N("Printable"), $printable, ""),
+				      ),
+			  ),
+		 ),
+	   0, gtkadd(Gtk2::Frame->new(N("Advanced options")),
+		     gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
+			      0, gtkadd(Gtk2::Frame->new(N("Printer access")),
+					gtkpack_(gtkset_border_width(Gtk2::VBox->new, 1),
+						 0, $label_and_widgets->(N("Write list"), $write_list, ""),
+						 0, $label_and_widgets->(N("Inherit permissions"), $inherit_permissions, ""),
+						 0, $label_and_widgets->(N("Guest ok:"), $guest_ok, ""),
+						 0, $label_and_widgets->(N("Create mode:"), $create_mode, ""),
+						),
+				       ),
+			      0, Gtk2::VSeparator->new,
+			      0, gtkadd(Gtk2::Frame->new(N("Printer command")),
+					gtkpack_(gtkset_border_width(Gtk2::VBox->new, 1),
+						 0, $label_and_widgets->(N("Print command:"), $print_command, ""),
+						 0, $label_and_widgets->(N("LPQ command:"), $lpq_command, ""),
+						 0, $label_and_widgets->(N("Printing:"), $printing, ""),
+						),
+				       ),
+			     ),
+		    ),
 	   0, create_okcancel({
 			       cancel_clicked => sub { $dialog->destroy },
 			       ok_clicked => sub {
@@ -831,7 +852,7 @@ $_->set_rules_hint(1) foreach $share_list, $printer_list;
 
 my $window = ugtk2->new("DrakSamba $version");
 $::main_window = $window->{real_window};
-$window->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
+$window->{rwindow}->set_size_request(600, 410) unless $::isEmbedded;
 $window->{rwindow}->set_position('center') if !$::isEmbedded;
 my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
