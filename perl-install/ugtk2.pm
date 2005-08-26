@@ -1542,6 +1542,7 @@ sub new {
     my ($_class, $icon, $text, $o_options) = @_;
 
     my $darea = Gtk2::DrawingArea->new;
+    $darea->set_name('Banner') if $::isInstall;
     my $d_height = $::isInstall ? 55 : 75;
     $darea->set_size_request(-1, $d_height);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string("Sans Bold 14"));
