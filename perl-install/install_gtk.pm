@@ -126,7 +126,7 @@ sub create_steps_window {
 
     $o->{steps_window} and $o->{steps_window}->destroy;
 
-    $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off);
+    $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off done);
     my $category = sub { 
 	gtknew('HBox', children_tight => [ 
 	    gtknew('Label', text => $_[0], widget_name => 'Step-categories')
