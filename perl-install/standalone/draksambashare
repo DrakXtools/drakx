@@ -330,9 +330,9 @@ sub printers_section() {
   $samba->{'use client driver'} = "yes";
 }
 
-sub add_entry {
+sub add_entry() {
   use wizards;
-  my ($wiz_addshare_name, $wiz_addshare_comment, $wiz_addshare_path, $wiz_addshare_browseable, $wiz_addshare_public);
+  my ($wiz_addshare_name, $wiz_addshare_comment, $wiz_addshare_path);
   my $w = wizards->new;
   my $wiz = {
 	     name => N("Add a Samba share"),
@@ -396,7 +396,7 @@ sub add_entry {
   gtkset_mousecursor_normal();
 }
 
-sub add_printers_entry {
+sub add_printers_entry() {
   use wizards;
   my $w = wizards->new;
   my %print = (
@@ -415,10 +415,10 @@ sub add_printers_entry {
 				   no_back => 1,
 				   post => sub {
 				     if ($wiz_todo == 1) {
-				       pdf_section;
+				       &pdf_section;
 				     } elsif ($wiz_todo == 2) {
-				       printdollar_section;
-				       printers_section;
+				       &printdollar_section;
+				       &printers_section;
 				     }
 				     return;
 				   },
@@ -439,7 +439,7 @@ sub add_printers_entry {
 
 sub modify_printers_entry {
   my ($selected) = @_;
-  my ($dir, $i, $path, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable, $write_list, $printing, $lpq_command, $create_mode, $writable, $use_client_driver, $inherit_permissions);
+  my ($dir, $comment, $print_command, $guest_ok, $share_name, $browseable, $printable, $write_list, $printing, $lpq_command, $create_mode, $writable, $use_client_driver, $inherit_permissions);
 
   $share_name = Gtk2::Label->new;
   $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $print_command, $write_list, $printing, $lpq_command, $create_mode;
@@ -503,7 +503,7 @@ sub modify_printers_entry {
 
 sub modify_entry {
   my ($selected) = @_;
-  my ($dir, $i, $path, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
+  my ($dir, $comment, $create_mask, $directory_mask, $read_list, $write_list, $admin_users, $valid_users, $force_group, $browseable, $public, $writable, $hide_files, $hide_dot_files, $force_create_mode, $preserve_case, $default_case, $inherit_permissions, $share_name);
 
   $share_name = Gtk2::Label->new;
   $_ = Gtk2::Entry->new foreach $dir, $path, $comment, $create_mask, $directory_mask, $hide_files;
