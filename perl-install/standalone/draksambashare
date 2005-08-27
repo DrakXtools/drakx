@@ -28,6 +28,7 @@ use interactive;
 use ugtk2 qw(:ask :wrappers :create :dialogs);
 use mygtk2 qw(gtknew);
 use Gtk2::SimpleList;
+use Gtk2::Gdk::Keysyms;
 
 # use libconf
 use Libconf::Templates;
@@ -1095,6 +1096,14 @@ $share_list->signal_connect('button-press-event' => sub {
 			      $menupopup->popup(undef, undef, undef, undef, $event->button, $event->time);
 			    }
 			   );
+
+$share_list->signal_connect(key_press_event => sub {
+    my ($widget, $event) = @_;
+    return unless $event->keyval == $Gtk2::Gdk::Keysyms{Return};
+    my ($selected) = $share_list->get_selected_indices;
+    modify_entry($selected, $share_list);
+    return 1;
+});
 
 # create menu
 my @items = get_items();
