@@ -845,10 +845,12 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
+    my $icon = find { _find_imgfile($_) } $opts{icon}, 'banner-generic-ad',;
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
+	if_($::isInstall, banner => Gtk2::Banner->new($icon, $title)),
 	child => gtknew('VBox'),
 	modal => $grab || $o->{grab} || $o->{modal},
 	if_(!$::isInstall, icon_no_error => wm_icon()),
