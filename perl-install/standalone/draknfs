@@ -217,7 +217,7 @@ sub help_b {
 		    );
 }
 
-sub get_access_list {
+sub get_access_list() {
   my $net = {};
   network::network::read_net_conf($net);
   my $interface ||= $net->{net_interface};
@@ -581,7 +581,7 @@ my $okcancel = create_okcancel({
 # main interface
 $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 		 0, $menu,
-		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('drakgw', N("DrakNFS manage NFS shares"))),
+		 if_(!$::isEmbedded, 0, Gtk2::Banner->new('IC-NFS-48', N("DrakNFS manage NFS shares"))),
 		 if_($::isEmbedded, 0, Gtk2::Label->new("Here you can add, remove and alter NFS shares.")),
 		 1, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 			     1, create_scrolled_window($treeview),
