@@ -31,7 +31,7 @@ use network::network;
 use ugtk2 qw(:ask :wrappers :create :dialogs);
 
 use constant FALSE => 0;
-use constant TRUE => 1;
+
 
 my $HOSTS = "/etc/hosts";
 my @listhosts;
@@ -74,7 +74,7 @@ sub write_conf_hosts() {
 }
 
 sub add_modify_entry {
-  my ($_widget, $treeview, $wanted) = @_;
+  my ($treeview, $wanted) = @_;
   my $model = $treeview->get_model;
   my $selection = $treeview->get_selection;
   my $iter;
@@ -157,7 +157,7 @@ sub add_modify_entry {
 }
 
 sub remove_entry {
-  my ($_widget, $treeview) = @_;
+  my ($treeview) = @_;
   my $model = $treeview->get_model;
   my $selection = $treeview->get_selection;
   my $iter = $selection->get_selected;
@@ -212,17 +212,16 @@ my $W = $window->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 
 my $treeview = Gtk2::TreeView->new_with_model($model);
-$treeview->set_rules_hint(TRUE);
+$treeview->set_rules_hint(1);
 $treeview->get_selection->set_mode('single');
 add_columns($treeview);
 
 $treeview->signal_connect(button_press_event => sub {
 			    my (undef, $event) = @_;
-			    my $model = $treeview->get_model;
 			    my $selection = $treeview->get_selection;
 			    my $iter = $selection->get_selected;
 			    if ($iter) {
-			      add_modify_entry($model, $treeview, "modify") if $event->type eq '2button-press';
+			      add_modify_entry($treeview, "modify") if $event->type eq '2button-press';
 			    }
 			  });
 
@@ -242,21 +241,21 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,0),
 			     1, create_scrolled_window($treeview),
 			     0, gtkpack_(gtkset_border_width(create_vbox('start', 3)),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-								eval { add_modify_entry($model, $treeview, "add") };
+								eval { add_modify_entry($treeview, "add") };
 								my $err = $@;
 								if ($err) {
 								  err_dialog(N("Error"), N("Failed to add host.") . "\n\n" . $err);
 								}
 							      }),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Modify")), clicked => sub {
-								eval { add_modify_entry($model, $treeview, "modify") };
+								eval { add_modify_entry($treeview, "modify") };
 								my $err = $@;
 								if ($err) {
 								  err_dialog(N("Error"), N("Failed to Modify host.") . "\n\n" . $err);
 								}
 							      }),
 					 0, gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-								eval { remove_entry($model, $treeview) };
+								eval { remove_entry($treeview) };
 								my $err = $@;
 								if ($err) {
 								  err_dialog(N("Error"), N("Failed to remove host.") . "\n\n" . $err);
