@@ -845,7 +845,7 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    my $icon = find { _find_imgfile($_) } $opts{icon}, 'banner-generic-ad',;
+    my $icon = find { _find_imgfile($_) } $opts{icon}, 'banner-generic-ad';
     my $window = gtknew(
 	'MagicWindow',
 	title => $title || '',
