@@ -78,7 +78,7 @@ sub create_share_list() {
 					 N("Default case") => 'text',
 					);
   $share_list->set_headers_clickable(1);
-  foreach ($share_list->get_columns()) {
+  foreach ($share_list->get_columns) {
     $_->set_resizable(1);
   }
   foreach (1, 2, 3) {
@@ -1064,6 +1064,38 @@ $user_list->signal_connect(button_press_event => sub {
 				$user_list->{data}[$selected][1] and modify_user_info($user_list->{data}[$selected][1], "", "change") if $event->type eq '2button-press';
 			      });
 
+# dont know why "$event->type eq '2button-press'" when starting draksambashare so i can't use mapn :/
+#mapn {
+#    $_[0]->signal_connect(button_press_event => sub {
+#	my (undef, $event) = @_;
+#	my ($selected) = $_[0]->get_selected_indices;
+#	return unless $event->type eq '2button-press';
+#	$_[0]->{data}[$selected][1] and $_[1]($selected); # if $event->type eq '2button-press';
+#    });
+#} [ $share_list, $printer_list, $user_list ], [ modify_entry, modify_printers_entry, modify_user_info ];
+
+# create popup menu
+my $menupopup = Gtk2::Menu->new;
+my $menuitem1 = Gtk2::MenuItem->new(N("Modify"));
+my $menuitem2 = Gtk2::MenuItem->new(N("Remove"));
+$menuitem1->signal_connect(activate => sub {
+			     my ($selected) = $share_list->get_selected_indices;
+			     modify_entry($selected, $share_list);
+			   });
+$menuitem2->signal_connect(activate => sub {
+			     my ($selected) = $share_list->get_selected_indices;
+			     ask_okcancel("Remove entry ?", "Remove $share_list->{data}[$selected][1]") or return;
+			     remove_entry($selected, $share_list);
+			   });
+$_->show foreach $menuitem1, $menuitem2;
+$menupopup->append($_) foreach $menuitem1, $menuitem2;
+$share_list->signal_connect('button-press-event' => sub {
+			      my ($widget, $event) = @_;
+			      return unless $event->button == 3;
+			      $menupopup->popup(undef, undef, undef, undef, $event->button, $event->time);
+			    }
+			   );
+
 # create menu
 my @items = get_items();
 my $factory = Gtk2::ItemFactory->new('Gtk2::MenuBar', '<main>', undef);
@@ -1149,7 +1181,7 @@ gtkappend_page($nb, gtkpack_(gtkset_border_width(Gtk2::HBox->new, 0),
 			    ),
 	       gtkshow(gtkpack_(Gtk2::HBox->new(0,0),
 				0, Gtk2::Image->new_from_file($printershare_icon),
-				0, Gtk2::Label->new(N("Printers"))
+				0, Gtk2::Label->new(N("Printers")),
 			       ),
 		      ),
 	      );
