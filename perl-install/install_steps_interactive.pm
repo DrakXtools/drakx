@@ -82,6 +82,7 @@ sub acceptLicense {
     my $r = $::testing ? 'Accept' : 'Refuse';
 
     $o->ask_from_({ title => N("License agreement"), 
+                    icon => 'banner-license',
 		     cancel => N("Quit"),
 		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
 		     interactive_help_id => 'acceptLicense',
@@ -184,6 +185,7 @@ sub selectMouse {
 	my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
 
 	$o->ask_from_({ messages => N("Please choose your type of mouse."),
+			title => N("Mouse choice"),
 			interactive_help_id => 'selectMouse',
 		      },
 		     [ { list => [ mouse::fullnames() ], separator => '|', val => \$prev, format => sub { join('|', map { translate($_) } split('\|', $_[0])) } } ]);
@@ -766,7 +768,7 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-    my $_w = $o->wait_message('', N("Post-install configuration"));
+    my $_w = $o->wait_message('toto', N("Post-install configuration"));
     $o->SUPER::afterInstallPackages;
 }
 
@@ -801,7 +803,7 @@ sub installUpdates {
     $o->hasNetwork or return;
 
     if (is_empty_hash_ref($u)) {
-	$o->ask_yesorno_({ title => N("Updates"), messages => formatAlaTeX(
+	$o->ask_yesorno_({ title => N("Updates"), icon => 'banner-update', messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -873,7 +875,7 @@ sub configureTimezone {
     my ($o, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $o->{timezone}{timezone}) || return;
+    $o->{timezone}{timezone} = $o->ask_from_treelist(N("Timezone"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $o->{timezone}{timezone}) || return;
 
     my $ntp = to_bool($o->{timezone}{ntp});
     $o->ask_from_({ interactive_help_id => 'configureTimezoneGMT' }, [
@@ -1316,6 +1318,7 @@ Do you really want to quit now?"), 0);
     $o->ask_from_no_check(
 	{
 	 title => N("Congratulations"),
+	 icon => 'banner-exit',
 	 messages => formatAlaTeX(install_messages::install_completed()),
 	 interactive_help_id => 'exitInstall',
 	 ok => $::local_install ? N("Quit") : N("Reboot"),

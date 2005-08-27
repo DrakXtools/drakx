@@ -596,7 +596,7 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 sub summary_prompt {
     my ($o, $l, $check_complete) = @_;
 
-    my $w = ugtk2->new(N("Summary"));
+    my $w = ugtk2->new(N("Summary"), icon => 'banner-summary');
 
     my $set_entry_labels;
     my @table;

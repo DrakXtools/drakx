@@ -111,7 +111,7 @@ xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
 sub ask_install_simple {
     my ($in) = @_;
     my ($l, $on_services) = services();
-    $in->ask_many_from_list("drakxservices",
+    $in->ask_many_from_list(N("Services"),
 			    N("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
@@ -154,7 +154,7 @@ sub ask_install {
     $services{$_} = 0 foreach @{$l || []};
     $services{$_} = 1 foreach @{$on_services || []};
 
-    $in->ask_browse_tree_info('drakxservices', N("Choose which services should be automatically started at boot time"),
+    $in->ask_browse_tree_info(N("Services"), N("Choose which services should be automatically started at boot time"),
 			      {
 			       node_state => sub { $services{$_[0]} ? 'selected' : 'unselected' },
 			       build_tree => sub {

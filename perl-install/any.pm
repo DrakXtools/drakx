@@ -267,6 +267,8 @@ sub setupBootloader__general {
     $::Wizard_title = N("Boot Style Configuration");
     if (arch() !~ /ppc/) {
 	$in->ask_from_({ messages => N("Bootloader main options"),
+			 title => N("Bootloader main options"),
+			 icon => 'banner-bootL',
 			 interactive_help_id => 'setupBootloader',
 			 callbacks => {
 			     complete => sub {
@@ -299,6 +301,8 @@ sub setupBootloader__general {
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
 	$in->ask_from_({ messages => N("Bootloader main options"),
+			 title => N("Bootloader main options"),
+			 icon => 'banner-bootL',
 			 interactive_help_id => 'setupYabootGeneral',
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
@@ -623,6 +627,7 @@ sub ask_user_one {
     };
     my $ret = $in->ask_from_(
         { title => N("Add user"),
+          icon => 'banner-adduser',
           messages => N("Enter a user\n%s", $options{additional_msg} || $names),
           interactive_help_id => 'addUser',
           focus_first => 1,
@@ -711,6 +716,7 @@ sub selectLanguage_install {
 
     my $common = { messages => N("Please choose a language to use."),
 		   title => N("Language choice"),
+		   icon => 'banner-languages.png',
 		   interactive_help_id => 'selectLanguage' };
 
     my $lang = $locale->{lang};
@@ -830,6 +836,7 @@ sub selectCountry {
 
     $in->ask_from_(
 		  { title => N("Country / Region"), 
+		    icon => 'banner-languages',
 		    messages => N("Please choose your country."),
 		    interactive_help_id => 'selectCountry',
 		    if_(@best, advanced_messages => N("Here is the full list of available countries")),

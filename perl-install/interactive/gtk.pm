@@ -398,7 +398,7 @@ sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
 
-    my $mainw = ugtk2->new($common->{title}, %$o, modal => 1, if__($::main_window, transient => $::main_window));
+    my $mainw = ugtk2->new($common->{title}, %$o, modal => 1, if__($::main_window, transient => $::main_window), if_($common->{icon}, icon => $common->{icon}));
  
     #-the widgets
     my (@widgets, @widgets_always, @widgets_advanced, $advanced);

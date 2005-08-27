@@ -393,7 +393,7 @@ sub netprofile_read {
 sub miscellaneous_choose {
     my ($in, $u) = @_;
 
-    $in->ask_from('',
+    $in->ask_from(N("Proxies configuration"),
        N("Proxies configuration"),
        [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
          { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },

@@ -52,7 +52,8 @@ connections from many clients. Note: if your machine is only a client on the Int
 
     my @l = 2 .. 5;
 
-    $in->ask_from_({ title => N("DrakSec Basic Options"),
+    $in->ask_from_({ title => $::isInstall ? N("Security") : N("DrakSec Basic Options"),
+		     icon => 'banner-security',
 		     messages => N("Please choose the desired security level") . "\n\n" .
 		                 join('', map { to_string($_) . ": " . formatAlaTeX($help{$_}) . "\n\n" } @l),
 		     interactive_help_id => 'miscellaneous',
