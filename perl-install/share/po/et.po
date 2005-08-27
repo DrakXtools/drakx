@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-07-30 17:30+0200\n"
+"PO-Revision-Date: 2005-08-27 11:59+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3073,9 +3073,9 @@ msgid "Enabling swap partition %s"
 msgstr "Vormindan saaleala %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Te ei saa haakepunkti %s jaoks kasutada krüptitud failisüsteemi"
+msgstr "Krüptitud failisüsteemi kasutamine"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3155,7 +3155,7 @@ msgstr ""
 "näiteks võtmerida user,exec,dev,suid )."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 "Ketta kasutajakvootide arvestuse ja võimalusel limiitide kehtestamise "
@@ -10165,7 +10165,7 @@ msgstr "Parooli lahtimurdmine"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "\"%s\" rünnak"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10183,9 +10183,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "%s üritas parooli lahtimurdmist."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "%s üritas porte skaneerida."
+msgstr "\"%s\" rünnaku katse %s poolt"
 
 #: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
 #: network/netconnect.pm:547 network/netconnect.pm:690
@@ -10895,7 +10895,7 @@ msgstr "Võrgu kohene valmidus (hotplugging)"
 #: network/netconnect.pm:900 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
-msgstr "Käivitub alglaadimisel"
+msgstr "Käivitatakse alglaadimisel"
 
 #: network/netconnect.pm:902 standalone/drakconnect:460
 #, c-format
@@ -10905,7 +10905,7 @@ msgstr "Meetrika"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "IPv6->IPv4 tunneli lubamine"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -11028,7 +11028,7 @@ msgstr "Krüptorežiim"
 #: network/netconnect.pm:1026
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Tugijaama vahetumise lubamine"
 
 #: network/netconnect.pm:1027 standalone/drakconnect:406
 #, c-format
@@ -11832,9 +11832,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Võrguprinter (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "SMB/Windows 95/98/NT serveri printer"
+msgstr "SMB/Windows serveri printer"
 
 #: printer/main.pm:33
 #, c-format
@@ -12456,18 +12456,19 @@ msgstr "CUPS-i taaskäivitamine..."
 #: printer/printerdrake.pm:614
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr ""
+msgstr "Hüpikaknad on lubatud, seadistamist ja pakettide paigaldamist saab katkestada"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, canceling setup and package installation not possible"
 msgstr ""
+"Hüpikaknad pole lubatud, seadistamist ja pakettide paigaldamist ei saa katkestada"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Printeri automaattuvastus"
+msgstr "Printeri automaathaldus"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12475,41 +12476,43 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Siin saab seadistada printeri haldusfunktsioone, mida sooritatakse "
+"automaatselt."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Automaatse seadistuse kasutamine (DHCP)"
+msgstr "Uute printerite automaatne seadistamine"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (Kontrollige, et kõik printerid on ühendatud ja sisse lülitatud).\n"
+msgstr "kui USB-printer on on ühendatud ja sisse lülitatud"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "See printer on keelatud"
+msgstr "kui Printerdrake käivitatakse"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Printeri automaatse seadistamise režiim:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Saadaolevad printerid"
+msgstr "Keelatud printerite taaslubamine"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Trükkimissüsteemi muutmine"
+msgstr "kui trükkimissüsteem käivitatakse"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Printeri \"%s\" kasutamine/hooldamine"
+msgstr "Printeri \"%s\" kasutamisvigade käsitlemine"
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12518,36 +12521,38 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Siin saab seadistada, kuidas tuleb käsitleda suhtlemisvigasid Teie arvuti "
+"ja printeri \"%s\" vahel (kui näiteks printer pole sisse lülitatud)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Pordi number peab olema täisarv!"
+msgstr "Uuestiproovimiste arv peab olema täisarv väärtusega vähemalt 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Aegumine peab olema positiivne täisarv!"
+msgstr "Ootamine uuestiproovimiste vahel peab olema positiivne täisarv!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Printeri keelamine"
+msgstr "Printerit ei keelata"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Proovitakse lõputult uuesti"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Nuppude arv"
+msgstr "Uuestiproovimiste arv"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Ootamine uuestiproovimiste vahel (sek)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12735,7 +12740,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not do automatic printer setup and do not do it again"
-msgstr ""
+msgstr "Printerit ei seadistata automaatselt ja seda ei üritata ka edaspidi teha"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12745,17 +12750,17 @@ msgstr "Uute printerite otsimine..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "Printerit ei seadistata uuesti automaatselt"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Printerit ei leitud!"
+msgstr "Leiti uued printerid"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Printerit ei leitud!"
+msgstr "Leiti uus printer"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12764,6 +12769,10 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"Leiti järgmised printerid, mida Printerdrake võib Teie jaoks automaatselt "
+"seadistada. Kui Te ei soovi neid kõiki seadistada, eemaldage märge nende "
+"eest, mida soovite vahele jätta, või klõpsake nupule \"Loobu\", kui Te "
+"ei peaks soovima ühtegi printerit seadistada.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12772,6 +12781,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"Leiti järgmine printer, mida Printerdrake võib Teie jaoks automaatselt "
+"seadistada. Kui Te ei soovi seda seadistada, eemaldage märge selle nime "
+"eest või klõpsake nupule \"Loobu\",\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12779,6 +12791,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Pange tähele, et teatud printerimudelite korral on vajalik paigaldada "
+"lisatarkvara. Seepärast hoidke paigaldusandmekandja käepärast.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12843,6 +12857,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Te olete printeri automaatse seadistamise välja lülitanud.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12850,11 +12866,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Te võite selle uuesti sisse lülitada, valides Printerdrake'i peamenüüs "
+"\"%s\" -> \"%s\". "
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Võrguhaldus"
+msgstr "Automaathalduse seadistamine"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12863,6 +12881,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Te võite ka valida, millisel juhul tuleks printer automaatselt seadistada "
+"(Printerdrake'i käivitamisel, trükkimissüsteemi käivitamisel, uue USB-printeri "
+"ühendamisel)."
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2420
@@ -14087,22 +14108,22 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Canon LBP-460/660 seadistamine"
 
 #: printer/printerdrake.pm:3589
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Canon LBP-460/660 seadistamine"
+msgstr "Canon LBP-810/1120 (CAPT) seadistamine"
 
 #: printer/printerdrake.pm:3590
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
 "port. Please connect your printer to the USB or configure it on the machine "
 "where it is directly connected to."
 msgstr ""
-"Selle printeri draiver toetab ainult kohalikke USB ühendusega printereid, "
-"mitte aga printereid võrgumasinatel või printserveritel. Ühendage palun oma "
-"printer kohalikku USB porti või seadistage see masinas, millega printer on "
-"ühendatud."
+"Selle printeri draiver toetab ainult kohalikke USB-ühendusega printereid, "
+"mitte aga printereid võrgumasinatel või printserveritel või paralleelportides. "
+"Ühendage palun oma printer kohalikku USB-porti või seadistage see masinas, "
+"millega printer on ühendatud."
 
 #: printer/printerdrake.pm:3597
 #, c-format
@@ -15078,9 +15099,9 @@ msgid "Disable Printer"
 msgstr "Printeri keelamine"
 
 #: printer/printerdrake.pm:5480 printer/printerdrake.pm:5574
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Printeri ühendusviis"
+msgstr "Printeri kasutamisvigade käsitlemine"
 
 #: printer/printerdrake.pm:5481 printer/printerdrake.pm:5578
 #, c-format
@@ -17983,9 +18004,9 @@ msgid "Terminal Server Configuration"
 msgstr "Terminaliserveri seadistamine"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "Dhcpd seadistamine..."
+msgstr "Dhcpd seadistamine"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -18112,7 +18133,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Kliendi X'i klaviatuuri seadistused sünkroniseeritakse serveriga."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -18120,7 +18141,8 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Palun valige kliendi tüüp.\n"
+"Palun valige kliendi tüüp (vaikimisi \"paks\", kui õhukesed kliendid "
+"pole lubatud).\n"
 "    \"Õhuke\" klient kasutab kõike serveri protsessori/RAM-i abil, kliendi "
 "poolel on ainult monitor.\n"
 "    \"Paks\" klient kasutab enda protsessorit/RAM-i, kuid serveri "
@@ -18521,7 +18543,7 @@ msgstr "PXE laadefailide loomine."
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "i586 kerneli paigaldamine vanematele klientidele"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18564,9 +18586,9 @@ msgid "Delete All NBIs"
 msgstr "Kustuta kõik võrgu alglaadefailid"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Võrgulaadepiltide loomine kõigile kernelitele"
+msgstr "Laadepiltide loomine kernelile:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -19583,7 +19605,7 @@ msgstr "Varundamine otse lindile"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "Riistvaralise lindi tihendamise kasutamine (EKSPERIMENTAALNE)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -20664,9 +20686,9 @@ msgid "Graphical boot theme selection"
 msgstr "Graafilise algkäivitusteema valik"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Graafilise algkäivituse kasutamine"
+msgstr "Graafilise algkäivituse režiim:"
 
 #: standalone/drakboot:143
 #, c-format
@@ -21970,22 +21992,22 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Palun lisage masin, muidu ei saa seda muuta."
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Palun %s info"
+msgstr "Palun muutke infot"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Palun %s info"
+msgstr "Palun kustutage info"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Palun %s info"
+msgstr "Palun lisage info"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -22038,27 +22060,27 @@ msgid "Failed to remove host."
 msgstr "Masina eemaldamine ebaõnnestus."
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Lubatud kõigile kasutajatele"
+msgstr "Lubatud aadressid"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:61 standalone/net_applet:183
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Aktiivne tulemüür"
+msgstr "Interaktiivne tulemüür"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "Logi"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Kustuta kõik"
+msgstr "Kustuta logid"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
@@ -22209,7 +22231,7 @@ msgstr ""
 "`/255.255.252.0' või `/22' võrgu baasaadressile.\n"
 
 #: standalone/draknfs:153
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -22236,18 +22258,19 @@ msgstr ""
 "<span weight=\"bold\">Kasutaja ID valikud</span>\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">root_squash:</span> kõik uid/gid 0 päringud "
-"seotakse anonüümse uid/gid-iga.\n"
+"<span foreground=\"royalblue3\">administraatori sidumine anonüümsena:</span> "
+"kõik uid/gid 0 päringud seotakse anonüümse uid/gid-iga.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">no_root_squash:</span> administraatori "
-"sidumist ei lubata. See on kasulik peamiselt kettata klientide korral.\n"
+"<span foreground=\"royalblue3\">administraatori kaugligipääsu lubamine:</span> "
+"administraatori sidumist ei lubata. See on kasulik peamiselt kettata klientide "
+"korral.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">all_squash:</span> kõik uid-d ja gid-d "
-"seaotakse anonüümse kasutajaga. Kasulik NFS-eksporditud avalike FTP-"
-"kataloogide, uudiste puhverkataloogide jms, korral. Vastand on vaikimisi "
-"kasutatav no_all_squash.\n"
+"<span foreground=\"royalblue3\">kõigi kasutajate sidumine anonüümsena:</span> "
+"kõik uid-d ja gid-d seaotakse anonüümse kasutajaga. Kasulik NFS-eksporditud "
+"avalike FTP-kataloogide, uudiste puhverkataloogide jms, korral. Vastand on "
+"vaikimisi kasutatav kasutaja UID mittesidumine (no_all_squash).\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">anonuid ja anongid:</span> anonüümse konto "
@@ -22312,7 +22335,7 @@ msgstr ""
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Palun lisage NFS-i ressurss, muidu ei saa seda muuta."
 
 #: standalone/draknfs:373
 #, c-format
@@ -22776,104 +22799,104 @@ msgid "on"
 msgstr "sees"
 
 #: standalone/draksambashare:64
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Eemalda nimekiri"
+msgstr "Lugemisõigus"
 
 #: standalone/draksambashare:65
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Valge nimekiri"
+msgstr "Kirjutamisõigus"
 
 #: standalone/draksambashare:66 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Lisa kasutaja"
+msgstr "Adnimistraatorid"
 
 #: standalone/draksambashare:67 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Lisa kasutaja"
+msgstr "Lubatud kasutajad"
 
 #: standalone/draksambashare:68 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Failide peitmine"
+msgstr "Punktiga failide peitmine"
 
 #: standalone/draksambashare:70
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Grupp"
+msgstr "Kohustuslik grupp"
 
 #: standalone/draksambashare:71
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Kohustuslik loomise grupp"
 
 #: standalone/draksambashare:72 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Vaikimisi kasutaja"
+msgstr "Vaikimisi tõst"
 
 #: standalone/draksambashare:73 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Eelistused"
+msgstr "Tõstu säilitamine"
 
 #: standalone/draksambashare:74 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Tekita"
+msgstr "Loomise mask"
 
 #: standalone/draksambashare:75 standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Kataloog"
+msgstr "Kataloogi mask"
 
 #: standalone/draksambashare:76
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Õigused"
+msgstr "Õiguste pärimine"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Samba server"
 
 #: standalone/draksambashare:106
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "NFS-serveri taaskäivitamine..."
+msgstr "Samba serveri taaskäivitamine..."
 
 #: standalone/draksambashare:107
-#, fuzzy, c-format
+#, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "Viga NFS-serveri taaskäivitamisel"
+msgstr "Viga Samba serveri taaskäivitamisel"
 
 #: standalone/draksambashare:234 standalone/draksambashare:242
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Samba ressursi lisamine"
 
 #: standalone/draksambashare:237
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "Selle nõustaja eesmärk on uue Samba ressursi lihtne loomine."
 
 #: standalone/draksambashare:244
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Sertifikaadi nimi"
+msgstr "Ressursi nimi:"
 
 #: standalone/draksambashare:245 standalone/draksambashare:402
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Rakendamine"
+msgstr "Kommentaar:"
 
 #: standalone/draksambashare:246
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Asukoht"
+msgstr "Asukoht:"
 
 #: standalone/draksambashare:251
 #, c-format
@@ -22881,16 +22904,18 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Sellise nimega jagatud ressurss on juba olemas või jätsite nime andmata. "
+"Palun valige uus nimi."
 
 #: standalone/draksambashare:255 standalone/draksambashare:261
 #, c-format
 msgid "Can\\'t create the directory, please enter a correct path."
-msgstr ""
+msgstr "Kataloogi loomine ebaõnnestus, palun andke korrektne asukoht."
 
 #: standalone/draksambashare:258 standalone/draksambashare:424
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Palun määrake jagatav kataloog."
+msgstr "Palun kirjutage jagatud ressursi kommentaar."
 
 #: standalone/draksambashare:288 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:449 standalone/logdrake:455
@@ -22904,132 +22929,135 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Nõustaja lisas edukalt Samba ressursi. Selle muutmiseks tehke ressursi "
+"nimel topeltklõps."
 
 #: standalone/draksambashare:321
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "DrakSamba kirje"
 
 #: standalone/draksambashare:325
 #, c-format
 msgid "Please add a Samba share to be able to modify it."
-msgstr ""
+msgstr "Palun lisage Samba ressurss, muidu ei saa seda muuta."
 
 #: standalone/draksambashare:352
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Samba server"
+msgstr "Samba kasutaja ligipääs"
 
 #: standalone/draksambashare:360
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Põhiseadistused"
+msgstr "Maski valikud"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "Parameetrite määramine"
+msgstr "Kuvamise valikud"
 
 #: standalone/draksambashare:397
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Jagatud kataloog"
+msgstr "Samba ressursi kataloog"
 
 #: standalone/draksambashare:400
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "Jagatav printer"
+msgstr "Ressursi nimi:"
 
 #: standalone/draksambashare:406
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Avalik:"
 
 #: standalone/draksambashare:407
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "Kirjutada"
+msgstr "Kirjutamisõigus:"
 
 #: standalone/draksambashare:408
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "Lehitse"
+msgstr "Lehitsemisõigus:"
 
 #: standalone/draksambashare:430
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
+"Loomise mask, loomise režiim ja kataloogi mask peavad olema arvud, nt. 0755."
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
 msgstr "Jagatud kataloog"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "Rakendamine"
+msgstr "Kommentaar"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "Lehitse"
+msgstr "Lehitsemisõigus"
 
 #: standalone/draksambashare:543
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "Avalik"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "Kirjutada"
+msgstr "Kirjutamisõigus"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Lugeda"
+msgstr "Lugemisõigus"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Valge nimekiri"
+msgstr "Kirjutamisõigus"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Teie printeri mudel"
+msgstr "Kohustuslik loomise režiim"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "PFS grupp"
+msgstr "Kohustuslik grupp"
 
 #: standalone/draksambashare:543
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Õigused"
+msgstr "Õiguste pärimine"
 
 #: standalone/draksambashare:590
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFS - NFS-ressursside haldamine"
+msgstr "DrakSamba - Samba ressursside haldamine"
 
 #: standalone/draksambashare:601
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "NFS-ressursi lisamine ebaõnnestus."
+msgstr "Samba ressursi lisamine ebaõnnestus."
 
 #: standalone/draksambashare:609
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "NFS-ressursi muutmine ebaõnnestus."
+msgstr "Samba ressursi muutmine ebaõnnestus."
 
 #: standalone/draksambashare:616
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "NFS-ressursi eemaldamine ebaõnnestus."
+msgstr "Samba ressursi eemaldamine ebaõnnestus."
 
 #: standalone/draksec:49
 #, c-format
@@ -23677,7 +23705,7 @@ msgid ""
 "\n"
 "This kernel has '%s' support."
 msgstr ""
-"Kernelil paistab toetavat ipsec-i.\n"
+"Kernel peab olema ipsec-i toetusega.\n"
 "\n"
 "Teil on %s kerneli versioon.\n"
 "\n"
@@ -26386,7 +26414,7 @@ msgstr "Abi"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Interaktiivse tulemüüri automaatne režiim"
 
 #: standalone/net_applet:309
 #, c-format
@@ -26394,19 +26422,19 @@ msgid "Always launch on startup"
 msgstr "Alati käivitatakse käivitumisel"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Traadita ühenduste haldamine"
+msgstr "Traadita võrgud"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "Aktiivne tulemüür: tuvastati sissetung"
+msgstr "Interaktiivne tulemüür: tuvastati sissetung"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Kas lisada ründaja musta nimekirja?"
+msgstr "Mida selle ründajaga ette võtta?"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26646,9 +26674,9 @@ msgid "/_Configure CUPS"
 msgstr "/Seadista _CUPS"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Võrguhaldus"
+msgstr "/Seadista _automaathaldus"
 
 #: standalone/printerdrake:192
 #, c-format
@@ -27413,70 +27441,9 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Paigaldamine ebaõnnestus!"
 
-#~ msgid ""
-#~ "Enable user disk quota accounting enabled, and optionally enforce limits"
-#~ msgstr ""
-#~ "Ketta kasutajakvootide arvestuse ja võimalusel limiitide kehtestamise "
-#~ "lubamine"
-
-#~ msgid "Printer on SMB/Windows 95/98/NT server"
-#~ msgstr "SMB/Windows 95/98/NT serveri printer"
-
-#~ msgid "Found printer on %s..."
-#~ msgstr "Leiti printer asukohas %s..."
-
-#~ msgid "Useless without Terminal Server"
-#~ msgstr "Kasutu ilma terminaliserverita"
-
-#~ msgid ""
-#~ "Please select default client type.\n"
-#~ "    'Thin' clients run everything off the server's CPU/RAM, using the "
-#~ "client display.\n"
-#~ "    'Fat' clients use their own CPU/RAM but the server's filesystem."
-#~ msgstr ""
-#~ "Palun valige kliendi tüüp.\n"
-#~ "    \"Õhuke\" klient kasutab kõike serveri protsessori/RAM-i abil, "
-#~ "kliendi poolel on ainult monitor.\n"
-#~ "    \"Paks\" klient kasutab enda protsessorit/RAM-i, kuid serveri "
-#~ "failisüsteemi."
-
-#~ msgid "dhcpd Config..."
-#~ msgstr "Dhcpd seadistamine..."
-
-#~ msgid ""
-#~ "package 'ImageMagick' is required to be able to complete configuration.\n"
-#~ "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-#~ msgstr ""
-#~ "korrektseks töötamiseks on vajalik pakett ImageMagick.\n"
-#~ "Klõpsake \"Olgu\" paketi ImageMagick paigaldamiseks\n"
-#~ "või \"Loobu\" väljumiseks."
-
-#~ msgid "Unable to select wireless network: %s"
-#~ msgstr "Traadita võrgu valimine ebaõnnestus: %s"
-
-#~ msgid "Interactive intrusion detection"
-#~ msgstr "Interaktiivne sissetungide tuvastamine"
-
-#~ msgid "Actions"
-#~ msgstr "Toimingud"
-
-#~ msgid "Active Firewall: intrusion detected"
-#~ msgstr "Aktiivne tulemüür: tuvastati sissetung"
-
-#~ msgid "Do you want to blacklist the attacker?"
-#~ msgstr "Kas lisada ründaja musta nimekirja?"
-
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "Local Network adress"
-#~ msgstr "Kohtvõrgu aadress"
 
 #~ msgid "Configuring scripts, installing software, starting servers..."
 #~ msgstr "Häälestan skriptid, paigaldan tarkvara, käivitan serverid..."
-
-#~ msgid "drakfloppy"
-#~ msgstr "drakfloppy"
 
 #~ msgid "Boot disk creation"
 #~ msgstr "Alglaadimisketta loomine"
@@ -27545,245 +27512,6 @@ msgstr "Paigaldamine ebaõnnestus!"
 #~ "\n"
 #~ "<span foreground=\"Red\"><tt>%s</tt></span>"
 
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr "Te ei saa haakepunkti %s jaoks kasutada LVM loogilist ketast"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "Olete valinud juurpartitsiooniks (/) LVM loogilise ketta.\n"
-#~ "Ilma /boot-partitsioonita ei ole võimalik sellist süsteemi laadida.\n"
-#~ "Lisage kindlasti /boot-partitsioon!"
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Võib juhtuda, et Te ei saa LiLo-t paigaldada (sest LiLo ei suuda "
-#~ "käsitleda loogilist ketast mitmel füüsilisel kettal)"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "Nüüd on Teil võimalik seadistada oma arvuti paigaldamaks PXE serverit "
-#~ "DHCP serveri \n"
-#~ "ja TFTP serveri rollis, et luua paigaldusserver.\n"
-#~ "Selle võimaluse abil saavad teised Teie kohtvõrgu arvutid kasutada seda "
-#~ "masinat endale süsteemi paigaldamiseks.\n"
-#~ "\n"
-#~ "Kontrollige enne jätkamist, et olete seadistanud oma võrgu/"
-#~ "Internetiühenduse drakconnecti abil.\n"
-#~ "\n"
-#~ "Märkus: kohtvõrgu (LAN) jaoks on vajalik eraldi võrgukaardi olemasolu."
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "Teie süsteemis ei ole võrgukaarti!"
-
-#~ msgid "Choose the network interface"
-#~ msgstr "Valige võrgukaart"
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr ""
-#~ "Palun valige, millist võrguliidest soovite DHCP serveri jaoks kasutada"
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "Liides %s (võrgus %s)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "DHCP server võimaldab teistel arvutitel sooritada alglaadimise PXE "
-#~ "vahendusel antud aadressivahemikus.\n"
-#~ "\n"
-#~ "Võrguaadress on %s, võrgumask %s.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Andke palun paigalduslaadefaili asukoht.\n"
-#~ "\n"
-#~ "Kui Teil sellist kataloogi ei ole, kopeerige palun CD või DVD sisu.\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "Paigalduslaadefaili kataloog"
-
-#~ msgid "No image found"
-#~ msgstr "Laadefaili ei leitud!"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr ""
-#~ "CD- ega DVD-laadefaili ei leitud, palun kopeerige paigaldusprogramm ja "
-#~ "rpm-failid."
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Andke palun faili auto_install.cfg asukoht.\n"
-#~ "\n"
-#~ "Jätke tühjaks, kui Te ei soovi määrata automaatpaigaldamise režiimi.\n"
-#~ "\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Faili auto_install.cfg asukoht"
-
-#~ msgid "Do it later"
-#~ msgstr "Tee seda hiljem"
-
-#~ msgid "MdkKDM (Mandriva Linux Display Manager)"
-#~ msgstr "MkdKDM (Mandriva Linuxi kuvahaldur)"
-
-#~ msgid "Internet Connection Sharing currently disabled"
-#~ msgstr "Internetiühendust hetkel ei jagata"
-
-#~ msgid "Enabling servers..."
-#~ msgstr "Serverite käivitamine..."
-
-#~ msgid "Internet Connection Sharing currently enabled"
-#~ msgstr "Internetiühenduse jagamine on lubatud"
-
-#~ msgid "Interface %s (using module %s)"
-#~ msgstr "Liides %s (kasutab moodulit %s)"
-
-#~ msgid "Interface %s"
-#~ msgstr "Liides %s"
-
-#~ msgid "Network interface already configured"
-#~ msgstr "Võrguliides on juba seadistatud"
-
-#~ msgid ""
-#~ "Warning, the network adapter (%s) is already configured.\n"
-#~ "\n"
-#~ "Do you want an automatic re-configuration?\n"
-#~ "\n"
-#~ "You can do it manually but you need to know what you're doing."
-#~ msgstr ""
-#~ "Hoiatus: võrgukaart (%s) on juba seadistatud.\n"
-#~ "\n"
-#~ "Kas soovite ette võtta automaatse ümberseadistamine?\n"
-#~ "\n"
-#~ "Seda saab teha ka käsitsi, aga siis peate kindlasti teadma, mida teete."
-
-#~ msgid "No (experts only)"
-#~ msgstr "Ei (ainult eksperdile)"
-
-#~ msgid "Show current interface configuration"
-#~ msgstr "Liidese praeguste seadistuste näitamine"
-
-#~ msgid "Current interface configuration"
-#~ msgstr "Liidese praegune seadistus"
-
-#~ msgid ""
-#~ "Current configuration of `%s':\n"
-#~ "\n"
-#~ "Network: %s\n"
-#~ "IP address: %s\n"
-#~ "IP attribution: %s\n"
-#~ "Driver: %s"
-#~ msgstr ""
-#~ "\"%s\" praegused seadistused:\n"
-#~ "\n"
-#~ "Võrk: %s\n"
-#~ "IP-aadress: %s\n"
-#~ "IP omistamine: %s\n"
-#~ "Draiver: %s"
-
-#~ msgid ""
-#~ "I can keep your current configuration and assume you already set up a "
-#~ "DHCP server; in that case please verify I correctly read the Network that "
-#~ "you use for your local network; I will not reconfigure it and I will not "
-#~ "touch your DHCP server configuration.\n"
-#~ "\n"
-#~ "The default DNS entry is the Caching Nameserver configured on the "
-#~ "firewall. You can replace that with your ISP DNS IP, for example.\n"
-#~ "\t\t      \n"
-#~ "Otherwise, I can reconfigure your interface and (re)configure a DHCP "
-#~ "server for you.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Teie praegune seadistus on võimalik säilitada ja eeldada, et DHCP server "
-#~ "on juba seadistatud. Sellisel juhul kontrollige, et võrk, mida kasutate "
-#~ "kohtvõrgu tarbeks, on õigesti tuvastatud. Seda ei hakata ümber seadistama "
-#~ "ega Teie DHCP serveri seadistust muutma.\n"
-#~ "\n"
-#~ "Vaikimisi DNS kirje on tulemüüri poolt seadistatud puhverdav nimeserver. "
-#~ "See on võimalik asendada näiteks Teie ISP DNSi IP-ga.\n"
-#~ "\t\t       \n"
-#~ "Vastasel juhul seadistatakse Teie liides ümber ja seadistatakse (ümber) "
-#~ "ka DHCP server.\n"
-#~ "\n"
-
-#~ msgid "(This) DHCP Server IP"
-#~ msgstr "(Selle) DHCP serveri IP"
-
-#~ msgid "Re-configure interface and DHCP server"
-#~ msgstr "Liidese ja DHCP serveri ümberseadistamine"
-
-#~ msgid "The Local Network did not finish with `.0', bailing out."
-#~ msgstr "Kohtvõrgu lõpus ei seisa \"0\", visatakse minema."
-
-#~ msgid "Number of logical extents: %d"
-#~ msgstr "Loogiliste seadmete arv: %d"
-
-#~ msgid ""
-#~ "WARNING: this device has been previously configured to connect to the "
-#~ "Internet.\n"
-#~ "Modifying the fields below will override this configuration.\n"
-#~ "Do you really want to reconfigure this device?"
-#~ msgstr ""
-#~ "HOIATUS: See seade on juba seadistatud Interneti jaoks.\n"
-#~ "Allolevate väljade muutmine tühistab varasema seadistuse.\n"
-#~ "Kas soovite kindlasti seadet uuesti seadistada?"
-
-#~ msgid "hd"
-#~ msgstr "hd"
-
-#~ msgid "tape"
-#~ msgstr "lint"
-
-#~ msgid "WebDAV remote site already in sync!"
-#~ msgstr "WebDAVi kaugsait on juba sünkroonis!"
-
-#~ msgid "WebDAV transfer failed!"
-#~ msgstr "WebDAVi edastus ebaõnnestus!"
-
-#~ msgid ""
-#~ "Maximum size\n"
-#~ " allowed for Drakbackup (MB)"
-#~ msgstr ""
-#~ "Drakbackupi suurim\n"
-#~ " lubatud suurus (MB)"
-
-#~ msgid "\t-Network by webdav.\n"
-#~ msgstr "\t-võrk webdavi vahendusel.\n"
-
 #~ msgid "first step creation"
 #~ msgstr "esimene samm loomine"
 
@@ -27829,30 +27557,3 @@ msgstr "Paigaldamine ebaõnnestus!"
 #~ "\n"
 #~ "<span foreground=\"Red\">%s</span>"
 
-#~ msgid "No floppy drive available"
-#~ msgstr "Disketiseade ei ole kättesaadav"
-
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr "Pange palun moodulite uuendamise diskett seadmesse %s"
-
-#~ msgid "No network card"
-#~ msgstr "Võrgukaart puudub"
-
-#~ msgid ""
-#~ "The following protocols can be used to configure an ethernet connection. "
-#~ "Please choose the one you want to use"
-#~ msgstr ""
-#~ "Ethernet-ühenduse seadistamiseks saab kasutada järgmisi protokolle. Palun "
-#~ "valige, millist soovite kasutada"
-
-#~ msgid "Use already installed driver (%s)"
-#~ msgstr "Juba paigaldatud draiveri (%s) kasutamine"
-
-#~ msgid "Use Wi-Fi Protected Access (WPA)"
-#~ msgstr "Wi-Fi Protected Access'i (WPA) kasutamine"
-
-#~ msgid "You've not selected any font"
-#~ msgstr "Ühtegi fonti ei ole valitud!"
-
-#~ msgid "Save and close"
-#~ msgstr "Salvesta ja sulge"
