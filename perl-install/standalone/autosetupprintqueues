@@ -65,9 +65,9 @@ if ($gui ne "nogui") {
 	chomp $userhome;
 	my $errfile = "/dev/null";
 	if (-r "$userhome/.Xauthority") {
-	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; export XAUTHORITY=$userhome/.Xauthority; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1;";
+	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r /etc/sysconfig/i18n ] >> $errfile 2>&1 && for l in `cat /etc/sysconfig/i18n`; do export \$l; done >> $errfile 2>&1; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; export XAUTHORITY=$userhome/.Xauthority; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1;";
 	} else {
-	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost >> $errfile 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> $errfile 2>&1\"";
+	    system "export DISPLAY=\"localhost:0.0\"; export USER=$desktopuser; [ -r /etc/sysconfig/i18n ] >> $errfile 2>&1 && for l in `cat /etc/sysconfig/i18n`; do export \$l; done >> $errfile 2>&1; [ -r $userhome/.i18n ] >> $errfile 2>&1 && for l in `cat $userhome/.i18n`; do export \$l; done >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost +localhost >> $errfile 2>&1\"; /usr/sbin/printerdrake --onlyautoqueue >> $errfile 2>&1; /bin/su $desktopuser -c \"/usr/X11R6/bin/xhost -localhost >> $errfile 2>&1\"";
 	}
 	exit 0;
     }
