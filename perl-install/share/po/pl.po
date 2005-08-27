@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-27 13:21+0200\n"
+"PO-Revision-Date: 2005-08-27 17:45+0200\n"
 "Last-Translator: Tomasz Bednarski <tomasz.bednarski@mandriva.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24543,6 +24543,7 @@ msgstr "Adres źrdódłowy sainfo"
 
 #: standalone/drakvpn:910
 #, c-format
+#, fuzzy
 msgid ""
 "sainfo (source_id destination_id | anonymous) { statements }\n"
 "defines the parameters of the IKE phase 2\n"
@@ -24563,6 +24564,24 @@ msgid ""
 "sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
 "\t172.16.1.0/24 is the source address"
 msgstr ""
+"sainfo (source_id destination_id | anonymous) { instrukcje }\n"
+"definiuje parametry fazy 2 IKE\n"
+"(ustanawianie IPsec-SA).\n"
+"\n"
+"source_id i destination_id są skonstruowane wg schematu:\n"
+"\n"
+"\tadres adres [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Przykłady: \n"
+"\n"
+"sainfo anonymous (akceptuje połączenia zewsząd)\n"
+"\tpozostaw pole puste jeżeli mają być anonimowe\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\t203.178.141.209 is the source address\n"
+"\n"
+"sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
+"\t172.16.1.0/24 is the source address"
 
 #: standalone/drakvpn:927
 #, c-format
@@ -24571,6 +24590,7 @@ msgstr "Protokół źródłowy sainfo"
 
 #: standalone/drakvpn:928
 #, c-format
+#, fuzzy
 msgid ""
 "sainfo (source_id destination_id | anonymous) { statements }\n"
 "defines the parameters of the IKE phase 2\n"
@@ -24588,6 +24608,21 @@ msgid ""
 "sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
 "\tthe first 'any' allows any protocol for the source"
 msgstr ""
+"sainfo (source_id destination_id | anonymous) { statements }\n"
+"defines the parameters of the IKE phase 2\n"
+"(IPsec-SA establishment).\n"
+"\n"
+"source_id and destination_id are constructed like:\n"
+"\n"
+"\taddress address [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Examples: \n"
+"\n"
+"sainfo anonymous (accepts connections from anywhere)\n"
+"\tleave blank this entry if you want anonymous\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\tthe first 'any' allows any protocol for the source"
 
 #: standalone/drakvpn:942
 #, c-format
@@ -24596,6 +24631,7 @@ msgstr "Adres docelowy sainfo"
 
 #: standalone/drakvpn:943
 #, c-format
+#, fuzzy
 msgid ""
 "sainfo (source_id destination_id | anonymous) { statements }\n"
 "defines the parameters of the IKE phase 2\n"
@@ -24616,6 +24652,24 @@ msgid ""
 "sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
 "\t172.16.2.0/24 is the destination address"
 msgstr ""
+"sainfo (source_id destination_id | anonymous) { instrukcje }\n"
+"definiuje parametry fazy 2 IKE\n"
+"(ustanawianie IPsec-SA).\n"
+"\n"
+"source_id i destination_id są skonstruowane wg schematu:\n"
+"\n"
+"\tadres adres [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Przykłady: \n"
+"\n"
+"sainfo anonymous (akceptuje połączenia zewsząd)\n"
+"\tpozostaw pole puste jeżeli mają być anonimowe\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\t203.178.141.218 is the destination address\n"
+"\n"
+"sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
+"\t172.16.2.0/24 is the destination address"
 
 #: standalone/drakvpn:960
 #, c-format
@@ -24624,6 +24678,7 @@ msgstr "Protokół docelowy sainfo"
 
 #: standalone/drakvpn:961
 #, c-format
+#, fuzzy
 msgid ""
 "sainfo (source_id destination_id | anonymous) { statements }\n"
 "defines the parameters of the IKE phase 2\n"
@@ -24641,6 +24696,21 @@ msgid ""
 "sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
 "\tthe last 'any' allows any protocol for the destination"
 msgstr ""
+"sainfo (source_id destination_id | anonymous) { instrukcje }\n"
+"definiuje parametry fazy 2 IKE\n"
+"(ustanawianie IPsec-SA).\n"
+"\n"
+"source_id i destination_id są skonstruowane wg schematu:\n"
+"\n"
+"\tadres adres [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Przykłady: \n"
+"\n"
+"sainfo anonymous (akceptuje połączenia zewsząd)\n"
+"\tpozostaw pole puste jeżeli mają być anonimowe\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\tthe last 'any' allows any protocol for the destination"
 
 #: standalone/drakvpn:975
 #, c-format
@@ -24688,6 +24758,23 @@ msgid ""
 "\n"
 "So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.\n"
 msgstr ""
+"określ okresu ważności określonego czasu, który zostanie\n"
+"zaproponowany w pierwszej fazie negocjacji. Zostanie \n"
+"zaakceptowana każda propozycja a atrybut(y), a jeżeli \n"
+"nie określisz ich nie zostaną zaproponowane partnerowi \n"
+"negocjacji. Czas może być wprowadzony osobno dla każdej\n"
+"propozycji.\n"
+"\n"
+"Przykłady: \n"
+"\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 60 sec;\n"
+"\tlifetime time 12 hour;\n"
+"\n"
+"Dopuszczalne wartości okresu ważności 1, 1, 30, 30, 60 i 12.\n"
 
 #: standalone/drakvpn:999
 #, c-format
