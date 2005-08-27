@@ -463,6 +463,7 @@ sub _gtk__MagicWindow {
     };
 
     my $sub_child = delete $opts->{child} or internal_error("missing child");
+    my $provided_banner = delete $opts->{banner};
 
     if ($pop_it) {
 	$opts->{child} = $::isInstall ?
@@ -505,6 +506,9 @@ sub _gtk__MagicWindow {
 	$sub_child->set_border_width($::noborderWhenEmbedded ? 0 : 10);
 
 	$w = $::WizardWindow;
+     
+	$::Banner->destroy if $::Banner;
+	gtkadd($::WizardTable, children_tight => [ $::Banner = $provided_banner ]) if $provided_banner;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
     }
     bless { real_window => $w, child => $sub_child, pop_it => $pop_it }, 'mygtk2::MagicWindow';
