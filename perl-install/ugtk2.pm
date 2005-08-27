@@ -332,7 +332,7 @@ sub create_box_with_title {
          my ($txt) = @_;
          ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
      };
-	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
+	if (0 && ($o->{icon} && !$::isWizard || $::isInstall)) {
 	    gtkpack__($box,
 		      gtknew('HBox', children => [
 			       0, gtknew('VBox', width => 15),
