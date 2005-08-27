@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-08-25 15:00+0200\n"
-"PO-Revision-Date: 2005-08-26 22:52+0200\n"
+"PO-Revision-Date: 2005-08-27 14:10+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -12867,6 +12867,10 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"A rendszer a következő új nyomtatókat találta - ezeket a PrinterDrake "
+"automatikusan be tudja állítani. Ha nem szeretné mindet beállíttatni, akkor "
+"törölje azok kijelölését, amelyeket szeretne kihagyni. Ha egyiket sem kívánja "
+"beállíttatni, akkor a \"Mégsem\" gombot nyomja le.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12875,6 +12879,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"A rendszer a következő új nyomtatót találta - a PrinterDrake ezt a nyomtatót "
+"automatikusan be tudja állítani. Ha nem szeretné beállíttatni, akkor "
+"törölje annak kijelölését, vagy nyomja le a \"Mégsem\" gombot.\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12882,6 +12889,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Bizonyos nyomtatók esetében további csomagok telepítése szükséges, ezért "
+"érdemes kéznél tartani a telepítési adathordozót.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12947,6 +12956,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Kikapcsolta az automatikus nyomtatóbeállítást.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12954,6 +12965,8 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Az ismételt bekapcsoláshoz használja a következő funkciót a PrinterDrake program "
+"főmenüjében: \"%s\" -> \"%s\". "
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12967,6 +12980,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Ott azt is megadhatja, hogy milyen esetekben történjen automatikus nyomtatóbeállítás "
+"(a PrinterDrake program indításakor, a nyomtatási rendszer indításakor, illetve "
+"egy új USB-s nyomtató csatlakoztatásakor)."
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2420
@@ -14215,7 +14231,7 @@ msgid "Canon LBP-810/1120 (CAPT) configuration"
 msgstr "Canon LBP-810/1120 (CAPT) beállítása"
 
 #: printer/printerdrake.pm:3590
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -14223,9 +14239,9 @@ msgid ""
 "where it is directly connected to."
 msgstr ""
 "A nyomtató meghajtóprogramja csak helyi USB-s nyomtatókat támogat, tehát "
-"távoli gépen vagy nyomtatókiszolgálón levőket nem. Csatlakoztassa a "
-"nyomtatót egy helyi USB-portra, vagy állítsa azt be azon a gépen, amelyhez "
-"az csatlakoztatva van."
+"távoli gépen, nyomtatókiszolgálón vagy párhuzamos porton levőket nem. "
+"Csatlakoztassa a nyomtatót egy helyi USB-portra, vagy állítsa azt be azon "
+"a gépen, amelyhez az csatlakoztatva van."
 
 #: printer/printerdrake.pm:3597
 #, c-format
@@ -18311,7 +18327,7 @@ msgstr ""
 "kiszolgálóval."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -18319,7 +18335,9 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Válassza ki az alapértelmezett klienstípust.\n"
+"Válassza ki az alapértelmezett klienstípust (ha nincs bejelölve a\n"
+"\"vékony\" klienseket előíró opció, akkor alapértelmezés szerint a\n"
+"\"teljes értékű\" kliensek használata lép érvénybe).\n"
 "A \"vékony\" kliensek mindent a kiszolgálón futtatnak (annak processzorát\n"
 "és memóriáját használva), de a kliens képernyőjét használva.\n"
 "A \"teljes értékű\" kliensek a saját processzorukat és memóriájukat\n"
@@ -18344,7 +18362,7 @@ msgstr "Kész"
 #: standalone/drakTermServ:464 standalone/drakTermServ:849
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s nem sikerült"
 
 #: standalone/drakTermServ:473
 #, c-format
@@ -18353,6 +18371,9 @@ msgid ""
 "NBIs in %s.\n"
 "Needed: %d MB, Free: %d MB"
 msgstr ""
+"Nincs elég hely az NBI-k létrehozásához\n"
+"itt: %s.\n"
+"Szükséges: %d MB, elérhető: %d MB"
 
 #: standalone/drakTermServ:479
 #, c-format
@@ -18677,6 +18698,18 @@ msgid ""
 "        \t\t\n"
 "        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 msgstr ""
+"        - Etherboot-floppyk illetve Etherboot-CD-k készítése:\n"
+"        \tA lemez nélküli kliensgépeknek szükségük van vagy a hálózati\n"
+"        \tkártyán levő ROM-képmásokra, vagy egy rendszerindítási\n"
+"        \tfloppyra illetve CD-re ahhoz, hogy a rendszerindítási folyamat\n"
+"        \telkezdődhessen. A DrakTermServ program segítséget nyújt ezen\n"
+"        \tképmások elkészítéséhez a kliensgépben levő hálózati kártya\n"
+"        \talapján.\n"
+"\n"
+"        \tAlapvető példa egy rendszerindítási floppy kézzel való,\n"
+"        \t3Com 3c509 kártyák számára történő elkészítésére:\n"
+"\n"
+"        \tcat /usr/share/etherboot/zdsk/3c509.zdsk > /dev/fd0"
 
 #: standalone/drakTermServ:663
 #, c-format
@@ -18706,7 +18739,7 @@ msgstr "PXE-képmások létrehozása."
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "i586-os kernel telepítése régebbi kliensek számára"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18749,9 +18782,9 @@ msgid "Delete All NBIs"
 msgstr "Az összes NBI törlése"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Hálózati indítási fájlok létrehozása az összes kernelhez"
+msgstr "Képmásfájlok létrehozása a kernelhez:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -18958,11 +18991,13 @@ msgid ""
 "Dynamic IP Address Pool\n"
 "(needed for PXE clients):"
 msgstr ""
+"Címtartomány a dinamikus IP-címekhez\n"
+"(PXE-kliensekhez szükséges):"
 
 #: standalone/drakTermServ:1572
 #, c-format
 msgid "Write to %s failed!"
-msgstr ""
+msgstr "Nem sikerült írni ide: %s"
 
 #: standalone/drakTermServ:1584
 #, c-format
@@ -19242,13 +19277,13 @@ msgstr ""
 "eredményeket el kell küldeni. Ehhez egy levelezőkiszolgáló is szükséges."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
 msgstr ""
-"Azon helyi felhasználó illetve email-cím, akinek illetve ahova a mentési "
-"eredményeket el kell küldeni. Ehhez egy levelezőkiszolgáló is szükséges."
+"A válaszcím, ahonnan a mentési eredményeket el kell küldeni. "
+"Alapértelmezés: drakbackup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -19473,6 +19508,8 @@ msgid ""
 "Backup destination quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"A mentési cél kvótája túl lett lépve.\n"
+"Felhasználva: %d MB, a célra fenntartott hely: %d MB."
 
 #: standalone/drakbackup:954 standalone/drakbackup:986
 #, c-format
@@ -19776,7 +19813,7 @@ msgstr "Mentés közvetlenül szalagra"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "A szalagos eszköz tömörítési funkciójának használata (egyelőre KÍSÉRLETI funkció)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -19809,6 +19846,8 @@ msgid ""
 "Maximum disk space\n"
 " allocated for backups (MB)"
 msgstr ""
+"A mentéseknek fenntartott\n"
+"maximális lemezhely (MB)"
 
 #: standalone/drakbackup:1973
 #, c-format
@@ -19817,6 +19856,9 @@ msgid ""
 " backups older than N days\n"
 " (0 is keep all backups) to save space"
 msgstr ""
+"Az N napnál régebbi inkrementális illetve\n"
+"differenciális mentések törlése helymegtakarítás\n"
+"céljából (0: minden mentés megtartása)"
 
 #: standalone/drakbackup:2040
 #, c-format
@@ -20033,7 +20075,7 @@ msgstr "Levél küldése minden mentés után ide:"
 #: standalone/drakbackup:2216
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Válaszcím az elküldött levelekhez:"
 
 #: standalone/drakbackup:2222
 #, c-format
@@ -20183,7 +20225,7 @@ msgstr "\tLemezhasználat korlátozása %s MB-ra\n"
 #: standalone/drakbackup:2510
 #, c-format
 msgid "\tDelete backups older than %s day(s)\n"
-msgstr ""
+msgstr "\tA(z) %s napnál régebbi mentések törlése\n"
 
 #: standalone/drakbackup:2513
 #, c-format
@@ -20297,7 +20339,7 @@ msgstr "\tLevél küldése ide: %s\n"
 #: standalone/drakbackup:2538
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tLevél küldése innen: %s\n"
 
 #: standalone/drakbackup:2539
 #, c-format
