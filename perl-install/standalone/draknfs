@@ -565,8 +565,6 @@ $treeview->signal_connect(button_press_event => sub {
 			    my $selection = $treeview->get_selection;
 			    my $iter = $selection->get_selected;
 			    if ($iter) {
-			      my $path = $model->get_path($iter);
-			      my $i = ($path->get_indices)[0];
 			      add_modify_entry($model, $treeview, "modify") if $event->type eq '2button-press';
 			    }
 			  });
