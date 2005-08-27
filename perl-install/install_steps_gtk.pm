@@ -436,7 +436,7 @@ sub installPackages {
 
     my ($msg, $msg_time_remaining) = map { gtknew('Label', text => $_) } '', N("Estimating");
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
-    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', spacing => 10));
+    ugtk2::gtkadd($::WizardTable, my $box = gtknew('VBox', spacing => 10));
 
     my $advertize = sub {
 	my ($update) = @_;
