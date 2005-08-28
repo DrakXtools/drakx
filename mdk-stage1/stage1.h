@@ -35,6 +35,7 @@ extern char * interactive_fifo;
 #define MODE_AUTOMATIC	    (1 << 4)
 #define MODE_KEEP_MOUNTED   (1 << 5) /* for rescue */
 #define MODE_DEBUGSTAGE1    (1 << 6)
+#define MODE_RAMDISK        (1 << 9)
 #define MODE_CHANGEDISK     (1 << 10)
 #define MODE_THIRDPARTY     (1 << 11)
 #define MODE_NOAUTO         (1 << 12)

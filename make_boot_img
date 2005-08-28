@@ -38,7 +38,7 @@ my @kernels = grep { !/xbox/ } all('kernel/all.kernels');
 my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
-		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img', 'network.img', 'network_drivers.img'),
+		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img', 'network.img', 'network_drivers.img', 'ka.img'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		  if_($arch =~ /ppc/, 'all.img'),
 		 );
@@ -151,10 +151,11 @@ sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 sub initrd {
     my ($mnt, $type, $I, $img, $o_raw_stage1_tree_kind) = @_;
     my $tmp = "$ENV{HOME}/tmp/initrd";
+    $type eq 'ka' and $o_raw_stage1_tree_kind = "-with-ka";
     my $tar = "$instdir/stage1-data/stage1$o_raw_stage1_tree_kind.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ || $type eq "all" ? 16384 : 2000);
+    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ || $type eq "all" ? 16384 : $type eq 'ka' ? 2880 : 2000);
     mke2fs($tmp);
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
@@ -251,7 +252,7 @@ sub boot_img_i386 {
 
     __ "$sudo umount $tmp_mnt 2>/dev/null";
 
-    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 8000 : 1440);
+    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 8000 : $type eq 'ka' ? 2950 : 1440);
     my $mk_options = $type eq 'all' ? '' : '-f 1 -r 16 -s 2'; # keep the FAT bookkeeping as small as possible
     _ "mkdosfs $mk_options $img";
     _ "$sudo syslinux-graphic $img";

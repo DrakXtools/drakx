@@ -51,6 +51,10 @@
 #include "directory.h"
 #include "wireless.h"
 
+#ifndef DISABLE_KA
+#include "ka.h"
+#endif
+
 static void error_message_net(void)  /* reduce code size */
 {
 	stg1_error_message("Could not configure network.");
@@ -1204,4 +1208,25 @@ enum return_type http_prepare(void)
 	return RETURN_OK;
 
 }
+
+#ifndef DISABLE_KA
+enum return_type ka_prepare(void)
+{
+	enum return_type results;
+
+	if (!ramdisk_possible()) {
+		stg1_error_message("KA install needs more than %d Mbytes of memory (detected %d Mbytes).",
+				   MEM_LIMIT_DRAKX, total_memory());
+		return RETURN_ERROR;
+	}
+
+	results = intf_select_and_up();
+
+	if (results != RETURN_OK)
+		return results;
+
+	return perform_ka();
+}
+#endif
+
 #endif

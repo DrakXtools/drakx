@@ -31,6 +31,7 @@
 /* If we have more than that amount of memory (in Mbytes), we preload the rescue as a ramdisk */
 #define MEM_LIMIT_RESCUE_PRELOAD 100
 
+#define KA_MAX_RETRY    5
 
 #define SLASH_LOCATION   "/sysroot"
 

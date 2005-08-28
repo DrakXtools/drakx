@@ -57,6 +57,13 @@ load sr_mod
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
 
+if grep ka /proc/cmdline; then
+    echo Welcome to Ka rescue
+    drvinst
+    cd /ka
+    ./install.sh
+fi
+
 if ! grep -q expert /proc/cmdline; then
     rescue-gui
 fi

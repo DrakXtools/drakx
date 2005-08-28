@@ -266,6 +266,9 @@ static void method_select_and_prepare(void)
 	char * network_nfs_install = "NFS server"; char * network_nfs_install_auto = "nfs";
 	char * network_ftp_install = "FTP server"; char * network_ftp_install_auto = "ftp";
 	char * network_http_install = "HTTP server"; char * network_http_install_auto = "http";
+#ifndef DISABLE_KA
+	char * network_ka_install = "KA server"; char * network_ka_install_auto = "ka";
+#endif
 #endif
 	char * thirdparty_install = "Load third party modules"; char * thirdparty_install_auto = "thirdparty";
 
@@ -274,6 +277,9 @@ static void method_select_and_prepare(void)
 	means[i] = network_nfs_install; means_auto[i++] = network_nfs_install_auto;
 	means[i] = network_ftp_install; means_auto[i++] = network_ftp_install_auto;
 	means[i] = network_http_install; means_auto[i++] = network_http_install_auto;
+#ifndef DISABLE_KA
+	means[i] = network_ka_install; means_auto[i++] = network_ka_install_auto;
+#endif
 #endif
 #ifndef DISABLE_CDROM
 	means[i] = cdrom_install; means_auto[i++] = cdrom_install_auto;
@@ -314,6 +320,11 @@ static void method_select_and_prepare(void)
 	
 	if (!strcmp(choice, network_http_install))
 		results = http_prepare();
+
+#ifndef DISABLE_KA
+	if (!strcmp(choice, network_ka_install))
+		results = ka_prepare();
+#endif
 #endif
 #endif
 

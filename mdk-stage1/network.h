@@ -32,6 +32,9 @@ enum return_type nfs_prepare(void);
 #ifndef MANDRAKE_MOVE
 enum return_type ftp_prepare(void);
 enum return_type http_prepare(void);
+#ifndef DISABLE_KA
+enum return_type ka_prepare(void);
+#endif
 #endif
 
 
