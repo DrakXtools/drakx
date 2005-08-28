@@ -111,10 +111,7 @@ sub real_main {
           } else { $module = "" }
       };
 
-      my $is_ifplugd_blacklisted = sub {
-          member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
-	  find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe();
-      };
+      my $is_ifplugd_blacklisted = sub { member($module, qw(b44 forcedeth madwifi_pci via-velocity)) };
 
       my %adsl_descriptions = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
