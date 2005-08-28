@@ -709,7 +709,7 @@ Take a look at http://www.linmodems.org"),
                         }
                     },
                     name => N("Please choose your DSL connection type.
-If you do not know, keep the preselected type."),
+If you do not know it, keep the preselected type."),
                     data =>  [
                               { text => N("ADSL connection type:"), val => \$net->{adsl}{method}, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],
