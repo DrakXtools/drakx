@@ -154,6 +154,10 @@ sub real_main {
               services::restart("network");
           } else {
 	      network::tools::stop_net_interface($net, 0);
+ 	      if (exists $net->{adsl}{ethernet_device}) {
+	          network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
+	          network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
+	      }
 	      network::tools::start_net_interface($net, 0);
 	  }
           return "end";
