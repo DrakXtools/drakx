@@ -3,6 +3,13 @@ package network::wireless;
 use strict;
 use common;
 
+our %wireless_enc_modes = (
+    none => N("None"),
+    open => N("Open WEP"),
+    restricted => N("Restricted WEP"),
+    'wpa-psk' => N("WPA Pre-Shared Key"),
+);
+
 my $wpa_supplicant_conf = "/etc/wpa_supplicant.conf";
 
 sub convert_wep_key_for_iwconfig {

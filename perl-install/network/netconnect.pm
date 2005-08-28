@@ -146,13 +146,6 @@ sub real_main {
                               4 => N("PAP/CHAP"),
                              );
 
-      my %wireless_enc_modes = (
-                                none => N("None"),
-                                open => N("Open WEP"),
-                                restricted => N("Restricted WEP"),
-                                'wpa-psk' => N("WPA Pre-Shared Key"),
-                               );
-
       my $offer_to_connect = sub {
 	  if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
 	      member($net->{type}, qw(modem isdn isdn_external))) {
@@ -1017,8 +1010,9 @@ notation (for example, 1.2.3.4).")),
                                disabled => sub { $wireless_roaming } },
                              { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
                              { label => N("Encryption mode"), val => \$wireless_enc_mode,
-                               list => [ sort { $wireless_enc_modes{$a} cmp $wireless_enc_modes{$b} } keys %wireless_enc_modes ],
-                               format => sub { $wireless_enc_modes{$_[0]} } },
+                               list => [ keys %network::wireless::wireless_enc_modes ],
+                               sort => 1,
+                               format => sub { translate($network::wireless::wireless_enc_modes{$_[0]}) } },
                              { label => N("Encryption key"), val => \$wireless_enc_key, disabled => sub { $wireless_enc_mode eq 'none' } },
                              { text => N("Allow access point roaming"), val => \$wireless_roaming, type => "bool" },
                              { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
