@@ -37,9 +37,7 @@ my %pixbufs =
       firewall_icon => gtkcreate_pixbuf('/usr/lib/libDrakX/icons/drakfirewall.png')->scale_simple(24, 24, 'hyper'),
       state => { map { $_ => gtkcreate_pixbuf($_) } qw(connected disconnected) },
       link_level => { map {
-          my $f = "./wifi-$_.png";
-          my $pixbuf = gtkcreate_pixbuf(-r $f ? $f : 'default')->scale_simple(24, 24, 'hyper');
-          $_ => $pixbuf;
+          $_ => gtkcreate_pixbuf('wifi-' . sprintf('%03d', $_) . '.png')->scale_simple(24, 24, 'hyper');
       } qw(20 40 60 80 100) },
       keyring => gtkcreate_pixbuf("/usr/share/pixmaps/keyring-small.png")->scale_simple(24, 24, 'hyper'), #- provided by usermode, required by drakxtools
   );
