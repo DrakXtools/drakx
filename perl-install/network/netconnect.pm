@@ -704,10 +704,8 @@ Take a look at http://www.linmodems.org"),
                             $net->{adsl}{method} = "pppoe" if $net->{adsl}{method} eq "pppoa";
                         }
                     },
-                    name => N("Connect to the Internet") . "\n\n" .
-                    N("The most common way to connect with adsl is pppoe.
-Some connections use PPTP, a few use DHCP.
-If you do not know, choose 'use PPPoE'"),
+                    name => N("Please choose your DSL connection type.
+If you do not know, keep the preselected type."),
                     data =>  [
                               { text => N("ADSL connection type:"), val => \$net->{adsl}{method}, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],
