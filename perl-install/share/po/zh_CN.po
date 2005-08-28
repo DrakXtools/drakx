@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2006\n"
 "POT-Creation-Date: 2005-08-28 17:40+0800\n"
-"PO-Revision-Date: 2005-08-28 17:56+0800\n"
+"PO-Revision-Date: 2005-08-28 20:36+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -6794,7 +6794,7 @@ msgstr "请选择您的鼠标类型。"
 #: install_steps_interactive.pm:188
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "鼠标选择"
 
 #: install_steps_interactive.pm:197 standalone/mousedrake:46
 #, c-format
@@ -7029,7 +7029,7 @@ msgstr "请确定更新模块介质位于驱动器 %s"
 #: install_steps_interactive.pm:806
 #, c-format
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: install_steps_interactive.pm:807
 #, c-format
@@ -9889,7 +9889,7 @@ msgstr "密码破解"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "“%s”攻击"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10626,7 +10626,7 @@ msgstr "度量衡"
 #: network/netconnect.pm:903
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "启用 IPv6 到 IPv4 的隧道"
 
 #: network/netconnect.pm:905 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -10749,7 +10749,7 @@ msgstr "加密模式"
 #: network/netconnect.pm:1026
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "允许访问点漫游"
 
 #: network/netconnect.pm:1027 standalone/drakconnect:406
 #, c-format
@@ -12144,13 +12144,13 @@ msgstr "正在重新启动 CUPS..."
 #: printer/printerdrake.pm:614
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr ""
+msgstr "允许弹出窗口，可以取消设置及软件包安装"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, canceling setup and package installation not possible"
-msgstr ""
+msgstr "不允许弹出窗口，不可以取消设置及软件包安装"
 
 #: printer/printerdrake.pm:622
 #, c-format
@@ -12163,6 +12163,7 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"您可以在此配置应自动完成的打印机管理任务"
 
 #: printer/printerdrake.pm:626
 #, c-format
@@ -12195,9 +12196,9 @@ msgid "when the printing system is started"
 msgstr "启动打印系统时"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "使用/维护打印机“%s”"
+msgstr "处理打印机“%s”时发生了通讯错误"
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12206,36 +12207,38 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"您可以在此配置计算机和打印机“%s”之间的通讯应如何处理(例如，如果打印机"
+"未打开时应该怎么办)。"
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "端口须为数字！"
+msgstr "重试次数必须至少为 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "超时必须是正整数！"
+msgstr "每次重试之间的延迟应该是正整数!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "禁用打印机"
+msgstr "不禁用打印机"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "无限次重试"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "按钮数目"
+msgstr "重试次数"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "每次重试之间的延迟(秒数)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12425,7 +12428,7 @@ msgstr "正在搜索新的打印机..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "不再自动设置打印机"
 
 #: printer/printerdrake.pm:996
 #, c-format
@@ -12444,6 +12447,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"找到了下列新打印机，而 Printerdrake 可以为您自动设置这些打印机。"
+"如果您不想自动设置全部打印机，请不要选中您想要跳过的打印机，或者单击“取消”"
+"一个也不设置。\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12452,6 +12458,8 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"找到了下列新打印机，而 Printerdrake 可以为您自动设置该打印机。"
+"如果您不想自动设置该打印机，请不要选中该打印机，或者单击“取消”。\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12459,6 +12467,7 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"请注意，特定的打印机型号需要安装额外的软件包，所以您应该将您的安装光盘准备好。\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12520,6 +12529,7 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"您现在已经关闭了自动设置打印机。\n\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12527,6 +12537,7 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"如果您想再次开启此选项，请从 Printerdrake 的主菜单中选择“%s”->“%s”。"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12540,6 +12551,8 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"您还可以选择自动设置打印机的情形(Printerdrake 启动时，打印系统启动时，"
+"连接新的 USB 打印机时)。"
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2421
@@ -13707,7 +13720,7 @@ msgid "Canon LBP-810/1120 (CAPT) configuration"
 msgstr "Canon LBP-810/1120 (CAPT) 配置"
 
 #: printer/printerdrake.pm:3591
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -13715,7 +13728,7 @@ msgid ""
 "where it is directly connected to."
 msgstr ""
 "此打印的驱动程序只支持通过 USB 连接到本地的打印机, 而非远程主机或打印服务器上"
-"的打印机。请把打印机连接到您的 USB 端口, 或者在连接了打印机的电脑上进行配置。"
+"的打印机，也非并口打印机。请把打印机连接到您的 USB 端口, 或者在连接了打印机的电脑上进行配置。"
 
 #: printer/printerdrake.pm:3598
 #, c-format
@@ -17533,7 +17546,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "将客户端的 X 键盘设置与服务器同步。"
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -17541,7 +17554,7 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"请选择默认客户端类型。\n"
+"请选择默认客户端类型(默认为旁客户端)。\n"
 "    “瘦”客户端会使用服务器的 CPU/内存, 只是使用客户端进行显示。\n"
 "    “胖”客户端将会使用自己的 CPU/内存, 但会使用服务器的文件系统。"
 
@@ -17899,7 +17912,7 @@ msgstr "创建 PXE 映像。"
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "为旧客户机安装 i586 内核"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18929,7 +18942,7 @@ msgstr "直接备份到磁带"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "使用磁带硬件压缩(试验性)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -20886,7 +20899,7 @@ msgstr "导入"
 #: standalone/drakfont:494
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "获得 Windows 字体"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:512
@@ -21622,7 +21635,7 @@ msgstr ""
 "子网中的全部主机。例如，追加到网络基地址后的“/255.255.252.0”或“/22”。\n"
 
 #: standalone/draknfs:151
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -21649,17 +21662,17 @@ msgstr ""
 "<span weight=\"bold\">用户 ID 选项</span>\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">root_squash:</span> 将请求从 uid/gid 0 映射到"
-"匿名 uid/gid。\n"
+"<span foreground=\"royalblue3\">将 root 用户映射为匿名用户:</span> 将请求从 uid/gid 0 映射到"
+"匿名 uid/gid(root_squash)。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">no_root_squash:</span> 关闭根挤压。此选项特别"
-"适合于无盘工作站。\n"
+"<span foreground=\"royalblue3\">允许真正的远程 root 访问:</span> 关闭根挤压。此选项特别"
+"适合于无盘工作站(no_root_squash)。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">all_squash:</span> 将全部 uid 和 gid 映射到匿"
-"名用户。一般用于通过 NFS 导出的公开 FTP 目录，新闻池目录等等。具有相反功能的"
-"选项是，该设置是默认设置。\n"
+"<span foreground=\"royalblue3\">将全部用户映射到匿名用户:</span> 将全部 uid 和 gid 映射到匿"
+"名用户(all_squash)。一般用于通过 NFS 导出的公开 FTP 目录，新闻池目录等等。具有相反功能的"
+"选项是不进行 UID 映射(no_all_squash)，该设置是默认设置。\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">anonuid 和 anongid:</span> 显式设置匿名账户"
@@ -21719,7 +21732,7 @@ msgstr ""
 #: standalone/draknfs:304
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "请添加 NFS 共享再进行修改。"
 
 #: standalone/draknfs:371
 #, c-format
@@ -22186,156 +22199,156 @@ msgid "on"
 msgstr "开"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
 msgstr "共享目录"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "提交"
+msgstr "注释"
 
 #: standalone/draksambashare:64 standalone/draksambashare:97
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "浏览"
+msgstr "可浏览"
 
 #: standalone/draksambashare:65
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "公开"
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "写入"
+msgstr "可写入"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "新建"
+msgstr "创建掩码"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "目录"
+msgstr "目录掩码"
 
 #: standalone/draksambashare:69
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "读取"
+msgstr "读取列表"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "白名单"
+msgstr "写入列表"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "添加用户"
+msgstr "管理员用户"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "添加用户"
+msgstr "有效用户"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "权限"
+msgstr "继承权限"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "隐藏文件"
+msgstr "隐藏“.”开头的文件"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "首选项: "
+msgstr "保留大小写"
 
 #: standalone/draksambashare:77
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "您的打印机型号"
+msgstr "强制创建模式"
 
 #: standalone/draksambashare:78
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "PFS 组"
+msgstr "强制组"
 
 #: standalone/draksambashare:79 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "默认用户"
+msgstr "默认大小写"
 
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "打印机名称"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "可打印"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "打印命令"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "LPQ 命令"
 
 #: standalone/draksambashare:101
 #, c-format
 msgid "Guest ok"
-msgstr ""
+msgstr "Guest 可访问"
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "权限"
+msgstr "继承权限"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "创建模式"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "使用客户端驱动程序"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "删除列表"
+msgstr "读取列表"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "白名单"
+msgstr "写入名单"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "组"
+msgstr "强制组"
 
 #: standalone/draksambashare:140
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "强制创建组"
 
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "关于 Draksambashare"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -22346,47 +22359,52 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"版本: %s\n"
+"作者: Antoine Ginies\n"
+"\n"
+"这一简单工具可轻松管理 Samba 配置。"
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Samba 服务器"
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "正在重新启动/重新装入 NFS 服务器..."
+msgstr "正在重新启动/重新装入 Samba 服务器..."
 
 #: standalone/draksambashare:181
-#, fuzzy, c-format
+#, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "重新启动/重新装入 NFS 服务器出错"
+msgstr "重新启动/重新装入 Samba 服务器出错"
 
 #: standalone/draksambashare:367
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "添加 Samba 共享"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "此向导的作用是轻松创建新的 Samba 共享。"
 
 #: standalone/draksambashare:372
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "证书名称"
+msgstr "共享名称："
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "提交"
+msgstr "注释:"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "路径"
+msgstr "路径:"
 
 #: standalone/draksambashare:379
 #, c-format
@@ -22394,17 +22412,18 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"同名共享已经存在，或者共享名为空，请另选一个名称。"
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "无法创建目录，请输入正确的路径。"
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "请输入要共享的目录。"
+msgstr "请输入此共享的注释。"
 
 #: standalone/draksambashare:417
 #, c-format
@@ -22412,37 +22431,39 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"向导成功的添加了 Samba 共享。现在只需双击树视图中的该共享即可修改"
 
 #: standalone/draksambashare:433
 #, c-format
 msgid "pdf-gen - a pdf generator"
-msgstr ""
+msgstr "pdf-gen - PDF 生成器"
 
 #: standalone/draksambashare:434
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "打印机 - 可用的全部打印机"
 
 #: standalone/draksambashare:438
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "添加特殊的打印机共享"
 
 #: standalone/draksambashare:441
 #, c-format
 msgid ""
 "Goal of this wizard is to easily create a new special printer Samba share."
 msgstr ""
+"此向导的作用是轻松创建特殊的 Samba 共享打印机。"
 
 #: standalone/draksambashare:449
 #, c-format
 msgid "A pdf gnerator already exist."
-msgstr ""
+msgstr "已经存在 PDF 生成器。"
 
 #: standalone/draksambashare:473
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "打印机和 print$ 已经存在。"
 
 #: standalone/draksambashare:524
 #, c-format
@@ -22452,218 +22473,218 @@ msgstr ""
 #: standalone/draksambashare:547
 #, c-format
 msgid "Please add or select a Samba printer share to be able to modify it."
-msgstr ""
+msgstr "请添加或选择 Samba 打印机，然后再修改。"
 
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "打印机共享"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr ""
+msgstr "打印机名称:"
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "写入"
+msgstr "可写入:"
 
 #: standalone/draksambashare:593 standalone/draksambashare:774
 #, c-format
 msgid "Browseable:"
-msgstr ""
+msgstr "可浏览:"
 
 #: standalone/draksambashare:598
 #, c-format
 msgid "Advanced options"
-msgstr ""
+msgstr "高级选项"
 
 #: standalone/draksambashare:600
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "打印机访问"
 
 #: standalone/draksambashare:604
 #, c-format
 msgid "Guest ok:"
-msgstr ""
+msgstr "Guest 可访问:"
 
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "创建模式:"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "打印机命令"
 
 #: standalone/draksambashare:611
 #, c-format
 msgid "Print command:"
-msgstr ""
+msgstr "打印命令:"
 
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "LPQ 命令:"
 
 #: standalone/draksambashare:613
 #, c-format
 msgid "Printing:"
-msgstr ""
+msgstr "打印:"
 
 #: standalone/draksambashare:629
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "创建模式必须是数字。如: 0755。"
 
 #: standalone/draksambashare:691
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "DrakSamba 项"
 
 #: standalone/draksambashare:696
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
-msgstr ""
+msgstr "请添加或选择 Samba 共享，再修改。"
 
 #: standalone/draksambashare:719
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Samba 服务器"
+msgstr "Samba 用户访问"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "基本选项"
+msgstr "掩码选项"
 
 #: standalone/draksambashare:741
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "指定选项"
+msgstr "显示选项"
 
 #: standalone/draksambashare:763
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "共享目录"
+msgstr "Samba 共享目录"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "共享名"
+msgstr "共享名:"
 
 #: standalone/draksambashare:772
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "公开:"
 
 #: standalone/draksambashare:796
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
-msgstr ""
+msgstr "创建掩码、创建模式和目录掩码必须是数字。即: 0755。"
 
 #: standalone/draksambashare:803
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "请创建此 Samba 用户: %s"
 
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr ""
+msgstr "用户信息"
 
 #: standalone/draksambashare:928
 #, c-format
 msgid "User name:"
-msgstr ""
+msgstr "用户名:"
 
 #: standalone/draksambashare:929
 #, c-format
 msgid "Passwd:"
-msgstr ""
+msgstr "密码:"
 
 #: standalone/draksambashare:1129
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "添加 NFS 共享失败。"
+msgstr "添加 Samba 共享失败。"
 
 #: standalone/draksambashare:1138
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "修改 NFS 共享失败。"
+msgstr "修改 Samba 共享失败。"
 
 #: standalone/draksambashare:1147
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "删除 NFS 共享失败。"
+msgstr "删除 Samba 共享失败。"
 
 #: standalone/draksambashare:1154
 #, c-format
 msgid "File share"
-msgstr ""
+msgstr "文件共享"
 
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "添加打印机"
 
 #: standalone/draksambashare:1168
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "添加打印机失败。"
 
 #: standalone/draksambashare:1177
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "修改失败。"
 
 #: standalone/draksambashare:1186
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "删除失败。"
 
 #: standalone/draksambashare:1193
 #, c-format
 msgid "Printers"
-msgstr ""
+msgstr "打印机"
 
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr ""
+msgstr "更改密码"
 
 #: standalone/draksambashare:1206
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "更改用户密码。"
 
 #: standalone/draksambashare:1214
 #, c-format
 msgid "Failed to add user."
-msgstr ""
+msgstr "添加用户失败。"
 
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "删除用户"
 
 #: standalone/draksambashare:1226
 #, c-format
 msgid "Failed to delete user."
-msgstr ""
+msgstr "删除用户失败。"
 
 #: standalone/draksambashare:1238
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Samba 用户"
 
 #: standalone/draksambashare:1247
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFS 可管理 NFS 共享"
+msgstr "DrakSamba 管理 Samba 共享"
 
 #: standalone/draksec:49
 #, c-format
@@ -25743,7 +25764,7 @@ msgstr "获得在线帮助"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "交互式防火墙自动模式"
 
 #: standalone/net_applet:309
 #, c-format
@@ -25751,19 +25772,19 @@ msgid "Always launch on startup"
 msgstr "启动时自动调用"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "管理无线网络"
+msgstr "无线网络"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "活动的防火墙: 检测到了入侵"
+msgstr "交互式防火墙: 检测到了入侵"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "您是否想要将入侵者加入黑名单?"
+msgstr "您想要对入侵者进行什么操作?"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26002,9 +26023,9 @@ msgid "/_Configure CUPS"
 msgstr "/配置 CUPS(_C)"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "远程管理"
+msgstr "/配置自动管理(_A)"
 
 #: standalone/printerdrake:192
 #, c-format
