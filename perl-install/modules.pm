@@ -142,7 +142,9 @@ sub load_category {
 
 	if ($_->{error} && member($_->{driver}, 'ahci', 'ata_piix')) {
 	    #- HACK: ahci and ata_piix handle the same hardware, it only depends on the bios configuration
-	    $_->{driver} = $_->{driver} eq 'ahci' ? 'ata_piix' : 'ahci';
+	    my $other = $_->{driver} eq 'ahci' ? 'ata_piix' : 'ahci';
+	    log::l("failure loading $_->{driver}, trying $other instead (error is: $_->{error})");
+	    $_->{driver} = $other;
 	    redo;
 	}
 
