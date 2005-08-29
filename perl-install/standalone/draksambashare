@@ -430,7 +430,7 @@ sub add_printers_entry() {
   use wizards;
   my $w = wizards->new;
   my %print = (
-	       1 => N("pdf-gen - a pdf generator"),
+	       1 => N("pdf-gen - a PDF generator"),
 	       2 => N("printers - all printers available"),
 	      );
   my $wiz_todo;
@@ -446,7 +446,7 @@ sub add_printers_entry() {
 				   next => 'end_add',
 				   post => sub {
 				     if ($wiz_todo == 1) {
-				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A pdf generator already exists.")) and return 'welcome';
+				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A PDF generator already exists.")) and return 'welcome';
 				       &pdf_section;
 				       push @{$printer_list->{data}}, [
 								       $pixbuf_printer,
