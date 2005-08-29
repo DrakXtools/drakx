@@ -494,8 +494,10 @@ sub installPackages {
 			   $msg, $progress,
 			   gtknew('Table', children => [ [ N("Time remaining "), $msg_time_remaining ] ]),
 			   $text,
-			   $progress_total,
-			   gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
+			   gtknew('HBox', children => [
+			       1, gtknew('VBox', children => [ 1, '', 0, gtkset_size_request($progress_total, -1, 25), 1, '' ]),
+			       0, gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
+			   ]),
 			  ])), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
     $w->sync;
