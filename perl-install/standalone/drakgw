@@ -210,11 +210,9 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 		  ];
 	      },
  	      complete => sub {
-		  $dhcpd_conf->{domain_name_servers}[0] eq $lan_intf->{IPADDR} or return 0;
 		  !$use_caching_dns || $::testing and return 0;
 		  #- install a caching name server if the specified DNS is the gateway
-		  $in->do_pkgs->ensure_is_installed('caching-nameserver', '/var/named/named.local') or return 1;
-		  0;
+		  !$in->do_pkgs->ensure_is_installed('caching-nameserver', '/var/named/named.local');
 	      },
 	      post => sub {
 		  services::set_status($_, $use_caching_dns) foreach qw(named caching-nameserver);
