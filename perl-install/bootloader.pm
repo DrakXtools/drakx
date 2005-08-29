@@ -1130,7 +1130,7 @@ sub write_lilo {
 	if ($entry->{type} eq "image") {		
 	    push @entry_conf, 'root=' . $quotes_if_needed->($entry->{root}) if $entry->{root};
 	    push @entry_conf, "initrd=" . $file2fullname->($entry->{initrd}) if $entry->{initrd};
-	    push @entry_conf, qq(append="$entry->{append}") if $entry->{append};
+	    push @entry_conf, "append=", $quotes->($entry->{append}) if $entry->{append};
 	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
 	    push @entry_conf, grep { $entry->{$_} } qw(read-write read-only optional);
 	} else {
