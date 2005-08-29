@@ -322,6 +322,7 @@ sub read_lilo() {
 	local ($_) = @_;
 	s/^\s*//; s/\s*$//;
 	s/^"(.*?)"$/$1/;
+	s/\\"/"/g;
 	s/^\s*//; s/\s*$//; #- do it again for append=" foo"
 	$_;
     }
@@ -1063,10 +1064,17 @@ sub write_lilo {
 	}
     };
 
+    my $quotes = sub {
+	my ($s) = @_;
+	$s =~ s/"/\"/g;
+	qq("$s");
+    };
+
     my $quotes_if_needed = sub {
 	my ($s) = @_;
-	$s =~ /[=\s]/ ? qq("$s") : $s;
+	$s =~ /["=\s]/ ? $quotes->($s) : $s;
     };
+    
 
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $all_hds);
 
@@ -1092,7 +1100,7 @@ sub write_lilo {
     push @conf, "default=" . make_label_lilo_compatible($bootloader->{default}) if $bootloader->{default};
     push @conf, map { $_ . '=' . $quotes_if_needed->($bootloader->{$_}) } grep { $bootloader->{$_} } qw(boot root map install vga keytable raid-extra-boot menu-scheme);
     push @conf, grep { $bootloader->{$_} } qw(linear geometric compact prompt nowarn restricted static-bios-codes);
-    push @conf, qq(append="$bootloader->{append}") if $bootloader->{append};
+    push @conf, "append=" . $quotes->($bootloader->{append}) if $bootloader->{append};
     push @conf, "password=" . $bootloader->{password} if $bootloader->{password}; #- also done by msec
     push @conf, "timeout=" . round(10 * $bootloader->{timeout}) if $bootloader->{timeout};
     push @conf, "serial=" . $1 if get_append_with_key($bootloader, 'console') =~ /ttyS(.*)/;
