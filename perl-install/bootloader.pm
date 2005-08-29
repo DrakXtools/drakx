@@ -529,7 +529,7 @@ my $uniq_dict_appends = join('|', qw(devfs acpi pci resume PROFILE XFree));
 
 sub unpack_append {
     my ($s) = @_;
-    my @l = split(' ', $s);
+    my @l = "$s " =~ /((?:[^"\s]+|".*?")*)\s+/g;
     [ grep { !/=/ } @l ], [ map { if_(/(.*?)=(.*)/, [$1, $2]) } @l ];
 }
 sub pack_append {
