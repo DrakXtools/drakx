@@ -1066,7 +1066,7 @@ sub write_lilo {
 
     my $quotes = sub {
 	my ($s) = @_;
-	$s =~ s/"/\"/g;
+	$s =~ s/"/\\"/g;
 	qq("$s");
     };
 
