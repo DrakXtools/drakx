@@ -18,7 +18,6 @@ use detect_devices;
 use partition_table::raw;
 use run_program;
 use modules;
-use URPM;
 
 #-#####################################################################################
 #- Functions
@@ -470,6 +469,18 @@ sub _do_the_symlink {
       or cp_af("$::prefix/boot/$long_name", "$::prefix$link");
 }
 
+sub cmp_kernel_versions {
+    my ($va, $vb) = @_;
+    my $rel_a = $va =~ s/-(.*)$// && $1;
+    my $rel_b = $vb =~ s/-(.*)$// && $1;
+    ($va, $vb) = map { [ split /[.-]/ ] } $va, $vb;
+    my $r = 0;
+    mapn_ {
+	$r ||= $_[0] <=> $_[1];
+    } $va, $vb;
+    $r || $rel_a <=> $rel_b || $rel_a cmp $rel_b;
+}
+
 sub add_kernel {
     my ($bootloader, $kernel_str, $v, $b_nolink, $b_no_initrd) = @_;
 
@@ -482,7 +493,7 @@ sub add_kernel {
     #- normalize append and handle special options
     {
 	my ($simple, $dict) = unpack_append("$bootloader->{perImageAppend} $v->{append}");
-	if (-e "$::prefix/sbin/udev" && $kernel_str->{version} =~ /(2\.\d+\.\d+)/ && URPM::rpmvercmp($1, '2.6.8') >= 0) {
+	if (-e "$::prefix/sbin/udev" && cmp_kernel_versions($kernel_str->{version_no_ext}, '2.6.8') >= 0) {
 	    log::l("it is a recent kernel, so we remove any existing devfs= kernel option to enable udev");
 	    @$dict = grep { $_->[0] ne 'devfs' } @$dict;
 	}
@@ -662,7 +673,7 @@ sub get_kernel_labels {
     my ($kernels, $b_prefer_24) = @_;
     
     my @kernels_str = 
-      sort { URPM::rpmvercmp($b->{version_no_ext}, $a->{version_no_ext}) } 
+      sort { cmp_kernel_versions($b->{version_no_ext}, $a->{version_no_ext}) } 
       grep { -d "$::prefix/lib/modules/$_->{version}" }
       map { vmlinuz2kernel_str($_) } @$kernels;
 
