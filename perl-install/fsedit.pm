@@ -244,11 +244,8 @@ Do you agree to lose all the partitions?
 	}
 	
 	foreach (@parts) {
-	    my $label =
-	      member($_->{fs_type}, qw(ext2 ext3)) ?
-		c::get_ext2_label(devices::make($_->{device})) :
-		'';
-	    $_->{device_LABEL} = $label if $label;
+	    my $label = run_program::get_stdout('vol_id', '-l', devices::make($_->{device}));
+	    $_->{device_LABEL} = chomp_($label) if $label;
 	}
 
 	if ($hd->{usb_media_type}) {

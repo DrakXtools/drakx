@@ -219,23 +219,6 @@ is_ext3(device_name)
   OUTPUT:
   RETVAL
 
-char *
-get_ext2_label(device_name)
-  char * device_name
-  CODE:
-  {
-    ext2_filsys fs;
-    int retval = ext2fs_open (device_name, 0, 0, 0, unix_io_manager, &fs);
-    if (retval) {
-      RETVAL = 0;
-    } else {
-      RETVAL = fs->super->s_volume_name;
-      ext2fs_close(fs);  
-    }
-  }
-  OUTPUT:
-  RETVAL
-
 void
 init_setlocale()
    CODE:
