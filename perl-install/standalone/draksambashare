@@ -446,7 +446,7 @@ sub add_printers_entry() {
 				   next => 'end_add',
 				   post => sub {
 				     if ($wiz_todo == 1) {
-				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A pdf gnerator already exist.")) and return 'welcome';
+				       exists $samba->{'pdf-gen'} and err_dialog(N("Error"), N("A pdf generator already exists.")) and return 'welcome';
 				       &pdf_section;
 				       push @{$printer_list->{data}}, [
 								       $pixbuf_printer,
