@@ -231,7 +231,7 @@ sub read_grub {
     #- matches either:
     #-   setup (hd0)
     #-   install (hd0,0)/boot/grub/stage1 d (hd0) (hd0,0)/boot/grub/stage2 p (hd0,0)/boot/grub/menu.lst
-    if (cat_("$::prefix/boot/grub/install.sh") =~ /^(?:setup|install\s+(?:\S+)(?:\s+d)?)\s+(\(.*?\))/m) {
+    if (cat_("$::prefix/boot/grub/install.sh") =~ /^(?:setup.*|install\s.*\sd)\s+(\(.*?\))/m) {
 	$b{boot} = grub2dev($1, $grub2dev);
     }
 
