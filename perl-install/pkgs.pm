@@ -1258,12 +1258,19 @@ sub remove {
 
 sub selected_leaves {
     my ($packages) = @_;
-    my @leaves;
+    my $provides = $packages->{provides};
 
-    foreach (@{$packages->{depslist}}) {
-	($_->flag_requested || $_->flag_installed) && !$_->flag_base and push @leaves, $_->name;
+    my @l = grep { ($_->flag_requested || $_->flag_installed) && !$_->flag_base } @{$packages->{depslist}};
+
+    my %required_ids;
+    foreach (@l) {
+	foreach ($_->requires_nosense) {
+	    my $h = $provides->{$_} or next;
+	    my @provides = keys %$h;
+	    $required_ids{$provides[0]} = 1 if @provides == 1;
+	}
     }
-    \@leaves;
+    [ map { $_->name } grep { !$required_ids{$_->id} } @l ];    
 }
 
 sub naughtyServers_list {
