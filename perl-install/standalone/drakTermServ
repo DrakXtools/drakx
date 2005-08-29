@@ -1254,7 +1254,7 @@ sub client_set {
 			}
 		}
 		substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
-		substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+		substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
 		substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
 		# This file had 2 "Enable=" entries, one for XDMCP and one for debug
 		change_gdm_xdmcp("true");
@@ -1273,7 +1273,7 @@ sub client_set {
 			`mv /etc/sysconfig/autologin.bak /etc/sysconfig/autologin`;
 		}
 		substInFile { s/id:5:initdefault:/id:3:initdefault:/ } '/etc/inittab';
-		substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+		substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
 		substInFile { s/Enable=true/Enable=false/ } "/usr/share/config/kdm/kdmrc";
 		change_gdm_xdmcp("false");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
