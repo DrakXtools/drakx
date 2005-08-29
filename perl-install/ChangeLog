@@ -1,3 +1,226 @@
+2005/08/29  Pixel  <pixel at mandriva.com>
+
+	* modules.pm: better logging of ahci vs ata_piix special code
+
+2005/08/29  willysr
+
+	* share/po/id.po: Updated
+
+2005/08/28  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sc.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: Updated POT file. Sorry about that
+	:(
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+	Updated POT file. Sorry about that :(
+
+2005/08/28  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/ka.h, mdk-stage1/Makefile, rescue/tree/ka/make_initrd,
+	rescue/tree/etc/rc.sysinit, rescue/tree/ka/install.sh,
+	mdk-stage1/stage1-data/stage1-with-ka.tar.bz2,
+	rescue/tree/ka/ka-d-client, rescue/tree/ka/setup_network.sh,
+	rescue/tree/ka/hostnames, mdk-stage1/config-stage1.h,
+	mdk-stage1/stage1.h, rescue/tree/ka/gen_modules_conf.pl,
+	rescue/tree/ka/tftpserver, mdk-stage1/ka.c, mdk-stage1/stage1.c,
+	mdk-stage1/network.c, mdk-stage1/network.h: ka support (initially from
+	Antoine Ginies and Erwan Velu)
+
+	* network/wireless.pm: move %wireless_enc_modes in network::wireless
+
+	* network/netconnect.pm: improve "dsl type" message (thanks to Andreas)
+	restart associated ethernet device for dsl connections needing it
+	rephrase "DSL connection type" message, the preselected type has better
+	to be kept
+	move %wireless_enc_modes in network::wireless
+	don't blacklist ifplugd for pcmcia interfaces
+
+	* standalone/net_applet: use new wireless icons
+
+2005/08/28  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/08/28  xalba
+
+	* share/po/eu.po: eguneraketa
+	eguneraketa
+
+2005/08/27  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/drakhosts: use new icons
+	cosmetix fix
+
+	* standalone/draksambashare: now just we just need to press enter to
+	modify a file share
+	add popup menu to easily modify/remove share
+
+	* standalone/draknfs: use new icons
+	various perl_checker fix
+	remove unused code
+
+2005/08/27  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/08/27  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2005/08/27  tbednarski
+
+	* share/po/pl.po: translation updates
+	translation updates
+
+2005/08/27  Till Kamppeter  <till at mandriva.com>
+
+	* standalone/autosetupprintqueues: 
+	  - When doing automatic queue setup with windows on the user's screen,
+	do not only source the users .i18n, but also the system's
+	  /etc/sysconfig/i18n, so that the language is also correct when the
+	  user uses the system's default language.
+
+2005/08/27  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* ugtk2.pm (create_box_with_title) disable that code path
+	remove spurious comma
+	(new) add a banner at install time
+
+	* any.pm, network/network.pm, services.pm, security/level.pm,
+	install_steps_interactive.pm, interactive/gtk.pm,
+	network/drakfirewall.pm: fill in missing titles for banners and specify
+	icons
+
+	* share/po/fr.po: typo fix
+
+	* pixmaps/banner-sys.png, pixmaps/banner-part.png,
+	pixmaps/banner-update.png, pixmaps/banner-security.png,
+	pixmaps/banner-adduser.png, pixmaps/banner-license.png,
+	pixmaps/banner-summary.png, pixmaps/banner-pw.png,
+	pixmaps/banner-generic-ad.png, pixmaps/banner-bootL.png,
+	pixmaps/banner-exit.png, pixmaps/banner-languages.png: add banner icons
+
+	* mygtk2.pm (_gtk__MagicWindow) add a banner w/o margin if provided one
+
+	* install_steps_gtk.pm: fill in missing titles for banners and specify
+	icons
+	(installPackages) ensure there's no margin around advertisements (IHM
+	request)
+
+2005/08/26  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/drakbug: add drakhosts, draknfs, draksambashare, set wrap
+	width to 3 to show mandriva tools
+
+	* standalone/icons/ic82-users-16.png: add user icon (16x)
+
+	* standalone/icons/IC-sambaprt-16.png: add sambaprinter icon
+
+	* standalone/draksambashare: cosmetic fix
+	add an about menu
+	add icon in user, share, printer notebook
+	update icon (thx ln)
+	use drakgw icon
+	add pixbuf image
+	check user in valid_list, write_list ....
+	various fix in add user
+	add a samba user without passwd
+	fix double-click pb in user tab
+	add user tab
+	add user tab
+	test if printer share already exist
+	update printer_list from printer dialog box
+	major adjustemnt in printer dialog box
+
+	* standalone/icons/IC-Dhost-48.png, standalone/icons/IC-winacces2-16.png,
+	standalone/icons/IC-Dssh-48.png, standalone/icons/IC-NFS-48.png,
+	standalone/icons/IC-winacces1-48.png: add new icons
+
+2005/08/26  Olivier Blin <oblin at mandriva.com>
+
+	* pixmaps/wifi-080.png, pixmaps/wifi-040.png, pixmaps/wifi-060.png,
+	pixmaps/wifi-100.png, pixmaps/wifi-020.png: add new neat wifi icons from
+	Hélène
+
+2005/08/26  Pixel  <pixel at mandriva.com>
+
+	* share/list.xml: xorg modules: replace .a and .o with .so
+
+	* share/rpmsrate: lshw is not that important
+	gdm must only be installed when CAT_X is selected
+
+	* any.pm: 
+	  - don't open advanced languages by default
+	  - replace "Advanced" button with "Multi languages"
+
+	* Xconfig/card.pm: handle nvidia's libglx.so being now in
+	extensions/nvidia instead of extensions
+	(when there is extensions/libglx.a, it means extensions/libglx.so is not
+	xorg's libglx, so it may be nvidia's)
+
+2005/08/26  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Gutenprint does not print correctly when margins are set in the CUPS
+	configuration, so do not set margins when creating a queue with
+	  Gutenprint, or remove the margins when switching the driver of an
+	  existing queue to Gutenprint.
+
+	* printer/printerdrake.pm: 
+	  - Removed "Do not print testy page" in test page step of add printer
+	wizard (bug #15861).
+	  - Fixed message window in the case that no local printer was found
+	  when running the add printer wizard in beginner's mode (bug #16757).
+
+2005/08/26  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* install_steps_gtk.pm, install_steps_interactive.pm: add a cople missing
+	titles
+
+	* docs/HACKING: fix requires (gtk+-1.x => gtk+-2.x)
+
+	* standalone/icons/harddrake2/hw-keyboard.png,
+	standalone/icons/harddrake2/hw-pcmcia.png,
+	standalone/icons/harddrake2/hw-usb.png,
+	standalone/icons/harddrake2/hw-smbus.png,
+	standalone/icons/harddrake2/hw-memory.png: add a few more icons for
+	harddrake GUI
+
+	* harddrake/data.pm: add a few more icons in order to desambiguate some
+	categories that
+	were using the same icon
+
+	* harddrake/v4l.pm: sync list with latest saa7134 driver
+
+	* share/themes-galaxy.rc: use the same background under category as in
+	root window
+	new step category's color (on IHM team request)
+
+	* install_gtk.pm (update_steps_position) render passed steps as bold and
+	current step as bold italic as requested by IHM team
+	(create_steps_window) leave around references on text widget and on
+	unmarked text for steps
+	(create_steps_window) underline step categories (and render them as bold
+	btw)
+	(create_steps_window) precreate pixbuf for 'done' state too
+
 2005/08/26  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draksambashare: add user tab
