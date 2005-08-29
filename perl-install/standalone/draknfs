@@ -430,7 +430,7 @@ sub add_modify_entry {
 
 				 my $all_right = join(",", grep { defined $_ } $luserid_toput, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
 				 my $test_dir = $dir->get_text;
-				 -d $test_dir or err_dialog(N("Error!"), N("Please enter a directory to share.")) and return;
+				 mkdir_p($test_dir) or err_dialog(N("Error!"), N("Can't create this directory.")) and return;
 				 my $test_access = $access->child->get_text;
 				 $test_access or err_dialog(N("Error!"), N("You must specify hosts access.")) and return;
 				 if ($wanted =~ /add/) {
