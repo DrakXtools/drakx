@@ -643,7 +643,10 @@ sub _gtknew_handle_children {
 
     my @child = exists $opts->{children_tight} ? map { [ 0, $_ ] } @{delete $opts->{children_tight}} :
                 exists $opts->{children_loose} ? map { [ 1, $_ ] } @{delete $opts->{children_loose}} :
-	        exists $opts->{children} ? group_by2(@{delete $opts->{children}}) : ();
+	        exists $opts->{children} ? group_by2(@{delete $opts->{children}}) : 
+		exists $opts->{children_centered} ? 
+		  ([ 1, gtknew('VBox') ], (map { [ 0, $_ ] } @{delete $opts->{children_centered}}), [ 1, gtknew('VBox') ]) :
+		  ();
 
     my $padding = delete $opts->{padding};
 
