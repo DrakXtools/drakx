@@ -21,8 +21,12 @@ sub list_wireless {
     my %networks;
     #- bssid / frequency / signal level / flags / ssid
     while ($results =~ /^((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\t(\d+)\t(\d+)\t(.*?)\t(.*)$/mg) {
-        $networks{$1} = { frequency => $2, signal_level => $3, flags => $4, ssid => $5 };
-        $networks{$1}{approx_level} = 20 + min(80, int($3/20)*20);
+        # wpa_supplicant may list the network two times, use ||=
+        $networks{$1}{frequency} ||= $2;
+        $networks{$1}{signal_level} ||= $3;
+        $networks{$1}{flags} ||= $4;
+        $networks{$1}{ssid} ||= $5 if $5 ne '<hidden>';
+        $networks{$1}{approx_level} ||= 20 + min(80, int($3/20)*20);
     }
     my $list;
     eval { $list = $o->call_method('ListNetworks') };

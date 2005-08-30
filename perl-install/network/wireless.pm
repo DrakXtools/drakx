@@ -108,19 +108,21 @@ sub wpa_supplicant_add_network {
     my $network = {
         ssid => qq("$essid"),
         scan_ssid => 1,
-        $enc_mode eq 'wpa-psk' ?
-	  (
-	      psk => convert_key_for_wpa_supplicant($key),
-	  ) :
-	member($enc_mode, qw(open restricted)) ?
-	  (
-	      key_mgmt => 'NONE',
-	      wep_key0 => convert_key_for_wpa_supplicant($key),
-	      wep_tx_keyidx => 0,
-	      auth_alg => 'SHARED',
-	  ) :
-	  ()
     };
+
+    if ($enc_mode eq 'wpa-psk') {
+        $network->{psk} = convert_key_for_wpa_supplicant($key);
+    } else {
+        $network->{key_mgmt} = 'NONE';
+        if (member($enc_mode, qw(open restricted))) {
+            put_in_hash($network, {
+                wep_key0 => convert_key_for_wpa_supplicant($key),
+                wep_tx_keyidx => 0,
+                auth_alg => $enc_mode eq 'restricted' ? 'SHARED' : 'OPEN',
+            });
+        }
+    }
+
     @$conf = difference2($conf, [ wpa_supplicant_find_similar($conf, $network) ]);
     push @$conf, $network;
     wpa_supplicant_write_conf($conf);

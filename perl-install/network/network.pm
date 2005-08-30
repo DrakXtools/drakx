@@ -179,6 +179,20 @@ sub update_broadcast_and_network {
     $intf->{NETWORK} = join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask);
 }
 
+sub write_interface_settings {
+    my ($intf, $file) = @_;
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS VLAN MTU MS_DNS1 MS_DNS2 DOMAIN),
+                qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
+                qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
+                qw(IPV6INIT IPV6TO4INIT),
+                if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
+                if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
+               );
+    substInFile { s/^DEVICE='(`.*`)'/DEVICE=$1/g } $file; #- remove quotes if DEVICE is the result of a command
+    chmod $intf->{WIRELESS_ENC_KEY} ? 0700 : 0755, $file; #- hide WEP key for non-root users
+    log::explanations("written $intf->{DEVICE} interface configuration in $file");
+}
+
 sub write_interface_conf {
     my ($net, $name) = @_;
 
@@ -198,16 +212,7 @@ sub write_interface_conf {
     defined($intf->{METRIC}) or $intf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($intf)),
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL ATM_ADDR ETHTOOL_OPTS VLAN MTU MS_DNS1 MS_DNS2 DOMAIN),
-                qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV WIRELESS_WPA_DRIVER),
-                qw(DVB_ADAPTER_ID DVB_NETWORK_DEMUX DVB_NETWORK_PID),
-                qw(IPV6INIT IPV6TO4INIT),
-                if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
-                if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
-               );
-    substInFile { s/^DEVICE='(`.*`)'/DEVICE=$1/g } $file; #- remove quotes if DEVICE is the result of a command
-    chmod $intf->{WIRELESS_ENC_KEY} ? 0700 : 0755, $file; #- hide WEP key for non-root users
-    log::explanations("written $intf->{DEVICE} interface configuration in $file");
+    write_interface_settings($intf, $file);
 }
 
 sub add2hosts {
@@ -506,6 +511,10 @@ sub read_net_conf {
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
 	    $intf->{DEVICE} ||= $device;
 	}
+    }
+    $net->{wireless} ||= {};
+    foreach (all("$::prefix/etc/sysconfig/network-scripts/wireless.d")) {
+        $net->{wireless}{$_} = { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/wireless.d/$_") };
     }
     netprofile_read($net);
     if (my $default_intf = network::tools::get_default_gateway_interface($net)) {

@@ -1,27 +1,9 @@
 #!/usr/bin/perl
 
 # drakroam: wireless network roaming GUI
-# beta version uses wlandetect as backend
-# Austin Acton, 2005
-# <austin@mandrake.org>
+# Austin Acton, 2004 <austin@mandriva.org>
+# Olivier Blin, 2005 <oblin@mandriva.com>
 # Licensed under the GPL
-
-# problems
-# - deletes comments in config file
-# - expects an ifcfg file for static IP configurations (not uncommon)
-# - roaming status fails (no idea why)
-#   maybe same reason bash-completion killall can not see wlandetect?
-
-# todo (wlandetect version)
-# - make known and available lists have more rows by default (why so small?)
-# - refresh status every x seconds
-# - find a good way to drop the access point and resume roaming
-# - make 'key' column wider by default
-# todo (waproamd version)
-# - listen to dbus for pings from waproamd; update all on receiving a dbus ping
-# - setup static network configurations
-# - handle keys (can key file be named after ESSID?)
-# - should files be named as MAC or as essid:ESSID ?
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
@@ -30,369 +12,161 @@ use standalone;
 use common;
 use run_program;
 use detect_devices;
-use Glib qw(TRUE FALSE);
+use interactive;
+use mygtk2;
 use ugtk2 qw(:create :helpers :wrappers);
 use Gtk2::SimpleList;
-use Socket;
+use network::monitor;
+use network::wireless;
+use network::network;
+use network::ethernet;
 
-require_root_capability();
+my $in = 'interactive'->vnew('su');
 
-unless (detect_devices::has_wireless()) {
+my $wireless_device = find { detect_devices::is_wireless_interface($_) } detect_devices::getNet();
+
+unless ($wireless_device) {
     ugtk2::err_dialog(N("Error"), N("You do not have any wireless interface.
 Run the \"%s\" assistant from the Mandriva Linux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
     ugtk2::exit(0) if !$::testing;
 }
 
+my $modules_conf = modules::any_conf->read;
+my $dev = find { $_->[0] eq $wireless_device } network::ethernet::get_eth_cards($modules_conf);
+my $wireless_module = $dev->[1];
 
+my $net = {};
+network::network::read_net_conf($net);
 
-
-# global settings
-my $route = '/sbin/route -n';
-my $IWList = '/sbin/iwlist';
-my $IWConfig = '/sbin/iwconfig';
-my $IFConfig = '/sbin/ifconfig';
-my $IFUp = '/sbin/ifup';
-my $IFDown = '/sbin/ifdown';
-my $DHClient = '/sbin/dhclient';
-my $enable_roaming = member('--roaming', @ARGV); #- not tested yet ...
-
-# initialize variables
-my $ScanInterval = 30; # tell deamon to search for new nets every x seconds
-
-my ($KnownList, $AvailableList);
-my $device;
-
-my %available_roaming_daemons = (
-		       wlandetect => {
-				      config_location => '/etc/wlandetect.conf',
-				      binary => '/usr/sbin/wlandetect',
-				      start_options => sub {
-					  my ($interval, undef) = @_;
-					  "-d -t $interval";
-				      },
-				      read_config => sub {
-					  my ($config) = @_;
-					  each_index {
-					      /^#/ || /^\n/ and next; #ignore comments and blank lines
-					      if (/^(\S+)\s+(.*)$/) {
-						  my ($essid, $mode, $channel, $dhcp, $key);
-						  my $command = $2;
-						  # setup new network entry
-						  $essid = $1;
-						  ($mode) = $command =~ /mode\s([^\s;]+)/;
-						  ($channel) = $command =~ /channel\s([^\s;]+)/;
-						  ($key) = $command =~ /key\s([^\s;]+)/;
-						  $dhcp = $command =~ /dhclient/;
-						  &AddNet($essid, $mode, $channel, $dhcp, $key);
-					      }
-					      else { die "Line $::i of configuration file is not parseable.\n" }
-					  } cat_($config);
-				      },
-				      write_config => sub {
-					  my ($config) = @_;
-					  my @contents = (
-							  "#wlandetect configuration file\n",
-							  "#format: essid<tab><tab>commands\n",
-							  "#use \@DEV\@ for device name\n"
-							 );
-					  foreach my $row (@{$KnownList->{data}}) { # again, lame
-					      my $essid = $row->[0];
-					      my $iwc = join(' ', $IWConfig, "essid $essid",
-							     if_($row->[1], "mode $row->[1]"),
-							     if_($row->[2], "channel $row->[2]"),
-							     if_($row->[4], "key $row->[4]"));
-					      my $ifc = $row->[3] ? "$IFConfig \@DEV\@ up; $DHClient \@DEV\@" : "$IFUp \@DEV\@";
-					      push @contents, "$essid\t\t$iwc; $ifc\n";
-					  }
-					  output_with_perm($config, 0600, @contents);
-				      },
-				     },
-		       waproamd => {
-				      config_location => '/etc/waproamd/keys',
-				      binary => '/usr/sbin/waproamd',
-				      start_options => sub {
-					  my ($interval, $device) = @_;
-					  "-i $device -t $interval";
-				      },
-				      read_config => sub {
-					  my ($config) = @_;
-					  foreach my $file (all($config)) {
-					      my ($essid) = $file =~ /^(.*)\.wep$/ or next;
-					      &AddNet($essid, '', '', 1, cat_("$config/$file"));
-					  }
-				      },
-				      write_config => sub {
-					  my ($config) = @_;
-					  foreach my $row (@{$KnownList->{data}}) { # again, lame
-					      my $essid = $row->[0];
-					      output_with_perm("$config/$essid.wep", 0600, $row->[4]);
-					  }
-				      },
-				     },
+my $wireless_list = Gtk2::SimpleList->new(
+    "AP" => "hidden",
+    '' => "pixbuf",
+    N("SSID") => "text",
+    '' => "pixbuf",
+    N("Encryption") => "text",
+    N("Signal strength") => "pixbuf"
 );
+$wireless_list->get_selection->set_mode('single');
 
-my $roaming_daemon = $available_roaming_daemons{wlandetect};
+my $dbus = dbus_object::system_bus();
+my $monitor = network::monitor->new($dbus);
+my $wireless_networks = {};
 
-my $ScanEntry = Gtk2::Entry->new;
-$ScanEntry->set_width_chars(4);
-$ScanEntry->set_text($ScanInterval);
+my %pixbufs =
+  (
+      state => { map { $_ => gtkcreate_pixbuf($_) } qw(connected disconnected) },
+      link_level => { map {
+          $_ => gtkcreate_pixbuf('wifi-' . sprintf('%03d', $_) . '.png')->scale_simple(24, 24, 'hyper');
+      } qw(20 40 60 80 100) },
+      keyring => gtkcreate_pixbuf("/usr/share/pixmaps/keyring-small.png")->scale_simple(24, 24, 'hyper'), #- provided by usermode, required by drakxtools
+  );
 
-$KnownList = Gtk2::SimpleList->new(
-                                      N("ESSID") => "text",
-                                      N("Mode") => "text",
-                                      N("Channel") => "text",
-                                      N("DHCP") => "bool",
-                                      N("Key") => "text"
-                                     );
-$KnownList->get_selection->set_mode('single');
-$KnownList->set_reorderable(1);
-$KnownList->set_column_editable(1, TRUE); # allow to change mode
-$KnownList->set_column_editable(2, TRUE); # allow to change channel
-$KnownList->set_column_editable(4, TRUE); # allow to change key
+sub update_networks() {
+    $wireless_networks = $monitor->list_wireless;
+    @{$wireless_list->{data}} = ();
 
-$AvailableList = Gtk2::SimpleList->new(
-                                          "ESSID" => "text",
-                                          "Type" => "text",
-                                          "Encryption" => "text",
-                                          "Signal (%)" => "int"
-                                         );
-$AvailableList->get_selection->set_mode('single');
-
-my $NetLabel = Gtk2::WrappedLabel->new(N("Network:"));
-my $IpLabel = Gtk2::WrappedLabel->new(N("IP:"));
-my $GwLabel = Gtk2::WrappedLabel->new(N("Gateway:"));
-my $ModeLabel = Gtk2::WrappedLabel->new(N("Mode:"));
-my $WepLabel = Gtk2::WrappedLabel->new(N("Encryption:"));
-my $SignalLabel = Gtk2::WrappedLabel->new(N("Signal:"));
-
-my $net_field   = Gtk2::WrappedLabel->new;
-my $mode_field  = Gtk2::WrappedLabel->new;
-my $ip_field    = Gtk2::WrappedLabel->new;
-my $wep_field   = Gtk2::WrappedLabel->new;
-my $gw_field    = Gtk2::WrappedLabel->new;
-my $sig_field   = Gtk2::WrappedLabel->new;
-
-
-my $w = ugtk2->new('Drakroam');
-gtkadd(gtkset_border_width($w->{window}, 2),
-       gtkpack_(Gtk2::VBox->new,
-                if_($enable_roaming,
-                    0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Roaming")), 2),
-                          gtkpack(create_hbox(),
-                                  gtkpack(Gtk2::VBox->new,
-                                          my $RoamStatus = Gtk2::Label->new(N("Roaming: %s", N("off"))),
-                                          gtkpack(create_hbox(),
-						  gtksignal_connect(Gtk2::Button->new(N("Start")), clicked => sub { &StartRoam }),
-						  gtksignal_connect(Gtk2::Button->new(N("Stop")), clicked => sub { &StopRoam })
-                                                 )
-                                         ),
-                                  gtkpack(Gtk2::VBox->new,
-                                          Gtk2::Label->new(N("Scan interval (sec): ")),
-                                          gtkpack(Gtk2::HBox->new,
-                                                  $ScanEntry,
-                                                  gtksignal_connect(Gtk2::Button->new(N("Set")), clicked => sub { &SetInterval })
-                                                 )
-                                         )
-                                 )
-                         )),
-                1, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Known Networks (Drag up/down or edit)")), 2),
-                          gtkpack_(Gtk2::VBox->new,
-                                   1, create_scrolled_window($KnownList),
-                                   0, gtkpack(create_hbox(),
-					      gtksignal_connect(Gtk2::Button->new(N("Remove")), clicked => sub {
-								    my ($selected) = $KnownList->get_selected_indices;
-								    &RemoveNet($selected);
-								}),
-					      gtksignal_connect(Gtk2::Button->new(N("Connect")), clicked => sub {
-								    my ($selected) = $KnownList->get_selected_indices;
-								    &ConnectNow($selected);
-								}),
-					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { &WriteConfig })
-                                             )
-                                  )
-                         ),
-                1, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Available Networks")), 2),
-                          gtkpack_(Gtk2::VBox->new,
-                                   1, create_scrolled_window($AvailableList),
-                                   0, gtkpack(create_hbox(),
-					      gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub {
-								    my @selected = $AvailableList->get_selected_indices;
-								    my ($mode, $channel, $key);
-								    my $essid = $AvailableList->{data}["@selected"][0];
-								    my $dhcp = 1; # assume dhcp for new networks
-								    if ($essid) {
-									&AddNet($essid, $mode, $channel, $dhcp, $key);
-								    } else {
-									print "ESSID is empty, skipping network\n";
-								    }
-								}),
-					      gtksignal_connect(Gtk2::Button->new(N("Rescan")), clicked => sub { &UpdateAvailable })
-                                             )
-                                  )
-                         ),
-                0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Status")), 2),
-                          gtkpack(Gtk2::VBox->new,
-                                  create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                                   [ $NetLabel,  $net_field,  $IpLabel,  $ip_field,  $GwLabel,     $gw_field ],
-                                                   [ $ModeLabel, $mode_field, $WepLabel, $wep_field, $SignalLabel, $sig_field ],
-                                                  ),
-                                  gtkpack(create_hbox(),
-                                          gtksignal_connect(Gtk2::Button->new(N("Disconnect")), clicked => sub { &Disconnect }),
-                                          gtksignal_connect(Gtk2::Button->new(N("Refresh")), clicked => sub { &UpdateStatus }),
-                                          gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { Gtk2->main_quit })
-                                         )
-                                 )
-                         ),
-               )
-      );
-
-# fill the GUI
-&ReadConfig;
-&UpdateAll;
-
-sub UpdateAll {
-	&UpdateAvailable; #must go first as it defines the device name
-	&UpdateStatus;
-	&UpdateRoaming;
+    while (my ($ap, $network) = each(%$wireless_networks)) {
+        push @{$wireless_list->{data}}, [
+            $ap,
+            $network->{current} ? $pixbufs{state}{connected} : undef,
+            $network->{ssid} || $ap,
+            $network->{flags} ? $pixbufs{keyring} : undef,
+            $network->{flags},
+            $pixbufs{link_level}{$network->{approx_level}}
+        ];
+    }
+    1;
 }
 
-sub isRoamingRunning() {
-	my $name = basename($roaming_daemon->{binary});
-	any { /\Q$name\E$/ } run_program::get_stdout("ps", "-A");
+sub configure_selected() {
+    my ($selected) = $wireless_list->get_selected_indices or return;
+    my $ap = $wireless_list->{data}[$selected][0];
+    my $network = $wireless_networks->{$ap};
+    my $ssid = $network->{ssid};
+
+    my $wireless_net =
+      $ssid && exists $net->{wireless}{$ssid} ?
+        $net->{wireless}{$ssid} :
+      exists $net->{wireless}{$ap} ?
+        $net->{wireless}{$ap} :
+        {};
+    $wireless_net->{WIRELESS_ESSID} = $ssid if $ssid;
+
+    my ($wireless_enc_mode, $wireless_enc_key, $wireless_restricted);
+    ($wireless_enc_key, $wireless_restricted) = network::wireless::get_wep_key_from_iwconfig($wireless_net->{WIRELESS_ENC_KEY});
+    #- FIXME: handle restricted
+    $wireless_enc_mode = $network->{flags} =~ /wpa/i ? 'wpa-psk' : $network->{flags} =~ /wep/i ? 'open' : 'none';
+
+    my $dhcp = to_bool(!exists($wireless_net->{BOOTPROTO}) || $wireless_net->{BOOTPROTO} eq "dhcp");
+
+    $in->ask_from_({
+        title => "Wireless settings",
+        messages => N("Please enter settings for wireless network \"%s\"", $ssid || $ap)
+    },
+                   [
+                       { label => N("Network name (ESSID)"), val => \$wireless_net->{WIRELESS_ESSID}, disabled => sub { $ssid } },
+                       { label => N("Encryption mode"), val => \$wireless_enc_mode,
+                         list => [ keys %network::wireless::wireless_enc_modes ],
+                         sort => 1,
+                         format => sub { translate($network::wireless::wireless_enc_modes{$_[0]}) } },
+                       { label => N("Encryption key"), val => \$wireless_enc_key, disabled => sub { $wireless_enc_mode eq 'none' } },
+                       { text => N("Automatic IP (BOOTP/DHCP)"), val => \$dhcp, type => 'bool' },
+                       { label => N("IP address"), val => \$wireless_net->{IPADDR}, disabled => sub { $dhcp } },
+                       { label => N("DNS server"), val => \$wireless_net->{MS_DNS1}, disabled => sub { $dhcp } },
+                       { label => N("Gateway IP address"), val => \$wireless_net->{GATEWAY}, disabled => sub { $dhcp } },
+                   ],
+               ) or return;
+
+    $wireless_net->{BOOTPROTO} = $dhcp ? 'dhcp' : 'static';
+    $wireless_net->{WIRELESS_ENC_KEY} = network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
+    $wireless_net->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($wireless_module);
+
+    my $wireless_file = "/etc/sysconfig/network-scripts/wireless.d/" . ($ssid || $ap);
+    network::network::write_interface_settings($wireless_net, $wireless_file);
+    network::wireless::wpa_supplicant_add_network($wireless_net->{WIRELESS_ESSID}, $wireless_enc_mode, $wireless_enc_key);
+
+    system('/usr/sbin/wpa_cli reconfigure'); #- this should be handled by the monitoring daemon instead
+
+    1;
 }
 
-sub UpdateRoaming() {
-	my $status = isRoamingRunning() ? N("on") : N("off");
-	$RoamStatus->set_text(N("Roaming: %s", $status));
-	return FALSE; #- do not update again if launched on timeout
+sub connect_to_selected() {
+    my ($selected) = $wireless_list->get_selected_indices or return;
+    my $id = $wireless_list->{data}[$selected][0];
+
+    if (defined $id) {
+        eval { $monitor->select_network($id) };
+        $@ and err_dialog(N("Wireless connection"), N("Unable to contact daemon"));
+    } else {
+        configure_selected();
+        #- apply config in wpa_supplicant and retry
+    }
+
+    gtkset_mousecursor_wait();
+
+    Glib::Timeout->add(5000, sub {
+        update_networks();
+        gtkset_mousecursor_normal();
+        0;
+    });
 }
 
-sub UpdateStatus() {
-	my $CurrentNet = "-";
-	my $CurrentIP = "---.---.---.---";
-	my $CurrentGW = "---.---.---.---";
-	my $CurrentMode = "";
-	my $CurrentWEP = "";
-	my $CurrentSignal = "-";
-	print "Updating\n" if $::testing;
-	foreach (run_program::get_stdout($IWConfig, $device)) {
-		/ESSID:"(.*?)"/ and $CurrentNet = $1;
-		/Mode:(\S*)\s/ and $CurrentMode = $1;
-		/key:(\S*)\s/ and $CurrentWEP = $1;
-		m!Quality[:=](\S*)/! and $CurrentSignal = $1;
-	}
-	foreach (run_program::get_stdout($IFConfig, $device)) {
-		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
-	}
-	foreach (run_program::get_stdout($route)) {
-		#- FIXME: use timeout for DNS resolution, factorize with activefw.pm
-		if (/^0.0.0.0\s*(\S*)\s/) { $CurrentGW = gethostbyaddr(inet_aton($1), AF_INET) }
-		else { $CurrentGW = "---.---.---.---" }
-	}
-	$net_field->set_text($CurrentNet);
-	$mode_field->set_text($CurrentMode);
-	$ip_field->set_text($CurrentIP);
-	$wep_field->set_text($CurrentWEP);
-	$gw_field->set_text($CurrentGW);
-	$sig_field->set_text($CurrentSignal);
-}
+update_networks();
+Glib::Timeout->add(30000, \&update_networks);
 
-sub UpdateAvailable() {
-	my ($essid, $mode, $wep, $signal);
-	print "Running iwlist\n" if $::testing;
-	@{$AvailableList->{data}} = ();
-	foreach (`$IWList scan 2>/dev/null`) {
-		/([^ ]+)([ \t]+)Scan completed :/ and $device = $1;
-		/([^ ]+)([ \t]+)No scan results/ and  $device = $1;
-		/ESSID:"(.*?)"/ and $essid = $1;
-		/Mode:(\S*)/ and $mode = $1;
-		m!Quality[:=](\S*)/! and $signal = $1;
-		if (/key:(\S*)\s/) {
-			$wep = $1;
-			print "ESSID: $essid, Mode: $mode, WEP: $wep, Signal: $signal\n" if $::testing;
-			push @{$AvailableList->{data}}, [$essid, $mode, $wep, $signal];
-		}
-	}
-}
-
-sub AddNet {
-	my ($essid, $mode, $channel, $dhcp, $key) = @_;
-	member($essid, map { $_->[0] } @{$KnownList->{data}}) and return;
-	print "Adding net $essid\n" if $::testing;
-	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $dhcp, $key ];
-}
-
-sub RemoveNet {
-	my ($selected) = @_;
-	my $essid = $KnownList->{data}[$selected][0];
-	print "Removing net $essid\n" if $::testing;
-	splice @{$KnownList->{data}}, $selected, 1;
-}
-
-sub ReadConfig() {
-	$_->{read_config}($_->{config_location}) foreach values %available_roaming_daemons;
-}
-
-sub WriteConfig() {
-	$_->{write_config}($_->{config_location}) foreach values %available_roaming_daemons;
-}
-
-sub StartRoam() {
-	my $options = $roaming_daemon->{start_options}($ScanInterval, $device);
-	my $name = basename($roaming_daemon->{binary});
-	system("killall $name; $roaming_daemon->{binary} $options &");
-	Glib::Timeout->add(1000, \&UpdateRoaming);
-}
-
-sub StopRoam() {
-	my $name = basename($roaming_daemon->{binary});
-	system("killall $name");
-	Glib::Timeout->add(1000, \&UpdateRoaming);
-}
-
-sub SetInterval() {
-	$ScanInterval = $ScanEntry->get_text;
-	if (isRoamingRunning()) {
-	    StopRoam();
-	    StartRoam();
-	}
-}
-
-sub ConnectNow {
-	my ($row) = @_;
-	my @command = "";
-	push @command, "$IWConfig $device essid $KnownList->{data}[$row][0] ";
-     my %commands = (1 => 'mode', 2 => 'channel', 4 => 'key');
-     push @command, map { "$commands{$_} $KnownList->{data}[$row][$_] " } grep { $KnownList->{data}[$row][$_] } keys %commands;
-	push @command, "; ";
-	if ($KnownList->{data}[$row][3]) {
-		push @command, "$IFConfig $device up; $DHClient $device";
-	}
-	else {
-		push @command, "$IFUp $device";
-	}
-	my $ToBash = join("", @command);
-	print "Sending $ToBash\n" if $::testing;
-	system($ToBash);
-	&UpdateStatus;
-}
-
-sub Disconnect {
-	print "Dropping $device\n" if $::testing;
-	system("$IFDown $device");
-	&UpdateStatus;
-}
-
-sub Dialog {
-    my ($FilePointer) = @_;
-    my $content = join('', cat_($FilePointer));
-    # dump into a dialog
-    my $AboutWindow = Gtk2::Dialog->new(N("Information"), $w->{real_window},
-                                        'destroy-with-parent',
-                                        N("Ok") => 'none');
-    $AboutWindow->vbox->add(create_scrolled_window(Gtk2::Label->new($content)));
-    $AboutWindow->signal_connect(response => sub { $_[0]->destroy });
-    $AboutWindow->show_all;
-}
-
+my $w = ugtk2->new(N("Wireless connection"));
+gtkadd($w->{window},
+       gtknew('VBox', spacing => 5, children => [
+           0, if_(!$::isEmbedded, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakroam-mdk.png', N("Wireless connection"))),
+           1, gtknew('HBox', spacing => 5, children => [
+               1, gtknew('ScrolledWindow', width => 420, height => 300, child => $wireless_list),
+               0, gtknew('VButtonBox', layout => 'edge', children_loose => [
+                   gtknew('Button', text => N("Configure"), clicked => \&configure_selected),
+                   gtknew('Button', text => N("Connect"), clicked => \&connect_to_selected),
+                   gtknew('Button', text => N("Refresh"), clicked => \&update_networks),
+                   gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+               ]),
+           ]),
+       ]),
+       );
 $w->main;
