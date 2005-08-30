@@ -1180,7 +1180,10 @@ sub install_lilo {
     }
     if ($bootloader->{message_text}) {
 	output("$::prefix/boot/message-text", $bootloader->{message_text});
-	symlinkf "message-" . ($bootloader->{method} ne 'lilo-graphic' ? 'text' : 'graphic'), "$::prefix/boot/message";
+    }
+    my $message = "message-" . ($bootloader->{method} ne 'lilo-graphic' ? 'text' : 'graphic');
+    if (-r "$::prefix/boot/$message") {
+	symlinkf $message, "$::prefix/boot/message";
 	$bootloader->{message} = '/boot/message';
     }
 
