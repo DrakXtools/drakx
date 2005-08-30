@@ -1,3 +1,59 @@
+2005/08/30  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: in case of all_squash use anongid=65534 and
+	anongid=65534
+
+2005/08/30  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: display wireless link icon in net_applet if
+	connected through wireless
+	check wireless every 20 seconds only
+
+	* mdk-stage1/probing.c: support for alternate modules (allows to load both
+	ahci and ata_piix)
+
+2005/08/30  Pixel  <pixel at mandriva.com>
+
+	* any.pm: tell writeandclean_ldsoconf happened
+	cleanup (remove duplicates)
+
+	* modules.pm: ahci says "ahci: probe of %s failed with error %d", but
+	succeeds anyway, so we need to handle the ahci/ata_piix case otherwise
+
+2005/08/30  tbednarski
+
+	* share/po/pl.po: Translation updates
+
+2005/08/29  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: create dir if it does not exist
+
+2005/08/29  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/08/29  Olivier Blin <oblin at mandriva.com>
+
+	* share/rpmsrate: add prism2-utils in INSTALL section, required for
+	wlan-ng cards
+
+2005/08/29  Pixel  <pixel at mandriva.com>
+
+	* pkgs.pm: on 2002/07/10 (1.347), selected_leaves() behaviour was broken,
+	listing all packages.
+	restoring it (bugzilla #18000)
+
+	* ugtk2.pm: smaller banner during install (as required by warly & helene)
+
+	* bootloader.pm: finish commit 1.387
+
+	* install_steps_gtk.pm: put Cancel and Details button on the right of the
+	main progress bar
+
+2005/08/29  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: reverse xdm-config logic for XDMCP
+
 2005/08/29  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draknfs: create dir if it does not exist
