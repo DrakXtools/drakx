@@ -506,11 +506,14 @@ sub _gtk__MagicWindow {
 
 	$w = $::WizardWindow;
      
-	$::Banner->destroy if $::Banner;
-	gtkadd($::WizardTable, children_tight => [ $::Banner = $provided_banner ]) if $provided_banner;
+	gtkadd($::WizardTable, children_tight => [ $provided_banner ]) if $provided_banner;
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
     }
-    bless { real_window => $w, child => $sub_child, pop_it => $pop_it }, 'mygtk2::MagicWindow';
+    bless { 
+	real_window => $w, 
+	child => $sub_child, pop_it => $pop_it,
+	if_($provided_banner, banner => $provided_banner),
+    }, 'mygtk2::MagicWindow';
 }
 
 sub _gtk__FileSelection {
@@ -670,19 +673,19 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 
     my ($meth) = $mygtk2::MagicWindow::AUTOLOAD =~ /mygtk2::MagicWindow::(.*)/;
 
-    my ($s1, $s2) = $meth eq 'show'
-              ? ('real_window', 'child') :
+    my @l = $meth eq 'show'
+              ? ('banner', 'child', 'real_window') :
+            $meth eq 'destroy' || $meth eq 'hide' ?
+	      ($w->{pop_it} ? 'real_window' : ('banner', 'child')) :
             $meth eq 'get' && $args[0] eq 'window-position' ||
-            $w->{pop_it} && ($meth eq 'destroy' || $meth eq 'hide') ||
 	    $for_real_window{$meth} ||
             !$w->{child}->can($meth)
 	      ? 'real_window'
 	      : 'child';
 
-#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s1 (@args)\n";
+#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on @l (@args)\n";
 
-    $w->{$s2}->$meth(@args) if $s2;
-    $w->{$s1}->$meth(@args);
+    $w->{$_} && $w->{$_}->$meth(@args) foreach @l;
 }
 
 sub _create_Window {
