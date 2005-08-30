@@ -90,7 +90,9 @@ my $label_and_widgets = sub {
   my ($label, $widget, $button) = @_;
   gtkpack_(Gtk2::HBox->new(0,5),
            0, gtkadd_widget($size_groups{label}, $label),
-           1, gtkadd_widget($size_groups{widget}, $widget),
+           1, gtkpack_(Gtk2::VBox->new(),
+		      0, gtkadd_widget($size_groups{widget}, $widget),
+		       ),
 	   2, gtkadd_widget($size_groups{button}, $button),
           );
 };
