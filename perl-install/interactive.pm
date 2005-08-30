@@ -116,6 +116,9 @@ sub vnew {
     interactive::newt->new;
 }
 
+sub ok { N_("Ok") }
+sub cancel { N_("Cancel") }
+
 sub enter_console {}
 sub leave_console {}
 sub suspend {}
@@ -129,6 +132,7 @@ sub exit {
         exit($_[0]);
     }
 }
+
 
 #-######################################################################################
 #- Interactive functions
@@ -148,13 +152,13 @@ sub ask_okcancel {
 
 sub ask_warn_ {
     my ($o, $common) = @_;
-    ask_from_listf_raw_no_check($o, $common, undef, [ $o->ok ]);
+    ask_from_listf_raw_no_check($o, $common, \&translate, [ $o->ok ]);
 }
 
 sub ask_yesorno_ {
     my ($o, $common, $b_def) = @_;
     $common->{cancel} = '';
-    ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Yes"), N_("No") ], $b_def ? "Yes" : "No") eq "Yes";
+    ask_from_listf_raw($o, $common, \&translate, [ N_("Yes"), N_("No") ], $b_def ? "Yes" : "No") eq "Yes";
 }
 
 sub ask_okcancel_ {
@@ -165,7 +169,7 @@ sub ask_okcancel_ {
 	$common->{focus_cancel} = !$b_def;
     	ask_from_no_check($o, $common, []);
     } else {
-	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ $o->ok, $o->cancel ], $b_def ? $o->ok : $o->cancel) eq $o->ok;
+	ask_from_listf_raw($o, $common, \&translate, [ $o->ok, $o->cancel ], $b_def ? $o->ok : $o->cancel) eq $o->ok;
     }
 }
 
@@ -199,7 +203,7 @@ sub ask_from_list {
 
 sub ask_from_list_ {
     my ($o, $title, $message, $l, $o_def) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $o_def);
+    ask_from_listf($o, $title, $message, \&translate, $l, $o_def);
 }
 
 sub ask_from_listf_ {

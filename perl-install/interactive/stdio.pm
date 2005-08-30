@@ -168,13 +168,5 @@ sub wait_message_nextW {
 }
 sub wait_message_endW { print "\nDone\n" }
 
-sub ok {
-    N("Ok");
-}
-
-sub cancel {
-    N("Cancel");
-}
-
 1;
 

@@ -420,12 +420,4 @@ sub simplify_string {
     $s;
 }
 
-sub ok {
-    N("Ok");
-}
-
-sub cancel {
-    N("Cancel");
-}
-
 1;

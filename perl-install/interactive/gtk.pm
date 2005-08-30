@@ -807,12 +807,4 @@ sub kill {
     @tempory::objects = ();
 }
 
-sub ok {
-    N("Ok");
-}
-
-sub cancel {
-    N("Cancel");
-}
-
 1;
