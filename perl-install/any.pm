@@ -328,6 +328,7 @@ sub setupBootloader__general {
     if ($b->{method} eq 'grub') {
 	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
+    bootloader::suggest_message_text($b) if ! -e "$::prefix/boot/message-text"; #- in case we switch from grub to lilo
 
     bootloader::set_append_memsize($b, $memsize);
     if ($prev_force_acpi != $force_acpi) {
