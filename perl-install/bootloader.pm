@@ -722,6 +722,25 @@ sub sanitize_ver {
     $return;
 }
 
+sub suggest_message_text {
+    my ($bootloader) = @_;
+
+    if (!$bootloader->{message} && !$bootloader->{message_text} && arch() !~ /ia64/) {
+	my $msg_en =
+#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+N_("Welcome to the operating system chooser!
+
+Choose an operating system from the list above or
+wait for default boot.
+
+");
+	my $msg = translate($msg_en);
+	#- use the english version if more than 20% of 8bits chars
+	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
+	$bootloader->{message_text} = $msg;
+    }
+}
+
 sub suggest {
     my ($bootloader, $all_hds, %options) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
@@ -759,20 +778,7 @@ sub suggest {
          ),
 	});
 
-    if (!$bootloader->{message} && !$bootloader->{message_text} && arch() !~ /ia64/) {
-	my $msg_en =
-#-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-N_("Welcome to the operating system chooser!
-
-Choose an operating system from the list above or
-wait for default boot.
-
-");
-	my $msg = translate($msg_en);
-	#- use the english version if more than 20% of 8bits chars
-	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
-	$bootloader->{message_text} = $msg;
-    }
+    suggest_message_text($bootloader);
 
     add2hash_($bootloader, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
     if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
