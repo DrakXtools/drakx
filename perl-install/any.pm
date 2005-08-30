@@ -557,6 +557,7 @@ sub writeandclean_ldsoconf {
     push @l, grep { -d "$::prefix$_" } @suggest;
     @l = difference2(\@l, \@default);
 
+    log::l("writeandclean_ldsoconf");
     output($file, map { "$_\n" } uniq(@l));
 }
 
