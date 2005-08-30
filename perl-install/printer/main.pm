@@ -2443,9 +2443,15 @@ sub autodetectionentry_for_uri {
     } elsif ($uri =~ m!^hp:/(usb|par|net)/!) {
 	# HP printer (controlled by HPLIP)
 	my $hplipdevice = $uri;
-	$hplipdevice =~ m!^hp:/(usb|par|net)/(\S+?)(\?serial=(\S+)|)$!;
+	$hplipdevice =~ m!^hp:/(usb|par|net)/(\S+?)(\?(serial|device)=(\S+)|)$!;
 	my $model = $2;
-	my $serial = $4;
+	my $serial = undef;
+	my $device = undef;
+	if ($4 eq 'serial') {
+	    $serial = $5;
+	} elsif ($4 eq 'device') {
+	    $device = $5;
+	}
 	$model =~ s/_/ /g;
 	foreach my $p (@autodetected) {
 	    next if !$p->{val}{MODEL};
@@ -2459,6 +2465,7 @@ sub autodetectionentry_for_uri {
 	    next if ($serial && !$p->{val}{SERIALNUMBER}) ||
 		(!$serial && $p->{val}{SERIALNUMBER}) ||
 		(uc($serial) ne uc($p->{val}{SERIALNUMBER}));
+	    next if $device && ($device ne $p->{port});
 	    return $p;
 	}
     } elsif ($uri =~ m!^ptal://?mlc:!) {
@@ -2754,14 +2761,18 @@ sub start_hplip {
 		 '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
 		 die 'Could not run "/usr/lib/cups/backend/hp"!';
 	    while (my $line = <$F>) {
-		if (($line =~ m!^direct\s+(hp:/$bus/(\S+)\?serial=(\S+))\s+!) ||
+		if (($line =~ m!^direct\s+(hp:/$bus/(\S+?)\?serial=(\S+))\s+!) ||
+		    ($line =~ m!^direct\s+(hp:/$bus/(\S+?)\?device=()(\S+))\s+!) ||
 		    ($line =~ m!^direct\s+(hp:/$bus/(\S+))\s+!)) {
 		    my $uri = $1;
 		    my $modelstr = $2;
 		    my $serial = $3;
+		    my $devicestr = $4;
 		    if ((uc($modelstr) eq uc($hplipentry->{model})) &&
 			(!$serial ||
-			 (uc($serial) eq uc($a->{val}{SERIALNUMBER})))) {
+			 (uc($serial) eq uc($a->{val}{SERIALNUMBER}))) &&
+			(!$devicestr ||
+			 ($devicestr eq $device))) {
 			close $F;
 			return $uri;
 		    }
