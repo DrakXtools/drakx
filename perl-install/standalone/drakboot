@@ -48,7 +48,7 @@ my $bootloader = bootloader::read($all_hds);
 if (!$bootloader) {
     $in->ask_okcancel('', N("No bootloader found, creating a new configuration"), 0) or $in->exit;
     bootloader::suggest($bootloader ||= {}, $all_hds, 
-			vga_fb => listlength(cat_("/proc/fb")),
+			vga_fb => first($cmdline =~ /\bvga=(\S+)/), #- don't use $1 here, otherwise perl will hit you because of the other "=~" below
 			quiet => $cmdline =~ /\bsplash=silent\b/,
 		    );
 }
