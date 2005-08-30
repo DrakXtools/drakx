@@ -200,14 +200,14 @@ sub create_pango_help_box {
 
 sub help_b {
   my ($tittle, $help_data) = @_;
-  gtksignal_connect(new Gtk2::Button->new_from_stock('gtk-dialog-info'), clicked => sub {
+  gtksignal_connect(new Gtk2::Button->new(N("Information")), clicked => sub {
 		      my $dialog = _create_dialog();
 		      $dialog->set_transient_for($::main_window);
 		      $dialog->set_title(N("Help"));
 		      $dialog->set_modal(1);
 		      gtkpack_($dialog->vbox,
 			       1, create_pango_help_box($help_data),
-			       0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub {
+			       0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub {
 				   $dialog->destroy;
 						    }
 						   ),
@@ -283,7 +283,7 @@ sub add_modify_entry {
   $lsecure->set_popdown_strings(@yesno);
 
   my $file_dialog = $fdwidget->($dir);
-  my $button = Gtk2::Button->new_from_stock('gtk-open');
+  my $button = Gtk2::Button->new(N("Directory"));
   $button->signal_connect(clicked => sub { $file_dialog->show });
 
 # test if modify or add a nfs share
