@@ -427,6 +427,7 @@ sub installPackages {
 
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $_trans_progress_total);
 
+    local $::noborderWhenEmbedded = 1;
     my $w = ugtk2->new(N("Installing"));
     $w->sync;
     my $text = gtknew('Label');
@@ -436,7 +437,7 @@ sub installPackages {
 
     my ($msg, $msg_time_remaining) = map { gtknew('Label', text => $_) } '', N("Estimating");
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
-    ugtk2::gtkadd($::WizardTable, my $box = gtknew('VBox', spacing => 10));
+    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox'));
 
     my $advertize = sub {
 	my ($update) = @_;
@@ -490,15 +491,16 @@ sub installPackages {
 			     $advertize->('update');
 			 });
 
-    $box->pack_end(gtkshow(gtknew('VBox', spacing => 5, children_loose => [
+    $box->pack_end(gtkshow(gtknew('VBox', border_width => 5, spacing => 3, children_loose => [
 			   $msg, $progress,
 			   gtknew('Table', children => [ [ N("Time remaining "), $msg_time_remaining ] ]),
 			   $text,
 			   gtknew('HBox', children => [
-			       1, gtknew('VBox', children => [ 1, '', 0, gtkset_size_request($progress_total, -1, 25), 1, '' ]),
+			       1, gtknew('VBox', children_centered => [ gtkset_size_request($progress_total, -1, 25) ]),
 			       0, gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
 			   ]),
 			  ])), 0, 1, 0);
+
     $details->hide if !@install_any::advertising_images;
     $w->sync;
     gtkset($msg, text => N("Please wait, preparing installation..."));
