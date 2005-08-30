@@ -1,5 +1,116 @@
 2005/08/30  Antoine Ginies  <aginies at mandriva.com> 
 
+	* standalone/draknfs: put comboxentry in a VBox (to avoid 2 rows bug in
+	comboboxentry)
+	remove icon on all buttons
+	in case of all_squash use anongid=65534 and anongid=65534
+
+2005/08/30  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file
+
+2005/08/30  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: display wireless link icon in net_applet if
+	connected through wireless
+	check wireless every 20 seconds only
+
+	* network/wireless.pm, network/monitor.pm, network/network.pm,
+	standalone/drakroam: 
+	  - configure wpa_supplicant correctly for shared or passwordless
+	connections
+	  - split write_interface_setttings out of
+	network::network::write_interface_conf
+	  - wpa_supplicant may list some networks twice, handle it
+	  - rewrite drakroam to use wpa_supplicant
+
+	* mdk-stage1/probing.c: support for alternate modules (allows to load both
+	ahci and ata_piix)
+
+	* network/tools.pm: allow net_applet to use vlan/alias interfaces (thanks
+	to Michael Scherer)
+	fix metric parser
+
+2005/08/30  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: updated translations
+
+2005/08/30  Pixel  <pixel at mandriva.com>
+
+	* share/rpmsrate: i remember someone telling me gdm should now be used
+	instead of xdm when neither GNOME nor KDE are selected. but it seems
+	i've heard a ghost (or something alike), so reverting
+
+	* install_steps_gtk.pm: 
+	  - use noborderWhenEmbedded instead of dirtying directly in WizardTable
+	  - use children_centered to cleanly and correctly size the progress bar
+
+	* modules.pm: ahci says "ahci: probe of %s failed with error %d", but
+	succeeds anyway, so we need to handle the ahci/ata_piix case otherwise
+
+	* interactive.pm: cleanup (translate late, and move methods to upper
+	class)
+	fix "Cancel" in ask_okcancel
+
+	* standalone/drakboot: vga_fb expects the vga mode, not a boolean, fixing
+	propose to create a default bootloader configuration when no bootloader
+	is found
+
+	* bootloader.pm: fix ugly typo
+	handle {message_text} not set but /boot/message-text existing
+	create suggest_message_text()
+
+	* ugtk2.pm: we don't want global vars in mygtk2, move
+	$::noborderWhenEmbedded to ugtk2
+	if_ is *not* short-circuit
+
+	* interactive/gtk.pm, interactive/stdio.pm, interactive/newt.pm: cleanup
+	(translate late, and move methods to upper class)
+
+	* any.pm: ensure /boot/message-text exists (useful when switching from
+	grub to lilo)
+	tell writeandclean_ldsoconf happened
+	cleanup (remove duplicates)
+
+	* mygtk2.pm: make MagicWindow re-entrant again (was broken due to only one
+	banner, eg. for drakx summary)
+	add children_centered (was already children_tight, children_loose and
+	children)
+	we don't want global vars in mygtk2, move $::noborderWhenEmbedded to
+	ugtk2
+
+2005/08/30  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* crypto.pm: Update mirrorlist
+
+	* drakxtools.spec: require xtest instead of the /usr/X11R6/bin/xtest file
+
+2005/08/30  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - When setting up new queue with HPLIP old HPOJ config was not deleted
+	during installation. Fixed.
+	  - Restart CUPS after installing HPLIP for a network printer.
+
+2005/08/30  Antoine Ginies  <aginies at mandriva.com> 
+
 	* standalone/draknfs: in case of all_squash use anongid=65534 and
 	anongid=65534
 
