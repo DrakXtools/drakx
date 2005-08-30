@@ -856,6 +856,7 @@ sub new {
 	if_(!$::isInstall, icon_no_error => wm_icon()),
 	if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
     );
+    $window->set_border_width(10) if !$window->{pop_it} && !$::noborderWhenEmbedded;
 
     $o->{rwindow} = $o->{window} = $window;
     $o->{real_window} = $window->{real_window};

@@ -503,7 +503,6 @@ sub _gtk__MagicWindow {
 	}
 
 	set_main_window_size($::WizardWindow);
-	$sub_child->set_border_width($::noborderWhenEmbedded ? 0 : 10);
 
 	$w = $::WizardWindow;
      
