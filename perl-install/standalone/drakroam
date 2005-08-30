@@ -82,8 +82,8 @@ sub configure_selected() {
     my ($selected) = $wireless_list->get_selected_indices or return;
     my $ap = $wireless_list->{data}[$selected][0];
     my $network = $wireless_networks->{$ap};
-    my $ssid = $network->{ssid};
 
+    my $ssid = $network->{ssid};
     my $wireless_net =
       $ssid && exists $net->{wireless}{$ssid} ?
         $net->{wireless}{$ssid} :
@@ -132,10 +132,11 @@ sub configure_selected() {
 
 sub connect_to_selected() {
     my ($selected) = $wireless_list->get_selected_indices or return;
-    my $id = $wireless_list->{data}[$selected][0];
+    my $ap = $wireless_list->{data}[$selected][0];
+    my $network = $wireless_networks->{$ap};
 
-    if (defined $id) {
-        eval { $monitor->select_network($id) };
+    if (defined $network->{id}) {
+        eval { $monitor->select_network($network->{id}) };
         $@ and err_dialog(N("Wireless connection"), N("Unable to contact daemon"));
     } else {
         configure_selected();
