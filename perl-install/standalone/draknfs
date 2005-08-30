@@ -348,6 +348,9 @@ sub add_modify_entry {
   $luserid->signal_connect(changed => sub {
 			     if ($luserid->get_text =~ /$userid_data->{root_squash}/) {
 			       $_->set_sensitive(1) foreach $anongid, $anonuid;
+			     } elsif ($luserid->get_text =~ /$userid_data->{all_squash}/) {
+			       $_->set_sensitive(0) foreach $anongid, $anonuid;
+			       $_->set_text("65534") foreach $anongid, $anonuid;
 			     } else {
 			       $_->set_text("") foreach $anongid, $anonuid;
 			       $_->set_sensitive(0) foreach $anongid, $anonuid;
@@ -406,13 +409,13 @@ sub add_modify_entry {
 			       ok_clicked => sub {
 				 my ($anonu, $anong);
 				 if ($anonuid->get_text) {
-				     my ($uid) = $anonuid->get_text =~ /\[(\S*)\]/;
-				     $anonu = "anonuid=" . $uid;
+				   my ($uid) = $anonuid->get_text =~ /\[(\S*)\]/;
+				   $anonu = "anonuid=" . $uid;
 				 }
                                  if ($anongid->get_text) {
 				     my ($gid) = $anongid->get_text =~ /\[(\S*)\]/;
 				     $anong = "anongid=" . $gid;
-                                 }
+				   }
 				 if ($lsync->get_text =~ /yes/) { $lsync_data = "sync" } elsif ($lsync->get_text =~ /no/) { $lsync_data = "async" } else { undef $lsync_data }
 				 if ($lr->get_text =~ /yes/) { $lr_data = "ro" } elsif ($lr->get_text =~ /no/) { $lr_data = "rw" } else { undef $lr_data }
 				 if ($lsecure->get_text =~ /yes/) { $lsecure_data = "secure" } elsif ($lsecure->get_text =~ /no/) { $lsecure_data = "insecure" } else { undef $lsecure_data }
@@ -420,12 +423,16 @@ sub add_modify_entry {
 				 my $luserid_toput;
 				 if ($luserid->get_text =~ /$userid_data->{no_root_squash}/) {
 				     $luserid_toput = "no_root_squash";
+				     undef $anong; undef $anonu;
 				 } elsif ($luserid->get_text =~ /$userid_data->{root_squash}/) {
 				     $luserid_toput = "root_squash";
 				 } elsif ($luserid->get_text =~ /$userid_data->{no_all_squash}/) {
 				     $luserid_toput = "no_all_squash";
+				     undef $anong; undef $anonu;
 				 } elsif ($luserid->get_text =~ /$userid_data->{all_squash}/) {
 				     $luserid_toput = "all_squash";
+				     $anong = "anongid=65534";
+				     $anonu = "anonuid=65534";
 				 }
 
 				 my $all_right = join(",", grep { defined $_ } $luserid_toput, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
@@ -574,7 +581,9 @@ my $menu = $factory->get_widget('<main>');
 
 my $okcancel = create_okcancel({
 				cancel_clicked => sub { ugtk2->exit },
-				ok_clicked => sub { &write_conf; ugtk2->exit },
+				ok_clicked => sub { &write_conf;
+						    run_program::raw({ detach => 1 }, "service nfs reload");
+						    ugtk2->exit },
 			       },
 			      );
 
