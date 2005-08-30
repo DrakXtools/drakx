@@ -14,11 +14,11 @@ CAT_GRAPHICAL_DESKTOP
 
 CAT_GNOME
   5 gnome-panel nautilus nautilus-filesharing gnome-control-center metacity 
-  5 yelp gnome2
+  5 yelp gnome2 gdm
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore 
     gconf-editor desktop-printing eog evince
-  4 CAT_THEMES gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme
+  4 CAT_THEMES gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme gdm-themes
 
   3 gnome-pilot
   2 bug-buddy
@@ -605,10 +605,6 @@ CAT_X
   5 LOCALES"zh_TW" scim-chewing
   5 LOCALES"am" || LOCALES"ja" || LOCALES"ko" || LOCALES"zh" CAT_KDE scim-qtimm
   5 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK rxvt-unicode
-
-  !CAT_KDE || CAT_GNOME 
-    5 gdm 
-    4 CAT_THEMES gdm-themes
   
   4 vim-enhanced
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives fonts-ttf-west_european
