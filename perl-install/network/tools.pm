@@ -236,7 +236,7 @@ sub host_hex_to_dotted {
 sub get_routes() {
     my %routes;
     foreach (cat_("/proc/net/route")) {
-	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+[0-9A-F]+\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
+	if (/^(\S+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+[0-9A-F]+\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
 	    if (hex($2)) { $routes{$1}{network} = host_hex_to_dotted($2) }
 	    elsif (hex($3)) { $routes{$1}{gateway} = host_hex_to_dotted($3) }
 	    if ($4) { $routes{$1}{metric} = $4 }
