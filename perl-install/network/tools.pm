@@ -239,7 +239,7 @@ sub get_routes() {
 	if (/^(\w+)\s+([0-9A-F]+)\s+([0-9A-F]+)\s+[0-9A-F]+\s+\d+\s+\d+\s+(\d+)\s+([0-9A-F]+)/) {
 	    if (hex($2)) { $routes{$1}{network} = host_hex_to_dotted($2) }
 	    elsif (hex($3)) { $routes{$1}{gateway} = host_hex_to_dotted($3) }
-	    elsif ($4) { $routes{$1}{metric} = $4 }
+	    if ($4) { $routes{$1}{metric} = $4 }
 	}
     }
     #- TODO: handle IPv6 with /proc/net/ipv6_route
