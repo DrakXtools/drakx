@@ -88,12 +88,10 @@ sub wait_action {
 my %size_groups = map { $_ => Gtk2::SizeGroup->new('horizontal') } qw(label widget button);
 my $label_and_widgets = sub {
   my ($label, $widget, $button) = @_;
-  gtkpack_(Gtk2::HBox->new(0,5),
+  gtkpack_(Gtk2::HBox->new(0,0),
            0, gtkadd_widget($size_groups{label}, $label),
-           1, gtkpack_(Gtk2::VBox->new(),
-		      0, gtkadd_widget($size_groups{widget}, $widget),
-		       ),
-	   2, gtkadd_widget($size_groups{button}, $button),
+	   0, gtkadd_widget($size_groups{widget}, $widget),
+	   0, gtkadd_widget($size_groups{button}, $button),
           );
 };
 
@@ -273,11 +271,13 @@ sub add_modify_entry {
   $_ = Gtk2::Entry->new foreach $dir, $options;
   $_ = Gtk2::OptionMenu->new foreach $lr, $luserid, $lsecure, $lsync;
 
-  $access = Gtk2::ComboBoxEntry->new_text;
+  $access = Gtk2::Combo->new;
+#  $access = Gtk2::ComboBox->new_text;
   my @access_list = get_access_list();
-  foreach (@access_list) {
-    $_ and $access->append_text($_);
-  }
+#  foreach (@access_list) {
+#    $_ and $access->append_text($_);
+#  }
+  $access->set_popdown_strings(@access_list);
 
   $luserid->set_popdown_strings(@listuserid_data);
   $lr->set_popdown_strings(@yesno);
@@ -308,9 +308,11 @@ sub add_modify_entry {
     $i = ($path->get_indices)[0];
     $dir->set_text($listshare[$i]{dir});
     if (!member($listshare[$i]{access}, @access_list)) {
-      $access->append_text($listshare[$i]{access});
+      $access->entry->append_text($listshare[$i]{access});
     }
-    $access->child->set_text($listshare[$i]{access});
+#    $access->child->set_text($listshare[$i]{access});
+#    $access->set_text($listshare[$i]{access});
+    $access->entry->set_text($listshare[$i]{access});
 
     # list of all rigth in bracket
     #    $anongid, $anonuid, $lr, $luserid, $lsecure, $lsync;
@@ -440,20 +442,23 @@ sub add_modify_entry {
 				 my $all_right = join(",", grep { defined $_ } $luserid_toput, $anonu, $anong, $lsync_data, $lsecure_data, $lr_data);
 				 my $test_dir = $dir->get_text;
 				 mkdir_p($test_dir) or err_dialog(N("Error!"), N("Can't create this directory.")) and return;
-				 my $test_access = $access->child->get_text;
+				 #my $test_access = $access->child->get_text;
+				 my $test_access = $access->entry->get_text;
 				 $test_access or err_dialog(N("Error!"), N("You must specify hosts access.")) and return;
 				 if ($wanted =~ /add/) {
 				   $iter = $model->append;
 				   $i = "-1";
 				   push @listshare, {
 						     dir => $dir->get_text,
-						     access => $access->child->get_text,
+						     #access => $access->child->get_text,
+						     access => $access->entry->get_text,
 						     right => $all_right,
 						     options => $options->get_text,
 						    };
 				 }
 				 $listshare[$i]{right} = $all_right;
-				 $listshare[$i]{access} = $access->child->get_text;
+				 #$listshare[$i]{access} = $access->child->get_text;
+				 $listshare[$i]{access} = $access->entry->get_text;
 				 $listshare[$i]{dir} = $dir->get_text;
 				 $listshare[$i]{options} = $options->get_text;
 				 $model->set($iter,
