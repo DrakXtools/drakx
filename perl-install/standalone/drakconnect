@@ -277,7 +277,7 @@ sub build_tree {
     elsif ($interface eq 'isdn') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
 	network::isdn::read_config($intf);
-	$intf->{save} = sub { network::isdn::write_config($intf) };
+	$intf->{save} = sub { network::isdn::write_config($in, $intf) };
     }
     else {
 	#- ethernet is default
