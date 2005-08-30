@@ -4,10 +4,10 @@ use strict;
 use common;
 
 our %wireless_enc_modes = (
-    none => N("None"),
-    open => N("Open WEP"),
-    restricted => N("Restricted WEP"),
-    'wpa-psk' => N("WPA Pre-Shared Key"),
+    none => N_("None"),
+    open => N_("Open WEP"),
+    restricted => N_("Restricted WEP"),
+    'wpa-psk' => N_("WPA Pre-Shared Key"),
 );
 
 my $wpa_supplicant_conf = "/etc/wpa_supplicant.conf";
