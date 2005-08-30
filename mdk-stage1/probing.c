@@ -238,6 +238,34 @@ void probing_detect_devices()
 	already_detected_devices = 1;
 }
 
+#ifndef DISABLE_MEDIAS
+static const char * get_alternate_module(const char * name)
+{
+	struct alternate_mapping {
+		const char * a;
+		const char * b;
+	};
+	static struct alternate_mapping mappings[] = {
+                { "ahci", "ata_piix" },
+        };
+	int mappings_nb = sizeof(mappings) / sizeof(struct alternate_mapping);
+        int i;
+
+	for (i=0; i<mappings_nb; i++) {
+		const char * alternate = NULL;
+		if (streq(name, mappings[i].a))
+			alternate = mappings[i].b;
+		else if (streq(name, mappings[i].b))
+			alternate = mappings[i].a;
+		if (alternate) {
+			log_message("found alternate module %s for driver %s", alternate, name);
+			return alternate;
+		}
+	}
+        return NULL;
+}
+#endif
+
 void discovered_device(enum driver_type type,
 		       unsigned short vendor, unsigned short device, unsigned short subvendor, unsigned short subdevice,
 		       const char * description, const char * driver)
@@ -246,8 +274,13 @@ void discovered_device(enum driver_type type,
 	log_message("PCI: device %04x %04x %04x %04x is \"%s\", driver is %s", vendor, device, subvendor, subdevice, description, driver);
 #ifndef DISABLE_MEDIAS
 	if (type == SCSI_ADAPTERS) {
+		const char * alternate = NULL;
 		wait_message("Loading driver for SCSI adapter:\n \n%s", description);
 		failed = my_insmod(driver, SCSI_ADAPTERS, NULL, 1);
+		alternate = get_alternate_module(driver);
+		if (!IS_NOAUTO && alternate) {
+			failed = failed || my_insmod(alternate, SCSI_ADAPTERS, NULL, 1);
+		}
 		remove_wait_message();
 		warning_insmod_failed(failed);
 	}
