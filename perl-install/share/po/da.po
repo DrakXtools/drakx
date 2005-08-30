@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
-"POT-Creation-Date: 2005-08-28 17:40+0800\n"
+"POT-Creation-Date: 2005-08-30 18:05+0800\n"
 "PO-Revision-Date: 2005-04-29 08:32+0200\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -182,11 +182,11 @@ msgstr "Vent venligst, finder og konfigurerer enheder..."
 #: install_steps.pm:81 install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
-#: network/netconnect.pm:918 network/netconnect.pm:922
-#: network/netconnect.pm:926 network/netconnect.pm:931
-#: network/netconnect.pm:1074 network/netconnect.pm:1078
-#: network/netconnect.pm:1196 network/netconnect.pm:1201
-#: network/netconnect.pm:1221 network/netconnect.pm:1374
+#: network/netconnect.pm:910 network/netconnect.pm:914
+#: network/netconnect.pm:918 network/netconnect.pm:923
+#: network/netconnect.pm:1067 network/netconnect.pm:1071
+#: network/netconnect.pm:1189 network/netconnect.pm:1194
+#: network/netconnect.pm:1214 network/netconnect.pm:1367
 #: network/thirdparty.pm:266 network/thirdparty.pm:273
 #: network/thirdparty.pm:309 network/thirdparty.pm:311
 #: network/thirdparty.pm:332 network/thirdparty.pm:356
@@ -496,7 +496,7 @@ msgstr "Tilpasset"
 #: printer/printerdrake.pm:4686 printer/printerdrake.pm:5141
 #: standalone/drakhosts:263 standalone/drakids:62 standalone/drakids:71
 #: standalone/drakids:79 standalone/draksplash:81 standalone/logdrake:173
-#: standalone/net_applet:84 standalone/scannerdrake:477
+#: standalone/net_applet:82 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Afslut"
@@ -691,7 +691,7 @@ msgid "Cancel"
 msgstr "Annullér"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:634 interactive.pm:527
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:636 interactive.pm:527
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
@@ -1003,7 +1003,7 @@ msgid "Force No Local APIC"
 msgstr "Gennemtving ingen lokal APIC"
 
 #: any.pm:294 any.pm:648 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:571 printer/printerdrake.pm:1887
+#: network/netconnect.pm:565 printer/printerdrake.pm:1887
 #: printer/printerdrake.pm:2008 standalone/drakbackup:1630
 #: standalone/drakbackup:3504 standalone/drakups:299
 #, c-format
@@ -1390,10 +1390,9 @@ msgstr "Avanceret"
 msgid "Input method:"
 msgstr "Indtastningsmetode:"
 
-#: any.pm:854 install_any.pm:421 network/netconnect.pm:153
-#: network/netconnect.pm:309 network/netconnect.pm:314
-#: network/netconnect.pm:1187 printer/printerdrake.pm:105
-#: printer/printerdrake.pm:2429
+#: any.pm:854 install_any.pm:421 network/netconnect.pm:303
+#: network/netconnect.pm:308 network/netconnect.pm:1180 network/wireless.pm:7
+#: printer/printerdrake.pm:105 printer/printerdrake.pm:2429
 #, c-format
 msgid "None"
 msgstr "Ingen"
@@ -1753,7 +1752,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Denne adgangskode er for nemt at gætte (det skal mindst være på %d tegn)"
 
-#: authentication.pm:188 network/netconnect.pm:314 network/netconnect.pm:572
+#: authentication.pm:188 network/netconnect.pm:308 network/netconnect.pm:566
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
@@ -1769,7 +1768,7 @@ msgstr "Kan ikke bruge rundkastning uden noget NIS-domæne"
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:753
+#: bootloader.pm:765
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1784,42 +1783,42 @@ msgstr ""
 "vent paa at starte standard-systemet.\n"
 "\n"
 
-#: bootloader.pm:853
+#: bootloader.pm:865
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO med grafisk menu"
 
-#: bootloader.pm:854
+#: bootloader.pm:866
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO med tekstmenu"
 
-#: bootloader.pm:855
+#: bootloader.pm:867
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:856
+#: bootloader.pm:868
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:857
+#: bootloader.pm:869
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:935
+#: bootloader.pm:947
 #, c-format
 msgid "not enough room in /boot"
 msgstr "Ikke nok plads i /boot"
 
-#: bootloader.pm:1414
+#: bootloader.pm:1433
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Du kan ikke installere opstartsindlæseren på en %s-partition\n"
 
-#: bootloader.pm:1454
+#: bootloader.pm:1473
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1828,7 +1827,7 @@ msgstr ""
 "Din opstartsindlæserkonfiguration behøver at opdateres da rækkefølgen på "
 "dine partitioner er blevet ændret"
 
-#: bootloader.pm:1467
+#: bootloader.pm:1486
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1837,7 +1836,7 @@ msgstr ""
 "Opstartsindlæseren kan ikke blive installeret korrekt. Du skal lave "
 "nødopstart og vælge \"%s\""
 
-#: bootloader.pm:1468
+#: bootloader.pm:1487
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Geninstallér systemopstarter"
@@ -2963,7 +2962,7 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "Krypteringsnøglerne stemmer ikke overens"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1025
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1018
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
@@ -3238,22 +3237,22 @@ msgstr ""
 "\n"
 "Er du indforstået med at ødelægge alle partitionerne?\n"
 
-#: fsedit.pm:381
+#: fsedit.pm:378
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Monteringsstier skal begynde med /"
 
-#: fsedit.pm:382
+#: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Monteringspunkter bør kun indeholde bogstaver og tal"
 
-#: fsedit.pm:383
+#: fsedit.pm:380
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Der findes allerede en partition med monterings-sti %s\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:382
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3264,14 +3263,14 @@ msgstr ""
 "Ingen systemopstarter kan håndtere dette uden en /boot partition.\n"
 "Vær sikker på at tilføje en /boot partition"
 
-#: fsedit.pm:390
+#: fsedit.pm:387
 #, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
 
-#: fsedit.pm:392
+#: fsedit.pm:389
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
@@ -3280,12 +3279,12 @@ msgid ""
 "You should create a /boot partition first"
 msgstr ""
 
-#: fsedit.pm:396 fsedit.pm:398
+#: fsedit.pm:393 fsedit.pm:395
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Dette katalog bør ligge på rod-filsystemet"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:397 fsedit.pm:399
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3294,17 +3293,17 @@ msgstr ""
 "Du skal have et rigtigt filsystem (ext2/ext3, reiserfs, xfs eller jfs) til "
 "dette monteringspunkt\n"
 
-#: fsedit.pm:404
+#: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Du kan ikke bruge et krypteret filsystem for monteringspunkt %s"
 
-#: fsedit.pm:465
+#: fsedit.pm:462
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Ikke nok fri plads til at tildele nye partitioner automatisk"
 
-#: fsedit.pm:467
+#: fsedit.pm:464
 #, c-format
 msgid "Nothing to do"
 msgstr "Ingenting at lave"
@@ -3414,7 +3413,7 @@ msgstr ""
 msgid "Ethernetcard"
 msgstr "Ethernet-kort"
 
-#: harddrake/data.pm:282 network/netconnect.pm:484
+#: harddrake/data.pm:282 network/netconnect.pm:478
 #, c-format
 msgid "Modem"
 msgstr "Modem"
@@ -3632,7 +3631,7 @@ msgid "Trouble shooting"
 msgstr "Problemløsning"
 
 #: harddrake/sound.pm:271 install_steps_interactive.pm:1309 keyboard.pm:391
-#: network/ndiswrapper.pm:95 network/netconnect.pm:463
+#: network/ndiswrapper.pm:95 network/netconnect.pm:457
 #: printer/printerdrake.pm:1429 printer/printerdrake.pm:2460
 #: printer/printerdrake.pm:2559 printer/printerdrake.pm:2605
 #: printer/printerdrake.pm:2672 printer/printerdrake.pm:2707
@@ -3770,8 +3769,8 @@ msgstr ""
 "\n"
 "Den aktuelle driver for dit %s-lydkort er \"%s\" "
 
-#: harddrake/v4l.pm:12 standalone/net_applet:66 standalone/net_applet:67
-#: standalone/net_applet:69
+#: harddrake/v4l.pm:12 standalone/net_applet:64 standalone/net_applet:65
+#: standalone/net_applet:67
 #, c-format
 msgid "Auto-detect"
 msgstr "Automatisk detektion"
@@ -3852,7 +3851,7 @@ msgstr ""
 "betingelserne i den, så klik på '%s'-boksen. Hvis ikke, så vil klikning på "
 "\"%s\"-knappen genstarte din maskine."
 
-#: help.pm:14 install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: help.pm:14 install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
@@ -3945,7 +3944,7 @@ msgid "User name"
 msgstr "Brugernavn"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
-#: install_steps_gtk.pm:699 interactive.pm:432 interactive/newt.pm:321
+#: install_steps_gtk.pm:701 interactive.pm:432 interactive/newt.pm:321
 #: network/thirdparty.pm:322 printer/printerdrake.pm:3962
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
@@ -4297,7 +4296,7 @@ msgstr ""
 "hvordan man opsætter en ny printer. Grænsefladen\n"
 "præsenteret i vores manual ligner den som bruges på installationstidspunktet."
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:612
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:614
 #: standalone/drakbackup:2341 standalone/drakbackup:2345
 #: standalone/drakbackup:2349 standalone/drakbackup:2353
 #, c-format
@@ -6878,28 +6877,28 @@ msgstr "Ingen detaljer"
 msgid "Time remaining "
 msgstr "Resterende tid "
 
-#: install_steps_gtk.pm:502
+#: install_steps_gtk.pm:504
 #, c-format
 msgid "Please wait, preparing installation..."
 msgstr "Vent venligst, forbereder installationen"
 
-#: install_steps_gtk.pm:517
+#: install_steps_gtk.pm:519
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: install_steps_gtk.pm:522
+#: install_steps_gtk.pm:524
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738
 #, c-format
 msgid "Refuse"
 msgstr "Nægt"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:563 install_steps_interactive.pm:742
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6913,34 +6912,34 @@ msgstr ""
 "Hvis du ikke har den så tryk på Annullér for at undgå installation fra denne "
 "cd."
 
-#: install_steps_gtk.pm:576 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:578 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Der opstod en fejl ved sorteringen af pakkerne:"
 
-#: install_steps_gtk.pm:576 install_steps_gtk.pm:580
+#: install_steps_gtk.pm:578 install_steps_gtk.pm:582
 #: install_steps_interactive.pm:753 install_steps_interactive.pm:757
 #, c-format
 msgid "Go on anyway?"
 msgstr "Fortsæt alligevel?"
 
-#: install_steps_gtk.pm:580 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:757
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Der opstod en fejl ved installeringen af pakkerne:"
 
-#: install_steps_gtk.pm:599 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:601 install_steps_interactive.pm:933 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Oversigt"
 
-#: install_steps_gtk.pm:622 install_steps_interactive.pm:929
+#: install_steps_gtk.pm:624 install_steps_interactive.pm:929
 #: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "ikke konfigureret"
 
-#: install_steps_gtk.pm:685
+#: install_steps_gtk.pm:687
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -6949,7 +6948,7 @@ msgstr ""
 "De følgende installationsmedier er fundet.\n"
 "Hvis du ønsker at overspringe nogen af dem, kan du fravælge dem nu."
 
-#: install_steps_gtk.pm:694
+#: install_steps_gtk.pm:696
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -6962,7 +6961,7 @@ msgstr ""
 "Installationen vil så fortsætte fra disken og pakkerne vil forblive "
 "tilgængelige, når systemet er fuldt installeret."
 
-#: install_steps_gtk.pm:696
+#: install_steps_gtk.pm:698
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Kopiér hele cd'er"
@@ -9807,9 +9806,9 @@ msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/modem.pm:68 network/modem.pm:82 network/modem.pm:87
-#: network/modem.pm:120 network/netconnect.pm:583 network/netconnect.pm:588
-#: network/netconnect.pm:600 network/netconnect.pm:605
-#: network/netconnect.pm:621 network/netconnect.pm:623
+#: network/modem.pm:120 network/netconnect.pm:577 network/netconnect.pm:582
+#: network/netconnect.pm:594 network/netconnect.pm:599
+#: network/netconnect.pm:615 network/netconnect.pm:617
 #, c-format
 msgid "Automatic"
 msgstr "Automatisk"
@@ -10153,36 +10152,36 @@ msgstr "Et angreb med cracking af adgangskoder er blevet forsøgt af %s."
 msgid "A \"%s\" attack has been attempted by %s"
 msgstr "Et angreb med portskanning er blevet forsøgt af %s."
 
-#: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
-#: network/netconnect.pm:547 network/netconnect.pm:690
-#: network/netconnect.pm:694
+#: network/isdn.pm:117 network/netconnect.pm:449 network/netconnect.pm:538
+#: network/netconnect.pm:541 network/netconnect.pm:684
+#: network/netconnect.pm:688
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Ikke beskrevet - regigér manuelt"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "I do not know"
 msgstr "Det ved jeg ikke"
 
-#: network/isdn.pm:161 network/netconnect.pm:387
+#: network/isdn.pm:161 network/netconnect.pm:381
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:162 network/netconnect.pm:387
+#: network/isdn.pm:162 network/netconnect.pm:381
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/netconnect.pm:588 network/netconnect.pm:605
-#: network/netconnect.pm:621
+#: network/netconnect.pm:582 network/netconnect.pm:599
+#: network/netconnect.pm:615
 #, c-format
 msgid "Manual"
 msgstr "Manuel"
@@ -10221,8 +10220,8 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr "Kan ikke finde ndiswrapper-grænsefladen!"
 
-#: network/netconnect.pm:69 network/netconnect.pm:485
-#: network/netconnect.pm:492
+#: network/netconnect.pm:69 network/netconnect.pm:479
+#: network/netconnect.pm:486
 #, c-format
 msgid "Manual choice"
 msgstr "Manuelt valg"
@@ -10266,305 +10265,290 @@ msgstr ""
 "Protokol for resten af verden \n"
 " ingen D-kanal (lejet linje)"
 
-#: network/netconnect.pm:120 network/thirdparty.pm:184
+#: network/netconnect.pm:117 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch USB-modem"
 
-#: network/netconnect.pm:121
+#: network/netconnect.pm:118
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Sagem USB-modem"
 
-#: network/netconnect.pm:122
+#: network/netconnect.pm:119
 #, c-format
 msgid "Bewan modem"
 msgstr "Bewan PCI-modem"
 
-#: network/netconnect.pm:123
+#: network/netconnect.pm:120
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "ECI Hi-Focus-modem"
 
-#: network/netconnect.pm:127
+#: network/netconnect.pm:124
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
-#: network/netconnect.pm:128
+#: network/netconnect.pm:125
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Manuel TCP/IP-konfiguration"
 
-#: network/netconnect.pm:129
+#: network/netconnect.pm:126
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Point to Point Tunneling Protocol (PPTP)"
 
-#: network/netconnect.pm:130
+#: network/netconnect.pm:127
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP over Ethernet (PPPoE)"
 
-#: network/netconnect.pm:131
+#: network/netconnect.pm:128
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP over ATM (PPPoA)"
 
-#: network/netconnect.pm:132
+#: network/netconnect.pm:129
 #, c-format
 msgid "DSL over CAPI"
 msgstr "DSL over CAPI"
 
-#: network/netconnect.pm:136
+#: network/netconnect.pm:133
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Bridged Ethernet LLC"
 
-#: network/netconnect.pm:137
+#: network/netconnect.pm:134
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Bridged Ethernet VC"
 
-#: network/netconnect.pm:138
+#: network/netconnect.pm:135
 #, c-format
 msgid "Routed IP LLC"
 msgstr "Rutet IP LLC"
 
-#: network/netconnect.pm:139
+#: network/netconnect.pm:136
 #, c-format
 msgid "Routed IP VC"
 msgstr "Rutet IP VC"
 
-#: network/netconnect.pm:140
+#: network/netconnect.pm:137
 #, c-format
 msgid "PPPoA LLC"
 msgstr "PPPoA LLC"
 
-#: network/netconnect.pm:141
+#: network/netconnect.pm:138
 #, c-format
 msgid "PPPoA VC"
 msgstr "PPPoA VC"
 
-#: network/netconnect.pm:145 standalone/drakconnect:498
+#: network/netconnect.pm:142 standalone/drakconnect:498
 #, c-format
 msgid "Script-based"
 msgstr "Skript-baseret"
 
-#: network/netconnect.pm:146 standalone/drakconnect:498
+#: network/netconnect.pm:143 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:147 standalone/drakconnect:498
+#: network/netconnect.pm:144 standalone/drakconnect:498
 #, c-format
 msgid "Terminal-based"
 msgstr "Terminal-baseret"
 
-#: network/netconnect.pm:148 standalone/drakconnect:498
+#: network/netconnect.pm:145 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:149 standalone/drakconnect:498
+#: network/netconnect.pm:146 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:154
-#, c-format
-msgid "Open WEP"
-msgstr "Åben WEP"
-
-#: network/netconnect.pm:155
-#, c-format
-msgid "Restricted WEP"
-msgstr "Begrænset WEP"
-
-#: network/netconnect.pm:156
-#, c-format
-msgid "WPA Pre-Shared Key"
-msgstr "WPA Forud-delt nøgle"
-
-#: network/netconnect.pm:242 standalone/drakconnect:56
+#: network/netconnect.pm:236 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Konfigurér netværk og internet"
 
-#: network/netconnect.pm:248
+#: network/netconnect.pm:242
 #, c-format
 msgid "LAN connection"
 msgstr "Lokalnet-konfiguration"
 
-#: network/netconnect.pm:249 network/netconnect.pm:268
+#: network/netconnect.pm:243 network/netconnect.pm:262
 #, c-format
 msgid "Wireless connection"
 msgstr "Trådløs forbindelse"
 
-#: network/netconnect.pm:250
+#: network/netconnect.pm:244
 #, c-format
 msgid "ADSL connection"
 msgstr "ADSL opkobling"
 
-#: network/netconnect.pm:251
+#: network/netconnect.pm:245
 #, c-format
 msgid "Cable connection"
 msgstr "Kabelforbindelse"
 
-#: network/netconnect.pm:252
+#: network/netconnect.pm:246
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN-forbindelse"
 
-#: network/netconnect.pm:253
+#: network/netconnect.pm:247
 #, c-format
 msgid "Modem connection"
 msgstr "Modem-forbindelse"
 
-#: network/netconnect.pm:254
+#: network/netconnect.pm:248
 #, c-format
 msgid "DVB connection"
 msgstr ""
 
-#: network/netconnect.pm:264
+#: network/netconnect.pm:258
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Vælg den opkobling, du ønsker at konfigurere"
 
-#: network/netconnect.pm:279 network/netconnect.pm:769
+#: network/netconnect.pm:273 network/netconnect.pm:761
 #, c-format
 msgid "Connection Configuration"
 msgstr "Forbindelses-konfiguration"
 
-#: network/netconnect.pm:279 network/netconnect.pm:770
+#: network/netconnect.pm:273 network/netconnect.pm:762
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Udfyld eller markér feltet nedenunder"
 
-#: network/netconnect.pm:282
+#: network/netconnect.pm:276
 #, c-format
 msgid "Your personal phone number"
 msgstr "Dit personlige telefonnummer"
 
-#: network/netconnect.pm:283 network/netconnect.pm:773
+#: network/netconnect.pm:277 network/netconnect.pm:765
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Navn på udbyder (f.eks. udbyder.net)"
 
-#: network/netconnect.pm:284 standalone/drakconnect:493
+#: network/netconnect.pm:278 standalone/drakconnect:493
 #, c-format
 msgid "Provider phone number"
 msgstr "Udbyders telefonnummer"
 
-#: network/netconnect.pm:285
+#: network/netconnect.pm:279
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "Udbyder DNS 1 (valgfri)"
 
-#: network/netconnect.pm:286
+#: network/netconnect.pm:280
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "Udbyder DNS 2 (valgfri)"
 
-#: network/netconnect.pm:287 standalone/drakconnect:444
+#: network/netconnect.pm:281 standalone/drakconnect:444
 #, c-format
 msgid "Dialing mode"
 msgstr "Opringningsmåde"
 
-#: network/netconnect.pm:288 standalone/drakconnect:449
+#: network/netconnect.pm:282 standalone/drakconnect:449
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
 msgstr "Opkoblingshastighed"
 
-#: network/netconnect.pm:289 standalone/drakconnect:454
+#: network/netconnect.pm:283 standalone/drakconnect:454
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Opkoblingens tidsudløb (i sekunder)"
 
-#: network/netconnect.pm:290 network/netconnect.pm:315
-#: network/netconnect.pm:776 standalone/drakconnect:491
+#: network/netconnect.pm:284 network/netconnect.pm:309
+#: network/netconnect.pm:768 standalone/drakconnect:491
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Konto-login (brugernavn)"
 
-#: network/netconnect.pm:291 network/netconnect.pm:316
-#: network/netconnect.pm:777 standalone/drakconnect:492
+#: network/netconnect.pm:285 network/netconnect.pm:310
+#: network/netconnect.pm:769 standalone/drakconnect:492
 #, c-format
 msgid "Account Password"
 msgstr "Adgangskode for konto"
 
-#: network/netconnect.pm:292 standalone/drakconnect:554
+#: network/netconnect.pm:286 standalone/drakconnect:554
 #, c-format
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: network/netconnect.pm:293 standalone/drakconnect:555
+#: network/netconnect.pm:287 standalone/drakconnect:555
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: network/netconnect.pm:294 standalone/drakconnect:556
+#: network/netconnect.pm:288 standalone/drakconnect:556
 #, c-format
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: network/netconnect.pm:295 standalone/drakconnect:557
+#: network/netconnect.pm:289 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: network/netconnect.pm:296
+#: network/netconnect.pm:290
 #, c-format
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: network/netconnect.pm:311
+#: network/netconnect.pm:305
 #, c-format
 msgid "Cable: account options"
 msgstr "Kabel: indstillinger for konto"
 
-#: network/netconnect.pm:314
+#: network/netconnect.pm:308
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr "Brug BPALogin (nødvendigt for Telstra)"
 
-#: network/netconnect.pm:340 network/netconnect.pm:657
-#: network/netconnect.pm:808 network/netconnect.pm:1120
+#: network/netconnect.pm:334 network/netconnect.pm:651
+#: network/netconnect.pm:800 network/netconnect.pm:1113
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Vælg netværksgrænsesnit, der skal konfigureres:"
 
-#: network/netconnect.pm:342 network/netconnect.pm:377
-#: network/netconnect.pm:658 network/netconnect.pm:810 network/shorewall.pm:69
+#: network/netconnect.pm:336 network/netconnect.pm:371
+#: network/netconnect.pm:652 network/netconnect.pm:802 network/shorewall.pm:69
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
 msgstr "Net-enhed"
 
-#: network/netconnect.pm:343 network/netconnect.pm:348
+#: network/netconnect.pm:337 network/netconnect.pm:342
 #, c-format
 msgid "External ISDN modem"
 msgstr "Eksternt ISDN modem"
 
-#: network/netconnect.pm:376 standalone/harddrake2:216
+#: network/netconnect.pm:370 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
 msgstr "Vælg en enhed!"
 
-#: network/netconnect.pm:385 network/netconnect.pm:395
-#: network/netconnect.pm:405 network/netconnect.pm:438
-#: network/netconnect.pm:452
+#: network/netconnect.pm:379 network/netconnect.pm:389
+#: network/netconnect.pm:399 network/netconnect.pm:432
+#: network/netconnect.pm:446
 #, c-format
 msgid "ISDN Configuration"
 msgstr "ISDN konfiguration"
 
-#: network/netconnect.pm:386
+#: network/netconnect.pm:380
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Hvad slags kort har du?"
 
-#: network/netconnect.pm:396
+#: network/netconnect.pm:390
 #, c-format
 msgid ""
 "\n"
@@ -10578,22 +10562,22 @@ msgstr ""
 "\n"
 "Hvis du har et PCMCIA kort skal du vide irq og io for kortet.\n"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Continue"
 msgstr "Fortsæt"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Abort"
 msgstr "Afbryd"
 
-#: network/netconnect.pm:406
+#: network/netconnect.pm:400
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Hvilket af de følgende er dit ISDN-kort?"
 
-#: network/netconnect.pm:424
+#: network/netconnect.pm:418
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10604,25 +10588,25 @@ msgstr ""
 "faciliteter end den frie driver (såsom sending af faxer). Hvilken driver "
 "ønsker du at bruge?"
 
-#: network/netconnect.pm:426 standalone/drakconnect:109 standalone/drakups:251
+#: network/netconnect.pm:420 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "Drivprogram"
 
-#: network/netconnect.pm:438
+#: network/netconnect.pm:432
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Hvilken protokol ønsker du at bruge?"
 
-#: network/netconnect.pm:440 standalone/drakconnect:109
+#: network/netconnect.pm:434 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
 #: standalone/drakids:196 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
 msgstr "Protokol"
 
-#: network/netconnect.pm:452
+#: network/netconnect.pm:446
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10631,13 +10615,13 @@ msgstr ""
 "Vælg din udbyder.\n"
 " Hvis de ikke er i listen, vælg Ikke listet"
 
-#: network/netconnect.pm:454 network/netconnect.pm:543
-#: network/netconnect.pm:689
+#: network/netconnect.pm:448 network/netconnect.pm:537
+#: network/netconnect.pm:683
 #, c-format
 msgid "Provider:"
 msgstr "Udbyder: "
 
-#: network/netconnect.pm:463
+#: network/netconnect.pm:457
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10646,52 +10630,52 @@ msgstr ""
 "Dit modem er ikke understøttet af systemet.\n"
 "Tag og kig på http://www.linmodems.org"
 
-#: network/netconnect.pm:482
+#: network/netconnect.pm:476
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Vælg det modem, der skal konfigureres:"
 
-#: network/netconnect.pm:512
+#: network/netconnect.pm:506
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Angiv hvilken seriel port dit modem er forbundet til."
 
-#: network/netconnect.pm:541
+#: network/netconnect.pm:535
 #, c-format
 msgid "Select your provider:"
 msgstr "Vælg din udbyder"
 
-#: network/netconnect.pm:565
+#: network/netconnect.pm:559
 #, c-format
 msgid "Dialup: account options"
 msgstr "Indstillinger for konto til opkald"
 
-#: network/netconnect.pm:568
+#: network/netconnect.pm:562
 #, c-format
 msgid "Connection name"
 msgstr "Navn på forbindelsen"
 
-#: network/netconnect.pm:569
+#: network/netconnect.pm:563
 #, c-format
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: network/netconnect.pm:570
+#: network/netconnect.pm:564
 #, c-format
 msgid "Login ID"
 msgstr "Brugernavn"
 
-#: network/netconnect.pm:585 network/netconnect.pm:618
+#: network/netconnect.pm:579 network/netconnect.pm:612
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "IP-parametre for opkald"
 
-#: network/netconnect.pm:588
+#: network/netconnect.pm:582
 #, c-format
 msgid "IP parameters"
 msgstr "IP-parametre"
 
-#: network/netconnect.pm:589 network/netconnect.pm:894
+#: network/netconnect.pm:583 network/netconnect.pm:886
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
 #: standalone/drakhosts:197 standalone/drakups:286
@@ -10699,120 +10683,111 @@ msgstr "IP-parametre"
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: network/netconnect.pm:590
+#: network/netconnect.pm:584
 #, c-format
 msgid "Subnet mask"
 msgstr "Undernetmaske"
 
-#: network/netconnect.pm:602
+#: network/netconnect.pm:596
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Dialup: DNS-parametre"
 
-#: network/netconnect.pm:605
+#: network/netconnect.pm:599
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:606
+#: network/netconnect.pm:600
 #, c-format
 msgid "Domain name"
 msgstr "Domænenavn"
 
-#: network/netconnect.pm:607 network/netconnect.pm:774
+#: network/netconnect.pm:601 network/netconnect.pm:766
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Første DNS-server (valgfri)"
 
-#: network/netconnect.pm:608 network/netconnect.pm:775
+#: network/netconnect.pm:602 network/netconnect.pm:767
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Anden DNS-server (valgfri)"
 
-#: network/netconnect.pm:609
+#: network/netconnect.pm:603
 #, c-format
 msgid "Set hostname from IP"
 msgstr "Sæt værtsnavn ud fra IPadresse"
 
-#: network/netconnect.pm:621 standalone/drakconnect:327
+#: network/netconnect.pm:615 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
 msgstr "Gateway"
 
-#: network/netconnect.pm:622
+#: network/netconnect.pm:616
 #, c-format
 msgid "Gateway IP address"
 msgstr "IP-adresse på gateway"
 
-#: network/netconnect.pm:657
+#: network/netconnect.pm:651
 #, c-format
 msgid "ADSL configuration"
 msgstr "ADSL-konfiguration"
 
-#: network/netconnect.pm:687
+#: network/netconnect.pm:681
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Vælg din ADSL-udbyder"
 
-#: network/netconnect.pm:717
-#, c-format
-msgid "Connect to the Internet"
-msgstr "Lav forbindelse til Internettet"
-
-#: network/netconnect.pm:718
+#: network/netconnect.pm:711
 #, c-format
 msgid ""
-"The most common way to connect with adsl is pppoe.\n"
-"Some connections use PPTP, a few use DHCP.\n"
-"If you do not know, choose 'use PPPoE'"
+"Please choose your DSL connection type.\n"
+"If you do not know it, keep the preselected type."
 msgstr ""
-"Den mest almindelige måde at forbinde med ADSL er pppoe.\n"
-"Nogen forbindelser bruger PPTP, og nogle få bruger DHCP.\n"
-"Hvis du ikke ved noget, vælg 'brug PPPoE'"
 
-#: network/netconnect.pm:722
+#: network/netconnect.pm:714
 #, c-format
 msgid "ADSL connection type:"
 msgstr "ADSL-opkoblingstype"
 
-#: network/netconnect.pm:779
+#: network/netconnect.pm:771
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr "Virtual Path ID (VPI):"
 
-#: network/netconnect.pm:780
+#: network/netconnect.pm:772
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr "Virtual Circuit ID (VCI):"
 
-#: network/netconnect.pm:783
+#: network/netconnect.pm:775
 #, c-format
 msgid "Encapsulation:"
 msgstr "Indpakning:"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Manually load a driver"
 msgstr "Indlæs en driver manuelt"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Brug en Windows-driver (med ndiswrapper)"
 
-#: network/netconnect.pm:850
+#: network/netconnect.pm:842
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "Fremfinding af Zeroconf-værtsnavn"
 
-#: network/netconnect.pm:851 network/netconnect.pm:881
+#: network/netconnect.pm:843 network/netconnect.pm:873
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "Konfigurerer netværksenheden %s (driver %s)"
 
-#: network/netconnect.pm:852
+#: network/netconnect.pm:844
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
@@ -10821,7 +10796,7 @@ msgstr ""
 "De følgende protokoller kan bruges til at konfigurere en LAN-forbindelse. "
 "Vælg venligst den forbindelse du gerne vil bruge"
 
-#: network/netconnect.pm:882
+#: network/netconnect.pm:874
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -10831,196 +10806,196 @@ msgstr ""
 "Indtast IP konfigurationen for denne maskine. Hvert felt skal udfyldes\n"
 "med en IP adresse i `dotted-decimal' notation (for eksempel 1.2.3.4)."
 
-#: network/netconnect.pm:889 standalone/drakconnect:373
+#: network/netconnect.pm:881 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Tildel værtsnavn fra DHCP-adresse"
 
-#: network/netconnect.pm:890 standalone/drakconnect:375
+#: network/netconnect.pm:882 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr "DHCP-værtsnavn"
 
-#: network/netconnect.pm:895 standalone/drakconnect:321
+#: network/netconnect.pm:887 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
 msgstr "Netmaske"
 
-#: network/netconnect.pm:897 standalone/drakconnect:437
+#: network/netconnect.pm:889 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Følg id for netværkskort (nyttigt for bærbare)"
 
-#: network/netconnect.pm:898 standalone/drakconnect:438
+#: network/netconnect.pm:890 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Hotplugging af netværk"
 
-#: network/netconnect.pm:900 standalone/drakconnect:432
+#: network/netconnect.pm:892 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
 msgstr "Start ved opstart"
 
-#: network/netconnect.pm:902 standalone/drakconnect:460
+#: network/netconnect.pm:894 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
 msgstr "Metrisk"
 
-#: network/netconnect.pm:903
+#: network/netconnect.pm:895
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr ""
 
-#: network/netconnect.pm:905 standalone/drakconnect:369
+#: network/netconnect.pm:897 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
 msgstr "DHCP-klient"
 
-#: network/netconnect.pm:907 standalone/drakconnect:379
+#: network/netconnect.pm:899 standalone/drakconnect:379
 #, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "DHCP-tidsudløb (i sekunder)"
 
-#: network/netconnect.pm:908 standalone/drakconnect:382
+#: network/netconnect.pm:900 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Få DNS-servere fra DHCP"
 
-#: network/netconnect.pm:909 standalone/drakconnect:383
+#: network/netconnect.pm:901 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr "Få YP-servere fra DHCP"
 
-#: network/netconnect.pm:910 standalone/drakconnect:384
+#: network/netconnect.pm:902 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr "Få NTPD-servere fra DHCP"
 
-#: network/netconnect.pm:918 printer/printerdrake.pm:1896
+#: network/netconnect.pm:910 printer/printerdrake.pm:1896
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP adresse bør have formatet 1.2.3.4"
 
-#: network/netconnect.pm:922 standalone/drakconnect:680
+#: network/netconnect.pm:914 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "Netmaske bør have formatet 255.255.224.0"
 
-#: network/netconnect.pm:926
+#: network/netconnect.pm:918
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Advarsel: IP-adresse %s er normalt reserveret!"
 
-#: network/netconnect.pm:931 standalone/drakTermServ:1852
+#: network/netconnect.pm:923 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s er allerede i brug\n"
 
-#: network/netconnect.pm:971
+#: network/netconnect.pm:963
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Vælg en ndiswrapper driver"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr "Brug ndiswrapper-driveren %s"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Install a new driver"
 msgstr "Installér en ny driver"
 
-#: network/netconnect.pm:985
+#: network/netconnect.pm:977
 #, c-format
 msgid "Select a device:"
 msgstr "Vælg en enhed:"
 
-#: network/netconnect.pm:1014
+#: network/netconnect.pm:1006
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Indtast de trådløse parametre for dette kort:"
 
-#: network/netconnect.pm:1017 standalone/drakconnect:404
+#: network/netconnect.pm:1009 standalone/drakconnect:404
 #, c-format
 msgid "Operating Mode"
 msgstr "Udførelsestilstand"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Managed"
 msgstr "Administreret (managed)"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Master"
 msgstr "Master"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Repeater"
 msgstr "Forlænger (repeater)"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Secondary"
 msgstr "Sekundær"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Auto"
 msgstr "Auto"
 
-#: network/netconnect.pm:1021 standalone/drakconnect:405
+#: network/netconnect.pm:1013 standalone/drakconnect:405
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "Netværksnavn (ESSID)"
 
-#: network/netconnect.pm:1022
+#: network/netconnect.pm:1014
 #, c-format
 msgid "Encryption mode"
 msgstr "Krypteringstilstand"
 
-#: network/netconnect.pm:1026
+#: network/netconnect.pm:1019
 #, c-format
 msgid "Allow access point roaming"
 msgstr ""
 
-#: network/netconnect.pm:1027 standalone/drakconnect:406
+#: network/netconnect.pm:1020 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr "Netværks-ID"
 
-#: network/netconnect.pm:1028 standalone/drakconnect:407
+#: network/netconnect.pm:1021 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr "Operationsfrekvens"
 
-#: network/netconnect.pm:1029 standalone/drakconnect:408
+#: network/netconnect.pm:1022 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr "Følsomhedstærskel"
 
-#: network/netconnect.pm:1030 standalone/drakconnect:409
+#: network/netconnect.pm:1023 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr "Bitrate (i bit/s)"
 
-#: network/netconnect.pm:1031 standalone/drakconnect:420
+#: network/netconnect.pm:1024 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1032
+#: network/netconnect.pm:1025
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -11044,17 +11019,17 @@ msgstr ""
 "parameter til auto, fixed\n"
 "eller off."
 
-#: network/netconnect.pm:1039 standalone/drakconnect:421
+#: network/netconnect.pm:1032 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr "Fragmentation"
 
-#: network/netconnect.pm:1040 standalone/drakconnect:422
+#: network/netconnect.pm:1033 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
 msgstr "ekstra argumenter til Iwconfig kommando"
 
-#: network/netconnect.pm:1041
+#: network/netconnect.pm:1034
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11070,12 +11045,12 @@ msgstr ""
 "Se iwconfig(8) man-siden for yderligere information."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1048 standalone/drakconnect:423
+#: network/netconnect.pm:1041 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
 msgstr "ekstra argumenter til Iwspy-kommando"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1042
 #, c-format
 msgid ""
 "Iwspy is used to set a list of addresses in a wireless network\n"
@@ -11096,12 +11071,12 @@ msgstr ""
 "\n"
 "Se iwpspy(8) man-side for yderligere information."
 
-#: network/netconnect.pm:1058 standalone/drakconnect:424
+#: network/netconnect.pm:1051 standalone/drakconnect:424
 #, c-format
 msgid "Iwpriv command extra arguments"
 msgstr "ekstra argumenter til Iwpriv-kommando"
 
-#: network/netconnect.pm:1059
+#: network/netconnect.pm:1052
 #, c-format
 msgid ""
 "Iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11131,7 +11106,7 @@ msgstr ""
 "\n"
 "Se iwpriv(8) man-side for yderligere information."
 
-#: network/netconnect.pm:1074
+#: network/netconnect.pm:1067
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11140,7 +11115,7 @@ msgstr ""
 "Frek bør have endelsen k, M or G (for eksempel, \"2.46G\" for 2.46 GHz "
 "frekvens), eller tilføj nok '0'."
 
-#: network/netconnect.pm:1078
+#: network/netconnect.pm:1071
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11149,37 +11124,37 @@ msgstr ""
 "Hastighed bør have endelsen k, M or G (for eksempel, \"11M\" for 11M), eller "
 "tilføj nok '0'."
 
-#: network/netconnect.pm:1120
+#: network/netconnect.pm:1113
 #, c-format
 msgid "DVB configuration"
 msgstr ""
 
-#: network/netconnect.pm:1121
+#: network/netconnect.pm:1114
 #, c-format
 msgid "DVB Adapter"
 msgstr ""
 
-#: network/netconnect.pm:1138
+#: network/netconnect.pm:1131
 #, c-format
 msgid "DVB adapter settings"
 msgstr ""
 
-#: network/netconnect.pm:1141
+#: network/netconnect.pm:1134
 #, c-format
 msgid "Adapter card"
 msgstr ""
 
-#: network/netconnect.pm:1142
+#: network/netconnect.pm:1135
 #, c-format
 msgid "Net demux"
 msgstr ""
 
-#: network/netconnect.pm:1143
+#: network/netconnect.pm:1136
 #, c-format
 msgid "PID"
 msgstr ""
 
-#: network/netconnect.pm:1171
+#: network/netconnect.pm:1164
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11192,68 +11167,68 @@ msgstr ""
 "f.eks. minpc.mitfirma.dk. Hvis du ikke har nogen ekstra navne-servere,\n"
 "så lad navne-server-felterne være blanke."
 
-#: network/netconnect.pm:1176
+#: network/netconnect.pm:1169
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr "Sidst, men ikke mindst, indtast din DNS-servers IP-adresser."
 
-#: network/netconnect.pm:1178 standalone/drakconnect:991
+#: network/netconnect.pm:1171 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr "Værtsnavn (kan udelades)"
 
-#: network/netconnect.pm:1178 standalone/drakhosts:197
+#: network/netconnect.pm:1171 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Værtsnavn"
 
-#: network/netconnect.pm:1180
+#: network/netconnect.pm:1173
 #, c-format
 msgid "DNS server 1"
 msgstr "DNS-server 1"
 
-#: network/netconnect.pm:1181
+#: network/netconnect.pm:1174
 #, c-format
 msgid "DNS server 2"
 msgstr "DNS-server 2"
 
-#: network/netconnect.pm:1182
+#: network/netconnect.pm:1175
 #, c-format
 msgid "DNS server 3"
 msgstr "DNS-server 3"
 
-#: network/netconnect.pm:1183
+#: network/netconnect.pm:1176
 #, c-format
 msgid "Search domain"
 msgstr "domæne der søges i"
 
-#: network/netconnect.pm:1184
+#: network/netconnect.pm:1177
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr ""
 "Som standard vil søge-domænet blive sat ud fra det fuldt angivne værtsnavn"
 
-#: network/netconnect.pm:1185
+#: network/netconnect.pm:1178
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Gateway (fx %s)"
 
-#: network/netconnect.pm:1187
+#: network/netconnect.pm:1180
 #, c-format
 msgid "Gateway device"
 msgstr "Gateway enhed"
 
-#: network/netconnect.pm:1196
+#: network/netconnect.pm:1189
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Adresse på DNS-server skal have formatet 1.2.3.4"
 
-#: network/netconnect.pm:1201 standalone/drakconnect:685
+#: network/netconnect.pm:1194 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "Gateway-adresse skal have formatet 1.2.3.4"
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1207
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11266,67 +11241,67 @@ msgstr ""
 "delte ressourcer som ikke er styret af netværket.\n"
 "Dette er ikke nødvendigt på de fleste netværk."
 
-#: network/netconnect.pm:1218
+#: network/netconnect.pm:1211
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Zeroconf-værtsnavn"
 
-#: network/netconnect.pm:1221
+#: network/netconnect.pm:1214
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Zeroconf værtsnavn må ikke indeholde et ."
 
-#: network/netconnect.pm:1231
+#: network/netconnect.pm:1224
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Ønsker du at tillade brugere at starte din forbindelse?"
 
-#: network/netconnect.pm:1244
+#: network/netconnect.pm:1237
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Ønsker du at starte din forbindelse ved opstart?"
 
-#: network/netconnect.pm:1259
+#: network/netconnect.pm:1252
 #, c-format
 msgid "Automatically at boot"
 msgstr "Automatisk ved opstart"
 
-#: network/netconnect.pm:1261
+#: network/netconnect.pm:1254
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr "Ved brug af Net Applet i statusfeltet"
 
-#: network/netconnect.pm:1263
+#: network/netconnect.pm:1256
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr "Manuelt (grænsesnittet vil stadig blive aktiveret ved opstart)"
 
-#: network/netconnect.pm:1272
+#: network/netconnect.pm:1265
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Hvordan ønsker du at kalde denne forbindelse op?"
 
-#: network/netconnect.pm:1285
+#: network/netconnect.pm:1278
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Ønsker du at forsøge at skabe forbindelse til Internettet nu?"
 
-#: network/netconnect.pm:1293 standalone/drakconnect:1023
+#: network/netconnect.pm:1286 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr "Tester din forbindelse..."
 
-#: network/netconnect.pm:1313
+#: network/netconnect.pm:1306
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Systemet er nu forbundet til Internettet."
 
-#: network/netconnect.pm:1314
+#: network/netconnect.pm:1307
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Af sikkerhedsgrunde vil det blive afbrudt nu."
 
-#: network/netconnect.pm:1315
+#: network/netconnect.pm:1308
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11335,7 +11310,7 @@ msgstr ""
 "Det lader ikke til at dit system har forbindelse til Internettet.\n"
 "Prøv at omkonfigurere din forbindelse."
 
-#: network/netconnect.pm:1330
+#: network/netconnect.pm:1323
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11344,7 +11319,7 @@ msgstr ""
 "Tillykke, netværks- og internetkonfigurationen er færdig.\n"
 "\n"
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1326
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11353,7 +11328,7 @@ msgstr ""
 "Derefter anbefaler vi at du genstarter dit X-miljø for\n"
 "at undgå problemer med det ændrede værtsnavn"
 
-#: network/netconnect.pm:1334
+#: network/netconnect.pm:1327
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11364,28 +11339,28 @@ msgstr ""
 "Afprøv din forbindelse med net_monitor eller mcc. Hvis din forbindelse ikke "
 "virker, kan du prøve at genstarte konfigurationen."
 
-#: network/netconnect.pm:1345
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(detekteret på port %s)"
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected %s)"
 msgstr "(detekterede %s)"
 
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected)"
 msgstr "(detekteret)"
 
-#: network/netconnect.pm:1348
+#: network/netconnect.pm:1341
 #, c-format
 msgid "Network Configuration"
 msgstr "Konfigurér netværk"
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1342
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11398,12 +11373,12 @@ msgstr ""
 "Klik OK for at beholde din konfiguration, eller annullér for at "
 "omkonfigurere din Internet- og netværksforbindelse.\n"
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1345
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr "Netværket skal være genstartet. Ønsker du at genstarte det?"
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1346
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11414,7 +11389,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1354
+#: network/netconnect.pm:1347
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -11427,12 +11402,12 @@ msgstr ""
 "\n"
 "Tryk '%s' for at fortsætte."
 
-#: network/netconnect.pm:1355
+#: network/netconnect.pm:1348
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfiguration er færdig, ønsker du at effektuere indstillinger?"
 
-#: network/netconnect.pm:1356
+#: network/netconnect.pm:1349
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11443,12 +11418,12 @@ msgstr ""
 "Venligst vælg den du ønsker at bruger.\n"
 "\n"
 
-#: network/netconnect.pm:1357
+#: network/netconnect.pm:1350
 #, c-format
 msgid "Internet connection"
 msgstr "Internet opkobling"
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1367
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11621,6 +11596,21 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "Vent venligst, finder og konfigurerer enheder..."
+
+#: network/wireless.pm:8
+#, c-format
+msgid "Open WEP"
+msgstr "Åben WEP"
+
+#: network/wireless.pm:9
+#, c-format
+msgid "Restricted WEP"
+msgstr "Begrænset WEP"
+
+#: network/wireless.pm:10
+#, c-format
+msgid "WPA Pre-Shared Key"
+msgstr "WPA Forud-delt nøgle"
 
 #: partition_table.pm:391
 #, c-format
@@ -21081,7 +21071,7 @@ msgstr "Bus"
 msgid "Location on the bus"
 msgstr "Plads på bussen"
 
-#: standalone/drakconnect:700 standalone/drakgw:313
+#: standalone/drakconnect:700 standalone/drakgw:311
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -21205,7 +21195,7 @@ msgstr ""
 "Dette grænsesnit er ikke blevet konfigureret endnu.\n"
 "Kør 'Tilføj et grænsesnit'-hjælperen fra Mandriva Linux Kontrolcentret"
 
-#: standalone/drakconnect:975 standalone/net_applet:53
+#: standalone/drakconnect:975 standalone/net_applet:51
 #, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -21215,7 +21205,7 @@ msgstr ""
 "Kør '%s'-hjælperen fra Mandriva Linux Kontrolcentret"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:54
+#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:52
 #, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Opsætning af et nyt netværkgrænsesnit (LAN, ISDN, ADSL, ...)"
@@ -21775,7 +21765,7 @@ msgstr ""
 msgid "The DNS Server IP"
 msgstr "DHCP-serverens IP-adresse"
 
-#: standalone/drakgw:238
+#: standalone/drakgw:236
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -21790,77 +21780,77 @@ msgstr ""
 "Hvis du ikke kender betydningen af en valgmulighed, så lad den blot være som "
 "den er."
 
-#: standalone/drakgw:245
+#: standalone/drakgw:243
 #, fuzzy, c-format
 msgid "Use automatic configuration (DHCP)"
 msgstr "Automatisk rekonfiguration"
 
-#: standalone/drakgw:246
+#: standalone/drakgw:244
 #, c-format
 msgid "The DHCP start range"
 msgstr "Begyndelsen på DHCP-området"
 
-#: standalone/drakgw:247
+#: standalone/drakgw:245
 #, c-format
 msgid "The DHCP end range"
 msgstr "Stutningen på DHCP-området"
 
-#: standalone/drakgw:248
+#: standalone/drakgw:246
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "Normal udlejningsperiode (i sekunder)"
 
-#: standalone/drakgw:249
+#: standalone/drakgw:247
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "Største udlejningsperiode (i sekunder)"
 
-#: standalone/drakgw:272
+#: standalone/drakgw:270
 #, c-format
 msgid "Proxy caching server (SQUID)"
 msgstr ""
 
-#: standalone/drakgw:276
+#: standalone/drakgw:274
 #, c-format
 msgid "Use this gateway as proxy caching server"
 msgstr ""
 
-#: standalone/drakgw:277
+#: standalone/drakgw:275
 #, c-format
 msgid "Admin mail"
 msgstr ""
 
-#: standalone/drakgw:278
+#: standalone/drakgw:276
 #, fuzzy, c-format
 msgid "Visible hostname"
 msgstr "Eksternt værtsnavn"
 
-#: standalone/drakgw:279
+#: standalone/drakgw:277
 #, fuzzy, c-format
 msgid "Proxy port"
 msgstr "Egenskab"
 
-#: standalone/drakgw:280
+#: standalone/drakgw:278
 #, fuzzy, c-format
 msgid "Cache size (MB)"
 msgstr "Størrelse på cachen"
 
-#: standalone/drakgw:302
+#: standalone/drakgw:300
 #, fuzzy, c-format
 msgid "Broadcast printer information"
 msgstr "Drev-information"
 
-#: standalone/drakgw:319
+#: standalone/drakgw:317
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
 msgstr "Deling af internetforbindelse er nu slået til"
 
-#: standalone/drakgw:325
+#: standalone/drakgw:323
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
 msgstr "Deling af internetforbindelse er nu slået fra"
 
-#: standalone/drakgw:331
+#: standalone/drakgw:329
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -21873,17 +21863,17 @@ msgstr ""
 "netværk, ved at bruge automatisk netværkskonfigurering (DHCP)\n"
 "og en usynlig proxy-bufferserver (SQUID)."
 
-#: standalone/drakgw:366
+#: standalone/drakgw:364
 #, c-format
 msgid "Disabling servers..."
 msgstr "Slår servere fra..."
 
-#: standalone/drakgw:380
+#: standalone/drakgw:378
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Brandmurkonfiguration fundet!"
 
-#: standalone/drakgw:381
+#: standalone/drakgw:379
 #, c-format
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
@@ -21892,12 +21882,12 @@ msgstr ""
 "Advarsel! En eksisterende brandmurkonfiguration er blevet fundet. Du skal "
 "muligvis lave manuelle rettelser efter installationen."
 
-#: standalone/drakgw:386
+#: standalone/drakgw:384
 #, c-format
 msgid "Configuring..."
 msgstr "Konfigurerer..."
 
-#: standalone/drakgw:387
+#: standalone/drakgw:385
 #, c-format
 msgid "Configuring firewall..."
 msgstr ""
@@ -22031,7 +22021,7 @@ msgstr "Tillad alle brugere"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
-#: standalone/net_applet:61 standalone/net_applet:183
+#: standalone/net_applet:59 standalone/net_applet:181
 #: standalone/net_applet:353 standalone/net_applet:390
 #, fuzzy, c-format
 msgid "Interactive Firewall"
@@ -22073,7 +22063,7 @@ msgid "Remove from whitelist"
 msgstr "Fjern fra LVM"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
-#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:183
+#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:181
 #: standalone/net_applet:353
 #, fuzzy, c-format
 msgid "Unable to contact daemon"
@@ -22308,10 +22298,9 @@ msgstr ""
 msgid "Anonymous Group ID:"
 msgstr ""
 
-#: standalone/draknfs:433 standalone/draknfs:525 standalone/draksambashare:625
-#: standalone/draksambashare:792
+#: standalone/draknfs:433
 #, c-format
-msgid "Please enter a directory to share."
+msgid "Can't create this directory."
 msgstr ""
 
 #: standalone/draknfs:435
@@ -22337,6 +22326,12 @@ msgstr ""
 #: standalone/draknfs:513
 #, c-format
 msgid "Custom Options"
+msgstr ""
+
+#: standalone/draknfs:525 standalone/draksambashare:625
+#: standalone/draksambashare:792
+#, c-format
+msgid "Please enter a directory to share."
 msgstr ""
 
 #: standalone/draknfs:532
@@ -22944,7 +22939,7 @@ msgstr ""
 
 #: standalone/draksambashare:433
 #, c-format
-msgid "pdf-gen - a pdf generator"
+msgid "pdf-gen - a PDF generator"
 msgstr ""
 
 #: standalone/draksambashare:434
@@ -22965,7 +22960,7 @@ msgstr ""
 
 #: standalone/draksambashare:449
 #, c-format
-msgid "A pdf gnerator already exist."
+msgid "A PDF generator already exists."
 msgstr ""
 
 #: standalone/draksambashare:473
@@ -26508,53 +26503,53 @@ msgstr "Test af musen"
 msgid "Please test your mouse:"
 msgstr "Afprøv venligst din mus:"
 
-#: standalone/net_applet:49
+#: standalone/net_applet:47
 #, c-format
 msgid "Network is up on interface %s"
 msgstr "Netværket er oppe på grænsesnittet %s"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:52
+#: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr "Netværk er nede på grænsesnit %s. Klik på 'Konfigurér netværk'"
 
-#: standalone/net_applet:58 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "Tilslut %s"
 
-#: standalone/net_applet:59 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "Frakobl %s"
 
-#: standalone/net_applet:60
+#: standalone/net_applet:58
 #, c-format
 msgid "Monitor Network"
 msgstr "Overvåg netværk"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
 msgstr ""
 
-#: standalone/net_applet:63
+#: standalone/net_applet:61
 #, c-format
 msgid "Configure Network"
 msgstr "Konfigurér netværk"
 
-#: standalone/net_applet:65
+#: standalone/net_applet:63
 #, c-format
 msgid "Watched interface"
 msgstr "Overvåget grænseflade"
 
-#: standalone/net_applet:74
+#: standalone/net_applet:72
 #, c-format
 msgid "Profiles"
 msgstr "Profiler"
 
-#: standalone/net_applet:83
+#: standalone/net_applet:81
 #, c-format
 msgid "Get Online Help"
 msgstr "Få hjælp på nettet"
@@ -27591,6 +27586,18 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installation mislykkedes"
+
+#~ msgid "Connect to the Internet"
+#~ msgstr "Lav forbindelse til Internettet"
+
+#~ msgid ""
+#~ "The most common way to connect with adsl is pppoe.\n"
+#~ "Some connections use PPTP, a few use DHCP.\n"
+#~ "If you do not know, choose 'use PPPoE'"
+#~ msgstr ""
+#~ "Den mest almindelige måde at forbinde med ADSL er pppoe.\n"
+#~ "Nogen forbindelser bruger PPTP, og nogle få bruger DHCP.\n"
+#~ "Hvis du ikke ved noget, vælg 'brug PPPoE'"
 
 #~ msgid "Do not print any test page"
 #~ msgstr "Udskriv ikke nogen testsider"

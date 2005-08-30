@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-tl\n"
-"POT-Creation-Date: 2005-08-28 17:40+0800\n"
+"POT-Creation-Date: 2005-08-30 18:05+0800\n"
 "PO-Revision-Date: 2004-09-15 13:35+0200\n"
 "Last-Translator: Arys P. Deloso <arys@deloso.org>\n"
 "Language-Team: Filipino <salinpinoy@comitus.net>\n"
@@ -177,11 +177,11 @@ msgstr "Maghintay lamang, tinitiktikan at kino-configure ang mga \"device\"..."
 #: install_steps.pm:81 install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
-#: network/netconnect.pm:918 network/netconnect.pm:922
-#: network/netconnect.pm:926 network/netconnect.pm:931
-#: network/netconnect.pm:1074 network/netconnect.pm:1078
-#: network/netconnect.pm:1196 network/netconnect.pm:1201
-#: network/netconnect.pm:1221 network/netconnect.pm:1374
+#: network/netconnect.pm:910 network/netconnect.pm:914
+#: network/netconnect.pm:918 network/netconnect.pm:923
+#: network/netconnect.pm:1067 network/netconnect.pm:1071
+#: network/netconnect.pm:1189 network/netconnect.pm:1194
+#: network/netconnect.pm:1214 network/netconnect.pm:1367
 #: network/thirdparty.pm:266 network/thirdparty.pm:273
 #: network/thirdparty.pm:309 network/thirdparty.pm:311
 #: network/thirdparty.pm:332 network/thirdparty.pm:356
@@ -493,7 +493,7 @@ msgstr "Custom"
 #: printer/printerdrake.pm:4686 printer/printerdrake.pm:5141
 #: standalone/drakhosts:263 standalone/drakids:62 standalone/drakids:71
 #: standalone/drakids:79 standalone/draksplash:81 standalone/logdrake:173
-#: standalone/net_applet:84 standalone/scannerdrake:477
+#: standalone/net_applet:82 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Quit"
@@ -684,7 +684,7 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:634 interactive.pm:527
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:636 interactive.pm:527
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
@@ -994,7 +994,7 @@ msgid "Force No Local APIC"
 msgstr "Piliting Walang Local APIC"
 
 #: any.pm:294 any.pm:648 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:571 printer/printerdrake.pm:1887
+#: network/netconnect.pm:565 printer/printerdrake.pm:1887
 #: printer/printerdrake.pm:2008 standalone/drakbackup:1630
 #: standalone/drakbackup:3504 standalone/drakups:299
 #, c-format
@@ -1385,10 +1385,9 @@ msgstr "Advanced"
 msgid "Input method:"
 msgstr "Net Method:"
 
-#: any.pm:854 install_any.pm:421 network/netconnect.pm:153
-#: network/netconnect.pm:309 network/netconnect.pm:314
-#: network/netconnect.pm:1187 printer/printerdrake.pm:105
-#: printer/printerdrake.pm:2429
+#: any.pm:854 install_any.pm:421 network/netconnect.pm:303
+#: network/netconnect.pm:308 network/netconnect.pm:1180 network/wireless.pm:7
+#: printer/printerdrake.pm:105 printer/printerdrake.pm:2429
 #, c-format
 msgid "None"
 msgstr "Wala"
@@ -1735,7 +1734,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Masyadong maikli ang password na ito (dapat hindi iikli sa %d character)"
 
-#: authentication.pm:188 network/netconnect.pm:314 network/netconnect.pm:572
+#: authentication.pm:188 network/netconnect.pm:308 network/netconnect.pm:566
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
@@ -1747,7 +1746,7 @@ msgid "Can not use broadcast with no NIS domain"
 msgstr "Hindi magagamit ang \"broadcast\" na walang NIS domain"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:753
+#: bootloader.pm:765
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1762,42 +1761,42 @@ msgstr ""
 "para sa default na boot.\n"
 "\n"
 
-#: bootloader.pm:853
+#: bootloader.pm:865
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO na may \"graphical menu\""
 
-#: bootloader.pm:854
+#: bootloader.pm:866
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO na may \"text menu\""
 
-#: bootloader.pm:855
+#: bootloader.pm:867
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr ""
 
-#: bootloader.pm:856
+#: bootloader.pm:868
 #, c-format
 msgid "GRUB with text menu"
 msgstr ""
 
-#: bootloader.pm:857
+#: bootloader.pm:869
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:935
+#: bootloader.pm:947
 #, c-format
 msgid "not enough room in /boot"
 msgstr "Walang sapat na puwang sa /boot"
 
-#: bootloader.pm:1414
+#: bootloader.pm:1433
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Hindi maaaring i-install ang bootloader sa isang partisyon ng %s\n"
 
-#: bootloader.pm:1454
+#: bootloader.pm:1473
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1806,7 +1805,7 @@ msgstr ""
 "Ang configuration ng inyong bootloader ay dapat ma-update dahil nabago ang "
 "bilang ng partisyon"
 
-#: bootloader.pm:1467
+#: bootloader.pm:1486
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1815,7 +1814,7 @@ msgstr ""
 "Hindi ma-install ng tama ang bootloader. Dapat i-boot ninyo ang rescue at "
 "piliin ang \"%s\""
 
-#: bootloader.pm:1468
+#: bootloader.pm:1487
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "I-install ulit ang Boot loader"
@@ -2940,7 +2939,7 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "Ang mga \"encryption key\" ay hindi magkatumbas"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1025
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1018
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
@@ -3233,24 +3232,24 @@ msgstr ""
 "\n"
 "Pumapayag ba kayo na mawala ang mga partisyon?\n"
 
-#: fsedit.pm:381
+#: fsedit.pm:378
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Ang mga \"mount point\" ay dapat mag-umpisa sa /"
 
-#: fsedit.pm:382
+#: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr ""
 "Ang mga \"mount point\" ay dapat maglaman lamang ng mga character na "
 "\"alphanumeric\""
 
-#: fsedit.pm:383
+#: fsedit.pm:380
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Mayroon nang partisyon na may \"mount point\" na %s\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:382
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3262,14 +3261,14 @@ msgstr ""
 "boot.\n"
 "Tiyaking magdagdag ng partisyon na /boot"
 
-#: fsedit.pm:390
+#: fsedit.pm:387
 #, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
 
-#: fsedit.pm:392
+#: fsedit.pm:389
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
@@ -3278,12 +3277,12 @@ msgid ""
 "You should create a /boot partition first"
 msgstr ""
 
-#: fsedit.pm:396 fsedit.pm:398
+#: fsedit.pm:393 fsedit.pm:395
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ang directory na ito ay dapat manatili sa loob filesystem na root"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:397 fsedit.pm:399
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3292,19 +3291,19 @@ msgstr ""
 "Kailangan ninyo ng tunay na filesystem (ext2/ext3, reiserfs, xfs, o jfs) "
 "para sa mount point na ito\n"
 
-#: fsedit.pm:404
+#: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
 "Hindi kayo maaaring gumamit ng encrypted na file system para sa mount point "
 "na %s"
 
-#: fsedit.pm:465
+#: fsedit.pm:462
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Walang sapat na puwang para sa pag-auto-allocate"
 
-#: fsedit.pm:467
+#: fsedit.pm:464
 #, c-format
 msgid "Nothing to do"
 msgstr "Walang kailangang gawin"
@@ -3414,7 +3413,7 @@ msgstr ""
 msgid "Ethernetcard"
 msgstr "Ethernetcard"
 
-#: harddrake/data.pm:282 network/netconnect.pm:484
+#: harddrake/data.pm:282 network/netconnect.pm:478
 #, c-format
 msgid "Modem"
 msgstr "Modem"
@@ -3634,7 +3633,7 @@ msgid "Trouble shooting"
 msgstr "Tino-troubleshoot"
 
 #: harddrake/sound.pm:271 install_steps_interactive.pm:1309 keyboard.pm:391
-#: network/ndiswrapper.pm:95 network/netconnect.pm:463
+#: network/ndiswrapper.pm:95 network/netconnect.pm:457
 #: printer/printerdrake.pm:1429 printer/printerdrake.pm:2460
 #: printer/printerdrake.pm:2559 printer/printerdrake.pm:2605
 #: printer/printerdrake.pm:2672 printer/printerdrake.pm:2707
@@ -3777,8 +3776,8 @@ msgstr ""
 "\n"
 "Ang kasalukuyang driver para sa inyong \"%s\" na sound card ay \"%s\" "
 
-#: harddrake/v4l.pm:12 standalone/net_applet:66 standalone/net_applet:67
-#: standalone/net_applet:69
+#: harddrake/v4l.pm:12 standalone/net_applet:64 standalone/net_applet:65
+#: standalone/net_applet:67
 #, c-format
 msgid "Auto-detect"
 msgstr "Auto na pagtiktik"
@@ -3860,7 +3859,7 @@ msgstr ""
 "kayo ay sumasang-ayon sa lahat ng nasasaad, i-check ang \"%s\" na box.\n"
 "Kung hindi, i-click ang \"%s\" na button para i-reboot ang inyong computer."
 
-#: help.pm:14 install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: help.pm:14 install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
@@ -3967,7 +3966,7 @@ msgid "User name"
 msgstr "\"User name\""
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
-#: install_steps_gtk.pm:699 interactive.pm:432 interactive/newt.pm:321
+#: install_steps_gtk.pm:701 interactive.pm:432 interactive/newt.pm:321
 #: network/thirdparty.pm:322 printer/printerdrake.pm:3962
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
@@ -4347,7 +4346,7 @@ msgstr ""
 "bagong printer. Ang iniharap na interface doon ay katulad ng ginamit noong\n"
 "installation."
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:612
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:614
 #: standalone/drakbackup:2341 standalone/drakbackup:2345
 #: standalone/drakbackup:2349 standalone/drakbackup:2353
 #, c-format
@@ -7123,28 +7122,28 @@ msgstr "Walang detalye"
 msgid "Time remaining "
 msgstr "Nalalabing oras "
 
-#: install_steps_gtk.pm:502
+#: install_steps_gtk.pm:504
 #, c-format
 msgid "Please wait, preparing installation..."
 msgstr "Maghintay, naghahandang mag-install..."
 
-#: install_steps_gtk.pm:517
+#: install_steps_gtk.pm:519
 #, c-format
 msgid "%d packages"
 msgstr "%d mga package"
 
-#: install_steps_gtk.pm:522
+#: install_steps_gtk.pm:524
 #, c-format
 msgid "Installing package %s"
 msgstr "Ini-install ang package na %s"
 
-#: install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738
 #, c-format
 msgid "Refuse"
 msgstr "Tanggihan"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:563 install_steps_interactive.pm:742
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -7158,41 +7157,41 @@ msgstr ""
 "ang Ok pagkatapos. Kung wala kayo nito, pindutin ang Cancel para iwasang\n"
 "mag-install mula sa CD-ROM na ito."
 
-#: install_steps_gtk.pm:576 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:578 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "May error sa pagsasaayos ng mga package:"
 
-#: install_steps_gtk.pm:576 install_steps_gtk.pm:580
+#: install_steps_gtk.pm:578 install_steps_gtk.pm:582
 #: install_steps_interactive.pm:753 install_steps_interactive.pm:757
 #, c-format
 msgid "Go on anyway?"
 msgstr "Magpatuloy pa rin?"
 
-#: install_steps_gtk.pm:580 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:757
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "May error sa pag-i-install ng mga package na:"
 
-#: install_steps_gtk.pm:599 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:601 install_steps_interactive.pm:933 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Kabuuan"
 
-#: install_steps_gtk.pm:622 install_steps_interactive.pm:929
+#: install_steps_gtk.pm:624 install_steps_interactive.pm:929
 #: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "hindi na-configure"
 
-#: install_steps_gtk.pm:685
+#: install_steps_gtk.pm:687
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: install_steps_gtk.pm:694
+#: install_steps_gtk.pm:696
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -7201,7 +7200,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: install_steps_gtk.pm:696
+#: install_steps_gtk.pm:698
 #, c-format
 msgid "Copy whole CDs"
 msgstr ""
@@ -10059,9 +10058,9 @@ msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/modem.pm:68 network/modem.pm:82 network/modem.pm:87
-#: network/modem.pm:120 network/netconnect.pm:583 network/netconnect.pm:588
-#: network/netconnect.pm:600 network/netconnect.pm:605
-#: network/netconnect.pm:621 network/netconnect.pm:623
+#: network/modem.pm:120 network/netconnect.pm:577 network/netconnect.pm:582
+#: network/netconnect.pm:594 network/netconnect.pm:599
+#: network/netconnect.pm:615 network/netconnect.pm:617
 #, c-format
 msgid "Automatic"
 msgstr "Automatic"
@@ -10406,36 +10405,36 @@ msgstr ""
 msgid "A \"%s\" attack has been attempted by %s"
 msgstr ""
 
-#: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
-#: network/netconnect.pm:547 network/netconnect.pm:690
-#: network/netconnect.pm:694
+#: network/isdn.pm:117 network/netconnect.pm:449 network/netconnect.pm:538
+#: network/netconnect.pm:541 network/netconnect.pm:684
+#: network/netconnect.pm:688
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Hindi nakatala - i-edit ng mano-mano"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "I do not know"
 msgstr "Hindi ko alam"
 
-#: network/isdn.pm:161 network/netconnect.pm:387
+#: network/isdn.pm:161 network/netconnect.pm:381
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:162 network/netconnect.pm:387
+#: network/isdn.pm:162 network/netconnect.pm:381
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/netconnect.pm:588 network/netconnect.pm:605
-#: network/netconnect.pm:621
+#: network/netconnect.pm:582 network/netconnect.pm:599
+#: network/netconnect.pm:615
 #, c-format
 msgid "Manual"
 msgstr "Mano-mano"
@@ -10472,8 +10471,8 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr ""
 
-#: network/netconnect.pm:69 network/netconnect.pm:485
-#: network/netconnect.pm:492
+#: network/netconnect.pm:69 network/netconnect.pm:479
+#: network/netconnect.pm:486
 #, c-format
 msgid "Manual choice"
 msgstr "Mano-manong pili"
@@ -10517,305 +10516,290 @@ msgstr ""
 "Protocol para sa labi ng mundo\n"
 "Walang D-Channel (leased line)"
 
-#: network/netconnect.pm:120 network/thirdparty.pm:184
+#: network/netconnect.pm:117 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch USB modem"
 
-#: network/netconnect.pm:121
+#: network/netconnect.pm:118
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Sagem USB modem"
 
-#: network/netconnect.pm:122
+#: network/netconnect.pm:119
 #, c-format
 msgid "Bewan modem"
 msgstr "Bewan modem"
 
-#: network/netconnect.pm:123
+#: network/netconnect.pm:120
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "ECI Hi-Focus modem"
 
-#: network/netconnect.pm:127
+#: network/netconnect.pm:124
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
-#: network/netconnect.pm:128
+#: network/netconnect.pm:125
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Mano-manong pag-configure ng TCP/IP"
 
-#: network/netconnect.pm:129
+#: network/netconnect.pm:126
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Point to Point Tunneling Protocol (PPTP)"
 
-#: network/netconnect.pm:130
+#: network/netconnect.pm:127
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP over Ethernet (PPPoE)"
 
-#: network/netconnect.pm:131
+#: network/netconnect.pm:128
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP over ATM (PPPoA)"
 
-#: network/netconnect.pm:132
+#: network/netconnect.pm:129
 #, c-format
 msgid "DSL over CAPI"
 msgstr ""
 
-#: network/netconnect.pm:136
+#: network/netconnect.pm:133
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Bridged Ethernet LLC"
 
-#: network/netconnect.pm:137
+#: network/netconnect.pm:134
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Bridged Ethernet VC"
 
-#: network/netconnect.pm:138
+#: network/netconnect.pm:135
 #, c-format
 msgid "Routed IP LLC"
 msgstr "Routed IP LLC"
 
-#: network/netconnect.pm:139
+#: network/netconnect.pm:136
 #, c-format
 msgid "Routed IP VC"
 msgstr "Routed IP VC"
 
-#: network/netconnect.pm:140
+#: network/netconnect.pm:137
 #, c-format
 msgid "PPPoA LLC"
 msgstr "PPPoA LLC"
 
-#: network/netconnect.pm:141
+#: network/netconnect.pm:138
 #, c-format
 msgid "PPPoA VC"
 msgstr "PPPoA VC"
 
-#: network/netconnect.pm:145 standalone/drakconnect:498
+#: network/netconnect.pm:142 standalone/drakconnect:498
 #, c-format
 msgid "Script-based"
 msgstr "Script-based"
 
-#: network/netconnect.pm:146 standalone/drakconnect:498
+#: network/netconnect.pm:143 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:147 standalone/drakconnect:498
+#: network/netconnect.pm:144 standalone/drakconnect:498
 #, c-format
 msgid "Terminal-based"
 msgstr "Terminal-based"
 
-#: network/netconnect.pm:148 standalone/drakconnect:498
+#: network/netconnect.pm:145 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:149 standalone/drakconnect:498
+#: network/netconnect.pm:146 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:154
-#, c-format
-msgid "Open WEP"
-msgstr ""
-
-#: network/netconnect.pm:155
-#, c-format
-msgid "Restricted WEP"
-msgstr ""
-
-#: network/netconnect.pm:156
-#, c-format
-msgid "WPA Pre-Shared Key"
-msgstr ""
-
-#: network/netconnect.pm:242 standalone/drakconnect:56
+#: network/netconnect.pm:236 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Pagko-configure ng Network & Internet"
 
-#: network/netconnect.pm:248
+#: network/netconnect.pm:242
 #, c-format
 msgid "LAN connection"
 msgstr "LAN na koneksyon"
 
-#: network/netconnect.pm:249 network/netconnect.pm:268
+#: network/netconnect.pm:243 network/netconnect.pm:262
 #, c-format
 msgid "Wireless connection"
 msgstr "Wireless na koneksyon"
 
-#: network/netconnect.pm:250
+#: network/netconnect.pm:244
 #, c-format
 msgid "ADSL connection"
 msgstr "ADSL na koneksyon"
 
-#: network/netconnect.pm:251
+#: network/netconnect.pm:245
 #, c-format
 msgid "Cable connection"
 msgstr "Cable na koneksyon"
 
-#: network/netconnect.pm:252
+#: network/netconnect.pm:246
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN na koneksyon"
 
-#: network/netconnect.pm:253
+#: network/netconnect.pm:247
 #, c-format
 msgid "Modem connection"
 msgstr "Modem na koneksyon"
 
-#: network/netconnect.pm:254
+#: network/netconnect.pm:248
 #, c-format
 msgid "DVB connection"
 msgstr ""
 
-#: network/netconnect.pm:264
+#: network/netconnect.pm:258
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Piliin ang koneksyon na gusto ninyong i-configure"
 
-#: network/netconnect.pm:279 network/netconnect.pm:769
+#: network/netconnect.pm:273 network/netconnect.pm:761
 #, c-format
 msgid "Connection Configuration"
 msgstr "Pagko-configure ng koneksyon"
 
-#: network/netconnect.pm:279 network/netconnect.pm:770
+#: network/netconnect.pm:273 network/netconnect.pm:762
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Pakipunuan o paki-check ang field sa ilalim"
 
-#: network/netconnect.pm:282
+#: network/netconnect.pm:276
 #, c-format
 msgid "Your personal phone number"
 msgstr "Ang inyong personal na numero ng telepono"
 
-#: network/netconnect.pm:283 network/netconnect.pm:773
+#: network/netconnect.pm:277 network/netconnect.pm:765
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Pangalan ng provider (e.g. provider.net)"
 
-#: network/netconnect.pm:284 standalone/drakconnect:493
+#: network/netconnect.pm:278 standalone/drakconnect:493
 #, c-format
 msgid "Provider phone number"
 msgstr "Numero ng telepono ng provider"
 
-#: network/netconnect.pm:285
+#: network/netconnect.pm:279
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "Provider DNS 1 (hindi obligado)"
 
-#: network/netconnect.pm:286
+#: network/netconnect.pm:280
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "Provider DNS 2 (hindi obligado)"
 
-#: network/netconnect.pm:287 standalone/drakconnect:444
+#: network/netconnect.pm:281 standalone/drakconnect:444
 #, c-format
 msgid "Dialing mode"
 msgstr "Dialing mode"
 
-#: network/netconnect.pm:288 standalone/drakconnect:449
+#: network/netconnect.pm:282 standalone/drakconnect:449
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
 msgstr "Tulin ng koneksyon"
 
-#: network/netconnect.pm:289 standalone/drakconnect:454
+#: network/netconnect.pm:283 standalone/drakconnect:454
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Timeout ng koneksyon (segundo)"
 
-#: network/netconnect.pm:290 network/netconnect.pm:315
-#: network/netconnect.pm:776 standalone/drakconnect:491
+#: network/netconnect.pm:284 network/netconnect.pm:309
+#: network/netconnect.pm:768 standalone/drakconnect:491
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Account Login (user name)"
 
-#: network/netconnect.pm:291 network/netconnect.pm:316
-#: network/netconnect.pm:777 standalone/drakconnect:492
+#: network/netconnect.pm:285 network/netconnect.pm:310
+#: network/netconnect.pm:769 standalone/drakconnect:492
 #, c-format
 msgid "Account Password"
 msgstr "Password ng Account"
 
-#: network/netconnect.pm:292 standalone/drakconnect:554
+#: network/netconnect.pm:286 standalone/drakconnect:554
 #, c-format
 msgid "Card IRQ"
 msgstr "Card IRQ"
 
-#: network/netconnect.pm:293 standalone/drakconnect:555
+#: network/netconnect.pm:287 standalone/drakconnect:555
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Card mem (DMA)"
 
-#: network/netconnect.pm:294 standalone/drakconnect:556
+#: network/netconnect.pm:288 standalone/drakconnect:556
 #, c-format
 msgid "Card IO"
 msgstr "Card IO"
 
-#: network/netconnect.pm:295 standalone/drakconnect:557
+#: network/netconnect.pm:289 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
 msgstr "Card IO_0"
 
-#: network/netconnect.pm:296
+#: network/netconnect.pm:290
 #, c-format
 msgid "Card IO_1"
 msgstr "Card IO_1"
 
-#: network/netconnect.pm:311
+#: network/netconnect.pm:305
 #, fuzzy, c-format
 msgid "Cable: account options"
 msgstr "Dialup: mga account option"
 
-#: network/netconnect.pm:314
+#: network/netconnect.pm:308
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr ""
 
-#: network/netconnect.pm:340 network/netconnect.pm:657
-#: network/netconnect.pm:808 network/netconnect.pm:1120
+#: network/netconnect.pm:334 network/netconnect.pm:651
+#: network/netconnect.pm:800 network/netconnect.pm:1113
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Piliin ang network interface na iko-configure:"
 
-#: network/netconnect.pm:342 network/netconnect.pm:377
-#: network/netconnect.pm:658 network/netconnect.pm:810 network/shorewall.pm:69
+#: network/netconnect.pm:336 network/netconnect.pm:371
+#: network/netconnect.pm:652 network/netconnect.pm:802 network/shorewall.pm:69
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
 msgstr "Net Device"
 
-#: network/netconnect.pm:343 network/netconnect.pm:348
+#: network/netconnect.pm:337 network/netconnect.pm:342
 #, c-format
 msgid "External ISDN modem"
 msgstr "External ISDN modem"
 
-#: network/netconnect.pm:376 standalone/harddrake2:216
+#: network/netconnect.pm:370 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
 msgstr "Pumili ng device !"
 
-#: network/netconnect.pm:385 network/netconnect.pm:395
-#: network/netconnect.pm:405 network/netconnect.pm:438
-#: network/netconnect.pm:452
+#: network/netconnect.pm:379 network/netconnect.pm:389
+#: network/netconnect.pm:399 network/netconnect.pm:432
+#: network/netconnect.pm:446
 #, c-format
 msgid "ISDN Configuration"
 msgstr "Configuration ng ISDN"
 
-#: network/netconnect.pm:386
+#: network/netconnect.pm:380
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Anong klase ng card mayroon kayo?"
 
-#: network/netconnect.pm:396
+#: network/netconnect.pm:390
 #, c-format
 msgid ""
 "\n"
@@ -10831,22 +10815,22 @@ msgstr ""
 "Kung mayroon kayong PCMCIA card, dapat ninyong alamin ang \"irq\" at \"io\" "
 "ng inyong card.\n"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Continue"
 msgstr "Magpatuloy"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Abort"
 msgstr "Hindi ituloy"
 
-#: network/netconnect.pm:406
+#: network/netconnect.pm:400
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Alin sa mga sumusunod ang inyong ISDN card?"
 
-#: network/netconnect.pm:424
+#: network/netconnect.pm:418
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10854,25 +10838,25 @@ msgid ""
 "want to use?"
 msgstr ""
 
-#: network/netconnect.pm:426 standalone/drakconnect:109 standalone/drakups:251
+#: network/netconnect.pm:420 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "Driver"
 
-#: network/netconnect.pm:438
+#: network/netconnect.pm:432
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Aling protocol ang gusto ninyong gamitin?"
 
-#: network/netconnect.pm:440 standalone/drakconnect:109
+#: network/netconnect.pm:434 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
 #: standalone/drakids:196 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
 msgstr "Protocol"
 
-#: network/netconnect.pm:452
+#: network/netconnect.pm:446
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10881,13 +10865,13 @@ msgstr ""
 "Piliin ang inyong provider.\n"
 "Kung hindi nakalista, piliin ang Hindi Nakatala (\"Unlisted\")."
 
-#: network/netconnect.pm:454 network/netconnect.pm:543
-#: network/netconnect.pm:689
+#: network/netconnect.pm:448 network/netconnect.pm:537
+#: network/netconnect.pm:683
 #, c-format
 msgid "Provider:"
 msgstr "Provider:"
 
-#: network/netconnect.pm:463
+#: network/netconnect.pm:457
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10896,52 +10880,52 @@ msgstr ""
 "Ang inyong modem ay hindi suportado ng sistema.\n"
 "Tingnan ang http://www.linmodems.org"
 
-#: network/netconnect.pm:482
+#: network/netconnect.pm:476
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Piliin ang modem na iko-configure"
 
-#: network/netconnect.pm:512
+#: network/netconnect.pm:506
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Pakipili kung sa aling serial port nakakabit ang inyong modem."
 
-#: network/netconnect.pm:541
+#: network/netconnect.pm:535
 #, c-format
 msgid "Select your provider:"
 msgstr "Piliin ang inyong provider:"
 
-#: network/netconnect.pm:565
+#: network/netconnect.pm:559
 #, c-format
 msgid "Dialup: account options"
 msgstr "Dialup: mga account option"
 
-#: network/netconnect.pm:568
+#: network/netconnect.pm:562
 #, c-format
 msgid "Connection name"
 msgstr "Pangalan ng koneksyon"
 
-#: network/netconnect.pm:569
+#: network/netconnect.pm:563
 #, c-format
 msgid "Phone number"
 msgstr "Numero ng telepono"
 
-#: network/netconnect.pm:570
+#: network/netconnect.pm:564
 #, c-format
 msgid "Login ID"
 msgstr "Login ID"
 
-#: network/netconnect.pm:585 network/netconnect.pm:618
+#: network/netconnect.pm:579 network/netconnect.pm:612
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "Dialup: mga IP parameter"
 
-#: network/netconnect.pm:588
+#: network/netconnect.pm:582
 #, c-format
 msgid "IP parameters"
 msgstr "Mga IP parameter"
 
-#: network/netconnect.pm:589 network/netconnect.pm:894
+#: network/netconnect.pm:583 network/netconnect.pm:886
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
 #: standalone/drakhosts:197 standalone/drakups:286
@@ -10949,120 +10933,111 @@ msgstr "Mga IP parameter"
 msgid "IP address"
 msgstr "IP address"
 
-#: network/netconnect.pm:590
+#: network/netconnect.pm:584
 #, c-format
 msgid "Subnet mask"
 msgstr "Subnet mask"
 
-#: network/netconnect.pm:602
+#: network/netconnect.pm:596
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Dialup: mga DNS parameter"
 
-#: network/netconnect.pm:605
+#: network/netconnect.pm:599
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:606
+#: network/netconnect.pm:600
 #, c-format
 msgid "Domain name"
 msgstr "Domain name"
 
-#: network/netconnect.pm:607 network/netconnect.pm:774
+#: network/netconnect.pm:601 network/netconnect.pm:766
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Unang DNS Server (hindi obligado)"
 
-#: network/netconnect.pm:608 network/netconnect.pm:775
+#: network/netconnect.pm:602 network/netconnect.pm:767
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Pangalawang DNS Server (hindi obligado)"
 
-#: network/netconnect.pm:609
+#: network/netconnect.pm:603
 #, c-format
 msgid "Set hostname from IP"
 msgstr "I-set hostname mula sa IP"
 
-#: network/netconnect.pm:621 standalone/drakconnect:327
+#: network/netconnect.pm:615 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
 msgstr "Gateway"
 
-#: network/netconnect.pm:622
+#: network/netconnect.pm:616
 #, c-format
 msgid "Gateway IP address"
 msgstr "Gateway IP address"
 
-#: network/netconnect.pm:657
+#: network/netconnect.pm:651
 #, c-format
 msgid "ADSL configuration"
 msgstr "Configuration ng ADSL"
 
-#: network/netconnect.pm:687
+#: network/netconnect.pm:681
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Pakipili ang inyong ADSL provider"
 
-#: network/netconnect.pm:717
-#, c-format
-msgid "Connect to the Internet"
-msgstr "Kumabit sa Internet"
-
-#: network/netconnect.pm:718
+#: network/netconnect.pm:711
 #, c-format
 msgid ""
-"The most common way to connect with adsl is pppoe.\n"
-"Some connections use PPTP, a few use DHCP.\n"
-"If you do not know, choose 'use PPPoE'"
+"Please choose your DSL connection type.\n"
+"If you do not know it, keep the preselected type."
 msgstr ""
-"Ang pinakakaraniwang paraan para kumabit gamit ang adsl ay ang pppoe.\n"
-"Ilang mga koneksyon ay gumagamit ng PPTP, kaunti ay gamit ang DHCP.\n"
-"Kung hindi ninyo alam, piliin ang 'gamitin ang PPPoE'"
 
-#: network/netconnect.pm:722
+#: network/netconnect.pm:714
 #, c-format
 msgid "ADSL connection type:"
 msgstr "Uri ng ASDL na koneksyon :"
 
-#: network/netconnect.pm:779
+#: network/netconnect.pm:771
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr "Virtual Path ID (VPI):"
 
-#: network/netconnect.pm:780
+#: network/netconnect.pm:772
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr "Virtual Circuit ID (VCI):"
 
-#: network/netconnect.pm:783
+#: network/netconnect.pm:775
 #, c-format
 msgid "Encapsulation:"
 msgstr "Encapsulation:"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Manually load a driver"
 msgstr ""
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr ""
 
-#: network/netconnect.pm:850
+#: network/netconnect.pm:842
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "Zeroconf hostname resolution"
 
-#: network/netconnect.pm:851 network/netconnect.pm:881
+#: network/netconnect.pm:843 network/netconnect.pm:873
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "Kino-configure ang network device na %s (driver na %s)"
 
-#: network/netconnect.pm:852
+#: network/netconnect.pm:844
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
@@ -11071,7 +11046,7 @@ msgstr ""
 "Ang mga sumusunod na protocol ay magagamit para mag-configure ng koneksyon "
 "ng LAN. Pakipili ang gusto ninyong gamitin"
 
-#: network/netconnect.pm:882
+#: network/netconnect.pm:874
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -11082,196 +11057,196 @@ msgstr ""
 "Bawat isang item ay dapat maipasok bilang IP address sa dotted-decimal\n"
 "na notation (halimbawa, 1.2.3.4)."
 
-#: network/netconnect.pm:889 standalone/drakconnect:373
+#: network/netconnect.pm:881 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Itakda ang host name mula sa DHCP address"
 
-#: network/netconnect.pm:890 standalone/drakconnect:375
+#: network/netconnect.pm:882 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr "DHCP host name"
 
-#: network/netconnect.pm:895 standalone/drakconnect:321
+#: network/netconnect.pm:887 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
 msgstr "Netmask"
 
-#: network/netconnect.pm:897 standalone/drakconnect:437
+#: network/netconnect.pm:889 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Bakasan ang ID ng network card(may kabuluhan para sa mga laptop)"
 
-#: network/netconnect.pm:898 standalone/drakconnect:438
+#: network/netconnect.pm:890 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Network Hotplugging"
 
-#: network/netconnect.pm:900 standalone/drakconnect:432
+#: network/netconnect.pm:892 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
 msgstr "Simulan sa boot"
 
-#: network/netconnect.pm:902 standalone/drakconnect:460
+#: network/netconnect.pm:894 standalone/drakconnect:460
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "i-restrict"
 
-#: network/netconnect.pm:903
+#: network/netconnect.pm:895
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr ""
 
-#: network/netconnect.pm:905 standalone/drakconnect:369
+#: network/netconnect.pm:897 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
 msgstr "DHCP client"
 
-#: network/netconnect.pm:907 standalone/drakconnect:379
+#: network/netconnect.pm:899 standalone/drakconnect:379
 #, fuzzy, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "Timeout ng koneksyon (segundo)"
 
-#: network/netconnect.pm:908 standalone/drakconnect:382
+#: network/netconnect.pm:900 standalone/drakconnect:382
 #, fuzzy, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Ang DNS Server IP"
 
-#: network/netconnect.pm:909 standalone/drakconnect:383
+#: network/netconnect.pm:901 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr ""
 
-#: network/netconnect.pm:910 standalone/drakconnect:384
+#: network/netconnect.pm:902 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr ""
 
-#: network/netconnect.pm:918 printer/printerdrake.pm:1896
+#: network/netconnect.pm:910 printer/printerdrake.pm:1896
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "ang IP address ay dapat nasa format na 1.2.3.4"
 
-#: network/netconnect.pm:922 standalone/drakconnect:680
+#: network/netconnect.pm:914 standalone/drakconnect:680
 #, fuzzy, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "Ang Gateway address ay dapat naka-format na 1.2.3.4"
 
-#: network/netconnect.pm:926
+#: network/netconnect.pm:918
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Babala : ang IP address na %s ay karaniwang nakareserba !"
 
-#: network/netconnect.pm:931 standalone/drakTermServ:1852
+#: network/netconnect.pm:923 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s ay gamit na\n"
 
-#: network/netconnect.pm:971
+#: network/netconnect.pm:963
 #, fuzzy, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Pumipili na lang basta ng driver"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr ""
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, fuzzy, c-format
 msgid "Install a new driver"
 msgstr "Pangloob na mail server"
 
-#: network/netconnect.pm:985
+#: network/netconnect.pm:977
 #, c-format
 msgid "Select a device:"
 msgstr ""
 
-#: network/netconnect.pm:1014
+#: network/netconnect.pm:1006
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Pakipasok ang mga wireless parameter para sa card na ito:"
 
-#: network/netconnect.pm:1017 standalone/drakconnect:404
+#: network/netconnect.pm:1009 standalone/drakconnect:404
 #, c-format
 msgid "Operating Mode"
 msgstr "Mode ng Operasyon"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Managed"
 msgstr "Managed"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Master"
 msgstr "Master"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Repeater"
 msgstr "Repeater"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Secondary"
 msgstr "Secondary"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Auto"
 msgstr "Auto"
 
-#: network/netconnect.pm:1021 standalone/drakconnect:405
+#: network/netconnect.pm:1013 standalone/drakconnect:405
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "Pangalan ng Network (ESSID)"
 
-#: network/netconnect.pm:1022
+#: network/netconnect.pm:1014
 #, c-format
 msgid "Encryption mode"
 msgstr ""
 
-#: network/netconnect.pm:1026
+#: network/netconnect.pm:1019
 #, c-format
 msgid "Allow access point roaming"
 msgstr ""
 
-#: network/netconnect.pm:1027 standalone/drakconnect:406
+#: network/netconnect.pm:1020 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr "ID ng Network"
 
-#: network/netconnect.pm:1028 standalone/drakconnect:407
+#: network/netconnect.pm:1021 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr "Operating frequency"
 
-#: network/netconnect.pm:1029 standalone/drakconnect:408
+#: network/netconnect.pm:1022 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr "Sensitivity threshold"
 
-#: network/netconnect.pm:1030 standalone/drakconnect:409
+#: network/netconnect.pm:1023 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr "Bitrate (sa b/s)"
 
-#: network/netconnect.pm:1031 standalone/drakconnect:420
+#: network/netconnect.pm:1024 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1032
+#: network/netconnect.pm:1025
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -11298,17 +11273,17 @@ msgstr ""
 "ito\n"
 "sa auto, fixed, o off."
 
-#: network/netconnect.pm:1039 standalone/drakconnect:421
+#: network/netconnect.pm:1032 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr "Fragmentation"
 
-#: network/netconnect.pm:1040 standalone/drakconnect:422
+#: network/netconnect.pm:1033 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
 msgstr "Mga extrang argument ng iwconfig na command"
 
-#: network/netconnect.pm:1041
+#: network/netconnect.pm:1034
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11324,12 +11299,12 @@ msgstr ""
 "Tingnan ang man page ng iwconfig(8) para sa karagdagang inpormasyon."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1048 standalone/drakconnect:423
+#: network/netconnect.pm:1041 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
 msgstr "Mga extrang argument ng iwspy na command"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1042
 #, c-format
 msgid ""
 "Iwspy is used to set a list of addresses in a wireless network\n"
@@ -11349,12 +11324,12 @@ msgstr ""
 "\n"
 "Tingnan ang man page ng iwpspy(8) para sa karagdagang inpormasyon."
 
-#: network/netconnect.pm:1058 standalone/drakconnect:424
+#: network/netconnect.pm:1051 standalone/drakconnect:424
 #, c-format
 msgid "Iwpriv command extra arguments"
 msgstr "Mga extrang argument ng iwpriv na command"
 
-#: network/netconnect.pm:1059
+#: network/netconnect.pm:1052
 #, c-format
 msgid ""
 "Iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11383,7 +11358,7 @@ msgstr ""
 "\n"
 "Tingnan ang man page ng iwpriv(8) para sa karagdagang inpormasyon."
 
-#: network/netconnect.pm:1074
+#: network/netconnect.pm:1067
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11392,7 +11367,7 @@ msgstr ""
 "Ang Freq ay dapat may suffix na k, M or G (halimbawa, \"2.46G\" for 2.46 GHz "
 "frequency), o magdagdag ng sapat na '0' (zero)."
 
-#: network/netconnect.pm:1078
+#: network/netconnect.pm:1071
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11401,37 +11376,37 @@ msgstr ""
 "Ang Rate ay dapat may suffix na k, M or G (halimbawa, \"11M\" for 11M), o "
 "magdagdag ng sapat na '0' (zero)."
 
-#: network/netconnect.pm:1120
+#: network/netconnect.pm:1113
 #, c-format
 msgid "DVB configuration"
 msgstr ""
 
-#: network/netconnect.pm:1121
+#: network/netconnect.pm:1114
 #, c-format
 msgid "DVB Adapter"
 msgstr ""
 
-#: network/netconnect.pm:1138
+#: network/netconnect.pm:1131
 #, c-format
 msgid "DVB adapter settings"
 msgstr ""
 
-#: network/netconnect.pm:1141
+#: network/netconnect.pm:1134
 #, c-format
 msgid "Adapter card"
 msgstr ""
 
-#: network/netconnect.pm:1142
+#: network/netconnect.pm:1135
 #, c-format
 msgid "Net demux"
 msgstr ""
 
-#: network/netconnect.pm:1143
+#: network/netconnect.pm:1136
 #, c-format
 msgid "PID"
 msgstr ""
 
-#: network/netconnect.pm:1171
+#: network/netconnect.pm:1164
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11444,71 +11419,71 @@ msgstr ""
 "gaya ng ``boxko.labko.kumpanyako.com''.\n"
 "Maaari ninyo ring ipasok ang IP address ng inyong gateway kung mayroon."
 
-#: network/netconnect.pm:1176
+#: network/netconnect.pm:1169
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr ""
 "At pinakahuli, maaari rin ninyong i-type ang mga IP address ng inyong DNS "
 "server."
 
-#: network/netconnect.pm:1178 standalone/drakconnect:991
+#: network/netconnect.pm:1171 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr "Host name (hindi obligado)"
 
-#: network/netconnect.pm:1178 standalone/drakhosts:197
+#: network/netconnect.pm:1171 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Host name"
 
-#: network/netconnect.pm:1180
+#: network/netconnect.pm:1173
 #, c-format
 msgid "DNS server 1"
 msgstr "DNS server 1"
 
-#: network/netconnect.pm:1181
+#: network/netconnect.pm:1174
 #, c-format
 msgid "DNS server 2"
 msgstr "DNS server 2"
 
-#: network/netconnect.pm:1182
+#: network/netconnect.pm:1175
 #, c-format
 msgid "DNS server 3"
 msgstr "DNS server 3"
 
-#: network/netconnect.pm:1183
+#: network/netconnect.pm:1176
 #, c-format
 msgid "Search domain"
 msgstr "Search domain"
 
-#: network/netconnect.pm:1184
+#: network/netconnect.pm:1177
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr ""
 "Bilang default ang search domain ay ise-set mula sa fully-qualified (buo) na "
 "host name"
 
-#: network/netconnect.pm:1185
+#: network/netconnect.pm:1178
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Gateway (e.g. %s)"
 
-#: network/netconnect.pm:1187
+#: network/netconnect.pm:1180
 #, c-format
 msgid "Gateway device"
 msgstr "Gateway device"
 
-#: network/netconnect.pm:1196
+#: network/netconnect.pm:1189
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Ang DNS server address ay dapat naka-format na 1.2.3.4"
 
-#: network/netconnect.pm:1201 standalone/drakconnect:685
+#: network/netconnect.pm:1194 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "Ang Gateway address ay dapat naka-format na 1.2.3.4"
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1207
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11517,67 +11492,67 @@ msgid ""
 "It is not necessary on most networks."
 msgstr ""
 
-#: network/netconnect.pm:1218
+#: network/netconnect.pm:1211
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Zeroconf Host name"
 
-#: network/netconnect.pm:1221
+#: network/netconnect.pm:1214
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Ang Zeroconf host name ay hindi dapat maglaman ng '.'"
 
-#: network/netconnect.pm:1231
+#: network/netconnect.pm:1224
 #, fuzzy, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Gusto ninyong simulan ang koneksyon pag-boot?"
 
-#: network/netconnect.pm:1244
+#: network/netconnect.pm:1237
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Gusto ninyong simulan ang koneksyon pag-boot?"
 
-#: network/netconnect.pm:1259
+#: network/netconnect.pm:1252
 #, fuzzy, c-format
 msgid "Automatically at boot"
 msgstr "Simulan sa boot"
 
-#: network/netconnect.pm:1261
+#: network/netconnect.pm:1254
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr ""
 
-#: network/netconnect.pm:1263
+#: network/netconnect.pm:1256
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr ""
 
-#: network/netconnect.pm:1272
+#: network/netconnect.pm:1265
 #, fuzzy, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Gusto ninyong simulan ang koneksyon pag-boot?"
 
-#: network/netconnect.pm:1285
+#: network/netconnect.pm:1278
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Gusto ninyong subukang kumabit sa Internet ngayon?"
 
-#: network/netconnect.pm:1293 standalone/drakconnect:1023
+#: network/netconnect.pm:1286 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr "Sinusubukan ang inyong koneksyon..."
 
-#: network/netconnect.pm:1313
+#: network/netconnect.pm:1306
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Ang sistema ay nakakabit na ngayon sa Internet."
 
-#: network/netconnect.pm:1314
+#: network/netconnect.pm:1307
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Sa mga dahilang pang-seguridad, puputulin na ito ngayon."
 
-#: network/netconnect.pm:1315
+#: network/netconnect.pm:1308
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11586,7 +11561,7 @@ msgstr ""
 "Ang sistema ay mukhang hindi nakakabit sa Internet.\n"
 "Subukang i-configure ulit ang inyong koneksyon."
 
-#: network/netconnect.pm:1330
+#: network/netconnect.pm:1323
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11595,7 +11570,7 @@ msgstr ""
 "Maligayang bati, ang pagko-configure ng network at Internet ay tapos na.\n"
 "\n"
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1326
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11604,7 +11579,7 @@ msgstr ""
 "Pagkatapos itong magawa, inirerekomenda namin na i-restart ninyo ang X "
 "environment para makaiwas sa mga problema kaugnay ng hostname."
 
-#: network/netconnect.pm:1334
+#: network/netconnect.pm:1327
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11615,28 +11590,28 @@ msgstr ""
 "Subukan ang inyong koneksyon via net_monitor o mcc. Kung hindi gumana ang "
 "inyong koneksyon, maaari ninyong i-launch ulit ang configuration."
 
-#: network/netconnect.pm:1345
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(natiktikan sa port na %s)"
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected %s)"
 msgstr "(natiktikan ang %s)"
 
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected)"
 msgstr "(natiktikan)"
 
-#: network/netconnect.pm:1348
+#: network/netconnect.pm:1341
 #, c-format
 msgid "Network Configuration"
 msgstr "Configuration ng Network"
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1342
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11650,13 +11625,13 @@ msgstr ""
 "configure ulit ang inyong\n"
 "koneksyon sa Internet & Network.\n"
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1345
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr ""
 "Ang network ay kailangang simulan ulit. Gusto ninyo itong simulan ulit?"
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1346
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11667,7 +11642,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1354
+#: network/netconnect.pm:1347
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -11680,12 +11655,12 @@ msgstr ""
 "\n"
 "Pindutin ang \"%s\" para magpatuloy."
 
-#: network/netconnect.pm:1355
+#: network/netconnect.pm:1348
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Tapos na ang pagko-configure, gusto ninyong i-apply ang mga setting?"
 
-#: network/netconnect.pm:1356
+#: network/netconnect.pm:1349
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11696,12 +11671,12 @@ msgstr ""
 "Pumili ng isang gagamitin ninyo.\n"
 "\n"
 
-#: network/netconnect.pm:1357
+#: network/netconnect.pm:1350
 #, c-format
 msgid "Internet connection"
 msgstr "Internet connection"
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1367
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11873,6 +11848,21 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "Maghintay lamang, tinitiktikan at kino-configure ang mga \"device\"..."
+
+#: network/wireless.pm:8
+#, c-format
+msgid "Open WEP"
+msgstr ""
+
+#: network/wireless.pm:9
+#, c-format
+msgid "Restricted WEP"
+msgstr ""
+
+#: network/wireless.pm:10
+#, c-format
+msgid "WPA Pre-Shared Key"
+msgstr ""
 
 #: partition_table.pm:391
 #, c-format
@@ -21276,7 +21266,7 @@ msgstr "Bus"
 msgid "Location on the bus"
 msgstr "Kinaroroonan sa bus"
 
-#: standalone/drakconnect:700 standalone/drakgw:313
+#: standalone/drakconnect:700 standalone/drakgw:311
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -21402,7 +21392,7 @@ msgstr ""
 "Patakbuhin ang \"Magdagdag ng interface\" na assistant mula sa Mandriva "
 "Control Center"
 
-#: standalone/drakconnect:975 standalone/net_applet:53
+#: standalone/drakconnect:975 standalone/net_applet:51
 #, fuzzy, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -21412,7 +21402,7 @@ msgstr ""
 "Patakbuhin ang \"%s\" na assistant mula sa Mandriva Control Center"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:54
+#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:52
 #, fuzzy, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Mag-alis ng network interface"
@@ -21977,7 +21967,7 @@ msgstr ""
 msgid "The DNS Server IP"
 msgstr "Ang DNS Server IP"
 
-#: standalone/drakgw:238
+#: standalone/drakgw:236
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -21991,77 +21981,77 @@ msgstr ""
 "configuration.\n"
 "Kung hindi ninyo alam ang ibig sabihin ng isang option, hayaan na lamang ito."
 
-#: standalone/drakgw:245
+#: standalone/drakgw:243
 #, fuzzy, c-format
 msgid "Use automatic configuration (DHCP)"
 msgstr "Automatic reconfiguration"
 
-#: standalone/drakgw:246
+#: standalone/drakgw:244
 #, c-format
 msgid "The DHCP start range"
 msgstr "Ang DHCP start range"
 
-#: standalone/drakgw:247
+#: standalone/drakgw:245
 #, c-format
 msgid "The DHCP end range"
 msgstr "Ang DHCP end range"
 
-#: standalone/drakgw:248
+#: standalone/drakgw:246
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "Ang default lease (sa segundo)"
 
-#: standalone/drakgw:249
+#: standalone/drakgw:247
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "Ang maximum lease (sa segundo)"
 
-#: standalone/drakgw:272
+#: standalone/drakgw:270
 #, c-format
 msgid "Proxy caching server (SQUID)"
 msgstr ""
 
-#: standalone/drakgw:276
+#: standalone/drakgw:274
 #, c-format
 msgid "Use this gateway as proxy caching server"
 msgstr ""
 
-#: standalone/drakgw:277
+#: standalone/drakgw:275
 #, c-format
 msgid "Admin mail"
 msgstr ""
 
-#: standalone/drakgw:278
+#: standalone/drakgw:276
 #, fuzzy, c-format
 msgid "Visible hostname"
 msgstr "Pangalan ng remote host"
 
-#: standalone/drakgw:279
+#: standalone/drakgw:277
 #, fuzzy, c-format
 msgid "Proxy port"
 msgstr "Property"
 
-#: standalone/drakgw:280
+#: standalone/drakgw:278
 #, fuzzy, c-format
 msgid "Cache size (MB)"
 msgstr "Laki ng cache"
 
-#: standalone/drakgw:302
+#: standalone/drakgw:300
 #, fuzzy, c-format
 msgid "Broadcast printer information"
 msgstr "Inpormasyon sa \"hard drive\""
 
-#: standalone/drakgw:319
+#: standalone/drakgw:317
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
 msgstr "Ang Internet Connection Sharing ay gumagana na ngayon."
 
-#: standalone/drakgw:325
+#: standalone/drakgw:323
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
 msgstr "Ang Internet Connection Sharing ay naka-disable na ngayon."
 
-#: standalone/drakgw:331
+#: standalone/drakgw:329
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -22074,17 +22064,17 @@ msgstr ""
 "inyong Local Area Network, ginagamit ang automatic na\n"
 "network configuration (DHCP) at isang Transparent Proxy Cache server (SQUID)."
 
-#: standalone/drakgw:366
+#: standalone/drakgw:364
 #, c-format
 msgid "Disabling servers..."
 msgstr "Dini-disable ang mga server..."
 
-#: standalone/drakgw:380
+#: standalone/drakgw:378
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Natiktikan ang configuration ng firewall!"
 
-#: standalone/drakgw:381
+#: standalone/drakgw:379
 #, c-format
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
@@ -22093,12 +22083,12 @@ msgstr ""
 "Babala! May natiktikang configuration ng firewall. Maaari ninyong "
 "kailanganing mano-manong mag-ayos pagkatapos ng pag-i-install."
 
-#: standalone/drakgw:386
+#: standalone/drakgw:384
 #, c-format
 msgid "Configuring..."
 msgstr "Nagco-configure..."
 
-#: standalone/drakgw:387
+#: standalone/drakgw:385
 #, c-format
 msgid "Configuring firewall..."
 msgstr ""
@@ -22232,7 +22222,7 @@ msgstr "Payagan lahat ng mga \"user\""
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
-#: standalone/net_applet:61 standalone/net_applet:183
+#: standalone/net_applet:59 standalone/net_applet:181
 #: standalone/net_applet:353 standalone/net_applet:390
 #, fuzzy, c-format
 msgid "Interactive Firewall"
@@ -22274,7 +22264,7 @@ msgid "Remove from whitelist"
 msgstr "Alisin sa LVM"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
-#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:183
+#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:181
 #: standalone/net_applet:353
 #, fuzzy, c-format
 msgid "Unable to contact daemon"
@@ -22509,10 +22499,9 @@ msgstr ""
 msgid "Anonymous Group ID:"
 msgstr ""
 
-#: standalone/draknfs:433 standalone/draknfs:525 standalone/draksambashare:625
-#: standalone/draksambashare:792
+#: standalone/draknfs:433
 #, c-format
-msgid "Please enter a directory to share."
+msgid "Can't create this directory."
 msgstr ""
 
 #: standalone/draknfs:435
@@ -22538,6 +22527,12 @@ msgstr ""
 #: standalone/draknfs:513
 #, c-format
 msgid "Custom Options"
+msgstr ""
+
+#: standalone/draknfs:525 standalone/draksambashare:625
+#: standalone/draksambashare:792
+#, c-format
+msgid "Please enter a directory to share."
 msgstr ""
 
 #: standalone/draknfs:532
@@ -23146,7 +23141,7 @@ msgstr ""
 
 #: standalone/draksambashare:433
 #, c-format
-msgid "pdf-gen - a pdf generator"
+msgid "pdf-gen - a PDF generator"
 msgstr ""
 
 #: standalone/draksambashare:434
@@ -23167,7 +23162,7 @@ msgstr ""
 
 #: standalone/draksambashare:449
 #, c-format
-msgid "A pdf gnerator already exist."
+msgid "A PDF generator already exists."
 msgstr ""
 
 #: standalone/draksambashare:473
@@ -26732,53 +26727,53 @@ msgstr "Pagsubok ng mouse"
 msgid "Please test your mouse:"
 msgstr "Pakisubukan ang inyong mouse:"
 
-#: standalone/net_applet:49
+#: standalone/net_applet:47
 #, fuzzy, c-format
 msgid "Network is up on interface %s"
 msgstr "Network interface"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:52
+#: standalone/net_applet:50
 #, fuzzy, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr "Pakinabang(functionality) ng network hindi na-configure"
 
-#: standalone/net_applet:58 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "I-connect ang %s"
 
-#: standalone/net_applet:59 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "I-disconnect ang %s"
 
-#: standalone/net_applet:60
+#: standalone/net_applet:58
 #, fuzzy, c-format
 msgid "Monitor Network"
 msgstr "Ibalik Via Network"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
 msgstr ""
 
-#: standalone/net_applet:63
+#: standalone/net_applet:61
 #, c-format
 msgid "Configure Network"
 msgstr "I-configure ang Network"
 
-#: standalone/net_applet:65
+#: standalone/net_applet:63
 #, fuzzy, c-format
 msgid "Watched interface"
 msgstr "mga interface"
 
-#: standalone/net_applet:74
+#: standalone/net_applet:72
 #, fuzzy, c-format
 msgid "Profiles"
 msgstr "Mga Proxy"
 
-#: standalone/net_applet:83
+#: standalone/net_applet:81
 #, c-format
 msgid "Get Online Help"
 msgstr ""
@@ -27810,6 +27805,18 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Pag-i-install nabigo"
+
+#~ msgid "Connect to the Internet"
+#~ msgstr "Kumabit sa Internet"
+
+#~ msgid ""
+#~ "The most common way to connect with adsl is pppoe.\n"
+#~ "Some connections use PPTP, a few use DHCP.\n"
+#~ "If you do not know, choose 'use PPPoE'"
+#~ msgstr ""
+#~ "Ang pinakakaraniwang paraan para kumabit gamit ang adsl ay ang pppoe.\n"
+#~ "Ilang mga koneksyon ay gumagamit ng PPTP, kaunti ay gamit ang DHCP.\n"
+#~ "Kung hindi ninyo alam, piliin ang 'gamitin ang PPPoE'"
 
 #~ msgid "Do not print any test page"
 #~ msgstr "Huwag mag-print ng test page"

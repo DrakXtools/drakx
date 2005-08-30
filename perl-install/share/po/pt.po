@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-28 17:40+0800\n"
+"POT-Creation-Date: 2005-08-30 18:05+0800\n"
 "PO-Revision-Date: 2005-08-13 22:10+0200\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -197,11 +197,11 @@ msgstr "Por favor aguarde, a detectar e a configurar dispositivos..."
 #: install_steps.pm:81 install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
-#: network/netconnect.pm:918 network/netconnect.pm:922
-#: network/netconnect.pm:926 network/netconnect.pm:931
-#: network/netconnect.pm:1074 network/netconnect.pm:1078
-#: network/netconnect.pm:1196 network/netconnect.pm:1201
-#: network/netconnect.pm:1221 network/netconnect.pm:1374
+#: network/netconnect.pm:910 network/netconnect.pm:914
+#: network/netconnect.pm:918 network/netconnect.pm:923
+#: network/netconnect.pm:1067 network/netconnect.pm:1071
+#: network/netconnect.pm:1189 network/netconnect.pm:1194
+#: network/netconnect.pm:1214 network/netconnect.pm:1367
 #: network/thirdparty.pm:266 network/thirdparty.pm:273
 #: network/thirdparty.pm:309 network/thirdparty.pm:311
 #: network/thirdparty.pm:332 network/thirdparty.pm:356
@@ -509,7 +509,7 @@ msgstr "Personalizado"
 #: printer/printerdrake.pm:4686 printer/printerdrake.pm:5141
 #: standalone/drakhosts:263 standalone/drakids:62 standalone/drakids:71
 #: standalone/drakids:79 standalone/draksplash:81 standalone/logdrake:173
-#: standalone/net_applet:84 standalone/scannerdrake:477
+#: standalone/net_applet:82 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Sair"
@@ -702,7 +702,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:634 interactive.pm:527
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:636 interactive.pm:527
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
@@ -1016,7 +1016,7 @@ msgid "Force No Local APIC"
 msgstr "Forçar Sem APIC Local"
 
 #: any.pm:294 any.pm:648 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:571 printer/printerdrake.pm:1887
+#: network/netconnect.pm:565 printer/printerdrake.pm:1887
 #: printer/printerdrake.pm:2008 standalone/drakbackup:1630
 #: standalone/drakbackup:3504 standalone/drakups:299
 #, c-format
@@ -1406,10 +1406,9 @@ msgstr "Avançado"
 msgid "Input method:"
 msgstr "Método de entrada:"
 
-#: any.pm:854 install_any.pm:421 network/netconnect.pm:153
-#: network/netconnect.pm:309 network/netconnect.pm:314
-#: network/netconnect.pm:1187 printer/printerdrake.pm:105
-#: printer/printerdrake.pm:2429
+#: any.pm:854 install_any.pm:421 network/netconnect.pm:303
+#: network/netconnect.pm:308 network/netconnect.pm:1180 network/wireless.pm:7
+#: printer/printerdrake.pm:105 printer/printerdrake.pm:2429
 #, c-format
 msgid "None"
 msgstr "Nenhum"
@@ -1770,7 +1769,7 @@ msgstr "Nenhuma senha"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Essa senha é demasiado simples (pelo menos deve ter %d caracteres)"
 
-#: authentication.pm:188 network/netconnect.pm:314 network/netconnect.pm:572
+#: authentication.pm:188 network/netconnect.pm:308 network/netconnect.pm:566
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
@@ -1786,7 +1785,7 @@ msgstr "Não foi possível usar 'broadcast' sem um domínio NIS"
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:753
+#: bootloader.pm:765
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1801,42 +1800,42 @@ msgstr ""
 "espere pelo arranque predefinido.\n"
 "\n"
 
-#: bootloader.pm:853
+#: bootloader.pm:865
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO com lista gráfica"
 
-#: bootloader.pm:854
+#: bootloader.pm:866
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO com menu texto"
 
-#: bootloader.pm:855
+#: bootloader.pm:867
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB com menu gráfico"
 
-#: bootloader.pm:856
+#: bootloader.pm:868
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB com menu texto"
 
-#: bootloader.pm:857
+#: bootloader.pm:869
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:935
+#: bootloader.pm:947
 #, c-format
 msgid "not enough room in /boot"
 msgstr "não há espaço suficiente em /boot"
 
-#: bootloader.pm:1414
+#: bootloader.pm:1433
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Não pode instalar o carregador de arranque numa partição %s\n"
 
-#: bootloader.pm:1454
+#: bootloader.pm:1473
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1845,7 +1844,7 @@ msgstr ""
 "A configuração do seu carregador de arranque deve ser actualizada pois a "
 "partição foi renumerada"
 
-#: bootloader.pm:1467
+#: bootloader.pm:1486
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1854,7 +1853,7 @@ msgstr ""
 "O carregador de arranque não pode ser instalado correctamente. Tem de "
 "arrancar usar em modo de emergência e escolher \"%s\""
 
-#: bootloader.pm:1468
+#: bootloader.pm:1487
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Reinstalar o carregador de arranque"
@@ -2983,7 +2982,7 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "As senhas de encriptação não correspondem"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1025
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1018
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
@@ -3266,22 +3265,22 @@ msgstr ""
 "\n"
 "Concorda em perder todas as partições?\n"
 
-#: fsedit.pm:381
+#: fsedit.pm:378
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Os pontos de montagem devem começar com uma /"
 
-#: fsedit.pm:382
+#: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Os pontos de montagem devem apenas conter caracteres alfanuméricos"
 
-#: fsedit.pm:383
+#: fsedit.pm:380
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Já existe uma partição no ponto de montagem %s\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:382
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3292,7 +3291,7 @@ msgstr ""
 "Nenhum carregador de arranque a consegue aceder sem uma\n"
 "partição /boot. Certifique-se que adiciona uma partição /boot"
 
-#: fsedit.pm:390
+#: fsedit.pm:387
 #, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
@@ -3301,7 +3300,7 @@ msgstr ""
 "Não pode usar Volumes Lógicos LVM para pontos de monstagem %s já que atrasa "
 "os volumes físicos"
 
-#: fsedit.pm:392
+#: fsedit.pm:389
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
@@ -3310,12 +3309,12 @@ msgid ""
 "You should create a /boot partition first"
 msgstr "Seleccionou um Volume Lógico LVM como raiz (/)"
 
-#: fsedit.pm:396 fsedit.pm:398
+#: fsedit.pm:393 fsedit.pm:395
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Esta directoria deve permanecer dentro do sistema de ficheiros root"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:397 fsedit.pm:399
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3324,18 +3323,18 @@ msgstr ""
 "Precisa de um verdadeiro sistema de ficheiros (ext2/ext3, ReiserFS, xfs ou "
 "JFS) para este ponto de montagem\n"
 
-#: fsedit.pm:404
+#: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
 "Não pode usar um sistema de ficheiros encriptado para ponto de montagem %s"
 
-#: fsedit.pm:465
+#: fsedit.pm:462
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Sem espaço livre suficiente para auto-alocação"
 
-#: fsedit.pm:467
+#: fsedit.pm:464
 #, c-format
 msgid "Nothing to do"
 msgstr "Nada a fazer"
@@ -3445,7 +3444,7 @@ msgstr "Dispositivos bluetooth"
 msgid "Ethernetcard"
 msgstr "Placa Ethernet"
 
-#: harddrake/data.pm:282 network/netconnect.pm:484
+#: harddrake/data.pm:282 network/netconnect.pm:478
 #, c-format
 msgid "Modem"
 msgstr "Modem"
@@ -3663,7 +3662,7 @@ msgid "Trouble shooting"
 msgstr "Correcção de problemas"
 
 #: harddrake/sound.pm:271 install_steps_interactive.pm:1309 keyboard.pm:391
-#: network/ndiswrapper.pm:95 network/netconnect.pm:463
+#: network/ndiswrapper.pm:95 network/netconnect.pm:457
 #: printer/printerdrake.pm:1429 printer/printerdrake.pm:2460
 #: printer/printerdrake.pm:2559 printer/printerdrake.pm:2605
 #: printer/printerdrake.pm:2672 printer/printerdrake.pm:2707
@@ -3804,8 +3803,8 @@ msgstr ""
 "\n"
 "O driver actual para a sua placa de som \"%s\" é \"%s\" "
 
-#: harddrake/v4l.pm:12 standalone/net_applet:66 standalone/net_applet:67
-#: standalone/net_applet:69
+#: harddrake/v4l.pm:12 standalone/net_applet:64 standalone/net_applet:65
+#: standalone/net_applet:67
 #, c-format
 msgid "Auto-detect"
 msgstr "Auto-detectar"
@@ -3886,7 +3885,7 @@ msgstr ""
 "presentes, active a caixa \"%s\". Se não, pode clicar no botão \"%s\"\n"
 "para reiniciar o seu computador."
 
-#: help.pm:14 install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: help.pm:14 install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
@@ -3977,7 +3976,7 @@ msgid "User name"
 msgstr "Nome de utilizador"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
-#: install_steps_gtk.pm:699 interactive.pm:432 interactive/newt.pm:321
+#: install_steps_gtk.pm:701 interactive.pm:432 interactive/newt.pm:321
 #: network/thirdparty.pm:322 printer/printerdrake.pm:3962
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
@@ -4330,7 +4329,7 @@ msgstr ""
 "O interface apresentado no nosso manual é semelhante ao usado durante\n"
 "a instalação."
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:612
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:614
 #: standalone/drakbackup:2341 standalone/drakbackup:2345
 #: standalone/drakbackup:2349 standalone/drakbackup:2353
 #, c-format
@@ -6965,28 +6964,28 @@ msgstr "Sem detalhes"
 msgid "Time remaining "
 msgstr "Tempo restante "
 
-#: install_steps_gtk.pm:502
+#: install_steps_gtk.pm:504
 #, c-format
 msgid "Please wait, preparing installation..."
 msgstr "Por favor aguarde, a preparar a instalação..."
 
-#: install_steps_gtk.pm:517
+#: install_steps_gtk.pm:519
 #, c-format
 msgid "%d packages"
 msgstr "%d pacotes"
 
-#: install_steps_gtk.pm:522
+#: install_steps_gtk.pm:524
 #, c-format
 msgid "Installing package %s"
 msgstr "A instalar pacote %s"
 
-#: install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738
 #, c-format
 msgid "Refuse"
 msgstr "Recusar"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:563 install_steps_interactive.pm:742
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6999,34 +6998,34 @@ msgstr ""
 "feito.\n"
 "Se não o tiver, prima Cancelar para evitar a instalação deste Cd-Rom."
 
-#: install_steps_gtk.pm:576 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:578 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Houve um erro ao ordenar os pacotes:"
 
-#: install_steps_gtk.pm:576 install_steps_gtk.pm:580
+#: install_steps_gtk.pm:578 install_steps_gtk.pm:582
 #: install_steps_interactive.pm:753 install_steps_interactive.pm:757
 #, c-format
 msgid "Go on anyway?"
 msgstr "Continuar mesmo assim?"
 
-#: install_steps_gtk.pm:580 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:757
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Houve um erro a instalar os pacotes:"
 
-#: install_steps_gtk.pm:599 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:601 install_steps_interactive.pm:933 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Sumário"
 
-#: install_steps_gtk.pm:622 install_steps_interactive.pm:929
+#: install_steps_gtk.pm:624 install_steps_interactive.pm:929
 #: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "não configurado"
 
-#: install_steps_gtk.pm:685
+#: install_steps_gtk.pm:687
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -7035,7 +7034,7 @@ msgstr ""
 "A segiuinte media de instalação foi encontrada.\n"
 "Se quer evitar alguns deles, pode desmarcá-los agora."
 
-#: install_steps_gtk.pm:694
+#: install_steps_gtk.pm:696
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -7048,7 +7047,7 @@ msgstr ""
 "Irá continuar a partir do disco rígido e os pacotes irão permanecer "
 "disponíveis assim que o sistema estiver instalado."
 
-#: install_steps_gtk.pm:696
+#: install_steps_gtk.pm:698
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Copiar todos os CDs"
@@ -9894,9 +9893,9 @@ msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/modem.pm:68 network/modem.pm:82 network/modem.pm:87
-#: network/modem.pm:120 network/netconnect.pm:583 network/netconnect.pm:588
-#: network/netconnect.pm:600 network/netconnect.pm:605
-#: network/netconnect.pm:621 network/netconnect.pm:623
+#: network/modem.pm:120 network/netconnect.pm:577 network/netconnect.pm:582
+#: network/netconnect.pm:594 network/netconnect.pm:599
+#: network/netconnect.pm:615 network/netconnect.pm:617
 #, c-format
 msgid "Automatic"
 msgstr "Automático"
@@ -10240,36 +10239,36 @@ msgstr "Um ataque para crackar a senha foi tentado por %s."
 msgid "A \"%s\" attack has been attempted by %s"
 msgstr "Um ataque de pesquisa à porta foi tentado por %s."
 
-#: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
-#: network/netconnect.pm:547 network/netconnect.pm:690
-#: network/netconnect.pm:694
+#: network/isdn.pm:117 network/netconnect.pm:449 network/netconnect.pm:538
+#: network/netconnect.pm:541 network/netconnect.pm:684
+#: network/netconnect.pm:688
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Não listado - editar manualmente"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "I do not know"
 msgstr "Eu não sei"
 
-#: network/isdn.pm:161 network/netconnect.pm:387
+#: network/isdn.pm:161 network/netconnect.pm:381
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:162 network/netconnect.pm:387
+#: network/isdn.pm:162 network/netconnect.pm:381
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/netconnect.pm:588 network/netconnect.pm:605
-#: network/netconnect.pm:621
+#: network/netconnect.pm:582 network/netconnect.pm:599
+#: network/netconnect.pm:615
 #, c-format
 msgid "Manual"
 msgstr "Manual"
@@ -10308,8 +10307,8 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr "Não é possível encontrar o interface ndiswrapper!"
 
-#: network/netconnect.pm:69 network/netconnect.pm:485
-#: network/netconnect.pm:492
+#: network/netconnect.pm:69 network/netconnect.pm:479
+#: network/netconnect.pm:486
 #, c-format
 msgid "Manual choice"
 msgstr "Escolha manual"
@@ -10353,305 +10352,290 @@ msgstr ""
 "Protocolo para o resto do mundo\n"
 "Sem Canal-D (linhas alugadas)"
 
-#: network/netconnect.pm:120 network/thirdparty.pm:184
+#: network/netconnect.pm:117 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Modem Alcatel speedtouch USB"
 
-#: network/netconnect.pm:121
+#: network/netconnect.pm:118
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Modem USB Sagem"
 
-#: network/netconnect.pm:122
+#: network/netconnect.pm:119
 #, c-format
 msgid "Bewan modem"
 msgstr "Modem Bewan"
 
-#: network/netconnect.pm:123
+#: network/netconnect.pm:120
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "Modem ECI Hi-Focus"
 
-#: network/netconnect.pm:127
+#: network/netconnect.pm:124
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
-#: network/netconnect.pm:128
+#: network/netconnect.pm:125
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Configuração manual do TCP/IP"
 
-#: network/netconnect.pm:129
+#: network/netconnect.pm:126
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Protocolo de Tunelamento Ponto a Ponto (PPTP)"
 
-#: network/netconnect.pm:130
+#: network/netconnect.pm:127
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP através de Ethernet (PPPoE)"
 
-#: network/netconnect.pm:131
+#: network/netconnect.pm:128
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP através de ATM (PPPoA)"
 
-#: network/netconnect.pm:132
+#: network/netconnect.pm:129
 #, c-format
 msgid "DSL over CAPI"
 msgstr "DSL sobre CAPI"
 
-#: network/netconnect.pm:136
+#: network/netconnect.pm:133
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Bridge em Ethernet LLC"
 
-#: network/netconnect.pm:137
+#: network/netconnect.pm:134
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Bridge em Ethernet VC"
 
-#: network/netconnect.pm:138
+#: network/netconnect.pm:135
 #, c-format
 msgid "Routed IP LLC"
 msgstr "IP Routeado LLC"
 
-#: network/netconnect.pm:139
+#: network/netconnect.pm:136
 #, c-format
 msgid "Routed IP VC"
 msgstr "IP Routeado VC"
 
-#: network/netconnect.pm:140
+#: network/netconnect.pm:137
 #, c-format
 msgid "PPPoA LLC"
 msgstr "PPPoA LLC"
 
-#: network/netconnect.pm:141
+#: network/netconnect.pm:138
 #, c-format
 msgid "PPPoA VC"
 msgstr "PPPoA VC"
 
-#: network/netconnect.pm:145 standalone/drakconnect:498
+#: network/netconnect.pm:142 standalone/drakconnect:498
 #, c-format
 msgid "Script-based"
 msgstr "Baseado em Script"
 
-#: network/netconnect.pm:146 standalone/drakconnect:498
+#: network/netconnect.pm:143 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:147 standalone/drakconnect:498
+#: network/netconnect.pm:144 standalone/drakconnect:498
 #, c-format
 msgid "Terminal-based"
 msgstr "Baseado em terminal"
 
-#: network/netconnect.pm:148 standalone/drakconnect:498
+#: network/netconnect.pm:145 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:149 standalone/drakconnect:498
+#: network/netconnect.pm:146 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:154
-#, c-format
-msgid "Open WEP"
-msgstr "Abrir WEP"
-
-#: network/netconnect.pm:155
-#, c-format
-msgid "Restricted WEP"
-msgstr "WEP Restricto"
-
-#: network/netconnect.pm:156
-#, c-format
-msgid "WPA Pre-Shared Key"
-msgstr "Chave Pré-Partilhada WPA"
-
-#: network/netconnect.pm:242 standalone/drakconnect:56
+#: network/netconnect.pm:236 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Configuração de Rede & Internet"
 
-#: network/netconnect.pm:248
+#: network/netconnect.pm:242
 #, c-format
 msgid "LAN connection"
 msgstr "Conexão LAN"
 
-#: network/netconnect.pm:249 network/netconnect.pm:268
+#: network/netconnect.pm:243 network/netconnect.pm:262
 #, c-format
 msgid "Wireless connection"
 msgstr "Conexão Wireless"
 
-#: network/netconnect.pm:250
+#: network/netconnect.pm:244
 #, c-format
 msgid "ADSL connection"
 msgstr "Conexão ADSL"
 
-#: network/netconnect.pm:251
+#: network/netconnect.pm:245
 #, c-format
 msgid "Cable connection"
 msgstr "Conexão por Cabo"
 
-#: network/netconnect.pm:252
+#: network/netconnect.pm:246
 #, c-format
 msgid "ISDN connection"
 msgstr "Conexão ISDN"
 
-#: network/netconnect.pm:253
+#: network/netconnect.pm:247
 #, c-format
 msgid "Modem connection"
 msgstr "Conexão modem"
 
-#: network/netconnect.pm:254
+#: network/netconnect.pm:248
 #, c-format
 msgid "DVB connection"
 msgstr "Conexão DVB"
 
-#: network/netconnect.pm:264
+#: network/netconnect.pm:258
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Escolha a conexão que deseja configurar"
 
-#: network/netconnect.pm:279 network/netconnect.pm:769
+#: network/netconnect.pm:273 network/netconnect.pm:761
 #, c-format
 msgid "Connection Configuration"
 msgstr "Configuração da Conexão"
 
-#: network/netconnect.pm:279 network/netconnect.pm:770
+#: network/netconnect.pm:273 network/netconnect.pm:762
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Por favor preencha ou verifique os campos abaixo"
 
-#: network/netconnect.pm:282
+#: network/netconnect.pm:276
 #, c-format
 msgid "Your personal phone number"
 msgstr "O seu número de telefone pessoal"
 
-#: network/netconnect.pm:283 network/netconnect.pm:773
+#: network/netconnect.pm:277 network/netconnect.pm:765
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Nome do provedor (ex: provedor.net)"
 
-#: network/netconnect.pm:284 standalone/drakconnect:493
+#: network/netconnect.pm:278 standalone/drakconnect:493
 #, c-format
 msgid "Provider phone number"
 msgstr "Número do telefone do provedor"
 
-#: network/netconnect.pm:285
+#: network/netconnect.pm:279
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "Provedor DNS 1 (opcional)"
 
-#: network/netconnect.pm:286
+#: network/netconnect.pm:280
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "Provedor DNS 2 (opcional)"
 
-#: network/netconnect.pm:287 standalone/drakconnect:444
+#: network/netconnect.pm:281 standalone/drakconnect:444
 #, c-format
 msgid "Dialing mode"
 msgstr "Modo de marcação"
 
-#: network/netconnect.pm:288 standalone/drakconnect:449
+#: network/netconnect.pm:282 standalone/drakconnect:449
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
 msgstr "Velocidade de conexão"
 
-#: network/netconnect.pm:289 standalone/drakconnect:454
+#: network/netconnect.pm:283 standalone/drakconnect:454
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Tempo de espera da conexão (em segundos)"
 
-#: network/netconnect.pm:290 network/netconnect.pm:315
-#: network/netconnect.pm:776 standalone/drakconnect:491
+#: network/netconnect.pm:284 network/netconnect.pm:309
+#: network/netconnect.pm:768 standalone/drakconnect:491
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Nome do utilizador da conta"
 
-#: network/netconnect.pm:291 network/netconnect.pm:316
-#: network/netconnect.pm:777 standalone/drakconnect:492
+#: network/netconnect.pm:285 network/netconnect.pm:310
+#: network/netconnect.pm:769 standalone/drakconnect:492
 #, c-format
 msgid "Account Password"
 msgstr "Senha da conta"
 
-#: network/netconnect.pm:292 standalone/drakconnect:554
+#: network/netconnect.pm:286 standalone/drakconnect:554
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ da Placa"
 
-#: network/netconnect.pm:293 standalone/drakconnect:555
+#: network/netconnect.pm:287 standalone/drakconnect:555
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Memória da Placa (DMA)"
 
-#: network/netconnect.pm:294 standalone/drakconnect:556
+#: network/netconnect.pm:288 standalone/drakconnect:556
 #, c-format
 msgid "Card IO"
 msgstr "IO da Placa"
 
-#: network/netconnect.pm:295 standalone/drakconnect:557
+#: network/netconnect.pm:289 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
 msgstr "IO_O da Placa"
 
-#: network/netconnect.pm:296
+#: network/netconnect.pm:290
 #, c-format
 msgid "Card IO_1"
 msgstr "IO_1 da Placa"
 
-#: network/netconnect.pm:311
+#: network/netconnect.pm:305
 #, c-format
 msgid "Cable: account options"
 msgstr "Cabo: opções da conta"
 
-#: network/netconnect.pm:314
+#: network/netconnect.pm:308
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr "Usar BPALogin (necessário para o Telstra)"
 
-#: network/netconnect.pm:340 network/netconnect.pm:657
-#: network/netconnect.pm:808 network/netconnect.pm:1120
+#: network/netconnect.pm:334 network/netconnect.pm:651
+#: network/netconnect.pm:800 network/netconnect.pm:1113
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Seleccione o interface de rede a configurar:"
 
-#: network/netconnect.pm:342 network/netconnect.pm:377
-#: network/netconnect.pm:658 network/netconnect.pm:810 network/shorewall.pm:69
+#: network/netconnect.pm:336 network/netconnect.pm:371
+#: network/netconnect.pm:652 network/netconnect.pm:802 network/shorewall.pm:69
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
 msgstr "Dispositivo de Rede"
 
-#: network/netconnect.pm:343 network/netconnect.pm:348
+#: network/netconnect.pm:337 network/netconnect.pm:342
 #, c-format
 msgid "External ISDN modem"
 msgstr "Modem ISDN externo"
 
-#: network/netconnect.pm:376 standalone/harddrake2:216
+#: network/netconnect.pm:370 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
 msgstr "Seleccione um dispositivo !"
 
-#: network/netconnect.pm:385 network/netconnect.pm:395
-#: network/netconnect.pm:405 network/netconnect.pm:438
-#: network/netconnect.pm:452
+#: network/netconnect.pm:379 network/netconnect.pm:389
+#: network/netconnect.pm:399 network/netconnect.pm:432
+#: network/netconnect.pm:446
 #, c-format
 msgid "ISDN Configuration"
 msgstr "Configuração ISDN"
 
-#: network/netconnect.pm:386
+#: network/netconnect.pm:380
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Que tipo de placa tem?"
 
-#: network/netconnect.pm:396
+#: network/netconnect.pm:390
 #, c-format
 msgid ""
 "\n"
@@ -10665,22 +10649,22 @@ msgstr ""
 "\n"
 "Se tiver uma placa PCMCIA, tem que saber o \"irq\" e \"io\" da sua placa.\n"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Continue"
 msgstr "Continuar"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Abort"
 msgstr "Abortar"
 
-#: network/netconnect.pm:406
+#: network/netconnect.pm:400
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Qual destas é a sua placa ISDN?"
 
-#: network/netconnect.pm:424
+#: network/netconnect.pm:418
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10691,25 +10675,25 @@ msgstr ""
 "mais funcionalidades do que o driver livre (como o envio de telecopias). Que "
 "driver deseja usar?"
 
-#: network/netconnect.pm:426 standalone/drakconnect:109 standalone/drakups:251
+#: network/netconnect.pm:420 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "Driver"
 
-#: network/netconnect.pm:438
+#: network/netconnect.pm:432
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Que protocolo quer usar?"
 
-#: network/netconnect.pm:440 standalone/drakconnect:109
+#: network/netconnect.pm:434 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
 #: standalone/drakids:196 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
 msgstr "Protocolo"
 
-#: network/netconnect.pm:452
+#: network/netconnect.pm:446
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10718,13 +10702,13 @@ msgstr ""
 "Seleccione o seu provedor.\n"
 "Se não estiver listado, escolha Não Listado"
 
-#: network/netconnect.pm:454 network/netconnect.pm:543
-#: network/netconnect.pm:689
+#: network/netconnect.pm:448 network/netconnect.pm:537
+#: network/netconnect.pm:683
 #, c-format
 msgid "Provider:"
 msgstr "Provedor:"
 
-#: network/netconnect.pm:463
+#: network/netconnect.pm:457
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10733,52 +10717,52 @@ msgstr ""
 "O seu modem não é suportado pelo sistema.\n"
 "Veja em http://www.linmodems.org"
 
-#: network/netconnect.pm:482
+#: network/netconnect.pm:476
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Seleccione o modem a configurar:"
 
-#: network/netconnect.pm:512
+#: network/netconnect.pm:506
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Por favor escolha a que porta série o seu modem está ligado."
 
-#: network/netconnect.pm:541
+#: network/netconnect.pm:535
 #, c-format
 msgid "Select your provider:"
 msgstr "Seleccione o seu provedor:"
 
-#: network/netconnect.pm:565
+#: network/netconnect.pm:559
 #, c-format
 msgid "Dialup: account options"
 msgstr "Dialup: opções da conta"
 
-#: network/netconnect.pm:568
+#: network/netconnect.pm:562
 #, c-format
 msgid "Connection name"
 msgstr "Nome da conexão"
 
-#: network/netconnect.pm:569
+#: network/netconnect.pm:563
 #, c-format
 msgid "Phone number"
 msgstr "Número do telefone"
 
-#: network/netconnect.pm:570
+#: network/netconnect.pm:564
 #, c-format
 msgid "Login ID"
 msgstr "ID de Login"
 
-#: network/netconnect.pm:585 network/netconnect.pm:618
+#: network/netconnect.pm:579 network/netconnect.pm:612
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "Dialup: parâmetros IP"
 
-#: network/netconnect.pm:588
+#: network/netconnect.pm:582
 #, c-format
 msgid "IP parameters"
 msgstr "Parâmetros IP"
 
-#: network/netconnect.pm:589 network/netconnect.pm:894
+#: network/netconnect.pm:583 network/netconnect.pm:886
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
 #: standalone/drakhosts:197 standalone/drakups:286
@@ -10786,120 +10770,111 @@ msgstr "Parâmetros IP"
 msgid "IP address"
 msgstr "Endereço IP"
 
-#: network/netconnect.pm:590
+#: network/netconnect.pm:584
 #, c-format
 msgid "Subnet mask"
 msgstr "Máscara subnet"
 
-#: network/netconnect.pm:602
+#: network/netconnect.pm:596
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Conexão Dialup: parâmetros DNS"
 
-#: network/netconnect.pm:605
+#: network/netconnect.pm:599
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:606
+#: network/netconnect.pm:600
 #, c-format
 msgid "Domain name"
 msgstr "Nome do domínio"
 
-#: network/netconnect.pm:607 network/netconnect.pm:774
+#: network/netconnect.pm:601 network/netconnect.pm:766
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Primeiro Servidor DNS (opcional)"
 
-#: network/netconnect.pm:608 network/netconnect.pm:775
+#: network/netconnect.pm:602 network/netconnect.pm:767
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Segundo Servidor DNS (opcional)"
 
-#: network/netconnect.pm:609
+#: network/netconnect.pm:603
 #, c-format
 msgid "Set hostname from IP"
 msgstr "Definir nome de endereço a partir do IP"
 
-#: network/netconnect.pm:621 standalone/drakconnect:327
+#: network/netconnect.pm:615 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
 msgstr "Gateway"
 
-#: network/netconnect.pm:622
+#: network/netconnect.pm:616
 #, c-format
 msgid "Gateway IP address"
 msgstr "Endereço IP do Gateway"
 
-#: network/netconnect.pm:657
+#: network/netconnect.pm:651
 #, c-format
 msgid "ADSL configuration"
 msgstr "Configuração ADSL"
 
-#: network/netconnect.pm:687
+#: network/netconnect.pm:681
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Por favor escolha o seu provedor ADSL"
 
-#: network/netconnect.pm:717
-#, c-format
-msgid "Connect to the Internet"
-msgstr "Conectar à Internet"
-
-#: network/netconnect.pm:718
+#: network/netconnect.pm:711
 #, c-format
 msgid ""
-"The most common way to connect with adsl is pppoe.\n"
-"Some connections use PPTP, a few use DHCP.\n"
-"If you do not know, choose 'use PPPoE'"
+"Please choose your DSL connection type.\n"
+"If you do not know it, keep the preselected type."
 msgstr ""
-"A maneira mais comum de conectar com adsl é pppoe.\n"
-"Algumas conexões usam PPTP, poucas usam DHCP.\n"
-"Se não sabe, escolha 'use PPPoE'"
 
-#: network/netconnect.pm:722
+#: network/netconnect.pm:714
 #, c-format
 msgid "ADSL connection type:"
 msgstr "Tipo de conexão ADSL:"
 
-#: network/netconnect.pm:779
+#: network/netconnect.pm:771
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr "ID do Caminho Virtual (VPI):"
 
-#: network/netconnect.pm:780
+#: network/netconnect.pm:772
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr "ID do Circuito Virtual (VCI):"
 
-#: network/netconnect.pm:783
+#: network/netconnect.pm:775
 #, c-format
 msgid "Encapsulation:"
 msgstr "Encapsulamento:"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Manually load a driver"
 msgstr "Carregar um driver manualmente"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Usar um driver Windows (com o ndiswrapper)"
 
-#: network/netconnect.pm:850
+#: network/netconnect.pm:842
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "Resolução do nome de endereço Zeroconf"
 
-#: network/netconnect.pm:851 network/netconnect.pm:881
+#: network/netconnect.pm:843 network/netconnect.pm:873
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "A configurar o dispositivo de rede %s (driver %s)"
 
-#: network/netconnect.pm:852
+#: network/netconnect.pm:844
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
@@ -10908,7 +10883,7 @@ msgstr ""
 "Os seguintes protocolos podem ser usados para configurar uma conexão LAN. "
 "Por favor escolha o que deseja usar"
 
-#: network/netconnect.pm:882
+#: network/netconnect.pm:874
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -10919,196 +10894,196 @@ msgstr ""
 "Cada item deve ser introduzido como endereço IP em notação\n"
 "ponto-decimal (por exemplo, 1.2.3.4)."
 
-#: network/netconnect.pm:889 standalone/drakconnect:373
+#: network/netconnect.pm:881 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Atribuir nome de endereço a partir do endereço DHCP"
 
-#: network/netconnect.pm:890 standalone/drakconnect:375
+#: network/netconnect.pm:882 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr "Nome do servidor DHCP"
 
-#: network/netconnect.pm:895 standalone/drakconnect:321
+#: network/netconnect.pm:887 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
 msgstr "Netmask"
 
-#: network/netconnect.pm:897 standalone/drakconnect:437
+#: network/netconnect.pm:889 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Procurar o id da placa rede (útil para os portáteis)"
 
-#: network/netconnect.pm:898 standalone/drakconnect:438
+#: network/netconnect.pm:890 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Ligação à Rede \"Hotplugging\""
 
-#: network/netconnect.pm:900 standalone/drakconnect:432
+#: network/netconnect.pm:892 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
 msgstr "Iniciar no arranque"
 
-#: network/netconnect.pm:902 standalone/drakconnect:460
+#: network/netconnect.pm:894 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
 msgstr "Metrico"
 
-#: network/netconnect.pm:903
+#: network/netconnect.pm:895
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr ""
 
-#: network/netconnect.pm:905 standalone/drakconnect:369
+#: network/netconnect.pm:897 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
 msgstr "Cliente DHCP"
 
-#: network/netconnect.pm:907 standalone/drakconnect:379
+#: network/netconnect.pm:899 standalone/drakconnect:379
 #, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "Tempo de espera DHCP (em segundos)"
 
-#: network/netconnect.pm:908 standalone/drakconnect:382
+#: network/netconnect.pm:900 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Obter servidores DNS por DHCP"
 
-#: network/netconnect.pm:909 standalone/drakconnect:383
+#: network/netconnect.pm:901 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr "Obter servidores YP por DHCP"
 
-#: network/netconnect.pm:910 standalone/drakconnect:384
+#: network/netconnect.pm:902 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr "Obter servidores NTPD por DHCP"
 
-#: network/netconnect.pm:918 printer/printerdrake.pm:1896
+#: network/netconnect.pm:910 printer/printerdrake.pm:1896
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "O endereço IP deve estar no formato 1.2.3.4"
 
-#: network/netconnect.pm:922 standalone/drakconnect:680
+#: network/netconnect.pm:914 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "O netmask deve estar no formato 255.255.224.0"
 
-#: network/netconnect.pm:926
+#: network/netconnect.pm:918
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Aviso: o endereço IP %s é normalmente reservado!"
 
-#: network/netconnect.pm:931 standalone/drakTermServ:1852
+#: network/netconnect.pm:923 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s já está em uso\n"
 
-#: network/netconnect.pm:971
+#: network/netconnect.pm:963
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Escolha um driver ndiswrapper"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr "Use o driver ndiswrapper %s"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Install a new driver"
 msgstr "Instalar um novo driver"
 
-#: network/netconnect.pm:985
+#: network/netconnect.pm:977
 #, c-format
 msgid "Select a device:"
 msgstr "Seleccione um dispositivo:"
 
-#: network/netconnect.pm:1014
+#: network/netconnect.pm:1006
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Por favor indique os parâmetros wireless para esta placa:"
 
-#: network/netconnect.pm:1017 standalone/drakconnect:404
+#: network/netconnect.pm:1009 standalone/drakconnect:404
 #, c-format
 msgid "Operating Mode"
 msgstr "Modo de Operação"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Managed"
 msgstr "Controlado"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Master"
 msgstr "Master"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Repeater"
 msgstr "Repetidor"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Secondary"
 msgstr "Secundário"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Auto"
 msgstr "Auto"
 
-#: network/netconnect.pm:1021 standalone/drakconnect:405
+#: network/netconnect.pm:1013 standalone/drakconnect:405
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "Nome da Rede (ESSID)"
 
-#: network/netconnect.pm:1022
+#: network/netconnect.pm:1014
 #, c-format
 msgid "Encryption mode"
 msgstr "Modo de encriptação"
 
-#: network/netconnect.pm:1026
+#: network/netconnect.pm:1019
 #, c-format
 msgid "Allow access point roaming"
 msgstr ""
 
-#: network/netconnect.pm:1027 standalone/drakconnect:406
+#: network/netconnect.pm:1020 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr "ID de Rede"
 
-#: network/netconnect.pm:1028 standalone/drakconnect:407
+#: network/netconnect.pm:1021 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr "Frequência de operação"
 
-#: network/netconnect.pm:1029 standalone/drakconnect:408
+#: network/netconnect.pm:1022 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr "Sensibilidade do ponto inicial"
 
-#: network/netconnect.pm:1030 standalone/drakconnect:409
+#: network/netconnect.pm:1023 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr "Bitrate (em b/s)"
 
-#: network/netconnect.pm:1031 standalone/drakconnect:420
+#: network/netconnect.pm:1024 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1032
+#: network/netconnect.pm:1025
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -11133,17 +11108,17 @@ msgstr ""
 "auto,  fixo ou\n"
 "desligado."
 
-#: network/netconnect.pm:1039 standalone/drakconnect:421
+#: network/netconnect.pm:1032 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr "Fragmentação"
 
-#: network/netconnect.pm:1040 standalone/drakconnect:422
+#: network/netconnect.pm:1033 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
 msgstr "Argumentos extra do comando Iwconfig"
 
-#: network/netconnect.pm:1041
+#: network/netconnect.pm:1034
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11160,12 +11135,12 @@ msgstr ""
 
 #  -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1048 standalone/drakconnect:423
+#: network/netconnect.pm:1041 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
 msgstr "Argumentos extra do comando lwspy"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1042
 #, c-format
 msgid ""
 "Iwspy is used to set a list of addresses in a wireless network\n"
@@ -11184,12 +11159,12 @@ msgstr ""
 "\n"
 "Consulte a página do manual iwpspy(8) para mais informações."
 
-#: network/netconnect.pm:1058 standalone/drakconnect:424
+#: network/netconnect.pm:1051 standalone/drakconnect:424
 #, c-format
 msgid "Iwpriv command extra arguments"
 msgstr "Argumentos extra do comando lwpriv"
 
-#: network/netconnect.pm:1059
+#: network/netconnect.pm:1052
 #, c-format
 msgid ""
 "Iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11217,7 +11192,7 @@ msgstr ""
 "\n"
 "Veja a página do manual iwpriv(8) para mais informações."
 
-#: network/netconnect.pm:1074
+#: network/netconnect.pm:1067
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11226,7 +11201,7 @@ msgstr ""
 "Freq deve ter o sufixo k, M ou G (por exemplo, \"2.46G\" para uma frequência "
 "de 2.46 GHz), ou então insira suficientes '0' (zeros)."
 
-#: network/netconnect.pm:1078
+#: network/netconnect.pm:1071
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11235,37 +11210,37 @@ msgstr ""
 "A taxa de transferência deve ter o sufixo k, M ou G (por exemplo, \"11M\" "
 "para 11M), ou insira suficientes '0' (zeros)."
 
-#: network/netconnect.pm:1120
+#: network/netconnect.pm:1113
 #, c-format
 msgid "DVB configuration"
 msgstr "Configuração DVB"
 
-#: network/netconnect.pm:1121
+#: network/netconnect.pm:1114
 #, c-format
 msgid "DVB Adapter"
 msgstr "Adaptador DVB"
 
-#: network/netconnect.pm:1138
+#: network/netconnect.pm:1131
 #, c-format
 msgid "DVB adapter settings"
 msgstr "Definições do adaptador DVB"
 
-#: network/netconnect.pm:1141
+#: network/netconnect.pm:1134
 #, c-format
 msgid "Adapter card"
 msgstr "Placa de adaptador"
 
-#: network/netconnect.pm:1142
+#: network/netconnect.pm:1135
 #, c-format
 msgid "Net demux"
 msgstr "Net demux"
 
-#: network/netconnect.pm:1143
+#: network/netconnect.pm:1136
 #, c-format
 msgid "PID"
 msgstr "PID"
 
-#: network/netconnect.pm:1171
+#: network/netconnect.pm:1164
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11278,69 +11253,69 @@ msgstr ""
 "tal como ``mybox.mylab.myco.com''.\n"
 "Pode também introduzir o endereço IP do gateway se tiver algum."
 
-#: network/netconnect.pm:1176
+#: network/netconnect.pm:1169
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr "Por último pode também escrever nos seus endereços IP do servidor DNS."
 
-#: network/netconnect.pm:1178 standalone/drakconnect:991
+#: network/netconnect.pm:1171 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr "Nome da máquina (opcional)"
 
-#: network/netconnect.pm:1178 standalone/drakhosts:197
+#: network/netconnect.pm:1171 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Nome da máquina"
 
-#: network/netconnect.pm:1180
+#: network/netconnect.pm:1173
 #, c-format
 msgid "DNS server 1"
 msgstr "Servidor DNS 1"
 
-#: network/netconnect.pm:1181
+#: network/netconnect.pm:1174
 #, c-format
 msgid "DNS server 2"
 msgstr "Servidor DNS 2"
 
-#: network/netconnect.pm:1182
+#: network/netconnect.pm:1175
 #, c-format
 msgid "DNS server 3"
 msgstr "Servidor DNS 3"
 
-#: network/netconnect.pm:1183
+#: network/netconnect.pm:1176
 #, c-format
 msgid "Search domain"
 msgstr "Domínio de procura"
 
-#: network/netconnect.pm:1184
+#: network/netconnect.pm:1177
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr ""
 "Por defeito o domínio de procura será definido a partir do nome da máquina "
 "devidamente qualificado"
 
-#: network/netconnect.pm:1185
+#: network/netconnect.pm:1178
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Gateway (ex. %s)"
 
-#: network/netconnect.pm:1187
+#: network/netconnect.pm:1180
 #, c-format
 msgid "Gateway device"
 msgstr "Dispositivo Gateway"
 
-#: network/netconnect.pm:1196
+#: network/netconnect.pm:1189
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "O endereço do servidor DNS deve ser no formato 1.2.3.4"
 
-#: network/netconnect.pm:1201 standalone/drakconnect:685
+#: network/netconnect.pm:1194 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "O endereço Gateway deve ser no formato 1.2.3.4"
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1207
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11353,67 +11328,67 @@ msgstr ""
 "dos seus recursos partilhados que não são geridos pela rede.\n"
 "Não é necessário na maioria das redes."
 
-#: network/netconnect.pm:1218
+#: network/netconnect.pm:1211
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Nome de Máquina Zeroconf"
 
-#: network/netconnect.pm:1221
+#: network/netconnect.pm:1214
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "O nome de máquina Zeroconf não deve conter um ."
 
-#: network/netconnect.pm:1231
+#: network/netconnect.pm:1224
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Quer permitir aos utilizadores de iniciar a conexão?"
 
-#: network/netconnect.pm:1244
+#: network/netconnect.pm:1237
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Quer iniciar a sua conexão no arranque?"
 
-#: network/netconnect.pm:1259
+#: network/netconnect.pm:1252
 #, c-format
 msgid "Automatically at boot"
 msgstr "Automáticamente no arranque"
 
-#: network/netconnect.pm:1261
+#: network/netconnect.pm:1254
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr "Ao usar a Net Applet na bandeja do painel"
 
-#: network/netconnect.pm:1263
+#: network/netconnect.pm:1256
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr "Manualmente (o interface continuará a ser activado no arranque)"
 
-#: network/netconnect.pm:1272
+#: network/netconnect.pm:1265
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Como quer ligar esta conexão ?"
 
-#: network/netconnect.pm:1285
+#: network/netconnect.pm:1278
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Quer tentar ligar-se à Internet agora?"
 
-#: network/netconnect.pm:1293 standalone/drakconnect:1023
+#: network/netconnect.pm:1286 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr "A testar a sua conexão..."
 
-#: network/netconnect.pm:1313
+#: network/netconnect.pm:1306
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "O sistema está agora ligado à Internet."
 
-#: network/netconnect.pm:1314
+#: network/netconnect.pm:1307
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Por razões de segurança, será desligada agora."
 
-#: network/netconnect.pm:1315
+#: network/netconnect.pm:1308
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11422,7 +11397,7 @@ msgstr ""
 "O sistema não parece estar conectado à Internet.\n"
 "Tente reconfigurar a sua conexão."
 
-#: network/netconnect.pm:1330
+#: network/netconnect.pm:1323
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11431,7 +11406,7 @@ msgstr ""
 "Parabéns, a configuração da rede e da Internet acabou.\n"
 "\n"
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1326
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11440,7 +11415,7 @@ msgstr ""
 "Após estar pronto, recomendamos que reinicie o seu ambiente X para evitar "
 "qualquer problema relacionado com o nome da máquina."
 
-#: network/netconnect.pm:1334
+#: network/netconnect.pm:1327
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11451,29 +11426,29 @@ msgstr ""
 "Teste a sua conexão via net_monitor ou mcc. Se a sua conexão não funcionar, "
 "pode querer relançar a configuração."
 
-#: network/netconnect.pm:1345
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(detectado na porta %s)"
 
 #  -PO: here, "(detected)" string will be appended to eg "ADSL connection"
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected %s)"
 msgstr "(detectado %s)"
 
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected)"
 msgstr "(detectado)"
 
-#: network/netconnect.pm:1348
+#: network/netconnect.pm:1341
 #, c-format
 msgid "Network Configuration"
 msgstr "Configuração da Rede"
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1342
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11486,12 +11461,12 @@ msgstr ""
 "Clique em OK para manter a configuração, ou Cancelar para reconfigurar as "
 "suas conexões Internet & Rede.\n"
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1345
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr "A rede precisa ser reiniciada. Deseja reiniciá-la?"
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1346
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11502,7 +11477,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1354
+#: network/netconnect.pm:1347
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -11515,12 +11490,12 @@ msgstr ""
 "\n"
 "Clique em \"%s\" para continuar."
 
-#: network/netconnect.pm:1355
+#: network/netconnect.pm:1348
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "A configuração está completa, deseja aplicar as definições?"
 
-#: network/netconnect.pm:1356
+#: network/netconnect.pm:1349
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11531,12 +11506,12 @@ msgstr ""
 "Escolha aquela que deseja usar.\n"
 "\n"
 
-#: network/netconnect.pm:1357
+#: network/netconnect.pm:1350
 #, c-format
 msgid "Internet connection"
 msgstr "Conexão Internet"
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1367
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11709,6 +11684,21 @@ msgstr "A procurar software e drivers pedidos..."
 msgid "Please wait, running device configuration commands..."
 msgstr ""
 "Por favor aguarde, a executar os comandos de configuração dos dispositivos..."
+
+#: network/wireless.pm:8
+#, c-format
+msgid "Open WEP"
+msgstr "Abrir WEP"
+
+#: network/wireless.pm:9
+#, c-format
+msgid "Restricted WEP"
+msgstr "WEP Restricto"
+
+#: network/wireless.pm:10
+#, c-format
+msgid "WPA Pre-Shared Key"
+msgstr "Chave Pré-Partilhada WPA"
 
 #: partition_table.pm:391
 #, c-format
@@ -21261,7 +21251,7 @@ msgstr "Bus"
 msgid "Location on the bus"
 msgstr "Posição no bus"
 
-#: standalone/drakconnect:700 standalone/drakgw:313
+#: standalone/drakconnect:700 standalone/drakgw:311
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -21386,7 +21376,7 @@ msgstr ""
 "Execute o assistente \"Adicionar um interface\" do Centro de Controlo "
 "Mandriva Linux"
 
-#: standalone/drakconnect:975 standalone/net_applet:53
+#: standalone/drakconnect:975 standalone/net_applet:51
 #, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -21396,7 +21386,7 @@ msgstr ""
 "Execute o assistente \"%s\" do Centro de Controlo Mandriva Linux"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:54
+#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:52
 #, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Configurar um novo interface de rede (LAN, ISDN, ADSL, ...)"
@@ -21963,7 +21953,7 @@ msgstr "Use este gateway como servidor de nome de domínio"
 msgid "The DNS Server IP"
 msgstr "O IP do Servidor DNS"
 
-#: standalone/drakgw:238
+#: standalone/drakgw:236
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -21976,77 +21966,77 @@ msgstr ""
 "Aqui pode escolher as diferentes opções para a configuração do servidor\n"
 "DHCP. Se desconhecer o significado de uma opção, deixe-a como está."
 
-#: standalone/drakgw:245
+#: standalone/drakgw:243
 #, c-format
 msgid "Use automatic configuration (DHCP)"
 msgstr "Use configuração automática (DHCP)"
 
-#: standalone/drakgw:246
+#: standalone/drakgw:244
 #, c-format
 msgid "The DHCP start range"
 msgstr "O inicio da extensão DHCP"
 
-#: standalone/drakgw:247
+#: standalone/drakgw:245
 #, c-format
 msgid "The DHCP end range"
 msgstr "O fim da extensão DHCP"
 
-#: standalone/drakgw:248
+#: standalone/drakgw:246
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "A duração predefinida (em segundos)"
 
-#: standalone/drakgw:249
+#: standalone/drakgw:247
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "A duração máxima (em segundos)"
 
-#: standalone/drakgw:272
+#: standalone/drakgw:270
 #, c-format
 msgid "Proxy caching server (SQUID)"
 msgstr "Servidor Proxy com cache (SQUID)"
 
-#: standalone/drakgw:276
+#: standalone/drakgw:274
 #, c-format
 msgid "Use this gateway as proxy caching server"
 msgstr "Use este gateway como servidor proxy com cache"
 
-#: standalone/drakgw:277
+#: standalone/drakgw:275
 #, c-format
 msgid "Admin mail"
 msgstr "Admin mail"
 
-#: standalone/drakgw:278
+#: standalone/drakgw:276
 #, c-format
 msgid "Visible hostname"
 msgstr "Nome de endereço vísivel"
 
-#: standalone/drakgw:279
+#: standalone/drakgw:277
 #, c-format
 msgid "Proxy port"
 msgstr "Porta do proxy"
 
-#: standalone/drakgw:280
+#: standalone/drakgw:278
 #, c-format
 msgid "Cache size (MB)"
 msgstr "Tamanho da cache (MB)"
 
-#: standalone/drakgw:302
+#: standalone/drakgw:300
 #, c-format
 msgid "Broadcast printer information"
 msgstr "Informação de transmissão da impressora"
 
-#: standalone/drakgw:319
+#: standalone/drakgw:317
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
 msgstr "A Partilha da Conexão Internet está agora activada."
 
-#: standalone/drakgw:325
+#: standalone/drakgw:323
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
 msgstr "A Partilha da Conexão Internet está agora desactivada."
 
-#: standalone/drakgw:331
+#: standalone/drakgw:329
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -22059,17 +22049,17 @@ msgstr ""
 "Rede Local, usando a configuração de rede automática (DHCP).e um servidor "
 "Transparente Proxy Cache (SQUID)."
 
-#: standalone/drakgw:366
+#: standalone/drakgw:364
 #, c-format
 msgid "Disabling servers..."
 msgstr "A desactivar servidores..."
 
-#: standalone/drakgw:380
+#: standalone/drakgw:378
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Configuração firewall detectada!"
 
-#: standalone/drakgw:381
+#: standalone/drakgw:379
 #, c-format
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
@@ -22078,12 +22068,12 @@ msgstr ""
 "Aviso! Uma configuração firewall existente foi detectada. Pode precisar de "
 "algumas correcções manuais a seguir à instalação."
 
-#: standalone/drakgw:386
+#: standalone/drakgw:384
 #, c-format
 msgid "Configuring..."
 msgstr "A configurar..."
 
-#: standalone/drakgw:387
+#: standalone/drakgw:385
 #, c-format
 msgid "Configuring firewall..."
 msgstr "A configurar firewall..."
@@ -22217,7 +22207,7 @@ msgstr "Permitir todos os utilizadores"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
-#: standalone/net_applet:61 standalone/net_applet:183
+#: standalone/net_applet:59 standalone/net_applet:181
 #: standalone/net_applet:353 standalone/net_applet:390
 #, fuzzy, c-format
 msgid "Interactive Firewall"
@@ -22259,7 +22249,7 @@ msgid "Remove from whitelist"
 msgstr "Remover da lista branca"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
-#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:183
+#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:181
 #: standalone/net_applet:353
 #, c-format
 msgid "Unable to contact daemon"
@@ -22546,11 +22536,10 @@ msgstr "ID utilizador anónimo:"
 msgid "Anonymous Group ID:"
 msgstr "ID grupo anónimo:"
 
-#: standalone/draknfs:433 standalone/draknfs:525 standalone/draksambashare:625
-#: standalone/draksambashare:792
+#: standalone/draknfs:433
 #, c-format
-msgid "Please enter a directory to share."
-msgstr "Por favor indique um directório para partilhar."
+msgid "Can't create this directory."
+msgstr ""
 
 #: standalone/draknfs:435
 #, c-format
@@ -22576,6 +22565,12 @@ msgstr "Opções Gerais"
 #, c-format
 msgid "Custom Options"
 msgstr "Opções Personalizadas"
+
+#: standalone/draknfs:525 standalone/draksambashare:625
+#: standalone/draksambashare:792
+#, c-format
+msgid "Please enter a directory to share."
+msgstr "Por favor indique um directório para partilhar."
 
 #: standalone/draknfs:532
 #, c-format
@@ -23186,7 +23181,7 @@ msgstr ""
 
 #: standalone/draksambashare:433
 #, c-format
-msgid "pdf-gen - a pdf generator"
+msgid "pdf-gen - a PDF generator"
 msgstr ""
 
 #: standalone/draksambashare:434
@@ -23207,7 +23202,7 @@ msgstr ""
 
 #: standalone/draksambashare:449
 #, c-format
-msgid "A pdf gnerator already exist."
+msgid "A PDF generator already exists."
 msgstr ""
 
 #: standalone/draksambashare:473
@@ -26761,53 +26756,53 @@ msgstr "Teste do Rato"
 msgid "Please test your mouse:"
 msgstr "Por favor teste o seu rato:"
 
-#: standalone/net_applet:49
+#: standalone/net_applet:47
 #, c-format
 msgid "Network is up on interface %s"
 msgstr "A rede está activada no interface %s"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:52
+#: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr "A rede está desactivada no interface %s. Clique em \"Configurar Rede\""
 
-#: standalone/net_applet:58 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "Conectar %s"
 
-#: standalone/net_applet:59 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "Desconectar %s"
 
-#: standalone/net_applet:60
+#: standalone/net_applet:58
 #, c-format
 msgid "Monitor Network"
 msgstr "Monitorizar Rede"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
 msgstr "Gerir redes wireless"
 
-#: standalone/net_applet:63
+#: standalone/net_applet:61
 #, c-format
 msgid "Configure Network"
 msgstr "Configurar Rede"
 
-#: standalone/net_applet:65
+#: standalone/net_applet:63
 #, c-format
 msgid "Watched interface"
 msgstr "Interface monitorizado"
 
-#: standalone/net_applet:74
+#: standalone/net_applet:72
 #, c-format
 msgid "Profiles"
 msgstr "Perfis"
 
-#: standalone/net_applet:83
+#: standalone/net_applet:81
 #, c-format
 msgid "Get Online Help"
 msgstr "Ajuda Online"
@@ -27845,6 +27840,18 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalação falhada"
+
+#~ msgid "Connect to the Internet"
+#~ msgstr "Conectar à Internet"
+
+#~ msgid ""
+#~ "The most common way to connect with adsl is pppoe.\n"
+#~ "Some connections use PPTP, a few use DHCP.\n"
+#~ "If you do not know, choose 'use PPPoE'"
+#~ msgstr ""
+#~ "A maneira mais comum de conectar com adsl é pppoe.\n"
+#~ "Algumas conexões usam PPTP, poucas usam DHCP.\n"
+#~ "Se não sabe, escolha 'use PPPoE'"
 
 #~ msgid "Do not print any test page"
 #~ msgstr "Não imprime nenhuma página de teste"

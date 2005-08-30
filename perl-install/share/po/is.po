@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2005-08-28 17:40+0800\n"
+"POT-Creation-Date: 2005-08-30 18:05+0800\n"
 "PO-Revision-Date: 2005-07-23 23:45+0000\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <isl@molar.is>\n"
@@ -178,11 +178,11 @@ msgstr "Augnablik, leita að og stilli tæki..."
 #: install_steps.pm:81 install_steps_interactive.pm:37 interactive/http.pm:117
 #: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
 #: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
-#: network/netconnect.pm:918 network/netconnect.pm:922
-#: network/netconnect.pm:926 network/netconnect.pm:931
-#: network/netconnect.pm:1074 network/netconnect.pm:1078
-#: network/netconnect.pm:1196 network/netconnect.pm:1201
-#: network/netconnect.pm:1221 network/netconnect.pm:1374
+#: network/netconnect.pm:910 network/netconnect.pm:914
+#: network/netconnect.pm:918 network/netconnect.pm:923
+#: network/netconnect.pm:1067 network/netconnect.pm:1071
+#: network/netconnect.pm:1189 network/netconnect.pm:1194
+#: network/netconnect.pm:1214 network/netconnect.pm:1367
 #: network/thirdparty.pm:266 network/thirdparty.pm:273
 #: network/thirdparty.pm:309 network/thirdparty.pm:311
 #: network/thirdparty.pm:332 network/thirdparty.pm:356
@@ -490,7 +490,7 @@ msgstr "Sérsniðið"
 #: printer/printerdrake.pm:4686 printer/printerdrake.pm:5141
 #: standalone/drakhosts:263 standalone/drakids:62 standalone/drakids:71
 #: standalone/drakids:79 standalone/draksplash:81 standalone/logdrake:173
-#: standalone/net_applet:84 standalone/scannerdrake:477
+#: standalone/net_applet:82 standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Hætta"
@@ -683,7 +683,7 @@ msgid "Cancel"
 msgstr "Hætta við"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:634 interactive.pm:527
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:636 interactive.pm:527
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
@@ -993,7 +993,7 @@ msgid "Force No Local APIC"
 msgstr "Þvinga 'engan staðbundinn' APIC"
 
 #: any.pm:294 any.pm:648 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:571 printer/printerdrake.pm:1887
+#: network/netconnect.pm:565 printer/printerdrake.pm:1887
 #: printer/printerdrake.pm:2008 standalone/drakbackup:1630
 #: standalone/drakbackup:3504 standalone/drakups:299
 #, c-format
@@ -1382,10 +1382,9 @@ msgstr "Ítarlegra"
 msgid "Input method:"
 msgstr "Innsláttaraðferð:"
 
-#: any.pm:854 install_any.pm:421 network/netconnect.pm:153
-#: network/netconnect.pm:309 network/netconnect.pm:314
-#: network/netconnect.pm:1187 printer/printerdrake.pm:105
-#: printer/printerdrake.pm:2429
+#: any.pm:854 install_any.pm:421 network/netconnect.pm:303
+#: network/netconnect.pm:308 network/netconnect.pm:1180 network/wireless.pm:7
+#: printer/printerdrake.pm:105 printer/printerdrake.pm:2429
 #, c-format
 msgid "None"
 msgstr "Enginn"
@@ -1739,7 +1738,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Þetta lykilorð er of einfalt (það verður að vera a.m.k. %d stafa langt)"
 
-#: authentication.pm:188 network/netconnect.pm:314 network/netconnect.pm:572
+#: authentication.pm:188 network/netconnect.pm:308 network/netconnect.pm:566
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
@@ -1755,7 +1754,7 @@ msgstr "Get ekki notað útvörpun án NIS léns"
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:753
+#: bootloader.pm:765
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1770,42 +1769,42 @@ msgstr ""
 "biddu eftir sjalfgefinni raesingu.\n"
 "\n"
 
-#: bootloader.pm:853
+#: bootloader.pm:865
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO með grafískri valmynd"
 
-#: bootloader.pm:854
+#: bootloader.pm:866
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO með textavalmynd"
 
-#: bootloader.pm:855
+#: bootloader.pm:867
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB með grafískri valmynd"
 
-#: bootloader.pm:856
+#: bootloader.pm:868
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB með texavalmynd"
 
-#: bootloader.pm:857
+#: bootloader.pm:869
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:935
+#: bootloader.pm:947
 #, c-format
 msgid "not enough room in /boot"
 msgstr "ekki nægilegt pláss í /boot"
 
-#: bootloader.pm:1414
+#: bootloader.pm:1433
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Þú getur ekki sett ræsistjórann á %s disksneiðina\n"
 
-#: bootloader.pm:1454
+#: bootloader.pm:1473
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1814,7 +1813,7 @@ msgstr ""
 "Þú verður að uppfæra stillingar ræsistjórans því disksneiðar hafa verið "
 "endurnúmeraðar"
 
-#: bootloader.pm:1467
+#: bootloader.pm:1486
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1823,7 +1822,7 @@ msgstr ""
 "Ekki er hægt að setja ræsistjórann rétt upp. Þú verður að ræsa með "
 "björgunardisk og velja \"%s\""
 
-#: bootloader.pm:1468
+#: bootloader.pm:1487
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Setja aftur inn ræsistjóra"
@@ -2949,7 +2948,7 @@ msgstr "Þetta lykilorð er of einfalt (verður að vera minnst %d stafa langt)"
 msgid "The encryption keys do not match"
 msgstr "Dulritunarlyklarnir eru mismunandi"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1025
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1018
 #: standalone/drakconnect:419
 #, c-format
 msgid "Encryption key"
@@ -3224,22 +3223,22 @@ msgstr ""
 "\n"
 "Viltu eyða öllum þessum disksneiðum?\n"
 
-#: fsedit.pm:381
+#: fsedit.pm:378
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Heiti tengipunkta verða að byrja á /"
 
-#: fsedit.pm:382
+#: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "Heiti tengipunkta eiga aðeins að innihalda bókstafi og tölur"
 
-#: fsedit.pm:383
+#: fsedit.pm:380
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Það er þegar disksneið með tengipunktinn %s\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:382
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3250,7 +3249,7 @@ msgstr ""
 "ræsistjóri ræður við þetta án sérstakrar /boot sneiðar.\n"
 "Vinsamlega passaðu uppá að bæta við sneið fyrir /boot"
 
-#: fsedit.pm:390
+#: fsedit.pm:387
 #, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
@@ -3259,7 +3258,7 @@ msgstr ""
 "Þú getur ekki notað sýndardisk (LVM) á tengipunkti %s því það spannar marga "
 "raunverulega diska"
 
-#: fsedit.pm:392
+#: fsedit.pm:389
 #, c-format
 msgid ""
 "You've selected a LVM Logical Volume as root (/).\n"
@@ -3272,12 +3271,12 @@ msgstr ""
 "raunverulega diska.\n"
 "Þú ættir að búa til /boot disksneið fyrst"
 
-#: fsedit.pm:396 fsedit.pm:398
+#: fsedit.pm:393 fsedit.pm:395
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Þessi mappa ætti að vera í rótar-skráakerfinu"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:397 fsedit.pm:399
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3286,17 +3285,17 @@ msgstr ""
 "Þú þarft raunverulegt skráakerfi (ext2/ext3, reiserfs, xfs, eða jfs) fyrir "
 "þennan tengipunkt\n"
 
-#: fsedit.pm:404
+#: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Þú getur ekki notað dulritað skráakerfi á tengipunkt %s"
 
-#: fsedit.pm:465
+#: fsedit.pm:462
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Ekki nægilegt pláss til sjálfvirkrar úthlutunar"
 
-#: fsedit.pm:467
+#: fsedit.pm:464
 #, c-format
 msgid "Nothing to do"
 msgstr "Ekkert að gera"
@@ -3406,7 +3405,7 @@ msgstr "Blátannartæki"
 msgid "Ethernetcard"
 msgstr "Netkort"
 
-#: harddrake/data.pm:282 network/netconnect.pm:484
+#: harddrake/data.pm:282 network/netconnect.pm:478
 #, c-format
 msgid "Modem"
 msgstr "Mótald"
@@ -3623,7 +3622,7 @@ msgid "Trouble shooting"
 msgstr "Vandamálaleit"
 
 #: harddrake/sound.pm:271 install_steps_interactive.pm:1309 keyboard.pm:391
-#: network/ndiswrapper.pm:95 network/netconnect.pm:463
+#: network/ndiswrapper.pm:95 network/netconnect.pm:457
 #: printer/printerdrake.pm:1429 printer/printerdrake.pm:2460
 #: printer/printerdrake.pm:2559 printer/printerdrake.pm:2605
 #: printer/printerdrake.pm:2672 printer/printerdrake.pm:2707
@@ -3763,8 +3762,8 @@ msgstr ""
 "\n"
 "Núverandi rekill fyrir \"%s\" hljóðkortið er \"%s\""
 
-#: harddrake/v4l.pm:12 standalone/net_applet:66 standalone/net_applet:67
-#: standalone/net_applet:69
+#: harddrake/v4l.pm:12 standalone/net_applet:64 standalone/net_applet:65
+#: standalone/net_applet:67
 #, c-format
 msgid "Auto-detect"
 msgstr "Finna sjálfkrafa"
@@ -3845,7 +3844,7 @@ msgstr ""
 "skilmálum sem þar standa, krossaðu þá við í \"%s\" reitinn, ef ekki\n"
 "smelltu þá á \"%s\" hnappinn sem mun endurræsa tölvuna þína."
 
-#: help.pm:14 install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: help.pm:14 install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
@@ -3939,7 +3938,7 @@ msgid "User name"
 msgstr "Notandanafn"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
-#: install_steps_gtk.pm:699 interactive.pm:432 interactive/newt.pm:321
+#: install_steps_gtk.pm:701 interactive.pm:432 interactive/newt.pm:321
 #: network/thirdparty.pm:322 printer/printerdrake.pm:3962
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
@@ -4300,7 +4299,7 @@ msgstr ""
 "á að setja upp nýjan prentara. Viðmótið sem sýnt er í handbókinni okkar er\n"
 "svipað því sem er notað í uppsetningarforritinu."
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:612
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:614
 #: standalone/drakbackup:2341 standalone/drakbackup:2345
 #: standalone/drakbackup:2349 standalone/drakbackup:2353
 #, c-format
@@ -6914,28 +6913,28 @@ msgstr "Engar upplýsingar"
 msgid "Time remaining "
 msgstr "Tími eftir "
 
-#: install_steps_gtk.pm:502
+#: install_steps_gtk.pm:504
 #, c-format
 msgid "Please wait, preparing installation..."
 msgstr "Augnablik, undirbý innsetningu..."
 
-#: install_steps_gtk.pm:517
+#: install_steps_gtk.pm:519
 #, c-format
 msgid "%d packages"
 msgstr "%d pakkar"
 
-#: install_steps_gtk.pm:522
+#: install_steps_gtk.pm:524
 #, c-format
 msgid "Installing package %s"
 msgstr "Set inn pakka %s"
 
-#: install_steps_gtk.pm:557 install_steps_interactive.pm:92
+#: install_steps_gtk.pm:559 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738
 #, c-format
 msgid "Refuse"
 msgstr "Neita"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:563 install_steps_interactive.pm:742
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6949,34 +6948,34 @@ msgstr ""
 "Ef þú hefur ekki diskinn, ýttu þá að \"Hætta við\" til að sleppa uppsetningu "
 "frá þessum diski."
 
-#: install_steps_gtk.pm:576 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:578 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Það kom upp villa við að raða pökkum:"
 
-#: install_steps_gtk.pm:576 install_steps_gtk.pm:580
+#: install_steps_gtk.pm:578 install_steps_gtk.pm:582
 #: install_steps_interactive.pm:753 install_steps_interactive.pm:757
 #, c-format
 msgid "Go on anyway?"
 msgstr "Viltu samt halda áfram?"
 
-#: install_steps_gtk.pm:580 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:757
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Það kom upp villa við innsetningu pakka:"
 
-#: install_steps_gtk.pm:599 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:601 install_steps_interactive.pm:933 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Yfirlit"
 
-#: install_steps_gtk.pm:622 install_steps_interactive.pm:929
+#: install_steps_gtk.pm:624 install_steps_interactive.pm:929
 #: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "ekki stillt"
 
-#: install_steps_gtk.pm:685
+#: install_steps_gtk.pm:687
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
@@ -6985,7 +6984,7 @@ msgstr ""
 "Eftirfarandi uppsetningar-miðlar hafa fundist.\n"
 "Ef þú vilt sleppa einhverjum af þeim, þá getur þú af-valið þá núna."
 
-#: install_steps_gtk.pm:694
+#: install_steps_gtk.pm:696
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -6998,7 +6997,7 @@ msgstr ""
 "Síðan mun uppsetning halda áfram frá disknum og pakkarnir verða til staðar "
 "þegar kerfið er að fullu uppsett."
 
-#: install_steps_gtk.pm:696
+#: install_steps_gtk.pm:698
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Afrita alla geisladiska"
@@ -9839,9 +9838,9 @@ msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/modem.pm:68 network/modem.pm:82 network/modem.pm:87
-#: network/modem.pm:120 network/netconnect.pm:583 network/netconnect.pm:588
-#: network/netconnect.pm:600 network/netconnect.pm:605
-#: network/netconnect.pm:621 network/netconnect.pm:623
+#: network/modem.pm:120 network/netconnect.pm:577 network/netconnect.pm:582
+#: network/netconnect.pm:594 network/netconnect.pm:599
+#: network/netconnect.pm:615 network/netconnect.pm:617
 #, c-format
 msgid "Automatic"
 msgstr "Sjálfvirk"
@@ -10185,36 +10184,36 @@ msgstr "Reynt hefur verið að brjóta upp lykilorð af %s."
 msgid "A \"%s\" attack has been attempted by %s"
 msgstr "Port-skönnun hefur verið reynd af %s."
 
-#: network/isdn.pm:117 network/netconnect.pm:455 network/netconnect.pm:544
-#: network/netconnect.pm:547 network/netconnect.pm:690
-#: network/netconnect.pm:694
+#: network/isdn.pm:117 network/netconnect.pm:449 network/netconnect.pm:538
+#: network/netconnect.pm:541 network/netconnect.pm:684
+#: network/netconnect.pm:688
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Óskráð - breyta handvirkt"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:160 network/netconnect.pm:387
+#: network/isdn.pm:160 network/netconnect.pm:381
 #, c-format
 msgid "I do not know"
 msgstr "Ég veit ekki"
 
-#: network/isdn.pm:161 network/netconnect.pm:387
+#: network/isdn.pm:161 network/netconnect.pm:381
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:162 network/netconnect.pm:387
+#: network/isdn.pm:162 network/netconnect.pm:381
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/netconnect.pm:588 network/netconnect.pm:605
-#: network/netconnect.pm:621
+#: network/netconnect.pm:582 network/netconnect.pm:599
+#: network/netconnect.pm:615
 #, c-format
 msgid "Manual"
 msgstr "Handvirkt"
@@ -10253,8 +10252,8 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr "Finn ekki ndiswrapper tengið!"
 
-#: network/netconnect.pm:69 network/netconnect.pm:485
-#: network/netconnect.pm:492
+#: network/netconnect.pm:69 network/netconnect.pm:479
+#: network/netconnect.pm:486
 #, c-format
 msgid "Manual choice"
 msgstr "Handvirkt val"
@@ -10298,305 +10297,290 @@ msgstr ""
 "Samskiptaregla til tengingar við umheiminn\n"
 "Ekki D-rás (leigðar línur)"
 
-#: network/netconnect.pm:120 network/thirdparty.pm:184
+#: network/netconnect.pm:117 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch USB mótald"
 
-#: network/netconnect.pm:121
+#: network/netconnect.pm:118
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Sagem USB mótald"
 
-#: network/netconnect.pm:122
+#: network/netconnect.pm:119
 #, c-format
 msgid "Bewan modem"
 msgstr "Bewan mótald"
 
-#: network/netconnect.pm:123
+#: network/netconnect.pm:120
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "ECI Hi-Focus mótald"
 
-#: network/netconnect.pm:127
+#: network/netconnect.pm:124
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
-#: network/netconnect.pm:128
+#: network/netconnect.pm:125
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Handvirk TCP/IP uppsetning"
 
-#: network/netconnect.pm:129
+#: network/netconnect.pm:126
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Point to Point Tunneling Protocol (PPTP)"
 
-#: network/netconnect.pm:130
+#: network/netconnect.pm:127
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP yfir Ethernet (PPPoE)"
 
-#: network/netconnect.pm:131
+#: network/netconnect.pm:128
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP yfir ATM (PPPoA)"
 
-#: network/netconnect.pm:132
+#: network/netconnect.pm:129
 #, c-format
 msgid "DSL over CAPI"
 msgstr "DSL yfir CAPI"
 
-#: network/netconnect.pm:136
+#: network/netconnect.pm:133
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Brúað Ethernet LLC"
 
-#: network/netconnect.pm:137
+#: network/netconnect.pm:134
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Brúað Ethernet VC"
 
-#: network/netconnect.pm:138
+#: network/netconnect.pm:135
 #, c-format
 msgid "Routed IP LLC"
 msgstr "Rútuð IP LLC"
 
-#: network/netconnect.pm:139
+#: network/netconnect.pm:136
 #, c-format
 msgid "Routed IP VC"
 msgstr "Rútuð IP VC"
 
-#: network/netconnect.pm:140
+#: network/netconnect.pm:137
 #, c-format
 msgid "PPPoA LLC"
 msgstr "PPPoA LLC"
 
-#: network/netconnect.pm:141
+#: network/netconnect.pm:138
 #, c-format
 msgid "PPPoA VC"
 msgstr "PPPoA VC"
 
-#: network/netconnect.pm:145 standalone/drakconnect:498
+#: network/netconnect.pm:142 standalone/drakconnect:498
 #, c-format
 msgid "Script-based"
 msgstr "Með skriftu"
 
-#: network/netconnect.pm:146 standalone/drakconnect:498
+#: network/netconnect.pm:143 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:147 standalone/drakconnect:498
+#: network/netconnect.pm:144 standalone/drakconnect:498
 #, c-format
 msgid "Terminal-based"
 msgstr "Með skjáhermi"
 
-#: network/netconnect.pm:148 standalone/drakconnect:498
+#: network/netconnect.pm:145 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:149 standalone/drakconnect:498
+#: network/netconnect.pm:146 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:154
-#, c-format
-msgid "Open WEP"
-msgstr ""
-
-#: network/netconnect.pm:155
-#, c-format
-msgid "Restricted WEP"
-msgstr ""
-
-#: network/netconnect.pm:156
-#, c-format
-msgid "WPA Pre-Shared Key"
-msgstr "WPA for-valinn lykill"
-
-#: network/netconnect.pm:242 standalone/drakconnect:56
+#: network/netconnect.pm:236 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Staðarnets og Internet stillingar"
 
-#: network/netconnect.pm:248
+#: network/netconnect.pm:242
 #, c-format
 msgid "LAN connection"
 msgstr "Staðarnets-tenging"
 
-#: network/netconnect.pm:249 network/netconnect.pm:268
+#: network/netconnect.pm:243 network/netconnect.pm:262
 #, c-format
 msgid "Wireless connection"
 msgstr "Þráðlaus tenging"
 
-#: network/netconnect.pm:250
+#: network/netconnect.pm:244
 #, c-format
 msgid "ADSL connection"
 msgstr "ADSL tenging"
 
-#: network/netconnect.pm:251
+#: network/netconnect.pm:245
 #, c-format
 msgid "Cable connection"
 msgstr "Breiðbands-tenging"
 
-#: network/netconnect.pm:252
+#: network/netconnect.pm:246
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN tenging"
 
-#: network/netconnect.pm:253
+#: network/netconnect.pm:247
 #, c-format
 msgid "Modem connection"
 msgstr "Mótaldstenging"
 
-#: network/netconnect.pm:254
+#: network/netconnect.pm:248
 #, c-format
 msgid "DVB connection"
 msgstr "DVB tenging"
 
-#: network/netconnect.pm:264
+#: network/netconnect.pm:258
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Veldu tenginguna sem þú vilt stilla"
 
-#: network/netconnect.pm:279 network/netconnect.pm:769
+#: network/netconnect.pm:273 network/netconnect.pm:761
 #, c-format
 msgid "Connection Configuration"
 msgstr "Tengi-stillingar"
 
-#: network/netconnect.pm:279 network/netconnect.pm:770
+#: network/netconnect.pm:273 network/netconnect.pm:762
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Vinsamlega fylltu inn eða krossaðu við svæðin að neðan"
 
-#: network/netconnect.pm:282
+#: network/netconnect.pm:276
 #, c-format
 msgid "Your personal phone number"
 msgstr "Þitt símanúmer"
 
-#: network/netconnect.pm:283 network/netconnect.pm:773
+#: network/netconnect.pm:277 network/netconnect.pm:765
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Nafn þjónustuaðila (t.d. simnet.is)"
 
-#: network/netconnect.pm:284 standalone/drakconnect:493
+#: network/netconnect.pm:278 standalone/drakconnect:493
 #, c-format
 msgid "Provider phone number"
 msgstr "Símanúmer netþjónustu"
 
-#: network/netconnect.pm:285
+#: network/netconnect.pm:279
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "Nafnamiðlari DNS 1 (ekki krafist)"
 
-#: network/netconnect.pm:286
+#: network/netconnect.pm:280
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "Nafnamiðlari DNS 2 (ekki krafist)"
 
-#: network/netconnect.pm:287 standalone/drakconnect:444
+#: network/netconnect.pm:281 standalone/drakconnect:444
 #, c-format
 msgid "Dialing mode"
 msgstr "Hringihamur"
 
-#: network/netconnect.pm:288 standalone/drakconnect:449
+#: network/netconnect.pm:282 standalone/drakconnect:449
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
 msgstr "Tengihraði"
 
-#: network/netconnect.pm:289 standalone/drakconnect:454
+#: network/netconnect.pm:283 standalone/drakconnect:454
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Tenging fellur á tíma eftir (í sek)"
 
-#: network/netconnect.pm:290 network/netconnect.pm:315
-#: network/netconnect.pm:776 standalone/drakconnect:491
+#: network/netconnect.pm:284 network/netconnect.pm:309
+#: network/netconnect.pm:768 standalone/drakconnect:491
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Netþjónustu-notandanafn"
 
-#: network/netconnect.pm:291 network/netconnect.pm:316
-#: network/netconnect.pm:777 standalone/drakconnect:492
+#: network/netconnect.pm:285 network/netconnect.pm:310
+#: network/netconnect.pm:769 standalone/drakconnect:492
 #, c-format
 msgid "Account Password"
 msgstr "Netþjónustu-lykilorð"
 
-#: network/netconnect.pm:292 standalone/drakconnect:554
+#: network/netconnect.pm:286 standalone/drakconnect:554
 #, c-format
 msgid "Card IRQ"
 msgstr "IRQ Korts"
 
-#: network/netconnect.pm:293 standalone/drakconnect:555
+#: network/netconnect.pm:287 standalone/drakconnect:555
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Kortminni (DMA)"
 
-#: network/netconnect.pm:294 standalone/drakconnect:556
+#: network/netconnect.pm:288 standalone/drakconnect:556
 #, c-format
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: network/netconnect.pm:295 standalone/drakconnect:557
+#: network/netconnect.pm:289 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: network/netconnect.pm:296
+#: network/netconnect.pm:290
 #, c-format
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: network/netconnect.pm:311
+#: network/netconnect.pm:305
 #, c-format
 msgid "Cable: account options"
 msgstr "Breiðbandstengi: auðkenni notanda"
 
-#: network/netconnect.pm:314
+#: network/netconnect.pm:308
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr "Nota BPALogin (þarf fyrir Telstra)"
 
-#: network/netconnect.pm:340 network/netconnect.pm:657
-#: network/netconnect.pm:808 network/netconnect.pm:1120
+#: network/netconnect.pm:334 network/netconnect.pm:651
+#: network/netconnect.pm:800 network/netconnect.pm:1113
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Veldu netkort sem á að stilla:"
 
-#: network/netconnect.pm:342 network/netconnect.pm:377
-#: network/netconnect.pm:658 network/netconnect.pm:810 network/shorewall.pm:69
+#: network/netconnect.pm:336 network/netconnect.pm:371
+#: network/netconnect.pm:652 network/netconnect.pm:802 network/shorewall.pm:69
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
 msgstr "Nettæki"
 
-#: network/netconnect.pm:343 network/netconnect.pm:348
+#: network/netconnect.pm:337 network/netconnect.pm:342
 #, c-format
 msgid "External ISDN modem"
 msgstr "Útvært ISDN mótald"
 
-#: network/netconnect.pm:376 standalone/harddrake2:216
+#: network/netconnect.pm:370 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
 msgstr "Veldu tæki !"
 
-#: network/netconnect.pm:385 network/netconnect.pm:395
-#: network/netconnect.pm:405 network/netconnect.pm:438
-#: network/netconnect.pm:452
+#: network/netconnect.pm:379 network/netconnect.pm:389
+#: network/netconnect.pm:399 network/netconnect.pm:432
+#: network/netconnect.pm:446
 #, c-format
 msgid "ISDN Configuration"
 msgstr "ISDN uppsetning"
 
-#: network/netconnect.pm:386
+#: network/netconnect.pm:380
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Hvernig kort ertu með?"
 
-#: network/netconnect.pm:396
+#: network/netconnect.pm:390
 #, c-format
 msgid ""
 "\n"
@@ -10610,22 +10594,22 @@ msgstr ""
 "\n"
 "Ef þú hefur PCMCIA kort, þá þarft þú að vita \"irq\" og \"io\" kortsins.\n"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Continue"
 msgstr "Áfram"
 
-#: network/netconnect.pm:400
+#: network/netconnect.pm:394
 #, c-format
 msgid "Abort"
 msgstr "Hætta við"
 
-#: network/netconnect.pm:406
+#: network/netconnect.pm:400
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Hvert af eftirfarandi er þitt ISDN kort?"
 
-#: network/netconnect.pm:424
+#: network/netconnect.pm:418
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10636,25 +10620,25 @@ msgstr ""
 "möguleika en frjálsi rekillinn (svo sem að senda föx). Hvorn rekilinn viltu "
 "nota?"
 
-#: network/netconnect.pm:426 standalone/drakconnect:109 standalone/drakups:251
+#: network/netconnect.pm:420 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "Rekill"
 
-#: network/netconnect.pm:438
+#: network/netconnect.pm:432
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Hvaða samskiptareglu viltu nota?"
 
-#: network/netconnect.pm:440 standalone/drakconnect:109
+#: network/netconnect.pm:434 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
 #: standalone/drakids:196 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
 msgstr "Samskiptaregla"
 
-#: network/netconnect.pm:452
+#: network/netconnect.pm:446
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10663,13 +10647,13 @@ msgstr ""
 "Veldu netþjónustuaðila.\n"
 "Ef hann er ekki á lista, veldu 'Ekki á lista'."
 
-#: network/netconnect.pm:454 network/netconnect.pm:543
-#: network/netconnect.pm:689
+#: network/netconnect.pm:448 network/netconnect.pm:537
+#: network/netconnect.pm:683
 #, c-format
 msgid "Provider:"
 msgstr "Þjónustuaðili:"
 
-#: network/netconnect.pm:463
+#: network/netconnect.pm:457
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10678,52 +10662,52 @@ msgstr ""
 "Mótaldið þitt er ekki stutt af kerfinu.\n"
 "Líttu á http://www.linmodems.org"
 
-#: network/netconnect.pm:482
+#: network/netconnect.pm:476
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Veldu mótald sem á að stilla:"
 
-#: network/netconnect.pm:512
+#: network/netconnect.pm:506
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Veldu við hvaða raðtengi mótaldið er tengt."
 
-#: network/netconnect.pm:541
+#: network/netconnect.pm:535
 #, c-format
 msgid "Select your provider:"
 msgstr "Veldu þjónustuaðila:"
 
-#: network/netconnect.pm:565
+#: network/netconnect.pm:559
 #, c-format
 msgid "Dialup: account options"
 msgstr "Upphringi: auðkenni"
 
-#: network/netconnect.pm:568
+#: network/netconnect.pm:562
 #, c-format
 msgid "Connection name"
 msgstr "Nafn tengingar"
 
-#: network/netconnect.pm:569
+#: network/netconnect.pm:563
 #, c-format
 msgid "Phone number"
 msgstr "Símanúmer"
 
-#: network/netconnect.pm:570
+#: network/netconnect.pm:564
 #, c-format
 msgid "Login ID"
 msgstr "Notendanafn"
 
-#: network/netconnect.pm:585 network/netconnect.pm:618
+#: network/netconnect.pm:579 network/netconnect.pm:612
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "Upphringi: IP Viðföng"
 
-#: network/netconnect.pm:588
+#: network/netconnect.pm:582
 #, c-format
 msgid "IP parameters"
 msgstr "IP viðföng"
 
-#: network/netconnect.pm:589 network/netconnect.pm:894
+#: network/netconnect.pm:583 network/netconnect.pm:886
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
 #: standalone/drakhosts:197 standalone/drakups:286
@@ -10731,120 +10715,111 @@ msgstr "IP viðföng"
 msgid "IP address"
 msgstr "IP vistfang"
 
-#: network/netconnect.pm:590
+#: network/netconnect.pm:584
 #, c-format
 msgid "Subnet mask"
 msgstr "Staðarnetsía"
 
-#: network/netconnect.pm:602
+#: network/netconnect.pm:596
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Upphringi: DNS viðföng"
 
-#: network/netconnect.pm:605
+#: network/netconnect.pm:599
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:606
+#: network/netconnect.pm:600
 #, c-format
 msgid "Domain name"
 msgstr "Nafn léns"
 
-#: network/netconnect.pm:607 network/netconnect.pm:774
+#: network/netconnect.pm:601 network/netconnect.pm:766
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Aðal nafnamiðlari (ekki krafist)"
 
-#: network/netconnect.pm:608 network/netconnect.pm:775
+#: network/netconnect.pm:602 network/netconnect.pm:767
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Vara nafnamiðlari (ekki krafist)"
 
-#: network/netconnect.pm:609
+#: network/netconnect.pm:603
 #, c-format
 msgid "Set hostname from IP"
 msgstr "Setja vélarnafn frá IP"
 
-#: network/netconnect.pm:621 standalone/drakconnect:327
+#: network/netconnect.pm:615 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
 msgstr "Netgátt"
 
-#: network/netconnect.pm:622
+#: network/netconnect.pm:616
 #, c-format
 msgid "Gateway IP address"
 msgstr "IP vistfang netgáttar"
 
-#: network/netconnect.pm:657
+#: network/netconnect.pm:651
 #, c-format
 msgid "ADSL configuration"
 msgstr "ADSL uppsetning"
 
-#: network/netconnect.pm:687
+#: network/netconnect.pm:681
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Veldu ADSL þjónustuaðila þinn"
 
-#: network/netconnect.pm:717
-#, c-format
-msgid "Connect to the Internet"
-msgstr "Tengjast Internetinu"
-
-#: network/netconnect.pm:718
+#: network/netconnect.pm:711
 #, c-format
 msgid ""
-"The most common way to connect with adsl is pppoe.\n"
-"Some connections use PPTP, a few use DHCP.\n"
-"If you do not know, choose 'use PPPoE'"
+"Please choose your DSL connection type.\n"
+"If you do not know it, keep the preselected type."
 msgstr ""
-"Algengast er að tengjast við ADSL með PPPoE.\n"
-"Sumir nota pptp (Ísland), nokkrir nota DHCP.\n"
-"Ef þú veist ekki, veldu þá 'nota PPTP' (Ísland)"
 
-#: network/netconnect.pm:722
+#: network/netconnect.pm:714
 #, c-format
 msgid "ADSL connection type:"
 msgstr "ADSL tengitegund:"
 
-#: network/netconnect.pm:779
+#: network/netconnect.pm:771
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr ""
 
-#: network/netconnect.pm:780
+#: network/netconnect.pm:772
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr ""
 
-#: network/netconnect.pm:783
+#: network/netconnect.pm:775
 #, c-format
 msgid "Encapsulation:"
 msgstr "Umlukin samskiptaregla:"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Manually load a driver"
 msgstr "Hlaða rekli handvirkt"
 
-#: network/netconnect.pm:810
+#: network/netconnect.pm:802
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Nota Windows rekil (með ndiswrapper)"
 
-#: network/netconnect.pm:850
+#: network/netconnect.pm:842
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "Zeroconf nafnleit vélar"
 
-#: network/netconnect.pm:851 network/netconnect.pm:881
+#: network/netconnect.pm:843 network/netconnect.pm:873
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "Stilli nettæki %s (rekill %s)"
 
-#: network/netconnect.pm:852
+#: network/netconnect.pm:844
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
@@ -10853,7 +10828,7 @@ msgstr ""
 "Eftirfarandi samskiptareglur má nota til að stilla staðarnets-tengingu. "
 "Vinsamlega veljið hverja þið viljið nota"
 
-#: network/netconnect.pm:882
+#: network/netconnect.pm:874
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -10864,196 +10839,196 @@ msgstr ""
 "Hver færsla á að vera IP tala rituð með punkt á milli.\n"
 "(dæmi 1.2.3.4)."
 
-#: network/netconnect.pm:889 standalone/drakconnect:373
+#: network/netconnect.pm:881 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Skilgreina nafn vélar frá DHCP vistfangi"
 
-#: network/netconnect.pm:890 standalone/drakconnect:375
+#: network/netconnect.pm:882 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr "DHCP vélarheiti"
 
-#: network/netconnect.pm:895 standalone/drakconnect:321
+#: network/netconnect.pm:887 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
 msgstr "Netsía"
 
-#: network/netconnect.pm:897 standalone/drakconnect:437
+#: network/netconnect.pm:889 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr ""
 
-#: network/netconnect.pm:898 standalone/drakconnect:438
+#: network/netconnect.pm:890 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Netstillingar útskiptanlegra tækja"
 
-#: network/netconnect.pm:900 standalone/drakconnect:432
+#: network/netconnect.pm:892 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
 msgstr "Ræsa við kerfisræsingu"
 
-#: network/netconnect.pm:902 standalone/drakconnect:460
+#: network/netconnect.pm:894 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
 msgstr "Kvarði"
 
-#: network/netconnect.pm:903
+#: network/netconnect.pm:895
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr ""
 
-#: network/netconnect.pm:905 standalone/drakconnect:369
+#: network/netconnect.pm:897 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
 msgstr "DHCP biðlari"
 
-#: network/netconnect.pm:907 standalone/drakconnect:379
+#: network/netconnect.pm:899 standalone/drakconnect:379
 #, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "DHCP tenging fellur á tíma eftir (í sek)"
 
-#: network/netconnect.pm:908 standalone/drakconnect:382
+#: network/netconnect.pm:900 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Sækja vistföng DNS þjóna frá DHCP miðlara"
 
-#: network/netconnect.pm:909 standalone/drakconnect:383
+#: network/netconnect.pm:901 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr "Ná í YP miðlara frá DHCP"
 
-#: network/netconnect.pm:910 standalone/drakconnect:384
+#: network/netconnect.pm:902 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr "Ná í NTPD miðlara frá DHCP"
 
-#: network/netconnect.pm:918 printer/printerdrake.pm:1896
+#: network/netconnect.pm:910 printer/printerdrake.pm:1896
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP vistfang á að vera á sniðinu 1.2.3.4"
 
-#: network/netconnect.pm:922 standalone/drakconnect:680
+#: network/netconnect.pm:914 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "Netsía á að vera á sniðinu 255.255.224.0"
 
-#: network/netconnect.pm:926
+#: network/netconnect.pm:918
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Aðvörun: IP tala %s er venjulega frátekin!"
 
-#: network/netconnect.pm:931 standalone/drakTermServ:1852
+#: network/netconnect.pm:923 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s er þegar í notkun\n"
 
-#: network/netconnect.pm:971
+#: network/netconnect.pm:963
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Velja ndiswrapper rekil"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr "Nota ndiswrapper rekil %s"
 
-#: network/netconnect.pm:973
+#: network/netconnect.pm:965
 #, c-format
 msgid "Install a new driver"
 msgstr "Setja inn nýjan rekil"
 
-#: network/netconnect.pm:985
+#: network/netconnect.pm:977
 #, c-format
 msgid "Select a device:"
 msgstr "Velja tæki:"
 
-#: network/netconnect.pm:1014
+#: network/netconnect.pm:1006
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Sláðu inn vistföng fyrir þetta þráðlausa netkort:"
 
-#: network/netconnect.pm:1017 standalone/drakconnect:404
+#: network/netconnect.pm:1009 standalone/drakconnect:404
 #, c-format
 msgid "Operating Mode"
 msgstr "Vinnsluhamur"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Ad-hoc"
 msgstr "Beintengt"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Managed"
 msgstr "Managed"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Master"
 msgstr "Stjórnandi"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Repeater"
 msgstr "Endurvaki"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Secondary"
 msgstr "Aukalegur"
 
-#: network/netconnect.pm:1018
+#: network/netconnect.pm:1010
 #, c-format
 msgid "Auto"
 msgstr "Sjálfvirkt"
 
-#: network/netconnect.pm:1021 standalone/drakconnect:405
+#: network/netconnect.pm:1013 standalone/drakconnect:405
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "Netnafn (ESSID)"
 
-#: network/netconnect.pm:1022
+#: network/netconnect.pm:1014
 #, c-format
 msgid "Encryption mode"
 msgstr "Dulritunarmáti"
 
-#: network/netconnect.pm:1026
+#: network/netconnect.pm:1019
 #, c-format
 msgid "Allow access point roaming"
 msgstr ""
 
-#: network/netconnect.pm:1027 standalone/drakconnect:406
+#: network/netconnect.pm:1020 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr "Netauðkenni"
 
-#: network/netconnect.pm:1028 standalone/drakconnect:407
+#: network/netconnect.pm:1021 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr "Vinnslutíðni"
 
-#: network/netconnect.pm:1029 standalone/drakconnect:408
+#: network/netconnect.pm:1022 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr "Næmniþröskuldur"
 
-#: network/netconnect.pm:1030 standalone/drakconnect:409
+#: network/netconnect.pm:1023 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr "Bitahraði (í b/s)"
 
-#: network/netconnect.pm:1031 standalone/drakconnect:420
+#: network/netconnect.pm:1024 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1032
+#: network/netconnect.pm:1025
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -11073,17 +11048,17 @@ msgstr ""
 "Ef gildið er jafn stórt hámarks-pakkastærð er könnunin óvirk.\n"
 "Þú getur einnig valið gildin auto, fixed, eða off."
 
-#: network/netconnect.pm:1039 standalone/drakconnect:421
+#: network/netconnect.pm:1032 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr "Slitnir-pakkar"
 
-#: network/netconnect.pm:1040 standalone/drakconnect:422
+#: network/netconnect.pm:1033 standalone/drakconnect:422
 #, c-format
 msgid "Iwconfig command extra arguments"
 msgstr "Aukaviðföng fyrir iwconfig"
 
-#: network/netconnect.pm:1041
+#: network/netconnect.pm:1034
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11100,12 +11075,12 @@ msgstr ""
 "sjá nánar á man-síðunni iwconfig(8)."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1048 standalone/drakconnect:423
+#: network/netconnect.pm:1041 standalone/drakconnect:423
 #, c-format
 msgid "Iwspy command extra arguments"
 msgstr "Auka viðföng fyrir iwspy"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1042
 #, c-format
 msgid ""
 "Iwspy is used to set a list of addresses in a wireless network\n"
@@ -11124,12 +11099,12 @@ msgstr ""
 "\n"
 "Sjá nánari upplýsingar á iwpspy(8) man síðu."
 
-#: network/netconnect.pm:1058 standalone/drakconnect:424
+#: network/netconnect.pm:1051 standalone/drakconnect:424
 #, c-format
 msgid "Iwpriv command extra arguments"
 msgstr "Auka viðföng fyrir Iwpriv"
 
-#: network/netconnect.pm:1059
+#: network/netconnect.pm:1052
 #, c-format
 msgid ""
 "Iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11156,7 +11131,7 @@ msgstr ""
 "\n"
 "sjá nánar á man-síðunni fyrir iwpriv(8)."
 
-#: network/netconnect.pm:1074
+#: network/netconnect.pm:1067
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11165,7 +11140,7 @@ msgstr ""
 "Tíðni ætti að hafa viðskeyti k, M eða G (t.d. \"2.46G\" fyrir 2.46 GHz "
 "tíðni), eða bæta við nógu mörgum núllum."
 
-#: network/netconnect.pm:1078
+#: network/netconnect.pm:1071
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11174,37 +11149,37 @@ msgstr ""
 "Hraði ætti að hafa viðskeyti k, M eða G (t.d. \"11M\" fyrir 11M) eða bæta "
 "við nógu mörgum núllum."
 
-#: network/netconnect.pm:1120
+#: network/netconnect.pm:1113
 #, c-format
 msgid "DVB configuration"
 msgstr "DVB stillingar"
 
-#: network/netconnect.pm:1121
+#: network/netconnect.pm:1114
 #, c-format
 msgid "DVB Adapter"
 msgstr "DVB tengi"
 
-#: network/netconnect.pm:1138
+#: network/netconnect.pm:1131
 #, c-format
 msgid "DVB adapter settings"
 msgstr "DVB tengi-stillingar"
 
-#: network/netconnect.pm:1141
+#: network/netconnect.pm:1134
 #, c-format
 msgid "Adapter card"
 msgstr "Netkort"
 
-#: network/netconnect.pm:1142
+#: network/netconnect.pm:1135
 #, c-format
 msgid "Net demux"
 msgstr ""
 
-#: network/netconnect.pm:1143
+#: network/netconnect.pm:1136
 #, c-format
 msgid "PID"
 msgstr ""
 
-#: network/netconnect.pm:1171
+#: network/netconnect.pm:1164
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11217,68 +11192,68 @@ msgstr ""
 "Þú mátt líka slá inn IP vistfang netgáttarinnar ef þú þekkir það.\n"
 "Netgáttin gefur þér aðgang út úr staðarnetinu (t.d. á Internetið)."
 
-#: network/netconnect.pm:1176
+#: network/netconnect.pm:1169
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr ""
 "Síðast en ekki síst getur þú einnig slegið inn IP-tölu DNS nafnamiðlara."
 
-#: network/netconnect.pm:1178 standalone/drakconnect:991
+#: network/netconnect.pm:1171 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr "Vélarnafn (þarf ekki)"
 
-#: network/netconnect.pm:1178 standalone/drakhosts:197
+#: network/netconnect.pm:1171 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Heiti vélar"
 
-#: network/netconnect.pm:1180
+#: network/netconnect.pm:1173
 #, c-format
 msgid "DNS server 1"
 msgstr "Nafnamiðlari 1 (DNS)"
 
-#: network/netconnect.pm:1181
+#: network/netconnect.pm:1174
 #, c-format
 msgid "DNS server 2"
 msgstr "Nafnamiðlari 2 (DNS)"
 
-#: network/netconnect.pm:1182
+#: network/netconnect.pm:1175
 #, c-format
 msgid "DNS server 3"
 msgstr "Nafnamiðlari 3 (DNS)"
 
-#: network/netconnect.pm:1183
+#: network/netconnect.pm:1176
 #, c-format
 msgid "Search domain"
 msgstr "Leita í léni"
 
-#: network/netconnect.pm:1184
+#: network/netconnect.pm:1177
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr "Sjálfgefið verður leitar-lén sett út frá fullformuðu vélarnafni"
 
-#: network/netconnect.pm:1185
+#: network/netconnect.pm:1178
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Netgátt (þ.e. %s)"
 
-#: network/netconnect.pm:1187
+#: network/netconnect.pm:1180
 #, c-format
 msgid "Gateway device"
 msgstr "Netgátt (tækið)"
 
-#: network/netconnect.pm:1196
+#: network/netconnect.pm:1189
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Vistfang DNS-þjóns á að vera á sniðinu 1.2.3.4"
 
-#: network/netconnect.pm:1201 standalone/drakconnect:685
+#: network/netconnect.pm:1194 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "Vistfang netgáttar á að vera á sniðinu 1.2.3.4"
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1207
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11291,67 +11266,67 @@ msgstr ""
 "þjónustur sem er ekki stjórnað af netinu.\n"
 "Þessa er ekki þörf á flestum netum."
 
-#: network/netconnect.pm:1218
+#: network/netconnect.pm:1211
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Zeroconf Heiti vélar"
 
-#: network/netconnect.pm:1221
+#: network/netconnect.pm:1214
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Zerocont vélarheiti má ekki innihalda ."
 
-#: network/netconnect.pm:1231
+#: network/netconnect.pm:1224
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Viltu leyfa notendum að ræsa nettengingarnar?"
 
-#: network/netconnect.pm:1244
+#: network/netconnect.pm:1237
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Viltu ræsa nettengingarnar þegar kerfi ræsir?"
 
-#: network/netconnect.pm:1259
+#: network/netconnect.pm:1252
 #, c-format
 msgid "Automatically at boot"
 msgstr "Sjálfvirkt við kerfisræsingu"
 
-#: network/netconnect.pm:1261
+#: network/netconnect.pm:1254
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr "Með því að nota Netforritið í kerfisbakkanum"
 
-#: network/netconnect.pm:1263
+#: network/netconnect.pm:1256
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr "Handvirkt (tækið verður samt frumstillt þegar kerfið ræsir)"
 
-#: network/netconnect.pm:1272
+#: network/netconnect.pm:1265
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Hvernig viltu hringja í þessa nettengingu?"
 
-#: network/netconnect.pm:1285
+#: network/netconnect.pm:1278
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Viltu reyna að tengjast Internetinu núna?"
 
-#: network/netconnect.pm:1293 standalone/drakconnect:1023
+#: network/netconnect.pm:1286 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr "Prófa tenginguna þína..."
 
-#: network/netconnect.pm:1313
+#: network/netconnect.pm:1306
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Kerfið er nú tengt Internetinu."
 
-#: network/netconnect.pm:1314
+#: network/netconnect.pm:1307
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Af öryggisástæðum verður aftengt núna."
 
-#: network/netconnect.pm:1315
+#: network/netconnect.pm:1308
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11360,7 +11335,7 @@ msgstr ""
 "Kerfið virðist ekki vera tengt við Internetið.\n"
 "reyndu að endurstilla tenginguna."
 
-#: network/netconnect.pm:1330
+#: network/netconnect.pm:1323
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11369,7 +11344,7 @@ msgstr ""
 "Til hamingju, staðarnets og Internets uppsetningu er lokið.\n"
 "\n"
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1326
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11378,7 +11353,7 @@ msgstr ""
 "Eftir að þessu er lokið mælum við með að þú endurræsir X umhverfið til að "
 "koma í veg fyrir nafna-tengd vandamál."
 
-#: network/netconnect.pm:1334
+#: network/netconnect.pm:1327
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11389,28 +11364,28 @@ msgstr ""
 "Prófaðu tenginguna með net_monitor eða mcc. ef tengingin virkar ekki,þá "
 "gætir þú reynt að endurtaka uppsetninguna."
 
-#: network/netconnect.pm:1345
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(fundið á porti %s)"
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected %s)"
 msgstr "(skynjað %s)"
 
-#: network/netconnect.pm:1347
+#: network/netconnect.pm:1340
 #, c-format
 msgid "(detected)"
 msgstr "(skynjað)"
 
-#: network/netconnect.pm:1348
+#: network/netconnect.pm:1341
 #, c-format
 msgid "Network Configuration"
 msgstr "Netstillingar"
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1342
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11423,12 +11398,12 @@ msgstr ""
 "Smelltu á 'Í lagi' til að halda þessari uppsetningu, eða 'Hætta við' til að "
 "endurstilla Internet og nettengingar.\n"
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1345
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr "Það þarf að endurræsa netið, viltu endurræsa það núna?"
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1346
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11439,7 +11414,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1354
+#: network/netconnect.pm:1347
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -11452,12 +11427,12 @@ msgstr ""
 "\n"
 "Ýttu á \"%s\" til að halda áfram."
 
-#: network/netconnect.pm:1355
+#: network/netconnect.pm:1348
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Uppsetningu lokið, viltu virkja stillingar?"
 
-#: network/netconnect.pm:1356
+#: network/netconnect.pm:1349
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11468,12 +11443,12 @@ msgstr ""
 "Veldu þá sem þú vilt nota.\n"
 "\n"
 
-#: network/netconnect.pm:1357
+#: network/netconnect.pm:1350
 #, c-format
 msgid "Internet connection"
 msgstr "Internet-tenging"
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1367
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11644,6 +11619,21 @@ msgstr "Leita að hugbúnaði og reklum..."
 #, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "Augnablik, keyri stilli-skipanir fyrir tæki..."
+
+#: network/wireless.pm:8
+#, c-format
+msgid "Open WEP"
+msgstr ""
+
+#: network/wireless.pm:9
+#, c-format
+msgid "Restricted WEP"
+msgstr ""
+
+#: network/wireless.pm:10
+#, c-format
+msgid "WPA Pre-Shared Key"
+msgstr "WPA for-valinn lykill"
 
 #: partition_table.pm:391
 #, c-format
@@ -21069,7 +21059,7 @@ msgstr "Braut"
 msgid "Location on the bus"
 msgstr "Staðsetning á braut"
 
-#: standalone/drakconnect:700 standalone/drakgw:313
+#: standalone/drakconnect:700 standalone/drakgw:311
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -21193,7 +21183,7 @@ msgstr ""
 "Þetta nettengi hefur ekki verið stillt enn.\n"
 "Keyrið \"Bæta við tengingu\" aðstoðarálfinn frá Mandriva Linux stjórnborðinu"
 
-#: standalone/drakconnect:975 standalone/net_applet:53
+#: standalone/drakconnect:975 standalone/net_applet:51
 #, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
@@ -21203,7 +21193,7 @@ msgstr ""
 "Keyrið \"%s\" aðstoðarálfinn frá Mandriva Linux stjórnborðinu"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:54
+#: standalone/drakconnect:976 standalone/drakroam:42 standalone/net_applet:52
 #, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Setja upp nýja nettengingu (LAN, ISDN, ADSL, ...)"
@@ -21765,7 +21755,7 @@ msgstr "Nota þessa netgátt sem nafnamiðlara léns"
 msgid "The DNS Server IP"
 msgstr "Vistfang DNS þjóns"
 
-#: standalone/drakgw:238
+#: standalone/drakgw:236
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -21778,77 +21768,77 @@ msgstr ""
 "Hér getur þú valið mismunandi valkosti fyrir DHCP miðlara uppsetningu.\n"
 "Ef þú veist ekki hvað þessar breytur þýða, láttu þær þá bara eiga sig."
 
-#: standalone/drakgw:245
+#: standalone/drakgw:243
 #, c-format
 msgid "Use automatic configuration (DHCP)"
 msgstr "Nota sjálfvirka uppsetningu (DHCP)"
 
-#: standalone/drakgw:246
+#: standalone/drakgw:244
 #, c-format
 msgid "The DHCP start range"
 msgstr "Fyrsta IP-tala DHCP"
 
-#: standalone/drakgw:247
+#: standalone/drakgw:245
 #, c-format
 msgid "The DHCP end range"
 msgstr "Loka IP-tala DHCP"
 
-#: standalone/drakgw:248
+#: standalone/drakgw:246
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "Sjálfgefinn leigutími (í sekúndum)"
 
-#: standalone/drakgw:249
+#: standalone/drakgw:247
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "Hámarksleigutími (í sekúndum)"
 
-#: standalone/drakgw:272
+#: standalone/drakgw:270
 #, c-format
 msgid "Proxy caching server (SQUID)"
 msgstr "Vefsels-þjónusta (SQUID)"
 
-#: standalone/drakgw:276
+#: standalone/drakgw:274
 #, c-format
 msgid "Use this gateway as proxy caching server"
 msgstr "Nota þessa netgátt sem vefsels-þjónustu"
 
-#: standalone/drakgw:277
+#: standalone/drakgw:275
 #, c-format
 msgid "Admin mail"
 msgstr "Netfang kerfisstjóra"
 
-#: standalone/drakgw:278
+#: standalone/drakgw:276
 #, c-format
 msgid "Visible hostname"
 msgstr "Sýnilegt vélarnafn"
 
-#: standalone/drakgw:279
+#: standalone/drakgw:277
 #, c-format
 msgid "Proxy port"
 msgstr "Sel-gátt"
 
-#: standalone/drakgw:280
+#: standalone/drakgw:278
 #, c-format
 msgid "Cache size (MB)"
 msgstr "Stærð biðminnis (MB)"
 
-#: standalone/drakgw:302
+#: standalone/drakgw:300
 #, c-format
 msgid "Broadcast printer information"
 msgstr "Útvarpa upplýsingum um prentara"
 
-#: standalone/drakgw:319
+#: standalone/drakgw:317
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
 msgstr "Samnýting Internetstengingar er nú virk."
 
-#: standalone/drakgw:325
+#: standalone/drakgw:323
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
 msgstr "Samnýting Internets tengingar er nú aftengd."
 
-#: standalone/drakgw:331
+#: standalone/drakgw:329
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -21861,17 +21851,17 @@ msgstr ""
 "því að nota sjálfvirka netuppsetningu (DHCP) og \n"
 "gagnsæja vefsels-þjónustu (SQUID)."
 
-#: standalone/drakgw:366
+#: standalone/drakgw:364
 #, c-format
 msgid "Disabling servers..."
 msgstr "Aftengi miðlara..."
 
-#: standalone/drakgw:380
+#: standalone/drakgw:378
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Fann eldveggsuppsetningu!"
 
-#: standalone/drakgw:381
+#: standalone/drakgw:379
 #, c-format
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
@@ -21880,12 +21870,12 @@ msgstr ""
 "Aðvörun! Eldveggsuppsetning hefur fundist. Þú þarft kannski að breyta henni "
 "handvirkt eftir uppsetninguna."
 
-#: standalone/drakgw:386
+#: standalone/drakgw:384
 #, c-format
 msgid "Configuring..."
 msgstr "Uppsetning..."
 
-#: standalone/drakgw:387
+#: standalone/drakgw:385
 #, c-format
 msgid "Configuring firewall..."
 msgstr "Stilli eldvegg..."
@@ -22019,7 +22009,7 @@ msgstr "Leyfa öllum notendum"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
-#: standalone/net_applet:61 standalone/net_applet:183
+#: standalone/net_applet:59 standalone/net_applet:181
 #: standalone/net_applet:353 standalone/net_applet:390
 #, fuzzy, c-format
 msgid "Interactive Firewall"
@@ -22061,7 +22051,7 @@ msgid "Remove from whitelist"
 msgstr "Taka úr LVM"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
-#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:183
+#: standalone/drakids:179 standalone/drakids:246 standalone/net_applet:181
 #: standalone/net_applet:353
 #, fuzzy, c-format
 msgid "Unable to contact daemon"
@@ -22345,11 +22335,10 @@ msgstr "Auðkenni (ID) nafnlauss notanda:"
 msgid "Anonymous Group ID:"
 msgstr "Auðkenni (GID) nafnlauss hóps:"
 
-#: standalone/draknfs:433 standalone/draknfs:525 standalone/draksambashare:625
-#: standalone/draksambashare:792
+#: standalone/draknfs:433
 #, c-format
-msgid "Please enter a directory to share."
-msgstr "Vinsamlega gefið upp möppu sem á að miðla."
+msgid "Can't create this directory."
+msgstr ""
 
 #: standalone/draknfs:435
 #, c-format
@@ -22375,6 +22364,12 @@ msgstr "Almennir valkostir"
 #, c-format
 msgid "Custom Options"
 msgstr "Sértækir valkostir"
+
+#: standalone/draknfs:525 standalone/draksambashare:625
+#: standalone/draksambashare:792
+#, c-format
+msgid "Please enter a directory to share."
+msgstr "Vinsamlega gefið upp möppu sem á að miðla."
 
 #: standalone/draknfs:532
 #, c-format
@@ -22983,7 +22978,7 @@ msgstr ""
 
 #: standalone/draksambashare:433
 #, c-format
-msgid "pdf-gen - a pdf generator"
+msgid "pdf-gen - a PDF generator"
 msgstr ""
 
 #: standalone/draksambashare:434
@@ -23004,7 +22999,7 @@ msgstr ""
 
 #: standalone/draksambashare:449
 #, c-format
-msgid "A pdf gnerator already exist."
+msgid "A PDF generator already exists."
 msgstr ""
 
 #: standalone/draksambashare:473
@@ -26373,53 +26368,53 @@ msgstr "Músaprófun"
 msgid "Please test your mouse:"
 msgstr "Vinsamlega prófaðu músina:"
 
-#: standalone/net_applet:49
+#: standalone/net_applet:47
 #, c-format
 msgid "Network is up on interface %s"
 msgstr "Net er í gangi á tengi %s"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-#: standalone/net_applet:52
+#: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
 msgstr "Net er ekki í gangi á tengi %s. Smelltu á \"Stilla net\""
 
-#: standalone/net_applet:58 standalone/net_monitor:469
+#: standalone/net_applet:56 standalone/net_monitor:469
 #, c-format
 msgid "Connect %s"
 msgstr "Tengist %s"
 
-#: standalone/net_applet:59 standalone/net_monitor:469
+#: standalone/net_applet:57 standalone/net_monitor:469
 #, c-format
 msgid "Disconnect %s"
 msgstr "Aftengist %s"
 
-#: standalone/net_applet:60
+#: standalone/net_applet:58
 #, c-format
 msgid "Monitor Network"
 msgstr "Neteftirlit"
 
-#: standalone/net_applet:62
+#: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
 msgstr "Sýsla með þráðlaus net"
 
-#: standalone/net_applet:63
+#: standalone/net_applet:61
 #, c-format
 msgid "Configure Network"
 msgstr "Stilla nettengingu"
 
-#: standalone/net_applet:65
+#: standalone/net_applet:63
 #, c-format
 msgid "Watched interface"
 msgstr "Eftirlit með tengi"
 
-#: standalone/net_applet:74
+#: standalone/net_applet:72
 #, c-format
 msgid "Profiles"
 msgstr "Snið"
 
-#: standalone/net_applet:83
+#: standalone/net_applet:81
 #, c-format
 msgid "Get Online Help"
 msgstr "Sækja nethjálp"
@@ -27452,6 +27447,18 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Innsetning mistókst"
+
+#~ msgid "Connect to the Internet"
+#~ msgstr "Tengjast Internetinu"
+
+#~ msgid ""
+#~ "The most common way to connect with adsl is pppoe.\n"
+#~ "Some connections use PPTP, a few use DHCP.\n"
+#~ "If you do not know, choose 'use PPPoE'"
+#~ msgstr ""
+#~ "Algengast er að tengjast við ADSL með PPPoE.\n"
+#~ "Sumir nota pptp (Ísland), nokkrir nota DHCP.\n"
+#~ "Ef þú veist ekki, veldu þá 'nota PPTP' (Ísland)"
 
 #~ msgid "Do not print any test page"
 #~ msgstr "Prenta ekki út prufublaðsíðu(r)"
