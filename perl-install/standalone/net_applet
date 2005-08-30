@@ -207,7 +207,6 @@ sub checkWireless() {
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
 sub checkNetwork() {
-    checkWireless();
     my ($gw_intf, $_is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
       network::tools::get_internet_connection($net);
@@ -217,13 +216,16 @@ sub checkNetworkForce() {
     $net = {};
     network::network::read_net_conf($net);
     undef $current_state;
+    checkWireless();
     checkNetwork();
 }
 sub cronNetwork() {
+    my $i;
     $timeout = Glib::Timeout->add(2000, sub {
-                                      checkNetwork();
-                                      1;
-                                  });
+        checkWireless() if !($i++%10);
+        checkNetwork();
+        1;
+    });
 }
 sub cronUpdate() {
     my $current_md5 = common::md5file($0);
