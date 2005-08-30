@@ -1030,7 +1030,7 @@ packet size disable the scheme. You may also set this parameter to auto, fixed
 or off.")
                              },
                              { label => N("Fragmentation"), val => \$ethntf->{WIRELESS_FRAG}, advanced => 1 },
-                             { label => N("Iwconfig command extra arguments"), val => \$ethntf->{WIRELESS_IWCONFIG}, advanced => 1,
+                             { label => N("iwconfig command extra arguments"), val => \$ethntf->{WIRELESS_IWCONFIG}, advanced => 1,
                                help => N("Here, one can configure some extra wireless parameters such as:
 ap, channel, commit, enc, power, retry, sens, txpower (nick is already set as the hostname).
 
@@ -1038,8 +1038,8 @@ See iwconfig(8) man page for further information."),
                              },
                              { label =>
                                #-PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-                               N("Iwspy command extra arguments"), val => \$ethntf->{WIRELESS_IWSPY}, advanced => 1,
-                               help => N("Iwspy is used to set a list of addresses in a wireless network
+                               N("iwspy command extra arguments"), val => \$ethntf->{WIRELESS_IWSPY}, advanced => 1,
+                               help => N("iwspy is used to set a list of addresses in a wireless network
 interface and to read back quality of link information for each of those.
 
 This information is the same as the one available in /proc/net/wireless :
@@ -1048,11 +1048,11 @@ quality of the link, signal strength and noise level.
 See iwpspy(8) man page for further information."),
  },
                              if_(!$need_rt2x00_iwpriv,
-                                 { label => N("Iwpriv command extra arguments"), val => \$ethntf->{WIRELESS_IWPRIV}, advanced => 1,
-                                   help => N("Iwpriv enable to set up optionals (private) parameters of a wireless network
+                                 { label => N("iwpriv command extra arguments"), val => \$ethntf->{WIRELESS_IWPRIV}, advanced => 1,
+                                   help => N("iwpriv enable to set up optionals (private) parameters of a wireless network
 interface.
 
-Iwpriv deals with parameters and setting specific to each driver (as opposed to
+iwpriv deals with parameters and setting specific to each driver (as opposed to
 iwconfig which deals with generic ones).
 
 In theory, the documentation of each device driver should indicate how to use

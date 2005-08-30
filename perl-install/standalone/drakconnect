@@ -23,7 +23,7 @@
 
 use strict;
 
-use lib qw(/usr/lib/libDrakX);
+#use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
@@ -419,9 +419,9 @@ sub build_notebook {
 			   } ([ N("Encryption key"), 'WIRELESS_ENC_KEY' ],
 			      [ N("RTS/CTS"), 'WIRELESS_RTS' ],
 			      [ N("Fragmentation"), 'WIRELESS_FRAG' ],
-			      [ N("Iwconfig command extra arguments"),  'WIRELESS_IWCONFIG' ],
-			      [ N("Iwspy command extra arguments"), 'WIRELESS_IWSPY' ],
-			      [ N("Iwpriv command extra arguments"), 'WIRELESS_IWPRIV' ],
+			      [ N("iwconfig command extra arguments"),  'WIRELESS_IWCONFIG' ],
+			      [ N("iwspy command extra arguments"), 'WIRELESS_IWSPY' ],
+			      [ N("iwpriv command extra arguments"), 'WIRELESS_IWPRIV' ],
 			     ),
 			),
 	       );
