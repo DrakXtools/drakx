@@ -2775,18 +2775,22 @@ sub setup_common {
     }
 
     #- if CUPS is the spooler, make sure that CUPS knows the device
-    if ($printer->{SPOOLER} eq "cups" &&
-	$device !~ /^lpd:/ &&
-	$device !~ /^smb:/ &&
-	$device !~ /^socket:/ &&
-	$device !~ /^http:/ &&
-	$device !~ /^ipp:/) {
-	my $_w = $in->wait_message(
-             N("Printerdrake"),
-	     N("Making printer port available for CUPS..."))
-	    if !$printer->{noninteractive};
-	printer::main::assure_device_is_available_for_cups($ptaldevice ||
-							   $device);
+    if ($printer->{SPOOLER} eq "cups") {
+	my $hplipsocket = undef;
+	$hplipsocket = "hp:/" if $hplipdevice =~ m!/net/!i;
+	if ($hplipsocket || 
+	    ($device !~ /^lpd:/ &&
+	     $device !~ /^smb:/ &&
+	     $device !~ /^socket:/ &&
+	     $device !~ /^http:/ &&
+	     $device !~ /^ipp:/)) {
+	    my $_w = $in->wait_message(
+		N("Printerdrake"),
+		N("Making printer port available for CUPS..."))
+		if !$printer->{noninteractive};
+	    printer::main::assure_device_is_available_for_cups(
+		$hplipsocket || $hplipdevice || $ptaldevice || $device);
+	}
     }
 
     #- Read the printer driver database if necessary
