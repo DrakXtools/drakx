@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.49mdk
+Release: 0.50mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,65 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 30 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.50mdk
+- drakroam: rewrite it to use wpa_supplicant and mandi
+- net_applet:
+  o use new wireless icons
+  o display wireless link icon in tray icon if connected
+    through wireless
+  o check wireless every 20 seconds only
+  o detect use vlan/alias interfaces (thanks to Michael Scherer)
+  o rephrase IFW interactive/automatic checkbox label in
+    the settings menu
+- generic wireless:
+  o configure wpa_supplicant correctly for shared or passwordless
+    connections
+  o wpa_supplicant may list some networks twice, handle it
+- drakconnect:
+  o restart associated ethernet device for dsl connections needing it
+  o rephrase "DSL connection type" message, the preselected type
+    has better to be kept
+  o don't blacklist ifplugd for pcmcia interfaces
+  o use lower case 'i' for iwconfig/iwpriv/iwspy (#18031)
+- draksplash: restrict mouse motion to image
+- drakfont: allow to import Windows Fonts (#15531)
+- printerdrake (Till):
+  o when setting up new queue with HPLIP old HPOJ, delete config
+  o restart CUPS after installing HPLIP for a network printer
+  o autosetupprintqueues: use correct language
+  o disable margins with Gutenprint
+  o removed "Do not print testy page" in test page step of add printer
+    wizard (bug #15861)
+  o fix message window in the case that no local printer was found
+    when running the add printer wizard in beginner's mode (bug #16757)
+- drakhosts/draksambashare/draknfs (Antoine Ginies): use new icons
+- draknfs (Antoine Ginies):
+  o in case of all_squash use anongid=65534 and anongid=65534
+  o create dir if it does not exist
+  o fix typo (#17978)
+- draksambashare (Antoine Ginies):
+  o add popup menu to easily modify/remove share
+  o add printer support, notebook support, and user tab
+- interactive layer (Pixel): fix "Cancel" in ask_okcancel
+- bootlader-config (Pixel):
+  o vga_fb expects the vga mode, not a boolean
+  o propose to create a default bootloader configuration when no
+    bootloader is found
+  o conectiva 10's grub detection
+  o install grub stage files in install_grub(), not write_grub()
+    (#17830, thanks to herton)
+- XFdrake (Pixel): handle nvidia's libglx.so being now in extensions/nvidia
+- drakTermServ (Stew): reverse xdm-config logic for XDMCP
+- drakfirewall (Thierry): use banner and icon
+- harddrake (Thierry):
+  o add more icons
+  o sync with latest saa7134 driver
+  o ldetect runs gzip now, reduce time spent by using a cache
+  o find driver of host controller from sysfs in all cases (not just usb-storage)
+- diskdrake: (Thierry)
+  o document 'encrypted' option (#13562, Per Oyvind Karlsen)
+  o Grub really is named GRUB (it makes the pull-down more consistent)
+
 * Wed Aug 24 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.49mdk
 - interactive layer: do not crash when given an empty list (blino, #17718)
 - diskdrake, XFdrake: misc bug fixes (pixel)
