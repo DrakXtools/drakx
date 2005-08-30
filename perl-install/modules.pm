@@ -132,21 +132,18 @@ sub load_category {
 	  if_($category =~ /net/, 'bmac', 'gmac', 'mace', 'airport'),
       ) : (),
     );
-    my @l = (probe_category($category),
-	     map { { driver => $_, description => $_, try => 1 } } @try_modules);
+    my @l = (
+	(map {
+	    my $other = { ahci => 'ata_piix', ata_piix => 'ahci' }->{$_->{driver}};
+	    ($_, if_($other, { %$_, driver => $other }));
+	} probe_category($category)),
+	(map { { driver => $_, description => $_, try => 1 } } @try_modules),
+    );
 
     foreach (@l) {
 	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
 	eval { load_and_configure($conf, $_->{driver}, $_->{options}) };
 	$_->{error} = $@;
-
-	if ($_->{error} && member($_->{driver}, 'ahci', 'ata_piix')) {
-	    #- HACK: ahci and ata_piix handle the same hardware, it only depends on the bios configuration
-	    my $other = $_->{driver} eq 'ahci' ? 'ata_piix' : 'ahci';
-	    log::l("failure loading $_->{driver}, trying $other instead (error is: $_->{error})");
-	    $_->{driver} = $other;
-	    redo;
-	}
 
 	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
     }
