@@ -946,6 +946,7 @@ Beware that some Mandriva Linux tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
 " };
+    install_any::deploy_server_notify($o) if exists $o->{deploy_server};
     #- wait for remaining processes.
     foreach (@{$o->{waitpids}}) {
 	waitpid $_, 0;

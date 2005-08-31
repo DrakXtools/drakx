@@ -1930,6 +1930,31 @@ sub move_clp_to_disk {
     }
 }
 
+sub deploy_server_notify {
+    my ($o) = @_;
+    my $fallback_intf = "eth0";
+    my $fallback_port = 3710;
+
+    my ($server, $port) = $o->{deploy_server} =~ /^(.*?)(?::(\d+))?$/;
+    if ($server) {
+        require network::tools;
+        require IO::Socket;
+        $port ||= $fallback_port;
+        my $intf = network::tools::get_current_gateway_interface() || $fallback_intf;
+        my $mac = c::get_hw_address($intf);
+        my $sock = IO::Socket::INET->new(PeerAddr => $server, PeerPort => $port, Proto => 'tcp');
+        if ($sock) {
+            print $sock "$mac\n";
+            close($sock);
+            log::l(qq(successfully notified deploy server $server on port $port));
+        } else {
+            log::l(qq(unable to contact deploy server $server on port $port));
+        }
+    } else {
+        log::l(qq(unable to parse deploy server in string $o->{deploy_server}));
+    }
+}
+
 #-###############################################################################
 #- pcmcia various
 #-###############################################################################
