@@ -346,7 +346,7 @@ sub _gtk__Entry {
 }
 
 sub _gtk__TextView {
-    my ($w, $opts) = @_;
+    my ($w, $opts, $_class, $action) = @_;
 	
     if (!$w) {
 	$w = Gtk2::TextView->new;
@@ -355,7 +355,7 @@ sub _gtk__TextView {
 	$w->set_cursor_visible(delete $opts->{cursor_visible}) if exists $opts->{cursor_visible};
     }
 
-    _text_insert($w, delete $opts->{text}) if exists $opts->{text};
+    _text_insert($w, delete $opts->{text}, append => $action eq 'gtkadd') if exists $opts->{text};
     $w;
 }
 
