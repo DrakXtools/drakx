@@ -510,8 +510,7 @@ sub installPackages {
 
     $advertize->(0);
 
-    my $oldInstallCallback = \&pkgs::installCallback;
-    local *pkgs::installCallback = sub {
+    local *install_steps::installCallback = sub {
 	my ($data, $type, $id, $subtype, $amount, $total) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
 	    #- $amount and $total are used to return number of package and total size.
@@ -545,7 +544,7 @@ sub installPackages {
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
-	} else { goto $oldInstallCallback }
+	}
     };
     #- the modification is not local as the box should be living for other package installation.
     undef *install_any::changeMedium;

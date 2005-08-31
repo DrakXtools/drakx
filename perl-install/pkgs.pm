@@ -1038,7 +1038,7 @@ sub installCallback {
 }
 
 sub install {
-    my ($isUpgrade, $toInstall, $packages) = @_;
+    my ($isUpgrade, $toInstall, $packages, $callback) = @_;
     my %packages;
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
@@ -1070,7 +1070,7 @@ sub install {
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
     #- place (install_steps_gtk.pm,...).
-    installCallback($packages, user => undef, install => $nb, $total);
+    $callback->($packages, user => undef, install => $nb, $total);
 
     do {
 	my @transToInstall = installTransactionClosure($packages, \%packages);
@@ -1109,8 +1109,8 @@ sub install {
 		    foreach (@transToInstall) {
 			log::l("i would install ", $_->name, " now");
 			my $id = $_->id;
-			installCallback($packages, inst => $id, start => 0, $size_typical);
-			installCallback($packages, inst => $id, progress => 0, $size_typical);
+			$callback->($packages, inst => $id, start => 0, $size_typical);
+			$callback->($packages, inst => $id, progress => 0, $size_typical);
 			$close->($_);
 		    }
 		} else {
@@ -1155,7 +1155,7 @@ sub install {
 								  });
 						$check_installed or log::l($pkg->name . " not installed, " . URPM::rpmErrorString());
 						$check_installed and $close->($pkg);
-					    }, callback_inst => \&installCallback,
+					    }, callback_inst => $callback,
 					);
 		    log::l("transactions done, now trying to close still opened fd");
 		    install_any::getFile('XXX'); #- close still opened fd.
@@ -1219,7 +1219,7 @@ sub install {
 }
 
 sub remove_marked_ask_remove {
-    my ($packages) = @_;
+    my ($packages, $callback) = @_;
 
     my @to_remove = keys %{$packages->{state}{ask_remove}} or return;
     
@@ -1228,13 +1228,13 @@ sub remove_marked_ask_remove {
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?
 
-    remove(\@to_remove);
+    remove(\@to_remove, $callback);
 
     delete $packages->{state}{ask_remove}{$_} foreach @to_remove;
 }
 
 sub remove {
-    my ($to_remove) = @_;
+    my ($to_remove, $callback) = @_;
 
     log::l("removing: " . join(' ', @$to_remove));
     
@@ -1244,7 +1244,7 @@ sub remove {
     #- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
     $trans->remove($_) foreach @$to_remove;
 
-    installCallback($db, user => undef, remove => scalar @$to_remove);
+    $callback->($db, user => undef, remove => scalar @$to_remove);
 
     if (my @pbs = $trans->run(undef, force => 1)) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @pbs);

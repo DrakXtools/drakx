@@ -712,8 +712,7 @@ sub installPackages {
 
     my $w = $o->wait_message(N("Installing"), N("Preparing installation"));
 
-    my $old = \&pkgs::installCallback;
-    local *pkgs::installCallback = sub {
+    local *install_steps::installCallback = sub {
 	my ($data, $type, $id, $subtype, $_amount, $total_) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
 	    $total = $total_;
@@ -721,7 +720,7 @@ sub installPackages {
 	    my $p = $data->{depslist}[$id];
 	    $w->set(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
 	    $current += $p->size;
-	} else { goto $old }
+	}
     };
 
     #- the modification is not local as the box should be living for other package installation.

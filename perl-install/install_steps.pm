@@ -432,18 +432,23 @@ sub pkg_install {
     }
 }
 
+sub installCallback {
+#    my (undef, $msg, @para) = @_;
+#    log::l("$msg: " . join(',', @para));
+}
+
 sub installPackages { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
 
-    pkgs::remove_marked_ask_remove($packages);
+    pkgs::remove_marked_ask_remove($packages, \&installCallback);
 
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = pkgs::packagesToInstall($packages);
 
     my $time = time();
     $ENV{DURING_INSTALL} = 1;
-    pkgs::install($o->{isUpgrade}, \@toInstall, $packages);
+    pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
 
     any::writeandclean_ldsoconf($o->{prefix});
     delete $ENV{DURING_INSTALL};
