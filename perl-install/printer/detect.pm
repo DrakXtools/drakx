@@ -529,8 +529,18 @@ sub parport_addr {
     $device =~ m!^/dev/lp(\d+)$! or
 	$device =~ m!^/dev/printers/(\d+)$!;
     my $portnumber = $1;
+    my $i = 0;
+    my $parportdir;
+    foreach (sort { $a =~ /(\d+)/; my $m = $1; $b =~ /(\d+)/; my $n = $1; $m <=> $n } `ls -1d /proc/parport/[0-9]* /proc/sys/dev/parport/parport[0-9]* 2>/dev/null`) {
+	chomp;
+	if ($i == $portnumber) {
+	    $parportdir = $_;
+	    last;
+	}
+	$i++;
+    }
     my $parport_addresses = 
-	`cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
+	`cat $parportdir/base-addr`;
     my $address_arg;
     if ($parport_addresses =~ /^\s*(\d+)\s+(\d+)\s*$/) {
 	$address_arg = sprintf(" -base 0x%x -basehigh 0x%x", $1, $2);
