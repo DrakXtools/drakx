@@ -111,8 +111,6 @@ sub real_main {
           } else { $module = "" }
       };
 
-      my $is_ifplugd_blacklisted = sub { member($module, qw(b44 forcedeth madwifi_pci via-velocity)) };
-
       my %adsl_descriptions = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
                           sagem => N("Sagem USB modem"),
@@ -721,7 +719,7 @@ If you do not know it, keep the preselected type."),
                         $net->{type} = 'adsl';
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
-                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_ifplugd_blacklisted->());
+                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno(network::ethernet::is_ifplugd_blacklisted($module));
                         if ($ntf_name eq "sagem"  && member($net->{adsl}{method}, qw(static dhcp))) {
                             #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
                             #- it auto-detects dhcp/static modes thanks to encapsulation setting
@@ -863,7 +861,7 @@ If you do not know it, keep the preselected type."),
                         $peeryp = $ethntf->{PEERYP} =~ /yes/;
                         $peerntpd = $ethntf->{PEERNTPD} =~ /yes/;
                         # blacklist bogus driver, enable ifplugd support else:
-                        $ifplugd = !text2bool($ethntf->{MII_NOT_SUPPORTED}) && !$is_ifplugd_blacklisted->();
+                        $ifplugd = !text2bool($ethntf->{MII_NOT_SUPPORTED}) && !network::ethernet::is_ifplugd_blacklisted($module);
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{TYPE} if $net->{type} ne 'adsl' || !member($net->{adsl}{method}, qw(static dhcp));
                         $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));

@@ -142,4 +142,9 @@ sub configure_eth_aliases {
     $::isStandalone and $modules_conf->write;
 }
 
+sub is_ifplugd_blacklisted {
+    my ($module) = @_;
+    member($module, qw(b44 forcedeth via-velocity));
+}
+
 1;
