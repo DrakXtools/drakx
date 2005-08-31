@@ -291,7 +291,7 @@ sub _gtk__Image {
 	    $w->set_from_file($file);
 	};
 	gtkval_register($w, $file_ref, $set);
-	$set->();
+	$set->() if $$file_ref;
     }
     $w;
 }
