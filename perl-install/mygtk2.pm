@@ -118,6 +118,13 @@ sub _gtk {
 	$global_tooltips->set_tip($w, $tip);
     }
 
+    #- WARNING: hide_ref and show_ref are not effective until you gtkval_modify the ref
+    if (my $hide_ref = delete $opts->{hide_ref}) {
+	gtkval_register($w, $hide_ref, sub { $$hide_ref ? $w->hide : $w->show });
+    } elsif (my $show_ref = delete $opts->{show_ref}) {
+	gtkval_register($w, $show_ref, sub { $$show_ref ? $w->show : $w->hide });
+    }
+
     if (%$opts && !$opts->{allow_unknown_options}) {
 	internal_error("$action $class: unknown option(s) " . join(', ', keys %$opts));
     }
