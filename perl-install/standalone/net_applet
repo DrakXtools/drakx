@@ -189,7 +189,7 @@ sub generate_wireless_menuitem {
 sub update_wireless_item {
     my ($net, $ap_address) = @_;
     $net->{ssid_label}->set_text($net->{ssid} || "[$ap_address]");
-    $net->{keyring_image}->visible($net->{flags});
+    $net->{keyring_image}->visible(to_bool($net->{flags}));
     $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$net->{approx_level}});
 
     $net->{menuitem}->signal_handler_block($net->{activate});
