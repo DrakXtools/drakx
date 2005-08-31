@@ -1218,42 +1218,37 @@ sub install {
     fs::loopback::save_boot($loop_boot);
 }
 
-sub remove {
-    my ($toRemove, $packages) = @_;
+sub remove_marked_ask_remove {
+    my ($packages) = @_;
 
+    my @to_remove = keys %{$packages->{state}{ask_remove}} or return;
+    
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
-
-    return if !@{$toRemove || []};
-
-    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
-    my $trans = $db->create_transaction($::prefix);
-
-    foreach my $p (@$toRemove) {
-	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
-	$trans->remove($p);
-    }
 
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?
 
-    #- do not modify/translate the message used with installCallback since
-    #- these are keys during progressing installation, or change in other
-    #- place (install_steps_gtk.pm,...).
-    installCallback($db, user => undef, remove => scalar @$toRemove);
+    remove(\@to_remove);
 
-    if (my @probs = $trans->run(undef, force => 1)) {
-	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
-    } else {
-	#- clean ask_remove according to package marked to be deleted.
-	if ($packages) {
-	    foreach my $p (@$toRemove) {
-		delete $packages->{state}{ask_remove}{$p};
-	    }
-	}
+    delete $packages->{state}{ask_remove}{$_} foreach @to_remove;
+}
+
+sub remove {
+    my ($to_remove) = @_;
+
+    log::l("removing: " . join(' ', @to_remove));
+    
+    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
+    my $trans = $db->create_transaction($::prefix);
+
+    #- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
+    $trans->remove($_) foreach @$to_remove;
+
+    installCallback($db, user => undef, remove => scalar @$to_remove);
+
+    if (my @pbs = $trans->run(undef, force => 1)) {
+	die "removing of old rpms failed:\n  ", join("\n  ", @pbs);
     }
-
-    #- keep in mind removing of these packages by cleaning $toRemove.
-    @{$toRemove || []} = ();
 }
 
 sub selected_leaves {
