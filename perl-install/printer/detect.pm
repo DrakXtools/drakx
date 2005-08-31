@@ -38,26 +38,32 @@ sub whatPrinter() {
 
 sub whatParport() {
     my @res;
-    foreach (0..3) {
+    my $i = 0;
+    foreach (sort { $a =~ /(\d+)/; my $m = $1; $b =~ /(\d+)/; my $n = $1; $m <=> $n } `ls -1d /proc/parport/[0-9]* /proc/sys/dev/parport/parport[0-9]* 2>/dev/null`) {
+	chomp;
 	my $elem = {};
 	my $F;
-	open $F, "/proc/parport/$_/autoprobe" or open $F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
+	open $F, "$_/autoprobe" or next;
 	{
 	    local $_;
 	    my $itemfound = 0;
-	    while (<$F>) { 
+	    while (<$F>) {
+		chomp;
 		if (/(.*):(.*);/) { #-#
 		    $elem->{$1} = $2;
 		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
 		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
 		    $itemfound = 1;
+		    # Add IEEE-1284 device ID string
+		    $elem->{IEEE1284} .= $_;
 		}
 	    }
 	    # Some parallel printers miss the "CLASS" field
 	    $elem->{CLASS} = 'PRINTER' 
 		if $itemfound && !defined($elem->{CLASS});
 	}
-	push @res, { port => "/dev/lp$_", val => $elem };
+	push @res, { port => "/dev/lp$i", val => $elem };
+	$i ++;
     }
     @res;
 }
@@ -103,6 +109,10 @@ sub whatUsbport() {
 		next;
 	    };
 	    close $PORT;
+	    # Cut resulting string to its real length
+	    my $length = ord(substr($idstr, 1, 1)) +
+		(ord(substr($idstr, 0, 1)) << 8);
+	    $idstr = substr($idstr, 2, $length-2);
 	    # Remove non-printable characters
 	    $idstr =~ tr/[\x00-\x1f]/./;
 	    # If we do not find any item in the ID string, we try to read
