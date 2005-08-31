@@ -1236,7 +1236,7 @@ sub remove_marked_ask_remove {
 sub remove {
     my ($to_remove) = @_;
 
-    log::l("removing: " . join(' ', @to_remove));
+    log::l("removing: " . join(' ', @$to_remove));
     
     my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction($::prefix);
