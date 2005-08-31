@@ -303,6 +303,12 @@ sub _gtk__WrappedLabel {
     _gtk__Label($w, $opts);
 }
 
+sub _gtk__Label_Left {
+    my ($w, $opts) = @_;
+    
+    gtknew('HBox', children_tight => [ _gtk__Label($w, $opts) ]);
+}
+
 sub _gtk__Label {
     my ($w, $opts) = @_;
 
