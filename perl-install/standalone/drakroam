@@ -158,7 +158,7 @@ Glib::Timeout->add(30000, \&update_networks);
 my $w = ugtk2->new(N("Wireless connection"));
 gtkadd($w->{window},
        gtknew('VBox', spacing => 5, children => [
-           0, if_(!$::isEmbedded, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakroam-mdk.png', N("Wireless connection"))),
+           $::isEmbedded ? () : (0, Gtk2::Banner->new('/usr/share/mcc/themes/default/drakroam-mdk.png', N("Wireless connection"))),
            1, gtknew('HBox', spacing => 5, children => [
                1, gtknew('ScrolledWindow', width => 420, height => 300, child => $wireless_list),
                0, gtknew('VButtonBox', layout => 'edge', children_loose => [
