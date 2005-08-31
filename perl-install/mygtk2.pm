@@ -903,10 +903,9 @@ sub _allow_scroll_TextView_to_bottom {
 
     $textView->get_buffer->create_mark('end', $textView->get_buffer->get_end_iter, 0);
     sub {
-	my $new_scroll = $scrolledWindow->get_vadjustment->get_value;
-	$textView->{no_scroll_down} ||= $new_scroll < ($textView->{prev_scroll} || 0);
-	$textView->{prev_scroll} = $new_scroll;
-	if (!$textView->{no_scroll_down}) {
+	my ($o_force) = @_;
+	my $adjustment = $scrolledWindow->get_vadjustment;
+	if ($o_force || $adjustment->page_size + $adjustment->value == $adjustment->upper) {
 	    $textView->scroll_to_mark($textView->get_buffer->get_mark('end'), 0, 1, 0, 1);
 	}
     };
