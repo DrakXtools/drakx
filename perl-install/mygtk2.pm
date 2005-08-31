@@ -414,6 +414,8 @@ sub _gtk__ScrolledWindow {
 	$w->set_policy(delete $opts->{h_policy} || 'automatic', delete $opts->{v_policy} || 'automatic');
     }
 
+    my $faked_w = $w;
+
     if (my $child = delete $opts->{child}) {
 	if (member(ref($child), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	    $w->add($child);
@@ -426,11 +428,15 @@ sub _gtk__ScrolledWindow {
 
 	$w->child->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 
+	if (ref($child) eq 'Gtk2::TextView' && delete $opts->{to_bottom}) {
+	    $child->{to_bottom} = _allow_scroll_TextView_to_bottom($w, $child);
+	}
+
 	if ($action eq 'gtknew' && ref($child) =~ /Gtk2::TextView|Gtk2::TreeView/) {
-	    $w = gtknew('Frame', shadow_type => 'in', child => $w);
+	    $faked_w = gtknew('Frame', shadow_type => 'in', child => $w);
 	}
     }
-    $w;
+    $faked_w;
 }
 
 sub _gtk__Frame {
@@ -881,6 +887,8 @@ sub _text_insert {
             $buffer->set_text($t);
         }
     }
+    $textview->{to_bottom}->() if $textview->{to_bottom};
+
     #- the following line is needed to move the cursor to the beginning, so that if the
     #- textview has a scrollbar, it will not scroll to the bottom when focusing (#3633)
     $buffer->place_cursor($buffer->get_start_iter);
@@ -888,6 +896,20 @@ sub _text_insert {
     $textview->set_editable($opts{editable} || 0);
     $textview->set_cursor_visible($opts{visible} || 0);
     $textview;
+}
+
+sub _allow_scroll_TextView_to_bottom {
+    my ($scrolledWindow, $textView) = @_;
+
+    $textView->get_buffer->create_mark('end', $textView->get_buffer->get_end_iter, 0);
+    sub {
+	my $new_scroll = $scrolledWindow->get_vadjustment->get_value;
+	$textView->{no_scroll_down} ||= $new_scroll < ($textView->{prev_scroll} || 0);
+	$textView->{prev_scroll} = $new_scroll;
+	if (!$textView->{no_scroll_down}) {
+	    $textView->scroll_to_mark($textView->get_buffer->get_mark('end'), 0, 1, 0, 1);
+	}
+    };
 }
 
 sub set_main_window_size {
