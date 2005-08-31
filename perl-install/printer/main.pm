@@ -488,14 +488,17 @@ sub connectionstr {
 
 sub read_printer_db {
 
-    my ($printer, $spooler) = @_;
+    my ($printer, $spooler, $newppd) = @_;
+
+    # If a $newppd is supplied, we return the key of the DB entry which
+    # is for this file. This way we can pre-select a freshly added PPD in
+    # the model/driver list.
 
     # No local queues available in daemon-less CUPS mode
     return 1 if $spooler eq "rcups";
 
     my $DBPATH; #- do not have to do close ... and do not modify globals at least
-    # Generate the Foomatic printer/driver overview, read it from the
-    # appropriate file when it is already generated
+    # Generate the Foomatic printer/driver overview
     open($DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
 	"foomatic-configure -O -q |") or
 	die "Could not run foomatic-configure";
@@ -512,6 +515,7 @@ sub read_printer_db {
     my $ppds = {};
     my $ppddriver = "";
     my $ppdfile = "";
+    my $ppdentry = "";
     local $_;
     while (<$DBPATH>) {
 	chomp;
@@ -688,7 +692,7 @@ sub read_printer_db {
 
     #- Load CUPS driver database if CUPS is used as spooler
     if ($spooler && $spooler eq "cups") {
-        poll_ppd_base($printer);
+        $ppdentry = poll_ppd_base($printer, $newppd);
     }
 
     #my @entries_db_short     = sort keys %printer::thedb;
@@ -696,6 +700,8 @@ sub read_printer_db {
     #%descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
     #@entry_db_description = keys %descr_to_db;
     #db_to_descr          = reverse %descr_to_db;
+
+    return $ppdentry if $newppd;
 
 }
 
@@ -1663,10 +1669,9 @@ sub installppd {
     printer::services::restart("cups") if $printer->{SPOOLER} eq "cups";
     # Re-read printer database
     %thedb = ();
-    read_printer_db($printer, $printer->{SPOOLER});
-    # Return description string of the PPD file
-    my $ppdentry = get_descr_from_ppdfile($printer, $ppdfile);
-    return $ppdentry;
+    # Supplying $ppdfile returns us the key for this PPD file in the
+    # so that we can point to it in the printer/driver list
+    return read_printer_db($printer, $printer->{SPOOLER}, $ppdfile);
 }
 
 sub clean_manufacturer_name {
@@ -1848,7 +1853,12 @@ sub ppd_devid_data {
 }
 
 sub poll_ppd_base {
-    my ($printer) = @_;
+    my ($printer, $ppdfile) = @_;
+
+    # If a $ppdfile is supplied, we return the key of the DB entry which
+    # is for this file. This way we can pre-select a freshly added PPD in
+    # the model/driver list.
+
     #- Before trying to poll the ppd database available to cups, we have 
     #- to make sure the file /etc/cups/ppds.dat is no more modified.
     #- If cups continue to modify it (because it reads the ppd files 
@@ -1857,6 +1867,7 @@ sub poll_ppd_base {
     run_program::rooted($::prefix, 'ifconfig', 'lo', '127.0.0.1');
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
+    my $ppdentry = "";
     foreach (1..60) {
 	open(my $PPDS, ($::testing ? $::prefix :
 				 "chroot $::prefix/ ") .
@@ -1959,6 +1970,10 @@ sub poll_ppd_base {
 			    if $deviddesc;
 			$thedb{$newkey}{devidcmdset} = $devidcmdset
 			    if $devidcmdset;
+			# Rememeber which entry is the freshly added 
+			# PPD file
+			$ppdentry = $newkey if
+			    $ppdfile eq "/usr/share/cups/model/$ppd";
 		    }
 		    next;
 		} elsif (!$printer->{expert}) {
@@ -2080,6 +2095,9 @@ sub poll_ppd_base {
 		#my ($devidmake, $devidmodel) = ppd_devid_data($ppd);
 		#$thedb{$key}{devidmake} = $devidmake;
 		#$thedb{$key}{devidmodel} = $devidmodel;
+		# Rememeber which entry is the freshly added PPD file
+		$ppdentry = $key if
+		    $ppdfile eq "/usr/share/cups/model/$ppd";
 	    };
 	}
 	close $PPDS;
@@ -2091,6 +2109,7 @@ sub poll_ppd_base {
     #scalar(keys %descr_to_ppd) > 5 or 
     #  die "unable to connect to cups server";
 
+    return $ppdentry;
 }
 
 
