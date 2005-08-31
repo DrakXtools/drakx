@@ -163,6 +163,8 @@ sub selectInstallClass {
 		log::l("choosing to upgrade partition $p->{part}{device}");
 		$o->{migrate_device_names} = install_any::use_root_part($o->{all_hds}, $p->{part}, $o);
 	    }
+
+	    #- handle encrypted partitions (esp. /home)
 	    foreach (grep { $_->{mntpoint} } @{$o->{fstab}}) {
 		my ($options, $_unknown) = fs::mount_options::unpack($_);
 		$options->{encrypted} or next;
@@ -170,7 +172,9 @@ sub selectInstallClass {
 			      [ { label => N("Encryption key for %s", $_->{mntpoint}),
 				  hidden => 1, val => \$_->{encrypt_key} } ]);
 	    }
-	    $o->{isUpgrade} = $p->{release_file} =~ /redhat/ ? 'redhat' : 'mandrake';
+
+	    $o->{isUpgrade} = (find { $p->{release_file} =~ /$_/ } 'mandriva', 'mandrake', 'conectiva', 'redhat') || 'unknown';
+	    log::l("upgrading $o->{isUpgrade} distribution");
 	}
     }
 }
