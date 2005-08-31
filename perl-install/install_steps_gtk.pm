@@ -429,57 +429,29 @@ sub installPackages {
 
     local $::noborderWhenEmbedded = 1;
     my $w = ugtk2->new(N("Installing"));
-    $w->sync;
-    my $text = gtknew('Label');
-    my ($advertising, $change_time, $i);
     my $show_advertising if 0;
-    $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
 
-    my ($msg, $msg_time_remaining) = map { gtknew('Label', text => $_) } '', N("Estimating");
-    my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
-    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox'));
-
+    my $pkg_log_widget = gtknew('TextView', editable => 0);
+    my ($advertising_image, $change_time, $i);
     my $advertize = sub {
 	my ($update) = @_;
-	@install_any::advertising_images or return;
-	foreach ($msg, $progress, $text) {
-	    $show_advertising ? $_->hide : $_->show;
-	}
 
-	gtkdestroy($advertising) if $advertising;
-	if ($show_advertising && $update) {
-	    $change_time = time();
-	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
-	    $f =~ s/\Q$::prefix// if ! -f $f;
-	    log::l("advertising $f");
+	$pkg_log_widget->{to_bottom}->('force');
+
+	@install_any::advertising_images && $show_advertising && $update or return;
+	
+	$change_time = time();
+	my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
+	$f =~ s/\Q$::prefix// if ! -f $f;
+	log::l("advertising $f");
+	gtkval_modify(\$advertising_image, $f);
+
+	if (my $banner = $w->{window}{banner}) {
+	    my ($title);
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
-	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon.png/;
-	    my ($draw_text, $width, $height, $border, $y_start, @text);
-	    -e $pl and $draw_text = 1;
-	    eval(cat_($pl)) if $draw_text;
-	    my $pix = gtkcreate_pixbuf($f);
-	    my $darea = gtknew('DrawingArea');
-	    gtkpack($box, $advertising = !$draw_text ?
-		    gtkcreate_img($f) :
-		    gtkset($darea, width => $width, height => $height, expose_event => sub {
-			       my (undef, undef, $dx, $dy) = $darea->allocation->values;
-				   $darea->window->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
-				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
-							    ($dx-$width)/2, 0, $width, $height, 'none', 0, 0);
-
-                                   my @lines = wrap_paragraph([ @text ], $darea, $border, $width);
-                                   foreach my $line (@lines) {
-                                       my $layout = $darea->create_pango_layout($line->{text});
-                                       my $draw_lay = sub {
-                                           my ($gc, $decx) = @_;
-                                           $darea->window->draw_layout($gc, $line->{'x'} + $decx, $y_start + $line->{'y'}, $layout);
-                                       };
-                                       $draw_lay->($darea->style->black_gc, 0);
-                                       $line->{options}{bold} and $draw_lay->($darea->style->black_gc, 1);
-                                   }
-			   }));
-	} else {
-	    $advertising = undef;
+	    eval(cat_($pl)) if -e $pl;    
+	    $banner->{text} = $title;
+	    Gtk2::Banner::set_pixmap($banner);
 	}
     };
 
@@ -491,19 +463,30 @@ sub installPackages {
 			     $advertize->('update');
 			 });
 
-    $box->pack_end(gtkshow(gtknew('VBox', border_width => 5, spacing => 3, children_loose => [
-			   $msg, $progress,
-			   gtknew('Table', children => [ [ N("Time remaining "), $msg_time_remaining ] ]),
-			   $text,
-			   gtknew('HBox', children => [
-			       1, gtknew('VBox', children_centered => [ gtkset_size_request($progress_total, -1, 25) ]),
-			       0, gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
-			   ]),
-			  ])), 0, 1, 0);
+    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
+	gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
+    ]));
+
+    $box->pack_end(gtkshow(gtknew('VBox', border_width => 7, spacing => 3, children_loose => [
+	gtknew('ScrolledWindow', child => $pkg_log_widget, 
+	       hide_ref => \$show_advertising, height => 250, to_bottom => 1),
+	gtknew('ProgressBar', fraction_ref => \ (my $pkg_progress), hide_ref => \$show_advertising),
+	gtknew('Table', children => [ [ 
+	    N("Time remaining "), 
+	    gtknew('Label', text_ref => \ (my $msg_time_remaining = N("Estimating"))),
+	] ]),
+	gtknew('HBox', children => [
+	    1, gtknew('VBox', children_centered => [ gtknew('ProgressBar', fraction_ref => \ (my $progress_total), height => 25) ]),
+	    0, gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
+	]),
+    ])), 0, 1, 0);
+    
+    #- for the hide_ref & show_ref to work, we must set $show_advertising after packing
+    gtkval_modify(\$show_advertising, 
+		  defined $show_advertising ? $show_advertising : to_bool(@install_any::advertising_images));
 
     $details->hide if !@install_any::advertising_images;
     $w->sync;
-    gtkset($msg, text => N("Please wait, preparing installation..."));
     foreach ($cancel, $details) {
 	gtkset_mousecursor_normal($_->window);
     }
@@ -517,19 +500,18 @@ sub installPackages {
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
 	    $start_time = time();
-	    gtkset($msg, text => N("%d packages", $nb));
+	    mygtk2::gtkadd($pkg_log_widget, text => N("%d packages", $nb));
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
-	    $progress->set_fraction(0);
+	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $data->{depslist}[$id];
-	    gtkset($msg, text => N("Installing package %s", $p->name));
+	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, (split /\n/, c::from_utf8($p->summary))[0] || ''));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
-	    gtkset($text, text => (split /\n/, c::from_utf8($p->summary))[0] || '');
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
-	    $progress->set_fraction($total ? $amount / $total : 0);
+	    gtkval_modify(\$pkg_progress, $total ? $amount / $total : 0);
 
 	    my $dtime = time() - $start_time;
 	    my $ratio = 
@@ -538,9 +520,9 @@ sub installPackages {
 	    $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
-	    $progress_total->set_fraction($ratio);
+	    gtkval_modify(\$progress_total, $ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
-		gtkset($msg_time_remaining, text => formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
+		gtkval_modify(\$msg_time_remaining, formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
