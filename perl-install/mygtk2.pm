@@ -322,6 +322,12 @@ sub _gtk__Label {
 	$w->modify_font(Gtk2::Pango::FontDescription->from_string(delete $opts->{font})) if exists $opts->{font};
     }
 
+    if (my $text_ref = delete $opts->{text_ref}) {
+	my $set = sub { $w->set_text($$text_ref) };
+	gtkval_register($w, $text_ref, $set);
+	$set->();
+    }
+
     $w->set_markup(delete $opts->{text_markup}) if exists $opts->{text_markup};
     $w;
 }
