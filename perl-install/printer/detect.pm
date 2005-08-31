@@ -167,7 +167,8 @@ sub whatUsbport() {
 			   DESCRIPTION => $description,
 			   SERIALNUMBER => $serialnumber,
 			   'COMMAND SET' => $commandset,
-			   SKU => $sku
+			   SKU => $sku,
+			   IEEE1284 => $idstr,
 			   } };
 	    last;
 	}
