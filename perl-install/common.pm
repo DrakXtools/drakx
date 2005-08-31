@@ -237,7 +237,7 @@ sub set_permissions {
 
 sub release_file {
     my ($o_dir) = @_;
-    find { -r "$o_dir$_" } map { "/etc/$_" } 'mandrakelinux-release', 'mandrake-release', 'release', 'redhat-release';
+    find { -r "$o_dir$_" } map { "/etc/$_" } 'mandrakelinux-release', 'mandrake-release', 'conectiva-release', 'release', 'redhat-release';
 }
 
 sub mandrake_release {
