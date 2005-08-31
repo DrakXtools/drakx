@@ -231,6 +231,24 @@ sub _gtk__HScale {
     $w;
 }
 
+sub _gtk__ProgressBar {
+    my ($w, $opts) = @_;
+
+    if (!$w) {
+	$w = Gtk2::ProgressBar->new;
+    }
+
+    if (my $fraction_ref = delete $opts->{fraction_ref}) {
+	my $set = sub { $w->set_fraction($$fraction_ref) };
+	gtkval_register($w, $fraction_ref, $set);
+	$set->();
+    } elsif (exists $opts->{fraction}) {
+	$w->set_fraction(delete $opts->{fraction});
+    }
+
+    $w;
+}
+
 sub _gtk__VSeparator { &_gtk_any_simple }
 sub _gtk__HSeparator { &_gtk_any_simple }
 sub _gtk__Calendar   { &_gtk_any_simple }
