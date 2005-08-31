@@ -1538,6 +1538,7 @@ sub set_pixmap {
     ugtk2::set_back_pixmap($darea);
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
     $darea->{txt_width} = ($darea->{layout}->get_pixel_size)[0];
+    $darea->queue_draw;
 }
 
 
