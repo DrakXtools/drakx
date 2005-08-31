@@ -174,12 +174,17 @@ sub find_matching_interface {
     } sort keys %{$net->{ifcfg}};
 }
 
+#- returns the current gateway, with lowest metric
+sub get_current_gateway_interface() {
+    my $routes = get_routes();
+    first(sort { $routes->{$a}{metric} <=> $routes->{$b}{metric} } grep { exists $routes->{$_}{gateway} } keys %$routes);
+}
+
 #- returns gateway interface if found
 sub get_default_gateway_interface {
     my ($net) = @_;
     my @intfs = sort keys %{$net->{ifcfg}};
-    my $routes = get_routes();
-    (find { $routes->{$_}{gateway} } sort keys %$routes) ||
+    get_current_gateway_interface() ||
     $net->{network}{GATEWAYDEV} ||
     $net->{network}{GATEWAY} && find_matching_interface($net, $net->{network}{GATEWAY}) ||
     (find { get_interface_type($net->{ifcfg}{$_}) eq 'adsl' } @intfs) ||
