@@ -2411,7 +2411,7 @@ sub copy_foomatic_queue {
 sub autodetectionentry_for_uri {
     my ($uri, @autodetected) = @_;
 
-    if ($uri =~ m!^usb://([^/]+)/([^/\?]+)(|\?serial=(\S+))$!) {
+    if ($uri =~ m!^usb://([^/]+)/([^\?]+)(|\?serial=(\S+))$!) {
 	# USB device with URI referring to printer model
 	my $make = $1;
 	my $model = $2;
