@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.50mdk
+Release: 0.51mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,44 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep  1 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.51mdk
+- drakfirewall: allow to install and configure Interface Firewall
+- net_applet:
+  o run drakids on click if an alert is still available
+  o don't display keyring icon if the wireless network doesn't
+    need a key (thanks to Couriousous)
+  o allow to use vlan/alias interfaces (thanks to Michael Scherer)
+- drakconnect:
+  o fix include path (#18103)
+  o don't blacklist madwifi_pci for ifplugd
+  o fix isdn config in manage interface
+- drakroam: fix embedded mode (#18113)
+- mygtk2:
+  o fix return value in window method
+   (fix net_monitor crash, #18136, Pixel & me)
+  o improve progress bars and banners (Pixel)
+- XFdrake (Pixel): drivers/fglrx_drv.o is now drivers/fglrx_drv.so
+- drakboot (Pixel):
+  o handle "=" between keyword and value (esp. useful for reading
+    Conectiva's menu.lst) (bugzilla #18090)
+  o ensure /boot/message-text exists
+    (useful when switching from grub to lilo)
+- drakauth (Pixel & Vincent Guardiola):
+  o allow Active Directory even on non corporate product
+  o change definition for Active Directory with SFU and
+    Active Directory Winbind
+  o remove idmap ldap backend for winbind AD (obsolete, see Samba 3.0.20)
+  o remove default_tgs_enctypes, default_tkt_enctypes, permitted_enctypes
+    from /etc/krb5.conf for winbind configuration (#15232)
+- printerdrake:
+  o added recording of IEEE-1284 device ID string, for USB printers
+  o fix parallel printer auto-detection
+  o pre-select newly added PPD file in the printer/driver list
+  o fix recognition of alredy set up queues for auto queue setup
+    (for several Xerox Phaser printers, the user was asked again and again)
+  o support for HPLIP URIs with "?device=..." (#18041, #18053)
+- draksplash (Warly): add a lot more settings (text and progress bars)
+
 * Tue Aug 30 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.50mdk
 - drakroam: rewrite it to use wpa_supplicant and mandi
 - net_applet:
