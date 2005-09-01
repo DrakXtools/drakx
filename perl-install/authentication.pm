@@ -6,7 +6,7 @@ sub kinds {
     my $no_para = @_ == 0;
     my ($do_pkgs, $meta_class) = @_;
     my $allow_SmartCard = $no_para || $do_pkgs->is_available('castella-pam');
-    my $allow_AD = $no_para || $meta_class =~ /corporate/;
+    my $allow_AD = 1;
     (
 	'local', 
 	'LDAP',
