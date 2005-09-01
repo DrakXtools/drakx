@@ -586,11 +586,11 @@ sub krb5_conf_update {
 	if (my $i = /^\s*\[\Q$category\E\]/i ... /^\[/) {
 	    if ($i =~ /E/) { #- for last line of category
 		chomp $s; $s .= "\n";
-		$s .= " $_->[0] = $_->[1]\n" foreach values %subst;
+		$s .= " $_->[0] = $_->[1]\n" foreach grep { defined($_->[1]) } values %subst;
 		%subst = ();
 	    } elsif (/^\s*([^=]*?)\s*=/) {
 		if (my $e = delete $subst{lc($1)}) {
-		    $_ = " $1 = $e->[1]\n";
+		    $_ = defined($e->[1]) ? " $1 = $e->[1]\n" : '';
 		}
 	      }
 	}
@@ -601,7 +601,7 @@ sub krb5_conf_update {
     if (keys %subst) {
 	chomp $s;
 	$s .= "\n[$category]\n";
-	$s .= " $_->[0] = $_->[1]\n" foreach values %subst;
+	$s .= " $_->[0] = $_->[1]\n" foreach grep { defined($_->[1]) } values %subst;
     }
 
     MDK::Common::File::output($file, $s);
