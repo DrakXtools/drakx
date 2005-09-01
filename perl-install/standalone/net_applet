@@ -87,11 +87,6 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
               gtkpack($img = Gtk2::Image->new)
              )
       );
-$eventbox->signal_connect(button_press_event => sub {
-    $_[1]->button == 1 and run_net_monitor();
-    $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
-});
-
 $icon->show_all;
 
 my ($dbus, $monitor, $ifw, $interactive_cb, @attacks_queue, $ifw_alert);
@@ -123,6 +118,11 @@ $bubble->signal_connect(clicked => sub {
     $ifw_alert = 0;
     update_tray_icon();
     ask_attack_verdict($attacks_queue[0]);
+});
+
+$eventbox->signal_connect(button_press_event => sub {
+    $_[1]->button == 1 and ($ifw_alert ? run_drakids() : run_net_monitor());
+    $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
 });
 
 checkNetworkForce();
@@ -397,7 +397,6 @@ sub notify_attack {
     }
     $bubble->set(N("Interactive Firewall"), Gtk2::Image->new_from_pixbuf($pixbufs{firewall}), $attack->{msg});
     $bubble->show(5000);
-
 }
 
 sub ask_attack_verdict {
