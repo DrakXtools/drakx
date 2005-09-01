@@ -1,6 +1,5 @@
 package network::ifw;
 
-use dbus_object;
 use Socket;
 use common;
 
@@ -13,6 +12,7 @@ sub new {
     $con->add_filter($filter);
     $con->add_match("type='signal',interface='com.mandriva.monitoring.ifw'");
 
+    require dbus_object;
     my $o = dbus_object::new($type,
 			     $bus,
 			     "com.mandriva.monitoring",
