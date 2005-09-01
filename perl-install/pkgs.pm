@@ -14,7 +14,7 @@ use fs;
 use fs::loopback;
 use c;
 
-our %preferred = map { $_ => undef } qw(lilo perl-base gstreamer-oss openjade ctags glibc curl sane-backends postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 libxpm4 zlib1 libncurses5 harddrake cups apache);
+our %preferred = map { $_ => undef } qw(lilo nail perl-base openjade ctags glibc glibc-devel curl sane-backends postfix gcc gcc-cpp gcc-c++ proftpd vim-minimal db1 libxpm4 zlib1 libncurses5 harddrake cups);
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 our %compssListDesc = (
