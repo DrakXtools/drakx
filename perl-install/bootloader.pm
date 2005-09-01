@@ -200,7 +200,7 @@ sub read_grub {
         chomp;
 	s/^\s*//; s/\s*$//;
         next if /^#/ || /^$/;
-	my ($keyword, $v) = split(' ', $_, 2) or
+	my ($keyword, $v) = split('[ \t=]+', $_, 2) or
 	  warn qq(unknown line in /boot/grub/menu.lst: "$_"\n), next;
 
         if ($keyword eq 'title') {
