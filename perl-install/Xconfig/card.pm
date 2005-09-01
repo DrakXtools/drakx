@@ -328,7 +328,7 @@ sub install_server {
     }
     if ($card->{Driver2} eq 'fglrx' &&
 	-e "$::prefix$modules_dir/dri/fglrx_dri.so" &&
-	-e "$::prefix$modules_dir/drivers/fglrx_drv.o") {
+	(-e "$::prefix$modules_dir/drivers/fglrx_drv.o" || -e "$::prefix$modules_dir/drivers/fglrx_drv.so")) {
 	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
