@@ -1229,13 +1229,13 @@ sub remove_marked_ask_remove {
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?
 
-    remove(\@to_remove, $callback);
+    remove(\@to_remove, $callback, force => 1);
 
     delete $packages->{state}{ask_remove}{$_} foreach @to_remove;
 }
 
-sub remove {
-    my ($to_remove, $callback) = @_;
+sub remove_raw {
+    my ($to_remove, $callback, %run_transaction_options) = @_;
 
     log::l("removing: " . join(' ', @$to_remove));
     
@@ -1247,7 +1247,17 @@ sub remove {
 
     $callback->($db, user => undef, remove => scalar @$to_remove);
 
-    if (my @pbs = $trans->run(undef, force => 1)) {
+    $trans->run(undef, %run_transaction_options);
+}
+sub remove {
+    my ($_to_remove, $_callback, %run_transaction_options) = @_;
+
+    my @pbs = &remove_raw;
+    if (@pbs && !$run_transaction_options{noscripts}) {
+	$run_transaction_options{noscripts} = 1;
+	@pbs = &remove_raw;
+    }
+    if (@pbs) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @pbs);
     }
 }
