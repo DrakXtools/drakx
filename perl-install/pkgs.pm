@@ -257,6 +257,7 @@ sub packageRequest {
 sub packageCallbackChoices {
     my ($urpm, $_db, $state, $choices) = @_;
     if (my $prefer = find { $_->arch ne 'src' && exists $preferred{$_->name} } @$choices) {
+#-	log::l("packageCallbackChoices: prefering " . $prefer->name);
 	$prefer;
     } else {
 	my @l = grep {
@@ -270,8 +271,8 @@ sub packageCallbackChoices {
 	    } $_->requires_nosense;
 	} @$choices;
 	if (!@l) {
-	    push @l, $choices->[0];
-	    log::l("packageCallbackChoices: default choice from ", join(",", map { $urpm->{depslist}[$_]->name } keys %{$state->{selected}}), " in ", join(",", map { $_->name } @$choices));
+	    @l = $choices->[0];
+	    log::l("packageCallbackChoices: default choice from ", join(",", map { $_->name } @$choices), " in ", join(",", map { $urpm->{depslist}[$_]->name } keys %{$state->{selected}}));
 	}
 	#-log::l("packageCallbackChoices: chosen " . join(" ", map { $_->name } @l));
 	@l;
