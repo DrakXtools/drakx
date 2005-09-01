@@ -447,11 +447,12 @@ sub installPackages { #- complete REWORK, TODO and TOCHECK!
     my @toInstall = pkgs::packagesToInstall($packages);
 
     my $time = time();
-    $ENV{DURING_INSTALL} = 1;
-    pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
-
+    { 
+	local $ENV{DURING_INSTALL} = 1;
+	pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
+    }
     any::writeandclean_ldsoconf($o->{prefix});
-    delete $ENV{DURING_INSTALL};
+
     run_program::rooted_or_die($o->{prefix}, 'ldconfig');
 
     eval {
