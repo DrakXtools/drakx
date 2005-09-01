@@ -1452,7 +1452,8 @@ sub setup_local_autoscan {
 	my @str;
 	foreach my $p (@autodetected) {
 	    if (($p->{val}{DESCRIPTION}) || ($p->{val}{MODEL})) {
-		my $menustr = ($p->{val}{DESCRIPTION} ?
+		my $menustr = (defined($p->{val}{DESCRIPTION}) &&
+			       (length($p->{val}{DESCRIPTION}) > 5) ?
 			       $p->{val}{DESCRIPTION} :
 			       (($p->{val}{MANUFACTURER} ? 
 				 ($p->{val}{MANUFACTURER} . " ") : ()) .
@@ -2825,7 +2826,7 @@ sub setup_common {
 	    $descr = "$descrmake|$autosku";
 	} elsif ($automake && $automodel) {
 	    $descr = "$descrmake|$automodel";
-	} elsif ($autodescr) {
+	} elsif ($autodescr && (length($autodescr) > 5)) {
 	    $descr = $autodescr;
 	    $descr =~ s/ /|/;
 	} elsif ($automodel) {
@@ -2930,7 +2931,7 @@ sub setup_common {
 	    # exact match or a match to the auto-detection ID string 
 	    next if $matchlength >= 100;
 	    # Try to match the (human-readable) make and model of the
-	    # Foomatic database or of thr PPD file
+	    # Foomatic database or of the PPD file
 	    my $dbmakemodel;
 	    if ($printer->{expert}) {
 		$dbmakemodel = $1 if $entry =~ m/^(.*)\|[^\|]*$/;
