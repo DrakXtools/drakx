@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
 "POT-Creation-Date: 2005-08-30 18:05+0800\n"
-"PO-Revision-Date: 2005-08-02 23:00+0900\n"
+"PO-Revision-Date: 2005-08-31 23:30+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1336,7 +1336,7 @@ msgstr ""
 #: any.pm:749
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "多言語"
 
 #: any.pm:765 any.pm:794 help.pm:647
 #, c-format
@@ -3080,14 +3080,14 @@ msgid "Enabling swap partition %s"
 msgstr "swapパーティション %s を有効にしています"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "マウントポイント %s には暗号化ファイルシステムは使えません"
+msgstr "暗号化ファイルシステムを使う"
 
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr "グループディスク割当てを有効にしオプションで制限を強制する"
+msgstr "グループディスククォータを有効にしオプションで制限を強制する"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -3160,9 +3160,9 @@ msgstr ""
 "す。ただし、user, exec, dev, suidなどの行で別に指定すれば変更できます。"
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
-msgstr "ユーザディスク割当てを有効にしオプションで制限を強制する"
+msgstr "ユーザディスククォータを有効にしオプションで制限を強制する"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -6913,7 +6913,7 @@ msgstr "マウスの種類を選んでください。"
 #: install_steps_interactive.pm:188
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "マウスの選択"
 
 #: install_steps_interactive.pm:197 standalone/mousedrake:46
 #, c-format
@@ -7155,7 +7155,7 @@ msgstr "更新モジュールメディアがドライブ %s に入っている�
 #: install_steps_interactive.pm:806
 #, c-format
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: install_steps_interactive.pm:807
 #, c-format
@@ -10022,7 +10022,7 @@ msgstr "パスワード破り"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "%s 攻撃"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10040,9 +10040,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "%s がパスワードクラック攻撃を試みました"
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "%s がポートスキャン攻撃を試みました"
+msgstr "%2$s が %1$s 攻撃を試みました"
 
 #: network/isdn.pm:117 network/netconnect.pm:449 network/netconnect.pm:538
 #: network/netconnect.pm:541 network/netconnect.pm:684
@@ -10637,6 +10637,8 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
+"DSL接続の種類を選んでください。\n"
+"不明な場合はそのままにしておいてください。"
 
 #: network/netconnect.pm:714
 #, c-format
@@ -10737,7 +10739,7 @@ msgstr "Metric"
 #: network/netconnect.pm:895
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "IPv6 to IPv4 トンネルを有効にする"
 
 #: network/netconnect.pm:897 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -10860,7 +10862,7 @@ msgstr "暗号化方式"
 #: network/netconnect.pm:1019
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "アクセスポイントローミングを許可"
 
 #: network/netconnect.pm:1020 standalone/drakconnect:406
 #, c-format
@@ -11671,9 +11673,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "ネットワークプリンタ(TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "SMB/Windows 95/98/NT サーバのプリンタ"
+msgstr "SMB/Windowsサーバのプリンタ"
 
 #: printer/main.pm:33
 #, c-format
@@ -12290,59 +12292,61 @@ msgstr "CUPSを再起動中.."
 #, c-format
 msgid "Allow pop-up windows, canceling setup and package installation possible"
 msgstr ""
+"ポップアップウィンドウを許可(設定/パッケージインストールのキャンセル可能)"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
 "No pop-up windows, canceling setup and package installation not possible"
 msgstr ""
+"ポップアップウィンドウなし(設定/パッケージインストールのキャンセル不可)"
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "プリンタを自動的に検出する"
+msgstr "プリンタ自動管理"
 
 #: printer/printerdrake.pm:623
 #, c-format
 msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
-msgstr ""
+msgstr "ここでは自動的に実行するプリンタ管理のタスクを設定します"
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "自動設定(DHCP)を使用"
+msgstr "新しいプリンタを自動設定する"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (全てのプリンタを接続して電源を入れてください)\n"
+msgstr "USBプリンタが接続され電源が入った時"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "このプリンタは無効になっています"
+msgstr "Printerdrakeが開始された時"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "プリンタ自動設定のモード:"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "利用可能なプリンタ"
+msgstr "無効になっているプリンタを有効にする"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "印刷システムを変更"
+msgstr "印刷システムが開始された時"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "プリンタ %s を使用/維持"
+msgstr "プリンタ %s のコミュニケーションエラーの扱い"
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12351,36 +12355,39 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"ここではお使いのコンピュータとプリンタ %s の間でコミュニケーションエラーが発"
+"生した場合にどのように処理するかを設定します。(例: プリンタの電源が入っていな"
+"っかった場合)"
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "ポート番号は整数でなければいけません"
+msgstr "再試行の回数は1以上の整数で指定してください"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "タイムアウトの値は正の整数でなければなりません"
+msgstr "再試行の間隔は正の整数で指定してください"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "プリンタを無効にする"
+msgstr "プリンタを無効にしない"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "無制限に再試行を繰り返す"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "ボタンの数"
+msgstr "再試行の回数"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "再試行の間隔(秒)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12564,7 +12571,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not do automatic printer setup and do not do it again"
-msgstr ""
+msgstr "今回も今後もプリンタ自動設定を実行しない"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12574,17 +12581,17 @@ msgstr "新しいプリンタを検索中.."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not do automatic printer setup again"
-msgstr ""
+msgstr "今後はプリンタ自動設定を実行しない"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "プリンタが見つかりません"
+msgstr "新しいプリンタが見つかりました"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "プリンタが見つかりません"
+msgstr "新しいプリンタが見つかりました"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12593,6 +12600,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"以下の新しいプリンタが見つかりました。Printerdrakeは自動設定を行なうことがで"
+"きます。設定したくないプリンタがあれば選択を解除してください。いずれも設定し"
+"ない場合は[キャンセル]をクリックしてください。\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12601,6 +12611,8 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"次の新しいプリンタが見つかりました。Printerdrakeは自動設定を行なうことができ"
+"ます。設定しない場合は選択を解除するか[キャンセル]をクリックしてください。\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12608,6 +12620,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"プリンタのモデルによってはパッケージを追加する必要がありますので、インストー"
+"ルメディアを用意しておいてください。\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12673,6 +12687,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"プリンタ自動設定を無効にしました\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12680,11 +12696,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"自動設定を再度有効にするにはPrinterdrakeのメインメニューから次を選択してくだ"
+"さい: \"%s\" -> \"%s\""
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "リモート管理"
+msgstr "自動管理を設定"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12693,6 +12711,9 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"どのような場合にプリンタ自動設定を実行するかを選択することもできます。\n"
+"(例: Printerdrakeの開始時、印刷システムの開始時、新しいUSBプリンタが接続され"
+"た時)"
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2421
@@ -13895,24 +13916,25 @@ msgstr ""
 #: printer/printerdrake.pm:3563
 #, c-format
 msgid "Canon LBP-460/660 configuration"
-msgstr "Caon LBP-460/660の設定"
+msgstr "Canon LBP-460/660の設定"
 
 #: printer/printerdrake.pm:3590
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Caon LBP-460/660の設定"
+msgstr "Canon LBP-810/1120 (CAPT)の設定"
 
 #: printer/printerdrake.pm:3591
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
 "port. Please connect your printer to the USB or configure it on the machine "
 "where it is directly connected to."
 msgstr ""
-"このプリンタのドライバはUSB経由でローカルに接続されたプリンタにしか使えませ"
-"ん。リモートマシンやプリンタサーバのプリンタはサポートされません。プリンタを"
-"ローカルUSBポートに接続するか、接続されているマシンで設定してください。"
+"このプリンタのドライバはUSB経由でローカルに接続されたプリンタにしか使えません"
+"。リモートマシンやプリンタサーバのプリンタ、パラレルポートのプリンタには使え"
+"ません。プリンタをUSBに接続するか、プリンタが接続されているマシンで設定してく"
+"ださい。"
 
 #: printer/printerdrake.pm:3598
 #, c-format
@@ -14868,9 +14890,9 @@ msgid "Disable Printer"
 msgstr "プリンタを無効にする"
 
 #: printer/printerdrake.pm:5481 printer/printerdrake.pm:5575
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "プリンタ接続の種類"
+msgstr "プリンタコミュニケーションエラーの扱い"
 
 #: printer/printerdrake.pm:5482 printer/printerdrake.pm:5579
 #, c-format
@@ -17700,9 +17722,9 @@ msgid "Terminal Server Configuration"
 msgstr "ターミナルサーバの設定"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "DHCPDを設定中.."
+msgstr "DHCPDの設定"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -17825,7 +17847,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "クライアントのXキーボード設定をサーバと同期"
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -17833,7 +17855,8 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"デフォルトのクライアントの種類を選んでください。\n"
+"デフォルトのクライアントの種類を選んでください。('thinクライアントを使う'にチ"
+"ェックが入ってない場合はfatクライアントになります。)\n"
 "    thinクライアントは全てにサーバのCPU/RAMを使用します。ディスプレーは自分の"
 "ものを使います。\n"
 "    fatクライアントは自分のCPU/RAMとサーバのファイルシステムを使用します。"
@@ -18232,7 +18255,7 @@ msgstr "PXEイメージを作成"
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "古いクライアントのためにi586カーネルをインストール"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18275,9 +18298,9 @@ msgid "Delete All NBIs"
 msgstr "全てのNBIを削除"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "全カーネル用のネットブートイメージを作成"
+msgstr "カーネル用のイメージを作成:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -19290,7 +19313,7 @@ msgstr "テープに直接バックアップ"
 #: standalone/drakbackup:1861
 #, c-format
 msgid "Use tape hardware compression (EXPERIMENTAL)"
-msgstr ""
+msgstr "テープハードウェア圧縮を使う(実験的)"
 
 #: standalone/drakbackup:1867
 #, c-format
@@ -20367,12 +20390,12 @@ msgstr "テーマをインストール"
 #: standalone/drakboot:138
 #, c-format
 msgid "Graphical boot theme selection"
-msgstr "グラフィカルな起動テーマを選択"
+msgstr "グラフィカル起動のテーマを選択"
 
 #: standalone/drakboot:141
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "グラフィカルブートを使う"
+msgstr "グラフィカル起動モード:"
 
 #: standalone/drakboot:143
 #, c-format
@@ -21165,7 +21188,7 @@ msgstr "インポート"
 #: standalone/drakfont:494
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Windowsフォントをインポート"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:512
@@ -21675,22 +21698,22 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "変更できるようにホストを追加してください"
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "%s の情報をお願いします"
+msgstr "情報を変更してください"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "%s の情報をお願いします"
+msgstr "情報を削除してください"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "%s の情報をお願いします"
+msgstr "情報を追加してください"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -21743,27 +21766,27 @@ msgid "Failed to remove host."
 msgstr "ホストの削除に失敗しました"
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "全てのユーザに許可"
+msgstr "許可するアドレス"
 
 #: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:59 standalone/net_applet:181
 #: standalone/net_applet:353 standalone/net_applet:390
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "有効なファイアウォール"
+msgstr "対話式ファイアウォール"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "ログ"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "全てをクリア"
+msgstr "ログを消去"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
@@ -21916,7 +21939,7 @@ msgstr ""
 "result.\n"
 
 #: standalone/draknfs:151
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -21943,18 +21966,19 @@ msgstr ""
 "<span weight=\"bold\">ユーザIDのオプション</span>\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">root_squash:</span> uid/gid 0 からの要求を匿"
-"名uid/gidにマップします。\n"
+"<span foreground=\"royalblue3\">rootユーザを匿名にマップ:</span> uid/gid 0 "
+"からの要求を匿名uid/gidにマップします(root_squash)。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">no_root_squash:</span> root_sqaushを無効にし"
-"ます。このオプションは主にディスクレスクライアントに有用です。\n"
+"<span foreground=\"royalblue3\">実リモートrootアクセスを許可:</span> "
+"root_sqaushを無効にします。このオプションは主にディスクレスクライアントに有用"
+"です(no_root_squash)。\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">all_squash:</span> 全てのuidとgidを匿名ユーザ"
-"にマップします。NFSからエクスポートされた公開FTPディレクトリやニューススプー"
-"ルディレクトリ等に有用です。デフォルトではこれと反対のオプションno_all_squash"
-"に設定されています。\n"
+"<span foreground=\"royalblue3\">全てのユーザを匿名にマップ:</span> 全てのuid"
+"とgidを匿名ユーザにマップします(all_squash)。NFSからエクスポートされた公開FTP"
+"ディレクトリやニューススプールディレクトリ等に有用です。デフォルトの設定はこ"
+"れと反対のユーザUIDマッピングなし(no_all_squash)です。\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> 匿名アカウントの"
@@ -22018,7 +22042,7 @@ msgstr ""
 #: standalone/draknfs:304
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "変更できるようにNFS共有を追加してください"
 
 #: standalone/draknfs:371
 #, c-format
@@ -22079,7 +22103,7 @@ msgstr "匿名グループID:"
 #: standalone/draknfs:433
 #, c-format
 msgid "Can't create this directory."
-msgstr ""
+msgstr "このディレクトリは作成できません"
 
 #: standalone/draknfs:435
 #, c-format
@@ -22490,156 +22514,156 @@ msgid "on"
 msgstr "on"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "ディレクトリを共有"
+msgstr "共有ディレクトリ"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "コミット"
+msgstr "コメント"
 
 #: standalone/draksambashare:64 standalone/draksambashare:97
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "ブラウズ"
+msgstr "閲覧可能"
 
 #: standalone/draksambashare:65
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "公開"
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "書き込み"
+msgstr "書き込み可能"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "作成"
+msgstr "Create mask"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "ディレクトリ"
+msgstr "Directory mask"
 
 #: standalone/draksambashare:69
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "読み取り"
+msgstr "読み込みリスト"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "ホワイトリスト"
+msgstr "書き込みリスト"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "ユーザを追加"
+msgstr "管理者ユーザ"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "ユーザを追加"
+msgstr "有効なユーザ"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "権限"
+msgstr "Inherit Permissions"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "ファイルを隠す"
+msgstr "ドットファイルを隠す"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "設定"
+msgstr "文字種別(大/小文字)を保存"
 
 #: standalone/draksambashare:77
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "プリンタの機種"
+msgstr "Force create mode"
 
 #: standalone/draksambashare:78
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "PFSグループ"
+msgstr "Force group"
 
 #: standalone/draksambashare:79 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "デフォルトのユーザ"
+msgstr "デフォルトの文字種別(大/小文字)"
 
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "プリンタ名"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "印刷可能"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "印刷コマンド"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "LPQコマンド"
 
 #: standalone/draksambashare:101
 #, c-format
 msgid "Guest ok"
-msgstr ""
+msgstr "ゲストOK"
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "権限"
+msgstr "Inherit permissions"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Create mode"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "クライアントのドライバを使う"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "リストを削除"
+msgstr "読み込みリスト"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "ホワイトリスト"
+msgstr "書き込みリスト"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "グループ"
+msgstr "Force Group"
 
 #: standalone/draksambashare:140
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Force create group"
 
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "Draksambashareについて"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -22650,6 +22674,11 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"リリース: %s\n"
+"作者: Antoine Ginies\n"
+"\n"
+"これはSambaの設定を簡単に管理するためのシンプルなツールです。"
 
 #: standalone/draksambashare:180
 #, c-format
@@ -22657,40 +22686,40 @@ msgid "Samba server"
 msgstr "Sambaサーバ"
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "NFSサーバを再スタート/リロード.."
+msgstr "Sambaサーバを再スタート/リロード.."
 
 #: standalone/draksambashare:181
-#, fuzzy, c-format
+#, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "NFSサーバの再スタート/リロードのエラー"
+msgstr "Sambaサーバの再スタート/リロードのエラー"
 
 #: standalone/draksambashare:367
-#, fuzzy, c-format
+#, c-format
 msgid "Add a Samba share"
-msgstr "Sambaサーバ"
+msgstr "Samba共有を追加"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "このウィザードの目的は簡単にSamba共有を作成することです"
 
 #: standalone/draksambashare:372
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "証明書の名前"
+msgstr "共有の名前:"
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "コミット"
+msgstr "コメント:"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "パス"
+msgstr "パス:"
 
 #: standalone/draksambashare:379
 #, c-format
@@ -22698,17 +22727,19 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"同じ名前の共有がすでに存在するか共有名が空白になっています。別の名前を選んで"
+"ください。"
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "ディレクトリを作成できません。正しいパスを入力してください。"
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "共有するディレクトリを入力してください"
+msgstr "この共有に関するコメントを入力してください"
 
 #: standalone/draksambashare:417
 #, c-format
@@ -22716,258 +22747,262 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Samba共有の追加が完了しました。変更するにはツリー表示の該当箇所をダブルクリッ"
+"クしてください。"
 
 #: standalone/draksambashare:433
 #, c-format
 msgid "pdf-gen - a PDF generator"
-msgstr ""
+msgstr "pdf-gen - PDFジェネレータ"
 
 #: standalone/draksambashare:434
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "プリンタ - 利用可能な全てのプリンタ"
 
 #: standalone/draksambashare:438
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "特別なプリンタ共有を追加"
 
 #: standalone/draksambashare:441
 #, c-format
 msgid ""
 "Goal of this wizard is to easily create a new special printer Samba share."
 msgstr ""
+"このウィザードの目的は特別なプリンタSamba共有を簡単に作成することです"
 
 #: standalone/draksambashare:449
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "PDFジェネレータがすでに存在します"
 
 #: standalone/draksambashare:473
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "プリンタとprint$はすでに存在します"
 
 #: standalone/draksambashare:524
 #, c-format
 msgid "The wizard successfully the Samba share"
-msgstr ""
+msgstr "Samba共有の追加が完了しました"
 
 #: standalone/draksambashare:547
 #, c-format
 msgid "Please add or select a Samba printer share to be able to modify it."
-msgstr ""
+msgstr "変更するにはSambaプリンタを追加または選択してください"
 
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "プリンタ共有"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr ""
+msgstr "プリンタ名:"
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "書き込み"
+msgstr "書き込み可能:"
 
 #: standalone/draksambashare:593 standalone/draksambashare:774
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "ブラウズ"
+msgstr "閲覧可能:"
 
 #: standalone/draksambashare:598
 #, c-format
 msgid "Advanced options"
-msgstr ""
+msgstr "上級オプション"
 
 #: standalone/draksambashare:600
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "プリンタアクセス"
 
 #: standalone/draksambashare:604
 #, c-format
 msgid "Guest ok:"
-msgstr ""
+msgstr "ゲストOK:"
 
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Create mode:"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "プリンタコマンド"
 
 #: standalone/draksambashare:611
 #, c-format
 msgid "Print command:"
-msgstr ""
+msgstr "印刷コマンド:"
 
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "LPQコマンド:"
 
 #: standalone/draksambashare:613
 #, c-format
 msgid "Printing:"
-msgstr ""
+msgstr "印刷:"
 
 #: standalone/draksambashare:629
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "create mode は数字で指定してください(例: 0755)"
 
 #: standalone/draksambashare:691
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "DrakSambaのエントリ"
 
 #: standalone/draksambashare:696
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
-msgstr ""
+msgstr "変更するにはSamba共有を追加または選択してください"
 
 #: standalone/draksambashare:719
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Sambaサーバ"
+msgstr "Sambaユーザアクセス"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "基本"
+msgstr "マスクオプション"
 
 #: standalone/draksambashare:741
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "オプションを指定"
+msgstr "表示オプション"
 
 #: standalone/draksambashare:763
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "ディレクトリを共有"
+msgstr "Samba共有ディレクトリ"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "共有名"
+msgstr "共有名:"
 
 #: standalone/draksambashare:772
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "公開:"
 
 #: standalone/draksambashare:796
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
+"create mask/create mode/directory mask は数字で指定してください(例: 0755)"
 
 #: standalone/draksambashare:803
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "次のSambaユーザを作成: %s"
 
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr ""
+msgstr "ユーザ情報"
 
 #: standalone/draksambashare:928
 #, c-format
 msgid "User name:"
-msgstr ""
+msgstr "ユーザ名:"
 
 #: standalone/draksambashare:929
 #, c-format
 msgid "Passwd:"
-msgstr ""
+msgstr "パスワード:"
 
 #: standalone/draksambashare:1129
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "NFS共有の追加に失敗しました"
+msgstr "Samba共有の追加に失敗しました"
 
 #: standalone/draksambashare:1138
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "NFS共有の変更に失敗しました"
+msgstr "Samba共有の変更に失敗しました"
 
 #: standalone/draksambashare:1147
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "NFS共有の削除に失敗しました"
+msgstr "Samba共有の削除に失敗しました"
 
 #: standalone/draksambashare:1154
 #, c-format
 msgid "File share"
-msgstr ""
+msgstr "ファイル共有"
 
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "プリンタを追加"
 
 #: standalone/draksambashare:1168
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "プリンタの追加に失敗しました"
 
 #: standalone/draksambashare:1177
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "変更に失敗しました"
 
 #: standalone/draksambashare:1186
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "削除に失敗しました"
 
 #: standalone/draksambashare:1193
 #, c-format
 msgid "Printers"
-msgstr ""
+msgstr "プリンタ"
 
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr ""
+msgstr "パスワードを変更"
 
 #: standalone/draksambashare:1206
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "ユーザパスワードの変更に失敗しました"
 
 #: standalone/draksambashare:1214
 #, c-format
 msgid "Failed to add user."
-msgstr ""
+msgstr "ユーザの追加に失敗しました"
 
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "ユーザを削除"
 
 #: standalone/draksambashare:1226
 #, c-format
 msgid "Failed to delete user."
-msgstr ""
+msgstr "ユーザの削除に失敗しました"
 
 #: standalone/draksambashare:1238
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Sambaユーザ"
 
 #: standalone/draksambashare:1247
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFSはNFS共有を管理します"
+msgstr "DrakSambaはSamba共有を管理します"
 
 #: standalone/draksec:49
 #, c-format
@@ -23104,17 +23139,17 @@ msgstr "セキュリティ管理者:"
 #: standalone/draksec:219
 #, c-format
 msgid "Basic options"
-msgstr "基本"
+msgstr "基本オプション"
 
 #: standalone/draksec:233
 #, c-format
 msgid "Network Options"
-msgstr "ネットワーク"
+msgstr "ネットワークオプション"
 
 #: standalone/draksec:233
 #, c-format
 msgid "System Options"
-msgstr "システム"
+msgstr "システムオプション"
 
 #: standalone/draksec:268
 #, c-format
@@ -26316,7 +26351,7 @@ msgstr "オンラインヘルプを見る"
 #: standalone/net_applet:304
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "対話式ファイアウォールの自動モード"
 
 #: standalone/net_applet:309
 #, c-format
@@ -26324,19 +26359,19 @@ msgid "Always launch on startup"
 msgstr "起動時に開始"
 
 #: standalone/net_applet:313
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "ワイヤレスネットワークを管理"
+msgstr "ワイヤレスネットワーク"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "アクティブなファイアウォール: 侵入を検知しました "
+msgstr "対話型ファイアウォール: 侵入を検知しました "
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "この攻撃者をブラックリストに載せますか？"
+msgstr "この攻撃者をどうしますか？"
 
 #: standalone/net_applet:414
 #, c-format
@@ -26575,9 +26610,9 @@ msgid "/_Configure CUPS"
 msgstr "/CUPSを設定(_C)"
 
 #: standalone/printerdrake:169
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "リモート管理"
+msgstr "/自動管理を設定(_A)"
 
 #: standalone/printerdrake:192
 #, c-format
