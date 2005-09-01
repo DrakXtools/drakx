@@ -1,15 +1,11 @@
 package network::shorewall; # $Id$
 
-
-
-
 use detect_devices;
 use network::ethernet;
 use network::network;
 use run_program;
 use common;
 use log;
-
 
 sub check_iptables() {
     -f "$::prefix/etc/sysconfig/iptables" ||
@@ -101,16 +97,21 @@ sub read {
     $conf{net_interface} && \%conf;
 }
 
+sub ports_by_proto {
+    my ($ports) = @_;
+    my %ports_by_proto;
+    foreach (split ' ', $ports) {
+	m!^(\d+(?:\d+)?)/(udp|tcp|icmp)$! or die "bad port $_\n";
+	push @{$ports_by_proto{$2}}, $1;
+    }
+    \%ports_by_proto;
+}
+
 sub write {
     my ($conf) = @_;
     my $default_intf = get_ifcfg_interface();
     my $use_pptp = $default_intf =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_intf") =~ /pptp/;
-
-    my %ports_by_proto;
-    foreach (split ' ', $conf->{ports}) {
-	m!^(\d+(:\d+)?)/(udp|tcp|icmp)$! or die "bad port $_\n";
-	push @{$ports_by_proto{$3}}, $1;
-    }
+    my $ports_by_proto = ports_by_proto($conf->{ports});
 
     my $interface_settings = sub {
         my ($zone, $interface) = @_;
@@ -134,7 +135,7 @@ sub write {
     set_config_file('rules',
     		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
 		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
-		    (map_each { [ 'ACCEPT', 'net', 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto),
+		    (map_each { [ 'ACCEPT', 'net', 'fw', $::a, join(',', @$::b), '-' ] } %$ports_by_proto),
 		    (map {
 			map_each { [ 'REDIRECT', 'loc', $::a, $_, $::b, '-' ] } %{$conf->{redirects}{$_}};
 		    } keys %{$conf->{redirects}}),

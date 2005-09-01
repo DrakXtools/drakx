@@ -69,6 +69,13 @@ my @all_servers =
   },
 );
 
+my @ifw_rules = (
+    {
+        name => N_("Port scan detection"),
+        ifw_rule => 'psd',
+    },
+);
+
 sub port2server {
     my ($port) = @_;
     find {
@@ -170,7 +177,7 @@ drakconnect before going any further."), 1) or return;
     }
 }
 
-sub choose {
+sub choose_allowed_services {
     my ($in, $disabled, $servers, $unlisted) = @_;
 
     $_->{on} = 0 foreach @all_servers;
@@ -202,7 +209,60 @@ You can also give a range of ports (eg: 24300:24350/udp)", $invalid_port));
 		   { label => N("Other ports"), val => \$unlisted, advanced => 1, disabled => sub { $disabled } }
 		  ]) or return;
 
-    $disabled, to_ports([ grep { $_->{on} } @l ], $unlisted);
+    $disabled, [ grep { $_->{on} } @l ], $unlisted;
+}
+
+sub set_ifw {
+    my ($do_pkgs, $enabled, $rules, $ports) = @_;
+    $do_pkgs->ensure_is_installed('mandi-ifw', '/etc/ifw/start', $::isInstall) or return;
+
+    my $ports_by_proto = network::shorewall::ports_by_proto($ports);
+    output_with_perm("$::prefix/etc/ifw/rules", 0644, map { "$_\n" } (
+        (map { "source /etc/ifw/rules.d/$_" } @$rules),
+        map {
+            my $proto = $_;
+            map {
+                my $multiport = /:/ && " -m multiport";
+                "iptables -A Ifw -m state --state NEW -p $proto$multiport --dport $_ -j IFWLOG --log-prefix NEW\n";
+            } @{$ports_by_proto->{$proto}};
+        } keys %$ports_by_proto,
+    ));
+
+    my $set_in_file = sub {
+        my ($file, @list) = @_;
+        substInFile {
+            foreach my $l (@list) { s|^$l\n|| }
+            $_ .= join("\n", @list) . "\n" if eof && $enabled;
+        } "$::prefix/etc/shorewall/$file";
+    };
+    $set_in_file->('start', "INCLUDE /etc/ifw/start", "INCLUDE /etc/ifw/rules", "iptables -I INPUT 2 -j Ifw");
+    $set_in_file->('stop', "iptables -D INPUT -j Ifw", "INCLUDE /etc/ifw/stop");
+}
+
+sub choose_watched_services {
+    my ($in, $servers, $unlisted) = @_;
+
+    my @l = (@ifw_rules, @$servers, map { { ports => $_ } } split(' ', $unlisted));
+    my $enabled = 1;
+    $_->{ifw} = 1 foreach @l;
+
+    $in->ask_from_({
+        messages =>
+          N("Interactive Firewall") . "\n\n" .
+          N("You can be warned when someone access to a service or tries to intrude into your computer.
+Please select which network activity should be watched."),
+        title => N("Interactive Firewall"),
+    },
+                   [
+                       { text => N("Use Interactive Firewall"), val => \$enabled, type => 'bool' },
+                       map { my $e = $_; {
+                           text => (exists $_->{name} ? translate($_->{name}) : $_->{ports}),
+                           val => \$_->{ifw},
+                           type => 'bool', disabled => sub { !member($e, @ifw_rules) || !$enabled },
+                       } } @l,
+                   ]) or return;
+    my ($rules, $ports) = partition { exists $_->{ifw_rule} } grep { $_->{ifw} } @l;
+    set_ifw($in->do_pkgs, $enabled, [ map { $_->{ifw_rule} } @$rules ], to_ports($ports));
 }
 
 sub main {
@@ -210,8 +270,11 @@ sub main {
 
     ($disabled, my $servers, my $unlisted) = get_conf($in, $disabled) or return;
 
-    ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
+    ($disabled, $servers, $unlisted) = choose_allowed_services($in, $disabled, $servers, $unlisted) or return;
 
+    choose_watched_services($in, $servers, $unlisted) unless $disabled;
+
+    my $ports = to_ports($servers, $unlisted);
     set_ports($in->do_pkgs, $disabled, $ports, $in) or return;
 
     ($disabled, $ports);
