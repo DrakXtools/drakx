@@ -110,9 +110,20 @@ sub theme_read_config_for_resolution {
     my ($theme, $res) = @_;
     my $file = theme_get_config_for_resolution($theme, $res);
     my $contents = cat_($file);
-    my ($pb_x1, $pb_y1, $pb_x2, $pb_y2) = $contents =~ /^box\s+silent\s+noover\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/m;
-    my ($pc) = $contents =~ /^box\s+silent\s+inter\s+\d+\s+\d+\s+\d+\s+\d+\s+(#\w+)/m;
-    { pc => $pc, px => $pb_x1, pw => $pb_x2 - $pb_x1, py => $pb_y1, ph => $pb_y2 - $pb_y1, getVarsFromSh($file) };
+    my ($bgcolor) = $contents =~ /^bgcolor=(\d+)/m;
+    my ($pb_x1, $pb_y1, $pb_x2, $pb_y2, $pbg_c, $ptransp) = $contents =~ /^box\s+silent\s+noover\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(#\w{6})(\w{2})/m;
+    my ($tb_x1, $tb_y1, $tb_x2, $tb_y2, $tc, $transp) = $contents =~ /^box\s+noover\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(#\w{6})(\w{2})/m;
+    my ($pc1, $pc2, $pc3, $pc4) = $contents =~ /^box\s+silent\s+inter\s+\d+\s+\d+\s+\d+\s+\d+\s+(#\w+)\s+(#\w+)\s+(#\w+)\s+(#\w+)/m;
+    my ($text_color) = $contents =~ /^text_color=0x(\w+)/m;
+    my $gradient;
+    if ($pc1 eq $pc2) {
+	$gradient = 'vertical';
+	$pc2 = $pc3
+    }
+    { pc1 => $pc1, pc2 => $pc2, gradient => $gradient,  transp => hex $transp, ptransp => hex $ptransp, 
+      tb_x => $tb_x1, tb_y => $tb_y1, tb_w => $tb_x2 - $tb_x1, tb_h => $tb_y2 - $tb_y1, tc => $tc, pbg_c => $pbg_c, 
+      px => $pb_x1, pw => $pb_x2 - $pb_x1, py => $pb_y1, ph => $pb_y2 - $pb_y1, 
+      getVarsFromSh($file), text_color => "#$text_color" }
 }
 
 sub theme_write_config_for_resolution {
@@ -125,10 +136,22 @@ sub theme_write_config_for_resolution {
     # progress/text rectangles border/inter coordinates
     my ($pb_x1, $pb_x2, $pb_y1, $pb_y2) = ($conf->{px}, $conf->{px} + $conf->{pw}, $conf->{py}, $conf->{py} + $conf->{ph});
     my ($pi_x1, $pi_x2, $pi_y1, $pi_y2) = ($pb_x1 + 1, $pb_x2 - 1, $pb_y1 + 1, $pb_y2 - 1);
-    my ($tb_x1, $tb_x2, $tb_y1, $tb_y2) = ($conf->{tx}, $conf->{tx} + $conf->{tw}, $conf->{ty}, $conf->{ty} + $conf->{th});
-    my ($ti_x1, $ti_x2, $ti_y1, $ti_y2) = ($tb_x1 + 1, $tb_x2 - 1, $tb_y1 + 1, $tb_y2 - 1);
-    my $pc = $conf->{pc};
-
+    my ($tb_x1, $tb_y1, $tb_x2, $tb_y2) = ($conf->{tb_x}, $conf->{tb_y}, $conf->{tb_x} + $conf->{tb_w}, $conf->{tb_y} + $conf->{tb_h});
+    my ($tx, $ty, $tw, $th) = ($tb_x1 + 10, $tb_y1 + 5, $conf->{tb_w} - 20 , $conf->{tb_h} - 10);
+    my ($ti_x1, $ti_x2, $ti_y1, $ti_y2) = ($tb_x1 - 1, $tb_x2 + 1, $tb_y1 + 1, $tb_y2 + 1);
+    my ($pc1, $pc2, $pc3, $pc4);
+    if ($conf->{gradient} eq 'vertical') {
+	($pc1, $pc2, $pc3, $pc4) = ($conf->{pc1}, $conf->{pc1}, $conf->{pc2}, $conf->{pc2})
+    } else { 
+	($pc1, $pc2, $pc3, $pc4) = ($conf->{pc1}, $conf->{pc2}, $conf->{pc1}, $conf->{pc2})
+    }
+    if (!$pc1) { ($pc1, $pc2, $pc3, $pc4) = ('#ffffff', '#ffffff', '#000000', '#000000') }
+    my $ptransp = sprintf '%02x', $conf->{ptransp};
+    my $transp = sprintf '%02x', $conf->{transp};
+    $conf->{pbg_c} ||= '#aaaaaa';
+    $conf->{tc} ||= '#ffffff';
+    $text_color = $conf->{text_color} ? "0x$conf->{text_color}" : '0xaaaaaa';
+    $text_color =~ s/#//;
     output($config,
 	   qq(# This is the configuration file for the $res bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
@@ -142,21 +165,21 @@ state=1
 
 # fgcolor is the text forground color.
 # bgcolor is the text background (i.e. transparent) color.
-fgcolor=7
-bgcolor=0
+fgcolor=$conf->{fgcolor}
+bgcolor=$conf->{bgcolor}
 
 # (tx, ty) are the (x, y) coordinates of the text window in pixels.
 # tw/th is the width/height of the text window in pixels.
-tx=$conf->{tx}
-ty=$conf->{ty}
-tw=$conf->{tw}
-th=$conf->{th}
+tx=$tx
+ty=$ty
+tw=$tw
+th=$th
 
 # ttf message output parameters
-text_x=20
-text_y=550
-text_size=20
-text_color=0xeef4ff
+text_x=$conf->{text_x}
+text_y=$conf->{text_y}
+text_size=$conf->{text_size}
+text_color=$text_color
 
 # name of the picture file (full path recommended)
 jpeg=$jpeg
@@ -166,10 +189,10 @@ progress_enable=1
 
 # background
 # b(order) or i(nter)
-box silent noover $pb_x1 $pb_y1 $pb_x2 $pb_y2 #040454
+box silent noover $pb_x1 $pb_y1 $pb_x2 $pb_y2 $conf->{pbg_c}$ptransp
 # progress bar
-box silent inter  $pi_x1 $pi_y1 $pi_x1 $pi_y2 $pc $pc $pc $pc
-box silent        $pi_x1 $pi_y1 $pi_x2 $pi_y2 $pc $pc $pc $pc
+box silent inter  $pb_x1 $pi_y1 $pb_x1 $pi_y2 $pc1 $pc2 $pc3 $pc4
+box silent        $pb_x1 $pi_y1 $pb_x2 $pi_y2 $pc1 $pc2 $pc3 $pc4
 # black border (top, bottom, left, right)
 box silent        $pb_x1 $pb_y1 $pb_x2 $pb_y1 #313234
 box silent        $pb_x1 $pb_y2 $pb_x2 $pb_y2 #889499
@@ -177,12 +200,12 @@ box silent        $pb_x1 $pb_y1 $pb_x1 $pb_y2 #313234
 box silent        $pb_x2 $pb_y1 $pb_x2 $pb_y2 #889499
 
 # text box
-box noover        $ti_x1 $ti_y1 $ti_x2 $ti_y2 #011763
+box noover        $tb_x1 $tb_y1 $tb_x2 $tb_y2 $conf->{tc}$transp
 # black border (top, bottom, left, right)
-box               $tb_x1 $tb_y1 $tb_x2 $tb_y1 #313234
-box               $tb_x1 $tb_y2 $tb_x2 $tb_y2 #889499
-box               $tb_x1 $tb_y1 $tb_x1 $tb_y2 #313234
-box               $tb_x2 $tb_y1 $tb_x2 $tb_y2 #889499
+box               $ti_x1 $tb_y1 $ti_x1 $ti_y2 #313234
+box               $tb_x1 $tb_y1 $ti_x2 $tb_y1 #313234
+box               $ti_x2 $ti_y1 $ti_x2 $ti_y2 #889499
+box               $tb_x1 $ti_y2 $ti_x2 $ti_y2 #889499
 
 overpaintok=1
 

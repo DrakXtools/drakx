@@ -27,18 +27,24 @@ my $scroll = create_scrolled_window($image_area);
 switch_to_mode(0);
 
 my %scale_settings = (
-		      tx => [ 1/10, N("x coordinate of text box\nin number of characters") ],
-		      ty => [ 1/10, N("y coordinate of text box\nin number of characters") ],
-		      tw => [ 8/10, N("text width") ],
-		      th => [ 8/10, N("text box height") ],
+		      tb_x => [ 1/10, N("x coordinate of text box") ],
+		      tb_y => [ 1/10, N("y coordinate of text box") ],
+		      tb_w => [ 8/10, N("text box width") ],
+		      tb_h => [ 8/10, N("text box height") ],
 		      px => [ 2/10, N("the progress bar x coordinate\nof its upper left corner") ],
 		      py => [ 7/10, N("the progress bar y coordinate\nof its upper left corner") ],
 		      pw => [ 6/10, N("the width of the progress bar") ],
 		      ph => [ 1/10, N("the height of the progress bar") ],
+		      text_x => [ 1/10, N("x coordinate of the text") ],
+		      text_y => [ 1/10, N("y coordinate of the text") ],
+		      transp => [ 1/10, N("text box transparency") ],
+		      ptransp => [ 1/10, N("progress box transparency") ],
+		      text_size => [ 1/10, N("text size") ],
 		     );
 
 my %adj;
 create_adj_widgets();
+create_simple_adj_widgets();
 
 my %theme;
 set_theme('new_theme');
@@ -50,13 +56,20 @@ my $notebook = gtksignal_connect(Gtk2::Notebook->new, switch_page => sub {
 				     switch_to_mode($mode);
 				 });
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
-				 create_scale_table('px', 'pw', 'py', 'ph'),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
+				 create_scale_table('px', 'pw', 'py', 'ph', 'ptransp'),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color 1")), clicked => sub { choose_color('pc1') }),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color 2")), clicked => sub { choose_color('pc2') }),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar background")), clicked => sub { choose_color('pbg_c') }),
+				 Gtk2::Label->new(N("Gradient type")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 'vertical', 'horizontal' ], 'vertical'), changed => sub { $theme{conf}{gradient} = $_[0]->get_child->get_text }),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose text color")), clicked => sub { choose_color('text_color') }),
+				 create_scale_table('text_x', 'text_y', 'text_size'),
 				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('silentjpeg') })),
 		       N("Silent bootsplash"));
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
-				 create_scale_table('tx', 'tw', 'ty', 'th'),
-				 gtksignal_connect(Gtk2::Button->new(N("Choose progress bar color")), clicked => \&choose_color),
+				 create_scale_table('tb_x', 'tb_y', 'tb_w', 'tb_h', 'transp'),
+				 gtksignal_connect(Gtk2::Button->new(N("Choose text zone color")), clicked => sub { choose_color('tc') }),
+				 Gtk2::Label->new(N("Text color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], 1), changed => sub { $theme{conf}{fgcolor} = $_[0]->get_child->get_text }),
+				 Gtk2::Label->new(N("Background color")), gtksignal_connect(Gtk2::ComboBoxEntry->new_with_strings([ 0 .. 15 ], '0'), changed => sub { $theme{conf}{bgcolor} = $_[0]->get_child->get_text }),
 				 gtksignal_connect(Gtk2::Button->new(N("Choose picture")), clicked => sub { choose_image('jpeg') })),
 		       N("Verbose bootsplash"));
 $notebook->append_page(gtkpack__(Gtk2::VBox->new(0, 5),
@@ -172,13 +185,15 @@ sub choose_image {
 }
 
 sub choose_color() {
-    my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-    my @rgb = $theme{conf}{pc} =~ /^#(.{2})(.{2})(.{2})$/ ? (map { hex($_)*255 } ($1, $2, $3)) : ();
+    my ($var) = @_;
+    my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("Color selection")));
+    print "Current color $var: $theme{conf}{$var}\n";
+    my @rgb = $theme{conf}{$var} =~ /^#(.{2})(.{2})(.{2})$/ ? (map { hex($_)*255 } ($1, $2, $3)) : ();
     $color->colorsel->set_current_color(gtkcolor(@rgb));
     $color->cancel_button->signal_connect(clicked => sub { $color->destroy });
     $color->ok_button->signal_connect(clicked => sub {
 					  my $colour = $color->colorsel->get_current_color;
-					  $theme{conf}{pc} = "#" . join('', map { sprintf("%02x", $_/255) } $colour->red, $colour->green, $colour->blue);
+					  $theme{conf}{$var} = "#" . join('', map { sprintf("%02x", $_/256) } $colour->red, $colour->green, $colour->blue);
 					  $color->destroy;
 				      });
 }
@@ -187,10 +202,17 @@ sub choose_color() {
 #- Adjustement widgets
 sub create_adj_widgets() {
     $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
-    my %scale_links = (tx => 'tw', ty => 'th', px => 'pw', py => 'ph');
+    my %scale_links = (tb_x => 'tb_w', tb_y => 'tb_h', px => 'pw', py => 'ph', text_x => 'px', text_y => 'py', transp => 'transp', ptransp => 'ptransp', text_size => 'text_size' );
     while (my ($n1, $n2) = each(%scale_links)) {
 	$adj{$n1}{on_change} = $adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
 	$adj{$n2}{on_change} = $adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
+    }
+}
+
+sub create_simple_adj_widgets() {
+    $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
+    foreach my $n ('transp','ptransp', 'text_size') {
+	$adj{$n}{on_change} = $adj{$n}->signal_connect(value_changed => sub { apply_scale($n) });
     }
 }
 sub create_scale_table {
@@ -201,9 +223,12 @@ sub create_scale_table {
 	[ Gtk2::Label->new($scale_settings{$_}[1]), $w ];
     } @settings);
 }
+
 sub get_scale_max {
     my ($name) = @_;
-    $theme{$name =~ /[xw]$/ ? "res_w" : "res_h"};
+    if ($name =~ /size/) { return 100 }
+    if ($name =~ /transp/) { return 255 }
+    $theme{$name =~ /[xw]$/ ? "res_w" : "res_h"}
 }
 sub apply_scale {
     my ($name) = @_;
@@ -254,7 +279,7 @@ sub image_expose {
 	$window->draw_rectangle($widget->style->white_gc, 1, @{$theme{conf}}{'px', 'py', 'pw', 'ph'});
 	$cross_gc = $widget->style->black_gc;
     } else { #- verbose or console
-	$window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
+	$window->draw_rectangle($widget->style->black_gc, 0, @{$theme{conf}}{'tb_x', 'tb_y', 'tb_w', 'tb_h'});
 	$cross_gc = $widget->style->white_gc;
     }
     $window->draw_line($cross_gc, $current_rect->[0]{X}, $current_rect->[0]{Y}, $current_rect->[1]{X}, $current_rect->[1]{Y});
@@ -266,7 +291,7 @@ sub update_rect() {
     if ($current_mode == 0) { #- silent
 	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'px', 'py', 'pw', 'ph'});
     } else { #- verbose or console
-	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'tx', 'ty', 'tw', 'th'});
+	$current_rect = bootsplash::xywh2rectangle(@{$theme{conf}}{'tb_x', 'tb_y', 'tb_w', 'tb_h'});
     }
 }
 
@@ -281,7 +306,7 @@ sub update_theme_from_rect() {
     if ($current_mode == 0) { #- silent
 	@{$theme{conf}}{'px', 'py', 'pw', 'ph'} = bootsplash::rectangle2xywh($current_rect);
     } else { #- verbose or console
-	@{$theme{conf}}{'tx', 'ty', 'tw', 'th'} = bootsplash::rectangle2xywh($current_rect);
+	@{$theme{conf}}{'tb_x', 'tb_y', 'tb_w', 'tb_h'} = bootsplash::rectangle2xywh($current_rect);
     }
     update_scale_values_from_conf();
     $image_area->queue_draw;
