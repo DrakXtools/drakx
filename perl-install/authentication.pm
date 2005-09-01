@@ -55,9 +55,9 @@ sub kind2description {
 	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
 	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
 	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
-	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
-	AD        => [ N("Active Directory with SFU:"), N("Kerberos is a secure system for providing network authentication services."), ],
-	SMBKRB    => [ N("Active Directory with Winbind:"), N("Kerberos is a secure system for providing network authentication services.")  ],
+	winbind   => [ N("Windows Domain:"), N("iWinbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
+	AD        => [ N("Active Directory with SFU:"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
+	SMBKRB    => [ N("Active Directory with Winbind:"), N("Winbind allows the system to authenticate users in a Windows Active Directory Server.")  ],
     );
     join('', map { $_ ? qq($_->[0]\n$_->[1]\n\n) : '' } map { $kind2description{$_} } @kinds);
 }
@@ -152,8 +152,8 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 			  { label => N("Windows Domain"), val => \$authentication->{WINDOMAIN} },
 			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
-			  { label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
-			  { label => N("Default Idmap "), val => \$authentication->{AD_users_idmap}, disabled => sub { $anonymous } },
+			  #{ label => N("Use Idmap for store UID/SID "), val => \$anonymous, type => 'bool' },
+			  #{ label => N("Default Idmap "), val => \$authentication->{AD_users_idmap}, disabled => sub { $anonymous } },
 			]) or return;
     }
     $authentication->{$kind} ||= 1;
