@@ -516,6 +516,9 @@ sub configure_krb5_for_AD {
 				     default_realm => $uc_domain,
 				     dns_lookup_realm => $authentication->{AD_server} ? 'false' : 'true',
 				     dns_lookup_kdc => $authentication->{AD_server} ? 'false' : 'true',
+				     default_tgs_enctypes => undef, 
+				     default_tkt_enctypes => undef,
+				     permitted_enctypes => undef,
 				    ));
 
     my @sections = (
