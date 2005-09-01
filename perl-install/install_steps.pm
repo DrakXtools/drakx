@@ -449,6 +449,8 @@ sub installPackages { #- complete REWORK, TODO and TOCHECK!
     my $time = time();
     { 
 	local $ENV{DURING_INSTALL} = 1;
+	local $ENV{TMPDIR} = '/tmp';
+	local $ENV{TMP} = '/tmp';
 	pkgs::install($o->{isUpgrade}, \@toInstall, $packages, \&installCallback);
     }
     any::writeandclean_ldsoconf($o->{prefix});
