@@ -716,19 +716,20 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 
     my ($meth) = $mygtk2::MagicWindow::AUTOLOAD =~ /mygtk2::MagicWindow::(.*)/;
 
-    my @l = $meth eq 'show'
-              ? ('banner', 'child', 'real_window') :
+    my ($s1, @s2) = $meth eq 'show'
+              ? ('real_window', 'banner', 'child') :
             $meth eq 'destroy' || $meth eq 'hide' ?
-	      ($w->{pop_it} ? 'real_window' : ('banner', 'child')) :
+	      ($w->{pop_it} ? 'real_window' : ('child', 'banner')) :
             $meth eq 'get' && $args[0] eq 'window-position' ||
 	    $for_real_window{$meth} ||
             !$w->{child}->can($meth)
 	      ? 'real_window'
 	      : 'child';
 
-#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on @l (@args)\n";
+#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s1 @s2 (@args)\n";
 
-    $w->{$_} && $w->{$_}->$meth(@args) foreach @l;
+    $w->{$_} && $w->{$_}->$meth(@args) foreach @s2;
+    $w->{$s1}->$meth(@args);
 }
 
 sub _create_Window {
