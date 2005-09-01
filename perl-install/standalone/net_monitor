@@ -56,14 +56,14 @@ my $in = 'interactive'->vnew;
 
 
 my $window1 = ugtk2->new(N("Network Monitoring"));
-$window1->{rwindow}->signal_connect(delete_event => \&main_quit);
+$window1->{window}->signal_connect(delete_event => \&main_quit);
 
 unless ($::isEmbedded) {
-    $window1->{rwindow}->set_position('center');
-    $window1->{rwindow}->set_title(N("Network Monitoring"));
-    $window1->{rwindow}->set_border_width(5);
+    $window1->{window}->set_position('center');
+    $window1->{window}->set_title(N("Network Monitoring"));
+    $window1->{window}->set_border_width(5);
 }
-#$::isEmbedded or $window1->{rwindow}->set_size_request(580, 320);
+#$::isEmbedded or $window1->{window}->set_size_request(580, 320);
 
 my $colorr = gtkcolor(50400, 655, 20000);
 my $colort = gtkcolor(55400, 55400, 655);
@@ -121,18 +121,18 @@ gtkadd($window1->{window},
                ),
       );
 
-$window1->{rwindow}->show_all;
-$window1->{rwindow}->realize;
+$window1->{window}->show_all;
+$window1->{window}->realize;
 
-my $gct = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
+my $gct = Gtk2::Gdk::GC->new($window1->{window}->window);
 $gct->set_foreground($colort);
-my $gcr = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
+my $gcr = Gtk2::Gdk::GC->new($window1->{window}->window);
 $gcr->set_foreground($colorr);
-my $gca = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
+my $gca = Gtk2::Gdk::GC->new($window1->{window}->window);
 $gca->set_foreground($colora);
 
 $statusbar->push(1, N("Wait please, testing your connection..."));
-$window1->{rwindow}->show_all;
+$window1->{window}->show_all;
 
 Glib::Timeout->add(1000, \&rescan);
 my $time_tag2 = Glib::Timeout->add(1000, \&update);
