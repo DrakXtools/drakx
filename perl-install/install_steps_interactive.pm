@@ -174,7 +174,10 @@ sub selectInstallClass {
 	    }
 
 	    $o->{isUpgrade} = (find { $p->{release_file} =~ /$_/ } 'mandriva', 'mandrake', 'conectiva', 'redhat') || 'unknown';
-	    $o->{upgrade_by_removing_pkgs} ||= member($o->{isUpgrade}, 'conectiva', 'redhat');
+	    $o->{upgrade_by_removing_pkgs_matching} ||= {
+		conectiva => 'cl',
+		redhat => '.', #- everything!
+	    }->{$o->{isUpgrade}};
 	    log::l("upgrading $o->{isUpgrade} distribution" . ($o->{upgrade_by_removing_pkgs} ? " (upgrade_by_removing_pkgs)" : ''));
 	}
     }
