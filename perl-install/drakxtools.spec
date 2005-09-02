@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.51mdk
+Release: 0.52mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep  2 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.52mdk
+- drakhelp: prefix file path with file://
+  (mozilla-firefox needs a valid url)
+- net_applet: don't exec new binary on update (#16051)
+- printerdrake (Till): use printer name determined by HPLIP to
+  auto-select PPD file of a network printer where the model name
+  was not determined by SNMP
+
 * Thu Sep  1 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.51mdk
 - drakfirewall: allow to install and configure Interface Firewall
 - net_applet:
