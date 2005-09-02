@@ -351,57 +351,90 @@ sub getIPsInLocalNetworks() {
     # Read the output of "ifconfig" to determine the broadcast addresses of
     # the local networks
     my $dev_is_localnet = 0;
-    my @local_bcasts;
-    my $current_bcast = "";
-	
+    my $local_nets = {};
+    my $dev;
     local *IFCONFIG_OUT;
     open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
 	'/bin/sh -c "export LC_ALL=C; ifconfig" 2> /dev/null |' or return ();
     while (my $readline = <IFCONFIG_OUT>) {
 	# New entry ...
 	if ($readline =~ /^(\S+)\s/) {
-	    my $dev = $1;
+	    $dev = $1;
 	    # ... for a local network (eth = ethernet, 
 	    #     vmnet = VMWare,
 	    #     ethernet card connected to ISP excluded)?
 	    $dev_is_localnet = $dev =~ /^eth/ || $dev =~ /^vmnet/;
-	    # delete previous address
-	    $current_bcast = "";
 	}
-	# Are we in the important line now?
-	if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
-	    # Rip out the broadcast IP address
-	    $current_bcast = $1;
-	    
-	    # Are we in an entry for a local network?
-	    if ($dev_is_localnet == 1) {
-		# Store current IP address
-		push @local_bcasts, $current_bcast;
+	if ($dev_is_localnet) {
+	    # Are we in the important line now?
+	    if ($readline =~ /\saddr:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+		# Rip out the broadcast IP address
+		$local_nets->{$dev}{ip} = $1;
+	    }
+	    if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+		# Rip out the broadcast IP address
+		$local_nets->{$dev}{bcast} = $1;
+	    }
+	    if ($readline =~ /\sMask:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+		# Rip out the broadcast IP address
+		$local_nets->{$dev}{mask} = $1;
 	    }
 	}
     }
     close(IFCONFIG_OUT);
 
+    # Now find all addresses in the local networks which we will investigate
     my @addresses;
-    # Now ping all broadcast addresses and additionally "nmblookup" the
-    # networks (to find Windows servers which do not answer to ping)
-    foreach my $bcast (@local_bcasts) {
-	local *F;
-	open F, ($::testing ? "" : "chroot $::prefix/ ") . 
-	    qq(/bin/sh -c "export LC_ALL=C; ping -w 1 -b -n $bcast 2> /dev/null | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |) 
-	    or next;
-	local $_;
-	while (<F>) { chomp; push @addresses, $_ }
-	close F;
-	if (-x "/usr/bin/nmblookup") {
+    foreach $dev (keys %{$local_nets}) {
+	my $ip = $local_nets->{$dev}{ip};
+	my $bcast = $local_nets->{$dev}{bcast};
+	my $mask = $local_nets->{$dev}{mask};
+	if ($mask =~ /255.255.255.(\d+)/) {
+	    # Small network, never more than 255 boxes, so we return
+	    # all addresses belonging to this network, nwithout pinging
+	    my $lastnumber = $1;
+	    my $masknumber;
+	    if ($lastnumber < 128) {
+		$masknumber = 24;
+	    } elsif ($lastnumber < 192) {
+		$masknumber = 25;
+	    } elsif ($lastnumber < 224) {
+		$masknumber = 26;
+	    } elsif ($lastnumber < 240) {
+		$masknumber = 27;
+	    } elsif ($lastnumber < 248) {
+		$masknumber = 28;
+	    } elsif ($lastnumber < 252) {
+		$masknumber = 29;
+	    } elsif ($lastnumber < 254) {
+		$masknumber = 30;
+	    } elsif ($lastnumber < 255) {
+		$masknumber = 31;
+	    } else {
+		$masknumber = 32;
+	    }
+	    push @addresses, "$ip/$masknumber";
+	} else {
+	    # Big network, probably more than 255 boxes, so ping the 
+	    # broadcast address and additionally "nmblookup" the
+	    # networks (to find Windows servers which do not answer to ping)
 	    local *F;
 	    open F, ($::testing ? "" : "chroot $::prefix/ ") . 
-		qq(/bin/sh -c "export LC_ALL=C; nmblookup -B $bcast \\* 2> /dev/null | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |)
+		qq(/bin/sh -c "export LC_ALL=C; ping -w 1 -b -n $bcast 2> /dev/null | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |) 
 		or next;
 	    local $_;
-	    while (<F>) { 
-		chomp;
-		push @addresses, $_ if !(member($_,@addresses));
+	    while (<F>) { chomp; push @addresses, $_ }
+	    close F;
+	    if (-x "/usr/bin/nmblookup") {
+		local *F;
+		open F, ($::testing ? "" : "chroot $::prefix/ ") . 
+		    qq(/bin/sh -c "export LC_ALL=C; nmblookup -B $bcast \\* 2> /dev/null | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort" |)
+		    or next;
+		local $_;
+		while (<F>) { 
+		    chomp;
+		    push @addresses, $_ if !(member($_,@addresses));
+		}
 	    }
 	}
     }
