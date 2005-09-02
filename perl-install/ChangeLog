@@ -1,3 +1,405 @@
+2005/09/02  Olivier Blin <oblin at mandriva.com>
+
+	* share/rpmsrate: don't install hotplug anymore
+
+2005/09/02  Pixel  <pixel at mandriva.com>
+
+	* install2.pm: move code to create_minimal_files()
+
+	* pkgs.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+	rename pkgs::rpmDbOpenForInstall() to pkgs::open_rpm_db_rw()
+	allow verbose removing of packages
+	opening rpm db in selectPackage(), so remove some rpmDbOpen()
+	new function select_by_package_names()
+
+	* diskdrake/interactive.pm, fs/format.pm, interactive.pm:
+	fs::format::wait_message() is now ->wait_message_with_progress_bar (on
+	interactive objects)
+
+	* share/upgrade-map.conectiva.10, common.pm, share/list.xml: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+
+	* install_any.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+	move code to create_minimal_files()
+	rename pkgs::rpmDbOpenForInstall() to pkgs::open_rpm_db_rw()
+	opening rpm db in selectPackage(), so remove some rpmDbOpen()
+	new function select_by_package_names()
+	hoist things in install_any
+	fs::format::wait_message() is now ->wait_message_with_progress_bar (on
+	interactive objects)
+
+	* install_steps_interactive.pm: cleanup
+	we want the release extension
+	set {upgrade_by_removing_pkgs} when upgrading conectiva and redhat
+	new function select_by_package_names()
+	hoist things in install_any
+	fs::format::wait_message() is now ->wait_message_with_progress_bar (on
+	interactive objects)
+
+	* install_steps.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+	allow upgrading a local_install (no need to call use_root_part)
+	opening rpm db in selectPackage(), so remove some rpmDbOpen()
+	hoist things in install_any
+
+	* install_steps_gtk.pm: cleanup
+
+2005/09/02  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Workaround : Don't call method directly
+
+2005/09/02  Till Kamppeter  <till at mandriva.com>
+
+	* share/rpmsrate: 
+	  - Removed hplip-hpijs-ppds, this package is not really required.
+
+	* printer/printerdrake.pm: 
+	  - Use printer name determined by HPLIP to auto-select PPD file of a
+	network printer where the model name was not determined by SNMP.
+
+2005/09/01  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/pt_BR.po: Updated pt_BR translation from Arthur R. Mello
+	<renato@conectiva.com.br>.
+
+	* share/po/ja.po: Updated Japanese translation from Yukiko Bando
+	<ybando@k6.dion.ne.jp>
+
+2005/09/01  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo corrigido
+
+2005/09/01  Olivier Blin <oblin at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.51mdk
+
+	* install_steps.pm: enable Ifw by default in high security levels and
+	enable the psd rule
+
+	* network/ifw.pm: require dbus_object only when needed
+
+	* share/rpmsrate, network/drakfirewall.pm, network/shorewall.pm: install
+	and configure Interface Firewall in drakfirewall
+
+	* standalone/net_applet: run drakids on click if an alert is still
+	available
+
+	* standalone/drakconnect: fix include path (#18103)
+
+	* standalone/net_monitor: interactive is unused
+	use window instead of rwindow, they're equivalent
+
+2005/09/01  Pixel  <pixel at mandriva.com>
+
+	* authentication.pm: perl_checker compliance
+	allow Active Directory even on non corporate product (requested by our
+	commercial team)
+	allow removing lines in krb5_conf_update() (for vguardiola)
+
+	* install_steps.pm: set TMPDIR and TMP during install (bugzilla #18088)
+	cleanup
+
+	* pkgs.pm: create remove_raw(), remove() now retries with option noscripts
+	preferred packages:
+	  - remove packages not existing anymore
+	  - add nail and glibc-devel
+	help debugging packageCallbackChoices()
+
+	* Xconfig/card.pm: drivers/fglrx_drv.o is now drivers/fglrx_drv.so
+
+	* bootloader.pm: handle "=" between keyword and value (esp. useful for
+	reading conectiva's menu.lst) (bugzilla #18090)
+
+	* mygtk2.pm: fix return value (thanks to blino for finding the pb)
+
+2005/09/01  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/po/pt.po: Fix newline in translation
+
+2005/09/01  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Do not display or use the description field of the IEEE-1284 ID
+	string of a printer if it is shorter than 5 characters (Many HP
+	  printers have a 4-digit number there).
+
+2005/09/01  Vincent Guardiola <vguardiola at mandriva.com>
+
+	* authentication.pm: Change definition for Active Directory with SFU and
+	Active Directory Winbind
+	Remove idmap ldap backend for winbind AD (obsolete, see Samba 3.0.20)
+	Remove default_tgs_enctypes, default_tkt_enctypes, permitted_enctypes
+	from /etc/krb5.conf for winbind configuration, Buzgilla 15232
+
+2005/09/01  Warly  <warly at mandriva.com>
+
+	* share/advertising/13.png, share/advertising/13.pl: forgotten pictures
+
+	* standalone/draksplash, bootsplash.pm: add few parameters
+
+2005/08/31  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2005/08/31  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/08/31  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: perl_checker fix
+
+	* install_steps.pm, install_any.pm: initial deployment server support
+
+	* standalone/drakroam: short-circuit and fix embedded mode
+
+	* standalone/net_applet: avoid warning
+	don't display keyring icon if the wireless network doesn't need a key
+	(thanks to Couriousous)
+
+	* network/tools.pm: add get_current_gateway_interface
+
+	* network/netconnect.pm, network/ethernet.pm: move is_ifplugd_blacklist in
+	network::ethernet (and get rid of madwifi_pci, it's wifi and supported
+	by ifplugd)
+
+2005/08/31  Pixel  <pixel at mandriva.com>
+
+	* install_steps_interactive.pm: set isUpgrade to conectiva when we found a
+	conectiva release file
+	instead of dirtying pkgs::installCallback, use
+	install_steps::installCallback
+	(still not clean, but better)
+
+	* pkgs.pm: instead of dirtying pkgs::installCallback, use
+	install_steps::installCallback
+	(still not clean, but better)
+	fix typo
+	create remove_marked_ask_remove() and use it
+
+	* ugtk2.pm: use "to_bottom" functionality from mygtk2 (note that
+	scroll_to_iter is no good for this, scroll_to_mark is better (cf gtk's
+	doc))
+	ensure Gtk2::Banner::set_pixmap can be used to change the text
+
+	* install_steps_gtk.pm: 
+	  - new advertising
+	  - nicer "Details" mode
+	instead of dirtying pkgs::installCallback, use
+	install_steps::installCallback
+	(still not clean, but better)
+	fix bad handle of the elapsed time
+
+	* mygtk2.pm: simpler and better code, allowing forcing scrolling to bottom
+	allow ScrolledWindow around TextView to be automatically scrolled down
+	on new text insert
+	allow file_ref to be false at Image creation
+	allow adding text to a TextView with gtkadd
+	add "text_ref" for Label's
+	add Label_Left
+	add ProgressBar
+	handle hide_ref and show_ref
+
+	* common.pm: also look for conectiva-release
+
+	* install_steps.pm: instead of dirtying pkgs::installCallback, use
+	install_steps::installCallback
+	(still not clean, but better)
+	create remove_marked_ask_remove() and use it
+
+2005/08/31  tbednarski
+
+	* share/po/pl.po: Translation update
+
+2005/08/31  Till Kamppeter  <till at mandriva.com>
+
+	* printer/detect.pm: 
+	  - Fixed retrieval of parallel port base address.
+	  - Fixed parallel printer auto-detection and registered IEEE-1284 ID
+	string for Mandriva hardware database.
+	  - Fixed USB IEEE-1284 ID string output.
+	  - Added recording of IEEE-1284 device ID string, for USB printers.
+
+	* printer/main.pm: 
+	  - When having added one's own PPD file now it gets pre-selected in the
+	printer/driver list.
+	  - Fixed recognition of alredy set up queues for auto queue setup, for
+	  several Xerox Phaser printers the user was asked again and again to
+	  set up a print queue.
+
+2005/08/31  Warly  <warly at mandriva.com>
+
+	* share/advertising/25.pl, share/advertising/03.png,
+	share/advertising/25.png, share/advertising/20.pl,
+	share/advertising/13-b.png, share/advertising/30.png,
+	share/advertising/02.pl, share/advertising/list-ppp,
+	share/advertising/27.pl, share/advertising/14.pl,
+	share/advertising/lpi.png, share/advertising/21.png,
+	share/advertising/07.png, share/advertising/08.pl,
+	share/advertising/26.png, share/advertising/22.pl,
+	share/advertising/30.pl, share/advertising/10.pl,
+	share/advertising/18.pl, share/advertising/16.pl,
+	share/advertising/28.png, share/advertising/01.pl,
+	share/advertising/09.png, share/advertising/29.png,
+	share/advertising/list-dwd, share/advertising/06.png,
+	share/advertising/01.png, share/advertising/23.pl,
+	share/advertising/list-dis, share/advertising/02.png,
+	share/advertising/15.png, share/advertising/23.png,
+	share/advertising/29.pl, share/advertising/07.pl,
+	share/advertising/19.png, share/advertising/04.png,
+	share/advertising/13-a.png, share/advertising/09.pl,
+	share/advertising/27.png, share/advertising/17.pl,
+	share/advertising/22.png, share/advertising/13-b.pl,
+	share/advertising/04.pl, share/advertising/28.pl,
+	share/advertising/12.png, share/advertising/24.pl,
+	share/advertising/12.pl, share/advertising/26.pl,
+	share/advertising/06.pl, share/advertising/03.pl,
+	share/advertising/24.png, share/advertising/13-a.pl,
+	share/advertising/lpi.pl, share/advertising/11.png,
+	share/advertising/16.png, share/advertising/14.png,
+	share/advertising/list-pwp, share/advertising/10.png,
+	share/advertising/18.png, share/advertising/19.pl,
+	share/advertising/15.pl, share/advertising/11.pl,
+	share/advertising/05.pl, share/advertising/21.pl,
+	share/advertising/05.png, share/advertising/17.png,
+	share/advertising/20.png, share/advertising/08.png: add new advertising
+	pictures
+
+2005/08/31  willysr
+
+	* share/po/id.po: Updated plus added new Translator
+
+2005/08/30  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: use Combo instaed of ComboBoxEntry to fiw 2 rows
+	heigh bug
+	put comboxentry in a VBox (to avoid 2 rows bug in comboboxentry)
+
+2005/08/30  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/08/30  Olivier Blin <oblin at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.50mdk
+
+	* network/wireless.pm: don't translate strings here
+	  - configure wpa_supplicant correctly for shared or passwordless
+	connections
+	  - split write_interface_setttings out of
+	network::network::write_interface_conf
+	  - wpa_supplicant may list some networks twice, handle it
+	  - rewrite drakroam to use wpa_supplicant
+
+	* standalone/drakconnect: fix isdn config in manage interface
+	use lower case 'i' in iwconfig/iwpriv/iwspy (#18031)
+
+	* network/network.pm, network/monitor.pm: 
+	  - configure wpa_supplicant correctly for shared or passwordless
+	connections
+	  - split write_interface_setttings out of
+	network::network::write_interface_conf
+	  - wpa_supplicant may list some networks twice, handle it
+	  - rewrite drakroam to use wpa_supplicant
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, network/netconnect.pm, share/po/be.po,
+	share/po/pa_IN.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sc.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/nl.po, share/po/tl.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: use lower case 'i' in
+	iwconfig/iwpriv/iwspy (#18031)
+
+	* standalone/drakroam: really allow to select the network
+	  - configure wpa_supplicant correctly for shared or passwordless
+	connections
+	  - split write_interface_setttings out of
+	network::network::write_interface_conf
+	  - wpa_supplicant may list some networks twice, handle it
+	  - rewrite drakroam to use wpa_supplicant
+
+2005/08/30  Pixel  <pixel at mandriva.com>
+
+	* share/rpmsrate: i remember someone telling me gdm should now be used
+	instead of xdm when neither GNOME nor KDE are selected. but it seems
+	i've heard a ghost (or something alike), so reverting
+
+	* install_steps_gtk.pm: 
+	  - use noborderWhenEmbedded instead of dirtying directly in WizardTable
+	  - use children_centered to cleanly and correctly size the progress bar
+
+	* mygtk2.pm: make MagicWindow re-entrant again (was broken due to only one
+	banner, eg. for drakx summary)
+	add children_centered (was already children_tight, children_loose and
+	children)
+
+2005/08/30  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* crypto.pm: Update mirrorlist
+
+	* drakxtools.spec: require xtest instead of the /usr/X11R6/bin/xtest file
+
+2005/08/30  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - When setting up new queue with HPLIP old HPOJ config was not deleted
+	during installation. Fixed.
+
+	* printer/main.pm: 
+	  - Support for HPLIP URIs with "?device=...", possible fix for bug
+	#18041 and bug #18053.
+
 2005/08/30  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draknfs: put comboxentry in a VBox (to avoid 2 rows bug in
