@@ -1140,7 +1140,7 @@ sub format_ {
 	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
     }
     $part->{isFormatted} = 0; #- force format;
-    my ($_w, $wait_message) = fs::format::wait_message($in);
+    my ($_w, $wait_message) = $in->wait_message_with_progress_bar;
     fs::format::part($all_hds, $part, $wait_message);
     1;
 }

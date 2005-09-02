@@ -480,6 +480,39 @@ sub wait_message {
     $b;
 }
 
+
+sub wait_message_with_progress_bar {
+    my ($in) = @_;
+
+    my ($w, $progress, $last_msg, $displayed);
+    my $on_expose = sub { $displayed = 1; 0 }; #- declared here to workaround perl limitation
+    $w, sub {
+	my ($msg, $current, $total) = @_;
+	if ($msg) {
+	    $last_msg = $msg;
+	    if (!$w) {
+		$progress = Gtk2::ProgressBar->new if $in->isa('interactive::gtk');
+		$w = $in->wait_message('', [ '', if_($progress, $progress) ]);
+		if ($progress) {
+		    #- don't show by default, only if we are given progress information
+		    $progress->hide;
+		    $progress->signal_connect(expose_event => $on_expose);
+		}
+	    }
+	    $w->set($msg);
+	} elsif ($total) {
+	    if ($progress) {
+		$progress->set_fraction($current / $total);
+		$progress->show;
+		$displayed = 0;
+		mygtk2::flush() while !$displayed;
+	    } else {
+		$w->set([ $last_msg, "$current / $total" ]);
+	    }
+	}
+    };
+}
+
 sub kill() {}
 
 

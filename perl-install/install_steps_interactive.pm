@@ -382,7 +382,7 @@ sub choosePartitionsToFormat {
 
 sub formatMountPartitions {
     my ($o, $_fstab) = @_;
-    my ($w, $wait_message) = fs::format::wait_message($o);
+    my ($w, $wait_message) = $o->wait_message_with_progress_bar;
     catch_cdie {
         fs::format::formatMount_all($o->{all_hds}, $o->{fstab}, $wait_message);
     } sub { 

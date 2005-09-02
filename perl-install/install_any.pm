@@ -749,7 +749,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	my $m = install_medium::by_id($k, $o->{packages});
 	#- don't copy rpms of supplementary media
 	next if $m->is_suppl;
-	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
+	my ($wait_w, $wait_message) = $o->wait_message_with_progress_bar; #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
 	    my $cd_k = $m->get_cd_number;
