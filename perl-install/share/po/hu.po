@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-08-30 18:05+0800\n"
-"PO-Revision-Date: 2005-09-01 11:49+0200\n"
+"PO-Revision-Date: 2005-09-02 15:14+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -22403,47 +22403,47 @@ msgstr "Hálózati csatolófelület"
 #: standalone/draknfs:41
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "rendszergazda (root) anonymous-ként való kezelése"
 
 #: standalone/draknfs:42
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "összes felhasználó anonymous-ként való kezelése"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Nincs felhasználóazonosító-leképezés"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "valódi távoli rendszergazdai elérés engedélyezése"
 
 #: standalone/draknfs:83
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "NFS-kiszolgáló"
 
 #: standalone/draknfs:83
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Az NFS-kiszolgáló újraindítása/újratöltése..."
 
 #: standalone/draknfs:84
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Hiba az NFS-kiszolgáló újraindítása/újratöltése közben"
 
 #: standalone/draknfs:100 standalone/draksambashare:197
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Könyvtárválasztás"
 
 #: standalone/draknfs:105 standalone/draksambashare:202
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Könyvtárt kell megadni."
 
 #: standalone/draknfs:136
 #, c-format
@@ -22471,8 +22471,30 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"Az <span weight=\"bold\">NFS-kliensek</span> többféle módon adhatók meg:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">egyetlen gép:</span> egy gép - a feloldó "
+"által felismert rövidített névvel, teljesen megadott tartománynévvel "
+"vagy IP-címmel megadva\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">hálózati csoportok:</span> NIS hálózati "
+"csoportok (netgroups) megadhatók @csoport formában\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">helyettesítő karakterek:</span> a gépnevek "
+"tartalmazhatják a * és a ? helyettesítő karaktereket. Például a *.cs.foo.edu "
+"kifejezés illeszkedik a cs.foo.edu tartomány összes gépére.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">IP-hálózatok:</span> egyszerre is exportálhatók "
+"könyvtárak egy IP-hálózat vagy -alhálózat összes gépére. Például a következők "
+"hozzáfűzhetők a hálózati alapcímhez: \"/255.255.252.0\" illetve \"/22\".\n"
 
 #: standalone/draknfs:151
+# NFS offers root squashing, a feature that maps uid 0 (root) to the
+# anonymous (nfsnobody) uid
 #, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
@@ -22497,26 +22519,52 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Felhasználói azonosítókkal kapcsolatos opciók</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">rendszergazda (root) anonymous-ként való "
+"kezelése:</span> a \"0\" felhasználóazonosítóról illetve "
+"csoportazonosítóról érkező kérések leképezése az \"anonymous\" "
+"felhasználóazonosítóra illetve csoportazonosítóra (root_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">valódi távoli rendszergazdai elérés "
+"engedélyezése:</span> a rendszergazda anonymous-ként való kezelésének "
+"(\"root squashing\") kikapcsolása. Ez az opció főleg a lemez nélküli "
+"kliensek esetében hasznos (no_root_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">összes felhasználó anonymous-ként való "
+"kezelése:</span> az összes felhasználóazonosító és csoportazonosító "
+"leképezése az anonymous felhasználóra (all_squash). Hasznos lehet "
+"például NFS-sel exportált nyilvános FTP-könyvtárak vagy hírkönyvtárak "
+"(news spool) esetében. Az alapértelmezés ennek az ellentéte: ekkor "
+"nincs felhasználóazonosító-leképezés (no_all_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid és anongid:</span> az \"anonymous\" "
+"felhasználó felhasználóazonosítójának illetve csoportazonosítójának "
+"közvetlen módon való beállítása.\n"
 
 #: standalone/draknfs:167
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Szinkron elérés:"
 
 #: standalone/draknfs:168
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Biztonságossá tett kapcsolat:"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Csak olvasható megosztás:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Speciális opciók</span>"
 
 #: standalone/draknfs:172
 #, c-format
@@ -22525,6 +22573,9 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> ez az opció előírja, hogy a kérések "
+"egy olyan internetes porttól származzanak, amelynek száma kisebb az "
+"IPPORT_RESERVED (1024) értéknél. Alapértelmezésben be van kapcsolva az opció."
 
 #: standalone/draknfs:173
 #, c-format
@@ -22534,6 +22585,10 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> csak olvasási kérések "
+"legyenek engedélyezve ezen az NFS-köteten, vagy pedig olvasási és "
+"írási kérések is. Alapértelmezésben a fájlrendszer módosítására irányuló "
+"kérések tiltva vannak. Ez közvetlenül is beállítható ezzel az opcióval."
 
 #: standalone/draknfs:174
 #, c-format
@@ -22542,128 +22597,132 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> megtiltja az NFS-kiszolgáló számára, "
+"hogy az NFS-protokollal ellentétesen cselekedve az előtt válaszoljon a kérésekre, "
+"hogy ezen kérések által végrehajtott módosítások véglegesítve lettek volna "
+"stabil tárolóterületre (például lemezre)."
 
 #: standalone/draknfs:304
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "NFS-megosztás módosításához előbb vegyen fel egyet."
 
 #: standalone/draknfs:371
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Speciális beállítások"
+msgstr "A speciális opciók leírása"
 
 #: standalone/draknfs:382
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "NFS-könyvtár"
 
 #: standalone/draknfs:384 standalone/draksambashare:588
 #: standalone/draksambashare:767
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Könyvtár:"
 
 #: standalone/draknfs:387
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Gépelérés"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "Access:"
-msgstr ""
+msgstr "Elérés:"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "Hosts Access"
-msgstr ""
+msgstr "Gépelérés"
 
 #: standalone/draknfs:392
 #, c-format
 msgid "User ID Mapping"
-msgstr ""
+msgstr "Felhasználóazonosító-leképezés"
 
 #: standalone/draknfs:394
 #, c-format
 msgid "User ID:"
-msgstr ""
+msgstr "Felhasználóazonosító:"
 
 #: standalone/draknfs:394
 #, c-format
 msgid "Help User ID"
-msgstr ""
+msgstr "Leírás - felhasználóazonosító"
 
 #: standalone/draknfs:395
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "Anonymous felhasználóazonosító:"
 
 #: standalone/draknfs:396
 #, c-format
 msgid "Anonymous Group ID:"
-msgstr ""
+msgstr "Anonymous csoportazonosító:"
 
 #: standalone/draknfs:433
 #, c-format
 msgid "Can't create this directory."
-msgstr ""
+msgstr "Nem hozható létre ilyen könyvtár."
 
 #: standalone/draknfs:435
 #, c-format
 msgid "You must specify hosts access."
-msgstr ""
+msgstr "Meg kell adni gépelérést."
 
 #: standalone/draknfs:513
 #, c-format
 msgid "Share Directory"
-msgstr ""
+msgstr "Könyvtár megosztása"
 
 #: standalone/draknfs:513
 #, c-format
 msgid "Hosts Wildcard"
-msgstr ""
+msgstr "Helyettesítő karakterek gépnevekhez"
 
 #: standalone/draknfs:513
 #, c-format
 msgid "General Options"
-msgstr ""
+msgstr "Általános opciók"
 
 #: standalone/draknfs:513
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Egyéni opciók"
 
 #: standalone/draknfs:525 standalone/draksambashare:625
 #: standalone/draksambashare:792
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Adjon meg egy megosztandó könyvtárt."
 
 #: standalone/draknfs:532
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "A megfelelő elérés beállításához használja a Módosítás gombot."
 
 #: standalone/draknfs:584
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS - NFS-megosztások kezelése"
 
 #: standalone/draknfs:593
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Nem sikerült felvenni NFS-megosztást."
 
 #: standalone/draknfs:600
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Nem sikerült módosítani az NFS-megosztást."
 
 #: standalone/draknfs:607
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Nem sikerült törölni egy NFS-megosztást."
 
 #: standalone/drakperm:21
 #, c-format
