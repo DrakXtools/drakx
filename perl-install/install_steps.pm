@@ -417,7 +417,6 @@ sub pkg_install {
     if ($::testing) {
 	log::l(qq(selecting package "$_")) foreach @l;
     } else {
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
     }
     my @toInstall = pkgs::packagesToInstall($o->{packages});

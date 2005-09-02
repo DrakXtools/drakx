@@ -298,6 +298,8 @@ sub selectPackage {
     #- is only used for unselection, not selection)
     my $state = $packages->{state} ||= {};
 
+    $packages->{rpmdb} ||= rpmDbOpen();
+
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
 					 callback_choices => \&packageCallbackChoices);
 

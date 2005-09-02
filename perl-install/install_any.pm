@@ -257,7 +257,6 @@ sub setup_postinstall_rpms($$) {
     my %toCopy;
     #- compute closure of package that may be copied, use INSTALL category
     #- in rpmsrate.
-    $packages->{rpmdb} ||= pkgs::rpmDbOpen();
     pkgs::select_by_package_names($packages, $packages->{needToCopy} || [], 0, \%toCopy);
     delete $packages->{rpmdb};
 
