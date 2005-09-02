@@ -11,8 +11,8 @@ sub local_detect() {
     # Reload parallel port modules only when we were not called by
     # automatic setup of print queues, to avoid recursive calls
     if (!$::autoqueue) {
-	eval { modules::unload(qw(lp parport_pc parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
-	eval { modules::load(qw(parport_pc lp)) }; #- take care as not available on 2.4 kernel (silent error).
+	eval { modules::unload(qw(lp parport_pc ppdev parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
+	eval { modules::load(qw(ppdev parport_pc lp)) }; #- take care as not available on 2.4 kernel (silent error).
     }
     whatPrinter();
 }
