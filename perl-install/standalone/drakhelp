@@ -35,4 +35,4 @@ my ($instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 -e $instpath or system("/usr/sbin/drakhelp_inst $package");
 -e $instpath or $in->ask_warn(N("Mandriva Linux Help Center"), N("%s cannot be displayed \n. No Help entry of this type\n", $instpath));
 
-system("/usr/bin/www-browser $ancpath &") if -e $instpath;
+system("/usr/bin/www-browser file://$ancpath &") if -e $instpath;
