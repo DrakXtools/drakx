@@ -636,7 +636,7 @@ sub load_rate_files {
 }
 
 sub setPackages {
-    my ($o) = @_;
+    my ($o, $wait_message) = @_;
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
@@ -673,6 +673,14 @@ sub setPackages {
 
 	#- open rpm db (always without rebuilding db, it should be false at this point).
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
+    }
+
+    $wait_message->(N("Looking at packages already installed..."));
+    pkgs::selectPackagesAlreadyInstalled($o->{packages});
+
+    if ($o->{isUpgrade}) {
+	$wait_message->(N("Finding packages to upgrade..."));
+	pkgs::selectPackagesToUpgrade($o->{packages});
     }
 }
 

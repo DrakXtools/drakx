@@ -297,9 +297,7 @@ sub formatMountPartitions {
 sub setPackages {
     my ($o) = @_;
 
-    install_any::setPackages($o);
-    pkgs::selectPackagesAlreadyInstalled($o->{packages});
-    pkgs::selectPackagesToUpgrade($o->{packages}) if $o->{isUpgrade};
+    install_any::setPackages($o, sub {});
 }
 
 sub deselectFoundMedia {

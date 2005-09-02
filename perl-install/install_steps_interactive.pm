@@ -399,15 +399,7 @@ sub setPackages {
 
     my $w = $o->wait_message('', $o->{isUpgrade} ? N("Looking for available packages and rebuilding rpm database...") :
 			     N("Looking for available packages..."));
-    install_any::setPackages($o);
-
-    $w->set(N("Looking at packages already installed..."));
-    pkgs::selectPackagesAlreadyInstalled($o->{packages});
-
-    if ($o->{isUpgrade}) {
-	$w->set(N("Finding packages to upgrade..."));
-	pkgs::selectPackagesToUpgrade($o->{packages});
-    }
+    install_any::setPackages($o, sub { $w->set(@_) });
 }
 
 sub mirror2text { $crypto::mirrors{$_[0]} ? $crypto::mirrors{$_[0]}[0] . '|' . $_[0] : "-|URL" }
