@@ -564,6 +564,9 @@ EOF
 	}
     }
 
+    renamef(pkgs::removed_pkgs_to_upgrade_file(), pkgs::removed_pkgs_to_upgrade_file() . '.done');
+    unlink(glob("$::prefix/root/drakx/*.upgrading"));
+
     any::fix_broken_alternatives($o->{isUpgrade} eq 'redhat');
 
     #- update theme directly from a package (simplest).

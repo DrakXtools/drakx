@@ -643,6 +643,11 @@ sub setPackages {
 	#- open rpm db according to right mode needed (ie rebuilding database if upgrading)
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{isUpgrade});
 
+	if (my $extension = $o->{upgrade_by_removing_pkgs_matching}) {
+	    $wait_message->(N("Removing packages prior to upgrade..."));
+	    push @{$o->{default_packages}}, pkgs::upgrade_by_removing_pkgs($o->{packages}, \&install_steps::installCallback, $extension, "$ENV{SHARE_PATH}/upgrade-map.$o->{isUpgrade}");
+	}
+
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
 	pkgs::selectPackage($o->{packages},
@@ -1505,20 +1510,23 @@ sub suggest_mount_points {
 sub find_root_parts {
     my ($fstab, $prefix) = @_;
 
+    my $extract = sub {
+	my ($prefix, $f, $part) = @_;
+	chomp(my $s = cat_("$prefix$f"));
+	$s =~ s/\s+for\s+\S+//;
+	log::l("find_root_parts found $part->{device}: $s" . ($f !~ m!/etc/! ? " in special release file $f" : ''));
+	{ release => $s, release_file => $f, part => $part };
+    };
+
     if ($::local_install) {
 	my $f = common::release_file('/mnt') or return;
-	chomp(my $s = cat_("/mnt$f"));
-	$s =~ s/\s+for\s+\S+//;
-	return { release => $s, release_file => $f };
+	return $extract->('/mnt', $f, {});
     }
 
     map { 
 	my $handle = any::inspect($_, $prefix);
 	if (my $f = $handle && common::release_file($handle->{dir})) {
-	    chomp(my $s = cat_("$handle->{dir}$f"));
-	    $s =~ s/\s+for\s+\S+//;
-	    log::l("find_root_parts found $_->{device}: $s");
-	    { release => $s, part => $_, release_file => $f };
+	    $extract->($handle->{dir}, $f, $_);
 	} else { () }
     } @$fstab;
 }

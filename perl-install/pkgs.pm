@@ -1230,6 +1230,87 @@ sub install {
     fs::loopback::save_boot($loop_boot);
 }
 
+sub upgrade_by_removing_pkgs {
+    my ($packages, $callback, $extension, $o_map) = @_;
+    
+    log::l("upgrade_by_removing_pkgs (extension=$extension, map=$o_map)");
+
+    #- put the release file in /root/drakx so that we continue an upgrade even if the file has gone
+    my $f = common::release_file($::prefix);
+    if (dirname($f) eq '/etc') {
+	output_p("$::prefix/root/drakx/" . basename($f) . '.upgrading', cat_("$::prefix$f"));
+    }
+    my $busy_var_tmp = "$::prefix/var/tmp/ensure-rpm-does-not-remove-this-dir";
+    touch($busy_var_tmp);
+
+    my @was_installed = remove_pkgs_to_upgrade($packages, $callback, $extension);
+
+    {
+	my @restore_files = qw(/etc/passwd /etc/group /etc/ld.so.conf);
+	foreach (@restore_files) {
+	    rename "$::prefix$_.rpmsave", "$::prefix$_";
+	}
+        install_any::create_minimal_files();
+	unlink $busy_var_tmp;
+    }
+
+    if ($o_map) {
+	my @l = glob("$o_map*");
+	@l == 0 and log::l("upgrade_by_removing_pkgs: no map matching $o_map*");
+	@l > 1 and log::l("upgrade_by_removing_pkgs: many maps (" . join(' ', @l) . ")");    
+	$o_map = $l[0];
+    }
+    my %map = map {
+	chomp;
+	my ($name, @new) = split;
+	$name => \@new;
+    } $o_map ? cat_($o_map) : ();
+
+    log::l("upgrade_by_removing_pkgs: map $o_map gave " . (int keys %map) . " rules");
+
+    my $log;
+    my @to_install = uniq(map { 
+	$log .= " $_=>" . join('+', @{$map{$_}}) if $map{$_};
+	$map{$_} ? @{$map{$_}} : $_;
+    } @was_installed);
+    log::l("upgrade_by_removing_pkgs special maps:$log");
+    log::l("upgrade_by_removing_pkgs: wanted packages: ", join(' ', sort @to_install));
+
+    @to_install;
+}
+
+sub removed_pkgs_to_upgrade_file() { "$::prefix/root/drakx/removed_pkgs_to_upgrade" }
+
+sub remove_pkgs_to_upgrade {
+    my ($packages, $callback, $extension) = @_;
+
+    my @to_remove;
+    my @was_installed;
+    {
+	$packages->{rpmdb} ||= pkgs::rpmDbOpen();
+	$packages->{rpmdb}->traverse(sub {
+	    my ($pkg) = @_;
+	    if ($pkg->release =~ /$extension$/) {
+		push @was_installed, $pkg->name;
+		push @to_remove, scalar $pkg->fullname;
+	    }
+	});
+    }
+    if (-e removed_pkgs_to_upgrade_file()) {
+	log::l("removed_pkgs_to_upgrade: using saved installed packages list ", removed_pkgs_to_upgrade_file());
+	@was_installed = chomp_(cat_(removed_pkgs_to_upgrade_file()));
+    } else {
+	log::l("removed_pkgs_to_upgrade: saving (old) installed packages in ", removed_pkgs_to_upgrade_file());
+	output_p(removed_pkgs_to_upgrade_file(), map { "$_\n" } @was_installed);
+    }
+
+    delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
+
+    remove(\@to_remove, $callback, noscripts => 1);
+
+    @was_installed;
+}
+
 sub remove_marked_ask_remove {
     my ($packages, $callback) = @_;
 
