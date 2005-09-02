@@ -153,6 +153,10 @@ sub collect_needed_perl_files {
 	    } elsif (begins_with($f, '/dev/')) {
 		# skip
 	    } elsif (begins_with($f, '/')) {
+		if ($main_node->{attr}{'no-arch-libraries'}) {
+		    #- replace /lib/tls or /lib/i686 with /lib
+		    $f =~ s!^(/lib(64)?/).*?/!$1!;
+		}
 		$global{$f} = 1;
 	    }
 	}
@@ -286,6 +290,7 @@ sub install {
 	warn "collect-perl-files $local $to @files ($env->{filter}{command})\n";
 	my ($local_perl_files, $global_perl_files) = collect_needed_perl_files($local, $to, @files);
 	warn "collect-perl-files gave: ", join(' ', @$local_perl_files), "\n";
+#	warn "                    and: ", join(' ', @$global_perl_files), "\n";
 	copy_and_filter("$working_dir/$local", "$DEST$to", $local_perl_files, $env->{filter}, '', '--dereference');
 	copy_and_filter('', $DEST, $global_perl_files, $env->{filter}, '', '--dereference');
 
