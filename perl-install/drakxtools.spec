@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.52mdk
+Release: 0.53mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Sep  3 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.53mdk
+- printerdrake (Till):
+  o let also network printers be found which do not answer to a
+    broadcast ping (most newer HP), this is done only in class C
+    and smaller networks, to not scan too many machines
+  o made reloading of parallel port kernel modules (for auto-detection)
+     also working if "ppdev" module is loaded
+  o make building of main window of printerdrake much faster
+  o check for CUPS daemon running without console output
+
 * Fri Sep  2 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.52mdk
 - drakhelp: prefix file path with file://
   (mozilla-firefox needs a valid url)
