@@ -23,7 +23,7 @@ Usage:
 ") . N(" --id <id_label>       - load the html help page which refers to id_label
 ") . N(" --doc <link>          - link to another web page ( for WM welcome frontend)
 ");
-    exit(0)
+    exit(0);
 }
 my ($opt, $idlabel) = @ARGV;
 @ARGV == 2 && ($opt eq '--id' || $opt eq '--doc' || $opt eq '--help') or usage();
