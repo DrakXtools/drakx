@@ -504,10 +504,7 @@ The format is the same as auto_install generated files."),
 		$o->ask_okcancel('', N("Bad file")) or return;
 	    } else {
 		install_any::unselectMostPackages($o);
-		foreach (@{$O->{default_packages} || []}) {
-		    my $pkg = pkgs::packageByName($packages, $_);
-		    pkgs::selectPackage($packages, $pkg) if $pkg;
-		}
+		pkgs::select_by_package_names($packages, $O->{default_packages} || []);
 		return 1;
 	    }
 	}

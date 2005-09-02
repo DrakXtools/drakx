@@ -258,10 +258,7 @@ sub setup_postinstall_rpms($$) {
     #- compute closure of package that may be copied, use INSTALL category
     #- in rpmsrate.
     $packages->{rpmdb} ||= pkgs::rpmDbOpen();
-    foreach (@{$packages->{needToCopy} || []}) {
-	my $p = pkgs::packageByName($packages, $_) or next;
-	pkgs::selectPackage($packages, $p, 0, \%toCopy);
-    }
+    pkgs::select_by_package_names($packages, $packages->{needToCopy} || [], 0, \%toCopy);
     delete $packages->{rpmdb};
 
     my @toCopy = grep { $_ && !$_->flag_selected } map { $packages->{depslist}[$_] } keys %toCopy;
@@ -885,7 +882,7 @@ sub default_packages {
 
 sub select_default_packages {
     my ($o) = @_;
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+    pkgs::select_by_package_names($o->{packages}, $o->{default_packages});
 }
 
 sub unselectMostPackages {

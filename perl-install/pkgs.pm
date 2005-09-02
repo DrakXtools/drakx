@@ -279,6 +279,15 @@ sub packageCallbackChoices {
     }
 }
 
+sub select_by_package_names {
+    my ($packages, $names, $b_base, $o_otherOnly) = @_;
+
+    foreach (@$names) {
+	my $p = packageByName($packages, $_) or next;
+	selectPackage($packages, $p, $b_base, $o_otherOnly);
+    }
+}
+
 #- selection, unselection of package.
 sub selectPackage {
     my ($packages, $pkg, $b_base, $o_otherOnly) = @_;
