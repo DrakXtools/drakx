@@ -1016,7 +1016,7 @@ sub install_urpmi {
     delete $packages->{rpmdb};
 
     #- import pubkey in rpmdb.
-    my $db = pkgs::rpmDbOpenForInstall();
+    my $db = pkgs::open_rpm_db_rw();
     $packages->parse_pubkeys(db => $db);
     foreach my $medium (@mediums) {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {

@@ -899,7 +899,7 @@ sub rpmDbCleanLogs() {
     unlink glob("$::prefix/var/lib/rpm/__db.*");
 }
 
-sub rpmDbOpenForInstall() {
+sub open_rpm_db_rw() {
     my $db = URPM::DB::open($::prefix, 1);
     $db and log::l("opened rpmdb for writing in $::prefix");
     $db;
@@ -1126,7 +1126,7 @@ sub install {
 			$close->($_);
 		    }
 		} else {
-		    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
+		    my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
 		    my $trans = $db->create_transaction($::prefix);
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
@@ -1250,7 +1250,7 @@ sub remove_raw {
 
     log::l("removing: " . join(' ', @$to_remove));
     
-    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", URPM::rpmErrorString();
+    my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction($::prefix);
 
     #- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
