@@ -2522,7 +2522,8 @@ sub setup_common {
 			    printer::main::hplip_device_entry_from_uri
 			    ($hplipdevice);
 		    }
-		    if ($makemodel !~ /\S/) {
+		    if (($makemodel !~ /\S/) ||
+			($makemodel =~ /$searchunknown/)) {
 			$makemodel = $hplipentry->{model};
 			$makemodel =~ s/_/ /g;
 			$makemodel = "HP " . $makemodel 
