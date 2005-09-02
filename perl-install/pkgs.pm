@@ -219,7 +219,7 @@ sub packagesToInstall {
     my ($packages) = @_;
     my @packages;
     foreach (values %{$packages->{mediums}}) {
-	$_->selected or next;
+	$_->{selected} or next;
 	log::l("examining packagesToInstall of medium $_->{descr}");
 	push @packages, grep { $_->flag_selected } packagesOfMedium($packages, $_);
     }
