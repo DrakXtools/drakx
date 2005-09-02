@@ -1,5 +1,48 @@
 2005/09/02  Olivier Blin <oblin at mandriva.com>
 
+	* standalone/drakhelp: perl_checker fix
+	prefix file path with file:// (mozilla-firefox needs a valid url)
+
+2005/09/02  Pixel  <pixel at mandriva.com>
+
+	* install2.pm: move code to create_minimal_files()
+
+	* install_steps.pm, common.pm, share/upgrade-map.conectiva.10,
+	share/list.xml, pkgs.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+
+	* tools/install-xml-file-list: replace /lib/tls with /lib for libraries
+	collected using collect_needed_libraries
+	(it was already done for files collected using ldd)
+
+	* install_any.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+	move code to create_minimal_files()
+
+2005/09/02  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Workaround : Don't call method directly
+
+2005/09/02  Olivier Blin <oblin at mandriva.com>
+
 	* share/rpmsrate: don't install hotplug anymore
 
 2005/09/02  Pixel  <pixel at mandriva.com>
