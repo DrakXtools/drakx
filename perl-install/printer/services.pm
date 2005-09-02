@@ -45,7 +45,9 @@ sub wait_for_cups() {
     my $cupsready = 0;
     my $i;
     for ($i = 0; $i < 30; $i++) {
-	run_program::rooted($::prefix, "/usr/bin/lpstat", "-r");
+	# Check whether CUPS is running without any console output
+	system(($::testing ? $::prefix : "chroot $::prefix/ ") . 
+	    "/usr/bin/lpstat -r >/dev/null 2>&1");
 	if (($? >> 8) != 0) {
 	    # CUPS is not ready, continue
 	    sleep 1;
