@@ -288,13 +288,13 @@ sub NotebookSwitch() {
 }
 
 sub RefreshLocalPrintersFull {
-    my ($strfilt) = @_;
+    my ($strfilt, @allprinters) = @_;
     my @printers;
     defined $printer and @printers = keys %{$printer->{configured}};
     $ltree_model->clear;
     return if $printer->{SPOOLER} eq "rcups";
     my @LocalReal;
-    LOOP: foreach my $p (@printers) {
+    foreach my $p (@printers) {
 	# Apply string search to all fields, not only the printer name
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $model = $printer->{configured}{$p}{queuedata}{make} . ' ' .
@@ -304,11 +304,12 @@ sub RefreshLocalPrintersFull {
 	my $searchstr = "$p|$model|$connect|$description|$location";
 	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
     }
-    printer::services::wait_for_cups();
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
-		     (printer::cups::queue_enabled($p) ? N("Enabled") :
-		      N("Disabled")));
+		     ((grep { 
+			 ($_->{queuename} eq $p) &&
+			     ($_->{state} eq "enabled");  
+		     } @allprinters) ? N("Enabled") : N("Disabled")));
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $description = $printer->{configured}{$p}{queuedata}{desc};
 	my $location = $printer->{configured}{$p}{queuedata}{loc};
@@ -323,9 +324,7 @@ sub RefreshLocalPrintersFull {
 }
 
 sub RefreshRemotePrintersFull {
-    my ($strfilt) = @_;
-    my @printers;
-    defined $printer and @printers = printer::cups::lpstat_lpv();
+    my ($strfilt, @printers) = @_;
     $rtree_model->clear;
     my @RemoteReal;
     LOOP: foreach my $p (@printers) {
@@ -340,13 +339,11 @@ sub RefreshRemotePrintersFull {
 	# All remaining to which the search term applies
 	push(@RemoteReal, $p) if $searchstr =~ /\Q$strfilt/i;
     }
-    printer::services::wait_for_cups();
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
 	my $queue = $p->{queuename};
-	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
-		     (printer::cups::queue_enabled($queue) ? N("Enabled") :
-		      N("Disabled")));
+	my $state = ($p->{state} eq "enabled" ?
+		     N("Enabled") : N("Disabled"));
 	my $server = $p->{ipp} || $printer->{remote_cups_server};
 	my $description = $p->{description};
 	my $location = $p->{location};
@@ -361,8 +358,11 @@ sub RefreshRemotePrintersFull {
 sub Refresh {
     my ($strfilt) = @_;
     my $selection = get_selection();
-    RefreshLocalPrintersFull($strfilt); 
-    RefreshRemotePrintersFull($strfilt);
+    printer::services::wait_for_cups();
+    my @printers;
+    defined $printer and @printers = printer::cups::lpstat_lpv();
+    RefreshLocalPrintersFull($strfilt, @printers); 
+    RefreshRemotePrintersFull($strfilt, @printers);
     GrayDelEdit();
     set_selection($selection);
 }

@@ -29,13 +29,15 @@ sub lpstat_lpv() {
     for my $line (@lpstat) {
 	chomp($line);
 	if ($line !~ m!^\s*$!) {
-	    if ($line =~ m!^printer\s+(\S+)\s+(\S.*)$!) {
+	    if ($line =~ m!^printer\s+(\S+)\s+.*\b(enabled|disabled)\b!) {
 		# Beginning of new printer's entry
 		my $name = $1;
+		my $state = $2;
 		push(@items, {});
 		$currentitem = $#items;
 		$itemshash->{$name} = $currentitem;
 		$items[$currentitem]{queuename} ||= $name;
+		$items[$currentitem]{state} ||= $state;
 	    } elsif ($line =~ m!^\s+Description:\s+(\S.*)$!) {
 		# Description field
 		if ($currentitem != -1) {
