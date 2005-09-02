@@ -1258,7 +1258,7 @@ sub remove_raw {
 
     $callback->($db, user => undef, remove => scalar @$to_remove);
 
-    $trans->run(undef, %run_transaction_options);
+    $trans->run(undef, %run_transaction_options, callback_uninst => $callback);
 }
 sub remove {
     my ($_to_remove, $_callback, %run_transaction_options) = @_;
