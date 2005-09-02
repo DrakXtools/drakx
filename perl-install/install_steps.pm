@@ -169,7 +169,7 @@ sub selectInstallClass {
     if ($o->{partitioning}{use_existing_root} || $o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = fs::get::root_($o->{fstab}) || (first(install_any::find_root_parts($o->{fstab}, $o->{prefix})) || die)->{part};
-	$o->{migrate_device_names} = install_any::use_root_part($o->{all_hds}, $p);
+	$o->{migrate_device_names} = install_any::use_root_part($o->{all_hds}, $p) if !$::local_install;
     } 
 }
 
