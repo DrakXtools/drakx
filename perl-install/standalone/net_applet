@@ -127,7 +127,6 @@ $eventbox->signal_connect(button_press_event => sub {
 
 checkNetworkForce();
 cronNetwork();
-cronUpdate();
 get_unprocessed_attacks();
 
 $SIG{HUP} = sub {
@@ -225,12 +224,6 @@ sub cronNetwork() {
         checkWireless() if !($i++%10);
         checkNetwork();
         1;
-    });
-}
-sub cronUpdate() {
-    my $current_md5 = common::md5file($0);
-    $update_timeout = Glib::Timeout->add(60000, sub {
-        common::md5file($0) ne $current_md5 and exec($0);
     });
 }
 sub go2State {
