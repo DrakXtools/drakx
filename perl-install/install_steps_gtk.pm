@@ -494,7 +494,7 @@ sub installPackages {
     $advertize->(0);
 
     local *install_steps::installCallback = sub {
-	my ($data, $type, $id, $subtype, $amount, $total) = @_;
+	my ($packages, $type, $id, $subtype, $amount, $total) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
 	    #- $amount and $total are used to return number of package and total size.
 	    $nb = $amount;
@@ -504,7 +504,7 @@ sub installPackages {
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    gtkval_modify(\$pkg_progress, 0);
-	    my $p = $data->{depslist}[$id];
+	    my $p = $packages->{depslist}[$id];
 	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, (split /\n/, c::from_utf8($p->summary))[0] || ''));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;

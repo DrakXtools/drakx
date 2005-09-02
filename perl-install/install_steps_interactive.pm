@@ -710,11 +710,11 @@ sub installPackages {
     my $w = $o->wait_message(N("Installing"), N("Preparing installation"));
 
     local *install_steps::installCallback = sub {
-	my ($data, $type, $id, $subtype, $_amount, $total_) = @_;
+	my ($packages, $type, $id, $subtype, $_amount, $total_) = @_;
 	if ($type eq 'user' && $subtype eq 'install') {
 	    $total = $total_;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
-	    my $p = $data->{depslist}[$id];
+	    my $p = $packages->{depslist}[$id];
 	    $w->set(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
 	    $current += $p->size;
 	}
