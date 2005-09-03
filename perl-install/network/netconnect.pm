@@ -1088,6 +1088,7 @@ See iwpriv(8) man page for further information."),
                             #- use iwpriv for WPA with rt2400/rt2500 drivers, they don't plan to support wpa_supplicant
                             $ethntf->{WIRELESS_IWPRIV} = $wireless_enc_mode eq 'wpa-psk' && qq(set AuthMode=WPAPSK
 set EncrypType=TKIP
+set SSID=$ethntf->{WIRELESS_ESSID}
 set WPAPSK="$wireless_enc_key"
 set TxRate=0);
                         }
