@@ -272,8 +272,9 @@ my $isEmbedded = $::isEmbedded;
 local $::isEmbedded = 0;
 
 # Auto refresh
-local $SIG{ALRM} = sub { Refresh($stringsearch) };
-alarm $refreshinterval;
+my $refreshing = 0;
+Glib::Timeout->add($refreshinterval * 1000, 
+		   sub { Refresh($stringsearch); 1 });
 
 $us->{wnd}->main;
 ugtk2->exit;
@@ -369,8 +370,9 @@ sub RefreshRemotePrintersFull {
 }
 
 sub Refresh {
-    # Do not have ourselves recalled if we are not running
-    alarm 0;
+    # Do not have ourselves recalled if we are already running
+    return if $refreshing;
+    $refreshing = 1;
     my ($strfilt) = @_;
     my $selection = get_selection();
     printer::services::wait_for_cups();
@@ -380,8 +382,7 @@ sub Refresh {
     RefreshRemotePrintersFull($strfilt, @printers);
     GrayDelEdit();
     set_selection($selection);
-    # Recall when refresh intervall has passed
-    alarm $refreshinterval;
+    $refreshing = 0;
 }
 
 sub AddPrinter() {
