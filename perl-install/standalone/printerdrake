@@ -49,6 +49,8 @@ my $domainname = "mandriva.com";
 
 my $pixdir = '/usr/share/libDrakX/pixmaps/';
 
+my $refreshinterval = 5;
+
 local $_ = join '', @ARGV;
 
 my $printer;
@@ -269,6 +271,8 @@ gtkset_mousecursor_normal();
 my $isEmbedded = $::isEmbedded;
 local $::isEmbedded = 0;
 
+local $SIG{ALRM} = sub { Refresh($stringsearch) };
+alarm $refreshinterval;
 $us->{wnd}->main;
 ugtk2->exit;
 
@@ -306,7 +310,7 @@ sub RefreshLocalPrintersFull {
     }
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
-		     ((grep { 
+		     ((any { 
 			 ($_->{queuename} eq $p) &&
 			     ($_->{state} eq "enabled");  
 		     } @allprinters) ? N("Enabled") : N("Disabled")));
@@ -365,6 +369,7 @@ sub Refresh {
     RefreshRemotePrintersFull($strfilt, @printers);
     GrayDelEdit();
     set_selection($selection);
+    alarm $refreshinterval;
 }
 
 sub AddPrinter() {
