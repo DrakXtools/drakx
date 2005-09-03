@@ -193,7 +193,7 @@ my $searchBox = gtkpack_(Gtk2::HBox->new(0,5),
                          1, Gtk2::Label->new(""),
                          0, Gtk2::Label->new(N("Search:")),
                          0, gtksignal_connect($filter = Gtk2::Entry->new,
-				       key_press_event => sub { $_[1]->keyval == $Gtk2::Gdk::Keysyms{Return} and Refresh($filter->get_text) }),
+				       key_press_event => sub { $_[1]->keyval == $Gtk2::Gdk::Keysyms{Return} and do { $stringsearch = $filter->get_text; Refresh($stringsearch) };}),
                          0, my $fbut = Gtk2::Button->new(N("Apply filter")),
                         );
 gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack(create_scrolled_window($localtree)), gtkshow(Gtk2::Label->new(N("Configured on this machine"))));
@@ -271,8 +271,10 @@ gtkset_mousecursor_normal();
 my $isEmbedded = $::isEmbedded;
 local $::isEmbedded = 0;
 
+# Auto refresh
 local $SIG{ALRM} = sub { Refresh($stringsearch) };
 alarm $refreshinterval;
+
 $us->{wnd}->main;
 ugtk2->exit;
 
@@ -300,13 +302,18 @@ sub RefreshLocalPrintersFull {
     my @LocalReal;
     foreach my $p (@printers) {
 	# Apply string search to all fields, not only the printer name
+	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
+		     ((any { 
+			 ($_->{queuename} eq $p) &&
+			     ($_->{state} eq "enabled");  
+		     } @allprinters) ? N("Enabled") : N("Disabled")));
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $model = $printer->{configured}{$p}{queuedata}{make} . ' ' .
 	    $printer->{configured}{$p}{queuedata}{model};
 	my $description = $printer->{configured}{$p}{queuedata}{desc};
 	my $location = $printer->{configured}{$p}{queuedata}{loc};
-	my $searchstr = "$p|$model|$connect|$description|$location";
-	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
+	my $searchstr = "$p|$state|$model|$connect|$description|$location";
+	push(@LocalReal, $p) if !$strfilt || ($searchstr =~ /\Q$strfilt/i);
     }
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
@@ -336,12 +343,14 @@ sub RefreshRemotePrintersFull {
 	next LOOP if defined($printer->{configured}{$p->{queuename}});
 	# Apply string search to all fields, not only the printer name
 	my $queue = $p->{queuename};
+	my $state = ($p->{state} eq "enabled" ?
+		     N("Enabled") : N("Disabled"));
 	my $server = $p->{ipp} || $printer->{remote_cups_server};
 	my $description = $p->{description};
 	my $location = $p->{location};
-	my $searchstr = "$queue|$server|$description|$location";
+	my $searchstr = "$queue|$state|$server|$description|$location";
 	# All remaining to which the search term applies
-	push(@RemoteReal, $p) if $searchstr =~ /\Q$strfilt/i;
+	push(@RemoteReal, $p) if !$strfilt || ($searchstr =~ /\Q$strfilt/i);
     }
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
@@ -360,6 +369,8 @@ sub RefreshRemotePrintersFull {
 }
 
 sub Refresh {
+    # Do not have ourselves recalled if we are not running
+    alarm 0;
     my ($strfilt) = @_;
     my $selection = get_selection();
     printer::services::wait_for_cups();
@@ -369,6 +380,7 @@ sub Refresh {
     RefreshRemotePrintersFull($strfilt, @printers);
     GrayDelEdit();
     set_selection($selection);
+    # Recall when refresh intervall has passed
     alarm $refreshinterval;
 }
 
