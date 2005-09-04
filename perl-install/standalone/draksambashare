@@ -521,7 +521,7 @@ sub add_printers_entry() {
 				  },
 		       end_add => {
 				   name => N("Congratulations"),
-				   data => [ { label => N("The wizard successfully the Samba share") } ],
+				   data => [ { label => N("The wizard successfully added the printer Samba share") } ],
 				   no_back => 1,
 				   end => 1,
 				   next => 0,
@@ -926,7 +926,7 @@ sub modify_user_info {
            0, gtkadd(Gtk2::Frame->new(N("User information")),
                      gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
                               0, $label_and_widgets->(N("User name:"), $buser, ""),
-                              0, $label_and_widgets->(N("Passwd:"), $bpasswd, ""),
+                              0, $label_and_widgets->(N("Password:"), $bpasswd, ""),
                              ),
                     ),
 	   0, create_okcancel({

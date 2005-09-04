@@ -611,9 +611,9 @@ sub config_auto_admin {
 
     # Configuration dialog
     my $waitforgui =
-	N("Allow pop-up windows, canceling setup and package installation possible");
+	N("Allow pop-up windows, printer setup and package installation may be canceled");
     my $nogui =
-	N("No pop-up windows, canceling setup and package installation not possible");
+	N("No pop-up windows, printer setup and package installation cannot be canceled");
     my $autoqueuesetupmode =
 	($printer->{autoqueuesetupgui} && -x "/usr/X11R6/bin/X") ? 
 	$waitforgui : $nogui;
@@ -881,7 +881,7 @@ sub first_time_dialog {
 		    messages => $dialogtext,
 		    cancel => N("Quit"),
 		    ok => N("Yes") },
-		 [ { text => N("Do not do automatic printer setup and do not do it again"),
+		 [ { text => N("Do not setup printer automatically now, and never do it again"),
 		     type => 'bool',
 		     val => \$donotsetupagain } ] );
 	    
@@ -986,7 +986,7 @@ sub configure_new_printers {
 	my $donotsetupagain = 0;
 	push (@widgets, { val => "__________" });
 	push (@widgets, { text =>
-			      N("Do not do automatic printer setup again"),
+			      N("Do not setup printer automatically again"),
 			  type => 'bool',
 			  val => \$donotsetupagain });
 	undef $w;
