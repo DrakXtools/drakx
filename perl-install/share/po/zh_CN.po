@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2006\n"
-"POT-Creation-Date: 2005-09-03 01:06+0800\n"
+"POT-Creation-Date: 2005-09-04 21:26+0800\n"
 "PO-Revision-Date: 2005-09-03 01:22+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -1419,7 +1419,7 @@ msgstr "运行“Drak 用户管理”"
 #: printer/printerdrake.pm:5459 standalone/drakTermServ:294
 #: standalone/drakbackup:4097 standalone/drakbug:126 standalone/drakfont:498
 #: standalone/draknfs:210 standalone/net_monitor:117
-#: standalone/printerdrake:565
+#: standalone/printerdrake:583
 #, c-format
 msgid "Close"
 msgstr "关闭"
@@ -1516,8 +1516,7 @@ msgstr "Windows 域:"
 msgid ""
 "iWinbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
-msgstr ""
-"iWinbind 允许系统从 Windows 域中获取信息并验证用户的身份。"
+msgstr "iWinbind 允许系统从 Windows 域中获取信息并验证用户的身份。"
 
 #: authentication.pm:59
 #, c-format
@@ -1539,8 +1538,7 @@ msgstr "带 Winbind 的活动目录:"
 msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
-msgstr ""
-"Winbind 允许系统在 Windows 活动目录服务器中进行用户的身份验证。"
+msgstr "Winbind 允许系统在 Windows 活动目录服务器中进行用户的身份验证。"
 
 #: authentication.pm:85
 #, c-format
@@ -2185,7 +2183,7 @@ msgstr "类型"
 
 #. -PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: diskdrake/hd_gtk.pm:359 diskdrake/interactive.pm:455
-#: standalone/drakperm:123 standalone/printerdrake:246
+#: standalone/drakperm:123 standalone/printerdrake:248
 #, c-format
 msgid "Delete"
 msgstr "删除"
@@ -11428,7 +11426,7 @@ msgstr "(在 %s)"
 msgid "(on this machine)"
 msgstr "(在本机上)"
 
-#: printer/cups.pm:115 standalone/printerdrake:198
+#: printer/cups.pm:115 standalone/printerdrake:200
 #, c-format
 msgid "Configured on other machines"
 msgstr "已在其它计算机上配置"
@@ -11555,7 +11553,7 @@ msgstr "建议"
 msgid "Unknown model"
 msgstr "未知型号"
 
-#: printer/main.pm:355 standalone/printerdrake:197
+#: printer/main.pm:355 standalone/printerdrake:199
 #, c-format
 msgid "Configured on this machine"
 msgstr "已在本机上配置"
@@ -12110,7 +12108,7 @@ msgstr "缺少 CUPS 服务器名称或 IP 地址。"
 #: printer/printerdrake.pm:4853 printer/printerdrake.pm:4862
 #: printer/printerdrake.pm:4877 printer/printerdrake.pm:5078
 #: printer/printerdrake.pm:5540 printer/printerdrake.pm:5623
-#: standalone/printerdrake:73 standalone/printerdrake:572
+#: standalone/printerdrake:75 standalone/printerdrake:590
 #, c-format
 msgid "Printerdrake"
 msgstr "Drak 打印机"
@@ -12128,14 +12126,15 @@ msgstr "正在重新启动 CUPS..."
 
 #: printer/printerdrake.pm:614
 #, c-format
-msgid "Allow pop-up windows, canceling setup and package installation possible"
-msgstr "允许弹出窗口，可以取消设置及软件包安装"
+msgid ""
+"Allow pop-up windows, printer setup and package installation may be canceled"
+msgstr "允许弹出窗口，可以取消打印机设置和软件包安装"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
-"No pop-up windows, canceling setup and package installation not possible"
-msgstr "不允许弹出窗口，不可以取消设置及软件包安装"
+"No pop-up windows, printer setup and package installation cannot be canceled"
+msgstr "不允许弹出窗口，不可以取消打印机设置和软件包安装"
 
 #: printer/printerdrake.pm:622
 #, c-format
@@ -12401,8 +12400,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:884
 #, c-format
-msgid "Do not do automatic printer setup and do not do it again"
-msgstr "不自动设置打印机，以后也不再自动设置"
+msgid "Do not setup printer automatically now, and never do it again"
+msgstr "现在不自动设置打印机，以后也不再自动设置"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12411,7 +12410,7 @@ msgstr "正在搜索新的打印机..."
 
 #: printer/printerdrake.pm:989
 #, c-format
-msgid "Do not do automatic printer setup again"
+msgid "Do not setup printer automatically again"
 msgstr "不再自动设置打印机"
 
 #: printer/printerdrake.pm:996
@@ -13447,14 +13446,14 @@ msgid "Name of printer"
 msgstr "打印机名称"
 
 #: printer/printerdrake.pm:3056 standalone/drakconnect:592
-#: standalone/harddrake2:39 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: standalone/harddrake2:39 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "Description"
 msgstr "描述"
 
-#: printer/printerdrake.pm:3057 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: printer/printerdrake.pm:3057 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "Location"
 msgstr "位置"
@@ -19118,8 +19117,8 @@ msgstr "未找到引导程序，创建新配置"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
-#: standalone/printerdrake:148 standalone/printerdrake:149
-#: standalone/printerdrake:150
+#: standalone/printerdrake:150 standalone/printerdrake:151
+#: standalone/printerdrake:152
 #, c-format
 msgid "/_File"
 msgstr "/文件(_F)"
@@ -19130,7 +19129,7 @@ msgid "/File/_Quit"
 msgstr "/文件(F)/退出(_Q)"
 
 #: standalone/drakboot:85 standalone/harddrake2:192 standalone/logdrake:75
-#: standalone/printerdrake:150
+#: standalone/printerdrake:152
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -19469,8 +19468,8 @@ msgstr "请稍候"
 msgid "Interface"
 msgstr "网卡"
 
-#: standalone/drakconnect:109 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: standalone/drakconnect:109 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "State"
 msgstr "状态"
@@ -21014,7 +21013,7 @@ msgstr "删除选中的规则"
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/drakperm:124 standalone/drakups:302 standalone/drakups:362
 #: standalone/drakups:382 standalone/drakvpn:319 standalone/drakvpn:680
-#: standalone/printerdrake:243
+#: standalone/printerdrake:245
 #, c-format
 msgid "Edit"
 msgstr "编辑"
@@ -21171,7 +21170,7 @@ msgid "Connect"
 msgstr "连接"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:167 standalone/printerdrake:249
+#: standalone/drakroam:167 standalone/printerdrake:251
 #, c-format
 msgid "Refresh"
 msgstr "刷新"
@@ -21442,8 +21441,8 @@ msgstr "打印机和 print$ 已经存在。"
 
 #: standalone/draksambashare:524
 #, c-format
-msgid "The wizard successfully the Samba share"
-msgstr "向导成功创建了 Samba 共享"
+msgid "The wizard successfully added the printer Samba share"
+msgstr "向导成功添加了打印机 Samba 共享"
 
 #: standalone/draksambashare:547
 #, c-format
@@ -21576,10 +21575,10 @@ msgstr "用户信息"
 msgid "User name:"
 msgstr "用户名:"
 
-#: standalone/draksambashare:929
+#: standalone/draksambashare:929 standalone/harddrake2:551
 #, c-format
-msgid "Passwd:"
-msgstr "密码:"
+msgid "Password:"
+msgstr "密码："
 
 #: standalone/draksambashare:1129
 #, c-format
@@ -23757,7 +23756,7 @@ msgid "class of hardware device"
 msgstr "硬件设备的分类"
 
 #: standalone/harddrake2:51 standalone/harddrake2:83
-#: standalone/printerdrake:222
+#: standalone/printerdrake:224
 #, c-format
 msgid "Model"
 msgstr "型号"
@@ -24260,15 +24259,15 @@ msgstr "特性"
 
 #. -PO: please keep all "/" characters !!!
 #: standalone/harddrake2:176 standalone/logdrake:76
-#: standalone/printerdrake:144 standalone/printerdrake:157
-#: standalone/printerdrake:169
+#: standalone/printerdrake:146 standalone/printerdrake:159
+#: standalone/printerdrake:171
 #, c-format
 msgid "/_Options"
 msgstr "/选项(_O)"
 
 #: standalone/harddrake2:177 standalone/harddrake2:203 standalone/logdrake:78
-#: standalone/printerdrake:170 standalone/printerdrake:172
-#: standalone/printerdrake:175 standalone/printerdrake:177
+#: standalone/printerdrake:172 standalone/printerdrake:174
+#: standalone/printerdrake:177 standalone/printerdrake:179
 #, c-format
 msgid "/_Help"
 msgstr "/帮助(_H)"
@@ -24298,7 +24297,7 @@ msgstr "/自动检测并口 zip 驱动器(_Z)"
 msgid "/_Upload the hardware list"
 msgstr "/上传硬件列表(_U)"
 
-#: standalone/harddrake2:192 standalone/printerdrake:150
+#: standalone/harddrake2:192 standalone/printerdrake:152
 #, c-format
 msgid "/_Quit"
 msgstr "/退出(_Q)"
@@ -24320,12 +24319,12 @@ msgid ""
 "in fields displayed on the right frame (\"Information\")"
 msgstr "只要您选中了设备, 您就能看到在右侧框架(“信息”)中显示的解释。"
 
-#: standalone/harddrake2:222 standalone/printerdrake:175
+#: standalone/harddrake2:222 standalone/printerdrake:177
 #, c-format
 msgid "/_Report Bug"
 msgstr "/故障报告(_R)"
 
-#: standalone/harddrake2:224 standalone/printerdrake:177
+#: standalone/harddrake2:224 standalone/printerdrake:179
 #, c-format
 msgid "/_About..."
 msgstr "/关于(_A)..."
@@ -24377,8 +24376,8 @@ msgstr "运行配置工具"
 msgid "unknown"
 msgstr "未知"
 
-#: standalone/harddrake2:307 standalone/printerdrake:309
-#: standalone/printerdrake:347
+#: standalone/harddrake2:307 standalone/printerdrake:306
+#: standalone/printerdrake:320
 #, c-format
 msgid "Unknown"
 msgstr "未知"
@@ -24423,11 +24422,6 @@ msgstr "上传硬件列表"
 #, c-format
 msgid "Account:"
 msgstr "账户："
-
-#: standalone/harddrake2:551
-#, c-format
-msgid "Password:"
-msgstr "密码："
 
 #: standalone/harddrake2:552
 #, c-format
@@ -25017,159 +25011,161 @@ msgstr "警告, 检测到了另外的 Internet 连接, 可能使用您的网络"
 msgid "No internet connection configured"
 msgstr "尚未配置 Internet 连接"
 
-#: standalone/printerdrake:74
+#: standalone/printerdrake:76
 #, c-format
 msgid "Reading data of installed printers..."
 msgstr "正在读取所安装打印机的数据..."
 
-#: standalone/printerdrake:126
+#: standalone/printerdrake:128
 #, c-format
 msgid "%s Printer Management Tool"
 msgstr "%s 打印机管理工具"
 
-#: standalone/printerdrake:140 standalone/printerdrake:141
 #: standalone/printerdrake:142 standalone/printerdrake:143
-#: standalone/printerdrake:151 standalone/printerdrake:152
-#: standalone/printerdrake:156
+#: standalone/printerdrake:144 standalone/printerdrake:145
+#: standalone/printerdrake:153 standalone/printerdrake:154
+#: standalone/printerdrake:158
 #, c-format
 msgid "/_Actions"
 msgstr "/操作(_A)"
 
-#: standalone/printerdrake:140 standalone/printerdrake:152
+#: standalone/printerdrake:142 standalone/printerdrake:154
 #, c-format
 msgid "/_Add Printer"
 msgstr "/添加打印机(_A)"
 
-#: standalone/printerdrake:141
+#: standalone/printerdrake:143
 #, c-format
 msgid "/Set as _Default"
 msgstr "/设为默认值(_D)"
 
-#: standalone/printerdrake:142
+#: standalone/printerdrake:144
 #, c-format
 msgid "/_Edit"
 msgstr "/编辑(_E)"
 
-#: standalone/printerdrake:143
+#: standalone/printerdrake:145
 #, c-format
 msgid "/_Delete"
 msgstr "/删除(_D)"
 
-#: standalone/printerdrake:144
+#: standalone/printerdrake:146
 #, c-format
 msgid "/_Expert mode"
 msgstr "/专家模式(_E)"
 
-#: standalone/printerdrake:149
+#: standalone/printerdrake:151
 #, c-format
 msgid "/_Refresh"
 msgstr "/刷新(_R)"
 
-#: standalone/printerdrake:156
+#: standalone/printerdrake:158
 #, c-format
 msgid "/_Configure CUPS"
 msgstr "/配置 CUPS(_C)"
 
-#: standalone/printerdrake:169
+#: standalone/printerdrake:171
 #, c-format
 msgid "/Configure _Auto Administration"
 msgstr "/配置自动管理(_A)"
 
-#: standalone/printerdrake:192
+#: standalone/printerdrake:194
 #, c-format
 msgid "Search:"
 msgstr "搜索:"
 
-#: standalone/printerdrake:195
+#: standalone/printerdrake:197
 #, c-format
 msgid "Apply filter"
 msgstr "应用过滤器"
 
-#: standalone/printerdrake:222 standalone/printerdrake:229
+#: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Def."
 msgstr "默认"
 
-#: standalone/printerdrake:222 standalone/printerdrake:229
+#: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Printer Name"
 msgstr "打印机名称"
 
-#: standalone/printerdrake:222
+#: standalone/printerdrake:224
 #, c-format
 msgid "Connection Type"
 msgstr "连接类型"
 
-#: standalone/printerdrake:229
+#: standalone/printerdrake:231
 #, c-format
 msgid "Server Name"
 msgstr "服务器名"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:237
+#: standalone/printerdrake:239
 #, c-format
 msgid "Add Printer"
 msgstr "添加打印机"
 
-#: standalone/printerdrake:237
+#: standalone/printerdrake:239
 #, c-format
 msgid "Add a new printer to the system"
 msgstr "向系统中添加一台新打印机"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:240
+#: standalone/printerdrake:242
 #, c-format
 msgid "Set as default"
 msgstr "设为默认值"
 
-#: standalone/printerdrake:240
+#: standalone/printerdrake:242
 #, c-format
 msgid "Set selected printer as the default printer"
 msgstr "将选中打印机设为默认打印机"
 
-#: standalone/printerdrake:243
+#: standalone/printerdrake:245
 #, c-format
 msgid "Edit selected printer"
 msgstr "编辑选中的打印机"
 
-#: standalone/printerdrake:246
+#: standalone/printerdrake:248
 #, c-format
 msgid "Delete selected printer"
 msgstr "删除选中的打印机"
 
-#: standalone/printerdrake:249
+#: standalone/printerdrake:251
 #, c-format
 msgid "Refresh the list"
 msgstr "刷新列表"
 
 #. -PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:252
+#: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS"
 msgstr "配置 CUPS"
 
-#: standalone/printerdrake:252
+#: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS printing system"
 msgstr "配置 CUPS 打印系统"
 
-#: standalone/printerdrake:310 standalone/printerdrake:348
+#: standalone/printerdrake:310 standalone/printerdrake:324
+#: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Enabled"
 msgstr "已启用"
 
-#: standalone/printerdrake:311 standalone/printerdrake:349
+#: standalone/printerdrake:310 standalone/printerdrake:324
+#: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Disabled"
 msgstr "已禁用"
 
-#: standalone/printerdrake:578
+#: standalone/printerdrake:596
 #, c-format
 msgid "Authors: "
 msgstr "作者: "
 
 #. -PO: here %s is the version number
-#: standalone/printerdrake:588
+#: standalone/printerdrake:606
 #, c-format
 msgid "Printer Management %s"
 msgstr "打印机管理 %s"
@@ -25817,6 +25813,26 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#~ msgid ""
+#~ "Allow pop-up windows, canceling setup and package installation possible"
+#~ msgstr "允许弹出窗口，可以取消设置及软件包安装"
+
+#~ msgid ""
+#~ "No pop-up windows, canceling setup and package installation not possible"
+#~ msgstr "不允许弹出窗口，不可以取消设置及软件包安装"
+
+#~ msgid "Do not do automatic printer setup and do not do it again"
+#~ msgstr "不自动设置打印机，以后也不再自动设置"
+
+#~ msgid "Do not do automatic printer setup again"
+#~ msgstr "不再自动设置打印机"
+
+#~ msgid "The wizard successfully the Samba share"
+#~ msgstr "向导成功创建了 Samba 共享"
+
+#~ msgid "Passwd:"
+#~ msgstr "密码:"
 
 #~ msgid ""
 #~ "Winbind allows the system to retrieve information and authenticate users "

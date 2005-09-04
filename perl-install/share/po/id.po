@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
-"POT-Creation-Date: 2005-09-03 01:06+0800\n"
+"POT-Creation-Date: 2005-09-04 21:26+0800\n"
 "PO-Revision-Date: 2005-09-04 18:40+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
@@ -1461,7 +1461,7 @@ msgstr "Jalankan userdrake"
 #: printer/printerdrake.pm:5459 standalone/drakTermServ:294
 #: standalone/drakbackup:4097 standalone/drakbug:126 standalone/drakfont:498
 #: standalone/draknfs:210 standalone/net_monitor:117
-#: standalone/printerdrake:565
+#: standalone/printerdrake:583
 #, c-format
 msgid "Close"
 msgstr "Tutup"
@@ -1562,8 +1562,8 @@ msgid ""
 "iWinbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
-"iWinbind mengijinkan sistem untuk menerima informasi dan mengotentikasi pengguna "
-"dalam domain Windows."
+"iWinbind mengijinkan sistem untuk menerima informasi dan mengotentikasi "
+"pengguna dalam domain Windows."
 
 #: authentication.pm:59
 #, c-format
@@ -1573,7 +1573,8 @@ msgstr "Active Directory dengan SFU:"
 #: authentication.pm:59
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr "Dengan Kerberos dan Ldap untuk otentikasi pada Active Directory Server "
+msgstr ""
+"Dengan Kerberos dan Ldap untuk otentikasi pada Active Directory Server "
 
 #: authentication.pm:60
 #, c-format
@@ -2245,7 +2246,7 @@ msgstr "Tipe"
 
 #. -PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: diskdrake/hd_gtk.pm:359 diskdrake/interactive.pm:455
-#: standalone/drakperm:123 standalone/printerdrake:246
+#: standalone/drakperm:123 standalone/printerdrake:248
 #, c-format
 msgid "Delete"
 msgstr "Hapus"
@@ -3574,7 +3575,7 @@ msgstr ""
 "Di sini Anda dapat dipilih driver alternatif (OSS atau ALSA) untuk kartu "
 "suara Anda (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:242
@@ -12040,7 +12041,7 @@ msgstr "(pada %s)"
 msgid "(on this machine)"
 msgstr "(pada komputer ini)"
 
-#: printer/cups.pm:115 standalone/printerdrake:198
+#: printer/cups.pm:115 standalone/printerdrake:200
 #, c-format
 msgid "Configured on other machines"
 msgstr "Terkonfigurasi pada komputer lain"
@@ -12167,7 +12168,7 @@ msgstr "disarankan"
 msgid "Unknown model"
 msgstr "Model tak dikenal"
 
-#: printer/main.pm:355 standalone/printerdrake:197
+#: printer/main.pm:355 standalone/printerdrake:199
 #, c-format
 msgid "Configured on this machine"
 msgstr "Terkonfigurasi pada komputer ini"
@@ -12732,7 +12733,7 @@ msgstr "Nama server CUPS atau alamat IP hilang."
 #: printer/printerdrake.pm:4853 printer/printerdrake.pm:4862
 #: printer/printerdrake.pm:4877 printer/printerdrake.pm:5078
 #: printer/printerdrake.pm:5540 printer/printerdrake.pm:5623
-#: standalone/printerdrake:73 standalone/printerdrake:572
+#: standalone/printerdrake:75 standalone/printerdrake:590
 #, c-format
 msgid "Printerdrake"
 msgstr "Printerdrake"
@@ -12750,17 +12751,15 @@ msgstr "Menjalankan ulang CUPS..."
 
 #: printer/printerdrake.pm:614
 #, c-format
-msgid "Allow pop-up windows, canceling setup and package installation possible"
+msgid ""
+"Allow pop-up windows, printer setup and package installation may be canceled"
 msgstr ""
-"Ijinkan jendela pop-up membatalkan setup dan installasi paket dimungkinkan"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
-"No pop-up windows, canceling setup and package installation not possible"
+"No pop-up windows, printer setup and package installation cannot be canceled"
 msgstr ""
-"Tanpa jendela pop-up, membatalkan setup dan installasi paket tidak "
-"dimungkinkan"
 
 #: printer/printerdrake.pm:622
 #, c-format
@@ -13039,8 +13038,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:884
 #, c-format
-msgid "Do not do automatic printer setup and do not do it again"
-msgstr "Jangan lakukan setup printer otomatis dan jangan lakukan lagi"
+msgid "Do not setup printer automatically now, and never do it again"
+msgstr ""
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -13049,8 +13048,8 @@ msgstr "Mencari printer baru..."
 
 #: printer/printerdrake.pm:989
 #, c-format
-msgid "Do not do automatic printer setup again"
-msgstr "Jangan lakukan setup printer otomatis lagi"
+msgid "Do not setup printer automatically again"
+msgstr ""
 
 #: printer/printerdrake.pm:996
 #, c-format
@@ -14139,14 +14138,14 @@ msgid "Name of printer"
 msgstr "Nama Printer"
 
 #: printer/printerdrake.pm:3056 standalone/drakconnect:592
-#: standalone/harddrake2:39 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: standalone/harddrake2:39 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "Description"
 msgstr "Keterangan"
 
-#: printer/printerdrake.pm:3057 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: printer/printerdrake.pm:3057 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "Location"
 msgstr "Lokasi"
@@ -14178,10 +14177,10 @@ msgstr ""
 "Printerdrake telah membandingkan nama model printer yang terdeteksi secara "
 "otomatis dengan daftar model pada basis data untuk menemukan yang paling "
 "cocok. Pilihan ini mungkin salah, khususnya jika printer Anda tidak "
-"terdaftar pada basis data. Periksa apakah pilihan sudah benar dan klik \"Model "
-"sudah benar\" jika benar dan jika tidak, klik \"Pilih model secara manual\" "
-"sehingga Anda dapat memilih model printer Anda secara manual pada layar "
-"berikut.\n"
+"terdaftar pada basis data. Periksa apakah pilihan sudah benar dan klik "
+"\"Model sudah benar\" jika benar dan jika tidak, klik \"Pilih model secara "
+"manual\" sehingga Anda dapat memilih model printer Anda secara manual pada "
+"layar berikut.\n"
 "\n"
 "Printerdrake telah menemukan:\n"
 "\n"
@@ -20030,8 +20029,8 @@ msgstr "Tidak ada bootloader yang ditemukan, membuat konfigurasi baru"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
-#: standalone/printerdrake:148 standalone/printerdrake:149
-#: standalone/printerdrake:150
+#: standalone/printerdrake:150 standalone/printerdrake:151
+#: standalone/printerdrake:152
 #, c-format
 msgid "/_File"
 msgstr "/_File"
@@ -20042,7 +20041,7 @@ msgid "/File/_Quit"
 msgstr "/File/_Keluar"
 
 #: standalone/drakboot:85 standalone/harddrake2:192 standalone/logdrake:75
-#: standalone/printerdrake:150
+#: standalone/printerdrake:152
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -20382,8 +20381,8 @@ msgstr "Harap tunggu"
 msgid "Interface"
 msgstr "Antarmuka"
 
-#: standalone/drakconnect:109 standalone/printerdrake:222
-#: standalone/printerdrake:229
+#: standalone/drakconnect:109 standalone/printerdrake:224
+#: standalone/printerdrake:231
 #, c-format
 msgid "State"
 msgstr "Status"
@@ -21962,7 +21961,7 @@ msgstr "Hapus aturan terpilih"
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/drakperm:124 standalone/drakups:302 standalone/drakups:362
 #: standalone/drakups:382 standalone/drakvpn:319 standalone/drakvpn:680
-#: standalone/printerdrake:243
+#: standalone/printerdrake:245
 #, c-format
 msgid "Edit"
 msgstr "Edit"
@@ -22119,7 +22118,7 @@ msgid "Connect"
 msgstr "Sambungkan"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:167 standalone/printerdrake:249
+#: standalone/drakroam:167 standalone/printerdrake:251
 #, c-format
 msgid "Refresh"
 msgstr "Pembaruan"
@@ -22397,8 +22396,8 @@ msgstr "Printer dan print$ sudah ada."
 
 #: standalone/draksambashare:524
 #, c-format
-msgid "The wizard successfully the Samba share"
-msgstr "Wizard berhasil menambahkan share Samba"
+msgid "The wizard successfully added the printer Samba share"
+msgstr ""
 
 #: standalone/draksambashare:547
 #, c-format
@@ -22535,9 +22534,9 @@ msgstr "Informasi pengguna"
 msgid "User name:"
 msgstr "Nama pengguna:"
 
-#: standalone/draksambashare:929
+#: standalone/draksambashare:929 standalone/harddrake2:551
 #, c-format
-msgid "Passwd:"
+msgid "Password:"
 msgstr "Katasandi:"
 
 #: standalone/draksambashare:1129
@@ -25005,7 +25004,7 @@ msgid "class of hardware device"
 msgstr "kelas divais perangkat keras"
 
 #: standalone/harddrake2:51 standalone/harddrake2:83
-#: standalone/printerdrake:222
+#: standalone/printerdrake:224
 #, c-format
 msgid "Model"
 msgstr "Model"
@@ -25516,15 +25515,15 @@ msgstr "Fitur"
 
 #. -PO: please keep all "/" characters !!!
 #: standalone/harddrake2:176 standalone/logdrake:76
-#: standalone/printerdrake:144 standalone/printerdrake:157
-#: standalone/printerdrake:169
+#: standalone/printerdrake:146 standalone/printerdrake:159
+#: standalone/printerdrake:171
 #, c-format
 msgid "/_Options"
 msgstr "/_Opsi"
 
 #: standalone/harddrake2:177 standalone/harddrake2:203 standalone/logdrake:78
-#: standalone/printerdrake:170 standalone/printerdrake:172
-#: standalone/printerdrake:175 standalone/printerdrake:177
+#: standalone/printerdrake:172 standalone/printerdrake:174
+#: standalone/printerdrake:177 standalone/printerdrake:179
 #, c-format
 msgid "/_Help"
 msgstr "/_Bantuan"
@@ -25554,7 +25553,7 @@ msgstr "/Pendeteksian Otomatis drive _zip parallel"
 msgid "/_Upload the hardware list"
 msgstr "/_Upload daftar perangkat keras"
 
-#: standalone/harddrake2:192 standalone/printerdrake:150
+#: standalone/harddrake2:192 standalone/printerdrake:152
 #, c-format
 msgid "/_Quit"
 msgstr "/_Keluar"
@@ -25578,12 +25577,12 @@ msgstr ""
 "Setelah memilih divais, Anda akan dapat melihat informasi divais pada frame "
 "bagian kanan (\"Informasi\")"
 
-#: standalone/harddrake2:222 standalone/printerdrake:175
+#: standalone/harddrake2:222 standalone/printerdrake:177
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Laporkanan Kesalahan"
 
-#: standalone/harddrake2:224 standalone/printerdrake:177
+#: standalone/harddrake2:224 standalone/printerdrake:179
 #, c-format
 msgid "/_About..."
 msgstr "/_Tentang..."
@@ -25635,8 +25634,8 @@ msgstr "Jalankan perkakas konfigurasi"
 msgid "unknown"
 msgstr "tidak dikenal"
 
-#: standalone/harddrake2:307 standalone/printerdrake:309
-#: standalone/printerdrake:347
+#: standalone/harddrake2:307 standalone/printerdrake:306
+#: standalone/printerdrake:320
 #, c-format
 msgid "Unknown"
 msgstr "Tidak dikenal"
@@ -25681,11 +25680,6 @@ msgstr "Upload daftar perangkat keras"
 #, c-format
 msgid "Account:"
 msgstr "Account:"
-
-#: standalone/harddrake2:551
-#, c-format
-msgid "Password:"
-msgstr "Katasandi:"
 
 #: standalone/harddrake2:552
 #, c-format
@@ -26287,159 +26281,161 @@ msgstr ""
 msgid "No internet connection configured"
 msgstr "Tidak ada koneksi Internet yang terkonfigurasi"
 
-#: standalone/printerdrake:74
+#: standalone/printerdrake:76
 #, c-format
 msgid "Reading data of installed printers..."
 msgstr "Membaca data dari printer yang terinstall..."
 
-#: standalone/printerdrake:126
+#: standalone/printerdrake:128
 #, c-format
 msgid "%s Printer Management Tool"
 msgstr "Perkakas Manajemen Printer %s"
 
-#: standalone/printerdrake:140 standalone/printerdrake:141
 #: standalone/printerdrake:142 standalone/printerdrake:143
-#: standalone/printerdrake:151 standalone/printerdrake:152
-#: standalone/printerdrake:156
+#: standalone/printerdrake:144 standalone/printerdrake:145
+#: standalone/printerdrake:153 standalone/printerdrake:154
+#: standalone/printerdrake:158
 #, c-format
 msgid "/_Actions"
 msgstr "/_Aksi"
 
-#: standalone/printerdrake:140 standalone/printerdrake:152
+#: standalone/printerdrake:142 standalone/printerdrake:154
 #, c-format
 msgid "/_Add Printer"
 msgstr "/_Tambah Printer"
 
-#: standalone/printerdrake:141
+#: standalone/printerdrake:143
 #, c-format
 msgid "/Set as _Default"
 msgstr "/Set sebagai _Default"
 
-#: standalone/printerdrake:142
+#: standalone/printerdrake:144
 #, c-format
 msgid "/_Edit"
 msgstr "/_Edit"
 
-#: standalone/printerdrake:143
+#: standalone/printerdrake:145
 #, c-format
 msgid "/_Delete"
 msgstr "/_Hapus"
 
-#: standalone/printerdrake:144
+#: standalone/printerdrake:146
 #, c-format
 msgid "/_Expert mode"
 msgstr "/_Mode Ahli"
 
-#: standalone/printerdrake:149
+#: standalone/printerdrake:151
 #, c-format
 msgid "/_Refresh"
 msgstr "/_Pembaruan"
 
-#: standalone/printerdrake:156
+#: standalone/printerdrake:158
 #, c-format
 msgid "/_Configure CUPS"
 msgstr "/_Konfigurasi CUPS"
 
-#: standalone/printerdrake:169
+#: standalone/printerdrake:171
 #, c-format
 msgid "/Configure _Auto Administration"
 msgstr "/Konfigurasi Administrasi _Otomatis"
 
-#: standalone/printerdrake:192
+#: standalone/printerdrake:194
 #, c-format
 msgid "Search:"
 msgstr "Cari:"
 
-#: standalone/printerdrake:195
+#: standalone/printerdrake:197
 #, c-format
 msgid "Apply filter"
 msgstr "Terapkan filter"
 
-#: standalone/printerdrake:222 standalone/printerdrake:229
+#: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Def."
 msgstr "Def."
 
-#: standalone/printerdrake:222 standalone/printerdrake:229
+#: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Printer Name"
 msgstr "Nama Printer"
 
-#: standalone/printerdrake:222
+#: standalone/printerdrake:224
 #, c-format
 msgid "Connection Type"
 msgstr "Tipe Koneksi"
 
-#: standalone/printerdrake:229
+#: standalone/printerdrake:231
 #, c-format
 msgid "Server Name"
 msgstr "Nama Server"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:237
+#: standalone/printerdrake:239
 #, c-format
 msgid "Add Printer"
 msgstr "Tambah Printer"
 
-#: standalone/printerdrake:237
+#: standalone/printerdrake:239
 #, c-format
 msgid "Add a new printer to the system"
 msgstr "Tambah printer baru ke sistem"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:240
+#: standalone/printerdrake:242
 #, c-format
 msgid "Set as default"
 msgstr "Tentukan default"
 
-#: standalone/printerdrake:240
+#: standalone/printerdrake:242
 #, c-format
 msgid "Set selected printer as the default printer"
 msgstr "Tentukan printer ini sebagai printer default"
 
-#: standalone/printerdrake:243
+#: standalone/printerdrake:245
 #, c-format
 msgid "Edit selected printer"
 msgstr "Edit printer yang terpilih"
 
-#: standalone/printerdrake:246
+#: standalone/printerdrake:248
 #, c-format
 msgid "Delete selected printer"
 msgstr "Hapus printer yang terpilih"
 
-#: standalone/printerdrake:249
+#: standalone/printerdrake:251
 #, c-format
 msgid "Refresh the list"
 msgstr "Perbarui daftar"
 
 #. -PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:252
+#: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS"
 msgstr "Konfigurasikan CUPS"
 
-#: standalone/printerdrake:252
+#: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS printing system"
 msgstr "Konfigurasi sistem pencetakan CUPS"
 
-#: standalone/printerdrake:310 standalone/printerdrake:348
+#: standalone/printerdrake:310 standalone/printerdrake:324
+#: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Enabled"
 msgstr "Aktif"
 
-#: standalone/printerdrake:311 standalone/printerdrake:349
+#: standalone/printerdrake:310 standalone/printerdrake:324
+#: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Disabled"
 msgstr "Non-aktif"
 
-#: standalone/printerdrake:578
+#: standalone/printerdrake:596
 #, c-format
 msgid "Authors: "
 msgstr "Penulis: "
 
 #. -PO: here %s is the version number
-#: standalone/printerdrake:588
+#: standalone/printerdrake:606
 #, c-format
 msgid "Printer Management %s"
 msgstr "Manajemen Printer %s"
@@ -27109,6 +27105,29 @@ msgid "Installation failed"
 msgstr "Installasi gagal"
 
 #~ msgid ""
+#~ "Allow pop-up windows, canceling setup and package installation possible"
+#~ msgstr ""
+#~ "Ijinkan jendela pop-up membatalkan setup dan installasi paket dimungkinkan"
+
+#~ msgid ""
+#~ "No pop-up windows, canceling setup and package installation not possible"
+#~ msgstr ""
+#~ "Tanpa jendela pop-up, membatalkan setup dan installasi paket tidak "
+#~ "dimungkinkan"
+
+#~ msgid "Do not do automatic printer setup and do not do it again"
+#~ msgstr "Jangan lakukan setup printer otomatis dan jangan lakukan lagi"
+
+#~ msgid "Do not do automatic printer setup again"
+#~ msgstr "Jangan lakukan setup printer otomatis lagi"
+
+#~ msgid "The wizard successfully the Samba share"
+#~ msgstr "Wizard berhasil menambahkan share Samba"
+
+#~ msgid "Passwd:"
+#~ msgstr "Katasandi:"
+
+#~ msgid ""
 #~ "Winbind allows the system to retrieve information and authenticate users "
 #~ "in a Windows domain."
 #~ msgstr ""
@@ -27704,8 +27723,8 @@ msgstr "Installasi gagal"
 #~ "\t* <b>MySQL</b> and <b>PostgreSQL</b>: The world's most popular open "
 #~ "source databases."
 #~ msgstr ""
-#~ "\t* <b>MySQL</b> dan <b>PostgresSQL</b>: Basis Data open source yang paling "
-#~ "populer."
+#~ "\t* <b>MySQL</b> dan <b>PostgresSQL</b>: Basis Data open source yang "
+#~ "paling populer."
 
 #~ msgid ""
 #~ "\t* <b>CVS</b>: Concurrent Versions System, the dominant open source "
