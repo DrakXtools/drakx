@@ -31,7 +31,7 @@ sub new {
 
 	my $ftp;
 	foreach (1..10) {
-	    $ftp = Net::FTP->new(resolv($host), %options) or die "Can't resolv hostname '$host'\n";
+	    $ftp = Net::FTP->new(resolv($host), %options) or die "Can't resolve hostname '$host'\n";
 	    $ftp && $ftp->login($o_login, $o_password) and last;
 
 	    log::l("ftp login failed, sleeping before trying again");
