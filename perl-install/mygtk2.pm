@@ -274,21 +274,32 @@ sub _gtk__Pixbuf {
     $w;
 }
 
+# Image_using_pixmap is rendered using DITHER_MAX which is much better on 16bpp displays
+sub _gtk__Image_using_pixmap { &_gtk__Image }
 sub _gtk__Image {
     my ($w, $opts, $class) = @_;
 
     if (!$w) {
-	$w = "Gtk2::$class"->new;
+	$w = Gtk2::Image->new;
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
+
+        $w->{set_from_file} = $class =~ /using_pixmap/ ? sub { 
+            my ($w, $file) = @_;
+            my $pixmap = mygtk2::pixmap_from_pixbuf($w, gtknew('Pixbuf', file => $file));
+	    $w->set_from_pixmap($pixmap, undef);
+        } : sub { 
+            my ($w, $file) = @_;
+            $w->set_from_file($file);
+        };
     }
 
     if (my $name = delete $opts->{file}) {
 	my $file = _find_imgfile(may_apply($w->{format}, $name)) or internal_error("can not find image $name");
-	$w->set_from_file($file);
+	$w->{set_from_file}->($w, $file);
     } elsif (my $file_ref = delete $opts->{file_ref}) {
 	my $set = sub {
 	    my $file = _find_imgfile(may_apply($w->{format}, $$file_ref)) or internal_error("can not find image $$file_ref");
-	    $w->set_from_file($file);
+	    $w->{set_from_file}->($w, $file);
 	};
 	gtkval_register($w, $file_ref, $set);
 	$set->() if $$file_ref;
@@ -977,6 +988,15 @@ sub set_root_window_background_with_gc {
     my ($w, $h) = $root->get_size;
     $root->set_background($gc->get_values->{foreground});
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
+}
+
+sub pixmap_from_pixbuf {
+    my ($widget, $pixbuf) = @_;
+    my $window = $widget->window or internal_error("you can't use this function if the widget is not realised");
+    my ($width, $height) = ($pixbuf->get_width, $pixbuf->get_height);
+    my $pixmap = Gtk2::Gdk::Pixmap->new($window, $width, $height, $window->get_depth);
+    $pixbuf->render_to_drawable($pixmap, $widget->style->fg_gc('normal'), 0, 0, 0, 0, $width, $height, 'max', 0, 0);
+    $pixmap;
 }
 
 1;
