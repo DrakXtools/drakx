@@ -247,7 +247,6 @@ sub packageRequest {
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
     foreach (values %{$packages->{mediums}}) {
-	#- XXX $_ should always be an object here
 	!$_->{selected} && $pkg->id >= $_->{start} && $pkg->id <= $_->{end} and return;
     }
 
@@ -369,6 +368,7 @@ sub psUpdateHdlistsDeps {
 
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
+	next if ref $_ ne 'install_medium'; #- skip empty hash artifact
 	$_->selected || $_->ignored or next;
 	my $hdlistf = "$urpmidir/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	my $synthesisf = "$urpmidir/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
@@ -966,6 +966,7 @@ sub installTransactionClosure {
 
     #- search first usable medium (sorted by medium ordering).
     foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
+	next if ref $_ ne 'install_medium'; #- skip empty hash artifact
 	unless ($_->selected) {
 	    #- this medium is not selected, but we have to make sure no package is left
 	    #- in $id2pkg.

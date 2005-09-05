@@ -1021,7 +1021,7 @@ sub warnAboutFilesStillOpen() {
 sub install_urpmi {
     my ($method, $packages) = @_;
 
-    my @mediums = values %{$packages->{mediums}};
+    my @mediums = grep { defined $_->{medium} } values %{$packages->{mediums}};
     my $hdInstallPath = any::hdInstallPath();
 
     #- rare case where urpmi cannot be installed (no hd install path).
