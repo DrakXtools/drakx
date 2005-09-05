@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-09-04 21:26+0800\n"
-"PO-Revision-Date: 2005-07-15 03:00+0800\n"
+"PO-Revision-Date: 2005-08-30 18:50+0800\n"
 "Last-Translator: You-Cheng Hsieh <yochenhsieh@xuite.net>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1332,7 +1332,7 @@ msgstr ""
 #: any.pm:751
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "多語系"
 
 #: any.pm:767 any.pm:796 help.pm:647
 #, c-format
@@ -1844,7 +1844,7 @@ msgstr "consolehelper 遺失"
 #: network/adsl_consts.pm:75 network/adsl_consts.pm:84
 #, c-format
 msgid "Austria"
-msgstr "澳洲"
+msgstr "奧地利"
 
 #: crypto.pm:14 crypto.pm:47 lang.pm:208 standalone/drakxtv:48
 #, c-format
@@ -2917,9 +2917,9 @@ msgstr "再次輸入加密金鑰"
 
 #: diskdrake/interactive.pm:1332 standalone/drakvpn:1017
 #: standalone/drakvpn:1102
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption algorithm"
-msgstr "認證方式"
+msgstr "加密演算法"
 
 #: diskdrake/removable.pm:46
 #, c-format
@@ -3043,9 +3043,9 @@ msgid "Enabling swap partition %s"
 msgstr "正在啟用 swap 分割區 %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "您不能使用加密過的檔案系統來作為 %s 的掛載點"
+msgstr "使用加密的檔案系統"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -4795,7 +4795,7 @@ msgstr ""
 " * \"%s\": 不選取這個選項將強制使用者手動掛載與卸載可移除式媒介例如磁碟片與\n"
 "光碟。\n"
 "\n"
-" * \"%s\": 如果您想用巫師來分割您的硬碟, 使用這個選項. 如果您沒有對於\n"
+" * \"%s\": 如果您想用精靈來分割您的硬碟, 使用這個選項. 如果您沒有對於\n"
 "操作分割的好的了解, 這是被建議的.\n"
 "hard drive. This is recommended if you do not have a good understanding of\n"
 "partitioning.\n"
@@ -5236,6 +5236,17 @@ msgid ""
 "you\n"
 "know what you're doing."
 msgstr ""
+"開機載入器是在電腦開機時啟動的程式。它負責啟動整個系統。正常的話，開機載入\n"
+"程式的安裝是完全自動化的。DrakX 會分析硬碟的開機扇區並根據它所找到的行動：\n"
+"\n"
+" * 如果找到 Windows 開機扇區的話，它會將其取代為 GRUB/LILO 開機扇區。這樣\n"
+"您就能載入 GNU/Linux 或任何其他安裝在您的機器上的作業系統。\n"
+"\n"
+" * 如果找到 GRUB 或 LILO 開機扇區，它會用一個新的將其取代。\n"
+"\n"
+"如果 DrakX 無法決定該將開機扇區放在哪哩，它會詢問您要將其放置於何處。一般來\n"
+"說，\"%s\" 是最安全的地方。選擇 \"%s\" 將不會安裝任何開機載入程式。只有在\n"
+"您很清楚您在做什麼時才選擇這個選項。"
 
 #: help.pm:742
 #, c-format
@@ -5341,6 +5352,8 @@ msgid ""
 "here. If you notice the sound card is not the one actually present on your\n"
 "system, you can click on the button and choose a different driver."
 msgstr ""
+"\"%s\": 如果您的系統上有偵測到音效卡，它將會顯示在這裡。如果您發現這並不是\n"
+"目前您的系統使用的音效卡，您可以按下按鈕並選擇另一個驅動程式。"
 
 #: help.pm:788 help.pm:855 install_steps_interactive.pm:1010
 #: install_steps_interactive.pm:1027
@@ -5565,7 +5578,7 @@ msgstr "網路 (FTP)"
 #: install_any.pm:417
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "網路 (NFS)"
 
 #: install_any.pm:447
 #, c-format
@@ -5595,22 +5608,22 @@ msgstr "映像站的 URL？"
 #: install_any.pm:521
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "設定 NFS"
 
 #: install_any.pm:521
 #, c-format
 msgid "Please enter the hostname and directory of your NFS media"
-msgstr ""
+msgstr "請輸入您的 NFS 媒介的主機和目錄名稱"
 
 #: install_any.pm:522
 #, c-format
 msgid "Hostname of the NFS mount ?"
-msgstr ""
+msgstr "NFS 掛載點的主機名稱？"
 
 #: install_any.pm:522 standalone/draknfs:288
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "目錄"
 
 #: install_any.pm:571
 #, c-format
@@ -5741,9 +5754,9 @@ msgid "Permission denied"
 msgstr "權限不足"
 
 #: install_any.pm:1785
-#, fuzzy, c-format
+#, c-format
 msgid "Bad NFS name"
-msgstr "名片名稱"
+msgstr "錯誤的 NFS 名稱"
 
 #: install_any.pm:1806
 #, c-format
@@ -5937,7 +5950,7 @@ msgstr "移除 Windows(TM)"
 #: install_interactive.pm:215
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "你有多於一個硬碟, 您打算那一個安裝 linux?"
+msgstr "你有多於一個硬碟, 您打算用那一個安裝 linux?"
 
 #: install_interactive.pm:219
 #, c-format
@@ -5966,7 +5979,7 @@ msgstr "找不到任何可用的安裝空間"
 #: install_interactive.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr "DrakX 分割巫師找到了下列解決方案:"
+msgstr "DrakX 分割精靈找到了下列解決方案:"
 
 #: install_interactive.pm:281
 #, c-format
@@ -6909,7 +6922,7 @@ msgid "Preparing bootloader..."
 msgstr "正在準備開機載入器..."
 
 #: install_steps_interactive.pm:1232
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
 "will not work for you. The install will continue, but you'll need to use "
@@ -6918,7 +6931,8 @@ msgid ""
 msgstr ""
 "您的系統似乎有 OldWorld 或者是其他不認識的機器,\n"
 "這將會導致 yaboot 開機載入器無法正常運作.\n"
-"安裝還是會繼續下去, 不過您將需要使用 bootX 或某些其他方法來開機你的機器."
+"安裝還是會繼續下去, 不過您將需要使用 bootX 或某些其他方法來開機你的機器.root "
+"fs 的核心參數是：root=%s"
 
 #: install_steps_interactive.pm:1238
 #, c-format
@@ -7135,14 +7149,14 @@ msgstr "捷克 (QWERTZ)"
 msgid ""
 "_: keyboard\n"
 "German"
-msgstr "德國"
+msgstr "德語"
 
 #: keyboard.pm:173
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak"
-msgstr "Dvorak"
+msgstr "Dvorak 配置"
 
 #: keyboard.pm:174 keyboard.pm:224
 #, c-format
@@ -7163,7 +7177,7 @@ msgstr "芬蘭"
 msgid ""
 "_: keyboard\n"
 "French"
-msgstr "法國"
+msgstr "法語"
 
 #: keyboard.pm:177 keyboard.pm:272
 #, c-format
@@ -7222,28 +7236,28 @@ msgstr "亞美尼亞 (舊式)"
 msgid ""
 "_: keyboard\n"
 "Armenian (typewriter)"
-msgstr "亞美尼亞 (typewriter)"
+msgstr "亞美尼亞 (打字機)"
 
 #: keyboard.pm:188
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (phonetic)"
-msgstr "亞美尼亞 (phonetic)"
+msgstr "亞美尼亞 (音標)"
 
 #: keyboard.pm:189
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Arabic"
-msgstr "Arabic"
+msgstr "阿拉伯"
 
 #: keyboard.pm:190
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Azerbaidjani (latin)"
-msgstr "蘇聯共和國 (latin)"
+msgstr "Azerbaidjani (拉丁)"
 
 #: keyboard.pm:191
 #, c-format
@@ -7271,7 +7285,7 @@ msgstr "孟加拉 (Probhat)"
 msgid ""
 "_: keyboard\n"
 "Bulgarian (phonetic)"
-msgstr "保加利亞 (phonetic)"
+msgstr "保加利亞 (音標)"
 
 #: keyboard.pm:195
 #, c-format
@@ -7292,7 +7306,7 @@ msgstr "巴西 (ABNT-2)"
 msgid ""
 "_: keyboard\n"
 "Bosnian"
-msgstr "愛沙尼亞"
+msgstr "波士尼亞"
 
 #: keyboard.pm:198
 #, c-format
@@ -7316,11 +7330,11 @@ msgid ""
 msgstr "瑞士 (法式配置)"
 
 #: keyboard.pm:204
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Cherokee syllabics"
-msgstr "Arabic"
+msgstr "卻洛奇族語"
 
 #: keyboard.pm:206
 #, c-format
@@ -7334,7 +7348,7 @@ msgstr "捷克 (QWERTY)"
 msgid ""
 "_: keyboard\n"
 "German (no dead keys)"
-msgstr "德語 (no dead keys)"
+msgstr "德語 (無 dead keys)"
 
 #: keyboard.pm:209
 #, c-format
@@ -7404,7 +7418,7 @@ msgstr "Dvorak (瑞典)"
 msgid ""
 "_: keyboard\n"
 "Dzongkha/Tibetan"
-msgstr "不丹宗卡語/泰語"
+msgstr "不丹宗卡語/藏語"
 
 #: keyboard.pm:223
 #, c-format
@@ -7446,7 +7460,7 @@ msgstr "希臘"
 msgid ""
 "_: keyboard\n"
 "Greek (polytonic)"
-msgstr "希臘 (polytonic)"
+msgstr "希臘 (多音調)"
 
 #: keyboard.pm:233
 #, c-format
@@ -7547,7 +7561,7 @@ msgid ""
 msgstr "韓式鍵盤"
 
 #: keyboard.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
@@ -7593,14 +7607,14 @@ msgstr "立陶宛 (新 AZERTY 式)"
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"number row\" QWERTY"
-msgstr "立陶宛 \"number row, QWERTY 式\""
+msgstr "立陶宛 \"數字列與 QWERTY 式\""
 
 #: keyboard.pm:263
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"phonetic\" QWERTY"
-msgstr "立陶宛 \"phonetic, QWERTY 式\""
+msgstr "立陶宛 \"音標列與 QWERTY 式\""
 
 #: keyboard.pm:264
 #, c-format
@@ -7680,11 +7694,11 @@ msgid ""
 msgstr "波蘭 (qwertz 式配置)"
 
 #: keyboard.pm:277
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Pashto"
-msgstr "波蘭"
+msgstr "帕施圖語"
 
 #: keyboard.pm:278
 #, c-format
@@ -7736,18 +7750,18 @@ msgid ""
 msgstr ""
 
 #: keyboard.pm:289
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Sindhi"
-msgstr "泰式鍵盤"
+msgstr "信德語"
 
 #: keyboard.pm:291
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovenian"
-msgstr "斯洛法尼亞"
+msgstr "斯洛伐尼亞"
 
 #: keyboard.pm:293
 #, c-format
@@ -7761,14 +7775,14 @@ msgstr ""
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTZ)"
-msgstr "斯洛法克 (QWERTZ)"
+msgstr "斯洛伐克 (QWERTZ)"
 
 #: keyboard.pm:295
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTY)"
-msgstr "斯洛法克 (QWERTY)"
+msgstr "斯洛伐克 (QWERTY)"
 
 #: keyboard.pm:297
 #, c-format
@@ -7782,14 +7796,14 @@ msgstr "塞爾維亞 (cyrillic)"
 msgid ""
 "_: keyboard\n"
 "Syriac"
-msgstr "Syriac"
+msgstr "敘利亞"
 
 #: keyboard.pm:299
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Syriac (phonetic)"
-msgstr "利亞語 (phonetic)"
+msgstr "敘利亞 (音標)"
 
 #: keyboard.pm:300
 #, c-format
@@ -7810,28 +7824,28 @@ msgstr "坦米爾 (ISCII-佈置)"
 msgid ""
 "_: keyboard\n"
 "Tamil (Typewriter-layout)"
-msgstr "亞美尼亞 (Typewriter-佈置)"
+msgstr "坦米爾 (打字機配置)"
 
 #: keyboard.pm:304
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Kedmanee)"
-msgstr "泰式鍵盤"
+msgstr "泰語鍵盤 (Kedmanee)"
 
 #: keyboard.pm:305
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (TIS-820)"
-msgstr "泰式鍵盤"
+msgstr "泰語鍵盤 (TIS-820)"
 
 #: keyboard.pm:307
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Pattachote)"
-msgstr "泰式鍵盤"
+msgstr "泰語鍵盤 (Pattachote)"
 
 #: keyboard.pm:310
 #, c-format
@@ -7855,11 +7869,11 @@ msgid ""
 msgstr "Tajik 鍵盤"
 
 #: keyboard.pm:315
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Turkmen"
-msgstr "德國"
+msgstr "土庫曼語"
 
 #: keyboard.pm:316
 #, c-format
@@ -7883,11 +7897,11 @@ msgid ""
 msgstr "烏克蘭"
 
 #: keyboard.pm:322
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Urdu keyboard"
-msgstr "韓式鍵盤"
+msgstr "烏都語鍵盤"
 
 #: keyboard.pm:324
 #, c-format
@@ -7895,18 +7909,18 @@ msgid "US keyboard (international)"
 msgstr "美式鍵盤 (國際型)"
 
 #: keyboard.pm:325
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Uzbek (cyrillic)"
-msgstr "塞爾維亞 (cyrillic)"
+msgstr "烏茲別克 (cyrillic)"
 
 #: keyboard.pm:327
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Vietnamese \"numeric row\" QWERTY"
-msgstr "越南 \"numeric row\" QWERTY 式"
+msgstr "越南 \"數字列\" QWERTY 式"
 
 #: keyboard.pm:328
 #, c-format
@@ -8189,7 +8203,7 @@ msgstr "可可斯群島"
 #: lang.pm:232
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "剛果 (金夏沙)"
 
 #: lang.pm:233
 #, c-format
@@ -8199,7 +8213,7 @@ msgstr "中非共和國"
 #: lang.pm:234
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "剛果 (布拉柴維爾)"
 
 #: lang.pm:236
 #, c-format
@@ -8394,7 +8408,7 @@ msgstr "赤道幾內亞"
 #: lang.pm:281
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "南喬治亞與南三明治群島"
 
 #: lang.pm:282
 #, c-format
@@ -8419,7 +8433,7 @@ msgstr "蓋亞那"
 #: lang.pm:286
 #, c-format
 msgid "Hong Kong SAR (China)"
-msgstr "香港 SAR (中國)"
+msgstr "香港特區 (中國)"
 
 #: lang.pm:287
 #, c-format
@@ -8454,7 +8468,7 @@ msgstr "印度"
 #: lang.pm:296
 #, c-format
 msgid "British Indian Ocean Territory"
-msgstr "大不列顛印度海洋領土"
+msgstr "大不列顛印度洋領土"
 
 #: lang.pm:297
 #, c-format
@@ -8579,7 +8593,7 @@ msgstr "立陶宛"
 #: lang.pm:323
 #, c-format
 msgid "Luxembourg"
-msgstr "森堡"
+msgstr "盧森堡"
 
 #: lang.pm:324
 #, c-format
@@ -8629,7 +8643,7 @@ msgstr "馬里"
 #: lang.pm:333
 #, c-format
 msgid "Myanmar"
-msgstr "緬甸文字"
+msgstr "緬甸"
 
 #: lang.pm:334
 #, c-format
@@ -8644,7 +8658,7 @@ msgstr "北馬里亞納群島"
 #: lang.pm:336
 #, c-format
 msgid "Martinique"
-msgstr "聖馬丁節"
+msgstr "馬丁尼克"
 
 #: lang.pm:337
 #, c-format
@@ -8789,7 +8803,7 @@ msgstr "波多黎各"
 #: lang.pm:369
 #, c-format
 msgid "Palestine"
-msgstr ""
+msgstr "巴勒斯坦"
 
 #: lang.pm:371
 #, c-format
@@ -9019,12 +9033,12 @@ msgstr "委內瑞拉"
 #: lang.pm:422
 #, c-format
 msgid "Virgin Islands (British)"
-msgstr "英屬維爾京群島"
+msgstr "英屬維京群島"
 
 #: lang.pm:423
 #, c-format
 msgid "Virgin Islands (U.S.)"
-msgstr "美屬維爾京群島"
+msgstr "美屬維京群島"
 
 #: lang.pm:424
 #, c-format
@@ -9039,7 +9053,7 @@ msgstr "萬那杜"
 #: lang.pm:426
 #, c-format
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "瓦里斯與富都拿群島"
 
 #: lang.pm:427
 #, c-format
@@ -9429,9 +9443,9 @@ msgid "Any PS/2 & USB mice"
 msgstr "任何 PS/2 與 USB 滑鼠"
 
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Explorer"
+msgstr "Microsoft Xbox 控制器"
 
 #: mouse.pm:93 standalone/drakconnect:351 standalone/drakvpn:1126
 #, c-format
@@ -9588,9 +9602,9 @@ msgstr "其它埠"
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:59 standalone/net_applet:180
 #: standalone/net_applet:354 standalone/net_applet:391
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "防火牆"
+msgstr "互動式防火牆"
 
 #: network/drakfirewall.pm:252
 #, c-format
@@ -9606,44 +9620,44 @@ msgid "Use Interactive Firewall"
 msgstr ""
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "不分享"
+msgstr "通訊埠掃描"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "被攻擊的服務： %s"
+msgstr "攻擊服務"
 
 #: network/ifw.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "密碼 (再一次)"
+msgstr "密碼破解"
 
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "\"%s\" 攻擊"
 
 #: network/ifw.pm:141
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr "%s 試圖發動通訊埠掃描攻擊未遂。"
+msgstr "%s 試圖發動通訊埠掃描攻擊。"
 
 #: network/ifw.pm:142
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr "%s 服務被 %s 攻擊。"
+msgstr "%2$s 試圖對 %1$s 服務發動攻擊。"
 
 #: network/ifw.pm:143
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr "%s 試圖發動密碼破解攻擊未遂。"
+msgstr "%s 試圖發動密碼破解攻擊。"
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "%s 試圖發動通訊埠掃描攻擊未遂。"
+msgstr "%2$s 試圖發動 \"%1$s\" 攻擊"
 
 #: network/isdn.pm:117 network/netconnect.pm:447 network/netconnect.pm:536
 #: network/netconnect.pm:539 network/netconnect.pm:682
@@ -10326,9 +10340,9 @@ msgid "Start at boot"
 msgstr "於開機時啟動"
 
 #: network/netconnect.pm:892 standalone/drakconnect:460
-#, fuzzy, c-format
+#, c-format
 msgid "Metric"
-msgstr "限制"
+msgstr "公制"
 
 #: network/netconnect.pm:893
 #, c-format
@@ -10696,9 +10710,9 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: network/netconnect.pm:1222
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "您要在開機時自動啟動該連線嗎?"
+msgstr "您要在允許使用者啟動該連線嗎?"
 
 #: network/netconnect.pm:1235
 #, c-format
@@ -10912,13 +10926,9 @@ msgid ""
 msgstr ""
 
 #: network/thirdparty.pm:196
-#, fuzzy, c-format
+#, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"您需要 Alcatel 的微碼。\n"
-"請到下述網站下載：\n"
-"%s\n"
-"並複製檔案 mgmt.o 到 /usr/share/speedtouch"
+msgstr "將 Alcatel 的微碼複製為 mgmt.o 並置於 /usr/share/speedtouch/"
 
 #: network/thirdparty.pm:205
 #, c-format
@@ -10930,9 +10940,9 @@ msgid ""
 msgstr ""
 
 #: network/thirdparty.pm:266
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "無法安裝 %s 套件！"
+msgstr "無法安裝套件 (%s)！"
 
 #: network/thirdparty.pm:274
 #, c-format
@@ -10954,9 +10964,9 @@ msgid ""
 msgstr ""
 
 #: network/thirdparty.pm:309
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
-msgstr "由您的系統移除該字體檔案"
+msgstr "無法從您的 Windows 系統找到 \"%s\"!"
 
 #: network/thirdparty.pm:311
 #, c-format
@@ -11022,9 +11032,9 @@ msgid "Looking for required software and drivers..."
 msgstr ""
 
 #: network/thirdparty.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "請稍候，正在偵測與設定裝置中..."
+msgstr "請稍候，正在執行設定裝置的指令..."
 
 #: network/wireless.pm:8
 #, c-format
@@ -11223,9 +11233,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "網路印表機 (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "SMB/Windows 95/98/NT 伺服器印表機"
+msgstr "SMB/Windows 伺服器印表機"
 
 #: printer/main.pm:33
 #, c-format
@@ -11815,9 +11825,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "印表機自動偵測"
+msgstr "印表機自動管理"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -11827,34 +11837,34 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "自動重新設定"
+msgstr "自動設定新的印表機"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (請確認您全部的印表機連結並且打開電源了)。\n"
+msgstr "於您的印表機已接上並且打開電源時"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "這個分割區無法重新調整大小"
+msgstr "於 Printerdrake 啟動時"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "自動印表機設定模式"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "可用的印表機"
+msgstr "重新啟用停用的印表機"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "變更列印系統"
+msgstr "於列印系統啟動時"
 
 #: printer/printerdrake.pm:680
 #, fuzzy, c-format
@@ -11870,34 +11880,34 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "通訊埠號應該是一個整數！"
+msgstr "重試次數應該是一個至少為 1 的整數！"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "連線逾時時間必須為整數！"
+msgstr "重試延遲時間必須為正整數！"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "關閉服務"
+msgstr "請勿停用印表機"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "無限制重試"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "按鍵數"
+msgstr "重試次數"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "重試間隔延遲 (秒)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12084,14 +12094,14 @@ msgid "Do not setup printer automatically again"
 msgstr ""
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "找不到印表機！"
+msgstr "找到新的印表機"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "找不到印表機！"
+msgstr "找到新的印表機"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12185,9 +12195,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "遠端管理"
+msgstr "設定自動管理"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12362,9 +12372,9 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "自動偵測位於 Microsoft Windows 電腦的印表機"
 
 #: printer/printerdrake.pm:1374
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "自動偵測"
+msgstr "不要自動偵測"
 
 #: printer/printerdrake.pm:1394
 #, c-format
@@ -12488,19 +12498,17 @@ msgid "The following printer was auto-detected. "
 msgstr "已偵測到下列的印表機。"
 
 #: printer/printerdrake.pm:1601
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
-msgstr ""
-"下面所列出的是使用自動偵測所找到的印表機。若是找到的項目\n"
-"並不是你所預期的, 那請手動輸入裝置名稱/檔案名稱"
+msgstr "若是找到的項目並不是你要設定的, 那麼請在欄位中輸入裝置名稱/檔案名稱"
 
 #: printer/printerdrake.pm:1602
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
-msgstr "請選擇您印表機的連接埠, 或者是輸入該裝置的名稱"
+msgstr "或者您也可以在欄位中指定該裝置的名稱或檔案名稱"
 
 #: printer/printerdrake.pm:1603 printer/printerdrake.pm:1612
 #, c-format
@@ -12899,9 +12907,9 @@ msgid "A valid URI must be entered!"
 msgstr "必須輸入完整的 URI 位址！"
 
 #: printer/printerdrake.pm:2377
-#, fuzzy, c-format
+#, c-format
 msgid "Pipe into command"
-msgstr "使用 Pipe 管線方式組成列印工作"
+msgstr "使用 Pipe 管線方式組成指令"
 
 #: printer/printerdrake.pm:2378
 #, c-format
@@ -12916,9 +12924,9 @@ msgid "Command line"
 msgstr "指令列"
 
 #: printer/printerdrake.pm:2383
-#, fuzzy, c-format
+#, c-format
 msgid "A command line must be entered!"
-msgstr "必須輸入完整的 URI 位址！"
+msgstr "必須輸入指令列！"
 
 #: printer/printerdrake.pm:2423
 #, c-format
@@ -13004,9 +13012,9 @@ msgid "Checking device and configuring %s..."
 msgstr "正在檢查與設定 %s 中..."
 
 #: printer/printerdrake.pm:2510
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "您要使用那個通訊協定?"
+msgstr "您要用 HPLIP 設定那個印表機？"
 
 #: printer/printerdrake.pm:2551 printer/printerdrake.pm:2664
 #, c-format
@@ -13218,9 +13226,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:3294
-#, fuzzy, c-format
+#, c-format
 msgid "Install PPD file from"
-msgstr "安裝"
+msgstr "安裝 PPD 的來源："
 
 #: printer/printerdrake.pm:3297 printer/printerdrake.pm:3305
 #: standalone/scannerdrake:183 standalone/scannerdrake:192
@@ -13325,17 +13333,15 @@ msgid "Lexmark X125 configuration"
 msgstr "Lexmark X125 多功能事務機設定"
 
 #: printer/printerdrake.pm:3520
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes. Please connect "
 "your printer to a local USB port or configure it on the machine where it is "
 "connected to."
 msgstr ""
-"Lexmark 所提供的噴墨印表機驅動程式只有支援本機印表機\n"
-"的列印的功能, 將無法使用這類遠端印表機。請確認您目前\n"
-"印表機已經正確連結到您本地端電腦上, 設定該印表機的\n"
-"連結位置。"
+"這個印表機驅動程式只有支援由 USB 連接的本機印表機，而非遠端主機的印表機或列印"
+"伺服器。請將印表機連接到本機的 USB 或從它所連接的機器上設定它。"
 
 #: printer/printerdrake.pm:3542
 #, c-format
@@ -13343,40 +13349,37 @@ msgid "Samsung ML/QL-85G configuration"
 msgstr "Samsung ML/QL-85G 設定"
 
 #: printer/printerdrake.pm:3543 printer/printerdrake.pm:3570
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected on the "
 "first parallel port, no printers on remote machines or print server boxes or "
 "on other parallel ports. Please connect your printer to the first parallel "
 "port or configure it on the machine where it is connected to."
 msgstr ""
-"Lexmark 所提供的噴墨印表機驅動程式只有支援本機印表機\n"
-"的列印的功能, 將無法使用這類遠端印表機。請確認您目前\n"
-"印表機已經正確連結到您本地端電腦上, 設定該印表機的\n"
-"連結位置。"
+"這個印表機驅動程式只有支援由第一個平行埠連接的本機印表機，而非遠端主機的印表"
+"機或列印伺服器。請將印表機連接到本機的第一個平行埠或從它所連接的機器上設定"
+"它。"
 
 #: printer/printerdrake.pm:3569
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-460/660 configuration"
-msgstr "手動組態設定"
+msgstr "Canon LBP-460/660 設定"
 
 #: printer/printerdrake.pm:3596
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "手動組態設定"
+msgstr "Canon LBP-810/1120 (CAPT) 設定"
 
 #: printer/printerdrake.pm:3597
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
 "port. Please connect your printer to the USB or configure it on the machine "
 "where it is directly connected to."
 msgstr ""
-"Lexmark 所提供的噴墨印表機驅動程式只有支援本機印表機\n"
-"的列印的功能, 將無法使用這類遠端印表機。請確認您目前\n"
-"印表機已經正確連結到您本地端電腦上, 設定該印表機的\n"
-"連結位置。"
+"這個印表機驅動程式只有支援由 USB 連接的本機印表機，而非遠端主機的印表機或列印"
+"伺服器。請將印表機連接到本機的 USB 或從它所連接的機器上設定它。"
 
 #: printer/printerdrake.pm:3604
 #, c-format
@@ -13662,9 +13665,9 @@ msgid "Printing/Photo Card Access on \"%s\""
 msgstr ""
 
 #: printer/printerdrake.pm:4187
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "使用「%s」印表機進行列印"
+msgstr "使用/維護 \"%s\" 印表機"
 
 #: printer/printerdrake.pm:4188
 #, c-format
@@ -13756,9 +13759,9 @@ msgid " - Print head alignment\n"
 msgstr ""
 
 #: printer/printerdrake.pm:4235
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
-msgstr "Xorg 設定"
+msgstr " - 色彩校正\n"
 
 #: printer/printerdrake.pm:4250
 #, c-format
@@ -13942,7 +13945,7 @@ msgid "Go on without configuring the network"
 msgstr "略過網路設定項目繼續進行下面的步驟"
 
 #: printer/printerdrake.pm:4482
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network is accessible after booting your "
@@ -13950,11 +13953,9 @@ msgid ""
 "\"Network & Internet\"/\"Connection\", and afterwards set up the printer, "
 "also using the %s Control Center, section \"Hardware\"/\"Printer\""
 msgstr ""
-"在系統整個安裝過程中, 系統的網路服務並未啟動。建議您可以在\n"
-"整個安裝完成, 重新開機進入系統後, 透過 Mandriva 控制台程式\n"
-"選擇『網路』『連線』項目進行設定。此外, 後續像是印表機\n"
-"的設定, 您也可以透過 Mandriva 控制台程式, 在『硬體』內的\n"
-"『印表機』項目來進行設定"
+"在系統安裝過程中設定的網路服務無法啟動。請在重新啟動系統後檢查網路是否\n"
+"可用，並使用 %s 控制中心選擇『網路』『連線』項目修正設定。後續印表機的\n"
+"設定, 也可以用 %s 控制中心，在『硬體』內的『印表機』項目來進行設定"
 
 #: printer/printerdrake.pm:4483
 #, c-format
@@ -14049,9 +14050,9 @@ msgid "Removing %s..."
 msgstr "正在移除 %s"
 
 #: printer/printerdrake.pm:4597
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove the %s printing system!"
-msgstr "變更列印系統"
+msgstr "無法移除 %s 列印系統！"
 
 #: printer/printerdrake.pm:4617
 #, c-format
@@ -14059,9 +14060,9 @@ msgid "Installing %s..."
 msgstr "正在安裝套件 %s..."
 
 #: printer/printerdrake.pm:4621
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the %s printing system!"
-msgstr "變更列印系統"
+msgstr "無法安裝 %s 列印系統！"
 
 #: printer/printerdrake.pm:4689
 #, c-format
@@ -14080,19 +14081,19 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:4705
-#, fuzzy, c-format
+#, c-format
 msgid "Name or IP of remote server:"
-msgstr "遠端的 lpd 伺服器印表機"
+msgstr "遠端伺服器的名稱或 IP:"
 
 #: printer/printerdrake.pm:4725
-#, fuzzy, c-format
+#, c-format
 msgid "Setting Default Printer..."
-msgstr "預設印表機"
+msgstr "設定預設印表機..."
 
 #: printer/printerdrake.pm:4745
-#, fuzzy, c-format
+#, c-format
 msgid "Local CUPS printing system or remote CUPS server?"
-msgstr "遠端的 CUPS 伺服器印表機"
+msgstr "本機的 CUPS 列印系統或遠端的 CUPS 伺服器？"
 
 #: printer/printerdrake.pm:4746
 #, c-format
@@ -14152,9 +14153,9 @@ msgid "Remote server, specify Name or IP here:"
 msgstr ""
 
 #: printer/printerdrake.pm:4774
-#, fuzzy, c-format
+#, c-format
 msgid "Local CUPS printing system"
-msgstr "變更列印系統"
+msgstr "本機的 CUPS 列印系統"
 
 #: printer/printerdrake.pm:4813
 #, c-format
@@ -14167,9 +14168,9 @@ msgid "Which printing system (spooler) do you want to use?"
 msgstr "您打算用那一套列印系統？"
 
 #: printer/printerdrake.pm:4863
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "正在設定「%s」印表機中 ..."
+msgstr "無法設定「%s」印表機！"
 
 #: printer/printerdrake.pm:4878
 #, c-format
@@ -14182,19 +14183,19 @@ msgid "Could not install %s packages, %s cannot be started!"
 msgstr "無法安裝套件 %s，%s 啟動失敗！"
 
 #: printer/printerdrake.pm:5079
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
 "it. "
 msgstr ""
-"下列的印表機都已經設定過了, 您可以點選其中一個項目, \n"
-"可以查看內容資訊或者是修改內容設定, 包含設定為預設印表機。"
+"下列的印表機都已經設定好了, 您可以點選其中一個印表機來修改其設定；設定為預設"
+"印表機；或查看其資訊。"
 
 #: printer/printerdrake.pm:5109
-#, fuzzy, c-format
+#, c-format
 msgid "Display all available remote CUPS printers"
-msgstr "更新印表機清單 (重新尋找遠端可用的所有 CUPS 印表機)"
+msgstr "顯示所有可用的遠端 CUPS 印表機"
 
 #: printer/printerdrake.pm:5110
 #, c-format
@@ -14242,9 +14243,9 @@ msgstr ""
 "您要修改這個印表機的那個項目？"
 
 #: printer/printerdrake.pm:5458
-#, fuzzy, c-format
+#, c-format
 msgid "This printer is disabled"
-msgstr "這個分割區無法重新調整大小"
+msgstr "這個印表機已經停用了"
 
 #: printer/printerdrake.pm:5460
 #, c-format
@@ -14278,15 +14279,15 @@ msgstr "使用這台印表機為預設印表機"
 
 #: printer/printerdrake.pm:5480 printer/printerdrake.pm:5569
 #: printer/printerdrake.pm:5571 printer/printerdrake.pm:5580
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Printer"
-msgstr "開啟服務"
+msgstr "啟用印表機"
 
 #: printer/printerdrake.pm:5483 printer/printerdrake.pm:5574
 #: printer/printerdrake.pm:5575 printer/printerdrake.pm:5577
-#, fuzzy, c-format
+#, c-format
 msgid "Disable Printer"
-msgstr "關閉服務"
+msgstr "停用印表機"
 
 #: printer/printerdrake.pm:5487 printer/printerdrake.pm:5581
 #, fuzzy, c-format
@@ -14296,17 +14297,17 @@ msgstr "印表機連線方式"
 #: printer/printerdrake.pm:5488 printer/printerdrake.pm:5585
 #, c-format
 msgid "Print test pages"
-msgstr "列印測試頁..."
+msgstr "列印測試頁"
 
 #: printer/printerdrake.pm:5489 printer/printerdrake.pm:5587
-#, fuzzy, c-format
+#, c-format
 msgid "Learn how to use this printer"
 msgstr "瞭解如何使用這台印表機"
 
 #: printer/printerdrake.pm:5490 printer/printerdrake.pm:5589
 #, c-format
 msgid "Remove printer"
-msgstr "刪除印表機"
+msgstr "移除印表機"
 
 #: printer/printerdrake.pm:5541
 #, c-format
@@ -14314,14 +14315,14 @@ msgid "Removing old printer \"%s\"..."
 msgstr "正在刪除舊的印表機 \"%s\" ..."
 
 #: printer/printerdrake.pm:5572
-#, fuzzy, c-format
+#, c-format
 msgid "Printer \"%s\" is now enabled."
-msgstr "印表機 \"%s\", 位於 \"%s\""
+msgstr "\"%s\" 印表機現在啟用了。"
 
 #: printer/printerdrake.pm:5578
-#, fuzzy, c-format
+#, c-format
 msgid "Printer \"%s\" is now disabled."
-msgstr "Internet 連線共享目前關閉了。"
+msgstr "\"%s\" 印表機現在停用了。"
 
 #: printer/printerdrake.pm:5620
 #, c-format
@@ -14344,9 +14345,9 @@ msgid "The printer \"%s\" is set as the default printer now."
 msgstr "這台印表機 \"%s\" 將會被設定成為預設印表機。"
 
 #: raid.pm:41
-#, fuzzy, c-format
+#, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
-msgstr "無法在 _已格式_ 化的磁碟陣列 md%d 中加入分割區"
+msgstr "無法在 _已格式_ 化的磁碟陣列 %s 中加入分割區"
 
 #: raid.pm:145
 #, c-format
@@ -14378,9 +14379,9 @@ msgstr ""
 #: standalone/scannerdrake:382 standalone/scannerdrake:446
 #: standalone/scannerdrake:490 standalone/scannerdrake:494
 #: standalone/scannerdrake:516 standalone/scannerdrake:581
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "選取您的掃描器"
+msgstr "Scannerdrake"
 
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
@@ -14429,14 +14430,14 @@ msgid "Allow/Forbid reboot by the console user."
 msgstr ""
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid remote root login."
-msgstr "(位於這個機器上)"
+msgstr "允許/禁止遠端 root 登入。"
 
 #: security/help.pm:31
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "(位於這個機器上)"
+msgstr "允許/禁止 root 直接登入。"
 
 #: security/help.pm:33
 #, c-format
@@ -14598,9 +14599,9 @@ msgid ""
 msgstr ""
 
 #: security/help.pm:108
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root umask."
-msgstr "沒有密碼"
+msgstr "設定 root umask."
 
 #: security/help.pm:109
 #, c-format
@@ -14716,9 +14717,9 @@ msgid "Timeout unit is second"
 msgstr ""
 
 #: security/help.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user umask."
-msgstr "使用者"
+msgstr "設定使用者 umask."
 
 #: security/l10n.pm:11
 #, c-format
@@ -14746,9 +14747,9 @@ msgid "Reboot by the console user"
 msgstr ""
 
 #: security/l10n.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login"
-msgstr "(位於這個機器上)"
+msgstr "允許遠端 root 登入"
 
 #: security/l10n.pm:18
 #, c-format
@@ -14766,9 +14767,9 @@ msgid "Export display when passing from root to the other users"
 msgstr ""
 
 #: security/l10n.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid "Allow X Window connections"
-msgstr "一般 modem 連線方式"
+msgstr "允許 X Window 連線"
 
 #: security/l10n.pm:22
 #, c-format
@@ -14781,9 +14782,9 @@ msgid "Authorize all services controlled by tcp_wrappers"
 msgstr ""
 
 #: security/l10n.pm:24
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "設定系統服務"
+msgstr "Chkconfig 遵從 msec 規則"
 
 #: security/l10n.pm:25
 #, c-format
@@ -14846,9 +14847,9 @@ msgid "Sulogin(8) in single user level"
 msgstr ""
 
 #: security/l10n.pm:37
-#, fuzzy, c-format
+#, c-format
 msgid "No password aging for"
-msgstr "沒有密碼"
+msgstr "不設定密碼期限給"
 
 #: security/l10n.pm:38
 #, c-format
@@ -14856,9 +14857,9 @@ msgid "Set password expiration and account inactivation delays"
 msgstr ""
 
 #: security/l10n.pm:39
-#, fuzzy, c-format
+#, c-format
 msgid "Password history length"
-msgstr "輸入的密碼太簡單了"
+msgstr "密碼長度紀錄"
 
 #: security/l10n.pm:40
 #, c-format
@@ -14866,9 +14867,9 @@ msgid "Password minimum length and number of digits and upcase letters"
 msgstr ""
 
 #: security/l10n.pm:41
-#, fuzzy, c-format
+#, c-format
 msgid "Root umask"
-msgstr "沒有密碼"
+msgstr "Root umask"
 
 #: security/l10n.pm:42
 #, c-format
@@ -14876,19 +14877,19 @@ msgid "Shell history size"
 msgstr ""
 
 #: security/l10n.pm:43
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "核心啟動時間逾時時間"
+msgstr "Shell 啟動逾時"
 
 #: security/l10n.pm:44
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "使用者"
+msgstr "使用者 umask"
 
 #: security/l10n.pm:45
-#, fuzzy, c-format
+#, c-format
 msgid "Check open ports"
-msgstr "於 port %s 偵測到"
+msgstr "檢查開放的連線埠"
 
 #: security/l10n.pm:46
 #, c-format
@@ -15327,13 +15328,13 @@ msgid ""
 msgstr "儲存與回存高品質系統亂數產生器"
 
 #: services.pm:76
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "給 block 這類區塊裝置指派 raw 裝置 (就像是硬碟的分割區), \n"
-"一般是給 oracle 這類特殊程式使用。"
+"給 oracle 或 DVD 播放器這類程式使用。"
 
 #: services.pm:78
 #, c-format
@@ -15654,12 +15655,11 @@ msgid "Internet station"
 msgstr "Internet 平台"
 
 #: share/compssUsers.pl:45
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr ""
-"包含讀信、寫信以及閱讀網路論壇的工具 (pine、mutt、tin ..) 與及 web 瀏覽工具"
+msgstr "包含讀信、寄信和閱讀新聞群組 (mutt、tin ..) 以及網路瀏覽的工具"
 
 #: share/compssUsers.pl:50
 #, c-format
@@ -15722,9 +15722,9 @@ msgid "Apache"
 msgstr "Apache"
 
 #: share/compssUsers.pl:89
-#, fuzzy, c-format
+#, c-format
 msgid "Groupware"
-msgstr "群組"
+msgstr "群組軟體"
 
 #: share/compssUsers.pl:90
 #, c-format
@@ -15742,19 +15742,19 @@ msgid "Internet gateway"
 msgstr "Internet 閘道器"
 
 #: share/compssUsers.pl:97
-#, fuzzy, c-format
+#, c-format
 msgid "Mail/News"
-msgstr "/檔案 (F)/新增 (_N)"
+msgstr "郵件/新聞"
 
 #: share/compssUsers.pl:98
-#, fuzzy, c-format
+#, c-format
 msgid "Postfix mail server, Inn news server"
-msgstr "Postfix 郵件伺服器"
+msgstr "Postfix 郵件伺服器，Inn 新聞伺服器"
 
 #: share/compssUsers.pl:101
-#, fuzzy, c-format
+#, c-format
 msgid "Directory Server"
-msgstr "使用光碟片回存"
+msgstr "目錄伺服器"
 
 #: share/compssUsers.pl:105
 #, c-format
@@ -15772,19 +15772,19 @@ msgid "DNS/NIS"
 msgstr ""
 
 #: share/compssUsers.pl:110
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name and Network Information Server"
-msgstr "網域名稱伺服器"
+msgstr "網域名稱與網路資訊伺服器"
 
 #: share/compssUsers.pl:113
-#, fuzzy, c-format
+#, c-format
 msgid "File and Printer Sharing Server"
-msgstr "列印伺服器名稱"
+msgstr "檔案與列印分享伺服器"
 
 #: share/compssUsers.pl:114
-#, fuzzy, c-format
+#, c-format
 msgid "NFS Server, Samba server"
-msgstr "Samba 伺服器"
+msgstr "NFS 伺服器、Samba 伺服器"
 
 #: share/compssUsers.pl:117 share/compssUsers.pl:130
 #, c-format
@@ -15792,9 +15792,9 @@ msgid "Database"
 msgstr "資料庫軟體"
 
 #: share/compssUsers.pl:118
-#, fuzzy, c-format
+#, c-format
 msgid "PostgreSQL and MySQL Database Server"
-msgstr "PostgreSQL、MySQL 資料庫"
+msgstr "PostgreSQL 與 MySQL 資料庫伺服器"
 
 #: share/compssUsers.pl:122
 #, c-format
@@ -15812,7 +15812,7 @@ msgid "Mail"
 msgstr "電郵"
 
 #: share/compssUsers.pl:127
-#, fuzzy, c-format
+#, c-format
 msgid "Postfix mail server"
 msgstr "Postfix 郵件伺服器"
 
@@ -15856,9 +15856,9 @@ msgid ""
 msgstr "包含友善的應用程式、桌面軟體的圖型化使用環境"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "桌面"
+msgstr "IceWM 桌面"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -15866,19 +15866,19 @@ msgid "Other Graphical Desktops"
 msgstr "其他圖型桌面軟體"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, 等等管理程式"
+msgstr "Window Maker, Enlightenment, Fvwm, 等視窗管理程式"
 
 #: share/compssUsers.pl:184
-#, fuzzy, c-format
+#, c-format
 msgid "Utilities"
-msgstr "Philippines"
+msgstr "工具軟體"
 
 #: share/compssUsers.pl:186 share/compssUsers.pl:187 standalone/logdrake:381
 #, c-format
 msgid "SSH Server"
-msgstr "NIS 伺服主機"
+msgstr "SSH 伺服主機"
 
 #: share/compssUsers.pl:191
 #, c-format
@@ -16077,9 +16077,9 @@ msgid ""
 msgstr ""
 
 #: standalone/XFdrake:59
-#, fuzzy, c-format
+#, c-format
 msgid "You need to reboot for changes to take effect"
-msgstr "您需要重新開機以便於讓異動的設定生效"
+msgstr "您需要重新開機以便讓異動的設定生效"
 
 #: standalone/XFdrake:90
 #, c-format
@@ -16109,14 +16109,14 @@ msgid "%s: %s requires hostname...\n"
 msgstr ""
 
 #: standalone/drakTermServ:207 standalone/drakTermServ:210
-#, fuzzy, c-format
+#, c-format
 msgid "Terminal Server Configuration"
-msgstr "Mandriva Terminal Server 設定"
+msgstr "Terminal Server 設定"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "dhcpd 設定..."
+msgstr "dhcpd 設定"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -16171,7 +16171,7 @@ msgstr ""
 #: standalone/drakTermServ:289 standalone/drakbug:47
 #, c-format
 msgid "First Time Wizard"
-msgstr "首次巫師"
+msgstr "首次精靈"
 
 #: standalone/drakTermServ:326 standalone/drakTermServ:327
 #, c-format
@@ -16212,9 +16212,9 @@ msgid "Please save dhcpd config!"
 msgstr ""
 
 #: standalone/drakTermServ:422
-#, fuzzy, c-format
+#, c-format
 msgid "Use thin clients."
-msgstr "新增/刪除用戶端"
+msgstr "使用輕量化用戶端。"
 
 #: standalone/drakTermServ:424
 #, c-format
@@ -16243,14 +16243,14 @@ msgid "This will take a few minutes."
 msgstr "這個過程將會需要花費一些時間。"
 
 #: standalone/drakTermServ:453 standalone/drakTermServ:493
-#, fuzzy, c-format
+#, c-format
 msgid "Done!"
-msgstr "完成"
+msgstr "完成！"
 
 #: standalone/drakTermServ:464 standalone/drakTermServ:849
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s 失敗"
 
 #: standalone/drakTermServ:473
 #, c-format
@@ -16273,9 +16273,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakTermServ:534
-#, fuzzy, c-format
+#, c-format
 msgid "Terminal Server Overview"
-msgstr "Mandriva Terminal Server 設定"
+msgstr "Terminal Server 概觀"
 
 #: standalone/drakTermServ:535
 #, c-format
@@ -16469,14 +16469,14 @@ msgid "Boot ISO"
 msgstr "開機映像檔案"
 
 #: standalone/drakTermServ:667
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Image"
-msgstr "核心"
+msgstr "PXE 核心影像"
 
 #: standalone/drakTermServ:728
-#, fuzzy, c-format
+#, c-format
 msgid "Default kernel version"
-msgstr "核心版本"
+msgstr "預設核心版本"
 
 #: standalone/drakTermServ:731
 #, c-format
@@ -16519,9 +16519,9 @@ msgid "<-- Delete"
 msgstr "<-- 刪除"
 
 #: standalone/drakTermServ:802
-#, fuzzy, c-format
+#, c-format
 msgid "No image selected!"
-msgstr "未選擇網路卡!"
+msgstr "未選擇核心影像檔!"
 
 #: standalone/drakTermServ:805
 #, c-format
@@ -16552,9 +16552,9 @@ msgid "<-- Del User"
 msgstr "<-- 刪除使用者"
 
 #: standalone/drakTermServ:1051
-#, fuzzy, c-format
+#, c-format
 msgid "type: %s"
-msgstr "格式： "
+msgstr "格式：%s"
 
 #: standalone/drakTermServ:1055
 #, c-format
@@ -16562,11 +16562,11 @@ msgid "local config: %s"
 msgstr ""
 
 #: standalone/drakTermServ:1086
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow local hardware\n"
 "configuration."
-msgstr "自動重新設定"
+msgstr "允許本機硬體設定。"
 
 #: standalone/drakTermServ:1095
 #, c-format
@@ -16574,14 +16574,14 @@ msgid "No net boot images created!"
 msgstr "並未建立網路開機映像檔"
 
 #: standalone/drakTermServ:1114
-#, fuzzy, c-format
+#, c-format
 msgid "Thin Client"
-msgstr "DHCP 用戶端"
+msgstr "輕量化用戶端"
 
 #: standalone/drakTermServ:1118
-#, fuzzy, c-format
+#, c-format
 msgid "Allow Thin Clients"
-msgstr "新增/刪除用戶端"
+msgstr "允許輕量化用戶端"
 
 #: standalone/drakTermServ:1119
 #, c-format
@@ -16596,29 +16596,29 @@ msgid "Add Client -->"
 msgstr "新增用戶端 -->"
 
 #: standalone/drakTermServ:1134
-#, fuzzy, c-format
+#, c-format
 msgid "type: fat"
-msgstr "格式： "
+msgstr "類型：完備"
 
 #: standalone/drakTermServ:1135
-#, fuzzy, c-format
+#, c-format
 msgid "type: thin"
-msgstr "格式： "
+msgstr "類型：精簡"
 
 #: standalone/drakTermServ:1142
-#, fuzzy, c-format
+#, c-format
 msgid "local config: false"
-msgstr "本機密碼檔"
+msgstr "本機設定檔：無"
 
 #: standalone/drakTermServ:1143
-#, fuzzy, c-format
+#, c-format
 msgid "local config: true"
-msgstr "重新設定"
+msgstr "本機設定檔：有"
 
 #: standalone/drakTermServ:1151
 #, c-format
 msgid "<-- Edit Client"
-msgstr "<-- 刪除用戶端"
+msgstr "<-- 編輯用戶端"
 
 #: standalone/drakTermServ:1176
 #, c-format
@@ -16626,9 +16626,9 @@ msgid "Disable Local Config"
 msgstr ""
 
 #: standalone/drakTermServ:1183
-#, fuzzy, c-format
+#, c-format
 msgid "Delete Client"
-msgstr "<-- 刪除用戶端"
+msgstr "刪除用戶端"
 
 #: standalone/drakTermServ:1205
 #, c-format
@@ -16673,14 +16673,14 @@ msgid "Broadcast Address:"
 msgstr ""
 
 #: standalone/drakTermServ:1335
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name:"
-msgstr "網域名稱"
+msgstr "網域名稱："
 
 #: standalone/drakTermServ:1343
-#, fuzzy, c-format
+#, c-format
 msgid "Name Servers:"
-msgstr "Samba 伺服器"
+msgstr "網域名稱伺服器："
 
 #: standalone/drakTermServ:1354
 #, c-format
@@ -16730,17 +16730,17 @@ msgstr ""
 #: standalone/drakTermServ:1584
 #, c-format
 msgid "Please insert floppy disk:"
-msgstr "請插入一張軟片:"
+msgstr "請插入一張磁片:"
 
 #: standalone/drakTermServ:1588
 #, c-format
 msgid "Could not access the floppy!"
-msgstr "無法存取到軟碟"
+msgstr "無法存取到磁片"
 
 #: standalone/drakTermServ:1590
 #, c-format
 msgid "Floppy can be removed now"
-msgstr "請移開軟碟內的軟片"
+msgstr "請移開軟碟機內的磁片"
 
 #: standalone/drakTermServ:1593
 #, c-format
@@ -16748,14 +16748,14 @@ msgid "No floppy drive available!"
 msgstr "沒有可用的軟碟機"
 
 #: standalone/drakTermServ:1599
-#, fuzzy, c-format
+#, c-format
 msgid "PXE image is %s/%s"
-msgstr "網路開機的映像檔案是 %s"
+msgstr "PXE 映像檔案是 %s/%s"
 
 #: standalone/drakTermServ:1601
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing %s/%s"
-msgstr "寫入檔案 %s 時發生錯誤"
+msgstr "寫入檔案 %s/%s 時發生錯誤"
 
 #: standalone/drakTermServ:1611
 #, c-format
@@ -16778,9 +16778,9 @@ msgid "%s passwd bad in Terminal Server - rewriting...\n"
 msgstr ""
 
 #: standalone/drakTermServ:1806
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a user..\n"
-msgstr "%s 沒有正常回應"
+msgstr "%s 不是使用者..\n"
 
 #: standalone/drakTermServ:1807
 #, c-format
@@ -16798,14 +16798,14 @@ msgid "%s added to Terminal Server\n"
 msgstr ""
 
 #: standalone/drakTermServ:1828
-#, fuzzy, c-format
+#, c-format
 msgid "Deleted %s...\n"
-msgstr "偵測到 %s"
+msgstr "已刪除 %s...\n"
 
 #: standalone/drakTermServ:1830 standalone/drakTermServ:1903
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found...\n"
-msgstr "%s 沒有正常回應"
+msgstr "%s 未找到...\n"
 
 #: standalone/drakTermServ:1931
 #, c-format
@@ -16838,7 +16838,7 @@ msgid "Auto Install Configurator"
 msgstr "自動安裝設定程式"
 
 #: standalone/drakautoinst:42
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure an Auto Install floppy. This feature is somewhat "
 "dangerous and must be used circumspectly.\n"
@@ -16852,14 +16852,15 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
-"目前準備設定自動安裝軟片。這個功能有點危險, 使用上要很慎重。\n"
+"您將要設定自動安裝磁片。這個功能有點危險，請務必慎重使用。\n"
 "\n"
-"這個功能, 您將能夠很自動的在所要安裝的電腦上自動進行安裝的\n"
-"動作, 有些步驟則能夠停下來讓使用者自己手動進行一些操作。\n"
+"經由此功能，您將能夠在將要安裝的電腦上自動進行在這部電腦\n"
+"安裝的動作，有些步驟則能夠停下來以改變一些選項。\n"
 "\n"
-"為了最安全考量, 所有分割區劃分以及格式化動作將會自動進行。\n"
+"為了最安全考量, 所有分割區劃分以及格式化動作將不會自動進行，\n"
+"不論您在這部電腦上如何選擇。\n"
 "\n"
-"您希望繼續嗎？"
+"按下 OK 以繼續。"
 
 #: standalone/drakautoinst:60
 #, c-format
@@ -16869,7 +16870,7 @@ msgstr "重播"
 #: standalone/drakautoinst:60 standalone/drakautoinst:69
 #, c-format
 msgid "manual"
-msgstr ""
+msgstr "手動"
 
 #: standalone/drakautoinst:64
 #, c-format
@@ -16890,14 +16891,14 @@ msgid "Creating auto install floppy"
 msgstr "正在製作自動安裝軟片"
 
 #: standalone/drakautoinst:90
-#, fuzzy, c-format
+#, c-format
 msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr "請在 %s 中插入一片空白軟片"
+msgstr "請在 %s 中插入一片空白磁片 (作為驅動程式磁片)"
 
 #: standalone/drakautoinst:91
-#, fuzzy, c-format
+#, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr "正在製作自動安裝軟片"
+msgstr "正在製作自動安裝磁片 (驅動程式磁片)"
 
 #: standalone/drakautoinst:156
 #, c-format
@@ -17031,9 +17032,9 @@ msgid "No interval selected for cron operation."
 msgstr ""
 
 #: standalone/drakbackup:378
-#, fuzzy, c-format
+#, c-format
 msgid "Interval cron not available as non-root"
-msgstr "Cron 使用非 root 身份執行時無法使用"
+msgstr "使用非 root 身份時無法使用 Interval Cron"
 
 #: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
@@ -17053,28 +17054,23 @@ msgid "Valid user list changed, rewriting config file."
 msgstr ""
 
 #: standalone/drakbackup:480
-#, fuzzy, c-format
+#, c-format
 msgid "Old user list:\n"
-msgstr ""
-"\n"
-"- 使用者檔案:\n"
+msgstr "舊的使用者清單:\n"
 
 #: standalone/drakbackup:482
-#, fuzzy, c-format
+#, c-format
 msgid "New user list:\n"
-msgstr ""
-"\n"
-"- 使用者檔案:\n"
+msgstr "新的使用者清單:\n"
 
 #: standalone/drakbackup:511
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "                      DrakBackup Report \n"
 msgstr ""
 "\n"
 "                      DrakBackup 報表清單 \n"
-"\n"
 
 #: standalone/drakbackup:512
 #, c-format
@@ -17105,7 +17101,7 @@ msgid "Total progress"
 msgstr "全部進度"
 
 #: standalone/drakbackup:596
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s exists, delete?\n"
 "\n"
@@ -17123,9 +17119,9 @@ msgid "This may take a moment to generate the keys."
 msgstr "產生憑證檔案, 請稍後...。"
 
 #: standalone/drakbackup:612
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot spawn %s."
-msgstr "錯誤, 無法執行 %s。"
+msgstr "無法產生 %s。"
 
 #: standalone/drakbackup:629
 #, c-format
@@ -17258,19 +17254,15 @@ msgstr ""
 "(!) FTP 連結錯誤：由於 FTP 連線錯誤, 備份檔案將沒透過 FTP 備份傳送出去。\n"
 
 #: standalone/drakbackup:1093
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error during sending file via FTP. Please correct your FTP configuration."
-msgstr ""
-"使用 FTP 上傳檔案時發生錯誤。\n"
-"請檢視您的 FTP 設定是否設定。"
+msgstr "使用 FTP 上傳檔案時發生錯誤。請修正您的 FTP 設定。\n"
 
 #: standalone/drakbackup:1095
-#, fuzzy, c-format
+#, c-format
 msgid "file list sent by FTP: %s\n"
-msgstr ""
-"透過 FTP 傳送檔案清單: %s\n"
-" "
+msgstr "FTP 傳送的檔案清單: %s\n"
 
 #: standalone/drakbackup:1111
 #, c-format
@@ -17295,12 +17287,9 @@ msgstr ""
 "\n"
 
 #: standalone/drakbackup:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr ""
-"執行 sendmail 程式時發生錯誤\n"
-"  由於該錯誤, 備份報表檔案將無法送出\n"
-"  請檢視您系統的 sendmail 是否有錯誤。"
+msgstr "傳送郵件時發生錯誤。您的備份報告郵件未寄出。\n"
 
 #: standalone/drakbackup:1126
 #, c-format
@@ -17334,9 +17323,9 @@ msgstr "備份您的系統檔案。(/etc 目錄)"
 
 #: standalone/drakbackup:1400 standalone/drakbackup:1464
 #: standalone/drakbackup:1530
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "使用遞增備份 (不會覆蓋舊有備份)"
+msgstr "使用遞增/差異檔案備份 (不會覆蓋舊有備份)"
 
 #: standalone/drakbackup:1402 standalone/drakbackup:1466
 #: standalone/drakbackup:1532
@@ -17373,7 +17362,7 @@ msgid "Do not include the browser cache"
 msgstr "不要包含瀏覽器的快取資料檔"
 
 #: standalone/drakbackup:1517
-#, fuzzy, c-format
+#, c-format
 msgid "Select the files or directories and click on 'OK'"
 msgstr "選取檔案或者是目錄, 然後點選 '加入'"
 
@@ -17403,30 +17392,24 @@ msgid "Use Expect for SSH"
 msgstr ""
 
 #: standalone/drakbackup:1608
-#, fuzzy, c-format
+#, c-format
 msgid "Create/Transfer backup keys for SSH"
-msgstr ""
-"建立/傳送\n"
-"備份 SSH 的憑證檔案"
+msgstr "建立/傳送 SSH 的備份憑證"
 
 #: standalone/drakbackup:1610
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer Now"
-msgstr ""
-"  傳送    \n"
-"現在"
+msgstr "現在傳送"
 
 #: standalone/drakbackup:1612
-#, fuzzy, c-format
+#, c-format
 msgid "Other (not drakbackup) keys in place already"
-msgstr ""
-"其他 (非 drakbackup)\n"
-"認證憑證檔案已經存在"
+msgstr "其他 (非 drakbackup) 認證憑證檔案已經存在"
 
 #: standalone/drakbackup:1615
-#, fuzzy, c-format
+#, c-format
 msgid "Host name or IP."
-msgstr "主機名稱"
+msgstr "主機名稱或 IP."
 
 #: standalone/drakbackup:1620
 #, c-format
@@ -17449,14 +17432,14 @@ msgid "Use CD-R/DVD-R to backup"
 msgstr "使用 CD/DVDROM 備份"
 
 #: standalone/drakbackup:1742
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD device"
-msgstr "請選取您 CD/DVD 容量大小"
+msgstr "請選取您的 CD/DVD 裝置"
 
 #: standalone/drakbackup:1747
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD media size"
-msgstr "請選取您 CD/DVD 容量大小"
+msgstr "請選取您的 CD/DVD 容量大小"
 
 #: standalone/drakbackup:1754
 #, c-format
@@ -17469,9 +17452,9 @@ msgid "CDRW media"
 msgstr ""
 
 #: standalone/drakbackup:1762
-#, fuzzy, c-format
+#, c-format
 msgid "Erase your RW media (1st Session)"
-msgstr "如果您要先清除該讀寫媒介裝置上的資料 (1st Session), 請選取該項目"
+msgstr "清除您的可複寫媒介 (第一個資料軌)"
 
 #: standalone/drakbackup:1763
 #, c-format
@@ -17484,19 +17467,19 @@ msgid "DVD+RW media"
 msgstr ""
 
 #: standalone/drakbackup:1771
-#, fuzzy, c-format
+#, c-format
 msgid "DVD-R media"
-msgstr "裝置設備"
+msgstr "DVD-R 媒體"
 
 #: standalone/drakbackup:1773
-#, fuzzy, c-format
+#, c-format
 msgid "DVDRAM device"
-msgstr "裝置設備"
+msgstr "DVDRAM 裝置"
 
 #: standalone/drakbackup:1804
 #, c-format
 msgid "No CD device defined!"
-msgstr "尚未有任何 CD 裝置定義!"
+msgstr "尚未定義任何 CD 裝置!"
 
 #: standalone/drakbackup:1846
 #, c-format
@@ -17504,7 +17487,7 @@ msgid "Use tape to backup"
 msgstr "使用磁帶進行備份"
 
 #: standalone/drakbackup:1849
-#, fuzzy, c-format
+#, c-format
 msgid "Device name to use for backup"
 msgstr "請輸入您要用來備份使用的裝置名稱"
 
@@ -17526,12 +17509,12 @@ msgstr "備份之後不回捲磁帶"
 #: standalone/drakbackup:1873
 #, c-format
 msgid "Erase tape before backup"
-msgstr "使用磁帶進行備份"
+msgstr "進行備份前抹除磁帶"
 
 #: standalone/drakbackup:1879
-#, fuzzy, c-format
+#, c-format
 msgid "Eject tape after the backup"
-msgstr "使用磁帶進行備份"
+msgstr "備份完畢後退出磁帶"
 
 #: standalone/drakbackup:1960
 #, c-format
@@ -17539,9 +17522,9 @@ msgid "Enter the directory to save to:"
 msgstr "請輸入您要儲存的目錄名稱："
 
 #: standalone/drakbackup:1964
-#, fuzzy, c-format
+#, c-format
 msgid "Directory to save to"
-msgstr "請輸入您要儲存的目錄名稱："
+msgstr "儲存的目錄"
 
 #: standalone/drakbackup:1969
 #, c-format
@@ -17729,22 +17712,19 @@ msgid "Month"
 msgstr "月"
 
 #: standalone/drakbackup:2143
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday"
-msgstr "星期三"
+msgstr "星期"
 
 #: standalone/drakbackup:2149
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the media for backup."
-msgstr "請選擇要用來備份的裝置"
+msgstr "請選擇要用來備份的媒介"
 
 #: standalone/drakbackup:2155
-#, fuzzy, c-format
+#, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr ""
-"請確定您系統有安裝並且有啟用 cron 排程服務程式。\n"
-"\n"
-"請注意目前所有 '網路' 媒介都會使用硬碟。"
+msgstr "請確定您有啟用 cron 排程服務程式。"
 
 #: standalone/drakbackup:2156
 #, c-format
@@ -17753,22 +17733,19 @@ msgid ""
 msgstr ""
 
 #: standalone/drakbackup:2157
-#, fuzzy, c-format
+#, c-format
 msgid "Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"請確定您系統有安裝並且有啟用 cron 排程服務程式。\n"
-"\n"
-"請注意目前所有 '網路' 媒介都會使用硬碟。"
+msgstr "請注意目前所有 '網路' 媒介都會使用硬碟。"
 
 #: standalone/drakbackup:2204
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the compression type"
-msgstr "請選取要回存的日期"
+msgstr "請選取要壓縮的方式"
 
 #: standalone/drakbackup:2208
-#, fuzzy, c-format
+#, c-format
 msgid "Use .backupignore files"
-msgstr "備份檔案啟用最大容量配給限制。"
+msgstr "使用 .backupignore 檔案"
 
 #: standalone/drakbackup:2210
 #, c-format
@@ -17826,9 +17803,9 @@ msgid "Please choose where you want to backup"
 msgstr "請選取您要備份的項目"
 
 #: standalone/drakbackup:2337
-#, fuzzy, c-format
+#, c-format
 msgid "Hard Drive used to prepare backups for all media"
-msgstr "備份成功後刪除硬碟上的 tar 檔案"
+msgstr "使用硬碟以準備所有媒介的備份"
 
 #: standalone/drakbackup:2337
 #, c-format
@@ -17851,9 +17828,9 @@ msgid "Backup Users"
 msgstr "備份使用者資料"
 
 #: standalone/drakbackup:2384
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "預設印表機"
+msgstr " (預設是所有使用者)"
 
 #: standalone/drakbackup:2397
 #, c-format
@@ -18025,14 +18002,14 @@ msgid "\tBackups use tar and gzip\n"
 msgstr "\t使用 tar 與 gzip 進行備份\n"
 
 #: standalone/drakbackup:2534
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use tar only\n"
-msgstr "\t使用 tar 與 gzip 進行備份\n"
+msgstr "\t僅使用 tar 進行備份\n"
 
 #: standalone/drakbackup:2536
 #, c-format
 msgid "\tUse .backupignore files\n"
-msgstr "\t使用.backupignore 檔案\n"
+msgstr "\t使用 .backupignore 檔案\n"
 
 #: standalone/drakbackup:2537
 #, c-format
@@ -18091,7 +18068,7 @@ msgstr "\t-網路 (透過 rsync)\n"
 #: standalone/drakbackup:2549
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr "尚未設定任何組態項目, 請點選巫師或者是進階模式建立之。\n"
+msgstr "尚未設定任何組態項目, 請點選精靈或者是進階模式建立之。\n"
 
 #: standalone/drakbackup:2554
 #, c-format
@@ -18103,11 +18080,9 @@ msgstr ""
 "\n"
 
 #: standalone/drakbackup:2556
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore System Files.\n"
-msgstr ""
-"\n"
-"- 系統檔案:\n"
+msgstr "- 回存系統檔案。\n"
 
 #: standalone/drakbackup:2558 standalone/drakbackup:2568
 #, c-format
@@ -18115,18 +18090,14 @@ msgid "   - from date: %s %s\n"
 msgstr ""
 
 #: standalone/drakbackup:2561
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore User Files: \n"
-msgstr ""
-"\n"
-"- 使用者檔案:\n"
+msgstr "- 回存使用者檔案：\n"
 
 #: standalone/drakbackup:2566
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore Other Files: \n"
-msgstr ""
-"\n"
-"- 其他檔案:\n"
+msgstr "- 回存其他檔案：\n"
 
 #: standalone/drakbackup:2745
 #, c-format
@@ -18173,9 +18144,9 @@ msgid "User list to restore (only the most recent date per user is important)"
 msgstr "回存的使用者清單 (只有回存最近使用者重要的檔案)"
 
 #: standalone/drakbackup:3008
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the date to restore:"
-msgstr "請選取要回存的日期"
+msgstr "請選取要回存的日期："
 
 #: standalone/drakbackup:3045
 #, c-format
@@ -18183,14 +18154,14 @@ msgid "Restore from Hard Disk."
 msgstr "由硬碟回存。"
 
 #: standalone/drakbackup:3047
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory where backups are stored"
-msgstr "請輸入備份資料所要回存的目錄"
+msgstr "請輸入備份資料所儲存的目錄"
 
 #: standalone/drakbackup:3051
-#, fuzzy, c-format
+#, c-format
 msgid "Directory with backups"
-msgstr "回存所有備份資料"
+msgstr "儲存備份資料的目錄"
 
 #: standalone/drakbackup:3105
 #, c-format
@@ -18223,9 +18194,9 @@ msgid "Select path to restore (instead of /)"
 msgstr "選擇要回存的路徑名稱 (代替預設的 /)"
 
 #: standalone/drakbackup:3120 standalone/drakbackup:3402
-#, fuzzy, c-format
+#, c-format
 msgid "Path To Restore To"
-msgstr "自訂回存方式"
+msgstr "回存的路徑"
 
 #: standalone/drakbackup:3123
 #, c-format
@@ -18253,11 +18224,9 @@ msgid "No matches found..."
 msgstr "找不到符合的..."
 
 #: standalone/drakbackup:3235
-#, fuzzy, c-format
+#, c-format
 msgid "Restore Selected"
-msgstr ""
-"回存選取項目\n"
-"檔案"
+msgstr "回存選取項目"
 
 #: standalone/drakbackup:3370
 #, c-format
@@ -18376,9 +18345,9 @@ msgid "Restore Failed..."
 msgstr "回存失敗..."
 
 #: standalone/drakbackup:3557
-#, fuzzy, c-format
+#, c-format
 msgid "%s not retrieved..."
-msgstr "%s 沒有正常回應"
+msgstr "%s 無法取得..."
 
 #: standalone/drakbackup:3778 standalone/drakbackup:3847
 #, c-format
@@ -18406,9 +18375,9 @@ msgid "Unable to find backups to restore...\n"
 msgstr "無法找到備份以回存...\n"
 
 #: standalone/drakbackup:3816
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "這樣子正確嗎？"
+msgstr "請確認 %s 是正確的路徑"
 
 #: standalone/drakbackup:3817
 #, c-format
@@ -18431,9 +18400,9 @@ msgid "Browse to new restore repository."
 msgstr ""
 
 #: standalone/drakbackup:3841
-#, fuzzy, c-format
+#, c-format
 msgid "Directory To Restore From"
-msgstr "使用光碟片回存"
+msgstr "用來回存的目錄"
 
 #: standalone/drakbackup:3877
 #, c-format
@@ -18451,9 +18420,9 @@ msgid "Restore"
 msgstr "回存"
 
 #: standalone/drakbackup:4109 standalone/harddrake2:479
-#, fuzzy, c-format
+#, c-format
 msgid "The following packages need to be installed:\n"
-msgstr "下列的套件將會被安裝上"
+msgstr "需要安裝下列套件：\n"
 
 #: standalone/drakbackup:4136
 #, c-format
@@ -18481,9 +18450,9 @@ msgid "Total Progress"
 msgstr "全部進度"
 
 #: standalone/drakbackup:4211
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "正在送出檔案..."
+msgstr "經由 FTP 傳送檔案"
 
 #: standalone/drakbackup:4214
 #, c-format
@@ -18511,9 +18480,9 @@ msgid "Advanced Configuration"
 msgstr "進階設定"
 
 #: standalone/drakbackup:4325
-#, fuzzy, c-format
+#, c-format
 msgid "View Configuration"
-msgstr "組態設定"
+msgstr "檢視組態設定"
 
 #: standalone/drakbackup:4329
 #, c-format
@@ -18532,7 +18501,7 @@ msgid ""
 "please click Wizard or Advanced."
 msgstr ""
 "尚未產生組態設定檔案, 請點選\n"
-"巫師或者是進階模式建立之。"
+"精靈或者是進階模式建立之。"
 
 #: standalone/drakbackup:4358 standalone/drakbackup:4361
 #, c-format
@@ -18571,12 +18540,12 @@ msgstr "只顯示文字"
 #: standalone/drakboot:126
 #, c-format
 msgid "Verbose"
-msgstr ""
+msgstr "顯示訊息"
 
 #: standalone/drakboot:127
 #, c-format
 msgid "Silent"
-msgstr "靜音"
+msgstr "隱藏訊息"
 
 #: standalone/drakboot:134
 #, c-format
@@ -18586,9 +18555,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakboot:135
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to configure it now?"
-msgstr "您想要測試您的設定值嗎？"
+msgstr "您想要現在設定它嗎？"
 
 #: standalone/drakboot:144
 #, c-format
@@ -18596,19 +18565,19 @@ msgid "Install themes"
 msgstr "安裝佈景"
 
 #: standalone/drakboot:146
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot theme selection"
-msgstr "印表機型號選擇"
+msgstr "圖形開機佈景主題選擇"
 
 #: standalone/drakboot:149
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "使用圖形化開機畫面"
+msgstr "圖形化開機模式："
 
 #: standalone/drakboot:151
 #, c-format
 msgid "Theme"
-msgstr "佈景檔"
+msgstr "佈景主題"
 
 #: standalone/drakboot:154
 #, c-format
@@ -18730,7 +18699,7 @@ msgstr "Userdrake 使用者管理"
 #: standalone/drakbug:59
 #, c-format
 msgid "Configuration Wizards"
-msgstr "設定巫師"
+msgstr "設定精靈"
 
 #: standalone/drakbug:81
 #, c-format
@@ -18760,7 +18729,7 @@ msgid "Kernel:"
 msgstr "核心："
 
 #: standalone/drakbug:101
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -18768,10 +18737,10 @@ msgid ""
 "Things useful to include in your report are the output of lspci, kernel "
 "version, and /proc/cpuinfo."
 msgstr ""
-"要回報任何臭蟲問題, 請點選回報的按鈕.\n"
-"這將會開啟瀏覽器於 %s\n"
-" 其中你將找到一表格填入. 以上顯示的資訊將 會\n"
-"被傳送到那伺服器."
+"要回報臭蟲問題，請點選回報的按鈕。\n"
+"這將會在 %s 開啟瀏覽器，並有一表格可填入。\n"
+"以上顯示的資訊將會被傳送到該伺服器。\n"
+"適合附在報告中的有用資訊包含 lspci 的結果、核心版本、和 /proc/cpuinfo."
 
 #: standalone/drakbug:107
 #, c-format
@@ -18784,9 +18753,9 @@ msgid "Not installed"
 msgstr "尚未安裝"
 
 #: standalone/drakbug:174
-#, fuzzy, c-format
+#, c-format
 msgid "Package not installed"
-msgstr "尚未安裝"
+msgstr "套件尚未安裝"
 
 #: standalone/drakclock:29
 #, c-format
@@ -18794,14 +18763,14 @@ msgid "DrakClock"
 msgstr "DrakClock"
 
 #: standalone/drakclock:39
-#, fuzzy, c-format
+#, c-format
 msgid "not defined"
-msgstr "重新設定"
+msgstr "尚未設定"
 
 #: standalone/drakclock:41
-#, fuzzy, c-format
+#, c-format
 msgid "Change Time Zone"
-msgstr "時區"
+msgstr "變更時區"
 
 #: standalone/drakclock:45
 #, c-format
@@ -18819,9 +18788,9 @@ msgid "Is your hardware clock set to GMT?"
 msgstr "硬體時鐘設定為 GMT 時間嗎?"
 
 #: standalone/drakclock:75
-#, fuzzy, c-format
+#, c-format
 msgid "Network Time Protocol"
-msgstr "網路介面"
+msgstr "網路時間協定"
 
 #: standalone/drakclock:77
 #, c-format
@@ -18831,14 +18800,14 @@ msgid ""
 msgstr ""
 
 #: standalone/drakclock:78
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Network Time Protocol"
-msgstr "網路回存使用的協定：%s"
+msgstr "啟用網路時間協定"
 
 #: standalone/drakclock:86
 #, c-format
 msgid "Server:"
-msgstr "伺服器"
+msgstr "伺服器："
 
 #: standalone/drakclock:124
 #, c-format
@@ -18851,13 +18820,17 @@ msgid "Reset"
 msgstr "重設"
 
 #: standalone/drakclock:224
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "We need to install ntp package\n"
 " to enable Network Time Protocol\n"
 "\n"
 "Do you want to install ntp?"
-msgstr "這個 %s 套件需要安裝上, 您要安裝該套件嗎？"
+msgstr ""
+"我們必須安裝 ntp 套件\n"
+"以啟用網路時間協定\n"
+"\n"
+"您要安裝該套件嗎？"
 
 #: standalone/drakconnect:80
 #, c-format
@@ -18922,29 +18895,29 @@ msgid "Manage connections"
 msgstr "管理連線"
 
 #: standalone/drakconnect:215
-#, fuzzy, c-format
+#, c-format
 msgid "Device selected"
-msgstr "移除選取項目"
+msgstr "選取的裝置"
 
 #: standalone/drakconnect:296
-#, fuzzy, c-format
+#, c-format
 msgid "IP configuration"
-msgstr "CUPS 設定組態"
+msgstr "IP 組態設定"
 
 #: standalone/drakconnect:335
-#, fuzzy, c-format
+#, c-format
 msgid "DNS servers"
 msgstr "DNS 伺服器"
 
 #: standalone/drakconnect:343
-#, fuzzy, c-format
+#, c-format
 msgid "Search Domain"
-msgstr "NIS 域名"
+msgstr "搜尋網域"
 
 #: standalone/drakconnect:351
-#, fuzzy, c-format
+#, c-format
 msgid "static"
-msgstr "自動分配 IP"
+msgstr "固定 IP"
 
 #: standalone/drakconnect:351
 #, c-format
@@ -18957,34 +18930,34 @@ msgid "Flow control"
 msgstr "流量控制"
 
 #: standalone/drakconnect:516
-#, fuzzy, c-format
+#, c-format
 msgid "Line termination"
-msgstr "Internet 平台"
+msgstr "斷線"
 
 #: standalone/drakconnect:527
-#, fuzzy, c-format
+#, c-format
 msgid "Modem timeout"
-msgstr "核心啟動時間逾時時間"
+msgstr "數據機逾時"
 
 #: standalone/drakconnect:531
-#, fuzzy, c-format
+#, c-format
 msgid "Use lock file"
-msgstr "選擇檔案"
+msgstr "選擇 lock 檔案"
 
 #: standalone/drakconnect:533
 #, c-format
 msgid "Wait for dialup tone before dialing"
-msgstr ""
+msgstr "撥號前等待撥號聲"
 
 #: standalone/drakconnect:536
-#, fuzzy, c-format
+#, c-format
 msgid "Busy wait"
-msgstr "科威特"
+msgstr "忙線中"
 
 #: standalone/drakconnect:541
-#, fuzzy, c-format
+#, c-format
 msgid "Modem sound"
-msgstr "型號"
+msgstr "數據機聲音"
 
 #: standalone/drakconnect:542 standalone/drakgw:105
 #, c-format
@@ -19030,23 +19003,23 @@ msgid ""
 msgstr "您系統偵測不到有網路卡的存在，請重新執行硬體設定工具。"
 
 #: standalone/drakconnect:708
-#, fuzzy, c-format
+#, c-format
 msgid "Remove a network interface"
-msgstr "選取網路介面"
+msgstr "移除網路介面"
 
 #: standalone/drakconnect:712
-#, fuzzy, c-format
+#, c-format
 msgid "Select the network interface to remove:"
-msgstr "選取網路介面"
+msgstr "選取要移除的網路介面："
 
 #: standalone/drakconnect:744
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while deleting the \"%s\" network interface:\n"
 "\n"
 "%s"
 msgstr ""
-"重新啟動網路時發生了下面的錯誤：\n"
+"刪除 \"%s\" 網路介面時發生了下面的錯誤：\n"
 "\n"
 "%s"
 
@@ -19069,12 +19042,12 @@ msgstr "沒有遮罩"
 #: standalone/drakconnect:763 standalone/drakconnect:916
 #, c-format
 msgid "up"
-msgstr ""
+msgstr "啟用"
 
 #: standalone/drakconnect:763 standalone/drakconnect:916
-#, fuzzy, c-format
+#, c-format
 msgid "down"
-msgstr "完成"
+msgstr "停用"
 
 #: standalone/drakconnect:798 standalone/net_monitor:465
 #, c-format
@@ -19136,11 +19109,13 @@ msgid "Started on boot"
 msgstr "於開機時啟動"
 
 #: standalone/drakconnect:921
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This interface has not been configured yet.\n"
 "Run the \"Add an interface\" assistant from the Mandriva Linux Control Center"
-msgstr "網路介面尚未設定, 請執行設定巫師"
+msgstr ""
+"網路介面尚未設定。\n"
+"請從 Mandriva Linux 控制中心執行「增加網路介面」精靈"
 
 #: standalone/drakconnect:975 standalone/net_applet:51
 #, c-format
@@ -19275,9 +19250,9 @@ msgid "Search for fonts in installed list"
 msgstr "於已安裝清單內搜尋字型"
 
 #: standalone/drakfont:296
-#, fuzzy, c-format
+#, c-format
 msgid "%s fonts conversion"
-msgstr "pfm 字型轉換"
+msgstr "%s 字型轉換"
 
 #: standalone/drakfont:325
 #, c-format
@@ -19430,7 +19405,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "選擇能夠使用該字體的應用程式："
 
 #: standalone/drakfont:557
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
 "install them on your system.\n"
@@ -19438,9 +19413,10 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"進行安裝字型前, 請務必確認您有適當的權限能夠存取使用, \n"
-"其中包含這些字型都是正確沒錯誤的。要不然, 極端情況下, \n"
-"您的 X 伺服器可能會因為不正確的字型檔案而不預期結束。"
+"安裝任何字型前，請確認您有權限能夠安裝與使用。\n"
+"\n"
+"您仍然可以用正常方式安裝字型。在極端情況下，不正確的字型\n"
+"可能會使您的 X 伺服器中止或失去回應。"
 
 #: standalone/drakfont:567
 #, c-format
@@ -19478,14 +19454,14 @@ msgid "Fonts"
 msgstr "字形"
 
 #: standalone/drakfont:652
-#, fuzzy, c-format
+#, c-format
 msgid "Import fonts"
-msgstr "字型匯入"
+msgstr "匯入字型"
 
 #: standalone/drakfont:657
-#, fuzzy, c-format
+#, c-format
 msgid "Install fonts"
-msgstr "移除字型"
+msgstr "安裝字型"
 
 #: standalone/drakfont:692
 #, c-format
@@ -19513,9 +19489,9 @@ msgid "Remove List"
 msgstr "移除清單"
 
 #: standalone/drakfont:750 standalone/drakfont:769
-#, fuzzy, c-format
+#, c-format
 msgid "Importing fonts"
-msgstr "字型匯入"
+msgstr "正在匯入字型"
 
 #: standalone/drakfont:754 standalone/drakfont:774
 #, c-format
@@ -19548,9 +19524,9 @@ msgid "Post Uninstall"
 msgstr "後續反安裝設定"
 
 #: standalone/drakgw:50 standalone/drakvpn:51
-#, fuzzy, c-format
+#, c-format
 msgid "Sorry, we support only 2.4 and above kernels."
-msgstr "抱歉, 目前只有支援使用 2.4 的核心版本。"
+msgstr "抱歉, 目前只有支援 2.4 及更新的核心版本。"
 
 #: standalone/drakgw:75
 #, c-format
@@ -19583,23 +19559,23 @@ msgid ""
 "\n"
 "What would you like to do?"
 msgstr ""
-"目前 Internet 連線分享的設定已經完成了.. 目前已經可用了..\n"
-"您目前打算要做什麼呢？"
+"Internet 連線分享的設定已經完成了。目前已經啟用了。\n"
+"您打算要做什麼呢？"
 
 #: standalone/drakgw:99
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
 msgstr ""
-"Internet 連線共享已經設定完成了。目前是處於關閉不使用狀態。\n"
+"Internet 連線分享的設定已經完成了。目前是停用的狀態。\n"
 "\n"
-"您希望要處理那個？"
+"您打算要做什麼呢？"
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
 msgstr "重新設定"
 
@@ -19626,9 +19602,9 @@ msgid ""
 msgstr "請選擇要連線到區域網路內的網路卡。"
 
 #: standalone/drakgw:177
-#, fuzzy, c-format
+#, c-format
 msgid "Local Area Network setings"
-msgstr "內部網路IP位址"
+msgstr "內部區域網路設定"
 
 #: standalone/drakgw:180
 #, c-format
@@ -19646,9 +19622,9 @@ msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "潛在的 LAN 位址衝突發現於目前 %s 設定!\n"
 
 #: standalone/drakgw:204
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server (DNS) configuration"
-msgstr "Mandriva Terminal Server 設定"
+msgstr "網域名稱伺服器 (DNS) 設定"
 
 #: standalone/drakgw:208
 #, c-format
@@ -19661,7 +19637,7 @@ msgid "The DNS Server IP"
 msgstr "該 DHCP 主機 IP"
 
 #: standalone/drakgw:236
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DHCP Server Configuration.\n"
 "\n"
@@ -19670,14 +19646,13 @@ msgid ""
 msgstr ""
 "DHCP 伺服器設定。\n"
 "\n"
-"您可以在這邊選擇設定 DHCP 的相關組態設定。\n"
-"如果您不清楚相關參數的意思, 您可以為持空白不要輸入資料。\n"
-"\n"
+"您可以在這邊選擇 DHCP 伺服器的各種組態設定。\n"
+"如果您不清楚相關參數的意思, 您可以維持空白不要輸入資料。"
 
 #: standalone/drakgw:243
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "自動重新設定"
+msgstr "使用自動設定 (DHCP)"
 
 #: standalone/drakgw:244
 #, c-format
@@ -19715,29 +19690,29 @@ msgid "Admin mail"
 msgstr ""
 
 #: standalone/drakgw:276
-#, fuzzy, c-format
+#, c-format
 msgid "Visible hostname"
-msgstr "遠端主機名稱"
+msgstr "可見的主機名稱"
 
 #: standalone/drakgw:277
-#, fuzzy, c-format
+#, c-format
 msgid "Proxy port"
-msgstr "特性"
+msgstr "Proxy 連線埠"
 
 #: standalone/drakgw:278
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size (MB)"
-msgstr "快取大小"
+msgstr "快取大小 (MB)"
 
 #: standalone/drakgw:300
-#, fuzzy, c-format
+#, c-format
 msgid "Broadcast printer information"
-msgstr "硬碟資訊"
+msgstr "廣播印表機資訊"
 
 #: standalone/drakgw:317
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
-msgstr "Internet 連線工想目前開啟了。"
+msgstr "Internet 連線共享目前開啟了。"
 
 #: standalone/drakgw:323
 #, c-format
@@ -19745,7 +19720,7 @@ msgid "Internet Connection Sharing is now disabled."
 msgstr "Internet 連線共享目前關閉了。"
 
 #: standalone/drakgw:329
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -19753,8 +19728,8 @@ msgid ""
 " a Transparent Proxy Cache server (SQUID)."
 msgstr ""
 "每個項目都已經設定好了。\n"
-"現在您的系統已經透過 DHCP 動態 IP 分配的方式取得連線 IP, \n"
-"並且也已經能夠透過其他電腦的頻寬分享存取 Internet 服務。"
+"現在您可以藉由自動網路設定 (DHCP) 及 Transparent Proxy Cache server (SQUID) "
+"分享網路連線給其他區域網路中的電腦\n"
 
 #: standalone/drakgw:364
 #, c-format
@@ -19815,9 +19790,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakhelp:36
-#, fuzzy, c-format
+#, c-format
 msgid "Mandriva Linux Help Center"
-msgstr "Mandriva 控制中心"
+msgstr "Mandriva Linux 協助中心"
 
 #: standalone/drakhelp:36
 #, c-format
@@ -19832,19 +19807,19 @@ msgid "Please add an host to be able to modify it."
 msgstr ""
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "詳細資訊"
+msgstr "請修改資訊"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "詳細資訊"
+msgstr "請刪除資訊"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "詳細資訊"
+msgstr "請增加資訊"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -19897,69 +19872,69 @@ msgid "Failed to remove host."
 msgstr ""
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "允許所有使用者"
+msgstr "允許的位址"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "紀錄檔"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "全部清除"
+msgstr "清除紀錄檔"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "黑名單"
 
 #: standalone/drakids:69
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "由 LVM 中移除"
+msgstr "由黑名單中移除"
 
 #: standalone/drakids:70
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "移動至黑名單"
 
 #: standalone/drakids:74 standalone/net_applet:444
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "白名單"
 
 #: standalone/drakids:78
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "由 LVM 中移除"
+msgstr "由白名單中移除"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
 #: standalone/drakids:179 standalone/drakids:246 standalone/drakroam:140
 #: standalone/net_applet:180 standalone/net_applet:354
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "無法聯繫映射站台 %s"
+msgstr "無法聯繫 daemon"
 
 #: standalone/drakids:191
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "狀態"
+msgstr "日期"
 
 #: standalone/drakids:192
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "詳細的攻擊資訊"
+msgstr "攻擊者"
 
 #: standalone/drakids:193
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "攻擊型態： %s"
+msgstr "攻擊類型"
 
 #: standalone/drakids:194
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
 msgstr "服務"
 
@@ -20117,20 +20092,20 @@ msgid "Please add an NFS share to be able to modify it."
 msgstr ""
 
 #: standalone/draknfs:378
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "進階設定"
+msgstr "進階設定協助"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "NFS 目錄"
 
 #: standalone/draknfs:391 standalone/draksambashare:588
 #: standalone/draksambashare:767
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "目錄："
 
 #: standalone/draknfs:394
 #, c-format
@@ -20239,14 +20214,14 @@ msgid "System settings"
 msgstr "系統設定"
 
 #: standalone/drakperm:22
-#, fuzzy, c-format
+#, c-format
 msgid "Custom settings"
-msgstr "自訂磁碟分割"
+msgstr "自訂設定"
 
 #: standalone/drakperm:23
-#, fuzzy, c-format
+#, c-format
 msgid "Custom & system settings"
-msgstr "自訂磁碟分割"
+msgstr "自訂與系統設定"
 
 #: standalone/drakperm:43
 #, c-format
@@ -20284,14 +20259,14 @@ msgid "Edit current rule"
 msgstr "編輯目前規則"
 
 #: standalone/drakperm:106
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here you can see files to use in order to fix permissions, owners, and "
 "groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
-"Drakperm 程式能夠讓使用者檢視以及修改重要檔案的權限, 包含擁有者、\n"
-"群組等資訊。另外您也可以自行編輯創造更多屬於自訂的規則項目。"
+"這裡讓您可以藉由 msec 檢視以及修改重要檔案的權限、擁有者、群組等資訊。\n"
+"另外您也可以編輯自訂的規則以取代預設的項目。"
 
 #: standalone/drakperm:109
 #, c-format
@@ -20321,7 +20296,7 @@ msgid "Move selected rule down one level"
 msgstr ""
 
 #: standalone/drakperm:122
-#, fuzzy, c-format
+#, c-format
 msgid "Add a rule"
 msgstr "新增規則"
 
@@ -20397,7 +20372,7 @@ msgid "Enable \"%s\" to execute the file"
 msgstr ""
 
 #: standalone/drakperm:272
-#, fuzzy, c-format
+#, c-format
 msgid "Sticky-bit"
 msgstr "Sticky-Bit"
 
@@ -20499,156 +20474,156 @@ msgid "Refresh"
 msgstr "重新載入"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "開始的磁區："
+msgstr "分享的目錄"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "緊密模式"
+msgstr "註解"
 
 #: standalone/draksambashare:64 standalone/draksambashare:97
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "瀏覽"
+msgstr "可瀏覽"
 
 #: standalone/draksambashare:65
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "公用的"
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "寫入"
+msgstr "可寫入"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "建立"
+msgstr "建立 mask"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "回存所有備份資料"
+msgstr "目錄 mask"
 
 #: standalone/draksambashare:69
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "已讀"
+msgstr "讀取清單"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "寫入"
+msgstr "寫入清單"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "新增使用者"
+msgstr "管理者"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "新增使用者"
+msgstr "有效使用者"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "權限"
+msgstr "繼承權限"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
 msgstr "隱藏檔案"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "偏好設定"
+msgstr "保留大寫"
 
 #: standalone/draksambashare:77
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "您的印表機型號"
+msgstr "強制建立模式"
 
 #: standalone/draksambashare:78
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "工作群組"
+msgstr "強制群組"
 
 #: standalone/draksambashare:79 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "預設使用者"
+msgstr "預設大寫"
 
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "印表機名稱"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "可列印"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "列印指令"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "LPQ 指令"
 
 #: standalone/draksambashare:101
 #, c-format
 msgid "Guest ok"
-msgstr ""
+msgstr "允許 guest"
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "權限"
+msgstr "繼承權限"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "建立模式"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "使用用戶端驅動程式"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "移除清單"
+msgstr "讀取清單"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "寫入"
+msgstr "寫入清單"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "群組"
+msgstr "強制群組"
 
 #: standalone/draksambashare:140
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "強制建立群組"
 
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "關於 Draksambashare"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -20661,63 +20636,63 @@ msgid ""
 msgstr ""
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Samba 伺服器"
 
 #: standalone/draksambashare:180
 #, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr ""
+msgstr "重新啟動/重新載入 Samba 伺服器..."
 
 #: standalone/draksambashare:181
 #, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr ""
+msgstr "重新啟動/重新載入 Samba 伺服器發生錯誤"
 
 #: standalone/draksambashare:367
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "增加 Samba 分享"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "這個精靈的目標是輕鬆地建立新的 Samba 分享。"
 
 #: standalone/draksambashare:372
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "印表機名稱"
+msgstr "分享的名稱："
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "緊密模式"
+msgstr "註解："
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "路徑"
+msgstr "路徑："
 
 #: standalone/draksambashare:379
 #, c-format
 msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
-msgstr ""
+msgstr "同名的分享已經存在或未輸入分享名稱，請選擇其他名稱。"
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "無法建立該目錄，請輸入正確路徑。"
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "請輸入這張卡的無線網路參數："
+msgstr "請輸入這個分享的註解。"
 
 #: standalone/draksambashare:417
 #, c-format
@@ -20778,14 +20753,14 @@ msgid "Printer name:"
 msgstr ""
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "寫入"
+msgstr "可寫入："
 
 #: standalone/draksambashare:593 standalone/draksambashare:774
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "瀏覽"
+msgstr "可瀏覽："
 
 #: standalone/draksambashare:598
 #, c-format
@@ -20843,29 +20818,29 @@ msgid "Please add or select a Samba share to be able to modify it."
 msgstr ""
 
 #: standalone/draksambashare:719
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Samba 伺服器"
+msgstr "Samba 使用者存取"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "DrakSec 基本參數選項"
+msgstr "Mask 選項"
 
 #: standalone/draksambashare:741
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "指定選項"
+msgstr "顯示選項"
 
 #: standalone/draksambashare:763
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Xpmac (顯示卡驅動程式的安裝)"
+msgstr "Samba 分享目錄"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "印表機名稱"
+msgstr "分享名稱："
 
 #: standalone/draksambashare:772
 #, c-format
@@ -21058,9 +21033,9 @@ msgstr ""
 "\n"
 
 #: standalone/draksec:168
-#, fuzzy, c-format
+#, c-format
 msgid "(default value: %s)"
-msgstr " (預設：%s)"
+msgstr "(預設值：%s)"
 
 #: standalone/draksec:210
 #, c-format
@@ -21073,9 +21048,9 @@ msgid "Security Administrator:"
 msgstr "安全性管理者:"
 
 #: standalone/draksec:219
-#, fuzzy, c-format
+#, c-format
 msgid "Basic options"
-msgstr "DrakSec 基本參數選項"
+msgstr "基本選項"
 
 #: standalone/draksec:233
 #, c-format
@@ -21129,7 +21104,7 @@ msgstr ""
 "http://www.mandrivalinux.com/en/hardware.php3"
 
 #: standalone/draksound:57
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -21140,8 +21115,9 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"請注意, 若是您使用的音效卡是 ISA PnP 類型的話, 您需要使用 sndconfig \n"
-"這個程式來設定。請在 console 模式輸入執行 \"sndconfig\" 即可。"
+"請注意：若是您使用的是 ISA PnP 音效卡的話, 您需要使用 alsaconf 或 "
+"sndconfig \n"
+"程式來設定。請在終端機中輸入 \"alsaconf\" 或 \"sndconfig\" 即可。"
 
 #: standalone/draksplash:30
 #, c-format
@@ -21305,9 +21281,9 @@ msgid "Unable to load image file %s"
 msgstr ""
 
 #: standalone/draksplash:174
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "選擇映像檔案        "
+msgstr "選擇核心映像檔案"
 
 #: standalone/draksplash:189
 #, c-format
@@ -21320,20 +21296,20 @@ msgid "Connected through a serial port or an usb cable"
 msgstr ""
 
 #: standalone/drakups:80
-#, fuzzy, c-format
+#, c-format
 msgid "Add an UPS device"
-msgstr "新增項目"
+msgstr "新增 UPS 裝置"
 
 #: standalone/drakups:83
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to the UPS configuration utility.\n"
 "\n"
 "Here, you'll add a new UPS to your system.\n"
 msgstr ""
-"歡迎來到郵件設定工具。\n"
+"歡迎來到 UPS 設定工具。\n"
 "\n"
-"在這裡, 您能夠設定您的警示通知的方式。\n"
+"在這裡, 您能夠為您的系統增加新的 UPS。\n"
 
 #: standalone/drakups:90
 #, c-format
@@ -21345,7 +21321,7 @@ msgid ""
 msgstr ""
 
 #: standalone/drakups:93
-#, fuzzy, c-format
+#, c-format
 msgid "Autodetection"
 msgstr "自動偵測"
 
@@ -21360,24 +21336,24 @@ msgid "The wizard successfully added the following UPS devices:"
 msgstr ""
 
 #: standalone/drakups:123
-#, fuzzy, c-format
+#, c-format
 msgid "No new UPS devices was found"
-msgstr "找不到印表機！"
+msgstr "找不到新的 UPS 裝置"
 
 #: standalone/drakups:128 standalone/drakups:140
-#, fuzzy, c-format
+#, c-format
 msgid "UPS driver configuration"
-msgstr "OKI Windows 印表機設定"
+msgstr "UPS 驅動程式設定"
 
 #: standalone/drakups:128
-#, fuzzy, c-format
+#, c-format
 msgid "Please select your UPS model."
-msgstr "請測試滑鼠"
+msgstr "請選擇您的 UPS 機型。"
 
 #: standalone/drakups:129
-#, fuzzy, c-format
+#, c-format
 msgid "Manufacturer / Model:"
-msgstr "印表機廠商,型號"
+msgstr "製造廠商 / 型號："
 
 #: standalone/drakups:140
 #, c-format
@@ -21392,9 +21368,9 @@ msgid "Name:"
 msgstr "名稱:"
 
 #: standalone/drakups:145
-#, fuzzy, c-format
+#, c-format
 msgid "The name of your ups"
-msgstr "裝置的廠商名稱"
+msgstr "您的 UPS 名稱"
 
 #: standalone/drakups:146
 #, c-format
@@ -21407,9 +21383,9 @@ msgid "Port:"
 msgstr "連接埠："
 
 #: standalone/drakups:149
-#, fuzzy, c-format
+#, c-format
 msgid "The port on which is connected your ups"
-msgstr "請選取您滑鼠連接的序列埠。"
+msgstr "請選取您的 UPS 連接的埠。"
 
 #: standalone/drakups:159
 #, c-format
@@ -21417,9 +21393,9 @@ msgid "The wizard successfully configured the new \"%s\" UPS device."
 msgstr ""
 
 #: standalone/drakups:250
-#, fuzzy, c-format
+#, c-format
 msgid "UPS devices"
-msgstr "Server 程式"
+msgstr "UPS 裝置"
 
 #: standalone/drakups:251 standalone/drakups:270 standalone/drakups:286
 #: standalone/harddrake2:85 standalone/harddrake2:111
@@ -21429,14 +21405,14 @@ msgid "Name"
 msgstr "名稱"
 
 #: standalone/drakups:269
-#, fuzzy, c-format
+#, c-format
 msgid "UPS users"
-msgstr "使用者"
+msgstr "UPS 使用者"
 
 #: standalone/drakups:285
-#, fuzzy, c-format
+#, c-format
 msgid "Access Control Lists"
-msgstr "存取網路工具"
+msgstr "存取控制清單"
 
 #: standalone/drakups:286
 #, c-format
@@ -21459,9 +21435,9 @@ msgid "Level"
 msgstr "難度"
 
 #: standalone/drakups:299
-#, fuzzy, c-format
+#, c-format
 msgid "ACL name"
-msgstr "LVM 名稱？"
+msgstr "ACL 名稱"
 
 #: standalone/drakups:329 standalone/drakups:333 standalone/drakups:342
 #, c-format
@@ -21653,9 +21629,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:311 standalone/drakvpn:671
-#, fuzzy, c-format
+#, c-format
 msgid "%s entries"
-msgstr ", 第 %s 磁區"
+msgstr "%s 項目"
 
 #: standalone/drakvpn:312
 #, c-format
@@ -21679,9 +21655,9 @@ msgid ""
 msgstr "顯示"
 
 #: standalone/drakvpn:319 standalone/drakvpn:680
-#, fuzzy, c-format
+#, c-format
 msgid "Commit"
-msgstr "緊密模式"
+msgstr "送出"
 
 #: standalone/drakvpn:333 standalone/drakvpn:337 standalone/drakvpn:695
 #: standalone/drakvpn:699
@@ -21722,24 +21698,24 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:362
-#, fuzzy, c-format
+#, c-format
 msgid "config setup"
-msgstr "重新設定"
+msgstr "調整設定"
 
 #: standalone/drakvpn:362
-#, fuzzy, c-format
+#, c-format
 msgid "conn %default"
-msgstr "預設"
+msgstr "conn 預設"
 
 #: standalone/drakvpn:362
-#, fuzzy, c-format
+#, c-format
 msgid "normal conn"
-msgstr "一般模式"
+msgstr "一般 conn"
 
 #: standalone/drakvpn:368 standalone/drakvpn:409 standalone/drakvpn:496
-#, fuzzy, c-format
+#, c-format
 msgid "Exists!"
-msgstr "離開"
+msgstr "已存在！"
 
 #: standalone/drakvpn:369 standalone/drakvpn:410
 #, c-format
@@ -21764,7 +21740,7 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:391
-#, fuzzy, c-format
+#, c-format
 msgid "interfaces"
 msgstr "介面"
 
@@ -21807,9 +21783,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:437
-#, fuzzy, c-format
+#, c-format
 msgid "PFS"
-msgstr "HFS"
+msgstr "PFS"
 
 #: standalone/drakvpn:438
 #, c-format
@@ -21941,9 +21917,9 @@ msgid "Section names"
 msgstr "連線名稱"
 
 #: standalone/drakvpn:576
-#, fuzzy, c-format
+#, c-format
 msgid "Can not edit!"
-msgstr "無法找到 %s (位於 %s)"
+msgstr "無法編輯！"
 
 #: standalone/drakvpn:577
 #, c-format
@@ -22051,7 +22027,7 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:721
-#, fuzzy, c-format
+#, c-format
 msgid "path"
 msgstr "路徑"
 
@@ -22076,9 +22052,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:732
-#, fuzzy, c-format
+#, c-format
 msgid "path type"
-msgstr "改變分割區格式"
+msgstr "路徑類型"
 
 #: standalone/drakvpn:736
 #, c-format
@@ -22365,14 +22341,14 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1019
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication algorithm"
-msgstr "認證方式"
+msgstr "認證演算法"
 
 #: standalone/drakvpn:1021
 #, c-format
 msgid "Compression algorithm"
-msgstr ""
+msgstr "壓縮演算法"
 
 #: standalone/drakvpn:1022
 #, fuzzy, c-format
@@ -22400,9 +22376,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1038
-#, fuzzy, c-format
+#, c-format
 msgid "Exchange mode"
-msgstr "撥接的模式"
+msgstr "交換模式"
 
 #: standalone/drakvpn:1040
 #, c-format
@@ -22450,9 +22426,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1062
-#, fuzzy, c-format
+#, c-format
 msgid "Passive"
-msgstr "路徑選擇"
+msgstr "被動的"
 
 #: standalone/drakvpn:1064
 #, c-format
@@ -22569,9 +22545,9 @@ msgid "Hash algorithm"
 msgstr ""
 
 #: standalone/drakvpn:1112
-#, fuzzy, c-format
+#, c-format
 msgid "DH group"
-msgstr "群組"
+msgstr "DH 群組"
 
 #: standalone/drakvpn:1119
 #, c-format
@@ -22581,12 +22557,12 @@ msgstr "指令"
 #: standalone/drakvpn:1120
 #, c-format
 msgid "Source IP range"
-msgstr ""
+msgstr "來源 IP 範圍"
 
 #: standalone/drakvpn:1121
 #, c-format
 msgid "Destination IP range"
-msgstr ""
+msgstr "目的 IP 範圍"
 
 #: standalone/drakvpn:1122
 #, fuzzy, c-format
@@ -22594,9 +22570,9 @@ msgid "Upper-layer protocol"
 msgstr "Europe 通訊協定"
 
 #: standalone/drakvpn:1122 standalone/drakvpn:1129
-#, fuzzy, c-format
+#, c-format
 msgid "any"
-msgstr "天"
+msgstr "任何"
 
 #: standalone/drakvpn:1124
 #, c-format
@@ -22634,19 +22610,19 @@ msgid "tunnel"
 msgstr "取消"
 
 #: standalone/drakvpn:1129
-#, fuzzy, c-format
+#, c-format
 msgid "transport"
-msgstr "測試連接埠"
+msgstr "傳輸"
 
 #: standalone/drakvpn:1131
-#, fuzzy, c-format
+#, c-format
 msgid "Source/destination"
-msgstr "工作站平台"
+msgstr "來源/目的"
 
 #: standalone/drakvpn:1132
 #, c-format
 msgid "require"
-msgstr ""
+msgstr "需要"
 
 #: standalone/drakvpn:1132
 #, c-format
@@ -22654,9 +22630,9 @@ msgid "default"
 msgstr "預設"
 
 #: standalone/drakvpn:1132
-#, fuzzy, c-format
+#, c-format
 msgid "use"
-msgstr "滑鼠"
+msgstr "使用"
 
 #: standalone/drakvpn:1132
 #, fuzzy, c-format
@@ -22813,12 +22789,12 @@ msgid "Bus identification"
 msgstr "匯流排描述"
 
 #: standalone/harddrake2:32
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
 msgstr ""
-"- PCI 與 USB 裝置：這列出了廠商名稱, 裝置名稱與附屬廠商等 PCI/USB IDS 資訊"
+"- PCI 與 USB 裝置：這列出了廠商名稱、裝置名稱、附屬廠商與 PCI/USB IDS 資訊"
 
 #: standalone/harddrake2:35
 #, c-format
@@ -22842,9 +22818,9 @@ msgid "special capacities of the driver (burning ability and or DVD support)"
 msgstr ""
 
 #: standalone/harddrake2:39
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
-msgstr "該裝置的欄位描述"
+msgstr "此欄位為裝置的描述"
 
 #: standalone/harddrake2:40
 #, c-format
@@ -22862,9 +22838,9 @@ msgid "New devfs device"
 msgstr "新的 devfs 裝置"
 
 #: standalone/harddrake2:43
-#, fuzzy, c-format
+#, c-format
 msgid "new dynamic device name generated by core kernel devfs"
-msgstr "由何新的 devfs 提供產生的動態新裝置名稱"
+msgstr "由核心的 devfs 產生的新動態裝置名稱"
 
 #. -PO: here "module" is the "jargon term" for a kernel driver
 #: standalone/harddrake2:46
@@ -22974,9 +22950,9 @@ msgid "PCI function number"
 msgstr "連線名稱"
 
 #: standalone/harddrake2:58
-#, fuzzy, c-format
+#, c-format
 msgid "Vendor ID"
-msgstr "廠商"
+msgstr "廠商 ID"
 
 #: standalone/harddrake2:58
 #, c-format
@@ -22984,9 +22960,9 @@ msgid "this is the standard numerical identifier of the vendor"
 msgstr ""
 
 #: standalone/harddrake2:59
-#, fuzzy, c-format
+#, c-format
 msgid "Device ID"
-msgstr "裝置： "
+msgstr "裝置 ID"
 
 #: standalone/harddrake2:59
 #, fuzzy, c-format
@@ -23014,9 +22990,9 @@ msgid "this is the minor numerical identifier of the device"
 msgstr "裝置的廠商名稱"
 
 #: standalone/harddrake2:62
-#, fuzzy, c-format
+#, c-format
 msgid "Device USB ID"
-msgstr "裝置： "
+msgstr "USB 裝置 ID"
 
 #: standalone/harddrake2:62
 #, c-format
@@ -23068,9 +23044,9 @@ msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "CPU 的家族 (例如：6 表示 i686 等級)"
 
 #: standalone/harddrake2:72
-#, fuzzy, c-format
+#, c-format
 msgid "Cpuid level"
-msgstr "安全等級"
+msgstr "CPUID 等級"
 
 #: standalone/harddrake2:72
 #, c-format
@@ -23241,14 +23217,14 @@ msgid "EIDE/SCSI channel"
 msgstr "EIDE/SCSI 通道"
 
 #: standalone/harddrake2:98
-#, fuzzy, c-format
+#, c-format
 msgid "Disk identifier"
-msgstr "印表機"
+msgstr "磁碟標識"
 
 #: standalone/harddrake2:98
 #, c-format
 msgid "usually the disk serial number"
-msgstr ""
+msgstr "通常是磁碟的序號"
 
 #: standalone/harddrake2:99
 #, fuzzy, c-format
@@ -23285,9 +23261,9 @@ msgid "Enabled size of the memory bank"
 msgstr ""
 
 #: standalone/harddrake2:108
-#, fuzzy, c-format
+#, c-format
 msgid "type of the memory device"
-msgstr "裝置的廠商名稱"
+msgstr "記憶體裝置的類型"
 
 #: standalone/harddrake2:109
 #, c-format
@@ -23351,9 +23327,9 @@ msgid "the number of buttons the mouse has"
 msgstr "滑鼠所擁有的按鍵數"
 
 #: standalone/harddrake2:120
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "請選取您滑鼠連接的序列埠。"
+msgstr "請選取您的滑鼠所連接的埠"
 
 #: standalone/harddrake2:121
 #, c-format
@@ -23378,9 +23354,9 @@ msgid "Connection"
 msgstr "連線"
 
 #: standalone/harddrake2:138
-#, fuzzy, c-format
+#, c-format
 msgid "Performances"
-msgstr "偏好"
+msgstr "效能"
 
 #: standalone/harddrake2:139
 #, fuzzy, c-format
@@ -23494,16 +23470,16 @@ msgid ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 msgstr ""
-"這是 HardDrake 程式, Mandriva Linux 所發展的硬體檢視設定工具。\n"
+"這是 HardDrake ，一個 %s 硬體檢視設定工具。\n"
 "<span foreground=\"royalblue3\">版本：</span> %s\n"
 "<span foreground=\"royalblue3\">作者:</span> Thierry Vignaud &lt;"
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
 #: standalone/harddrake2:242
-#, fuzzy, c-format
+#, c-format
 msgid "Harddrake2"
-msgstr "HardDrake 硬體偵測設定"
+msgstr "HardDrake2"
 
 #: standalone/harddrake2:256
 #, c-format
@@ -23546,12 +23522,12 @@ msgstr ""
 #: standalone/harddrake2:394
 #, c-format
 msgid "secondary"
-msgstr ""
+msgstr "次要的"
 
 #: standalone/harddrake2:394
 #, c-format
 msgid "primary"
-msgstr ""
+msgstr "主要的"
 
 #: standalone/harddrake2:398
 #, c-format
@@ -23566,7 +23542,7 @@ msgstr "DVD"
 #: standalone/harddrake2:545 standalone/harddrake2:548
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
+msgstr "上傳硬體清單"
 
 #: standalone/harddrake2:550
 #, c-format
@@ -23793,7 +23769,7 @@ msgid "Xinetd Service"
 msgstr "Xinetd 服務"
 
 #: standalone/logdrake:394
-#, fuzzy, c-format
+#, c-format
 msgid "Configure the mail alert system"
 msgstr "設定郵件警示系統"
 
@@ -23853,7 +23829,7 @@ msgid ""
 msgstr ""
 
 #: standalone/logdrake:428
-#, fuzzy, c-format
+#, c-format
 msgid "Alert configuration"
 msgstr "警示設定"
 
@@ -23931,7 +23907,7 @@ msgstr "監控網路"
 #: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "管理無線網路"
 
 #: standalone/net_applet:61
 #, c-format
@@ -23939,14 +23915,14 @@ msgid "Configure Network"
 msgstr "設定網路"
 
 #: standalone/net_applet:63
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "介面"
+msgstr "監控的介面"
 
 #: standalone/net_applet:72
 #, c-format
 msgid "Profiles"
-msgstr ")定檔案"
+msgstr "自訂檔案"
 
 #: standalone/net_applet:81
 #, c-format
@@ -23956,7 +23932,7 @@ msgstr "取得線上說明"
 #: standalone/net_applet:305
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "互動式防火牆自動模式"
 
 #: standalone/net_applet:310
 #, c-format
@@ -23964,9 +23940,9 @@ msgid "Always launch on startup"
 msgstr "總是在啟動時執行"
 
 #: standalone/net_applet:314
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "無線網路連線"
+msgstr "無線網路"
 
 #: standalone/net_applet:398
 #, fuzzy, c-format
@@ -23974,9 +23950,9 @@ msgid "Interactive Firewall: intrusion detected"
 msgstr "防火牆設定已經偵測到了!"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "您要將攻擊者列入黑名單嗎？"
+msgstr "您要如何處理這個攻擊者？"
 
 #: standalone/net_applet:414
 #, c-format
@@ -24150,7 +24126,7 @@ msgid "Local measure"
 msgstr "LocaleDrake"
 
 #: standalone/net_monitor:461
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Warning, another internet connection has been detected, maybe using your "
 "network"
@@ -24215,9 +24191,9 @@ msgid "/_Configure CUPS"
 msgstr "/設定 _CUPS"
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "遠端管理"
+msgstr "/設定自動管理"
 
 #: standalone/printerdrake:194
 #, c-format
@@ -24448,7 +24424,7 @@ msgstr "安裝韌體檔，由"
 #: standalone/scannerdrake:200
 #, c-format
 msgid "Select firmware file"
-msgstr "選擇韌體案"
+msgstr "選擇韌體檔案"
 
 #: standalone/scannerdrake:203 standalone/scannerdrake:262
 #, c-format
@@ -24477,9 +24453,9 @@ msgid ""
 msgstr ""
 
 #: standalone/scannerdrake:235
-#, fuzzy, c-format
+#, c-format
 msgid "Install firmware for the"
-msgstr "安裝"
+msgstr "安裝軔體給"
 
 #: standalone/scannerdrake:258
 #, c-format
@@ -24510,9 +24486,9 @@ msgstr ""
 
 #: standalone/scannerdrake:308 standalone/scannerdrake:315
 #: standalone/scannerdrake:345
-#, fuzzy, c-format
+#, c-format
 msgid "Auto-detect available ports"
-msgstr "自動偵測印表機 (_P)"
+msgstr "自動偵測可用的埠"
 
 #: standalone/scannerdrake:310 standalone/scannerdrake:356
 #, c-format
@@ -24736,14 +24712,14 @@ msgid "You must enter a host name or an IP address.\n"
 msgstr "請輸入主機名稱或是 IP\n"
 
 #: standalone/scannerdrake:727 standalone/scannerdrake:877
-#, fuzzy, c-format
+#, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "這個主機/網路已經存在於列表中，無法重複新增\n"
+msgstr "這個主機已經存在於列表中，無法重複新增\n"
 
 #: standalone/scannerdrake:782
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "使用未用到的空間"
+msgstr "使用遠端的掃描器"
 
 #: standalone/scannerdrake:783
 #, c-format
@@ -24751,17 +24727,20 @@ msgid "These are the machines from which the scanners should be used:"
 msgstr ""
 
 #: standalone/scannerdrake:940
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
 "\n"
 "Do you want to install the saned package?"
-msgstr "這個 %s 套件需要安裝上, 您要安裝該套件嗎？"
+msgstr ""
+"需要安裝 saned 套件以便分享本機掃描器。\n"
+"\n"
+"您要安裝 saned 套件嗎？"
 
 #: standalone/scannerdrake:944 standalone/scannerdrake:948
-#, fuzzy, c-format
+#, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr "您的掃描器將只供擁有管理者權限的使用者使用。"
+msgstr "您的掃描器將無法從網路上使用。"
 
 #: standalone/service_harddrake:105
 #, c-format
@@ -24774,9 +24753,9 @@ msgid "- %s was removed\n"
 msgstr ""
 
 #: standalone/service_harddrake:109
-#, fuzzy, c-format
+#, c-format
 msgid "Some devices were added: %s\n"
-msgstr "滑鼠裝置: %s\n"
+msgstr "新增了一些裝置: %s\n"
 
 #: standalone/service_harddrake:110
 #, c-format
@@ -24784,9 +24763,9 @@ msgid "- %s was added\n"
 msgstr ""
 
 #: standalone/service_harddrake:207
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware probing in progress"
-msgstr "正在偵測中"
+msgstr "硬體偵測正在進行中"
 
 #: standalone/service_harddrake_confirm:7
 #, c-format
@@ -24794,9 +24773,9 @@ msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
 msgstr ""
 
 #: standalone/service_harddrake_confirm:8
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to run the appropriate config tool?"
-msgstr "您想要測試設定值嗎?"
+msgstr "您想要執行適合的設定工具嗎?"
 
 #: steps.pm:14
 #, c-format
@@ -24896,27 +24875,27 @@ msgstr "這樣子正確嗎？"
 #: ugtk2.pm:979
 #, c-format
 msgid "No file chosen"
-msgstr ""
+msgstr "未選擇檔案"
 
 #: ugtk2.pm:981
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr ""
+msgstr "您選擇了檔案而非目錄"
 
 #: ugtk2.pm:983
 #, c-format
 msgid "You have chosen a directory, not a file"
-msgstr ""
+msgstr "您選擇了目錄而非檔案"
 
 #: ugtk2.pm:985
 #, c-format
 msgid "No such directory"
-msgstr ""
+msgstr "無此目錄"
 
 #: ugtk2.pm:985
-#, fuzzy, c-format
+#, c-format
 msgid "No such file"
-msgstr "本地端檔案"
+msgstr "無此檔案"
 
 #: ugtk2.pm:1066
 #, c-format
@@ -24959,53 +24938,83 @@ msgstr "安裝失敗"
 #~ msgid "Installing package %s"
 #~ msgstr "正在安裝套件 %s"
 
+#~ msgid "Connect to the Internet"
+#~ msgstr "連線到 Internet"
+
+#~ msgid ""
+#~ "The most common way to connect with adsl is pppoe.\n"
+#~ "Some connections use PPTP, a few use DHCP.\n"
+#~ "If you do not know, choose 'use PPPoE'"
+#~ msgstr ""
+#~ "最常連線到 ADSL 的方法就是使用 pppoe.\n"
+#~ "有些連線是使用 PPTP, 有些事使用 DHCP.\n"
+#~ "若是您不清楚的話, 選擇 '使用 PPPoE'"
+
 #~ msgid "<b>What is Mandriva Linux?</b>"
 #~ msgstr "<b>Mandriva Linux 是什麼？</b>"
 
 #~ msgid "Welcome to <b>Mandriva Linux</b>!"
 #~ msgstr "歡迎來到 <b>Mandriva Linux</b>!"
 
-#, fuzzy
 #~ msgid "<b>Open Source</b>"
-#~ msgstr "<b>伺服器</b>"
+#~ msgstr "<b>開放原始碼</b>"
 
-#, fuzzy
 #~ msgid "Welcome to the <b>world of open source</b>!"
-#~ msgstr "歡迎來到開放源碼的世界。"
+#~ msgstr "歡迎來到<b>開放原始碼的世界</b>！"
 
-#, fuzzy
+#~ msgid "<b>The GPL</b>"
+#~ msgstr "<b>The GPL</b>"
+
+#~ msgid "<b>Join the Community</b>"
+#~ msgstr "<b>參與社群</b>"
+
+#~ msgid "<b>Download Version</b>"
+#~ msgstr "<b>下載版本</b>"
+
+#~ msgid "<b>Discovery, Your First Linux Desktop</b>"
+#~ msgstr "<b>Discovery, 您的第一個 Linux 桌面</b>"
+
+#~ msgid "You are now installing <b>Mandriva Linux Discovery</b>."
+#~ msgstr "您正在安裝 <b>Mandriva Linux Discovery</b>."
+
+#~ msgid "<b>PowerPack, The Ultimate Linux Desktop</b>"
+#~ msgstr "<b>PowerPack, 終極的 Linux 桌面</b>"
+
+#~ msgid "You are now installing <b>Mandriva Linux PowerPack</b>."
+#~ msgstr "您正在安裝 <b>Mandriva Linux PowerPack</b>."
+
+#~ msgid "<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"
+#~ msgstr "<b>PowerPack+, 桌面和伺服器的 Linux 解決方案</b>"
+
+#~ msgid "You are now installing <b>Mandriva Linux PowerPack+</b>."
+#~ msgstr "您正在安裝 <b>Mandriva Linux PowerPack+</b>."
+
 #~ msgid "<b>Mandriva Products</b>"
-#~ msgstr "Mandriva Linux 控制中心"
+#~ msgstr "<b>Mandriva 的產品線</b>"
 
-#, fuzzy
 #~ msgid "<b>Choose your Favorite Desktop Environment</b>"
-#~ msgstr "選擇您檔案系統所使用的加密金鑰"
+#~ msgstr "<b>選擇您最喜歡的桌面環境</b>"
 
-#, fuzzy
 #~ msgid "<b>OpenOffice.org</b>"
-#~ msgstr "OpenOffice.org Math"
+#~ msgstr "<b>OpenOffice.org</b>"
 
-#, fuzzy
 #~ msgid "<b>Kontact</b>"
-#~ msgstr "<b>Mandriva Club</b>"
+#~ msgstr "<b>Kontact</b>"
 
 #~ msgid "<b>Surf the Internet</b>"
 #~ msgstr "<b>漫遊瀏覽網際網路</b>"
 
-#, fuzzy
 #~ msgid "\t* <b>Transfer</b> files with KBear."
-#~ msgstr "以 FTP 傳輸檔案"
+#~ msgstr "\t* 以 KBear <b>傳輸</b>檔案。"
 
 #~ msgid "<b>Development Environments</b>"
 #~ msgstr "<b>開發環境</b>"
 
-#, fuzzy
 #~ msgid "<b>Development Editors</b>"
-#~ msgstr "程式開發平台"
+#~ msgstr "<b>程式開發編輯器</b>"
 
-#, fuzzy
 #~ msgid "<b>Development Languages</b>"
-#~ msgstr "程式開發平台"
+#~ msgstr "<b>程式開發語言</b>"
 
 #~ msgid "\t\t* <b>C++</b>"
 #~ msgstr "\t\t* <b>C++</b>"
@@ -25013,9 +25022,8 @@ msgstr "安裝失敗"
 #~ msgid "\t\t* <b>Java™</b>"
 #~ msgstr "\t\t* <b>Java™</b>"
 
-#, fuzzy
 #~ msgid "\t* Scripting languages:"
-#~ msgstr "列印管理程式"
+#~ msgstr "\t* 命令稿語言："
 
 #~ msgid "\t\t* <b>Perl</b>"
 #~ msgstr "\t\t* <b>Perl</b>"
@@ -25023,27 +25031,23 @@ msgstr "安裝失敗"
 #~ msgid "\t\t* <b>Python</b>"
 #~ msgstr "\t\t* <b>Python</b>"
 
-#, fuzzy
 #~ msgid "<b>Development Tools</b>"
-#~ msgstr "程式開發平台"
+#~ msgstr "<b>程式開發工具</b>"
 
-#, fuzzy
 #~ msgid "<b>Groupware Server</b>"
-#~ msgstr "<b>伺服器</b>"
+#~ msgstr "<b>群組軟體伺服器</b>"
 
 #~ msgid "<b>Servers</b>"
 #~ msgstr "<b>伺服器</b>"
 
-#, fuzzy
 #~ msgid "\t* <b>Apache</b>: The most widely used web server."
-#~ msgstr "Apache WWW 伺服器"
+#~ msgstr "\t* <b>Apache</b>: 最廣泛使用的網路伺服器。"
 
 #~ msgid "<b>Mandriva Linux Control Center</b>"
 #~ msgstr "<b>Mandriva Linux 控制中心</b>"
 
-#, fuzzy
 #~ msgid "<b>Online Store</b>"
-#~ msgstr "Mandriva Linux 控制中心"
+#~ msgstr "<b>線上網路商店</b>"
 
 #~ msgid "<b>Mandriva Club</b>"
 #~ msgstr "<b>Mandriva Club</b>"
@@ -25091,19 +25095,7 @@ msgstr "安裝失敗"
 #~ msgstr "文字寬度                                      "
 
 #~ msgid "ProgressBar color selection"
-#~ msgstr "進度巴色彩選擇"
-
-#~ msgid "Connect to the Internet"
-#~ msgstr "連線到 Internet"
-
-#~ msgid ""
-#~ "The most common way to connect with adsl is pppoe.\n"
-#~ "Some connections use PPTP, a few use DHCP.\n"
-#~ "If you do not know, choose 'use PPPoE'"
-#~ msgstr ""
-#~ "最常連線到 ADSL 的方法就是使用 pppoe.\n"
-#~ "有些連線是使用 PPTP, 有些事使用 DHCP.\n"
-#~ "若是您不清楚的話, 選擇 '使用 PPPoE'"
+#~ msgstr "進度條色彩選擇"
 
 #~ msgid "Do not print any test page"
 #~ msgstr "不要列印任何測試頁"
