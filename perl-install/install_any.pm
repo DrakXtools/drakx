@@ -464,7 +464,7 @@ sub selectSupplMedia {
 	}->{$suppl};
 	my $medium_name = int(keys %{$o->{packages}{mediums}}) + 1;
 	#- configure network if needed
-	prep_net_suppl_media($o) if !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/;
+	prep_net_suppl_media($o) if !scalar keys %{$o->{net}{ifcfg}} && $suppl_method !~ /^(?:cdrom|disk)/;
 	local $::isWizard = 0;
 	local $o->{method} = $suppl_method;
 	my $postinstall_rpms_tmp = $postinstall_rpms;
