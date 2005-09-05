@@ -42,7 +42,7 @@ sub ask_authentication() {
     authentication::set_root_passwd($superuser, $authentication);
 
     eval { 
-	authentication::set($in, $net, $authentication);
+	authentication::set($in, $net, $authentication) or goto &ask_authentication;
 	network::network::write_network_conf($net);
     };
     if (my $err = $@) {

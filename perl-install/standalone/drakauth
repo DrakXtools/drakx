@@ -29,7 +29,7 @@ $in->ask_from(N("Authentication"), authentication::kind2description(@kinds),
 authentication::ask_parameters($in, $net, $authentication, $kind) or goto main;
 
 eval { 
-    authentication::set($in, $net, $authentication);
+    authentication::set($in, $net, $authentication) or goto main;
     network::network::write_network_conf($net); #- for NISDOMAIN
 };
 if (my $err = $@) {
