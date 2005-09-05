@@ -101,7 +101,7 @@ sub ports_by_proto {
     my ($ports) = @_;
     my %ports_by_proto;
     foreach (split ' ', $ports) {
-	m!^(\d+(?:\d+)?)/(udp|tcp|icmp)$! or die "bad port $_\n";
+	m!^(\d+(?::\d+)?)/(udp|tcp|icmp)$! or die "bad port $_\n";
 	push @{$ports_by_proto{$2}}, $1;
     }
     \%ports_by_proto;
