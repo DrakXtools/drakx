@@ -1137,7 +1137,9 @@ sub summary {
     };
 
     my $check_complete = sub {
-	$o->{raw_X} || !$::testing && !pkgs::packageByName($o->{packages}, 'xorg-x11')->flag_installed ||
+	require pkgs;
+	my $p = pkgs::packageByName($o->{packages}, 'xorg-x11');
+	$o->{raw_X} || !$::testing && $p && !$p->flag_installed ||
 	$o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"));
     };
 
