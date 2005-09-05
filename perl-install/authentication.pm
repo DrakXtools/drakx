@@ -143,7 +143,7 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 	$authentication->{AD_domain} ||= $net->{resolv}{DOMAINNAME} if $kind eq 'SMBKRB';
 	 $authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain}) if $kind eq 'SMBKRB';
 	$authentication->{WINDOMAIN} ||= $net->{resolv}{DOMAINNAME};
-	my $anonymous;
+
 	$in->ask_from('',
 		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
 		        [ if_($kind eq 'SMBKRB', 
@@ -225,7 +225,7 @@ sub set {
 
     if ($kind eq 'local') {
     } elsif ($kind eq 'SmartCard') {
-	$in->do_pkgs->ensure_are_installed([ 'castella-pam'], 1) or return;
+	$in->do_pkgs->ensure_are_installed([ 'castella-pam' ], 1) or return;
     } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->ensure_are_installed([ qw(openldap-clients nss_ldap pam_ldap autofs) ]) or return;
 
