@@ -464,7 +464,7 @@ sub installPackages {
 			 });
 
     ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
-	gtknew('Image', file_ref => \$advertising_image, show_ref => \$show_advertising),
+	gtknew('Image_using_pixmap', file_ref => \$advertising_image, show_ref => \$show_advertising),
     ]));
 
     $box->pack_end(gtkshow(gtknew('VBox', border_width => 7, spacing => 3, children_loose => [
