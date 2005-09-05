@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.53mdk
+Release: 0.54mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep  5 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.54mdk
+- drakauth, finish-install: handle required package(s) not installed
+  correctly (pixel, #18180)
+- drakconnect: set SSID for rt2400/rt2500 cards using WPA with an
+  iwpriv command (blino, #18205)
+- printerdrake (till):
+  o fix printer list filtering in the main window
+  o prevent auto-refreshing to happen while refreshing
+  o auto-refresh the list of remote printers in the main windows every
+    5 seconds.
+
 * Sat Sep  3 2005 Olivier Blin <oblin@mandriva.com> 10.3-0.53mdk
 - printerdrake (Till):
   o let also network printers be found which do not answer to a
