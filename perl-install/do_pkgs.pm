@@ -27,6 +27,21 @@ sub ensure_is_installed {
     1;
 }
 
+sub ensure_are_installed {
+    my ($do, $pkgs, $b_auto) = @_;
+
+    my @not_installed = difference2($pkgs, [ $do->are_installed(@$pkgs) ]) or return 1;
+
+    $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
+	  or return if !$b_auto;
+
+    if (!$do->install(@not_installed)) {
+	$do->in->ask_warn(N("Error"), N("Could not install the %s package!", $not_installed[0]));
+	return;
+    }
+    1;
+}
+
 sub ensure_binary_is_installed {
     my ($do, $pkg, $binary, $b_auto) = @_;
 
