@@ -65,7 +65,7 @@ sub spooler() {
 
     return map { $spoolers{$_}{long_name} } ('cups', 'rcups' , 
     if_(files_exist(qw(/usr/bin/pdq)), 'pdq'),
-    if_(files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd)), 'lprng'));
+    if_(files_exist("/usr/$lib/filters/lpf", "/usr/sbin/lpd"), 'lprng'));
 }
 
 sub printer_type($) {
@@ -2785,8 +2785,8 @@ sub start_hplip {
 	foreach my $a (@autodetected) {
 	    $device eq $a->{port} or next;
 	    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-		 '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
-		 die 'Could not run "/usr/lib/cups/backend/hp"!';
+		 "/bin/sh -c \"export LC_ALL=C; /usr/$lib/cups/backend/hp\" |") or
+		 die "Could not run \"/usr/$lib/cups/backend/hp\"!";
 	    while (my $line = <$F>) {
 		if (($line =~ m!^direct\s+(hp:/$bus/(\S+?)\?serial=(\S+))\s+!) ||
 		    ($line =~ m!^direct\s+(hp:/$bus/(\S+?)\?device=()(\S+))\s+!) ||
@@ -2820,8 +2820,8 @@ sub start_hplip_manual {
 
     # Return all possible device URIs
     open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-	 '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
-	 die 'Could not run "/usr/lib/cups/backend/hp"!';
+	 "/bin/sh -c \"export LC_ALL=C; /usr/$lib/cups/backend/hp\" |") or
+	 die "Could not run \"/usr/$lib/cups/backend/hp\"!";
     my @uris;
     while (<$F>) {
         m!^direct\s+(hp:\S+)\s+!;

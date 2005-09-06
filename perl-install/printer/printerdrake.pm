@@ -2537,10 +2537,10 @@ sub setup_common {
 		if ($hplipentry->{scan}) {
 		    # Install SANE
 		    if (!$::testing &&
-			(!files_exist(qw(/usr/bin/scanimage
-					/usr/bin/xscanimage
-					/etc/sane.d/dll.conf
-					/usr/lib/libsane-hpaio.so.1)) ||
+			(!files_exist("/usr/bin/scanimage",
+				      "/usr/bin/xscanimage",
+				      "/etc/sane.d/dll.conf",
+				      "/usr/$lib/libsane-hpaio.so.1") ||
 			 (!files_exist(qw(/usr/bin/xsane)) &&
 			  !files_exist(qw(/usr/bin/kooka)) &&
 			  ($::isInstall ||
@@ -2650,10 +2650,10 @@ sub setup_common {
 			$makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
 			# Install SANE
 			if (!$::testing &&
-			    (!files_exist(qw(/usr/bin/scanimage
-					     /usr/bin/xscanimage
-					     /etc/sane.d/dll.conf
-					     /usr/lib/libsane-hpoj.so.1)) ||
+			    (!files_exist("/usr/bin/scanimage",
+					  "/usr/bin/xscanimage",
+					  "/etc/sane.d/dll.conf",
+					  "/usr/$lib/libsane-hpoj.so.1") ||
 			     (!files_exist(qw(/usr/bin/xsane)) &&
 			      !files_exist(qw(/usr/bin/kooka)) &&
 			      ($::isInstall ||
@@ -5130,8 +5130,8 @@ sub mainwindow_interactive {
 		  val => N("CUPS configuration") } : ()),
 	      ($printer->{expert} && 
 	       (files_exist(qw(/usr/bin/pdq)) ||
-		files_exist(qw(/usr/lib/filters/lpf 
-			       /usr/sbin/lpd))) ?
+		files_exist("/usr/$lib/filters/lpf", 
+			    "/usr/sbin/lpd")) ?
 	       { clicked_may_quit =>
 		     sub {
 			 # Save the cursor position

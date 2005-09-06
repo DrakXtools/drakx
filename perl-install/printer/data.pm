@@ -6,7 +6,7 @@ use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv
-	     $kernelversion $usbprintermodule
+	     $kernelversion $usbprintermodule $lib
 	     $commonpackages $gimpprintingpackages $gnomecupspackages
 	     $localqueuepackages);
 
@@ -18,13 +18,16 @@ chomp $kernelversion;
 
 our $usbprintermodule = ($kernelversion eq '2.6' ? "usblp" : "printer");
 
+# Architecture-specific data
+our $lib = arch() =~ /x86_64/ ? "lib64" : "lib";
+
 # Packages which are always needed to run printerdrake
 our $commonpackages = [ [ 'foomatic-db-engine' ], 
 			[ '/usr/bin/foomatic-configure' ] ];
 
 # Packages which are needed to print with the GIMP
 our $gimpprintingpackages = [ [ 'gutenprint-gimp2' ], 
-			      [ '/usr/lib/gimp/2.0/plug-ins/print' ] ];
+			      [ "/usr/$lib/gimp/2.0/plug-ins/print" ] ];
 
 # Packages which are needed for CUPS under GNOME
 our $gnomecupspackages = [ [ 'desktop-printing' ], 
@@ -85,7 +88,7 @@ our %spoolers = ('pdq' => {
                                                 /sbin/ifconfig
                                                 /usr/bin/a2ps
                                                 /usr/bin/convert)] ],
-                        'packages2rm' => [ 'LPRng', '/usr/lib/filters/lpf' ],
+                        'packages2rm' => [ 'LPRng', "/usr/$lib/filters/lpf" ],
                         'alternatives' => [
                             [ 'lpr', '/usr/bin/lpr-lpd' ],
                             [ 'lpq', '/usr/bin/lpq-lpd' ],
@@ -102,11 +105,11 @@ our %spoolers = ('pdq' => {
 		     'service' => 'lpd',
 		     'local_queues' => 1,
 		     'packages2add' => [ [qw(LPRng net-tools a2ps ImageMagick)],
-					 [qw(/usr/lib/filters/lpf
-					     /usr/sbin/lpd
-					     /sbin/ifconfig
-					     /usr/bin/a2ps
-					     /usr/bin/convert)] ],
+					 ["/usr/$lib/filters/lpf",
+					  "/usr/sbin/lpd",
+					  "/sbin/ifconfig",
+					  "/usr/bin/a2ps",
+					  "/usr/bin/convert"] ],
 		     'packages2rm' => [ 'lpr', '/usr/sbin/lpf' ],
 		     'alternatives' => [
 					[ 'lpr', '/usr/bin/lpr-lpd' ],
@@ -129,11 +132,11 @@ our %spoolers = ('pdq' => {
 		     'local_queues' => 1,
 		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups',
 					  $::isInstall ? 'curl' : 'webfetch'],
-					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
-					      /sbin/ifconfig
-					      /usr/bin/xpp
-					      /usr/lib/cups/filter/rastertolxx74 
-					      /usr/lib/cups/filter/commandtoepson),
+					 [ "/usr/$lib/cups/cgi-bin/printers.cgi",
+					   "/sbin/ifconfig",
+					   "/usr/bin/xpp",
+					   "/usr/$lib/cups/filter/rastertolxx74", 
+					   "/usr/$lib/cups/filter/commandtoepson",
 					   $::isInstall ||
 					   !(-x '/usr/bin/wget') ?
 					   '/usr/bin/curl' :
