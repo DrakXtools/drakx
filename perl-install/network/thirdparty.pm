@@ -261,6 +261,18 @@ sub find_settings {
     } @{$network_settings{$category}};
 }
 
+sub device_run_command {
+    my ($settings, $option) = @_;
+    my $command = $settings->{$option} or return;
+
+    if (ref $command eq 'CODE') {
+        $command->();
+    } else {
+        log::explanations("Running $option command $command");
+        run_program::rooted($::prefix, $command);
+    }
+}
+
 sub warn_not_installed {
     my ($in, @packages) = @_;
     $in->ask_warn(N("Error"), N("Could not install the packages (%s)!", @packages));
@@ -432,12 +444,8 @@ sub setup_device {
 	    services::restart_or_start($service);
 	}
 
-	if (my $post = $settings->{post}) {
-	    my $_w = $in->wait_message('', N("Please wait, running device configuration commands..."));
-	    log::explanations("Running post-install command $post");
-	    run_program::rooted($::prefix, $post);
-	}
-
+        my $_wait = $in->wait_message('', N("Please wait, running device configuration commands..."));
+        device_run_command($settings, 'post');
 	log::explanations(qq(Settings for driver "$driver" applied));
     } else {
 	log::explanations(qq(No settings found for driver "$driver" in category "$category"));
