@@ -67,7 +67,7 @@ our %l = (
       qw(fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ)
     ],
     modem => [
-      qw(ltmodem mwave ),
+      qw(ltmodem mwave sm56),
     ],
     slmodem => [
       qw(slamr slusb snd-ali5451 snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
