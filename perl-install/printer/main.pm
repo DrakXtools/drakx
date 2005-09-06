@@ -753,19 +753,22 @@ sub set_cups_special_options {
     my @lpoptions = cat_("$::prefix/etc/cups/lpoptions");
     # If nothing is already configured, set text file borders of half
     # an inch so nothing of the text gets cut off by unprintable
-    # borders. Do this only when the driver is not Gutenprint, as with
-    # Gutenprint this will break PostScript printing
+    # borders. Do this only when the driver is not Gutenprint or HPIJS, as 
+    # both drivers decent border settings are already done and with
+    # Gutenprint this will even break PostScript printing
     if ((($queue eq $printer->{currentqueue}{$queue}) &&
-	 (($printer->{currentqueue}{driver} =~ /guten.*print/i) ||
-	  ($printer->{currentqueue}{ppd} =~ /guten.*print/i))) ||
+	 (($printer->{currentqueue}{driver} =~
+	   /(guten.*print|hpijs|hplip)/i) ||
+	  ($printer->{currentqueue}{ppd} =~
+	   /(guten.*print|hpijs|hplip)/i))) ||
 	((defined($printer->{configured}{$queue})) &&
 	 (($printer->{configured}{$queue}{queuedata}{driver} =~
-	   /guten.*print/i) ||
+	   /(guten.*print|hpijs|hplip)/i) ||
 	  ($printer->{configured}{$queue}{queuedata}{ppd} =~
-	   /guten.*print/i))) ||
+	   /(guten.*print|hpijs|hplip)/i))) ||
 	(($printer->{SPOOLER} eq "cups") &&
 	 (-r "$::prefix/etc/cups/ppd/$queue.ppd") &&
-	 (`grep -ic gutenprint $::prefix/etc/cups/ppd/$queue.ppd` > 2))) {
+	 (`egrep -ic '(gutenprint|hpijs|hplip)' $::prefix/etc/cups/ppd/$queue.ppd` > 2))) {
 	# Remove page margin settings
 	foreach (@lpoptions) {
 	    s/\s*page-(top|bottom|left|right)=\S+//g if /$queue/;
@@ -2684,6 +2687,11 @@ sub hplip_device_entry {
 	    return $entry;
 	}
 	my $hpmodelstr = "HP_" . $modelstr;
+	if ($entry = $hplipdevicesdb->{$hpmodelstr}) {
+	    # Exact match
+	    return $entry;
+	}
+	my $hpmodelstr = "hp_" . $modelstr;
 	if ($entry = $hplipdevicesdb->{$hpmodelstr}) {
 	    # Exact match
 	    return $entry;
