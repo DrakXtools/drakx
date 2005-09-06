@@ -509,7 +509,43 @@ sub getSNMPModel {
     # Was there a manufacturer and a model in the output?
     # If not, get them from the description
     if ($manufacturer eq "" || $model eq "") {
-	if ($description =~ /^\s*(\S*)\s+(\S.*)$/) {
+	# Replace bad description
+	if ((length($description) < 5) &&
+	    (length($description) >= 5)) {
+	    $description = $model;
+	}
+	# Guess manufacturer by model name
+	if ($description =~
+	    /^\s*(DeskJet|LaserJet|OfficeJet|PSC|PhotoSmart)\b/i) {
+	    # HP printer
+	    $manufacturer = "HP";
+	    $model = $description;
+	} elsif ($description =~
+	    /^\s*(Stylus|EPL|AcuLaser)\b/i) {
+	    # Epson printer
+	    $manufacturer = "Epson";
+	    $model = $description;
+	} elsif ($description =~
+	    /^\s*(Aficio)\b/i) {
+	    # Ricoh printer
+	    $manufacturer = "Ricoh";
+	    $model = $description;
+	} elsif ($description =~
+	    /^\s*(Optra|Color\s+JetPrinter)\b/i) {
+	    # Lexmark printer
+	    $manufacturer = "Lexmark";
+	    $model = $description;
+	} elsif ($description =~
+	    /^\s*(imageRunner|Pixma|Pixus|BJC|LBP)\b/i) {
+	    # Canon printer
+	    $manufacturer = "Canon";
+	    $model = $description;
+	} elsif ($description =~
+	    /^\s*(Phaser|DocuPrint|(Work|Document)\s*(Home|)Centre)\b/i) {
+	    # Xerox printer
+	    $manufacturer = "Xerox";
+	    $model = $description;
+	} elsif ($description =~ /^\s*(\S*)\s+(\S.*)$/) {
 	    $manufacturer = $1 if $manufacturer eq "";
 	    $model = $2 if $model eq "";
 	}
