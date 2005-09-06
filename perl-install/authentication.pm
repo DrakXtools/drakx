@@ -115,7 +115,7 @@ sub ask_parameters {
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
 		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { $anonymous } },
-		       { label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
+		       #{ label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
 		     ]) or return;
 	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
 	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$authentication->{AD_domain}";
@@ -147,7 +147,7 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
 	$in->ask_from('',
 		      $kind eq 'SMBKRB' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
 		        [ if_($kind eq 'SMBKRB', 
-			  { label => N("Domain"), val => \$authentication->{AD_domain} }
+			  { label => N("Active Directory Realm "), val => \$authentication->{AD_domain} }
 			     ),
 			  { label => N("Windows Domain"), val => \$authentication->{WINDOMAIN} },
 			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
