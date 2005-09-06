@@ -462,7 +462,7 @@ sub choosePackages {
     undef $w;
     if ($min_size >= $availableC) {
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
-			   $min_size, $availableC));
+			   $min_size / sqr(1024), $availableC / sqr(1024)));
 	install_steps::rebootNeeded($o);
     }
 
