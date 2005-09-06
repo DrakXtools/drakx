@@ -2405,13 +2405,13 @@ sub setup_common {
     my $ptaldevice = "";
     my $isHPOJ = 0;
     my $isHPLIP = 0;
+    my $searchunknown = N("Unknown model");
     my $w;
     if ($device =~ m!^/dev/! || $device =~ m!^socket://!) {
 	# Ask user whether he has a multi-function device when he did not
 	# do auto-detection or when auto-detection failed
-	my $searchunknown = N("Unknown model");
 	if (!$do_auto_detect ||
-	    $makemodel eq $searchunknown ||
+	    $makemodel =~ /$searchunknown/ ||
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
@@ -2832,7 +2832,11 @@ sub setup_common {
 	    $descr =~ s/ /|/;
 	} elsif ($automodel) {
 	    $descr = $automodel;
-	    $descr =~ s/ /|/;
+	    if ($descr !~ /$searchunknown/) {
+		$descr =~ s/ /|/;
+	    } else {
+		$descr = "|$searchunknown";
+	    }
 	} elsif ($automake) {
 	    $descr = "$descrmake|";
 	} elsif ($makemodel =~ /\S/) {
@@ -3002,6 +3006,7 @@ sub setup_common {
 		 $descr !~ /Hewlett[\s-]+Packard/i))
             { $printer->{DBENTRY} = "" }
 	}
+	last;
     }
 
     #- Pre-fill the "Description" field with the printer's model name
