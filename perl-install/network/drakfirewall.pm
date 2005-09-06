@@ -249,7 +249,7 @@ sub choose_watched_services {
     $in->ask_from_({
         messages =>
           N("Interactive Firewall") . "\n\n" .
-          N("You can be warned when someone access to a service or tries to intrude into your computer.
+          N("You can be warned when someone accesses to a service or tries to intrude into your computer.
 Please select which network activity should be watched."),
         title => N("Interactive Firewall"),
     },
