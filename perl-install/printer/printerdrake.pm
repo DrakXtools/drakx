@@ -5317,7 +5317,8 @@ sub add_printer {
 		choose_model($printer, $in) or do {
 		    # Restore DB entry
 		    $printer->{DBENTRY} = $dbentry;
-		    goto step_3_9 if $printer->{MANUALMODEL};
+		    goto step_3_9 if $printer->{MANUALMODEL} &&
+			$printer->{DBENTRY};
 		    goto step_2;
 		};
 	    }
