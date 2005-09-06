@@ -512,7 +512,7 @@ sub selectSupplMedia {
 	} else {
 	    my $url;
 	    local $global_ftp_prefix;
-	    if ($suppl_method eq 'ftp') { #- mirrors are ftp only (currently)
+	    if ($suppl_method eq 'ftp') {
 		$url = $o->askSupplMirror(N("URL of the mirror?")) or return 'error';
 		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
