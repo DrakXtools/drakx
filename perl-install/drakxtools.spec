@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.54mdk
+Release: 0.55mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep  6 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.55mdk
+- drakfirewall: fix port range parser (blino)
+- draksec: install chkrootkit if needed (#17896)
+- harddrake service: fix status message (#16925)
+- printerdrake (till):
+  o make it work on 64-bit systems
+  o only install "desktop-printing" when "gnome-panel" is installed
+  o fixes in handling unknown printers
+  o fix endless loop when clicking "Back" in model selection and when
+    no model was automatically found.
+
+  o do not set margins in CUPS for HPIJS driver
+
 * Mon Sep  5 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.54mdk
 - drakauth, finish-install: handle required package(s) not installed
   correctly (pixel, #18180)
