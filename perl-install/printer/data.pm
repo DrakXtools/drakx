@@ -7,7 +7,8 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv
 	     $kernelversion $usbprintermodule
-	     $commonpackages $gimpprintingpackages $localqueuepackages);
+	     $commonpackages $gimpprintingpackages $gnomecupspackages
+	     $localqueuepackages);
 
 
 # Kernel-specific data
@@ -24,6 +25,10 @@ our $commonpackages = [ [ 'foomatic-db-engine' ],
 # Packages which are needed to print with the GIMP
 our $gimpprintingpackages = [ [ 'gutenprint-gimp2' ], 
 			      [ '/usr/lib/gimp/2.0/plug-ins/print' ] ];
+
+# Packages which are needed for CUPS under GNOME
+our $gnomecupspackages = [ [ 'desktop-printing' ], 
+			   [ '/usr/bin/eggcups' ] ];
 
 # Packages which are needed to create and manage local print queues
 our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
@@ -122,14 +127,13 @@ our %spoolers = ('pdq' => {
 		     'boot_spooler' => 'cups',
 		     'service' => 'cups',
 		     'local_queues' => 1,
-		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups', 'desktop-printing',
+		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers', 'gutenprint-cups',
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
 					      /usr/bin/xpp
 					      /usr/lib/cups/filter/rastertolxx74 
-					      /usr/lib/cups/filter/commandtoepson
-					      /usr/bin/eggcups),
+					      /usr/lib/cups/filter/commandtoepson),
 					   $::isInstall ||
 					   !(-x '/usr/bin/wget') ?
 					   '/usr/bin/curl' :

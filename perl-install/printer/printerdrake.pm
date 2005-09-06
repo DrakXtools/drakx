@@ -4617,6 +4617,10 @@ sub install_spooler {
 	push @{$packages->[0]}, @{$gimpprintingpackages->[0]};
 	push @{$packages->[1]}, @{$gimpprintingpackages->[1]};
     }
+    if (files_exist("/usr/bin/gnome-panel")) {
+	push @{$packages->[0]}, @{$gnomecupspackages->[0]};
+	push @{$packages->[1]}, @{$gnomecupspackages->[1]};
+    }
     if (@{$packages->[0]} && !files_exist(@{$packages->[1]})) {
 	undef $w;
         $w = $o_in && $o_in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
