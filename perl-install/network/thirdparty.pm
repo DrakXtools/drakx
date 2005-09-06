@@ -124,6 +124,19 @@ my %network_settings = (
     device => '/dev/ttySL0',
     restart_service => 1,
    },
+
+   {
+    matching => 'sm56',
+    description => 'Motorola SM56 WinModem',
+    url => 'http://www.motorola.com/softmodem/driver.htm#linux',
+    name => 'sm56',
+    kernel_module =>
+    {
+        package => 'sm56',
+    },
+    no_club => 1,
+    device => '/dev/sm56',
+   },
   ],
 
   wireless =>
