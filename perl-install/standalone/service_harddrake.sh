@@ -39,6 +39,7 @@ case "$1" in
 		   gprintf "Harddrake service was run at boot time"
 	   else gprintf "Harddrake service was not run at boot time"
 	   fi
+        echo
 	;;
  reload)
         ;;
