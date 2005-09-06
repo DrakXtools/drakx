@@ -247,7 +247,7 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub summary {
     my ($auto) = @_;
-    installStepsCall($o, $auto, 'summaryBefore');
+    installStepsCall($o, $auto, 'summaryBefore') if $o->{steps}{summary}{entered} == 1;
     installStepsCall($o, $auto, 'summary');
     installStepsCall($o, $auto, 'summaryAfter');
 }
