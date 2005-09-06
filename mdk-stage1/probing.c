@@ -364,7 +364,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 		while (1) {
 			unsigned int i;
-			unsigned short vendor, device, subvendor, subdevice, class_, class_prog, devbusfn;
+			unsigned short vendor, device, subvendor, subdevice, class_, devbusfn;
+			unsigned char class_prog;
 			const char *name, *module;
 			enum driver_type type_ = type;
 
