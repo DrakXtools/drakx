@@ -1,3 +1,301 @@
+2005/09/06  Daouda Lo  <daouda at mandriva.com>
+
+	* Makefile.config: 
+	  - don't package drakvpn as it is unusable
+
+2005/09/06  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: Don't install gnome-alsa-mixer when detecting alsa,
+	gstreamer-alsa
+	is enough
+
+2005/09/06  Funda Wang <fundawang at linux.net.cn>
+
+	* share/rpmsrate: forgot to add CAT_BOOKS in previous commit :p
+
+2005/09/06  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: sm56 support
+	allow to run perl code as post command
+
+	* network/drakfirewall.pm: fix typo (Rafael)
+
+2005/09/06  Pixel  <pixel at mandriva.com>
+
+	* install2.pm: do summaryBefore() only once (this will reduce damage
+	caused in bugzilla #18277)
+
+	* share/rpmsrate: we prefer engine arts for amarok, don't let the install
+	choose arbitrarily
+
+	* install_steps_interactive.pm: display in MBytes the sizes instead of
+	Bytes (not changing the string since the po is frozen)
+
+	* bootloader.pm: different entries are same even if readonly value is not
+	the same
+	(since we dropped setting readonly)
+
+2005/09/06  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/po/fr.po: A few missing strings
+
+	* install_any.pm: Remove a misleading comment
+
+2005/09/06  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Install "desktop-printing" only on sytems with installed
+	gnome-panel, Discovery does not ship GNOME and also not
+	desktop-printing.
+	  - Fixed endless loop when clicking "Back" in model selection, when by
+	  autodetection no model was found.
+	  - Some fixes in handling unknown printers.
+
+	* printer/data.pm: 
+	  - Install "desktop-printing" only on sytems with installed
+	gnome-panel, Discovery does not ship GNOME and also not
+	desktop-printing.
+
+	* printer/main.pm: 
+	  - Do not set margins in CUPS when HPIJS is the driver, for this driver
+	the margins are already well set.
+	  - Also match model name with added lower-case "hp" with HPLIP XML
+	database.
+
+	* printer/detect.pm: 
+	  - When auto-detecting network printer models via SNMP, guess
+	manufacturer name from model name
+
+2005/09/06  Vincent Guardiola <vguardiola at mandriva.com>
+
+	* authentication.pm: Remove Encrytion type for AD with SFU (not tested)
+	Change Label for AD Winbind (more explicit)
+
+2005/09/06  willysr
+
+	* share/po/id.po: Updated
+
+2005/09/05  cavassin
+
+	* share/po/pt_BR.po: Fixed missing DrakX pt_BR messages: msgcat'ed an old
+	po and them merged
+	with actual POT. Now we have 100% translated (3861 msgs).
+
+2005/09/05  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_TW.po: Updated Traditional translation from You-Cheng Hsieh
+	<yochenhsieh@xuite.net>.
+
+	* share/po/ja.po: Updated translation from Yukiko Bando
+	<ybando@k6.dion.ne.jp>.
+
+	* share/rpmsrate: documentation packages are not named as mandriva-doc-LL,
+	cause we have already splitted them by manuals/books.
+
+2005/09/05  Olivier Blin <oblin at mandriva.com>
+
+	* network/shorewall.pm: fix port range parser
+
+	* share/rpmsrate: add mandi-ifw in install section
+
+2005/09/05  pmaryanov
+
+	* share/po/ru.po: updated translation
+
+2005/09/05  Pixel  <pixel at mandriva.com>
+
+	* do_pkgs.pm: create ->ensure_are_installed (alike ->ensure_is_installed)
+
+	* authentication.pm: perl_checker fixes
+	handle required package(s) not installed correctly (bugzilla #18180)
+
+	* mygtk2.pm: new "Image_using_pixmap" which is rendered using DITHER_MAX
+	which is much better on 16bpp displays
+
+	* install_steps_gtk.pm: use Image_using_pixmap to display adverstising
+	(nicer rendering on 16bpp displays)
+
+	* standalone/drakauth, standalone/finish-install: handle required
+	package(s) not installed correctly (bugzilla #18180)
+
+2005/09/05  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* install_any.pm: At some point, an empty hashref is autovivified in
+	$packages->{medium}.
+	So, protect the loops that iterate over this hash, in application of
+	the belt and suspenders doctrine.
+	Proper detection of network interface at supplementary media setup
+
+	* install_steps_interactive.pm: Don't crash when xorg-x11 is not available
+
+	* pkgs.pm: At some point, an empty hashref is autovivified in
+	$packages->{medium}.
+	So, protect the loops that iterate over this hash, in application of
+	the belt and suspenders doctrine.
+
+	* share/po/zh_TW.po: Fix newlines, once again
+
+2005/09/05  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+	minor update
+	minor update
+	update
+	update
+	update
+
+	* drakxtools.spec: 10.3-0.54mdk
+
+	* pixmaps/steps_done.png: better image (soft border)
+
+	* share/po/cy.po, share/po/fr.po, share/po/ga.po: update
+
+2005/09/04  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/hr.po,
+	share/po/be.po, share/po/pa_IN.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+	* standalone/draksambashare, printer/printerdrake.pm: Corrected typos.
+
+	* share/po/ja.po: Updated POT file.
+	Updated Japanese translation from Yukiko Bando <ybando@k6.dion.ne.jp>.
+
+2005/09/04  mbukovjan
+
+	* share/po/cs.po: Updated Czech translation
+
+2005/09/04  Olivier Blin <oblin at mandriva.com>
+
+	* ftp.pm: fix typo
+
+2005/09/04  tbednarski
+
+	* share/po/pl.po: Translation updates
+
+2005/09/04  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/09/04  willysr
+
+	* share/po/id.po: Updated
+
+2005/09/03  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation.
+
+2005/09/03  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: set SSID for rt2400/rt2500 cards using WPA with
+	an iwpriv command (#18205)
+
+2005/09/03  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/09/03  Till Kamppeter  <till at mandriva.com>
+
+	* standalone/printerdrake: 
+	  - Used Glib::Timeout->add() function for auto-refreshing remote
+	printer list.
+	  - Fixed printer list filtering in the main window, now one can also
+	  filter on the state field, and pressing <Enter> after typing in the
+	  filter string does not cause the filter being lost when hitting the
+	  refresh button or doing some action.
+	  - Taken care that auto-refreshing does not happen when the refresh
+	  function is running.
+	  - Auto-refresh the list of remote printers in the main windows every 5
+	  seconds.
+
+2005/09/02  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/09/02  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakhelp: perl_checker fix
+	prefix file path with file:// (mozilla-firefox needs a valid url)
+
+	* standalone/net_applet: don't exec new binary on update
+
+	* drakxtools.spec: 10.3-0.53mdk
+	10.3-0.52mdk
+
+2005/09/02  Pixel  <pixel at mandriva.com>
+
+	* install_steps.pm, common.pm, share/upgrade-map.conectiva.10,
+	share/list.xml, pkgs.pm, install_any.pm: 
+	  - new functionality: upgrade_by_removing_pkgs, enabled when upgrading
+	redhat and conectiva distributions
+	  - add file upgrade-map.conectiva.10 for precise choice of packages
+	  - save /etc/xxx-release into /root/drakx/xxx-release.upgrading when
+	starting
+	  - release_file(): look for xxx-release.upgrading first
+	  - find_root_parts(): better logging about upgrade_by_removing_pkgs,
+	and factorize code
+	  - when all packages are installed, remove xxx-release.upgrading and
+	rename pkgs::removed_pkgs_to_upgrade_file()
+
+	* tools/install-xml-file-list: replace /lib/tls with /lib for libraries
+	collected using collect_needed_libraries
+	(it was already done for files collected using ldd)
+
+2005/09/02  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Workaround : Don't call method directly
+
+2005/09/02  Till Kamppeter  <till at mandriva.com>
+
+	* printer/cups.pm, standalone/printerdrake: 
+	  - Make building of main window of printerdrake much faster.
+
+	* printer/detect.pm: 
+	  - Made reloading of parallel port kernel modules (for auto-detection)
+	also working if "ppdev" module is loaded.
+	  - Let also network printers be found which do not answer to a
+	  broadcast ping (most newer HP). This is done only in class C and
+	  smaller networks, to not scan too many machines.
+
+	* printer/services.pm: 
+	  - Check for CUPS daemon running without console output.
+
+2005/09/02  Warly  <warly at mandriva.com>
+
+	* share/rpmsrate: add discovery-icons-theme for disco in KDE
+
 2005/09/02  Olivier Blin <oblin at mandriva.com>
 
 	* standalone/drakhelp: perl_checker fix
