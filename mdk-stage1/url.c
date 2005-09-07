@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -51,6 +52,7 @@
 
 #define TIMEOUT_SECS 60
 #define BUFFER_SIZE 4096
+#define HTTP_MAX_RECURSION 5
 
 
 static int ftp_check_response(int sock, char ** str)
@@ -401,18 +403,19 @@ char *str_ftp_error(int error)
 }
 
 
-int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport)
+static int _http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport, int recursion)
 {
 	char * buf;
 	char headers[4096];
 	char * nextChar = headers;
-	int checkedCode;
+	int statusCode;
 	struct in_addr serverAddress;
 	struct pollfd polls;
 	int sock;
 	int rc;
 	struct sockaddr_in destPort;
-	char * header_content_length = "Content-Length: ";
+	const char * header_content_length = "Content-Length: ";
+	const char * header_location = "Location: http://";
 	char * http_server_name;
 	int http_server_port;
 
@@ -455,7 +458,7 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 	   2) Get a \r\n\r\n, which means we're done */
 
 	*nextChar = '\0';
-	checkedCode = 0;
+	statusCode = 0;
 	while (!strstr(headers, "\r\n\r\n")) {
 		polls.fd = sock;
 		polls.events = POLLIN;
@@ -482,10 +485,9 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 			return FTPERR_SERVER_IO_ERROR;
 		}
 
-		if (!checkedCode && strstr(headers, "\r\n")) {
+		if (!statusCode && strstr(headers, "\r\n")) {
 			char * start, * end;
 
-			checkedCode = 1;
 			start = headers;
 			while (!isspace(*start) && *start) start++;
 			if (!*start) {
@@ -503,10 +505,15 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 
 			*end = '\0';
                         log_message("HTTP: server response '%s'", start);
-			if (!strcmp(start, "404")) {
+			if (streq(start, "404")) {
 				close(sock);
 				return FTPERR_FILE_NOT_FOUND;
-			} else if (strcmp(start, "200")) {
+			} else if (streq(start, "302")) {
+				log_message("HTTP: found, but document has moved");
+				statusCode = 302;
+			} else if (streq(start, "200")) {
+				statusCode = 200;
+			} else {
 				close(sock);
 				return FTPERR_BAD_SERVER_RESPONSE;
 			}
@@ -515,10 +522,44 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 		}
 	}
 
+	if (statusCode == 302) {
+		if (recursion >= HTTP_MAX_RECURSION) {
+			log_message("HTTP: too many levels of recursion, aborting");
+			close(sock);
+			return FTPERR_UNKNOWN;
+		}
+		if ((buf = strstr(headers, header_location))) {
+			char * found_host;
+			char *found_file;
+			found_host = buf + strlen(header_location);
+			if ((found_file = index(found_host, '/'))) {
+				if ((buf = index(found_file, '\r'))) {
+					buf[0] = '\0';
+					remotename = strdup(found_file);
+					found_file[0] = '\0';
+					hostname = strdup(found_host);
+					log_message("HTTP: redirected to new host \"%s\" and file \"%s\"", hostname, remotename);
+				}
+			}
+			
+		}
+		/*
+		 * don't fail if new URL can't be parsed,
+		 * asking the same URL may work if the DNS server are doing round-robin
+		 */
+		return _http_download_file(hostname, remotename, size, proxyprotocol, proxyname, proxyport, recursion + 1);
+	}
+
 	if ((buf = strstr(headers, header_content_length)))
 		*size = charstar_to_int(buf + strlen(header_content_length));
 	else
 		*size = 0;
 
 	return sock;
+}
+
+
+int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport)
+{
+	return _http_download_file(hostname, remotename, size, proxyprotocol, proxyname, proxyport, 0);
 }
