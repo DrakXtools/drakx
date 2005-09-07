@@ -135,6 +135,7 @@ sub load_category {
     my @l = (
 	(map {
 	    my $other = { ahci => 'ata_piix', ata_piix => 'ahci' }->{$_->{driver}};
+	    $_->{try} = 1 if $other;
 	    ($_, if_($other, { %$_, driver => $other }));
 	} probe_category($category)),
 	(map { { driver => $_, description => $_, try => 1 } } @try_modules),
