@@ -559,18 +559,23 @@ sub is_lan_interface {
     # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wifi|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
-    # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
     # - ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
     #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #   plip%d are created by drivers/net/plip.c
     #   ppp%d are created by drivers/net/ppp_generic.c
-    # - wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
     #
     # we need both detection schemes since:
     # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
     # - /proc/net/dev does not list VLAN and IP aliased interfaces
 
+    is_useful_interface($_[0]) &&
     $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0|wifi)/;
+}
+
+sub is_useful_interface {
+    # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
+    # - wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
+    $_[0] !~ /^(?:lo|sit0|wifi)/;
 }
 
 sub is_wireless_interface {
@@ -597,13 +602,20 @@ sub get_sysfs_device_id_map {
       { id => "device", subid => "subsystem_device", vendor => "vendor", subvendor => "subsystem_vendor" };
 }
 
+sub get_all_net_devices() {
+    uniq(
+        (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
+        c::get_netdevices(),
+    );
+}
+
 sub getNet() {
-    grep { is_lan_interface($_) }
-      uniq(
-           (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
-           c::get_netdevices(),
-          );
+    grep { is_lan_interface($_) } get_all_net_devices();
  }
+
+sub get_net_interfaces() {
+    grep { is_useful_interface($_) } get_all_net_devices();
+}
 
 #sub getISDN() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
