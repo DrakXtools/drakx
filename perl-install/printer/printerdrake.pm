@@ -2556,7 +2556,7 @@ sub setup_common {
 						     ($::isInstall ?
 						      'xsane' : 
 						      'scanner-gui'), 
-						     'libsane-hpaio1')
+						     "${lib}sane-hpaio1")
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
@@ -2669,7 +2669,7 @@ sub setup_common {
 							 ($::isInstall ?
 							  'xsane' : 
 							  'scanner-gui'), 
-							 'libsane-hpoj1')
+							 "${lib}sane-hpoj1")
 				or do {
 				    $in->ask_warn(N("Warning"),
 						  N("Could not install the %s packages!",
