@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.55mdk
+Release: 0.56mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Sep  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.56mdk
+- harddrake service: blacklist audio too (#12731)
+
 * Tue Sep  6 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.55mdk
 - drakfirewall: fix port range parser (blino)
 - draksec: install chkrootkit if needed (#17896)
