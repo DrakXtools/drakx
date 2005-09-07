@@ -21,8 +21,8 @@ my $force = member('--force', @ARGV);
 my $mode = $ARGV[0] eq 'stop' && 'stop';
 
 if ($mode eq 'stop') {
-    substInFile { $_ .= "snd-usb-audio\n" if eof } '/etc/hotplug/blacklist';
-    append_to_file('/etc/modprobe.conf', "blacklist snd-usb-audio\n") if cat_('/etc/modprobe.conf') !~ /^blacklist snd-usb-audio/m;
+    substInFile { $_ .= "audio\nsnd-usb-audio\n" if eof } '/etc/hotplug/blacklist';
+    append_to_file('/etc/modprobe.conf', "blacklist audio\nblacklist snd-usb-audio\n") if cat_('/etc/modprobe.conf') !~ /^blacklist snd-usb-audio/m;
     c::_exit(0);
 }
 
