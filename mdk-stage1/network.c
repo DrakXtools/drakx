@@ -1161,6 +1161,16 @@ enum return_type http_prepare(void)
 		int fd, size;
 		int use_http_proxy;
 
+		if (!IS_AUTOMATIC) {
+			if (answers == NULL)
+				answers = (char **) malloc(sizeof(questions));
+
+			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "http", &answers[0], &answers[1]);
+
+			if (results == RETURN_BACK)
+				return ftp_prepare();
+		}
+
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
 						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
