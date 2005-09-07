@@ -5128,6 +5128,15 @@ sub mainwindow_interactive {
 			  1;
 		      },
 		  val => N("CUPS configuration") } : ()),
+	      (($printer->{SPOOLER} eq "cups") ?
+	       { clicked_may_quit =>
+		      sub { 
+			  # Save the cursor position
+			  $cursorpos = $menuchoice;
+			  $menuchoice = '@autoadminconfig';
+			  1;
+		      },
+		  val => N("Configure Auto Administration") } : ()),
 	      ($printer->{expert} && 
 	       (files_exist(qw(/usr/bin/pdq)) ||
 		files_exist("/usr/$lib/filters/lpf", 
@@ -5184,6 +5193,11 @@ sub mainwindow_interactive {
 	# Configure CUPS
 	if ($menuchoice eq '@cupsconfig') {
 	    config_cups($printer, $security, $in, $upNetwork);
+	    next;
+	}
+	# Configure auto administration
+	if ($menuchoice eq '@autoadminconfig') {
+	    config_auto_admin($printer, $in);
 	    next;
 	}
 	# Call function to switch to another spooler
