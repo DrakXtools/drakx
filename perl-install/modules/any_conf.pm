@@ -103,6 +103,7 @@ sub remove_alias_regexp_byname {
 
 sub remove_module {
     my ($conf, $module) = @_;
+    return if !$module;
     $module = $conf->mapping($module);
     substInFile {
         undef $_ if /^$module/;
