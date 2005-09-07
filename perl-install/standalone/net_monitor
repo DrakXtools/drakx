@@ -44,7 +44,7 @@ my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 
 my $net = {};
 network::network::read_net_conf($net);
-$default_intf ||= $net->{default}{interface};
+$default_intf ||= $net->{net_interface};
 
 if ($force) {
     $connect and network::tools::start_interface($default_intf, 1);
