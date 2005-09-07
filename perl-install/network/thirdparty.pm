@@ -83,7 +83,7 @@ my %network_settings = (
     matching => qr/^Hsf:/,
     description => 'HSF 56k Modem',
     url => 'http://www.linuxant.com/drivers/hsf/',
-    name => 'hsflinmodem',
+    name => 'hsfmodem',
     kernel_module => 1,
     tools =>
     {
