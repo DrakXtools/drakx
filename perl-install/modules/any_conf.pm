@@ -105,9 +105,11 @@ sub remove_module {
     my ($conf, $module) = @_;
     return if !$module;
     $module = $conf->mapping($module);
-    substInFile {
-        undef $_ if /^$module/;
-    } $_  foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+    foreach my $file ("$::prefix/etc/modules", "$::prefix/etc/modprobe.preload") {
+        substInFile {
+            undef $_ if /^$module/;
+        } $file;
+    }
     
     $conf->remove_alias($module);
     log::explanations("removing module $module");
