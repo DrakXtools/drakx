@@ -193,7 +193,7 @@ my %network_settings = (
   dsl =>
   [
    {
-    matching => sub { detect_devices::getSpeedtouch() },
+    matching => \&detect_devices::getSpeedtouch,
     description => N_("Alcatel speedtouch USB modem"),
     url => "http://www.speedtouch.com/supuser.htm",
     name => 'speedtouch',
@@ -223,7 +223,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
    },
 
    {
-    matching => 'eagle-usb',
+    matching => \&detect_devices::getSagem,
     description => 'Eagle chipset (from Analog Devices), e.g. Sagem F@st 800/840/908',
     url => 'http://www.eagle-usb.org/',
     name => 'eagle-usb',
