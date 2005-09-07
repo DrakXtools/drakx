@@ -1,6 +1,6 @@
 include ../../Makefile.config
 
-PMSFILES = $(ALLPMS) ../move/move.pm ../move/tree/mdk_totem
+PMSFILES = $(ALLPMS) standalone/drakvpn ../move/move.pm ../move/tree/mdk_totem
 PMSFILES_HERE = $(wildcard $(PMSFILES:%=../../%))
 
 POFILES = $(wildcard *.po)
