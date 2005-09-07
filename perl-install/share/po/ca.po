@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "POT-Creation-Date: 2005-09-04 21:26+0800\n"
-"PO-Revision-Date: 2005-08-02 22:25+0200\n"
+"PO-Revision-Date: 2005-09-07 16:10+0200\n"
 "Last-Translator: Albert Astals Cid <astals11@terra.es>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ../move/move.pm:292
 #, c-format
 msgid "Which USB key do you want to format?"
-msgstr ""
+msgstr "Quina memòria USB voleu formatejar?"
 
 #: ../move/move.pm:296
 #, c-format
@@ -31,11 +31,14 @@ msgid ""
 "We advise you to unplug all other USB storage devices while doing this "
 "operation."
 msgstr ""
+"Esteu a punt de formatejar el dispositiu USB \"%s\". Això eliminarà totes les dades existents.\n"
+"Assegureu-vos que el dispositiu seleccionat és la memòria USB que voleu formatejar. \n"
+"Suggerim que desconnecteu tots els altres dispositius USB mentre feu aquesta operació."
 
 #: ../move/move.pm:448 ../move/move.pm:460
 #, c-format
 msgid "Key is not writable"
-msgstr ""
+msgstr "No és pot escriure a la memòria"
 
 #: ../move/move.pm:450
 #, c-format
@@ -43,6 +46,8 @@ msgid ""
 "The USB key seems to have write protection enabled. Please\n"
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
+"Sembla que la memòria USB té la protecció contra escriptura habilitada. Si us plau,\n"
+"desconnecteu-la, desactiveu la protecció contra escriptura i torneu-la a connectar."
 
 #
 #: ../move/move.pm:452
@@ -53,7 +58,7 @@ msgstr "Reintenta"
 #: ../move/move.pm:453 ../move/move.pm:497
 #, c-format
 msgid "Continue without USB key"
-msgstr ""
+msgstr "Continua sense memòria USB"
 
 #: ../move/move.pm:462
 #, c-format
@@ -65,6 +70,13 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandriva Move again."
 msgstr ""
+"La memòria USB sembla tenir la protecció contra escriptura habilitada però no\n"
+"es pot desconnectar amb seguretat ara.\n"
+"\n"
+"\n"
+"Premeu el botó per reiniciar l'ordinador, desconnecteu la memòria, desactiveu\n"
+"la protecció contra escriptura , torneu a connectar la memòria i executeu\n"
+"Mandriva Move un altre cop."
 
 #: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1320
 #, c-format
@@ -85,6 +97,16 @@ msgid ""
 "able to use Mandriva Move as a normal live Mandriva\n"
 "Operating System."
 msgstr ""
+"La vostra memòria USB no te cap partició de Windows (FAT) vàlida.\n"
+"En cal una per continuar (a part que és més estàndard, i així\n"
+"podreu accedir i moure els vostres fitxers des d'ordinadors\n"
+"que usin Windows). Si us plau, connecteu una memòria USB\n"
+"que contingui una partició de Windows.\n"
+"\n"
+"\n"
+"Si voleu podeu continuar sense una memòria USB, utilitzant\n"
+"Mandriva Move com un sistema operatiu Mandriva, però sense\n"
+"poder desar les vostres dades.Sistema "
 
 #: ../move/move.pm:483
 #, c-format
@@ -105,22 +127,22 @@ msgstr ""
 #: ../move/move.pm:494
 #, c-format
 msgid "Need a key to save your data"
-msgstr ""
+msgstr "Cal una memòria USB per desar les vostres dades"
 
 #: ../move/move.pm:496
 #, c-format
 msgid "Detect USB key again"
-msgstr ""
+msgstr "Torna a detectar memòries USB"
 
 #: ../move/move.pm:517
 #, c-format
 msgid "Setting up USB key"
-msgstr ""
+msgstr "S'està configurant la memòria USB"
 
 #: ../move/move.pm:517
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
-msgstr "Espereu si us plau, s'està detectant i configurant els dispositius..."
+msgstr "Si us plau espereu mentre es configuren els fitxers necessaris a la memòria USB..."
 
 #: ../move/move.pm:546
 #, c-format
@@ -423,8 +445,7 @@ msgstr "Xfree %s amb acceleració 3D de maquinari"
 #: Xconfig/card.pm:413
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
-msgstr ""
-"La vostra targeta pot tenir acceleració 3D de maquinari amb l'Xfree %s."
+msgstr "La vostra targeta pot tenir acceleració 3D de maquinari amb l'Xfree %s."
 
 #: Xconfig/card.pm:419
 #, c-format
@@ -669,8 +690,7 @@ msgstr "Voleu comprovar la configuració?"
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr ""
-"Avís: la comprovació d'aquesta targeta gràfica pot penjar-vos l'ordinador"
+msgstr "Avís: la comprovació d'aquesta targeta gràfica pot penjar-vos l'ordinador"
 
 #: Xconfig/test.pm:69
 #, c-format
@@ -909,8 +929,7 @@ msgstr "Introduïu la mida de la RAM en MB"
 
 #: any.pm:277
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "L'opció \"Limita les opcions de la línia d'ordres\" no té cap utilitat sense "
 "una contrasenya"
@@ -1170,10 +1189,8 @@ msgstr "Si us plau, introduïu un nom d'usuari"
 
 #: any.pm:618
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"El nom d'usuari només pot contenir lletres en minúscula, números, '-' i '_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "El nom d'usuari només pot contenir lletres en minúscula, números, '-' i '_'"
 
 #: any.pm:619
 #, c-format
@@ -1203,7 +1220,7 @@ msgstr "%s ha de ser un número"
 #: any.pm:626
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s hauria de ser superior a 500. Continuar tot i això?"
 
 #: any.pm:631 standalone/draksambashare:1210
 #, c-format
@@ -1404,8 +1421,7 @@ msgstr ""
 
 #: any.pm:1000
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
+msgid "You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Podeu exportar utilitzant NFS o SMB. Seleccioneu quin voleu utilitzar."
 
 #: any.pm:1025
@@ -1460,12 +1476,12 @@ msgstr "Domini de Windows"
 #: authentication.pm:28
 #, c-format
 msgid "Active Directory with SFU"
-msgstr ""
+msgstr "Active Directory amb SFU"
 
 #: authentication.pm:29
 #, c-format
 msgid "Active Directory with Winbind"
-msgstr ""
+msgstr "Active Directory amb Winbind"
 
 #
 #: authentication.pm:55
@@ -1475,8 +1491,7 @@ msgstr "Fitxer local:"
 
 #: authentication.pm:55
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 
 #: authentication.pm:56
@@ -1490,6 +1505,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
+"El vostre ordinador usarà LDAP per alguna o totes les autenticacions. LDAP "
+"consolida certs tipus d0informació dintre de les organitzacions."
 
 #
 #: authentication.pm:57
@@ -1519,7 +1536,7 @@ msgstr ""
 #: authentication.pm:59
 #, c-format
 msgid "Active Directory with SFU:"
-msgstr ""
+msgstr "Active Directory amb SFU:"
 
 #: authentication.pm:59
 #, c-format
@@ -1529,7 +1546,7 @@ msgstr ""
 #: authentication.pm:60
 #, c-format
 msgid "Active Directory with Winbind:"
-msgstr ""
+msgstr "Active Directory amb Winbind:"
 
 #: authentication.pm:60
 #, c-format
@@ -1679,14 +1696,14 @@ msgid "Domain Admin Password"
 msgstr "Contrasenya de l'administrador del domini"
 
 #: authentication.pm:170
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr "Estableix la contrasenya de root i els mètodes d'autenticació de xarxa"
+msgstr "Estableix la contrasenya de l'administrador (roo)t i els mètodes d'autenticació de xarxa"
 
 #: authentication.pm:171
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password"
-msgstr "Estableix la contrasenya de root"
+msgstr "Estableix la contrasenya de l'administrador (root)"
 
 #: authentication.pm:172 standalone/drakvpn:1111
 #, c-format
@@ -1702,8 +1719,7 @@ msgstr "Sense contrasenya"
 #: authentication.pm:183
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr ""
-"Aquesta contrasenya és massa curta (ha de tenir com a mínim %d caràcters)"
+msgstr "Aquesta contrasenya és massa curta (ha de tenir com a mínim %d caràcters)"
 
 #: authentication.pm:188 network/netconnect.pm:306 network/netconnect.pm:564
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
@@ -2489,10 +2505,8 @@ msgstr "Voleu suprimir el fitxer de loopback?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"Després de canviar el tipus de la partició %s, se'n perdran totes les dades"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "Després de canviar el tipus de la partició %s, se'n perdran totes les dades"
 
 #: diskdrake/interactive.pm:619
 #, c-format
@@ -2557,8 +2571,7 @@ msgstr "Cal fer una còpia de seguretat de totes les dades d'aquesta partició"
 #: diskdrake/interactive.pm:755
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr ""
-"Després de canviar la mida de la partició %s, se'n perdran totes les dades"
+msgstr "Després de canviar la mida de la partició %s, se'n perdran totes les dades"
 
 #: diskdrake/interactive.pm:760
 #, c-format
@@ -2684,8 +2697,7 @@ msgstr "Quin tipus de particionament voleu?"
 #: diskdrake/interactive.pm:1106
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr ""
-"Us caldrà tornar a arrencar per tal que les modificacions tinguin efecte"
+msgstr "Us caldrà tornar a arrencar per tal que les modificacions tinguin efecte"
 
 #: diskdrake/interactive.pm:1115
 #, c-format
@@ -2991,8 +3003,7 @@ msgstr "Un altre"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Introduïu el vostre nom d'usuari, la contrasenya i el nom de domini per "
 "accedir a aquesta màquina."
@@ -3091,10 +3102,9 @@ msgid "Enabling swap partition %s"
 msgstr "S'està habilitant la partició d'intercanvi %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr ""
-"No podeu utilitzar un sistema d'arxius xifrat per al punt de muntatge %s"
+msgstr "Usa un sistema de fitxers xifrat"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3292,8 +3302,7 @@ msgstr ""
 #: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr ""
-"No podeu utilitzar un sistema d'arxius xifrat per al punt de muntatge %s"
+msgstr "No podeu utilitzar un sistema d'arxius xifrat per al punt de muntatge %s"
 
 #
 #: fsedit.pm:462
@@ -3349,7 +3358,7 @@ msgstr "Targeta de vídeo"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "Targeta DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3390,7 +3399,7 @@ msgstr "Dispositius de so USB"
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Targetes de ràdio"
 
 #: harddrake/data.pm:238
 #, c-format
@@ -3442,7 +3451,7 @@ msgstr "Impressora"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Ports de controladors per jocs"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3571,7 +3580,7 @@ msgstr ""
 "Aquí podeu seleccionar un controlador alternatiu (tant OSS com ALSA) per ala "
 "targeta de so (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:242
@@ -4231,7 +4240,7 @@ msgid "Truly minimal install"
 msgstr "Instal·lació mínima real"
 
 #: help.pm:149
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you choose to install packages individually, the installer will present\n"
 "a tree containing all packages classified by groups and subgroups. While\n"
@@ -4276,22 +4285,22 @@ msgstr ""
 "Cada cop que seleccioneu un paquet de l'arbre, apareixerà una descripció a \n"
 "la dreta que us informarà de la finalitat del paquet.\n"
 "\n"
-"Si heu seleccionat un paquet de servidor, intencionadament o perquè\n"
+"!! Si heu seleccionat un paquet de servidor, intencionadament o perquè\n"
 "formava part d'un grup, se us demanarà que confirmeu si realment voleu\n"
-"instal·lar aquests servidors. Per defecte, Mandriva Linux iniciarà i "
-"instal·larà automàticament qualsevol servidor durant l'arrencada. Tot i que\n"
+"instal·lar aquests servidors. Per defecte, Mandriva Linux iniciarà"
+"automàticament qualsevol servidor durant l'arrencada. Tot i que\n"
 "siguin segurs i no tinguin cap problema conegut quan es publica la\n"
 "distribució, és totalment possible que es descobreixin forats de seguretat\n"
 "després que aquesta versió de Mandriva Linux quedi finalitzada.\n"
 "Si no sabeu què se suposa que fa un servei en particular, o per què s'està\n"
 "instal·lant, feu clic a \"%s\". Per defecte, si feu clic a \"%s\" els "
 "serveis\n"
-"llistats s'instal·laran i s'iniciaran automàticament durant l'arrencada.\n"
+"llistats s'instal·laran i s'iniciaran automàticament durant l'arrencada. !!\n"
 "\n"
 "L'opció \"%s\" s'utilitza per inhabilitar el diàleg d'advertència que\n"
 "apareix quan l'instal·lador selecciona automàticament un paquet per "
 "resoldre\n"
-"un tema de dependències. Alguns paquets estan relacionats els uns amb els\n"
+"dependències. Alguns paquets estan relacionats els uns amb els\n"
 "altres, de manera que la instal·lació d'un paquet fa que calgui instal·lar\n"
 "també algun altre programa. L'instal·lador pot determinar quins paquets "
 "calen\n"
@@ -4350,7 +4359,7 @@ msgid "Configure"
 msgstr "Configura"
 
 #: help.pm:189
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog is used to select which services you wish to start at boot\n"
 "time.\n"
@@ -4382,12 +4391,12 @@ msgstr ""
 "comportament\n"
 "per defecte.\n"
 "\n"
-"AVÍS: Aneu especialment amb cura en aquest pas si penseu utilitzar "
+"!! Aneu especialment amb cura en aquest pas si penseu utilitzar "
 "l'ordinador com\n"
 "a servidor: segurament no voldreu iniciar serveis que no necessiteu.\n"
 "Recordeu que hi ha diversos serveis que poden ser perillosos si s'habiliten\n"
 "en un servidor. En general, seleccioneu només els serveis que realment "
-"necessiteu."
+"necessiteu. !!"
 
 #: help.pm:206
 #, c-format
@@ -4456,7 +4465,7 @@ msgstr ""
 "més convenient."
 
 #: help.pm:231
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
@@ -4514,18 +4523,18 @@ msgid ""
 "want to check \"%s\" if your machine is to act as a server, or if you were\n"
 "not successful in getting the display configured."
 msgstr ""
-"L'X (per sistema X Window) és el cor de la interfície gràfica de GNU/Linux\n"
-"de què depenen tots els entorns gràfics (KDE, GNOME, AfterStep, "
-"WindowMaker,\n"
-"etc.) que venen amb Mandriva Linux.\n"
+"X (per sistema X Window) és el cor de la interfície gràfica de GNU/Linux\n"
+"de què depenen tots els entorns gràfics (KDE, GNOME, AfterStep, \n"
+"WindowMaker, etc.) que venen amb Mandriva Linux.\n"
 "\n"
 "Veureu una relació de diferents paràmetres que podeu canviar per aconseguir\n"
-"una visualització gràfica òptima: Targeta gràfica\n"
+"una visualització gràfica òptima.\n"
+"\n"
+"Targeta gràfica\n"
 "\n"
 "   Normalment, l'instal·lador detectarà i configurarà automàticament la\n"
-"targeta gràfica instal·lada a l'ordinador. Si no fos així, podeu escollir "
-"de\n"
-"la llista la targeta que realment tingueu instal·lada.\n"
+"targeta gràfica instal·lada a l'ordinador. Si no fos així, podeu escollir\n"
+"de la llista la targeta que realment tingueu instal·lada.\n"
 "\n"
 "   En cas que hi hagi diferents servidors disponibles per a la vostra\n"
 "targeta, amb o sense acceleració 3D, se us demanarà que escolliu el que\n"
@@ -4552,9 +4561,9 @@ msgstr ""
 "\n"
 "Prova\n"
 "\n"
-"Depenent del maquinari aquesta entrada pot no aparèixer.\n"
+"   Depenent del maquinari aquesta entrada pot no aparèixer.\n"
 "\n"
-"   el sistema intentarà obrir una pantalla gràfica amb la resolució\n"
+"   El sistema intentarà obrir una pantalla gràfica amb la resolució\n"
 "desitjada. Si podeu veure el missatge durant la prova i responeu \"%s\",\n"
 "DrakX passarà al pas següent. Si no el podeu veure, vol dir que la\n"
 "configuració detectada automàticament no era del tot correcta i la prova\n"
@@ -4614,7 +4623,7 @@ msgstr ""
 "el servidor que més us convingui."
 
 #: help.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options\n"
 "\n"
@@ -4626,9 +4635,8 @@ msgstr ""
 "Opcions\n"
 "\n"
 "   Aquí podeu decidir si voleu que l'ordinador canviï automàticament a una\n"
-"interfície gràfica en arrencar. Òbviament, activareu \"%s\" si l'ordinador "
-"ha\n"
-"de ser un servidor, o si no heu pogut configurar la pantalla."
+"interfície gràfica en arrencar. Òbviament, activareu \"%s\" si l'ordinador\n"
+"ha de ser un servidor, o si no heu pogut configurar la pantalla."
 
 #: help.pm:316
 #, fuzzy, c-format
@@ -6424,8 +6432,7 @@ msgstr "Ha fallat el redimensionament de la FAT: %s"
 #: install_interactive.pm:208
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
-"No hi ha cap partició FAT a la qual canviar la mida (o no queda prou espai)"
+msgstr "No hi ha cap partició FAT a la qual canviar la mida (o no queda prou espai)"
 
 #: install_interactive.pm:213
 #, c-format
@@ -6440,8 +6447,7 @@ msgstr "Teniu més d'un disc dur; en quin voleu instal·lar el Linux?"
 #: install_interactive.pm:219
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr ""
-"Es perdran TOTES les particions, i les dades que contenen, de la unitat %s"
+msgstr "Es perdran TOTES les particions, i les dades que contenen, de la unitat %s"
 
 #: install_interactive.pm:232
 #, c-format
@@ -6465,8 +6471,7 @@ msgstr "No es pot trobar espai per a la instal·lació"
 #: install_interactive.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
-"L'auxiliar de particionament del DrakX ha trobat les solucions següents:"
+msgstr "L'auxiliar de particionament del DrakX ha trobat les solucions següents:"
 
 #: install_interactive.pm:281
 #, c-format
@@ -7413,8 +7418,7 @@ msgstr ""
 #
 #: install_steps_interactive.pm:824
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "S'està contactant amb el servidor Mandriva Linux per obtenir la llista de "
 "rèpliques disponibles..."
@@ -7658,10 +7662,8 @@ msgstr "Instal·lació del Mandriva Linux %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr ""
-"  <Tab>/<Alt-Tab> entre elements  | <Espai> selecciona | <F12> pant. següent"
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr "  <Tab>/<Alt-Tab> entre elements  | <Espai> selecciona | <F12> pant. següent"
 
 #
 #: interactive.pm:196
@@ -10833,8 +10835,7 @@ msgstr "Escolliu el mòdem a configurar:"
 #: network/netconnect.pm:504
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
-msgstr ""
-"Si us plau, seleccioneu el port sèrie al qual teniu connectat el mòdem."
+msgstr "Si us plau, seleccioneu el port sèrie al qual teniu connectat el mòdem."
 
 #
 #: network/netconnect.pm:533
@@ -12611,14 +12612,12 @@ msgstr "S'està reiniciant el CUPS"
 
 #: printer/printerdrake.pm:614
 #, c-format
-msgid ""
-"Allow pop-up windows, printer setup and package installation may be canceled"
+msgid "Allow pop-up windows, printer setup and package installation may be canceled"
 msgstr ""
 
 #: printer/printerdrake.pm:616
 #, c-format
-msgid ""
-"No pop-up windows, printer setup and package installation cannot be canceled"
+msgid "No pop-up windows, printer setup and package installation cannot be canceled"
 msgstr ""
 
 #
@@ -12644,8 +12643,7 @@ msgstr "Configuració d'una impressora remota"
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
 #, fuzzy, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr ""
-" (Assegureu-vos que totes les impressores estan connectades i engegades.)\n"
+msgstr " (Assegureu-vos que totes les impressores estan connectades i engegades.)\n"
 
 #: printer/printerdrake.pm:630
 #, fuzzy, c-format
@@ -12748,8 +12746,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:758
 #, c-format
-msgid ""
-"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Detecció automàtica de la impressora (local, TCP/Socket, impressores SMB i "
 "URI de dispositiu)"
@@ -12852,16 +12849,14 @@ msgstr ""
 
 #: printer/printerdrake.pm:846
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
+msgid "There are no printers found which are directly connected to your machine"
 msgstr "No s'ha trobat cap impressora connectada directament a l'ordinador"
 
 #
 #: printer/printerdrake.pm:849
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr ""
-" (Assegureu-vos que totes les impressores estan connectades i engegades.)\n"
+msgstr " (Assegureu-vos que totes les impressores estan connectades i engegades.)\n"
 
 #: printer/printerdrake.pm:862
 #, c-format
@@ -13365,8 +13360,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:1602
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Alternativament, podeu indicar el nom de dispositiu/nom de fitxer en la "
 "línia d'entrada"
@@ -13428,8 +13422,7 @@ msgstr ""
 #: printer/printerdrake.pm:1615
 #, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr ""
-"Si us plau, seleccioneu la impressora on han d'anar les tasques d'impressió."
+msgstr "Si us plau, seleccioneu la impressora on han d'anar les tasques d'impressió."
 
 #: printer/printerdrake.pm:1617
 #, c-format
@@ -13444,8 +13437,7 @@ msgstr ""
 #: printer/printerdrake.pm:1618
 #, c-format
 msgid "Please choose the port that your printer is connected to."
-msgstr ""
-"Si us plau, seleccioneu el port al qual teniu connectada la impressora."
+msgstr "Si us plau, seleccioneu el port al qual teniu connectada la impressora."
 
 #: printer/printerdrake.pm:1620
 #, c-format
@@ -13954,8 +13946,7 @@ msgstr "S'estan instal·lant els paquets mtools..."
 #: printer/printerdrake.pm:2712
 #, c-format
 msgid "Photo memory card access on the %s will not be possible."
-msgstr ""
-"L'accés a la targeta de memòria per a fotografies a %s no serà possible"
+msgstr "L'accés a la targeta de memòria per a fotografies a %s no serà possible"
 
 #: printer/printerdrake.pm:2728
 #, c-format
@@ -14989,8 +14980,7 @@ msgstr "paranoic"
 #: printer/printerdrake.pm:4526
 #, c-format
 msgid "Installing a printing system in the %s security level"
-msgstr ""
-"S'està instal·lant un sistema d'impressió amb el nivell de seguretat %s"
+msgstr "S'està instal·lant un sistema d'impressió amb el nivell de seguretat %s"
 
 #: printer/printerdrake.pm:4527
 #, c-format
@@ -15399,8 +15389,7 @@ msgstr "No s'ha pogut crear l'enllaç /usr/share/sane/%s!"
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
-"No s'ha pogut copiar el fitxer de firmware %s a /usr/share/sane/firmware!"
+msgstr "No s'ha pogut copiar el fitxer de firmware %s a /usr/share/sane/firmware!"
 
 #: scanner.pm:121
 #, c-format
@@ -15632,8 +15621,7 @@ msgstr "Habilita/Inhabilita la comprovació de seguretat msec horària."
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-" Enabling su only from members of the wheel group or allow su from any user."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 " S'està habilitant su només per a membres del grup wheel o permet su des de "
 "qualsevol usuari."
@@ -15646,8 +15634,7 @@ msgstr "Utilitza una contrasenya per autenticar usuaris."
 #: security/help.pm:94
 #, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr ""
-"Activa/Inhabilita la comprovació de promiscuïtat de les targetes Ethernet."
+msgstr "Activa/Inhabilita la comprovació de promiscuïtat de les targetes Ethernet."
 
 #: security/help.pm:96
 #, c-format
@@ -15726,8 +15713,7 @@ msgstr "si és \"sí\", comprova els permisos dels fitxers a casa dels usuaris"
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
-"si és \"sí\", comprova si els dispositius de xarxa són en mode promiscu."
+msgstr "si és \"sí\", comprova si els dispositius de xarxa són en mode promiscu."
 
 #: security/help.pm:119
 #, c-format
@@ -15771,8 +15757,7 @@ msgstr "si és \"sí\", executa les comprovacions chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "si es defineix, envia l'informe de correu a aquesta adreça electrònica; si "
 "no, envia'l al root."
@@ -15790,14 +15775,12 @@ msgstr "No enviïs correus si no hi ha res del que avisar"
 #: security/help.pm:130
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr ""
-"si és \"sí\", executa determinades comprovacions de la base de dades rpm."
+msgstr "si és \"sí\", executa determinades comprovacions de la base de dades rpm."
 
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
-"si és \"sí\", informa del resultat de la comprovació al registre del sistema."
+msgstr "si és \"sí\", informa del resultat de la comprovació al registre del sistema."
 
 #: security/help.pm:132
 #, c-format
@@ -16206,8 +16189,7 @@ msgstr "Empra libsafe per als servidors"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Una llibreria que defensa contra els atacs de 'buffer overflow' i de 'format "
 "string'."
@@ -16294,8 +16276,7 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "L'Apache és un servidor de World Wide Web. S'utilitza per servir fitxers\n"
 "HTML i CGI."
@@ -16349,8 +16330,7 @@ msgstr ""
 #: services.pm:47
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
-msgstr ""
-"Detecció i configuració automàtica de maquinari en iniciar l'ordinador."
+msgstr "Detecció i configuració automàtica de maquinari en iniciar l'ordinador."
 
 #: services.pm:48
 #, c-format
@@ -16569,8 +16549,7 @@ msgstr "Inicia l'X Font Server (això és necessari perquè l'Xorg funcioni)."
 #: services.pm:115 services.pm:157
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr ""
-"Escolliu els serveis que s'han d'iniciar automàticament durant l'arrencada"
+msgstr "Escolliu els serveis que s'han d'iniciar automàticament durant l'arrencada"
 
 #
 #: services.pm:127 standalone/draksambashare:105
@@ -18335,15 +18314,13 @@ msgstr "S'està creant el disquet d'instal·lació automàtica"
 #: standalone/drakautoinst:90
 #, c-format
 msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr ""
-"Inseriu un disquet en blanc a la unitat %s (pel disquet de controladors)"
+msgstr "Inseriu un disquet en blanc a la unitat %s (pel disquet de controladors)"
 
 #
 #: standalone/drakautoinst:91
 #, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr ""
-"S'està creant el disquet d'instal·lació automàtica (disquet de controladors)"
+msgstr "S'està creant el disquet d'instal·lació automàtica (disquet de controladors)"
 
 #: standalone/drakautoinst:156
 #, c-format
@@ -18396,8 +18373,7 @@ msgstr ""
 #: standalone/drakbackup:154
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr ""
-"Desa la contrasenya per aquest sistema a la configuració de drakbackup."
+msgstr "Desa la contrasenya per aquest sistema a la configuració de drakbackup."
 
 #: standalone/drakbackup:155
 #, c-format
@@ -18491,8 +18467,7 @@ msgstr "Internal cron no està disponible per a usuaris que no siguin root"
 #: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"\"%s\" no és ni una adreça de correu vàlida ni un usuari local existent!"
+msgstr "\"%s\" no és ni una adreça de correu vàlida ni un usuari local existent!"
 
 #: standalone/drakbackup:469 standalone/logdrake:442
 #, c-format
@@ -18715,8 +18690,7 @@ msgstr ""
 
 #: standalone/drakbackup:1093
 #, c-format
-msgid ""
-"Error during sending file via FTP. Please correct your FTP configuration."
+msgid "Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 "S'ha produït un error en enviar el fitxer a través d'FTP. Si us plau, "
 "corregiu la configuració de l'FTP."
@@ -18777,8 +18751,7 @@ msgstr ""
 
 #: standalone/drakbackup:1398
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Aquestes opcions poden fer còpia de seguretat i restaurar tots els fitxers "
 "del directori /etc.\n"
@@ -18890,8 +18863,7 @@ msgstr "Nom de l'ordinador o IP"
 #: standalone/drakbackup:1620
 #, c-format
 msgid "Directory (or module) to put the backup on this host."
-msgstr ""
-"Directori (o mòdul) d'aquest ordinador on voleu desar la còpia de seguretat."
+msgstr "Directori (o mòdul) d'aquest ordinador on voleu desar la còpia de seguretat."
 
 #
 #: standalone/drakbackup:1632
@@ -19213,20 +19185,17 @@ msgstr "Si us plau, trieu el suport per a la còpia."
 #: standalone/drakbackup:2155
 #, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr ""
-"Si us plau assegureu-vos que el dimoni cron està inclòs en els serveis."
+msgstr "Si us plau assegureu-vos que el dimoni cron està inclòs en els serveis."
 
 #: standalone/drakbackup:2156
 #, c-format
-msgid ""
-"If your machine is not on all the time, you might want to install anacron."
+msgid "If your machine is not on all the time, you might want to install anacron."
 msgstr ""
 
 #: standalone/drakbackup:2157
 #, c-format
 msgid "Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"Noteu que ara mateix tots els suports de xarxa també fan servir el disc dur."
+msgstr "Noteu que ara mateix tots els suports de xarxa també fan servir el disc dur."
 
 #
 #: standalone/drakbackup:2204
@@ -19819,8 +19788,7 @@ msgstr ""
 #: standalone/drakbackup:3489
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
-msgstr ""
-"L'etiqueta de la cinta no és correcta. L'etiqueta d'aquesta cinta és %s."
+msgstr "L'etiqueta de la cinta no és correcta. L'etiqueta d'aquesta cinta és %s."
 
 #
 #: standalone/drakbackup:3500
@@ -20186,8 +20154,7 @@ msgstr ""
 #: standalone/drakbug:41
 #, c-format
 msgid "Mandriva Linux Bug Report Tool"
-msgstr ""
-"Eina per a la comunicació d'errors de programació (bugs) de Mandriva Linux"
+msgstr "Eina per a la comunicació d'errors de programació (bugs) de Mandriva Linux"
 
 #: standalone/drakbug:46
 #, c-format
@@ -20593,8 +20560,7 @@ msgstr ""
 
 #: standalone/drakconnect:745
 #, c-format
-msgid ""
-"Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Felicitats, la interfície de xarxa \"%s\" s'ha esborrat amb èxit"
 
 #: standalone/drakconnect:761
@@ -21442,8 +21408,7 @@ msgstr " --help                - mostra aquesta ajuda     \n"
 
 #: standalone/drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
 #: standalone/drakhelp:24
@@ -22404,8 +22369,7 @@ msgstr ""
 
 #: standalone/draksambashare:441
 #, c-format
-msgid ""
-"Goal of this wizard is to easily create a new special printer Samba share."
+msgid "Goal of this wizard is to easily create a new special printer Samba share."
 msgstr ""
 
 #: standalone/draksambashare:449
@@ -22535,8 +22499,7 @@ msgstr ""
 
 #: standalone/draksambashare:796
 #, c-format
-msgid ""
-"Create mask, create mode and directory mask should be numeric. ie: 0755."
+msgid "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
 
 #: standalone/draksambashare:803
@@ -24499,8 +24462,7 @@ msgstr "la llista de controladors alternatius per a aquesta targeta de so"
 
 #: standalone/harddrake2:29
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "aquest és el bus físic al qual el dispositiu està connectat (p.ex.: PCI, "
 "USB...)"
@@ -25043,14 +25005,13 @@ msgstr "Fitxer de dispositiu"
 
 #: standalone/harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 
 #: standalone/harddrake2:116
 #, c-format
 msgid "Emulated wheel"
-msgstr ""
+msgstr "Rodeta emulada"
 
 #: standalone/harddrake2:116
 #, c-format
@@ -25271,8 +25232,7 @@ msgstr "Varis"
 
 #: standalone/harddrake2:342
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Feu clic a un dispositiu de l'arbre de l'esquerra per veure'n aquí la "
 "informació."
@@ -25656,8 +25616,7 @@ msgstr "La xarxa està activa a la interfície %s"
 #: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr ""
-"La xarxa està caiguda a la interfície %s. Premeu a \"Configura la xarxa\""
+msgstr "La xarxa està caiguda a la interfície %s. Premeu a \"Configura la xarxa\""
 
 #: standalone/net_applet:56 standalone/net_monitor:468
 #, c-format
@@ -26098,8 +26057,7 @@ msgstr "S'està avortant Scannerdrake."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "No s'han pogut instal·lar els paquets necessaris per configurar l'escàner "
 "amb Scannerdrake."
@@ -26137,8 +26095,7 @@ msgstr "S'ha trobat %s en %s, voleu configurar-lo automàticament?"
 #: standalone/scannerdrake:116
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr ""
-"%s no és a la base de dades de l'escàner, voleu configurar-lo manualment?"
+msgstr "%s no és a la base de dades de l'escàner, voleu configurar-lo manualment?"
 
 #
 #: standalone/scannerdrake:131
@@ -26412,8 +26369,7 @@ msgstr ""
 #: standalone/scannerdrake:435 standalone/scannerdrake:438
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"No s'ha trobat cap escàner que estigui disponible en el vostre sistema.\n"
+msgstr "No s'ha trobat cap escàner que estigui disponible en el vostre sistema.\n"
 
 #: standalone/scannerdrake:452
 #, c-format
@@ -26466,8 +26422,7 @@ msgstr ""
 #: standalone/scannerdrake:586
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
-"Els escàners d'aquesta màquina estan disponibles per a altres ordinadors"
+msgstr "Els escàners d'aquesta màquina estan disponibles per a altres ordinadors"
 
 #: standalone/scannerdrake:588
 #, c-format
@@ -31148,3 +31103,4 @@ msgstr "La instal·lació ha fallat"
 
 #~ msgid "utopia 25"
 #~ msgstr "utopia 25"
+
