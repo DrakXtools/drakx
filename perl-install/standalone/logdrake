@@ -141,7 +141,10 @@ gtkadd($my_win->{window},
 														      clicked => sub {
 															  $refcount_search++; 
 															  gtkset_sensitive($yy, $refcount_search);
-														      }) } sort keys %files,
+                                                                         });
+                                                        $toggle{$_}->set_sensitive(0) if !-f $files{$_}{file};
+                                                        $toggle{$_};
+                                                    } sort keys %files,
 										)
 								       ),
 							     0, gtkadd(gtkset_border_width(Gtk2::Frame->new(N("Calendar")),2),
