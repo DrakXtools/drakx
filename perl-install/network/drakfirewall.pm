@@ -244,7 +244,7 @@ sub choose_watched_services {
 
     my @l = (@ifw_rules, @$servers, map { { ports => $_ } } split(' ', $unlisted));
     my $enabled = 1;
-    $_->{ifw} = 1 foreach @l;
+    $_->{ifw} = 1 foreach @ifw_rules;
 
     $in->ask_from_({
         messages =>
