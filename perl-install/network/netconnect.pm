@@ -786,6 +786,7 @@ If you do not know it, keep the preselected type."),
 			  $net->{adsl}{method} eq 'pptp' ? 'pptp_modem' :
 			  $net->{adsl}{method} eq 'capi' ? 'capi_modem' :
 			  $ntf_name;
+                        # FIXME: duplicate with $after_start_on_boot_step sub
                         network::adsl::adsl_conf_backend($in, $modules_conf, $net);
                         "allow_user_ctl";
                     },
