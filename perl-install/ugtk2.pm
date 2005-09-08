@@ -1542,7 +1542,7 @@ sub new {
                                my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $height + $padding*2;
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
                                                                   0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $::isInstall ? 17 : 25,
+                               $darea->window->draw_layout($style->fg_gc('normal'), $x_text, $o_options->{txt_ypos} || $::isInstall ? 13 : 25,
                                                            $darea->{layout});
                                1;
                            });
