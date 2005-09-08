@@ -59,6 +59,8 @@ gtkadd($w->{window},
                 1, gtknew('ScrolledWindow', width => 600, height => 400, child => $loglist),
                 0, gtknew('HButtonBox', layout => 'edge', children_loose => [
                     gtknew('Button', text => N("Clear logs"), clicked => \&clear_log),
+                    gtknew('Button', text => N("Blacklist"), clicked => sub { blacklist(get_selected_log_seq()) }),
+                    gtknew('Button', text => N("Whitelist"), clicked => sub { whitelist(get_selected_log()) }),
                     gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                 ]),
             ]),
@@ -67,7 +69,11 @@ gtkadd($w->{window},
                 1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
                 0, gtknew('HButtonBox', layout => 'edge', children_loose => [
                     gtknew('Button', text => N("Remove from blacklist"), clicked => sub { unblacklist(get_selected_blacklist()) }),
-                    gtknew('Button', text => N("Move to whitelist"), clicked => sub { whitelist(get_selected_blacklist()) }),
+                    gtknew('Button', text => N("Move to whitelist"), clicked => sub {
+                        my @addr = get_selected_blacklist();
+                        unblacklist(@addr);
+                        whitelist(@addr);
+                    }),
                     gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                 ]),
             ]),
@@ -109,7 +115,6 @@ sub init_blacklist() {
     my @packets = $ifw->get_blacklist;
     while (my @blacklist = splice(@packets, 0, 8)) {
         handle_blacklist(@blacklist);
-        handle_log(@blacklist);
     }
 }
 
@@ -123,6 +128,12 @@ sub handle_blacklist {
 
 sub get_selected_blacklist() {
     uniq(map { $blacklist->{data}[$_][0] } $blacklist->get_selected_indices);
+}
+
+sub blacklist {
+    my @seq = @_;
+    eval { $ifw->set_blacklist_verdict($_, 1) foreach @seq };
+    $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 }
 
 sub unblacklist {
@@ -155,7 +166,6 @@ sub get_selected_whitelist() {
 
 sub whitelist {
     my @addr = @_;
-    unblacklist(@addr);
     eval { $ifw->whitelist($_) foreach @addr };
     $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
 }
@@ -187,6 +197,7 @@ sub clear_lists() {
 
 sub create_attack_list() {
     my $attacklist = Gtk2::SimpleList->new(addr => 'hidden',
+                                           seq => 'hidden',
                                            timestamp => 'hidden',
                                            N("Date") => 'text',
                                            N("Attacker") => 'text',
@@ -209,6 +220,7 @@ sub attack_list_add {
     my ($attacklist, $attack) = @_;
     push @{$attacklist->{data}}, [
         $attack->{addr},
+        $attack->{seq},
         $attack->{timestamp},
         $attack->{date},
         $attack->{hostname},
@@ -233,6 +245,13 @@ sub clear_loglist() {
 
 sub handle_log {
     attack_list_add($loglist, network::ifw::attack_to_hash(\@_));
+}
+
+sub get_selected_log_seq() {
+    uniq(map { $loglist->{data}[$_][1] } $loglist->get_selected_indices);
+}
+sub get_selected_log() {
+    uniq(map { $loglist->{data}[$_][0] } $loglist->get_selected_indices);
 }
 
 sub clear_log {
