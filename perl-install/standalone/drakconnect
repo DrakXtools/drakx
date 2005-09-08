@@ -272,7 +272,7 @@ sub build_tree {
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };
 	put_in_hash($intf, network::modem::ppp_read_conf());
-	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
+	$intf->{save} = sub { network::modem::ppp_configure($net, $in, $intf) };
     }
     elsif ($interface eq 'isdn') {
 	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Modem' => 1, 'Options' => 1 };

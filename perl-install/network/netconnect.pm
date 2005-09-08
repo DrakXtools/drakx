@@ -616,7 +616,7 @@ Take a look at http://www.linmodems.org"),
                         ];
                         },
                     post => sub {
-                        network::modem::ppp_configure($in, $modem);
+                        network::modem::ppp_configure($net, $in, $modem);
                         $net->{net_interface} = 'ppp0';
                         "allow_user_ctl";
                     },

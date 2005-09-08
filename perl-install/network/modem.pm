@@ -53,7 +53,7 @@ sub ppp_read_conf() {
 
 #-----modem conf
 sub ppp_configure {
-    my ($in, $modem) = @_;
+    my ($net, $in, $modem) = @_;
     $in->do_pkgs->install('ppp') if !$::testing;
     $in->do_pkgs->install('kdenetwork-kppp') if !$::testing && $in->do_pkgs->is_installed('kdebase');
 
@@ -75,7 +75,6 @@ sub ppp_configure {
 
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
-    $toreplace{intf} ||= 'ppp0';
     $toreplace{papname} = $toreplace{login} if member($modem->{Authentication}, 1, 3, 4);
 
     # handle static/dynamic settings:
@@ -88,36 +87,34 @@ sub ppp_configure {
 
     $toreplace{METRIC} = defined($modem->{METRIC}) ? $modem->{METRIC} : network::tools::get_default_metric("modem");
 
-    #- build ifcfg-ppp0.
-    my $various = <<END;
-DEVICE="$toreplace{intf}"
-ONBOOT="no"
-USERCTL="no"
-MODEMPORT="/dev/modem"
-LINESPEED="115200"
-PERSIST="yes"
-DEFABORT="yes"
-DEBUG="yes"
-INITSTRING="ATZ"
-DEFROUTE="yes"
-HARDFLOWCTL="yes"
-ESCAPECHARS="no"
-PPPOPTIONS=""
-PAPNAME="$toreplace{papname}"
-REMIP=""
-NETMASK=""
-IPADDR=""
-MRU=""
-MTU=""
-DISCONNECTTIMEOUT="5"
-RETRYTIMEOUT="60"
-BOOTPROTO="none"
-PEERDNS="$toreplace{peerdns}"
-METRIC=$toreplace{METRIC}
-END
-    output("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
-	   $various,
-           if_($modem->{auto_dns} ne N("Automatic"), map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2));
+    $net->{ifcfg}{ppp0} = {
+        DEVICE => "ppp0",
+        ONBOOT => "no",
+        USERCTL => "no",
+        MODEMPORT => "/dev/modem",
+        LINESPEED => "115200",
+        PERSIST => "yes",
+        DEFABORT => "yes",
+        DEBUG => "yes",
+        INITSTRING => "ATZ",
+        DEFROUTE => "yes",
+        HARDFLOWCTL => "yes",
+        ESCAPECHARS => "no",
+        PPPOPTIONS => "",
+        PAPNAME => $toreplace{papname},
+        REMIP => "",
+        NETMASK => "",
+        IPADDR => "",
+        MRU => "",
+        MTU => "",
+        DISCONNECTTIMEOUT => "5",
+        RETRYTIMEOUT => "60",
+        BOOTPROTO => "none",
+        PEERDNS => $toreplace{peerdns},
+        METRIC => $toreplace{METRIC},
+        if_($modem->{auto_dns} ne N("Automatic"),
+            map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2),
+    };
 
     #- build chat-ppp0.
     my @chat = <<END;
