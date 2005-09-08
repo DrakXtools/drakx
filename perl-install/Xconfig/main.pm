@@ -95,7 +95,11 @@ sub configure_chooser_raw {
     };
     $update_texts->();
 
-    my $may_set = sub {
+    my $may_set; 
+    my $prompt_for_resolution = sub {
+	$may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}));
+    };
+    $may_set = sub {
 	my ($field, $val) = @_;
 	if ($val) {
 	    $X->{$field} = $val;
@@ -104,8 +108,16 @@ sub configure_chooser_raw {
 	    $update_texts->();
 
 	    if (member($field, 'card', 'monitors')) {
-		Xconfig::screen::configure($raw_X);
-		$raw_X->set_resolution($X->{resolution}) if $X->{resolution};
+		my ($default_resolution) = Xconfig::resolution_and_depth::choices($raw_X, $X->{resolution}, $X->{card}, $X->{monitors});
+		if (find { $default_resolution->{$_} ne $X->{resolution}{$_} } 'X', 'Y', 'Depth') {
+		    $prompt_for_resolution->();
+		} else {
+		    if ($default_resolution->{bios} && !$X->{resolution}{bios}) {
+			$may_set->('resolution', $default_resolution);
+		    }
+		    Xconfig::screen::configure($raw_X);
+		    $raw_X->set_resolution($X->{resolution}) if $X->{resolution};
+		}
 	    }
 	}
     };
@@ -121,9 +133,7 @@ sub configure_chooser_raw {
 			  $may_set->('monitors', Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)));
 		      } },
 		    { label => N("Resolution"), val => \$texts{resolution}, disabled => sub { !$X->{card} || !$X->{monitors} },
-		      clicked => sub {
-			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}));
-		      } },
+		      clicked => $prompt_for_resolution },
 		        if_(Xconfig::card::check_bad_card($X->{card}) || $::isStandalone,
 		     { val => N("Test"), disabled => sub { !$X->{card} || !$X->{monitors} },
 		       clicked => sub { 
