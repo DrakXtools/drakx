@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.56mdk
+Release: 0.57mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,28 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.57mdk
+- drakfirewall: don't enable custom IFW rules (blino)
+- draknetconnect (blino):
+  o disable roaming for rt2400/rt2500
+  o really read system kppp configuration
+  o do not let modem settings be overriden by previous ppp0 settings
+  o misc fixes for 3rd party drivers
+- harddrake service: prevent wiping /etc/modprobe.preload (#16181)
+- localedrake: unset QT_IM_MODULE due to unsatisfied qtimmodule
+  support in KDE (funda wang)
+- logdrake: insensitive categories for which file is missing, thus
+  preventing crashing (#16935)
+- net_monitor (blino):
+  o really preselect default interface
+  o show ppp/isdn interfaces as well (#18303)
+- printerdrake: fix setup of HP's multi-function printers on 64-bit
+  boxes (till)
+- XFdrake (pixel):
+  o when changing the card/monitor, ensure the resolution is still
+    valid
+  o when switching to fbdev, ensure we have a bios resolution
+
 * Wed Sep  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.56mdk
 - harddrake service: blacklist audio too (#12731)
 
