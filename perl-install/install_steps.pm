@@ -590,6 +590,8 @@ sub install_urpmi {
     if ($pkg && ($pkg->flag_selected || $pkg->flag_installed)) {
 	install_any::install_urpmi($o->{method}, $o->{packages});
 	pkgs::saveCompssUsers($o->{packages}, $o->{compssUsers});
+    } else {
+	log::l("skipping install_urpmi, urpmi not installed");
     }
 }
 
