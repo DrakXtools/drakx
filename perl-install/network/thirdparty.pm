@@ -318,7 +318,7 @@ sub is_file_installed {
 sub is_module_installed {
     my ($settings, $driver) = @_;
     my $module = $settings->{kernel_module}{test_file} || $driver;
-    find { m!/$driver\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
+    find { m!/$module\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
 }
 
 sub is_firmware_installed {
