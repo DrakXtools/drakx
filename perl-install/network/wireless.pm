@@ -12,6 +12,16 @@ our %wireless_enc_modes = (
 
 my $wpa_supplicant_conf = "/etc/wpa_supplicant.conf";
 
+sub is_old_rt2x00 {
+    my ($module) = @_;
+    member($module, qw(rt2400 rt2500));
+}
+
+sub is_wpa_supplicant_blacklisted {
+    my ($module) = @_;
+    is_old_rt2x00($module);
+}
+
 sub convert_wep_key_for_iwconfig {
     #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
     #- else consider the key as hexadecimal, do not strip dashes

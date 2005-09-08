@@ -987,7 +987,7 @@ notation (for example, 1.2.3.4).")),
                     pre => sub {
                         require network::wireless;
                         $find_lan_module->();
-                        $need_rt2x00_iwpriv = member($module, qw(rt2400 rt2500));
+                        $need_rt2x00_iwpriv = network::wireless::is_old_rt2x00($module);
                         $wireless_roaming = delete $ethntf->{WIRELESS_MODE} eq 'Roaming' && !$need_rt2x00_iwpriv;
                         $ethntf->{WIRELESS_MODE} ||= "Managed";
                         $ethntf->{WIRELESS_ESSID} ||= "any";
@@ -1014,7 +1014,8 @@ notation (for example, 1.2.3.4).")),
                                sort => 1,
                                format => sub { translate($network::wireless::wireless_enc_modes{$_[0]}) } },
                              { label => N("Encryption key"), val => \$wireless_enc_key, disabled => sub { $wireless_enc_mode eq 'none' } },
-                             { text => N("Allow access point roaming"), val => \$wireless_roaming, type => "bool" },
+                             { text => N("Allow access point roaming"), val => \$wireless_roaming, type => "bool",
+                               disabled => sub { network::wireless::is_wpa_supplicant_blacklisted($module) } },
                              { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
                              { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ}, advanced => 1 },
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
