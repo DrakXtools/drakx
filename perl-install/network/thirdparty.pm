@@ -70,7 +70,9 @@ my %network_settings = (
     description => 'HCF 56k Modem',
     url => 'http://www.linuxant.com/drivers/hcf/',
     name => 'hcfpcimodem',
-    kernel_module => 1,
+    kernel_module => {
+        'hcfpciengine',
+    },
     tools =>
     {
      test_file => '/usr/sbin/hcfpciconfig',
@@ -84,7 +86,9 @@ my %network_settings = (
     description => 'HSF 56k Modem',
     url => 'http://www.linuxant.com/drivers/hsf/',
     name => 'hsfmodem',
-    kernel_module => 1,
+    kernel_module => {
+        'hsfengine',
+    },
     tools =>
     {
      test_file => '/usr/sbin/hsfconfig',
@@ -238,7 +242,9 @@ You can find a driver on http://eciadsl.flashtux.org/"),
     description => 'Bewan Adsl (Unicorn)',
     url => 'http://www.bewan.com/bewan/users/downloads/',
     name => 'unicorn',
-    kernel_module => 1,
+    kernel_module => {
+        test_file => 'unicorn_.*_atm',
+    },
     tools => 1,
    },
   ],
@@ -310,8 +316,9 @@ sub is_file_installed {
 }
 
 sub is_module_installed {
-    my ($driver) = @_;
-    find { m!/\Q$driver\E\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
+    my ($settings, $driver) = @_;
+    my $module = $settings->{kernel_module}{test_file} || $driver;
+    find { m!/$driver\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
 }
 
 sub is_firmware_installed {
@@ -403,7 +410,7 @@ sub install_packages {
 	   kernel_module =>
 	   {
 	    find_package_name => sub { device_get_package($settings, $option, "$settings->{name}-kernel") },
-	    check_installed => sub { is_module_installed($driver) },
+	    check_installed => sub { is_module_installed($settings, $driver) },
 	    get_packages => sub { my ($name) = @_; my $l = $in->do_pkgs->check_kernel_module_packages($name); $l ? @$l : () }
 	   },
 	   firmware =>
