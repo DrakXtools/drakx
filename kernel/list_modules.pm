@@ -103,7 +103,7 @@ our %l = (
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
-      qw(ahci ata_adma ata_piix pata_pdc2027x sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      qw(ahci ata_adma ata_piix pata_pdc2027x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
