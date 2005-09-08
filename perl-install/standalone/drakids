@@ -59,7 +59,7 @@ gtkadd($w->{window},
                 1, gtknew('ScrolledWindow', width => 600, height => 400, child => $loglist),
                 0, gtknew('HButtonBox', layout => 'edge', children_loose => [
                     gtknew('Button', text => N("Clear logs"), clicked => \&clear_log),
-                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                    gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                 ]),
             ]),
             gtknew('Label', text => N("Blacklist")),
@@ -68,7 +68,7 @@ gtkadd($w->{window},
                 0, gtknew('HButtonBox', layout => 'edge', children_loose => [
                     gtknew('Button', text => N("Remove from blacklist"), clicked => sub { unblacklist(get_selected_blacklist()) }),
                     gtknew('Button', text => N("Move to whitelist"), clicked => sub { whitelist(get_selected_blacklist()) }),
-                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                    gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                 ]),
             ]),
             gtknew('Label', text => N("Whitelist")),
@@ -76,7 +76,7 @@ gtkadd($w->{window},
                 1, gtknew('ScrolledWindow', width => 600, height => 400, child => $whitelist),
                 0, gtknew('HButtonBox', layout => 'edge', children_loose => [
                     gtknew('Button', text => N("Remove from whitelist"), clicked => sub { unwhitelist(get_selected_whitelist()) }),
-                    gtknew('Button', text => N("Quit"), clicked => sub { Gtk2->main_quit })
+                    gtknew('Button', text => N("Close"), clicked => sub { Gtk2->main_quit })
                 ]),
             ]),
         ]),
