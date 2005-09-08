@@ -178,7 +178,7 @@ sub selectInstallClass {
 		conectiva => 'cl',
 		redhat => '.', #- everything!
 	    }->{$o->{isUpgrade}};
-	    log::l("upgrading $o->{isUpgrade} distribution" . ($o->{upgrade_by_removing_pkgs} ? " (upgrade_by_removing_pkgs)" : ''));
+	    log::l("upgrading $o->{isUpgrade} distribution" . ($o->{upgrade_by_removing_pkgs_matching} ? " (upgrade_by_removing_pkgs_matching $o->{upgrade_by_removing_pkgs_matching})" : ''));
 	}
     }
 }
