@@ -1249,7 +1249,8 @@ It is not necessary on most networks."),
                    isdn_dial_on_boot =>
                    {
                     pre => sub {
-                        $net->{ifcfg}{ippp0} ||= { DEVICE => "ippp0" }; # we want the ifcfg-ippp0 file to be written
+                        $net->{ifcfg}{ippp0} ||= {}; # we want the ifcfg-ippp0 file to be written
+                        $net->{ifcfg}{ippp0}{DEVICE} = "ippp0";
                         @isdn_dial_methods = ({ name => N("Automatically at boot"),
                                                 ONBOOT => 1, DIAL_ON_IFUP => 1 },
                                               { name => N("By using Net Applet in the system tray"),
