@@ -332,25 +332,6 @@ sub create_box_with_title {
          my ($txt) = @_;
          ref($txt) ? $txt : gtknew('WrappedLabel', text => $txt);
      };
-	if (0 && ($o->{icon} && !$::isWizard || $::isInstall)) {
-	    gtkpack__($box,
-		      gtknew('HBox', children => [
-			       0, gtknew('VBox', width => 15),
-			       0, eval { gtkcreate_img($o->{icon}) },
-			       0, gtknew('VBox', width => 15),
-			       1, $o->{box_title} = gtknew('VBox', children_loose => [
-					 gtknew('HBox', children => [
-					   (map {
-					       my $w = $new_label->($_);
-					       $::isWizard and $w->set_justify("left");
-					       (0, $w);
-					   } @l),
-					   1, gtknew('HBox'),
-					  ]) ])
-		      ]),
-		      if_($a, gtknew('HSeparator'))
-		     );
-	} else {
 	    gtkpack__($box,
 		      if_($::isWizard, gtknew('Label', height => 10)),
 		      (map {
@@ -361,7 +342,6 @@ sub create_box_with_title {
 		      if_($::isWizard, gtknew('Label', height => 15)),
 		      if_($a, gtknew('HSeparator')),
 		     );
-	}
     }
 }
 
