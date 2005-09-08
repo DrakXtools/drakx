@@ -1068,7 +1068,10 @@ sub write {
 	foreach (@IM_i18n_fields) {
 	    $h->{$_} = $IM_config{$locale->{IM}}{$_};
 	}
-        $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
+	# I must set QT_IM_MODULE to xim to satisfy KDE startup,
+	# otherwise it will hangs if *-qtimm be installed.
+	# $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
+	add2hash($h, { QT_IM_MODULE => 'xim' });
 
 	if (ref $h->{XIM_PROGRAM}) {
 	    $h->{XIM_PROGRAM} = 
