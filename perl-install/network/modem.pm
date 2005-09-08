@@ -22,7 +22,7 @@ sub get_user_home() {
 sub ppp_read_conf() {
     my $modem = {};
     my %l = getVarsFromSh(get_user_home() . "/.kde/share/config/kppprc");
-    add2hash(\%l, getVarsFromSh("$::prefix/usr/share/config/kppprc"));
+    add2hash(\%l, { getVarsFromSh("$::prefix/usr/share/config/kppprc") });
     $l{Authentication} = 4 if $l{Authentication} !~ /\d/;
     $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
     $modem->{connection} ||= $l{Name};
