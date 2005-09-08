@@ -61,7 +61,8 @@ sub get_eth_cards {
                      "p80211_prism2_usb" => 'prism2_usb',
                      "ip1394" => "eth1394",
                      "DL2K" => "dl2k",
-                     "hostap" => undef, #- should be either "hostap_plx", "hostap_pci" or "hostap_cs"
+                     "orinoco" => undef, #- should be orinoco_{cs,nortel,pci,plx,tmd}
+                     "hostap" => undef, #- should be hostap_{cs,pci,plx}
                     );
         $a = $fixes{$a} if exists $fixes{$a};
 
