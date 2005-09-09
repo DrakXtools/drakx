@@ -661,7 +661,7 @@ sub setPackages {
 	put_in_hash($o->{rpmsrate_flags_chosen} ||= {}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
 	load_rate_files($o);
 
-	copy_rpms_on_disk($o) if $copy_rpms_on_disk;
+	copy_rpms_on_disk($o, $wait_message) if $copy_rpms_on_disk;
 
 	set_rpmsrate_default_category_flags($o, $rpmsrate_flags_was_chosen);
 
@@ -745,7 +745,7 @@ sub cp_with_progress {
 }
 
 sub copy_rpms_on_disk {
-    my ($o) = @_;
+    my ($o, $wait_message) = @_;
     mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrivalinux var/ftp/pub/Mandrivalinux/media);
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
@@ -770,7 +770,6 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	my $m = install_medium::by_id($k, $o->{packages});
 	#- don't copy rpms of supplementary media
 	next if $m->is_suppl;
-	my ($wait_w, $wait_message) = $o->wait_message_with_progress_bar; #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
 	    my $cd_k = $m->get_cd_number;
@@ -792,7 +791,6 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrivalinux";
 	$m->{method} = 'disk';
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
-	undef $wait_w;
     }
     ejectCdrom() if $o->{method} eq "cdrom";
     #- now the install will continue as 'disk'

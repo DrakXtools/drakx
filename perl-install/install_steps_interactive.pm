@@ -401,9 +401,13 @@ sub formatMountPartitions {
 sub setPackages {
     my ($o) = @_;
 
-    my $w = $o->wait_message('', $o->{isUpgrade} ? N("Looking for available packages and rebuilding rpm database...") :
-			     N("Looking for available packages..."));
-    install_any::setPackages($o, sub { $w->set(@_) });
+    my ($w, $wait_message) = $o->wait_message_with_progress_bar;
+
+    $wait_message->($o->{isUpgrade} ? N("Looking for available packages and rebuilding rpm database...") :
+			              N("Looking for available packages..."));
+    install_any::setPackages($o, $wait_message);
+
+    undef $w; #- help perl
 }
 
 sub mirror2text { $crypto::mirrors{$_[0]} ? $crypto::mirrors{$_[0]}[0] . '|' . $_[0] : "-|URL" }
