@@ -126,7 +126,11 @@ my %network_settings = (
      test_file => '/usr/sbin/slmodemd',
     },
     device => '/dev/ttySL0',
-    restart_service => 1,
+    post => sub {
+	my ($driver) = @_;
+	addVarsInSh("$::prefix/etc/sysconfig/slmodemd", { SLMODEMD_MODULE => $driver });
+    },
+    restart_service => "slmodemd",
    },
 
    {
@@ -281,11 +285,11 @@ sub find_settings {
 }
 
 sub device_run_command {
-    my ($settings, $option) = @_;
+    my ($settings, $driver, $option) = @_;
     my $command = $settings->{$option} or return;
 
     if (ref $command eq 'CODE') {
-        $command->();
+        $command->($driver);
     } else {
         log::explanations("Running $option command $command");
         run_program::rooted($::prefix, $command);
@@ -455,17 +459,19 @@ sub setup_device {
     if ($settings) {
 	log::explanations(qq(Found settings for driver "$driver" in category "$category"));
 
-	my $_w = $in->wait_message('', N("Looking for required software and drivers..."));
+	my $wait = $in->wait_message('', N("Looking for required software and drivers..."));
 
 	install_packages($in, $settings, $driver, qw(kernel_module firmware tools)) or return;
 
-	if (my $service = device_get_option($settings, 'service')) {
+        undef $wait;
+        $wait = $in->wait_message('', N("Please wait, running device configuration commands..."));
+        device_run_command($settings, $driver, 'post');
+
+	if (my $service = device_get_option($settings, 'restart_service')) {
 	    log::explanations("Restarting service $service");
 	    services::restart_or_start($service);
 	}
 
-        my $_wait = $in->wait_message('', N("Please wait, running device configuration commands..."));
-        device_run_command($settings, 'post');
 	log::explanations(qq(Settings for driver "$driver" applied));
     } else {
 	log::explanations(qq(No settings found for driver "$driver" in category "$category"));
