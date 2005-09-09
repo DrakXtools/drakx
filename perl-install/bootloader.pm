@@ -225,6 +225,8 @@ sub read_grub {
                 $e->{initrd} = grub2file($v, $grub2dev, $fstab);
             } elsif ($keyword eq 'map') {
 		$e->{mapdrive}{$2} = $1 if $v =~ m/\((.*)\) \((.*)\)/;
+            } elsif ($keyword eq 'module') {
+		push @{$e->{modules}}, $v;
 	    }
         }
     }
@@ -1349,6 +1351,7 @@ sub write_grub {
 		       $_->{append},
 		       if_($_->{'read-write'}, 'rw'),
 		       if_($vga && $vga ne "normal", "vga=$vga"));
+		push @conf, "module " . $_ foreach @{$_->{modules} || []};
 		push @conf, "initrd " . $file2grub->($_->{initrd}) if $_->{initrd};
 	    } else {
 		my $dev = eval { device_string2grub($_->{kernel_or_dev}, \@legacy_floppies, \@sorted_hds) };
