@@ -1331,7 +1331,10 @@ sub remove_raw {
     my ($to_remove, $callback, %run_transaction_options) = @_;
 
     log::l("removing: " . join(' ', @$to_remove));
-    
+
+    URPM::read_config_files();
+    URPM::add_macro(URPM::expand('__dbi_cdb %__dbi_cdb nofsync'));
+
     my $db = open_rpm_db_rw() or die "error opening RPM database: ", URPM::rpmErrorString();
     my $trans = $db->create_transaction($::prefix);
 
