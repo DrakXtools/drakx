@@ -191,10 +191,10 @@ sub read_grub {
     my $global = 1;
     my ($e, %b);
 
-    my $grub2dev = read_grub_device_map();
-
     my $menu_lst_file = "$::prefix/boot/grub/menu.lst";
     -e $menu_lst_file or return;
+
+    my $grub2dev = read_grub_device_map();
 
     foreach (cat_($menu_lst_file)) {
         chomp;
