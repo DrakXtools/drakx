@@ -44,7 +44,6 @@ my %scale_settings = (
 
 my %adj;
 create_adj_widgets();
-create_simple_adj_widgets();
 
 my %theme;
 set_theme('new_theme');
@@ -199,22 +198,18 @@ sub choose_color() {
 }
 
 
-#- Adjustement widgets
 sub create_adj_widgets() {
     $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
-    my %scale_links = (tb_x => 'tb_w', tb_y => 'tb_h', px => 'pw', py => 'ph', text_x => 'px', text_y => 'py', transp => 'transp', ptransp => 'ptransp', text_size => 'text_size' );
+    my %scale_links = (tb_x => 'tb_w', tb_y => 'tb_h', px => 'pw', py => 'ph', text_x => 'px', text_y => 'py');
     while (my ($n1, $n2) = each(%scale_links)) {
 	$adj{$n1}{on_change} = $adj{$n1}->signal_connect(value_changed => sub { check_scale_value($n1, $n2); apply_scale($n1) });
 	$adj{$n2}{on_change} = $adj{$n2}->signal_connect(value_changed => sub { check_scale_value($n2, $n1); apply_scale($n2) });
     }
-}
-
-sub create_simple_adj_widgets() {
-    $adj{$_} = Gtk2::Adjustment->new(0, 0, 0, 1, 10, 0) foreach keys %scale_settings;
-    foreach my $n ('transp','ptransp', 'text_size') {
+    foreach my $n (qw(transp ptransp text_size)) {
 	$adj{$n}{on_change} = $adj{$n}->signal_connect(value_changed => sub { apply_scale($n) });
     }
 }
+
 sub create_scale_table {
     my @settings = @_;
     create_packtable({ col_spacings => 10, row_spacings => 5 }, map {
