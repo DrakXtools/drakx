@@ -648,8 +648,19 @@ sub setPackages {
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{isUpgrade});
 
 	if (my $extension = $o->{upgrade_by_removing_pkgs_matching}) {
+	    my $time = time();
 	    $wait_message->(N("Removing packages prior to upgrade..."));
-	    push @{$o->{default_packages}}, pkgs::upgrade_by_removing_pkgs($o->{packages}, \&install_steps::installCallback, $extension, "$ENV{SHARE_PATH}/upgrade-map.$o->{isUpgrade}");
+	    my ($current, $total);
+	    my $callback = sub {
+		my (undef, $type, $_id, $subtype, $amount) = @_;
+		if ($type eq 'user') {
+		    ($current, $total) = (0, $amount);
+		} elsif ($type eq 'uninst' && $subtype eq 'stop') {
+		    $wait_message->('', $current++, $total);
+		}
+	    };
+	    push @{$o->{default_packages}}, pkgs::upgrade_by_removing_pkgs($o->{packages}, $callback, $extension, "$ENV{SHARE_PATH}/upgrade-map.$o->{isUpgrade}");
+	    log::l("Removing packages took: ", formatTimeRaw(time() - $time));
 	}
 
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
