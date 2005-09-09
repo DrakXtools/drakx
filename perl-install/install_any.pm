@@ -842,6 +842,7 @@ sub rpmsrate_always_flags {
     my ($o) = @_;
 
     my $rpmsrate_flags_chosen = {};
+    $rpmsrate_flags_chosen->{qq(META_CLASS"$o->{meta_class}")} = 1;
     $rpmsrate_flags_chosen->{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
     $rpmsrate_flags_chosen->{uc($_)} = 1 foreach detect_devices::probe_name('Flag');
     $rpmsrate_flags_chosen->{DOCS} = !$o->{excludedocs};
