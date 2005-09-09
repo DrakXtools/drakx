@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.58mdk
+Release: 0.59mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep  9 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.59mdk
+- drakboot: misc fixes (pixel)
+- drakconnect: support soft modems through ALSA (blino)
+- draksplash: fix adjustments creation (blino, #18295)
+
 * Thu Sep  8 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.58mdk
 - drakids: allow to blacklist/whitelist from the log
 - drakconnect (blino):
