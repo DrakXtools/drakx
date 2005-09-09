@@ -498,6 +498,9 @@ sub wait_message_with_progress_bar {
 		    $progress->hide;
 		    $progress->signal_connect(expose_event => $on_expose);
 		}
+	    } else {
+		#- re-hide if visible
+		$progress->hide if $progress;
 	    }
 	    $w->set($msg);
 	} elsif ($total) {
