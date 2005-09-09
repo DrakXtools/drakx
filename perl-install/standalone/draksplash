@@ -183,7 +183,7 @@ sub choose_image {
     $file_dialog->destroy;
 }
 
-sub choose_color() {
+sub choose_color {
     my ($var) = @_;
     my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("Color selection")));
     print "Current color $var: $theme{conf}{$var}\n";
@@ -223,7 +223,7 @@ sub get_scale_max {
     my ($name) = @_;
     if ($name =~ /size/) { return 100 }
     if ($name =~ /transp/) { return 255 }
-    $theme{$name =~ /[xw]$/ ? "res_w" : "res_h"}
+    $theme{$name =~ /[xw]$/ ? "res_w" : "res_h"};
 }
 sub apply_scale {
     my ($name) = @_;
