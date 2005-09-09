@@ -532,8 +532,13 @@ sub selectSupplMedia {
 		#- add $mediadir in fstab for post-installation
 		push @{$o->{all_hds}{nfss}}, { fs_type => 'nfs', mntpoint => $mediadir, device => $dev, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 	    } else {
-		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
-		$url =~ s!/+\z!!;
+		our $last_url; #- propose the last URL for correction in case of error
+		$o->ask_from_({ focus_first => 1 },
+			      [ { label => N("URL of the mirror?"),
+				  #hidden => 1,
+				  val => \$last_url } ]);
+		$last_url =~ s!/+\z!!;
+		$url = $last_url or return 'error';
 	    }
 	    useMedium($medium_name);
 	    require http if $suppl_method eq 'http';
