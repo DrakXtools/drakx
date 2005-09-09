@@ -535,7 +535,6 @@ sub selectSupplMedia {
 		our $last_url; #- propose the last URL for correction in case of error
 		$o->ask_from_({ focus_first => 1 },
 			      [ { label => N("URL of the mirror?"),
-				  #hidden => 1,
 				  val => \$last_url } ]);
 		$last_url =~ s!/+\z!!;
 		$url = $last_url or return 'error';
