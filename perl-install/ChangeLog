@@ -1,3 +1,309 @@
+2005/09/09  cavassin
+
+	* share/po/pt_BR.po: More fixes for pt_BR.
+
+2005/09/09  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/sl.po: Updated Slovenian translation from Jure Repinc
+	<jlp@holodeck1.com>.
+
+2005/09/09  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: support snd-intel8x0m by writing SLMODEMD_MODULE
+	in /etc/sysconfig/slmodemd
+
+	* standalone/draksplash: perl_checker fixes
+	fix adjustments creation (#18295)
+
+2005/09/09  pmaryanov
+
+	* share/po/ru.po: updated translation
+
+2005/09/09  Pixel  <pixel at mandriva.com>
+
+	* install_steps_interactive.pm: pass around wait_message with progress bar
+	capability
+
+	* pkgs.pm: have same rpm config as when installing pkgs
+
+	* interactive.pm: allow the wait_message progress bar to be used more than
+	once
+
+	* bootloader.pm: see if we have menu.lst first
+	handle "module xxx" lines in menu.lst (used for xen)
+
+	* install_steps.pm: play it safe (bugzilla #18390)
+
+	* install_any.pm: set META_CLASS"xxx" flag
+	have a progress bar when removing packages
+	pass around wait_message with progress bar capability
+
+	* share/rpmsrate: replace mozilla-mail (no more) with mozilla-thunderbird
+
+2005/09/09  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* install_any.pm: Remove commented code
+	When adding http suppl media, repropose the last url entered. Very
+	useful in case of typo in the url
+
+	* share/po/fr.po: More translations
+
+2005/09/09  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+	update
+	update
+	update
+
+	* lang.pm (write) use qt-immodule again
+
+	* drakxtools.spec: 10.3-0.59mdk
+
+	* share/rpmsrate: install scim-qtimm for CJK
+
+2005/09/08  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: adjust GUI ouput in modify dialog box
+
+2005/09/08  cavassin
+
+	* share/po/pt_BR.po: Fixed a few more pt_BR messages.
+
+2005/09/08  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: unset QT_IM_MODULE due to unsatisfied qtimmodule support in Qt.
+	If we don't touch QT_IM_MODULE, it will cause KDE hangs up if
+	upgrading from cooker to official.
+
+	* share/po/it.po: Updated it translation from Andrea Celli
+	<andrea.celli@libero.it>
+
+	* share/rpmsrate: Drop scim-qtimm due to unsatisfied qtimm support in qt3
+
+2005/09/08  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/09/08  mbukovjan
+
+	* share/po/cs.po: Updated Czech translations.
+
+2005/09/08  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: fix typo
+	don't try to install both source/precompiled dkms packages if one of
+	them is installed
+	really fix sagem/speedtouch detection
+
+	* network/netconnect.pm: force DEVICE field write for ISDN configurations
+	add reminder
+	disable roaming for rt2400/rt2500
+	do not let modem settings be overriden by previous ppp0 settings
+
+	* network/wireless.pm: disable roaming for rt2400/rt2500
+
+	* network/modem.pm: really read system kppp configuration (happy birthday
+	little bug)
+	do not let modem settings be overriden by previous ppp0 settings
+
+	* standalone/drakids: allow to blacklist/whitelist from the log window
+	use Close instead of Quit
+
+	* network/ethernet.pm: try not to use wrong "orinoco" module (#18294)
+
+	* standalone/drakconnect: do not let modem settings be overriden by
+	previous ppp0 settings
+
+	* network/drakfirewall.pm: only enable built-in IFW rules for now (too
+	late to add strings for custom rules)
+
+2005/09/08  Pixel  <pixel at mandriva.com>
+
+	* install_steps_interactive.pm: fix log
+
+	* Xconfig/main.pm: 
+	  - when changing the card/monitor, ensure the resolution is still valid
+	  - when switching to fbdev, ensure we have a bios resolution
+
+2005/09/08  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: * Sep 9 2005 Reinout van Schouwen <reinout@cs.vu.nl>
+	Updated Dutch translation by Rob Teng <mandrake.tips@free.fr>
+
+2005/09/08  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/po/fr.po: Fix grammar
+
+	* install_steps.pm: Add a trace
+
+2005/09/08  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* ugtk2.pm (Gtk2::Banner->new) fix banner's text position since pixel has
+	reduce its height
+	(create_box_with_title) kill that dead code path
+
+	* share/po/br.po: update
+	update
+	update
+
+	* standalone/logdrake: insensitive categories for which file is missing,
+	thus preventing
+	crashing (#16935)
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+	* drakxtools.spec: 10.3-0.58mdk
+	10.3-0.57mdk
+
+2005/09/08  Warly  <warly at mandriva.com>
+
+	* share/rpmsrate: rename openldap openldap-servers
+
+2005/09/08  willysr
+
+	* share/po/id.po: Updated
+
+2005/09/07  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/Makefile,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/ta.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	Updated POT.
+
+2005/09/07  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/network.c: mirror list support for http method
+
+	* detect_devices.pm: 
+	  - split is_useful_interface out of is_lan_interface
+	  - split get_all_net_devices out of getNet
+	  - add get_net_interfaces to include isdn/dsl interfaces
+
+	* network/thirdparty.pm: fix installation of eagle-usb package
+	our hsf package is called hsfmodem, not hsflinmodem
+
+	* standalone/net_monitor: really preselect default interface
+	show ppp/isdn interfaces as well (#18303)
+
+	* mdk-stage1/url.c: http redirection support
+
+2005/09/07  Pixel  <pixel at mandriva.com>
+
+	* rescue/partimage_whole_disk: 
+	  - install scsi and sata modules
+	  - make save_home_directory optional (and is false by default)
+
+	* modules.pm: silent error when ahci or ata_piix insmod fail (ahci fails
+	on vmware)
+
+2005/09/07  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Another 64-bit fix in printerdrake. Now setup of HP's multi-function
+	printers really works on 64-bit boxes.
+	  - Give also access to the CUPS auto administration dialog during
+	  installation.
+
+2005/09/07  tsdgeos
+
+	* share/po/ca.po: updates
+
+2005/09/07  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/service_harddrake: blacklist audio too (#12731)
+
+	* modules/any_conf.pm (remove_module) better written this way
+	(remove_module) prevent wiping /etc/modprobe.preload if module is
+	unset (#16181)
+
+	* drakxtools.spec: 10.3-0.56mdk
+
+2005/09/07  Warly  <warly at mandriva.com>
+
+	* share/advertising/24.png, share/advertising/07.png,
+	share/advertising/26.png, share/advertising/16.png,
+	share/advertising/11.png, share/advertising/02.png,
+	share/advertising/23.png, share/advertising/15.png,
+	share/advertising/03.png, share/advertising/14.png,
+	share/advertising/25.png, share/advertising/19.png,
+	share/advertising/13.png, share/advertising/10.png,
+	share/advertising/04.png, share/advertising/18.png,
+	share/advertising/22.png, share/advertising/09.png,
+	share/advertising/06.png, share/advertising/17.png,
+	share/advertising/05.png, share/advertising/01.png,
+	share/advertising/21.png, share/advertising/20.png,
+	share/advertising/08.png, share/advertising/12.png: update images with
+	new true color ones
+
+2005/09/06  Frederic Crozat  <fcrozat at mandriva.com>
+
+	* share/rpmsrate: Don't install gnome-alsa-mixer when detecting alsa,
+	gstreamer-alsa
+	is enough
+
+2005/09/06  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_TW.po: Updated zh_TW translation from You-Cheng Hsieh
+	<yochenhsieh@xuite.net>
+
+2005/09/06  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/probing.c: fix lame bug preventing usb and firewire
+	controllers to be recognized
+
+	* network/thirdparty.pm: sm56 support
+
+2005/09/06  Pixel  <pixel at mandriva.com>
+
+	* share/rpmsrate: we prefer engine arts for amarok, don't let the install
+	choose arbitrarily
+
+2005/09/06  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Made printerdrake working on 64-bit systems, with /usr/lib64.
+	  - Install "desktop-printing" only on sytems with installed
+	gnome-panel, Discovery does not ship GNOME and also not
+	desktop-printing.
+	  - Fixed endless loop when clicking "Back" in model selection, when by
+	  autodetection no model was found.
+
+	* printer/data.pm: 
+	  - Made printerdrake working on 64-bit systems, with /usr/lib64.
+	  - Install "desktop-printing" only on sytems with installed
+	gnome-panel, Discovery does not ship GNOME and also not
+	desktop-printing.
+
+	* printer/main.pm: 
+	  - Made printerdrake working on 64-bit systems, with /usr/lib64.
+
+2005/09/06  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/draksec: install chkrootkit if needed (#17896)
+
+	* drakxtools.spec: 10.3-0.55mdk
+
+	* standalone/service_harddrake.sh: fix status message (#16925)
+
+2005/09/06  willysr
+
+	* share/po/id.po: Updated
+
 2005/09/06  Daouda Lo  <daouda at mandriva.com>
 
 	* Makefile.config: 
