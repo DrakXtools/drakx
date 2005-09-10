@@ -141,7 +141,7 @@ consult the Errata available from:
 
 Information on configuring your system is available in the post
 install chapter of the Official Mandriva Linux User's Guide.",
-N("http://www.mandrivalinux.com/en/errata.php3"));
+"http://www.mandriva.com/security");
 }
 
 1;
