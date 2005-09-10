@@ -2,14 +2,14 @@
 # Vietnamese Translation for DrakX module.
 # Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
 # Trinh Minh Thanh <tmthanh@yahoo.com> 2001-2005.
-#
+# Larry Nguyen <larry@vnlinux.org> 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi version\n"
 "Report-Msgid-Bugs-To: tmthanh@yahoo.com\n"
 "POT-Creation-Date: 2005-09-08 00:35+0800\n"
 "PO-Revision-Date: 2005-06-02 21:17+0700\n"
-"Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
+"Last-Translator: Larry Nguyen <larry@vnlinux.org>\n"
 "Language-Team:  <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1225,14 +1225,14 @@ msgid "Group ID"
 msgstr "ID Nhóm"
 
 #: any.pm:625
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "Tùy chọn %s phải là một số !"
+msgstr "Tùy chọn %s phải là một số"
 
 #: any.pm:626
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s nên lớn hơn 500. Chấp nhận giá trị này?"
 
 #: any.pm:631 standalone/draksambashare:1210
 #, c-format
@@ -1294,7 +1294,7 @@ msgid "I can set up your computer to automatically log on one user."
 msgstr "Có thể thiết lập máy tính tự động đăng nhập vào một người dùng."
 
 #: any.pm:705
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
 msgstr "Bạn muốn dùng tính năng này không?"
 
@@ -1686,9 +1686,9 @@ msgid "Authentication Windows Domain"
 msgstr "Chứng Thực Miền Windows"
 
 #: authentication.pm:150
-#, c-format
+#, fuzzy, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Active Directory với SFU"
 
 #: authentication.pm:153
 #, c-format
@@ -3086,14 +3086,14 @@ msgid "Enabling swap partition %s"
 msgstr "Bật chạy phân vùng swap %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr "Không thể dùng một hệ thống file đã mã hóa cho điểm gắn kết %s"
+msgstr "Sử dụng mã hóa file system"
 
 #: fs/mount_options.pm:113
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
-msgstr ""
+msgstr "Sử dụng quota và có thể ép buộc giới hạn"
 
 #: fs/mount_options.pm:115
 #, c-format
@@ -10057,42 +10057,45 @@ msgstr "Các cổng khác"
 #: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
 #: standalone/net_applet:59 standalone/net_applet:180
 #: standalone/net_applet:354 standalone/net_applet:391
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
 msgstr "Tường lửa"
 
 #: network/drakfirewall.pm:252
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You can be warned when someone accesses to a service or tries to intrude "
 "into your computer.\n"
 "Please select which network activity should be watched."
 msgstr ""
+"Hệ thống có thể thông báo ai đang nối vào dịch vụ hoặc đang muốn xâm nhập "
+"vào máy bạn.\n"
+"Vui lòng chỉ định những sự kiện nào nên được thông báo."
 
 #: network/drakfirewall.pm:257
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "Sử dụng tường lửa"
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Không chia sẻ"
+msgstr "Cổng đang bị quét"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Dịch vụ bị tấn công: %s"
+msgstr "Dịch vụ bị tấn công"
 
 #: network/ifw.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Nhập lại mật khẩu"
+msgstr "Đoán Mật khẩu"
 
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "\"%s\" tấn công"
 
 #: network/ifw.pm:141
 #, c-format
@@ -10110,9 +10113,9 @@ msgid "A password cracking attack has been attempted by %s."
 msgstr "%s đang thực hiện tấn công bẻ khóa mật khẩu."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "%s đang cố thực hiện tấn công quét cổng."
+msgstr "Một tấn công %s đang cố thực hiện bởi %s"
 
 #: network/isdn.pm:117 network/netconnect.pm:447 network/netconnect.pm:536
 #: network/netconnect.pm:539 network/netconnect.pm:682
@@ -10169,7 +10172,7 @@ msgid "Unable to load the ndiswrapper module!"
 msgstr "Không thể nạp ndiswrapper module!"
 
 #: network/ndiswrapper.pm:95
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
@@ -11750,7 +11753,7 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Máy in mạng (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
 msgstr "Máy in của máy chủ SMB/Windows 95/98/NT"
 
@@ -12378,9 +12381,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Dò tìm tự động máy in"
+msgstr "Tự động quản lý máy in"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12390,39 +12393,39 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Dùng cấu hình tự động (DHCP)"
+msgstr "Tự động cấu hình máy in mới"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (Hãy đảm bảo là mọi máy in đã được nối và bật lên).\n"
+msgstr "khi một máy in USB đã được nối và đã mở lên"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Máy in này đã tắt"
+msgstr "Khi Printerdrake đã chạy"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Chế độ tự động cấu hình máy in"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Các máy in sẵn có"
+msgstr "Bật lại các máy in tưởng không dùng"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Thay đổi hệ thống in"
+msgstr "khi hệ thống máy in đã chạy"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Dùng/Bảo trì máy in \"%s\""
+msgstr "Cách thông báo lỗi cho máy in \"%s\""
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12431,36 +12434,38 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Bạn có thể cấu hình cách thông báo lỗi giữa máy tính và máy in \"%s\" (ví dụ "
+"khi máy in chưa được bật)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Số hiệu cổng nên là một số nguyên!"
+msgstr "Số lần cố thử lại nên là số nguyên ít nhất là 1!"
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Timeout phải là một số nguyên dương!"
+msgstr "Thời gian trì trệ trong lúch thử lại  phải là một số nguyên dương!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Tắt máy in"
+msgstr "Đừng làm ngưng máy in"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Cứ cố thử lại thường xuyên"
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Số lượng nút"
+msgstr "Số lần thử lại"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Thời gian ngưng giữa các lần thử lại (số giây)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12653,19 +12658,19 @@ msgid "Searching for new printers..."
 msgstr "Đang tìm máy in mới..."
 
 #: printer/printerdrake.pm:989
-#, c-format
+#, fuzzy, c-format
 msgid "Do not setup printer automatically again"
-msgstr ""
+msgstr "Có thể thiết lập máy tính tự động đăng nhập vào một người dùng."
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
 msgstr "Không tìm thấy máy in nào!"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Không tìm thấy máy in nào!"
+msgstr "Tìm thấy máy in mới!"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12760,11 +12765,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Bạn có thể mở nó lên bằng cách chọn \"%s\" -> \"%s\" trong menu chính của "
+"Printerdrake. "
 
 #: printer/printerdrake.pm:1125 printer/printerdrake.pm:5139
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Quản trị từ xa"
+msgstr "Cấu hình tự động quản lý hệ thống"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12773,6 +12780,8 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Ở đó bạn có thể chọn trong trường hợp nào máy in có thể tự động cấu hình "
+"(Lúc Printerdrake chạy, lúc hệ thống in chạy, lúc nối vào máy in USB mới)."
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2422
@@ -13988,12 +13997,12 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Cấu hình Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3601
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Cấu hình Canon LBP-460/660"
+msgstr "Cấu hình Canon LBP-810/1120 (CAPT)"
 
 #: printer/printerdrake.pm:3602
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -14973,9 +14982,9 @@ msgid "Disable Printer"
 msgstr "Tắt máy in"
 
 #: printer/printerdrake.pm:5511 printer/printerdrake.pm:5605
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Kiểu kết nối máy in"
+msgstr "Kiểu thông báo lỗi của máy in"
 
 #: printer/printerdrake.pm:5512 printer/printerdrake.pm:5609
 #, c-format
@@ -16640,9 +16649,9 @@ msgstr ""
 "Môi trường đồ họa thân thiện cho các ứng dụng và các tiện ích màn hình nền"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Plucker Desktop"
+msgstr "IceWm Desktop"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -16650,9 +16659,9 @@ msgid "Other Graphical Desktops"
 msgstr "Các màn hình nền đồ hoạ khác"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, v.v..."
+msgstr "Window Maker, Enlightenment, Fvwm, v.v..."
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -16992,9 +17001,9 @@ msgid "Terminal Server Configuration"
 msgstr "Cấu hình máy chủ terminal"
 
 #: standalone/drakTermServ:216
-#, fuzzy, c-format
+#, c-format
 msgid "dhcpd Config"
-msgstr "Cấu hình DHCPd..."
+msgstr "Cấu hình dhcpd"
 
 #: standalone/drakTermServ:220
 #, c-format
@@ -17117,7 +17126,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Đồng bộ thiết lập bàn phím của máy khách đồ họa với máy chủ."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -17553,9 +17562,9 @@ msgid "Delete All NBIs"
 msgstr "Xoá mọi NBI"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Tạo các ảnh khởi động mạng cho mọi kernel"
+msgstr "Tạo các ảnh cho nhân"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -18039,13 +18048,11 @@ msgstr ""
 "lưu đến. Bạn cần định ra một máy chủ thư thực hiện việc này."
 
 #: standalone/drakbackup:160
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be the return address that you want the backup results sent "
 "from. Default is drakbackup."
-msgstr ""
-"Việc này dùng để sao lưu các kết quả gửi đi từ địa chỉ phản hồi. Mặc định là "
-"drakbakup."
+msgstr "Đây là địa chỉ bạn muốn gửi kết quả backup đến. Mặc định là drakbakup."
 
 #: standalone/drakbackup:161
 #, c-format
@@ -19656,7 +19663,7 @@ msgid "Graphical boot theme selection"
 msgstr "Lựa chọn theme khởi động đồ họa"
 
 #: standalone/drakboot:149
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
 msgstr "Dùng khởi động đồ họa"
 
@@ -20967,186 +20974,186 @@ msgid "Please add an host to be able to modify it."
 msgstr ""
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Thông tin chi tiết"
+msgstr "Vui lòng thay đổi thông tin"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Thông tin chi tiết"
+msgstr "Vui lòng xóa thông tin"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Thông tin chi tiết"
+msgstr "Vui lòng thêm thông tin"
 
 #: standalone/drakhosts:115
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Địa chỉ IP:"
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Tên máy"
 
 #: standalone/drakhosts:117
 #, c-format
 msgid "Host Aliases:"
-msgstr ""
+msgstr "Bí danh (aliases):"
 
 #: standalone/drakhosts:123
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Vui lòng điền vào địa chỉ IP hợp lệ."
 
 #: standalone/drakhosts:129
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "Địa chỉ IP này đã có trong %s"
 
 #: standalone/drakhosts:197
 #, c-format
 msgid "Host Aliases"
-msgstr ""
+msgstr "Bí danh (aliases) của máy"
 
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS quản lý định nghĩa của các máy"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Không thể thêm máy."
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Không thể đổi máy"
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Không thể xóa máy đi"
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Cho phép mọi người dùng"
+msgstr "Cho phép mọi địa chỉ"
 
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr ""
+msgstr "Bản ghi"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Xóa hết"
+msgstr "Xóa hết trong bản ghi"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Danh sách cấm"
 
 #: standalone/drakids:69
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Gỡ bỏ khỏi LVM"
+msgstr "Gỡ bỏ khỏi danh sách cấm"
 
 #: standalone/drakids:70
 #, c-format
 msgid "Move to whitelist"
-msgstr ""
+msgstr "Di chuyển qua danh sách cho phép"
 
 #: standalone/drakids:74 standalone/net_applet:444
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Danh sách cho phép"
 
 #: standalone/drakids:78
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Gỡ bỏ khỏi LVM"
+msgstr "Gỡ bỏ khỏi danh sách cho phép"
 
 #: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
 #: standalone/drakids:179 standalone/drakids:246 standalone/drakroam:140
 #: standalone/net_applet:180 standalone/net_applet:354
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Không thể kết nối được với mirror %s"
+msgstr "Không thể kết nối được với máy chủ"
 
 #: standalone/drakids:191
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "Tình trạng"
+msgstr "Ngày"
 
 #: standalone/drakids:192
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
 msgstr "Thông tin tấn công"
 
 #: standalone/drakids:193
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
 msgstr "Kiểu tấn công: %s"
 
 #: standalone/drakids:194
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
 msgstr "Dịch vụ"
 
 #: standalone/drakids:195
 #, c-format
 msgid "Network interface"
-msgstr "Giao diện mạng"
+msgstr "Thiết bị mạng"
 
 #: standalone/draknfs:41
 #, c-format
 msgid "map root user as anonymous"
-msgstr ""
+msgstr "gán người dùng root như khách không tên"
 
 #: standalone/draknfs:42
 #, c-format
 msgid "map all users to anonymous user"
-msgstr ""
+msgstr "gán tất cả người dùng thành khách không tên"
 
 #: standalone/draknfs:43
 #, c-format
 msgid "No user UID mapping"
-msgstr ""
+msgstr "Không có người dùng UID"
 
 #: standalone/draknfs:44
 #, c-format
 msgid "allow real remote root access"
-msgstr ""
+msgstr "cho phép root kết nối từ xa"
 
 #: standalone/draknfs:83
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "Máy chủ NFS"
 
 #: standalone/draknfs:83
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Khởi động lại máy chủ NFS..."
 
 #: standalone/draknfs:84
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Lỗi khi khởi động lại máy chủ NFS"
 
 #: standalone/draknfs:100 standalone/draksambashare:197
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Lựa chọn thư mục"
 
 #: standalone/draknfs:105 standalone/draksambashare:202
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Nên là một thư mục."
 
 #: standalone/draknfs:136
 #, c-format
@@ -21174,6 +21181,25 @@ msgid ""
 "either `/255.255.252.0' or  `/22'  appended to the network base address "
 "result.\n"
 msgstr ""
+"<span weight=\"bold\">Máy trạm NFS</span> có thể được chỉ định bằng nhiều "
+"cách:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Một máy trạm:</span> có thể chỉ định bởi tên "
+"được nhận bởi hệ thống hay bởi tên miền đầy đủ, hoặc một địa chỉ IP\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">netgroups:</span> NIS netgroups có thể được "
+"gán như @group.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">wildcards:</span>tên máy có thể chứa các ký "
+"tự * và ?. Ví dụ: *cs.foo.edu sẽ tìm các tên trong tên miền cs.foo.edu.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Mạng IP:</span> bạn có thể xuất các thư mục "
+"đến tất các máy bằng địa chỉ IP (sub-)network. Ví dụ, có thể là "
+"`/255.255.252.0' hoặc `/22' vô cái địa chỉ mạng .\n"
 
 #: standalone/draknfs:151
 #, c-format
@@ -21200,26 +21226,47 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
+"<span weight=\"bold\">Lựa chọn cho User ID</span>\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Gán người dùng root như người dùng ẩn danh:</"
+"span> gán những đường nối từ uid/gid 0 đến uid/gid (root_squash) người dùng "
+"ẩn danh.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">cho phép người dùng có quyền như root kết "
+"nối:</span> tắt root squashing. Chức năng này chỉ có hữu dụng khi dùng máy "
+"không ổ cứng (no_root_squash).\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">gán tất cả người dùng như người dùng ẩn danh:"
+"<span> gán tất cả uids và gids như người dùng ẩn danh (all_squash). Hữu dụng "
+"khi dùng NFS cho cácthư mục trên máy chủ FTP, máy chủ news, v..v.. Lựa chọn "
+"ngược lại là không có gán UID (no_all_squash), cũng là lựa chọn chuẩn.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">anonuid và anongid:</span> chỉ định rõ uid "
+"và gid của tài khoản người dùng ẩn danh.\n"
 
 #: standalone/draknfs:167
 #, c-format
 msgid "Synchronous access:"
-msgstr ""
+msgstr "Kết nối làm trùng hợp"
 
 #: standalone/draknfs:168
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Kết nối an toàn"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Chia sẻ với quyền đọc"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Các lựa chọn nâng cao</span>"
 
 #: standalone/draknfs:172
 #, c-format
@@ -21228,6 +21275,8 @@ msgid ""
 "requests originate on an internet port less than IPPORT_RESERVED (1024). "
 "This option is on by default."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> chức năng này yêu cầu những kết "
+"nối từ cổng phải thấp hơn IPPORT_RESERVED (1024). Đây là chức năng chuẩn."
 
 #: standalone/draknfs:173
 #, c-format
@@ -21237,6 +21286,9 @@ msgid ""
 "request which changes the filesystem. This can also be made explicit by "
 "using this option."
 msgstr ""
+"<span foreground=\"royalblue3\"%s:</span> cho phép đọc hoặc cả hai đọc và "
+"ghi trên vùng NFS này. Chuẩn là không cho phép thay đổi trên filesystem. Bạn "
+"cũng có thể chỉ định rõ ràng bằng cách sử dụng chức năng này."
 
 #: standalone/draknfs:174
 #, c-format
@@ -21245,32 +21297,35 @@ msgid ""
 "violate the NFS protocol and to reply to requests before any changes made by "
 "these requests have been committed to stable storage (e.g. disc drive)."
 msgstr ""
+"<span foreground=\"royalblue3\">%s:</span> không cho phép máy chủ NFS vi "
+"phạm NFS protocol và trả lời các đường nối trước khi các thay đổi được áp "
+"dụng đến các ổ lưu trữ (chẳng hạn như ổ cứng)."
 
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Vui lòng thêm điểm chia sẻ NFS trước khi bạn muốn sửa đổi."
 
 #: standalone/draknfs:378
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Cấu hình Nâng cao"
+msgstr "Giúp đỡ của Cấu hình Nâng cao"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Thư mục NFS"
 
 #: standalone/draknfs:391 standalone/draksambashare:588
 #: standalone/draksambashare:767
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Thư mục"
 
 #: standalone/draknfs:394
 #, c-format
 msgid "Host access"
-msgstr ""
+msgstr "Kết nối của máy trạm"
 
 #: standalone/draknfs:396
 #, c-format
@@ -21645,110 +21700,110 @@ msgid "Refresh"
 msgstr "Cập nhật"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Không có thư mục như vậy"
+msgstr "Thư mục chia sẻ"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "Xác nhận"
+msgstr "Chú thích"
 
 #: standalone/draksambashare:64 standalone/draksambashare:97
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable"
-msgstr "Duyệt"
+msgstr "Duyệt được"
 
 #: standalone/draksambashare:65
 #, c-format
 msgid "Public"
-msgstr ""
+msgstr "Công cộng"
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "Ghi"
+msgstr "Ghi được"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Tạo"
+msgstr "Tạo mask"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
-#, fuzzy, c-format
+#, c-format
 msgid "Directory mask"
-msgstr "Thư mục chứa sao lưu"
+msgstr "Thư mục muốn mask"
 
 #: standalone/draksambashare:69
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Đọc"
+msgstr "Danh sách Đọc"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Ghi"
+msgstr "Danh sách Ghi"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Thêm người dùng"
+msgstr "Quản lý người dùng"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Thêm người dùng"
+msgstr "Người dùng hợp lệ"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Sự chấp thuận"
+msgstr "Tự hưởng các quyền"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Các tập tin ẩn"
+msgstr "Đừng hiển thị các tập tin ẩn"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Tùy thích"
+msgstr "Giữ lại chữ hoa/không hoa"
 
 #: standalone/draksambashare:77
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Model máy in của bạn"
+msgstr "Ép chế độ tạo"
 
 #: standalone/draksambashare:78
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "Nhóm PFS"
+msgstr "Ép nhóm"
 
 #: standalone/draksambashare:79 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Người dùng mặc định"
+msgstr "Trường hợp mặc định"
 
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "Tên máy in"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "Có thể in"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "Lệnh in"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "Lệnh LPQ"
 
 #: standalone/draksambashare:101
 #, c-format
@@ -21757,44 +21812,44 @@ msgstr ""
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Sự chấp thuận"
+msgstr "Tự hưởng permissions"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Chế độ tạo"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "Sử dụng driver của máy trạm"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Gỡbỏ Danh sách"
+msgstr "Danh sách Đọc"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Ghi"
+msgstr "Danh sách Ghi"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Nhóm"
+msgstr "Ép Nhóm"
 
 #: standalone/draksambashare:140
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Ép tạo nhóm"
 
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "Thông tin về Draksambashare"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -21805,47 +21860,53 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"Release: %s\n"
+"Tác giả: Antoine Ginies\n"
+"\n"
+"Đây là một công cụ đơn giản việc quản lý cấu hình Samba."
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Máy Chủ Samba"
 
 #: standalone/draksambashare:180
 #, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr ""
+msgstr "Khởi động lại máy chủ Samba..."
 
 #: standalone/draksambashare:181
 #, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr ""
+msgstr "Lỗi khi khởi động lại máy chủ Samba"
 
 #: standalone/draksambashare:367
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Thêm một điểm chia sẻ Samba"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
 msgstr ""
+"Mục địch của đồ thuật này là để tạo điểm chia sẻ Samba một cách dễ dàng."
 
 #: standalone/draksambashare:372
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Tên chứng thực"
+msgstr "Tên của điểm chia sẻ"
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Xác nhận"
+msgstr "Chú thích"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Đường dẫn"
+msgstr "Đường dẫn:"
 
 #: standalone/draksambashare:379
 #, c-format
@@ -21853,17 +21914,18 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Có vùng chia sẻ đã dùng tên này hoặc tên còn trống, vui lòng chọn tên khác."
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "Không thể tạo thư mục, vui lòng điền vào đường dẫn hợp lệ."
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Hãy nhập các tham số kết nối không dây cho card:"
+msgstr "Vui lòng điền vào chú thích cho điểm chia sẻ này."
 
 #: standalone/draksambashare:417
 #, c-format
@@ -21871,77 +21933,80 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"Đồ thuật đã thêm điểm chia sẻ Samba thành công. Bạn chỉ cần nhấp chuột 2 lần "
+"trong treeview để sửa đổi nó"
 
 #: standalone/draksambashare:433
 #, c-format
 msgid "pdf-gen - a PDF generator"
-msgstr ""
+msgstr "pdf-gen - công cụ tạo PDF"
 
 #: standalone/draksambashare:434
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "printers - tất cả các máy in đang có"
 
 #: standalone/draksambashare:438
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "Thêm vào một điểm chia sẻ máy in"
 
 #: standalone/draksambashare:441
 #, c-format
 msgid ""
 "Goal of this wizard is to easily create a new special printer Samba share."
 msgstr ""
+"Mục đích của đồ thuật này là để tạo một điểm chia sẻ máy in thật dễ dàng."
 
 #: standalone/draksambashare:449
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "Công cụ tạo PDF đã tồn tại."
 
 #: standalone/draksambashare:473
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "Máy in và print$ đã tồn tại."
 
 #: standalone/draksambashare:524
-#, c-format
+#, fuzzy, c-format
 msgid "The wizard successfully added the printer Samba share"
-msgstr ""
+msgstr "Đồ thuật đã tạo điểm chia sẻ Samba thành công"
 
 #: standalone/draksambashare:547
 #, c-format
 msgid "Please add or select a Samba printer share to be able to modify it."
-msgstr ""
+msgstr "Vui lòng thêm hoặc chọn điểm chia sẻ máy in để có thể sửa đổi nó."
 
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "Máy in chia sẻ"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr ""
+msgstr "Tên máy in:"
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
-#, fuzzy, c-format
+#, c-format
 msgid "Writable:"
-msgstr "Ghi"
+msgstr "Có thể Ghi"
 
 #: standalone/draksambashare:593 standalone/draksambashare:774
-#, fuzzy, c-format
+#, c-format
 msgid "Browseable:"
-msgstr "Duyệt"
+msgstr "Có thể Duyệt"
 
 #: standalone/draksambashare:598
 #, c-format
 msgid "Advanced options"
-msgstr ""
+msgstr "Các lựa chọn cao cấp"
 
 #: standalone/draksambashare:600
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "Kết nối đến máy in"
 
 #: standalone/draksambashare:604
 #, c-format
@@ -21951,32 +22016,32 @@ msgstr ""
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Chế độ tạo:"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "Lệnh của máy in"
 
 #: standalone/draksambashare:611
 #, c-format
 msgid "Print command:"
-msgstr ""
+msgstr "Lệnh in"
 
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "Lệnh LPQ"
 
 #: standalone/draksambashare:613
 #, c-format
 msgid "Printing:"
-msgstr ""
+msgstr "Đang in:"
 
 #: standalone/draksambashare:629
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "Quyền tạo nên là số. chẳng hạn: 0755."
 
 #: standalone/draksambashare:691
 #, c-format
@@ -21986,58 +22051,58 @@ msgstr ""
 #: standalone/draksambashare:696
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
-msgstr ""
+msgstr "Vui lòng thêm hoặc chọn điểm chia sẻ Samba để có thể thay đổi nó."
 
 #: standalone/draksambashare:719
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Máy Chủ Samba"
+msgstr "Quyền nối Samba của người dùng"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Tùy Chọn Cơ Bản"
+msgstr "Lựa chọn của Mask"
 
 #: standalone/draksambashare:741
-#, fuzzy, c-format
+#, c-format
 msgid "Display options"
-msgstr "Định rõ tùy chọn"
+msgstr "Lựa chọn của hiển thị"
 
 #: standalone/draksambashare:763
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Không có thư mục như vậy"
+msgstr "Thư mục chia sẻ Samba"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
 msgstr "Tên chia sẻ"
 
 #: standalone/draksambashare:772
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Công cộng"
 
 #: standalone/draksambashare:796
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
-msgstr ""
+msgstr "Tạo mask, tạo quyền và thư mục nên là số. chẳng hạn: 0755."
 
 #: standalone/draksambashare:803
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "Vui lòng tạo người dùng Samba: %s"
 
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr ""
+msgstr "Thong tin người dùng"
 
 #: standalone/draksambashare:928
 #, c-format
 msgid "User name:"
-msgstr ""
+msgstr "Ngươì dùng:"
 
 #: standalone/draksambashare:929 standalone/harddrake2:551
 #, c-format
@@ -22047,82 +22112,82 @@ msgstr "Mật khẩu:"
 #: standalone/draksambashare:1129
 #, c-format
 msgid "Failed to add Samba share."
-msgstr ""
+msgstr "Không thể thêm điểm chia sẻ Samba"
 
 #: standalone/draksambashare:1138
 #, c-format
 msgid "Failed to Modify Samba share."
-msgstr ""
+msgstr "Không thể thay đổi điểm chia sẻ Samba."
 
 #: standalone/draksambashare:1147
 #, c-format
 msgid "Failed to remove a Samba share."
-msgstr ""
+msgstr "Không thể xóa điểm chia sẻ Samba."
 
 #: standalone/draksambashare:1154
 #, c-format
 msgid "File share"
-msgstr ""
+msgstr "Tập tin chia sẻ"
 
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "Thêm máy in"
 
 #: standalone/draksambashare:1168
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "Không thể thêm máy in"
 
 #: standalone/draksambashare:1177
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "Không thể sửa đổi."
 
 #: standalone/draksambashare:1186
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "Không thể xóa."
 
 #: standalone/draksambashare:1193
 #, c-format
 msgid "Printers"
-msgstr ""
+msgstr "Máy in"
 
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr ""
+msgstr "Thay đổi mật khẩu"
 
 #: standalone/draksambashare:1206
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "Không thể thay đổi mật khẩu của người dùng."
 
 #: standalone/draksambashare:1214
 #, c-format
 msgid "Failed to add user."
-msgstr ""
+msgstr "Không thể thêm người dùng."
 
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "Xóa người dùng"
 
 #: standalone/draksambashare:1226
 #, c-format
 msgid "Failed to delete user."
-msgstr ""
+msgstr "Không thể xóa người dùng."
 
 #: standalone/draksambashare:1238
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Người dùng của Samba"
 
 #: standalone/draksambashare:1247
 #, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr ""
+msgstr "DrakSamba quản lý điểm chia sẻ Samba"
 
 #: standalone/draksec:49
 #, c-format
@@ -25574,17 +25639,17 @@ msgid "Always launch on startup"
 msgstr "Luôn chạy khi khởi động"
 
 #: standalone/net_applet:314
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Quản lý mạng không dây"
+msgstr "Mạng không dây"
 
 #: standalone/net_applet:398
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr "Tường lửa hoạt động: phát hiện có đột nhập"
 
 #: standalone/net_applet:411
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
 msgstr "Bạn muốn bỏ kẻ tấn công vào danh sách đen không?"
 
@@ -25827,9 +25892,9 @@ msgid "/_Configure CUPS"
 msgstr "/Cấ_u hình CUPS"
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Quản trị từ xa"
+msgstr "/Cấu hình Quản trị _tự động"
 
 #: standalone/printerdrake:194
 #, c-format
@@ -26590,6 +26655,9 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Không cài đặt được"
+
+#~ msgid "Passwd:"
+#~ msgstr "Mật khẩu:"
 
 #~ msgid ""
 #~ "Winbind allows the system to retrieve information and authenticate users "
