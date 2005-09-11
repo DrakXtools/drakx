@@ -168,7 +168,7 @@ my %network_settings = (
            firmware =>
 	   {
                url => "http://ipw${_}.sourceforge.net/firmware.php",
-               test_file => ($_ == 2100 ? "ipw2100-*.fw" :  "ipw-*.fw"),
+               test_file => ($_ == 2100 ? "ipw2100-*.fw" :  "ipw-2.3-*.fw"),
            },
        };
    } (2100, 2200)),
