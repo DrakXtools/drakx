@@ -32,18 +32,19 @@ use log;
 #-     if exists but not 1, name of the service to be restarted
 #-     if 1, specify that the service named by the name field should be restarted
 #- o tools:
-#-     if exists but not 1, hash of the tools settings
-#-     if 1, tools are needed and package name is the name field
+#-     hash of the tools settings
+#-     test_file field required
+#-     if package field doesn't exist, 'name' is used
 #- o kernel_module:
 #-     if exists but not 1, hash of the module settings
 #-     if 1, kernel modules are needed and use the name field
 #-         (name-kernel or dkms-name)
 #- o firmware:
-#-     if exists but not 1, hash of the firmware settings
-#-     if 1, firmware are needed and use the name field
-#-         (name-firmware)
+#-     hash of the firmware settings
+#-     test_file field required
+#-     if package field doesn't exist, 'name-firmware' is used
 
-#- hash of package settings structure (all fields are optional):
+#- hash of package settings structure:
 #- o package:
 #-     name of the package to be installed for these device
 #- o test_file:
@@ -71,7 +72,7 @@ my %network_settings = (
     url => 'http://www.linuxant.com/drivers/hcf/',
     name => 'hcfpcimodem',
     kernel_module => {
-        'hcfpciengine',
+        test_file => 'hcfpciengine',
     },
     tools =>
     {
@@ -87,7 +88,7 @@ my %network_settings = (
     url => 'http://www.linuxant.com/drivers/hsf/',
     name => 'hsfmodem',
     kernel_module => {
-        'hsfengine',
+        test_file => 'hsfengine',
     },
     tools =>
     {
@@ -227,7 +228,9 @@ my %network_settings = (
 
 You can find a driver on http://eciadsl.flashtux.org/"),
     no_club => 1,
-    tools => 1,
+    tools => {
+	test_file => '/usr/sbin/pppoeci',
+    },
    },
 
    {
@@ -249,7 +252,9 @@ You can find a driver on http://eciadsl.flashtux.org/"),
     kernel_module => {
         test_file => 'unicorn_.*_atm',
     },
-    tools => 1,
+    tools => {
+	test_file => '/usr/bin/bewan_adsl_status',
+    },
    },
   ],
 );
@@ -307,7 +312,7 @@ sub warn_not_found {
     $opt{$_} = $settings->{$option}{$_} || $settings->{$_} foreach qw(url explanations no_club);
     $in->ask_warn(N("Error"),
 		  N("Some packages (%s) are required but aren't available.", @packages) .
-		  if_(!$opt{no_club}, N("These packages can be found in Mandriva Club or in Mandriva commercial releases.")) .
+		  if_(!$opt{no_club}, "\n" . N("These packages can be found in Mandriva Club or in Mandriva commercial releases.")) .
 		  if_($opt{url}, "\n\n" . N("The required files can also be installed from this URL:
 %s", $opt{url})) .
 		  if_($opt{explanations}, "\n\n" . translate($opt{explanations})));
