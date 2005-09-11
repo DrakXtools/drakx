@@ -59,7 +59,7 @@ sub real_main {
       my ($net, $in, $modules_conf) = @_;
       #- network configuration should have been already read in $net at this point
       my $mouse = $::o->{mouse} || {};
-      my ($cnx_type, @all_cards, %eth_intf, %all_eth_intf);
+      my ($cnx_type, @all_cards, %eth_intf, %all_eth_intf, %unavailable_wireless_intf);
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_dyn_dns, $modem_dyn_ip);
       my $cable_no_auth;
@@ -97,6 +97,11 @@ sub real_main {
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
             grep { to_bool($is_wireless) == detect_devices::is_wireless_interface($_->[0]) } @all_cards;
+          my %available;
+          $available{$_->[2]} = undef foreach grep { $_->[2] } @all_cards;
+          %unavailable_wireless_intf = map {
+              $_->{driver} => sprintf('%s (%s): %s', N("unknown"), $_->{driver}, $_->{description});
+          } grep { !exists($available{$_->{description}}) } modules::probe_category('network/wireless');
       };
 
       my $is_dvb_interface = sub { $_[0]{DEVICE} =~ /^dvb\d+_\d+/ };
@@ -798,8 +803,12 @@ If you do not know it, keep the preselected type."),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N_("Manually load a driver"), if_($is_wireless, N_("Use a Windows driver (with ndiswrapper)")) ], 
-                            allow_empty_list => 1, format => sub { translate($eth_intf{$_[0]} || $_[0]) } } ];
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [
+                            (sort keys %eth_intf, if_($is_wireless, keys %unavailable_wireless_intf)),
+                            N_("Manually load a driver"),
+                            if_($is_wireless, N_("Use a Windows driver (with ndiswrapper)")),
+                        ], allow_empty_list => 1, format => sub {
+                            translate($eth_intf{$_[0]} || $unavailable_wireless_intf{$_[0]} || $_[0]) } } ];
                     },
                     complete => sub {
                         if ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
@@ -811,6 +820,21 @@ If you do not know it, keep the preselected type."),
                                 $ndiswrapper_driver = network::ndiswrapper::ask_driver($in) or return 1;
                                 return !$ndiswrapper_do_driver_selection->();
                             }
+                        }
+                        if (exists $unavailable_wireless_intf{$ntf_name}) {
+                            my $driver = $ntf_name;
+                            network::thirdparty::setup_device($in, 'wireless', $driver) or return 1;
+                            eval {
+                                modules::unload($driver);
+                                modules::load($driver);
+                            };
+                            $lan_detect->();
+                            my $eth_card = find { $_->[1] eq $driver } @all_cards;
+                            unless ($eth_card) {
+                                $in->ask_warn(N("Error"), N("No device found"));
+                                return 1;
+                            }
+                            $ntf_name = $eth_card->[0];
                         }
                         0;
                     },
