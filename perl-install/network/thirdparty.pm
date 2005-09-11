@@ -438,8 +438,11 @@ sub install_packages {
 
 	if (my @packages = $get_method->('get_packages')->($name)) {
 	    log::explanations("Installing thirdparty packages ($option) " . join(', ', @packages));
-	    $in->do_pkgs->install(@packages) and next;
-	    warn_not_installed($in, @packages);
+	    if (!$in->do_pkgs->install(@packages)) {
+		warn_not_installed($in, @packages);
+	    } elsif ($get_method->('check_installed')->()) {
+		next;
+	    }
 	}
 	log::explanations("Thirdparty package $name ($option) is required but not available");
 
