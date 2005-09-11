@@ -61,7 +61,7 @@ use log;
 #- o no_club:
 #-     1 if the package isn't available on Mandriva club
 
-my $hotplug_firmware_prefix = "$::prefix/lib/hotplug/firmware";
+my $firmware_directory = "/lib/hotplug/firmware";
 
 my %network_settings = (
   rtc =>
@@ -312,10 +312,11 @@ sub warn_not_found {
     $opt{$_} = $settings->{$option}{$_} || $settings->{$_} foreach qw(url explanations no_club);
     $in->ask_warn(N("Error"),
 		  N("Some packages (%s) are required but aren't available.", @packages) .
-		  if_(!$opt{no_club}, "\n" . N("These packages can be found in Mandriva Club or in Mandriva commercial releases.")) .
-		  if_($opt{url}, "\n\n" . N("The required files can also be installed from this URL:
+		  (!$opt{no_club} && "\n" . N("These packages can be found in Mandriva Club or in Mandriva commercial releases.")) .
+		  ($option eq 'firmware' && "\n\n" . N("Info: ") . "\n" . N("due to missing %s", get_firmware_path($settings))) .
+		  ($opt{url} && "\n\n" . N("The required files can also be installed from this URL:
 %s", $opt{url})) .
-		  if_($opt{explanations}, "\n\n" . translate($opt{explanations})));
+		  ($opt{explanations} && "\n\n" . translate($opt{explanations})));
 }
 
 sub is_file_installed {
@@ -330,11 +331,17 @@ sub is_module_installed {
     find { m!/$module\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
 }
 
-sub is_firmware_installed {
+sub get_firmware_path {
     my ($settings) = @_;
     my $wildcard = exists $settings->{firmware} && $settings->{firmware}{test_file} or return;
-    my $path = $settings->{firmware}{prefix} || $hotplug_firmware_prefix;
-    scalar glob_("$::prefix$path/$wildcard");
+    my $path = $settings->{firmware}{prefix} || $firmware_directory;
+    "$::prefix$path/$wildcard";
+}
+
+sub is_firmware_installed {
+    my ($settings) = @_;
+    my $pattern = get_firmware_path($settings) or return;
+    scalar glob_($pattern);
 }
 
 sub find_file_on_windows_system {
