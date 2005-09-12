@@ -1,3 +1,4 @@
+# translation of fr.po to Français
 # translation of DrakX-fr.po to Français
 # translation of DrakX-fr.po to french
 # Translation file of Mandriva Linux graphic install
@@ -66,21 +67,22 @@
 # Teletchéa <steletch@free.fr>, 2004, 2005.
 # Christophe Berthelé <cpjc@free.fr>, 2005.
 # Didier Hérisson <didier.herisson@angstrom.uu.se>, 2005.
+# Nicolas Lécureuil <neoclust@mandriva.org>, 2005.
 #
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-fr\n"
+"Project-Id-Version: fr\n"
 "POT-Creation-Date: 2005-09-08 00:35+0800\n"
-"PO-Revision-Date: 2005-09-12 17:31+0200\n"
-"Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
+"PO-Revision-Date: 2005-09-12 22:05+0200\n"
+"Last-Translator: Nicolas Lécureuil <neoclust@mandriva.org>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2;plural=(n>1);\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -500,8 +502,7 @@ msgstr "Impossible d'installer le paquetage Xorg : %s"
 #: Xconfig/card.pm:268
 #, c-format
 msgid "Select the memory size of your graphics card"
-msgstr ""
-"Veuillez préciser la quantité de mémoire vidéo de votre carte graphique"
+msgstr "Veuillez préciser la quantité de mémoire vidéo de votre carte graphique"
 
 #: Xconfig/card.pm:351
 #, c-format
@@ -541,8 +542,7 @@ msgstr "Xorg %s avec accélération 3D matérielle"
 #: Xconfig/card.pm:413
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
-msgstr ""
-"Votre carte vidéo peut utiliser l'accélération 3D matérielle avec Xorg %s."
+msgstr "Votre carte vidéo peut utiliser l'accélération 3D matérielle avec Xorg %s."
 
 #: Xconfig/card.pm:419
 #, c-format
@@ -608,8 +608,7 @@ msgstr "Options"
 #: Xconfig/main.pm:168
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
-msgstr ""
-"Votre fichier de configuration Xorg est invalide, nous allons l'ignorer."
+msgstr "Votre fichier de configuration Xorg est invalide, nous allons l'ignorer."
 
 #: Xconfig/main.pm:186
 #, c-format
@@ -949,8 +948,7 @@ msgstr ""
 #: any.pm:164
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr ""
-"L'installation du programme d'amorçage a échoué pour la raison suivante : "
+msgstr "L'installation du programme d'amorçage a échoué pour la raison suivante : "
 
 #: any.pm:170
 #, c-format
@@ -1034,10 +1032,8 @@ msgstr "Indiquez la quantité de mémoire en Mo"
 
 #: any.pm:277
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"L'option ``Restrict command line options'' est inutile sans mot de passe"
+msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr "L'option ``Restrict command line options'' est inutile sans mot de passe"
 
 #: any.pm:278 any.pm:615 authentication.pm:181
 #, c-format
@@ -1295,8 +1291,7 @@ msgstr "Veuillez taper un nom d'utilisateur"
 
 #: any.pm:618
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 "Le nom d'utilisateur ne peut contenir que des lettres minuscules,\n"
 "des nombres, ainsi que les caractères « - » et « _ »"
@@ -1431,7 +1426,7 @@ msgstr ""
 #: any.pm:751
 #, c-format
 msgid "Multi languages"
-msgstr "Multi langues"
+msgstr "Multilingue"
 
 #: any.pm:767 any.pm:796 help.pm:647
 #, c-format
@@ -1527,10 +1522,8 @@ msgstr ""
 
 #: any.pm:1000
 #, c-format
-msgid ""
-"You can export using NFS or SMB. Please select which you would like to use."
-msgstr ""
-"Souhaitez-vous partager par NFS (protocole Unix) ou SMB (protocole Windows) ?"
+msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgstr "Souhaitez-vous partager par NFS (protocole Unix) ou SMB (protocole Windows) ?"
 
 #: any.pm:1025
 #, c-format
@@ -1599,8 +1592,7 @@ msgstr "Fichier local : "
 
 #: authentication.pm:55
 #, c-format
-msgid ""
-"Use local for all authentication and information user tell in local file"
+msgid "Use local for all authentication and information user tell in local file"
 msgstr ""
 "Utilise les données du système local pour toute l'authentification et la "
 "recherche des informations sur les utilisateurs"
@@ -1644,6 +1636,8 @@ msgid ""
 "iWinbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"iWinbind permet au système de retrouver les informations et d'authentifier "
+"les utilisateurs dans un domaine Windows."
 
 #: authentication.pm:59
 #, c-format
@@ -1653,7 +1647,7 @@ msgstr "Active Directory avec SFU : "
 #: authentication.pm:59
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "Avec Kerberos et LDAP pour authentification dans un serveur Active Directory"
 
 #: authentication.pm:60
 #, c-format
@@ -1666,6 +1660,8 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
+"Winbind permet au sytème d'authentifier les utilisateurs dans un serveur "
+"Windows Active Directory."
 
 #: authentication.pm:85
 #, c-format
@@ -1793,7 +1789,7 @@ msgstr "Authentification au Domaine Windows"
 #: authentication.pm:150
 #, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Authentification Active Directory"
 
 #: authentication.pm:153
 #, c-format
@@ -1808,8 +1804,7 @@ msgstr "Mot de passe d'administration de domaine"
 #: authentication.pm:170
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr ""
-"Définissez le mot de passe root et les méthodes d'authentification réseau"
+msgstr "Définissez le mot de passe root et les méthodes d'authentification réseau"
 
 #: authentication.pm:171
 #, c-format
@@ -2605,8 +2600,7 @@ msgstr "Supprimer le fichier de bouclage ?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
+msgid "After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Après avoir modifié le type de la partition %s, toutes les données\n"
 "présentes sur cette partition seront perdues."
@@ -2806,14 +2800,12 @@ msgstr "Quel type de partitionnement ?"
 #: diskdrake/interactive.pm:1106
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr ""
-"Vous devez redémarrer pour que les modifications soient prises en compte"
+msgstr "Vous devez redémarrer pour que les modifications soient prises en compte"
 
 #: diskdrake/interactive.pm:1115
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr ""
-"La table des partitions de %s va maintenant être écrite sur le disque !"
+msgstr "La table des partitions de %s va maintenant être écrite sur le disque !"
 
 #: diskdrake/interactive.pm:1138
 #, c-format
@@ -3106,8 +3098,7 @@ msgstr "Un autre"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Veuillez entrer vos nom d'utilisateur, mot de passe et nom de domaine pour "
 "accéder à ce serveur"
@@ -3310,10 +3301,11 @@ msgstr ""
 "« user,exec,dev,suid »)."
 
 #: fs/mount_options.pm:143
-#, fuzzy, c-format
+#, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
-"Activer les quotas utilisateur et imposer (facultativement) les limites"
+"Activer les quotas disque pour les utilisateurs et éventuellement renforcer "
+"les limites"
 
 #: fs/mount_options.pm:145
 #, c-format
@@ -3371,8 +3363,7 @@ msgstr "Les points de montage doivent commencer par /"
 #: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr ""
-"Les points de montage ne doivent contenir que des caractères alphanumériques"
+msgstr "Les points de montage ne doivent contenir que des caractères alphanumériques"
 
 #: fsedit.pm:380
 #, c-format
@@ -3706,7 +3697,7 @@ msgstr ""
 "Vous pouvez sélectionner ici un pilote alternatif (OSS ou ALSA) pour votre "
 "carte son (%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:242
@@ -3814,8 +3805,7 @@ msgstr "Pilote inconnu"
 #: harddrake/sound.pm:289
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr ""
-"Erreur : le pilote « %s » pour votre carte son n'est pas dans la liste."
+msgstr "Erreur : le pilote « %s » pour votre carte son n'est pas dans la liste."
 
 #: harddrake/sound.pm:303
 #, c-format
@@ -6239,7 +6229,7 @@ msgstr ""
 #: install_any.pm:647
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr "Désinstallation des paquetages avant la mise à jour..."
+msgstr "Suppression des paquetages avant la mise à jour ..."
 
 #: install_any.pm:679
 #, c-format
@@ -7106,8 +7096,7 @@ msgstr ""
 #: install_steps_gtk.pm:384
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr ""
-"Vous ne pouvez pas désélectionner ce paquetage, il doit être mis à jour."
+msgstr "Vous ne pouvez pas désélectionner ce paquetage, il doit être mis à jour."
 
 #: install_steps_gtk.pm:389
 #, c-format
@@ -7519,8 +7508,7 @@ msgstr "Configuration post-installation"
 #: install_steps_interactive.pm:774
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr ""
-"Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
+msgstr "Assurez vous que le média de mise à jour des modules est dans le lecteur %s"
 
 #: install_steps_interactive.pm:802
 #, c-format
@@ -7550,8 +7538,7 @@ msgstr ""
 
 #: install_steps_interactive.pm:824
 #, c-format
-msgid ""
-"Contacting Mandriva Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandriva Linux web site to get the list of available mirrors..."
 msgstr ""
 "Connexion au site Web de Mandriva Linux pour obtenir la liste des serveurs "
 "miroirs disponibles..."
@@ -7628,8 +7615,7 @@ msgstr ""
 #: install_steps_interactive.pm:1034
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"Aucune carte son détectée. Essayez avec « harddrake » après l'installation"
+msgstr "Aucune carte son détectée. Essayez avec « harddrake » après l'installation"
 
 #: install_steps_interactive.pm:1054
 #, c-format
@@ -7790,8 +7776,7 @@ msgstr "Installation de Mandriva Linux %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 "<Tab> suivant | <Alt-Tab> précédent | <Espace> sélectionner | <F12> Écran "
 "suivant "
@@ -10323,7 +10308,7 @@ msgstr "BitTorrent"
 #: network/drakfirewall.pm:74
 #, c-format
 msgid "Port scan detection"
-msgstr ""
+msgstr "Détection de balayage de ports"
 
 #: network/drakfirewall.pm:165
 #, c-format
@@ -10412,6 +10397,9 @@ msgid ""
 "into your computer.\n"
 "Please select which network activity should be watched."
 msgstr ""
+"Vous pouvez être informé lorsque quelqu'un accède à un service ou essaye de "
+"s'introduire dans votre système.\n"
+"Veuillez sélectionner l'activité réseau que vous souhaitez surveiller."
 
 #: network/drakfirewall.pm:257
 #, c-format
@@ -11055,8 +11043,8 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
-"Sélectionnez votre type de connexion DSL.\n"
-"Gardez la valeur préselectionnée si vous ne la connaissez pas."
+"Veuillez sélectionner votre type de connexion DSL.\n"
+"Si vous ne savez pas répondre, laisser le choix prédéfini."
 
 #: network/netconnect.pm:712
 #, c-format
@@ -11195,8 +11183,7 @@ msgstr "L'adresse IP doit ressembler à quelque chose comme « 192.168.1.20 »
 #: network/netconnect.pm:912 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
-msgstr ""
-"Le masque réseau doit ressembler à quelque chose comme « 255.255.224.0 »"
+msgstr "Le masque réseau doit ressembler à quelque chose comme « 255.255.224.0 »"
 
 #: network/netconnect.pm:916
 #, c-format
@@ -11283,7 +11270,7 @@ msgstr "Mode de cryptage"
 #: network/netconnect.pm:1017
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Autoriser les connexions itinérantes"
 
 #: network/netconnect.pm:1018 standalone/drakconnect:406
 #, c-format
@@ -11490,8 +11477,7 @@ msgstr ""
 #: network/netconnect.pm:1168
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
-msgstr ""
-"Enfin, vous pouvez également entrer les adresses IP de vos serveurs DNS."
+msgstr "Enfin, vous pouvez également entrer les adresses IP de vos serveurs DNS."
 
 #: network/netconnect.pm:1170 standalone/drakconnect:991
 #, c-format
@@ -11543,8 +11529,7 @@ msgstr "Périphérique passerelle"
 #: network/netconnect.pm:1188
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr ""
-"L'adresse du DNS doit ressembler à quelque chose comme « 192.168.1.20 »"
+msgstr "L'adresse du DNS doit ressembler à quelque chose comme « 192.168.1.20 »"
 
 #: network/netconnect.pm:1193 standalone/drakconnect:685
 #, c-format
@@ -11802,8 +11787,7 @@ msgstr ""
 #: network/thirdparty.pm:209
 #, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
-msgstr ""
-"Copiez le microcode Alcatel sous le nom mgmt.o dans /usr/share/speedtouch"
+msgstr "Copiez le microcode Alcatel sous le nom mgmt.o dans /usr/share/speedtouch"
 
 #: network/thirdparty.pm:218
 #, c-format
@@ -11826,8 +11810,7 @@ msgstr "Impossible d'installer les paquetages (%s) !"
 #: network/thirdparty.pm:299
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
-msgstr ""
-"Certains paquetages (%s) sont nécessaires mais ne sont pas disponibles."
+msgstr "Certains paquetages (%s) sont nécessaires mais ne sont pas disponibles."
 
 #: network/thirdparty.pm:300
 #, c-format
@@ -12425,8 +12408,7 @@ msgstr ""
 #: printer/printerdrake.pm:72
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
-"Les imprimantes de cette machine sont disponibles aux autres ordinateurs"
+msgstr "Les imprimantes de cette machine sont disponibles aux autres ordinateurs"
 
 #: printer/printerdrake.pm:77
 #, c-format
@@ -12758,20 +12740,22 @@ msgstr "Redémarrage de CUPS..."
 
 #: printer/printerdrake.pm:614
 #, c-format
-msgid ""
-"Allow pop-up windows, printer setup and package installation may be canceled"
+msgid "Allow pop-up windows, printer setup and package installation may be canceled"
 msgstr ""
+"Autoriser les fenêtres de configuration, l'annulation de la configuration et "
+"de l'installation de paquetages seront alors possibles."
 
 #: printer/printerdrake.pm:616
 #, c-format
-msgid ""
-"No pop-up windows, printer setup and package installation cannot be canceled"
+msgid "No pop-up windows, printer setup and package installation cannot be canceled"
 msgstr ""
+"Pas de fenêtres de configuration, l'annulation de la configuration et de "
+"l'installation de paquetages ne seront pas possibles."
 
 #: printer/printerdrake.pm:622
 #, c-format
 msgid "Printer auto administration"
-msgstr "Administration automatique de l'imprimante"
+msgstr "Administration automatique d'imprimantes"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12779,41 +12763,43 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Vous allez configurer ici les tâches d'administration des imprimantes qui "
+"doivent être faites automatiquement."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Utiliser la configuration automatique (DHCP)"
+msgstr "Configurer automatiquement les nouvelles imprimantes"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr "(Vérifiez que toutes les imprimantes sont connectées et allumées).\n"
+msgstr "lorsqu'une imprimante USB est connectée et allumée"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Cette imprimante est désactivée"
+msgstr "lorsque Printerdrake est lancé"
 
 #: printer/printerdrake.pm:634
 #, c-format
 msgid "Mode for automatic printer setup:"
-msgstr ""
+msgstr "Mode pour la configuration automatique des imprimantes :"
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Imprimantes disponibles"
+msgstr "Ré-activer les imprimantes désactivées"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Changer le système d'impression"
+msgstr "lorsque le système d'impression est démarré"
 
 #: printer/printerdrake.pm:680
-#, fuzzy, c-format
+#, c-format
 msgid "Communication error handling for the printer \"%s\""
-msgstr "Utilisation/Maintenance de l'imprimante « %s »"
+msgstr "Gestion des erreurs de communication avec l'imprimante « %s »"
 
 #: printer/printerdrake.pm:682
 #, c-format
@@ -12822,31 +12808,34 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Ici vous pouvez configurer le nombre d'erreurs à gérer pendant la "
+"communication entre votre ordinateur et l'imprimante « %s » (par exemple, si "
+"l'imprimante est débranchée)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "Le numéro de port doit être un nombre entier !"
+msgstr "Le nombre de tentatives doit être un nombre entier au moins égal à 1 ! "
 
 #: printer/printerdrake.pm:690
-#, fuzzy, c-format
+#, c-format
 msgid "The delay between retries should be a positive integer number!"
-msgstr "Le délai doit être une valeur positive et entière !"
+msgstr "Le délai entre les tentatives doit être un nombre entier positif !"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Désactiver l'imprimante"
+msgstr "Ne pas désactiver l'imprimante"
 
 #: printer/printerdrake.pm:704
 #, c-format
 msgid "Retry infinitely often"
-msgstr ""
+msgstr "Ré-essayer indéfiniment"
 
 #: printer/printerdrake.pm:707
 #, c-format
 msgid "Number of retries"
-msgstr "Nombre d'essais"
+msgstr "Nombre de tentatives"
 
 #: printer/printerdrake.pm:712
 #, c-format
@@ -12872,7 +12861,7 @@ msgid ""
 msgstr ""
 "\n"
 "Les imprimantes connectées à un serveur CUPS distant n'ont pas besoin d'être "
-"configurées ici; elles seront automatiquement détectées."
+"configurées ici; elles seront automatiquement détectées. "
 
 #: printer/printerdrake.pm:751 printer/printerdrake.pm:5089
 #, c-format
@@ -12887,8 +12876,7 @@ msgstr ""
 
 #: printer/printerdrake.pm:758
 #, c-format
-msgid ""
-"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Autodétection d'imprimante (locale, TCP/Socket, imprimantes SMB et URI de "
 "périphériques)"
@@ -12901,8 +12889,7 @@ msgstr "Modifier le délai d'auto-détection des imprimantes réseau"
 #: printer/printerdrake.pm:766
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
-"Entrez ici le délai d'auto-détection (en msec) des imprimantes réseau. "
+msgstr "Entrez ici le délai d'auto-détection (en msec) des imprimantes réseau. "
 
 #: printer/printerdrake.pm:768
 #, c-format
@@ -12994,10 +12981,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:846
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
-msgstr ""
-"Aucune des imprimantes trouvées n'est directement reliée à votre machine"
+msgid "There are no printers found which are directly connected to your machine"
+msgstr "Aucune des imprimantes trouvées n'est directement reliée à votre machine"
 
 #: printer/printerdrake.pm:849
 #, c-format
@@ -13016,8 +13001,7 @@ msgstr ""
 #: printer/printerdrake.pm:863
 #, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr ""
-"Souhaitez-vous activer l'impression sur les imprimantes de votre réseau ?\n"
+msgstr "Souhaitez-vous activer l'impression sur les imprimantes de votre réseau ?\n"
 
 #: printer/printerdrake.pm:865
 #, c-format
@@ -13041,7 +13025,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not setup printer automatically now, and never do it again"
-msgstr ""
+msgstr "Ne pas configurer l'imprimante automatiquement ni maintenant ni dans le futur"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -13051,7 +13035,7 @@ msgstr "Recherche de nouvelles imprimantes..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not setup printer automatically again"
-msgstr ""
+msgstr "Ne plus configurer l' imprimante automatiquement"
 
 #: printer/printerdrake.pm:996
 #, c-format
@@ -13070,6 +13054,10 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"Les imprimantes suivantes ont été trouvées et Printerdrake peut les "
+"configurer automatiquement à votre place. Si vous ne voulez pas qu'elles "
+"soient toutes configurées, désélectionnez celles qui ne doivent pas l'être, "
+"ou cliquez sur « Annuler » si aucune ne doit être configurée.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -13078,6 +13066,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"L'imprimante suivante a été trouvée et Printerdrake peut la configurer "
+"automatiquement à votre place. Si vous ne souhaitez pas qu'elle le soit, "
+"désélectionnez-la, ou cliquez sur « Annuler ».\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -13085,6 +13076,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Sachez que pour certaines imprimantes il est nécessaire d'installerdes "
+"programmes supplémentaires. Ayez vos média d'installation à portée de main.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -13149,6 +13142,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"La configuration automatique des imprimantes a été désactivée.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -13156,11 +13151,13 @@ msgid ""
 "You can turn it back on again by choosing \"%s\" -> \"%s\" in Printerdrake's "
 "main menu. "
 msgstr ""
+"Vous pouvez la réactiver en choisissant « %s » -> « %s » dans le menu "
+"principal de Printerdrake."
 
 #: printer/printerdrake.pm:1125 printer/printerdrake.pm:5139
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Administration à distance"
+msgstr "Configurer l'Administration Automatique"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -13169,6 +13166,10 @@ msgid ""
 "(On Printerdrake startup, on printing system startup, when connecting a new "
 "USB printer)."
 msgstr ""
+"Ici vous pouvez aussi choisir dans quelles situations la configuration "
+"automatique de l'imprimante est faite (au démarrage de Printerdrake, au "
+"démarrage du système d'impression, lors de la détection d'une nouvelle "
+"imprimante USB)"
 
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2422
@@ -13346,8 +13347,7 @@ msgstr "Détecter automatiquement les imprimantes reliées directement au résea
 #: printer/printerdrake.pm:1371
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr ""
-"Détecter automatiquement les imprimantes reliées à des machines sous windows"
+msgstr "Détecter automatiquement les imprimantes reliées à des machines sous windows"
 
 #: printer/printerdrake.pm:1374
 #, c-format
@@ -13479,7 +13479,7 @@ msgstr "Imprimantes disponibles"
 #: printer/printerdrake.pm:1599 printer/printerdrake.pm:1608
 #, c-format
 msgid "The following printer was auto-detected. "
-msgstr "L'imprimante suivante a été détectée."
+msgstr "L'imprimante suivante a été détectée. "
 
 #: printer/printerdrake.pm:1601
 #, c-format
@@ -13487,13 +13487,12 @@ msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
-"si ce n'est pas celle que vous voulez configurer, tapez un nom de fichier ou "
+"Si ce n'est pas celle que vous voulez configurer, tapez un nom de fichier ou "
 "de périphérique dans le champ de saisie"
 
 #: printer/printerdrake.pm:1602
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Sinon vous pouvez spécifier un nom de périphérique ou de fichier dans le "
 "champ de saisie"
@@ -13692,7 +13691,7 @@ msgid ""
 msgstr ""
 "Si l'imprimante voulue a été autodétectée, choisissez la dans la liste et "
 "ajoutez un nom d'utilisateur, un mot de passe et un groupe de travail si "
-"nécessaire."
+"nécessaire. "
 
 #: printer/printerdrake.pm:1884
 #, c-format
@@ -13869,7 +13868,7 @@ msgid ""
 msgstr ""
 "Choisissez une imprimante parmi celles qui ont été détectées, ou entrez un "
 "nom de machine ou une adresse IP et le numéro de port optionnel (9100 par "
-"défaut)."
+"défaut). "
 
 #: printer/printerdrake.pm:2146
 #, c-format
@@ -14223,7 +14222,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier si l'imprimante a été correctement détectée. Cherchez le "
 "modèle correct dans la liste si le curseur se situe sur un modèle erroné ou "
-"sur « Imprimante à accès direct »."
+"sur « Imprimante à accès direct ». "
 
 #: printer/printerdrake.pm:3260
 #, c-format
@@ -14436,7 +14435,7 @@ msgid "Canon LBP-810/1120 (CAPT) configuration"
 msgstr "Configuration du Canon LBP-810/1120 (CAPT)"
 
 #: printer/printerdrake.pm:3602
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes or on the parallel "
@@ -14445,8 +14444,9 @@ msgid ""
 msgstr ""
 "Le pilote pour cette imprimante ne permet que l'utilisation des imprimantes "
 "locales connectées par USB, et pas des imprimantes distantes ou des serveurs "
-"d'impression. Veuillez connecter votre imprimante sur un port local USB ou "
-"configurez-la sur la machine à laquelle elle est connectée."
+"d'impression ou sur un port parallèle. Veuillez connecter votre imprimante "
+"sur un port local USB ou configurez-la sur la machine à laquelle elle est "
+"connectée."
 
 #: printer/printerdrake.pm:3609
 #, c-format
@@ -15336,8 +15336,7 @@ msgstr "Installation de Foomatic..."
 #: printer/printerdrake.pm:4893
 #, c-format
 msgid "Could not install %s packages, %s cannot be started!"
-msgstr ""
-"Impossible d'installer les paquetages %s, %s ne peut pas être démarré !"
+msgstr "Impossible d'installer les paquetages %s, %s ne peut pas être démarré !"
 
 #: printer/printerdrake.pm:5088
 #, c-format
@@ -15450,9 +15449,9 @@ msgid "Disable Printer"
 msgstr "Désactiver l'imprimante"
 
 #: printer/printerdrake.pm:5511 printer/printerdrake.pm:5605
-#, fuzzy, c-format
+#, c-format
 msgid "Printer communication error handling"
-msgstr "Type de connexion"
+msgstr "Gestion des erreurs de connexion avec l'imprimante"
 
 #: printer/printerdrake.pm:5512 printer/printerdrake.pm:5609
 #, c-format
@@ -15548,14 +15547,12 @@ msgstr "Scannerdrake"
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
-"Impossible d'installer les paquetages nécessaires au partage de vos scanners."
+msgstr "Impossible d'installer les paquetages nécessaires au partage de vos scanners."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
-"Vos scanners ne seront pas disponibles pour les utilisateurs non privilégiés."
+msgstr "Vos scanners ne seront pas disponibles pour les utilisateurs non privilégiés."
 
 #: security/help.pm:11
 #, c-format
@@ -15596,8 +15593,7 @@ msgstr ""
 #: security/help.pm:27
 #, c-format
 msgid "Allow/Forbid reboot by the console user."
-msgstr ""
-"Activer/Désactiver le redémarrage du système par l'utilisateur de la console."
+msgstr "Activer/Désactiver le redémarrage du système par l'utilisateur de la console."
 
 #: security/help.pm:29
 #, c-format
@@ -15766,8 +15762,7 @@ msgstr "Activer/Désactiver les vérifications de msec toutes les heures"
 
 #: security/help.pm:90
 #, c-format
-msgid ""
-" Enabling su only from members of the wheel group or allow su from any user."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 " Autorise « su » seulement pour les membres du groupe « wheel » ou bien pour "
 "tout le monde."
@@ -15790,8 +15785,7 @@ msgstr " Activer/Désactiver les vérifications quotidiennes de sécurité."
 #: security/help.pm:98
 #, c-format
 msgid " Enable/Disable sulogin(8) in single user level."
-msgstr ""
-"Activer/Désactiver la demande de mot de passe en mode mono-utilisateur."
+msgstr "Activer/Désactiver la demande de mot de passe en mode mono-utilisateur."
 
 #: security/help.pm:100
 #, c-format
@@ -15910,10 +15904,8 @@ msgstr "Si oui, vérifie l'absence de rootkit via chkrootkit."
 
 #: security/help.pm:127
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
-msgstr ""
-"Si rempli, envoie le rapport par courriel à cette adresse, sinon à root."
+msgid "if set, send the mail report to this email address else send it to root."
+msgstr "Si rempli, envoie le rapport par courriel à cette adresse, sinon à root."
 
 #: security/help.pm:128
 #, c-format
@@ -16002,8 +15994,7 @@ msgstr "Login root direct"
 #: security/l10n.pm:19
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr ""
-"Lister les utilisateurs dans les gestionnaires de connexion (kdm et gdm)"
+msgstr "Lister les utilisateurs dans les gestionnaires de connexion (kdm et gdm)"
 
 #: security/l10n.pm:20
 #, c-format
@@ -16070,8 +16061,7 @@ msgstr "Activer les vérifications de msec toutes les heures"
 #: security/l10n.pm:32
 #, c-format
 msgid "Enable su only from the wheel group members or for any user"
-msgstr ""
-"Autoriser « su » seulement aux membres du groupe « wheel » ou à tout le monde"
+msgstr "Autoriser « su » seulement aux membres du groupe « wheel » ou à tout le monde"
 
 #: security/l10n.pm:33
 #, c-format
@@ -16101,8 +16091,7 @@ msgstr "Pas de délai d'expiration des mots de passe pour"
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr ""
-"Régler la durée de vie des mots de passe et le délai d'inactivation du compte"
+msgstr "Régler la durée de vie des mots de passe et le délai d'inactivation du compte"
 
 #: security/l10n.pm:39
 #, c-format
@@ -16174,14 +16163,12 @@ msgstr "Vérifier les mots de passe vides dans /etc/shadow."
 #: security/l10n.pm:52
 #, c-format
 msgid "Verify checksum of the suid/sgid files"
-msgstr ""
-"Vérifier les sommes de contrôle des fichiers ayant la permission suid/sgid"
+msgstr "Vérifier les sommes de contrôle des fichiers ayant la permission suid/sgid"
 
 #: security/l10n.pm:53
 #, c-format
 msgid "Check additions/removals of suid root files"
-msgstr ""
-"Vérifier les ajouts/retraits des fichiers qui ont la permission « suid root »"
+msgstr "Vérifier les ajouts/retraits des fichiers qui ont la permission « suid root »"
 
 #: security/l10n.pm:54
 #, c-format
@@ -16206,8 +16193,7 @@ msgstr "Ne pas envoyer de mail quand cela n'est pas nécessaire"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Si rempli, envoie le rapport par courriel à cette adresse, sinon à root"
+msgstr "Si rempli, envoie le rapport par courriel à cette adresse, sinon à root"
 
 #: security/l10n.pm:59
 #, c-format
@@ -16217,8 +16203,7 @@ msgstr "Envoyer le rapport de vérification par courriel"
 #: security/l10n.pm:60
 #, c-format
 msgid "Run some checks against the rpm database"
-msgstr ""
-"Vérifie les fichiers des paquetages rpm par rapport à la base de données"
+msgstr "Vérifie les fichiers des paquetages rpm par rapport à la base de données"
 
 #: security/l10n.pm:61
 #, c-format
@@ -16342,8 +16327,7 @@ msgstr "Utilisation de « libsafe » pour les serveurs"
 
 #: security/level.pm:64
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Une bibliothèque qui protège contre les attaques par débordement de pile.\n"
 "(les plus fréquentes)"
@@ -16444,8 +16428,7 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache est un serveur Web (HTTP). Il est utilisé pour faire fonctionner un "
 "site internet."
@@ -16463,7 +16446,7 @@ msgstr ""
 "Le métaserveur « inetd » sert à démarrer automatiquement les autres services "
 "réseau lorsqu'une requête est détectée. Il est notamment responsable du "
 "démarrage des services telnet, ftp, rsh et rlogin, etc. Le désactiver "
-"revient à désactiver tous les services qu'il gère."
+"revient à désactiver tous les services qu'il gère. "
 
 #: services.pm:40
 #, c-format
@@ -16843,7 +16826,7 @@ msgstr "Haute disponibilité"
 #: share/advertising/09.pl:3
 #, c-format
 msgid "Delta RPM"
-msgstr ""
+msgstr "Delta RPM"
 
 #: share/advertising/10.pl:3
 #, c-format
@@ -16863,17 +16846,17 @@ msgstr "Mandriva Linux 2006 : Plus facile à utiliser"
 #: share/advertising/13.pl:3
 #, c-format
 msgid "Latest graphical interfaces: KDE and GNOME"
-msgstr "Les dernières interfaces graphiques : KDE et GNOME"
+msgstr "Les interfaces graphiques les plus récentes : KDE et GNOME"
 
 #: share/advertising/14.pl:3
 #, c-format
 msgid "auto-installation servers"
-msgstr "Serveurs d'installation automatique"
+msgstr "serveurs d'installation automatisée"
 
 #: share/advertising/15.pl:3
 #, c-format
 msgid "Easy and quick installation"
-msgstr "Installation rapide et facile"
+msgstr "Installation rapide et faicle"
 
 #: share/advertising/16.pl:3
 #, c-format
@@ -16883,7 +16866,7 @@ msgstr "Configuration facile grâce à 60 assistants"
 #: share/advertising/17.pl:3
 #, c-format
 msgid "Look and feel improved"
-msgstr "Apparence améliorée"
+msgstr "Apparence amélioré"
 
 #: share/advertising/18.pl:3
 #, c-format
@@ -16918,7 +16901,7 @@ msgstr "Mandriva Linux 2006 : Où l'acheter ?"
 #: share/advertising/24.pl:3
 #, c-format
 msgid "Where to find technical assistance?"
-msgstr "Où trouver de l'aide technique ?"
+msgstr "Où trouver une assistance technique ? "
 
 #: share/advertising/25.pl:3
 #, c-format
@@ -16928,7 +16911,7 @@ msgstr "Comment rejoindre la communauté Mandriva Linux ?"
 #: share/advertising/26.pl:3
 #, c-format
 msgid "How to maintain your system up-to-date?"
-msgstr "Comment garder votre système à jour ?"
+msgstr "Comment conserver son système à jour ? "
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -16961,8 +16944,7 @@ msgstr "Jeux"
 #: share/compssUsers.pl:35
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-"Programmes de divertissement : jeux d'arcade, de plateau, de stratégie, etc"
+msgstr "Programmes de divertissement : jeux d'arcade, de plateau, de stratégie, etc"
 
 #: share/compssUsers.pl:38
 #, c-format
@@ -17021,8 +17003,7 @@ msgstr "Éditeurs, interpréteurs, outils fichiers, terminaux"
 #: share/compssUsers.pl:66 share/compssUsers.pl:170
 #, c-format
 msgid "C and C++ development libraries, programs and include files"
-msgstr ""
-"Bibliothèques de développement C et C++, programmes et fichiers d'en-tête"
+msgstr "Bibliothèques de développement C et C++, programmes et fichiers d'en-tête"
 
 #: share/compssUsers.pl:70 share/compssUsers.pl:174
 #, c-format
@@ -17679,7 +17660,7 @@ msgid "Sync client X keyboard settings with server."
 msgstr "Synchroniser le paramétrage X11 du clavier avec le serveur."
 
 #: standalone/drakTermServ:426
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select default client type (Fat is the default type if 'Use thin' is "
 "unchecked).\n"
@@ -17687,11 +17668,12 @@ msgid ""
 "display.\n"
 "    'Fat' clients use their own CPU/RAM but the server's filesystem."
 msgstr ""
-"Veuillez sélectionner le type de client par défaut.\n"
-"    « Client léger » utilise le processeur et la ram du serveur mais utilise "
-"l'affichage du client.\n"
-"    « Client lourd » utilise son propre processeur et sa propre ram mais le "
-"système de fichier du serveur."
+"Veuillez sélectionner le type de client par défaut (Lourd est choisi par "
+"défaut si Léger n'est pas sélectionné).\n"
+"    « Client léger » utilise le processeur et la mémoire du serveur mais "
+"utilise l'affichage du client.\n"
+"    « Client lourd » utilise son propre processeur et sa propre mémoire mais "
+"le système de fichier du serveur."
 
 #: standalone/drakTermServ:446
 #, c-format
@@ -18072,7 +18054,7 @@ msgstr "Créer les images PXE"
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "Installe un noyau i586 pour les postes clients plus plus anciens"
 
 #: standalone/drakTermServ:767
 #, c-format
@@ -18115,9 +18097,9 @@ msgid "Delete All NBIs"
 msgstr "Effacer toutes les NBI"
 
 #: standalone/drakTermServ:880
-#, fuzzy, c-format
+#, c-format
 msgid "Building images for kernel:"
-msgstr "Création des images de démarrage réseau pour tous les noyaux"
+msgstr "Création des images du noyau :"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -18236,8 +18218,7 @@ msgstr ""
 #: standalone/drakTermServ:1250
 #, c-format
 msgid "Thin clients will not work with autologin. Disable autologin?"
-msgstr ""
-"Les clients légers ne fonctionnent pas avec autologin. Désactiver autologin ?"
+msgstr "Les clients légers ne fonctionnent pas avec autologin. Désactiver autologin ?"
 
 #: standalone/drakTermServ:1266
 #, c-format
@@ -18412,8 +18393,7 @@ msgstr "%s introuvable...\n"
 #: standalone/drakTermServ:1931
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
-msgstr ""
-"/etc/hosts.allow et /etc/hosts.deny déjà configurés. Aucune modification"
+msgstr "/etc/hosts.allow et /etc/hosts.deny déjà configurés. Aucune modification"
 
 #: standalone/drakTermServ:2071
 #, c-format
@@ -18561,8 +18541,7 @@ msgstr ""
 #: standalone/drakbackup:154
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr ""
-"Stocker le mot de passe pour ce système dans la configuration DrakBackup."
+msgstr "Stocker le mot de passe pour ce système dans la configuration DrakBackup."
 
 #: standalone/drakbackup:155
 #, c-format
@@ -18678,8 +18657,7 @@ msgstr "L'intervalle Cron n'est accessible qu'au superutilisateur"
 #: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
-"« %s » n'est ni une adresse de courriel valide ni un utilisateur local !"
+msgstr "« %s » n'est ni une adresse de courriel valide ni un utilisateur local !"
 
 #: standalone/drakbackup:469 standalone/logdrake:442
 #, c-format
@@ -18901,8 +18879,7 @@ msgstr ""
 
 #: standalone/drakbackup:1093
 #, c-format
-msgid ""
-"Error during sending file via FTP. Please correct your FTP configuration."
+msgid "Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 "Erreur pendant l'envoi du fichier par FTP. Veuillez corriger votre "
 "configuration FTP"
@@ -18962,8 +18939,7 @@ msgstr ""
 
 #: standalone/drakbackup:1398
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Ces options peuvent sauvegarder et restaurer\n"
 "tous les fichiers du dossier de configuration système « /etc »\n"
@@ -19080,8 +19056,7 @@ msgstr "Se souvenir du mot de passe"
 #: standalone/drakbackup:1648
 #, c-format
 msgid "Need hostname, username and password!"
-msgstr ""
-"Le nom d'hôte, le nom d'utilisateur et le mot de passe sont nécessaires !"
+msgstr "Le nom d'hôte, le nom d'utilisateur et le mot de passe sont nécessaires !"
 
 #: standalone/drakbackup:1739
 #, c-format
@@ -19390,8 +19365,7 @@ msgstr "Veuillez vérifier que le démon « cron » fait partie de vos service
 
 #: standalone/drakbackup:2156
 #, c-format
-msgid ""
-"If your machine is not on all the time, you might want to install anacron."
+msgid "If your machine is not on all the time, you might want to install anacron."
 msgstr ""
 "Si votre ordinateur n'est pas allumé constamment, installez peut-être "
 "« anacron »."
@@ -19795,8 +19769,7 @@ msgstr "          Toutes vos données sélectionnées ont été       "
 #: standalone/drakbackup:2779
 #, c-format
 msgid "          Successfully Restored on %s       "
-msgstr ""
-"    correctement restaurées en prenant « %s » comme dossier racine      "
+msgstr "    correctement restaurées en prenant « %s » comme dossier racine      "
 
 #: standalone/drakbackup:2899
 #, c-format
@@ -20183,7 +20156,7 @@ msgstr "Drakbackup"
 #: standalone/drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr "Aucun chargeur de démarrage n'a été trouvé, création d'une nouvelle configuration"
+msgstr "Chargeur de démarrage non trouvé. Création d'une nouvelle configuration"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
@@ -20686,7 +20659,7 @@ msgid ""
 "hardware configuration tool."
 msgstr ""
 "Aucune carte réseau n'a été détectée sur votre système. Veuillez utiliser "
-"l'outil de configuration du matériel."
+"l'outil de configuration du matériel. "
 
 #: standalone/drakconnect:708
 #, c-format
@@ -20712,8 +20685,7 @@ msgstr ""
 
 #: standalone/drakconnect:745
 #, c-format
-msgid ""
-"Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Félicitations, l'interface réseau « %s » a été supprimée avec succès"
 
 #: standalone/drakconnect:761
@@ -21045,7 +21017,7 @@ msgstr "Importer"
 #: standalone/drakfont:494
 #, c-format
 msgid "Get Windows Fonts"
-msgstr "Récupérer les polices Windows"
+msgstr "Récupérer les police d'écritures Windows"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:512
@@ -21347,8 +21319,7 @@ msgstr ""
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
-msgstr ""
-"Veuillez choisir quelle carte réseau sera connectée à votre réseau local"
+msgstr "Veuillez choisir quelle carte réseau sera connectée à votre réseau local"
 
 #: standalone/drakgw:177
 #, c-format
@@ -21500,7 +21471,8 @@ msgid ""
 "need some manual fixes after installation."
 msgstr ""
 "Attention ! Une configuration existante du Pare-Feu a été détectée. Vous "
-"devrez peut-être modifier la configuration manuellement après l'installation."
+"devrez peut-être modifier la configuration manuellement après "
+"l'installation. "
 
 #: standalone/drakgw:384
 #, c-format
@@ -21536,8 +21508,7 @@ msgstr "--help                - afficher ce message\n"
 
 #: standalone/drakhelp:23
 #, c-format
-msgid ""
-" --id <id_label>       - load the html help page which refers to id_label\n"
+msgid " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <label_id>       - charger la page d'aide html identifiée par "
 "label_id\n"
@@ -21568,22 +21539,22 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Veuillez ajouter un hôte pour pouvoir le modifier."
 
 #: standalone/drakhosts:108
 #, c-format
 msgid "Please modify information"
-msgstr "Pouvez-vous modifier l'information"
+msgstr "Veuillez modifier les informations"
 
 #: standalone/drakhosts:109
 #, c-format
 msgid "Please delete information"
-msgstr "Pouvez-vous effacer l'information"
+msgstr "Veuillez supprimer les informations"
 
 #: standalone/drakhosts:110
 #, c-format
 msgid "Please add information"
-msgstr "Pouvez-vous ajouter l'information"
+msgstr "Veuillez ajouter les informations"
 
 #: standalone/drakhosts:115
 #, c-format
@@ -21646,9 +21617,9 @@ msgid "Log"
 msgstr "Journal"
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Supprimer toutes les partitions"
+msgstr "Nettoyer les journaux"
 
 #: standalone/drakids:65 standalone/net_applet:439
 #, c-format
@@ -21802,7 +21773,7 @@ msgstr ""
 "Exemple : 192.168.1.0/255.255.255.0' ou 192.168.1.0/24\n"
 
 #: standalone/draknfs:151
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "<span weight=\"bold\">User ID options</span>\n"
 "\n"
@@ -21826,29 +21797,29 @@ msgid ""
 "<span foreground=\"royalblue3\">anonuid and anongid:</span> explicitly set "
 "the uid and gid of the anonymous account.\n"
 msgstr ""
-"<span weight=\"bold\">Options Correspondance des utilisateurs</span>\n"
+"<span weight=\"bold\">Options identité des utilisateurs</span>\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">Associer l'utilisateur root à l'utilisateur "
-"anonymous (root_squash) :</span> Transforme les requêtes des UID/GID 0 en "
+"anonymous (root_squash) :</span> transforme les requêtes des UID/GID 0 en "
 "UID/GID anonymes.\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">Autoriser les accès distants de root "
-"(no_root_squash) :</span> Ne pas transformer les UID/GID 0. Cette option est "
+"(no_root_squash) :</span> ne pas transformer les UID/GID 0. Cette option est "
 "particulièrement utiles pour les stations sans disque.\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">Associer tous les utilisateurs à "
-"l'utilisateur anonymous (all_squash) :</span> Convertit tous les UID/GID en "
+"l'utilisateur anonymous (all_squash) :</span> convertit tous les UID/GID en "
 "utilisateur anonyme. Utiles pour exporter avec NFS des répertoires publics "
 "de FTP, des répertoires de News, etc... L'option inverse est no_all_squash, "
 "qui s'applique par défaut.\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">Utilisateur et groupe anonymous (anonuid et "
-"anongid) :</span> Ces options donnent explicitement l'UID et le GID du "
-"compte anonyme.\n"
+"anongid) :</span> ces options donnent explicitement l'UID et le GID du "
+"compte anonymous.\n"
 
 #: standalone/draknfs:167
 #, c-format
@@ -21909,7 +21880,7 @@ msgstr ""
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Veuillez ajouter un partage NFS pour pouvoir le modifier."
 
 #: standalone/draknfs:378
 #, c-format
@@ -21970,7 +21941,7 @@ msgstr "Groupe anonymous :"
 #: standalone/draknfs:444
 #, c-format
 msgid "Can't create this directory."
-msgstr "Ne peut créer ce répertoire."
+msgstr "Impossible de créer ce dossier."
 
 #: standalone/draknfs:447
 #, c-format
@@ -22248,8 +22219,7 @@ msgstr "Utilisateur courant"
 #: standalone/drakperm:299
 #, c-format
 msgid "When checked, owner and group will not be changed"
-msgstr ""
-"Une fois vérifiés, le propriétaire et le groupe ne seront plus modifiés"
+msgstr "Une fois vérifiés, le propriétaire et le groupe ne seront plus modifiés"
 
 #: standalone/drakperm:309
 #, c-format
@@ -22276,12 +22246,12 @@ msgstr ""
 #: standalone/drakperm:391
 #, c-format
 msgid "User: %s"
-msgstr ""
+msgstr "Utilisateur : %s"
 
 #: standalone/drakperm:392
 #, c-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Groupe : %s"
 
 #: standalone/drakroam:29
 #, c-format
@@ -22295,7 +22265,7 @@ msgstr ""
 #: standalone/drakroam:44
 #, c-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
 #: standalone/drakroam:46
 #, c-format
@@ -22310,7 +22280,7 @@ msgstr "Force du signal"
 #: standalone/drakroam:104
 #, c-format
 msgid "Please enter settings for wireless network \"%s\""
-msgstr ""
+msgstr "Veuillez fournir les paramètres du réseau sans fil « %s »"
 
 #: standalone/drakroam:115
 #, c-format
@@ -22329,9 +22299,9 @@ msgid "Refresh"
 msgstr "Rafraîchir"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Partager le répertoire"
+msgstr "Dossier partagé"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
 #, c-format
@@ -22341,7 +22311,7 @@ msgstr "Commentaire"
 #: standalone/draksambashare:64 standalone/draksambashare:97
 #, c-format
 msgid "Browseable"
-msgstr "V&isible"
+msgstr "Visible sur le réseau"
 
 #: standalone/draksambashare:65
 #, c-format
@@ -22351,12 +22321,12 @@ msgstr "Publique"
 #: standalone/draksambashare:66 standalone/draksambashare:102
 #, c-format
 msgid "Writable"
-msgstr "En écriture"
+msgstr "Droit d'écriture"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
 #, c-format
 msgid "Create mask"
-msgstr "Créer le masque"
+msgstr "Masque de création fichier"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
 #, c-format
@@ -22366,53 +22336,53 @@ msgstr "Masque de répertoire"
 #: standalone/draksambashare:69
 #, c-format
 msgid "Read list"
-msgstr "Liste de lecture"
+msgstr "Utilisateurs en lecture uniquement"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Liste blanche"
+msgstr "Utilisateur avec droit d'écriture"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Ajouter un utilisateur"
+msgstr "Administrateurs"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
 #, c-format
 msgid "Valid users"
-msgstr "Utilisateurs valides"
+msgstr "Utilisateurs autorisés"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Permissions"
+msgstr "Hériter des permissions"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Cacher les fichiers"
+msgstr "Cacher les fichiers cachés"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
 #, c-format
 msgid "Preserve case"
-msgstr "P&réserver la casse"
+msgstr "Conserver la casse"
 
 #: standalone/draksambashare:77
-#, fuzzy, c-format
+#, c-format
 msgid "Force create mode"
-msgstr "Le modèle de votre imprimante"
+msgstr "Forcer les droits à la création"
 
 #: standalone/draksambashare:78
-#, fuzzy, c-format
+#, c-format
 msgid "Force group"
-msgstr "Groupe PFS"
+msgstr "Forcer le groupe"
 
 #: standalone/draksambashare:79 standalone/draksambashare:141
-#, fuzzy, c-format
+#, c-format
 msgid "Default case"
-msgstr "Utilisateur par défaut"
+msgstr "Casse par défaut"
 
 #: standalone/draksambashare:94
 #, c-format
@@ -22422,63 +22392,63 @@ msgstr "Nom de l'imprimante"
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "Imprimable"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "commande d'impression"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "Commande LPQ"
 
 #: standalone/draksambashare:101
 #, c-format
 msgid "Guest ok"
-msgstr ""
+msgstr "Accès sans mot de passe"
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Permissions"
+msgstr "Hériter des permissions"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Droits à la création"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "Utiliser le pilote du client"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Désinstalle la liste"
+msgstr "Utilisateurs en lecture uniquement"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Liste blanche"
+msgstr "Utilisateur avec droit d'écriture"
 
 #: standalone/draksambashare:139
-#, fuzzy, c-format
+#, c-format
 msgid "Force Group"
-msgstr "Groupe"
+msgstr "Groupé forcé"
 
 #: standalone/draksambashare:140
 #, c-format
 msgid "Force create group"
-msgstr ""
+msgstr "Droits forcés à la création"
 
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "À propos de Draksambashare"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -22489,6 +22459,11 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"Version : %s\n"
+"Auteur: Antoine Ginies\n"
+"\n"
+"Il s'agit d'un outils simple pour gérer facilement la configuration de Samba"
 
 #: standalone/draksambashare:180
 #, c-format
@@ -22498,27 +22473,27 @@ msgstr "Serveur Samba"
 #: standalone/draksambashare:180
 #, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr "Relancer/Recharger le serveur Samba..."
+msgstr "Redémarrage/Rechargement du serveur Samba..."
 
 #: standalone/draksambashare:181
 #, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr "Erreur de relance/rechargement du serveur Samba"
+msgstr "Erreur de redémarrage/rechargement du serveur Samba"
 
 #: standalone/draksambashare:367
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Ajouter un partage Samba"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
-msgstr ""
+msgstr "Le but de cet assistant est de créer facilement un nouveau partage Samba. "
 
 #: standalone/draksambashare:372
 #, c-format
 msgid "Name of the share:"
-msgstr "Nom du partage"
+msgstr "Nom du partage : "
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
@@ -22537,17 +22512,19 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Un partage de même nom existe déjà ou alors le nom de partage est vide, "
+"veuillez choisir un autre nom."
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "Impossible de créer le dossier, veuillez entrer un chemin correct. "
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Veuillez entrer un répertoire à partager."
+msgstr "Veuillez entrer un commentaire pour ce partage. "
 
 #: standalone/draksambashare:417
 #, c-format
@@ -22555,67 +22532,72 @@ msgid ""
 "The wizard successfully added the Samba share. Now just double click on it "
 "in treeview to modify it"
 msgstr ""
+"L'assistant a ajouté avec succès le partage Samba. Double-cliquez sur son "
+"nom dans l'arbre pour le modifier."
 
 #: standalone/draksambashare:433
 #, c-format
 msgid "pdf-gen - a PDF generator"
-msgstr ""
+msgstr "pdf-gen - un générateur de PDF"
 
 #: standalone/draksambashare:434
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "imprimantes - toutes les imprimantes disponibles"
 
 #: standalone/draksambashare:438
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "Ajouter un partage imprimante particulier"
 
 #: standalone/draksambashare:441
 #, c-format
-msgid ""
-"Goal of this wizard is to easily create a new special printer Samba share."
+msgid "Goal of this wizard is to easily create a new special printer Samba share."
 msgstr ""
+"Le rôle de cet assistant est de faciliter la création d'un partage "
+"imprimante particulier"
 
 #: standalone/draksambashare:449
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "Un générateur de PDF existe déjà. "
 
 #: standalone/draksambashare:473
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "Les imprimantes et print$ existent déjà."
 
 #: standalone/draksambashare:524
 #, c-format
 msgid "The wizard successfully added the printer Samba share"
-msgstr ""
+msgstr "L'assistant a ajouté une imprimante partagé Samba avec succès"
 
 #: standalone/draksambashare:547
 #, c-format
 msgid "Please add or select a Samba printer share to be able to modify it."
 msgstr ""
+"Veuillez ajouter ou sélectionner une imprimante partagée Samba afin de "
+"pouvoir la modifier. "
 
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "partage d'imprimante"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr "Nom de l'imprimante :"
+msgstr "Nom de l'imprimante : "
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
 #, c-format
 msgid "Writable:"
-msgstr "En écriture :"
+msgstr "Droit d'écriture :"
 
 #: standalone/draksambashare:593 standalone/draksambashare:774
 #, c-format
 msgid "Browseable:"
-msgstr "V&isible :"
+msgstr "Visible sur le réseau :"
 
 #: standalone/draksambashare:598
 #, c-format
@@ -22625,32 +22607,32 @@ msgstr "Options avancées"
 #: standalone/draksambashare:600
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "Accès à l'imprimante"
 
 #: standalone/draksambashare:604
 #, c-format
 msgid "Guest ok:"
-msgstr ""
+msgstr "Accès sans mot de passe :"
 
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Droits à la création :"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "commande d'impression"
 
 #: standalone/draksambashare:611
 #, c-format
 msgid "Print command:"
-msgstr "C&ommande d'impression :"
+msgstr "Commande d'impression :"
 
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "Commande LPQ :"
 
 #: standalone/draksambashare:613
 #, c-format
@@ -22660,27 +22642,29 @@ msgstr "Impression :"
 #: standalone/draksambashare:629
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "Le droit à la création doit être un nombre. Ex : 0755."
 
 #: standalone/draksambashare:691
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "Entrée DrakSamba"
 
 #: standalone/draksambashare:696
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
 msgstr ""
+"Veuillez ajouter ou sélectionner un partage Samba afin de pouvoir le "
+"modifier. "
 
 #: standalone/draksambashare:719
-#, fuzzy, c-format
+#, c-format
 msgid "Samba user access"
-msgstr "Serveur Samba"
+msgstr "Accès utilisateur Samba"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Options de base"
+msgstr "Options de masque"
 
 #: standalone/draksambashare:741
 #, c-format
@@ -22688,14 +22672,14 @@ msgid "Display options"
 msgstr "Options d'affichage"
 
 #: standalone/draksambashare:763
-#, fuzzy, c-format
+#, c-format
 msgid "Samba share directory"
-msgstr "Partager le répertoire"
+msgstr "Dossier partagé Samba"
 
 #: standalone/draksambashare:766
 #, c-format
 msgid "Share name:"
-msgstr "Nom de partage de l'imprimante :"
+msgstr "Nom de partage : "
 
 #: standalone/draksambashare:772
 #, c-format
@@ -22704,24 +22688,25 @@ msgstr "Publique :"
 
 #: standalone/draksambashare:796
 #, c-format
-msgid ""
-"Create mask, create mode and directory mask should be numeric. ie: 0755."
+msgid "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
+"Le masque de création, les droits sur les répertoires et fichiers doivent "
+"être des valeurs numériques. Ex : 0755."
 
 #: standalone/draksambashare:803
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "Veuillez créer cet utilisateur Samba : %s"
 
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr "Titouroù diwar an arveriad"
+msgstr "Information de l'utilisateur"
 
 #: standalone/draksambashare:928
 #, c-format
 msgid "User name:"
-msgstr "Nom d'utilisateur :"
+msgstr "Nom d'utilisateur : "
 
 #: standalone/draksambashare:929 standalone/harddrake2:551
 #, c-format
@@ -22729,44 +22714,44 @@ msgid "Password:"
 msgstr "Mot de passe :"
 
 #: standalone/draksambashare:1129
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add Samba share."
-msgstr "Impossible d'ajouter un partage NFS."
+msgstr "Impossible d'ajouter un partage Samba. "
 
 #: standalone/draksambashare:1138
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to Modify Samba share."
-msgstr "Impossible de modifier un partage NFS."
+msgstr "Impossible de modifier un partage Samba."
 
 #: standalone/draksambashare:1147
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove a Samba share."
-msgstr "Impossible d'enlever un partage NFS."
+msgstr "Impossible d'enlever un partage Samba."
 
 #: standalone/draksambashare:1154
 #, c-format
 msgid "File share"
-msgstr ""
+msgstr "Partage de fichiers"
 
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "Ajouter des imprimantes"
 
 #: standalone/draksambashare:1168
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "Échec lors de l'ajout d'imprimantes.  "
 
 #: standalone/draksambashare:1177
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "Échec lors de la modification. "
 
 #: standalone/draksambashare:1186
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "Échec lors de la suppression. "
 
 #: standalone/draksambashare:1193
 #, c-format
@@ -22776,27 +22761,27 @@ msgstr "Imprimantes"
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr "Kemmañ an tremenger"
+msgstr "Changer le mot de passe"
 
 #: standalone/draksambashare:1206
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "Impossible de changer le mot de passe de l'utilisateur. "
 
 #: standalone/draksambashare:1214
 #, c-format
 msgid "Failed to add user."
-msgstr "Impossible d'ajouter l'utilisateur."
+msgstr "Échec lors de l'ajout de l'utilisateur. "
 
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr "Effacer l'utilisateur"
+msgstr "Supprimer l'utilisateur"
 
 #: standalone/draksambashare:1226
 #, c-format
 msgid "Failed to delete user."
-msgstr "Impossible d'effacer l'utilisateur."
+msgstr "Échec lors de la suppression de l'utilisateur. "
 
 #: standalone/draksambashare:1238
 #, c-format
@@ -22804,9 +22789,9 @@ msgid "Samba Users"
 msgstr "Utilisateurs Samba"
 
 #: standalone/draksambashare:1247
-#, fuzzy, c-format
+#, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr "DrakNFS gère les partages NFS"
+msgstr "DrakSamba gère les partages Samba"
 
 #: standalone/draksec:49
 #, c-format
@@ -23020,7 +23005,7 @@ msgstr ""
 #: standalone/draksplash:30
 #, c-format
 msgid "x coordinate of text box"
-msgstr "coordonnée x de la zone de texte"
+msgstr "coordonnée x de la zone texte"
 
 #: standalone/draksplash:31
 #, c-format
@@ -23068,12 +23053,12 @@ msgstr "la hauteur de la barre de progression"
 #: standalone/draksplash:38
 #, c-format
 msgid "x coordinate of the text"
-msgstr "coordonnée x du texte"
+msgstr "coordonnée (x) du texte"
 
 #: standalone/draksplash:39
 #, c-format
 msgid "y coordinate of the text"
-msgstr "coordonnée y du texte"
+msgstr "coordonnée (y) du texte"
 
 #: standalone/draksplash:40
 #, c-format
@@ -23083,27 +23068,27 @@ msgstr "transparence de la zone de texte"
 #: standalone/draksplash:41
 #, c-format
 msgid "progress box transparency"
-msgstr "transparence de la barre d'avancement"
+msgstr "transparence de la barre de progression"
 
 #: standalone/draksplash:42
 #, c-format
 msgid "text size"
-msgstr "taille de texte"
+msgstr "taille du texte"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr "Choisir la couleur de la barre d'avancement 1"
+msgstr "Choisissez la couleur de la barre de progression 1"
 
 #: standalone/draksplash:61
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr "Choisir la couleur de la barre d'avancement 2"
+msgstr "Choisissez la couleur de la barre de progression 2"
 
 #: standalone/draksplash:62
 #, c-format
 msgid "Choose progress bar background"
-msgstr "Choisir le fond de la barre d'avancement"
+msgstr "Choisissez le fond de la barre de progression"
 
 #: standalone/draksplash:63
 #, c-format
@@ -23113,7 +23098,7 @@ msgstr "Type de gradient"
 #: standalone/draksplash:64
 #, c-format
 msgid "Choose text color"
-msgstr "Choisir la couleur de texte"
+msgstr "Choisissez la couleur du texte"
 
 #: standalone/draksplash:66 standalone/draksplash:73
 #, c-format
@@ -23128,17 +23113,17 @@ msgstr "Mode silencieux"
 #: standalone/draksplash:70
 #, c-format
 msgid "Choose text zone color"
-msgstr "Choisir la couleur de zone de texte"
+msgstr "Choisissez la couleur de la zone de texte"
 
 #: standalone/draksplash:71
 #, c-format
 msgid "Text color"
-msgstr "Couleur du texte"
+msgstr "couleur du texte"
 
 #: standalone/draksplash:72
 #, c-format
 msgid "Background color"
-msgstr "Couleur de fond"
+msgstr "couleur de fond"
 
 #: standalone/draksplash:74
 #, c-format
@@ -23188,7 +23173,7 @@ msgstr "choisissez l'image"
 #: standalone/draksplash:189
 #, c-format
 msgid "Color selection"
-msgstr "Sélection de couleurs"
+msgstr "Sélection de la couleur"
 
 #: standalone/drakups:74
 #, c-format
@@ -25080,7 +25065,7 @@ msgstr "Maintenant vous pouvez lancer xawtv (sous X-Window) !\n"
 #: standalone/drakxtv:149
 #, c-format
 msgid "No TV Card detected!"
-msgstr "Aucune carte TV détectée !"
+msgstr "Aucune carte TV détectée ! "
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakxtv:151
@@ -25116,8 +25101,7 @@ msgstr "liste des autres pilotes pour cette carte son"
 
 #: standalone/harddrake2:29
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "ceci est le bus physique sur lequel le périphérique est connecté (ex : PCI, "
 "USB, ...)"
@@ -25651,8 +25635,7 @@ msgstr "Fichier de périphérique"
 
 #: standalone/harddrake2:115
 #, c-format
-msgid ""
-"the device file used to communicate with the kernel driver for the mouse"
+msgid "the device file used to communicate with the kernel driver for the mouse"
 msgstr ""
 "le fichier de périphérique utilisé pour communiquer avec le pilote du noyau "
 "pour la souris"
@@ -25877,8 +25860,7 @@ msgstr "Divers"
 
 #: standalone/harddrake2:342
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Cliquez sur un périphérique dans l'arborescence afin de consulter les "
 "informations correspondantes."
@@ -26175,8 +26157,7 @@ msgstr "Configuration des services"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr ""
-"Vous recevrez une alerte si l'un des services sélectionnés ne tourne plus"
+msgstr "Vous recevrez une alerte si l'un des services sélectionnés ne tourne plus"
 
 #: standalone/logdrake:421
 #, c-format
@@ -26208,8 +26189,7 @@ msgstr "Veuillez entrer votre adresse courriel ci-dessous"
 #: standalone/logdrake:430
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
-msgstr ""
-"et entrez le nom (ou l'adresse IP) du serveur SMTP que vous désirez utiliser"
+msgstr "et entrez le nom (ou l'adresse IP) du serveur SMTP que vous désirez utiliser"
 
 #: standalone/logdrake:449
 #, c-format
@@ -26567,9 +26547,9 @@ msgid "/_Configure CUPS"
 msgstr "/_Configuration de CUPS"
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Administration à distance"
+msgstr "/Configurer l'_Administration Automatique"
 
 #: standalone/printerdrake:194
 #, c-format
@@ -26695,8 +26675,7 @@ msgstr "Annulation de Scannerdrake"
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid ""
-"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 "Impossible d'installer les paquetages nécessaires à la configuration d'un "
 "scanner avec ScannerDrake."
@@ -26816,8 +26795,7 @@ msgstr "Sélectionnez un fichier de firmware"
 #: standalone/scannerdrake:203 standalone/scannerdrake:262
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
-msgstr ""
-"Le fichier firmware « %s » n'existe pas ou n'est pas accessible en lecture !"
+msgstr "Le fichier firmware « %s » n'existe pas ou n'est pas accessible en lecture !"
 
 #: standalone/scannerdrake:226
 #, c-format
@@ -27065,8 +27043,7 @@ msgstr ""
 #: standalone/scannerdrake:586
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
-"Les scanners de cette machine sont utilisables par les autres ordinateurs"
+msgstr "Les scanners de cette machine sont utilisables par les autres ordinateurs"
 
 #: standalone/scannerdrake:588
 #, c-format
@@ -27124,8 +27101,7 @@ msgstr "Nom ou Adresse IP de l'hôte : "
 #: standalone/scannerdrake:705 standalone/scannerdrake:855
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Choisissez l'hôte à partir duquel les scanners locaux seront disponibles : "
+msgstr "Choisissez l'hôte à partir duquel les scanners locaux seront disponibles : "
 
 #: standalone/scannerdrake:716 standalone/scannerdrake:866
 #, c-format
@@ -27194,8 +27170,7 @@ msgstr "Détection du matériel en cours"
 #: standalone/service_harddrake_confirm:7
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
-msgstr ""
-"Modification matériel dans la classe « %s » (%s secondes pour répondre)"
+msgstr "Modification matériel dans la classe « %s » (%s secondes pour répondre)"
 
 #: standalone/service_harddrake_confirm:8
 #, c-format
@@ -27351,1189 +27326,3 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Échec de l'installation"
 
-#~ msgid ""
-#~ "Winbind allows the system to retrieve information and authenticate users "
-#~ "in a Windows domain."
-#~ msgstr ""
-#~ "Winbind autorise votre système à rapatrier les informations et "
-#~ "authentification utilisateur dans un Domaine Windows."
-
-#~ msgid ""
-#~ "Kerberos is a secure system for providing network authentication services."
-#~ msgstr ""
-#~ "Kerberos est un système sécurisé qui fournit des services "
-#~ "d'authentification réseau."
-
-#~ msgid "Use Idmap for store UID/SID "
-#~ msgstr "Utiliser Idmap pour stocker les UID/SID"
-
-#~ msgid "Default Idmap "
-#~ msgstr "Idmap par défaut"
-
-#~ msgid "Please wait, preparing installation..."
-#~ msgstr "Veuillez patienter, préparation de l'installation..."
-
-#~ msgid "Installing package %s"
-#~ msgstr "Installation du paquetage %s"
-
-#~ msgid "<b>What is Mandriva Linux?</b>"
-#~ msgstr "<b>Qu'est-ce que Mandriva Linux ?</b>"
-
-#~ msgid "Welcome to <b>Mandriva Linux</b>!"
-#~ msgstr "<b>Mandriva Linux</b> vous souhaite la bienvenue !"
-
-#~ msgid ""
-#~ "Mandriva Linux is a <b>Linux distribution</b> that comprises the core of "
-#~ "the system, called the <b>operating system</b> (based on the Linux "
-#~ "kernel) together with <b>a lot of applications</b> meeting every need you "
-#~ "could even think of."
-#~ msgstr ""
-#~ "Mandriva Linux est une <b>distribution Linux</b>, qui regroupe un "
-#~ "<b>système d'exploitation</b> (ie : le coeur du système, basé sur le "
-#~ "noyau Linux) et <b>un très grand nombre d'applications</b> qui répondront "
-#~ "à tous vos besoins."
-
-#~ msgid ""
-#~ "Mandriva Linux is the most <b>user-friendly</b> Linux distribution today. "
-#~ "It is also one of the <b>most widely used</b> Linux distributions "
-#~ "worldwide!"
-#~ msgstr ""
-#~ "Mandriva Linux est la distribution Linux la plus <b>conviviale</b> de "
-#~ "toutes. C'est aussi l'une des <b>plus utilisées</b> au monde !"
-
-#~ msgid "<b>Open Source</b>"
-#~ msgstr "<b>Logiciel libre</b>"
-
-#~ msgid "Welcome to the <b>world of open source</b>!"
-#~ msgstr "Bienvenue dans le <b>monde du logiciel libre</b> !"
-
-#~ msgid ""
-#~ "Mandriva Linux is committed to the open source model. This means that "
-#~ "this new release is the result of <b>collaboration</b> between "
-#~ "<b>Mandriva's team of developers</b> and the <b>worldwide community</b> "
-#~ "of Mandriva Linux contributors."
-#~ msgstr ""
-#~ "Mandriva Linux adhère au modèle du logiciel libre. Cela signifie que "
-#~ "cette dernière version est le résultat d'une <b>collaboration</b> entre "
-#~ "<b>l'équipe des développeurs de Mandriva</b> et la <b>communauté "
-#~ "mondiale</b> des contributeurs à Mandriva Linux."
-
-#~ msgid ""
-#~ "We would like to <b>thank</b> everyone who participated in the "
-#~ "development of this latest release."
-#~ msgstr ""
-#~ "Nous <b>remercions</b> vivement toutes les personnes qui ont participé au "
-#~ "développement de cette dernière version."
-
-#~ msgid "<b>The GPL</b>"
-#~ msgstr "<b>La GPL</b>"
-
-#~ msgid ""
-#~ "Most of the software included in the distribution and all of the Mandriva "
-#~ "Linux tools are licensed under the <b>General Public License</b>."
-#~ msgstr ""
-#~ "La plupart des logiciels inclus dans la distribution et l'intégralité des "
-#~ "outils Mandriva Linux respectent la <b>Licence Publique Générale</b> (en "
-#~ "anglais General Public License ou GPL)."
-
-#~ msgid ""
-#~ "The GPL is at the heart of the open source model; it grants everyone the "
-#~ "<b>freedom</b> to use, study, distribute and improve the software any way "
-#~ "they want, provided they make the results available."
-#~ msgstr ""
-#~ "La GPL est au coeur du modèle du logiciel libre ; elle donne à chacun la "
-#~ "<b>liberté</b> d'utiliser, d'étudier, de distribuer et d'améliorer chaque "
-#~ "logiciel comme il l'entend, à condition de redistribuer les résultats."
-
-#~ msgid ""
-#~ "The main benefit of this is that the number of developers is virtually "
-#~ "<b>unlimited</b>, resulting in <b>very high quality</b> software."
-#~ msgstr ""
-#~ "L'avantage majeur de la GPL est le nombre <b>illimité</b> de "
-#~ "développeurs, ce qui permet d'obtenir des logiciels de <b>très haute "
-#~ "qualité.</b>"
-
-#~ msgid "<b>Join the Community</b>"
-#~ msgstr "<b>Rejoignez la communauté</b>"
-
-#~ msgid ""
-#~ "Mandriva Linux has one of the <b>biggest communities</b> of users and "
-#~ "developers. The role of such a community is very wide, ranging from bug "
-#~ "reporting to the development of new applications. The community plays a "
-#~ "<b>key role</b> in the Mandriva Linux world."
-#~ msgstr ""
-#~ "Mandriva Linux possède l'une des <b>plus importantes</b> communautés "
-#~ "d'utilisateurs et de développeurs. Le rôle de cette communauté est "
-#~ "multiple, des rapports de bugs aux développements de nouvelles "
-#~ "applications. La communauté est une <b>part très importante</b> du monde "
-#~ "Mandriva Linux."
-
-#~ msgid ""
-#~ "To <b>learn more</b> about our dynamic community, please visit <b>www."
-#~ "mandrivalinux.com</b> or directly <b>www.mandrivalinux.com/en/cookerdevel."
-#~ "php3</b> if you would like to get <b>involved</b> in the development."
-#~ msgstr ""
-#~ "Pour en savoir plus sur notre communauté dynamique, allez sur <b>www."
-#~ "mandrivalinux.com</b> ou directement sur <b>www.mandrivalinux.com/en/"
-#~ "cookerdevel.php3</b> si vous souhaitez vous impliquer dans le "
-#~ "développement."
-
-#~ msgid "<b>Download Version</b>"
-#~ msgstr "<b>Version Download</b>"
-
-#~ msgid ""
-#~ "You are now installing <b>Mandriva Linux Download</b>. This is the free "
-#~ "version that Mandriva wants to keep <b>available to everyone</b>."
-#~ msgstr ""
-#~ "Vous êtes en train d'installer <b>Mandriva Linux Download</b>. C'est la "
-#~ "version gratuite que Mandriva tient à garder <b>disponible pour tous</b>."
-
-#~ msgid ""
-#~ "The Download version <b>cannot include</b> all the software that is not "
-#~ "open source. Therefore, you will not find in the Download version:"
-#~ msgstr ""
-#~ "La version Download <b>ne peut pas intégrer</b> tous les logiciels qui ne "
-#~ "sont pas libres. Ainsi, vous ne trouverez pas dans la version Download :"
-
-#~ msgid ""
-#~ "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
-#~ msgstr ""
-#~ "\t* Les <b>pilotes propriétaires</b> (tels que les pilotes pour NVIDIA®, "
-#~ "ATI™, etc.)."
-
-#~ msgid ""
-#~ "\t* <b>Proprietary software</b> (such as Acrobat® Reader®, RealPlayer®, "
-#~ "Flash™, etc.)."
-#~ msgstr ""
-#~ "\t* Les <b>applications propriétaires</b> (telles que Acrobat® Reader®, "
-#~ "RealPlayer®, Flash™, etc.)."
-
-#~ msgid ""
-#~ "You will not have access to the <b>services included</b> in the other "
-#~ "Mandriva products either."
-#~ msgstr ""
-#~ "Vous n'aurez pas non plus accès aux <b>services inclus</b> dans les "
-#~ "autres produits de Mandriva."
-
-#~ msgid "<b>Discovery, Your First Linux Desktop</b>"
-#~ msgstr "<b>Discovery, Votre premier poste de travail sous Linux</b>"
-
-#~ msgid "You are now installing <b>Mandriva Linux Discovery</b>."
-#~ msgstr "Vous êtes en train d'installer <b>Mandriva Linux Discovery</b>."
-
-#~ msgid ""
-#~ "Discovery is the <b>easiest</b> and most <b>user-friendly</b> Linux "
-#~ "distribution. It includes a hand-picked selection of <b>premium software</"
-#~ "b> for office, multimedia and Internet activities. Its menu is task-"
-#~ "oriented, with a single application per task."
-#~ msgstr ""
-#~ "Discovery est la distribution la plus <b>simple</b> et la plus "
-#~ "<b>conviviale</b> sous Linux. Elle comprend une sélection de <b>logiciels "
-#~ "indispensables</b> à la bureautique, au multimédia et à Internet. Son "
-#~ "menu est orienté tâche, avec une seule application par tâche."
-
-#~ msgid "<b>PowerPack, The Ultimate Linux Desktop</b>"
-#~ msgstr "<b>PowerPack, Le poste de travail de référence sous Linux</b>"
-
-#~ msgid "You are now installing <b>Mandriva Linux PowerPack</b>."
-#~ msgstr "Vous êtes en train d'installer <b>Mandriva Linux PowerPack</b>."
-
-#~ msgid ""
-#~ "PowerPack is Mandriva's <b>premier Linux desktop</b> product. PowerPack "
-#~ "includes <b>thousands of applications</b> - everything from the most "
-#~ "popular to the most advanced."
-#~ msgstr ""
-#~ "PowerPack est l'une des <b>distributions Linux de référence</b>. Elle "
-#~ "intègre un <b>très grand nombre d'applications</b>, des plus utilisées "
-#~ "aux plus avancées."
-
-#~ msgid "<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"
-#~ msgstr ""
-#~ "<b>PowerPack+, La solution Linux pour postes de travail et serveurs</b>"
-
-#~ msgid "You are now installing <b>Mandriva Linux PowerPack+</b>."
-#~ msgstr "Vous êtes en train d'installer <b>Mandriva Linux PowerPack+</b>."
-
-#~ msgid ""
-#~ "PowerPack+ is a <b>full-featured Linux solution</b> for small to medium-"
-#~ "sized <b>networks</b>. PowerPack+ includes thousands of <b>desktop "
-#~ "applications</b> and a comprehensive selection of world-class <b>server "
-#~ "applications</b>."
-#~ msgstr ""
-#~ "PowerPack+ est la <b>solution Linux</b> dédiée aux petits <b>réseaux</b>. "
-#~ "Elle intègre un très grand nombre d'<b>applications pour poste de "
-#~ "travail</b> ainsi que toutes les <b>fonctions serveurs</b> indispensables."
-
-#~ msgid "<b>Mandriva Products</b>"
-#~ msgstr "<b>Les produits Mandriva</b>"
-
-#~ msgid ""
-#~ "<b>Mandriva</b> has developed a wide range of <b>Mandriva Linux</b> "
-#~ "products."
-#~ msgstr ""
-#~ "<b>Mandriva</b> a développé une large gamme de produits <b>Mandriva "
-#~ "Linux</b>."
-
-#~ msgid "The Mandriva Linux products are:"
-#~ msgstr "Les produits Mandriva Linux sont :"
-
-#~ msgid "\t* <b>Discovery</b>, Your First Linux Desktop."
-#~ msgstr "\t* <b>Discovery</b>, Votre premier poste de travail sous Linux."
-
-#~ msgid "\t* <b>PowerPack</b>, The Ultimate Linux Desktop."
-#~ msgstr "\t* <b>PowerPack</b>, Le poste de travail de référence sous Linux."
-
-#~ msgid "\t* <b>PowerPack+</b>, The Linux Solution for Desktops and Servers."
-#~ msgstr ""
-#~ "\t* <b>PowerPack+</b>, La solution Linux pour postes de travail et "
-#~ "serveurs."
-
-#~ msgid ""
-#~ "\t* <b>Mandriva Linux for x86-64</b>, The Mandriva Linux solution for "
-#~ "making the most of your 64-bit processor."
-#~ msgstr ""
-#~ "\t* <b>Mandriva Linux pour x86-64</b>, La solution Mandriva Linux pour "
-#~ "tirer le meilleur parti de votre processeur 64 bits."
-
-#~ msgid "<b>Mandriva Products (Nomad Products)</b>"
-#~ msgstr "<b>Les produits Mandriva (produits nomades)</b>"
-
-#~ msgid ""
-#~ "Mandriva has developed two products that allow you to use Mandriva Linux "
-#~ "<b>on any computer</b> and without any need to actually install it:"
-#~ msgstr ""
-#~ "Mandriva a développé deux produits qui permettent d'utiliser Mandriva "
-#~ "Linux <b>sur n'importe quel ordinateur</b> et sans installation :"
-
-#~ msgid ""
-#~ "\t* <b>Move</b>, a Mandriva Linux distribution that runs entirely from a "
-#~ "bootable CD-ROM."
-#~ msgstr ""
-#~ "\t* <b>Move</b>, une distribution Mandriva Linux qui fonctionne "
-#~ "entièrement depuis un CD-ROM amorçable."
-
-#~ msgid ""
-#~ "\t* <b>GlobeTrotter</b>, a Mandriva Linux distribution pre-installed on "
-#~ "the ultra-compact “LaCie Mobile Hard Drive”."
-#~ msgstr ""
-#~ "\t* <b>GlobeTrotter</b>, une distribution Mandriva Linux préinstallée sur "
-#~ "le disque dur ultra compact “LaCie Mobile Hard Drive”."
-
-#~ msgid "<b>Mandriva Products (Professional Solutions)</b>"
-#~ msgstr "<b>Les produits Mandriva (solutions professionnelles)</b>"
-
-#~ msgid ""
-#~ "Below are the Mandriva products designed to meet the <b>professional "
-#~ "needs</b>:"
-#~ msgstr ""
-#~ "Voici les produits Mandriva destinés à répondre aux <b>besoins "
-#~ "professionnels</b> :"
-
-#~ msgid ""
-#~ "\t* <b>Corporate Desktop</b>, The Mandriva Linux Desktop for Businesses."
-#~ msgstr ""
-#~ "\t* <b>Corporate Desktop</b>, Le poste de travail Mandriva Linux à "
-#~ "destination des entreprises."
-
-#~ msgid "\t* <b>Corporate Server</b>, The Mandriva Linux Server Solution."
-#~ msgstr "\t* <b>Corporate Server</b>, La solution serveur Mandriva Linux."
-
-#~ msgid ""
-#~ "\t* <b>Multi-Network Firewall</b>, The Mandriva Linux Security Solution."
-#~ msgstr ""
-#~ "\t* <b>Multi-Network Firewall</b>, La solution sécurité Mandriva Linux."
-
-#~ msgid "<b>The KDE Choice</b>"
-#~ msgstr "<b>Le choix de KDE</b>"
-
-#~ msgid ""
-#~ "With your Discovery, you will be introduced to <b>KDE</b>, the most "
-#~ "advanced and user-friendly <b>graphical desktop environment</b> available."
-#~ msgstr ""
-#~ "Avec Discovery, vous allez découvrir <b>KDE</b>, l'<b>environnement "
-#~ "graphique</b> le plus avancé et le plus convivial."
-
-#~ msgid ""
-#~ "KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you "
-#~ "will not ever think of running another operating system!"
-#~ msgstr ""
-#~ "KDE rendra vos <b>premiers pas</b> sous Linux si <b>faciles</b> que vous "
-#~ "ne songerez même plus à utiliser un autre système d'exploitation !"
-
-#~ msgid ""
-#~ "KDE also includes a lot of <b>well integrated applications</b> such as "
-#~ "Konqueror, the web browser and Kontact, the personal information manager."
-#~ msgstr ""
-#~ "KDE inclut également beaucoup de <b>logiciels intégrés</b> à "
-#~ "l'environnement graphique, tels que Konqueror, le navigateur web, et "
-#~ "Kontact, la suite d'informations personnelles."
-
-#~ msgid "<b>Choose your Favorite Desktop Environment</b>"
-#~ msgstr "<b>Choisissez votre environnement de bureau favori</b>"
-
-#~ msgid ""
-#~ "With PowerPack, you will have the choice of the <b>graphical desktop "
-#~ "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
-#~ msgstr ""
-#~ "Avec PowerPack, vous aurez le choix de l'<b>environnement graphique</b>. "
-#~ "Mandriva a choisi <b>KDE</b> comme environnement par défaut."
-
-#~ msgid ""
-#~ "KDE is one of the <b>most advanced</b> and <b>user-friendly</b> graphical "
-#~ "desktop environment available. It includes a lot of integrated "
-#~ "applications."
-#~ msgstr ""
-#~ "KDE est l'un des environnements graphiques les <b>plus avancés</b> et les "
-#~ "<b>plus conviviaux</b>. Il inclut un grand nombre de logiciels intégrés."
-
-#~ msgid ""
-#~ "But we advise you to try all available ones (including <b>GNOME</b>, "
-#~ "<b>IceWM</b>, etc.) and pick your favorite."
-#~ msgstr ""
-#~ "Mais nous vous conseillons d'essayer les autres disponibles (dont "
-#~ "<b>GNOME</b>, <b>IceWM</b>, etc.) pour choisir votre préféré."
-
-#~ msgid ""
-#~ "With PowerPack+, you will have the choice of the <b>graphical desktop "
-#~ "environment</b>. Mandriva has chosen <b>KDE</b> as the default one."
-#~ msgstr ""
-#~ "Avec PowerPack+, vous aurez le choix de l'<b>environnement graphique</b>. "
-#~ "Mandriva a choisi <b>KDE</b> comme environnement par défaut."
-
-#~ msgid "<b>OpenOffice.org</b>"
-#~ msgstr "<b>OpenOffice.org</b>"
-
-#~ msgid "With Discovery, you will discover <b>OpenOffice.org</b>."
-#~ msgstr "Avec Discovery, vous allez découvrir <b>OpenOffice.org</b>."
-
-#~ msgid ""
-#~ "It is a <b>full-featured office suite</b> that includes word processor, "
-#~ "spreadsheet, presentation and drawing applications."
-#~ msgstr ""
-#~ "C'est une <b>suite bureautique complète</b> qui inclut un traitement de "
-#~ "texte, un tableur, un logiciel de présentation et un logiciel de dessin."
-
-#~ msgid ""
-#~ "OpenOffice.org can read and write most types of <b>Microsoft® Office</b> "
-#~ "documents such as Word, Excel and PowerPoint® files."
-#~ msgstr ""
-#~ "OpenOffice.org peut lire et écrire la plupart des documents <b>Microsoft® "
-#~ "Office</b> comme Word, Excel et PowerPoint®."
-
-#~ msgid "<b>Kontact</b>"
-#~ msgstr "<b>Kontact</b>"
-
-#~ msgid ""
-#~ "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
-#~ msgstr ""
-#~ "Discovery inclut <b>Kontact</b>, la nouvelle <b>solution de travail "
-#~ "collaboratif</b> de KDE."
-
-#~ msgid ""
-#~ "More than just a full-featured <b>e-mail client</b>, Kontact also "
-#~ "includes an <b>address book</b>, a <b>calendar</b>, plus a tool for "
-#~ "taking <b>notes</b>!"
-#~ msgstr ""
-#~ "Plus qu'un simple <b>client de messagerie électronique</b>, Kontact "
-#~ "inclut aussi un <b>carnet d'adresses</b>, un <b>agenda</b> ainsi qu'un "
-#~ "outil pour prendre des <b>notes</b> !"
-
-#~ msgid ""
-#~ "It is the easiest way to communicate with your contacts and to organize "
-#~ "your time."
-#~ msgstr ""
-#~ "C'est la façon la plus simple de communiquer avec vos contacts et "
-#~ "d'organiser votre temps."
-
-#~ msgid "<b>Surf the Internet</b>"
-#~ msgstr "<b>Surfez sur Internet</b>"
-
-#~ msgid "Discovery will give you access to <b>every Internet resource</b>:"
-#~ msgstr ""
-#~ "Discovery vous donnera accès à <b>toutes les ressources d'Internet</b>. "
-#~ "Vous pourrez : "
-
-#~ msgid "\t* Browse the <b>Web</b> with Konqueror."
-#~ msgstr "\t* Naviguer sur le <b>web</b> avec Konqueror."
-
-#~ msgid "\t* <b>Chat</b> online with your friends using Kopete."
-#~ msgstr "\t* <b>Discuter</b> en ligne avec vos amis grâce à Kopete."
-
-#~ msgid "\t* <b>Transfer</b> files with KBear."
-#~ msgstr "\t* <b>Transférer</b> des fichiers avec KBear."
-
-#~ msgid "\t* ..."
-#~ msgstr "\t* ..."
-
-#~ msgid "<b>Enjoy our Multimedia Features</b>"
-#~ msgstr "<b>Profiter du multimédia</b>"
-
-#~ msgid "Discovery will also make <b>multimedia</b> very easy for you:"
-#~ msgstr ""
-#~ "Discovery vous simplifiera aussi l'utilisation du <b>multimédia</b>. Vous "
-#~ "pourrez ainsi :"
-
-#~ msgid "\t* Watch your favorite <b>videos</b> with Kaffeine."
-#~ msgstr "\t* Regarder vos <b>vidéos</b> favorites avec Kaffeine."
-
-#~ msgid "\t* Listen to your <b>music files</b> with amaroK."
-#~ msgstr "\t* Écouter vos <b>fichiers musicaux</b> avec amaroK."
-
-#~ msgid "\t* Edit and create <b>images</b> with the GIMP."
-#~ msgstr "\t* Créer et modifier des <b>images</b> avec le GIMP."
-
-#~ msgid "<b>Enjoy the Wide Range of Applications</b>"
-#~ msgstr "<b>Profiter de la large gamme d'applications</b>"
-
-#~ msgid ""
-#~ "In the Mandriva Linux menu you will find <b>easy-to-use</b> applications "
-#~ "for <b>all of your tasks</b>:"
-#~ msgstr ""
-#~ "Dans le menu Mandriva Linux, vous trouverez des applications <b>faciles "
-#~ "d'utilisation</b> pour <b>toutes vos tâches</b> :"
-
-#~ msgid ""
-#~ "\t* Create, edit and share office documents with <b>OpenOffice.org</b>."
-#~ msgstr ""
-#~ "\t* Créez, éditez et partagez des documents bureautiques avec "
-#~ "<b>OpenOffice.org</b>."
-
-#~ msgid ""
-#~ "\t* Manage your personal data with the integrated personal information "
-#~ "suites <b>Kontact</b> and <b>Evolution</b>."
-#~ msgstr ""
-#~ "\t* Gérez vos données personnelles avec les suites d'informations "
-#~ "personnelles <b>Kontact</b> et <b>Evolution</b>."
-
-#~ msgid "\t* Browse the web with <b>Mozilla</b> and <b>Konqueror</b>."
-#~ msgstr "\t* Naviguez sur le web avec <b>Mozilla</b> et <b>Konqueror</b>."
-
-#~ msgid "\t* Participate in online chat with <b>Kopete</b>."
-#~ msgstr "\t* Discutez en ligne avec <b>Kopete</b>."
-
-#~ msgid ""
-#~ "\t* Listen to your <b>audio CDs</b> and <b>music files</b>, watch your "
-#~ "<b>videos</b>."
-#~ msgstr ""
-#~ "\t* Écoutez vos <b>CD audio</b> et vos <b>fichiers musicaux</b>, regardez "
-#~ "vos <b>vidéos</b>."
-
-#~ msgid "\t* Edit and create images with the <b>GIMP</b>."
-#~ msgstr "\t* Créez et modifier des images avec le <b>GIMP</b>."
-
-#~ msgid "<b>Development Environments</b>"
-#~ msgstr "<b>Environnements de développement</b>"
-
-#~ msgid ""
-#~ "PowerPack gives you the best tools to <b>develop</b> your own "
-#~ "applications."
-#~ msgstr ""
-#~ "PowerPack vous offre les meilleurs outils pour <b>développer</b> vos "
-#~ "propres applications."
-
-#~ msgid ""
-#~ "You will enjoy the powerful, integrated development environment from KDE, "
-#~ "<b>KDevelop</b>, which will let you program in a lot of languages."
-#~ msgstr ""
-#~ "Vous allez apprécier le puissant environnement de développement intégré "
-#~ "de KDE, <b>KDevelop</b>, qui vous permettra de programmer dans un grand "
-#~ "nombre de langages."
-
-#~ msgid ""
-#~ "PowerPack also ships with <b>GCC</b>, the leading Linux compiler and "
-#~ "<b>GDB</b>, the associated debugger."
-#~ msgstr ""
-#~ "PowerPack fournit aussi <b>GCC</b>, le célèbre compilateur Linux et "
-#~ "<b>GDB</b>, le débogueur associé."
-
-#~ msgid "<b>Development Editors</b>"
-#~ msgstr "<b>Éditeurs de texte</b>"
-
-#~ msgid "PowerPack will let you choose between those <b>popular editors</b>:"
-#~ msgstr ""
-#~ "PowerPack vous laissera choisir parmi les <b>célèbres éditeurs</b> :"
-
-#~ msgid "\t* <b>Emacs</b>: a customizable and real time display editor."
-#~ msgstr "\t* <b>Emacs</b> : un éditeur de texte très configurable."
-
-#~ msgid ""
-#~ "\t* <b>XEmacs</b>: another open source text editor and application "
-#~ "development system."
-#~ msgstr ""
-#~ "\t* <b>XEmacs</b> : un autre éditeur de texte et environnement de "
-#~ "développement libre."
-
-#~ msgid ""
-#~ "\t* <b>Vim</b>: an advanced text editor with more features than standard "
-#~ "Vi."
-#~ msgstr ""
-#~ "\t* <b>Vim</b> : un éditeur de texte avancé, extrêmement efficace, basé "
-#~ "sur Vi."
-
-#~ msgid "<b>Development Languages</b>"
-#~ msgstr "<b>Langages de programmation</b>"
-
-#~ msgid ""
-#~ "With all these <b>powerful tools</b>, you will be able to write "
-#~ "applications in <b>dozens of programming languages</b>:"
-#~ msgstr ""
-#~ "Avec ces <b>puissants outils</b>, vous pourrez écrire des applications "
-#~ "dans <b>un grand nombre de langages</b> :"
-
-#~ msgid "\t* The famous <b>C language</b>."
-#~ msgstr "\t* Le célèbre <b>langage C</b>."
-
-#~ msgid "\t* Object oriented languages:"
-#~ msgstr "\t* Les langages orientés objet : "
-
-#~ msgid "\t\t* <b>C++</b>"
-#~ msgstr "\t\t* <b>C++</b>"
-
-#~ msgid "\t\t* <b>Java™</b>"
-#~ msgstr "\t\t* <b>Java™</b>"
-
-#~ msgid "\t* Scripting languages:"
-#~ msgstr "\t* Langages de scripts : "
-
-#~ msgid "\t\t* <b>Perl</b>"
-#~ msgstr "\t\t* <b>Perl</b>"
-
-#~ msgid "\t\t* <b>Python</b>"
-#~ msgstr "\t\t* <b>Python</b>"
-
-# c-format
-#~ msgid "\t* And many more."
-#~ msgstr "\t* Et d'autres encore."
-
-#~ msgid "<b>Development Tools</b>"
-#~ msgstr "<b>Outils de développement</b>"
-
-#~ msgid ""
-#~ "With the powerful integrated development environment <b>KDevelop</b> and "
-#~ "the leading Linux compiler <b>GCC</b>, you will be able to create "
-#~ "applications in <b>many different languages</b> (C, C++, Java™, Perl, "
-#~ "Python, etc.)."
-#~ msgstr ""
-#~ "Avec le puissant environnement de développement intégré <b>KDevelop</b> "
-#~ "et le célèbre compilateur <b>GCC</b>, vous pourrez créer vos logiciels "
-#~ "dans <b>beaucoup de langages</b> (C, C++, Java™, Perl, Python, etc.)."
-
-#~ msgid "<b>Groupware Server</b>"
-#~ msgstr "<b>Serveur de travail collaboratif</b>"
-
-#~ msgid ""
-#~ "PowerPack+ will give you access to <b>Kolab</b>, a full-featured "
-#~ "<b>groupware server</b> which will, thanks to the client <b>Kontact</b>, "
-#~ "allow you to:"
-#~ msgstr ""
-#~ "PowerPack+ vous donnera accès à <b>Kolab</b>, un <b>serveur de travail "
-#~ "collaboratif</b> qui vous permettra, grâce au client <b>Kontact</b>, de :"
-
-#~ msgid "\t* Send and receive your <b>e-mails</b>."
-#~ msgstr "\t* Envoyer et recevoir vos <b>courriels</b>."
-
-#~ msgid "\t* Share your <b>agendas</b> and your <b>address books</b>."
-#~ msgstr ""
-#~ "\t* Partager vos <b>calendriers</b> et vos <b>carnets d'adresses</b>."
-
-#~ msgid "\t* Manage your <b>memos</b> and <b>task lists</b>."
-#~ msgstr "\t* Gérer vos <b>mémos</b> et vos <b>listes de tâches</b>."
-
-#~ msgid "<b>Servers</b>"
-#~ msgstr "<b>Serveurs</b>"
-
-#~ msgid ""
-#~ "Empower your business network with <b>premier server solutions</b> "
-#~ "including:"
-#~ msgstr ""
-#~ "Enrichissez votre réseau d'entreprise avec les <b>solides fonctions "
-#~ "serveur</b> incluant :"
-
-#~ msgid ""
-#~ "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
-#~ msgstr ""
-#~ "\t* <b>Samba</b> : Services de partage de fichiers et d'impression pour "
-#~ "clients Microsoft® Windows®."
-
-#~ msgid "\t* <b>Apache</b>: The most widely used web server."
-#~ msgstr "\t* <b>Apache</b> : Le serveur web le plus utilisé au monde."
-
-#~ msgid ""
-#~ "\t* <b>MySQL</b> and <b>PostgreSQL</b>: The world's most popular open "
-#~ "source databases."
-#~ msgstr ""
-#~ "\t* <b>MySQL</b> et <b>PostgreSQL</b> : Les bases de données libres les "
-#~ "plus populaires."
-
-#~ msgid ""
-#~ "\t* <b>CVS</b>: Concurrent Versions System, the dominant open source "
-#~ "network-transparent version control system."
-#~ msgstr ""
-#~ "\t* CVS : Concurrent Versions System, le logiciel libre de gestion de "
-#~ "versions le plus utilisé."
-
-#~ msgid ""
-#~ "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server "
-#~ "software."
-#~ msgstr ""
-#~ "\t* <b>ProFTPD</b> : Le serveur FTP sous licence GPL, entièrement "
-#~ "configurable."
-
-#~ msgid ""
-#~ "\t* <b>Postfix</b> and <b>Sendmail</b>: The popular and powerful mail "
-#~ "servers."
-#~ msgstr ""
-#~ "\t* <b>Postfix</b> et <b>Sendmail</b> : Les puissants et populaires "
-#~ "serveurs e-mail."
-
-#~ msgid "<b>Mandriva Linux Control Center</b>"
-#~ msgstr "<b>Centre de Contrôle Mandriva Linux</b>"
-
-#~ msgid ""
-#~ "The <b>Mandriva Linux Control Center</b> is an essential collection of "
-#~ "Mandriva Linux-specific utilities designed to simplify the configuration "
-#~ "of your computer."
-#~ msgstr ""
-#~ "Le <b>Centre de Contrôle Mandriva Linux</b> est un ensemble cohérent "
-#~ "d'outils créés par Mandriva Linux pour simplifier la configuration de "
-#~ "votre ordinateur."
-
-#~ msgid ""
-#~ "You will immediately appreciate this collection of <b>more than 60</b> "
-#~ "handy utilities for <b>easily configuring your system</b>: hardware "
-#~ "devices, mount points, network and Internet, security level of your "
-#~ "computer, etc."
-#~ msgstr ""
-#~ "Vous apprécierez immédiatement cette collection de <b>plus de 60</b> "
-#~ "outils très faciles d'utilisation, pour <b>configurer facilement votre "
-#~ "système</b> : périphériques, points de montage, connexion réseau et "
-#~ "Internet, niveau de sécurité de votre ordinateur, etc."
-
-#~ msgid "<b>The Open Source Model</b>"
-#~ msgstr "<b>Le modèle du logiciel libre</b>"
-
-#~ msgid ""
-#~ "Like all computer programming, open source software <b>requires time and "
-#~ "people</b> for development. In order to respect the open source "
-#~ "philosophy, Mandriva sells added value products and services to <b>keep "
-#~ "improving Mandriva Linux</b>. If you want to <b>support the open source "
-#~ "philosophy</b> and the development of Mandriva Linux, <b>please</b> "
-#~ "consider buying one of our products or services!"
-#~ msgstr ""
-#~ "Comme toute autre activité informatique, le logiciel libre requiert du "
-#~ "<b>temps et des effectifs</b> pour mener à bien les développements. Pour "
-#~ "respecter la philosophie du logiciel libre, Mandriva vend des produits et "
-#~ "des services à valeur ajoutée pour <b>continuer d'améliorer Mandriva "
-#~ "Linux</b>. Si vous souhaitez <b>soutenir la philosophie du logiciel "
-#~ "libre</b> et le développement de Mandriva Linux, <b>merci</b> d'envisager "
-#~ "l'achat d'un de nos produits ou services !"
-
-#~ msgid "<b>Online Store</b>"
-#~ msgstr "<b>Boutique en ligne</b>"
-
-#~ msgid ""
-#~ "To learn more about Mandriva products and services, you can visit our "
-#~ "<b>e-commerce platform</b>."
-#~ msgstr ""
-#~ "Pour en savoir plus sur les produits et les services de Mandriva, vous "
-#~ "pouvez visitez notre <b>plate-forme de commerce électronique</b>."
-
-#~ msgid ""
-#~ "There you can find all our products, services and third-party products."
-#~ msgstr ""
-#~ "Vous y trouverez tous nos produits, nos services et des produits tiers."
-
-#~ msgid ""
-#~ "This platform has just been <b>redesigned</b> to improve its efficiency "
-#~ "and usability."
-#~ msgstr ""
-#~ "Cette plate-forme a été entièrement <b>repensée</b> pour améliorer son "
-#~ "efficacité et sa convivialité."
-
-#~ msgid "Stop by today at <b>store.mandriva.com</b>!"
-#~ msgstr "Arrêtez-vous aujourd'hui sur <b>store.mandriva.com</b> !"
-
-#~ msgid "<b>Mandriva Club</b>"
-#~ msgstr "<b>Mandriva Club</b>"
-
-#~ msgid ""
-#~ "<b>Mandriva Club</b> is the <b>perfect companion</b> to your Mandriva "
-#~ "Linux product.."
-#~ msgstr ""
-#~ "<b>Mandriva Club</b> est le <b>partenaire parfait</b> de votre produit "
-#~ "Mandriva Linux."
-
-#~ msgid ""
-#~ "Take advantage of <b>valuable benefits</b> by joining Mandriva Club, such "
-#~ "as:"
-#~ msgstr ""
-#~ "Profitez de <b>nombreux avantages</b> en rejoignant Mandriva Club, tels "
-#~ "que :"
-
-#~ msgid ""
-#~ "\t* <b>Special discounts</b> on products and services of our online store "
-#~ "<b>store.mandriva.com</b>."
-#~ msgstr ""
-#~ "\t* <b>Des réductions spéciales</b> sur des produits et des services de "
-#~ "notre boutique en ligne <b>store.mandriva.com</b>."
-
-#~ msgid ""
-#~ "\t* Access to <b>commercial applications</b> (for example to NVIDIA® or "
-#~ "ATI™ drivers)."
-#~ msgstr ""
-#~ "\t* Accès à des <b>applications commerciales</b> (par exemple aux pilotes "
-#~ "NVIDIA® ou ATI™)."
-
-#~ msgid "\t* Participation in Mandriva Linux <b>user forums</b>."
-#~ msgstr "\t* Participation aux <b>forums d'utilisateurs</b> Mandriva Linux."
-
-#~ msgid ""
-#~ "\t* <b>Early and privileged access</b>, before public release, to "
-#~ "Mandriva Linux <b>ISO images</b>."
-#~ msgstr ""
-#~ "\t* Accès privilégié, et avant les sorties publiques, aux images ISO de "
-#~ "Mandriva Linux."
-
-#~ msgid "<b>Mandriva Online</b>"
-#~ msgstr "<b>Mandriva Online</b>"
-
-#~ msgid ""
-#~ "<b>Mandriva Online</b> is a new premium service that Mandriva is proud to "
-#~ "offer its customers!"
-#~ msgstr ""
-#~ "<b>Mandriva Online</b> est le tout nouveau service que Mandriva est fier "
-#~ "de présenter à ses clients !"
-
-#~ msgid ""
-#~ "Mandriva Online provides a wide range of valuable services for <b>easily "
-#~ "updating</b> your Mandriva Linux systems:"
-#~ msgstr ""
-#~ "Mandriva Online fournit une large gamme de services à valeur ajoutée pour "
-#~ "<b>mettre à jour facilement</b> votre système Mandriva Linux :"
-
-#~ msgid "\t* <b>Perfect</b> system security (automated software updates)."
-#~ msgstr ""
-#~ "\t* Sécurité <b>parfaite</b> du système (mises à jour logicielles "
-#~ "automatiques)."
-
-#~ msgid ""
-#~ "\t* <b>Notification</b> of updates (by e-mail or by an applet on the "
-#~ "desktop)."
-#~ msgstr ""
-#~ "\t* <b>Notification</b> de mises à jour (par courriel ou par une icône "
-#~ "sur le bureau)."
-
-#~ msgid "\t* Flexible <b>scheduled</b> updates."
-#~ msgstr "\t* <b>Planification</b> flexible des mises à jour."
-
-#~ msgid ""
-#~ "\t* Management of <b>all your Mandriva Linux systems</b> with one account."
-#~ msgstr ""
-#~ "\t* Gestion de <b>tous vos systèmes Mandriva Linux</b> avec un seul "
-#~ "compte."
-
-#~ msgid "<b>Mandriva Expert</b>"
-#~ msgstr "<b>Mandriva Expert</b>"
-
-#~ msgid ""
-#~ "Do you require <b>assistance?</b> Meet Mandriva's technical experts on "
-#~ "<b>our technical support platform</b> www.mandrivaexpert.com."
-#~ msgstr ""
-#~ "Vous avez besoin d'<b>assistance</b> ? Rencontrez les experts techniques "
-#~ "de Mandriva sur notre <b>plate-forme de support technique</b> www."
-#~ "mandrivaexpert.com."
-
-#~ msgid ""
-#~ "Thanks to the help of <b>qualified Mandriva Linux experts</b>, you will "
-#~ "save a lot of time."
-#~ msgstr ""
-#~ "Grâce aux <b>experts Mandriva Linux qualifiés</b>, vous gagnerez beaucoup "
-#~ "de temps."
-
-#~ msgid ""
-#~ "For any question related to Mandriva Linux, you have the possibility to "
-#~ "purchase support incidents at <b>store.mandriva.com</b>."
-#~ msgstr ""
-#~ "Pour toute question relative à Mandriva Linux, vous pouvez acheter du "
-#~ "support d'incidents sur <b>store.mandriva.com</b>."
-
-#~ msgid "ESSID"
-#~ msgstr "ESSID"
-
-#~ msgid "Key"
-#~ msgstr "Clé"
-
-#~ msgid "Network:"
-#~ msgstr "Réseau :"
-
-#~ msgid "IP:"
-#~ msgstr "IP :"
-
-#~ msgid "Mode:"
-#~ msgstr "Mode :"
-
-#~ msgid "Encryption:"
-#~ msgstr "Chiffrement :"
-
-#~ msgid "Signal:"
-#~ msgstr "Signal :"
-
-#~ msgid "Roaming"
-#~ msgstr "Détection des réseaux sans fil"
-
-#~ msgid "Roaming: %s"
-#~ msgstr "Détection : %s"
-
-#~ msgid "Scan interval (sec): "
-#~ msgstr "Intervalle de rafraîchissement (sec) :"
-
-#~ msgid "Set"
-#~ msgstr "Définir"
-
-#~ msgid "Known Networks (Drag up/down or edit)"
-#~ msgstr "Réseaux connus (Déplacer haut/bas ou éditer)"
-
-#~ msgid "Available Networks"
-#~ msgstr "Réseaux disponibles"
-
-#~ msgid "Rescan"
-#~ msgstr "Rafraîchir"
-
-#~ msgid "Status"
-#~ msgstr "État"
-
-#~ msgid "Disconnect"
-#~ msgstr "Déconnecter"
-
-#~ msgid ""
-#~ "x coordinate of text box\n"
-#~ "in number of characters"
-#~ msgstr ""
-#~ "coordonnées x de la zone de texte\n"
-#~ "en nombre de caractères"
-
-#~ msgid ""
-#~ "y coordinate of text box\n"
-#~ "in number of characters"
-#~ msgstr ""
-#~ "coordonnées y de la zone de texte\n"
-#~ "en nombre de caractères"
-
-#~ msgid "text width"
-#~ msgstr "largeur du texte"
-
-#~ msgid "Choose progress bar color"
-#~ msgstr "Choisir la couleur de la barre de progression"
-
-#~ msgid "ProgressBar color selection"
-#~ msgstr "Sélection de couleur de la barre de progression"
-
-#~ msgid "Connect to the Internet"
-#~ msgstr "Connexion à Internet"
-
-#~ msgid ""
-#~ "The most common way to connect with adsl is pppoe.\n"
-#~ "Some connections use PPTP, a few use DHCP.\n"
-#~ "If you do not know, choose 'use PPPoE'"
-#~ msgstr ""
-#~ "La façon la plus courante de se connecter à Internet en utilisant une "
-#~ "ligne ADSL est d'utiliser « PPPoA ».\n"
-#~ "« DHCP » est souvent utilisé lorsque la connexion est dégroupée.\n"
-#~ "Certaines connexions utilisent « PPPoE », quelques-unes se servent de "
-#~ "« PPTP ».\n"
-#~ "Si votre modem a été détecté, suivez les choix par défaut qui devraient "
-#~ "vous convenir."
-
-#~ msgid "Do not print any test page"
-#~ msgstr "Ne pas imprimer de page de test"
-
-#~ msgid ""
-#~ "Enable user disk quota accounting enabled, and optionally enforce limits"
-#~ msgstr ""
-#~ "Activer les quotas utilisateur et imposer (facultativement) les limites"
-
-#~ msgid "Printer on SMB/Windows 95/98/NT server"
-#~ msgstr "Imprimante sur serveur SMB (Windows 95/98/NT)"
-
-#~ msgid "Found printer on %s..."
-#~ msgstr "Imprimante trouvée sur %s ..."
-
-#~ msgid "Useless without Terminal Server"
-#~ msgstr "Inutilisable sans Serveur de Terminal"
-
-#~ msgid ""
-#~ "Please select default client type.\n"
-#~ "    'Thin' clients run everything off the server's CPU/RAM, using the "
-#~ "client display.\n"
-#~ "    'Fat' clients use their own CPU/RAM but the server's filesystem."
-#~ msgstr ""
-#~ "Veuillez sélectionner le type de client par défaut.\n"
-#~ "    « Client léger » utilise le processeur et la ram du serveur mais "
-#~ "utilise l'affichage du client.\n"
-#~ "    « Client lourd » utilise son propre processeur et sa propre ram mais "
-#~ "le système de fichier du serveur."
-
-#~ msgid "dhcpd Config..."
-#~ msgstr "Configuration de dhcpd..."
-
-#~ msgid ""
-#~ "package 'ImageMagick' is required to be able to complete configuration.\n"
-#~ "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-#~ msgstr ""
-#~ "le paquetage « ImageMagick » est nécessaire pour fonctionner "
-#~ "correctement.\n"
-#~ "Cliquez sur « Ok » pour l'installer ou « Annuler » pour quitter"
-
-#~ msgid "Unable to select wireless network: %s"
-#~ msgstr "Impossible de sélectionner le réseau sans fil : %s"
-
-#~ msgid "Interactive intrusion detection"
-#~ msgstr "Détection interactive d'intrusions"
-
-#~ msgid "Actions"
-#~ msgstr "Actions"
-
-#~ msgid "Active Firewall: intrusion detected"
-#~ msgstr "Pare Feu actif : intrusion détectée"
-
-#~ msgid "Do you want to blacklist the attacker?"
-#~ msgstr "Voulez-vous mettre l'attaquant en liste noire ?"
-
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "Local Network adress"
-#~ msgstr "Adresse de Réseau Local"
-
-#~ msgid "Configuring scripts, installing software, starting servers..."
-#~ msgstr ""
-#~ "Configuration des scripts, installation des logiciels, démarrage des "
-#~ "serveurs..."
-
-#~ msgid "More options"
-#~ msgstr "Plus d'options..."
-
-#~ msgid "drakfloppy"
-#~ msgstr "drakfloppy"
-
-#~ msgid "Boot disk creation"
-#~ msgstr "Création d'une disquette d'amorçage"
-
-#~ msgid "General"
-#~ msgstr "Général"
-
-#~ msgid "Kernel version"
-#~ msgstr "Version du noyau"
-
-#~ msgid "Preferences"
-#~ msgstr "Préférences"
-
-#~ msgid "Advanced preferences"
-#~ msgstr "Options avancées"
-
-#~ msgid "Size"
-#~ msgstr "Taille"
-
-#~ msgid "Mkinitrd optional arguments"
-#~ msgstr "Arguments optionnels pour mkinitrd"
-
-#~ msgid "force"
-#~ msgstr "forcer"
-
-#~ msgid "omit raid modules"
-#~ msgstr "ne pas tenir compte des modules RAID"
-
-#~ msgid "if needed"
-#~ msgstr "si besoin est"
-
-#~ msgid "omit scsi modules"
-#~ msgstr "ne pas tenir compte des modules SCSI"
-
-#~ msgid "Add a module"
-#~ msgstr "Ajouter un module"
-
-#~ msgid "Remove a module"
-#~ msgstr "Retirer un module"
-
-#~ msgid "Be sure a media is present for the device %s"
-#~ msgstr "Assurez-vous qu'un médium est présent dans le périphérique %s"
-
-#~ msgid ""
-#~ "There is no medium or it is write-protected for device %s.\n"
-#~ "Please insert one."
-#~ msgstr ""
-#~ "Il n'y a aucune disquette dans le lecteur %s, ou alors elle est \n"
-#~ "protégée contre l'écriture. Veuillez vérifier ou en insérer une."
-
-#~ msgid "Unable to fork: %s"
-#~ msgstr "Impossible de dédoubler (fork) : %s"
-
-#~ msgid "Floppy creation completed"
-#~ msgstr "La création de la disquette est maintenant terminée"
-
-#~ msgid "The creation of the boot floppy has been successfully completed \n"
-#~ msgstr "La création de la disquette de démarrage a été menée avec succès\n"
-
-#~ msgid ""
-#~ "Unable to properly close mkbootdisk:\n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-#~ msgstr ""
-#~ "Impossible de terminer correctement mkbootdisk : \n"
-#~ "\n"
-#~ "<span foreground=\"Red\"><tt>%s</tt></span>"
-
-#~ msgid "You can not use a LVM Logical Volume for mount point %s"
-#~ msgstr ""
-#~ "Vous ne pouvez pas utiliser une partition logique LVM pour le point de "
-#~ "montage %s"
-
-#~ msgid ""
-#~ "You've selected a LVM Logical Volume as root (/).\n"
-#~ "The bootloader is not able to handle this without a /boot partition.\n"
-#~ "Please be sure to add a /boot partition"
-#~ msgstr ""
-#~ "Attention, vous avez choisi une partition logique LVM comme partition "
-#~ "racine (/).\n"
-#~ "Pour que votre système puisse démarrer, vous devez ajouter\n"
-#~ "une partition non LVM, spécifique pour le dossier /boot."
-
-#~ msgid ""
-#~ "You may not be able to install lilo (since lilo does not handle a LV on "
-#~ "multiple PVs)"
-#~ msgstr ""
-#~ "Vous risquez de ne pas être en mesure d'installer lilo (car lilo ne "
-#~ "supporte pas un LV sur plusieurs PVs)"
-
-#~ msgid "use PPPoE"
-#~ msgstr "utiliser « PPPoE »"
-
-#~ msgid "use PPTP"
-#~ msgstr "utiliser « PPTP »"
-
-#~ msgid "use DHCP"
-#~ msgstr "utiliser « DHCP »"
-
-#~ msgid "Alcatel Speedtouch USB"
-#~ msgstr "Alcatel Speedtouch USB "
-
-#~ msgid " - detected"
-#~ msgstr " - détecté"
-
-#~ msgid "Sagem (using PPPoA) USB"
-#~ msgstr "Sagem USB (avec PPPoA)"
-
-#~ msgid "Sagem (using DHCP) USB"
-#~ msgstr "Sagem USB (avec DHCP)"
-
-#~ msgid ""
-#~ "Warning, another Internet connection has been detected, maybe using your "
-#~ "network"
-#~ msgstr ""
-#~ "Attention, une autre connexion internet a été détectée, peut-être "
-#~ "utilisant votre réseau"
-
-#~ msgid "PXE Server Configuration"
-#~ msgstr "Configuration du serveur PXE"
-
-#~ msgid "Installation Server Configuration"
-#~ msgstr "Configuration du serveur d'installation"
-
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using this computer as source.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "Vous vous apprêtez à installer un serveur PXE agissant comme un serveur "
-#~ "DHCP,\n"
-#~ "et un serveur TFTP comme un serveur d'installation.\n"
-#~ "Avec cette fonction, d'autres ordinateurs sur votre réseau local pourront "
-#~ "être installés à partir de cet ordinateur.\n"
-#~ "\n"
-#~ "Assurez-vous d'avoir configuré votre accès Réseau/Internet avec "
-#~ "DrakConnect avant d'aller plus loin.\n"
-#~ "\n"
-#~ "Veuillez noter que vous avez besoin d'une carte réseau dédiée à votre "
-#~ "réseau local."
-
-#~ msgid "No network adapter on your system!"
-#~ msgstr "Aucune carte réseau n'est présente dans votre système !"
-
-#~ msgid "Choose the network interface"
-#~ msgstr "Choisissez la carte réseau"
-
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr ""
-#~ "Veuillez choisir la carte réseau qui sera utilisée pour le serveur DHCP"
-
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "Interface %s (sur le réseau %s)"
-
-#~ msgid ""
-#~ "The DHCP server will allow other computer to boot using PXE in the given "
-#~ "range of address.\n"
-#~ "\n"
-#~ "The network address is %s using a netmask of %s.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Le serveur DHCP permettra aux autres ordinateurs de s'amorcer en "
-#~ "utilisant le PXE dans la plage d'adresses donnée.\n"
-#~ "\n"
-#~ "L'adresse réseau est %s, avec le masque %s.\n"
-#~ "\n"
-
-#~ msgid "The DHCP start ip"
-#~ msgstr "L'adresse DHCP de début"
-
-#~ msgid "The DHCP end ip"
-#~ msgstr "L'adresse DHCP de fin"
-
-#~ msgid ""
-#~ "Please indicate where the installation image will be available.\n"
-#~ "\n"
-#~ "If you do not have an existing directory, please copy the CD or DVD "
-#~ "contents.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Veuillez indiquer où les images d'installation seront disponibles.\n"
-#~ "\n"
-#~ "Si vous n'avez pas de dossier existant, veuillez copier le contenu du CD "
-#~ "ou du DVD.\n"
-#~ "\n"
-
-#~ msgid "Installation image directory"
-#~ msgstr "Dossier des images d'installation"
-
-#~ msgid "No image found"
-#~ msgstr "Aucune image trouvée"
-
-#~ msgid ""
-#~ "No CD or DVD image found, please copy the installation program and rpm "
-#~ "files."
-#~ msgstr ""
-#~ "Aucune image de CD ou de DVD trouvée. Veuillez copier le programme "
-#~ "d'installation et les paquetages rpm."
-
-#~ msgid ""
-#~ "Please indicate where the auto_install.cfg file is located.\n"
-#~ "\n"
-#~ "Leave it blank if you do not want to set up automatic installation mode.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Veuillez indiquer l'emplacement du fichier auto_install.cfg.\n"
-#~ "\n"
-#~ "Laissez le champ vide si vous ne voulez pas configurer de mode "
-#~ "d'installation automatique.\n"
-#~ "\n"
-
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Emplacement du fichier auto_install.cfg"
