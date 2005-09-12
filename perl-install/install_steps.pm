@@ -369,6 +369,8 @@ sub upgrading_redhat() {
 sub beforeInstallPackages {
     my ($o) = @_;
 
+    readBootloaderConfigBeforeInstall($o);
+
     #- save these files in case of upgrade failure.
     if ($o->{isUpgrade}) {
 	foreach (@filesToSaveForUpgrade) {

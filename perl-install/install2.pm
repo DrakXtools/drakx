@@ -230,7 +230,6 @@ sub choosePackages {
 sub installPackages {
     my ($auto) = @_;
 
-    installStepsCall($o, $auto, 'readBootloaderConfigBeforeInstall');
     installStepsCall($o, $auto, 'beforeInstallPackages');
     installStepsCall($o, $auto, 'installPackages');
     installStepsCall($o, $auto, 'afterInstallPackages');
