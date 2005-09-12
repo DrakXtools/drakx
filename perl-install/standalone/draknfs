@@ -558,7 +558,7 @@ sub cell_edited {
 # create model
 my $model = create_model();
 
-my $window = ugtk2->new("Draknfs $version");
+my $window = ugtk2->new("DrakNFS");
 $::main_window = $window->{real_window};
 $window->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 $window->{rwindow}->set_position('center') if !$::isEmbedded;
