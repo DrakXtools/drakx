@@ -203,7 +203,7 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "chr" => [ N_("_: keyboard\nCherokee syllabics"), "us",         "chr",   1 ],
  "cz" => [ N_("_: keyboard\nCzech (QWERTZ)"), "cz",              "cz",    0 ],
- "cz_qwerty" => [ N_("_: keyboard\nCzech (QWERTY)"), "cz-lat2", "cz_qwerty", 0 ],
+ "cz_qwerty" => [ N_("_: keyboard\nCzech (QWERTY)"), "cz-lat2", "cz(qwerty)", 0 ],
  "de" => [ N_("_: keyboard\nGerman"),         "de-latin1",       "de",    0 ],
  "de_nodeadkeys" => [ N_("_: keyboard\nGerman (no dead keys)"), "de-latin1-nodeadkeys", "de(nodeadkeys)", 0 ],
  "dev" => [ N_("_: keyboard\nDevanagari"),     "us",             "dev",   0 ],
