@@ -186,7 +186,7 @@ arch() =~ /^sparc/ ? (
  "am_old" => [ N_("_: keyboard\nArmenian (old)"), "am_old",	 "am(old)", 1 ],
  "am" => [ N_("_: keyboard\nArmenian (typewriter)"), "am-armscii8", "am",   1 ],
  "am_phonetic" => [ N_("_: keyboard\nArmenian (phonetic)"), "am_phonetic", "am(phonetic)",1 ],
- "ar" => [ N_("_: keyboard\nArabic"),          "us",             "ar(digits)",   1 ],
+ "ar" => [ N_("_: keyboard\nArabic"),          "us",             "ara(digits)",   1 ],
  "az" => [ N_("_: keyboard\nAzerbaidjani (latin)"), "az",        "az",    0 ],
  "be" => [ N_("_: keyboard\nBelgian"),        "be2-latin1",      "be",    0 ],
  "ben" => [ N_("_: keyboard\nBengali (Inscript-layout)"), "us",  "ben",   1 ],
@@ -258,11 +258,11 @@ arch() =~ /^sparc/ ? (
  "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "lo",    1 ], 
  "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt(lt_a)", 0 ],
 #- TODO: write a console kbd map for lt_new
- "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt(lt_std)", 0 ],
- "lt_b" => [ N_("_: keyboard\nLithuanian \"number row\" QWERTY"), "ltb-latin7", "lt(lt_us)", 1 ],
+ "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt(std)", 0 ],
+ "lt_b" => [ N_("_: keyboard\nLithuanian \"number row\" QWERTY"), "ltb-latin7", "lt(us)", 1 ],
  "lt_p" => [ N_("_: keyboard\nLithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt(phonetic)", 0 ],
  "lv" => [ N_("_: keyboard\nLatvian"),	 "lv-latin7",       "lv",    0 ],
- "mal" => [ N_("_: keyboard\nMalayalam"),	 "us",              "ml(mlplusnum)", 1 ],
+ "mal" => [ N_("_: keyboard\nMalayalam"),	 "us",              "mal(mlplusnum)", 1 ],
  "mk" => [ N_("_: keyboard\nMacedonian"),	 "mk",              "mk",    1 ],
  "mm" => [ N_("_: keyboard\nMyanmar (Burmese)"), "us",           "mm",    1 ],
  "mng" => [ N_("_: keyboard\nMongolian (cyrillic)"), "us",       "mng",   1 ],
@@ -280,7 +280,7 @@ arch() =~ /^sparc/ ? (
  "qc" => [ N_("_: keyboard\nCanadian (Quebec)"), "qc-latin1", "ca_enhanced", 0 ],
 #- TODO: write a console kbd map for ro2
  "ro2" => [ N_("_: keyboard\nRomanian (qwertz)"), "ro2",         "ro",    0 ],
- "ro" => [ N_("_: keyboard\nRomanian (qwerty)"), "ro",           "ro(us_ro)", 0 ],
+ "ro" => [ N_("_: keyboard\nRomanian (qwerty)"), "ro",           "ro(us)", 0 ],
  "ru" => [ N_("_: keyboard\nRussian"),        "ru4",             "ru(winkeys)", 1 ],
  "ru_yawerty" => [ N_("_: keyboard\nRussian (phonetic)"), "ru-yawerty", "ru(phonetic)", 1 ],
  "sapmi" => [ N_("_: keyboard\nSaami (norwegian)"), "no-latin1",  "sapmi", 0 ],
@@ -292,7 +292,7 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "sin" => [ N_("_: keyboard\nSinhala"),       "us",              "sin",   1 ],
  "sk" => [ N_("_: keyboard\nSlovakian (QWERTZ)"), "sk-qwertz",   "sk",    0 ],
- "sk_qwerty" => [ N_("_: keyboard\nSlovakian (QWERTY)"), "sk-qwerty", "sk_qwerty", 0 ],
+ "sk_qwerty" => [ N_("_: keyboard\nSlovakian (QWERTY)"), "sk-qwerty", "sk(qwerty)", 0 ],
 # TODO: console map
  "sr" => [ N_("_: keyboard\nSerbian (cyrillic)"), "sr",          "yu,sr",    1 ],
  "syr" => [ N_("_: keyboard\nSyriac"),         "us",             "syr",  1 ],
@@ -307,13 +307,13 @@ arch() =~ /^sparc/ ? (
  "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th_pat", 1 ],
 # TODO: console map
 # NOTE: we define a triple layout here
- "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr", "fr,tifinagh,ar(azerty)", 1 ],
- "tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "fr", "fr,tifinagh(phonetic),ar(azerty)", 1 ],
+ "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr", "fr,tifinagh,ara(azerty)", 1 ],
+ "tifinagh_p" => [ N_("_: keyboard\nTifinagh (phonetic) (+latin/arabic)"), "fr", "fr,tifinagh(phonetic),ara(azerty)", 1 ],
 # TODO: console map
  "tj" => [ N_("_: keyboard\nTajik"),         "ru4",             "tj",    1 ],
 # TODO: console map
  "tk" => [ N_("_: keyboard\nTurkmen"),        "us",              "tk",    0 ],
- "tr_f" => [ N_("_: keyboard\nTurkish (traditional \"F\" model)"), "trf", "tr(tr_f)", 0 ],
+ "tr_f" => [ N_("_: keyboard\nTurkish (traditional \"F\" model)"), "trf", "tr(f)", 0 ],
  "tr_q" => [ N_("_: keyboard\nTurkish (modern \"Q\" model)"), "tr_q-latin5", "tr", 0 ],
 #-"tw => [ N_("_: keyboard\nChineses bopomofo"), "tw",           "tw",    1 ],
  "ua" => [ N_("_: keyboard\nUkrainian"),      "ua",              "ua",    1 ],
