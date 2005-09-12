@@ -188,13 +188,34 @@ sub read {
 
 sub read_grub {
     my ($fstab) = @_;
+
+    my $grub2dev = read_grub_device_map();
+
+    my $bootloader = read_grub_menu_lst($fstab, $grub2dev) or return;
+
+    read_grub_install_sh($bootloader, $grub2dev);
+
+    $bootloader;
+}
+
+sub read_grub_install_sh {
+    my ($bootloader, $grub2dev) = @_;
+
+    #- matches either:
+    #-   setup (hd0)
+    #-   install (hd0,0)/boot/grub/stage1 d (hd0) (hd0,0)/boot/grub/stage2 p (hd0,0)/boot/grub/menu.lst
+    if (cat_("$::prefix/boot/grub/install.sh") =~ /^(?:setup.*|install\s.*\sd)\s+(\(.*?\))/m) {
+	$bootloader->{boot} = grub2dev($1, $grub2dev);
+    }    
+}
+
+sub read_grub_menu_lst {
+    my ($fstab, $grub2dev) = @_;
     my $global = 1;
     my ($e, %b);
 
     my $menu_lst_file = "$::prefix/boot/grub/menu.lst";
     -e $menu_lst_file or return;
-
-    my $grub2dev = read_grub_device_map();
 
     foreach (cat_($menu_lst_file)) {
         chomp;
@@ -229,12 +250,6 @@ sub read_grub {
 		push @{$e->{modules}}, $v;
 	    }
         }
-    }
-    #- matches either:
-    #-   setup (hd0)
-    #-   install (hd0,0)/boot/grub/stage1 d (hd0) (hd0,0)/boot/grub/stage2 p (hd0,0)/boot/grub/menu.lst
-    if (cat_("$::prefix/boot/grub/install.sh") =~ /^(?:setup.*|install\s.*\sd)\s+(\(.*?\))/m) {
-	$b{boot} = grub2dev($1, $grub2dev);
     }
 
     #- sanitize
