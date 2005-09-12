@@ -210,7 +210,7 @@ arch() =~ /^sparc/ ? (
  "dk" => [ N_("_: keyboard\nDanish"),         "dk-latin1",       "dk",    0 ],
  "dvorak" => [ N_("_: keyboard\nDvorak (US)"), "pc-dvorak-latin1", "dvorak", 0 ],
 # TODO: console map
- "dvorak_eo" => [ N_("_: keyboard\nDvorak (Esperanto)"), "us",   "dvorak(eo)", 0 ],
+# "dvorak_eo" => [ N_("_: keyboard\nDvorak (Esperanto)"), "us",   "dvorak(eo)", 0 ],
 # TODO: console map
  "dvorak_fr" => [ N_("_: keyboard\nDvorak (French)"),    "us",   "dvorak(fr)", 0 ],
 # TODO: console map
@@ -256,11 +256,11 @@ arch() =~ /^sparc/ ? (
  "la" => [ N_("_: keyboard\nLatin American"), "la-latin1",       "la",    0 ],
 # TODO: console map
  "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "lo",    1 ], 
- "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt(lt_a)", 0 ],
+# "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt(lt_a)", 0 ],
 #- TODO: write a console kbd map for lt_new
  "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt(std)", 0 ],
  "lt_b" => [ N_("_: keyboard\nLithuanian \"number row\" QWERTY"), "ltb-latin7", "lt(us)", 1 ],
- "lt_p" => [ N_("_: keyboard\nLithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt(phonetic)", 0 ],
+# "lt_p" => [ N_("_: keyboard\nLithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt(phonetic)", 0 ],
  "lv" => [ N_("_: keyboard\nLatvian"),	 "lv-latin7",       "lv",    0 ],
  "mal" => [ N_("_: keyboard\nMalayalam"),	 "us",              "mal(mlplusnum)", 1 ],
  "mk" => [ N_("_: keyboard\nMacedonian"),	 "mk",              "mk",    1 ],
@@ -302,9 +302,9 @@ arch() =~ /^sparc/ ? (
  "tml" => [ N_("_: keyboard\nTamil (ISCII-layout)"), "us",       "tml(INSCRIPT)",   1 ],
  "tscii" => [ N_("_: keyboard\nTamil (Typewriter-layout)"), "us", "tml(UNI)", 1 ],
  "th" => [ N_("_: keyboard\nThai (Kedmanee)"), "th",             "th",    1 ],
- "th_tis" => [ N_("_: keyboard\nThai (TIS-820)"), "th",          "th_tis", 1 ],
+ "th_tis" => [ N_("_: keyboard\nThai (TIS-820)"), "th",          "th(tis)", 1 ],
 # TODO: console map
- "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th_pat", 1 ],
+ "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th(pat)", 1 ],
 # TODO: console map
 # NOTE: we define a triple layout here
  "tifinagh" => [ N_("_: keyboard\nTifinagh (moroccan layout) (+latin/arabic)"), "fr", "fr,tifinagh,ara(azerty)", 1 ],
