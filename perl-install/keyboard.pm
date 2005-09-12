@@ -333,7 +333,7 @@ arch() =~ /^sparc/ ? (
 #- (eg in X86Config file: XkbOptions "grp:toggle")
 my %grp_toggles = (
     toggle => N_("Right Alt key"),
-    shift_toggle => N_("Both Shift keys simultaneously"),
+    shifts_toggle => N_("Both Shift keys simultaneously"),
     ctrl_shift_toggle => N_("Control and Shift keys simultaneously"),
     caps_toggle => N_("CapsLock key"),
     shift_caps_toggle => N_("Shift and CapsLock keys simultaneously"),
