@@ -6,7 +6,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 
 use common;
-use ugtk2 qw(:helpers :wrappers :create);
+use ugtk2 qw(:create :dialogs :helpers :wrappers);
 
 $ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakperm-mdk.png";
 require_root_capability();
@@ -376,6 +376,11 @@ sub row_setting_dialog {
                             ok_clicked => sub {
                                 my ($path, $user, $group, $perms, $_idx);
                                 $path = $file->get_text;
+                                if ($path !~ m!^/!) {
+                                    print "checking '$path'\n";
+                                    warn_dialog(N("Warning"), N("The first character of the path must be a slash (\"/\"):\n\"%s\"",  $path)) or return;
+                                    return 1;
+                                }
                                 if ($usr_check->get_active) {
                                     $user  = 'current';
                                     $group = '';
