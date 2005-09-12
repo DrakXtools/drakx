@@ -377,7 +377,6 @@ sub row_setting_dialog {
                                 my ($path, $user, $group, $perms, $_idx);
                                 $path = $file->get_text;
                                 if ($path !~ m!^/!) {
-                                    print "checking '$path'\n";
                                     warn_dialog(N("Warning"), N("The first character of the path must be a slash (\"/\"):\n\"%s\"",  $path)) or return;
                                     return 1;
                                 }
