@@ -615,7 +615,7 @@ sub config_auto_admin {
     my $nogui =
 	N("No pop-up windows, printer setup and package installation cannot be canceled");
     my $autoqueuesetupmode =
-	($printer->{autoqueuesetupgui} && -x "/usr/X11R6/bin/X") ? 
+	($printer->{autoqueuesetupgui} && -x "$::prefix/usr/X11R6/bin/X") ? 
 	$waitforgui : $nogui;
     if ($in->ask_from_
 	({ 
@@ -630,10 +630,10 @@ sub config_auto_admin {
 	      { text => N("when Printerdrake is started"), 
 		type => 'bool',
 		val => \$printer->{autoqueuesetuponstart} },
-	      if_(-x "/usr/X11R6/bin/X", 
+	      if_(-x "$::prefix/usr/X11R6/bin/X", 
 		  { val => N("Mode for automatic printer setup:") }),
 	      { val => \$autoqueuesetupmode,
-		list => [ if_(-x "/usr/X11R6/bin/X", $waitforgui), 
+		list => [ if_(-x "$::prefix/usr/X11R6/bin/X", $waitforgui), 
 			  $nogui ], 
 		not_edit => 1, sort => 0,
 		type => 'list' },
