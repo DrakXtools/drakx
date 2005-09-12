@@ -20,7 +20,7 @@ $(DIRS):
 
 install:
 	@install -d $(MISC_DEST)/auto $(MISC_DEST)/Distribconf
-	@install mdkinst_stage2_tool $(MISC_DEST)
+	@install mdkinst_stage2_tool drakx-in-chroot $(MISC_DEST)
 	cp -rf `perldoc -l packdrake` $(MISC_DEST) || { echo "install packdrake first!" ; exit 1; }
 	cp -rf `perldoc -l Packdrakeng` $(MISC_DEST) || { echo "install packdrake first!" ; exit 1; }
 	cp -rf `perldoc -l Distribconf` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
