@@ -280,11 +280,11 @@ sub row_setting_dialog {
     my $alrd_exsts = defined $o_iter;
     $file->set_text($model->get($o_iter, 1)) if $o_iter;
 
-    my $users  = Gtk2::ComboBox->new_with_strings([ get_user_or_group('users') ]);
+    my $users  = Gtk2::ComboBox->new_with_strings([ my @users = get_user_or_group('users') ]);
     $users->entry->set_text($model->get($o_iter, 2)) if $o_iter;
     $users->set_wrap_width(3);
      
-    my $groups = Gtk2::ComboBox->new_with_strings([ get_user_or_group('groups') ]);
+    my $groups = Gtk2::ComboBox->new_with_strings([ my @groups = get_user_or_group('groups') ]);
     $groups->entry->set_text($model->get($o_iter, 3)) if $o_iter;
     $groups->set_wrap_width(3);
 
@@ -386,6 +386,14 @@ sub row_setting_dialog {
                                 } else {
                                     $user  = $users->entry->get_text;
                                     $group = $groups->entry->get_text;
+                                    if (!member($user, @users) || !member($group, @groups)) {
+                                        warn_dialog(N("Warning"), join("\n", N("Both the username and the group must valid!"),
+                                                                       N("User: %s",  $user),
+                                                                       N("Group: %s",  $group),
+                                                                   )
+                                                );
+                                        return 1;
+                                    }
                                 }
                                 $perms = sprintf("%03o", eval(join('', "0b",
                                                                    (map { $perms{$_}->get_active || 0 } reverse @bits),
