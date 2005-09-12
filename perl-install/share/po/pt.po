@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: DrakX-pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-08 00:35+0800\n"
-"PO-Revision-Date: 2005-09-11 18:27+0100\n"
+"PO-Revision-Date: 2005-09-12 00:40+0100\n"
 "Last-Translator: José Melo <mmodem00@netvisao.pt>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5634,7 +5634,7 @@ msgstr ""
 "sistema de impressão \"lpd\". Portanto, é compatível com os sistemas\n"
 "anteriores. Pode fazer muitas coisas, mas a configuração de base é\n"
 "quase tão simples como \"lpd\". Se precisa dele para emular um\n"
-"servidor \"lpd\", tem de activar o daemon \"cups-lpd\". \"%s\" tem\n"
+"servidor \"lpd\", tem que activar o servidor \"cups-lpd\". \"%s\" tem\n"
 "interfaces gráficos para imprimir ou escolher as opções de impressão.\n"
 "\n"
 "Poderá mudar a sua escolha de sistema após a instalação correndo o\n"
@@ -11824,7 +11824,7 @@ msgstr "PDQ"
 #: printer/data.pm:80
 #, c-format
 msgid "LPD - Line Printer Daemon"
-msgstr "LPD - Daemon de Impressão em Linha"
+msgstr "LPD - Servidor de Impressão em Linha"
 
 #: printer/data.pm:81
 #, c-format
@@ -12300,7 +12300,7 @@ msgstr ""
 #: printer/printerdrake.pm:4697
 #, c-format
 msgid "Remote CUPS server and no local CUPS daemon"
-msgstr "Servidor CUPS remoto e nenhum daemon CUPS local"
+msgstr "Servidor CUPS remoto e nenhum servidor CUPS local"
 
 #: printer/printerdrake.pm:141
 #, c-format
@@ -14863,13 +14863,13 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
-"Esta prestes a instalar o sistema de impressão %s num sistema a correr no "
-"nível de segurança %s.\n"
-"Este sistema de impressão corre um daemon (processo em 2º plano) que espera "
-"por tarefas de impressão trata destas. Este daemon é também acessível por "
-"máquinas remotas através da rede e então é um possível ponto para ataques. "
-"Então só uns poucos daemons seleccionados são iniciados por omissão neste "
-"nível de segurança.\n"
+"Esta prestes a instalar o sistema de impressão %s num sistema a correr "
+"no nível de segurança %s.\n"
+"Este sistema de impressão corre um servidor (processo em 2º plano) que "
+"espera tarefas de impressão e trata destas. Este servidor é também "
+"acessível por máquinas remotas através da rede e então é um possível "
+"ponto para ataques. Então apenas uns quantos servidores seleccionados "
+"são iniciados por omissão neste nível de segurança.\n"
 "\n"
 "Deseja realmente configurar a impressão nesta máquina?"
 
@@ -14992,8 +14992,8 @@ msgid ""
 msgstr ""
 "A desvantagem desta abordagem +e, que mais recursos na máquina local são "
 "precisos: É necessário que seja instalado pacotes adicionais de software, o "
-"daemon CUPS tem que ser executado em 2º plano e é necessária mais memória, e "
-"a porta IPP (porta 631) é aberta. "
+"servidor CUPS tem que ser executado em 2º plano e é necessária mais memória, "
+"e a porta IPP (porta 631) é aberta. "
 
 #: printer/printerdrake.pm:4761
 #, c-format
@@ -16099,9 +16099,8 @@ msgid ""
 "change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
-"FAM é um daemon de monitorização de ficheiros. É usado para obter "
-"relatórios\n"
-"quando os ficheiros são alterados.\n"
+"O FAM é um servidor de monitorização de ficheiros. É usado para obter\n"
+"relatórios quando os ficheiros são alterados.\n"
 "É usado pelo GNOME e pelo KDE"
 
 #: services.pm:30
@@ -16112,10 +16111,9 @@ msgid ""
 "operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
-"GPM adiciona suporte de rato a aplicações Linux em modo de texto tais\n"
-"como o Midnight Commander. Permite também operações de cortar-e-colar com o "
-"rato\n"
-"e inclui suporte para menus pop-up na consola."
+"O GPM adiciona suporte do rato a aplicações Linux em modo de texto tais\n"
+"como o Midnight Commander. Permite também operações de cortar-e-colar\n"
+"com o rato e inclui suporte para menus pop-up na consola."
 
 #: services.pm:33
 #, c-format
@@ -16123,15 +16121,13 @@ msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
 msgstr ""
-"Harddrake executa uma sondagem ao hardware, e opcionalmente\n"
+"O harddrake executa uma verificação ao hardware, e opcionalmente\n"
 "configura hardware novo/alterado."
 
 #: services.pm:35
 #, c-format
 msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
-msgstr ""
-"Apache é um servidor World Wide Web. É usado para servir ficheiros HTML e "
-"CGI."
+msgstr "O apache é um servidor Web mundial. É usado para servir ficheiros HTML e CGI."
 
 #: services.pm:36
 #, c-format
@@ -16143,11 +16139,11 @@ msgid ""
 "disables\n"
 "all of the services it is responsible for."
 msgstr ""
-"O daemon Internet superserver (normalmente chamado inetd) inicia\n"
-"uma variedade de outros serviços de Internet conforme necessário. É "
-"responsável\n"
-"pela inicialização de vários serviços, incluindo telnet, ftp, rsh e rlogin. "
-"Desactivando o inetd, desactiva todos os serviços pelos quais é responsável."
+"O servidor Internet superserver (normalmente chamado inetd) inicia\n"
+"uma variedade de outros serviços Internet conforme necessário. É\n"
+"responsável pela inicialização de vários serviços, incluindo telnet, ftp,\n"
+"rsh e rlogin. Desactivando o inetd, desactiva todos os serviços pelos\n"
+"quais é responsável."
 
 #: services.pm:40
 #, c-format
@@ -16155,7 +16151,7 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Execute o filtro de pacotes para Linux kernel 2.2, para definir \n"
+"Execute o filtro de pacotes para o Linux kernel 2.2, para definir\n"
 "uma firewall para proteger a sua máquina de ataques da rede."
 
 #: services.pm:42
@@ -16165,8 +16161,8 @@ msgid ""
 "/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
 "You should leave this enabled for most machines."
 msgstr ""
-"Este pacote carrega o mapa de teclado seleccionado como\n"
-"definido em /etc/sysconfig/keyboard. Isto pode ser seleccionado usando o\n"
+"Este pacote carrega o mapa de teclado seleccionado como definido\n"
+"em /etc/sysconfig/keyboard. Isto pode ser seleccionado usando o\n"
 "utilitário kbdconfig. Deve deixar isto activado para a maioria da máquinas."
 
 #: services.pm:45
@@ -16175,7 +16171,7 @@ msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
-"Regeneração automática do cabeçalho do kernel em /boot \n"
+"Regeneração automática do cabeçalho do kernel em /boot\n"
 "para /usr/include/linux/{autoconf,version}.h"
 
 #: services.pm:47
@@ -16189,8 +16185,8 @@ msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
 "at boot-time to maintain the system configuration."
 msgstr ""
-"O Linuxconf irá por vezes executar várias tarefas\n"
-"no arranque para manter a configuração do sistema."
+"O Linuxconf irá por vezes executar várias tarefas no\n"
+"arranque para manter a configuração do sistema."
 
 #: services.pm:50
 #, c-format
@@ -16198,9 +16194,9 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"lpd é o daemon de impressão requerido para que o lpr funcione "
-"correctamente.\n"
-"É basicamente um servidor que controla os trabalhos para a(s) impressora(s)."
+"lpd é o servidor de impressão requerido para que o lpr funcione\n"
+"correctamente.\nÉ basicamente um servidor que controla os trabalhos\n"
+"de impressão para a(s) impressora(s)."
 
 #: services.pm:52
 #, c-format
@@ -16208,8 +16204,8 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
-"Linux Virtual Server, usado para criar um servidor de alta performance\n"
-"e grande disponibilidade."
+"O Linux Virtual Server, é usado para criar um servidor de alta performance\n"
+"e de grande disponibilidade."
 
 #: services.pm:54
 #, c-format
@@ -16217,8 +16213,8 @@ msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
-"named (BIND) é um Domain Name Server (DNS) que é usado para resolver nomes "
-"de hosts para endereços IP."
+"O conhecido (BIND) é um Domain Name Server (DNS) que é usado para resolver "
+"nomes de endereços para endereços IP."
 
 #: services.pm:55
 #, c-format
@@ -16245,9 +16241,9 @@ msgid ""
 "This service provides NFS server functionality, which is configured via the\n"
 "/etc/exports file."
 msgstr ""
-"NFS é um protocolo popular para partilha de ficheiros através de\n"
-"redes TCP/IP. Este serviço oferece a funcionalidade do servidor NFS, que\n"
-"é configurado através do ficheiro /etc/exports."
+"O NFS é um protocolo popular para partilha de ficheiros através de\n"
+"redes TCP/IP. Este serviço oferece a funcionalidade do servidor NFS,\n"
+"que é configurado através do ficheiro /etc/exports."
 
 #: services.pm:62
 #, c-format
@@ -16255,7 +16251,7 @@ msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
-"NFS é um protocolo popular para partilha de ficheiros através de redes\n"
+"O NFS é um protocolo popular para partilha de ficheiros através de redes\n"
 "TCP/IP. Este serviço oferece a funcionalidade de bloquear ficheiros NFS."
 
 #: services.pm:64
@@ -16265,7 +16261,7 @@ msgid ""
 "and Xorg at boot."
 msgstr ""
 "Automaticamente alterna o estado da tecla numlock na consola\n"
-"e Xorg no arranque."
+"e o Xorg no arranque."
 
 #: services.pm:66
 #, c-format
@@ -16281,9 +16277,9 @@ msgid ""
 "it installed on machines that do not need it."
 msgstr ""
 "O suporte PCMCIA é normalmente usado para suportar coisas como\n"
-"ethernet ou modems nos portáteis. Não será iniciado a não ser que seja "
-"configurado\n"
-"de modo que seja seguro tê-lo instalado em máquinas que não precisem dele."
+"ethernet ou modems nos portáteis. Não será iniciado a não ser que seja\n"
+"configurado de modo que seja seguro tê-lo instalado em máquinas que\n"
+"não precisem dele."
 
 #: services.pm:70
 #, c-format
@@ -16293,10 +16289,9 @@ msgid ""
 "machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
-"O portmapper gere conexões RPC, que são usadas por\n"
-"protocolos tais como NFS ou NIS. O servidor portmap tem que estar a correr "
-"nas máquinas\n"
-"que actuam como servidores para protocolos que façam uso do mecanismo RPC."
+"O portmapper gere conexões RPC, que são usadas por protocolos tais como\n"
+"NFS ou NIS. O servidor portmap tem que estar a correr nas máquinas que\n"
+"actuam como servidores para protocolos que façam uso do mecanismo RPC."
 
 #: services.pm:73
 #, c-format
@@ -16304,7 +16299,7 @@ msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix é um Agente de Transporte de Correio Eletrônico, que é o programa "
+"O postfix é um Agente de Transporte de Correio Electrónico, que é o programa "
 "que move mail de uma máquina para outra."
 
 #: services.pm:74
@@ -16322,7 +16317,7 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Atribui dispositivos 'raw' a dispositivos de bloco (tais como as partições\n"
+"Atribui dispositivos 'raw' para bloquear dispositivos (tais como as partições\n"
 "do disco rígido), para o uso de aplicações como o Oracle ou leitores DVD"
 
 #: services.pm:78
@@ -16332,10 +16327,10 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"O daemon routeado permite a actualização automática da tabela IP Router\n"
-"através do protocolo RIP. Enquanto o RIP é largamente usado em pequenas\n"
-"redes, protocolos routing mais complexos são necessários para redes\n"
-"mais complexas."
+"O servidor encaminhado (routed) permite a actualização automática da\n"
+"tabela IP Router através do protocolo RIP. Enquanto o RIP é largamente\n"
+"usado em pequenas redes, os protocolos routing mais complexos são\n"
+"necessários para redes mais complexas."
 
 #: services.pm:81
 #, c-format
@@ -16363,7 +16358,7 @@ msgid ""
 msgstr ""
 "O protocolo rwho permite que utilizadores remotos obtenham uma\n"
 "lista de todos os utilizadores conectados numa máquina a correr o\n"
-"daemon rwho (similar ao finger)."
+"servidor rwho (similar ao finger)."
 
 #: services.pm:87
 #, c-format
@@ -16376,9 +16371,8 @@ msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
-"Syslog é a capacidade que muitos daemons usam para registar mensagens\n"
-"para vários ficheiros de registo do sistema. É boa ideia correr sempre o "
-"syslog."
+"Syslog é a capacidade que muitos servidores usam para registar mensagens\n"
+"para vários ficheiros de registo do sistema. É boa ideia correr sempre o syslog."
 
 #: services.pm:90
 #, c-format
@@ -16435,7 +16429,7 @@ msgstr "parado"
 #: services.pm:213
 #, c-format
 msgid "Services and daemons"
-msgstr "Serviços e daemons"
+msgstr "Serviços e servidores"
 
 #: services.pm:219
 #, c-format
@@ -16958,14 +16952,14 @@ msgid ""
 "--version             : show version number.\n"
 msgstr ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
-"Aplicação para Bachup e Restauro\n"
+"Aplicação para Backup e Restauro\n"
 "\n"
 "--default             : grava as directorias predefinidas.\n"
 "--debug               : mostra todas as mensagens erro.\n"
 "--show-conf           : lista de ficheiros ou directorias para bachup.\n"
 "--config-info         : explica as opções dos ficheiros de configuração "
 "(para utilizadores sem X).\n"
-"--daemon              : utiliza a configuração do daemon. \n"
+"--daemon              : usa a configuração do servidor.\n"
 "--help                : mostra esta mensagem.\n"
 "--version             : mostra o numero da versão.\n"
 
@@ -18390,7 +18384,7 @@ msgid ""
 "                      DrakBackup Daemon Report\n"
 msgstr ""
 "\n"
-"                      Relatório do Daemon DrakBackup\n"
+"                      Relatório do Servidor DrakBackup\n"
 
 #: standalone/drakbackup:518
 #, c-format
@@ -19004,7 +18998,7 @@ msgstr "Sábado"
 #: standalone/drakbackup:2112
 #, c-format
 msgid "Use daemon"
-msgstr "Usar um daemon"
+msgstr "Usar servidor"
 
 #: standalone/drakbackup:2116
 #, c-format
@@ -19049,7 +19043,7 @@ msgstr "Por favor escolha a media a usar para arquivar(backup)."
 #: standalone/drakbackup:2155
 #, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr "Assegure-se que o daemon cron está incluído nos seus serviços."
+msgstr "Assegure-se que o servidor cron está incluído nos seus serviços."
 
 #: standalone/drakbackup:2156
 #, c-format
@@ -19359,7 +19353,7 @@ msgid ""
 "- Daemon, %s via:\n"
 msgstr ""
 "\n"
-"- Daemon, %s por :\n"
+"- Servidor, %s via :\n"
 
 #: standalone/drakbackup:2542
 #, c-format
@@ -21329,7 +21323,7 @@ msgstr "Remover da lista branca"
 #: standalone/net_applet:180 standalone/net_applet:354
 #, c-format
 msgid "Unable to contact daemon"
-msgstr "Não foi possível contactar o daemon"
+msgstr "Não foi possível contactar o servidor"
 
 #: standalone/drakids:191
 #, c-format
