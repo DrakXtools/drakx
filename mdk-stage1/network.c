@@ -630,6 +630,7 @@ static char * auto_select_up_intf(void)
 		ifr.ifr_data = (caddr_t)&edata;
 		if (ioctl(s, SIOCETHTOOL, &ifr) == 0 && edata.data) {
 			close(s);
+                        log_message("NETWORK: choosing interface %s (link beat detected)", *ptr);
 			return *ptr;
 		}
 		ptr++;
