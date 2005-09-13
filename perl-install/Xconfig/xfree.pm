@@ -141,7 +141,7 @@ sub get_resolution {
     my ($raw_X, $o_Screen) = @_;
     my $Screen = $o_Screen || $raw_X->get_default_screen or return {};
     
-    my $depth = val($Screen->{DefaultColorDepth});
+    my $depth = val($Screen->{DefaultColorDepth} || $Screen->{DefaultDepth});
     my $Display = find { !$depth || val($_->{l}{Depth}) eq $depth } @{$Screen->{Display} || []} or return {};
     $Display->{l}{Virtual} && val($Display->{l}{Virtual}) =~ /(\d+)\s+(\d+)/ or
       val($Display->{l}{Modes}) =~ /(\d+)x(\d+)/ or return {};
@@ -156,6 +156,7 @@ sub set_resolution {
 	my $Mode_name = (any { $_->{l}{Modes} } @{$Screen->{Display} || []}) ? 'Modes' : 'Virtual';
 	my $Mode = sprintf($Mode_name eq 'Modes' ? '"%dx%d"' : '%d %d', @$resolution{'X', 'Y'});
 	
+	delete $Screen->{DefaultDepth};
 	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} eq '32' ? 24 : $resolution->{Depth} };	
 	$Screen->{Display} = [ map {
 	    { l => { Depth => { val => $_ }, $Mode_name => { val => $Mode } } };
