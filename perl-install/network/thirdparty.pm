@@ -78,7 +78,7 @@ my %network_settings = (
     {
      test_file => '/usr/sbin/hcfpciconfig',
     },
-    device => '/dev/ttySHSF0',
+    device => '/dev/ttySHCF0',
     post => '/usr/sbin/hcfpciconfig --auto',
    },
 
