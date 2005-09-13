@@ -116,7 +116,7 @@ Network & Internet connection and monitoring application
        XFdrake resolution"),
 	      );
 
-$usages{$_} = $usages{rpmdrake} foreach qw(rpmdrake-remove Mandriva Update);
+$usages{$_} = $usages{rpmdrake} foreach qw(rpmdrake-remove MandrivaUpdate);
 $usages{Xdrakres} = $usages{XFdrake};
 
 
