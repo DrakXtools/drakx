@@ -21,16 +21,16 @@ alsa-lib-devel libalsa2-devel
 alsa-lib-devel-static libalsa2-static-devel
 alsa-oss-devel libalsa-oss0-devel
 alsa-oss-devel-static libalsa-oss0-devel
-alsa-server libalsa2-devel
+alsa-server
 alsa-tools cspctl sbiload ac3dec sscape_ctl as10k1 vxloader sb16_csp emu10k1-tools envy24control
 alsa-utils alsa-utils
 alsaconf sndconfig alsa-utils
 alternatives update-alternatives
-amanda amanda-server libamanda0 libamanda0-devel
-amanda-client libamanda0-devel amanda-client
+amanda amanda-server libamanda0
+amanda-client amanda-client
 amanda-devel libamanda0-devel
 amanda-doc
-amanda-server amanda-client libamanda0-devel amanda-server
+amanda-server amanda-client amanda-server
 amarok amarok
 amarok-doc amarok
 amarok-i18n-es amarok
@@ -65,7 +65,7 @@ ark-doc-es kde-i18n-es
 arping iputils
 arpwatch arpwatch
 arts arts
-arts-common-libs libarts1-devel libarts1
+arts-common-libs libarts1
 arts-devel libarts1 libarts1-devel
 artsbuilder kdemultimedia-common libkdemultimedia1-common
 artsbuilder-doc kdemultimedia-common
@@ -132,7 +132,7 @@ bind-devel bind-devel
 bind-doc
 bind-libs
 bind-utils bind-utils
-binutils libbinutils2-devel binutils
+binutils binutils
 binutils-i18n-es
 binutils-i18n-pt_BR
 bison bison
@@ -149,7 +149,7 @@ bittorrent-text-client BitTornado bittorrent
 blender blender
 blender-examples
 blender-manual
-blt libblt2-devel blt libblt2
+blt blt libblt2
 blt-demo
 blt-doc
 bluefish bluefish
@@ -160,7 +160,7 @@ bm bm
 bogofilter bogofilter
 bogofilter-doc
 bonnie++ bonnie++
-bonobo libbonobo2 libbonobo2-devel libefs1-devel bonobo libefs1
+bonobo libbonobo2 bonobo libefs1
 bonobo-devel bonobo libefs1-devel libbonobo2-devel
 bonobo-i18n-es bonobo
 bonobo-i18n-pt_BR bonobo
@@ -189,7 +189,7 @@ cdrdao cdrdao
 cdrecord cdrecord
 cdrtools cdrecord mkisofs cdrecord-isotools
 cdrtools-devel star-devel cdrecord-devel
-cervisia libkdesdk1-cervisia-devel libkdesdk1-cervisia kdesdk-cervisia kdesdk
+cervisia libkdesdk1-cervisia kdesdk-cervisia kdesdk
 cervisia-doc-pt_BR kde-i18n-pt_BR
 cflow
 chkconfig chkconfig
@@ -284,7 +284,7 @@ dev-base
 device-mapper dmsetup
 dhcp dhcp-client dhcp-relay dhcp-server
 dhcp-doc
-dhcpcd dhcpcd
+dhcpcd dhcp-client
 dia dia
 dia-i18n-es dia
 dia-i18n-pt_BR dia
@@ -343,7 +343,7 @@ ee-i18n-es ee
 ee-i18n-pt_BR ee
 efax efax
 eject eject
-electricfence libefence0-devel libefence0 ElectricFence
+electricfence libefence0 ElectricFence
 elfutils elfutils
 elfutils-devel libelfutils1-devel
 elfutils-libelf libelfutils1
@@ -358,7 +358,7 @@ enscript enscript
 eog eog
 eog-i18n-es eog
 eog-i18n-pt_BR eog
-epiphany epiphany-devel epiphany
+epiphany epiphany
 epiphany-devel epiphany-devel
 epiphany-extensions epiphany-extensions
 epiphany-extensions-i18n-es
@@ -367,7 +367,7 @@ epiphany-i18n-es epiphany
 epiphany-i18n-pt_BR epiphany
 epsutil
 escputil gutenprint-escputil
-esound libesound0-devel libesound0 esound
+esound libesound0 esound
 esound-devel libesound0-devel
 etcskel bash etcskel
 etherape etherape
@@ -466,7 +466,7 @@ ftp-i18n-pt_BR
 funcoeszz
 fwhois
 g++ gcc3.3-c++ gcc2.96-c++ gcc-c++
-g-wrap libg-wrap1-devel g-wrap libg-wrap1
+g-wrap g-wrap libg-wrap1
 g-wrap-devel libg-wrap1-devel libg-wrap1 g-wrap
 g77 gcc-g77
 gail libgail17 gail
@@ -488,7 +488,7 @@ gcalctool-i18n-es gcalctool
 gcalctool-i18n-pt_BR gcalctool
 gcc cross-ppc-gcc-cpp cross-ppc64-gcc-cpp gcc-cpp gcc2.96-cpp gcc gcc3.3-cpp
 gcj kaffe gcj-tools libgcj6-devel
-gconf libGConf1-devel libGConf1 GConf
+gconf libGConf1 GConf
 gconf-devel libGConf1-devel
 gconf-editor gconf-editor
 gconf-editor-i18n-es gconf-editor
@@ -500,7 +500,7 @@ gconf2-i18n-es GConf2
 gconf2-i18n-pt_BR GConf2
 gdam gdam-client gdam-server gdam-clients-gui libgdam-common0 libgdam-model0 libgdam-server0 gdam-common
 gdam-alsa-plugins gdam-alsa-plugin
-gdam-client libgdam-common0 libgdam-client0 libgdam0-devel gdam-clients-gui gdam-client gdam-common
+gdam-client libgdam-common0 libgdam-client0 gdam-clients-gui gdam-client gdam-common
 gdam-devel libgdam-client0 libgdam0-devel libgdam-model0 libgdam-server0 libgdam-common0
 gdam-xmms-plugins gdam-xmms-plugin
 gdb gdb
@@ -529,12 +529,12 @@ gftp-i18n-pt_BR gftp
 ggv ggv
 ggv-i18n-es ggv
 ggv-i18n-pt_BR ggv
-ghostscript libijs1-devel ghostscript
+ghostscript ghostscript
 ghostscript-doc
 ghostscript-fonts ghostscript-fonts
 ghostscript-module-X11
 ghostscript-resource
-gimp gimp libgimp2.0-devel libgimp2.0_0 gutenprint-gimp2 gimp-python
+gimp gimp libgimp2.0_0 gutenprint-gimp2 gimp-python
 gimp-devel libgimp2.0-devel
 gimp-doc
 gimp-help gimp-help-2
@@ -701,7 +701,7 @@ gnome2-industrial-theme-gtk+ ximian-artwork
 gnome2-industrial-theme-gtk+2 gtk-engines2
 gnome2-user-docs gnome-user-docs
 gnomemeeting gnomemeeting
-gnucash libgnucash0 gnucash libgnucash0-devel
+gnucash libgnucash0 gnucash
 gnucash-devel libgnucash0-devel
 gnucash-doc gnucash
 gnucash-help gnucash
@@ -740,7 +740,7 @@ gq gq
 gqview gqview
 gqview-i18n-es gqview
 gqview-i18n-pt_BR gqview
-graphviz libgraphviz7-devel libgraphviz7 graphviz libgraphviztcl7
+graphviz libgraphviz7 graphviz libgraphviztcl7
 graphviz-devel libgraphviztcl7-devel libgraphviz7-devel
 graphviz-doc
 graphviz-examples libgraphviztcl7-devel
@@ -778,7 +778,7 @@ gst-plugins-sdl gstreamer-SDL
 gst-plugins-shout
 gst-plugins-vorbis gstreamer-vorbis
 gst-plugins-wincodec
-gstreamer libgstreamer0.8-devel libgstreamer0.8 gstreamer-tools
+gstreamer libgstreamer0.8 gstreamer-tools
 gstreamer-devel libgstreamer0.8-devel
 gstreamer-tools gstreamer-tools
 gtk+ libgtk+1.2
@@ -796,7 +796,7 @@ gtk2-engines libgtk+2.0_0 gtk-engines gtk-engines2
 gtkam gtkam
 gtkam-i18n-es gtkam
 gtkam-i18n-pt_BR gtkam
-gtkhtml libgtkhtml1.1_3-devel gtkhtml
+gtkhtml gtkhtml
 gtkhtml-devel libgtkhtml1.1_3-devel
 gtkhtml-i18n-es
 gtkhtml-i18n-pt_BR
@@ -816,13 +816,13 @@ guile16 guile
 guppi16 Guppi
 gv gv
 gv-doc
-gwenview libgwenview1-devel libgwenview1 gwenview
+gwenview libgwenview1 gwenview
 gwenview-i18n-es gwenview
 gwenview-i18n-pt_BR gwenview
 gzip gzip
 gzip-i18n-pt_BR
 hdparm hdparm
-heartbeat libheartbeat0 heartbeat libheartbeat0-devel libheartbeat-pils0
+heartbeat libheartbeat0 heartbeat libheartbeat-pils0
 heartbeat-ldirectord ldirectord heartbeat-ldirectord heartbeat
 heartbeat-pils libheartbeat-pils0-devel heartbeat-pils libheartbeat-pils0
 heartbeat-stonith libheartbeat-stonith0-devel heartbeat-stonith libheartbeat-stonith0
@@ -844,7 +844,7 @@ htdig-doc
 hwdata pcmcia-cs
 hwinfo harddrake
 hwinfo-devel
-hylafax hylafax-server hylafax-client hylafax mgetty-sendfax libhylafax4.2.0-devel
+hylafax hylafax-server hylafax-client hylafax mgetty-sendfax
 icecast icecast
 ices ices
 icmpinfo
@@ -855,7 +855,7 @@ ikons-icon-theme kdeartwork
 imagemagick ImageMagick
 imagemagick-doc ImageMagick-doc
 imap imap
-imlib2 libimlib2_1 libimlib2_1-devel
+imlib2 libimlib2_1
 imlib2-devel libimlib2_1-devel
 imlib2-filters
 imlib2-loader_argb
@@ -902,7 +902,7 @@ itcl itcl
 itcl-devel
 itcl-iwidgets-demos
 itcl-iwidgets2.2.0-demos itcl
-jack jackit-example-clients libjack0-devel libjack0 jack jackit
+jack jackit-example-clients libjack0 jack jackit
 jack-client-samples jackit-example-clients
 jack-devel libjack0-devel
 jack-doc
@@ -953,13 +953,13 @@ kandy-doc kdepim-kpilot
 kandy-doc-es kde-i18n-es
 kappfinder kdebase-progs kdebase-common
 kapptemplate kdesdk
-karbon libkoffice2-karbon libkoffice2-progs-devel koffice-karbon koffice-progs
+karbon libkoffice2-karbon koffice-karbon koffice-progs
 karbon-i18n-es koffice-i18n-es
 karbon-i18n-pt_BR koffice-l10n-pt_BR
 karm kdepim-common kdepim-karm
 karm-doc kdepim-karm
 karm-doc-es kde-i18n-es
-kasteroids libkdegames1-devel kdegames
+kasteroids kdegames
 kasteroids-doc kdegames
 kasteroids-doc-es kde-i18n-es
 kasteroids-doc-pt_BR kde-i18n-pt_BR
@@ -974,7 +974,7 @@ katomic-doc kdegames
 katomic-doc-es kde-i18n-es
 katomic-doc-pt_BR kde-i18n-pt_BR
 kaudiocreator kdemultimedia-kaudiocreator
-kbabel libkdesdk1-kbabel-devel libkdesdk1-kbabel kdesdk-kbabel kdesdk
+kbabel libkdesdk1-kbabel kdesdk-kbabel kdesdk
 kbabel-doc-es kde-i18n-es
 kbabel-doc-pt_BR kde-i18n-pt_BR
 kbackgammon kdegames
@@ -1071,8 +1071,8 @@ kdeartwork-wallpapers kdeartwork
 kdeautorun kdebase-common
 kdebase kdebase
 kdebase-common kdelibs-common kdebase-common lisa
-kdebase-core libkdebase4 kdebase-progs kdebase-common libkdebase4-devel
-kdebase-devel libkdebase4-kate-devel libkdebase4 libkdebase4-kate libkdebase4-devel
+kdebase-core libkdebase4 kdebase-progs kdebase-common
+kdebase-devel libkdebase4-kate-devel libkdebase4 libkdebase4-kate
 kdebase-doc
 kdebase-i18n-es kde-i18n-es
 kdebase-i18n-pt_BR kde-i18n-pt_BR
@@ -1080,7 +1080,7 @@ kdebase-nsplugins kdebase-kcontrol-nsplugins kdebase-nsplugins kdebase-common
 kdebase-sounds kdebase-common
 kdebase-themes kdebase-common
 kdebase-wallpapers kdebase-common
-kdebluetooth libkdebluetooth0 kdebluetooth libkdebluetooth0-devel
+kdebluetooth libkdebluetooth0 kdebluetooth
 kdebluetooth-devel libkdebluetooth0-devel
 kdebluetooth-doc
 kdebugdialog-doc-es kde-i18n-es
@@ -1122,13 +1122,13 @@ kdelibs3-devel-static
 kdelirc libkdeutils1-common kdeutils-common
 kdelirc-doc kdeutils-common
 kdemultimedia kdemultimedia
-kdemultimedia-common libkdemultimedia1-common libkdemultimedia1-noatun kdemultimedia-kaudiocreator kdemultimedia-common kdemultimedia-noatun libkdemultimedia1-common-devel
+kdemultimedia-common libkdemultimedia1-common libkdemultimedia1-noatun kdemultimedia-kaudiocreator kdemultimedia-common kdemultimedia-noatun
 kdemultimedia-devel libkdemultimedia1-common libkdemultimedia1-kscd-devel libkdemultimedia1-common-devel libkdemultimedia1-noatun-devel
 kdemultimedia-doc
 kdemultimedia-i18n-es kde-i18n-es
 kdemultimedia-i18n-pt_BR kde-i18n-pt_BR
 kdenetwork kdenetwork
-kdenetwork-common kdenetwork-kopete libkdenetwork2-common-devel libkdenetwork2-common kdenetwork-common kdenetwork-knewsticker
+kdenetwork-common kdenetwork-kopete libkdenetwork2-common kdenetwork-common kdenetwork-knewsticker
 kdenetwork-devel libkdenetwork2-common-devel
 kdenetwork-doc
 kdenetwork-i18n-es kde-i18n-es
@@ -1167,7 +1167,7 @@ kdetoys-devel libkdetoys1-devel
 kdetoys-doc
 kdetoys-i18n-es kde-i18n-es
 kdetoys-i18n-pt_BR kde-i18n-pt_BR
-kdetv libkdevideo1-devel libkdevideo1 kdetv avifile-samples
+kdetv libkdevideo1 kdetv avifile-samples
 kdetv-i18n-es kdetv
 kdeutils kdeutils
 kdeutils-devel libkdeutils1-common-devel libkdeutils1-ksim-devel
@@ -1243,14 +1243,14 @@ kformula-doc koffice-kformula
 kformula-docs-es koffice-i18n-es
 kformula-i18n-es koffice-i18n-es
 kformula-i18n-pt_BR koffice-l10n-pt_BR
-kfouleggs libkdegames1-devel kdegames
+kfouleggs kdegames
 kfouleggs-doc kdegames
 kgamma kdegraphics-common
 kgamma-doc kdegraphics-common
 kgamma-doc-es kde-i18n-es
 kget kdenetwork-kget
 kget-doc kdenetwork-kget
-kghostview libkdegraphics0-kghostview-devel kdegraphics-kghostview libkdegraphics0-kghostview
+kghostview kdegraphics-kghostview libkdegraphics0-kghostview
 kghostview-doc kdegraphics-kghostview
 kghostview-doc-es kde-i18n-es
 kgoldrunner kdegames
@@ -1316,10 +1316,10 @@ kivio-i18n-pt_BR koffice-l10n-pt_BR
 kjots kdeutils-kjots
 kjots-doc kdeutils-kjots
 kjots-doc-es kde-i18n-es
-kjumpingcube libkdegames1-devel kdegames
+kjumpingcube kdegames
 kjumpingcube-doc kdegames
 kjumpingcube-doc-es kde-i18n-es
-klaptopdaemon libkdeutils1-klaptop-devel kdeutils-klaptop libkdeutils1-klaptop
+klaptopdaemon kdeutils-klaptop libkdeutils1-klaptop
 klaptopdaemon-doc kdeutils-common kdeutils-klaptop
 klettres kde-i18n-sk kde-i18n-da kde-i18n-cs kdeedu
 klettres-doc kdeedu
@@ -1329,7 +1329,7 @@ klicker-i18n-es
 klickety kdegames
 klickety-doc kdegames
 klickety-doc-es kde-i18n-es
-klines libkdegames1-devel kdegames
+klines kdegames
 klines-doc kdegames
 klines-doc-es kde-i18n-es
 klipper kdebase-progs libkdebase4 kdebase-common
@@ -1337,7 +1337,7 @@ klipper-doc kdebase-common
 klipper-doc-es kde-i18n-es
 kmag kdeaccessibility
 kmag-doc kdeaccessibility
-kmahjongg libkdegames1-devel kdegames
+kmahjongg kdegames
 kmail libkdepim2-kmail kdepim-kmail kdepim-kontact
 kmail-doc kdepim-kmail
 kmail-doc-es kde-i18n-es
@@ -1351,10 +1351,10 @@ kmenuedit-doc-es kde-i18n-es
 kmessedwords kdeedu
 kmessedwords-doc kdeedu
 kmessedwords-doc-es kde-i18n-es
-kmid libkdemultimedia1-common kdemultimedia-kmidi libkdemultimedia1-common-devel kdemultimedia-kmid
+kmid libkdemultimedia1-common kdemultimedia-kmidi kdemultimedia-kmid
 kmid-doc kdemultimedia-kmid
 kmid-doc-es kde-i18n-es
-kmilo libkdeutils1-klaptop libkdeutils1-klaptop-devel kdeutils-klaptop
+kmilo libkdeutils1-klaptop kdeutils-klaptop
 kmines kdegames
 kmines-doc kdegames
 kmines-doc-es kde-i18n-es
@@ -1376,7 +1376,7 @@ kmplot kdeedu
 kmplot-doc kdeedu
 kmplot-doc-es kde-i18n-es
 kmrml libkdegraphics0-mrmlsearch kdegraphics-mrmlsearch
-kmyfirewall libkmyfirewall0-devel libkmyfirewall0 kmyfirewall
+kmyfirewall libkmyfirewall0 kmyfirewall
 kmyfirewall-doc kmyfirewall
 kmyfirewall-i18n-es
 kmyfirewall-i18n-pt_BR
@@ -1400,7 +1400,7 @@ kodo kdetoys
 kodo-doc kdetoys
 kodo-doc-es kde-i18n-es
 koffice koffice
-koffice-common koffice-progs libkoffice2-kword-devel libkoffice2-progs koffice-koshell libkoffice2-progs-devel libkoffice2-kword libkoffice2-kspread
+koffice-common koffice-progs libkoffice2-progs koffice-koshell libkoffice2-kword libkoffice2-kspread
 koffice-common-doc koffice-koshell koffice-progs
 koffice-common-i18n-es koffice-i18n-es
 koffice-common-i18n-pt_BR koffice-l10n-pt_BR
@@ -1414,13 +1414,13 @@ koffice-i18n-pt_BR koffice-l10n-pt_BR
 koffice-templates koffice-kspread koffice-kword koffice-kugar koffice-kpresenter
 kolf kdegames libkdegames1
 kolf-doc kdegames
-kommander libkdewebdev0-kommander kdewebdev-kommander libkdewebdev0-kommander-devel
+kommander libkdewebdev0-kommander kdewebdev-kommander
 kompare libkdesdk1-devel libkdesdk1 kdesdk
 kompare-doc-es kde-i18n-es
 kompare-doc-pt_BR kde-i18n-pt_BR
 konq-plugins-doc-es kde-i18n-es
 konq-plugins-doc-pt_BR kde-i18n-pt_BR
-konqueror libkdebase4 libkdebase4-devel kdebase-progs kdebase-common kdenetwork-common
+konqueror libkdebase4 kdebase-progs kdebase-common kdenetwork-common
 konqueror-addons kdeaddons-atlantik libkdeaddons1-konqimagegallery kdelibs-common kdeaddons kdeaddons-konqimagegallery libkdeaddons1
 konqueror-doc kdebase-common
 konqueror-doc-es kde-i18n-es
@@ -1433,7 +1433,7 @@ konsole-doc-es kde-i18n-es
 konsolekalendar kdepim-common kdepim-korganizer
 konsolekalendar-doc kdepim-korganizer
 konsolekalendar-doc-es kde-i18n-es
-kontact libkdepim2-kontact libkdepim2-kontact-devel kdepim-kontact
+kontact libkdepim2-kontact kdepim-kontact
 kontact-addons kdepim-kontact
 kontact-doc kdepim-kontact
 kontact-doc-es kde-i18n-es
@@ -1444,7 +1444,7 @@ konversation-i18n-pt_BR konversation
 kooka kdegraphics-common libkdegraphics0-kooka kdegraphics-kooka
 kooka-doc kdegraphics-kooka
 kooka-doc-es kde-i18n-es
-kopete libkdenetwork2-kopete-devel libkdenetwork2-kopete kdenetwork-kopete
+kopete libkdenetwork2-kopete kdenetwork-kopete
 kopete-doc kdenetwork-common kdenetwork-kopete
 kopete-doc-es kde-i18n-es
 kopete-nowlistening kdenetwork-kopete
@@ -1495,11 +1495,11 @@ krandr libkdebase4 kdebase-progs kdebase-common
 krb5 libkrb53
 krb5-apps-clients krb5-workstation
 krb5-apps-servers krb5-workstation
-krb5-client libkrb53-devel krb5-workstation openafs krb5-server
+krb5-client krb5-workstation openafs krb5-server
 krb5-devel krb5-workstation libkrb53-devel krb5-server
 krb5-devel-static
 krb5-doc
-krb5-server krb5-workstation libkrb53-devel krb5-server
+krb5-server krb5-workstation krb5-server
 krdc kdenetwork-kopete kdenetwork-krfb
 krdc-doc kdenetwork-krfb
 kreatecd
@@ -1508,8 +1508,8 @@ kreatecd-i18n-es
 kreatecd-i18n-pt_BR
 krec libkdemultimedia1-krec kdemultimedia-krec
 krec-doc kdemultimedia-krec
-kregexpeditor libkdeutils1-common libkdeutils1-common-devel kdeutils-common
-kreversi libkdegames1-devel kdegames
+kregexpeditor libkdeutils1-common kdeutils-common
+kreversi kdegames
 kreversi-doc kdegames
 kreversi-doc-es kde-i18n-es
 krfb kdenetwork-krfb
@@ -1535,7 +1535,7 @@ ksim libkdeutils1-ksim libkdeutils1-ksim-devel kdeutils-ksim
 ksim-doc-es kde-i18n-es
 ksirc libkdenetwork2-ksirc kdenetwork-ksirc
 ksirc-doc kdenetwork-ksirc
-ksirtet kdegames libkdegames1-devel
+ksirtet kdegames
 ksirtet-doc kdegames
 ksirtet-doc-es kde-i18n-es
 ksmiletris kdegames
@@ -1550,7 +1550,7 @@ ksnapshot-doc kdegraphics-ksnapshot
 ksnapshot-doc-es kde-i18n-es
 ksokoban kdegames
 ksokoban-doc kdegames
-kspaceduel libkdegames1-devel kdegames
+kspaceduel kdegames
 kspaceduel-doc kdegames
 kspell-doc-es kde-i18n-es
 kspread libkoffice2-kspread koffice-kspread koffice-progs
@@ -1563,7 +1563,7 @@ kstars indilib kdeedu
 kstars-doc kdeedu
 kstars-doc-es kde-i18n-es
 kstars-doc-pt_BR kde-i18n-pt_BR
-ksvg libkdegraphics0-ksvg kdegraphics-ksvg libkdegraphics0-ksvg-devel
+ksvg libkdegraphics0-ksvg kdegraphics-ksvg
 ksymoops ksymoops
 ksync kdepim-kpilot libkdepim2-common
 ksysguard libkdebase4 kdebase-progs kdebase-common
@@ -1586,7 +1586,7 @@ ktnef libkdepim2-ktnef kdepim-ktnef
 ktouch kdeedu
 ktouch-doc kdeedu
 ktouch-doc-es kde-i18n-es
-ktron libkdegames1-devel kdegames
+ktron kdegames
 ktron-doc kdegames
 ktuberling kdegames
 ktuberling-doc kdegames
@@ -1611,7 +1611,7 @@ kuser-doc-es kde-i18n-es
 kverbos kdeedu
 kverbos-doc kdeedu
 kverbos-doc-es kde-i18n-es
-kview kdegraphics-common kdegraphics-kview libkdegraphics0-kview-devel libkdegraphics0-kview kdegraphics-ksvg
+kview kdegraphics-common kdegraphics-kview libkdegraphics0-kview kdegraphics-ksvg
 kview-doc kdegraphics-kview
 kview-doc-es kde-i18n-es
 kvoctrain kdeedu
@@ -1637,7 +1637,7 @@ kwin-system kdeartwork
 kwin4 kdegames
 kwin4-doc kdegames
 kwin4-doc-es kde-i18n-es
-kword libkoffice2-kword libkoffice2-kword-devel koffice-kword koffice-progs
+kword libkoffice2-kword koffice-kword koffice-progs
 kword-doc koffice-kword
 kword-docs-es koffice-i18n-es
 kword-docs-pt_BR koffice-l10n-pt_BR
@@ -1655,7 +1655,7 @@ kxsldbg kdewebdev
 kxsldbg-doc kdewebdev
 kynaptic
 kynaptic-i18n-pt_BR
-ladspa ladspa-devel ladspa
+ladspa ladspa
 lam sweep libmpich21-devel libmpich1-devel mpic++ mpif77 libkdesdk1-devel mpich lam-devel mpich2 mpi2f77 mpi2cc lam-runtime mpicc
 lam-doc lam-doc
 lam-examples
@@ -1675,12 +1675,12 @@ libacl-devel libacl1-devel
 libacl1 libacl1
 libadns-devel libadns1-devel
 libadns1 libadns1
-libalsa2 libalsa-data libalsa2 libalsa2-devel
+libalsa2 libalsa-data libalsa2
 libalsatoss0 libalsa-oss0
 libao-devel libao2-devel
 libao-doc
-libao2 libao2-devel libao2
-libaoss0 libalsa-oss0-devel libalsa-oss0 aoss
+libao2 libao2
+libaoss0 libalsa-oss0 aoss
 libapr-devel libapr0-devel libapr-util0-devel
 libapr-devel-static libapr-util0-devel libapr0-devel
 libapr0 libapr-util0 libapr0
@@ -1745,7 +1745,7 @@ libeel2 libeel2_2
 libeel2-i18n-es eel
 libeel2-i18n-pt_BR eel
 libenchant-devel libenchant1-devel
-libenchant0 libenchant1-devel libenchant1
+libenchant0 libenchant1
 libewm
 libewm-devel
 libexif-devel libexif12-devel
@@ -1777,7 +1777,7 @@ libftgl0 libftgl0
 libgaim-remote-devel libgaim-remote0-devel
 libgaim-remote0 libgaim-remote0
 libgal-devel libgal23-devel
-libgal0 libgal2.0_6 libgal2.0_6-devel gal2.0
+libgal0 libgal2.0_6 gal2.0
 libgal0-i18n-es gal2.0
 libgal0-i18n-pt_BR gal2.0
 libgal21
@@ -1790,7 +1790,7 @@ libgcj4 libgcj6
 libgcrypt1
 libgd-devel libgd2-devel
 libgd-doc
-libgd-progs libgd2-devel gd-utils
+libgd-progs gd-utils
 libgd1
 libgd2 libgd2
 libgdbm-devel libgdbm3-devel
@@ -1853,7 +1853,7 @@ libgnomeui-i18n-pt_BR libgnomeui2
 libgpgme-devel libgpgme03_6-devel libgpgme11-devel
 libgpgme-doc
 libgpgme6 libgpgme03_6
-libgphoto2 libgphoto2-devel libgphoto2 libgphoto-hotplug
+libgphoto2 libgphoto2 libgphoto-hotplug
 libgphoto2-devel libgphoto2-devel
 libgphoto2-doc
 libgphoto2-i18n-es libgphoto2
@@ -1903,7 +1903,7 @@ libimap-devel imap-devel
 libimap-devel-static
 libimap4
 libimlib-devel libimlib1-devel
-libimlib1 libimlib1-devel imlib libimlib1
+libimlib1 imlib libimlib1
 libimlib1-cfgeditor imlib-cfgeditor
 libipsec0 libipsec0
 libipsec0-devel libipsec0-devel
@@ -1916,7 +1916,7 @@ libjpeg-devel libjpeg62-devel
 libjpeg62 jpeg-progs libjpeg62
 libkabinterfaces1 libkdepim2-kaddressbook
 libkcal2 kdepim-common libkdepim2-common
-libkcddb1 libkdemultimedia1-common libkdemultimedia1-common-devel kdemultimedia-kscd
+libkcddb1 libkdemultimedia1-common kdemultimedia-kscd
 libkdeeducore0 libkdeedu1
 libkdeeduplot1 libkdeedu1
 libkdeeduui1 libkdeedu1
@@ -1988,7 +1988,7 @@ libogg-doc
 libogg0 libogg0
 liboggflac++0
 liboggflac1
-libole2 libole20 libole20-devel
+libole2 libole20
 libole2-devel libole20-devel
 libopenal-devel libopenal0-devel
 libopenal0 libopenal0
@@ -2003,7 +2003,7 @@ libpcap-devel libpcap0-devel
 libperl5.8
 libpgtypes1
 libplanner-devel libplanner-1_0-devel
-libplanner1 libplanner-1_0-devel
+libplanner1 libplanner-1_0
 libplot-devel libplotutils2-devel
 libplot4 libplotutils2
 libplotter-devel
@@ -2045,7 +2045,7 @@ libsdl-ttf-test libSDL_ttf2.0-test
 libsdl-ttf2.0 libSDL_ttf2.0
 libsdl1.2 libSDL1.2
 libsdp2
-libshout libshout3-devel
+libshout libshout3
 libshout-devel libshout3-devel
 libslang-devel libslang1-devel
 libslang-devel-static libslang1-devel
@@ -2125,7 +2125,7 @@ libxklavier libxklavier-data
 libxklavier-devel libxklavier10-devel
 libxmi-devel
 libxmi1
-libxml libxml1-devel libxml1
+libxml libxml1
 libxml-devel libxml1-devel
 libxml-doc
 libxml2 libxml2-utils libxml2
@@ -2139,7 +2139,7 @@ libxosd-xmms xmms-xosd beep-media-player-xosd
 libxosd2 xosd-tools libxosd2
 libxslt-devel libxslt1-devel
 libxslt-doc
-libxslt1 libxslt1-devel libxslt1 libxslt-proc
+libxslt1 libxslt1 libxslt-proc
 libxvid-devel
 libxvid3
 libyafcore0 libkdemultimedia1-common
@@ -2163,7 +2163,7 @@ lilo-doc lilo-doc
 linc ORBit2 liblinc1
 linc-devel liblinc1-devel
 linc-doc liblinc1-devel
-linuxconf linuxconf-lang-pt linuxconf-util linuxconf-devel linuxconf linuxconf-lang-es
+linuxconf linuxconf-lang-pt linuxconf-util linuxconf linuxconf-lang-es
 linuxconf-accountbatch linuxconf-lang-pt linuxconf linuxconf-lang-es
 linuxconf-amandaconf linuxconf linuxconf-lang-pt linuxconf-lang-es
 linuxconf-aptconf linuxconf
@@ -2183,7 +2183,7 @@ linuxconf-ircdconf linuxconf-lang-pt linuxconf-lang-es linuxconf
 linuxconf-isapnpconf linuxconf linuxconf-lang-es linuxconf-lang-pt
 linuxconf-kbdconf linuxconf-lang-pt linuxconf-lang-es linuxconf
 linuxconf-kernelconf linuxconf linuxconf-lang-pt linuxconf-lang-es
-linuxconf-lib linuxconf-devel linuxconf-lib
+linuxconf-lib linuxconf-lib
 linuxconf-libmodules
 linuxconf-liloconf linuxconf-lang-pt linuxconf linuxconf-lang-es
 linuxconf-mailconf linuxconf linuxconf-lang-pt linuxconf-lang-es
@@ -2302,7 +2302,7 @@ mgetty-doc
 mgetty-sendfax hylafax-client mgetty-sendfax
 mgetty-viewfax mgetty-viewfax
 mgetty-voice mgetty-sendfax mgetty-voice
-mhash libmhash2-devel libmhash2
+mhash libmhash2
 mhash-devel libmhash2-devel
 mhash-doc
 mi
@@ -2334,7 +2334,7 @@ mod_auth_ldap
 mod_auth_pam mod_auth_pam
 mod_auth_pgsql
 mod_dav
-mod_perl apache-mod_perl-devel
+mod_perl apache-mod_perl
 mod_perl-devel mod_perl-devel
 mod_perl-doc
 mod_python
@@ -2359,7 +2359,7 @@ mozilla-psm
 mozplugger mozplugger
 mp3c mp3c
 mpage mpage
-mpeglib libkdemultimedia1-common libkdemultimedia1-common-devel kdemultimedia-common
+mpeglib libkdemultimedia1-common kdemultimedia-common
 mpg321 mpg123 mpg321
 mplayer mencoder mplayer-gui mplayer
 mplayer-doc
@@ -2437,7 +2437,7 @@ nfs-utils nfs-utils nfs-utils-clients
 nmap nmap
 nmap-doc
 nmap-frontend nmap-frontend
-noatun kdemultimedia-noatun libkdemultimedia1-common-devel libkdemultimedia1-noatun libkdemultimedia1-noatun-devel kdemultimedia-common
+noatun kdemultimedia-noatun libkdemultimedia1-noatun kdemultimedia-common
 noatun-addons libkdeaddons1-noatun kdeaddons-noatun
 noatun-doc kdemultimedia-noatun
 noatun-doc-es kde-i18n-es
@@ -2450,7 +2450,7 @@ ntp ntp-client ntp openntpd
 ntp-doc
 ntsysv ntsysv
 numlock numlock
-oaf liboaf0 oaf liboaf0-devel
+oaf liboaf0 oaf
 oaf-devel liboaf0-devel oaf
 oaf-i18n-es oaf
 oaf-i18n-pt_BR oaf
@@ -2482,7 +2482,7 @@ openldap-client openldap-clients
 openldap-devel libldap2.2_7-devel
 openldap-doc openldap-doc
 openldap-server openldap-servers
-openmotif lesstif-clients lesstif-devel
+openmotif lesstif-clients
 openmotif-demos
 openmotif-devel lesstif-clients lesstif-devel
 openmotif-mwm lesstif-mwm
@@ -2535,7 +2535,7 @@ pbm2lwxl printer-filters
 pciutils pciutils
 pciutils-devel pciutils-devel
 pcl3-cups
-pcre libpcre0 pcre libpcre0-devel
+pcre libpcre0 pcre
 pcre-devel libpcre0-devel
 pcsc-lite pcsc-lite
 pcsc-lite-devel pcsc-lite-devel
@@ -2580,7 +2580,7 @@ perl-libxml-perl perl-libxml-perl
 perl-mailtools perl-MailTools
 perl-mime-tools perl-MIME-tools
 perl-mime-tools-doc
-perl-modules perl-devel
+perl-modules
 perl-mon perl-Mon
 perl-msql-mysql-modules
 perl-net-daemon perl-Net-Daemon
@@ -2598,7 +2598,7 @@ perl-suidperl perl-suid
 perl-timedate perl-TimeDate
 perl-unix-syslog perl-Unix-Syslog
 perl-uri perl-URI
-perl-utils perl perl-devel perl-doc
+perl-utils perl perl-doc
 perl-xml-parser perl-XML-Parser
 perl-xml-sax perl-XML-SAX
 pflogsumm pflogsumm
@@ -2639,7 +2639,7 @@ popt libpopt0
 popt-devel libpopt0-devel
 popt-devel-static libpopt0-devel
 popt-doc
-portaudio libportaudio0-devel
+portaudio libportaudio0
 portaudio-devel libportaudio0-devel
 portmap portmap
 portmap-static
@@ -2647,14 +2647,14 @@ portslave
 poster printer-utils
 postfix postfix
 postfix-doc
-postgresql postgresql-server postgresql-devel postgresql
+postgresql postgresql-server postgresql
 postgresql-clients postgresql
 postgresql-contrib postgresql-contrib
 postgresql-devel libpq4-devel libecpg5-devel postgresql-devel
 postgresql-doc
 postgresql-odbc
 postgresql-pgaccess pgaccess
-postgresql-tcl libpgtcl2 libpgtcl2-devel postgresql-tcl
+postgresql-tcl libpgtcl2 postgresql-tcl
 postgresql-test postgresql-test
 ppmtomd printer-filters
 ppmtotbmp
@@ -2702,7 +2702,7 @@ python-dateutil
 python-devel
 python-doc
 python-freeze
-python-gtk python-gtk-devel python-gtk
+python-gtk python-gtk
 python-gtk+2
 python-gtk+2-devel pygtk2.0-devel
 python-gtk+2-examples
@@ -2730,7 +2730,7 @@ python-reportlab-docco
 python-reportlab-platypus
 python-reportlab-test
 python-rpm
-python-sip sip-devel
+python-sip sip
 python-spread
 python-sqlite python-sqlite
 python-subversion python-svn
@@ -2812,7 +2812,7 @@ rusers rusers
 rusers-server rusers-server
 rwall rwall
 rwho rwho
-sablotron libsablotron0 libsablotron0-devel sablotron
+sablotron libsablotron0 sablotron
 sablotron-devel libsablotron0-devel
 sablotron-doc
 samba-clients smbget samba-common
@@ -2856,10 +2856,10 @@ screem screem
 screem-i18n-es screem
 screem-i18n-pt_BR screem
 screen ncurses ncurses-extraterms screen
-scribus libscribus0 libscribus0-devel scribus
+scribus libscribus0 scribus
 scribus-devel libscribus0-devel
 scribus-doc scribus
-scrollkeeper libscrollkeeper0 scrollkeeper libscrollkeeper0-devel
+scrollkeeper libscrollkeeper0 scrollkeeper
 scrollkeeper-i18n-es scrollkeeper
 scrollkeeper-i18n-pt_BR scrollkeeper
 sdcc sdcc
@@ -2922,7 +2922,7 @@ startup-notification libstartup-notification-1_0
 startup-notification-devel libstartup-notification-1_0-devel
 statserial statserial
 strace strace
-stunnel libstunnel0-devel stunnel
+stunnel stunnel
 stunnel-doc
 subversion subversion subversion-repos libsvn_ra_local1_0 libsvn_repos1_0 libsvn_diff1_0 libsvn_client1_0 libsvn_subr1_0 libsvn_ra_dav1_0 libsvn_ra_svn1_0 libsvn_delta1_0
 subversion-devel python-svn-devel libsubversion1_0-devel
@@ -3268,7 +3268,7 @@ xfree86-modules-fb-multi-depths xorg-x11-server
 xfree86-modules-freetype
 xfree86-modules-xaa xorg-x11-server
 xfree86-modules-xtt
-xfree86-progs X11R6-contrib xterm xorg-x11 libxpm4-devel
+xfree86-progs X11R6-contrib xterm xorg-x11
 xfree86-proxy xorg-x11
 xfree86-server
 xfree86-server-common xorg-x11 xorg-x11-server XFree86-server-common
