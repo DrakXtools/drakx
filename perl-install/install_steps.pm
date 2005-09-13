@@ -572,9 +572,10 @@ EOF
     unlink(glob("$::prefix/root/drakx/*.upgrading"));
 
     if ($o->{upgrade_by_removing_pkgs_matching}) {
-	if (cat_("$::prefix/etc/inittab.rpmsave") =~ /^id:(\d):initdefault:\s*$/m) {
-	    $o->{X}{xdm} = $1;
-	    log::l("runlevel is $o->{X}{xdm} (as found in previous inittab)");
+	if (cat_("$::prefix/etc/inittab.rpmsave") =~ /^id:5:initdefault:\s*$/m) {
+	    $o->{X}{xdm} = 1;
+	    require Xconfig::various;
+	    Xconfig::various::runlevel(5);
 	}
     }
 
