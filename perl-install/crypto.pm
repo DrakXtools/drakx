@@ -101,15 +101,24 @@ sub mirrors {
 	$o_use_local_list or alarm 60;
 	my $distro_type = $o_distro_type || 'updates';
 	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version() . '/main_updates';
+	my $strict_arch;
+	my $our_arch = MDK::Common::System::arch();
+	my %arch_mirror;
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
+	    defined $strict_arch && $arch eq $strict_arch or next;
 	    MDK::Common::System::compat_arch($arch) or next;
+	    $arch eq $our_arch and $strict_arch = $arch;
 	    my $land = N("United States");
 	    foreach (keys %url2land) {
 		my $qu = quotemeta $_;
 		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};
 	    }
 	    $mirrors{$url} = [ $land, $dir . $sub_dir ];
+	    $arch_mirror{$url} = $arch;
+	}
+	if (defined $strict_arch) {
+	    delete @mirrors{grep { $arch_mirror{$_} ne $strict_arch } keys %arch_mirror};
 	}
 	unless ($o_use_local_list) {
 	    http::getFile('/XXX'); #- close connection.
