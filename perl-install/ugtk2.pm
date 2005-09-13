@@ -830,7 +830,7 @@ sub new {
 	'MagicWindow',
 	title => $title || '',
 	pop_it => $o->{pop_it},
-	$::isInstall ? (banner => Gtk2::Banner->new($icon, $title)) : (),
+	$::isInstall && $icon ? (banner => Gtk2::Banner->new($icon, $title)) : (),
 	child => gtknew('VBox'),
 	modal => $grab || $o->{grab} || $o->{modal},
 	if_(!$::isInstall, icon_no_error => wm_icon()),
