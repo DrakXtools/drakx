@@ -1706,7 +1706,7 @@ sub media_browser {
 	hd => N("Hard Disk"),
 	cdrom => N("CDROM"),
     );
-    my @network_protocols = (if_(!$save, N_("HTTP")), N_("FTP"), N_("NFS"));
+    my @network_protocols = (if_(!$save, N_("HTTP")), if_(0, N_("FTP")), N_("NFS"));
 
     my $to_text = sub {
 	my ($hd) = @_;
