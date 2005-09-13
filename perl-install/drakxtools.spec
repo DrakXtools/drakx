@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.60mdk
+Release: 0.61mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -377,6 +377,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep 12 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.61mdk
+- drakboot: misc fixes (pixel)
+- drakperm: check if path, username & group are valid
+- localedrake:
+  o use SCIM for vietnamese
+  o im-ja supports gtk-immodule but not qt-immodule (Yukiko Bando)
+  o install scim-tomoe for japanese
+- XFdrake: sync kbd list with current Xorg (fredl)
+
 * Mon Sep 12 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.60mdk
 - drakconnect (blino):
   o keep modem specific stuff in ifcfg-*
