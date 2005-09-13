@@ -1,32 +1,30 @@
-# -*- sh -*-
-
 CAT_LSB
   5 lsb
 
 CAT_ICEWM
-  4 icewm
+  5 icewm
+  5 rox
+  3 icepref
 
 CAT_GRAPHICAL_DESKTOP
   4 WindowMaker
-  3 epplets blackbox fluxbox enlightenment ethemes icepref xfce
+  3 epplets blackbox enlightenment ethemes xfce
   2 wmnet
   1 lesstif-mwm
 
 CAT_GNOME
-  5 gnome-panel nautilus nautilus-filesharing gnome-control-center metacity 
-  5 yelp gnome2 gdm
+  5 gnome-panel nautilus gnome-control-center metacity 
   4 gnome-applets gtk-themes file-roller
-    gnome-utils gucharmap xlockmore 
-    gconf-editor desktop-printing eog evince
-  4 CAT_THEMES gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme gdm-themes
-
+    gnome-utils gucharmap xlockmore gtk-engines2 
+    gconf-editor
+  5 !CAT_KDE gdm
   3 gnome-pilot
   2 bug-buddy
 
 CAT_KDE
-  5 galaxy-kde galaxy-kde-kwin kdebase-nsplugins kdebase-progs krozat mandriva-galaxy xsettings-kde
-  5 discovery-icons-theme
-  5 kdebase-kdm kat
+  5 galaxy-kde galaxy-kde-kwin kdeartwork kdeartwork-kde-classic kdebase-nsplugins kdebase-progs krozat mandrakegalaxy
+  5 mdkkdm
+  1 kdebase-kdm
   5 kde-i18n-af kde-i18n-ar
   5 kdebase-servicemenu zip
   5 kdeutils-ark kdeutils-kcalc kdeutils-kcharselect kdeutils-kdf kdeutils-kfloppy kdeutils-kdepasswd
@@ -35,39 +33,35 @@ CAT_KDE
   5 kdeutils-kwalletmanager
   5 kdegraphics-kuickshow
   3 kdeutils-kedit kdeutils-khexedit kdeutils-kjots kdeutils-ktimer
-  4 CAT_GRAPHICS || PHOTO kdegraphics-common
-  4 CAT_THEMES kdeartwork kdeartwork-kde-classic
-  4 digikam digikamimageplugins kipi-plugins dcraw
-  4 klamav
 
 CAT_VIDEO
-  5 CAT_GNOME totem xine-esd
+  5 CAT_GNOME totem
   5 CAT_KDE kaffeine
   5 CAT_KDE kdenlive
+  5 CAT_ICEWM xine-ui
   4 RealPlayer
-  3 xine-ui
   3 powerdvd
   3 xmms-smpeg mplayer-gui
   2 xmovie
 TV
   5 CAT_KDE kdetv
-  5 !CAT_KDE || CAT_GNOME tvtime
+  5 !CAT_KDE || CAT_GNOME || CAT_ICEWM tvtime
   3 xawtv
   3 zapping
   3 HW"ATI" ati.2
 
 CAT_OFFICE
-  5 OpenOffice.org
-  5 OpenOffice.org-help-cs OpenOffice.org-help-de
-  5 OpenOffice.org-l10n-ar OpenOffice.org-l10n-ca
+  5 !CAT_ICEWM OpenOffice.org
+  5 !CAT_ICEWM OpenOffice.org-help-cs OpenOffice.org-help-de
+  5 !CAT_ICEWM OpenOffice.org-l10n-ar OpenOffice.org-l10n-ca
   5 CAT_KDE koffice-kivio
-  5 !CAT_KDE || CAT_GNOME dia
+  5 !CAT_KDE || CAT_GNOME || CAT_ICEWM
   5 gnucash gnucash-hbci gnucash-ofx
   5 planner
   5 CAT_KDE kdenetwork-kdict
   5 CAT_KDE kdepim-karm
+  5 CAT_ICEWM abiword gnumeric
   4 acroread acroread-nppdf
-  4 CAT_GNOME gnumeric
   3 gaddr xpdf gv
   3 wv ical
   2 units lyx
@@ -81,33 +75,33 @@ CAT_OFFICE
     3 kdegraphics-kdvi
   CAT_GNOME
     4 gnome-pim
-    3 gnome-pilot-conduits 
+    3 gnome-pilot-conduits Guppi
+    2 ggv 
 
 CAT_SPELLCHECK
   5 aspell-br aspell-ca
-  5 aspell-af aspell-en
+  5 ispell-af ispell-en
   5 myspell-bg_BG myspell-ca_ES
   5 myspell-hyph-cs myspell-hyph-da
 
 SOUND
   5 CAT_KDE kdemultimedia-kmix
+  5 CAT_ICEWM aumix
   3 CAT_KDE xmms-arts
   3 sox
-  3 aumix
 
 CAT_AUDIO
   5 CAT_KDE kdemultimedia-kscd
-  5 CAT_KDE xine-arts amarok-engine-arts
-  5 audacity
+  5 CAT_KDE xine-arts amarok
+  5 CAT_KDE || CAT GNOME audacity
   5 CAT_KDE kdemultimedia-kaudiocreator kdemultimedia-common
-  5 gnome-media
-  4 CAT_GNOME rhythmbox sound-juicer
+  5 CAT_KDE || CAT_GNOME gnome-media
+  5 CAT_ICEWM grip
   4 CAT_GNOME gnome-audio
   4 CAT_KDE rosegarden4
   3 cdp
   3 cdparanoia
   3 cdrecord-cdda2wav
-  3 grip
   3 CAT_GNOME gnome-audio-extra
   3 CAT_KDE kdeaddons-noatun
   3 CAT_KDE kdemultimedia-kmid
@@ -115,22 +109,20 @@ CAT_AUDIO
   3 CAT_KDE kdemultimedia-noatun
   3 timidity-instruments
   3 beep-media-player
-  5 DRIVER"^snd-" alsa-utils
-  4 DRIVER"^snd-" xmms-alsa gstreamer-alsa
+  3 DRIVER"^snd-" xmms-alsa gnome-alsamixer alsa-utils
 # the two following entries are for ISA sound cards and thus are not managed for now:
-  5 DRIVER"^snd-sb" cspctl
-  5 DRIVER"^snd-sb|^sbawe" sb16_csp
-  5 DRIVER"^sbawe" awesfx
-  5 DRIVER"snd-darla20|snd-darla24|snd-gina20|snd-gina24|snd-gina3g|snd-indi|snd-indigodj|snd-indigoio|snd-layla20|snd-layla24|snd-layla3g|snd-mia|snd-mona" echomixer
-  5 DRIVER"snd-emu10k1|snd-emu10k1x" as10k1 ld10k1
-  5 DRIVER"snd-hdsp" hdspconf hdsploader hdspmixer rmedigicontrol
-  5 DRIVER"snd-ice1712|snd-ice1724" envy24control
+  3 DRIVER"^snd-sb" cspctl
+  3 DRIVER"^sbawe" awesfx
+  3 DRIVER"snd-darla20|snd-darla24|snd-gina20|snd-gina24|snd-gina3g|snd-indi|snd-indigodj|snd-indigoio|snd-layla20|snd-layla24|snd-layla3g|snd-mia|snd-mona" echomixer
+  3 DRIVER"snd-emu10k1" as10k1
+  3 DRIVER"snd-hdsp" hdsploader hdspmixer rmedigicontrol
+  3 DRIVER"snd-ice1712|snd-ice1724" envy24control
 # unmanaged ISA too:
-  5 DRIVER"snd-pcxhr" pcxhrloader
-  5 DRIVER"snd-sscape" sscape_ctl
-  5 DRIVER"snd-mixart" mixartloader
-  5 DRIVER"snd-usb-usx2y" us428control usx2yloader
-  5 DRIVER"^snd-vx" vxloader
+  3 DRIVER"snd-pcxhr" pcxhrloader
+  3 DRIVER"snd-sscape" sscape_ctl
+  3 DRIVER"snd-mixart" mixartloader
+  3 DRIVER"snd-usb-audio" us428control usx2yloader
+  3 DRIVER"^snd-vx" vxloader
   3 xmms-esd
   3 xmms-kjofol-skins
   3 xmms-more-vis-plugins
@@ -195,8 +187,9 @@ CAT_COMMUNICATIONS
   5 gnomemeeting
   5 CAT_KDE kphone
   4 CAT_KDE kdebase-kdeprintfax kdegraphics-kfax
+  4 CAT_ICEWM drakfax
+  4 CAT_ICEWM jpilot pilot-link
   4 hylafax-client 
-  3 jpilot pilot-link
   2 hylafax-server dip
   2 lrzsz mgetty mgetty-contrib mgetty-sendfax mgetty-viewfax mgetty-voice minicom
   1 jpilot-Mail jpilot-syncmal statserial
@@ -224,6 +217,7 @@ CAT_NETWORKING_CHAT_SERVER
 
 CAT_NETWORKING_FILE_TRANSFER
   5 CAT_KDE kbear
+  5 CAT_GNOME gftp
   5 lftp mirrordir rsync
   4 rdist
   3 fmirror ncftp tftp
@@ -235,17 +229,16 @@ CAT_NETWORKING_FILE_TRANSFER_SERVER
   2 wu-ftpd anonftp
 
 CAT_NETWORKING_LDAP_SERVER
-  4 openldap-servers directory_administrator
+  4 openldap directory_administrator
 
 CAT_NETWORKING_INSTANT_MESSAGING
   5 CAT_KDE kdenetwork-kopete
-  5 LOCALES"zh" CAT_KDE eva
-  5 !CAT_KDE || CAT_GNOME gaim
+  5 !CAT_KDE gaim
   3 licq
   3 ayttm
   3 licq-console licq-rms
   CAT_GNOME
-    3 gnomeicu gossip
+    3 gnomeicu gabber
     3 gtk+licq
 
 CAT_NETWORKING_IRC
@@ -268,7 +261,7 @@ CAT_NETWORKING_MAIL
   5 CAT_KDE kdepim-kmail
   5 CAT_GNOME evolution
   3 mailx metamail
-  3 faces mozilla-thunderbird mozilla-thunderbird-en mozilla-thunderbird-fr
+  3 faces mozilla-mail
   3 fetchmail urlview mutt spamassassin
   3 !CAT_GNOME !CAT_KDE xmailbox
   3 CAT_KDE kdepim-korn
@@ -310,7 +303,7 @@ CAT_NIS_SERVER
   5 ypserv
 
 CAT_NETWORKING_REMOTE_ACCESS
-  5 openssh-clients telnet-client-krb5 keychain
+  5 openssh-clients telnet-client-krb5
   4 traceroute rfbdrake
   3 CAT_KDE kdeutils-kdessh lisa
   3 tightvnc
@@ -349,10 +342,9 @@ CAT_NETWORKING_FILE_SERVER
 
 CAT_NETWORKING_WWW
   5 CAT_X mozilla-firefox
-  5 CAT_X mozilla-firefox-fr mozilla-firefox-es
   5 CAT_KDE kdewebdev
   5 CAT_GNOME screem
-  5 CAT_GNOME epiphany epiphany-extensions
+  5 CAT_GNOME epiphany
   4 FlashPlayer crossover-plugin-demo j2re
   4 wget
   4 lynx
@@ -364,24 +356,24 @@ CAT_NETWORKING_WWW
   3 mozplugger
   3 opera
   3 bluefish
-  CAT_DEVELOPMENT 
-    4 nvu
 
 CAT_NETWORKING_WWW_SERVER
-  5 apache-mpm-prefork apache-mod_perl apache-mod_ssl apache-mod_php 
-  4 apache-mod_suexec 
-  4 CAT_BOOKS apache-doc
+  5 apache2 apache2-mod_perl apache2-mod_ssl apache2-mod_php 
+  4 apache2-mod_suexec 
+  4 CAT_BOOKS apache2-manual
   3 php-gd php-imap php-ldap php-mysql
     php-pgsql php-readline php_cgi mod_sxnet HTML-Embperl
   3 CAT_BOOKS php-manual-en php-manual-fr
 
 CAT_GRAPHICS
   5 qiv
-  5 gimp ufraw-gimp gimp-help-2
+  5 gimp2_0 gimp-help-2
   5 CAT_KDE kuickshow
-  5 !CAT_KDE gthumb
+  5 !CAT_KDE gqview
   5 CAT_KDE kdegraphics-ksnapshot
-  4 !CAT_KDE || CAT_GNOME flphoto gtkam
+  5 CAT_KDE digikam
+  4 !CAT_KDE flphoto gtkam
+  4 CAT_KDE kdegraphics-common
   4 ImageMagick giftrans gphoto2
   3 gimp-data-extras
   3 CAT_BOOKS
@@ -416,7 +408,7 @@ BURNER
   4 !CAT_KDE !CAT_GNOME CAT_X xcdroast
   3 gcombust
   3 CAT_GNOME gnome-toaster
-  2 !CAT_KDE !CAT_GNOME CAT_X eroaster 
+  2 CAT_X eroaster 
   CAT_DEVELOPMENT
     3 cdrecord-devel
 
@@ -425,7 +417,7 @@ SCANNER
   4 CAT_KDE kdegraphics-kooka
 
 PHOTO
-  4 gphoto gphoto2 ufraw
+  4 gphoto gphoto2
 
 CAT_DATABASES
   5 postgresql
@@ -457,9 +449,10 @@ CAT_GAMES
     3 kdetoys
   3D
     5 armagetron csmash
-      !HW"Riva.*128" chromium ppracer
+      !HW"Riva.*128" chromium tuxracer
 
-    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" bzflag
+    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)"
+        bzflag
 
 CAT_DEVELOPMENT
   5 autoconf2.1 automake1.4 m4 make 
@@ -491,7 +484,7 @@ CAT_DEVELOPMENT
 
   4 perl perl-Term-Readline-Gnu perl-libwww-perl perl-devel
   3 perl-DBI perl-IO-stringy perl-PDL perl-Parse-RecDescent 
-    perl-Tk perlftlib perl-URI perl-DB_File
+    perl-GTK-GLArea perl-Tk perlftlib perl-URI perl-DB_File
     perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse
     perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat
 
@@ -535,6 +528,7 @@ CAT_DEVELOPMENT
       libquanta0-kommander-devel koffice-devel
 
   CAT_GNOME
+    4 perl-GTK-Glade perl-GTK-Gnome 
     3 glade2 pygnome libgnomeui2_0-devel libpanel-applet-2_0-devel
     2 pygnome-capplet pygnome-libglade
       libgnomemm-1.2_9-devel libgnome-pilot2-devel glademm 
@@ -563,7 +557,7 @@ CAT_MONITORING
   4 CAT_X nmap-frontend
   4 smartmontools
   3 CAT_KDE kdeutils-ksim
-  3 iplog arpwatch lslk xcpustate xsysinfo pciutils lshw
+  3 iplog arpwatch lslk xcpustate xsysinfo pciutils
   2 cfengine gkrellm gps rusers mon 
   2 3D xtraceroute
   1 logcheck
@@ -580,9 +574,6 @@ CAT_FILE_TOOLS
 CAT_WEBMIN
   5 webmin
   5 mdkwebadmin
-  CAT_BOOKS
-    3 mandriva-doc-Server_Conf_Guide-en mandriva-doc-Server_Conf_Guide-fr
-    3 mandriva-doc-contrib-Server_Conf_Guide-pl mandriva-doc-contrib-Server_Conf_Guide-zh_cn
 
 CAT_WIZARDS
   5 drakwizard
@@ -593,33 +584,26 @@ CAT_CONFIG
   1 ipxutils
 
 CAT_BOOKS
-  4 mandriva-doc-Starter-en mandriva-doc-Starter-fr
-  4 mandriva-doc-contrib-Starter-et mandriva-doc-contrib-Starter-pl
+  4 mandrake-doc-de mandrake-doc-es
+  4 !LOCALES"fr" !LOCALES"it" !LOCALES"es" mandrake-doc-en
 
 CAT_X
-  5 xorg-x11 xorg-x11-server rxvt xorg-x11-75dpi-fonts urw-fonts fonts-ttf-dejavu
-  5 icewm-light monitor-edid
+  5 xorg-x11 xorg-x11-server rxvt xorg-x11-75dpi-fonts urw-fonts fonts-ttf-vera
+  5 icewm-light
   5 HIGH_SECURITY mountloop
   5 LOCALES"zh" || LOCALES"am" scim-tables
-  5 LOCALES"ja" scim-anthy scim-input-pad scim-tomoe
-  5 LOCALES"ja" !CAT_KDE uim-gtk
-  5 LOCALES"ja" CAT_KDE uim-qt
+  5 LOCALES"ja" scim-anthy scim-uim
   5 LOCALES"ko" scim-hangul
   5 LOCALES"vi" x-unikey
-  5 LOCALES"zh" scim-pinyin
+  5 LOCALES"zh" scim-chinese
   5 LOCALES"zh_TW" scim-chewing
-  5 LOCALES"am" || LOCALES"ja" || LOCALES"ko" || LOCALES"zh" CAT_KDE scim-qtimm
   5 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK rxvt-unicode
   
   4 vim-enhanced
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives fonts-ttf-west_european
-    mandrake-mime menudrake desktop-common-data
+    mandrake-mime menudrake mandrake_desk
     mdkonline drakfirsttime gtk-engines bootsplash
-    galaxy-gnome x86-compat-galaxy-gnome
-
-  CAT_BOOKS
-    3 mandriva-doc-Drakxtools-Guide-en mandriva-doc-Drakxtools-Guide-fr
-    3 mandriva-doc-contrib-Drakxtools-et mandriva-doc-contrib-Drakxtools-ru
+    galaxy-gnome
 
   3 xorg-x11-100dpi-fonts draksync
   3 USB usbview
@@ -627,15 +611,13 @@ CAT_X
   2 imlib-cfgeditor
   1 Mesa xtoolwait X11R6-contrib 
 
-# list alternative IMs so that they're on CDs (in order not to break updates):
-  3 ami fcitx gcin im-ja imhangul kinput2-wnn4 nabi scim-canna scim-fcitx scim-m17n scim-prime scim-skk scim-uim skim xvnkb
+  3 ami fcitx imhangul im-ja miniChinput nabi skim xcin xvnkb
 
   2 app-defaults-be app-defaults-cs
 
   5 LOCALES"ru" || LOCALES"uk" xorg-x11-cyrillic-fonts
     LOCALES"am" fonts-ttf-ethiopic
-    LOCALES"ar" fonts-ttf-arabic-arabeyes fonts-ttf-arabic-kacst
-    LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic-farsi
+    LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic-arabeyes fonts-ttf-arabic-farsi fonts-ttf-arabic-kacst
     LOCALES"as" || LOCALES"bn" fonts-ttf-bengali
     LOCALES"el" fonts-type1-greek
     LOCALES"he" || LOCALES"yi" fonts-hebrew-elmar fonts-type1-hebrew
@@ -648,7 +630,6 @@ CAT_X
     LOCALES"zh" fonts-ttf-chinese 
     LOCALES"zh_CN" fonts-ttf-gb2312
     LOCALES"zh_TW" taipeifonts fonts-ttf-big5
-  5 CAT_THEMES bootsplash-themes
 
 DOCS
   5 man info man-pages
@@ -657,66 +638,57 @@ CAT_SYSTEM
   5 at eject ldetect harddrake udev s2u sharutils
     locales iputils urpmi cpio msec tmpwatch gnupg
 
-  5 dmidecode setarch
+  5 lshw dmidecode
 
   5 HIGH_SECURITY libsafe kernel-secure lads
   5 BIGMEM kernel
   5 SMP kernel-smp
+  5 BIGMEM SMP kernel-enterprise
   5 PCMCIA pcmcia-cs
+  5 USB hotplug
 
   5 HW"HighPoint Technologies Inc.\|HPT37|Promise Technology.*FastTrak" || DRIVER"ata_piix|i2o_block|megaraid|sata_sil" mdadm dmraid
   5 HW"American Power Conversion\|Back-UPS Pro 500|MGE UPS Systems\|" nut-server
   5 HW"iKey 3000 Token" rnboifd
-  5 HW_CAT"network/slmodem" slmodem
+  5 DRIVER"slamr|slusb|snd-atiixp-modem|snd-intel8x0m|snd-via82xx-modem" slmodem
   5 DRIVER"^LT:|slamr|slusb|^Hcf:|^Hsf:" ppp
       CAT_KDE kdenetwork-kppp
   5 DRIVER"^LT:" ltmodem
-  5 HW"OmniKey Cardman" cm2020
+  5 HW"OmniKey Cardman"
+     cm2020
      SMP cm2020-smp
      HIGH_SECURITY cm2020-secure
      BIGMEM cm2020-enterprise
-  5 DRIVER"a320raid" || HW"HostRAID" a320raid-kernel
-     SMP a320raid-kernelsmp
-  5 HW"\|SynPS/2 Synaptics TouchPad|\|AlpsPS/2 ALPS TouchPad" synaptics
-  5 HW"\|SynPS/2 Synaptics TouchPad|\|AlpsPS/2 ALPS TouchPad" CAT_KDE ksynaptics
 
-  5 CAT_KDE || CAT_GNOME gnome-volume-manager
+  5 CAT_GNOME || CAT_KDE magicdev
 
   5 DRIVER"slamr|slusb" slmodem-kernel
   5 HW"tor2|wcfxo|wcfxs|wct1xxp|wct4xxp|wcte11xp|wcusb" dkms-zaptel zaptel-tools
-  5 HW"DAC960|cpqarray" cpqarrayd
   5 DRIVER"^ISDN:" ibod isdn4net isdn4k-utils
-  5 DRIVER"eagle-usb" eagle-usb
-  5 HW_CAT"input/joystick" joystick
-  5 HW_CAT"multimedia/radio" CAT_KDE kradio qtradio
-  5 HW_CAT"multimedia/radio" CAT_GNOME gnomeradio
-  5 HW_CAT"multimedia/dvb" dvb-apps dvbsnoop dvbstream dvbtune
-  5 CAT_KDE  HW_CAT"bus/bluetooth" kdebluetooth 
-  5 !CAT_KDE || CAT_GNOME HW_CAT"bus/bluetooth" gnome-bluetooth
+  5 DRIVER"adiusbadsl" eagle-usb
+  5 CAT_KDE  DRIVER"bcm203x|bfusb|hci_usb" kdebluetooth 
+  5 !CAT_KDE DRIVER"bcm203x|bfusb|hci_usb" gnome-bluetooth
   5 DRIVER"ipw2100" ipw2100-firmware
   5 DRIVER"ipw2200" ipw2200-firmware
   5 DRIVER"ath_pci" madwifi-kernel madwifi
-  5 DRIVER"prism54" prism54-firmware
-  5 DRIVER"^at76" atmel-firmware
   5 DRIVER"speedtch" speedtouch speedtouch_mgmt
   5 DRIVER"^Hcf:" hcfmodem
   5 DRIVER"^Hsf:" hsfmodem
+  5 DRIVER"^ISDN:|^Hcf:|^Hsf:|^LT:|speedtch"
+      kernel-2.4
+      SMP kernel-smp-2.4
+      BIGMEM kernel-enterprise-2.4
 
-  5 HW_CAT"bus/bluetooth" bluez-utils
-
-  5 CAT_KDE TYPE"wireless" kdenetwork-kwifimanager
-  5 TYPE"wireless" libiw27 wireless-tools
-
-  5 CAT_KDE TYPE"laptop" kdeutils-klaptop
-  5 !CAT_KDE TYPE"laptop" cpufreqd
-  5 TYPE"laptop" cpufreq apmd hotkeys laptop-mode-tools
-  3 evms evms-gui evms-cli evms-ncurses
+  5 atmel-firmware prism54-firmware
+  5 bluez-utils
   
-  4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc bc
-    lsof
-
+  5 CAT_KDE TYPE"laptop" kdeutils-klaptop hotkeys
+  5 TYPE"laptop" cpufreq apmd
+  
+  4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc
   4 TYPE"laptop" netprofile
 
+  3 bc
   2 sndconfig acpid adns audiofile freeswan fbset vlan-utils gpm
   1 fdutils genromfs mailcap pinfo
 
@@ -736,14 +708,11 @@ CAT_EMULATORS
   3 wine
 
 CAT_PRINTER
-  4 xpp nmap printer-testpages scli net-tools foomatic-db-engine 
-    foomatic-filters foomatic-db foomatic-db-hpijs ImageMagick
-    ghostscript printer-filters printer-utils mpage 
-    a2ps ppdfilt groff lesstif
-    libsnmp0 
-    hplip-hpijs postscript-ppds
-    gutenprint-ijs gutenprint-foomatic gutenprint-escputil
-    gutenprint-gimp2
+  4 xpp nmap printer-testpages scli net-tools gimpprint foomatic-db-engine 
+    foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
+    a2ps ppdfilt gpr groff lesstif
+    sane-backends sane-frontends scanner-gui 
+    libsnmp0 xojpanel libsane-hpoj1 printer-utils
 
 INSTALL
   NOCOPY
@@ -753,13 +722,13 @@ INSTALL
       ik8utils toshutils
     4 brltty
 
-  5 pptp-linux dhcpcd dhcpxd dhcp-client rp-pppoe pump
-    ppp nfs-utils-clients ppp-pppoe ppp-pppoatm
+  5 pptp-adsl dhcpcd dhcpxd dhcp-client rp-pppoe pump
+    ppp nfs-utils-clients libiw27 wireless-tools ppp-pppoe ppp-pppoatm
     autologin ntp samba-server ncpfs ucd-snmp libptal0
-    shorewall iptables samba-client perl-Net-DNS mandi-ifw
+    shorewall iptables samba-client perl-Net-DNS
     ipchains nc sndconfig curl
     mtools mtoolsfm numlock usbutils
-    ypbind
+    hotplug ypbind
     autofs pam_ldap pam_krb5 libsasl2-plug-gssapi nss_ldap openldap-clients samba-winbind
     tmdns zcip acpi acpid
     ibod isdn4net isdn-light isdn4k-utils kernel-2.4
@@ -767,11 +736,6 @@ INSTALL
     speedtouch speedtouch_mgmt
     kdenetwork-kppp-provider
     synaptics dkms-minimal
-    prism2-utils wpa_supplicant
 
-  5 cups cups-drivers hpoj libhpojip0 gutenprint-cups
-    xojpanel libsane-hpoj1
-    sane-backends sane-frontends scanner-gui xsane
-
+  5 cups cups-drivers hpoj libhpojip0
   4 xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
-    hplip libsane-hpaio1 libhpip0
