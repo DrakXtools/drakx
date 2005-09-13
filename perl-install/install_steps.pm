@@ -571,6 +571,13 @@ EOF
     renamef(pkgs::removed_pkgs_to_upgrade_file(), pkgs::removed_pkgs_to_upgrade_file() . '.done');
     unlink(glob("$::prefix/root/drakx/*.upgrading"));
 
+    if ($o->{upgrade_by_removing_pkgs_matching}) {
+	if (cat_("$::prefix/etc/inittab.rpmsave") =~ /^id:(\d):initdefault:\s*$/m) {
+	    $o->{X}{xdm} = $1;
+	    log::l("runlevel is $o->{X}{xdm} (as found in previous inittab)");
+	}
+    }
+
     any::fix_broken_alternatives($o->{isUpgrade} eq 'redhat');
 
     #- update theme directly from a package (simplest).
