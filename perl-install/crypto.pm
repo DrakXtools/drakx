@@ -106,7 +106,7 @@ sub mirrors {
 	my %arch_mirror;
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
-	    defined $strict_arch && $arch eq $strict_arch or next;
+	    $strict_arch && $arch eq $strict_arch and next;
 	    MDK::Common::System::compat_arch($arch) or next;
 	    $arch eq $our_arch and $strict_arch = $arch;
 	    my $land = N("United States");
