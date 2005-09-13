@@ -369,7 +369,7 @@ sub upgrading_redhat() {
 sub beforeInstallPackages {
     my ($o) = @_;
 
-    readBootloaderConfigBeforeInstall($o);
+    read_bootloader_config($o);
 
     #- save these files in case of upgrade failure.
     if ($o->{isUpgrade}) {
@@ -469,6 +469,8 @@ sub installPackages { #- complete REWORK, TODO and TOCHECK!
 
 sub afterInstallPackages($) {
     my ($o) = @_;
+
+    read_bootloader_config($o) if $o->{isUpgrade} && is_empty_hash_ref($o->{bootloader});
 
     die N("Some important packages did not get installed properly.
 Either your cdrom drive or your cdrom is defective.
@@ -790,11 +792,12 @@ sub addUser {
 }
 
 #------------------------------------------------------------------------------
-sub readBootloaderConfigBeforeInstall {
+sub read_bootloader_config {
     my ($o) = @_;
 
     require bootloader;
     eval { add2hash($o->{bootloader} ||= {}, bootloader::read($o->{all_hds})) };
+    $@ && $o->{isUpgrade} and log::l("read_bootloader_config failed: $@");
 
     $o->{bootloader}{bootUnsafe} = 0 if $o->{bootloader}{boot}; #- when upgrading, do not ask where to install the bootloader (mbr vs boot partition)
 }
