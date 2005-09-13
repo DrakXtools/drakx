@@ -511,6 +511,9 @@ my @IM_i18n_fields = (
  'XIM_PROGRAM',
 #-      the program to run (usually the same as XIM value, but
 #-	in some cases different, particularly if parameters are needed;
+ 'QT_IM_MODULE',
+#-     the module to use for Qt programs ("xim" to use an X11
+#-     XIM server; or a Qt plugin if exists)
 );
 
 # keep the 'packages' field in sync with share/rpmsrate:
@@ -524,9 +527,11 @@ my %IM_config =
            #- XIM_PROGRAM => 'ami',
            XMODIFIERS => '@im=Ami',
            GTK_IM_MODULE => 'xim',
+           QT_IM_MODULE => 'xim',
           },
    chinput => {
                GTK_IM_MODULE => 'xim',
+               QT_IM_MODULE => 'xim',
                XIM => 'chinput',
                XMODIFIERS => '@im=Chinput',
 	       XIM_PROGRAM => {
@@ -538,18 +543,22 @@ my %IM_config =
 	       packages => { generic => 'miniChinput' },
               },
    fcitx => {
+             GTK_IM_MODULE => 'xim',
+             QT_IM_MODULE => 'xim',
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
             },
    gcin => {
              GTK_IM_MODULE => 'gcin',
+             QT_IM_MODULE => 'gcin',
              XIM => 'gcin',
              XIM_PROGRAM => 'gcin',
              XMODIFIERS => '@im=gcin',
             },
    iiimf => {
              GTK_IM_MODULE => 'iiim',
+             QT_IM_MODULE => 'iiim',
              XIM => 'iiimx',
              XIM_PROGRAM => 'iiimx',
              XMODIFIERS => '@im=iiimx',
@@ -563,12 +572,15 @@ my %IM_config =
             },
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
+               QT_IM_MODULE => 'xim',
                XIM => 'im-ja-xim-server',
                XIM_PROGRAM => 'im-ja-xim-server',
                XMODIFIERS => '@im=im-ja-xim-server',
               },
 
    kinput2 => {   
+               GTK_IM_MODULE => 'xim',
+               QT_IM_MODULE => 'xim',
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
                XMODIFIERS => '@im=kinput2',
@@ -576,6 +588,7 @@ my %IM_config =
               },
    nabi => {
             GTK_IM_MODULE => 'xim',
+            QT_IM_MODULE => 'xim',
             XIM => 'nabi',
             XIM_PROGRAM => 'nabi',
             XMODIFIERS => '@im=nabi',
@@ -583,6 +596,7 @@ my %IM_config =
 
    'scim+(default)' => {
             GTK_IM_MODULE => 'scim',
+            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    default_for_lang => 'am ja ko zh_CN zh_TW',
@@ -598,6 +612,7 @@ my %IM_config =
    (map {
        ("scim+$_" => {
             GTK_IM_MODULE => 'scim',
+	    QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
 	    packages => { generic => "scim-$_" },
@@ -606,11 +621,13 @@ my %IM_config =
 
    skim => {
             GTK_IM_MODULE => 'scim',
+            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'skim -d',
             XMODIFIERS => '@im=SCIM',
            },
    uim => {
            GTK_IM_MODULE => 'uim',
+           QT_IM_MODULE => 'uim',
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
@@ -621,9 +638,11 @@ my %IM_config =
             XIM_PROGRAM => 'xcin',
             XMODIFIERS => '@im=xcin-zh_TW',
             GTK_IM_MODULE => 'xim',
+            QT_IM_MODULE => 'xim',
            },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
+                  QT_IM_MODULE => 'xim',
                   XMODIFIERS => '@im=unikey',
 		  default_for_lang => 'vi',
                  },
@@ -1068,7 +1087,7 @@ sub write {
 	foreach (@IM_i18n_fields) {
 	    $h->{$_} = $IM_config{$locale->{IM}}{$_};
 	}
-        $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
+ #       $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE};
 
 	if (ref $h->{XIM_PROGRAM}) {
 	    $h->{XIM_PROGRAM} = 
