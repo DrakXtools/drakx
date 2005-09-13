@@ -605,7 +605,7 @@ my %IM_config =
 		am => 'scim scim-tables ',
 		ja => 'scim-anthy scim-input-pad',
 		ko => 'scim-hangul',
-          vi => 'scim-m17n scim',
+          vi => 'scim-m17n',
 		zh => 'scim-pinyin scim-tables scim-chewing',
 	    },
            },
