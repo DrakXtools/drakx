@@ -129,6 +129,9 @@ sub selectKeyboard {
 	$o->{keyboard}{unsafe} or return;
 	if (my $keyboard = keyboard::read()) {
 	    $o->{keyboard} = $keyboard;
+	} elsif ($o->{isUpgrade}) {
+	    #- oops, the keyboard config is wrong, writing the unsafe config
+	    addToBeDone { keyboard::write($o->{keyboard}) } 'installPackages';
 	}
     } 'formatPartitions';
 }
