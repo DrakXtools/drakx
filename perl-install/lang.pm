@@ -599,7 +599,7 @@ my %IM_config =
             QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
-	    default_for_lang => 'am ja ko zh_CN zh_TW',
+	    default_for_lang => 'am ja ko vi zh_CN zh_TW',
 	    packages => {
 		generic => 'scim scim-m17n scim-tables',
 		am => 'scim scim-tables ',
@@ -644,7 +644,6 @@ my %IM_config =
                   GTK_IM_MODULE => 'xim',
                   QT_IM_MODULE => 'xim',
                   XMODIFIERS => '@im=unikey',
-		  default_for_lang => 'vi',
                  },
 );
 
