@@ -174,7 +174,7 @@ sub configure_everything_or_configure_chooser {
     $err ||= check_valid($raw_X) if $raw_X && @$raw_X; #- that's ok if config is empty
     if ($err) {
 	log::l("ERROR: bad X config file (error: $err)");
-	$in->ask_okcancel('',
+	$options->{ignore_bad_conf} or $in->ask_okcancel('',
 			  N("Your Xorg configuration file is broken, we will ignore it.")) or return;
 	$raw_X = [];
     }

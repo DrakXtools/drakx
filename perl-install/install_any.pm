@@ -1843,6 +1843,7 @@ sub X_options_from_o {
     { 
 	freedriver => $o->{freedriver},
 	allowFB => $o->{allowFB},
+	ignore_bad_conf => $o->{isUpgrade} =~ /redhat|conectiva/,
     };
 }
 
