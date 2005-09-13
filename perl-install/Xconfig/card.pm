@@ -145,7 +145,7 @@ sub card_config__not_listed {
     );
     my $cards = readCardsDB("$ENV{SHARE_PATH}/ldetect-lst/Cards+");
 
-    my @xf4 = grep { $options->{allowFB} || $_ ne 'fbdev' } @xfree4_Drivers;
+    my @xf4 = grep { $options->{allowFB} || $::isStandalone || $_ ne 'fbdev' } @xfree4_Drivers;
     my @list = (
 	(map { 'Vendor|' . $_ } keys %$cards),
 	(map { 'Xorg|' . $_ } @xf4),
