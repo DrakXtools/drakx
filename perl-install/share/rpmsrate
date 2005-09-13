@@ -18,8 +18,8 @@ CAT_GNOME
   5 gnome-panel nautilus nautilus-filesharing gnome-control-center metacity
   5 yelp gnome2 gdm
   4 gnome-applets gtk-themes file-roller
-    gnome-utils gucharmap xlockmore
-	gconf-editor desktop-printing eog evince
+    gnome-utils gucharmap xlockmore 
+    gconf-editor desktop-printing eog evince
   4 CAT_THEMES gnome-icon-theme gnome-themes-extras gnome-themes hicolor-icon-theme gdm-themes
   3 gnome-pilot
   2 bug-buddy
@@ -249,7 +249,7 @@ CAT_NETWORKING_INSTANT_MESSAGING
   3 licq-console licq-rms
   CAT_GNOME
     3 gnomeicu gossip
-	3 gtk+licq
+    3 gtk+licq
 
 CAT_NETWORKING_IRC
   3 xchat
@@ -368,7 +368,7 @@ CAT_NETWORKING_WWW
   3 opera
   3 bluefish
   CAT_DEVELOPMENT
-   4 nvu
+    4 nvu
 
 CAT_NETWORKING_WWW_SERVER
   5 apache-mpm-prefork apache-mod_perl apache-mod_ssl apache-mod_php
@@ -428,7 +428,7 @@ SCANNER
   4 CAT_KDE kdegraphics-kooka
 
 PHOTO
-   4 gphoto gphoto2 ufraw
+  4 gphoto gphoto2 ufraw
 
 CAT_DATABASES
   5 postgresql
@@ -460,9 +460,9 @@ CAT_GAMES
     3 kdetoys
   3D
     5 armagetron csmash
-		!HW"Riva.*128" chromium ppracer
+      !HW"Riva.*128" chromium ppracer
 
-		3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" bzflag
+    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" bzflag
 
 CAT_DEVELOPMENT
   5 autoconf2.1 automake1.4 m4 make 
@@ -495,7 +495,7 @@ CAT_DEVELOPMENT
   4 perl perl-Term-Readline-Gnu perl-libwww-perl perl-devel
   3 perl-DBI perl-IO-stringy perl-PDL perl-Parse-RecDescent 
     perl-Tk perlftlib perl-URI perl-DB_File
-	perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse
+    perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse
     perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat
 
   4 rpm-build
@@ -584,8 +584,8 @@ CAT_WEBMIN
   5 webmin
   5 mdkwebadmin
   CAT_BOOKS
-  	3 mandriva-doc-Server_Conf_Guide-en mandriva-doc-Server_Conf_Guide-fr
-	3 mandriva-doc-contrib-Server_Conf_Guide-pl mandriva-doc-contrib-Server_Conf_Guide-zh_cn
+    3 mandriva-doc-Server_Conf_Guide-en mandriva-doc-Server_Conf_Guide-fr
+    3 mandriva-doc-contrib-Server_Conf_Guide-pl mandriva-doc-contrib-Server_Conf_Guide-zh_cn
 
 CAT_WIZARDS
   5 drakwizard
@@ -617,12 +617,12 @@ CAT_X
   4 vim-enhanced
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives fonts-ttf-west_european
     mandrake-mime menudrake desktop-common-data
-	mdkonline drakfirsttime gtk-engines bootsplash
+    mdkonline drakfirsttime gtk-engines bootsplash
     galaxy-gnome x86-compat-galaxy-gnome
 
   CAT_BOOKS
     3 mandriva-doc-Drakxtools-Guide-en mandriva-doc-Drakxtools-Guide-fr
-	3 mandriva-doc-contrib-Drakxtools-et mandriva-doc-contrib-Drakxtools-ru
+    3 mandriva-doc-contrib-Drakxtools-et mandriva-doc-contrib-Drakxtools-ru
 
   3 xorg-x11-100dpi-fonts draksync
   3 USB usbview
@@ -630,16 +630,16 @@ CAT_X
   2 imlib-cfgeditor
   1 Mesa xtoolwait X11R6-contrib 
 
- # list alternative IMs so that they're on CDs (in order not to break updates):
-   3 ami fcitx gcin im-ja imhangul kinput2-wnn4 nabi scim-canna scim-fcitx scim-m17n scim-prime scim-skk scim-uim skim xvnkb
+# list alternative IMs so that they're on CDs (in order not to break updates):
+  3 ami fcitx gcin im-ja imhangul kinput2-wnn4 nabi scim-canna scim-fcitx scim-m17n scim-prime scim-skk scim-uim skim xvnkb
 
   2 app-defaults-be app-defaults-cs
 
   5 LOCALES"ru" || LOCALES"uk" xorg-x11-cyrillic-fonts
     LOCALES"am" fonts-ttf-ethiopic
     LOCALES"ar" fonts-ttf-arabic-arabeyes fonts-ttf-arabic-kacst
-	LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic-farsi
-	LOCALES"as" || LOCALES"bn" fonts-ttf-bengali
+    LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic-farsi
+    LOCALES"as" || LOCALES"bn" fonts-ttf-bengali
     LOCALES"el" fonts-type1-greek
     LOCALES"he" || LOCALES"yi" fonts-hebrew-elmar fonts-type1-hebrew
     LOCALES"hy" fonts-ttf-armenian
@@ -675,12 +675,12 @@ CAT_SYSTEM
   5 DRIVER"^LT:|slamr|slusb|^Hcf:|^Hsf:" ppp
       CAT_KDE kdenetwork-kppp
   5 DRIVER"^LT:" ltmodem
-  5 HW"OmniKey Cardman" cm2020   
-	 SMP cm2020-smp
+  5 HW"OmniKey Cardman" cm2020
+     SMP cm2020-smp
      HIGH_SECURITY cm2020-secure
      BIGMEM cm2020-enterprise
   5 DRIVER"a320raid" || HW"HostRAID" a320raid-kernel
-    SMP a320raid-kernelsmp
+     SMP a320raid-kernelsmp
   5 HW"\|SynPS/2 Synaptics TouchPad|\|AlpsPS/2 ALPS TouchPad" synaptics
   5 HW"\|SynPS/2 Synaptics TouchPad|\|AlpsPS/2 ALPS TouchPad" CAT_KDE ksynaptics
 
@@ -743,12 +743,12 @@ CAT_EMULATORS
 CAT_PRINTER
   4 xpp nmap printer-testpages scli net-tools foomatic-db-engine
     foomatic-filters foomatic-db foomatic-db-hpijs ImageMagick
-	ghostscript printer-filters printer-utils mpage
-	a2ps ppdfilt groff lesstif
-	libsnmp0
-	plip-hpijs postscript-ppds
-	gutenprint-ijs gutenprint-foomatic gutenprint-escputil
-	gutenprint-gimp2
+    ghostscript printer-filters printer-utils mpage 
+    a2ps ppdfilt groff lesstif
+    libsnmp0 
+    hplip-hpijs postscript-ppds
+    gutenprint-ijs gutenprint-foomatic gutenprint-escputil
+    gutenprint-gimp2
 
 INSTALL
   NOCOPY
@@ -760,9 +760,9 @@ INSTALL
 
   5 pptp-linux dhcpcd dhcpxd dhcp-client rp-pppoe pump  
     ppp nfs-utils-clients ppp-pppoe ppp-pppoatm
-	autologin ntp samba-server ncpfs ucd-snmp libptal0
+    autologin ntp samba-server ncpfs ucd-snmp libptal0
     shorewall iptables samba-client perl-Net-DNS mandi-ifw
-	ipchains nc sndconfig curl
+    ipchains nc sndconfig curl
     mtools mtoolsfm numlock usbutils
     ypbind
     autofs pam_ldap pam_krb5 libsasl2-plug-gssapi nss_ldap openldap-clients samba-winbind
@@ -772,12 +772,11 @@ INSTALL
     speedtouch speedtouch_mgmt
     kdenetwork-kppp-provider
     synaptics dkms-minimal
-	prism2-utils wpa_supplicant
-
+    prism2-utils wpa_supplicant
 
   5 cups cups-drivers hpoj libhpojip0 gutenprint-cups
     xojpanel libsane-hpoj1
-	sane-backends sane-frontends scanner-gui xsane
+    sane-backends sane-frontends scanner-gui xsane
 
   4 xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
     hplip libsane-hpaio1 libhpip0
