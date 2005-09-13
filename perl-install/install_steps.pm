@@ -197,7 +197,7 @@ sub doPartitionDisksAfter {
 
     fs::set_removable_mntpoints($o->{all_hds});
     fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
-	if !$o->{isUpgrade};
+	if !$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/;
 
     $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];
 
