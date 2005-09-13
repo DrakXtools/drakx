@@ -13,7 +13,7 @@ use c;
 
 require_root_capability();
 my $in;
-my $keyboard = keyboard::read() || keyboard::default();
+my $keyboard = keyboard::read_or_default();
 if (my ($kb) = grep { !/^-/ } @ARGV) {
     keyboard::KEYBOARD2text($kb) or die "bad keyboard $kb\n";
     $keyboard->{KEYBOARD} = $kb;

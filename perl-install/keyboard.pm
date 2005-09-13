@@ -626,8 +626,9 @@ sub read() {
     if (!$keyboard{KEYBOARD}) {
 	add2hash(\%keyboard, grep { keyboard2kmap($_) eq $keyboard{KEYTABLE} } keyboards());
     }
-    keyboard2text(\%keyboard) ? \%keyboard : {};
+    keyboard2text(\%keyboard) && \%keyboard;
 }
+sub read_or_default() { &read() || default() }
 
 sub check() {
     $^W = 0;

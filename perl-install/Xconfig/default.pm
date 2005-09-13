@@ -13,7 +13,7 @@ use modules::any_conf;
 sub configure {
     my ($do_pkgs, $o_keyboard, $o_mouse) = @_;
 
-    my $keyboard = $o_keyboard || keyboard::read();
+    my $keyboard = $o_keyboard || keyboard::read_or_default();
     my $mouse = $o_mouse || do {
 	my $mouse = mouse::read(); 
 	add2hash($mouse, mouse::detect(modules::any_conf->read)) if !$::noauto;
