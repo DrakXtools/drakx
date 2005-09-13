@@ -60,7 +60,7 @@ sub run_interface_command {
     my ($command, $intf, $detach) = @_;
     my @command =
       !$> || system("/usr/sbin/usernetctl $intf report") == 0 ?
-	($command, $intf, if_(!$::isInstall, "boot")) :
+	($command, $intf, if_(!$::isInstall, "daemon")) :
 	wrap_command_for_root($command, $intf);
     run_program::raw({ detach => $detach, root => $::prefix }, @command);
 }
