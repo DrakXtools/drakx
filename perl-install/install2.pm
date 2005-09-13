@@ -285,6 +285,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($auto) = @_;
+    return if $::local_install;
 
     $o->{modules_conf}->write;
 
@@ -421,7 +422,7 @@ sub main {
     if ($::local_install) {
 	push @auto, 
 #	  'selectLanguage', 'selectKeyboard', 'miscellaneous', 'selectInstallClass',
-	  'doPartitionDisks', 'formatPartitions', 'setupBootloader';
+	  'doPartitionDisks', 'formatPartitions';
 	fs::mount::usbfs(''); #- do it now so that when_load doesn't do it
     }
 
