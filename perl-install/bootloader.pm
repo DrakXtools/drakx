@@ -149,6 +149,8 @@ sub read {
 	my $f = $bootloader::{"read_$main_method"} or die "unknown bootloader method $main_method (read)";
 	my $bootloader = $f->($fstab);
 
+	cleanup_entries($bootloader);
+
 	my @devs = $bootloader->{boot};
 	if ($bootloader->{'raid-extra-boot'} =~ /mbr/ && 
 	    (my $md = fs::get::device2part($bootloader->{boot}, $all_hds->{raids}))) {
@@ -360,13 +362,22 @@ sub read_lilo() {
 	$b{method} = 'lilo-' . (member($b{install}, 'text', 'menu', 'graphic') ? $b{install} : 'graphic');
     }
 
-    #- cleanup duplicate labels & bad entries (in case file is corrupted)
-    my %seen;
-    @{$b{entries}} = 
-	grep { !$seen{$_->{label}}++ }
-	grep { $_->{type} ne 'image' || -e "$::prefix$_->{kernel_or_dev}" } @{$b{entries}};
+    # cleanup duplicate labels (in case file is corrupted)
+    @{$b{entries}} = uniq_ { $_->{label} } @{$b{entries}};
 
     \%b;
+}
+
+sub cleanup_entries {
+    my ($bootloader) = @_;
+
+    #- cleanup bad entries (in case file is corrupted)
+    @{$bootloader->{entries}} = 
+	grep { 
+	    my $pb = $_->{type} eq 'image' && dirname($_->{kernel_or_dev}) eq '/boot' && ! -e "$::prefix$_->{kernel_or_dev}";
+	    log::l("dropping bootloader entry $_->{label} since $_->{kernel_or_dev} doesn't exist") if $pb;
+	    !$pb;
+	} @{$bootloader->{entries}};
 }
 
 sub suggest_onmbr {
