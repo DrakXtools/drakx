@@ -1,3 +1,131 @@
+2005/09/13  David Baudens  <baudens at mandriva.com>
+
+	* share/rpmsrate: Fix previous errors
+	Fix previous errors
+	Low ressources setup
+
+2005/09/13  Daouda Lo  <daouda at mandriva.com>
+
+	* standalone.pm: 
+	  - fix typo
+
+2005/09/13  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* share/rpmsrate: add some 32-bit compat packages (galaxy-kde + j2re)
+
+2005/09/13  Olivier Blin <oblin at mandriva.com>
+
+	* mdk-stage1/network.c: add some log message about interface auto
+	detection
+
+2005/09/13  Pixel  <pixel at mandriva.com>
+
+	* install2.pm: it seems we don't need re-ordering steps anymore for
+	upgrading
+	(otherwise we would need to have miscellaneous before doPartitionDisks
+	so that useSupermount is correctly set)
+	when upgrading and the keyboard config is wrong, write the unsafe config
+	really skip setupBootloader in local_install
+
+	* keyboard.pm, standalone/keyboarddrake, Xconfig/default.pm: 
+	  - keyboard::read() now returns false if the value is not recognised
+	  - new function keyboard::read_or_default() which always returns a
+	valid value
+
+	* install_any.pm: migrate fstab when upgrading an alien distro (should be
+	done always?)
+	when taking screenshot during pkgs install, we can be chrooted
+	for now, disable FTP in media_browser since we don't handle it (#16088)
+	for local_install we don't want use_root_part to do anything
+	silently ignore existing X config file if upgrading an alien distro
+
+	* Xconfig/card.pm: allow forcing fbdev even if we don't allowFB
+
+	* Xconfig/parse.pm, Xconfig/xfree.pm: handle DefaultDepth (which is the
+	same as DefaultColorDepth)
+
+	* Xconfig/main.pm: silently ignore existing X config file if upgrading an
+	alien distro
+
+	* bootloader.pm: 
+	  - drop splashimage if file can't be found (useful when upgrading)
+	  - internally splashimage is preferably a file, not a grub file
+	background and foreground are valid menu.lst commands
+	  - create cleanup_entries() which remove bad entries (and more
+	verbosely than was done for lilo.conf) and call it for all bootloaders
+	(was only for lilo)
+	  - keep removing duplicate labels only for lilo (and use uniq_) (don't
+	do it for grub since duplicate labels are allowed (???))
+
+	* share/rpmsrate: !CAT_ICEWM is dangerous, replace it with CAT_KDE ||
+	CAT_GNOME
+	restore previous indentation and fix a typo (hplip-hpijs)
+
+	* install_steps_gtk.pm: don't have title twice (we already have it in the
+	banner)
+
+	* share/upgrade-map.conectiva.10: remove a lot of unneeded devel packages
+	try to have less devel packages when conectiva's install didn't have
+	them
+	  - ensure msec is there
+	  - ensure desktop-common-data is there when we have X
+	  - more closer map to mandriva tools
+
+	* install_steps.pm: migrate fstab when upgrading an alien distro (should
+	be done always?)
+	better call Xconfig::various::runlevel() directly since it's not always
+	called
+	when upgrading by removing pkgs, ensure we keep the previous runlevel
+	for local_install we don't want use_root_part to do anything
+	  - rename readBootloaderConfigBeforeInstall() to
+	read_bootloader_config()
+	  - call read_bootloader_config() after installing packages (for the
+	case of grub scripts fixing the configuration, ie creating device.map
+	and install.sh)
+
+	* ugtk2.pm: when taking screenshot during pkgs install, we can be
+	chrooted, in that case the icon is not accessible
+
+2005/09/13  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/po/fr.po: Trim down message so it fits in the window
+
+	* crypto.pm: Update hardcoded mirror list (for FTP suppl media)
+	Need more coffee
+	When selecting mirrors in the mirror list, if we find a mirror with the
+	exact same architecture than the current one, discard all other mirrors.
+	This should avoid listing i586 mirrors when installing on x86_64.
+
+2005/09/13  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* lang.pm: sync japanese package list with rpmsrate
+	vi: remove scim (already selected by scim-m17n)
+	install scim-m17n & scim for vietnamese users
+	use SCIM by default for Vietnamese users since x-unikey is broken
+	  - do not set QT_IM_MODDULE to GTK_IM_MODDULE when not supported (eg:
+	fix im-ja)
+	  - explicitely set the right QT_IM_MODULE
+	(Yukiko Bando)
+
+	* share/po/eu.po, share/po/bs.po, share/po/es.po, share/po/fi.po,
+	share/po/de.po, share/po/cy.po, share/po/af.po, share/po/eo.po,
+	share/po/ca.po, share/po/da.po, share/po/ga.po: fix extra accelerators
+
+	* share/rpmsrate: install scim-qtimm for vi too
+	vi: remove scim (already selected by scim-m17n)
+	use SCIM (scim-m17n & scim) by default for Vietnamese users since
+	x-unikey is broken
+
+	* drakxtools.spec: 10.3-0.61mdk
+
+2005/09/13  Warly  <warly at mandriva.com>
+
+	* share/logo-mandriva.png: new installation banner
+
+2005/09/13  willysr
+
+	* share/po/id.po: Updated
+
 2005/09/12  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
