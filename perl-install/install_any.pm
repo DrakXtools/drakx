@@ -1850,8 +1850,10 @@ sub X_options_from_o {
 }
 
 sub screenshot_dir__and_move() {
-    my ($dir1, $dir2) = ("$::prefix/root", '/tmp');
-    if (-e $dir1) {
+    my ($dir0, $dir1, $dir2) = ('/root', "$::prefix/root", '/tmp');
+    if (-e $dir0) {
+	$dir0; #- it occurs during pkgs install when we are chrooted
+    } elsif (-e $dir1) {
 	if (-e "$dir2/DrakX-screenshots") {
 	    cp_af("$dir2/DrakX-screenshots", $dir1);
 	    rm_rf("$dir2/DrakX-screenshots");
