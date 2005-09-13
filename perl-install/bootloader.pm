@@ -271,6 +271,11 @@ sub read_grub_menu_lst {
     }
     $b{method} = $b{splashimage} ? 'grub-graphic' :  'grub-menu';
 
+    if ($b{splashimage} =~ m!^/boot! && ! -e "$::prefix$b{splashimage}") {
+	log::l("dropping bootloader splashimage since $b{splashimage} doesn't exist");
+	delete $b{splashimage};
+    }
+
     \%b;
 }
 
@@ -1349,7 +1354,7 @@ sub write_grub {
 	$bootloader->{serial} ||= "--unit=$1 --speed=$2";
 	$bootloader->{terminal} ||= "--timeout=" . ($bootloader->{timeout} || 0) . " console serial";
     } elsif ($bootloader->{splashimage} eq '' && $bootloader->{method} eq 'grub-graphic') {
-	$bootloader->{splashimage} ||= $file2grub->("/boot/grub/mdv-grub_splash.xpm.gz");
+	$bootloader->{splashimage} ||= '/boot/grub/mdv-grub_splash.xpm.gz';
 	$bootloader->{viewport} ||= "3 2 77 22";
 	$bootloader->{shade} ||= "1";
     } elsif ($bootloader->{method} eq 'grub-menu') {
