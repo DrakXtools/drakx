@@ -1632,6 +1632,8 @@ sub migrate_device_names {
 
 sub use_root_part {
     my ($all_hds, $part, $o_in) = @_;
+    return if $::local_install;
+
     my $migrate_device_names;
     {
 	my $handle = any::inspect($part, $::prefix) or internal_error();
