@@ -102,7 +102,7 @@ It's currently disabled.
 What would you like to do?"); #- FIXME : not used for now
 	      },
 	      data => sub {
-		  [ { type => "list", val => \$choice, list => [ ($gw_enabled ? N_("Disable") : N_("Enable")), N_("Reconfigure") ] } ];
+		  [ { type => "list", val => \$choice, list => [ ($gw_enabled ? N_("Disable") : N_("Enable")), N_("Reconfigure") ], format => \&translate } ];
 	      },
 	      post => sub {
 		  if ($choice eq "Enable") {
