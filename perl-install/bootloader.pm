@@ -925,11 +925,10 @@ sub method_choices {
     my ($all_hds) = @_;
     my $fstab = [ fs::get::fstab($all_hds) ];
     my $root_part = fs::get::root($fstab);
-    my $boot_part = fs::get::root($fstab, 'boot');
-    my $boot_disk = fs::get::part2hd($boot_part, $all_hds);
+    my $have_dmraid = find { fs::type::is_dmraid($_) } @{$all_hds->{hds}};
 
     grep {
-	(!/lilo/ || !isLoopback($root_part) && !fs::type::is_dmraid($boot_disk))
+	(!/lilo/ || !isLoopback($root_part) && !$have_dmraid)
 	  && (!/lilo-graphic/ || !detect_devices::matching_desc__regexp('ProSavageDDR'))
 	  && (!/grub/ || !isRAID($root_part));
     } method_choices_raw(1);
