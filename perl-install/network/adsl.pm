@@ -92,7 +92,6 @@ sub adsl_conf_backend {
        bewan =>
        {
         start => qq(
-modprobe pppoatm
 #  ActivationMode=1
 modprobe $bewan_module
 # wait for the modem to be set up:
@@ -321,6 +320,9 @@ user "$net->{adsl}{login}"
     #- useful during install, or in case the packages have been installed after the device has been plugged
     my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
     @modules or @modules = qw(ppp_synctty ppp_async ppp_generic n_hdlc); #- required for pppoe/pptp connections
+    #- pppoa connections need the pppoatm module
+    #- pppd should run "modprobe pppoatm", but it will fail during install
+    push @modules, 'pppoatm' if $adsl_type = 'pppoa';
     @modules && eval { modules::load(@modules) }
       or log::l("failed to load " . join(',', @modules), " modules: $@");
     $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
