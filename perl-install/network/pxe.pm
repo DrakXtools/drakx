@@ -15,7 +15,7 @@ our $pxelinux_config_file = $pxelinux_config_root . '/default';
 our $pxe_config_file = '/etc/pxe.conf';
 
 my @global_pxelinux_settings = qw(PROMPT DEFAULT DISPLAY TIMEOUT F1);
-my @append_settings = qw(initrd ramdisk_size vga display);
+my @append_settings = qw(initrd ramdisk_size vga display auto_install);
 my @automatic_settings = qw(method interface network server directory);
 
 our %vga_bios_to_resolution = (
