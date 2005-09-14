@@ -323,8 +323,9 @@ user "$net->{adsl}{login}"
     #- pppoa connections need the pppoatm module
     #- pppd should run "modprobe pppoatm", but it will fail during install
     push @modules, 'pppoatm' if $adsl_type = 'pppoa';
-    @modules && eval { modules::load(@modules) }
-      or log::l("failed to load " . join(',', @modules), " modules: $@");
+    foreach (@modules) {
+        eval { modules::load($_) } or log::l("failed to load $_ module: $@");
+    }
     $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
 }
 
