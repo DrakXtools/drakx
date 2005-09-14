@@ -136,7 +136,6 @@ foreach my $hw_class (@harddrake::data::tree) {
         $modules_conf->remove_alias_regexp('^(wlan|eth)[0-9]*$');
         modules::load_category($modules_conf, 'network/main|gigabit|usb|wireless|firewire|pcmcia');
         require network::ethernet;
-        network::ethernet::update_iftab();
         network::ethernet::configure_eth_aliases($modules_conf);
         $modules_conf->write;
         next;

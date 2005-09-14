@@ -141,6 +141,7 @@ sub configure_eth_aliases {
         }
     }
     $::isStandalone and $modules_conf->write;
+    update_iftab();
 }
 
 sub is_ifplugd_blacklisted {

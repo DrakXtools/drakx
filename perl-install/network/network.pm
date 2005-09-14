@@ -578,7 +578,6 @@ sub configure_network {
     my ($net, $in, $modules_conf) = @_;
     if (!$::testing) {
         require network::ethernet;
-        network::ethernet::update_iftab();
         network::ethernet::configure_eth_aliases($modules_conf);
 
         write_network_conf($net);
