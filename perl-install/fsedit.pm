@@ -128,7 +128,7 @@ sub get_hds {
     my @drives = detect_devices::hds();
 
     #- replace drives used in dmraid by the merged name
-    handle_dmraid(\@drives);
+    handle_dmraid(\@drives) if !$flags->{nodmraid};
 
     foreach my $hd (@drives) {
 	$hd->{file} = devices::make($hd->{device});
