@@ -255,7 +255,12 @@ sub configureNetwork {
     #- get current configuration of network device.
     require network::network;
     eval { network::network::read_net_conf($o->{net}) };
-    installStepsCall($o, $auto, 'configureNetwork') if !$o->{isUpgrade};
+    if (!$o->{isUpgrade}) {
+        installStepsCall($o, $auto, 'configureNetwork');
+    } else {
+        require network::ethernet;
+        network::ethernet::configure_eth_aliases($o->{modules_conf});
+    }
 }
 #------------------------------------------------------------------------------
 sub installUpdates {
