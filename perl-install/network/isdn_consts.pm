@@ -446,6 +446,14 @@ our @isdn_capi =
     driver => 'fcdslslusb',
     firmware => 'fdlubase.frm',
    },
+   {
+    vendor => 0x057c,
+    id => 0x3600,
+    description => 'AVM FRITZ!Card DSL USB v2.0',
+    bus => 'USB',
+    driver => 'fcdslusb2',
+    firmware => 'fds2base.frm',
+   },
   );
 
 
