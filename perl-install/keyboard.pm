@@ -253,9 +253,9 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "ku" => [ N_("_: keyboard\nKurdish (arabic script)"), "us",     "ku",    1 ],
  "ky" => [ N_("_: keyboard\nKyrgyz"),          "ky",             "ky",    1 ],
- "la" => [ N_("_: keyboard\nLatin American"), "la-latin1",       "la",    0 ],
+ "la" => [ N_("_: keyboard\nLatin American"), "la-latin1",       "latam",    0 ],
 # TODO: console map
- "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "lo",    1 ], 
+ "lao" => [ N_("_: keyboard\nLaotian"),	 "us",	            "la",    1 ],
 # "lt" => [ N_("_: keyboard\nLithuanian AZERTY (old)"), "lt-latin7", "lt(lt_a)", 0 ],
 #- TODO: write a console kbd map for lt_new
  "lt_new" => [ N_("_: keyboard\nLithuanian AZERTY (new)"), "lt-latin7", "lt(std)", 0 ],
