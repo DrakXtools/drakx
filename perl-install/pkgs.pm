@@ -1362,7 +1362,7 @@ sub selected_leaves {
     my ($packages) = @_;
     my $provides = $packages->{provides};
 
-    my @l = grep { ($_->flag_requested || $_->flag_installed) && !$_->flag_base } @{$packages->{depslist}};
+    my @l = grep { $_->flag_requested || $_->flag_installed } @{$packages->{depslist}};
 
     my %required_ids;
     foreach (@l) {
