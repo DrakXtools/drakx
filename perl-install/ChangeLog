@@ -1,3 +1,155 @@
+2005/09/14  Antoine Ginies  <aginies at mandriva.com> 
+
+	* network/pxe.pm: add auto_install option
+
+2005/09/14  Frederic Lepied  <flepied at mandriva.com>
+
+	* keyboard.pm: fixed Latin American (latam) and Laotian (la) xkb keyboard
+	names.
+
+	* Xconfig/card.pm: xorg 6.9
+
+2005/09/14  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/09/14  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* share/rpmsrate: add acroread7 l10n-* to be completed
+
+2005/09/14  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/09/14  Olivier Blin <oblin at mandriva.com>
+
+	* network/isdn_consts.pm: support AVM FRITZ!Card DSL USB v2.0
+
+2005/09/14  pjetur
+
+	* share/po/is.po: Clean up fuzzy entries
+
+2005/09/14  pmaryanov
+
+	* share/po/ru.po: updated translation
+
+2005/09/14  Pixel  <pixel at mandriva.com>
+
+	* share/upgrade-map.conectiva.10,
+	share/upgrade/conectiva.10/pre.remove-conflicting-files.sh,
+	share/upgrade/conectiva.10/pre.merge-groups.sh,
+	share/upgrade/conectiva.10/map, share/list.xml, install_any.pm: add
+	upgrade script for conectiva
+
+	* pkgs.pm: add upgrade script for conectiva
+	do have all useful info in selected leaves, including base packages,
+	it won't be much longer but we can precise choices like lilo vs grub
+	do log the prefered choice (esp. to debug lilo vs grub)
+
+	* fs/dmraid.pm: log what dmraid -ccs and -ccr returns
+
+	* diskdrake/resize_ext2.pm: don't succeed if resize2fs failed
+
+	* run_program.pm: force our tmpdir to /root/tmp when root and not
+	isInstall
+	(fixes installkernel being called with sudo and not sudo -H) (thanks to
+	fred crozat!)
+
+	* install2.pm, fsedit.pm: new option "nodmraid" do ensure we don't use
+	dmraid
+	(useful since dmraid can be unused by the user but still half working as
+	far as dmraid knows)
+
+	* bootloader.pm: if we have dmraid devices, use grub, and not only if the
+	boot device is on dmraid (bugzilla #18386)
+
+2005/09/14  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* share/po/fr.po: Fix two typos
+
+	* drakxtools.spec: Make drakxtools require gtkdialogs for urpmi --gui
+
+2005/09/14  tbednarski
+
+	* share/po/pl.po: translation updates
+
+2005/09/13  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: There is no need manually specifying font name, because we've
+	already handled
+	it perfectly in fontconfig.
+
+2005/09/13  mbukovjan
+
+	* share/po/cs.po: Updated Czech translation.
+
+2005/09/13  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: fix device path for HCF modems
+
+	* standalone/drakgw: fix untranslated messages (#17969)
+
+	* mdk-stage1/network.c: add some log message about interface auto
+	detection
+
+	* network/tools.pm: fix start/stop of interfaces that are not set to start
+	on boot
+
+2005/09/13  Pixel  <pixel at mandriva.com>
+
+	* install_any.pm: migrate fstab when upgrading an alien distro (should be
+	done always?)
+	when taking screenshot during pkgs install, we can be chrooted
+	for now, disable FTP in media_browser since we don't handle it (#16088)
+
+	* install_steps.pm: migrate fstab when upgrading an alien distro (should
+	be done always?)
+	better call Xconfig::various::runlevel() directly since it's not always
+	called
+
+	* install2.pm: it seems we don't need re-ordering steps anymore for
+	upgrading
+	(otherwise we would need to have miscellaneous before doPartitionDisks
+	so that useSupermount is correctly set)
+
+	* share/upgrade-map.conectiva.10: remove a lot of unneeded devel packages
+
+	* ugtk2.pm: when taking screenshot during pkgs install, we can be
+	chrooted, in that case the icon is not accessible
+
+2005/09/13  rstandtke
+
+	* share/po/de.po: update
+
+2005/09/13  tsdgeos
+
+	* share/po/ca.po: updating drakx
+
+2005/09/13  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/fr.po: update (Stéphane Teletchéa)
+
+2005/09/13  Warly  <warly at mandriva.com>
+
+	* share/logo-mandriva.png: new installation banner
+
 2005/09/13  David Baudens  <baudens at mandriva.com>
 
 	* share/rpmsrate: Fix previous errors
