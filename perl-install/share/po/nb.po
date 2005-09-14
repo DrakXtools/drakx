@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2005-09-14 19:41+0800\n"
+"POT-Creation-Date: 2005-09-03 01:06+0800\n"
 "PO-Revision-Date: 2005-08-30 16:28+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norwegian Bokmål <nb@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 "skrivebeskyttelsen,\n"
 "plugg i nøkkelen igjen og last Mandriva Move på nytt."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1326
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1320
 #, c-format
 msgid "Reboot"
 msgstr "Restart"
@@ -186,19 +186,18 @@ msgstr "Oppdager og setter opp enheter.."
 #: diskdrake/interactive.pm:243 diskdrake/interactive.pm:404
 #: diskdrake/interactive.pm:422 diskdrake/interactive.pm:558
 #: diskdrake/interactive.pm:563 diskdrake/smbnfs_gtk.pm:41 do_pkgs.pm:19
-#: do_pkgs.pm:39 do_pkgs.pm:52 fsedit.pm:209 install_any.pm:1770
-#: install_any.pm:1822 install_steps.pm:81 install_steps_interactive.pm:37
-#: interactive/http.pm:117 interactive/http.pm:118 network/ndiswrapper.pm:27
-#: network/ndiswrapper.pm:42 network/ndiswrapper.pm:89
-#: network/ndiswrapper.pm:101 network/netconnect.pm:834
-#: network/netconnect.pm:933 network/netconnect.pm:937
-#: network/netconnect.pm:941 network/netconnect.pm:946
-#: network/netconnect.pm:1091 network/netconnect.pm:1095
-#: network/netconnect.pm:1214 network/netconnect.pm:1219
-#: network/netconnect.pm:1239 network/netconnect.pm:1393
-#: network/thirdparty.pm:306 network/thirdparty.pm:313
-#: network/thirdparty.pm:357 network/thirdparty.pm:359
-#: network/thirdparty.pm:380 network/thirdparty.pm:404
+#: do_pkgs.pm:37 fsedit.pm:209 install_any.pm:1754 install_any.pm:1806
+#: install_steps.pm:81 install_steps_interactive.pm:37 interactive/http.pm:117
+#: interactive/http.pm:118 network/ndiswrapper.pm:27 network/ndiswrapper.pm:42
+#: network/ndiswrapper.pm:89 network/ndiswrapper.pm:101
+#: network/netconnect.pm:908 network/netconnect.pm:912
+#: network/netconnect.pm:916 network/netconnect.pm:921
+#: network/netconnect.pm:1065 network/netconnect.pm:1069
+#: network/netconnect.pm:1187 network/netconnect.pm:1192
+#: network/netconnect.pm:1212 network/netconnect.pm:1365
+#: network/thirdparty.pm:266 network/thirdparty.pm:273
+#: network/thirdparty.pm:309 network/thirdparty.pm:311
+#: network/thirdparty.pm:332 network/thirdparty.pm:356
 #: printer/printerdrake.pm:244 printer/printerdrake.pm:251
 #: printer/printerdrake.pm:276 printer/printerdrake.pm:422
 #: printer/printerdrake.pm:427 printer/printerdrake.pm:440
@@ -216,13 +215,13 @@ msgstr "Oppdager og setter opp enheter.."
 #: printer/printerdrake.pm:2272 printer/printerdrake.pm:2290
 #: printer/printerdrake.pm:2299 printer/printerdrake.pm:2308
 #: printer/printerdrake.pm:2319 printer/printerdrake.pm:2383
-#: printer/printerdrake.pm:2478 printer/printerdrake.pm:3037
-#: printer/printerdrake.pm:3321 printer/printerdrake.pm:3327
-#: printer/printerdrake.pm:3891 printer/printerdrake.pm:3895
-#: printer/printerdrake.pm:3899 printer/printerdrake.pm:4360
-#: printer/printerdrake.pm:4601 printer/printerdrake.pm:4629
-#: printer/printerdrake.pm:4706 printer/printerdrake.pm:4772
-#: printer/printerdrake.pm:4892 standalone/drakTermServ:394
+#: printer/printerdrake.pm:2478 printer/printerdrake.pm:3032
+#: printer/printerdrake.pm:3316 printer/printerdrake.pm:3322
+#: printer/printerdrake.pm:3886 printer/printerdrake.pm:3890
+#: printer/printerdrake.pm:3894 printer/printerdrake.pm:4355
+#: printer/printerdrake.pm:4596 printer/printerdrake.pm:4620
+#: printer/printerdrake.pm:4697 printer/printerdrake.pm:4763
+#: printer/printerdrake.pm:4883 standalone/drakTermServ:394
 #: standalone/drakTermServ:464 standalone/drakTermServ:473
 #: standalone/drakTermServ:774 standalone/drakTermServ:781
 #: standalone/drakTermServ:802 standalone/drakTermServ:849
@@ -252,9 +251,9 @@ msgstr "Oppdager og setter opp enheter.."
 #: standalone/draksambashare:1168 standalone/draksambashare:1177
 #: standalone/draksambashare:1186 standalone/draksambashare:1206
 #: standalone/draksambashare:1214 standalone/draksambashare:1226
-#: standalone/draksplash:162 standalone/drakxtv:107
-#: standalone/finish-install:49 standalone/logdrake:171
-#: standalone/logdrake:440 standalone/logdrake:445 standalone/scannerdrake:59
+#: standalone/draksplash:163 standalone/drakxtv:107
+#: standalone/finish-install:49 standalone/logdrake:168
+#: standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59
 #: standalone/scannerdrake:202 standalone/scannerdrake:261
 #: standalone/scannerdrake:715 standalone/scannerdrake:726
 #: standalone/scannerdrake:865 standalone/scannerdrake:876
@@ -497,38 +496,39 @@ msgstr ""
 msgid "Custom"
 msgstr "Skreddersydd"
 
-#: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1326
+#: Xconfig/main.pm:115 diskdrake/dav.pm:26 help.pm:14
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1320
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
-#: printer/printerdrake.pm:4701 printer/printerdrake.pm:5165
-#: standalone/drakhosts:263 standalone/drakroam:168 standalone/draksplash:93
-#: standalone/logdrake:176 standalone/net_applet:82
+#: printer/printerdrake.pm:4692 printer/printerdrake.pm:5147
+#: standalone/drakhosts:263 standalone/drakids:62 standalone/drakids:71
+#: standalone/drakids:79 standalone/drakroam:168 standalone/draksplash:94
+#: standalone/logdrake:173 standalone/net_applet:82
 #: standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
 msgstr "Avslutt"
 
-#: Xconfig/main.pm:129
+#: Xconfig/main.pm:117
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafikk-kort"
 
-#: Xconfig/main.pm:132 Xconfig/monitor.pm:110
+#: Xconfig/main.pm:120 Xconfig/monitor.pm:110
 #, c-format
 msgid "Monitor"
 msgstr "Skjerm"
 
-#: Xconfig/main.pm:135 Xconfig/resolution_and_depth.pm:287
+#: Xconfig/main.pm:123 Xconfig/resolution_and_depth.pm:287
 #, c-format
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: Xconfig/main.pm:138
+#: Xconfig/main.pm:128
 #, c-format
 msgid "Test"
 msgstr "Test"
 
-#: Xconfig/main.pm:143 diskdrake/dav.pm:65 diskdrake/interactive.pm:448
+#: Xconfig/main.pm:133 diskdrake/dav.pm:65 diskdrake/interactive.pm:448
 #: diskdrake/removable.pm:24 diskdrake/smbnfs_gtk.pm:79
 #: printer/printerdrake.pm:1125 standalone/drakfont:491
 #: standalone/drakfont:554
@@ -536,12 +536,12 @@ msgstr "Test"
 msgid "Options"
 msgstr "Valg"
 
-#: Xconfig/main.pm:178
+#: Xconfig/main.pm:168
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
 msgstr "Din Xorg-oppsettsfil er ødelagt, vi vil ignorere den."
 
-#: Xconfig/main.pm:196
+#: Xconfig/main.pm:186
 #, c-format
 msgid ""
 "Keep the changes?\n"
@@ -670,38 +670,38 @@ msgstr "Grafikk-kort: %s"
 #: standalone/drakbackup:4035 standalone/drakbackup:4079
 #: standalone/drakconnect:158 standalone/drakconnect:852
 #: standalone/drakconnect:939 standalone/drakconnect:1030
-#: standalone/drakfont:575 standalone/drakfont:585 standalone/draksplash:173
-#: standalone/drakups:212 standalone/net_monitor:339 ugtk2.pm:392 ugtk2.pm:490
-#: ugtk2.pm:899 ugtk2.pm:922
+#: standalone/drakfont:575 standalone/drakfont:585 standalone/draksplash:174
+#: standalone/drakups:212 standalone/net_monitor:339 ugtk2.pm:412 ugtk2.pm:510
+#: ugtk2.pm:919 ugtk2.pm:942
 #, c-format
 msgid "Ok"
 msgstr "Ok"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
-#: help.pm:444 install_steps_gtk.pm:458 install_steps_interactive.pm:429
-#: install_steps_interactive.pm:834 interactive.pm:120 interactive.pm:437
+#: help.pm:444 install_steps_gtk.pm:458 install_steps_interactive.pm:425
+#: install_steps_interactive.pm:830 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
-#: printer/printerdrake.pm:3971 standalone/drakautoinst:215
+#: printer/printerdrake.pm:3966 standalone/drakautoinst:215
 #: standalone/drakbackup:1350 standalone/drakbackup:3901
 #: standalone/drakbackup:3905 standalone/drakbackup:3963
 #: standalone/drakconnect:157 standalone/drakconnect:937
 #: standalone/drakconnect:1029 standalone/drakfont:585 standalone/drakfont:663
-#: standalone/drakfont:740 standalone/draksplash:173 standalone/drakups:219
-#: standalone/logdrake:176 standalone/net_monitor:338 ugtk2.pm:386
-#: ugtk2.pm:488 ugtk2.pm:497 ugtk2.pm:899
+#: standalone/drakfont:740 standalone/draksplash:174 standalone/drakups:219
+#: standalone/logdrake:173 standalone/net_monitor:338 ugtk2.pm:406
+#: ugtk2.pm:508 ugtk2.pm:517 ugtk2.pm:919
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:620 interactive.pm:567
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:620 interactive.pm:564
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
 #: standalone/drakfont:510 standalone/draknfs:206 standalone/drakperm:133
-#: standalone/draksambashare:314 standalone/draksec:342 standalone/draksec:344
-#: standalone/draksec:362 standalone/draksec:364 ugtk2.pm:1031 ugtk2.pm:1032
+#: standalone/draksambashare:314 standalone/draksec:336 standalone/draksec:338
+#: standalone/draksec:356 standalone/draksec:358 ugtk2.pm:1051 ugtk2.pm:1052
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
@@ -839,7 +839,7 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Hva slags norm bruker TV'en din?"
 
-#: Xconfig/xfree.pm:648
+#: Xconfig/xfree.pm:647
 #, c-format
 msgid ""
 "_:weird aspect ratio\n"
@@ -929,7 +929,7 @@ msgstr "Første sektor av root-partisjon"
 msgid "On Floppy"
 msgstr "På diskett"
 
-#: any.pm:236 help.pm:739 printer/printerdrake.pm:4357
+#: any.pm:236 help.pm:739 printer/printerdrake.pm:4352
 #, c-format
 msgid "Skip"
 msgstr "Hopp over"
@@ -1008,7 +1008,7 @@ msgid "Force No Local APIC"
 msgstr "Tving ingen lokal APIC"
 
 #: any.pm:294 any.pm:650 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
-#: network/netconnect.pm:568 printer/printerdrake.pm:1888
+#: network/netconnect.pm:563 printer/printerdrake.pm:1888
 #: printer/printerdrake.pm:2009 standalone/drakbackup:1630
 #: standalone/drakbackup:3504 standalone/drakups:299
 #, c-format
@@ -1272,7 +1272,7 @@ msgstr ""
 #: any.pm:636 diskdrake/dav.pm:66 diskdrake/hd_gtk.pm:154
 #: diskdrake/removable.pm:26 diskdrake/smbnfs_gtk.pm:81 help.pm:530
 #: interactive/http.pm:151 printer/printerdrake.pm:197
-#: printer/printerdrake.pm:382 printer/printerdrake.pm:5165
+#: printer/printerdrake.pm:382 printer/printerdrake.pm:5147
 #: standalone/drakbackup:2717 standalone/scannerdrake:668
 #: standalone/scannerdrake:818
 #, c-format
@@ -1365,7 +1365,7 @@ msgstr "Bruk Unicode som standard"
 msgid "All languages"
 msgstr "Alle språk"
 
-#: any.pm:840 help.pm:566 help.pm:855 install_steps_interactive.pm:955
+#: any.pm:840 help.pm:566 help.pm:855 install_steps_interactive.pm:951
 #, c-format
 msgid "Country / Region"
 msgstr "Land"
@@ -1396,8 +1396,8 @@ msgstr "Avansert"
 msgid "Input method:"
 msgstr "Inndata-metode:"
 
-#: any.pm:856 install_any.pm:417 network/netconnect.pm:306
-#: network/netconnect.pm:311 network/netconnect.pm:1205 network/wireless.pm:7
+#: any.pm:856 install_any.pm:417 network/netconnect.pm:301
+#: network/netconnect.pm:306 network/netconnect.pm:1178 network/wireless.pm:7
 #: printer/printerdrake.pm:105 printer/printerdrake.pm:2430
 #, c-format
 msgid "None"
@@ -1457,13 +1457,12 @@ msgstr "Du kan eksportere med NFS eller SMB. Velg den du ønsker å bruke."
 msgid "Launch userdrake"
 msgstr "Start userdrake"
 
-#: any.pm:1025 printer/printerdrake.pm:4196 printer/printerdrake.pm:4199
-#: printer/printerdrake.pm:4200 printer/printerdrake.pm:4201
-#: printer/printerdrake.pm:5483 standalone/drakTermServ:294
+#: any.pm:1025 printer/printerdrake.pm:4191 printer/printerdrake.pm:4194
+#: printer/printerdrake.pm:4195 printer/printerdrake.pm:4196
+#: printer/printerdrake.pm:5459 standalone/drakTermServ:294
 #: standalone/drakbackup:4097 standalone/drakbug:126 standalone/drakfont:498
-#: standalone/drakids:64 standalone/drakids:77 standalone/drakids:85
 #: standalone/draknfs:210 standalone/net_monitor:117
-#: standalone/printerdrake:583
+#: standalone/printerdrake:565
 #, c-format
 msgid "Close"
 msgstr "Lukk"
@@ -1627,7 +1626,7 @@ msgstr "sikkerhetsoppsett (SASL/Kerberos)"
 msgid "Authentication Active Directory"
 msgstr "Autentisering for Active Directory"
 
-#: authentication.pm:111 diskdrake/smbnfs_gtk.pm:181
+#: authentication.pm:111 authentication.pm:150 diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Domain"
 msgstr "Domene"
@@ -1658,6 +1657,11 @@ msgstr "LDAP-bruker som får søke i Active Directory"
 #, c-format
 msgid "Password for user"
 msgstr "Passord for bruker"
+
+#: authentication.pm:118 standalone/drakroam:46
+#, c-format
+msgid "Encryption"
+msgstr "Kryptering"
 
 #: authentication.pm:129
 #, c-format
@@ -1710,11 +1714,6 @@ msgstr ""
 msgid "Authentication Windows Domain"
 msgstr "Autentisering Windows-Domene"
 
-#: authentication.pm:150
-#, c-format
-msgid "Active Directory Realm "
-msgstr ""
-
 #: authentication.pm:153
 #, c-format
 msgid "Domain Admin User Name"
@@ -1752,7 +1751,7 @@ msgstr "Intet passord"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: authentication.pm:188 network/netconnect.pm:311 network/netconnect.pm:569
+#: authentication.pm:188 network/netconnect.pm:306 network/netconnect.pm:564
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
@@ -1764,7 +1763,7 @@ msgid "Can not use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast uten NIS-domene"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: bootloader.pm:764
+#: bootloader.pm:731
 #, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
@@ -1779,42 +1778,42 @@ msgstr ""
 "vent for standardoppstart.\n"
 "\n"
 
-#: bootloader.pm:904
+#: bootloader.pm:871
 #, c-format
 msgid "LILO with graphical menu"
 msgstr "LILO med grafisk meny"
 
-#: bootloader.pm:905
+#: bootloader.pm:872
 #, c-format
 msgid "LILO with text menu"
 msgstr "LILO med tekstmeny"
 
-#: bootloader.pm:906
+#: bootloader.pm:873
 #, c-format
 msgid "GRUB with graphical menu"
 msgstr "GRUB med grafisk meny"
 
-#: bootloader.pm:907
+#: bootloader.pm:874
 #, c-format
 msgid "GRUB with text menu"
 msgstr "GRUB med tekstmeny"
 
-#: bootloader.pm:908
+#: bootloader.pm:875
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:986
+#: bootloader.pm:953
 #, c-format
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
-#: bootloader.pm:1476
+#: bootloader.pm:1442
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
 msgstr "Du kan ikke installere oppstartslasteren på en %s-partisjon\n"
 
-#: bootloader.pm:1516
+#: bootloader.pm:1482
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
@@ -1823,7 +1822,7 @@ msgstr ""
 "Ditt oppsett av oppstartslaster trenger å oppdateres pga. rekkefølgen på "
 "dine partisjoner har blitt endret"
 
-#: bootloader.pm:1529
+#: bootloader.pm:1495
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
@@ -1832,7 +1831,7 @@ msgstr ""
 "Oppstartslasteren kan ikke bli installert korrekt. Du må gjøre nødoppstart "
 "og velge \"%s\""
 
-#: bootloader.pm:1530
+#: bootloader.pm:1496
 #, c-format
 msgid "Re-install Boot Loader"
 msgstr "Installer oppstartslaster på nytt"
@@ -1872,12 +1871,12 @@ msgstr "1 minutt"
 msgid "%d seconds"
 msgstr "%d sekunder"
 
-#: common.pm:257
+#: common.pm:255
 #, c-format
 msgid "kdesu missing"
 msgstr "kdesu mangler"
 
-#: common.pm:260
+#: common.pm:258
 #, c-format
 msgid "consolehelper missing"
 msgstr "Konsollhjelper mangler"
@@ -2064,7 +2063,7 @@ msgstr "Taiwan"
 msgid "South Africa"
 msgstr "Sør-Afrika"
 
-#: crypto.pm:77 crypto.pm:112 lang.pm:416 network/netconnect.pm:45
+#: crypto.pm:77 crypto.pm:107 lang.pm:416 network/netconnect.pm:45
 #, c-format
 msgid "United States"
 msgstr "USA"
@@ -2244,7 +2243,7 @@ msgstr "Type"
 
 #. -PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: diskdrake/hd_gtk.pm:359 diskdrake/interactive.pm:455
-#: standalone/drakperm:123 standalone/printerdrake:248
+#: standalone/drakperm:123 standalone/printerdrake:246
 #, c-format
 msgid "Delete"
 msgstr "Slett"
@@ -2921,7 +2920,7 @@ msgstr "Størrelse: %s\n"
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
 
-#: diskdrake/interactive.pm:1275 network/thirdparty.pm:316
+#: diskdrake/interactive.pm:1275
 #, c-format
 msgid "Info: "
 msgstr "Info: "
@@ -2961,7 +2960,7 @@ msgstr "Denne krypteringsnøkkelen er for enkel (må være minst %d tegn lang)"
 msgid "The encryption keys do not match"
 msgstr "Krypteringsnøklene stemmer ikke overens"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1041
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1016
 #: standalone/drakconnect:419 standalone/drakroam:112
 #, c-format
 msgid "Encryption key"
@@ -3026,51 +3025,27 @@ msgstr "Søk gjennom tjenere"
 msgid "Search new servers"
 msgstr "Søk nye tjenere"
 
-#: do_pkgs.pm:16 do_pkgs.pm:49
+#: do_pkgs.pm:16 do_pkgs.pm:34
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Pakken %s må installeres. Vil du installere den?"
 
-#: do_pkgs.pm:19 do_pkgs.pm:39 do_pkgs.pm:52 printer/printerdrake.pm:4037
+#: do_pkgs.pm:19 do_pkgs.pm:37 printer/printerdrake.pm:4032
 #, c-format
 msgid "Could not install the %s package!"
 msgstr "Kunne ikke installere %s-pakken!"
 
-#: do_pkgs.pm:24 do_pkgs.pm:57
+#: do_pkgs.pm:24 do_pkgs.pm:42
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Obligatorisk pakke %s mangler"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:271 install_steps_interactive.pm:1311
-#: keyboard.pm:391 network/ndiswrapper.pm:95 network/netconnect.pm:460
-#: printer/printerdrake.pm:1429 printer/printerdrake.pm:2461
-#: printer/printerdrake.pm:2561 printer/printerdrake.pm:2607
-#: printer/printerdrake.pm:2674 printer/printerdrake.pm:2709
-#: printer/printerdrake.pm:3043 printer/printerdrake.pm:3050
-#: printer/printerdrake.pm:4036 printer/printerdrake.pm:4365
-#: printer/printerdrake.pm:4485 printer/printerdrake.pm:5644
-#: standalone/drakTermServ:326 standalone/drakTermServ:1205
-#: standalone/drakTermServ:1266 standalone/drakTermServ:1931
-#: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:133
-#: standalone/drakclock:224 standalone/drakconnect:973 standalone/drakperm:380
-#: standalone/drakperm:390 standalone/drakups:27 standalone/harddrake2:479
-#: standalone/localedrake:43 standalone/scannerdrake:51
-#: standalone/scannerdrake:940
-#, c-format
-msgid "Warning"
-msgstr "Advarsel"
-
-#: do_pkgs.pm:35 standalone/drakbackup:4109 standalone/harddrake2:479
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "De følgende pakkerne trengs å bli installert:\n"
-
-#: do_pkgs.pm:202
+#: do_pkgs.pm:187
 #, c-format
 msgid "Installing packages..."
 msgstr "Installerer pakke..."
 
-#: do_pkgs.pm:247
+#: do_pkgs.pm:232
 #, c-format
 msgid "Removing packages..."
 msgstr "Fjerner pakekr..."
@@ -3337,7 +3312,7 @@ msgstr "Ikke nok plass for auto-allokering"
 msgid "Nothing to do"
 msgstr "Ingenting å gjøre"
 
-#: harddrake/data.pm:62 install_any.pm:1705
+#: harddrake/data.pm:62 install_any.pm:1689
 #, c-format
 msgid "Floppy"
 msgstr "Diskett"
@@ -3347,12 +3322,12 @@ msgstr "Diskett"
 msgid "Zip"
 msgstr "Zip"
 
-#: harddrake/data.pm:88 install_any.pm:1706
+#: harddrake/data.pm:88 install_any.pm:1690
 #, c-format
 msgid "Hard Disk"
 msgstr "Harddisk"
 
-#: harddrake/data.pm:97 install_any.pm:1707
+#: harddrake/data.pm:97 install_any.pm:1691
 #, c-format
 msgid "CDROM"
 msgstr "CDROM"
@@ -3442,7 +3417,7 @@ msgstr "Bluetooth-enheter"
 msgid "Ethernetcard"
 msgstr "Ethernettkort"
 
-#: harddrake/data.pm:282 network/netconnect.pm:481
+#: harddrake/data.pm:282 network/netconnect.pm:476
 #, c-format
 msgid "Modem"
 msgstr "Modem"
@@ -3463,7 +3438,7 @@ msgid "AGP controllers"
 msgstr "AGP-kontrollere"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:987
+#: install_steps_interactive.pm:983
 #, c-format
 msgid "Printer"
 msgstr "Skriver"
@@ -3530,7 +3505,7 @@ msgid "Bridges and system controllers"
 msgstr "Broer og systemkontrollere"
 
 #: harddrake/data.pm:447 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:947 standalone/keyboarddrake:29
+#: install_steps_interactive.pm:943 standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -3540,7 +3515,7 @@ msgstr "Tastatur"
 msgid "Tablet and touchscreen"
 msgstr "Tablet og touchscreen"
 
-#: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:980
+#: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:976
 #, c-format
 msgid "Mouse"
 msgstr "Mus"
@@ -3658,6 +3633,24 @@ msgstr "Driver:"
 #, c-format
 msgid "Trouble shooting"
 msgstr "Feilsøking"
+
+#: harddrake/sound.pm:271 install_steps_interactive.pm:1305 keyboard.pm:391
+#: network/ndiswrapper.pm:95 network/netconnect.pm:455
+#: printer/printerdrake.pm:1429 printer/printerdrake.pm:2461
+#: printer/printerdrake.pm:2561 printer/printerdrake.pm:2607
+#: printer/printerdrake.pm:2674 printer/printerdrake.pm:2709
+#: printer/printerdrake.pm:3038 printer/printerdrake.pm:3045
+#: printer/printerdrake.pm:4031 printer/printerdrake.pm:4360
+#: printer/printerdrake.pm:4480 printer/printerdrake.pm:5620
+#: standalone/drakTermServ:326 standalone/drakTermServ:1205
+#: standalone/drakTermServ:1266 standalone/drakTermServ:1931
+#: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:133
+#: standalone/drakclock:224 standalone/drakconnect:973 standalone/drakups:27
+#: standalone/harddrake2:479 standalone/localedrake:43
+#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#, c-format
+msgid "Warning"
+msgstr "Advarsel"
 
 #: harddrake/sound.pm:271
 #, c-format
@@ -3866,7 +3859,7 @@ msgstr ""
 "maskinen din på nytt."
 
 #: help.pm:14 install_steps_gtk.pm:542 install_steps_interactive.pm:92
-#: install_steps_interactive.pm:738 standalone/drakautoinst:214
+#: install_steps_interactive.pm:734 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
 msgstr "Godta"
@@ -3965,10 +3958,10 @@ msgstr "Brukernavn"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
 #: install_steps_gtk.pm:685 interactive.pm:436 interactive/newt.pm:321
-#: network/thirdparty.pm:370 printer/printerdrake.pm:3973
+#: network/thirdparty.pm:322 printer/printerdrake.pm:3968
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
-#: standalone/drakbackup:4083 ugtk2.pm:490
+#: standalone/drakbackup:4083 ugtk2.pm:510
 #, c-format
 msgid "Next"
 msgstr "Neste"
@@ -4193,7 +4186,7 @@ msgstr "Utvikling"
 msgid "Graphical Environment"
 msgstr "Grafisk miljø"
 
-#: help.pm:146 install_steps_gtk.pm:235 install_steps_interactive.pm:646
+#: help.pm:146 install_steps_gtk.pm:235 install_steps_interactive.pm:642
 #, c-format
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
@@ -4203,7 +4196,7 @@ msgstr "Individuelt pakkevalg"
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: help.pm:146 install_steps_interactive.pm:604
+#: help.pm:146 install_steps_interactive.pm:600
 #, c-format
 msgid "With X"
 msgstr "Med X"
@@ -4293,17 +4286,17 @@ msgstr ""
 "en annen installasjon. Se det andre tipset i det siste steget om hvordan du\n"
 "kan lage en slik diskett."
 
-#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:939
+#: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:925
 #: interactive.pm:161 modules/interactive.pm:71 standalone/drakbackup:2517
-#: standalone/draksec:54 standalone/harddrake2:309 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:309 ugtk2.pm:918 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Nei"
 
-#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:939 interactive.pm:161
+#: help.pm:180 help.pm:285 help.pm:444 install_any.pm:925 interactive.pm:161
 #: modules/interactive.pm:71 printer/printerdrake.pm:883
 #: printer/printerdrake.pm:898 standalone/drakbackup:2517
-#: standalone/draksec:55 standalone/harddrake2:308 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:55 standalone/harddrake2:308 ugtk2.pm:918 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Ja"
@@ -4407,7 +4400,7 @@ msgstr ""
 "valget installerer dessuten en tidstjener som kan brukes av andre maskiner\n"
 "på ditt lokale nettverk."
 
-#: help.pm:217 install_steps_interactive.pm:882
+#: help.pm:217 install_steps_interactive.pm:878
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din er satt til GMT"
@@ -4880,17 +4873,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Generer autoinstallasjonsdiskett"
 
-#: help.pm:409 install_steps_interactive.pm:1337
+#: help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: help.pm:409 install_steps_interactive.pm:1337
+#: help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Automated"
 msgstr "Automatisert"
 
-#: help.pm:409 install_steps_interactive.pm:1340
+#: help.pm:409 install_steps_interactive.pm:1334
 #, c-format
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
@@ -4945,10 +4938,10 @@ msgstr ""
 "ødelagte blokker på disken."
 
 #: help.pm:431 install_steps_gtk.pm:392 interactive.pm:437
-#: interactive/newt.pm:318 printer/printerdrake.pm:3971
+#: interactive/newt.pm:318 printer/printerdrake.pm:3966
 #: standalone/drakTermServ:363 standalone/drakbackup:3914
 #: standalone/drakbackup:3953 standalone/drakbackup:4064
-#: standalone/drakbackup:4079 ugtk2.pm:488
+#: standalone/drakbackup:4079 ugtk2.pm:508
 #, c-format
 msgid "Previous"
 msgstr "Forrige"
@@ -5721,7 +5714,7 @@ msgstr ""
 msgid "pdq"
 msgstr "pdq"
 
-#: help.pm:765 printer/cups.pm:117 printer/data.pm:129
+#: help.pm:765 printer/cups.pm:115 printer/data.pm:121
 #, c-format
 msgid "CUPS"
 msgstr "CUPS"
@@ -5782,8 +5775,8 @@ msgstr ""
 "faktisk er til stede på ditt system, så kan du klikke på denne knappen for\n"
 "å velge en annen driver."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1014
-#: install_steps_interactive.pm:1031
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1010
+#: install_steps_interactive.pm:1027
 #, c-format
 msgid "Sound card"
 msgstr "Lydkort"
@@ -5936,13 +5929,13 @@ msgstr ""
 "å se\n"
 "igjennom dette."
 
-#: help.pm:855 install_steps_interactive.pm:878
-#: install_steps_interactive.pm:973 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:874
+#: install_steps_interactive.pm:969 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: help.pm:855 install_steps_interactive.pm:1047
+#: help.pm:855 install_steps_interactive.pm:1043
 #, c-format
 msgid "TV card"
 msgstr "TV-kort"
@@ -5957,33 +5950,33 @@ msgstr "ISDN-kort"
 msgid "Graphical Interface"
 msgstr "Grafisk grensesnitt"
 
-#: help.pm:855 install_any.pm:1728 install_steps_interactive.pm:1065
+#: help.pm:855 install_any.pm:1712 install_steps_interactive.pm:1061
 #: standalone/drakbackup:2035
 #, c-format
 msgid "Network"
 msgstr "Nettverk"
 
-#: help.pm:855 install_steps_interactive.pm:1077
+#: help.pm:855 install_steps_interactive.pm:1073
 #, c-format
 msgid "Proxies"
 msgstr "Proxyer"
 
-#: help.pm:855 install_steps_interactive.pm:1088
+#: help.pm:855 install_steps_interactive.pm:1084
 #, c-format
 msgid "Security Level"
 msgstr "Sikkerhetsnivå"
 
-#: help.pm:855 install_steps_interactive.pm:1102 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1098 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Brannmur"
 
-#: help.pm:855 install_steps_interactive.pm:1118
+#: help.pm:855 install_steps_interactive.pm:1114
 #, c-format
 msgid "Bootloader"
 msgstr "Oppstartslaster"
 
-#: help.pm:855 install_steps_interactive.pm:1131 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1127 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6041,7 +6034,7 @@ msgstr ""
 "dette betyr vanligvis at oppstartsdisketten din ikke er i synk med "
 "installasjonsmediet (opprett en nyere diskett)"
 
-#: install2.pm:168
+#: install2.pm:169
 #, c-format
 msgid "You must also format %s"
 msgstr "Du må også formatere %s"
@@ -6066,8 +6059,8 @@ msgstr ""
 "\n"
 "Har du flere installasjonsmedier du vil sette opp?"
 
-#: install_any.pm:417 printer/printerdrake.pm:3301
-#: printer/printerdrake.pm:3308 standalone/scannerdrake:182
+#: install_any.pm:417 printer/printerdrake.pm:3296
+#: printer/printerdrake.pm:3303 standalone/scannerdrake:182
 #: standalone/scannerdrake:190 standalone/scannerdrake:241
 #: standalone/scannerdrake:248
 #, c-format
@@ -6094,7 +6087,7 @@ msgstr "Nettverk (NFS)"
 msgid "Insert the CD 1 again"
 msgstr "Sett inn CD 1 igjen"
 
-#: install_any.pm:473 network/netconnect.pm:834 standalone/drakbackup:112
+#: install_any.pm:473 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "Ingen enheter funnet"
@@ -6109,7 +6102,7 @@ msgstr "Sett inn CDen"
 msgid "Unable to mount CD-ROM"
 msgstr "Kunne ikke montere CD-ROM"
 
-#: install_any.pm:516 install_any.pm:537
+#: install_any.pm:516 install_any.pm:535
 #, c-format
 msgid "URL of the mirror?"
 msgstr "Nettadresse til speilet?"
@@ -6134,7 +6127,7 @@ msgstr "Vertsnavn til NFS-monteringen ?"
 msgid "Directory"
 msgstr "Katalog"
 
-#: install_any.pm:575
+#: install_any.pm:571
 #, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
@@ -6143,22 +6136,22 @@ msgstr ""
 "Kan ikke finne pakkelistefil på dette speilet. VKontroller at adressen er "
 "riktig."
 
-#: install_any.pm:652
+#: install_any.pm:647
 #, c-format
 msgid "Removing packages prior to upgrade..."
 msgstr ""
 
-#: install_any.pm:694
+#: install_any.pm:679
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Ser på pakker som allerede er installert..."
 
-#: install_any.pm:698
+#: install_any.pm:683
 #, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Finner pakker som skal oppgraderes..."
 
-#: install_any.pm:776
+#: install_any.pm:761
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -6169,13 +6162,13 @@ msgstr ""
 "\n"
 "Sett inn CDen merket \"%s\" i stasjonen og trykk Ok når du er ferdig."
 
-#: install_any.pm:788
+#: install_any.pm:774
 #, c-format
 msgid "Copying in progress"
 msgstr "Kopiering pågår"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:930
+#: install_any.pm:916
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -6199,7 +6192,7 @@ msgstr ""
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: install_any.pm:953
+#: install_any.pm:939
 #, c-format
 msgid ""
 "The following packages will be removed to allow upgrading your system: %s\n"
@@ -6213,22 +6206,22 @@ msgstr ""
 " \n"
 "Ønsker du å fjerne disse pakkene?\n"
 
-#: install_any.pm:1389 partition_table.pm:597
+#: install_any.pm:1375 partition_table.pm:597
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
 
-#: install_any.pm:1623
+#: install_any.pm:1609
 #, c-format
 msgid "The following disk(s) were renamed:"
 msgstr "De følgende disk(ene) fikk nytt navn:"
 
-#: install_any.pm:1625
+#: install_any.pm:1611
 #, c-format
 msgid "%s (previously named as %s)"
 msgstr "%s (tidligere kalt %s)"
 
-#: install_any.pm:1665
+#: install_any.pm:1649
 #, c-format
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
@@ -6237,52 +6230,52 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Sjekk maskinvaren din for årsaken til dette problemet"
 
-#: install_any.pm:1709
+#: install_any.pm:1693
 #, c-format
 msgid "HTTP"
 msgstr "HTTP"
 
-#: install_any.pm:1709
+#: install_any.pm:1693
 #, c-format
 msgid "FTP"
 msgstr "FTP"
 
-#: install_any.pm:1709
+#: install_any.pm:1693
 #, c-format
 msgid "NFS"
 msgstr "NFS"
 
-#: install_any.pm:1732
+#: install_any.pm:1716
 #, c-format
 msgid "Please choose a media"
 msgstr "Velg et media"
 
-#: install_any.pm:1748
+#: install_any.pm:1732
 #, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Filen eksisterer allerede. Overskriv?"
 
-#: install_any.pm:1752
+#: install_any.pm:1736
 #, c-format
 msgid "Permission denied"
 msgstr "Adgang nektet"
 
-#: install_any.pm:1801
+#: install_any.pm:1785
 #, c-format
 msgid "Bad NFS name"
 msgstr "Ugyldig NFS-navn"
 
-#: install_any.pm:1822
+#: install_any.pm:1806
 #, c-format
 msgid "Bad media %s"
 msgstr "Feil i media %s"
 
-#: install_any.pm:1872
+#: install_any.pm:1853
 #, c-format
 msgid "Can not make screenshots before partitioning"
 msgstr "Jeg kan ikke ta skjembilder før partisjonering."
 
-#: install_any.pm:1879
+#: install_any.pm:1860
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Skjermbilder vil være tilgjengelig etter installasjon i %s"
@@ -6836,7 +6829,6 @@ msgstr ""
 "respektive opphavsmenn og er beskyttet av intellektuell eiendom og \n"
 "opphavsrettslover som gjelder programvare.\n"
 
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:131
 #, c-format
 msgid ""
@@ -6870,12 +6862,18 @@ msgstr ""
 "Informasjon om oppsett av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandriva Linux User's Guide."
 
+#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
+#: install_messages.pm:144
+#, c-format
+msgid "http://www.mandrivalinux.com/en/errata.php3"
+msgstr "http://www.mandrivalinux.com/en/errata.php3"
+
 #: install_steps.pm:253
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: install_steps.pm:475
+#: install_steps.pm:471
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -6905,12 +6903,13 @@ msgstr ""
 "installering\n"
 "i stedet. Trykk `F1' ved oppstart av CD-ROM, skriv så `text'."
 
-#: install_steps_gtk.pm:211 install_steps_interactive.pm:628
+#: install_steps_gtk.pm:211 install_steps_gtk.pm:228
+#: install_steps_interactive.pm:624
 #, c-format
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: install_steps_gtk.pm:254 install_steps_interactive.pm:571
+#: install_steps_gtk.pm:254 install_steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
@@ -6945,7 +6944,7 @@ msgstr "Viktighet: "
 msgid "You can not select/unselect this package"
 msgstr "Du kan ikke velge/fjerne denne pakken"
 
-#: install_steps_gtk.pm:340 network/thirdparty.pm:316
+#: install_steps_gtk.pm:340
 #, c-format
 msgid "due to missing %s"
 msgstr "pga manglende %s"
@@ -7028,12 +7027,12 @@ msgstr "Oppdaterer pakkevalg"
 msgid "Minimal install"
 msgstr "Minimal installasjon"
 
-#: install_steps_gtk.pm:414 install_steps_interactive.pm:490
+#: install_steps_gtk.pm:414 install_steps_interactive.pm:486
 #, c-format
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: install_steps_gtk.pm:431 install_steps_interactive.pm:714
+#: install_steps_gtk.pm:431 install_steps_interactive.pm:710
 #, c-format
 msgid "Installing"
 msgstr "Installerer"
@@ -7059,12 +7058,12 @@ msgid "%d packages"
 msgstr "%d pakker"
 
 #: install_steps_gtk.pm:542 install_steps_interactive.pm:92
-#: install_steps_interactive.pm:738
+#: install_steps_interactive.pm:734
 #, c-format
 msgid "Refuse"
 msgstr "Nekt"
 
-#: install_steps_gtk.pm:546 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:546 install_steps_interactive.pm:738
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -7077,29 +7076,29 @@ msgstr ""
 "Sett inn CDen merket \"%s\" i stasjonen og trykk Ok når du er ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'e."
 
-#: install_steps_gtk.pm:559 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:559 install_steps_interactive.pm:749
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:561 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
-#: install_steps_gtk.pm:563 install_steps_interactive.pm:753
-#: install_steps_interactive.pm:757
+#: install_steps_gtk.pm:563 install_steps_interactive.pm:749
+#: install_steps_interactive.pm:753
 #, c-format
 msgid "Go on anyway?"
 msgstr "Fortsett uansett?"
 
-#: install_steps_gtk.pm:585 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:585 install_steps_interactive.pm:929 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: install_steps_gtk.pm:608 install_steps_interactive.pm:929
-#: install_steps_interactive.pm:1078
+#: install_steps_gtk.pm:608 install_steps_interactive.pm:925
+#: install_steps_interactive.pm:1074
 #, c-format
 msgid "not configured"
 msgstr "ikke satt opp"
@@ -7285,22 +7284,22 @@ msgstr ""
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Det er ikke nok swap til å fullføre installasjonen, legg til litt mer"
 
-#: install_steps_interactive.pm:406
+#: install_steps_interactive.pm:404
 #, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
 msgstr "Søker etter tilgjengelige pakker og bygger om igjen rpm-databasen..."
 
-#: install_steps_interactive.pm:407 install_steps_interactive.pm:459
+#: install_steps_interactive.pm:405 install_steps_interactive.pm:455
 #, c-format
 msgid "Looking for available packages..."
 msgstr "Søker etter tilgjengelige pakker"
 
-#: install_steps_interactive.pm:428 install_steps_interactive.pm:833
+#: install_steps_interactive.pm:424 install_steps_interactive.pm:829
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
 
-#: install_steps_interactive.pm:468
+#: install_steps_interactive.pm:464
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%d "
@@ -7309,7 +7308,7 @@ msgstr ""
 "Ditt system har ikke nok plass igjen for installasjon eller oppgradering (%d "
 "> %d)"
 
-#: install_steps_interactive.pm:502
+#: install_steps_interactive.pm:498
 #, c-format
 msgid ""
 "Please choose load or save package selection.\n"
@@ -7318,33 +7317,33 @@ msgstr ""
 "Velg lagre eller hent pakkevalg.\n"
 "Formatet er det samme som for auto_install-genererte filer."
 
-#: install_steps_interactive.pm:504
+#: install_steps_interactive.pm:500
 #, c-format
 msgid "Load"
 msgstr "Belastning"
 
-#: install_steps_interactive.pm:504 standalone/drakbackup:3932
-#: standalone/drakbackup:4005 standalone/logdrake:175
+#: install_steps_interactive.pm:500 standalone/drakbackup:3932
+#: standalone/drakbackup:4005 standalone/logdrake:172
 #, c-format
 msgid "Save"
 msgstr "Lagre"
 
-#: install_steps_interactive.pm:512
+#: install_steps_interactive.pm:508
 #, c-format
 msgid "Bad file"
 msgstr "Ødelagt fil"
 
-#: install_steps_interactive.pm:585
+#: install_steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
 msgstr "Valgt størrelse er større enn tilgjengelig plass"
 
-#: install_steps_interactive.pm:600
+#: install_steps_interactive.pm:596
 #, c-format
 msgid "Type of install"
 msgstr "Type installasjon"
 
-#: install_steps_interactive.pm:601
+#: install_steps_interactive.pm:597
 #, c-format
 msgid ""
 "You have not selected any group of packages.\n"
@@ -7353,22 +7352,22 @@ msgstr ""
 "Du har ikke valgt noen pakkegrupper.\n"
 "Velg den minimale installasjonen du ønsker:"
 
-#: install_steps_interactive.pm:605
+#: install_steps_interactive.pm:601
 #, c-format
 msgid "With basic documentation (recommended!)"
 msgstr "Med grunnleggende dokumentasjon (anbefalt!)"
 
-#: install_steps_interactive.pm:606
+#: install_steps_interactive.pm:602
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Virkelig minimal installasjon (uten urpmi)"
 
-#: install_steps_interactive.pm:645 standalone/drakxtv:52
+#: install_steps_interactive.pm:641 standalone/drakxtv:52
 #, c-format
 msgid "All"
 msgstr "Alle"
 
-#: install_steps_interactive.pm:684
+#: install_steps_interactive.pm:680
 #, c-format
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
@@ -7379,17 +7378,17 @@ msgstr ""
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
-#: install_steps_interactive.pm:689
+#: install_steps_interactive.pm:685
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CD-ROMen ved navnet \"%s\""
 
-#: install_steps_interactive.pm:714
+#: install_steps_interactive.pm:710
 #, c-format
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: install_steps_interactive.pm:722
+#: install_steps_interactive.pm:718
 #, c-format
 msgid ""
 "Installing package %s\n"
@@ -7398,22 +7397,22 @@ msgstr ""
 "Installerer pakke %s\n"
 "%d%%"
 
-#: install_steps_interactive.pm:771
+#: install_steps_interactive.pm:767
 #, c-format
 msgid "Post-install configuration"
 msgstr "Oppsett etter installering"
 
-#: install_steps_interactive.pm:778
+#: install_steps_interactive.pm:774
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "%s"
 
-#: install_steps_interactive.pm:806
+#: install_steps_interactive.pm:802
 #, c-format
 msgid "Updates"
 msgstr "Oppdateringer"
 
-#: install_steps_interactive.pm:807
+#: install_steps_interactive.pm:803
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7434,7 +7433,7 @@ msgstr ""
 "\n"
 "Ønsker du å installere oppdateringene ?"
 
-#: install_steps_interactive.pm:828
+#: install_steps_interactive.pm:824
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7442,67 +7441,67 @@ msgstr ""
 "Kontakter Mandriva Linux-nettstedet for å få liste over tilgjengelige "
 "speil..."
 
-#: install_steps_interactive.pm:847
+#: install_steps_interactive.pm:843
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker..."
 
-#: install_steps_interactive.pm:851
+#: install_steps_interactive.pm:847
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Kan ikke kontakte speil %s"
 
-#: install_steps_interactive.pm:851
+#: install_steps_interactive.pm:847
 #, c-format
 msgid "Would you like to try again?"
 msgstr "Ønsker du å prøve på nytt?"
 
-#: install_steps_interactive.pm:878 standalone/drakclock:45
+#: install_steps_interactive.pm:874 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Hva er din tidssone?"
 
-#: install_steps_interactive.pm:883
+#: install_steps_interactive.pm:879
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:887
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: install_steps_interactive.pm:946 install_steps_interactive.pm:954
-#: install_steps_interactive.pm:972 install_steps_interactive.pm:979
-#: install_steps_interactive.pm:1130 services.pm:133
+#: install_steps_interactive.pm:942 install_steps_interactive.pm:950
+#: install_steps_interactive.pm:968 install_steps_interactive.pm:975
+#: install_steps_interactive.pm:1126 services.pm:133
 #: standalone/drakbackup:1576
 #, c-format
 msgid "System"
 msgstr "System"
 
-#: install_steps_interactive.pm:986 install_steps_interactive.pm:1013
-#: install_steps_interactive.pm:1030 install_steps_interactive.pm:1046
-#: install_steps_interactive.pm:1057
+#: install_steps_interactive.pm:982 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:1026 install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1053
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: install_steps_interactive.pm:992 install_steps_interactive.pm:1001
+#: install_steps_interactive.pm:988 install_steps_interactive.pm:997
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS-tjener"
 
-#: install_steps_interactive.pm:992
+#: install_steps_interactive.pm:988
 #, c-format
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: install_steps_interactive.pm:1034
+#: install_steps_interactive.pm:1030
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Har du et ISA-lydkort?"
 
-#: install_steps_interactive.pm:1036
+#: install_steps_interactive.pm:1032
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7511,71 +7510,71 @@ msgstr ""
 "Kjør \"alsaconf\" eller \"sndconfig\" etter installasjonen for å sette opp "
 "lydkortet ditt"
 
-#: install_steps_interactive.pm:1038
+#: install_steps_interactive.pm:1034
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Lydkort ikke oppdaget. Prøv \"harddrake\" etter installasjonen"
 
-#: install_steps_interactive.pm:1058
+#: install_steps_interactive.pm:1054
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafisk grensesnitt"
 
-#: install_steps_interactive.pm:1064 install_steps_interactive.pm:1076
+#: install_steps_interactive.pm:1060 install_steps_interactive.pm:1072
 #, c-format
 msgid "Network & Internet"
 msgstr "Nettverk & internett"
 
-#: install_steps_interactive.pm:1078
+#: install_steps_interactive.pm:1074
 #, c-format
 msgid "configured"
 msgstr "satt opp"
 
-#: install_steps_interactive.pm:1087 install_steps_interactive.pm:1101
+#: install_steps_interactive.pm:1083 install_steps_interactive.pm:1097
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Sikkerhet"
 
-#: install_steps_interactive.pm:1106
+#: install_steps_interactive.pm:1102
 #, c-format
 msgid "activated"
 msgstr "aktivert"
 
-#: install_steps_interactive.pm:1106
+#: install_steps_interactive.pm:1102
 #, c-format
 msgid "disabled"
 msgstr "deaktiver"
 
-#: install_steps_interactive.pm:1117
+#: install_steps_interactive.pm:1113
 #, c-format
 msgid "Boot"
 msgstr "Oppstart"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1121 printer/printerdrake.pm:974
+#: install_steps_interactive.pm:1117 printer/printerdrake.pm:974
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
 
-#: install_steps_interactive.pm:1135 services.pm:175
+#: install_steps_interactive.pm:1131 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Tjenester: %d aktivert for %d registrert"
 
-#: install_steps_interactive.pm:1147
+#: install_steps_interactive.pm:1141
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Du har ikke satt opp det grafiske grensesnittet X. Er du sikker på at du "
 "ikke vil gjøre dette?"
 
-#: install_steps_interactive.pm:1228
+#: install_steps_interactive.pm:1222
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Klargjør oppstartslaster"
 
-#: install_steps_interactive.pm:1238
+#: install_steps_interactive.pm:1232
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7588,12 +7587,12 @@ msgstr ""
 "du må bruke BootX eller andre måter for å starte din maskin. "
 "Kjerneargumentet for root-filsystemet er: root=%s"
 
-#: install_steps_interactive.pm:1244
+#: install_steps_interactive.pm:1238
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: install_steps_interactive.pm:1247
+#: install_steps_interactive.pm:1241
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7602,7 +7601,7 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøv å installer selv om det ødelegger den første partisjonen?"
 
-#: install_steps_interactive.pm:1264
+#: install_steps_interactive.pm:1258
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7611,22 +7610,22 @@ msgstr ""
 "I dette er sikkerhetsnivået er tilgang til Windows-partisjonen forbeholdt "
 "administratoren."
 
-#: install_steps_interactive.pm:1293 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1287 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: install_steps_interactive.pm:1298
+#: install_steps_interactive.pm:1292
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Sett inn en annen diskett med drivere."
 
-#: install_steps_interactive.pm:1300
+#: install_steps_interactive.pm:1294
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: install_steps_interactive.pm:1312
+#: install_steps_interactive.pm:1306
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7637,19 +7636,19 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: install_steps_interactive.pm:1322 standalone/draksambashare:416
+#: install_steps_interactive.pm:1316 standalone/draksambashare:416
 #: standalone/draksambashare:523 standalone/drakups:120 standalone/drakups:159
-#: standalone/logdrake:452 standalone/logdrake:458
+#: standalone/logdrake:449 standalone/logdrake:455
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulerer"
 
-#: install_steps_interactive.pm:1330 install_steps_interactive.pm:1331
+#: install_steps_interactive.pm:1324 install_steps_interactive.pm:1325
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: install_steps_interactive.pm:1332
+#: install_steps_interactive.pm:1326
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
@@ -7712,7 +7711,7 @@ msgstr "Fjern"
 msgid "Basic"
 msgstr "Grunnleggende"
 
-#: interactive.pm:436 interactive/newt.pm:321 ugtk2.pm:490
+#: interactive.pm:436 interactive/newt.pm:321 ugtk2.pm:510
 #, c-format
 msgid "Finish"
 msgstr "Fullfør"
@@ -8030,6 +8029,13 @@ msgid ""
 "Dvorak (US)"
 msgstr "Dvorak (US)"
 
+#: keyboard.pm:213
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Dvorak (Esperanto)"
+msgstr "Dvorak (Esperanto)"
+
 #: keyboard.pm:215
 #, c-format
 msgid ""
@@ -8240,6 +8246,13 @@ msgid ""
 "Laotian"
 msgstr "Laot"
 
+#: keyboard.pm:259
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Lithuanian AZERTY (old)"
+msgstr "Liauisk AZERTY (gammel)"
+
 #: keyboard.pm:261
 #, c-format
 msgid ""
@@ -8253,6 +8266,13 @@ msgid ""
 "_: keyboard\n"
 "Lithuanian \"number row\" QWERTY"
 msgstr "Litauisk \"nummer-rekke\" QWERTY"
+
+#: keyboard.pm:263
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Lithuanian \"phonetic\" QWERTY"
+msgstr "Litauisk \"fonétisk\" QWERTY"
 
 #: keyboard.pm:264
 #, c-format
@@ -9722,7 +9742,7 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: lang.pm:1141
+#: lang.pm:1122
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
@@ -9939,10 +9959,10 @@ msgid "GlidePoint"
 msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/modem.pm:68 network/modem.pm:81 network/modem.pm:86
-#: network/modem.pm:115 network/netconnect.pm:580 network/netconnect.pm:585
-#: network/netconnect.pm:597 network/netconnect.pm:602
-#: network/netconnect.pm:618 network/netconnect.pm:620
+#: network/modem.pm:68 network/modem.pm:82 network/modem.pm:87
+#: network/modem.pm:120 network/netconnect.pm:575 network/netconnect.pm:580
+#: network/netconnect.pm:592 network/netconnect.pm:597
+#: network/netconnect.pm:613 network/netconnect.pm:615
 #, c-format
 msgid "Automatic"
 msgstr "Automatisk"
@@ -10252,9 +10272,9 @@ msgid "Other ports"
 msgstr "Andre porter"
 
 #: network/drakfirewall.pm:251 network/drakfirewall.pm:254
-#: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
-#: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
-#: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:180
+#: standalone/drakids:33 standalone/drakids:134 standalone/drakids:160
+#: standalone/drakids:169 standalone/drakids:179 standalone/drakids:246
+#: standalone/net_applet:59 standalone/net_applet:180
 #: standalone/net_applet:354 standalone/net_applet:391
 #, c-format
 msgid "Interactive Firewall"
@@ -10263,8 +10283,8 @@ msgstr "Interaktiv brannmur"
 #: network/drakfirewall.pm:252
 #, c-format
 msgid ""
-"You can be warned when someone accesses to a service or tries to intrude "
-"into your computer.\n"
+"You can be warned when someone access to a service or tries to intrude into "
+"your computer.\n"
 "Please select which network activity should be watched."
 msgstr ""
 
@@ -10313,36 +10333,36 @@ msgstr "Et passordcrackeangrep har blitt forsøkt av %s."
 msgid "A \"%s\" attack has been attempted by %s"
 msgstr "Et \"%s\"-angrep har blitt forsøkt av %s."
 
-#: network/isdn.pm:117 network/netconnect.pm:452 network/netconnect.pm:541
-#: network/netconnect.pm:544 network/netconnect.pm:687
-#: network/netconnect.pm:691
+#: network/isdn.pm:117 network/netconnect.pm:447 network/netconnect.pm:536
+#: network/netconnect.pm:539 network/netconnect.pm:682
+#: network/netconnect.pm:686
 #, c-format
 msgid "Unlisted - edit manually"
 msgstr "Ulistet - endre manuelt"
 
-#: network/isdn.pm:160 network/netconnect.pm:384
+#: network/isdn.pm:160 network/netconnect.pm:379
 #, c-format
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: network/isdn.pm:160 network/netconnect.pm:384
+#: network/isdn.pm:160 network/netconnect.pm:379
 #, c-format
 msgid "I do not know"
 msgstr "Jeg vet ikke"
 
-#: network/isdn.pm:161 network/netconnect.pm:384
+#: network/isdn.pm:161 network/netconnect.pm:379
 #, c-format
 msgid "PCI"
 msgstr "PCI"
 
-#: network/isdn.pm:162 network/netconnect.pm:384
+#: network/isdn.pm:162 network/netconnect.pm:379
 #, c-format
 msgid "USB"
 msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
-#: network/netconnect.pm:585 network/netconnect.pm:602
-#: network/netconnect.pm:618
+#: network/netconnect.pm:580 network/netconnect.pm:597
+#: network/netconnect.pm:613
 #, c-format
 msgid "Manual"
 msgstr "Manuell"
@@ -10381,8 +10401,8 @@ msgstr ""
 msgid "Unable to find the ndiswrapper interface!"
 msgstr "Klarte ikke å finne ndiswrapper-grensesnitt!"
 
-#: network/netconnect.pm:69 network/netconnect.pm:482
-#: network/netconnect.pm:489
+#: network/netconnect.pm:69 network/netconnect.pm:477
+#: network/netconnect.pm:484
 #, c-format
 msgid "Manual choice"
 msgstr "Manuelt valg"
@@ -10426,298 +10446,291 @@ msgstr ""
 "Resten av verden \n"
 " ingen D-kanal (leid linje)"
 
-#: network/netconnect.pm:103 standalone/harddrake2:306
-#: standalone/net_monitor:102 standalone/net_monitor:103
-#: standalone/net_monitor:108
-#, c-format
-msgid "unknown"
-msgstr "ukjent"
-
-#: network/netconnect.pm:120 network/thirdparty.pm:206
+#: network/netconnect.pm:115 network/thirdparty.pm:184
 #, c-format
 msgid "Alcatel speedtouch USB modem"
 msgstr "Alcatel speedtouch USB-modem"
 
-#: network/netconnect.pm:121
+#: network/netconnect.pm:116
 #, c-format
 msgid "Sagem USB modem"
 msgstr "Sagem USB-modem"
 
-#: network/netconnect.pm:122
+#: network/netconnect.pm:117
 #, c-format
 msgid "Bewan modem"
 msgstr "Bewan PCI-modem"
 
-#: network/netconnect.pm:123
+#: network/netconnect.pm:118
 #, c-format
 msgid "ECI Hi-Focus modem"
 msgstr "ECI Hi-Focus-modem"
 
-#: network/netconnect.pm:127
+#: network/netconnect.pm:122
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
 msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
-#: network/netconnect.pm:128
+#: network/netconnect.pm:123
 #, c-format
 msgid "Manual TCP/IP configuration"
 msgstr "Manuelt oppsett av TCP/IP"
 
-#: network/netconnect.pm:129
+#: network/netconnect.pm:124
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
 msgstr "Point to Point Tunneling Protocol (PPTP)"
 
-#: network/netconnect.pm:130
+#: network/netconnect.pm:125
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
 msgstr "PPP over Ethernet (PPPoE)"
 
-#: network/netconnect.pm:131
+#: network/netconnect.pm:126
 #, c-format
 msgid "PPP over ATM (PPPoA)"
 msgstr "PPP over ATM (PPPoA)"
 
-#: network/netconnect.pm:132
+#: network/netconnect.pm:127
 #, c-format
 msgid "DSL over CAPI"
 msgstr "DSL over CAPI"
 
-#: network/netconnect.pm:136
+#: network/netconnect.pm:131
 #, c-format
 msgid "Bridged Ethernet LLC"
 msgstr "Ethernett over bro LLC"
 
-#: network/netconnect.pm:137
+#: network/netconnect.pm:132
 #, c-format
 msgid "Bridged Ethernet VC"
 msgstr "Ethernett over bro VC"
 
-#: network/netconnect.pm:138
+#: network/netconnect.pm:133
 #, c-format
 msgid "Routed IP LLC"
 msgstr "Routed IP LLC"
 
-#: network/netconnect.pm:139
+#: network/netconnect.pm:134
 #, c-format
 msgid "Routed IP VC"
 msgstr "Routed IP VC"
 
-#: network/netconnect.pm:140
+#: network/netconnect.pm:135
 #, c-format
 msgid "PPPoA LLC"
 msgstr "PPPoA LLC"
 
-#: network/netconnect.pm:141
+#: network/netconnect.pm:136
 #, c-format
 msgid "PPPoA VC"
 msgstr "PPPoA VC"
 
-#: network/netconnect.pm:145 standalone/drakconnect:498
+#: network/netconnect.pm:140 standalone/drakconnect:498
 #, c-format
 msgid "Script-based"
 msgstr "Scriptbasert"
 
-#: network/netconnect.pm:146 standalone/drakconnect:498
+#: network/netconnect.pm:141 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
 msgstr "PAP"
 
-#: network/netconnect.pm:147 standalone/drakconnect:498
+#: network/netconnect.pm:142 standalone/drakconnect:498
 #, c-format
 msgid "Terminal-based"
 msgstr "Terminalbasert"
 
-#: network/netconnect.pm:148 standalone/drakconnect:498
+#: network/netconnect.pm:143 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
 
-#: network/netconnect.pm:149 standalone/drakconnect:498
+#: network/netconnect.pm:144 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
 msgstr "PAP/CHAP"
 
-#: network/netconnect.pm:239 standalone/drakconnect:56
+#: network/netconnect.pm:234 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Nettverk- og internettsoppsett"
 
-#: network/netconnect.pm:245
+#: network/netconnect.pm:240
 #, c-format
 msgid "LAN connection"
 msgstr "Lokal nettverkstilkobling"
 
-#: network/netconnect.pm:246 network/netconnect.pm:265 standalone/drakroam:140
+#: network/netconnect.pm:241 network/netconnect.pm:260 standalone/drakroam:140
 #: standalone/drakroam:158 standalone/drakroam:161
 #, c-format
 msgid "Wireless connection"
 msgstr "Trådløs tilkobling"
 
-#: network/netconnect.pm:247
+#: network/netconnect.pm:242
 #, c-format
 msgid "ADSL connection"
 msgstr "ADSL-tilkobling"
 
-#: network/netconnect.pm:248
+#: network/netconnect.pm:243
 #, c-format
 msgid "Cable connection"
 msgstr "Kabeltilkobling"
 
-#: network/netconnect.pm:249
+#: network/netconnect.pm:244
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN-tilkobling"
 
-#: network/netconnect.pm:250
+#: network/netconnect.pm:245
 #, c-format
 msgid "Modem connection"
 msgstr "Modemtilkobling"
 
-#: network/netconnect.pm:251
+#: network/netconnect.pm:246
 #, c-format
 msgid "DVB connection"
 msgstr "DVB-tilkobling"
 
-#: network/netconnect.pm:261
+#: network/netconnect.pm:256
 #, c-format
 msgid "Choose the connection you want to configure"
 msgstr "Velg tilkoblingen du ønsker å sette opp"
 
-#: network/netconnect.pm:276 network/netconnect.pm:764
+#: network/netconnect.pm:271 network/netconnect.pm:759
 #, c-format
 msgid "Connection Configuration"
 msgstr "Tilkoblingsoppsett"
 
-#: network/netconnect.pm:276 network/netconnect.pm:765
+#: network/netconnect.pm:271 network/netconnect.pm:760
 #, c-format
 msgid "Please fill or check the field below"
 msgstr "Fyll eller merk feltet nedenfor"
 
-#: network/netconnect.pm:279
+#: network/netconnect.pm:274
 #, c-format
 msgid "Your personal phone number"
 msgstr "Ditt telefonnummer"
 
-#: network/netconnect.pm:280 network/netconnect.pm:768
+#: network/netconnect.pm:275 network/netconnect.pm:763
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
-#: network/netconnect.pm:281 standalone/drakconnect:493
+#: network/netconnect.pm:276 standalone/drakconnect:493
 #, c-format
 msgid "Provider phone number"
 msgstr "Telefonnummer tilbyder"
 
-#: network/netconnect.pm:282
+#: network/netconnect.pm:277
 #, c-format
 msgid "Provider DNS 1 (optional)"
 msgstr "Tilbyder DNS 1 (valgfri)"
 
-#: network/netconnect.pm:283
+#: network/netconnect.pm:278
 #, c-format
 msgid "Provider DNS 2 (optional)"
 msgstr "Tilbyder DNS 2 (valgfri)"
 
-#: network/netconnect.pm:284 standalone/drakconnect:444
+#: network/netconnect.pm:279 standalone/drakconnect:444
 #, c-format
 msgid "Dialing mode"
 msgstr "Oppringningsmodus"
 
-#: network/netconnect.pm:285 standalone/drakconnect:449
+#: network/netconnect.pm:280 standalone/drakconnect:449
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
 msgstr "Oppkoblingshastighet"
 
-#: network/netconnect.pm:286 standalone/drakconnect:454
+#: network/netconnect.pm:281 standalone/drakconnect:454
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Oppkoblingens tidsavbrudd (i sekunder)"
 
-#: network/netconnect.pm:287 network/netconnect.pm:312
-#: network/netconnect.pm:771 standalone/drakconnect:491
+#: network/netconnect.pm:282 network/netconnect.pm:307
+#: network/netconnect.pm:766 standalone/drakconnect:491
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Konto logginn (brukernavn)"
 
-#: network/netconnect.pm:288 network/netconnect.pm:313
-#: network/netconnect.pm:772 standalone/drakconnect:492
+#: network/netconnect.pm:283 network/netconnect.pm:308
+#: network/netconnect.pm:767 standalone/drakconnect:492
 #, c-format
 msgid "Account Password"
 msgstr "Kontopassord"
 
-#: network/netconnect.pm:289 standalone/drakconnect:554
+#: network/netconnect.pm:284 standalone/drakconnect:554
 #, c-format
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: network/netconnect.pm:290 standalone/drakconnect:555
+#: network/netconnect.pm:285 standalone/drakconnect:555
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: network/netconnect.pm:291 standalone/drakconnect:556
+#: network/netconnect.pm:286 standalone/drakconnect:556
 #, c-format
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: network/netconnect.pm:292 standalone/drakconnect:557
+#: network/netconnect.pm:287 standalone/drakconnect:557
 #, c-format
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: network/netconnect.pm:293
+#: network/netconnect.pm:288
 #, c-format
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: network/netconnect.pm:308
+#: network/netconnect.pm:303
 #, c-format
 msgid "Cable: account options"
 msgstr "Kabel: kontoinstillinger"
 
-#: network/netconnect.pm:311
+#: network/netconnect.pm:306
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
 msgstr "bruk BPALogin (trengs for Telstra)"
 
-#: network/netconnect.pm:337 network/netconnect.pm:654
-#: network/netconnect.pm:804 network/netconnect.pm:1138
+#: network/netconnect.pm:332 network/netconnect.pm:649
+#: network/netconnect.pm:798 network/netconnect.pm:1111
 #, c-format
 msgid "Select the network interface to configure:"
 msgstr "Velg nettverksgrensesnittet som skal settes opp:"
 
-#: network/netconnect.pm:339 network/netconnect.pm:374
-#: network/netconnect.pm:655 network/netconnect.pm:806 network/shorewall.pm:65
+#: network/netconnect.pm:334 network/netconnect.pm:369
+#: network/netconnect.pm:650 network/netconnect.pm:800 network/shorewall.pm:65
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
 msgstr "Nett-enhet"
 
-#: network/netconnect.pm:340 network/netconnect.pm:345
+#: network/netconnect.pm:335 network/netconnect.pm:340
 #, c-format
 msgid "External ISDN modem"
 msgstr "Eksternt ISDN-modem"
 
-#: network/netconnect.pm:373 standalone/harddrake2:216
+#: network/netconnect.pm:368 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
 msgstr "Velg en enhet!"
 
-#: network/netconnect.pm:382 network/netconnect.pm:392
-#: network/netconnect.pm:402 network/netconnect.pm:435
-#: network/netconnect.pm:449
+#: network/netconnect.pm:377 network/netconnect.pm:387
+#: network/netconnect.pm:397 network/netconnect.pm:430
+#: network/netconnect.pm:444
 #, c-format
 msgid "ISDN Configuration"
 msgstr "ISDN-oppsett"
 
-#: network/netconnect.pm:383
+#: network/netconnect.pm:378
 #, c-format
 msgid "What kind of card do you have?"
 msgstr "Hva slags kort har du?"
 
-#: network/netconnect.pm:393
+#: network/netconnect.pm:388
 #, c-format
 msgid ""
 "\n"
@@ -10731,22 +10744,22 @@ msgstr ""
 "\n"
 "Hvis du har et PCMCIA-kort må du vite irq og io for kortet.\n"
 
-#: network/netconnect.pm:397
+#: network/netconnect.pm:392
 #, c-format
 msgid "Continue"
 msgstr "Fortsett"
 
-#: network/netconnect.pm:397
+#: network/netconnect.pm:392
 #, c-format
 msgid "Abort"
 msgstr "Avbryt"
 
-#: network/netconnect.pm:403
+#: network/netconnect.pm:398
 #, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Hvilket av de følgende er ditt ISDN-kort?"
 
-#: network/netconnect.pm:421
+#: network/netconnect.pm:416
 #, c-format
 msgid ""
 "A CAPI driver is available for this modem. This CAPI driver can offer more "
@@ -10757,25 +10770,25 @@ msgstr ""
 "tilby flere muligheter enn den frie driveren (som å sende fakser). Hvilken "
 "driver vil du bruke?"
 
-#: network/netconnect.pm:423 standalone/drakconnect:109 standalone/drakups:251
+#: network/netconnect.pm:418 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
 msgstr "Driver"
 
-#: network/netconnect.pm:435
+#: network/netconnect.pm:430
 #, c-format
 msgid "Which protocol do you want to use?"
 msgstr "Hvilken protokoll ønsker du å bruke?"
 
-#: network/netconnect.pm:437 standalone/drakconnect:109
+#: network/netconnect.pm:432 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
-#: standalone/drakids:207 standalone/drakvpn:1128
+#: standalone/drakids:196 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
 msgstr "Protokoll"
 
-#: network/netconnect.pm:449
+#: network/netconnect.pm:444
 #, c-format
 msgid ""
 "Select your provider.\n"
@@ -10784,13 +10797,13 @@ msgstr ""
 "Velg din tilbyder.\n"
 " Hvis denne ikke er i listen, velg ikke i listen"
 
-#: network/netconnect.pm:451 network/netconnect.pm:540
-#: network/netconnect.pm:686
+#: network/netconnect.pm:446 network/netconnect.pm:535
+#: network/netconnect.pm:681
 #, c-format
 msgid "Provider:"
 msgstr "Tilbyder:"
 
-#: network/netconnect.pm:460
+#: network/netconnect.pm:455
 #, c-format
 msgid ""
 "Your modem is not supported by the system.\n"
@@ -10799,52 +10812,52 @@ msgstr ""
 "Ditt modem er ikke støttet av systemet.\n"
 "Se http://www.linmodems.org."
 
-#: network/netconnect.pm:479
+#: network/netconnect.pm:474
 #, c-format
 msgid "Select the modem to configure:"
 msgstr "Velg modem som skal settes opp:"
 
-#: network/netconnect.pm:509
+#: network/netconnect.pm:504
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Velg hvilken serieport modemet ditt koblet til."
 
-#: network/netconnect.pm:538
+#: network/netconnect.pm:533
 #, c-format
 msgid "Select your provider:"
 msgstr "Velg din tilbyder:"
 
-#: network/netconnect.pm:562
+#: network/netconnect.pm:557
 #, c-format
 msgid "Dialup: account options"
 msgstr "Dialup: kontoinstillinger"
 
-#: network/netconnect.pm:565
+#: network/netconnect.pm:560
 #, c-format
 msgid "Connection name"
 msgstr "Tilkoblingsnavn"
 
-#: network/netconnect.pm:566
+#: network/netconnect.pm:561
 #, c-format
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: network/netconnect.pm:567
+#: network/netconnect.pm:562
 #, c-format
 msgid "Login ID"
 msgstr "InnlogingsID"
 
-#: network/netconnect.pm:582 network/netconnect.pm:615
+#: network/netconnect.pm:577 network/netconnect.pm:610
 #, c-format
 msgid "Dialup: IP parameters"
 msgstr "Dialup: IP-parametre"
 
-#: network/netconnect.pm:585
+#: network/netconnect.pm:580
 #, c-format
 msgid "IP parameters"
 msgstr "IP-parametre"
 
-#: network/netconnect.pm:586 network/netconnect.pm:909
+#: network/netconnect.pm:581 network/netconnect.pm:884
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
 #: standalone/drakhosts:197 standalone/drakroam:114 standalone/drakups:286
@@ -10852,64 +10865,64 @@ msgstr "IP-parametre"
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: network/netconnect.pm:587
+#: network/netconnect.pm:582
 #, c-format
 msgid "Subnet mask"
 msgstr "Subnettmaske"
 
-#: network/netconnect.pm:599
+#: network/netconnect.pm:594
 #, c-format
 msgid "Dialup: DNS parameters"
 msgstr "Dialup: DNS-parametre"
 
-#: network/netconnect.pm:602
+#: network/netconnect.pm:597
 #, c-format
 msgid "DNS"
 msgstr "DNS"
 
-#: network/netconnect.pm:603
+#: network/netconnect.pm:598
 #, c-format
 msgid "Domain name"
 msgstr "Domenenavn"
 
-#: network/netconnect.pm:604 network/netconnect.pm:769
+#: network/netconnect.pm:599 network/netconnect.pm:764
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Første DNS-tjener (valgfri)"
 
-#: network/netconnect.pm:605 network/netconnect.pm:770
+#: network/netconnect.pm:600 network/netconnect.pm:765
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Andre DNS-tjener (valgfri)"
 
-#: network/netconnect.pm:606
+#: network/netconnect.pm:601
 #, c-format
 msgid "Set hostname from IP"
 msgstr "Sett vertsnavn etter IP"
 
-#: network/netconnect.pm:618 standalone/drakconnect:327
+#: network/netconnect.pm:613 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
 msgstr "Gateway"
 
-#: network/netconnect.pm:619 standalone/drakroam:116
+#: network/netconnect.pm:614 standalone/drakroam:116
 #, c-format
 msgid "Gateway IP address"
 msgstr "Gateway IP-adresse"
 
-#: network/netconnect.pm:654
+#: network/netconnect.pm:649
 #, c-format
 msgid "ADSL configuration"
 msgstr "ADSL-oppsett"
 
-#: network/netconnect.pm:684
+#: network/netconnect.pm:679
 #, c-format
 msgid "Please choose your ADSL provider"
 msgstr "Velg din ADSL-tilbyder"
 
-#: network/netconnect.pm:714
+#: network/netconnect.pm:709
 #, c-format
 msgid ""
 "Please choose your DSL connection type.\n"
@@ -10918,47 +10931,47 @@ msgstr ""
 "Vennligst velg din DSL-tilkoblingstype.\n"
 "Hvis du ikke vet så behold den forhåndsvalgte typen."
 
-#: network/netconnect.pm:717
+#: network/netconnect.pm:712
 #, c-format
 msgid "ADSL connection type:"
 msgstr "ADSL-tilkoblingstype :"
 
-#: network/netconnect.pm:774
+#: network/netconnect.pm:769
 #, c-format
 msgid "Virtual Path ID (VPI):"
 msgstr "Virtual Path ID (VPI):"
 
-#: network/netconnect.pm:775
+#: network/netconnect.pm:770
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
 msgstr "Virtual Circuit ID (VCI):"
 
-#: network/netconnect.pm:778
+#: network/netconnect.pm:773
 #, c-format
 msgid "Encapsulation:"
 msgstr "Kapsulering :"
 
-#: network/netconnect.pm:808
+#: network/netconnect.pm:800
 #, c-format
 msgid "Manually load a driver"
 msgstr "Last en driver manuelt"
 
-#: network/netconnect.pm:809
+#: network/netconnect.pm:800
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Bruker en Windows-driver (med ndiswrapper)"
 
-#: network/netconnect.pm:865
+#: network/netconnect.pm:840
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr "Zerconf vertsnavnoppløsning"
 
-#: network/netconnect.pm:866 network/netconnect.pm:896
+#: network/netconnect.pm:841 network/netconnect.pm:871
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr "Setter opp nettverksenhet %s (driver %s)"
 
-#: network/netconnect.pm:867
+#: network/netconnect.pm:842
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
@@ -10967,7 +10980,7 @@ msgstr ""
 "De følgende protokollene kan bli brukt til å sette opp en LANstilkobling. "
 "Velg den du vil bruke"
 
-#: network/netconnect.pm:897
+#: network/netconnect.pm:872
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -10978,197 +10991,197 @@ msgstr ""
 "Hvert element bør skrives som en IP-adresse i punkt-desimal\n"
 "notasjon (f.eks, 1.2.3.4)."
 
-#: network/netconnect.pm:904 standalone/drakconnect:373
+#: network/netconnect.pm:879 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr "Tilegn vertsnavn fra DHCP-adresse"
 
-#: network/netconnect.pm:905 standalone/drakconnect:375
+#: network/netconnect.pm:880 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr "DHCP vertsnavn"
 
-#: network/netconnect.pm:910 standalone/drakconnect:321
+#: network/netconnect.pm:885 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
 msgstr "Nettmaske"
 
-#: network/netconnect.pm:912 standalone/drakconnect:437
+#: network/netconnect.pm:887 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Spor id nettverkskort (nyttig for bærbare)"
 
-#: network/netconnect.pm:913 standalone/drakconnect:438
+#: network/netconnect.pm:888 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Nettverks Hotplugging"
 
-#: network/netconnect.pm:915 standalone/drakconnect:432
+#: network/netconnect.pm:890 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
 msgstr "Start ved oppstart"
 
-#: network/netconnect.pm:917 standalone/drakconnect:460
+#: network/netconnect.pm:892 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
 msgstr "Metrisk"
 
-#: network/netconnect.pm:918
+#: network/netconnect.pm:893
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr "Aktiver IPv6 til IPv4-tunnel"
 
-#: network/netconnect.pm:920 standalone/drakconnect:369
+#: network/netconnect.pm:895 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
 msgstr "DHCP-klient"
 
-#: network/netconnect.pm:922 standalone/drakconnect:379
+#: network/netconnect.pm:897 standalone/drakconnect:379
 #, c-format
 msgid "DHCP timeout (in seconds)"
 msgstr "DHCP-tidsavbrudd (i sekunder)"
 
-#: network/netconnect.pm:923 standalone/drakconnect:382
+#: network/netconnect.pm:898 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr "Få DNS-tjenere fra DHCP"
 
-#: network/netconnect.pm:924 standalone/drakconnect:383
+#: network/netconnect.pm:899 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr "Få YP-tjenere fra DHCP"
 
-#: network/netconnect.pm:925 standalone/drakconnect:384
+#: network/netconnect.pm:900 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr "Få NTPD-tjenere fra DHCP"
 
-#: network/netconnect.pm:933 printer/printerdrake.pm:1897
+#: network/netconnect.pm:908 printer/printerdrake.pm:1897
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
-#: network/netconnect.pm:937 standalone/drakconnect:680
+#: network/netconnect.pm:912 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr "Netmaske bør være i format 255.255.224.0"
 
-#: network/netconnect.pm:941
+#: network/netconnect.pm:916
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr "Advarsel : IP-adresse %s er vanligvis reservert !"
 
-#: network/netconnect.pm:946 standalone/drakTermServ:1852
+#: network/netconnect.pm:921 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr "%s er allerede i bruk\n"
 
-#: network/netconnect.pm:986
+#: network/netconnect.pm:961
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr "Bruk en ndiswrapper-driver"
 
-#: network/netconnect.pm:988
+#: network/netconnect.pm:963
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr "Bruk ndiswrapperdriveren %s"
 
-#: network/netconnect.pm:988
+#: network/netconnect.pm:963
 #, c-format
 msgid "Install a new driver"
 msgstr "Installer en ny driver"
 
-#: network/netconnect.pm:1000
+#: network/netconnect.pm:975
 #, c-format
 msgid "Select a device:"
 msgstr "Velg en enhet:"
 
-#: network/netconnect.pm:1029
+#: network/netconnect.pm:1004
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr "Skriv inn de trådløse parametrene for dette kortet:"
 
-#: network/netconnect.pm:1032 standalone/drakconnect:404
+#: network/netconnect.pm:1007 standalone/drakconnect:404
 #, c-format
 msgid "Operating Mode"
 msgstr "Operasjonsmodus"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Managed"
 msgstr "Håndtert"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Master"
 msgstr "Mester"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Repeater"
 msgstr "Repeterer"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Secondary"
 msgstr "Sekundær"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1008
 #, c-format
 msgid "Auto"
 msgstr "Auto"
 
-#: network/netconnect.pm:1036 standalone/drakconnect:405
+#: network/netconnect.pm:1011 standalone/drakconnect:405
 #: standalone/drakroam:107
 #, c-format
 msgid "Network name (ESSID)"
 msgstr "Nettverksnavn (ESSID)"
 
-#: network/netconnect.pm:1037 standalone/drakroam:108
+#: network/netconnect.pm:1012 standalone/drakroam:108
 #, c-format
 msgid "Encryption mode"
 msgstr "Krypteringsmodus"
 
-#: network/netconnect.pm:1042
+#: network/netconnect.pm:1017
 #, c-format
 msgid "Allow access point roaming"
 msgstr "Tillatt gjennomstreifing av aksesspunkt"
 
-#: network/netconnect.pm:1044 standalone/drakconnect:406
+#: network/netconnect.pm:1018 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr "NettverksID"
 
-#: network/netconnect.pm:1045 standalone/drakconnect:407
+#: network/netconnect.pm:1019 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr "Operasjonsfrekvens"
 
-#: network/netconnect.pm:1046 standalone/drakconnect:408
+#: network/netconnect.pm:1020 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr "Følsomhetsgrense"
 
-#: network/netconnect.pm:1047 standalone/drakconnect:409
+#: network/netconnect.pm:1021 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
 msgstr "Bitrate (i b/s)"
 
-#: network/netconnect.pm:1048 standalone/drakconnect:420
+#: network/netconnect.pm:1022 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
 msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1023
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -11192,17 +11205,17 @@ msgstr ""
 "parameteren til auto, fixed\n"
 "eller off."
 
-#: network/netconnect.pm:1056 standalone/drakconnect:421
+#: network/netconnect.pm:1030 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr "Fragmentering"
 
-#: network/netconnect.pm:1057 standalone/drakconnect:422
+#: network/netconnect.pm:1031 standalone/drakconnect:422
 #, c-format
 msgid "iwconfig command extra arguments"
 msgstr "iwconfig-kommando ekstra argumenter"
 
-#: network/netconnect.pm:1058
+#: network/netconnect.pm:1032
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -11218,12 +11231,12 @@ msgstr ""
 "Se iwconfig(8) man-siden for ytterligere informasjon."
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1065 standalone/drakconnect:423
+#: network/netconnect.pm:1039 standalone/drakconnect:423
 #, c-format
 msgid "iwspy command extra arguments"
 msgstr "iwspy-kommando ekstra argumenter"
 
-#: network/netconnect.pm:1066
+#: network/netconnect.pm:1040
 #, c-format
 msgid ""
 "iwspy is used to set a list of addresses in a wireless network\n"
@@ -11244,12 +11257,12 @@ msgstr ""
 "\n"
 "Se iwpspy(8) man-side for ytterligere informasjon."
 
-#: network/netconnect.pm:1075 standalone/drakconnect:424
+#: network/netconnect.pm:1049 standalone/drakconnect:424
 #, c-format
 msgid "iwpriv command extra arguments"
 msgstr "iwpriv-kommando ekstra argumenter"
 
-#: network/netconnect.pm:1076
+#: network/netconnect.pm:1050
 #, c-format
 msgid ""
 "iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -11279,7 +11292,7 @@ msgstr ""
 "\n"
 "Se iwpriv(8) man-side for ytterligere informasjon."
 
-#: network/netconnect.pm:1091
+#: network/netconnect.pm:1065
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11289,7 +11302,7 @@ msgstr ""
 "frekvens),\n"
 "eller tilstrekkelig antall nuller (0). "
 
-#: network/netconnect.pm:1095
+#: network/netconnect.pm:1069
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -11298,37 +11311,37 @@ msgstr ""
 "Hastighet skal ha suffix k, M eller G (for eksempel \"11M\"), eller "
 "tilstrekkelig antall nuller"
 
-#: network/netconnect.pm:1138
+#: network/netconnect.pm:1111
 #, c-format
 msgid "DVB configuration"
 msgstr "DVB-konfigurasjon"
 
-#: network/netconnect.pm:1139
+#: network/netconnect.pm:1112
 #, c-format
 msgid "DVB Adapter"
 msgstr "DVB-kontroller"
 
-#: network/netconnect.pm:1156
+#: network/netconnect.pm:1129
 #, c-format
 msgid "DVB adapter settings"
 msgstr "DVD-adapteroppsett"
 
-#: network/netconnect.pm:1159
+#: network/netconnect.pm:1132
 #, c-format
 msgid "Adapter card"
 msgstr "Kontrollerkort"
 
-#: network/netconnect.pm:1160
+#: network/netconnect.pm:1133
 #, c-format
 msgid "Net demux"
 msgstr "Net demux"
 
-#: network/netconnect.pm:1161
+#: network/netconnect.pm:1134
 #, c-format
 msgid "PID"
 msgstr "PID"
 
-#: network/netconnect.pm:1189
+#: network/netconnect.pm:1162
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -11341,69 +11354,69 @@ msgstr ""
 "så som ``minboks.mittlab.mittfirma.no''.\n"
 "Du kan også taste inn IP-adressen til gatewayen hvis du har en"
 
-#: network/netconnect.pm:1194
+#: network/netconnect.pm:1167
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr "Sist, men ikke minst tast inn din DNS-tjeners IP-adresser."
 
-#: network/netconnect.pm:1196 standalone/drakconnect:991
+#: network/netconnect.pm:1169 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr "Vertsnavn (valgfritt)"
 
-#: network/netconnect.pm:1196 standalone/drakhosts:197
+#: network/netconnect.pm:1169 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Vertsnavn"
 
-#: network/netconnect.pm:1198
+#: network/netconnect.pm:1171
 #, c-format
 msgid "DNS server 1"
 msgstr "DNS-tjener 1"
 
-#: network/netconnect.pm:1199
+#: network/netconnect.pm:1172
 #, c-format
 msgid "DNS server 2"
 msgstr "DNS-tjener 2"
 
-#: network/netconnect.pm:1200
+#: network/netconnect.pm:1173
 #, c-format
 msgid "DNS server 3"
 msgstr "DNS-tjener 3"
 
-#: network/netconnect.pm:1201
+#: network/netconnect.pm:1174
 #, c-format
 msgid "Search domain"
 msgstr "Søk igjennom domene"
 
-#: network/netconnect.pm:1202
+#: network/netconnect.pm:1175
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr ""
 "Som standard vil domenet å søke gjennom bli satt til det fullkvalifiserte "
 "vertsnavnet"
 
-#: network/netconnect.pm:1203
+#: network/netconnect.pm:1176
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Gateway (f.eks. %s)"
 
-#: network/netconnect.pm:1205
+#: network/netconnect.pm:1178
 #, c-format
 msgid "Gateway device"
 msgstr "Gateway-enhet"
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1187
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS-tjeneradresse bør være i format 1.2.3.4"
 
-#: network/netconnect.pm:1219 standalone/drakconnect:685
+#: network/netconnect.pm:1192 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr "Gatewayadresse bør være i format 1.2.3.4"
 
-#: network/netconnect.pm:1232
+#: network/netconnect.pm:1205
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -11416,67 +11429,67 @@ msgstr ""
 "sine delte ressurser som ikke er behandlet av nettverket.\n"
 "Det trengs ikke på de fleste nettverk."
 
-#: network/netconnect.pm:1236
+#: network/netconnect.pm:1209
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Ukonfigurert vertsnavn"
 
-#: network/netconnect.pm:1239
+#: network/netconnect.pm:1212
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Zeroconf-vertsnavn må ikke innholde en ."
 
-#: network/netconnect.pm:1249
+#: network/netconnect.pm:1222
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr "Ønsker du å tillate brukere å starte tilkoblingen?"
 
-#: network/netconnect.pm:1262
+#: network/netconnect.pm:1235
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
-#: network/netconnect.pm:1278
+#: network/netconnect.pm:1250
 #, c-format
 msgid "Automatically at boot"
 msgstr "Automatisk ved oppstart"
 
-#: network/netconnect.pm:1280
+#: network/netconnect.pm:1252
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr "Ved å bruke Net-miniprogrammet i systemkurven"
 
-#: network/netconnect.pm:1282
+#: network/netconnect.pm:1254
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr "Manuelt (grensesnittet vil fremdeles bli aktivert ved oppstart)"
 
-#: network/netconnect.pm:1291
+#: network/netconnect.pm:1263
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr "Hvordan vil du ringe opp denne tilkoblingen?"
 
-#: network/netconnect.pm:1304
+#: network/netconnect.pm:1276
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Vil du prøve å koble opp mot Internett nå?"
 
-#: network/netconnect.pm:1312 standalone/drakconnect:1023
+#: network/netconnect.pm:1284 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr "Tester tilkoblingen din..."
 
-#: network/netconnect.pm:1332
+#: network/netconnect.pm:1304
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Systemet er nå koblet opp mot Internett."
 
-#: network/netconnect.pm:1333
+#: network/netconnect.pm:1305
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Av sikkerhetsgrunner vil den bli koblet fra nå."
 
-#: network/netconnect.pm:1334
+#: network/netconnect.pm:1306
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
@@ -11485,7 +11498,7 @@ msgstr ""
 "Det ser ikke ut til at systemet er koblet til Internett.\n"
 "Prøv å sette opp tilkoblingen din på nytt."
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1321
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
@@ -11494,7 +11507,7 @@ msgstr ""
 "Gratulerer, internett og nettverksoppsettet er fullført.\n"
 "\n"
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1324
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
@@ -11503,7 +11516,7 @@ msgstr ""
 "Etter at det er ferding, anbefaler vi at du restarter X\n"
 "slik at du unngår problemer med at vertsnavnet forandres."
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1325
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -11514,28 +11527,28 @@ msgstr ""
 "Test tilkoblingen din via net_monitor eller mcc. Hvis tilkoblingen din ikke "
 "virker, ønsker du kanskje å kjøre oppsettet på nytt"
 
-#: network/netconnect.pm:1364
+#: network/netconnect.pm:1336
 #, c-format
 msgid "(detected on port %s)"
 msgstr "(oppdaget på port %s)"
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1366
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected %s)"
 msgstr "(oppdaget %s)"
 
-#: network/netconnect.pm:1366
+#: network/netconnect.pm:1338
 #, c-format
 msgid "(detected)"
 msgstr "(oppdaget)"
 
-#: network/netconnect.pm:1367
+#: network/netconnect.pm:1339
 #, c-format
 msgid "Network Configuration"
 msgstr "Nettverksoppsett"
 
-#: network/netconnect.pm:1368
+#: network/netconnect.pm:1340
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -11548,12 +11561,12 @@ msgstr ""
 "Trykk OK for å beholde ditt eksisterende oppsett, eller avbryt for å sette "
 "opp dit internett- og nettverksoppsett.\n"
 
-#: network/netconnect.pm:1371
+#: network/netconnect.pm:1343
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr "Nettverket trengs å startes på nytt. Vil du starte det på nytt?"
 
-#: network/netconnect.pm:1372
+#: network/netconnect.pm:1344
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -11564,7 +11577,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: network/netconnect.pm:1373
+#: network/netconnect.pm:1345
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -11577,12 +11590,12 @@ msgstr ""
 "\n"
 "Trykk \"%s\" for å fortsette."
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1346
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Oppsettet er ferdig, vil du gjøre den gjeldende?"
 
-#: network/netconnect.pm:1375
+#: network/netconnect.pm:1347
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -11593,12 +11606,12 @@ msgstr ""
 "Venligst velg den du ønsker å bruke.\n"
 "\n"
 
-#: network/netconnect.pm:1376
+#: network/netconnect.pm:1348
 #, c-format
 msgid "Internet connection"
 msgstr "Internettilkobling"
 
-#: network/netconnect.pm:1393
+#: network/netconnect.pm:1365
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
@@ -11607,27 +11620,27 @@ msgstr ""
 "En uventet feil oppstod:\n"
 "%s"
 
-#: network/network.pm:403 network/network.pm:404
+#: network/network.pm:401 network/network.pm:402
 #, c-format
 msgid "Proxies configuration"
 msgstr "Mellomtjener oppsett"
 
-#: network/network.pm:405
+#: network/network.pm:403
 #, c-format
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
-#: network/network.pm:406
+#: network/network.pm:404
 #, c-format
 msgid "FTP proxy"
 msgstr "FTP-proxy"
 
-#: network/network.pm:409
+#: network/network.pm:407
 #, c-format
 msgid "Proxy should be http://..."
 msgstr "Proxy burde være http://..."
 
-#: network/network.pm:410
+#: network/network.pm:408
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "URLen bør begynne med 'ftp:' eller 'http:'"
@@ -11649,12 +11662,12 @@ msgstr ""
 "\t\teth0 eller eth1 for kabeltilkobling, \n"
 "\t\tippp+ for isdntilkobling.\n"
 
-#: network/thirdparty.pm:218
+#: network/thirdparty.pm:196
 #, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr "Du trenger Alcatel-mikrokoden som mgmt.o i /usr/share/speedtouch/"
 
-#: network/thirdparty.pm:227
+#: network/thirdparty.pm:205
 #, c-format
 msgid ""
 "The ECI Hi-Focus modem cannot be supported due to binary driver distribution "
@@ -11667,17 +11680,17 @@ msgstr ""
 "\n"
 "Du kan finne en driver på http://eciadsl.flashtux.org/"
 
-#: network/thirdparty.pm:306
+#: network/thirdparty.pm:266
 #, c-format
 msgid "Could not install the packages (%s)!"
 msgstr "Kunne ikke installerepakkene (%s)!"
 
-#: network/thirdparty.pm:314
+#: network/thirdparty.pm:274
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
 msgstr "Noen pakker (%s) trengs, men er ikke tilgjengelige."
 
-#: network/thirdparty.pm:315
+#: network/thirdparty.pm:275
 #, c-format
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
@@ -11686,7 +11699,7 @@ msgstr ""
 "Disse pakkene kan bli funnet på Mandriva Club eller i Mandriva kommersielle "
 "utgivelser."
 
-#: network/thirdparty.pm:317
+#: network/thirdparty.pm:276
 #, c-format
 msgid ""
 "The required files can also be installed from this URL:\n"
@@ -11695,22 +11708,22 @@ msgstr ""
 "Filene som trengs kan også installeres fra denne internettadressen:\n"
 "%s"
 
-#: network/thirdparty.pm:357
+#: network/thirdparty.pm:309
 #, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
 msgstr "Klarte ikke å finne \"%s\" på ditt Windows-system!"
 
-#: network/thirdparty.pm:359
+#: network/thirdparty.pm:311
 #, c-format
 msgid "No Windows system has been detected!"
 msgstr "Inget Windows-system har blitt oppdaget!"
 
-#: network/thirdparty.pm:369
+#: network/thirdparty.pm:321
 #, c-format
 msgid "Insert floppy"
 msgstr "Sett inn diskett"
 
-#: network/thirdparty.pm:370
+#: network/thirdparty.pm:322
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -11719,12 +11732,12 @@ msgstr ""
 "Sett inn en FAT-formatert diskett i stasjon %s med %s i root-katalog og "
 "trykk på %s"
 
-#: network/thirdparty.pm:380
+#: network/thirdparty.pm:332
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Diskettilgangsfeil, ikke i stand til å montere enheten %s"
 
-#: network/thirdparty.pm:390
+#: network/thirdparty.pm:342
 #, c-format
 msgid ""
 "You need the Alcatel microcode.\n"
@@ -11735,38 +11748,38 @@ msgstr ""
 "Du må gi tilby det via diskett eller din windows-partisjon,\n"
 "eller hoppe over og gjøre det senere."
 
-#: network/thirdparty.pm:394 network/thirdparty.pm:396
+#: network/thirdparty.pm:346 network/thirdparty.pm:348
 #, c-format
 msgid "Use a floppy"
 msgstr "Bruk en diskett"
 
-#: network/thirdparty.pm:394
+#: network/thirdparty.pm:346
 #, c-format
 msgid "Use my Windows partition"
 msgstr "Bruk min Windows-partisjon"
 
-#: network/thirdparty.pm:404
+#: network/thirdparty.pm:356
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Firmwarekopiering feilet, filen %s ble ikke funnet"
 
-#: network/thirdparty.pm:409 standalone/drakautoinst:250
+#: network/thirdparty.pm:361 standalone/drakautoinst:250
 #: standalone/drakvpn:888 standalone/scannerdrake:405
 #, c-format
 msgid "Congratulations!"
 msgstr "Gratulerer!"
 
-#: network/thirdparty.pm:409
+#: network/thirdparty.pm:361
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Firmwarekopiering vellykket"
 
-#: network/thirdparty.pm:477
+#: network/thirdparty.pm:426
 #, c-format
 msgid "Looking for required software and drivers..."
 msgstr "Ser etter programvare og drivere som trengs..."
 
-#: network/thirdparty.pm:482
+#: network/thirdparty.pm:436
 #, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr "Vent, kjører kommandoer for å sette opp enheter..."
@@ -11865,80 +11878,80 @@ msgstr "kanskje"
 msgid "Downloading file %s..."
 msgstr "Laster ned fil %s..."
 
-#: printer/cups.pm:105
+#: printer/cups.pm:103
 #, c-format
 msgid "(on %s)"
 msgstr "(på %s)"
 
-#: printer/cups.pm:105
+#: printer/cups.pm:103
 #, c-format
 msgid "(on this machine)"
 msgstr "(på denne maskinen)"
 
-#: printer/cups.pm:117 standalone/printerdrake:200
+#: printer/cups.pm:115 standalone/printerdrake:198
 #, c-format
 msgid "Configured on other machines"
 msgstr "Satt opp på andre maskiner"
 
-#: printer/cups.pm:119
+#: printer/cups.pm:117
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "På CUPS-tjener \"%s\""
 
-#: printer/cups.pm:119 printer/printerdrake.pm:5064
-#: printer/printerdrake.pm:5074 printer/printerdrake.pm:5233
-#: printer/printerdrake.pm:5244 printer/printerdrake.pm:5458
+#: printer/cups.pm:117 printer/printerdrake.pm:5055
+#: printer/printerdrake.pm:5065 printer/printerdrake.pm:5210
+#: printer/printerdrake.pm:5221 printer/printerdrake.pm:5434
 #, c-format
 msgid " (Default)"
 msgstr " (Standard)"
 
-#: printer/data.pm:67
+#: printer/data.pm:59
 #, c-format
 msgid "PDQ - Print, Do not Queue"
 msgstr "PDQ - Print, Do not Queue"
 
-#: printer/data.pm:68
+#: printer/data.pm:60
 #, c-format
 msgid "PDQ"
 msgstr "PDQ"
 
-#: printer/data.pm:80
+#: printer/data.pm:72
 #, c-format
 msgid "LPD - Line Printer Daemon"
 msgstr "LPD - Line Printer Daemon"
 
-#: printer/data.pm:81
+#: printer/data.pm:73
 #, c-format
 msgid "LPD"
 msgstr "LPD"
 
-#: printer/data.pm:102
+#: printer/data.pm:94
 #, c-format
 msgid "LPRng - LPR New Generation"
 msgstr "LPRng - LPR New Generation"
 
-#: printer/data.pm:103
+#: printer/data.pm:95
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
 
-#: printer/data.pm:128
+#: printer/data.pm:120
 #, c-format
 msgid "CUPS - Common Unix Printing System"
 msgstr "CUPS - Common Unix Printing System"
 
-#: printer/data.pm:158
+#: printer/data.pm:151
 #, c-format
 msgid "CUPS - Common Unix Printing System (remote server)"
 msgstr "CUPS - Common Unix Printing System (ekstern tjener)"
 
-#: printer/data.pm:159
+#: printer/data.pm:152
 #, c-format
 msgid "Remote CUPS"
 msgstr "Fjern-CUPS"
 
-#: printer/detect.pm:166 printer/detect.pm:250 printer/detect.pm:485
-#: printer/detect.pm:558
+#: printer/detect.pm:166 printer/detect.pm:250 printer/detect.pm:452
+#: printer/detect.pm:489
 #, c-format
 msgid "Unknown Model"
 msgstr "Ukjent modell"
@@ -11994,15 +12007,15 @@ msgstr "Pipe inn i kommando"
 msgid "recommended"
 msgstr "anbefalt"
 
-#: printer/main.pm:330 printer/main.pm:690 printer/main.pm:1808
-#: printer/main.pm:2981 printer/main.pm:2990 printer/printerdrake.pm:973
-#: printer/printerdrake.pm:1133 printer/printerdrake.pm:2408
-#: printer/printerdrake.pm:5495
+#: printer/main.pm:330 printer/main.pm:690 printer/main.pm:1805
+#: printer/main.pm:2973 printer/main.pm:2982 printer/printerdrake.pm:973
+#: printer/printerdrake.pm:1133 printer/printerdrake.pm:2412
+#: printer/printerdrake.pm:5471
 #, c-format
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
-#: printer/main.pm:355 standalone/printerdrake:199
+#: printer/main.pm:355 standalone/printerdrake:197
 #, c-format
 msgid "Configured on this machine"
 msgstr "Satt opp på denne maskinen"
@@ -12194,33 +12207,33 @@ msgid "URI: %s"
 msgstr "URI: %s"
 
 #: printer/main.pm:687 printer/printerdrake.pm:1060
-#: printer/printerdrake.pm:3232
+#: printer/printerdrake.pm:3227
 #, c-format
 msgid "Raw printer (No driver)"
 msgstr "Rå skriver (ingen driver)"
 
-#: printer/main.pm:1307 printer/printerdrake.pm:211
+#: printer/main.pm:1304 printer/printerdrake.pm:211
 #: printer/printerdrake.pm:223
 #, c-format
 msgid "Local network(s)"
 msgstr "Lokale nettverk"
 
-#: printer/main.pm:1309 printer/printerdrake.pm:227
+#: printer/main.pm:1306 printer/printerdrake.pm:227
 #, c-format
 msgid "Interface \"%s\""
 msgstr "Grensesnitt \"%s\""
 
-#: printer/main.pm:1311
+#: printer/main.pm:1308
 #, c-format
 msgid "Network %s"
 msgstr "Nettverk %s"
 
-#: printer/main.pm:1313
+#: printer/main.pm:1310
 #, c-format
 msgid "Host %s"
 msgstr "Vertsnavn %s"
 
-#: printer/main.pm:1342
+#: printer/main.pm:1339
 #, c-format
 msgid "%s (Port %s)"
 msgstr "%s (Port %s)"
@@ -12380,7 +12393,7 @@ msgstr ""
 "må de selv sørge for at disse punktene blir overholdt."
 
 #: printer/printerdrake.pm:138 printer/printerdrake.pm:506
-#: printer/printerdrake.pm:4697
+#: printer/printerdrake.pm:4688
 #, c-format
 msgid "Remote CUPS server and no local CUPS daemon"
 msgstr "Ekstern CUPS-tjener og ingen lokal CUPS-tjeneste"
@@ -12552,8 +12565,8 @@ msgstr "Port"
 msgid "On, Name or IP of remote server:"
 msgstr "På, Navn eller IP av ekstern tjener."
 
-#: printer/printerdrake.pm:514 printer/printerdrake.pm:4706
-#: printer/printerdrake.pm:4772
+#: printer/printerdrake.pm:514 printer/printerdrake.pm:4697
+#: printer/printerdrake.pm:4763
 #, c-format
 msgid "CUPS server name or IP address missing."
 msgstr "CUPS-tjenernavn eller IP-adresse mangler."
@@ -12568,26 +12581,26 @@ msgstr "CUPS-tjenernavn eller IP-adresse mangler."
 #: printer/printerdrake.pm:2602 printer/printerdrake.pm:2619
 #: printer/printerdrake.pm:2663 printer/printerdrake.pm:2703
 #: printer/printerdrake.pm:2753 printer/printerdrake.pm:2790
-#: printer/printerdrake.pm:2801 printer/printerdrake.pm:3074
-#: printer/printerdrake.pm:3079 printer/printerdrake.pm:3227
-#: printer/printerdrake.pm:3338 printer/printerdrake.pm:3951
-#: printer/printerdrake.pm:4018 printer/printerdrake.pm:4067
-#: printer/printerdrake.pm:4070 printer/printerdrake.pm:4202
-#: printer/printerdrake.pm:4303 printer/printerdrake.pm:4375
-#: printer/printerdrake.pm:4396 printer/printerdrake.pm:4406
-#: printer/printerdrake.pm:4497 printer/printerdrake.pm:4592
-#: printer/printerdrake.pm:4598 printer/printerdrake.pm:4626
-#: printer/printerdrake.pm:4733 printer/printerdrake.pm:4842
-#: printer/printerdrake.pm:4862 printer/printerdrake.pm:4871
-#: printer/printerdrake.pm:4886 printer/printerdrake.pm:5087
-#: printer/printerdrake.pm:5564 printer/printerdrake.pm:5647
-#: standalone/printerdrake:75 standalone/printerdrake:590
+#: printer/printerdrake.pm:2801 printer/printerdrake.pm:3069
+#: printer/printerdrake.pm:3074 printer/printerdrake.pm:3222
+#: printer/printerdrake.pm:3333 printer/printerdrake.pm:3946
+#: printer/printerdrake.pm:4013 printer/printerdrake.pm:4062
+#: printer/printerdrake.pm:4065 printer/printerdrake.pm:4197
+#: printer/printerdrake.pm:4298 printer/printerdrake.pm:4370
+#: printer/printerdrake.pm:4391 printer/printerdrake.pm:4401
+#: printer/printerdrake.pm:4492 printer/printerdrake.pm:4587
+#: printer/printerdrake.pm:4593 printer/printerdrake.pm:4617
+#: printer/printerdrake.pm:4724 printer/printerdrake.pm:4833
+#: printer/printerdrake.pm:4853 printer/printerdrake.pm:4862
+#: printer/printerdrake.pm:4877 printer/printerdrake.pm:5078
+#: printer/printerdrake.pm:5540 printer/printerdrake.pm:5623
+#: standalone/printerdrake:73 standalone/printerdrake:572
 #, c-format
 msgid "Printerdrake"
 msgstr "Printerdrake"
 
-#: printer/printerdrake.pm:567 printer/printerdrake.pm:4304
-#: printer/printerdrake.pm:4843
+#: printer/printerdrake.pm:567 printer/printerdrake.pm:4299
+#: printer/printerdrake.pm:4834
 #, c-format
 msgid "Reading printer data..."
 msgstr "Leser skriverdata: ..."
@@ -12599,15 +12612,17 @@ msgstr "Starter CUPS på nytt..."
 
 #: printer/printerdrake.pm:614
 #, c-format
-msgid ""
-"Allow pop-up windows, printer setup and package installation may be canceled"
+msgid "Allow pop-up windows, canceling setup and package installation possible"
 msgstr ""
+"Tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon mulig"
 
 #: printer/printerdrake.pm:616
 #, c-format
 msgid ""
-"No pop-up windows, printer setup and package installation cannot be canceled"
+"No pop-up windows, canceling setup and package installation not possible"
 msgstr ""
+"Ikke tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon "
+"ikke mulig"
 
 #: printer/printerdrake.pm:622
 #, c-format
@@ -12719,7 +12734,7 @@ msgstr ""
 "Skrivere på fjern-CUPS-tjenere trenger du ikke å sette opp her; disse "
 "skriverene vil bli oppdaget automatisk."
 
-#: printer/printerdrake.pm:751 printer/printerdrake.pm:5089
+#: printer/printerdrake.pm:751 printer/printerdrake.pm:5080
 #, c-format
 msgid ""
 "\n"
@@ -12885,8 +12900,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:884
 #, c-format
-msgid "Do not setup printer automatically now, and never do it again"
-msgstr ""
+msgid "Do not do automatic printer setup and do not do it again"
+msgstr "Ikke gjør automatisk oppsett av skriveren og ikke gjør det igjen"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12895,8 +12910,8 @@ msgstr "Søker etter nye skrivere..."
 
 #: printer/printerdrake.pm:989
 #, c-format
-msgid "Do not setup printer automatically again"
-msgstr ""
+msgid "Do not do automatic printer setup again"
+msgstr "Ikke gjør automatisk oppsett av skriver på nytt"
 
 #: printer/printerdrake.pm:996
 #, c-format
@@ -12960,12 +12975,12 @@ msgstr " på "
 msgid ")"
 msgstr ")"
 
-#: printer/printerdrake.pm:1069 printer/printerdrake.pm:3239
+#: printer/printerdrake.pm:1069 printer/printerdrake.pm:3234
 #, c-format
 msgid "Printer model selection"
 msgstr "Skrivervalg"
 
-#: printer/printerdrake.pm:1070 printer/printerdrake.pm:3240
+#: printer/printerdrake.pm:1070 printer/printerdrake.pm:3235
 #, c-format
 msgid "Which printer model do you have?"
 msgstr "Hva slags type skriver har du?"
@@ -12983,7 +12998,7 @@ msgstr ""
 "Printerdrake kunne ikke avgjøre hva slags modell skriveren \"%s\" er. Velg "
 "den korrekte modellen fra lista. "
 
-#: printer/printerdrake.pm:1074 printer/printerdrake.pm:3245
+#: printer/printerdrake.pm:1074 printer/printerdrake.pm:3240
 #, c-format
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
@@ -12992,7 +13007,7 @@ msgstr ""
 "Hvis din skriver ikke finnes i listen velg en kompatibel (se i "
 "skrivermanualen) eller en lignende."
 
-#: printer/printerdrake.pm:1089 printer/printerdrake.pm:4863
+#: printer/printerdrake.pm:1089 printer/printerdrake.pm:4854
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Setter opp skriver \"%s\"..."
@@ -13015,7 +13030,7 @@ msgstr ""
 "Du kan skru den tilbake på igjen ved å velge \"%s\" -> \"%s\" i "
 "Printerdrake's hovedmeny. "
 
-#: printer/printerdrake.pm:1125 printer/printerdrake.pm:5139
+#: printer/printerdrake.pm:1125
 #, c-format
 msgid "Configure Auto Administration"
 msgstr "Sett opp automatisk administrasjon"
@@ -13034,7 +13049,7 @@ msgstr ""
 #: printer/printerdrake.pm:1274 printer/printerdrake.pm:1286
 #: printer/printerdrake.pm:1393 printer/printerdrake.pm:2422
 #: printer/printerdrake.pm:2437 printer/printerdrake.pm:2509
-#: printer/printerdrake.pm:5106 printer/printerdrake.pm:5293
+#: printer/printerdrake.pm:5097 printer/printerdrake.pm:5270
 #, c-format
 msgid "Add a new printer"
 msgstr "Legg til en ny skriver"
@@ -13938,23 +13953,23 @@ msgstr "Setter opp enhet..."
 msgid "Making printer port available for CUPS..."
 msgstr "Gjør skriverport tilgjengelig for CUPS..."
 
-#: printer/printerdrake.pm:2801 printer/printerdrake.pm:3075
-#: printer/printerdrake.pm:3228
+#: printer/printerdrake.pm:2801 printer/printerdrake.pm:3070
+#: printer/printerdrake.pm:3223
 #, c-format
 msgid "Reading printer database..."
 msgstr "Leser skriverdatabase  ..."
 
-#: printer/printerdrake.pm:3033
+#: printer/printerdrake.pm:3028
 #, c-format
 msgid "Enter Printer Name and Comments"
 msgstr "Angi Skrivernavn og kommentarer"
 
-#: printer/printerdrake.pm:3037 printer/printerdrake.pm:4360
+#: printer/printerdrake.pm:3032 printer/printerdrake.pm:4355
 #, c-format
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr "Skrivernavn bør inneholde kun bokstaver, tall og understrek"
 
-#: printer/printerdrake.pm:3043 printer/printerdrake.pm:4365
+#: printer/printerdrake.pm:3038 printer/printerdrake.pm:4360
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -13963,7 +13978,7 @@ msgstr ""
 "Skriveren \"%s\" eksisterer allerede,\n"
 "ønsker du å overskrive dens oppsett?"
 
-#: printer/printerdrake.pm:3050
+#: printer/printerdrake.pm:3045
 #, c-format
 msgid ""
 "The printer name \"%s\" has more than 12 characters which can make the "
@@ -13973,7 +13988,7 @@ msgstr ""
 "Printernavnet \"%s\" har mer enn 12 tegn som kan gjøre skriveren "
 "utilgjengelig fra Windows-klienter. Ønsker du virkelig å bruke dette navnet?"
 
-#: printer/printerdrake.pm:3059
+#: printer/printerdrake.pm:3054
 #, c-format
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
@@ -13983,35 +13998,35 @@ msgstr ""
 "plasseringsfeltene trenger ikke å fylles inn. De er kommentarerer for "
 "brukerne."
 
-#: printer/printerdrake.pm:3060
+#: printer/printerdrake.pm:3055
 #, c-format
 msgid "Name of printer"
 msgstr "Navn på skriver"
 
-#: printer/printerdrake.pm:3061 standalone/drakconnect:592
-#: standalone/harddrake2:39 standalone/printerdrake:224
-#: standalone/printerdrake:231
+#: printer/printerdrake.pm:3056 standalone/drakconnect:592
+#: standalone/harddrake2:39 standalone/printerdrake:222
+#: standalone/printerdrake:229
 #, c-format
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: printer/printerdrake.pm:3062 standalone/printerdrake:224
-#: standalone/printerdrake:231
+#: printer/printerdrake.pm:3057 standalone/printerdrake:222
+#: standalone/printerdrake:229
 #, c-format
 msgid "Location"
 msgstr "Plassering"
 
-#: printer/printerdrake.pm:3080
+#: printer/printerdrake.pm:3075
 #, c-format
 msgid "Preparing printer database..."
 msgstr "Forbereder skriverdatabase ..."
 
-#: printer/printerdrake.pm:3206
+#: printer/printerdrake.pm:3201
 #, c-format
 msgid "Your printer model"
 msgstr "Din skrivermodell"
 
-#: printer/printerdrake.pm:3207
+#: printer/printerdrake.pm:3202
 #, c-format
 msgid ""
 "Printerdrake has compared the model name resulting from the printer auto-"
@@ -14036,18 +14051,18 @@ msgstr ""
 "\n"
 "%s"
 
-#: printer/printerdrake.pm:3212 printer/printerdrake.pm:3215
+#: printer/printerdrake.pm:3207 printer/printerdrake.pm:3210
 #, c-format
 msgid "The model is correct"
 msgstr "Modellen er riktig"
 
-#: printer/printerdrake.pm:3213 printer/printerdrake.pm:3214
-#: printer/printerdrake.pm:3217
+#: printer/printerdrake.pm:3208 printer/printerdrake.pm:3209
+#: printer/printerdrake.pm:3212
 #, c-format
 msgid "Select model manually"
 msgstr "Velg modell manuelt"
 
-#: printer/printerdrake.pm:3241
+#: printer/printerdrake.pm:3236
 #, c-format
 msgid ""
 "\n"
@@ -14062,12 +14077,12 @@ msgstr ""
 "skrivermodell riktig. Søk etter riktig modell i listen når pekeren står over "
 "en feil modell eller på \"Rå skriver\"."
 
-#: printer/printerdrake.pm:3260
+#: printer/printerdrake.pm:3255
 #, c-format
 msgid "Install a manufacturer-supplied PPD file"
 msgstr "Installer en PPD-fil levert av produsent"
 
-#: printer/printerdrake.pm:3292
+#: printer/printerdrake.pm:3287
 #, c-format
 msgid ""
 "Every PostScript printer is delivered with a PPD file which describes the "
@@ -14076,7 +14091,7 @@ msgstr ""
 "Hver PostScript-skriver er levert med en PPD-fil som beskriver skriverens "
 "valg og finesser."
 
-#: printer/printerdrake.pm:3293
+#: printer/printerdrake.pm:3288
 #, c-format
 msgid ""
 "This file is usually somewhere on the CD with the Windows and Mac drivers "
@@ -14085,12 +14100,12 @@ msgstr ""
 "Denne filen er vanligvis et sted på CDen med Windows- og Mac-driverene som "
 "fulgte med skriveren."
 
-#: printer/printerdrake.pm:3294
+#: printer/printerdrake.pm:3289
 #, c-format
 msgid "You can find the PPD files also on the manufacturer's web sites."
 msgstr "Du kan finne PPD-filer også på produsentenes nettsteder."
 
-#: printer/printerdrake.pm:3295
+#: printer/printerdrake.pm:3290
 #, c-format
 msgid ""
 "If you have Windows installed on your machine, you can find the PPD file on "
@@ -14099,7 +14114,7 @@ msgstr ""
 "Hvis du har Windows installert på din maskin så kan du finne PPD-fila på din "
 "Windows-partisjon også."
 
-#: printer/printerdrake.pm:3296
+#: printer/printerdrake.pm:3291
 #, c-format
 msgid ""
 "Installing the printer's PPD file and using it when setting up the printer "
@@ -14109,7 +14124,7 @@ msgstr ""
 "Installerer skriverens PPD-fil og bruker den mens den setter opp skriveren "
 "så alle valg til skriveren vil være tilgjengelig via skriverens hardware"
 
-#: printer/printerdrake.pm:3297
+#: printer/printerdrake.pm:3292
 #, c-format
 msgid ""
 "Here you can choose the PPD file to be installed on your machine, it will "
@@ -14118,51 +14133,51 @@ msgstr ""
 "Her kan du velge PPD-filen som skal installeres på din maskin, den vil siden "
 "bli brukt til oppsett av din skriver."
 
-#: printer/printerdrake.pm:3299
+#: printer/printerdrake.pm:3294
 #, c-format
 msgid "Install PPD file from"
 msgstr "Installer PPD-fil fra"
 
-#: printer/printerdrake.pm:3302 printer/printerdrake.pm:3310
+#: printer/printerdrake.pm:3297 printer/printerdrake.pm:3305
 #: standalone/scannerdrake:183 standalone/scannerdrake:192
 #: standalone/scannerdrake:242 standalone/scannerdrake:250
 #, c-format
 msgid "Floppy Disk"
 msgstr "Diskett"
 
-#: printer/printerdrake.pm:3303 printer/printerdrake.pm:3312
+#: printer/printerdrake.pm:3298 printer/printerdrake.pm:3307
 #: standalone/scannerdrake:184 standalone/scannerdrake:194
 #: standalone/scannerdrake:243 standalone/scannerdrake:252
 #, c-format
 msgid "Other place"
 msgstr "Annet sted"
 
-#: printer/printerdrake.pm:3318
+#: printer/printerdrake.pm:3313
 #, c-format
 msgid "Select PPD file"
 msgstr "Velg PPD-fil"
 
-#: printer/printerdrake.pm:3322
+#: printer/printerdrake.pm:3317
 #, c-format
 msgid "The PPD file %s does not exist or is unreadable!"
 msgstr "PPD-fila %s eksisterer ikke eller er uleselig!"
 
-#: printer/printerdrake.pm:3328
+#: printer/printerdrake.pm:3323
 #, c-format
 msgid "The PPD file %s does not conform with the PPD specifications!"
 msgstr "PPD-fila %s følger ikke PPD-spesifikasjonene!"
 
-#: printer/printerdrake.pm:3339
+#: printer/printerdrake.pm:3334
 #, c-format
 msgid "Installing PPD file..."
 msgstr "Installerer PPD-fil..."
 
-#: printer/printerdrake.pm:3457
+#: printer/printerdrake.pm:3452
 #, c-format
 msgid "OKI winprinter configuration"
 msgstr "OKI winprinter-oppsett"
 
-#: printer/printerdrake.pm:3458
+#: printer/printerdrake.pm:3453
 #, c-format
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
@@ -14179,12 +14194,12 @@ msgstr ""
 "du skriver ut en testside. Ellers vil ikke skriveren virke. Innstillinger "
 "for oppkoblingstype vil bli ignorert av driveren."
 
-#: printer/printerdrake.pm:3483 printer/printerdrake.pm:3513
+#: printer/printerdrake.pm:3478 printer/printerdrake.pm:3508
 #, c-format
 msgid "Lexmark inkjet configuration"
 msgstr "Lexmark inkjet-oppsett"
 
-#: printer/printerdrake.pm:3484
+#: printer/printerdrake.pm:3479
 #, c-format
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
@@ -14196,7 +14211,7 @@ msgstr ""
 "skrivere på fjernmaskiner eller skrivertjenerbokser. Koble skriveren til en "
 "lokal port eller sett den opp på maskinen hvor det er koblet til."
 
-#: printer/printerdrake.pm:3514
+#: printer/printerdrake.pm:3509
 #, c-format
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
@@ -14217,12 +14232,12 @@ msgstr ""
 "skriverhode alignment sider med \"lexmarkmaintain\" og juster hode alignment-"
 "innstillinger med dette programmet."
 
-#: printer/printerdrake.pm:3524
+#: printer/printerdrake.pm:3519
 #, c-format
 msgid "Lexmark X125 configuration"
 msgstr "Lexmark X125-oppsett"
 
-#: printer/printerdrake.pm:3525
+#: printer/printerdrake.pm:3520
 #, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
@@ -14235,12 +14250,12 @@ msgstr ""
 "skriveren til en lokal USB-port eller sett den opp på maskinen hvor den er "
 "koblet til."
 
-#: printer/printerdrake.pm:3547
+#: printer/printerdrake.pm:3542
 #, c-format
 msgid "Samsung ML/QL-85G configuration"
 msgstr "Samsung ML/QL-85G-oppsett"
 
-#: printer/printerdrake.pm:3548 printer/printerdrake.pm:3575
+#: printer/printerdrake.pm:3543 printer/printerdrake.pm:3570
 #, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected on the "
@@ -14253,17 +14268,17 @@ msgstr ""
 "paralellporter. Koble til skriveren på den første parallellporten eller sett "
 "den opp på maskinen den er koblet til."
 
-#: printer/printerdrake.pm:3574
+#: printer/printerdrake.pm:3569
 #, c-format
 msgid "Canon LBP-460/660 configuration"
 msgstr "Canon LBP-460/660-oppsett"
 
-#: printer/printerdrake.pm:3601
+#: printer/printerdrake.pm:3596
 #, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
 msgstr "Canon LBP-810/1120 (CAPT)-oppsett"
 
-#: printer/printerdrake.pm:3602
+#: printer/printerdrake.pm:3597
 #, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
@@ -14276,12 +14291,12 @@ msgstr ""
 "tilkoblet via parallellport. Koble skriveren til en lokal USB-port eller "
 "sett den opp på maskinen hvor den er koblet til."
 
-#: printer/printerdrake.pm:3609
+#: printer/printerdrake.pm:3604
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
 msgstr "Firmwareopplasting for HP LaserJet 1000"
 
-#: printer/printerdrake.pm:3759
+#: printer/printerdrake.pm:3754
 #, c-format
 msgid ""
 "Printer default settings\n"
@@ -14299,27 +14314,27 @@ msgstr ""
 "papirholdere) er satt riktig. Merk deg at veldig god utskriftskvalitet kan "
 "gjøre utskriften mye tregere."
 
-#: printer/printerdrake.pm:3884
+#: printer/printerdrake.pm:3879
 #, c-format
 msgid "Printer default settings"
 msgstr "Standardoppsett for skriver"
 
-#: printer/printerdrake.pm:3891
+#: printer/printerdrake.pm:3886
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Valg %s må være ett helt tall!"
 
-#: printer/printerdrake.pm:3895
+#: printer/printerdrake.pm:3890
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "Valg %s må være ett tall!"
 
-#: printer/printerdrake.pm:3899
+#: printer/printerdrake.pm:3894
 #, c-format
 msgid "Option %s out of range!"
 msgstr "Valg %s er utenfor rekkevidden!"
 
-#: printer/printerdrake.pm:3951
+#: printer/printerdrake.pm:3946
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
@@ -14328,12 +14343,12 @@ msgstr ""
 "Ønsker du å sette denne skriveren (\"%s\")\n"
 "som standard skriver?"
 
-#: printer/printerdrake.pm:3967
+#: printer/printerdrake.pm:3962
 #, c-format
 msgid "Test pages"
 msgstr "Testsider"
 
-#: printer/printerdrake.pm:3968
+#: printer/printerdrake.pm:3963
 #, c-format
 msgid ""
 "Please select the test pages you want to print.\n"
@@ -14346,47 +14361,47 @@ msgstr ""
 "for lite minne vil den ikke skrives ut i det hele tatt. Som regel vil det "
 "holde å skrive ut standard testsiden."
 
-#: printer/printerdrake.pm:3972
+#: printer/printerdrake.pm:3967
 #, c-format
 msgid "No test pages"
 msgstr "Ingen testsider"
 
-#: printer/printerdrake.pm:3973
+#: printer/printerdrake.pm:3968
 #, c-format
 msgid "Print"
 msgstr "Skriv ut"
 
-#: printer/printerdrake.pm:3998
+#: printer/printerdrake.pm:3993
 #, c-format
 msgid "Standard test page"
 msgstr "Standard testside"
 
-#: printer/printerdrake.pm:4001
+#: printer/printerdrake.pm:3996
 #, c-format
 msgid "Alternative test page (Letter)"
 msgstr "Alternativ testside (brev)"
 
-#: printer/printerdrake.pm:4004
+#: printer/printerdrake.pm:3999
 #, c-format
 msgid "Alternative test page (A4)"
 msgstr "Alternativ testside (A4)"
 
-#: printer/printerdrake.pm:4006
+#: printer/printerdrake.pm:4001
 #, c-format
 msgid "Photo test page"
 msgstr "Fototestside"
 
-#: printer/printerdrake.pm:4019 printer/printerdrake.pm:4203
+#: printer/printerdrake.pm:4014 printer/printerdrake.pm:4198
 #, c-format
 msgid "Printing test page(s)..."
 msgstr "Skriver ut testside(r)..."
 
-#: printer/printerdrake.pm:4039
+#: printer/printerdrake.pm:4034
 #, c-format
 msgid "Skipping photo test page."
 msgstr "Hopper over fototestside."
 
-#: printer/printerdrake.pm:4056
+#: printer/printerdrake.pm:4051
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -14401,7 +14416,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: printer/printerdrake.pm:4060
+#: printer/printerdrake.pm:4055
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -14410,17 +14425,17 @@ msgstr ""
 "Testsiden(e) har blitt sendt til skriveren.\n"
 "Det kan ta litt tid før skriveren starter.\n"
 
-#: printer/printerdrake.pm:4070
+#: printer/printerdrake.pm:4065
 #, c-format
 msgid "Did it work properly?"
 msgstr "Virker det som det skal?"
 
-#: printer/printerdrake.pm:4094 printer/printerdrake.pm:5496
+#: printer/printerdrake.pm:4089 printer/printerdrake.pm:5472
 #, c-format
 msgid "Raw printer"
 msgstr "Rå skriver"
 
-#: printer/printerdrake.pm:4132
+#: printer/printerdrake.pm:4127
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -14433,7 +14448,7 @@ msgstr ""
 "eller \"kprinter <fil>\". De grafiske verktøyene lar deg velge skriver og "
 "forandre utskriftsvalg enkelt. \n"
 
-#: printer/printerdrake.pm:4134
+#: printer/printerdrake.pm:4129
 #, c-format
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
@@ -14444,8 +14459,8 @@ msgstr ""
 "skriverdialogen til mange applikasjoner, men her skal du ikke angi filnavnet "
 "ettersom det er gitt av applikasjonen.\n"
 
-#: printer/printerdrake.pm:4137 printer/printerdrake.pm:4154
-#: printer/printerdrake.pm:4164
+#: printer/printerdrake.pm:4132 printer/printerdrake.pm:4149
+#: printer/printerdrake.pm:4159
 #, c-format
 msgid ""
 "\n"
@@ -14458,7 +14473,7 @@ msgstr ""
 "skriverjobb. Du kan ganske enkelt angi de forskjellige valgene på "
 "kommandolinja, for eksempel \"%s <fil>\". "
 
-#: printer/printerdrake.pm:4140 printer/printerdrake.pm:4180
+#: printer/printerdrake.pm:4135 printer/printerdrake.pm:4175
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -14469,7 +14484,7 @@ msgstr ""
 "enten listen nedenfor eller klikk på  \"Skrivervalgliste\"-knappen.%s%s%s\n"
 "\n"
 
-#: printer/printerdrake.pm:4144
+#: printer/printerdrake.pm:4139
 #, c-format
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
@@ -14478,7 +14493,7 @@ msgstr ""
 "Dette er en liste over tilgjengelige valg for skriveren:\n"
 "\n"
 
-#: printer/printerdrake.pm:4149 printer/printerdrake.pm:4159
+#: printer/printerdrake.pm:4144 printer/printerdrake.pm:4154
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -14487,8 +14502,8 @@ msgstr ""
 "For å skrive ut en fil fra kommandolinja (terminalvindu), bruk kommandoen \"%"
 "s  <fil>\". \n"
 
-#: printer/printerdrake.pm:4151 printer/printerdrake.pm:4161
-#: printer/printerdrake.pm:4171
+#: printer/printerdrake.pm:4146 printer/printerdrake.pm:4156
+#: printer/printerdrake.pm:4166
 #, c-format
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
@@ -14499,7 +14514,7 @@ msgstr ""
 "skriverdialogen til mange applikasjoner. Her skal du ikke oppgi et filnavn "
 "ettersom det er gitt av applikasjonen.\n"
 
-#: printer/printerdrake.pm:4156 printer/printerdrake.pm:4166
+#: printer/printerdrake.pm:4151 printer/printerdrake.pm:4161
 #, c-format
 msgid ""
 "To get a list of the options available for the current printer click on the "
@@ -14508,7 +14523,7 @@ msgstr ""
 "Får å få en liste over tilgjengelige valg for nåværende skriver klikk på "
 "\"Skrivervalgliste\"-knappen."
 
-#: printer/printerdrake.pm:4169
+#: printer/printerdrake.pm:4164
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -14517,7 +14532,7 @@ msgstr ""
 "Får å skrive ut en fil fra kommandolinjen (terminalvindu) bruk kommandoen \"%"
 "s <file>\" eller \"%s <file>\".\n"
 
-#: printer/printerdrake.pm:4173
+#: printer/printerdrake.pm:4168
 #, c-format
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
@@ -14535,7 +14550,7 @@ msgstr ""
 "annet\n"
 "ved papirkræsj.\n"
 
-#: printer/printerdrake.pm:4177
+#: printer/printerdrake.pm:4172
 #, c-format
 msgid ""
 "\n"
@@ -14548,37 +14563,37 @@ msgstr ""
 "spesifik skriverjobb. Bare legg til de ønskede valgene til kommandolinjen, "
 "feks. \"%s <fil>\".\n"
 
-#: printer/printerdrake.pm:4187
+#: printer/printerdrake.pm:4182
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Skriver/Skanner/Fotokort på \"%s\""
 
-#: printer/printerdrake.pm:4188
+#: printer/printerdrake.pm:4183
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr "Skriver ut/Skanner på \"%s\""
 
-#: printer/printerdrake.pm:4190
+#: printer/printerdrake.pm:4185
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Skrive/Fotokort-tilgang på \"%s\""
 
-#: printer/printerdrake.pm:4192
+#: printer/printerdrake.pm:4187
 #, c-format
 msgid "Using/Maintaining the printer \"%s\""
 msgstr "Bruker/vedlikeholder skriveren \"%s\""
 
-#: printer/printerdrake.pm:4193
+#: printer/printerdrake.pm:4188
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "Skriver ut på skriver \"%s\""
 
-#: printer/printerdrake.pm:4199
+#: printer/printerdrake.pm:4194
 #, c-format
 msgid "Print option list"
 msgstr "Skrivervalgliste"
 
-#: printer/printerdrake.pm:4221
+#: printer/printerdrake.pm:4216
 #, c-format
 msgid ""
 "Your %s is set up with HP's HPLIP driver software. This way many special "
@@ -14589,7 +14604,7 @@ msgstr ""
 "mange spesialfinesser din printer måtte ha støttet.\n"
 "\n"
 
-#: printer/printerdrake.pm:4224
+#: printer/printerdrake.pm:4219
 #, c-format
 msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
@@ -14598,7 +14613,7 @@ msgstr ""
 "Scanneren i skriveren din kan brukes med den vanlige SANE-programvaren, "
 "feks. Kooka eller XSane (Begge i Multimedia/Grafikk-menyen). "
 
-#: printer/printerdrake.pm:4225
+#: printer/printerdrake.pm:4220
 #, c-format
 msgid ""
 "Run Scannerdrake (Hardware/Scanner in Mandriva Linux Control Center) to "
@@ -14609,7 +14624,7 @@ msgstr ""
 "dele scanneren din på nettverket.\n"
 "\n"
 
-#: printer/printerdrake.pm:4229
+#: printer/printerdrake.pm:4224
 #, c-format
 msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
@@ -14618,7 +14633,7 @@ msgstr ""
 "Minnekortleserne i din skriver kan brukes som en vanlig USB-"
 "masselagringsenhet."
 
-#: printer/printerdrake.pm:4230
+#: printer/printerdrake.pm:4225
 #, c-format
 msgid ""
 "After inserting a card a hard disk icon to access the card should appear on "
@@ -14629,7 +14644,7 @@ msgstr ""
 "dukke opp på ditt skrivebord.\n"
 "\n"
 
-#: printer/printerdrake.pm:4232
+#: printer/printerdrake.pm:4227
 #, c-format
 msgid ""
 "The memory card readers in your printer can be accessed using HP's Printer "
@@ -14640,7 +14655,7 @@ msgstr ""
 "(Meny: System/Overvåking/HP Printer Toolbox) ved å klikke på \"Access Photo "
 "Cards...\"-knappen i \"Functions\"-arkfanen. "
 
-#: printer/printerdrake.pm:4233
+#: printer/printerdrake.pm:4228
 #, c-format
 msgid ""
 "Note that this is very slow, reading the pictures from the camera or a USB "
@@ -14651,7 +14666,7 @@ msgstr ""
 "kortleser er vanligvis raskere.\n"
 "\n"
 
-#: printer/printerdrake.pm:4236
+#: printer/printerdrake.pm:4231
 #, c-format
 msgid ""
 "HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) offers a "
@@ -14662,27 +14677,27 @@ msgstr ""
 "stor mengde statusovervåkning og vedlikeholdsfunksjoner for din %s:\n"
 "\n"
 
-#: printer/printerdrake.pm:4237
+#: printer/printerdrake.pm:4232
 #, c-format
 msgid " - Ink level/status info\n"
 msgstr " - Blekknivå/statusinformasjon:\n"
 
-#: printer/printerdrake.pm:4238
+#: printer/printerdrake.pm:4233
 #, c-format
 msgid " - Ink nozzle cleaning\n"
 msgstr " - Blekkpatronrensing \n"
 
-#: printer/printerdrake.pm:4239
+#: printer/printerdrake.pm:4234
 #, c-format
 msgid " - Print head alignment\n"
 msgstr " - Skriverhodejustering\n"
 
-#: printer/printerdrake.pm:4240
+#: printer/printerdrake.pm:4235
 #, c-format
 msgid " - Color calibration\n"
 msgstr " - Fargekalibrering\n"
 
-#: printer/printerdrake.pm:4255
+#: printer/printerdrake.pm:4250
 #, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
@@ -14708,7 +14723,7 @@ msgstr ""
 "trenger bare å bruke «scannerdrake» hvis du vil dele skanneren over "
 "nettverket."
 
-#: printer/printerdrake.pm:4281
+#: printer/printerdrake.pm:4276
 #, c-format
 msgid ""
 "Your printer was configured automatically to give you access to the photo "
@@ -14731,13 +14746,13 @@ msgstr ""
 "\"MToolsFM\" kan du bytte mellom stasjonbokstaver med feltet i øvre høyre\n"
 "hjørne av fil-lista."
 
-#: printer/printerdrake.pm:4324 printer/printerdrake.pm:4351
-#: printer/printerdrake.pm:4386
+#: printer/printerdrake.pm:4319 printer/printerdrake.pm:4346
+#: printer/printerdrake.pm:4381
 #, c-format
 msgid "Transfer printer configuration"
 msgstr "Overfør skriveroppsett"
 
-#: printer/printerdrake.pm:4325
+#: printer/printerdrake.pm:4320
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -14752,7 +14767,7 @@ msgstr ""
 "ikke jobber.\n"
 "Ikke alle køer kan overføres grunnet:\n"
 
-#: printer/printerdrake.pm:4328
+#: printer/printerdrake.pm:4323
 #, c-format
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
@@ -14761,7 +14776,7 @@ msgstr ""
 "CUPS støtter ikke skrivere på Novell-tjenere eller skrivere som sender "
 "dataene inn i en friformet kommando.\n"
 
-#: printer/printerdrake.pm:4330
+#: printer/printerdrake.pm:4325
 #, c-format
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
@@ -14770,12 +14785,12 @@ msgstr ""
 "PDQ støtter bare lokale skrivere, fjern-LPD skrivere, og Socket/TCP-"
 "skrivere.\n"
 
-#: printer/printerdrake.pm:4332
+#: printer/printerdrake.pm:4327
 #, c-format
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD og LPRng støtter ikke IPP-skrivere.\n"
 
-#: printer/printerdrake.pm:4334
+#: printer/printerdrake.pm:4329
 #, c-format
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
@@ -14784,7 +14799,7 @@ msgstr ""
 "I tillegg, køer laget med dette programmet eller \"foomatic -configure\" kan "
 "ikke overflyttes."
 
-#: printer/printerdrake.pm:4335
+#: printer/printerdrake.pm:4330
 #, c-format
 msgid ""
 "\n"
@@ -14795,7 +14810,7 @@ msgstr ""
 "Skrivere satt opp med PPD-filene som produsenten har laget eller med CUPS-"
 "drivere kan ikke overføres."
 
-#: printer/printerdrake.pm:4336
+#: printer/printerdrake.pm:4331
 #, c-format
 msgid ""
 "\n"
@@ -14806,17 +14821,17 @@ msgstr ""
 "Velg skriverene som du vil overføre og klikk \n"
 "\"Overfør\"."
 
-#: printer/printerdrake.pm:4339
+#: printer/printerdrake.pm:4334
 #, c-format
 msgid "Do not transfer printers"
 msgstr "Ikke overfør skrivere"
 
-#: printer/printerdrake.pm:4340 printer/printerdrake.pm:4356
+#: printer/printerdrake.pm:4335 printer/printerdrake.pm:4351
 #, c-format
 msgid "Transfer"
 msgstr "Overfør"
 
-#: printer/printerdrake.pm:4352
+#: printer/printerdrake.pm:4347
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -14827,17 +14842,17 @@ msgstr ""
 "Klikk \"Overfør\" for å overskrive.\n"
 "Du kan også gi ett nytt skrivernavn, eller hoppe over denne skriveren."
 
-#: printer/printerdrake.pm:4373
+#: printer/printerdrake.pm:4368
 #, c-format
 msgid "New printer name"
 msgstr "Nytt skrivernavn"
 
-#: printer/printerdrake.pm:4376
+#: printer/printerdrake.pm:4371
 #, c-format
 msgid "Transferring %s..."
 msgstr "Overfører %s ..."
 
-#: printer/printerdrake.pm:4387
+#: printer/printerdrake.pm:4382
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
@@ -14847,28 +14862,28 @@ msgstr ""
 "opp\n"
 "som standardskriver også under det nye skriversystemet - %s?"
 
-#: printer/printerdrake.pm:4397
+#: printer/printerdrake.pm:4392
 #, c-format
 msgid "Refreshing printer data..."
 msgstr "Oppdaterer skriverdata ..."
 
-#: printer/printerdrake.pm:4407
+#: printer/printerdrake.pm:4402
 #, c-format
 msgid "Starting network..."
 msgstr "Starter nettverk ..."
 
-#: printer/printerdrake.pm:4451 printer/printerdrake.pm:4455
-#: printer/printerdrake.pm:4457
+#: printer/printerdrake.pm:4446 printer/printerdrake.pm:4450
+#: printer/printerdrake.pm:4452
 #, c-format
 msgid "Configure the network now"
 msgstr "Sett opp nettverket nå"
 
-#: printer/printerdrake.pm:4452
+#: printer/printerdrake.pm:4447
 #, c-format
 msgid "Network functionality not configured"
 msgstr "Nettverksfunksjonalitet ikke satt opp"
 
-#: printer/printerdrake.pm:4453
+#: printer/printerdrake.pm:4448
 #, c-format
 msgid ""
 "You are going to configure a remote printer. This needs working network "
@@ -14881,12 +14896,12 @@ msgstr ""
 "nettverket, vil du ikke bli i stand til å bruke skriveren du setter opp. "
 "Hvordan vil du fortsette?"
 
-#: printer/printerdrake.pm:4456
+#: printer/printerdrake.pm:4451
 #, c-format
 msgid "Go on without configuring the network"
 msgstr "Fortsett uten å sette opp nettverket"
 
-#: printer/printerdrake.pm:4487
+#: printer/printerdrake.pm:4482
 #, c-format
 msgid ""
 "The network configuration done during the installation cannot be started "
@@ -14901,7 +14916,7 @@ msgstr ""
 "\"Nettverk og internett\"/ \"Forbindelse\", og sett opp skriveren etterpå, "
 "også i %s Kontrollsenter, under /\"Maskinvare\"/\"Skriver\""
 
-#: printer/printerdrake.pm:4488
+#: printer/printerdrake.pm:4483
 #, c-format
 msgid ""
 "The network access was not running and could not be started. Please check "
@@ -14912,27 +14927,27 @@ msgstr ""
 "nettverksoppsettet og prøv deretter å sette opp nettverks-\n"
 "skriveren igjen."
 
-#: printer/printerdrake.pm:4498
+#: printer/printerdrake.pm:4493
 #, c-format
 msgid "Restarting printing system..."
 msgstr "Starter skriversystemet på nytt ..."
 
-#: printer/printerdrake.pm:4529
+#: printer/printerdrake.pm:4524
 #, c-format
 msgid "high"
 msgstr "høy"
 
-#: printer/printerdrake.pm:4529
+#: printer/printerdrake.pm:4524
 #, c-format
 msgid "paranoid"
 msgstr "paranoid"
 
-#: printer/printerdrake.pm:4531
+#: printer/printerdrake.pm:4526
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr "Installerer et utskriftsystem på %s sikkerhetsnivået"
 
-#: printer/printerdrake.pm:4532
+#: printer/printerdrake.pm:4527
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -14956,12 +14971,12 @@ msgstr ""
 "\n"
 "Er du sikker på at du vil sette opp skriver på dette systemet?"
 
-#: printer/printerdrake.pm:4568
+#: printer/printerdrake.pm:4563
 #, c-format
 msgid "Starting the printing system at boot time"
 msgstr "Starter utskriftsystemet ved oppstart"
 
-#: printer/printerdrake.pm:4569
+#: printer/printerdrake.pm:4564
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -14981,32 +14996,32 @@ msgstr ""
 "\n"
 "Ønsker du å skru på automatisk start av skriversystemet igjen?"
 
-#: printer/printerdrake.pm:4592
+#: printer/printerdrake.pm:4587
 #, c-format
 msgid "Checking installed software..."
 msgstr "Sjekker installert programvare..."
 
-#: printer/printerdrake.pm:4598
+#: printer/printerdrake.pm:4593
 #, c-format
 msgid "Removing %s..."
 msgstr "Fjerner %s ..."
 
-#: printer/printerdrake.pm:4602
+#: printer/printerdrake.pm:4597
 #, c-format
 msgid "Could not remove the %s printing system!"
 msgstr "Kunne ikke fjerne %s-utskriftssystemet!"
 
-#: printer/printerdrake.pm:4626
+#: printer/printerdrake.pm:4617
 #, c-format
 msgid "Installing %s..."
 msgstr "Installerer %s ..."
 
-#: printer/printerdrake.pm:4630
+#: printer/printerdrake.pm:4621
 #, c-format
 msgid "Could not install the %s printing system!"
 msgstr "Kunne ikke installere %s-utskriftssystemet!"
 
-#: printer/printerdrake.pm:4698
+#: printer/printerdrake.pm:4689
 #, c-format
 msgid ""
 "In this mode there is no local printing system, all printing requests go "
@@ -15019,7 +15034,7 @@ msgstr ""
 "definere lokale utskriftskøer da og hvis den spesifiserte tjeneren er nede "
 "vil det ikke være mulig å skrive ut fra denne maskinen."
 
-#: printer/printerdrake.pm:4700
+#: printer/printerdrake.pm:4691
 #, c-format
 msgid ""
 "Enter the host name or IP of your CUPS server and click OK if you want to "
@@ -15028,32 +15043,32 @@ msgstr ""
 "Skriv inn vertsnavnet eller IP-adressen til din CUPS-tjener og klikk OK hvis "
 "du vil bruke dette moduset, hvis ikke, klikk \"Avslutt\"."
 
-#: printer/printerdrake.pm:4714
+#: printer/printerdrake.pm:4705
 #, c-format
 msgid "Name or IP of remote server:"
 msgstr "Navn eller IP til ekstern tjener."
 
-#: printer/printerdrake.pm:4734
+#: printer/printerdrake.pm:4725
 #, c-format
 msgid "Setting Default Printer..."
 msgstr "Setter standardskriver..."
 
-#: printer/printerdrake.pm:4754
+#: printer/printerdrake.pm:4745
 #, c-format
 msgid "Local CUPS printing system or remote CUPS server?"
 msgstr "Lokalt CUPS-utskriftssystem eller ekstern CUPS-tjener?"
 
-#: printer/printerdrake.pm:4755
+#: printer/printerdrake.pm:4746
 #, c-format
 msgid "The CUPS printing system can be used in two ways: "
 msgstr "CUPS-utskiftssystemet kan brukes på to måter:"
 
-#: printer/printerdrake.pm:4757
+#: printer/printerdrake.pm:4748
 #, c-format
 msgid "1. The CUPS printing system can run locally. "
 msgstr "1. CUPS-utskriftssystemet kan kjøres lokalt."
 
-#: printer/printerdrake.pm:4758
+#: printer/printerdrake.pm:4749
 #, c-format
 msgid ""
 "Then locally connected printers can be used and remote printers on other "
@@ -15062,7 +15077,7 @@ msgstr ""
 "Da vil skrivere som er koblet til lokalt kunne brukes og eksterne skrivere "
 "på andre CUPS-tjenere i samme nettverket blir oppdaget automatisk."
 
-#: printer/printerdrake.pm:4759
+#: printer/printerdrake.pm:4750
 #, c-format
 msgid ""
 "Disadvantage of this approach is, that more resources on the local machine "
@@ -15074,14 +15089,14 @@ msgstr ""
 "maskinen: Flere programpakker må installeres, CUPS-tjenesten må kjøre i "
 "bakgrunnen og trenger litt minne, og IPP-porten (port 631) blir åpnet."
 
-#: printer/printerdrake.pm:4761
+#: printer/printerdrake.pm:4752
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
 msgstr ""
 "2. Alle utskriftsforespørseler blir umiddelbart sent til en ekstern CUPS-"
 "tjener."
 
-#: printer/printerdrake.pm:4762
+#: printer/printerdrake.pm:4753
 #, c-format
 msgid ""
 "Here local resource occupation is reduced to a minimum. No CUPS daemon is "
@@ -15093,7 +15108,7 @@ msgstr ""
 "programvareinfrastruktur for å sette opp lokale utskriftsforespørseler blir "
 "installert, så mindre minne og harddiskplass blir brukt."
 
-#: printer/printerdrake.pm:4763
+#: printer/printerdrake.pm:4754
 #, c-format
 msgid ""
 "Disadvantage is that it is not possible to define local printers then and if "
@@ -15103,48 +15118,48 @@ msgstr ""
 "spesifiserte tjeneren er nede er det ikke mulig å skrive ut fra denne "
 "maskinen."
 
-#: printer/printerdrake.pm:4765
+#: printer/printerdrake.pm:4756
 #, c-format
 msgid "How should CUPS be set up on your machine?"
 msgstr "Hvordan skal CUPS bli satt opp på din maskin?"
 
-#: printer/printerdrake.pm:4769 printer/printerdrake.pm:4784
-#: printer/printerdrake.pm:4788 printer/printerdrake.pm:4794
+#: printer/printerdrake.pm:4760 printer/printerdrake.pm:4775
+#: printer/printerdrake.pm:4779 printer/printerdrake.pm:4785
 #, c-format
 msgid "Remote server, specify Name or IP here:"
 msgstr "Ekstern tjener, spesifiser Navn eller IP her:"
 
-#: printer/printerdrake.pm:4783
+#: printer/printerdrake.pm:4774
 #, c-format
 msgid "Local CUPS printing system"
 msgstr "Lokalt CUPS-utskriftssystem"
 
-#: printer/printerdrake.pm:4822
+#: printer/printerdrake.pm:4813
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Velg skriverkøbehandler"
 
-#: printer/printerdrake.pm:4823
+#: printer/printerdrake.pm:4814
 #, c-format
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Hvilket utskriftsystem (købehandler) ønsker du å bruke?"
 
-#: printer/printerdrake.pm:4872
+#: printer/printerdrake.pm:4863
 #, c-format
 msgid "Failed to configure printer \"%s\"!"
 msgstr "Klarte ikke å sette opp skriver \"%s\"!"
 
-#: printer/printerdrake.pm:4887
+#: printer/printerdrake.pm:4878
 #, c-format
 msgid "Installing Foomatic..."
 msgstr "Installerer Foomatic ..."
 
-#: printer/printerdrake.pm:4893
+#: printer/printerdrake.pm:4884
 #, c-format
 msgid "Could not install %s packages, %s cannot be started!"
 msgstr "Kunne ikke installere %s-pakkene. %s kan ikke startes!"
 
-#: printer/printerdrake.pm:5088
+#: printer/printerdrake.pm:5079
 #, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
@@ -15155,48 +15170,48 @@ msgstr ""
 "oppsettet; for å gjøre den til standard printer; eller for å vise "
 "informasjon om den."
 
-#: printer/printerdrake.pm:5118
+#: printer/printerdrake.pm:5109
 #, c-format
 msgid "Display all available remote CUPS printers"
 msgstr "Vis alle tilgjengelige fjern-CUPS-skrivere"
 
-#: printer/printerdrake.pm:5119
+#: printer/printerdrake.pm:5110
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Oppdater skriverliste (for å vise alle tilgjengelige CUPS-skrivere)"
 
-#: printer/printerdrake.pm:5130
+#: printer/printerdrake.pm:5121
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPS-oppsett"
 
-#: printer/printerdrake.pm:5151
+#: printer/printerdrake.pm:5133
 #, c-format
 msgid "Change the printing system"
 msgstr "Endrer utskriftssystemet"
 
-#: printer/printerdrake.pm:5160
+#: printer/printerdrake.pm:5142
 #, c-format
 msgid "Normal Mode"
 msgstr "Normalt modus"
 
-#: printer/printerdrake.pm:5161
+#: printer/printerdrake.pm:5143
 #, c-format
 msgid "Expert Mode"
 msgstr "Ekspertmodus"
 
-#: printer/printerdrake.pm:5439 printer/printerdrake.pm:5497
-#: printer/printerdrake.pm:5583 printer/printerdrake.pm:5592
+#: printer/printerdrake.pm:5415 printer/printerdrake.pm:5473
+#: printer/printerdrake.pm:5559 printer/printerdrake.pm:5568
 #, c-format
 msgid "Printer options"
 msgstr "Valg for skriver"
 
-#: printer/printerdrake.pm:5475
+#: printer/printerdrake.pm:5451
 #, c-format
 msgid "Modify printer configuration"
 msgstr "Endre skriveroppsett"
 
-#: printer/printerdrake.pm:5477
+#: printer/printerdrake.pm:5453
 #, c-format
 msgid ""
 "Printer %s%s\n"
@@ -15205,104 +15220,104 @@ msgstr ""
 "Skriver %s%s\n"
 "Hva ønsker du å forandre på denne skriveren?"
 
-#: printer/printerdrake.pm:5482
+#: printer/printerdrake.pm:5458
 #, c-format
 msgid "This printer is disabled"
 msgstr "Denne skriveren er deaktivert"
 
-#: printer/printerdrake.pm:5484
+#: printer/printerdrake.pm:5460
 #, c-format
 msgid "Do it!"
 msgstr "Gjør det!"
 
-#: printer/printerdrake.pm:5489 printer/printerdrake.pm:5551
+#: printer/printerdrake.pm:5465 printer/printerdrake.pm:5527
 #, c-format
 msgid "Printer connection type"
 msgstr "Skrivertilkoblingstype"
 
-#: printer/printerdrake.pm:5490 printer/printerdrake.pm:5557
+#: printer/printerdrake.pm:5466 printer/printerdrake.pm:5533
 #, c-format
 msgid "Printer name, description, location"
 msgstr "Skrivernavn, beskrivelse, plassering"
 
-#: printer/printerdrake.pm:5492 printer/printerdrake.pm:5576
+#: printer/printerdrake.pm:5468 printer/printerdrake.pm:5552
 #, c-format
 msgid "Printer manufacturer, model, driver"
 msgstr "Skriverprodusent, modell, driver"
 
-#: printer/printerdrake.pm:5493 printer/printerdrake.pm:5577
+#: printer/printerdrake.pm:5469 printer/printerdrake.pm:5553
 #, c-format
 msgid "Printer manufacturer, model"
 msgstr "Skriverprodusent, modell"
 
-#: printer/printerdrake.pm:5499 printer/printerdrake.pm:5587
+#: printer/printerdrake.pm:5475 printer/printerdrake.pm:5563
 #, c-format
 msgid "Set this printer as the default"
 msgstr "Sett denne skriveren som standard"
 
-#: printer/printerdrake.pm:5504 printer/printerdrake.pm:5593
-#: printer/printerdrake.pm:5595 printer/printerdrake.pm:5604
+#: printer/printerdrake.pm:5480 printer/printerdrake.pm:5569
+#: printer/printerdrake.pm:5571 printer/printerdrake.pm:5580
 #, c-format
 msgid "Enable Printer"
 msgstr "Aktiver skriver"
 
-#: printer/printerdrake.pm:5507 printer/printerdrake.pm:5598
-#: printer/printerdrake.pm:5599 printer/printerdrake.pm:5601
+#: printer/printerdrake.pm:5483 printer/printerdrake.pm:5574
+#: printer/printerdrake.pm:5575 printer/printerdrake.pm:5577
 #, c-format
 msgid "Disable Printer"
 msgstr "Deaktiver skriver"
 
-#: printer/printerdrake.pm:5511 printer/printerdrake.pm:5605
+#: printer/printerdrake.pm:5487 printer/printerdrake.pm:5581
 #, c-format
 msgid "Printer communication error handling"
 msgstr "Feilhåndtering ved skriverkommunikasjon"
 
-#: printer/printerdrake.pm:5512 printer/printerdrake.pm:5609
+#: printer/printerdrake.pm:5488 printer/printerdrake.pm:5585
 #, c-format
 msgid "Print test pages"
 msgstr "Skriver ut testsider"
 
-#: printer/printerdrake.pm:5513 printer/printerdrake.pm:5611
+#: printer/printerdrake.pm:5489 printer/printerdrake.pm:5587
 #, c-format
 msgid "Learn how to use this printer"
 msgstr "Lær hvordan man skal bruke denne skriveren"
 
-#: printer/printerdrake.pm:5514 printer/printerdrake.pm:5613
+#: printer/printerdrake.pm:5490 printer/printerdrake.pm:5589
 #, c-format
 msgid "Remove printer"
 msgstr "Fjern skriver"
 
-#: printer/printerdrake.pm:5565
+#: printer/printerdrake.pm:5541
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Fjerner gammel skriver \"%s\" ..."
 
-#: printer/printerdrake.pm:5596
+#: printer/printerdrake.pm:5572
 #, c-format
 msgid "Printer \"%s\" is now enabled."
 msgstr "Skriver «%s» er nå aktivert."
 
-#: printer/printerdrake.pm:5602
+#: printer/printerdrake.pm:5578
 #, c-format
 msgid "Printer \"%s\" is now disabled."
 msgstr "Skriver «%s» er nå deaktivert."
 
-#: printer/printerdrake.pm:5644
+#: printer/printerdrake.pm:5620
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Ønsker du virkelig å fjerne skriveren \"%s\"?"
 
-#: printer/printerdrake.pm:5648
+#: printer/printerdrake.pm:5624
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Fjerner skriver \"%s\"..."
 
-#: printer/printerdrake.pm:5672
+#: printer/printerdrake.pm:5648
 #, c-format
 msgid "Default printer"
 msgstr "Standardskriver"
 
-#: printer/printerdrake.pm:5673
+#: printer/printerdrake.pm:5649
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "Skriveren \"%s\" er nå satt til standard skriver."
@@ -16516,7 +16531,7 @@ msgstr ""
 "Ingen tilleggsinformasjon\n"
 "om denne tjenesten, begklager."
 
-#: services.pm:224 ugtk2.pm:1009
+#: services.pm:224 ugtk2.pm:1029
 #, c-format
 msgid "Info"
 msgstr "Info"
@@ -16946,7 +16961,7 @@ msgstr "Window Maker, Enlightenment, Fvwm etc"
 msgid "Utilities"
 msgstr "Verktøy"
 
-#: share/compssUsers.pl:186 share/compssUsers.pl:187 standalone/logdrake:384
+#: share/compssUsers.pl:186 share/compssUsers.pl:187 standalone/logdrake:381
 #, c-format
 msgid "SSH Server"
 msgstr "SSH-tjener"
@@ -18401,13 +18416,13 @@ msgstr "Inget interval valgt for cron-operasjon"
 msgid "Interval cron not available as non-root"
 msgstr "cron er ikke tilgjengelig som ikke-root"
 
-#: standalone/drakbackup:465 standalone/logdrake:440
+#: standalone/drakbackup:465 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
 msgstr ""
 "\"%s\" er hverken en gyldig e-postadresse eller en eksisterende lokal bruker!"
 
-#: standalone/drakbackup:469 standalone/logdrake:445
+#: standalone/drakbackup:469 standalone/logdrake:442
 #, c-format
 msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
@@ -19809,6 +19824,11 @@ msgstr "Lag sikkerhetskopi"
 msgid "Restore"
 msgstr "Gjenopprett"
 
+#: standalone/drakbackup:4109 standalone/harddrake2:479
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "De følgende pakkerne trengs å bli installert:\n"
+
 #: standalone/drakbackup:4136
 #, c-format
 msgid "Please select data to restore..."
@@ -19900,8 +19920,8 @@ msgstr ""
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
-#: standalone/printerdrake:150 standalone/printerdrake:151
-#: standalone/printerdrake:152
+#: standalone/printerdrake:148 standalone/printerdrake:149
+#: standalone/printerdrake:150
 #, c-format
 msgid "/_File"
 msgstr "/_Fil"
@@ -19912,7 +19932,7 @@ msgid "/File/_Quit"
 msgstr "/Fil/_Avslutt"
 
 #: standalone/drakboot:85 standalone/harddrake2:192 standalone/logdrake:75
-#: standalone/printerdrake:152
+#: standalone/printerdrake:150
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
@@ -20253,8 +20273,8 @@ msgstr "Vennligst vent"
 msgid "Interface"
 msgstr "Grensesnitt"
 
-#: standalone/drakconnect:109 standalone/printerdrake:224
-#: standalone/printerdrake:231
+#: standalone/drakconnect:109 standalone/printerdrake:222
+#: standalone/printerdrake:229
 #, c-format
 msgid "State"
 msgstr "Status"
@@ -21350,59 +21370,59 @@ msgstr "Logg"
 msgid "Clear logs"
 msgstr "Tøm logger"
 
-#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:439
+#: standalone/drakids:65 standalone/net_applet:439
 #, c-format
 msgid "Blacklist"
 msgstr "Svartelist"
 
-#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:444
-#, c-format
-msgid "Whitelist"
-msgstr "Hvitlist"
-
-#: standalone/drakids:71
+#: standalone/drakids:69
 #, c-format
 msgid "Remove from blacklist"
 msgstr "Fjern fra svarteliste"
 
-#: standalone/drakids:72
+#: standalone/drakids:70
 #, c-format
 msgid "Move to whitelist"
 msgstr "Flytt over til hvitliste"
 
-#: standalone/drakids:84
+#: standalone/drakids:74 standalone/net_applet:444
+#, c-format
+msgid "Whitelist"
+msgstr "Hvitlist"
+
+#: standalone/drakids:78
 #, c-format
 msgid "Remove from whitelist"
 msgstr "Fjern fra hvitliste"
 
-#: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
-#: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
-#: standalone/drakroam:140 standalone/net_applet:180 standalone/net_applet:354
+#: standalone/drakids:134 standalone/drakids:160 standalone/drakids:169
+#: standalone/drakids:179 standalone/drakids:246 standalone/drakroam:140
+#: standalone/net_applet:180 standalone/net_applet:354
 #, c-format
 msgid "Unable to contact daemon"
 msgstr "Klarte ikke å kontakter tjeneste"
 
-#: standalone/drakids:202
+#: standalone/drakids:191
 #, c-format
 msgid "Date"
 msgstr "Dato"
 
-#: standalone/drakids:203
+#: standalone/drakids:192
 #, c-format
 msgid "Attacker"
 msgstr "Angriper"
 
-#: standalone/drakids:204
+#: standalone/drakids:193
 #, c-format
 msgid "Attack type"
 msgstr "Angrepstype"
 
-#: standalone/drakids:205
+#: standalone/drakids:194
 #, c-format
 msgid "Service"
 msgstr "Tjeneste"
 
-#: standalone/drakids:206
+#: standalone/drakids:195
 #, c-format
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
@@ -21831,7 +21851,7 @@ msgstr "Fjern vagte regel"
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/drakperm:124 standalone/drakups:302 standalone/drakups:362
 #: standalone/drakups:382 standalone/drakvpn:319 standalone/drakvpn:680
-#: standalone/printerdrake:245
+#: standalone/printerdrake:243
 #, c-format
 msgid "Edit"
 msgstr "Rediger"
@@ -21953,28 +21973,6 @@ msgstr "Filbane valg"
 msgid "Property"
 msgstr "Eiendom"
 
-#: standalone/drakperm:380
-#, c-format
-msgid ""
-"The first character of the path must be a slash (\"/\"):\n"
-"\"%s\""
-msgstr ""
-
-#: standalone/drakperm:390
-#, c-format
-msgid "Both the username and the group must valid!"
-msgstr ""
-
-#: standalone/drakperm:391
-#, c-format
-msgid "User: %s"
-msgstr ""
-
-#: standalone/drakperm:392
-#, c-format
-msgid "Group: %s"
-msgstr ""
-
 #: standalone/drakroam:29
 #, c-format
 msgid ""
@@ -21988,11 +21986,6 @@ msgstr ""
 #, c-format
 msgid "SSID"
 msgstr ""
-
-#: standalone/drakroam:46
-#, c-format
-msgid "Encryption"
-msgstr "Kryptering"
 
 #: standalone/drakroam:47
 #, c-format
@@ -22015,7 +22008,7 @@ msgid "Connect"
 msgstr "Koble til"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:167 standalone/printerdrake:251
+#: standalone/drakroam:167 standalone/printerdrake:249
 #, c-format
 msgid "Refresh"
 msgstr "Oppdater"
@@ -22293,8 +22286,8 @@ msgstr "Skrivere og print$ eksisterer allerede."
 
 #: standalone/draksambashare:524
 #, c-format
-msgid "The wizard successfully added the printer Samba share"
-msgstr ""
+msgid "The wizard successfully the Samba share"
+msgstr "Veivisseren la vellykket til den delte Samba-ressursen"
 
 #: standalone/draksambashare:547
 #, c-format
@@ -22431,9 +22424,9 @@ msgstr "Brukerinformasjon"
 msgid "User name:"
 msgstr "Brukernavn:"
 
-#: standalone/draksambashare:929 standalone/harddrake2:551
-#, c-format
-msgid "Password:"
+#: standalone/draksambashare:929
+#, fuzzy, c-format
+msgid "Passwd:"
 msgstr "Passord:"
 
 #: standalone/draksambashare:1129
@@ -22799,102 +22792,102 @@ msgstr ""
 msgid "text size"
 msgstr ""
 
-#: standalone/draksplash:59
+#: standalone/draksplash:60
 #, c-format
 msgid "Choose progress bar color 1"
 msgstr ""
 
-#: standalone/draksplash:60
+#: standalone/draksplash:61
 #, c-format
 msgid "Choose progress bar color 2"
 msgstr ""
 
-#: standalone/draksplash:61
+#: standalone/draksplash:62
 #, c-format
 msgid "Choose progress bar background"
 msgstr ""
 
-#: standalone/draksplash:62
+#: standalone/draksplash:63
 #, c-format
 msgid "Gradient type"
 msgstr ""
 
-#: standalone/draksplash:63
+#: standalone/draksplash:64
 #, c-format
 msgid "Choose text color"
 msgstr ""
 
-#: standalone/draksplash:65 standalone/draksplash:72
+#: standalone/draksplash:66 standalone/draksplash:73
 #, c-format
 msgid "Choose picture"
 msgstr "Velg bilde"
 
-#: standalone/draksplash:66
+#: standalone/draksplash:67
 #, c-format
 msgid "Silent bootsplash"
 msgstr "Stille bootsplash"
 
-#: standalone/draksplash:69
+#: standalone/draksplash:70
 #, c-format
 msgid "Choose text zone color"
 msgstr ""
 
-#: standalone/draksplash:70
+#: standalone/draksplash:71
 #, c-format
 msgid "Text color"
 msgstr ""
 
-#: standalone/draksplash:71
+#: standalone/draksplash:72
 #, c-format
 msgid "Background color"
 msgstr ""
 
-#: standalone/draksplash:73
+#: standalone/draksplash:74
 #, c-format
 msgid "Verbose bootsplash"
 msgstr "Informativ bootsplash"
 
-#: standalone/draksplash:75
+#: standalone/draksplash:76
 #, c-format
 msgid "Display logo on Console"
 msgstr "Vis logo på konsollet"
 
-#: standalone/draksplash:78
+#: standalone/draksplash:79
 #, c-format
 msgid "Console bootsplash"
 msgstr "Konsoll-bootsplash"
 
-#: standalone/draksplash:84
+#: standalone/draksplash:85
 #, c-format
 msgid "Theme name"
 msgstr "Temanavn"
 
-#: standalone/draksplash:87
+#: standalone/draksplash:88
 #, c-format
 msgid "final resolution"
 msgstr "endelige oppløsning"
 
-#: standalone/draksplash:92
+#: standalone/draksplash:93
 #, c-format
 msgid "Save theme"
 msgstr "Lagre tema"
 
-#: standalone/draksplash:153
+#: standalone/draksplash:154
 #, c-format
 msgid "saving Bootsplash theme..."
 msgstr "lagrer bootsplash-tema..."
 
-#: standalone/draksplash:162
+#: standalone/draksplash:163
 #, c-format
 msgid "Unable to load image file %s"
 msgstr "Klarte ikke å laste inn bildefil %s"
 
-#: standalone/draksplash:173
+#: standalone/draksplash:174
 #, c-format
 msgid "choose image"
 msgstr "velg bildefil"
 
-#: standalone/draksplash:188
+#: standalone/draksplash:189
 #, c-format
 msgid "Color selection"
 msgstr ""
@@ -24890,7 +24883,7 @@ msgid "class of hardware device"
 msgstr "klasse av maskinvareenhet"
 
 #: standalone/harddrake2:51 standalone/harddrake2:83
-#: standalone/printerdrake:224
+#: standalone/printerdrake:222
 #, c-format
 msgid "Model"
 msgstr "Modell"
@@ -25403,15 +25396,15 @@ msgstr "Finesser"
 
 #. -PO: please keep all "/" characters !!!
 #: standalone/harddrake2:176 standalone/logdrake:76
-#: standalone/printerdrake:146 standalone/printerdrake:159
-#: standalone/printerdrake:171
+#: standalone/printerdrake:144 standalone/printerdrake:157
+#: standalone/printerdrake:169
 #, c-format
 msgid "/_Options"
 msgstr "/_Valg"
 
 #: standalone/harddrake2:177 standalone/harddrake2:203 standalone/logdrake:78
-#: standalone/printerdrake:172 standalone/printerdrake:174
-#: standalone/printerdrake:177 standalone/printerdrake:179
+#: standalone/printerdrake:170 standalone/printerdrake:172
+#: standalone/printerdrake:175 standalone/printerdrake:177
 #, c-format
 msgid "/_Help"
 msgstr "/_Hjelp"
@@ -25441,7 +25434,7 @@ msgstr "/Automatisk oppdag _zip-disker på parallellport"
 msgid "/_Upload the hardware list"
 msgstr "/_Last opp maskinvarelisten"
 
-#: standalone/harddrake2:192 standalone/printerdrake:152
+#: standalone/harddrake2:192 standalone/printerdrake:150
 #, c-format
 msgid "/_Quit"
 msgstr "/_Avslutt"
@@ -25465,12 +25458,12 @@ msgstr ""
 "Når du har valg en enhet, så kan du se informasjon om den i feltet i den "
 "høyre rammen (\"Informasjon\")"
 
-#: standalone/harddrake2:222 standalone/printerdrake:177
+#: standalone/harddrake2:222 standalone/printerdrake:175
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Rapporter feil"
 
-#: standalone/harddrake2:224 standalone/printerdrake:179
+#: standalone/harddrake2:224 standalone/printerdrake:177
 #, c-format
 msgid "/_About..."
 msgstr "/_Om..."
@@ -25516,8 +25509,14 @@ msgstr "Sett opp modul"
 msgid "Run config tool"
 msgstr "Kjør oppsettsverktøy"
 
-#: standalone/harddrake2:307 standalone/printerdrake:306
-#: standalone/printerdrake:320
+#: standalone/harddrake2:306 standalone/net_monitor:102
+#: standalone/net_monitor:103 standalone/net_monitor:108
+#, c-format
+msgid "unknown"
+msgstr "ukjent"
+
+#: standalone/harddrake2:307 standalone/printerdrake:309
+#: standalone/printerdrake:347
 #, c-format
 msgid "Unknown"
 msgstr "Ukjent"
@@ -25562,6 +25561,11 @@ msgstr "Last opp maskinvarelisten"
 #, c-format
 msgid "Account:"
 msgstr "Konto:"
+
+#: standalone/harddrake2:551
+#, c-format
+msgid "Password:"
+msgstr "Passord:"
 
 #: standalone/harddrake2:552
 #, c-format
@@ -25724,82 +25728,82 @@ msgstr "men ikke lik"
 msgid "Choose file"
 msgstr "Velg fil"
 
-#: standalone/logdrake:150
+#: standalone/logdrake:147
 #, c-format
 msgid "Calendar"
 msgstr "Kalender"
 
-#: standalone/logdrake:160
+#: standalone/logdrake:157
 #, c-format
 msgid "Content of the file"
 msgstr "Innholdet i filen"
 
-#: standalone/logdrake:164 standalone/logdrake:402
+#: standalone/logdrake:161 standalone/logdrake:399
 #, c-format
 msgid "Mail alert"
 msgstr "E-post varsel"
 
-#: standalone/logdrake:171
+#: standalone/logdrake:168
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
 msgstr "Varslingsveiviseren feilet uten forvarsel:"
 
-#: standalone/logdrake:224
+#: standalone/logdrake:221
 #, c-format
 msgid "please wait, parsing file: %s"
 msgstr "gjennomgår %s"
 
-#: standalone/logdrake:379
+#: standalone/logdrake:376
 #, c-format
 msgid "Apache World Wide Web Server"
 msgstr "Apache World Wide Web-tjener"
 
-#: standalone/logdrake:380
+#: standalone/logdrake:377
 #, c-format
 msgid "Domain Name Resolver"
 msgstr "Domenenavnoppslagstjeneste"
 
-#: standalone/logdrake:381
+#: standalone/logdrake:378
 #, c-format
 msgid "Ftp Server"
 msgstr "Ftp-server"
 
-#: standalone/logdrake:382
+#: standalone/logdrake:379
 #, c-format
 msgid "Postfix Mail Server"
 msgstr "Postfix-posttjener"
 
-#: standalone/logdrake:383
+#: standalone/logdrake:380
 #, c-format
 msgid "Samba Server"
 msgstr "Samba-tjener"
 
-#: standalone/logdrake:385
+#: standalone/logdrake:382
 #, c-format
 msgid "Webmin Service"
 msgstr "Webmin-tjeneste"
 
-#: standalone/logdrake:386
+#: standalone/logdrake:383
 #, c-format
 msgid "Xinetd Service"
 msgstr "Xinetd-tjener"
 
-#: standalone/logdrake:397
+#: standalone/logdrake:394
 #, c-format
 msgid "Configure the mail alert system"
 msgstr "Sett opp e-postvarslingssystemet"
 
-#: standalone/logdrake:398
+#: standalone/logdrake:395
 #, c-format
 msgid "Stop the mail alert system"
 msgstr "Stopp e-postvarslingssystemet"
 
-#: standalone/logdrake:405
+#: standalone/logdrake:402
 #, c-format
 msgid "Mail alert configuration"
 msgstr "E-post varslingsoppsett"
 
-#: standalone/logdrake:406
+#: standalone/logdrake:403
 #, c-format
 msgid ""
 "Welcome to the mail configuration utility.\n"
@@ -25810,17 +25814,17 @@ msgstr ""
 "\n"
 "Her kan du sette opp varslingsystemet.\n"
 
-#: standalone/logdrake:409
+#: standalone/logdrake:406
 #, c-format
 msgid "What do you want to do?"
 msgstr "Hva ønsker du å gjøre?"
 
-#: standalone/logdrake:416
+#: standalone/logdrake:413
 #, c-format
 msgid "Services settings"
 msgstr "Tjenesteoppsett"
 
-#: standalone/logdrake:417
+#: standalone/logdrake:414
 #, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
@@ -25828,50 +25832,50 @@ msgid ""
 msgstr ""
 "Du vil motta en advarsel hvis en av de valgte tjenestene ikke lenger kjører"
 
-#: standalone/logdrake:424
+#: standalone/logdrake:421
 #, c-format
 msgid "Load setting"
 msgstr "Last inn oppsett"
 
-#: standalone/logdrake:425
+#: standalone/logdrake:422
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Du vil motta en advarsel hvis lasten er høyere enn denne verdien"
 
-#: standalone/logdrake:426
+#: standalone/logdrake:423
 #, c-format
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
 msgstr "Last"
 
-#: standalone/logdrake:431
+#: standalone/logdrake:428
 #, c-format
 msgid "Alert configuration"
 msgstr "Varslingsoppsett"
 
-#: standalone/logdrake:432
+#: standalone/logdrake:429
 #, c-format
 msgid "Please enter your email address below "
 msgstr "Skriv inn e-postadressen din nedenfor"
 
-#: standalone/logdrake:433
+#: standalone/logdrake:430
 #, c-format
 msgid "and enter the name (or the IP) of the SMTP server you wish to use"
 msgstr ""
 "og skriver inn navnet (eller IP-adresse) til smtp-tjeneren du ønsker å bruke"
 
-#: standalone/logdrake:452
+#: standalone/logdrake:449
 #, c-format
 msgid "The wizard successfully configured the mail alert."
 msgstr "Veiviseren satte opp e-postvarsleren vellykket."
 
-#: standalone/logdrake:458
+#: standalone/logdrake:455
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
 msgstr "Veiviseren deaktiverte e-postvarsleren vellykket."
 
-#: standalone/logdrake:517
+#: standalone/logdrake:514
 #, c-format
 msgid "Save as.."
 msgstr "Lagre Som..."
@@ -26157,161 +26161,159 @@ msgstr ""
 msgid "No internet connection configured"
 msgstr "Ingen Internettilkobling er satt opp"
 
-#: standalone/printerdrake:76
+#: standalone/printerdrake:74
 #, c-format
 msgid "Reading data of installed printers..."
 msgstr "Leser data fra installerte skrivere..."
 
-#: standalone/printerdrake:128
+#: standalone/printerdrake:126
 #, c-format
 msgid "%s Printer Management Tool"
 msgstr "%s Skriverhåndteringsverktøy"
 
+#: standalone/printerdrake:140 standalone/printerdrake:141
 #: standalone/printerdrake:142 standalone/printerdrake:143
-#: standalone/printerdrake:144 standalone/printerdrake:145
-#: standalone/printerdrake:153 standalone/printerdrake:154
-#: standalone/printerdrake:158
+#: standalone/printerdrake:151 standalone/printerdrake:152
+#: standalone/printerdrake:156
 #, c-format
 msgid "/_Actions"
 msgstr "/_Handlinger"
 
-#: standalone/printerdrake:142 standalone/printerdrake:154
+#: standalone/printerdrake:140 standalone/printerdrake:152
 #, c-format
 msgid "/_Add Printer"
 msgstr "/_Legg til skriver"
 
-#: standalone/printerdrake:143
+#: standalone/printerdrake:141
 #, c-format
 msgid "/Set as _Default"
 msgstr "/_Sett som standard"
 
-#: standalone/printerdrake:144
+#: standalone/printerdrake:142
 #, c-format
 msgid "/_Edit"
 msgstr "/_Rediger"
 
-#: standalone/printerdrake:145
+#: standalone/printerdrake:143
 #, c-format
 msgid "/_Delete"
 msgstr "/_Slett"
 
-#: standalone/printerdrake:146
+#: standalone/printerdrake:144
 #, c-format
 msgid "/_Expert mode"
 msgstr "/_Ekspertmodus"
 
-#: standalone/printerdrake:151
+#: standalone/printerdrake:149
 #, c-format
 msgid "/_Refresh"
 msgstr "/_Oppdater"
 
-#: standalone/printerdrake:158
+#: standalone/printerdrake:156
 #, c-format
 msgid "/_Configure CUPS"
 msgstr "/_Innstilinger for CUPS"
 
-#: standalone/printerdrake:171
+#: standalone/printerdrake:169
 #, c-format
 msgid "/Configure _Auto Administration"
 msgstr "/Sett opp Fjernadministrasjon"
 
-#: standalone/printerdrake:194
+#: standalone/printerdrake:192
 #, c-format
 msgid "Search:"
 msgstr "Søk:"
 
-#: standalone/printerdrake:197
+#: standalone/printerdrake:195
 #, c-format
 msgid "Apply filter"
 msgstr "Legg til filter"
 
-#: standalone/printerdrake:224 standalone/printerdrake:231
+#: standalone/printerdrake:222 standalone/printerdrake:229
 #, c-format
 msgid "Def."
 msgstr "Def."
 
-#: standalone/printerdrake:224 standalone/printerdrake:231
+#: standalone/printerdrake:222 standalone/printerdrake:229
 #, c-format
 msgid "Printer Name"
 msgstr "Skrivernavn"
 
-#: standalone/printerdrake:224
+#: standalone/printerdrake:222
 #, c-format
 msgid "Connection Type"
 msgstr "Tilkoblingstype"
 
-#: standalone/printerdrake:231
+#: standalone/printerdrake:229
 #, c-format
 msgid "Server Name"
 msgstr "Tjenernavn"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:239
+#: standalone/printerdrake:237
 #, c-format
 msgid "Add Printer"
 msgstr "Legg til skriver"
 
-#: standalone/printerdrake:239
+#: standalone/printerdrake:237
 #, c-format
 msgid "Add a new printer to the system"
 msgstr "Legg til en ny skriver til systmet"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:242
+#: standalone/printerdrake:240
 #, c-format
 msgid "Set as default"
 msgstr "Sett som standard"
 
-#: standalone/printerdrake:242
+#: standalone/printerdrake:240
 #, c-format
 msgid "Set selected printer as the default printer"
 msgstr "Sett valgte skriver som standardskriver"
 
-#: standalone/printerdrake:245
+#: standalone/printerdrake:243
 #, c-format
 msgid "Edit selected printer"
 msgstr "Endre valgte skriver"
 
-#: standalone/printerdrake:248
+#: standalone/printerdrake:246
 #, c-format
 msgid "Delete selected printer"
 msgstr "Fjern valgte skriver"
 
-#: standalone/printerdrake:251
+#: standalone/printerdrake:249
 #, c-format
 msgid "Refresh the list"
 msgstr "Oppdater listen"
 
 #. -PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/printerdrake:254
+#: standalone/printerdrake:252
 #, c-format
 msgid "Configure CUPS"
 msgstr "Sett opp CUPS"
 
-#: standalone/printerdrake:254
+#: standalone/printerdrake:252
 #, c-format
 msgid "Configure CUPS printing system"
 msgstr "Oppsett for CUPS-utskriftssystemet"
 
-#: standalone/printerdrake:310 standalone/printerdrake:324
-#: standalone/printerdrake:348 standalone/printerdrake:360
+#: standalone/printerdrake:310 standalone/printerdrake:348
 #, c-format
 msgid "Enabled"
 msgstr "Aktivert"
 
-#: standalone/printerdrake:310 standalone/printerdrake:324
-#: standalone/printerdrake:348 standalone/printerdrake:360
+#: standalone/printerdrake:311 standalone/printerdrake:349
 #, c-format
 msgid "Disabled"
 msgstr "Deaktivert"
 
-#: standalone/printerdrake:596
+#: standalone/printerdrake:578
 #, c-format
 msgid "Authors: "
 msgstr "Forfattere: "
 
 #. -PO: here %s is the version number
-#: standalone/printerdrake:606
+#: standalone/printerdrake:588
 #, c-format
 msgid "Printer Management %s"
 msgstr "Skriverhåndtering %s"
@@ -26924,47 +26926,47 @@ msgstr "Installer oppdateringer"
 msgid "Exit install"
 msgstr "Avslutt installasjon"
 
-#: ugtk2.pm:899
+#: ugtk2.pm:919
 #, c-format
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ugtk2.pm:959
+#: ugtk2.pm:979
 #, c-format
 msgid "No file chosen"
 msgstr "Ingen fil valgt"
 
-#: ugtk2.pm:961
+#: ugtk2.pm:981
 #, c-format
 msgid "You have chosen a file, not a directory"
 msgstr "Du har valgt en fil, ikke en katalog"
 
-#: ugtk2.pm:963
+#: ugtk2.pm:983
 #, c-format
 msgid "You have chosen a directory, not a file"
 msgstr "Du har valgt en katalog, ikke en fil"
 
-#: ugtk2.pm:965
+#: ugtk2.pm:985
 #, c-format
 msgid "No such directory"
 msgstr "Ingen slik katalog"
 
-#: ugtk2.pm:965
+#: ugtk2.pm:985
 #, c-format
 msgid "No such file"
 msgstr "Ingen slik fil"
 
-#: ugtk2.pm:1046
+#: ugtk2.pm:1066
 #, c-format
 msgid "Expand Tree"
 msgstr "Utvid tre"
 
-#: ugtk2.pm:1047
+#: ugtk2.pm:1067
 #, c-format
 msgid "Collapse Tree"
 msgstr "Trekk sammen tre"
 
-#: ugtk2.pm:1048
+#: ugtk2.pm:1068
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Skift mellom flat og gruppesortert"
@@ -26982,48 +26984,6 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Installasjon feilet"
-
-#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
-#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Dvorak (Esperanto)"
-#~ msgstr "Dvorak (Esperanto)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian AZERTY (old)"
-#~ msgstr "Liauisk AZERTY (gammel)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian \"phonetic\" QWERTY"
-#~ msgstr "Litauisk \"fonétisk\" QWERTY"
-
-#~ msgid ""
-#~ "Allow pop-up windows, canceling setup and package installation possible"
-#~ msgstr ""
-#~ "Tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon mulig"
-
-#~ msgid ""
-#~ "No pop-up windows, canceling setup and package installation not possible"
-#~ msgstr ""
-#~ "Ikke tillatt oppsprettsvinduer, avbryting av oppsett og pakkeinstallasjon "
-#~ "ikke mulig"
-
-#~ msgid "Do not do automatic printer setup and do not do it again"
-#~ msgstr "Ikke gjør automatisk oppsett av skriveren og ikke gjør det igjen"
-
-#~ msgid "Do not do automatic printer setup again"
-#~ msgstr "Ikke gjør automatisk oppsett av skriver på nytt"
-
-#~ msgid "The wizard successfully the Samba share"
-#~ msgstr "Veivisseren la vellykket til den delte Samba-ressursen"
-
-#, fuzzy
-#~ msgid "Passwd:"
-#~ msgstr "Passord:"
 
 #~ msgid ""
 #~ "Winbind allows the system to retrieve information and authenticate users "
