@@ -298,7 +298,13 @@ sub install_server {
     }
 
     my %proprietary_Driver2 = (
-	nvidia => [ 'nvidia-kernel', 'nvidia' ], #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
+	nvidia => [
+            $card->{NVIDIA_LEGACY} ?
+              #- using NVIDIA Legacy driver for old NVIDIA cards (TNT, TNT2, Vanta, Quadro, Quadro2, GeForce and GeForce2)
+              ('nvidia_legacy-kernel', 'nvidia_legacy') :
+              #- using current NVIDIA driver for recent NVIDIA cards (Geforce/Quadro 3/4/FX/6x00/NVS)
+              ('nvidia-kernel', 'nvidia')
+          ],
 	fglrx => [ 'ati-kernel', 'ati' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
     );
     if (my $rpms_needed = $proprietary_Driver2{$card->{Driver2}}) {
@@ -525,6 +531,7 @@ sub readCardsDB {
 	BAD_FB_RESTORE => sub { $card->{BAD_FB_RESTORE} = 1 },
 	FB_TVOUT => sub { $card->{FB_TVOUT} = 1 },
 	UNSUPPORTED => sub { delete $card->{Driver} },
+	NVIDIA_LEGACY => sub { $card->{NVIDIA_LEGACY} = 1 },
 
 	COMMENT => sub {},
     };
