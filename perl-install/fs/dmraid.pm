@@ -44,6 +44,7 @@ sub check {
 sub _raid_devices_raw() {
     map {
 	chomp;
+	log::l("got: $_");
 	my %l; @l{qw(pv format vg level status size)} = split(':');
 	\%l;
     } call_dmraid('-ccr');
@@ -62,6 +63,7 @@ sub _raid_devices() {
 sub _sets_raw() {
     map {
 	chomp;
+	log::l("got: $_");
 	my %l; @l{qw(name size stride level status subsets devs spares)} = split(':');
 	\%l;
     } call_dmraid('-ccs');
