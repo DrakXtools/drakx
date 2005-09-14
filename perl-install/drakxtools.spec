@@ -11,6 +11,7 @@ Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.072-1mdk, perl-Glib >= 1.072-1mdk, xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.23, mandrake-doc-common >= 9.2-5mdk, perl-Net-DBus
 Requires: foomatic-db-engine
 Requires: drakconf-icons
+Requires: gtkdialogs
 Conflicts: drakconf < 10.3-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
