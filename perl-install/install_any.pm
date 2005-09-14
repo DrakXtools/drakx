@@ -659,7 +659,7 @@ sub setPackages {
 		    $wait_message->('', $current++, $total);
 		}
 	    };
-	    push @{$o->{default_packages}}, pkgs::upgrade_by_removing_pkgs($o->{packages}, $callback, $extension, "$ENV{SHARE_PATH}/upgrade-map.$o->{isUpgrade}");
+	    push @{$o->{default_packages}}, pkgs::upgrade_by_removing_pkgs($o->{packages}, $callback, $extension, $o->{isUpgrade});
 	    log::l("Removing packages took: ", formatTimeRaw(time() - $time));
 	}
 

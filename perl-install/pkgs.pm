@@ -1232,9 +1232,17 @@ sub install {
 }
 
 sub upgrade_by_removing_pkgs {
-    my ($packages, $callback, $extension, $o_map) = @_;
+    my ($packages, $callback, $extension, $upgrade_name) = @_;
+
+    my $upgrade_data;
+    if ($upgrade_name) {
+	my @l = glob("$ENV{SHARE_PATH}/upgrade/$upgrade_name*");
+	@l == 0 and log::l("upgrade_by_removing_pkgs: no special upgrade data");
+	@l > 1 and log::l("upgrade_by_removing_pkgs: many special upgrade data (" . join(' ', @l) . ")");
+	$upgrade_data = $l[0];
+    }
     
-    log::l("upgrade_by_removing_pkgs (extension=$extension, map=$o_map)");
+    log::l("upgrade_by_removing_pkgs (extension=$extension, upgrade_data=$upgrade_data)");
 
     #- put the release file in /root/drakx so that we continue an upgrade even if the file has gone
     my $f = common::release_file($::prefix);
@@ -1243,6 +1251,15 @@ sub upgrade_by_removing_pkgs {
     }
     my $busy_var_tmp = "$::prefix/var/tmp/ensure-rpm-does-not-remove-this-dir";
     touch($busy_var_tmp);
+
+    if ($upgrade_data) {
+	foreach (glob("$upgrade_data/pre.*")) {
+	    my $f = '/tmp/' . basename($_);
+	    cp_af($_, "$::prefix$f");
+	    run_program::rooted($::prefix, $f);
+	    unlink "$::prefix$f";
+	}
+    }
 
     my @was_installed = remove_pkgs_to_upgrade($packages, $callback, $extension);
 
@@ -1255,19 +1272,13 @@ sub upgrade_by_removing_pkgs {
 	unlink $busy_var_tmp;
     }
 
-    if ($o_map) {
-	my @l = glob("$o_map*");
-	@l == 0 and log::l("upgrade_by_removing_pkgs: no map matching $o_map*");
-	@l > 1 and log::l("upgrade_by_removing_pkgs: many maps (" . join(' ', @l) . ")");    
-	$o_map = $l[0];
-    }
     my %map = map {
 	chomp;
 	my ($name, @new) = split;
 	$name => \@new;
-    } $o_map ? cat_($o_map) : ();
+    } $upgrade_data ? cat_("$upgrade_data/map") : ();
 
-    log::l("upgrade_by_removing_pkgs: map $o_map gave " . (int keys %map) . " rules");
+    log::l("upgrade_by_removing_pkgs: map $upgrade_data/map gave " . (int keys %map) . " rules");
 
     my $log;
     my @to_install = uniq(map { 
