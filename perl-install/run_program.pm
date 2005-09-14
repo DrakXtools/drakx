@@ -54,9 +54,9 @@ sub raw {
 
     $root ? ($root .= '/') : ($root = '');
     
-    $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
+    $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root'; # TO REMOVE
     my $tmpdir = sub {
-	my $dir = "$ENV{HOME}/tmp";
+	my $dir = $::isInstall ? '/tmp' : $< == 0 ? '/root/tmp' : "$ENV{HOME}/tmp";
 	-d $dir or mkdir($dir, 0700);
 	$dir;
     };
