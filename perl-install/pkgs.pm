@@ -256,7 +256,7 @@ sub packageRequest {
 sub packageCallbackChoices {
     my ($urpm, $_db, $state, $choices) = @_;
     if (my $prefer = find { $_->arch ne 'src' && exists $preferred{$_->name} } @$choices) {
-#-	log::l("packageCallbackChoices: prefering " . $prefer->name);
+	log::l("packageCallbackChoices: prefered choice " . $prefer->name . " from ", join(",", map { $_->name } @$choices));
 	$prefer;
     } else {
 	my @l = grep {
