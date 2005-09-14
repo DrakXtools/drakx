@@ -396,7 +396,7 @@ sub multi_head_choices {
 }
 
 #- Xorg version available, it would be better to parse available package and get version from it.
-sub xorg_version() { '6.8.2' }
+sub xorg_version() { '6.9' }
 
 sub xfree_and_glx_choices {
     my ($card) = @_;
