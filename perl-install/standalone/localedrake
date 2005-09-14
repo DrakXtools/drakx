@@ -12,7 +12,7 @@ use any;
 my ($klang, $kcountry, $apply);
 
 foreach (@ARGV) {
-    $apply = /--apply/;
+    $apply = 1 if /--apply/;
     $klang = $1 if /--kde_lang=(.*)/;
     $kcountry = uc($1) if /--kde_country=(.*)/;
 }
