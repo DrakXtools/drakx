@@ -124,7 +124,7 @@ sub configure_ap {
 
     $wireless_net->{BOOTPROTO} = $dhcp ? 'dhcp' : 'static';
     $wireless_net->{WIRELESS_ENC_KEY} = $wireless_enc_key && network::wireless::convert_wep_key_for_iwconfig($wireless_enc_key, $wireless_enc_mode eq 'restricted');
-    $wireless_net->{WIRELESS_MODE} = $network->{mode} eq 'Master' ? 'Managed' : $network->{mode};
+    $wireless_net->{WIRELESS_MODE} = $network->{mode} eq 'Ad-Hoc' ? $network->{mode} : 'Managed';
 
     if ($has_roaming || $wireless_enc_mode eq 'wpa-psk') {
         $wireless_net->{WIRELESS_WPA_DRIVER} = network::wireless::wpa_supplicant_get_driver($wireless_module);
