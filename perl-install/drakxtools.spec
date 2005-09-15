@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.61mdk
+Release: 0.62mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -378,6 +378,43 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.62mdk
+- bootloader-config: fix entry "linux" when removing a kernel (pixel)
+- diskdrake: check if resize2fs failed (pixel)
+- drakconnect (blino):
+  o fix start/stop of interfaces that are not set to start on boot
+  o fix device path for HCF modems
+  o fortify PPP configuration
+  o install madwifi drivers if needed
+  o restart hsf/hcfpci services when needed
+  o rewrite shorewall config at end of setup
+  o support AVM FRITZ!Card DSL USB v2.0
+- drakconnect/drakroam (blino):
+  o better handling of ASCII WEP keys (#18558)
+  o write wireless settings in wireless.d/ as well
+- drakfirewall: read shorewall net interface from configuration file (blino)
+- drakgw: fix untranslated messages (blino, #17969)
+- drakroam (blino):
+  o don't automatically refresh networks list
+  o show refresh icon if network isn't connected
+- harddrake GUI: show the main window earlier (thus fixing 
+  windows' icons)
+- harddrake service: write /etc/iftab if needed (blino)
+- keyboarddrake: fix some keyboards (fredl)
+- localedrake:
+  o do not force font name since fontconfig handle it perfectly
+    (funda wang)
+  o fix --apply managment (ennael, misc)
+- net_applet (blino):
+  o allow to up/down any network interface
+  o refresh wireless networks every minute only
+- net_applet/drakroam (blino):
+  o fallback to wpa_cli or iwlist/iwconfig when wpa_supplicant is not
+    used (#18516)
+  o adjust signal level given by wpa_supplicant
+- XFdrake: use nvidia legacy drivers for TNT2/GeForce/GeForce2 (blino)
+- require gtkdialogs for urpmi --gui (rafael)
+
 * Mon Sep 12 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.61mdk
 - drakboot: misc fixes (pixel)
 - drakperm: check if path, username & group are valid
