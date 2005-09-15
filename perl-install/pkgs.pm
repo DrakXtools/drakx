@@ -1148,6 +1148,7 @@ sub install {
 		    my $fd; #- since we return the "fileno", perl does not know we're still using it, and so closes it, and :-(
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
 						my ($packages, $_type, $id) = @_;
+						&$callback;
 						my $pkg = defined $id && $packages->{depslist}[$id];
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
@@ -1160,6 +1161,7 @@ sub install {
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
 						my ($packages, $_type, $id) = @_;
+						&$callback;
 						my $pkg = defined $id && $packages->{depslist}[$id] or return;
 						my $check_installed;
 						$db->traverse_tag('name', [ $pkg->name ], sub {

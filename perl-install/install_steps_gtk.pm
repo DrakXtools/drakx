@@ -442,7 +442,6 @@ sub installPackages {
 	
 	$change_time = time();
 	my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
-	$f =~ s/\Q$::prefix// if ! -f $f;
 	log::l("advertising $f");
 	gtkval_modify(\$advertising_image, $f);
 
@@ -502,7 +501,7 @@ sub installPackages {
 	    $start_time = time();
 	    mygtk2::gtkadd($pkg_log_widget, text => N("%d packages", $nb));
 	    $w->flush;
-	} elsif ($type eq 'inst' && $subtype eq 'start') {
+	} elsif ($type eq 'open') {
 	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $packages->{depslist}[$id];
 	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, (split /\n/, c::from_utf8($p->summary))[0] || ''));
