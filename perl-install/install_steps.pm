@@ -197,7 +197,7 @@ sub doPartitionDisksAfter {
 
     fs::set_removable_mntpoints($o->{all_hds});
     fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
-	if !$o->{isUpgrade} || $o->{isUpgrade} =~ /redhat|conectiva/;
+	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];
 
@@ -396,6 +396,12 @@ sub beforeInstallPackages {
     if ($o->{isUpgrade} eq 'redhat') {
 	upgrading_redhat();
     }
+
+    if ($o->{isUpgrade} =~ /redhat|conectiva/) {
+	#- to ensure supermount is removed for cds
+	fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
+    }
+	
 
     #- some packages need such files for proper installation.
     install_any::write_fstab($o);
