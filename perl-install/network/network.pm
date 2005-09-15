@@ -607,7 +607,7 @@ sub configure_network {
         #- update interfaces list in shorewall
         require network::shorewall;
         my $shorewall = network::shorewall::read();
-        $shorewall and network::shorewall::write($shorewall);
+        $shorewall && !$shorewall->{disabled} and network::shorewall::write($shorewall);
     }
 
     #- make net_applet reload the configuration
