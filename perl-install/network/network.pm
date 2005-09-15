@@ -603,6 +603,11 @@ sub configure_network {
         write_zeroconf($net, $in);
 
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
+
+        #- update interfaces list in shorewall
+        require network::shorewall;
+        my $shorewall = network::shorewall::read();
+        $shorewall and network::shorewall::write($shorewall);
     }
 
     #- make net_applet reload the configuration
