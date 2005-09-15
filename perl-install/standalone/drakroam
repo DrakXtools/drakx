@@ -213,7 +213,6 @@ sub connect_to_selected() {
 }
 
 update_networks();
-Glib::Timeout->add(30000, \&update_networks);
 
 my $w = ugtk2->new(N("Wireless connection"));
 gtkadd($w->{window},
