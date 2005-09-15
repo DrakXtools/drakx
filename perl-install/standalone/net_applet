@@ -224,7 +224,7 @@ sub checkNetworkForce() {
 sub cronNetwork() {
     my $i;
     $timeout = Glib::Timeout->add(2000, sub {
-        checkWireless() if !($i++%10);
+        checkWireless() if !($i++%30);
         checkNetwork();
         1;
     });
