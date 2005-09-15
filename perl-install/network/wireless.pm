@@ -22,12 +22,20 @@ sub is_wpa_supplicant_blacklisted {
     is_old_rt2x00($module);
 }
 
+sub get_hex_key {
+    my ($key) = @_;
+    if ($key =~ /^([[:xdigit:]]{4}[\:-]?)+[[:xdigit:]]{2,}$/) {
+        $key =~ s/[\:-]//g;
+        return lc($key);
+    }
+}
+
 sub convert_wep_key_for_iwconfig {
     #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
     #- else consider the key as hexadecimal, do not strip dashes
     #- always quote the key as string
     my ($real_key, $restricted) = @_;
-    my $key = member(length($real_key), (5, 13)) ? "s:$real_key" : $real_key;
+    my $key = get_hex_key($real_key) || "s:$real_key";
     $restricted ? "restricted $key" : "open $key";
 }
 
@@ -35,19 +43,14 @@ sub get_wep_key_from_iwconfig {
     #- strip "s:" if the key is 5 or 13 characters (ASCII)
     #- else the key as hexadecimal, do not modify
     my ($key) = @_;
-    $key =~ s/^s:// if member(length($key), (7,15));
     my ($mode, $real_key) = $key =~ /^(?:(open|restricted)\s+)?(.*)$/;
+    $real_key =~ s/^s://;
     ($real_key, $mode eq 'restricted');
 }
 
 sub convert_key_for_wpa_supplicant {
     my ($key) = @_;
-    if ($key =~ /^([[:xdigit:]]{4}[\:-]?)+[[:xdigit:]]{2,}$/) {
-        $key =~ s/[\:-]//g;
-        return lc($key);
-    } else {
-        return qq("$key");
-    }
+    get_hex_key($key) || qq("$key");
 }
 
 sub wlan_ng_needed {
