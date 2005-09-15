@@ -1,3 +1,126 @@
+2005/09/15  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/sl.po: language proof from Gregor Pirnaver
+	<gregor.pirnaver@sdm-si.org>.
+	Updated sl translation from Jure Repinc <jlp@holodeck1.com>.
+
+2005/09/15  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakroam: don't resize state icons
+	show refresh icon if network isn't connected
+	show ESSID if already configured for hidden ssid
+	move signal strength icon on the left
+	don't automatically refresh networks list
+	use Managed mode if AP isn't Ad-Hoc
+	drakconnect: write wireless settings in wireless.d/ as well
+	fallback to wpa_cli or iwlist/iwconfig when needed (#18516)
+
+	* network/wireless.pm: better handling of ASCII WEP keys (partial fix for
+	#18558)
+
+	* network/network.pm: don't try to update shorewall configuration if it's
+	disabled
+	drakconnect: update interfaces list in shorewall
+	drakconnect: write wireless settings in wireless.d/ as well
+
+	* network/shorewall.pm: read shorewall net interface from configuration
+	file first
+
+	* network/monitor.pm: lower signal level given by wpa_supplicant
+	fix hidden ssid always recognized as current when using iwlist
+	fallback to wpa_cli or iwlist/iwconfig when needed (#18516)
+
+	* standalone/net_applet: refresh wireless networks every minute only
+	fallback to wpa_cli or iwlist/iwconfig when needed (#18516)
+
+	* detect_devices.pm: fallback to wpa_cli or iwlist/iwconfig when needed
+	(#18516)
+
+2005/09/15  Pixel  <pixel at mandriva.com>
+
+	* install2.pm: 
+	  - we do want doPartitionDisks and formatPartitions to be done early on
+	upgrade,
+	so that selectKeyboard is done when the partitions are mounted
+	  - call set_all_default() (to fix fstab on upgrade) before install
+	packages so that
+	  {useSupermount} is correctly set
+	  (maybe we could also move the set_all_default on install there)
+	since choosing keyboard is done after mounting partition to upgrade,
+	we can do things much more nicely on upgrade:
+	  - keeping previous keyboard
+	  - or forcing prompting keyboard when bad keyboard
+
+	* install_steps_gtk.pm, pkgs.pm: 
+	  - call installCallback() on "open" too
+	  - on "open" we are not chrooted
+	  - setting advertising when chrooted could cause havoc
+	if pango wants to load a new font (eg: advertising #13 in pt_BR)
+
+	* share/upgrade/conectiva.10/map: ensure we have gnome-volume-manager when
+	we have gnome or kde (to handle cdrom auto mounting)
+
+	* install_steps.pm: 
+	  - we do want doPartitionDisks and formatPartitions to be done early on
+	upgrade,
+	so that selectKeyboard is done when the partitions are mounted
+	  - call set_all_default() (to fix fstab on upgrade) before install
+	packages so that
+	  {useSupermount} is correctly set
+	  (maybe we could also move the set_all_default on install there)
+
+	* install_any.pm: 
+	  - there is no more adverstising icon
+	  - cleaning
+
+2005/09/15  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/09/14  cavassin
+
+	* share/po/pt_BR.po: Fixed typos and one fuzzy.
+
+2005/09/14  Frederic Lepied  <flepied at mandriva.com>
+
+	* keyboard.pm: fixed Latin American (latam) and Laotian (la) xkb keyboard
+	names.
+
+2005/09/14  Michael Scherer  <mscherer at mandrake.org>
+
+	* standalone/localedrake: 
+	  - allow to use --apply anywhere on the command line ( thanks ennael
+	for spotting this )
+
+2005/09/14  Olivier Blin <oblin at mandriva.com>
+
+	* Xconfig/card.pm: use nvidia legacy drivers for TNT2/GeForce/GeForce2
+
+	* standalone/service_harddrake, network/network.pm, network/ethernet.pm:
+	call network::ethernet::update_iftab from
+	network::ethernet::configure_eth_aliases
+
+	* install2.pm: write ethernet aliases (and iftab) on upgrade, so that
+	eth1394 doesn't mess up interface ordering after install
+
+	* network/adsl.pm: try to load all ppp modules, even if one of them fails
+	modprobe pppoatm for pppoa connections
+
+2005/09/14  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: updates from eskild
+
+2005/09/14  Pixel  <pixel at mandriva.com>
+
+	* share/upgrade/conectiva.10/map, share/upgrade-map.conectiva.10,
+	share/upgrade/conectiva.10/pre.remove-conflicting-files.sh,
+	share/upgrade/conectiva.10/pre.merge-groups.sh, share/list.xml, pkgs.pm,
+	install_any.pm: add upgrade script for conectiva
+
+2005/09/14  tbednarski
+
+	* share/po/pl.po: translation updates
+
 2005/09/14  Antoine Ginies  <aginies at mandriva.com> 
 
 	* network/pxe.pm: add auto_install option
