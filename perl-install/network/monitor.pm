@@ -31,9 +31,11 @@ sub list_wireless {
     if (defined $results && defined $list) {
         #- bssid / frequency / signal level / flags / ssid
         while ($results =~ /^((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\t(\d+)\t(\d+)\t(.*?)\t(.*)$/mg) {
-            # wpa_supplicant may list the network two times, use ||=
+            #- wpa_supplicant may list the network two times, use ||=
             $networks{$1}{frequency} ||= $2;
-            $networks{$1}{signal_level} ||= $3;
+            #- signal level is really too high in wpa_supplicant
+            #- this should be standardized at some point
+            $networks{$1}{signal_level} ||= int($3/3.5);
             $networks{$1}{flags} ||= $4;
             $networks{$1}{essid} ||= $5 if $5 ne '<hidden>';
         }
