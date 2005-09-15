@@ -136,8 +136,7 @@ sub configure_ap {
     my $ssid = $essid || $ap;
     $net->{wireless}{$ssid} = $wireless_net;
 
-    my $wireless_file = "/etc/sysconfig/network-scripts/wireless.d/$ssid";
-    network::network::write_interface_settings($wireless_net, $wireless_file);
+    network::network::write_wireless_conf($ssid, $wireless_net);
 
     if ($has_roaming) {
         #- this should be handled by the monitoring daemon instead

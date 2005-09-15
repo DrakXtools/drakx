@@ -217,6 +217,12 @@ sub write_interface_conf {
     write_interface_settings($intf, $file);
 }
 
+sub write_wireless_conf {
+    my ($ssid, $ifcfg) = @_;
+    my $wireless_file = "$::prefix/etc/sysconfig/network-scripts/wireless.d/$ssid";
+    write_interface_settings($ifcfg, $wireless_file);
+}
+
 sub add2hosts {
     my ($hostname, @ips) = @_;
     my ($sub_hostname) = $hostname =~ /(.*?)\./;
@@ -586,11 +592,15 @@ sub configure_network {
             #- symlink resolv.conf in install root too so that updates and suppl media can be added
             symlink "$::prefix/etc/resolv.conf", "/etc/resolv.conf";
         }
-	write_interface_conf($net, $_) foreach keys %{$net->{ifcfg}};
-	network::ethernet::install_dhcp_client($in, $_->{DHCP_CLIENT}) foreach grep { $_->{BOOTPROTO} eq "dhcp" } values %{$net->{ifcfg}};
+        foreach (keys %{$net->{ifcfg}}) {
+            write_interface_conf($net, $_);
+            my $ssid = $net->{ifcfg}{$_}{WIRELESS_ESSID} or next;
+            write_wireless_conf($ssid, $net->{ifcfg}{$_});
+        }
+        network::ethernet::install_dhcp_client($in, $_->{DHCP_CLIENT}) foreach grep { $_->{BOOTPROTO} eq "dhcp" } values %{$net->{ifcfg}};
         add2hosts("localhost", "127.0.0.1");
         add2hosts($net->{network}{HOSTNAME}, "127.0.0.1") if $net->{network}{HOSTNAME};
-	write_zeroconf($net, $in);
+        write_zeroconf($net, $in);
 
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %{$net->{ifcfg}} and $in->do_pkgs->install('pump');
     }
