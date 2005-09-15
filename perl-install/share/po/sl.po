@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-09-14 19:41+0800\n"
-"PO-Revision-Date: 2005-09-09 08:44+0200\n"
+"PO-Revision-Date: 2005-09-15 00:48+0200\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -489,7 +489,7 @@ msgstr ""
 #: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:116 any.pm:973
 #, c-format
 msgid "Custom"
-msgstr "Razno"
+msgstr "Po želji"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
 #: install_steps_interactive.pm:86 install_steps_interactive.pm:1326
@@ -980,7 +980,7 @@ msgstr "Zagonska naprava"
 #: any.pm:287
 #, c-format
 msgid "Delay before booting default image"
-msgstr "Pavza pred zaganjanjem privzete slike"
+msgstr "Premor pred zaganjanjem privzete slike"
 
 #: any.pm:288
 #, c-format
@@ -1028,7 +1028,7 @@ msgstr "Ob vsakem zagonu počisti /tmp"
 #: any.pm:299
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Natančna velikost pomnilnika RAM, če je potrebno (najdeno %d MB)"
+msgstr "Natančna velikost pomnilnika, če je potrebno (najdeno %d MB)"
 
 #: any.pm:309
 #, c-format
@@ -1411,7 +1411,12 @@ msgid ""
 "and nautilus.\n"
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
-msgstr "Želite uporabnikom omogočiti, da dajo svoje mape v skupno rabo?\n"
+msgstr ""
+"Želite uporabnikom omogočiti, da dajo svoje mape v skupno rabo?\n"
+"Uporabniki lahko potem preprosto iz priročnega menija za mapo izberejo "
+"»Souporaba«.\n"
+"\n"
+"»Po želji« omogoča nastavljanje za vsakega uporabnika posebej.\n"
 
 #: any.pm:989
 #, c-format
@@ -2111,7 +2116,7 @@ msgstr "Url naslov se mora pričeti s http:// ali s https://"
 #: diskdrake/dav.pm:109
 #, c-format
 msgid "Server: "
-msgstr "Strežnik:"
+msgstr "Strežnik: "
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:521
 #: diskdrake/interactive.pm:1208 diskdrake/interactive.pm:1286
@@ -2220,7 +2225,7 @@ msgstr "Vrste datotečnih sistemov:"
 #: diskdrake/hd_gtk.pm:357 diskdrake/hd_gtk.pm:359 diskdrake/hd_gtk.pm:365
 #, c-format
 msgid "Use ``%s'' instead"
-msgstr "Rajši uporabite ``%s''"
+msgstr "Rajši uporabite »%s«"
 
 #: diskdrake/hd_gtk.pm:357 diskdrake/interactive.pm:470
 #, c-format
@@ -2245,7 +2250,7 @@ msgstr "Izbriši"
 #: diskdrake/hd_gtk.pm:365
 #, c-format
 msgid "Use ``Unmount'' first"
-msgstr "Najprej uporabite ``Odklopi''"
+msgstr "Najprej uporabite »Odklopi«"
 
 #: diskdrake/interactive.pm:194
 #, c-format
@@ -2270,12 +2275,12 @@ msgstr "Razveljavi"
 #: diskdrake/interactive.pm:256
 #, c-format
 msgid "Toggle to normal mode"
-msgstr "Spremeni v normalni način"
+msgstr "Preklopi v normalni način"
 
 #: diskdrake/interactive.pm:256
 #, c-format
 msgid "Toggle to expert mode"
-msgstr "Spremeni v napredni način"
+msgstr "Preklopi v napredni način"
 
 #: diskdrake/interactive.pm:275
 #, c-format
@@ -2334,7 +2339,7 @@ msgstr "Več"
 #: diskdrake/interactive.pm:317
 #, c-format
 msgid "Hard drive information"
-msgstr "Informacije o trdem disku"
+msgstr "Podatki o trdem disku"
 
 #: diskdrake/interactive.pm:349
 #, c-format
@@ -2417,7 +2422,7 @@ msgstr "Reševanje razdelitvene tabele"
 #: diskdrake/interactive.pm:434
 #, c-format
 msgid "Detailed information"
-msgstr "Podrobne informacije"
+msgstr "Podrobni podatki"
 
 #: diskdrake/interactive.pm:449 diskdrake/interactive.pm:760
 #, c-format
@@ -2432,12 +2437,12 @@ msgstr "Formatiraj"
 #: diskdrake/interactive.pm:452
 #, c-format
 msgid "Add to RAID"
-msgstr "Dodaj k RAID"
+msgstr "Dodaj v RAID"
 
 #: diskdrake/interactive.pm:453
 #, c-format
 msgid "Add to LVM"
-msgstr "Dodaj k LVM"
+msgstr "Dodaj v LVM"
 
 #: diskdrake/interactive.pm:456
 #, c-format
@@ -2482,7 +2487,7 @@ msgstr "Vrsta datotečnega sistema: "
 #: diskdrake/interactive.pm:525
 #, c-format
 msgid "Preference: "
-msgstr "Lastnosti:"
+msgstr "Možnosti: "
 
 #: diskdrake/interactive.pm:528
 #, c-format
@@ -2763,7 +2768,7 @@ msgstr "Razdelki so bili preštevilčeni"
 #: diskdrake/interactive.pm:1209 diskdrake/interactive.pm:1271
 #, c-format
 msgid "Device: "
-msgstr "Naprava:"
+msgstr "Naprava: "
 
 #: diskdrake/interactive.pm:1210
 #, c-format
@@ -2778,18 +2783,18 @@ msgstr "Oznaka enote: "
 #: diskdrake/interactive.pm:1212
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "Črka DOS pogona: %s (ugibanje)\n"
+msgstr "Črka pogona DOS: %s (ugibanje)\n"
 
 #: diskdrake/interactive.pm:1216 diskdrake/interactive.pm:1225
 #: diskdrake/interactive.pm:1289
 #, c-format
 msgid "Type: "
-msgstr "Vrsta:"
+msgstr "Vrsta: "
 
 #: diskdrake/interactive.pm:1220 install_steps_gtk.pm:300
 #, c-format
 msgid "Name: "
-msgstr "Ime:"
+msgstr "Ime: "
 
 #: diskdrake/interactive.pm:1227
 #, c-format
@@ -2915,7 +2920,7 @@ msgstr "Geometrija: %s cilindrov, %s glav, %s sektorjev\n"
 #: diskdrake/interactive.pm:1275 network/thirdparty.pm:316
 #, c-format
 msgid "Info: "
-msgstr "Informacije: "
+msgstr "Podatki: "
 
 #: diskdrake/interactive.pm:1276
 #, c-format
@@ -3352,7 +3357,7 @@ msgstr "Zip"
 #: harddrake/data.pm:88 install_any.pm:1706
 #, c-format
 msgid "Hard Disk"
-msgstr "Hard Disk"
+msgstr "Trdi disk"
 
 #: harddrake/data.pm:97 install_any.pm:1707
 #, c-format
@@ -3362,7 +3367,7 @@ msgstr "CDROM"
 #: harddrake/data.pm:107
 #, c-format
 msgid "CD/DVD burners"
-msgstr "CD/DVD zapisovalniki"
+msgstr "Zapisovalniki CD/DVD"
 
 #: harddrake/data.pm:117
 #, c-format
@@ -10427,48 +10432,48 @@ msgstr "PAP/CHAP"
 #: network/netconnect.pm:239 standalone/drakconnect:56
 #, c-format
 msgid "Network & Internet Configuration"
-msgstr "Nastavite za omrežje in internet"
+msgstr "Nastavitve za omrežje in internet"
 
 #: network/netconnect.pm:245
 #, c-format
 msgid "LAN connection"
-msgstr "Povezava LAN"
+msgstr "Krajevno omrežje (LAN)"
 
 #: network/netconnect.pm:246 network/netconnect.pm:265 standalone/drakroam:140
 #: standalone/drakroam:158 standalone/drakroam:161
 #, c-format
 msgid "Wireless connection"
-msgstr "Brezžična povezava"
+msgstr "Brezžična"
 
 #: network/netconnect.pm:247
 #, c-format
 msgid "ADSL connection"
-msgstr "ADSL povezava"
+msgstr "ADSL"
 
 #: network/netconnect.pm:248
 #, c-format
 msgid "Cable connection"
-msgstr "Kabelska povezava"
+msgstr "Kabelska"
 
 #: network/netconnect.pm:249
 #, c-format
 msgid "ISDN connection"
-msgstr "ISDN povezava"
+msgstr "ISDN"
 
 #: network/netconnect.pm:250
 #, c-format
 msgid "Modem connection"
-msgstr "Povezava preko modema"
+msgstr "Modemska"
 
 #: network/netconnect.pm:251
 #, c-format
 msgid "DVB connection"
-msgstr "Povezava DVB"
+msgstr "DVB"
 
 #: network/netconnect.pm:261
 #, c-format
 msgid "Choose the connection you want to configure"
-msgstr "Izberite povezavo, ki jo želite nastaviti"
+msgstr "Izberite vrsto povezavo, ki jo želite nastaviti"
 
 #: network/netconnect.pm:276 network/netconnect.pm:764
 #, c-format
@@ -10478,7 +10483,7 @@ msgstr "Nastavitve povezave"
 #: network/netconnect.pm:276 network/netconnect.pm:765
 #, c-format
 msgid "Please fill or check the field below"
-msgstr "Prosim, obkljukajte ali izpolnite spodnje polje"
+msgstr "Prosim izpolnite ali preverite spodnje polje"
 
 #: network/netconnect.pm:279
 #, c-format
@@ -11198,7 +11203,7 @@ msgstr "Vmesniška kartica"
 #: network/netconnect.pm:1160
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "Omrežno demultipleksiranje"
 
 #: network/netconnect.pm:1161
 #, c-format
@@ -15209,12 +15214,12 @@ msgstr "Sprejmi / zavrni lažna sporočila o napakah IPv4"
 #: security/help.pm:13
 #, c-format
 msgid " Accept/Refuse broadcasted icmp echo."
-msgstr "Sprejmi / zavrni posredovani icmp odmev."
+msgstr "Sprejmi / zavrni posredovani ICMP odmev."
 
 #: security/help.pm:15
 #, c-format
 msgid " Accept/Refuse icmp echo."
-msgstr "Sprejmi / zavrni icmp odmev."
+msgstr "Sprejmi / zavrni ICMP odmev."
 
 #: security/help.pm:17
 #, c-format
@@ -15611,12 +15616,12 @@ msgstr "Sprejmi nepravilna sporočila o napakah IPv4"
 #: security/l10n.pm:12
 #, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr "Sprejmi posredovani icmp odmev"
+msgstr "Sprejmi posredovani ICMP odmev"
 
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr "Sprejmi icmp odmev"
+msgstr "Sprejmi ICMP odmev"
 
 #: security/l10n.pm:15
 #, c-format
@@ -16369,7 +16374,7 @@ msgstr "Informacije"
 #: services.pm:227
 #, c-format
 msgid "Start when requested"
-msgstr "Start na zahtevo"
+msgstr "Na zahtevo"
 
 #: services.pm:227
 #, c-format
@@ -16379,7 +16384,7 @@ msgstr "Ob zagonu"
 #: services.pm:244
 #, c-format
 msgid "Start"
-msgstr "Start"
+msgstr "Zaženi"
 
 #: services.pm:244
 #, c-format
@@ -19707,17 +19712,17 @@ msgstr "Pokaži konfiguracijo sistema za varnostne kopije."
 #: standalone/drakbackup:4315
 #, c-format
 msgid "Wizard Configuration"
-msgstr "Konfiguracija prek čarovnika"
+msgstr "Nastavitev prek čarovnika"
 
 #: standalone/drakbackup:4320
 #, c-format
 msgid "Advanced Configuration"
-msgstr "Napredna konfiguracija"
+msgstr "Napredna nastavitev"
 
 #: standalone/drakbackup:4325
 #, c-format
 msgid "View Configuration"
-msgstr "Pokaži konfiguracijo"
+msgstr "Pokaži nastavitve"
 
 #: standalone/drakbackup:4329
 #, c-format
@@ -19735,8 +19740,8 @@ msgid ""
 "No configuration file found \n"
 "please click Wizard or Advanced."
 msgstr ""
-"Ni mogoče najti datoteke s konfiguracijo\n"
-"Kliknite Čarovnik ali Napredno."
+"Ni mogoče najti datoteke z nastavitvami \n"
+"Prosim opravite nastavitev prek čarovnika ali napredno."
 
 #: standalone/drakbackup:4358 standalone/drakbackup:4361
 #, c-format
@@ -19859,7 +19864,7 @@ msgstr "Sistemski način"
 #: standalone/drakboot:206
 #, c-format
 msgid "Launch the graphical environment when your system starts"
-msgstr "Zagon sistema X-Windows pri zagonu sistema"
+msgstr "Zagon grafičnega okolja ob zagonu sistema"
 
 #: standalone/drakboot:272
 #, c-format
@@ -20034,7 +20039,7 @@ msgstr "Je ura v vašem računalniku nastavljena na GMT?"
 #: standalone/drakclock:75
 #, c-format
 msgid "Network Time Protocol"
-msgstr "Omrežni časovni protokol"
+msgstr "Omrežni časovni protokol (NTP)"
 
 #: standalone/drakclock:77
 #, c-format
@@ -20048,7 +20053,7 @@ msgstr ""
 #: standalone/drakclock:78
 #, c-format
 msgid "Enable Network Time Protocol"
-msgstr "Omogoči Omrežni časovni protokol"
+msgstr "Omogoči omrežni časovni protokol"
 
 #: standalone/drakclock:86
 #, c-format
@@ -20091,7 +20096,7 @@ msgstr "Privzeti prehod:"
 #: standalone/drakconnect:89 standalone/drakconnect:807
 #, c-format
 msgid "Interface:"
-msgstr "Naprava:"
+msgstr "Vmesnik:"
 
 #: standalone/drakconnect:93 standalone/net_monitor:116
 #, c-format
@@ -20101,7 +20106,7 @@ msgstr "Prosim, počakajte"
 #: standalone/drakconnect:109
 #, c-format
 msgid "Interface"
-msgstr "Naprava"
+msgstr "Vmesnik"
 
 #: standalone/drakconnect:109 standalone/printerdrake:224
 #: standalone/printerdrake:231
@@ -20566,11 +20571,11 @@ msgid ""
 "-You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Pred nameščanje kakršne koli pisave se prepričajte, da imate pravico do "
-"uporabe in namestitve na važem sistemu. \n"
+"Pred namestitvijo katerekoli pisave se prepričajte, da imate pravico do "
+"njene uporabe in namestitve na svoj sistem\n"
 "\n"
-"- Pisave lahko namestite na navaden način. V redkih primerih, hroščate "
-"pisave lahko obesijo vaš X Strežnik."
+"Pisave lahko namestite na običajen način. V redkih primerih lahko hroščate "
+"pisave obesijo vaš strežnik X."
 
 #: standalone/drakfont:474 standalone/drakfont:483
 #, c-format
@@ -20615,7 +20620,7 @@ msgid ""
 "\n"
 "       VIGNAUD Thierry <tvignaud@mandriva.com>"
 msgstr ""
-"Avtorske pravice (C) 2001-2002 Mandriva. \n"
+"Avtorske pravice © 2001-2002 Mandriva. \n"
 "\n"
 "\n"
 "       DUPONT Sebastien (originalna različica)\n"
@@ -20644,17 +20649,17 @@ msgid ""
 " Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 msgstr ""
 "Ta program je prosta programska oprema; lahko ga razširjate in/ali\n"
-"spreminjate po pogojih, določenih v ,,GNU General Public License``, izdani\n"
+"spreminjate po pogojih, določenih v »GNU General Public License«, izdani\n"
 "pri Free Software Foundation; 2. izdaja (ali novejša, če razpolagate z "
 "njo).\n"
 "\n"
 "\n"
 " Ta program se razširja v upanju, da je koristen, vendar BREZ KAKRŠNEGAKOLI\n"
 "JAMSTVA, niti jamstev USTREZNOSTI ZA PRODAJO ali PRIMERNOSTI ZA UPORABO. Za\n"
-"podrobnosti si oglejte ,,GNU General Public License``.\n"
+"podrobnosti si oglejte »GNU General Public License«.\n"
 "\n"
 "\n"
-"Izvod ,,GNU General Public License`` bi moral biti priložen temu programu;\n"
+"Izvod »GNU General Public License« bi moral biti priložen temu programu;\n"
 "če ni, pišite Free Software Foundation, Inc., 59 Temple Place - Suite 330,\n"
 "Boston, MA 02111-1307, USA."
 
@@ -20675,24 +20680,24 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
-"Zavala \n"
+"Zahvale:\n"
 "\n"
 "    -  pfm2afm:   \n"
 "\t by Ken Borgendale:\n"
-"\t    Pretvoril Windows .pfm datoteko v .afm (Adobe Font Metrics)\n"
+"\t    Pretvori Windows datoteko .pfm v .afm (Adobe Font Metrics)\n"
 "\n"
 "    -  type1inst:\n"
 "\t by James Macnicol: \n"
-"\t    type1inst napravi datotekefonts.dir fonts.scale & Fontmap.\n"
+"\t    type1inst ustvari datoteke fonts.dir, fonts.scale in Fontmap.\n"
 "\n"
 "    -  ttf2pt1:   \n"
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
-"             Pretvoril ttf datoteke s pisavami v afm in pisave pfb\n"
+"             Pretvori datoteke ttf s pisavami v pisave afm in pfb\n"
 
 #: standalone/drakfont:556
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Izberi aplikacijo, ki bo podprla te pisave:"
+msgstr "Izberite aplikacijo, ki bo podprla te pisave:"
 
 #: standalone/drakfont:557
 #, c-format
@@ -20703,11 +20708,11 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Pred namestitvijo katero od pisav, se prepričajte, da imate pravico do "
-"uporabe in jih namestiti na vaš sistem\n"
+"Pred namestitvijo katerekoli pisave se prepričajte, da imate pravico do "
+"njene uporabe in namestitve na svoj sistem\n"
 "\n"
-"Pisave lahko namestite po običajni poti. V redkih primerih lahko hroščate "
-"pisave povzročijo sesutje vašega X Strežnika."
+"Pisave lahko namestite na običajen način. V redkih primerih lahko hroščate "
+"pisave obesijo vaš strežnik X."
 
 #: standalone/drakfont:567
 #, c-format
@@ -20762,7 +20767,7 @@ msgstr "kliknite sem, če ste prepričani."
 #: standalone/drakfont:694
 #, c-format
 msgid "here if no."
-msgstr "nem, če niste."
+msgstr "sem, če niste."
 
 #: standalone/drakfont:733
 #, c-format
@@ -20797,12 +20802,12 @@ msgstr "Kopiraj pisave na vaš sistem"
 #: standalone/drakfont:756
 #, c-format
 msgid "Install & convert Fonts"
-msgstr "Namesti & pretvori Pisave"
+msgstr "Namesti in pretvori pisave"
 
 #: standalone/drakfont:757
 #, c-format
 msgid "Post Install"
-msgstr "Po Namestitvi"
+msgstr "Po namestitvi"
 
 #: standalone/drakfont:775
 #, c-format
@@ -20812,7 +20817,7 @@ msgstr "Odstrani pisave z vašega sistema"
 #: standalone/drakfont:776
 #, c-format
 msgid "Post Uninstall"
-msgstr "Po Odstranitvi"
+msgstr "Po odstranitvi"
 
 #: standalone/drakgw:50 standalone/drakvpn:51
 #, c-format
@@ -20837,16 +20842,16 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Prišli ste do nastavitev, kjer lahko vaš računalnik deli Internetno "
-"povezavo.\n"
+"Prišli ste do nastavitev za skupno rabo internetne povezave na tem "
+"računalniku.\n"
 "S to zmožnostjo bodo lahko drugi računalniki v vašem krajevnem omrežju "
 "uporabljali internetno povezavo tega računalnika.\n"
 "\n"
-"Prepričajte se, da ste si nastavili vaš Mrežni/Internet dostop z uporabo "
-"drakconnect preden greste dalje.\n"
+"Preden nadaljujete, se prepričajte, da ste že nastavili mrežni oziroma "
+"internetni dostop z uporabo drakconnect.\n"
 "\n"
-"Opomba: rabili boste posvečeni mrežni prilagojevalnik da si boste nastavili "
-"Krajevno Področni Omrežje (KPO angl. LAN)."
+"Opomba: da lahko nastavite krajevno omrežje (LAN), potrebujete za to svoj "
+"mrežni vmesnik."
 
 #: standalone/drakgw:95
 #, c-format
@@ -20856,7 +20861,7 @@ msgid ""
 "\n"
 "What would you like to do?"
 msgstr ""
-"Nastavitev deljenja internetne povezave je že narejeno.\n"
+"Nastavitev skupne uporabe internetne povezave je že opravljena.\n"
 "Trenutno je omogočena.\n"
 "\n"
 "Kaj bi radi naredili?"
@@ -20869,7 +20874,7 @@ msgid ""
 "\n"
 "What would you like to do?"
 msgstr ""
-"Nastavitev deljenja internetne povezave je že narejeno.\n"
+"Nastavitev skupne uporabe internetne povezave je že opravljena.\n"
 "Trenutno je onemogočena.\n"
 "\n"
 "Kaj bi radi naredili?"
@@ -20888,11 +20893,11 @@ msgid ""
 "\n"
 "I am about to setup your Local Area Network with that adapter."
 msgstr ""
-"Tukaj na vašem sistemu je prikrojen le en mrežni prilagojevalnik:\n"
+"Na vašem sistemu je nastavljen le en mrežni vmesnik:\n"
 "\n"
 "%s\n"
 "\n"
-"Nameravam nastaviti vašo Krajevno Področno Omrežje s tem prilagojevalnikom."
+"Nameravam nastaviti vaše krajevno omrežje z uporabo tega vmesnika."
 
 #: standalone/drakgw:156
 #, c-format
@@ -20900,8 +20905,7 @@ msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr ""
-"Prosimo izberite kakšen mrežni prilagojevalnik bo povezan do vašega "
-"Krajevnnega Področnega Omrežja."
+"Prosim izberite, kateri mrežni vmesnik bo povezan z vašim krajevnim omrežjem."
 
 #: standalone/drakgw:177
 #, c-format
@@ -20922,7 +20926,8 @@ msgstr "Notranje ime domene"
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
-"Najden je spor z potencialenim KPO naslovomv trenutnih nastavitvah %s!\n"
+"V trenutnih nastavitvah za %s je zaznan možen spor glede naslovov za "
+"krajevno omrežje!\n"
 
 #: standalone/drakgw:204
 #, c-format
@@ -21625,7 +21630,7 @@ msgid ""
 msgstr ""
 "Tukaj vidite datoteke, katerim msec popravlja dovoljenja, lastnike ter "
 "pripadnost skupinam.\n"
-"Tu lahko tudi urejata vaša pravila, ki prepišejo privzeta pravila."
+"Tu lahko tudi urejate svoja pravila, ki prepišejo privzeta pravila."
 
 #: standalone/drakperm:109
 #, c-format
@@ -21702,35 +21707,35 @@ msgstr "drugo"
 #: standalone/drakperm:252
 #, c-format
 msgid "Read"
-msgstr "Prebran"
+msgstr "Branje"
 
 #. -PO: here %s will be either "user", "group" or "other"
 #: standalone/drakperm:255
 #, c-format
 msgid "Enable \"%s\" to read the file"
-msgstr "Omogoči »%s«, da lahko bere to datoteko"
+msgstr "Omogoči, da »%s« lahko bere to datoteko"
 
 #: standalone/drakperm:259
 #, c-format
 msgid "Write"
-msgstr "Piši"
+msgstr "Pisanje"
 
 #. -PO: here %s will be either "user", "group" or "other"
 #: standalone/drakperm:262
 #, c-format
 msgid "Enable \"%s\" to write the file"
-msgstr "Omogoči »%s«, da lahko piše v to datoteko"
+msgstr "Omogoči, da »%s« lahko piše v to datoteko"
 
 #: standalone/drakperm:266
 #, c-format
 msgid "Execute"
-msgstr "Izvedi"
+msgstr "Izvajanje"
 
 #. -PO: here %s will be either "user", "group" or "other"
 #: standalone/drakperm:269
 #, c-format
 msgid "Enable \"%s\" to execute the file"
-msgstr "Omogoči »%s«, da lahko požene to datoteko"
+msgstr "Omogoči, da »%s« lahko požene to datoteko"
 
 #: standalone/drakperm:272
 #, c-format
@@ -21744,12 +21749,12 @@ msgid ""
 " only owner of directory or file in this directory can delete it"
 msgstr ""
 "Uporabljeno za mapo:\n"
-" le lastnik mape ali datoteke v tej mapi jo lahko izbriše"
+"le lastnik mape ali datoteke v tej mapi jo lahko izbriše"
 
 #: standalone/drakperm:273
 #, c-format
 msgid "Set-UID"
-msgstr "Nastavi uid"
+msgstr "Nastavi UID"
 
 #: standalone/drakperm:273
 #, c-format
@@ -21759,7 +21764,7 @@ msgstr "Pri poganjanju nastavi ID lastnika"
 #: standalone/drakperm:274
 #, c-format
 msgid "Set-GID"
-msgstr "Nastavi gid"
+msgstr "Nastavi GID"
 
 #: standalone/drakperm:274
 #, c-format
@@ -21784,7 +21789,7 @@ msgstr "Trenutni uporabnik"
 #: standalone/drakperm:299
 #, c-format
 msgid "When checked, owner and group will not be changed"
-msgstr "Pri preverjanju, uporabnik in skupina ne bosta spremenjena"
+msgstr "Če je omogočeno, uporabnik in skupina ne bosta spremenjena"
 
 #: standalone/drakperm:309
 #, c-format
@@ -21802,21 +21807,23 @@ msgid ""
 "The first character of the path must be a slash (\"/\"):\n"
 "\"%s\""
 msgstr ""
+"Prvi znak v poti mora biti poševnica (»/«):\n"
+"»%s«"
 
 #: standalone/drakperm:390
 #, c-format
 msgid "Both the username and the group must valid!"
-msgstr ""
+msgstr "Uporabniško ime in skupina morata biti veljavna!"
 
 #: standalone/drakperm:391
 #, c-format
 msgid "User: %s"
-msgstr ""
+msgstr "Uporabnik: %s"
 
 #: standalone/drakperm:392
 #, c-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Skupina: %s"
 
 #: standalone/drakroam:29
 #, c-format
@@ -22434,15 +22441,15 @@ msgstr ""
 "Tu lahko nastavite varnostno stopnjo in administratorja vaše naprave.\n"
 "\n"
 "\n"
-"'<span weight=\"bold\">Varnostni Administrator</span>' je tisti ki bo "
-"prejemal  varnostna opozorila če je\n"
-"'<span weight=\"bold\">Varnostno opozorilo</span>' nastavljeno. Lahko "
-"jeuporabniško ime ali e-pošta.\n"
+"'<span weight=\"bold\">Varnostni Administrator</span>' je tisti, ki bo "
+"prejemal varnostna opozorila, če je omogočena možnost\n"
+"'<span weight=\"bold\">Varnostno opozorilo</span>'. Lahko vpišete "
+"uporabniško ime ali e-pošto.\n"
 "\n"
 "\n"
-"Meni '<span weight=\"bold\">Stopnja varnosti</span>' omogoča izbiro eno "
+"Meni '<span weight=\"bold\">Stopnja varnosti</span>' omogoča izbiro ene "
 "izmed petih prednstavljenih varnostnih stopenj,\n"
-"ki so na voljo z  msec. Te stopnje segajo od '<span weight=\"bold\">slabe</"
+"ki so na voljo z msec. Te stopnje segajo od '<span weight=\"bold\">slabe</"
 "span>' varnosti in enostavne uporabe, do\n"
 "'<span weight=\"bold\">paranoične</span>' konfiguracije, primerne za zelo "
 "občutljive strežniške aplikacije:\n"
@@ -22450,29 +22457,30 @@ msgstr ""
 "\n"
 "<span foreground=\"royalblue3\">Slaba</span>: To je popolnoma neuporabna "
 "varnostna stopnja, a zelo\n"
-"enostavna za uporabo. Uporabljati bi se morala samo na računalnikih, ki niso "
-"priključeni na\n"
-"omrežje mrežo ali pa niso dostopni vsakomur.\n"
+"enostavna za uporabo. Uporabljala naj bi se samo na računalnikih, ki niso "
+"priključeni v\n"
+"omrežje, ali pa niso dostopni vsakomur.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Standardna</span>: To je standardna "
-"varnost,\n"
+"<span foreground=\"royalblue3\">Standardna</span>: To je standardna stopnja "
+"varnosti,\n"
 "priporočena za računalnike, ki bodo priključeni na internet kot odjemalci.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Visoka</span>: Tu so že določene\n"
-"omejitve in določena preverjanja se izvajajo vsako noč.\n"
+"<span foreground=\"royalblue3\">Visoka</span>: Tu že nastopijo določene "
+"omejitve, vsako noč pa se izvajajo tudi določena preverjanja.\n"
 "\n"
 "\n"
 "<span foreground=\"royalblue3\">Višja</span>: Varnost je sedaj tako visoka, "
 "da\n"
-"lahko sistem sedaj uporabljate kot strežnik, ki lahko sprejema povezave "
-"večih odjemalcev. Če\n"
-"je vaš računalnik samo klient na internetu, izberite nižji varnostni nivo.\n"
+"lahko sistem uporabljate tudi kot strežnik, ki lahko sprejema povezave večih "
+"odjemalcev. Če\n"
+"je vaš računalnik samo odjemalec na internetu, izberite nižjo varnostno "
+"stopnjo.\n"
 "\n"
 "\n"
-"<span foreground=\"royalblue3\">Paranoična</span>: Ta je podobn prejšnji\n"
-"stopnji, z razliko, da je sistem tu povsem zaprt in varnost povsem na\n"
+"<span foreground=\"royalblue3\">Paranoična</span>: Ta stopnja je podobna "
+"prejšnji, s to razliko, da je sistem tu povsem zaprt in varnost povsem na\n"
 "višku."
 
 #: standalone/draksec:154 standalone/harddrake2:208
@@ -22492,7 +22500,7 @@ msgstr "(privzeta vrednost: %s)"
 #: standalone/draksec:210
 #, c-format
 msgid "Security Level:"
-msgstr "Nivo varnosti:"
+msgstr "Stopnja varnosti:"
 
 #: standalone/draksec:217
 #, c-format
@@ -22517,7 +22525,7 @@ msgstr "Sistemske možnosti"
 #: standalone/draksec:268
 #, c-format
 msgid "Periodic Checks"
-msgstr "Občasno preverjanje"
+msgstr "Redna preverjanja"
 
 #: standalone/draksec:298
 #, c-format
@@ -25514,38 +25522,38 @@ msgstr "/Pomoč/_O..."
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
-msgstr "Avtentikacija"
+msgstr "Overjanje (auth.log)"
 
 #: standalone/logdrake:109
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
-msgstr "Uporabniški"
+msgstr "Uporabniki (user.log)"
 
 #: standalone/logdrake:110
 #, c-format
 msgid ""
 "_:this is the /var/log/messages log file\n"
 "Messages"
-msgstr "Sporočila"
+msgstr "Sporočila (messages)"
 
 #: standalone/logdrake:111
 #, c-format
 msgid ""
 "_:this is the /var/log/syslog log file\n"
 "Syslog"
-msgstr "Syslog"
+msgstr "Sistem (syslog)"
 
 #: standalone/logdrake:115
 #, c-format
 msgid "search"
-msgstr "išči"
+msgstr "Išči"
 
 #: standalone/logdrake:127
 #, c-format
 msgid "A tool to monitor your logs"
-msgstr "Orodje za spremljanje log-ov"
+msgstr "Orodje za spremljanje dnevnikov"
 
 #: standalone/logdrake:128 standalone/net_applet:316 standalone/net_monitor:93
 #, c-format
@@ -25565,7 +25573,7 @@ msgstr "toda neujemanje z"
 #: standalone/logdrake:138
 #, c-format
 msgid "Choose file"
-msgstr "Izberi datoteko"
+msgstr "Izbor datotek"
 
 #: standalone/logdrake:150
 #, c-format
@@ -25580,12 +25588,12 @@ msgstr "Vsebina datoteke"
 #: standalone/logdrake:164 standalone/logdrake:402
 #, c-format
 msgid "Mail alert"
-msgstr "Obvestilo o pošti"
+msgstr "E-poštna opozorila"
 
 #: standalone/logdrake:171
 #, c-format
 msgid "The alert wizard has failed unexpectedly:"
-msgstr "Čarovnik opozoril nepričakovano ni uspel:"
+msgstr "Čarovnik za opozorila je nepričakovano spodletel:"
 
 #: standalone/logdrake:224
 #, c-format
@@ -25670,12 +25678,12 @@ msgid ""
 "running"
 msgstr ""
 "Če katerakoli izmed izbranih storitev ne bo več tekla, boste prejeli "
-"obvestilo"
+"opozorilo"
 
 #: standalone/logdrake:424
 #, c-format
 msgid "Load setting"
-msgstr "Naloži nastavitve"
+msgstr "Nastavitve glede obremenitve"
 
 #: standalone/logdrake:425
 #, c-format
@@ -25687,7 +25695,7 @@ msgstr "Če bo obremenitev večja od te vrednosti, boste prejeli opozorilo"
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
-msgstr "obremenitev"
+msgstr "Obremenitev"
 
 #: standalone/logdrake:431
 #, c-format
@@ -25697,7 +25705,7 @@ msgstr "Nastavitve opozoril"
 #: standalone/logdrake:432
 #, c-format
 msgid "Please enter your email address below "
-msgstr "Prosim vpišite spodaj vaš e-poštni naslov"
+msgstr "Prosim spodaj vpišite svoj e-poštni naslov "
 
 #: standalone/logdrake:433
 #, c-format
@@ -25707,12 +25715,12 @@ msgstr "in vnesite ime (ali IP) strežnika SMTP, ki ga želite uporabiti"
 #: standalone/logdrake:452
 #, c-format
 msgid "The wizard successfully configured the mail alert."
-msgstr "Čarovnik je uspešno nastavil e-poštna obvestila."
+msgstr "Čarovnik je uspešno nastavil e-poštna opozorila."
 
 #: standalone/logdrake:458
 #, c-format
 msgid "The wizard successfully disabled the mail alert."
-msgstr "Čarovnik je uspešno onemogočil e-poštna obvestila."
+msgstr "Čarovnik je uspešno onemogočil e-poštna opozorila."
 
 #: standalone/logdrake:517
 #, c-format
@@ -25906,7 +25914,7 @@ msgid ""
 "speed:"
 msgstr ""
 "Hitrost\n"
-"prejemanje:"
+"prejemanja:"
 
 #: standalone/net_monitor:107
 #, c-format
@@ -26056,7 +26064,7 @@ msgstr "/_Nastavitev CUPS"
 #: standalone/printerdrake:171
 #, c-format
 msgid "/Configure _Auto Administration"
-msgstr "/Nastavitev _samodejne administracija"
+msgstr "/Nastavitev _samodejne administracije"
 
 #: standalone/printerdrake:194
 #, c-format
