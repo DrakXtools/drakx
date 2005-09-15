@@ -122,18 +122,15 @@ sub setupSCSI {
 sub selectKeyboard {
     my ($auto) = @_;
 
-    installStepsCall($o, $auto, 'selectKeyboard');
+    my $force;
+    if (my $keyboard = keyboard::read()) {
+	$o->{keyboard} = $keyboard; #- for uprade
+    } elsif ($o->{isUpgrade}) {
+	#- oops, the keyboard config is wrong, forcing prompt and writing
+	$force = 1;
+    }
 
-    #- read keyboard ASAP (so that summary displays ok)
-    addToBeDone {	
-	$o->{keyboard}{unsafe} or return;
-	if (my $keyboard = keyboard::read()) {
-	    $o->{keyboard} = $keyboard;
-	} elsif ($o->{isUpgrade}) {
-	    #- oops, the keyboard config is wrong, writing the unsafe config
-	    addToBeDone { keyboard::write($o->{keyboard}) } 'installPackages';
-	}
-    } 'formatPartitions';
+    installStepsCall($o, $auto, 'selectKeyboard', $force);
 }
 
 #------------------------------------------------------------------------------
