@@ -46,10 +46,10 @@ my $wireless_list = Gtk2::SimpleList->new(
     "AP" => "hidden",
     '' => "pixbuf",
     N("SSID") => "text",
+    N("Signal strength") => "pixbuf",
     '' => "pixbuf",
     N("Encryption") => "text",
     N("Operating Mode") => "text",
-    N("Signal strength") => "pixbuf",
 );
 $wireless_list->get_selection->set_mode('single');
 
@@ -76,10 +76,10 @@ sub update_networks() {
             $ap,
             $network->{current} ? $pixbufs{state}{connected} : undef,
             $network->{essid} || $ap,
+            $pixbufs{link_level}{$network->{approx_level}},
             $network->{flags} ? $pixbufs{keyring} : undef,
             $network->{flags},
             $network->{mode},
-            $pixbufs{link_level}{$network->{approx_level}},
         ];
     }
     1;
