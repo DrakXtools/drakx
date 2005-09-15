@@ -85,13 +85,13 @@ sub remove_kernel() {
 	} else {
 	    my $vmlinuz = $_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev});
 	    if ($vmlinuz && "/boot/$vmlinuz" eq $image) {
+		#- eg: removing kernel XXX and entry "linux" has /boot/vmlinuz -> vmlinuz-XXX
+		#-     so finding out which kernel still installed is better suited to use label "linux"
 		if (!%proposed_labels) {
 		    %proposed_labels = bootloader::get_kernels_and_labels_before_kernel_remove($vmlinuz); 
 		}
-		if (my $proposed = $proposed_labels{$_->{label}}) {
-		    my %to_add = %$_;
-		    put_in_hash(\%to_add, $proposed);
-		    push @new_entries, \%to_add;
+		if (my $kernel_str = $proposed_labels{$_->{label}}) {
+		    push @new_entries, [ $kernel_str, $_ ];
 		}
 		1;
 	    } else {
@@ -105,7 +105,8 @@ sub remove_kernel() {
     @{$bootloader->{entries}} = @$to_keep;
 
     foreach (@new_entries) {
-	bootloader::add_kernel($bootloader, $_, {});
+	my ($kernel_str, $v) = @$_;
+	bootloader::add_kernel($bootloader, $kernel_str, $v);
     }
 
     modify_bootloader();
