@@ -41,6 +41,11 @@ sub get_ifcfg_interface() {
 }
 
 sub get_shorewall_interface() {
+    #- read shorewall configuration first
+    foreach (get_config_file('interfaces')) {
+        $_->[0] eq 'net' and return $_->[1];
+    }
+    #- else try to find the best interface available
     my $default_dev = get_ifcfg_interface();
     $default_dev =~ /^ippp/ && "ippp+" ||
     $default_dev =~ /^ppp/ && "ppp+" ||
