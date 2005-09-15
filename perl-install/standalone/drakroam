@@ -60,7 +60,7 @@ my $has_roaming;
 
 my %pixbufs =
   (
-      state => { map { $_ => gtkcreate_pixbuf($_)->scale_simple(24, 24, 'hyper') } qw(connected refresh disconnected) },
+      state => { map { $_ => gtkcreate_pixbuf($_) } qw(connected disconnected refresh) },
       link_level => { map {
           $_ => gtkcreate_pixbuf('wifi-' . sprintf('%03d', $_) . '.png')->scale_simple(24, 24, 'hyper');
       } qw(20 40 60 80 100) },
