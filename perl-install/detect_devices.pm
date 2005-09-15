@@ -587,7 +587,7 @@ sub is_wireless_interface {
     #- i.e interfaces for which get_wireless_stats() is available
     c::isNetDeviceWirelessAware($interface) || -e "/sys/class/net/$interface/wireless";
 }
-sub has_wireless() { any { is_wireless_interface($_) } getNet() }
+sub get_wireless_interface() { find { is_wireless_interface($_) } getNet() }
 
 sub is_bridge_interface {
     my ($interface) = @_;
@@ -951,7 +951,7 @@ sub matching_type {
     if ($type =~ /laptop/i) {
         return isLaptop();
     } elsif ($type =~ /wireless/i) {
-        return has_wireless();
+        return to_bool(get_wireless_interface());
     }
 }
 

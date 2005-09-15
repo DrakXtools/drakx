@@ -21,11 +21,11 @@ use ugtk2 qw(:create :helpers :wrappers :dialogs);
 
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
-# Allow multiple instances, but only one per user:
+#- Allow multiple instances, but only one per user:
 is_running('net_applet') and die "net_applet already running\n";
 
 my ($eventbox, $img, $bubble);
-my ($current_state, $current_interface, $menu, $wireless_menu, $timeout, $update_timeout);
+my ($current_state, $current_interface, $menu, $wireless_device, $wireless_menu, $timeout, $update_timeout);
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 
 my $net = {};
@@ -57,7 +57,7 @@ my %actions = (
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => sub { network::tools::stop_interface($_[0], 1) } },
                'monitorNetwork' => { name => N("Monitor Network"), launch => \&run_net_monitor },
                'monitorIFW' => { name => N("Interactive Firewall"), launch => \&run_drakids },
-               'wireless' => { name => N("Manage wireless networks"), launch => \&run_drakroam },
+               'wireless' => { name => N("Manage wireless networks"), launch => sub { run_drakroam() } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
                'chooseInterface' => {
                    name => N("Watched interface"),
@@ -155,8 +155,9 @@ sub shouldStart() {
 sub run_net_monitor() {
     run_program::raw({ detach => 1 }, '/usr/sbin/net_monitor', '--defaultintf', $current_interface) unless is_running('net_monitor');
 }
-sub run_drakroam() {
-    run_program::raw({ detach => 1 }, '/usr/sbin/drakroam') unless is_running('drakroam');
+sub run_drakroam {
+    my ($o_ap) = @_;
+    run_program::raw({ detach => 1 }, '/usr/sbin/drakroam', if_($o_ap, "--ap=$o_ap")) unless is_running('drakroam');
 }
 sub run_drakids() {
     $ifw_alert = 0;
@@ -167,7 +168,7 @@ sub run_drakids() {
     }
 }
 sub generate_wireless_menuitem {
-    my ($net) = @_;
+    my ($net, $ap) = @_;
     $net->{menuitem} = Gtk2::CheckMenuItem->new;
     $net->{menuitem}->set_draw_as_radio(1);
     $net->{menuitem}->add(gtkpack_(gtkshow(Gtk2::HBox->new),
@@ -179,7 +180,7 @@ sub generate_wireless_menuitem {
             eval { $monitor->select_network($net->{id}) };
             $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
         } else {
-            run_drakroam();
+            run_drakroam($ap);
         }
         checkNetworkForce();
     });
@@ -187,7 +188,7 @@ sub generate_wireless_menuitem {
 }
 sub update_wireless_item {
     my ($net, $ap_address) = @_;
-    $net->{ssid_label}->set_text($net->{ssid} || "[$ap_address]");
+    $net->{ssid_label}->set_text($net->{essid} || "[$ap_address]");
     $net->{keyring_image}->visible(to_bool($net->{flags}));
     $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$net->{approx_level}});
 
@@ -196,11 +197,12 @@ sub update_wireless_item {
     $net->{menuitem}->signal_handler_unblock($net->{activate});
 }
 sub checkWireless() {
-    my $networks = eval { $monitor->list_wireless };
+    $wireless_device or return;
+    my ($networks) =  network::monitor::list_wireless($monitor, $wireless_device);
     foreach (keys %$networks) {
         my $net = $wireless_networks{$_} ||= {};
         put_in_hash($net, $networks->{$_});
-        exists $net->{menuitem} or generate_wireless_menuitem($net);
+        exists $net->{menuitem} or generate_wireless_menuitem($net, $_);
         update_wireless_item($net, $_);
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
@@ -215,6 +217,7 @@ sub checkNetworkForce() {
     $net = {};
     network::network::read_net_conf($net);
     undef $current_state;
+    $wireless_device = detect_devices::get_wireless_interface();
     checkWireless();
     checkNetwork();
 }
@@ -231,6 +234,7 @@ sub go2State {
     if ($current_state ne $state_type || $current_interface ne $interface) {
         $current_state = $state_type;
         $current_interface = $interface;
+        $wireless_device = detect_devices::get_wireless_interface();
         if ($menu) {
             if (my $m = $wireless_menu && $wireless_menu->get_submenu) {
                 $_->{menuitem}->get_parent and $m->remove($_->{menuitem}) foreach values %wireless_networks;
@@ -283,7 +287,6 @@ sub generate_menu {
     };
 
     my (@settings);
-    my $has_wireless = $monitor && detect_devices::has_wireless();
     my $interactive;
     eval { $interactive = $ifw->get_interactive };
 
@@ -296,7 +299,7 @@ sub generate_menu {
     $menu->append($create_item->('confNetwork'));
 
     if ($current_state ne 'notconfigured') {
-        $menu->append($create_item->('wireless')) if $has_wireless;
+        $menu->append($create_item->('wireless')) if $wireless_device;
         push @settings, $create_item->('chooseInterface');
     }
 
@@ -311,7 +314,7 @@ sub generate_menu {
                                               toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) }));
 
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    $has_wireless and $menu->append(gtkshow($wireless_menu = create_menu(N("Wireless networks"),
+    $wireless_device and $menu->append(gtkshow($wireless_menu = create_menu(N("Wireless networks"),
                                                                          map { $_->{menuitem} } values %wireless_networks)));
     $menu->append(gtkshow(create_menu(N("Settings"), grep { $_ } @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
