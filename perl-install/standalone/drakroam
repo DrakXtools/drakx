@@ -202,7 +202,7 @@ sub connect_to_ap {
             network::tools::start_interface($wireless_device, 0);
         }
     }
-    wait_and_run_sub(5000, \&update_networks);
+    wait_and_run_sub(10000, \&update_networks);
 }
 
 sub configure_selected() {
