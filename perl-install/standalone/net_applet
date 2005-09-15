@@ -68,6 +68,26 @@ my %actions = (
                        checkNetworkForce();
                    }
                },
+               'setInterface' => {
+                   name => N("Network interface"),
+                   choices => sub { sort keys %{$net->{ifcfg}} },
+                   format_choice => sub {
+                       my ($is_up, $_gw) = network::tools::get_interface_status($_[0]);
+                       $is_up ? N("Disconnect %s", $_[0]) : N("Connect %s", $_[0]);
+                   },
+                   choice_selected => sub {
+                       my ($is_up, $_gw) = network::tools::get_interface_status($_[0]);
+                       $is_up;
+                   },
+                   launch => sub {
+                       my ($is_up, $_gw) = network::tools::get_interface_status($_[0]);
+                       if ($is_up) {
+                           network::tools::stop_interface($_[0], 1);
+                       } else {
+                           network::tools::start_interface($_[0], 1);
+                       }
+                   }
+               },
                'chooseProfile' => {
                    name => N("Profiles"),
                    choices => sub { network::network::netprofile_list() },
@@ -274,9 +294,10 @@ sub generate_menu {
             $w = gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) });
         } elsif (@choices > 1) {
             my $selected = $actions{$action}{choice_selected};
+            my $format = $actions{$action}{format_choice};
             $w = gtkshow(create_menu($name, map {
                 my $choice = $_;
-                my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
+                my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($format ? $format->($choice) : $choice), $selected->($choice)));
                 gtksignal_connect($w, activate => sub { $launch->($choice) });
                 $w->set_draw_as_radio(1);
                 $w;
@@ -316,6 +337,7 @@ sub generate_menu {
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $wireless_device and $menu->append(gtkshow($wireless_menu = create_menu(N("Wireless networks"),
                                                                          map { $_->{menuitem} } values %wireless_networks)));
+    $menu->append($create_item->('setInterface')) if $current_state ne 'notconfigured';
     $menu->append(gtkshow(create_menu(N("Settings"), grep { $_ } @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append($create_item->('help'));
