@@ -80,6 +80,7 @@ my %network_settings = (
     },
     device => '/dev/ttySHCF0',
     post => '/usr/sbin/hcfpciconfig --auto',
+    restart_service => 'hcfpci',
    },
 
    {
@@ -96,6 +97,7 @@ my %network_settings = (
     },
     device => '/dev/ttySHSF0',
     post => '/usr/sbin/hsfconfig --auto',
+    restart_service => 'hsf',
    },
 
    {
