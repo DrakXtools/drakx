@@ -243,9 +243,6 @@ $w = ugtk2->new(N("Harddrake2"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};
 
-my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-gtkflush() if !$::isEmbedded;
-
 my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
 $w->{window}->set_size_request(805, 550) if !$::isEmbedded;
 
@@ -286,6 +283,12 @@ my (@data, @configurators);
 $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
+
+sub fill_default_text {
+    my ($text) = @_;
+    $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."));
+}
+
 $tree->get_selection->signal_connect('changed' => sub {
     my ($select) = @_;
     my ($model, $iter) = $select->get_selected;
@@ -339,11 +342,20 @@ $tree->get_selection->signal_connect('changed' => sub {
             return 1;
         }
     }
-    $text->get_buffer->set_text(N("Click on a device in the left tree in order to display its information here."));
+    # No device is selected:
+    fill_default_text($text);
     undef $current_device;
     $config_button->hide;
     $module_cfg_button->hide;
 });
+
+# show the main window earlier (so that sub dialogs can use main
+# window's icon and so that no Gtk+ critical message got displayed):
+$w->{rwindow}->show_all;
+$_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
+my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+gtkflush() if !$::isEmbedded;
+
 
 my $index = 0;
 
@@ -464,8 +476,6 @@ $textcolumn->set_min_width(350);
 $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 #$tree->columns_autosize();
 $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::TreePath->new_first) });
-$w->{rwindow}->show_all;
-$_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
 
 {
     $SIG{CHLD} = undef;
@@ -485,6 +495,8 @@ $SIG{CHLD} = \&reap_children;
 undef $wait;
 gtkset_mousecursor_normal();
 
+# fill in default right text since no device is selected on startup:
+fill_default_text($text);
 
 $w->main;
 
