@@ -197,6 +197,17 @@ my %network_settings = (
     },
     links => 'http://at76c503a.berlios.de/',
    },
+
+   {
+    matching => 'ath_pci',
+    description => 'Multiband Atheros Driver for WiFi',
+    url => 'http://madwifi.sourceforge.net/',
+    name => 'madwifi',
+    kernel_module => 1,
+    tools => {
+	test_file => '/usr/bin/athstats',
+    },
+   },
   ],
 
   dsl =>
@@ -327,7 +338,7 @@ sub is_file_installed {
 
 sub is_module_installed {
     my ($settings, $driver) = @_;
-    my $module = $settings->{kernel_module}{test_file} || $driver;
+    my $module = ref $settings->{kernel_module} eq 'HASH' && $settings->{kernel_module}{test_file} || $driver;
     find { m!/$module\.k?o! } cat_("$::prefix/lib/modules/" . c::kernel_version() . '/modules.dep');
 }
 
