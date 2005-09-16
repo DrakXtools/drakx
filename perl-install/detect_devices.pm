@@ -141,11 +141,10 @@ sub complete_usb_storage_info {
 
     foreach my $usb (usb_probe()) {
 	if (my $e = find { !$_->{found} && $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @usb) {
-		$e->{found} = 1;
+         local $e->{found} = 1;
 	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
 	}
     }
-    delete $_->{found} foreach @usb;
 }
 
 sub get_devfs_devices {
