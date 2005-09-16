@@ -458,7 +458,8 @@ sub reap_children() {
     # reap zombies
     my $child_pid;
     do { $child_pid = waitpid(-1, POSIX::WNOHANG); undef $pid if $pid == $child_pid } until $child_pid > 0;
-};
+}
+
 $SIG{CHLD} = \&reap_children;
 
 $w->{rwindow}->signal_connect(delete_event => \&quit_global);
