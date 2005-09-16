@@ -459,27 +459,31 @@ sub set_glx_restrictions {
 sub libgl_config {
     my ($Driver) = @_;
 
-    my $dir = "$::prefix/etc/ld.so.conf.d/";
+    my $dir = "$::prefix/etc/ld.so.conf.d";
+    my $comment = '# commented-by-DrakX ';
 
     my %driver_to_libgl_config = (
-	nvidia => '.nvidia.conf',
-	fglrx => '.ati.conf',
+	nvidia => 'nvidia.conf',
+	fglrx => 'ati.conf',
     );
     my $need_to_run_ldconfig;
-    my $link = "$dir/GL.conf";
-    if (my $file = $driver_to_libgl_config{$Driver}) {
-        if (-e "$dir/$file" && readlink($link) ne $file) {
-            symlinkf($file, "$dir/GL.conf");
-            $need_to_run_ldconfig = 1;
-            log::explanations("ldconfig will be run because the GL library was enabled");
-        }
-    } elsif (-e $link) {
-	eval { rm_rf($link) };
-        $need_to_run_ldconfig = 2;
-        log::explanations("ldconfig will be run because the GL library was disabled");
-
+    my $wanted = $driver_to_libgl_config{$Driver};
+    foreach my $file (values %driver_to_libgl_config) {
+	substInFile {
+	    my ($commented, $s) = /^($comment)?(.*)/;
+	    if ($file eq $wanted) {
+		$_ = "$s\n";
+		$need_to_run_ldconfig ||= $commented;
+	    } else {
+		$_ = "$comment$s\n";
+		$need_to_run_ldconfig ||= !$commented;
+	    }	    
+	} "$dir/$file";
     }
-    system("/sbin/ldconfig") if $::isStandalone && $need_to_run_ldconfig;
+    if ($::isStandalone && $need_to_run_ldconfig) {
+	log::explanations("ldconfig will be run because the GL library was " . ($wanted ? 'enabled' : 'disabled'));
+	system("/sbin/ldconfig");
+    }
 }
 
 sub add_to_card__using_Cards {
