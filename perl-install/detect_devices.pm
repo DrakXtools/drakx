@@ -145,6 +145,7 @@ sub complete_usb_storage_info {
 	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
 	}
     }
+    delete $_->{found} foreach @usb;
 }
 
 sub get_devfs_devices {
