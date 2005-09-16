@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mkdir -p /usr/share/apps/konqueror/profiles
+for i in Conectiva cnccontrol conectiva-smb filemanagement-conectiva; do
+    cp -f /usr/lib/kde3/share/apps/konqueror/profiles/$i /usr/share/apps/konqueror/profiles
+done
