@@ -1217,7 +1217,6 @@ sub configure_kdeglobals {
 
     my $charset = l2charset($locale->{lang});
     my $kde_charset = charset2kde_charset($charset);
-    my ($prev_kde_charset) = cat_($kdeglobals) =~ /^Charset=(.*)/mi;
 
     mkdir_p($confdir);
 
