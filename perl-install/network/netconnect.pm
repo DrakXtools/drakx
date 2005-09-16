@@ -482,8 +482,13 @@ Take a look at http://www.linmodems.org"),
                             list => [ keys %{$net->{autodetect}{modem}}, N("Manual choice") ], } ];
                     },
 		    complete => sub {
-			my $driver = $net->{autodetect}{modem}{$modem_name}{driver} or return 0;
-			!network::thirdparty::setup_device($in, 'rtc', $driver, $modem, qw(device));
+                        my $driver = $net->{autodetect}{modem}{$modem_name}{driver} or return 0;
+                        #- some modem configuration programs modify modprobe.conf while we're loaded
+                        #- so write it now and reload then
+                        $modules_conf->write;
+                        my $ret = network::thirdparty::setup_device($in, 'rtc', $driver, $modem, qw(device));
+                        $modules_conf->read if $ret;
+                        !$ret;
 		    },
                     post => sub {
                         return 'choose_serial_port' if $modem_name eq N("Manual choice");
