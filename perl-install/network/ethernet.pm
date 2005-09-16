@@ -146,7 +146,7 @@ sub configure_eth_aliases {
 
 sub is_ifplugd_blacklisted {
     my ($module) = @_;
-    member($module, qw(b44 forcedeth via-velocity));
+    member($module, qw(forcedeth via-velocity));
 }
 
 1;
