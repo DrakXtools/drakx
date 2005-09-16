@@ -271,6 +271,7 @@ user "$net->{adsl}{login}"
                                    NETMASK => '255.255.255.0',
                                    NETWORK => '10.0.0.0',
                                    BROADCAST => '10.0.0.255',
+                                   MII_NOT_SUPPORTED => 'yes',
                                    ONBOOT => 'yes',
                                   };
         }
