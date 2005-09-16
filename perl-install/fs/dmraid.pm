@@ -29,8 +29,8 @@ sub init() {
 
 #- call_dmraid is overloaded when debugging, see the end of this file
 sub call_dmraid {
-    my ($option) = @_;
-    run_program::get_stdout('dmraid', $option);
+    my ($option, @args) = @_;
+    run_program::get_stdout('dmraid', $option, @args);
 }
 
 sub check {
@@ -170,11 +170,11 @@ if ($ENV{DRAKX_DEBUG_DMRAID}) {
     );
     
     *call_dmraid = sub {
-        my ($option) = @_;
+        my ($option, @args) = @_;
         if (my $s = $debug_data{$ENV{DRAKX_DEBUG_DMRAID}}{$option}) {
             split("\n", $s);
 	} else {
-            warn "dmraid @_\n";
+            warn "dmraid $option @args\n";
         }
     };
 EOF
