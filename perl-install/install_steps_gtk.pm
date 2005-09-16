@@ -436,8 +436,6 @@ sub installPackages {
     my $advertize = sub {
 	my ($update) = @_;
 
-	$pkg_log_widget->{to_bottom}->('force');
-
 	@install_any::advertising_images && $show_advertising && $update or return;
 	
 	$change_time = time();
@@ -459,7 +457,7 @@ sub installPackages {
 			 format => sub { $show_advertising ? N("Details") : N("No details") },
 			 clicked => sub {
 			     gtkval_modify(\$show_advertising, !$show_advertising);
-			     $advertize->('update');
+			     $pkg_log_widget->{to_bottom}->('force');
 			 });
 
     ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', children_tight => [ 
