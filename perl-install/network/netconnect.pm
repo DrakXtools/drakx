@@ -748,6 +748,7 @@ If you do not know it, keep the preselected type."),
                             $auto_ip = $net->{adsl}{method} eq 'dhcp';
                             return 'lan_intf';
                         }
+                        member($net->{adsl}{method}, qw(pppoe pptp)) and $net->{adsl}{ethernet_device} = $ntf_name;
                         return 'adsl_account';
                     },
                    },
@@ -757,7 +758,6 @@ If you do not know it, keep the preselected type."),
                    {
                     pre => sub {
                         network::adsl::adsl_probe_info($net);
-                        member($net->{adsl}{method}, qw(pppoe pptp)) and $net->{adsl}{ethernet_device} = $ntf_name;
                         $net->{net_interface} = 'ppp0';
                         ($adsl_vpi, $adsl_vci) = (hex($net->{adsl}{vpi}), hex($net->{adsl}{vci}));
                     },
@@ -788,8 +788,9 @@ If you do not know it, keep the preselected type."),
                         ($net->{adsl}{vpi}, $net->{adsl}{vci}) = map { sprintf("%x", $_) } ($adsl_vpi, $adsl_vci);
 
 			$net->{adsl}{device} =
-			  $net->{adsl}{method} eq 'pptp' ? 'pptp_modem' :
 			  $net->{adsl}{method} eq 'capi' ? 'capi_modem' :
+			  $net->{adsl}{method} eq 'pppoe' ? 'pppoe_modem' :
+			  $net->{adsl}{method} eq 'pptp' ? 'pptp_modem' :
 			  $ntf_name;
                         # FIXME: duplicate with $after_start_on_boot_step sub
                         network::adsl::adsl_conf_backend($in, $modules_conf, $net);
