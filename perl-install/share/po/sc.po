@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sc\n"
-"POT-Creation-Date: 2005-09-14 19:41+0800\n"
-"PO-Revision-Date: 2005-03-23 20:10+0100\n"
+"POT-Creation-Date: 2005-09-16 17:08+0200\n"
+"PO-Revision-Date: 2005-09-14 11:29+0100\n"
 "Last-Translator: Antoni Pistis <antonio.pistis@virgilio.it>\n"
 "Language-Team: Sardu\n"
 "MIME-Version: 1.0\n"
@@ -176,15 +176,15 @@ msgstr "Abeta, circu e assètiu is trastus..."
 #: install_any.pm:1822 install_steps.pm:81 install_steps_interactive.pm:37
 #: interactive/http.pm:117 interactive/http.pm:118 network/ndiswrapper.pm:27
 #: network/ndiswrapper.pm:42 network/ndiswrapper.pm:89
-#: network/ndiswrapper.pm:101 network/netconnect.pm:834
-#: network/netconnect.pm:933 network/netconnect.pm:937
-#: network/netconnect.pm:941 network/netconnect.pm:946
-#: network/netconnect.pm:1091 network/netconnect.pm:1095
-#: network/netconnect.pm:1214 network/netconnect.pm:1219
-#: network/netconnect.pm:1239 network/netconnect.pm:1393
-#: network/thirdparty.pm:306 network/thirdparty.pm:313
-#: network/thirdparty.pm:357 network/thirdparty.pm:359
-#: network/thirdparty.pm:380 network/thirdparty.pm:404
+#: network/ndiswrapper.pm:101 network/netconnect.pm:835
+#: network/netconnect.pm:934 network/netconnect.pm:938
+#: network/netconnect.pm:942 network/netconnect.pm:947
+#: network/netconnect.pm:1092 network/netconnect.pm:1096
+#: network/netconnect.pm:1215 network/netconnect.pm:1220
+#: network/netconnect.pm:1240 network/netconnect.pm:1394
+#: network/thirdparty.pm:319 network/thirdparty.pm:326
+#: network/thirdparty.pm:370 network/thirdparty.pm:372
+#: network/thirdparty.pm:393 network/thirdparty.pm:417
 #: printer/printerdrake.pm:244 printer/printerdrake.pm:251
 #: printer/printerdrake.pm:276 printer/printerdrake.pm:422
 #: printer/printerdrake.pm:427 printer/printerdrake.pm:440
@@ -227,7 +227,7 @@ msgstr "Abeta, circu e assètiu is trastus..."
 #: standalone/drakgw:50 standalone/drakgw:188 standalone/drakhosts:98
 #: standalone/drakhosts:246 standalone/drakhosts:253 standalone/drakhosts:260
 #: standalone/draknfs:306 standalone/draknfs:609 standalone/draknfs:616
-#: standalone/draknfs:623 standalone/drakroam:29 standalone/draksambashare:379
+#: standalone/draknfs:623 standalone/drakroam:33 standalone/draksambashare:379
 #: standalone/draksambashare:383 standalone/draksambashare:386
 #: standalone/draksambashare:389 standalone/draksambashare:449
 #: standalone/draksambashare:473 standalone/draksambashare:547
@@ -255,7 +255,7 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Faddina. No sciu comenti e ndi bessiri beni.\n"
+"Faddina. No sciu comenti ndi bessiri beni.\n"
 "Sighi a perìgulu tuu."
 
 #: ../move/move.pm:660 install_steps_interactive.pm:37
@@ -282,6 +282,21 @@ msgid ""
 "a look at log files in console #3 and #4 to try to\n"
 "guess what's happening."
 msgstr ""
+"Dui est stètia una faddina:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"Custa podit benni de file de assètiu de sistema purdiaus\n"
+"in sa crai USB, ki est de aici burrendiddus e apustis\n"
+"torrendi a allui Mandriva Move iast a depi arresolvi. Po du\n"
+"fai, crica in su butoni apostu.\n"
+"\n"
+"\n"
+"Forsis bolis torrai a allui e arremovi sa crai USB, o\n"
+"esaminai su ki dui est asuta de atru OS, o fintzas castiai\n"
+"is file de arrelatu in is console #3 e #4 po provai a\n"
+"intzertai ita est sutzedendi."
 
 #: ../move/move.pm:681
 #, c-format
@@ -296,7 +311,7 @@ msgstr "Torra feti a allui"
 #: ../move/tree/mdk_totem:50 ../move/tree/mdk_totem:96
 #, c-format
 msgid "You can only run with no CDROM support"
-msgstr ""
+msgstr "Podis andai feti sentza de suportu CDROM"
 
 #: ../move/tree/mdk_totem:71
 #, c-format
@@ -321,6 +336,9 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
+"No fait a impreai un'atru CDROM candu is programas ki sighint funt "
+"girendi: \n"
+"%s"
 
 #: ../move/tree/mdk_totem:101
 #, c-format
@@ -385,7 +403,7 @@ msgstr "Sçobera unu X server"
 #: Xconfig/card.pm:188
 #, c-format
 msgid "Multi-head configuration"
-msgstr ""
+msgstr "Assètiu multi-head"
 
 #: Xconfig/card.pm:189
 #, c-format
@@ -393,6 +411,8 @@ msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
+"Su sistema suportat assètius a (multi-head).\n"
+"Ita bolis fai?"
 
 #: Xconfig/card.pm:258
 #, c-format
@@ -404,57 +424,59 @@ msgstr "No fait a aposentai su pakitu Xorg: %s"
 msgid "Select the memory size of your graphics card"
 msgstr "Sçobera su manniori de memòria de sa skeda gràfiga"
 
-#: Xconfig/card.pm:351
+#: Xconfig/card.pm:357
 #, c-format
 msgid "Xorg configuration"
 msgstr "Assètiu de Xorg"
 
-#: Xconfig/card.pm:353
+#: Xconfig/card.pm:359
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
 msgstr "Cali assètiu de Xorg bolis tenni?"
 
-#: Xconfig/card.pm:386
+#: Xconfig/card.pm:392
 #, c-format
 msgid "Configure all heads independently"
-msgstr ""
+msgstr "Assètia totu is concas (head) una a una"
 
-#: Xconfig/card.pm:387
+#: Xconfig/card.pm:393
 #, c-format
 msgid "Use Xinerama extension"
 msgstr "Imprea alladiaduras Xinerama"
 
-#: Xconfig/card.pm:392
+#: Xconfig/card.pm:398
 #, c-format
 msgid "Configure only card \"%s\"%s"
 msgstr "Assètia feti sa skeda \"%s\"%s"
 
-#: Xconfig/card.pm:404 Xconfig/various.pm:23
+#: Xconfig/card.pm:410 Xconfig/various.pm:23
 #, c-format
 msgid "Xorg %s"
 msgstr "Xorg %s"
 
-#: Xconfig/card.pm:411 Xconfig/various.pm:22
+#: Xconfig/card.pm:417 Xconfig/various.pm:22
 #, c-format
 msgid "Xorg %s with 3D hardware acceleration"
 msgstr "Xorg %s cun allestradura 3D hardware"
 
-#: Xconfig/card.pm:413
+#: Xconfig/card.pm:419
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
 msgstr "Podis tenni su suportu po allestradura 3D hardware cun Xorg %s."
 
-#: Xconfig/card.pm:419
+#: Xconfig/card.pm:425
 #, c-format
 msgid "Xorg %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr "Xorg %s cun allestradura 3D hardware SPERIMENTALI"
 
-#: Xconfig/card.pm:421
+#: Xconfig/card.pm:427
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support with Xorg %s,\n"
 "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER."
 msgstr ""
+"Sa skeda podit tenni aceleradura 3D hardware cun Xorg %s,\n"
+"MI' CA EST SPERIMENTALI E PODIT ARROCAI SA COMPUTADORA."
 
 #: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:116 any.pm:973
 #, c-format
@@ -465,8 +487,8 @@ msgstr "Personalisada"
 #: install_steps_interactive.pm:86 install_steps_interactive.pm:1326
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4701 printer/printerdrake.pm:5165
-#: standalone/drakhosts:263 standalone/drakroam:168 standalone/draksplash:93
-#: standalone/logdrake:176 standalone/net_applet:82
+#: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
+#: standalone/logdrake:176 standalone/net_applet:102
 #: standalone/scannerdrake:477
 #, c-format
 msgid "Quit"
@@ -503,7 +525,7 @@ msgstr "Sceras"
 #: Xconfig/main.pm:178
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
-msgstr ""
+msgstr "Su file de assètiu de Xorg est purdiau, d'eus a innyorai."
 
 #: Xconfig/main.pm:196
 #, c-format
@@ -521,7 +543,7 @@ msgstr ""
 #: Xconfig/monitor.pm:111
 #, c-format
 msgid "Choose a monitor for head #%d"
-msgstr ""
+msgstr "Sçobera unu bisori po sa conca #%d"
 
 #: Xconfig/monitor.pm:111
 #, c-format
@@ -547,7 +569,7 @@ msgstr "Produsidori"
 #: Xconfig/monitor.pm:129
 #, c-format
 msgid "Plug'n Play probing failed. Please select the correct monitor"
-msgstr ""
+msgstr "Controllu Plug'n Play faddiu. Sçobera su bisori justu"
 
 #: Xconfig/monitor.pm:137
 #, c-format
@@ -563,16 +585,25 @@ msgid ""
 "monitor.\n"
 " If in doubt, choose a conservative setting."
 msgstr ""
+"Is duus paràmetrus perigulosus funt sa frecuèntzia de arrecasçu strantaxa,\n"
+"est a nai sa de totu su bisori, e prus ancora sa frecuèntzia crocada, ki "
+"est\n"
+"sa frecuèntzia de amostu de is arrayas.\n"
+"\n"
+"Est DE IMPORTU MANNU ki no ponjas unu tipu de bisori cun frecuèntzia\n"
+"prus arta de sa ki podit donai su bisori tuu: iast a podi adanniai su "
+"bisori.\n"
+" Ki ses in duda, sçobera unu assètiu moderau."
 
 #: Xconfig/monitor.pm:144
 #, c-format
 msgid "Horizontal refresh rate"
-msgstr ""
+msgstr "Frecuèntzia de arrecasçu crocau"
 
 #: Xconfig/monitor.pm:145
 #, c-format
 msgid "Vertical refresh rate"
-msgstr ""
+msgstr "Frecuèntzia de arrecasçu strantaxu"
 
 #: Xconfig/resolution_and_depth.pm:10
 #, c-format
@@ -632,7 +663,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
-#: help.pm:444 install_steps_gtk.pm:458 install_steps_interactive.pm:429
+#: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:429
 #: install_steps_interactive.pm:834 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
@@ -649,7 +680,7 @@ msgid "Cancel"
 msgstr "Annudda"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/hd_gtk.pm:150
-#: install_steps_gtk.pm:232 install_steps_gtk.pm:620 interactive.pm:567
+#: install_steps_gtk.pm:232 install_steps_gtk.pm:617 interactive.pm:567
 #: interactive/gtk.pm:681 interactive/gtk.pm:683 standalone/drakTermServ:284
 #: standalone/drakbackup:3897 standalone/drakbug:105
 #: standalone/drakconnect:153 standalone/drakconnect:236
@@ -673,7 +704,7 @@ msgstr "Bolis fai su test de s'assètiu?"
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr ""
+msgstr "Atentu: "
 
 #: Xconfig/test.pm:69
 #, c-format
@@ -719,12 +750,12 @@ msgstr "Bisori: %s\n"
 #: Xconfig/various.pm:34
 #, c-format
 msgid "Monitor HorizSync: %s\n"
-msgstr ""
+msgstr "Frecuèntzia Bisori crocada: %s\n"
 
 #: Xconfig/various.pm:35
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
-msgstr ""
+msgstr "Frecuèntzia Bisori strantaxa: %s\n"
 
 #: Xconfig/various.pm:37
 #, c-format
@@ -798,12 +829,12 @@ msgstr "De cali standard est sa TV?"
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "atru"
 
 #: any.pm:142 harddrake/sound.pm:192 interactive.pm:474 pkgs.pm:473
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:246
-#: standalone/service_harddrake:207
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:356
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Please wait"
 msgstr "Abeta"
@@ -874,7 +905,7 @@ msgstr "In d-unu floppy"
 #: any.pm:236 help.pm:739 printer/printerdrake.pm:4357
 #, c-format
 msgid "Skip"
-msgstr ""
+msgstr "Lassa a perdi"
 
 #: any.pm:240
 #, c-format
@@ -889,7 +920,7 @@ msgstr "Aundi bolis aposentai su bootloader?"
 #: any.pm:267 standalone/drakboot:269
 #, c-format
 msgid "Boot Style Configuration"
-msgstr ""
+msgstr "Assètiu de su Stili de Boot"
 
 #: any.pm:269 any.pm:270 any.pm:303 any.pm:304
 #, c-format
@@ -906,6 +937,7 @@ msgstr "Dona sa mesura de sa RAM in MB"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
+"Sa scera ``Restrict command line options'' no balit sentza de una password"
 
 #: any.pm:278 any.pm:615 authentication.pm:181
 #, c-format
@@ -940,12 +972,12 @@ msgstr "Abiva ACPI"
 #: any.pm:290
 #, c-format
 msgid "Force no APIC"
-msgstr ""
+msgstr "Bai sentza de APIC"
 
 #: any.pm:292
 #, c-format
 msgid "Force No Local APIC"
-msgstr ""
+msgstr "Bai sentza de APIC locali"
 
 #: any.pm:294 any.pm:650 authentication.pm:186 diskdrake/smbnfs_gtk.pm:180
 #: network/netconnect.pm:568 printer/printerdrake.pm:1888
@@ -983,7 +1015,7 @@ msgstr "Indida sa mesura de sa RAM ki serbit (agataus %d MB)"
 #: any.pm:309
 #, c-format
 msgid "Init Message"
-msgstr ""
+msgstr "Missada de Init"
 
 #: any.pm:311
 #, c-format
@@ -1003,7 +1035,7 @@ msgstr "Abivu alluidura de CD?"
 #: any.pm:314
 #, c-format
 msgid "Enable OF Boot?"
-msgstr ""
+msgstr "Abivu alluidura OF?"
 
 #: any.pm:315
 #, c-format
@@ -1038,7 +1070,7 @@ msgstr "Initrd"
 #: any.pm:376
 #, c-format
 msgid "Network profile"
-msgstr ""
+msgstr "Profilu de arretza"
 
 #: any.pm:385 any.pm:390 any.pm:392
 #, c-format
@@ -1053,37 +1085,37 @@ msgstr "Predefiniu"
 #: any.pm:394
 #, c-format
 msgid "Initrd-size"
-msgstr ""
+msgstr "Initrd-size"
 
 #: any.pm:396
 #, c-format
 msgid "NoVideo"
-msgstr ""
+msgstr "NoVideo"
 
 #: any.pm:407
 #, c-format
 msgid "Empty label not allowed"
-msgstr ""
+msgstr "No fait a lassai sbuida sa boxi"
 
 #: any.pm:408
 #, c-format
 msgid "You must specify a kernel image"
-msgstr ""
+msgstr "Depis indidai una màgini de kernel"
 
 #: any.pm:408
 #, c-format
 msgid "You must specify a root partition"
-msgstr ""
+msgstr "Depis indidai una pratzidura arrèxini"
 
 #: any.pm:409
 #, c-format
 msgid "This label is already used"
-msgstr ""
+msgstr "Custa boxi dui est jai"
 
 #: any.pm:423
 #, c-format
 msgid "Which type of entry do you want to add?"
-msgstr ""
+msgstr "Ita tipu de boxi bolis açungi?"
 
 #: any.pm:424
 #, c-format
@@ -1111,16 +1143,18 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
+"Innoi dui funt is boxis de sa lista de alluidura finas a imoi.\n"
+"Podis açungi atras boxis o mudai is ki nci funt."
 
 #: any.pm:601
 #, c-format
 msgid "access to X programs"
-msgstr ""
+msgstr "acessu a programas X"
 
 #: any.pm:602
 #, c-format
 msgid "access to rpm tools"
-msgstr ""
+msgstr "acessu a ainas rpm"
 
 #: any.pm:603
 #, c-format
@@ -1130,17 +1164,17 @@ msgstr "permiti \"su\""
 #: any.pm:604
 #, c-format
 msgid "access to administrative files"
-msgstr ""
+msgstr "acessu a file de aministradura"
 
 #: any.pm:605
 #, c-format
 msgid "access to network tools"
-msgstr ""
+msgstr "acessu a ainas po s'arretza"
 
 #: any.pm:606
 #, c-format
 msgid "access to compilation tools"
-msgstr ""
+msgstr "acessu a ainas po cumpilai"
 
 #: any.pm:611
 #, c-format
@@ -1187,12 +1221,12 @@ msgstr "IP Grupu"
 #: any.pm:625
 #, c-format
 msgid "%s must be a number"
-msgstr ""
+msgstr "%s depit essi unu nùmeru"
 
 #: any.pm:626
 #, c-format
 msgid "%s should be above 500. Accept anyway?"
-msgstr ""
+msgstr "%s iat a bolli prus artu de 500. Du pigu a su pròpiu?"
 
 #: any.pm:631 standalone/draksambashare:1210
 #, c-format
@@ -1255,9 +1289,9 @@ msgstr ""
 "Potzu assetiai sa computadora po fai intrai in automàtigu unu umperadori."
 
 #: any.pm:705
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Bolis a tenni custa possibilidadi?"
+msgstr "Imprea custa caraterìstiga"
 
 #: any.pm:706
 #, c-format
@@ -1293,7 +1327,7 @@ msgstr ""
 #: any.pm:751
 #, c-format
 msgid "Multi languages"
-msgstr ""
+msgstr "Tanti lìnguas"
 
 #: any.pm:767 any.pm:796 help.pm:647
 #, c-format
@@ -1337,7 +1371,7 @@ msgid "Input method:"
 msgstr "Manera de input:"
 
 #: any.pm:856 install_any.pm:417 network/netconnect.pm:306
-#: network/netconnect.pm:311 network/netconnect.pm:1205 network/wireless.pm:7
+#: network/netconnect.pm:311 network/netconnect.pm:1206 network/wireless.pm:7
 #: printer/printerdrake.pm:105 printer/printerdrake.pm:2430
 #, c-format
 msgid "None"
@@ -1362,6 +1396,11 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"Bolis permiti a is umperadoris de acomunai cancu directory?\n"
+"Ki du permitis, is umperadoris ant a podi cricai \"Share\" in konqueror e "
+"nautilus.\n"
+"\n"
+"\"Custom\" permitit unu assètiu personalisau.\n"
 
 #: any.pm:989
 #, c-format
@@ -1409,6 +1448,8 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
+"Su cumoni personalisau impreat su grupu \"fileshare\". \n"
+"Podis impreai userdrake po açungi umperadoris a su grupu."
 
 #: authentication.pm:23
 #, c-format
@@ -1467,6 +1508,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
+"Narat a sa computadora a impreai LDAP po parti o po totu is autentigaduras: "
+"LDAParregollit unus cantu tipus de scedas in sa cumpangia tua."
 
 #: authentication.pm:57
 #, c-format
@@ -1479,6 +1522,8 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
+"Ti permitit de fai girai unu grupu de computadoras in su pròpiu domìniu "
+"Network Information Service cun sa pròpiu password e su pròpiu file de grupu."
 
 #: authentication.pm:58
 #, c-format
@@ -1491,6 +1536,8 @@ msgid ""
 "iWinbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"iWinbind permitit a su sistema de agatai scedas e autentigai umperadoris in "
+"d-unu domìniu Windows."
 
 #: authentication.pm:59
 #, c-format
@@ -1500,7 +1547,7 @@ msgstr "Active Directory cun SFU:"
 #: authentication.pm:59
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
-msgstr ""
+msgstr "cun Kerberos e Ldap po si autentigai in Active Directory Server "
 
 #: authentication.pm:60
 #, c-format
@@ -1513,11 +1560,13 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
+"Winbind permitit a su sistema de autentigai umperadoris in d-unu Windows "
+"Active Directory Server."
 
 #: authentication.pm:85
 #, c-format
 msgid "Authentication LDAP"
-msgstr ""
+msgstr "Autentigadura LDAP"
 
 #: authentication.pm:86
 #, c-format
@@ -1552,12 +1601,12 @@ msgstr "skema de siguresa (SASL/Kerberos)"
 #: authentication.pm:110 authentication.pm:148
 #, c-format
 msgid "Authentication Active Directory"
-msgstr ""
+msgstr "Autentigadura in Active Directory"
 
 #: authentication.pm:111 diskdrake/smbnfs_gtk.pm:181
 #, c-format
 msgid "Domain"
-msgstr ""
+msgstr "Domìniu"
 
 #: authentication.pm:113 diskdrake/dav.pm:63 help.pm:146
 #: printer/printerdrake.pm:141 share/compssUsers.pl:82
@@ -1569,17 +1618,17 @@ msgstr "Server"
 #: authentication.pm:114
 #, c-format
 msgid "LDAP users database"
-msgstr ""
+msgstr "Database de is umperadoris LDAP"
 
 #: authentication.pm:115
 #, c-format
 msgid "Use Anonymous BIND "
-msgstr ""
+msgstr "Imprea Anonymous BIND"
 
 #: authentication.pm:116
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
-msgstr ""
+msgstr "Umperadori LDAP autorisau a sfollyai sa Active Directory"
 
 #: authentication.pm:117
 #, c-format
@@ -1589,17 +1638,17 @@ msgstr "Password po umperadori"
 #: authentication.pm:129
 #, c-format
 msgid "Authentication NIS"
-msgstr ""
+msgstr "Autentigadura NIS"
 
 #: authentication.pm:130
 #, c-format
 msgid "NIS Domain"
-msgstr ""
+msgstr "Domìniu NIS"
 
 #: authentication.pm:131
 #, c-format
 msgid "NIS Server"
-msgstr ""
+msgstr "Server NIS"
 
 #: authentication.pm:136
 #, c-format
@@ -1621,12 +1670,12 @@ msgstr ""
 #: authentication.pm:148
 #, c-format
 msgid "Authentication Windows Domain"
-msgstr ""
+msgstr "Autentigadura in Windows Domain"
 
 #: authentication.pm:150
 #, c-format
 msgid "Active Directory Realm "
-msgstr ""
+msgstr "Active Directory Realm "
 
 #: authentication.pm:153
 #, c-format
@@ -1642,16 +1691,18 @@ msgstr ""
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
 msgstr ""
+"Assètia sa password de s'aministradori (root) e is mètudus de autentigadura "
+"in arretza"
 
 #: authentication.pm:171
 #, c-format
 msgid "Set administrator (root) password"
-msgstr ""
+msgstr "Assètia sa password de s'aministradori (root)"
 
 #: authentication.pm:172 standalone/drakvpn:1111
 #, c-format
 msgid "Authentication method"
-msgstr ""
+msgstr "Mètudu de autentigadura"
 
 #. -PO: keep this short or else the buttons will not fit in the window
 #: authentication.pm:177 help.pm:722
@@ -1668,12 +1719,12 @@ msgstr "Custa password est tropu curtza (bolit longa a su mancu %d caràteris)"
 #: standalone/drakauth:24 standalone/drakauth:26 standalone/drakconnect:481
 #, c-format
 msgid "Authentication"
-msgstr "Connoscidura"
+msgstr "Autentigadura"
 
 #: authentication.pm:307
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
-msgstr ""
+msgstr "No fait a impreai broadcast sentza de domìniu NIS"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: bootloader.pm:764
@@ -1704,46 +1755,48 @@ msgstr "LILO cun lista scriturali"
 #: bootloader.pm:906
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "GRUB cun lista gràfiga"
 
 #: bootloader.pm:907
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB cun lista scriturali"
 
 #: bootloader.pm:908
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
 
-#: bootloader.pm:986
+#: bootloader.pm:985
 #, c-format
 msgid "not enough room in /boot"
-msgstr ""
+msgstr "no dui at spàtziu abasta in /boot"
 
-#: bootloader.pm:1476
+#: bootloader.pm:1475
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
-msgstr ""
+msgstr "No podis aposentai su bootloader in d-una pratzidura %s\n"
 
-#: bootloader.pm:1516
+#: bootloader.pm:1515
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
+"S'assètiu de su bootloader bolit ajorronau ca sa pratzidura d'ant torrada a "
+"numerai"
 
-#: bootloader.pm:1529
+#: bootloader.pm:1528
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
-msgstr ""
+msgstr "No fait a aposentai beni su bootloader. Depis allui e sçoberai \"%s\""
 
-#: bootloader.pm:1530
+#: bootloader.pm:1529
 #, c-format
 msgid "Re-install Boot Loader"
-msgstr ""
+msgstr "Torra a aposentai su Boot Loader"
 
 #: common.pm:131
 #, c-format
@@ -1783,7 +1836,7 @@ msgstr "%d segundus"
 #: common.pm:257
 #, c-format
 msgid "kdesu missing"
-msgstr ""
+msgstr "kdesu amancat"
 
 #: common.pm:260
 #, c-format
@@ -1945,7 +1998,7 @@ msgstr "Portugallu"
 #: crypto.pm:38 crypto.pm:69 lang.pm:376 network/adsl_consts.pm:725
 #, c-format
 msgid "Russia"
-msgstr ""
+msgstr "Rùssia"
 
 #: crypto.pm:39 crypto.pm:73 lang.pm:382 network/adsl_consts.pm:882
 #, c-format
@@ -1985,6 +2038,11 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
+"WebDAV est unu protocollu ki ti permitit de una directory de unu server web\n"
+"in locali, e a da manijai ke unu filesystem locali (postu ki su server web "
+"siat\n"
+"assetiau ke WebDAV server). Ki bolis açungi puntus de càrrigu WebDAV,\n"
+"sçobera \"Nou\"."
 
 #: diskdrake/dav.pm:25
 #, c-format
@@ -2011,12 +2069,12 @@ msgstr "Puntu de càrrigu"
 #: diskdrake/dav.pm:83
 #, c-format
 msgid "Please enter the WebDAV server URL"
-msgstr ""
+msgstr "Intra sa URL de su server WebDAV"
 
 #: diskdrake/dav.pm:87
 #, c-format
 msgid "The URL must begin with http:// or https://"
-msgstr ""
+msgstr "Sa URL depit cumentzai cun http:// o https://"
 
 #: diskdrake/dav.pm:109
 #, c-format
@@ -2037,7 +2095,7 @@ msgstr "Sceras: %s"
 #: diskdrake/hd_gtk.pm:92
 #, c-format
 msgid "Please make a backup of your data first"
-msgstr ""
+msgstr "Fai una còpia de is dadus tuus po primu cosa"
 
 #: diskdrake/hd_gtk.pm:95
 #, c-format
@@ -2046,6 +2104,9 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
+"Ki pensas de impreai aboot, atentu a lassai spàtziu lìberu (abastant 2048 "
+"segaduras)\n"
+"a su cumentzu de su discu"
 
 #: diskdrake/hd_gtk.pm:152 help.pm:530
 #, c-format
@@ -2073,11 +2134,11 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Crica in d-una pratzidura"
 
-#: diskdrake/hd_gtk.pm:205 diskdrake/smbnfs_gtk.pm:62 install_steps_gtk.pm:460
+#: diskdrake/hd_gtk.pm:205 diskdrake/smbnfs_gtk.pm:62 install_steps_gtk.pm:457
 #: standalone/drakbackup:2952 standalone/drakbackup:3012
 #, c-format
 msgid "Details"
-msgstr ""
+msgstr "A minudu"
 
 #: diskdrake/hd_gtk.pm:251
 #, c-format
@@ -2208,6 +2269,7 @@ msgstr "Bolis sarvai is mudas de /etc/fstab"
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
+"Depis torrai a allui po fai balli is mudas a sa tàula de is pratziduras"
 
 #: diskdrake/interactive.pm:297
 #, c-format
@@ -2257,6 +2319,7 @@ msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
 msgstr ""
+"Po tenni prus pratziduras, burrandi una po podi creai una pratzidura tirada"
 
 #: diskdrake/interactive.pm:360
 #, c-format
@@ -2266,12 +2329,12 @@ msgstr ""
 #: diskdrake/interactive.pm:361
 #, c-format
 msgid "Supermount"
-msgstr ""
+msgstr "Supermount"
 
 #: diskdrake/interactive.pm:362
 #, c-format
 msgid "Supermount except for CDROM drives"
-msgstr ""
+msgstr "Supermount ma no po is trastus CDROM"
 
 #: diskdrake/interactive.pm:368 help.pm:530
 #, c-format
@@ -2309,16 +2372,18 @@ msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
 msgstr ""
+"Sa còpia de sa tàula de pratzidura no est manna uguali\n"
+"Sigu a andai?"
 
 #: diskdrake/interactive.pm:428
 #, c-format
 msgid "Trying to rescue partition table"
-msgstr ""
+msgstr "Provu a sarvai sa tàula de pratzidura"
 
 #: diskdrake/interactive.pm:434
 #, c-format
 msgid "Detailed information"
-msgstr ""
+msgstr "Scedas a minudu"
 
 #: diskdrake/interactive.pm:449 diskdrake/interactive.pm:760
 #, c-format
@@ -2397,6 +2462,9 @@ msgid ""
 "(since you reached the maximal number of primary partitions).\n"
 "First remove a primary partition and create an extended partition."
 msgstr ""
+"No podis creai una pratzidura noa\n"
+"(ses lòmpiu a su nùmeru permìtiu de pratziduras primarjas).\n"
+"Innantis burra una pratzidura primarja e creandi una tirada."
 
 #: diskdrake/interactive.pm:588
 #, c-format
@@ -2428,12 +2496,12 @@ msgstr "Mudai de ext2 a ext3"
 #: diskdrake/interactive.pm:657
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr ""
+msgstr "Aundi bolis carrigai su file de loopback %s?"
 
 #: diskdrake/interactive.pm:658
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr ""
+msgstr "Aundi bolis carrigai su trastu %s?"
 
 #: diskdrake/interactive.pm:663
 #, c-format
@@ -2441,6 +2509,8 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
+"No fait a disassetiai su puntu de càrrigu ca sa pratzidura est po loopback.\n"
+"Boga su loopback innantis"
 
 #: diskdrake/interactive.pm:688
 #, c-format
@@ -2456,7 +2526,7 @@ msgstr "Arremesuru"
 #: diskdrake/interactive.pm:712
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr ""
+msgstr "Càrculu is làcanas de su filesystem FAT"
 
 #: diskdrake/interactive.pm:748
 #, c-format
@@ -2466,7 +2536,7 @@ msgstr "No fait a arremesurai custa pratzidura"
 #: diskdrake/interactive.pm:753
 #, c-format
 msgid "All data on this partition should be backed-up"
-msgstr ""
+msgstr "Totu su ki dui est in custa pratzidura iat a bolli sarvau in còpia"
 
 #: diskdrake/interactive.pm:755
 #, c-format
@@ -2494,7 +2564,7 @@ msgstr ""
 #: diskdrake/interactive.pm:843
 #, c-format
 msgid "Choose an existing RAID to add to"
-msgstr ""
+msgstr "Sçobera unu RAID ki jai dui est po d'açungi"
 
 #: diskdrake/interactive.pm:845 diskdrake/interactive.pm:862
 #, c-format
@@ -2504,7 +2574,7 @@ msgstr "nou"
 #: diskdrake/interactive.pm:860
 #, c-format
 msgid "Choose an existing LVM to add to"
-msgstr ""
+msgstr "Sçobera unu LVM ki jai dui est po d'açungi"
 
 #: diskdrake/interactive.pm:866
 #, c-format
@@ -2526,7 +2596,7 @@ msgstr ""
 #: diskdrake/interactive.pm:914
 #, c-format
 msgid "This partition can not be used for loopback"
-msgstr ""
+msgstr "No fait a impreai custa pratzidura po loopback"
 
 #: diskdrake/interactive.pm:927
 #, c-format
@@ -2536,27 +2606,27 @@ msgstr "Loopback"
 #: diskdrake/interactive.pm:928
 #, c-format
 msgid "Loopback file name: "
-msgstr ""
+msgstr "Nòmini de su file de loopback:"
 
 #: diskdrake/interactive.pm:933
 #, c-format
 msgid "Give a file name"
-msgstr ""
+msgstr "Dona unu nòmini de file"
 
 #: diskdrake/interactive.pm:936
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr ""
+msgstr "Un'atru loopback est jai impreendi su file, sçoberandi un'atru"
 
 #: diskdrake/interactive.pm:937
 #, c-format
 msgid "File already exists. Use it?"
-msgstr ""
+msgstr "Su file esistit jai. A d'impreai?"
 
 #: diskdrake/interactive.pm:960
 #, c-format
 msgid "Mount options"
-msgstr ""
+msgstr "Sceras de càrrigu"
 
 #: diskdrake/interactive.pm:967
 #, c-format
@@ -2581,32 +2651,32 @@ msgstr ""
 #: diskdrake/interactive.pm:1053
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr ""
+msgstr "Atentu: custa cosa est perigulosa."
 
 #: diskdrake/interactive.pm:1068
 #, c-format
 msgid "What type of partitioning?"
-msgstr ""
+msgstr "Ita tipu de pratzimentu?"
 
 #: diskdrake/interactive.pm:1106
 #, c-format
 msgid "You'll need to reboot before the modification can take place"
-msgstr ""
+msgstr "Depis torrai a allui innantis ki sa muda tenjat efetu"
 
 #: diskdrake/interactive.pm:1115
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr ""
+msgstr "Megu a scrìiri sa tàula de pratzidura de su trastu %s in su discu!"
 
 #: diskdrake/interactive.pm:1138
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
+msgstr "Apustis formatada sa pratzidura %s, as a perdi totu su ki dui est"
 
 #: diskdrake/interactive.pm:1154
 #, c-format
 msgid "Move files to the new partition"
-msgstr ""
+msgstr "Movi is file a sa pratzidura noa"
 
 #: diskdrake/interactive.pm:1154 standalone/draksambashare:75
 #: standalone/draksambashare:138
@@ -2624,7 +2694,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1166
 #, c-format
 msgid "Moving files to the new partition"
-msgstr ""
+msgstr "Movu is file a sa pratzidura noa"
 
 #: diskdrake/interactive.pm:1170
 #, c-format
@@ -2639,12 +2709,12 @@ msgstr "Burru %s"
 #: diskdrake/interactive.pm:1188
 #, c-format
 msgid "partition %s is now known as %s"
-msgstr ""
+msgstr "sa pratzidura %s imoi da connosceus po %s"
 
 #: diskdrake/interactive.pm:1189
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr ""
+msgstr "Is nùmerus de is pratziduras funt mudaus:"
 
 #: diskdrake/interactive.pm:1209 diskdrake/interactive.pm:1271
 #, c-format
@@ -2680,7 +2750,7 @@ msgstr "Nòmini: "
 #: diskdrake/interactive.pm:1227
 #, c-format
 msgid "Start: sector %s\n"
-msgstr ""
+msgstr "Cumentzu: segadura %s\n"
 
 #: diskdrake/interactive.pm:1228
 #, c-format
@@ -2690,7 +2760,7 @@ msgstr "Mesura: %s"
 #: diskdrake/interactive.pm:1230
 #, c-format
 msgid ", %s sectors"
-msgstr ""
+msgstr ", %s segaduras"
 
 #: diskdrake/interactive.pm:1232
 #, c-format
@@ -2797,7 +2867,7 @@ msgstr "Mesura: %s\n"
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Jometria: %s cilindrus, %s concas, %s segaduras\n"
 
-#: diskdrake/interactive.pm:1275 network/thirdparty.pm:316
+#: diskdrake/interactive.pm:1275 network/thirdparty.pm:329
 #, c-format
 msgid "Info: "
 msgstr "Sceda: "
@@ -2838,8 +2908,8 @@ msgstr ""
 msgid "The encryption keys do not match"
 msgstr "Is crais de cuadura no cunsonant"
 
-#: diskdrake/interactive.pm:1329 network/netconnect.pm:1041
-#: standalone/drakconnect:419 standalone/drakroam:112
+#: diskdrake/interactive.pm:1329 network/netconnect.pm:1042
+#: standalone/drakconnect:419 standalone/drakroam:120
 #, c-format
 msgid "Encryption key"
 msgstr "Crai de cuadura"
@@ -2853,7 +2923,7 @@ msgstr "Crai de cuadura (torra)"
 #: standalone/drakvpn:1102
 #, c-format
 msgid "Encryption algorithm"
-msgstr ""
+msgstr "Algoritmu de critadura"
 
 #: diskdrake/removable.pm:46
 #, c-format
@@ -2928,14 +2998,14 @@ msgstr "Amancat su pakitu %s, necessàriu"
 #: standalone/drakTermServ:1266 standalone/drakTermServ:1931
 #: standalone/drakbackup:497 standalone/drakbackup:596 standalone/drakboot:133
 #: standalone/drakclock:224 standalone/drakconnect:973 standalone/drakperm:380
-#: standalone/drakperm:390 standalone/drakups:27 standalone/harddrake2:479
+#: standalone/drakperm:390 standalone/drakups:27 standalone/harddrake2:489
 #: standalone/localedrake:43 standalone/scannerdrake:51
 #: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "Atentu"
 
-#: do_pkgs.pm:35 standalone/drakbackup:4109 standalone/harddrake2:479
+#: do_pkgs.pm:35 standalone/drakbackup:4109 standalone/harddrake2:489
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr ""
@@ -3003,7 +3073,7 @@ msgstr "Abivu pratzidura swap %s"
 #: fs/mount_options.pm:111
 #, c-format
 msgid "Use an encrypted file system"
-msgstr ""
+msgstr "Impreai unu filesystem cuau"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3053,7 +3123,7 @@ msgstr "Càrriga su filesystem ligi-feti."
 #: fs/mount_options.pm:133
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
-msgstr ""
+msgstr "Totu su I/O po su filesystem iat a bolli fatu in sincronia."
 
 #: fs/mount_options.pm:137
 #, c-format
@@ -3116,17 +3186,17 @@ msgstr ""
 #: fsedit.pm:378
 #, c-format
 msgid "Mount points must begin with a leading /"
-msgstr ""
+msgstr "Is puntus de càrrigu depint cumetzai cun d-una /"
 
 #: fsedit.pm:379
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr ""
+msgstr "Is puntus de càrrigu iant a bolli de litras e nùmerus feti"
 
 #: fsedit.pm:380
 #, c-format
 msgid "There is already a partition with mount point %s\n"
-msgstr ""
+msgstr "Dui at jai una pratzidura cun puntu de càrrigu in %s\n"
 
 #: fsedit.pm:382
 #, c-format
@@ -3155,7 +3225,7 @@ msgstr ""
 #: fsedit.pm:393 fsedit.pm:395
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr ""
+msgstr "Custa directory iat a bolli lassada in su filesystem root"
 
 #: fsedit.pm:397 fsedit.pm:399
 #, c-format
@@ -3163,16 +3233,18 @@ msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
+"Ti serbit unu filesystem beru (ext2/ext3, reiserfs, xfs, or jfs) po custu "
+"puntu de càrrigu\n"
 
 #: fsedit.pm:401
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr ""
+msgstr "No fait a impreai unu filesystem cuau po su puntu de càrrigu %s"
 
 #: fsedit.pm:462
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr ""
+msgstr "No dui at spàtziu abasta po sa aposentadura automàtiga"
 
 #: fsedit.pm:464
 #, c-format
@@ -3222,7 +3294,7 @@ msgstr "Skeda Vìdeo"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "Skeda DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3257,27 +3329,27 @@ msgstr "Adatadoris ISDN"
 #: harddrake/data.pm:220
 #, c-format
 msgid "USB sound devices"
-msgstr ""
+msgstr "Trastus USB po su sonu"
 
 #: harddrake/data.pm:229
 #, c-format
 msgid "Radio cards"
-msgstr ""
+msgstr "Skedas arràdiu"
 
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "Skedas de arretza ATM"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "Skedas de arretza WAN"
 
 #: harddrake/data.pm:256
 #, c-format
 msgid "Bluetooth devices"
-msgstr ""
+msgstr "Trastus Bluetooth"
 
 #: harddrake/data.pm:265
 #, c-format
@@ -3314,7 +3386,7 @@ msgstr "Imprentadora"
 #: harddrake/data.pm:338
 #, c-format
 msgid "Game port controllers"
-msgstr ""
+msgstr "Controlladoris de sa Porta de Jogu"
 
 #: harddrake/data.pm:347
 #, c-format
@@ -3380,7 +3452,7 @@ msgstr "Tecrau"
 #: harddrake/data.pm:460
 #, c-format
 msgid "Tablet and touchscreen"
-msgstr ""
+msgstr "Tablet e touchscreen"
 
 #: harddrake/data.pm:469 help.pm:855 install_steps_interactive.pm:980
 #, c-format
@@ -3397,7 +3469,7 @@ msgstr "UPS"
 msgid "Scanner"
 msgstr "Scannidora"
 
-#: harddrake/data.pm:502 standalone/harddrake2:442
+#: harddrake/data.pm:502 standalone/harddrake2:454
 #, c-format
 msgid "Unknown/Others"
 msgstr "Disconnotu/Atrus"
@@ -3500,6 +3572,8 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
+"No dui est unu driver lìberu po sa skeda àudio (%s), ma nci nd'at unu "
+"propiedàriu in \"%s\"."
 
 #: harddrake/sound.pm:283
 #, c-format
@@ -3614,7 +3688,7 @@ msgstr "Modellu de sa skeda:"
 #: harddrake/v4l.pm:408
 #, c-format
 msgid "Tuner type:"
-msgstr "Tipu de tuner:"
+msgstr "Tipu de sintonisadori:"
 
 #: harddrake/v4l.pm:409
 #, c-format
@@ -3650,7 +3724,7 @@ msgid ""
 "button will reboot your computer."
 msgstr ""
 
-#: help.pm:14 install_steps_gtk.pm:542 install_steps_interactive.pm:92
+#: help.pm:14 install_steps_gtk.pm:539 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738 standalone/drakautoinst:214
 #, c-format
 msgid "Accept"
@@ -3704,8 +3778,8 @@ msgid "User name"
 msgstr "Nòmini umperadori"
 
 #: help.pm:51 help.pm:431 help.pm:681 install_steps_gtk.pm:237
-#: install_steps_gtk.pm:685 interactive.pm:436 interactive/newt.pm:321
-#: network/thirdparty.pm:370 printer/printerdrake.pm:3973
+#: install_steps_gtk.pm:682 interactive.pm:436 interactive/newt.pm:321
+#: network/thirdparty.pm:383 printer/printerdrake.pm:3973
 #: standalone/drakTermServ:384 standalone/drakbackup:3954
 #: standalone/drakbackup:4048 standalone/drakbackup:4065
 #: standalone/drakbackup:4083 ugtk2.pm:490
@@ -3904,7 +3978,7 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:939
 #: interactive.pm:161 modules/interactive.pm:71 standalone/drakbackup:2517
-#: standalone/draksec:54 standalone/harddrake2:309 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:312 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "No"
@@ -3912,7 +3986,7 @@ msgstr "No"
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:939 interactive.pm:161
 #: modules/interactive.pm:71 printer/printerdrake.pm:883
 #: printer/printerdrake.pm:898 standalone/drakbackup:2517
-#: standalone/draksec:55 standalone/harddrake2:308 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:55 standalone/harddrake2:311 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Eya"
@@ -3931,10 +4005,10 @@ msgid ""
 "manual is similar to the one used during installation."
 msgstr ""
 
-#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:598
+#: help.pm:186 help.pm:566 help.pm:855 install_steps_gtk.pm:595
 #: standalone/drakbackup:2341 standalone/drakbackup:2345
 #: standalone/drakbackup:2349 standalone/drakbackup:2353
-#: standalone/drakroam:165
+#: standalone/drakroam:227
 #, c-format
 msgid "Configure"
 msgstr "Assètia"
@@ -4657,7 +4731,7 @@ msgstr ""
 #: help.pm:722
 #, c-format
 msgid "authentication"
-msgstr "connoscidura"
+msgstr "autentigadura"
 
 #: help.pm:725
 #, c-format
@@ -4921,7 +4995,7 @@ msgid ""
 "Installation medium (please create a newer boot floppy)"
 msgstr ""
 
-#: install2.pm:168
+#: install2.pm:169
 #, c-format
 msgid "You must also format %s"
 msgstr "Depis formatai %s puru"
@@ -4962,14 +5036,14 @@ msgstr "Arretza (FTP)"
 #: install_any.pm:417
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Arretza (NFS)"
 
 #: install_any.pm:447
 #, c-format
 msgid "Insert the CD 1 again"
 msgstr "Intra torra su CD 1"
 
-#: install_any.pm:473 network/netconnect.pm:834 standalone/drakbackup:112
+#: install_any.pm:473 network/netconnect.pm:835 standalone/drakbackup:112
 #, c-format
 msgid "No device found"
 msgstr "Nisçunu trastu agatau"
@@ -4992,7 +5066,7 @@ msgstr "URL de su sprigu?"
 #: install_any.pm:521
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Assètiu NFS"
 
 #: install_any.pm:521
 #, c-format
@@ -5007,7 +5081,7 @@ msgstr ""
 #: install_any.pm:522 standalone/draknfs:288
 #, c-format
 msgid "Directory"
-msgstr ""
+msgstr "Directory"
 
 #: install_any.pm:575
 #, c-format
@@ -5019,17 +5093,17 @@ msgstr ""
 #: install_any.pm:652
 #, c-format
 msgid "Removing packages prior to upgrade..."
-msgstr ""
+msgstr "Srèxinu is pakitus ki dui funt po ajorronai..."
 
 #: install_any.pm:694
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr ""
+msgstr "Càstiu is pakitus jai aposentaus..."
 
 #: install_any.pm:698
 #, c-format
 msgid "Finding packages to upgrade..."
-msgstr ""
+msgstr "Agatu is pakitus po ajorronai..."
 
 #: install_any.pm:776
 #, c-format
@@ -5111,12 +5185,12 @@ msgstr "NFS"
 #: install_any.pm:1732
 #, c-format
 msgid "Please choose a media"
-msgstr ""
+msgstr "Sçobera unu suportu, po praxeri"
 
 #: install_any.pm:1748
 #, c-format
 msgid "File already exists. Overwrite it?"
-msgstr ""
+msgstr "Su file esistit jai. Nci scriu apitzus?"
 
 #: install_any.pm:1752
 #, c-format
@@ -5136,12 +5210,12 @@ msgstr ""
 #: install_any.pm:1872
 #, c-format
 msgid "Can not make screenshots before partitioning"
-msgstr ""
+msgstr "No fait a fai fotografias innantis de pratzidurai"
 
 #: install_any.pm:1879
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr ""
+msgstr "As a podi biri is fotografias apustis de s'aposentada in %s"
 
 #: install_gtk.pm:136
 #, c-format
@@ -5252,7 +5326,7 @@ msgstr ""
 #: install_interactive.pm:156
 #, c-format
 msgid "Computing the size of the Windows partition"
-msgstr ""
+msgstr "Càrculu sa mesura de sa pratzidura Windows"
 
 #: install_interactive.pm:163
 #, c-format
@@ -5281,7 +5355,7 @@ msgstr ""
 #: install_interactive.pm:178
 #, c-format
 msgid "Which size do you want to keep for Windows on"
-msgstr ""
+msgstr "Ita mesura bolis apoderai po sa pratzidura Windows"
 
 #: install_interactive.pm:179
 #, c-format
@@ -5563,7 +5637,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dòpia su puntu de càrrigu %s"
 
-#: install_steps.pm:475
+#: install_steps.pm:481
 #, c-format
 msgid ""
 "Some important packages did not get installed properly.\n"
@@ -5626,25 +5700,25 @@ msgstr "Importu: "
 msgid "You can not select/unselect this package"
 msgstr "No podis scerai/disiscerai custu pakitu"
 
-#: install_steps_gtk.pm:340 network/thirdparty.pm:316
+#: install_steps_gtk.pm:340 network/thirdparty.pm:329
 #, c-format
 msgid "due to missing %s"
-msgstr ""
+msgstr "ca amancat %s"
 
 #: install_steps_gtk.pm:341
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr ""
+msgstr "ca no est satisfatu %s"
 
 #: install_steps_gtk.pm:342
 #, c-format
 msgid "trying to promote %s"
-msgstr ""
+msgstr "provu a sçoberai %s"
 
 #: install_steps_gtk.pm:343
 #, c-format
 msgid "in order to keep %s"
-msgstr ""
+msgstr "po podi apoderai %s"
 
 #: install_steps_gtk.pm:348
 #, c-format
@@ -5718,33 +5792,33 @@ msgstr "Sçobera is pakitus ki bolis aposentai"
 msgid "Installing"
 msgstr "Seu aposentendi"
 
-#: install_steps_gtk.pm:460
+#: install_steps_gtk.pm:457
 #, c-format
 msgid "No details"
 msgstr ""
 
-#: install_steps_gtk.pm:475
+#: install_steps_gtk.pm:472
 #, c-format
 msgid "Time remaining "
 msgstr "Tempus ki abarrat "
 
-#: install_steps_gtk.pm:476
+#: install_steps_gtk.pm:473
 #, c-format
 msgid "Estimating"
 msgstr "Seu carculendi"
 
-#: install_steps_gtk.pm:503
+#: install_steps_gtk.pm:500
 #, c-format
 msgid "%d packages"
 msgstr "%d pakitus"
 
-#: install_steps_gtk.pm:542 install_steps_interactive.pm:92
+#: install_steps_gtk.pm:539 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:738
 #, c-format
 msgid "Refuse"
 msgstr "Arrevuda"
 
-#: install_steps_gtk.pm:546 install_steps_interactive.pm:742
+#: install_steps_gtk.pm:543 install_steps_interactive.pm:742
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -5756,41 +5830,41 @@ msgstr ""
 "Intra su Cd-Rom etiketau \"%s\" in su ligidori e craca Ok candu as fatu.\n"
 "Ki no du tenis, craca Annudda po scampai s'aposentadura de custu Cd-Rom."
 
-#: install_steps_gtk.pm:559 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:556 install_steps_interactive.pm:753
 #, c-format
 msgid "There was an error ordering packages:"
 msgstr "Faddina in s'ordinadura de is pakitus:"
 
-#: install_steps_gtk.pm:561 install_steps_interactive.pm:757
+#: install_steps_gtk.pm:558 install_steps_interactive.pm:757
 #, c-format
 msgid "There was an error installing packages:"
 msgstr "Faddina in s'aposentadura de is pakitus:"
 
-#: install_steps_gtk.pm:563 install_steps_interactive.pm:753
+#: install_steps_gtk.pm:560 install_steps_interactive.pm:753
 #: install_steps_interactive.pm:757
 #, c-format
 msgid "Go on anyway?"
 msgstr "Sigu comuncas?"
 
-#: install_steps_gtk.pm:585 install_steps_interactive.pm:933 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:933 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Arresùmini"
 
-#: install_steps_gtk.pm:608 install_steps_interactive.pm:929
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:929
 #: install_steps_interactive.pm:1078
 #, c-format
 msgid "not configured"
 msgstr "no assetiau"
 
-#: install_steps_gtk.pm:671
+#: install_steps_gtk.pm:668
 #, c-format
 msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
 
-#: install_steps_gtk.pm:680
+#: install_steps_gtk.pm:677
 #, c-format
 msgid ""
 "You have the option to copy the contents of the CDs onto the hard drive "
@@ -5799,7 +5873,7 @@ msgid ""
 "available once the system is fully installed."
 msgstr ""
 
-#: install_steps_gtk.pm:682
+#: install_steps_gtk.pm:679
 #, c-format
 msgid "Copy whole CDs"
 msgstr "Còpia totu is CD"
@@ -5807,7 +5881,7 @@ msgstr "Còpia totu is CD"
 #: install_steps_interactive.pm:84
 #, c-format
 msgid "License agreement"
-msgstr ""
+msgstr "Cuntratu de permissu"
 
 #: install_steps_interactive.pm:89
 #, c-format
@@ -5852,7 +5926,7 @@ msgstr "Sçobera su tipu de sòrixi."
 #: install_steps_interactive.pm:196
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "Sçoberu de su sòrixi"
 
 #: install_steps_interactive.pm:205 standalone/mousedrake:46
 #, c-format
@@ -6068,7 +6142,7 @@ msgstr ""
 #: install_steps_interactive.pm:806
 #, c-format
 msgid "Updates"
-msgstr ""
+msgstr "Ajorronus"
 
 #: install_steps_interactive.pm:807
 #, c-format
@@ -6250,7 +6324,7 @@ msgstr ""
 #: install_steps_interactive.pm:1293 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
-msgstr ""
+msgstr "Intra unu floppy sbuidu in su trastu %s"
 
 #: install_steps_interactive.pm:1298
 #, c-format
@@ -6383,12 +6457,12 @@ msgstr "Butoni `%s': %s"
 #: interactive/stdio.pm:95
 #, c-format
 msgid "Do you want to click on this button?"
-msgstr ""
+msgstr "Bolis cricai custu butoni?"
 
 #: interactive/stdio.pm:104
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr ""
+msgstr "Ita sçoberas? (predefiniu `%s'%s)"
 
 #: interactive/stdio.pm:104
 #, c-format
@@ -6493,12 +6567,12 @@ msgstr ""
 #: keyboard.pm:182 keyboard.pm:320
 #, c-format
 msgid "UK keyboard"
-msgstr ""
+msgstr "Tecrau UK"
 
 #: keyboard.pm:183 keyboard.pm:323
 #, c-format
 msgid "US keyboard"
-msgstr ""
+msgstr "Tecrau US"
 
 #: keyboard.pm:185
 #, c-format
@@ -7168,7 +7242,7 @@ msgstr ""
 #: keyboard.pm:324
 #, c-format
 msgid "US keyboard (international)"
-msgstr ""
+msgstr "Tecrau US (intrenatzionali)"
 
 #: keyboard.pm:325
 #, c-format
@@ -7298,12 +7372,12 @@ msgstr ""
 #: lang.pm:178
 #, c-format
 msgid "default:LTR"
-msgstr ""
+msgstr "predefiniu:LTR"
 
 #: lang.pm:195
 #, c-format
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: lang.pm:196 network/adsl_consts.pm:943
 #, c-format
@@ -7313,7 +7387,7 @@ msgstr "Emiraus Aràbius Unius"
 #: lang.pm:197
 #, c-format
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afganistàn"
 
 #: lang.pm:198
 #, c-format
@@ -7338,7 +7412,7 @@ msgstr "Armènia"
 #: lang.pm:202
 #, c-format
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Antillas Olandesas"
 
 #: lang.pm:203
 #, c-format
@@ -7368,12 +7442,12 @@ msgstr "Aruba"
 #: lang.pm:210
 #, c-format
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaijàn"
 
 #: lang.pm:211
 #, c-format
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bòsnia e Erzegòvina"
 
 #: lang.pm:212
 #, c-format
@@ -7463,7 +7537,7 @@ msgstr "Ìsulas Cocos (Keeling)"
 #: lang.pm:232
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Congo (Kinshasa)"
 
 #: lang.pm:233
 #, c-format
@@ -7473,12 +7547,12 @@ msgstr "Repùbrica de Centru Àfriga"
 #: lang.pm:234
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Congo (Brazzaville)"
 
 #: lang.pm:236
 #, c-format
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Cote d'Ivoire"
 
 #: lang.pm:237
 #, c-format
@@ -7517,7 +7591,7 @@ msgstr "Colòmbia"
 #: lang.pm:243
 #, c-format
 msgid "Serbia & Montenegro"
-msgstr ""
+msgstr "Serbia & Montenegro"
 
 #: lang.pm:244
 #, c-format
@@ -7592,7 +7666,7 @@ msgstr "Figi"
 #: lang.pm:264
 #, c-format
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Falkland Islands (Malvinas)"
 
 #: lang.pm:265
 #, c-format
@@ -7628,7 +7702,7 @@ msgstr "Georja"
 #: lang.pm:272
 #, c-format
 msgid "French Guiana"
-msgstr ""
+msgstr "Guyana Frantzesa"
 
 #: lang.pm:273
 #, c-format
@@ -7658,7 +7732,7 @@ msgstr "Ghinea"
 #: lang.pm:278
 #, c-format
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: lang.pm:279
 #, c-format
@@ -7668,7 +7742,7 @@ msgstr "Ghinea Ecuadoriali"
 #: lang.pm:281
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "South Georgia and the South Sandwich Islands"
 
 #: lang.pm:282
 #, c-format
@@ -7683,7 +7757,7 @@ msgstr "Guam"
 #: lang.pm:284
 #, c-format
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: lang.pm:285
 #, c-format
@@ -7693,7 +7767,7 @@ msgstr "Guyana"
 #: lang.pm:286
 #, c-format
 msgid "Hong Kong SAR (China)"
-msgstr ""
+msgstr "Hong Kong SAR (Cina)"
 
 #: lang.pm:287
 #, c-format
@@ -7763,17 +7837,17 @@ msgstr "Kènia"
 #: lang.pm:305
 #, c-format
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirghìsistan"
 
 #: lang.pm:306
 #, c-format
 msgid "Cambodia"
-msgstr ""
+msgstr "Camboja"
 
 #: lang.pm:307
 #, c-format
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: lang.pm:308
 #, c-format
@@ -7783,17 +7857,17 @@ msgstr "Comorras"
 #: lang.pm:309
 #, c-format
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts and Nevis"
 
 #: lang.pm:310
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Korea (Nord)"
 
 #: lang.pm:311
 #, c-format
 msgid "Korea"
-msgstr ""
+msgstr "Korea"
 
 #: lang.pm:312
 #, c-format
@@ -7878,7 +7952,7 @@ msgstr "Monaco"
 #: lang.pm:328
 #, c-format
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: lang.pm:329
 #, c-format
@@ -7918,7 +7992,7 @@ msgstr "Ìsulas Nord Mariannas"
 #: lang.pm:336
 #, c-format
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #: lang.pm:337
 #, c-format
@@ -7973,7 +8047,7 @@ msgstr "Namìbia"
 #: lang.pm:347
 #, c-format
 msgid "New Caledonia"
-msgstr ""
+msgstr "Caledònia Noa"
 
 #: lang.pm:348
 #, c-format
@@ -8028,7 +8102,7 @@ msgstr "Perù"
 #: lang.pm:361
 #, c-format
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinèsia Frantzesa"
 
 #: lang.pm:362
 #, c-format
@@ -8053,7 +8127,7 @@ msgstr "Saint Pierre e Miquelon"
 #: lang.pm:367
 #, c-format
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn"
 
 #: lang.pm:368
 #, c-format
@@ -8083,7 +8157,7 @@ msgstr "Qatar"
 #: lang.pm:374
 #, c-format
 msgid "Reunion"
-msgstr ""
+msgstr "Reunion"
 
 #: lang.pm:375
 #, c-format
@@ -8163,7 +8237,7 @@ msgstr "Suriname"
 #: lang.pm:393
 #, c-format
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tomè e Prìncipe"
 
 #: lang.pm:394
 #, c-format
@@ -8203,7 +8277,7 @@ msgstr "Togo"
 #: lang.pm:402
 #, c-format
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tagìkistan"
 
 #: lang.pm:403
 #, c-format
@@ -8263,7 +8337,7 @@ msgstr "Uganda"
 #: lang.pm:415
 #, c-format
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "United States Minor Outlying Islands"
 
 #: lang.pm:417
 #, c-format
@@ -8278,12 +8352,12 @@ msgstr "Usbekistàn"
 #: lang.pm:419
 #, c-format
 msgid "Vatican"
-msgstr ""
+msgstr "Vaticanu"
 
 #: lang.pm:420
 #, c-format
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Saint Vincent e Grenadines"
 
 #: lang.pm:421
 #, c-format
@@ -8298,7 +8372,7 @@ msgstr "Virgin Islands (British)"
 #: lang.pm:423
 #, c-format
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Virgin Islands (U.S.)"
 
 #: lang.pm:424
 #, c-format
@@ -8313,7 +8387,7 @@ msgstr "Vanuatu"
 #: lang.pm:426
 #, c-format
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis e Futuna"
 
 #: lang.pm:427
 #, c-format
@@ -8343,7 +8417,7 @@ msgstr "Zimbabwe"
 #: lang.pm:1141
 #, c-format
 msgid "Welcome to %s"
-msgstr ""
+msgstr "Beni bènniu a %s"
 
 #: lvm.pm:83
 #, c-format
@@ -8368,7 +8442,7 @@ msgstr ""
 #: modules/interactive.pm:21 standalone/drakconnect:1027
 #, c-format
 msgid "Parameters"
-msgstr ""
+msgstr "Paràmetrus"
 
 #: modules/interactive.pm:21 standalone/draksec:51
 #, c-format
@@ -8378,17 +8452,17 @@ msgstr ""
 #: modules/interactive.pm:22
 #, c-format
 msgid "Module configuration"
-msgstr ""
+msgstr "Assètiu mòdulu"
 
 #: modules/interactive.pm:22
 #, c-format
 msgid "You can configure each parameter of the module here."
-msgstr ""
+msgstr "Podis assetiai dònnia paràmentru de su mòdulu innoi."
 
 #: modules/interactive.pm:63
 #, c-format
 msgid "Found %s interfaces"
-msgstr ""
+msgstr "Agatadas %s interfacis"
 
 #: modules/interactive.pm:64
 #, c-format
@@ -8398,32 +8472,32 @@ msgstr ""
 #: modules/interactive.pm:65
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr ""
+msgstr "Tenis interfacis %s?"
 
 #: modules/interactive.pm:71
 #, c-format
 msgid "See hardware info"
-msgstr ""
+msgstr "Càstia sa sceda hardware"
 
 #: modules/interactive.pm:82
 #, c-format
 msgid "Installing driver for USB controller"
-msgstr ""
+msgstr "Aposentu driver po controlladori USB"
 
 #: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr ""
+msgstr "Aposentu driver po controlladori firewire %s"
 
 #: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr ""
+msgstr "Aposentu driver po controlladori de discu tostau %s"
 
 #: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr ""
+msgstr "Aposentu driver po controlladori ethernet %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -8435,7 +8509,7 @@ msgstr ""
 #: modules/interactive.pm:99
 #, c-format
 msgid "(module %s)"
-msgstr ""
+msgstr "(mòdulu %s)"
 
 #: modules/interactive.pm:109
 #, c-format
@@ -8495,52 +8569,52 @@ msgstr ""
 #: modules/parameters.pm:49
 #, c-format
 msgid "a number"
-msgstr ""
+msgstr "unu nùmeru"
 
 #: modules/parameters.pm:51
 #, c-format
 msgid "%d comma separated numbers"
-msgstr ""
+msgstr "%d nùmerus pratzius a vìrgula"
 
 #: modules/parameters.pm:51
 #, c-format
 msgid "%d comma separated strings"
-msgstr ""
+msgstr "%d arrayas pratzias a vìrgula"
 
 #: modules/parameters.pm:53
 #, c-format
 msgid "comma separated numbers"
-msgstr ""
+msgstr "nùmerus pratzius a vìrgula"
 
 #: modules/parameters.pm:53
 #, c-format
 msgid "comma separated strings"
-msgstr ""
+msgstr "arrayas pratzias a vìrgula"
 
 #: mouse.pm:25
 #, c-format
 msgid "Sun - Mouse"
-msgstr ""
+msgstr "Sun - Mouse"
 
 #: mouse.pm:31 security/level.pm:12
 #, c-format
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #: mouse.pm:32
 #, c-format
 msgid "Logitech MouseMan+"
-msgstr ""
+msgstr "Logitech MouseMan+"
 
 #: mouse.pm:33
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
-msgstr ""
+msgstr "Sòrixi genèrigu PS2 a arroda"
 
 #: mouse.pm:34
 #, c-format
 msgid "GlidePoint"
-msgstr ""
+msgstr "GlidePoint"
 
 #: mouse.pm:36 network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/modem.pm:68 network/modem.pm:81 network/modem.pm:86
@@ -8549,72 +8623,72 @@ msgstr ""
 #: network/netconnect.pm:618 network/netconnect.pm:620
 #, c-format
 msgid "Automatic"
-msgstr ""
+msgstr "Automàtigu"
 
 #: mouse.pm:39 mouse.pm:73
 #, c-format
 msgid "Kensington Thinking Mouse"
-msgstr ""
+msgstr "Kensington Thinking Mouse"
 
 #: mouse.pm:40 mouse.pm:68
 #, c-format
 msgid "Genius NetMouse"
-msgstr ""
+msgstr "Genius NetMouse"
 
 #: mouse.pm:41
 #, c-format
 msgid "Genius NetScroll"
-msgstr ""
+msgstr "Genius NetScroll"
 
 #: mouse.pm:42 mouse.pm:52
 #, c-format
 msgid "Microsoft Explorer"
-msgstr ""
+msgstr "Microsoft Explorer"
 
 #: mouse.pm:47 mouse.pm:79
 #, c-format
 msgid "1 button"
-msgstr ""
+msgstr "1 butoni"
 
 #: mouse.pm:48 mouse.pm:57
 #, c-format
 msgid "Generic 2 Button Mouse"
-msgstr ""
+msgstr "Sòrixi genèrigu a 2 butonis"
 
 #: mouse.pm:50 mouse.pm:59
 #, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
-msgstr ""
+msgstr "Sòrixi genèrigu a 3 butonis cun emuladori de arroda"
 
 #: mouse.pm:51
 #, c-format
 msgid "Wheel"
-msgstr ""
+msgstr "Arroda"
 
 #: mouse.pm:55
 #, c-format
 msgid "serial"
-msgstr ""
+msgstr "seriali"
 
 #: mouse.pm:58
 #, c-format
 msgid "Generic 3 Button Mouse"
-msgstr ""
+msgstr "Sòrixi genèrigu a 3 butonis"
 
 #: mouse.pm:60
 #, c-format
 msgid "Microsoft IntelliMouse"
-msgstr ""
+msgstr "Microsoft IntelliMouse"
 
 #: mouse.pm:61
 #, c-format
 msgid "Logitech MouseMan"
-msgstr ""
+msgstr "Logitech MouseMan"
 
 #: mouse.pm:62
 #, c-format
 msgid "Logitech MouseMan with Wheel emulation"
-msgstr ""
+msgstr "Logitech MouseMan cun emuladori de arroda"
 
 #: mouse.pm:63
 #, c-format
@@ -8624,77 +8698,77 @@ msgstr ""
 #: mouse.pm:65
 #, c-format
 msgid "Logitech CC Series"
-msgstr ""
+msgstr "Logitech CC Series"
 
 #: mouse.pm:66
 #, c-format
 msgid "Logitech CC Series with Wheel emulation"
-msgstr ""
+msgstr "Logitech CC Series cun emuladori de arroda"
 
 #: mouse.pm:67
 #, c-format
 msgid "Logitech MouseMan+/FirstMouse+"
-msgstr ""
+msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: mouse.pm:69
 #, c-format
 msgid "MM Series"
-msgstr ""
+msgstr "MM Series"
 
 #: mouse.pm:70
 #, c-format
 msgid "MM HitTablet"
-msgstr ""
+msgstr "MM HitTablet"
 
 #: mouse.pm:71
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
-msgstr ""
+msgstr "Logitech Mouse (seriali, tipu C7 beçu)"
 
 #: mouse.pm:72
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
-msgstr ""
+msgstr "Logitech Mouse (seriali, tipu C7 beçu) cun emuladori de arroda"
 
 #: mouse.pm:74
 #, c-format
 msgid "Kensington Thinking Mouse with Wheel emulation"
-msgstr ""
+msgstr "Kensington Thinking Mouse cun emuladori de arroda"
 
 #: mouse.pm:77
 #, c-format
 msgid "busmouse"
-msgstr ""
+msgstr "busmouse"
 
 #: mouse.pm:80
 #, c-format
 msgid "2 buttons"
-msgstr ""
+msgstr "2 butonis"
 
 #: mouse.pm:81
 #, c-format
 msgid "3 buttons"
-msgstr ""
+msgstr "3 butonis"
 
 #: mouse.pm:82
 #, c-format
 msgid "3 buttons with Wheel emulation"
-msgstr ""
+msgstr "3 butonis cun emuladori de arroda"
 
 #: mouse.pm:86
 #, c-format
 msgid "Universal"
-msgstr ""
+msgstr "Universali"
 
 #: mouse.pm:88
 #, c-format
 msgid "Any PS/2 & USB mice"
-msgstr ""
+msgstr "Sòrixis PS/2 & USB"
 
 #: mouse.pm:89
 #, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr ""
+msgstr "Microsoft Xbox Controller S"
 
 #: mouse.pm:93 standalone/drakconnect:351 standalone/drakvpn:1126
 #, c-format
@@ -8704,72 +8778,72 @@ msgstr ""
 #: mouse.pm:95
 #, c-format
 msgid "No mouse"
-msgstr ""
+msgstr "Nisçunu sòrixi"
 
 #: mouse.pm:304 mouse.pm:367 mouse.pm:376 mouse.pm:435
 #, c-format
 msgid "Synaptics Touchpad"
-msgstr ""
+msgstr "Synaptics Touchpad"
 
 #: mouse.pm:561
 #, c-format
 msgid "Please test the mouse"
-msgstr ""
+msgstr "Prova su sòrixi"
 
 #: mouse.pm:563
 #, c-format
 msgid "To activate the mouse,"
-msgstr ""
+msgstr "Po abivai su sòrixi,"
 
 #: mouse.pm:564
 #, c-format
 msgid "MOVE YOUR WHEEL!"
-msgstr ""
+msgstr "MOVI S'ARRODA!"
 
 #: network/drakfirewall.pm:12 share/compssUsers.pl:85
 #, c-format
 msgid "Web Server"
-msgstr ""
+msgstr "Server Web"
 
 #: network/drakfirewall.pm:17
 #, c-format
 msgid "Domain Name Server"
-msgstr ""
+msgstr "Domain Name Server"
 
 #: network/drakfirewall.pm:22
 #, c-format
 msgid "SSH server"
-msgstr ""
+msgstr "Server SSH"
 
 #: network/drakfirewall.pm:27
 #, c-format
 msgid "FTP server"
-msgstr ""
+msgstr "Server FTP"
 
 #: network/drakfirewall.pm:32
 #, c-format
 msgid "Mail Server"
-msgstr ""
+msgstr "Server de curreu"
 
 #: network/drakfirewall.pm:37
 #, c-format
 msgid "POP and IMAP Server"
-msgstr ""
+msgstr "Server POP e IMAP"
 
 #: network/drakfirewall.pm:42
 #, c-format
 msgid "Telnet server"
-msgstr ""
+msgstr "Server Telnet"
 
 #: network/drakfirewall.pm:48
 #, c-format
 msgid "Windows Files Sharing (SMB)"
-msgstr ""
+msgstr "Cumoni de file Windows (SMB)"
 
 #: network/drakfirewall.pm:54
 #, c-format
 msgid "CUPS server"
-msgstr ""
+msgstr "Server CUPS"
 
 #: network/drakfirewall.pm:60
 #, c-format
@@ -8779,12 +8853,12 @@ msgstr ""
 #: network/drakfirewall.pm:65
 #, c-format
 msgid "BitTorrent"
-msgstr ""
+msgstr "BitTorrent"
 
 #: network/drakfirewall.pm:74
 #, c-format
 msgid "Port scan detection"
-msgstr ""
+msgstr "Controllu a scannidura de is portas"
 
 #: network/drakfirewall.pm:165
 #, c-format
@@ -8836,16 +8910,16 @@ msgstr ""
 #: network/drakfirewall.pm:209
 #, c-format
 msgid "Other ports"
-msgstr ""
+msgstr "Atras portas"
 
 #: network/drakfirewall.pm:251 network/drakfirewall.pm:254
 #: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
-#: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:180
-#: standalone/net_applet:354 standalone/net_applet:391
-#, fuzzy, c-format
+#: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:201
+#: standalone/net_applet:379 standalone/net_applet:416
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Firewall"
+msgstr "Interactive Firewall"
 
 #: network/drakfirewall.pm:252
 #, c-format
@@ -8858,12 +8932,12 @@ msgstr ""
 #: network/drakfirewall.pm:257
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "Imprea Interactive Firewall"
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Nisçunu acomunu"
+msgstr "Scannidura de is portas"
 
 #: network/ifw.pm:137
 #, fuzzy, c-format
@@ -8883,7 +8957,7 @@ msgstr ""
 #: network/ifw.pm:141
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "%s at provau unu afracu a scannidura de portas."
 
 #: network/ifw.pm:142
 #, c-format
@@ -8910,12 +8984,12 @@ msgstr ""
 #: network/isdn.pm:160 network/netconnect.pm:384
 #, c-format
 msgid "ISA / PCMCIA"
-msgstr ""
+msgstr "ISA / PCMCIA"
 
 #: network/isdn.pm:160 network/netconnect.pm:384
 #, c-format
 msgid "I do not know"
-msgstr ""
+msgstr "No sciu"
 
 #: network/isdn.pm:161 network/netconnect.pm:384
 #, c-format
@@ -8925,14 +8999,14 @@ msgstr "PCI"
 #: network/isdn.pm:162 network/netconnect.pm:384
 #, c-format
 msgid "USB"
-msgstr ""
+msgstr "USB"
 
 #: network/modem.pm:47 network/modem.pm:48 network/modem.pm:49
 #: network/netconnect.pm:585 network/netconnect.pm:602
 #: network/netconnect.pm:618
 #, c-format
 msgid "Manual"
-msgstr ""
+msgstr "Manuali"
 
 #: network/ndiswrapper.pm:27
 #, c-format
@@ -8982,7 +9056,7 @@ msgstr ""
 msgid "Manual configuration"
 msgstr ""
 
-#: network/netconnect.pm:81 standalone/drakroam:113
+#: network/netconnect.pm:81 standalone/drakroam:121
 #, c-format
 msgid "Automatic IP (BOOTP/DHCP)"
 msgstr ""
@@ -8995,12 +9069,12 @@ msgstr ""
 #: network/netconnect.pm:86
 #, c-format
 msgid "Protocol for the rest of the world"
-msgstr ""
+msgstr "Protocollu de totu s'atru mundu"
 
 #: network/netconnect.pm:88 standalone/drakconnect:563
 #, c-format
 msgid "European protocol (EDSS1)"
-msgstr ""
+msgstr "Protocolllu europeu (EDSS1)"
 
 #: network/netconnect.pm:89 standalone/drakconnect:564
 #, c-format
@@ -9009,62 +9083,62 @@ msgid ""
 "No D-Channel (leased lines)"
 msgstr ""
 
-#: network/netconnect.pm:103 standalone/harddrake2:306
+#: network/netconnect.pm:103 standalone/harddrake2:309
 #: standalone/net_monitor:102 standalone/net_monitor:103
 #: standalone/net_monitor:108
 #, c-format
 msgid "unknown"
-msgstr ""
+msgstr "disconnotu"
 
-#: network/netconnect.pm:120 network/thirdparty.pm:206
+#: network/netconnect.pm:120 network/thirdparty.pm:219
 #, c-format
 msgid "Alcatel speedtouch USB modem"
-msgstr ""
+msgstr "Alcatel speedtouch USB modem"
 
 #: network/netconnect.pm:121
 #, c-format
 msgid "Sagem USB modem"
-msgstr ""
+msgstr "Sagem USB modem"
 
 #: network/netconnect.pm:122
 #, c-format
 msgid "Bewan modem"
-msgstr ""
+msgstr "Bewan modem"
 
 #: network/netconnect.pm:123
 #, c-format
 msgid "ECI Hi-Focus modem"
-msgstr ""
+msgstr "ECI Hi-Focus modem"
 
 #: network/netconnect.pm:127
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
-msgstr ""
+msgstr "Dynamic Host Configuration Protocol (DHCP)"
 
 #: network/netconnect.pm:128
 #, c-format
 msgid "Manual TCP/IP configuration"
-msgstr ""
+msgstr "Assètiu manuali de TCP/IP"
 
 #: network/netconnect.pm:129
 #, c-format
 msgid "Point to Point Tunneling Protocol (PPTP)"
-msgstr ""
+msgstr "Point to Point Tunneling Protocol (PPTP)"
 
 #: network/netconnect.pm:130
 #, c-format
 msgid "PPP over Ethernet (PPPoE)"
-msgstr ""
+msgstr "PPP over Ethernet (PPPoE)"
 
 #: network/netconnect.pm:131
 #, c-format
 msgid "PPP over ATM (PPPoA)"
-msgstr ""
+msgstr "PPP over ATM (PPPoA)"
 
 #: network/netconnect.pm:132
 #, c-format
 msgid "DSL over CAPI"
-msgstr ""
+msgstr "DSL over CAPI"
 
 #: network/netconnect.pm:136
 #, c-format
@@ -9089,12 +9163,12 @@ msgstr ""
 #: network/netconnect.pm:140
 #, c-format
 msgid "PPPoA LLC"
-msgstr ""
+msgstr "PPPoA LLC"
 
 #: network/netconnect.pm:141
 #, c-format
 msgid "PPPoA VC"
-msgstr ""
+msgstr "PPPoA VC"
 
 #: network/netconnect.pm:145 standalone/drakconnect:498
 #, c-format
@@ -9104,7 +9178,7 @@ msgstr ""
 #: network/netconnect.pm:146 standalone/drakconnect:498
 #, c-format
 msgid "PAP"
-msgstr ""
+msgstr "PAP"
 
 #: network/netconnect.pm:147 standalone/drakconnect:498
 #, c-format
@@ -9114,12 +9188,12 @@ msgstr ""
 #: network/netconnect.pm:148 standalone/drakconnect:498
 #, c-format
 msgid "CHAP"
-msgstr ""
+msgstr "CHAP"
 
 #: network/netconnect.pm:149 standalone/drakconnect:498
 #, c-format
 msgid "PAP/CHAP"
-msgstr ""
+msgstr "PAP/CHAP"
 
 #: network/netconnect.pm:239 standalone/drakconnect:56
 #, c-format
@@ -9129,48 +9203,48 @@ msgstr ""
 #: network/netconnect.pm:245
 #, c-format
 msgid "LAN connection"
-msgstr ""
+msgstr "Acàpiu LAN"
 
-#: network/netconnect.pm:246 network/netconnect.pm:265 standalone/drakroam:140
-#: standalone/drakroam:158 standalone/drakroam:161
+#: network/netconnect.pm:246 network/netconnect.pm:265 standalone/drakroam:182
+#: standalone/drakroam:220 standalone/drakroam:223
 #, c-format
 msgid "Wireless connection"
-msgstr ""
+msgstr "Acàpiu wireless"
 
 #: network/netconnect.pm:247
 #, c-format
 msgid "ADSL connection"
-msgstr ""
+msgstr "Acàpiu ADSL"
 
 #: network/netconnect.pm:248
 #, c-format
 msgid "Cable connection"
-msgstr ""
+msgstr "Acàpiu a cavu"
 
 #: network/netconnect.pm:249
 #, c-format
 msgid "ISDN connection"
-msgstr ""
+msgstr "Acàpiu ISDN"
 
 #: network/netconnect.pm:250
 #, c-format
 msgid "Modem connection"
-msgstr ""
+msgstr "Acàpiu a modem"
 
 #: network/netconnect.pm:251
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "Acàpiu DVB"
 
 #: network/netconnect.pm:261
 #, c-format
 msgid "Choose the connection you want to configure"
-msgstr ""
+msgstr "Sçobera ita tipu de acàpiu bolis assetiai"
 
 #: network/netconnect.pm:276 network/netconnect.pm:764
 #, c-format
 msgid "Connection Configuration"
-msgstr ""
+msgstr "Assètiu Acàpiu"
 
 #: network/netconnect.pm:276 network/netconnect.pm:765
 #, c-format
@@ -9211,7 +9285,7 @@ msgstr ""
 #: standalone/drakconnect:517
 #, c-format
 msgid "Connection speed"
-msgstr ""
+msgstr "Lestresa de s'acàpiu"
 
 #: network/netconnect.pm:286 standalone/drakconnect:454
 #, c-format
@@ -9266,39 +9340,39 @@ msgid "Use BPALogin (needed for Telstra)"
 msgstr ""
 
 #: network/netconnect.pm:337 network/netconnect.pm:654
-#: network/netconnect.pm:804 network/netconnect.pm:1138
+#: network/netconnect.pm:805 network/netconnect.pm:1139
 #, c-format
 msgid "Select the network interface to configure:"
-msgstr ""
+msgstr "Sçobera s'interfaci de arretza de assetiai:"
 
 #: network/netconnect.pm:339 network/netconnect.pm:374
-#: network/netconnect.pm:655 network/netconnect.pm:806 network/shorewall.pm:65
+#: network/netconnect.pm:655 network/netconnect.pm:807 network/shorewall.pm:70
 #: standalone/drakconnect:713
 #, c-format
 msgid "Net Device"
-msgstr ""
+msgstr "Trastu de arretza"
 
 #: network/netconnect.pm:340 network/netconnect.pm:345
 #, c-format
 msgid "External ISDN modem"
-msgstr ""
+msgstr "Modem ISDN foranu"
 
 #: network/netconnect.pm:373 standalone/harddrake2:216
 #, c-format
 msgid "Select a device!"
-msgstr ""
+msgstr "Sçobera unu trastu!"
 
 #: network/netconnect.pm:382 network/netconnect.pm:392
 #: network/netconnect.pm:402 network/netconnect.pm:435
 #: network/netconnect.pm:449
 #, c-format
 msgid "ISDN Configuration"
-msgstr ""
+msgstr "Assètiu ISDN"
 
 #: network/netconnect.pm:383
 #, c-format
 msgid "What kind of card do you have?"
-msgstr ""
+msgstr "Ita tipu de skeda tenis?"
 
 #: network/netconnect.pm:393
 #, c-format
@@ -9323,7 +9397,7 @@ msgstr ""
 #: network/netconnect.pm:403
 #, c-format
 msgid "Which of the following is your ISDN card?"
-msgstr ""
+msgstr "Cali de is ki sighint est sa skeda ISDN tua?"
 
 #: network/netconnect.pm:421
 #, c-format
@@ -9337,19 +9411,19 @@ msgstr ""
 #: standalone/harddrake2:133
 #, c-format
 msgid "Driver"
-msgstr ""
+msgstr "Driver"
 
 #: network/netconnect.pm:435
 #, c-format
 msgid "Which protocol do you want to use?"
-msgstr ""
+msgstr "Ita protocollu bolis impreai?"
 
 #: network/netconnect.pm:437 standalone/drakconnect:109
 #: standalone/drakconnect:300 standalone/drakconnect:562
 #: standalone/drakids:207 standalone/drakvpn:1128
 #, c-format
 msgid "Protocol"
-msgstr ""
+msgstr "Protocollu"
 
 #: network/netconnect.pm:449
 #, c-format
@@ -9357,12 +9431,14 @@ msgid ""
 "Select your provider.\n"
 "If it is not listed, choose Unlisted."
 msgstr ""
+"Sçobera su frunidori.\n"
+"Ki no est in sa lista, sçobera No in lista."
 
 #: network/netconnect.pm:451 network/netconnect.pm:540
 #: network/netconnect.pm:686
 #, c-format
 msgid "Provider:"
-msgstr ""
+msgstr "Frunidori:"
 
 #: network/netconnect.pm:460
 #, c-format
@@ -9370,91 +9446,93 @@ msgid ""
 "Your modem is not supported by the system.\n"
 "Take a look at http://www.linmodems.org"
 msgstr ""
+"Su modem no du suportat su sistema.\n"
+"Poni ogu a http://www.linmodems.org"
 
 #: network/netconnect.pm:479
 #, c-format
 msgid "Select the modem to configure:"
-msgstr ""
+msgstr "Sçobera su modem de assetiai:"
 
 #: network/netconnect.pm:509
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
-msgstr ""
+msgstr "Po praxeri, indida sa porta seriali ki su modem est acapiau."
 
 #: network/netconnect.pm:538
 #, c-format
 msgid "Select your provider:"
-msgstr ""
+msgstr "Sçobera su frunidori:"
 
 #: network/netconnect.pm:562
 #, c-format
 msgid "Dialup: account options"
-msgstr ""
+msgstr "Dialup: sceras de s'account"
 
 #: network/netconnect.pm:565
 #, c-format
 msgid "Connection name"
-msgstr ""
+msgstr "Nòmini de s'acàpiu:"
 
 #: network/netconnect.pm:566
 #, c-format
 msgid "Phone number"
-msgstr ""
+msgstr "Nùmeru de telèfunu"
 
 #: network/netconnect.pm:567
 #, c-format
 msgid "Login ID"
-msgstr ""
+msgstr "Login ID"
 
 #: network/netconnect.pm:582 network/netconnect.pm:615
 #, c-format
 msgid "Dialup: IP parameters"
-msgstr ""
+msgstr "Dialup: paràmetrus IP"
 
 #: network/netconnect.pm:585
 #, c-format
 msgid "IP parameters"
-msgstr ""
+msgstr "Paràmetrus IP"
 
-#: network/netconnect.pm:586 network/netconnect.pm:909
+#: network/netconnect.pm:586 network/netconnect.pm:910
 #: printer/printerdrake.pm:460 standalone/drakconnect:109
 #: standalone/drakconnect:316 standalone/drakconnect:882
-#: standalone/drakhosts:197 standalone/drakroam:114 standalone/drakups:286
+#: standalone/drakhosts:197 standalone/drakroam:122 standalone/drakups:286
 #, c-format
 msgid "IP address"
-msgstr ""
+msgstr "Bivimentu IP"
 
 #: network/netconnect.pm:587
 #, c-format
 msgid "Subnet mask"
-msgstr ""
+msgstr "Subnet mask"
 
 #: network/netconnect.pm:599
 #, c-format
 msgid "Dialup: DNS parameters"
-msgstr ""
+msgstr "Dialup: paràmetrus DNS"
 
 #: network/netconnect.pm:602
 #, c-format
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 #: network/netconnect.pm:603
 #, c-format
 msgid "Domain name"
-msgstr ""
+msgstr "Nòmini domìniu"
 
 #: network/netconnect.pm:604 network/netconnect.pm:769
 #: standalone/drakconnect:992
 #, c-format
 msgid "First DNS Server (optional)"
-msgstr ""
+msgstr "Primu server DNS (ki bolis)"
 
 #: network/netconnect.pm:605 network/netconnect.pm:770
 #: standalone/drakconnect:993
 #, c-format
 msgid "Second DNS Server (optional)"
-msgstr ""
+msgstr "Segundu server DNS (ki bolis)"
 
 #: network/netconnect.pm:606
 #, c-format
@@ -9464,22 +9542,22 @@ msgstr ""
 #: network/netconnect.pm:618 standalone/drakconnect:327
 #, c-format
 msgid "Gateway"
-msgstr ""
+msgstr "Gateway"
 
-#: network/netconnect.pm:619 standalone/drakroam:116
+#: network/netconnect.pm:619 standalone/drakroam:124
 #, c-format
 msgid "Gateway IP address"
-msgstr ""
+msgstr "Bivimentu IP de su Gateway"
 
 #: network/netconnect.pm:654
 #, c-format
 msgid "ADSL configuration"
-msgstr ""
+msgstr "Assètiu ADSL"
 
 #: network/netconnect.pm:684
 #, c-format
 msgid "Please choose your ADSL provider"
-msgstr ""
+msgstr "Po praxeri, sçobera su frunidori ADSL"
 
 #: network/netconnect.pm:714
 #, c-format
@@ -9487,55 +9565,57 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
+"Po praxeri, sçobera su tipu de acàpiu DSL.\n"
+"Ki no du scis, apodera su tipu predefiniu."
 
 #: network/netconnect.pm:717
 #, c-format
 msgid "ADSL connection type:"
-msgstr ""
+msgstr "Tipu de acàpiu ADSL:"
 
 #: network/netconnect.pm:774
 #, c-format
 msgid "Virtual Path ID (VPI):"
-msgstr ""
+msgstr "Virtual Path ID (VPI):"
 
 #: network/netconnect.pm:775
 #, c-format
 msgid "Virtual Circuit ID (VCI):"
-msgstr ""
+msgstr "Virtual Circuit ID (VCI):"
 
 #: network/netconnect.pm:778
 #, c-format
 msgid "Encapsulation:"
 msgstr ""
 
-#: network/netconnect.pm:808
-#, c-format
-msgid "Manually load a driver"
-msgstr ""
-
 #: network/netconnect.pm:809
 #, c-format
-msgid "Use a Windows driver (with ndiswrapper)"
-msgstr ""
+msgid "Manually load a driver"
+msgstr "Càrriga a manu unu driver"
 
-#: network/netconnect.pm:865
+#: network/netconnect.pm:810
+#, c-format
+msgid "Use a Windows driver (with ndiswrapper)"
+msgstr "Imprea unu driver po Windows (cun ndiswrapper)"
+
+#: network/netconnect.pm:866
 #, c-format
 msgid "Zeroconf hostname resolution"
 msgstr ""
 
-#: network/netconnect.pm:866 network/netconnect.pm:896
+#: network/netconnect.pm:867 network/netconnect.pm:897
 #, c-format
 msgid "Configuring network device %s (driver %s)"
 msgstr ""
 
-#: network/netconnect.pm:867
+#: network/netconnect.pm:868
 #, c-format
 msgid ""
 "The following protocols can be used to configure a LAN connection. Please "
 "choose the one you want to use"
 msgstr ""
 
-#: network/netconnect.pm:897
+#: network/netconnect.pm:898
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -9543,197 +9623,198 @@ msgid ""
 "notation (for example, 1.2.3.4)."
 msgstr ""
 
-#: network/netconnect.pm:904 standalone/drakconnect:373
+#: network/netconnect.pm:905 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr ""
 
-#: network/netconnect.pm:905 standalone/drakconnect:375
+#: network/netconnect.pm:906 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
 msgstr ""
 
-#: network/netconnect.pm:910 standalone/drakconnect:321
+#: network/netconnect.pm:911 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
 #, c-format
 msgid "Netmask"
-msgstr ""
+msgstr "Netmask"
 
-#: network/netconnect.pm:912 standalone/drakconnect:437
+#: network/netconnect.pm:913 standalone/drakconnect:437
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr ""
 
-#: network/netconnect.pm:913 standalone/drakconnect:438
+#: network/netconnect.pm:914 standalone/drakconnect:438
 #, c-format
 msgid "Network Hotplugging"
 msgstr ""
 
-#: network/netconnect.pm:915 standalone/drakconnect:432
+#: network/netconnect.pm:916 standalone/drakconnect:432
 #, c-format
 msgid "Start at boot"
-msgstr ""
+msgstr "Parti a s'alluidura"
 
-#: network/netconnect.pm:917 standalone/drakconnect:460
+#: network/netconnect.pm:918 standalone/drakconnect:460
 #, c-format
 msgid "Metric"
 msgstr ""
 
-#: network/netconnect.pm:918
+#: network/netconnect.pm:919
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
 msgstr ""
 
-#: network/netconnect.pm:920 standalone/drakconnect:369
+#: network/netconnect.pm:921 standalone/drakconnect:369
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
-msgstr ""
+msgstr "Client DHCP"
 
-#: network/netconnect.pm:922 standalone/drakconnect:379
+#: network/netconnect.pm:923 standalone/drakconnect:379
 #, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr ""
+msgstr "DHCP timeout (in segundus)"
 
-#: network/netconnect.pm:923 standalone/drakconnect:382
+#: network/netconnect.pm:924 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
 msgstr ""
 
-#: network/netconnect.pm:924 standalone/drakconnect:383
+#: network/netconnect.pm:925 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
 msgstr ""
 
-#: network/netconnect.pm:925 standalone/drakconnect:384
+#: network/netconnect.pm:926 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
 msgstr ""
 
-#: network/netconnect.pm:933 printer/printerdrake.pm:1897
+#: network/netconnect.pm:934 printer/printerdrake.pm:1897
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
-#: network/netconnect.pm:937 standalone/drakconnect:680
+#: network/netconnect.pm:938 standalone/drakconnect:680
 #, c-format
 msgid "Netmask should be in format 255.255.224.0"
 msgstr ""
 
-#: network/netconnect.pm:941
+#: network/netconnect.pm:942
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
 msgstr ""
 
-#: network/netconnect.pm:946 standalone/drakTermServ:1852
+#: network/netconnect.pm:947 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
 #, c-format
 msgid "%s already in use\n"
 msgstr ""
 
-#: network/netconnect.pm:986
+#: network/netconnect.pm:987
 #, c-format
 msgid "Choose an ndiswrapper driver"
 msgstr ""
 
-#: network/netconnect.pm:988
+#: network/netconnect.pm:989
 #, c-format
 msgid "Use the ndiswrapper driver %s"
 msgstr ""
 
-#: network/netconnect.pm:988
+#: network/netconnect.pm:989
 #, c-format
 msgid "Install a new driver"
 msgstr ""
 
-#: network/netconnect.pm:1000
+#: network/netconnect.pm:1001
 #, c-format
 msgid "Select a device:"
 msgstr ""
 
-#: network/netconnect.pm:1029
+#: network/netconnect.pm:1030
 #, c-format
 msgid "Please enter the wireless parameters for this card:"
 msgstr ""
 
-#: network/netconnect.pm:1032 standalone/drakconnect:404
+#: network/netconnect.pm:1033 standalone/drakconnect:404
+#: standalone/drakroam:52
 #, c-format
 msgid "Operating Mode"
 msgstr ""
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Ad-hoc"
-msgstr ""
+msgstr "Ad-hoc"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Managed"
 msgstr ""
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Master"
-msgstr ""
+msgstr "Master"
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Repeater"
 msgstr ""
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Secondary"
 msgstr ""
 
-#: network/netconnect.pm:1033
+#: network/netconnect.pm:1034
 #, c-format
 msgid "Auto"
 msgstr ""
 
-#: network/netconnect.pm:1036 standalone/drakconnect:405
-#: standalone/drakroam:107
+#: network/netconnect.pm:1037 standalone/drakconnect:405
+#: standalone/drakroam:115
 #, c-format
 msgid "Network name (ESSID)"
 msgstr ""
 
-#: network/netconnect.pm:1037 standalone/drakroam:108
+#: network/netconnect.pm:1038 standalone/drakroam:116
 #, c-format
 msgid "Encryption mode"
 msgstr ""
 
-#: network/netconnect.pm:1042
+#: network/netconnect.pm:1043
 #, c-format
 msgid "Allow access point roaming"
 msgstr ""
 
-#: network/netconnect.pm:1044 standalone/drakconnect:406
+#: network/netconnect.pm:1045 standalone/drakconnect:406
 #, c-format
 msgid "Network ID"
 msgstr ""
 
-#: network/netconnect.pm:1045 standalone/drakconnect:407
+#: network/netconnect.pm:1046 standalone/drakconnect:407
 #, c-format
 msgid "Operating frequency"
 msgstr ""
 
-#: network/netconnect.pm:1046 standalone/drakconnect:408
+#: network/netconnect.pm:1047 standalone/drakconnect:408
 #, c-format
 msgid "Sensitivity threshold"
 msgstr ""
 
-#: network/netconnect.pm:1047 standalone/drakconnect:409
+#: network/netconnect.pm:1048 standalone/drakconnect:409
 #, c-format
 msgid "Bitrate (in b/s)"
-msgstr ""
+msgstr "Bitrate (in b/s)"
 
-#: network/netconnect.pm:1048 standalone/drakconnect:420
+#: network/netconnect.pm:1049 standalone/drakconnect:420
 #, c-format
 msgid "RTS/CTS"
-msgstr ""
+msgstr "RTS/CTS"
 
-#: network/netconnect.pm:1049
+#: network/netconnect.pm:1050
 #, c-format
 msgid ""
 "RTS/CTS adds a handshake before each packet transmission to make sure that "
@@ -9747,17 +9828,17 @@ msgid ""
 "or off."
 msgstr ""
 
-#: network/netconnect.pm:1056 standalone/drakconnect:421
+#: network/netconnect.pm:1057 standalone/drakconnect:421
 #, c-format
 msgid "Fragmentation"
 msgstr ""
 
-#: network/netconnect.pm:1057 standalone/drakconnect:422
+#: network/netconnect.pm:1058 standalone/drakconnect:422
 #, c-format
 msgid "iwconfig command extra arguments"
 msgstr ""
 
-#: network/netconnect.pm:1058
+#: network/netconnect.pm:1059
 #, c-format
 msgid ""
 "Here, one can configure some extra wireless parameters such as:\n"
@@ -9768,12 +9849,12 @@ msgid ""
 msgstr ""
 
 #. -PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
-#: network/netconnect.pm:1065 standalone/drakconnect:423
+#: network/netconnect.pm:1066 standalone/drakconnect:423
 #, c-format
 msgid "iwspy command extra arguments"
 msgstr ""
 
-#: network/netconnect.pm:1066
+#: network/netconnect.pm:1067
 #, c-format
 msgid ""
 "iwspy is used to set a list of addresses in a wireless network\n"
@@ -9785,12 +9866,12 @@ msgid ""
 "See iwpspy(8) man page for further information."
 msgstr ""
 
-#: network/netconnect.pm:1075 standalone/drakconnect:424
+#: network/netconnect.pm:1076 standalone/drakconnect:424
 #, c-format
 msgid "iwpriv command extra arguments"
 msgstr ""
 
-#: network/netconnect.pm:1076
+#: network/netconnect.pm:1077
 #, c-format
 msgid ""
 "iwpriv enable to set up optionals (private) parameters of a wireless "
@@ -9808,51 +9889,51 @@ msgid ""
 "See iwpriv(8) man page for further information."
 msgstr ""
 
-#: network/netconnect.pm:1091
+#: network/netconnect.pm:1092
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
 
-#: network/netconnect.pm:1095
+#: network/netconnect.pm:1096
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
 "enough '0' (zeroes)."
 msgstr ""
 
-#: network/netconnect.pm:1138
-#, c-format
-msgid "DVB configuration"
-msgstr ""
-
 #: network/netconnect.pm:1139
 #, c-format
-msgid "DVB Adapter"
-msgstr ""
+msgid "DVB configuration"
+msgstr "Assètiu DVB"
 
-#: network/netconnect.pm:1156
+#: network/netconnect.pm:1140
+#, c-format
+msgid "DVB Adapter"
+msgstr "Adatadori DVB"
+
+#: network/netconnect.pm:1157
 #, c-format
 msgid "DVB adapter settings"
-msgstr ""
-
-#: network/netconnect.pm:1159
-#, c-format
-msgid "Adapter card"
-msgstr ""
+msgstr "Assètius de s'adatadori DVB"
 
 #: network/netconnect.pm:1160
 #, c-format
-msgid "Net demux"
-msgstr ""
+msgid "Adapter card"
+msgstr "Skeda adatadora"
 
 #: network/netconnect.pm:1161
 #, c-format
-msgid "PID"
-msgstr ""
+msgid "Net demux"
+msgstr "Net demux"
 
-#: network/netconnect.pm:1189
+#: network/netconnect.pm:1162
+#, c-format
+msgid "PID"
+msgstr "PID"
+
+#: network/netconnect.pm:1190
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -9861,67 +9942,67 @@ msgid ""
 "You may also enter the IP address of the gateway if you have one."
 msgstr ""
 
-#: network/netconnect.pm:1194
+#: network/netconnect.pm:1195
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
 msgstr ""
 
-#: network/netconnect.pm:1196 standalone/drakconnect:991
+#: network/netconnect.pm:1197 standalone/drakconnect:991
 #, c-format
 msgid "Host name (optional)"
 msgstr ""
 
-#: network/netconnect.pm:1196 standalone/drakhosts:197
+#: network/netconnect.pm:1197 standalone/drakhosts:197
 #, c-format
 msgid "Host name"
 msgstr "Nòmini host"
 
-#: network/netconnect.pm:1198
-#, c-format
-msgid "DNS server 1"
-msgstr ""
-
 #: network/netconnect.pm:1199
 #, c-format
-msgid "DNS server 2"
-msgstr ""
+msgid "DNS server 1"
+msgstr "DNS server 1"
 
 #: network/netconnect.pm:1200
 #, c-format
-msgid "DNS server 3"
-msgstr ""
+msgid "DNS server 2"
+msgstr "DNS server 2"
 
 #: network/netconnect.pm:1201
+#, c-format
+msgid "DNS server 3"
+msgstr "DNS server 3"
+
+#: network/netconnect.pm:1202
 #, c-format
 msgid "Search domain"
 msgstr ""
 
-#: network/netconnect.pm:1202
+#: network/netconnect.pm:1203
 #, c-format
 msgid "By default search domain will be set from the fully-qualified host name"
 msgstr ""
 
-#: network/netconnect.pm:1203
+#: network/netconnect.pm:1204
 #, c-format
 msgid "Gateway (e.g. %s)"
-msgstr ""
+msgstr "Gateway (p.e. %s)"
 
-#: network/netconnect.pm:1205
+#: network/netconnect.pm:1206
 #, c-format
 msgid "Gateway device"
 msgstr ""
 
-#: network/netconnect.pm:1214
+#: network/netconnect.pm:1215
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr ""
 
-#: network/netconnect.pm:1219 standalone/drakconnect:685
+#: network/netconnect.pm:1220 standalone/drakconnect:685
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr ""
 
-#: network/netconnect.pm:1232
+#: network/netconnect.pm:1233
 #, c-format
 msgid ""
 "If desired, enter a Zeroconf hostname.\n"
@@ -9930,88 +10011,90 @@ msgid ""
 "It is not necessary on most networks."
 msgstr ""
 
-#: network/netconnect.pm:1236
+#: network/netconnect.pm:1237
 #, c-format
 msgid "Zeroconf Host name"
 msgstr ""
 
-#: network/netconnect.pm:1239
+#: network/netconnect.pm:1240
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
-#: network/netconnect.pm:1249
+#: network/netconnect.pm:1250
 #, c-format
 msgid "Do you want to allow users to start the connection?"
 msgstr ""
 
-#: network/netconnect.pm:1262
+#: network/netconnect.pm:1263
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr ""
 
-#: network/netconnect.pm:1278
+#: network/netconnect.pm:1279
 #, c-format
 msgid "Automatically at boot"
-msgstr ""
+msgstr "In automàtigu a s'alluidura"
 
-#: network/netconnect.pm:1280
+#: network/netconnect.pm:1281
 #, c-format
 msgid "By using Net Applet in the system tray"
 msgstr ""
 
-#: network/netconnect.pm:1282
+#: network/netconnect.pm:1283
 #, c-format
 msgid "Manually (the interface would still be activated at boot)"
 msgstr ""
 
-#: network/netconnect.pm:1291
+#: network/netconnect.pm:1292
 #, c-format
 msgid "How do you want to dial this connection?"
 msgstr ""
 
-#: network/netconnect.pm:1304
+#: network/netconnect.pm:1305
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr ""
 
-#: network/netconnect.pm:1312 standalone/drakconnect:1023
+#: network/netconnect.pm:1313 standalone/drakconnect:1023
 #, c-format
 msgid "Testing your connection..."
 msgstr ""
 
-#: network/netconnect.pm:1332
-#, c-format
-msgid "The system is now connected to the Internet."
-msgstr ""
-
 #: network/netconnect.pm:1333
 #, c-format
-msgid "For security reasons, it will be disconnected now."
-msgstr ""
+msgid "The system is now connected to the Internet."
+msgstr "Su sistema imoi est acapiau a Internet."
 
 #: network/netconnect.pm:1334
+#, c-format
+msgid "For security reasons, it will be disconnected now."
+msgstr "Po arrexonis de siguresa, eus a segai s'acàpiu imoi."
+
+#: network/netconnect.pm:1335
 #, c-format
 msgid ""
 "The system does not seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
+"Su sistema no parit acapiau a Internet.\n"
+"Prova a assetiai torra s'acàpiu."
 
-#: network/netconnect.pm:1349
+#: network/netconnect.pm:1350
 #, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
 "\n"
 msgstr ""
 
-#: network/netconnect.pm:1352
+#: network/netconnect.pm:1353
 #, c-format
 msgid ""
 "After this is done, we recommend that you restart your X environment to "
 "avoid any hostname-related problems."
 msgstr ""
 
-#: network/netconnect.pm:1353
+#: network/netconnect.pm:1354
 #, c-format
 msgid ""
 "Problems occurred during configuration.\n"
@@ -10019,28 +10102,28 @@ msgid ""
 "work, you might want to relaunch the configuration."
 msgstr ""
 
-#: network/netconnect.pm:1364
+#: network/netconnect.pm:1365
 #, c-format
 msgid "(detected on port %s)"
 msgstr ""
 
 #. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
-#: network/netconnect.pm:1366
+#: network/netconnect.pm:1367
 #, c-format
 msgid "(detected %s)"
 msgstr ""
 
-#: network/netconnect.pm:1366
+#: network/netconnect.pm:1367
 #, c-format
 msgid "(detected)"
 msgstr ""
 
-#: network/netconnect.pm:1367
+#: network/netconnect.pm:1368
 #, c-format
 msgid "Network Configuration"
-msgstr ""
+msgstr "Assètiu arretza"
 
-#: network/netconnect.pm:1368
+#: network/netconnect.pm:1369
 #, c-format
 msgid ""
 "Because you are doing a network installation, your network is already "
@@ -10049,12 +10132,12 @@ msgid ""
 "Internet & Network connection.\n"
 msgstr ""
 
-#: network/netconnect.pm:1371
+#: network/netconnect.pm:1372
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it?"
 msgstr ""
 
-#: network/netconnect.pm:1372
+#: network/netconnect.pm:1373
 #, c-format
 msgid ""
 "A problem occurred while restarting the network: \n"
@@ -10062,7 +10145,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: network/netconnect.pm:1373
+#: network/netconnect.pm:1374
 #, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
@@ -10071,12 +10154,12 @@ msgid ""
 "Press \"%s\" to continue."
 msgstr ""
 
-#: network/netconnect.pm:1374
+#: network/netconnect.pm:1375
 #, c-format
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr ""
 
-#: network/netconnect.pm:1375
+#: network/netconnect.pm:1376
 #, c-format
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
@@ -10084,44 +10167,44 @@ msgid ""
 "\n"
 msgstr ""
 
-#: network/netconnect.pm:1376
+#: network/netconnect.pm:1377
 #, c-format
 msgid "Internet connection"
 msgstr ""
 
-#: network/netconnect.pm:1393
+#: network/netconnect.pm:1394
 #, c-format
 msgid ""
 "An unexpected error has happened:\n"
 "%s"
 msgstr ""
 
-#: network/network.pm:403 network/network.pm:404
+#: network/network.pm:409 network/network.pm:410
 #, c-format
 msgid "Proxies configuration"
 msgstr ""
 
-#: network/network.pm:405
+#: network/network.pm:411
 #, c-format
 msgid "HTTP proxy"
-msgstr ""
+msgstr "HTTP proxy"
 
-#: network/network.pm:406
+#: network/network.pm:412
 #, c-format
 msgid "FTP proxy"
-msgstr ""
+msgstr "FTP proxy"
 
-#: network/network.pm:409
+#: network/network.pm:415
 #, c-format
 msgid "Proxy should be http://..."
 msgstr ""
 
-#: network/network.pm:410
+#: network/network.pm:416
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr ""
 
-#: network/shorewall.pm:50
+#: network/shorewall.pm:55
 #, c-format
 msgid ""
 "Please enter the name of the interface connected to the internet.\n"
@@ -10132,12 +10215,12 @@ msgid ""
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
 
-#: network/thirdparty.pm:218
+#: network/thirdparty.pm:231
 #, c-format
 msgid "Copy the Alcatel microcode as mgmt.o in /usr/share/speedtouch/"
 msgstr ""
 
-#: network/thirdparty.pm:227
+#: network/thirdparty.pm:240
 #, c-format
 msgid ""
 "The ECI Hi-Focus modem cannot be supported due to binary driver distribution "
@@ -10146,58 +10229,58 @@ msgid ""
 "You can find a driver on http://eciadsl.flashtux.org/"
 msgstr ""
 
-#: network/thirdparty.pm:306
-#, fuzzy, c-format
+#: network/thirdparty.pm:319
+#, c-format
 msgid "Could not install the packages (%s)!"
-msgstr "No fait a aposentai su pakitu Xorg: %s"
+msgstr "No fait a aposentai is pakitus (%s)!"
 
-#: network/thirdparty.pm:314
+#: network/thirdparty.pm:327
 #, c-format
 msgid "Some packages (%s) are required but aren't available."
 msgstr ""
 
-#: network/thirdparty.pm:315
+#: network/thirdparty.pm:328
 #, c-format
 msgid ""
 "These packages can be found in Mandriva Club or in Mandriva commercial "
 "releases."
 msgstr ""
 
-#: network/thirdparty.pm:317
+#: network/thirdparty.pm:330
 #, c-format
 msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
 
-#: network/thirdparty.pm:357
+#: network/thirdparty.pm:370
 #, c-format
 msgid "Unable to find \"%s\" on your Windows system!"
 msgstr ""
 
-#: network/thirdparty.pm:359
+#: network/thirdparty.pm:372
 #, c-format
 msgid "No Windows system has been detected!"
 msgstr ""
 
-#: network/thirdparty.pm:369
+#: network/thirdparty.pm:382
 #, c-format
 msgid "Insert floppy"
-msgstr ""
+msgstr "Intra unu floppy"
 
-#: network/thirdparty.pm:370
+#: network/thirdparty.pm:383
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
 "press %s"
 msgstr ""
 
-#: network/thirdparty.pm:380
+#: network/thirdparty.pm:393
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr ""
 
-#: network/thirdparty.pm:390
+#: network/thirdparty.pm:403
 #, c-format
 msgid ""
 "You need the Alcatel microcode.\n"
@@ -10205,41 +10288,41 @@ msgid ""
 "or skip and do it later."
 msgstr ""
 
-#: network/thirdparty.pm:394 network/thirdparty.pm:396
+#: network/thirdparty.pm:407 network/thirdparty.pm:409
 #, c-format
 msgid "Use a floppy"
-msgstr ""
+msgstr "Imprea unu floppy"
 
-#: network/thirdparty.pm:394
+#: network/thirdparty.pm:407
 #, c-format
 msgid "Use my Windows partition"
-msgstr ""
+msgstr "Imprea sa pratzidura Windows"
 
-#: network/thirdparty.pm:404
+#: network/thirdparty.pm:417
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
 
-#: network/thirdparty.pm:409 standalone/drakautoinst:250
+#: network/thirdparty.pm:422 standalone/drakautoinst:250
 #: standalone/drakvpn:888 standalone/scannerdrake:405
 #, c-format
 msgid "Congratulations!"
-msgstr ""
+msgstr "Cumprimentus!"
 
-#: network/thirdparty.pm:409
+#: network/thirdparty.pm:422
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
 
-#: network/thirdparty.pm:477
+#: network/thirdparty.pm:490
 #, c-format
 msgid "Looking for required software and drivers..."
 msgstr ""
 
-#: network/thirdparty.pm:482
-#, fuzzy, c-format
+#: network/thirdparty.pm:495
+#, c-format
 msgid "Please wait, running device configuration commands..."
-msgstr "Abeta, circu e assètiu is trastus..."
+msgstr "Abeta, sigu is cumandus po assetiai trastus..."
 
 #: network/wireless.pm:8
 #, c-format
@@ -10358,42 +10441,42 @@ msgstr ""
 #: printer/data.pm:67
 #, c-format
 msgid "PDQ - Print, Do not Queue"
-msgstr ""
+msgstr "PDQ - Print, Do not Queue"
 
 #: printer/data.pm:68
 #, c-format
 msgid "PDQ"
-msgstr ""
+msgstr "PDQ"
 
 #: printer/data.pm:80
 #, c-format
 msgid "LPD - Line Printer Daemon"
-msgstr ""
+msgstr "LPD - Line Printer Daemon"
 
 #: printer/data.pm:81
 #, c-format
 msgid "LPD"
-msgstr ""
+msgstr "LPD"
 
 #: printer/data.pm:102
 #, c-format
 msgid "LPRng - LPR New Generation"
-msgstr ""
+msgstr "LPRng - LPR New Generation"
 
 #: printer/data.pm:103
 #, c-format
 msgid "LPRng"
-msgstr ""
+msgstr "LPRng"
 
 #: printer/data.pm:128
 #, c-format
 msgid "CUPS - Common Unix Printing System"
-msgstr ""
+msgstr "CUPS - Common Unix Printing System"
 
 #: printer/data.pm:158
 #, c-format
 msgid "CUPS - Common Unix Printing System (remote server)"
-msgstr ""
+msgstr "CUPS - Common Unix Printing System (server foranu)"
 
 #: printer/data.pm:159
 #, c-format
@@ -10414,18 +10497,18 @@ msgstr ""
 #: printer/main.pm:28
 #, c-format
 msgid "Remote printer"
-msgstr ""
+msgstr "Imprentadora forana"
 
 #: printer/main.pm:29
 #, c-format
 msgid "Printer on remote CUPS server"
-msgstr ""
+msgstr "Imprentadora cun server CUPS foranu"
 
 #: printer/main.pm:30 printer/printerdrake.pm:1373
 #: printer/printerdrake.pm:1920
 #, c-format
 msgid "Printer on remote lpd server"
-msgstr ""
+msgstr "Imprentadora cun server lpd foranu"
 
 #: printer/main.pm:31
 #, c-format
@@ -10654,7 +10737,7 @@ msgstr ""
 #: printer/main.pm:484
 #, c-format
 msgid "URI: %s"
-msgstr ""
+msgstr "URI: %s"
 
 #: printer/main.pm:687 printer/printerdrake.pm:1060
 #: printer/printerdrake.pm:3232
@@ -10671,22 +10754,22 @@ msgstr ""
 #: printer/main.pm:1309 printer/printerdrake.pm:227
 #, c-format
 msgid "Interface \"%s\""
-msgstr ""
+msgstr "Interfaci \"%s\""
 
 #: printer/main.pm:1311
 #, c-format
 msgid "Network %s"
-msgstr ""
+msgstr "Arretza %s"
 
 #: printer/main.pm:1313
 #, c-format
 msgid "Host %s"
-msgstr ""
+msgstr "Host %s"
 
 #: printer/main.pm:1342
 #, c-format
 msgid "%s (Port %s)"
-msgstr ""
+msgstr "%s (Porta %s)"
 
 #: printer/printerdrake.pm:24
 #, c-format
@@ -10711,6 +10794,8 @@ msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
+"Immoi podis sçoberai ki màkinas foranas, e calis màkinas foranas, podint "
+"lompi a is imprentadoras acapiadas a custa màkina."
 
 #: printer/printerdrake.pm:69
 #, c-format
@@ -10718,6 +10803,8 @@ msgid ""
 "You can also decide here whether printers on remote machines should be "
 "automatically made available on this machine."
 msgstr ""
+"Podis finas detzidi ki custa màkina potzat disponni in automàtigu de "
+"imprentadoras de màkinas foranas."
 
 #: printer/printerdrake.pm:72
 #, c-format
@@ -10737,18 +10824,18 @@ msgstr ""
 #: printer/printerdrake.pm:84
 #, c-format
 msgid "Custom configuration"
-msgstr ""
+msgstr "Assètiu personalisau"
 
 #: printer/printerdrake.pm:89 standalone/scannerdrake:593
 #: standalone/scannerdrake:610
 #, c-format
 msgid "No remote machines"
-msgstr ""
+msgstr "Nisçuna màkina forana"
 
 #: printer/printerdrake.pm:100
 #, c-format
 msgid "Additional CUPS servers: "
-msgstr ""
+msgstr "Server CUPS in açunta:"
 
 #: printer/printerdrake.pm:107
 #, c-format
@@ -10766,7 +10853,7 @@ msgstr ""
 #: printer/printerdrake.pm:115
 #, c-format
 msgid "Japanese text printing mode"
-msgstr ""
+msgstr "Modalidadi de imprenta de scritu japonesu"
 
 #: printer/printerdrake.pm:116
 #, c-format
@@ -10811,13 +10898,13 @@ msgstr ""
 #: printer/printerdrake.pm:141
 #, c-format
 msgid "On"
-msgstr ""
+msgstr "On"
 
 #: printer/printerdrake.pm:143 printer/printerdrake.pm:498
 #: printer/printerdrake.pm:525
 #, c-format
 msgid "Off"
-msgstr ""
+msgstr "Off"
 
 #: printer/printerdrake.pm:144 printer/printerdrake.pm:507
 #, c-format
@@ -10951,7 +11038,7 @@ msgstr ""
 #: standalone/drakups:251 standalone/harddrake2:52
 #, c-format
 msgid "Port"
-msgstr ""
+msgstr "Porta"
 
 #: printer/printerdrake.pm:495 printer/printerdrake.pm:511
 #: printer/printerdrake.pm:526 printer/printerdrake.pm:530
@@ -11018,9 +11105,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Aministradori de Siguresa"
+msgstr "Aministradori automàtigu imprentadora"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -11030,9 +11117,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Assètiu automàtigu"
+msgstr "Assètia in automàtigu is imprentadoras noas"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
 #, c-format
@@ -11052,7 +11139,7 @@ msgstr ""
 #: printer/printerdrake.pm:640
 #, c-format
 msgid "Re-enable disabled printers"
-msgstr ""
+msgstr "Abiva torra is imprentadoras disabivadas"
 
 #: printer/printerdrake.pm:644
 #, c-format
@@ -11085,7 +11172,7 @@ msgstr ""
 #: printer/printerdrake.pm:701
 #, c-format
 msgid "Do not disable the printer"
-msgstr ""
+msgstr "No disbivist s'imprentadora"
 
 #: printer/printerdrake.pm:704
 #, c-format
@@ -11269,14 +11356,14 @@ msgid "Do not setup printer automatically again"
 msgstr ""
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "Nisçuna imprentadora"
+msgstr "Imprentadoras noas agatadas"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "Nisçuna imprentadora"
+msgstr "Imprentadora noa agatada"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -11309,17 +11396,17 @@ msgstr ""
 #: printer/printerdrake.pm:1062
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: printer/printerdrake.pm:1063
 #, c-format
 msgid " on "
-msgstr ""
+msgstr "in"
 
 #: printer/printerdrake.pm:1064 standalone/scannerdrake:137
 #, c-format
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: printer/printerdrake.pm:1069 printer/printerdrake.pm:3239
 #, c-format
@@ -11367,9 +11454,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:1125 printer/printerdrake.pm:5139
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Aministradori de Siguresa"
+msgstr "Assètia Aministradura automàtiga"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -11740,7 +11827,7 @@ msgstr ""
 #: standalone/drakbackup:605 standalone/drakbackup:640
 #: standalone/drakbackup:741 standalone/draknfs:203
 #: standalone/draksambashare:623 standalone/draksambashare:790
-#: standalone/harddrake2:259
+#: standalone/harddrake2:256
 #, c-format
 msgid "Information"
 msgstr "Sceda"
@@ -11825,7 +11912,7 @@ msgstr ""
 #: printer/printerdrake.pm:1911
 #, c-format
 msgid "SECURITY WARNING!"
-msgstr ""
+msgstr "AVISU DE SIGURESA!"
 
 #: printer/printerdrake.pm:1912
 #, c-format
@@ -12030,14 +12117,14 @@ msgstr ""
 #: printer/printerdrake.pm:2489
 #, c-format
 msgid "HPLIP"
-msgstr ""
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2430 printer/printerdrake.pm:2433
 #: printer/printerdrake.pm:2603 printer/printerdrake.pm:2609
 #: printer/printerdrake.pm:2620
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2438
 #, c-format
@@ -12280,7 +12367,7 @@ msgstr ""
 #: standalone/scannerdrake:242 standalone/scannerdrake:250
 #, c-format
 msgid "Floppy Disk"
-msgstr ""
+msgstr "Floppy Disk"
 
 #: printer/printerdrake.pm:3303 printer/printerdrake.pm:3312
 #: standalone/scannerdrake:184 standalone/scannerdrake:194
@@ -13121,7 +13208,7 @@ msgstr ""
 #: printer/printerdrake.pm:5130
 #, c-format
 msgid "CUPS configuration"
-msgstr ""
+msgstr "Assètiu CUPS"
 
 #: printer/printerdrake.pm:5151
 #, c-format
@@ -13295,7 +13382,7 @@ msgstr ""
 #: standalone/scannerdrake:516 standalone/scannerdrake:581
 #, c-format
 msgid "Scannerdrake"
-msgstr ""
+msgstr "Scannerdrake"
 
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
@@ -14333,17 +14420,17 @@ msgstr "Firma"
 #: share/advertising/01.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Packs"
-msgstr ""
+msgstr "Mandriva Linux 2006: pakitus"
 
 #: share/advertising/02.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More features"
-msgstr ""
+msgstr "Mandriva Linux 2006: prus abilidadis"
 
 #: share/advertising/03.pl:3
 #, c-format
 msgid "Interactive firewall"
-msgstr ""
+msgstr "Interactive firewall"
 
 #: share/advertising/04.pl:3
 #, c-format
@@ -14358,7 +14445,7 @@ msgstr ""
 #: share/advertising/06.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More performances"
-msgstr ""
+msgstr "Mandriva Linux 2006: prus traballanti"
 
 #: share/advertising/07.pl:3
 #, c-format
@@ -14373,7 +14460,7 @@ msgstr ""
 #: share/advertising/09.pl:3
 #, c-format
 msgid "Delta RPM"
-msgstr ""
+msgstr "Delta RPM"
 
 #: share/advertising/10.pl:3
 #, c-format
@@ -14383,12 +14470,12 @@ msgstr ""
 #: share/advertising/11.pl:3
 #, c-format
 msgid "Boot time reduction"
-msgstr ""
+msgstr "Tempus de alluidura arredùsiu"
 
 #: share/advertising/12.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Easier to use"
-msgstr ""
+msgstr "Mandriva Linux 2006: Prus simpli a d'impreai"
 
 #: share/advertising/13.pl:3
 #, c-format
@@ -14398,12 +14485,12 @@ msgstr ""
 #: share/advertising/14.pl:3
 #, c-format
 msgid "auto-installation servers"
-msgstr ""
+msgstr "server po aposentai in automàtigu"
 
 #: share/advertising/15.pl:3
 #, c-format
 msgid "Easy and quick installation"
-msgstr ""
+msgstr "Aposentadura simpli e lestra"
 
 #: share/advertising/16.pl:3
 #, c-format
@@ -14423,27 +14510,27 @@ msgstr ""
 #: share/advertising/19.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More support"
-msgstr ""
+msgstr "Mandriva Linux 2006: prus suportu"
 
 #: share/advertising/20.pl:3
 #, c-format
 msgid "Better Hardware support"
-msgstr ""
+msgstr "suportu hardware amellorau"
 
 #: share/advertising/21.pl:3
 #, c-format
 msgid "Xen support"
-msgstr ""
+msgstr "suportu Xen"
 
 #: share/advertising/22.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More information"
-msgstr ""
+msgstr "Mandriva Linux 2006: prus imformatzioni"
 
 #: share/advertising/23.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Where to buy?"
-msgstr ""
+msgstr "Mandriva Linux 2006: aundi fait a da comporai?"
 
 #: share/advertising/24.pl:3
 #, c-format
@@ -14458,6 +14545,11 @@ msgstr ""
 #: share/advertising/26.pl:3
 #, c-format
 msgid "How to maintain your system up-to-date?"
+msgstr ""
+
+#: share/advertising/skype.pl:3
+#, c-format
+msgid "Skype lets you make calls through the Internet for free."
 msgstr ""
 
 #: share/compssUsers.pl:26
@@ -14559,7 +14651,7 @@ msgstr ""
 #: share/compssUsers.pl:75 share/compssUsers.pl:178
 #, c-format
 msgid "LSB"
-msgstr ""
+msgstr "LSB"
 
 #: share/compssUsers.pl:76 share/compssUsers.pl:179
 #, c-format
@@ -14569,7 +14661,7 @@ msgstr ""
 #: share/compssUsers.pl:86
 #, c-format
 msgid "Apache"
-msgstr ""
+msgstr "Apache"
 
 #: share/compssUsers.pl:89
 #, c-format
@@ -14579,47 +14671,47 @@ msgstr "Traballu in Grupu"
 #: share/compssUsers.pl:90
 #, c-format
 msgid "Kolab Server"
-msgstr ""
+msgstr "Server Kolab"
 
 #: share/compssUsers.pl:93 share/compssUsers.pl:134
 #, c-format
 msgid "Firewall/Router"
-msgstr ""
+msgstr "Firewall/Router"
 
 #: share/compssUsers.pl:94 share/compssUsers.pl:135
 #, c-format
 msgid "Internet gateway"
-msgstr ""
+msgstr "Gateway po Internet"
 
 #: share/compssUsers.pl:97
 #, c-format
 msgid "Mail/News"
-msgstr ""
+msgstr "Curreu/Noas"
 
 #: share/compssUsers.pl:98
 #, c-format
 msgid "Postfix mail server, Inn news server"
-msgstr ""
+msgstr "Server de curreu Postfix, server de noas Inn"
 
 #: share/compssUsers.pl:101
 #, c-format
 msgid "Directory Server"
-msgstr ""
+msgstr "Server de Directory"
 
 #: share/compssUsers.pl:105
 #, c-format
 msgid "FTP Server"
-msgstr ""
+msgstr "Server FTP"
 
 #: share/compssUsers.pl:106
 #, c-format
 msgid "ProFTPd"
-msgstr ""
+msgstr "ProFTPd"
 
 #: share/compssUsers.pl:109
 #, c-format
 msgid "DNS/NIS"
-msgstr ""
+msgstr "DNS/NIS"
 
 #: share/compssUsers.pl:110
 #, c-format
@@ -14634,27 +14726,27 @@ msgstr ""
 #: share/compssUsers.pl:114
 #, c-format
 msgid "NFS Server, Samba server"
-msgstr ""
+msgstr "Server NFS, server Samba"
 
 #: share/compssUsers.pl:117 share/compssUsers.pl:130
 #, c-format
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: share/compssUsers.pl:118
 #, c-format
 msgid "PostgreSQL and MySQL Database Server"
-msgstr ""
+msgstr "Server po Database PostGreSQL e MySQL"
 
 #: share/compssUsers.pl:122
 #, c-format
 msgid "Web/FTP"
-msgstr ""
+msgstr "Web/FTP"
 
 #: share/compssUsers.pl:123
 #, c-format
 msgid "Apache, Pro-ftpd"
-msgstr ""
+msgstr "Apache, Pro-ftpd"
 
 #: share/compssUsers.pl:126
 #, c-format
@@ -14664,12 +14756,12 @@ msgstr "Curreu"
 #: share/compssUsers.pl:127
 #, c-format
 msgid "Postfix mail server"
-msgstr ""
+msgstr "Server de curreu Postfix"
 
 #: share/compssUsers.pl:131
 #, c-format
 msgid "PostgreSQL or MySQL database server"
-msgstr ""
+msgstr "Server po Database PostGreSQL e MySQL"
 
 #: share/compssUsers.pl:138
 #, c-format
@@ -14684,7 +14776,7 @@ msgstr ""
 #: share/compssUsers.pl:147
 #, c-format
 msgid "KDE Workstation"
-msgstr ""
+msgstr "KDE Workstation"
 
 #: share/compssUsers.pl:148
 #, c-format
@@ -14696,7 +14788,7 @@ msgstr ""
 #: share/compssUsers.pl:152
 #, c-format
 msgid "GNOME Workstation"
-msgstr ""
+msgstr "GNOME Workstation"
 
 #: share/compssUsers.pl:153
 #, c-format
@@ -14706,19 +14798,19 @@ msgid ""
 msgstr ""
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Plucker Desktop"
+msgstr "IceWm Desktop"
 
 #: share/compssUsers.pl:160
 #, c-format
 msgid "Other Graphical Desktops"
-msgstr ""
+msgstr "Atras scrianias gràfigas"
 
 #: share/compssUsers.pl:161
 #, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -14728,12 +14820,12 @@ msgstr ""
 #: share/compssUsers.pl:186 share/compssUsers.pl:187 standalone/logdrake:384
 #, c-format
 msgid "SSH Server"
-msgstr ""
+msgstr "Server SSH"
 
 #: share/compssUsers.pl:191
 #, c-format
 msgid "Webmin"
-msgstr ""
+msgstr "Webmin"
 
 #: share/compssUsers.pl:192
 #, c-format
@@ -15059,7 +15151,7 @@ msgstr ""
 #: standalone/drakTermServ:394
 #, c-format
 msgid "Please save dhcpd config!"
-msgstr ""
+msgstr "Po praxeri, sarva s'assètiu de dhcpd!"
 
 #: standalone/drakTermServ:422
 #, c-format
@@ -15084,23 +15176,23 @@ msgstr ""
 #: standalone/drakTermServ:446
 #, c-format
 msgid "Creating net boot images for all kernels"
-msgstr ""
+msgstr "Creu is màginis de alluidura de arretza po totu is kernel"
 
 #: standalone/drakTermServ:447 standalone/drakTermServ:769
 #: standalone/drakTermServ:785
 #, c-format
 msgid "This will take a few minutes."
-msgstr ""
+msgstr "Ant a serbiri unus cantu minudus."
 
 #: standalone/drakTermServ:453 standalone/drakTermServ:493
 #, c-format
 msgid "Done!"
-msgstr ""
+msgstr "Fatu!"
 
 #: standalone/drakTermServ:464 standalone/drakTermServ:849
 #, c-format
 msgid "%s failed"
-msgstr ""
+msgstr "%s faddiu"
 
 #: standalone/drakTermServ:473
 #, c-format
@@ -15311,27 +15403,27 @@ msgstr ""
 #: standalone/drakTermServ:663
 #, c-format
 msgid "Boot Floppy"
-msgstr ""
+msgstr "Boot Floppy"
 
 #: standalone/drakTermServ:665
 #, c-format
 msgid "Boot ISO"
-msgstr ""
+msgstr "Boot ISO"
 
 #: standalone/drakTermServ:667
 #, c-format
 msgid "PXE Image"
-msgstr ""
+msgstr "Màgini PXE"
 
 #: standalone/drakTermServ:728
 #, c-format
 msgid "Default kernel version"
-msgstr ""
+msgstr "Versioni kernel predefinia"
 
 #: standalone/drakTermServ:731
 #, c-format
 msgid "Create PXE images."
-msgstr ""
+msgstr "Crea màginis PXE."
 
 #: standalone/drakTermServ:757
 #, c-format
@@ -15366,7 +15458,7 @@ msgstr ""
 #: standalone/drakTermServ:797
 #, c-format
 msgid "<-- Delete"
-msgstr ""
+msgstr "<-- Burra"
 
 #: standalone/drakTermServ:802
 #, c-format
@@ -15426,7 +15518,7 @@ msgstr ""
 #: standalone/drakTermServ:1114
 #, c-format
 msgid "Thin Client"
-msgstr ""
+msgstr "Thin Client"
 
 #: standalone/drakTermServ:1118
 #, c-format
@@ -15500,12 +15592,12 @@ msgstr ""
 #: standalone/drakTermServ:1300
 #, c-format
 msgid "Subnet:"
-msgstr ""
+msgstr "Subnet:"
 
 #: standalone/drakTermServ:1307
 #, c-format
 msgid "Netmask:"
-msgstr ""
+msgstr "Netmask:"
 
 #: standalone/drakTermServ:1314
 #, c-format
@@ -15515,7 +15607,7 @@ msgstr ""
 #: standalone/drakTermServ:1321
 #, c-format
 msgid "Subnet Mask:"
-msgstr ""
+msgstr "Subnet Mask:"
 
 #: standalone/drakTermServ:1328
 #, c-format
@@ -15706,12 +15798,12 @@ msgstr ""
 #: standalone/drakautoinst:60
 #, c-format
 msgid "replay"
-msgstr ""
+msgstr "arrepiti"
 
 #: standalone/drakautoinst:60 standalone/drakautoinst:69
 #, c-format
 msgid "manual"
-msgstr ""
+msgstr "manuali"
 
 #: standalone/drakautoinst:64
 #, c-format
@@ -15765,12 +15857,12 @@ msgstr "Aposentada automàtiga"
 #: standalone/drakautoinst:356
 #, c-format
 msgid "Add an item"
-msgstr ""
+msgstr "Açungi una boxi"
 
 #: standalone/drakautoinst:363
 #, c-format
 msgid "Remove the last item"
-msgstr ""
+msgstr "Burra s'ùrtima boxi"
 
 #: standalone/drakbackup:153
 #, c-format
@@ -16348,7 +16440,7 @@ msgstr ""
 #: standalone/drakbackup:2040
 #, c-format
 msgid "CD-R / DVD-R"
-msgstr ""
+msgstr "CD-R / DVD-R"
 
 #: standalone/drakbackup:2045
 #, c-format
@@ -16359,126 +16451,126 @@ msgstr ""
 #: standalone/drakbackup:2066
 #, c-format
 msgid "hourly"
-msgstr ""
+msgstr "dònnia ora"
 
 #: standalone/drakbackup:2060 standalone/drakbackup:2062
 #: standalone/drakbackup:2067
 #, c-format
 msgid "daily"
-msgstr ""
+msgstr "dònnia dii"
 
 #: standalone/drakbackup:2060 standalone/drakbackup:2063
 #: standalone/drakbackup:2068
 #, c-format
 msgid "weekly"
-msgstr ""
+msgstr "dònnia cida"
 
 #: standalone/drakbackup:2060 standalone/drakbackup:2064
 #: standalone/drakbackup:2069
 #, c-format
 msgid "monthly"
-msgstr ""
+msgstr "dònnia mesi"
 
 #: standalone/drakbackup:2060 standalone/drakbackup:2065
 #: standalone/drakbackup:2070
 #, c-format
 msgid "custom"
-msgstr ""
+msgstr "apersonau"
 
 #: standalone/drakbackup:2074
 #, c-format
 msgid "January"
-msgstr ""
+msgstr "Gennarju"
 
 #: standalone/drakbackup:2074
 #, c-format
 msgid "February"
-msgstr ""
+msgstr "Friarju"
 
 #: standalone/drakbackup:2074
 #, c-format
 msgid "March"
-msgstr ""
+msgstr "Martzu"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "April"
-msgstr ""
+msgstr "Abrili"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "May"
-msgstr ""
+msgstr "Mayu"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "June"
-msgstr ""
+msgstr "Làmpadas"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "July"
-msgstr ""
+msgstr "Arjolas"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "August"
-msgstr ""
+msgstr "Austu"
 
 #: standalone/drakbackup:2075
 #, c-format
 msgid "September"
-msgstr ""
+msgstr "Cabudanni"
 
 #: standalone/drakbackup:2076
 #, c-format
 msgid "October"
-msgstr ""
+msgstr "Ladàmini"
 
 #: standalone/drakbackup:2076
 #, c-format
 msgid "November"
-msgstr ""
+msgstr "Donniasantu"
 
 #: standalone/drakbackup:2076
 #, c-format
 msgid "December"
-msgstr ""
+msgstr "Idas"
 
 #: standalone/drakbackup:2079
 #, c-format
 msgid "Sunday"
-msgstr ""
+msgstr "Domìnigu"
 
 #: standalone/drakbackup:2079
 #, c-format
 msgid "Monday"
-msgstr ""
+msgstr "Lunis"
 
 #: standalone/drakbackup:2079
 #, c-format
 msgid "Tuesday"
-msgstr ""
+msgstr "Martis"
 
 #: standalone/drakbackup:2080
 #, c-format
 msgid "Wednesday"
-msgstr ""
+msgstr "Mèrcuris"
 
 #: standalone/drakbackup:2080
 #, c-format
 msgid "Thursday"
-msgstr ""
+msgstr "Jòbia"
 
 #: standalone/drakbackup:2080
 #, c-format
 msgid "Friday"
-msgstr ""
+msgstr "Cenàbara"
 
 #: standalone/drakbackup:2080
 #, c-format
 msgid "Saturday"
-msgstr ""
+msgstr "Sàbudu"
 
 #: standalone/drakbackup:2112
 #, c-format
@@ -16498,7 +16590,7 @@ msgstr ""
 #: standalone/drakbackup:2127
 #, c-format
 msgid "Minute"
-msgstr ""
+msgstr "Minudu"
 
 #: standalone/drakbackup:2131
 #, c-format
@@ -16508,17 +16600,17 @@ msgstr "Ora"
 #: standalone/drakbackup:2135
 #, c-format
 msgid "Day"
-msgstr ""
+msgstr "Dii"
 
 #: standalone/drakbackup:2139
 #, c-format
 msgid "Month"
-msgstr ""
+msgstr "Mesi"
 
 #: standalone/drakbackup:2143
 #, c-format
 msgid "Weekday"
-msgstr ""
+msgstr "Dii de sa cida"
 
 #: standalone/drakbackup:2149
 #, c-format
@@ -16559,12 +16651,12 @@ msgstr ""
 #: standalone/drakbackup:2216
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Bivimentu de torrada po su curreu mandau:"
 
 #: standalone/drakbackup:2222
 #, c-format
 msgid "SMTP server for mail:"
-msgstr ""
+msgstr "Server SMTP po su curreu:"
 
 #: standalone/drakbackup:2227
 #, c-format
@@ -16574,22 +16666,22 @@ msgstr ""
 #: standalone/drakbackup:2270
 #, c-format
 msgid "What"
-msgstr ""
+msgstr "Ita"
 
 #: standalone/drakbackup:2275
 #, c-format
 msgid "Where"
-msgstr ""
+msgstr "Aundi"
 
 #: standalone/drakbackup:2280
 #, c-format
 msgid "When"
-msgstr ""
+msgstr "Candu"
 
 #: standalone/drakbackup:2285
 #, c-format
 msgid "More Options"
-msgstr ""
+msgstr "Atras Sceras"
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -16619,7 +16711,7 @@ msgstr ""
 #: standalone/drakbackup:2337
 #, c-format
 msgid "On CD-R"
-msgstr ""
+msgstr "Apitzus de CD-R"
 
 #: standalone/drakbackup:2337
 #, c-format
@@ -16718,7 +16810,7 @@ msgstr ""
 #: standalone/drakbackup:2519
 #, c-format
 msgid "RW"
-msgstr ""
+msgstr "RW"
 
 #: standalone/drakbackup:2520
 #, c-format
@@ -16823,7 +16915,7 @@ msgstr ""
 #: standalone/drakbackup:2543
 #, c-format
 msgid "\t-CD-R.\n"
-msgstr ""
+msgstr "\t-CD-R.\n"
 
 #: standalone/drakbackup:2544
 #, c-format
@@ -17333,9 +17425,9 @@ msgid "Graphical boot theme selection"
 msgstr ""
 
 #: standalone/drakboot:149
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical boot mode:"
-msgstr "Ambienti Gràfigu"
+msgstr "Modalidadi gràfiga de alluidura:"
 
 #: standalone/drakboot:151
 #, c-format
@@ -17400,7 +17492,7 @@ msgstr ""
 #: standalone/drakbug:46
 #, c-format
 msgid "Mandriva Linux Control Center"
-msgstr ""
+msgstr "Centru de Controllu Mandriva Linux"
 
 #: standalone/drakbug:48
 #, c-format
@@ -17430,7 +17522,7 @@ msgstr "Menudrake"
 #: standalone/drakbug:53
 #, c-format
 msgid "Msec"
-msgstr ""
+msgstr "Msec"
 
 #: standalone/drakbug:54
 #, c-format
@@ -17445,7 +17537,7 @@ msgstr "Manijadori de is programas"
 #: standalone/drakbug:56
 #, c-format
 msgid "Urpmi"
-msgstr ""
+msgstr "Urpmi"
 
 #: standalone/drakbug:57
 #, c-format
@@ -17482,12 +17574,12 @@ msgstr ""
 #: standalone/drakbug:87
 #, c-format
 msgid "Package: "
-msgstr ""
+msgstr "Pakitu: "
 
 #: standalone/drakbug:88
 #, c-format
 msgid "Kernel:"
-msgstr ""
+msgstr "Kernel:"
 
 #: standalone/drakbug:101
 #, c-format
@@ -17502,7 +17594,7 @@ msgstr ""
 #: standalone/drakbug:107
 #, c-format
 msgid "Report"
-msgstr ""
+msgstr "Arrelata"
 
 #: standalone/drakbug:162
 #, c-format
@@ -17517,7 +17609,7 @@ msgstr ""
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
-msgstr ""
+msgstr "DrakClock"
 
 #: standalone/drakclock:39
 #, c-format
@@ -17532,12 +17624,12 @@ msgstr ""
 #: standalone/drakclock:45
 #, c-format
 msgid "Timezone - DrakClock"
-msgstr ""
+msgstr "Timezone - DrakClock"
 
 #: standalone/drakclock:47
 #, c-format
 msgid "GMT - DrakClock"
-msgstr ""
+msgstr "GMT - DrakClock"
 
 #: standalone/drakclock:47
 #, c-format
@@ -17564,7 +17656,7 @@ msgstr ""
 #: standalone/drakclock:86
 #, c-format
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: standalone/drakclock:124
 #, c-format
@@ -17593,12 +17685,12 @@ msgstr ""
 #: standalone/drakconnect:89 standalone/drakconnect:807
 #, c-format
 msgid "Gateway:"
-msgstr ""
+msgstr "Gateway:"
 
 #: standalone/drakconnect:89 standalone/drakconnect:807
 #, c-format
 msgid "Interface:"
-msgstr ""
+msgstr "Interfaci:"
 
 #: standalone/drakconnect:93 standalone/net_monitor:116
 #, c-format
@@ -17608,7 +17700,7 @@ msgstr ""
 #: standalone/drakconnect:109
 #, c-format
 msgid "Interface"
-msgstr ""
+msgstr "Interfaci"
 
 #: standalone/drakconnect:109 standalone/printerdrake:224
 #: standalone/printerdrake:231
@@ -17655,7 +17747,7 @@ msgstr ""
 #: standalone/drakconnect:296
 #, c-format
 msgid "IP configuration"
-msgstr ""
+msgstr "Assètiu IP"
 
 #: standalone/drakconnect:335
 #, c-format
@@ -17675,7 +17767,7 @@ msgstr ""
 #: standalone/drakconnect:351
 #, c-format
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #: standalone/drakconnect:515
 #, c-format
@@ -17715,12 +17807,12 @@ msgstr ""
 #: standalone/drakconnect:542 standalone/drakgw:105
 #, c-format
 msgid "Enable"
-msgstr ""
+msgstr "Abiva"
 
 #: standalone/drakconnect:542 standalone/drakgw:105
 #, c-format
 msgid "Disable"
-msgstr ""
+msgstr "Disabiva"
 
 #: standalone/drakconnect:593 standalone/harddrake2:50
 #, c-format
@@ -17741,7 +17833,7 @@ msgstr ""
 #: standalone/harddrake2:120
 #, c-format
 msgid "Bus"
-msgstr ""
+msgstr "Bus"
 
 #: standalone/drakconnect:597 standalone/harddrake2:34
 #, c-format
@@ -17871,7 +17963,7 @@ msgid ""
 msgstr ""
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
-#: standalone/drakconnect:976 standalone/drakroam:30 standalone/net_applet:52
+#: standalone/drakconnect:976 standalone/drakroam:34 standalone/net_applet:52
 #, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
 msgstr "Assètia un'atra interfaci de arretza (LAN, ISDN, ADSL, ...)"
@@ -17909,17 +18001,17 @@ msgstr ""
 #: standalone/drakedm:40
 #, c-format
 msgid "GDM (GNOME Display Manager)"
-msgstr ""
+msgstr "GDM (GNOME Display Manager)"
 
 #: standalone/drakedm:41
 #, c-format
 msgid "KDM (KDE Display Manager)"
-msgstr ""
+msgstr "KDM (KDE Display Manager)"
 
 #: standalone/drakedm:42
 #, c-format
 msgid "XDM (X Display Manager)"
-msgstr ""
+msgstr "XDM (X Display Manager)"
 
 #: standalone/drakedm:53
 #, c-format
@@ -17971,7 +18063,7 @@ msgstr ""
 #: standalone/drakfont:412 standalone/drakfont:426
 #, c-format
 msgid "done"
-msgstr ""
+msgstr "fatu"
 
 #: standalone/drakfont:223
 #, c-format
@@ -18061,7 +18153,7 @@ msgstr ""
 #: standalone/drakfont:474 standalone/drakfont:483
 #, c-format
 msgid "DrakFont"
-msgstr ""
+msgstr "DrakFont"
 
 #: standalone/drakfont:484
 #, c-format
@@ -18086,7 +18178,7 @@ msgstr ""
 #: standalone/drakfont:494
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Cobera is llitras de Windows"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:512
@@ -18101,6 +18193,14 @@ msgid ""
 "\n"
 "       VIGNAUD Thierry <tvignaud@mandriva.com>"
 msgstr ""
+"Copyright (C) 2001-2002 by Mandriva \n"
+"\n"
+"\n"
+"       DUPONT Sebastien (original version)\n"
+"\n"
+"       CHAUMETTE Damien <dchaumette@mandriva.com>\n"
+"\n"
+"       VIGNAUD Thierry <tvignaud@mandriva.com>"
 
 #: standalone/drakfont:521
 #, c-format
@@ -18158,17 +18258,17 @@ msgstr ""
 #: standalone/drakfont:567
 #, c-format
 msgid "Ghostscript"
-msgstr ""
+msgstr "Ghostscript"
 
 #: standalone/drakfont:568
 #, c-format
 msgid "StarOffice"
-msgstr ""
+msgstr "StarOffice"
 
 #: standalone/drakfont:569
 #, c-format
 msgid "Abiword"
-msgstr ""
+msgstr "Abiword"
 
 #: standalone/drakfont:570
 #, c-format
@@ -18303,9 +18403,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakgw:105
-#, fuzzy, c-format
+#, c-format
 msgid "Reconfigure"
-msgstr "assetiau"
+msgstr "Torra a assetiai"
 
 #: standalone/drakgw:145
 #, c-format
@@ -18369,9 +18469,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakgw:243
-#, fuzzy, c-format
+#, c-format
 msgid "Use automatic configuration (DHCP)"
-msgstr "Assètiu automàtigu"
+msgstr "Imprea assètiu automàtigu (DHCP)"
 
 #: standalone/drakgw:244
 #, c-format
@@ -18521,24 +18621,24 @@ msgid "Please add an host to be able to modify it."
 msgstr ""
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Scedas discu tostau"
+msgstr "Muda informatzioni"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Scedas discu tostau"
+msgstr "Burra informatzioni"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Scedas discu tostau"
+msgstr "Açungi informatzioni"
 
 #: standalone/drakhosts:115
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Bivimentu IP:"
 
 #: standalone/drakhosts:116
 #, c-format
@@ -18553,7 +18653,7 @@ msgstr ""
 #: standalone/drakhosts:123
 #, c-format
 msgid "Please enter a valid IP address."
-msgstr ""
+msgstr "Intra unu bivimentu IP bonu."
 
 #: standalone/drakhosts:129
 #, c-format
@@ -18586,9 +18686,9 @@ msgid "Failed to remove host."
 msgstr ""
 
 #: standalone/drakids:26
-#, fuzzy, c-format
+#, c-format
 msgid "Allowed addresses"
-msgstr "Permiti a totu is umperadoris"
+msgstr "Bivimentus permìtius"
 
 #: standalone/drakids:57
 #, c-format
@@ -18596,24 +18696,24 @@ msgid "Log"
 msgstr ""
 
 #: standalone/drakids:61
-#, fuzzy, c-format
+#, c-format
 msgid "Clear logs"
-msgstr "Lìmpia totu"
+msgstr "Lìmpia is arrelatas"
 
-#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:439
+#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:464
 #, c-format
 msgid "Blacklist"
-msgstr ""
+msgstr "Blacklist"
 
-#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:444
+#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:469
 #, c-format
 msgid "Whitelist"
-msgstr ""
+msgstr "Whitelist"
 
 #: standalone/drakids:71
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Burra de LVM"
+msgstr "Burra de sa blacklist"
 
 #: standalone/drakids:72
 #, c-format
@@ -18621,21 +18721,21 @@ msgid "Move to whitelist"
 msgstr ""
 
 #: standalone/drakids:84
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Burra de LVM"
+msgstr "Burra de sa whitelist"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
-#: standalone/drakroam:140 standalone/net_applet:180 standalone/net_applet:354
-#, fuzzy, c-format
+#: standalone/drakroam:182 standalone/net_applet:201 standalone/net_applet:379
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "No potzu cuntatai su sprigu %s"
+msgstr "No potzu cuntatai su dimòniu"
 
 #: standalone/drakids:202
-#, fuzzy, c-format
+#, c-format
 msgid "Date"
-msgstr "Burra"
+msgstr "Data"
 
 #: standalone/drakids:203
 #, c-format
@@ -18648,14 +18748,14 @@ msgid "Attack type"
 msgstr ""
 
 #: standalone/drakids:205
-#, fuzzy, c-format
+#, c-format
 msgid "Service"
-msgstr "Serbìtzius"
+msgstr "Serbìtziu"
 
-#: standalone/drakids:206
-#, fuzzy, c-format
+#: standalone/drakids:206 standalone/net_applet:72
+#, c-format
 msgid "Network interface"
-msgstr "Arretza & Internet"
+msgstr "Interfaci de arretza"
 
 #: standalone/draknfs:41
 #, c-format
@@ -18680,7 +18780,7 @@ msgstr ""
 #: standalone/draknfs:83
 #, c-format
 msgid "NFS server"
-msgstr ""
+msgstr "Server NFS"
 
 #: standalone/draknfs:83
 #, c-format
@@ -18700,7 +18800,7 @@ msgstr ""
 #: standalone/draknfs:105 standalone/draksambashare:202
 #, c-format
 msgid "Should be a directory."
-msgstr ""
+msgstr "Iat a depi essi una directory."
 
 #: standalone/draknfs:136
 #, c-format
@@ -18813,13 +18913,13 @@ msgstr ""
 #: standalone/draknfs:389
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Directory NFS"
 
 #: standalone/draknfs:391 standalone/draksambashare:588
 #: standalone/draksambashare:767
 #, c-format
 msgid "Directory:"
-msgstr ""
+msgstr "Directory:"
 
 #: standalone/draknfs:394
 #, c-format
@@ -18940,12 +19040,12 @@ msgstr ""
 #: standalone/drakperm:43
 #, c-format
 msgid "Editable"
-msgstr ""
+msgstr "Mudaditzu"
 
 #: standalone/drakperm:48 standalone/drakperm:323 standalone/draksambashare:95
 #, c-format
 msgid "Path"
-msgstr ""
+msgstr "Mori"
 
 #: standalone/drakperm:48 standalone/drakperm:250
 #, c-format
@@ -18955,7 +19055,7 @@ msgstr "Umperadori"
 #: standalone/drakperm:48 standalone/drakperm:250
 #, c-format
 msgid "Group"
-msgstr ""
+msgstr "Grupu"
 
 #: standalone/drakperm:48 standalone/drakperm:335
 #, c-format
@@ -19033,27 +19133,27 @@ msgstr "Muda"
 #: standalone/drakperm:242
 #, c-format
 msgid "browse"
-msgstr ""
+msgstr "sfollya"
 
 #: standalone/drakperm:247
 #, c-format
 msgid "user"
-msgstr ""
+msgstr "umperadori"
 
 #: standalone/drakperm:247
 #, c-format
 msgid "group"
-msgstr ""
+msgstr "grupu"
 
 #: standalone/drakperm:247
 #, c-format
 msgid "other"
-msgstr ""
+msgstr "atru"
 
 #: standalone/drakperm:252
 #, c-format
 msgid "Read"
-msgstr ""
+msgstr "Ligi"
 
 #. -PO: here %s will be either "user", "group" or "other"
 #: standalone/drakperm:255
@@ -19064,7 +19164,7 @@ msgstr ""
 #: standalone/drakperm:259
 #, c-format
 msgid "Write"
-msgstr ""
+msgstr "Scrii"
 
 #. -PO: here %s will be either "user", "group" or "other"
 #: standalone/drakperm:262
@@ -19098,7 +19198,7 @@ msgstr ""
 #: standalone/drakperm:273
 #, c-format
 msgid "Set-UID"
-msgstr ""
+msgstr "Set-UID"
 
 #: standalone/drakperm:273
 #, c-format
@@ -19108,7 +19208,7 @@ msgstr ""
 #: standalone/drakperm:274
 #, c-format
 msgid "Set-GID"
-msgstr ""
+msgstr "Set-GID"
 
 #: standalone/drakperm:274
 #, c-format
@@ -19123,7 +19223,7 @@ msgstr "Umperadori:"
 #: standalone/drakperm:294
 #, c-format
 msgid "Group:"
-msgstr ""
+msgstr "Grupu:"
 
 #: standalone/drakperm:298
 #, c-format
@@ -19160,65 +19260,65 @@ msgstr ""
 #: standalone/drakperm:391
 #, c-format
 msgid "User: %s"
-msgstr ""
+msgstr "Umperador: %s"
 
 #: standalone/drakperm:392
 #, c-format
 msgid "Group: %s"
-msgstr ""
+msgstr "Grupu: %s"
 
-#: standalone/drakroam:29
+#: standalone/drakroam:33
 #, c-format
 msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
 
-#: standalone/drakroam:44
+#: standalone/drakroam:48
 #, c-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
-#: standalone/drakroam:46
-#, c-format
-msgid "Encryption"
-msgstr "Critadura"
-
-#: standalone/drakroam:47
+#: standalone/drakroam:49
 #, c-format
 msgid "Signal strength"
 msgstr ""
 
-#: standalone/drakroam:104
+#: standalone/drakroam:51
+#, c-format
+msgid "Encryption"
+msgstr "Critadura"
+
+#: standalone/drakroam:112
 #, c-format
 msgid "Please enter settings for wireless network \"%s\""
-msgstr ""
+msgstr "Intra is assètius poi s'arretza wireless: \"%s\""
 
-#: standalone/drakroam:115
+#: standalone/drakroam:123
 #, c-format
 msgid "DNS server"
-msgstr ""
+msgstr "Server DNS"
 
-#: standalone/drakroam:166
+#: standalone/drakroam:228
 #, c-format
 msgid "Connect"
 msgstr "Acàpia"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-#: standalone/drakroam:167 standalone/printerdrake:251
+#: standalone/drakroam:229 standalone/printerdrake:251
 #, c-format
 msgid "Refresh"
 msgstr "Arrecasça"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Segadura de partèntzia: "
+msgstr "Acomuna directory"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
-#, fuzzy, c-format
+#, c-format
 msgid "Comment"
-msgstr "Cumandu"
+msgstr "Cumentu"
 
 #: standalone/draksambashare:64 standalone/draksambashare:97
 #, c-format
@@ -19231,19 +19331,19 @@ msgid "Public"
 msgstr ""
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, fuzzy, c-format
+#, c-format
 msgid "Writable"
-msgstr "disabivau"
+msgstr "Scriiditzu"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
-#, fuzzy, c-format
+#, c-format
 msgid "Create mask"
-msgstr "Crea"
+msgstr "Crea mask"
 
 #: standalone/draksambashare:68 standalone/draksambashare:144
 #, c-format
 msgid "Directory mask"
-msgstr ""
+msgstr "Mask de sa directory"
 
 #: standalone/draksambashare:69
 #, c-format
@@ -19252,34 +19352,34 @@ msgstr ""
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Arrecasça sa lista"
+msgstr "Scrii lista"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
-#, fuzzy, c-format
+#, c-format
 msgid "Admin users"
-msgstr "Açungi umperadori"
+msgstr "Aministradoris"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
-#, fuzzy, c-format
+#, c-format
 msgid "Valid users"
-msgstr "Açungi umperadori"
+msgstr "Umperadoris"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Permissus"
+msgstr "Ereda is permissus"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Cua is file"
+msgstr "Cua is file puntaus"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
-#, fuzzy, c-format
+#, c-format
 msgid "Preserve case"
-msgstr "Preferèntzias"
+msgstr " "
 
 #: standalone/draksambashare:77
 #, c-format
@@ -19299,22 +19399,22 @@ msgstr "Predefiniu"
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "Nòmini de s'imprentadora"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "Imprentaditzu"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "Cumandu de imprenta"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "Cumandu LPQ"
 
 #: standalone/draksambashare:101
 #, c-format
@@ -19323,14 +19423,14 @@ msgstr ""
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Permissus"
+msgstr "Ereda is permissus"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Crea modalidadi"
 
 #: standalone/draksambashare:107
 #, c-format
@@ -19345,7 +19445,7 @@ msgstr ""
 #: standalone/draksambashare:134
 #, c-format
 msgid "Write List"
-msgstr ""
+msgstr "scrii lista"
 
 #: standalone/draksambashare:139
 #, c-format
@@ -19373,9 +19473,9 @@ msgid ""
 msgstr ""
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
-msgstr "X server"
+msgstr "Samba server"
 
 #: standalone/draksambashare:180
 #, c-format
@@ -19404,14 +19504,14 @@ msgstr ""
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
-#, fuzzy, c-format
+#, c-format
 msgid "Comment:"
-msgstr "Cumandu"
+msgstr "Cumentu:"
 
 #: standalone/draksambashare:374
-#, fuzzy, c-format
+#, c-format
 msgid "Path:"
-msgstr "Porta:"
+msgstr "Mori:"
 
 #: standalone/draksambashare:379
 #, c-format
@@ -19451,7 +19551,7 @@ msgstr ""
 #: standalone/draksambashare:438
 #, c-format
 msgid "Add Special Printer share"
-msgstr ""
+msgstr "Açungi cumoni de Imprentadora Spetziali"
 
 #: standalone/draksambashare:441
 #, c-format
@@ -19462,7 +19562,7 @@ msgstr ""
 #: standalone/draksambashare:449
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "Unu generadori de file PDF esistit jai."
 
 #: standalone/draksambashare:473
 #, c-format
@@ -19482,12 +19582,12 @@ msgstr ""
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "Cumoni de s'imprentadora"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr ""
+msgstr "Nòmini de s'imprentadora"
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
 #, c-format
@@ -19502,12 +19602,12 @@ msgstr ""
 #: standalone/draksambashare:598
 #, c-format
 msgid "Advanced options"
-msgstr ""
+msgstr "Sçoberus adelantaus"
 
 #: standalone/draksambashare:600
 #, c-format
 msgid "Printer access"
-msgstr ""
+msgstr "Acessu a s'imprentadora"
 
 #: standalone/draksambashare:604
 #, c-format
@@ -19517,12 +19617,12 @@ msgstr ""
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Crea modalidadi:"
 
 #: standalone/draksambashare:609
 #, c-format
 msgid "Printer command"
-msgstr ""
+msgstr "Cumandu de s'imprentadora"
 
 #: standalone/draksambashare:611
 #, c-format
@@ -19532,12 +19632,12 @@ msgstr ""
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "Cumandu LPQ:"
 
 #: standalone/draksambashare:613
 #, c-format
 msgid "Printing:"
-msgstr ""
+msgstr "Imprentu:"
 
 #: standalone/draksambashare:629
 #, c-format
@@ -19547,7 +19647,7 @@ msgstr ""
 #: standalone/draksambashare:691
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "Boxi de DrakSamba"
 
 #: standalone/draksambashare:696
 #, c-format
@@ -19557,12 +19657,12 @@ msgstr ""
 #: standalone/draksambashare:719
 #, c-format
 msgid "Samba user access"
-msgstr ""
+msgstr "Acessu de umperadori Samba"
 
 #: standalone/draksambashare:727
-#, fuzzy, c-format
+#, c-format
 msgid "Mask options"
-msgstr "Sceras"
+msgstr "Sçoberus de mask"
 
 #: standalone/draksambashare:741
 #, c-format
@@ -19572,12 +19672,12 @@ msgstr ""
 #: standalone/draksambashare:763
 #, c-format
 msgid "Samba share directory"
-msgstr ""
+msgstr "Cumoni de directory Samba"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "Suriname"
+msgstr "Nòmini de su cumoni:"
 
 #: standalone/draksambashare:772
 #, c-format
@@ -19598,14 +19698,14 @@ msgstr ""
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr ""
+msgstr "Informatzioni umperadori"
 
 #: standalone/draksambashare:928
 #, c-format
 msgid "User name:"
-msgstr ""
+msgstr "Nòmini umperadori:"
 
-#: standalone/draksambashare:929 standalone/harddrake2:551
+#: standalone/draksambashare:929 standalone/harddrake2:563
 #, c-format
 msgid "Password:"
 msgstr "Password:"
@@ -19633,7 +19733,7 @@ msgstr ""
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "Açungi imprentadoras"
 
 #: standalone/draksambashare:1168
 #, c-format
@@ -19653,12 +19753,12 @@ msgstr ""
 #: standalone/draksambashare:1193
 #, c-format
 msgid "Printers"
-msgstr ""
+msgstr "Imprentadoras"
 
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr ""
+msgstr "Muda password"
 
 #: standalone/draksambashare:1206
 #, c-format
@@ -19673,7 +19773,7 @@ msgstr ""
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "Burra umperadori"
 
 #: standalone/draksambashare:1226
 #, c-format
@@ -19683,7 +19783,7 @@ msgstr ""
 #: standalone/draksambashare:1238
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Umperadoris Samba"
 
 #: standalone/draksambashare:1247
 #, c-format
@@ -19693,14 +19793,14 @@ msgstr ""
 #: standalone/draksec:49
 #, c-format
 msgid "ALL"
-msgstr ""
+msgstr "TOTU"
 
 #: standalone/draksec:50
 #, c-format
 msgid "LOCAL"
-msgstr ""
+msgstr "LOCALI"
 
-#: standalone/draksec:53 standalone/net_applet:449
+#: standalone/draksec:53 standalone/net_applet:474
 #, c-format
 msgid "Ignore"
 msgstr ""
@@ -19908,7 +20008,7 @@ msgstr ""
 #: standalone/draksplash:42
 #, c-format
 msgid "text size"
-msgstr ""
+msgstr "mesura de su scritu"
 
 #: standalone/draksplash:59
 #, c-format
@@ -19933,7 +20033,7 @@ msgstr ""
 #: standalone/draksplash:63
 #, c-format
 msgid "Choose text color"
-msgstr ""
+msgstr "Sçobera colori de su scritu"
 
 #: standalone/draksplash:65 standalone/draksplash:72
 #, c-format
@@ -19948,7 +20048,7 @@ msgstr ""
 #: standalone/draksplash:69
 #, c-format
 msgid "Choose text zone color"
-msgstr ""
+msgstr "Sçobera colori de fundu de su scritu"
 
 #: standalone/draksplash:70
 #, c-format
@@ -20008,7 +20108,7 @@ msgstr ""
 #: standalone/draksplash:188
 #, c-format
 msgid "Color selection"
-msgstr ""
+msgstr "Sçoberu colori"
 
 #: standalone/drakups:74
 #, c-format
@@ -20042,7 +20142,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr ""
 
-#: standalone/drakups:101 standalone/harddrake2:246
+#: standalone/drakups:101 standalone/harddrake2:356
 #, c-format
 msgid "Detection in progress"
 msgstr ""
@@ -20082,7 +20182,7 @@ msgstr ""
 #: standalone/drakups:145
 #, c-format
 msgid "Name:"
-msgstr ""
+msgstr "Nòmini:"
 
 #: standalone/drakups:145
 #, c-format
@@ -20112,7 +20212,7 @@ msgstr ""
 #: standalone/drakups:250
 #, c-format
 msgid "UPS devices"
-msgstr ""
+msgstr "Trastus UPS"
 
 #: standalone/drakups:251 standalone/drakups:270 standalone/drakups:286
 #: standalone/harddrake2:85 standalone/harddrake2:111
@@ -20134,7 +20234,7 @@ msgstr ""
 #: standalone/drakups:286
 #, c-format
 msgid "IP mask"
-msgstr ""
+msgstr "IP mask"
 
 #: standalone/drakups:298
 #, c-format
@@ -20159,7 +20259,7 @@ msgstr ""
 #: standalone/drakups:329 standalone/drakups:333 standalone/drakups:342
 #, c-format
 msgid "DrakUPS"
-msgstr ""
+msgstr "DrakUPS"
 
 #: standalone/drakups:339
 #, c-format
@@ -20169,7 +20269,7 @@ msgstr ""
 #: standalone/drakvpn:73
 #, c-format
 msgid "DrakVPN"
-msgstr ""
+msgstr "DrakVPN"
 
 #: standalone/drakvpn:95
 #, c-format
@@ -20230,7 +20330,7 @@ msgstr ""
 #: standalone/drakvpn:127
 #, c-format
 msgid "enable"
-msgstr ""
+msgstr "abiva"
 
 #: standalone/drakvpn:135
 #, c-format
@@ -20422,7 +20522,7 @@ msgstr ""
 #: standalone/drakvpn:368 standalone/drakvpn:409 standalone/drakvpn:496
 #, c-format
 msgid "Exists!"
-msgstr ""
+msgstr "Esistit!"
 
 #: standalone/drakvpn:369 standalone/drakvpn:410
 #, c-format
@@ -20449,32 +20549,32 @@ msgstr ""
 #: standalone/drakvpn:391
 #, c-format
 msgid "interfaces"
-msgstr ""
+msgstr "interfacIs"
 
 #: standalone/drakvpn:392
 #, c-format
 msgid "klipsdebug"
-msgstr ""
+msgstr "klipsdebug"
 
 #: standalone/drakvpn:393
 #, c-format
 msgid "plutodebug"
-msgstr ""
+msgstr "plutodebug"
 
 #: standalone/drakvpn:394
 #, c-format
 msgid "plutoload"
-msgstr ""
+msgstr "plutoload"
 
 #: standalone/drakvpn:395
 #, c-format
 msgid "plutostart"
-msgstr ""
+msgstr "plutostart"
 
 #: standalone/drakvpn:396
 #, c-format
 msgid "uniqueids"
-msgstr ""
+msgstr "uniqueids"
 
 #: standalone/drakvpn:430
 #, c-format
@@ -20492,12 +20592,12 @@ msgstr ""
 #: standalone/drakvpn:437
 #, c-format
 msgid "PFS"
-msgstr ""
+msgstr "PFS"
 
 #: standalone/drakvpn:438
 #, c-format
 msgid "keyingtries"
-msgstr ""
+msgstr "keyingtries"
 
 #: standalone/drakvpn:439
 #, c-format
@@ -20507,32 +20607,32 @@ msgstr ""
 #: standalone/drakvpn:440
 #, c-format
 msgid "disablearrivalcheck"
-msgstr ""
+msgstr "disablearrivalcheck"
 
 #: standalone/drakvpn:441 standalone/drakvpn:480
 #, c-format
 msgid "left"
-msgstr ""
+msgstr "left"
 
 #: standalone/drakvpn:442 standalone/drakvpn:481
 #, c-format
 msgid "leftcert"
-msgstr ""
+msgstr "leftcert"
 
 #: standalone/drakvpn:443 standalone/drakvpn:482
 #, c-format
 msgid "leftrsasigkey"
-msgstr ""
+msgstr "leftrsasigkey"
 
 #: standalone/drakvpn:444 standalone/drakvpn:483
 #, c-format
 msgid "leftsubnet"
-msgstr ""
+msgstr "leftsubnet"
 
 #: standalone/drakvpn:445 standalone/drakvpn:484
 #, c-format
 msgid "leftnexthop"
-msgstr ""
+msgstr "leftnexthop"
 
 #: standalone/drakvpn:474
 #, c-format
@@ -20736,7 +20836,7 @@ msgstr ""
 #: standalone/drakvpn:721
 #, c-format
 msgid "path"
-msgstr ""
+msgstr "mori"
 
 #: standalone/drakvpn:721
 #, c-format
@@ -20746,7 +20846,7 @@ msgstr "atesu"
 #: standalone/drakvpn:721
 #, c-format
 msgid "sainfo"
-msgstr ""
+msgstr "sainfo"
 
 #: standalone/drakvpn:729
 #, c-format
@@ -21106,12 +21206,12 @@ msgstr ""
 #: standalone/drakvpn:1047 standalone/drakvpn:1063 standalone/drakvpn:1076
 #, c-format
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: standalone/drakvpn:1047 standalone/drakvpn:1063 standalone/drakvpn:1076
 #, c-format
 msgid "on"
-msgstr ""
+msgstr "on"
 
 #: standalone/drakvpn:1048
 #, c-format
@@ -21299,7 +21399,7 @@ msgstr ""
 #: standalone/drakvpn:1126
 #, c-format
 msgid "ipsec"
-msgstr ""
+msgstr "ipsec"
 
 #: standalone/drakvpn:1126
 #, c-format
@@ -21314,7 +21414,7 @@ msgstr ""
 #: standalone/drakvpn:1129
 #, c-format
 msgid "tunnel"
-msgstr ""
+msgstr "tunnel"
 
 #: standalone/drakvpn:1129
 #, c-format
@@ -21618,7 +21718,7 @@ msgstr ""
 #: standalone/harddrake2:55
 #, c-format
 msgid "Bus PCI #"
-msgstr ""
+msgstr "Bus PCI #"
 
 #: standalone/harddrake2:55
 #, c-format
@@ -21698,7 +21798,7 @@ msgstr ""
 #: standalone/harddrake2:66
 #, c-format
 msgid "Bogomips"
-msgstr ""
+msgstr "Bogomips"
 
 #: standalone/harddrake2:66
 #, c-format
@@ -22037,7 +22137,7 @@ msgstr ""
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:319
+#: standalone/harddrake2:322
 #, c-format
 msgid "Identification"
 msgstr ""
@@ -22060,7 +22160,7 @@ msgstr ""
 #: standalone/harddrake2:140
 #, c-format
 msgid "FPU"
-msgstr ""
+msgstr "FPU"
 
 #: standalone/harddrake2:147
 #, c-format
@@ -22168,71 +22268,71 @@ msgstr ""
 #: standalone/harddrake2:242
 #, c-format
 msgid "Harddrake2"
-msgstr ""
+msgstr "Harddrake2"
 
-#: standalone/harddrake2:256
+#: standalone/harddrake2:253
 #, c-format
 msgid "Detected hardware"
 msgstr ""
 
-#: standalone/harddrake2:261
+#: standalone/harddrake2:258
 #, c-format
 msgid "Configure module"
 msgstr ""
 
-#: standalone/harddrake2:268
+#: standalone/harddrake2:265
 #, c-format
 msgid "Run config tool"
 msgstr ""
 
-#: standalone/harddrake2:307 standalone/printerdrake:306
-#: standalone/printerdrake:320
-#, c-format
-msgid "Unknown"
-msgstr ""
-
-#: standalone/harddrake2:327
-#, c-format
-msgid "Misc"
-msgstr ""
-
-#: standalone/harddrake2:342
+#: standalone/harddrake2:289
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
 
-#: standalone/harddrake2:394
+#: standalone/harddrake2:310 standalone/printerdrake:306
+#: standalone/printerdrake:320
+#, c-format
+msgid "Unknown"
+msgstr "Disconnotu"
+
+#: standalone/harddrake2:330
+#, c-format
+msgid "Misc"
+msgstr ""
+
+#: standalone/harddrake2:406
 #, c-format
 msgid "secondary"
-msgstr ""
+msgstr "segundàriu"
 
-#: standalone/harddrake2:394
+#: standalone/harddrake2:406
 #, c-format
 msgid "primary"
-msgstr ""
+msgstr "primàriu"
 
-#: standalone/harddrake2:398
+#: standalone/harddrake2:410
 #, c-format
 msgid "burner"
-msgstr ""
+msgstr "scriidori"
 
-#: standalone/harddrake2:398
+#: standalone/harddrake2:410
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:545 standalone/harddrake2:548
+#: standalone/harddrake2:557 standalone/harddrake2:560
 #, c-format
 msgid "Upload the hardware list"
 msgstr ""
 
-#: standalone/harddrake2:550
+#: standalone/harddrake2:562
 #, c-format
 msgid "Account:"
-msgstr ""
+msgstr "Account:"
 
-#: standalone/harddrake2:552
+#: standalone/harddrake2:564
 #, c-format
 msgid "Hostname:"
 msgstr ""
@@ -22261,7 +22361,7 @@ msgstr ""
 #: standalone/localedrake:47 standalone/scannerdrake:135
 #, c-format
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: standalone/localedrake:55
 #, c-format
@@ -22271,12 +22371,12 @@ msgstr ""
 #: standalone/logdrake:49
 #, c-format
 msgid "Mandriva Linux Tools Logs"
-msgstr ""
+msgstr "Mandriva Linux Tools Logs"
 
 #: standalone/logdrake:50
 #, c-format
 msgid "Logdrake"
-msgstr ""
+msgstr "Logdrake"
 
 #: standalone/logdrake:63
 #, c-format
@@ -22371,7 +22471,7 @@ msgstr ""
 msgid "A tool to monitor your logs"
 msgstr ""
 
-#: standalone/logdrake:128 standalone/net_applet:316 standalone/net_monitor:93
+#: standalone/logdrake:128 standalone/net_applet:341 standalone/net_monitor:93
 #, c-format
 msgid "Settings"
 msgstr "Assètius"
@@ -22389,7 +22489,7 @@ msgstr ""
 #: standalone/logdrake:138
 #, c-format
 msgid "Choose file"
-msgstr ""
+msgstr "Sçobera file"
 
 #: standalone/logdrake:150
 #, c-format
@@ -22429,27 +22529,27 @@ msgstr ""
 #: standalone/logdrake:381
 #, c-format
 msgid "Ftp Server"
-msgstr ""
+msgstr "Server ftp"
 
 #: standalone/logdrake:382
 #, c-format
 msgid "Postfix Mail Server"
-msgstr ""
+msgstr "Server de curreu Postfix"
 
 #: standalone/logdrake:383
 #, c-format
 msgid "Samba Server"
-msgstr ""
+msgstr "Server Samba"
 
 #: standalone/logdrake:385
 #, c-format
 msgid "Webmin Service"
-msgstr ""
+msgstr "Serbìtziu Webmin"
 
 #: standalone/logdrake:386
 #, c-format
 msgid "Xinetd Service"
-msgstr ""
+msgstr "Serbìtziu Xinetd"
 
 #: standalone/logdrake:397
 #, c-format
@@ -22536,7 +22636,7 @@ msgstr ""
 #: standalone/logdrake:517
 #, c-format
 msgid "Save as.."
-msgstr ""
+msgstr "Sarva ke..."
 
 #: standalone/mousedrake:31
 #, c-format
@@ -22551,43 +22651,45 @@ msgstr ""
 #: standalone/mousedrake:61
 #, c-format
 msgid "Mouse test"
-msgstr ""
+msgstr "Esàmini de su sòrixi"
 
 #: standalone/mousedrake:64
 #, c-format
 msgid "Please test your mouse:"
-msgstr ""
+msgstr "Esàmina su sòrixi:"
 
 #: standalone/net_applet:47
 #, c-format
 msgid "Network is up on interface %s"
-msgstr ""
+msgstr "S'arretza est alluta in s'interfaci %s"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
 #: standalone/net_applet:50
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr ""
+msgstr "S'arretza est studada in s'interfaci %s. Crica in \"Assètia Arretza\""
 
-#: standalone/net_applet:56 standalone/net_monitor:468
+#: standalone/net_applet:56 standalone/net_applet:76
+#: standalone/net_monitor:468
 #, c-format
 msgid "Connect %s"
-msgstr ""
+msgstr "Acàpia %s"
 
-#: standalone/net_applet:57 standalone/net_monitor:468
+#: standalone/net_applet:57 standalone/net_applet:76
+#: standalone/net_monitor:468
 #, c-format
 msgid "Disconnect %s"
-msgstr ""
+msgstr "Disacàpia %s"
 
 #: standalone/net_applet:58
 #, c-format
 msgid "Monitor Network"
-msgstr ""
+msgstr "Controlla s'acàpiu"
 
 #: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Manija arretzas wireless"
 
 #: standalone/net_applet:61
 #, c-format
@@ -22599,92 +22701,92 @@ msgstr "Assètia Arretza"
 msgid "Watched interface"
 msgstr ""
 
-#: standalone/net_applet:72
+#: standalone/net_applet:92
 #, c-format
 msgid "Profiles"
 msgstr ""
 
-#: standalone/net_applet:81
+#: standalone/net_applet:101
 #, c-format
 msgid "Get Online Help"
 msgstr ""
 
-#: standalone/net_applet:305
+#: standalone/net_applet:329
 #, c-format
 msgid "Interactive Firewall automatic mode"
 msgstr ""
 
-#: standalone/net_applet:310
+#: standalone/net_applet:334
 #, c-format
 msgid "Always launch on startup"
 msgstr "Lança sempri a s'alluidura"
 
-#: standalone/net_applet:314
+#: standalone/net_applet:338
 #, c-format
 msgid "Wireless networks"
-msgstr ""
+msgstr "Arretzas wireless"
 
-#: standalone/net_applet:398
+#: standalone/net_applet:423
 #, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr ""
 
-#: standalone/net_applet:411
-#, fuzzy, c-format
+#: standalone/net_applet:436
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "Aundi bolis aposentai su bootloader?"
+msgstr "Ita bolis fai cun custu afracadori?"
 
-#: standalone/net_applet:414
+#: standalone/net_applet:439
 #, c-format
 msgid "Attack details"
 msgstr ""
 
-#: standalone/net_applet:418
+#: standalone/net_applet:443
 #, c-format
 msgid "Attack time: %s"
 msgstr ""
 
-#: standalone/net_applet:419
+#: standalone/net_applet:444
 #, c-format
 msgid "Network interface: %s"
 msgstr ""
 
-#: standalone/net_applet:420
+#: standalone/net_applet:445
 #, c-format
 msgid "Attack type: %s"
 msgstr ""
 
-#: standalone/net_applet:421
+#: standalone/net_applet:446
 #, c-format
 msgid "Protocol: %s"
 msgstr ""
 
-#: standalone/net_applet:422
+#: standalone/net_applet:447
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr ""
 
-#: standalone/net_applet:423
+#: standalone/net_applet:448
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr ""
 
-#: standalone/net_applet:426
+#: standalone/net_applet:451
 #, c-format
 msgid "Service attacked: %s"
 msgstr ""
 
-#: standalone/net_applet:427
+#: standalone/net_applet:452
 #, c-format
 msgid "Port attacked: %s"
 msgstr ""
 
-#: standalone/net_applet:429
+#: standalone/net_applet:454
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr ""
 
-#: standalone/net_applet:434
+#: standalone/net_applet:459
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr ""
@@ -22707,7 +22809,7 @@ msgstr ""
 #: standalone/net_monitor:101
 #, c-format
 msgid "Average"
-msgstr ""
+msgstr "Mèdia"
 
 #: standalone/net_monitor:102
 #, c-format
@@ -22729,6 +22831,8 @@ msgid ""
 "Connection\n"
 "time: "
 msgstr ""
+"Acàpiu\n"
+"tempus: "
 
 #: standalone/net_monitor:114
 #, c-format
@@ -22743,27 +22847,27 @@ msgstr ""
 #: standalone/net_monitor:182 standalone/net_monitor:195
 #, c-format
 msgid "Disconnecting from Internet "
-msgstr ""
+msgstr "Mi disacàpiu de s'Arretza"
 
 #: standalone/net_monitor:182 standalone/net_monitor:195
 #, c-format
 msgid "Connecting to Internet "
-msgstr ""
+msgstr "Mi acàpiu a s'Arretza"
 
 #: standalone/net_monitor:226
 #, c-format
 msgid "Disconnection from Internet failed."
-msgstr ""
+msgstr "Disacàpiu de s'Arretza faddiu."
 
 #: standalone/net_monitor:227
 #, c-format
 msgid "Disconnection from Internet complete."
-msgstr ""
+msgstr "Disacàpiu de s'Arretza fatu."
 
 #: standalone/net_monitor:229
 #, c-format
 msgid "Connection complete."
-msgstr ""
+msgstr "Acàpiu fatu."
 
 #: standalone/net_monitor:230
 #, c-format
@@ -22771,26 +22875,28 @@ msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandriva Linux Control Center."
 msgstr ""
+"Acàpiu faddiu.\n"
+"Aberiga s'assètiu in su Mandriva Linux Control Center."
 
 #: standalone/net_monitor:335
 #, c-format
 msgid "Color configuration"
-msgstr ""
+msgstr "Assètiu de su colori"
 
 #: standalone/net_monitor:383 standalone/net_monitor:403
 #, c-format
 msgid "sent: "
-msgstr ""
+msgstr "mandau:"
 
 #: standalone/net_monitor:390 standalone/net_monitor:407
 #, c-format
 msgid "received: "
-msgstr ""
+msgstr "arriciu:"
 
 #: standalone/net_monitor:397
 #, c-format
 msgid "average"
-msgstr ""
+msgstr "mèdia"
 
 #: standalone/net_monitor:400
 #, c-format
@@ -22807,7 +22913,7 @@ msgstr ""
 #: standalone/net_monitor:472
 #, c-format
 msgid "No internet connection configured"
-msgstr ""
+msgstr "Nisçunu acàpiu a s'Arretza assetiau"
 
 #: standalone/printerdrake:76
 #, c-format
@@ -22863,9 +22969,9 @@ msgid "/_Configure CUPS"
 msgstr ""
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Aministradori de Siguresa"
+msgstr "/Assètia Aministradura _Automàtiga"
 
 #: standalone/printerdrake:194
 #, c-format
@@ -22880,54 +22986,54 @@ msgstr "Àpriga ciliru"
 #: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Def."
-msgstr ""
+msgstr "Def."
 
 #: standalone/printerdrake:224 standalone/printerdrake:231
 #, c-format
 msgid "Printer Name"
-msgstr ""
+msgstr "Nòmini de s'Imprentadora"
 
 #: standalone/printerdrake:224
 #, c-format
 msgid "Connection Type"
-msgstr ""
+msgstr "Tipu de acàpiu"
 
 #: standalone/printerdrake:231
 #, c-format
 msgid "Server Name"
-msgstr ""
+msgstr "Nòmini de su server"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/printerdrake:239
 #, c-format
 msgid "Add Printer"
-msgstr ""
+msgstr "Açungi computadoras"
 
 #: standalone/printerdrake:239
 #, c-format
 msgid "Add a new printer to the system"
-msgstr ""
+msgstr "Açungi una imprentadora in su sistema"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/printerdrake:242
 #, c-format
 msgid "Set as default"
-msgstr ""
+msgstr "Poni a predefinia"
 
 #: standalone/printerdrake:242
 #, c-format
 msgid "Set selected printer as the default printer"
-msgstr ""
+msgstr "Poni s'imprentadora sçoberada a predefinia"
 
 #: standalone/printerdrake:245
 #, c-format
 msgid "Edit selected printer"
-msgstr ""
+msgstr "Muda s'imprentadora sçoberada"
 
 #: standalone/printerdrake:248
 #, c-format
 msgid "Delete selected printer"
-msgstr ""
+msgstr "Burra s'imprentadora sçoberada"
 
 #: standalone/printerdrake:251
 #, c-format
@@ -22938,24 +23044,24 @@ msgstr "Arrecasça sa lista"
 #: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS"
-msgstr ""
+msgstr "Assètia CUPS"
 
 #: standalone/printerdrake:254
 #, c-format
 msgid "Configure CUPS printing system"
-msgstr ""
+msgstr "Assètia su sistema de imprenta CUPS"
 
 #: standalone/printerdrake:310 standalone/printerdrake:324
 #: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Enabled"
-msgstr ""
+msgstr "Abivau"
 
 #: standalone/printerdrake:310 standalone/printerdrake:324
 #: standalone/printerdrake:348 standalone/printerdrake:360
 #, c-format
 msgid "Disabled"
-msgstr ""
+msgstr "Disabivau"
 
 #: standalone/printerdrake:596
 #, c-format
@@ -22975,11 +23081,14 @@ msgid ""
 "\n"
 "Do you want to install the SANE packages?"
 msgstr ""
+"Is pakitus de SANE bolint aposentaus po impreai scannidoras.\n"
+"\n"
+"Bolis aposentai is pakitus de SANE?"
 
 #: standalone/scannerdrake:55
 #, c-format
 msgid "Aborting Scannerdrake."
-msgstr ""
+msgstr "Bessu de Scannerdrake."
 
 #: standalone/scannerdrake:60
 #, c-format
@@ -22990,17 +23099,17 @@ msgstr ""
 #: standalone/scannerdrake:61
 #, c-format
 msgid "Scannerdrake will not be started now."
-msgstr ""
+msgstr "Imoi apu a allui Scannerdrake."
 
 #: standalone/scannerdrake:67 standalone/scannerdrake:491
 #, c-format
 msgid "Searching for configured scanners..."
-msgstr ""
+msgstr "Circu is scannidoras assetiadas..."
 
 #: standalone/scannerdrake:71 standalone/scannerdrake:495
 #, c-format
 msgid "Searching for new scanners..."
-msgstr ""
+msgstr "Circu atras scannidoras..."
 
 #: standalone/scannerdrake:79 standalone/scannerdrake:517
 #, c-format
@@ -23025,37 +23134,37 @@ msgstr ""
 #: standalone/scannerdrake:131
 #, c-format
 msgid "Select a scanner model"
-msgstr ""
+msgstr "Sçobera unu modellu de scannidora"
 
 #: standalone/scannerdrake:132
 #, c-format
 msgid " ("
-msgstr ""
+msgstr " ("
 
 #: standalone/scannerdrake:133
 #, c-format
 msgid "Detected model: %s"
-msgstr ""
+msgstr "Modellu agatau: %s"
 
 #: standalone/scannerdrake:136
 #, c-format
 msgid "Port: %s"
-msgstr ""
+msgstr "Porta: %s"
 
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (NO SUPORTADA)"
 
 #: standalone/scannerdrake:144
 #, c-format
 msgid "The %s is not supported under Linux."
-msgstr ""
+msgstr "Sa %s no est suportada in Linux."
 
 #: standalone/scannerdrake:171 standalone/scannerdrake:185
 #, c-format
 msgid "Do not install firmware file"
-msgstr ""
+msgstr "No aposentist su file de firmware"
 
 #: standalone/scannerdrake:175 standalone/scannerdrake:227
 #, c-format
@@ -23142,7 +23251,7 @@ msgstr ""
 #: standalone/scannerdrake:299
 #, c-format
 msgid "The %s is unsupported"
-msgstr ""
+msgstr "Su %s no est suportau"
 
 #: standalone/scannerdrake:304
 #, c-format
@@ -23170,22 +23279,22 @@ msgstr ""
 #: standalone/scannerdrake:313 standalone/scannerdrake:358
 #, c-format
 msgid "choose device"
-msgstr ""
+msgstr "sçobera trastu"
 
 #: standalone/scannerdrake:347
 #, c-format
 msgid "Searching for scanners..."
-msgstr ""
+msgstr "Circu scannidoras..."
 
 #: standalone/scannerdrake:383
 #, c-format
 msgid "Setting up kernel modules..."
-msgstr ""
+msgstr "Assètiu is mòdulus de su kernel..."
 
 #: standalone/scannerdrake:390 standalone/scannerdrake:397
 #, c-format
 msgid "Attention!"
-msgstr ""
+msgstr "Atentu!"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -23227,7 +23336,7 @@ msgstr ""
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "muda su file de assètiu /etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:406
 #, c-format
@@ -23236,6 +23345,9 @@ msgid ""
 "You may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/"
 "Graphics in the applications menu."
 msgstr ""
+"Su %s est assetiau.\n"
+"Imoi podis scanniri dogumentus cun \"XSane\" o \"Kooka\" de Multimèdia/"
+"Gràfiga in sa lista de is programas."
 
 #: standalone/scannerdrake:431
 #, c-format
@@ -23245,6 +23357,10 @@ msgid ""
 "%s\n"
 "are available on your system.\n"
 msgstr ""
+"Custas scannidoras\n"
+"\n"
+"%s\n"
+"funt a disposta in su sistema.\n"
 
 #: standalone/scannerdrake:432
 #, c-format
@@ -23254,41 +23370,45 @@ msgid ""
 "%s\n"
 "is available on your system.\n"
 msgstr ""
+"Custa scannidora\n"
+"\n"
+"%s\n"
+"est a disposta in su sistema.\n"
 
 #: standalone/scannerdrake:435 standalone/scannerdrake:438
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
+msgstr "No apu agatau scannidoras a disposta in su sistema.\n"
 
 #: standalone/scannerdrake:452
 #, c-format
 msgid "Search for new scanners"
-msgstr ""
+msgstr "Circa atras scannidoras"
 
 #: standalone/scannerdrake:458
 #, c-format
 msgid "Add a scanner manually"
-msgstr ""
+msgstr "Açungi a manu una scannidora"
 
 #: standalone/scannerdrake:465
 #, c-format
 msgid "Install/Update firmware files"
-msgstr ""
+msgstr "Aposenta/Ajorrona is file de firmware"
 
 #: standalone/scannerdrake:471
 #, c-format
 msgid "Scanner sharing"
-msgstr ""
+msgstr "Scannidora a cumoni"
 
 #: standalone/scannerdrake:530 standalone/scannerdrake:695
 #, c-format
 msgid "All remote machines"
-msgstr ""
+msgstr "Totu is màkinas in atesu"
 
 #: standalone/scannerdrake:542 standalone/scannerdrake:845
 #, c-format
 msgid "This machine"
-msgstr ""
+msgstr "Custa màkina"
 
 #: standalone/scannerdrake:582
 #, c-format
@@ -23307,28 +23427,28 @@ msgstr ""
 #: standalone/scannerdrake:586
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
+msgstr "Is scannidoras de custa màkinas das podint impreai atras màkinas"
 
 #: standalone/scannerdrake:588
 #, c-format
 msgid "Scanner sharing to hosts: "
-msgstr ""
+msgstr "Scannidora a cumoni cun is host:"
 
 #: standalone/scannerdrake:602
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Imprea sa scannidora in computadoras in atesu"
 
 #: standalone/scannerdrake:605
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Imprea sa scannidora in is host:"
 
 #: standalone/scannerdrake:632 standalone/scannerdrake:704
 #: standalone/scannerdrake:854
 #, c-format
 msgid "Sharing of local scanners"
-msgstr ""
+msgstr "Cumoni de scannidoras innoi"
 
 #: standalone/scannerdrake:633
 #, c-format
@@ -23340,17 +23460,17 @@ msgstr ""
 #: standalone/scannerdrake:644 standalone/scannerdrake:794
 #, c-format
 msgid "Add host"
-msgstr ""
+msgstr "Açungi host"
 
 #: standalone/scannerdrake:650 standalone/scannerdrake:800
 #, c-format
 msgid "Edit selected host"
-msgstr ""
+msgstr "Muda s'host sçoberau"
 
 #: standalone/scannerdrake:659 standalone/scannerdrake:809
 #, c-format
 msgid "Remove selected host"
-msgstr ""
+msgstr "Burra s'host sçoberau"
 
 #: standalone/scannerdrake:683 standalone/scannerdrake:691
 #: standalone/scannerdrake:696 standalone/scannerdrake:742
@@ -23358,7 +23478,7 @@ msgstr ""
 #: standalone/scannerdrake:846 standalone/scannerdrake:892
 #, c-format
 msgid "Name/IP address of host:"
-msgstr ""
+msgstr "Nòmini/bivimentu IP de s'host:"
 
 #: standalone/scannerdrake:705 standalone/scannerdrake:855
 #, c-format
@@ -23368,22 +23488,22 @@ msgstr ""
 #: standalone/scannerdrake:716 standalone/scannerdrake:866
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr ""
+msgstr "Depis intrai unu nòmini host o unu bivimentu IP.\n"
 
 #: standalone/scannerdrake:727 standalone/scannerdrake:877
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Custu host est jai in sa lista, no fait a d'açungi torra.\n"
 
 #: standalone/scannerdrake:782
 #, c-format
 msgid "Usage of remote scanners"
-msgstr ""
+msgstr "Impreu de scannidoras foranas"
 
 #: standalone/scannerdrake:783
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
+msgstr "Custas funt is màkinas de anca podis impreai is scannidoras:"
 
 #: standalone/scannerdrake:940
 #, c-format
@@ -23392,11 +23512,14 @@ msgid ""
 "\n"
 "Do you want to install the saned package?"
 msgstr ""
+"saned bolit aposentau po acumonai is scannidoras localis.\n"
+"\n"
+"Bolis aposentai su pakitu saned?"
 
 #: standalone/scannerdrake:944 standalone/scannerdrake:948
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "As a podi impreai sa(is) sscannidora(s) in arretza."
 
 #: standalone/service_harddrake:105
 #, c-format
@@ -23418,10 +23541,10 @@ msgstr ""
 msgid "- %s was added\n"
 msgstr ""
 
-#: standalone/service_harddrake:207
+#: standalone/service_harddrake:206
 #, c-format
 msgid "Hardware probing in progress"
-msgstr ""
+msgstr "Seu provendi s'hardware"
 
 #: standalone/service_harddrake_confirm:7
 #, c-format
@@ -23441,77 +23564,77 @@ msgstr "Lìngua"
 #: steps.pm:15
 #, c-format
 msgid "License"
-msgstr ""
+msgstr "Permissu"
 
 #: steps.pm:16
 #, c-format
 msgid "Configure mouse"
-msgstr ""
+msgstr "Assètia sòrixi"
 
 #: steps.pm:17
 #, c-format
 msgid "Hard drive detection"
-msgstr ""
+msgstr "Controllu de su discu tostau"
 
 #: steps.pm:18
 #, c-format
 msgid "Select installation class"
-msgstr ""
+msgstr "Sçobera tipu de aposentadura"
 
 #: steps.pm:19
 #, c-format
 msgid "Choose your keyboard"
-msgstr ""
+msgstr "Sçobera su tecrau"
 
 #: steps.pm:21
 #, c-format
 msgid "Partitioning"
-msgstr ""
+msgstr "Pratzimentu"
 
 #: steps.pm:22
 #, c-format
 msgid "Format partitions"
-msgstr ""
+msgstr "Formata pratziduras"
 
 #: steps.pm:23
 #, c-format
 msgid "Choose packages to install"
-msgstr ""
+msgstr "Sçobera pakitus de aposentai"
 
 #: steps.pm:24
 #, c-format
 msgid "Install system"
-msgstr ""
+msgstr "Aposenta su sistema"
 
 #: steps.pm:25
 #, c-format
 msgid "Administrator password"
-msgstr ""
+msgstr "Password de Aministradori"
 
 #: steps.pm:26
 #, c-format
 msgid "Add a user"
-msgstr ""
+msgstr "Açungi umperadoris"
 
 #: steps.pm:27
 #, c-format
 msgid "Configure networking"
-msgstr ""
+msgstr "Assètia s'arretza"
 
 #: steps.pm:28
 #, c-format
 msgid "Install bootloader"
-msgstr ""
+msgstr "Aposenta su bootloader"
 
 #: steps.pm:29
 #, c-format
 msgid "Configure X"
-msgstr ""
+msgstr "Assètia X"
 
 #: steps.pm:31
 #, c-format
 msgid "Configure services"
-msgstr ""
+msgstr "Assètia serbìtzius"
 
 #: steps.pm:32
 #, c-format
@@ -23521,47 +23644,47 @@ msgstr "Aposenta is ajorronus"
 #: steps.pm:33
 #, c-format
 msgid "Exit install"
-msgstr ""
+msgstr "Bessi de s'aposentadura"
 
 #: ugtk2.pm:899
 #, c-format
 msgid "Is this correct?"
-msgstr ""
+msgstr "Andat beni?"
 
 #: ugtk2.pm:959
 #, c-format
 msgid "No file chosen"
-msgstr ""
+msgstr "Nisçunu file sçoberau"
 
 #: ugtk2.pm:961
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr ""
+msgstr "As sçoberau unu file, no una directory"
 
 #: ugtk2.pm:963
 #, c-format
 msgid "You have chosen a directory, not a file"
-msgstr ""
+msgstr "As sçoberau una directory, no unu file"
 
 #: ugtk2.pm:965
 #, c-format
 msgid "No such directory"
-msgstr ""
+msgstr "Nisçuna directory de aici"
 
 #: ugtk2.pm:965
 #, c-format
 msgid "No such file"
-msgstr ""
+msgstr "Nisçunu file de aici"
 
 #: ugtk2.pm:1046
 #, c-format
 msgid "Expand Tree"
-msgstr ""
+msgstr "Allàdia s'arrampili"
 
 #: ugtk2.pm:1047
 #, c-format
 msgid "Collapse Tree"
-msgstr ""
+msgstr "Serra s'arrampili"
 
 #: ugtk2.pm:1048
 #, c-format
@@ -23574,45 +23697,13 @@ msgid ""
 "%s is not installed\n"
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
+"%s no est aposentau\n"
+"Crica \"Sighi\" po aposentai o \"Annudda\" po bessiri"
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
-msgstr ""
+msgstr "Aposentadura faddia"
 
 #~ msgid "http://www.mandrivalinux.com/en/errata.php3"
 #~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
-
-#~ msgid "Please wait, preparing installation..."
-#~ msgstr "Abeta, apariçu s'aposentadura..."
-
-#~ msgid "Installing package %s"
-#~ msgstr "Aposentu su pakitu %s"
-
-#~ msgid "Encryption:"
-#~ msgstr "Critadura:"
-
-#~ msgid "Status"
-#~ msgstr "Stadu"
-
-#~ msgid "Connect to the Internet"
-#~ msgstr "Acàpiadì a internet"
-
-#, fuzzy
-#~ msgid "Unable to select wireless network: %s"
-#~ msgstr "No potzu cuntatai su sprigu %s"
-
-#~ msgid "Grub"
-#~ msgstr "Grub"
-
-#~ msgid "General"
-#~ msgstr "Generali"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferèntzias"
-
-#~ msgid "Size"
-#~ msgstr "Mesura"
-
-#~ msgid "No floppy drive available"
-#~ msgstr "No dui at ligidori floppy"
