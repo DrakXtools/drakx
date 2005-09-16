@@ -759,6 +759,7 @@ If you do not know it, keep the preselected type."),
                     pre => sub {
                         network::adsl::adsl_probe_info($net);
                         $net->{net_interface} = 'ppp0';
+                        $net->{ifcfg}{ppp0} ||= {};
                         ($adsl_vpi, $adsl_vci) = (hex($net->{adsl}{vpi}), hex($net->{adsl}{vci}));
                     },
                     name => N("Connection Configuration") . "\n\n" .
