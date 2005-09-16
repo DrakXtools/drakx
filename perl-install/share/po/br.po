@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
 "POT-Creation-Date: 2005-09-16 17:08+0200\n"
-"PO-Revision-Date: 2005-09-09 16:18+0200\n"
+"PO-Revision-Date: 2005-09-16 22:52+0200\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: Brezhoneg <ofisk@wanadoo.fr>\n"
 "MIME-Version: 1.0\n"
@@ -1318,7 +1318,7 @@ msgstr "N'eo ket lodañ"
 #: any.pm:973
 #, c-format
 msgid "Allow all users"
-msgstr "Aotreiñ an holl dud"
+msgstr "Aotreiñ pep arveriad"
 
 #: any.pm:977
 #, c-format
@@ -1604,7 +1604,7 @@ msgstr "Tremenger merour ar domani"
 #: authentication.pm:170
 #, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr ""
+msgstr "Choazh tremenger ar merour hag an hentenn dilesadur rouedad"
 
 #: authentication.pm:171
 #, c-format
@@ -2487,6 +2487,8 @@ msgid ""
 "Physical volume %s is still in use.\n"
 "Do you want to move used physical extents on this volume to other volumes?"
 msgstr ""
+"Implijet eo al levrenn fizikel %s c'hoazh.\n"
+"Mennout a rit dilec'hiañ al levrennioù fizikel implijet deus al levrenn-mañ war unan all ?"
 
 #: diskdrake/interactive.pm:896
 #, c-format
@@ -3053,12 +3055,12 @@ msgstr ""
 #: fs/type.pm:376
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
-msgstr "N'hellit ket implij JFS evit ar parzhadurioù bihanioc'h evit 16Mo"
+msgstr "N'hellit ket implij JFS evit ar parzhadurioù bihanioc'h evel 16Mo"
 
 #: fs/type.pm:377
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
-msgstr "N'hellit ket implij ReiserFS evit ar parzhadurioù bihanioc'h evit 32Mo"
+msgstr "N'hellit ket implij ReiserFS evit ar parzhadurioù bihanioc'h evel 32Mo"
 
 #: fsedit.pm:27
 #, c-format
@@ -3114,11 +3116,11 @@ msgid ""
 msgstr ""
 
 #: fsedit.pm:387
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use a LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
-msgstr "Ne mennit ket implij ul levrenn poellek evit ar poent marc'hañ %s"
+msgstr "Ne mennit ket implij ul levrenn poellek evit ar poent marc'hañ %s peogwir vez implijet meur a levrenn fizikel"
 
 #: fsedit.pm:389
 #, c-format
@@ -3464,7 +3466,7 @@ msgstr "Sturier :"
 #: harddrake/sound.pm:263
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "Defaziañ"
 
 #: harddrake/sound.pm:271
 #, c-format
@@ -3511,7 +3513,7 @@ msgstr "Fazi : n'eo ket rollet ar sturier « %s » evit ho kartenn gwelet"
 #: harddrake/sound.pm:303
 #, c-format
 msgid "Sound trouble shooting"
-msgstr ""
+msgstr "Defaziañ un diaster klevet"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: harddrake/sound.pm:306
@@ -5144,9 +5146,9 @@ msgid "Can not make screenshots before partitioning"
 msgstr "N'hellan ket sevel skrammpakeroù a-raok parzhañ"
 
 #: install_any.pm:1879
-#, fuzzy, c-format
+#, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr "Gallout a rit dibab yezhoù all hag a vo hegerz goude staliañ"
+msgstr "Skrammpakeroù a vo bet kavet goude staliañ e %s"
 
 #: install_gtk.pm:136
 #, c-format
@@ -7061,7 +7063,7 @@ msgstr "Slovek"
 msgid ""
 "_: keyboard\n"
 "Sinhala"
-msgstr ""
+msgstr "Sinhalek"
 
 #: keyboard.pm:294
 #, c-format
@@ -7934,7 +7936,7 @@ msgstr "Mali"
 #: lang.pm:333
 #, c-format
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: lang.pm:334
 #, c-format
@@ -8379,12 +8381,12 @@ msgstr "Degemer e %s"
 #: lvm.pm:83
 #, c-format
 msgid "Moving used physical extents to other physical volumes failed"
-msgstr ""
+msgstr "Sac'het eo dilec'hiañ al levrennioù fizikel implijet war re all"
 
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "Implijet eo al levrenn fizikel %s c'hoazh"
 
 #: lvm.pm:145
 #, c-format
@@ -8394,7 +8396,7 @@ msgstr "Lemel al levrenn poellek da gentañ\n"
 #: lvm.pm:178
 #, c-format
 msgid "The bootloader can't handle /boot on multiple physicals volumes"
-msgstr ""
+msgstr "N'eo ket possubl da loc'hañ gant /boot war meur a levrenn fizikel"
 
 #: modules/interactive.pm:21 standalone/drakconnect:1027
 #, c-format
@@ -8414,7 +8416,7 @@ msgstr "Kefluniañ ar mollad"
 #: modules/interactive.pm:22
 #, c-format
 msgid "You can configure each parameter of the module here."
-msgstr ""
+msgstr "Moien zo dit kefluniañ pep dibarzh ar mollad amañ."
 
 #: modules/interactive.pm:63
 #, c-format
@@ -8852,7 +8854,7 @@ msgstr ""
 #: network/drakfirewall.pm:188
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr ""
+msgstr "Pere servijoù e fell dit aotrañ kevreañ ouzh Internet ?"
 
 #: network/drakfirewall.pm:191
 #, c-format
@@ -8887,7 +8889,7 @@ msgstr "Porzhioù all"
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:201
 #: standalone/net_applet:379 standalone/net_applet:416
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
 msgstr "Moger tan bev"
 
@@ -8902,7 +8904,7 @@ msgstr ""
 #: network/drakfirewall.pm:257
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "Implijit ar moger tan bev"
 
 #: network/ifw.pm:136
 #, fuzzy, c-format
@@ -8910,9 +8912,9 @@ msgid "Port scanning"
 msgstr "N'eo ket lodañ"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Merour ar servijoù"
+msgstr "Argad ouzh ur servij"
 
 #: network/ifw.pm:138
 #, fuzzy, c-format
@@ -8922,7 +8924,7 @@ msgstr "Tremenger (adarre)"
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "Argad « %s »"
 
 #: network/ifw.pm:141
 #, c-format
@@ -8932,7 +8934,7 @@ msgstr ""
 #: network/ifw.pm:142
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr ""
+msgstr "Argadet oa bet ar servij %s gant %s."
 
 #: network/ifw.pm:143
 #, c-format
@@ -9052,6 +9054,8 @@ msgid ""
 "Protocol for the rest of the world\n"
 "No D-Channel (leased lines)"
 msgstr ""
+"Komenad ar broioù all\n"
+"N'eus kanol-D ebet (linennoù fermet)"
 
 #: network/netconnect.pm:103 standalone/harddrake2:309
 #: standalone/net_monitor:102 standalone/net_monitor:103
@@ -9113,22 +9117,22 @@ msgstr "DSL a-us CAPI"
 #: network/netconnect.pm:136
 #, c-format
 msgid "Bridged Ethernet LLC"
-msgstr ""
+msgstr "Pont Ethernet LLC"
 
 #: network/netconnect.pm:137
 #, c-format
 msgid "Bridged Ethernet VC"
-msgstr ""
+msgstr "Pont Ethernet VC"
 
 #: network/netconnect.pm:138
 #, c-format
 msgid "Routed IP LLC"
-msgstr ""
+msgstr "IP LLC gant un hent"
 
 #: network/netconnect.pm:139
 #, c-format
 msgid "Routed IP VC"
-msgstr ""
+msgstr "IP VC gant un hent"
 
 #: network/netconnect.pm:140
 #, c-format
@@ -9219,7 +9223,7 @@ msgstr "Kefluniañ ar gevreadenn"
 #: network/netconnect.pm:276 network/netconnect.pm:765
 #, c-format
 msgid "Please fill or check the field below"
-msgstr ""
+msgstr "Lakaat pe gwiriekaat an dachenn a-is"
 
 #: network/netconnect.pm:279
 #, c-format
@@ -9416,6 +9420,8 @@ msgid ""
 "Your modem is not supported by the system.\n"
 "Take a look at http://www.linmodems.org"
 msgstr ""
+"N'eo ket possubl da implij ho modem gant ar reizhiad.\n"
+"Sell ouzh http://www.linmodems.org"
 
 #: network/netconnect.pm:479
 #, c-format
@@ -9533,6 +9539,8 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
+"Dibabit seurt ho kevreadenn DSL mar plij.\n"
+"Ma n'ouiez ket, mir an hini dibabet."
 
 #: network/netconnect.pm:717
 #, c-format
@@ -9565,9 +9573,9 @@ msgid "Use a Windows driver (with ndiswrapper)"
 msgstr "Implijit ur sturier Windows (gant ndiswrapper)"
 
 #: network/netconnect.pm:866
-#, fuzzy, c-format
+#, c-format
 msgid "Zeroconf hostname resolution"
-msgstr "Anv ostiz Zeroconf"
+msgstr ""
 
 #: network/netconnect.pm:867 network/netconnect.pm:897
 #, c-format
@@ -9614,9 +9622,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr ""
 
 #: network/netconnect.pm:914 standalone/drakconnect:438
-#, fuzzy, c-format
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Kefluniadur ar rouedad"
+msgstr ""
 
 #: network/netconnect.pm:916 standalone/drakconnect:432
 #, c-format
@@ -9631,7 +9639,7 @@ msgstr "Metrik"
 #: network/netconnect.pm:919
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Bevaat an hent-riboul IPv6 dre IPv4"
 
 #: network/netconnect.pm:921 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -9673,7 +9681,7 @@ msgstr "Er furmad 255.255.224.0 e tlefe bezañ ar maskl rouedad"
 #: network/netconnect.pm:942
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
-msgstr ""
+msgstr "Diwallit : strizh eo ar chomlec'h IP %s boazamant !"
 
 #: network/netconnect.pm:947 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
@@ -9756,7 +9764,7 @@ msgstr "Mod enrinegadur"
 #: network/netconnect.pm:1043
 #, c-format
 msgid "Allow access point roaming"
-msgstr ""
+msgstr "Aotreañ ar c'hevreadennoù baleantour"
 
 #: network/netconnect.pm:1045 standalone/drakconnect:406
 #, c-format
@@ -9805,7 +9813,7 @@ msgstr ""
 #: network/netconnect.pm:1058 standalone/drakconnect:422
 #, c-format
 msgid "iwconfig command extra arguments"
-msgstr ""
+msgstr "arventennoù ouzhpenn an urzhiad iwconfig"
 
 #: network/netconnect.pm:1059
 #, c-format
@@ -9821,7 +9829,7 @@ msgstr ""
 #: network/netconnect.pm:1066 standalone/drakconnect:423
 #, c-format
 msgid "iwspy command extra arguments"
-msgstr ""
+msgstr "arventennoù ouzhpenn an urzhiad iwspy"
 
 #: network/netconnect.pm:1067
 #, c-format
@@ -9838,7 +9846,7 @@ msgstr ""
 #: network/netconnect.pm:1076 standalone/drakconnect:424
 #, c-format
 msgid "iwpriv command extra arguments"
-msgstr ""
+msgstr "arventennoù ouzhpenn an urzhiad iwpriv"
 
 #: network/netconnect.pm:1077
 #, c-format
@@ -9895,7 +9903,7 @@ msgstr ""
 #: network/netconnect.pm:1161
 #, c-format
 msgid "Net demux"
-msgstr ""
+msgstr "Net demux"
 
 #: network/netconnect.pm:1162
 #, c-format
@@ -10160,6 +10168,8 @@ msgid ""
 "An unexpected error has happened:\n"
 "%s"
 msgstr ""
+"Degouezhet ez eus ur fazi dic'hortoz :\n"
+"%s"
 
 #: network/network.pm:409 network/network.pm:410
 #, c-format
@@ -10196,6 +10206,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Roit anv an etrefas kevreet ouzh internet.\n"
+"\n"
+"Dre skouer :\n"
+"\t\tppp+ evit ur model pe ul linenn DSL, \n"
+"\t\teth0 pe eth1 evit ur gevreadenn gant ur fun,\n"
+"\t\tippp+ evit ur gevreadenn ISDN.\n"
 
 #: network/thirdparty.pm:231
 #, c-format
@@ -10234,6 +10250,8 @@ msgid ""
 "The required files can also be installed from this URL:\n"
 "%s"
 msgstr ""
+"Moien zo da staliañ ar restroù red digant an URL-mañ :\n"
+"%s"
 
 #: network/thirdparty.pm:370
 #, c-format
@@ -10569,7 +10587,7 @@ msgstr ", Moullerez HP ouzh USB"
 #: printer/main.pm:374
 #, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr ""
+msgstr ", moullerez HP war HP JetDirect"
 
 #: printer/main.pm:376
 #, c-format
@@ -10629,7 +10647,7 @@ msgstr " ouzh ar servijer Novell « %s », moullerez « %s »"
 #: printer/main.pm:414
 #, c-format
 msgid ", using command %s"
-msgstr ""
+msgstr ", oc'h implij an urzhiad %s"
 
 #: printer/main.pm:429
 #, c-format
@@ -10660,7 +10678,7 @@ msgstr "Moullerez HP ouzh USB"
 #: printer/main.pm:442
 #, c-format
 msgid "HP printer on HP JetDirect"
-msgstr ""
+msgstr "Moullerez HP war HP JetDirect"
 
 #: printer/main.pm:444
 #, c-format
@@ -10953,7 +10971,7 @@ msgstr ""
 #: printer/printerdrake.pm:253 printer/printerdrake.pm:429
 #, c-format
 msgid "Examples for correct IPs:\n"
-msgstr ""
+msgstr "Skouerioù IPioù mat :\n"
 
 #: printer/printerdrake.pm:277
 #, c-format
@@ -11166,12 +11184,12 @@ msgstr ""
 #: printer/printerdrake.pm:707
 #, c-format
 msgid "Number of retries"
-msgstr ""
+msgstr "Niver a daolioù"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Dale etre taolioù (eil)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -11244,31 +11262,43 @@ msgid "and %d unknown printers"
 msgstr "ha %d voullerez dianav"
 
 #: printer/printerdrake.pm:835
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
-msgstr "Da beseurt pladenn e mennit dilec'hiañ ?"
+msgstr ""
+"Ar moullerezioù a-heul\n"
+"\n"
+"%s%s\n"
+"a zo kevreet war-eeun ouzh ho reizhiad"
 
 #: printer/printerdrake.pm:837
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
-msgstr "Da beseurt pladenn e mennit dilec'hiañ ?"
+msgstr ""
+"Ar voullerez a-heul\n"
+"\n"
+"%s%s\n"
+"a zo kevreet war-eeun ouzh ho reizhiad"
 
 #: printer/printerdrake.pm:838
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "is directly connected to your system"
-msgstr "Da beseurt pladenn e mennit dilec'hiañ ?"
+msgstr ""
+"Ar voullerez a-heul\n"
+"\n"
+"%s%s\n"
+"a zo kevreet war-eeun ouzh ho reizhiad"
 
 #: printer/printerdrake.pm:842
 #, c-format
@@ -11303,9 +11333,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:863
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr "Ha mennout a rit amprouiñ moullañ skrid ?"
+msgstr "Ha mennout a rit bevaat moulañ gant moullerezioù war ar rouedad lec'hel ?\n"
 
 #: printer/printerdrake.pm:865
 #, fuzzy, c-format
@@ -11342,12 +11372,12 @@ msgstr ""
 #: printer/printerdrake.pm:996
 #, c-format
 msgid "New printers found"
-msgstr ""
+msgstr "Moullerezioù nevez kavet"
 
 #: printer/printerdrake.pm:997
 #, c-format
 msgid "New printer found"
-msgstr ""
+msgstr "Moullerez nevez kavet"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12032,7 +12062,7 @@ msgstr "Anv pe IP an oztiz ar voullerez"
 #: printer/printerdrake.pm:2242
 #, c-format
 msgid "Refreshing Device URI list..."
-msgstr "O adtresañ roll URI an trobarzhelloù ..."
+msgstr "Oc'h adtresañ roll URI an trobarzhelloù ..."
 
 #: printer/printerdrake.pm:2245 printer/printerdrake.pm:2247
 #, c-format
@@ -12050,7 +12080,7 @@ msgstr ""
 #: printer/printerdrake.pm:2272
 #, c-format
 msgid "A valid URI must be entered!"
-msgstr ""
+msgstr "Red eo dit da reiñ un URI mat !"
 
 #: printer/printerdrake.pm:2377
 #, c-format
@@ -12072,7 +12102,7 @@ msgstr "Linenn urzhiañ"
 #: printer/printerdrake.pm:2383
 #, c-format
 msgid "A command line must be entered!"
-msgstr ""
+msgstr "Red eo dit da reiñ ul linenn &urzhiañ !"
 
 #: printer/printerdrake.pm:2423
 #, c-format
@@ -12145,12 +12175,12 @@ msgstr ""
 #: printer/printerdrake.pm:2479
 #, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
+msgstr "N'eo ket possubl lemel ho restr kefluniadur HPOJ kozh %s evit ho %s !"
 
 #: printer/printerdrake.pm:2481
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Lemel ar restr mar plij ha adloc'hañ HPOJ."
 
 #: printer/printerdrake.pm:2489 printer/printerdrake.pm:2620
 #, c-format
@@ -12853,9 +12883,9 @@ msgstr ""
 
 #: printer/printerdrake.pm:4324 printer/printerdrake.pm:4351
 #: printer/printerdrake.pm:4386
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer printer configuration"
-msgstr "Kefluniañ ar proksioù"
+msgstr "Treuzkas kefluniadur ar voullerez"
 
 #: printer/printerdrake.pm:4325
 #, c-format
@@ -12947,7 +12977,7 @@ msgstr ""
 #: printer/printerdrake.pm:4397
 #, c-format
 msgid "Refreshing printer data..."
-msgstr ""
+msgstr "O adtresañ roadoù ar moullerezioù ..."
 
 #: printer/printerdrake.pm:4407
 #, c-format
@@ -13157,13 +13187,13 @@ msgstr ""
 #: printer/printerdrake.pm:4765
 #, c-format
 msgid "How should CUPS be set up on your machine?"
-msgstr ""
+msgstr "Penaos vez lakaet CUPS war ho reizhiad ?"
 
 #: printer/printerdrake.pm:4769 printer/printerdrake.pm:4784
 #: printer/printerdrake.pm:4788 printer/printerdrake.pm:4794
 #, c-format
 msgid "Remote server, specify Name or IP here:"
-msgstr ""
+msgstr "Server a-bell, reiñ anv pe IP amañ :"
 
 #: printer/printerdrake.pm:4783
 #, c-format
@@ -13208,7 +13238,7 @@ msgstr ""
 #: printer/printerdrake.pm:5118
 #, c-format
 msgid "Display all available remote CUPS printers"
-msgstr ""
+msgstr "Diskouez pep moullerez CUPS a-bell"
 
 #: printer/printerdrake.pm:5119
 #, c-format
@@ -13441,7 +13471,7 @@ msgstr ""
 #: security/help.pm:27
 #, c-format
 msgid "Allow/Forbid reboot by the console user."
-msgstr ""
+msgstr "Bevaat/Marvaat adloc'hañ gant arveriad al letrin."
 
 #: security/help.pm:29
 #, c-format
@@ -13451,7 +13481,7 @@ msgstr "Bevaat/Marvaat ereañ a-bell gant root."
 #: security/help.pm:31
 #, c-format
 msgid "Allow/Forbid direct root login."
-msgstr ""
+msgstr "Bevaat/Marvaat dazont root war-eeun."
 
 #: security/help.pm:33
 #, c-format
@@ -14523,7 +14553,7 @@ msgstr ""
 #: share/advertising/03.pl:3
 #, c-format
 msgid "Interactive firewall"
-msgstr ""
+msgstr "Moger tan bev"
 
 #: share/advertising/04.pl:3
 #, c-format
@@ -14533,12 +14563,12 @@ msgstr ""
 #: share/advertising/05.pl:3
 #, c-format
 msgid "New package manager"
-msgstr ""
+msgstr "Merour pakadoù nevez"
 
 #: share/advertising/06.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More performances"
-msgstr ""
+msgstr "Mandriva Linux 2006 : buanoc'h"
 
 #: share/advertising/07.pl:3
 #, c-format
@@ -14553,7 +14583,7 @@ msgstr ""
 #: share/advertising/09.pl:3
 #, c-format
 msgid "Delta RPM"
-msgstr ""
+msgstr "Delta RPM"
 
 #: share/advertising/10.pl:3
 #, c-format
@@ -14563,12 +14593,12 @@ msgstr ""
 #: share/advertising/11.pl:3
 #, c-format
 msgid "Boot time reduction"
-msgstr ""
+msgstr "Loc'han buanoc'h"
 
 #: share/advertising/12.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Easier to use"
-msgstr ""
+msgstr "Mandriva Linux 2006 : aesoc'h da implij"
 
 #: share/advertising/13.pl:3
 #, c-format
@@ -14583,7 +14613,7 @@ msgstr ""
 #: share/advertising/15.pl:3
 #, c-format
 msgid "Easy and quick installation"
-msgstr ""
+msgstr "Staliadur aes ha buan"
 
 #: share/advertising/16.pl:3
 #, c-format
@@ -14593,12 +14623,12 @@ msgstr ""
 #: share/advertising/17.pl:3
 #, c-format
 msgid "Look and feel improved"
-msgstr ""
+msgstr "Neuz ha feson gwellaet"
 
 #: share/advertising/18.pl:3
 #, c-format
 msgid "New webmin theme"
-msgstr ""
+msgstr "Giz Webmin nevez"
 
 #: share/advertising/19.pl:3
 #, c-format
@@ -14618,7 +14648,7 @@ msgstr ""
 #: share/advertising/22.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More information"
-msgstr ""
+msgstr "Mandriva Linux 2006: Titouroù muioc'h"
 
 #: share/advertising/23.pl:3
 #, c-format
@@ -14643,7 +14673,7 @@ msgstr ""
 #: share/advertising/skype.pl:3
 #, c-format
 msgid "Skype lets you make calls through the Internet for free."
-msgstr ""
+msgstr "Moien zo dit da bellgomziñ dre Internet hepken paeañ."
 
 #: share/compssUsers.pl:26
 #, c-format
@@ -15189,7 +15219,7 @@ msgstr "Pladennig/ISO Etherboot"
 #: standalone/drakTermServ:251
 #, c-format
 msgid "Net Boot Images"
-msgstr ""
+msgstr "Skeudennoù loc'hañ dre ar rouedad"
 
 #: standalone/drakTermServ:258
 #, c-format
@@ -15614,7 +15644,7 @@ msgstr "Kefluniadur goude staliañ"
 #: standalone/drakTermServ:1095
 #, c-format
 msgid "No net boot images created!"
-msgstr ""
+msgstr "N'eus ket bet skeudenn loc'hañ dre ar rouedad krouet ebet !"
 
 #: standalone/drakTermServ:1114
 #, c-format
@@ -16440,9 +16470,9 @@ msgid "Choose your CD/DVD media size"
 msgstr "Dibabit ment ho vedia CD/DVD"
 
 #: standalone/drakbackup:1754
-#, fuzzy, c-format
+#, c-format
 msgid "Multisession CD"
-msgstr "Liesvedia"
+msgstr ""
 
 #: standalone/drakbackup:1756
 #, c-format
@@ -16681,9 +16711,9 @@ msgid "Use daemon"
 msgstr "Implij un diaoul"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the time interval between each backup"
-msgstr "Dibabit ar pakadoù a vennit staliañ, mar plij."
+msgstr ""
 
 #: standalone/drakbackup:2122
 #, c-format
@@ -16721,9 +16751,9 @@ msgid "Please choose the media for backup."
 msgstr "Dibabit ar vedia evit gwareziñ, mar plij."
 
 #: standalone/drakbackup:2155
-#, fuzzy, c-format
+#, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr "Dibabit ar pakadoù a vennit staliañ, mar plij."
+msgstr ""
 
 #: standalone/drakbackup:2156
 #, c-format
@@ -17126,9 +17156,9 @@ msgid "User list to restore (only the most recent date per user is important)"
 msgstr ""
 
 #: standalone/drakbackup:3008
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the date to restore:"
-msgstr "Dibabit seurt ho logodenn, mar plij."
+msgstr ""
 
 #: standalone/drakbackup:3045
 #, c-format
@@ -17380,7 +17410,7 @@ msgstr ""
 #: standalone/drakbackup:3841
 #, fuzzy, c-format
 msgid "Directory To Restore From"
-msgstr "Assevel adalek ar bladennxig"
+msgstr "Assevel adalek ar bladennig"
 
 #: standalone/drakbackup:3877
 #, fuzzy, c-format
@@ -18709,6 +18739,11 @@ msgid ""
 "\n"
 "Usage: \n"
 msgstr ""
+"drakhelp 0.1\n"
+"Copyright (C) 2003-2005 Mandriva.\n"
+"Ur meziant frank eo an hini-mañ ha moien zo da zal'ch anezhañ hervez GNU GPL.\n"
+"\n"
+"Arveriadur :\n"
 
 #: standalone/drakhelp:22
 #, c-format
@@ -18853,9 +18888,9 @@ msgstr "Lemel diwar ar roll wenn"
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
 #: standalone/drakroam:182 standalone/net_applet:201 standalone/net_applet:379
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Ne m'eus ket daremprediñ ar melezour %s"
+msgstr "N'hellan ket kevreañ ouzh an diaoul"
 
 #: standalone/drakids:202
 #, c-format
@@ -18863,14 +18898,14 @@ msgid "Date"
 msgstr "Deiziad"
 
 #: standalone/drakids:203
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Munudoù ebet"
+msgstr "Argader"
 
 #: standalone/drakids:204
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "seurt : %s"
+msgstr "Seurt an argad"
 
 #: standalone/drakids:205
 #, c-format
@@ -21264,9 +21299,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:982
-#, fuzzy, c-format
+#, c-format
 msgid "Lifetime number"
-msgstr "ur niverenn"
+msgstr ""
 
 #: standalone/drakvpn:983
 #, c-format
@@ -21440,14 +21475,14 @@ msgid "Name of the private key"
 msgstr "Anv an alc'hwez sekred"
 
 #: standalone/drakvpn:1073
-#, fuzzy, c-format
+#, c-format
 msgid "Peers certfile"
-msgstr "Dibabit ar restr"
+msgstr "Restr testeni kevatal"
 
 #: standalone/drakvpn:1074
 #, c-format
 msgid "Name of the peers certificate"
-msgstr ""
+msgstr "Anv an testeni kevatal"
 
 #: standalone/drakvpn:1075
 #, c-format
@@ -21494,9 +21529,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1100
-#, fuzzy, c-format
+#, c-format
 msgid "Peers identifier"
-msgstr "Moullerez"
+msgstr ""
 
 #: standalone/drakvpn:1101
 #, c-format
@@ -21753,9 +21788,9 @@ msgid ""
 msgstr ""
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
-#, fuzzy, c-format
+#, c-format
 msgid "Bus identification"
-msgstr "Dilesadur"
+msgstr ""
 
 #: standalone/harddrake2:32
 #, c-format
@@ -21890,9 +21925,9 @@ msgid "Bus PCI #"
 msgstr "Bus PCI #"
 
 #: standalone/harddrake2:55
-#, fuzzy, c-format
+#, c-format
 msgid "the PCI bus on which the device is plugged"
-msgstr "Dibabit ar porzh a-steud m'eo luget ho logodenn outañ, mar plij."
+msgstr "Ar bus PCI a-benn lugellañ an drobarzhell"
 
 #: standalone/harddrake2:56
 #, c-format
@@ -21907,12 +21942,12 @@ msgstr "niverenn an drobarzhell PCI"
 #: standalone/harddrake2:57
 #, c-format
 msgid "PCI function #"
-msgstr ""
+msgstr "Fonksion PCI niv."
 
 #: standalone/harddrake2:57
-#, fuzzy, c-format
+#, c-format
 msgid "PCI function number"
-msgstr "Anv ar gevreadenn"
+msgstr "Niver a fonksion PCI"
 
 #: standalone/harddrake2:58
 #, c-format
@@ -21930,9 +21965,9 @@ msgid "Device ID"
 msgstr "ID an drobarzhell"
 
 #: standalone/harddrake2:59
-#, fuzzy, c-format
+#, c-format
 msgid "this is the numerical identifier of the device"
-msgstr "anv gwerzher an drobarzhell"
+msgstr ""
 
 #: standalone/harddrake2:60
 #, c-format
@@ -21945,14 +21980,14 @@ msgid "this is the minor numerical identifier of the vendor"
 msgstr ""
 
 #: standalone/harddrake2:61
-#, fuzzy, c-format
+#, c-format
 msgid "Sub device ID"
-msgstr "trobarzhell"
+msgstr "IsID an drobarzhell"
 
 #: standalone/harddrake2:61
-#, fuzzy, c-format
+#, c-format
 msgid "this is the minor numerical identifier of the device"
-msgstr "anv gwerzher an drobarzhell"
+msgstr ""
 
 #: standalone/harddrake2:62
 #, c-format
@@ -22132,9 +22167,9 @@ msgid "the number of the processor"
 msgstr ""
 
 #: standalone/harddrake2:87
-#, fuzzy, c-format
+#, c-format
 msgid "Model stepping"
-msgstr "O furmadiñ"
+msgstr ""
 
 #: standalone/harddrake2:87
 #, c-format
@@ -22190,9 +22225,9 @@ msgid "usually the disk serial number"
 msgstr ""
 
 #: standalone/harddrake2:99
-#, fuzzy, c-format
+#, c-format
 msgid "Logical unit number"
-msgstr "Anv al levrenn poellek "
+msgstr ""
 
 #: standalone/harddrake2:99
 #, c-format
@@ -22239,9 +22274,9 @@ msgid "Speed of the memory bank"
 msgstr ""
 
 #: standalone/harddrake2:110
-#, fuzzy, c-format
+#, c-format
 msgid "Bank connections"
-msgstr "Meran liammoù"
+msgstr ""
 
 #: standalone/harddrake2:111
 #, c-format
@@ -22290,14 +22325,14 @@ msgid "the number of buttons the mouse has"
 msgstr "niver a nozelioù gand al logodenn"
 
 #: standalone/harddrake2:120
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "Dibabit ar porzh a-steud m'eo luget ho logodenn outañ, mar plij."
+msgstr ""
 
 #: standalone/harddrake2:121
 #, c-format
 msgid "Mouse protocol used by X11"
-msgstr ""
+msgstr "Komenad logod implijet gant X11"
 
 #: standalone/harddrake2:121
 #, c-format
@@ -22317,9 +22352,9 @@ msgid "Connection"
 msgstr "Kevreadenn"
 
 #: standalone/harddrake2:138
-#, fuzzy, c-format
+#, c-format
 msgid "Performances"
-msgstr "Dibarzhoù"
+msgstr ""
 
 #: standalone/harddrake2:139
 #, c-format
@@ -22886,7 +22921,7 @@ msgstr "Skoazell enlinenn"
 #: standalone/net_applet:329
 #, c-format
 msgid "Interactive Firewall automatic mode"
-msgstr ""
+msgstr "Moger tan bev ent emgefreek"
 
 #: standalone/net_applet:334
 #, c-format
@@ -22906,17 +22941,17 @@ msgstr ""
 #: standalone/net_applet:436
 #, c-format
 msgid "What do you want to do with this attacker?"
-msgstr ""
+msgstr "Petra e fell deoc'h d'ober gant an argader-mañ ?"
 
 #: standalone/net_applet:439
-#, fuzzy, c-format
+#, c-format
 msgid "Attack details"
-msgstr "Munudoù ebet"
+msgstr "Munudoù an argad"
 
 #: standalone/net_applet:443
 #, c-format
 msgid "Attack time: %s"
-msgstr ""
+msgstr "Eur an argad : %s"
 
 #: standalone/net_applet:444
 #, c-format
@@ -22924,9 +22959,9 @@ msgid "Network interface: %s"
 msgstr "Etrefas rouedad: %s"
 
 #: standalone/net_applet:445
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type: %s"
-msgstr "seurt : %s"
+msgstr "Seurt an argad : %s"
 
 #: standalone/net_applet:446
 #, c-format
@@ -22934,29 +22969,29 @@ msgid "Protocol: %s"
 msgstr "Komenad: %s"
 
 #: standalone/net_applet:447
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker IP address: %s"
-msgstr "Chomlec'h IP ar dreuzell"
+msgstr "Chomlec'h IP an argader : %s"
 
 #: standalone/net_applet:448
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker hostname: %s"
-msgstr "Anv ostiz ar proksi :"
+msgstr "Anv ostiz an argader : %s"
 
 #: standalone/net_applet:451
-#, fuzzy, c-format
+#, c-format
 msgid "Service attacked: %s"
-msgstr "Merour ar servijoù"
+msgstr "Servij argadet : %s"
 
 #: standalone/net_applet:452
-#, fuzzy, c-format
+#, c-format
 msgid "Port attacked: %s"
-msgstr "Porzh : %s"
+msgstr "Porzh argadet : %s"
 
 #: standalone/net_applet:454
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "Seurt an argad ICMP : %s"
 
 #: standalone/net_applet:459
 #, c-format
@@ -23292,9 +23327,9 @@ msgid "The %s is not supported by this version of %s."
 msgstr ""
 
 #: standalone/scannerdrake:104
-#, fuzzy, c-format
+#, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "Mennout a rit kefluniañ ur voullerez ?"
+msgstr "%s kavet war %s, kefluniañ anezhi ent emgefreek ?"
 
 #: standalone/scannerdrake:116
 #, c-format
@@ -23517,22 +23552,22 @@ msgid ""
 msgstr ""
 
 #: standalone/scannerdrake:431
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanners\n"
 "\n"
 "%s\n"
 "are available on your system.\n"
-msgstr "Da beseurt pladenn e mennit dilec'hiañ ?"
+msgstr ""
 
 #: standalone/scannerdrake:432
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanner\n"
 "\n"
 "%s\n"
 "is available on your system.\n"
-msgstr "Da beseurt pladenn e mennit dilec'hiañ ?"
+msgstr ""
 
 #: standalone/scannerdrake:435 standalone/scannerdrake:438
 #, c-format
@@ -23655,9 +23690,9 @@ msgid "This host is already in the list, it cannot be added again.\n"
 msgstr ""
 
 #: standalone/scannerdrake:782
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Implij da saveteiñ"
+msgstr "Arveriadur an eiltreserioù a-bell"
 
 #: standalone/scannerdrake:783
 #, c-format
