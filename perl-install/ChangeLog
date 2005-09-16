@@ -1,3 +1,196 @@
+2005/09/16  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draknfs: fix draknfs banner
+
+	* standalone/drakhosts: fix drakhosts banner
+
+2005/09/16  cavassin
+
+	* share/po/pt_BR.po: Filled one untranslated msg.
+
+2005/09/16  Gwenole Beauchesne  <gbeauchesne at mandriva.com>
+
+	* crypto.pm: more x86_64 mirrors (works, tested as lftp $url -e exit)
+
+2005/09/16  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/09/16  neoclust
+
+	* share/po/it.po: Updated translation from Giuseppe Levi
+
+2005/09/16  Olivier Blin <oblin at mandriva.com>
+
+	* install2.pm: pppoe_modem device doesn't exist
+	automatically configure DSL connection on installation from DSL
+
+	* network/netconnect.pm: revert previous simplification, it may break the
+	unusual sagem over pppoe case
+	some modem configuration programs modify modprobe.conf while
+	drakconnect/the installer is loaded, workaround it
+	make sure $net->{ifcfg}{ppp0} is a hash
+	simplify pppoe configuration code
+
+	* network/adsl.pm: revert previous simplification, it may break the
+	unusual sagem over pppoe case
+	automatically configure DSL connection on installation from DSL
+	fix ugly typo
+	fix probing of login name for pppoe connections (peers file is more
+	important than pppoe.conf)
+	don't use ifplugd for ethernet devices associated with a pppoe/pptp
+	connection
+	simplify pppoe configuration code
+	come on titi, no need to check we're root here
+
+	* standalone/drakroam: if ESSID is hidden, add brackets around AP MAC
+	address
+
+	* install_any.pm, install_steps_interactive.pm: automatically configure
+	DSL connection on installation from DSL
+
+	* standalone/net_applet: fix crash when only one interface is configured
+
+2005/09/16  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2005/09/16  pjetur
+
+	* share/po/is.po: just continue
+
+2005/09/16  Pixel  <pixel at mandriva.com>
+
+	* install_steps_gtk.pm: don't call $advertize on "Details" click otherwise
+	it may call $advertize when
+	chrooted which we don't want. So changing behaviour: the button now only
+	hide
+	or show, it doesn't change the current ad
+
+	* Xconfig/card.pm: comment/dis-comment the content of
+	ld.so.conf.d/{nvidia,ati}.conf instead of symlinking to a hidden file
+	(implies the new ati/nvidia packages have config(noreplace) for those
+	files)
+	instead of symlinking, comment the content of the ld.so.conf.d/*.conf
+	don't load glx with fbdev (since glx is used for various things
+	nowadays, dixit fredl)
+
+	* fs/dmraid.pm: fix typo
+	during install, don't use half working dmraids (#18386)
+
+	* pkgs.pm: URPM/Resolve.pm diff 1.109: "Remove the return value of
+	compute_installed_flags"...
+	but alas install still use it, so doing here what was done in
+	compute_installed_flags
+
+2005/09/16  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2005/09/16  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Adapted file names to check for to the changes on the HPIJ 0.91-8mdk
+	packages.
+
+2005/09/16  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* network/ethernet.pm (is_ifplugd_blacklisted) do not blacklist anymore
+	b44 since it now
+	support reporting link status according to Arnaud Monnet de Lorbeau
+
+	* detect_devices.pm (complete_usb_storage_info) delete {found} field once
+	used
+	(complete_usb_storage_info) fix getting data when multiple USB disks
+	of the same vendor are plugged
+	right thing would be to compare {host} but usb_probde() cannot return
+	SCSI host, thus descriptions might be switched if the manufacturer
+	altered them on latest discs
+	rationale:
+
+	* lang.pm (configure_kdeglobals) kill dead variable
+
+	* interactive/gtk.pm (create_treeview_list) run timer only once
+	(create_treeview_list) workaround Gtk+ bug where it hides half the list
+	(#18132)
+
+	* standalone/harddrake2: space cleaning (thx perl_checko)
+
+2005/09/16  Warly  <warly at mandriva.com>
+
+	* share/po/fr.po: faicle->facile
+
+	* share/advertising/skype.pl, share/advertising/skype.png: add skype ad
+
+2005/09/15  cavassin
+
+	* share/po/pt_BR.po: Fixed wrong string gÅ•fica (thanks pixel).
+	Fixed some strings and misuses of "esse/essa/isso".
+
+2005/09/15  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/sl.po: language proof from Gregor Pirnaver
+	<gregor.pirnaver@sdm-si.org>.
+
+2005/09/15  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: restart hsf/hcfpci services when needed
+	support madwifi drivers
+
+	* standalone/drakroam: increase timeout after a wireless network is
+	selected
+	don't vivify hash ref
+
+	* standalone/net_applet: allow to up/down any network interface (backport
+	of my 2005 patch for PSA)
+
+2005/09/15  Pixel  <pixel at mandriva.com>
+
+	* install_steps_gtk.pm, pkgs.pm: 
+	  - call installCallback() on "open" too
+	  - on "open" we are not chrooted
+	  - setting advertising when chrooted could cause havoc
+	if pango wants to load a new font (eg: advertising #13 in pt_BR)
+
+	* share/upgrade/conectiva.10/map: have drakconf when there was
+	task-webmin-desktop
+
+	* standalone/bootloader-config: fix borking entry "linux" (removing
+	root=xxx) when removing a kernel
+
+	* install_any.pm: 
+	  - there is no more adverstising icon
+	  - cleaning
+
+2005/09/15  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/09/15  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/harddrake2: show the main window very early. thus:
+	  - users feels it startups faster
+	  - both main window's icon subdialogs' ones work smoothly
+
+	* drakxtools.spec: 10.3-0.62mdk
+
 2005/09/15  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/sl.po: language proof from Gregor Pirnaver
