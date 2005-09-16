@@ -1,4 +1,4 @@
-# translation of DrakX-sl.po to 
+# translation of DrakX-sl.po to
 # translation of DrakX.po to Slovenian
 # translation of DrakX-sl.po to Slovenian
 # translation of DrakX-sl.po to
@@ -8,18 +8,18 @@
 # Aljoša Ločičnik <aljosa.locicnik@mandrakeprinas.org>, 2005.
 # Gregor Pirnaver <gregor.pirnaver@sdm-si.org>, 2002,2004,2005.
 # Jure Repinc <jlp@holodeck1.com>, 2005.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-sl\n"
+"Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-09-16 17:08+0200\n"
-"PO-Revision-Date: 2005-09-15 14:15+0200\n"
-"Last-Translator: Gregor Pirnaver <gregor.pirnaver@sdm-si.org>\n"
-"Language-Team:  <sl@li.org>\n"
+"PO-Revision-Date: 2005-09-16 19:43+0200\n"
+"Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3);\n"
 
@@ -1054,7 +1054,7 @@ msgstr "Omogočim zagon s CD pogona?"
 #: any.pm:314
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "Izbira zagona OF?"
+msgstr "Omogočim zagon OF?"
 
 #: any.pm:315
 #, c-format
@@ -1498,12 +1498,12 @@ msgstr "Domena za Windows"
 #: authentication.pm:28
 #, c-format
 msgid "Active Directory with SFU"
-msgstr "Aktivni imenik, ki vsebuje SFU (Windows services for Unix)"
+msgstr "Aktivni imenik z SFU (Windows services for Unix)"
 
 #: authentication.pm:29
 #, c-format
 msgid "Active Directory with Winbind"
-msgstr "Aktivni imenik, ki vsebuje Winbind"
+msgstr "Aktivni imenik z Winbind"
 
 #: authentication.pm:55
 #, c-format
@@ -1515,8 +1515,8 @@ msgstr "Krajevna datoteka:"
 msgid ""
 "Use local for all authentication and information user tell in local file"
 msgstr ""
-"Uporabi krajevno za vsa overjanja in podatke, ki jih uporabniki navedejo v "
-"krajevni datoteki."
+"Uporabi krajevno datoteko za vsa overjanja in podatke, ki jih uporabniki "
+"navedejo v krajevni datoteki."
 
 #: authentication.pm:56
 #, c-format
@@ -1529,8 +1529,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
-"Določi, naj računalnik za vsa ali za nekatera LDAP overjanja utrdi določene "
-"vrste podatkov znotraj vaše organizacije."
+"Določi, naj računalnik za vsa ali za nekatera overjanja uporabi LDAP. LDAP "
+"združuje določene vrste podatkov znotraj vaše organizacije."
 
 #: authentication.pm:57
 #, c-format
@@ -1543,8 +1543,9 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
-"Dovoli zagon skupine računalnikov znotraj iste NIS domene z enotnim geslom "
-"in skupno datoteko."
+"Omogoča poganjanje skupine računalnikov znotraj iste domene NIS (Network "
+"Information Service), tako da uporabljajo isto datoteko za uporabnike, gesla "
+"in skupine."
 
 #: authentication.pm:58
 #, c-format
@@ -1563,7 +1564,7 @@ msgstr ""
 #: authentication.pm:59
 #, c-format
 msgid "Active Directory with SFU:"
-msgstr "Aktivni imenik, ki vsebuje SFU (Windows services for Unix)"
+msgstr "Aktivni imenik z SFU (Windows services for Unix):"
 
 #: authentication.pm:59
 #, c-format
@@ -1573,7 +1574,7 @@ msgstr "S Kerberos in LDAP za overjanje na strežniku Active Directory."
 #: authentication.pm:60
 #, c-format
 msgid "Active Directory with Winbind:"
-msgstr "Aktivni imenik, ki vsebuje Winbind"
+msgstr "Aktivni imenik z Winbind"
 
 #: authentication.pm:60
 #, c-format
@@ -1587,12 +1588,12 @@ msgstr ""
 #: authentication.pm:85
 #, c-format
 msgid "Authentication LDAP"
-msgstr "LDAP overjanje"
+msgstr "Overjanje LDAP"
 
 #: authentication.pm:86
 #, c-format
 msgid "LDAP Base dn"
-msgstr "Osnovno domensko ime LDAP"
+msgstr "Osnovno ime domene LDAP"
 
 #: authentication.pm:87 share/compssUsers.pl:102
 #, c-format
@@ -1612,7 +1613,7 @@ msgstr "TLS (Transport Layer Security protocol)"
 #: authentication.pm:102
 #, c-format
 msgid "SSL"
-msgstr "SSL ( Secure Sockets Layer.)"
+msgstr "SSL (Secure Sockets Layer)"
 
 #: authentication.pm:103
 #, c-format
@@ -1761,7 +1762,7 @@ msgstr "Brez domene NIS oddajanje ni mogoče."
 # only the ascii charset will be available on most machines
 # so use only 7bit for this message (and do transliteration or
 # leave it in English, as it is the best for your language)
-# 
+#
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: bootloader.pm:764
 #, c-format
@@ -3644,7 +3645,7 @@ msgid ""
 msgstr ""
 "OSS (Odprt Zvočni Sistem) je bil prvi API (vmesnik za aplikacijsko "
 "programiranje) za zvok. Je od operacijskega sistema neodvisen API za zvok."
-"(Najdemo ga na večini UNIX(tm) sistemov, vendar je zelo enostaven in omejen "
+"(Najdemo ga na večini UNIX sistemov, vendar je zelo enostaven in omejen "
 "API.)\n"
 "\n"
 "ALSA (Advanced Linux Sound Architecture) je napredna arhitektura zvoka, ki\n"
@@ -3714,7 +3715,7 @@ msgstr "Neznan gonilnik"
 #: harddrake/sound.pm:289
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Napaka: Gonilnika »%s« za vašo zvočno katico ni na seznamu."
+msgstr "Napaka: Gonilnika »%s« za vašo zvočno kartico ni na seznamu."
 
 #: harddrake/sound.pm:303
 #, c-format
@@ -3766,7 +3767,7 @@ msgstr ""
 #: harddrake/sound.pm:332
 #, c-format
 msgid "Let me pick any driver"
-msgstr "Dovolite, da izberem katerikoli gonilnik"
+msgstr "Dovoli, da izberem katerikoli gonilnik"
 
 #: harddrake/sound.pm:335
 #, c-format
@@ -4497,12 +4498,14 @@ msgid ""
 "want to check \"%s\" if your machine is to act as a server, or if you were\n"
 "not successful in getting the display configured."
 msgstr ""
-"X (X okenski sistem) je srce grafičnega vmesnika za GNU/Linux\n"
-"na katerem so zgrajeni vsa v Mandriva Linux vključena grafična\n"
-"okolja. (KDE,GNOME, AfterStep, WindowMaker. itd)\n"
+"X (okenski sistem X) je srce grafičnega vmesnika za GNU/Linux\n"
+"na katerega se zanašajo vsa v Mandriva Linux vključena grafična\n"
+"okolja. (KDE, GNOME, AfterStep, WindowMaker ...)\n"
 "\n"
-"Predočen vam bo seznam različnih vrednosti, ki jih lahko spreminjate,\n"
-"tako, da dosežete najboljši grafični prikaz: Grafična kartica\n"
+"Prikazal se vam bo seznam različnih vrednosti, ki jih lahko spreminjate,\n"
+"da dosežete najboljši grafični prikaz.\n"
+"\n"
+"Grafična kartica\n"
 "\n"
 "   Program za nameščanje navadno samodejno zazna in nastavi grafično\n"
 "kartico, ki je priključena v računalniku. Če temu ni tako, lahko\n"
@@ -5230,7 +5233,7 @@ msgid ""
 "to Mandriva Linux version \"8.1\" is not recommended."
 msgstr ""
 "Ta korak se zažene samo v primeru, da na vašem računalniku že obstaja\n"
-"razdelek  zaGNU/Linux.\n"
+"razdelek za GNU/Linux.\n"
 "\n"
 "Lahko izbirate med novo namestitvijo in med posodobitvijo obstoječega\n"
 "sistema Mandriva Linux.\n"
@@ -5415,7 +5418,7 @@ msgstr ""
 "miška dve tipki, in nastavi emulacijo tretje tipke. Tretjo tipko\n"
 "miške z dvema tipkama v tem primeru nadomešča istočasni pritisk na\n"
 "obe tipki. DrakX samodejno zazna tudi, na kateri vmesnik je vaša\n"
-"miška priključena. (PS/2, serijska vrata, USB,)\n"
+"miška priključena. (PS/2, serijska vrata, USB)\n"
 "\n"
 "Če imate miško s tremi tipkami, vendar brez kolesca, izberite miško\n"
 "»%s«. DrakX jo bo nastavil tako,\n"
@@ -5827,7 +5830,8 @@ msgstr ""
 " * »%s«: Na ta gumb kliknite, če želite spremeniti nastavitve zagonskega\n"
 "nalagalnika. To priporočamo samo izkušenim uporabnikom!.\n"
 "\n"
-" * »%s«: Tu lahko določite, katere storitve naj tečejo navašem računalniku.\n"
+" * »%s«: Tu lahko določite, katere storitve naj tečejo na vašem "
+"računalniku.\n"
 "Če boste računalnik uporabljali kot strežnik, vam priporočamo, da\n"
 "pregledate in prilagodite te nastavitve."
 
@@ -6528,7 +6532,7 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact Mandriva S.A.  \n"
 msgstr ""
-"PREDSTAVITEV\n"
+"Uvod\n"
 "\n"
 "Operacijski sistem in druge sestavine distribucije Mandriva Linux \n"
 "bomo v nadaljnjem besedilu imenovali »Programje«.  Programje vsebuje "
@@ -6537,10 +6541,10 @@ msgstr ""
 "Mandriva Linux.\n"
 "\n"
 "\n"
-"1. LICENČNA POGODBA\n"
+"1. Licenčna pogodba\n"
 "\n"
 "Prosimo, pazljivo preberite ta dokument. To je licenčna pogodba med vami in "
-"Mandriva d.d.,ki se nanaša na programje.\n"
+"Mandriva S.A.,ki se nanaša na programje.\n"
 "Vsaka namestitev, razmnoževanje ali uporaba programja pomeni, da izrecno "
 "sprejemate pogoje te pogodbe in da se z njimi v celoti strinjate.\n"
 "Če zavračate katerokoli pogodbeno določilo, programja ne smete namestiti,\n"
@@ -6553,26 +6557,26 @@ msgstr ""
 "posesti.\n"
 "\n"
 "\n"
-"2. OMEJENO JAMSTVO\n"
+"2. Omejeno jamstvo\n"
 "\n"
 "Programje in priložena dokumentacija sta na voljo v obliki, v kakršni sta, "
 "brez jamstva,\n"
 "ki presega z zakonom določeno odgovornost.\n"
-"Mandriva d.d. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
+"Mandriva S.A. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
 "ne prevzema odgovornosti za kakršnokoli naključno, posredno ali neposredno "
 "škodo,\n"
 "vključno s škodo zaradi izgube zaslužka, motenj v poslovanju, finančnih "
 "izgub, sodnih taks\n"
 "in izrečenih kazni ali drugih oblik posredne škode, ki bi nastala zaradi "
 "uporabe ali\n"
-"nezmožnosti uporabe programja, tudi če je bila Mandriva d.d. opozorjena na "
+"nezmožnosti uporabe programja, tudi če je bila Mandriva S.A. opozorjena na "
 "možnost nastanka takšne škode.\n"
 "\n"
 "\n"
 "OMEJENA ODGOVORNOST ZA POSEDOVANJE ALI UPORABO PROGRAMJA, KI JE V NEKATERIH "
 "DRŽAVAH PREPOVEDANO\n"
 "\n"
-"Mandriva d.d. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
+"Mandriva S.A. v nobenem primeru, razen kadar to izrecno določa pravni red,\n"
 "ne prevzema odgovornosti za kakršnokoli naključno, posredno ali neposredno "
 "škodo,\n"
 "vključno s škodo zaradi izgube zaslužka, motenj v poslovanju, finančnih "
@@ -6586,7 +6590,7 @@ msgstr ""
 "šifrirane sestavine programja.\n"
 "\n"
 "\n"
-"3. SPLOŠNO DOVOLJENJE GNU IN SORODNA DOVOLJENJA\n"
+"3. Splošno dovoljenje GNU (GPL) in sorodna dovoljenje\n"
 "\n"
 "Programje vsebuje sestavine, ki so jih ustvarili različni posamezniki in "
 "skupine.\n"
@@ -6603,24 +6607,24 @@ msgstr ""
 " sestavino programja, preden jo uporabite.\n"
 "Obenem vas prosimo, da vsa vprašanja, ki se nanašajo na licenčne pogodbe za "
 "posamezne\n"
-"sestavine programja,naslovite na njenega avtorja in ne na Mandriva d.d.\n"
-"Vsako programje, ki ga razvije Mandriva d.d., je zaščiteno s splošnim "
+"sestavine programja,naslovite na njenega avtorja in ne na Mandriva S.A.\n"
+"Vsako programje, ki ga razvije Mandriva S.A., je zaščiteno s splošnim "
 "dovoljenjem GPL.\n"
-"Dokumentacija, napisana pri Mandriva d.d., je zaščitena s posebnim "
+"Dokumentacija, napisana pri Mandriva S.A., je zaščitena s posebnim "
 "dovoljenjem.\n"
 "Prosimo, da podrobnosti preberete v dokumentaciji.\n"
 "\n"
 "\n"
-"4.PRAVICE INTELEKTUALNE LASTNINE\n"
+"4. Pravice intelektualne lastnine\n"
 "\n"
 "Avtorske in druge pravice intelektualne lastnine, ki se nanašajo na "
 "programje, pripadaj avtorjem\n"
 " programja in so zaščitene z zakonom.\n"
-"Mandriva d.d. si pridržuje pravico do spreminjanja programja v celoti ali "
+"Mandriva S.A. si pridržuje pravico do spreminjanja programja v celoti ali "
 "deloma\n"
 "v kakršnem koli smislu in za kakršen koli namen.\n"
 "»Mandriva«, »Mandriva Linux« in pripadajoči logotipi so blagovne znamke "
-"Mandriva d.d.\n"
+"Mandriva S.A.\n"
 "\n"
 "\n"
 "5. Končne določbe\n"
@@ -6635,7 +6639,7 @@ msgstr ""
 "pa je pristojno sodišče v Parizu, Republika Francija.\n"
 "\n"
 "Prosimo, da se glede vseh nejasnosti v zvezi s to pogodbo obrnete na "
-"Mandakesoft d.d.\n"
+"Mandriva S.A.\n"
 
 #: install_messages.pm:90
 #, c-format
@@ -6706,7 +6710,7 @@ msgstr ""
 " preden pričnete uporabljati ali razširjati programje, na katero se nanaša.\n"
 "Navadno takšna dovoljenja prepovedujejo vsako razširjanje, razmnoževanje\n"
 "(razen varnostnih kopij), spreminjanje, prilagajanje ali razstavljanje\n"
-" programja, na katero se nanšajo.\n"
+" programja, na katero se nanašajo.\n"
 "Vsakršna kršitev pogodbe o takšnem dovoljenju bi imelo za posledico\n"
 " takojšnje prenehanje vseh pogodbenih pravic.\n"
 "Običajno omenjena dovoljenja dopuščajo namestitev programja\n"
@@ -6785,7 +6789,7 @@ msgstr ""
 "Vaš sistem ni dovolj zmogljiv. Lahko, da boste imeli pri namestitvi\n"
 "Mandriva Linux težave. V tem primeru lahko poskusite z namestitvijo v "
 "besedilnem načinu. \n"
-"Po zagonu z zgoščenke pritisnite `F1' in vpišite `text'."
+"Po zagonu z zgoščenke pritisnite »F1« in vpišite »text«."
 
 #: install_steps_gtk.pm:211 install_steps_interactive.pm:628
 #, c-format
@@ -8486,7 +8490,7 @@ msgstr "Tipki »Ctrl« in »Alt« istočasno"
 #: keyboard.pm:341
 #, c-format
 msgid "Alt and Shift keys simultaneously"
-msgstr "Tipki Alt in Shift istočasno"
+msgstr "Tipki »Alt« in »Shift« istočasno"
 
 #: keyboard.pm:342
 #, c-format
@@ -8506,37 +8510,37 @@ msgstr "Desna tipka »Windows«"
 #: keyboard.pm:345
 #, c-format
 msgid "Both Control keys simultaneously"
-msgstr "Obe tipki Ctrl istočasno"
+msgstr "Obe tipki »Ctrl« istočasno"
 
 #: keyboard.pm:346
 #, c-format
 msgid "Both Alt keys simultaneously"
-msgstr "Obe tipki Alt istočasno"
+msgstr "Obe tipki »Alt« istočasno"
 
 #: keyboard.pm:347
 #, c-format
 msgid "Left Shift key"
-msgstr "Leva tipka Shift"
+msgstr "Leva tipka »Shift«"
 
 #: keyboard.pm:348
 #, c-format
 msgid "Right Shift key"
-msgstr "Desna tipka Shift"
+msgstr "Desna tipka »Shift«"
 
 #: keyboard.pm:349
 #, c-format
 msgid "Left Alt key"
-msgstr "Leva tipka Alt"
+msgstr "Leva tipka »Alt«"
 
 #: keyboard.pm:350
 #, c-format
 msgid "Left Control key"
-msgstr "Leva tipka Ctrl"
+msgstr "Leva tipka »Ctrl«"
 
 #: keyboard.pm:351
 #, c-format
 msgid "Right Control key"
-msgstr "Desna tipka Ctrl"
+msgstr "Desna tipka »Ctrl«"
 
 #: keyboard.pm:387
 #, c-format
@@ -9800,7 +9804,7 @@ msgstr "števila ločena z vejicami"
 #: modules/parameters.pm:53
 #, c-format
 msgid "comma separated strings"
-msgstr "nizi ločeni z vejicamio"
+msgstr "nizi ločeni z vejicami"
 
 #: mouse.pm:25
 #, c-format
@@ -10647,7 +10651,8 @@ msgid ""
 "want to use?"
 msgstr ""
 "Za ta modem je na voljo gonilnik CAPI. CAPI gonilnik nudi več možnosti, kot "
-"prosti gonilnik (n.pr.:pošiljanje faxov). Kateri gonilnik želite uporabljati?"
+"prosti gonilnik (n.pr.: pošiljanje faksov). Kateri gonilnik želite "
+"uporabljati?"
 
 #: network/netconnect.pm:423 standalone/drakconnect:109 standalone/drakups:251
 #: standalone/harddrake2:133
@@ -10674,7 +10679,7 @@ msgid ""
 "If it is not listed, choose Unlisted."
 msgstr ""
 "Izberite svojega ponudnika.\n"
-"Če ga ni seznamu. izberite Unlisted."
+"Če ga ni seznamu. izberite »Ni na seznamu«."
 
 #: network/netconnect.pm:451 network/netconnect.pm:540
 #: network/netconnect.pm:686
@@ -10742,7 +10747,7 @@ msgstr "Nastavitve IP"
 #: standalone/drakhosts:197 standalone/drakroam:122 standalone/drakups:286
 #, c-format
 msgid "IP address"
-msgstr "IP naslov"
+msgstr "Naslov IP"
 
 #: network/netconnect.pm:587
 #, c-format
@@ -10752,7 +10757,7 @@ msgstr "Maska podomrežja"
 #: network/netconnect.pm:599
 #, c-format
 msgid "Dialup: DNS parameters"
-msgstr "Klicne nastavitve:DNS"
+msgstr "Klicne nastavitve: DNS"
 
 #: network/netconnect.pm:602
 #, c-format
@@ -10779,7 +10784,7 @@ msgstr "Drugi DNS strežnik (neobvezno)"
 #: network/netconnect.pm:606
 #, c-format
 msgid "Set hostname from IP"
-msgstr "Gostiteljevo ime pridobi iz IP naslova"
+msgstr "Gostiteljevo ime pridobi iz naslova IP"
 
 #: network/netconnect.pm:618 standalone/drakconnect:327
 #, c-format
@@ -10789,7 +10794,7 @@ msgstr "Privzeti prehod"
 #: network/netconnect.pm:619 standalone/drakroam:124
 #, c-format
 msgid "Gateway IP address"
-msgstr "IP naslov privzetega prehoda (gateway)"
+msgstr "Naslov IP privzetega prehoda (gateway)"
 
 #: network/netconnect.pm:654
 #, c-format
@@ -10867,18 +10872,18 @@ msgid ""
 "notation (for example, 1.2.3.4)."
 msgstr ""
 "Vnesite IP nastavitve za ta računalnik.\n"
-"Vsako postavko vnesite kot IP naslov v obliki decimalnih števil, ločenih s "
+"Vsako postavko vnesite kot naslov IP v obliki decimalnih števil, ločenih s "
 "piko (n.pr.: 1.2.3.4)."
 
 #: network/netconnect.pm:905 standalone/drakconnect:373
 #, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Pridobi gostiteljsko ime preko DHCP naslova"
+msgstr "Pridobi ime gostitelja prek naslova DHCP"
 
 #: network/netconnect.pm:906 standalone/drakconnect:375
 #, c-format
 msgid "DHCP host name"
-msgstr "DHCP gostiteljsko ime"
+msgstr "Ime gostitelja (DHCP)"
 
 #: network/netconnect.pm:911 standalone/drakconnect:321
 #: standalone/drakconnect:883 standalone/drakgw:181
@@ -10915,7 +10920,7 @@ msgstr "Omogoči tunel med IPv6 in IPv4"
 #: standalone/drakconnect:886
 #, c-format
 msgid "DHCP client"
-msgstr "DHCP odjemalec"
+msgstr "Odjemalec DHCP"
 
 #: network/netconnect.pm:923 standalone/drakconnect:379
 #, c-format
@@ -10925,23 +10930,23 @@ msgstr "Premor pred povezavo z DHCP (v sekundah)"
 #: network/netconnect.pm:924 standalone/drakconnect:382
 #, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "Pridobi DNS strežnike od DHCP"
+msgstr "Pridobi strežnike DNS prek DHCP"
 
 #: network/netconnect.pm:925 standalone/drakconnect:383
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr "Pridobi YP strežnike od DHCP"
+msgstr "Pridobi strežnike YP prek DHCP"
 
 #: network/netconnect.pm:926 standalone/drakconnect:384
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr "Pridobi NTPD strežnike od DHCP"
+msgstr "Pridobi strežnike NTPD prek DHCP"
 
 #: network/netconnect.pm:934 printer/printerdrake.pm:1897
 #: standalone/drakconnect:676
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
-msgstr "IP naslov mora imeti obliko 1.2.3.4"
+msgstr "Naslov IP mora imeti obliko 1.2.3.4"
 
 #: network/netconnect.pm:938 standalone/drakconnect:680
 #, c-format
@@ -10951,7 +10956,7 @@ msgstr "Mrežna maska bi morala biti v obliki 255.255.255.0"
 #: network/netconnect.pm:942
 #, c-format
 msgid "Warning: IP address %s is usually reserved!"
-msgstr "Opozorilo: IP naslov %s je običajno rezerviran!"
+msgstr "Opozorilo: naslov IP %s je običajno rezerviran!"
 
 #: network/netconnect.pm:947 standalone/drakTermServ:1852
 #: standalone/drakTermServ:1853 standalone/drakTermServ:1854
@@ -11003,17 +11008,17 @@ msgstr "Upravljano"
 #: network/netconnect.pm:1034
 #, c-format
 msgid "Master"
-msgstr "Master"
+msgstr "Glavno"
 
 #: network/netconnect.pm:1034
 #, c-format
 msgid "Repeater"
-msgstr "Repeater"
+msgstr "Ponavljalnik"
 
 #: network/netconnect.pm:1034
 #, c-format
 msgid "Secondary"
-msgstr "Sekundarna"
+msgstr "Sekundarno"
 
 #: network/netconnect.pm:1034
 #, c-format
@@ -11220,14 +11225,14 @@ msgid ""
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one."
 msgstr ""
-"Prosim, vnesite svoje gostiteljsko ime.\n"
-"Gostiteljsko ime mora imeti obliko kot na primer:``mybox.mylab.myco.com''.\n"
-"Lahko vnesete tudi IP naslov privzetega prehoda (gateway)."
+"Prosim, vnesite svoje ime gostitelja.\n"
+"Ime gostitelja mora imeti obliko kot na primer:``mybox.mylab.myco.com''.\n"
+"Lahko vnesete tudi naslov IP privzetega prehoda (gateway)."
 
 #: network/netconnect.pm:1195
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
-msgstr "Vnesete lahko tudi IP naslov DNS strežnika."
+msgstr "Vnesete lahko tudi naslov IP strežnika DNS."
 
 #: network/netconnect.pm:1197 standalone/drakconnect:991
 #, c-format
@@ -11292,7 +11297,7 @@ msgid ""
 "its shared resources that are not managed by the network.\n"
 "It is not necessary on most networks."
 msgstr ""
-"Če želite, lahko vnesete Zeroconf gostiteljsko ime.\n"
+"Če želite, lahko vnesete ime gostitelja za Zeroconf.\n"
 "S tem imenom bo vaš računalnik predstavljal vse \n"
 "vire v skupni rabi, ki jih ne upravlja omrežje.\n"
 "Za večino omrežij to ime ni potrebno."
@@ -11300,12 +11305,12 @@ msgstr ""
 #: network/netconnect.pm:1237
 #, c-format
 msgid "Zeroconf Host name"
-msgstr "Zeroconf gostiteljsko ime"
+msgstr "Ime gostitelja za Zeroconf"
 
 #: network/netconnect.pm:1240
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr "Zeroconf gostiteljsko ime ne sme vsebovati"
+msgstr "ime gostitelja za Zeroconf ne sme vsebovati"
 
 #: network/netconnect.pm:1250
 #, c-format
@@ -11505,7 +11510,7 @@ msgstr "Posrednik za FTP"
 #: network/network.pm:415
 #, c-format
 msgid "Proxy should be http://..."
-msgstr "Proxy mora imeti obliko http://..."
+msgstr "Posrednik mora imeti obliko http://..."
 
 #: network/network.pm:416
 #, c-format
@@ -11611,7 +11616,7 @@ msgid ""
 "You can provide it now via a floppy or your windows partition,\n"
 "or skip and do it later."
 msgstr ""
-"Potrebujete datoteko Alcatel microcode.\n"
+"Potrebujete Alcatelovo mikrokodo.\n"
 "Lahko jo prenesete z diskete ali z razdelka za Windows,\n"
 "lahko pa dejanje preskočite in ga opravite kasneje."
 
@@ -12115,7 +12120,7 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
-"Tiskalniku HP LaserJeet 1000 je treba ob vsakokratnem vklopu naložiti "
+"Tiskalniku HP LaserJet 1000 je treba ob vsakokratnem vklopu naložiti "
 "strojnoprogramsko datoteko (firmware). S spletne strani HP pridobite "
 "gonilnik za Windows (firmware z zgoščenke ne deluje!) in iz njega izločite "
 "strojnoprogramsko datoteko. To storite tako, da izvlečete 'exe' datoteko z "
@@ -12193,7 +12198,7 @@ msgstr ""
 "omrežju vključite izbiro »Samodejno iskanje dosegljivih tiskalnikov v "
 "omrežju« Strežnik CUPS bo samodejno obvestil vaš računalnik o dosegljivih "
 "tiskalnikih. Vsi zaznani tiskalniki so našteti v oddelku »Oddaljeni "
-"tiskalnik« v PrinterDrake. Če vaš CUPS strežnik ni naštet, vnesite IP naslov "
+"tiskalnik« v PrinterDrake. Če vaš CUPS strežnik ni naštet, vnesite naslov IP "
 "in številko vrat, da bi pridobili informacije o tiskalnikih na strežniku."
 
 #: printer/printerdrake.pm:115
@@ -12274,9 +12279,9 @@ msgid ""
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
 msgstr ""
-"V tem naččinu bo krajevni CUPS demon zaustavljen, vsa tiskalniška opravila "
-"pa bodo poslana neposredno strežniku, ki je naveden spodaj. Upoštevajte, da "
-"ni mogoče ustvariti krajevne čakalne vrste in da bo v primeru, da izbrani "
+"V tem načinu bo krajevni CUPS demon zaustavljen, vsa tiskalniška opravila pa "
+"bodo poslana neposredno strežniku, ki je naveden spodaj. Upoštevajte, da ni "
+"mogoče ustvariti krajevne čakalne vrste in da bo v primeru, da izbrani "
 "strežnik ne deluje, tiskanje na tem računalniku onemogočeno."
 
 #: printer/printerdrake.pm:161 printer/printerdrake.pm:236
@@ -12313,7 +12318,7 @@ msgstr "Odstrani izbranega gostitelja/omrežje"
 #: printer/printerdrake.pm:279 printer/printerdrake.pm:297
 #, c-format
 msgid "IP address of host/network:"
-msgstr "IP naslov izbranega gostitelja/omrežja:"
+msgstr "Naslov IP gostitelja/omrežja:"
 
 #: printer/printerdrake.pm:237
 #, c-format
@@ -12327,17 +12332,17 @@ msgstr ""
 #: printer/printerdrake.pm:244
 #, c-format
 msgid "Host/network IP address missing."
-msgstr "Manjka IP naslov gostitelja/omrežja."
+msgstr "Manjka naslov IP gostitelja/omrežja."
 
 #: printer/printerdrake.pm:252
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr "Vnešeni IP naslov je napačen.\n"
+msgstr "Vneseni naslov IP je napačen.\n"
 
 #: printer/printerdrake.pm:253 printer/printerdrake.pm:429
 #, c-format
 msgid "Examples for correct IPs:\n"
-msgstr "Primeri pravilnih IP naslovov:\n"
+msgstr "Primeri pravilnih naslovov IP:\n"
 
 #: printer/printerdrake.pm:277
 #, c-format
@@ -12379,7 +12384,7 @@ msgstr "Odstrani izbrani strežnik"
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
-"Vnesite IP naslov in vrata strežnika, na katerem želite uporabljati "
+"Vnesite naslov IP in vrata strežnika, na katerem želite uporabljati "
 "tiskalnike."
 
 #: printer/printerdrake.pm:418
@@ -12395,7 +12400,7 @@ msgstr "Manjka IP strežnika!"
 #: printer/printerdrake.pm:428
 #, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Vnešeni IP naslov ni pravilen.\n"
+msgstr "Vneseni naslov IP ni pravilen.\n"
 
 #: printer/printerdrake.pm:440 printer/printerdrake.pm:2154
 #, c-format
@@ -12418,13 +12423,13 @@ msgstr "Vrata"
 #: printer/printerdrake.pm:536
 #, c-format
 msgid "On, Name or IP of remote server:"
-msgstr "Vključen. Ime ali IP naslov oddaljenega strežnika:"
+msgstr "Vključen. Ime ali naslov IP oddaljenega strežnika:"
 
 #: printer/printerdrake.pm:514 printer/printerdrake.pm:4706
 #: printer/printerdrake.pm:4772
 #, c-format
 msgid "CUPS server name or IP address missing."
-msgstr "Manjka IP naslov ali IP naslov oddaljenega strežnika."
+msgstr "Manjka ime strežnika CUPS ali njegov naslov IP."
 
 #: printer/printerdrake.pm:566 printer/printerdrake.pm:586
 #: printer/printerdrake.pm:811 printer/printerdrake.pm:880
@@ -12955,7 +12960,7 @@ msgstr ""
 "računalnik,\n"
 "neposredno v omrežje ali na računalnik z nameščenim Windows.\n"
 "\n"
-"Priključite vse tiskalnike, ki jih želite namestiti na tem račuanalniku in "
+"Priključite vse tiskalnike, ki jih želite namestiti na tem računalniku in "
 "jih vključite, da bo mogoča samodejna zaznava. Priključite in vključite tudi "
 "omrežne tiskalnike in tiskalnike, priključene na računalnike z Windows.\n"
 "\n"
@@ -12987,7 +12992,7 @@ msgstr ""
 "Čarovnik vam bo pomagal namestiti tiskalnik (tiskalnike), priključen na vaš "
 "računalnik.\n"
 "\n"
-"Priključite vse tiskalnike, ki jih želite namestiti na tem račuanalniku in "
+"Priključite vse tiskalnike, ki jih želite namestiti na tem računalniku in "
 "jih vključite, da bo mogoča samodejna zaznava.\n"
 "\n"
 "Kliknite »Naprej«, ko boste pripravljeni. Če tiskalnika ne želite namestiti "
@@ -13019,7 +13024,7 @@ msgstr ""
 "Čarovnik vam bo pomagal namestiti tiskalnik (tiskalnike), priključen na vaš "
 "računalnik ali neposredno v omrežje.\n"
 "\n"
-"Priključite vse tiskalnike, ki jih želite namestiti na tem račuanalniku in "
+"Priključite vse tiskalnike, ki jih želite namestiti na tem računalniku in "
 "jih vključite, da bo mogoča samodejna zaznava. Vključeni morajo biti tudi "
 "tiskalniki, ki so priključeni neposredno v omrežje.\n"
 "\n"
@@ -13051,7 +13056,7 @@ msgstr ""
 "Čarovnik vam bo pomagal namestiti tiskalnik (tiskalnike), priključen na vaš "
 "računalnik.\n"
 "\n"
-"Priključite vse tiskalnike, ki jih želite namestiti na tem račuanalniku in "
+"Priključite vse tiskalnike, ki jih želite namestiti na tem računalniku in "
 "jih vključite, da bo mogoča samodejna zaznava.\n"
 "\n"
 "Kliknite »Naprej«, ko boste pripravljeni. Če tiskalnika ne želite namestiti "
@@ -13269,7 +13274,7 @@ msgid ""
 "\"Manual configuration\"."
 msgstr ""
 "Prosim, izberite tiskalnik, ki ga želite nastaviti.Nastavitev tiskalnika se "
-"bo izvedla povsem samodejno. Če tiskalnik ni bil pravilno zaznan aliče ga "
+"bo izvedla povsem samodejno. Če tiskalnik ni bil pravilno zaznan, ali če ga "
 "želite nastaviti ročno, vključite »Ročno nastavljanje«."
 
 #: printer/printerdrake.pm:1615
@@ -13325,8 +13330,8 @@ msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
 msgstr ""
-"Da bi lahko uporabljali oddaljeni lpd tiskalnik, si morate priskrbeti "
-"gostiteljsko ime tiskalniškega strežnika in ime tiskalnika na tem strežniku."
+"Da bi lahko uporabljali oddaljeni lpd tiskalnik, si morate priskrbeti ime "
+"gostitelja tiskalniškega strežnika in ime tiskalnika na tem strežniku."
 
 #: printer/printerdrake.pm:1702
 #, c-format
@@ -13359,7 +13364,7 @@ msgstr "Manjka ime oddaljenega tiskalnika!"
 #: standalone/harddrake2:256
 #, c-format
 msgid "Information"
-msgstr "Obvestilo"
+msgstr "Podatki"
 
 #: printer/printerdrake.pm:1740 printer/printerdrake.pm:2216
 #: printer/printerdrake.pm:2341
@@ -13395,8 +13400,8 @@ msgid ""
 "the print server, as well as the share name for the printer you wish to "
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
-"Za tiskanje na SMB tiskalniku potrebujete SMB gostiteljsko ime (Pazite! "
-"Lahko se razlikuje od TCP/IP gostiteljskega imena.) in verjetno tudi IP "
+"Za tiskanje na SMB tiskalniku potrebujete ime gostitelja za SMB (Pazite! "
+"Lahko se razlikuje od imena gostitelja za TCP/IP.) in verjetno tudi IP "
 "naslov tiskalniškega strežnika. Potrebujete tudi ime tiskalnika v skupni "
 "rabi, ki ga želite uporabljati ter veljavno uporabniško ime, geslo in ime "
 "delovne skupine."
@@ -13419,7 +13424,7 @@ msgstr "Gostitelj SMB strežnika"
 #: printer/printerdrake.pm:1885
 #, c-format
 msgid "SMB server IP"
-msgstr "IP naslov SMB strežnika"
+msgstr "Naslov IP strežnika SMB"
 
 #: printer/printerdrake.pm:1886 standalone/draksambashare:61
 #, c-format
@@ -13439,7 +13444,7 @@ msgstr "Samodejno zaznano"
 #: printer/printerdrake.pm:1901
 #, c-format
 msgid "Either the server name or the server's IP must be given!"
-msgstr "Vnesti morate ime strežnika ali njegov IP naslov!"
+msgstr "Vnesti morate ime strežnika ali njegov naslov IP!"
 
 #: printer/printerdrake.pm:1905
 #, c-format
@@ -13478,7 +13483,7 @@ msgstr ""
 "geslom. Zaradi napake v arhitekturi programa Samba client se geslo izpiše "
 "kot čisto besedilo v ukazni vrstici, v katero vpišete ukaz za pošiljanje "
 "tiskalniških opravil strežniku v Windows. Zato lahko vsak uporabnik na tem "
-"računalniku prikaže geslo na zaslonu z ukazom: »ps auxwww«.\n"
+"računalniku prikaže geslo na zaslonu z ukazom: »SP auxwww«.\n"
 "\n"
 "Priporočam vam, da uporabite eno od naslednjih možnosti (v vsakem primeru "
 "zagotovite, da bodo imeli dostop do tiskalniškega strežnika v Windows samo "
@@ -13578,7 +13583,7 @@ msgid ""
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
 "Izberite enega od samodejno zaznanih tiskalnikov ali pa vpišite gostiteljsko "
-"ime ali IP naslov ter številko tiskalniških vrat (privzeta vrata so 9100). "
+"ime ali naslov IP ter številko tiskalniških vrat (privzeta vrata so 9100). "
 
 #: printer/printerdrake.pm:2146
 #, c-format
@@ -13588,7 +13593,7 @@ msgid ""
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
 msgstr ""
-"Za tiskanje na TCP/Socket tiskalniku morate vnesti gostiteljsko ime ali IP "
+"Za tiskanje na TCP/Socket tiskalniku morate vnesti ime gostitelja ali IP "
 "naslov tiskalnika, lahko pa tudi številko tiskalniških vrat (privzeta so "
 "9100). Na strežnikih HP JetDirect je številka vrat običajno prav tako 9100, "
 "na drugih strežnikih pa utegne biti različna. Poglejte v priročnik vaše "
@@ -13597,12 +13602,12 @@ msgstr ""
 #: printer/printerdrake.pm:2150
 #, c-format
 msgid "Printer host name or IP missing!"
-msgstr "Manjka gostiteljevo ime ali IP naslov!"
+msgstr "Manjka gostiteljevo ime ali naslov IP!"
 
 #: printer/printerdrake.pm:2179
 #, c-format
 msgid "Printer host name or IP"
-msgstr "Gostiteljevo ime ali IP naslov tiskalnika"
+msgstr "Ime ali naslov IP gostitelja tiskalnika"
 
 #: printer/printerdrake.pm:2242
 #, c-format
@@ -13662,9 +13667,9 @@ msgid ""
 "printers with card readers. "
 msgstr ""
 "Mnogi tiskalniki HP imajo na voljo posebne funkcije: vzdrževanje (raven "
-"črnila, čiščenje šob, uravnavanje glav,.....) na inkjet tiskalnikih, "
+"črnila, čiščenje šob, uravnavanje glav,.....) na brizgalnih tiskalnikih, "
 "skeniranje na večfunkcijskih napravah in dostop do spominskih kartic na "
-"tiskalnikih s čitalci kartic."
+"tiskalnikih s čitalniki kartic."
 
 #: printer/printerdrake.pm:2425
 #, c-format
@@ -13692,9 +13697,9 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
-"ali s starejšim programom HPOJ, ki omogoča samo dostop do optičnega čitalca "
-"in spominske kartice, vendar vam je lahko v pomoč v primeru, da HPLIP ne "
-"deluje."
+"ali s starejšim programom HPOJ, ki omogoča samo dostop do optičnega "
+"čitalnika in spominske kartice, vendar vam je lahko v pomoč v primeru, da "
+"HPLIP ne deluje."
 
 #: printer/printerdrake.pm:2429
 #, c-format
@@ -13729,7 +13734,7 @@ msgstr ""
 #: printer/printerdrake.pm:2457 printer/printerdrake.pm:2603
 #, c-format
 msgid "Installing %s package..."
-msgstr "Nameščnje paketa %s..."
+msgstr "Nameščanje paketa %s..."
 
 #: printer/printerdrake.pm:2464 printer/printerdrake.pm:2610
 #, c-format
@@ -13759,12 +13764,12 @@ msgstr "Kateri tiskalnik želite nastaviti s pomočjo HPLIP?"
 #: printer/printerdrake.pm:2551 printer/printerdrake.pm:2664
 #, c-format
 msgid "Installing SANE packages..."
-msgstr "Namščanje paketov SANE.."
+msgstr "Nameščanje paketov SANE.."
 
 #: printer/printerdrake.pm:2564 printer/printerdrake.pm:2677
 #, c-format
 msgid "Scanning on the %s will not be possible."
-msgstr "Optično čitanje na %s ne bo mogoče."
+msgstr "Optično branje na %s ne bo mogoče."
 
 #: printer/printerdrake.pm:2579
 #, c-format
@@ -13784,7 +13789,7 @@ msgstr "Dostop do spominske kartice fotoaparata na %s ne bo mogoče."
 #: printer/printerdrake.pm:2728
 #, c-format
 msgid "Scanning on your HP multi-function device"
-msgstr "Optično čitanje na vaši večnamenski napravi HP"
+msgstr "Optično branje na vaši večnamenski napravi HP"
 
 #: printer/printerdrake.pm:2737
 #, c-format
@@ -14046,7 +14051,7 @@ msgstr ""
 #: printer/printerdrake.pm:3483 printer/printerdrake.pm:3513
 #, c-format
 msgid "Lexmark inkjet configuration"
-msgstr "Nastavitev tiskalnika Lexmark inkjet"
+msgstr "Nastavitev brizgalnega tiskalnika Lexmark"
 
 #: printer/printerdrake.pm:3484
 #, c-format
@@ -14056,10 +14061,11 @@ msgid ""
 "printer to a local port or configure it on the machine where it is connected "
 "to."
 msgstr ""
-"Gonilniki za Lexmark inkjet tiskalnike podpirajo samo krajevne tiskalnike, "
-"ne pa tudi tiskalnikov na oddaljenih računalnikih ali tiskalniških "
-"strežnikih. Prosim, tiskalnik priključite na krajevna vrata svojega "
-"računalnika ali pa ga nastavite na računalniku, na katerega je priključen."
+"Gonilniki za Lexmark brizgalne tiskalnike podpirajo samo krajevne "
+"tiskalnike, ne pa tudi tiskalnikov na oddaljenih računalnikih ali "
+"tiskalniških strežnikih. Prosim, tiskalnik priključite na krajevna vrata "
+"svojega računalnika ali pa ga nastavite na računalniku, na katerega je "
+"priključen."
 
 #: printer/printerdrake.pm:3514
 #, c-format
@@ -14073,12 +14079,12 @@ msgid ""
 "agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and "
 "adjust the head alignment settings with this program."
 msgstr ""
-"Da bi bilo mogoče tiskati z Lexmark inkjet tiskalnikom s temi nastavitvami, "
-"potrebujete proizvajalčeve gonilnike (http://www.lexmark.com/) Kliknite na "
-"povezavo »Gonilniki« in izberite model svojega tiskalnika in »Linux« kot "
-"operacijski sistem. Gonilniki so dostopni kot RPM paketi ali kot lupinski "
-"skripti z interaktivno grafično namestitvijo. Te nastavitve vam ni treba "
-"izvesti z grafičnimi programskimi vmesniki. Prekličite neposredno po "
+"Da bi bilo mogoče tiskati z Lexmark brizgalnim tiskalnikom s temi "
+"nastavitvami, potrebujete proizvajalčeve gonilnike (http://www.lexmark.com/) "
+"Kliknite na povezavo »Gonilniki« in izberite model svojega tiskalnika in "
+"»Linux« kot operacijski sistem. Gonilniki so dostopni kot RPM paketi ali kot "
+"lupinski skripti z interaktivno grafično namestitvijo. Te nastavitve vam ni "
+"treba izvesti z grafičnimi programskimi vmesniki. Prekličite neposredno po "
 "potrditvi licenčnega sporazuma. Potem natisnite strani za prilagajanje "
 "tiskalnih glav z ukazom »lexmarkmaintain« in s tem programom nastavite "
 "ujemanje."
@@ -14414,12 +14420,12 @@ msgstr ""
 #: printer/printerdrake.pm:4187
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
-msgstr "Tiskanje/Optično čitanje/Foto kartice na »%s«"
+msgstr "Tiskanje/optično branje/foto kartice na »%s«"
 
 #: printer/printerdrake.pm:4188
 #, c-format
 msgid "Printing/Scanning on \"%s\""
-msgstr "Tiskanje/Optično čitanje na »%s«"
+msgstr "Tiskanje/optično branje na »%s«"
 
 #: printer/printerdrake.pm:4190
 #, c-format
@@ -14469,8 +14475,9 @@ msgid ""
 "share your scanner on the network.\n"
 "\n"
 msgstr ""
-"Zaženite Scannerdrake (Nastavite svoj računalnik/Stronja oprema/Nastavite "
-"optični čitalec), če želite omogočiti skupno rabo čitalca v omrežju.\n"
+"Zaženite Scannerdrake (Nastavite svoj računalnik > Strojna oprema > "
+"Nastavite optični čitalnik), če želite omogočiti skupno rabo čitalnika v "
+"omrežju.\n"
 "\n"
 
 #: printer/printerdrake.pm:4229
@@ -14479,7 +14486,7 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
-"Čitalci spominskih kartic vašega tiskalnika so dosegljivi kot običajne USB "
+"Čitalniki spominskih kartic vašega tiskalnika so dosegljivi kot običajne USB "
 "naprave za shranjevanje podatkov."
 
 #: printer/printerdrake.pm:4230
@@ -14499,8 +14506,9 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
-"Čitalci spominskih kartic so dosegljivi z orodjem  HP's Printer Toolbox."
-"(Meni/Sistem/Nadzorovanje/ HP Printer Toolbox)"
+"Čitalniki spominskih kartic so dosegljivi z orodjem  HP's Printer Toolbox."
+"(Meni > Sistem > Nadzorovanje > HP Printer Toolbox). V orodju pojdite na "
+"zavihek »Funkcije« in kliknite »Foto kartice ...«."
 
 #: printer/printerdrake.pm:4233
 #, c-format
@@ -14509,8 +14517,8 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
-"Upoštevajte., da je čitanje zelo počasno, hitrejše je neposredno čitanje s "
-"fotoaparata ali USB čitalca kartic.\n"
+"Upoštevajte, da je branje zelo počasno, hitrejše je neposredno branje s "
+"fotoaparata ali USB čitalnika kartic.\n"
 "\n"
 
 #: printer/printerdrake.pm:4236
@@ -14532,7 +14540,7 @@ msgstr " - nivo črnila in stanje\n"
 #: printer/printerdrake.pm:4238
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr " - čičšenje brizgalnih šob\n"
+msgstr " - čiščenje brizgalnih šob\n"
 
 #: printer/printerdrake.pm:4239
 #, c-format
@@ -14560,7 +14568,7 @@ msgid ""
 "scanner on the network."
 msgstr ""
 "Vaša večnamenska naprava je bila samodejno nastavljena tako, da je optično "
-"čitanje (skeniranje) omogočeno. Skenirate lahko s pomočjo ukaza »scanimage« "
+"branje (skeniranje) omogočeno. Skenirate lahko s pomočjo ukaza »scanimage« "
 "ali »scanimage -d hp:%s«, da določite napravo, če imate več čitalnikov Za "
 "skeniranje lahko uporabite tudi grafične vmesnike kot sta »xscanimage« in "
 "»xsane«. Če uporabljate program »Gimp«, lahko skenirate z ustrezno izbiro v "
@@ -14609,7 +14617,7 @@ msgstr ""
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
-msgstr "CUPS ne podpira tiskalnikov na strežnikih Nowell.\n"
+msgstr "CUPS ne podpira tiskalnikov na strežnikih Novell.\n"
 
 #: printer/printerdrake.pm:4330
 #, c-format
@@ -14874,14 +14882,14 @@ msgid ""
 "Enter the host name or IP of your CUPS server and click OK if you want to "
 "use this mode, click \"Quit\" otherwise."
 msgstr ""
-"Če želite uporabljati ta način, vpišite gostiteljsko ime ali IP naslov CUPS "
-"strežnika in kliknite V redu. Če tega načina ne želite uporabljati, kliknite "
-"»Prekini«."
+"Če želite uporabljati ta način, vpišite ime gostitelja ali naslov IP "
+"strežnika CUPS in kliknite »V redu«. Če tega načina ne želite uporabljati, "
+"kliknite »Prekini«."
 
 #: printer/printerdrake.pm:4714
 #, c-format
 msgid "Name or IP of remote server:"
-msgstr "Ime ali IP naslov oddaljenega strežnika."
+msgstr "Ime ali naslov IP oddaljenega strežnika."
 
 #: printer/printerdrake.pm:4734
 #, c-format
@@ -14960,7 +14968,7 @@ msgstr "Na kakšen način želite nastaviti CUPS na tem računalniku?"
 #: printer/printerdrake.pm:4788 printer/printerdrake.pm:4794
 #, c-format
 msgid "Remote server, specify Name or IP here:"
-msgstr "Oddaljeni strežnik, navedite ime ali IP naslov:"
+msgstr "Oddaljeni strežnik, navedite ime ali naslov IP:"
 
 #: printer/printerdrake.pm:4783
 #, c-format
@@ -14985,7 +14993,7 @@ msgstr "Nastavljanje tiskalnika »%s« ni uspelo."
 #: printer/printerdrake.pm:4887
 #, c-format
 msgid "Installing Foomatic..."
-msgstr "Nameščnje Foomatic..."
+msgstr "Nameščanje Foomatic ..."
 
 #: printer/printerdrake.pm:4893
 #, c-format
@@ -15396,7 +15404,7 @@ msgstr "Varnostna opozorila:"
 #: security/help.pm:82
 #, c-format
 msgid "Enable/Disable IP spoofing protection."
-msgstr "Omogoči / onemogoči zaščito pred lažnim predstavljanjem IP naslova."
+msgstr "Omogoči/onemogoči zaščito pred lažnim predstavljanjem naslova IP."
 
 #: security/help.pm:84
 #, c-format
@@ -15449,8 +15457,7 @@ msgstr "Dodajte ime pri katerem storitev msec ne omogoči staranja gesla."
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr ""
-"Nastavitev zakasnitve poteka gesla na »max« dni in zakasnitve deaktivacije."
+msgstr "Za izklop nastavite zakasnitev na »max« dni."
 
 #: security/help.pm:104
 #, c-format
@@ -15529,7 +15536,7 @@ msgstr ""
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr "Če je nastavljeno na »da«, preveri »checksum« datotek suid/sgid."
+msgstr "Če je nastavljeno na »da«, preveri kontrolno vsoto datotek suid/sgid."
 
 #: security/help.pm:123
 #, c-format
@@ -15561,7 +15568,7 @@ msgid ""
 "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "Če je nastavljeno, pošlji e-poštno poročilo na ta e-poštni naslov, v "
-"nasprotnem primeru pošlji rootu."
+"nasprotnem primeru pošlji uporabniku »root«."
 
 #: security/help.pm:128
 #, c-format
@@ -15693,12 +15700,12 @@ msgstr "Zaščita pred lažnim predstavljanjem pri odločitvah o naslovu"
 #: security/l10n.pm:28
 #, c-format
 msgid "Enable IP spoofing protection"
-msgstr "Omogoči zaščito pred lažnim predstavljanjem IP naslova"
+msgstr "Omogoči zaščito pred lažnim predstavljanjem naslova IP"
 
 #: security/l10n.pm:29
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
-msgstr "Omogoči sibsafe, če je nameščen"
+msgstr "Omogoči libsafe, če je nameščen"
 
 #: security/l10n.pm:30
 #, c-format
@@ -15815,7 +15822,7 @@ msgstr "Preveri ali so v /etc/shadow prazna gesla"
 #: security/l10n.pm:52
 #, c-format
 msgid "Verify checksum of the suid/sgid files"
-msgstr "Preveri »checksum« datotek suid/sgid."
+msgstr "Preveri kontrolno vsoto datotek suid/sgid."
 
 #: security/l10n.pm:53
 #, c-format
@@ -15992,12 +15999,12 @@ msgstr "Sistemski skrbnik za varnost (prijava ali e-pošta)"
 #: services.pm:19
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "Zaženi ALSA  (Advanced Linux Sound Architecture) zvočni sistem."
+msgstr "Zažene zvočni sistem ALSA (Advanced Linux Sound Architecture)"
 
 #: services.pm:20
 #, c-format
 msgid "Anacron is a periodic command scheduler."
-msgstr "Anacron omogoča zagon programov ob določenem času."
+msgstr "Anacron omogoča ponavljajoč zagon programov ob določenem času."
 
 #: services.pm:21
 #, c-format
@@ -16005,8 +16012,8 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
-"apmd se uporablja za nadzor baterij in beleženje statusa v syslog.\n"
-"Uporabi se lahko tudi za izklop računalnika v primeru prazne baterije."
+"apmd se uporablja za nadzor baterij in beleženje stanja v syslog.\n"
+"Uporabi se lahko tudi za izklop računalnika pred izpraznitvijo baterije."
 
 #: services.pm:23
 #, c-format
@@ -16014,7 +16021,7 @@ msgid ""
 "Runs commands scheduled by the at command at the time specified when\n"
 "at was run, and runs batch commands when the load average is low enough."
 msgstr ""
-"Izvede ukaze ob določenem času\n"
+"Izvede ukaze določene z ukazom at ob določenem času in\n"
 "omogoča, da se ukazi izvedejo, kadar računalnik ni preobremenjen."
 
 #: services.pm:25
@@ -16037,7 +16044,7 @@ msgid ""
 "It is used by GNOME and KDE"
 msgstr ""
 "FAM je program, ki beleži spremembe datotek.\n"
-" Uporabljata ga med drugim tudi GNOME in KDE."
+"Uporabljata ga med drugim tudi GNOME in KDE."
 
 #: services.pm:30
 #, c-format
@@ -16047,10 +16054,9 @@ msgid ""
 "operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
-"GPM omogoča rabo miške tudi v tekstovnem načinu v aplikacijah kot so\n"
-"Midnight Commander. Omogoča, da z miško opravljamo kopiraj-prilepi "
-"funkcije \n"
-"in nudi hitre menije v ukazni vrstici."
+"GPM omogoča rabo miške tudi v besedilnem načinu v programoh kot so\n"
+"Midnight Commander. Omogoča, da z miško opravljamo funkcije\n"
+" kopiraj-prilepi in vključuje podporo za menije v konzoli."
 
 #: services.pm:33
 #, c-format
@@ -16066,8 +16072,8 @@ msgstr ""
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
-"Apache je spletni strežnik. Uporablja se za strežbo HTML datotek in "
-"izvajanje CGI programov."
+"Apache je spletni strežnik. Uporablja se za strežbo datotek HTML in "
+"izvajanje programov CGI."
 
 #: services.pm:36
 #, c-format
@@ -16079,8 +16085,8 @@ msgid ""
 "disables\n"
 "all of the services it is responsible for."
 msgstr ""
-"Nadzorni proces za spletne aplikacije (poznan kot inetd) skrbi za paleto\n"
-"z internetom povezanih storitev. Skrbi za zagon programov, kot so telnet, "
+"Nadzorni proces za internetne aplikacije (poznan kot inetd) skrbi za paleto\n"
+"z internetom povezanih storitev. Skrbi za zagon storitev, kot so telnet, "
 "ftp, rsh in rlogin.\n"
 "Izključitev inetd onemogoči programe, ki skrbijo za te storitve."
 
@@ -16090,8 +16096,8 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Poženi filtriranje paketov za Linux jedro 2.2 in \n"
-"vzpostavi požarni zid za obrambo računalnika pred vdori iz interneta."
+"Požene filtriranje paketov za Linux jedro 2.2 in \n"
+"vzpostavi požarni zid za obrambo računalnika pred vdori z interneta."
 
 #: services.pm:42
 #, c-format
@@ -16110,7 +16116,7 @@ msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
-"Samodejna obnova glave jedra v /boot za \n"
+"Samodejna obnova zaglavij jedra v /boot za\n"
 "/usr/include/linux/{autoconf,version}.h"
 
 #: services.pm:47
@@ -16125,7 +16131,7 @@ msgid ""
 "at boot-time to maintain the system configuration."
 msgstr ""
 "Linuxconf samodejno nastavi izvajanje različnih opravil\n"
-"za vzdrževanje sistema ob zagonu."
+"ob zagonu za vzdrževanje sistemskih nastavitev."
 
 #: services.pm:50
 #, c-format
@@ -16142,7 +16148,7 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
-"Linux Virtual Server, namenjen izgradnji visoko zmogljivega in zdržljivega "
+"Linux Virtual Server, namenjen izgradnji visoko zmogljivega in vzdržljivega "
 "strežnika."
 
 #: services.pm:54
@@ -16151,8 +16157,8 @@ msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
-"named (BIND) je domenski (DNS) strežnik, ki imena strežnikov pretvarja v IP "
-"naslove."
+"named (BIND) je domenski (DNS) strežnik, ki imena strežnikov pretvarja v "
+"naslove IP."
 
 #: services.pm:55
 #, c-format
@@ -16160,8 +16166,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Priklopi in odkopi vse omrežne datotečne sisteme (NFS), omrežne Windows "
-"(SMB) sisteme in NetWare (NCP) priklopne točke."
+"Priklopi in odkopi vse priklopne točke za omrežni datotečni sistem (NFS),\n"
+"SMB (LAN Manager/Windows) in NCP (NetWare)."
 
 #: services.pm:57
 #, c-format
@@ -16169,8 +16175,8 @@ msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
 msgstr ""
-"Vključi/izključi vse mrežne kartice, ki so nastavljene,\n"
-" da se vključijo ob zagonu."
+"Vključi/izključi vse mrežne vmesnike, ki so nastavljeni,\n"
+"da se vključijo ob zagonu."
 
 #: services.pm:59
 #, c-format
@@ -16179,9 +16185,9 @@ msgid ""
 "This service provides NFS server functionality, which is configured via the\n"
 "/etc/exports file."
 msgstr ""
-"NFS je priljubljen protokol za izmenjavo datotek po TCP/IP omrežjih.\n"
-"Storitev omogoča funkcije strežnika NFS, ki so zapisane v n/etc/exports "
-"datoteki."
+"NFS je priljubljen protokol za izmenjavo datotek po omrežjih TCP/IP.\n"
+"Storitev omogoča funkcije strežnika NFS, ki so nastavljene v datoteki\n"
+"/etc/exports."
 
 #: services.pm:62
 #, c-format
@@ -16189,15 +16195,16 @@ msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
-"NFS je priljubljen protokol za izmenjavo datotek po TCP/IP omrežjih.\n"
-"Storitev omogoča NFS zaklepanje posameznih datotek."
+"NFS je priljubljen protokol za izmenjavo datotek po omrežjih TCP/IP.\n"
+"Ta storitev omogoča NFS zaklepanje posameznih datotek."
 
 #: services.pm:64
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr "Prižge numlock indikator."
+msgstr ""
+"Ob zagonu samodejno vklopi številčni del tipkovnice za konzolo in Xorg."
 
 #: services.pm:66
 #, c-format
@@ -16214,7 +16221,7 @@ msgid ""
 msgstr ""
 "PCMCIA v večini podpira mrežne kartice in modeme v prenosnikih.\n"
 "Servis bo izveden samo v primeru, da je dejansko omogočen\n"
-"na račnalnikih, ki ti funkcionalnost potrebujejo."
+"na računalnikih, ki ti funkcionalnost potrebujejo."
 
 #: services.pm:70
 #, c-format
@@ -16224,9 +16231,9 @@ msgid ""
 "machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
-"portmapper nadzira RPC povezave, ki se uporabljene \n"
-"pri storitvah NFS in NIS. Portmap mora biti omogočen pri računalnikih, \n"
-"ki delujejo kot strežniki na osnovi RPC mehanizma."
+"portmapper nadzira povezave RPC, ki jih uporabljajo protokoli\n"
+"kot sta NFS in NIS. Strežnik portmap mora biti zagnan na računalnikih,\n"
+"ki delujejo kot strežniki za protokole, ki uporabljajo mehanizem RPC."
 
 #: services.pm:73
 #, c-format
@@ -16234,7 +16241,7 @@ msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix je strežnik za elektnosko pošto, ki skrbi za prenos sporočil med "
+"Postfix je strežnik za elektronsko pošto, ki skrbi za prenos sporočil med "
 "strežniki."
 
 #: services.pm:74
@@ -16242,7 +16249,7 @@ msgstr ""
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
-msgstr "Skrbi za sistem, ki generira naključna števila."
+msgstr "Skrbi za kvalitetnejše ustvarjanje naključnih števil."
 
 #: services.pm:76
 #, c-format
@@ -16250,8 +16257,8 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Prijavi raw devices v block devices (kot so razdelki diska) za potrebe \n"
-"aplikacij kot so Oracle in DVD snemalniki."
+"Priredi surove (raw) naprave bločnim napravam (kot so razdelki diska)\n"
+"za potrebe aplikacij kot so Oracle in DVD snemalniki."
 
 #: services.pm:78
 #, c-format
@@ -16260,9 +16267,9 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"Routed proces omogoča samodejno nasatvljanje IP route table, posodobljenih\n"
-"preko RIP protokola.Medtem, ko je RIP šioko zastopam pri manjših omrežjih\n"
-"se za večja omrežja uporablajjo kompleksnejši protokoli."
+"Demon routed omogoča samodejno nastavljanje usmerjevalne tabele za IP,\n"
+"posodobljene preko protokola RIP. Medtem, ko je RIP široko zastopam pri\n"
+"manjših omrežjih, se za večja omrežja uporabljajo kompleksnejši protokoli."
 
 #: services.pm:81
 #, c-format
@@ -16270,7 +16277,7 @@ msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
 msgstr ""
-"Rstat protokol omogoča pridobivanje preformančnih podatkov\n"
+"Protokol rstat omogoča pridobivanje podatkov o zmogljivostih\n"
 "računalnikov priključenih v omrežje."
 
 #: services.pm:83
@@ -16279,7 +16286,7 @@ msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
-"Rusers protokol omogoča uporabnikom v lokalni mreži\n"
+"Protokol rusers omogoča uporabnikom v lokalni mreži\n"
 "identifikacijo prijavljenih uporabnikov na drugih računalnikih."
 
 #: services.pm:85
@@ -16288,14 +16295,14 @@ msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similar to finger)."
 msgstr ""
-"Rwho protokol omogoča oddaljenim uporabnikom, da pridobijo spisek "
-"uporabnikov\n"
-",prijavljenih na oddaljenih računalnikh na katerih teče rwho."
+"Protokol rwho omogoča oddaljenim uporabnikom, da pridobijo spisek "
+"uporabnikov,\n"
+"prijavljenih na računalnikh, na katerih teče rwho (podobno kot finger)."
 
 #: services.pm:87
 #, c-format
 msgid "Launch the sound system on your machine"
-msgstr "Poženi zvok na tvojem računalniku"
+msgstr "Zažene zvočni sistem na vašem računalniku"
 
 #: services.pm:88
 #, c-format
@@ -16304,22 +16311,24 @@ msgid ""
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
 "Syslog je storitev, ki omogoča ostalim programom, da uporabljajo skupen "
-"sistem logiranja sporočil.  Dobro je, da syslog storitev vedno teče."
+"sistem zapisovanja sporočil v dnevnike. Dobro je, da syslog storitev vedno "
+"teče."
 
 #: services.pm:90
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Naloži gonilnike za USB naprave."
+msgstr "Naloži gonilnike za naprave USB."
 
 #: services.pm:91
 #, c-format
 msgid "Starts the X Font Server (this is mandatory for Xorg to run)."
-msgstr "Zaženi X strežnik za tipografije (potreben za zagon Xorg)."
+msgstr "Zažene strežnik za pisave za X (potreben za zagon Xorg)."
 
 #: services.pm:115 services.pm:157
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
-msgstr "Izberi katera storitev naj se samodejno vključi ob zagonu računalnika"
+msgstr ""
+"Izberite, katere storitve naj se samodejno zaženejo ob zagonu računalnika"
 
 #: services.pm:127 standalone/draksambashare:105
 #, c-format
@@ -16366,7 +16375,7 @@ msgstr "Storitve in demoni"
 msgid ""
 "No additional information\n"
 "about this service, sorry."
-msgstr "Žal o tej storitvi ni dodatnih informacij.."
+msgstr "Žal o tej storitvi ni dodatnih informacij."
 
 #: services.pm:224 ugtk2.pm:1009
 #, c-format
@@ -16753,7 +16762,7 @@ msgstr "Strežnik omrežnega računalnika"
 #: share/compssUsers.pl:139
 #, c-format
 msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "Strežnik NFS, strežnik SMB, proksi strežnik, strežnik SSH"
+msgstr "Strežnik NFS, strežnik SMB, posredniški strežnik, strežnik SSH"
 
 #: share/compssUsers.pl:147
 #, c-format
@@ -16828,7 +16837,7 @@ msgstr "Nadzorna orodja, knjigovodstvo procesov, tcpdump, nmap ..."
 #: share/compssUsers.pl:201
 #, c-format
 msgid "Mandriva Wizards"
-msgstr " Mandrivaovi čarovniki"
+msgstr "Mandrivini čarovniki"
 
 #: share/compssUsers.pl:202
 #, c-format
@@ -16852,19 +16861,18 @@ msgid ""
 "along with this program; if not, write to the Free Software\n"
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 msgstr ""
-"Ta program je odprtokodni in ga lahko posredujete dalje ali pa ga "
-"spreminjate\n"
-"pod pogoji GNU General Public License ki so objavljeni\n"
-"pod Free Software Foundation; kot verzija 2, ali kot\n"
+"To je prosto programje in ga lahko posredujete dalje ali pa ga spreminjate\n"
+"pod pogoji GNU General Public License, ki so jih objavili pri\n"
+"Free Software Foundation; kot verzija 2, ali kot\n"
 "katera novejša verzija.\n"
 "\n"
 "Ta program razširjamo v upanju da bo uporaben,\n"
-"toda BREZ JAMSTVA; celo brez   without even implementiranega jamstva za\n"
-"MERCHANTABILITY ali FITNESS FOR A PARTICULAR PURPOSE. Preberi\n"
-"GNU General Public License za več informaciji.\n"
+"toda BREZ JAMSTVA; celo brez posledičnega jamstva za\n"
+"MERCHANTABILITY ali FITNESS FOR A PARTICULAR PURPOSE. Za\n"
+"podrobnosti preberite GNU General Public License.\n"
 "\n"
-"Morali bi dobiti kopijo GNU General Public licenco\n"
-"skupaj z programom; če ne, pišite na Free Software\n"
+"Kopijo GNU General Public licenco bi morali dobit\n"
+"skupaj s programom; če je ne, pišite na Free Software\n"
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 
 #: standalone.pm:40
@@ -16964,7 +16972,7 @@ msgstr ""
 "Program za uvoz in nadzor pisav.\n"
 "\n"
 "MOŽNOSTI:\n"
-"--windows_import : uvozi z vseh dostopnih razdelkov windows.\n"
+"--windows_import : uvozi z vseh dostopnih razdelkov Windows.\n"
 "--xls_fonts      : pokaži vse pisave, ki so že na xls\n"
 "--install        : sprejmi vsako datoteko pisave ali mape.\n"
 "--uninstall      : odstrani vsako datoteko ali mapo pisav.\n"
@@ -17004,7 +17012,7 @@ msgstr ""
 "--addclient      : dodaj odjemalca v MTS (zahteva naslov MAC, IP, ime slike "
 "nbi)\n"
 "--delclient      : izbriši odjemalca iz MTS ( zahteva naslov MAC, IP, ime "
-"spike nbi)"
+"slike nbi)"
 
 #: standalone.pm:96
 #, c-format
@@ -17124,13 +17132,13 @@ msgid ""
 "%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
 "0/1 for Local Config...\n"
 msgstr ""
-"%s: %s gostiteljsko ime, fizični naslov, IP naslov, nbi-image, 0/1 za "
-"THIN_CLIENT, 0/1 za Local Config...\n"
+"%s: %s  potrebuje ime gostitelja, naslov MAC, naslov IP, nbi-image, 0/1 za "
+"THIN_CLIENT, 0/1 za Local Config ...\n"
 
 #: standalone/drakTermServ:125
 #, c-format
 msgid "%s: %s requires hostname...\n"
-msgstr "%s: %s zahteva gostiteljsko ime...\n"
+msgstr "%s: %s potrebuje ime gostitelja ...\n"
 
 #: standalone/drakTermServ:207 standalone/drakTermServ:210
 #, c-format
@@ -17237,13 +17245,14 @@ msgstr ""
 "nbis.                                                                \n"
 "    b) vključil "
 "strežnik.                                                          \n"
-"    c) zagnal server.                                                     \n"
+"    c) zagnal "
+"strežnik.                                                     \n"
 "    d) uskladil shadow datoteke, tako da bo vse uporabnike, vključno s "
 "korenskim,\n"
 "       dodal v datoteko shadow$$CLIENT$"
 "$                                               \n"
 "    e) pomagal ustvariti zagonsko disketo.\n"
-"    f) ,če gre za lahkega odjemalca, zahteval ponoven zagon KDM.\n"
+"    f) če gre za lahkega odjemalca, zahteval ponoven zagon KDM.\n"
 
 #: standalone/drakTermServ:379
 #, c-format
@@ -17310,7 +17319,7 @@ msgid ""
 msgstr ""
 "Za ustvarjanje NBIjev ni dovolj prostora v\n"
 "%s.\n"
-"Potrebno: %d MiB. Prosto: %d MiB."
+"Potrebno: %d MB. Prosto: %d MB."
 
 #: standalone/drakTermServ:479
 #, c-format
@@ -17379,7 +17388,7 @@ msgid ""
 msgstr ""
 "        - Vzdrževanje /etc/dhcpd.conf:\n"
 "        \tZa zagon odjemalcev iz omrežja potrebuje vsak odjemalec poseben "
-"vnos v dhcpd.conf, z dodeljenim IP naslovom\n"
+"vnos v dhcpd.conf, z dodeljenim naslovom IP\n"
 "        \tin s sliko za omrežni zagon. DrakTermServ pomaga ustvariti ali "
 "odstraniti\n"
 "        \tte vnose.\n"
@@ -17431,8 +17440,8 @@ msgid ""
 "clients."
 msgstr ""
 "        Namesto, da bi za vsak odjemalec posebej vnašali podatke o statičnem "
-"IP naslovu, ki jih ustvari ClusterNFS, je bolje, da \n"
-"        uporabite nabor IP naslovov.\n"
+"naslovu IP, ki jih ustvari ClusterNFS, je bolje, da \n"
+"        uporabite nabor naslovov IP.\n"
 "\t\t\t\n"
 "        Opozorilo: Vnos '#type' uporablja izključno drakTermServ. Odjemalci "
 "so lahko 'lahki' (thin)'\n"
@@ -17743,7 +17752,7 @@ msgstr "vrsta: %s"
 #: standalone/drakTermServ:1055
 #, c-format
 msgid "local config: %s"
-msgstr "local config (krajevne nastavitve): %s"
+msgstr "local config: %s"
 
 #: standalone/drakTermServ:1086
 #, c-format
@@ -17825,7 +17834,7 @@ msgid ""
 "(service dm restart - at the console)"
 msgstr ""
 "Za uveljavitev sprememb je potrebno ponovno zagnati upravitelja zaslona.\n"
-"(service dm restart - v konzoli)"
+"(»service dm restart« - v konzoli)"
 
 #: standalone/drakTermServ:1250
 #, c-format
@@ -18049,27 +18058,28 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
-"You are about to configure an Auto Install floppy. This feature is somewhat "
-"dangerous and must be used circumspectly.\n"
+"Ste pred nastavitvijo diskete za samodejno namestitev. Ta možnost je "
+"nekoliko nevarna in jo morate uporabljati previdno.\n"
 "\n"
-"With that feature, you will be able to replay the installation you've "
-"performed on this computer, being interactively prompted for some steps, in "
-"order to change their values.\n"
+"S to možnostjo bo mogoče ponoviti namestitev, ki ste jo opravili na tem "
+"računalniku, z nekaj vprašanji, ki vam bodo omogočili spremeniti določene "
+"vrednosti.\n"
 "\n"
-"For maximum safety, the partitioning and formatting will never be performed "
-"automatically, whatever you chose during the install of this computer.\n"
+"Za največjo varnost, se ustvarjanje razdelkov in formatiranje ne bosta "
+"nikoli izvedla samodejno, ne glede na to, kaj izberete med namestitvijo na "
+"ta računalnik.\n"
 "\n"
-"Press ok to continue."
+"Kliknite »V redu« za nadaljevanje."
 
 #: standalone/drakautoinst:60
 #, c-format
 msgid "replay"
-msgstr "posnetek"
+msgstr "samodejno"
 
 #: standalone/drakautoinst:60 standalone/drakautoinst:69
 #, c-format
 msgid "manual"
-msgstr "ročna"
+msgstr "ročno"
 
 #: standalone/drakautoinst:64
 #, c-format
@@ -18158,7 +18168,7 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
-"Pri večsejnih zgoščenkah bo samo prva seja izbrisala cdrw. Sicer bo cdrw "
+"Pri večsejnih zgoščenkah bo samo prva seja izbrisala CDRW. Sicer bo CDRW "
 "izbrisan pred posamezno izdelavo varnostne kopije."
 
 #: standalone/drakbackup:156
@@ -18273,14 +18283,14 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
-"»%s« je krajevni uporabnik, vendar niste izbrali krajevnega smtp, zato "
+"»%s« je krajevni uporabnik, vendar niste izbrali krajevnega SMTP, zato "
 "morate uporabiti celoten e-poštni naslov!"
 
 #: standalone/drakbackup:478
 #, c-format
 msgid "Valid user list changed, rewriting config file."
 msgstr ""
-"Seznam veljavnih uporabnikov je bil spremenjen, zato bo konfiguracijska "
+"Seznam veljavnih uporabnikov je bil spremenjen, zato bo nastavitvena "
 "datoteka prepisana."
 
 #: standalone/drakbackup:480
@@ -18432,7 +18442,7 @@ msgid ""
 "%d MB used vs %d MB allocated."
 msgstr ""
 "Na cilju za varnostne kopije je presežena kvota!\n"
-"Porabljeno: %d MiB. Dodeljeno: %d MiB."
+"Porabljeno: %d MB. Dodeljeno: %d MB."
 
 #: standalone/drakbackup:954 standalone/drakbackup:986
 #, c-format
@@ -18742,7 +18752,7 @@ msgstr "Strojno stiskanje za tračne enote (POSKUSNO)"
 #: standalone/drakbackup:1867
 #, c-format
 msgid "Do not rewind tape after backup"
-msgstr "Ne prevrti kasete nazaj po končanem kopiranju"
+msgstr "Po kopiranju ne prevrti kasete nazaj"
 
 #: standalone/drakbackup:1873
 #, c-format
@@ -18771,7 +18781,7 @@ msgid ""
 " allocated for backups (MB)"
 msgstr ""
 "Zgornja omejitev prostora na disku\n"
-"dodeljenega za varnostne kopije (MiB)"
+"dodeljenega za varnostne kopije (MB)"
 
 #: standalone/drakbackup:1973
 #, c-format
@@ -19483,7 +19493,7 @@ msgid ""
 "Ctrl-Click files to select multiple files."
 msgstr ""
 "Kliknite na datum/čas za pregled datotek v varnost. kopiji.\n"
-"S tipko Ctrl in klikom na njihov imena izberete več datotek."
+"S tipko »Ctrl« in klikom na njihov imena izberete več datotek."
 
 #: standalone/drakbackup:3376
 #, c-format
@@ -19709,7 +19719,7 @@ msgstr "Pošiljanje datotek ..."
 #: standalone/drakbackup:4284
 #, c-format
 msgid "Backup Now from configuration file"
-msgstr "Izvedi varnostno kopiranje sedaj iz konfiguracijske datoteke"
+msgstr "Izvedi varnostno kopiranje sedaj iz nastavitvene datoteke"
 
 #: standalone/drakbackup:4289
 #, c-format
@@ -19753,7 +19763,7 @@ msgstr ""
 #: standalone/drakbackup:4358 standalone/drakbackup:4361
 #, c-format
 msgid "Drakbackup"
-msgstr "Drakbackup"
+msgstr "DrakBackup"
 
 #: standalone/drakboot:49
 #, c-format
@@ -19957,7 +19967,7 @@ msgstr "Nastavitveni Čarovniki"
 #: standalone/drakbug:81
 #, c-format
 msgid "Select Mandriva Tool:"
-msgstr "Izberite Mandrivaovo orodje"
+msgstr "Izberite Mandrivino orodje"
 
 #: standalone/drakbug:82
 #, c-format
@@ -20124,12 +20134,12 @@ msgstr "Stanje"
 #: standalone/drakconnect:126
 #, c-format
 msgid "Hostname: "
-msgstr "Gostiteljsko ime"
+msgstr "Ime gostitelja: "
 
 #: standalone/drakconnect:128
 #, c-format
 msgid "Configure hostname..."
-msgstr "Nastavite gostiteljsko ime..."
+msgstr "Nastavitev imena gostitelja ..."
 
 #: standalone/drakconnect:142 standalone/drakconnect:845
 #, c-format
@@ -20160,17 +20170,17 @@ msgstr "Izbrana naprava"
 #: standalone/drakconnect:296
 #, c-format
 msgid "IP configuration"
-msgstr "Nastavitev IP naslova"
+msgstr "Nastavitev naslova IP"
 
 #: standalone/drakconnect:335
 #, c-format
 msgid "DNS servers"
-msgstr "DNS strežniki"
+msgstr "Strežniki DNS"
 
 #: standalone/drakconnect:343
 #, c-format
 msgid "Search Domain"
-msgstr "Domena za iskanje:"
+msgstr "Domena za iskanje"
 
 #: standalone/drakconnect:351
 #, c-format
@@ -20230,7 +20240,7 @@ msgstr "Onemogoči"
 #: standalone/drakconnect:593 standalone/harddrake2:50
 #, c-format
 msgid "Media class"
-msgstr "Vrsta medija"
+msgstr "Razred medija"
 
 #: standalone/drakconnect:594
 #, c-format
@@ -20292,7 +20302,7 @@ msgstr "Omrežna naprava »%s« je bila uspešno odstranjena"
 #: standalone/drakconnect:761
 #, c-format
 msgid "No IP"
-msgstr "Ni IP naslova"
+msgstr "Ni naslova IP"
 
 #: standalone/drakconnect:762
 #, c-format
@@ -20497,7 +20507,7 @@ msgstr "opravljeno"
 #: standalone/drakfont:223
 #, c-format
 msgid "Could not find any font in your mounted partitions"
-msgstr "Nisem mogel najti nobene pisave v vaših priklopljenih particijah"
+msgstr "Ni moč najti nobene pisave na vaših priklopljenih razdelkih"
 
 #: standalone/drakfont:258
 #, c-format
@@ -20512,12 +20522,12 @@ msgstr "Nisem mogel najti nobene pisave.\n"
 #: standalone/drakfont:271
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr "Iskanje pisav v nameščenem sezbamu"
+msgstr "Iskanje pisav v seznamu nameščenih"
 
 #: standalone/drakfont:296
 #, c-format
 msgid "%s fonts conversion"
-msgstr "%s oretvorbe pisav"
+msgstr "%s pretvorbe pisav"
 
 #: standalone/drakfont:325
 #, c-format
@@ -20567,7 +20577,7 @@ msgstr "Nadpiši Datoteke s Pisavami"
 #: standalone/drakfont:422
 #, c-format
 msgid "xfs restart"
-msgstr "restart xfs"
+msgstr "Ponovni zagon XFS"
 
 #: standalone/drakfont:430
 #, c-format
@@ -21017,7 +21027,7 @@ msgstr "Vrata posrednika"
 #: standalone/drakgw:278
 #, c-format
 msgid "Cache size (MB)"
-msgstr "Velikost predpomnilnika (MiB)"
+msgstr "Velikost predpomnilnika (MB)"
 
 #: standalone/drakgw:300
 #, c-format
@@ -21046,7 +21056,8 @@ msgstr ""
 "Sedaj lahko delite Internetno povezavo z drugimi računalniki na vaši "
 "Krajevno Področnem Omrežju z uporabo samodejno nastavitevene mreže (DHCP) "
 "in\n"
-"Transparentnega Predpomnilniškega Posrednika (proxy cache) strežnika (SQUID)."
+"Transparentnega predpomnilniško posredniškega (proxy cache) strežnika "
+"(SQUID)."
 
 #: standalone/drakgw:364
 #, c-format
@@ -21088,7 +21099,7 @@ msgid ""
 "Usage: \n"
 msgstr ""
 " drakhelp 0.1\n"
-"Copyright (C) 2003-2005 Mandriva.\n"
+"Copyright  20©03-2005 Mandriva.\n"
 "To je prosto programje in se lahko razširja pod pogoji splošnega dovoljenja "
 "GPL.\n"
 "Uporaba: \n"
@@ -21621,7 +21632,7 @@ msgstr "Dovoljenja"
 #: standalone/drakperm:57
 #, c-format
 msgid "Add a new rule"
-msgstr "Dodaj novo prailo"
+msgstr "Dodaj novo pravilo"
 
 #: standalone/drakperm:64 standalone/drakperm:99 standalone/drakperm:124
 #, c-format
@@ -21704,12 +21715,12 @@ msgstr "uporabnik"
 #: standalone/drakperm:247
 #, c-format
 msgid "group"
-msgstr "skupino"
+msgstr "skupina"
 
 #: standalone/drakperm:247
 #, c-format
 msgid "other"
-msgstr "drugo"
+msgstr "drugi"
 
 #: standalone/drakperm:252
 #, c-format
@@ -21786,7 +21797,7 @@ msgstr "Uporabnik:"
 #: standalone/drakperm:294
 #, c-format
 msgid "Group:"
-msgstr "Skupina :"
+msgstr "Skupina:"
 
 #: standalone/drakperm:298
 #, c-format
@@ -21890,7 +21901,7 @@ msgstr "Komentar"
 #: standalone/draksambashare:64 standalone/draksambashare:97
 #, c-format
 msgid "Browseable"
-msgstr "Brskanje omogčeno"
+msgstr "Brskanje omogočeno"
 
 #: standalone/draksambashare:65
 #, c-format
@@ -21926,7 +21937,7 @@ msgstr "Seznam za pisanje"
 #: standalone/draksambashare:71 standalone/draksambashare:135
 #, c-format
 msgid "Admin users"
-msgstr "Upravljalci"
+msgstr "Upravljavci"
 
 #: standalone/draksambashare:72 standalone/draksambashare:136
 #, c-format
@@ -22448,9 +22459,9 @@ msgstr ""
 "Tu lahko nastavite varnostno stopnjo in administratorja vaše naprave.\n"
 "\n"
 "\n"
-"'<span weight=\"bold\">Varnostni Administrator</span>' je tisti, ki bo "
+"'<span weight=\"bold\">Varnostni administrator</span>' je tisti, ki bo "
 "prejemal varnostna opozorila, če je omogočena možnost\n"
-"'<span weight=\"bold\">Varnostno opozorilo</span>'. Lahko vpišete "
+"'<span weight=\"bold\">Varnostna opozorila</span>'. Lahko vpišete "
 "uporabniško ime ali e-pošto.\n"
 "\n"
 "\n"
@@ -22778,7 +22789,7 @@ msgid ""
 msgstr ""
 "Dobrodošli v orodju za nastavitev UPS.\n"
 "\n"
-"V sistem boste dodali nov USP.\n"
+"V sistem boste dodali nov UPS.\n"
 
 #: standalone/drakups:90
 #, c-format
@@ -22801,7 +22812,7 @@ msgstr "Samodejna zaznava"
 #: standalone/drakups:101 standalone/harddrake2:356
 #, c-format
 msgid "Detection in progress"
-msgstr "Zaznavanje v tekul"
+msgstr "Zaznavanje v teku"
 
 #: standalone/drakups:121
 #, c-format
@@ -22845,12 +22856,12 @@ msgstr "Ime:"
 #: standalone/drakups:145
 #, c-format
 msgid "The name of your ups"
-msgstr "Ime vašega ups"
+msgstr "Ime vašega UPSa"
 
 #: standalone/drakups:146
 #, c-format
 msgid "The driver that manages your ups"
-msgstr "Gonilnik, ki upravlja vaš ups"
+msgstr "Gonilnik, ki upravlja vaš UPS"
 
 #: standalone/drakups:147
 #, c-format
@@ -22860,7 +22871,7 @@ msgstr "Vrata:"
 #: standalone/drakups:149
 #, c-format
 msgid "The port on which is connected your ups"
-msgstr "Vrata preko katerih je povezan vaš ups"
+msgstr "Vrata preko katerih je povezan vaš UPS"
 
 #: standalone/drakups:159
 #, c-format
@@ -23066,7 +23077,7 @@ msgstr ""
 " - Super-FreeSwan: \t\thttp://www.freeswan.ca/\n"
 " - ipsec-tools: \t\t\thttp://ipsec-tools.sourceforge.net\n"
 " - ipsec-howto: \t\thttp://www.ipsec-howto.org\n"
-" - dokumenti in man strani, priložene paketu %s package\n"
+" - dokumenti in man strani, priložene v paketu %s\n"
 "\n"
 "Preden nadaljujete, preberite prosim vsaj dokumentacijo ipsec-howto\n"
 "."
@@ -24013,7 +24024,7 @@ msgstr ""
 "določa parametre IKE faze 2\n"
 "(IPsec-SA establishment).\n"
 "\n"
-"source_id and destination_id so sestavljeni kot:\n"
+"source_id in destination_id so sestavljeni kot:\n"
 "\n"
 "\taddress address [/ prefix] [[port]] ul_proto\n"
 "\n"
@@ -24039,10 +24050,10 @@ msgid ""
 "group is one of the following: modp768, modp1024, modp1536.\n"
 "Or you can define 1, 2, or 5 as the DH group number."
 msgstr ""
-"Določi skupino Diffie-Hellmanove exponentiations.\n"
+"Določi skupino Diffie-Hellmanovih potenc.\n"
 "To navodilo lahko opustiš, če ne potrebuješ PFS.\n"
 "Če ne navedeš nič, bo sprejet vsak predlog.\n"
-"skupine so lahko: modp768, modp1024, modp1536.\n"
+"Skupine so lahko: modp768, modp1024, modp1536.\n"
 "Ali pa določiš 1, 2 ali 5 kot DH številko skupine."
 
 #: standalone/drakvpn:982
@@ -24114,7 +24125,7 @@ msgid ""
 msgstr ""
 "določi čas trajanja, ki bo predlagan\n"
 "za fazo 1 povezovanja. Vsak predlog bo sprejet,\n"
-"vendar lastnosti ne bodo predložene enakovrenim napravam,\n"
+"vendar lastnosti ne bodo predložene enakovrednim napravam,\n"
 "če jih ne boš navedel. Lahko se jih nevede posebej\n"
 "v vsakem predlogu.\n"
 "\n"
@@ -24127,7 +24138,7 @@ msgstr ""
 "        lifetime time 60 sec;\n"
 "\tlifetime time 12 hour;\n"
 "\n"
-"Torej enote trajanaja so:  'min', 'min', 'sec', 'sec', 'sec' and 'hour'.\n"
+"Torej enote trajanaja so: 'min', 'min', 'sec', 'sec', 'sec' in 'hour'.\n"
 
 #: standalone/drakvpn:1019
 #, c-format
@@ -24163,16 +24174,16 @@ msgid ""
 "remote anonymous\n"
 "remote ::1 [8000]"
 msgstr ""
-"oddaljen  (address | anonymous) [[port]] { statements }\n"
-"speccificira vrednosti za IKE fazo 1 za vsako oddaljeno vozlišče.\n"
-"Privzeto se uporablja port 500. Če se navede anonymous, se le to\n"
-"aplicira na vse enakovredne naprave, ki jim ne ustreza nobeno drugo\n"
+"remote  (address | anonymous) [[port]] { statements }\n"
+"določi vrednosti za IKE fazo 1 za vsako oddaljeno vozlišče.\n"
+"Privzeto se uporablja vrata 500. Če se navede anonymous, se le to\n"
+"uporabi za vse enakovredne naprave, ki jim ne ustreza nobeno drugo\n"
 "oddaljeno navodilo.\n"
 "\n"
 "Primeri: \n"
 "\n"
-"oddaljen anonymous\n"
-"oddaljen ::1 [8000]"
+"remote anonymous\n"
+"remote ::1 [8000]"
 
 #: standalone/drakvpn:1038
 #, c-format
@@ -24231,12 +24242,12 @@ msgid ""
 msgstr ""
 "To navodilo je za odzivnik. Zaradi tega moraš\n"
 "vključiti pasivno, zato da bo samo racoon(8) postal\n"
-"odzivnik. Če odzvinik nima določenih pravil v SPD med\n"
+"odzivnik. Če odzivnik nima določenih pravil v SPD med\n"
 "drugo fazo povezovanja, navodilo pa je vključeno, potem\n"
 "bo racoon(8) izbral prvo predlogo v SA prometu od pobudnika,\n"
 "nato bo ustvaril pravilnik vnosov od pobudnika. Koristno se je\n"
-"povezovati z odjemalcem, ki ima dinamično dololčen\n"
-"IP naslov. Pozoren bodi na to, da se v odzivnikov SPD lahko\n"
+"povezovati z odjemalcem, ki ima dinamično določen\n"
+"naslov IP. Pozoren bodi na to, da se v odzivnikov SPD lahko\n"
 "namesti neprimeren pravilnik pobudnika. Zaradi neskladja\n"
 "pravilnikov pobudnika in odzivnika lahko pride do\n"
 "izgube ostale komunikacije, če je tak pravilnik\n"
@@ -24267,7 +24278,7 @@ msgstr "Vrsta certifikata"
 #: standalone/drakvpn:1069
 #, c-format
 msgid "My certfile"
-msgstr "Moja certifikacijska datoteka"
+msgstr "Moje potrdilo"
 
 #: standalone/drakvpn:1070
 #, c-format
@@ -24287,17 +24298,17 @@ msgstr "Ime zasebnega ključa"
 #: standalone/drakvpn:1073
 #, c-format
 msgid "Peers certfile"
-msgstr "Certifikacijska datoteka enakovrednih naprav"
+msgstr "Potrdilo za enakovredne naprave"
 
 #: standalone/drakvpn:1074
 #, c-format
 msgid "Name of the peers certificate"
-msgstr "Ime certifikata enakovredne naprave"
+msgstr "Ime potrdila za enakovredne naprave"
 
 #: standalone/drakvpn:1075
 #, c-format
 msgid "Verify cert"
-msgstr "Preveri certifikat"
+msgstr "Preveri potrdilo"
 
 #: standalone/drakvpn:1077
 #, c-format
@@ -24340,26 +24351,26 @@ msgid ""
 "\n"
 "my_identifier user_fqdn \"myemail@mydomain.com\""
 msgstr ""
-"specifies the identifier sent to the remote host and the\n"
-"type to use in the phase 1 negotiation.  address, FQDN,\n"
-"user_fqdn, keyid and asn1dn can be used as an idtype.\n"
-"they are used like:\n"
-"\tmy_identifier address [address];\n"
-"\t\tthe type is the IP address.  This is the default\n"
-"\t\ttype if you do not specify an identifier to use.\n"
-"\tmy_identifier user_fqdn string;\n"
-"\t\tthe type is a USER_FQDN (user fully-qualified\n"
-"\t\tdomain name).\n"
-"\tmy_identifier FQDN string;\n"
-"\t\tthe type is a FQDN (fully-qualified domain name).\n"
-"\tmy_identifier keyid file;\n"
-"\t\tthe type is a KEY_ID.\n"
-"\tmy_identifier asn1dn [string];\n"
-"\t\tthe type is an ASN.1 distinguished name.  If\n"
-"\t\tstring is omitted, racoon(8) will get DN from\n"
-"\t\tSubject field in the certificate.\n"
+"Določa identifikator, ki se pošlje oddaljenemu dostitelju, in\n"
+"vrsto za uporabo v pogajanjih faze 1 negotiation. Za idtype\n"
+"se lahko uporabi FQDN, user_fqdn, keyid in asn1dn.\n"
+"Vse se uporablja na ta način:\n"
+"\tmy_identifier address [naslov];\n"
+"\t\tvrsta je naslov IP. To je privzeta\n"
+"\t\tvrsta, če ne določite identifikatorja.\n"
+"\tmy_identifier user_fqdn niz;\n"
+"\t\tvrsta je USER_FQDN (uporabniško polno\n"
+"\t\tkvalificirano ime domene).\n"
+"\tmy_identifier FQDN niz;\n"
+"\t\tvrsta je FQDN (polno kvalificirano ime domene).\n"
+"\tmy_identifier keyid datoteka;\n"
+"\t\tvrsta je KEY_ID.\n"
+"\tmy_identifier asn1dn [niz];\n"
+"\t\tvrsta je značilno ime ASN.1. Če\n"
+"\t\tniz izpustite, bo racoon(8) pridobil ime iz\n"
+"\t\tpolja Zadeva iz potrdila.\n"
 "\n"
-"Examples: \n"
+"Primeri: \n"
 "\n"
 "my_identifier user_fqdn \"mojapošta@mojadomena.com\""
 
@@ -24384,38 +24395,38 @@ msgid ""
 "\n"
 "For other transforms, this statement should not be used."
 msgstr ""
-"navedi algoritem za kodiranje, ki bo v uporabi\n"
-"za prvo stopnjo povezovanja. To navodilo mora biti določeno. \n"
+"navedi algoritem za šifriranje, ki bo v uporabi\n"
+"za prvo stopnjo pogajanja. To navodilo mora biti določeno.\n"
 "lahko se izbere naslednje algoritne: \n"
 "\n"
 "DES, 3DES, blowfish, cast128 za oakley.\n"
 "\n"
-"Za ostale pretvorbe se ta stvek ne uporablja."
+"Za ostale pretvorbe se ta navedba ne uporablja."
 
 #: standalone/drakvpn:1110
 #, c-format
 msgid "Hash algorithm"
-msgstr "Hash algoritem"
+msgstr "Zgostitveni algoritem"
 
 #: standalone/drakvpn:1112
 #, c-format
 msgid "DH group"
-msgstr "DH skupina"
+msgstr "Skupina DH"
 
 #: standalone/drakvpn:1119
 #, c-format
 msgid "Command"
-msgstr "Ukaz, ukazna vrstica"
+msgstr "Ukaz"
 
 #: standalone/drakvpn:1120
 #, c-format
 msgid "Source IP range"
-msgstr "Obseg vrednosti izvornega IP"
+msgstr "Obseg vrednosti za izvorni IP"
 
 #: standalone/drakvpn:1121
 #, c-format
 msgid "Destination IP range"
-msgstr "Obseg vrednosti ciljenega IP."
+msgstr "Obseg vrednosti za ciljni IP"
 
 #: standalone/drakvpn:1122
 #, c-format
@@ -24638,7 +24649,8 @@ msgstr "seznam alternativnih gonilnikov za to zvočno kartico"
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
-"to je fizično vodilo na katerega so naprave priklopljene (npr: PCI, USB, ...)"
+"to je fizično vodilo, na katerega je priklopljena naprava (npr: PCI, "
+"USB, ...)"
 
 #: standalone/harddrake2:31 standalone/harddrake2:146
 #, c-format
@@ -24661,21 +24673,20 @@ msgid ""
 "- eide devices: the device is either a slave or a master device\n"
 "- scsi devices: the scsi bus and the scsi device ids"
 msgstr ""
-"- pci naprave: pokaže PCI reže, napravo in funkcijo  te kartice\n"
-"- eide naprave: ta naprava je bodisi sekundarna ali  primarna naprava (slave/"
+"- naprave PCI: pokaže PCI reže, napravo in funkcijo  te kartice\n"
+"- naprave EIDE: ta naprava je bodisi sekundarna ali primarna naprava (slave/"
 "master)\n"
-"- scsi naprave: scsi vodilo in scsi identifikacije  naprav"
+"- naprave SCSI: vodilo SCSI in identifikacije naprav SCSI"
 
 #: standalone/harddrake2:38
 #, c-format
 msgid "Drive capacity"
-msgstr "Kapaciteta pogona"
+msgstr "Zmožnosti pogona"
 
 #: standalone/harddrake2:38
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
-"posebne zmogljivosti gonilnika (zmogljivosti zapisa in/ali podpora za DVD)"
+msgstr "posebne zmožnosti pogona (zmožnost zapisovanja, podpora za DVD)"
 
 #: standalone/harddrake2:39
 #, c-format
@@ -24690,17 +24701,17 @@ msgstr "Stara datoteka naprave"
 #: standalone/harddrake2:41
 #, c-format
 msgid "old static device name used in dev package"
-msgstr "ime stare statične naprave v dev paketu"
+msgstr "staro, statično ime naprave v paketu dev"
 
 #: standalone/harddrake2:42
 #, c-format
 msgid "New devfs device"
-msgstr "Nova devfs naprava"
+msgstr "Nova naprava devfs"
 
 #: standalone/harddrake2:43
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
-msgstr "ime nove dinamične naprave ustvarjeno z devfs  jedra"
+msgstr "novo, dinamično ime naprave ustvarjene z devfs iz jedra"
 
 #. -PO: here "module" is the "jargon term" for a kernel driver
 #: standalone/harddrake2:46
@@ -24792,22 +24803,22 @@ msgstr "vodilo PCI, na katerega je priklopljena naprava"
 #: standalone/harddrake2:56
 #, c-format
 msgid "PCI device #"
-msgstr "# PCI naprave"
+msgstr "# naprave PCI"
 
 #: standalone/harddrake2:56
 #, c-format
 msgid "PCI device number"
-msgstr "Številka PCI naprave"
+msgstr "številka naprave PCI"
 
 #: standalone/harddrake2:57
 #, c-format
 msgid "PCI function #"
-msgstr "# PCI funkcije"
+msgstr "# funkcije PCI"
 
 #: standalone/harddrake2:57
 #, c-format
 msgid "PCI function number"
-msgstr "Številka PCI funkcije"
+msgstr "številka funkcije PCI"
 
 #: standalone/harddrake2:58
 #, c-format
@@ -24852,7 +24863,7 @@ msgstr "to je manj pomembna identifikacija naprave"
 #: standalone/harddrake2:62
 #, c-format
 msgid "Device USB ID"
-msgstr "ID aprave USB"
+msgstr "ID naprave USB"
 
 #: standalone/harddrake2:62
 #, c-format
@@ -24871,9 +24882,9 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"jedro GNU/Linux mora zagnati zanko za izračun v času zagona za nastavitev "
-"števca časa.  Njegov rezultat je shranjen kot bogomips kot način za "
-"»primerjalno označbo« za CPE."
+"jedro GNU/Linux mora ob zagonu zagnati računsko zanko za nastavitev števca "
+"časa. Rezultat zanke je shranjen kot bogomips kot način za »primerjalno "
+"označbo« za CPE."
 
 #: standalone/harddrake2:67
 #, c-format
@@ -24889,17 +24900,17 @@ msgstr "velikost drugostopenjskega CPE predpomnilnika"
 #: standalone/harddrake2:70
 #, c-format
 msgid "Coma bug"
-msgstr "Coma hrošč"
+msgstr "Hrošč Coma"
 
 #: standalone/harddrake2:70
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "kjer ima ta CPE Cyrix 6x86 Coma hrošča"
+msgstr "ali ima ta CPE Cyrix 6x86 hrošča Coma"
 
 #: standalone/harddrake2:71
 #, c-format
 msgid "Cpuid family"
-msgstr "Identifikacija CPE družine"
+msgstr "Identifikacija družine CPE"
 
 #: standalone/harddrake2:71
 #, c-format
@@ -24909,12 +24920,12 @@ msgstr "družina CPE (npr: 6 za i686 razred)"
 #: standalone/harddrake2:72
 #, c-format
 msgid "Cpuid level"
-msgstr "Stopnja CPE družine"
+msgstr "Stopnja CPUID"
 
 #: standalone/harddrake2:72
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
-msgstr "stopnja informacij ki so lahko dobljene skozi ukaz cpuid"
+msgstr "stopnja podatkov, ki jih je moč pridobiti z uporabo ukaza cpuid"
 
 #: standalone/harddrake2:73
 #, c-format
@@ -24928,8 +24939,8 @@ msgid ""
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
-"frekvenca CPE v MHz (Megahercih, katerih prvi pribljižek predstavlja število "
-"asembblerskih ukazov, ki jih CPE lahko dobi in izvede v eni sekundi)"
+"frekvenca CPE v MHz (megahercih, katerih prvi približek predstavlja število "
+"ukazov, ki jih CPE lahko izvede v eni sekundi)"
 
 #: standalone/harddrake2:74
 #, c-format
@@ -24939,12 +24950,12 @@ msgstr "Zastavice"
 #: standalone/harddrake2:74
 #, c-format
 msgid "CPU flags reported by the kernel"
-msgstr "CPU zastavice, ki so poročane od jedra"
+msgstr "Zastavice CPE, ki jih sporoča od jedro"
 
 #: standalone/harddrake2:75
 #, c-format
 msgid "Fdiv bug"
-msgstr "fdiv hrošč"
+msgstr "Hrošč FDIV"
 
 #: standalone/harddrake2:76
 #, c-format
@@ -24953,46 +24964,46 @@ msgid ""
 "processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
-"Zgodnji Pentium procesorji, ki so bili izdelani so imeli hrošča v procesorju "
-"za plavajočo vejicom ki ni dosegel zahtevane točnosti, kar je "
-"izvedloFloating point DIVision (FDIV)"
+"zgodnji čipi Pentium so imeli hrošča v procesorju za plavajočo vejico, ki ni "
+"dosegel zahtevane točnosti ob izvajanju deljenja (Floating point DIVision "
+"(FDIV))"
 
 #: standalone/harddrake2:77
 #, c-format
 msgid "Is FPU present"
-msgstr "je prisotna enota za plavajočo vejico"
+msgstr "Enota za plavajočo vejico"
 
 #: standalone/harddrake2:77
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr "da pomeni, da ima procesor aritmetični koprocesor"
+msgstr "»da« pomeni, da ima procesor aritmetični koprocesor"
 
 #: standalone/harddrake2:78
 #, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr "Bodisi ima enota za plavajočo vejico IRQ vektor"
+msgstr "Enota za plavajočo vejico ima vektor IRQ"
 
 #: standalone/harddrake2:78
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "da pomeni, da ima aritmetični koprocesorski priložen vektor za izjeme"
+msgstr "»da« pomeni, da ima aritmetični koprocesor vgrajen vektor za izjeme"
 
 #: standalone/harddrake2:79
 #, c-format
 msgid "F00f bug"
-msgstr "F00f hrošč"
+msgstr "Hrošč F00F"
 
 #: standalone/harddrake2:79
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"zgodnji pentiumi so bili hroščati in se niso več odzvali, ko so dobili bitno "
-"kodo F00F"
+"zgodnji Pentiumi so bili hroščati in so se prenehali odzivati, ko so "
+"dekodirali bitno kodo F00F"
 
 #: standalone/harddrake2:80
 #, c-format
 msgid "Halt bug"
-msgstr "Hrošč Ustavitve"
+msgstr "Hrošč Halt"
 
 #: standalone/harddrake2:81
 #, c-format
@@ -25000,8 +25011,8 @@ msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
 "after the \"halt\" instruction is used"
 msgstr ""
-"Nekateri od zgodnjih i486DX-100 čipov niso mogli zagotoviti, da bi se vrnili "
-"v način delovanja po tem, ko je bil uporabljen ukaz »halt«"
+"nekateri od zgodnjih čipov i486DX-100 se niso mogli zanesljivo vrniti v "
+"način delovanja po tem, ko je bil uporabljen ukaz »halt«"
 
 #: standalone/harddrake2:82
 #, c-format
@@ -25046,17 +25057,17 @@ msgstr "Model korakanja"
 #: standalone/harddrake2:87
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "korakanje CPE (številka pod model (generacie) )"
+msgstr "korakanje CPE (številka pod modela (generacije))"
 
 #: standalone/harddrake2:88
 #, c-format
 msgid "the vendor name of the processor"
-msgstr "ime založnika procesorja"
+msgstr "ime proizvajalca procesorja"
 
 #: standalone/harddrake2:89
 #, c-format
 msgid "Write protection"
-msgstr "Zaščita pisanja"
+msgstr "Zaščita pisanja (WP)"
 
 #: standalone/harddrake2:89
 #, c-format
@@ -25065,19 +25076,19 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-"the WP flag in the CR0 register of the cpu enforce write protection at the "
-"memory page level, thus enabling the processor to prevent unchecked kernel "
-"accesses to user memory (aka this is a bug guard) "
+"zastavica WP v registru CR0 procesorja omogoči zaščito pisanja na stopnji "
+"strani v pomnilniku in s tem preprečevanje nepreverjenih dostopov jedra do "
+"uporabniškega pomnilnika"
 
 #: standalone/harddrake2:93
 #, c-format
 msgid "Floppy format"
-msgstr "Format disketne enote"
+msgstr "Format diskete"
 
 #: standalone/harddrake2:93
 #, c-format
 msgid "format of floppies supported by the drive"
-msgstr "format disket podprtih od naprave"
+msgstr "format disket, ki jih podpira ta pogon"
 
 #: standalone/harddrake2:97
 #, c-format
@@ -25087,7 +25098,7 @@ msgstr "Kanal"
 #: standalone/harddrake2:97
 #, c-format
 msgid "EIDE/SCSI channel"
-msgstr "EIDE/SCSI kanal"
+msgstr "kanal EIDE/SCSI"
 
 #: standalone/harddrake2:98
 #, c-format
@@ -25102,7 +25113,7 @@ msgstr "navadno serijska številka diska"
 #: standalone/harddrake2:99
 #, c-format
 msgid "Logical unit number"
-msgstr "Logična številka diska"
+msgstr "Številka logične enote"
 
 #: standalone/harddrake2:99
 #, c-format
@@ -25111,7 +25122,7 @@ msgid ""
 "identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"številka ciljne SCSI naprave (LUN). SCSI naprava povezana do gostitelja so "
+"številka ciljne SCSI naprave (LUN). SCSI naprave povezane z gostiteljem so "
 "unikatno identificirane po\n"
 "številki kanala, identifikaciji cilja in po številki logične enote"
 
@@ -25124,7 +25135,7 @@ msgstr "Velikost nameščenega"
 #: standalone/harddrake2:106
 #, c-format
 msgid "Installed size of the memory bank"
-msgstr "Velikost nameščene banke pomnilnika"
+msgstr "Nameščena velikost banke pomnilnika"
 
 #: standalone/harddrake2:107
 #, c-format
@@ -25134,7 +25145,7 @@ msgstr "Omogočena velikost"
 #: standalone/harddrake2:107
 #, c-format
 msgid "Enabled size of the memory bank"
-msgstr "Omogočena velikost pomnilnika"
+msgstr "omogočena velikost banke pomnilnika"
 
 #: standalone/harddrake2:108
 #, c-format
@@ -25149,7 +25160,7 @@ msgstr "Hitrost"
 #: standalone/harddrake2:109
 #, c-format
 msgid "Speed of the memory bank"
-msgstr "Hitrost banke pomnilnika"
+msgstr "hitrost banke pomnilnika"
 
 #: standalone/harddrake2:110
 #, c-format
@@ -25159,7 +25170,7 @@ msgstr "Povezave bank"
 #: standalone/harddrake2:111
 #, c-format
 msgid "Socket designation of the memory bank"
-msgstr "Oznaka vtiča od banke pomnilnika"
+msgstr "oznaka vtiča za banko pomnilnika"
 
 #: standalone/harddrake2:115
 #, c-format
@@ -25288,12 +25299,12 @@ msgstr "/Samozaznava _modemov"
 #: standalone/harddrake2:183
 #, c-format
 msgid "/Autodetect _jaz drives"
-msgstr "/Samozaznava _jaz pogonov"
+msgstr "/Samozaznava pogonov _jaz"
 
 #: standalone/harddrake2:184
 #, c-format
 msgid "/Autodetect parallel _zip drives"
-msgstr "/Samodejna zaznava vzporednih pogonov _zip"
+msgstr "/Samozaznava pogonov _zip (vzporednih)"
 
 #: standalone/harddrake2:191
 #, c-format
@@ -25308,7 +25319,7 @@ msgstr "/_Končaj"
 #: standalone/harddrake2:205
 #, c-format
 msgid "/_Fields description"
-msgstr "/Opisi _polja"
+msgstr "/Opisi _polj"
 
 #: standalone/harddrake2:207
 #, c-format
@@ -25380,7 +25391,8 @@ msgstr "Poženi prikrojitveno orodje"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
-"Kliknite na napravo v levem drevesu da bi prikazali tukaj njene podatke-"
+"Kliknite na napravo v drevesu na levi in tukaj se bodo prikazali njeni "
+"podatki."
 
 #: standalone/harddrake2:310 standalone/printerdrake:306
 #: standalone/printerdrake:320
@@ -25426,7 +25438,7 @@ msgstr "Račun:"
 #: standalone/harddrake2:564
 #, c-format
 msgid "Hostname:"
-msgstr "Gostiteljsko ime:"
+msgstr "Ime gostitelja:"
 
 #: standalone/keyboarddrake:30
 #, c-format
@@ -25462,7 +25474,7 @@ msgstr "Da bi uveljavili spremembe, se morate odjaviti."
 #: standalone/logdrake:49
 #, c-format
 msgid "Mandriva Linux Tools Logs"
-msgstr "Logi Mandriva Linuxovih orodij"
+msgstr "Orodja Mandriva Linuxa"
 
 #: standalone/logdrake:50
 #, c-format
@@ -25865,7 +25877,7 @@ msgstr "Napadalčev naslov IP: %s"
 #: standalone/net_applet:448
 #, c-format
 msgid "Attacker hostname: %s"
-msgstr "Gostiteljsko ime napadalca: %s"
+msgstr "Ime gostitelja napadalca: %s"
 
 #: standalone/net_applet:451
 #, c-format
@@ -26125,7 +26137,7 @@ msgstr "Nastavi kot privzeto"
 #: standalone/printerdrake:242
 #, c-format
 msgid "Set selected printer as the default printer"
-msgstr "Nastavi izbrani tiskalnik kot privzeti tisklanik"
+msgstr "Nastavi izbrani tiskalnik za privzetega"
 
 #: standalone/printerdrake:245
 #, c-format
@@ -26183,7 +26195,7 @@ msgid ""
 "\n"
 "Do you want to install the SANE packages?"
 msgstr ""
-"Za uporabo optičnih čitalcev je potrebno namestiti pakete SANE.\n"
+"Za uporabo optičnih čitalnikov je potrebno namestiti pakete SANE.\n"
 "\n"
 "Želite namestiti pakete SANE?"
 
@@ -26355,7 +26367,7 @@ msgstr "Namesti strojni gonilnik (firmware) za"
 #: standalone/scannerdrake:258
 #, c-format
 msgid "Select firmware file for the %s"
-msgstr "Izberite strojni gonilnik (firmwre) za %s"
+msgstr "Izberite strojni gonilnik (firmware) za %s"
 
 #: standalone/scannerdrake:276
 #, c-format
@@ -26522,7 +26534,7 @@ msgstr "Iskanje novih optičnih čitalcev"
 #: standalone/scannerdrake:458
 #, c-format
 msgid "Add a scanner manually"
-msgstr "Dodaj optični čitalec ročno "
+msgstr "Ročno dodaj optični čitalnik"
 
 #: standalone/scannerdrake:465
 #, c-format
@@ -26684,7 +26696,7 @@ msgstr "- %s je bil dodan\n"
 #: standalone/service_harddrake:206
 #, c-format
 msgid "Hardware probing in progress"
-msgstr "Preiskušanje strojne opreme"
+msgstr "Preizkušanje strojne opreme"
 
 #: standalone/service_harddrake_confirm:7
 #, c-format
@@ -26754,7 +26766,7 @@ msgstr "Geslo administratorja"
 #: steps.pm:26
 #, c-format
 msgid "Add a user"
-msgstr "Dodajte uporabnika"
+msgstr "Dodajanje uporabnika"
 
 #: steps.pm:27
 #, c-format
@@ -26844,21 +26856,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Namestitev ni uspela"
-
-#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
-#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Dvorak (Esperanto)"
-#~ msgstr "Dvorak (Esperanto)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian AZERTY (old)"
-#~ msgstr "litovska (AZERTY, stara)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian \"phonetic\" QWERTY"
-#~ msgstr "litovska (»fonetična« QWERTY)"
