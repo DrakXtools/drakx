@@ -143,7 +143,7 @@ sub create_treeview_list {
 	    my $nb = find_index { $_ eq $v } @{$e->{list}};
 	    my ($old_path) = $list_tv->get_cursor;
 	    if (!$old_path || $nb != $old_path->to_string) {
-             Glib::Timeout->add(100, sub { $select->(Gtk2::TreePath->new_from_string($nb)); 1 });
+             Glib::Timeout->add(100, sub { $select->(Gtk2::TreePath->new_from_string($nb)); 0 });
 	    }
 	    undef $old_path if $old_path;
 	};
