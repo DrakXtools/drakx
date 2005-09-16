@@ -53,9 +53,11 @@ sub _raid_devices_raw() {
 sub _raid_devices() {
     my @l = _raid_devices_raw();
     my %vg2pv; push @{$vg2pv{$_->{vg}}}, delete $_->{pv} foreach @l;
+    my %vg2status; push @{$vg2status{$_->{vg}}}, delete $_->{status} foreach @l;
     map {
 	delete $_->{size}; #- now irrelevant
 	$_->{disks} = $vg2pv{$_->{vg}};
+	$_->{status} = (every { $_ eq 'ok' } @{$vg2status{$_->{vg}}}) ? 'ok' : join(' ', @{$vg2status{$_->{vg}}});
 	$_;
     } uniq_ { $_->{vg} } @l;
 }
@@ -79,6 +81,7 @@ sub _sets() {
 	    log::l("ERROR: multiple match for set $name: " . join(' ', map { $_->{vg} } @l)) if @l > 1;
 	    my ($raid) = @l;
 	    add2hash($_, $raid);
+	    $_->{status} = $raid->{status} if $_->{status} eq 'ok' && $::isInstall;
 	} else {
 	    log::l("ERROR: no matching raid devices for set $name");
 	}
@@ -96,7 +99,14 @@ sub vgs() {
 	#- if it doesn't, we suppose it's not in use
 	if_(-e "/dev/$dev", $vg); 
 
-    } grep { $_->{status} eq 'ok' } _sets();
+    } grep { 
+	if ($_->{status} eq 'ok') {
+	    1;
+	} else {
+	    call_dmraid('-an', $_->{vg}) if $::isInstall; #- for things like bad_sil below, deactivating half activated dmraid
+	    0;
+	}
+    } _sets();
 }
 
 if ($ENV{DRAKX_DEBUG_DMRAID}) {
@@ -147,16 +157,28 @@ if ($ENV{DRAKX_DEBUG_DMRAID}) {
     
       '-ccr' => "/dev/sda:pdc:pdc_bcefbiigfg:mirror:ok:80043200:0\n" .
                 "/dev/sdb:pdc:pdc_bcefbiigfg:mirror:ok:80043200:0\n",
-      },
+     },
     
+     bad_sil => {
+      '-ccs' => "sil_aeacdidecbcb:234439600:0:mirror:ok:0:1:0\n",
+                # ERROR: sil: only 3/4 metadata areas found on /dev/sdb, electing...
+
+      '-ccr' => "/dev/sdb:sil:sil_aeacdidecbcb:mirror:broken:234439600:0\n",
+                # ERROR: sil: only 3/4 metadata areas found on /dev/sdb, electing...
+     },
+
     );
     
     *call_dmraid = sub {
         my ($option) = @_;
-        my $s = $debug_data{$ENV{DRAKX_DEBUG_DMRAID}}{$option} or return;
-        split("\n", $s);
+        if (my $s = $debug_data{$ENV{DRAKX_DEBUG_DMRAID}}{$option}) {
+            split("\n", $s);
+	} else {
+            warn "dmraid @_\n";
+        }
     };
 EOF
+    $@ and die;
 }
 
 1;
