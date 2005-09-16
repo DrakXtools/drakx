@@ -280,11 +280,12 @@ user "$net->{adsl}{login}"
 
     #- FIXME: ppp0 and ippp0 are hardcoded
     my $metric = network::tools::get_default_metric("adsl"); #- FIXME, do not override if already set
-    put_in_hash($net->{ifcfg}{ppp0}, {
-				      DEVICE => 'ppp0',
-				      TYPE => 'ADSL',
-				      METRIC => $metric,
-				     }) unless member($adsl_type, qw(static dhcp));
+    put_in_hash($net->{ifcfg}{ppp0} ||= {}, {
+        DEVICE => 'ppp0',
+        TYPE => 'ADSL',
+        METRIC => $metric,
+        ONBOOT => 'yes', #- will be modified later in netconnect if requested
+    }) unless member($adsl_type, qw(static dhcp));
 
     #- remove file used with sagem for dhcp/static connections
     unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");

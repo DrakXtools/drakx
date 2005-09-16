@@ -468,8 +468,22 @@ sub main {
 	    log::l("found network config file $file");
 	    add2hash($o->{net}{resolv} ||= {}, network::network::read_resolv_conf($file));
 	}
-	$o->{net}{type} = 'lan';
-	$o->{net}{net_interface}  = first(values %{$o->{net}{ifcfg}});
+	my $dsl_device = find { $_->{BOOTPROTO} eq 'adsl_pppoe' } values %{$o->{net}{ifcfg}};
+	if ($dsl_device) {
+	    $o->{net}{type} = 'adsl';
+	    $o->{net}{net_interface} = $dsl_device->{DEVICE};
+	    $o->{net}{adsl} = {
+		method => 'pppoe',
+		device => 'pppoe_modem',
+		ethernet_device => $dsl_device->{DEVICE},
+		login => $dsl_device->{USER},
+		password => $dsl_device->{PASS},
+	    };
+	    %$dsl_device = ();
+	} else {
+	    $o->{net}{type} = 'lan';
+	    $o->{net}{net_interface} = first(values %{$o->{net}{ifcfg}});
+	}
     }
 
     #- done after module dependencies are loaded for "vfat depends on fat"

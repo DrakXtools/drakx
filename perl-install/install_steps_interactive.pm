@@ -789,8 +789,14 @@ sub configureNetwork {
 	require network::netconnect;
 	network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});
     } else {
-	require network::network;
-	network::network::easy_dhcp($o->{net}, $o->{modules_conf});
+	#- don't overwrite configuration in a network install
+	if (!install_any::is_network_install($o)) {
+	    require network::network;
+	    network::network::easy_dhcp($o->{net}, $o->{modules_conf});
+	} elsif ($o->{net}{type} eq 'adsl') {
+	    require network::adsl;
+	    network::adsl::adsl_conf_backend($o, $o->{modules_conf}, $o->{net});
+	}
 	$o->SUPER::configureNetwork;
     }
 }

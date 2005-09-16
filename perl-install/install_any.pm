@@ -290,6 +290,12 @@ sub dont_run_directly_stage2() {
     readlink("/usr/bin/runinstall2") eq "runinstall2.sh";
 }
 
+#- FIXME: use it whenever possible once unfrozen
+sub is_network_install {
+    my ($o) = @_;
+    member($o->{method}, qw(ftp http nfs));
+}
+
 
 sub start_i810fb() {
     my ($vga) = cat_('/proc/cmdline') =~ /vga=(\S+)/;
