@@ -337,7 +337,7 @@ sub generate_menu {
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $wireless_device and $menu->append(gtkshow($wireless_menu = create_menu(N("Wireless networks"),
                                                                          map { $_->{menuitem} } values %wireless_networks)));
-    $menu->append($create_item->('setInterface')) if $current_state ne 'notconfigured';
+    if (my $set = $current_state ne 'notconfigured' && $create_item->('setInterface')) { $menu->append($set) }
     $menu->append(gtkshow(create_menu(N("Settings"), grep { $_ } @settings)));
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append($create_item->('help'));
