@@ -78,7 +78,7 @@ sub update_networks() {
         push @{$wireless_list->{data}}, [
             $ap,
             $network->{current} ? $connected ? $pixbufs{state}{connected} : $pixbufs{state}{refresh} : undef,
-            $network->{essid} || exists $net->{wireless}{$ap} && $net->{wireless}{$ap}{WIRELESS_ESSID} || $ap,
+            $network->{essid} || exists $net->{wireless}{$ap} && $net->{wireless}{$ap}{WIRELESS_ESSID} || "[$ap]",
             $pixbufs{link_level}{$network->{approx_level}},
             $network->{flags} ? $pixbufs{keyring} : undef,
             $network->{flags},
