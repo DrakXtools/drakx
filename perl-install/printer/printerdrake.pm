@@ -2540,7 +2540,7 @@ sub setup_common {
 			(!files_exist("/usr/bin/scanimage",
 				      "/usr/bin/xscanimage",
 				      "/etc/sane.d/dll.conf",
-				      "/usr/$lib/libsane-hpaio.so.1") ||
+				      "/usr/$lib/sane/libsane-hpaio.so.1") ||
 			 (!files_exist(qw(/usr/bin/xsane)) &&
 			  !files_exist(qw(/usr/bin/kooka)) &&
 			  ($::isInstall ||
@@ -2649,11 +2649,11 @@ sub setup_common {
 			$makemodel !~ /HP\s+LaserJet\s+2200/i &&
 			$makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
 			# Install SANE
-			if (!$::testing &&
+ 			if (!$::testing &&
 			    (!files_exist("/usr/bin/scanimage",
 					  "/usr/bin/xscanimage",
 					  "/etc/sane.d/dll.conf",
-					  "/usr/$lib/libsane-hpoj.so.1") ||
+					  "/usr/$lib/sane/libsane-hpoj.so.1") ||
 			     (!files_exist(qw(/usr/bin/xsane)) &&
 			      !files_exist(qw(/usr/bin/kooka)) &&
 			      ($::isInstall ||
