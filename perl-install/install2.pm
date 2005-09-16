@@ -474,7 +474,7 @@ sub main {
 	    $o->{net}{net_interface} = $dsl_device->{DEVICE};
 	    $o->{net}{adsl} = {
 		method => 'pppoe',
-		device => 'pppoe_modem',
+		device => $dsl_device->{DEVICE},
 		ethernet_device => $dsl_device->{DEVICE},
 		login => $dsl_device->{USER},
 		password => $dsl_device->{PASS},
