@@ -317,7 +317,7 @@ user "$net->{adsl}{login}"
     @modules or @modules = qw(ppp_synctty ppp_async ppp_generic n_hdlc); #- required for pppoe/pptp connections
     #- pppoa connections need the pppoatm module
     #- pppd should run "modprobe pppoatm", but it will fail during install
-    push @modules, 'pppoatm' if $adsl_type = 'pppoa';
+    push @modules, 'pppoatm' if $adsl_type eq 'pppoa';
     foreach (@modules) {
         eval { modules::load($_) } or log::l("failed to load $_ module: $@");
     }
