@@ -470,7 +470,7 @@ sub libgl_config {
     my $wanted = $driver_to_libgl_config{$Driver};
     foreach my $file (values %driver_to_libgl_config) {
 	substInFile {
-	    my ($commented, $s) = /^($comment)?(.*)/;
+	    my ($commented, $s) = /^(\Q$comment\E)?(.*)/;
 	    if ($file eq $wanted) {
 		$_ = "$s\n";
 		$need_to_run_ldconfig ||= $commented;
