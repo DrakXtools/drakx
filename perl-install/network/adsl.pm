@@ -12,11 +12,12 @@ use vars qw(@ISA @EXPORT);
 sub adsl_probe_info {
     my ($net) = @_;
     my $pppoe_file = "$::prefix/etc/ppp/pppoe.conf";
-    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (!exists $net->{adsl}{method} || $net->{adsl}{method} eq 'pppoe') && -f $pppoe_file;
-    my $login = $pppoe_conf{USER};
+    my $login;
     foreach (qw(/etc/ppp/peers/ppp0 /etc/ppp/options /etc/ppp/options.adsl)) {
 	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
+    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (!exists $net->{adsl}{method} || $net->{adsl}{method} eq 'pppoe') && -f $pppoe_file;
+    $login ||= $pppoe_conf{USER};
     my $passwd = network::tools::passwd_by_login($login);
     if (!$net->{adsl}{vpi} && !$net->{adsl}{vci}) {
       ($net->{adsl}{vpi}, $net->{adsl}{vci}) =
