@@ -929,7 +929,15 @@ sub selectPackagesAlreadyInstalled {
     my ($packages) = @_;
 
     log::l("computing installed flags and size of installed packages");
-    $packages->{sizes} = $packages->compute_installed_flags($packages->{rpmdb});
+
+    $packages->compute_installed_flags($packages->{rpmdb});
+
+    my %sizes;
+    $packages->{rpmdb}->traverse(sub {
+	my ($p) = @_;      
+	$sizes{$p->name} += $p->size;
+    });
+    $packages->{sizes} = \%sizes;
 }
 
 sub selectPackagesToUpgrade {
