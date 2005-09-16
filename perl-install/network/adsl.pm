@@ -208,12 +208,13 @@ mtu 1492),
 avmadsl)
                   },
        },
+      );
 
-       pppoe_modem =>
+    my %generic =
+      (
+       pppoe =>
        {
-        server => {
-            pppoe => '"pppoe -I ' . ($modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $net->{adsl}{ethernet_device}) . '"',
-        },
+        server => '"pppoe -I ' . (exists $modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $net->{adsl}{ethernet_device}) . '"',
         ppp_options => qq(default-asyncmap
 mru 1492
 mtu 1492
@@ -225,7 +226,7 @@ nodeflate
 lcp-echo-interval 20
 lcp-echo-failure 3
 ),
-        }
+       }
       );
 
     if ($adsl_type =~ /^pp|^capi$/) {
@@ -239,10 +240,16 @@ lcp-echo-failure 3
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}});
 
-	my $pty_option = exists $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
+	my $pty_option =
+          exists $modems{$adsl_device}{server}{$adsl_type} ? "pty $modems{$adsl_device}{server}{$adsl_type}" :
+          exists $generic{$adsl_type}{server} ? "pty $generic{$adsl_type}{server}" :
+          "";
 	my $plugin = exists $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
 	my $noipdefault = $adsl_type eq 'pptp' ? '' : 'noipdefault';
-	my $ppp_options = exists $modems{$adsl_device}{ppp_options} && $modems{$adsl_device}{ppp_options};
+	my $ppp_options =
+          exists $modems{$adsl_device}{ppp_options} ? $modems{$adsl_device}{ppp_options} :
+          exists $generic{$adsl_type}{ppp_options} ? $generic{$adsl_type}{ppp_options} :
+          "";
 	output("$::prefix/etc/ppp/peers/ppp0",
 qq(lock
 persist

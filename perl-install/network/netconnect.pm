@@ -795,7 +795,6 @@ If you do not know it, keep the preselected type."),
 
 			$net->{adsl}{device} =
 			  $net->{adsl}{method} eq 'capi' ? 'capi_modem' :
-			  $net->{adsl}{method} eq 'pppoe' ? 'pppoe_modem' :
 			  $net->{adsl}{method} eq 'pptp' ? 'pptp_modem' :
 			  $ntf_name;
                         # FIXME: duplicate with $after_start_on_boot_step sub
