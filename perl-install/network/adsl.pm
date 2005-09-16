@@ -230,14 +230,14 @@ lcp-echo-failure 3
 
     if ($adsl_type =~ /^pp|^capi$/) {
         mkdir_p("$::prefix/etc/ppp");
-        $in->do_pkgs->install('ppp') if !$>;
+        $in->do_pkgs->install('ppp');
         my %packages = (
                         pppoa => [ qw(ppp-pppoatm) ],
                         pppoe => [ qw(ppp-pppoe rp-pppoe) ],
                         pptp  => [ qw(pptp-linux) ],
                         capi => [ qw(isdn4k-utils) ], #- capi4linux service
                        );
-        $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
+        $in->do_pkgs->install(@{$packages{$adsl_type}});
 
 	my $pty_option =
           exists $modems{$adsl_device}{server}{$adsl_type} ? "pty $modems{$adsl_device}{server}{$adsl_type}" :
