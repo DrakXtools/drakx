@@ -531,7 +531,8 @@ sub custom_id {
          $device->{"Socket Designation"} ?
          "$device->{name} (" . $device->{"Socket Designation"} . ")" :
          $device->{name} ? $device->{name} :
-         (defined($device->{description}) ? $device->{description} : $str));
+           (defined($device->{description}) ? $device->{description} :
+              (defined($device->{Vendor}) ? $device->{Vendor} : $str)));
 }
 
 1;
