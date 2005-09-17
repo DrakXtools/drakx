@@ -58,7 +58,7 @@ EOF
 	done
     fi
 
-    mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
+    mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandriva -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
     mkcd --addmd5 part_$action.iso
 done
  

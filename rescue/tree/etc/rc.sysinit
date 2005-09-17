@@ -4,7 +4,7 @@ action() { echo $1; shift; $*; }
 
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
-echo -e "\t\t\tWelcome to \\033[1;36mMandrake\\033[0;39m Linux"
+echo -e "\t\t\tWelcome to \\033[1;36mMandriva\\033[0;39m Linux"
 
 action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
 
