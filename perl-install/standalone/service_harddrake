@@ -69,7 +69,7 @@ my $previous_config;
 
 if (-f $last_boot_config && -s $last_boot_config) {
     eval { $previous_config = Storable::retrieve($last_boot_config) };
-    log::explanations("resetting previous harware file ($@)") if $@;
+    log::explanations("resetting previous hardware file ($@)") if $@;
 }
 
 $previous_config ||= {};
