@@ -179,7 +179,7 @@ sub connect_to_ap {
         if (defined $network->{id}) {
             eval { $monitor->select_network($network->{id}) };
             $found = !$@;
-            $found or err_dialog(N("Wireless connection"), N("Unable to contact daemon"));
+            $found or ugtk2::err_dialog(N("Wireless connection"), N("Unable to contact daemon"));
         } elsif ($wireless_net) {
             network::tools::stop_interface($wireless_device, 0);
             overwrite_wireless_ifcfg($wireless_net);
