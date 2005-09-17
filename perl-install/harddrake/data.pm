@@ -438,7 +438,9 @@ our @tree =
       string => N("Bridges and system controllers"),
       icon => "memory.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER/ } @devices) },
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM|SYSTEM_OTHER/
+                                 || $_->{description} =~ /Parallel Port Adapter/
+			 } @devices) },
       checked_on_boot => 0,
      },
 
