@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
 "POT-Creation-Date: 2005-09-16 17:08+0200\n"
-"PO-Revision-Date: 2005-09-16 22:52+0200\n"
+"PO-Revision-Date: 2005-09-18 01:55+0200\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: Brezhoneg <ofisk@wanadoo.fr>\n"
 "MIME-Version: 1.0\n"
@@ -2370,7 +2370,7 @@ msgstr ""
 #: diskdrake/interactive.pm:588
 #, c-format
 msgid "Remove the loopback file?"
-msgstr "Lemel ar restr loopback ?"
+msgstr "Lemel ar restr saveteiñ ?"
 
 #: diskdrake/interactive.pm:607
 #, c-format
@@ -4928,13 +4928,17 @@ msgstr "Hag ur vedia all hoc'h eus ?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:404
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following media have been found and will be used during install: %s.\n"
 "\n"
 "\n"
 "Do you have a supplementary installation media to configure?"
-msgstr "Hag un etrefas %s bennak a zo ganeoc'h ?"
+msgstr ""
+"Kavet 'meus ar medioù a-heul. Implojet e vint en ur staliañ : %s.\n"
+"\n"
+"\n"
+"Hag unann all da gefluniañ zo ganeoc'h ?"
 
 #: install_any.pm:417 printer/printerdrake.pm:3301
 #: printer/printerdrake.pm:3308 standalone/scannerdrake:182
@@ -5212,7 +5216,7 @@ msgstr "N'eus parzhadur da implij ebet"
 #: install_interactive.pm:114
 #, c-format
 msgid "Use the Windows partition for loopback"
-msgstr "Implij ar barzhadur Windows evit al loopback"
+msgstr "Implij ar barzhadur Windows evit saveteiñ"
 
 #: install_interactive.pm:117
 #, c-format
@@ -5237,7 +5241,7 @@ msgstr "Ment ar parzhadur disloañ e Mo : "
 #: install_interactive.pm:130
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
+msgstr "N'eus ket ur barzhadur FAT evit saveteiñ (n'eus ket a-walc'h egor dieub)"
 
 #: install_interactive.pm:139
 #, c-format
@@ -5250,6 +5254,8 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
+"N'eo ket possubl d'adenvañ ho parzhadur gant an adventer FAT,\n"
+"degouezhet ez eus ar fazi a-heul : %s"
 
 #: install_interactive.pm:156
 #, c-format
@@ -5311,7 +5317,7 @@ msgstr "Adventañ FAT zo sac'het : %s"
 #: install_interactive.pm:208
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
+msgstr "N'eus ket ur barzhadur FAT d'adventañ (n'eus ket a-walc'h egor dieub)"
 
 #: install_interactive.pm:213
 #, c-format
@@ -5321,7 +5327,7 @@ msgstr "Chetan Windows(TM)"
 #: install_interactive.pm:215
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Meur a bladenn oc'h eus. Pehini oc'h eus c'hoant da implij evit staliñ Linux ?"
 
 #: install_interactive.pm:219
 #, c-format
@@ -5351,7 +5357,7 @@ msgstr "N'hellan ket kavout plas da staliañ"
 #: install_interactive.pm:275
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "Kinnig eo deoc'h gant ar skoazeller parzhadur DrakX :"
 
 #: install_interactive.pm:281
 #, c-format
@@ -6400,6 +6406,8 @@ msgid ""
 "Entries you'll have to fill:\n"
 "%s"
 msgstr ""
+"Bouetadurioù e vo red dit da leuniañ :\n"
+"%s"
 
 #: interactive/stdio.pm:70
 #, c-format
@@ -7946,7 +7954,7 @@ msgstr "Mongoli"
 #: lang.pm:335
 #, c-format
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Inizi Mariana norzh"
 
 #: lang.pm:336
 #, c-format
@@ -8226,7 +8234,7 @@ msgstr "Tchad"
 #: lang.pm:399
 #, c-format
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Broioù su ar Vro-C'hall"
 
 #: lang.pm:400
 #, c-format
@@ -8316,7 +8324,7 @@ msgstr "Vatikan"
 #: lang.pm:420
 #, c-format
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Sant Visant ha Grenadin"
 
 #: lang.pm:421
 #, c-format
@@ -8944,7 +8952,7 @@ msgstr ""
 #: network/ifw.pm:144
 #, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr ""
+msgstr "Bez eus un argad « %s » gant %s"
 
 #: network/isdn.pm:117 network/netconnect.pm:452 network/netconnect.pm:541
 #: network/netconnect.pm:544 network/netconnect.pm:687
@@ -9087,7 +9095,7 @@ msgstr "Modem ECI Hi-Focus"
 #: network/netconnect.pm:127
 #, c-format
 msgid "Dynamic Host Configuration Protocol (DHCP)"
-msgstr ""
+msgstr "Komenad kefluniadur buhezek an ostiz (DHCP)"
 
 #: network/netconnect.pm:128
 #, c-format
@@ -11338,14 +11346,14 @@ msgid "Do you want to enable printing on printers in the local network?\n"
 msgstr "Ha mennout a rit bevaat moulañ gant moullerezioù war ar rouedad lec'hel ?\n"
 
 #: printer/printerdrake.pm:865
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to enable printing on the printers mentioned above?\n"
-msgstr "Mennout a rit implijout aboot ?"
+msgstr "Mennout a rit moulañ gant ar moullerezioù-mañ ?\n"
 
 #: printer/printerdrake.pm:866
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
+msgstr "Ha sur oc'h bezañ mennet da voulañ gant an ardinvink-mañ ?\n"
 
 #: printer/printerdrake.pm:867
 #, c-format
@@ -11765,9 +11773,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:1615
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "Dibabit ouzh pe voullerez a-steud eo luget ho modem, mar plij."
+msgstr "Dibabit ouzh pe voullerez vo bet implijet evit moulañ, mar plij."
 
 #: printer/printerdrake.pm:1617
 #, c-format
@@ -13826,14 +13834,14 @@ msgid "Authorize all services controlled by tcp_wrappers"
 msgstr ""
 
 #: security/l10n.pm:24
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Kefluniañ servijoù"
+msgstr "Implij a ra chkconfig reolennoù msec"
 
 #: security/l10n.pm:25
 #, c-format
 msgid "Enable \"crontab\" and \"at\" for users"
-msgstr ""
+msgstr "Bevaat « crontab » hag « at » evit an arveriaded"
 
 #: security/l10n.pm:26
 #, c-format
@@ -15903,7 +15911,7 @@ msgstr "Fazi !"
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr ""
+msgstr "N'hellan ket kavour ar restr skeudenn red « %s »."
 
 #: standalone/drakautoinst:41
 #, c-format
@@ -17400,12 +17408,12 @@ msgstr "Red eo reuñ"
 #: standalone/drakbackup:3835
 #, c-format
 msgid "CD in place - continue."
-msgstr ""
+msgstr "Enlakaet eo ar CD. Kenderc'hel."
 
 #: standalone/drakbackup:3840
 #, c-format
 msgid "Browse to new restore repository."
-msgstr ""
+msgstr "Furchal er renkell adaozañ nevez."
 
 #: standalone/drakbackup:3841
 #, fuzzy, c-format
@@ -17413,9 +17421,9 @@ msgid "Directory To Restore From"
 msgstr "Assevel adalek ar bladennig"
 
 #: standalone/drakbackup:3877
-#, fuzzy, c-format
+#, c-format
 msgid "Restore Progress"
-msgstr "Adaozañ adalek ar restr"
+msgstr "Araogenn adaozañ"
 
 #: standalone/drakbackup:3988
 #, c-format
@@ -17690,9 +17698,9 @@ msgid "Urpmi"
 msgstr "Urpmi"
 
 #: standalone/drakbug:57
-#, fuzzy, c-format
+#, c-format
 msgid "Windows Migration tool"
-msgstr "Titouroù"
+msgstr "Ostil broierezh deus Windows"
 
 #: standalone/drakbug:58 standalone/draksambashare:1230
 #, c-format
@@ -17951,9 +17959,9 @@ msgid "Wait for dialup tone before dialing"
 msgstr "Gortoz e-pad an ton galv goude sifrenn"
 
 #: standalone/drakconnect:536
-#, fuzzy, c-format
+#, c-format
 msgid "Busy wait"
-msgstr "Kowaet"
+msgstr "Gortoz da vat"
 
 #: standalone/drakconnect:541
 #, c-format
@@ -19198,9 +19206,9 @@ msgid "Custom & system settings"
 msgstr "Kefluniadur diouzhoc'h ha reizhiad"
 
 #: standalone/drakperm:43
-#, fuzzy, c-format
+#, c-format
 msgid "Editable"
-msgstr "Taolenn"
+msgstr ""
 
 #: standalone/drakperm:48 standalone/drakperm:323 standalone/draksambashare:95
 #, c-format
@@ -20868,9 +20876,9 @@ msgid "right"
 msgstr "a-zehoù"
 
 #: standalone/drakvpn:486
-#, fuzzy, c-format
+#, c-format
 msgid "rightcert"
-msgstr "Uheloc'h"
+msgstr ""
 
 #: standalone/drakvpn:487
 #, c-format
@@ -21259,9 +21267,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:960
-#, fuzzy, c-format
+#, c-format
 msgid "Sainfo destination protocol"
-msgstr "Titouroù"
+msgstr ""
 
 #: standalone/drakvpn:961
 #, c-format
@@ -21352,9 +21360,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1019
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication algorithm"
-msgstr "dilesadur"
+msgstr "Algoritm dilesadur"
 
 #: standalone/drakvpn:1021
 #, c-format
@@ -21362,9 +21370,9 @@ msgid "Compression algorithm"
 msgstr ""
 
 #: standalone/drakvpn:1022
-#, fuzzy, c-format
+#, c-format
 msgid "deflate"
-msgstr "dre ziouer"
+msgstr ""
 
 #: standalone/drakvpn:1029
 #, c-format
@@ -21387,9 +21395,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1038
-#, fuzzy, c-format
+#, c-format
 msgid "Exchange mode"
-msgstr "Anv domani"
+msgstr "Mod eskemm"
 
 #: standalone/drakvpn:1040
 #, c-format
@@ -21437,9 +21445,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:1062
-#, fuzzy, c-format
+#, c-format
 msgid "Passive"
-msgstr "Palestin"
+msgstr "Gouzañv"
 
 #: standalone/drakvpn:1064
 #, c-format
@@ -22758,19 +22766,19 @@ msgid "Xinetd Service"
 msgstr "Servijer xinetd"
 
 #: standalone/logdrake:397
-#, fuzzy, c-format
+#, c-format
 msgid "Configure the mail alert system"
-msgstr "Kefluniañ ur rouedad"
+msgstr "Kefluniañ ar reizhiad diwall dre post"
 
 #: standalone/logdrake:398
 #, c-format
 msgid "Stop the mail alert system"
-msgstr ""
+msgstr "Paouez ar reizhiad diwall dre post"
 
 #: standalone/logdrake:405
-#, fuzzy, c-format
+#, c-format
 msgid "Mail alert configuration"
-msgstr "Kefluniañ ar proksioù"
+msgstr "Kefluniadur an diwall dre post"
 
 #: standalone/logdrake:406
 #, c-format
@@ -22815,9 +22823,9 @@ msgid ""
 msgstr "Sammad"
 
 #: standalone/logdrake:431
-#, fuzzy, c-format
+#, c-format
 msgid "Alert configuration"
-msgstr "Kefluniañ ar proksioù"
+msgstr "Kefluniadur an diwall"
 
 #: standalone/logdrake:432
 #, c-format
@@ -22926,7 +22934,7 @@ msgstr "Moger tan bev ent emgefreek"
 #: standalone/net_applet:334
 #, c-format
 msgid "Always launch on startup"
-msgstr ""
+msgstr "Loc'hañ atav pa loc'her ar reizhiad"
 
 #: standalone/net_applet:338
 #, c-format
@@ -23011,7 +23019,7 @@ msgstr "Stadegoù hollek"
 #: standalone/net_monitor:101
 #, c-format
 msgid "Instantaneous"
-msgstr ""
+msgstr "Bremañ"
 
 #: standalone/net_monitor:101
 #, c-format
@@ -23044,7 +23052,7 @@ msgstr ""
 #: standalone/net_monitor:114
 #, c-format
 msgid "Use same scale for received and transmitted"
-msgstr ""
+msgstr "Implij ar memes skeul evit kas ha digas"
 
 #: standalone/net_monitor:133
 #, c-format
@@ -23082,6 +23090,8 @@ msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandriva Linux Control Center."
 msgstr ""
+"Sac'het eo ar gevreadenn.\n"
+"Gwiriit ho kefluniadur er c'hreizenn ren Mandriva Linux."
 
 #: standalone/net_monitor:335
 #, c-format
@@ -23852,12 +23862,12 @@ msgstr "N'eus restr dibabet ebet"
 #: ugtk2.pm:961
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr ""
+msgstr "Dibabet 'teus ur restr. N'eo ket ur renkell"
 
 #: ugtk2.pm:963
 #, c-format
 msgid "You have chosen a directory, not a file"
-msgstr ""
+msgstr "Dibabet 'teus ur renkell. N'eo ket ur restr"
 
 #: ugtk2.pm:965
 #, c-format
@@ -24265,10 +24275,6 @@ msgstr " Sac'het eo ar staliadur"
 
 #~ msgid "No floppy drive available"
 #~ msgstr "Lenner pladennig hegerz ebet"
-
-#, fuzzy
-#~ msgid "Please insert the Update Modules floppy in drive %s"
-#~ msgstr "Lakait ur bladennig gwerc'h el lenner %s"
 
 #~ msgid "No network card"
 #~ msgstr "Kartenn rouedad ebet"
