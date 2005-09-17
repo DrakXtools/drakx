@@ -1,3 +1,93 @@
+2005/09/17  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/sl.po: Updated sl translations.
+
+	* rescue/tree/etc/rc.sysinit, rescue/tree/etc/issue,
+	rescue/make_partimage_save_rest_all: Mandrake -> Mandriva series.
+
+2005/09/17  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/09/17  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+	updates
+	soft/initscripts/po/da.po gi/perl-install/share/po/da.po
+
+2005/09/17  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/09/17  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakroam: fix crash (ugtk2 dialog helpers aren't imported)
+
+	* standalone/service_harddrake: fix typo (pterjan)
+
+	* modules.pm, detect_devices.pm: add sr_mod in modprobe.preload if needed
+	(#18641)
+
+2005/09/17  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Remove unclear text (not needed, #18619)
+
+2005/09/17  Till Kamppeter  <till at mandriva.com>
+
+	* printer/detect.pm: 
+	  - On USB printer hot-plugging sometimes parallel printers are also
+	shown in the window popping up to ask whether the printer should be
+	  set up. Even sometimes parallel printers which are not connected or
+	  turned on any more were shown. Fixed.
+
+2005/09/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: typo fix
+
+	* harddrake/data.pm: display cards that offer additional parallep port in
+	the system class
+	rather than in the "unknown" section
+	(custom_id) try harder to have a sane name: before fallbacking to the
+	class name (eg: "Printer"), try to use the vendor name (eg for
+	printers)
+
+2005/09/17  willysr
+
+	* share/po/id.po: Updated
+
+2005/09/16  cavassin
+
+	* share/po/pt_BR.po: Filled one untranslated msg.
+
+2005/09/16  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated zh_CN translation.
+
+	* share/po/sl.po: sl corrections from Jure Repinc <jlp@holodeck1.com>.
+
+2005/09/16  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/sv.po: Updated translations, was 89 fuzzy, 245 untranslated, is
+	now 60 fuzzy, 147 untranslated, will be 100% tomorrow....
+
+2005/09/16  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/draksec (wait_msg) workaround gtk+ not displaying subdialog
+	contents
+
+	* share/po/br.po, share/po/fr.po: update
+
+	* detect_devices.pm (complete_usb_storage_info) using a local value is
+	just saner
+	(complete_usb_storage_info) delete {found} field once used
+	(complete_usb_storage_info) fix getting data when multiple USB disks
+	of the same vendor are plugged
+	right thing would be to compare {host} but usb_probde() cannot return
+	SCSI host, thus descriptions might be switched if the manufacturer
+	altered them on latest discs
+	rationale:
+
 2005/09/16  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draknfs: fix draknfs banner
