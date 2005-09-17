@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.62mdk
+Release: 0.63mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -378,6 +378,31 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Sep 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.63mdk
+- add sr_mod in modprobe.preload if needed (blino, #18641)
+- drakconnect:
+  o use ifplugd with b44
+  o don't use ifplugd for ethernet devices associated with a
+    pppoe/pptp connection (blino)
+  o fix probing the PPPOE login name (blino)
+  o keep changed made by modem tools run by drakconnect
+- drakbackup: remove unclear text (stew, #18619)
+- drakroam (blino):
+  o increase timeout after a wireless network is selected
+  o fix crash
+- draksec: ensure wait dialogs contents is showed on applying msec
+  config
+- harddrake:
+  o display parallel port controllers in the "system" section rather
+    than in the "unknown" one
+  o display the vendor name rather than "printer" in the left tree for
+    printers
+- net_applet: fix crash when only one interface is configured
+- printerdrake (till):
+  o handle new HPIJ
+  o fix list of displayed printers
+- XFdrake: don't load "glx" with "fbdev" (pixel)
+
 * Thu Sep 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.62mdk
 - bootloader-config: fix entry "linux" when removing a kernel (pixel)
 - diskdrake: check if resize2fs failed (pixel)
