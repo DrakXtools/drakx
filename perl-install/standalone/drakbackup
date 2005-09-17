@@ -1394,15 +1394,13 @@ sub advanced_what_sys() {
     
     gtkpack($advanced_box,
 	    $box_what_sys =  gtkpack_(Gtk2::VBox->new(0, 15),
-		     1, N("\nPlease check all options that you need.\n"),
-		     1, N("These options can backup and restore all files in your /etc directory.\n"),
+			 1, Gtk2::VBox->new(0, 15),
 		     0, my $check_what_sys = Gtk2::CheckButton->new(N("Backup your System files. (/etc directory)")),
 		     0, my $check_what_versions = Gtk2::CheckButton->new(N("Use Incremental/Differential Backups  (do not replace old backups)")),
 		     0, gtkpack__(Gtk2::HBox->new(0,0),	
 				my @mode_buttons = gtkradio((N("Use Incremental Backups")) x 2, N("Use Differential Backups")),
 			 ),
 			 0, my $check_what_critical = Gtk2::CheckButton->new(N("Do not include critical files (passwd, group, fstab)")),
-		     0, N("With this option you will be able to restore any version\n of your /etc directory."),     
 			 1, Gtk2::VBox->new(0, 15),
 		),
 	);
