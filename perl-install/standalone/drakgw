@@ -174,7 +174,7 @@ I am about to setup your Local Area Network with that adapter.", format_interfac
 		  $lan_intf->{NETMASK} ||= "255.255.255.0";
 		  $internal_domain_name = $resolv_conf->{search}[0] ||= "homeland.net";
 	      },
-	      name => N("Local Area Network setings"),
+	      name => N("Local Area Network settings"),
 	      data => sub {
 		  [
 		   { label => N("Local IP address"), val => \$lan_intf->{IPADDR} },
