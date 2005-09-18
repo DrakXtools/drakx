@@ -837,6 +837,11 @@ If you do not know it, keep the preselected type."),
                             $lan_detect->();
                             my $eth_card = find { $_->[1] eq $driver } @all_cards;
                             unless ($eth_card) {
+                                #- FIXME (#17545)
+                                #- "No matching device found for driver %s."
+                                #- "The driver has probably failed to load because of a missing firmware
+                                #-  or because it doesn't support your card revision.
+                                #-  Have a look at /var/log/messages to find additional information."
                                 $in->ask_warn(N("Error"), N("No device found"));
                                 return 1;
                             }
