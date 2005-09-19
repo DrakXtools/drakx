@@ -189,8 +189,15 @@ sub get_hds {
 		    partition_table::read($hd);
 		    if (listlength(partition_table::get_normal_parts($hd)) == 0) {
 			$handled = 1 if $handle_die_and_cdie->();
-		    } else {
-			fs::proc_partitions::compare($hd) if !fs::type::is_dmraid($hd) && $::isInstall && !detect_devices::is_xbox();
+		    } elsif ($::isInstall) {
+			if (fs::type::is_dmraid($hd)) {
+			    if (my $p = find { ! -e "/dev/$_->{device}" } partition_table::get_normal_parts($hd)) {
+				#- dmraid should have created the device, so it means we don't agree
+				die sprintf(q(bad dmraid (missing partition %s), you may try rebooting install with option "nodmraid"), $p->{device});
+			    }
+			} else {
+			    fs::proc_partitions::compare($hd) if !detect_devices::is_xbox();
+			}
 		    }
 		} sub {
 		    my $err = $@;
