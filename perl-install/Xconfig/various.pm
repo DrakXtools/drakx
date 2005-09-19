@@ -155,7 +155,7 @@ sub setupFB {
     require bootloader;
     my ($bootloader, $all_hds);
 
-    if ($::isInstall) {
+    if ($::isInstall && !$::globetrotter) {
 	($bootloader, $all_hds) = ($::o->{bootloader}, $::o->{all_hds});
     } else {
 	require fsedit;
