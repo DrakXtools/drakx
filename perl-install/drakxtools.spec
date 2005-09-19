@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.3
-Release: 0.63mdk
+Release: 0.64mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -378,6 +378,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.64mdk
+- drakconnect:
+  o really restart ethernet interface for PPPOE connection (blino)
+  o fix hostap/orinoco driver detection (#18294)
+- net_applet: force menu refresh when interface status is modified
+  (blino, #18636)
+
 * Sun Sep 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.63mdk
 - add sr_mod in modprobe.preload if needed (blino, #18641)
 - drakconnect:
