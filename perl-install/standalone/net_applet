@@ -314,10 +314,11 @@ sub generate_menu {
 
     if ($current_state eq 'connected') {
         $menu->append($create_item->($_)) foreach qw(downNetwork monitorNetwork);
-        $menu->append($create_item->('monitorIFW')) if defined $interactive;
     } elsif ($current_state eq 'disconnected') {
         $menu->append($create_item->('upNetwork'));
     }
+    $menu->append($create_item->('monitorIFW')) if $current_state ne 'notconfigured' && defined $interactive;
+
     $menu->append($create_item->('confNetwork'));
 
     if ($current_state ne 'notconfigured') {
