@@ -155,16 +155,20 @@ sub real_main {
           if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
                 member($net->{type}, qw(modem isdn isdn_external))) {
               return "ask_connect_now";
-          } elsif ($need_network_restart) {
-              services::restart("network");
-          } else {
-              #- FIXME: move this in network::tools::restart_net_interface
-              network::tools::stop_net_interface($net, 0);
-              if (exists $net->{adsl}{ethernet_device}) {
-                  network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
-                  network::tools::start_interface($net->{adsl}{ethernet_device}, 0);
+          }
+
+          unless ($::isInstall) {
+              if ($need_network_restart) {
+                  services::restart("network");
+              } else {
+                  #- FIXME: move this in network::tools::restart_net_interface
+                  network::tools::stop_net_interface($net, 0);
+                  if (exists $net->{adsl}{ethernet_device}) {
+                      network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
+                      network::tools::start_interface($net->{adsl}{ethernet_device}, 0);
+                  }
+                  network::tools::start_net_interface($net, 0);
               }
-              network::tools::start_net_interface($net, 0);
           }
           #- FIXME: check for connection here
           #-        check for real interface in connection test
