@@ -70,7 +70,7 @@ sub wait_msg {
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
     # ugly workaround for gtk+ not displaying subdialog contents:
-    Glib::Timeout->add(300, sub { print "EXITING"; Gtk2->main_quit; 0 });
+    Glib::Timeout->add(300, sub { Gtk2->main_quit; 0 });
     Gtk2->main;
     $mainw;
 }
