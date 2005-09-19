@@ -65,7 +65,19 @@ sub load_raw {
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
 	  or die "insmod'ing module $_ failed" foreach @$l;
     }
-    sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @$l;
+    if (any { /^(mousedev|printer)$/ } @$l) {
+	sleep 2;
+    } elsif (member('usb-storage', @$l)) {
+	#- usb-storage is only modprobed when we know there is some scsi devices
+	#- so trying hard to wait for devices to be detected
+	my $retry = 10;
+	sleep 1; #- TOREMOVE for compatibility with previous behaviour: wait at least 2 seconds
+	do { 
+	    sleep 1;
+	    last if all('/sys/bus/scsi/devices');
+	    log::l("waiting for usb-storage devices to appear (retry = $retry)");
+	} until !$retry--;
+    }
 }
 sub load_with_options {
     my ($l, $h_options) = @_;
