@@ -82,8 +82,9 @@ sub create_treeview_list {
     $list_tv->append_column($textcolumn);
     
     my $select = sub {
-	$list_tv->set_cursor($_[0], undef, 0);
-    	$list_tv->scroll_to_cell($_[0], undef, 1, 0.5, 0);
+	my ($path) = @_;
+	$list_tv->set_cursor($path, undef, 0);
+	Glib::Timeout->add(100, sub { $list_tv->scroll_to_cell($path, undef, 1, 0.5, 0); 0 });
     };
 
     my ($starting_word, $start_reg) = ('', '^');
@@ -143,7 +144,7 @@ sub create_treeview_list {
 	    my $nb = find_index { $_ eq $v } @{$e->{list}};
 	    my ($old_path) = $list_tv->get_cursor;
 	    if (!$old_path || $nb != $old_path->to_string) {
-             Glib::Timeout->add(100, sub { $select->(Gtk2::TreePath->new_from_string($nb)); 0 });
+		$select->(Gtk2::TreePath->new_from_string($nb));
 	    }
 	    undef $old_path if $old_path;
 	};
