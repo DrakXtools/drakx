@@ -2538,7 +2538,7 @@ sub setup_common {
 		    # Install SANE
 		    if (!$::testing &&
 			(!files_exist("/usr/bin/scanimage",
-				      "/usr/bin/xscanimage",
+				      #"/usr/bin/xscanimage",
 				      "/etc/sane.d/dll.conf",
 				      "/usr/$lib/sane/libsane-hpaio.so.1") ||
 			 (!files_exist(qw(/usr/bin/xsane)) &&
@@ -2552,7 +2552,7 @@ sub setup_common {
 			    if !$printer->{noninteractive};
 			$::noX
 			    or $in->do_pkgs->install('sane-backends',
-						     'sane-frontends',
+						     #'sane-frontends',
 						     ($::isInstall ?
 						      'xsane' : 
 						      'scanner-gui'), 
@@ -2651,7 +2651,7 @@ sub setup_common {
 			# Install SANE
  			if (!$::testing &&
 			    (!files_exist("/usr/bin/scanimage",
-					  "/usr/bin/xscanimage",
+					  #"/usr/bin/xscanimage",
 					  "/etc/sane.d/dll.conf",
 					  "/usr/$lib/sane/libsane-hpoj.so.1") ||
 			     (!files_exist(qw(/usr/bin/xsane)) &&
@@ -2665,7 +2665,7 @@ sub setup_common {
 				if !$printer->{noninteractive};
 			    $::noX
 				or $in->do_pkgs->install('sane-backends',
-							 'sane-frontends',
+							 #'sane-frontends',
 							 ($::isInstall ?
 							  'xsane' : 
 							  'scanner-gui'), 
