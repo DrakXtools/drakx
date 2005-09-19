@@ -1,3 +1,37 @@
+2005/09/19  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/DrakX.pot: Updated POT file.
+
+2005/09/19  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: fs::proc_partitions::compare is no good for dmraid, but we
+	need to check if we
+	agree with the kernel, otherwise an uncatched error will occur (bugzilla
+	#18655)
+
+	* interactive/gtk.pm: titi's patch is wrong, the ->set_cursor being not
+	done when selecting and exiting window on the event (ie double clicking
+	on the entry)
+	we really would need to do things more cleanly (i know on TextView
+	->scroll_to_mark works better than ->scroll_to_cell)
+
+	* detect_devices.pm: ensure titi has the good tab-width
+
+	* any.pm: update report.bug entries to have current config files
+
+	* modules.pm: ugly hack: wait for usb-storage devices to appear (bugzilla
+	#13395)
+
+2005/09/19  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/draksec (wait_msg) kill debug message
+
+2005/09/19  Warly  <warly at mandriva.com>
+
+	* share/advertising/list-dwd: fix skype and add intel
+
+	* share/advertising/intel.pl, share/advertising/intel.png: add intel ad
+
 2005/09/19  Antoine Ginies  <aginies at mandriva.com> 
 
 	* standalone/draksambashare: remove untranslated text
