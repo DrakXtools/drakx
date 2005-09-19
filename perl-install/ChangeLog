@@ -1,3 +1,29 @@
+2005/09/19  Frederic Lepied  <flepied at mandriva.com>
+
+	* share/po/fr.po: fixes from marketing.
+
+2005/09/19  Olivier Blin <oblin at mandriva.com>
+
+	* modules.pm, detect_devices.pm: drop sr_mod workarounds, it's now handled
+	by udev coldplug
+
+	* network/netconnect.pm: don't try to connect auto-magically ethernet
+	interfaces during configuration in install
+	restart ethernet interface for pppoe connections
+	add some reminders, fix indentation
+	fix typo
+
+2005/09/19  Till Kamppeter  <till at mandriva.com>
+
+	* printer/printerdrake.pm: 
+	  - Do not auto-install "sane-frontends" for MF devices.
+
+2005/09/19  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+
+	* drakxtools.spec: 10.3-0.64mdk
+
 2005/09/19  cavassin
 
 	* share/po/pt_BR.po: Filled one more msg.
