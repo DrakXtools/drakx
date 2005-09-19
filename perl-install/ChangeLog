@@ -1,3 +1,110 @@
+2005/09/19  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: remove untranslated text
+
+2005/09/19  Olivier Blin <oblin at mandriva.com>
+
+	* network/ethernet.pm: fix hostap/orinoco driver detection (#18294)
+
+2005/09/19  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: fs::proc_partitions::compare is no good for dmraid, but we
+	need to check if we
+	agree with the kernel, otherwise an uncatched error will occur (bugzilla
+	#18655)
+
+	* interactive/gtk.pm: titi's patch is wrong, the ->set_cursor being not
+	done when selecting and exiting window on the event (ie double clicking
+	on the entry)
+	we really would need to do things more cleanly (i know on TextView
+	->scroll_to_mark works better than ->scroll_to_cell)
+
+	* detect_devices.pm: ensure titi has the good tab-width
+
+	* modules.pm: ugly hack: wait for usb-storage devices to appear (bugzilla
+	#13395)
+
+2005/09/19  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+	Updated Malay translation
+
+2005/09/19  Warly  <warly at mandriva.com>
+
+	* share/advertising/list-dwd: add skype add
+
+	* share/rpmsrate: fix acroread rpmsrate completion
+
+	* share/advertising/intel.pl, share/advertising/intel.png: add intel ad
+
+2005/09/18  mbukovjan
+
+	* share/po/cs.po: Updated Czech translations.
+
+2005/09/18  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: add reminder
+
+	* standalone/net_applet: force menu refresh when interface status is
+	modified (#18636)
+
+2005/09/18  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: * Sep 18 2005 Reinout van Schouwen <reinout@cs.vu.nl>
+	Updated Dutch translation
+
+2005/09/18  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/sv.po: Updated translations, fully translated, was 60 fuzzy,
+	147 untranslated.
+
+2005/09/18  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/09/18  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/draknfs, standalone/drakgw: typo fix
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: typo fix
+	typo fix
+
+2005/09/17  Olivier Blin <oblin at mandriva.com>
+
+	* modules.pm, detect_devices.pm: add sr_mod in modprobe.preload if needed
+	(#18641)
+
+2005/09/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+	typo fix
+
+	* drakxtools.spec: 10.3-0.63mdk
+
+	* harddrake/data.pm: display cards that offer additional parallep port in
+	the system class
+	rather than in the "unknown" section
+	(custom_id) try harder to have a sane name: before fallbacking to the
+	class name (eg: "Printer"), try to use the vendor name (eg for
+	printers)
+
 2005/09/17  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/sl.po: Updated sl translations.
