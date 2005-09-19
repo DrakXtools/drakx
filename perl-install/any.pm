@@ -896,11 +896,11 @@ sub report_bug {
       header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$::prefix/root/drakx/ddebug.log"),
       header("install.log"), cat_("$::prefix/root/drakx/install.log"),
       header("fstab"), cat_("$::prefix/etc/fstab"),
-      header("modules.conf"), cat_("$::prefix/etc/modules.conf"),
+      header("modprobe.conf"), cat_("$::prefix/etc/modprobe.conf"),
       header("lilo.conf"), cat_("$::prefix/etc/lilo.conf"),
       header("menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
-      header("XF86Config"), cat_("$::prefix/etc/X11/XF86Config"),
-      header("/etc/modules"), cat_("$::prefix/etc/modules"),
+      header("xorg.conf"), cat_("$::prefix/etc/X11/xorg.conf"),
+      header("modprobe.preload"), cat_("$::prefix/etc/modprobe.preload"),
       header("sysconfig/i18n"), cat_("$::prefix/etc/sysconfig/i18n"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
