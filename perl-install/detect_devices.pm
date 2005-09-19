@@ -283,8 +283,6 @@ sub getSCSI_26() {
 	# (see linux/include/scsi/scsi.h and sans-find-scanner.1)
 	my $raw_type = $scsi_types[$get->('type')];
 	$media_type ||= 'scanner' if $raw_type =~ /Scanner|Processor/;
-	# if sr_mod isn't loaded, the block device may not be created yet
-	$media_type ||= 'cdrom' if $raw_type eq "CD-ROM";
 
 	{ info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
 	  bus => 'SCSI', media_type => $media_type, device => $device,
