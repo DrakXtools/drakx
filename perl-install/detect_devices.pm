@@ -1064,3 +1064,8 @@ sub suggest_mount_point {
 }
 
 1;
+
+#- Local Variables:
+#- mode:cperl
+#- tab-width:8
+#- End:
