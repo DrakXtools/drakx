@@ -64,7 +64,10 @@ sub get_eth_cards {
                      "orinoco" => undef, #- should be orinoco_{cs,nortel,pci,plx,tmd}
                      "hostap" => undef, #- should be hostap_{cs,pci,plx}
                     );
-        $a = $fixes{$a} if exists $fixes{$a};
+        if (exists $fixes{$a}) {
+            $a = $fixes{$a};
+            $a or undef $detected_through_ethtool;
+        }
 
         # 3) try to match a PCMCIA device for device description:
         if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
@@ -77,7 +80,7 @@ sub get_eth_cards {
         }
         # 5) try to match a device through sysfs for driver & device description:
         #     (eg: ipw2100 driver for intel centrino do not support ETHTOOL)
-        if (!$description) {
+        if (!$description || !$a) {
             my $dev_path = "/sys/class/net/$interface/device";
             my $drv = readlink("$dev_path/driver");
             if ($drv && $drv =~ s!.*/!!) {
@@ -86,7 +89,7 @@ sub get_eth_cards {
                 my $sysfs_fields = detect_devices::get_sysfs_device_id_map($dev_path);
                 $l{$_} = hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) foreach keys %$sysfs_fields;
                 my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
-                $description = $cards[0]{description} if @cards == 1;
+                $description ||= $cards[0]{description} if @cards == 1;
             }
         }
         # 6) try to match a device by driver for device description:
