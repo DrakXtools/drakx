@@ -150,19 +150,26 @@ sub real_main {
                              );
 
       my $offer_to_connect = sub {
-	  if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
-	      member($net->{type}, qw(modem isdn isdn_external))) {
-	      return "ask_connect_now";
-	  } elsif ($need_network_restart) {
+          #- FIXME: create $try_to_connect sub out of this code
+          #-        merge with "ask_connect_now" post code
+          if ($net->{type} eq 'adsl' && !member($net->{adsl}{method}, qw(static dhcp)) ||
+                member($net->{type}, qw(modem isdn isdn_external))) {
+              return "ask_connect_now";
+          } elsif ($need_network_restart) {
               services::restart("network");
           } else {
-	      network::tools::stop_net_interface($net, 0);
- 	      if (exists $net->{adsl}{ethernet_device}) {
-	          network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
-	          network::tools::start_interface($net->{adsl}{ethernet_device}, 0);
-	      }
-	      network::tools::start_net_interface($net, 0);
-	  }
+              #- FIXME: move this in network::tools::restart_net_interface
+              network::tools::stop_net_interface($net, 0);
+              if (exists $net->{adsl}{ethernet_device}) {
+                  network::tools::stop_interface($net->{adsl}{ethernet_device}, 0);
+                  network::tools::start_interface($net->{adsl}{ethernet_device}, 0);
+              }
+              network::tools::start_net_interface($net, 0);
+          }
+          #- FIXME: check for connection here
+          #-        check for real interface in connection test
+          #-        don't block when checking connection
+          #-        return "after_connect" (old "disconnect" step)
           return "end";
       };
 
@@ -174,6 +181,7 @@ sub real_main {
 	  $net->{type} eq 'adsl' and network::adsl::adsl_conf_backend($in, $modules_conf, $net);
 
           network::network::configure_network($net, $in, $modules_conf);
+          #- FIXME: always run "ask_connect_now"
           return $offer_to_connect->();
       };
 
