@@ -582,6 +582,9 @@ sub read_rpmsrate_raw {
 	    my ($rates, $flags) = partition { /^\d$/ } @m;
 	    my ($rate) = @$rates or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
 	    foreach my $name (split ' ', $data) {
+		if (uc($name) eq $name) {
+		    log::l("$name is parsed as a package name, not as a flag");
+		}
 		if (member('INSTALL', @$flags)) {
 		    push @need_to_copy, $name if !member('NOCOPY', @$flags);
 		    next;    #- do not need to put INSTALL flag for a package.
@@ -1463,7 +1466,6 @@ ucd-snmp
     my @new_92 = qw(
 clusternfs
 gkrellm-server
-lisa
 mon
 net-snmp
 openldap-servers
@@ -1486,6 +1488,7 @@ spamassassin-spamd
 );
 
     my @not_warned = qw(
+lisa
 nfs-utils-clients
 portmap
 howl
