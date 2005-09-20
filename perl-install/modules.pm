@@ -72,11 +72,11 @@ sub load_raw {
 	#- so trying hard to wait for devices to be detected
 	my $retry = 10;
 	sleep 1; #- TOREMOVE for compatibility with previous behaviour: wait at least 2 seconds
-	do { 
+	while ($retry--) { 
 	    sleep 1;
 	    last if all('/sys/bus/scsi/devices');
 	    log::l("waiting for usb-storage devices to appear (retry = $retry)");
-	} until !$retry--;
+	}
     }
 }
 sub load_with_options {
