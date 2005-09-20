@@ -902,6 +902,7 @@ If you do not know it, keep the preselected type."),
                    lan_intf =>
                    {
                     pre => sub  {
+                        require network::ethernet;
                         $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE},
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/;
