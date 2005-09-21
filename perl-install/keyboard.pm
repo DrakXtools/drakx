@@ -221,8 +221,7 @@ arch() =~ /^sparc/ ? (
  "ee" => [ N_("_: keyboard\nEstonian"),       "ee-latin9",       "ee",    0 ],
  "es" => [ N_("_: keyboard\nSpanish"),        "es-latin1",       "es",    0 ],
  "fi" => [ N_("_: keyboard\nFinnish"),        "fi-latin1",       "fi",    0 ],
-# there used to be a "fo" layout in XFree86...
- "fo" => [ N_("_: keyboard\nFaroese"),        "is",              "is",    0 ],
+ "fo" => [ N_("_: keyboard\nFaroese"),        "is",              "fo",    0 ],
  "fr" => [ N_("_: keyboard\nFrench"),         "fr-latin1",       "fr",    0 ],
  "ge_ru" => [N_("_: keyboard\nGeorgian (\"Russian\" layout)"), "ge_ru-georgian_academy", "ge(ru)",1],
  "ge_la" => [N_("_: keyboard\nGeorgian (\"Latin\" layout)"), "ge_la-georgian_academy", "ge(la)",1],
