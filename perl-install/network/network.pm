@@ -104,7 +104,6 @@ sub write_network_conf {
     $net->{network}{NETWORKING} = 'yes';
 
     setVarsInSh($::prefix . $network_file, $net->{network}, qw(HOSTNAME NETWORKING GATEWAY GATEWAYDEV NISDOMAIN FORWARD_IPV4 NETWORKING_IPV6 IPV6_DEFAULTDEV));
-    $net->{network}{HOSTNAME} && !$::isInstall and sethostname($net);
 }
 
 sub write_zeroconf {
@@ -608,6 +607,8 @@ sub configure_network {
         require network::shorewall;
         my $shorewall = network::shorewall::read();
         $shorewall && !$shorewall->{disabled} and network::shorewall::write($shorewall);
+
+        $net->{network}{HOSTNAME} && !$::isInstall and sethostname($net);
     }
 
     #- make net_applet reload the configuration
