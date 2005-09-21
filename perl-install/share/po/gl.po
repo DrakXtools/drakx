@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-gl\n"
 "POT-Creation-Date: 2005-09-19 21:17+0800\n"
-"PO-Revision-Date: 2005-07-18 12:33+0100\n"
+"PO-Revision-Date: 2005-09-10 13:26+0100\n"
 "Last-Translator: Leandro Regueiro <unho@gulo.org>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -148,9 +148,11 @@ msgstr ""
 "USB..."
 
 #: ../move/move.pm:546
-#, c-format
+#, fuzzy, c-format
 msgid "Enter your user information, password will be used for screensaver"
 msgstr ""
+"Introduza a súa información de usuario, o contrasinal usarase para o "
+"salvapantallas"
 
 #: ../move/move.pm:556
 #, c-format
@@ -418,9 +420,9 @@ msgid "Configure all heads independently"
 msgstr ""
 
 #: Xconfig/card.pm:393
-#, fuzzy, c-format
+#, c-format
 msgid "Use Xinerama extension"
-msgstr "Usar detección automática"
+msgstr "Usar extensión Xinerama"
 
 #: Xconfig/card.pm:398
 #, c-format
@@ -800,16 +802,16 @@ msgstr ""
 "Ten esta funcionalidade?"
 
 #: Xconfig/various.pm:99
-#, fuzzy, c-format
+#, c-format
 msgid "What norm is your TV using?"
-msgstr "¿Que tipo de conexión RDSI ten?"
+msgstr "Que norma usa a súa TV?"
 
 #: Xconfig/xfree.pm:648
 #, c-format
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "outro"
 
 #: any.pm:142 harddrake/sound.pm:192 interactive.pm:474 pkgs.pm:473
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
@@ -1200,9 +1202,9 @@ msgid "Group ID"
 msgstr "ID do Grupo"
 
 #: any.pm:625
-#, fuzzy, c-format
+#, c-format
 msgid "%s must be a number"
-msgstr "¡A opción %s debe ser un número!"
+msgstr "%s debe ser un número"
 
 #: any.pm:626
 #, c-format
@@ -1271,9 +1273,9 @@ msgstr ""
 "un usuario determinado."
 
 #: any.pm:705
-#, fuzzy, c-format
+#, c-format
 msgid "Use this feature"
-msgstr "Desexa usar esta funcionalidade?"
+msgstr "Usar esta funcionalidade"
 
 #: any.pm:706
 #, c-format
@@ -1370,7 +1372,7 @@ msgid "Allow all users"
 msgstr "Permitirlle a tódolos usuarios"
 
 #: any.pm:977
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
 "Allowing this will permit users to simply click on \"Share\" in konqueror "
@@ -1378,6 +1380,11 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"Desexa permitir que os usuarios compartan algúns dos seus directorios?\n"
+"Se permite isto deixará que os usuarios simplemente cliquen en \"Compartir\" "
+"en konqueror e en nautilus.\n"
+"\n"
+"\"Personalizado\" permite especificalo usuario a usuario.\n"
 
 #: any.pm:989
 #, c-format
@@ -1509,6 +1516,8 @@ msgid ""
 "iWinbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"iWinbind permítelle ó sistema recuperar información e autenticar usuarios "
+"nun dominio Windows."
 
 #: authentication.pm:59
 #, c-format
@@ -1519,6 +1528,7 @@ msgstr "Directorio Activo con SFU:"
 #, c-format
 msgid "With Kerberos and Ldap for authentication in Active Directory Server "
 msgstr ""
+"Con Kerberos e Ldap para autenticación nun Servidor de Active Directory"
 
 #: authentication.pm:60
 #, c-format
@@ -1531,6 +1541,8 @@ msgid ""
 "Winbind allows the system to authenticate users in a Windows Active "
 "Directory Server."
 msgstr ""
+"Winbind permítelle ó sistema autenticar usuarios nun Servidor Windows de "
+"Active Directory."
 
 #: authentication.pm:85
 #, c-format
@@ -1729,12 +1741,12 @@ msgstr "LILO con menú de texto"
 #: bootloader.pm:906
 #, c-format
 msgid "GRUB with graphical menu"
-msgstr ""
+msgstr "GRUB con menú gráfico"
 
 #: bootloader.pm:907
 #, c-format
 msgid "GRUB with text menu"
-msgstr ""
+msgstr "GRUB con menú de texto"
 
 #: bootloader.pm:908
 #, c-format
@@ -1766,6 +1778,8 @@ msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
+"Non se puido instalar de xeito correcto o cargador de arrinque. Ten que "
+"arrincar co disco de rescate e elixir \"%s\""
 
 #: bootloader.pm:1529
 #, c-format
@@ -3059,10 +3073,9 @@ msgid "Enabling swap partition %s"
 msgstr "Activando a partición de intercambio %s"
 
 #: fs/mount_options.pm:111
-#, fuzzy, c-format
+#, c-format
 msgid "Use an encrypted file system"
-msgstr ""
-"Non pode usar un sistema de ficheiros cifrado para o punto de montaxe %s"
+msgstr "Usar un sistema de ficheiros cifrado"
 
 #: fs/mount_options.pm:113
 #, c-format
@@ -3124,6 +3137,7 @@ msgstr "Monta-lo sistema de ficheiros coma de só lectura."
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr ""
+"Toda a E/S do sistema de ficheiros debe facerse de maneira sincronizada."
 
 #: fs/mount_options.pm:137
 #, c-format
@@ -3307,7 +3321,7 @@ msgstr "Tarxeta de Video"
 #: harddrake/data.pm:146
 #, c-format
 msgid "DVB card"
-msgstr ""
+msgstr "Tarxeta DVB"
 
 #: harddrake/data.pm:154
 #, c-format
@@ -3352,12 +3366,12 @@ msgstr "Tarxetas de radio"
 #: harddrake/data.pm:238
 #, c-format
 msgid "ATM network cards"
-msgstr ""
+msgstr "Tarxetas de rede ATM"
 
 #: harddrake/data.pm:247
 #, c-format
 msgid "WAN network cards"
-msgstr ""
+msgstr "Tarxetas de rede WAN"
 
 #: harddrake/data.pm:256
 #, c-format
@@ -3584,7 +3598,7 @@ msgstr "Driver:"
 #: harddrake/sound.pm:263
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "Solución de problemas"
 
 #: harddrake/sound.pm:271
 #, c-format
@@ -3707,13 +3721,18 @@ msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Descoñecido|CPH06X (bt878) [varios vendedores]"
 
 #: harddrake/v4l.pm:404
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
 msgstr ""
+"Para a maioría das tarxetas de TV modernas, o módulo bttv do kernel Linux "
+"detecta automáticamente os parámetros correctos.\n"
+"Se a súa tarxeta non se detecta, vostede pode forzar \n"
+" the right tuner and card types here. Just select your tv card parameters if "
+"needed."
 
 #: harddrake/v4l.pm:407
 #, c-format
@@ -5917,7 +5936,7 @@ msgstr "Rede (FTP)"
 #: install_any.pm:423
 #, c-format
 msgid "Network (NFS)"
-msgstr ""
+msgstr "Rede (NFS)"
 
 #: install_any.pm:453
 #, c-format
@@ -5947,7 +5966,7 @@ msgstr "URL do sitio espello?"
 #: install_any.pm:527
 #, c-format
 msgid "NFS setup"
-msgstr ""
+msgstr "Configuración de NFS"
 
 #: install_any.pm:527
 #, c-format
@@ -6097,7 +6116,7 @@ msgstr "Permiso denegado"
 #: install_any.pm:1807
 #, c-format
 msgid "Bad NFS name"
-msgstr ""
+msgstr "Nome NFS incorrecto"
 
 #: install_any.pm:1828
 #, fuzzy, c-format
@@ -6892,7 +6911,7 @@ msgstr "Por favor, escolla o seu tipo de rato."
 #: install_steps_interactive.pm:196
 #, c-format
 msgid "Mouse choice"
-msgstr ""
+msgstr "Elección de rato"
 
 #: install_steps_interactive.pm:205 standalone/mousedrake:46
 #, c-format
@@ -7730,6 +7749,13 @@ msgid ""
 "Dvorak (US)"
 msgstr "Dvorak (EEUU)"
 
+#: keyboard.pm:211
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Dvorak (Esperanto)"
+msgstr "Dvorak (Esperanto)"
+
 #: keyboard.pm:215
 #, c-format
 msgid ""
@@ -7913,11 +7939,11 @@ msgid ""
 msgstr "Teclado coreano"
 
 #: keyboard.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
-msgstr "Árabe"
+msgstr "Kurdo (escritura árabe)"
 
 #: keyboard.pm:255
 #, c-format
@@ -7940,6 +7966,13 @@ msgid ""
 "Laotian"
 msgstr "Laosiano"
 
+#: keyboard.pm:255
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Lithuanian AZERTY (old)"
+msgstr "Lituano AZERTY (antigo)"
+
 #: keyboard.pm:261
 #, c-format
 msgid ""
@@ -7953,6 +7986,13 @@ msgid ""
 "_: keyboard\n"
 "Lithuanian \"number row\" QWERTY"
 msgstr "Lituano \"ringleira de números\" QWERTY"
+
+#: keyboard.pm:259
+#, c-format
+msgid ""
+"_: keyboard\n"
+"Lithuanian \"phonetic\" QWERTY"
+msgstr "Lituano \"fonético\" QWERTY"
 
 #: keyboard.pm:264
 #, c-format
@@ -9435,7 +9475,7 @@ msgstr ""
 #: lvm.pm:135
 #, c-format
 msgid "Physical volume %s is still in use"
-msgstr ""
+msgstr "O volume físico %s ainda se está usando"
 
 #: lvm.pm:145
 #, c-format
@@ -9802,7 +9842,7 @@ msgstr "Ningún rato"
 #: mouse.pm:304 mouse.pm:367 mouse.pm:376 mouse.pm:435
 #, c-format
 msgid "Synaptics Touchpad"
-msgstr ""
+msgstr "Touchpad Synaptic"
 
 #: mouse.pm:561
 #, c-format
@@ -9867,7 +9907,7 @@ msgstr "Servidor CUPS"
 #: network/drakfirewall.pm:60
 #, c-format
 msgid "Echo request (ping)"
-msgstr ""
+msgstr "Solicitude de eco (ping)"
 
 #: network/drakfirewall.pm:65
 #, c-format
@@ -9877,7 +9917,7 @@ msgstr "BitTorrent"
 #: network/drakfirewall.pm:74
 #, c-format
 msgid "Port scan detection"
-msgstr ""
+msgstr "Detección de escaneo de portos"
 
 #: network/drakfirewall.pm:165
 #, c-format
@@ -9953,9 +9993,9 @@ msgstr "Outros portos"
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:202
 #: standalone/net_applet:380 standalone/net_applet:417
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall"
-msgstr "Cortalumes"
+msgstr "Cortalumes Interactivo"
 
 #: network/drakfirewall.pm:252
 #, c-format
@@ -9968,32 +10008,32 @@ msgstr ""
 #: network/drakfirewall.pm:257
 #, c-format
 msgid "Use Interactive Firewall"
-msgstr ""
+msgstr "Usar Cortalumes Interactivo"
 
 #: network/ifw.pm:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port scanning"
-msgstr "Non compartir"
+msgstr "Escaneo de portos"
 
 #: network/ifw.pm:137
-#, fuzzy, c-format
+#, c-format
 msgid "Service attack"
-msgstr "Servicio atacado: %s"
+msgstr "Ataque a servicios"
 
 #: network/ifw.pm:138
-#, fuzzy, c-format
+#, c-format
 msgid "Password cracking"
-msgstr "Contrasinal outra vez:"
+msgstr "Descifrado de contrasinais"
 
 #: network/ifw.pm:139
 #, c-format
 msgid "\"%s\" attack"
-msgstr ""
+msgstr "ataque \"%s\""
 
 #: network/ifw.pm:141
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "%s intentou un ataque de escaneo de portos."
 
 #: network/ifw.pm:142
 #, c-format
@@ -10003,12 +10043,12 @@ msgstr "O servicio %s foi atacado por %s."
 #: network/ifw.pm:143
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "%s intentou un ataque de descifrado de contrasinais."
 
 #: network/ifw.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "A \"%s\" attack has been attempted by %s"
-msgstr "O servicio %s foi atacado por %s."
+msgstr "Intentouse un ataque de \"%s\" por parte de %s"
 
 #: network/isdn.pm:117 network/netconnect.pm:452 network/netconnect.pm:546
 #: network/netconnect.pm:549 network/netconnect.pm:692
@@ -10047,7 +10087,7 @@ msgstr "Manual"
 #: network/ndiswrapper.pm:27
 #, c-format
 msgid "No device supporting the %s ndiswrapper driver is present!"
-msgstr ""
+msgstr "Non hai ningún dispositivo que soporte o driver ndiswrapper %s!"
 
 #: network/ndiswrapper.pm:33
 #, c-format
@@ -10070,11 +10110,13 @@ msgid ""
 "The selected device has already been configured with the %s driver.\n"
 "Do you really want to use a ndiswrapper driver?"
 msgstr ""
+"O dispositivo seleccionado xa está configurado co driver %s.\n"
+"Desexa usar un driver ndiswrapper?"
 
 #: network/ndiswrapper.pm:101
 #, c-format
 msgid "Unable to find the ndiswrapper interface!"
-msgstr ""
+msgstr "Non foi posible atopar a interface ndiswrapper!"
 
 #: network/netconnect.pm:69 network/netconnect.pm:482
 #: network/netconnect.pm:494
@@ -10272,7 +10314,7 @@ msgstr "Conexión por módem"
 #: network/netconnect.pm:251
 #, c-format
 msgid "DVB connection"
-msgstr ""
+msgstr "Conexión DVB"
 
 #: network/netconnect.pm:261
 #, c-format
@@ -10375,7 +10417,7 @@ msgstr "Cable: opcións da conta"
 #: network/netconnect.pm:311
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
-msgstr ""
+msgstr "Usar BPALogin (necesario para Telstra)"
 
 #: network/netconnect.pm:337 network/netconnect.pm:659
 #: network/netconnect.pm:810 network/netconnect.pm:1149
@@ -10612,6 +10654,8 @@ msgid ""
 "Please choose your DSL connection type.\n"
 "If you do not know it, keep the preselected type."
 msgstr ""
+"Elixa o tipo de conexión ADSL que ten.\n"
+"Se non o sabe, deixe o tipo preseleccionado."
 
 #: network/netconnect.pm:722
 #, c-format
@@ -10712,7 +10756,7 @@ msgstr "restrinxir"
 #: network/netconnect.pm:929
 #, c-format
 msgid "Enable IPv6 to IPv4 tunnel"
-msgstr ""
+msgstr "Habilitar o túnel IPv6 a IPv4"
 
 #: network/netconnect.pm:931 standalone/drakconnect:369
 #: standalone/drakconnect:886
@@ -10770,7 +10814,7 @@ msgstr "Escolla un driver ndiswrapper"
 #: network/netconnect.pm:999
 #, c-format
 msgid "Use the ndiswrapper driver %s"
-msgstr ""
+msgstr "Usar o driver ndiswrapper %s"
 
 #: network/netconnect.pm:999
 #, c-format
@@ -11004,7 +11048,7 @@ msgstr ""
 #: network/netconnect.pm:1205
 #, c-format
 msgid "Last but not least you can also type in your DNS server IP addresses."
-msgstr ""
+msgstr "Por último tamén pode introducir os enderezos IP do seu servidor DNS."
 
 #: network/netconnect.pm:1207 standalone/drakconnect:991
 #, c-format
@@ -11353,7 +11397,7 @@ msgstr "Non foi posible atopar \"%s\" no seu sistema Windows!"
 #: network/thirdparty.pm:372
 #, c-format
 msgid "No Windows system has been detected!"
-msgstr ""
+msgstr "Non se detectou ningún sistema Windows!"
 
 #: network/thirdparty.pm:382
 #, c-format
@@ -11421,12 +11465,12 @@ msgstr "Agarde, executando os comandos de configuración do dispositivo..."
 #: network/wireless.pm:8
 #, c-format
 msgid "Open WEP"
-msgstr ""
+msgstr "WEP aberto"
 
 #: network/wireless.pm:9
 #, c-format
 msgid "Restricted WEP"
-msgstr ""
+msgstr "WEP restrinxido"
 
 #: network/wireless.pm:10
 #, c-format
@@ -11617,9 +11661,9 @@ msgid "Network printer (TCP/Socket)"
 msgstr "Impresora de rede (TCP/Socket)"
 
 #: printer/main.pm:32
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on SMB/Windows server"
-msgstr "Impresora SMB/Windows 95/98/NT server"
+msgstr "Impresora no servidor SMB/Windows"
 
 #: printer/main.pm:33
 #, c-format
@@ -12219,9 +12263,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:622
-#, fuzzy, c-format
+#, c-format
 msgid "Printer auto administration"
-msgstr "Detección automática da impresora"
+msgstr "Administración automática de impresoras"
 
 #: printer/printerdrake.pm:623
 #, c-format
@@ -12229,21 +12273,23 @@ msgid ""
 "Here you can configure printer administration tasks which should be done "
 "automatically."
 msgstr ""
+"Aquí pode configurar as tarefas de administración de impresoras que deben "
+"facerse automáticamente."
 
 #: printer/printerdrake.pm:626
-#, fuzzy, c-format
+#, c-format
 msgid "Do automatic configuration of new printers"
-msgstr "Usar configuración automática (DHCP)"
+msgstr "Usar configuración automática nas novas impresoras"
 
 #: printer/printerdrake.pm:627 printer/printerdrake.pm:641
-#, fuzzy, c-format
+#, c-format
 msgid "when a USB printer is connected and turned on"
-msgstr " (Asegúrese de que tódalas impresoras están conectadas e prendidas).\n"
+msgstr "cando se conecta e se prende unha impresora USB"
 
 #: printer/printerdrake.pm:630
-#, fuzzy, c-format
+#, c-format
 msgid "when Printerdrake is started"
-msgstr "Esta impresora está deshabilitada"
+msgstr "cando se iniciou Printerdrake"
 
 #: printer/printerdrake.pm:634
 #, c-format
@@ -12251,14 +12297,14 @@ msgid "Mode for automatic printer setup:"
 msgstr ""
 
 #: printer/printerdrake.pm:640
-#, fuzzy, c-format
+#, c-format
 msgid "Re-enable disabled printers"
-msgstr "Impresoras dispoñibles"
+msgstr "Volver habilitar as impresoras deshabilitadas"
 
 #: printer/printerdrake.pm:644
-#, fuzzy, c-format
+#, c-format
 msgid "when the printing system is started"
-msgstr "Cambia-lo sistema de impresión"
+msgstr "cando se iniciou o sistema de impresión"
 
 #: printer/printerdrake.pm:680
 #, fuzzy, c-format
@@ -12272,11 +12318,14 @@ msgid ""
 "computer and the printer \"%s\" should be handled (for example if the "
 "printer is not turned on)."
 msgstr ""
+"Aquí pode configurar como se deben manexar os erros durante a comunicación "
+"entre o seu ordenador e a impresora \"%s\" (por exemplo se a impresora non "
+"está acesa)."
 
 #: printer/printerdrake.pm:686
-#, fuzzy, c-format
+#, c-format
 msgid "The number of retries should be an integer number of at least 1!"
-msgstr "¡O número do porto debe ser un número enteiro!"
+msgstr "O número de reintentos debe ser un número enteiro ou polo menos 1!"
 
 #: printer/printerdrake.pm:690
 #, fuzzy, c-format
@@ -12284,9 +12333,9 @@ msgid "The delay between retries should be a positive integer number!"
 msgstr "¡A opción %s debe ser un número enteiro!"
 
 #: printer/printerdrake.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Do not disable the printer"
-msgstr "Desactivar Impresora"
+msgstr "Non deshabilitar a impresora"
 
 #: printer/printerdrake.pm:704
 #, c-format
@@ -12294,14 +12343,14 @@ msgid "Retry infinitely often"
 msgstr ""
 
 #: printer/printerdrake.pm:707
-#, fuzzy, c-format
+#, c-format
 msgid "Number of retries"
-msgstr "Número de botóns"
+msgstr "Número de reintentos"
 
 #: printer/printerdrake.pm:712
 #, c-format
 msgid "Delay between retries (in sec)"
-msgstr ""
+msgstr "Atraso entre reintentos (en segundos)"
 
 #: printer/printerdrake.pm:745 printer/printerdrake.pm:765
 #, c-format
@@ -12486,7 +12535,7 @@ msgstr ""
 #: printer/printerdrake.pm:884
 #, c-format
 msgid "Do not setup printer automatically now, and never do it again"
-msgstr ""
+msgstr "Non configurar automáticamente a impresora agora, nin nunca"
 
 #: printer/printerdrake.pm:928
 #, c-format
@@ -12496,17 +12545,17 @@ msgstr "Buscando novas impresoras..."
 #: printer/printerdrake.pm:989
 #, c-format
 msgid "Do not setup printer automatically again"
-msgstr ""
+msgstr "Non volver configurar a impresora automáticamente"
 
 #: printer/printerdrake.pm:996
-#, fuzzy, c-format
+#, c-format
 msgid "New printers found"
-msgstr "¡Non se atoparon impresoras!"
+msgstr "Atopáronse novas impresoras"
 
 #: printer/printerdrake.pm:997
-#, fuzzy, c-format
+#, c-format
 msgid "New printer found"
-msgstr "¡Non se atoparon impresoras!"
+msgstr "Atopouse unha nova impresora"
 
 #: printer/printerdrake.pm:999
 #, c-format
@@ -12515,6 +12564,9 @@ msgid ""
 "them up for you. If you do not want to have all of them set up, unselect the "
 "ones which should be skipped, or click \"Cancel\" to set up none of them.\n"
 msgstr ""
+"Atopáronse as seguintes impresoras novas e Printerdrake pode configuralas "
+"automáticamente. Se non desexa configuralas todas, deseleccione as que "
+"deben  saltarse, ou clique en \"Cancelar\" para non configurar ningunha.\n"
 
 #: printer/printerdrake.pm:1000
 #, c-format
@@ -12523,6 +12575,9 @@ msgid ""
 "it up for you. If you do not want to have it set up, unselect it, or click "
 "\"Cancel\".\n"
 msgstr ""
+"Atopouse a seguinte impresora nova e Printerdrake pode configurala "
+"automáticamente. Se non desexa configurala, deselecciónea, ou clique en "
+"\"Cancelar\".\n"
 
 #: printer/printerdrake.pm:1001
 #, c-format
@@ -12530,6 +12585,8 @@ msgid ""
 "Note that for certain printer models additional packages need to be "
 "installed. So keep your installation media handy.\n"
 msgstr ""
+"Teña en conta que cómpre instalar paquetes adicionais para certos modelos de "
+"impresoras. Así que teña a man o soporte de instalación.\n"
 
 #: printer/printerdrake.pm:1037 printer/printerdrake.pm:1079
 #, c-format
@@ -12594,6 +12651,8 @@ msgid ""
 "Now you have turned off automatic printer setup.\n"
 "\n"
 msgstr ""
+"Agora ten apagada a configuración automática de impresoras.\n"
+"\n"
 
 #: printer/printerdrake.pm:1125
 #, c-format
@@ -12603,9 +12662,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:1125 printer/printerdrake.pm:5139
-#, fuzzy, c-format
+#, c-format
 msgid "Configure Auto Administration"
-msgstr "Administración Remota"
+msgstr "Configurar a Administración Automática"
 
 #: printer/printerdrake.pm:1126
 #, c-format
@@ -12965,6 +13024,9 @@ msgid ""
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
 msgstr ""
+"A configuración da impresora será totalmente automática. Se non se detecta "
+"correctamente a súa impresora ou se prefire unha configuración personalizada "
+"da impresora, seleccione \"Configuración manual\"."
 
 #: printer/printerdrake.pm:1611
 #, c-format
@@ -12979,6 +13041,10 @@ msgid ""
 "detected or if you prefer a customized printer configuration, turn on "
 "\"Manual configuration\"."
 msgstr ""
+"Elixa a impresora que desexa configurar. A configuración da impresora será "
+"totalmente automática. Se non se detecta correctamente a súa impresora ou se "
+"prefire unha configuración personalizada da impresora, seleccione "
+"\"Configuración manual\"."
 
 #: printer/printerdrake.pm:1615
 #, c-format
@@ -13400,6 +13466,9 @@ msgid ""
 "LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony "
 "IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"
 msgstr ""
+"É a súa impresora un dispositivo multifunción de HP ou Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3000/3200/3300/4345 con escáner, DeskJet 450, Sony "
+"IJP-V100), unha HP PhotoSmart ou unha HP LaserJet 2200?"
 
 #: printer/printerdrake.pm:2457 printer/printerdrake.pm:2603
 #, c-format
@@ -13740,6 +13809,10 @@ msgid ""
 "your printer to a local USB port or configure it on the machine where it is "
 "connected to."
 msgstr ""
+"O driver para esta impresora só soporta impresoras conectadas localmente a "
+"través de USB, pero non impresoras en máquinas remotas ou servidores de "
+"impresión. Conecte a súa impresora a un porto USB local ou configúrea na "
+"máquina á que está conectada."
 
 #: printer/printerdrake.pm:3547
 #, c-format
@@ -13754,6 +13827,10 @@ msgid ""
 "on other parallel ports. Please connect your printer to the first parallel "
 "port or configure it on the machine where it is connected to."
 msgstr ""
+"O driver para esta impresora só soporta impresoras conectadas localmente ó "
+"primeiro porto paralelo, pero non impresoras en máquinas remotas ou "
+"servidores de impresión ou noutro porto paralelo. Conecte a súa impresora ó "
+"primeiro porto paralelo ou configúrea na máquina á que está conectada."
 
 #: printer/printerdrake.pm:3574
 #, c-format
@@ -13761,9 +13838,9 @@ msgid "Canon LBP-460/660 configuration"
 msgstr "Configuración de Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3601
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-810/1120 (CAPT) configuration"
-msgstr "Configuración de Canon LBP-460/660"
+msgstr "Configuración de Canon LBP-810/1120 (CAPT)"
 
 #: printer/printerdrake.pm:3602
 #, c-format
@@ -13773,6 +13850,10 @@ msgid ""
 "port. Please connect your printer to the USB or configure it on the machine "
 "where it is directly connected to."
 msgstr ""
+"O driver para esta impresora só soporta impresoras conectadas localmente a "
+"través de USB, pero non impresoras en máquinas remotas ou servidores de "
+"impresión ou no porto paralelo. Conecte a súa impresora a un porto USB ou "
+"configúrea na máquina á que está conectada directamente."
 
 #: printer/printerdrake.pm:3609
 #, c-format
@@ -13953,6 +14034,10 @@ msgid ""
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
+"Para saber cales son as opcións dispoñibles para a impresora actual lea a "
+"lista que se amosa embaixo ou clique no botón \"Imprimir lista de opcións\".%"
+"s%s%s\n"
+"\n"
 
 #: printer/printerdrake.pm:4144
 #, c-format
@@ -14164,6 +14249,17 @@ msgid ""
 "device, you only need to use \"scannerdrake\" if you want to share the "
 "scanner on the network."
 msgstr ""
+"O seu dispositivo multifunción configurouse automáticamente para que sexa "
+"capaz de dixitalizar. Agora pode dixitalizar con \"scanimage\" (\"scanimage -"
+"d hp:%s\" para especificar o escáner cando ten máis dun) dende a liña de "
+"comandos ou cas interfaces gráficas \"xscanimage\" ou \"xsane\". Se está "
+"usando o GIMP, tamén pode dixitalizar escollendo o punto apropiado no menú "
+"\"Ficheiro\"/\"Adquirir\". Execute tamén \"man scanimage\" na liña de "
+"comandos para obter máis información.\n"
+"\n"
+"Non necesita executar \"scannerdrake\" para configurar a dixitalización "
+"neste dispositivo, só ten que usar \"scannerdrake\" se desexa compartir o "
+"escáner na rede."
 
 #: printer/printerdrake.pm:4281
 #, c-format
@@ -14376,6 +14472,16 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
+"Está a piques de instalar o sistema de impresión %s nun sistema que se está "
+"executando co nivel de seguridade %s.\n"
+"\n"
+"Este sistema de impresión executa un daemon (proceso que se executa por "
+"detrás) o cal agarda por traballos de impresión e os manexa. Este daemon "
+"tamén é accesible por máquinas remotas a través da rede e é así un posible "
+"obxectivo de ataques. Polo tanto só se inician de maneira predeterminada uns "
+"poucos daemons seleccionados neste nivel de seguridade.\n"
+"\n"
+"Desexa configurar o sistema de impresión nesta máquina?"
 
 #: printer/printerdrake.pm:4568
 #, c-format
@@ -14395,6 +14501,14 @@ msgid ""
 "Do you want to have the automatic starting of the printing system turned on "
 "again?"
 msgstr ""
+"O sistema de impresión (%s) non se iniciará automáticamente cando arrinca a "
+"máquina.\n"
+"\n"
+"É posible que o inicio automático se desactivara ó cambiar a un nivel de "
+"seguridade superior, porque o sistema de impresión é un punto potencial de "
+"ataques.\n"
+"\n"
+"Desexa activar de novo o inicio automático do sistema de impresión?"
 
 #: printer/printerdrake.pm:4592
 #, c-format
@@ -14429,6 +14543,10 @@ msgid ""
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
 msgstr ""
+"Neste modo non hai sistema de impresión local, tódalas solicitudes de "
+"impresión van directamente ó servidor especificado embaixo. Teña en conta "
+"que non é posible definir colas de impresión locais e se o servidor "
+"especificado está caido non se poderá imprimir dende esta máquina."
 
 #: printer/printerdrake.pm:4700
 #, c-format
@@ -14481,6 +14599,10 @@ msgid ""
 "daemon has to run in the background and needs some memory, and the IPP port "
 "(port 631) is opened. "
 msgstr ""
+"A desvantaxe disto é que se necesitan máis recursos na máquina local: Cómpre "
+"instalar paquetes de software adicionais, tense que executar por detrás o "
+"daemon CUPS e necesita algunha memoria, e o porto IPP (porto 631) está "
+"aberto."
 
 #: printer/printerdrake.pm:4761
 #, c-format
@@ -14503,6 +14625,8 @@ msgid ""
 "Disadvantage is that it is not possible to define local printers then and if "
 "the specified server is down it cannot be printed at all from this machine. "
 msgstr ""
+"A desvantaxe é que non é posible definir impresoras locais e se o servidor "
+"especificado está caído non se poderá imprimir dende esta máquina."
 
 #: printer/printerdrake.pm:4765
 #, c-format
@@ -14928,7 +15052,7 @@ msgstr "Activar/Desactivar libsafe se se atopa libsafe no sistema."
 #: security/help.pm:86
 #, c-format
 msgid "Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
+msgstr "Activar/Desactivar o rexistro de paquetes IPv4 estraños."
 
 #: security/help.pm:88
 #, c-format
@@ -15033,7 +15157,7 @@ msgstr "se está a si, executaranse as comprobacións de seguridade diariamente.
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
+msgstr "se está a sí, verifica a adición/eliminación de ficheiros sgid."
 
 #: security/help.pm:121
 #, c-format
@@ -15044,6 +15168,7 @@ msgstr "se está a si, comproba contrasinais baleiros en /etc/shadow."
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
 msgstr ""
+"se está a sí, verifica as sumas de comprobación dos ficheiros suid/sgid."
 
 #: security/help.pm:123
 #, c-format
@@ -15075,7 +15200,7 @@ msgstr ""
 #: security/help.pm:128
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr ""
+msgstr "se está a sí, envía o informe do resultado da comprobación por correo."
 
 #: security/help.pm:129
 #, c-format
@@ -15212,7 +15337,7 @@ msgstr "Activar libsafe se se atopa no sistema"
 #: security/l10n.pm:30
 #, c-format
 msgid "Enable the logging of IPv4 strange packets"
-msgstr ""
+msgstr "Activar o rexistro de paquetes IPv4 estraños"
 
 #: security/l10n.pm:31
 #, c-format
@@ -15314,7 +15439,7 @@ msgstr "Executar as comprobacións de seguridade diariamente"
 #: security/l10n.pm:50
 #, c-format
 msgid "Check additions/removals of sgid files"
-msgstr ""
+msgstr "Verificar adicións/eliminacións de ficheiros sgid"
 
 #: security/l10n.pm:51
 #, c-format
@@ -15324,7 +15449,7 @@ msgstr "Comproba contrasinais baleiros en /etc/shadow"
 #: security/l10n.pm:52
 #, c-format
 msgid "Verify checksum of the suid/sgid files"
-msgstr ""
+msgstr "Verificar as sumas de comprobación dos ficheiros suid/sgid"
 
 #: security/l10n.pm:53
 #, c-format
@@ -15599,6 +15724,9 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
+"Execute o filtrado de paquetes do kernel Linux serie 2.2,\n"
+"para configurar un cortalumes que protexa a súa máquina\n"
+"de ataques dende a rede."
 
 #: services.pm:42
 #, c-format
@@ -15648,6 +15776,8 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
+"Linux Virtual Server, úsase para construir un servidor de alto\n"
+"rendemento e alta dispoñibilidade."
 
 #: services.pm:54
 #, c-format
@@ -15908,17 +16038,17 @@ msgstr "Parar"
 #: share/advertising/01.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Packs"
-msgstr ""
+msgstr "Mandriva Linux 2006: Packs"
 
 #: share/advertising/02.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More features"
-msgstr ""
+msgstr "Mandriva Linux 2006: Máis funcionalidades"
 
 #: share/advertising/03.pl:3
 #, c-format
 msgid "Interactive firewall"
-msgstr ""
+msgstr "Cortalumes interactivo"
 
 #: share/advertising/04.pl:3
 #, c-format
@@ -15928,27 +16058,27 @@ msgstr ""
 #: share/advertising/05.pl:3
 #, c-format
 msgid "New package manager"
-msgstr ""
+msgstr "Novo xestor de paquetes"
 
 #: share/advertising/06.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More performances"
-msgstr ""
+msgstr "Mandriva Linux 2006: Máis resultados"
 
 #: share/advertising/07.pl:3
 #, c-format
 msgid "Latest kernel and GCC"
-msgstr ""
+msgstr "Último kernel e GCC"
 
 #: share/advertising/08.pl:3
 #, c-format
 msgid "High Availibility"
-msgstr ""
+msgstr "Alta dispoñibilidade"
 
 #: share/advertising/09.pl:3
 #, c-format
 msgid "Delta RPM"
-msgstr ""
+msgstr "Delta RPM"
 
 #: share/advertising/10.pl:3
 #, c-format
@@ -15958,17 +16088,17 @@ msgstr ""
 #: share/advertising/11.pl:3
 #, c-format
 msgid "Boot time reduction"
-msgstr ""
+msgstr "Reducción do tempo de arrinque"
 
 #: share/advertising/12.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Easier to use"
-msgstr ""
+msgstr "Mandriva Linux 2006: Máis fácil de usar"
 
 #: share/advertising/13.pl:3
 #, c-format
 msgid "Latest graphical interfaces: KDE and GNOME"
-msgstr ""
+msgstr "Últimas interfaces gráficas: KDE e GNOME"
 
 #: share/advertising/14.pl:3
 #, c-format
@@ -15978,62 +16108,62 @@ msgstr ""
 #: share/advertising/15.pl:3
 #, c-format
 msgid "Easy and quick installation"
-msgstr ""
+msgstr "Instalación rápida e sinxela"
 
 #: share/advertising/16.pl:3
 #, c-format
 msgid "Easy configuration thanks to 60 wizards"
-msgstr ""
+msgstr "Configuración sinxela gracias a 60 asistentes"
 
 #: share/advertising/17.pl:3
 #, c-format
 msgid "Look and feel improved"
-msgstr ""
+msgstr "Aparencia mellorada"
 
 #: share/advertising/18.pl:3
 #, c-format
 msgid "New webmin theme"
-msgstr ""
+msgstr "Novo tema para Webmin"
 
 #: share/advertising/19.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More support"
-msgstr ""
+msgstr "Mandriva Linux 2006: Máis soporte"
 
 #: share/advertising/20.pl:3
 #, c-format
 msgid "Better Hardware support"
-msgstr ""
+msgstr "Mellor soporte de Hardware"
 
 #: share/advertising/21.pl:3
 #, c-format
 msgid "Xen support"
-msgstr ""
+msgstr "Soporte para Xen"
 
 #: share/advertising/22.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: More information"
-msgstr ""
+msgstr "Mandriva Linux 2006: Máis información"
 
 #: share/advertising/23.pl:3
 #, c-format
 msgid "Mandriva Linux 2006: Where to buy?"
-msgstr ""
+msgstr "Mandriva Linux 2006: Onde compralo?"
 
 #: share/advertising/24.pl:3
 #, c-format
 msgid "Where to find technical assistance?"
-msgstr ""
+msgstr "Onde atopar asistencia técnica?"
 
 #: share/advertising/25.pl:3
 #, c-format
 msgid "How to join the Mandriva Linux community?"
-msgstr ""
+msgstr "Como unirse á comunidade de Mandriva Linux?"
 
 #: share/advertising/26.pl:3
 #, c-format
 msgid "How to maintain your system up-to-date?"
-msgstr ""
+msgstr "Como manter o seu sistema actualizado?"
 
 #: share/advertising/intel.pl:3
 #, c-format
@@ -16302,9 +16432,9 @@ msgstr ""
 "escritorio"
 
 #: share/compssUsers.pl:156
-#, fuzzy, c-format
+#, c-format
 msgid "IceWm Desktop"
-msgstr "Escritorio"
+msgstr "Escritorio IceWm"
 
 #: share/compssUsers.pl:160
 #, c-format
@@ -16312,9 +16442,9 @@ msgid "Other Graphical Desktops"
 msgstr "Outros Escritorios Gráficos"
 
 #: share/compssUsers.pl:161
-#, fuzzy, c-format
+#, c-format
 msgid "Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Window Maker, Enlightenment, Fvwm, etc"
 
 #: share/compssUsers.pl:184
 #, c-format
@@ -16602,7 +16732,7 @@ msgstr ""
 #: standalone/drakTermServ:251
 #, c-format
 msgid "Net Boot Images"
-msgstr ""
+msgstr "Imaxes de Arrinque dende Rede"
 
 #: standalone/drakTermServ:258
 #, c-format
@@ -16690,7 +16820,7 @@ msgstr ""
 #: standalone/drakTermServ:446
 #, c-format
 msgid "Creating net boot images for all kernels"
-msgstr ""
+msgstr "Creando imaxes de arrinque dende rede para tódolos kernels"
 
 #: standalone/drakTermServ:447 standalone/drakTermServ:769
 #: standalone/drakTermServ:785
@@ -16723,6 +16853,8 @@ msgstr ""
 #, c-format
 msgid "Syncing server user list with client list, including root."
 msgstr ""
+"Sincronizando a lista de usuarios do servidor ca lista do cliente, incluindo "
+"a root."
 
 #: standalone/drakTermServ:499
 #, c-format
@@ -16945,12 +17077,12 @@ msgstr "Crear imaxes PXE."
 #: standalone/drakTermServ:757
 #, c-format
 msgid "Install i586 kernel for older clients"
-msgstr ""
+msgstr "Instalar un kernel i586 para clientes antigos"
 
 #: standalone/drakTermServ:767
 #, c-format
 msgid "Build Whole Kernel -->"
-msgstr ""
+msgstr "Construir o Kernel Enteiro -->"
 
 #: standalone/drakTermServ:774
 #, c-format
@@ -16970,7 +17102,7 @@ msgstr "¡Non hai ningún NIC seleccionado!"
 #: standalone/drakTermServ:784
 #, c-format
 msgid "Build All Kernels -->"
-msgstr ""
+msgstr "Construir Tódolos Kernels -->"
 
 #: standalone/drakTermServ:797
 #, c-format
@@ -16990,7 +17122,7 @@ msgstr "Eliminar Tódolos NBIs"
 #: standalone/drakTermServ:880
 #, c-format
 msgid "Building images for kernel:"
-msgstr ""
+msgstr "Construindo imaxes para o kernel:"
 
 #: standalone/drakTermServ:1004
 #, c-format
@@ -17032,7 +17164,7 @@ msgstr ""
 #: standalone/drakTermServ:1095
 #, c-format
 msgid "No net boot images created!"
-msgstr ""
+msgstr "Non se crearon imaxes de arrinque dende rede!"
 
 #: standalone/drakTermServ:1114
 #, fuzzy, c-format
@@ -17328,9 +17460,9 @@ msgid "manual"
 msgstr "manual"
 
 #: standalone/drakautoinst:64
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic Steps Configuration"
-msgstr "Configuración do estilo de arrinque"
+msgstr "Configuración dos Pasos Automáticos"
 
 #: standalone/drakautoinst:65
 #, c-format
@@ -17338,6 +17470,8 @@ msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
 msgstr ""
+"Elixa en cada paso se se debe reproducir coma na súa instalación, ou se debe "
+"ser manual"
 
 #: standalone/drakautoinst:77 standalone/drakautoinst:78
 #: standalone/drakautoinst:92
@@ -17616,7 +17750,7 @@ msgstr "Non se puido atopar %s en %s"
 #: standalone/drakbackup:636
 #, c-format
 msgid "%s not responding"
-msgstr ""
+msgstr "%s non responde"
 
 #: standalone/drakbackup:640
 #, c-format
@@ -18833,7 +18967,7 @@ msgstr ""
 #: standalone/drakbackup:3833
 #, c-format
 msgid "CD in place - continue."
-msgstr ""
+msgstr "CD introducido - continuar."
 
 #: standalone/drakbackup:3838
 #, c-format
@@ -18947,7 +19081,7 @@ msgstr "Drakbackup"
 #: standalone/drakboot:49
 #, c-format
 msgid "No bootloader found, creating a new configuration"
-msgstr ""
+msgstr "Non se atopou o cargador de arrinque, creando unha nova configuración"
 
 #: standalone/drakboot:84 standalone/harddrake2:190 standalone/harddrake2:191
 #: standalone/harddrake2:192 standalone/logdrake:69
@@ -19790,7 +19924,7 @@ msgstr "Importar"
 #: standalone/drakfont:494
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Obter as Fontes de Windows"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakfont:512
@@ -20068,7 +20202,7 @@ msgstr "Enderezo da Rede Local"
 #: standalone/drakgw:180
 #, c-format
 msgid "Local IP address"
-msgstr ""
+msgstr "Enderezo IP local"
 
 #: standalone/drakgw:182
 #, c-format
@@ -20221,7 +20355,7 @@ msgstr "Configurando..."
 #: standalone/drakgw:385
 #, c-format
 msgid "Configuring firewall..."
-msgstr ""
+msgstr "Configurando o cortalumes..."
 
 #: standalone/drakhelp:17
 #, c-format
@@ -20272,32 +20406,32 @@ msgstr ""
 #: standalone/drakhosts:98
 #, c-format
 msgid "Please add an host to be able to modify it."
-msgstr ""
+msgstr "Por favor, engada unha máquina para podela modificar."
 
 #: standalone/drakhosts:108
-#, fuzzy, c-format
+#, c-format
 msgid "Please modify information"
-msgstr "Información detallada"
+msgstr "Por favor modifique a información"
 
 #: standalone/drakhosts:109
-#, fuzzy, c-format
+#, c-format
 msgid "Please delete information"
-msgstr "Información detallada"
+msgstr "Por favor elimine a información"
 
 #: standalone/drakhosts:110
-#, fuzzy, c-format
+#, c-format
 msgid "Please add information"
-msgstr "Información detallada"
+msgstr "Por favor engada a información"
 
 #: standalone/drakhosts:115
 #, c-format
 msgid "IP address:"
-msgstr ""
+msgstr "Enderezo IP:"
 
 #: standalone/drakhosts:116
 #, c-format
 msgid "Host name:"
-msgstr ""
+msgstr "Nome de máquina:"
 
 #: standalone/drakhosts:117
 #, c-format
@@ -20312,7 +20446,7 @@ msgstr "Introduza un enderezo IP válido."
 #: standalone/drakhosts:129
 #, c-format
 msgid "Same IP is already in %s file."
-msgstr ""
+msgstr "O mesmo IP xa está no ficheiro %s."
 
 #: standalone/drakhosts:197
 #, c-format
@@ -20322,22 +20456,22 @@ msgstr ""
 #: standalone/drakhosts:237
 #, c-format
 msgid "DrakHOSTS manage hosts definitions"
-msgstr ""
+msgstr "DrakHOSTS administra as definicións de máquinas"
 
 #: standalone/drakhosts:246
 #, c-format
 msgid "Failed to add host."
-msgstr ""
+msgstr "Erro ó engadir a máquina."
 
 #: standalone/drakhosts:253
 #, c-format
 msgid "Failed to Modify host."
-msgstr ""
+msgstr "Erro ó Modificar a máquina."
 
 #: standalone/drakhosts:260
 #, c-format
 msgid "Failed to remove host."
-msgstr ""
+msgstr "Erro ó eliminar a máquina."
 
 #: standalone/drakids:26
 #, fuzzy, c-format
@@ -20347,7 +20481,7 @@ msgstr "Permitirlle a tódolos usuarios"
 #: standalone/drakids:57
 #, c-format
 msgid "Log"
-msgstr "Rexisto"
+msgstr "Rexistro"
 
 #: standalone/drakids:61
 #, fuzzy, c-format
@@ -20355,36 +20489,36 @@ msgid "Clear logs"
 msgstr "Borrar todas"
 
 #: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:465
-#, fuzzy, c-format
+#, c-format
 msgid "Blacklist"
-msgstr "Negro"
+msgstr "Lista negra"
 
 #: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:470
-#, fuzzy, c-format
+#, c-format
 msgid "Whitelist"
-msgstr "Lista de escritura:"
+msgstr "Lista branca"
 
 #: standalone/drakids:71
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from blacklist"
-msgstr "Quitar do LVM"
+msgstr "Quitar da lista negra"
 
 #: standalone/drakids:72
-#, fuzzy, c-format
+#, c-format
 msgid "Move to whitelist"
-msgstr "Menú a editar"
+msgstr "Mover á lista branca"
 
 #: standalone/drakids:84
-#, fuzzy, c-format
+#, c-format
 msgid "Remove from whitelist"
-msgstr "Quitar do LVM"
+msgstr "Quitar da lista branca"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
 #: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:380
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact daemon"
-msgstr "Non se puido contactar co espello %s"
+msgstr "Non se puido contactar co daemon"
 
 #: standalone/drakids:202
 #, c-format
@@ -20392,14 +20526,14 @@ msgid "Date"
 msgstr "Data"
 
 #: standalone/drakids:203
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker"
-msgstr "Detalles do ataque"
+msgstr "Atacante"
 
 #: standalone/drakids:204
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type"
-msgstr "Tipo de ataque: %s"
+msgstr "Tipo de ataque"
 
 #: standalone/drakids:205
 #, c-format
@@ -20439,17 +20573,17 @@ msgstr "Servidor NFS"
 #: standalone/draknfs:83
 #, c-format
 msgid "Restarting/Reloading NFS server..."
-msgstr ""
+msgstr "Reiniciando/Recargando o servidor NFS..."
 
 #: standalone/draknfs:84
 #, c-format
 msgid "Error Restarting/Reloading NFS server"
-msgstr ""
+msgstr "Erro ó Reiniciar/Recargar o servidor NFS"
 
 #: standalone/draknfs:100 standalone/draksambashare:197
 #, c-format
 msgid "Directory Selection"
-msgstr ""
+msgstr "Selección de Directorio"
 
 #: standalone/draknfs:105 standalone/draksambashare:202
 #, c-format
@@ -20517,17 +20651,17 @@ msgstr ""
 #: standalone/draknfs:168
 #, c-format
 msgid "Secured Connection:"
-msgstr ""
+msgstr "Conexión Segura:"
 
 #: standalone/draknfs:169
 #, c-format
 msgid "Read-Only share:"
-msgstr ""
+msgstr "Recurso de Só Lectura:"
 
 #: standalone/draknfs:171
 #, c-format
 msgid "<span weight=\"bold\">Advanced Options</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Opcións Avanzadas</span>"
 
 #: standalone/draknfs:172
 #, c-format
@@ -20557,17 +20691,17 @@ msgstr ""
 #: standalone/draknfs:306
 #, c-format
 msgid "Please add an NFS share to be able to modify it."
-msgstr ""
+msgstr "Por favor, engada un recurso NFS para podelo modificar."
 
 #: standalone/draknfs:378
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options Help"
-msgstr "Opcións avanzadas"
+msgstr "Axuda de Opcións Avanzadas"
 
 #: standalone/draknfs:389
 #, c-format
 msgid "NFS directory"
-msgstr ""
+msgstr "Directorio NFS"
 
 #: standalone/draknfs:391 standalone/draksambashare:588
 #: standalone/draksambashare:767
@@ -20598,7 +20732,7 @@ msgstr ""
 #: standalone/draknfs:401
 #, c-format
 msgid "User ID:"
-msgstr "ID do Usuario:"
+msgstr "ID de usuario:"
 
 #: standalone/draknfs:401
 #, c-format
@@ -20608,7 +20742,7 @@ msgstr ""
 #: standalone/draknfs:402
 #, c-format
 msgid "Anonymous user ID:"
-msgstr ""
+msgstr "ID do usuario anónimo:"
 
 #: standalone/draknfs:403
 #, c-format
@@ -20618,7 +20752,7 @@ msgstr ""
 #: standalone/draknfs:444
 #, c-format
 msgid "Can't create this directory."
-msgstr ""
+msgstr "Non se puido crear este directorio."
 
 #: standalone/draknfs:447
 #, c-format
@@ -20643,38 +20777,38 @@ msgstr "Opcións Xerais"
 #: standalone/draknfs:527
 #, c-format
 msgid "Custom Options"
-msgstr ""
+msgstr "Opcións Personalizadas"
 
 #: standalone/draknfs:539 standalone/draksambashare:625
 #: standalone/draksambashare:792
 #, c-format
 msgid "Please enter a directory to share."
-msgstr ""
+msgstr "Introduza o directorio que se vai compartir."
 
 #: standalone/draknfs:546
 #, c-format
 msgid "Please use the modify button to set right access."
-msgstr ""
+msgstr "Use o botón modificar para establecer o acceso correcto."
 
 #: standalone/draknfs:600
 #, c-format
 msgid "DrakNFS manage NFS shares"
-msgstr ""
+msgstr "DrakNFS administra os recursos NFS"
 
 #: standalone/draknfs:609
 #, c-format
 msgid "Failed to add NFS share."
-msgstr ""
+msgstr "Erro ó engadir o recurso NFS."
 
 #: standalone/draknfs:616
 #, c-format
 msgid "Failed to Modify NFS share."
-msgstr ""
+msgstr "Erro ó Modificar o recurso NFS."
 
 #: standalone/draknfs:623
 #, c-format
 msgid "Failed to remove an NFS share."
-msgstr ""
+msgstr "Erro ó eliminar o recurso NFS."
 
 #: standalone/drakperm:21
 #, c-format
@@ -20719,7 +20853,7 @@ msgstr "Permisos"
 #: standalone/drakperm:57
 #, c-format
 msgid "Add a new rule"
-msgstr ""
+msgstr "Engadir unha nova regra"
 
 #: standalone/drakperm:64 standalone/drakperm:99 standalone/drakperm:124
 #, c-format
@@ -20932,16 +21066,18 @@ msgid ""
 "You do not have any wireless interface.\n"
 "Run the \"%s\" assistant from the Mandriva Linux Control Center"
 msgstr ""
+"Non ten ningunha interface wireless.\n"
+"Execute o asistente \"%s\" dende o Centro de Control de Mandriva Linux"
 
 #: standalone/drakroam:48
 #, c-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
 #: standalone/drakroam:49
 #, c-format
 msgid "Signal strength"
-msgstr ""
+msgstr "Potencia do sinal"
 
 #: standalone/drakroam:51
 #, c-format
@@ -20951,7 +21087,7 @@ msgstr "Cifrado"
 #: standalone/drakroam:112
 #, c-format
 msgid "Please enter settings for wireless network \"%s\""
-msgstr ""
+msgstr "Introduza as preferencias para a rede sen fíos \"%s\""
 
 #: standalone/drakroam:123
 #, c-format
@@ -20970,9 +21106,9 @@ msgid "Refresh"
 msgstr "Actualizar"
 
 #: standalone/draksambashare:62
-#, fuzzy, c-format
+#, c-format
 msgid "Share directory"
-msgstr "Debe ser un directorio."
+msgstr "Compartir directorio"
 
 #: standalone/draksambashare:63 standalone/draksambashare:96
 #, c-format
@@ -20987,12 +21123,12 @@ msgstr "Explorar"
 #: standalone/draksambashare:65
 #, c-format
 msgid "Public"
-msgstr "Pública"
+msgstr "Público"
 
 #: standalone/draksambashare:66 standalone/draksambashare:102
-#, c-format
+#, fuzzy, c-format
 msgid "Writable"
-msgstr "Escribíbel"
+msgstr "Escritura"
 
 #: standalone/draksambashare:67 standalone/draksambashare:143
 #, fuzzy, c-format
@@ -21005,15 +21141,15 @@ msgid "Directory mask"
 msgstr "Directorio"
 
 #: standalone/draksambashare:69
-#, fuzzy, c-format
+#, c-format
 msgid "Read list"
-msgstr "Lectura"
+msgstr "Lista de lectura"
 
 #: standalone/draksambashare:70 standalone/draksambashare:103
 #: standalone/draksambashare:602
-#, fuzzy, c-format
+#, c-format
 msgid "Write list"
-msgstr "Lista de escritura:"
+msgstr "Lista de escritura"
 
 #: standalone/draksambashare:71 standalone/draksambashare:135
 #, fuzzy, c-format
@@ -21026,14 +21162,14 @@ msgid "Valid users"
 msgstr "Engadir usuario"
 
 #: standalone/draksambashare:73
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit Permissions"
-msgstr "Permisos"
+msgstr "Herdar Permisos"
 
 #: standalone/draksambashare:74 standalone/draksambashare:137
-#, fuzzy, c-format
+#, c-format
 msgid "Hide dot files"
-msgstr "Agocha-los ficheiros"
+msgstr "Agocha-los ficheiros con punto"
 
 #: standalone/draksambashare:76 standalone/draksambashare:142
 #, fuzzy, c-format
@@ -21058,22 +21194,22 @@ msgstr "Usuario por omisión"
 #: standalone/draksambashare:94
 #, c-format
 msgid "Printer name"
-msgstr ""
+msgstr "Nome de impresora"
 
 #: standalone/draksambashare:98 standalone/draksambashare:594
 #, c-format
 msgid "Printable"
-msgstr ""
+msgstr "Imprimible"
 
 #: standalone/draksambashare:99
 #, c-format
 msgid "Print Command"
-msgstr ""
+msgstr "Comando de Impresión"
 
 #: standalone/draksambashare:100
 #, c-format
 msgid "LPQ command"
-msgstr ""
+msgstr "Comando LPQ"
 
 #: standalone/draksambashare:101
 #, c-format
@@ -21082,29 +21218,29 @@ msgstr ""
 
 #: standalone/draksambashare:104 standalone/draksambashare:145
 #: standalone/draksambashare:603
-#, fuzzy, c-format
+#, c-format
 msgid "Inherit permissions"
-msgstr "Permisos"
+msgstr "Herdar permisos"
 
 #: standalone/draksambashare:106
 #, c-format
 msgid "Create mode"
-msgstr ""
+msgstr "Modo de creación"
 
 #: standalone/draksambashare:107
 #, c-format
 msgid "Use client driver"
-msgstr ""
+msgstr "Usar o driver do cliente"
 
 #: standalone/draksambashare:133
-#, fuzzy, c-format
+#, c-format
 msgid "Read List"
-msgstr "Elimina-la Lista"
+msgstr "Lista de Lectura"
 
 #: standalone/draksambashare:134
-#, fuzzy, c-format
+#, c-format
 msgid "Write List"
-msgstr "Lista de escritura:"
+msgstr "Lista de Escritura"
 
 #: standalone/draksambashare:139
 #, fuzzy, c-format
@@ -21119,7 +21255,7 @@ msgstr ""
 #: standalone/draksambashare:160
 #, c-format
 msgid "About Draksambashare"
-msgstr ""
+msgstr "Acerca de Draksambashare"
 
 #: standalone/draksambashare:160
 #, c-format
@@ -21130,36 +21266,43 @@ msgid ""
 "\n"
 "This is a simple tool to easily manage Samba configuration."
 msgstr ""
+"Mandriva Linux \n"
+"Versión: %s\n"
+"Autor: Antoine Ginies\n"
+"\n"
+"Esta é unha ferramenta simple para administrar de maneira sinxela a "
+"configuración de Samba."
 
 #: standalone/draksambashare:180
-#, fuzzy, c-format
+#, c-format
 msgid "Samba server"
 msgstr "Servidor Samba"
 
 #: standalone/draksambashare:180
 #, c-format
 msgid "Restarting/Reloading Samba server..."
-msgstr ""
+msgstr "Reiniciando/Recargando o servidor Samba..."
 
 #: standalone/draksambashare:181
 #, c-format
 msgid "Error Restarting/Reloading Samba server"
-msgstr ""
+msgstr "Erro ó Reiniciar/Recargar o servidor Samba"
 
 #: standalone/draksambashare:367
 #, c-format
 msgid "Add a Samba share"
-msgstr ""
+msgstr "Engadir un recurso de Samba"
 
 #: standalone/draksambashare:370
 #, c-format
 msgid "Goal of this wizard is to easily create a new Samba share."
 msgstr ""
+"A meta deste asistente é crear dunha maneira sinxela un novo recurso Samba."
 
 #: standalone/draksambashare:372
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the share:"
-msgstr "Nome do certificado"
+msgstr "Nome do recurso:"
 
 #: standalone/draksambashare:373 standalone/draksambashare:587
 #: standalone/draksambashare:768
@@ -21178,17 +21321,19 @@ msgid ""
 "Share with the same name already exist or share name empty, please choose "
 "another name."
 msgstr ""
+"Xa existe un recurso con este nome ou o nome está baleiro, escolla outro "
+"nome."
 
 #: standalone/draksambashare:383 standalone/draksambashare:389
 #, c-format
 msgid "Can't create the directory, please enter a correct path."
-msgstr ""
+msgstr "Non se puido crear o directorio, introduza unha ruta correcta."
 
 #: standalone/draksambashare:386 standalone/draksambashare:623
 #: standalone/draksambashare:790
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter a Comment for this share."
-msgstr "Introduza os parámetros wireless para esta tarxeta:"
+msgstr "Introduza un Comentario para este recurso."
 
 #: standalone/draksambashare:417
 #, c-format
@@ -21200,12 +21345,12 @@ msgstr ""
 #: standalone/draksambashare:433
 #, c-format
 msgid "pdf-gen - a PDF generator"
-msgstr ""
+msgstr "pdf-gen - un xerador de PDF"
 
 #: standalone/draksambashare:434
 #, c-format
 msgid "printers - all printers available"
-msgstr ""
+msgstr "printers - tódalas impresoras dispoñibles"
 
 #: standalone/draksambashare:438
 #, c-format
@@ -21221,12 +21366,12 @@ msgstr ""
 #: standalone/draksambashare:449
 #, c-format
 msgid "A PDF generator already exists."
-msgstr ""
+msgstr "Xa existe un xerador de PDF."
 
 #: standalone/draksambashare:473
 #, c-format
 msgid "Printers and print$ already exist."
-msgstr ""
+msgstr "Printers e print$ xa existen."
 
 #: standalone/draksambashare:524
 #, c-format
@@ -21241,12 +21386,12 @@ msgstr ""
 #: standalone/draksambashare:583
 #, c-format
 msgid "Printer share"
-msgstr ""
+msgstr "Recurso printer"
 
 #: standalone/draksambashare:586
 #, c-format
 msgid "Printer name:"
-msgstr ""
+msgstr "Nome da impresora:"
 
 #: standalone/draksambashare:592 standalone/draksambashare:773
 #, fuzzy, c-format
@@ -21261,7 +21406,7 @@ msgstr "Explorar"
 #: standalone/draksambashare:598
 #, c-format
 msgid "Advanced options"
-msgstr ""
+msgstr "Opcións avanzadas"
 
 #: standalone/draksambashare:600
 #, c-format
@@ -21276,7 +21421,7 @@ msgstr ""
 #: standalone/draksambashare:605
 #, c-format
 msgid "Create mode:"
-msgstr ""
+msgstr "Modo de creación:"
 
 #: standalone/draksambashare:609
 #, c-format
@@ -21286,12 +21431,12 @@ msgstr ""
 #: standalone/draksambashare:611
 #, c-format
 msgid "Print command:"
-msgstr ""
+msgstr "Comando de impresión:"
 
 #: standalone/draksambashare:612
 #, c-format
 msgid "LPQ command:"
-msgstr ""
+msgstr "Comando LPQ:"
 
 #: standalone/draksambashare:613
 #, c-format
@@ -21301,17 +21446,17 @@ msgstr ""
 #: standalone/draksambashare:629
 #, c-format
 msgid "create mode should be numeric. ie: 0755."
-msgstr ""
+msgstr "o modo de creación debe ser numérico. p.ex: 0755."
 
 #: standalone/draksambashare:691
 #, c-format
 msgid "DrakSamba entry"
-msgstr ""
+msgstr "entrada DrakSamba"
 
 #: standalone/draksambashare:696
 #, c-format
 msgid "Please add or select a Samba share to be able to modify it."
-msgstr ""
+msgstr "Engada ou seleccione un recurso Samba para podelo modificar."
 
 #: standalone/draksambashare:719
 #, fuzzy, c-format
@@ -21334,30 +21479,32 @@ msgid "Samba share directory"
 msgstr "Non existe tal directorio"
 
 #: standalone/draksambashare:766
-#, fuzzy, c-format
+#, c-format
 msgid "Share name:"
-msgstr "Nome de recurso compartido"
+msgstr "Nome de recurso:"
 
 #: standalone/draksambashare:772
 #, c-format
 msgid "Public:"
-msgstr ""
+msgstr "Público:"
 
 #: standalone/draksambashare:796
 #, c-format
 msgid ""
 "Create mask, create mode and directory mask should be numeric. ie: 0755."
 msgstr ""
+"A máscara de creación, o modo de creación e a máscara do directorio deben "
+"ser numéricos. p.ex: 0755."
 
 #: standalone/draksambashare:803
 #, c-format
 msgid "Please create this Samba user: %s"
-msgstr ""
+msgstr "Por favor, cree este usuario de Samba: %s"
 
 #: standalone/draksambashare:926
 #, c-format
 msgid "User information"
-msgstr ""
+msgstr "Información de usuario"
 
 #: standalone/draksambashare:928
 #, c-format
@@ -21372,17 +21519,17 @@ msgstr "Contrasinal:"
 #: standalone/draksambashare:1129
 #, c-format
 msgid "Failed to add Samba share."
-msgstr ""
+msgstr "Erro ó engadir o recurso Samba."
 
 #: standalone/draksambashare:1138
 #, c-format
 msgid "Failed to Modify Samba share."
-msgstr ""
+msgstr "Erro ó Modificar o recurso Samba."
 
 #: standalone/draksambashare:1147
 #, c-format
 msgid "Failed to remove a Samba share."
-msgstr ""
+msgstr "Erro ó eliminar o recurso Samba."
 
 #: standalone/draksambashare:1154
 #, c-format
@@ -21392,22 +21539,22 @@ msgstr ""
 #: standalone/draksambashare:1162
 #, c-format
 msgid "Add printers"
-msgstr ""
+msgstr "Engadir impresoras"
 
 #: standalone/draksambashare:1168
 #, c-format
 msgid "Failed to add printers."
-msgstr ""
+msgstr "Erro ó engadir impresoras."
 
 #: standalone/draksambashare:1177
 #, c-format
 msgid "Failed to Modify."
-msgstr ""
+msgstr "Erro ó Modificar."
 
 #: standalone/draksambashare:1186
 #, c-format
 msgid "Failed to remove."
-msgstr ""
+msgstr "Erro ó eliminar."
 
 #: standalone/draksambashare:1193
 #, c-format
@@ -21417,37 +21564,37 @@ msgstr "Impresoras"
 #: standalone/draksambashare:1201
 #, c-format
 msgid "Change password"
-msgstr ""
+msgstr "Cambiar contrasinal"
 
 #: standalone/draksambashare:1206
 #, c-format
 msgid "Failed to change user password."
-msgstr ""
+msgstr "Erro ó cambiar o contrasinal do usuario."
 
 #: standalone/draksambashare:1214
 #, c-format
 msgid "Failed to add user."
-msgstr ""
+msgstr "Erro ó engadir o usuario."
 
 #: standalone/draksambashare:1217
 #, c-format
 msgid "Delete user"
-msgstr ""
+msgstr "Eliminar usuario"
 
 #: standalone/draksambashare:1226
 #, c-format
 msgid "Failed to delete user."
-msgstr ""
+msgstr "Erro ó eliminar o usuario."
 
 #: standalone/draksambashare:1238
 #, c-format
 msgid "Samba Users"
-msgstr ""
+msgstr "Usuarios de Samba"
 
 #: standalone/draksambashare:1247
 #, c-format
 msgid "DrakSamba manage Samba shares"
-msgstr ""
+msgstr "DrakSamba administra os recursos Samba"
 
 #: standalone/draksec:49
 #, c-format
@@ -21619,22 +21766,22 @@ msgstr ""
 #: standalone/draksplash:30
 #, c-format
 msgid "x coordinate of text box"
-msgstr ""
+msgstr "coordenada x da caixa de texto"
 
 #: standalone/draksplash:31
 #, c-format
 msgid "y coordinate of text box"
-msgstr ""
+msgstr "coordenada y da caixa de texto"
 
 #: standalone/draksplash:32
 #, c-format
 msgid "text box width"
-msgstr ""
+msgstr "ancho da caixa de texto"
 
 #: standalone/draksplash:33
 #, c-format
 msgid "text box height"
-msgstr ""
+msgstr "altura da caixa de texto"
 
 #: standalone/draksplash:34
 #, c-format
@@ -21663,57 +21810,57 @@ msgstr "a altura da barra de progreso"
 #: standalone/draksplash:38
 #, c-format
 msgid "x coordinate of the text"
-msgstr ""
+msgstr "coordenada x do texto"
 
 #: standalone/draksplash:39
 #, c-format
 msgid "y coordinate of the text"
-msgstr ""
+msgstr "coordenada y do texto"
 
 #: standalone/draksplash:40
 #, c-format
 msgid "text box transparency"
-msgstr ""
+msgstr "transparencia da caixa de texto"
 
 #: standalone/draksplash:41
 #, c-format
 msgid "progress box transparency"
-msgstr ""
+msgstr "transparencia da barra de progreso"
 
 #: standalone/draksplash:42
 #, c-format
 msgid "text size"
-msgstr ""
+msgstr "tamaño do texto"
 
 #: standalone/draksplash:59
 #, c-format
 msgid "Choose progress bar color 1"
-msgstr ""
+msgstr "Escolla a cor 1 da barra de progreso"
 
 #: standalone/draksplash:60
 #, c-format
 msgid "Choose progress bar color 2"
-msgstr ""
+msgstr "Escolla a cor 2 da barra de progreso"
 
 #: standalone/draksplash:61
 #, c-format
 msgid "Choose progress bar background"
-msgstr ""
+msgstr "Elixa o fondo da barra de progreso"
 
 #: standalone/draksplash:62
 #, c-format
 msgid "Gradient type"
-msgstr ""
+msgstr "Tipo de gradiente"
 
 #: standalone/draksplash:63
 #, c-format
 msgid "Choose text color"
-msgstr ""
+msgstr "Elixa a cor do texto"
 
 #: standalone/draksplash:65 standalone/draksplash:72
 #, c-format
 msgid "Choose picture"
-msgstr ""
+msgstr "Elixa a imaxe"
 
 #: standalone/draksplash:66
 #, c-format
@@ -21738,7 +21885,7 @@ msgstr "Cor do fondo"
 #: standalone/draksplash:73
 #, c-format
 msgid "Verbose bootsplash"
-msgstr ""
+msgstr "bootsplash detallado"
 
 #: standalone/draksplash:75
 #, c-format
@@ -21768,12 +21915,12 @@ msgstr "Garda-lo tema"
 #: standalone/draksplash:153
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr ""
+msgstr "gardando o tema de Bootsplash..."
 
 #: standalone/draksplash:162
 #, c-format
 msgid "Unable to load image file %s"
-msgstr ""
+msgstr "Non foi posible cargar o ficheiro de imaxes %s"
 
 #: standalone/draksplash:173
 #, c-format
@@ -21783,7 +21930,7 @@ msgstr "Escolle-la imaxe"
 #: standalone/draksplash:188
 #, c-format
 msgid "Color selection"
-msgstr ""
+msgstr "Selección de cores"
 
 #: standalone/drakups:74
 #, c-format
@@ -23201,9 +23348,9 @@ msgid "Mode"
 msgstr "Modo"
 
 #: standalone/drakvpn:1129
-#, fuzzy, c-format
+#, c-format
 msgid "tunnel"
-msgstr "Cancelar"
+msgstr "túnel"
 
 #: standalone/drakvpn:1129
 #, c-format
@@ -23689,7 +23836,7 @@ msgstr ""
 #: standalone/harddrake2:77
 #, c-format
 msgid "Is FPU present"
-msgstr ""
+msgstr "Ten FPU"
 
 #: standalone/harddrake2:77
 #, c-format
@@ -24505,7 +24652,7 @@ msgstr "Monitorizar a Rede"
 #: standalone/net_applet:60
 #, c-format
 msgid "Manage wireless networks"
-msgstr ""
+msgstr "Administrar redes sen fíos"
 
 #: standalone/net_applet:61
 #, c-format
@@ -24538,19 +24685,19 @@ msgid "Always launch on startup"
 msgstr "Lanzar sempre ó inicia-lo sistema"
 
 #: standalone/net_applet:339
-#, fuzzy, c-format
+#, c-format
 msgid "Wireless networks"
-msgstr "Conexión Wireless"
+msgstr "Redes sen fíos"
 
 #: standalone/net_applet:424
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive Firewall: intrusion detected"
-msgstr "¡Detectouse unha configuración de cortalumes!"
+msgstr "Cortalumes Interactivo: detectouse unha intrusión"
 
 #: standalone/net_applet:437
-#, fuzzy, c-format
+#, c-format
 msgid "What do you want to do with this attacker?"
-msgstr "¿Queres rematar o xogo?"
+msgstr "Que desexa facer con este atacante?"
 
 #: standalone/net_applet:440
 #, c-format
@@ -24791,9 +24938,9 @@ msgid "/_Configure CUPS"
 msgstr "/_Configurar CUPS"
 
 #: standalone/printerdrake:171
-#, fuzzy, c-format
+#, c-format
 msgid "/Configure _Auto Administration"
-msgstr "Administración Remota"
+msgstr "/Configurar _Administración Automática"
 
 #: standalone/printerdrake:194
 #, c-format
@@ -25546,6 +25693,9 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Fallo ó instalar"
 
+#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
+#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
+
 #~ msgid ""
 #~ "\n"
 #~ "Please check all options that you need.\n"
@@ -25566,23 +25716,9 @@ msgstr "Fallo ó instalar"
 #~ "Con esta opción poderá restaurar calquera versión do\n"
 #~ "seu directorio /etc."
 
-#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
-#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Dvorak (Esperanto)"
-#~ msgstr "Dvorak (Noruegués)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian AZERTY (old)"
-#~ msgstr "Lituano AZERTY (antigo)"
-
-#~ msgid ""
-#~ "_: keyboard\n"
-#~ "Lithuanian \"phonetic\" QWERTY"
-#~ msgstr "Lituano \"fonético\" QWERTY"
+#, fuzzy
+#~ msgid "Local Area Network setings"
+#~ msgstr "Enderezo da Rede Local"
 
 #~ msgid ""
 #~ "Winbind allows the system to retrieve information and authenticate users "
