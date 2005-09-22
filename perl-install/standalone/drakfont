@@ -427,7 +427,7 @@ sub remove_fonts() {
 }
 
 sub license_msg() {
-    print N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") . "\n";
+    print N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\nYou can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") . "\n";
 }
 
 sub backend_mod() {
@@ -554,7 +554,7 @@ sub appli_choice() {
     dialog(N("Options"),
 	   [
 	    0, N("Choose the applications that will support the fonts:"),
-	    0, Gtk2::WrappedLabel->new(N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\nYou can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.")),
+	    0, Gtk2::WrappedLabel->new(license_msg()),
 	    (map {
 	      my ($label, $ref) = @$_;
 	      (0, gtkpack_(Gtk2::HBox->new, 
