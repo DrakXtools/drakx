@@ -391,9 +391,9 @@ No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
 
     #- NB: if the LV doesn't exist, lv_nb_pvs returns 0
-    die N("You can not use a LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
+    die N("You can not use the LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($part) && lvm::lv_nb_pvs($part) > 1;
-    cdie N("You've selected a LVM Logical Volume as root (/).
+    cdie N("You've selected the LVM Logical Volume as root (/).
 The bootloader is not able to handle this when the volume spans physical volumes.
 You should create a /boot partition first") if $mntpoint eq "/" && isLVM($part) && lvm::lv_nb_pvs($part) != 1 && !fs::get::has_mntpoint("/boot", $all_hds);
 

@@ -175,7 +175,7 @@ sub lv_create {
 
     if ($lv->{mntpoint} eq '/boot' && lv_nb_pvs($lv) > 1) {
 	lvm_cmd_or_die('lvremove', '-f', "/dev/$lv->{device}");
-	die N("The bootloader can't handle /boot on multiple physicals volumes");
+	die N("The bootloader can't handle /boot on multiple physical volumes");
     }
 
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
