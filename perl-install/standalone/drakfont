@@ -483,6 +483,9 @@ sub interactive_mode() {
                  if_(!$::isEmbedded, 0, Gtk2::Banner->new("drakfont", N("DrakFont"))), 
                  0, Gtk2::WrappedLabel->new(N("Font List")),
                  1, Gtk2::FontSelection->new,
+                 0, gtkadd(create_hbox(), 
+                             gtksignal_connect(Gtk2::Button->new(N("Get Windows Fonts")), clicked => sub { $windows = 1; import_status(); $windows = 0 }),
+                         ),
                  0, create_okcancel(my $oc = {
                                      ok_clicked => sub { Gtk2->main_quit },
                                     },
@@ -491,7 +494,6 @@ sub interactive_mode() {
                                     [ N("Options"),   \&appli_choice, 1 ],
                                     [ N("Uninstall"), \&uninstall, 1 ],
                                     [ N("Import"),    \&advanced_install, 1 ],
-                                    [ N("Get Windows Fonts"), sub { $windows = 1; import_status(); $windows = 0 }, 1 ],
                                    ),
                 ),
           );
