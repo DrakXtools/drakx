@@ -86,7 +86,7 @@ sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
     my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
-      sanitize_ver("$base-$kernel->{version}") : 
+      sanitize_ver($base, $kernel) : 
         $kernel->{ext} ? "$base-$kernel->{ext}" : $base;
 }
 
@@ -728,29 +728,30 @@ sub get_kernel_labels {
     @kernels_str;
 }
 
-# sanitize_ver: long function when it could be shorter but we are sure
-#		to catch everything and can be readable if we want to
-#		add new scheme name.
-# DUPLICATED from /usr/share/loader/common.pm
 sub sanitize_ver {
-    my ($string) = @_;
+    my ($name, $kernel_str) = @_;
 
-    my ($name, $main_version, undef, $extraversion, $rest) = 
-      $string =~ m!^(.*?-)(\d+(?:\.\d+)*)(-((?:pre|rc)\d+))?(.*)$!;
+    $name = '' if $name eq 'linux';
 
-    if (my ($mdkver, $cpu, $nproc, $mem) = $rest =~ m|-(.+)-(.+)-(.+)-(.+)|) {
-	$rest = "$cpu$nproc$mem-$mdkver";
+    my ($v, $ext) = ($kernel_str->{version_no_ext}, $kernel_str->{ext});
+    if ($v =~ s/-\d+\.mm\././) {
+	$name = join(' ', grep { $_ } $name, 'multimedia');
     }
-    $name = '' if $name eq 'linux-';
 
-    my $return = "$name$main_version$extraversion$rest";
+    $v =~ s!mdk$!!;
+    $v =~ s!-0\.(pre|rc)(\d+)\.!$1$2-!;
 
-    $return =~ s|\.||g;
-    $return =~ s|mdk||;
-    $return =~ s|64GB|64G|;
-    $return =~ s|4GB|4G|;
-    $return =~ s|secure|sec|;
-    $return =~ s|enterprise|ent|;
+    my $short_ext = {
+	'i586-up-1GB' => 'i586',
+	'i686-up-4GB' => '4GB',
+    }->{$ext};
+    $ext = $short_ext if $short_ext;
+
+    my $return = join(' ', grep { $_ } $name, $ext, $v);
+
+    length($return) < 30 or $return =~ s!secure!sec!;
+    length($return) < 30 or $return =~ s!enterprise!ent!;
+    length($return) < 30 or $return =~ s!multimedia!mm!;
 
     $return;
 }
@@ -1087,7 +1088,10 @@ sub when_config_changed_cromwell {
 }
 
 sub make_label_lilo_compatible {
-    my ($label) = @_; 
+    my ($label) = @_;
+
+    length($label) < 31 or $label =~ s/\.//g;
+
     $label = substr($label, 0, 31); #- lilo does not handle more than 31 char long labels
     $label =~ s/ /_/g; #- lilo does not support blank character in image names, labels or aliases
     qq("$label");
