@@ -26,6 +26,7 @@ use strict;
 use interactive;
 use common;
 use detect_devices;
+use POSIX;
 
 # Backend Options.
 # make this global for status screen      
@@ -90,6 +91,7 @@ my %cd_devices;
 my $std_device;
 my @tape_devices;
 my $in;
+my @cron_entries;
 
 # config. FILES -> Default PATH  & Global variables. 
 my @user_list;
@@ -113,7 +115,9 @@ my @no_devices = translate(N_("No device found"));
 my %help;
 my %conf;
 my $time_string = "* * * * *";
-my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup --daemon > /dev/null 2>&1";
+my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup";
+my $profile_string;
+my $redir_string = "--daemon > /dev/null 2>&1";
 my $ignore_files_list;
 my @list_of_rpm_to_install;
 my @other_files;
@@ -142,6 +146,7 @@ my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 
 foreach (@ARGV) {
     /--default/ and backend_mode();
+    /--profile/ and set_profile($_);
     /--daemon/ and daemon_mode();
     /--show-conf/ and show_conf();
 	/--cd-info/ and get_cd_info(), exit(0);
@@ -176,6 +181,16 @@ sub show_conf() {
 sub backend_mode() {
     build_backup_files();
     exit(0);
+}
+
+sub set_profile {
+	my ($argn) = @_;
+	my $profile = $ARGV[$argn + 1];
+	die "Usage: --profile <filename>...\n" if $profile =~ /^--/;
+	$profile .= ".conf" if $profile !~ /.conf/;
+	$cfg_file = $cfg_dir . $profile;
+	die "Profile $cfg_file not found...\n" if !-e $cfg_file;
+	return;  
 }
 
 sub daemon_mode() {
@@ -360,19 +375,14 @@ sub read_cron_files() {
     	!$daemon_found and $backup_daemon = 0;
 	} else {
 		$custom_cron = 1;
-		my $tmpcron = "$ENV{HOME}/tmp/crontab.tmp";
-		$tmpcron = `crontab -l | tail +4`;
-		my @cronline = grep { /drakbackup/ } $tmpcron;
-		if (@cronline) {
-			@cronline = split(" ", $cronline[0]);
-			my @crondetail = splice(@cronline, 0, 5);			
-			$time_string = join(" ", @crondetail);
-		}
-	} 
+		@cron_entries = `crontab -l`;
+		chomp @cron_entries;
+	}
 }
 
 sub save_cron_files() {
-	my $tmpcron = "$ENV{HOME}/tmp/crontab.tmp";
+	my $tmpcron = $ENV{HOME} . tmpnam() . ".tmp";
+	my @cron_output;
 
 	if ($nonroot_user && $conf{DAEMON_TIME_SPACE} ne "custom" && $conf{DAEMON_TIME_SPACE} ne '' && $backup_daemon)  {
 		show_warning("w", N("Interval cron not available as non-root"));
@@ -389,22 +399,17 @@ sub save_cron_files() {
 		output_p("/etc/cron.$conf{DAEMON_TIME_SPACE}/drakbackup",  @cron_file);
 		system("chmod +x /etc/cron.$conf{DAEMON_TIME_SPACE}/drakbackup");
 	}
+
 	if ($conf{DAEMON_TIME_SPACE} eq "custom" || !$backup_daemon) {
-		my $newdetail = $backup_daemon && join(" ", $time_string, $exec_string, "\n");
-		system("crontab -l | tail +4 > $tmpcron");
-		my @cronlines = cat_($tmpcron);
-		my $index = 0;
-		foreach (@cronlines) {
-			if (/$exec_string/) {
-				splice(@cronlines, $index, 1);
-			}
-			$index++;
+		foreach (@cron_entries) { 
+			next if /^#/;
+			push @cron_output, $_ . "\n";
 		}
-		push(@cronlines, $newdetail) if $backup_daemon;
-		output($tmpcron, @cronlines);
+		output($tmpcron, @cron_output);
 		system("crontab $tmpcron");
 		unlink($tmpcron);
 	}
+
 }
 
 sub upgrade_conf_file() {
@@ -1347,26 +1352,26 @@ sub filedialog_generic {
 	#- a title prompt, the widget to get updated
 	my ($prompt, $widget) = @_; 
 	
-    my $file_dialog = Gtk2::FileChooserDialog->new($prompt, $my_win->{real_window}, 'select_folder', N("Cancel") => 'cancel', N("Ok") => 'ok');
-    $file_dialog->show;
-    while (my $answer = $file_dialog->run) {
-        if (member($answer, qw(cancel delete-event))) {
-            $file_dialog->destroy;
-            return;
-        } elsif ($answer eq 'ok') {
-		if (defined($widget)) {
-			$$widget->set_text($file_dialog->get_filename);
-		} else {
-    		my $file_name = $file_dialog->get_filename;
-			#- catch files and dirs with spaces
-			$file_name = '"' . $file_name . '"' if $file_name =~ / /;
-    		if (!member($file_name, @other_files)) {
-				push(@other_files, $file_name);
-				$list_model->append_set(0, $file_name);
-    		}
-		}
-		$file_dialog->destroy;
-		return;
+	my $file_dialog = Gtk2::FileChooserDialog->new($prompt, $my_win->{real_window}, 'select-folder', N("Cancel") => 'cancel', N("Ok") => 'ok');
+	$file_dialog->show;
+	while (my $answer = $file_dialog->run) {
+		if (member($answer, qw(cancel delete-event))) {
+			$file_dialog->destroy;
+			return;
+		} elsif ($answer eq 'ok') {
+			if (defined($widget)) {
+				$$widget->set_text($file_dialog->get_filename);
+			} else {
+				my $file_name = $file_dialog->get_filename;
+				#- catch files and dirs with spaces
+				$file_name = '"' . $file_name . '"' if $file_name =~ / /;
+				if (!member($file_name, @other_files)) {
+					push(@other_files, $file_name);
+					$list_model->append_set(0, $file_name);
+				}
+			}
+			$file_dialog->destroy;
+			return;
         }
     }
 }
@@ -2057,15 +2062,15 @@ sub advanced_when() {
 	my $allow_custom = $backup_daemon && $custom_cron; 
     my $combo_when_space = Gtk2::ComboBox->new_with_strings([ "", N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom") ]);
     my %trans = (N("hourly") => 'hourly',
-		 N("daily") => 'daily',
-		 N("weekly") => 'weekly',
-		 N("monthly") => 'monthly',
-		 N("custom") => 'custom');
+		N("daily") => 'daily',
+		N("weekly") => 'weekly',
+		N("monthly") => 'monthly',
+		N("custom") => 'custom');
     my %trans2 = ('hourly' => N("hourly"),
-		  'daily' => N("daily"),
-		  'weekly' => N("weekly"),
-		  'monthly' => N("monthly"),
-		  'custom' => N("custom"));
+		'daily' => N("daily"),
+		'weekly' => N("weekly"),
+		'monthly' => N("monthly"),
+		'custom' => N("custom"));
 	set_help_tip($combo_when_space, 'when_space');
 
 	#- custom setup - let user specify month, day of month, day of week, hour, minute
@@ -2076,13 +2081,57 @@ sub advanced_when() {
 	my $combo_day_when = Gtk2::ComboBox->new_with_strings([ "*", (1..31) ]);
 	my @weekdays = ("*", N("Sunday"), N("Monday"), N("Tuesday"), 
 		N("Wednesday"), N("Thursday"), N("Friday"), N("Saturday")); 
-	my $combo_weekday_when = Gtk2::ComboBox->new_with_strings(\@weekdays);
-	my $combo_hour_when = Gtk2::ComboBox->new_text;
-	$combo_hour_when->set_popdown_strings("*", (0..23));
+	my $combo_weekday_start = Gtk2::ComboBox->new_with_strings(\@weekdays);
+	my $combo_weekday_end = Gtk2::ComboBox->new_with_strings(\@weekdays);
+	my $combo_hour_when = Gtk2::ComboBox->new_with_strings([ "*", (0..23) ]);
 	my $combo_minute_when = Gtk2::ComboBox->new_with_strings([ "*", (0..59) ]);
+	my @profiles = glob_("$cfg_dir/*.conf");
+	@profiles = map { basename($_) } @profiles;
+	@profiles = difference2(\@profiles, [ ("drakbackup.conf") ]);
+	unshift(@profiles, N("Default"));
+	my $combo_profile = Gtk2::ComboBox->new_with_strings(\@profiles);
 	
+	my $cron_model = Gtk2::ListStore->new("Glib::String");
+	my $list_cron = Gtk2::TreeView->new_with_model($cron_model);
+	$list_cron->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$list_cron->set_headers_visible(0);	
+	my $cron_iter;
+	my $cron_entry;
+
+	foreach (@cron_entries) {
+		$cron_model->append_set(0, $_) if !/^#/;	
+	}
+	
+	$list_cron->get_selection->signal_connect(changed => sub {
+    	my ($model, $iter) = $_[0]->get_selected;
+    	$model && $iter or return;
+    	$cron_entry = $model->get($iter, 0);
+		$cron_iter = $iter;
+	});
+	    
+	my $del_button  = Gtk2::Button->new(N("Delete cron entry"));
+	my $add_button  = Gtk2::Button->new(N("Add cron entry"));
+
+	$del_button->signal_connect(clicked => sub { 
+		$cron_model->remove($cron_iter) if $cron_iter; 
+		my $iindex = 0; 
+		foreach (@cron_entries) {
+			if ($_ eq $cron_entry) {
+				splice(@cron_entries, $iindex, 1); 
+				last;
+			}
+			$iindex++;
+		}
+	});
+
 	my $entry_crontab = Gtk2::Entry->new;
 	gtkset_editable($entry_crontab, 0);
+
+	$add_button->signal_connect(clicked => sub {
+		my $entry = $entry_crontab->get_text;
+		$cron_model->append_set(0, $entry);
+		push @cron_entries, $entry;
+	});
 
 	my @time_list = split(" ", $time_string);
 	$combo_minute_when->entry->set_text($time_list[0]);
@@ -2093,17 +2142,29 @@ sub advanced_when() {
 	} else {
 		$combo_month_when->entry->set_text($months[$time_list[3]]);
 	}
+	my $start;
+	my $end = "*";
 	if ($time_list[4] =~ /\*/) {
-		$combo_weekday_when->entry->set_text($time_list[4]);
+		$start = "*";
 	} else {
-		$combo_weekday_when->entry->set_text($weekdays[$time_list[4] + 1]);
+		if (length($time_list[4]) > 1) {
+			my @span = split("-", $time_list[4]);
+			$start = $weekdays[$span[0] + 1];
+			$end = $weekdays[$span[1] + 1];
+		} else {
+			$start = $weekdays[$time_list[4] + 1];
+		}
 	}
-	
+	$combo_weekday_start->entry->set_text($start);
+	$combo_weekday_end->entry->set_text($end);
+
+	$combo_profile->entry->set_text(substr($profile_string, 10)) if $profile_string ne "";
+
 	#- drop down list of possible media - default to config value
-    my $entry_media_type = Gtk2::ComboBox->new_with_strings([ sort(@net_methods, @media_types) ], $conf{DAEMON_MEDIA});
+    my $combo_media_type = Gtk2::ComboBox->new_with_strings([ sort(@net_methods, @media_types) ], $conf{DAEMON_MEDIA});
 	
     gtkpack($advanced_box,
-		$box_when = gtkpack_(Gtk2::VBox->new(0, 10),
+		$box_when = gtkpack_(Gtk2::VBox->new(0, 5),
 			0, gtkpack_(Gtk2::HBox->new(0,10),
 				1, Gtk2::HBox->new(0,10),
 				1, gtkcreate_img("ic82-when-40"),
@@ -2116,43 +2177,53 @@ sub advanced_when() {
 				0, gtkset_sensitive($combo_when_space, $backup_daemon),
 			),
 			0, Gtk2::HSeparator->new,
+			0, gtkset_sensitive($entry_crontab, $allow_custom),
 			0, gtkpack_(Gtk2::HBox->new(0,10),
-				0, gtkset_sensitive(Gtk2::Label->new(N("Custom setup/crontab entry:")), $allow_custom),
-				1, gtkset_sensitive($entry_crontab, $allow_custom),
-			),
-			0, gtkpack_(Gtk2::HBox->new(0,10),
-				1, gtkpack_(Gtk2::VBox->new(0,10),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
 					0, gtkset_sensitive(Gtk2::Label->new(N("Minute")), $allow_custom),
 					0, gtkset_sensitive($combo_minute_when, $allow_custom),
 				),
-				1, gtkpack_(Gtk2::VBox->new(0,10),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
 					0, gtkset_sensitive(Gtk2::Label->new(N("Hour")), $allow_custom),
 					0, gtkset_sensitive($combo_hour_when, $allow_custom),
 				),
-				1, gtkpack_(Gtk2::VBox->new(0,10),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
 					0, gtkset_sensitive(Gtk2::Label->new(N("Day")), $allow_custom),
 					0, gtkset_sensitive($combo_day_when, $allow_custom),
 				),
-				1, gtkpack_(Gtk2::VBox->new(0,10),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
 					0, gtkset_sensitive(Gtk2::Label->new(N("Month")), $allow_custom),			
 					0, gtkset_sensitive($combo_month_when, $allow_custom),
 				),
-				1, gtkpack_(Gtk2::VBox->new(0,10),
-					0, gtkset_sensitive(Gtk2::Label->new(N("Weekday")), $allow_custom),
-					0, gtkset_sensitive($combo_weekday_when, $allow_custom),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
+					0, gtkset_sensitive(Gtk2::Label->new(N("Weekday (start)")), $allow_custom),
+					0, gtkset_sensitive($combo_weekday_start, $allow_custom),
 				),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
+					0, gtkset_sensitive(Gtk2::Label->new(N("Weekday (end)")), $allow_custom),
+					0, gtkset_sensitive($combo_weekday_end, $allow_custom),
+				),
+				1, gtkpack_(Gtk2::VBox->new(0,5),
+					0, gtkset_sensitive(Gtk2::Label->new(N("Profile")), $allow_custom),
+					0, gtkset_sensitive($combo_profile, $allow_custom),
+				),
+			),
+			0, gtkpack_(Gtk2::HBox->new(0,10),
+				1, gtkset_sensitive($del_button, $allow_custom),
+				1, gtkset_sensitive(Gtk2::Label->new(N("Current crontab:")), $allow_custom),
+				1, gtkset_sensitive($add_button, $allow_custom),
+			),
+			1, gtkpack_(Gtk2::HBox->new(0,4),
+				1, create_scrolled_window(gtkset_sensitive($list_cron, $allow_custom)),
 			),
 			0, Gtk2::HSeparator->new,
 			0, gtkpack_(Gtk2::HBox->new(0,10),
 				0, gtkset_sensitive(Gtk2::Label->new(N("Please choose the media for backup.")), $backup_daemon),
 				1, Gtk2::HBox->new(0,10),
-				0, gtkpack_(Gtk2::VBox->new(0,10),
-					0, gtkset_sensitive($entry_media_type, $backup_daemon),
-				),
+				0, gtkset_sensitive($combo_media_type, $backup_daemon),
 			),
 			0, gtkset_sensitive(Gtk2::Label->new(N("Please be sure that the cron daemon is included in your services.")), $backup_daemon),
 			0, gtkset_sensitive(Gtk2::Label->new(N("If your machine is not on all the time, you might want to install anacron.")), $backup_daemon), 
-			0, gtkset_sensitive(Gtk2::Label->new(N("Note that currently all 'net' media also use the hard drive.")),  $backup_daemon),
 		),
 	);
 
@@ -2169,15 +2240,31 @@ sub advanced_when() {
 		advanced_when();		
 	});
 	if ($custom_cron) {
-		$entry_crontab->set_text("$time_string $exec_string");
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
 	}
 	
 	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text, 0) });
 	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_text, 1) });
 	$combo_day_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_day_when->get_text, 2) });	
 	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_active, 3) });
-	$combo_weekday_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_weekday_when->get_active - 1, 4) });	
-	$entry_media_type->entry->signal_connect('changed', sub { $conf{DAEMON_MEDIA} = $entry_media_type->entry->get_text });
+	$combo_weekday_start->entry->signal_connect('changed', sub {
+		my $start = $combo_weekday_start->get_active - 1;
+		my $end = $combo_weekday_end->get_active - 1;
+		$start = $start . "-" . $end if $end > -1 && $start < $end; 
+		combo_to_cron_string($start, 4); 
+	});
+	$combo_weekday_end->entry->signal_connect('changed', sub {
+		my $start = $combo_weekday_start->get_active - 1;
+		my $end = $combo_weekday_end->get_active - 1;
+		$start = $start . "-" . $end if $start > -1 && $start < $end; 
+		combo_to_cron_string($start, 4);   
+	});
+	$combo_profile->entry->signal_connect('changed', sub {
+		$profile_string = "--profile " . $combo_profile->get_text;
+		$profile_string = "" if $combo_profile->get_active == 0;
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
+	});	
+	$combo_media_type->entry->signal_connect('changed', sub { $conf{DAEMON_MEDIA} = $combo_media_type->entry->get_text });
     fonction_env(\$box_when, \&advanced_when, \&advanced_box);
     $up_box->show_all;
 }
@@ -4349,6 +4436,55 @@ sub interactive_mode_box {
     $up_box->show_all;
 }
 
+sub profile_chooser {
+	my ($mode, $prompt) = @_;
+	my $file_dialog = Gtk2::FileChooserDialog->new($prompt, $my_win->{real_window}, $mode, N("Cancel") => 'cancel', N("Ok") => 'ok');
+	my $filter = Gtk2::FileFilter->new;
+	$filter->add_pattern("*.conf");
+	$file_dialog->set_current_folder($cfg_dir);
+	$file_dialog->add_filter($filter);
+	$file_dialog->set('do-overwrite-confirmation', 1);
+	$file_dialog->show;
+	while (my $answer = $file_dialog->run) {
+		if (member($answer, qw(cancel delete-event))) {
+			$file_dialog->destroy;
+			return;
+		} elsif ($answer eq 'ok') {
+			my $file_name = $file_dialog->get_filename;
+			$file_dialog->destroy;
+			return $file_name;
+		}
+	}
+}
+
+sub load_profile() {
+	my $profile = profile_chooser('open', N("Load profile"));
+	if ($profile =~ /.conf$/) {
+		$cfg_file = $profile;
+		read_conf_file();
+		interactive_mode_box();	
+	}
+}
+
+sub save_profile() {
+	my $profile = profile_chooser('save', N("Save profile as..."));
+	if ($profile =~ /.conf$/) {
+		$cfg_file = $profile;
+		save_conf_file();	
+	}
+}
+
+sub get_items() {
+	my @items = (
+		[ "/_File", undef, undef, undef, '<Branch>', ],
+		[ "/_File/_Load profile", undef, \&load_profile, 1, '<StockItem>', 'gtk-execute' ],
+		[ "/_File/_Save profile as...", undef, \&save_profile, 1, '<StockItem>', 'gtk-execute' ],	
+		[ "/_File/_Exit", undef, sub { ugtk2->exit(0) }, 1, '<StockItem>', 'gtk-quit' ],
+		[ "/_Help/_Help", undef, \&adv_help, 1, '<StockItem>', 'gtk-help' ],
+	);
+	return @items;
+}
+
 sub interactive_mode() {
     $interactive = 1;
 
@@ -4360,12 +4496,17 @@ sub interactive_mode() {
     $window1 = $my_win->{window};
     $my_win->{rwindow}->set_size_request(600,440);
     $my_win->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
+	my @items = get_items();
+	my $factory = Gtk2::ItemFactory->new('Gtk2::MenuBar', '<main>', undef);
+	$factory->create_items('menu', @items);
+	my $menu = $factory->get_widget('<main>');
     read_conf_file();     
 
     gtkadd($window1,
 		gtkpack(Gtk2::VBox->new(0,0),
 			gtkpack($up_box = Gtk2::VBox->new(0, 5), 
 				gtkpack_(Gtk2::VBox->new(0, 3),
+					0, $menu,
 					1, gtkpack_(Gtk2::HBox->new(0, 3),
 					    1, $advanced_box = Gtk2::HBox->new(0, 15),	
 					),
