@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-19 21:17+0800\n"
-"PO-Revision-Date: 2005-09-23 21:20+0100\n"
+"PO-Revision-Date: 2005-09-25 04:44+0100\n"
 "Last-Translator: José Melo <mmodme00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -880,10 +880,10 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
-"O LILO quer atribuir um novo ID de Volume ao drive %s.  No entanto,é\n"
-"um erro fatal do Windows se mudar o ID de Volume de um Windows NT,\n"
-"2000, ou disco de arranque XP.\n"
-"Esta precaução não se aplica ao Windows 95 ou 98. ou aos discos NT.\n"
+"O LILO quer atribuir um novo ID de Volume ao dispositivo %s.  No entanto,\n"
+"se mudar o ID de Volume do Windows NT, 2000, ou do disco de arranque XP,\n"
+"pode causar um erro fatal no Windows. Esta precaução não se aplica ao\n"
+"Windows 95 ou 98. ou aos discos NT.\n"
 "\n"
 "Atribuir um novo ID de Volume?"
 
@@ -923,7 +923,7 @@ msgstr ""
 "Isto implica que já tem um carregador de arranque no disco que arranca\n"
 "(ex: System Commander).\n"
 "\n"
-"Em que drive está a arrancar?"
+"Em que dispositivo está a arrancar?"
 
 #: any.pm:231 help.pm:739
 #, c-format
@@ -3585,7 +3585,7 @@ msgstr "Por favor aguarde... A aplicar a configuração"
 #: harddrake/sound.pm:228
 #, c-format
 msgid "No alternative driver"
-msgstr "Nenhum drive alternativo"
+msgstr "Nenhum controlador alternativo"
 
 #: harddrake/sound.pm:229
 #, c-format
@@ -3593,8 +3593,8 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Não há nenhum drive alternativo OSS/ALSA conhecido para a sua placa de som (%"
-"s) que actualmente use \"%s\""
+"Não há nenhum controlador alternativo OSS/ALSA conhecido para a sua placa "
+"de som (%s) que actualmente usa \"%s\""
 
 #: harddrake/sound.pm:235
 #, c-format
@@ -3607,8 +3607,8 @@ msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
-"Aqui pode seleccionar um drive alternativo (seja OSS ou ALSA) para a sua "
-"placa de som (%s)"
+"Aqui pode seleccionar um controlador alternativo (seja OSS ou ALSA) para "
+"a sua placa de som (%s)"
 
 #. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
@@ -3623,8 +3623,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"A sua placa actualmente usa o drive %s\"%s\" (o drive predefinido para a sua "
-"placa é \"%s\")"
+"A sua placa actualmente usa o controlador %s\"%s\" (o controlador "
+"predefinido para a sua placa é o \"%s\")"
 
 #: harddrake/sound.pm:244
 #, c-format
@@ -3648,7 +3648,7 @@ msgstr ""
 "OSS (Open Sound System) era o primeiro som API. É um som API de um OS "
 "independente (está disponivel na maior parte dos sistemas Unix) mas é um API "
 "muito básico\n"
-"e limitado. Ainda mais, todos os drives OSS reinventam a roda.\n"
+"e limitado. Ainda mais, todos os controladores OSS reinventaram a roda.\n"
 "\n"
 "ALSA (Advanced Linux Sound Architecture) é uma arquitectura modularizada\n"
 "que suporta um grande numero de placas ISA, USB e PCI.\n"
@@ -3688,7 +3688,7 @@ msgstr ""
 #: harddrake/sound.pm:279
 #, c-format
 msgid "No open source driver"
-msgstr "Nenhum drive open source"
+msgstr "Nenhum controlador open source"
 
 #: harddrake/sound.pm:280
 #, c-format
@@ -3696,18 +3696,18 @@ msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Não há nenhum drive livre para a sua placa de som (%s), mas existe um drive "
-"apropriado em \"%s\"."
+"Não há nenhum controlador grátis para a sua placa de som (%s), mas "
+"existe um controlador apropriado em \"%s\"."
 
 #: harddrake/sound.pm:283
 #, c-format
 msgid "No known driver"
-msgstr "Nenhum drive conhecido"
+msgstr "Nenhum controlador conhecido"
 
 #: harddrake/sound.pm:284
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr "Não há nenhum drive conhecido para a sua placa de som (%s)"
+msgstr "Não há nenhum controlador conhecido para a sua placa de som (%s)"
 
 #: harddrake/sound.pm:288
 #, c-format
@@ -3717,7 +3717,7 @@ msgstr "Controlador desconhecido"
 #: harddrake/sound.pm:289
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Erro: o drive \"%s\" para a sua placa de som não está listado"
+msgstr "Erro: o controlador \"%s\" para a sua placa de som não está listado"
 
 #: harddrake/sound.pm:303
 #, c-format
@@ -3748,17 +3748,17 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
-"O teste clássico a fazer em caso de problemas de som são os comandos:\n"
+"O teste clássico a fazer em caso de problemas de som é:\n"
 "\n"
 "\n"
-"- \"lspcidrake -v | fgrep AUDIO\" diz-lhe que drive a sua placa usa\n"
-"por defeito\n"
+"- \"lspcidrake -v | fgrep AUDIO\" diz-lhe que controlador a sua placa usa\n"
+"por omissão\n"
 "\n"
-"- \"grep sound-slot /etc/modules.conf\" diz-lhe que drive actualmente\n"
-"usa\n"
+"- \"grep sound-slot /etc/modules.conf\" diz-lhe que controlador\n"
+"actualmente usa\n"
 "\n"
-"- \"/sbin/lsmod\" permite-lhe verificar se o seu módulo controlador) está\n"
-"carregado ou não\n"
+"- \"/sbin/lsmod\" permite-lhe verificar se o seu módulo controlador)\n"
+"está carregado ou não\n"
 "\n"
 "- \"/sbin/chkconfig --list sound\" e \"/sbin/chkconfig --list alsa\" diz-"
 "lhe\n"
@@ -4025,25 +4025,29 @@ msgstr ""
 "\n"
 "Cada partição é listada como se segue: \"Nome\", \"Capacidade\".\n"
 "\n"
-"\"Nome\" é estruturado: \"tipo do drive do disco\", \"número do drive\",\n"
-"\"número da partição\" (por exemplo, \"hda1\").\n"
+"O \"Nome\" está estruturado: \"tipo do dispositivo do disco\", \"número do\n"
+"dispositivo\", \"número da partição\" (por exemplo, \"hda1\").\n"
 "\n"
-"\"Tipo do drive do disco\" é \"hd\" se o drive do disco for um drive IDE e\n"
-"\"sd\" se for um drive SCSI.\n"
+"\"O tipo do dispositivo do disco\" é \"hd\" se o controlador do disco for\n"
+"um dispositivo IDE e \"sd\" se for um dispositivo SCSI.\n"
 "\n"
-"\"Número do drive do disco\" é sempre uma letra a seguir a \"hd\" \n"
-"ou \"sd\". Para os drives IDE:\n"
+"\"O número do dispositivo do disco\" é sempre uma letra a seguir a \"hd\"\n"
+"ou \"sd\". Para os dispositivos IDE:\n"
 "\n"
-" * \"a\" significa \"drive master no primeiro controlador IDE\";\n"
+" * \"a\" significa \"dispositivo principal (master) do disco no primeiro\n"
+"controlador IDE\";\n"
 "\n"
-" * \"b\" significa \"drive slave no primeiro controlador IDE\";\n"
+" * \"b\" significa \"dispositivo secundário (slave) do disco no primeiro\n"
+"controlador IDE\";\n"
 "\n"
-" * \"c\" significa \"drive master no segundo controlador IDE\";\n"
+" * \"c\" significa \"dispositivo principal (master) do disco no segundo\n"
+"controlador IDE\";\n"
 "\n"
-" * \"d\" significa \"drive slave no segundo controlador IDE\".\n"
+" * \"d\" significa \"dispositivo secundário (slave) do disco no segundo\n"
+"controlador IDE\".\n"
 "\n"
-"Com os drives SCSI, um \"a\" significa \"ID SCSI mais baixo\", um\n"
-"\"b\" significa \"segundo ID SCSI mais baixo\", etc."
+"Com os dispositivos SCSI, um \"a\" significa \"ID SCSI mais baixo\", um\n"
+"\"b\" significa \"ID SCSI segundo mais baixo\", etc."
 
 #: help.pm:85
 #, c-format
@@ -6390,7 +6394,9 @@ msgstr "Tem mais que um disco rígido, em qual deles quer instalar o linux?"
 #: install_interactive.pm:219
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "TODAS as partições existentes e seus dados serão perdidos no drive %s"
+msgstr ""
+"TODAS as partições existentes e os seus dados serão perdidos no "
+"dispositivo %s"
 
 #: install_interactive.pm:232
 #, c-format
@@ -6797,7 +6803,7 @@ msgid ""
 "\"\n"
 msgstr ""
 "Alguns pacotes importantes não foram devidamente instalados.\n"
-"O seu drive de cdrom ou o seu cdrom está defeituoso.\n"
+"O seu controlador de cdrom ou o seu cdrom está defeituoso.\n"
 "Verifique o cdrom num computador instalado usando \"rpm -qpl media/main/*.rpm"
 "\"\n"
 
@@ -7319,7 +7325,9 @@ msgstr "Configuração pós-instalação"
 #: install_steps_interactive.pm:778
 #, c-format
 msgid "Please ensure the Update Modules media is in drive %s"
-msgstr "Por favor certifique-se que a média Módulos de Actualização está no drive %s"
+msgstr ""
+"Por favor certifique-se que a média Módulos de Actualização está no "
+"dispositivo %s"
 
 #: install_steps_interactive.pm:812
 #, c-format
@@ -7523,7 +7531,7 @@ msgstr ""
 #: install_steps_interactive.pm:1299 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
-msgstr "Insira uma disquete vazia no drive %s"
+msgstr "Insira uma disquete vazia no dispositivo %s"
 
 #: install_steps_interactive.pm:1304
 #, c-format
@@ -9718,22 +9726,22 @@ msgstr "Ver informação do hardware"
 #: modules/interactive.pm:82
 #, c-format
 msgid "Installing driver for USB controller"
-msgstr "A instalar o driver para o controlador USB"
+msgstr "A instalar o controlador para o dispositivo USB"
 
 #: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr "A instalar o driver para o controlador firewire %s"
+msgstr "A instalar o controlador para o dispositivo firewire %s"
 
 #: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr "A instalar o driver para o controlador do disco %s"
+msgstr "A instalar o controlador dispositivo do disco %s"
 
 #: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr "A instalar o driver para o controlador ethernet %s"
+msgstr "A instalar o controlador para o dispositivo ethernet %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -12980,8 +12988,8 @@ msgstr ""
 "rede.\n"
 "\n"
 "Pergunta-lhe por todas as informações necessárias para configurar a "
-"impressora e dá-lhe acesso a todos os drives de impressoras disponíveis, "
-"opções dos drives, e tipos de conexão de impressoras."
+"impressora e dá-lhe acesso a todos os controladores de impressoras "
+"disponíveis, opções dos controlador, e tipos de ligação das impressoras."
 
 #: printer/printerdrake.pm:1288
 #, c-format
@@ -14117,10 +14125,9 @@ msgid ""
 "printer to a local port or configure it on the machine where it is connected "
 "to."
 msgstr ""
-"Os drivers de impressoras a jacto de tinta fornecidos pela Lexmark só "
-"suportam impressoras locais, não impressoras em máquinas remotas ou servidor "
-"de impressão. Por favor conecte a sua impressora localmente ou configure-a "
-"na máquina à qual se encontra ligada."
+"Os controladores das impressoras a jacto de tinta fornecidos pela Lexmark "
+"apenas suportam impressoras locais, não impressoras em máquinas "
+"remotas ou num servidor de impressão. Por favor ligue a sua impressora localmente ou configure-a na máquina à qual se encontra ligada."
 
 #: printer/printerdrake.pm:3514
 #, c-format
@@ -14135,13 +14142,14 @@ msgid ""
 "adjust the head alignment settings with this program."
 msgstr ""
 "Para poder imprimir com a sua Lexmark a jacto de tinta e esta configuração, "
-"precisa dos drivers fornecidos pela Lexmark (http://www.lexmark.com/). "
-"Clique no link \"Drivers\". Depois escolha o seu modelo e a seguir \"Linux\" "
-"como sistema operativo. Os drivers vêm como pacotes RPM ou scripts Shell com "
-"instalação gráfica interactiva. Não precisa fazer esta configuração pelos "
-"interfaces gráficos. Cancele directamente a seguir ao acordo de licença. A "
-"seguir imprima paginas de controlo alinhadas \"lexmarkmaintain\" e configure "
-"as definições de alinhamento da cabeça de página com este programa."
+"precisa dos controladores fornecidos pela Lexmark (http://www.lexmark.com/). "
+"Clique na hiper-ligação \"Controladores\". A seguir escolha o seu modelo e "
+"depois \"Linux\" como sistema operativo. Os controladores vêm como "
+"pacotes RPM ou scripts Shell com instalação gráfica interactiva. Não precisa "
+"fazer esta configuração pelos interfaces gráficos. Após o acordo de "
+"licença, cancele directamente. A seguir imprima os alinhamentos dos "
+"cabeçalhos das páginas de controlo com o \"lexmarkmaintain\" e configure "
+"as definições de alinhamento do cabeçalho da página com este programa."
 
 #: printer/printerdrake.pm:3524
 #, c-format
@@ -14649,15 +14657,15 @@ msgid ""
 "can switch between drive letters with the field at the upper-right corners "
 "of the file lists."
 msgstr ""
-"A sua impressora foi configurada automaticamente para lhe dar acesso aos "
-"drivers de cartas de fotos no seu PC. Pode agora aceder às suas cartas de "
-"fotos com o programa gráfico \"MtoolsFM\" (Menu: \"Aplicações\" -> "
-"\"Ferramentas de ficheiros\" -> \"Gestor de Ficheiros MTools\") ou com os "
-"utilitários na linha de comando \"mtools\" (escreva \"man mtools\" na linha "
-"de comando para mais informações). Vai encontrar o sistema de ficheiros da "
-"carta na letra \"p:\", ou nas letras seguintes se tem mais de uma impressora "
-"HP com drivers de cartas de fotos. Em \"MToolsFM\" pode mudar de letra de "
-"dispositivo com a zona no canto direito superior da lista de ficheiros."
+"A sua impressora foi configurada automaticamente para lhe dar acesso "
+"aos controladores de placas fotográficas no seu PC. Pode agora aceder às "
+"suas placa fotográficas com o programa gráfico \"MtoolsFM\" (Menu: "
+"\"Aplicações\" -> \"Ferramentas de ficheiros\" -> \"Gestor de Ficheiros MTools\") ou com os utilitários na linha de comando \"mtools\" (escreva \"man mtools\" na "
+"linha de comando para mais informações). Vai encontrar o sistema de "
+"ficheiros da placa na letra \"p:\", ou nas letras seguintes se tem mais de "
+"uma impressora HP com controladores de placas fotográficas. Em "
+"\"MToolsFM\" pode mudar de letra de dispositivo com a zona no canto "
+"direito superior da lista de ficheiros."
 
 #: printer/printerdrake.pm:4324 printer/printerdrake.pm:4351
 #: printer/printerdrake.pm:4386
@@ -14721,7 +14729,7 @@ msgid ""
 msgstr ""
 "\n"
 "Também as impressoras configuradas com ficheiros PPD fornecidos pelos "
-"fabricantes ou com drivers CUPS nativos não podem ser transferidas."
+"fabricantes ou com controladores CUPS nativos não podem ser transferidas."
 
 #: printer/printerdrake.pm:4336
 #, c-format
@@ -16390,7 +16398,7 @@ msgstr ""
 #: services.pm:90
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Carrega os driver para os seus dispositivos usb."
+msgstr "Carrega os controladores para os seus dispositivos usb."
 
 #: services.pm:91
 #, c-format
@@ -18038,7 +18046,7 @@ msgstr "A disquete pode ser removida agora"
 #: standalone/drakTermServ:1593
 #, c-format
 msgid "No floppy drive available!"
-msgstr "Nenhum drive de disquete disponível !"
+msgstr "Nenhum controlador de disquete disponível!"
 
 #: standalone/drakTermServ:1599
 #, c-format
@@ -18192,12 +18200,12 @@ msgstr "A criar disquete de auto-instalação"
 #: standalone/drakautoinst:90
 #, c-format
 msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr "Insira outra disquete vazia na drive %s (para o disco de drivers)"
+msgstr "Insira outra disquete vazia no dispositivo %s (para os controladores do disco)"
 
 #: standalone/drakautoinst:91
 #, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr "A criar disquete de auto-instalação (disco de drivers)"
+msgstr "A criar disquete de auto-instalação (disco de controladores)"
 
 #: standalone/drakautoinst:156
 #, c-format
@@ -18494,7 +18502,7 @@ msgstr ""
 #: standalone/drakbackup:690
 #, c-format
 msgid "No CD-R/DVD-R in drive!"
-msgstr "Nenhum CDR/DVDR no drive!"
+msgstr "Nenhum CDR/DVDR no dispositivo!"
 
 #: standalone/drakbackup:694
 #, c-format
@@ -19593,8 +19601,8 @@ msgid ""
 "Insert the CD with volume label %s\n"
 " in the CD drive under mount point /mnt/cdrom"
 msgstr ""
-"Insira o CD com a etiqueta %s\n"
-" no drive de CD no ponto de montagem /mnt/cdrom"
+"Insira o CD com o nome de volume %s\n"
+"no dispositivo de CD no ponto de montagem /mnt/cdrom"
 
 #: standalone/drakbackup:3475
 #, c-format
@@ -19612,13 +19620,13 @@ msgid ""
 "Insert the tape with volume label %s\n"
 " in the tape drive device %s"
 msgstr ""
-"Insira a cassete com a etiqueta %s\n"
-" no drive leitor de cassetes %s"
+"Insira a cassete com o nome de volume %s\n"
+" no dispositivo de leitor de cassetes %s"
 
 #: standalone/drakbackup:3487
 #, c-format
 msgid "Not the correct tape label. Tape is labelled %s."
-msgstr "Não é a etiqueta/cassete correcta. A cassete está etiquetada por %s."
+msgstr "Não é a etiqueta/cassete correcta. A cassete chama-se %s."
 
 #: standalone/drakbackup:3498
 #, c-format
@@ -19708,7 +19716,7 @@ msgstr "Verifique que %s é o caminho correcto"
 #: standalone/drakbackup:3815
 #, c-format
 msgid " and the CD is in the drive"
-msgstr " e o CD está no drive"
+msgstr " e o CD está no dispositivo"
 
 #: standalone/drakbackup:3817
 #, c-format
@@ -24712,12 +24720,12 @@ msgstr ""
 #: standalone/harddrake2:25
 #, c-format
 msgid "Alternative drivers"
-msgstr "Drivers alternativos"
+msgstr "Controladores alternativos"
 
 #: standalone/harddrake2:26
 #, c-format
 msgid "the list of alternative drivers for this sound card"
-msgstr "a lista dos drivers alternativos para esta placa de som"
+msgstr "a lista dos controladores alternativos para esta placa de som"
 
 #: standalone/harddrake2:29
 #, c-format
@@ -25163,7 +25171,7 @@ msgstr "Formatos de disquete"
 #: standalone/harddrake2:93
 #, c-format
 msgid "format of floppies supported by the drive"
-msgstr "formatos de disquetes suportados pelo drive"
+msgstr "formatos de disquetes suportados pelo dispositivo"
 
 #: standalone/harddrake2:97
 #, c-format
@@ -25374,12 +25382,12 @@ msgstr "/Auto-detectar _modems"
 #: standalone/harddrake2:183
 #, c-format
 msgid "/Autodetect _jaz drives"
-msgstr "/Auto-detectar drives _jaz"
+msgstr "/Auto-detectar controladores _jaz"
 
 #: standalone/harddrake2:184
 #, c-format
 msgid "/Autodetect parallel _zip drives"
-msgstr "/Autodetectar drives _zip parallelos"
+msgstr "/Autodetectar controladores _zip parallelos"
 
 #: standalone/harddrake2:191
 #, c-format
