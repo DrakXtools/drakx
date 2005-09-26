@@ -1577,7 +1577,8 @@ sub write_and_check {
 
 sub write_eb_image {
 	#- write a bootable etherboot CD image or floppy - pxe images too
-	my ($nic, $rom_path, $type) = @_;	 	
+	my ($nic, $rom_path, $type) = @_;
+	$in->ask_warn(N("Error"), N("No NIC selected!")) and return if $nic eq '';	 	
 	if ($type eq 'floppy') {
 		my $in = interactive->vnew;
 		if (-e "/dev/fd0") {
@@ -1601,17 +1602,20 @@ sub write_eb_image {
 			$in->ask_warn(N("Error"), N("Error writing %s/%s", $tftpboot, $nic));
 		}			
 	} else {
-		my $tmp = "/root/tmp";
-		mkdir_p("$tmp/eb");
-		run_program::run("cat $rom_path/zdsk/$nic > $tmp/eb/eb.img");
-		run_program::run("dd if=/dev/zero of=$tmp/eb/eb.img bs=512 seek=72 count=2808");
-		run_program::run("mkisofs -b eb.img -o $tmp/$nic.iso $tmp/eb");
-		rm_rf("$tmp/eb");
-		if (-e "$tmp/$nic.iso") {
-			$in->ask_warn(N("Information"), N("Etherboot ISO image is %s", "$tmp/$nic.iso"));
-		} else { 
-			$in->ask_warn(N("Error"), N("Something went wrong! - Is mkisofs installed?"));
-		}		
+		my $installed = $in->do_pkgs->install('mkisofs') || -f "/usr/bin/mksofs";
+		if ($installed) {
+			my $tmp = "/root/tmp";
+			mkdir_p("$tmp/eb");
+			run_program::run("cat $rom_path/zdsk/$nic > $tmp/eb/eb.img");
+			run_program::run("dd if=/dev/zero of=$tmp/eb/eb.img bs=512 seek=72 count=2808");
+			run_program::run("mkisofs -b eb.img -o $tmp/$nic.iso $tmp/eb");
+			rm_rf("$tmp/eb");
+			if (-e "$tmp/$nic.iso") {
+				$in->ask_warn(N("Information"), N("Etherboot ISO image is %s", "$tmp/$nic.iso"));
+				return;
+			}
+		}
+		$in->ask_warn(N("Error"), N("Something went wrong! - Is mkisofs installed?"));		
 	}
 }
 
