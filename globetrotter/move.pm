@@ -50,12 +50,10 @@ sub init {
 
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
 
-    run_program::run('sysctl', '-w', 'kernel.hotplug=/bin/true');
     modules::load_category('bus/usb'); 
     *c::pcmcia_probe = \&detect_devices::pcmcia_probe;
     $o->{pcmcia} ||= !$::noauto && c::pcmcia_probe();
     install_steps::setupSCSI($o);
-    run_program::run('sysctl', '-w', 'kernel.hotplug=/sbin/hotplug');
 
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
