@@ -460,7 +460,7 @@ sub psUsingHdlist {
 	rpmsdir    => $rpmsdir, #- where is RPMS directory.
 	descr      => $descr,
 	fakemedium => $fakemedium,
-	selected   => $selected, #- default value is only CD1, it is really the minimal.
+	selected   => $selected, #- this is !$noauto from the hdlists file
 	ignored    => !$selected, #- keep track of ignored medium by DrakX.
 	pubkey     => [], #- all pubkey blocks here
     );
