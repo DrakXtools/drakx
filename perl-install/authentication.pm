@@ -55,7 +55,7 @@ sub kind2description {
 	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
 	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
 	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
-	winbind   => [ N("Windows Domain:"), N("iWinbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
+	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
 	AD        => [ N("Active Directory with SFU:"), N("With Kerberos and Ldap for authentication in Active Directory Server "), ],
 	SMBKRB    => [ N("Active Directory with Winbind:"), N("Winbind allows the system to authenticate users in a Windows Active Directory Server.")  ],
     );
@@ -114,7 +114,7 @@ sub ask_parameters {
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
-		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { $anonymous } },
+		       { label => N("Password for user"), val => \$authentication->{AD_password}, hidden => 1, disabled => sub { $anonymous } },
 		       #{ label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
 		     ]) or return;
 	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
