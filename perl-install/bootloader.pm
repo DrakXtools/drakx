@@ -807,6 +807,7 @@ sub suggest {
 	   if_(arch() !~ /ia64/,
 	 boot => "/dev/" . ($onmbr ? $all_hds->{hds}[0]{device} : $boot),
 	 map => "/boot/map",
+	 compact => 1,
 	 color => 'black/cyan yellow/cyan',
 	 'menu-scheme' => 'wb:bw:wb:bw'
          ),
