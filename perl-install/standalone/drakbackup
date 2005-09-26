@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 #  Copyright (C) 2001-2005 Mandriva by Sebastien DUPONT <dupont_s@epita.fr>
-#  Updated 2002-2005 by Stew Benedict <sbenedict@mandrakesoft.com>
+#  Updated 2002-2005 by Stew Benedict <sbenedict@mandriva.com>
 #  Redistribution of this file is permitted under the terms of the GNU
 #  Public License (GPL)
 #
@@ -119,12 +119,10 @@ my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup";
 my $profile_string;
 my $redir_string = "--daemon > /dev/null 2>&1";
 my $ignore_files_list;
-my @list_of_rpm_to_install;
 my @other_files;
 my @sys_files = "/etc";
 my @files_for_direct_tape;
 my $host_passwd;
-my $untar_prefix = "tar -C $restore_path -x";
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -145,12 +143,12 @@ $cfg_file = $cfg_dir . "drakbackup.conf";
 my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 
 foreach (@ARGV) {
-    /--default/ and backend_mode();
-    /--profile/ and set_profile($_);
-    /--daemon/ and daemon_mode();
-    /--show-conf/ and show_conf();
+	/--default/ and backend_mode();
+	/--profile/ and set_profile($_);
+	/--daemon/ and daemon_mode();
+	/--show-conf/ and show_conf();
 	/--cd-info/ and get_cd_info(), exit(0);
-    /--debug/ and $DEBUG = 1, next;
+	/--debug/ and $DEBUG = 1, next;
 }
 
 sub setup_tooltips() {
@@ -161,7 +159,8 @@ sub setup_tooltips() {
 		'use_incr_decr' => N("This option will save files that have changed.  Exact behavior depends on whether incremental or differential mode is used."), 
 		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
 		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
-		'send_mail_to' => N("This should be a local user or email address that you want the backup results sent to. You will need to define a functioning mail server."),
+		'choose_archiver' => N("Star should be selected if you want to backup extended ACLs, otherwise choose tar"),
+		'send_mail_to' => N("This should be a local user or email address that you want the backup results sent to. You will need to define a functioning mail server. Multiple users can be in a comma seperated list"),
 		'send_mail_from' => N("This should be the return address that you want the backup results sent from. Default is drakbackup."),
 		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
 		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
@@ -273,9 +272,10 @@ sub get_cd_info() {
 	my @line_data;
 	my @drive_names;
 	my $i;
-	require_rpm("cdrecord") if $nonroot_user;
-    # just trying load ide-cd, since it does not seem to be loaded by default
-	$nonroot_user ? `cdrecord -scanbus -dev=ATA > /dev/null 2>&1` : `modprobe ide-cd` unless -f "/proc/sys/dev/cdrom";
+	# just trying load ide-cd, since it does not seem to be loaded by default
+	if (!-f "/proc/sys/dev/cdrom") {
+		$nonroot_user ? `cdrecord -scanbus -dev=ATA > /dev/null 2>&1` : `modprobe ide-cd`;
+	}
 	my @cd_info = cat_("/proc/sys/dev/cdrom/info");
 	my %data = (
                   "drive speed" => 'speed',
@@ -357,20 +357,20 @@ sub save_conf_file() {
 	mkdir_p($cfg_dir) if !-d $cfg_dir;
 	setVarsInSh($cfg_file, \%conf);
 	$conf{PASSWD} = $host_passwd if $conf{REMEMBER_PASS} != 1;
-    chmod(0600, $cfg_file);
-    save_cron_files();
-    0;
+	chmod(0600, $cfg_file);
+	save_cron_files();
+	0;
 }
 
 sub read_cron_files() {
-    my $daemon_found = 0;
-    foreach (qw(hourly daily weekly monthly)) {
+	my $daemon_found = 0;
+	foreach (qw(hourly daily weekly monthly)) {
 		if (-f "/etc/cron.$_/drakbackup" && !$nonroot_user) {
-	    	$conf{DAEMON_TIME_SPACE} = $_;	    
-	    	$daemon_found = 1;
-	    	last;
+			$conf{DAEMON_TIME_SPACE} = $_;	    
+			$daemon_found = 1;
+			last;
 		}
-    }
+	}
 	if ($conf{DAEMON_TIME_SPACE} ne "custom") {
     	!$daemon_found and $backup_daemon = 0;
 	} else {
@@ -390,10 +390,10 @@ sub save_cron_files() {
 		return 1;
 	} else {
 		foreach (qw(hourly daily weekly monthly)) {
-	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup") if !$nonroot_user;
+			-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup") if !$nonroot_user;
 		}
 	}
-    my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
+	my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
 
 	if ($conf{DAEMON_TIME_SPACE} ne "custom" && $conf{DAEMON_TIME_SPACE} ne '' && $backup_daemon) {
 		output_p("/etc/cron.$conf{DAEMON_TIME_SPACE}/drakbackup",  @cron_file);
@@ -409,7 +409,6 @@ sub save_cron_files() {
 		system("crontab $tmpcron");
 		unlink($tmpcron);
 	}
-
 }
 
 sub upgrade_conf_file() {
@@ -457,6 +456,7 @@ sub read_conf_file() {
 	$conf{MAX_SPACE} = 1000.0 if !exists($conf{MAX_SPACE});
 	$conf{USE_HD} = 1 if !exists($conf{USE_HD});
 	$conf{OPTION_COMP} = "tar.gz" if !exists($conf{OPTION_COMP});
+	$conf{ARCHIVER} = "tar" if !exists($conf{ARCHIVER});
 	$conf{FROM_MAIL} = "drakbackup" if !exists($conf{FROM_MAIL});
 	$conf{DEL_OLD} = 0 if !exists($conf{DEL_OLD});
 	# deal with users that may have been deleted from the system
@@ -466,13 +466,16 @@ sub read_conf_file() {
 
 sub verify_mail_setup() {
 	all_user_list() if @user_list_all == ();
-	if ($conf{USER_MAIL} ne "root" && $conf{USER_MAIL} !~ /[\w.-]*\@[\w.-]/ && !member($conf{USER_MAIL}, @user_list_all)) {
+	my @mlist = split(',', $conf{USER_MAIL});
+	foreach (@mlist) {
+	if ($_ ne "root" && !/[\w.-]*\@[\w.-]/ && !member($_, @user_list_all)) {
 		show_warning("f", N("\"%s\" neither is a valid email nor is an existing local user!", $conf{USER_MAIL}));
 		return 1;
 	}
-	if (member($conf{USER_MAIL}, @user_list_all) && $conf{SMTP_SERVER} ne "localhost") {
+	if (member($_, @user_list_all) && $conf{SMTP_SERVER} ne "localhost") {
 		show_warning("f", N("\"%s\" is a local user, but you did not select a local smtp, so you must use a complete email address!", $conf{USER_MAIL}));
 		return 1;
+	}
 	}
 }
 
@@ -538,7 +541,7 @@ sub ftp_client() {
 	return 1 if !$ftp;
 	$ftp->binary;
 	$ftp->cwd($conf{HOST_PATH}); 
-    foreach (@file_list_to_send_by_ftp) {
+	foreach (@file_list_to_send_by_ftp) {
 		$interactive and $pbar->set_fraction(0);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
@@ -546,9 +549,9 @@ sub ftp_client() {
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
 		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progress"));
-    }
-    $ftp->quit; 
-    return 0;
+	}
+	$ftp->quit; 
+	return 0;
 }
 
 sub do_expect {
@@ -654,7 +657,7 @@ sub ssh_client() {
 	my $command;
 	my $value;
 	
-    foreach (@file_list_to_send_by_ftp) {
+	foreach (@file_list_to_send_by_ftp) {
 		if ($conf{USER_KEYS}) {
 			$command = "scp -P $scp_port $_ $conf{LOGIN}\@$conf{HOST_NAME}:$conf{HOST_PATH}";
 		} else {
@@ -814,7 +817,7 @@ sub get_tape_label {
 	my ($device) = @_;
 	gtkset_mousecursor_wait();
 	system("mt -f $device rewind");
-	system("tar -C $cfg_dir -xf $device");
+	system("$conf{ARCHIVER} -C $cfg_dir -x -f $device");
 	my @volname = cat_("$cfg_dir/drakbackup.label");
 	unlink("$cfg_dir/drakbackup.label");
 	$vol_name = $volname[0];
@@ -844,12 +847,12 @@ sub build_tape() {
 	}
 	if (!$conf{MEDIA_ERASE}) {
 		spawn_progress($command, "Rewind to find tape label");
-		$command = "tar -tf $conf{TAPE_DEVICE}";
+		$command = "$conf{ARCHIVER} -t -f $conf{TAPE_DEVICE}";
 		spawn_progress($command, "Check for label");
 		if ($log_buff =~ /drakbackup.label/) {
 			$command = "mt -f $conf{TAPE_DEVICE} rewind";
 			spawn_progress($command, "Rewind to get tape label");
-			$command = "tar -C $cfg_dir -xf $conf{TAPE_DEVICE}";
+			$command = "$conf{ARCHIVER} -C $cfg_dir -x -f $conf{TAPE_DEVICE}";
 			spawn_progress($command, "Reading tape label");		
 			my @volname = cat_("$cfg_dir/drakbackup.label");
 			unlink("$cfg_dir/drakbackup.label");
@@ -863,7 +866,7 @@ sub build_tape() {
 		$vol_name = "Drakbackup" . $the_time;
 		my $f = "$cfg_dir/drakbackup.label";
 		output($f, $vol_name);
-		$command = "tar -C $cfg_dir -cf $conf{TAPE_DEVICE} drakbackup.label;";
+		$command = "$conf{ARCHIVER} -C $cfg_dir -c -f $conf{TAPE_DEVICE} drakbackup.label;";
 		spawn_progress($command, "Creating tape label");
 		unlink $f;
 	}
@@ -873,9 +876,9 @@ sub build_tape() {
 	}
 	
 	#- do the backup
-	$command = "tar -cvf $conf{TAPE_DEVICE} ";
+	$command = "$conf{ARCHIVER} -cv -f $conf{TAPE_DEVICE} ";
 	if ($conf{DIRECT_TAPE}) {
-		$command = handle_ignores($command, @files_for_direct_tape);
+		$command .= handle_ignores($command !~ /-V/, @files_for_direct_tape);
 		$command .= " @files_for_direct_tape";
 	} else {
 		$command .= " @file_list_to_send_by_ftp";
@@ -891,17 +894,17 @@ sub build_tape() {
 
 sub send_mail {
     my ($result) = @_;
-    my $datem = `date`;	
+    my $datem = `date`;
+	my $merror = 0;	
     use Mail::Mailer;
-    my $mailer = Mail::Mailer->new('smtp', Server => $conf{SMTP_SERVER});
-    $mailer->open({ From    => $conf{FROM_MAIL},
-                    To      => $conf{USER_MAIL},
-                    Subject => "DrakBackup report on $datem",
-                  })
-    or return 1;
-    print $mailer $result;
-    $mailer->close;
-	0;
+	my @mlist = split(',', $conf{USER_MAIL});
+	foreach (@mlist) {
+    	my $mailer = Mail::Mailer->new('smtp', Server => $conf{SMTP_SERVER});
+    	$mailer->open({ From => $conf{FROM_MAIL}, To => $_, Subject => "DrakBackup report on $datem" }) or $merror = 1;
+    	print $mailer $result;
+    	$mailer->close;
+	}
+	return $merror;
 }
 
 sub build_backup_files() {
@@ -924,15 +927,16 @@ sub build_backup_files() {
 	@files_for_direct_tape = ();
 		
 	$interactive and gtkset_mousecursor_wait();
+	check_archiver();
     read_conf_file();
     $the_time = the_time();    
     $conf{SEND_MAIL} and complete_results();
     -d  $conf{PATH_TO_SAVE} or mkdir_p($conf{PATH_TO_SAVE});
 	
-	$tar_cmd = "tar cpv";
-	$tar_cmd .= "j" if $conf{OPTION_COMP} eq "tar.bz2";
-	$tar_cmd .= "z" if $conf{OPTION_COMP} eq "tar.gz";
-	$tar_cmd .= " ";
+	$tar_cmd = "$conf{ARCHIVER} -cv -p ";
+	$tar_cmd .= $conf{ARCHIVER} eq 'tar' ? "-P " : "-acl -tpath ";
+	$tar_cmd .= "-j " if $conf{OPTION_COMP} eq "tar.bz2";
+	$tar_cmd .= "-z " if $conf{OPTION_COMP} eq "tar.gz";
 
 	clean_old_backups();
 	my $used_space = check_storage_quota($conf{PATH_TO_SAVE});
@@ -948,10 +952,11 @@ sub build_backup_files() {
 	$tar_cmd_sys = $tar_cmd;
     $tar_cmd_user = $tar_cmd;
     $tar_cmd_other = $tar_cmd;
-    $conf{NO_CRITICAL_SYS} and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group --exclude mtab";
-    $conf{NO_BROWSER_CACHE} and $tar_cmd_user .= "--exclude NewCache --exclude Cache --exclude cache";
-	$nonroot_user and $tar_cmd_user .= " --exclude .drakbackup";
-	$conf{BACKUPIGNORE} && -f "/etc/.backupignore" and $tar_cmd_sys .= " -X /etc/.backupignore";
+	my $exclude_cmd = $conf{ARCHIVER} eq 'tar' ? " --exclude=" : " pat=*/";
+	my $invert_cmd = $conf{ARCHIVER} eq 'tar' ? "" : "-V";
+    $conf{NO_CRITICAL_SYS} and $tar_cmd_sys .= $invert_cmd . $exclude_cmd . "passwd" . $exclude_cmd . "fstab" . $exclude_cmd . "group" . $exclude_cmd . "mtab";
+    $conf{NO_BROWSER_CACHE} and $tar_cmd_user .= $invert_cmd . $exclude_cmd . "NewCache" . $exclude_cmd . "Cache" . $exclude_cmd . "cache";
+	$nonroot_user and $tar_cmd_user .= $invert_cmd . $exclude_cmd . ".drakbackup";	
 	
     -d $conf{PATH_TO_SAVE} and @dir_content = all($conf{PATH_TO_SAVE});
  
@@ -961,7 +966,7 @@ sub build_backup_files() {
 	  	my $find_args_sys = $find_args;
 		my $first_done;
 		$ignore_files_list = '';
-	  	handle_ignores2("/etc") if $conf{BACKUPIGNORE};
+		$tar_cmd_sys .= handle_ignores($tar_cmd_sys !~ /-V/, "/etc");
 	    if ($conf{SYS_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_sys";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{SYS_DIFFERENTIAL_BACKUPS};
@@ -990,17 +995,16 @@ sub build_backup_files() {
 	  }
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
-	
+
 	  unless ($conf{NO_USER_FILES}) {
 	    foreach (@user_list) {
 		  my $user = $_;
 		  my $tar_cmd_cuser = $tar_cmd_user;
 		  $path_name = return_path($user);
-		  $conf{BACKUPIGNORE} && -f "$path_name/.backupignore" and $tar_cmd_cuser .= " -X $path_name/.backupignore";
+		  $ignore_files_list = '';
+		  $tar_cmd_cuser .= handle_ignores($tar_cmd_cuser !~ /-V/, $path_name);
 		  my $find_args_user = $find_args;
 		  my $first_done;
-		  $ignore_files_list = '';
-	  	  handle_ignores2($path_name) if $conf{BACKUPIGNORE};
 		  if ($conf{USER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_user_";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{USER_DIFFERENTIAL_BACKUPS};
@@ -1028,14 +1032,14 @@ sub build_backup_files() {
 		  files_to_results("$incr$user");
 	    }
 	  }
-	  $interactive and progress($pbar2, $plabel1, 1, N("Backup User files..."));
+	  $interactive and progress($pbar1, $plabel1, 1, N("Backup User files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
 
 	  if ($conf{OTHER_FILES}) {
 		my $find_args_other = $find_args;
 		my $first_done;
 		$ignore_files_list = '';
-		$tar_cmd_other = handle_ignores($tar_cmd_other, @other_files) if $conf{BACKUPIGNORE};
+		$tar_cmd_other .= handle_ignores($tar_cmd_other !~ /-V/, @other_files);
 		if ($conf{OTHER_INCREMENTAL_BACKUPS}) {
 			$base = $incr = "incr_other";
 			($base, $incr) = swap_prefix($base, $incr) if $conf{OTHER_DIFFERENTIAL_BACKUPS};
@@ -1062,10 +1066,10 @@ sub build_backup_files() {
 		push_list("list_$incr") if $incr =~ /_other/;
 		files_to_results($incr);
 	  }
-	  $interactive and progress($pbar1, $plabel2, 1, N("Backup Other files..."));
+	  $interactive and progress($pbar2, $plabel2, 1, N("Backup Other files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
 	}
-	  
+
 	my $filecount = @file_list_to_send_by_ftp;
 	if (!$filecount && !$conf{DIRECT_TAPE}) {
 		my $msg = N("No changes to backup!");
@@ -1078,7 +1082,6 @@ sub build_backup_files() {
 		
 	#- should hit this block if running daemon mode only
 	if ($daemon && $conf{DAEMON_MEDIA}) {
-#		ftp_client() if $ftp_daemon;
 		rsync_client() if $conf{DAEMON_MEDIA} eq 'rsync';
 		ssh_client() if $conf{DAEMON_MEDIA} eq 'ssh' && !$conf{USE_EXPECT};
 		do_expect("backup") if $conf{DAEMON_MEDIA} eq 'ssh' && $conf{USE_EXPECT};
@@ -1102,8 +1105,7 @@ sub build_backup_files() {
     }
 	
 	#- consolidate all the other methods under here - interactive and --default should land here
-	if (!$daemon) {
-	
+	if (!$daemon) {	
 		if ($conf{USE_NET} && $conf{NET_PROTO} && $conf{NET_PROTO} ne 'ftp') {
 			rsync_client() if $conf{NET_PROTO} eq 'rsync';
 			ssh_client() if $conf{NET_PROTO} eq 'ssh' && !$conf{USE_EXPECT};
@@ -1240,7 +1242,10 @@ sub do_tar {
 		renamef($tmp_list, $list_file) if -e $tmp_list;
 	} else {
 		#- if $list_file is undefined, then use the @files list
-		-e $tmp_list ? system("$tar_cmd -f $full_dest_file --index-file=$list_file -T $tmp_list") : system("$tar_cmd -f $full_dest_file --index-file=$list_file @files");
+		my $list_cmd = $conf{ARCHIVER} eq "tar" ? "-T " : "list=";
+		#- FIXME? no --index-file equiv for star, use pipe to cat for now
+		# $conf{ARCHIVER} eq "tar" ? $index_cmd = "--index-file=" : $index_cmd = " | cat > "; 
+		-e $tmp_list ? system("$tar_cmd -f $full_dest_file $list_cmd$tmp_list | cat > $list_file") : system("$tar_cmd -f $full_dest_file @files | cat > $list_file");
 		unlink($tmp_list) if -e $tmp_list;
 	}
 	#- someone on club complained about perms being too open
@@ -1269,53 +1274,50 @@ sub files_to_results {
 }
 
 sub handle_ignores {
-	my ($tar_cmd, @list) = @_;
+	#- not quite the expected behavior for "other" files: .backupignore entries in one dir will affect others
+	my ($needs_V, @list) = @_;
+	return if !$conf{BACKUPIGNORE};
+	my $tar_cmd;
 	foreach my $dir (@list) {
 		if (-d $dir) {
-			-f "$dir/.backupignore" and $tar_cmd .= " -X $dir/.backupignore";
-			handle_ignores2($dir);
+			if (-f "$dir/.backupignore") {					
+				my @ignores = cat_("$dir/.backupignore");
+				$ignore_files_list .= join('',@ignores);
+				if ($conf{ARCHIVER} eq 'star') {
+					chomp @ignores;
+					my $ignore_args = $needs_V ? " -V" : "";
+					foreach (@ignores) {
+						#- FIXME star -V pat= doesn't quite map to gnu tar behavior
+						next if $_ eq '';
+						$ignore_args .= " pat=";
+						$ignore_args .= "*/" if !m,^/|^\*,;
+						$ignore_args .= -d "$dir/$_" ? $_ . "*" : $_;
+					}
+					$tar_cmd .= $ignore_args;
+				} else {
+					$tar_cmd .= " -X $dir/.backupignore";
+				}				
+			}
 		}
 	}
 	return $tar_cmd;
 }
 
-sub handle_ignores2 {
-	my ($dir) = @_;
-	my @ignore_files = cat_("$dir/.backupignore");
-	foreach (@ignore_files) {
-		$ignore_files_list .= $_;
-	}
-}
-
-sub require_rpm {
-    my $all_rpms_found = 1;
-    my $res;
-    foreach my $pkg (@_) {
-		$res = system("rpm -q $pkg > /dev/null");
-		if ($res == 256) { 
-			$all_rpms_found = 0; 
-			push @list_of_rpm_to_install, $pkg;
-		}
-    }
-    return $all_rpms_found;
-}
-
 sub check_pkg_needs() {
 	my @extra_pkg;
-	@list_of_rpm_to_install = ();
 	if ($conf{USE_NET}) {
 		@extra_pkg = "rsync" if $conf{NET_PROTO} eq 'rsync';
 		@extra_pkg = "perl-Expect" if $conf{NET_PROTO} eq 'ssh' && ($conf{USE_EXPECT} || $conf{DRAK_KEYS});
 	}
 	@extra_pkg = "mt-st" if $conf{USE_TAPE};
 	@extra_pkg = ("mkisofs", "cdrecord") if $conf{USE_CD};
+	push @extra_pkg, "star" if $conf{ARCHIVER} eq 'star';
 	if (@extra_pkg) {
-		if (require_rpm(@extra_pkg)) {
-			return 0;
-		} else {
+		if (!$in->do_pkgs->install(@extra_pkg)) {
+			$in->ask_warn(N("Error"), N("Problem installing %s", join(', ', @extra_pkg)));
 			return 1;
-		}		
-	}	
+		}
+	}
 }
 
 sub show_status() {
@@ -1642,11 +1644,7 @@ sub advanced_where_net_types {
 	$entry_net_type->entry->set_text($conf{NET_PROTO});
 	$button_xfer_keys->signal_connect('clicked', sub { 
 		if ($conf{PASSWD} && $conf{LOGIN} && $conf{HOST_NAME}) {
-			if (check_pkg_needs()) {
-				install_rpm(\&advanced_where_net_types, $previous_function);
-			} else {
-				do_expect("sendkey");
-			}
+			do_expect("sendkey") unless check_pkg_needs();
 		} else {
 			$in->ask_warn(N("Error"), N("Need hostname, username and password!"));
 		}
@@ -2282,9 +2280,15 @@ sub combo_to_cron_string {
 
 sub advanced_options() {
     my $box_options;
+	my $entry_archiver = Gtk2::ComboBox->new_with_strings([ "tar", "star" ], $conf{ARCHIVER});
 	my $entry_comp_mode = Gtk2::ComboBox->new_with_strings([ "tar", "tar.gz", "tar.bz2" ], $conf{OPTION_COMP});
 	gtkpack($advanced_box,
 		$box_options = gtkpack_(Gtk2::VBox->new(0, 15),
+			0, gtkpack_(Gtk2::HBox->new(0,10),
+				0, Gtk2::Label->new(N("Please choose the archive program")),
+				1, Gtk2::HBox->new(0,10),
+				0, $entry_archiver,
+			), 
 			0, gtkpack_(Gtk2::HBox->new(0,10),
 				0, Gtk2::Label->new(N("Please choose the compression type")),
 				1, Gtk2::HBox->new(0,10),
@@ -2319,8 +2323,10 @@ sub advanced_options() {
     $from_entry->set_text($conf{FROM_MAIL});
     $from_entry->signal_connect('changed', sub { $conf{FROM_MAIL} = $from_entry->get_text });    
     $smtp_entry->set_text($conf{SMTP_SERVER});
-    $smtp_entry->signal_connect('changed', sub { $conf{SMTP_SERVER} = $smtp_entry->get_text });	
+    $smtp_entry->signal_connect('changed', sub { $conf{SMTP_SERVER} = $smtp_entry->get_text });
+	$entry_archiver->entry->signal_connect('changed', sub { $conf{ARCHIVER} = $entry_archiver->entry->get_text });	
 	$entry_comp_mode->entry->signal_connect('changed', sub { $conf{OPTION_COMP} = $entry_comp_mode->entry->get_text });
+	set_help_tip($entry_archiver, 'choose_archiver');
 	set_help_tip($check_backupignore, 'backupignore');
 	set_help_tip($check_mail, 'send_mail_to');
 	set_help_tip($from_entry, 'send_mail_from');
@@ -2387,7 +2393,7 @@ sub wizard_step3() {
 		return;
 	}
 	if (check_pkg_needs()) {
-		install_rpm(\&wizard_step3, undef);
+		interactive_mode_box();
 		return;
 	}
     my $text = Gtk2::TextView->new;
@@ -2614,9 +2620,9 @@ sub system_state() {
 		$system_state .= N("\n- Options:\n");
 		$conf{NO_SYS_FILES} and $system_state .= N("\tDo not include System Files\n");
 		
-		$system_state .= N("\tBackups use tar and bzip2\n") if $conf{OPTION_COMP} eq "tar.bz2"; 
-		$system_state .= N("\tBackups use tar and gzip\n") if $conf{OPTION_COMP} eq "tar.gz";
-		$system_state .= N("\tBackups use tar only\n") if $conf{OPTION_COMP} eq "tar";
+		$system_state .= N("\tBackups use %s and bzip2\n", $conf{ARCHIVER}) if $conf{OPTION_COMP} eq "tar.bz2"; 
+		$system_state .= N("\tBackups use %s and gzip\n", $conf{ARCHIVER}) if $conf{OPTION_COMP} eq "tar.gz";
+		$system_state .= N("\tBackups use %s only\n", $conf{ARCHIVER}) if $conf{OPTION_COMP} eq "tar";
 
 		$system_state .= N("\tUse .backupignore files\n") if $conf{BACKUPIGNORE};
 		$system_state .= N("\tSend mail to %s\n", $conf{USER_MAIL}) if $conf{SEND_MAIL};
@@ -2775,8 +2781,8 @@ sub show_backup_details {
 	$tarfile = $tarfiles[0];
 	my $command1 = "stat " . $tarfile;
 
-	$command2 = "tar -tv";
-	$command2 = set_tar($command2, $tarfile);
+###	$command2 = "$conf{ARCHIVER} -t -v";
+	$command2 = set_tar("list", $tarfile);
 	$command2 .= " $tarfile";
 
 	log::explanations("Running $command1");
@@ -2815,7 +2821,7 @@ sub valid_backup_test {
     my $is_corrupted = 0;
 	my $comp_test;
     foreach (@files_list) {
-		$comp_test = set_tar("tar t", $_);
+		$comp_test = set_tar("list", $_);
 		if (system("$comp_test $path_to_find_restore/$_ > /dev/null 2>&1") > 1) {
 	    	push @files_corrupted, $_;
 	    	$is_corrupted = -1;
@@ -2884,7 +2890,6 @@ sub return_path {
 }
 
 sub restore_backend() {
-    my $untar_cmd = "tar x";
     my $exist_problem = 0;
     my $user_dir;
 	my $username;
@@ -2907,7 +2912,7 @@ sub restore_backend() {
 				$user_dir = return_path($username);
 				-d $user_dir and rm_rf($user_dir) if $remove_user_before_restore;
 
-				my $user_untar = set_tar($untar_cmd, $_);
+				my $user_untar = set_tar("restore", $_);
 		    	$DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
 		    	system("$user_untar $path_to_find_restore/$_ -C $restore_path");
 			}
@@ -2923,7 +2928,7 @@ sub restore_backend() {
 			restore_aff_backup_problems();
 	    } else {
 			foreach (@sys_list_to_restore) {
-				my $sys_untar = set_tar($untar_cmd, $_);
+				my $sys_untar = set_tar("restore", $_);
 				system("$sys_untar $path_to_find_restore/$_ -C $restore_path"); 
 			}
 		}
@@ -2934,7 +2939,7 @@ sub restore_backend() {
 			restore_aff_backup_problems();
 	    } else {
 			foreach (@other_list_to_restore) {
-				my $other_untar = set_tar($untar_cmd, $_);
+				my $other_untar = set_tar("restore", $_);
 				system("$other_untar $path_to_find_restore/$_ -C $restore_path"); 
 			}
 		}
@@ -2943,11 +2948,24 @@ sub restore_backend() {
 }
 
 sub set_tar {
-	my ($untar_cmd, $filename) = @_;
-	$untar_cmd .= "z" if $filename =~ /tar.gz$/;
-	$untar_cmd .= "j" if $filename =~ /tar.bz2$/;
-	$untar_cmd .= "f";
+	my ($mode, $filename) = @_;
+	my $untar_cmd;
+	$untar_cmd = "$conf{ARCHIVER} -C $restore_path -x" if $mode eq "restore";
+	$untar_cmd = "$conf{ARCHIVER} -t" if $mode eq "list";
+	$untar_cmd .= " -acl" if $conf{ARCHIVER} eq "star";
+	$untar_cmd .= " -z" if $filename =~ /tar.gz$/;
+	$untar_cmd .= " -j" if $filename =~ /tar.bz2$/;
+	$untar_cmd .= " -f";
 	return $untar_cmd;
+}
+
+sub check_archiver() {
+	if (!-x "/usr/bin/star") { 
+		#- sane fallback, star is still in contrib
+		$conf{ARCHIVER} = "tar";
+		show_warning("i", N("/usr/bin/star not found, using tar..."));
+		save_conf_file();
+	}
 }
 
 sub restore_do() {
@@ -2993,13 +3011,13 @@ sub restore_do2() {
 sub restore_step_other() {
     my $retore_step_other;
     my $text = Gtk2::TextView->new;
-	my $untar_cmd = "tar tzf";
+	my $untar_cmd = "$conf{ARCHIVER} -t -z -f";
 	my $other_rest = "";
 	select_other_data_to_restore();
 	if ($restore_other) {
 		foreach (@other_list_to_restore) {
 			if (/tar.bz2$/) {
-				$untar_cmd = "tar tjf";
+				$untar_cmd = "$conf{ARCHIVER} -t -j -f";
 			}
 			$other_rest .= "/" . `$untar_cmd $path_to_find_restore/$_ -C $restore_path`;
 		} 
@@ -3260,7 +3278,6 @@ sub restore_step2() {
     $restore_path_entry->set_text($restore_path); 
     $restore_path_entry->signal_connect('changed', sub { 
 		$restore_path = $restore_path_entry->get_text;
-		$untar_prefix = "tar -C $restore_path -x";
 	});
     $up_box->show_all;
 }
@@ -3496,7 +3513,6 @@ sub catalog_restore {
 	$restore_path_entry->set_text($restore_path);
 	gtksignal_connect($restore_path_entry, changed => sub { 
 		$restore_path = $restore_path_entry->get_text; 
-		$untar_prefix = "tar -C $restore_path -x";
 	});
 	$button->add(gtkpack(Gtk2::HBox->new(0,10), gtkcreate_img("ic82-dossier-32")));
 	button_box_restore();
@@ -3631,7 +3647,7 @@ sub untar {
 	my ($cmd, $msg, $tarfile, $restorefile) = @_;
 	my $message = "Untarring from \n$tarfile \nto $restore_path.";
 	$message = "Untarring \n$restorefile from \n$tarfile \nto $restore_path." if $msg eq "files";
-	my $untar_cmd = set_tar($untar_prefix, $tarfile);
+	my $untar_cmd = set_tar("restore", $tarfile);
 	my $command = "$untar_cmd $cmd";
 	spawn_progress($command, $message);
 }
@@ -3669,7 +3685,7 @@ sub restore_tape {
 	my $indv_files = @restore_files;
 	my $wild_card = catalog_to_wildcard($cat_entry);
 	$dev_path =~ s|/st|/nst|;
-	my $command = "tar -C $restore_path -xf $dev_path";
+	my $command = "$conf{ARCHIVER} -C $restore_path -x -f $dev_path";
 
 	if ($media eq "DirectTape") {
 		position_tape($cat_entry, $dev_path);
@@ -3799,12 +3815,15 @@ sub wildcard_to_tarfile {
 
 sub file_to_tarfile {
 	my ($restore_file, $wildcard) = @_;
-	#- remove leading "/"
-	$restore_file = substr($restore_file, 1);
+	#- remove leading "/" - only when using star (behavior change from before, now tar uses -P to archive for consistancy)
+	check_archiver();
+	$restore_file = substr($restore_file, 1) if $conf{ARCHIVER} eq 'star';
 	#- filename with spaces
 	$restore_file = "'" . $restore_file . "'" if $restore_file =~ / /;
-	my $tarfile = `grep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt`;
-	chop $tarfile;
+	#- can be in more than one tarfile (misuse of "other")
+	my @tarfiles = `grep -l $restore_file $conf{PATH_TO_SAVE}/*$wildcard.txt`;
+	chomp @tarfiles;
+	my $tarfile = $tarfiles[0];
 	$tarfile = basename($tarfile);
 	$tarfile =~ s/txt/$conf{OPTION_COMP}/;
 	$tarfile =~ s/list/backup/;
@@ -3816,7 +3835,7 @@ sub find_tape_offset {
 	my @line_data = split(':', $cat_entry);
 	my $label = $line_data[2];
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
-	# always off by 1 for tape label.
+	#- always off by 1 for tape label.
 	my $offset = 1;
 	foreach (@catalog) {
 		chomp;
@@ -3839,7 +3858,7 @@ sub position_tape {
 
 sub get_tarfile_from_tape {
 	my ($dev_path) = @_;
-	spawn_progress("tar -C $cfg_dir/restores -xf $dev_path", "Untarring from $dev_path to work directory.");
+	spawn_progress("$conf{ARCHIVER} -C $cfg_dir/restores -x -f $dev_path", "Untarring from $dev_path to work directory.");
 }
 
 sub restore_box() {
@@ -4015,13 +4034,10 @@ sub button_box_adv() {
 			hspace(),
 			pbutton(),
 			0, gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { 
-				if (check_pkg_needs()) {
-					install_rpm(\&$current_widget, undef);
-				} else {
-					if (!save_conf_file()) {
-						destroy_widget();
-						$previous_widget->();
-					}
+				return if check_pkg_needs();
+				if (!save_conf_file()) {
+					destroy_widget();
+					$previous_widget->();
 				}
 			}),
 		),
@@ -4185,29 +4201,6 @@ sub button_box_main() {
 }
 
 ################################################  MESSAGES  ################################################  
-
-sub install_rpm {
-    my ($calling_widget, $previous) = @_;
-	destroy_widget();
-    gtkpack($advanced_box,
-		my $rpm_box = gtkpack_(Gtk2::VBox->new(0, 15),
-			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
-			0, Gtk2::HSeparator->new,
-			0, gtksignal_connect(Gtk2::Button->new(N("Install")), clicked => sub {  
-				my $installed = system("/usr/sbin/urpmi --auto @list_of_rpm_to_install"); 
-				if ($installed == 0) {
-					destroy_widget();
-					$calling_widget->($previous);
-				} else {
-					#- no string for the moment - too late for translators
-					$in->ask_warn(N("Error"), @list_of_rpm_to_install);
-				} 
-			}),
-		),
-	);
-	$central_widget = \$rpm_box;
-	$up_box->show_all;
-}
 
 sub message_norestore_box() {
     $box2->destroy;
