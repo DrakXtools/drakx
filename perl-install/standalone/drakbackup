@@ -159,11 +159,12 @@ sub setup_tooltips() {
 		'use_incr_decr' => N("This option will save files that have changed.  Exact behavior depends on whether incremental or differential mode is used."), 
 		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
 		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
-		'choose_archiver' => N("Star should be selected if you want to backup extended ACLs, otherwise choose tar"),
+		'choose_archiver' => N("Star should be selected if you want to backup EA or ACLs, otherwise choose tar"),
 		'send_mail_to' => N("This should be a local user or email address that you want the backup results sent to. You will need to define a functioning mail server. Multiple users can be in a comma seperated list"),
 		'send_mail_from' => N("This should be the return address that you want the backup results sent from. Default is drakbackup."),
 		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
 		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
+		'view_log' => N("Selecting this option allows you to view the raw output from the restore process, after a file restore."),
 		'dir_or_module' => N("Some protocols, like rsync, may be configured at the server end.  Rather than using a directory path, you would use the 'module' name for the service path."),
 		'when_space' => N("Custom allows you to specify your own day and time.  The other options use run-parts in /etc/crontab."),
 	);
@@ -934,9 +935,8 @@ sub build_backup_files() {
     -d  $conf{PATH_TO_SAVE} or mkdir_p($conf{PATH_TO_SAVE});
 	
 	$tar_cmd = "$conf{ARCHIVER} -cv -p ";
-	$tar_cmd .= $conf{ARCHIVER} eq 'tar' ? "-P " : "-acl -tpath ";
-	$tar_cmd .= "-j " if $conf{OPTION_COMP} eq "tar.bz2";
-	$tar_cmd .= "-z " if $conf{OPTION_COMP} eq "tar.gz";
+	$tar_cmd .= $conf{ARCHIVER} eq 'tar' ? "-P " : "-acl -xattr -tpath ";
+	$tar_cmd .= set_compression($conf{OPTION_COMP});
 
 	clean_old_backups();
 	my $used_space = check_storage_quota($conf{PATH_TO_SAVE});
@@ -953,7 +953,7 @@ sub build_backup_files() {
     $tar_cmd_user = $tar_cmd;
     $tar_cmd_other = $tar_cmd;
 	my $exclude_cmd = $conf{ARCHIVER} eq 'tar' ? " --exclude=" : " pat=*/";
-	my $invert_cmd = $conf{ARCHIVER} eq 'tar' ? "" : "-V";
+	my $invert_cmd = $conf{ARCHIVER} eq 'tar' ? "" : " -V";
     $conf{NO_CRITICAL_SYS} and $tar_cmd_sys .= $invert_cmd . $exclude_cmd . "passwd" . $exclude_cmd . "fstab" . $exclude_cmd . "group" . $exclude_cmd . "mtab";
     $conf{NO_BROWSER_CACHE} and $tar_cmd_user .= $invert_cmd . $exclude_cmd . "NewCache" . $exclude_cmd . "Cache" . $exclude_cmd . "cache";
 	$nonroot_user and $tar_cmd_user .= $invert_cmd . $exclude_cmd . ".drakbackup";	
@@ -2312,12 +2312,11 @@ sub advanced_options() {
 				1, Gtk2::HBox->new(0,10),
 				0, gtkset_sensitive(my $smtp_entry = Gtk2::Entry->new, $conf{SEND_MAIL}),
 			),
-			0, gtkpack_(Gtk2::HBox->new(0,10),
-				0, my $check_del_hd_files = Gtk2::CheckButton->new(N("Delete Hard Drive tar files after backup to other media.")),
-			),
+			0, my $check_del_hd_files = Gtk2::CheckButton->new(N("Delete Hard Drive tar files after backup to other media.")),
+			0, my $check_view_restore_log = Gtk2::CheckButton->new(N("View restore log after file restore.")),
 		),
 	);
-    check_list([$check_mail, \$conf{SEND_MAIL}], [$check_del_hd_files, \$conf{DEL_HD_FILES}], [$check_backupignore, \$conf{BACKUPIGNORE}]);
+    check_list([$check_mail, \$conf{SEND_MAIL}], [$check_del_hd_files, \$conf{DEL_HD_FILES}], [$check_backupignore, \$conf{BACKUPIGNORE}], [$check_view_restore_log, \$conf{VIEW_RESTORE_LOG}]);
     $mail_entry->set_text($conf{USER_MAIL});
     $mail_entry->signal_connect('changed', sub { $conf{USER_MAIL} = $mail_entry->get_text });
     $from_entry->set_text($conf{FROM_MAIL});
@@ -2331,6 +2330,7 @@ sub advanced_options() {
 	set_help_tip($check_mail, 'send_mail_to');
 	set_help_tip($from_entry, 'send_mail_from');
 	set_help_tip($check_del_hd_files, 'delete_files');
+	set_help_tip($check_view_restore_log, 'view_log');
     fonction_env(\$box_options, \&advanced_options, \&advanced_box);
     $up_box->show_all;
 }
@@ -2952,11 +2952,16 @@ sub set_tar {
 	my $untar_cmd;
 	$untar_cmd = "$conf{ARCHIVER} -C $restore_path -x" if $mode eq "restore";
 	$untar_cmd = "$conf{ARCHIVER} -t" if $mode eq "list";
-	$untar_cmd .= " -acl" if $conf{ARCHIVER} eq "star";
-	$untar_cmd .= " -z" if $filename =~ /tar.gz$/;
-	$untar_cmd .= " -j" if $filename =~ /tar.bz2$/;
+	$untar_cmd .= " -acl -xattr" if $conf{ARCHIVER} eq "star";
+	$untar_cmd .= set_compression($filename);
 	$untar_cmd .= " -f";
 	return $untar_cmd;
+}
+
+sub set_compression {
+	my ($extension) = @_;
+	return " -j" if $extension =~ /tar.bz2$/;
+	return " -z" if $extension =~ /tar.gz$/;
 }
 
 sub check_archiver() {
@@ -3355,7 +3360,7 @@ sub find_files_to_restore() {
 				}
 				restore_catalog_entry($cat_entry, @files_to_restore);
 				destroy_widget();
-				find_files_to_restore();
+				find_files_to_restore() if view_log_or();
 			}), 0),
 		),
 	);
@@ -3480,7 +3485,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box();
+								interactive_mode_box() if view_log_or();
 							} 
 						} 
 					}),
@@ -3492,7 +3497,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box();
+								interactive_mode_box() if view_log_or();
 							} 
 						}
 					}),
@@ -3626,8 +3631,7 @@ sub restore_catalog_entry {
 		}
 			
 		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if $media eq 'ftp';
-		$restore_result = restore_rsync_ssh($cat_entry, $vol_host, $dev_path, $username, $media, @restore_files) 
-			if $media eq 'rsync' || $media eq 'ssh';
+		$restore_result = restore_rsync_ssh($cat_entry, $vol_host, $dev_path, $username, $media, @restore_files) if $media eq 'rsync' || $media eq 'ssh';
 	}
 
 	# cleanup our restore dir - unlink fails here?
@@ -3643,6 +3647,15 @@ sub restore_catalog_entry {
 
 }
 
+sub view_log_or() {
+	if ($conf{VIEW_RESTORE_LOG}) {
+		button_box_ok_only();
+		show_status();
+	} else {
+		return 1;
+	}
+}
+
 sub untar {
 	my ($cmd, $msg, $tarfile, $restorefile) = @_;
 	my $message = "Untarring from \n$tarfile \nto $restore_path.";
@@ -3650,6 +3663,7 @@ sub untar {
 	my $untar_cmd = set_tar("restore", $tarfile);
 	my $command = "$untar_cmd $cmd";
 	spawn_progress($command, $message);
+	$results = $log_buff;
 }
 
 sub no_tarfile {
