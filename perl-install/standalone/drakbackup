@@ -373,12 +373,16 @@ sub read_cron_files() {
 		}
 	}
 	if ($conf{DAEMON_TIME_SPACE} ne "custom") {
-    	!$daemon_found and $backup_daemon = 0;
+		!$daemon_found and $backup_daemon = 0;
 	} else {
+		read_user_cron();
+	}
+}
+
+sub read_user_cron() {
 		$custom_cron = 1;
 		@cron_entries = `crontab -l`;
 		chomp @cron_entries;
-	}
 }
 
 sub save_cron_files() {
@@ -401,7 +405,7 @@ sub save_cron_files() {
 		system("chmod +x /etc/cron.$conf{DAEMON_TIME_SPACE}/drakbackup");
 	}
 
-	if ($conf{DAEMON_TIME_SPACE} eq "custom" || !$backup_daemon) {
+	if ($conf{DAEMON_TIME_SPACE} eq "custom" && $backup_daemon) {
 		foreach (@cron_entries) { 
 			next if /^#/;
 			push @cron_output, $_ . "\n";
@@ -2096,6 +2100,7 @@ sub advanced_when() {
 	my $cron_iter;
 	my $cron_entry;
 
+	read_user_cron();
 	foreach (@cron_entries) {
 		$cron_model->append_set(0, $_) if !/^#/;	
 	}
