@@ -607,7 +607,7 @@ sub main {
     }
     $::o = $o = $o_;
 
-    eval { output('/proc/splash', "verbose\n") };
+    eval { output('/proc/splash', "verbose\n") } if !$::globetrotter;
   
     #-the main cycle
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
