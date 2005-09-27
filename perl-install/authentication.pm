@@ -49,6 +49,17 @@ my %kind2nsswitch = (
     SMBKRB    => ['winbind'],
 );
 
+my %kind2packages = (
+    local     => [],
+    SmartCard => [ 'castella-pam' ],
+    LDAP      => [ 'openldap-clients', 'nss_ldap', 'pam_ldap', 'autofs' ],
+    AD        => [ 'nss_ldap', 'pam_krb5', 'libsasl2-plug-gssapi' ],
+    NIS       => [ 'ypbind', 'autofs' ],
+    winbind   => [ 'samba-winbind' ],
+    SMBKRB    => [ 'samba-winbind', 'pam_krb5', 'samba-server', 'samba-client' ],
+);
+
+
 sub kind2description {
     my (@kinds) = @_;
     my %kind2description = (
@@ -203,8 +214,26 @@ sub get() {
     };
 }
 
+sub install_needed_packages {
+    my ($do_pkgs, $kind) = @_;
+    if (my $pkgs = $kind2packages{$kind}) {
+	#- automatic during install
+	$do_pkgs->ensure_are_installed($pkgs, $::isInstall) or return;
+    } else {
+	log::l("ERROR: $kind not listed in kind2packages");
+    }
+    1;
+}
+
 sub set {
     my ($in, $net, $authentication, $o_when_network_is_up) = @_;
+
+    install_needed_packages($in->do_pkgs, to_kind($authentication)) or return;
+    set_raw($net, $authentication, $o_when_network_is_up);
+}
+
+sub set_raw {
+    my ($net, $authentication, $o_when_network_is_up) = @_;
 
     my $when_network_is_up = $o_when_network_is_up || sub { my ($f) = @_; $f->() };
 
@@ -225,10 +254,7 @@ sub set {
 
     if ($kind eq 'local') {
     } elsif ($kind eq 'SmartCard') {
-	$in->do_pkgs->ensure_are_installed([ 'castella-pam' ], 1) or return;
     } elsif ($kind eq 'LDAP') {
-	$in->do_pkgs->ensure_are_installed([ qw(openldap-clients nss_ldap pam_ldap autofs) ]) or return;
-
 	my $domain = $authentication->{LDAPDOMAIN} || do {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
@@ -242,7 +268,6 @@ sub set {
 			 nss_base_group => $domain . "?sub",
 			);
     } elsif ($kind eq 'AD') {
-	$in->do_pkgs->ensure_are_installed([ qw(nss_ldap pam_krb5 libsasl2-plug-gssapi) ]) or return;
 	my $port = "389";
 	
 	my $ssl = { 
@@ -302,7 +327,6 @@ sub set {
 	configure_krb5_for_AD($authentication);
 
     } elsif ($kind eq 'NIS') {
-	$in->do_pkgs->ensure_are_installed([ qw(ypbind autofs) ], 1) or return;
 	my $domain = $net->{network}{NISDOMAIN};
 	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can not use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
@@ -325,8 +349,6 @@ sub set {
 
 	my $domain = uc $authentication->{WINDOMAIN};
 	
-	$in->do_pkgs->ensure_are_installed([ 'samba-winbind' ], 1) or return;
-
 	require network::smb;
 	network::smb::write_smb_conf($domain);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
@@ -345,7 +367,6 @@ sub set {
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->ensure_are_installed([ 'samba-winbind', 'pam_krb5', 'samba-server', 'samba-client' ]) or return;
 		
 	require network::smb;
 	network::smb::write_smb_ads_conf($domain,$realm);
