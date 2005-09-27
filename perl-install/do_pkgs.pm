@@ -237,6 +237,8 @@ sub is_installed {
 
 sub are_installed {
     my ($_do, @l) = @_;
+    @l or return;
+
     my @l2;
     run_program::run('/bin/rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l); #- do not care about the return value
     intersection(\@l, [ chomp_(@l2) ]); #- can not return directly @l2 since it contains things like "package xxx is not installed"
