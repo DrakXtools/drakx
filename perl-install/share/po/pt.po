@@ -27,13 +27,13 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-19 21:17+0800\n"
-"PO-Revision-Date: 2005-09-26 00:00+0100\n"
+"PO-Revision-Date: 2005-09-27 06:17+0100\n"
 "Last-Translator: José Melo <mmodme00@gmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../move/move.pm:292
@@ -3930,7 +3930,7 @@ msgstr ""
 "seus próprios ficheiros e configurações, protegendo o sistema de mudanças\n"
 "desintencionais ou maliciosas que poderiam ter impacto. Vai ter que criar\n"
 "pelo menos um utilizador regular para si próprio -- esta é a conta que pode\n"
-"usar por rotina, no dia-à-dia. Contudo é muito fácil fazer login como root,\n"
+"usar por rotina, no dia-à-dia. Contudo é muito fácil entrar como root,\n"
 "para fazer o que quer que seja, pode também ser muito perigoso! Um\n"
 "simples erro pode significar que o seu sistema não volte a trabalhar.\n"
 "Se cometer um erro sério como utilizador regular, o pior que pode\n"
@@ -3940,12 +3940,12 @@ msgstr ""
 "O primeiro campo pergunta por um nome real. Claro que não é imperativo\n"
 "-- realmente até pode digitar o que quiser. O DrakX irá usar a primeira\n"
 "palavra que digitar neste campo e copiá-la para este campo \"%s\",\n"
-"que é o nome que este utilizador irá digitar para fazer o login no sistema.\n"
-"O próximo passo é para digitar uma senha. De um posto de vista seguro,\n"
-"uma senha de um utilizador não privilegiado (regular) não é crucial como\n"
-"uma senha \"root\", mas não há razão para negligenciar a senha fazendo-a\n"
-"demasiado simples, ou simplesmente deixar em branco: claro que seriam\n"
-"os seus ficheiros que ficariam em risco.\n"
+"que é o nome que este utilizador irá digitar para fazer se autenticar no\n"
+"sistema. O próximo passo é para digitar uma senha. De um posto de vista\n"
+"seguro, uma senha de um utilizador não privilegiado (regular) não é crucial\n"
+"como uma senha \"root\", mas não há razão para negligenciar a senha\n"
+"fazendo-a demasiado simples, ou simplesmente deixar em branco: claro\n"
+"que seriam os seus ficheiros que ficariam em risco.\n"
 "\n"
 "Assim que clicar em \"%s\",pode adicionar outros utilizadores. Adicionar\n"
 "um utilizador para cada um dos seus amigos, o seu pai, a sua irmã, etc.\n"
@@ -10770,7 +10770,7 @@ msgstr "Número do telefone"
 #: network/netconnect.pm:572
 #, c-format
 msgid "Login ID"
-msgstr "ID de Login"
+msgstr "ID da Autenticação"
 
 #: network/netconnect.pm:587 network/netconnect.pm:620
 #, c-format
@@ -15315,7 +15315,7 @@ msgstr "Aceitar/Recusar icmp echo."
 #: security/help.pm:17
 #, c-format
 msgid "Allow/Forbid autologin."
-msgstr "Permite/Proíbe autologin."
+msgstr "Permitir/Proíbir auto-autenticação."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
@@ -15336,17 +15336,17 @@ msgstr ""
 #: security/help.pm:27
 #, c-format
 msgid "Allow/Forbid reboot by the console user."
-msgstr "Permite/Proíbe reinicar pelo utilizador da consola."
+msgstr "Permitir/Proíbir reiniciar pelo utilizador da consola."
 
 #: security/help.pm:29
 #, c-format
 msgid "Allow/Forbid remote root login."
-msgstr "Permite/Proíbe login root remoto."
+msgstr "Permitir/Proíbir autenticação root remota."
 
 #: security/help.pm:31
 #, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "Permite/Proíbe login root directo."
+msgstr "Permitir/Proíbir autenticação root directa."
 
 #: security/help.pm:33
 #, c-format
@@ -15354,7 +15354,7 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
-"Permite/Proíbe listar os utilizadores do sistema nos gestores de ecrã (kdm e "
+"Permitir/Proíbir a lista dos utilizadores do sistema nos gestores de ecrã (kdm e "
 "gdm)."
 
 #: security/help.pm:35
@@ -15365,7 +15365,7 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Permite/Proibe exportar o display quando\n"
+"Permitir/Proibir exportar o ecrã quando\n"
 "passar da conta root para outros utilizadores.\n"
 "\n"
 "Ver pam_xauth(8) para mais detalhes.'"
@@ -15381,7 +15381,7 @@ msgid ""
 "\n"
 "- NONE (no connection)."
 msgstr ""
-"Permite/Proíbe ligações X:\n"
+"Permitir/Proíbir ligações X:\n"
 "\n"
 "- TODOS (todas as ligações são permitidas),\n"
 "\n"
@@ -15482,7 +15482,7 @@ msgstr "Alertas de Segurança:"
 #: security/help.pm:82
 #, c-format
 msgid "Enable/Disable IP spoofing protection."
-msgstr "Activar/Desactivar protecçao IP 'spoofing'"
+msgstr "Activar/Desactivar protecção IP 'spoofing'"
 
 #: security/help.pm:84
 #, c-format
@@ -15497,13 +15497,13 @@ msgstr "Activar/Desactivar o registo dos pacotes IPv4 extranhos."
 #: security/help.pm:88
 #, c-format
 msgid "Enable/Disable msec hourly security check."
-msgstr "Activar/Desactivar a verificação msec todas as horas."
+msgstr "Activar/Desactivar verificação msec horária."
 
 #: security/help.pm:90
 #, c-format
 msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
-"Activa su só para membros do grupo wheel ou permite su a partir de "
+"Activar su apenas para membros do grupo wheel ou permitir su a partir de "
 "qualquerutilizador."
 
 #: security/help.pm:92
@@ -15719,12 +15719,12 @@ msgstr "Reinicio pelo utilizador da consola"
 #: security/l10n.pm:17
 #, c-format
 msgid "Allow remote root login"
-msgstr "Permitir login remoto do root"
+msgstr "Permitir autenticação remota root"
 
 #: security/l10n.pm:18
 #, c-format
 msgid "Direct root login"
-msgstr "Login directo do root"
+msgstr "Autenticação directa root"
 
 #: security/l10n.pm:19
 #, c-format
@@ -15814,7 +15814,7 @@ msgstr "Verificação diária da segurança"
 #: security/l10n.pm:36
 #, c-format
 msgid "Sulogin(8) in single user level"
-msgstr "Sulogin(8) no nível utilizador ùnico"
+msgstr "Sulogin(8) no nível utilizador único"
 
 #: security/l10n.pm:37
 #, c-format
@@ -16066,7 +16066,7 @@ msgstr ""
 #: security/level.pm:65
 #, c-format
 msgid "Security Administrator (login or email)"
-msgstr "Administrador de Segurança (login ou email)"
+msgstr "Administrador de Segurança (autenticação ou email)"
 
 #: services.pm:19
 #, c-format
@@ -17003,7 +17003,7 @@ msgstr ""
 "OPÇÕES:\n"
 "  --boot              - permite configurar o carregador de arranque\n"
 "  --splash        - permite configurar o modo predefinido do tema\n"
-" de arranque: oferece para configurar a função autologin"
+" de arranque: oferece para configurar a opção auto-autenticar"
 
 #: standalone.pm:57
 #, c-format
@@ -17653,7 +17653,7 @@ msgstr ""
 "        \t/etc/sysconfig/mouse, /etc/sysconfig/keyboard numa base por "
 "cliente.\n"
 "\n"
-"        Nota: Permitir a configuração local do hardware, activa o login do "
+"        Nota: Permitir a configuração local do hardware, activa a autenticação "
 "root no servidor de terminal\n"
 "        em cada máquina cliente que tem esta opção activada.  A configuração "
 "local pode ser,\n"
@@ -17827,7 +17827,7 @@ msgstr ""
 "!!! Indica que a senha no sistema de base de dados é diferente do\n"
 "que a senha da base de dados do Servidor de Terminal.\n"
 "Apague/re-adicione o utilizador para o Servidor de Terminais\n"
-"para permitir a login/inicio de sessão."
+"para permitir a autenticação."
 
 #: standalone/drakTermServ:1009
 #, c-format
@@ -18493,7 +18493,7 @@ msgid ""
 "without being prompted for a password."
 msgstr ""
 "Transferência com sucesso\n"
-"Pode querer verificar se pode iniciar a sessão/login no servidor com :\n"
+"Pode querer verificar se pode entrar/autenticar no servidor com :\n"
 "\n"
 "ssh -i %s %s@%s\n"
 "\n"
@@ -19938,12 +19938,12 @@ msgstr "Ecrâ predefinido"
 #: standalone/drakboot:195
 #, c-format
 msgid "No, I do not want autologin"
-msgstr "Não, eu não quero autologin"
+msgstr "Não, não quero auto-autenticação"
 
 #: standalone/drakboot:196
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Sim, eu quero autologin com este (utilizador, ecrâ)"
+msgstr "Sim, quero auto-autenticação com este (utilizador, ecrâ)"
 
 #: standalone/drakboot:203
 #, c-format
