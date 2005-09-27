@@ -697,7 +697,7 @@ sub autologin {
 	$o->{desktop} = 'KDE';
 	$o->{autologin} = $users[0];
     } elsif (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
-	my $use_autologin = @users == 1;
+	my $use_autologin = $::globetrotter || @users == 1;
 
 	$in->ask_from_(
 		       { title => N("Autologin"),
