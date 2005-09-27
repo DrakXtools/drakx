@@ -14,7 +14,7 @@ sub ensure_is_installed {
 
     if (! $o_file || ! -e "$::prefix$o_file") {
 	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
-	  or return if !$b_auto;
+	  or return if !$b_auto && $do->in;
 	if (!$do->install($pkg)) {
 	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
 	    return;
@@ -33,7 +33,7 @@ sub ensure_are_installed {
     my @not_installed = difference2($pkgs, [ $do->are_installed(@$pkgs) ]) or return 1;
 
     $do->in->ask_okcancel(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @not_installed), 1)
-	  or return if !$b_auto;
+	  or return if !$b_auto && $do->in;
 
     if (!$do->install(@not_installed)) {
 	$do->in->ask_warn(N("Error"), N("Could not install the %s package!", $not_installed[0]));
@@ -47,7 +47,7 @@ sub ensure_binary_is_installed {
 
     if (!whereis_binary($binary, $::prefix)) {
 	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
-	  or return if !$b_auto;
+	  or return if !$b_auto && $do->in;
 	if (!$do->install($pkg)) {
 	    $do->in->ask_warn(N("Error"), N("Could not install the %s package!", $pkg));
 	    return;
@@ -104,6 +104,9 @@ our @ISA = qw(do_pkgs_common);
 
 sub new {
     my ($type, $in) = @_;
+
+    $in->isa('interactive') or undef $in;
+
     require pkgs;
     bless { in => $in, o => $::o }, $type;
 }
