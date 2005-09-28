@@ -244,7 +244,7 @@ sub check() {
 	}
     };
     $not_listed->('NOT LISTED', 1, `cd all.kernels/2.6* ; find -name "*.k?o" -o -name "*.k?o.gz"`);
-    $not_listed->('not listed', $verbose, `rpm -qpl RPMS/kernel-2.6*`);
+    $not_listed->('not listed', $verbose, `rpm -qpl RPMS/kernel-*2.6*`);
     if (%deprecated_modules) {
 	my %per_cat;
 	push @{$per_cat{$listed{$_}}}, $_ foreach keys %deprecated_modules;
