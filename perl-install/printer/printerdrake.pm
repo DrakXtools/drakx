@@ -927,22 +927,9 @@ sub configure_new_printers {
 	$in->wait_message(N("Printerdrake"),
 			  N("Searching for new printers..."));
 
-    # When HPOJ is running, it blocks the printer ports on which it is
-    # configured, so we stop it here. If it is not installed or not 
-    # configured, this command has no effect. We do not stop HPOJ if we are
-    # called by the hotplug script, as HPOJ reloads the parallel port
-    # kernel modules and causes a new hotplug signal which leads to
-    # recursive calls of the hotplug script.
-    require services;
-    services::stop("hpoj") if !$::noX && !$::autoqueue;
-
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
     $printer->{AUTODETECTEDPRINTERSNONINTERACTIVE} = \@autodetected if @autodetected;
-
-    # We are ready with auto-detection, so we restart HPOJ here. If it 
-    # is not installed or not configured, this command has no effect.
-    services::start("hpoj") if !$::noX && !$::autoqueue;
 
     # No printer found? So no need of new queues.
     return 1 if !@autodetected;
@@ -1436,11 +1423,6 @@ sub setup_local_autoscan {
 	    };
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Detecting devices..."));
-	# When HPOJ is running, it blocks the printer ports on which it is
-	# configured, so we stop it here. If it is not installed or not 
-	# configured, this command has no effect.
-	require services;
-	services::stop("hpoj");
 	@autodetected = (
 	    $expert_or_modify || $printer->{AUTODETECTLOCAL} ? printer::detect::local_detect() : (),
 	    !$expert_or_modify ? printer::detect::whatNetPrinter($printer->{AUTODETECTNETWORK}, $printer->{AUTODETECTSMB}, $printer->{TIMEOUT}) : (),
@@ -1514,9 +1496,6 @@ sub setup_local_autoscan {
 		$menuentries->{$menustr} = $q;
 	    }
 	}
-	# We are ready with auto-detection, so we restart HPOJ here. If it 
-	# is not installed or not configured, this command has no effect.
-	printer::services::start("hpoj");
     } else {
 	# Always ask for queue name in recommended mode when no auto-
 	# detection was done
@@ -1732,23 +1711,23 @@ complete => sub {
     # Auto-detect printer model (works if host is an ethernet-connected
     # printer)
     my $modelinfo = printer::detect::getSNMPModel($remotehost);
-    my $auto_hpoj;
+    my $auto_hplip;
     if (defined($modelinfo) &&
 	$modelinfo->{MANUFACTURER} ne "" &&
 	$modelinfo->{MODEL} ne "") {
 	local $::isWizard = 0;
         $in->ask_warn(N("Information"), N("Detected model: %s %s",
                             $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
-        $auto_hpoj = 1;
+        $auto_hplip = 1;
     } else {
-	$auto_hpoj = 0;
+	$auto_hplip = 0;
     }
 
     # Do configuration of multi-function devices and look up model name
     # in the printer database
     setup_common($printer, $in,
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
-		  $printer->{currentqueue}{connect}, $auto_hpoj,
+		  $printer->{currentqueue}{connect}, $auto_hplip,
                   ({port => $printer->{currentqueue}{connect},
                     val => $modelinfo }));
 
@@ -2207,7 +2186,7 @@ sub setup_socket {
     if ($printer->{AUTODETECT}) {
 	$modelinfo = printer::detect::getSNMPModel($remotehost);
     }
-    my $auto_hpoj;
+    my $auto_hplip;
     if (defined($modelinfo) &&
 	$modelinfo->{MANUFACTURER} ne "" &&
 	$modelinfo->{MODEL} ne "") {
@@ -2217,16 +2196,16 @@ sub setup_socket {
 					      $modelinfo->{MANUFACTURER},
 					      $modelinfo->{MODEL}));
 	}
-        $auto_hpoj = 1;
+        $auto_hplip = 1;
     } else {
-	$auto_hpoj = 0;
+	$auto_hplip = 0;
     }
 
     # Do configuration of multi-function devices and look up model name
     # in the printer database
     setup_common($printer, $in,
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
-		  $printer->{currentqueue}{connect}, $auto_hpoj,
+		  $printer->{currentqueue}{connect}, $auto_hplip,
                   ({port => $printer->{currentqueue}{connect},
                     val => $modelinfo }));
     1;
@@ -2259,8 +2238,6 @@ list => [ if_($printer->{currentqueue}{connect},
 	    "smb://",
 	    "ncp://",
 	    "socket://",
-	    "ptal:/mlc:",
-	    "ptal:/hpjd:",
 	    "hp:/usb/",
 	    "hp:/par/",
 	    "hp:/net/",
@@ -2333,7 +2310,7 @@ complete => sub {
 	# printer)
 	my $remotehost = $1;
 	my $modelinfo = printer::detect::getSNMPModel($remotehost);
-        my $auto_hpoj;
+        my $auto_hplip;
         if (defined($modelinfo) &&
             $modelinfo->{MANUFACTURER} ne "" &&
 	    $modelinfo->{MODEL} ne "") {
@@ -2341,16 +2318,16 @@ complete => sub {
             $in->ask_warn(N("Information"), N("Detected model: %s %s",
                                 $modelinfo->{MANUFACTURER},
 				$modelinfo->{MODEL}));
-            $auto_hpoj = 1;
+            $auto_hplip = 1;
         } else {
-	    $auto_hpoj = 0;
+	    $auto_hplip = 0;
         }
 
         # Do configuration of multi-function devices and look up model name
         # in the printer database
         setup_common($printer, $in,
 		      "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
-		      $printer->{currentqueue}{connect}, $auto_hpoj,
+		      $printer->{currentqueue}{connect}, $auto_hplip,
                       ({port => $printer->{currentqueue}{connect},
                         val => $modelinfo }));
     }
@@ -2393,17 +2370,79 @@ complete => sub {
     1;
 }
 
+sub hplip_bus_warning {
+
+    my ($printer, $in, $device, $hplipentry) = @_;
+
+    # Determine connection type
+    my $bus;
+    if ($device =~ /usb/) {
+	$bus = "usb";
+    } elsif ($device =~ m!/dev/(lp|par.*|printer.*)\d+!) {
+	$bus = "par";
+    } elsif ($device =~ m!^socket://!) {
+	$bus = "net";
+    } else {
+	return 0;
+    }
+
+    # HPLIP supports the connection through which the device is currently
+    # accessed
+    return 1 if $hplipentry->{bus}{$bus};
+
+    # Ask user what to do
+    if ($::noX) {
+	return 0;
+    } else {
+	local $::isWizard = 0;
+	my $modelstr = $hplipentry->{model};
+	$modelstr =~ s/_/ /g;
+	my $choice = $in->ask_from_list
+	    (N("Add a new printer"),
+	     N("Your printer %s is currently connected %s.",
+	       $modelstr,
+	       ($bus eq "par" ? N("to a parallel port") :
+		($bus eq "usb" ? N("to the USB") :
+		 N("via the network")))) . " " .
+	     N("This type of connection is currently not fully supported by HPLIP.") .
+	     " " .
+	     N("You get full HPLIP support for your device if you connect it ") .
+	     join(", ",
+		  (if_($hplipentry->{bus}{par}, N("to a parallel port")),
+		   if_($hplipentry->{bus}{usb}, N("to the USB")),
+		   if_($hplipentry->{bus}{net}, N("via the network")))) .
+	     ".\n\n" .
+	     N("You can now set up your device with HPLIP anyway (works in many cases), ") .
+	     N("set it up without HPLIP (print-only), ") . N("or") . " " .
+	     N("cancel the setup (for example to reconnect your device).") .
+	     "\n\n" .
+	     N("You can always revise your choice by clicking your printer's entry in the main window, ") .
+	     N("clicking the \"%s\" button, ", N("Edit")) .
+	     N("and choosing \"%s\".", N("Printer connection type")) .
+	     "\n\n" .
+	     N("What do you want to do?"),
+	     [N("Set up with HPLIP"), 
+	      N("Set up without HPLIP"), 
+	      N("Cancel setup")], N("Cancel setup"));
+	if ($choice eq N("Set up with HPLIP")) {
+	    return 1;
+	} elsif ($choice eq N("Set up without HPLIP")) {
+	    return 2;
+	} else {
+	    return 0;
+	}
+    }
+}
+
 sub setup_common {
 
     my ($printer, $in, $makemodel, $device, $do_auto_detect, @autodetected) = @_;
 
     local $::isEmbedded = 0;
-    #- Check whether the printer is an HP multi-function device and 
-    #- configure HPOJ if it is one
+    #- Check whether the printer is an HP printer or multi-function device and 
+    #- configure HPLIP if it is one
 
     my $hplipdevice = "";
-    my $ptaldevice = "";
-    my $isHPOJ = 0;
     my $isHPLIP = 0;
     my $searchunknown = N("Unknown model");
     my $w;
@@ -2411,44 +2450,38 @@ sub setup_common {
 	# Ask user whether he has a multi-function device when he did not
 	# do auto-detection or when auto-detection failed
 	if (!$do_auto_detect ||
-	    $makemodel =~ /$searchunknown/ ||
+	    $makemodel =~ /$searchunknown/i ||
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
-		if (($device =~ m!/usb/! ||
-		     $device =~ m!^socket://!) &&
-		    $printer->{SPOOLER} eq 'cups') {
-		    my $choice = $in->ask_from_list
+		if ($printer->{SPOOLER} eq 'cups') {
+		    $isHPLIP = $in->ask_yesorno
 			(N("Add a new printer"),
 			 N("On many HP printers there are special functions available, maintenance (ink level checking, nozzle cleaning. head alignment, ...) on all not too old inkjets, scanning on multi-function devices, and memory card access on printers with card readers. ") .
 			 "\n\n" .
-			 N("To access these extra functions on your HP printer, it must be set up with the appropriate software: ") . 
-			 N("Either with the newer HPLIP which allows printer maintenance through the easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on newer PhotoSmart models ") .
-			 N("or with the older HPOJ which allows only scanner and memory card access, but could help you in case of failure of HPLIP. ") . 
+			 N("To access these extra functions on HP printers they must be set up with HPLIP (HP Linux Imaging and Printing). ") .
 			 "\n\n" .
-			 N("What is your choice (choose \"None\" for non-HP printers)? "),
-			 [N("None"), N("HPLIP"), N("HPOJ")], N("None"));
-		    if ($choice eq N("HPLIP")) {
-			$isHPLIP = 1;
-		    } elsif ($choice eq N("HPOJ")) {
-			$isHPOJ = 1;
-		    }
-		} else {
-		    $isHPOJ = $in->ask_yesorno(N("Add a new printer"),
-					       N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+			 N("Do you want to use HPLIP (choose \"No\" for non-HP printers)? "), 0);
 		}
 	    }
 	}
 	my $hplipentry;
+	my $hplipaborted = 0;
 	if (($printer->{SPOOLER} eq 'cups') &&
 	    (($hplipentry =
 	      printer::main::hplip_device_entry($device, @autodetected)) ||
 	     $isHPLIP)) {
 	    # Device is supported by HPLIP
-
+	    if ($hplipentry) {
+		my $buswarning = 
+		    hplip_bus_warning($printer, $in, $device, $hplipentry);
+		return 0 if !$buswarning;
+		$hplipaborted = 1 if $buswarning == 2;
+	    }
 	    # Install HPLIP packages
 	    my $hplipinstallfailed = 0;
 	    if (!$::testing &&
+		!$hplipaborted &&
 		!files_exist(qw(/usr/sbin/hpiod))) {
 		if ($::noX) {
 		    $hplipinstallfailed = 1;
@@ -2482,14 +2515,15 @@ sub setup_common {
 		    }
 		}
 	    }
-	    # Start HPLIP and get device URI
-	    undef $w;
-	    $w = $in->wait_message(
-		 N("Printerdrake"),
-		 N("Checking device and configuring %s...", N("HPLIP")))
-		if !$printer->{noninteractive};
 
-	    if (!$hplipinstallfailed) {
+	    if (!$hplipinstallfailed && !$hplipaborted) {
+		# Start HPLIP and get device URI
+		undef $w;
+		$w = $in->wait_message
+		    (N("Printerdrake"),
+		     N("Checking device and configuring %s...", N("HPLIP")))
+		    if !$printer->{noninteractive};
+
 		if ($isHPLIP && ($device !~ m!^socket://!)) {
 		    my @uris = printer::main::start_hplip_manual();
 		    my (@menu, %menuhash);
@@ -2513,7 +2547,21 @@ sub setup_common {
 		    $hplipentry = 
 			printer::main::hplip_device_entry_from_uri
 			($hplipdevice);
-		    $makemodel = $choice;
+		    if ($hplipentry) {
+			my $buswarning = 
+			    hplip_bus_warning($printer, $in,
+					      $device, $hplipentry);
+			return 0 if !$buswarning;
+			if ($buswarning == 2) {
+			    $hplipaborted = 1;
+			    $hplipdevice = "";
+			} else {
+			    $makemodel = $choice;
+			}
+		    } else {
+			$hplipaborted = 1;
+			$hplipdevice = "";
+		    }
 		} else {
 		    $hplipdevice = printer::main::start_hplip
 			($device, $hplipentry, @autodetected);
@@ -2523,7 +2571,7 @@ sub setup_common {
 			    ($hplipdevice);
 		    }
 		    if (($makemodel !~ /\S/) ||
-			($makemodel =~ /$searchunknown/)) {
+			($makemodel =~ /$searchunknown/i)) {
 			$makemodel = $hplipentry->{model};
 			$makemodel =~ s/_/ /g;
 			$makemodel = "HP " . $makemodel 
@@ -2586,169 +2634,8 @@ sub setup_common {
 	    }
 	}
 	if (!$hplipdevice) {
-	    if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|30(15|20|30)|3200|33.0|4345)|(DeskJet|dj)\s*450)/i ||
-		$makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
-		$isHPOJ) {
-		# Install HPOJ package
-		my $hpojinstallfailed = 0;
-		if (!$::testing &&
-		    !files_exist(qw(/usr/sbin/ptal-mlcd
-				    /usr/sbin/ptal-init
-				    /usr/bin/xojpanel
-				    /usr/sbin/lsusb))) {
-		    if ($::noX) {
-			$hpojinstallfailed = 1;
-		    } else {
-			$w = $in->wait_message(N("Printerdrake"),
-					       N("Installing %s package...", N("HPOJ")))
-			    if !$printer->{noninteractive};
-			$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
-			    or do {
-				$in->ask_warn(N("Warning"),
-					      N("Could not install the %s packages!",
-						N("HPOJ")) . " " .
-					      N("Only printing will be possible on the %s.",
-						$makemodel));
-				$hpojinstallfailed = 1;
-			    };
-		    }
-		}
-		# Configure and start HPOJ
-		undef $w;
-		$w = $in->wait_message
-		    (N("Printerdrake"),
-		     N("Checking device and configuring %s...", N("HPOJ")))
-		    if !$printer->{noninteractive};
-		
-		eval { $ptaldevice = printer::main::configure_hpoj
-			   ($device, @autodetected) if !$hpojinstallfailed };
-		
-		if (my $err = $@) {
-		    warn qq(HPOJ conf failure: "$err");
-		    log::l(qq(HPOJ conf failure: "$err"));
-		}
-
-		if ($ptaldevice) {
-		    # HPOJ has determined the device name, make use of
-		    # it if we did not know it before
-		    if (!$do_auto_detect ||
-			!$makemodel ||
-			$makemodel eq $searchunknown ||
-			$makemodel =~ /^\s*$/) {
-			$makemodel = $ptaldevice;
-			$makemodel =~ s/^.*:([^:]+)$/$1/;
-			$makemodel =~ s/_/ /g;
-			if ($makemodel =~ /^\s*IJP/i) {
-			    $makemodel = "Sony $makemodel";
-			} else {
-			    $makemodel = "HP $makemodel";
-			}
-		    }
-		    # Configure scanning with SANE on the MF device
-		    if ($makemodel !~ /HP\s+PhotoSmart/i &&
-			$makemodel !~ /HP\s+LaserJet\s+2200/i &&
-			$makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
-			# Install SANE
- 			if (!$::testing &&
-			    (!files_exist("/usr/bin/scanimage",
-					  #"/usr/bin/xscanimage",
-					  "/etc/sane.d/dll.conf",
-					  "/usr/$lib/sane/libsane-hpoj.so.1") ||
-			     (!files_exist(qw(/usr/bin/xsane)) &&
-			      !files_exist(qw(/usr/bin/kooka)) &&
-			      ($::isInstall ||
-			       !$in->do_pkgs->is_installed('scanner-gui'))))) {
-			    undef $w;
-			    $w = $in->wait_message
-				(N("Printerdrake"),
-				 N("Installing SANE packages..."))
-				if !$printer->{noninteractive};
-			    $::noX
-				or $in->do_pkgs->install('sane-backends',
-							 #'sane-frontends',
-							 ($::isInstall ?
-							  'xsane' : 
-							  'scanner-gui'), 
-							 "${lib}sane-hpoj1")
-				or do {
-				    $in->ask_warn(N("Warning"),
-						  N("Could not install the %s packages!",
-						    "SANE") . " " .
-						  N("Scanning on the %s will not be possible.",
-						    $makemodel));
-				};
-			}
-			# Configure the HPOJ SANE backend
-			printer::main::config_sane('hpoj');
-		    }
-		    # Configure photo card access with mtools and MToolsFM
-		    if (($makemodel =~ /HP\s+PhotoSmart/i ||
-			 $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
-			 $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
-			 $makemodel =~ /HP\s+PSC\s*161\d/i ||
-			 $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
-			 $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
-			 $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
-			 $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
-			 $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
-			$makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
-			# Install mtools and MToolsFM
-			if (!$::testing &&
-			    !files_exist(qw(/usr/bin/mdir
-					    /usr/bin/mcopy
-					    /usr/bin/MToolsFM
-					    ))) {
-			    undef $w;
-			    $w = $in->wait_message
-				(N("Printerdrake"),
-				 N("Installing mtools packages..."))
-				if !$printer->{noninteractive};
-			    $::noX
-				or $in->do_pkgs->install('mtools', 'mtoolsfm')
-				or do {
-				    $in->ask_warn(N("Warning"),
-						  N("Could not install the %s packages!",
-						    "Mtools") . " " .
-						  N("Photo memory card access on the %s will not be possible.",
-						    $makemodel));
-				};
-			}
-			# Configure mtools/MToolsFM for photo card access
-			printer::main::config_photocard();
-		    }
-		    
-		    if (!$printer->{noninteractive} && !$::noX) {
-			my $text = "";
-			# Inform user about how to scan with his MF device
-			$text = scanner_help($makemodel, "ptal://$ptaldevice");
-			if ($text) {
-			    undef $w;
-			    local $::isWizard = 0;
-			    $in->ask_warn
-				(N("Scanning on your HP multi-function device"),
-				 $text);
-			}
-			# Inform user about how to access photo cards with his 
-			# MF device
-			$text = photocard_help($makemodel, "ptal://$ptaldevice");
-			if ($text) {
-			    undef $w;
-			    local $::isWizard = 0;
-			    $in->ask_warn(N("Photo memory card access on your HP multi-function device"),
-					  $text);
-			}
-		    }
-		    # make the DeviceURI from $ptaldevice.
-		    $printer->{currentqueue}{connect} =
-			"ptal://" . $ptaldevice;
-		} else {
-		    # make the DeviceURI from $device.
-		    $printer->{currentqueue}{connect} = $device;
-		}
-	    } else {
-		# make the DeviceURI from $device.
-		$printer->{currentqueue}{connect} = $device;
-	    }
+	    # make the DeviceURI from $device.
+	    $printer->{currentqueue}{connect} = $device;
 	    $w = $in->wait_message(
 		 N("Printerdrake"),
 		 N("Configuring device..."))
@@ -2791,7 +2678,7 @@ sub setup_common {
 		N("Making printer port available for CUPS..."))
 		if !$printer->{noninteractive};
 	    printer::main::assure_device_is_available_for_cups(
-		$hplipsocket || $hplipdevice || $ptaldevice || $device);
+		$hplipsocket || $hplipdevice || $device);
 	}
     }
 
@@ -2832,7 +2719,7 @@ sub setup_common {
 	    $descr =~ s/ /|/;
 	} elsif ($automodel) {
 	    $descr = $automodel;
-	    if ($descr !~ /$searchunknown/) {
+	    if ($descr !~ /$searchunknown/i) {
 		$descr =~ s/ /|/;
 	    } else {
 		$descr = "|$searchunknown";
@@ -3383,7 +3270,8 @@ sub get_printer_info {
 	delete($printer->{currentqueue}{ppd});
 	$printer->{currentqueue}{foomatic} = 0;
 	# Read info from printer database
-	foreach (qw(printer ppd driver make model)) { #- copy some parameter, shorter that way...
+	foreach (qw(printer ppd driver make model)) {
+	    #- copy some parameters, shorter that way...
 	    $printer->{currentqueue}{$_} = $printer::main::thedb{$printer->{DBENTRY}}{$_};
 	}
 	$newdriver = 1;
@@ -4090,7 +3978,7 @@ sub printer_help {
     my $photocard = "";
     my $hp11000fw = "";
     if ($printer->{configured}{$queue}) {
-	if ($printer->{configured}{$queue}{queuedata}{model} eq "Unknown model" ||
+	if ($printer->{configured}{$queue}{queuedata}{model} eq N("Unknown model") ||
 	    $printer->{configured}{$queue}{queuedata}{model} eq N("Raw printer")) {
 	    $raw = 1;
 	}
@@ -4101,22 +3989,6 @@ sub printer_help {
 	     $printer->{configured}{$queue}{queuedata}{connect});
 	if ($hplip) {
 	    $hplip = "\n\n$hplip\n\n";
-	}
-	# Information about scanning with HP's multi-function devices
-	$scanning = scanner_help(
-	     $printer->{configured}{$queue}{queuedata}{make} . " " .
-	     $printer->{configured}{$queue}{queuedata}{model}, 
-	     $printer->{configured}{$queue}{queuedata}{connect});
-	if ($scanning) {
-	    $scanning = "\n\n$scanning\n\n";
-	}
-	# Information about photo card access with HP's multi-function devices
-	$photocard = photocard_help(
-	     $printer->{configured}{$queue}{queuedata}{make} . " " .
-	     $printer->{configured}{$queue}{queuedata}{model}, 
-	     $printer->{configured}{$queue}{queuedata}{connect});
-	if ($photocard) {
-	    $photocard = "\n\n$photocard\n\n";
 	}
 	if ($printer->{configured}{$queue}{queuedata}{printer} eq
 	    'HP-LaserJet_1000') {
@@ -4139,11 +4011,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $hplip, $scanning . $photocard, $hp11000fw) . printer::main::help_output($printer, 'cups') : 
- $hplip . $scanning . $photocard . $hp11000fw .
+", $hplip, $hp11000fw) . printer::main::help_output($printer, 'cups') : 
+ $hplip . $hp11000fw .
  N("Here is a list of the available printing options for the current printer:
 
-") . printer::main::help_output($printer, 'cups')) : $hplip . $scanning . $photocard . $hp11000fw);
+") . printer::main::help_output($printer, 'cups')) : $hplip . $hp11000fw);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -4153,7 +4025,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $scanning . $photocard . $hp11000fw : $hplip . $scanning . $photocard . $hp11000fw);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $hp11000fw : $hplip . $hp11000fw);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -4163,7 +4035,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $scanning . $photocard . $hp11000fw : $hplip . $scanning . $photocard . $hp11000fw);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $hplip . $hp11000fw : $hplip . $hp11000fw);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -4179,18 +4051,12 @@ The \"%s\" and \"%s\" commands also allow to modify the option settings for a pa
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
 N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $hplip, $scanning . $photocard, $hp11000fw) . printer::main::help_output($printer, 'pdq') :
- $hplip . $scanning . $photocard . $hp11000fw);
+", $hplip, $hp11000fw) . printer::main::help_output($printer, 'pdq') :
+ $hplip . $hp11000fw);
     }
-    my $windowtitle = ($scanning ?
-                       ($photocard ?
-			N("Printing/Scanning/Photo Cards on \"%s\"", $queue) :
-			N("Printing/Scanning on \"%s\"", $queue)) :
-                       ($photocard ?
-			N("Printing/Photo Card Access on \"%s\"", $queue) :
-			($hplip ?
+    my $windowtitle = ($hplip ?
 			 N("Using/Maintaining the printer \"%s\"", $queue) :
-			 N("Printing on the printer \"%s\"", $queue))));
+			 N("Printing on the printer \"%s\"", $queue));
     if (!$raw && !$cupsremote) {
         my $choice;
         while ($choice ne N("Close")) {
@@ -4200,7 +4066,7 @@ N("To know about the options available for the current printer read either the l
 		 N("Close"));
 	    if ($choice ne N("Close")) {
 		my $_w = $in->wait_message(N("Printerdrake"),
-					  N("Printing test page(s)..."));
+					  N("Printing option list..."));
 	        printer::main::print_optionlist($printer);
 	    }
 	}
@@ -4242,49 +4108,6 @@ sub hplip_help {
     $text .= "\n";
 
     return $text;
-}
-
-sub scanner_help {
-    my ($makemodel, $deviceuri) = @_;
-    if ($deviceuri =~ m!^ptal://?(.*?)$!) {
-	my $ptaldevice = $1;
-	if ($makemodel !~ /HP\s+PhotoSmart/i &&
-	    $makemodel !~ /HP\s+LaserJet\s+2200/i &&
-	    $makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
-	    # Models with built-in scanner
-	    return N("Your multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" on the command line to get more information.
-
-You do not need to run \"scannerdrake\" for setting up scanning on this device, you only need to use \"scannerdrake\" if you want to share the scanner on the network.",
-		     $ptaldevice);
-	} else {
-	    # Scanner-less models
-	    return "";
-	}
-    }
-}
-
-sub photocard_help {
-    my ($makemodel, $deviceuri) = @_;
-    if ($deviceuri =~ m!^ptal://?(.*?)$!) {
-	my $ptaldevice = $1;
-	if (($makemodel =~ /HP\s+PhotoSmart/i ||
-	     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
-	     $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
-	     $makemodel =~ /HP\s+PSC\s*161\d/i ||
-	     $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
-	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
-	     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
-	     $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
-	     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
-	    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
-	    # Models with built-in photo card drives
-	    return N("Your printer was configured automatically to give you access to the photo card drives from your PC. Now you can access your photo cards using the graphical program \"MtoolsFM\" (Menu: \"Applications\" -> \"File tools\" -> \"MTools File Manager\") or the command line utilities \"mtools\" (enter \"man mtools\" on the command line for more info). You find the card's file system under the drive letter \"p:\", or subsequent drive letters when you have more than one HP printer with photo card drives. In \"MtoolsFM\" you can switch between drive letters with the field at the upper-right corners of the file lists.",
-		     $ptaldevice);
-	} else {
-	    # Photo-card-drive-less models
-	    return "";
-	}
-    }
 }
 
 sub copy_queues_from {
@@ -5491,9 +5314,7 @@ What do you want to modify on this printer?",
 			    ($printer->{expert} ?
 			     N("Printer manufacturer, model, driver") :
 			     N("Printer manufacturer, model")),
-			    if_($printer->{configured}{$queue}{queuedata}{make} ne "" &&
-				$printer->{configured}{$queue}{queuedata}{model} ne N("Unknown model") &&
-				$printer->{configured}{$queue}{queuedata}{model} ne N("Raw printer"),
+			    if_($printer->{configured}{$queue}{args},
 				N("Printer options"))) : ()),
 			  if_($queue ne $printer->{DEFAULT},
 			      N("Set this printer as the default")),

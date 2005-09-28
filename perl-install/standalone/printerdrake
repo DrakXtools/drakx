@@ -375,7 +375,7 @@ sub Refresh {
     $refreshing = 1;
     my ($strfilt) = @_;
     my $selection = get_selection();
-    printer::services::wait_for_cups();
+    printer::services::wait_for_cups() if ($printer->{SPOOLER} eq "cups");
     my @printers;
     defined $printer and @printers = printer::cups::lpstat_lpv();
     RefreshLocalPrintersFull($strfilt, @printers); 

@@ -165,7 +165,7 @@ sub whatUsbport() {
 	    # Was there a manufacturer and a model in the string?
 	    if ($manufacturer eq "" || $model eq "") {
 		$manufacturer = "";
-		$model = N("Unknown Model");
+		$model = N("Unknown model");
 	    }
 	    # No description field? Make one out of manufacturer and model.
 	    if ($description eq "") {
@@ -204,12 +204,13 @@ sub whatNetPrinter {
     
     return () if $#portstoscan < 0;
     my $portlist = join ",", @portstoscan;
-    
+
     # Which hosts should be scanned?
-    # (Applying nmap to a whole network is very time-consuming, because nmap
-    #  waits for a certain timeout period on non-existing hosts, so we get a 
-    #  lists of existing hosts by pinging the broadcast addresses for existing
-    #  hosts and then scanning only them, which is much faster)
+    # (Applying nmap to a whole network is very time-consuming,
+    #  because nmap waits for a certain timeout period on non-existing
+    #  hosts, so we get a lists of existing hosts by pinging the
+    #  broadcast addresses for existing hosts and then scanning only
+    #  them, which is much faster)
     my @hostips = getIPsInLocalNetworks();
     return () if $#hostips < 0;
     my $hostlist = join " ", @hostips;
@@ -220,7 +221,7 @@ sub whatNetPrinter {
     open F, ($::testing ? "" : "chroot $::prefix/ ") .
 	qq(/bin/sh -c "export LC_ALL=C; nmap -r -P0 --host_timeout $timeout --initial_rtt_timeout $irtimeout -p $portlist $hostlist" 2> /dev/null |)
 	or return @res;
-    my ($host, $ip, $port, $modelinfo) = ("", "", "", "");
+    my ($host, $ip, $port, $modelinfo, $namechecked) = ("", "", "", "", 0);
     while (my $line = <F>) {
 	chomp $line;
 
@@ -231,13 +232,23 @@ sub whatNetPrinter {
 	    $ip = $host if !$ip;
 	    $host = $ip if $host eq "";
 	    $port = "";
+	    $namechecked = 0;
 
 	    undef $modelinfo;
 
 	} elsif ($line =~ m!^\s*(\d+)/\S+\s+open\s+!i) {
 	    next if $ip eq "";
 	    $port = $1;
-	    
+
+	    # Check integrity of the host name (work around DNS problems
+	    # by using IP if host name is broken)
+	    if (!$namechecked && ($host ne $ip)) {
+		$namechecked = 1; # Do not check more than once
+		my $packedip = gethostbyname("$host");
+		my ($a,$b,$c,$d) = unpack('C4',$packedip);
+		my $ipfromdns = sprintf("%d.%d.%d.%d", $a, $b, $c, $d);
+		$host = $ip if $ip ne $ipfromdns;
+	    }
 	    # Now we have all info for one printer
 	    # Store this auto-detection result in the data structure
 
@@ -249,7 +260,7 @@ sub whatNetPrinter {
 		foreach my $share (@shares) {
 		    push @res, { port => "smb://$host/$share->{name}",
 				 val => { CLASS => 'PRINTER',
-					  MODEL => N("Unknown Model"),
+					  MODEL => N("Unknown model"),
 					  MANUFACTURER => "",
 					  DESCRIPTION => $share->{description},
 					  SERIALNUMBER => ""
@@ -484,7 +495,7 @@ sub getSNMPModel {
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
 	qq(/bin/sh -c "scli -v 1 -c 'show printer info' $host" 2> /dev/null |) or
 	return { CLASS => 'PRINTER',
-		 MODEL => N("Unknown Model"),
+		 MODEL => N("Unknown model"),
 		 MANUFACTURER => "",
 		 DESCRIPTION => "",
 		 SERIALNUMBER => ""
@@ -557,7 +568,7 @@ sub getSNMPModel {
     }
     
     # We couldn't determine a model
-    $model = N("Unknown Model") if $model eq "";
+    $model = N("Unknown model") if $model eq "";
     
     # Remove trailing spaces
     $manufacturer =~ s/(\S+)\s+$/$1/;
