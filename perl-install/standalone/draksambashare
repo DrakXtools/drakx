@@ -37,6 +37,12 @@ use Libconf::Glueconf::Samba::Smb_conf;
 my $in = 'interactive'->vnew('su');
 $in->do_pkgs->ensure_is_installed('samba-server', '/usr/sbin/smbd') or return;
 
+#if (!-f "/etc/sysconfig/wizard_samba") {
+#    $in->do_pkgs->ensure_is_installed('drakwizard', '/usr/sbin/drakwizard');
+#    err_dialog(N("Error"), N("Please setup a samba server")) and return;    
+#}
+
+
 my $icon_path = "/usr/lib/libDrakX/icons";
 my $fileshare_icon = "$icon_path/IC-winacces2-16.png";
 my $printershare_icon = "$icon_path/IC-sambaprt-16.png";
