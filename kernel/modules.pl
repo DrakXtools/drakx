@@ -130,7 +130,7 @@ sub remove_unneeded_modules {
 
     my @all = list_modules::all_modules();
     my @all_with_deps = map { dependencies_closure($_) } @all;
-    my %wanted_modules = map {; "$_.$ext" => 1 } @all_with_deps;
+    my %wanted_modules = map { "$_.$ext" => 1 } @all_with_deps;
     foreach (all("all.kernels/$kern_ver/modules")) {
 	$wanted_modules{$_} or unlink "all.kernels/$kern_ver/modules/$_";	
     }
@@ -208,7 +208,7 @@ sub make_modules_description {
 sub get_main_modules() {
     my $base = dirname($0);
     my $main = chomp_(cat_("$base/RPMS/.main"));
-    `tar tvf $base/all.kernels/$main/all_modules.tar | awk '{ print \$6 }'`
+    `tar tvf $base/all.kernels/$main/all_modules.tar | awk '{ print \$6 }'`;
 }
 
 sub pci_modules4stage1 {
