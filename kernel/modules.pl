@@ -205,6 +205,11 @@ sub make_modules_description {
     output("modules.description", @l);
 }
 
+sub get_main_modules() {
+    my $main = chomp_(cat_('RPMS/.main'));
+    `tar tvf all.kernels/$main/all_modules.tar | awk '{ print \$6 }'`
+}
+
 sub pci_modules4stage1 {
     my ($category) = @_;
     my @modules = difference2([ category2modules($category) ], \@modules_removed_from_stage1);
@@ -244,7 +249,7 @@ sub check() {
 	    print "$msg $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
 	}
     };
-    $not_listed->('NOT LISTED', 1, `tar tvf all.kernels/2.6*/all_modules.tar | awk '{ print \$6 }'`);
+    $not_listed->('NOT LISTED', 1, get_main_modules());
     $not_listed->('not listed', $verbose, `rpm -qpl RPMS/kernel-*2.6*`);
     if (%deprecated_modules) {
 	my %per_cat;
