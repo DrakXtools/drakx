@@ -229,6 +229,7 @@ sub check() {
 	my ($msg, $verbose, @l) = @_;
 	my %not_listed;
 	foreach (@l) {
+	    chomp;
 	    my ($mod) = m|([^/]*)\.k?o(\.gz)?$| or next;
 	    delete $deprecated_modules{$mod};
 	    next if $listed{$mod};
@@ -243,7 +244,7 @@ sub check() {
 	    print "$msg $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
 	}
     };
-    $not_listed->('NOT LISTED', 1, `cd all.kernels/2.6* ; find -name "*.k?o" -o -name "*.k?o.gz"`);
+    $not_listed->('NOT LISTED', 1, `tar tvf all.kernels/2.6*/all_modules.tar | awk '{ print \$6 }'`);
     $not_listed->('not listed', $verbose, `rpm -qpl RPMS/kernel-*2.6*`);
     if (%deprecated_modules) {
 	my %per_cat;
