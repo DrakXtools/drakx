@@ -213,8 +213,13 @@ sub get_main_modules() {
 
 sub pci_modules4stage1 {
     my ($category) = @_;
+    my @list = map { s/\.k?o.*$//; chomp_($_) } get_main_modules();
+    my %listed;
+    @listed{@list} = ();
     my @modules = difference2([ category2modules($category) ], \@modules_removed_from_stage1);
-    print "$_\n" foreach uniq(map { dependencies_closure($_) } @modules);
+    my ($kept, $rejected) = partition { exists $listed{$_} } @modules;
+    print STDERR "REJECTED @$rejected\n" if $verbose;
+    print "$_\n" foreach uniq(map { dependencies_closure($_) } @$kept);
 }
 
 sub check() {
