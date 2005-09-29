@@ -208,7 +208,7 @@ sub make_modules_description {
 sub get_main_modules() {
     my $base = dirname($0);
     my $main = chomp_(cat_("$base/RPMS/.main"));
-    chomp_(`tar tvf $base/all.kernels/$main/all_modules.tar | awk '{ print \$6 }'`);
+    chomp_(`tar tf $base/all.kernels/$main/all_modules.tar`);
 }
 
 sub pci_modules4stage1 {
