@@ -130,7 +130,7 @@ sub remove_unneeded_modules {
 
     my @all = list_modules::all_modules();
     my @all_with_deps = map { dependencies_closure($_) } @all;
-    my %wanted_modules = map {; "$_.$ext" => 1 } @all_with_deps;
+    my %wanted_modules = map { ("$_.$ext" => 1) } @all_with_deps;
     foreach (all("all.kernels/$kern_ver/modules")) {
 	$wanted_modules{$_} or unlink "all.kernels/$kern_ver/modules/$_";	
     }
