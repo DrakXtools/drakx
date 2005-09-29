@@ -216,6 +216,8 @@ sub pci_modules4stage1 {
     my @list = map { s/\.k?o.*$//; $_ } get_main_modules();
     my %listed;
     @listed{@list} = ();
+    #- keep 2.4 compatibility aliases (to sync with get_name_kernel_26_transition() from mdk-stage1/modules.c)
+    @listed{qw(usb-ohci usb-uhci uhci bcm4400 3c559 3c90x dc395x_trm)} = ();
     my @modules = difference2([ category2modules($category) ], \@modules_removed_from_stage1);
     my ($kept, $rejected) = partition { exists $listed{$_} } @modules;
     print STDERR "REJECTED @$rejected\n" if $verbose;
