@@ -220,7 +220,7 @@ sub pci_modules4stage1 {
     @listed{qw(usb-ohci usb-uhci uhci bcm4400 3c559 3c90x dc395x_trm)} = ();
     my @modules = difference2([ category2modules($category) ], \@modules_removed_from_stage1);
     my ($kept, $rejected) = partition { exists $listed{$_} } @modules;
-    print STDERR "REJECTED @$rejected\n" if $verbose;
+    print STDERR "REJECTED @$rejected\n" if $verbose && @$rejected;
     print "$_\n" foreach uniq(map { dependencies_closure($_) } @$kept);
 }
 
