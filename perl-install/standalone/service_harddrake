@@ -45,7 +45,7 @@ if ($curr_kernel ne $prev_kernel) {
 }
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
-    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_", "char/drm/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
+    if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("extra/$_", "video/$_", "char/$_", "char/drm/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
         # do not automatically switch from nv to nvidia (in order to handle
         # cases where nvidia module crashes the system):
         #
