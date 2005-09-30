@@ -28,11 +28,14 @@ Usage:
 my ($opt, $idlabel) = @ARGV;
 @ARGV == 2 && ($opt eq '--id' || $opt eq '--doc' || $opt eq '--help') or usage();
 
-$ugtk2::wm_icon = "help";
-my $in = interactive->vnew;
 my ($instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 
 -e $instpath or system("/usr/sbin/drakhelp_inst $package");
--e $instpath or $in->ask_warn(N("Mandriva Linux Help Center"), N("%s cannot be displayed \n. No Help entry of this type\n", $instpath));
 
-system("/usr/bin/www-browser file://$ancpath &") if -e $instpath;
+if (-e $instpath) {
+    system("/usr/bin/www-browser file://$ancpath &");
+} else {
+    $ugtk2::wm_icon = "help";
+    my $in = interactive->vnew;
+    $in->ask_warn(N("Mandriva Linux Help Center"), N("%s cannot be displayed \n. No Help entry of this type\n", $instpath));
+}
