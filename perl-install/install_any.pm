@@ -897,6 +897,7 @@ sub default_packages {
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @l, "dmraid" if any { fs::type::is_dmraid($_) } @{$o->{all_hds}{hds}};
     push @l, "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
+    push @l, (arch() =~ /x86_64/ ? 'powernowd' : 'athcool') if cat_('/proc/cpuinfo') =~ /AuthenticAMD/;
     push @l, detect_devices::probe_name('Pkg');
 
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
