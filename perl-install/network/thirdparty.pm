@@ -61,7 +61,7 @@ use log;
 #- o no_club:
 #-     1 if the package isn't available on Mandriva club
 
-my $firmware_directory = "/lib/hotplug/firmware";
+my $firmware_directory = "/lib/firmware";
 
 my %network_settings = (
   rtc =>
