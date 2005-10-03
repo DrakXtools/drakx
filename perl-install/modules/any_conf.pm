@@ -208,7 +208,9 @@ sub read_raw {
 	s/#.*$//;
 	s/\s+$//;
 
+	# Fix upgrade from ALSA < 0.9.0:
 	s/\b(snd-card-)/snd-/g;
+	# Fix upgrade for unified VIA driver:
 	s/\b(snd-via686|snd-via8233)\b/snd-via82xx/g;
 
 	my ($type, $module, $val) = split(' ', $_, 3) or next;
