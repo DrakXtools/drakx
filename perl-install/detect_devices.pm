@@ -141,8 +141,15 @@ sub complete_usb_storage_info {
 
     foreach my $usb (usb_probe()) {
 	if (my $e = find { !$_->{found} && $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @usb) {
+         my $host = get_sysfs_usbpath_for_block($e->{device});
+         if ($host) {
+             $e->{info} = chomp_(cat_("/sys/block/$e->{device}/$host/../serial"));
+             $e->{usb_description} = join('|', 
+                                          chomp_(cat_("/sys/block/$e->{device}/$host/../manufacturer")),
+                                          chomp_(cat_("/sys/block/$e->{device}/$host/../product")));
+         }
          local $e->{found} = 1;
-	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
+	    $e->{"usb_$_"} ||= $usb->{$_} foreach keys %$usb;
 	}
     }
 }
@@ -192,13 +199,19 @@ sub may_be_a_hd {
     );
 }
 
+sub get_sysfs_usbpath_for_block {
+    my ($device) = @_;
+    my $host = readlink("/sys/block/$device/device");
+    $host =~ s!/host.*!!;
+    $host;
+}
+
 sub get_scsi_driver {
     my (@l) = @_;
     # find driver of host controller from sysfs:
     foreach (@l) {
 	next if $_->{driver};
-	my $host = readlink("/sys/block/$_->{device}/device");
-     $host =~ s!/host.*!!;
+	my $host = get_sysfs_usbpath_for_block($_->{device});
 	$_->{driver} = readlink("/sys/block/$_->{device}/$host/driver");
 	$_->{driver} =~ s!.*/!!;
     }
