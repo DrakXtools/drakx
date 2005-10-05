@@ -29,8 +29,8 @@ PARTIMAGE_DIR="$@" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all"
 mkdir -p .tmp/install/stage2
 mv -f rescue.clp .tmp/install/stage2
 
-common_para="rescue acpi=ht automatic=method:cdrom"
-# hda=4864,255,63
+common_para="rescue automatic=method:cdrom"
+# hda=4864,255,63 acpi=ht
 
 for action in save_all rest_all; do
 
