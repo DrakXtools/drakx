@@ -478,7 +478,7 @@ sub libgl_config {
 		$_ = "$comment$s\n";
 		$need_to_run_ldconfig ||= !$commented;
 	    }	    
-	} "$dir/$file";
+	} "$dir/$file" if -e "$dir/$file";
     }
     if ($::isStandalone && $need_to_run_ldconfig) {
 	log::explanations("ldconfig will be run because the GL library was " . ($wanted ? 'enabled' : 'disabled'));
