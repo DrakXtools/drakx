@@ -64,6 +64,7 @@ sub to_raw_X {
       if defined $card->{Xinerama};
 
     $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL} && $card->{Driver} ne 'fbdev'); #- glx for everyone, except proprietary nvidia and fbdev
+    $raw_X->remove_load_module($card->{REMOVE_GLX}) if $card->{REMOVE_GLX};
     $raw_X->set_load_module('dri', $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL});
 
     # This loads the NVIDIA GLX extension module.
@@ -330,6 +331,7 @@ sub install_server {
 	    $card->{Driver} = 'nvidia';
 	    $card->{DRI_GLX_SPECIAL} = $libglx;
 	    $card->{Options}{IgnoreEDID} = 1;
+	    $card->{REMOVE_GLX} = "$modules_dir/extensions/libglx.so";
 	}
     }
     if ($card->{Driver2} eq 'fglrx' &&
@@ -338,6 +340,7 @@ sub install_server {
 	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
+    $card->{REMOVE_GLX} ||= "$modules_dir/extensions/nvidia/libglx.so";
 
     libgl_config($card->{Driver});
 
