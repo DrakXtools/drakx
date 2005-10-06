@@ -347,7 +347,7 @@ sub install_server {
     }
     $card->{REMOVE_GLX} ||= "$modules_dir/extensions/nvidia/libglx.so";
 
-    libgl_config($card->{Driver});
+    libgl_config($card);
 
     if ($card->{need_MATROX_HAL}) {
 	require Xconfig::proprietary;
@@ -465,18 +465,20 @@ sub set_glx_restrictions {
 }
 
 sub libgl_config {
-    my ($Driver) = @_;
+    my ($card) = @_;
 
     my $dir = "$::prefix/etc/ld.so.conf.d";
     my $comment = '# commented-by-DrakX ';
 
     my %driver_to_libgl_config = (
-	nvidia => 'nvidia.conf',
+	nvidia => $card->{NVIDIA_LEGACY} ? 'nvidia_legacy.conf' : 'nvidia.conf',
+	nvidia_other => !$card->{NVIDIA_LEGACY} ? 'nvidia_legacy.conf' : 'nvidia.conf',
 	fglrx => 'ati.conf',
     );
     my $need_to_run_ldconfig;
-    my $wanted = $driver_to_libgl_config{$Driver};
+    my $wanted = $driver_to_libgl_config{$card->{Driver}};
     foreach my $file (values %driver_to_libgl_config) {
+	next if !-e "$dir/$file";
 	substInFile {
 	    my ($commented, $s) = /^(\Q$comment\E)?(.*)/;
 	    if ($file eq $wanted) {
