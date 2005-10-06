@@ -63,14 +63,19 @@ sub to_raw_X {
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
 
-    $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL} && $card->{Driver} ne 'fbdev'); #- glx for everyone, except proprietary nvidia and fbdev
+    # handle Xorg <-> nvidia swithch when packages're installed:
     $raw_X->remove_load_module($card->{REMOVE_GLX}) if $card->{REMOVE_GLX};
-    $raw_X->set_load_module('dri', $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL});
+    if ($card->{DRI_GLX_SPECIAL}) {
+        $raw_X->remove_load_module('glx'); # this doesn't duplicate the above glx line
+        # This loads the NVIDIA GLX extension module.
+        # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
+        # IT WILL LOAD XFree86 glx module and the server will crash.
+        $raw_X->add_load_module($card->{DRI_GLX_SPECIAL});
+    } else {
+        $raw_X->set_load_module('glx', $card->{Driver} ne 'fbdev'); #- glx for everyone, except proprietary nvidia and fbdev
+        $raw_X->set_load_module('dri', $card->{use_DRI_GLX});
+    }
 
-    # This loads the NVIDIA GLX extension module.
-    # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
-    # IT WILL LOAD XFree86 glx module and the server will crash.
-    $raw_X->set_load_module($card->{DRI_GLX_SPECIAL}, to_bool($card->{DRI_GLX_SPECIAL})); 
     $raw_X->remove_Section('DRI');
 
     $raw_X->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
