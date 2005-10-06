@@ -15,10 +15,10 @@ sub config_window {
 	   push @l, { label => $name, help => join("\n", $description, if_(c::kernel_version() !~ /^\Q2.6/, "[$format]")),
                                                 val => \$conf{$name}, allow_empty_list => 1 };
     }
-    # BUG: once we've released mdk9.2 and unfreeze cooker, morph this
-    #      into a proper error dialog with a nice error message (but
-    #      for now we cannot due to string freeze :-()
-    @l = { label => N("Parameters"), help => "", val => N("NONE"), allow_empty_list => 1 } if !@l;
+    if (!@l) {
+        $in->ask_warn(N("Error"), N("This driver has no configuration parameter!"));
+        return;
+    }
     if ($in->ask_from(N("Module configuration"), N("You can configure each parameter of the module here."), \@l)) {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
