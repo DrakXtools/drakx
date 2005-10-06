@@ -478,7 +478,6 @@ sub libgl_config {
     my $need_to_run_ldconfig;
     my $wanted = $driver_to_libgl_config{$card->{Driver}};
     foreach my $file (values %driver_to_libgl_config) {
-	next if !-e "$dir/$file";
 	substInFile {
 	    my ($commented, $s) = /^(\Q$comment\E)?(.*)/;
 	    if ($file eq $wanted) {
