@@ -104,6 +104,8 @@ sub raw {
 	    log::l($_[0]);
 	    c::_exit(128);
 	}
+     my $binary = ref $name ? $name->[0] : $name;
+     die_exit "program not found: $binary" if !find { -x $_ } $binary, map { "$_/$binary" } split(':', $ENV{PATH});
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
 	    $stderr_mode =~ s/2//;
