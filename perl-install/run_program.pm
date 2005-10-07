@@ -63,7 +63,8 @@ sub raw {
     my $stdout = $stdout_raw && (ref($stdout_raw) ? $tmpdir->() . "/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
-    if (! ($real_name =~ m!^/! ? -x $real_name : whereis_binary($real_name, $root))) {
+    my ($rname) = split(/[ \|]/, $real_name, 2);
+    if (! ($rname =~ m!^/! ? -x $rname : whereis_binary($rname, $root))) {
 	log::l("program not found: $real_name");
 	return;
     }
