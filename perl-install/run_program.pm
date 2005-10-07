@@ -63,6 +63,11 @@ sub raw {
     my $stdout = $stdout_raw && (ref($stdout_raw) ? $tmpdir->() . "/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
+    if (! ($real_name =~ m!^/! ? -x $real_name : whereis_binary($real_name, $root))) {
+	log::l("program not found: $real_name");
+	return;
+    }
+
     if (my $pid = fork()) {
 	if ($options->{detach}) {
 	    $pid;
@@ -104,8 +109,6 @@ sub raw {
 	    log::l($_[0]);
 	    c::_exit(128);
 	}
-     my $binary = ref $name ? $name->[0] : $name;
-     die_exit "program not found: $binary" if !find { -x $_ } $binary, map { "$_/$binary" } split(':', $ENV{PATH});
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
 	    $stderr_mode =~ s/2//;
@@ -157,3 +160,8 @@ sub DESTROY {
 }
 
 1;
+
+#- Local Variables:
+#- mode:cperl
+#- tab-width:8
+#- End:
