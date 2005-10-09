@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-10-09 01:35+0800\n"
-"PO-Revision-Date: 2005-09-26 09:53+0700\n"
-"Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
+"PO-Revision-Date: 2005-10-09 08:41+0700\n"
+"Last-Translator: Willy Sudiarto Raharjo <willysr@jogja.citra.net.id>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -3289,7 +3289,7 @@ msgstr ""
 "Hati-hati dalam menambahkan partisi /boot"
 
 #: fsedit.pm:394
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -3298,7 +3298,7 @@ msgstr ""
 "karena ia melebihi volume fisik"
 
 #: fsedit.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -9925,14 +9925,14 @@ msgid "Remove the logical volumes first\n"
 msgstr "Hapus volume logical dahulu\n"
 
 #: lvm.pm:178
-#, fuzzy, c-format
+#, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "Bootloader tidak bisa menangani /boot pada beberapa volume fisik"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Konfigurasi driver UPS"
+msgstr "Driver ini tidak memiliki parameter konfigurasi!"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -11790,6 +11790,8 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080"
 msgstr ""
+"Disini Anda bisa mensetting konfigurasi proxy (misalnya http://"
+"server_cache:8080"
 
 #: network/network.pm:410
 #, c-format
@@ -13949,53 +13951,56 @@ msgstr "Perintah baris harus diisi!"
 #: printer/printerdrake.pm:2402
 #, c-format
 msgid "Your printer %s is currently connected %s."
-msgstr ""
+msgstr "Printer %s Anda saat ini terhubung %s."
 
 #: printer/printerdrake.pm:2404 printer/printerdrake.pm:2411
-#, fuzzy, c-format
+#, c-format
 msgid "to a parallel port"
-msgstr " pada port paralel #%s"
+msgstr "menuju port paralel"
 
 #: printer/printerdrake.pm:2405 printer/printerdrake.pm:2412
 #, c-format
 msgid "to the USB"
-msgstr ""
+msgstr "menuju USB"
 
 #: printer/printerdrake.pm:2406 printer/printerdrake.pm:2413
-#, fuzzy, c-format
+#, c-format
 msgid "via the network"
-msgstr "Mengaktifkan jaringan"
+msgstr "via jaringan"
 
 #: printer/printerdrake.pm:2407
 #, c-format
 msgid "This type of connection is currently not fully supported by HPLIP."
-msgstr ""
+msgstr "Jenis koneksi ini tidak sepenuhnya didukung oleh HPLIP."
 
 #: printer/printerdrake.pm:2409
 #, c-format
 msgid "You get full HPLIP support for your device if you connect it "
-msgstr ""
+msgstr "Anda mendapatkan dukungan penuh HPLIP untuk divais Anda jika Anda"
+"menghubungkannya"
 
 #: printer/printerdrake.pm:2415
 #, c-format
 msgid ""
 "You can now set up your device with HPLIP anyway (works in many cases), "
 msgstr ""
+"Anda sekarang bisa set-up divais Anda dengan HPLIP (bekerja pada sebagian "
+"besar kasus), "
 
 #: printer/printerdrake.pm:2416
 #, c-format
 msgid "set it up without HPLIP (print-only), "
-msgstr ""
+msgstr "set-up tanpa HPLIP (hanya mencetak), "
 
 #: printer/printerdrake.pm:2416
-#, fuzzy, c-format
+#, c-format
 msgid "or"
-msgstr "Jam"
+msgstr "atau"
 
 #: printer/printerdrake.pm:2417
 #, c-format
 msgid "cancel the setup (for example to reconnect your device)."
-msgstr ""
+msgstr "batalkan set-up (misalnya untuk menghubungkan kembali divais Anda)."
 
 #: printer/printerdrake.pm:2419
 #, c-format
@@ -14003,11 +14008,13 @@ msgid ""
 "You can always revise your choice by clicking your printer's entry in the "
 "main window, "
 msgstr ""
+"Anda dapat selalu merevisi pilihan Anda dengan memilih daftar printer pada "
+"jendela utama, "
 
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "klik pada tombol \"%s\", "
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:302
@@ -14020,7 +14027,7 @@ msgstr "Edit"
 #: printer/printerdrake.pm:2421
 #, c-format
 msgid "and choosing \"%s\"."
-msgstr ""
+msgstr "dan memilih \"%s\"."
 
 #: printer/printerdrake.pm:2421 printer/printerdrake.pm:5312
 #: printer/printerdrake.pm:5372
@@ -14036,17 +14043,17 @@ msgstr "Apa yang akan Anda lakukan?"
 #: printer/printerdrake.pm:2424 printer/printerdrake.pm:2427
 #, c-format
 msgid "Set up with HPLIP"
-msgstr ""
+msgstr "Set-up dengan HPLIP"
 
 #: printer/printerdrake.pm:2425 printer/printerdrake.pm:2429
 #, c-format
 msgid "Set up without HPLIP"
-msgstr ""
+msgstr "Set-up tanpa HPLIP"
 
 #: printer/printerdrake.pm:2426
-#, fuzzy, c-format
+#, c-format
 msgid "Cancel setup"
-msgstr "Batal"
+msgstr "Batalkan set-up"
 
 #: printer/printerdrake.pm:2460
 #, c-format
@@ -14062,18 +14069,18 @@ msgstr ""
 "akses kartu memori pada printer dengan pembaca kartu."
 
 #: printer/printerdrake.pm:2462
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To access these extra functions on HP printers they must be set up with "
 "HPLIP (HP Linux Imaging and Printing). "
 msgstr ""
-"Untuk mengakses fungsi tambahan ini pada printer HP Anda, harus diset-up "
-"dengan perangkat lunak yang sesuai: "
+"Untuk mengakses fungsi tambahan pada printer HP Anda harus diset-up "
+"dengan HPLIP (HP Linux Imaging and Printing). "
 
 #: printer/printerdrake.pm:2464
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use HPLIP (choose \"No\" for non-HP printers)? "
-msgstr "Apa pilihan Anda (pilih \"None\" untuk printer non-HP)? "
+msgstr "Apakah Anda ingin menggunakan HPLIP (pilih \"Tidak\" untuk printer non HP)? "
 
 #: printer/printerdrake.pm:2490
 #, c-format
@@ -14760,9 +14767,9 @@ msgid "Print option list"
 msgstr "Daftar opsi cetak"
 
 #: printer/printerdrake.pm:4069
-#, fuzzy, c-format
+#, c-format
 msgid "Printing option list..."
-msgstr "Daftar opsi cetak"
+msgstr "Mencetak daftar opsi..."
 
 #: printer/printerdrake.pm:4087
 #, c-format
@@ -18459,16 +18466,19 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"Star harus dipilih jika Anda ingin mem-backup EA atau ACL, jika tidak pilih "
+"tar"
 
 #: standalone/drakbackup:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
 "users can be in a comma seperated list"
 msgstr ""
 "Ini seharusnya berisi pengguna lokal atau alamat email yang digunakan untuk "
-"mengirimkan hasil. Anda harus mendefinisikan server mail yang berfungsi."
+"pengiriman hasil backup. Anda harus mendefinisikan server mail yang berfungsi."
+"Beberapa pengguna dapat berupa daftar yang dipisahkan dengan koma"
 
 #: standalone/drakbackup:164
 #, c-format
@@ -18505,6 +18515,8 @@ msgid ""
 "Selecting this option allows you to view the raw output from the restore "
 "process, after a file restore."
 msgstr ""
+"Memilih opsi ini mengijinkan Anda untuk melihat hasil output dari proses "
+"pengembalian, setelah sebuah file dikembalikan."
 
 #: standalone/drakbackup:168
 #, c-format
@@ -18811,9 +18823,9 @@ msgid "Can not create catalog!"
 msgstr "Tidak dapat membuat katalog!"
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Masalah menginstall paket %s"
+msgstr "Masalah dalam menginstall %s"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -19174,14 +19186,14 @@ msgid "Saturday"
 msgstr "Sabtu"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Hapus Klien"
+msgstr "Hapus daftar cron"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "Tambah Printer"
+msgstr "Tambah daftar cron"
 
 #: standalone/drakbackup:2174
 #, c-format
@@ -19214,24 +19226,24 @@ msgid "Month"
 msgstr "Bulan"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "Mingguan"
+msgstr "Mingguan (awal)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "Mingguan"
+msgstr "Mingguan (akhir)"
 
 #: standalone/drakbackup:2210
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
 msgstr "Profil"
 
 #: standalone/drakbackup:2216
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "Pengguna aktual"
+msgstr "Crontab aktual:"
 
 #: standalone/drakbackup:2224
 #, c-format
@@ -19251,9 +19263,9 @@ msgstr ""
 "Jika komputer tidak selalu menyala, Anda mungkin ingin menginstall anacron."
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "Silahkan pilih tanggal untuk dipulihkan:"
+msgstr "Silahkan pilih program arsip"
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -19286,9 +19298,9 @@ msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "Hapus file tar hard disk setelah backup pada media lain."
 
 #: standalone/drakbackup:2321
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "OK untuk pemulihan file lain."
+msgstr "Lihat log pengembalikan setelah pengembalian file."
 
 #: standalone/drakbackup:2366
 #, c-format
@@ -19515,19 +19527,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tJangan sertakan File Sistem\n"
 
 #: standalone/drakbackup:2628
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\tBackup dengan tar dan bzip2\n"
+msgstr "\tBackup dengan %s dan bzip2\n"
 
 #: standalone/drakbackup:2629
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tBackup dengan tar dan gzip\n"
+msgstr "\tBackup dengan %s dan gzip\n"
 
 #: standalone/drakbackup:2630
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tBackup hanya dengan tar\n"
+msgstr "\tBackup hanya dengan %s\n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -19654,7 +19666,7 @@ msgstr "          Berhasil Dipulihkan pada %s    "
 #: standalone/drakbackup:2976
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "/usr/bin/star tidak ditemukan, menggunakan tar..."
 
 #: standalone/drakbackup:3012
 #, c-format
@@ -20036,14 +20048,14 @@ msgstr ""
 "silakan klik Wizard atau Tingkat Lanjut."
 
 #: standalone/drakbackup:4473
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "File lokal"
+msgstr "Muat profil"
 
 #: standalone/drakbackup:4482
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "Simpan sebagai.."
+msgstr "Simpan profil sebagai.."
 
 #: standalone/drakbackup:4504 standalone/drakbackup:4507
 #, c-format
@@ -20879,7 +20891,7 @@ msgstr ""
 "Sebelum menginstall sembarang font, pastikan Anda memiliki hak untuk "
 "menggunakan dan menginstallnya pada sistem Anda.\n"
 "\n"
-"-Anda dapat menginstal font dengan cara normal. Terkadang, font palsu dapat "
+"-Anda dapat menginstall font dengan cara normal. Terkadang, font palsu dapat "
 "membuat server X Anda hang."
 
 #: standalone/drakfont:474 standalone/drakfont:483
@@ -21404,7 +21416,7 @@ msgstr "Pusat Bantuan Mandriva Linux"
 #: standalone/drakhelp:51
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "Tidak ada daftar bantuan untuk %s\n"
 
 #: standalone/drakhosts:98
 #, c-format
