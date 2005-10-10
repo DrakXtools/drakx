@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-et\n"
 "POT-Creation-Date: 2005-10-09 01:35+0800\n"
-"PO-Revision-Date: 2005-09-19 16:58+0200\n"
+"PO-Revision-Date: 2005-10-10 14:13+0200\n"
 "Last-Translator: Marek Laane <bald@starman.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1545,7 +1545,7 @@ msgid "Windows Domain:"
 msgstr "Windowsi domeen:"
 
 #: authentication.pm:69
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
@@ -3269,7 +3269,7 @@ msgstr ""
 "Lisage kindlasti /boot-partitsioon!"
 
 #: fsedit.pm:394
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -3278,7 +3278,7 @@ msgstr ""
 "hõlmab mitut füüsilist ketast"
 
 #: fsedit.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -9670,16 +9670,16 @@ msgid "Remove the logical volumes first\n"
 msgstr "Eemaldage esmalt loogilised kettad\n"
 
 #: lvm.pm:178
-#, fuzzy, c-format
+#, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
 "Alglaadur ei suuda käsitleda mitmel füüsilisel kettal paiknevat "
 "partitsiooni /boot"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "UPS-i draiveri seadistamine"
+msgstr "Sellel draiveril puuduvad seadistatavad parameetrid!"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -11536,6 +11536,8 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080"
 msgstr ""
+"Siin saate määrata oma puhverserverite parameetrid (näiteks http://"
+"minu_puhverserver:8080)"
 
 #: network/network.pm:410
 #, c-format
@@ -13701,53 +13703,54 @@ msgstr "Sisestama peab käsurea!"
 #: printer/printerdrake.pm:2402
 #, c-format
 msgid "Your printer %s is currently connected %s."
-msgstr ""
+msgstr "Teie printer %s on praegu ühendatud %s."
 
 #: printer/printerdrake.pm:2404 printer/printerdrake.pm:2411
-#, fuzzy, c-format
+#, c-format
 msgid "to a parallel port"
-msgstr " paralleelpordis #%s"
+msgstr "paralleelporti"
 
 #: printer/printerdrake.pm:2405 printer/printerdrake.pm:2412
 #, c-format
 msgid "to the USB"
-msgstr ""
+msgstr "USB-porti"
 
 #: printer/printerdrake.pm:2406 printer/printerdrake.pm:2413
-#, fuzzy, c-format
+#, c-format
 msgid "via the network"
-msgstr "Võrgu aktiveerimine"
+msgstr "üle võrgu"
 
 #: printer/printerdrake.pm:2407
 #, c-format
 msgid "This type of connection is currently not fully supported by HPLIP."
-msgstr ""
+msgstr "HPLIP ei toeta veel täielikult seda tüüpi ühendust. "
 
 #: printer/printerdrake.pm:2409
 #, c-format
 msgid "You get full HPLIP support for your device if you connect it "
-msgstr ""
+msgstr "Te saate HPLIP-i täieliku toe oma seadmele, kui ühendate selle "
 
 #: printer/printerdrake.pm:2415
 #, c-format
 msgid ""
 "You can now set up your device with HPLIP anyway (works in many cases), "
 msgstr ""
+"Nüüd võite seadistada oma seadme tööle HPLIP-iga (toimib peaaegu kõigil juhtudel), "
 
 #: printer/printerdrake.pm:2416
 #, c-format
 msgid "set it up without HPLIP (print-only), "
-msgstr ""
+msgstr "seadistada selle tööle ilma HPLIP-ita (ainult trükkimiseks) "
 
 #: printer/printerdrake.pm:2416
-#, fuzzy, c-format
+#, c-format
 msgid "or"
-msgstr "Tundi"
+msgstr "või"
 
 #: printer/printerdrake.pm:2417
 #, c-format
 msgid "cancel the setup (for example to reconnect your device)."
-msgstr ""
+msgstr "katkestada seadistamise (näiteks seadme lahtiühendamiseks). "
 
 #: printer/printerdrake.pm:2419
 #, c-format
@@ -13755,11 +13758,12 @@ msgid ""
 "You can always revise your choice by clicking your printer's entry in the "
 "main window, "
 msgstr ""
+"Te võite alati oma valikut muuta, kui klõpsate peaaknas printeri kirjele, "
 
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "klõpsate nupule \"%s\" "
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:302
@@ -13772,7 +13776,7 @@ msgstr "Muuda"
 #: printer/printerdrake.pm:2421
 #, c-format
 msgid "and choosing \"%s\"."
-msgstr ""
+msgstr "ja valite \"%s\". "
 
 #: printer/printerdrake.pm:2421 printer/printerdrake.pm:5312
 #: printer/printerdrake.pm:5372
@@ -13788,17 +13792,17 @@ msgstr "Mida soovite ette võtta?"
 #: printer/printerdrake.pm:2424 printer/printerdrake.pm:2427
 #, c-format
 msgid "Set up with HPLIP"
-msgstr ""
+msgstr "Seadista HPLIP-iga"
 
 #: printer/printerdrake.pm:2425 printer/printerdrake.pm:2429
 #, c-format
 msgid "Set up without HPLIP"
-msgstr ""
+msgstr "Seadista HPLIP-ita"
 
 #: printer/printerdrake.pm:2426
-#, fuzzy, c-format
+#, c-format
 msgid "Cancel setup"
-msgstr "Loobu"
+msgstr "Loobu seadistamisest"
 
 #: printer/printerdrake.pm:2460
 #, c-format
@@ -13814,18 +13818,18 @@ msgstr ""
 "mälukaardi kasutamiseks kaardilugejaga printeritel. "
 
 #: printer/printerdrake.pm:2462
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To access these extra functions on HP printers they must be set up with "
 "HPLIP (HP Linux Imaging and Printing). "
 msgstr ""
-"Selliste HP printerite lisafunktsioonide pruukimiseks tuleb paigaldada ka "
-"vastav tarkvara: "
+"Selliste HP printerite lisafunktsioonide pruukimiseks tuleb need panna tööle "
+"HPLIP-iga (HP Linux Imaging and Printing). "
 
 #: printer/printerdrake.pm:2464
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use HPLIP (choose \"No\" for non-HP printers)? "
-msgstr "Milline on Teie valik (valige \"Puudub\", kui Teil pole HP printerit)?"
+msgstr "Kas soovite kasutada HPLIP-i (valige \"Ei\", kui Teil pole HP printerit)?"
 
 #: printer/printerdrake.pm:2490
 #, c-format
@@ -14514,9 +14518,9 @@ msgid "Print option list"
 msgstr "Trükkimisvalikute nimekiri"
 
 #: printer/printerdrake.pm:4069
-#, fuzzy, c-format
+#, c-format
 msgid "Printing option list..."
-msgstr "Trükkimisvalikute nimekiri"
+msgstr "Trükkimisvalikute nimekiri..."
 
 #: printer/printerdrake.pm:4087
 #, c-format
@@ -18215,9 +18219,10 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"Kui soovite varundada EA-d või ACL-e, valige star, muudel juhtudel tar"
 
 #: standalone/drakbackup:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
@@ -18225,7 +18230,8 @@ msgid ""
 msgstr ""
 "Siia saab kirjutada komadega eraldatult kohalikud kasutajad või nende e-"
 "posti aadressid, kellele/kuhu antakse teada varunduse tulemustest. Selleks "
-"läheb vaja toimivat e-posti serverit."
+"läheb vaja toimivat e-posti serverit. Mitme kasutaja määramisel eraldage "
+"nad komadega."
 
 #: standalone/drakbackup:164
 #, c-format
@@ -18262,6 +18268,8 @@ msgid ""
 "Selecting this option allows you to view the raw output from the restore "
 "process, after a file restore."
 msgstr ""
+"Selle valimisel saate pärast faili taastamist näha taastamisprotsessi "
+"terviklikku väljundit."
 
 #: standalone/drakbackup:168
 #, c-format
@@ -18568,9 +18576,9 @@ msgid "Can not create catalog!"
 msgstr "Kataloogi ei õnnestunud luua!"
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Probleemid paketi %s paigaldamisel"
+msgstr "Probleem paketi %s paigaldamisel"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -18931,14 +18939,14 @@ msgid "Saturday"
 msgstr "Laupäev"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Kustuta klient"
+msgstr "Cron-kirje kustutamine"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "Lisa printer"
+msgstr "Cron-kirje lisamine"
 
 #: standalone/drakbackup:2174
 #, c-format
@@ -18971,24 +18979,24 @@ msgid "Month"
 msgstr "Kuu"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "Nädalapäev"
+msgstr "Nädalapäev (algus)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "Nädalapäev"
+msgstr "Nädalapäev (lõpp)"
 
 #: standalone/drakbackup:2210
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
-msgstr "Profiilid"
+msgstr "Profiil"
 
 #: standalone/drakbackup:2216
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "Praegune kasutaja"
+msgstr "Praegune crontab:"
 
 #: standalone/drakbackup:2224
 #, c-format
@@ -19007,9 +19015,9 @@ msgid ""
 msgstr "Kui Teie masin ei ole kogu aeg sees, võiks paigaldada paketi anacron."
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "valige palun kuupäev, kust taastada"
+msgstr "Palun valige arhiveerimisprogramm"
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -19043,9 +19051,9 @@ msgstr ""
 "Tar-failid kustutatakse kõvakettalt pärast varundamist muule andmekandjale"
 
 #: standalone/drakbackup:2321
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "Muude failide taastamiseks klõpsake nupule \"Olgu\"."
+msgstr "Taastamislogi näitamine pärast faili taastamist"
 
 #: standalone/drakbackup:2366
 #, c-format
@@ -19274,19 +19282,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tsüsteemsete failide kõrvalejätmine\n"
 
 #: standalone/drakbackup:2628
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\tvarukoopiad tar- ja bzip2-vormingus\n"
+msgstr "\tvarukoopiad %s- ja bzip2-vormingus\n"
 
 #: standalone/drakbackup:2629
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tvarukoopiad tar- ja gzip-vormingus\n"
+msgstr "\tvarukoopiad %s- ja gzip-vormingus\n"
 
 #: standalone/drakbackup:2630
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tvarukoopiad ainult tar-vormingus\n"
+msgstr "\tvarukoopiad ainult %s-vormingus\n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -19413,7 +19421,7 @@ msgstr "         edukalt taastatud %s -l       "
 #: standalone/drakbackup:2976
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "/usr/bin/star'i ei leitud, kasutatakse tar'i..."
 
 #: standalone/drakbackup:3012
 #, c-format
@@ -19791,14 +19799,14 @@ msgstr ""
 "klõpsake palun nupul \"Nõustaja\" või \"Muud\"."
 
 #: standalone/drakbackup:4473
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "Kohalik fail"
+msgstr "Laadi profiil"
 
 #: standalone/drakbackup:4482
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "Salvesta kui..."
+msgstr "Salvesta profiil kui..."
 
 #: standalone/drakbackup:4504 standalone/drakbackup:4507
 #, c-format
@@ -21160,7 +21168,7 @@ msgstr "Mandriva Linuxi abikeskus"
 #: standalone/drakhelp:51
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "%s on ilma abikirjeta\n"
 
 #: standalone/drakhosts:98
 #, c-format
@@ -26849,27 +26857,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Paigaldamine ebaõnnestus!"
 
-#~ msgid "Unknown Model"
-#~ msgstr "Tundmatu mudel"
-
-#~ msgid ""
-#~ "Either with the newer HPLIP which allows printer maintenance through the "
-#~ "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
-#~ "newer PhotoSmart models "
-#~ msgstr ""
-#~ "kas uuem HPLIP, mis võimaldab printeri hooldamist väga lihtsa graafilise "
-#~ "rakendusega \"Toolbox\" ning neljavärvitrükki uuematel PhotoSmarti "
-#~ "mudelitel "
-
-#~ msgid ""
-#~ "or with the older HPOJ which allows only scanner and memory card access, "
-#~ "but could help you in case of failure of HPLIP. "
-#~ msgstr ""
-#~ "või vanem HPOJ, mis võimaldab küll ainult skänneri ja mälukaardi "
-#~ "kasutamist, kuid võib välja aidata, kui HPLIP miskipärast toime ei tule."
-
-#~ msgid "HPOJ"
-#~ msgstr "HPOJ"
 
 #~ msgid ""
 #~ "Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
@@ -26966,13 +26953,6 @@ msgstr "Paigaldamine ebaõnnestus!"
 #~ "\n"
 #~ "Fontide paigaldamine ei nõua mingeid eritingimusi. Haruharva võivad "
 #~ "siiski vigased fondid tuua kaasa X-serveri hangumise."
-
-#~ msgid ""
-#~ "%s cannot be displayed \n"
-#~ ". No Help entry of this type\n"
-#~ msgstr ""
-#~ "%s näitamine ei õnnestu.\n"
-#~ "Sellist tüüpi abikirjet ei ole.\n"
 
 #~ msgid ""
 #~ "\n"
