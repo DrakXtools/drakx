@@ -241,7 +241,7 @@ sub row_setting_dialog {
 #    $dlg->set_resizable(0);
     my $browse = Gtk2::Button->new(N("browse"));
     my $file        = Gtk2::Entry->new;
-    my ($other, $group, $user, $s) = reverse(split(//, $model->get($o_iter, 4))) if $o_iter;
+    my ($other, $group, $user, $s) = $o_iter ? reverse(split(//, $model->get($o_iter, 4))) : ();
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
     my @owners = (N_("user"), N_("group"), N_("other"));

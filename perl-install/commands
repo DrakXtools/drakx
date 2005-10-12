@@ -17,4 +17,4 @@ eval {
 };
 die formatError($@) . "\n";
 
-sub err { die "$0: unknown program (unimplemented)\n" }
+sub err() { die "$0: unknown program (unimplemented)\n" }
