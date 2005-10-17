@@ -389,6 +389,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o enhance cron support
   o weekday ranges (#18290)
 - drakboot: use compact by default (pixel, #8752)
+- drakconnect (blino):
+  o set hostname only after packages have been installed, thus
+    preventing graphical urpmi may fail
+  o restart ethernet interface for PPPoE connections
 - drakfont: fix layout
 - drakhelp: fallback nicely, trying english if i18n doc not available (pixel)
 - drakproxy: better explanations (#17261)
