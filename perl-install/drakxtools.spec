@@ -2,8 +2,8 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.3
-Release: 0.64mdk
+Version: 10.4
+Release: 0.1mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -378,6 +378,55 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Oct 17 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.1mdk
+- drakauth: hide the password (pixel, #18800)
+- drakbackup (stew):
+  o avoid wiping out user cron
+  o extended ACL support user star (#17761)
+  o multiple email recipients
+  o fix restoring with file in 2 archives
+  o profile support (#17566)
+  o enhance cron support
+  o weekday ranges (#18290)
+- drakboot: use compact by default (pixel, #8752)
+- drakfont: fix layout
+- drakhelp: fallback nicely, trying english if i18n doc not available (pixel)
+- drakproxy: better explanations (#17261)
+- draksound: do display the driver description (#5403)
+- drakTermServ (stew):
+  o install mkisofs if needed
+  o refuse to creates images without a NIC
+- harddrake: properly report no configurable parameter (#17579)
+- keyboarddrake (pablo):
+  o add "fo" keyboard
+  o synchronize XKB keyboard names with what is in latest xorg
+- net_applet: show IFW button even if not connected (blino, #18708)
+- printerdrake (till):
+  o do not auto-install "sane-frontends" for MF devices
+  o let parallel HP printers be set up with HPLIP
+  o removed HPOJ support (HPOJ obsolete, now completely replaced by HPLIP). 
+  o warn if an HP printer is connected via a port not supported by
+    HPLIP
+  o fix freezing when choosing a machine as remote CUPS server (for
+    daemon-less client) which does not exist or does not run CUPS.
+  o let network printer detection also work if the DNS is
+    misconfigured
+  o hide "Printer options" entry in printer editing menu only if there
+    are really no options (also for Sagem MF3625 with empty
+    manufacturer name in the PPD)
+  o fix raw queue being shown with "driver: PPD" (not "driver: raw")
+  o do not use "Unknown model" and "Unknown Model", this somtimes
+    broke identifying a print queue as being for an unknown printer
+  o fix loop of determining the HPLIP device URI for local printers in
+    the "printer::main::start_hplip()" function
+- XFdrake:
+  o handle nvidia_legacy
+  o don't run ldconfig when not needed
+  o prevent x11 segfaulting with nvidia driver (loading both
+    Xorg's glx and nvidia's glx)
+  o prevent GL apps from segfaulting when using nv driver while nvidia
+    packages're installed
+
 * Mon Sep 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.3-0.64mdk
 - drakconnect:
   o really restart ethernet interface for PPPOE connection (blino)
