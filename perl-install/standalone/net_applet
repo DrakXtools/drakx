@@ -268,11 +268,15 @@ sub go2State {
 sub update_tray_icon() {
     if (!$ifw_alert || $img->get_storage_type ne 'pixbuf') {
         my $pixbuf;
-        if (detect_devices::is_wireless_interface($current_interface)) {
-            my $net = find { $_->{current} } values %wireless_networks;
-            $pixbuf = $pixbufs{link_level}{$net->{approx_level}} if $net;
+        if ($current_state eq 'connected') {
+            if (detect_devices::is_wireless_interface($current_interface)) {
+                my $net = find { $_->{current} } values %wireless_networks;
+                $pixbuf = $pixbufs{link_level}{$net->{approx_level}} if $net;
+            }
+            $pixbuf ||= $pixbufs{state}{connected}
+        } else {
+            $pixbuf = $pixbufs{state}{disconnected};
         }
-        $pixbuf ||= $pixbufs{state}{$current_state eq 'connected' ? 'connected' : 'disconnected'};
         $img->set_from_pixbuf($pixbuf);
     } else {
         $img->set_from_stock('gtk-dialog-warning', 'small-toolbar');
