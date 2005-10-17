@@ -259,7 +259,7 @@ To use alsa, one can either use:
                                     help => join("\n\n", map { qq("$_": ) . $des{$_} } @alternative),
                                     allow_empty_list => 1, 
                                     format => sub { my ($drv) = @_;
-                                                    sprintf(($des{$drv} ? "$des{$drv} (%s)"  : "%s"), ($drv =~ /^snd[-_]/) ? "$drv [ALSA]" : "$drv [OSS]");
+                                                    sprintf(($des{$drv} ? "$des{$drv} (%s [%s])"  : "%s [%s]"), $drv, ($drv =~ /^snd[-_]/) ? 'ALSA' : 'OSS');
                                                 }
                                 },
                                 {
