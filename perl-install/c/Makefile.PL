@@ -6,7 +6,7 @@ use Config;
 
 my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
 
-my $libs = '-lldetect -lext2fs';
+my $libs = '-lldetect';
 
 my $pcmcia_dir = $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia_' : '';
 

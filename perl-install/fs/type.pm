@@ -252,25 +252,6 @@ sub set_type_subpart {
     }
 }
 
-
-my @partitions_signatures = (
-    (map { [ 'Linux Logical Volume Manager', 0x200 * $_ + 0x18, "LVM2" ] } 0 .. 3),
-    [ 'Linux Logical Volume Manager', 0, "HM\1\0" ],
-    [ 'ext2', 0x438, "\x53\xEF" ],
-    [ 'reiserfs', 0x10034, "ReIsErFs" ],
-    [ 'reiserfs', 0x10034, "ReIsEr2Fs" ],
-    [ 'xfs', 0, 'XFSB', 0x200, 'XAGF', 0x400, 'XAGI' ],
-    [ 'jfs', 0x8000, 'JFS1' ],
-    [ 'swap', 4086, "SWAP-SPACE" ],
-    [ 'swap', 4086, "SWAPSPACE2" ],
-    [ 'ntfs', 0x1FE, "\x55\xAA", 0x3, "NTFS" ],
-    [ 'FAT32',  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
-if_(arch() !~ /^sparc/,
-    [ 'FAT16',  0x1FE, "\x55\xAA", 0x36, "FAT" ],
-    [ 'iso9660', 0x8001, "CD001" ],
-),
-);
-
 sub fs_type_from_magic {
     my ($part) = @_;
     if (exists $part->{fs_type_from_magic}) {
@@ -281,33 +262,38 @@ sub fs_type_from_magic {
     }
 }
 
+sub call_vol_id {
+    my ($part) = @_;
+
+    my %h = map {
+	if_(/(.*?)=(.*)/, $1 => $2);
+    } run_program::get_stdout('vol_id', devices::make($part->{device}));
+
+    \%h;
+}
+
 sub type_subpart_from_magic { 
     my ($part) = @_;
-    my $dev = devices::make($part->{device});
+    my $ids = call_vol_id($part);
 
-    my $check_md = sub {
-	my ($F) = @_;
-	my $MD_RESERVED_SECTORS = 128;
-	my $sector = round_down($part->{size}, $MD_RESERVED_SECTORS) - $MD_RESERVED_SECTORS; #- MD_NEW_SIZE_SECTORS($part->{size})
-	if (c::lseek_sector(fileno $F, $sector, 0)) {
-	    my $tmp;
-	    my $signature = "\xfc\x4e\x2b\xa9";
-	    sysread($F, $tmp, length $signature);
-	    $tmp eq $signature and return "Linux RAID";
-	}
-	'';
-    };
-    my $t = typeFromMagic($dev, 
-			  if_($part->{size}, $check_md),
-			  @partitions_signatures) or return;
+    $part->{LABEL_from_magic} = $ids->{ID_FS_LABEL_SAFE} if $ids->{ID_FS_LABEL_SAFE};
 
-    my $p = type_name2subpart($t) || fs_type2subpart($t) || internal_error("unknown name/fs $t");
-    if ($p->{fs_type} eq 'ext2') {
-	#- there is no magic to differentiate ext3 and ext2. Using libext2fs
-	#- to check if it has a journal
-	$p->{fs_type} = 'ext3' if c::is_ext3($dev);
+    my $p;
+    if ($ids->{ID_FS_USAGE} eq 'raid') {
+	my $name = {
+	    linux_raid_member => "Linux RAID",
+	    LVM1_member => 'Linux Logical Volume Manager',
+	    LVM2_member => 'Linux Logical Volume Manager',
+	}->{$ids->{ID_FS_TYPE}};
+
+	$p = type_name2subpart($name) if $name;
+    } elsif ($ids->{ID_FS_TYPE}) {
+	$p = fs_type2subpart($ids->{ID_FS_TYPE}) or log::l("unknown filesystem $ids->{ID_FS_TYPE} returned by vol_id");
     }
-    $part->{fs_type_from_magic} = $p->{fs_type};
+
+    if ($p) {
+	$part->{fs_type_from_magic} = $p->{fs_type};
+    }
     $p;
 }
 
@@ -390,3 +376,5 @@ sub carry_root_loopback {
     my ($part) = @_;
     any { $_->{mntpoint} eq '/' } @{$part->{loopback} || []};
 }
+
+1;

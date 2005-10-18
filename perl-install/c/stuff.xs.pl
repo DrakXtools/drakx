@@ -48,10 +48,6 @@ typedef __uint8_t u8;
 
 #include <linux/ethtool.h>
 
-/* for is_ext3 */
-#include <ext2fs/ext2_fs.h>
-#include <ext2fs/ext2fs.h>
-
 // for UPS on USB:
 # define HID_MAX_USAGES 1024
 #include <linux/hiddev.h>
@@ -198,23 +194,6 @@ is_secure_file(filename)
     unlink(filename); /* in case it exists and we manage to remove it */
     RETVAL = (fd = open(filename, O_RDWR | O_CREAT | O_EXCL, 0600)) != -1;
     if (RETVAL) close(fd);
-  }
-  OUTPUT:
-  RETVAL
-
-int
-is_ext3(device_name)
-  char * device_name
-  CODE:
-  {
-    ext2_filsys fs;
-    int retval = ext2fs_open (device_name, 0, 0, 0, unix_io_manager, &fs);
-    if (retval) {
-      RETVAL = 0;
-    } else {
-      RETVAL = fs->super->s_feature_compat & EXT3_FEATURE_COMPAT_HAS_JOURNAL;
-      ext2fs_close(fs);  
-    }
   }
   OUTPUT:
   RETVAL

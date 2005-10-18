@@ -237,7 +237,7 @@ Do you agree to lose all the partitions?
 	my @parts = partition_table::get_normal_parts($hd);
 
 	# checking the magic of the filesystem, do not rely on pt_type
-	foreach (grep { member($_->{fs_type}, 'vfat', 'ntfs', 'ext2') || $_->{pt_type} == 0x100 } @parts) {
+	foreach (@parts) {
 	    if (my $type = fs::type::type_subpart_from_magic($_)) {
                 if ($type->{fs_type}) {
                     #- keep {pt_type}
@@ -248,11 +248,7 @@ Do you agree to lose all the partitions?
 	    } else {
 		$_->{bad_fs_type_magic} = 1;
 	    }
-	}
-	
-	foreach (@parts) {
-	    my $label = run_program::get_stdout('vol_id', '-l', devices::make($_->{device}));
-	    $_->{device_LABEL} = chomp_($label) if $label;
+	    $_->{device_LABEL} = $_->{LABEL_from_magic} if $_->{LABEL_from_magic};
 	}
 
 	if ($hd->{usb_media_type}) {
