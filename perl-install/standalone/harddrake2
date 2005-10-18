@@ -235,6 +235,7 @@ $ugtk2::wm_icon = "harddrake";
 $in = 'interactive'->vnew('su'); #require_root_capability();
 
 %options = getVarsFromSh($conffile);
+$options{MDV_ONLINE} ||= [];
 
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
@@ -242,6 +243,25 @@ $::noborderWhenEmbedded = 1;
 $w = ugtk2->new(N("Harddrake2"));
 # fake diagnostics pragma:
 local $::main_window = $w->{real_window};
+
+require list_modules;
+my @proprietary_drivers = (qw(avmfritz fcpci fcdsl fcdsl fcdsl2 fcdslsl fcdslslusb fcdslusb fcdslusba fcusb fcusb2 fxusb fxusb_CZ), #ISDN
+                           qw(slamr slusb), # SLAMR
+                           qw(ltmodem speedtch), # modem
+                           qw(speedtch), # ADSL
+                           qw(a320raid), # block
+                           qw(ath_pci ipw2100 ipw2200 prism54 speedtch), # network
+                           list_modules::category2modules('network/slmodem'),
+                          );
+
+sub need_pkgs_offered_by_club {
+    my ($device) = @_;
+
+    # need firmware, 3rd party driver or 3rd party program:
+    $device->{description} =~ /HostRAID/ ||
+      $device->{driver} =~ /^at76|^LT:|^Hcf:|^Hsf:/ ||
+        member($device->{driver}, @proprietary_drivers);
+}
 
 my ($menubar, $factory) = create_factory_menu($w->{real_window}, @menu_items);
 $w->{window}->set_size_request(805, 550) if !$::isEmbedded;
@@ -388,6 +408,10 @@ foreach (@classes) {
 
     # Fill the graphic tree with a "tree leaf" widget per device
     foreach (@devices) {
+        if ($options{MDV_ONLINE} ne 'done' && ref $options{MDV_ONLINE}) {
+            push @{$options{MDV_ONLINE}}, $_ if $_->{need_pkgs_offered_by_club} ||= need_pkgs_offered_by_club($_);
+        }
+
         # we really should test for $title there:
         if ($_->{bus} && $_->{bus} eq "PCI") {
             # do not display unknown driver for system bridges that're managed by kernel core:
@@ -479,10 +503,25 @@ $textcolumn->set_sizing('GTK_TREE_VIEW_COLUMN_AUTOSIZE');#GROW_ONLY
 $tree->signal_connect(realize => sub { $tree->get_selection->select_path(Gtk2::TreePath->new_first) });
 
 {
+    my $do_pkgs;
     $SIG{CHLD} = undef;
     #local $SIG{CHLD} = sub {};
+
+    if (ref $options{MDV_ONLINE} && @{$options{MDV_ONLINE}}) { # was the question already answered?
+        $do_pkgs ||= do_pkgs_standalone->new;
+        if (!$do_pkgs->is_available('speedtouch_mgmt') # do we have access to 3rd party programs?
+            && $in->ask_yesorno(N("Warning"),
+                                N("The following devices needs proprietary drivers or firmwares in order to operate smoothly. The appropriate packages can be retrieved from the Mandriva Club. Do you want to subscribe to the Mandriva Club?") . "\n\n" .
+                                join(",\n", map { print "- $_->{description}\n"; "- " . $_->{description} } @{$options{MDV_ONLINE}}))) {
+            $do_pkgs->install('mdkonline') if !-x '/usr/X11R6/bin/mdkonline';
+            require run_program;
+            run_program::raw({ detach => 1 }, "/usr/X11R6/bin/mdkonline");
+        }
+    }
+    $options{MDV_ONLINE} = 'done';
+
     if (my @packages = difference2([ simple_read_rpmsrate() ], [ qw(ati.2 dmraid gnome-alsamixer mdadm xmms-alsa) ])) {
-        my $do_pkgs = do_pkgs_standalone->new;
+        $do_pkgs ||= do_pkgs_standalone->new;
         my @packages2install = grep { $do_pkgs->is_available($_) && !$do_pkgs->is_installed($_) } @packages;
         undef $wait;
         gtkset_mousecursor_normal();
