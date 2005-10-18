@@ -20,7 +20,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 ac3200 acenic aironet4500_card amd8111e at1700 atp),
-        qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
+        qw(b44 bcm4400 cassini com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3  fealnx hamachi hp hp-plus hp100),
@@ -103,7 +103,7 @@ our %l = (
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
-      qw(ahci ata_adma ata_piix pata_pdc2027x sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      qw(ahci ata_adma ata_piix pata_pdc2027x pdc_adma sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
