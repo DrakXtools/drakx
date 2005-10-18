@@ -273,7 +273,7 @@ sub update_tray_icon() {
                 my $net = find { $_->{current} } values %wireless_networks;
                 $pixbuf = $pixbufs{link_level}{$net->{approx_level}} if $net;
             }
-            $pixbuf ||= $pixbufs{state}{connected}
+            $pixbuf ||= $pixbufs{state}{connected};
         } else {
             $pixbuf = $pixbufs{state}{disconnected};
         }
