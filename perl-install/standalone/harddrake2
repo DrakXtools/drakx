@@ -385,8 +385,6 @@ my @classes;
 foreach my $hw_class (@harddrake::data::tree) {
     my ($Ident, $title, $icon, $configurator, $detector) = @$hw_class{qw(class string icon configurator detector)};
     next if ref($detector) ne "CODE"; #skip class witouth detector
-    # blacklist agp controllers b/c string is not yet translated:
-    next if $Ident eq 'AGP';
     next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
     next if $Ident =~ /JAZZ/ && !$options{JAZZ_DETECTION};
     next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
