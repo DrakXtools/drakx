@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.4
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -378,6 +378,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Oct 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.2mdk
+- diskdrake (pixel):
+  o separate hpfs and ntfs entries (even if they both use the same
+    type id in partition table) (#19322)
+  o use vol_id in order to find device type
+  o fix using mdadm 1.12.0
+- harddrake2:
+  o do not merge AGP section into BRIDGES one
+  o Club integration for proprietary drivers
+- net_applet: use disconnected icon if no route, even if wifi is
+  associated (blino)
+
 * Mon Oct 17 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.1mdk
 - drakauth: hide the password (pixel, #18800)
 - drakbackup (stew):
