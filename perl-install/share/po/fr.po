@@ -55,6 +55,7 @@
 #
 # Nous vous remercions de votre compréhension.
 # Stéphane Teletchéa, 2005.
+# Stéphane Teletchéa, 2005.
 # David BAUDENS <baudens@mandriva.com>, 1999-2004.
 # David ODIN <odin@mandriva.com>, 2000.
 # Pablo Saratxaga <pablo@mandriva.com>, 2001, 2005.
@@ -69,7 +70,6 @@
 # Christophe Berthelé <cpjc@free.fr>, 2005.
 # Didier Hérisson <didier.herisson@angstrom.uu.se>, 2005.
 # Nicolas Lécureuil <neoclust@mandriva.org>, 2005.
-# Stéphane Teletchéa, 2005.
 #
 #
 #
@@ -77,9 +77,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2005-10-15 15:03+0800\n"
-"PO-Revision-Date: 2005-10-10 15:11+0200\n"
-"Last-Translator: Stéphane Teletchéa\n"
-"Language-Team:  <fr@li.org>\n"
+"PO-Revision-Date: 2005-10-18 18:11+0200\n"
+"Last-Translator: Nicolas Lécureuil <neoclust@mandriva.org>\n"
+"Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1647,12 +1647,12 @@ msgid "Windows Domain:"
 msgstr "Domaine Windows : "
 
 #: authentication.pm:69
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
-"iWinbind permet au système de retrouver les informations et d'authentifier "
+"Winbind permet au système de retrouver les informations et d'authentifier "
 "les utilisateurs dans un domaine Windows."
 
 #: authentication.pm:70
@@ -3403,7 +3403,7 @@ msgstr ""
 "une partition non RAID, spécifique pour le dossier /boot."
 
 #: fsedit.pm:394
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
@@ -18993,9 +18993,9 @@ msgid "Can not create catalog!"
 msgstr "Ne peut créer le catalogue !"
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Des problèmes sont apparus en installant le paquetage %s"
+msgstr "Problème lors de l'installation de %s"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -19359,16 +19359,14 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Effacer un client"
+msgstr "Effacer une entrée cron"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr ""
-"Ajouter une\n"
-"Imprimante"
+msgstr "Ajouter une entrée cron"
 
 #: standalone/drakbackup:2174
 #, c-format
@@ -19401,19 +19399,19 @@ msgid "Month"
 msgstr "Mois"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "Jour de la semaine"
+msgstr "Jour de la semaine (début)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "Jour de la semaine"
+msgstr "Jour de la semaine (fin)"
 
 #: standalone/drakbackup:2210
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
-msgstr "Profils"
+msgstr "Profil"
 
 #: standalone/drakbackup:2216
 #, fuzzy, c-format
@@ -19439,9 +19437,9 @@ msgstr ""
 "« anacron »."
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "Veuillez choisir la date à restaurer : "
+msgstr "Veuillez choisir le programme d'archivage : "
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -19474,9 +19472,10 @@ msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "Effacer les fichiers tar après sauvegarde vers un autre support."
 
 #: standalone/drakbackup:2321
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "OK pour restaurer les autres fichiers."
+msgstr ""
+"Afficher le journal de la restauration après une restauration de fichiers."
 
 #: standalone/drakbackup:2366
 #, c-format
@@ -19703,19 +19702,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tFichiers système non inclus\n"
 
 #: standalone/drakbackup:2628
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\tLa sauvegarde utilise « tar » et « bzip2 »\n"
+msgstr "\tLa sauvegarde utilise  %s  et  bzip2 \n"
 
 #: standalone/drakbackup:2629
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tLa sauvegarde utilise « tar » et « gzip »\n"
+msgstr "\tLa sauvegarde utilise  %s  et  gzip \n"
 
 #: standalone/drakbackup:2630
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tLa sauvegarde utilise seulement « tar »\n"
+msgstr "\tLa sauvegarde utilise seulement %s \n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -19846,7 +19845,7 @@ msgstr ""
 #: standalone/drakbackup:2976
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "/usr/bin/star non trouvé, utilisation de tar ..."
 
 #: standalone/drakbackup:3012
 #, c-format
@@ -20226,14 +20225,14 @@ msgstr ""
 "manuelle »"
 
 #: standalone/drakbackup:4473
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "Fichier local"
+msgstr "Charger le profil"
 
 #: standalone/drakbackup:4482
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "Enregistrer sous..."
+msgstr "Enregistrer le profil sous..."
 
 #: standalone/drakbackup:4504 standalone/drakbackup:4507
 #, c-format
@@ -21610,7 +21609,7 @@ msgstr "Le centre d'aide de Mandriva Linux"
 #: standalone/drakhelp:51
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "Aucune entrée d'aide pour %s\n"
 
 #: standalone/drakhosts:98
 #, c-format
@@ -27406,157 +27405,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Échec de l'installation"
-
-#~ msgid "Unknown Model"
-#~ msgstr "Modèle inconnu"
-
-#~ msgid ""
-#~ "Either with the newer HPLIP which allows printer maintenance through the "
-#~ "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
-#~ "newer PhotoSmart models "
-#~ msgstr ""
-#~ "Soit avec le nouveau HPLIP qui permet la maintenance de votre imprimante "
-#~ "au moyen d'une « boite à outils » graphique facile d'utilisation, ainsi "
-#~ "que l'impression sans marges « full-bleed » pour les modèles PhotoSmart "
-
-#~ msgid ""
-#~ "or with the older HPOJ which allows only scanner and memory card access, "
-#~ "but could help you in case of failure of HPLIP. "
-#~ msgstr ""
-#~ "ou avec l'ancien HPOJ qui ne permet que la numérisation et l'accès aux "
-#~ "cartes mémoire mais qui peut néanmoins vous aidez en cas de défaillance "
-#~ "d'HPLIP. "
-
-#~ msgid "HPOJ"
-#~ msgstr "HPOJ"
-
-#~ msgid ""
-#~ "Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-#~ "LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, "
-#~ "Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"
-#~ msgstr ""
-#~ "Votre imprimante est-elle un périphérique multifonction de HP ou Sony "
-#~ "(OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 avec "
-#~ "scanner, DeskJet 450, Sony IJP-V100), un HP PhotoSmart ou un HP LaserJet "
-#~ "2200 ?"
-
-#~ msgid "Installing mtools packages..."
-#~ msgstr "Installation des paquetages mtools..."
-
-#~ msgid "Photo memory card access on the %s will not be possible."
-#~ msgstr "L'accès à la carte mémoire photo du %s ne sera pas possible."
-
-#~ msgid "Scanning on your HP multi-function device"
-#~ msgstr "Numérisation avec votre périphérique multifonction HP"
-
-#~ msgid "Photo memory card access on your HP multi-function device"
-#~ msgstr "Accès à la carte mémoire photo de votre périphérique multifonction"
-
-#~ msgid "Printing/Scanning/Photo Cards on \"%s\""
-#~ msgstr "Impression/Acquisition/Cartes photo sur « %s »"
-
-#~ msgid "Printing/Scanning on \"%s\""
-#~ msgstr "Impression/Acquisition sur l'imprimante « %s »"
-
-#~ msgid "Printing/Photo Card Access on \"%s\""
-#~ msgstr "Impression/Accès aux cartes mémoire sur « %s »"
-
-#~ msgid ""
-#~ "Your multi-function device was configured automatically to be able to "
-#~ "scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to "
-#~ "specify the scanner when you have more than one) from the command line or "
-#~ "with the graphical interfaces \"xscanimage\" or \"xsane\". If you are "
-#~ "using the GIMP, you can also scan by choosing the appropriate point in "
-#~ "the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" on the command "
-#~ "line to get more information.\n"
-#~ "\n"
-#~ "You do not need to run \"scannerdrake\" for setting up scanning on this "
-#~ "device, you only need to use \"scannerdrake\" if you want to share the "
-#~ "scanner on the network."
-#~ msgstr ""
-#~ "Votre périphérique multifonction HP a été configuré automatiquement pour "
-#~ "être capable de scanner. Maintenant vous pouvez scanner avec "
-#~ "« scanimage » ( « scanimage -d hp:%s » pour spécifier le scanner si vous "
-#~ "en avez plus d'un) à partir de la ligne de commande, ou avec des "
-#~ "interfaces graphiques comme « xscanimage » ou « xsane ». Si vous utilisez "
-#~ "« Le Gimp », vous pouvez aussi scanner grâce au menu « Fichier / "
-#~ "Acquisition ». Pour avoir plus d'information, vous pouvez taper « man "
-#~ "scanimage » dans une fenêtre de commandes.\n"
-#~ "\n"
-#~ "Il n'est pas necessaire d'utiliser « scannerdrake » pour cet appareil, "
-#~ "vous ne devez utiliser « scannerdrake » que si vous desirez partager "
-#~ "l'accès au numériseur via le réseau."
-
-#~ msgid ""
-#~ "Your printer was configured automatically to give you access to the photo "
-#~ "card drives from your PC. Now you can access your photo cards using the "
-#~ "graphical program \"MtoolsFM\" (Menu: \"Applications\" -> \"File tools\" -"
-#~ "> \"MTools File Manager\") or the command line utilities \"mtools"
-#~ "\" (enter \"man mtools\" on the command line for more info). You find the "
-#~ "card's file system under the drive letter \"p:\", or subsequent drive "
-#~ "letters when you have more than one HP printer with photo card drives. In "
-#~ "\"MtoolsFM\" you can switch between drive letters with the field at the "
-#~ "upper-right corners of the file lists."
-#~ msgstr ""
-#~ "Votre imprimante HP a été configurée automatiquement pour vous donner "
-#~ "accès aux lecteurs de carte mémoire à partir de votre PC. Maintenant vous "
-#~ "pouvez accéder à vos cartes en utilisant le programme graphique "
-#~ "« MtoolsFM » (Menu : « Applications » -> « Outils fichiers » -> "
-#~ "« gestionnaire de fichiers MTools ») ou le programme en ligne de commande "
-#~ "mtools (tapez « man mtools » pour plus d'informations). Vous accéderez à "
-#~ "la carte par le lecteur ayant la lettre « p: », ou une autre lettre si "
-#~ "vous avez plus d'un appareil de ce type. Dans « MtoolsFM » vous pouvez "
-#~ "commuter entre plusieurs lecteurs grâce au champ situé dans le coin "
-#~ "supérieur droit de la liste de fichiers."
-
-#~ msgid "Custom setup/crontab entry:"
-#~ msgstr "Entrée setup/crontab personnalisée : "
-
-#~ msgid "Note that currently all 'net' media also use the hard drive."
-#~ msgstr ""
-#~ "Tenez compte du fait qu'actuellement tous les médias réseaux utilisent "
-#~ "également le disque dur."
-
-#~ msgid ""
-#~ "Before installing any fonts, be sure that you have the right to use and "
-#~ "install them on your system.\n"
-#~ "\n"
-#~ "-You can install the fonts the normal way. In rare cases, bogus fonts may "
-#~ "hang up your X Server."
-#~ msgstr ""
-#~ "Avant d'installer des polices de caractères, assurez-vous que vous avez\n"
-#~ "les permissions de les utiliser et de les installer sur votre système. \n"
-#~ "\n"
-#~ "- Vous pouvez installer les polices par la voie habituelle. Dans de rares "
-#~ "cas,\n"
-#~ "des polices boguées peuvent bloquer votre serveur d'affichage Xorg."
-
-#~ msgid ""
-#~ "%s cannot be displayed \n"
-#~ ". No Help entry of this type\n"
-#~ msgstr ""
-#~ "%s ne peut être affiché\n"
-#~ ". Aucune entrée d'aide pour ce type\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Please check all options that you need.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Veuillez cocher toutes les options dont vous avez besoin.\n"
-
-#~ msgid ""
-#~ "These options can backup and restore all files in your /etc directory.\n"
-#~ msgstr ""
-#~ "Ces options peuvent sauvegarder et restaurer\n"
-#~ "tous les fichiers du dossier de configuration système « /etc »\n"
-
-#~ msgid ""
-#~ "With this option you will be able to restore any version\n"
-#~ " of your /etc directory."
-#~ msgstr ""
-#~ "Cette option vous permet de restaurer n'importe quelle\n"
-#~ "version du dossier de configuration système « /etc »."
-
-#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
-#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
