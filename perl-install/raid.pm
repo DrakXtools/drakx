@@ -242,7 +242,7 @@ sub write_conf {
 
 sub get_md_info {
     my ($dev) = @_;
-    my $conf = parse_mdadm_conf(scalar run_program::get_stdout('mdadm', '--detail', '--brief', $dev));
+    my $conf = parse_mdadm_conf(scalar run_program::get_stdout('mdadm', '--detail', '--brief', '-v', $dev));
 
     @{$conf->{ARRAY}} or return;
     @{$conf->{ARRAY}} == 1 or internal_error("too many answers");
