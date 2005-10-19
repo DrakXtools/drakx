@@ -210,7 +210,7 @@ filesystem checks will be run on your next boot into Windows(TM)")) if $part->{f
 
     if (@$fstab && @hds_rw) {
 	$solutions{wipe_drive} =
-	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase entire disk"), 
+	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase and use entire disk"), 
 	    sub {
 		my $hd = $o->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
 						  interactive_help_id => 'takeOverHdChoose',
