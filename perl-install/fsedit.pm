@@ -21,21 +21,21 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => 300 << 11, fs_type => 'ext3', ratio => 5, maxsize => 6000 << 11 },
+    { mntpoint => "/",     size => 300 << 11, fs_type => 'ext3', ratio => 5, maxsize => 8000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 1100 << 11 },
     { mntpoint => "/home", size => 300 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("with /usr") => [
     { mntpoint => "/",     size => 250 << 11, fs_type => 'ext3', ratio => 1, maxsize => 2000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize => 1100 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 6000 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
     { mntpoint => "/home", size => 100 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("server") => [
-    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize =>  800 << 11 },
+    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize => 1600 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 2, maxsize => 1600 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 6000 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 8000 << 11 },
     { mntpoint => "/var",  size => 200 << 11, fs_type => 'ext3', ratio => 3 },
     { mntpoint => "/home", size => 150 << 11, fs_type => 'ext3', ratio => 3 },
-    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 1000 << 11 },
+    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 2000 << 11 },
   ],
 );
 foreach (values %suggestions) {
