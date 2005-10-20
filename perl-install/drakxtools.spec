@@ -41,6 +41,8 @@ Summary: Drakxtools libraries and background tools
 Group: System/Configuration/Other
 Requires: ldetect-lst >= 0.1.71
 Requires: dmidecode
+# for fileshareset and filesharelist
+Requires: perl-suid
 Conflicts: drakxtools-newt < 10-51mdk
 
 
