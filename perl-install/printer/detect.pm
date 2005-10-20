@@ -398,7 +398,7 @@ sub getIPsInLocalNetworks() {
 
     # Now find all addresses in the local networks which we will investigate
     my @addresses;
-    foreach $dev (keys %{$local_nets}) {
+    foreach my $dev (keys %{$local_nets}) {
 	my $ip = $local_nets->{$dev}{ip};
 	my $bcast = $local_nets->{$dev}{bcast};
 	my $mask = $local_nets->{$dev}{mask};
