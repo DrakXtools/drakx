@@ -215,6 +215,11 @@ sub rest_all {
     }
     
     run_or_die('install_bootloader', '--auto');
+
+    print "\n", "Your system is ready, press enter to reboot (Y/n) ";
+    if (<STDIN> !~ /n/i) {
+	run_program::run('reboot');
+    }
 }
 
 sub lst_fields() { qw(device size fs_type saved) }

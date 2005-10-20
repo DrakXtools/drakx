@@ -92,8 +92,6 @@ if ($ENV{PARTIMAGE_RPM}) {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
       drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server save_all $default_dir
-      echo "Press enter"
-      read
   fi
   if grep -q rest_all /proc/cmdline; then
       if [ -d $local_dir ]; then
@@ -101,8 +99,6 @@ if ($ENV{PARTIMAGE_RPM}) {
       else
           drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server rest_all $partimage_dir
       fi
-      echo "Press enter"
-      read
   fi
 EOF
     } "$tmp/etc/rc.sysinit";
