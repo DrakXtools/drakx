@@ -214,7 +214,7 @@ sub rest_all {
 	} "$::prefix/etc/lilo.conf";
     }
     
-    run_program::run('install_bootloader', '--auto');
+    run_or_die('install_bootloader', '--auto');
 }
 
 sub lst_fields() { qw(device size fs_type saved) }
