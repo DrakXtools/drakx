@@ -17,6 +17,10 @@ use common;
 use bootloader;
 use fs;
 
+if ($ARGV[0] eq '--auto') {
+    $auto = shift @ARGV;
+}
+
 $::prefix = '/mnt';
 
 my $release = common::mandrake_release($::prefix) || 
@@ -58,6 +62,8 @@ my $install = $bootloader::{'install_raw_' . $main_method} or die "unknown bootl
 print "About to re-install Boot Loader $main_method of following Mandriva Linux distribution:\n\t",
   $release,
   "\n=> ok? <press Enter to continue, 'n' and Enter to cancel> ";
-<STDIN> =~ /^n/i and exit 0;
+if (!$auto) {
+    <STDIN> =~ /^n/i and exit 0;
+}
 
 $install->();
