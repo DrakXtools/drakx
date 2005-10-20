@@ -60,9 +60,9 @@ if (@main_methods == 0) {
 my $install = $bootloader::{'install_raw_' . $main_method} or die "unknown bootloader method install_raw_$main_method\n";
 
 print "About to re-install Boot Loader $main_method of following Mandriva Linux distribution:\n\t",
-  $release,
-  "\n=> ok? <press Enter to continue, 'n' and Enter to cancel> ";
+  $release, "\n";
 if (!$auto) {
+    print "=> ok? <press Enter to continue, 'n' and Enter to cancel> ";
     <STDIN> =~ /^n/i and exit 0;
 }
 
