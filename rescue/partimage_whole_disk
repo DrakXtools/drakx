@@ -18,6 +18,7 @@ BEGIN { partition_table::raw::default_type() }
 my %options = (
     save_home_directory => 1,
     empty_space_at_end_of_disk => 0, # 300 * 1024 * 2, # 300MB
+    ask_before_modifying_home => 0,
 );
 
 my ($server);
@@ -146,6 +147,16 @@ sub rest_all {
     #- grow the last ext3 partition
     if (my $part = find { isTrueLocalFS($_) } reverse @$part_list) {
 	$part->{ratio} = 1;
+
+	if ($options{ask_before_modifying_home}) {
+	    print "\nkeep existing /home? (Y/n) ";
+	    if (<STDIN> !~ /n/i) {
+		my $l = @$from_partimage > 1 ? $from_partimage : $created;
+		#- it was meant to be restored or formatted
+		my $p = pop @$l;
+		log::l("keeping existing /home: removing $p->{device}");
+	    }
+	}
     }
 
     #- write the partition table
