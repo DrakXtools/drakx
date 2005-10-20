@@ -17,6 +17,7 @@ BEGIN { partition_table::raw::default_type() }
 
 my %options = (
     save_home_directory => 1,
+    empty_space_at_end_of_disk => 0, # 300 * 1024 * 2, # 300MB
 );
 
 my ($server);
@@ -184,7 +185,7 @@ sub rest_all {
 
 	my %wanted_part = %$part;
 	if ($part->{ratio}) {
-	    $part->{size} = $hole->{size};
+	    $part->{size} = $hole->{size} - ($options{empty_space_at_end_of_disk} || 0);
 	} else {
 	    $part->{size} += $hd->{geom}{sectors} if $extended;
 	    $part->{size} += $hd->cylinder_size if $part->{start} == 1;
