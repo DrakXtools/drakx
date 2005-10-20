@@ -45,6 +45,7 @@ mkdir_p($tmp . chomp_($_)) foreach cat_("dirs");
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
 _ "perl devices.pl $tmp/dev";
+_ "mkfifo $tmp/dev/initctl";
 substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 
 {
