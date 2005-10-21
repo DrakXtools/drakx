@@ -64,7 +64,7 @@ sub to_raw_X {
       if defined $card->{Xinerama};
 
     # cleanup previous special nvidia libglx
-    $raw_X->remove_load_module($_) foreach @{$card->{REMOVE_GLX}};
+    $raw_X->remove_load_module($_) foreach @{$card->{REMOVE_GLX} || []};
 
     if ($card->{DRI_GLX_SPECIAL}) {
         $raw_X->remove_load_module('glx'); # this doesn't duplicate the above glx line
