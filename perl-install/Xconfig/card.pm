@@ -63,7 +63,7 @@ sub to_raw_X {
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
 
-    # handle Xorg <-> nvidia swithch when packages're installed:
+    # handle Xorg <-> nvidia switch when packages are installed:
     $raw_X->remove_load_module($card->{REMOVE_GLX}) if $card->{REMOVE_GLX};
     if ($card->{DRI_GLX_SPECIAL}) {
         $raw_X->remove_load_module('glx'); # this doesn't duplicate the above glx line
@@ -323,6 +323,8 @@ sub install_server {
     -x $prog or die "server not available (should be in $prog)";
 
     my $modules_dir = "/usr/X11R6/$lib/modules";
+    my $new_nvidia_libglx = "$modules_dir/extensions/nvidia/libglx.so";
+    my $old_nvidia_libglx = "$modules_dir/extensions/libglx.so";
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{Driver2} eq 'nvidia' &&
@@ -330,13 +332,13 @@ sub install_server {
 	#- when there is extensions/libglx.a, it means extensions/libglx.so is not xorg's libglx, so it may be nvidia's
 	#- new nvidia packages have libglx.so in extensions/nvidia instead of simply extensions/
 	my $libglx_a = -e "$::prefix$modules_dir/extensions/libglx.a";
-	my $libglx = find { -l "$::prefix$_" } "$modules_dir/extensions/nvidia/libglx.so", if_($libglx_a, "$modules_dir/extensions/libglx.so");
+	my $libglx = find { -l "$::prefix$_" } $new_nvidia_libglx, if_($libglx_a, $old_nvidia_libglx);
 	if ($libglx) {
 	    log::explanations("Using specific NVIDIA driver and GLX extensions");
 	    $card->{Driver} = 'nvidia';
 	    $card->{DRI_GLX_SPECIAL} = $libglx;
 	    $card->{Options}{IgnoreEDID} = 1;
-	    $card->{REMOVE_GLX} = "$modules_dir/extensions/libglx.so";
+	    $card->{REMOVE_GLX} = $old_nvidia_libglx;
 	}
     }
     if ($card->{Driver2} eq 'fglrx' &&
@@ -345,7 +347,7 @@ sub install_server {
 	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
-    $card->{REMOVE_GLX} ||= "$modules_dir/extensions/nvidia/libglx.so";
+    $card->{REMOVE_GLX} ||= $new_nvidia_libglx;
 
     libgl_config($card);
 
