@@ -63,8 +63,9 @@ sub to_raw_X {
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
 
-    # handle Xorg <-> nvidia switch when packages are installed:
-    $raw_X->remove_load_module($card->{REMOVE_GLX}) if $card->{REMOVE_GLX};
+    # cleanup previous special nvidia libglx
+    $raw_X->remove_load_module($_) foreach @{$card->{REMOVE_GLX}};
+
     if ($card->{DRI_GLX_SPECIAL}) {
         $raw_X->remove_load_module('glx'); # this doesn't duplicate the above glx line
         # This loads the NVIDIA GLX extension module.
@@ -338,7 +339,6 @@ sub install_server {
 	    $card->{Driver} = 'nvidia';
 	    $card->{DRI_GLX_SPECIAL} = $libglx;
 	    $card->{Options}{IgnoreEDID} = 1;
-	    $card->{REMOVE_GLX} = $old_nvidia_libglx;
 	}
     }
     if ($card->{Driver2} eq 'fglrx' &&
@@ -347,7 +347,7 @@ sub install_server {
 	log::explanations("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
-    $card->{REMOVE_GLX} ||= $new_nvidia_libglx;
+    $card->{REMOVE_GLX} = [ $old_nvidia_libglx, $new_nvidia_libglx ];
 
     libgl_config($card);
 
