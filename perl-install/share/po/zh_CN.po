@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 2006\n"
-"POT-Creation-Date: 2005-10-15 15:03+0800\n"
+"POT-Creation-Date: 2005-10-22 19:23+0800\n"
 "PO-Revision-Date: 2005-10-09 02:12+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandriva Linux i18n Team <cooker-i18n@mandrivalinux.org>\n"
@@ -379,22 +379,22 @@ msgstr "32 MB"
 msgid "64 MB or more"
 msgstr "64 MB 或更多"
 
-#: Xconfig/card.pm:161
+#: Xconfig/card.pm:162
 #, c-format
 msgid "X server"
 msgstr "X 服务器"
 
-#: Xconfig/card.pm:162
+#: Xconfig/card.pm:163
 #, c-format
 msgid "Choose an X server"
 msgstr "选择 X 服务器"
 
-#: Xconfig/card.pm:194
+#: Xconfig/card.pm:195
 #, c-format
 msgid "Multi-head configuration"
 msgstr "多显示器配置"
 
-#: Xconfig/card.pm:195
+#: Xconfig/card.pm:196
 #, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
@@ -403,62 +403,62 @@ msgstr ""
 "您的系统支持多显示器。\n"
 "是否进行设置?"
 
-#: Xconfig/card.pm:264
+#: Xconfig/card.pm:265
 #, c-format
 msgid "Can not install Xorg package: %s"
 msgstr "无法安装 Xorg 软件包: %s"
 
-#: Xconfig/card.pm:274
+#: Xconfig/card.pm:275
 #, c-format
 msgid "Select the memory size of your graphics card"
 msgstr "请选择您显示卡上内存的大小"
 
-#: Xconfig/card.pm:365
+#: Xconfig/card.pm:367
 #, c-format
 msgid "Xorg configuration"
 msgstr "Xorg 配置"
 
-#: Xconfig/card.pm:367
+#: Xconfig/card.pm:369
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
 msgstr "您希望拥有哪个 Xorg 配置?"
 
-#: Xconfig/card.pm:400
+#: Xconfig/card.pm:402
 #, c-format
 msgid "Configure all heads independently"
 msgstr "独立配置所有头"
 
-#: Xconfig/card.pm:401
+#: Xconfig/card.pm:403
 #, c-format
 msgid "Use Xinerama extension"
 msgstr "使用 Xinerama 扩展"
 
-#: Xconfig/card.pm:406
+#: Xconfig/card.pm:408
 #, c-format
 msgid "Configure only card \"%s\"%s"
 msgstr "只配置“%s”%s 卡"
 
-#: Xconfig/card.pm:418 Xconfig/various.pm:23
+#: Xconfig/card.pm:420 Xconfig/various.pm:23
 #, c-format
 msgid "Xorg %s"
 msgstr "Xorg %s"
 
-#: Xconfig/card.pm:425 Xconfig/various.pm:22
+#: Xconfig/card.pm:427 Xconfig/various.pm:22
 #, c-format
 msgid "Xorg %s with 3D hardware acceleration"
 msgstr "Xorg %s 带有硬件 3D 加速的支持"
 
-#: Xconfig/card.pm:427
+#: Xconfig/card.pm:429
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
 msgstr "使用 Xorg %s, 您的显示卡可以得到 3D 硬件加速支持。"
 
-#: Xconfig/card.pm:433
+#: Xconfig/card.pm:435
 #, c-format
 msgid "Xorg %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr "Xorg %s 带有试验阶段的 3D 硬件加速支持"
 
-#: Xconfig/card.pm:435
+#: Xconfig/card.pm:437
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support with Xorg %s,\n"
@@ -819,7 +819,7 @@ msgstr "其它"
 
 #: any.pm:142 harddrake/sound.pm:192 interactive.pm:474 pkgs.pm:473
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:376
 #: standalone/service_harddrake:208
 #, c-format
 msgid "Please wait"
@@ -2971,7 +2971,7 @@ msgstr "无法安装 %s 软件包!"
 msgid "Mandatory package %s is missing"
 msgstr "无法找到必需的软件包 %s"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:271 install_steps_interactive.pm:1317
+#: do_pkgs.pm:35 harddrake/sound.pm:274 install_steps_interactive.pm:1317
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -2982,13 +2982,14 @@ msgstr "无法找到必需的软件包 %s"
 #: standalone/drakTermServ:1935 standalone/drakbackup:510
 #: standalone/drakbackup:609 standalone/drakboot:133 standalone/drakclock:224
 #: standalone/drakconnect:973 standalone/drakperm:380 standalone/drakperm:390
-#: standalone/drakups:27 standalone/harddrake2:490 standalone/localedrake:43
-#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#: standalone/drakups:27 standalone/harddrake2:511 standalone/harddrake2:527
+#: standalone/localedrake:43 standalone/scannerdrake:51
+#: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "警告"
 
-#: do_pkgs.pm:35 standalone/harddrake2:490
+#: do_pkgs.pm:35 standalone/harddrake2:527
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "下列软件包需要安装: \n"
@@ -3146,12 +3147,12 @@ msgstr "给普通用户以写权限"
 msgid "Give read-only access to ordinary users"
 msgstr "给普通用户以只读权限"
 
-#: fs/type.pm:376
+#: fs/type.pm:363
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "您不能把 JFS(日志文件系统)用于小于 16 MB 的分区"
 
-#: fs/type.pm:377
+#: fs/type.pm:364
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "您不能把 ReiserFS 用于小于 32 MB 的分区"
@@ -3184,22 +3185,22 @@ msgstr ""
 "\n"
 "您同意清除所有分区吗?\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:381
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "挂载点必需要以 / 为开头"
 
-#: fsedit.pm:386
+#: fsedit.pm:382
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "挂载点只能包含字母和数字"
 
-#: fsedit.pm:387
+#: fsedit.pm:383
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "已经有一个分区的挂载点是 %s\n"
 
-#: fsedit.pm:389
+#: fsedit.pm:385
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3210,14 +3211,14 @@ msgstr ""
 "如果没有一个 /boot 分区, 各种启动引导程序都无法处理这种情况。\n"
 "所以, 请增加一个 /boot 分区。"
 
-#: fsedit.pm:394
+#: fsedit.pm:390
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "您不能为挂载点 %s 使用 LVM 逻辑卷，因为该卷跨越了多个物理卷"
 
-#: fsedit.pm:396
+#: fsedit.pm:392
 #, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3229,29 +3230,29 @@ msgstr ""
 "引导程序无法识别跨越多个物理卷的卷。\n"
 "您应该先创建 /boot 分区"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:396 fsedit.pm:398
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "这个目录应该保留在根文件系统中"
 
-#: fsedit.pm:404 fsedit.pm:406
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr "这个挂载点需要一个真正的文件系统(ext2/ext3、reiserfs、xfs 或 jfs)\n"
 
-#: fsedit.pm:408
+#: fsedit.pm:404
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "挂载点 %s 不能使用用加密的文件系统"
 
-#: fsedit.pm:469
+#: fsedit.pm:465
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "没有足够的空闲空间供自动分配"
 
-#: fsedit.pm:471
+#: fsedit.pm:467
 #, c-format
 msgid "Nothing to do"
 msgstr "不做任何事"
@@ -3474,7 +3475,7 @@ msgstr "UPS"
 msgid "Scanner"
 msgstr "扫描仪"
 
-#: harddrake/data.pm:504 standalone/harddrake2:454
+#: harddrake/data.pm:504 standalone/harddrake2:476
 #, c-format
 msgid "Unknown/Others"
 msgstr "未知/其它"
@@ -3562,17 +3563,17 @@ msgstr ""
 "- 与旧的 OSS 兼容的 API\n"
 "- 新的 ALSA API 带来许多增强特性, 但这需要使用 ALSA 库。\n"
 
-#: harddrake/sound.pm:258 harddrake/sound.pm:343 standalone/drakups:146
+#: harddrake/sound.pm:258 harddrake/sound.pm:346 standalone/drakups:146
 #, c-format
 msgid "Driver:"
 msgstr "驱动程序: "
 
-#: harddrake/sound.pm:263
+#: harddrake/sound.pm:266
 #, c-format
 msgid "Trouble shooting"
 msgstr "疑难解答"
 
-#: harddrake/sound.pm:271
+#: harddrake/sound.pm:274
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3587,12 +3588,12 @@ msgstr ""
 "\n"
 "新的“%s”驱动程序仅会在下此启动时使用。"
 
-#: harddrake/sound.pm:279
+#: harddrake/sound.pm:282
 #, c-format
 msgid "No open source driver"
 msgstr "没有开放源代码的驱动程序"
 
-#: harddrake/sound.pm:280
+#: harddrake/sound.pm:283
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3601,33 +3602,33 @@ msgstr ""
 "没有已知的 OSS/ALSA 替代驱动程序可以用在您的(%s)声卡上, 不过在“%s”有一个专有"
 "的驱动程序。"
 
-#: harddrake/sound.pm:283
+#: harddrake/sound.pm:286
 #, c-format
 msgid "No known driver"
 msgstr "没有已知驱动程序"
 
-#: harddrake/sound.pm:284
+#: harddrake/sound.pm:287
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "没有已知的驱动程序可以用在您的声卡(%s)上"
 
-#: harddrake/sound.pm:288
+#: harddrake/sound.pm:291
 #, c-format
 msgid "Unknown driver"
 msgstr "未知的驱动程序"
 
-#: harddrake/sound.pm:289
+#: harddrake/sound.pm:292
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "错误: 您的“%s”声卡驱动程序未被列出"
 
-#: harddrake/sound.pm:303
+#: harddrake/sound.pm:306
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "声音疑难解决"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:306
+#: harddrake/sound.pm:309
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3666,18 +3667,18 @@ msgstr ""
 "\n"
 "- “/sbin/fuser -v /dev/dsp”将会告诉您哪个程序使用声卡。\n"
 
-#: harddrake/sound.pm:332
+#: harddrake/sound.pm:335
 #, c-format
 msgid "Let me pick any driver"
 msgstr "让我挑选任意驱动"
 
-#: harddrake/sound.pm:335
+#: harddrake/sound.pm:338
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "选择其它驱动"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:338
+#: harddrake/sound.pm:341
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -4155,7 +4156,7 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:946
 #: interactive.pm:161 modules/interactive.pm:71 standalone/drakbackup:2613
-#: standalone/draksec:54 standalone/harddrake2:312 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:332 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "否"
@@ -4163,7 +4164,7 @@ msgstr "否"
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:946 interactive.pm:161
 #: modules/interactive.pm:71 printer/printerdrake.pm:883
 #: printer/printerdrake.pm:898 standalone/drakbackup:2613
-#: standalone/draksec:55 standalone/harddrake2:311 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:55 standalone/harddrake2:331 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "是"
@@ -4587,7 +4588,7 @@ msgstr "使用已有分区"
 msgid "Use the free space on the Windows partition"
 msgstr "使用在 Windows 分区上的空闲空间"
 
-#: help.pm:374 install_interactive.pm:213
+#: help.pm:374
 #, c-format
 msgid "Erase entire disk"
 msgstr "清除整个磁盘"
@@ -6129,6 +6130,11 @@ msgstr "没有 FAT 分区用来调整大小(或者没有足够剩余空间)"
 #, c-format
 msgid "Remove Windows(TM)"
 msgstr "删除 Windows(TM)"
+
+#: install_interactive.pm:213
+#, c-format
+msgid "Erase and use entire disk"
+msgstr "清除并使用整个磁盘"
 
 #: install_interactive.pm:215
 #, c-format
@@ -9835,7 +9841,7 @@ msgstr "其它端口"
 #: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:202
-#: standalone/net_applet:381 standalone/net_applet:418
+#: standalone/net_applet:385 standalone/net_applet:422
 #, c-format
 msgid "Interactive Firewall"
 msgstr "交互式防火墙"
@@ -10008,7 +10014,7 @@ msgstr ""
 "世界其它地区的协议\n"
 "没有 D-信道(专线)"
 
-#: network/netconnect.pm:103 standalone/harddrake2:309
+#: network/netconnect.pm:103 standalone/harddrake2:329
 #: standalone/net_monitor:102 standalone/net_monitor:103
 #: standalone/net_monitor:108
 #, c-format
@@ -12970,7 +12976,7 @@ msgstr "没有找到远程打印机！"
 #: standalone/drakbackup:618 standalone/drakbackup:653
 #: standalone/drakbackup:754 standalone/draknfs:203
 #: standalone/draksambashare:629 standalone/draksambashare:796
-#: standalone/harddrake2:256
+#: standalone/harddrake2:276
 #, c-format
 msgid "Information"
 msgstr "信息"
@@ -20564,12 +20570,12 @@ msgstr "日志"
 msgid "Clear logs"
 msgstr "清除日志"
 
-#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:466
+#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:470
 #, c-format
 msgid "Blacklist"
 msgstr "黑名单"
 
-#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:471
+#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:475
 #, c-format
 msgid "Whitelist"
 msgstr "白名单"
@@ -20591,7 +20597,7 @@ msgstr "从白名单中移除"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
-#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:381
+#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:385
 #, c-format
 msgid "Unable to contact daemon"
 msgstr "无法连接守护程序"
@@ -21620,7 +21626,7 @@ msgstr "用户信息"
 msgid "User name:"
 msgstr "用户名:"
 
-#: standalone/draksambashare:935 standalone/harddrake2:564
+#: standalone/draksambashare:935 standalone/harddrake2:601
 #, c-format
 msgid "Password:"
 msgstr "密码："
@@ -21720,7 +21726,7 @@ msgstr "本地"
 msgid "NONE"
 msgstr "无"
 
-#: standalone/draksec:53 standalone/net_applet:476
+#: standalone/draksec:53 standalone/net_applet:480
 #, c-format
 msgid "Ignore"
 msgstr "忽略"
@@ -22117,7 +22123,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "自动检测"
 
-#: standalone/drakups:101 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/harddrake2:376
 #, c-format
 msgid "Detection in progress"
 msgstr "检测进行中"
@@ -24207,7 +24213,7 @@ msgstr "内存条连接"
 #: standalone/harddrake2:111
 #, c-format
 msgid "Socket designation of the memory bank"
-msgstr "内存条的插座指派"
+msgstr "内存条的插座设计"
 
 #: standalone/harddrake2:115
 #, c-format
@@ -24267,7 +24273,7 @@ msgstr "图形桌面使用鼠标的协议"
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:322
+#: standalone/harddrake2:342
 #, c-format
 msgid "Identification"
 msgstr "标识"
@@ -24400,74 +24406,84 @@ msgstr ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
-#: standalone/harddrake2:242
+#: standalone/harddrake2:243
 #, c-format
 msgid "Harddrake2"
 msgstr "Drak 硬件配置"
 
-#: standalone/harddrake2:253
+#: standalone/harddrake2:273
 #, c-format
 msgid "Detected hardware"
 msgstr "检测到的硬件"
 
-#: standalone/harddrake2:258
+#: standalone/harddrake2:278
 #, c-format
 msgid "Configure module"
 msgstr "配置模块"
 
-#: standalone/harddrake2:265
+#: standalone/harddrake2:285
 #, c-format
 msgid "Run config tool"
 msgstr "运行配置工具"
 
-#: standalone/harddrake2:289
+#: standalone/harddrake2:309
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "单击左侧树中的设备, 就可在此显示其信息。"
 
-#: standalone/harddrake2:310 standalone/printerdrake:306
+#: standalone/harddrake2:330 standalone/printerdrake:306
 #: standalone/printerdrake:320
 #, c-format
 msgid "Unknown"
 msgstr "未知"
 
-#: standalone/harddrake2:330
+#: standalone/harddrake2:350
 #, c-format
 msgid "Misc"
 msgstr "杂项"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "secondary"
 msgstr "次要"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "primary"
 msgstr "主"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "burner"
 msgstr "刻录机"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:558 standalone/harddrake2:561
+#: standalone/harddrake2:512
+#, c-format
+msgid ""
+"The following devices needs proprietary drivers or firmwares in order to "
+"operate smoothly. The appropriate packages can be retrieved from the "
+"Mandriva Club. Do you want to subscribe to the Mandriva Club?"
+msgstr ""
+"下列设备需要私有驱动程序或固件才能正常运作。相应的软件包可以从 Mandriva "
+"俱乐部获得。您是否想要订阅 Mandriva 俱乐部?"
+
+#: standalone/harddrake2:595 standalone/harddrake2:598
 #, c-format
 msgid "Upload the hardware list"
 msgstr "上传硬件列表"
 
-#: standalone/harddrake2:563
+#: standalone/harddrake2:600
 #, c-format
 msgid "Account:"
 msgstr "账户："
 
-#: standalone/harddrake2:565
+#: standalone/harddrake2:602
 #, c-format
 msgid "Hostname:"
 msgstr "主机名："
@@ -24606,7 +24622,7 @@ msgstr "搜索"
 msgid "A tool to monitor your logs"
 msgstr "日志监视工具"
 
-#: standalone/logdrake:128 standalone/net_applet:343 standalone/net_monitor:93
+#: standalone/logdrake:128 standalone/net_applet:347 standalone/net_monitor:93
 #, c-format
 msgid "Settings"
 msgstr "设置"
@@ -24844,82 +24860,82 @@ msgstr "配置文件"
 msgid "Get Online Help"
 msgstr "获得在线帮助"
 
-#: standalone/net_applet:331
+#: standalone/net_applet:335
 #, c-format
 msgid "Interactive Firewall automatic mode"
 msgstr "交互式防火墙自动模式"
 
-#: standalone/net_applet:336
+#: standalone/net_applet:340
 #, c-format
 msgid "Always launch on startup"
 msgstr "启动时自动调用"
 
-#: standalone/net_applet:340
+#: standalone/net_applet:344
 #, c-format
 msgid "Wireless networks"
 msgstr "无线网络"
 
-#: standalone/net_applet:425
+#: standalone/net_applet:429
 #, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr "交互式防火墙: 检测到了入侵"
 
-#: standalone/net_applet:438
+#: standalone/net_applet:442
 #, c-format
 msgid "What do you want to do with this attacker?"
 msgstr "您想要对入侵者进行什么操作?"
 
-#: standalone/net_applet:441
+#: standalone/net_applet:445
 #, c-format
 msgid "Attack details"
 msgstr "攻击细节"
 
-#: standalone/net_applet:445
+#: standalone/net_applet:449
 #, c-format
 msgid "Attack time: %s"
 msgstr "攻击时间: %s"
 
-#: standalone/net_applet:446
+#: standalone/net_applet:450
 #, c-format
 msgid "Network interface: %s"
 msgstr "网卡: %s"
 
-#: standalone/net_applet:447
+#: standalone/net_applet:451
 #, c-format
 msgid "Attack type: %s"
 msgstr "攻击类型: %s"
 
-#: standalone/net_applet:448
+#: standalone/net_applet:452
 #, c-format
 msgid "Protocol: %s"
 msgstr "协议: %s"
 
-#: standalone/net_applet:449
+#: standalone/net_applet:453
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr "攻击者 IP 地址: %s"
 
-#: standalone/net_applet:450
+#: standalone/net_applet:454
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr "攻击者主机名: %s"
 
-#: standalone/net_applet:453
+#: standalone/net_applet:457
 #, c-format
 msgid "Service attacked: %s"
 msgstr "攻击的服务: %s"
 
-#: standalone/net_applet:454
+#: standalone/net_applet:458
 #, c-format
 msgid "Port attacked: %s"
 msgstr "攻击的端口: %s"
 
-#: standalone/net_applet:456
+#: standalone/net_applet:460
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr "ICMP 攻击的类型: %s"
 
-#: standalone/net_applet:461
+#: standalone/net_applet:465
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr "总是黑名单(以后不再询问)"

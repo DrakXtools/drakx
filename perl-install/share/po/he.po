@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-15 15:03+0800\n"
+"POT-Creation-Date: 2005-10-22 19:23+0800\n"
 "PO-Revision-Date: 2005-09-10 09:11+0300\n"
 "Last-Translator: dovix <dovix2003@yahoo.com>\n"
 "Language-Team: Hebrew <mdk-hebrew@iglu.org.il>\n"
@@ -383,22 +383,22 @@ msgstr "32 MB"
 msgid "64 MB or more"
 msgstr "64 MB או יותר"
 
-#: Xconfig/card.pm:161
+#: Xconfig/card.pm:162
 #, c-format
 msgid "X server"
 msgstr "שרת גרפי"
 
-#: Xconfig/card.pm:162
+#: Xconfig/card.pm:163
 #, c-format
 msgid "Choose an X server"
 msgstr "יש לבחור כרטיס מסך"
 
-#: Xconfig/card.pm:194
+#: Xconfig/card.pm:195
 #, c-format
 msgid "Multi-head configuration"
 msgstr "הגדרת מספר צגים"
 
-#: Xconfig/card.pm:195
+#: Xconfig/card.pm:196
 #, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
@@ -407,62 +407,62 @@ msgstr ""
 "המערכת שלך תומכת בהגדרת מספר צגים.\n"
 "מה ברצונך לעשות?"
 
-#: Xconfig/card.pm:264
+#: Xconfig/card.pm:265
 #, c-format
 msgid "Can not install Xorg package: %s"
 msgstr "אין אפשרות להתקין חבילת שרת גרפי: %s"
 
-#: Xconfig/card.pm:274
+#: Xconfig/card.pm:275
 #, c-format
 msgid "Select the memory size of your graphics card"
 msgstr "עליך לבחור את כמות הזיכרון של כרטיס המסך שלך"
 
-#: Xconfig/card.pm:365
+#: Xconfig/card.pm:367
 #, c-format
 msgid "Xorg configuration"
 msgstr "הגדרות Xorg"
 
-#: Xconfig/card.pm:367
+#: Xconfig/card.pm:369
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
 msgstr "איזו גרסת שרת גרפי ברצונך להתקין?"
 
-#: Xconfig/card.pm:400
+#: Xconfig/card.pm:402
 #, c-format
 msgid "Configure all heads independently"
 msgstr "הגדרת כל הצגים בנפרד"
 
-#: Xconfig/card.pm:401
+#: Xconfig/card.pm:403
 #, c-format
 msgid "Use Xinerama extension"
 msgstr "השתמש בהרחבת Xinerama"
 
-#: Xconfig/card.pm:406
+#: Xconfig/card.pm:408
 #, c-format
 msgid "Configure only card \"%s\"%s"
 msgstr "הגדר רק את הכרטיס \"%s\"%s"
 
-#: Xconfig/card.pm:418 Xconfig/various.pm:23
+#: Xconfig/card.pm:420 Xconfig/various.pm:23
 #, c-format
 msgid "Xorg %s"
 msgstr "Xorg %s"
 
-#: Xconfig/card.pm:425 Xconfig/various.pm:22
+#: Xconfig/card.pm:427 Xconfig/various.pm:22
 #, c-format
 msgid "Xorg %s with 3D hardware acceleration"
 msgstr "Xorg %s עם תמיכה בהאצת תלת מימד בחומרה"
 
-#: Xconfig/card.pm:427
+#: Xconfig/card.pm:429
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
 msgstr "כרטיסך יכול לתמוך בהאצת תלת מימד בחומרה עם Xorg %s."
 
-#: Xconfig/card.pm:433
+#: Xconfig/card.pm:435
 #, c-format
 msgid "Xorg %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr "Xorg %s עם חומרה מאיצת תלת מימד נסיונית"
 
-#: Xconfig/card.pm:435
+#: Xconfig/card.pm:437
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support with Xorg %s,\n"
@@ -824,7 +824,7 @@ msgstr "אחר"
 
 #: any.pm:142 harddrake/sound.pm:192 interactive.pm:474 pkgs.pm:473
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:376
 #: standalone/service_harddrake:208
 #, c-format
 msgid "Please wait"
@@ -2965,7 +2965,7 @@ msgstr "אין אפשרות להתקין את החבילה %s !"
 msgid "Mandatory package %s is missing"
 msgstr "נדרשת החבילה %s אך היא חסרה"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:271 install_steps_interactive.pm:1317
+#: do_pkgs.pm:35 harddrake/sound.pm:274 install_steps_interactive.pm:1317
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -2976,13 +2976,14 @@ msgstr "נדרשת החבילה %s אך היא חסרה"
 #: standalone/drakTermServ:1935 standalone/drakbackup:510
 #: standalone/drakbackup:609 standalone/drakboot:133 standalone/drakclock:224
 #: standalone/drakconnect:973 standalone/drakperm:380 standalone/drakperm:390
-#: standalone/drakups:27 standalone/harddrake2:490 standalone/localedrake:43
-#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#: standalone/drakups:27 standalone/harddrake2:511 standalone/harddrake2:527
+#: standalone/localedrake:43 standalone/scannerdrake:51
+#: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "אזהרה"
 
-#: do_pkgs.pm:35 standalone/harddrake2:490
+#: do_pkgs.pm:35 standalone/harddrake2:527
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "החבילות הבאות יותקנו:\n"
@@ -3142,12 +3143,12 @@ msgstr "אפשר הרשאת כתיבה למשתמשים רגילים"
 msgid "Give read-only access to ordinary users"
 msgstr "אפשר הרשאת קריאה בלבד למשתמשים רגילים"
 
-#: fs/type.pm:376
+#: fs/type.pm:363
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "אין אפשרות להשתמש ב-JFS עבור מחיצה קטנה מ- 16MB"
 
-#: fs/type.pm:377
+#: fs/type.pm:364
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "אין אפשרות להשתמש ב-ReiserFS למחיצה קטנה מ-32MB"
@@ -3181,22 +3182,22 @@ msgstr ""
 "\n"
 "האם ניתן להמשיך תוך סיכון של אובדן כל המחיצות?\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:381
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "נקודות עיגון חייבות להתחיל בלוכסן (/)"
 
-#: fsedit.pm:386
+#: fsedit.pm:382
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "שמות נקודות עיגון צריכות להכיל רק אותיות, מספרים וקו תחתון"
 
-#: fsedit.pm:387
+#: fsedit.pm:383
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "כבר קיימת מחיצה עם נקודת עיגון %s\n"
 
-#: fsedit.pm:389
+#: fsedit.pm:385
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3207,14 +3208,14 @@ msgstr ""
 "תצורה זו לא נתמכת ע\"י טוען המערכת ללא מחיצת /boot.\n"
 "עליך להגדיר מחיצת /boot מתאימה"
 
-#: fsedit.pm:394
+#: fsedit.pm:390
 #, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
 
-#: fsedit.pm:396
+#: fsedit.pm:392
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3226,12 +3227,12 @@ msgstr ""
 "תצורה זו לא נתמכת ע\"י טוען המערכת ללא מחיצת /boot.\n"
 "עליך להגדיר מחיצת /boot מתאימה"
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:396 fsedit.pm:398
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "ספרייה זו צריכה להישאר במערכת הקבצים הראשית (root)."
 
-#: fsedit.pm:404 fsedit.pm:406
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3240,17 +3241,17 @@ msgstr ""
 "יש להגדיר מערכת קבצים אמתית (ext2/ext3, reiserfs, xfs, או jfs) בשביל נקודת "
 "העיגון הזאת\n"
 
-#: fsedit.pm:408
+#: fsedit.pm:404
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "אסור להשתמש במערכת קבצים מוצפנת לנקודת העיגון %s"
 
-#: fsedit.pm:469
+#: fsedit.pm:465
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "אין מספיק מקום פנוי לחלוקה אוטומטית"
 
-#: fsedit.pm:471
+#: fsedit.pm:467
 #, c-format
 msgid "Nothing to do"
 msgstr "לא נדרש לעשות דבר"
@@ -3473,7 +3474,7 @@ msgstr "UPS"
 msgid "Scanner"
 msgstr "סורק"
 
-#: harddrake/data.pm:504 standalone/harddrake2:454
+#: harddrake/data.pm:504 standalone/harddrake2:476
 #, c-format
 msgid "Unknown/Others"
 msgstr "לא ידוע/אחרים"
@@ -3550,17 +3551,17 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 
-#: harddrake/sound.pm:258 harddrake/sound.pm:343 standalone/drakups:146
+#: harddrake/sound.pm:258 harddrake/sound.pm:346 standalone/drakups:146
 #, c-format
 msgid "Driver:"
 msgstr "מנהל התקן:"
 
-#: harddrake/sound.pm:263
+#: harddrake/sound.pm:266
 #, c-format
 msgid "Trouble shooting"
 msgstr "פתרון בעיות"
 
-#: harddrake/sound.pm:271
+#: harddrake/sound.pm:274
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3570,12 +3571,12 @@ msgid ""
 "The new \"%s\" driver will only be used on next bootstrap."
 msgstr ""
 
-#: harddrake/sound.pm:279
+#: harddrake/sound.pm:282
 #, c-format
 msgid "No open source driver"
 msgstr "אין מנהל התקן בקוד פתוח"
 
-#: harddrake/sound.pm:280
+#: harddrake/sound.pm:283
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3584,33 +3585,33 @@ msgstr ""
 "לא קיים מנהל התקן חופשי עבור כרטיס המסך שלך (%s), אבל קיים מנהל התקן קנייני "
 "באתר \"%s\"."
 
-#: harddrake/sound.pm:283
+#: harddrake/sound.pm:286
 #, c-format
 msgid "No known driver"
 msgstr "אין מנהל התקן ידוע"
 
-#: harddrake/sound.pm:284
+#: harddrake/sound.pm:287
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "אין פה מנהל התקן ידוע לכרטיס הקול שלך (%s)"
 
-#: harddrake/sound.pm:288
+#: harddrake/sound.pm:291
 #, c-format
 msgid "Unknown driver"
 msgstr "מנהל התקן לא ידוע"
 
-#: harddrake/sound.pm:289
+#: harddrake/sound.pm:292
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "שגיאה: ההתקן \"%s\" עבור הכרטיס קול שלך לא רשום"
 
-#: harddrake/sound.pm:303
+#: harddrake/sound.pm:306
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "פתרון בעיות קול"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:306
+#: harddrake/sound.pm:309
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3634,18 +3635,18 @@ msgid ""
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
 
-#: harddrake/sound.pm:332
+#: harddrake/sound.pm:335
 #, c-format
 msgid "Let me pick any driver"
 msgstr "תן לי לבחור מנהל התקן כלשהו"
 
-#: harddrake/sound.pm:335
+#: harddrake/sound.pm:338
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "בחירת מנהל התקן באופן שרירותי"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:338
+#: harddrake/sound.pm:341
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -4081,7 +4082,7 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:946
 #: interactive.pm:161 modules/interactive.pm:71 standalone/drakbackup:2613
-#: standalone/draksec:54 standalone/harddrake2:312 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:332 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "לא"
@@ -4089,7 +4090,7 @@ msgstr "לא"
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:946 interactive.pm:161
 #: modules/interactive.pm:71 printer/printerdrake.pm:883
 #: printer/printerdrake.pm:898 standalone/drakbackup:2613
-#: standalone/draksec:55 standalone/harddrake2:311 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:55 standalone/harddrake2:331 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "כן"
@@ -4427,7 +4428,7 @@ msgstr "שימוש במחיצות קיימות"
 msgid "Use the free space on the Windows partition"
 msgstr "שימוש בשטח החופשי שעל מחיצת חלונות"
 
-#: help.pm:374 install_interactive.pm:213
+#: help.pm:374
 #, c-format
 msgid "Erase entire disk"
 msgstr "מחיקת כל המידע הקיים בכונן הקשיח"
@@ -5797,6 +5798,11 @@ msgstr "אין מחיצת FAT שניתן לשנות את גודלה (או לא �
 #, c-format
 msgid "Remove Windows(TM)"
 msgstr "הסרת מערכת חלונות"
+
+#: install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "מחיקת כל המידע הקיים בכונן הקשיח"
 
 #: install_interactive.pm:215
 #, c-format
@@ -9537,7 +9543,7 @@ msgstr "יציאות אחרות"
 #: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:202
-#: standalone/net_applet:381 standalone/net_applet:418
+#: standalone/net_applet:385 standalone/net_applet:422
 #, c-format
 msgid "Interactive Firewall"
 msgstr "חומת אש אינטראקטיבית"
@@ -9704,7 +9710,7 @@ msgid ""
 "No D-Channel (leased lines)"
 msgstr ""
 
-#: network/netconnect.pm:103 standalone/harddrake2:309
+#: network/netconnect.pm:103 standalone/harddrake2:329
 #: standalone/net_monitor:102 standalone/net_monitor:103
 #: standalone/net_monitor:108
 #, c-format
@@ -12646,7 +12652,7 @@ msgstr "חסר שם מדפסת מרוחקת!"
 #: standalone/drakbackup:618 standalone/drakbackup:653
 #: standalone/drakbackup:754 standalone/draknfs:203
 #: standalone/draksambashare:629 standalone/draksambashare:796
-#: standalone/harddrake2:256
+#: standalone/harddrake2:276
 #, c-format
 msgid "Information"
 msgstr "מידע"
@@ -19968,12 +19974,12 @@ msgstr "רישום"
 msgid "Clear logs"
 msgstr "נקה הכל"
 
-#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:466
+#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:470
 #, c-format
 msgid "Blacklist"
 msgstr "רשימה שחורה"
 
-#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:471
+#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:475
 #, c-format
 msgid "Whitelist"
 msgstr "רשימה לבנה"
@@ -19995,7 +20001,7 @@ msgstr "הסרה מהרשימה הלבנה"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
-#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:381
+#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:385
 #, c-format
 msgid "Unable to contact daemon"
 msgstr "לא יכול להתחבר לתכנת הרקע"
@@ -20974,7 +20980,7 @@ msgstr "מידע משתמש"
 msgid "User name:"
 msgstr "שם משתמש:"
 
-#: standalone/draksambashare:935 standalone/harddrake2:564
+#: standalone/draksambashare:935 standalone/harddrake2:601
 #, c-format
 msgid "Password:"
 msgstr "ססמה:"
@@ -21074,7 +21080,7 @@ msgstr "מקומי"
 msgid "NONE"
 msgstr "כלום"
 
-#: standalone/draksec:53 standalone/net_applet:476
+#: standalone/draksec:53 standalone/net_applet:480
 #, c-format
 msgid "Ignore"
 msgstr "התעלם"
@@ -21436,7 +21442,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "זיהוי-אוטומטי"
 
-#: standalone/drakups:101 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/harddrake2:376
 #, c-format
 msgid "Detection in progress"
 msgstr "זיהוי בתהליך"
@@ -23457,7 +23463,7 @@ msgstr "הפרוטוקול המשמש את שולחן העבודה לתקשור�
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:322
+#: standalone/harddrake2:342
 #, c-format
 msgid "Identification"
 msgstr "זיהוי"
@@ -23592,74 +23598,82 @@ msgstr ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
-#: standalone/harddrake2:242
+#: standalone/harddrake2:243
 #, c-format
 msgid "Harddrake2"
 msgstr "HardDrake2"
 
-#: standalone/harddrake2:253
+#: standalone/harddrake2:273
 #, c-format
 msgid "Detected hardware"
 msgstr "חומרה שזוהתה"
 
-#: standalone/harddrake2:258
+#: standalone/harddrake2:278
 #, c-format
 msgid "Configure module"
 msgstr "הגדרת מודול"
 
-#: standalone/harddrake2:265
+#: standalone/harddrake2:285
 #, c-format
 msgid "Run config tool"
 msgstr "הרצת כלי הגדרה"
 
-#: standalone/harddrake2:289
+#: standalone/harddrake2:309
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "עליך לבחור התקן בחלון הימני בכדי להציג את המידע עבורו בחלון זה."
 
-#: standalone/harddrake2:310 standalone/printerdrake:306
+#: standalone/harddrake2:330 standalone/printerdrake:306
 #: standalone/printerdrake:320
 #, c-format
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: standalone/harddrake2:330
+#: standalone/harddrake2:350
 #, c-format
 msgid "Misc"
 msgstr "שונות"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "secondary"
 msgstr "משני"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "primary"
 msgstr "ראשי"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "burner"
 msgstr "צורב"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:558 standalone/harddrake2:561
+#: standalone/harddrake2:512
+#, c-format
+msgid ""
+"The following devices needs proprietary drivers or firmwares in order to "
+"operate smoothly. The appropriate packages can be retrieved from the "
+"Mandriva Club. Do you want to subscribe to the Mandriva Club?"
+msgstr ""
+
+#: standalone/harddrake2:595 standalone/harddrake2:598
 #, c-format
 msgid "Upload the hardware list"
 msgstr "טען את רשימת החומרה"
 
-#: standalone/harddrake2:563
+#: standalone/harddrake2:600
 #, c-format
 msgid "Account:"
 msgstr "חשבון:"
 
-#: standalone/harddrake2:565
+#: standalone/harddrake2:602
 #, c-format
 msgid "Hostname:"
 msgstr "שם מארח:"
@@ -23798,7 +23812,7 @@ msgstr "חיפוש"
 msgid "A tool to monitor your logs"
 msgstr "כלי להצגת הרישום של המערכת"
 
-#: standalone/logdrake:128 standalone/net_applet:343 standalone/net_monitor:93
+#: standalone/logdrake:128 standalone/net_applet:347 standalone/net_monitor:93
 #, c-format
 msgid "Settings"
 msgstr "הגדרות"
@@ -24036,82 +24050,82 @@ msgstr "פרופילים"
 msgid "Get Online Help"
 msgstr "קבלת עזרה מקוונת"
 
-#: standalone/net_applet:331
+#: standalone/net_applet:335
 #, c-format
 msgid "Interactive Firewall automatic mode"
 msgstr ""
 
-#: standalone/net_applet:336
+#: standalone/net_applet:340
 #, c-format
 msgid "Always launch on startup"
 msgstr "הפעל תמיד באתחול המערכת"
 
-#: standalone/net_applet:340
+#: standalone/net_applet:344
 #, fuzzy, c-format
 msgid "Wireless networks"
 msgstr "ניהול רשתות אלחוטיות"
 
-#: standalone/net_applet:425
+#: standalone/net_applet:429
 #, fuzzy, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr "חומת אש פעילה: זוהתה חדירה"
 
-#: standalone/net_applet:438
+#: standalone/net_applet:442
 #, fuzzy, c-format
 msgid "What do you want to do with this attacker?"
 msgstr "האם ברצונך להוסיף את המתקיף לרשימה השחורה?"
 
-#: standalone/net_applet:441
+#: standalone/net_applet:445
 #, c-format
 msgid "Attack details"
 msgstr "מידע אודות ההתקפה"
 
-#: standalone/net_applet:445
+#: standalone/net_applet:449
 #, c-format
 msgid "Attack time: %s"
 msgstr "משך ההתקפה: %s"
 
-#: standalone/net_applet:446
+#: standalone/net_applet:450
 #, c-format
 msgid "Network interface: %s"
 msgstr "ממשקי רשת: %s"
 
-#: standalone/net_applet:447
+#: standalone/net_applet:451
 #, c-format
 msgid "Attack type: %s"
 msgstr "סוג ההתקפה: %s"
 
-#: standalone/net_applet:448
+#: standalone/net_applet:452
 #, c-format
 msgid "Protocol: %s"
 msgstr "פרוטוקול: %s"
 
-#: standalone/net_applet:449
+#: standalone/net_applet:453
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr "כתובת ה-IP של התוקף: %s"
 
-#: standalone/net_applet:450
+#: standalone/net_applet:454
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr "שם המחשב של התוקף %s: "
 
-#: standalone/net_applet:453
+#: standalone/net_applet:457
 #, c-format
 msgid "Service attacked: %s"
 msgstr "סוג שירות המותקף: %s"
 
-#: standalone/net_applet:454
+#: standalone/net_applet:458
 #, c-format
 msgid "Port attacked: %s"
 msgstr "הפורט המותקף: %s"
 
-#: standalone/net_applet:456
+#: standalone/net_applet:460
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr ""
 
-#: standalone/net_applet:461
+#: standalone/net_applet:465
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr "חסום באופן תמידי (אל תשאל שנית)"

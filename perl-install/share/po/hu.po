@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2005-10-15 15:03+0800\n"
+"POT-Creation-Date: 2005-10-22 19:23+0800\n"
 "PO-Revision-Date: 2005-09-19 22:55+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -396,22 +396,22 @@ msgstr "32 MB"
 msgid "64 MB or more"
 msgstr "64 MB vagy több"
 
-#: Xconfig/card.pm:161
+#: Xconfig/card.pm:162
 #, c-format
 msgid "X server"
 msgstr "X-kiszolgáló"
 
-#: Xconfig/card.pm:162
+#: Xconfig/card.pm:163
 #, c-format
 msgid "Choose an X server"
 msgstr "Válasszon egy X-kiszolgálót"
 
-#: Xconfig/card.pm:194
+#: Xconfig/card.pm:195
 #, c-format
 msgid "Multi-head configuration"
 msgstr "A többképernyős mód beállítása"
 
-#: Xconfig/card.pm:195
+#: Xconfig/card.pm:196
 #, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
@@ -420,62 +420,62 @@ msgstr ""
 "A grafikus kártya lehetővé teszi több képernyő használatát.\n"
 "Mit szeretne tenni?"
 
-#: Xconfig/card.pm:264
+#: Xconfig/card.pm:265
 #, c-format
 msgid "Can not install Xorg package: %s"
 msgstr "Az Xorg csomag nem telepíthető: %s"
 
-#: Xconfig/card.pm:274
+#: Xconfig/card.pm:275
 #, c-format
 msgid "Select the memory size of your graphics card"
 msgstr "Válassza ki a grafikus kártyán található memória mennyiségét"
 
-#: Xconfig/card.pm:365
+#: Xconfig/card.pm:367
 #, c-format
 msgid "Xorg configuration"
 msgstr "Xorg-beállítások"
 
-#: Xconfig/card.pm:367
+#: Xconfig/card.pm:369
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
 msgstr "Melyik Xorg grafikus rendszert kívánja használni?"
 
-#: Xconfig/card.pm:400
+#: Xconfig/card.pm:402
 #, c-format
 msgid "Configure all heads independently"
 msgstr "A képernyők egymástól független beállítása"
 
-#: Xconfig/card.pm:401
+#: Xconfig/card.pm:403
 #, c-format
 msgid "Use Xinerama extension"
 msgstr "A Xinerama kiterjesztés használata"
 
-#: Xconfig/card.pm:406
+#: Xconfig/card.pm:408
 #, c-format
 msgid "Configure only card \"%s\"%s"
 msgstr "Csak a(z) \"%s\"%s kártya beállítása"
 
-#: Xconfig/card.pm:418 Xconfig/various.pm:23
+#: Xconfig/card.pm:420 Xconfig/various.pm:23
 #, c-format
 msgid "Xorg %s"
 msgstr "Xorg %s"
 
-#: Xconfig/card.pm:425 Xconfig/various.pm:22
+#: Xconfig/card.pm:427 Xconfig/various.pm:22
 #, c-format
 msgid "Xorg %s with 3D hardware acceleration"
 msgstr "Xorg %s hardveres 3D-s gyorsítással"
 
-#: Xconfig/card.pm:427
+#: Xconfig/card.pm:429
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with Xorg %s."
 msgstr "A kártya támogat hardveres 3D-s gyorsítást az Xorg %s verzióval."
 
-#: Xconfig/card.pm:433
+#: Xconfig/card.pm:435
 #, c-format
 msgid "Xorg %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr "Xorg %s KÍSÉRLETI JELLEGŰ hardveres 3D-s gyorsítással"
 
-#: Xconfig/card.pm:435
+#: Xconfig/card.pm:437
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support with Xorg %s,\n"
@@ -841,7 +841,7 @@ msgstr "egyéb"
 
 #: any.pm:142 harddrake/sound.pm:192 interactive.pm:474 pkgs.pm:473
 #: standalone/drakconnect:160 standalone/drakconnect:635 standalone/draksec:68
-#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:376
 #: standalone/service_harddrake:208
 #, c-format
 msgid "Please wait"
@@ -3053,7 +3053,7 @@ msgstr "Nem sikerült telepíteni a(z) %s csomagot."
 msgid "Mandatory package %s is missing"
 msgstr "Hiányzik a(z) \"%s\" nevű kötelező csomag"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:271 install_steps_interactive.pm:1317
+#: do_pkgs.pm:35 harddrake/sound.pm:274 install_steps_interactive.pm:1317
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3064,13 +3064,14 @@ msgstr "Hiányzik a(z) \"%s\" nevű kötelező csomag"
 #: standalone/drakTermServ:1935 standalone/drakbackup:510
 #: standalone/drakbackup:609 standalone/drakboot:133 standalone/drakclock:224
 #: standalone/drakconnect:973 standalone/drakperm:380 standalone/drakperm:390
-#: standalone/drakups:27 standalone/harddrake2:490 standalone/localedrake:43
-#: standalone/scannerdrake:51 standalone/scannerdrake:940
+#: standalone/drakups:27 standalone/harddrake2:511 standalone/harddrake2:527
+#: standalone/localedrake:43 standalone/scannerdrake:51
+#: standalone/scannerdrake:940
 #, c-format
 msgid "Warning"
 msgstr "Figyelmeztetés"
 
-#: do_pkgs.pm:35 standalone/harddrake2:490
+#: do_pkgs.pm:35 standalone/harddrake2:527
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "A következő csomagokat szükséges telepíteni:\n"
@@ -3244,12 +3245,12 @@ msgstr "Írási jog adása a normál felhasználóknak"
 msgid "Give read-only access to ordinary users"
 msgstr "Olvasási jog adása a normál felhasználóknak"
 
-#: fs/type.pm:376
+#: fs/type.pm:363
 #, c-format
 msgid "You can not use JFS for partitions smaller than 16MB"
 msgstr "Nem lehet JFS-t használni 16 MB-nál kisebb partíción"
 
-#: fs/type.pm:377
+#: fs/type.pm:364
 #, c-format
 msgid "You can not use ReiserFS for partitions smaller than 32MB"
 msgstr "Nem lehet ReiserFS-t használni 32 MB-nál kisebb partíción"
@@ -3283,22 +3284,22 @@ msgstr ""
 "\n"
 "Törölni szeretné az összes partíciót?\n"
 
-#: fsedit.pm:385
+#: fsedit.pm:381
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "A csatolási pontoknak /-rel kell kezdődni"
 
-#: fsedit.pm:386
+#: fsedit.pm:382
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
 msgstr "A csatolási pontoknak betűkből és számokból kell állni"
 
-#: fsedit.pm:387
+#: fsedit.pm:383
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Már van egy partíció amelynek %s a csatolási pontja\n"
 
-#: fsedit.pm:389
+#: fsedit.pm:385
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3309,7 +3310,7 @@ msgstr ""
 "Egyik rendszerindító program sem tudja ezt kezelni /boot partíció nélkül,\n"
 "ezért mindenképpen hozzon létre egy /boot partíciót."
 
-#: fsedit.pm:394
+#: fsedit.pm:390
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -3318,7 +3319,7 @@ msgstr ""
 "A(z) \"%s\" csatolási ponthoz nem használható az LVM-es logikai kötet, mivel "
 "több fizikai köteten foglal helyet."
 
-#: fsedit.pm:396
+#: fsedit.pm:392
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3332,12 +3333,12 @@ msgstr ""
 "több fizikai köteten helyezkedik el.\n"
 "Először hozzon létre egy /boot partíciót."
 
-#: fsedit.pm:400 fsedit.pm:402
+#: fsedit.pm:396 fsedit.pm:398
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Ennek a könyvtárnak a gyökér-fájlrendszeren belül kell maradnia"
 
-#: fsedit.pm:404 fsedit.pm:406
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3346,17 +3347,17 @@ msgstr ""
 "Valódi fájlrendszert (Ext2, Ext3, ReiserFS, XFS vagy JFS) kell használni "
 "ennél a csatolási pontnál\n"
 
-#: fsedit.pm:408
+#: fsedit.pm:404
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Titkosított fájlrendszer nem használható ehhez a csatolási ponthoz: %s"
 
-#: fsedit.pm:469
+#: fsedit.pm:465
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Nincs elég szabad terület az automatikus helyfoglaláshoz"
 
-#: fsedit.pm:471
+#: fsedit.pm:467
 #, c-format
 msgid "Nothing to do"
 msgstr "Nincs mit tenni"
@@ -3579,7 +3580,7 @@ msgstr "UPS"
 msgid "Scanner"
 msgstr "Lapolvasó"
 
-#: harddrake/data.pm:504 standalone/harddrake2:454
+#: harddrake/data.pm:504 standalone/harddrake2:476
 #, c-format
 msgid "Unknown/Others"
 msgstr "Ismeretlen/Egyéb"
@@ -3675,17 +3676,17 @@ msgstr ""
 " - ALSA-hívásokkal, amelyek fejlettebb funkciókat valósítanak meg, de ehhez "
 "szükség van az ALSA-könyvtár használatára.\n"
 
-#: harddrake/sound.pm:258 harddrake/sound.pm:343 standalone/drakups:146
+#: harddrake/sound.pm:258 harddrake/sound.pm:346 standalone/drakups:146
 #, c-format
 msgid "Driver:"
 msgstr "Meghajtó:"
 
-#: harddrake/sound.pm:263
+#: harddrake/sound.pm:266
 #, c-format
 msgid "Trouble shooting"
 msgstr "Problémaelhárítás"
 
-#: harddrake/sound.pm:271
+#: harddrake/sound.pm:274
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -3700,13 +3701,13 @@ msgstr ""
 "\n"
 "Az új \"%s\" meghajtó csak a következő indítástól kezdve lesz használva."
 
-#: harddrake/sound.pm:279
+#: harddrake/sound.pm:282
 #, c-format
 msgid "No open source driver"
 msgstr "Nincs nyílt forrású meghajtó"
 
 # a 2. %s egy drivert jelöl
-#: harddrake/sound.pm:280
+#: harddrake/sound.pm:283
 #, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
@@ -3715,33 +3716,33 @@ msgstr ""
 "Nincs szabadon használható meghajtó a hangkártyához (%s), viszont létezik "
 "kötött licencelésű meghajtó: \"%s\"."
 
-#: harddrake/sound.pm:283
+#: harddrake/sound.pm:286
 #, c-format
 msgid "No known driver"
 msgstr "Nincs ismert meghajtó"
 
-#: harddrake/sound.pm:284
+#: harddrake/sound.pm:287
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr "Nincs ismert meghajtó a hangkártyához (%s)"
 
-#: harddrake/sound.pm:288
+#: harddrake/sound.pm:291
 #, c-format
 msgid "Unknown driver"
 msgstr "Ismeretlen meghajtó"
 
-#: harddrake/sound.pm:289
+#: harddrake/sound.pm:292
 #, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "Hiba: a hangkártya meghajtója (%s) nem elérhető"
 
-#: harddrake/sound.pm:303
+#: harddrake/sound.pm:306
 #, c-format
 msgid "Sound trouble shooting"
 msgstr "Hangprobléma elhárítása"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:306
+#: harddrake/sound.pm:309
 #, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
@@ -3785,18 +3786,18 @@ msgstr ""
 "- \"/sbin/fuser -v /dev/dsp\": kiírja, hogy melyik program használja a\n"
 "hangkártyát\n"
 
-#: harddrake/sound.pm:332
+#: harddrake/sound.pm:335
 #, c-format
 msgid "Let me pick any driver"
 msgstr "Szeretnék meghajtót választani"
 
-#: harddrake/sound.pm:335
+#: harddrake/sound.pm:338
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Tetszőleges meghajtó kiválasztása"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
-#: harddrake/sound.pm:338
+#: harddrake/sound.pm:341
 #, c-format
 msgid ""
 "If you really think that you know which driver is the right one for your "
@@ -4316,7 +4317,7 @@ msgstr ""
 
 #: help.pm:180 help.pm:285 help.pm:313 help.pm:444 install_any.pm:946
 #: interactive.pm:161 modules/interactive.pm:71 standalone/drakbackup:2613
-#: standalone/draksec:54 standalone/harddrake2:312 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:54 standalone/harddrake2:332 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "No"
 msgstr "Nem"
@@ -4324,7 +4325,7 @@ msgstr "Nem"
 #: help.pm:180 help.pm:285 help.pm:444 install_any.pm:946 interactive.pm:161
 #: modules/interactive.pm:71 printer/printerdrake.pm:883
 #: printer/printerdrake.pm:898 standalone/drakbackup:2613
-#: standalone/draksec:55 standalone/harddrake2:311 ugtk2.pm:898 wizards.pm:156
+#: standalone/draksec:55 standalone/harddrake2:331 ugtk2.pm:898 wizards.pm:156
 #, c-format
 msgid "Yes"
 msgstr "Igen"
@@ -4778,7 +4779,7 @@ msgstr "Már létező partíció használata"
 msgid "Use the free space on the Windows partition"
 msgstr "A windowsos partíción levő szabad hely felhasználása"
 
-#: help.pm:374 install_interactive.pm:213
+#: help.pm:374
 #, c-format
 msgid "Erase entire disk"
 msgstr "A teljes lemez törlése"
@@ -6436,6 +6437,11 @@ msgstr "Nincs átméretezhető FAT partíció, vagy nincs elég hely"
 #, c-format
 msgid "Remove Windows(TM)"
 msgstr "A Windows(TM) eltávolítása"
+
+#: install_interactive.pm:213
+#, fuzzy, c-format
+msgid "Erase and use entire disk"
+msgstr "A teljes lemez törlése"
 
 #: install_interactive.pm:215
 #, c-format
@@ -10292,7 +10298,7 @@ msgstr "Egyéb portok"
 #: standalone/drakids:33 standalone/drakids:136 standalone/drakids:145
 #: standalone/drakids:170 standalone/drakids:179 standalone/drakids:189
 #: standalone/drakids:265 standalone/net_applet:59 standalone/net_applet:202
-#: standalone/net_applet:381 standalone/net_applet:418
+#: standalone/net_applet:385 standalone/net_applet:422
 #, c-format
 msgid "Interactive Firewall"
 msgstr "Interaktív tűzfal"
@@ -10468,7 +10474,7 @@ msgstr ""
 "Protokoll a világ többi részén\n"
 "D csatorna nélkül (bérelt vonal)"
 
-#: network/netconnect.pm:103 standalone/harddrake2:309
+#: network/netconnect.pm:103 standalone/harddrake2:329
 #: standalone/net_monitor:102 standalone/net_monitor:103
 #: standalone/net_monitor:108
 #, c-format
@@ -13549,7 +13555,7 @@ msgstr "A távoli nyomtató neve nem lehet üres!"
 #: standalone/drakbackup:618 standalone/drakbackup:653
 #: standalone/drakbackup:754 standalone/draknfs:203
 #: standalone/draksambashare:629 standalone/draksambashare:796
-#: standalone/harddrake2:256
+#: standalone/harddrake2:276
 #, c-format
 msgid "Information"
 msgstr "Információ"
@@ -21543,12 +21549,12 @@ msgstr "Napló"
 msgid "Clear logs"
 msgstr "Naplók törlése"
 
-#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:466
+#: standalone/drakids:62 standalone/drakids:67 standalone/net_applet:470
 #, c-format
 msgid "Blacklist"
 msgstr "Feketelista"
 
-#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:471
+#: standalone/drakids:63 standalone/drakids:80 standalone/net_applet:475
 #, c-format
 msgid "Whitelist"
 msgstr "Fehérlista"
@@ -21570,7 +21576,7 @@ msgstr "Eltávolítás a fehérlistáról"
 
 #: standalone/drakids:136 standalone/drakids:145 standalone/drakids:170
 #: standalone/drakids:179 standalone/drakids:189 standalone/drakids:265
-#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:381
+#: standalone/drakroam:182 standalone/net_applet:202 standalone/net_applet:385
 #, c-format
 msgid "Unable to contact daemon"
 msgstr "Nem sikerült kapcsolódni a szolgáltatáshoz"
@@ -22634,7 +22640,7 @@ msgstr "Felhasználói információ"
 msgid "User name:"
 msgstr "Felhasználónév:"
 
-#: standalone/draksambashare:935 standalone/harddrake2:564
+#: standalone/draksambashare:935 standalone/harddrake2:601
 #, c-format
 msgid "Password:"
 msgstr "Jelszó:"
@@ -22734,7 +22740,7 @@ msgstr "HELYI"
 msgid "NONE"
 msgstr "EGYIK SEM"
 
-#: standalone/draksec:53 standalone/net_applet:476
+#: standalone/draksec:53 standalone/net_applet:480
 #, c-format
 msgid "Ignore"
 msgstr "Ignorálás"
@@ -23147,7 +23153,7 @@ msgstr ""
 msgid "Autodetection"
 msgstr "Automatikus felderítés"
 
-#: standalone/drakups:101 standalone/harddrake2:356
+#: standalone/drakups:101 standalone/harddrake2:376
 #, c-format
 msgid "Detection in progress"
 msgstr "Felderítés folyamatban"
@@ -25586,7 +25592,7 @@ msgstr "A grafikus rendszer által az egérhez használt protokoll"
 
 #: standalone/harddrake2:128 standalone/harddrake2:137
 #: standalone/harddrake2:144 standalone/harddrake2:152
-#: standalone/harddrake2:322
+#: standalone/harddrake2:342
 #, c-format
 msgid "Identification"
 msgstr "Azonosítás"
@@ -25721,27 +25727,27 @@ msgstr ""
 "tvignaud@mandriva.com&gt;\n"
 "\n"
 
-#: standalone/harddrake2:242
+#: standalone/harddrake2:243
 #, c-format
 msgid "Harddrake2"
 msgstr "Harddrake2"
 
-#: standalone/harddrake2:253
+#: standalone/harddrake2:273
 #, c-format
 msgid "Detected hardware"
 msgstr "A megtalált hardver"
 
-#: standalone/harddrake2:258
+#: standalone/harddrake2:278
 #, c-format
 msgid "Configure module"
 msgstr "Modul beállítása"
 
-#: standalone/harddrake2:265
+#: standalone/harddrake2:285
 #, c-format
 msgid "Run config tool"
 msgstr "Beállítóprogram indítása"
 
-#: standalone/harddrake2:289
+#: standalone/harddrake2:309
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
@@ -25749,48 +25755,56 @@ msgstr ""
 "Ha a bal oldali fában rákattint egy eszközre, megjelennek itt az eszköz "
 "adatai."
 
-#: standalone/harddrake2:310 standalone/printerdrake:306
+#: standalone/harddrake2:330 standalone/printerdrake:306
 #: standalone/printerdrake:320
 #, c-format
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: standalone/harddrake2:330
+#: standalone/harddrake2:350
 #, c-format
 msgid "Misc"
 msgstr "Vegyes"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "secondary"
 msgstr "másodlagos"
 
-#: standalone/harddrake2:406
+#: standalone/harddrake2:428
 #, c-format
 msgid "primary"
 msgstr "elsődleges"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "burner"
 msgstr "író"
 
-#: standalone/harddrake2:410
+#: standalone/harddrake2:432
 #, c-format
 msgid "DVD"
 msgstr "DVD"
 
-#: standalone/harddrake2:558 standalone/harddrake2:561
+#: standalone/harddrake2:512
+#, c-format
+msgid ""
+"The following devices needs proprietary drivers or firmwares in order to "
+"operate smoothly. The appropriate packages can be retrieved from the "
+"Mandriva Club. Do you want to subscribe to the Mandriva Club?"
+msgstr ""
+
+#: standalone/harddrake2:595 standalone/harddrake2:598
 #, c-format
 msgid "Upload the hardware list"
 msgstr "Hardverlista feltöltése"
 
-#: standalone/harddrake2:563
+#: standalone/harddrake2:600
 #, c-format
 msgid "Account:"
 msgstr "Azonosító:"
 
-#: standalone/harddrake2:565
+#: standalone/harddrake2:602
 #, c-format
 msgid "Hostname:"
 msgstr "Gépnév:"
@@ -25932,7 +25946,7 @@ msgstr "keresés"
 msgid "A tool to monitor your logs"
 msgstr "Naplófigyelő"
 
-#: standalone/logdrake:128 standalone/net_applet:343 standalone/net_monitor:93
+#: standalone/logdrake:128 standalone/net_applet:347 standalone/net_monitor:93
 #, c-format
 msgid "Settings"
 msgstr "Beállítások"
@@ -26177,82 +26191,82 @@ msgstr "Profilok"
 msgid "Get Online Help"
 msgstr "Online segítség"
 
-#: standalone/net_applet:331
+#: standalone/net_applet:335
 #, c-format
 msgid "Interactive Firewall automatic mode"
 msgstr "Interaktív tűzfal - automatikus mód"
 
-#: standalone/net_applet:336
+#: standalone/net_applet:340
 #, c-format
 msgid "Always launch on startup"
 msgstr "Minden rendszerindításnál induljon el"
 
-#: standalone/net_applet:340
+#: standalone/net_applet:344
 #, c-format
 msgid "Wireless networks"
 msgstr "Vezeték nélküli hálózatok"
 
-#: standalone/net_applet:425
+#: standalone/net_applet:429
 #, c-format
 msgid "Interactive Firewall: intrusion detected"
 msgstr "Interaktív tűzfal: behatolási kísérlet történt"
 
-#: standalone/net_applet:438
+#: standalone/net_applet:442
 #, c-format
 msgid "What do you want to do with this attacker?"
 msgstr "Mit szeretne tenni a támadóval?"
 
-#: standalone/net_applet:441
+#: standalone/net_applet:445
 #, c-format
 msgid "Attack details"
 msgstr "A támadás részletei"
 
-#: standalone/net_applet:445
+#: standalone/net_applet:449
 #, c-format
 msgid "Attack time: %s"
 msgstr "A támadás ideje: %s"
 
-#: standalone/net_applet:446
+#: standalone/net_applet:450
 #, c-format
 msgid "Network interface: %s"
 msgstr "Hálózati csatoló: %s"
 
-#: standalone/net_applet:447
+#: standalone/net_applet:451
 #, c-format
 msgid "Attack type: %s"
 msgstr "A támadás típusa: %s"
 
-#: standalone/net_applet:448
+#: standalone/net_applet:452
 #, c-format
 msgid "Protocol: %s"
 msgstr "Protokoll: %s"
 
-#: standalone/net_applet:449
+#: standalone/net_applet:453
 #, c-format
 msgid "Attacker IP address: %s"
 msgstr "A támadó IP-címe: %s"
 
-#: standalone/net_applet:450
+#: standalone/net_applet:454
 #, c-format
 msgid "Attacker hostname: %s"
 msgstr "A támadó gépneve: %s"
 
-#: standalone/net_applet:453
+#: standalone/net_applet:457
 #, c-format
 msgid "Service attacked: %s"
 msgstr "A megtámadott szolgáltatás: %s"
 
-#: standalone/net_applet:454
+#: standalone/net_applet:458
 #, c-format
 msgid "Port attacked: %s"
 msgstr "A megtámadott port: %s"
 
-#: standalone/net_applet:456
+#: standalone/net_applet:460
 #, c-format
 msgid "Type of ICMP attack: %s"
 msgstr "Az ICMP-támadás típusa: %s"
 
-#: standalone/net_applet:461
+#: standalone/net_applet:465
 #, c-format
 msgid "Always blacklist (do not ask again)"
 msgstr "Mindig feketelistára tevés (ne legyen rákérdezés)"
