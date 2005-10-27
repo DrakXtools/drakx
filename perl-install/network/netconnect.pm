@@ -95,7 +95,7 @@ sub real_main {
           detect($modules_conf, $net->{autodetect}, 'lan');
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
-          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
+          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2] || N("Unknown driver")) }
             grep { to_bool($is_wireless) == detect_devices::is_wireless_interface($_->[0]) } @all_cards;
           my %available;
           $available{$_->[2]} = undef foreach grep { $_->[2] } @all_cards;
@@ -829,6 +829,11 @@ If you do not know it, keep the preselected type."),
                             translate($eth_intf{$_[0]} || $unavailable_wireless_intf{$_[0]} || $_[0]) } } ];
                     },
                     complete => sub {
+                        if (any { $_->[0] eq $ntf_name && !$_->[1] } @all_cards) {
+                            $in->ask_warn(N("Error"), N("Unknown driver"));
+                            return 1;
+                        }
+
                         if ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
                             require network::ndiswrapper;
                             $in->do_pkgs->ensure_is_installed('ndiswrapper', '/usr/sbin/ndiswrapper') or return 1;
