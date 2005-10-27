@@ -111,7 +111,7 @@ sub get_eth_cards_names {
 #- returns (link_type, mac_address)
 sub get_eth_card_mac_address {
     my ($intf) = @_;
-    #- don't look for 6 bytes addresses only because of firewire
+    #- don't look for 6 bytes addresses only because of various non-standard MAC addresses
     `$::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s((?:[0-9a-f]{2}:?)+)\s|;
 }
 
@@ -122,11 +122,12 @@ sub update_iftab() {
         my ($link_type, $mac_address) = get_eth_card_mac_address($intf) or next;
         #- do not write zeroed MAC addresses in iftab, it confuses ifrename
         $mac_address =~ /^[0:]+$/ and next;
-        my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type} or next;
+        # ifrename supports alsa IEEE1394, EUI64 and IRDA
+        member($link, 'ether', 'ieee1394', 'irda', '[27]') or next;
         substInFile {
             s/^$intf\s+.*\n//;
             s/^.*\s+$mac_address\n//;
-            $_ .= qq($intf\t$descriptor $mac_address\n) if eof;
+            $_ .= qq($intf mac $mac_address\n) if eof;
         } "$::prefix/etc/iftab";
     }
 }
