@@ -90,6 +90,12 @@ sub get_eth_cards {
                 $l{$_} = hex(chomp_(cat_("$dev_path/" . $sysfs_fields->{$_}))) foreach keys %$sysfs_fields;
                 my @cards = grep { my $dev = $_; every { $dev->{$_} eq $l{$_} } keys %l } detect_devices::probeall();
                 $description ||= $cards[0]{description} if @cards == 1;
+            } elsif (!$a && -e "/sys/class/net/$interface/wireless") {
+                # probably a rt2400/rt2500 device (PCI or PCMCIA CardBus)
+                # these broken drivers don't create the "device" link
+                # try to see if rt2400/rt2500 is loaded, and assume current wireless device uses it
+                # FIXME: remove this code as soon as the drivers are fixed
+                $a = find { -e "/sys/bus/pci/drivers/$_" } qw(rt2400 rt2500);
             }
         }
         # 6) try to match a device by driver for device description:
