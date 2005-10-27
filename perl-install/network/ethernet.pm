@@ -123,7 +123,7 @@ sub update_iftab() {
         #- do not write zeroed MAC addresses in iftab, it confuses ifrename
         $mac_address =~ /^[0:]+$/ and next;
         # ifrename supports alsa IEEE1394, EUI64 and IRDA
-        member($link, 'ether', 'ieee1394', 'irda', '[27]') or next;
+        member($link_type, 'ether', 'ieee1394', 'irda', '[27]') or next;
         substInFile {
             s/^$intf\s+.*\n//;
             s/^.*\s+$mac_address\n//;
