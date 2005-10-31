@@ -635,7 +635,9 @@ sub read_printer_db {
 			$entry->{ENTRY} =~ s/^CITOH/C.ITOH/i;
 			$entry->{ENTRY} =~ 
 			    s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
-			if ($entry->{defaultdriver}) {
+			if (($entry->{defaultdriver}) &&
+			    (member($entry->{defaultdriver},
+			            @{$entry->{drivers}}))) {
 			    my $driver = $entry->{defaultdriver};
 			    $entry->{driver} = $driver;
 			    if (defined($ppds->{$driver})) {
