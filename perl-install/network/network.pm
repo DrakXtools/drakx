@@ -406,7 +406,7 @@ sub miscellaneous_choose {
     my ($in, $u) = @_;
 
     $in->ask_from(N("Proxies configuration"),
-       N("Here you can set up your proxies configuration (eg: http://my_caching_server:8080"),
+       N("Here you can set up your proxies configuration (eg: http://my_caching_server:8080)"),
        [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
          { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
        ],
