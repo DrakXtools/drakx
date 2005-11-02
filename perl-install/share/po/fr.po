@@ -1,6 +1,4 @@
-# translation of fr.po to Français
 # translation of DrakX-fr.po to Français
-# translation of DrakX-fr.po to french
 # Translation file of Mandriva Linux graphic install
 # Copyright (C) 1999 Mandriva
 #
@@ -54,7 +52,9 @@
 #    préférable de le remplacer par le mot "programme".
 #
 # Nous vous remercions de votre compréhension.
-# Stéphane Teletchéa, 2005.
+#
+#
+#
 # Stéphane Teletchéa, 2005.
 # David BAUDENS <baudens@mandriva.com>, 1999-2004.
 # David ODIN <odin@mandriva.com>, 2000.
@@ -70,21 +70,18 @@
 # Christophe Berthelé <cpjc@free.fr>, 2005.
 # Didier Hérisson <didier.herisson@angstrom.uu.se>, 2005.
 # Nicolas Lécureuil <neoclust@mandriva.org>, 2005.
-#
-#
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
 "POT-Creation-Date: 2005-10-28 23:26+0800\n"
-"PO-Revision-Date: 2005-10-20 15:48+0100\n"
-"Last-Translator: Nicolas Lécureuil <neoclust@mandriva.org>\n"
+"PO-Revision-Date: 2005-11-02 12:12+0100\n"
+"Last-Translator: Christophe Berthelé <cpjc@free.fr>\n"
 "Language-Team: Français <cooker-i18n@mandrivalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11\n"
+"Plural-Forms: nplurals=2;plural=(n>1);\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -3413,14 +3410,14 @@ msgstr ""
 "s car il est réparti sur plusieurs volumes physiques"
 
 #: fsedit.pm:392
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
-"Attention, vous avez choisi une partition logique LVM comme partition racine "
+"Attention, vous avez choisi un volume logique LVM comme partition racine "
 "(/).\n"
 "Le chargeur de démarrage ne peut pas gérer cette situation si le volume est "
 "réparti sur plusieurs volumes physiques.\n"
@@ -6578,9 +6575,9 @@ msgid "Remove Windows(TM)"
 msgstr "Supprimer Microsoft Windows™"
 
 #: install_interactive.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "Effacer tout le disque"
+msgstr "Effacer et utiliser tout le disque"
 
 #: install_interactive.pm:215
 #, c-format
@@ -9897,16 +9894,16 @@ msgid "Remove the logical volumes first\n"
 msgstr "Enlevez d'abord les volumes logiques\n"
 
 #: lvm.pm:178
-#, fuzzy, c-format
+#, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr ""
-"Le chargeur de démarrage ne peut pas gérer /boot s'il est réparti sur "
-"plusieurs volumes physiques"
+"Le chargeur de démarrage ne peut pas gérer /boot réparti sur plusieurs "
+"volumes physiques"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Configuration du pilote UPS"
+msgstr "Ce pilote n'a pas de paramètre de configuration !"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -11785,6 +11782,8 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080"
 msgstr ""
+"Vous pouvez définir ici la configuration des serveurs mandataires (ex : "
+"http://mon_proxy:8080"
 
 #: network/network.pm:410
 #, c-format
@@ -14005,7 +14004,7 @@ msgstr " sur un port parallèle"
 #: printer/printerdrake.pm:2405 printer/printerdrake.pm:2412
 #, c-format
 msgid "to the USB"
-msgstr ""
+msgstr "à l'USB"
 
 #: printer/printerdrake.pm:2406 printer/printerdrake.pm:2413
 #, c-format
@@ -14016,17 +14015,22 @@ msgstr "via le réseau"
 #, c-format
 msgid "This type of connection is currently not fully supported by HPLIP."
 msgstr ""
+"Ce type de connexion n'est pas complètement supporté actuellement par HPLIP."
 
 #: printer/printerdrake.pm:2409
 #, c-format
 msgid "You get full HPLIP support for your device if you connect it "
 msgstr ""
+"Vous aurez un support complet HPLIP de votre périphérique si vous le "
+"connectez "
 
 #: printer/printerdrake.pm:2415
 #, c-format
 msgid ""
 "You can now set up your device with HPLIP anyway (works in many cases), "
 msgstr ""
+"Vous pouvez cependant configurer votre périphérique avec HPLIP (cela marche "
+"généralement),"
 
 #: printer/printerdrake.pm:2416
 #, c-format
@@ -14042,7 +14046,7 @@ msgstr "ou"
 #, c-format
 msgid "cancel the setup (for example to reconnect your device)."
 msgstr ""
-"annuler la configuration (par exemple pour reconnecter votre périphérique)"
+"annuler la configuration (par exemple pour reconnecter votre périphérique)."
 
 #: printer/printerdrake.pm:2419
 #, c-format
@@ -14050,11 +14054,13 @@ msgid ""
 "You can always revise your choice by clicking your printer's entry in the "
 "main window, "
 msgstr ""
+"Vous pouvez toujours revenir sur votre décision en cliquant sur la ligne "
+"correspondant à votre imprimante dans la fenêtre principale, "
 
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "puis en cliquant sur le bouton « %s », "
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:302
@@ -14067,7 +14073,7 @@ msgstr "Éditer"
 #: printer/printerdrake.pm:2421
 #, c-format
 msgid "and choosing \"%s\"."
-msgstr ""
+msgstr "et en choisissant « %s »."
 
 #: printer/printerdrake.pm:2421 printer/printerdrake.pm:5312
 #: printer/printerdrake.pm:5372
@@ -14110,18 +14116,19 @@ msgstr ""
 "adapté. "
 
 #: printer/printerdrake.pm:2462
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To access these extra functions on HP printers they must be set up with "
 "HPLIP (HP Linux Imaging and Printing). "
 msgstr ""
 "Pour avoir accès aux fonctions spéciales de votre imprimante HP, celle-ci "
-"doit être configurée avec le logiciel approprié : "
+"doit être configurée avec HPLIP (HP Linux Imaging and Printing). "
 
 #: printer/printerdrake.pm:2464
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use HPLIP (choose \"No\" for non-HP printers)? "
-msgstr "Que choisissez-vous (« Aucun » pour les imprimantes non HP) ? "
+msgstr ""
+"Voulez-vous utiliser HPLIP (cliquez « Non » pour les imprimantes non HP) ? "
 
 #: printer/printerdrake.pm:2490
 #, c-format
@@ -18639,9 +18646,11 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"Vous devez sélectionner star si vous souhaitez sauvegarder les EA ou ACLs, "
+"sinon choisissez tar"
 
 #: standalone/drakbackup:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
@@ -18649,7 +18658,8 @@ msgid ""
 msgstr ""
 "Ceci devrait être un nom d'utilisateur local ou une adresse courriel auquel "
 "vous voulez que soient envoyés les résultats de la sauvegarde. Vous devrez "
-"avoir installé sur votre système un logiciel de transfert de courriel (MTA)."
+"avoir installé sur votre système un logiciel de transfert de courriel (MTA). "
+"Vous pouvez saisir plusieurs utilisateurs en les séparant par une virgule."
 
 #: standalone/drakbackup:164
 #, c-format
@@ -18687,6 +18697,8 @@ msgid ""
 "Selecting this option allows you to view the raw output from the restore "
 "process, after a file restore."
 msgstr ""
+"Sélectionner cette option vous permet de voir le résultat brut du processus, "
+"après la restauration d'un fichier."
 
 #: standalone/drakbackup:168
 #, c-format
@@ -25975,6 +25987,9 @@ msgid ""
 "operate smoothly. The appropriate packages can be retrieved from the "
 "Mandriva Club. Do you want to subscribe to the Mandriva Club?"
 msgstr ""
+"Les périphériques suivants nécessitent des pilotes ou des microcodes "
+"propriétaires pour fonctionner correctement. Les paquetages appropriés sont "
+"disponibles au Mandriva Club. Désirez-vous vous abonner au Mandriva Club ?"
 
 #: standalone/harddrake2:595 standalone/harddrake2:598
 #, c-format
