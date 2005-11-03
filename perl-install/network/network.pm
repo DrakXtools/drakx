@@ -221,7 +221,7 @@ sub write_wireless_conf {
     my $wireless_file = "$::prefix/etc/sysconfig/network-scripts/wireless.d/$ssid";
     write_interface_settings($ifcfg, $wireless_file);
     # FIXME: write only DHCP/IP settings here
-    substInFile { undef $_ if /^DEVICE=/ } $wireless_file;
+    substInFile { $_ = '' if /^DEVICE=/ } $wireless_file;
 }
 
 sub add2hosts {
