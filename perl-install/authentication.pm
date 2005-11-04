@@ -340,11 +340,9 @@ sub set_raw {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
-	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
+	})
 #    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
 
-#	}) if !$::isInstall; 
-#- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($kind eq 'winbind') {
 
 	my $domain = uc $authentication->{WINDOMAIN};
