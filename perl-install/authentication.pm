@@ -340,7 +340,7 @@ sub set_raw {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
-	})
+	});
 #    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
 
     } elsif ($kind eq 'winbind') {
