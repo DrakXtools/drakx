@@ -290,7 +290,6 @@ sub dont_run_directly_stage2() {
     readlink("/usr/bin/runinstall2") eq "runinstall2.sh";
 }
 
-#- FIXME: use it whenever possible once unfrozen
 sub is_network_install {
     my ($o) = @_;
     member($o->{method}, qw(ftp http nfs));
@@ -1466,7 +1465,7 @@ sub generate_automatic_stage1_params {
     }
     @ks = (method => $method, @ks);
 
-    if (member($o->{method}, qw(http ftp nfs))) {
+    if (is_network_install($o)) {
 	if ($ENV{PROXY}) {
 	    push @ks, proxy_host => $ENV{PROXY}, proxy_port => $ENV{PROXYPORT};
 	}
@@ -1731,7 +1730,7 @@ sub media_browser {
 	    my $hd = $to_text->($_);
 	    map { $_ => join('\1', $hd, partition_table::description($_)) } grep { isTrueFS($_) || isOtherAvailableFS($_) } fs::get::hds_fstab($_);
 	} fs::get::hds($all_hds)),
-	if_(member($::o->{method}, qw(ftp http nfs)) || install_steps::hasNetwork($::o),
+	if_(is_network_install($::o) || install_steps::hasNetwork($::o),
 	    map { $_ => join('\1', N("Network"), translate($_)) } @network_protocols),
     );
 

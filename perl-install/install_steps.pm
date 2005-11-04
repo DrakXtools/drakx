@@ -1003,7 +1003,7 @@ sub network_is_cheap {
 sub upNetwork {
     my ($o, $b_pppAvoided) = @_;
 
-    member($o->{method}, qw(ftp http nfs)) and return 1;
+    install_any::is_network_install($o) and return 1;
     $o->{modules_conf}->write;
     if (hasNetwork($o)) {
 	if (network_is_cheap($o)) {
@@ -1029,7 +1029,7 @@ sub upNetwork {
 sub downNetwork {
     my ($o, $costlyOnly) = @_;
 
-    $o->{method} eq "ftp" || $o->{method} eq "http" || $o->{method} eq "nfs" and return 1;
+    install_any::is_network_install($o) and return 1;
     $o->{modules_conf}->write;
     if (hasNetwork($o)) {
 	if (!$costlyOnly) {
