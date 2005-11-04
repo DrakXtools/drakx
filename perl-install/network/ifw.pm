@@ -13,6 +13,8 @@ sub new {
     $con->add_match("type='signal',interface='com.mandriva.monitoring.ifw'");
 
     require dbus_object;
+    require Net::DBus::Binding::Value;
+
     my $o = dbus_object::new($type,
 			     $bus,
 			     "com.mandriva.monitoring",
