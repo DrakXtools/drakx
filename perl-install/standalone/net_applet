@@ -189,16 +189,16 @@ sub run_drakids() {
     }
 }
 sub generate_wireless_menuitem {
-    my ($net, $ap) = @_;
-    $net->{menuitem} = Gtk2::CheckMenuItem->new;
-    $net->{menuitem}->set_draw_as_radio(1);
-    $net->{menuitem}->add(gtkpack_(gtkshow(Gtk2::HBox->new),
-                                   1, gtkset_alignment($net->{ssid_label} = Gtk2::Label->new, 0, 0),
-                                   0, $net->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
-                                   0, $net->{level_image} = Gtk2::Image->new));
-    $net->{activate} = $net->{menuitem}->signal_connect('activate' => sub {
-        if (exists $net->{id}) {
-            eval { $monitor->select_network($net->{id}) };
+    my ($wnet, $ap) = @_;
+    $wnet->{menuitem} = Gtk2::CheckMenuItem->new;
+    $wnet->{menuitem}->set_draw_as_radio(1);
+    $wnet->{menuitem}->add(gtkpack_(gtkshow(Gtk2::HBox->new),
+                                    1, gtkset_alignment($wnet->{ssid_label} = Gtk2::Label->new, 0, 0),
+                                    0, $wnet->{keyring_image} = Gtk2::Image->new_from_pixbuf($pixbufs{keyring}),
+                                    0, $wnet->{level_image} = Gtk2::Image->new));
+    $wnet->{activate} = $wnet->{menuitem}->signal_connect('activate' => sub {
+        if (exists $wnet->{id}) {
+            eval { $monitor->select_network($wnet->{id}) };
             $@ and err_dialog(N("Interactive Firewall"), N("Unable to contact daemon"));
         } else {
             run_drakroam($ap);
@@ -208,23 +208,23 @@ sub generate_wireless_menuitem {
     undef $current_state; #- force menu redraw
 }
 sub update_wireless_item {
-    my ($net, $ap_address) = @_;
-    $net->{ssid_label}->set_text($net->{essid} || "[$ap_address]");
-    $net->{keyring_image}->visible(to_bool($net->{flags}));
-    $net->{level_image}->set_from_pixbuf($pixbufs{link_level}{$net->{approx_level}});
+    my ($wnet, $ap_address) = @_;
+    $wnet->{ssid_label}->set_text($wnet->{essid} || "[$ap_address]");
+    $wnet->{keyring_image}->visible(to_bool($wnet->{flags}));
+    $wnet->{level_image}->set_from_pixbuf($pixbufs{link_level}{$wnet->{approx_level}});
 
-    $net->{menuitem}->signal_handler_block($net->{activate});
-    $net->{menuitem}->set_active($net->{current});
-    $net->{menuitem}->signal_handler_unblock($net->{activate});
+    $wnet->{menuitem}->signal_handler_block($wnet->{activate});
+    $wnet->{menuitem}->set_active($wnet->{current});
+    $wnet->{menuitem}->signal_handler_unblock($wnet->{activate});
 }
 sub checkWireless() {
     $wireless_device or return;
     my ($networks) =  network::monitor::list_wireless($monitor, $wireless_device);
     foreach (keys %$networks) {
-        my $net = $wireless_networks{$_} ||= {};
-        put_in_hash($net, $networks->{$_});
-        exists $net->{menuitem} or generate_wireless_menuitem($net, $_);
-        update_wireless_item($net, $_);
+        my $wnet = $wireless_networks{$_} ||= {};
+        put_in_hash($wnet, $networks->{$_});
+        exists $wnet->{menuitem} or generate_wireless_menuitem($wnet, $_);
+        update_wireless_item($wnet, $_);
     }
     $wireless_networks{$_}{menuitem}->visible(exists $networks->{$_}) foreach keys %wireless_networks;
 }
@@ -270,8 +270,8 @@ sub update_tray_icon() {
         my $pixbuf;
         if ($current_state eq 'connected') {
             if (detect_devices::is_wireless_interface($current_interface)) {
-                my $net = find { $_->{current} } values %wireless_networks;
-                $pixbuf = $pixbufs{link_level}{$net->{approx_level}} if $net;
+                my $wnet = find { $_->{current} } values %wireless_networks;
+                $pixbuf = $pixbufs{link_level}{$wnet->{approx_level}} if $wnet;
             }
             $pixbuf ||= $pixbufs{state}{connected};
         } else {
