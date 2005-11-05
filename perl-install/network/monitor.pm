@@ -25,8 +25,8 @@ sub list_wireless {
     my $has_roaming = defined $results && defined $list;
     #- try wpa_cli if we're root
     if ($@ && !$>) {
-        $results = run_program::get_stdout('/usr/sbin/wpa_cli', '2>', '/dev/null', 'scan_results');
-        $list = run_program::get_stdout('/usr/sbin/wpa_cli', '2>', '/dev/null', 'list_networks');
+        $results = `/usr/sbin/wpa_cli scan_results 2>/dev/null`;
+        $list = `/usr/sbin/wpa_cli list_networks 2>/dev/null`;
     }
     if (defined $results && defined $list) {
         #- bssid / frequency / signal level / flags / ssid
@@ -49,9 +49,9 @@ sub list_wireless {
         }
     } elsif ($o_intf) {
         #- else use iwlist
-        my $current_essid = chomp_(run_program::get_stdout('/sbin/iwgetid', '-r', $o_intf));
-        my $current_ap = lc(chomp_(run_program::get_stdout('/sbin/iwgetid', '-r', '-a', $o_intf)));
-        my @list = run_program::get_stdout('/sbin/iwlist', $o_intf, 'scanning');
+        my $current_essid = chomp_(`/sbin/iwgetid -r $o_intf`);
+        my $current_ap = lc(chomp_(`/sbin/iwgetid -r -a $o_intf`));
+        my @list = `/sbin/iwlist $o_intf scanning`;
         my $net = {};
 	foreach (@list) {
             if ((/^\s*$/ || /Cell/) && exists $net->{ap}) {
