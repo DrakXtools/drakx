@@ -3,7 +3,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.4
-Release: %mkrel 0.2
+Release: %mkrel 0.3
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -380,6 +380,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Nov  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.3mdk
+- requires perl-suid for fileshareset and filesharelist (#17123)
+- drakconnect (blino):
+  o don't duplicate variables (MTU, NETMASK, IPADDR) in ifcfg files
+    (#19325)
+  o don't let interfaces with unknown drivers be configured
+  o temporary workaround to have device-independant config files in
+    wireless.d
+  o use standard 'mac' modifier in iftab for IEEE1394, EUI64 and IRDA
+  o workaround missing "device" link in sysfs for rt2400/rt2500
+- net_applet: misc small fixes (blino)
+- printerdrake: fix setting up printers with pre-made Foomatic PPD in
+  /usr/share/cups/model (till, #19524)
+- XFdrake: properly handle switch between nvidia & nvidia_legacy
+
 * Tue Oct 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.2mdk
 - diskdrake (pixel):
   o separate hpfs and ntfs entries (even if they both use the same
