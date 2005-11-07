@@ -304,19 +304,24 @@ sub install_server {
 	delete $card->{Driver2};
     }
 
+    my %nvidia_packages = (
+                            #- using NVIDIA Legacy driver for old NVIDIA cards (TNT, TNT2, Vanta, Quadro, Quadro2, GeForce and GeForce2):
+                            legacy => [ qw(nvidia_legacy-kernel nvidia_legacy) ],
+                            #- using current NVIDIA driver for recent NVIDIA cards (Geforce/Quadro 3/4/FX/6x00/NVS):
+                            new => [ qw(nvidia-kernel nvidia) ],
+                           );
+
     my %proprietary_Driver2 = (
-	nvidia => [
-            $card->{NVIDIA_LEGACY} ?
-              #- using NVIDIA Legacy driver for old NVIDIA cards (TNT, TNT2, Vanta, Quadro, Quadro2, GeForce and GeForce2)
-              ('nvidia_legacy-kernel', 'nvidia_legacy') :
-              #- using current NVIDIA driver for recent NVIDIA cards (Geforce/Quadro 3/4/FX/6x00/NVS)
-              ('nvidia-kernel', 'nvidia')
-          ],
+	nvidia => $nvidia_packages{ $card->{NVIDIA_LEGACY} ? 'legacy' : 'new' },
 	fglrx => [ 'ati-kernel', 'ati' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
     );
     if (my $rpms_needed = $proprietary_Driver2{$card->{Driver2}}) {
 	if (my $proprietary_packages = $do_pkgs->check_kernel_module_packages($rpms_needed->[0], $rpms_needed->[1])) {
 	    push @packages, @$proprietary_packages;
+	    # prevent having both nvidia & nvidia_legacy driver installed due to incompatibility:
+	    if ($card->{Driver2} eq 'nvidia') {
+	       $do_pkgs->remove($_) foreach @{$do_pkgs->check_kernel_module_packages(@{$nvidia_packages{ $card->{NVIDIA_LEGACY} ? 'new' : 'legacy' }})};
+	    }
 	}
     }
 
