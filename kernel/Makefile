@@ -12,5 +12,5 @@ clean:
 check:
 	perl modules.pl check > /dev/null
 	@echo "unlisted drivers: "
-	@for i in $$(cut -f 2 -d \" /usr/share/ldetect-lst/pcitable|egrep -v '^#|ADSL:|Bad:|Card:|H[cs]f:|ISDN:|LT:'|sort|uniq|less);do fgrep -q $$i list_modules.pm|| echo -n "$$i ";done
+	@for i in $$(zcat /usr/share/ldetect-lst/pcitable.gz|cut -f 2 -d \" |egrep -v '^#|ADSL:|Bad:|Card:|H[cs]f:|ISDN:|LT:'|sort|uniq|less);do fgrep -q $$i list_modules.pm|| echo -n "$$i ";done
 	@echo
