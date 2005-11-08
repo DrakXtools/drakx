@@ -14,8 +14,6 @@ use fs::wild_device;
 use run_program;
 
 
-init() or log::l("dmraid::init failed");
-
 sub init() {
     whereis_binary('dmraid') or die "dmraid not installed";
 

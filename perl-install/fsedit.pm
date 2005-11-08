@@ -105,7 +105,8 @@ sub handle_dmraid {
 
     devices::make($_->{device}) foreach @$drives;
 
-    eval { require fs::dmraid; 1 } or return;
+    require fs::dmraid; 
+    fs::dmraid::init() or log::l("dmraid::init failed"), return;
 
     my @vgs = fs::dmraid::vgs();
     log::l(sprintf('dmraid: ' . join(' ', map { "$_->{device} [" . join(' ', @{$_->{disks}}) . "]" } @vgs)));
