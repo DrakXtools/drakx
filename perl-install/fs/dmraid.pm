@@ -46,7 +46,7 @@ sub _raid_devices_raw() {
 	chomp;
 	log::l("got: $_");
 	my %l; @l{qw(pv format vg level status size)} = split(':');
-	\%l;
+	if_(defined $l{size}, \%l);
     } call_dmraid('-ccr');
 }
 
@@ -67,7 +67,7 @@ sub _sets_raw() {
 	chomp;
 	log::l("got: $_");
 	my %l; @l{qw(name size stride level status subsets devs spares)} = split(':');
-	\%l;
+	if_(defined $l{spares}, \%l);
     } call_dmraid('-ccs');
 }
 
@@ -166,6 +166,22 @@ if ($ENV{DRAKX_DEBUG_DMRAID}) {
       '-ccr' => "/dev/sdb:sil:sil_aeacdidecbcb:mirror:broken:234439600:0\n",
                 # ERROR: sil: only 3/4 metadata areas found on /dev/sdb, electing...
      },
+
+     weird_nvidia =>  {
+      '-ccs' => <<'EO',
+/dev/sda: "sil" and "nvidia" formats discovered (using nvidia)!
+/dev/sdb: "sil" and "nvidia" formats discovered (using nvidia)!
+nvidia_bcjdbjfa:586114702:128:mirror:ok:0:2:0
+EO
+       '-ccr' => <<'EO',
+/dev/sda: "sil" and "nvidia" formats discovered (using nvidia)!
+/dev/sdb: "sil" and "nvidia" formats discovered (using nvidia)!
+/dev/sda:nvidia:nvidia_bcjdbjfa:mirror:ok:586114702:0
+/dev/sdb:nvidia:nvidia_bcjdbjfa:mirror:ok:586114702:0
+EO
+	 # ERROR: multiple match for set nvidia_bcjdbjfa:  nvidia_bcjdbjfa
+     },
+
 
     );
     
