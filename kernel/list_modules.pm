@@ -103,7 +103,7 @@ our %l = (
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
-      qw(ahci ata_adma ata_piix pata_pdc2027x pdc_adma sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
+      qw(ahci aic94xx ata_adma ata_piix pata_pdc2027x pdc_adma sata_mv sata_nv sata_promise sata_qstor sata_sil sata_sil24 sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
@@ -111,7 +111,7 @@ our %l = (
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(a320raid),
         qw(3w-9xxx 3w-xxxx aacraid arcmsr cciss cpqfc cpqarray DAC960 dpt_i2o gdth i2o_block ipr it821x it8212),
-        qw(iteraid megaraid megaraid_mbox megaraid_sas mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
+        qw(iteraid megaraid megaraid_mbox megaraid_sas mptfc mptsas mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
@@ -172,8 +172,8 @@ our %l = (
           qw(maestro3 mpu401 msnd_pinnacle nm256_audio nvaudio opl3 opl3sa opl3sa2 pas2 pss),
           qw(rme96xx sam9407 sb sgalaxy snd-ad1816a snd-ad1848 snd-ad1889 snd-ali5451 snd-als100),
           qw(snd-als4000 snd-atiixp snd-au8810 snd-au8820 snd-au8830 snd-audigyls snd-azt2320 snd-azt3328 snd-azx),
-          qw(snd-bt87x snd-ca0106 snd-cmi8330 snd-cmipci snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
-          qw(snd-cs46xx snd-darla20 snd-darla24 snd-dt019x snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
+          qw(snd-asihpi snd-bt87x snd-ca0106 snd-cmi8330 snd-cmipciAsnd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
+          qw(snd-cs46xx snd-cs5535audio snd-darla20 snd-darla24 snd-dt019x snd-emu10k1 snd-emu10k1x snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
           qw(snd-es1938 snd-es1968 snd-es968 snd-fm801 snd-gina20 snd-gina24 snd-gina3g snd-gusclassic snd-gusextreme),
           qw(snd-gusmax snd-hda-intel snd-hdsp snd-hdspm snd-ice1712 snd-ice1724 snd-indi snd-indigo snd-indigodj snd-indigoio snd-intel8x0 snd-interwave),
           qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
