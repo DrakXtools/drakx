@@ -37,6 +37,11 @@ my @partimage_cmd = ('partimage', if_($server, '-s', $server));
 
 @ARGV == 1 or usage();
 
+if ($server && !is_network_configured()) {
+    run_program::run('drvinst', 'NETWORK'); 
+    run_program::run('dhcp-client');
+}
+
 run_program::run('drvinst', 'STORAGE_SCSI', 'STORAGE_IDE');
 
 my $all_hds = fsedit::get_hds({});
@@ -254,4 +259,9 @@ sub error {
     my ($msg) = @_;
     log::l($msg);
     die "$msg\n";
+}
+
+sub is_network_configured() {
+    my (undef, @l) = cat_('/proc/net/route');
+    find { /^(\S+)/ && $1 ne 'lo' } @l;
 }
