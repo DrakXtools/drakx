@@ -18,7 +18,8 @@ BEGIN { partition_table::raw::default_type() }
 my %options = (
     save_home_directory => 1,
     empty_space_at_end_of_disk => 0, # 300 * 1024 * 2, # 300MB
-    ask_before_modifying_home => 0,
+    ask_before_modifying_home => 1,
+    bzip2 => 1,
 );
 
 my ($server);
@@ -73,6 +74,7 @@ sub save_all {
 
     foreach (grep { $_->{saved} } @$part_list) {
 	run_or_die(@partimage_cmd,
+		   if_($options{bzip2}, '-z', 2),
 		   '-V', 0, '--nombr', '--nodesc', '--nocheck', '-b', '-o',
 		   'save', devices::make($_->{device}), "$dir/$_->{device}");
     }
