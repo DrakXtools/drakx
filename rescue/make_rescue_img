@@ -76,6 +76,13 @@ foreach (cat_("aliases")) {
     symlink $dest, "$tmp$f";
 }
 
+
+if (my ($LANGUAGE) = map { if_(/LANGUAGE_(.*)/, $1) } keys %ENV) {
+    substInFile {
+	$_ = "export LANGUAGE=$LANGUAGE\n" . "export LC_ALL=$LANGUAGE\n" if /^#LANGUAGE/;	
+    } "$tmp/etc/rc.sysinit";
+}
+
 if ($ENV{PARTIMAGE_RPM}) {
 
     _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";

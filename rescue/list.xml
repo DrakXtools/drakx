@@ -146,6 +146,22 @@
   <from expand="command">
     perl -Mkeyboard -I../perl-install -le 'print foreach keyboard::loadkeys_files()'
   </from>
+
+  <if set="LANGUAGE_fr_FR">
+    /usr/lib/gconv/gconv-modules
+    /usr/lib/gconv/ISO8859-15.so
+    /usr/share/locale/ISO-8859-15
+    /usr/share/locale/fr_FR
+    /usr/share/locale/fr/LC_MESSAGES/partimage.mo
+  </if>
+  <if set="LANGUAGE_pt_BR">
+    /usr/lib/gconv/gconv-modules
+    /usr/lib/gconv/ISO8859-15.so
+    /usr/share/locale/ISO-8859-15
+    /usr/share/locale/pt_BR
+    /usr/share/locale/pt/LC_MESSAGES/partimage.mo
+  </if>
+
 </from>
 
 <from dir="/usr/lib/rpm" expand="glob">
