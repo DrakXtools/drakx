@@ -45,7 +45,7 @@ sub _raid_devices_raw() {
 	log::l("got: $_");
 	my %l; @l{qw(pv format vg level status size)} = split(':');
 	if_(defined $l{size}, \%l);
-    } call_dmraid('-ccr');
+    } call_dmraid('-r', '-c', '-c');
 }
 
 sub _raid_devices() {
@@ -66,7 +66,7 @@ sub _sets_raw() {
 	log::l("got: $_");
 	my %l; @l{qw(name size stride level status subsets devs spares)} = split(':');
 	if_(defined $l{spares}, \%l);
-    } call_dmraid('-ccs');
+    } call_dmraid('-s', '-c', '-c');
 }
 
 sub _sets() {
@@ -125,14 +125,14 @@ if ($ENV{DRAKX_DEBUG_DMRAID}) {
       # devs   : 2
       # spares : 0
     
-      '-ccs' => "isw_ffafgbdhi_toto:234441216:256:mirror:ok:0:2:0\n",
+      '-s' => "isw_ffafgbdhi_toto:234441216:256:mirror:ok:0:2:0\n",
     
       # dmraid -r ####################
       #/dev/sda: isw, "isw_ffafgbdhi", GROUP, ok, 488397166 sectors, data@ 0
       #/dev/sdb: isw, "isw_ffafgbdhi", GROUP, ok, 234441646 sectors, data@ 0
     
-      '-ccr' => "/dev/sda:isw:isw_ffafgbdhi:GROUP:ok:488397166:0\n" .
-                "/dev/sdb:isw:isw_ffafgbdhi:GROUP:ok:234441646:0\n",
+      '-r' => "/dev/sda:isw:isw_ffafgbdhi:GROUP:ok:488397166:0\n" .
+              "/dev/sdb:isw:isw_ffafgbdhi:GROUP:ok:234441646:0\n",
      },
     
      pdc => {
@@ -147,31 +147,31 @@ if ($ENV{DRAKX_DEBUG_DMRAID}) {
       # devs   : 2
       # spares : 0
     
-      '-ccs' => "pdc_bcefbiigfg:80043200:128:mirror:ok:0:2:0\n",
+      '-s' => "pdc_bcefbiigfg:80043200:128:mirror:ok:0:2:0\n",
     
       # dmraid -r ####################
       # /dev/sda: pdc, "pdc_bcefbiigfg", mirror, ok, 80043200 sectors, data@ 0
       # /dev/sdb: pdc, "pdc_bcefbiigfg", mirror, ok, 80043200 sectors, data@ 0
     
-      '-ccr' => "/dev/sda:pdc:pdc_bcefbiigfg:mirror:ok:80043200:0\n" .
+      '-r' => "/dev/sda:pdc:pdc_bcefbiigfg:mirror:ok:80043200:0\n" .
                 "/dev/sdb:pdc:pdc_bcefbiigfg:mirror:ok:80043200:0\n",
      },
     
      bad_sil => {
-      '-ccs' => "sil_aeacdidecbcb:234439600:0:mirror:ok:0:1:0\n",
+      '-s' => "sil_aeacdidecbcb:234439600:0:mirror:ok:0:1:0\n",
                 # ERROR: sil: only 3/4 metadata areas found on /dev/sdb, electing...
 
-      '-ccr' => "/dev/sdb:sil:sil_aeacdidecbcb:mirror:broken:234439600:0\n",
+      '-r' => "/dev/sdb:sil:sil_aeacdidecbcb:mirror:broken:234439600:0\n",
                 # ERROR: sil: only 3/4 metadata areas found on /dev/sdb, electing...
      },
 
      weird_nvidia =>  {
-      '-ccs' => <<'EO',
+      '-s' => <<'EO',
 /dev/sda: "sil" and "nvidia" formats discovered (using nvidia)!
 /dev/sdb: "sil" and "nvidia" formats discovered (using nvidia)!
 nvidia_bcjdbjfa:586114702:128:mirror:ok:0:2:0
 EO
-       '-ccr' => <<'EO',
+       '-r' => <<'EO',
 /dev/sda: "sil" and "nvidia" formats discovered (using nvidia)!
 /dev/sdb: "sil" and "nvidia" formats discovered (using nvidia)!
 /dev/sda:nvidia:nvidia_bcjdbjfa:mirror:ok:586114702:0
