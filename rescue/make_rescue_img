@@ -98,13 +98,13 @@ if ($ENV{PARTIMAGE_RPM}) {
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
-      drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server save_all $default_dir
+      partimage_whole_disk -s $server save_all $default_dir
   fi
   if grep -q rest_all /proc/cmdline; then
       if [ -d $local_dir ]; then
           partimage_whole_disk rest_all $local_dirs
       else
-          drvinst NETWORK ; dhcp-client ; partimage_whole_disk -s $server rest_all $partimage_dir
+          partimage_whole_disk -s $server rest_all $partimage_dir
       fi
   fi
 EOF
