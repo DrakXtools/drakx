@@ -28,7 +28,7 @@ sub list_wireless {
         $results = `/usr/sbin/wpa_cli scan_results 2>/dev/null`;
         $list = `/usr/sbin/wpa_cli list_networks 2>/dev/null`;
     }
-    if (defined $results && defined $list) {
+    if ($results && $list) {
         #- bssid / frequency / signal level / flags / ssid
         while ($results =~ /^((?:[0-9a-f]{2}:){5}[0-9a-f]{2})\t(\d+)\t(\d+)\t(.*?)\t(.*)$/mg) {
             #- wpa_supplicant may list the network two times, use ||=
