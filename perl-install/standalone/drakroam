@@ -53,8 +53,9 @@ my $wireless_list = Gtk2::SimpleList->new(
 );
 $wireless_list->get_selection->set_mode('single');
 
-my $dbus = dbus_object::system_bus();
-my $monitor = network::monitor->new($dbus);
+my ($dbus, $monitor);
+eval { $dbus = dbus_object::system_bus() };
+eval { $monitor = network::monitor->new($dbus) } if $dbus;
 my $wireless_networks = {};
 my $has_roaming;
 
