@@ -103,8 +103,7 @@ sub configure_ap {
 
     my ($wireless_enc_mode, $wireless_enc_key, $wireless_restricted);
     ($wireless_enc_key, $wireless_restricted) = network::wireless::get_wep_key_from_iwconfig($wireless_net->{WIRELESS_ENC_KEY});
-    #- FIXME: handle restricted
-    $wireless_enc_mode = $network->{flags} =~ /wpa/i ? 'wpa-psk' : $network->{flags} =~ /wep/i ? 'open' : 'none';
+    $wireless_enc_mode = $network->{flags} =~ /wpa/i ? 'wpa-psk' : $network->{flags} =~ /wep/i ? $wireless_restricted ? 'restricted' : 'open' : 'none';
 
     my $dhcp = to_bool(!exists($wireless_net->{BOOTPROTO}) || $wireless_net->{BOOTPROTO} eq "dhcp");
 
