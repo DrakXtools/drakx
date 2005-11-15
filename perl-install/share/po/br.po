@@ -3117,15 +3117,18 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
+"Choizh o'ch eus oc'h implij RAID evit gwrizienn (/).\n"
+"N'eo ket possubl da loc'hañ hep ur barzhadur /boot.\n"
+"Bezit sur oc'h eus ouzhpennet ur barzhadur /boot"
 
 #: fsedit.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"Ne mennit ket implij ul levrenn poellek evit ar poent marc'hañ %s peogwir "
-"vez implijet meur a levrenn fizikel"
+"Ne mennit ket implij al levrenn poellek LVM evit ar poent marc'hañ %s peogwir "
+"e vez implijet meur a levrenn fizikel gantañ"
 
 #: fsedit.pm:392
 #, c-format
@@ -3135,6 +3138,9 @@ msgid ""
 "volumes.\n"
 "You should create a /boot partition first"
 msgstr ""
+"Choizh o'ch eus oc'h implij LVM evit gwrizienn (/).\n"
+"N'eo ket possubl da loc'hañ gant /boot war meur a levrenn fizikel.\n"
+"Mat vije deoc'h krouiñ ur barzhadur loc'hañ da gentañ"
 
 #: fsedit.pm:396 fsedit.pm:398
 #, c-format
@@ -3366,9 +3372,9 @@ msgid "Keyboard"
 msgstr "Stokellaoueg"
 
 #: harddrake/data.pm:462
-#, fuzzy, c-format
+#, c-format
 msgid "Tablet and touchscreen"
-msgstr "Tablezenn"
+msgstr "Tablezenn ha skramm stekiñ"
 
 #: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:986
 #, c-format
@@ -5333,9 +5339,9 @@ msgid "Remove Windows(TM)"
 msgstr "Chetan Windows(TM)"
 
 #: install_interactive.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "Chetañ an holl planedenn"
+msgstr "Chetañ hag implij an holl planedenn"
 
 #: install_interactive.pm:215
 #, c-format
@@ -8437,17 +8443,17 @@ msgstr "Implijet eo al levrenn fizikel %s c'hoazh"
 #: lvm.pm:145
 #, c-format
 msgid "Remove the logical volumes first\n"
-msgstr "Lemel al levrenn poellek da gentañ\n"
+msgstr "Lemel al levrennioù poellek da gentañ\n"
 
 #: lvm.pm:178
-#, fuzzy, c-format
+#, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "N'eo ket possubl da loc'hañ gant /boot war meur a levrenn fizikel"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "Kefluniadur ar sturier UPS"
+msgstr "N'eus rannbennad kefluniadur ebet evit ar sturier-mañ !"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -10372,10 +10378,10 @@ msgid "Looking for required software and drivers..."
 msgstr ""
 
 #: network/thirdparty.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, running device configuration commands..."
 msgstr ""
-"Gortozit mar plij, o tinoiñ trobarzhelloù ha o kefluniañ trobarzhelloù ..."
+"Gortozit mar plij, o seveniñ urzhiadoù kefluniañ an trobarzhell ..."
 
 #: network/wireless.pm:8
 #, c-format
@@ -11364,9 +11370,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:849
-#, fuzzy, c-format
+#, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr "Dibabit ouzh pe borzh a-steud eo luget ho modem, mar plij."
+msgstr " (Bezit sur eo kefluniet ha loc'het ho pep moullerez).\n"
 
 #: printer/printerdrake.pm:862
 #, c-format
@@ -12834,9 +12840,9 @@ msgid ""
 msgstr ""
 
 #: printer/printerdrake.pm:4058
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "Emaon o moulañ gant ar voullerez « %s »"
+msgstr "Oc'h implij/ober war-dro voullerez « %s »"
 
 #: printer/printerdrake.pm:4059
 #, c-format
@@ -16401,9 +16407,9 @@ msgid "Can not create catalog!"
 msgstr "Ne m'eus ket krouiñ ar c'hatalog !"
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "Fazioù en ur staliañ ar pakad %s"
+msgstr "Fazi en ur staliañ %s"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -16760,14 +16766,14 @@ msgid "Saturday"
 msgstr "Sadorn"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "Dilemel an c'hliant"
+msgstr "Dilemel ar vouetadur cron"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "Ouzhpennañ ur voullerez"
+msgstr "Ouzhpennañ ur vouetadur cron"
 
 #: standalone/drakbackup:2174
 #, c-format
@@ -16800,14 +16806,14 @@ msgid "Month"
 msgstr "Miz"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "Deiz ar sizhun"
+msgstr "Deiz ar sizhun (deroù)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "Deiz ar sizhun"
+msgstr "Deiz ar sizhun (dibenn)"
 
 #: standalone/drakbackup:2210
 #, c-format
@@ -16815,9 +16821,9 @@ msgid "Profile"
 msgstr "Profil"
 
 #: standalone/drakbackup:2216
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "Arveriad red"
+msgstr "Crontab red :"
 
 #: standalone/drakbackup:2224
 #, c-format
@@ -16836,9 +16842,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "Dibabit ar vedia evit gwareziñ, mar plij."
+msgstr "Dibabit ar goulev gwareziñ mar plij"
 
 #: standalone/drakbackup:2298
 #, fuzzy, c-format
@@ -16858,7 +16864,7 @@ msgstr ""
 #: standalone/drakbackup:2310
 #, c-format
 msgid "Return address for sent mail:"
-msgstr ""
+msgstr "Chomlec'h distro evit kas postel :"
 
 #: standalone/drakbackup:2316
 #, c-format
@@ -17113,7 +17119,7 @@ msgstr "\tKas ur postel da %s\n"
 #: standalone/drakbackup:2634
 #, c-format
 msgid "\tSend mail from %s\n"
-msgstr ""
+msgstr "\tKas ur postel eus %s\n"
 
 #: standalone/drakbackup:2635
 #, c-format
@@ -17591,14 +17597,14 @@ msgstr ""
 "klikit ouzh « Skoazeller » pe  « Barek » mar plij."
 
 #: standalone/drakbackup:4473
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "Restr lec'hel"
+msgstr "Kargañ ar profil"
 
 #: standalone/drakbackup:4482
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "Enrollañ e ..."
+msgstr "Enrollañ ar profil e ..."
 
 #: standalone/drakbackup:4504 standalone/drakbackup:4507
 #, c-format
@@ -23997,21 +24003,6 @@ msgstr " Sac'het eo ar staliadur"
 
 #~ msgid "Installing mtools packages..."
 #~ msgstr "O staliañ pakad mtools ..."
-
-#, fuzzy
-#~ msgid "Printing/Scanning/Photo Cards on \"%s\""
-#~ msgstr "O tizenaouiñ ar rouedad"
-
-#, fuzzy
-#~ msgid "Printing/Scanning on \"%s\""
-#~ msgstr "O tizenaouiñ ar rouedad"
-
-#, fuzzy
-#~ msgid "Printing/Photo Card Access on \"%s\""
-#~ msgstr "O tizenaouiñ ar rouedad"
-
-#~ msgid "http://www.mandrivalinux.com/en/errata.php3"
-#~ msgstr "http://www.mandrivalinux.com/en/errata.php3"
 
 #~ msgid "Use Idmap for store UID/SID "
 #~ msgstr "Implij LDAP evit enrollañ UID/SID"
