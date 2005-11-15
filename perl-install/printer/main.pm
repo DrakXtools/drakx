@@ -1843,12 +1843,8 @@ sub get_descr_from_ppdfile {
 sub ppd_devid_data {
     my ($ppd) = @_;
     $ppd = "$::prefix/usr/share/cups/model/$ppd";
-    my @content;
-    if ($ppd =~ /\.gz$/i) {
-	@content = cat_("$::prefix/bin/zcat $ppd |") or return "", "";
-    } else {
-	@content = cat_($ppd) or return "", "";
-    }
+    my @content = eval { catMaybeCompressed($ppd) } or return "", "";
+
     my ($devidmake, $devidmodel);
     /^\*Manufacturer:\s*"(.*)"\s*$/ and $devidmake = $1
 	foreach @content;

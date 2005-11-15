@@ -4241,8 +4241,7 @@ sub start_network {
 
 sub network_configured() {
     # Do configured networks (/etc/sysconfig/network-scripts/ifcfg*) exist?
-    my @netscripts =
-	cat_("ls -1 $::prefix/etc/sysconfig/network-scripts/ |");
+    my @netscripts = all("$::prefix/etc/sysconfig/network-scripts");
     my $netconfigured = 0;
     (/ifcfg-/ and !/(ifcfg-lo|:|rpmsave|rpmorig|rpmnew)/ and
       !/(~|\.bak)$/ and $netconfigured = 1) foreach @netscripts;
