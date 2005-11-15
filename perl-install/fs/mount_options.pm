@@ -48,8 +48,8 @@ sub unpack {
     my %options = map { $_ => '' } keys %$non_defaults;
     my @unknown;
     foreach (split(",", $packed_options)) {
-	if ($_ eq 'user') {
-	    $options{$_} = 1 foreach 'user', @$user_implies;
+	if (member($_, 'user', 'users')) {
+	    $options{$_} = 1 foreach $_, @$user_implies;
 	} elsif (exists $non_defaults->{$_}) {
 	    $options{$_} = 1;
 	} elsif ($defaults->{$_}) {
@@ -84,8 +84,9 @@ sub pack_ {
 	push @l, 'umask=' . min(@umasks);
     }
 
-    if (delete $options->{user}) {
-	push @l, 'user';
+    if (my $user = find { delete $options->{$_} } 'users', 'user') {
+	push @l, $user;
+	delete $options->{user};
 	foreach (@$user_implies) {
 	    if (!delete $options->{$_}) {
 		# overriding
@@ -134,11 +135,11 @@ have suidperl(1) installed.)"),
 
 	'supermount' => '',
 
-	'user' => N("Allow an ordinary user to mount the file system. The
+	'users' => N("Allow an ordinary user to mount the file system. The
 name of the mounting user is written to mtab so that he can unmount the file
 system again. This option implies the options noexec, nosuid, and nodev
 (unless overridden by subsequent options, as in the option line
-user,exec,dev,suid )."),
+user,exec,dev,suid )."),         
 
 	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
 
@@ -228,7 +229,7 @@ sub set_default {
 			      });
     }
     if (fs::type::can_be_this_fs_type($part, 'iso9660')) {
-	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
+	put_in_hash($options, { users => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
     }
     if ($part->{fs_type} eq 'reiserfs') {
 	$options->{notail} = 1;

@@ -950,13 +950,13 @@ sub Loopback {
 sub Options {
     my ($in, $hd, $part, $all_hds) = @_;
 
-    my @simple_options = qw(user noauto supermount username= password=);
+    my @simple_options = qw(users noauto supermount username= password=);
 
     my (undef, $user_implies) = fs::mount_options::list();
     my ($options, $unknown) = fs::mount_options::unpack($part);
     my %help = fs::mount_options::help();
 
-    my $prev_user = $options->{user};
+    my %prev_options = %$options;
     $in->ask_from(N("Mount options"),
 		  '',
 		  [ 
@@ -967,9 +967,10 @@ sub Options {
 		    { label => N("Various"), val => \$unknown, advanced => 1 },
 		  ],
 		  changed => sub {
-		      if ($prev_user != $options->{user}) {
-			  $prev_user = $options->{user};
-			  $options->{$_} = $options->{user} foreach @$user_implies;
+		      if (my $user = find { $prev_options{$_} != $options->{$_} } 'users', 'user') {
+			  $options->{$user eq 'user' ? 'users' : 'user'} = 0 if $options->{$user}; # we don't want both user and users
+			  $options->{$_} = $options->{$user} foreach @$user_implies;
+			  %prev_options = %$options;
 		      }
 		      if ($options->{encrypted}) {
 			  # modify $part->{options} for the check
