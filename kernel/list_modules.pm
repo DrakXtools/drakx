@@ -81,7 +81,9 @@ our %l = (
   disk => 
   {
     # ide drivers compiled as modules:
-    ide => [ qw(aec62xx cs5520 cs5530 delkin_cb ide-generic rz1000 sc1200 slc90e66 triflex trm290) ],
+    ide => [
+        qw(aec62xx cs5520 cs5530 cs5535 delkin_cb ide-generic pata_amd),
+        qw(pata_opti pata_sil680 pata_triflex pata_via rz1000 sc1200 slc90e66 triflex trm290) ],
     # ide drivers compiled in core kernel:
     all_ide => [
         qw(ali14xx amd74xx dtc2278 ht6560b qd65xx umc8672 aec62xx alim15x3 atiixp cmd64x cs5520 cs5530 cy82c693),
@@ -99,7 +101,7 @@ our %l = (
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
-      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
+      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
