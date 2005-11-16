@@ -143,7 +143,7 @@ noaccomp),
        sagem =>
        {
         modules => [ qw(eagle-usb) ],
-        start => 'grep -qs eagle-usb /var/run/usb/* || /sbin/eaglectrl -d',
+        start => '/sbin/eaglectrl -i >/dev/null 2>/dev/null || /sbin/eaglectrl -d',
         stop =>  "/usr/bin/killall pppoa",
         get_intf => '/sbin/eaglectrl -i',
         server => {
