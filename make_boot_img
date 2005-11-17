@@ -34,7 +34,8 @@ mkdir "images";
 
 my $main = chomp_(cat_('kernel/RPMS/.main'));
 my $main_BOOT = chomp_(cat_('kernel/RPMS/.main-BOOT'));
-my @kernels = grep { !/xbox/ } all('kernel/all.kernels');
+my @kernels = uniq($main, grep { !/xbox/ } all('kernel/all.kernels'));
+
 my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
@@ -57,7 +58,7 @@ foreach my $img (@images) {
     if ($img =~ /hd_grub/) {
 	hd_grub($img);
     } elsif ($img =~ /isolinux/) {
-	isolinux($main, @kernels);
+	isolinux(\@kernels);
 
 	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
 	    system("/bin/cp -f isolinux/alt0/* $tftpboot");
@@ -739,10 +740,9 @@ sub syslinux_all_files {
 }
 
 sub isolinux {
-    my ($main, @kernels) = @_;
-    @kernels = ($main, grep { $_ ne $main } @kernels);
+    my ($kernels) = @_;
 
-    syslinux_all_files('isolinux', \@kernels);
+    syslinux_all_files('isolinux', $kernels);
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom'));
