@@ -2,8 +2,8 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4
-Release: %mkrel 0.3
+Version: 10.4.1
+Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -380,6 +380,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.1-1mdk
+- diskdrake (pixel):
+  o add button "Label" (in expert mode) to set the "volume label" (and
+    so get LABEL= in fstab and lilo.conf)
+  o dmraid log is mixed with valid data (#19654)
+  o handle "users" the way "user" is handled
+  o handle dmraid-1.0.0 RC9 (#19654)
+- drakconnect (blino):
+  o don't screw up eagle-usb devices if the firmware is already loaded
+  o fix zd1201 devices detection as well
+- drakroam (blino):
+  o don't crash if mandi isn't started
+  o fix wireless network list using iwlist
+  o remember 'restricted' wireless mode
+
 * Mon Nov  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.3mdk
 - requires perl-suid for fileshareset and filesharelist (#17123)
 - drakconnect (blino):
