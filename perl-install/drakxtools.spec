@@ -391,8 +391,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o don't screw up eagle-usb devices if the firmware is already loaded
   o fix zd1201 devices detection as well
 - drakroam (blino):
-  o don't crash if mandi isn't started
-  o fix wireless network list using iwlist
+  o don't crash if mandi isn't started (#19608)
+  o fix wireless network list using iwlist (#19742)
   o remember 'restricted' wireless mode
 
 * Mon Nov  7 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4-0.3mdk
