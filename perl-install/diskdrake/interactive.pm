@@ -446,6 +446,7 @@ sub part_possible_actions {
         N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '!isNonMountable && $::expert',
+	N_("Label")            => '!isNonMountable && $::expert',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && LVM_resizable',
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
@@ -641,6 +642,13 @@ sub Type {
     if (defined $type) {
 	check_type($in, $type, $hd, $part) and fsedit::change_type($type, $hd, $part);
     }
+}
+
+sub Label {
+    my ($in, $hd, $part) = @_;
+    $in->ask_from('', N("Which volume label?"),
+		  [ { val => \$part->{device_LABEL} } ]) or return;
+    $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL});
 }
 
 sub Mount_point {
