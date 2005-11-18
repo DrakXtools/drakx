@@ -645,7 +645,7 @@ sub Type {
 }
 
 sub Label {
-    my ($in, $hd, $part) = @_;
+    my ($in, $_hd, $part) = @_;
     $in->ask_from('', N("Which volume label?"),
 		  [ { val => \$part->{device_LABEL} } ]) or return;
     $part->{prefer_device_LABEL} = to_bool($part->{device_LABEL});
