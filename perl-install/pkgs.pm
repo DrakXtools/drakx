@@ -633,6 +633,7 @@ sub read_rpmsrate {
 	    my $ok = find {
 		my $inv = s/^!//;
 		$inv xor do {
+              return 1 if $::build_live_system;
 		    if (my ($p) = /^HW"(.*)"/) {
 			detect_devices::matching_desc__regexp($p);
 		    } elsif (($p) = /^HW_CAT"(.*)"/) {
