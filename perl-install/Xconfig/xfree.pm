@@ -671,7 +671,7 @@ foreach my $ratio (keys %ratio2resolutions) {
 	    $y == $y2 or do {
 		my $good_ratio = (find { m!^(\d+)/(\d+)$! && $y == round($x * $2 / $1) } keys %ratio2resolutions) || '??';
 		die "bad ratio $ratio for resolution $_, it should be $good_ratio\n";
-	    }
+	    };
 	}
     }
 }
