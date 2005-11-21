@@ -13,8 +13,6 @@ sub new {
     $con->add_match("type='signal',interface='com.mandriva.monitoring.ifw'");
 
     require dbus_object;
-    require Net::DBus::Binding::Value;
-
     my $o = dbus_object::new($type,
 			     $bus,
 			     "com.mandriva.monitoring",
@@ -26,27 +24,22 @@ sub new {
 
 sub set_blacklist_verdict {
     my ($o, $seq, $blacklist) = @_;
-    $o->call_method('SetBlacklistVerdict',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
+    $o->call_method('SetBlacklistVerdict', Net::DBus::dbus_uint32($seq), Net::DBus::dbus_uint32($blacklist));
 }
 
 sub unblacklist {
     my ($o, $addr) = @_;
-    $o->call_method('UnBlacklist',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    $o->call_method('UnBlacklist', Net::DBus::dbus_uint32($addr));
 }
 
 sub whitelist {
     my ($o, $addr) = @_;
-    $o->call_method('Whitelist',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    $o->call_method('Whitelist', Net::DBus::dbus_uint32($addr));
 }
 
 sub unwhitelist {
     my ($o, $addr) = @_;
-    $o->call_method('UnWhitelist',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    $o->call_method('UnWhitelist', Net::DBus::dbus_uint32($addr));
 }
 
 sub get_interactive {
@@ -56,14 +49,12 @@ sub get_interactive {
 
 sub set_interactive {
     my ($o, $mode) = @_;
-    $o->call_method('SetMode',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
+    $o->call_method('SetMode', Net::DBus::dbus_uint32($mode));
 }
 
 sub get_reports {
     my ($o, $o_include_processed) = @_;
-    $o->call_method('GetReports',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, to_bool($o_include_processed)));
+    $o->call_method('GetReports', Net::DBus::dbus_uint32(to_bool($o_include_processed)));
 }
 
 sub get_blacklist {

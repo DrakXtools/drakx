@@ -77,8 +77,7 @@ sub list_wireless {
 
 sub select_network {
     my ($o, $id) = @_;
-    $o->call_method('SelectNetwork',
-                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $id));
+    $o->call_method('SelectNetwork', Net::DBus::dbus_uint32($id));
 }
 
 1;
