@@ -634,13 +634,13 @@ sub read_rpmsrate {
 		my $inv = s/^!//;
 		$inv xor do {
 		    if (my ($p) = /^HW"(.*)"/) {
-                  return $inv ^ $::o->{build_live_system} || detect_devices::matching_desc__regexp($p);
+			return $::o->{build_live_system} ? !$inv : detect_devices::matching_desc__regexp($p);
 		    } elsif (($p) = /^HW_CAT"(.*)"/) {
-                  return $inv ^ $::o->{build_live_system} || modules::probe_category($p);
+			return $::o->{build_live_system} ? !$inv : modules::probe_category($p);
 		    } elsif (($p) = /^DRIVER"(.*)"/) {
-                  return $inv ^ $::o->{build_live_system} || detect_devices::matching_driver__regexp($p);
+			return $::o->{build_live_system} ? !$inv : detect_devices::matching_driver__regexp($p);
 		    } elsif (($p) = /^TYPE"(.*)"/) {
-                  return $inv ^ $::o->{build_live_system} || detect_devices::matching_type($p);
+			return $::o->{build_live_system} ? !$inv : detect_devices::matching_type($p);
 		    } else {
 			$rpmsrate_flags_chosen->{$_};
 		    }
