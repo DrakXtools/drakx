@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.1
+Version: 10.4.2
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -380,6 +380,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Nov 21 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.2-1mdk
+- diskdrake: handle missing dmraid (pixel, l#19849)
+- draksound: install aoss when switching from OSS to ALSA
+
 * Fri Nov 18 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.1-1mdk
 - diskdrake (pixel):
   o add button "Label" (in expert mode) to set the "volume label" (and
