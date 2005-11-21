@@ -287,7 +287,7 @@ sub installPackages() {
 					    }, 'install_any');
 
     my %rpmsrate_flags_chosen = map { $_ => 1 } map { @{$_->{flags}} } @{$o->{compssUsers}};
-    $rpmsrate_flags_chosen{$_} = 0 foreach qw(CAT_NETWORKING_MAIL_SERVERE);
+    $rpmsrate_flags_chosen{$_} = 0 foreach qw(CAT_NETWORKING_MAIL_SERVER);
     $rpmsrate_flags_chosen{$_} = 1 foreach qw(CAT_AUDIO CAT_KDE CAT_GNOME CAT_NETWORKING CAT_OFFICE CAT_SYSTEM DVD USB SOUND BURNER UTF8 DOCS TV 3D INSTALL);
     $rpmsrate_flags_chosen{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
     pkgs::setSelectedFromCompssList($o->{packages}, \%rpmsrate_flags_chosen, 4, 0);
