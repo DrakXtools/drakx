@@ -117,7 +117,7 @@ CAT_AUDIO
   3 CAT_KDE kdemultimedia-noatun
   3 timidity-instruments
   3 beep-media-player
-  5 DRIVER"^snd-" alsa-utils
+  5 DRIVER"^snd-" alsa-utils aoss
   4 DRIVER"^snd-" xmms-alsa gstreamer-alsa
 # the two following entries are for ISA sound cards and thus are not managed for now:
   5 DRIVER"^snd-sb" cspctl
@@ -765,7 +765,7 @@ INSTALL
   NOCOPY
     5 kernel kernel-smp kernel-i686-up-4GB
       mdadm lvm2 reiserfsprogs jfsprogs xfsprogs 
-      alsa-utils xorg-x11 xorg-x11-server 
+      alsa-utils aoss xorg-x11 xorg-x11-server 
       ik8utils toshutils
     4 brltty
 

@@ -200,7 +200,7 @@ sub do_switch {
     $modules_conf->set_sound_slot("sound-slot-$index", $new_driver);
     $modules_conf->write;
     if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
-        $in->do_pkgs->ensure_binary_is_installed('alsa-utils', 'alsactl');
+        $in->do_pkgs->ensure_binary_is_installed(qw(alsactl  alsa-utils aoss));
         rooted("service alsa start") if $::isStandalone && !$blacklisted;
         rooted("/sbin/chkconfig --add alsa")  if $::isStandalone;
         load($modules_conf, $new_driver) if $::isStandalone;   # service alsa is buggy

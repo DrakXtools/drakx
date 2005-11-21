@@ -1038,7 +1038,7 @@ sub summary {
 	    val => sub {},
 	    clicked => sub {
 	        if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
-	    	  $o->do_pkgs->install(qw(alsa-utils sndconfig));
+	    	  $o->do_pkgs->install(qw(alsa-utils sndconfig aoss));
 	    	  $o->ask_warn('', N("Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound card"));
 	        } else {
 	    	  $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
