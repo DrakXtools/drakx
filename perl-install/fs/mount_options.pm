@@ -135,11 +135,7 @@ have suidperl(1) installed.)"),
 
 	'supermount' => '',
 
-	'users' => N("Allow an ordinary user to mount the file system. The
-name of the mounting user is written to mtab so that he can unmount the file
-system again. This option implies the options noexec, nosuid, and nodev
-(unless overridden by subsequent options, as in the option line
-user,exec,dev,suid )."),         
+	'users' => N("Allow an ordinary user to mount the file system."),         
 
 	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
 
