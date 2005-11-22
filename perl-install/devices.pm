@@ -122,6 +122,7 @@ sub entry {
 		   "md"          => sub { c::S_IFBLK(), 9,  0  },
 		   "nst"         => sub { c::S_IFCHR(), 9, 128 },
 		   "sr"          => sub { c::S_IFBLK(), 11, 0  },
+		   "tty"         => sub { c::S_IFCHR(), 4,  0  },
 		   "ttyS"        => sub { c::S_IFCHR(), 4, 64  },
 		   "ubd/"        => sub { c::S_IFBLK(), 98, 0  },
 		   "dm-"         => sub { c::S_IFBLK(), get_dynamic_major('device-mapper'), 0 },
@@ -156,6 +157,11 @@ sub entry {
 		   "vcsa"     => [ c::S_IFCHR(), 7,  128 ],
 		   "zero"     => [ c::S_IFCHR(), 1,  5  ],		     
 		   "null"     => [ c::S_IFCHR(), 1,  3  ],		     
+
+		   "initrd"   => [ c::S_IFBLK(), 1,  250 ],
+		   "console"  => [ c::S_IFCHR(), 5,  1  ],
+		   "systty"   => [ c::S_IFCHR(), 4,  0  ],
+		   "lvm"   =>    [ c::S_IFBLK(), 109, 0 ],
 	       }}{$_} or internal_error("unknown device $_") };
     }
     ($type, $major, $minor);
