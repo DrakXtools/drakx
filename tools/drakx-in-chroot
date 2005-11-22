@@ -57,7 +57,7 @@ create_initial_devices();
 output("$SLASH_LOCATION/etc/hosts", "127.0.0.1 localhost\n") if ! -e "$SLASH_LOCATION/etc/hosts";
 
 my $Xnest_pid;
-if (whereis_binary('Xnest')) {
+if (!-f ($SLASH_LOCATION . $AUTO_INSTALL_ROOTED) && whereis_binary('Xnest')) {
     my $DISPLAY = ':8';
     $Xnest_pid = fork();
     if (!$Xnest_pid) {
