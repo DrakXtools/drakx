@@ -29,10 +29,12 @@ if (-d $SLASH_LOCATION) {
     umount_all() == 0 or die "$SLASH_LOCATION is busy\n";
     sys("$sudo rm -rf $SLASH_LOCATION/var/lib/rpm $SLASH_LOCATION/dev/mapper");
     rm_rf($SLASH_LOCATION);
-    rm_rf(glob("$dir/*")) if $ENV{CLEAN};
 }
 
 mkdir_p("$SLASH_LOCATION$_") foreach '/dev', '/dev/usb', '/etc', '/var', '/proc', $STAGE2_LOCATION_ROOTED, $IMAGE_LOCATION_ROOTED, $prefix_ROOTED;
+
+sys("$sudo rm -rf $dir") if $ENV{CLEAN};
+-e $dir or sys("$sudo mkdir -p $dir");
 
 if (-d "$repository/$LIVE_LOCATION_REL") {
     sys("$sudo mount -o bind $repository/$LIVE_LOCATION_REL $STAGE2_LOCATION");
