@@ -101,7 +101,7 @@ our %l = (
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma nsp32),
       ),
-      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
+      qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicfas408 sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
       # note that ata_piix manage RAID devices on ICH6R
