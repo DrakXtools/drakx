@@ -14,6 +14,7 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 my $authentication = authentication::get();
 my $security = security::level::get();
 my $net = {};
+my $locale;
 network::network::read_net_conf($net);
 
 $::isWizard = 1;
@@ -21,11 +22,27 @@ my $in = 'interactive'->vnew;
 
 sub ask_language() {
     require lang;
-    my $locale = lang::read();
+    $locale = lang::read();
     any::selectLanguage_and_more_standalone($in, $locale);
     lang::write_and_install($locale, $in->do_pkgs);
     lang::set($locale);
     Gtk2->set_locale;
+}
+
+sub ask_keyboard() {
+    require keyboard;
+    my $keyboard = $locale ? keyboard::lang2keyboard($locale->{lang}) : keyboard::read_or_default();
+
+  choose:
+    $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),
+                                                N("Please, choose your keyboard layout."),
+                                                sub { translate(keyboard::KEYBOARD2text($_[0])) },
+                                                [ keyboard::KEYBOARDs() ],
+                                                $keyboard->{KEYBOARD}) or return;
+
+    keyboard::group_toggle_choose($in, $keyboard) or goto choose;
+
+    keyboard::configure_and_set_standalone($keyboard);
 }
 
 sub ask_network() {
@@ -66,6 +83,7 @@ sub call {
 }
 
 call('ask_language');
+call('ask_keyboard');
 call('ask_network');
 $::WizardWindow->destroy; undef $::WizardWindow;
 $::Wizard_pix_up = 'redhat-config-users';
