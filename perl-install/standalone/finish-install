@@ -11,6 +11,8 @@ use network::netconnect;
 use security::level;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
+my $conf_file = '/etc/sysconfig/finish-install';
+my %steps = getVarsFromSh($conf_file);
 my $authentication = authentication::get();
 my $security = security::level::get();
 my $net = {};
@@ -73,20 +75,25 @@ sub ask_users() {
 }
 
 sub call {
-    my ($f_name) = @_;
-    log::l("calling $f_name");
-    my $f = $::{$f_name} or internal_error "bad function $f_name";
-    eval { $f->() };
-    log::l("$f_name failed: $@") if $@;
+    my ($step_name) = @_;
+    my $f_name = 'ask_' . $step_name;
+    if (member('no', map { lc($steps{$_}) } lc($step_name), uc($step_name))) {
+        log::l("ignoring $f_name");
+    } else {
+        log::l("calling $f_name");
+        my $f = $::{$f_name} or internal_error "bad function $f_name";
+        eval { $f->() };
+        log::l("$f_name failed: $@") if $@;
+    }
 }
 
-call('ask_language');
-call('ask_keyboard');
-call('ask_network');
+call('language');
+call('keyboard');
+call('network');
 $::WizardWindow->destroy; undef $::WizardWindow;
 $::Wizard_pix_up = 'redhat-config-users';
-call('ask_authentication');
-call('ask_users');
-setVarsInSh('/etc/sysconfig/finish-install', { FINISH_INSTALL => 'no' });
+call('authentication');
+call('users');
+setVarsInSh($conf_file, { FINISH_INSTALL => 'no' });
 
 $in->exit(0);
