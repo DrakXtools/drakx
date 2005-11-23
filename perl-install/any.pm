@@ -796,7 +796,7 @@ sub selectLanguage_standalone {
 	{ val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
     ]);
     lang::set($locale);
-    Gtk2->set_locale;
+    Gtk2->set_locale if $in->isa('interactive::gtk');
 }
 
 sub selectLanguage_and_more_standalone {
