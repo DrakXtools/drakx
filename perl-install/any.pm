@@ -795,6 +795,8 @@ sub selectLanguage_standalone {
 	  format => sub { lang::l2name($_[0]) }, list => \@langs },
 	{ val => \$locale->{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
     ]);
+    lang::set($locale);
+    Gtk2->set_locale;
 }
 
 sub selectLanguage_and_more_standalone {
