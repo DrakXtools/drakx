@@ -618,6 +618,16 @@ sub configure_xorg {
     }
 }
 
+sub configure_and_set_standalone {
+    my ($keyboard) = @_;
+
+    configure_xorg($keyboard);
+    setxkbmap($keyboard);
+
+    &write($keyboard);
+    system('/etc/init.d/keytable', 'restart');
+}
+
 sub read() {
     my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return;
     if (!$keyboard{KEYBOARD}) {

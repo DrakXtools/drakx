@@ -47,11 +47,8 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
     }
 }
 
-keyboard::setxkbmap($keyboard);
-keyboard::configure_xorg($keyboard);
 
-keyboard::write($keyboard);
-system('/etc/init.d/keytable', 'restart');
+keyboard::configure_and_set_standalone($keyboard);
 
 end:
     $in->exit(0) if $in;
