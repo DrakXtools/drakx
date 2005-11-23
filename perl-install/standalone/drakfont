@@ -106,7 +106,6 @@ my @application;
 my @install;
 my @uninstall;
 my $interactive;
-my $dialog;
 my $pbar;
 my $pbar1;
 my $pbar2;
@@ -623,7 +622,7 @@ sub exitdialog() { Gtk2->main_quit }
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop) = @_;
-    $dialog = _create_dialog($title, { transient => $window1->{real_window} });
+    my $dialog = _create_dialog($title, { transient => $window1->{real_window} });
     $dialog->signal_connect(delete_event => \&exitdialog);
     gtkpack_($dialog->vbox, @$widgets);
     gtkpack($dialog->action_area, @$buttons) if $buttons;
@@ -658,8 +657,6 @@ sub advanced_install() {
             gtksignal_connect(Gtk2::Button->new(N("Remove Selected")), clicked => \&list_remove),
             gtksignal_connect($button = gtkset_sensitive(Gtk2::Button->new(N("Install fonts")), 0),
                               clicked => sub {
-                                  $dialog->destroy;
-                                  undef $dialog;
                                   import_status() if @install;
                               }),
             gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&exitdialog),
