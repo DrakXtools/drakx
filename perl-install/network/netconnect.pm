@@ -549,7 +549,7 @@ Take a look at http://www.linmodems.org"),
                                 $countries{$country} ||= translate($country);
                                 join('', $countries{$country}, $_);
                             } grep { !/.directory$/ } glob_("$p_db_path/$country/*");
-                        } map { s!$p_db_path/!!o; s!_! !g; $_ } glob_("$p_db_path/*");
+                        } map { s!$p_db_path/!!o; s!_! !g; $_ } glob_("$p_db_path/*") if !@isp;
                         $old_provider = $provider;
                     },
                     name => N("Select your provider:"),
@@ -695,7 +695,7 @@ Take a look at http://www.linmodems.org"),
                    {
                     pre => sub {
                         require network::adsl_consts;
-                        %adsl_data = %network::adsl_consts::adsl_data;
+                        %adsl_data = %network::adsl_consts::adsl_data if is_empty_hash_ref(\%adsl_data);
                         $adsl_old_provider = $adsl_provider;
                         if (!$adsl_provider) {
                             require lang;
