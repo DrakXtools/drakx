@@ -697,6 +697,11 @@ Take a look at http://www.linmodems.org"),
                         require network::adsl_consts;
                         %adsl_data = %network::adsl_consts::adsl_data;
                         $adsl_old_provider = $adsl_provider;
+                        if (!$adsl_provider) {
+                            require lang;
+                            my $locale_country = lang::c2name($::o->{locale}{country} || lang::read()->{country});
+                            $adsl_provider = find { $_ =~ /^$locale_country/ } sort(keys %adsl_data);
+                        }
                     },
                     name => N("Please choose your ADSL provider"),
                     data => sub {
