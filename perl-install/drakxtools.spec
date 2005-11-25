@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.2
+Version: 10.4.3
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -380,6 +380,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov 25 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.3-1mdk
+- drakconnect: preselect first ISP of user's country
+- finish-install:
+  o allow to blacklist steps in /etc/sysconfig/finish-install (blino)
+  o be able to set up keyboard (pixel)
+- drakfont: fix the need to press twice the "close" button (blino, #14314)
+
 * Mon Nov 21 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.2-1mdk
 - diskdrake: handle missing dmraid (pixel, l#19849)
 - draksound: install aoss when switching from OSS to ALSA
