@@ -216,7 +216,7 @@ sub switch {
     my $driver = $device->{current_driver} || $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
-    my @alternative = @{get_alternative($driver)};
+    my @alternative = $driver ne 'unknown' ? @{get_alternative($driver)} : ();
     unless ($driver eq $device->{driver} || member($device->{driver}, @alternative)) {
 	push @alternative, @{get_alternative($device->{driver})}, $device->{driver};
     }
