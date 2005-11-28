@@ -36,7 +36,7 @@ my %modules_only_for_all_img = (
 
     qw(dc395x dc395x_trm dmx3191d qla1280 BusLogic fdomain),
     qw(pci2220i eata eata_pio eata_dma),
-    'aic7xxx_old', 'qlogicisp',
+    'aic7xxx_old',
     'dtc',
   ],
   'disk/sata' => [
