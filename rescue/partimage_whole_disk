@@ -185,7 +185,7 @@ sub rest_all {
 	    $part->{size} += $hd->cylinder_size if $part->{start} == 1;
 	}
 	log::l("adding $part->{device} with size $part->{size}");
-	partition_table::add($hd, $part, $extended && 'Extended');
+	partition_table::add($hd, $part, $extended ? 'Extended' : 'Primary');
 	foreach ('device', if_(!$part->{ratio}, 'size')) {
 	    $part->{$_} eq $wanted_part{$_} or log::l("bad $_ for $part->{device}: $part->{$_} != $wanted_part{$_}");
 	}
