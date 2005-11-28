@@ -55,6 +55,9 @@ load sr_mod
 /sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
 /sbin/route add 127.0.0.1 lo
 
+# disable the weird echoprt in cooked mode for user interaction:
+stty sane
+
 #LANGUAGE (filled by make_rescue_img)
 
 grep -q noauto /proc/cmdline || drvinst SERIAL_USB
