@@ -700,7 +700,7 @@ Take a look at http://www.linmodems.org"),
                         if (!$adsl_provider) {
                             require lang;
                             my $locale_country = lang::c2name($::o->{locale}{country} || lang::read()->{country});
-                            $adsl_provider = find { $_ =~ /^$locale_country/ } sort(keys %adsl_data);
+                            $adsl_provider = find { /^$locale_country/ } sort(keys %adsl_data);
                         }
                     },
                     name => N("Please choose your ADSL provider"),
