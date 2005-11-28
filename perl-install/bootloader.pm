@@ -350,7 +350,7 @@ sub read_lilo() {
 	$_;
     }
 
-    foreach ('append', 'root', 'default') {
+    foreach ('append', 'root', 'default', 'raid-extra-boot') {
 	$b{$_} = remove_quotes_and_spaces($b{$_}) if $b{$_};
     }
     foreach my $entry (@{$b{entries}}) {
