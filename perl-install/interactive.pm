@@ -138,16 +138,16 @@ sub exit {
 #- Interactive functions
 #-######################################################################################
 sub ask_warn {
-    my ($o, $title, $message) = @_;
-    ask_warn_($o, { title => $title, messages => $message });
+    my ($o, $title, $message, $o_icon) = @_;
+    ask_warn_($o, { title => $title, messages => $message, icon => $o_icon });
 }
 sub ask_yesorno {
     my ($o, $title, $message, $b_def) = @_;
     ask_yesorno_($o, { title => $title, messages => $message }, $b_def);
 }
 sub ask_okcancel {
-    my ($o, $title, $message, $b_def) = @_;
-    ask_okcancel_($o, { title => $title, messages => $message }, $b_def);
+    my ($o, $title, $message, $b_def, $o_icon) = @_;
+    ask_okcancel_($o, { title => $title, messages => $message, icon => $o_icon }, $b_def);
 }
 
 sub ask_warn_ {
