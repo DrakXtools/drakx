@@ -123,9 +123,10 @@ sub write {
         [ $zone, $interface, 'detect', if_(detect_devices::is_bridge_interface($interface), 'routeback') ];
     };
 
-    set_config_file("zones", 
-		    [ 'net', 'Net', 'Internet zone' ],
-		    if_($conf->{loc_interface}[0], [ 'loc', 'Local', 'Local' ]),
+    set_config_file("zones",
+		    [ 'net', 'ipv4' ],
+		    if_($conf->{loc_interface}[0], [ 'loc', 'ipv4' ]),
+		    [ 'fw', 'firewall' ],
 		   );
     set_config_file('interfaces',
                    $interface_settings->('net', $conf->{net_interface}),
