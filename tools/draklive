@@ -252,18 +252,24 @@ sub create_initrd {
         (map { $_, $_ . '1' } map { "sd$_" } ('a' .. 'h'));
 
     load_moddeps($live->{system}{root}, "/lib/modules/" . $live->{system}{kernel});
-    my ($modules, $unknown) = partition { exists $moddeps{$_} }
-      uniq(map { modules::cond_mapping_24_26($_) } category2modules($storage_modules{$live->{media}{storage}})),
+
+    my ($modules, $skipped) = partition { exists $moddeps{$_} }
+      uniq(map { modules::cond_mapping_24_26($_) } category2modules($storage_modules{$live->{media}{storage}}));
+    my ($extra_modules, $missing) = partition { exists $moddeps{$_} }
       nls_modules($live),
       $live->{media}{fs},
       @{$live->{media}{modules} || []},
       (map { @{$loop{$_}{modules} || []} } uniq(map { $_->{type} } grep { $_->{type} } @{$live->{mount}{dirs} || []})),
       ($live->{mount}{overlay} ? @{$overlay{$live->{mount}{overlay}}{modules} || []} : ());
-    @$unknown and die "unknown modules:" . join("\n", '', @$unknown);
+
+    @$missing and die "missing mandatory modules:" . join("\n", '', sort(@$missing));
+    push @$modules, @$extra_modules;
 
     my @module_deps = uniq(map { moddeps_closure($_) } @$modules);
     run_('gzip', '>', $live->{initrd_tree} . "/lib/$_.ko", '-dc', $live->{system}{root} . $moddeps{$_}{full})
       foreach @module_deps, @$modules;
+
+    @$skipped and warn "skipped modules:" . join("\n", '', sort(@$skipped));
 
     create_initrd_linuxrc($live, @module_deps, @$modules);
     compress_initrd_tree($live);
