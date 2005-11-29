@@ -275,6 +275,8 @@ sub ask_mntpoint_s { #- }{}
 	$fstab[0]{mntpoint} = '/';
     } else {
 	$o->ask_from_({ messages => N("Choose the mount points"),
+			title => N("Partitioning"),
+			icon => 'banner-part',
 			interactive_help_id => 'ask_mntpoint_s',
 			callbacks => {
 			    complete => sub {
@@ -337,7 +339,7 @@ sub doPartitionDisks {
 #------------------------------------------------------------------------------
 sub rebootNeeded {
     my ($o) = @_;
-    $o->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
+    $o->ask_warn(N("Partitionning"), N("You need to reboot for the partition table modifications to take place"), icon => 'banner-part');
 
     install_steps::rebootNeeded($o);
 }

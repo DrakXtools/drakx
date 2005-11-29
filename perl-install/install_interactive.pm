@@ -59,9 +59,9 @@ sub partition_with_diskdrake {
 	
 	unless (fs::get::root_(\@fstab)) {
 	    $ok = 0;
-	    $o->ask_okcancel('', N("You must have a root partition.
+	    $o->ask_okcancel(N("Partitionning"), N("You must have a root partition.
 For this, create a partition (or click on an existing one).
-Then choose action ``Mount point'' and set it to `/'"), 1) or return;
+Then choose action ``Mount point'' and set it to `/'"), 1, 'banner-part') or return;
 	}
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $o->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
@@ -213,10 +213,14 @@ filesystem checks will be run on your next boot into Windows(TM)")) if $part->{f
 	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase and use entire disk"), 
 	    sub {
 		my $hd = $o->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
+						  title => N("Partitioning"),
+						  icon => 'banner-part',
 						  interactive_help_id => 'takeOverHdChoose',
 						},
 						\&partition_table::description, \@hds_rw) or return;
 		$o->ask_okcancel_({ messages => N("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd)),
+				    title => N("Partitioning"),
+				    icon => 'banner-part',
 				    interactive_help_id => 'takeOverHdConfirm' }) or return;
 		partition_table::raw::zero_MBR($hd);
 		fsedit::auto_allocate($all_hds, $o->{partitions});
@@ -268,11 +272,13 @@ sub partitionWizard {
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
-    @solutions or $o->ask_warn('', N("I can not find any room for installing")), die 'already displayed';
+    @solutions or $o->ask_warn(N("Partitioning"), N("I can not find any room for installing"), icon => 'banner-part'), die 'already displayed';
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
     my $sol;
     $o->ask_from_({ messages => N("The DrakX Partitioning wizard found the following solutions:"),
+		    title => N("Partitioning"),
+		    icon => 'banner-part',
 		    interactive_help_id => 'doPartitionDisks',
 		  }, 
 		  [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
