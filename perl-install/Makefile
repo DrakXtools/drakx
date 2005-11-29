@@ -89,8 +89,6 @@ install_pms: $(DIRS)
 		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|strict|vars|warnings)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
-	rm -f $(DESTREP4PMS)/{bootlook,tinyfirewall}.pm
-
 	cp share/*.rc $(DESTREP4PMS)
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
