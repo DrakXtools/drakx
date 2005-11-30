@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.3
+Version: 10.4.4
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -380,6 +380,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Nov 30 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.4-1mdk
+- drakboot: fix getting raid-extra-boot (pixel, #19965)
+- drakfirewall: update zones file for shorewall 3.0 (blino)
+- draksound: automatically install packages
+
 * Fri Nov 25 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.3-1mdk
 - drakconnect: preselect first ISP of user's country
 - finish-install:
