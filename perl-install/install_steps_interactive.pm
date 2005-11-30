@@ -339,7 +339,7 @@ sub doPartitionDisks {
 #------------------------------------------------------------------------------
 sub rebootNeeded {
     my ($o) = @_;
-    $o->ask_warn(N("Partitionning"), N("You need to reboot for the partition table modifications to take place"), icon => 'banner-part');
+    $o->ask_warn(N("Partitioning"), N("You need to reboot for the partition table modifications to take place"), icon => 'banner-part');
 
     install_steps::rebootNeeded($o);
 }

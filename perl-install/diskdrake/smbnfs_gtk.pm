@@ -18,7 +18,7 @@ sub main {
     my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
     $kind->check($in) or return;
 
-    my $w = ugtk2->new(N("Partitionning"), icon => 'banner-part');
+    my $w = ugtk2->new(N("Partitioning"), icon => 'banner-part');
 
     add_smbnfs($w->{window}, $kind);
     $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');

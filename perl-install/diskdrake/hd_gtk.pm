@@ -49,7 +49,7 @@ sub main {
 
     local $in->{grab} = 1;
 
-    $w = ugtk2->new(N("Partitionning"), icon => 'banner-part');
+    $w = ugtk2->new(N("Partitioning"), icon => 'banner-part');
     $::main_window = $w->{real_window} if !$::isEmbedded && !$::isInstall;
     my $rc = "/usr/share/libDrakX/diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
