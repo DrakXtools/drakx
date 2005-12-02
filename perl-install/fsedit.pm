@@ -383,9 +383,12 @@ sub check_mntpoint {
     $mntpoint =~ m|[\x7f-\xff]| and cdie N("Mount points should contain only alphanumerical characters");
     fs::get::mntpoint2part($mntpoint, [ grep { $_ ne $part } fs::get::really_all_fstab($all_hds) ]) and die N("There is already a partition with mount point %s\n", $mntpoint);
 
-    cdie N("You've selected a software RAID partition as root (/).
+    if ($mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds)) {
+	my $md_part = fs::get::device2part($part->{raid}, $all_hds->{raids});
+	cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
+Please be sure to add a /boot partition") if $md_part->{level} ne '1'; # lilo handles / on RAID1
+    }
 
     #- NB: if the LV doesn't exist, lv_nb_pvs returns 0
     die N("You can not use the LVM Logical Volume for mount point %s since it spans physical volumes", $mntpoint)
