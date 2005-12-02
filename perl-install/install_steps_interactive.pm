@@ -784,9 +784,6 @@ sub updatemodules {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
-    require network::ethernet;
-    modules::load_category($o->{modules_conf}, list_modules::ethernet_categories());
-
     if ($o->{meta_class} eq 'firewall') {
 	require network::netconnect;
 	network::netconnect::real_main($o->{net}, $o, $o->{modules_conf});

@@ -256,10 +256,11 @@ sub configureNetwork {
     #- get current configuration of network device.
     require network::network;
     eval { network::network::read_net_conf($o->{net}) };
+    require network::ethernet;
+    modules::load_category($o->{modules_conf}, list_modules::ethernet_categories());
     if (!$o->{isUpgrade}) {
         installStepsCall($o, $auto, 'configureNetwork');
     } else {
-        require network::ethernet;
         network::ethernet::configure_eth_aliases($o->{modules_conf});
     }
 }

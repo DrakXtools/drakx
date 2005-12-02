@@ -36,13 +36,6 @@ sub new {
     }
 }
 
-sub configureNetwork {
-    my ($o) = @_;
-    log::l("install_steps_auto_install::configureNetwork");
-    modules::load_category($o->{modules_conf}, 'network/main|gigabit|usb');
-    goto &install_steps::configureNetwork;
-}
-
 sub exitInstall {
     my ($o, $alldone) = @_;
     return if $o->{autoExitInstall};
