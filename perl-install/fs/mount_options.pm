@@ -12,6 +12,7 @@ sub list() {
     my %non_defaults = (
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
+			user_xattr => 'nouser_xattr',
 		       );
     my @user_implies = qw(noexec nodev nosuid);
     \%non_defaults, \@user_implies;
@@ -138,6 +139,8 @@ have suidperl(1) installed.)"),
 	'users' => N("Allow an ordinary user to mount the file system."),         
 
 	'usrquota' => N("Enable user disk quota accounting, and optionally enforce limits"),
+
+        'user_xattr' => N("Support user. extended attributes"),
 
         'umask=0' => N("Give write access to ordinary users"),
 
