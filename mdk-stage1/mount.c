@@ -203,6 +203,12 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	if (!strcmp(fs, "reiserfs"))
 		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL, 1);
 
+	if (!strcmp(fs, "jfs"))
+		my_insmod("jfs", ANY_DRIVER_TYPE, NULL, 1);
+
+	if (!strcmp(fs, "xfs"))
+		my_insmod("xfs", ANY_DRIVER_TYPE, NULL, 1);
+
 #endif
 	if (!strcmp(fs, "iso9660"))
 		my_insmod("isofs", ANY_DRIVER_TYPE, NULL, 1);

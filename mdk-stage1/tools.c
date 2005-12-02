@@ -458,6 +458,8 @@ int try_mount(char * dev, char * location)
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
 	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "reiserfs", 0) == -1 &&
+	    my_mount(device_fullname, location, "jfs", 0) == -1 &&
+	    my_mount(device_fullname, location, "xfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "iso9660", 0) == -1) {
                 return 1;
         }
