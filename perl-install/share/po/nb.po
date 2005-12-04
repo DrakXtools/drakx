@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2005-09-21 23:11+0200\n"
 "Last-Translator: Per Øyvind Karlsen <pkarlsen@mandriva.com>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@mandrivalinux.com>\n"
@@ -88,7 +88,7 @@ msgstr ""
 "skrivebeskyttelsen,\n"
 "plugg i nøkkelen igjen og last Mandriva Move på nytt."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "Restart"
@@ -499,7 +499,7 @@ msgid "Custom"
 msgstr "Skreddersydd"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -680,7 +680,7 @@ msgstr "Ok"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1368,7 +1368,7 @@ msgstr "Bruk Unicode som standard"
 msgid "All languages"
 msgstr "Alle språk"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "Land"
@@ -2139,10 +2139,13 @@ msgstr "Valg: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "Partisjonering"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -3060,7 +3063,7 @@ msgstr "Kunne ikke installere %s-pakken!"
 msgid "Mandatory package %s is missing"
 msgstr "Obligatorisk pakke %s mangler"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3143,17 +3146,17 @@ msgstr "feil ved avmontering av %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Aktiverer swap-partisjon %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Use an encrypted file system"
 msgstr "Bruk et kryptert filsystem"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "Aktiver bokføring av gruppediskkvota og valgfritt påfør grenser"
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -3163,7 +3166,7 @@ msgstr ""
 "(feks. for kjappere tilgang til njus-køen for å øke hastigheten på njus-"
 "tjenere)."
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -3172,12 +3175,12 @@ msgstr ""
 "Kan bare bli eksplisitt montert (feks.,\n"
 "-a-valget vil ikke forårsake at filsystemet blir montert)."
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "Ikke tyd tegn- eller blokkspesialenheter på filsystemet."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3188,7 +3191,7 @@ msgstr ""
 "Dette valget kan være nyttig på en tjener som har filsystem som\n"
 "innholder binære filer for andre arkitekturer enn sin egen."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3199,32 +3202,37 @@ msgstr ""
 "å trå i effekt. (Dette ser trygt ut, men er faktisk rimelig utrygt hvis du\n"
 "har suidperl(1) installert.)"
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Monter filsystemet som read-only."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "All I/O til filsystemet bør gjøres synkront."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr "Aktiver bokføring av brukerdiskkvota og valgfritt påfør grenser"
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Gi skrivetilgang til ordinære brukere"
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Gi lesetilgang til ordinære brukere"
@@ -3282,7 +3290,7 @@ msgstr "Monteringspunkt burde innholde alfanumeriske tegn"
 msgid "There is already a partition with mount point %s\n"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3293,7 +3301,7 @@ msgstr ""
 "Ingen oppstartslaster kan håndtere dette uten en /boot partisjon.\n"
 "Så vær nøye med å legge til en /boot partisjon"
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -3302,7 +3310,7 @@ msgstr ""
 "Du kan ikke bruke LVM Logisk Volum for monteringspunkt %s siden det omfanger "
 "fysiske volum"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3314,12 +3322,12 @@ msgstr ""
 "Oppstartslasteren er ikke i stand til å håndtere dette når volumet omfanger "
 "fysiske volum. Du burde opprette en /boot-partisjon først"
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Denne katalogen bør forbli i root-filsystemet"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3328,17 +3336,17 @@ msgstr ""
 "Du trenger et virkelig filsystem (ext2, reiserfs, xfs eller jfs) for dette "
 "monteringspunktet\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Du kan ikke bruke ett kryptert filsystem som monteringspunkt %s"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Ikke nok plass for auto-allokering"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "Ingenting å gjøre"
@@ -3469,7 +3477,7 @@ msgid "AGP controllers"
 msgstr "AGP-kontrollere"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "Skriver"
@@ -3536,7 +3544,7 @@ msgid "Bridges and system controllers"
 msgstr "Broer og systemkontrollere"
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3547,7 +3555,7 @@ msgstr "Tastatur"
 msgid "Tablet and touchscreen"
 msgstr "Tablet og touchscreen"
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "Mus"
@@ -4414,7 +4422,7 @@ msgstr ""
 "valget installerer dessuten en tidstjener som kan brukes av andre maskiner\n"
 "på ditt lokale nettverk."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din er satt til GMT"
@@ -4887,17 +4895,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Generer autoinstallasjonsdiskett"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "Automatisert"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
@@ -5789,8 +5797,8 @@ msgstr ""
 "faktisk er til stede på ditt system, så kan du klikke på denne knappen for\n"
 "å velge en annen driver."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "Lydkort"
@@ -5943,13 +5951,13 @@ msgstr ""
 "å se\n"
 "igjennom dette."
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "TV-kort"
@@ -5964,33 +5972,33 @@ msgstr "ISDN-kort"
 msgid "Graphical Interface"
 msgstr "Grafisk grensesnitt"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "Nettverk"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
 msgid "Proxies"
 msgstr "Proxyer"
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "Sikkerhetsnivå"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Brannmur"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "Oppstartslaster"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6486,13 +6494,6 @@ msgstr "Slette hele disken"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer enn en harddisk, hvilken ønsker du å installere linux på?"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "Partisjonering"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6906,7 +6907,7 @@ msgstr ""
 "Det er noe galt enten med CD-romen eller CD-platen.\n"
 "Sjekk cd-platen på en installert maskin med \"rpm -qpl media/main/*.rpm\"\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Entrer trinn `%s'\n"
@@ -7112,13 +7113,13 @@ msgstr "Det var en feil ved installering av pakkene:"
 msgid "Go on anyway?"
 msgstr "Fortsett uansett?"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "ikke satt opp"
@@ -7314,7 +7315,7 @@ msgstr "Søker etter tilgjengelige pakker og bygger om igjen rpm-databasen..."
 msgid "Looking for available packages..."
 msgstr "Søker etter tilgjengelige pakker"
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
@@ -7427,12 +7428,12 @@ msgstr "Oppsett etter installering"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "%s"
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "Oppdateringer"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7453,7 +7454,7 @@ msgstr ""
 "\n"
 "Ønsker du å installere oppdateringene ?"
 
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7461,67 +7462,67 @@ msgstr ""
 "Kontakter Mandriva Linux-nettstedet for å få liste over tilgjengelige "
 "speil..."
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker..."
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Kan ikke kontakte speil %s"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Would you like to try again?"
 msgstr "Ønsker du å prøve på nytt?"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Hva er din tidssone?"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "System"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS-tjener"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Har du et ISA-lydkort?"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7530,71 +7531,71 @@ msgstr ""
 "Kjør \"alsaconf\" eller \"sndconfig\" etter installasjonen for å sette opp "
 "lydkortet ditt"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Lydkort ikke oppdaget. Prøv \"harddrake\" etter installasjonen"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "Grafisk grensesnitt"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "Nettverk & internett"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "configured"
 msgstr "satt opp"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Sikkerhet"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "aktivert"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "deaktiver"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "Oppstart"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s på %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Tjenester: %d aktivert for %d registrert"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 "Du har ikke satt opp det grafiske grensesnittet X. Er du sikker på at du "
 "ikke vil gjøre dette?"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Klargjør oppstartslaster"
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7607,12 +7608,12 @@ msgstr ""
 "du må bruke BootX eller andre måter for å starte din maskin. "
 "Kjerneargumentet for root-filsystemet er: root=%s"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7621,7 +7622,7 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøv å installer selv om det ødelegger den første partisjonen?"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7630,22 +7631,22 @@ msgstr ""
 "I dette er sikkerhetsnivået er tilgang til Windows-partisjonen forbeholdt "
 "administratoren."
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Sett inn en annen diskett med drivere."
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7656,19 +7657,19 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "Gratulerer"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"

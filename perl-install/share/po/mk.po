@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mk\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2004-11-03 18:47+0100\n"
 "Last-Translator: Зоран Димовски <decata@mt.net.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -82,7 +82,7 @@ msgstr ""
 "исклучете ја заштитата за запишување, внесете го клучот повторно и повторно "
 "подигнете го Mandriva Move."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "Рестартирај"
@@ -461,7 +461,7 @@ msgid "Custom"
 msgstr "По избор"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -642,7 +642,7 @@ msgstr "Во ред"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1328,7 +1328,7 @@ msgstr "Користи Unicode како стандарден"
 msgid "All languages"
 msgstr "Сите јазици"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "Држава / Регион"
@@ -2084,10 +2084,13 @@ msgstr "Опции: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "Партиционирање"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -2997,7 +3000,7 @@ msgstr "Инсталирање на пакетот %s"
 msgid "Mandatory package %s is missing"
 msgstr "Неопходниот пакет %s недостига"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3080,17 +3083,17 @@ msgstr "грешка при одмонтирање на %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Вклучување на swap партицијата %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr "Не може да користите криптиран фајлсистем за точката на монтирање %s"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -3100,7 +3103,7 @@ msgstr ""
 "(на пр. за побрз пристап на новостите паралелно за да се забрзат серверите "
 "за дискусионите групи)."
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -3109,14 +3112,14 @@ msgstr ""
 "Може да се монтира само експлицитно (на пр.,\n"
 "опцијата -а нема да предизвика фајл системот да биде монтиран)."
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "Не ги интерпретирај карактерите или специјалните блок уреди на датотечниот "
 "систем."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3127,7 +3130,7 @@ msgstr ""
 "фајл ситем. Оваа опција можеби е корисна за сервер чии што фајл системи\n"
 "содржат бинарни датотеки за архитектури поинакви од неговата."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3138,32 +3141,37 @@ msgstr ""
 "подеси-групен-идентификатор да се применат. (Ова изгледа сигурно, но\n"
 "всушност не е сигурно ако имате инсталирано suidperl(1))"
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Монтирањето на системската датотека е само за читање."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Сите I/O од системските датотеки треба да бидат синхрнизирани."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr ""
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr ""
@@ -3223,7 +3231,7 @@ msgstr "Точките на монтирање треба да содржат с
 msgid "There is already a partition with mount point %s\n"
 msgstr "Веќе постои партиција со точка на монтирање %s\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3234,7 +3242,7 @@ msgstr ""
 "Ниту еден подигач не може да се справи со ова без /boot партиција.\n"
 "Ве молиме бидете сигурни да додадете /boot партиција"
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
@@ -3242,7 +3250,7 @@ msgid ""
 msgstr ""
 "Не можете да користите LVM логички волумен за точкатата на монтирање %s"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3254,12 +3262,12 @@ msgstr ""
 "Подигачот не може да се справи со ова без /boot партиција.\n"
 "Ве молиме бидете сигурни да додадете /boot партиција"
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Овој директориум би требало да остане во root-фајлсистемот"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3268,17 +3276,17 @@ msgstr ""
 "Потребен ви е вистински фајлсистем (ext2/ext3, reiserfs, xfs, или jfs) за "
 "оваа точка на монтирање\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Не може да користите криптиран фајлсистем за точката на монтирање %s"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Нема доволно слободен простор за авто-алоцирање"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "Не прави ништо"
@@ -3409,7 +3417,7 @@ msgid "AGP controllers"
 msgstr "AGP контролери"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "Принтер"
@@ -3476,7 +3484,7 @@ msgid "Bridges and system controllers"
 msgstr "Мостови и систем контролери"
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3487,7 +3495,7 @@ msgstr "Тастатура"
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "Глушец"
@@ -4361,7 +4369,7 @@ msgstr ""
 "да\n"
 "се користи од други машини на Вашата локална мрежа."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Хардверски часовник наместен според GMT"
@@ -4806,17 +4814,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Генерирај дискета за авто-инсталација"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "Реприза"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "Автоматска"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "Зачувување на селекцијата пакети"
@@ -5654,8 +5662,8 @@ msgstr ""
 "изберете\n"
 "друг драјвер."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "Звучна картичка"
@@ -5731,13 +5739,13 @@ msgid ""
 "idea to review this setup."
 msgstr ""
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Часовна зона"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "ТВ картичка"
@@ -5752,33 +5760,33 @@ msgstr "ISDN картичка"
 msgid "Graphical Interface"
 msgstr "Графички интерфејс"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "Мрежа"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
 msgid "Proxies"
 msgstr "Прокси"
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "Ниво на сигурност"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Firewall"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "Подигач"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6266,13 +6274,6 @@ msgstr "Избриши го целиот диск"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Имате повеќе од еден хард диск; на кој инсталирате Линукс?"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "Партиционирање"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6662,7 +6663,7 @@ msgstr ""
 "Проверете ги цедеата на инсталиран компјутер користејќи\n"
 "\"rpm -qpl media/main/*.rpm\"\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Премин на чекор \"%s\"\n"
@@ -6869,13 +6870,13 @@ msgstr "Се случи грешка во инсталирањето на пак
 msgid "Go on anyway?"
 msgstr "Да продолжиме?"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Резултати"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "не е конфигурирано"
@@ -7067,7 +7068,7 @@ msgstr "Барање достапни пакети и повторно град�
 msgid "Looking for available packages..."
 msgstr "Барање достапни пакети..."
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Изберете огледало од кое да се преземат пакетите"
@@ -7180,12 +7181,12 @@ msgstr "Пост-инсталациона конфигурација"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "Ажурирања"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, fuzzy, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7206,7 +7207,7 @@ msgstr ""
 "\n"
 "Дали сакате да ги инсталирате надградбите ?"
 
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7214,67 +7215,67 @@ msgstr ""
 "Контактирање со веб сајтот на Мандрива Линукс за добивање на листата на "
 "огледала..."
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Контактирање со огледалото за добивање листа на достапни пакети..."
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Не можеше да контактира со другиот %s"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Would you like to try again?"
 msgstr "Дали сакате да пробате пак?"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Кој е Вашата временска зона?"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Автоматска синхронизација на време (преку NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "NTP сервер"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "Систем"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "Хардвер(машински дел)"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Далечински CUPS сервер"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "Нема принтер"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Дали имате ISA звучна картичка?"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7283,71 +7284,71 @@ msgstr ""
 "По инсталацијата вклучете \"alsaconf\" или \"sndconfig\" за да ја "
 "конфигурирате звучаната картичка"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Не е детектирана звучна картичка. Обидете се со \"harddrake\" по "
 "инсталацијата"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "Графички интерфејс"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "Мрежа и Интернет"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "configured"
 msgstr "конфигурирано"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Безбедност"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "активиран"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "оневозможено"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "Подигање"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s на %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Сервисите: %d активирани за %d регистрирани"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Се уште го ш конфигурирано Х. Дали навистина сакаш да го направиш ова?"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Подговтвување на подигачот..."
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7360,12 +7361,12 @@ msgstr ""
 "Инсталацијата ќе продолжи, но ќе треба да користите\n"
 " BootX или некои други средства за да ја подигнете Вашата машина"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Дали сакате да го користите aboot?"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7374,29 +7375,29 @@ msgstr ""
 "Грешка при инсталирање aboot. \n"
 "Да се обидеме со сила, иако тоа може да ја уништи првата партиција?"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Внесете празна дискета во %s"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Ве молиме внесете друга дискета за драјвери"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Создавање дискета за авто-инсталација..."
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7407,19 +7408,19 @@ msgstr ""
 "\n"
 "Дали навистина сакате сега да напуштите?"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "Честитки"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Генерирање дискета за авто-инсталација"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"

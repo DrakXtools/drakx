@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-es\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2005-04-24 11:46+0200\n"
 "Last-Translator: José Manuel Pérez <jmprodu@hotmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
@@ -83,7 +83,7 @@ msgstr ""
 "Haga clic sobre el botón para reiniciar la máquina, desconéctela, quite\n"
 "dicha protección, vuelva a conectarla y lance Mandriva Move otra vez."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "Reiniciar"
@@ -496,7 +496,7 @@ msgid "Custom"
 msgstr "Personalizada"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -677,7 +677,7 @@ msgstr "Aceptar"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1370,7 +1370,7 @@ msgstr "Usar Unicode predeterminadamente"
 msgid "All languages"
 msgstr "Todos los idiomas"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "País / Región"
@@ -2142,10 +2142,13 @@ msgstr "Opciones: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "Particionando"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -3063,7 +3066,7 @@ msgstr "¡No se pudo instalar el paquete %s!"
 msgid "Mandatory package %s is missing"
 msgstr "Falta el paquete obligatorio %s"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3146,18 +3149,18 @@ msgstr "error desmontando %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Habilitando la partición swap %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr ""
 "No puede usar un sistema de archivos cifrado para el punto de montaje %s"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -3167,7 +3170,7 @@ msgstr ""
 "(ej: para un acceso más rápido al spool de noticias en un servidor de "
 "noticias)"
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -3176,14 +3179,14 @@ msgstr ""
 "Sólo se puede montar explícitamente (es decir,\n"
 "la opción -a no causará que se monte el sistema de archivos)"
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "No interpretar dispositivos especiales de bloque o carácter en el sistema de "
 "archivos."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3194,7 +3197,7 @@ msgstr ""
 "Esta opción puede ser útil para un servidor que tiene sistemas de archivos\n"
 "que contienen binaros para arquitecturas distintas a la propia."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3206,33 +3209,38 @@ msgstr ""
 "(Esto parece seguro, pero de hecho es bastante inseguro si tiene\n"
 "suidperl(1) instalado)"
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Montar el sistema de archivos como sólo de lectura."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr ""
 "Toda la E/S del sistema de archivos debería hacerse de manera sincrónica."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Dar acceso de escritura a usuarios regulares"
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Dar acceso sólo de lectura a usuarios regulares"
@@ -3292,7 +3300,7 @@ msgstr "Los puntos de montaje deberían contener sólo caracteres alfanuméricos
 msgid "There is already a partition with mount point %s\n"
 msgstr "Ya existe una partición con el punto de montaje %s\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3304,14 +3312,14 @@ msgstr ""
 "boot.\n"
 "Por favor, asegúrese de añadir una partición /boot."
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "No puede usar un Volumen Lógico LVM para el punto de montaje %s"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3323,12 +3331,12 @@ msgstr ""
 "El cargador de arranque no puede manejar esto sin una partición /boot.\n"
 "Por favor, asegúrese de añadir una partición /boot."
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Este directorio debería permanecer dentro del sistema de archivos raíz"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3337,18 +3345,18 @@ msgstr ""
 "Necesita un sistema de archivos verdadero (ext2/ext3, reiserfs, xfs o jfs) "
 "para este punto de montaje\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
 "No puede usar un sistema de archivos cifrado para el punto de montaje %s"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "No hay espacio libre suficiente para la asignación automática"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "Nada para hacer"
@@ -3479,7 +3487,7 @@ msgid "AGP controllers"
 msgstr "Controladoras AGP"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "Impresora"
@@ -3546,7 +3554,7 @@ msgid "Bridges and system controllers"
 msgstr "Puentes y controladores del sistema"
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3557,7 +3565,7 @@ msgstr "Teclado"
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "Ratón"
@@ -4439,7 +4447,7 @@ msgstr ""
 "de Usted. En realidad, esta opción instala un servidor de la hora que\n"
 "también puede ser utilizado por otras máquinas en su red local."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Reloj interno puesto a GMT"
@@ -4900,17 +4908,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Generar un disquete de instalación automática"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "Reproducir"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "Automatizada"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "Guardar la selección de paquetes"
@@ -5829,8 +5837,8 @@ msgstr ""
 "presente en su sistema, puede hacer clic sobre el botón y elegir un\n"
 "controlador diferente."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "Tarjeta de sonido"
@@ -5978,13 +5986,13 @@ msgstr ""
 "servicios correrán en su máquina. Si planifica utilizar esta máquina como\n"
 "servidor es una buena idea revisar estos ajustes."
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Huso horario"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "Tarjeta de TV"
@@ -5999,33 +6007,33 @@ msgstr "Tarjeta RDSI"
 msgid "Graphical Interface"
 msgstr "Interfaz gráfica"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "Red"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
 msgid "Proxies"
 msgstr "Proxis"
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "Nivel de seguridad"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Cortafuegos"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "Cargador de arranque"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6527,13 +6535,6 @@ msgstr "Borrar el disco entero"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Tiene más de un disco rígido, ¿sobre cuál desea instalar Linux?"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "Particionando"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6961,7 +6962,7 @@ msgstr ""
 "Compruebe el CD de instalación en un sistema ya existente con el comando:\n"
 "  rpm -qpl media/main/*.rpm\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Entrando en la etapa '%s'\n"
@@ -7167,13 +7168,13 @@ msgstr "Hubo un error al instalar los paquetes:"
 msgid "Go on anyway?"
 msgstr "¿Seguir adelante?"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Resumen"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "no configurada"
@@ -7372,7 +7373,7 @@ msgstr ""
 msgid "Looking for available packages..."
 msgstr "Buscando los paquetes disponibles..."
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Elija un sitio de réplica del cual obtener los paquetes"
@@ -7487,12 +7488,12 @@ msgstr ""
 "Por favor, asegúrese de que el soporte de Actualización de Módulos está en "
 "la unidad %s"
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7513,7 +7514,7 @@ msgstr ""
 "\n"
 "¿Desea instalar las actualizaciones?"
 
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7521,69 +7522,69 @@ msgstr ""
 "Contactando con el sitio web de Mandriva Linux para obtener la lista de las "
 "réplicas disponibles"
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
 "Contactando con el sitio de réplica para obtener la lista de los paquetes "
 "disponibles..."
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "No se puede contactar al sitio de réplica %s"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Would you like to try again?"
 msgstr "¿Desea intentar nuevamente?"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "¿Cuál es su huso horario?"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Sincronización automática de hora (usando NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "Servidor NTP"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "Sistema"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "Hardware"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Servidor CUPS remoto"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "Sin impresora"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "¿Tiene una tarjeta de sonido ISA?"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7592,70 +7593,70 @@ msgstr ""
 "Use \"alsaconf\" o \"sndconfig\" luego de la instalación para configurar su "
 "tarjeta de sonido"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "No se detectó tarjeta de sonido. Pruebe \"harddrake\" luego de la instalación"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "Interfaz gráfica"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "Redes e Internet"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "configured"
 msgstr "configurado"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Seguridad"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "activado"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "Arranque"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s en %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Servicios: %d activados de %d registrados"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "No ha configurado a X ¿Está seguro que realmente desea esto?"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Preparando el cargador de arranque"
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7669,12 +7670,12 @@ msgstr ""
 "utilizar BootX o alguna otra manera para arrancar su máquina. El parámetro "
 "del kernel para el sistema de ficheros raíz es: root=%s"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "¿Desea usar aboot?"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7684,7 +7685,7 @@ msgstr ""
 "¿desea forzar la instalación incluso si ello implicara la destrucción de la "
 "primera partición?"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7693,22 +7694,22 @@ msgstr ""
 "En este nivel de seguridad, el acceso a los archivos en la partición Windows "
 "está restringido sólo al administrador."
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Inserte un disquete en blanco en la unidad %s"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Por favor, inserte otro disquete para los controladores"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Creando el disquete de instalación automática"
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7719,19 +7720,19 @@ msgstr ""
 "\n"
 "¿Realmente desea salir ahora?"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "Felicidades"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Generar un disquete de instalación automática"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"

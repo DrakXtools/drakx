@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi version\n"
 "Report-Msgid-Bugs-To: tmthanh@yahoo.com\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2005-06-02 21:17+0700\n"
 "Last-Translator: Larry Nguyen <larry@vnlinux.org>\n"
 "Language-Team:  <gnomevi-list@lists.sourceforge.net>\n"
@@ -75,7 +75,7 @@ msgstr ""
 "Hãy khởi động lại máy tính, rút USB key ra, mở khoá chống ghi,\n"
 "cắm lại USB key vào máy và chạy lại Mandriva Move."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "Khởi động lại"
@@ -485,7 +485,7 @@ msgid "Custom"
 msgstr "Tùy chỉnh"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -663,7 +663,7 @@ msgstr "OK"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1347,7 +1347,7 @@ msgstr "Dùng Unicode theo mặc định"
 msgid "All languages"
 msgstr "Mọi ngôn ngữ"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "Quốc gia / Vùng"
@@ -2110,10 +2110,13 @@ msgstr "Tùy chọn: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "Phân vùng đĩa"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -3020,7 +3023,7 @@ msgstr "Không cài đặt được gói %s"
 msgid "Mandatory package %s is missing"
 msgstr "Thiếu gói tin bắt buộc %s"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3103,17 +3106,17 @@ msgstr "Lỗi khi đang thôi gắn kết %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Bật chạy phân vùng swap %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, c-format
 msgid "Use an encrypted file system"
 msgstr "Sử dụng mã hóa file system"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr "Sử dụng quota và có thể ép buộc giới hạn"
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -3123,7 +3126,7 @@ msgstr ""
 "(vd: để truy cập nhanh hơn trên spool tin tức để tăng tốc độ máy chủ tin "
 "tức)."
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -3132,13 +3135,13 @@ msgstr ""
 "Chỉ có thể được gắn kết dứt khoát (tức là: \n"
 "tùy chọn -a sẽ không làm cho hệ thống tập tin được gắn kết)."
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 "Không giải thích các thiết bị khối đặc biệt hoặc ký tự trên hệ thống tập tin."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3150,7 +3153,7 @@ msgstr ""
 "các hệ thống tập tin chứa các tập tin nhị phân cho các kiến trúc hơn là cho "
 "riêng nó."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3161,32 +3164,37 @@ msgstr ""
 "có tác dụng. (Điều này có vẻ an toàn, nhưng thực tế thì lại không an\n"
 "toàn lắm khi bạn đã cài đặt suidperl(1) )."
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "Gắn kết hệ thống tập tin theo chế độ chỉ đọc."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "Mọi I/O tới hệ thống tập tin nên được hoàn thành một cách đồng bộ."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "Cấp quyền ghi cho người dùng thông thường"
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "Người dùng thông thường chỉ được cấp quyền đọc"
@@ -3244,7 +3252,7 @@ msgstr "Các điểm gắn kết chỉ nên dùng các ký tự chữ và số"
 msgid "There is already a partition with mount point %s\n"
 msgstr "Đang có một phân vùng có điểm gắn kết %s rồi\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3255,14 +3263,14 @@ msgstr ""
 "Không có trình khởi động nào xử lý nó khi thiếu phân vùng /boot.\n"
 "Vì vậy, hãy đảm bảo thêm phân vùng /boot"
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "Không thể dùng một ổ lý luận LVM cho điểm gắn kết %s"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3274,12 +3282,12 @@ msgstr ""
 "Không có trình khởi động nào xử lý nó khi thiếu phân vùng /boot.\n"
 "Vì vậy, hãy đảm bảo thêm phân vùng /boot"
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Thư mục này nên đặt trong hệ thống tập tin root"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3288,17 +3296,17 @@ msgstr ""
 "Bạn cần một hệ thống tập tin thật sự (ext2/ext3, reiserfs, xfs, jfs) cho "
 "điểm gắn kết này\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr "Không thể dùng một hệ thống file đã mã hóa cho điểm gắn kết %s"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "Không đủ không gian trống để phân chia tự động"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "Không có gì để làm"
@@ -3429,7 +3437,7 @@ msgid "AGP controllers"
 msgstr "AGP controllers"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "Máy in"
@@ -3496,7 +3504,7 @@ msgid "Bridges and system controllers"
 msgstr "Bridges và điều khiển hệ thống"
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3507,7 +3515,7 @@ msgstr "Bàn phím"
 msgid "Tablet and touchscreen"
 msgstr "Tablet và touchscreen"
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "Chuột"
@@ -4345,7 +4353,7 @@ msgstr ""
 "cho tính năng này hoạt động. Thực tế là nó sẽ cài đặt một máy chủ thời\n"
 "gian lên máy tính này để các máy khác trong mạng cục bộ tùy ý sử dụng."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Đồng hồ trong máy đặt theo GMT"
@@ -4776,17 +4784,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Tạo đĩa mềm cài đặt tự động"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "Diễn lại"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "Tự động"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "Lưu lựa chọn các gói"
@@ -5619,8 +5627,8 @@ msgstr ""
 "có trong hệ thống, bạn có thể nhấn nút này và chọn một\n"
 "driver khác."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "Card âm thanh"
@@ -5758,13 +5766,13 @@ msgstr ""
 "này. Nếu bạn có kế hoạch dùng máy này làm máy chủ, hãy xem lại\n"
 "thiết lập này."
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Múi giờ"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "Card TV"
@@ -5779,33 +5787,33 @@ msgstr "ISDN card"
 msgid "Graphical Interface"
 msgstr "Giao Diện Đồ Họa"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "Mạng"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
 msgid "Proxies"
 msgstr "Proxies"
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "Mức Bảo Mật"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Tường lửa"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "Trình nạp khởi động"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6298,13 +6306,6 @@ msgstr "Xoá toàn bộ đĩa"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Bạn có hơn một đĩa cứng, bạn cài đặt Linux lên đĩa nào?"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "Phân vùng đĩa"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6688,7 +6689,7 @@ msgstr ""
 "Có thể do ổ đĩa cdrom hoặc đĩa cdrom của bạn bị lỗi.\n"
 "Kiểm tra cdrom trên máy tính bằng \"rpm -qpl media/main/*.rpm\"\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Bắt đầu bước `%s'\n"
@@ -6893,13 +6894,13 @@ msgstr "Lỗi khi đang cài đặt các gói:"
 msgid "Go on anyway?"
 msgstr "Vẫn cứ tiếp tục?"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Tóm tắt"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "chưa được cấu hình"
@@ -7094,7 +7095,7 @@ msgstr "Đang tìm các gói hiện có và xây dựng lại cơ sở dữ li�
 msgid "Looking for available packages..."
 msgstr "Đang tìm các gói hiện có"
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Chọn một mirror để tải các gói về"
@@ -7207,12 +7208,12 @@ msgstr "Cấu hình sau khi cài đặt"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr "Hãy đảm bảo là phương tiện Update Modules có trong drive %s"
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "Cập nhật"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7232,7 +7233,7 @@ msgstr ""
 "\n"
 "Bạn có muốn cài đặt các gói cập nhật không ?"
 
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7240,67 +7241,67 @@ msgstr ""
 "Đang kết nối với website của Mandriva Linux để lấy danh sách các mirrors "
 "hiệncó..."
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Đang kết nối với mirror để lấy danh sách các gói hiện có"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Không thể kết nối được với mirror %s"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Would you like to try again?"
 msgstr "Bạn có muốn thử lại không?"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Bạn ở múi giờ nào?"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Đồng bộ hóa tự động thời gian (dùng NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "Máy chủ NTP"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "Hệ thống"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "Phần cứng"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Máy chủ CUPS ở xa"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "Không có máy in"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Bạn có card âm thanh ISA không ?"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7309,70 +7310,70 @@ msgstr ""
 "Chạy lệnh \"alsaconf\" hoặc \"sndconfig\" sau khi cài đặt để cấu hìnhcard âm "
 "thanh"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Không phát hiện được card âm thanh nào. Hãy thử \"harddrake\" sau khi cài đặt"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "Giao diện đồ họa"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "Mạng & Internet"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "configured"
 msgstr "đã cấu hình"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Bảo mật"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "Đã kích hoạt"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "Đã tắt"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "Khởi động"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s trên %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Các dịch vụ: %d được kích hoạt để đăng nhập %d"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Chưa đặt cấu hình cho X. Bạn có chắc là muốn như vậy không ?"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Đang chuẩn bị trình khởi động"
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7385,12 +7386,12 @@ msgstr ""
 "phương tiện khác để khởi động máy tính. Đối số của kernel cho root fs là: "
 "root=%s"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Bạn có muốn sử dụng aboot không?"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7399,7 +7400,7 @@ msgstr ""
 "Lỗi khi cài đặt aboot, \n"
 "Cố gắng cài đặt kể cả khi nó có thể phá hỏng phân vùng đầu tiên?"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7408,22 +7409,22 @@ msgstr ""
 "Với mức bảo mật này, chỉ người quản trị mới có quyền truy cậpvào các tập tin "
 "trong phân vùng Windows."
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Nạp một đĩa mềm trắng vào ổ %s"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Nạp đĩa mềm khác cho đĩa driver"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Đang tạo đĩa mềm cài đặt tự động"
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7434,19 +7435,19 @@ msgstr ""
 "\n"
 "Bạn thực sự muốn thoát ra bây giờ?"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "Chúc mừng"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Tạo đĩa mềm cài đặt tự động"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"

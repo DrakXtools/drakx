@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-el\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2004-09-15 13:28+0200\n"
 "Last-Translator:  Νίκος Νύκταρης (Nick Niktaris) <niktarin@yahoo.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -64,7 +64,7 @@ msgid ""
 "plug the key again, and launch Mandriva Move again."
 msgstr ""
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "Επανεκκίνηση"
@@ -438,7 +438,7 @@ msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -618,7 +618,7 @@ msgstr "Εντάξει"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1306,7 +1306,7 @@ msgstr "Προεπιλεγμένη η χρήση Unicode"
 msgid "All languages"
 msgstr "Όλες οι γλώσσες"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "Χώρα"
@@ -2059,10 +2059,13 @@ msgstr "Επιλογές: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "Καταμερισμός"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -2976,7 +2979,7 @@ msgstr "Εγκατάσταση πακέτου %s"
 msgid "Mandatory package %s is missing"
 msgstr "Ένα απαραίτητο αρχείο (το %s ) δεν υπάρχει"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3059,38 +3062,38 @@ msgstr "σφάλμα κατά την αποσύνδεση του %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "Ενεργοποίηση κατάτμησης swap %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr ""
 "Δεν μπορείτε να χρησιμοποιήσετε κρυπτογραφημένο σύστημα αρχείων για "
 "προσάρτηση %s"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr ""
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3098,7 +3101,7 @@ msgid ""
 "containing binaries for architectures other than its own."
 msgstr ""
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3106,32 +3109,37 @@ msgid ""
 "have suidperl(1) installed.)"
 msgstr ""
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr ""
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr ""
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr ""
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr ""
@@ -3195,7 +3203,7 @@ msgstr ""
 msgid "There is already a partition with mount point %s\n"
 msgstr "Υπάρχει ήδη κατάτμηση με σημείο σύνδεσης %s\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, fuzzy, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3205,14 +3213,14 @@ msgstr ""
 "\n"
 " Όχι\n"
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "Δεν μπορείτε να χρησιμοποιήσετε μια κατάτμηση LVM για προσάρτηση %s"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3223,13 +3231,13 @@ msgstr ""
 "\n"
 " Όχι\n"
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr ""
 "Αυτός ο κατάλογος πρέπει να παραμείνει στο ριζικό σύστημα αρχείων (root)"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3238,21 +3246,21 @@ msgstr ""
 "Χρειάζεστε ένα πραγματικό σύστημα αρχείων (ext2/ext3, reiserfs, xfs, or jfs) "
 "για αυτό το σημείο σύνδεσης\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
 "Δεν μπορείτε να χρησιμοποιήσετε κρυπτογραφημένο σύστημα αρχείων για "
 "προσάρτηση %s"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr ""
 "Δεν υπάρχει αρκετός ελεύθερος χώρος για την αυτόματη δημιουργία νέων "
 "κατατμήσεων"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "Καμία ενέργεια προς εκτέλεση"
@@ -3383,7 +3391,7 @@ msgid "AGP controllers"
 msgstr "Ελεγκτές AGP"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "Εκτυπωτής"
@@ -3450,7 +3458,7 @@ msgid "Bridges and system controllers"
 msgstr ""
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3461,7 +3469,7 @@ msgstr "Πληκτρολόγιο"
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "Ποντίκι"
@@ -4282,7 +4290,7 @@ msgstr ""
 " εξυπηρετητής\n"
 " εξυπηρετητής."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "Το ρολόι του υπολογιστή σας είναι ρυθμισμένο σε GMT (ώρα Γκρίνουιτς)"
@@ -4714,17 +4722,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "Επαναφόρτωση"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "Αυτόματο"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "Αποθήκευση επιλογής πακέτων"
@@ -5539,8 +5547,8 @@ msgstr ""
 "\n"
 "."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "Κάρτα ήχου"
@@ -5616,13 +5624,13 @@ msgid ""
 "idea to review this setup."
 msgstr ""
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "Ωρολογιακή Ζώνη"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "Κάρτα TV"
@@ -5637,33 +5645,33 @@ msgstr "Εσωτερική κάρτα ISDN"
 msgid "Graphical Interface"
 msgstr "Γραφικό περιβάλλον"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "Δίκτυο"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, fuzzy, c-format
 msgid "Proxies"
 msgstr "Προφίλ "
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "Επίπεδο Ασφαλείας"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "Τοίχος Προστασίας"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "Προγράμματος εκκίνησης"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6155,13 +6163,6 @@ msgstr ""
 "Έχετε περισσότερους από έναν δίσκους, σε ποιόν θέλετε να εγκαταστήσετε το "
 "Linux;"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "Καταμερισμός"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6531,7 +6532,7 @@ msgstr ""
 "Ελέγξτε το CD-ROM σε ένα άλλο σύστημα χρησιμοποιώντας την εντολή \"rpm -qpl "
 "media/main/*.rpm\"\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Βήμα `%s'\n"
@@ -6738,13 +6739,13 @@ msgstr "Προκλήθηκε σφάλμα κατά την εγκατάσταση
 msgid "Go on anyway?"
 msgstr "Να συνεχίσω;"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "Περίληψη"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "δεν ρυθμίστηκε"
@@ -6938,7 +6939,7 @@ msgstr "Ψάχνω για διαθέσιμα πακέτα και δημιουρ�
 msgid "Looking for available packages..."
 msgstr "Ψάχνω για διαθέσιμα πακέτα..."
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "Επιλέξτε τόπο από τον οποίο θα γίνει η λήψη πακέτων"
@@ -7051,12 +7052,12 @@ msgstr "Ρυθμίσεις μετά την εγκατάσταση"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "Ενημερώσεις"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7079,7 +7080,7 @@ msgstr ""
 "Θέλετε να εγκαταστήσετε τις αναβαθμίσεις ;"
 
 # fuzzy
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7087,67 +7088,67 @@ msgstr ""
 "Σύνδεση με την τοποθεσία της Mandriva Linux για λήψη των διαθέσιμων τόπων "
 "λήψης..."
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Σύνδεση με τον τόπο για την λήψη των διαθέσιμων πακέτων..."
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, fuzzy, c-format
 msgid "Unable to contact mirror %s"
 msgstr "Αδυναμία fork: %s"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, fuzzy, c-format
 msgid "Would you like to try again?"
 msgstr "Θα θέλατε να ρυθμίσετε έναν εκτυπωτή;"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Ποια είναι η ζώνη ώρας;"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Αυτόματος συγχρονισμός ώρας (χρήση NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "Εξυπηρετητής NTP"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "Σύστημα"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "Υλικό"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "Απομακρυσμένος εξυπηρετητής CUPS"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "Κανένας εκτυπωτής"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "Έχετε κάρτα ήχου ISA;"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, fuzzy, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7155,70 +7156,70 @@ msgid ""
 msgstr ""
 "Εκτελέστε  \"sndconfig\" μετά την εγκατάσταση για την ρύθμιση της κάρτας"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr ""
 "Δεν βρέθηκε κάρτα ήχου. Δοκιμάστε το \"harddrake\" μετά την εγκατάσταση"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "Γραφικό περιβάλλον"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "Δίκτυο & Διαδίκτυο"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, fuzzy, c-format
 msgid "configured"
 msgstr "επαναρύθμιση"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "Ασφάλεια"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "ενεργοποιημένο"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "απενεργοποιημένο"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "Εκκίνηση"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s σε %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "Υπηρεσίες: %d ενεργοποιημένες για %d εγγεγραμμένες"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Δεν έχετε ρυθμίσει το Χ. Είστε βέβαιοι ότι θέλετε να το κάνετε;"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Προετοιμασία προγράμματος εκκίνησης..."
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, fuzzy, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7231,12 +7232,12 @@ msgstr ""
 "Η εγκατάσταση θα συνεχιστεί, αλλά\n"
 "θα χρειαστεί να χρησιμοποιήσετε το BootX για να ξεκινήσετε το μηχάνημά σας"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "Θέλετε να χρησιμοποιήσετε το aboot;"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7246,29 +7247,29 @@ msgstr ""
 "προσπάθεια βεβιασμένης εγκατάστασης, ακόμα και αν αυτό έχει σαν αποτέλεσμα "
 "την καταστροφή της πρώτης κατάτμησης;"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Εισάγετε άδεια δισκέτα στον οδηγό %s"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, fuzzy, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "Παρακαλώ εισάγετε τη δισκέτα Εκκίνησης στον οδηγό %s"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης..."
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7279,19 +7280,19 @@ msgstr ""
 "\n"
 "Θέλετε σίγουρα να εγκαταλείψετε τώρα;"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "Συγχαρητήρια"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Δημιουργία δισκέτας αυτόματης εγκατάστασης"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"

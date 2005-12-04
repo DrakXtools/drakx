@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fa\n"
-"POT-Creation-Date: 2005-11-30 17:38+0800\n"
+"POT-Creation-Date: 2005-12-04 12:48+0800\n"
 "PO-Revision-Date: 2005-02-26 06:31+0100\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -76,7 +76,7 @@ msgstr ""
 "بردارید،\n"
 "کلید را دوباره وصل کرده، و Mandriva Move را دوباره راه‌اندازی کنید."
 
-#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1334
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1331
 #, c-format
 msgid "Reboot"
 msgstr "آغازگری مجدد"
@@ -488,7 +488,7 @@ msgid "Custom"
 msgstr "سفارشی"
 
 #: Xconfig/main.pm:127 diskdrake/dav.pm:26 help.pm:14
-#: install_steps_interactive.pm:86 install_steps_interactive.pm:1334
+#: install_steps_interactive.pm:86 install_steps_interactive.pm:1331
 #: printer/printerdrake.pm:882 printer/printerdrake.pm:899
 #: printer/printerdrake.pm:4523 printer/printerdrake.pm:4987
 #: standalone/drakhosts:263 standalone/drakroam:230 standalone/draksplash:93
@@ -667,7 +667,7 @@ msgstr "تأیید"
 
 #: Xconfig/resolution_and_depth.pm:373 diskdrake/smbnfs_gtk.pm:80 help.pm:89
 #: help.pm:444 install_steps_gtk.pm:455 install_steps_interactive.pm:431
-#: install_steps_interactive.pm:842 interactive.pm:120 interactive.pm:437
+#: install_steps_interactive.pm:839 interactive.pm:120 interactive.pm:437
 #: interactive/http.pm:104 interactive/http.pm:160 interactive/newt.pm:318
 #: interactive/stdio.pm:39 interactive/stdio.pm:142
 #: printer/printerdrake.pm:3859 standalone/drakautoinst:215
@@ -1354,7 +1354,7 @@ msgstr "استفاده کردن از یونی‌کد در پیش‌فرض"
 msgid "All languages"
 msgstr "همه‌ی زبان‌ها"
 
-#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:963
+#: any.pm:842 help.pm:566 help.pm:855 install_steps_interactive.pm:960
 #, c-format
 msgid "Country / Region"
 msgstr "کشور / منطقه"
@@ -2124,10 +2124,13 @@ msgstr "گزینه‌ها: %s"
 
 #: diskdrake/hd_gtk.pm:52 diskdrake/interactive.pm:292
 #: diskdrake/smbnfs_gtk.pm:21 install_interactive.pm:62
-#: install_steps_interactive.pm:342
+#: install_interactive.pm:216 install_interactive.pm:222
+#: install_interactive.pm:275 install_interactive.pm:280
+#: install_steps_interactive.pm:278 install_steps_interactive.pm:342
+#: steps.pm:21
 #, c-format
-msgid "Partitionning"
-msgstr ""
+msgid "Partitioning"
+msgstr "قسمت‌بندی"
 
 #: diskdrake/hd_gtk.pm:92
 #, c-format
@@ -3040,7 +3043,7 @@ msgstr "بسته‌ی %s نتوانست نصب گردد!"
 msgid "Mandatory package %s is missing"
 msgstr "بسته‌ی ضروری %s حضور ندارد"
 
-#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1319
+#: do_pkgs.pm:35 harddrake/sound.pm:275 install_steps_interactive.pm:1316
 #: keyboard.pm:388 network/ndiswrapper.pm:95 network/netconnect.pm:472
 #: printer/printerdrake.pm:1416 printer/printerdrake.pm:2494
 #: printer/printerdrake.pm:2609 printer/printerdrake.pm:2930
@@ -3123,18 +3126,18 @@ msgstr "خطا در پیاده کردن %s: %s"
 msgid "Enabling swap partition %s"
 msgstr "بکار انداختن قسمت‌بندی حافظه‌ی مبادله %s"
 
-#: fs/mount_options.pm:112
+#: fs/mount_options.pm:113
 #, fuzzy, c-format
 msgid "Use an encrypted file system"
 msgstr ""
 "نمی‌توانید از سیستم پرونده‌ی رمزگذاری شده برای نقطه سوارسازی %s استفاده کنید"
 
-#: fs/mount_options.pm:114
+#: fs/mount_options.pm:115
 #, c-format
 msgid "Enable group disk quota accounting and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:116
+#: fs/mount_options.pm:117
 #, c-format
 msgid ""
 "Do not update inode access times on this file system\n"
@@ -3143,7 +3146,7 @@ msgstr ""
 "زمان دستیابی inode در این سیستم پرونده بروزسازی نگردد\n"
 "(برای دستیابی سریع‌تر بر spool اخبار و سرعت دادن به کارگزاران اخبار)."
 
-#: fs/mount_options.pm:119
+#: fs/mount_options.pm:120
 #, c-format
 msgid ""
 "Can only be mounted explicitly (i.e.,\n"
@@ -3152,12 +3155,12 @@ msgstr ""
 "فقط می‌تواند بطور صریح سوار گردد (\n"
 "گزینه -a باعث سوار شدن سیستم پرونده‌ای نخواهد شد)."
 
-#: fs/mount_options.pm:122
+#: fs/mount_options.pm:123
 #, c-format
 msgid "Do not interpret character or block special devices on the file system."
 msgstr "نویسه‌ یا دستگاه‌های مخصوص بلوک روی سیستم پرونده‌ای تعبیر نشوند."
 
-#: fs/mount_options.pm:124
+#: fs/mount_options.pm:125
 #, c-format
 msgid ""
 "Do not allow execution of any binaries on the mounted\n"
@@ -3169,7 +3172,7 @@ msgstr ""
 "برای\n"
 "ساختاری غیر از ساختار خود است مفید باشد."
 
-#: fs/mount_options.pm:128
+#: fs/mount_options.pm:129
 #, c-format
 msgid ""
 "Do not allow set-user-identifier or set-group-identifier\n"
@@ -3180,32 +3183,37 @@ msgstr ""
 " (این بنظر امن می‌رسد، ولی در حقیقت اگر شما suidperl(1) را نصب \n"
 "کرده‌اید ناامن است )"
 
-#: fs/mount_options.pm:132
+#: fs/mount_options.pm:133
 #, c-format
 msgid "Mount the file system read-only."
 msgstr "سوار کردن سیستم پرونده بطور فقط-خواندن."
 
-#: fs/mount_options.pm:134
+#: fs/mount_options.pm:135
 #, c-format
 msgid "All I/O to the file system should be done synchronously."
 msgstr "همه‌ی I/O به سیستم پرونده بایستی بطور هم‌گاه انجام گیرد."
 
-#: fs/mount_options.pm:138
+#: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
 msgstr ""
 
-#: fs/mount_options.pm:140
+#: fs/mount_options.pm:141
 #, c-format
 msgid "Enable user disk quota accounting, and optionally enforce limits"
 msgstr ""
 
-#: fs/mount_options.pm:142
+#: fs/mount_options.pm:143
+#, c-format
+msgid "Support user. extended attributes"
+msgstr ""
+
+#: fs/mount_options.pm:145
 #, c-format
 msgid "Give write access to ordinary users"
 msgstr "دادن حق نگارش به کاربران عادی"
 
-#: fs/mount_options.pm:144
+#: fs/mount_options.pm:147
 #, c-format
 msgid "Give read-only access to ordinary users"
 msgstr "دادن حق خواندن به کاربران عادی"
@@ -3265,7 +3273,7 @@ msgstr "نقاط سوارسازی فقط باید حاوی نویسه‌های �
 msgid "There is already a partition with mount point %s\n"
 msgstr "قسمت‌بندیی با نقطه‌ی سوارسازی %s از قبل وجود دارد\n"
 
-#: fsedit.pm:386
+#: fsedit.pm:388
 #, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
@@ -3276,14 +3284,14 @@ msgstr ""
 "هیچ بارگزار آغازگری قادر به اداره‌ی این بدون یک قسمت‌بندی /boot نمی‌باشد. \n"
 "لطفا یک قسمت‌بندی /boot را اضافه کنید"
 
-#: fsedit.pm:391
+#: fsedit.pm:394
 #, fuzzy, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr "نمی‌توانید از یک حجم منطقی LVM برای نقطه سوارسازی %s استفاده کنید"
 
-#: fsedit.pm:393
+#: fsedit.pm:396
 #, fuzzy, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
@@ -3295,12 +3303,12 @@ msgstr ""
 "هیچ بارگزار آغازگری قادر به اداره‌ی این بدون یک قسمت‌بندی /boot نمی‌باشد. \n"
 "لطفا مطمئن شوید که یک قسمت‌بندی /boot را اضافه کرده‌اید"
 
-#: fsedit.pm:397 fsedit.pm:399
+#: fsedit.pm:400 fsedit.pm:402
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "این شاخه باید درون سیستم پرونده‌ی ریشه باقی بماند"
 
-#: fsedit.pm:401 fsedit.pm:403
+#: fsedit.pm:404 fsedit.pm:406
 #, c-format
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -3309,18 +3317,18 @@ msgstr ""
 "شما به یک سیستم پرونده‌ی واقعی (ext2/ext3, reiserfs, xfs, یا jfs) برای این "
 "نقطه سوارسازی احتیاج دارید\n"
 
-#: fsedit.pm:405
+#: fsedit.pm:408
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
 msgstr ""
 "نمی‌توانید از سیستم پرونده‌ی رمزگذاری شده برای نقطه سوارسازی %s استفاده کنید"
 
-#: fsedit.pm:466
+#: fsedit.pm:469
 #, c-format
 msgid "Not enough free space for auto-allocating"
 msgstr "فضای آزاد کافی برای جاسازی-خودکار وجود ندارد"
 
-#: fsedit.pm:468
+#: fsedit.pm:471
 #, c-format
 msgid "Nothing to do"
 msgstr "کاری برای انجام نیست"
@@ -3451,7 +3459,7 @@ msgid "AGP controllers"
 msgstr "کنترل‌گر‌های AGP"
 
 #: harddrake/data.pm:324 help.pm:186 help.pm:855
-#: install_steps_interactive.pm:995
+#: install_steps_interactive.pm:992
 #, c-format
 msgid "Printer"
 msgstr "چاپگر"
@@ -3518,7 +3526,7 @@ msgid "Bridges and system controllers"
 msgstr "پل‌ها وکنترل‌گر‌های سیستم"
 
 #: harddrake/data.pm:449 help.pm:855 install_steps_interactive.pm:119
-#: install_steps_interactive.pm:955 standalone/finish-install:37
+#: install_steps_interactive.pm:952 standalone/finish-install:37
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Keyboard"
@@ -3529,7 +3537,7 @@ msgstr "صفحه‌کلید"
 msgid "Tablet and touchscreen"
 msgstr ""
 
-#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:988
+#: harddrake/data.pm:471 help.pm:855 install_steps_interactive.pm:985
 #, c-format
 msgid "Mouse"
 msgstr "موشی"
@@ -4385,7 +4393,7 @@ msgstr ""
 "کارگزار زمانی را نصب می‌کند که می‌تواند بوسیله‌ی ماشین های دیگر بر روی\n"
 "شبکه‌اتان گردد."
 
-#: help.pm:217 install_steps_interactive.pm:890
+#: help.pm:217 install_steps_interactive.pm:887
 #, c-format
 msgid "Hardware clock set to GMT"
 msgstr "گذاردن ساعت سخت‌افزار به GMT"
@@ -4824,17 +4832,17 @@ msgstr ""
 msgid "Generate auto-install floppy"
 msgstr "تولید دیسکچه‌ی نصب-خودکار"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Replay"
 msgstr "بازپخش"
 
-#: help.pm:409 install_steps_interactive.pm:1345
+#: help.pm:409 install_steps_interactive.pm:1342
 #, c-format
 msgid "Automated"
 msgstr "خودکار"
 
-#: help.pm:409 install_steps_interactive.pm:1348
+#: help.pm:409 install_steps_interactive.pm:1345
 #, c-format
 msgid "Save packages selection"
 msgstr "ذخیره‌ی مجموعه بسته‌ها"
@@ -5704,8 +5712,8 @@ msgstr ""
 "میشود. اگر کارت نشان داده شده آن نیست که در سیستم شما وجود دارد، \n"
 "میتوانید بر دکمه کلیک کرده و راه‌انداز دیگری را انتخاب کنید."
 
-#: help.pm:788 help.pm:855 install_steps_interactive.pm:1022
-#: install_steps_interactive.pm:1039
+#: help.pm:788 help.pm:855 install_steps_interactive.pm:1019
+#: install_steps_interactive.pm:1036
 #, c-format
 msgid "Sound card"
 msgstr "کارت صوتی"
@@ -5849,13 +5857,13 @@ msgstr ""
 "خواهند شد را میزان کنید. اگر می‌خواهید از این ماشین مانند یک\n"
 "کارگزار استفاده کنید فکر خوبی است که این برپاسازی را مرور کنید."
 
-#: help.pm:855 install_steps_interactive.pm:886
-#: install_steps_interactive.pm:981 standalone/drakclock:100
+#: help.pm:855 install_steps_interactive.pm:883
+#: install_steps_interactive.pm:978 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
 msgstr "زمان منطقه‌ای"
 
-#: help.pm:855 install_steps_interactive.pm:1055
+#: help.pm:855 install_steps_interactive.pm:1052
 #, c-format
 msgid "TV card"
 msgstr "کارت تلویزیون"
@@ -5870,33 +5878,33 @@ msgstr "کارت ISDN"
 msgid "Graphical Interface"
 msgstr "واسط گرافیکی"
 
-#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1073
+#: help.pm:855 install_any.pm:1733 install_steps_interactive.pm:1070
 #: standalone/drakbackup:2040
 #, c-format
 msgid "Network"
 msgstr "شبکه"
 
-#: help.pm:855 install_steps_interactive.pm:1085
+#: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
 msgid "Proxies"
 msgstr "پراکسی‌ها"
 
-#: help.pm:855 install_steps_interactive.pm:1096
+#: help.pm:855 install_steps_interactive.pm:1093
 #, c-format
 msgid "Security Level"
 msgstr "سطح امنیتی"
 
-#: help.pm:855 install_steps_interactive.pm:1110 network/drakfirewall.pm:189
+#: help.pm:855 install_steps_interactive.pm:1107 network/drakfirewall.pm:189
 #, c-format
 msgid "Firewall"
 msgstr "دیوارآتش"
 
-#: help.pm:855 install_steps_interactive.pm:1126
+#: help.pm:855 install_steps_interactive.pm:1123
 #, c-format
 msgid "Bootloader"
 msgstr "بارگذار آغازگر"
 
-#: help.pm:855 install_steps_interactive.pm:1139 services.pm:114
+#: help.pm:855 install_steps_interactive.pm:1136 services.pm:114
 #: services.pm:157 services.pm:193
 #, c-format
 msgid "Services"
@@ -6387,13 +6395,6 @@ msgstr ""
 "شما بیش از یک دستگاه دیسک دارید، بر کدامیک از آنها می‌خواهید لینوکس را نصب "
 "کنید؟"
 
-#: install_interactive.pm:216 install_interactive.pm:222
-#: install_interactive.pm:275 install_interactive.pm:280
-#: install_steps_interactive.pm:278 steps.pm:21
-#, c-format
-msgid "Partitioning"
-msgstr "قسمت‌بندی"
-
 #: install_interactive.pm:221
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
@@ -6780,7 +6781,7 @@ msgstr ""
 "این سی‌دی را بر یک رایانه‌ی نصب شده با استفاده از \"rpm -qpl media/main/*.rpm"
 "\" بررسی کنید\n"
 
-#: install_steps_auto_install.pm:75 install_steps_stdio.pm:27
+#: install_steps_auto_install.pm:68 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "ورود به مرحله‌ی `%s'\n"
@@ -6987,13 +6988,13 @@ msgstr "خطائی هنگام نصب بسته‌ها وجود داشت:"
 msgid "Go on anyway?"
 msgstr "ادامه به هر حال؟"
 
-#: install_steps_gtk.pm:582 install_steps_interactive.pm:941 steps.pm:30
+#: install_steps_gtk.pm:582 install_steps_interactive.pm:938 steps.pm:30
 #, c-format
 msgid "Summary"
 msgstr "خلاصه"
 
-#: install_steps_gtk.pm:605 install_steps_interactive.pm:937
-#: install_steps_interactive.pm:1086
+#: install_steps_gtk.pm:605 install_steps_interactive.pm:934
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "not configured"
 msgstr "پیکربندی نشده است"
@@ -7188,7 +7189,7 @@ msgstr "جستجو برای بسته‌های موجود و دوباره‌سا�
 msgid "Looking for available packages..."
 msgstr "جستجو برای بسته‌های موجود..."
 
-#: install_steps_interactive.pm:430 install_steps_interactive.pm:841
+#: install_steps_interactive.pm:430 install_steps_interactive.pm:838
 #, c-format
 msgid "Choose a mirror from which to get the packages"
 msgstr "انتخاب آینه‌ای برای گرفتن بسته‌ها"
@@ -7300,12 +7301,12 @@ msgstr "پیکربندی بعد از نصب"
 msgid "Please ensure the Update Modules media is in drive %s"
 msgstr ""
 
-#: install_steps_interactive.pm:814
+#: install_steps_interactive.pm:811
 #, c-format
 msgid "Updates"
 msgstr "بروزسازی‌ها"
 
-#: install_steps_interactive.pm:815
+#: install_steps_interactive.pm:812
 #, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -7325,7 +7326,7 @@ msgstr ""
 "\n"
 "آیا می‌خواهید بروزسازی‌ها را نصب کنید؟"
 
-#: install_steps_interactive.pm:836
+#: install_steps_interactive.pm:833
 #, c-format
 msgid ""
 "Contacting Mandriva Linux web site to get the list of available mirrors..."
@@ -7333,67 +7334,67 @@ msgstr ""
 "در حال تماس گرفتن با وب‌گاه لینوکس ماندریبا برای دریافت لیست پایگاه‌های "
 "آینه‌های موجود..."
 
-#: install_steps_interactive.pm:855
+#: install_steps_interactive.pm:852
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "تماس گرفتن با آینه برای گرفتن لیست بسته‌های موجود..."
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Unable to contact mirror %s"
 msgstr "نمی‌توان با آینه %s تماس برقرار کرد"
 
-#: install_steps_interactive.pm:859
+#: install_steps_interactive.pm:856
 #, c-format
 msgid "Would you like to try again?"
 msgstr "می‌خواهید دوباره امتحان کنید؟"
 
-#: install_steps_interactive.pm:886 standalone/drakclock:45
+#: install_steps_interactive.pm:883 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
 msgstr "منطقه‌ی زمانی شما کدام است؟"
 
-#: install_steps_interactive.pm:891
+#: install_steps_interactive.pm:888
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "هم‌گاه‌سازی خودکار زمان (با استفاده از NTP)"
 
-#: install_steps_interactive.pm:899
+#: install_steps_interactive.pm:896
 #, c-format
 msgid "NTP Server"
 msgstr "کارگزار NTP"
 
-#: install_steps_interactive.pm:954 install_steps_interactive.pm:962
-#: install_steps_interactive.pm:980 install_steps_interactive.pm:987
-#: install_steps_interactive.pm:1138 services.pm:133
+#: install_steps_interactive.pm:951 install_steps_interactive.pm:959
+#: install_steps_interactive.pm:977 install_steps_interactive.pm:984
+#: install_steps_interactive.pm:1135 services.pm:133
 #: standalone/drakbackup:1585
 #, c-format
 msgid "System"
 msgstr "سیستم"
 
-#: install_steps_interactive.pm:994 install_steps_interactive.pm:1021
-#: install_steps_interactive.pm:1038 install_steps_interactive.pm:1054
-#: install_steps_interactive.pm:1065
+#: install_steps_interactive.pm:991 install_steps_interactive.pm:1018
+#: install_steps_interactive.pm:1035 install_steps_interactive.pm:1051
+#: install_steps_interactive.pm:1062
 #, c-format
 msgid "Hardware"
 msgstr "سخت‌افزار"
 
-#: install_steps_interactive.pm:1000 install_steps_interactive.pm:1009
+#: install_steps_interactive.pm:997 install_steps_interactive.pm:1006
 #, c-format
 msgid "Remote CUPS server"
 msgstr "کارگزار از راه دور CUPS"
 
-#: install_steps_interactive.pm:1000
+#: install_steps_interactive.pm:997
 #, c-format
 msgid "No printer"
 msgstr "بدون چاپگر"
 
-#: install_steps_interactive.pm:1042
+#: install_steps_interactive.pm:1039
 #, c-format
 msgid "Do you have an ISA sound card?"
 msgstr "آیا کارت صوتی ISA دارید؟"
 
-#: install_steps_interactive.pm:1044
+#: install_steps_interactive.pm:1041
 #, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
@@ -7402,69 +7403,69 @@ msgstr ""
 "برای پیکربندی کارت صوتی خود بعد از نصب برنامه‌ی \"sndconfig\" یا \"alsaconf"
 "\"  را اجرا کنید"
 
-#: install_steps_interactive.pm:1046
+#: install_steps_interactive.pm:1043
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "هیچ کارت صوتی شناسایی نشد. \"harddrake\" را بعد از نصب امتحان کنید"
 
-#: install_steps_interactive.pm:1066
+#: install_steps_interactive.pm:1063
 #, c-format
 msgid "Graphical interface"
 msgstr "واسط گرافیکی"
 
-#: install_steps_interactive.pm:1072 install_steps_interactive.pm:1084
+#: install_steps_interactive.pm:1069 install_steps_interactive.pm:1081
 #, c-format
 msgid "Network & Internet"
 msgstr "شبکه و اینترنت"
 
-#: install_steps_interactive.pm:1086
+#: install_steps_interactive.pm:1083
 #, c-format
 msgid "configured"
 msgstr "پیکربندی شده"
 
-#: install_steps_interactive.pm:1095 install_steps_interactive.pm:1109
+#: install_steps_interactive.pm:1092 install_steps_interactive.pm:1106
 #: security/level.pm:55 steps.pm:20
 #, c-format
 msgid "Security"
 msgstr "امنیت"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "activated"
 msgstr "فعال شده"
 
-#: install_steps_interactive.pm:1114
+#: install_steps_interactive.pm:1111
 #, c-format
 msgid "disabled"
 msgstr "از کار افتاده"
 
-#: install_steps_interactive.pm:1125
+#: install_steps_interactive.pm:1122
 #, c-format
 msgid "Boot"
 msgstr "آغازگری"
 
 #. -PO: example: lilo-graphic on /dev/hda1
-#: install_steps_interactive.pm:1129 printer/printerdrake.pm:961
+#: install_steps_interactive.pm:1126 printer/printerdrake.pm:961
 #, c-format
 msgid "%s on %s"
 msgstr "%s بر %s"
 
-#: install_steps_interactive.pm:1143 services.pm:175
+#: install_steps_interactive.pm:1140 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
 msgstr "سرویس‌ها: %d فعال شده برای %d ثبت شده"
 
-#: install_steps_interactive.pm:1155
+#: install_steps_interactive.pm:1152
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "شما ایکس را پیکربندی نکرده‌اید. آیا واقعاً مطمئنید که این را می‌خواهید؟"
 
-#: install_steps_interactive.pm:1236
+#: install_steps_interactive.pm:1233
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "آماده کردن بارگذار آغازگر..."
 
-#: install_steps_interactive.pm:1246
+#: install_steps_interactive.pm:1243
 #, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
@@ -7478,12 +7479,12 @@ msgstr ""
 "از BootX یا طریق دیگری برای آغازگری استفاده کنید.  آرگومان هسته برای سیستم "
 "پرونده ریشه: root=%s"
 
-#: install_steps_interactive.pm:1252
+#: install_steps_interactive.pm:1249
 #, c-format
 msgid "Do you want to use aboot?"
 msgstr "آیا می‌خواهید از aboot استفاده کنید؟"
 
-#: install_steps_interactive.pm:1255
+#: install_steps_interactive.pm:1252
 #, c-format
 msgid ""
 "Error installing aboot, \n"
@@ -7492,7 +7493,7 @@ msgstr ""
 "خطا در نصب aboot, \n"
 "تلاش به اجبار نصب می‌کنید حتی اگر آن اولین قسمت‌بندی را خراب کند؟"
 
-#: install_steps_interactive.pm:1272
+#: install_steps_interactive.pm:1269
 #, c-format
 msgid ""
 "In this security level, access to the files in the Windows partition is "
@@ -7500,22 +7501,22 @@ msgid ""
 msgstr ""
 "در این سطح امنیتی، دستیابی به پرونده‌های قسمت‌بندی ویندوز محدود به مدیر است."
 
-#: install_steps_interactive.pm:1301 standalone/drakautoinst:76
+#: install_steps_interactive.pm:1298 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "یک دیسکچه‌ی خالی را در گرداننده‌ی %s داخل کنید"
 
-#: install_steps_interactive.pm:1306
+#: install_steps_interactive.pm:1303
 #, c-format
 msgid "Please insert another floppy for drivers disk"
 msgstr "لطفاً دیسکچه‌ی دیگری را برای دیسک راه‌اندازها داخل کنید"
 
-#: install_steps_interactive.pm:1308
+#: install_steps_interactive.pm:1305
 #, c-format
 msgid "Creating auto install floppy..."
 msgstr "ایجاد کردن دیسکچه‌ی نصب خودکار..."
 
-#: install_steps_interactive.pm:1320
+#: install_steps_interactive.pm:1317
 #, c-format
 msgid ""
 "Some steps are not completed.\n"
@@ -7526,19 +7527,19 @@ msgstr ""
 "\n"
 "واقعاً می‌خواهید اکنون ترک کنید؟"
 
-#: install_steps_interactive.pm:1330 standalone/draksambashare:422
+#: install_steps_interactive.pm:1327 standalone/draksambashare:422
 #: standalone/draksambashare:529 standalone/drakups:120 standalone/drakups:159
 #: standalone/logdrake:452 standalone/logdrake:458
 #, c-format
 msgid "Congratulations"
 msgstr "تبریک می‌گوئیم!"
 
-#: install_steps_interactive.pm:1338 install_steps_interactive.pm:1339
+#: install_steps_interactive.pm:1335 install_steps_interactive.pm:1336
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "تولید دیسکچه‌ی نصب خودکار"
 
-#: install_steps_interactive.pm:1340
+#: install_steps_interactive.pm:1337
 #, c-format
 msgid ""
 "The auto install can be fully automated if wanted,\n"
