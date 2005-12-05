@@ -465,7 +465,7 @@ sub record_master {
         unless ($o_refresh_boot_only) {
             foreach (grep { $_->{build_from} || $_->{pre_create} } @{$live->{mount}{dirs} || []}) {
                 print "copying $_->{source}\n";
-                run_('cp', '-f', $live->{images_dir} . '/' . $_->{source}, $live->{mnt});
+                cp_f($live->{images_dir} . '/' . $_->{source}, $live->{mnt});
             }
         }
         run_('umount', $live->{mnt});
