@@ -163,6 +163,18 @@ my %loop = (
             @mnt;
         } },
     },
+    sparsefs => {
+        modules => [],
+        create => sub {
+            my ($dest) = @_;
+            run_('dd', "of=$dest", 'count=0', 'seek=1000000', 'bs=1k');
+            run_('mke2fs', '-F', $dest);
+        },
+        mount => sub {
+            my ($live, $dir) = @_;
+            "mount -t ext2 $live->{media}{mountpoint}/$dir->{source} none $dir->{mountpoint}";
+        },
+    },
     tmpfs => {
         mount => sub {
             my ($_live, $dir) = @_;
@@ -395,6 +407,11 @@ sub create_loopback_files {
         unlink($dest);
         $loop{$_->{type}}{build}->($tree, $dest);
     }
+    foreach (grep { $_->{pre_create} } @{$live->{mount}{dirs} || []}) {
+        my $dest = $live->{images_dir} . '/' . $_->{source};
+        unlink($dest);
+        $loop{$_->{type}}{create}->($dest);
+    }
 }
 
 sub get_media_label {
@@ -446,9 +463,9 @@ sub record_master {
         cp_f(glob($live->{boot_dir} . '/*'), $live->{mnt});
         output($live->{mnt} . '/syslinux.cfg', build_syslinux_cfg($live));
         unless ($o_refresh_boot_only) {
-            foreach (grep { $_->{build_from} } @{$live->{mount}{dirs} || []}) {
+            foreach (grep { $_->{build_from} || $_->{pre_create} } @{$live->{mount}{dirs} || []}) {
                 print "copying $_->{source}\n";
-                cp_f($live->{images_dir} . '/' . $_->{source}, $live->{mnt});
+                run_('cp', '-f', $live->{images_dir} . '/' . $_->{source}, $live->{mnt});
             }
         }
         run_('umount', $live->{mnt});
