@@ -1,3 +1,1121 @@
+2005/12/05  Antoine Ginies  <aginies at mandriva.com> 
+
+	* docs/HACKING: add missgin requires to build GI
+
+2005/12/05  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: revert to cp_f
+	add support for writable sparse loopbacks
+
+2005/12/05  willysr
+
+	* share/po/id.po: Updated
+
+2005/12/04  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/12/02  Olivier Blin <oblin at mandriva.com>
+
+	* install_steps_auto_install.pm, install2.pm,
+	install_steps_interactive.pm: load all ethernet modules in all
+	installation modes (fixes the problem of firewire not being loaded in
+	automatic mode)
+
+	* mdk-stage1/mount.c, mdk-stage1/tools.c: support jfs and xfs
+
+2005/12/02  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: lilo handles / on RAID1, so don't warn in that case (#20021)
+
+	* fs/mount_options.pm: add user_xattr (useful for beagle, cf bugzilla
+	#15068)
+
+2005/12/02  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/sound.pm (do_switch) make it more readable
+
+2005/12/01  Warly  <warly at mandriva.com>
+
+	* share/rpmsrate: add cdrdao-gcdmaster to burn audio on gnome
+
+2005/11/30  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/11/30  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* diskdrake/hd_gtk.pm, diskdrake/smbnfs_gtk.pm, diskdrake/interactive.pm,
+	install_interactive.pm, install_steps_interactive.pm: typo fix
+
+	* drakxtools.spec: 10.4.4-1mdk
+
+	* share/po/br.po: typo fix
+	update
+
+2005/11/30  willysr
+
+	* share/po/id.po: Updated
+
+2005/11/29  Olivier Blin <oblin at mandriva.com>
+
+	* tools/draklive: documentation fix
+	don't die if non-mandatory modules are missing, warn and skip them
+	add reference to the wiki page
+	initial import
+
+	* network/shorewall.pm: update zones file for shorewall 3.0
+
+2005/11/29  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* Makefile: remove old outdated cleanup rule (it's no more needed for
+	years)
+
+	* docs/HACKING: clean build requires:
+	  - glib2-devel and gtk+2-devel are *NOT* needed
+	  - ext2fs2-devel is no more needed (we use vol_id now)
+	  - rpm-devel is no more needed too (we only use it through perl-URPM
+	now)
+
+	* harddrake/sound.pm (do_switch) automatically install packages
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm, diskdrake/smbnfs_gtk.pm,
+	install_interactive.pm, install_steps_interactive.pm: set title & icon
+	of banner for most partitionning steps
+
+	* interactive.pm (ask_okcancel,ask_warn) enable to set an icon (eg for
+	banners at install time)
+
+2005/11/28  Pixel  <pixel at mandriva.com>
+
+	* bootloader.pm: fix getting raid-extra-boot (bugzilla #19965)
+	fix getting raid-extra-boot (bugzilla #19965)
+
+	* rescue/tree/etc/rc.sysinit, rescue/list.xml: disable the weird echoprt
+	in cooked mode for user interaction
+
+	* rescue/partimage_whole_disk: fix restoring many primary partitions
+
+2005/11/28  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* network/netconnect.pm: simplify
+
+	* harddrake/sound.pm (switch) be more robust
+	(do_switch) make package installation actually work
+
+2005/11/26  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/11/25  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.4.3-1mdk
+
+	* network/netconnect.pm (real_main) once ISP DB is loaded, do not bother
+	reload it
+	(real_main) usuability: preselect first ISP of user's country
+
+	* share/po/br.po: update
+
+2005/11/24  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated zh_CN translation
+
+2005/11/23  Olivier Blin <oblin at mandriva.com>
+
+	* any.pm: apply locale settings immediately
+	apply locale settings immediately
+
+	* standalone/finish-install: allow to blacklist steps in
+	/etc/sysconfig/finish-install
+	locale is now set by any::selectLanguage_standalone
+
+	* standalone/drakfont: make dialog variable local, to avoid crappy
+	workarounds that don't even work
+
+2005/11/23  Pixel  <pixel at mandriva.com>
+
+	* any.pm: fix for localedrake in text mode
+
+	* run_program.pm: don't use /root/tmp if /root doesn't exist (fixes using
+	it in rescue)
+
+	* keyboard.pm, standalone/keyboarddrake: create new function and use it
+
+	* standalone/finish-install: add ask_keyboard step
+
+	* share/list.xml, rescue/list.xml: adapt to MDV::Packdrakeng
+
+2005/11/22  Olivier Blin <oblin at mandriva.com>
+
+	* devices.pm: add some useful devices for live systems build
+
+	* tools/drakx-in-chroot: don't run Xnest if an auto_install file is used
+	contatenate auto_install and defcfg files into a new auto_install file
+	in install root
+	do not commit suicide if Xnest isn't used
+	remove destination dir as root, and create it if not existent
+
+2005/11/21  Olivier Blin <oblin at mandriva.com>
+
+	* Xconfig/xfree.pm: perl_checker fix
+	refer to xorg.conf man page instead of XF86Config (Yukiko Bando)
+
+	* share/rpmsrate: bpalogin is required for Telstra's BPA cable connections
+
+	* pkgs.pm: fix rpmsrate negations when not installing a live system
+
+	* network/monitor.pm, network/ifw.pm: use new DBus typing facilities
+
+2005/11/21  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/wa.po: updated Walloon file (better strings in drakfont)
+
+2005/11/21  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: fix catching fs::dmraid::init() failure
+
+	* fs/mount_options.pm: simplify text for option "users" (was not accurate
+	and much too verbose) (see also bugzilla #19848)
+
+2005/11/21  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* harddrake/sound.pm: ones less space
+	install aoss too when installing ALSA
+
+	* drakxtools.spec: 10.4.2-1mdk
+
+	* pkgs.pm (read_rpmsrate) do not match CAT_(KDE|GNOME|...) and ignore !
+	while
+	installing a live system
+	(read_rpmsrate) let "build_live_system" mode be selected by auto config
+	file
+	(read_rpmsrate) install all hardware related packages when building a
+	live system
+
+	* install_any.pm (default_packages) better let rpmsrate handle ALSA
+	packages installation
+	(default_packages) typo fix
+	install aoss too when installing ALSA
+
+	* share/rpmsrate, install_steps_interactive.pm: install aoss too when
+	installing ALSA
+
+2005/11/19  willysr
+
+	* share/po/id.po: Updated
+
+2005/11/18  Pixel  <pixel at mandriva.com>
+
+	* diskdrake/interactive.pm: perl_checker compliance
+	add button "Label" (in expert for now) to set the "volume label" (and so
+	get LABEL= in fstab and lilo.conf)
+
+2005/11/18  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po, share/po/fr.po: update
+	Updated POT file
+
+	* drakxtools.spec: add bug references in 10.4.1-1mdk's changelog
+	10.4.1-1mdk
+	add bug references in 10.3-0.64.3.20060mdk's changelog
+	fix release number after removing %mkrel
+	10.3-0.3.20060mdk
+	rename 10.3-0.1.20060mdk as 10.3-0.2.20060mdk since till previously
+	uploaded an update :-(
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: Updated POT file
+
+2005/11/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+
+2005/11/16  Olivier Blin <oblin at mandriva.com>
+
+	* network/adsl.pm: don't screw up eagle-usb devices if the firmware is
+	already loaded
+	don't screw up eagle-usb devices if the firmware is already loaded
+
+	* standalone/drakroam: remember 'restricted' wireless mode
+	don't crash if mandi isn't started
+
+2005/11/15  Pixel  <pixel at mandriva.com>
+
+	* fs/mount_options.pm: handle "users" the way "user" is handled
+	handle "users" the way "user" is handled
+
+	* diskdrake/interactive.pm: handle "users" the way "user" is handled
+
+	* printer/main.pm, printer/printerdrake.pm: adapt to new cat_() only
+	accepting files, ie not doing popen anymore
+
+2005/11/15  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+
+2005/11/14  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/drakroam: remember 'restricted' wireless mode
+	don't crash if mandi isn't started
+
+2005/11/14  Pixel  <pixel at mandriva.com>
+
+	* share/upgrade/conectiva.10/map: fix upgrading conectivaoffice pkg
+	(bugzilla #18948)
+	fix upgrading conectivaoffice pkg (bugzilla #18948)
+
+2005/11/14  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/11/12  Olivier Blin <oblin at mandriva.com>
+
+	* network/monitor.pm: fix wireless network list using iwlist (`` returns a
+	defined empty string if the command fails)
+	fix wireless network list using iwlist (`` returns a defined empty
+	string if the command fails)
+
+2005/11/10  Pixel  <pixel at mandriva.com>
+
+	* fs/dmraid.pm: when calling dmraid, replace -ccs and -ccr with -s -c -c
+	and -r -c -c
+	(the former doesn't work anymore with dmraid 1.0.0 RC9) (cf #19654,
+	thanks a lot to Thomas Backlund)
+	when calling dmraid, replace -ccs and -ccr with -s -c -c and -r -c -c
+	(the former doesn't work anymore with dmraid 1.0.0 RC9) (cf #19654,
+	thanks a lot to Thomas Backlund)
+
+	* rescue/tree/etc/rc.sysinit, rescue/list.xml: minimal i18n support
+
+	* rescue/partimage_whole_disk: configure network if needed
+	new option (bzip2), enabled by default
+
+	* rescue/make_rescue_img: partimage_whole_disk takes care of configuring
+	network when needed
+	minimal i18n support
+
+2005/11/08  Olivier Blin <oblin at mandriva.com>
+
+	* network/ethernet.pm: handle zd1201 as well
+	fix zd1201 devices detection as well
+
+2005/11/08  Pixel  <pixel at mandriva.com>
+
+	* fsedit.pm: do not call dmraid init() by default, call it explictly (it
+	helps patching dmraid)
+
+	* fs/dmraid.pm: do not call dmraid init() by default, call it explictly
+	(it helps patching dmraid)
+	log is mixed with valid data (bugzilla #19654)
+	log is mixed with valid data (bugzilla #19654)
+
+	* patch/patch-2006-fix-parsing-dmraid.pl: log is mixed with valid data
+	(bugzilla #19654)
+
+2005/11/08  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.3-0.1.20060mdk
+
+2005/11/07  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: don't let interfaces with unknown drivers be
+	configured
+
+	* network/ethernet.pm: fix rt2400/rt2500 devices detection (workaround for
+	their missing "device" link in sysfs)
+
+	* standalone/net_applet: use disconnected icon if no route, even if wifi
+	is associated
+
+	* network/network.pm: don't duplicate variables (MTU, NETMASK, IPADDR) in
+	ifcfg files (#19325)
+	temporary workaround to have device-independant config files in
+	wireless.d
+	set hostname only after packages have been installed, or else graphical
+	urpmi may fail
+
+	* network/monitor.pm: don't log wpa_cli/iwgetid/iwlist commands
+
+2005/11/07  Pixel  <pixel at mandriva.com>
+
+	* drakxtools.spec: add "Requires: perl-suid" for fileshareset and
+	filesharelist (bugzilla #17123)
+
+2005/11/07  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.4-0.3mdk
+	add bug reference in requires explanations
+
+	* share/po/br.po: update
+	update translations from TRUNK
+
+	* share/po/ms.po, share/po/zh_TW.po, share/po/wa.po: update translations
+	from TRUNK
+
+	* detect_devices.pm (getSagem) handle new ueagle-atm driver
+
+	* Xconfig/card.pm (install_server) properly handle switch between nvidia &
+	nvidia_legacy: prevent
+	having both nvidia_legacy-kerne and nvidia-kernel, thus resulting in
+	having two
+	drivers with the same name:
+	The following packages have to be removed for others to be upgraded:
+	nvidia-7676-5mdk.i586 (en raison de conflit avec
+	nvidia_legacy-7174-3mdk.i586)
+	installing nvidia_legacy-7174-3mdk.i586.rpm
+	nvidia_legacy-kernel-2.6.12-12mdk-7174-1mdk.i586.rpm from //mnt/disk/bin
+	lemel nvidia-7676-5mdk.i586
+	Emaon o prientiñ ...
+	#############################################
+	      1/2: nvidia_legacy
+	#############################################
+	
+	Relaunch XFdrake to configure your NVidia cards
+	warning: /etc/ld.so.conf.d/nvidia.conf saved as
+	/etc/ld.so.conf.d/nvidia.conf.rpmsave
+	      2/2:
+	nvidia_legacy-kernel-2.6.12-12mdk#############################################
+	
+	Error! This module/version combo is already installed
+	for kernel: 2.6.12-12mdk (i586)
+	nvidia_legacy, 7174, 2.6.12-12mdk, i586: installed  (WARNING! Diff
+	between built and installed module!)
+	
+	root@du mdk/gi/perl-install # rpm -qa nvidia\*
+	nvidia_legacy-kernel-2.6.12-12mdk-7174-1mdk
+	nvidia-kernel-2.6.12-12mdk-7676-1mdk
+	nvidia_legacy-7174-3mdk
+
+2005/11/05  Olivier Blin <oblin at mandriva.com>
+
+	* network/monitor.pm: don't log wpa_cli/iwgetid/iwlist commands
+
+2005/11/04  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: use $wnet variable name to disambiguate wireless
+	network and global net settings
+
+	* network/network.pm: don't duplicate variables (MTU, NETMASK, IPADDR) in
+	ifcfg files (#19325)
+
+	* network/ifw.pm: make sure Net::DBus::Binding::Value is loaded
+
+2005/11/04  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* authentication.pm: perl_checko cleanup
+	(set_raw) restart ypbind in install too (killing old todo)
+
+	* drakxtools.spec: use mkrel
+
+	* install_steps.pm, install_any.pm (is_network_install) use it whenever
+	possible
+
+2005/11/03  Olivier Blin <oblin at mandriva.com>
+
+	* network/network.pm: make it more readable
+
+2005/11/03  Pixel  <pixel at mandriva.com>
+
+	* run_program.pm: don't use /root/tmp if /root doesn't exist (fixes using
+	it in rescue)
+
+2005/11/02  berthy
+
+	* share/po/fr.po: Updated French translation
+
+2005/11/02  Olivier Blin <oblin at mandriva.com>
+
+	* network/network.pm: temporary workaround to have device-independant
+	config files in wireless.d
+	fix typo (thanks to Berthy)
+
+2005/10/31  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - Fixed setting up printers with pre-made Foomatic PPD in
+	/usr/share/cups/model (bug #19524).
+
+2005/10/29  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/10/28  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/10/28  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/wa.po: updated Walloon file
+
+2005/10/27  Olivier Blin <oblin at mandriva.com>
+
+	* network/netconnect.pm: don't let interfaces with unknown drivers be
+	configured
+
+	* network/ethernet.pm: crappy workaround for rt2400/rt2500 and their
+	missing "device" link in sysfs
+	fix typo
+	use standard 'mac' modifier in iftab for IEEE1394, EUI64 and IRDA
+
+2005/10/25  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2005/10/24  renato
+
+	* share/po/pt_BR.po: 1 fuzzy and 1 not translated strings.1 fuzzy and 1
+	not translated strings.1 fuzzy and 1 not translated strings.1 fuzzy and
+	1 not translated strings.1 fuzzy and 1 not translated strings.1 fuzzy
+	and 1 not translated strings.1 fuzzy and 1 not translated strings.1
+	fuzzy and 1 not translated strings.1 fuzzy and 1 not translated
+	strings.1 fuzzy and 1 not translated strings.1 fuzzy and 1 not
+	translated strings.
+
+2005/10/24  willysr
+
+	* share/po/id.po: Updated Contact Info
+
+2005/10/23  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/10/23  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2005/10/22  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/10/22  tbednarski
+
+	* share/po/pl.po: Translation update
+
+2005/10/21  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/initscripts/po/da.po gi/perl-install/share/po/da.po
+
+2005/10/21  Pixel  <pixel at mandriva.com>
+
+	* Xconfig/card.pm: safer
+	simplify (and make it more robust)
+	make it more easier to understand
+	ensure we don't load both "/usr/X11R6/lib/modules/extensions/libglx.so"
+	and "/usr/X11R6/lib/modules/extensions/nvidia/libglx.so"
+	(backported from HEAD) (bugzilla #19285)
+
+2005/10/20  neoclust
+
+	* share/po/fr.po: Updated French translation
+
+2005/10/20  Pixel  <pixel at mandriva.com>
+
+	* rescue/make_rescue_img: reboot if things went nicely
+	fix reboot by creating /dev/initctl (what's this??)
+	(it was broken when called in rc.sysinit, it was working otherwise)
+
+	* pkgs.pm: old perl_checker compliance
+
+	* printer/detect.pm: old perl_checker compliance
+	old perl_checker compliance
+
+	* .perl_checker: need this to build po
+
+	* rescue/partimage_whole_disk: reboot if things went nicely
+	install_bootloader should succeed otherwise it's an error
+	make install_bootloader non interactive
+	add ability to keep existing /home (as requested by miura)
+	simplify (remove code choosing best master to restore from)
+	make it an option to keep empty_space_at_end_of_disk
+
+	* drakxtools.spec: add "Requires: perl-suid" for fileshareset and
+	filesharelist (bugzilla #17123)
+
+	* rescue/install_bootloader: doesn't display prompt if auto
+	add option --auto to install without prompting
+
+2005/10/20  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Fix test for dangling symlink
+
+2005/10/20  tbednarski
+
+	* share/po/pl.po: Translation updates
+
+2005/10/20  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm: 
+	  - perl_checker fix.
+	  - Updated printerdrake to the state of Mandriva 2006:
+	o HPLIP support
+	   o Gutenprint support
+	   o support for several other new drivers
+	   o Printer communication error handling
+	   o Main window of printerdrake comes up faster
+	   o Many bug fixes and detail improvements
+
+	* printer/cups.pm, printer/detect.pm, printer/data.pm,
+	standalone/printerdrake, printer/office.pm, printer/default.pm,
+	printer/services.pm, printer/printerdrake.pm, printer/gimp.pm: 
+	  - Updated printerdrake to the state of Mandriva 2006:
+	o HPLIP support
+	   o Gutenprint support
+	   o support for several other new drivers
+	   o Printer communication error handling
+	   o Main window of printerdrake comes up faster
+	   o Many bug fixes and detail improvements
+
+2005/10/20  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: update
+
+2005/10/19  Daouda Lo  <daouda at mandriva.com>
+
+	* standalone/harddrake2: 
+	  - use drakfirstboot wizard instead of mdkonline
+
+2005/10/19  Pixel  <pixel at mandriva.com>
+
+	* install_interactive.pm: more meaningful message (bugzilla #19249)
+
+	* docs/comparisons: fix typo
+
+	* fsedit.pm: increase "/" maxsize (bugzilla #19353)
+
+2005/10/18  neoclust
+
+	* share/po/fr.po: Updated French translation
+
+2005/10/18  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: perl_checker fix
+
+2005/10/18  Pixel  <pixel at mandriva.com>
+
+	* raid.pm: "mdadm --detail --brief" doesn't contain "devices=..." anymore
+	(since mdadm 1.12.0),
+	it needs option "-v" to keep previous behaviour
+	"mdadm --detail --brief" doesn't contain "devices=..." anymore (since
+	mdadm 1.12.0),
+	it needs option "-v" to keep previous behaviour
+
+	* c/stuff.xs.pl, c/Makefile.PL, fsedit.pm: use vol_id to find device type
+	(fs_type and pt_type)
+
+	* fs/type.pm: use vol_id to find device type (fs_type and pt_type)
+	separate hpfs and ntfs entries (even if they both use the same type id
+	in partition table) (bugzilla #19322)
+	(and also remove the special ppc case which is useless inside a
+	/^i.86|x86_64/ condition)
+
+	* patch/patch-2006-existing-md.pl: "mdadm --detail --brief" doesn't
+	contain "devices=..." anymore (since mdadm 1.12.0),
+	it needs option "-v" to keep previous behaviour
+
+2005/10/18  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: 10.4-0.2mdk
+
+	* bootsplash.pm: perl_checker cleanups
+
+	* harddrake/sound.pm: perl_checko cleanup
+
+	* standalone/harddrake2: do not merge AGP section into BRIDGES one
+	(translation is availlable for quite a long time)
+	Club integration for proprietary drivers: offer to subscribe to Mandriva
+	Club
+	if some proprietary packages are needed and are not availlable, thus
+	allowing
+	automatic download/installation of proprietary drivers from Club
+
+2005/10/17  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/10/17  Olivier Blin <oblin at mandriva.com>
+
+	* standalone/net_applet: use disconnected icon if no route, even if wifi
+	is associated
+
+2005/10/17  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* drakxtools.spec: also describe drakconnect changes in 10.4-0.1mdk's
+	changelog
+	10.4-0.1mdk
+
+	* harddrake/sound.pm: make it somewhat clearer
+	do display the driver description (#5403)
+
+	* share/po/br.po: update
+
+2005/10/17  willysr
+
+	* share/po/id.po: Updated
+
+2005/10/15  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file.
+
+2005/10/14  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/10/12  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/drakperm, commands, harddrake/data.pm: perl_checker cleanup
+
+	* standalone/service_harddrake: add a couple comments
+
+2005/10/10  mareklaane
+
+	* share/po/et.po: Updated Estonian translation.
+
+2005/10/10  Olivier Blin <oblin at mandriva.com>
+
+	* share/po/fr.po: fix typo (reported by PierreLag)
+
+2005/10/10  Pixel  <pixel at mandriva.com>
+
+	* patch/patch-2006-no-dmraid.pl: option "nodmraid" is broken in mdv2006
+
+	* install2.pm: fix typo
+
+2005/10/10  renato
+
+	* share/po/pt_BR.po: Solved some fuzzy and not translated strings.
+
+2005/10/09  willysr
+
+	* share/po/id.po: Updated
+
+2005/10/08  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file
+
+	* share/po/DrakX.pot: Updated POT file.
+
+2005/10/07  Pixel  <pixel at mandriva.com>
+
+	* run_program.pm: fix buggy previous commit, cleanup and correctly indent.
+	previous commit was:
+	do not clober output files (stdout or stderr) when binary cannot be
+	found (#18987)
+
+2005/10/07  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* run_program.pm: fix previous commit so that "prog1|prog2" like
+	construction still work
+	(raw) do not clober output files (stdout or stderr) when binary cannot
+	be found (#18987)
+
+	* network/network.pm (miscellaneous_choose) try harder to explain (#17261)
+
+2005/10/06  Pixel  <pixel at mandriva.com>
+
+	* rescue/partimage_whole_disk: fix (same behaviour as before, but option
+	save_home_directory really mean what it says)
+
+	* Xconfig/card.pm: remove duplicate case
+
+2005/10/06  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/rpmsrate, lang.pm: scim-anthy-0.7 needs kasumi
+
+	* Xconfig/card.pm (libgl_config)
+	  - handle nvidia_legacy
+	  - don't create files (and thus don't run ldconfig when not needed)
+	(to_raw_X) make it more readable and ensure only one glx is loaded:
+	  - factorize test
+	  - set_load_module with test on DRI_GLX_SPECIAL doesn't work when
+	DRI_GLX_SPECIAL isn't set
+	  o remove vendor's glx when DRI_GLX_SPECIAL is not set
+	(to_raw_X, install_server) fix X11 segfaulting with nvidia driver, aka
+	prevent
+	loading both Xorg's glx and nvidia's glx
+	(also prevent glixinfo from segfaulting when using nv driver while
+	nvidia
+	packages're installed btw)
+
+	* modules/interactive.pm (config_window) properly report no configurable
+	parameter (#17579)
+
+2005/10/05  Pixel  <pixel at mandriva.com>
+
+	* rescue/make_partimage_save_rest_all: acpi=ht is bad on some boxes (=>
+	sata_sis not working)
+
+	* Xconfig/card.pm: don't modify /etc/ld.so.conf.d/{nvidia,ati}.conf if
+	file does not exist
+	(otherwise at package install time, one gets a .rpmnew)
+	don't modify /etc/ld.so.conf.d/{nvidia,ati}.conf if file does not exist
+	(otherwise at package install time, one gets a .rpmnew)
+
+2005/10/05  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* detect_devices.pm (get_sysfs_usbpath_for_block) introduce it in order to
+	factorize code
+	(complete_usb_storage_info) use sane way for handling multiple USB disks
+	of the
+	same vendor (aka compare hosts)
+
+2005/10/03  Olivier Blin <oblin at mandriva.com>
+
+	* network/thirdparty.pm: use /lib/firmware as default firmware directory
+
+2005/10/03  Pixel  <pixel at mandriva.com>
+
+	* patch/patch-2006-new-dmraid.pl: allow using an updated dmraid
+
+2005/10/03  tbednarski
+
+	* share/po/pl.po: Translation updates
+
+2005/10/03  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* install_any.pm (default_packages) install powernowd on x86_64 (since
+	they've the cool&quiet technology) and athcool on athlon32
+	(default_packages) "alsa" doesn't exists
+
+	* modules/any_conf.pm (read_raw) explain (ie add comments)
+
+2005/10/02  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2005/10/01  pjetur
+
+	* share/po/is.po: Small consistency changes
+
+2005/09/30  Pixel  <pixel at mandriva.com>
+
+	* standalone/drakhelp: fallback nicely, trying english if i18n doc not
+	available
+	(need a change in ctxhelp, but won't fail worse than current behaviour
+	without it)
+	cleanup
+
+2005/09/29  David Baudens  <baudens at mandriva.com>
+
+	* share/rpmsrate: Add stellarium
+
+2005/09/29  renato
+
+	* share/po/pt_BR.po: 3 errors in pt_BR for drakconf.po.
+
+2005/09/29  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* standalone/service_harddrake: nvidia installer now uses a new place
+
+2005/09/28  Antoine Ginies  <aginies at mandriva.com> 
+
+	* standalone/draksambashare: test if /etc/sysconfig/wizard_samba exist
+	(commented)
+
+2005/09/28  Olivier Blin <oblin at mandriva.com>
+
+	* network/ndiswrapper.pm: simplify
+
+2005/09/28  tbednarski
+
+	* share/po/pl.po: Translation updates
+	Some translation corrections
+
+2005/09/28  Till Kamppeter  <till at mandriva.com>
+
+	* printer/main.pm, printer/detect.pm, standalone/printerdrake,
+	printer/printerdrake.pm: 
+	  - Let parallel HP printers be set up with HPLIP.
+	  - Removed HPOJ support (HPOJ obsolete, now completely replaced by
+	HPLIP).
+	  - Warn the user if an HP printer is connected via a port which is not
+	supported by HPLIP.
+	  - Fixed printerdrake freezing when choosing a machine as remote CUPS
+	  server (for daemon-less client) which does not exist or does not run
+	  CUPS.
+	  - Let network printer detection also work if the DNS is misconfigured.
+	  - Let "Printer options" entry in printer editing menu only disapppear
+	  if there are really no options (entry disappeared also for Sagem
+	  MF3625 with empty manufacturer name in the PPD).
+	  - Fixed raw queue being shown with "driver: PPD" and not "driver:
+	raw".
+	  - Do not use "Unknown model" and "Unknown Model", this somtimes broke
+	  identifying a print queue as being for an unknown printer.
+	  - Do not die if /usr/share/hplip/data/xml/models.xml (HPLIP printer
+	  database) is missing, this allows creation of live distros without
+	  HPLIP.
+	  - Fixed loop of determining the HPLIP device URI for local printers in
+	  the "printer::main::start_hplip()" function.
+	  - Let parallel HP printers be set up with HPLIP.
+	  - Removed HPOJ support (HPOJ obsolete, now completely replaced by
+	HPLIP).
+	  - Warn the user if an HP printer is connected via a port which is not
+	  supported by HPLIP.
+	  - Fixed printerdrake freezing when choosing a machine as remote CUPS
+	  server (for daemon-less client) which does not exist or does not run
+	  CUPS.
+	  - Let network printer detection also work if the DNS is misconfigured.
+	  - Let "Printer options" entry in printer editing menu only disapppear
+	  if there are really no options (entry disappeared also for Sagem
+	  MF3625 with empty manufacturer name in the PPD).
+	  - Fixed raw queue being shown with "driver: PPD" and not "driver:
+	raw".
+	  - Do not use "Unknown model" and "Unknown Model", this somtimes broke
+	  identifying a print queue as being for an unknown printer.
+	  - Do not die if /usr/share/hplip/data/xml/models.xml (HPLIP printer
+	  database) is missing, this allows creation of live distros without
+	  HPLIP.
+	  - Fixed loop of determining the HPLIP device URI for local printers in
+	  the "printer::main::start_hplip()" function.
+
+	* share/rpmsrate: 
+	  - Removed HPOJ and subpackages from rpmsrate (obsolete, replaced by
+	HPLIP).
+	  - Removed mtoolsfm from rpmsrate (was only needed by HPOJ).
+
+2005/09/27  Pablo Saratxaga  <pablo at mandriva.com>
+
+	* share/po/pt.po: fixed end of line
+
+2005/09/27  Pixel  <pixel at mandriva.com>
+
+	* Xconfig/monitor.pm: backport 1.43 fix: add missing chomp_
+
+	* authentication.pm: cleanup, and especially call ensure_are_installed
+	with parameter "auto" during install
+	(esp. to fix calling authentication::set with $o which is not
+	interactive)
+
+	* patch/patch-2006-auto_install_LDAP_auth.pl: fix error calling
+	ask_okcancel on object install_steps_auto_install when setting LDAP
+	authentication
+
+	* do_pkgs.pm: ensure we don't prompt things when we are not interactive
+	get rid of "rpmq: no arguments given for query"
+	(eg: when calling ensure_are_installed with an empty list)
+
+2005/09/27  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Avoid wiping out user cron
+
+2005/09/27  tbednarski
+
+	* share/po/pl.po: Some translation corrections
+
+2005/09/27  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* any.pm (autologin) always show the autologing config step for
+	globetrotter
+	(autologin) always enable autologin on globetrotter
+	(autologin) always show the autologing config step for globetrotter
+	(autologin) always enable autologin on globetrotter
+
+	* install2.pm (main) do not stop bootsplash on globetrotter
+	(main) do not stop bootsplash on globetrotter
+
+2005/09/26  Pixel  <pixel at mandriva.com>
+
+	* authentication.pm: 
+	  - password entry field should not show the password (bugzilla #18800)
+	  - fix typo
+
+	* bootloader.pm: use compact by default, it is strongly suggested in
+	lilo's documentation even
+	if it can lead to bios issues.
+	to be disabled if it causes pbs
+
+2005/09/26  Rafael Garcia-Suarez <rgarciasuarez at mandriva.com>
+
+	* pkgs.pm: Comment fix
+
+2005/09/26  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakTermServ: Install mkisofs if needed. Refuse to creates
+	images without a NIC.
+
+	* standalone/drakbackup: Add EA (xattr) to star
+	Optional view restore log
+	Redo compression flag set code
+	Extended ACL support user star (#17761)
+	Multiple email recipients (user requested feature)
+	Code cleanups, use do_pkgs->install
+	Fix bug on restore with file in 2 archives
+
+2005/09/26  tbednarski
+
+	* share/po/pl.po: Some translation corrections
+	Some translations corrections
+	Some corrections
+
+2005/09/26  willysr
+
+	* share/po/id.po: Updated
+
+2005/09/25  huftis
+
+	* share/po/nn.po: Updated translations.
+
+2005/09/25  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Fix mis-sorted progress bars
+	Fix mis-sorted progress bars
+	Fix mis-sorted progress bars
+	Fix mis-sorted progress bars
+
+2005/09/25  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/pl.po: fix obviously wrong translation (#18831)
+
+2005/09/24  Stew Benedict  <sbenedict at mandriva.com>
+
+	* standalone/drakbackup: Profile support (#17566)
+	Enhance cron support
+	o weekday ranges (#18290)
+	  o multiple cron jobs
+	  o use profiles
+
+2005/09/24  xalba
+
+	* share/po/eu.po: 20 itzulpen falta dira.
+
+2005/09/23  Frederic Lepied  <flepied at mandriva.com>
+
+	* share/po/it.po, share/po/es.po, share/po/fr.po, share/po/de.po: fixed
+	translation for the skype string
+
+2005/09/23  pjetur
+
+	* share/po/is.po: Almost done
+
+2005/09/23  tbednarski
+
+	* share/po/pl.po: Some corrections
+
+2005/09/23  Thierry Vignaud  <tvignaud at mandriva.com>
+
+	* share/po/br.po: 
+	  - fix skype ad
+	  - translate a few more ads
+
 2005/09/23  Frederic Lepied  <flepied at mandriva.com>
 
 	* share/po/it.po, share/po/es.po, share/po/fr.po, share/po/de.po: fixed
