@@ -407,14 +407,19 @@ sub netprofile_read {
 sub miscellaneous_choose {
     my ($in, $u) = @_;
 
+    my $use_http_for_https = $u->{https_proxy} eq $u->{http_proxy};
     $in->ask_from(N("Proxies configuration"),
        N("Here you can set up your proxies configuration (eg: http://my_caching_server:8080)"),
        [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
+         { text => N("Use HTTP proxy for HTTPS connections"), val => \$use_http_for_https, type => "bool" },
+         { label => N("HTTPS proxy"), val => \$u->{https_proxy}, disabled => sub { $use_http_for_https } },
          { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
        ],
        complete => sub {
+           $use_http_for_https and $u->{https_proxy} = $u->{http_proxy};
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be http://...")), return 1,0;
-	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,1;
+	   $u->{https_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be https?://...")), return 1,2;
+	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,3;
 	   0;
        }
     ) or return;
@@ -424,10 +429,10 @@ sub miscellaneous_choose {
 sub proxy_configure {
     my ($u) = @_;
     my $sh_file = "$::prefix/etc/profile.d/proxy.sh";
-    setExportedVarsInSh($sh_file,  $u, qw(http_proxy ftp_proxy));
+    setExportedVarsInSh($sh_file, $u, qw(http_proxy https_proxy ftp_proxy));
     chmod 0755, $sh_file;
     my $csh_file = "$::prefix/etc/profile.d/proxy.csh";
-    setExportedVarsInCsh($csh_file, $u, qw(http_proxy ftp_proxy));
+    setExportedVarsInCsh($csh_file, $u, qw(http_proxy https_proxy ftp_proxy));
     chmod 0755, $csh_file;
 
     #- KDE proxy settings
@@ -441,10 +446,10 @@ sub proxy_configure {
         update_gnomekderc($kde_config_file,
                           "Proxy Settings",
                           AuthMode => 0,
-                          ProxyType => $u->{http_proxy} || $u->{ftp_proxy} ? 4 : 0,
+                          ProxyType => $u->{http_proxy} || $u->{https_proxy} || $u->{ftp_proxy} ? 4 : 0,
                           ftpProxy => "ftp_proxy",
                           httpProxy => "http_proxy",
-                          httpsProxy => "http_proxy"
+                          httpsProxy => "https_proxy"
                   );
     }
 
@@ -475,13 +480,17 @@ xml:readonly:$defaults_dir
             $gconf_set->("/system/http_proxy/use_authentication", "bool", to_bool($user));
             $user and $gconf_set->("/system/http_proxy/authentication_user", "string", $user);
             $password and $gconf_set->("/system/http_proxy/authentication_password", "string", $password);
-
-            #- https proxy (ssl)
-            $gconf_set->("/system/proxy/secure_host", "string", $host);
-            $gconf_set->("/system/proxy/secure_port", "int", $port);
-            $use_alternate_proxy = 1;
         } else {
             $gconf_set->("/system/http_proxy/use_http_proxy", "bool", 0);
+        }
+
+        #- https proxy
+        if (my ($host, $port) = $u->{https_proxy} =~ m,^https?://(?:[^:\@]+(?::[^:\@]+)?\@)?([^\:]+)(?::(\d+))?$,) {
+            $port ||= 443;
+            $gconf_set->("/system/proxy/secure_host", "string", $host);
+            $gconf_set->("/system/proxy/secure_port",  "int", $port);
+            $use_alternate_proxy = 1;
+        } else {
             #- clear the ssl host so that it isn't used if the manual proxy is activated for ftp
             $gconf_set->("/system/proxy/secure_host", "string", "");
         }
@@ -489,7 +498,6 @@ xml:readonly:$defaults_dir
         #- ftp proxy
         if (my ($host, $port) = $u->{ftp_proxy} =~ m,^(?:http|ftp)://(?:[^:\@]+(?::[^:\@]+)?\@)?([^\:]+)(?::(\d+))?$,) {
             $port ||= 21;
-            $gconf_set->("/system/proxy/mode", "string", "manual");
             $gconf_set->("/system/proxy/ftp_host", "string", $host);
             $gconf_set->("/system/proxy/ftp_port",  "int", $port);
             $use_alternate_proxy = 1;
