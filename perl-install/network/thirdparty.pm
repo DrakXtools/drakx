@@ -207,6 +207,7 @@ my %network_settings = (
     name => 'madwifi',
     kernel_module => 1,
     tools => {
+	optionnal => 1,
 	test_file => '/usr/bin/athstats',
     },
    },
@@ -266,6 +267,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
         test_file => 'unicorn_.*_atm',
     },
     tools => {
+	optionnal => 1,
 	test_file => '/usr/bin/bewan_adsl_status',
     },
    },
@@ -464,7 +466,8 @@ sub install_packages {
 	if (my @packages = $get_method->('get_packages')->($name)) {
 	    log::explanations("Installing thirdparty packages ($option) " . join(', ', @packages));
 	    if (!$in->do_pkgs->install(@packages)) {
-		warn_not_installed($in, @packages);
+		 next if ref $settings->{$option} eq 'HASH' && $settings->{$option}{optionnal};
+		 warn_not_installed($in, @packages);
 	    } elsif ($get_method->('check_installed')->()) {
 		next;
 	    }
