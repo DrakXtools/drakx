@@ -291,8 +291,9 @@ user "$net->{adsl}{login}"
         DEVICE => 'ppp0',
         TYPE => 'ADSL',
         METRIC => $metric,
-        ONBOOT => 'yes', #- will be modified later in netconnect if requested
     }) unless member($adsl_type, qw(static dhcp));
+    #- don't overwrite ONBOOT setting, it may have been handled earlier in netconnect
+    $net->{ifcfg}{ppp0}{ONBOOT} ||= 'yes';
 
     #- remove file used with sagem for dhcp/static connections
     unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");
