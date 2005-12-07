@@ -469,7 +469,8 @@ sub record_master {
             }
         }
         run_('umount', $live->{mnt});
-        run_("syslinux $device") or die "unable to run syslinux on $device";
+        #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX
+        run_('syslinux', '-s', $device) or die "unable to run syslinux on $device";
     } else {
         warn "not implemented yet";
     }
