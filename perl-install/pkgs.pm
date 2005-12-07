@@ -194,6 +194,7 @@ sub bestKernelPackage {
 	@kernels = @l;
     }
     my @preferred_exts =
+      $::o->{build_live_system} ? '-i586-up-1GB' :
       $::build_globetrotter ? '' :
       detect_devices::is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
