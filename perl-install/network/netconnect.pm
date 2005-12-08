@@ -889,9 +889,8 @@ If you do not know it, keep the preselected type."),
                    {
                     pre => sub  {
                         $find_lan_module->();
-                        my $intf_type = member($module, list_modules::category2modules('network/gigabit')) ? "ethernet_gigabit" : "ethernet";
-                        defined($ethntf->{METRIC}) or $ethntf->{METRIC} = network::tools::get_default_metric($intf_type);
-
+                        $ethntf->{METRIC} = network::tools::get_default_metric(network::tools::get_interface_type($ethntf, $module))
+                          unless defined($ethntf->{METRIC});
                         $protocol = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') : $ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 

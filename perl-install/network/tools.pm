@@ -208,13 +208,14 @@ sub get_internet_connection {
 }
 
 sub get_interface_type {
-    my ($interface) = @_;
+    my ($interface, $o_module) = @_;
     require detect_devices;
     member($interface->{TYPE}, "xDSL", "ADSL") && "adsl" ||
     $interface->{DEVICE} =~ /^ippp/ && "isdn" ||
     $interface->{DEVICE} =~ /^ppp/ && "modem" ||
     (detect_devices::is_wireless_interface($interface->{DEVICE}) || exists $interface->{WIRELESS_MODE}) && "wifi" ||
-    detect_devices::is_lan_interface($interface->{DEVICE}) && "ethernet" ||
+    detect_devices::is_lan_interface($interface->{DEVICE}) &&
+        ($o_module && member($o_module, list_modules::category2modules('network/gigabit')) ? "ethernet_gigabit" : "ethernet") ||
     "unknown";
 }
 
