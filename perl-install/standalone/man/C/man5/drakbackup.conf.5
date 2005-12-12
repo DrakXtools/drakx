@@ -1,5 +1,5 @@
 .\" 
-.TH drakbackup.conf 5 "March 2004" Mandrakesoft "System Utilities"
+.TH drakbackup.conf 5 "December 2005" Mandriva "System Utilities"
 .SH NAME 
 drakbackup.conf
 
@@ -37,6 +37,9 @@ The default configuration file is located in:
 .B 
  BACKUPIGNORE
    Honor .backupignore files in backup directories.
+.B
+ ARCHIVER
+   Choice of 'tar' or 'star'. Star provides support for ACLs (Access Control Lists).
 .B 
  OPTION_COMP
    Compression option (tar.gz, tar.bz2, tar \- tar.gz is default).
@@ -48,7 +51,7 @@ The default configuration file is located in:
    Backup media is re\-writable CD.
 .B 
  DVDR
-   Backup media is recordable DVD (not fully supported yet).
+   Backup media is recordable DVD.
 .B 
  DVDRW
    Backup media is recordable DVD+RW.
@@ -57,7 +60,7 @@ The default configuration file is located in:
    Backup media is DVDRAM (not fully supported yet).
 .B 
  NET_PROTO
-   Network protocol to use for remote backups: (ftp, rsync, ssh, or webdav)
+   Network protocol to use for remote backups: (ftp, rsync, ssh)
 .B 
  HOST_NAME
    Remote backup host.
@@ -99,6 +102,9 @@ The default configuration file is located in:
 .B 
  MAX_SPACE
    Maximum Hard Drive Space(MB) to consume for backups. 
+.B
+ DEL_OLD
+   Delete backups older than the given number of days on a new backup run.
 .B 
  USE_CD
    Use CD for backups.
@@ -126,9 +132,12 @@ The default configuration file is located in:
 .B 
  CD_DEVICE
    Cdrecord style CD device name (ie: 1,3,0, or ATAPI:/dev/hdc).
+.B
+ FROM_MAIL
+   The return address that will be used for backup mail messages.
 .B 
  USER_MAIL
-   User to send backup results to via email.
+   User to send backup results to via email. (Can be a comma seperated list of addresses).
 .B
  SMTP_SERVER
    Mail server to use for sending mail.
@@ -171,10 +180,14 @@ The default configuration file is located in:
 .B 
  CRITICAL_SYS
    Do backup above system files.
+.B
+ VIEW_RESTORE_LOG
+   Enables display of the restore process log after a restore operation.
 
 .SH "SEE ALSO"
-/usr/share/doc/mandrake/en/Drakxtools-Guide.html/drakbackup.html
+.BR drakbackup (5),
+.BR /usr/share/doc/mandrake/en/Drakxtools-Guide.html/drakbackup.html
 
 .SH AUTHOR
-Stew Benedict <sbenedict@mandrakesoft.com>
+Stew Benedict <sbenedict@mandriva.com>
 

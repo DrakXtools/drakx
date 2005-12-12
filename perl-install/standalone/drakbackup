@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-#  Copyright (C) 2001-2005 Mandriva by Sebastien DUPONT <dupont_s@epita.fr>
+#  Copyright (C) 2001,2002,2003,2004,2005 Mandriva by Sebastien DUPONT <dupont_s@epita.fr>
 #  Updated 2002-2005 by Stew Benedict <sbenedict@mandriva.com>
 #  Redistribution of this file is permitted under the terms of the GNU
 #  Public License (GPL)
@@ -380,9 +380,8 @@ sub read_cron_files() {
 }
 
 sub read_user_cron() {
-		$custom_cron = 1;
-		@cron_entries = `crontab -l`;
-		chomp @cron_entries;
+	@cron_entries = `crontab -l`;
+	chomp @cron_entries;
 }
 
 sub save_cron_files() {
@@ -2061,7 +2060,7 @@ sub advanced_where() {
 
 sub advanced_when() {
     my $box_when;
-	my $allow_custom = $backup_daemon && $custom_cron; 
+	my $allow_custom = $backup_daemon && $custom_cron;
     my $combo_when_space = Gtk2::ComboBox->new_with_strings([ "", N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom") ]);
     my %trans = (N("hourly") => 'hourly',
 		N("daily") => 'daily',
@@ -2240,27 +2239,41 @@ sub advanced_when() {
 		$conf{DAEMON_TIME_SPACE} = $trans{$combo_when_space->entry->get_text}; 
 		$custom_cron = $conf{DAEMON_TIME_SPACE} eq "custom" ? 1 : 0;
 		destroy_widget();
-		advanced_when();		
+		advanced_when();
 	});
 	if ($custom_cron) {
 		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
 	}
 	
-	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text, 0) });
-	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_text, 1) });
-	$combo_day_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_day_when->get_text, 2) });	
-	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_active, 3) });
+	$combo_minute_when->entry->signal_connect('changed', sub { 
+		combo_to_cron_string($combo_minute_when->get_text, 0);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
+	});
+	$combo_hour_when->entry->signal_connect('changed', sub { 
+		combo_to_cron_string($combo_hour_when->get_text, 1);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
+	});
+	$combo_day_when->entry->signal_connect('changed', sub {	
+		combo_to_cron_string($combo_day_when->get_text, 2);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
+	});	
+	$combo_month_when->entry->signal_connect('changed', sub { 
+		combo_to_cron_string($combo_month_when->get_active, 3);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string");
+	});
 	$combo_weekday_start->entry->signal_connect('changed', sub {
 		my $start = $combo_weekday_start->get_active - 1;
 		my $end = $combo_weekday_end->get_active - 1;
 		$start = $start . "-" . $end if $end > -1 && $start < $end; 
-		combo_to_cron_string($start, 4); 
+		combo_to_cron_string($start, 4);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string"); 
 	});
 	$combo_weekday_end->entry->signal_connect('changed', sub {
 		my $start = $combo_weekday_start->get_active - 1;
 		my $end = $combo_weekday_end->get_active - 1;
 		$start = $start . "-" . $end if $start > -1 && $start < $end; 
-		combo_to_cron_string($start, 4);   
+		combo_to_cron_string($start, 4);
+		$entry_crontab->set_text("$time_string $exec_string $profile_string $redir_string"); 
 	});
 	$combo_profile->entry->signal_connect('changed', sub {
 		$profile_string = "--profile " . $combo_profile->get_text;
@@ -2279,8 +2292,6 @@ sub combo_to_cron_string {
 	my @time_list = split(" ", $time_string);
 	splice(@time_list, $location, 1, $field);
 	$time_string = join(" ", @time_list);
-	destroy_widget();
-	advanced_when();				
 }
 
 sub advanced_options() {
