@@ -627,8 +627,15 @@ sub read_rpmsrate {
     
     foreach (keys %$flags) {
 	my $p = packageByName($packages, $_) or next;
-	my @flags = (@{$flags->{$_}}, map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense);
-
+	my @flags = @{$flags->{$_}};
+	if (my @l = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense) {
+	    if (@l > 1) {
+		log::l("ERROR: package $_ is requiring many locales") if $_ ne 'lsb';
+	    } else {
+		push @flags, @l;
+	    }	    
+	}
+	
 	@flags = map {
 	    my ($user_flags, $known_flags) = partition { /^!?CAT_/ } split('\|\|', $_);
 	    my $ok = find {
