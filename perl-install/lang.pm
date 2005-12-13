@@ -956,7 +956,7 @@ sub langsLANGUAGE {
 
 sub utf8_should_be_needed {
     my ($locale) = @_; 
-    my @l = uniq(grep { $_ ne 'C' } map { l2charset($_) } langs($locale->{langs}));
+    my @l = uniq(grep { $_ ne 'C' } map { l2charset($_) } $locale->{lang}, langs($locale->{langs}));
     @l > 1 || any { /utf|unicode/ } @l;
 }
 
