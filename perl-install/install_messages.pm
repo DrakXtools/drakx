@@ -129,7 +129,7 @@ copyright laws applicable to software programs.
 sub install_completed() {
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Congratulations, installation is complete.
-Remove the boot media and press return to reboot.
+Remove the boot media and press Enter to reboot.
 
 
 For information on fixes which are available for this release of Mandriva Linux,
