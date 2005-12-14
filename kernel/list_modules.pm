@@ -156,9 +156,9 @@ our %l = (
     local => [
       if_(arch() =~ /^i.86|x86_64/, qw(vfat ntfs)),
       if_(arch() =~ /^ppc/, qw(hfs)),
-      qw(reiserfs),
+      qw(reiserfs jfs xfs),
     ],
-    various => [ qw(smbfs romfs ext3 xfs jfs ufs ntfs) ],
+    various => [ qw(smbfs romfs ext3 ufs ntfs) ],
 
   },
 
