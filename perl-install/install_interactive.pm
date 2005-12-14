@@ -111,7 +111,7 @@ sub partitionWizardSolutions {
     fs::df($_) foreach @fats;
     if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_swap + $min_freewin } @fats) {
 	$solutions{loopback} = 
-	  [ -10 - @fats, N("Use the Windows partition for loopback"), 
+	  [ -10 - @fats, N("Use the Microsoft Windows® partition for loopback"), 
 	    sub { 
 		my ($s_root, $s_swap);
 		my $part = $o->ask_from_listf('', N("Which partition do you want to use for Linux4Win?"), \&partition_table::description, \@ok_forloopback) or return;
@@ -134,7 +134,7 @@ sub partitionWizardSolutions {
     
     if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly} } @$fstab) {
 	$solutions{resize_fat} = 
-	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Windows partition"),
+	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Microsoft Windows® partition"),
 	    sub {
 		my $part = $o->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
 						    interactive_help_id => 'resizeFATChoose',
@@ -153,29 +153,29 @@ sub partitionWizardSolutions {
 		$@ and die N("The FAT resizer is unable to handle your partition, 
 the following error occurred: %s", formatError($@));
 		my $min_win = do {
-		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
+		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Microsoft Windows® partition"));
 		    $resize_fat->min_size;
 		};
 		#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 		#- this save at least a cylinder (less than 8Mb).
 		$min_win += partition_table::raw::cylinder_size($hd);
 
-		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
+		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Microsoft Windows® partition is too fragmented. Please reboot your computer under Microsoft Windows®, run the ``defrag'' utility, then restart the Mandriva Linux installation.");
 		$o->ask_okcancel('', formatAlaTeX(
                                             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                             N("WARNING!
 
-DrakX will now resize your Windows partition. Be careful: this
-operation is dangerous. If you have not already done so, you
-first need to exit the installation, run \"chkdsk c:\" from a
-Command Prompt under Windows (beware, running graphical program
-\"scandisk\" is not enough, be sure to use \"chkdsk\" in a
-Command Prompt!), optionally run defrag, then restart the
-installation. You should also backup your data.
-When sure, press Ok."))) or return;
+								
+Your Microsoft Windows® partition will be now resized.
+
+
+Be careful: this operation is dangerous. If you have not already done so, you first need to exit the installation, run \"chkdsk c:\" from a Command Prompt under Microsoft Windows® (beware, running graphical program \"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), optionally run defrag, then restart the installation. You should also backup your data.
+
+
+When sure, press Next."))) or return;
 
 		my $mb_size = $part->{size} >> 11;
-		$o->ask_from('', N("Which size do you want to keep for Windows on"), [
+		$o->ask_from('', N("Which size do you want to keep for Microsoft Windows® on"), [
                    { label => N("partition %s", partition_table::description($part)), val => \$mb_size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 
@@ -185,7 +185,7 @@ When sure, press Ok."))) or return;
 		$hd->adjustEnd($part);
 
 		eval { 
-		    my $_w = $o->wait_message(N("Resizing"), N("Resizing Windows partition"));
+		    my $_w = $o->wait_message(N("Resizing"), N("Resizing Microsoft Windows® partition"));
 		    $resize_fat->resize($part->{size});
 		};
 		if (my $err = $@) {
@@ -194,7 +194,7 @@ When sure, press Ok."))) or return;
 		}
 
 		$o->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
-filesystem checks will be run on your next boot into Windows(TM)")) if $part->{fs_type} ne 'vfat';
+filesystem checks will be run on your next boot into Microsoft Windows®")) if $part->{fs_type} ne 'vfat';
 
 		set_isFormatted($part, 1);
 		partition_table::will_tell_kernel($hd, resize => $part); #- down-sizing, write_partitions is not needed
@@ -210,7 +210,7 @@ filesystem checks will be run on your next boot into Windows(TM)")) if $part->{f
 
     if (@$fstab && @hds_rw) {
 	$solutions{wipe_drive} =
-	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Windows(TM)") : N("Erase and use entire disk"), 
+	  [ 10, fsedit::is_one_big_fat_or_NT($hds) ? N("Remove Microsoft Windows®") : N("Erase and use entire disk"), 
 	    sub {
 		my $hd = $o->ask_from_listf_raw({ messages => N("You have more than one hard drive, which one do you install linux on?"),
 						  title => N("Partitioning"),
