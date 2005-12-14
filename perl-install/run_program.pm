@@ -62,8 +62,11 @@ sub raw {
     my $stdout = $stdout_raw && (ref($stdout_raw) ? $tmpdir->() . "/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
-    my ($rname) = split(/[ \|]/, $real_name, 2);
-    if (! ($rname =~ m!^/! ? -x $rname : whereis_binary($rname, $root))) {
+    #- checking if binary exist to avoid cloberring stdout file
+    my ($rname) = $real_name =~ /(.*)[\s\|]/;    
+    if (! ($rname =~ m!^/! 
+	     ? -x "$root$rname" || $root && -l "$root$rname" #- handle non-relative symlink which can be broken when non-rooted
+	     : whereis_binary($rname, $root))) {
 	log::l("program not found: $real_name");
 	return;
     }
