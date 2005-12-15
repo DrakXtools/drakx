@@ -371,7 +371,7 @@ drive. Be careful -- it is a powerful but dangerous choice and you can very
 easily lose all your data. That's why this option is really only
 recommended if you have done something like this before and have some
 experience. For more instructions on how to use the DiskDrake utility,
-refer to the ``Managing Your Partitions'' section in the ``Starter Guide''.", N("Use free space"), N("Use existing partition"), N("Use the free space on the Windows partition"), N("Erase entire disk"), N("Remove Windows"), N("Custom disk partitioning"));
+refer to the ``Managing Your Partitions'' section in the ``Starter Guide''.", N("Use free space"), N("Use existing partition"), N("Use the free space on the Microsoft Windows® partition"), N("Erase entire disk"), N("Remove Windows"), N("Custom disk partitioning"));
 }
 sub exitInstall() {
     N("There you are. Installation is now complete and your GNU/Linux system is

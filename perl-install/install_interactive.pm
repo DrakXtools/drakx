@@ -166,14 +166,14 @@ the following error occurred: %s", formatError($@));
                                             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                             N("WARNING!
 
-								
+
 Your Microsoft Windows® partition will be now resized.
 
 
 Be careful: this operation is dangerous. If you have not already done so, you first need to exit the installation, run \"chkdsk c:\" from a Command Prompt under Microsoft Windows® (beware, running graphical program \"scandisk\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), optionally run defrag, then restart the installation. You should also backup your data.
 
 
-When sure, press Next."))) or return;
+When sure, press %s.",N("Next")))) or return;
 
 		my $mb_size = $part->{size} >> 11;
 		$o->ask_from('', N("Which size do you want to keep for Microsoft Windows® on"), [

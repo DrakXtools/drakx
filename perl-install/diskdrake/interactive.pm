@@ -2,6 +2,7 @@ package diskdrake::interactive; # $Id$
 
 use diagnostics;
 use strict;
+use utf8;
 
 use common;
 use fs::type;
@@ -808,7 +809,7 @@ sub Resize {
 	$nice_resize{ntfs}->resize($part->{size});
 	$wait = undef;
 	$in->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
-filesystem checks will be run on your next boot into Windows(TM)"));
+filesystem checks will be run on your next boot into Microsoft Windows®"));
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
 	run_program::run('resize_reiserfs', '-f', '-q', '-s' . int($part->{size}/2) . 'K', devices::make($part->{device}));
