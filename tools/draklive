@@ -176,8 +176,7 @@ my %loop = (
         mount => sub {
             my ($live, $dir) = @_;
             my @mnt = (
-                ($live->{media}{fs} eq 'nfs' ? '/bin/losetup -r' : 'losetup') .
-                  " /dev/loop$loop_number $live->{media}{mountpoint}/$dir->{source}",
+                "/bin/losetup -r /dev/loop$loop_number $live->{media}{mountpoint}/$dir->{source}",
                 "mount -o ro -t squashfs /dev/loop$loop_number $dir->{mountpoint}");
             $loop_number++;
             @mnt;
@@ -269,15 +268,14 @@ sub create_initrd {
     # cp_f($live->{system}{root} . '/sbin/nash', $live->{initrd_tree} . '/bin/');
     #- use nash from cooker for now, label support
     cp_f('/sbin/nash', $live->{initrd_tree} . '/bin/');
+    #- needed to mount loopbacks read-only
+    cp_f('/lib/tls/libc.so.6', $live->{initrd_tree} . '/lib/');
+    cp_f('/lib/ld-linux.so.2', $live->{initrd_tree} . '/lib/');
+    cp_f('/sbin/losetup', $live->{initrd_tree} . '/bin/');
 
-    if ($live->{debug} || $live->{media}{fs} eq 'nfs') {
-        cp_f('/lib/tls/libc.so.6', $live->{initrd_tree} . '/lib/');
-        cp_f('/lib/ld-linux.so.2', $live->{initrd_tree} . '/lib/');
-    }
     if ($live->{media}{fs} eq 'nfs') {
         cp_f('/sbin/ifconfig', $live->{initrd_tree} . '/bin/');
         cp_f('/bin/mount', $live->{initrd_tree} . '/bin/');
-        cp_f('/sbin/losetup', $live->{initrd_tree} . '/bin/');
         if ($live->{debug}) {
             cp_f('/bin/ping', $live->{initrd_tree} . '/bin/');
             cp_f('/lib/libresolv.so.2', $live->{initrd_tree} . '/lib/');
