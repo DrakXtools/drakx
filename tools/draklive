@@ -260,7 +260,7 @@ sub create_initrd {
     rm_rf($live->{initrd_tree}) if -e $live->{initrd_tree};
 
     mkdir_p($live->{initrd_tree} . $_) foreach
-      qw(/bin /dev /lib /proc),
+      qw(/bin /dev /lib /proc /sys),
       $live->{media}{mountpoint},
       (map { $_->{mountpoint} } @{$live->{mount}{dirs} || []}),
       $live->{mount}{root};
@@ -333,6 +333,8 @@ sub create_initrd_linuxrc {
                           if_($live->{media}{sleep}, "sleep $live->{media}{sleep}"),
                           #- required for labels
                           "mount -t proc none /proc",
+                          #- required for cdrom labels
+                          "mount -t sysfs none /sys",
                           if_($live->{debug}, "/bin/sh"),
                           if_($live->{media}{pre}, deref_array($live->{media}{pre})),
                           ($live->{media}{fs} eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
@@ -340,6 +342,7 @@ sub create_initrd_linuxrc {
                           (map { $loop{$_->{type}}{mount}->($live, $_) } grep { $_->{type} } @{$live->{mount}{dirs} || []}),
                           ($live->{mount}{overlay} ? $overlay{$live->{mount}{overlay}}{mount}->($live) : ()),
                           "echo 0x0100 > /proc/sys/kernel/real-root-dev",
+                          "umount /sys",
                           "umount /proc",
                           ($live->{mount}{overlay} ?
                              # don't move to /initrd but /live, or else the overlay will be unmounted
