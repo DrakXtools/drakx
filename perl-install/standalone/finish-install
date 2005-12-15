@@ -22,6 +22,10 @@ network::network::read_net_conf($net);
 $::isWizard = 1;
 my $in = 'interactive'->vnew;
 
+sub ask_license() {
+    any::acceptLicense($in);
+}
+
 sub ask_language() {
     require lang;
     $locale = lang::read();
@@ -87,6 +91,7 @@ sub call {
     }
 }
 
+call('license');
 call('language');
 call('keyboard');
 call('network');
