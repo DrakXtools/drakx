@@ -734,6 +734,8 @@ sub acceptLicense {
 		   },
 		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ])
       or do {
+	  # when refusing license in finish-install:
+	  exec("/sbin/reboot") if !$::isInstall;
 	  if ($::globetrotter) {
            run_program::run('killall', 'Xorg');
 	      exec("/sbin/reboot");
