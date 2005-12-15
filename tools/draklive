@@ -471,14 +471,7 @@ sub prepare_bootloader {
     cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{boot_dir} . '/vmlinuz');
     my $msg = $live->{system}{root} . '/boot/message-graphic';
     cp_f($msg, $live->{boot_dir} . '/live.msg') if -f $msg;
-    if ($live->{media}{storage} eq 'usb') {
-        output($live->{boot_dir} . '/syslinux.cfg', build_syslinux_cfg($live));
-    } elsif ($live->{media}{storage} eq 'cdrom') {
-        cp_f('/usr/lib/syslinux/isolinux-graphic.bin', $live->{boot_dir} . '/isolinux.bin');
-        output($live->{boot_dir} . '/isolinux.cfg', build_syslinux_cfg($live));
-    } else {
-        warn "not implemented yet";
-    }
+    output($live->{boot_dir} . '/syslinux.cfg', build_syslinux_cfg($live));
 }
 
 sub create_master {
