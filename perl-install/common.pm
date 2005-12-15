@@ -28,7 +28,7 @@ our $SECTORSIZE  = 512;
 #-#####################################################################################
 
 sub N {
-    my ($s, @para) = shift @_; 
+    my ($s, @para) = @_; 
     $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see mygtk2.pm
     my $t = translate($s);
     sprintf($t, @para);
