@@ -293,8 +293,7 @@ sub create_initrd {
     devices::make($live->{initrd_tree} . "/dev/$_") foreach
         qw(console initrd null ram systty),
         (map { "tty$_" } 0..5),
-        (map { "loop$_" } 0..7),
-        (map { $_, $_ . '1' } map { "sd$_" } ('a' .. 'h'));
+        (map { "loop$_" } 0..7);
 
     load_moddeps($live->{system}{root}, "/lib/modules/" . $live->{system}{kernel});
 
