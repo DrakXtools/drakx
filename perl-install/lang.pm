@@ -956,7 +956,7 @@ sub langsLANGUAGE {
 
 sub utf8_should_be_needed {
     my ($locale) = @_; 
-    my @l = uniq(grep { $_ ne 'C' } map { l2charset($_) } $locale->{lang}, langs($locale->{langs}));
+    my @l = uniq(grep { $_ ne 'C' } map { l2charset($_) } langs($locale->{langs}));
     @l > 1 || any { /utf|unicode/ } @l;
 }
 
@@ -1253,9 +1253,9 @@ sub bindtextdomain() {
     my $localedir = "$ENV{SHARE_PATH}/locale" . ($::prefix ? "_special" : '');
 
     c::init_setlocale();
-    c::bind_textdomain_codeset('libDrakX', 'UTF-8');
     $::need_utf8_i18n = 1;
-    c::bindtextdomain('libDrakX', $localedir);
+    Locale::gettext::bind_textdomain_codeset('libDrakX', 'UTF-8');
+    Locale::gettext::bindtextdomain('libDrakX', $localedir);
 
     $localedir;
 }

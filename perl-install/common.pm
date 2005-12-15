@@ -1,6 +1,7 @@
 package common; # $Id$
 
 use MDK::Common;
+use Locale::gettext();
 use diagnostics;
 use strict;
 
@@ -59,7 +60,7 @@ sub translate_real {
     my ($s) = @_;
     $s or return '';
     foreach (@::textdomains, 'libDrakX') {
-	my $s2 = c::dgettext($_, $s);
+	my $s2 = Locale::gettext::dgettext($_, $s);
 	return $s2 if $s ne $s2;
     }
     $s;

@@ -128,11 +128,6 @@ pcmcia_probe()
 ';
 
 print '
-char *
-dgettext(domainname, msgid)
-   char * domainname
-   char * msgid
-
 int
 del_partition(hd, part_number)
   int hd
@@ -186,18 +181,6 @@ char *
 setlocale(category, locale = 0) 
     int     category
     char *      locale
-
-
-
-char *
-bindtextdomain(domainname, dirname)
-   char * domainname
-   char * dirname
-
-char *
-bind_textdomain_codeset(domainname, codeset)
-   char * domainname
-   char * codeset
 
 int
 lseek_sector(fd, sector, offset)
