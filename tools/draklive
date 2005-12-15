@@ -224,6 +224,7 @@ my %overlay = (
 
 my %storage = (
     cdrom => {
+        read_only => 1,
         modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
     },
     usb => {
@@ -338,6 +339,7 @@ sub create_initrd_linuxrc {
                           if_($live->{debug}, "/bin/sh"),
                           if_($live->{media}{pre}, deref_array($live->{media}{pre})),
                           ($live->{media}{fs} eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
+                            ($storage{$live->{media}{storage}}{read_only} && " -o ro") .
                             " -t $live->{media}{fs} $live->{media}{source} $live->{media}{mountpoint}",
                           (map { $loop{$_->{type}}{mount}->($live, $_) } grep { $_->{type} } @{$live->{mount}{dirs} || []}),
                           ($live->{mount}{overlay} ? $overlay{$live->{mount}{overlay}}{mount}->($live) : ()),
