@@ -1538,11 +1538,11 @@ msgid "Windows Domain:"
 msgstr "Windowsのドメイン:"
 
 #: authentication.pm:69
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
-msgstr "iWinbindはWindowsドメインでの情報収集とユーザ認証を可能にします。"
+msgstr "WinbindはWindowsドメインでの情報収集とユーザ認証を可能にします。"
 
 #: authentication.pm:70
 #, c-format
@@ -2522,7 +2522,7 @@ msgstr "ext2 を ext3 に変更"
 #: diskdrake/interactive.pm:649
 #, c-format
 msgid "Which volume label?"
-msgstr ""
+msgstr "どのボリュームラベル？"
 
 #: diskdrake/interactive.pm:665
 #, c-format
@@ -3182,7 +3182,7 @@ msgstr "ファイルシステムへの全てのI/Oを同期的に行う"
 #: fs/mount_options.pm:139
 #, c-format
 msgid "Allow an ordinary user to mount the file system."
-msgstr ""
+msgstr "一般ユーザにファイルシステムのマウントを許可する"
 
 #: fs/mount_options.pm:141
 #, c-format
@@ -3269,16 +3269,16 @@ msgstr ""
 "必ず/bootパーティションを追加してください。"
 
 #: fsedit.pm:394
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can not use the LVM Logical Volume for mount point %s since it spans "
 "physical volumes"
 msgstr ""
-"LMV論理ボリュームは物理ボリュームに及ぶので、マウントポイント %s には使用でき"
+"LVM論理ボリュームは物理ボリュームに及ぶので、マウントポイント %s には使用でき"
 "ません。"
 
 #: fsedit.pm:396
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected the LVM Logical Volume as root (/).\n"
 "The bootloader is not able to handle this when the volume spans physical "
@@ -6270,9 +6270,9 @@ msgid "Remove Microsoft Windows®"
 msgstr "Microsoft Windows®を削除"
 
 #: install_interactive.pm:213
-#, fuzzy, c-format
+#, c-format
 msgid "Erase and use entire disk"
-msgstr "ディスク全体を消去"
+msgstr "ディスク全体を消去して使用"
 
 #: install_interactive.pm:215
 #, c-format
@@ -9520,14 +9520,14 @@ msgid "Remove the logical volumes first\n"
 msgstr "まず論理ボリュームを削除してください\n"
 
 #: lvm.pm:178
-#, fuzzy, c-format
+#, c-format
 msgid "The bootloader can't handle /boot on multiple physical volumes"
 msgstr "ブートローダは複数の物理ボリューム上の /boot を扱えません"
 
 #: modules/interactive.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "This driver has no configuration parameter!"
-msgstr "UPSドライバの設定"
+msgstr "このドライバには設定パラメータがありません。"
 
 #: modules/interactive.pm:22
 #, c-format
@@ -11375,6 +11375,7 @@ msgid ""
 "Here you can set up your proxies configuration (eg: http://"
 "my_caching_server:8080)"
 msgstr ""
+"ここでプロキシを設定をすることができます(例: http://my_caching_server:8080)"
 
 #: network/network.pm:413
 #, c-format
@@ -11384,12 +11385,12 @@ msgstr "HTTPプロクシ"
 #: network/network.pm:414
 #, c-format
 msgid "Use HTTP proxy for HTTPS connections"
-msgstr ""
+msgstr "HTTPS接続にHTTPプロキシを使う"
 
 #: network/network.pm:415
 #, c-format
 msgid "HTTPS proxy"
-msgstr ""
+msgstr "HTTPSプロキシ"
 
 #: network/network.pm:416
 #, c-format
@@ -11404,7 +11405,7 @@ msgstr "プロクシは http://.. で始まります"
 #: network/network.pm:421
 #, c-format
 msgid "Proxy should be https?://..."
-msgstr ""
+msgstr "プロキシは https?://... でなければいけません"
 
 #: network/network.pm:422
 #, c-format
@@ -13528,65 +13529,65 @@ msgstr "コマンドラインを入力してください"
 #: printer/printerdrake.pm:2402
 #, c-format
 msgid "Your printer %s is currently connected %s."
-msgstr ""
+msgstr "プリンタ %s は現在 %s に接続されています"
 
 #: printer/printerdrake.pm:2404 printer/printerdrake.pm:2411
-#, fuzzy, c-format
+#, c-format
 msgid "to a parallel port"
-msgstr " パラレルポートの #%s"
+msgstr "パラレルポートに"
 
 #: printer/printerdrake.pm:2405 printer/printerdrake.pm:2412
 #, c-format
 msgid "to the USB"
-msgstr ""
+msgstr "USBに"
 
 #: printer/printerdrake.pm:2406 printer/printerdrake.pm:2413
-#, fuzzy, c-format
+#, c-format
 msgid "via the network"
-msgstr "ネットワークを確立"
+msgstr "ネットワーク経由で"
 
 #: printer/printerdrake.pm:2407
 #, c-format
 msgid "This type of connection is currently not fully supported by HPLIP."
-msgstr ""
+msgstr "HPLIPは現在のところこのタイプの接続を完全にサポートしていません。"
 
 #: printer/printerdrake.pm:2409
 #, c-format
 msgid "You get full HPLIP support for your device if you connect it "
-msgstr ""
+msgstr "お使いのデバイスを接続するとHPLIPの完全なサポートが得られます。"
 
 #: printer/printerdrake.pm:2415
 #, c-format
 msgid ""
 "You can now set up your device with HPLIP anyway (works in many cases), "
-msgstr ""
+msgstr "お使いのデバイスをHPLIPで設定できます(大抵の場合動きます)。"
 
 #: printer/printerdrake.pm:2416
 #, c-format
 msgid "set it up without HPLIP (print-only), "
-msgstr ""
+msgstr "HPLIPなしで設定(印刷のみ)"
 
 #: printer/printerdrake.pm:2416
-#, fuzzy, c-format
+#, c-format
 msgid "or"
-msgstr "時間"
+msgstr "または"
 
 #: printer/printerdrake.pm:2417
 #, c-format
 msgid "cancel the setup (for example to reconnect your device)."
-msgstr ""
+msgstr "設定をキャンセル(例えばデバイスを再接続するために)"
 
 #: printer/printerdrake.pm:2419
 #, c-format
 msgid ""
 "You can always revise your choice by clicking your printer's entry in the "
 "main window, "
-msgstr ""
+msgstr "選択を見直すには、メインウィンドウのプリンタをクリックして、"
 
 #: printer/printerdrake.pm:2420
 #, c-format
 msgid "clicking the \"%s\" button, "
-msgstr ""
+msgstr "%s ボタンをクリック、"
 
 #. -PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: printer/printerdrake.pm:2420 standalone/drakperm:124 standalone/drakups:302
@@ -13599,7 +13600,7 @@ msgstr "編集"
 #: printer/printerdrake.pm:2421
 #, c-format
 msgid "and choosing \"%s\"."
-msgstr ""
+msgstr "そして %s を選んでください。"
 
 #: printer/printerdrake.pm:2421 printer/printerdrake.pm:5311
 #: printer/printerdrake.pm:5371
@@ -13615,17 +13616,17 @@ msgstr "何をしますか？"
 #: printer/printerdrake.pm:2424 printer/printerdrake.pm:2427
 #, c-format
 msgid "Set up with HPLIP"
-msgstr ""
+msgstr "HPLIPで設定"
 
 #: printer/printerdrake.pm:2425 printer/printerdrake.pm:2429
 #, c-format
 msgid "Set up without HPLIP"
-msgstr ""
+msgstr "HPLIPなしで設定"
 
 #: printer/printerdrake.pm:2426
-#, fuzzy, c-format
+#, c-format
 msgid "Cancel setup"
-msgstr "キャンセル"
+msgstr "設定をキャンセル"
 
 #: printer/printerdrake.pm:2460
 #, c-format
@@ -13640,18 +13641,18 @@ msgstr ""
 "バイスでのスキャン; メモリーカードへのアクセス"
 
 #: printer/printerdrake.pm:2462
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To access these extra functions on HP printers they must be set up with "
 "HPLIP (HP Linux Imaging and Printing). "
 msgstr ""
-"HPプリンタのこれらの追加機能を利用するためには、プリンタを適切なソフトウェア"
-"を使って設定する必要があります。"
+"HPプリンタのこれらの追加機能を利用するためには、プリンタをHPLIP(HP Linux "
+"Imaging and Printing)を使って設定する必要があります。"
 
 #: printer/printerdrake.pm:2464
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use HPLIP (choose \"No\" for non-HP printers)? "
-msgstr "どちらを選択しますか？(HP以外のプリンタには'なし'を選んでください)"
+msgstr "HPLIPを使いますか？(HP以外のプリンタには'なし'を選んでください)"
 
 #: printer/printerdrake.pm:2490
 #, c-format
@@ -14329,9 +14330,9 @@ msgid "Print option list"
 msgstr "印刷オプションの一覧"
 
 #: printer/printerdrake.pm:4069
-#, fuzzy, c-format
+#, c-format
 msgid "Printing option list..."
-msgstr "印刷オプションの一覧"
+msgstr "印刷オプションの一覧..."
 
 #: printer/printerdrake.pm:4087
 #, c-format
@@ -17997,16 +17998,19 @@ msgid ""
 "Star should be selected if you want to backup EA or ACLs, otherwise choose "
 "tar"
 msgstr ""
+"EAまたはACLをバックアップする場合はstarを選んでください。そうでなければtarを"
+"選んでください。"
 
 #: standalone/drakbackup:163
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server. Multiple "
 "users can be in a comma seperated list"
 msgstr ""
 "バックアップレポートの送信先(ローカルユーザ名またはメールアドレス)。有効な"
-"メールサーバを定義する必要があります。"
+"メールサーバを定義する必要があります。複数のユーザを指定する場合はコンマで区"
+"切ってください。"
 
 #: standalone/drakbackup:164
 #, c-format
@@ -18346,9 +18350,9 @@ msgid "Can not create catalog!"
 msgstr "カタログを作成できません"
 
 #: standalone/drakbackup:1321
-#, fuzzy, c-format
+#, c-format
 msgid "Problem installing %s"
-msgstr "パッケージ %s のインストール中に問題が発生"
+msgstr "%s のインストール中に問題が発生"
 
 #: standalone/drakbackup:1409
 #, c-format
@@ -18709,14 +18713,14 @@ msgid "Saturday"
 msgstr "土曜日"
 
 #: standalone/drakbackup:2115
-#, fuzzy, c-format
+#, c-format
 msgid "Delete cron entry"
-msgstr "クライアントを削除"
+msgstr "cronエントリを削除"
 
 #: standalone/drakbackup:2116
-#, fuzzy, c-format
+#, c-format
 msgid "Add cron entry"
-msgstr "プリンタを追加"
+msgstr "cronエントリを追加"
 
 #: standalone/drakbackup:2174
 #, c-format
@@ -18749,24 +18753,24 @@ msgid "Month"
 msgstr "月"
 
 #: standalone/drakbackup:2202
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (start)"
-msgstr "ウィークデー"
+msgstr "ウィークデー(開始)"
 
 #: standalone/drakbackup:2206
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday (end)"
-msgstr "ウィークデー"
+msgstr "ウィークデー(終了)"
 
 #: standalone/drakbackup:2210
-#, fuzzy, c-format
+#, c-format
 msgid "Profile"
 msgstr "プロファイル"
 
 #: standalone/drakbackup:2216
-#, fuzzy, c-format
+#, c-format
 msgid "Current crontab:"
-msgstr "現在のユーザ"
+msgstr "現在のcrontab:"
 
 #: standalone/drakbackup:2224
 #, c-format
@@ -18786,9 +18790,9 @@ msgstr ""
 "常時稼動していないマシンには、anacronをインストールされるといいでしょう。"
 
 #: standalone/drakbackup:2293
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the archive program"
-msgstr "復元する日付を選んでください:"
+msgstr "アーカイブプログラムを選んでください"
 
 #: standalone/drakbackup:2298
 #, c-format
@@ -18821,9 +18825,9 @@ msgid "Delete Hard Drive tar files after backup to other media."
 msgstr "他のメディアにバックアップしたらハードドライブのtarファイルを削除"
 
 #: standalone/drakbackup:2321
-#, fuzzy, c-format
+#, c-format
 msgid "View restore log after file restore."
-msgstr "OK で他のファイルを復元します"
+msgstr "ファイル復元後に復元ログを見る"
 
 #: standalone/drakbackup:2366
 #, c-format
@@ -19050,19 +19054,19 @@ msgid "\tDo not include System Files\n"
 msgstr "\tシステムファイルは含めない\n"
 
 #: standalone/drakbackup:2628
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and bzip2\n"
-msgstr "\tバックアップにtarとbzip2を使う\n"
+msgstr "\tバックアップに %s と bzip2 を使う\n"
 
 #: standalone/drakbackup:2629
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s and gzip\n"
-msgstr "\tバックアップにtarとgzipを使う\n"
+msgstr "\tバックアップに %s と gzip を使う\n"
 
 #: standalone/drakbackup:2630
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use %s only\n"
-msgstr "\tバックアップにtarのみを使う\n"
+msgstr "\tバックアップに %s のみを使う\n"
 
 #: standalone/drakbackup:2632
 #, c-format
@@ -19189,7 +19193,7 @@ msgstr "          %s に復元しました      "
 #: standalone/drakbackup:2976
 #, c-format
 msgid "/usr/bin/star not found, using tar..."
-msgstr ""
+msgstr "/usr/bin/star が見つかりません、tarを使います..."
 
 #: standalone/drakbackup:3012
 #, c-format
@@ -19568,14 +19572,14 @@ msgstr ""
 "ウィザードか詳細をクリックしてください。"
 
 #: standalone/drakbackup:4473
-#, fuzzy, c-format
+#, c-format
 msgid "Load profile"
-msgstr "ローカルファイル"
+msgstr "プロファイルをロード"
 
 #: standalone/drakbackup:4482
-#, fuzzy, c-format
+#, c-format
 msgid "Save profile as..."
-msgstr "名前をつけて保存"
+msgstr "プロファイルに名前をつけて保存..."
 
 #: standalone/drakbackup:4504 standalone/drakbackup:4507
 #, c-format
@@ -20931,7 +20935,7 @@ msgstr "Mandriva Linuxヘルプセンタ"
 #: standalone/drakhelp:51
 #, c-format
 msgid "No Help entry for %s\n"
-msgstr ""
+msgstr "%s のヘルプはありません\n"
 
 #: standalone/drakhosts:98
 #, c-format
@@ -25207,6 +25211,9 @@ msgid ""
 "operate smoothly. The appropriate packages can be retrieved from the "
 "Mandriva Club. Do you want to subscribe to the Mandriva Club?"
 msgstr ""
+"次のデバイスを円滑に動作させるためにはプロプライエタリのドライバまたはファー"
+"ムウェアが必要です。適切なパッケージは Mandriva Club から入手できます。"
+"Mandriva Club に加入しますか？"
 
 #: standalone/harddrake2:595 standalone/harddrake2:598
 #, c-format
