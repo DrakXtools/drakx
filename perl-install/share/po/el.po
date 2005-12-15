@@ -2541,7 +2541,7 @@ msgstr "Νέο μέγεθος σε MB:"
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Windows(TM)"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
 #: diskdrake/interactive.pm:851
@@ -4632,7 +4632,7 @@ msgstr "Χρήση υπαρχουσών κατατμήσεων"
 
 #: help.pm:374 install_interactive.pm:137
 #, c-format
-msgid "Use the free space on the Windows partition"
+msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "Χρήση του ελεύθερου χώρου στην κατάτμηση των Windows"
 
 #: help.pm:374
@@ -6036,8 +6036,8 @@ msgstr "Δεν υπάρχουν κατατμήσεις προς χρήση"
 
 #: install_interactive.pm:114
 #, c-format
-msgid "Use the Windows partition for loopback"
-msgstr "Χρήση κατάτμησης Windows για loopback"
+msgid "Use the Microsoft Windows® partition for loopback"
+msgstr "Χρήση κατάτμησης Microsoft Windows® για loopback"
 
 #: install_interactive.pm:117
 #, c-format
@@ -6081,19 +6081,19 @@ msgstr ""
 
 #: install_interactive.pm:156
 #, c-format
-msgid "Computing the size of the Windows partition"
-msgstr "Υπολογίζεται το μέγεθος της κατάτμησης των Windows"
+msgid "Computing the size of the Microsoft Windows® partition"
+msgstr "Υπολογίζεται το μέγεθος της κατάτμησης των Microsoft Windows®"
 
 #: install_interactive.pm:163
 #, c-format
 msgid ""
-"Your Windows partition is too fragmented. Please reboot your computer under "
-"Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
-"installation."
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
 msgstr ""
-"Η κατάτμηση των Windows είναι πολύ κατακερματισμένη, παρακαλώ τρέξτε πρώτα "
-"το ``defrag'' μέσα από τα Windows και ξεκινήστε ξανά την εγκατάσταση του  "
-"Mandriva Linux "
+"Η κατάτμηση των Microsoft Windows® είναι πολύ κατακερματισμένη, παρακαλώ "
+"τρέξτε πρώτα το ``defrag'' μέσα από τα Microsoft Windows® και ξεκινήστε ξανά "
+"την εγκατάσταση του  Mandriva Linux "
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6101,28 +6101,38 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
+"\n"
+"Your Microsoft Windows® partition will be now resized.\n"
+"\n"
+"\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
+"\n"
+"\n"
+"When sure, press %s."
 msgstr ""
 "ΠΡΟΣΟΧΗ!\n"
 "\n"
+"\n"
 "Το DrakX πρέπει τώρα να αλλάξει το μέγεθος της κατάτμησης των Windows.\n"
-"Η διαδικασία αυτή εμπεριέχει κινδύνους. Εάν δεν το έχετε κάνει ήδη,\n"
-"βγείτε από την εγκατάσταση ελέγξετε την κατάτμηση με το \n"
-"scandisk μέσα από τα Windows και κατά περίπτωση την αποκατακερμάτιση \n"
-"(defragment). Μετά ξεκινήστε ξανά την εγκατάσταση.\n"
-"Μετά θα πρέπει να κρατήσετε αντίγραφο ασφαλείας των δεδομένων σας.\n"
-"Εάν είστε σίγουροι, πατήστε Εντάξει."
+"\n"
+"\n"
+"Η διαδικασία αυτή εμπεριέχει κινδύνους. Εάν δεν το έχετε κάνει ήδη, βγείτε "
+"από την εγκατάσταση ελέγξετε την κατάτμηση με το  scandisk μέσα από τα "
+"Windows και κατά περίπτωση την αποκατακερμάτιση  (defragment). Μετά "
+"ξεκινήστε ξανά την εγκατάσταση. Μετά θα πρέπει να κρατήσετε αντίγραφο "
+"ασφαλείας των δεδομένων σας.\n"
+"\n"
+"\n"
+"Εάν είστε σίγουροι, πατήστε %s."
 
 #: install_interactive.pm:178
 #, c-format
-msgid "Which size do you want to keep for Windows on"
+msgid "Which size do you want to keep for Microsoft Windows® on"
 msgstr "Τι χώρο θέλετε να κρατήσετε για τα windows στο"
 
 #: install_interactive.pm:179
@@ -6132,8 +6142,8 @@ msgstr "κατάτμηση %s"
 
 #: install_interactive.pm:188
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "Γίνεται αλλαγή τις κατάτμησης των Windows"
+msgid "Resizing Microsoft Windows® partition"
+msgstr "Γίνεται αλλαγή τις κατάτμησης των Microsoft Windows®"
 
 #: install_interactive.pm:193
 #, c-format
@@ -6148,8 +6158,8 @@ msgstr ""
 
 #: install_interactive.pm:213
 #, c-format
-msgid "Remove Windows(TM)"
-msgstr "Αφαίρεση Windows(TM)"
+msgid "Remove Microsoft Windows®"
+msgstr "Αφαίρεση Microsoft Windows®"
 
 #: install_interactive.pm:213
 #, fuzzy, c-format
@@ -6484,7 +6494,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
-"Remove the boot media and press return to reboot.\n"
+"Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
 "For information on fixes which are available for this release of Mandriva "
@@ -16089,7 +16099,7 @@ msgstr ""
 
 #: share/advertising/26.pl:3
 #, c-format
-msgid "How to maintain your system up-to-date?"
+msgid "How to keep your system up-to-date?"
 msgstr ""
 
 #: share/advertising/intel.pl:3
