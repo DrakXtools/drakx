@@ -714,6 +714,7 @@ sub autologin {
 
 sub acceptLicense {
     my ($o) = @_;
+    require install_messages;
 
     $o->{release_notes} = join("\n\n", map { 
 	my $f = install_any::getFile($_);
