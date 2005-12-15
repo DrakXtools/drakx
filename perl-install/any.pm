@@ -718,7 +718,7 @@ sub acceptLicense {
     $o->{release_notes} = join("\n\n", map { 
 	my $f = install_any::getFile($_);
 	$f && cat__($f);
-    } 'release-notes.txt', 'release-notes.' . arch() . '.txt');
+    } 'release-notes.txt', 'release-notes.' . arch() . '.txt') if $::isInstall;
 
     return if $o->{useless_thing_accepted};
 
