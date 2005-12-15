@@ -95,8 +95,8 @@ my %predefined = (
         },
         cdrom => {
             storage => 'cdrom',
-            fs => 'vfat',
-            source => 'LABEL=MDVUSBROOT',
+            fs => 'iso9660',
+            source => 'LABEL=MDVCDROOT',
             mountpoint => '/media',
         },
     },
@@ -121,6 +121,11 @@ sub nls_modules {
     my ($live) = @_;
     if_($live->{media}{fs} eq 'vfat', 'nls_cp437'), #- default FAT codepage
     map { "nls_$_" } (map { "iso8859-$_" } 1..7, 9, 13..15), 'utf8';
+}
+
+sub fs_module {
+    my ($live) = @_;
+    $live->{media}{fs} eq 'iso9660' ? 'isofs' : $live->{media}{fs};
 }
 
 sub progress_start {
@@ -298,7 +303,7 @@ sub create_initrd {
       uniq(map { modules::cond_mapping_24_26($_) } category2modules($storage{$live->{media}{storage}}{modules}));
     my ($extra_modules, $missing) = partition { exists $moddeps{$_} }
       nls_modules($live),
-      $live->{media}{fs},
+      fs_module($live),
       @{$live->{media}{modules} || []},
       (map { @{$loop{$_}{modules} || []} } uniq(map { $_->{type} } grep { $_->{type} } @{$live->{mount}{dirs} || []})),
       ($live->{mount}{overlay} ? @{$overlay{$live->{mount}{overlay}}{modules} || []} : ());
