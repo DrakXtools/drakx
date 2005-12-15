@@ -68,6 +68,15 @@ sub translate {
     $s;
 }
 
+sub from_utf8 {
+    my ($s) = @_;
+    Locale::gettext::iconv($s, "utf-8", undef); #- undef = locale charmap = nl_langinfo(CODESET)
+}
+sub to_utf8 { 
+    my ($s) = @_;
+    Locale::gettext::iconv($s, undef, "utf-8"); #- undef = locale charmap = nl_langinfo(CODESET)
+}
+
 #- This is needed because text printed by Gtk2 will always be encoded
 #- in UTF-8;
 #- we first check if LC_ALL is defined, because if it is, changing

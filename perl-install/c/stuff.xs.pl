@@ -666,13 +666,6 @@ upgrade_utf8(s)
    CODE:
    sv_utf8_upgrade(s);
 
-char *
-standard_charset()
-  CODE:
-  RETVAL = nl_langinfo(CODESET);
-  OUTPUT:
-  RETVAL
-
 void
 get_iso_volume_ids(int fd)
   INIT:

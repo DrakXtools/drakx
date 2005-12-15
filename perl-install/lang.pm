@@ -1138,7 +1138,7 @@ sub write {
 
 	if (!$b_user_only) {
 	    my $kde_charset = charset2kde_charset(l2charset($locale->{lang}));
-	    my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
+	    my $welcome = common::to_utf8(N("Welcome to %s", '%n'));
          log::explanations(qq(Configuring KDM/MdkKDM));
 	    substInFile { 
 		s/^(GreetString)=.*/$1=$welcome/;

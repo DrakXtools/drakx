@@ -92,7 +92,7 @@ sub check_rpm {
     my ($in, $rpms) = @_;
     foreach my $rpm (@$rpms) {
         next if $in->do_pkgs->is_installed($rpm);
-        if ($in->ask_okcancel(N("Error"), N("%s is not installed\nClick \"Next\" to install or \"Cancel\" to quit", c::from_utf8($rpm)))) {
+        if ($in->ask_okcancel(N("Error"), N("%s is not installed\nClick \"Next\" to install or \"Cancel\" to quit", common::from_utf8($rpm)))) {
             $::testing and next;
             if (!$in->do_pkgs->install($rpm)) {
                 local $::Wizard_finished = 1;

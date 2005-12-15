@@ -11,7 +11,4 @@ $VERSION = '0.01';
 
 c::stuff->bootstrap($VERSION);
 
-sub from_utf8 { iconv($_[0], "utf-8", standard_charset()) }
-sub to_utf8 { iconv($_[0], standard_charset(), "utf-8") }
-
 1;

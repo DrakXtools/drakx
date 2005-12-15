@@ -156,7 +156,7 @@ END
 
     $toreplace{$_->[0]} = $modem->{$_->[0]} || $_->[1] foreach [ 'Timeout', 60 ], [ 'UseLockFile', 1 ], [ 'Enter', 'CR' ], [ 'Volume', 0 ],
                                                                [ 'BusyWait', 0 ], [ 'FlowControl', 'CRTSCTS' ], [ 'Speed', 115200 ];
-    output($modem->{kppprc} || "$::prefix/usr/share/config/kppprc", c::to_utf8(<<END));
+    output($modem->{kppprc} || "$::prefix/usr/share/config/kppprc", common::to_utf8(<<END));
 # KDE Config File
 
 [Account0]

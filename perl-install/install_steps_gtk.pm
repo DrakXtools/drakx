@@ -301,7 +301,7 @@ sub choosePackagesTree {
                                     [ N("Version: "), $tag ], [ $p->version . '-' . $p->release . "\n" ],
                                     [ N("Size: "), $tag ], [ N("%d KB\n", $p->size / 1024) ],
                                     if_($imp, [ N("Importance: "), $tag ], [ "$imp\n" ]),
-                                    [ "\n" ], [ formatLines(c::from_utf8($p->description)) ] ];
+                                    [ "\n" ], [ formatLines(common::from_utf8($p->description)) ] ];
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;
@@ -502,7 +502,7 @@ sub installPackages {
 	} elsif ($type eq 'open') {
 	    gtkval_modify(\$pkg_progress, 0);
 	    my $p = $packages->{depslist}[$id];
-	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, (split /\n/, c::from_utf8($p->summary))[0] || ''));
+	    mygtk2::gtkadd($pkg_log_widget, text => sprintf("\n%s: %s", $p->name, (split /\n/, common::from_utf8($p->summary))[0] || ''));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
