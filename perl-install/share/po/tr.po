@@ -2541,7 +2541,7 @@ msgstr "MB olarak yeni boyut: "
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Windows(TM)"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
 #: diskdrake/interactive.pm:851
@@ -4553,7 +4553,7 @@ msgstr "Geçerli bölümlendirmeyi kullan"
 
 #: help.pm:374 install_interactive.pm:137
 #, c-format
-msgid "Use the free space on the Windows partition"
+msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "Windows'un bulunduğu bölümdeki boş alan kullanılsın"
 
 #: help.pm:374
@@ -5955,8 +5955,8 @@ msgstr "Kullanılabilecek bir bölüm bulunamadı"
 
 #: install_interactive.pm:114
 #, c-format
-msgid "Use the Windows partition for loopback"
-msgstr "Loopback için Windows bölümü kullanılsın"
+msgid "Use the Microsoft Windows® partition for loopback"
+msgstr "Loopback için Microsoft Windows® bölümü kullanılsın"
 
 #: install_interactive.pm:117
 #, c-format
@@ -6000,18 +6000,18 @@ msgstr ""
 
 #: install_interactive.pm:156
 #, c-format
-msgid "Computing the size of the Windows partition"
-msgstr "Windows bölümünün boyutu hesaplanıyor"
+msgid "Computing the size of the Microsoft Windows® partition"
+msgstr "Microsoft Windows® bölümünün boyutu hesaplanıyor"
 
 #: install_interactive.pm:163
 #, c-format
 msgid ""
-"Your Windows partition is too fragmented. Please reboot your computer under "
-"Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
-"installation."
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
 msgstr ""
-"Windows bölümünüz çok dağınık, lütfen önce \"defrag\" ile diskinizdeki "
-"dosyaları bir araya getirin"
+"Microsoft Windows® bölümünüz çok dağınık, lütfen önce \"defrag\" ile "
+"diskinizdeki dosyaları bir araya getirin"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6019,30 +6019,40 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
+"\n"
+"Your Microsoft Windows® partition will be now resized.\n"
+"\n"
+"\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
+"\n"
+"\n"
+"When sure, press %s."
 msgstr ""
 "UYARI!\n"
 "\n"
-"DrakX Windows bölümünüzü yeniden boyutlandıracak. Dikkatli olun: \n"
-"bu tehlikeli bir iştir. Hazır olduğunuza emin değilseniz, önce\n"
-"windows komut satırından \"chkdsk c:\" komutunu veriniz ( \n"
-"windows altındaki grafiksel scandiske güvenmeyin ve bunu komut \n"
-"satırından yazıp yapınız), ardından disk birleştirme operasyonunu\n"
-"yapınız(defrag). Tüm bunların ardından kuruluma yeniden başlayınız.\n"
-"Bunların dışında verilerinizi yedeklemiş olmanız tavsiye edilir.\n"
-"Devam etmek için hazır olduğunuzda Tamam tuşuna basınız."
+"\n"
+"DrakX Windows bölümünüzü yeniden boyutlandıracak.\n"
+"\n"
+"\n"
+"Dikkatli olun: bu tehlikeli bir iştir. Hazır olduğunuza emin değilseniz, "
+"önce windows komut satırından \"chkdsk c:\" komutunu veriniz (windows "
+"altındaki grafiksel scandiske güvenmeyin ve bunu komut satırından yazıp "
+"yapınız), ardından disk birleştirme operasyonunu yapınız(defrag). Tüm "
+"bunların ardından kuruluma yeniden başlayınız. Bunların dışında verilerinizi "
+"yedeklemiş olmanız tavsiye edilir.\n"
+"\n"
+"\n"
+"Devam etmek için hazır olduğunuzda %s tuşuna basınız."
 
 #: install_interactive.pm:178
 #, c-format
-msgid "Which size do you want to keep for Windows on"
-msgstr "Windows için"
+msgid "Which size do you want to keep for Microsoft Windows® on"
+msgstr "Microsoft Windows® için"
 
 #: install_interactive.pm:179
 #, c-format
@@ -6051,8 +6061,8 @@ msgstr "%s bölümünde ne kadar yer bırakacaksınız?"
 
 #: install_interactive.pm:188
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "Windows dosya sistemi sınırları hesaplanıyor"
+msgid "Resizing Microsoft Windows® partition"
+msgstr "Microsoft Windows® dosya sistemi sınırları hesaplanıyor"
 
 #: install_interactive.pm:193
 #, c-format
@@ -6066,8 +6076,8 @@ msgstr "Yeniden boyutlandırılacak hiç FAT bölümü yok (ya da boş alan kalm
 
 #: install_interactive.pm:213
 #, c-format
-msgid "Remove Windows(TM)"
-msgstr "MS WindowsTM silinsin"
+msgid "Remove Microsoft Windows®"
+msgstr "MS Windows™ silinsin"
 
 #: install_interactive.pm:213
 #, fuzzy, c-format
@@ -6410,7 +6420,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
-"Remove the boot media and press return to reboot.\n"
+"Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
 "For information on fixes which are available for this release of Mandriva "
@@ -15964,7 +15974,7 @@ msgstr ""
 
 #: share/advertising/26.pl:3
 #, c-format
-msgid "How to maintain your system up-to-date?"
+msgid "How to keep your system up-to-date?"
 msgstr ""
 
 #: share/advertising/intel.pl:3

@@ -2462,7 +2462,7 @@ msgstr "ขนาดเป็น MB: "
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Windows(TM)"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 
 #: diskdrake/interactive.pm:851
@@ -4163,7 +4163,7 @@ msgstr "ใช้พาร์ติชั่นที่มีอยู่"
 
 #: help.pm:374 install_interactive.pm:137
 #, c-format
-msgid "Use the free space on the Windows partition"
+msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "ใช้พื้นที่ที่ว่างใน Windows partition"
 
 #: help.pm:374
@@ -5220,7 +5220,7 @@ msgstr "ไม่มีพาร์ติชั่นที่มีอยู่
 
 #: install_interactive.pm:114
 #, c-format
-msgid "Use the Windows partition for loopback"
+msgid "Use the Microsoft Windows® partition for loopback"
 msgstr "ใช้ windows partion สำหรับการ Loopback"
 
 #: install_interactive.pm:117
@@ -5264,16 +5264,16 @@ msgstr ""
 
 #: install_interactive.pm:156
 #, fuzzy, c-format
-msgid "Computing the size of the Windows partition"
-msgstr "ใช้พื้นที่ที่ว่างใน Windows partition"
+msgid "Computing the size of the Microsoft Windows® partition"
+msgstr "ใช้พื้นที่ที่ว่างใน Microsoft Windows® partition"
 
 #: install_interactive.pm:163
 #, c-format
 msgid ""
-"Your Windows partition is too fragmented. Please reboot your computer under "
-"Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
-"installation."
-msgstr "Windows partition ของคุณกระจัดกระจายมากเกินไป กรุณา Defrag ก่อน"
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
+msgstr "Microsoft Windows® partition ของคุณกระจัดกระจายมากเกินไป กรุณา Defrag ก่อน"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -5281,26 +5281,35 @@ msgstr "Windows partition ของคุณกระจัดกระจาย
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
+"\n"
+"Your Microsoft Windows® partition will be now resized.\n"
+"\n"
+"\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
+"\n"
+"\n"
+"When sure, press %s."
 msgstr ""
 "ระวัง!\n"
+"\n"
+"\n"
 "DrakX กำลังจะลดขนาดพาร์ติชั่นของ windows การทำงานนี้อันตลายมาก\n"
-"ถ้าคุณยังไม่เคยทำมาก่อนคุณควรออกจากการทำงานนี้และรัน Scandisk บน\n"
-"Windows (และ defrag) แล้วค่อยเริ่มทำงานนี้ใหม่  และคุณสมควรที่จะทำการ\n"
-"Backup ข้อมูลสำคัญขึ้นมาก่อน\n"
-"เมื่อคุณแน่ใจแล้ว กด OK"
+"\n"
+"ถ้าคุณยังไม่เคยทำมาก่อนคุณควรออกจากการทำงานนี้และรัน Scandisk บน Windows (และ defrag) "
+"แล้วค่อยเริ่มทำงานนี้ใหม่  และคุณสมควรที่จะทำการ Backup ข้อมูลสำคัญขึ้นมาก่อน\n"
+"\n"
+"\n"
+"เมื่อคุณแน่ใจแล้ว กด %s"
 
 #: install_interactive.pm:178
 #, c-format
-msgid "Which size do you want to keep for Windows on"
-msgstr "คุณต้องการเก็บ Windows ไว้ในขนาดใหน"
+msgid "Which size do you want to keep for Microsoft Windows® on"
+msgstr "คุณต้องการเก็บ Microsoft Windows® ไว้ในขนาดใหน"
 
 #: install_interactive.pm:179
 #, c-format
@@ -5309,8 +5318,8 @@ msgstr "พาร์ติชั่น %s"
 
 #: install_interactive.pm:188
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "คำนวณขอบเขตของระบบไฟล์ Windows"
+msgid "Resizing Microsoft Windows® partition"
+msgstr "คำนวณขอบเขตของระบบไฟล์ Microsoft Windows®"
 
 #: install_interactive.pm:193
 #, c-format
@@ -5324,8 +5333,8 @@ msgstr "ไม่มี พาร์ติชั่น FAT เพื่อทำ
 
 #: install_interactive.pm:213
 #, c-format
-msgid "Remove Windows(TM)"
-msgstr "ลบ Windows(TM)"
+msgid "Remove Microsoft Windows®"
+msgstr "ลบ Microsoft Windows®"
 
 #: install_interactive.pm:213
 #, fuzzy, c-format
@@ -5672,7 +5681,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
-"Remove the boot media and press return to reboot.\n"
+"Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
 "For information on fixes which are available for this release of Mandriva "
@@ -14757,7 +14766,7 @@ msgstr ""
 
 #: share/advertising/26.pl:3
 #, c-format
-msgid "How to maintain your system up-to-date?"
+msgid "How to keep your system up-to-date?"
 msgstr ""
 
 #: share/advertising/intel.pl:3

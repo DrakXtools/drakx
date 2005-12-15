@@ -2643,7 +2643,7 @@ msgstr "Nowy rozmiar w MB: "
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Windows(TM)"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "Aby upewnić się co do spójności danych po zmianie rozmiaru partycji,\n"
 "podczas kolejnego uruchamiania systemu Windows(TM) zostanie\n"
@@ -4793,7 +4793,7 @@ msgstr "Wykorzystaj istniejące partycje"
 
 #: help.pm:374 install_interactive.pm:137
 #, c-format
-msgid "Use the free space on the Windows partition"
+msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "Wykorzystaj wolne miejsce na partycji Windows"
 
 #: help.pm:374
@@ -6341,8 +6341,8 @@ msgstr "Brak istniejących partycji do wykorzystania"
 
 #: install_interactive.pm:114
 #, c-format
-msgid "Use the Windows partition for loopback"
-msgstr "Wykorzystaj miejsce na partycji Windows na plikopartycję"
+msgid "Use the Microsoft Windows® partition for loopback"
+msgstr "Wykorzystaj miejsce na partycji Microsoft Windows® na plikopartycję"
 
 #: install_interactive.pm:117
 #, c-format
@@ -6387,19 +6387,19 @@ msgstr ""
 
 #: install_interactive.pm:156
 #, c-format
-msgid "Computing the size of the Windows partition"
-msgstr "Obliczanie rozmiaru partycji Windows"
+msgid "Computing the size of the Microsoft Windows® partition"
+msgstr "Obliczanie rozmiaru partycji Microsoft Windows®"
 
 #: install_interactive.pm:163
 #, c-format
 msgid ""
-"Your Windows partition is too fragmented. Please reboot your computer under "
-"Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
-"installation."
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
 msgstr ""
-"Partycja Windows jest zbyt pofragmentowana. Należy uruchomić komputer pod "
-"systemem Windows, uruchomić narzędzie \"defrag\" i następnie ponownie "
-"rozpocząć instalację Mandriva Linux."
+"Partycja Microsoft Windows® jest zbyt pofragmentowana. Należy uruchomić "
+"komputer pod systemem Microsoft Windows®, uruchomić narzędzie \"defrag\" i "
+"następnie ponownie rozpocząć instalację Mandriva Linux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -6407,32 +6407,41 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
+"\n"
+"Your Microsoft Windows® partition will be now resized.\n"
+"\n"
+"\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
+"\n"
+"\n"
+"When sure, press %s."
 msgstr ""
 "OSTRZEŻENIE!\n"
 "\n"
+"\n"
 "Instalator zmieni teraz rozmiar partycji Windows.\n"
-"Należy uważać, ta operacja jest niebezpieczna. Jeśli wcześniej\n"
-"tego nie robiono należy przerwać instalację, wrócić do Windows,\n"
-"uruchomić polecenie \"chkdsk c:\" z wiersza poleceń (uwaga,\n"
-"uruchomienie graficznego narzędzia \"scandisk\" nie wystarcza\n"
-"należy się upewnić, że \"chkdsk\" znajduje się w wierszu poleceń!),\n"
-"opcjonalnie zdefragmentować dysk (uruchomienie defrag) po czym\n"
-"powtórnie uruchomić instalację. Warto również zarchiwizować\n"
-"dane na dysku.\n"
-"W razie pewności, wybierz OK."
+"\n"
+"\n"
+"Należy uważać, ta operacja jest niebezpieczna. Jeśli wcześniej tego nie "
+"robiono należy przerwać instalację, wrócić do Windows, uruchomić polecenie "
+"\"chkdsk c:\" z wiersza poleceń (uwaga, uruchomienie graficznego narzędzia "
+"\"scandisk\" nie wystarcza należy się upewnić, że \"chkdsk\" znajduje się w "
+"wierszu poleceń!), opcjonalnie zdefragmentować dysk (uruchomienie defrag) po "
+"czym powtórnie uruchomić instalację. Warto również zarchiwizować dane na "
+"dysku.\n"
+"\n"
+"\n"
+"W razie pewności, wybierz %s."
 
 #: install_interactive.pm:178
 #, c-format
-msgid "Which size do you want to keep for Windows on"
-msgstr "Jaki powinien być rozmiar partycji Windows?"
+msgid "Which size do you want to keep for Microsoft Windows® on"
+msgstr "Jaki powinien być rozmiar partycji Microsoft Windows®?"
 
 #: install_interactive.pm:179
 #, c-format
@@ -6441,8 +6450,8 @@ msgstr "partycja %s"
 
 #: install_interactive.pm:188
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "Zmiana rozmiaru partycji Windows"
+msgid "Resizing Microsoft Windows® partition"
+msgstr "Zmiana rozmiaru partycji Microsoft Windows®"
 
 #: install_interactive.pm:193
 #, c-format
@@ -6457,8 +6466,8 @@ msgstr ""
 
 #: install_interactive.pm:213
 #, c-format
-msgid "Remove Windows(TM)"
-msgstr "Usuń Windows(TM)"
+msgid "Remove Microsoft Windows®"
+msgstr "Usuń Microsoft Windows®"
 
 #: install_interactive.pm:213
 #, c-format
@@ -6844,7 +6853,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
-"Remove the boot media and press return to reboot.\n"
+"Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
 "For information on fixes which are available for this release of Mandriva "
@@ -16718,7 +16727,7 @@ msgstr "Jak dołączyć do społeczności Mandriva Linux?"
 
 #: share/advertising/26.pl:3
 #, c-format
-msgid "How to maintain your system up-to-date?"
+msgid "How to keep your system up-to-date?"
 msgstr "Jak zachować aktualność systemu?"
 
 #: share/advertising/intel.pl:3

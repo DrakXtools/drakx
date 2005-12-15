@@ -2567,7 +2567,7 @@ msgstr "新大小 (MB)："
 #, c-format
 msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
-"filesystem checks will be run on your next boot into Windows(TM)"
+"filesystem checks will be run on your next boot into Microsoft Windows®"
 msgstr ""
 "為確保重新調整分割區大小後的資料正確性，當您下次從 Windows(TM)\n"
 "開機時便會執行檔案系統檢查。"
@@ -4509,7 +4509,7 @@ msgstr "使用已經存在的分割區"
 
 #: help.pm:374 install_interactive.pm:137
 #, c-format
-msgid "Use the free space on the Windows partition"
+msgid "Use the free space on the Microsoft Windows® partition"
 msgstr "使用 Windows 分割區所剩餘的可用空間"
 
 #: help.pm:374
@@ -5859,8 +5859,8 @@ msgstr "沒有已經存在的分割區可供使用"
 
 #: install_interactive.pm:114
 #, c-format
-msgid "Use the Windows partition for loopback"
-msgstr "使用 Windows 分割區作為 loopback"
+msgid "Use the Microsoft Windows® partition for loopback"
+msgstr "使用 Microsoft Windows® 分割區作為 loopback"
 
 #: install_interactive.pm:117
 #, c-format
@@ -5903,18 +5903,18 @@ msgstr ""
 
 #: install_interactive.pm:156
 #, c-format
-msgid "Computing the size of the Windows partition"
-msgstr "計算 Windows 分割區大小"
+msgid "Computing the size of the Microsoft Windows® partition"
+msgstr "計算 Microsoft Windows® 分割區大小"
 
 #: install_interactive.pm:163
 #, c-format
 msgid ""
-"Your Windows partition is too fragmented. Please reboot your computer under "
-"Windows, run the ``defrag'' utility, then restart the Mandriva Linux "
-"installation."
+"Your Microsoft Windows® partition is too fragmented. Please reboot your "
+"computer under Microsoft Windows®, run the ``defrag'' utility, then restart "
+"the Mandriva Linux installation."
 msgstr ""
-"您的 Windows 分割區太支離破碎。請先用 Windows 重新開機，執行  ``defrag'' 工具"
-"程式，然後重新開始安裝 Mandriva Linux 。"
+"您的 Microsoft Windows® 分割區太支離破碎。請先用 Microsoft Windows® 重新開"
+"機，執行  ``defrag'' 工具程式，然後重新開始安裝 Mandriva Linux 。"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -5922,28 +5922,38 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
+"\n"
+"Your Microsoft Windows® partition will be now resized.\n"
+"\n"
+"\n"
+"Be careful: this operation is dangerous. If you have not already done so, "
+"you first need to exit the installation, run \"chkdsk c:\" from a Command "
+"Prompt under Microsoft Windows® (beware, running graphical program \"scandisk"
+"\" is not enough, be sure to use \"chkdsk\" in a Command Prompt!), "
+"optionally run defrag, then restart the installation. You should also backup "
+"your data.\n"
+"\n"
+"\n"
+"When sure, press %s."
 msgstr ""
 "警告！\n"
 "\n"
-"DrakX 現在將要重新調整您 Windows 分割區的大小。請注意：這個動作\n"
-"是很危險的。如果您不曾做過，您必須先離開安裝程式，在 Windows 命\n"
-"令提示字元下執行 \"chkdsk c:\" (請注意，執行圖形介面的程式 \n"
-"\"scandisk\" 並不夠，請確定是在命令提示下使用 \"chkdsk\" ！)，\n"
-"您還可以額外執行 defrag，然後重新開始安裝。您也應該備份您的資料\n"
-"。當您確定之後，請按下確定。"
+"\n"
+"DrakX 現在將要重新調整您 Windows 分割區的大小。\n"
+"\n"
+"\n"
+"請注意：這個動作是很危險的。如果您不曾做過，您必須先離開安裝程式，在 Windows "
+"命令提示字元下執行 \"chkdsk c:\" (請注意，執行圖形介面的程式\"scandisk\" 並不"
+"夠，請確定是在命令提示下使用 \"chkdsk\" ！)，您還可以額外執行 defrag，然後重"
+"新開始安裝。您也應該備份您的資料。\n"
+"\n"
+"\n"
+"當您確定之後，請按下%s。"
 
 #: install_interactive.pm:178
 #, c-format
-msgid "Which size do you want to keep for Windows on"
-msgstr "您要保留多少空間給 Windows 使用"
+msgid "Which size do you want to keep for Microsoft Windows® on"
+msgstr "您要保留多少空間給 Microsoft Windows® 使用"
 
 #: install_interactive.pm:179
 #, c-format
@@ -5952,8 +5962,8 @@ msgstr "分割區 %s"
 
 #: install_interactive.pm:188
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "正在重新調整 Windows 分割區大小"
+msgid "Resizing Microsoft Windows® partition"
+msgstr "正在重新調整 Microsoft Windows® 分割區大小"
 
 #: install_interactive.pm:193
 #, c-format
@@ -5967,8 +5977,8 @@ msgstr "沒有 FAT 分割區能夠調整大小 (或者是沒足夠空間剩下)"
 
 #: install_interactive.pm:213
 #, c-format
-msgid "Remove Windows(TM)"
-msgstr "移除 Windows(TM)"
+msgid "Remove Microsoft Windows®"
+msgstr "移除 Microsoft Windows®"
 
 #: install_interactive.pm:213
 #, fuzzy, c-format
@@ -6226,7 +6236,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
-"Remove the boot media and press return to reboot.\n"
+"Remove the boot media and press Enter to reboot.\n"
 "\n"
 "\n"
 "For information on fixes which are available for this release of Mandriva "
@@ -15657,7 +15667,7 @@ msgstr ""
 
 #: share/advertising/26.pl:3
 #, c-format
-msgid "How to maintain your system up-to-date?"
+msgid "How to keep your system up-to-date?"
 msgstr ""
 
 #: share/advertising/intel.pl:3
