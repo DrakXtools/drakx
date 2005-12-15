@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.4
+Version: 10.4.5
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Dec 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.5-1mdk
+- drakbackup (stew):
+  o fix some instances of 100% cpu on combo-box 'changed' in "Advanced When"
+  o add drakbackup man page
+  o update drakbackup.conf man page with new options
+- diskdrake (pixel):
+  o add user_xattr (useful for beagle, #15068)
+  o lilo handles / on RAID1, so don't warn in that case (#20021)
+- drakconnect (blino):
+  o don't overwrite ONBOOT setting when writing adsl configuration
+  o fix default metric setting for wifi interfaces
+  o fix firewire not being loaded in automatic mode
+- drakproxy: add support for https proxy (blino, #19666)
+- finish-install: ask for license agreement before doing anything else
+- use Locale::gettext (pixel)
+
 * Wed Nov 30 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.4-1mdk
 - drakboot: fix getting raid-extra-boot (pixel, #19965)
 - drakfirewall: update zones file for shorewall 3.0 (blino)
