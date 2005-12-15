@@ -112,28 +112,6 @@ void log_message(const char * s, ...) {
 
 print '
 
-SV * iconv_(char* s, char* from_charset, char* to_charset) {
-  iconv_t cd = iconv_open(to_charset, from_charset);
-  char* retval = s;
-  if (cd != (iconv_t) (-1)) {
-      size_t s_len = strlen(retval);
-      /* the maximum expansion when converting happens when converting
-	 tscii to utf-8; each tscii char can become up to 4 unicode chars
-	 and each one of those unicode chars can be 3 bytes long */
-      char *buf = alloca(4 * 3 * s_len);
-      {
-	  char *ptr = buf;
-	  size_t ptr_len = 4 * 3 * s_len;
-	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
-	      *ptr = 0;
-	      retval = buf;
-	  }
-      }
-      iconv_close(cd);
-  }
-  return newSVpv(retval, 0);
-}
-
 int length_of_space_padded(char *str, int len) {
   while (len >= 0 && str[len-1] == \' \')
     --len;
@@ -684,16 +662,6 @@ void
 setPromVars(linuxAlias, bootDevice)
   char *linuxAlias
   char *bootDevice
-
-SV *
-iconv(s, from_charset, to_charset)
-  char *s
-  char *from_charset
-  char *to_charset
-  CODE:
-  RETVAL = iconv_(s, from_charset, to_charset);
-  OUTPUT:
-  RETVAL
 
 int
 is_tagged_utf8(s)
