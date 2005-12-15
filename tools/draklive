@@ -225,6 +225,7 @@ my %storage = (
     cdrom => {
         read_only => 1,
         modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
+        create => \&create_cdrom_master,
     },
     usb => {
         modules => 'bus/usb disk/raw|usb',
@@ -351,6 +352,7 @@ sub create_initrd_linuxrc {
                           ""));
 }
 
+#- builds $live->{boot_dir} . '/initrd.gz'
 sub compress_initrd_tree {
     my ($live) = @_;
 
@@ -471,6 +473,24 @@ sub prepare_bootloader {
     my $msg = $live->{system}{root} . '/boot/message-graphic';
     cp_f($msg, $live->{boot_dir} . '/live.msg') if -f $msg;
     output($live->{boot_dir} . '/syslinux.cfg', build_syslinux_cfg($live));
+}
+
+sub create_cdrom_master {
+    my ($live) = @_;
+    my $dest = $live->{images_dir} . '/live.iso';
+    my $label = get_media_label($live) or die "the source device must be described by a label";
+    run_('mkisofs', '-pad', '-l', '-R', '-J', '-v', '-v',
+           '-V', $label, #'-A', $application, '-p', $preparer, '-P', $publisher,
+           '-b', 'isolinux/isolinux.bin',
+           '-c', 'isolinux/boot.cat',
+           '-hide-rr-moved', '-no-emul-boot',
+           '-boot-load-size', 4, '-boot-info-table',
+           '-o', $dest,
+           '-graft-points',
+           'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
+           'isolinux/isolinux.cfg=' . $live->{boot_dir} . '/syslinux.cfg',
+           (map { 'isolinux/=' . $live->{boot_dir} . '/' . $_ } qw(vmlinuz initrd.gz live.msg)),
+           (map { $live->{images_dir} . '/' . $_->{source} } grep { $_->{build_from} } @{$live->{mount}{dirs}}));
 }
 
 sub create_master {
