@@ -226,6 +226,7 @@ my %storage = (
         read_only => 1,
         modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
         create => \&create_cdrom_master,
+        format => \&format_cdrom_device,
         record => \&record_cdrom_master,
     },
     usb => {
@@ -503,6 +504,21 @@ sub create_master {
     }
 }
 
+sub format_cdrom_device {
+    my ($live) = @_;
+    $live->{media}{device} or die "no device defined in media configuration";
+    run_('cdrecord', '-v', 'dev=' . $live->{media}{device}, "blank=fast");
+}
+
+sub format_device {
+    my ($live) = @_;
+    if (my $format = $storage{$live->{media}{storage}}{format}) {
+        $format->($live, $o_refresh_boot_only);
+    } else {
+        warn "not implemented yet";
+    }
+}
+
 sub record_cdrom_master {
     my ($live, $o_refresh_boot_only) = @_;
     $o_refresh_boot_only and die "record boot isn't possible for cdrom master";
@@ -577,6 +593,7 @@ my @actions = (
     { name => 'boot', do => \&prepare_bootloader },
     { name => 'loop', do => \&create_loopback_files },
     { name => 'master', do => \&create_master },
+    { name => 'format', do => \&format_device },
     { name => 'record', do => \&record_master },
     { name => 'record_boot', do => \&record_boot },
 );
@@ -632,12 +649,13 @@ draklive [options]
    --all            run all steps, from installation to mastering
 
    --clean          clean installation chroot and work directory
+
+   --device <dev>   use this device for live recording (not needed
+                    if the device already has the required label)
+   --format         format selected device
    --record         install live on selected media
    --record_boot    install bootloader only on selected media
 
-   --device <dev>   use this device for live recording, formatting
-                    it preliminary (not needed if the device
-                    already has the required label)
    --config <file>  use this configuration file as live description
 
 Examples:
