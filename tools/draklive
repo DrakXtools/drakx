@@ -254,7 +254,7 @@ sub moddeps_closure {
 }
 
 sub run_ {
-    print "running " . join(' ', @_) . "\n";
+    print STDERR "running " . join(' ', @_) . "\n";
     run_program::run(@_);
 }
 
@@ -479,27 +479,29 @@ sub prepare_bootloader {
 }
 
 sub create_cdrom_master {
-    my ($live) = @_;
-    my $dest = $live->{images_dir} . '/live.iso';
+    my ($live, $opts) = @_;
     my $label = get_media_label($live) or die "the source device must be described by a label";
+    my @dest = $opts->{onthefly} ? () : ('-o', $live->{images_dir} . '/live.iso');
     run_('mkisofs', '-pad', '-l', '-R', '-J', '-v', '-v',
-           '-V', $label, #'-A', $application, '-p', $preparer, '-P', $publisher,
-           '-b', 'isolinux/isolinux.bin',
-           '-c', 'isolinux/boot.cat',
-           '-hide-rr-moved', '-no-emul-boot',
-           '-boot-load-size', 4, '-boot-info-table',
-           '-o', $dest,
-           '-graft-points',
-           'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
-           'isolinux/isolinux.cfg=' . $live->{boot_dir} . '/syslinux.cfg',
-           (map { 'isolinux/=' . $live->{boot_dir} . '/' . $_ } qw(vmlinuz initrd.gz live.msg)),
-           (map { $live->{images_dir} . '/' . $_->{source} } grep { $_->{build_from} } @{$live->{mount}{dirs}}));
+         '-V', $label, #'-A', $application, '-p', $preparer, '-P', $publisher,
+         '-b', 'isolinux/isolinux.bin',
+         '-c', 'isolinux/boot.cat',
+         '-hide-rr-moved', '-no-emul-boot',
+         '-boot-load-size', 4, '-boot-info-table',
+         '-graft-points',
+         'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
+         'isolinux/isolinux.cfg=' . $live->{boot_dir} . '/syslinux.cfg',
+         (map { 'isolinux/=' . $live->{boot_dir} . '/' . $_ } qw(vmlinuz initrd.gz live.msg)),
+         (map { $live->{images_dir} . '/' . $_->{source} } grep { $_->{build_from} } @{$live->{mount}{dirs}}),
+         @dest,
+     );
 }
 
+#- $opts: onthefly : if true, the create function must output to stdout
 sub create_master {
-    my ($live) = @_;
+    my ($live, $opts) = @_;
     if (my $create = $storage{$live->{media}{storage}}{create}) {
-        $create->($live);
+        $create->($live, $opts);
     } else {
         warn "not implemented yet";
     }
@@ -527,15 +529,15 @@ sub format_device {
 }
 
 sub record_cdrom_master {
-    my ($live, $o_refresh_boot_only) = @_;
-    $o_refresh_boot_only and die "record boot isn't possible for cdrom master";
+    my ($live, $opts) = @_;
+    $opts->{refresh_boot_only} and die "record boot isn't possible for cdrom master";
     $live->{media}{device} or die "no device defined in media configuration";
-    my $src = $live->{images_dir} . '/live.iso';
+    my $src = $opts->{onthefly} ? '-' : $live->{images_dir} . '/live.iso';
     run_('cdrecord', '-v', 'dev=' . $live->{media}{device}, $src);
 }
 
 sub record_usb_master {
-    my ($live, $o_refresh_boot_only) = @_;
+    my ($live, $opts) = @_;
     if (my $label = $live->{media}{device} && get_media_label($live)) {
         run_('mlabel', '-i', $live->{media}{device}, '::' . $label);
     }
@@ -545,7 +547,7 @@ sub record_usb_master {
     run_('mount', $device, $live->{mnt})
       or die "unable to mount $device";
     cp_f(map { $live->{boot_dir} . "/$_" } qw(vmlinuz initrd.gz live.msg), $live->{mnt});
-    unless ($o_refresh_boot_only) {
+    unless ($opts->{refresh_boot_only}) {
         foreach (grep { $_->{build_from} || $_->{pre_allocate} } @{$live->{mount}{dirs} || []}) {
             print "copying $_->{source}\n";
             cp_f($live->{images_dir} . '/' . $_->{source}, $live->{mnt});
@@ -556,10 +558,11 @@ sub record_usb_master {
     run_('syslinux', '-s', $device) or die "unable to run syslinux on $device";
 }
 
+#- $opts: onthefly : if true, the record function must read from stdin
 sub record_master {
-    my ($live, $o_refresh_boot_only) = @_;
+    my ($live, $opts) = @_;
     if (my $record = $storage{$live->{media}{storage}}{record}) {
-        $record->($live, $o_refresh_boot_only);
+        $record->($live, $opts);
     } else {
         warn "not implemented yet";
     }
@@ -567,7 +570,47 @@ sub record_master {
 
 sub record_boot {
     my ($live) = @_;
-    record_master($live, 'refresh');
+    record_master($live, { refresh => 1 });
+}
+
+sub pipe_subs {
+    my ($writer, $reader) = @_;
+    my ($r, $w) = POSIX::pipe;
+    if (my $pid = fork()) {
+        POSIX::close($w) or die "couldn't close: $!\n";
+        my $stdin = POSIX::dup(0) or die "couldn't dup: $!\n";
+        POSIX::dup2($r, 0) or die "couldn't dup2: $!\n";
+        POSIX::close($r);
+        $reader->();
+        POSIX::close(0) or warn "writer exited $?";
+        POSIX::dup2($stdin, 0) or die "couldn't dup2: $!\n";
+        waitpid($pid, 0);
+    } else {
+        POSIX::close($r) or die "couldn't close: $!\n";
+        #- don't screw up reader
+        POSIX::dup2(POSIX::open('/dev/null', &POSIX::O_WRONLY), 2) or die "couldn't dup2: $!\n";
+        POSIX::dup2($w, 1) or die "couldn't dup2: $!\n";
+        POSIX::close($w);
+        $| = 1; #- autoflush write
+        exit !$writer->();
+    }
+}
+
+sub record_onthefly {
+    my ($live) = @_;
+    my $record = $storage{$live->{media}{storage}}{record};
+    unless ($record) {
+        warn "not implemented yet";
+        return;
+    }
+    if (my $create = $storage{$live->{media}{storage}}{create}) {
+        #- pipe creation step to recording step
+        pipe_subs(sub { $create->($live, { onthefly => 1 }) },
+                  sub { $record->($live, { onthefly => 1 }) });
+    } else {
+        #- no creation step, record directly
+        $record->($live);
+    }
 }
 
 sub complete_config {
@@ -602,6 +645,7 @@ my @actions = (
     { name => 'format', do => \&format_device },
     { name => 'record', do => \&record_master },
     { name => 'record_boot', do => \&record_boot },
+    { name => 'record_onthefly', do => \&record_onthefly },
 );
 my @all = qw(install initrd boot loop master);
 
@@ -644,23 +688,25 @@ draklive - A live distribution mastering tool
 draklive [options]
 
  Options:
-   --help           long help message
+   --help            long help message
 
-   --install        install selected distribution in chroot
-   --initrd         build initrd
-   --boot           prepare bootloader files
-   --loop           build compressed loopback files
-   --master         build master image
+   --install         install selected distribution in chroot
+   --initrd          build initrd
+   --boot            prepare bootloader files
+   --loop            build compressed loopback files
+   --master          build master image
 
-   --all            run all steps, from installation to mastering
+   --all             run all steps, from installation to mastering
 
-   --clean          clean installation chroot and work directory
+   --clean           clean installation chroot and work directory
 
-   --device <dev>   use this device for live recording (not needed
-                    if the device already has the required label)
-   --format         format selected device
-   --record         install live on selected media
-   --record_boot    install bootloader only on selected media
+   --device <dev>    use this device for live recording (not needed
+                     if the device already has the required label)
+   --format          format selected device
+   --record          record live on selected media
+   --record_boot     record bootloader only on selected media
+   --record_onthefly record live by creating master from loopback files
+                     on the fly
 
    --config <file>  use this configuration file as live description
 
