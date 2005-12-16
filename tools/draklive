@@ -232,6 +232,7 @@ my %storage = (
     usb => {
         modules => 'bus/usb disk/raw|usb',
         create => undef,
+        format => \&format_usb_device,
         record => \&record_usb_master,
     },
 );
@@ -506,14 +507,20 @@ sub create_master {
 
 sub format_cdrom_device {
     my ($live) = @_;
-    $live->{media}{device} or die "no device defined in media configuration";
     run_('cdrecord', '-v', 'dev=' . $live->{media}{device}, "blank=fast");
+}
+
+sub format_usb_device {
+    my ($live) = @_;
+    run_('mkdosfs', $live->{media}{device})
+      or die "unable to format device $live->{media}{device}";
 }
 
 sub format_device {
     my ($live) = @_;
+    $live->{media}{device} or die "no device defined in media configuration";
     if (my $format = $storage{$live->{media}{storage}}{format}) {
-        $format->($live, $o_refresh_boot_only);
+        $format->($live);
     } else {
         warn "not implemented yet";
     }
@@ -529,12 +536,11 @@ sub record_cdrom_master {
 
 sub record_usb_master {
     my ($live, $o_refresh_boot_only) = @_;
-    my $label = get_media_label($live);
-    if ($live->{media}{device} && $label) {
-        run_('mkdosfs', '-n', $label, $live->{media}{device})
-          or die "unable to format device $live->{media}{device}";
+    if (my $label = $live->{media}{device} && get_media_label($live)) {
+        run_('mlabel', '-i', $live->{media}{device}, '::' . $label);
     }
-    my $device = get_media_device($live);
+    my $device = get_media_device($live)
+      or die "unable to find recording device (missing label? try with --device <device>)";
     mkdir_p($live->{mnt});
     run_('mount', $device, $live->{mnt})
       or die "unable to mount $device";
