@@ -371,6 +371,10 @@ sub beforeInstallPackages {
 
     read_bootloader_config($o);
 
+    if ($o->{isUpgrade}) {
+	$o->{modules_conf}->merge_into(modules::any_conf->read);
+    }
+
     #- save these files in case of upgrade failure.
     if ($o->{isUpgrade}) {
 	foreach (@filesToSaveForUpgrade) {
