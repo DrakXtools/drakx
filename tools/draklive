@@ -497,7 +497,7 @@ sub create_cdrom_master {
 sub create_master {
     my ($live) = @_;
     if (my $create = $storage{$live->{media}{storage}}{create}) {
-        $create->($live, $o_refresh_boot_only);
+        $create->($live);
     } else {
         warn "not implemented yet";
     }
