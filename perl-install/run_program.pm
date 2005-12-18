@@ -63,7 +63,7 @@ sub raw {
     my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
     #- checking if binary exist to avoid cloberring stdout file
-    my ($rname) = $real_name =~ /(.*)[\s\|]/;    
+    my ($rname) = $real_name =~ /(.*?)[\s\|]/;    
     if (! ($rname =~ m!^/! 
 	     ? -x "$root$rname" || $root && -l "$root$rname" #- handle non-relative symlink which can be broken when non-rooted
 	     : whereis_binary($rname, $root))) {
