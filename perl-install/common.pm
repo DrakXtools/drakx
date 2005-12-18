@@ -1,9 +1,9 @@
 package common; # $Id$
 
 use MDK::Common;
-use Locale::gettext();
 use diagnostics;
 use strict;
+eval { require Locale::gettext }; #- allow common.pm to be used in drakxtools-backend without perl-Locale-gettext
 
 use log;
 use run_program;

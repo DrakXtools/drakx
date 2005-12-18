@@ -15,8 +15,10 @@ $::isStandalone = 1;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
 
-c::init_setlocale();
-Locale::gettext::bindtextdomain('libDrakX', "/usr/share/locale");
+eval { #- allow standalone.pm to be used in drakxtools-backend without perl-Locale-gettext
+    c::init_setlocale();
+    Locale::gettext::bindtextdomain('libDrakX', "/usr/share/locale");
+};
 
 $::license = N_("This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
