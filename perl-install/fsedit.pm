@@ -346,7 +346,7 @@ sub suggest_part {
     my $has_swap = any { isSwap($_) } fs::get::fstab($all_hds);
 
     my @local_suggestions =
-      grep { !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
+      grep { !$_->{mntpoint} && !$_->{VG_name} || !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
 
@@ -364,7 +364,7 @@ sub suggest_part {
     foreach ('options', 'lv_name', 'encrypt_key', 'device_LABEL', 'prefer_device_LABEL', 'primaryOrExtended') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
-    1;
+    $best;
 }
 
 sub suggestions_mntpoint {
@@ -431,15 +431,18 @@ sub add {
 sub allocatePartitions {
     my ($all_hds, $to_add) = @_;
 
+    my @to_add = @$to_add;
+ 
     foreach my $part_ (fs::get::holes($all_hds)) {
 	my ($start, $size, $dev) = @$part_{"start", "size", "rootDevice"};
-	my $part;
-	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
-			    $all_hds, $to_add)) {
+	my ($part, $suggested);
+	while ($suggested = suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
+					 $all_hds, \@to_add)) {
 	    my $hd = fs::get::part2hd($part, $all_hds);
 	    add($hd, $part, $all_hds, { primaryOrExtended => $part->{primaryOrExtended} });
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};
+ 	    @to_add = grep { $_ != $suggested } @to_add;
 	}
     }
 }
