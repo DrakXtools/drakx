@@ -286,7 +286,7 @@ sub generate_menu {
     my ($interface) = @_;
 
     update_tray_icon();
-    gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($tooltips{$current_state}), $interface)));
+    gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(sprintf(translate($tooltips{$current_state}), $interface)));
 
     my $menu = Gtk2::Menu->new;
     my $create_item = sub {
