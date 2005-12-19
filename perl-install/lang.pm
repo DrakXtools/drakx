@@ -603,7 +603,7 @@ my %IM_config =
 	    packages => {
 		generic => 'scim scim-m17n scim-tables',
 		am => 'scim scim-tables ',
-		ja => 'scim-anthy scim-input-pad scim-tomoe kasumi',
+		ja => 'scim-anthy scim-input-pad scim-tomoe',
 		ko => 'scim-hangul',
           vi => 'scim-m17n',
 		zh => 'scim-pinyin scim-tables scim-chewing',
@@ -632,7 +632,7 @@ my %IM_config =
            XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim',
-	   packages => { generic => 'uim-gtk uim-anthy' },
+	   packages => { generic => 'uim-gtk uim' },
           },
    xcin => {
             XIM => 'xcin',
