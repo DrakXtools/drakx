@@ -489,11 +489,11 @@ sub create_cdrom_master {
          '-hide-rr-moved', '-no-emul-boot',
          '-boot-load-size', 4, '-boot-info-table',
          '-graft-points',
+         @dest,
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
          'isolinux/isolinux.cfg=' . $live->{boot_dir} . '/syslinux.cfg',
          (map { 'isolinux/=' . $live->{boot_dir} . '/' . $_ } qw(vmlinuz initrd.gz live.msg)),
          (map { $live->{images_dir} . '/' . $_->{source} } grep { $_->{build_from} } @{$live->{mount}{dirs}}),
-         @dest,
      );
 }
 
