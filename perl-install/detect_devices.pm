@@ -291,6 +291,7 @@ sub getSCSI_26() {
 
 	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
 	my ($device) = readlink($node) =~ m!/block/(.*)!;
+	die "cannot get info for device ($host, $channel, $id, $lun)" if !$device;
 
 	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd' }}{substr($device, 0, 2)};
 	# Old hp scanners report themselves as "Processor"s
