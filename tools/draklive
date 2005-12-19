@@ -555,7 +555,7 @@ sub record_usb_master {
     unless ($opts->{refresh_boot_only}) {
         foreach (grep { $_->{build_from} || $_->{pre_allocate} } @{$live->{mount}{dirs} || []}) {
             print "copying $_->{source}\n";
-            cp_f($live->{images_dir} . '/' . $_->{source}, $live->{mnt});
+            run_('rsync', '-vP', $live->{workdir} . $live->{prefix}{images} . '/' . $_->{source}, $live->{mnt});
         }
     }
     run_('umount', $live->{mnt});
