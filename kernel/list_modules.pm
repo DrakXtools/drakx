@@ -266,6 +266,8 @@ sub load_dependencies {
     my ($file) = @_;
 
     %dependencies = map {
+	s![^ ]*/!!g;
+	s!\.ko!!g;
 	my ($f, $deps) = split ':';
 	$f => [ split ' ', $deps ];
     } cat_($file);
