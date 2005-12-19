@@ -289,6 +289,7 @@ sub getSCSI_26() {
 	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../../..";
 	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
 
+	# handle both old and new kernels:
 	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
 	my ($device) = readlink($node) =~ m!/block/(.*)!;
 	die "cannot get info for device ($host, $channel, $id, $lun)" if !$device;
