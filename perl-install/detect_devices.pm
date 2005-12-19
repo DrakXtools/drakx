@@ -289,7 +289,8 @@ sub getSCSI_26() {
 	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../../..";
 	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
 
-	my ($device) = readlink("$dir/block") =~ m!/block/(.*)!;
+	my $node =  -e "$dir/block" ? "$dir/block" : top(glob_("$dir/block*"));
+	my ($device) = readlink($node) =~ m!/block/(.*)!;
 
 	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd' }}{substr($device, 0, 2)};
 	# Old hp scanners report themselves as "Processor"s
