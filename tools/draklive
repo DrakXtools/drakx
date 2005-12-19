@@ -431,7 +431,12 @@ sub install_system {
     #- disable first boot wizard
     output($live->{system}{root} . '/etc/sysconfig/firstboot', 'FIRSTBOOT=no');
     #- enable drakx-finish-install
-    output($live->{system}{root} . '/etc/sysconfig/finish-install', 'FINISH_INSTALL=yes');
+    output($live->{system}{root} . '/etc/sysconfig/finish-install', qq(
+FINISH_INSTALL=yes
+NETWORK=no
+AUTHENTICATION=no
+USERS=no
+));
 
     #- preselect guest user in kdm
     my $kdm_cfg = '/usr/share/config/kdm/kdmrc';
