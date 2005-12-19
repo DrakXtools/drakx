@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.5
+Version: 10.4.6
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Dec 18 2005 Pixel <pixel@mandriva.com> 10.4.6-1mdk
+- autosetupprintqueues (till)
+  o Removed "localhost" from the DISPLAY veriable, it broke
+    the authorization to pop up the printerdrake window 
+    on the user's desktop when a new USB printer was plugged.
+- net_applet: replace sprintf_fixutf8 with simple sprintf
+- fix running lilo (run_program.pm)
+- allow drakxtools-backend tools to work without perl-Locale-gettext
+
 * Thu Dec 15 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.5-1mdk
 - drakbackup (stew):
   o fix some instances of 100% cpu on combo-box 'changed' in "Advanced When"
