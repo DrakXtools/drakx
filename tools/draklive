@@ -85,21 +85,6 @@ my %predefined = (
             ],
         },
     },
-    media => {
-        usb => {
-            storage => 'usb',
-            fs => 'vfat',
-            sleep => 15,
-            source => 'LABEL=MDVUSBROOT',
-            mountpoint => '/media',
-        },
-        cdrom => {
-            storage => 'cdrom',
-            fs => 'iso9660',
-            source => 'LABEL=MDVCDROOT',
-            mountpoint => '/media',
-        },
-    },
 );
 
 my %custom = (
@@ -107,25 +92,40 @@ my %custom = (
         nfs => sub {
             my ($module, $client, $source) = @_;
             {
-                modules => [ $module ],
+                extra_modules => [ $module ],
                 fs => 'nfs',
                 pre => "ifconfig eth0 $client up",
                 source => $source,
-                mountpoint => '/media',
             };
         },
     },
 );
 
+my %storage = (
+    cdrom => {
+        modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
+        fs => 'iso9660',
+        source => 'LABEL=MDVCDROOT',
+        read_only => 1,
+        create => \&create_cdrom_master,
+        format => \&format_cdrom_device,
+        record => \&record_cdrom_master,
+    },
+    usb => {
+        modules => 'bus/usb disk/raw|usb',
+        fs => 'vfat',
+        source => 'LABEL=MDVUSBROOT',
+        sleep => 15,
+        create => undef,
+        format => \&format_usb_device,
+        record => \&record_usb_master,
+    },
+);
+
 sub nls_modules {
     my ($live) = @_;
-    if_($live->{media}{fs} eq 'vfat', 'nls_cp437'), #- default FAT codepage
+    if_(get_media_setting($live->{media}, 'fs') eq 'vfat', 'nls_cp437'), #- default FAT codepage
     map { "nls_$_" } (map { "iso8859-$_" } 1..7, 9, 13..15), 'utf8';
-}
-
-sub fs_module {
-    my ($live) = @_;
-    $live->{media}{fs} eq 'iso9660' ? 'isofs' : $live->{media}{fs};
 }
 
 sub progress_start {
@@ -176,8 +176,8 @@ my %loop = (
         mount => sub {
             my ($live, $dir) = @_;
             my @mnt = (
-                "/bin/losetup -r /dev/loop$loop_number $live->{media}{mountpoint}/$dir->{source}",
-                "mount -o ro -t squashfs /dev/loop$loop_number $dir->{mountpoint}");
+                "/bin/losetup -r /dev/loop$loop_number $live->{prefix}{live_mnt}$live->{prefix}{media_mnt}$live->{prefix}{loopbacks}/$dir->{source}",
+                "mount -o ro -t squashfs /dev/loop$loop_number $live->{prefix}{live_mnt}$dir->{mountpoint}");
             $loop_number++;
             @mnt;
         },
@@ -192,16 +192,16 @@ my %loop = (
         mount => sub {
             my ($live, $dir) = @_;
             my @mnt = (
-                "losetup /dev/loop$loop_number $live->{media}{mountpoint}/$dir->{source}",
-                "mount -t ext2 /dev/loop$loop_number $dir->{mountpoint}");
+                "losetup /dev/loop$loop_number $live->{prefix}{live_mnt}$live->{prefix}{media_mnt}$live->{prefix}{loopbacks}/$dir->{source}",
+                "mount -t ext2 /dev/loop$loop_number $live->{prefix}{live_mnt}$dir->{mountpoint}");
             $loop_number++;
             @mnt;
         },
     },
     tmpfs => {
         mount => sub {
-            my ($_live, $dir) = @_;
-            "mount -t tmpfs none $dir->{mountpoint}";
+            my ($live, $dir) = @_;
+            "mount -t tmpfs none $live->{prefix}{live_mnt}$dir->{mountpoint}";
         },
     },
 );
@@ -213,27 +213,11 @@ my %overlay = (
             my ($live) = @_;
             #- build dirs list: "dir1=ro:dir2:ro:dir3=rw"
             my $dirs = join(':',
-                            map { "$_->{mountpoint}=" .
+                            map { "$live->{prefix}{live_mnt}$_->{mountpoint}=" .
                                     ($_->{type} && !$loop{$_->{type}}{read_only} ? 'rw' : 'ro');
                                 } @{$live->{mount}{dirs} || []});
-            "mount -o dirs=$dirs -t unionfs unionfs $live->{mount}{root}";
+            "mount -o dirs=$dirs -t unionfs unionfs $live->{prefix}{live_mnt}$live->{mount}{root}";
         },
-    },
-);
-
-my %storage = (
-    cdrom => {
-        read_only => 1,
-        modules => 'disk/cdrom|hardware_raid|sata|scsi bus/usb disk/raw',
-        create => \&create_cdrom_master,
-        format => \&format_cdrom_device,
-        record => \&record_cdrom_master,
-    },
-    usb => {
-        modules => 'bus/usb disk/raw|usb',
-        create => undef,
-        format => \&format_usb_device,
-        record => \&record_usb_master,
     },
 );
 
@@ -258,43 +242,61 @@ sub run_ {
     run_program::run(@_);
 }
 
+sub get_initrd_path {
+    my ($live, $media) = @_;
+    $live->{prefix}{boot} . '/' . $media->{storage} . '/initrd.gz';
+}
+
+sub get_syslinux_path {
+    my ($live, $media) = @_;
+    $live->{prefix}{boot} . '/' . $media->{storage} . '/syslinux.cfg';
+}
+
 sub create_initrd {
     my ($live) = @_;
+    foreach ($live->{media}, @{$live->{extra_media}}) {
+        create_initrd_for_media($live, $_);
+    }
+    $live->{copy_initrd} and cp_f($live->{workdir} . get_initrd_path($live, $live->{media}), $live->{copy_initrd});
+}
 
-    rm_rf($live->{initrd_tree}) if -e $live->{initrd_tree};
+sub create_initrd_for_media {
+    my ($live, $media) = @_;
 
-    mkdir_p($live->{initrd_tree} . $_) foreach
+    my $initrd_tree = $live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage};
+    rm_rf($initrd_tree) if -e $initrd_tree;
+
+    mkdir_p($initrd_tree . $_) foreach
       qw(/bin /dev /lib /proc /sys),
-      $live->{media}{mountpoint},
-      (map { $_->{mountpoint} } @{$live->{mount}{dirs} || []}),
-      $live->{mount}{root};
+      map { $live->{prefix}{live_mnt} . $_ }
+        $live->{prefix}{media_mnt},
+        $live->{mount}{root},
+        map { $_->{mountpoint} } @{$live->{mount}{dirs} || []};
 
-    # cp_f($live->{system}{root} . '/sbin/nash', $live->{initrd_tree} . '/bin/');
+    # cp_f($live->{system}{root} . '/sbin/nash', $initrd_tree . '/bin/');
     #- use nash from cooker for now, label support
-    cp_f('/sbin/nash', $live->{initrd_tree} . '/bin/');
-    #- needed to mount loopbacks read-only
-    cp_f('/lib/tls/libc.so.6', $live->{initrd_tree} . '/lib/');
-    cp_f('/lib/ld-linux.so.2', $live->{initrd_tree} . '/lib/');
-    cp_f('/sbin/losetup', $live->{initrd_tree} . '/bin/');
+    cp_f('/sbin/nash', $initrd_tree . '/bin/');
+    #- needed to mount loopbacks read-only and move mountpoints
+    cp_f('/bin/mount', '/sbin/losetup', $initrd_tree . '/bin/');
+    cp_f('/lib/ld-linux.so.2', '/lib/tls/libc.so.6', $initrd_tree . '/lib/');
 
-    if ($live->{media}{fs} eq 'nfs') {
-        cp_f('/sbin/ifconfig', $live->{initrd_tree} . '/bin/');
-        cp_f('/bin/mount', $live->{initrd_tree} . '/bin/');
+    if (get_media_setting($media, 'fs') eq 'nfs') {
+        cp_f('/sbin/ifconfig', $initrd_tree . '/bin/');
         if ($live->{debug}) {
-            cp_f('/bin/ping', $live->{initrd_tree} . '/bin/');
-            cp_f('/lib/libresolv.so.2', $live->{initrd_tree} . '/lib/');
+            cp_f('/bin/ping', $initrd_tree . '/bin/');
+            cp_f('/lib/libresolv.so.2', $initrd_tree . '/lib/');
         }
     }
     if ($live->{debug}) {
-        cp_f('/usr/bin/strace', $live->{initrd_tree} . '/bin/');
-        cp_f('/usr/bin/busybox', $live->{initrd_tree} . '/bin');
+        cp_f('/usr/bin/strace', $initrd_tree . '/bin/');
+        cp_f('/usr/bin/busybox', $initrd_tree . '/bin');
         my @l = map { /functions:/ .. /^$/ ? do { s/\s//g; split /,/ } : () } `busybox`;
         shift @l;
-        symlink('busybox', $live->{initrd_tree} . "/bin/$_") foreach @l;
+        symlink('busybox', $initrd_tree . "/bin/$_") foreach @l;
     }
 
     require devices;
-    devices::make($live->{initrd_tree} . "/dev/$_") foreach
+    devices::make($initrd_tree . "/dev/$_") foreach
         qw(console initrd null ram systty),
         (map { "tty$_" } 0..5),
         (map { "loop$_" } 0..7);
@@ -302,84 +304,85 @@ sub create_initrd {
     load_moddeps($live->{system}{root}, "/lib/modules/" . $live->{system}{kernel});
 
     my ($modules, $skipped) = partition { exists $moddeps{$_} }
-      uniq(map { modules::cond_mapping_24_26($_) } category2modules($storage{$live->{media}{storage}}{modules}));
+      uniq(map { modules::cond_mapping_24_26($_) } category2modules(get_media_setting($media, 'modules')));
     my ($extra_modules, $missing) = partition { exists $moddeps{$_} }
       nls_modules($live),
-      fs_module($live),
-      @{$live->{media}{modules} || []},
+      get_media_fs_module($media),
+      @{get_media_setting($media, 'extra_modules') || []},
       (map { @{$loop{$_}{modules} || []} } uniq(map { $_->{type} } grep { $_->{type} } @{$live->{mount}{dirs} || []})),
       ($live->{mount}{overlay} ? @{$overlay{$live->{mount}{overlay}}{modules} || []} : ());
 
-    @$missing and die "missing mandatory modules:" . join("\n", '', sort(@$missing));
+    @$missing and die "missing mandatory modules:" . join("\n", sort(@$missing));
     push @$modules, @$extra_modules;
 
     my @module_deps = uniq(map { moddeps_closure($_) } @$modules);
-    run_('gzip', '>', $live->{initrd_tree} . "/lib/$_.ko", '-dc', $live->{system}{root} . $moddeps{$_}{full})
+    run_('gzip', '>', $initrd_tree . "/lib/$_.ko", '-dc', $live->{system}{root} . $moddeps{$_}{full})
       foreach @module_deps, @$modules;
 
-    @$skipped and warn "skipped modules:" . join("\n", '', sort(@$skipped));
+    @$skipped and warn "skipped modules:" . join("\n", sort(@$skipped));
 
-    create_initrd_linuxrc($live, @module_deps, @$modules);
-    compress_initrd_tree($live);
-    add_splash($live);
-    $live->{copy_initrd} and cp_f($live->{boot_dir} . '/initrd.gz', $live->{copy_initrd});
+    create_initrd_linuxrc($live, $media, @module_deps, @$modules);
+    compress_initrd_tree($live, $media);
+    add_splash($live, $media);
 }
 
 sub create_initrd_linuxrc {
-    my ($live, @modules) = @_;
-    my $target = $live->{mount}{root} || $live->{media}{mountpoint};
-    output_with_perm($live->{initrd_tree} . '/linuxrc', 0755,
+    my ($live, $media, @modules) = @_;
+    my $target = $live->{prefix}{live_mnt} . ($live->{mount}{root} || $live->{prefix}{media_mnt});
+    my $sleep = get_media_setting($media, 'sleep');
+    my $pre = get_media_setting($media, 'pre');
+    my $fs = get_media_setting($media, 'fs');
+    output_with_perm($live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage} . '/linuxrc', 0755,
                      join("\n",
                           "#!/bin/nash",
                           (map { "insmod /lib/$_.ko" } @modules),
-                          if_($live->{media}{sleep}, "sleep $live->{media}{sleep}"),
+                          if_($sleep, "sleep $sleep"),
                           #- required for labels
                           "mount -t proc none /proc",
                           #- required for cdrom labels
                           "mount -t sysfs none /sys",
                           if_($live->{debug}, "/bin/sh"),
-                          if_($live->{media}{pre}, deref_array($live->{media}{pre})),
-                          ($live->{media}{fs} eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
-                            ($storage{$live->{media}{storage}}{read_only} && " -o ro") .
-                            " -t $live->{media}{fs} $live->{media}{source} $live->{media}{mountpoint}",
+                          if_($pre, deref_array($pre)),
+                          ($fs eq 'nfs' ? '/bin/mount -n -o ro,nolock' : 'mount') .
+                            (get_media_setting($media, 'read_only') && " -o ro") .
+                            " -t $fs " . get_media_setting($media, 'source') . " $live->{prefix}{live_mnt}$live->{prefix}{media_mnt}",
                           (map { $loop{$_->{type}}{mount}->($live, $_) } grep { $_->{type} } @{$live->{mount}{dirs} || []}),
                           ($live->{mount}{overlay} ? $overlay{$live->{mount}{overlay}}{mount}->($live) : ()),
                           "echo 0x0100 > /proc/sys/kernel/real-root-dev",
                           "umount /sys",
                           "umount /proc",
-                          ($live->{mount}{overlay} ?
-                             # don't move to /initrd but /live, or else the overlay will be unmounted
-                             ("mkdir -p $target/live", "pivot_root $target $target/live") :
-                               "pivot_root $target $target/initrd"),
+                          "pivot_root $target $target/initrd",
+                          "/bin/sh -c 'rmdir /initrd$target; cd /initrd$live->{prefix}{live_mnt}; for i in `/bin/ls -1`; do mkdir -p $live->{prefix}{live_mnt}/\$i; mount -n --move \$i $live->{prefix}{live_mnt}/\$i; done'",
                           if_($live->{post}, deref_array($live->{post})),
                           ""));
 }
 
-#- builds $live->{boot_dir} . '/initrd.gz'
 sub compress_initrd_tree {
-    my ($live) = @_;
+    my ($live, $media) = @_;
 
-    my $size = run_program::get_stdout("du -ks $live->{initrd_tree} | awk '{print \$1}'") + 250;
-    my $inodes = run_program::get_stdout("find $live->{initrd_tree} | wc -l") + 1250;
+    my $initrd_tree = $live->{workdir} . $live->{prefix}{initrd} . '/' . $media->{storage};
+    my $size = run_program::get_stdout("du -ks $initrd_tree | awk '{print \$1}'") + 250;
+    my $inodes = run_program::get_stdout("find $initrd_tree | wc -l") + 1250;
     $size = int($size + $inodes / 10) + 1; #- 10 inodes needs 1K
-    my $initrd = $live->{boot_dir} . "/initrd";
+    my $initrd = $live->{workdir} . get_initrd_path($live, $media);
+    $initrd =~ s/.gz$//;
 
-    mkdir_p($live->{boot_dir});
+    mkdir_p(dirname($initrd));
     run_('dd', 'if=/dev/zero', "of=$initrd", 'bs=1k', "count=$size");
     run_('mke2fs', '-q', '-m', 0, '-F', '-N', $inodes, '-s', 1, $initrd);
     mkdir_p($live->{mnt});
     run_('mount', '-o', 'loop', '-t', 'ext2', $initrd, $live->{mnt});
-    cp_af(glob("$live->{initrd_tree}/*"), $live->{mnt});
+    cp_af(glob("$initrd_tree/*"), $live->{mnt});
     rm_rf($live->{mnt} . "/lost+found");
     run_('umount', $live->{mnt});
     run_('gzip', '-f', '-9', $initrd);
 }
 
 sub add_splash {
-    my ($live) = @_;
+    my ($live, $media) = @_;
     if ($live->{system}{vga_mode} && $live->{system}{splash} ne 'no') {
 	require bootloader;
-	my $initrd = "$live->{boot_dir}/initrd.gz";
+	my $initrd = $live->{workdir} . get_initrd_path($live, $media);
 	my $tmp_initrd = '/tmp/initrd.gz';
         cp_f($initrd, $live->{system}{root} . $tmp_initrd);
         {
@@ -392,16 +395,19 @@ sub add_splash {
 }
 
 sub build_syslinux_cfg {
-    my ($live) = @_;
+    my ($live, $media) = @_;
     #- fastboot is needed to avoid fsck
     my $append = "fastboot splash=silent vga=$live->{system}{vga_mode}";
+    my $to_root = get_media_fs_module($media) eq 'vfat';
+    my ($initrd, $kernel, $display) = map { $to_root ? basename($_) : $_ }
+      get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
     qq(default live
 prompt 1
 timeout 40
-display live.msg
+display $display
 label live
-    kernel vmlinuz
-    append initrd=initrd.gz $append
+    kernel $kernel
+    append initrd=$initrd $append
 );
 }
 
@@ -446,29 +452,47 @@ USERS=no
 
 sub create_loopback_files {
     my ($live) = @_;
-    mkdir_p($live->{images_dir});
+    mkdir_p($live->{workdir} . $live->{prefix}{loopbacks});
     foreach (grep { $_->{build_from} } @{$live->{mount}{dirs} || []}) {
         my $tree = $live->{system}{root} . $_->{build_from};
-        my $dest = $live->{images_dir} . '/' . $_->{source};
+        my $dest = $live->{workdir} . $live->{prefix}{loopbacks} . '/' . $_->{source};
         unlink($dest);
         $loop{$_->{type}}{build}->($dest, $tree);
     }
     foreach (grep { $_->{pre_allocate} } @{$live->{mount}{dirs} || []}) {
-        my $dest = $live->{images_dir} . '/' . $_->{source};
+        my $dest = $live->{workdir} . $live->{prefix}{loopbacks} . '/' . $_->{source};
         unlink($dest);
         $loop{$_->{type}}{create}->($dest, $_->{pre_allocate});
     }
 }
 
+#- mainly for storage-specific subroutines
+sub get_storage_setting {
+    my ($media, $setting) = @_;
+    $storage{$media->{storage}}{$setting};
+}
+
+#- for user-customisable media setting, that can override storage setting
+sub get_media_setting {
+    my ($media, $setting) = @_;
+    $media->{$setting} || get_storage_setting($media, $setting);
+}
+
+sub get_media_fs_module {
+    my ($media) = @_;
+    my $fs = get_media_setting($media, 'fs');
+    $fs eq 'iso9660' ? 'isofs' : $fs;
+}
+
 sub get_media_label {
-    my ($live) = @_;
-    first($live->{media}{source} =~ /^LABEL=(.*)$/);
+    my ($media) = @_;
+    first(get_media_setting($media, 'source') =~ /^LABEL=(.*)$/);
 }
 
 sub get_media_device {
-    my ($live) = @_;
-    return $live->{media}{device} if $live->{media}{device};
-    my $label = get_media_label($live) or return $live->{media}{source};
+    my ($media) = @_;
+    return $media->{device} if $media->{device};
+    my $label = get_media_label($media) or return get_media_setting($media, 'source');
     my $device = chomp_(`readlink -f /dev/disk/by-label/$label`)
       or die "unable to find device for /dev/disk/by-label/$label";
     $device;
@@ -476,17 +500,23 @@ sub get_media_device {
 
 sub prepare_bootloader {
     my ($live) = @_;
-    mkdir_p($live->{boot_dir});
-    cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{boot_dir} . '/vmlinuz');
+    create_initrd($live);
+    cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{workdir} . $live->{prefix}{boot} . '/vmlinuz');
     my $msg = $live->{system}{root} . '/boot/message-graphic';
-    cp_f($msg, $live->{boot_dir} . '/live.msg') if -f $msg;
-    output($live->{boot_dir} . '/syslinux.cfg', build_syslinux_cfg($live));
+    cp_f($msg, $live->{workdir} . $live->{prefix}{boot} . '/live.msg') if -f $msg;
+    foreach ($live->{media}, @{$live->{extra_media}}) {
+        output($live->{workdir} . get_syslinux_path($live, $_), build_syslinux_cfg($live, $_));
+    }
 }
 
 sub create_cdrom_master {
-    my ($live, $opts) = @_;
-    my $label = get_media_label($live) or die "the source device must be described by a label";
-    my @dest = $opts->{onthefly} ? () : ('-o', $live->{images_dir} . '/live.iso');
+    my ($live, $media, $opts) = @_;
+    my $label = get_media_label($media) or die "the source device must be described by a label";
+    my @dest;
+    unless ($opts->{onthefly}) {
+        @dest = ('-o', $live->{workdir} . $live->{prefix}{images} . '/live.iso');
+        mkdir_p(dirname($dest[1]));
+    }
     run_('mkisofs', '-pad', '-l', '-R', '-J', '-v', '-v',
          '-V', $label, #'-A', $application, '-p', $preparer, '-P', $publisher,
          '-b', 'isolinux/isolinux.bin',
@@ -496,78 +526,89 @@ sub create_cdrom_master {
          '-graft-points',
          @dest,
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
-         'isolinux/isolinux.cfg=' . $live->{boot_dir} . '/syslinux.cfg',
-         (map { 'isolinux/=' . $live->{boot_dir} . '/' . $_ } qw(vmlinuz initrd.gz live.msg)),
-         (map { $live->{images_dir} . '/' . $_->{source} } grep { $_->{build_from} } @{$live->{mount}{dirs}}),
+         'isolinux/isolinux.cfg=' . $live->{workdir} . get_syslinux_path($live, $media),
+         $live->{prefix}{boot} . '=' . $live->{workdir} . $live->{prefix}{boot},
+         $live->{prefix}{loopbacks} . '=' . $live->{workdir} . $live->{prefix}{loopbacks},
      );
 }
 
-#- $opts: onthefly : if true, the create function must output to stdout
+#- $opts:
+#-   media: alternate media
+#-   onthefly : if true, the create function must output to stdout
 sub create_master {
     my ($live, $opts) = @_;
-    if (my $create = $storage{$live->{media}{storage}}{create}) {
-        $create->($live, $opts);
+    my $media = $opts->{media} || $live->{media};
+
+    if (my $create = get_storage_setting($media, 'create')) {
+        $create->($live, $media, $opts);
     } else {
         warn "not implemented yet";
     }
 }
 
 sub format_cdrom_device {
-    my ($live) = @_;
-    run_('cdrecord', '-v', 'dev=' . $live->{media}{device}, "blank=fast");
+    my ($_live, $media) = @_;
+    run_('cdrecord', '-v', 'dev=' . $media->{device}, "blank=fast");
 }
 
 sub format_usb_device {
-    my ($live) = @_;
-    run_('mkdosfs', $live->{media}{device})
-      or die "unable to format device $live->{media}{device}";
+    my ($_live, $media) = @_;
+    run_('mkdosfs', $media->{device})
+      or die "unable to format device $media->{device}";
 }
 
+#- $opts:
+#-   media: alternate media
 sub format_device {
-    my ($live) = @_;
-    $live->{media}{device} or die "no device defined in media configuration";
-    if (my $format = $storage{$live->{media}{storage}}{format}) {
-        $format->($live);
+    my ($live, $opts) = @_;
+    my $media = $opts->{media} || $live->{media};
+
+    $media->{device} or die "no device defined in media configuration";
+    if (my $format = get_storage_setting($media, 'format')) {
+        $format->($live, $media);
     } else {
         warn "not implemented yet";
     }
 }
 
 sub record_cdrom_master {
-    my ($live, $opts) = @_;
+    my ($live, $media, $opts) = @_;
     $opts->{refresh_boot_only} and die "record boot isn't possible for cdrom master";
-    $live->{media}{device} or die "no device defined in media configuration";
-    my $src = $opts->{onthefly} ? '-' : $live->{images_dir} . '/live.iso';
-    run_('cdrecord', '-v', 'dev=' . $live->{media}{device}, $src);
+    $media->{device} or die "no device defined in media configuration";
+    my $src = $opts->{onthefly} ? '-' : $live->{workdir} . $live->{prefix}{images} . '/live.iso';
+    run_('cdrecord', '-v', 'dev=' . $media->{device}, $src);
 }
 
 sub record_usb_master {
-    my ($live, $opts) = @_;
-    if (my $label = $live->{media}{device} && get_media_label($live)) {
-        run_('mlabel', '-i', $live->{media}{device}, '::' . $label);
+    my ($live, $media, $opts) = @_;
+    if (my $label = $media->{device} && get_media_label($media)) {
+        run_('mlabel', '-i', $media->{device}, '::' . $label);
     }
-    my $device = get_media_device($live)
+    my $device = get_media_device($media)
       or die "unable to find recording device (missing label? try with --device <device>)";
     mkdir_p($live->{mnt});
     run_('mount', $device, $live->{mnt})
       or die "unable to mount $device";
-    cp_f(map { $live->{boot_dir} . "/$_" } qw(vmlinuz initrd.gz live.msg), $live->{mnt});
-    unless ($opts->{refresh_boot_only}) {
-        foreach (grep { $_->{build_from} || $_->{pre_allocate} } @{$live->{mount}{dirs} || []}) {
-            print "copying $_->{source}\n";
-            run_('rsync', '-vP', $live->{workdir} . $live->{prefix}{images} . '/' . $_->{source}, $live->{mnt});
-        }
-    }
+    cp_af($live->{workdir} . $live->{prefix}{boot}, $live->{mnt});
+    cp_f($live->{workdir} . get_syslinux_path($live, $media), $live->{mnt});
+    cp_f($live->{workdir} . $_, $live->{mnt}) foreach
+      get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
+    run_('rsync', '-vdP', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
+      unless $opts->{refresh_boot_only};
     run_('umount', $live->{mnt});
     #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX
     run_('syslinux', '-s', $device) or die "unable to run syslinux on $device";
 }
 
-#- $opts: onthefly : if true, the record function must read from stdin
+#- $opts:
+#-   media: alternate media
+#-   onthefly : if true, the record function must read from stdin
 sub record_master {
     my ($live, $opts) = @_;
-    if (my $record = $storage{$live->{media}{storage}}{record}) {
-        $record->($live, $opts);
+    my $media = $opts->{media} || $live->{media};
+
+    if (my $record = get_storage_setting($media, 'record')) {
+        $record->($live, $media, $opts);
     } else {
         warn "not implemented yet";
     }
@@ -575,7 +616,7 @@ sub record_master {
 
 sub record_boot {
     my ($live) = @_;
-    record_master($live, { refresh => 1 });
+    record_master($live, { refresh_boot_only => 1 });
 }
 
 sub pipe_subs {
@@ -602,34 +643,43 @@ sub pipe_subs {
 }
 
 sub record_onthefly {
-    my ($live) = @_;
-    my $record = $storage{$live->{media}{storage}}{record};
+    my ($live, $opts) = @_;
+    my $media = $opts->{media} || $live->{media};
+
+    my $record = get_storage_setting($media, 'record');
     unless ($record) {
         warn "not implemented yet";
         return;
     }
-    if (my $create = $storage{$live->{media}{storage}}{create}) {
+    if (my $create = get_storage_setting($media, 'create')) {
         #- pipe creation step to recording step
-        pipe_subs(sub { $create->($live, { onthefly => 1 }) },
-                  sub { $record->($live, { onthefly => 1 }) });
+        pipe_subs(sub { $create->($live, $media, { onthefly => 1 }) },
+                  sub { $record->($live, $media, { onthefly => 1 }) });
     } else {
         #- no creation step, record directly
-        $record->($live);
+        $record->($live, $media);
     }
 }
 
 sub complete_config {
     my ($live) = @_;
 
+    add2hash($live->{prefix} ||= {},
+             {
+                 media_mnt => '/media',
+                 live_mnt => '/live',
+                 loopbacks => '/loopbacks',
+                 images => '/images',
+                 boot => '/boot',
+                 initrd => '/initrd',
+             });
+
     #- set unsupplied config dirs
     $live->{workdir} ||= '/tmp/draklive';
-    $live->{boot_dir} ||= $live->{workdir} . "/boot";
-    $live->{initrd_tree} ||= $live->{workdir} . "/initrd";
-    $live->{images_dir} ||= $live->{workdir} . "/images";
     $live->{mnt} ||= $live->{workdir} . "/mnt";
 
     #- check for minimum requirements
-    ref $live->{media} or die "no media definition";
+    ref $live->{media} && $live->{media}{storage} or die "no media storage definition";
     ref $live->{system} or die "no system definition";
     $live->{system}{kernel} or die "no kernel has been configured";
     mkdir_p($live->{workdir});
@@ -652,7 +702,7 @@ my @actions = (
     { name => 'record_boot', do => \&record_boot },
     { name => 'record_onthefly', do => \&record_onthefly },
 );
-my @all = qw(install initrd boot loop master);
+my @all = qw(install boot loop master);
 
 my %live;
 GetOptions(
@@ -696,8 +746,7 @@ draklive [options]
    --help            long help message
 
    --install         install selected distribution in chroot
-   --initrd          build initrd
-   --boot            prepare bootloader files
+   --boot            prepare initrd and bootloader files
    --loop            build compressed loopback files
    --master          build master image
 
@@ -712,6 +761,8 @@ draklive [options]
    --record_boot     record bootloader only on selected media
    --record_onthefly record live by creating master from loopback files
                      on the fly
+
+   --initrd          build initrd only
 
    --config <file>  use this configuration file as live description
 
@@ -748,7 +799,14 @@ Here's a configuration sample:
         ],
         vga_mode => 788,
     },
-    media => $predefined{media}{usb},
+    media => {
+        storage => 'cdrom',
+    },
+    extra_media => [
+        {
+                storage => 'usb',
+        },
+    ],
     mount => $predefined{mounts}{squash_union}
   };
 
