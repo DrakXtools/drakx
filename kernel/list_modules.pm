@@ -83,7 +83,7 @@ our %l = (
     # ide drivers compiled as modules:
     ide => [
         qw(aec62xx cs5520 cs5530 cs5535 delkin_cb ide-generic),
-        qw(pata_amd pata_mpiix pata_oldpiix pata_opti pata_pdc2027x pata_sil680 pata_triflex pata_via)
+        qw(pata_amd pata_mpiix pata_oldpiix pata_opti pata_pdc2027x pata_sil680 pata_triflex pata_via),
         qw(rz1000 sc1200 slc90e66 triflex trm290) ],
     # ide drivers compiled in core kernel:
     all_ide => [
