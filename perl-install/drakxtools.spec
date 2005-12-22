@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.6
+Version: 10.4.7
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Dec 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.7-1mdk
+- diskdrake: handle kernel-2.6.14+
+
 * Sun Dec 18 2005 Pixel <pixel@mandriva.com> 10.4.6-1mdk
 - autosetupprintqueues (till)
   o Removed "localhost" from the DISPLAY veriable, it broke
