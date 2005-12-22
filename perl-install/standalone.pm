@@ -140,6 +140,7 @@ Copyright (C) 1999-2004 Mandriva by <install@mandriva.com>
 ',  $::license, "\n";
 }
 
+if (!$::no_global_argv_parsing) {
 my ($i, @new_ARGV);
 foreach (@ARGV) {
     $i++;
@@ -171,7 +172,7 @@ foreach (@ARGV) {
 }
 
 @ARGV = @new_ARGV;
-
+}
 
 ################################################################################
 
