@@ -664,16 +664,6 @@ sub record_onthefly {
 sub complete_config {
     my ($live) = @_;
 
-    add2hash($live->{prefix} ||= {},
-             {
-                 media_mnt => '/media',
-                 live_mnt => '/live',
-                 loopbacks => '/loopbacks',
-                 images => '/images',
-                 boot => '/boot',
-                 initrd => '/initrd',
-             });
-
     #- set unsupplied config dirs
     $live->{workdir} ||= '/tmp/draklive';
     $live->{mnt} ||= $live->{workdir} . "/mnt";
@@ -689,6 +679,15 @@ sub clean {
     my ($live) = @_;
     rm_rf($_) foreach grep { -e $_ } $live->{workdir}, $live->{system}{root};
 }
+
+my $default_prefix = {
+    media_mnt => '/media',
+    live_mnt => '/live',
+    loopbacks => '/loopbacks',
+    images => '/images',
+    boot => '/boot',
+    initrd => '/initrd',
+};
 
 my @actions = (
     { name => 'clean', do => \&clean },
@@ -723,6 +722,7 @@ unless (keys(%live)) {
     pod2usage();
 }
 complete_config(\%live);
+add2hash($live{prefix} ||= {}, $default_prefix);
 
 require standalone;
 every { !$_->{to_run} } @actions and die 'nothing to do';
