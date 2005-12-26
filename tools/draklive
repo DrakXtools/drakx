@@ -21,8 +21,10 @@
 
 use lib qw(/usr/lib/libDrakX);
 use MDK::Common;
+use common;
 use list_modules;
 use modules;
+use detect_devices;
 use run_program;
 use POSIX qw(strftime);
 use Cwd 'abs_path';
@@ -107,6 +109,7 @@ my %storage = (
         fs => 'iso9660',
         source => 'LABEL=MDVCDROOT',
         read_only => 1,
+        detect => \&detect_devices::burners,
         create => \&create_cdrom_master,
         format => \&format_cdrom_device,
         record => \&record_cdrom_master,
@@ -116,6 +119,7 @@ my %storage = (
         fs => 'vfat',
         source => 'LABEL=MDVUSBROOT',
         sleep => 15,
+        detect => sub { grep { detect_devices::isKeyUsb($_) } detect_devices::get() },
         create => undef,
         format => \&format_usb_device,
         record => \&record_usb_master,
@@ -668,6 +672,64 @@ sub record_onthefly {
     }
 }
 
+sub copy_wizard {
+    my ($live) = @_;
+    #- assumes the current live media is mounted there
+    $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
+    $live->{mnt} = '/tmp/mnt';
+    my $root = $live->{workdir} . $live->{prefix}{boot};
+    my @available_storage = grep { -d "$root/$_" && exists $storage{$_}{detect} } all($root);
+    my @available_devices;
+    require interactive;
+    require wizards;
+    my $in = 'interactive'->vnew;
+    my $w = wizards->new;
+    my ($storage, $device, $format);
+    $w->process({
+        name => N("Live system copy wizard"),
+        pages => {
+            welcome => {
+                name => N("Welcome to the live system copy wizard"),
+                next => 'storage',
+            },
+            storage => {
+                name => N("Please select the medium type"),
+                data => [ { type => 'list', allow_empty_list => 1,
+                            val => \$storage, list => \@available_storage } ],
+                next => 'device',
+            },
+            device => {
+                name => N("Please select the device that will contain the new live system"),
+                pre => sub {
+                    my %devices = map { $_->{device} => $_ } $storage{$storage}{detect}->();
+                    $_->{formatted_name} = $_->{usb_description} || $_->{info} || $_->{device} foreach values %devices;
+                    @available_devices = ();
+                    require fs::proc_partitions;
+                    foreach (fs::proc_partitions::read([ values %devices ])) {
+                        if ($_->{rootDevice} && exists $devices{$_->{rootDevice}}) {
+                            my $description = $devices{$_->{rootDevice}}{usb_description} || $devices{$_->{rootDevice}}{info};
+                            $_->{formatted_name} = $description ? "$description ($_->{device})" : $_->{device};
+                            push @available_devices, $_;
+                        }
+                    }
+                    delete $devices{$_->{rootDevice}} foreach @available_devices;
+                    unshift @available_devices, map { $devices{$_} } sort keys %devices;
+                },
+                data => [ { type => 'list', allow_empty_list => 1,
+                            val => \$device, , list => \@available_devices,
+                            format => sub { $_[0]->{formatted_name} } },
+                          { text => N("Format selected device"), val => \$format, type => 'bool' } ],
+                post => sub {
+                    my $media = { media => { storage => $storage, device => '/dev/' . $device->{device} } };
+                    format_device($live, $media) if $format;
+                    record_onthefly($live, $media);
+                },
+                end => 1,
+            },
+        },
+    }, $in);
+}
+
 sub complete_config {
     my ($live) = @_;
 
@@ -710,9 +772,10 @@ my @actions = (
 );
 my @all = qw(install boot loop master);
 
-my %live;
+my (%live, $copy_wizard);
 GetOptions(
     "help" => sub { pod2usage('-verbose' => 1) },
+    "copy_wizard" => \$copy_wizard,
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
     (map { $_->{name} => \$_->{to_run} } @actions),
     "device:s" => sub { $live{media}{device} = $_[1] },
@@ -724,19 +787,27 @@ GetOptions(
         print "loaded $path as config file\n";
     },
 ) or pod2usage();
-unless (keys(%live)) {
-    warn 'no live definition';
-    pod2usage();
+
+unless ($copy_wizard) {
+    unless (keys(%live)) {
+        warn 'no live definition';
+        pod2usage();
+    }
+    complete_config(\%live);
 }
-complete_config(\%live);
 add2hash($live{prefix} ||= {}, $default_prefix);
 
 require standalone;
-every { !$_->{to_run} } @actions and die 'nothing to do';
-foreach (grep { $_->{to_run} } @actions) {
-    print qq(* entering step "$_->{name}"\n);
-    $_->{do}->(\%live);
-    print qq(* step "$_->{name}" done\n);
+
+if ($copy_wizard) {
+    copy_wizard(\%live);
+} else {
+    every { !$_->{to_run} } @actions and die 'nothing to do';
+    foreach (grep { $_->{to_run} } @actions) {
+        print qq(* entering step "$_->{name}"\n);
+        $_->{do}->(\%live);
+        print qq(* step "$_->{name}" done\n);
+    }
 }
 
 __END__
@@ -772,6 +843,8 @@ draklive [options]
    --initrd          build initrd only
 
    --config <file>  use this configuration file as live description
+
+   --copy_wizard    run the copy wizard
 
 Examples:
 
