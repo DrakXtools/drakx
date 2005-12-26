@@ -546,6 +546,11 @@ sub create_master {
     }
 }
 
+sub maybe_umount_device {
+    my ($device) = @_;
+    run_('umount', $device) if cat_('/proc/mounts') =~ m!^$device\s+!m;
+}
+
 sub format_cdrom_device {
     my ($_live, $media) = @_;
     run_('cdrecord', '-v', 'dev=' . $media->{device}, "blank=fast");
@@ -553,6 +558,7 @@ sub format_cdrom_device {
 
 sub format_usb_device {
     my ($_live, $media) = @_;
+    maybe_umount_device($media->{device});
     run_('mkdosfs', $media->{device})
       or die "unable to format device $media->{device}";
 }
@@ -596,6 +602,7 @@ sub record_usb_master {
     run_('rsync', '-vdP', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
       unless $opts->{refresh_boot_only};
     run_('umount', $live->{mnt});
+    maybe_umount_device($device);
     #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX
     run_('syslinux', '-s', $device) or die "unable to run syslinux on $device";
 }
