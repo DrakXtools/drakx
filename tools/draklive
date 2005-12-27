@@ -431,13 +431,13 @@ sub install_system {
 sub post_install_system {
     my ($live) = @_;
 
-    run_('urpmi',
-         '--root',
-         $live->{system}{root},
-         map { abs_path($_) } @{$live->{system}{rpms}}) if @{$live->{system}{rpms}};
+    my @rpms = map { abs_path($_) } @{$live->{system}{rpms}};
+    each_index { !defined $_ and die "unable to find file " . $live->{system}{rpms}[$::i] } @rpms;
+    run_('urpmi', '--root', $live->{system}{root}, @rpms) if @rpms;
 
-    run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', $live->{system}{root}, '-r', '/tmp', '-i', $_)
-      foreach map { abs_path($_) } @{$live->{system}{patches}};
+    my @patches = map { abs_path($_) } @{$live->{system}{patches}};
+    each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
+    run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', $live->{system}{root}, '-r', '/tmp', '-i', $_) foreach @patches;
 
     #- make sure harddrake is run
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
