@@ -423,6 +423,11 @@ sub install_system {
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
          if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})))
       or die "unable to install system chroot";
+    post_install_system($live);
+}
+
+sub post_install_system {
+    my ($live) = @_;
 
     run_('urpmi',
          '--root',
@@ -767,6 +772,7 @@ my $default_prefix = {
 my @actions = (
     { name => 'clean', do => \&clean },
     { name => 'install', do => \&install_system },
+    { name => 'post_install', do => \&post_install_system },
     { name => 'initrd', do => \&create_initrd },
     { name => 'boot', do => \&prepare_bootloader },
     { name => 'loop', do => \&create_loopback_files },
@@ -847,6 +853,7 @@ draklive [options]
                      on the fly
 
    --initrd          build initrd only
+   --post_install    run post install only (rpms and patches installation)
 
    --config <file>  use this configuration file as live description
 
