@@ -316,14 +316,14 @@ sub create_initrd_for_media {
       (map { @{$loop{$_}{modules} || []} } uniq(map { $_->{type} } grep { $_->{type} } @{$live->{mount}{dirs} || []})),
       ($live->{mount}{overlay} ? @{$overlay{$live->{mount}{overlay}}{modules} || []} : ());
 
-    @$missing and die "missing mandatory modules:" . join("\n", sort(@$missing));
+    @$missing and die "missing mandatory modules:" . join("\n", '', sort(@$missing));
     push @$modules, @$extra_modules;
 
     my @module_deps = uniq(map { moddeps_closure($_) } @$modules);
     run_('gzip', '>', $initrd_tree . "/lib/$_.ko", '-dc', $live->{system}{root} . $moddeps{$_}{full})
       foreach @module_deps, @$modules;
 
-    @$skipped and warn "skipped modules:" . join("\n", sort(@$skipped));
+    @$skipped and warn "skipped modules:" . join("\n", '', sort(@$skipped));
 
     create_initrd_linuxrc($live, $media, @module_deps, @$modules);
     compress_initrd_tree($live, $media);
