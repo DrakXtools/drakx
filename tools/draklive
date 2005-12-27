@@ -436,6 +436,9 @@ sub post_install_system {
          $live->{system}{root},
          map { abs_path($_) } @{$live->{system}{rpms}}) if @{$live->{system}{rpms}};
 
+    run_('patch', '-p0', '-s', '-N', '-F', 0, '-d', $live->{system}{root}, '-r', '/tmp', '-i', $_)
+      foreach map { abs_path($_) } @{$live->{system}{patches}};
+
     #- make sure harddrake is run
     #- (do it in chroot, or else Storable from the build box may write an incompatible config file)
     system("chroot $live->{system}{root} " .
@@ -891,6 +894,9 @@ Here's a configuration sample:
         patch_install => 'config/patch-2006-live.pl',
         rpms => [
              'rpms/unionfs-kernel-2.6.12-12mdk-i586-up-1GB-1.1.1.1.20051124.1mdk-1mdk.i586.rpm'
+        ],
+        patches => [
+             'patches/halt.loopfs.patch',
         ],
         vga_mode => 788,
     },
