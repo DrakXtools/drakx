@@ -721,10 +721,9 @@ sub copy_wizard {
                             format => sub { $_[0]->{formatted_name} } },
                           { text => N("Format selected device"), val => \$format, type => 'bool' } ],
                 complete => sub {
-                    unless (defined $device) {
-                        $in->ask_warn(N("Error"), N("You must select a device!"));
-                        return 1;
-                    }
+                    return 0 if defined $device;
+                    $in->ask_warn(N("Error"), N("You must select a device!"));
+                    1;
                 },
                 post => sub {
                     my $media = { media => { storage => $storage, device => '/dev/' . $device->{device} } };
