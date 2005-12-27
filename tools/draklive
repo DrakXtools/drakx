@@ -714,11 +714,18 @@ sub copy_wizard {
                     }
                     delete $devices{$_->{rootDevice}} foreach @available_devices;
                     unshift @available_devices, map { $devices{$_} } sort keys %devices;
+                    undef $device;
                 },
                 data => [ { type => 'list', allow_empty_list => 1,
                             val => \$device, , list => \@available_devices,
                             format => sub { $_[0]->{formatted_name} } },
                           { text => N("Format selected device"), val => \$format, type => 'bool' } ],
+                complete => sub {
+                    unless (defined $device) {
+                        $in->ask_warn(N("Error"), N("You must select a device!"));
+                        return 1;
+                    }
+                },
                 post => sub {
                     my $media = { media => { storage => $storage, device => '/dev/' . $device->{device} } };
                     format_device($live, $media) if $format;
