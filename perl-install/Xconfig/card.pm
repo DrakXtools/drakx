@@ -334,7 +334,7 @@ sub install_server {
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{Driver2} eq 'nvidia' &&
-	-e "$::prefix$modules_dir/drivers/nvidia_drv.o") {
+	(-e "$::prefix$modules_dir/drivers/nvidia_drv.o" || -e "$::prefix$modules_dir/drivers/nvidia_drv.so")) {
 	#- when there is extensions/libglx.a, it means extensions/libglx.so is not xorg's libglx, so it may be nvidia's
 	#- new nvidia packages have libglx.so in extensions/nvidia instead of simply extensions/
 	my $libglx_a = -e "$::prefix$modules_dir/extensions/libglx.a";
