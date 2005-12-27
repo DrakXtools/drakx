@@ -421,7 +421,7 @@ sub install_system {
          $live->{system}{repository},
          $live->{system}{root},
          if_($live->{system}{auto_install}, '--auto_install', abs_path($live->{system}{auto_install})),
-         if_($live->{system}{patch}, '--defcfg', abs_path($live->{system}{patch})))
+         if_($live->{system}{patch_install}, '--defcfg', abs_path($live->{system}{patch_install})))
       or die "unable to install system chroot";
 
     run_('urpmi',
@@ -879,7 +879,7 @@ Here's a configuration sample:
         repository => '/mnt/ken/2006.0/i586',
         kernel => '2.6.12-12mdk-i586-up-1GB',
         auto_install => 'config/auto_inst.cfg.pl',
-        patch => 'config/patch-2006-live.pl',
+        patch_install => 'config/patch-2006-live.pl',
         rpms => [
              'rpms/unionfs-kernel-2.6.12-12mdk-i586-up-1GB-1.1.1.1.20051124.1mdk-1mdk.i586.rpm'
         ],
