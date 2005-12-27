@@ -723,7 +723,7 @@ sub copy_wizard {
                 },
                 data => [ { type => 'list', allow_empty_list => 1,
                             val => \$device, , list => \@available_devices,
-                            format => sub { $_[0]->{formatted_name} } },
+                            format => sub { $_[0]{formatted_name} } },
                           { text => N("Format selected device"), val => \$format, type => 'bool' } ],
                 complete => sub {
                     return 0 if defined $device;
