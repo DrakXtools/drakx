@@ -48,7 +48,8 @@ sub kill_action {
 #------------------------------------------------------------------------------
 
 sub acceptLicense {
-    any::acceptLicense($in);
+    my ($o) = @_;
+    any::acceptLicense($o);
 }
 
 sub selectLanguage {
