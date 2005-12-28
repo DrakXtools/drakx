@@ -434,7 +434,7 @@ sub post_install_system {
 
     my @rpms = map { abs_path($_) } @{$live->{system}{rpms}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{rpms}[$::i] } @rpms;
-    run_('urpmi', '--root', $live->{system}{root}, @rpms) if @rpms;
+    run_('urpmi', '--auto', '--root', $live->{system}{root}, @rpms) if @rpms;
 
     my @patches = map { abs_path($_) } @{$live->{system}{patches}};
     each_index { !defined $_ and die "unable to find file " . $live->{system}{patches}[$::i] } @patches;
