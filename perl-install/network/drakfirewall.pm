@@ -257,7 +257,7 @@ Please select which network activity should be watched."),
     },
                    [
                        { text => N("Use Interactive Firewall"), val => \$enabled, type => 'bool' },
-                       map { my $e = $_; {
+                       map { {
                            text => (exists $_->{name} ? translate($_->{name}) : $_->{ports}),
                            val => \$_->{ifw},
                            type => 'bool', disabled => sub { !$enabled },
