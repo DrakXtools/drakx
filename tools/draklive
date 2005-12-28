@@ -403,12 +403,13 @@ sub build_syslinux_cfg {
     #- fastboot is needed to avoid fsck
     my $append = "fastboot splash=silent vga=$live->{system}{vga_mode}";
     my $to_root = get_media_fs_module($media) eq 'vfat';
-    my ($initrd, $kernel, $display) = map { $to_root ? basename($_) : $_ }
-      get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
+    my ($initrd, $kernel, $display, $help) = map { $to_root ? basename($_) : $_ }
+      get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg help.msg);
     qq(default live
 prompt 1
 timeout 40
 display $display
+F1 $help
 label live
     kernel $kernel
     append initrd=$initrd $append
@@ -518,6 +519,15 @@ sub prepare_bootloader {
     cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{workdir} . $live->{prefix}{boot} . '/vmlinuz');
     my $msg = $live->{system}{root} . '/boot/message-graphic';
     cp_f($msg, $live->{workdir} . $live->{prefix}{boot} . '/live.msg') if -f $msg;
+    output($live->{workdir} . $live->{prefix}{boot} . '/help.msg',
+           pack("C*", 0x0E, 0x80, 0x03, 0x00, 0xC) . qq(
+Welcome to Mandriva live!
+
+The command line can be used to specify kernel options.
+
+live <kernel options>
+
+));
     foreach ($live->{media}, @{$live->{extra_media}}) {
         output($live->{workdir} . get_syslinux_path($live, $_), build_syslinux_cfg($live, $_));
     }
