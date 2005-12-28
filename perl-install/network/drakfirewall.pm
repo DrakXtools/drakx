@@ -214,19 +214,21 @@ You can also give a range of ports (eg: 24300:24350/udp)", $invalid_port));
 
 sub set_ifw {
     my ($do_pkgs, $enabled, $rules, $ports) = @_;
-    $do_pkgs->ensure_is_installed('mandi-ifw', '/etc/ifw/start', $::isInstall) or return;
+    if ($enabled) {
+        $do_pkgs->ensure_is_installed('mandi-ifw', '/etc/ifw/start', $::isInstall) or return;
 
-    my $ports_by_proto = network::shorewall::ports_by_proto($ports);
-    output_with_perm("$::prefix/etc/ifw/rules", 0644, map { "$_\n" } (
-        (map { "source /etc/ifw/rules.d/$_" } @$rules),
-        map {
-            my $proto = $_;
+        my $ports_by_proto = network::shorewall::ports_by_proto($ports);
+        output_with_perm("$::prefix/etc/ifw/rules", 0644, map { "$_\n" } (
+            (map { "source /etc/ifw/rules.d/$_" } @$rules),
             map {
-                my $multiport = /:/ && " -m multiport";
-                "iptables -A Ifw -m state --state NEW -p $proto$multiport --dport $_ -j IFWLOG --log-prefix NEW\n";
-            } @{$ports_by_proto->{$proto}};
-        } keys %$ports_by_proto,
-    ));
+                my $proto = $_;
+                map {
+                    my $multiport = /:/ && " -m multiport";
+                    "iptables -A Ifw -m state --state NEW -p $proto$multiport --dport $_ -j IFWLOG --log-prefix NEW\n";
+                } @{$ports_by_proto->{$proto}};
+            } keys %$ports_by_proto,
+        ));
+    }
 
     my $set_in_file = sub {
         my ($file, @list) = @_;
@@ -244,7 +246,7 @@ sub choose_watched_services {
 
     my @l = (@ifw_rules, @$servers, map { { ports => $_ } } split(' ', $unlisted));
     my $enabled = 1;
-    $_->{ifw} = 1 foreach @ifw_rules;
+    $_->{ifw} = 1 foreach @l;
 
     $in->ask_from_({
         messages =>
@@ -258,7 +260,7 @@ Please select which network activity should be watched."),
                        map { my $e = $_; {
                            text => (exists $_->{name} ? translate($_->{name}) : $_->{ports}),
                            val => \$_->{ifw},
-                           type => 'bool', disabled => sub { !member($e, @ifw_rules) || !$enabled },
+                           type => 'bool', disabled => sub { !$enabled },
                        } } @l,
                    ]) or return;
     my ($rules, $ports) = partition { exists $_->{ifw_rule} } grep { $_->{ifw} } @l;
