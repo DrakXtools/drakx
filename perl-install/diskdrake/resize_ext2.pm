@@ -21,11 +21,6 @@ sub new {
     $o->{block_size} && $o;
 }
 
-sub check_prog {
-    my ($in) = @_;
-    $::isInstall || $in->do_pkgs->ensure_binary_is_installed('ntfsprogs', 'ntfsresize');
-}
-
 sub min_size {
     my ($o) = @_;
     ($o->{block_count} - $o->{free_block}) * ($o->{block_size} / 512);
