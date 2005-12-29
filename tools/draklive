@@ -603,7 +603,7 @@ sub format_device {
 
 sub record_cdrom_master {
     my ($live, $media, $opts) = @_;
-    $opts->{refresh_boot_only} and die "record boot isn't possible for cdrom master";
+    $opts->{boot_only} and die "record boot isn't possible for cdrom master";
     $media->{device} or die "no device defined in media configuration";
     my $src = $opts->{onthefly} ? '-' : $live->{workdir} . $live->{prefix}{images} . '/live.iso';
     run_('cdrecord', '-v', 'dev=' . $media->{device}, $src);
@@ -624,7 +624,7 @@ sub record_usb_master {
     cp_f($live->{workdir} . $_, $live->{mnt}) foreach
       get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
     run_('rsync', '-vdP', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
-      unless $opts->{refresh_boot_only};
+      unless $opts->{boot_only};
     run_('umount', $live->{mnt});
     maybe_umount_device($device);
     #- use syslinux -s, "safe, slow and stupid" version of SYSLINUX
