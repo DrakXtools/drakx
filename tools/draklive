@@ -634,7 +634,7 @@ sub record_usb_master {
     cp_f($live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}), $live->{mnt});
     cp_f($live->{workdir} . $_, $live->{mnt}) foreach
       get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
-    run_('rsync', '-vdP', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
+    run_('rsync', '-vdP', '--inplace', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
       unless $opts->{boot_only};
     run_('umount', $live->{mnt});
     maybe_umount_device($device);
