@@ -702,7 +702,7 @@ sub copy_wizard {
     my @available_devices;
     require interactive;
     require wizards;
-    my $in = 'interactive'->vnew;
+    my $in = 'interactive'->vnew('su');
     my $w = wizards->new;
     my ($storage, $device, $format);
     $w->process({
@@ -798,6 +798,8 @@ my @actions = (
     { name => 'record_onthefly', do => \&record_onthefly },
 );
 my @all = qw(install boot loop master);
+
+require_root_capability();
 
 my (%live, $copy_wizard);
 GetOptions(
