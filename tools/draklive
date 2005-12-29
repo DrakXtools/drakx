@@ -570,7 +570,7 @@ sub create_master {
     my ($live, $opts) = @_;
     my $media = $opts->{media} || $live->{media};
 
-    if (my $create = get_storage_setting($media, 'create')) {
+    if (my $create = get_boot_setting($media, 'create', $opts->{boot_only})) {
         $create->($live, $media, $opts);
     } else {
         warn "not implemented yet";
@@ -601,7 +601,7 @@ sub format_device {
     my $media = $opts->{media} || $live->{media};
 
     $media->{device} or die "no device defined in media configuration";
-    if (my $format = get_storage_setting($media, 'format')) {
+    if (my $format = get_boot_setting($media, 'format', $opts->{boot_only})) {
         $format->($live, $media);
     } else {
         warn "not implemented yet";
@@ -610,7 +610,6 @@ sub format_device {
 
 sub record_cdrom_master {
     my ($live, $media, $opts) = @_;
-    $opts->{boot_only} and die "record boot isn't possible for cdrom master";
     $media->{device} or die "no device defined in media configuration";
     my $src = $opts->{onthefly} ? '-' : $live->{workdir} . $live->{prefix}{images} . '/live.iso';
     run_('cdrecord', '-v', 'dev=' . $media->{device}, $src);
@@ -645,7 +644,7 @@ sub record_master {
     my ($live, $opts) = @_;
     my $media = $opts->{media} || $live->{media};
 
-    if (my $record = get_storage_setting($media, 'record')) {
+    if (my $record = get_boot_setting($media, 'record', $opts->{boot_only})) {
         $record->($live, $media, $opts);
     } else {
         warn "not implemented yet";
