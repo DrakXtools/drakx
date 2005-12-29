@@ -698,7 +698,7 @@ sub copy_wizard {
     $live->{workdir} = $live->{prefix}{live_mnt} . $live->{prefix}{media_mnt};
     $live->{mnt} = '/tmp/mnt';
     my $root = $live->{workdir} . $live->{prefix}{boot};
-    my @available_storage = grep { -d "$root/$_" && exists $storage{$_}{detect} } all($root);
+    my @available_storage = sort(grep { -d "$root/$_" && exists $storage{$_}{detect} } all($root));
     my @available_devices;
     require interactive;
     require wizards;
