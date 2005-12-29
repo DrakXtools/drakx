@@ -787,15 +787,15 @@ my $default_prefix = {
 my @actions = (
     { name => 'clean', do => \&clean },
     { name => 'install', do => \&install_system },
-    { name => 'post_install', do => \&post_install_system },
+    { name => 'post-install', do => \&post_install_system },
     { name => 'initrd', do => \&create_initrd },
     { name => 'boot', do => \&prepare_bootloader },
     { name => 'loop', do => \&create_loopback_files },
     { name => 'master', do => \&create_master },
     { name => 'format', do => \&format_device },
     { name => 'record', do => \&record_master },
-    { name => 'record_boot', do => \&record_boot },
-    { name => 'record_onthefly', do => \&record_onthefly },
+    { name => 'record-boot', do => \&record_boot },
+    { name => 'record-onthefly', do => \&record_onthefly },
 );
 my @all = qw(install boot loop master);
 
@@ -804,7 +804,7 @@ require_root_capability();
 my (%live, $copy_wizard);
 GetOptions(
     "help" => sub { pod2usage('-verbose' => 1) },
-    "copy_wizard" => \$copy_wizard,
+    "copy-wizard" => \$copy_wizard,
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
     (map { $_->{name} => \$_->{to_run} } @actions),
     "device:s" => sub { $live{media}{device} = $_[1] },
@@ -865,16 +865,16 @@ draklive [options]
                      if the device already has the required label)
    --format          format selected device
    --record          record live on selected media
-   --record_boot     record bootloader only on selected media
-   --record_onthefly record live by creating master from loopback files
+   --record-boot     record bootloader only on selected media
+   --record-onthefly record live by creating master from loopback files
                      on the fly
 
    --initrd          build initrd only
-   --post_install    run post install only (rpms and patches installation)
+   --post-install    run post install only (rpms and patches installation)
 
    --config <file>  use this configuration file as live description
 
-   --copy_wizard    run the copy wizard
+   --copy-wizard    run the copy wizard
 
 Examples:
 
