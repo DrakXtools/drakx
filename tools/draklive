@@ -252,8 +252,8 @@ sub get_initrd_path {
 }
 
 sub get_syslinux_path {
-    my ($live, $media) = @_;
-    $live->{prefix}{boot} . '/' . $media->{storage} . '/syslinux.cfg';
+    my ($live, $media, $o_boot_only) = @_;
+    $live->{prefix}{boot} . '/' . $media->{storage} . '/syslinux' . ($o_boot_only && '-boot') . '.cfg';
 }
 
 sub create_initrd {
@@ -399,10 +399,11 @@ sub add_splash {
 }
 
 sub build_syslinux_cfg {
-    my ($live, $media) = @_;
+    my ($live, $media, $opts) = @_;
     #- fastboot is needed to avoid fsck
     my $append = "fastboot splash=silent vga=$live->{system}{vga_mode}";
-    my $to_root = get_media_fs_module($media) eq 'vfat';
+    #- syslinux wants files at root (used with vfat fs)
+    my $to_root = get_boot_setting($media, 'fs', $opts->{boot_only}) eq 'vfat';
     my ($initrd, $kernel, $display, $help) = map { $to_root ? basename($_) : $_ }
       get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg help.msg);
     qq(default live
@@ -487,6 +488,12 @@ sub get_storage_setting {
     $storage{$media->{storage}}{$setting};
 }
 
+#- for actions that support an optionnal boot storage type
+sub get_boot_setting {
+    my ($media, $setting, $boot_only) = @_;
+    $boot_only && $media->{boot} ? $storage{$media->{boot}}{$setting} : get_storage_setting($media, $setting);
+}
+
 #- for user-customisable media setting, that can override storage setting
 sub get_media_setting {
     my ($media, $setting) = @_;
@@ -514,7 +521,7 @@ sub get_media_device {
 }
 
 sub prepare_bootloader {
-    my ($live) = @_;
+    my ($live, $opts) = @_;
     create_initrd($live);
     cp_f($live->{system}{root} . '/boot/vmlinuz-' . $live->{system}{kernel}, $live->{workdir} . $live->{prefix}{boot} . '/vmlinuz');
     my $msg = $live->{system}{root} . '/boot/message-graphic';
@@ -529,7 +536,7 @@ live <kernel options>
 
 ));
     foreach ($live->{media}, @{$live->{extra_media}}) {
-        output($live->{workdir} . get_syslinux_path($live, $_), build_syslinux_cfg($live, $_));
+        output($live->{workdir} . get_syslinux_path($live, $_, $opts->{boot_only}), build_syslinux_cfg($live, $_, $opts));
     }
 }
 
@@ -550,7 +557,7 @@ sub create_cdrom_master {
          '-graft-points',
          @dest,
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
-         'isolinux/isolinux.cfg=' . $live->{workdir} . get_syslinux_path($live, $media),
+         'isolinux/isolinux.cfg=' . $live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}),
          $live->{prefix}{boot} . '=' . $live->{workdir} . $live->{prefix}{boot},
          $live->{prefix}{loopbacks} . '=' . $live->{workdir} . $live->{prefix}{loopbacks},
      );
@@ -620,7 +627,7 @@ sub record_usb_master {
     run_('mount', $device, $live->{mnt})
       or die "unable to mount $device";
     cp_af($live->{workdir} . $live->{prefix}{boot}, $live->{mnt});
-    cp_f($live->{workdir} . get_syslinux_path($live, $media), $live->{mnt});
+    cp_f($live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}), $live->{mnt});
     cp_f($live->{workdir} . $_, $live->{mnt}) foreach
       get_initrd_path($live, $media), map { $live->{prefix}{boot} . '/' . $_ } qw(vmlinuz live.msg);
     run_('rsync', '-vdP', $live->{workdir} . $live->{prefix}{loopbacks} . '/', $live->{mnt} . $live->{prefix}{loopbacks})
