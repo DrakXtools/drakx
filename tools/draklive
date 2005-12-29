@@ -564,7 +564,7 @@ sub create_cdrom_master {
          'isolinux/isolinux.bin=/usr/lib/syslinux/isolinux-graphic.bin',
          'isolinux/isolinux.cfg=' . $live->{workdir} . get_syslinux_path($live, $media, $opts->{boot_only}),
          $live->{prefix}{boot} . '=' . $live->{workdir} . $live->{prefix}{boot},
-         $live->{prefix}{loopbacks} . '=' . $live->{workdir} . $live->{prefix}{loopbacks},
+         if_(!$opts->{boot_only}, $live->{prefix}{loopbacks} . '=' . $live->{workdir} . $live->{prefix}{loopbacks}),
      );
 }
 
