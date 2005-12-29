@@ -801,10 +801,11 @@ my @all = qw(install boot loop master);
 
 require_root_capability();
 
-my (%live, $copy_wizard);
+my (%live, %opts, $copy_wizard);
 GetOptions(
     "help" => sub { pod2usage('-verbose' => 1) },
     "copy-wizard" => \$copy_wizard,
+    "boot-only" => \$opts{boot_only},
     "all" => sub { $_->{to_run} = 1 foreach grep { member($_->{name}, @all) } @actions },
     (map { $_->{name} => \$_->{to_run} } @actions),
     "device:s" => sub { $live{media}{device} = $_[1] },
@@ -834,7 +835,7 @@ if ($copy_wizard) {
     every { !$_->{to_run} } @actions and die 'nothing to do';
     foreach (grep { $_->{to_run} } @actions) {
         print qq(* entering step "$_->{name}"\n);
-        $_->{do}->(\%live);
+        $_->{do}->(\%live, \%opts);
         print qq(* step "$_->{name}" done\n);
     }
 }
@@ -875,6 +876,9 @@ draklive [options]
    --config <file>  use this configuration file as live description
 
    --copy-wizard    run the copy wizard
+
+   --boot-only       consider only boot media
+                     (affects boot/master/format/record steps)
 
 Examples:
 
