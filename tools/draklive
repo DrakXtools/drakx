@@ -645,11 +645,6 @@ sub record_master {
     }
 }
 
-sub record_boot {
-    my ($live) = @_;
-    record_master($live, { refresh_boot_only => 1 });
-}
-
 sub pipe_subs {
     my ($writer, $reader) = @_;
     my ($r, $w) = POSIX::pipe;
@@ -794,7 +789,6 @@ my @actions = (
     { name => 'master', do => \&create_master },
     { name => 'format', do => \&format_device },
     { name => 'record', do => \&record_master },
-    { name => 'record-boot', do => \&record_boot },
     { name => 'record-onthefly', do => \&record_onthefly },
 );
 my @all = qw(install boot loop master);
@@ -866,7 +860,6 @@ draklive [options]
                      if the device already has the required label)
    --format          format selected device
    --record          record live on selected media
-   --record-boot     record bootloader only on selected media
    --record-onthefly record live by creating master from loopback files
                      on the fly
 
