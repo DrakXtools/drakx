@@ -72,6 +72,8 @@ my $mknbi = "/usr/bin/mknbi-set";
 #- make sure terminal server and friends are installed
 $in->do_pkgs->ensure_is_installed('terminal-server', '/usr/bin/drakTermServ') or $in->exit(-1);
 
+my $argc = @ARGV;
+
 if ("@ARGV" =~ /--enable/) {
 	enable_ts();
 	exit(0);	
@@ -99,13 +101,13 @@ if ("@ARGV" =~ /--stop/) {
 }
 
 if ("@ARGV" =~ /--adduser/) {
-	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
+	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $argc < 2;
 	adduser($ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--deluser/) {
-	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
+	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $argc < 2;
 	deluser($ARGV[1]);
 	exit(0);	
 }
@@ -116,19 +118,19 @@ if ("@ARGV" =~ /--syncusers/) {
 }
 
 if ("@ARGV" =~ /--addclient/) {
-	die N("%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, 0/1 for Local Config...\n", $0, $ARGV[0]) if $#ARGV < 6;
+	die N("%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, 0/1 for Local Config...\n", $0, $ARGV[0]) if $argc < 7;
 	addclient(@ARGV[1..6]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--delclient/) {
-	die N("%s: %s requires hostname...\n", $0, $ARGV[0]) if $#ARGV < 1;
+	die N("%s: %s requires hostname...\n", $0, $ARGV[0]) if $argc < 2;
 	delclient($ARGV[1]);
 	exit(0);	
 }
 
 read_conf_file();	
-interactive_mode() if $#ARGV < 1;
+interactive_mode() if $argc < 2;
 
 sub read_conf_file() {
 	if (-e $cfg_file) {
@@ -727,10 +729,17 @@ sub make_nbi() {
 
 	my $combo_default_kernel = Gtk2::ComboBox->new_with_strings([ N("Default kernel version"), 
                                                                    map { bootloader::vmlinuz2version($_) } @kernels ]);
-	
-	my $check_pxe = Gtk2::CheckButton->new(N("Create PXE images."));
+
+	my $entry_kargs = Gtk2::Entry->new;
+	$entry_kargs->set_width_chars(12);
+	my $check_pxe = Gtk2::CheckButton->new(N("Create PXE images"));
+	my $check_union = Gtk2::CheckButton->new(N("Use Unionfs (TS2)"));
+	#- disable until kernel support appears
+	$check_union->set_sensitive(0);
 	$check_pxe->set_active($conf{CREATE_PXE});
 	$check_pxe->signal_connect('clicked' => sub { invbool \$conf{CREATE_PXE} });
+	$check_union->set_active($conf{USE_UNIONFS});
+	$check_union->signal_connect('clicked' => sub { invbool \$conf{USE_UNIONFS} });
 
     $combo_default_kernel->set_active(0);
 	$combo_default_kernel->entry->signal_connect('changed', sub {
@@ -761,14 +770,14 @@ sub make_nbi() {
 	}					
 	gtkpack($status_box,
 		$nbi_box = gtkpack_(Gtk2::VBox->new(1,10),
-			0, gtkadd(Gtk2::HBox->new(0,10),
+			0, gtkadd(Gtk2::HBox->new(1,5),
 				create_scrolled_window($tree_kernels),
-				gtkadd(Gtk2::VBox->new(1,10),
+				gtkadd(Gtk2::VBox->new(0,5),
 					gtksignal_connect(Gtk2::Button->new(N("Build Whole Kernel -->")), clicked => sub { 
 						if ($kernel) {
 							$in->ask_warn(N("Information"), N("This will take a few minutes."));
 							gtkset_mousecursor_wait();
-							build_n_update($kernel, $list_model, undef) unless check_nbi_space($kernel, 1);
+							build_n_update($kernel, $list_model, undef, $entry_kargs->get_text) unless check_nbi_space($kernel, 1);
 							gtkset_mousecursor_normal(); 
 						} else {
 							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
@@ -776,7 +785,7 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build Single NIC -->")), clicked => sub { 
 						if ($nic) {
-							build_n_update($kernel, $list_model, $nic);
+							build_n_update($kernel, $list_model, $nic, $entry_kargs->get_text);
 						} else {
 							$in->ask_warn(N("Error"), N("No NIC selected!"));
 						}
@@ -787,13 +796,18 @@ sub make_nbi() {
 						if (check_nbi_space($kernels[0], $kcount)) {
 							return;
 						} else {
-							build_w_progress($list_model, undef);
+							build_w_progress($list_model, undef, $entry_kargs->get_text);
 							make_nbi(); 
 						}
 					}),
 					$button_i586_kernel,
 					$combo_default_kernel,
+					gtkadd(Gtk2::HBox->new(0,5),
+						Gtk2::Label->new(N("Custom\nkernel args")),
+						$entry_kargs,
+					),
 					$check_pxe,
+					$check_union,
 					gtksignal_connect(Gtk2::Button->new(N("<-- Delete")), clicked => sub { 
 						if ($nbi) {
 							my $result = clear_nbi($nbi);
@@ -810,12 +824,11 @@ sub make_nbi() {
 						$list_model->clear;
 						gtkset_mousecursor_normal();
 					}),
-					Gtk2::HBox->new(1,1),
 				),
 				create_scrolled_window($list_nbis),
 			),),
 	);
-	
+
 	$central_widget = \$nbi_box;
 	$nbi_box->show_all;
 }
@@ -843,9 +856,12 @@ sub update_list {
 }
 
 sub build_n_update {
-    my ($kernel, $list_model, $nic) = @_;
+    my ($kernel, $list_model, $nic, @kargs) = @_;
+	my $xtra_args = join(" ", @kargs);
 	my $command = "-k /boot/$kernel";
 	$command .= " -r $nic" if $nic;
+	$command .= " -u" if $conf{USE_UNIONFS};
+	$command .= " -a '" . $xtra_args . "'" if length($xtra_args);
     run_program::run("$mknbi -v $command") or $in->ask_warn(N("Error"), N("%s failed", $mknbi));
 	if ($conf{CREATE_PXE}) {
 		my $pxedir = get_platform_pxe();
@@ -859,12 +875,12 @@ sub build_n_update {
 }
 
 sub build_w_progress {
-	my ($widget, $nic) = @_;
+	my ($widget, $nic, @kargs) = @_;
 	gtkset_mousecursor_wait();
 	show_progress();
 	my $k = 1;
 	foreach (@kernels) {
-		build_n_update($_, $widget, $nic);
+		build_n_update($_, $widget, $nic, @kargs);
 		update_progress($k, $kcount, $_);
 		$k++;
 	}
