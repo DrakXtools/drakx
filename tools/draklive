@@ -253,7 +253,7 @@ sub get_initrd_path {
 
 sub get_syslinux_path {
     my ($live, $media, $o_boot_only) = @_;
-    $live->{prefix}{boot} . '/' . $media->{storage} . '/syslinux' . ($o_boot_only && '-boot') . '.cfg';
+    $live->{prefix}{boot} . '/' . $media->{storage} . '/syslinux' . ($o_boot_only && $media->{boot} && '-boot') . '.cfg';
 }
 
 sub create_initrd {
