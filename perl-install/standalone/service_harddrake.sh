@@ -7,7 +7,7 @@
 #		changed hardware.
 #
 # X-Parallel-Init
-# X-Parallel-Requires: pcmcia
+# X-Parallel-Requires: pcmcia dkms
 # X-Parallel-Interactive
 
 # This is an interactive program, we need the current locale
