@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.7
+Version: 10.4.8
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jan  2 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.8-1mdk
+- drakTermServ (stew):
+  o add support for custom kernel args in initrd
+  o add support for future unionfs/TS2
+- drakfirewall: don't install and configure mandi-ifw if ifw is
+  disabled (blino)
+- harddrake service: add parallel init support (Couriousous)
+- XFdrake: search harder for nvidia driver (blino)
+
 * Mon Dec 19 2005 Thierry Vignaud <tvignaud@mandriva.com> 10.4.7-1mdk
 - diskdrake: handle kernel-2.6.14+
 
