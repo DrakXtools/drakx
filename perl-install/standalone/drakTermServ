@@ -68,6 +68,7 @@ my @kernels = bootloader::installed_vmlinuz();
 my $kcount = @kernels;
 my $cmd_line = 1;
 my $mknbi = "/usr/bin/mknbi-set";
+my %help;
 
 #- make sure terminal server and friends are installed
 $in->do_pkgs->ensure_is_installed('terminal-server', '/usr/bin/drakTermServ') or $in->exit(-1);
@@ -131,6 +132,22 @@ if ("@ARGV" =~ /--delclient/) {
 
 read_conf_file();	
 interactive_mode() if $argc < 2;
+
+sub setup_tooltips() {
+	%help = (
+		'client_name' => N("Host name for client"),
+		'mac_address' => N("MAC address should be in the format 00:11:22:33:44:55"),
+		'ip_address' => N("IP address to be assigned to client"),
+		'netboot_image' => N("Kernel/network adapter image to use to boot client"),
+		'local_hardware' => N("Create masking files to allow configuration tools to run on client"),
+		'thin_client' => N("Applications will run on server machine"),
+	);
+}
+
+sub set_help_tip {
+	my ($entry, $key) = @_;
+	gtkset_tip(Gtk2::Tooltips->new, $entry, formatAlaTeX($help{$key}));
+}
 
 sub read_conf_file() {
 	if (-e $cfg_file) {
@@ -303,6 +320,7 @@ sub interactive_mode() {
 			),
 		),
 	);
+	setup_tooltips();
     $central_widget = \$main_box;
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
@@ -1092,15 +1110,20 @@ sub maintain_clients() {
 	#- entry boxes for client data entry
 	my $label_host = Gtk2::Label->new("Client Name:");
 	my $entry_host = Gtk2::Entry->new;
+	set_help_tip($entry_host, 'client_name');
 	my $label_mac = Gtk2::Label->new("MAC Address:");
 	my $entry_mac = Gtk2::Entry->new;
+	set_help_tip($entry_mac, 'mac_address');
 	my $label_ip = Gtk2::Label->new("IP Address:");
 	my $entry_ip = Gtk2::Entry->new;
+	set_help_tip($entry_ip, 'ip_address');
 	my $label_nbi = Gtk2::Label->new("Kernel Netboot Image:");
 	my $entry_nbi = Gtk2::Combo->new;
+	set_help_tip($entry_nbi, 'netboot_image');
 
 	gtksignal_connect(my $check_hdw_config = Gtk2::CheckButton->new(N("Allow local hardware\nconfiguration.")),
 		clicked => sub { invbool \$local_config });
+	set_help_tip($check_hdw_config, 'local_hardware');
 					
 	my @images = grep { /\.nbi/ } all($tftpboot);
 	my $have_nbis = @images;
@@ -1136,6 +1159,16 @@ sub maintain_clients() {
 					gtksignal_connect(Gtk2::Button->new(N("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text;
 							my $mac = $entry_mac->get_text;
+							$mac =~ s/-| /:/g; #- dashes or spaces
+							if (length($mac) == 12) {
+								#- no delimiter
+								for (my $i = 10; $i >= 2; $i = $i-2) { substr($mac, $i, 0) = ":" }
+							}
+							local $_ = $mac;
+							if (length($mac) != 17 || (tr/://) != 5) {
+								$in->ask_warn(N("Error"), N("Unknown MAC address format"));
+								return;
+							} 
 							my $ip = $entry_ip->get_text;
 							my $nbi = $entry_nbi->entry->get_text;
 							if ($hostname && $mac && $ip) {
@@ -1214,6 +1247,7 @@ sub maintain_clients() {
 	$check_allow_thin->set_active($conf{ALLOW_THIN});
 	$check_sync_kbd->set_active($conf{SYNC_KBD});
 	$check_thin->set_sensitive($conf{ALLOW_THIN});
+	set_help_tip($check_thin, 'thin_client');
 	gtksignal_connect($check_allow_thin, clicked => 
 		sub { invbool \$conf{ALLOW_THIN};
 			$check_thin->set_sensitive($conf{ALLOW_THIN});
