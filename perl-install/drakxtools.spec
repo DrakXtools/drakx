@@ -2,7 +2,7 @@
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.4.8
+Version: 10.4.9
 Release: %mkrel 1
 Url: http://www.mandrivalinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
@@ -381,6 +381,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jan  2 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.9-1mdk
+- diskdrake: be more tolerant with devices we cannot guess all info
+  about (#20340)
+
 * Mon Jan  2 2006 Thierry Vignaud <tvignaud@mandriva.com> 10.4.8-1mdk
 - drakTermServ (stew):
   o add support for custom kernel args in initrd
