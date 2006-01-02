@@ -4,7 +4,7 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.4.9
 Release: %mkrel 1
-Url: http://www.mandrivalinux.com/en/drakx.php3
+Url:     http://qa.mandriva.com/twiki/bin/view/Main/DrakX
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
