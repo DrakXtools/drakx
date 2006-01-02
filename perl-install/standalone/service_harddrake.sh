@@ -5,6 +5,10 @@
 # chkconfig: 345 05 95
 # description: 	This runs the hardware probe, and optionally configures \
 #		changed hardware.
+#
+# X-Parallel-Init
+# X-Parallel-Requires: pcmcia
+# X-Parallel-Interactive
 
 # This is an interactive program, we need the current locale
 
