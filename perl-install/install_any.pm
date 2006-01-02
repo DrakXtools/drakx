@@ -409,7 +409,7 @@ sub ask_if_suppl_media {
 	    N("The following media have been found and will be used during install: %s.
 
 
-Do you have a supplementary installation media to configure?",
+Do you have a supplementary installation medium to configure?",
 	    join ", ", uniq(sort {
 		    (my $x) = $a =~ /CD(\d+)/;
 		    (my $y) = $b =~ /CD(\d+)/;
