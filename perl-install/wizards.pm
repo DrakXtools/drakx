@@ -119,7 +119,7 @@ sub process {
         my ($res, $msg) = &{$o->{init}};
         if (!$res) {
             $in->ask_okcancel(N("Error"), $msg);
-            die "wizard failled" if !$::testing;
+            die "wizard failed" if !$::testing;
         }
     }
     
